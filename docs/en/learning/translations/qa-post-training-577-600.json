@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:rp-opsd/basics": {
+      "source_sha256": "567ef8be1c51483f516ddc9f2fe0bc1f9acbcd939901c8b7cac1014cf3688017",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distill cross-lingually around reasoning pivots in RP-OPSD?",
+        "answer": "Surface wording differs across languages; state-changing tokens matter more. Compare matched teacher distributions with/without the English reference to locate large information-induced shifts.",
+        "example": "A connective and a key equation need not receive equal credit based on text differences."
+      }
+    },
+    "qa/post-training:rp-opsd/comparison": {
+      "source_sha256": "b42e95cb31761f44a79a7b8fe077cc683c0cff5f3d6132c0374a8a9657c9718e",
+      "reviewed": true,
+      "fields": {
+        "question": "How does pivot detection differ from uniformly imitating all English tokens?",
+        "answer": "Uniform imitation can copy style and translation artifacts. Conditional shifts highlight important positions while retaining reference anchoring. Shifts aren't causal truth, so validate teacher quality.",
+        "example": "Different English wording with unchanged mathematical state need not rewrite every student word."
+      }
+    },
+    "qa/post-training:rp-opsd/implementation": {
+      "source_sha256": "2f3de128918a7fea5c19d73b872b6a45dd40e79be9133c1be464f0ee036188f9",
+      "reviewed": true,
+      "fields": {
+        "question": "What must the two RP-OPSD teacher views share?",
+        "answer": "Same model, question and student prefix; remove only reference conditioning. Student rollout cannot see reference answers. Local deterministic proxies aren't real multilingual teachers/corpora.",
+        "example": "Changing both model and question prevents attributing probability changes to the English reference."
+      }
+    },
+    "qa/post-training:rp-opsd/mechanism": {
+      "source_sha256": "9607ab91bae2aebaf0115c73adec8d97a3937d065a3eb5676f52dbbf0446e44c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compare matched views with and without English solutions?",
+        "answer": "Reference-induced distribution shifts can identify reasoning transitions rather than superficial translation. Concentrate privileged distillation there and keep reference anchoring. Match all other inputs and keep solutions teacher-only.",
+        "example": "Translated connectives and words determining operation order may shift differently after adding a solution."
+      }
+    },
+    "qa/post-training:opd2/basics": {
+      "source_sha256": "844fa51470255fc90312115a8c9de6b088ee8576cb82818ce49cd09f19f76e2b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distill the teacher's post-training change from base in OPD²?",
+        "answer": "Teacher's preexisting preferences may not come from target training. The delta emphasizes what changed instead of transferring all language/style bias; matching checkpoints is essential.",
+        "example": "An unchanged long-sentence preference should not count as newly acquired skill."
+      }
+    },
+    "qa/post-training:opd2/comparison": {
+      "source_sha256": "7d82da56f67f41b4d73f9bcfb8b09ec84e7130ccf9cb9f52d0bd5b292c57f7f1",
+      "reviewed": true,
+      "fields": {
+        "question": "How does delta distillation differ from copying the post-trained distribution?",
+        "answer": "It subtracts the teacher base; direct matching includes old knowledge and preferences. Subtraction may discard useful information or retain training noise, so not universally better.",
+        "example": "Learning the update is not copying the whole teacher knowledge base."
+      }
+    },
+    "qa/post-training:opd2/implementation": {
+      "source_sha256": "b890f6d025d0bdc704e86d0b94bee56b14f5a8633f8f850c98421f917e99a003",
+      "reviewed": true,
+      "fields": {
+        "question": "May OPD² use arbitrary teacher families for its two probabilities?",
+        "answer": "Not silently. Use paired base and post-trained checkpoint on the same prefix with aligned vocabulary/conditioning. Local candidates do not load multilingual math checkpoints.",
+        "example": "An unrelated architecture as base confounds family calibration with the training delta."
+      }
+    },
+    "qa/post-training:opd2/mechanism": {
+      "source_sha256": "2ddd7472ed289655f329eb04cfc2e710789680ce1557729e0ab2ef68c5c0d97c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why copy the delta rather than every teacher preference?",
+        "answer": "Comparing before/after logp isolates directions associated with post-training instead of inherited language/style/knowledge. It needs comparable checkpoints and isn't proven pure capability. Local small distributions don't verify language transfer.",
+        "example": "If RL improves conclusions but politeness is unchanged, the delta avoids treating the greeting as a new skill."
+      }
+    },
+    "qa/post-training:dash/basics": {
+      "source_sha256": "342a13ca9180f13f58476bb5737f56da2a982c0eb0a1efeadea576ba4d1119a5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why propagate later distillation differences to earlier positions in DASH?",
+        "answer": "Early choices have multi-step consequences. Local disagreement gates a backward recurrence with adaptive horizon, without extra teacher passes.",
+        "example": "An early fork causing repeated later errors should see some of their credit."
+      }
+    },
+    "qa/post-training:dash/comparison": {
+      "source_sha256": "4d84132a20dc28f1a1e7bb5ecfe93b7297749785b53b366122c181b98079c5b3",
+      "reviewed": true,
+      "fields": {
+        "question": "How does DASH's continuous gate differ from fixed discount?",
+        "answer": "Fixed discount propagates equally by position; gate uses relative local disagreement to vary horizon. Proxy credit is not always correct and doesn't add teacher rollouts.",
+        "example": "Consequences at equal distance can propagate differently under different local disagreement."
+      }
+    },
+    "qa/post-training:dash/implementation": {
+      "source_sha256": "cbb9b06d47d469c99539736741aa642ecd616c30ae6548f635d8e8619aa70887",
+      "reviewed": true,
+      "fields": {
+        "question": "How should DASH handle boundaries and gate gradients?",
+        "answer": "Recur backward with no next term at sequence end, detach gate and block padding or cross-response propagation. Candidate positions aren't long-token traces.",
+        "example": "Do not carry future credit from the next answer into the last token of this one."
+      }
+    },
+    "qa/post-training:dash/mechanism": {
+      "source_sha256": "6e2350203fcd5c48c7bbd1cdb2847ff16d9c8d2afd7febc0ee6e2e1ebad08372",
+      "reviewed": true,
+      "fields": {
+        "question": "Why control DASH horizon by local disagreement rather than propagate everything?",
+        "answer": "Later teacher feedback may help or become unreliable after divergence. Detached gating varies effective horizon without extra teacher calls. Fixed long or short windows can mix irrelevant signals or miss important outcomes. Gate is not truth.",
+        "example": "Carry future credit across consistent steps but weaken propagation at a severe divergence."
+      }
+    },
+    "qa/post-training:causal-opd/basics": {
+      "source_sha256": "b78ad95522d5b801ea0759bfef73a219dc6457740b87f0ca38076402a86b3a13",
+      "reviewed": true,
+      "fields": {
+        "question": "Why prioritize the first error in CausalOPD?",
+        "answer": "Later errors can follow from an early break. Short repair at its source avoids redundant punishment, then a curriculum moves evidence→mechanism→conclusion. Teacher localization must be reliable.",
+        "example": "An incorrect premise can make later coherent derivation wrong."
+      }
+    },
+    "qa/post-training:causal-opd/comparison": {
+      "source_sha256": "c04a95a70fe186a2ade6606b35d29b7b22a5cecf6b5a4ffee509d3c7e4240909",
+      "reviewed": true,
+      "fields": {
+        "question": "What tradeoff separates short first-error repairs and whole-trajectory imitation?",
+        "answer": "Short windows focus local breaks and reduce irrelevant supervision; full imitation covers more but may diverge from student behavior. Incorrect localization can miss the real error.",
+        "example": "Fixing one mechanism link doesn't guarantee every conclusion is correct."
+      }
+    },
+    "qa/post-training:causal-opd/implementation": {
+      "source_sha256": "2ac965f63db663f810c2927458fae506d8d97e260335787f1ef3977825b3a586",
+      "reviewed": true,
+      "fields": {
+        "question": "May first-error search default to index zero if nothing is found?",
+        "answer": "No. Explicitly represent no error or unreliable judgment. Align step indices and keep privileged diagnosis out of inference. Local candidates don't implement the full causal teacher.",
+        "example": "An empty list must not invent a first-step error."
+      }
+    },
+    "qa/post-training:causal-opd/mechanism": {
+      "source_sha256": "38295a96a25c57503cac4074f6b0feb36290ab5d3cf611fec5d1e616c91309db",
+      "reviewed": true,
+      "fields": {
+        "question": "Why locate the earliest wrong step and use short-horizon repair?",
+        "answer": "Later mistakes can inherit an earlier false premise. Correct the turning point rather than imitate final conclusions, then organize evidence/mechanism/conclusion. The teacher can misidentify it; proxy diagnostics aren't causal reasoning capability.",
+        "example": "Repair the first confusion of correlation with causation, not just the last sentence."
+      }
+    },
+    "qa/post-training:pcsd/basics": {
+      "source_sha256": "e3ecc05b71c9fa4ef693240631f6b22867f4e5e7a77dd8745ac3d55726d277be",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use persistent signals rather than one token gap in PCSD?",
+        "answer": "Local gaps are noisy; one whole-response weight is coarse. Accumulate support in adaptive windows, decay declining trends and continuously gate supervision.",
+        "example": "One high teacher score should differ from several supported consecutive steps."
+      }
+    },
+    "qa/post-training:pcsd/comparison": {
+      "source_sha256": "e0ed8efc9f4e3778c2aa24f0c30fec8c409bafe70dd913c94b646300bdea1b22",
+      "reviewed": true,
+      "fields": {
+        "question": "How does PCSD continuous gating differ from a hard threshold?",
+        "answer": "Sigmoid varies strength smoothly; accumulated trends allow the same present gap to receive different weights. It still relies on teacher quality, not a new verifier.",
+        "example": "Equal current gaps can differ if one has risen consistently and the other fallen."
+      }
+    },
+    "qa/post-training:pcsd/implementation": {
+      "source_sha256": "255980116cea116afc654965ce0430cf076e372430426f437acc144303d08301",
+      "reviewed": true,
+      "fields": {
+        "question": "May PCSD accumulation continue across independent responses?",
+        "answer": "No. Reset per response and apply valid masks. Teacher/gate statistics are fixed supervision; deterministic checks aren't long-reasoning training.",
+        "example": "Previous problem's ending support cannot become the next one's prior."
+      }
+    },
+    "qa/post-training:pcsd/mechanism": {
+      "source_sha256": "8753d491d10ba143368c5e4984124e5ba7d63805e412105be3d9e5fa5d336caa",
+      "reviewed": true,
+      "fields": {
+        "question": "Why accumulate sustained teacher-favoring evidence rather than switch on single gaps?",
+        "answer": "Single differences are noisy while whole-response weights hide position. Windowed exponential accumulation and decline decay combine smooth OPSD/GRPO gates. Persistence stabilizes signals without proving teacher correctness.",
+        "example": "An isolated overestimated word need not receive the same supervision as a consistently supported passage."
+      }
+    },
+    "qa/post-training:flux-opd/basics": {
+      "source_sha256": "f41027c0a0438042c188dd47dbb2b8193b02d4322a5917531fa6a0b976848220",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep a context-free anchor in Flux-OPD?",
+        "answer": "Students can absorb fixed context, but replacing it can abruptly change targets. The anchor stays fixed and accepts relative corrections from evolving contexts rather than wholesale replacement.",
+        "example": "A new retrieval background can change one judgment without moving all language targets."
+      }
+    },
+    "qa/post-training:flux-opd/comparison": {
+      "source_sha256": "77c78c8dfbb609da7d3f7b2cee786743374f9ec6fbdfc5a9366ba61e6b317a7d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why weaken Flux-OPD corrections when geometric teacher views conflict?",
+        "answer": "Geometric normalization reflects overlap. Large conflict reduces effective correction instead of averaging incompatible suggestions forcefully. Agreement also doesn't prove correctness.",
+        "example": "Two confident opposing answers should not receive twice the trust."
+      }
+    },
+    "qa/post-training:flux-opd/implementation": {
+      "source_sha256": "f89a87b804e62484ff01abaadce1865cf7f1930d73bf4c363ef8ee908e3bc018",
+      "reviewed": true,
+      "fields": {
+        "question": "Do local Flux reward axes reproduce real evolving-context extraction?",
+        "answer": "No. They proxy teacher changes without video, medical or language context models. Build log-space targets relative to one anchor; don't mix differences from unrelated baselines.",
+        "example": "Two hand-built logit tensors don't implement document extraction and updates."
+      }
+    },
+    "qa/post-training:flux-opd/mechanism": {
+      "source_sha256": "d850db36410b77a6bc95c88020bec640b015a7b26f23fbbd339c7169b2661747",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use a fixed anchor and conflict-weighted context corrections?",
+        "answer": "Replacing context can make targets jump. Relative corrections preserve the context-free base; geometric overlap weakens disagreement. Its normalization constant isn't arbitrary pairwise opinion distance. Local axes do not perform real extraction.",
+        "example": "For opposing suggested reasoning paths, retain the shared anchor and attenuate corrections rather than follow every new prompt."
+      }
+    }
+  }
+}

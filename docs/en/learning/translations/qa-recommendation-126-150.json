@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:casi/implementation": {
+      "source_sha256": "770e74d47862d806501472d20352ada88e99e86636fb102ab2de1dd4bb34bd11",
+      "reviewed": true,
+      "fields": {
+        "question": "Why jointly project CASI's bounded zero-sum advantages instead of clipping dimensions independently?",
+        "answer": "Independent clipping breaks zero sum and can shift the mean action advantage away from the original rollout advantage. Joint projection solves for a shared offset λ before clipping to satisfy both bounds and zero sum. It preserves the arithmetic action mean, not a token-length-weighted mean, and does not guarantee the original unbiased gradient.",
+        "example": "Clipping (2, −1, −1) to ±1 yields a negative sum. A common offset before clipping can meet both constraints."
+      }
+    },
+    "qa/recommendation:causal-representation/mechanism": {
+      "source_sha256": "b11068c1bed71ff350814225361fe038d1ad0b7559ae6d868dd53efa607cabef",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does deleting all exposure-related information not necessarily produce a good causal recommendation representation?",
+        "answer": "Some signals relate to both exposure and real outcomes. The information-theoretic objective balances outcome information conditional on confounders against dependence on exposure, aiming to preserve transferable information. Causal interpretation still depends on confounders and identification assumptions; distribution-shift metrics alone do not prove all noncausal information was removed.",
+        "example": "Geography affects both exposure and delivery feasibility. Distinguish targeting preference from real delivery effects instead of deleting every regional signal."
+      }
+    },
+    "qa/recommendation:causal-representation/basics": {
+      "source_sha256": "a45bdf7356224b7d4003161c2278d068163440481d7e99182a316cccd176772e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Causal Representation both retain outcome information and suppress confounding information?",
+        "answer": "Suppressing exposure information alone can remove genuine preference; preserving outcome prediction alone can exploit exposure shortcuts. The dual objective uses conditional outcome information and a confounding penalty to retain generalizable signals. These constraints do not establish causal identification without variable and data assumptions.",
+        "example": "Removing popularity entirely can lose demand information; keeping it unconditionally can copy the old exposure policy."
+      }
+    },
+    "qa/recommendation:causal-representation/comparison": {
+      "source_sha256": "b66aaf6f71fe0a5b6ef7ccf361366ba9d2779843c5730ab58b5e695287f998e0",
+      "reviewed": true,
+      "fields": {
+        "question": "Where do causal representation constraints act compared with IPS weighting?",
+        "answer": "Representation constraints change what the encoder stores, while IPS changes how much observed samples contribute to loss. The former needs confounder representations and information estimates; the latter needs valid propensities and support. Proxy results do not establish that one is generally better.",
+        "example": "Weighting rare impressions does not stop the model reading popularity. Suppressing popularity does not create missing unexposed samples."
+      }
+    },
+    "qa/recommendation:causal-representation/implementation": {
+      "source_sha256": "7c5b46421726ee65590e9a916d33211250321cd58778242deec19c85917a8ef2",
+      "reviewed": true,
+      "fields": {
+        "question": "How can an implementation of `I(g(T);Y|Z)−λI(g(T);Z)` avoid using target labels at serving time?",
+        "answer": "Y and Z can enter the training objective and estimator; the deployed representation must be computed solely from T available at prediction. The source reports no extra serving overhead after training, but the local public proxy does not prove that causal components were separated.",
+        "example": "Use clicks to train g(T), then compute it before the current click occurs. Concatenating the observed click at serving would leak the answer."
+      }
+    },
+    "qa/recommendation:causal-retrieval/mechanism": {
+      "source_sha256": "2a0983330beb67c866d09b395b12e09c5ba9106c09cf671736f382b1c78bb126",
+      "reviewed": true,
+      "fields": {
+        "question": "Why decide whether to trigger causal retrieval by uplift instead of underlying shopping probability?",
+        "answer": "High-propensity users might buy without retrieval, so allocate compute by the outcome changed by triggering. Use randomized logs to learn treated and control outcomes, doubly robust correction to estimate increment, and replay to select a threshold. Adequate experimental support and overlap are still necessary.",
+        "example": "A likely buyer may gain little, while a less likely buyer can be persuaded by relevant candidates. Under a budget, compare intervention increments rather than base propensity."
+      }
+    },
+    "qa/recommendation:causal-retrieval/basics": {
+      "source_sha256": "4db25d7cff4f084e58433f6510ee53769402872f98f74cad6d763401a57c53fc",
+      "reviewed": true,
+      "fields": {
+        "question": "What are the treatment and outcome in causal retrieval?",
+        "answer": "Treatment is whether the shopping candidate generator runs; outcomes are later business responses across events. Estimate the trigger/no-trigger difference for comparable users, not ordinary shopping-model accuracy. Both decisions must be sufficiently represented in the data.",
+        "example": "The question is whether running shopping retrieval changes purchase or consumption for the same context, not whether that user likes to shop anyway."
+      }
+    },
+    "qa/recommendation:causal-retrieval/comparison": {
+      "source_sha256": "012624479ccae32dd22097bef6bfd7053c6703961401af43817a1533695f6315",
+      "reviewed": true,
+      "fields": {
+        "question": "What does DR uplift add beyond two outcome models for treatment and control?",
+        "answer": "The model difference estimates the outcome gap; a propensity-weighted residual uses observed assignment information to correct fitting error. Double robustness depends on its assumptions and suitable model specification, not immunity to arbitrary bias. Local synthetic randomized treatments do not establish production uplift.",
+        "example": "The residual may correct underestimated treated purchases, but cannot fix zero support when this group has never received treatment."
+      }
+    },
+    "qa/recommendation:causal-retrieval/implementation": {
+      "source_sha256": "8f210010706e727f5943849b88079e4db06e8281e60ac6e99f76584a8b19e260",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check propensity values near zero or one in causal retrieval?",
+        "answer": "The DR residuals divide by e(x) or 1−e(x); extremes amplify noise, and missing overlap can prevent estimation. Choose trigger thresholds on independent replay or validation rather than test. Document any clipping because it changes estimator bias and variance.",
+        "example": "A subgroup triggered only 1% of the time can give one outcome enormous weight; a high score caused by that denominator is not high-confidence uplift."
+      }
+    },
+    "qa/recommendation:ccformer/mechanism": {
+      "source_sha256": "9cda784134b3425a93b6859752af1c29d78e9ee646a4c4d8f11206cfc6a7f443",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CCFormer expand compression receptive fields for distant history while retaining recent detail?",
+        "answer": "Old sequences are large, and per-event interactions can consume ranking budget. Recent behavior can signal changing intent and lose detail if merged early. CCFormer hierarchically mixes old tokens while keeping field-specific projections and cross-attention. Sequence shortening and field interaction solve different problems, so length alone cannot measure effectiveness.",
+        "example": "Merge many similar views from last month but preserve today's views of two different sizes; candidate fields can still query compressed long-term interests."
+      }
+    },
+    "qa/recommendation:ccformer/basics": {
+      "source_sha256": "4d702f47f5978290db0b0085b300c355a6c7af3ba04022da95e48c5e0d5642a5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why project CCFormer fields separately instead of treating IDs, content, and history as homogeneous tokens?",
+        "answer": "Different sources and scales benefit from their own projections, followed by cross-attention, which limits dominance by a strong field. Hierarchical compression separately controls history cost. This jointly addresses feature interaction and sequence length, not simply Transformer depth.",
+        "example": "A user ID is a sparse lookup and content represents semantics. Separate projections preserve both before interaction instead of favoring frequent IDs."
+      }
+    },
+    "qa/recommendation:ccformer/comparison": {
+      "source_sha256": "cb0bf61c772ab6000b4f3a4893ad185143d6bfd950d65e70f4b34acb61ffea86",
+      "reviewed": true,
+      "fields": {
+        "question": "What do CCFormer's progressive compression and fixed last-N truncation each lose?",
+        "answer": "Truncation removes distant events entirely; compression retains coarse older signals at less cost but can erase rare details. Keeping recent resolution while broadening old receptive fields is not lossless. A local GRU comparison does not establish a ranking of all long-sequence methods.",
+        "example": "Compression can retain last year's photography interest and three recent camping actions but forget one camera model. Last-ten truncation may forget photography entirely."
+      }
+    },
+    "qa/recommendation:ccformer/implementation": {
+      "source_sha256": "1fafb5762076caa34d91836b1dfb02fb6da3e76ab69b8546d08c99bc116a3fcd",
+      "reviewed": true,
+      "fields": {
+        "question": "How does hierarchical token mixing in CCFormer differ from compressing the whole sequence uniformly?",
+        "answer": "Expand the old-history receptive field by layer and temporal region, keep the recent fine-grained path, and use field-specific query projections for interactions. Uniform merging loses temporal resolution allocation. For the small local core, verify connectivity and length changes rather than just runnable tensor shapes.",
+        "example": "The first layer can keep four recent actions as individual tokens and merge eight older ones. A later layer expands the old window without averaging away a just-recorded key click."
+      }
+    },
+    "qa/recommendation:cdm/mechanism": {
+      "source_sha256": "c35d62b28ed659421eb6cfdd56a57556b4e86e359119b15189223cf1187590a5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must CDM's student see same-request candidates when distilling an MMR teacher?",
+        "answer": "MMR selection depends on other candidates and redundancy, so isolated item features cannot recover it. CDM learns selection propensity relative to context and combines it with the original recommendation score, transferring costly iterative redundancy reduction to a serving-time scorer. Student approximation need not reproduce the list exactly, and a small local run does not establish production diversity gains.",
+        "example": "A travel clip may be redundant among ten similar clips but distinctive in a cooking list."
+      }
+    },
+    "qa/recommendation:cdm/basics": {
+      "source_sha256": "33d0896e800651741d123f685a6444d83cadcaf3b89db67fe6c68e7eba2a8370",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CDM view diversity as marginal value given the selected prefix?",
+        "answer": "Value depends on what the list already contains: the first science-fiction item can add variety while the fourth similar one is redundant. MMR combines relevance with redundancy penalties; CDM learns the contextual gain for low-latency serving. Diversity is not a permanent per-item bonus.",
+        "example": "A third movie by a director may add little if two are already selected, yet be valuable when no work by that director appears."
+      }
+    },
+    "qa/recommendation:cdm/comparison": {
+      "source_sha256": "eaec98952cbdfda064fb4f59b2f4312a35d4a85d1d40f4ed62d64b9418311f0b",
+      "reviewed": true,
+      "fields": {
+        "question": "What does CDM distillation save compared with online MMR, and what error can it introduce?",
+        "answer": "MMR recomputes redundancy against the selected set at each step. The student approximates those decisions quickly, reducing iterative serving cost. It can drift on new candidate distributions or longer lists, so test precision and diversity as well as latency. Proxy gains do not prove exact imitation.",
+        "example": "One student score can replace repeated comparisons, but the student may underestimate redundancy in a near-duplicate set absent from training."
+      }
+    },
+    "qa/recommendation:cdm/implementation": {
+      "source_sha256": "669244c7669d0aafc99199a237de1869979ca7e08ba4ff3d95de021a3d99fde9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why update similarity penalties after selecting each item in the CDM teacher?",
+        "answer": "MMR penalizes maximum similarity to the current selected prefix. Every addition changes remaining marginal scores; one fixed ranking is not the same contextual decision. Student targets must correspond to the relevant prefix rather than conflating stages in a static item label.",
+        "example": "After selecting a camping tutorial, reduce the score of its near-duplicate. An empty-prefix score could put both next to each other."
+      }
+    },
+    "qa/recommendation:cgr/mechanism": {
+      "source_sha256": "782772c1d0e61464ebea48e534a3f4ec4bbd2f98d44f0590e5c2ca53076ea831",
+      "reviewed": true,
+      "fields": {
+        "question": "How do CGR's decoding-time ad-load constraints differ from deleting surplus ads afterward?",
+        "answer": "Post-hoc deletions change context and remaining slots, invalidating value estimates for the original prefixes. CGR maintains the feasible set at each generation step and combines it with estimated reward to prune infeasible branches. A high-scoring but unusable list is not a valid result.",
+        "example": "With at most two ads in five positions, mask ads after using both slots. Generating four ads and deleting two changes the list the system scored."
+      }
+    },
+    "qa/recommendation:cgr/basics": {
+      "source_sha256": "91fe49004ad2b2fbd645cef47db3993dc62f7f1392395f877d56e10e203e7183",
+      "reviewed": true,
+      "fields": {
+        "question": "What decisions does CGR unify by putting generation and reward estimation in one network?",
+        "answer": "The model proposes the next item and estimates its business value after insertion, conditioned on the prefix, ad positions, and load rules. Feasibility determines what can be chosen; reward compares legal options. A high reward does not override the rules.",
+        "example": "Once the screen reaches its ad cap, even a high-value ad cannot be generated; rank eligible organic items instead."
+      }
+    },
+    "qa/recommendation:cgr/comparison": {
+      "source_sha256": "025ed923e76b023fa48cb7999f56665658351da5024723efad1ea2361228a66e",
+      "reviewed": true,
+      "fields": {
+        "question": "How does CGR's constraint-aware pruning differ from fixed item ranking in prefix dependence?",
+        "answer": "Fixed item scores do not depend on selected items. CGR updates feasibility and reward at each step, so count and position rules directly change later choices. This reduces repairs but requires accurate value estimates and search budget; one proxy comparison does not prove global optimality.",
+        "example": "An ad in slot one can force organic content in slot two under spacing rules without changing any ordinary item score."
+      }
+    },
+    "qa/recommendation:cgr/implementation": {
+      "source_sha256": "03afa89ef0f403442880365bc13b31aedbb81a508a9369d7b52758d1fca655b4",
+      "reviewed": true,
+      "fields": {
+        "question": "When should an implementation of CGR update `F(y<t)`?",
+        "answer": "After each selection, update the prefix, load, and position state, then construct the next feasible set. Do not generate the whole sequence and assume every prefix was legal. An empty set must terminate or use a defined legal fallback, never silently fill with an invalid item.",
+        "example": "If the final slot has no eligible organic items and the ad cap is reached, report or terminate as defined instead of adding an ad."
+      }
+    },
+    "qa/recommendation:chronicle-rec/mechanism": {
+      "source_sha256": "aa721cac9c2bb0013e1d1b67e3e69b828981189ec4e3dd3230e8295ac0f5afc9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must a Chronicle Token have a time anchor and summarize only preceding events?",
+        "answer": "Without the boundary, an earlier representation could include future events, violating temporal causality and making cache meaning unclear. ChronicleRec compresses different ranges, anchors queries on the timeline, reads earlier events only, and masks recent behavior in multiple ways to align short-term intent. Anchored candidate-independent summaries are reusable across candidates.",
+        "example": "A Wednesday summary must not include Friday's camera purchase when scoring Thursday lens recommendations."
+      }
+    },
+    "qa/recommendation:chronicle-rec/basics": {
+      "source_sha256": "936f55fbf861ffcae4c67fdf6ecc4f01ce60aafdd7543f9861dd02eccb8b858a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does ChronicleRec represent near, middle, and distant history instead of a few unordered interest tokens?",
+        "answer": "Multi-scale pooling preserves temporal structure. Query anchors delimit the past being summarized so stable preferences and recent changes remain distinct. Candidate-independent Chronicle Tokens can be cached, but public compression can still discard target-specific details.",
+        "example": "A long-term science-fiction preference and this week's parenting interest mean more with time scales than as two unordered keywords."
+      }
+    },
+    "qa/recommendation:chronicle-rec/comparison": {
+      "source_sha256": "f83f1ea35e965133813615d1f7ce86e4ef7c92cac87ada7d8443899207bf3765",
+      "reviewed": true,
+      "fields": {
+        "question": "How does ChronicleRec alignment pretraining differ from ordinary next-item prediction?",
+        "answer": "Branches hide different lengths of recent actions so compressed older history must predict recent intent without nearby evidence. Ordinary next-item prediction may lean on adjacent actions. Do not return hidden targets to evaluation inputs, or the compression test loses its meaning.",
+        "example": "Hide the latest three parenting views and predict the new interest from older history instead of guessing the next item from the last parenting item."
+      }
+    },
+    "qa/recommendation:chronicle-rec/implementation": {
+      "source_sha256": "7a619dee49a5193e45166f6874dc9004421eff1c0610028fbae21b8b98f1eaf5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why normalize Chronicle Token pooling by valid mask count and read at the query position?",
+        "answer": "Padding should not shrink short histories; masks and a safe denominator average real events only. Read after causal encoding at the query anchor so the state summarizes only earlier events. Other positions and padded events can alter semantics without causing shape errors.",
+        "example": "A four-slot window with two real actions divides by two. Put the query after both to summarize both; a query between them cannot see the later one."
+      }
+    }
+  }
+}

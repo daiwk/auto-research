@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:adavdr/implementation": {
+      "source_sha256": "dd0a16e1b141047ea9ec23b63851e26b6c2dfc0f1b0747fb7a56930e58061f0b",
+      "reviewed": true,
+      "fields": {
+        "question": "How should local ToolRoute success be reported alongside cost and video scope?",
+        "answer": "Retain added verifier cost and state that local runs use an oracle-free stateful tool environment, not the paper's video data or full VDR system. Perfect PlanBench is a mechanism diagnostic. Fallback counts or success under another protocol are not video research gains.",
+        "example": "Example: Report that an extra verification step bought local success rather than claim higher success and fewer video calls from the same result."
+      }
+    },
+    "qa/agent-research:smith/mechanism": {
+      "source_sha256": "6db591250feb246aa191c4e6d8a50d9a27e5879f28be118d13cef7fe1404f712",
+      "reviewed": true,
+      "fields": {
+        "question": "Why jointly train tool creation and use in one policy?",
+        "answer": "Rewarding runnable code alone can produce awkward tools or tools that fail new tasks. Training only use cannot improve design. Mixed build and held-out use connect schema, execution, and outcome signals to encourage reusable abstractions. Passing examples is not independent problem solving.",
+        "example": "Example: A tool hard-codes a training constant and earns execution reward, but held-out calls expose the lack of reuse."
+      }
+    },
+    "qa/agent-research:smith/basics": {
+      "source_sha256": "a521595c2a4f57cdac3e3edbbf2737eb18391fe1871ee49317d16bda81d6fe03",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does SMITH learn to create reusable tools rather than only use existing ones?",
+        "answer": "Fixed tools may not cover new tasks, and rewriting one-off code wastes effort. Building and later using tools links interface and implementation to real use. Code generation does not establish usefulness; format, execution, and downstream answers can fail independently.",
+        "example": "Example: Repeated cleaning needs can justify a dedicated tool. Keep it only if later tasks can call it correctly and finish cleaning."
+      }
+    },
+    "qa/agent-research:smith/comparison": {
+      "source_sha256": "922e183b4f8f20a067606a45f9255ebd9ac848baa65141849624969652c3af53",
+      "reviewed": true,
+      "fields": {
+        "question": "Why aren't schema, code execution, and final answer rewards interchangeable?",
+        "answer": "A schema only needs to parse. Code execution only needs to run without crashing. The final result tests whether the task was solved. Separate signals expose different faults. Harder problems should encourage abstraction, not more hard-coded examples passed off as generalization.",
+        "example": "Example: A function has a valid signature and returns a number using the wrong formula. It passes the first two checks but fails the answer check."
+      }
+    },
+    "qa/agent-research:smith/implementation": {
+      "source_sha256": "cdbce3f2ee618d754e3afd8d2335d046adaadc70d142f5ea0bcf525d2fdd4e35",
+      "reviewed": true,
+      "fields": {
+        "question": "Is the local structured-plan tool equivalent to a Python execution sandbox?",
+        "answer": "No. Local work separates build and use and runs three verifiers, but uses controlled plans without Qwen3-4B, a Python sandbox, or Reasoning-Gym. Generation and reuse counts verify control flow, not paper code-tool training effects.",
+        "example": "Example: A rule interpreter can execute an add node without safely compiling or running arbitrary model-generated Python."
+      }
+    },
+    "qa/agent-research:pmcoder/mechanism": {
+      "source_sha256": "7ab5ef1ca81d27dc8da13016c20af4678fbda8bef4f36fefa0d05b065cc811a6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why condition episodic retrieval on the current phase instead of querying the original issue every step?",
+        "answer": "Localization, editing, and verification need different evidence. Static retrieval can repeat topically related but phase-inappropriate traces. Hierarchical planning constrains retrieval by phase, detects stalls from behavior, and replans. Real execution verdicts decide whether repair succeeded, not phase changes.",
+        "example": "Example: Localization needs files and verification needs regression tests. Repeatedly searching issue text can keep returning localization experiences."
+      }
+    },
+    "qa/agent-research:pmcoder/basics": {
+      "source_sha256": "476b387ff59547d98f62141705365319b6bf871c9f89296f0727552931f6f856",
+      "reviewed": true,
+      "fields": {
+        "question": "What reusable experience does PMCoder retain across locating, fixing, and testing an issue?",
+        "answer": "A long fix yields clues, failed attempts, and test conclusions. Restarting from the issue repeats searches and mistakes. Phase-organized plans and reads give each step the right history. Memory supports execution but current code and tests still decide if the new issue is fixed.",
+        "example": "Example: Remember the parser location and failing boundary input rather than search the whole repo again."
+      }
+    },
+    "qa/agent-research:pmcoder/comparison": {
+      "source_sha256": "fb20551813b5528b5c9a4c95279371306c122d4b5e3a3f415c9e2c76055ce4c9",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the trade-off between trace-based stall detection and rewriting the whole plan after any failure?",
+        "answer": "Trace statistics recognize repeated nonprogress and allow targeted replanning. One failure can be useful evidence rather than a bad direction. Full rewrites repeat work, while never changing can stall indefinitely. Use actual verdicts rather than self-reported recovery.",
+        "example": "Example: The same test error after two identical patches suggests another approach. A new first-time error can be normal progress."
+      }
+    },
+    "qa/agent-research:pmcoder/implementation": {
+      "source_sha256": "a99caf019edaba881112c3b06f1229823039055947e1fb81f5d273509674e766",
+      "reviewed": true,
+      "fields": {
+        "question": "Can perfect local phase/retrieval scores be compared with solving 25 more SWE-bench issues?",
+        "answer": "No. Deterministic PlanBench tests phase-conditioned retrieval, stalls, and replanning without repository containers or paper models. Proxy cost is not tool tokens. Report traces and branch evidence rather than call saturation issue-resolution capability.",
+        "example": "Example: Selecting a phase template and completing a three-step fixture does not establish locating, editing, and testing an unknown repository."
+      }
+    },
+    "qa/agent-research:codegrep/mechanism": {
+      "source_sha256": "b6f1174b98475897ea98c3b3b46feb29bf8778297d454c68307d974cb1567902",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reward code retrieval by downstream repair value rather than correct-file hits alone?",
+        "answer": "The right file may lack call chains or constraints, and retrieval may be too expensive. Pass evidence to a frozen coding agent and measure actual repair with costs. Freezing the executor reduces co-changing confounds, though one failed repair does not prove a given clue useless.",
+        "example": "Example: Finding an erroring function without its caller constraints can still lead to a bad patch. Related files and test context may enable real repair."
+      }
+    },
+    "qa/agent-research:codegrep/basics": {
+      "source_sha256": "034a145c8808dc47b10b22b76f494ebf50477f5db42bdeb4b2f7789465c57035",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CodeGrep treat evidence gathering in large repositories as a learned multi-step task?",
+        "answer": "Before repair, relevant files, symbols, and dependencies may be unknown. One search can retrieve only similar wording. CodeGrep searches, reads, and updates queries from new clues, serving downstream repair. Actual execution determines whether the evidence helped.",
+        "example": "Example: grep finds a config entry, but reading it reveals the default is elsewhere. Follow that dependency instead of guessing a local patch."
+      }
+    },
+    "qa/agent-research:codegrep/comparison": {
+      "source_sha256": "181dc0a711c407a17d07edcfbbe102509cdffdef41d1c1f88433e0191a65f225",
+      "reviewed": true,
+      "fields": {
+        "question": "How does multi-turn grep, glob, and read differ from one vector Top-K?",
+        "answer": "grep and glob narrow symbols and paths; reading results informs later queries. This interactive evidence collection differs from fixing candidates by initial embedding similarity. Adaptation costs calls and context, so compare exploration resources as well as file hits.",
+        "example": "Example: Glob test directories, grep the error symbol, read a caller, then search dependencies based on actual code."
+      }
+    },
+    "qa/agent-research:codegrep/implementation": {
+      "source_sha256": "d1fa3865050a1ca3d965ba4b76ae4382ed6ea62b47f8a132a5f6662f0f9567db",
+      "reviewed": true,
+      "fields": {
+        "question": "What evidence separates local retrieval operators from actual 14B GRPO training?",
+        "answer": "Local public mini-suites check bounded selection and state without training a 14B retriever, running SWE-bench, or using the full downstream fixer. Token and turn penalties need real measurements. Registration or simulated search is not executed RL or end-to-end speedup.",
+        "example": "Example: Two fewer fixture reads are a proxy reduction, not a 1.2-point improvement in actual repairs without real files and generation."
+      }
+    },
+    "qa/agent-research:manta/mechanism": {
+      "source_sha256": "e92eacb54e584ca9f8f978b262b96f8686143b8b1fcfae79a801668da043d43c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why adjust topology edges, ordering, and visibility rather than merely add agents?",
+        "answer": "Failure can come from missing information, duplicate roles, or absent verification. More agents do not fix these. Trajectories guide bounded changes to relationships and information flow. Budget projection limits communication and execution, and only task feedback confirms gains.",
+        "example": "Example: If reviewers never see current code, fix message visibility rather than add three reviewers of the same stale material."
+      }
+    },
+    "qa/agent-research:manta/basics": {
+      "source_sha256": "2d774632d2ff8726a850199db1e70de1136cae349611c1dd66fc5bfb5a71d01f",
+      "reviewed": true,
+      "fields": {
+        "question": "How can poor communication waste opportunities in a multi-agent team?",
+        "answer": "More roles do not help if results reach the wrong people, dependencies miss key messages, or ordering is wrong. MANTA adapts communication from execution rather than fixing a roster. Topology changes still cost coordination; evaluate visibility, results, and resources.",
+        "example": "Example: A verifier spots a constraint error but tells an unrelated role. The executor continues on a stale plan; adjust information flow rather than add another agent."
+      }
+    },
+    "qa/agent-research:manta/comparison": {
+      "source_sha256": "bd667236443388e02501cfeef83ae4977ce20d7d726dd42c106c368b2a865132",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the trade-off between online topology adaptation and picking a team once at the start?",
+        "answer": "An initial team uses task priors. Online changes respond to observed bottlenecks, failures, and duplication but can add instability and cost. Project changes onto budgets and permission boundaries rather than add unlimited agents or expose private histories.",
+        "example": "Example: Merge duplicate source-checking roles or alter edges, but never let evaluator references reach executors as part of the change."
+      }
+    }
+  }
+}

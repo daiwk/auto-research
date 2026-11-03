@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/post-training/student-trajectory-distillation": {
+      "source_sha256": "fe75df4bc584640b0cbeb9003e4a30a7f0ba60075205b741dd5cbcf2a26ed2d4",
+      "reviewed": true,
+      "fields": {
+        "title": "Trajectory distillation: separate sampler, proposal, and divergence direction",
+        "thesis": "On-policy describes supervised states; FKL/RKL/JSD describe how distributions compare there. GKD and MiniLLM establish those axes, DrOPD and AP-OPD adjust correction location or strength, and Semi-OPD and learning-signal diagnostics distinguish offline reuse from residual loss. MPOPD adds a learnable proposal. Its geometric-mixture target differs from the student's teacher-directed RKL.",
+        "axis_0": "State source: teacher demonstrations, current student, or fixed initial-student trajectories",
+        "axis_1": "Comparison geometry: FKL coverage, RKL mode seeking, and JSD routing",
+        "axis_2": "Local treatment: add a correction direction or rescale existing supervision",
+        "axis_3": "Evidence type: objective, caching contract, or learning-signal diagnostic"
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/comparison/post-training:gkd": {
+      "source_sha256": "d0bab6886684090abc45930ca7772c792bc8e27c93477b459ace9a5becc32462",
+      "reviewed": true,
+      "fields": {
+        "position": "Lets the teacher supervise distributions at actual student-generated prefixes and mixes fixed with on-policy states through a student-data fraction.",
+        "tradeoff": "Better state coverage does not prescribe a divergence. The local candidate support does not reproduce T5 sequence training."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/comparison/post-training:minillm": {
+      "source_sha256": "888ee4d2b822bffad3f873216d203a9254f31813b1a3c2c59365603bd6f2259b",
+      "reviewed": true,
+      "fields": {
+        "position": "Optimizes RKL on student generation with teacher-mixed sampling, baselines, and length treatment to stabilize estimates.",
+        "tradeoff": "Favors teacher modes the student can represent and can weaken undercovered directions. Local evidence verifies candidate sampling and gradient direction."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/comparison/post-training:divergence-routed-opd": {
+      "source_sha256": "7ca8b199b06c6930d27d34c4bba9716fdadbcd57e43ccf759d0022a23a0256a3",
+      "reviewed": true,
+      "fields": {
+        "position": "Keeps RKL everywhere and adds FKL only at high-JS positions, using a PPO surrogate over the union of candidates.",
+        "tradeoff": "Supports teacher-probable candidates rarely sampled by the student, not a global switch to FKL. Full training was not reproduced; tiny online updates are L1 diagnostics."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/comparison/post-training:ap-opd": {
+      "source_sha256": "29a99b6991f19cab5c9eb79d7fa60cb36c185eb896c284dded901f9f9d3bb402",
+      "reviewed": true,
+      "fields": {
+        "position": "Compares raw penalties in neighboring blocks and scales all signed supervision in a block after a spike.",
+        "tradeoff": "No extra teacher forwards or sign change. Thresholds are not calibrated significance tests. Full runs were too costly and not reproduced."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/comparison/post-training:semi-opd": {
+      "source_sha256": "0548baabf8acfc86766a12e97511ee2456a00d2e76ebabc42769ca823bf20d5c",
+      "reviewed": true,
+      "fields": {
+        "position": "Freezes initial student trajectories and teacher scores but recomputes current student log-probabilities and advantages each step.",
+        "tradeoff": "Avoids repeated collection without covering all new states. The short-budget checkpoint verifies training flow only."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/comparison/post-training:opd-learning-signals": {
+      "source_sha256": "1776e05d513f16504cf7bcbbfa760a687953a11def736069a75ef974ced2c11f",
+      "reviewed": true,
+      "fields": {
+        "position": "Tracks residual loss, pre-truncation gradient, two-fold occupancy, parameter displacement, and CKA to distinguish loss from usable signal.",
+        "tradeoff": "A correlational diagnostic, not a new optimizer. The local three-step run does not recreate a long plateau or prove its cause."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/comparison/post-training:mpopd": {
+      "source_sha256": "8999e01419dde1db8423f63eab1b1baf0d821c3c6db14a17beb12481569bb3c7",
+      "reviewed": true,
+      "fields": {
+        "position": "Fits a separate proposal to the normalized geometric mixture of updated student and teacher, while weighting student RKL on proposal trajectories by a frozen single-step ratio lagged one token.",
+        "tradeoff": "The ratio is not a cumulative product. Reset the proposal from the updated student each round. Complete sampling, LM copies, and optimizer orchestration are not implemented; tensor loss alone does not demonstrate on-policy training."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/analysis/0": {
+      "source_sha256": "b21188481bcf3a9513f759b1cce70533411bce0c7e395ec9cc765ffa2664c1cc",
+      "reviewed": true,
+      "fields": {
+        "title": "Student trajectories can still support different learning directions",
+        "body": "GKD supervises prefixes students actually visit but permits multiple divergences. MiniLLM chooses student-to-teacher RKL, which may weakly correct teacher options with very low student support. DrOPD retains RKL and adds FKL only on high-divergence positions over joint candidate support. State sampling, divergence direction, and updated candidates need separate checks."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/analysis/1": {
+      "source_sha256": "44258907307b4f9b1be70f31891d5538a35b84b922c912a278ba0808ef2406cf",
+      "reviewed": true,
+      "fields": {
+        "title": "Large loss, weak gradients, and spikes are not one fault",
+        "body": "OPD Learning Signals logs losses and gradients jointly rather than treating residual discrepancy as strong learning potential. AP-OPD scales whole blocks after abrupt penalty rises without changing signs; it does not explain plateaus generally. Semi-OPD changes state reuse; fixed teacher labels do not freeze student-dependent advantages."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/analysis/2": {
+      "source_sha256": "0b9a4ef4ab16797125fb4f5da344d3244172abfd728068eef0ae6efecdb159a5",
+      "reviewed": true,
+      "fields": {
+        "title": "A new sampler does not make the geometric mixture the student target",
+        "body": "GKD supervises student prefixes and MiniLLM chooses student-to-teacher RKL. MPOPD keeps the teacher target but learns a separate proposal for reachability. The geometric mixture trains only the proposal. Correct sampling mismatch with the frozen old-student/old-proposal one-step ratio from the previous token, not a trajectory product. A real system must reset from the updated student each round; external logits alone do not establish trajectory provenance."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/question/on-policy-not-one-kl": {
+      "source_sha256": "4d9c9b28462ed914599e9ea1e6db21b4ccc53a6f20854fd386bf6f0098f52c99",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add FKL in DrOPD if GKD and MiniLLM already learn along student trajectories?",
+        "answer": "Student trajectories determine prefixes only. MiniLLM RKL favors teacher modes the student supports, so low-probability teacher candidates can receive weak correction. DrOPD routes extra FKL at high-JS positions and retains teacher support. It does not change sampler or add unlimited FKL everywhere.",
+        "example": "Teaching example: A student considers only A at a visited mistaken prefix while a teacher favors B. Visiting the prefix does not guarantee a useful correction toward B."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/question/frozen-teacher-versus-student-score": {
+      "source_sha256": "f716c7ebb67360cc0a8812a0f96ab581d7e7e20dfe386e6f268c4a9e347198b7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why cache Semi-OPD teacher scores but not teacher-minus-student advantages forever?",
+        "answer": "Teacher configuration is fixed, but student parameters and log-probabilities change, so recompute differences. Stale advantages respond to old errors. Semi-OPD also fixes initial trajectories unlike continuously sampled GKD; neither implies all probabilities stay constant.",
+        "example": "Teaching example: An old teacher advantage can keep pushing a token the student has already learned."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/question/spike-versus-direction-repair": {
+      "source_sha256": "b5e09af53a2fa0b8b026e5c1985f6b16895311d7d86643a38bafbca35407cc43",
+      "reviewed": true,
+      "fields": {
+        "question": "Are AP-OPD spike damping and DrOPD high-divergence FKL opposite corrections?",
+        "answer": "They detect different things. AP-OPD checks neighboring raw penalty blocks and scales all signed coefficients; DrOPD detects JS divergence and undercoverage and adds a direction. Strength and composition differ.",
+        "example": "Teaching example: Persistent high divergence with no jump can trigger DrOPD but not AP-OPD; their gates are not complementary thresholds."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/question/mpopd-proposal-target-versus-student-target": {
+      "source_sha256": "77a12fb9cabd074c0d64ce956ab94b261eb436952bf7c6e70f984baa71ad3d1b",
+      "reviewed": true,
+      "fields": {
+        "question": "Should MPOPD distill the proposal's teacher–student mixture directly into the student?",
+        "answer": "No. The mixture shapes proposal sampling; the student still learns RKL to the teacher. Student loss uses a frozen old-student versus old-proposal single-step ratio with one-token lag. This adds a proposal axis beyond sampled states and divergence direction.",
+        "example": "Illustration: A proposal can reach a teacher-supported prefix more often without replacing the teacher target by a compromise."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/update/2026-10-27/0": {
+      "source_sha256": "365d51cfdbf42a8979f2b41f6eab56c32cdb19a0d6b9ce1932151574a4179d30",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial edition: separates student state distributions and divergence, comparing GKD/MiniLLM, DrOPD/AP-OPD, Semi-OPD, and learning-signal diagnostics; 40 abstracts and six close reads."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/update/2026-10-30/1": {
+      "source_sha256": "dac980314acff58d04301f3d02d46adb93dcc1df23fde4ef4b37598b00c93570",
+      "reviewed": true,
+      "fields": {
+        "summary": "Reviewed MPOPD v2, separating proposal, student RKL, teacher top-k support, and the frozen single-step ratio lagged one token. Adds a learnable sampler axis beyond GKD/MiniLLM and preserves prerequisites such as proposal reset."
+      }
+    }
+  }
+}

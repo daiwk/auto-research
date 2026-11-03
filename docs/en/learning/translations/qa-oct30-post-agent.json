@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:concur/priority-after-standardization": {
+      "source_sha256": "073de1b99671e2d708061dd180861168b10178738e1a02050c29ee22ea74e74f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can standardized rewards violate primary priority despite gating raw auxiliary rewards?",
+        "answer": "The raw gate constrains auxiliary scores for failures. Independent centering/scaling can amplify small auxiliary gaps enough to reverse primary order. At a primary ceiling the primary advantage is zero, so auxiliary can determine the update. CONCUR constrains standardized terms, not just the raw gate.",
+        "example": "Example: Two correct answers differ slightly in length reward. Standardization can give length unit variance while primary advantage is zero; this is not evidence of learning more correct answers."
+      }
+    },
+    "qa/post-training:concur/not-all-primary-ties": {
+      "source_sha256": "0a7d2c0964a844a92c0ea3ae66a7bce89a6de4277c131bf33ce077169c5a7a18",
+      "reviewed": true,
+      "fields": {
+        "question": "Why sort by primary then auxiliary before PAVA without averaging all equal primary scores?",
+        "answer": "Monotonicity only constrains strictly higher primary levels, not equal non-ceiling primary values. Sorting ties by auxiliary lets PAVA fix cross-primary violations only. Equal outputs are required at the ceiling only when that tie is enabled.",
+        "example": "Example: Primary [0.3,0.3,0.7], auxiliary [-1,0,1] is already feasible. Replacing the two first values with −0.5 adds a constraint."
+      }
+    },
+    "qa/post-training:concur/earned-trust-not-significance": {
+      "source_sha256": "73d2a85c2ac6fe3a53ba267f52d562dc3876f79332afab4f26f257f9260feb23",
+      "reviewed": true,
+      "fields": {
+        "question": "Does CONCUR-A exceeding two standard errors prove auxiliary reliability at the ceiling?",
+        "answer": "No. It measures concordance of passing pairs with different primary values, releasing ties after at least 61 valid readings and mean greater than two standard errors. The evolving distribution is not IID, and ceiling pairs are not directly measured. This is not a significance level or universal guarantee.",
+        "example": "Example: Concordance can reverse later and drop below the threshold; rebind the ceiling rather than treating the first release as permanent."
+      }
+    },
+    "qa/post-training:concur/whole-batch-before-projection": {
+      "source_sha256": "052aaa1092e63ee33a827044f6b1a42e4b2b7b05da75f7da337c31ef850679d0",
+      "reviewed": true,
+      "fields": {
+        "question": "Can the first group in a batch decide the CONCUR-A ceiling from only previous history?",
+        "answer": "No. Algorithm 1 merges every valid reading in the batch before sharing one policy per task/auxiliary and projecting groups. Sequential updates would depend on group order. Final whitening spans the full multi-task batch, not each group. A tensor check is not LLM lift.",
+        "example": "Example: History has 60 valid positives and group two supplies the 61st; group one also uses the merged current trust state."
+      }
+    },
+    "qa/post-training:mpopd/rollout-policy-not-student-target": {
+      "source_sha256": "98cf9b9292770462d62356957b397efe3c39b2af454c4355fe866ecdfec9f5c0",
+      "reviewed": true,
+      "fields": {
+        "question": "How does MPOPD mixing a rollout policy differ from mixing a student target?",
+        "answer": "A learned proposal changes which prefixes are visited. The student still minimizes reverse KL to the teacher and corrects the old proposal/student gap. Training against a mixed target changes the loss without necessarily visiting teacher-supported paths.",
+        "example": "Example: Reweighting observed bad paths cannot generate a rare good path that was never collected. A changed proposal may sample it."
+      }
+    },
+    "qa/post-training:mpopd/lagged-one-step-ratio": {
+      "source_sha256": "c3d6ce03467f100681e84b75371f3e55a4c0309ed00601f8e2271aa78a1a7ee9",
+      "reviewed": true,
+      "fields": {
+        "question": "Which importance weight multiplies the student's KL at position j?",
+        "answer": "Eq. 7 uses the one-step ratio w[j−1], with weight 1 at the first prefix. Use frozen old student and proposal probabilities of the sampled token and clip. Neither current-token ratio nor cumulative product is correct; no recomputation by the updating student.",
+        "example": "Example: Ratios 4, 0.25, 4 yield KL weights [1,4,0.25], not [4,0.25,4] or [1,4,1]."
+      }
+    },
+    "qa/post-training:mpopd/geometric-versus-arithmetic": {
+      "source_sha256": "bc5cadd33dc0a3200f26ef1e54cdb36e5bb277bf3c462b423224f5854f58c730",
+      "reviewed": true,
+      "fields": {
+        "question": "Does fixed-eta geometric mixing equal a probability average or a fixed KL radius?",
+        "answer": "Neither. It adds weighted log probabilities before normalization, not probabilities. Distributions vary by prefix, so the same eta produces different KL movement. A fixed local radius can imply prefix-specific eta; the global setting is a computational compromise.",
+        "example": "Example: Eta 0.4 barely moves a prefix where teacher and student agree but moves more mass when they conflict."
+      }
+    },
+    "qa/post-training:mpopd/proposal-reset-and-support": {
+      "source_sha256": "cd77ced1655fff67a0ed1a25e958d3cd5a7d3d19eb85226bb74e32c4bac5b354",
+      "reviewed": true,
+      "fields": {
+        "question": "Why don't real gradients establish full MPOPD integration?",
+        "answer": "The tensor kernel has no sampler, LM copy or teacher call. Each round must reset proposal from the updated student and optimize it toward the new geometric target. Student KL and target are renormalized on the same teacher top-k support. Numeric checks do not verify trajectory origins, resets or extended training.",
+        "example": "Example: Cached old prefixes backpropagate but aren't current proposal rollouts. A small CUDA tensor check is not accuracy on 16 reasoning benchmarks."
+      }
+    },
+    "qa/agent-research:emma/lesson-ownership": {
+      "source_sha256": "cc16928453cc185f6631e1c356bb46d50a90c669330b0ed5e491ddd251598f8d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't EMMA turn every failure into a new skill?",
+        "answer": "Ownership depends on the error. Use task-local plan guidance for one execution slip, agent prompts for general habits, skills for missing procedures and controller changes for routing. Experience at the wrong scope can fail to trigger or interfere elsewhere.",
+        "example": "Example: Checking units can be reusable. One misclick does not require a permanent unit-check skill or a new agent."
+      }
+    },
+    "qa/agent-research:emma/one-edit-and-preservation": {
+      "source_sha256": "9418c8bfec975e8bab5a23aa82c9c9bee2d2f3bba97493e2e8a072869b88b4be",
+      "reviewed": true,
+      "fields": {
+        "question": "Why require one edited entry and retain at least 60% of old prompt lines?",
+        "answer": "Single-entry and ownership scope bound location; retention, length and pool capacity bound magnitude. Only agents involved in the failed attempt may change. New entries must actually be used in the next plan. Structural validity is not better task performance.",
+        "example": "Example: Keeping two of five lines and replacing the role is rejected. Keeping three and adding a local check reaches 60%, but still needs an external rerun."
+      }
+    },
+    "qa/agent-research:emma/overflow-versus-missing-capability": {
+      "source_sha256": "027cfd67c75e4c184b1d18c6c6b6f5891c507948eceaeb3f191d1f362bb280c5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why treat context overflow differently from missing capability?",
+        "answer": "Overflow can mean a step is too broad. Split incomplete steps and resume without discarding finished work. A new specialist needs evidence of missing capability or repeated overflow; repeated overflow calls for changing the decomposition, not simply changing prompts/skills.",
+        "example": "Example: If steps one and two already produced a table and step three is too large, keep the table and subdivide step three among existing agents."
+      }
+    },
+    "qa/agent-research:emma/guards-not-semantic-verifier": {
+      "source_sha256": "27cf79a2a3e7d5ada8e20afcccb90e40e74ce8b3db02a21acfdc5392d2a9a760",
+      "reviewed": true,
+      "fields": {
+        "question": "Do passing local guards prove no memory leakage and a stronger agent?",
+        "answer": "No. The code checks ownership, capacity, retention, rotation, lifecycle and concatenation. Independent external services judge semantic deduplication, real specialization and leakage; the component cannot prove those judgments correct. No evaluated actor, LLM reflection or real task traces.",
+        "example": "Example: A service may incorrectly mark an answer-bearing proposal safe. A Boolean interface cannot detect that; local rejection counts are not AppWorld success rates."
+      }
+    },
+    "qa/agent-research:evalalloc/search-versus-final-confirmation": {
+      "source_sha256": "9800b63e3f4e39331b4b505ea6eb96e9237334617fca1d0c0a65d45780608567",
+      "reviewed": true,
+      "fields": {
+        "question": "If cheap search feedback is sufficient, why spend extra on final confirmation?",
+        "answer": "Search needs comparable low-cost guidance; final selection must separate near-tied candidates. EvalAlloc uses sparse shared-core search and paired confirmation that reuses cache, with real observations for the final prefix rather than perpetual imputation.",
+        "example": "Example: A predicted difference of 0.01 can guide exploration but should not decide the champion by itself."
+      }
+    },
+    "qa/agent-research:evalalloc/full-credit-beta-statistics": {
+      "source_sha256": "1f3f2e3a1488a17383f1e8a120f3f395b756a5cba13c6061350069a6b6b63350",
+      "reviewed": true,
+      "fields": {
+        "question": "Can partial credit 0.9 add 0.9 to an item's acquisition success count?",
+        "answer": "No. Acquisition counts only full credit a_i and uses a Beta posterior for conservative p(1−p) informativeness. Partial grades are not full successes there but remain scores for the response model. Mixing the stages changes the shared core.",
+        "example": "Example: Ten 0.9 scores yield a=0, n=10, not a=9; 0.9 still enters model fitting and final scores."
+      }
+    },
+    "qa/agent-research:evalalloc/shared-reference-not-independent-items": {
+      "source_sha256": "329c1b0a07b6f0acd6752439cba9a37e676ef96a974320a2b119cac545be23ad",
+      "reviewed": true,
+      "fields": {
+        "question": "Why aren't equally sized independent random item sets equivalent to a shared core?",
+        "answer": "Common items supply paired covariance, helping when candidates agree on most items and set difficulty varies. Frozen item model and prior put successive generations on one scale. Refitting per candidate breaks comparability. This benefit depends on candidate correlation, not guaranteed variance reduction.",
+        "example": "Example: A faces hard items and B easy ones. A common informative core is more comparable than merely requiring 60 items each."
+      }
+    },
+    "qa/agent-research:evalalloc/cached-union-and-crossfit": {
+      "source_sha256": "800bd23999497b71cdfaa09fe98eec74364c33377d1ae198ec966327b551ebeb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain the search-cache union and check candidate IDs in cross-fitting?",
+        "answer": "Already executed cells need not be paid for again; fill missing common-prefix items and retain candidate-specific observations. Separate two-fold refit predictions prevent candidates from training their own correction. The correction is zero when all items are observed.",
+        "example": "Example: Keep A's cached item 4 even if prefix is 0/1/2. If a round needs four new cells and only three remain, reject the round; never read hidden complete scores to select a winner."
+      }
+    }
+  }
+}

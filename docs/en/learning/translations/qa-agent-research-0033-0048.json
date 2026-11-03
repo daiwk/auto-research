@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:loongreflect/mechanism": {
+      "source_sha256": "773d3693fcbc03275dbc8245e88a691e115831e0fb9c2006ff412a6e5c834323",
+      "reviewed": true,
+      "fields": {
+        "question": "Why model reflection and backtracking as reversible memory-control actions?",
+        "answer": "Long searches must choose external actions, which traces to retain, and which fork to return to. Making reflection and backtracking policy actions lets the agent learn when to change memory. A privileged teacher supplies training signals and outcome reward covers long-run success, but evaluation must not give the student the teacher's global view or future answers.",
+        "example": "Example: After a dead end, return to the previous branch and keep the reason for failure. Appending reflection text without changing trace state is not real backtracking."
+      }
+    },
+    "qa/agent-research:loongreflect/basics": {
+      "source_sha256": "f17908d5fbabeac1b5a8e69f44bcde9b7b0461be742d4f068f9ace6a7097ed9c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does a long-horizon search agent need reflection that recovers its route, not just an explanation at the end?",
+        "answer": "Multi-hop evidence gathering includes failed attempts. An early wrong turn can make later steps depend on bad evidence. LoongReflect changes current information and the continuation path so the agent can recover before the task ends. An accurate retrospective cannot improve the evidence gathering of an already completed run.",
+        "example": "Example: If search keeps finding reprints of the same article, return to the earlier branch and change sources before submitting, not after admitting the evidence is narrow."
+      }
+    },
+    "qa/agent-research:loongreflect/comparison": {
+      "source_sha256": "6f39f44fd59ab34fd6f925cce2117e0989ccb3360f280e3e8f89071443332527",
+      "reviewed": true,
+      "fields": {
+        "question": "How do the fast privileged-teacher channel and slow outcome-GRPO channel supervise different signals?",
+        "answer": "The fast channel distills fine-grained reflection decisions from the teacher's view. The slow channel optimizes long-horizon policy using final trajectory outcomes. One provides local guidance, the other tests overall effectiveness. Privileged information belongs only with the training teacher or evaluator; the deployed student cannot read gold outcomes to choose backtracking.",
+        "example": "Example: A teacher can identify missing evidence at one search step. Final reward checks whether the complete answer succeeds. Online, the student sees only current observations."
+      }
+    },
+    "qa/agent-research:loongreflect/implementation": {
+      "source_sha256": "da54c5a9cf2455f74cbc2f75052b72f7a8a56a0363a51df5fda84b71276fb838",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a low mini-suite average cost establish savings for a real long-context model?",
+        "answer": "No. The deterministic suite verifies reflection, backtracking, and state transitions without a real browser, external tools, or the paper's large model. Cost follows the diagnostic definition. When accuracy is saturated, inspect branches and traces; proxy counts do not translate directly into real tokens or API fees.",
+        "example": "Example: A rule branch billed a fraction of a cost unit does not mean real model reflection uses the same fraction of tokens or time."
+      }
+    },
+    "qa/agent-research:toollift/mechanism": {
+      "source_sha256": "4071eecc83085f84f9d1e15c1bd9b52408d254c93239d56deec054c6320bd475",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does lifting a trajectory into a function workflow graph help reuse it with new tools?",
+        "answer": "The graph preserves required operations and dependencies while deferring concrete tools and interfaces until execution. A new tool set can implement the same functional plan using its current schemas. Parameter contracts still matter; each node needs a real tool with the required input/output behavior.",
+        "example": "Example: Old search_web and new lookup can implement evidence retrieval, so the workflow can be reused, but arguments and response formats must be matched again."
+      }
+    },
+    "qa/agent-research:toollift/basics": {
+      "source_sha256": "090fffd00eb488cbd984c162a4f59d103c33b93474b12fb5fa044dc1dfc0f5fe",
+      "reviewed": true,
+      "fields": {
+        "question": "What experience does ToolLIFT transfer when tool sets change frequently?",
+        "answer": "API names, arguments, and response formats change across services, but functional steps can stay stable, such as checking identity before reading records. ToolLIFT retains that procedural structure and resolves it against the current tool catalog rather than discarding old traces. Concrete interfaces must still be checked.",
+        "example": "Example: A migration still requires finding a customer before retrieving orders, but the old function names and fields cannot be copied into the new service."
+      }
+    },
+    "qa/agent-research:toollift/comparison": {
+      "source_sha256": "948a2f9b6c7ac669abea32591d6426321a8e63943594e8cf8e5d2e28993f282f",
+      "reviewed": true,
+      "fields": {
+        "question": "What information does a function workflow graph need versus an executable tool plan?",
+        "answer": "The function graph describes desired operations and state dependencies, preserving procedure across catalogs. An executable plan must also bind each node to a current API, parameters, and actual objects. The first gives transferable abstraction and the second grounds it. A sensible graph does not guarantee valid arguments, and legal calls need not cover the whole task.",
+        "example": "Example: The graph says find customer then find orders. Execution must confirm whether the new service returns customer_id or account_id and which field the order API accepts."
+      }
+    },
+    "qa/agent-research:toollift/implementation": {
+      "source_sha256": "576f3083b648ab8ecd479abf19d0c4ea95f0453f359994495c6e77e9f08fb25f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why preserve state dependencies in Lift and Select rather than saving only a list of functions?",
+        "answer": "Edges show what evidence or object each later step needs, and Select chooses tools based on current state. An unordered list loses variable provenance and preconditions. The mini-suite verifies lifting and selection control flow without real tools; perfect fixture scores do not establish transfer to unseen services.",
+        "example": "Example: Retrieve an order_id before canceling that order. A list saying query and cancel without binding the ID cannot produce a legal second call."
+      }
+    },
+    "qa/agent-research:hyperagent/mechanism": {
+      "source_sha256": "712efd94a71029d2a7b8e1618545296772088e056efa3caa09a4e8ad37b4bf3d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why represent tools as input-to-output hyperedges rather than retrieve by name similarity?",
+        "answer": "A tool can require several inputs jointly and produce multiple outputs. A hyperedge captures those requirements. The task DAG exposes missing state, then producer relations identify tools that can fill it. Name similarity does not guarantee required arguments or outputs for subsequent steps.",
+        "example": "Example: Invoicing requires an order ID and tax ID. Finding the order ID is insufficient; the hypergraph looks for a tax-ID producer rather than invoking the tool immediately."
+      }
+    },
+    "qa/agent-research:hyperagent/basics": {
+      "source_sha256": "7588fb6448eb1c01b4ad369cbd288fafd6cde1c150d05ebef4de3e26f1a0b619",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is a name-relevant tool insufficient for a multi-step tool task?",
+        "answer": "A call is possible only when its inputs are present, and its outputs may be required later. HyperAgent connects task requirements to these production dependencies and fills state gaps instead of selecting the closest interface by text. Multiple valid transitions are needed for an executable workflow.",
+        "example": "Example: Finding a refund tool does not make a refund possible if it needs an order identifier and payment record. First produce those inputs."
+      }
+    },
+    "qa/agent-research:hyperagent/comparison": {
+      "source_sha256": "95c9878d9f4490367d49843b694f05e5c328d306dda4b4716f3d502255f22fcb",
+      "reviewed": true,
+      "fields": {
+        "question": "Which describes demand and which describes supply: the task DAG or producer support graph?",
+        "answer": "The task DAG describes dependencies between goal states and exposes inputs missing for later subtasks. The producer support graph uses tool schemas to identify suppliers and their own input requirements. Together they form an executable tool chain. A producer's ability to return a value does not mean it already exists.",
+        "example": "Example: The refund task DAG exposes a missing order ID. The support graph finds the order lookup tool and checks whether its required user ID can be obtained first."
+      }
+    },
+    "qa/agent-research:hyperagent/implementation": {
+      "source_sha256": "c1b07f90892764f2d92680895bb65d0fd6ea0e1f762a3337a9696adb9cb35940",
+      "reviewed": true,
+      "fields": {
+        "question": "When expanding a producer, how do you avoid treating its outputs as existing state?",
+        "answer": "The graph says a call can produce a field, not that it has. Verify actual input availability before calling and update state only from real results. Local deterministic PlanBench verifies the dependency path, not AppWorld. A complete graph or perfect fixture result cannot replace actual API responses and task verification.",
+        "example": "Example: A customer lookup schema says it returns customer_id. Perform the lookup and verify the result rather than filling an ID from the schema."
+      }
+    },
+    "qa/agent-research:sira/mechanism": {
+      "source_sha256": "9376319b5e71622aa54f6d47764a97ee1a75e060ad8240d4799784abaccb91b5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why filter generated expansion terms using document frequency in the inverted index?",
+        "answer": "An LLM can suggest plausible terms absent from the corpus or ubiquitous terms that cannot discriminate. Document-frequency constraints ensure terms are retrievable and not too broad. One weighted BM25 query then combines them with the original. It preserves lexical retrieval rather than treating imagined terms as evidence.",
+        "example": "Example: An abbreviation absent from the corpus cannot retrieve documents about a rare disease, while research is too broad. Filtering retains useful terms."
+      }
+    },
+    "qa/agent-research:sira/basics": {
+      "source_sha256": "da89be708ab5d5133ae847e85326296091c9b7cf630f991e988ce58807447489",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does SIRA focus on vocabulary mismatch between how users ask and how evidence is written?",
+        "answer": "Inverted retrieval relies on term overlap. Users describe phenomena in ordinary language while documents may use technical terms, hiding relevant evidence. SIRA uses a frozen LLM to supply possible evidence terms and constrains expansion to the corpus. It bridges query–document vocabulary, not trains an answer generator.",
+        "example": "Example: A user says a program uses more memory over time. Documentation might call it a memory leak. Adding that term can retrieve otherwise missed material."
+      }
+    },
+    "qa/agent-research:sira/comparison": {
+      "source_sha256": "0f880aee4061f6b8cf9f53bdc7b88741f33467d49530871d2e6c55f79003f3a5",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a single weighted BM25 expansion differ from multi-turn agent search?",
+        "answer": "SIRA generates and filters missing terms, then runs one weighted retrieval with the original and expanded terms. It does not iteratively read results and replan. This simplifies interaction but limits recovery from first-pass failure. An agent label does not imply multi-turn self-correction.",
+        "example": "Example: After generating three terms, the method returns one ranking. It does not read first-round pages and invent another set of questions unless a separate loop is added."
+      }
+    },
+    "qa/agent-research:sira/implementation": {
+      "source_sha256": "806df109156b65de8cf362cebf138e97ee555f4598514fd76ec237bbbf2cab53",
+      "reviewed": true,
+      "fields": {
+        "question": "How should zero document frequency, the upper bound, and original query weight be handled?",
+        "answer": "An expansion term must satisfy 0<DF(t)≤τ|C|. Exclude zero-frequency terms and those above the bound. Preserve original-query BM25 and add the expansion contribution multiplied by w. Do not replace the original query or silently introduce multiple retrieval rounds. The local run implements the gate and combination, not the paper-scale index and LLM.",
+        "example": "Example: If no expansion term survives filtering, still return results for the original query rather than dropping the whole query."
+      }
+    }
+  }
+}

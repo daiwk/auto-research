@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:rpl/implementation": {
+      "source_sha256": "f7b612d85d1e6edd5aefceec0f194a211d21469f0617774d78f6ed1ff671f101",
+      "reviewed": true,
+      "fields": {
+        "question": "How does the local restricted RPL program control retrieval, fusion, and final output?",
+        "answer": "It allows at most four distinct queries, prescribed retrieval and reranking widths, real fusion of multi-route results, and a cap on printed documents. Conflicting contents for one ID are rejected, and reranking cannot add unretrieved documents. Local execution interprets data classes and an injected SDK, not arbitrary Python or the paper's token limits.",
+        "example": "Example: Retrieving twenty items and printing three legitimately separates compute and observation. Quietly injecting an unretrieved document during reranking breaks provenance."
+      }
+    },
+    "qa/agent-research:world-of-swecraft/mechanism": {
+      "source_sha256": "9319a7f4fd196b82e0822eabbb8501bb442c7830bbaed82bd7fabf5017ba2c11",
+      "reviewed": true,
+      "fields": {
+        "question": "Why validate collective improvement on hidden downstream packages instead of only agent-maintained microbenchmarks?",
+        "answer": "The group may overfit visible benchmarks while breaking real dependents. Installing frozen releases in unseen downstream packages tests compatibility and benefits. Failures stay in strict or carry aggregation rather than being dropped, and instruction counts do not measure wall-clock speed.",
+        "example": "Example: A function specialized for self-test inputs can improve a microbenchmark while breaking a downstream parser. Hidden dependencies reveal the regression."
+      }
+    },
+    "qa/agent-research:world-of-swecraft/basics": {
+      "source_sha256": "8eccb15518a1fc5a4b5b6bc328b7cb10c115985b1adc3393d5c32fd2d013cbe0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does World of SWEcraft model a package ecosystem maintained by several agents?",
+        "answer": "Fixing one isolated issue does not capture cross-project dependencies or long-term effects. Maintainers continuously change packages, affecting downstream users and requiring coordinated releases alongside local progress. Activity volume does not measure ecosystem quality; verify downstream functionality and resources.",
+        "example": "Example: A package changes a function signature and passes its own tests, but two dependent packages no longer import. Single-issue tests can miss that."
+      }
+    },
+    "qa/agent-research:world-of-swecraft/comparison": {
+      "source_sha256": "f7829f2bef8bd4db49a0b79fecb04521e891f6e9d1fe99ff10af81926b9f9c5c",
+      "reviewed": true,
+      "fields": {
+        "question": "How does persistent multi-session collaboration differ from one indefinitely long group chat?",
+        "answer": "Agents hand off through repositories, issues, PRs, releases, and durable memory, with separate session permissions and budgets. Shared artifacts preserve work without replaying every discussion, but coordination, ownership, and versioning still cost. More agents or larger models do not automatically produce more.",
+        "example": "Example: One maintainer releases a new version and a dependent library adapts using release artifacts, without all chat history being visible every turn."
+      }
+    },
+    "qa/agent-research:world-of-swecraft/implementation": {
+      "source_sha256": "8fa4ea81db0e85d91549a1ea06c900cff3e2a62b819c207d3c1fb20f8d23e2fe",
+      "reviewed": true,
+      "fields": {
+        "question": "How do strict and carry aggregate speed in correctness-failure rounds?",
+        "answer": "Strict assigns failed package tasks speed ratio one; carry uses the most recent passing ratio. Both retain all tasks and take a geometric mean. Instruction-count gains are not wall-clock speedup. Local formulas do not execute the ecosystem or reproduce its 55K sessions.",
+        "example": "Example: If an optimization breaks tests, keep the package in the denominator. Carry uses its last valid speed, not a faster failing run."
+      }
+    },
+    "qa/agent-research:tracer/mechanism": {
+      "source_sha256": "cc53a543cb16dc1d1518cff6745f2d0fff9bde129e005a42483e64a630406568",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does a tool trie use the complete within-turn call prefix instead of just the previous tool?",
+        "answer": "The same previous tool can occur in distinct workflows. A full prefix preserves path identity and retrieves real training transitions. Context similarity adds current intent, with learned weight and temperature. Unknown prefixes fall back to catalog search rather than force an unseen path onto the nearest old branch.",
+        "example": "Example: Search→download may lead to parsing, whereas authenticate→download may need permission checking. Download alone conflates them."
+      }
+    },
+    "qa/agent-research:tracer/basics": {
+      "source_sha256": "29d4bb0c903d66ef3936785adfe9757b7b0faca322c9a4f506b329b59d22d89c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a large tool catalog consume context without surfacing the right next action?",
+        "answer": "Keeping every description is costly, while static Top-K may omit the next interface. TRACER predicts a subset from executed transitions and current context so discovery adapts to progress. Candidate prediction does not replace argument validation or successful calls.",
+        "example": "Example: After identity lookup, account retrieval is more likely than rereading a thousand tools. If the user cancels, context should change the recommendation."
+      }
+    },
+    "qa/agent-research:tracer/comparison": {
+      "source_sha256": "c3cc7cbd68fd1ecc787318036449393ad2e594c2c9da3b1797ff0c04a09d68ca",
+      "reviewed": true,
+      "fields": {
+        "question": "Why learn the mix of frequency and context priors rather than simply add them?",
+        "answer": "Frequent tools can be wrong for current context, while semantic transitions may have few samples. Two linear heads use five state features to set mixing weight and temperature. Temperature changes the confidence gate, not order. Coverage and calibration still matter; frequency is not success probability.",
+        "example": "Example: A prefix usually leads to A, but the current context resembles past transitions to B. Reduce the frequency weight rather than copy blindly."
+      }
+    },
+    "qa/agent-research:tracer/implementation": {
+      "source_sha256": "3816449fa5a03b18b1cce8f45529d2494367f21c335255d079b4082456c3c441",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must cross-fitting exclude the target trajectory's entire fold rather than only hide the current label?",
+        "answer": "Other steps from that trajectory can affect trie counts and edge-context means. Hiding the label alone still leaks its structure. Each signal must use an index excluding the full fold, and standardization is fitted on training folds. Training real heads on synthetic vectors is not real tool-selection capability.",
+        "example": "Example: The target tool may be absent from loss input yet already counted in the all-data index, revealing its own answer path."
+      }
+    },
+    "qa/agent-research:structural-signal-retriever/mechanism": {
+      "source_sha256": "ddafa119add7f945e09374e75b4c594b50208d681e488718a3857f69e78dc85b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does SSR return an empty pool on no lexical match rather than claim a semantically similar agent?",
+        "answer": "Structural signals are terms and adjacent phrases from explicit fields. IDF gives no semantic score to unmatched content. Inverted lookup skips only zero-score candidates and retains the same lexical ranking. An empty pool exposes missing evidence; arbitrary fallback is not semantic understanding by SSR.",
+        "example": "Example: A card says invoice, and a nonoverlapping paraphrase gets no hit. This is a lexical coverage gap, not a discovered synonym."
+      }
+    },
+    "qa/agent-research:structural-signal-retriever/basics": {
+      "source_sha256": "d67587a22e9bb3e83cc3b65826c443fd969645c14884c4a97dc4a1000c7be2f9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does SSR start with discovering which agent to consider in a large directory?",
+        "answer": "Sending every capability description to a model raises selection cost. SSR uses discrete public-description signals to build an inverted candidate pool for later decisions. Matching is interpretable and literal, so paraphrases with no shared signal can legitimately yield nothing.",
+        "example": "Example: An invoice signal in both a task and a capability card creates a candidate. Disjoint terminology may not."
+      }
+    },
+    "qa/agent-research:structural-signal-retriever/comparison": {
+      "source_sha256": "19538ce77b521a6e0fd05a25cc00b2245cf151f0e05ebee3cbcb672ada22cc8d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do inverted SSR and an exhaustive scan of the same IDF score rank positive matches identically?",
+        "answer": "All IDFs are positive, so the postings union collects exactly cards sharing at least one query signal and excludes zero scores. Rank by the same score, match count, and ID tie-breaker. Savings come from skipping disjoint cards, not changing semantics. No hit means an empty pool.",
+        "example": "Example: Of a thousand cards, only ten share a term. Scoring those ten returns the exhaustive scan's positive ranking without fake fallbacks."
+      }
+    },
+    "qa/agent-research:structural-signal-retriever/implementation": {
+      "source_sha256": "2cdf14c3b596da7063c8d39aca27e0ad91a0aab0c1d1916104f115148b36d2a9",
+      "reviewed": true,
+      "fields": {
+        "question": "What constraints govern repeated words, the 64-signal limit, and empty_pool?",
+        "answer": "Signals are binary and deduplicated. Frequency only affects unigram truncation above the limit, followed by deterministic bigram filling. No hit returns empty_pool without calling a provider for an invented answer. API failures and illegal indexes stay failures. There is no real local LLM orchestration success metric.",
+        "example": "Example: Repeating search ten times does not yield tenfold score, and a zero lexical match cannot silently switch to full-directory semantic retrieval."
+      }
+    },
+    "qa/agent-research:leash/mechanism": {
+      "source_sha256": "7936559d876a48188ed1e663eb661d8cb39b2c05f4da150ad9e67a68e0f1c3b0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep using unexecuted Shadow actions after the stronger model takes over?",
+        "answer": "Handoff mitigates weak-model failure but does not prevent the strong model drifting. Weak shadow representations offer a cheap reference for periodic review without executing shadow actions. Distance to the failure reference is not calibrated failure probability or a fixed test takeover quota.",
+        "example": "Example: The strong model is about to delete while the weak shadow suggests checking permissions. Trigger review without running both actions."
+      }
+    },
+    "qa/agent-research:leash/basics": {
+      "source_sha256": "8a6ba3dade7f7662927b0565c15aa112de1e203e145b9c743cd6a84597966223",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does LEASH run a weaker model and hand off only in riskier states?",
+        "answer": "Strong calls throughout cost more; weak-only execution may fail in critical states. Risk-triggered takeover trades task outcomes against resource use. Handoffs are not free and risk scores are not inherently probabilities. Account for complete execution and results.",
+        "example": "Example: Use a small model for routine file search and a stronger one for rare recovery states. Value depends on takeover count and actual delivery."
+      }
+    },
+    "qa/agent-research:leash/comparison": {
+      "source_sha256": "a9d3c40d3a19a3e61d02ad65de7ec20845ed849321ffde0739243ac92e34d4ab",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't a reference-distance score a calibrated failure probability?",
+        "answer": "It compares the weak representation's Mahalanobis distances to Pass and Fail means. Higher values only indicate relative proximity to failure. Shift, covariance, and representation geometry affect thresholds, and target routing proportions are not test quotas. Calibrate on references rather than map scores directly to percentages.",
+        "example": "Example: Score two does not imply 20% failure; a different scale or task distribution can change risk at the same score."
+      }
+    }
+  }
+}

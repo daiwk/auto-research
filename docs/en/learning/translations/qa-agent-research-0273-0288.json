@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:memgpt/mechanism": {
+      "source_sha256": "8c96f2bbf546d466124a0a61f3992fd1c625771a984c7f7bfc20dbf4ec72b22a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why actively manage page-in and page-out when the external archive is large?",
+        "answer": "Archive capacity is not visible context. Relevant material must enter the working window to affect an answer. Paging links storage to the current task, and heartbeats or interrupts schedule further evidence gathering and user interaction. A virtual-memory interface does not let a model see unlimited history at once.",
+        "example": "Example: An old address remains in the archive. Retrieve and page it in before answering a shipping question."
+      }
+    },
+    "qa/agent-research:memgpt/basics": {
+      "source_sha256": "c5516afe070d08a3019952c5ee9ac980ef4738b4dcb07a55817ba0ba777aba7c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does MemGPT compare long documents and conversations to limited-memory management?",
+        "answer": "One context window is finite while user material can be much larger. MemGPT lets agents schedule information across visible working memory and external storage to continue long tasks. Archive capacity does not imply current knowledge; finding, paging, and storing information affect answers and cost.",
+        "example": "Example: To answer about a six-month-old contract, locate and page in the relevant record. Having the file on disk is not enough."
+      }
+    },
+    "qa/agent-research:memgpt/comparison": {
+      "source_sha256": "bc7747d329b134ea15dea0e50d5c10a24136b0430dc5b03bca24c171da88b8cc",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a heartbeat differ from a normal user-facing response in control flow?",
+        "answer": "Heartbeat or interrupt continues internal memory and tool work rather than treating each operation as a final response. This is a scheduling interface, not a guarantee of correct invocation. Unconditional loops can waste budget, so use it only for relevant pending work.",
+        "example": "Example: After paging old content out, continue internal retrieval and answer once relevant evidence is loaded instead of returning a partial status as the answer."
+      }
+    },
+    "qa/agent-research:memgpt/implementation": {
+      "source_sha256": "6b20dccfef063e61cb2ba4cad3d308253559e889a0b3a70130819e9444572204",
+      "reviewed": true,
+      "fields": {
+        "question": "Does deterministic key-based page-in establish semantic archive retrieval?",
+        "answer": "No. Local tests cover hierarchical state, paging, and interrupt counts, using deterministic keys instead of embeddings or LLM function calls. Proxy cost is not token count or latency. Paging works, but real autonomous evidence retrieval from long documents is unverified.",
+        "example": "Example: Getting an entry by order123 is easier than understanding and retrieving the user's vaguely mentioned last order."
+      }
+    },
+    "qa/agent-research:voyager/mechanism": {
+      "source_sha256": "680533275571ec9e8a189585edce6cbc5fcce5a0847e52e7bd457f8c816da7f6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why admit only programs verified by the environment to Voyager's skill library?",
+        "answer": "Plausible code can fail because materials are missing, APIs are wrong, or goals are unmet. Environment feedback exposes these failures. Index confirmed successes for reuse. The automatic curriculum picks new goals and the library retains verified behavior; code generation alone cannot substitute.",
+        "example": "Example: A program for crafting an iron pickaxe is not a successful skill if inventory lacks iron. Only actual completion supports future reuse."
+      }
+    },
+    "qa/agent-research:voyager/basics": {
+      "source_sha256": "2b58bc8a331029547fd880b0f7bc05306a6253554235abcbcd637be1cfcd981d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Voyager use code as an action instead of only a natural-language plan?",
+        "answer": "Code invokes environment APIs over extended behavior and can be iteratively repaired from errors and observations. Successful programs enter the library for reuse. Natural-language plans still need executable mapping. Runnable code can also be wrong and needs environmental validation.",
+        "example": "Example: Compile collecting wood into movement, search, and harvesting loops, then inspect inventory. Saying 'chop a tree' does not perform those actions."
+      }
+    },
+    "qa/agent-research:voyager/comparison": {
+      "source_sha256": "3f739914b122e4302b90530fb0a3eb1776ec1b6feae4073308585c094848f29c",
+      "reviewed": true,
+      "fields": {
+        "question": "How does automatic curriculum differ from a fixed checklist for accumulating skills?",
+        "answer": "The curriculum chooses novel goals from current state and skills. A fixed list is controlled but cannot adapt to capability. Self-selected goals can favor easy novelty, so validate outcomes and progress rather than treat task count or exploration distance as general capability.",
+        "example": "Example: After acquiring stone tools, mining explores more than repeated wood gathering, but completion still depends on inventory and milestones."
+      }
+    },
+    "qa/agent-research:voyager/implementation": {
+      "source_sha256": "51072edc968831ea89c747aee76f90dedbfcedcb8a112a56158e10f63cbfadd1",
+      "reviewed": true,
+      "fields": {
+        "question": "Is the local structured-plan skill library equivalent to Mineflayer JavaScript programs?",
+        "answer": "No. Curriculum, skills, verification, and cross-episode reuse are retained with structured tool plans. The run omits Minecraft, GPT-4, and embedding retrieval. Controlled retry counts do not represent real program debugging or paper item and distance gains.",
+        "example": "Example: Reusing a plan template does not show handling Mineflayer's asynchronous movement errors or achieving its technology-tree gains in a new world."
+      }
+    },
+    "qa/agent-research:generative-agents/mechanism": {
+      "source_sha256": "633369c4b538a5d8e27094bc67e1198c0adf1d76d16314c4c40303dd48960b49",
+      "reviewed": true,
+      "fields": {
+        "question": "Why shouldn't an important old event automatically replace more query-relevant memory?",
+        "answer": "Importance captures long-term significance, relevance measures current fit, and recency models decay. Reflection abstracts several important events, but actions still need current state. Using one dimension alone can repeat major events or focus only on recent chatter.",
+        "example": "Example: Moving home was important, but last night's restaurant confirmation better answers today's dinner-location question."
+      }
+    },
+    "qa/agent-research:generative-agents/basics": {
+      "source_sha256": "3caaa277682a7bb1c4952d8d015702abac14d760a57a0da2763051751a03b6a9",
+      "reviewed": true,
+      "fields": {
+        "question": "How does reflection differ from recording a single observation?",
+        "answer": "Observations are concrete events. Reflection draws higher-level inferences across important memories for retrieval and planning. Inferences can be wrong and are not primary evidence. Keep observations traceable and plans grounded in current state.",
+        "example": "Example: Several helpful acts may suggest someone is cooperative. That is an abstraction, not a new observed event, and should retain support."
+      }
+    },
+    "qa/agent-research:generative-agents/comparison": {
+      "source_sha256": "70418a0c00ab0a4cbab19dcc5a8939c3836b58c4f6e26d268b8bbea1477edb09",
+      "reviewed": true,
+      "fields": {
+        "question": "What questions do reflection and planning answer in everyday behavior simulation?",
+        "answer": "Reflection forms higher-level interpretations from experiences, such as relationship or habit inferences. Planning schedules what to do next using goals, memory, and time. Inferences are not events, and plans are not executed results. Separation makes both evidence and actual behavior traceable.",
+        "example": "Example: Inferring that a neighbor likes gardening is reflection. Deciding to invite them to buy seeds this afternoon is planning."
+      }
+    },
+    "qa/agent-research:generative-agents/implementation": {
+      "source_sha256": "dc590c63dd4362cf7bc26986fa79117225040d79b9db83dc072164353238a911",
+      "reviewed": true,
+      "fields": {
+        "question": "Do local reflection triggers include a social evaluation of 25 LLM personas?",
+        "answer": "No. Controlled EvoMem tests three-score retrieval, cumulative-importance triggers, and planning dependencies without a Smallville map, real personas, or human credibility judgments. Reflection counts and proxy costs show mechanism execution, not believable relationships or coordination.",
+        "example": "Example: A threshold producing one rule-based reflection does not show models spreading invitations or arranging a party."
+      }
+    },
+    "qa/agent-research:rpl/official-code-versus-local-fidelity": {
+      "source_sha256": "fb455078d00a7e3121998512055005a69367bd4c0b38bf63b76d3b3030d29a8d",
+      "reviewed": true,
+      "fields": {
+        "question": "Does Meta's release of full RPL code automatically make the local typed-program component a full reproduction?",
+        "answer": "No. Release improves provenance, not local fidelity. Local work still omits neural retrievers, cross-turn Python state, policy generation, GRPO, and distillation. The main project's CC-BY-NC and vendored licenses still apply. Public code is not permission to copy or upgrade evidence.",
+        "example": "Example: Having factory blueprints does not mean a small pipe simulator makes the same product. The real execution path and costs still need verification."
+      }
+    },
+    "qa/agent-research:rpl/mechanism": {
+      "source_sha256": "296a6ae2b313fed4d9f4ef96f25a07194df252ad195e546d4855a11584ed1111",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain retrieval-program supervision for a wrong answer while masking its answer span?",
+        "answer": "A syntactically valid, executed program can contain useful retrieval structure even when the final answer is wrong. Mask wrong-answer supervision so it does not teach generation errors. Actors cannot see verifier gold, and environment observations are not policy-generated tokens.",
+        "example": "Example: A program combines and deduplicates two retrieval routes correctly but the answerer copies a date incorrectly. Keep program supervision and mask the wrong date."
+      }
+    },
+    "qa/agent-research:rpl/basics": {
+      "source_sha256": "218b70ed031bcc8e00e4ac215375fe4b97aadb06cf1fe41a69cf269578eb0769",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does programmable retrieval return only explicitly printed documents to the model?",
+        "answer": "A program can retrieve, fuse, deduplicate, and rerank a large pool, but context receives only explicit outputs. This separates retrieval work from observation budget. Secretly appending intermediates bypasses program selection and invalidates the policy comparison.",
+        "example": "Example: Retrieve 50 documents and print three after reranking. The model sees only those three, not the other 47."
+      }
+    },
+    "qa/agent-research:rpl/comparison": {
+      "source_sha256": "a086d4cfab90a98a77abff12d17b4d7f92007f36c0aa1684c3dfa8cbabf3a644",
+      "reviewed": true,
+      "fields": {
+        "question": "How does mutating retrieval structure while preserving the query differ from asking the model for a new query?",
+        "answer": "Keeping the query isolates retrieval mode, width, fusion, and reranking changes. A new query changes semantics along with control flow. Local mutations can restrict exploration, but using gold to produce correct documents is not a valid mutation.",
+        "example": "Example: Widen retrieval from three to five under the same query to test evidence coverage. Adding answer keywords simultaneously confounds the change."
+      }
+    }
+  }
+}

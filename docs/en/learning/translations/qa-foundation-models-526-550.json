@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:criticl/basics": {
+      "source_sha256": "d67300a996ebe683d20c9f08587542b85652e9e275a052c95f6e698020e6d3c8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why build CritBank from weak-model errors?",
+        "answer": "Cluster recurring failures offline into reusable reminders for stronger models. This moves reflection cost upstream and avoids requiring a first failure on each deployed request.",
+        "example": "Add a common missed-unit-conversion reminder before a new answer."
+      }
+    },
+    "qa/foundation-models:criticl/comparison": {
+      "source_sha256": "da453c276613c9602998bd5b03594d7a26d11665510e56267013b00cbebbc843",
+      "reviewed": true,
+      "fields": {
+        "question": "How do static and dynamic critique selection differ?",
+        "answer": "Static uses frequent global failures; dynamic retrieves relevant CritBank entries for the current input. Both act before generation, but only dynamic adds input-dependent retrieval.",
+        "example": "A math question can retrieve calculation reminders different from those for other requests."
+      }
+    },
+    "qa/foundation-models:criticl/implementation": {
+      "source_sha256": "a3722cd9ed8f9532c67dfca127db5fa4b2d926244a02491223015affe0d2cb60",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not select critiques with the current question's correct answer?",
+        "answer": "That leaks evaluation targets into prompts. Dynamic retrieval uses only input similarity to the existing bank and then generates once. Offline failures and current hidden gold stay separate.",
+        "example": "Looking up the solution before picking the critique that fixes it is not deployable retrieval."
+      }
+    },
+    "qa/foundation-models:cross-lingual-exploration/mechanism": {
+      "source_sha256": "8da29d174986402f68af0749343a7f736171ae3b5ecbc16b6bf72be43e9e1b17",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not replace cross-lingual semantic aggregation with string voting, and why count aggregation cost?",
+        "answer": "Different languages may phrase equivalent facts differently, and superficially similar errors can differ. The method uses an LM for majority/minority-aware aggregation and separate correctness/consistency judgment. All path and aggregation tokens count. This is literature-only locally.",
+        "example": "Two names for one city need entity matching, not separate votes or costs counted from only one path."
+      }
+    },
+    "qa/foundation-models:cross-lingual-exploration/basics": {
+      "source_sha256": "c06e72e7fc524d127231504aa4a7d592a4547694f4d25ac42220438673b39841",
+      "reviewed": true,
+      "fields": {
+        "question": "Why explore multiple languages for one knowledge question?",
+        "answer": "Knowledge may be more accessible under some language contexts. Explore across languages then aggregate semantic answers, not mere string translations or presumed-correct majority.",
+        "example": "Distinct expressions may refer to one entity."
+      }
+    },
+    "qa/foundation-models:cross-lingual-exploration/comparison": {
+      "source_sha256": "cd461c0ef8661f1a8ac64670b5bc816d3dae64faab37b89c7660c75bf9692b89",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't a string counter substitute for semantic model aggregation?",
+        "answer": "Equivalent meanings can use different strings and equal strings can differ in context. An LM performs majority/minority-aware aggregation and semantic judgments in the paper.",
+        "example": "“United States” and “USA” can be one answer, despite string counts splitting them."
+      }
+    },
+    "qa/foundation-models:cross-lingual-exploration/implementation": {
+      "source_sha256": "7d0d68d2246f9c22c299c5688b6feb5f2b71b3cab608052ddd9f4e594314ceff",
+      "reviewed": true,
+      "fields": {
+        "question": "Why count more than generated path tokens?",
+        "answer": "Include each path's inputs and aggregation model tokens; semantic correctness and consistency also use model calls. Local work did not run the APIs or provide heuristics as substitutes.",
+        "example": "Ten short generations can still produce a long, expensive aggregation prompt."
+      }
+    },
+    "qa/foundation-models:deepsea/mechanism": {
+      "source_sha256": "e21f64eb70ef6b573d106c797473618a0122f89a50c6fe9df9fb16c3971dd2b9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why fix prediction order and isolate gold in grouped DeepSEA reporting?",
+        "answer": "Validate language, size, and order so predictions align to their examples. Expose only public task fields; keep answers and annotations with the evaluator. This evaluates lower-resource languages, not model training.",
+        "example": "Swapped outputs across languages become alignment errors; the predictor must not see references."
+      }
+    },
+    "qa/foundation-models:deepsea/basics": {
+      "source_sha256": "19766beb4146cc7134ca81bd80b90eae111a98fe5a6b3903be2ac12505fe94cc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not report only one DeepSEA multilingual average?",
+        "answer": "Language-resource strata and tasks expose gaps hidden by a mean. The project provides data and evaluation protocol, not a parameter-training algorithm.",
+        "example": "High-resource successes can mask low-resource failures."
+      }
+    },
+    "qa/foundation-models:deepsea/comparison": {
+      "source_sha256": "32910cf42680e8606ae5bb8c48a8087d94070de6de421c3e000353459869dd32",
+      "reviewed": true,
+      "fields": {
+        "question": "Are deterministic scorers and LLM judges interchangeable in DeepSEA?",
+        "answer": "Follow the fixed upstream protocol for each task. Substituting judges changes comparability. Bind outputs to language, subject, and row; group summaries do not fix misalignment.",
+        "example": "Pairing language A row one with a language B answer invalidates scoring even if row counts match."
+      }
+    },
+    "qa/foundation-models:deepsea/implementation": {
+      "source_sha256": "d7b76f7bf66cf2a728504dc0971047a542ad0a5ecb1408356ea9cfcd8c32a584",
+      "reviewed": true,
+      "fields": {
+        "question": "Should prediction callbacks get the evaluator or benchmark file and promise not to read gold?",
+        "answer": "No. Use allowlisted immutable public input and separate deep-copied private references. Reject missing languages, bad counts, or nonstring outputs. This is data-flow isolation, not an OS sandbox; do not add shell bypasses.",
+        "example": "Provide question, options, and context, not raw answer_with_cot records."
+      }
+    },
+    "qa/foundation-models:detector-scope/mechanism": {
+      "source_sha256": "ac02c1b54bd5226adb89d25fbe9a2afcb99ee7ff2edb1edc50b284c1687c952d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is zeroing a DetectorScope concept exact in logit space but not equivalent to editing text?",
+        "answer": "Sparse pooled features feed a linear head, so each weight times activation is an exact contribution. Text edits can change several features and contexts. Automatic descriptions are imperfect; local head excludes the full SAE/explanation pipeline.",
+        "example": "Zero one feature to verify its score change; deleting a word can alter several concepts."
+      }
+    },
+    "qa/foundation-models:detector-scope/basics": {
+      "source_sha256": "055d8285971312ef4e6f657116e742719e383f3eb05ea6db3e77d6daca327bb1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why make detection depend on inspectable sparse features?",
+        "answer": "Pool SAE features, filter unreliable concept descriptions, and fit a sparse linear head so logits decompose into actual computed contributions rather than post-hoc reasons.",
+        "example": "Verify a contribution by zeroing its feature rather than trusting generated explanations."
+      }
+    },
+    "qa/foundation-models:detector-scope/comparison": {
+      "source_sha256": "b6803df6f655133459354ce020bd60464d9e5ca71cdb1be559cf8e67b211616a",
+      "reviewed": true,
+      "fields": {
+        "question": "Is description validation equivalent to human confirmation of concept semantics?",
+        "answer": "Spearman correlation compares observed and predicted activation ranks as a filter, not manual validation or safety. Constant sequences do not support the correlation.",
+        "example": "Correlation on a small sample does not prove meanings are correct for every text."
+      }
+    },
+    "qa/foundation-models:detector-scope/implementation": {
+      "source_sha256": "1c6c1c557c84d0309e926b4d517f78f3ba3333b481c5cbd7f139b5111f9f08cf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not apply an L1 subgradient and soft thresholding together?",
+        "answer": "Apply BCE SGD with momentum, then ηλ soft thresholding, without a second L1 gradient or bias penalty. Fit uncentered RMS on training only.",
+        "example": "Penalizing twice changes effective sparsity beyond λ."
+      }
+    },
+    "qa/foundation-models:fuse-verifiers/mechanism": {
+      "source_sha256": "c94351b2bfb7d1e395f1dae31fb6e58892c9db201ec9c8539f888626c115159f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't label-free FUSE get more reliable simply by adding correlated verifiers?",
+        "answer": "Moment estimation needs identifiability assumptions such as a better-than-random majority and conditionally independent triplets. Transforms mitigate correlation, but shared errors can remain. Posteriors are not gold, which stays evaluation-only.",
+        "example": "Three verifiers copying one wrong rule are not three independent correctness signals."
+      }
+    },
+    "qa/foundation-models:fuse-verifiers/basics": {
+      "source_sha256": "d4b2a2f6a922f19afa21daed283451fea6d5c41bbad753b2d7985ee25a6a3163",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not average verifier scores in FUSE?",
+        "answer": "Correlated errors get counted repeatedly. Estimate query-conditioned quality from scores, transform to mitigate dependencies, then build posteriors for ensemble optimization.",
+        "example": "Three near-identical verifiers need not add three times the evidence."
+      }
+    },
+    "qa/foundation-models:fuse-verifiers/comparison": {
+      "source_sha256": "2fe73394908f35712f24a107f086c733a12c095ce7d67a56e102ccd4d7e964dc",
+      "reviewed": true,
+      "fields": {
+        "question": "Do moment-based posteriors provide the same guarantees as gold labels?",
+        "answer": "No. They depend on identifiability; high correlation or constant scores can break estimation. High estimated probability is not truth or safety.",
+        "example": "Shared wrong rules can produce agreement on the wrong answer."
+      }
+    },
+    "qa/foundation-models:fuse-verifiers/implementation": {
+      "source_sha256": "c31cbb7c69ac8ac3117eeddc75bf46afa88eab56798993a1ef4103e3da82c2b9",
+      "reviewed": true,
+      "fields": {
+        "question": "Can gold choose score transforms or ensemble parameters?",
+        "answer": "Not in the documented label-free fit. Use score matrices only and reserve labels for independent evaluation. Choosing transforms by gold on the same questions breaks both boundaries.",
+        "example": "Trying transforms and selecting the best by answers is not unsupervised selection."
+      }
+    },
+    "qa/foundation-models:gemma-priority-protocol/mechanism": {
+      "source_sha256": "86982b670d1217a7ad5cf6899cd6a44c563b7f7bfbe3ad9f02882441916c8dbc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why swap both word identity and document order in conflict tests?",
+        "answer": "Order alone confounds lexical preference, source role, and position. Four orthogonal crossings estimate effects, with a shared filtered set and unfiltered sensitivity analysis. Conclusions are for one model on short English choices.",
+        "example": "A favored word can win in either position; swap which source provides it to isolate source and order."
+      }
+    },
+    "qa/foundation-models:gemma-priority-protocol/basics": {
+      "source_sha256": "e383c25b01e1d5fc527347156e8ddd9f1abfd8592d01bea4e6ed16e9f9c33956",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use a multiway crossing for two-document conflicts?",
+        "answer": "Word identity, source, and position can all influence choice. Four conditions separate them instead of mistaking lexical or ordering preference for trust.",
+        "example": "Preferring word B is different from preferring whichever word the new source supplies."
+      }
+    },
+    "qa/foundation-models:gemma-priority-protocol/comparison": {
+      "source_sha256": "f6ffb772aa9ac7ebb38fe599ddc273bd2d74ba2bbe6722823e76ed449db47e08",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish order null contrast O from positional effect S?",
+        "answer": "They use different sign combinations. S measures position and negative S favors first; O is a null control. Both are half effects, so double for full range.",
+        "example": "Changing the signs on e1–e4 yields a different contrast."
+      }
+    },
+    "qa/foundation-models:gemma-priority-protocol/implementation": {
+      "source_sha256": "4149811ebaccbd46cd6a9aa9d57495510e316a78d23d0449fb5127f4595de9da",
+      "reviewed": true,
+      "fields": {
+        "question": "Can failed or degenerate BCa intervals silently fall back to equivalence?",
+        "answer": "No. Keep failed/degenerate and equivalent=null, not a hidden percentile interval. Ten conditions share the union of exclusions, and unfiltered sensitivity remains.",
+        "example": "If bootstrap cannot form a valid interval, report undecided rather than a pass."
+      }
+    },
+    "qa/foundation-models:interpolated-null-calibration/mechanism": {
+      "source_sha256": "35ba917607797ce9bdf16482a9bc042053c797505a5ec692a1707a4a2d8cf2d4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is λ=0 still calibrated in interpolated null calibration?",
+        "answer": "Zero removes the instruction-null contribution but still subtracts bare-null. Align all three score vectors by document and select λ on validation. A global oracle weight is not held-out gain. Local work is a score kernel.",
+        "example": "A long document can score highly without a query; bare-null still removes this baseline."
+      }
+    },
+    "qa/foundation-models:interpolated-null-calibration/basics": {
+      "source_sha256": "68e46367bedec234f9b51873e2800163aed6cbd9f98d330550f7324219c31bef",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compare instruction null with bare null in attention reranking?",
+        "answer": "Instructions can affect scores even without a query. Interpolation separates that influence and controls which baseline is subtracted from query-plus-instruction scores.",
+        "example": "“Judge relevance” may raise document scores without conveying the user's query."
+      }
+    }
+  }
+}

@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:pit/comparison": {
+      "source_sha256": "ac9cde5b41bd92c75a7b6155ec8b6885a99632f362aff19d2598d6d5a54e9ea4",
+      "reviewed": true,
+      "fields": {
+        "question": "Where do gradients couple PIT's tokenizer and recommender compared with a frozen codebook?",
+        "answer": "A frozen generator adapts to existing codes; PIT uses recommendation loss in code selection and learning, adapting paths to preference. This can destabilize addresses, so track versions and drift. Neither lossless streaming updates nor universal inferiority from a local negative proxy is established.",
+        "example": "Illustration: Keep an office-use entry for a fitness video if recommendation supervision supports it; a frozen index can only change probabilities on existing paths."
+      }
+    },
+    "qa/recommendation:pit/implementation": {
+      "source_sha256": "cca05b6fbe9817df9aaf41df7def45f7aec07ddccb4d53f8b92e2d9f92496f9b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use PIT's user-guided minimum-loss choice only among training candidate codes?",
+        "answer": "Argmin can use training labels to select a supervisory path, but inference must use model probabilities and legal beam paths rather than gold loss. Alternate codes map back to the same item. Gold-guided code choice is answer-aware routing.",
+        "example": "Illustration: Knowing the correct video and picking its easiest code inflates Hit. Generate codes before checking the item."
+      }
+    },
+    "qa/recommendation:ple/mechanism": {
+      "source_sha256": "456b7c34dec047e3bb0b411553080edb3c2a026f9d5ffe098c6f971611cf1c99",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does PLE distinguish shared and private experts beyond MMoE's task-specific gates?",
+        "answer": "MMoE mixes differently but all experts receive multiple tasks' gradients. PLE reserves private capacity alongside shared experts and extracts common and task-specific information layerwise. This changes information and gradient paths at extra capacity and routing cost; verify whether regressions actually decline.",
+        "example": "Illustration: Share category interest while purchase-private experts learn affordability and click-private experts learn headline appeal."
+      }
+    },
+    "qa/recommendation:ple/basics": {
+      "source_sha256": "bb623090f8fd86df595be37daf955a4b7829159a881181147f46681e6f1848f0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can average task AUC hide PLE's seesaw effect?",
+        "answer": "One task can improve while another regresses and the average obscures the loser. Report each objective under the same joint training. This differs from measurement noise and does not require identical gains across tasks.",
+        "example": "Illustration: Click AUC gains two points and purchase loses one; average AUC rises without both improving."
+      }
+    },
+    "qa/recommendation:ple/comparison": {
+      "source_sha256": "e44b271583ae5384a0d13aaffe3e6c8d7e2c1ea561911c3ed815aa7874f136c0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't PLE just increasing MMoE expert count?",
+        "answer": "More shared experts still accept all tasks' gradients. PLE changes access and gradient topology with private groups and layered fusion, not just parameter count. Match budgets and do not generalize a local two-task comparison to every conflict.",
+        "example": "Illustration: Ten additional shared experts can still transmit click interference to purchases; a purchase-private group blocks that route."
+      }
+    },
+    "qa/recommendation:ple/implementation": {
+      "source_sha256": "30d06765a7dc17f6fa6ef383beea67194c4ddcb409509e83741d633d4ce25748",
+      "reviewed": true,
+      "fields": {
+        "question": "Why restrict each PLE task gate to its private experts and shared experts?",
+        "answer": "This is the CGC separation contract. Accessing another task's private group changes the topology. Verify expert identities, masks, actual gradients, and next-layer channel layout rather than trusting variable names.",
+        "example": "Illustration: Concatenating all experts without a mask can preserve output shape but let click read purchase-private features."
+      }
+    },
+    "qa/recommendation:plum/mechanism": {
+      "source_sha256": "c498c1d4a0e0fb4eca6763daa9e4285c7db8160e650e20a6b922045798f44433",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use hierarchical video SIDs and continue language pretraining in PLUM instead of enlarging an ID table?",
+        "answer": "Huge ID tables memorize items and share little with new ones. Composable SIDs and CPT connect behavior, text, ASR, and metadata to LM capacity before next-SID training. Beam search generates candidates online, but code quality still determines retrieval usefulness.",
+        "example": "Illustration: A new baking video can borrow a coarse baking code and distinguish itself at a fine level instead of learning an isolated ID from scarce clicks."
+      }
+    },
+    "qa/recommendation:plum/basics": {
+      "source_sha256": "f873fb01a852943b49c6633939ff810628081067bcf06391fa32b28cb4dc1108",
+      "reviewed": true,
+      "fields": {
+        "question": "Why mix behavior and SID–metadata examples during PLUM CPT instead of only tuning next-item codes?",
+        "answer": "Behavior teaches consumption transitions; text and ASR connect addresses to language semantics. CPT adapts pretrained knowledge to recommendation, then SFT focuses on retrieval. Mixture ratio matters, and lower loss need not improve search.",
+        "example": "Illustration: Learn both that a code means a camping tutorial and what users consume afterward."
+      }
+    },
+    "qa/recommendation:plum/comparison": {
+      "source_sha256": "d72049248df3ccd7ae197e37423471b6bed53bce0e0323522595dbb7c9d2d65d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why cross random versus LM initialization with CPT on versus off in PLUM?",
+        "answer": "Four cells separate initialization, extra continued training, and their interaction. Locally CPT lowered loss without improving Recall and LM-initialized arms had zero hits. Convergence is not successful retrieval or general scaling evidence.",
+        "example": "Illustration: Run random/no CPT, random/CPT, LM/no CPT, and LM/CPT to distinguish pretrained knowledge from extra training."
+      }
+    },
+    "qa/recommendation:plum/implementation": {
+      "source_sha256": "6b2526ff6e8f1cf9586570b8f9d73f42e4c0e76e51b144c73fd6b457eccfe88c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reconstruct the first r codeword layers in PLUM progressive masking instead of shuffling levels?",
+        "answer": "Residual levels accumulate coarse-to-fine meaning. Random prefix depths require each prefix to work; shuffling destroys that order. Mask SFT prompt loss, supervise only target SIDs, and use catalog trie legality. Training on prompt text changes the objective.",
+        "example": "Illustration: Sometimes reconstruct with coarse codes and sometimes add detail; using level three as the first code is not progressive reconstruction."
+      }
+    },
+    "qa/recommendation:podcast-mtl/mechanism": {
+      "source_sha256": "1cfa34ca5163f700d9efacee501f15afc61da9520e24bdd62b12ef59d3cdad37",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Podcast MTL use organic promotion for cold ads, and why balance gradients?",
+        "answer": "User, content, and context representations share abundant organic signals while separate heads preserve objectives. Sample and gradient imbalance can drown the sparse advertising task, so adjust contributions. Transfer can fail when tasks differ; sharing does not guarantee gains.",
+        "example": "Illustration: A new podcast has organic plays but no ad clicks. Learn audience clues in the shared encoder while preventing organic gradients from overwhelming ad supervision."
+      }
+    },
+    "qa/recommendation:podcast-mtl/basics": {
+      "source_sha256": "eef38721574e21eb71617e66a856abb3582877f7e1591b8581b5ad1b9df3138e",
+      "reviewed": true,
+      "fields": {
+        "question": "Does cold start in Podcast MTL mean no content or no target feedback?",
+        "answer": "The gap is ad click/play labels for new podcasts, not necessarily missing titles or topics. Shared content and context help without representing observed ad outcomes. Transfer supplies a training signal, not a real click log.",
+        "example": "Illustration: A show's host and description can suggest likely audiences before exposure, but cannot verify their ad clicks."
+      }
+    },
+    "qa/recommendation:podcast-mtl/comparison": {
+      "source_sha256": "d76e4f14c9ce3ec3779490e2f6b63db96001a2b7ed514a352599533d3b5c99f6",
+      "reviewed": true,
+      "fields": {
+        "question": "How does gradient balancing treat a small podcast task differently from mixing by counts?",
+        "answer": "Counts let the large task dominate shared weights. Balancing actual contributions preserves the sparse ad direction, but too much can amplify noise. Evaluate per task; duplicating records cannot guarantee cold-start gains.",
+        "example": "Illustration: One million organic and one thousand ad examples can bury ad gradients. Moderate balancing does not mean infinitely upweighting a single ad label."
+      }
+    },
+    "qa/recommendation:podcast-mtl/implementation": {
+      "source_sha256": "c54c95dfc50de278ca8c317b4b9997236b57301b4a145b4e55ff4de89455e49a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not fill missing Podcast MTL labels with zeros?",
+        "answer": "An organic example may never expose the ad, so its ad response is unobserved, not negative. Mask that loss; observed objectives can still train shared features. Record task identity, data construction, and α. Movies proxy for podcasts only.",
+        "example": "Illustration: Listening after organic exposure does not imply the user ignored an unseen ad."
+      }
+    },
+    "qa/recommendation:poem/mechanism": {
+      "source_sha256": "06499b79b5690356266fe3d3e0276aca3e5c247630b28678effd371f967c1bcf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does POEM build a partial order from multiple objectives rather than order training sequences chronologically?",
+        "answer": "Event time does not measure present-request preference. POEM aggregates objective-relative candidate ranks into a partial order for supervision. Disagreement need not become a unique rank. Existing objective judgments are not independent unbiased user preferences.",
+        "example": "Illustration: An item viewed later can be preferred by click and purchase objectives. Use that relation instead of mistaking browse chronology for preference."
+      }
+    },
+    "qa/recommendation:poem/basics": {
+      "source_sha256": "19acd6ec9ca0609879cd4683317bf4fa145d3aef2b2a0c39dca92a81bfd0af48",
+      "reviewed": true,
+      "fields": {
+        "question": "How do POEM ranks differ from raw CTR or GMV values?",
+        "answer": "Ranks preserve which item comes first within an objective but drop units and magnitude, allowing cross-objective comparisons. They cannot replace all value information, such as one versus a hundred dollars.",
+        "example": "Illustration: A can have slightly higher CTR but much lower GMV. The two rank directions omit 'slightly' and 'much.'"
+      }
+    },
+    "qa/recommendation:poem/comparison": {
+      "source_sha256": "6212a0fb3f24c72df0f12ccbe56c9b2659a743c0f97cae56b5b5c147d1407042",
+      "reviewed": true,
+      "fields": {
+        "question": "What can POEM majority comparison lose versus retaining all conflicting evidence?",
+        "answer": "A majority compresses goals to one direction and can lose strongly opposed minority objectives and margins. A partial-order focus differs from representing both sides. The mechanism comparison does not prove universal performance.",
+        "example": "Illustration: Three weak votes for A beat two strong votes for B, hiding the purchase margin."
+      }
+    },
+    "qa/recommendation:poem/implementation": {
+      "source_sha256": "b1d92d300f14a9d8c3b77eab0ffb8e3f63ecfc0d1a649773249e0a23ef58b531",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check POEM pairwise majorities for ties or cycles rather than assume a total order?",
+        "answer": "A can beat B, B beat C, and C beat A, and ties have no unique direction. If a sequence is needed, apply a defined stable rule and record it. Never use test labels to choose a favorable ordering.",
+        "example": "Illustration: Breaking a cycle by item ID is an additional rule, not evidence that candidates had a consistent true order."
+      }
+    },
+    "qa/recommendation:policy-facet/mechanism": {
+      "source_sha256": "31f63c1be71b84441714a5e5d7eeced4144bb449d939b506223dea32f08fa6ec",
+      "reviewed": true,
+      "fields": {
+        "question": "Why maintain a policy-controlled taxonomy before small-model retrieval and single-token scoring in Policy Facet?",
+        "answer": "A curated set bounds themes, preventing arbitrary out-of-policy generation. Embeddings retrieve cheaply within it and a compact generator scores a token such as 'Okay' conditioned on user and query. Caching and batching lower latency. High model probability does not complete policy enforcement.",
+        "example": "Illustration: Choose a family travel facet from maintained destination and activity categories rather than inventing one live."
+      }
+    },
+    "qa/recommendation:policy-facet/basics": {
+      "source_sha256": "0d4192cc33c823d4b1eaf44845d3d2cef40cdf8e289571684803aaea130be803",
+      "reviewed": true,
+      "fields": {
+        "question": "Are Policy Facet's facets the same candidates as final products or documents?",
+        "answer": "No. Facets are refinement options that alter later search or browsing; items satisfy the resulting request. A facet must meet taxonomy and usefulness requirements. A high-scoring item title does not automatically make a useful refinement.",
+        "example": "Illustration: 'Family activities' narrows travel search; a specific museum ticket is a result."
+      }
+    },
+    "qa/recommendation:policy-facet/comparison": {
+      "source_sha256": "45f6e6f51d0f64b41d198140f7f65e3f6deae0e412ad82a7cb987f9543cfae6f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is an 'Okay' token probability cheaper than generating full judgments?",
+        "answer": "A bounded output gives a pointwise score without long decoding for every candidate; prefix caching and batching add reuse. It loses detailed reasoning and needs calibration. Scoring cannot recover facets missed in retrieval.",
+        "example": "Illustration: Read one probability for ten facets instead of generating ten long reviews, but an unretrieved option never gets scored."
+      }
+    },
+    "qa/recommendation:policy-facet/implementation": {
+      "source_sha256": "8827ab89cee71e795c3bf9d1f6a4eff3c13023d1851f079080a39f456b3de2b2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why verify tokenizer and full conditioning prefix for Policy Facet's 'Okay' score?",
+        "answer": "The word may tokenize differently across models. Read the designated output under the right user, query, and facet prefix. A hardcoded vocabulary ID can score another word after model changes; caches must not include another facet. Local proxy latency is not production evidence.",
+        "example": "Illustration: If 'Okay' becomes two tokens, the old single ID may be wrong even though it returns a finite number."
+      }
+    },
+    "qa/recommendation:precise/mechanism": {
+      "source_sha256": "98f2d88d86dfc3015301cbbdd50142c894e121300b0e921b982e7dac49a100ed",
+      "reviewed": true,
+      "fields": {
+        "question": "Why train IDs with frozen text representations before joint unfreezing in PRECISE?",
+        "answer": "Strong pretrained text can dominate initially random IDs and leave collaborative structure unlearned. The frozen stage lets IDs learn distinctions before joint adaptation. All-scene pretraining and sparse-target tuning address transfer separately; overall gains do not guarantee cold or tail gains.",
+        "example": "Illustration: Two similar movie descriptions can attract different audiences; learning IDs first can capture that difference before fusion."
+      }
+    },
+    "qa/recommendation:precise/basics": {
+      "source_sha256": "6d4d2dd7e9c5c455012ac8a3b0f7b0186c31650964832de8ac0bc28475276822",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do PRECISE UT and TT address all-scenario interests and sparse targets separately?",
+        "answer": "Broad sequence training supplies base preferences and target training adapts scarce labels. Objectives and attention rules differ, and transfer can hurt cold/tail items. Overall local gains accompanied lower Cold Recall, not universal cold-start improvement.",
+        "example": "Illustration: Learn interests from all positive feedback and then tune on high ratings. Popularity may improve aggregate hits while missing new films."
+      }
+    }
+  }
+}

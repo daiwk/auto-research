@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/recommendation/content-semantic-ids": {
+      "source_sha256": "8ea25ca38b11342ffb4aeaf15fdcb2f3d6414061878005391234064097d0cdfe",
+      "reviewed": true,
+      "fields": {
+        "title": "Knowledge, collaborative vectors, and semantic codes: how does the same content enter different recommender interfaces?",
+        "thesis": "KAR generates external knowledge for an existing recommender. NoteLLM learns a searchable compressed state from co-reading. Dual-purpose SID uses compact codes for both identity and content reconstruction. FineSID transfers fine-grained tokens and a complete interaction backbone across stages. Their alignment signals, compressed objects, and inherited states differ even when they all use LLMs or SIDs.",
+        "axis_0": "Knowledge from generated common sense, content, or interaction relations",
+        "axis_1": "Transfer objects: vectors, compact codes, or full predictor state",
+        "axis_2": "Joint constraints from content reconstruction and personalization",
+        "axis_3": "Offline caching, cold start, and full-reproduction limits"
+      }
+    },
+    "dive/recommendation/content-semantic-ids/comparison/recommendation:kar": {
+      "source_sha256": "4c8ed365c8a91e88cd9913ef168d73f6c71bb49febdaac5d401dd20ff857f911",
+      "reviewed": true,
+      "fields": {
+        "position": "Generates user preference reasoning and item factual knowledge separately, compresses them with a hybrid-expert adapter, then sends them into a recommender alongside original ID representations.",
+        "tradeoff": "Precomputing knowledge avoids online autoregressive generation, but descriptions are not actual preference labels. Caches need refreshes and facts need verification. The LLM does not do the entire online recommendation directly."
+      }
+    },
+    "dive/recommendation/content-semantic-ids/comparison/recommendation:notellm": {
+      "source_sha256": "7f8d6a2dfd43a35ac0e305a1e37f07c5c45f07d91010b55d21236b52d90b5b48",
+      "reviewed": true,
+      "fields": {
+        "position": "A compression prompt puts content into a special-token state. GCL learns the retrieval space from co-reading; CSFT generates hashtags or categories from the same state.",
+        "tradeoff": "Contrastive collaborative and generative supervision shape the representation together. Exposure bias in co-reading still matters. Content similarity and behavioral complementarity are not necessarily the same, and retrieval scores do not establish generation capability."
+      }
+    },
+    "dive/recommendation/content-semantic-ids/comparison/recommendation:dual-sid": {
+      "source_sha256": "062c21d69de6acaf14f6cabf5e27fa2583d1c77b32d6e4580779d760eadfe0de",
+      "reviewed": true,
+      "fields": {
+        "position": "Hierarchical SIDs encode collaborative identity, while SiDec reconstructs content embeddings from their discrete layers for retrieval, ranking, and low-I/O reconstruction.",
+        "tradeoff": "Compact codes reduce content transfer but introduce quantization collisions and bottlenecks. Measure reconstruction MSE and recommendation separately. Local genre labels replace multimodal content; production codebooks and online reconstruction are not reproduced."
+      }
+    },
+    "dive/recommendation/content-semantic-ids/comparison/recommendation:finesid": {
+      "source_sha256": "0cbbb2ea12b0875e0333438cde8f2f3b837c1ba486a6779a0789245d55e1b8a4",
+      "reviewed": true,
+      "fields": {
+        "position": "Retains multiscale visual and field-text tokens. Trains a full query–item relevance predictor, then keeps shared dense, embedding, and normalization state while switching to a CTR head.",
+        "tradeoff": "Transfer is richer than one embedding but requires compatible backbone and state management across stages. It is not merely an SID lookup. The repository records the method and online evidence; full training was too expensive to implement."
+      }
+    },
+    "dive/recommendation/content-semantic-ids/analysis/0": {
+      "source_sha256": "378b4930b34ee985fb2a9f4704fc6d958413d4e5a805c2d409ad18c65f361e0e",
+      "reviewed": true,
+      "fields": {
+        "title": "Ask what actually gets transferred",
+        "body": "KAR transfers features produced from generated knowledge via an adapter. NoteLLM transfers a collaboratively trained compressed vector. Dual-purpose SID transfers a discrete identity that reconstructs content. FineSID transfers shared predictor parameters and normalization state. Adding a random codebook to an existing CTR model reproduces neither KAR's knowledge source nor FineSID's stage inheritance. A token interface does not make them equivalent."
+      }
+    },
+    "dive/recommendation/content-semantic-ids/analysis/1": {
+      "source_sha256": "07a6533da00358a68f78a794b553362e9469f7d6f2944e5af6a91f9e1ae85148",
+      "reviewed": true,
+      "fields": {
+        "title": "Measure content fidelity and recommendation relevance separately",
+        "body": "Dual-purpose SID reconstruction checks how much of an embedding the code preserves. NoteLLM's GCL uses co-reading to decide which content should be close, imposing a different geometry. FineSID trains one backbone first with soft relevance targets and then for personalized CTR. Lower reconstruction error need not improve click ranking, and more plausible LLM output need not match user preferences."
+      }
+    },
+    "dive/recommendation/content-semantic-ids/question/same-token-different-transfer": {
+      "source_sha256": "1d7e95b1ee84e375a3beea94f9aa7e0b9d331703fcd476ca41cd910dc89404d0",
+      "reviewed": true,
+      "fields": {
+        "question": "Dual-purpose SID and FineSID both use discrete tokens. Why can't a single SID lookup experiment establish both results?",
+        "answer": "Dual-purpose SID requires codes to support collaborative identity and content reconstruction. FineSID retains fine-grained multiscale positions and transfers the full shared relevance predictor to CTR. A lookup covers only part of the interface. Without reconstruction or stage inheritance respectively, it misses the defining mechanism.",
+        "example": "Using three codes to roughly reconstruct a shoe image is compression. Learning query–shoe relevance and then inheriting the entire interaction network to predict a user's click is a different training pipeline."
+      }
+    },
+    "dive/recommendation/content-semantic-ids/question/generated-knowledge-not-click-label": {
+      "source_sha256": "89e47c9bfed88844d97d4786d7491b4ae648adbdfdfefa26a0ab08384b8f86e0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't KAR's generated preference descriptions replace NoteLLM's co-reading supervision?",
+        "answer": "KAR offers candidate knowledge about common sense and preferences; the recommendation objective determines its usefulness. NoteLLM's co-reading pairs come from behavior and directly constrain retrieval geometry. Generated knowledge may fill semantic gaps or invent false explanations. Behavioral pairs are observed but affected by exposure and popularity. They complement one another and are not interchangeable ground truths.",
+        "example": "An LLM's suggestion that campers might like hiking boots is a knowledge hypothesis. Users actually reading about a shoe and waterproof socks together is a platform behavioral relation. The evidence differs."
+      }
+    },
+    "dive/recommendation/content-semantic-ids/question/reconstruction-versus-preference": {
+      "source_sha256": "9ba5c1552a38ac5d7905f234099e344e24826c13c5c4ef7368dd7de4587e64ad",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can recommendation NDCG drop even when SID reconstruction is more accurate and text generation is more fluent?",
+        "answer": "Reconstruction preserves content and CSFT preserves the generation interface, but ranking also needs collaborative distinctions among user–item pairs. A dual-purpose SID codebook may favor content at the expense of preferences; NoteLLM uses GCL for behavior geometry; FineSID continues personalized CTR training. Evaluate reconstruction, collisions, relevance, and isolated test ranking separately.",
+        "example": "Two visually similar coats may be reconstructed accurately, but one is for cycling and the other for commuting. Visual fidelity does not guarantee a correct click order if codes lose the differences between audiences."
+      }
+    },
+    "dive/recommendation/content-semantic-ids/update/2026-10-27/0": {
+      "source_sha256": "f8adfddea841e0bdf4896bca85166c58b531e451c712c2282dc2039423fb44ae",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial version: compared KAR, NoteLLM, Dual-purpose SID, and FineSID. Added analysis and cross-paper questions on knowledge sources and transfer of vectors, compact codes, or full predictor state."
+      }
+    }
+  }
+}

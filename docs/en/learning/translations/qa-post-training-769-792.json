@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:smopd/basics": {
+      "source_sha256": "815727f311843a6d1169042ec3806f85695f3166094b38ac6409a7ff0644a1e5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why specialize then merge in SMOPD?",
+        "answer": "Reward priorities produce complementary teachers. Merge dense supervision on student-visited states instead of forcing conflicting goals into one expert initially. Teachers can still interfere.",
+        "example": "Train rigor and format specialists before deciding how each teaches the student."
+      }
+    },
+    "qa/post-training:smopd/comparison": {
+      "source_sha256": "68a1d607a76e20d3263cb1b8b7b10955471a3a626516fd3df702367e1f24e4f2",
+      "reviewed": true,
+      "fields": {
+        "question": "How do SMOPD reward specialists differ from MOPD domain specialists?",
+        "answer": "SMOPD varies reward priorities; MOPD often divides task domains. Both use multiple teachers, but expert grouping/evaluation and budgets differ.",
+        "example": "One domain can have several reward specialists, not one expert per dataset."
+      }
+    },
+    "qa/post-training:smopd/implementation": {
+      "source_sha256": "f5ce2166d1d364fd0a843672f1f088db0ebb6ccb1305bcc6301ee9dd8375aa56",
+      "reviewed": true,
+      "fields": {
+        "question": "Which states should all SMOPD teacher KL terms align to?",
+        "answer": "Score identical student prefixes, keeping weights/teacher targets frozen. Independent teacher generations do not align positionwise. No real local specialist training/merge.",
+        "example": "One teacher's step two and another's step four are not shared supervision states."
+      }
+    },
+    "qa/post-training:smopd/mechanism": {
+      "source_sha256": "fbfcb971723d6ed2698b649a4002eeadc919c12d42c8c832162349c4625c4d6d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why train reward-specialized teachers and merge on student states?",
+        "answer": "Separate rewards produce different strengths, then weighted distillation uses their distributions where students act. This isn't averaging rewards into one teacher or merging weights, and abilities can conflict. Local candidate evidence only.",
+        "example": "Calculation and formatting specialists can both score one student reasoning step."
+      }
+    },
+    "qa/post-training:rstg/basics": {
+      "source_sha256": "57d6378d0bb5c03d27f668088b43ea356a1a3ffa0cf653896730a3b6747210a8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why specifically recover all-fail groups in RSTG?",
+        "answer": "They lack relative reward signal and need teacher correction. All-success also has zero variance but no same failure need; consider variance and reward level.",
+        "example": "Don't call four correct replies a failure group just because their scores tie."
+      }
+    },
+    "qa/post-training:rstg/comparison": {
+      "source_sha256": "ff6b1c7b9fe69794f5a6ab47de69ccba820e65dbaea93681a3f8b582ed442c60",
+      "reviewed": true,
+      "fields": {
+        "question": "How does RSTG token selection differ from imitating full teacher trajectories?",
+        "answer": "Guide high entropy or large-gap positions more and add SFT on correct teacher traces. Selection avoids some irrelevant signals, but entropy/gap isn't ground-truth localization.",
+        "example": "Focus on uncertain reasoning rather than stable formatting."
+      }
+    },
+    "qa/post-training:rstg/implementation": {
+      "source_sha256": "7f02498283348bd5e241d4f9cfe8f101ac8adb5c9708782f4fb4c8307f6d4b45",
+      "reviewed": true,
+      "fields": {
+        "question": "Does implementing a negative-group gate complete RSTG?",
+        "answer": "No. Execute local distillation and teacher-success supervision with provenance/masks. Local candidate objectives do not run large teacher generation or full budget.",
+        "example": "A need_teacher flag does not execute the teacher branch."
+      }
+    },
+    "qa/post-training:rstg/mechanism": {
+      "source_sha256": "b4c807c2fa14e56ad48cd05be9abc65b6be472ad667fc909c726745e669480f9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why ask the teacher only for zero-variance failures, not every tied group?",
+        "answer": "All-fail normalization has no contrast, so teacher examples and high-entropy/gap distillation add signal. Tied successes don't need that intervention. Check outcome signs and teacher reliability.",
+        "example": "Request a verified demonstration for four wrong solutions, not four valid alternatives."
+      }
+    },
+    "qa/post-training:vad/basics": {
+      "source_sha256": "2882011776bb5f5e8c03041e036cf1d1e04f2dad6c89d1858bf9fce97a453c27",
+      "reviewed": true,
+      "fields": {
+        "question": "Why rebuild VAD targets around the current student?",
+        "answer": "Full teacher copying imports style/language bias. Add only visual-direction corrections around student to preserve other preferences; full privileged distribution is weak regularization.",
+        "example": "Transfer image color evidence without forcing all wording changes."
+      }
+    },
+    "qa/post-training:vad/comparison": {
+      "source_sha256": "d88db1125a0b63a536f4abce8029f12987e63ea84595b4a292f358c184f2d7b8",
+      "reviewed": true,
+      "fields": {
+        "question": "How does one-sided projection differ from replacing all correction with the visual direction?",
+        "answer": "Keep only teacher correction positively aligned to evidence. Replacement ignores whether teacher supported that change. Projection constrains attribution, not correctness.",
+        "example": "If teacher correction opposes visual contrast, don't blindly inject it."
+      }
+    },
+    "qa/post-training:vad/implementation": {
+      "source_sha256": "db6696d7703795d2eaefe31f407e98857a0cc5d0dec8b8d853d6b7611b60783f",
+      "reviewed": true,
+      "fields": {
+        "question": "What should VAD evidence-present and evidence-removed branches share?",
+        "answer": "Same frozen teacher, question and student prefix; only evidence view differs. Center logp and stabilize projection. Local process proxy lacks real crops/checkpoint/benchmarks.",
+        "example": "An unrelated text model would confound model architecture with evidence ablation."
+      }
+    },
+    "qa/post-training:vad/mechanism": {
+      "source_sha256": "f15c12df812afe3dddc3389007f787fd0273c8127836212e6fe0ea4a94b4b70f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why project teacher correction onto visual evidence and keep only aligned components?",
+        "answer": "Matched views define a visual direction. Keep positive projection and anchor target to student; weakly regularize toward full teacher. This avoids broad stylistic imitation. Local reward axes don't reproduce visual training.",
+        "example": "Try to transfer support for a red object without importing unrelated teacher phrasing preferences."
+      }
+    },
+    "qa/post-training:crpo/basics": {
+      "source_sha256": "07caade6c66cdf65f7905ba2995af8322c6243cbdcee31e33c1974a40d24a221",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish reflective exploration from exposure bias in CRPO?",
+        "answer": "Both can be uncertain. Reflection can repair reasoning; exposure bias can compound prefix errors. Group contrast treats them differently instead of rewarding entropy uniformly.",
+        "example": "Rechecking a branch is not the same as drifting after a wrong equation."
+      }
+    },
+    "qa/post-training:crpo/comparison": {
+      "source_sha256": "213f7a57d450e667051bb5e04258ea9d673692ef5eb6485eec7a4556ecdbaa7e",
+      "reviewed": true,
+      "fields": {
+        "question": "How does CRPO contrast differ from minimizing privileged teacher KL alone?",
+        "answer": "Contrast creates relative competition between positive/negative positions; KL directly matches a target. Classification needs reliability; negatives don't eliminate bias automatically.",
+        "example": "Which negatives appear in the denominator changes the update."
+      }
+    },
+    "qa/post-training:crpo/implementation": {
+      "source_sha256": "cd05e0bca8a70c946604b4d8f1bcfb75bb867366b3360a8bb7ab829897ff61eb",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local CRPO identify real reflection positions?",
+        "answer": "No. Candidate objectives test masks/diagnostics only. Record position/group provenance, keep privilege out of rollout and never label test positions with gold then claim autonomy.",
+        "example": "Predefined masks don't demonstrate finding exposure bias in real text."
+      }
+    },
+    "qa/post-training:crpo/mechanism": {
+      "source_sha256": "cc0a2712386c35ef71a7250bfc010d2e45c385c64e5fec9c9e4ad7776d801bad",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish reflective and exposure-bias positions rather than reward all high entropy?",
+        "answer": "Uncertainty can be useful exploration or failure from wrong prefixes. Contrast and privileged self-distillation handle them separately. Entropy alone isn't correctness; no complete reasoning training locally.",
+        "example": "High entropy during a useful recheck and a confused continuation call for different evidence-based updates."
+      }
+    },
+    "qa/post-training:distilled-rl/basics": {
+      "source_sha256": "49d073ad875104b8bb124ad1c7b28ae410e2b94f783dd14d055023ca9bfc8808",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Distilled RL use teacher distributions inside RL rather than standalone imitation?",
+        "answer": "Teacher/old-student ratios reweight task advantages at token level for positives only. Task outcome picks reinforcement; teacher focuses credit.",
+        "example": "A verified solution's teacher-supported key step can receive extra weight."
+      }
+    },
+    "qa/post-training:distilled-rl/comparison": {
+      "source_sha256": "e98193fb1ee31d0692b9da5c9cdd8afc914e9350a94b5e4ee90a806b4b7caf72",
+      "reviewed": true,
+      "fields": {
+        "question": "How does positive-only gating differ from weighting both signs?",
+        "answer": "Nonpositive advantages keep weight one, preserving failure penalties. Two-sided weighting could weaken some negative feedback. The teacher does not relabel outcomes.",
+        "example": "Teacher preference for wording in a failed reply doesn't reduce failure penalty."
+      }
+    },
+    "qa/post-training:distilled-rl/implementation": {
+      "source_sha256": "00a01b28f669d848f5b9322f73920231ad6b51f7f19e4820c576cb8f3673b75e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why normalize clipped ratios by sequence geometric mean?",
+        "answer": "Bound ratio scale and make weights relative within a valid-token sequence. Exclude padding and keep nonpositive branch one. Local mini-suite doesn't reproduce full generation/training.",
+        "example": "Including padding changes every weight even if its loss is masked."
+      }
+    },
+    "qa/post-training:distilled-rl/mechanism": {
+      "source_sha256": "ef4d1d693e4da9d0fa4e4c7713602cb8a5530cc8df12a4c43329ff8d34d1790d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add teacher weights only to positive advantages?",
+        "answer": "Verified positive samples already have outcome support; teacher ratio emphasizes useful tokens. Keep nonpositive learning unchanged. Clip and geometric-normalize weights without treating teacher preference as independent truth.",
+        "example": "Boost key steps in success; do not weaken negative updates just for teacher-approved wording."
+      }
+    },
+    "qa/post-training:armor/basics": {
+      "source_sha256": "a53e10dfde196c080be27f8df9e1e9cf5c6b8d8149c375b05539ee6c09f5f2de",
+      "reviewed": true,
+      "fields": {
+        "question": "Why sample actively from reference in ARMOR?",
+        "answer": "A passive penalty only acts on visited data and can't recover paths current policy never samples. Reference anchors restore actual training coverage.",
+        "example": "If student only takes a shortcut, old policy may still generate a verification route."
+      }
+    },
+    "qa/post-training:armor/comparison": {
+      "source_sha256": "e6ae2e0ad3a78c1f9523e0edc7aa974e0cdee4395085e3257b18d0d83a506b76",
+      "reviewed": true,
+      "fields": {
+        "question": "Are reference rollouts equivalent to adding reference KL?",
+        "answer": "No. Rollouts change visited states; KL regularizes distributions on existing states. Anchors may be stale or wrong and need evaluation.",
+        "example": "A missing old solution isn't practiced merely because KL is present."
+      }
+    },
+    "qa/post-training:armor/implementation": {
+      "source_sha256": "66fd9b47cbcc5832fbb8bd1ac7b8975def5311cfb868398e7bead861f5ef0ae5",
+      "reviewed": true,
+      "fields": {
+        "question": "What is local ARMOR reference, and are its samples on-policy?",
+        "answer": "The initialized candidate policy; log anchors separately from current student samples. No paper long-horizon pool; mixing tests data flow, not stability.",
+        "example": "Don't label an old-policy action as generated by the current policy."
+      }
+    },
+    "qa/post-training:armor/mechanism": {
+      "source_sha256": "ee44d2bb557d7e274a2d7912187e14e0cb7699bc87609b246a6d067a94fa1d7b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does active reference sampling differ from a KL penalty?",
+        "answer": "KL constrains drift on sampled states without guaranteeing useful reference behaviors appear. Frozen reference rollouts add that coverage. Anchors may be bad; tune mix and don't generalize candidate proxies.",
+        "example": "Active replay reintroduces the old verification route that a passive penalty may never sample."
+      }
+    }
+  }
+}

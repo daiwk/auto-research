@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:register-tokens-dllm/mechanism": {
+      "source_sha256": "92f4e901f4ba4ba347eedf656677dab6f012f0c38cefc30e1dc1edfc6caa30c5",
+      "reviewed": true,
+      "fields": {
+        "question": "How can fixed registers support cross-chunk reasoning after text removal, and what is lost?",
+        "answer": "Continuous hidden registers carry compressed previous-chunk information at fixed size. They do not preserve original text or guarantee fine detail. Train and evaluate retention; no complete local diffusion checkpoint.",
+        "example": "A relationship can survive as state while an omitted name cannot be guaranteed recoverable."
+      }
+    },
+    "qa/foundation-models:register-tokens-dllm/basics": {
+      "source_sha256": "8cc367066f2293fa270ba385ad97ac5240a2e624cd49670023e6b61b084d7c58",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use a fixed number of register tokens across diffusion chunks?",
+        "answer": "Hidden states pass some earlier information after text is cleared, while bounding capacity. This is also an information bottleneck.",
+        "example": "The next chunk gets several continuous vectors rather than all previous words."
+      }
+    },
+    "qa/foundation-models:register-tokens-dllm/comparison": {
+      "source_sha256": "608a7d530941ea95fa29234999e3b2edf773b9239bf797362fbc6d440dac9943",
+      "reviewed": true,
+      "fields": {
+        "question": "How does register carry differ from keeping all text or KV?",
+        "answer": "Carry is a fixed-size continuous summary. Text/KV grows and permits finer position access. Fixed registers are not lossless compression.",
+        "example": "Two hundred pages still compress into eight vectors without expanding capacity."
+      }
+    },
+    "qa/foundation-models:register-tokens-dllm/implementation": {
+      "source_sha256": "1f948de8e7566a6708ee0cd56a997152793c364fe0abebab1f3c5f4ca55d6706",
+      "reviewed": true,
+      "fields": {
+        "question": "How verify old text is not retained through an undeclared bypass?",
+        "answer": "Check that the next chunk receives only the agreed registers, clear old text and undeclared caches, and verify state updates. Local work omits LLaDA/Dream and diffu-GRPO.",
+        "example": "Fixed register count is insufficient if the old text is secretly concatenated anyway."
+      }
+    },
+    "qa/foundation-models:speculative-decoding/mechanism": {
+      "source_sha256": "74cadcea7d3f6b4a44c07595795e9014dccaf6d5fdea6594c4306b6807085984",
+      "reviewed": true,
+      "fields": {
+        "question": "Why sample positive residual after rejecting a speculative proposal?",
+        "answer": "Accepting by target/proposal ratio already contributes some target mass. Sample normalized positive target-minus-proposal remainder to fill the rest. Resampling target directly double-counts accepted mass. Local token transitions do not measure large kernels.",
+        "example": "When draft overweights one word, residual correction fills undercovered alternatives."
+      }
+    },
+    "qa/foundation-models:speculative-decoding/basics": {
+      "source_sha256": "f2ff3040850446f5c177a510d43cda8dd9b42716b039b14728d1c76430223fe2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a small draft reduce large-target serial calls?",
+        "answer": "Draft proposes blocks and target verifies in a batch, advancing through the accepted prefix. Exact acceptance/rejection correction preserves the target distribution.",
+        "example": "One target call can accept several candidates rather than one per call."
+      }
+    },
+    "qa/foundation-models:speculative-decoding/comparison": {
+      "source_sha256": "161d4fed3db50657ed603517502feb6c775c8995ed10f2f69b0cedee2d791936",
+      "reviewed": true,
+      "fields": {
+        "question": "Is greedy agreement the same guarantee as exact stochastic speculation?",
+        "answer": "No. Greedy agreement preserves a deterministic argmax path. Exact stochastic sampling needs p/q acceptance and residual correction for the complete distribution.",
+        "example": "Identical highest-probability words can hide different second- and third-choice probabilities."
+      }
+    },
+    "qa/foundation-models:speculative-decoding/implementation": {
+      "source_sha256": "c35e7e9791eec20100a670faffe524995766f0c7dc42e5d377101adba02663ba",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not commit later drafts unconditionally after a rejection?",
+        "answer": "Their prefix included the rejected token. Correct the token, discard the invalid suffix, and continue from the new prefix. Local Markov call counts are not T5-XXL latency.",
+        "example": "If word two changes, words three to five cannot assume the old word two."
+      }
+    },
+    "qa/foundation-models:tadm/mechanism": {
+      "source_sha256": "d1346d8aed8676381bdefb51e11d4b493482dcac5fd95370f2c8ad9b4f76bb21",
+      "reviewed": true,
+      "fields": {
+        "question": "Why gate corrections to TADM cached anchors based on current diffusion state?",
+        "answer": "Reusing expensive latent outputs saves anchor calls, but changing states make anchors stale. A cheap conditioned fusion predicts and gates corrections for a smaller denoiser. It cannot guarantee full recovery, and local tests omit full generation.",
+        "example": "Adjust an early rough sentence representation once later words become known."
+      }
+    },
+    "qa/foundation-models:tadm/basics": {
+      "source_sha256": "6baa8ec597ec5ded4b4a172ce6772f4b618307cb8647e16f7952defee97ccdb1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why needn't the expensive anchor run at every step?",
+        "answer": "Neighboring reverse steps can reuse part of the state. Refresh periodically and use cheap state-conditioned corrections in between before smaller denoising.",
+        "example": "Several steps share one anchor but produce different corrections."
+      }
+    },
+    "qa/foundation-models:tadm/comparison": {
+      "source_sha256": "1e31945a1121d7f537e896d9d4f4e0270753c2e365d98ddfe04654e0968aed5a",
+      "reviewed": true,
+      "fields": {
+        "question": "How does gated stale-cache correction differ from reuse unchanged?",
+        "answer": "It combines c_t and the old anchor to adjust stale information. Refresh may still be needed; fusion is not an exact substitute for every anchor call.",
+        "example": "A changed denoising state can revise old features instead of treating them as fresh."
+      }
+    },
+    "qa/foundation-models:tadm/implementation": {
+      "source_sha256": "ae07da71e8cf3c651f2b98c5224fc68680723c1324641d4fdc78f45dd1cb5874",
+      "reviewed": true,
+      "fields": {
+        "question": "What boundary checks validate TADM's g and Δ fusion?",
+        "answer": "Use h_t′+g⊙Δ. Zero g or zero Δ recovers the anchor, not zero. Local cache correction does not load DiffusionGemma-26B.",
+        "example": "Turning the gate off keeps the original anchor."
+      }
+    },
+    "qa/foundation-models:windowed-mtp/mechanism": {
+      "source_sha256": "b7f018cfa494f24971ca3fdc15a1513ca96bd8ba8200cfe8409ff46edb7e7a21",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can shrinking only Windowed-MTP's draft context save reads without changing the target distribution?",
+        "answer": "Draft reads sinks and recent tokens; the full target still sees all history and corrects proposals. The window affects draft cost and acceptance, not the exact target definition. Cutting target context changes the guarantee; local latency does not transfer to production.",
+        "example": "Target can reject a wrong draft caused by missing old evidence, provided its own history stays complete."
+      }
+    },
+    "qa/foundation-models:windowed-mtp/basics": {
+      "source_sha256": "3820a6e76c4d3a50d29a00e1ee8d5f5b2367efa25f13a04e8372580664d3aa57",
+      "reviewed": true,
+      "fields": {
+        "question": "Why window only the draft?",
+        "answer": "Draft KV reads can bottleneck long contexts. Retain sinks and recent draft history while the full target verifies, changing proposal cost and acceptance.",
+        "example": "Draft might read recent 64 and a few sinks while target reads all 16K."
+      }
+    },
+    "qa/foundation-models:windowed-mtp/comparison": {
+      "source_sha256": "039561175854cb51d2a3ed817857150ec82ac6b6c23fae28e9f1970e38f83259",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't a large reduction in draft keys yield the same TPOT reduction?",
+        "answer": "Draft forwards and target checks still cost time, and time per output depends on accepted length AL. Lower acceptance can offset savings.",
+        "example": "Cheaper verification that accepts fewer tokens may yield little throughput gain."
+      }
+    },
+    "qa/foundation-models:windowed-mtp/implementation": {
+      "source_sha256": "3cc1cb52fc77bfc29dea9a4138c8a7230a3ac823c019f1f7b90b06ac6389922b",
+      "reviewed": true,
+      "fields": {
+        "question": "Should overlaps between sinks and recent tokens duplicate KV?",
+        "answer": "No. Use the union without duplicates. Only draft indices change; target retains the full cache.",
+        "example": "A position in both sets appears once in draft attention."
+      }
+    },
+    "qa/foundation-models:activation-model-scanner/mechanism": {
+      "source_sha256": "4c5903efc8acd004747b40cdc90cbcc39341c8bd5553e0f5ccdab1534742f294",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't AMS activation separation establish behavioral safety?",
+        "answer": "Mid-layer contrast directions and same-architecture baseline drift provide structural evidence only. Layer numbering, variance, and baseline affect thresholds. Independent behavior evaluation is still required.",
+        "example": "A model can distinguish safety concepts internally while still responding unsafely to a particular prompt."
+      }
+    },
+    "qa/foundation-models:activation-model-scanner/basics": {
+      "source_sha256": "92941a24c1b5ad3508d7e298aa6b391cf82f7f27b7c8d7f405ec008e45c60083",
+      "reviewed": true,
+      "fields": {
+        "question": "Why scan contrastive input activations?",
+        "answer": "Identify safety-related separation in intermediate layers and compare direction/drift with a matched baseline. This does not generate or validate behavioral answers.",
+        "example": "Separable concepts do not guarantee all related requests are handled well."
+      }
+    },
+    "qa/foundation-models:activation-model-scanner/comparison": {
+      "source_sha256": "c36b9ee24eb7ae56967c48a68c18910166f0c2577c14054716ad7df4897f6512",
+      "reviewed": true,
+      "fields": {
+        "question": "What do AMS Tier 1 and Tier 2 measure?",
+        "answer": "Tier 1 measures separation of positive and negative projections. Tier 2 compares direction consistency and relative drift against matching layers/dimensions. Internal separation need not mean baseline alignment.",
+        "example": "Wide separation can coexist with a direction flip relative to baseline."
+      }
+    },
+    "qa/foundation-models:activation-model-scanner/implementation": {
+      "source_sha256": "9724db0e7a39ac983026f4b637ba4b6164c952cba0ce6d537a075f9b0d78e0e3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add one to the AMS block index in Hugging Face hidden_states?",
+        "answer": "Block hooks are zero-based but hidden_states[0] is embeddings. Use block_id+1, select the last real token, and preserve population variance and strict threshold.",
+        "example": "Block 9 reads hidden_states[10]."
+      }
+    },
+    "qa/foundation-models:combinatorial-watermark/mechanism": {
+      "source_sha256": "11e101909ec9a2ff807b94afa739ffca8c28b7a95c10e16b2d8e8be03ba0cb6d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can testing all cyclic phases still miss full-period deletion?",
+        "answer": "Phase search handles global offsets, but deleting a whole period can preserve the repeating pattern and phase. Independently calibrate global/local thresholds; a hard-pattern diagnostic is not perfect soft-watermark localization. No full local model edit matrix.",
+        "example": "Removing one full red/blue cycle leaves the remaining pattern unchanged."
+      }
+    },
+    "qa/foundation-models:combinatorial-watermark/basics": {
+      "source_sha256": "e8b15d632b4321391ff47afb1bae9db0a22889cf649514d693c886482c5fb559",
+      "reviewed": true,
+      "fields": {
+        "question": "Why bias vocabulary partitions by a periodic pattern?",
+        "answer": "Tag-specific logit biases induce a statistical periodic structure. The detector compares windows across all cyclic shifts for watermark and edit evidence.",
+        "example": "AB partition alternation is detectable without knowing where the observed text starts."
+      }
+    },
+    "qa/foundation-models:combinatorial-watermark/comparison": {
+      "source_sha256": "51680f4608b2b600af71bcbaba65d3953c10fdbae7adb50e3aad37abfa413db2",
+      "reviewed": true,
+      "fields": {
+        "question": "Can global D and local E(t) thresholds replace each other?",
+        "answer": "D detects a watermark across the whole passage; E(t) uses window coverage to flag possible edits. They differ in scope and threshold direction. Calibrate false positives independently.",
+        "example": "Global passage can pass while a short span scores low; that does not precisely identify every edit."
+      }
+    },
+    "qa/foundation-models:combinatorial-watermark/implementation": {
+      "source_sha256": "97420c1f592672fb78f5598b0b5b0a978b4c84aa16e2ecee8f0196c66e880cc8",
+      "reviewed": true,
+      "fields": {
+        "question": "Can local E(t) zero-pad edges?",
+        "answer": "No. It is defined only for complete interior t=w−1 through T−w, without zero padding or changing denominators. Check all phases and preserve full-period deletion as a blind negative control.",
+        "example": "Edge positions with incomplete windows should not be falsely flagged because zeros were added."
+      }
+    },
+    "qa/foundation-models:criticl/mechanism": {
+      "source_sha256": "b71b5dfdbd5fce0de9633c966c6688a0c27991f97f65e171016bd32b0c679ec8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't CritICL need the strong model to fail first at deployment?",
+        "answer": "Offline weak-model failures become reusable critiques. Static mode uses common patterns and dynamic mode retrieves question-relevant ones before one strong-model generation. Transfer patterns, not weak answers; relevance and coverage matter.",
+        "example": "Retrieve a unit-conversion reminder before answering, without reading test gold to craft it."
+      }
+    }
+  }
+}

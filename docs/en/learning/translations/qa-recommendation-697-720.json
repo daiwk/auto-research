@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:netflix-mediafm/comparison": {
+      "source_sha256": "dbcb25eafeb8094478b3ff0d2005ebfaee4e05de0fa75dea753717c849845ba5",
+      "reviewed": true,
+      "fields": {
+        "question": "How does query similarity add current search intent beyond user-only personalization?",
+        "answer": "User similarity reflects long-term taste; query similarity adds the explicit current request. Balance them so neither erases the other. This does not establish a universal weight, and offline IPS and winner proxies do not replace online evidence.",
+        "example": "Illustration: A user who likes action searches for a warm comedy. Query match should override some action preference to keep search artwork relevant."
+      }
+    },
+    "qa/recommendation:netflix-mediafm/implementation": {
+      "source_sha256": "00757968fa952e8649c93b72de9910a02508084b95cb3ea2086a2ccaa3013a4f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why calibrate all three vector scales when MediaFM combines two dot products?",
+        "answer": "User, query, and asset vectors need comparable scales or explicit calibration, otherwise one norm dominates the nominal α. Select checkpoints and fusion weights without tuning on test and bind frozen features to versions. Local movie-content proxies are not the production multimodal pipeline.",
+        "example": "Illustration: A query norm ten times larger can dominate a nominal 50/50 mix; normalization makes the coefficients interpretable."
+      }
+    },
+    "qa/recommendation:next-vlm/mechanism": {
+      "source_sha256": "7589771fbefb403a2a5a34a7e36ab278a7bbcadef441814b3cdef38c269decc8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why generate next intent before retrieval and verification in NEXT instead of linking the most semantically similar videos?",
+        "answer": "Similarity describes content, not the next need. A VLM infers what follows, retrieval grounds it, and verification forms a directed edge. Expensive inference runs offline; positive engagement triggers confident edges online. The graph expresses possible continuation, not symmetric similarity.",
+        "example": "Illustration: After a coffee-machine unboxing, extraction instructions may be a better next step than another unboxing."
+      }
+    },
+    "qa/recommendation:next-vlm/basics": {
+      "source_sha256": "40bf042c579d03d00e1bb85fcfc41fc53c308d71cb042e3e6bd4b91b8370be5a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't NEXT automatically reverse every directed edge?",
+        "answer": "A need after A need not reverse after B. Explicit sequels and inferred needs both create directional relations; serving triggers confident edges after positive engagement. Inferred transitions are not observed consumption.",
+        "example": "Illustration: An unboxing can lead to an extraction tutorial without the tutorial leading back to an unboxing."
+      }
+    },
+    "qa/recommendation:next-vlm/comparison": {
+      "source_sha256": "274ba2430ed770ab339e74689150d14e9d713bbb754a31594cbcaae693216cd1",
+      "reviewed": true,
+      "fields": {
+        "question": "How does NEXT's intent–retrieve–verify chain improve reliability over asking a VLM to name the next video?",
+        "answer": "Intent states the need, retrieval grounds it in the catalog, and verification checks fit, reducing invented titles. The stages can still inherit wrong intent or missed retrieval. A local proxy graph increment does not reproduce full NEXT-8B training.",
+        "example": "Illustration: Infer 'learn how to use it,' retrieve and verify a real tutorial; a bad initial intent can still steer the entire chain wrong."
+      }
+    },
+    "qa/recommendation:next-vlm/implementation": {
+      "source_sha256": "c166df501db8a825adbf30c0000329f09e487ebb105b5d45df50c4fdfafdc303",
+      "reviewed": true,
+      "fields": {
+        "question": "Why inject NEXT NKG candidates additively only after positive engagement?",
+        "answer": "Positive feedback triggers continuation, while additive candidates supplement production retrieval instead of replacing it with uncertain graph edges. The trigger must already be observed; deduplicate and enforce eligibility. A large single-seed proxy change applies to its fixed protocol only.",
+        "example": "Illustration: Add tutorial candidates after a user likes an unboxing, not after a skip; retain other retrieval options."
+      }
+    },
+    "qa/recommendation:nontp/mechanism": {
+      "source_sha256": "fe58b15c1f5d44f769e849b51a0a663053b8b1ceb64c16fc624d58827955b46c",
+      "reviewed": true,
+      "fields": {
+        "question": "Which two kinds of locality do TCL and TDL address in NONTP next-token prediction?",
+        "answer": "TCL predicts a later EMA-teacher state, extending immediate next-step supervision. TDL predicts the target through a shared item head from earlier cross-domain states, helping sparse domains. Both are training-only; inference stays on the original backbone and cannot read future states.",
+        "example": "Illustration: Before a lamp purchase, TCL teaches longer trajectories and TDL uses preceding home-content behavior. Serving sees only events already observed."
+      }
+    },
+    "qa/recommendation:nontp/basics": {
+      "source_sha256": "352c860206f1d7420bba77254d990003f4e4ad0e26c8b092c764fca90efe9e3c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add NONTP auxiliary modules only during training?",
+        "answer": "TCL and TDL teach long-range and cross-domain signals to the backbone without future teachers or extra branches at serving time. Richer supervision is not uniformly better, especially with weak domain labels and short histories. Future targets are not available online.",
+        "example": "Illustration: Train for a trajectory several steps ahead but serve with the current history and original item head."
+      }
+    },
+    "qa/recommendation:nontp/comparison": {
+      "source_sha256": "0c35147a0bf2f70d92196c02d9afd2ba30e1a77417f0f680de6cdba00717e797",
+      "reviewed": true,
+      "fields": {
+        "question": "How is TCL's EMA teacher more stable than a direct online future-state target?",
+        "answer": "EMA smooths updates and gives a stopped-gradient target rather than two sides chasing each other. Future state remains training-only; use other users as negatives rather than mislabeling nearby same-user interests. Stability does not ensure correctness and can preserve old biases.",
+        "example": "Illustration: A slow teacher changes less than a recent online update, but a consistently popularity-biased teacher is still biased."
+      }
+    },
+    "qa/recommendation:nontp/implementation": {
+      "source_sha256": "72544ca91a4eda8adc86ded3af66a58bc8e72bb87c74d238d7fdda1eb80de707",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must TDL use pre-target cross-domain history and the same item head?",
+        "answer": "Time order prevents leakage, domain mismatch supplies cross-business transfer, and averaging into the shared NTP head trains the target item space directly. Skip empty groups rather than inventing labels; an independent head is not the same transfer interface.",
+        "example": "Illustration: Predict a shopping target from earlier other-domain states, not videos afterward. No cross-domain history means no TDL evidence."
+      }
+    },
+    "qa/recommendation:notellm/mechanism": {
+      "source_sha256": "d59285e602a91915adc58dc093116aedcaecbe60c90f222984dc770c14902a90",
+      "reviewed": true,
+      "fields": {
+        "question": "Why train NoteLLM's compression state on co-read contrastive learning and content generation?",
+        "answer": "Co-read pairs capture collaborative relations but contrastive similarity alone can lose fine semantics. Generating tags and categories from the same bottleneck forces it to preserve recoverable content. The two objectives shape a retrieval vector that does not merely memorize co-occurrence.",
+        "example": "Illustration: Tent and cookware notes can be close for campers yet retain enough detail to generate distinct tags."
+      }
+    },
+    "qa/recommendation:notellm/basics": {
+      "source_sha256": "a3309f2a9fe9d72704da495de3da4e57e3dfdc88f93a66f21ff1a104932c4896",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is NoteLLM's compression token both a retrieval and generation interface?",
+        "answer": "Contrastive retrieval and label generation use the same compressed state, requiring collaborative and semantic evidence. If generation bypasses it to read raw text, the constraint changes. Compression does not preserve every note detail.",
+        "example": "Illustration: A token must bring co-read notes together and still generate 'camping gear,' not just encode shared popularity."
+      }
+    },
+    "qa/recommendation:notellm/comparison": {
+      "source_sha256": "113df2f1c2a50308a67dfd849f739fc0df840de05f837ab12d39a1ffe801b97c",
+      "reviewed": true,
+      "fields": {
+        "question": "What relation does GCL co-reading add beyond text-similarity positives?",
+        "answer": "Text similarity is content-driven; co-reading links consumption across superficially different notes but can reflect exposure and popularity. CSFT constrains content retention. Complementarity is not absence of bias, and simplified labels do not reproduce real hashtag generation.",
+        "example": "Illustration: Tent reviews and camp recipes may be co-read despite different text, whereas two near-identical tent reviews are textual matches."
+      }
+    },
+    "qa/recommendation:notellm/implementation": {
+      "source_sha256": "493b8a307a0eea0e3e72e89b235e076e6192b538fd3c5a4ed4e78cadfc35b2ca",
+      "reviewed": true,
+      "fields": {
+        "question": "How verify NoteLLM's contrastive vector and CSFT initial state use the same compression position?",
+        "answer": "Read the same special-token hidden state for both, not a last position for one and mean for the other. Align batch pairs and causal generation masks and exclude padding. Frozen versus joint training tests representations, not a full DIN ranking comparison.",
+        "example": "Illustration: Title-mean contrastive features and an independent CLS for generation can both train without constraining the same bottleneck."
+      }
+    },
+    "qa/recommendation:nova/mechanism": {
+      "source_sha256": "a31db038cf85f0d665f9231b790d6063466aa6293edebc22f4b16896f4e7be7c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does NOVA separate structural semantics, execution, offline effectiveness, and online impact?",
+        "answer": "Runnable code can still violate intended architecture or harm quality. NOVA uses change history and diagnosis to propose updates, then increasingly expensive checks to reject obvious failures early. Offline success still requires independent online evidence; local execution is diagnostic only.",
+        "example": "Illustration: An incorrectly wired task head can pass tensor checks but fail semantics. A structurally correct change can still regress on validation."
+      }
+    },
+    "qa/recommendation:nova/basics": {
+      "source_sha256": "36717e3f38f6e059bbc9226ca3b1c4492c9aba8ca8e7eba6ad0245359c8a993a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't NOVA's architecture gradient an ordinary backpropagation gradient?",
+        "answer": "It summarizes architecture changes, diagnostics, and metrics as an agent control signal. Directional feedback is not a derivative of a differentiable parameter objective; it cannot differentiate code end to end or guarantee improvement.",
+        "example": "Illustration: 'Widening exceeded budget; changing the gate hurt validation' guides a proposal without defining derivatives for Python characters."
+      }
+    },
+    "qa/recommendation:nova/comparison": {
+      "source_sha256": "c9ddc11d8f98bcb4610eb9d43966fc877f3dd74cb34fd28a5b31e43dc03cc5d5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't NOVA's semantic architecture checks replace ordinary runtime tests or vice versa?",
+        "answer": "Shape-compatible code can violate task wiring or defining information flow. Semantic checks test intent, execution checks runnable behavior, and offline/online stages test value. Lower training loss does not justify skipping semantics. The local candidate workflow has no production A/B.",
+        "example": "Illustration: A purchase head wired to click labels can train and lower loss; semantic checks should catch it before deployment."
+      }
+    },
+    "qa/recommendation:nova/implementation": {
+      "source_sha256": "8efd81f60f45df35ab0c1205482ea6b799b3278d5c241926900435d2f73fd38a",
+      "reviewed": true,
+      "fields": {
+        "question": "What outputs should distinguish actual validation from simulated online impact after NOVA selection?",
+        "answer": "Candidates, shape failures, validation scores, and promotion logs can be measured. Without traffic, online stages are simulations or diagnostics, not deployments. Use test only to evaluate the final selection, and record successful skills and prohibited directions in an auditable form.",
+        "example": "Illustration: Rejecting an intentionally bad shape demonstrates an execution gate. Passing simulated impact is not a user experiment."
+      }
+    },
+    "qa/recommendation:ogr/mechanism": {
+      "source_sha256": "d419a0ec39a6b28921978a82f1328c17c2692e2e54c2cd5181b435b71c325cc8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why fuse semantic and collaborative codes before conservative slate optimization in OGR?",
+        "answer": "Semantic codes share content structure and collaborative codes capture behavior relations; encoding organizes the generative space. Planning treats a slate as one action to model item combinations, and conservative feedback updates limit drift from supervision. Representation, joint action, and stable learning are separate.",
+        "example": "Illustration: Four individually strong shoes can be redundant, while a slate can combine shoes, socks, and a pack without jumping to an unfamiliar combination for one reward."
+      }
+    },
+    "qa/recommendation:ogr/basics": {
+      "source_sha256": "200dd783b71ce596baac41a718e4131d3e11ef90a79a85ff092b04df063867e3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does OGR's TUSID encode semantics and collaboration instead of only quantizing content?",
+        "answer": "Content generalizes to new items; collaborative codes preserve consumption relations. GL2P plans a slate and SPA adapts from feedback, distinct from coding. Richer codes can conflict and do not guarantee better pages.",
+        "example": "Illustration: Visually different items bought together can connect via collaboration; new items can borrow semantic structure."
+      }
+    },
+    "qa/recommendation:ogr/comparison": {
+      "source_sha256": "e22289eeee0ef355b12a3c6114441264edc6753fec9474a608ac08d7acf908cf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does conservative SPA keep an SFT anchor rather than maximize reward freely?",
+        "answer": "Sparse or misspecified rewards can favor extreme slates. KL limits drift from supervised behavior, trading improvement freedom for stability without fixing bad rewards. Local NDCG and Hit moved in different directions, not universal gains.",
+        "example": "Illustration: Novelty alone may favor irrelevant tail items; SFT preserves interest, but excessive constraint may block exploration."
+      }
+    },
+    "qa/recommendation:ogr/implementation": {
+      "source_sha256": "bdceb735e901022afebf9bfd56c484798e350376237d1769614a295b524acd16",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must OGR's R(Y) and KL compare the whole slate rather than one item?",
+        "answer": "Y is the slate, so reward, generation probability, and reference must apply to the same list or defined token decomposition with consistent IDs and deduplication. Mean item reward misses interactions and fixed score mixing is not policy updating. State the actual local path.",
+        "example": "Illustration: Five individually relevant duplicates can have high mean item score but poor slate value."
+      }
+    },
+    "qa/recommendation:onelatent/mechanism": {
+      "source_sha256": "b9dc73cb21ccc053ff50361684d73c088356f029945160e13064ba84f6cc91ff",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can OneLatent's latent tokens save online decoding without constituting a strict reasoning bottleneck?",
+        "answer": "Training reconstructs exploration, evaluation, and attribution through latent tokens, then outputs semantic IDs instead of long reasons. Ordinary causal masks still expose original profile/history and all student weights update. Gains cannot be attributed to tokens alone storing every step. Local work reviewed evidence and cost without running a reproduction.",
+        "example": "Illustration: A few internal markers can support a recommendation during training and only an ID appears online; faster output does not prove all reasoning is stored in markers."
+      }
+    },
+    "qa/recommendation:onelatent/basics": {
+      "source_sha256": "edf729eb30b21ec720d26f1de74c282da7bf99d787e5e9e7f6568c06b19e3765",
+      "reviewed": true,
+      "fields": {
+        "question": "Why supervise OneLatent with exploration, evaluation, and attribution instead of one fixed long chain of thought?",
+        "answer": "The views cover discovery, comparison, and explanation; available perspectives per sample train a latent interface without a rigid template. It reduces explicit serving output, not proof of faithful reasoning recovery. Full-parameter training also contributes.",
+        "example": "Illustration: One example may have only a reliable evaluation, another all three views. They need not be forced into the same reasoning length."
+      }
+    }
+  }
+}

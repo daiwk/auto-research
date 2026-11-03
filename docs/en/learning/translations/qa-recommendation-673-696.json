@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:mpformer/comparison": {
+      "source_sha256": "1715046d11ce681093eaba4f66039e5b19c936ac7d3bb2c331579d13a4114550",
+      "reviewed": true,
+      "fields": {
+        "question": "How do MPFormer dynamic quotas change serving budgets relative to fixed K per task?",
+        "answer": "Dynamic quotas allocate by difficulty or context, potentially increasing coverage for hard goals while crowding out others. Normalized weights do not ensure valid integer budgets. The public proxy does not establish gains for every industrial behavior objective.",
+        "example": "Illustration: Allocate less to easy click retrieval and more to sparse purchases, unless the difficulty estimate misallocates the extra capacity."
+      }
+    },
+    "qa/recommendation:mpformer/implementation": {
+      "source_sha256": "ee8d00462fde172e8c4cca35cf0515d640f33247ce80dea0f3df78456cae7167",
+      "reviewed": true,
+      "fields": {
+        "question": "Why record how MPFormer's qm(h) is used for training weights versus candidate quotas?",
+        "answer": "Normalized continuous weights multiply losses; serving counts need integer conversion and a total cap. Mask missing labels instead of making up zero supervision. Mixing proxy scores does not train an objective-conditioned shared model.",
+        "example": "Illustration: A training weight of 0.3 does not automatically mean 30 candidates; with total budget ten, define rounding and remainder."
+      }
+    },
+    "qa/recommendation:msd/mechanism": {
+      "source_sha256": "573ef9436786cef89027d3fdbd9dd867df7e4646871a4941400136d7497f014e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distill teacher keywords and reasoning and then align the student to CTR in MSD rather than cache teacher embeddings alone?",
+        "answer": "Static embeddings save compute but do not adapt to CTR. Autoregressive distillation transfers teacher semantics; LoRA and a recommendation adapter learn task features. Cache frequent items, encode misses online, and fuse only relevant history. These address semantics, CTR, and serving separately.",
+        "example": "Illustration: A student learns coat warmth and commuting attributes from teacher text, adapts them using clicks, then serves cached popular coats and encodes new items online."
+      }
+    },
+    "qa/recommendation:msd/basics": {
+      "source_sha256": "4a27220ef2a52c52f9331a682f6ddc459b90968c39234457aa9155c23c8e7794",
+      "reviewed": true,
+      "fields": {
+        "question": "Why split MSD's MKDM and MKIM into knowledge distillation and CTR adaptation?",
+        "answer": "Teacher keyword and reasoning generation transfers semantics first. LoRA and the recommendation adapter then align those features to clicks, unlike frozen knowledge. Supervision and trainable parameters differ across stages; lower distillation loss does not guarantee higher CTR.",
+        "example": "Illustration: First learn what warmth and commuting mean for coats, then train how user clicks combine them."
+      }
+    },
+    "qa/recommendation:msd/comparison": {
+      "source_sha256": "9ee986ff42c6cb409590979d3f73cefda18eaaa85b9dc6a2fa7e87dfcbf0f732",
+      "reviewed": true,
+      "fields": {
+        "question": "How does MSD amortize compute with frequent-item caching and online encoding for rare items?",
+        "answer": "Frequent items yield cache reuse; online encoding preserves coverage for rare items and misses. Encoding everything online is fresher but repeats expensive work. Stale cache/LoRA versions, refreshes, and hit rate matter. The local path does not measure production embedding efficiency.",
+        "example": "Illustration: Cache a coat scored a million times a day, encode a new raincoat online, and refresh cached semantics when LoRA changes."
+      }
+    },
+    "qa/recommendation:msd/implementation": {
+      "source_sha256": "fd88a36743c5de4299cda5adfd31eeda20101be8b33508abd443374900117de4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separately check candidate-specific top-three history and shareable cache features in MSD?",
+        "answer": "History selection depends on target similarity and can differ per candidate; cached item semantics must not include user or candidate-pair interaction. Verify only designated LoRA parameters update in the frozen student. Mixing paths can contaminate caches or erase candidate relevance.",
+        "example": "Illustration: Cameras need photography history and shoes need running history. Their selected top-three sets cannot be shared even if base item encodings can."
+      }
+    },
+    "qa/recommendation:msn/mechanism": {
+      "source_sha256": "a5e1937edcd3c76e1960d608831efa56ea668686b50d09d80d4202eda0231256",
+      "reviewed": true,
+      "fields": {
+        "question": "How does two-axis Product-Key Memory in MSN add capacity while reading little knowledge per query?",
+        "answer": "A slot combines one key from each axis. Summed similarities rank combinations, only a few values are read, and a gate fuses them into the dense backbone. Stored capacity does not all become active compute, and useful routing still matters.",
+        "example": "Illustration: Two sets of 100 keys address 10,000 slots, but one request reads the four most relevant ones."
+      }
+    },
+    "qa/recommendation:msn/basics": {
+      "source_sha256": "b3b8a56f802f997cdd19986eaf3a33433515af8d6920aa488d96f987cd51578a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why put capacity in MSN memory slots instead of a fully dense network?",
+        "answer": "Dense models typically activate all parameters. Memory stores more values but reads few slots, so compute need not grow proportionally. Product keys organize addresses across two axes and a gate fuses values. Sparse reads do not remove maintenance cost or guarantee useful knowledge.",
+        "example": "Illustration: Retrieving four files is cheaper than reading an archive, provided the routing finds the right files."
+      }
+    },
+    "qa/recommendation:msn/comparison": {
+      "source_sha256": "e68296101ccfb1f069aea626500a85892e7b363a996cccb0a23f26ec06c266e0",
+      "reviewed": true,
+      "fields": {
+        "question": "How does top-k PKM activation differ from a dense soft mixture over every expert?",
+        "answer": "A dense mixture usually evaluates all experts before weighting. PKM finds high-scoring key pairs and reads selected values, leaving most slots inactive. Search and memory access still cost time, and hard selection can miss evidence. Total-to-active parameter ratio does not predict measured latency.",
+        "example": "Illustration: Reading four of 10,000 slots differs from running 100 experts, but scattered reads can offset lower FLOPs."
+      }
+    },
+    "qa/recommendation:msn/implementation": {
+      "source_sha256": "e2ac0d6217db43c4280147ccd02100de6c5bfe3385b6ab9ed92f94aa0f2146fa",
+      "reviewed": true,
+      "fields": {
+        "question": "Why preserve unique slot IDs and deduplicate top-k two-axis combinations in MSN?",
+        "answer": "Both axis addresses identify the slot; the summed similarity is a score, not an ID. Duplicate slots overweight one value. Match value width to the backbone and define short or empty selections. Local genre and transition writes are public proxies.",
+        "example": "Illustration: (2,3) and (3,2) are different slots despite the same index sum, and a duplicate (2,3) is not independent knowledge."
+      }
+    },
+    "qa/recommendation:muchator/mechanism": {
+      "source_sha256": "1862918ca38e2b3a2c9c8a40019f5c14fac6e20ceaba414a9a8320e18d0f39b8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does MuChaToR optimize intent, discovery, and dialogue rewards beyond music pretraining and instruction learning?",
+        "answer": "Music pretraining adds domain knowledge and instructions teach response format, but neither resolves immediate preference versus discovery. RL provides feedback for intent, discovery, and dialogue with a reference constraint. The local ranking proxy does not demonstrate actual music conversation quality.",
+        "example": "Illustration: For relaxed commute music without only old songs, reward both mood fit and some discovery rather than merely imitating familiar artists."
+      }
+    },
+    "qa/recommendation:muchator/basics": {
+      "source_sha256": "5892fe5fcadd52caabfbafa928b7e2692e477c8828a358b7c2ecfffd609611db",
+      "reviewed": true,
+      "fields": {
+        "question": "Why treat MuChaToR as conversational music recommendation instead of just next-track prediction?",
+        "answer": "Current mood, context, and willingness to explore may differ from history. Dialogue can clarify needs, domain pretraining adds music knowledge, and SFT/RL connect interactions. Fluent discussion is not evidence of taste fit; evaluate separately and ground to a valid catalog.",
+        "example": "Illustration: 'Something relaxing for my commute, but not only old songs' requires both mood matching and exploration."
+      }
+    },
+    "qa/recommendation:muchator/comparison": {
+      "source_sha256": "30322694e2c9f623a3fabb76fe632e60a45bceb6ba8b2baaa1be69512daab850",
+      "reviewed": true,
+      "fields": {
+        "question": "How can MuChaToR discovery reward conflict with intent matching?",
+        "answer": "Strict matching may repeat familiar content, while too much discovery promotes irrelevant novelty. Dialogue quality can favor polished explanations too. Multi-objective optimization and KL balance trade-offs; one reward gain does not establish satisfaction. A movie proxy lacks music dialogue feedback.",
+        "example": "Illustration: Experimental music may be novel but poor for a quiet commute; familiar pop may fit without discovery."
+      }
+    },
+    "qa/recommendation:muchator/implementation": {
+      "source_sha256": "339ffc430e488f2c027146bf31c22a04ddf18febb5b319c16cac8bd865aff784",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't local MovieLens results validate MuChaToR music pretraining and dialogue RL?",
+        "answer": "The proxy lacks actual music corpora, dialogue turns, and reward environments. Fixed-candidate NDCG measures only the scoring path that ran. Dialogue training requires actual updates and valid logs. Keep negative proxy results instead of replacing them with paper business outcomes.",
+        "example": "Illustration: Genre features can test an interface without proving the model understands harmony or can clarify playlist needs."
+      }
+    },
+    "qa/recommendation:muser/mechanism": {
+      "source_sha256": "fe00a8e84095f46b149c36ab5621b659257d3f4cf12dd8bc29fb7cbc219c5f76",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compress recent, medium, and distant history at different strides and let candidates choose MuSeR interests?",
+        "answer": "Detailed recent events preserve immediate intent; larger distant strides control cost. Learned queries extract multiple interests, and candidate similarity selects a mixture. Compression determines how much history to read; candidate conditioning determines what to use. Pooling can still lose rare old events.",
+        "example": "Illustration: Summarize long-running photography and retain each recent camping view. A camera and tent activate different interests."
+      }
+    },
+    "qa/recommendation:muser/basics": {
+      "source_sha256": "2d50ede3153c8a2b070c87b3cb57c9a59fca62507e1f4588fad88dfd2905206d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use an orthogonality regularizer for MuSeR's learned interest queries?",
+        "answer": "Several queries may all read the same popular pattern. Penalizing similar interest directions encourages specialization for candidate selection. Geometry does not ensure semantic complementarity and can separate genuinely related interests. Use ablations and task metrics.",
+        "example": "Illustration: Distinct photography and camping queries can help coverage, but random orthogonal vectors are not useful by themselves."
+      }
+    },
+    "qa/recommendation:muser/comparison": {
+      "source_sha256": "aa8a78f9fb289d6652a024e289db32087b62bdef7f1b5cc02f07e1b98d8517ae",
+      "reviewed": true,
+      "fields": {
+        "question": "What conditioning does MuSeR preserve by selecting interests per candidate instead of averaging?",
+        "answer": "A common mean gives every item the same summary. Candidate softmax reads different interests according to similarity, requiring candidate-specific weights rather than wholly shared cache state. Local label fusion is not the full ERNIE/BGE multimodal pipeline.",
+        "example": "Illustration: Cameras emphasize photography and tents emphasize camping; averaging weakens each relevant signal."
+      }
+    },
+    "qa/recommendation:muser/implementation": {
+      "source_sha256": "5a5cd127913757657284eeac7d93ff9ff6edc9742bc409cbae45f38689052df5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why report absolute scores and component results alongside large relative local MuSeR Recall gains?",
+        "answer": "A low baseline makes small absolute changes look large in percentage terms. The hierarchical compression ablation was small, so do not credit it with the joint gain. State user sampling and full-catalog scope; label proxies do not establish original LLM summary gains.",
+        "example": "Illustration: Recall from 1% to about 2.6% looks large relatively, but most targets still miss the top ten."
+      }
+    },
+    "qa/recommendation:music-rationales/mechanism": {
+      "source_sha256": "be1911e4609342ebf150e3b2abda81e002726863123f6bb6e49b4db2370fe6ac",
+      "reviewed": true,
+      "fields": {
+        "question": "Why generate Music Rationales offline and separately test nomination and showing rationales?",
+        "answer": "Offline generation uses full history and expensive reasoning, then normalizes entities and filters rationales for cached serving. Nomination changes candidates; showing reasons can change response to the same candidates. Separate arms identify which path contributed. Fluency does not establish trustworthy reasons.",
+        "example": "Illustration: Show the same unfamiliar jazz artist with or without a reference to the user's piano-trio taste to isolate the reason's effect."
+      }
+    },
+    "qa/recommendation:music-rationales/basics": {
+      "source_sha256": "27c12e7424f2d8e65346ee7d4da7699d5c04576f7097e65c57b73d7dc8c2bd21",
+      "reviewed": true,
+      "fields": {
+        "question": "Why include unplayed artists and personalized reasons in a Music Rationales discovery profile?",
+        "answer": "A reason connects unfamiliar candidates with known interests. Generate nomination and explanation asynchronously, then verify entities and trustworthiness. It supports discovery, not guaranteed taste fit, and must not invent history to persuade.",
+        "example": "Illustration: Explain how an artist relates to piano trios the user plays, but do not claim a prior listen absent from history."
+      }
+    },
+    "qa/recommendation:music-rationales/comparison": {
+      "source_sha256": "e0e725424fe3b455678b2e62ac3332ffbe45cb5cddad600fb62f70aaed70a78e",
+      "reviewed": true,
+      "fields": {
+        "question": "What questions do explanation-only with fixed CF ordering and LLM-first nomination answer?",
+        "answer": "Nomination changes coverage and position and can affect offline hits. Adding explanations to the same list keeps offline Hit identical; only rationale coverage can be checked offline. Actual behavioral response needs a user experiment. Separate arms prevent misattribution.",
+        "example": "Illustration: Adding reasons for the same five artists cannot change static Hit@5 but might change click behavior under real exposure."
+      }
+    },
+    "qa/recommendation:music-rationales/implementation": {
+      "source_sha256": "6afc140ccccf21b193cf1d07a95d517e1ddd068a72cd07a67ec9168ca4cc8639",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain rejection and cache-miss states in Music Rationales?",
+        "answer": "Normalize artists to a real catalog, reject unsupported explanations, and fall back to the original recommender on a cache miss rather than inventing text. Evaluate nominations separately from final fallback lists. A single-seed diagnostic without explanation CTR cannot establish user benefit.",
+        "example": "Illustration: Fall back to CF on a nonexistent artist rather than force a mistaken name match; fallback availability is not LLM nomination success."
+      }
+    },
+    "qa/recommendation:netflix-mediafm/mechanism": {
+      "source_sha256": "0913b45ef8599f026400cf52ffeea5fac09f4a91a86958ad9d59c20e791a1e48",
+      "reviewed": true,
+      "fields": {
+        "question": "Why freeze shared multimodal features across Netflix MediaFM tasks rather than train a separate visual model for each?",
+        "answer": "A reusable feature layer amortizes media understanding. Downstream towers adapt users, queries, and assets, with query similarity complementing personalization in search. Sharing reduces duplicate encoding but cannot recover visual details absent from frozen features. Offline screening does not replace online validation.",
+        "example": "Illustration: Reuse a poster vector for home artwork and search; emphasize query match for 'seaside comedy' and long-term taste on home."
+      }
+    },
+    "qa/recommendation:netflix-mediafm/basics": {
+      "source_sha256": "8e07226a486079d18b1592d66ebd9540d03d2e5cd755f980759b747313ffe385",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does MediaFM provide shared media features rather than final recommendation probabilities?",
+        "answer": "Multimodal features describe content, while downstream towers adapt them to users, queries, and task objectives. Freezing avoids duplicate computation but limits missing details. Verify feature reuse separately from business outcomes.",
+        "example": "Illustration: The same poster vector supports home artwork and search, but high similarity does not make it optimal in every context."
+      }
+    }
+  }
+}

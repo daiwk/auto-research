@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:oda/implementation": {
+      "source_sha256": "890fb434f7e1bcdae32107c73b7fc8de4621891770af10095f3b3b059131b862",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must ODA decide before computing global attention?",
+        "answer": "Computing global attention first already pays the cost. The gate must control conditional execution. A local A100 receipt verifies the path, not end-to-end vLLM throughput.",
+        "example": "Reading the whole book before choosing the contents page saves no reading."
+      }
+    },
+    "qa/foundation-models:olmpool-long-context/mechanism": {
+      "source_sha256": "27decc42345b6fb3e32ccb42c1d166947b389f5835e7b01835f63569c98e9cc7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't matching parameter count sufficient for comparing long-context methods?",
+        "answer": "Normalization, GQA, pretraining windows, and sliding attention can all change long-context behavior. A controlled model pool isolates them; one model's success does not generalize a positional or attention modification.",
+        "example": "A longer-pretrained model beating a shorter-trained model does not isolate the extension method."
+      }
+    },
+    "qa/foundation-models:olmpool-long-context/basics": {
+      "source_sha256": "c26a131ba54eb366d8237265b9828106eec9853ce6777a12a71df9f0dc380851",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use a controlled OLMpool model pool?",
+        "answer": "Real models often differ in normalization, GQA, training length, and sliding windows simultaneously. The pool isolates these choices and their combinations for long-context extension.",
+        "example": "If architecture and training length both change, do not attribute the result to one toggle."
+      }
+    },
+    "qa/foundation-models:olmpool-long-context/comparison": {
+      "source_sha256": "7320c015567f358c502e8003e4e654ca10c87966108b2f5cfb33c664c09b50e6",
+      "reviewed": true,
+      "fields": {
+        "question": "How does changing normalization within the pool differ from comparing released models?",
+        "answer": "Released models can also differ in data, scale, and schedule. Controlled changes improve attribution, and interactions mean single-factor effects need not add.",
+        "example": "Swap normalization alone, then test whether the direction persists with GQA."
+      }
+    },
+    "qa/foundation-models:olmpool-long-context/implementation": {
+      "source_sha256": "58ce334e5668b03c6efcc0225f08b3f95db25605acf85b2ad9263ab753c69e75",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a passing local mini-suite establish the 7B pool's conclusions?",
+        "answer": "No. It verifies core data flow, not paper-scale checkpoints or full benchmarks. Causal attribution needs controlled training, matched extension protocols, and task evaluation.",
+        "example": "Accuracy on 64 diagnostic examples is not a controlled 7B long-context experiment."
+      }
+    },
+    "qa/foundation-models:openattention/mechanism": {
+      "source_sha256": "8d8866c596b8aaeab921b4b82c91cf6d4d1d9292eafc844d26f997c8ab870e99",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use a count-weighted proxy for unread KV in OpenAttention?",
+        "answer": "Top-k discards all unread softmax mass. Query-relevant geometry groups tokens, with more exact reads where estimated error is high. Residual mean keys/values enter joint normalization with log counts. This preserves approximate mass, not exact attention.",
+        "example": "A mean proxy for 100 similar tail tokens needs count correction or it represents just one entry."
+      }
+    },
+    "qa/foundation-models:openattention/basics": {
+      "source_sha256": "7a5d420358e01a076eb2b75455ace809e6b8f5725b135c0bd82c3e5cb96dd488",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not read only a few important KV entries?",
+        "answer": "A low read rate can leave substantial total mass in the tail. Counted residual-cluster averages supplement exact reads instead of treating the tail as zero.",
+        "example": "Many individually weak tokens can jointly affect the output."
+      }
+    },
+    "qa/foundation-models:openattention/comparison": {
+      "source_sha256": "a959fc1a43f99aee80e0d73cb9c4ff7f56cc90f5e4b8c898a73f21d3c4a16d22",
+      "reviewed": true,
+      "fields": {
+        "question": "What does a residual proxy retain beyond ordinary top-k?",
+        "answer": "The residual mean and count approximate omitted contributions and share softmax with exact tokens. The mean is not exact recovery.",
+        "example": "A proxy for 100 remaining tokens should not participate with single-token mass."
+      }
+    },
+    "qa/foundation-models:openattention/implementation": {
+      "source_sha256": "ad676655aaee8f72e332de2f77857af53a22bbf86583a197f485c82d11be53ed",
+      "reviewed": true,
+      "fields": {
+        "question": "Why recompute cluster residuals after selecting exact tokens?",
+        "answer": "Otherwise exact rows are counted twice. Remove them, recompute means and counts, add log count to logits, and omit empty clusters. Keep documented deterministic boundaries rather than heuristic fixes.",
+        "example": "Selecting three of ten leaves a seven-item proxy."
+      }
+    },
+    "qa/foundation-models:orthros/mechanism": {
+      "source_sha256": "ac82b2b1af4266bc047a861c311619718bf9da47d9a3c17cecc71a2785741b8f",
+      "reviewed": true,
+      "fields": {
+        "question": "How can Orthros decode from all history after local prefill?",
+        "answer": "Base tokens use sliding attention but build full per-layer KV. Output-specific queries read shared full history where predictions are required and do not write KV. Fixed-window prefill compute is linear, not linear-attention state or reduced cache.",
+        "example": "During prefill base tokens read neighbors, while the final output query and future decode positions can retrieve full stored history."
+      }
+    },
+    "qa/foundation-models:orthros/basics": {
+      "source_sha256": "333b8e27bf1f6bbbed46e2575240d94d22c752e3ae862eaa4e794b8a7bc420ed",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate base and output-specific tokens?",
+        "answer": "Most prefill positions build cache rather than emit outputs. Base uses a fixed window and retains full KV; output-specific queries read it when predictions are needed.",
+        "example": "Most prompt positions in a long document need not perform global output reads."
+      }
+    },
+    "qa/foundation-models:orthros/comparison": {
+      "source_sha256": "ad9cf813aa3544596b7d04f0f6e71ca8e3311c1e8f41ee5e7764b710ade6e88a",
+      "reviewed": true,
+      "fields": {
+        "question": "Is Orthros linear prefill kernelized linear attention?",
+        "answer": "No. Fixed-window SWA costs O(Tw). The output stream still performs ordinary causal cross-attention over full KV; it neither compresses into recurrence nor discards old cache.",
+        "example": "KV at the start remains available even if most prompt positions never read it."
+      }
+    },
+    "qa/foundation-models:orthros/implementation": {
+      "source_sha256": "65fadb381f057b191da5887edf57ef657395467e769c043ced805c7aac51c6fe",
+      "reviewed": true,
+      "fields": {
+        "question": "Should Orthros's output stream append its own K/V?",
+        "answer": "No. Same-layer KV comes only from base. Output queries use a shared projection and stream-specific affine transforms. Writing output KV changes the contract and may break cached-versus-batch parity.",
+        "example": "Append one base KV per step, not one per stream."
+      }
+    },
+    "qa/foundation-models:rea/mechanism": {
+      "source_sha256": "d682301a333251991822dbc3a4a24627e78266d05a02f3b8ae73f559e6ae339f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep global instructions in a persistent REA prefix?",
+        "answer": "Relevance ranking should not discard standing constraints. REA separates them from episodic retrieval, which applies role-specific preservation, compression, or omission. Context selection is not lossless reconstruction; policies require verification.",
+        "example": "A standing Chinese-output requirement must not disappear during a movie discussion merely for low keyword similarity."
+      }
+    },
+    "qa/foundation-models:rea/basics": {
+      "source_sha256": "b343465e8e5ae1b1924c15c5b905be6a92576ff9eb4767b02b1712316681b721",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not top-k system instructions with chat history?",
+        "answer": "Global instructions persist across turns. Episodic content is retrieved separately and handled by role.",
+        "example": "A lasting formatting requirement should not be evicted for low similarity to the current query."
+      }
+    },
+    "qa/foundation-models:rea/comparison": {
+      "source_sha256": "80d41384e4cdac4cfda78f6b6e7767cc5d67327d6a6b5a8b29973d99fb8834f5",
+      "reviewed": true,
+      "fields": {
+        "question": "How does role-aware episodic retrieval differ from a recent window?",
+        "answer": "It can retrieve distant relevant interactions instead of using recency alone, and retains persistent instructions independently. Role policies treat content differently; compression may lose information.",
+        "example": "Recover an older preference while dropping recent irrelevant tool logs."
+      }
+    },
+    "qa/foundation-models:rea/implementation": {
+      "source_sha256": "f1b23bb91254eb93551091c68d0017742aa551def6e69835d8e1259ac639865a",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local REA top-k path include real LLM compression?",
+        "answer": "No. It executes role separation and episodic retrieval without a compression LLM. Distinguish selection from generated summaries.",
+        "example": "Choosing three passages does not show an LM compressed them faithfully."
+      }
+    },
+    "qa/foundation-models:rope/mechanism": {
+      "source_sha256": "037f8cdae6053ef3bdf22ba349dfca173b074fefd526cd16a4b98cff101cd479",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do absolute Q/K rotations yield relative position in RoPE dot products?",
+        "answer": "The first rotation's transpose cancels the shared absolute phase, leaving displacement n−m. Q/K subspaces rotate, not values. Evaluability at larger positions does not guarantee trained retrieval extrapolation.",
+        "example": "Moving positions 3 and 8 to 13 and 18 preserves distance 5 and their relative phase."
+      }
+    },
+    "qa/foundation-models:rope/basics": {
+      "source_sha256": "fd8e9ad62d6860dc6526a4f9ee0cb7cad3cc5d51af1a80f9d66f96a89e587a79",
+      "reviewed": true,
+      "fields": {
+        "question": "Why rotate two-dimensional Q/K subspaces?",
+        "answer": "Position determines rotation angle, so dot products depend on relative phase and content without learning one vector per position.",
+        "example": "Identical content at distances 2 and 20 can produce different scores."
+      }
+    },
+    "qa/foundation-models:rope/comparison": {
+      "source_sha256": "a134c81e5eba282827bc52b94dff44c3b916d9fbeb54d47f4eed585db4397efa",
+      "reviewed": true,
+      "fields": {
+        "question": "How does RoPE differ from adding absolute embeddings?",
+        "answer": "Absolute embeddings modify representations additively. RoPE rotates Q/K so the inner product can express a relative rotation. These are different operations.",
+        "example": "Shifting both segments equally preserves RoPE's relative phase."
+      }
+    },
+    "qa/foundation-models:rope/implementation": {
+      "source_sha256": "2ca2e9d78b849374930c9b3de09e81e584a2a4a3a7b70ec012e87538c71f136a",
+      "reviewed": true,
+      "fields": {
+        "question": "Can RoPE rotate only Q or only K?",
+        "answer": "No. Relative displacement requires both R_m and R_n. Pair channels correctly and continue absolute positions through incremental decode.",
+        "example": "A single input token at position 100 still uses rotation 100, not zero."
+      }
+    },
+    "qa/foundation-models:sas-attention/mechanism": {
+      "source_sha256": "992094c8f66c6380cbb137c562d19bcc3d66a5fc8d30f39779c75c20fd0a526e",
+      "reviewed": true,
+      "fields": {
+        "question": "How does SAS train its selector despite nondifferentiable top-k indices?",
+        "answer": "It preserves continuous gates for selected blocks and adds log gates inside attention softmax. LM loss differentiates through gate values, not indices. History gates normalize jointly and the current block stays at one.",
+        "example": "Changing two selected gates from 0.8/0.2 to 0.6/0.4 changes output and gradients without changing indices."
+      }
+    },
+    "qa/foundation-models:sas-attention/basics": {
+      "source_sha256": "ecfaf2282898ef3ac9518e96edf8a42d811f7c70a5b8197c86e5e15ec9ad8a3f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep continuous SAS gates rather than only selected indices?",
+        "answer": "The integer indices choose blocks but do not carry gradients. Gates in attention let prediction loss train selection scores.",
+        "example": "Identical selected blocks with 0.8/0.2 versus 0.5/0.5 produce different outputs and gradients."
+      }
+    },
+    "qa/foundation-models:sas-attention/comparison": {
+      "source_sha256": "7fb50d5ffdcb221f7a66af575d21712c260ca199ffe6add2390e189590db4bb9",
+      "reviewed": true,
+      "fields": {
+        "question": "How does LM-loss selector training differ from distilling dense attention rankings?",
+        "answer": "Token prediction provides task feedback rather than supervising imitation of dense attention. It needs continuous gates; hard top-k remains nondifferentiable.",
+        "example": "A block ranked highly by the dense model need not contribute equally to prediction loss."
+      }
+    },
+    "qa/foundation-models:sas-attention/implementation": {
+      "source_sha256": "7a586267a54795c9add156d13694a936dfdaa6403904e558231140353f4555f6",
+      "reviewed": true,
+      "fields": {
+        "question": "Where does SAS add the log gate?",
+        "answer": "Add log gates for selected history to attention logits before shared softmax. Normalize history gates together and set current block to one. Post-output scaling changes the normalization relationship.",
+        "example": "Current gate one adds zero; history blocks compete with their respective log gates."
+      }
+    }
+  }
+}

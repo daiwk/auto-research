@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/foundation-models/compression-and-cache": {
+      "source_sha256": "37b44e4c38624da6afe6cf0021206c9d72d0048405667179f1dce6c1c38f030d",
+      "reviewed": true,
+      "fields": {
+        "title": "Find the inference bottleneck first: weights, KV content, or cache tiers",
+        "thesis": "AWQ reduces weight bit width; GQA shares KV heads; DropKV and TwinKV change retained content; KVMEM manages executable history views; Remote KV Tiers decides cross-tier loading. They can combine, but one compression ratio cannot explain quality, recoverability, and end-to-end speed. FoldBias makes compressed caches compatible with standard interfaces by folding static bias into equal-width keys, while future query drift still causes error.",
+        "axis_0": "Weights, KV heads, tokens, or paged storage",
+        "axis_1": "Whether information is quantized, evicted, or retrievable externally",
+        "axis_2": "Activation, query, substitution similarity, or bandwidth dependencies",
+        "axis_3": "Separate requirements for memory, bandwidth, and recomputation savings"
+      }
+    },
+    "dive/foundation-models/compression-and-cache/comparison/foundation-models:awq": {
+      "source_sha256": "670ff3fad4f226d66a98ed711b2b15a23a0c60c2890f4b7290ecb22e858b8f70",
+      "reviewed": true,
+      "fields": {
+        "position": "Use calibration activations to identify salient input channels and equivalent rescaling to protect low-bit weight reconstruction.",
+        "tradeoff": "Changes weight storage and matmul interfaces, not history length. Local W4 MSE is not TinyChat end-to-end throughput."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/comparison/foundation-models:gqa": {
+      "source_sha256": "d2ad5604fb64f4a9346e44c96bdc7a52e23225dc4f4000987c77024b677b496a",
+      "reviewed": true,
+      "fields": {
+        "position": "Share fewer KV heads across multiple query heads, lowering per-position KV storage and reads.",
+        "tradeoff": "Structural adaptation is usually needed and token count still grows. Small training from scratch differs from checkpoint uptraining."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/comparison/foundation-models:drop-kv": {
+      "source_sha256": "48161f9a0b8ad038623e6e6100db514aeb2f39f1dbc43717c1f0cbccee013093",
+      "reviewed": true,
+      "fields": {
+        "position": "Score single-entry removal by output perturbation using attention probability and value difference while protecting recent history.",
+        "tradeoff": "Individual scores are not an optimal joint eviction rule. Synthetic QKV and A100 numerical checks do not establish cache-service integration."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/comparison/foundation-models:twinkv": {
+      "source_sha256": "28880046ec62dd2f3f57f696f7c96ab1468305475b7128ca22d4561869e9797f",
+      "reviewed": true,
+      "fields": {
+        "position": "After base eviction, swap redundant donors with irreplaceable orphans at fixed KV count.",
+        "tradeoff": "Depends on key similarity and the base policy; repairs can regress. Preserve the negative local checkpoint reconstruction result, distinct from full generation evaluation."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/comparison/foundation-models:kvmem": {
+      "source_sha256": "5b41efc94187ae061a1fa0832ccc8bcca526445a1954d08e16f726aff7a8f840",
+      "reviewed": true,
+      "fields": {
+        "position": "Keep historical KV in tiered backing storage, retrieve blocks in model attention space, and materialize an execution view within the native window.",
+        "tradeoff": "Not all history attends at once. Local Python retains full backing cache; no asynchronous NVMe system or memory/latency claim."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/comparison/foundation-models:remote-kv-tiers": {
+      "source_sha256": "d4a7b370a2af102f403e06440041a2debec140e44ddfa65150d158a2bcbd055c",
+      "reviewed": true,
+      "fields": {
+        "position": "Compare remote load and recomputation, then use rank sharding and asynchronous loading to address transfer and head-of-line blocking.",
+        "tradeoff": "Hits can be slower depending on fixed overhead and bandwidth. Paper comparisons include layout changes; local distributed experiments were not implemented due to cost."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/comparison/foundation-models:rescom": {
+      "source_sha256": "021748ff471a0347fc4fe8d008cc70de814f1cdb13a20d0b732ac3c6836ed25a",
+      "reviewed": true,
+      "fields": {
+        "position": "Whiten centered residual/output error statistics, use truncated SVD, and restore the intercept.",
+        "tradeoff": "Calibration applies to a fixed host. Quantizer and native low-bit kernels are not implemented."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/comparison/foundation-models:hope-hilbert": {
+      "source_sha256": "d230729091ba8c3b6f39bd2b0bb2bab4c11684f45e9eeac55aea554509f92495",
+      "reviewed": true,
+      "fields": {
+        "position": "Use a biased Gaussian–ReLU kernel and Hilbert proxy to score pruning, with small dense-layer mean compensation and one-step recovery.",
+        "tradeoff": "Assumes a Gaussian activation proxy; no MERGE/EVICT, complete HOPE, or DEFT. Different from Sleep's Hope architecture."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/comparison/foundation-models:fold-bias": {
+      "source_sha256": "00e2d00aeccd53ed46f8491305f6307cc03120921478e77a5d8540d5068ede85",
+      "reviewed": true,
+      "fields": {
+        "position": "Fit a shared direction whose mean query projection is one, fold bias into `K+√dβu`, then least-squares refit V using actually bf16-rounded keys.",
+        "tradeoff": "Does not reduce KV heads, select AM keys, or run NNLS. Not equivalent for arbitrary future queries; the same-value unrounded bound does not directly apply after rounding or replacing values."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/analysis/0": {
+      "source_sha256": "7a9cd4cff425d65791235affae6cdbe0d40dd9481a5d7cd0dc02269e9e2268fa",
+      "reviewed": true,
+      "fields": {
+        "title": "Four kinds of capacity reductions",
+        "body": "AWQ stores the same weights in fewer bytes, GQA lowers KV heads per token, DropKV removes positions, and TwinKV reallocates a fixed position budget. The first two need not reduce history length and the latter two do not compress weights. AWQ can free room without changing long-output KV growth, while eviction may not fix weight-read bottlenecks."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/analysis/1": {
+      "source_sha256": "a7972450ca6ab39cad52c19799b4d81656ef7276e1736e6a3dd8822d980febb7",
+      "reviewed": true,
+      "fields": {
+        "title": "Deletion versus movement changes future access",
+        "body": "DropKV and TwinKV constrain visible history to what is retained. KVMEM separates the large address space from the small execution view; unselected blocks can remain in backing storage. Remote KV Tiers asks whether fixed load overhead plus bytes divided by bandwidth beats recomputation. Hits, retained data, GPU memory, and speed are distinct evidence. Local KVMEM keeps full backing cache and no remote implementation was measured."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/analysis/2": {
+      "source_sha256": "49186d70f51aaec7eceffbb4cb0ddecc5f90f44afd34d79741c5dfa271406262",
+      "reviewed": true,
+      "fields": {
+        "title": "October 29: new methods and scope changes",
+        "body": "ResCom adds a low-rank branch to a fixed quantized host to read activation rounding residuals; calibration and intercept must match that host. HOPE uses Gaussian–ReLU/Hilbert proxies to prune structured neurons and compensate downstream means. These are not universally equivalent pruning/quantization combinations. Local exact small components do not reproduce LLM or ImageNet matrices."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/analysis/3": {
+      "source_sha256": "b2988492c3e30365c10a6d46948aafe03b482129c563faba17e018cacf1b3313",
+      "reviewed": true,
+      "fields": {
+        "title": "Standard cache compatibility does not eliminate compression error",
+        "body": "GQA changes per-token KV storage by sharing heads. FoldBias preserves head width and query paths while folding an existing compression's static logit bias into `β(q·u)`, accurate only when query projection is near one. Refit values after key rounding to match actual kernel inputs. AM key selection, NNLS, and engine integration remain independent; small matrices do not prove throughput or full cache quality."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/question/weights-versus-history": {
+      "source_sha256": "c5ae034c2f114c7b17d54ce486bd24222818c55e9bb2860fccd683108ad41865",
+      "reviewed": true,
+      "fields": {
+        "question": "Which memory growth terms do AWQ and GQA change in long conversations, and why might eviction still be needed?",
+        "answer": "AWQ lowers resident weight bytes. GQA lowers per-token KV bytes but history count still grows. DropKV-like selection can bound history count while risking information loss. Report the three quantities separately.",
+        "example": "Thinner shelves do not reduce the arrival of books; GQA makes books smaller and eviction decides which books stay."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/question/importance-versus-substitution": {
+      "source_sha256": "456e7d8fd4e0cfc4452a00c5a926c7e211c51bf709ddfe6608710b945634d3a9",
+      "reviewed": true,
+      "fields": {
+        "question": "How do DropKV and TwinKV differ when two important KV entries are redundant?",
+        "answer": "DropKV estimates each entry's output impact from observed attention probabilities and values. TwinKV repairs a base set by swapping donors with substitutes for orphans without alternatives. They address individual importance and set coverage and can combine, but require quality and budget checks.",
+        "example": "Two near-duplicate plan entries can be exchanged to recover the only authorization scope if key similarity really implies substitutability."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/question/cache-hit-versus-recompute": {
+      "source_sha256": "ddc47d4e6a45591f31b9cbd222cbc7f803ea234956d93cf7f80238e88f38c8a9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why might Remote KV Tiers recommend recomputation after KVMEM finds a block?",
+        "answer": "An address makes reuse possible, not free. Low bandwidth, small blocks, or queueing can make `T0 + bytes/bandwidth` exceed a new prefill. Execution view limits visibility; the break-even rule decides how to retrieve. Hit rate alone cannot choose.",
+        "example": "A remote hit on a short prefix may lose to local recomputation, while a long prefix amortizes fixed overhead."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/question/oct29-method-boundary": {
+      "source_sha256": "1f1def650247cef0182b16b14f283d81fa9903b802a7bad809c7747454137f87",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't ResCom correction rank be read as the number of HOPE neurons that can be pruned?",
+        "answer": "ResCom budgets low-rank output-error compensation. HOPE costs depend on neuron Hilbert capacity and original parameter footprint. Their parameter locations, states, and calibration assumptions differ.",
+        "example": "Keeping every quantized output plus a rank-two correction is not deleting two neurons and compensating the downstream mean."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/question/fold-bias-compatibility-not-universal-equivalence": {
+      "source_sha256": "9526d3e533d76e6ac9fe896220d72eeeecc290cb9585cab76e898794a4fae4e5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check future query quality when FoldBias preserves head width and works with a standard kernel?",
+        "answer": "Folded bias is `β(q·u)`, not always β. The mean constraint `μ·u=1` only fits the context distribution; future queries can drift. GQA head sharing compresses another object. Verify compatibility, memory, and quality separately.",
+        "example": "With a future projection of 0.6, only about 60% of the original bias remains despite valid tensor shapes."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/update/2026-10-27/0": {
+      "source_sha256": "229a15006cfc9433757ad5b8fc87262925792da807d5e01546b10bbdd2385fd6",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial version: compared low-bit weights, shared KV heads, perturbation eviction, fixed-budget repair, historical execution views, and remote loading across capacity, recoverability, and latency."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/update/2026-10-29/1": {
+      "source_sha256": "7cb5ca2da8bc95e2236d53d2cfec5213528d718b98c4f33b2e62c3330b406e27",
+      "reviewed": true,
+      "fields": {
+        "summary": "ResCom adds low-rank activation-rounding residual correction to a fixed quantized host, with host-matched calibration and intercept. HOPE assesses structured neuron pruning with Gaussian–ReLU/Hilbert proxies and compensates downstream means. Their small exact local components do not guarantee equivalent combined compression or cover LLM/ImageNet capability matrices."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/update/2026-10-30/2": {
+      "source_sha256": "0aaccd493b848b6f4a97deefade22e646db3df1f178df5e83e649445ca2d88b6",
+      "reviewed": true,
+      "fields": {
+        "summary": "Reviewed FoldBias's constrained direction, rank-one key displacement, bf16 before value refitting, and same-value bound. Distinguished interface compatibility from structural GQA compression and retained future query drift caveats."
+      }
+    }
+  }
+}

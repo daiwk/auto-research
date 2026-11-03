@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/post-training/reward-and-credit": {
+      "source_sha256": "d4e7cd820f6438c8786bc816546f1efdc159d53affb680a22caab779eedba25f",
+      "reviewed": true,
+      "fields": {
+        "title": "Reward provenance determines where credit belongs",
+        "thesis": "Process labels, final outcomes, self-confidence, and hindsight attribution are distinct evidence. Stepwise PRMs, MRTPO, TACO, and MART-GRPO obtain labels, localize reward, damp positive credit, and filter failed suffixes respectively. INTUITOR uses an intrinsic distributional signal, not external verification. CONCUR instead prioritizes reward dimensions by projecting gated auxiliary advantages onto a primary-reward order cone; it does not assign token credit over time.",
+        "axis_0": "Evidence: human step labels, successful continuation rate, verifiers, and intrinsic distributions",
+        "axis_1": "Credit granularity: steps, tokens, reward dimensions, and action chunks",
+        "axis_2": "Changes: add supervision, redistribute, downweight, or mask",
+        "axis_3": "Visibility: generation-time information versus hindsight"
+      }
+    },
+    "dive/post-training/reward-and-credit/comparison/post-training:process-supervision": {
+      "source_sha256": "c38b316ab798b270127999a8148db4104ef3374773be0ed0fdfad4220adbb7ba",
+      "reviewed": true,
+      "fields": {
+        "position": "Trains a stepwise process reward model and prioritizes labeling uncertain steps.",
+        "tradeoff": "Depends on annotated step coverage. Local candidate diagnostics do not reproduce the original large-scale process evaluation."
+      }
+    },
+    "dive/post-training/reward-and-credit/comparison/post-training:math-shepherd": {
+      "source_sha256": "0964230d4d525ef2f9b51bca2b857f5ca57bedd153ef92b7409d1f8bb5b0195d",
+      "reviewed": true,
+      "fields": {
+        "position": "Samples continuations from an intermediate step and uses final correctness frequency as its automatic label.",
+        "tradeoff": "Reduces human annotation but depends on the continuation policy and sample budget. Original scale was not reproduced."
+      }
+    },
+    "dive/post-training/reward-and-credit/comparison/post-training:mrtpo": {
+      "source_sha256": "6f86b4a11953e1fd7891939d011d09868062e4d797260b513fe561bbfd5cbc66",
+      "reviewed": true,
+      "fields": {
+        "position": "Replays one fixed sampling policy with full verifier context and leave-one-block-out context, using full-vocabulary JSD to locate tokens relevant to each reward.",
+        "tradeoff": "Preserves total credit but depends on information blocks. Full SQL/tool experiments were too costly and not reproduced; current results are an L1 gradient diagnostic."
+      }
+    },
+    "dive/post-training/reward-and-credit/comparison/post-training:taco": {
+      "source_sha256": "8fd7a021cd8c41322ac5460292f899ea83af5461b87cd46ec131190a57e2cdf3",
+      "reviewed": true,
+      "fields": {
+        "position": "Reduces only positive advantages for high local tail-risk tokens while retaining negative advantages.",
+        "tradeoff": "Avoids reinforcing local errors from a successful trajectory. The local surprisal proxy does not reproduce the contextual risk predictor."
+      }
+    },
+    "dive/post-training/reward-and-credit/comparison/post-training:mart-grpo": {
+      "source_sha256": "dd5f266ea5a5590fba902cf12b352f23b53592b074d1d67bf6ec6a30f0a83e3c",
+      "reviewed": true,
+      "fields": {
+        "position": "Uses a hindsight VLM to locate the last unrecovered error and masks later credit while retaining group advantages and the original denominator.",
+        "tradeoff": "Hindsight boundaries need not satisfy ideal stopping-time assumptions. Full robot/VLM training was too costly; A100 evidence verifies only the L1 component."
+      }
+    },
+    "dive/post-training/reward-and-credit/comparison/post-training:intuitor": {
+      "source_sha256": "2b051eb2268ce508bd07464a6a932ffe0fde3111810b9dbd4ebf916fd16ce694",
+      "reviewed": true,
+      "fields": {
+        "position": "Uses length-averaged per-token full-vocabulary KL(U∥policy) as intrinsic self-certainty reward.",
+        "tradeoff": "No external verifier is needed, but confidence does not imply correctness. The local candidate diagnostic uses the opposite KL direction and does not implement the defining reward."
+      }
+    },
+    "dive/post-training/reward-and-credit/comparison/post-training:concur": {
+      "source_sha256": "c1afc6869053c407be5d17bcc876f9ad4d4205fe9f6027e0e2efd9d433bb9288",
+      "reviewed": true,
+      "fields": {
+        "position": "Standardizes within groups, projects gated auxiliary scores onto the closest order-preserving solution, handles ceiling constraints according to T/A strategies, and whitens across the batch.",
+        "tradeoff": "Ties below the primary ceiling need not be equal and projected scores are not re-standardized. Ungated dimensions can still reverse rankings. Full 32-GPU training was not reproduced; local work is an advantage estimator."
+      }
+    },
+    "dive/post-training/reward-and-credit/analysis/0": {
+      "source_sha256": "0a5249f62d81dc0228b688d05dd4997c8798e29572be94c58ab36d22cf5ba046",
+      "reviewed": true,
+      "fields": {
+        "title": "Automatic process labels are not unconditional step truth",
+        "body": "Human supervision asks whether a particular step is valid. Math-Shepherd estimates whether sampling from it eventually yields a correct answer, reflecting the continuation policy's ability to recover and finish. INTUITOR reads only model distributions, without final-answer correctness. Distinguish label meaning before comparing cost."
+      }
+    },
+    "dive/post-training/reward-and-credit/analysis/1": {
+      "source_sha256": "95aa2f5156c5d46e9abb458d8137bada240d3db7032435e31bfb10221b42b07d",
+      "reviewed": true,
+      "fields": {
+        "title": "Credit filters act on different quantities and preserve different invariants",
+        "body": "TACO attenuates positive advantages only. MART-GRPO masks failed-episode credit after a hindsight error boundary without changing the denominator. MRTPO redistributes signed credit across verifier information blocks with total and magnitude constraints. Deleting suspicious tokens and re-averaging cannot reproduce them all."
+      }
+    },
+    "dive/post-training/reward-and-credit/analysis/2": {
+      "source_sha256": "53fedfaa7bff1856ac64a44e2dbf5b2cb23bb51b975c4f03b52fbd7f1cf7ac59",
+      "reviewed": true,
+      "fields": {
+        "title": "Reward priorities and token credit use different axes",
+        "body": "TACO lowers positive credit within one response by local risk and preserves negative credit. CONCUR compares primary and auxiliary rewards across responses to the same prompt, adjusting standardized auxiliary order and ceiling differences. It does not identify a faulty token. A scalar loses both the nearest projection and sign separation. A ceiling tie removes that auxiliary's ordering for the group, not gradient training entirely."
+      }
+    },
+    "dive/post-training/reward-and-credit/question/step-truth-versus-continuation": {
+      "source_sha256": "2578f4c4d247e5efbdf233179e5ca8670ebe96a9298c79f4b8b779bf87c50c9d",
+      "reviewed": true,
+      "fields": {
+        "question": "Is a low Math-Shepherd continuation success rate equivalent to a human PRM finding a logically wrong step?",
+        "answer": "No. Subsequent sampling and budget affect the rate; correct steps can lead to difficult continuations. A human label evaluates the step itself. Both can help, but automatic labels are not logical ground truth. Keep training answers out of evaluated model inputs.",
+        "example": "Teaching example: A correct equation followed by arithmetic the model cannot finish can yield zero successful continuations without invalidating the equation."
+      }
+    },
+    "dive/post-training/reward-and-credit/question/filter-denominator": {
+      "source_sha256": "5b95332887b41f67eba7c9b39717b3bbd201fbb0baf5b9d40d989af25150cbd6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not implement TACO and MART-GRPO by deleting tokens and averaging again?",
+        "answer": "TACO preserves negative credit and damps risky positive credit. MART-GRPO zeros a failed suffix but keeps the original valid-action-token denominator. Re-averaging amplifies remaining terms and changes the objective. MRTPO separately preserves total credit through redistribution.",
+        "example": "Teaching example: After masking the last four of ten tokens, dividing by six instead of ten makes remaining negative terms stronger than MART defines."
+      }
+    },
+    "dive/post-training/reward-and-credit/question/confidence-is-not-verification": {
+      "source_sha256": "32e89f1eac2e89b3b03f6ce62b0d1b0f6a00eed2c12d3518cf500dc4e6feaffd",
+      "reviewed": true,
+      "fields": {
+        "question": "Is a sharper INTUITOR distribution the same reward improvement as more correct Math-Shepherd continuations?",
+        "answer": "No. INTUITOR uses full-vocabulary KL(U∥policy); Math-Shepherd measures final correctness. Models can be confidently wrong, and reversing KL changes the quantity. The local candidate diagnostic lacks the original direction and per-token full-vocabulary calculation, so do not rank capabilities with it.",
+        "example": "Teaching example: A model can always select one wrong number sharply while its verified continuation success remains zero."
+      }
+    },
+    "dive/post-training/reward-and-credit/question/concur-reward-axis-not-token-filter": {
+      "source_sha256": "03fc0c44ed33a70cd350bba24987d205f2d729593ef4c1dacf7cf25c1bc25251",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't CONCUR simply reuse TACO risk weights or reduce the length reward coefficient?",
+        "answer": "TACO dampens positive token credit to avoid reinforcing local errors. CONCUR ensures a higher primary-reward response does not receive a lower gated auxiliary score and can merge ceiling scores. Scaling leaves existing inversions intact and does not give a nearest order-preserving projection.",
+        "example": "Illustration: Correctness scores 0.6 and 0.9 may have standardized length scores 1 and −1. Multiplying both length scores by 0.1 keeps the inversion, and token risk cannot order the two responses by correctness."
+      }
+    },
+    "dive/post-training/reward-and-credit/update/2026-10-27/0": {
+      "source_sha256": "0edb6b4a99f64eb057fab98dbc3651ba79a989e254151cf1d7213d7d57b2de71",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial edition: compares human and automatic process labels, MRTPO reward localization, TACO positive credit, MART suffix masking, and INTUITOR intrinsic rewards; 36 abstracts and six close reads."
+      }
+    },
+    "dive/post-training/reward-and-credit/update/2026-10-30/1": {
+      "source_sha256": "4dcc0ff6331dd7c82bef74dd886cbec1d0278646dac3bb9003827367e333c1d1",
+      "reviewed": true,
+      "fields": {
+        "summary": "Reviewed CONCUR auxiliary-advantage projection, ceiling ties, and batch-level trust updates separately from TACO positive token credit. Evidence covers an L1 estimator, not 32-GPU training."
+      }
+    }
+  }
+}

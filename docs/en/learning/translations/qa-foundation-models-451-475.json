@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:twinkv/comparison": {
+      "source_sha256": "17ca834b092aed29cc5744cbb02a1578b1dbc7a68f89eb0f75800a3be51403e6",
+      "reviewed": true,
+      "fields": {
+        "question": "How does TwinKV compose with StreamingLLM or H2O?",
+        "answer": "It repairs a wrapped policy's result rather than replacing its score. Compare the same initial policy and KV budget with repair on or off.",
+        "example": "StreamingLLM and StreamingLLM+TwinKV retain equal counts, isolating swaps."
+      }
+    },
+    "qa/foundation-models:twinkv/implementation": {
+      "source_sha256": "bc7e75f0b9c2db462422314068fdf0d40381a1a3de9b517dbbeb12a4d3ea2d68",
+      "reviewed": true,
+      "fields": {
+        "question": "Why exclude local twins and sink/recent protected entries from donors?",
+        "answer": "Find similar retained twins outside the local window and never sacrifice protected entries. Swap only min(orphans, donors) and preserve |R′|=|R|.",
+        "example": "Nearby similar keys do not automatically qualify as distant redundancy."
+      }
+    },
+    "qa/foundation-models:vfold/mechanism": {
+      "source_sha256": "a77893d65bf1b37ae548730cfec5eee497e04bd4d68949289f08ec7297ed471d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why align adjacent Value coordinates before sharing, and why use full V for the current token?",
+        "answer": "CCA and head matching align spaces and fold transforms into V/output weights. Compute full attention for the current token before cross-layer sharing, while keys and protected ends remain independent. Invertible alignment does not make subsequent averaging lossless.",
+        "example": "Direct averaging can cancel equivalent features in different coordinates; aligned averaging is still approximate."
+      }
+    },
+    "qa/foundation-models:vfold/basics": {
+      "source_sha256": "c8b1c27b619e9e2667cd444f97d41143c12de248d2ff28a1a2da012f6fea9db7",
+      "reviewed": true,
+      "fields": {
+        "question": "What is shared between key and value caches in VFold?",
+        "answer": "Keys match historical positions; values supply content. Only aligned adjacent-layer values are merged; keys and protected first/last tokens remain separate.",
+        "example": "Two layers can share processed content while retaining independent keys."
+      }
+    },
+    "qa/foundation-models:vfold/comparison": {
+      "source_sha256": "1c01dffd98ecf6cbd42a6f6699e1a62878015cc25a3663e598c408bd414fd436",
+      "reviewed": true,
+      "fields": {
+        "question": "How would sharing keys as well as values change VFold?",
+        "answer": "It would change position matching, not just retrieved content. The documented method keeps keys separate and shares aligned values only.",
+        "example": "Layer weights over positions can differ even when some values are shared."
+      }
+    },
+    "qa/foundation-models:vfold/implementation": {
+      "source_sha256": "b88d95296a55d79fa006f700760e62accb7d58762f4d57086fce49a773679964",
+      "reviewed": true,
+      "fields": {
+        "question": "Why fold inverse transforms into every relevant GQA query output slice?",
+        "answer": "Several query heads share each physical KV head. Apply inverse transforms across all matching output slices. Current token uses full V first, and protected ends add overhead for short sequences.",
+        "example": "Correcting only one of two query groups leaves the other in mismatched coordinates."
+      }
+    },
+    "qa/foundation-models:aspire/mechanism": {
+      "source_sha256": "bab61813b06db6d85987c399231b7c6661b3caebb88ec4289b39fc2551610df4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why let ASPIRE choose draft lengths independently within a batch?",
+        "answer": "Requests differ in acceptance and remaining state. One length can waste checks or lose gains. Use batch costs and periodic full-attention refresh for self-speculation. Local tests do not modify a full engine.",
+        "example": "Give different lengths to frequently accepted and first-token-rejected requests, while accounting for shared batch cost."
+      }
+    },
+    "qa/foundation-models:aspire/basics": {
+      "source_sha256": "b291c7876d40a6486867badb3f1ebe404b76b771bd9cd410ab8386ac934e1a6f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why choose drafts per request?",
+        "answer": "Online acceptance and remaining conditions vary. Use current batch cost and per-request statistics, with periodic refresh for state correction.",
+        "example": "A frequent long-draft accepter need not match a frequent rejecter's length."
+      }
+    },
+    "qa/foundation-models:aspire/comparison": {
+      "source_sha256": "11ed25c7718edcdcb2267411e8f65de1af3bb3c6176e4f77d3771a92e11bf817",
+      "reviewed": true,
+      "fields": {
+        "question": "Is per-request choice the same as ignoring batch and acting greedily?",
+        "answer": "No. Decisions still use shared batch costs; ignoring resource and synchronization effects changes the scheduler.",
+        "example": "Longer drafts can benefit one request but increase group verification cost."
+      }
+    },
+    "qa/foundation-models:aspire/implementation": {
+      "source_sha256": "9409bc9b9ab6755f4dfb0dc06fa80de7e3503c5c1192a057ca7b8aafe3f0a85a",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local ASPIRE scheduler and refresh gate constitute a vLLM integration?",
+        "answer": "No. Verify real scheduling, cache handoff, refresh execution, and time separately. A reference schedule is not deployment throughput.",
+        "example": "A log showing draft length eight does not prove asynchronous service execution or correct KV transfer."
+      }
+    },
+    "qa/foundation-models:data-space-iteration/mechanism": {
+      "source_sha256": "10528db59f2e806eeee8dcf6f7f1a98a51dfdcc2f12132a1dbe91515cde78a28",
+      "reviewed": true,
+      "fields": {
+        "question": "Why refine with the same noise rather than interpreting iteration index as flow time?",
+        "answer": "The shared generator repeatedly improves one data-space prediction from fixed original noise. DMD uses frozen real teacher and fake distribution model. Earlier refinements are detached and only the current one trains; it is not real-image regression. Local tiny runs do not replace paper metrics.",
+        "example": "Refine outline then detail from the same noise; changing noise or time semantics changes the mechanism."
+      }
+    },
+    "qa/foundation-models:data-space-iteration/basics": {
+      "source_sha256": "802ddd82d7d005b448d7b171c4c28f45a1c988cfb1278180bf1c785a2acc5dc7",
+      "reviewed": true,
+      "fields": {
+        "question": "What changes across Data-Space Iteration refinements?",
+        "answer": "A shared network updates data predictions from fixed noise. Iteration counts refinement, not the separate DMD noising time τ.",
+        "example": "Refinement three is another prediction update, not diffusion time three."
+      }
+    },
+    "qa/foundation-models:data-space-iteration/comparison": {
+      "source_sha256": "87ec05dbae08b7f79a1560e403cc49c6a902d94922214ac699cc10be4b5f142f",
+      "reviewed": true,
+      "fields": {
+        "question": "Is direct real-image regression equivalent to DMD?",
+        "answer": "No. DMD uses a frozen real teacher and a fake model fitted to generated data to supply a distribution-matching direction. Per-step paired image regression replaces it.",
+        "example": "A teacher-minus-fake direction on a generated sample is not assigning a fixed real image to noise."
+      }
+    },
+    "qa/foundation-models:data-space-iteration/implementation": {
+      "source_sha256": "19d3a9b6cd1c43ae570e01b70c808cdfbf86d7ba13de872e7a5124e926b67d3e",
+      "reviewed": true,
+      "fields": {
+        "question": "How isolate prefix, fake model, and generator gradients?",
+        "answer": "Roll out prefix without a graph and train the final refinement. Train fake on detached samples; freeze teacher/fake gradients during generator updates and detach the direction.",
+        "example": "Updating step four does not backpropagate through the first three steps or teacher."
+      }
+    },
+    "qa/foundation-models:dblast/mechanism": {
+      "source_sha256": "432ccd439e6232759fbf5c38fc2c06810fdb25889861bcc10f04fb1f68e3ce0f",
+      "reviewed": true,
+      "fields": {
+        "question": "How does DBLast's shared latent address independent parallel draft positions?",
+        "answer": "Given one latent, positions can sample in parallel; marginalizing it yields dependence across positions. Optimize expected verification length, not isolated hits. Target verification still matters and local mechanism is not service speed.",
+        "example": "One latent can coordinate singular/plural choices instead of independently picking inconsistent words."
+      }
+    },
+    "qa/foundation-models:dblast/basics": {
+      "source_sha256": "7f90558becd42fbaf1587c2c10c143a47f92aa0a3a344b1552412b34a68f2ea1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can individually likely draft positions form a poor block?",
+        "answer": "Independent proposals ignore joint dependencies. DBLast conditions on a shared latent, inducing correlation without abandoning parallelism.",
+        "example": "Common colors and objects can still combine incoherently if chosen independently."
+      }
+    },
+    "qa/foundation-models:dblast/comparison": {
+      "source_sha256": "e2c086fb6ec8975d285caaa7d6a3ccca9303b075d7ddbb13c7a87f6965da558b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a latent mixture differ from independent unigram proposals?",
+        "answer": "Independent proposals multiply marginals. DBLast multiplies conditional probabilities under the same z and integrates z, so identical marginals can have different joints.",
+        "example": "Both positions can be half A/B, with only AA and BB or with all four pairs."
+      }
+    },
+    "qa/foundation-models:dblast/implementation": {
+      "source_sha256": "a6307187027d4b88cb217c2e3c3c1ee2b238800c54a0dee6978b2a23f88276b0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check exact speculative acceptance instead of position hit rate?",
+        "answer": "Benefit depends on accepted contiguous prefix and joint quality. Isolated correct positions need not pass as a block. Local Markov target and rank-four proposal are mechanism tests, not real throughput.",
+        "example": "Correct first and third tokens do not help the third if the second is rejected."
+      }
+    },
+    "qa/foundation-models:doublecat-semicat/mechanism": {
+      "source_sha256": "3beefe13328ce53e55fe1c84b0435e6e239ca31cb980a03551fbabebda500ccd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are DoubleCat two-level interpolation and SemiCat permanent reveal distinct?",
+        "answer": "Interpolation shifts training toward interior simplex states to reduce endpoint mismatch. Permanent reveal leaves chosen tokens clean and fixed, supervises unrevealed positions, and adjusts hazard to remaining time. Neither adds default self-conditioning.",
+        "example": "Keeping a confirmed subject clean differs from training on interior probability patterns."
+      }
+    },
+    "qa/foundation-models:doublecat-semicat/basics": {
+      "source_sha256": "6be654029be250edfcffc7674f2bdae921040f89fe6a146e62731347abd34960",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reveal some tokens as clean one-hot vectors early?",
+        "answer": "High-dimensional Gaussian noise can swamp a norm-one signal. Revealed anchors remain fixed, while loss covers unrevealed positions.",
+        "example": "Confirmed words stay clean as other positions denoise."
+      }
+    },
+    "qa/foundation-models:doublecat-semicat/comparison": {
+      "source_sha256": "6bbda994f95f42d5aad6625b25658f7adb4f385d973ff73b61d08a6938a2d0f8",
+      "reviewed": true,
+      "fields": {
+        "question": "Does two-level interpolation require an extra denoiser call for self-conditioning?",
+        "answer": "No. Interpolation constructs inputs without another denoiser. SemiCat also needs no default extra call. Optional bootstrap self-conditioning is a separately costed ablation.",
+        "example": "Do not hide a second forward under a nominal one-call training budget."
+      }
+    },
+    "qa/foundation-models:doublecat-semicat/implementation": {
+      "source_sha256": "56e71ec431ad44568293b41ba2f192071d0244a9e2f184aed01ac85ccda1a9db",
+      "reviewed": true,
+      "fields": {
+        "question": "How test final hazard one together with permanent carryover?",
+        "answer": "At the last step reveal all remaining positions. Preserve already revealed inputs and outputs at every step. Use untempered probabilities for continuous Euler and temperature only for categorical commits.",
+        "example": "A token revealed at step two cannot change at step three."
+      }
+    },
+    "qa/foundation-models:dqwen35/mechanism": {
+      "source_sha256": "aa86a64212e576e8d257ca2ec8cdc0872080b5587a350073809cb64e68bac1d3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does bidirectional dQwen3.5 need more than removing an attention mask?",
+        "answer": "The hybrid backbone also has recurrence. Both state propagation and attention must support bidirectional context for masked denoising. Running a propagation kernel does not establish a fully adapted checkpoint or loss curve.",
+        "example": "A sentence-start blank can need the end; changing only attention leaves recurrence one-way."
+      }
+    },
+    "qa/foundation-models:dqwen35/basics": {
+      "source_sha256": "a5931f4b087d7e2e816b23f99df8f8bbf03a615ec398c3f329f2f91e52aa381a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why convert a hybrid backbone into a bidirectional diffusion LM?",
+        "answer": "Masked denoising uses visible context on both sides rather than causal next-token prediction. Attention and recurrent paths, and the objective, all change.",
+        "example": "A masked middle word can use left and right words."
+      }
+    },
+    "qa/foundation-models:dqwen35/comparison": {
+      "source_sha256": "82706195c234f3fe737f9cb37478c4802eb0dc18aae93825ad5ea31bc7027fb8",
+      "reviewed": true,
+      "fields": {
+        "question": "How does masked bidirectional visibility differ from autoregressive training?",
+        "answer": "AR is prefix-causal; denoising can use visible left and right context. Adapt the hybrid state path and do not assume causal cache equivalence.",
+        "example": "A known word after a blank is legal evidence for denoising but not next-token AR."
+      }
+    }
+  }
+}

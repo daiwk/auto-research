@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:calibration-aware-rl/basics": {
+      "source_sha256": "14566534fc1e29bb43826ea4f888fa7f08da1e0f679cad63fc16976f13350ae1",
+      "reviewed": true,
+      "fields": {
+        "question": "Does calibration-aware RL score the entire explanation through its decision token?",
+        "answer": "No. It studies final-decision probability and calibration, not factual fidelity of all reasoning. Correct choices and credible probabilities require separate measurement.",
+        "example": "High probability for A doesn't make every preceding explanation step correct."
+      }
+    },
+    "qa/post-training:calibration-aware-rl/comparison": {
+      "source_sha256": "8b9905355104bca921189b46c85e1cf2090925610a14217d7f9f36cc35d62648",
+      "reviewed": true,
+      "fields": {
+        "question": "How does local temperature calibration differ from full RLVR training?",
+        "answer": "Temperature rescales existing logits; full training changes the decision model. Shared calibration goals do not make postprocessing a full reproduction.",
+        "example": "A frozen model with tuned T uses no resampled trajectories or policy gradient."
+      }
+    },
+    "qa/post-training:calibration-aware-rl/implementation": {
+      "source_sha256": "452d9509d22c6afc84b07bccb6e8c5a39646f283b927f0603b56914fade27ee9",
+      "reviewed": true,
+      "fields": {
+        "question": "May calibration T be selected on test NLL?",
+        "answer": "No. Fit validation NLL, freeze, then report test accuracy and calibration. Choosing on test biases final evaluation. Local coverage is calibration and split isolation.",
+        "example": "Trying all temperatures on test and reporting the best overstates generalization."
+      }
+    },
+    "qa/post-training:calibration-aware-rl/mechanism": {
+      "source_sha256": "7133a134c321bd1438767aa2754820234ebf17d29f0efaff84976a7d32a2f69d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why constrain decision probability if accuracy improves while ECE worsens?",
+        "answer": "Correctness only needs the top class right; calibration requires confidence to match actual hit frequency. RLVR can make correct choices overconfident. Measure separately, choose T on validation and reserve test. Post-hoc calibration is not full RL reproduction.",
+        "example": "Two models with identical labels can assign near-certainty or moderate confidence and differ in probability quality."
+      }
+    },
+    "qa/post-training:online-icepop/basics": {
+      "source_sha256": "a46fe5ad7533c62fac9047c5850f75dd03b2f3c0069b3ab67c8b5e7240e7c5f5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why consume each Online IcePop rollout batch once?",
+        "answer": "One update avoids extra staleness from reuse, making initial policy ratio one. Train/inference numerical correction remains.",
+        "example": "Discard the fresh batch after its update instead of optimizing against it again."
+      }
+    },
+    "qa/post-training:online-icepop/comparison": {
+      "source_sha256": "5a50fdaabf0d80f92827a8d6c2efcd90d01929c0b981317451c09bef47a2c860",
+      "reviewed": true,
+      "fields": {
+        "question": "Which correction does Online IcePop remove?",
+        "answer": "Remove reuse-induced stale-policy ratio and PPO clip, not the two-sided engine mask or original in-range ratio. Repeated updates invalidate the online simplification.",
+        "example": "Scheduling must enforce one use; deleting a line doesn't make training online."
+      }
+    },
+    "qa/post-training:online-icepop/implementation": {
+      "source_sha256": "bd3f5af70a0e5ab84e223b2666ce99aecda8d7816c1c329cf75f2354512a2587",
+      "reviewed": true,
+      "fields": {
+        "question": "How verify Online IcePop never silently reuses a batch?",
+        "answer": "Track unique batch IDs and consumption; reject a second update. A local candidate group is only a scheduling proxy, not distributed rollout infrastructure.",
+        "example": "Retried delivery of the same batch is not fresh data."
+      }
+    },
+    "qa/post-training:online-icepop/mechanism": {
+      "source_sha256": "fcda52a6c7f2abcd7e2e85c193418606972a127f04602b078db128e0ad4e4ded",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain engine correction when Online IcePop updates only once?",
+        "answer": "Fresh one-use rollouts eliminate reuse staleness, so policy ratio at sampling is one and PPO clipping unnecessary. Equal weights can still produce different probabilities in training vs inference; IcePop keeps its two-sided mask and in-range ratio.",
+        "example": "A fresh answer can come from a lower-precision engine; freshness is not engine equality."
+      }
+    },
+    "qa/post-training:minirl/basics": {
+      "source_sha256": "5a39a8390b0470e44f7619546c873cdc1145492f0b2a4dba714f723b7812424a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why model both train/inference mismatch and staleness in miniRL?",
+        "answer": "Equal weights may score differently across engines; old/new weights drift through learning. Separate them for appropriate on/off-policy correction.",
+        "example": "A kernel change and a policy update are distinct causes."
+      }
+    },
+    "qa/post-training:minirl/comparison": {
+      "source_sha256": "16ce76f8bfddf9acf2b3b7878923127be3e28276659d1960ed8ce6dff7af639c",
+      "reviewed": true,
+      "fields": {
+        "question": "What do MoE Routing Replay and ratio clipping address?",
+        "answer": "Replay restores expert execution paths; clipping limits update magnitude from probabilities. Clipping cannot reconstruct old routes.",
+        "example": "Saving which expert executed is different from lowering a large ratio."
+      }
+    },
+    "qa/post-training:minirl/implementation": {
+      "source_sha256": "8c5bc988f14c5f9e0a37a6fa33528b720ced2278660c575e80d9027b7c31a73a",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local miniRL kernel prove distributed MoE stability?",
+        "answer": "No. It checks correction, clipping and routing state semantics. Real replay needs recorded token routes and actual aligned execution, not a label.",
+        "example": "A replay flag doesn't prove forward passes used the recorded experts."
+      }
+    },
+    "qa/post-training:minirl/mechanism": {
+      "source_sha256": "0a6aa13f62e1cc43c3e72d6128aad9783bb3c7dbff663eb03033a61184310c3e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why split engine mismatch and policy staleness, and where does routing replay help?",
+        "answer": "Numerical engine differences and weight drift are distinct. Correct on-policy probabilities, combine off-policy updates with clipping and replay rollout MoE routing to reduce path mismatch. Both probabilities and paths need testing; local kernels aren't a cluster.",
+        "example": "One token may route to different experts even with synchronized weights, which a stale-policy ratio does not fix."
+      }
+    },
+    "qa/post-training:icepop/basics": {
+      "source_sha256": "21e450220e16013f53be305b6965f929e4db1f85b7ddf72af17a86e31cea19c1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does IcePop mask very small train-to-serve ratios?",
+        "answer": "Upper clipping only controls huge weights; tiny ratios may also signal mismatch. A two-sided interval keeps trustworthy ratios without snapping others to boundaries.",
+        "example": "A training probability far below serving can be unreliable even though its weight is small."
+      }
+    },
+    "qa/post-training:icepop/comparison": {
+      "source_sha256": "3e738e6ad8783e0960fcf17b2048686ccbfe51276b28c207b8f9121cc41bf894",
+      "reviewed": true,
+      "fields": {
+        "question": "How do IcePop masking and TIS clipping treat out-of-range samples?",
+        "answer": "IcePop zeroes their gradient; TIS caps high weights but keeps them contributing. IcePop uses original in-range ratios, not ones.",
+        "example": "An oversized ratio can retain capped contribution in TIS but none in IcePop."
+      }
+    },
+    "qa/post-training:icepop/implementation": {
+      "source_sha256": "c9e5b641f6e1919363ed91a1ab9fd31d28f288c45bee0d7e4f9874aa7e1c753b",
+      "reviewed": true,
+      "fields": {
+        "question": "Must IcePop distinguish engine ratio from policy ratio?",
+        "answer": "Yes. Engine ratio measures implementation mismatch; policy ratio measures current vs sampling policy. Mask the specified engine ratio only. No local real MoE/asynchronous system.",
+        "example": "Using model-learning drift as the engine mask could drop normal probability changes."
+      }
+    },
+    "qa/post-training:icepop/mechanism": {
+      "source_sha256": "a2eca2a05ece30490d5eac19c160d3c87bc2f2adced7f2dcc732f953b0c7f358",
+      "reviewed": true,
+      "fields": {
+        "question": "How is zeroing out-of-range IcePop updates different from clipping to a boundary?",
+        "answer": "Clipping preserves boundary-weighted contribution; masking drops the current token gradient. IcePop uses two fixed bounds and original in-range correction. It filters mismatch, not text quality.",
+        "example": "Tiny ratio is unaffected by upper clipping, but two-sided masking excludes it instead of raising it to the lower bound."
+      }
+    },
+    "qa/post-training:gppo/basics": {
+      "source_sha256": "808e0d10eeb7913180af8efec50c0fcd533b97236d121381e9735d489e083c47",
+      "reviewed": true,
+      "fields": {
+        "question": "Which PPO gradients does GPPO recover?",
+        "answer": "Ordinary clipping can stop gradients for positive-advantage high ratios and negative-advantage low ratios. GPPO restores backward signal while keeping the forward value.",
+        "example": "A bad action already made rarer may still need an avoidance gradient."
+      }
+    },
+    "qa/post-training:gppo/comparison": {
+      "source_sha256": "01bbe3ea2c12354e74c293a3eee4eaf8b0690deb5066cb431a456eaa9a0db4da",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can identical forward losses produce different updates?",
+        "answer": "Stop-gradient can change derivatives without changing values. GPPO separates forward and backward, so scalar logs cannot verify it.",
+        "example": "Two functions with equal output can have different derivatives through detach."
+      }
+    },
+    "qa/post-training:gppo/implementation": {
+      "source_sha256": "b517032e1abfd6a658bca5ba115f3688be4c96129ca69796519f9a4c7c2430df",
+      "reviewed": true,
+      "fields": {
+        "question": "Is equality of clipped GPPO/PPO loss values enough to test implementation?",
+        "answer": "No. Verify gradients in out-of-bound advantage quadrants against PPO's zero gradients, and explicit detach boundaries. No paper-scale long-CoT training.",
+        "example": "Positive advantage and a ratio above the upper bound directly test the recovered path."
+      }
+    },
+    "qa/post-training:gppo/mechanism": {
+      "source_sha256": "cfef13f184ae633891f2c2731430aa70d066a82fe967547210c4befd91cab6e3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can GPPO have PPO-like forward values and nonzero clipped-region gradients?",
+        "answer": "Stop-gradient constructions decouple clipping values and derivatives. Boundary weights restore learning in flattened quadrants for positive exploration and negative examples. Inspect gradients, not just loss.",
+        "example": "Two operators can print one clipped score but only one has a boundary-weighted derivative."
+      }
+    },
+    "qa/post-training:tis/basics": {
+      "source_sha256": "b492cc7033a5f220469edfb867346f18728f72b7c86b88f768cbb8c9808b2caa",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use TIS for equal-weight training and inference engines?",
+        "answer": "Precision and kernels can change probabilities, so rollout and training rescoring distributions differ. The ratio corrects implementation mismatch, not task rewards.",
+        "example": "Two compute paths using identical weights can assign slightly different token likelihoods."
+      }
+    },
+    "qa/post-training:tis/comparison": {
+      "source_sha256": "24154009e8b138aaa14e842c011143e13bf420c9b6a7b9590161ed3e83340e65",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does TIS upper-clip instead of two-sided dropping like IcePop?",
+        "answer": "Capping large weights controls heavy tails while retaining small contributions. Two-sided masking drops severe mismatch in either direction. Zeroing small TIS weights changes the method.",
+        "example": "A tiny TIS ratio still contributes a little."
+      }
+    },
+    "qa/post-training:tis/implementation": {
+      "source_sha256": "4b2b70dd397a53148bcdf10b1aa014afe98030fa7954b5457f434e183cf08cd3",
+      "reviewed": true,
+      "fields": {
+        "question": "Which probability is the TIS denominator?",
+        "answer": "Use the actual rollout engine probability below corresponding training probability; a separate policy ratio may follow. Local deterministic perturbations aren't vLLM/FSDP validation.",
+        "example": "Reversing the ratio can upweight an example that should be downweighted."
+      }
+    },
+    "qa/post-training:tis/mechanism": {
+      "source_sha256": "618377131a39cb465dd014dfe2f4c1cc655cf69c887ad1759ed00cc71cfd293a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why upper-clip engine ratios but keep small weights in TIS?",
+        "answer": "Correction targets the training distribution. Huge weights can dominate variance; cap them. Small ratios indicate smaller target contributions, not automatic invalidity. This is not PPO policy ratio or two-sided masking.",
+        "example": "A token common in rollout but rare in training should contribute less without necessarily being removed."
+      }
+    }
+  }
+}

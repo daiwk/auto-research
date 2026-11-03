@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:atomic-intent/basics": {
+      "source_sha256": "fd98c06e39b909c627533e99b04d58a8a9a163d3ff1e2ff597c687c963ddaab3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Atomic Intent break an action into a hierarchy of intents rather than assigning one broad category?",
+        "answer": "A category records what the user viewed; hierarchical intents also attempt to describe purpose and need, so cross-domain behavior can connect through shared intents. Offline extraction preserves fine-grained cacheable units, and the online target item retrieves relevant chains. An inferred intent can be wrong and is not an explicit user statement.",
+        "example": "Camera browsing could reflect a need for light travel gear or studio image quality. A generic photography label loses the distinction between evidence for a lightweight bag and for studio lighting."
+      }
+    },
+    "qa/recommendation:atomic-intent/comparison": {
+      "source_sha256": "4c9e211336668626788feb9572d19356dfa55e2fe30c9d229a7716404b896970",
+      "reviewed": true,
+      "fields": {
+        "question": "How does target-conditioned retrieval in Atomic Intent differ from a static text profile?",
+        "answer": "A static summary compresses needs into one account seen by every candidate. Atomic chains are indexed individually, support incremental updates, and let candidates fetch different evidence. Offline parsing, storage, and retrieval need maintenance; aggregation cannot recover evidence omitted by the index.",
+        "example": "Shoes can retrieve exercise needs while cameras retrieve travel photography needs. A fixed summary that only says the user likes the outdoors loses both specific reasons."
+      }
+    },
+    "qa/recommendation:atomic-intent/implementation": {
+      "source_sha256": "fce22d41f320c0d66dba2295246e99cd40acfa6effe6a33f329b9256ad8ec439",
+      "reviewed": true,
+      "fields": {
+        "question": "Why validate Atomic Intent's intent extraction and online aggregation separately?",
+        "answer": "Log-frequency and time decay weight evidence; they do not replace offline LLM extraction of hierarchical intent. Similarity retrieval and multi-head aggregation should consume cached chains. If the local implementation only has deterministic proxy scores, a runnable formula does not establish that it reproduces the LLM extraction.",
+        "example": "Weighting ten views by age produces a number, not an explanation such as traveling light. Check the cache first, then the online selection to locate the two kinds of error."
+      }
+    },
+    "qa/recommendation:attribution-sets/mechanism": {
+      "source_sha256": "d588d2e86ce6416e6f2de2e7353b728747b2e4de5d2a846f9e6f633f584ddebc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not randomly label one click positive when the conversion attribution is only known as a set?",
+        "answer": "Random pairing invents a precise label, and overlapping sets can affect the same event repeatedly. The method splits binary loss into a label-independent term and a label-dependent moment, estimating risk from set statistics without fabricating individual matches. The printed coefficient for multi-element sets failed a local constant-function check, so the counterexample is retained and the estimator is not fully validated.",
+        "example": "Three impressions may be associated with a purchase and two may also appear in a different attribution set. Choosing one arbitrarily changes the supervision; set statistics also need consistency checks."
+      }
+    },
+    "qa/recommendation:attribution-sets/basics": {
+      "source_sha256": "1b6a15d9865295c6575410cb1a274e2c8383c9639864b337e652e0188273e441",
+      "reviewed": true,
+      "fields": {
+        "question": "What do Attribution Sets reveal and what do they leave unspecified?",
+        "answer": "They constrain which clicks may be linked to a conversion, but provide no unique true match; different sets can overlap. Set statistics can support risk estimation, not a definitive label for each click. Keep that distinction separate from true individual attribution.",
+        "example": "Knowing that a purchase could follow any of three impressions does not justify labeling all three as positives or arbitrarily choosing one."
+      }
+    },
+    "qa/recommendation:attribution-sets/comparison": {
+      "source_sha256": "24b45cdeb00e932bd9c7dd74a6a7ccd4ca1d4b05f5141fb5d924715aea1af34a",
+      "reviewed": true,
+      "fields": {
+        "question": "How do the assumptions of Attribution Sets risk decomposition differ from maximum-prior pseudo-labeling?",
+        "answer": "Pseudo-labeling chooses a hidden match before training as if it had full supervision. Risk decomposition keeps the match unidentifiable and uses population moments and a position prior for the label-dependent term. It avoids claiming individual ground truth, but still requires a valid estimator and inputs. The local counterexample is a limited check of the printed coefficient, not a corrected replacement theory.",
+        "example": "A prior that favors the first impression does not make it the true positive. If the set estimator fails the constant-function check, audit it rather than reporting an unbiased result."
+      }
+    },
+    "qa/recommendation:attribution-sets/implementation": {
+      "source_sha256": "63e4a375e5c4e9250264513c05ad95b4414945643a3e235b99a4cf53aaa69876",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must an Attribution Sets implementation not silently clip singular denominators or renormalize by the window count?",
+        "answer": "The binomial tail probability, selection indicator, and fixed denominator together define the paper's estimator. Changing the denominator changes the statistical object. Fail explicitly at singular boundaries and distinguish known population moments from sample plug-in estimates. Keep the multi-element counterexample visible rather than masking it with a numerical fallback.",
+        "example": "Replacing a zero denominator with a tiny positive number returns a finite result but not the paper's estimator. Report that its assumptions do not hold for that input."
+      }
+    },
+    "qa/recommendation:autolr/mechanism": {
+      "source_sha256": "dea31a509a5011c6b78fcacfb74ca42e8be1a2e6ed8e7c1d47782bcd61460ed1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does AutoLR not let the LLM directly save its preferred idea as the long-term champion?",
+        "answer": "Noisy proposals and deliberations can compound when language judgments alone make KEEP decisions. The LLM does semantic reasoning; a deterministic controller handles budgets, metric extraction, guardrails, and state transitions. Only evidence passing the relevant experimental gates can update the champion, and a proxy win does not bypass later A/B testing or Launch Review.",
+        "example": "If an LLM suggests an optimizer whose offline benefit is unstable, log the proposal and failure and retain the old champion."
+      }
+    },
+    "qa/recommendation:autolr/basics": {
+      "source_sha256": "468a9be2c14a2d68a60761b0515a28c08b6832d8e62922e2ad41f5ad25a8962b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does AutoLR's long-term state machine distinguish offline evaluation, real A/B testing, and Launch Review?",
+        "answer": "Offline results apply only under their data protocol; real user effects and deployment resource constraints need separate verification. The state machine separates proposals, experiments, reviews, and promotion, records failures and budgets, and increases the evidence at each stage. LLM reasoning or code generation cannot grant approval.",
+        "example": "An optimizer with better validation but excess memory stops offline. A candidate with real experiment evidence can enter launch review, not automatically become the live champion."
+      }
+    },
+    "qa/recommendation:autolr/comparison": {
+      "source_sha256": "67d170d746b0dcc6748abaede7d2075f1bec00fc3f3b404f585537a0d01f8b93",
+      "reviewed": true,
+      "fields": {
+        "question": "What trade-off does AutoLR's disagreement penalty make compared with choosing only for exploration value?",
+        "answer": "Pure exploration favors unknown, risky ideas. Scoring existing evidence, exploration uncertainty, and expert disagreement gives conflict an explicit cost. Disagreement does not establish error; it calls for more evidence or lower budget priority. The local run did not beat the baseline in three rounds and could retain the champion.",
+        "example": "Of two equally novel ideas, test the broadly accepted one first under a tight budget and gather evidence about the contested one."
+      }
+    },
+    "qa/recommendation:autolr/implementation": {
+      "source_sha256": "cc972540d19f57b562a5b0ce53a9c82bfd1a2565cf7aa087cbbf03a9467de836",
+      "reviewed": true,
+      "fields": {
+        "question": "How does local AutoLR resume a disk ledger without using historical test scores for promotion?",
+        "answer": "Proposals can see research evidence and the completed validation ledger. Run one real backward-pass check, train under a fixed budget, and evaluate test only once after selection. Restore candidate, review, and validation state, keep `online_authorized` false, and do not feed test results back as selection rewards.",
+        "example": "After an interruption, resume round three from prior validation records. If the final test regresses, report it instead of feeding the score into the proposal prompt and selecting again."
+      }
+    },
+    "qa/recommendation:baff/mechanism": {
+      "source_sha256": "d565a9b4d3a7766c5f41a0365fd65a4fef0a73f4cf44aa21f6cc8a51f6497fdd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does BAFF check both rank and bid-price differences?",
+        "answer": "Similar ranks can still imply different win probabilities if bids differ; similar bids can still produce different exposure when ranks move. The two conditions remove A logs likely to affect policy B's decisions and reduce training interference. Retained samples are more transferable under these conditions, not evidence of a truly interference-free market.",
+        "example": "A similarly ranked ad may win because A bids much higher. Conversely, equal bids do not make logs interchangeable if a rank crosses the display boundary."
+      }
+    },
+    "qa/recommendation:baff/basics": {
+      "source_sha256": "30387dc35fd155ffdece7128a5ceedd4fa01d19c7f1a2f5c273c25bf773eed5f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does treatment interference arise in the RTB A/B logs studied by BAFF?",
+        "answer": "Policy choices affect bidding opportunities and prices. An ad decision in one arm may change the competition the other policy actually faces, so A's logs are not automatically examples of what B would observe. Filtering approximately interference-free cases limits transfer; it does not make the arm labels interchangeable.",
+        "example": "When A raises an ad's bid, it can alter the competition. B may not have won the same opportunity at the same price, so treating the record as ordinary B training data imports A's policy effect."
+      }
+    },
+    "qa/recommendation:baff/comparison": {
+      "source_sha256": "487b06873c2a9a00f882c85a61c8686cc2ca2819889f5bdbce853f4f6694e7c5",
+      "reviewed": true,
+      "fields": {
+        "question": "How does BAFF's filtering differ from uniformly downweighting all A logs?",
+        "answer": "Uniform downweighting preserves all samples, including opportunities severely affected by A. The two-condition filter rejects incompatible logs based on rank position under B and the bid difference. This can reduce interference at the cost of sample count; stricter thresholds are not always better and do not ensure unbiased survivors.",
+        "example": "Halving the weight of a log with similar prices but very different ranks still uses it. Filtering rejects it, but an overly strict filter can leave too little data and raise variance."
+      }
+    },
+    "qa/recommendation:baff/implementation": {
+      "source_sha256": "ff72c6dc813c56713a3094e0e292f6cb7d878223b996d58b61f7934edd7cee99",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does BAFF's bid-price distance count only the positive excess of A over B?",
+        "answer": "The paper uses `max(bpA−bpB,0)/bpA`, which measures upward price movement in that direction, not a symmetric absolute gap. Rank distance is the position in B divided by K. Keep the direction, normalization, and two separate thresholds.",
+        "example": "A bid of 10 versus B's 8 yields 20%; A's 8 versus B's 10 does not yield the same positive penalty. An absolute difference would change the filter."
+      }
+    },
+    "qa/recommendation:bahe/mechanism": {
+      "source_sha256": "83385cf18efd75b85bb0ef12fb250bb975ae2deb10b07a3e73617db71de8d80c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does BAHE still train higher-layer aggregation when shallow encodings of atomic behavior are cached?",
+        "answer": "Shallow layers encode reusable text semantics for individual actions; higher layers need the current history and candidate and cannot be frozen into a universal answer. This moves repeated text computation off training and request paths while retaining interactions. Stale or excessively compressed cache entries can harm quality despite better efficiency.",
+        "example": "Cache a movie title once, but aggregate it differently when watched alongside science fiction or family movies and when scoring different candidates."
+      }
+    },
+    "qa/recommendation:bahe/basics": {
+      "source_sha256": "6b0171f49eeff88811fc28f225fc07b8e4632b58833dc3d5686dec8a61289300",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is BAHE's atomic behavior cache different from caching the final user representation?",
+        "answer": "An atomic cache holds shallow single-item content encodings reusable across histories. The final user representation also depends on order, the current candidate, and higher-layer interactions. Asynchronous shallow updates remove repeated text work; the upper layer still learns personalized combinations. Finer caching increases reuse but requires version consistency and care over compression losses.",
+        "example": "Two users can read the same cached title vector in different history orders without sharing final interest scores."
+      }
+    },
+    "qa/recommendation:bahe/comparison": {
+      "source_sha256": "5584ff288b650785cc76c1fd5993cd7b85a9e4dfe9bd0478522945418da175c6",
+      "reviewed": true,
+      "fields": {
+        "question": "Where does BAHE save computation compared with rerunning the full text model per sample, and what can it lose?",
+        "answer": "Repeated shallow encoding is avoided, and upper layers process actions rather than every word token. Compression removes detail and changes capacity, so measure time and quality together. Local time fell but AUC also fell, supporting the efficiency mechanism rather than a quality-preserving substitution.",
+        "example": "Ten titles may contain over a hundred words; ten cached behavior vectors are quicker to process, but losing a critical phrase can damage ranking."
+      }
+    },
+    "qa/recommendation:bahe/implementation": {
+      "source_sha256": "ce6bacd8572853a9981ed584e66c1e953452cea6f3c6428f99b78e4f56890ea6",
+      "reviewed": true,
+      "fields": {
+        "question": "How does the local two-layer BERT-tiny BAHE split caching and training?",
+        "answer": "The first layer generates and caches atomic MovieLens title vectors. The copied upper layer processes CLS, 12 history entries, and the candidate. The control runs frozen lower and trainable upper layers per sample with matched data and budget. Bind the cache to the shallow version; a two-layer timing ratio does not predict production-scale gains.",
+        "example": "If the upper layer expects a different shallow encoder version from the cache producer, vector semantics can mismatch. Record the vector and upper-layer versions together."
+      }
+    },
+    "qa/recommendation:barge/mechanism": {
+      "source_sha256": "9ed616261a443249e98086472f7feb5ac6f1a021bc066d16bc2431c09a11ec66",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does BARGE both restore item boundaries and rerank accumulated semantic paths?",
+        "answer": "Ordinary sequence attention can treat the multiple SID codes of one item as separate events; ICA aggregates within-item context and gates it back into each code. HPR evaluates the accumulated generated path to limit propagation of early beam mistakes, while complementary quantization gives alternate decomposition views. These address boundaries, search errors, and diversity respectively.",
+        "example": "Province, city, and street are one address, not three purchases. If the coarse province is wrong, refining the street cannot fix it, so check the path at every level."
+      }
+    },
+    "qa/recommendation:barge/basics": {
+      "source_sha256": "ced0ab9051c4d4cc7612c97a7e00f4e8dd8e6606f9a781f048f8b0dd30d33bcc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do multiple SID tokens for one BARGE item require explicit item context?",
+        "answer": "They are decompositions of the same item, but ordinary sequence attention may treat them as independent events. ICA aggregates within-item context and gates it back into each token, joining whole-item meaning to local detail. This addresses representation structure, not the separate task of learning preferences across items.",
+        "example": "A book's topic, subcategory, and collision code describe one book, not three successive reads."
+      }
+    },
+    "qa/recommendation:barge/comparison": {
+      "source_sha256": "c28ba84ccff48b1966ba82ca5d0147a9c6bb0b477899a2114b4a3b6c364ace83",
+      "reviewed": true,
+      "fields": {
+        "question": "How do BARGE's two complementary decoding paths differ from widening a single beam?",
+        "answer": "A wider beam searches more paths within one encoding structure. Two orthogonal subspaces construct different representations and quantizations, so one early bias need not dominate both. HPR then scores cumulative paths. Extra paths add training and merge costs, and output count alone does not prove complementarity or independence.",
+        "example": "A wider beam may still explore a mistaken coarse code, while a second subspace can recover a missed book if it preserves different semantic cues."
+      }
+    },
+    "qa/recommendation:barge/implementation": {
+      "source_sha256": "086c44fbe79c1366fba6fabb6d3ee13a4d9d60be3cf63816f3ac323bbc855f91",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does BARGE's HPR compare the accumulated path vector instead of only the latest code?",
+        "answer": "The cumulative sum includes every choice from coarse to fine and reveals whether the full semantic path fits the user. During inference combine generation log-probability with reranking; during training use contrastive comparisons over cumulative paths. DPD separately constrains projection orthogonality; it is not the same loss or proof of full independence.",
+        "example": "An entry-level code makes sense on its own, but the path has already entered home goods while the user wants a camera. Only the accumulated path exposes the mismatch."
+      }
+    },
+    "qa/recommendation:baseline-incremental/mechanism": {
+      "source_sha256": "4e95b2eea7cb838e6bf54c0c977a66b9e5e94f0a7d15679681eaf28e732c12ba",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep the raw prediction after subtracting a user or item baseline?",
+        "answer": "The increment measures how far above normal a candidate is, while the raw score preserves absolute business magnitude. The method separately weights a nonlinear increment: compare probabilities in log-odds space and use same-unit differences for regressions. This is a scoring configuration, not causal uplift.",
+        "example": "A small lift over a low baseline can outrank a more valuable candidate on relative change alone; the raw score keeps the high baseline's value visible."
+      }
+    },
+    "qa/recommendation:baseline-incremental/basics": {
+      "source_sha256": "39001e18d053261ee467133b6586280c95b3763457b12e2eced1aefa78d8b2e4",
+      "reviewed": true,
+      "fields": {
+        "question": "What reference points do the user, item, and request baselines represent in Baseline-Incremental?",
+        "answer": "The user baseline captures customary response, the item baseline broad attractiveness, and the request baseline the current candidate pool's level. Increment scores show how a candidate stands out; raw scores keep absolute value. This is not causal uplift, and a different reference changes the ranking's meaning.",
+        "example": "A high-activity user's video click probability may only slightly exceed their norm, whereas a moderate probability for a less active user is more exceptional. Retain both absolute values."
+      }
+    }
+  }
+}

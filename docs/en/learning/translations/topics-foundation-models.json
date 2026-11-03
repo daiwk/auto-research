@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "units": {
+    "theme/foundation-models": {
+      "source_sha256": "81849747ead466f4b45a9c955ba78654a1a6496aa6f13761f4bf7c8385cf848b",
+      "reviewed": true,
+      "fields": {
+        "title": "Foundation models",
+        "intro": "Understand context access, allocation of compute and training budgets, and trade-offs in compression, generation, and evaluation."
+      }
+    },
+    "theme/foundation-models/context-and-state": {
+      "source_sha256": "a98b74dbb8c098a7f6b2b72cbbd47e7a02ea8204b46d62ef85ca4a61b7a70dd1",
+      "reviewed": true,
+      "fields": {
+        "title": "Long context: attention, recurrent state, and memory",
+        "question": "As context grows, does the model preserve addressable historical tokens or a compressed recurrent state?",
+        "takeaway": "Separate position, information access, and state capacity. RoPE rotates two-dimensional Q/K subspaces by position so dot products capture relative offsets; attention still accesses history within its window. Mamba makes state-update steps and read/write parameters input-dependent and compresses history into recurrent state. Sparse and hybrid attention lie between these approaches, reading selected history or retaining full access in some layers. MERLIN aggregates reads across state segments: routing-key first and second moments recover query-aligned means and variances, then separate softmaxes are mixed through a gate. This is not Mamba's state recurrence.",
+        "example": "Suppose a document defines x at the start and asks for it 30,000 tokens later. Full attention can address the location; a recurrent model must keep the relevant information in state. With a local window, check for global layers or extra memory rather than trusting a context-length claim alone.",
+        "pitfall": "Linear complexity does not guarantee exact long-distance retrieval or real hardware speed. RoPE does not guarantee unlimited extrapolation. Check state, window, training length, and position scaling together. Local small-model results are not paper-scale evidence.",
+        "reading_order": "Start with RoFormer's Q/K rotations, then Mamba's input-dependent state updates. Compare directly reading history with encoding history in state before moving to sparse attention, hybrids, or external memory."
+      }
+    },
+    "theme/foundation-models/context-and-state/self-test": {
+      "source_sha256": "f2302a996439a8314895120affc3789e6874583f5077b5ed3bab8d71a3d91af1",
+      "reviewed": true,
+      "fields": {
+        "question": "If two models accept 32k inputs, can they recover arbitrary details from the first segment equally well?",
+        "answer": "No. Input length describes the interface or operating range. Direct addressing, window clipping, state capacity, and training distributions differ. Test retrieval with controlled positions and distractor lengths under the same budget."
+      }
+    },
+    "theme/foundation-models/conditional-compute": {
+      "source_sha256": "b755426a6d94cef9d3c8c875077a305db05227b92d748e2267d52a43919e221d",
+      "reviewed": true,
+      "fields": {
+        "title": "Conditional computation: experts, elastic depth and width, and lookup memory",
+        "question": "At a fixed parameter budget, which parameters and how many steps should each token activate?",
+        "takeaway": "Switch Transformer routes each token to a single expert and uses a balancing loss to avoid overloading a few experts. Engram adds learned n-gram hash lookup memory so computation need not reconstruct common patterns repeatedly. Dynamic depth, width, and recurrent steps further control compute by input. All separate total capacity from per-input activation cost.",
+        "example": "One expert per token out of eight increases parameter count without eight FFNs per token, but popular experts can still queue. Hash lookup for common phrases trades compute for indexing and bandwidth. Neither form of sparsity removes communication, addressing, or parameter residency costs.",
+        "pitfall": "More experts do not imply proportionally more throughput. Imbalance, capacity overflow, and all-to-all communication can dominate. Lookups trade off collisions and capacity; repeated layers increase latency. Random routing diagnostics or registry labels are not capability or Evolve evidence.",
+        "reading_order": "Read Switch's top-1 routing and balancing first, then Engram's deterministic lookup and gated fusion. Distinguish conditional computation from memory, then choose depth, width, recurrence, or routing papers for the bottleneck."
+      }
+    },
+    "theme/foundation-models/conditional-compute/self-test": {
+      "source_sha256": "faefb2d1d5084c0546c2fe2f453601aa4e5d76b08dfd9b79e7866821119edb2c",
+      "reviewed": true,
+      "fields": {
+        "question": "If an 80B MoE activates 8B parameters per token, does it only need to store 8B?",
+        "answer": "No. Active parameters describe current computation. All routable experts still have to reside somewhere or be loaded. GPU memory, communication, and FLOPs per step are different budgets. Report total and active parameters and measured cost."
+      }
+    },
+    "theme/foundation-models/training-budget": {
+      "source_sha256": "70ecd631cabdc448e585fed512d1d9cf515e2b90ec841a62109bbe6fc164bc13",
+      "reviewed": true,
+      "fields": {
+        "title": "Training budgets: data mixtures, objectives, and optimizers",
+        "question": "Under a limited budget, should we change the data, the update direction, or the model size first?",
+        "takeaway": "DoReMi learns a domain mixture with Group DRO using a small proxy model's per-domain excess loss over a reference, then transfers the mixture to target training. Muon approximately orthogonalizes momentum updates for hidden matrices with decay and shape scaling. Other parameter types cannot blindly use the same update. The first changes what the model sees; the second changes how updates move. Evaluate the axes separately.",
+        "example": "A one-third split across code, web, and encyclopedia data is only a starting point. DoReMi uses difficulty relative to a reference, not the domains with the highest raw loss. After switching to Muon, compare matched-token, time, or FLOP curves, not one matched-step point.",
+        "pitfall": "A proxy's mixture is not guaranteed optimal at every scale; optimizer gains depend on learning rate and budget. Low-precision states, activation compression, and data selection can affect different resources. Retain the documented limits of mechanism checks, short-budget negative runs, and costly unreproduced experiments.",
+        "reading_order": "Start with why DoReMi uses excess rather than raw loss. Then study Muon's matrix update and limits for non-matrix parameters. Move on to data selection, low-precision states, and training systems."
+      }
+    },
+    "theme/foundation-models/training-budget/self-test": {
+      "source_sha256": "68093a295805d8dedee7fa17e7d44df5bda213f5480cdab5b76565a99ed72b6f",
+      "reviewed": true,
+      "fields": {
+        "question": "Optimizer A lowers loss faster per step but takes twice as long per step as B. Does it use less compute?",
+        "answer": "Not necessarily. Decide whether the objective is time, FLOPs, or tokens to matched quality, then compare the relevant curves. Match training data and tuning budget. Per-step progress is not end-to-end efficiency."
+      }
+    },
+    "theme/foundation-models/compression-and-cache": {
+      "source_sha256": "ef8b185f9f5af9bea172a98c1f7dacb515819cbbcb206496098933c1f59e738f",
+      "reviewed": true,
+      "fields": {
+        "title": "Inference compression: weights, KV cache, and serving bandwidth",
+        "question": "When memory or latency is constrained, do weights, historical states, or data movement dominate?",
+        "takeaway": "AWQ uses calibration activations to identify important channels and applies equivalent scaling to reduce low-bit weight error. GQA shares fewer KV heads across query heads, reducing state per position. KV eviction, quantization, and tiered storage change which tokens are retained, bits per state, and where states reside, respectively. FoldBias does not choose token removals. Given retained keys and fixed bias, it encodes the bias as shared-direction shifts, preserves head width, and refits values after actual cache rounding. Compatibility and quality remain separate tests.",
+        "example": "Moving a prompt from 1k to 32k barely changes weight size but increases KV with sequence length and concurrency. W4 may solve loading but not ever-growing caches. Fewer KV heads, state compression, and eviction can help cache cost; check quantization error or lost evidence for the latter two.",
+        "pitfall": "Smaller low-bit files do not imply proportional latency reductions: unpack kernels, bandwidth, and batch size matter. Check cache recovery and reuse. Reconstruction error, element counts, and CPU operator success cannot replace GPU throughput or long-context capability measurements.",
+        "reading_order": "Read AWQ to see what activation-aware scaling protects, then GQA to understand query-to-KV-head sharing. After separating static weights from dynamic caches, compare eviction, cache quantization, and remote storage."
+      }
+    },
+    "theme/foundation-models/compression-and-cache/self-test": {
+      "source_sha256": "e3388dcc23ddf0eced3590e39a5995fea5fec61140cc4026d87305edc55c4093",
+      "reviewed": true,
+      "fields": {
+        "question": "Are AWQ and KV eviction both ways to discard unimportant historical tokens?",
+        "answer": "No. AWQ changes how static weights are represented. KV eviction removes cache positions during inference. The first affects parameter storage and numeric error; the second changes accessible history. Validate quality and resource effects separately."
+      }
+    },
+    "theme/foundation-models/generation-paths": {
+      "source_sha256": "dbaac6b6b7e479e9f8307f194f3a9cef06f0a0be0b18bc4f2ea6c0d091e06d0a",
+      "reviewed": true,
+      "fields": {
+        "title": "Generation paths: draft verification, parallel denoising, and few-step refinement",
+        "question": "How can we reduce serial token generation while being explicit about whether the output distribution changes?",
+        "takeaway": "Speculative decoding proposes several tokens with a cheap draft and verifies them in one target pass. Correct acceptance and residual correction preserve the target distribution. Diffusion language models instead denoise multiple positions; dQwen3.5 changes a causal backbone with recurrent layers to bidirectional propagation. Few-step generation and shared iterative networks change refinement schedules. These are changes at different levels.",
+        "example": "A draft may propose four tokens and the target accept only the first two. The rest require correction and continued generation. Speed depends on acceptance and verification cost. A diffusion pass may update several positions, but multiple denoising passes can be needed. Compare full-output quality and end-to-end time, not tokens written in one pass.",
+        "pitfall": "Exact speculative sampling depends on the full acceptance and correction algorithm; it does not apply to arbitrary multihead drafts. Diffusion or distilled models are not automatically equivalent to the autoregressive target. Markov drafts, reference kernels, or call counts are not actual large-model speedups.",
+        "reading_order": "Start with the proposal, verification, and corrected sampling in Fast Inference. Then read dQwen3.5 on its bidirectional hybrid and parallel decoding. Distinguish rescheduling from training a new generative mechanism before exploring self-drafts, caching, and few-step refinements."
+      }
+    },
+    "theme/foundation-models/generation-paths/self-test": {
+      "source_sha256": "8be2d70dfb2b97102c08d709ba5d3fcef950ce31e5e5287491a9743e5c1d4f87",
+      "reviewed": true,
+      "fields": {
+        "question": "Can “speculative decoding preserves the distribution” also describe changing an autoregressive backbone to diffusion?",
+        "answer": "No. Speculation reschedules computation under a fixed target distribution with acceptance and correction. Diffusion changes propagation, training, and decoding. It requires independent quality evaluation and cannot inherit that guarantee."
+      }
+    },
+    "theme/foundation-models/evaluation-and-evidence": {
+      "source_sha256": "01c1fdf503e6f1a7e818dba8c0e0ed4be689a43bc51e4e53a1d299db027100e9",
+      "reviewed": true,
+      "fields": {
+        "title": "Capability evidence: sampling, readout, and reliability",
+        "question": "How can we tell whether a high score reflects the intended capability rather than language, ordering, readout, or statistical bias?",
+        "takeaway": "XLGoBench holds the underlying task constant with comparable multilingual algorithmic problems and objective answers, then varies language and complexity. ProEval fits a probabilistic surrogate from past item scores and uses uncertainty to select informative inputs, saving expensive ratings. Activation probes, reranking calibration, and watermarks audit other observation channels. Define the target capability and observable first.",
+        "example": "Translate a shortest-path problem while keeping the graph and correct path fixed. If quality drops, check that the translation preserved constraints. A 100-item budget can use active selection, but then the selected set is not representative. Use the prescribed estimator and uncertainty, not the raw average on difficult cases.",
+        "pitfall": "Detection scores, operator contract pass rates, and model capability are different. Surrogates may use history but not unseen target scores or gold. One cross-language difference is not a full language-capability claim. Local ProEval and XLGoBench scorer diagnostics do not reproduce the full papers.",
+        "reading_order": "Start with XLGoBench on controlled task, language, and difficulty. Then read ProEval on GP surrogates, active selection, and population estimation. Follow with probing, calibration, safety detection, or online experiments."
+      }
+    },
+    "theme/foundation-models/evaluation-and-evidence/self-test": {
+      "source_sha256": "0ee3683113a8a451f8f0d9cbd99cc89d00df88afb27d1f09fd868265182d04b1",
+      "reviewed": true,
+      "fields": {
+        "question": "If actively selected likely failures have low mean accuracy, can we directly estimate overall online accuracy?",
+        "answer": "No. Selection by failure likelihood introduces bias. Define the target distribution and use a matching estimator or representative sample. Report failure discovery and overall estimation separately."
+      }
+    }
+  }
+}

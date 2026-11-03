@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:lego-opd/basics": {
+      "source_sha256": "675d80da514e082201d673f68cefdb9f7fd9650267303072c0484227e7bb0c1a",
+      "reviewed": true,
+      "fields": {
+        "question": "Can LEGO-OPD grounding likelihood be read as the final answer probability?",
+        "answer": "No. It is the visual evidence factor, combined with language prior and normalized. Distinguish prior, likelihood and final posterior, not interpret one score as answer confidence.",
+        "example": "Vision supports red; language constrains valid next words. Combine and normalize for token probabilities."
+      }
+    },
+    "qa/post-training:lego-opd/comparison": {
+      "source_sha256": "fab9a0cd45d0369fc4f6197985543f9667bd4d042ae5ab62b464ebfb0cebf4a6",
+      "reviewed": true,
+      "fields": {
+        "question": "How does setting grounding α=0 differ from using only vision?",
+        "answer": "A valid zero-weight visual contribution leaves language prior. Vision-only would remove language, a different target. α scales evidence, not votes between two complete models.",
+        "example": "Multiplying visual log contribution by zero leaves language scores, not pure vision."
+      }
+    },
+    "qa/post-training:lego-opd/implementation": {
+      "source_sha256": "b9ea86f05afdf138248044617c11de45693b284de4895dcb9b89ddb63b3e10db",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local LEGO load both language and visual experts?",
+        "answer": "No. It only combines factors. Align candidates, add in log space, then normalize. Visual likelihood isn't a full VLM posterior; random logits aren't visual capability.",
+        "example": "Multiplying two vectors doesn't make any model see an image."
+      }
+    },
+    "qa/post-training:lego-opd/mechanism": {
+      "source_sha256": "44fa7e6f2f61f112a5076a3561ed29c600272771812890f6ed4f0d40d3bb0de9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine a language prior and visual likelihood instead of averaging teachers?",
+        "answer": "Language supplies general grammar/reasoning while vision modifies evidence through a product. This can avoid copying visual model language bias if its likelihood is reliable. Local target checks do not prove vision.",
+        "example": "Language makes a cup description grammatical; visual evidence increases the color it shows."
+      }
+    },
+    "qa/post-training:advisd/basics": {
+      "source_sha256": "59c7d6b4a5d84bee5ad85b0216c8c611be2492e9f34e5d6e1e668697d9fe0b3c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why train AdviSD advisor and freeze executor?",
+        "answer": "Improve advice to a fixed strong executor, isolating advisor contribution. Reflection generates candidate advice; only advice affecting executor preferences enough enters self-distillation.",
+        "example": "Improve parameter-check reminders without changing the tool model weights."
+      }
+    },
+    "qa/post-training:advisd/comparison": {
+      "source_sha256": "6cd4caac9e8763777e15c30bc61ec2cfd89fa1568b6674190d64718e6d4d4628",
+      "reviewed": true,
+      "fields": {
+        "question": "Is influential advice necessarily successful advice?",
+        "answer": "No. Likelihood contrast measures preference shifts on one recorded response. Donor calibration screens weak effects, not whether the change improves outcomes; evaluate tasks separately.",
+        "example": "Advice can increase support for an existing wrong action."
+      }
+    },
+    "qa/post-training:advisd/implementation": {
+      "source_sha256": "f8fda705a8901023c67cea87fd401f632ec69e2f14668a2066ff983713c2e267",
+      "reviewed": true,
+      "fields": {
+        "question": "May AdviSD generate separate replies for with/without advice comparisons?",
+        "answer": "Not in place of paired rescoring. Use the same response and mean valid-token logp; threshold from donor absolute contrast quantile. No local real executor.",
+        "example": "Different newly generated long and short answers confound advice effects."
+      }
+    },
+    "qa/post-training:advisd/mechanism": {
+      "source_sha256": "fa58cb3766462237b46e299595b0fd4437bf9ea667ed81d8cdaa906fdeaee52d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why score a fixed executor reply in both advice conditions?",
+        "answer": "Fixed reply controls generation randomness and isolates preference shift. Train advisor on threshold-passing reflections while executor stays frozen. A likelihood increase isn't task success and calibration depends on advice distribution.",
+        "example": "Rescore the same recorded tool call in both contexts rather than subtract independently generated answers."
+      }
+    },
+    "qa/post-training:olive/basics": {
+      "source_sha256": "1788dc6cf4c9e966d6c3d6d9cdea0c242d9840a745fc9a076799bd0dfe3ce6a6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why let OLIVE teacher continue from student-visited states?",
+        "answer": "Student mistakes differ from ideal teacher paths. Real prefixes supply deployment-like supervision for continuation/recovery instead of memorizing complete solutions.",
+        "example": "Continue from an unusual intermediate expression the student reached."
+      }
+    },
+    "qa/post-training:olive/comparison": {
+      "source_sha256": "3db8a27412a098da895dd300a48881004201d626c3bf2bf18faef916b09b8cee",
+      "reviewed": true,
+      "fields": {
+        "question": "How does teacher continuation CE differ from scoring original student tokens?",
+        "answer": "Continuation adds newly generated teacher text as target; rescoring evaluates existing sampled actions/states. A scoring kernel doesn't produce new teacher continuations.",
+        "example": "Writing the next steps differs from rating the old steps."
+      }
+    },
+    "qa/post-training:olive/implementation": {
+      "source_sha256": "262268f10e6c515f45f899a539433cac6ece94e2fc59b814fd12521d52a1ea20",
+      "reviewed": true,
+      "fields": {
+        "question": "Can OLIVE remove prefixes from input because they have no loss?",
+        "answer": "No. Prefix remains conditioning for continuation and student supervision; mask targets only. Handle concatenation, EOS and padding. Local tests verify masks without a closed teacher.",
+        "example": "Retain three mistaken steps as context without training to imitate them."
+      }
+    },
+    "qa/post-training:olive/mechanism": {
+      "source_sha256": "3feb03dcfa1e76d979dab9049066db217354d14334e15fae4afe2b3cf05454e7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why don't OLIVE prefixes receive supervised loss?",
+        "answer": "The teacher continues the student's actual prefix, giving useful next-step examples without treating student mistakes as correct labels. Apply CE only to teacher tokens. Teacher quality and full-model experiments remain separate.",
+        "example": "Read a repairable wrong expression and learn only the corrected teacher continuation."
+      }
+    },
+    "qa/post-training:mas-opd/basics": {
+      "source_sha256": "765ced2f9510b5be1f48d1500a291828f8ab363b1182373b24f6af5c70617d46",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add role-specific advantage in MAS-OPD?",
+        "answer": "Terminal team outcomes hide member responsibility. Target vs other-role teacher signals supply local collaboration credit. Verify attribution rather than punish everyone equally.",
+        "example": "Good retrieval and faulty summarization call for different credit."
+      }
+    },
+    "qa/post-training:mas-opd/comparison": {
+      "source_sha256": "9b882ed585f714cc25d8848491d4ff0c90c15545448b500634e359589d07ee03",
+      "reviewed": true,
+      "fields": {
+        "question": "How does teacher-only conflict information differ from giving full attribution to all roles?",
+        "answer": "Students act on their own public histories; only teacher sees extra conflict explanation. Giving hindsight to students changes deployment inputs and hides whether learning internalized it.",
+        "example": "Teacher may know who misunderstood after failure; deployed members cannot start with that diagnosis."
+      }
+    },
+    "qa/post-training:mas-opd/implementation": {
+      "source_sha256": "03fef60cdf475e20ac4c9e53587d9965cb1897305888e3ff9b898d70fdb9efef",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local MAS-OPD jointly train real models?",
+        "answer": "No. It tests role advantage and conflict masks. Align roles, traces and valid generated positions. Registry labels or misassigned signals don't establish team training.",
+        "example": "Swapping role order can keep arrays valid while assigning credit to the wrong member."
+      }
+    },
+    "qa/post-training:mas-opd/mechanism": {
+      "source_sha256": "594d0c97ab31617986f39e2297e662807dc7b5805ac63e66d59464b7194fe40b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why put conflict attribution in teacher view instead of changing every role's reward?",
+        "answer": "One team score doesn't identify corrections. Privileged teacher distinguishes target and other contributions. Extra attribution is training-only and local mask/advantage does not establish multi-model collaboration.",
+        "example": "A sound planner and an executor using the wrong tool shouldn't receive the same blame."
+      }
+    },
+    "qa/post-training:opd-aha/basics": {
+      "source_sha256": "999638de8c11e8c6a88092b0fda29397ede00b176d8bdf205cb6e30357e38868",
+      "reviewed": true,
+      "fields": {
+        "question": "What does language inertia mean in OPD-Aha?",
+        "answer": "A wrong student prefix can lead a teacher to keep repeating it despite visual evidence. Compare actual and empty vision to recover visual contributions.",
+        "example": "If prior text says dog and picture shows cat, don't blindly continue dog."
+      }
+    },
+    "qa/post-training:opd-aha/comparison": {
+      "source_sha256": "e8bca8b6189e5017af15bfe52df0934ef63da6741036d41b0fc5efcaf5f9ac28",
+      "reviewed": true,
+      "fields": {
+        "question": "How does real/empty vision contrast differ from raising confidence?",
+        "answer": "It changes vision while matching teacher context. Sharpening can amplify language priors. Empty-view design and teacher quality affect attribution.",
+        "example": "If both views confidently say dog, sharpening won't discover the cat."
+      }
+    },
+    "qa/post-training:opd-aha/implementation": {
+      "source_sha256": "4d7a7bf3f7ddd5a0694ed10dcc1a19bce24ff82616a870d69d9f2c64ce5b3198",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local OPD-Aha reconstruction use a multimodal checkpoint?",
+        "answer": "No. It tests target math. Real implementation needs paired visual/empty inputs and identical student prefixes scored by a model. Fixed differences don't establish visual reflection.",
+        "example": "Manually increasing cat probability checks reconstruction, not image recognition."
+      }
+    },
+    "qa/post-training:opd-aha/mechanism": {
+      "source_sha256": "9d2c37e3a5298321419b592b3277bfa26fe6306047127a1cf5d35406ebed3259",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compare teacher distributions with real and empty visual input?",
+        "answer": "The comparison isolates preference changes attributable to image conditioning despite mistaken text context. It helps separate evidence from prior but doesn't guarantee correctness. Local evidence is reconstruction only.",
+        "example": "A cat image can shift preferences away from the prefix's dog claim relative to no vision."
+      }
+    },
+    "qa/post-training:nsd/basics": {
+      "source_sha256": "f337b743eaae46a0a562ac78a145e8e6e9beae6c10c5c896380ac8021bde28b9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use self-generated mistakes as negative teaching material in NSD?",
+        "answer": "Failures identify directions to avoid. Negative teacher models error distribution and a dynamic gate concentrates suppression on key reasoning while protecting ordinary language.",
+        "example": "A misused proof rule can supply an avoid signal."
+      }
+    },
+    "qa/post-training:nsd/comparison": {
+      "source_sha256": "f8321bd4e415cbd8dc5ddfe1e2eeb85ca9e46bee6b9520991e84b8b6296ca181",
+      "reviewed": true,
+      "fields": {
+        "question": "How does negative self-distillation differ from lowering every wrong answer token?",
+        "answer": "Wrong responses can contain valid facts, grammar and steps. Selective gating limits collateral damage, but isn't a verified step label.",
+        "example": "A wrong result doesn't mean all numbers and connectives should be forgotten."
+      }
+    },
+    "qa/post-training:nsd/implementation": {
+      "source_sha256": "842b12d55f965d31291a228865d0139debc0865510b288cf43b86a73f5038003",
+      "reviewed": true,
+      "fields": {
+        "question": "What supplies local NSD negative teachers and gates?",
+        "answer": "Candidate policies test control flow, not full-parameter LLM. Freeze and align gates to penalized positions; test gold cannot preidentify errors under no-leakage claims.",
+        "example": "Hand-labeled errors are a unit fixture, not autonomous error localization."
+      }
+    },
+    "qa/post-training:nsd/mechanism": {
+      "source_sha256": "a2cecfee8ddb8fc059dbced315a6103d7ce823ae19f7edfa54c5f4800c88490e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not suppress the entire erroneous answer in NSD?",
+        "answer": "Negative teacher gives a distribution to avoid, with dynamic gates selecting reasoning-critical tokens while preserving useful language/steps. Selection doesn't prove errors and full LM training wasn't reproduced.",
+        "example": "A carry error needn't suppress every connective and correct digit."
+      }
+    }
+  }
+}

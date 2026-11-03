@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:mass/implementation": {
+      "source_sha256": "efbaa4cf02c80ba3b77856dab259bca12e3dacd5ce58477adbbdc4e069cc5ea4",
+      "reviewed": true,
+      "fields": {
+        "question": "What do two actual local LoRA rounds and lower validation loss establish?",
+        "answer": "They show the shared-checkpoint execution, proposal, ranking, and update chain ran, including real parameter training in a constrained two-worker text workflow. The data were self-generated trajectories, with one seed and few steps. There were no arbitrary workflow graphs or research-file tools, so lower loss does not establish stronger independent research capability.",
+        "example": "Round two may imitate its own validation text more easily and lower loss without ever testing whether its conclusions on unseen research tasks are correct."
+      }
+    },
+    "qa/agent-research:evoalloc/mechanism": {
+      "source_sha256": "32050454f7ab69985361e1511a7be524723be2a67b4b2db3a34d5b9144270dd8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why should some discarded candidates still receive counterfactual evaluation?",
+        "answer": "If only selected programs are evaluated, the allocation policy cannot see high-quality candidates it missed and may become overly confident in its own preferences. Random counterfactual checks reveal the risk of missing a new best, and shadow policies need shared evidence. Those Full calls consume budget; do not exclude exploration or warmup to make savings look larger.",
+        "example": "A filter may discard an unfamiliar implementation that an occasional full evaluation reveals to be superior. That evidence corrects selective feedback that equates unfamiliarity with low quality."
+      }
+    },
+    "qa/agent-research:evoalloc/basics": {
+      "source_sha256": "4457af31c7546cf4e1fcc6a7fd841556431d0095653d363f8d2be24b1e20a2ff",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is continuing or stopping after Partial more flexible than an immediate Full/Discard decision?",
+        "answer": "Partial evaluation offers cheaper initial evidence before paying full cost, avoiding exhaustive evaluation of clearly bad candidates and premature discarding of potential winners. The task needs a trustworthy Partial signal; do not invent a score for an environment that does not support one.",
+        "example": "A quick program constraint check followed by a lengthy performance evaluation can be useful, but Circle26's current interface has no Partial, so the local path supports only Full or Discard."
+      }
+    },
+    "qa/agent-research:evoalloc/comparison": {
+      "source_sha256": "93e60cbc1889c648da9d88e796fa82433b37e8a23c4c93396bf5350ccf621958",
+      "reviewed": true,
+      "fields": {
+        "question": "How does prioritizing missed new bests before cost differ from minimizing Full evaluations?",
+        "answer": "Saving evaluations alone can miss the actual best candidate. Lexicographic ranking first protects search quality, then saves Full and Partial evaluations when missed-new-best counts tie. Random counterfactual checks of discarded candidates mitigate selective feedback, and shadow policies share evidence. Do not evaluate an allocator on accepted candidates alone.",
+        "example": "If A avoids ten evaluations but misses a new champion, while B pays for two more evaluations and retains the champion, A should not advance merely for being cheaper."
+      }
+    },
+    "qa/agent-research:evoalloc/implementation": {
+      "source_sha256": "4ed780119d9f2ca556a048e989efdbae8a310e2f184208c6f50daff1d83bd2d1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why charge warmup, the shadow union, and counterfactual Full evaluations to the budget, and what did the short GPU run not trigger?",
+        "answer": "They actually consume resources and are not free administrative work. Shadow promotion also requires two observed disagreements. The best of four real local Full evaluations did not beat the initial program. Warmup was insufficient and no promotion occurred. Partial and the two-disagreement case were covered only by contract tests, not triggered in the real run.",
+        "example": "If a shadow policy requests a Full evaluation of a program discarded by the primary policy, charge it even if it never changes the primary champion."
+      }
+    },
+    "qa/agent-research:sentry/mechanism": {
+      "source_sha256": "b5f40ee3a33afb1eff70722c912bd0cd5fcdb7536dd46929c11f6a9b5a0f9ba7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add recovery advice to the playbook only after it is verified by observable later progress?",
+        "answer": "Advice proposed after failure is a hypothesis; saving it immediately can poison the playbook with bad remedies. An external verifier checks whether subsequent behavior actually recovers without reading task rewards to supply answers to the actor. Experiences are retrieved by failure class. Format errors follow hard repair, keeping mechanical correction distinct from semantic recovery.",
+        "example": "If 'refresh login' still leads to repeated errors, do not store it. Progress through subsequent steps provides evidence that can be reused for similar failures."
+      }
+    },
+    "qa/agent-research:sentry/basics": {
+      "source_sha256": "0df3f5b1d4dea89490fc5fe80096514d80e9b8e407f3311189f311cded38d830",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Sentry specifically address stalls, repeated actions, and formatting errors during agent execution?",
+        "answer": "Long-horizon agents can fail not just from missing knowledge but from loops, repeated ineffective actions, or invalid calls. Sentry detects such faults during execution and uses prior experience to support recovery. Resuming locally is not the same as ultimately answering correctly; the real local control comparison had a negative result.",
+        "example": "If an agent repeats an ineffective search, detection can trigger related advice. Even if it starts reading new pages, the final answer still needs to be checked."
+      }
+    },
+    "qa/agent-research:sentry/comparison": {
+      "source_sha256": "8ee2345ce8a3aface393c3788663e8fc30fa84d6afbf2248e30a9bdde0230e89",
+      "reviewed": true,
+      "fields": {
+        "question": "What are the information trade-offs between retrieving recovery advice by failure class and keeping all experience in context?",
+        "answer": "Conditional retrieval supplies relevant categories and tags only after detecting a matching failure, reducing input during normal execution. Always-on advice requires no trigger but adds irrelevant suggestions more readily. Conditional intervention depends on detection and matching: missed failures lose help, and false positives can disrupt a working policy. Less context alone does not imply more success.",
+        "example": "After a network timeout, retrieving connection recovery is more focused than carrying format and loop repair guides at each step. Misreading normal waiting as a timeout can still make the intervention harmful."
+      }
+    },
+    "qa/agent-research:sentry/implementation": {
+      "source_sha256": "80876b4f1a85e49e6b646a34f0fda0ac2603f0b4c4ce1b1b0eeddcaed3d7d477",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't the local three-seed HotpotQA result be presented as improvement or as 24 independent tasks?",
+        "answer": "Three generation seeds repeat the same eight questions. The mean was below baseline, and the extra manager and verifier calls added cost: this is a negative result. Memory is frozen after construction, holdout questions do not retune the detector, and a holdout derived from official validation is not the official test. A positive difference in one seed cannot override the overall decline.",
+        "example": "Seed 43 answers one more question correctly, but the other two perform worse. Report all paired outcomes to show instability rather than advertising only the best run."
+      }
+    },
+    "qa/agent-research:seer-forecasting/mechanism": {
+      "source_sha256": "a9819442d0936c762b4be39b89fb0b11541773a7963ce625368a2b7218e78330",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must reflection wait for forecast outcomes to mature, with memory and causal knowledge frozen during testing?",
+        "answer": "Future ground truth is unavailable at forecast time. Using it early to update retrieval or filtering leaks outcomes; updating memory from test errors also turns reporting into training feedback. Keeping retrieval memory, screening memory, and knowledge separate helps localize faults, but verify event time and actual availability independently.",
+        "example": "In a forecast of next week's sales, weekend news cannot be inserted into Monday's inputs. Sales learned after the test cannot be used to rewrite retrieval for that same test."
+      }
+    },
+    "qa/agent-research:seer-forecasting/basics": {
+      "source_sha256": "b486e78dad6c235c5d47f35324bd1573ba1a06da47c6b8f1d6ba894d9a5d8fa2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does SEER consider available external events in addition to numerical time series?",
+        "answer": "Prices and demand can respond to news or policy that historical numbers alone cannot explain. SEER retrieves relevant events and improves filtering and knowledge from prior forecasting experience while keeping predictor weights fixed. Extra text can introduce noise and look-ahead risk, so check what was actually available at forecast time.",
+        "example": "An already announced holiday schedule may explain a demand shift. A sales report published afterward cannot be given to an earlier forecast, however clearly it explains the outcome."
+      }
+    },
+    "qa/agent-research:seer-forecasting/comparison": {
+      "source_sha256": "ff5926d7bd2395df393b9c12fca3a6b9295f49f5f766debf979a6e1e58a310c3",
+      "reviewed": true,
+      "fields": {
+        "question": "How does fixing the forecasting model while updating retrieval and screening experience differ from fine-tuning its weights?",
+        "answer": "The former changes how external evidence is expanded, filtered, and organized, leaving predictor weights fixed so context evolution can be studied. Fine-tuning changes the internal mapping. The two memories and knowledge play different roles; a handwritten causal rule or new query template does not automatically teach the numerical model new dynamics.",
+        "example": "Retrieval memory can suggest checking holidays, and screening memory can exclude irrelevant news, without changing the time-series model's parameters."
+      }
+    },
+    "qa/agent-research:seer-forecasting/implementation": {
+      "source_sha256": "6012b85493de1b9df4446177dea21f1a7c51f796b0607138d345c5cc04274670",
+      "reviewed": true,
+      "fields": {
+        "question": "How do event occurrence and information availability jointly limit what a forecaster can read?",
+        "answer": "An event may already have occurred while reports or database entries become public later. Forecast inputs must satisfy the target-time and information-availability boundaries. The date on a story is not enough; check whether its contents were obtainable at the time. Memory can be compressed when capacity is limited, but compression cannot inject future conclusions into past contexts, and test-time reflection is forbidden.",
+        "example": "An event occurs Monday but is disclosed Wednesday. Tuesday's forecast must not use Wednesday's story, even if the headline is relabeled with Monday's date."
+      }
+    },
+    "qa/agent-research:frugalevo/mechanism": {
+      "source_sha256": "35c11ac27c94ac0751e5cefdd20632bfaabf0ac6ae585ecf23a775c3fd7a51ce",
+      "reviewed": true,
+      "fields": {
+        "question": "Why follow an expensive model's strategy proposal with repeated cheap execution, and assess the full best-so-far curve?",
+        "answer": "Strategic planning and local code iteration require different capabilities and costs. Hierarchy reserves expensive calls for direction setting. Failures add feedback while retaining the parent program; improvement re-anchors search, and an island archive protects diversity. The best-so-far curve over the budget reflects how early useful solutions emerge, not just a lucky final score.",
+        "example": "A strong model proposes vectorization and a smaller model tests several equivalent implementations. Finding a useful speedup earlier under the same budget is more informative than one chance best at the end."
+      }
+    },
+    "qa/agent-research:frugalevo/basics": {
+      "source_sha256": "db47b0620cc4282ae5155aecb0fe59861dfe4d1d70a2e8da98292f9e0a8e9860",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does FrugalEvo want cheaper models to implement strong-model research ideas repeatedly?",
+        "answer": "Using a strong model for every generation and execution step is costly, while a weaker one may lack good strategies. FrugalEvo joins stronger strategy proposals with cheaper repeated implementation to find useful programs within a budget. Evaluate actual costs and quality over the whole search, not just the final best score or a cheap individual call.",
+        "example": "A strong model suggests a direction and a weak model tries several code variants. If repeated failures still consume substantial budget, the division of labor may not pay off."
+      }
+    },
+    "qa/agent-research:frugalevo/comparison": {
+      "source_sha256": "5553d9f802770d6f459db3caffd813257e3a61d5bb871212cd230ea302e41e8e",
+      "reviewed": true,
+      "fields": {
+        "question": "How should a costly strategy model plus cheap implementer be fairly compared with weak-model-only search?",
+        "answer": "Start both from the same program, budget, and call caps, but actual costs can differ when different limits bind first. Larger models are not necessarily stronger; report actual tokens, strategy trials, and refinement. The architecture does not imply collaboration always wins, and overall local results did not support that conclusion.",
+        "example": "If the weak model hits its 30-call cap with budget left and the collaboration consumes more tokens, report 'same caps,' not 'same actual cost.'"
+      }
+    }
+  }
+}

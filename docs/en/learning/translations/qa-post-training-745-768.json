@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:compass-opd/basics": {
+      "source_sha256": "861746434313498c5d090a49189cca75f4bb3ad0a18e08e171c89966ee0b38e5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CompassOPD need each teacher's own reference?",
+        "answer": "Absolute probability scales differ across families. Relative change captures post-training direction, and within-family centering reduces global bias before using the student anchor. It isn't correctness proof.",
+        "example": "A naturally sharp teacher shouldn't look more learned just because probabilities are larger."
+      }
+    },
+    "qa/post-training:compass-opd/comparison": {
+      "source_sha256": "700e77aa3e58ae91506f21a14a663f4cd51acdae93848bd21ad86f88c7b7fd88",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Compass trade off against averaging cross-family probabilities?",
+        "answer": "Relative directions mitigate scale effects but discard some global information. Direct mixtures retain absolute posteriors. Compare under equal protocol; no universal win.",
+        "example": "Two moves toward the correct option shouldn't be obscured by native temperature differences."
+      }
+    },
+    "qa/post-training:compass-opd/implementation": {
+      "source_sha256": "0d21fa6a0595f3c14b2ddc68a114bf43171ebbdc9d63fdd9c4ad5cbf359d6670",
+      "reviewed": true,
+      "fields": {
+        "question": "What comparable sets should Compass center over?",
+        "answer": "Use consistent candidates/weights for specified family changes and a separate student reference. Don't center arbitrarily across questions. Local audit magnitudes aren't training success.",
+        "example": "Mismatched option order makes subtraction meaningless."
+      }
+    },
+    "qa/post-training:compass-opd/mechanism": {
+      "source_sha256": "e5bcc6da1bcf942a42fad4fb447938699e2b20fe41c160938e99b46392affc68",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compare post-trained teacher to its own reference rather than absolute teacher–student scores?",
+        "answer": "Calibration and sharpness vary by family. Relative likelihood shifts and within-family centering extract direction, with a student reference anchor. Teacher bias can remain.",
+        "example": "Two teachers may both increasingly favor the right step despite very different initial distributions."
+      }
+    },
+    "qa/post-training:oprd/basics": {
+      "source_sha256": "a658f1e1e8259c731a5b8347871dceeac5b792535065eda3d35e05f91a20e514",
+      "reviewed": true,
+      "fields": {
+        "question": "What information transfers from weak to strong in OPRD?",
+        "answer": "Weak post-training logit change relative to base augments strong verifier gradient. Weak answers needn't outperform strong ones; a useful update direction may transfer.",
+        "example": "A learned unit-check tendency can help without copying weak arithmetic."
+      }
+    },
+    "qa/post-training:oprd/comparison": {
+      "source_sha256": "4752a7955596d3c668688e615d1e76cebcc943e049866410df0cb8b75bbd14fb",
+      "reviewed": true,
+      "fields": {
+        "question": "How does OPRD gradient augmentation differ from full weak-teacher distillation?",
+        "answer": "Keep strong verifier gradient and amplify its component along weak learning direction, instead of fitting weak distribution. An irrelevant direction may not help.",
+        "example": "Strong model still follows its reward with directional modulation."
+      }
+    },
+    "qa/post-training:oprd/implementation": {
+      "source_sha256": "f4941bd62aefa6b782f49f89ee26320c4dc977634a3052160ba14e8bac39b8ee",
+      "reviewed": true,
+      "fields": {
+        "question": "How handle zero change and gradient direction in OPRD?",
+        "answer": "Center and unit-normalize deltas; treat zero norm as no direction. Add projection to original gradient, not replace it. Local candidates only map the proxy to parameters.",
+        "example": "Identical weak checkpoints should not generate a divide-by-zero teaching direction."
+      }
+    },
+    "qa/post-training:oprd/mechanism": {
+      "source_sha256": "6da941d5d3a12cf8e806b73185c8aa48d8dc36056a9dcc442a0d60389d7b7f61",
+      "reviewed": true,
+      "fields": {
+        "question": "Why transfer weak-model direction without asking the strong model to imitate answers?",
+        "answer": "Extract centered normalized weak-after/base difference and boost aligned strong-verifier components. The transfer object is direction, not content. Utility requires alignment and candidate diagnostics don't prove broad gains.",
+        "example": "A stronger model can learn to check units without copying an incorrect weak numeric result."
+      }
+    },
+    "qa/post-training:weak-guide-rlvr/basics": {
+      "source_sha256": "cfec123e3d77a1478ffe2d08e7ab5a665d6d50016cc68f7577b0be2b32dadf27",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can weak-model prefixes improve strong exploration?",
+        "answer": "They move the target to states its own policy rarely visits, expanding reasoning coverage. Prefixes can be wrong; independent verification still defines reward.",
+        "example": "Try continuing an alternative decomposition and check the result."
+      }
+    },
+    "qa/post-training:weak-guide-rlvr/comparison": {
+      "source_sha256": "4973f132e6bfaeb475443a778cd6b6c4a881d70013ebda7e91be22f5da53d2af",
+      "reviewed": true,
+      "fields": {
+        "question": "How does prefix guidance differ from SFT on complete weak answers?",
+        "answer": "It supplies only a starting point; target generates and learns from reward. Native/guided mixtures and entropy truncation control coverage instead of trusting weak solutions wholesale.",
+        "example": "Give an opening idea without asking the student to copy a wrong conclusion."
+      }
+    },
+    "qa/post-training:weak-guide-rlvr/implementation": {
+      "source_sha256": "6a98053958dec4d3b3f5378a52d16610f4bba5711aa1487715f081e89905c755",
+      "reviewed": true,
+      "fields": {
+        "question": "Is the local frozen-reference proxy actual dual-checkpoint RLVR?",
+        "answer": "No. Candidate distributions simulate guidance. Record mixture proportions and prefix boundaries; keep hints out of independent test. No real two-model generation.",
+        "example": "Numeric alternative starts don't measure linguistic weak-prefix quality."
+      }
+    },
+    "qa/post-training:weak-guide-rlvr/mechanism": {
+      "source_sha256": "76ae21dc1e4413c358d7ab4be45d590a3fb2e440cdeda54fe5138c0ee9f77631",
+      "reviewed": true,
+      "fields": {
+        "question": "Why mix weak prefixes even though they can be wrong?",
+        "answer": "They provide uncommon exploration starts. Entropy truncation limits unstable continuations and native traces maintain coverage. Hints aren't labels; use independent verifier. Frozen proxy isn't dual-model training.",
+        "example": "An alternate decomposition can be tried but still receives failure if validation fails."
+      }
+    },
+    "qa/post-training:video-opsd/basics": {
+      "source_sha256": "ce5aac0650f2c4a4a7792a6e10b4d90601b0e260e40e92436d94624323e73b05",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Video-OPSD teacher see evidence frames while student sees full video?",
+        "answer": "Privileged frames focus teacher supervision, while student learns to find relevant evidence amid distractions and does not receive annotation at inference.",
+        "example": "Teacher can see the cup pickup moment; student must find it within the full activity."
+      }
+    },
+    "qa/post-training:video-opsd/comparison": {
+      "source_sha256": "125f6a0da993fc4e85c70fd5066f868aa14db2eca25c7dfec9fbc43a989a8d58",
+      "reviewed": true,
+      "fields": {
+        "question": "How do evidence-dependent weights differ from equal token KL?",
+        "answer": "Emphasize positions influenced by visual evidence, not all style tokens equally. Dependency isn't factual certainty. No-video smoke doesn't validate paper training time.",
+        "example": "An action word can depend more on frames than a connective."
+      }
+    },
+    "qa/post-training:video-opsd/implementation": {
+      "source_sha256": "fd791e667cc034c5d702cd58de9ef514825851bb56d68446458474bd0c6134b9",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local Video-OPSD smoke include video frames?",
+        "answer": "No. Independent reward axes proxy evidence. Available checkpoints don't imply trained video model. Align teacher targets to student prefixes and keep annotations out of deployment.",
+        "example": "A synthetic process score doesn't show the model watched a video."
+      }
+    },
+    "qa/post-training:video-opsd/mechanism": {
+      "source_sha256": "13617683c77131c2be1d00c0839f5e56b24aa6e9f6623937198e3dc3a315ec2a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep evidence frames teacher-only and full video for student?",
+        "answer": "Human-labeled frames give focused supervision, weighted by token dependence. Student must handle distractions as deployed; supplying frame labels changes the task. No-video diagnostics aren't vision evidence.",
+        "example": "To answer who picked up the cup first, student still needs to locate the relevant segment."
+      }
+    },
+    "qa/post-training:uc-mopd/basics": {
+      "source_sha256": "be5bca6fb470d13d8e8365d85af7344e6ba96a1c5ff99a7c5b4ffb31348a7c66",
+      "reviewed": true,
+      "fields": {
+        "question": "Why expand temperature coverage before UC-MOPD selection?",
+        "answer": "Ordinary sampling may yield few positive-credit positions. Dual temperatures broaden exploration, then trajectory density/token reliability filter it. More candidates aren't all correct.",
+        "example": "Try another solution first, then check whether its steps help."
+      }
+    },
+    "qa/post-training:uc-mopd/comparison": {
+      "source_sha256": "3dc70986d31774fbd5a0e0976cad89d1c1abd4ec1e53001e1cca459f5d15ec4c",
+      "reviewed": true,
+      "fields": {
+        "question": "How do positive-advantage density and CLL gating work together?",
+        "answer": "Density selects useful trajectories; CLL controls local tokens inside selected traces. Both are required and confidence isn't truth.",
+        "example": "A generally useful solution can still contain positions not worth reinforcing."
+      }
+    },
+    "qa/post-training:uc-mopd/implementation": {
+      "source_sha256": "5c44a8234fe4719b9b6dc5bcfeefceff4f4c7ddc31a18169168ae39393e1166c",
+      "reviewed": true,
+      "fields": {
+        "question": "What does stochastic UC-MOPD gating need to log, and were checkpoints loaded?",
+        "answer": "Log probabilities, seed and valid positions so random draws aren't deterministic decisions. No general/domain teachers loaded; formula checks don't prove retained general capabilities.",
+        "example": "Track each differing random mask, not just report the best draw."
+      }
+    },
+    "qa/post-training:uc-mopd/mechanism": {
+      "source_sha256": "a37a40b82840b82b5d7acbfc311d7557102c14ec94db247a98cfd8ed43476d36",
+      "reviewed": true,
+      "fields": {
+        "question": "What do temperature expansion, trajectory selection and token gating each solve?",
+        "answer": "Expand candidate coverage, favor trajectories with dense positive advantages, then gate individual updates with entropy-calibrated probabilities. More samples don't guarantee correct supervision; no full teachers locally.",
+        "example": "Sample varied solutions, select one with useful steps and reinforce only reliable tokens."
+      }
+    },
+    "qa/post-training:clue-opsd/basics": {
+      "source_sha256": "de70476b918f46f67f1c5d9dbd260c6807052cf8702bc03e67a6ce92f36bc7b3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are relevant time intervals privileged training information in Clue-OPSD?",
+        "answer": "A focused teacher can guide evidence retrieval in long video. Student still receives full video/question and loses clue and teacher at deployment.",
+        "example": "Teacher knows the opening-door timestamp; deployed student must find it."
+      }
+    },
+    "qa/post-training:clue-opsd/comparison": {
+      "source_sha256": "bb688360709fce7d5217fe26f37d122f3b973c1f54ec7f953aace3ee3b5d8237",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a clue teacher differ from shortening the student's video?",
+        "answer": "Shortening input simplifies the task; teacher-only privilege changes supervision while preserving full-video difficulty and costs.",
+        "example": "Seeing a solution clip and seeing all footage are not matched evaluations."
+      }
+    },
+    "qa/post-training:clue-opsd/implementation": {
+      "source_sha256": "4bca3aca94ee78598c99ea2c0da2271a918b70df064f202bf52a58da6bfbf2fd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why score Clue-OPSD KL on student rather than teacher prefixes?",
+        "answer": "Guide actually visited states with aligned token positions despite different visual conditions. The mini-suite does not execute a full video-checkpoint experiment.",
+        "example": "If the student misidentifies a person, teacher must rate that prefix, not its own ideal opening."
+      }
+    },
+    "qa/post-training:clue-opsd/mechanism": {
+      "source_sha256": "8b33b1f62f0014a8f41d2fe66d531bc9040eb3eebba77f223a7a2e19f61148f2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why query a clue-conditioned teacher on the student's own prefixes?",
+        "answer": "Actual student prefixes reduce trajectory mismatch while clue segments focus evidence. Clues are training privilege; at inference the student must handle full video without markers, answers or teacher.",
+        "example": "Guide correction of an incomplete event ordering during training, without giving the manual clip at deployment."
+      }
+    }
+  }
+}

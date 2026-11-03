@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/foundation-models/conditional-compute": {
+      "source_sha256": "c4807f881dc3c01ab437bd8a16b23505a45ffbce11f683acf08b2c9dbbdf7fc3",
+      "reviewed": true,
+      "fields": {
+        "title": "Conditional compute: choose experts, skip work, or retrieve stored knowledge?",
+        "thesis": "Parameter capacity, active computation per token, and serving latency are distinct. Switch selects experts; Engram and Memory Grafting retrieve local patterns. AdaDSF, Telescopic LM, and WIDE allocate work by token and layer, full depth, and group width respectively. Identify the routing unit before discussing capacity or savings.",
+        "axis_0": "Experts, layers, head/channel groups, or discrete memory entries",
+        "axis_1": "Capacity in trainable networks or frozen lookup values",
+        "axis_2": "Budgets per token, layer, request, or deployment depth",
+        "axis_3": "Whether sparse branches actually skip kernels"
+      }
+    },
+    "dive/foundation-models/conditional-compute/comparison/foundation-models:switch-transformer": {
+      "source_sha256": "a055b58a17745de647692f41e4098c29f01ab4a271a49712caad8a40f6f75e96",
+      "reviewed": true,
+      "fields": {
+        "position": "Activate one FFN expert per token to increase total capacity with sparse compute; an auxiliary objective balances load.",
+        "tradeoff": "Storage, expert capacity, and cross-device communication remain. Local top-1 MoE omits overflow and all-to-all."
+      }
+    },
+    "dive/foundation-models/conditional-compute/comparison/foundation-models:engram": {
+      "source_sha256": "069df775e15e36b97c4f0cdb8869b26cb45a1fd0ba13999791aef7df5de78095",
+      "reviewed": true,
+      "fields": {
+        "position": "Hash normalized n-grams into trainable memory and context-gate the retrieved vectors into early layers.",
+        "tradeoff": "Local patterns do not replace compositional reasoning; hash collisions and table size matter. The local trainable lookup runs, but short-budget results are not paper gains."
+      }
+    },
+    "dive/foundation-models/conditional-compute/comparison/foundation-models:memory-grafting": {
+      "source_sha256": "c81720b7e71c4b2d401c1456977a601124263733b82d6d91a60c2693b7273f91",
+      "reviewed": true,
+      "fields": {
+        "position": "Encode frequent phrases offline with a pretrained model and freeze them. At serving, match the longest exact suffix or fall back to hashed Engram.",
+        "tradeoff": "Offline bank construction amortizes knowledge acquisition, with new coverage and interface requirements. The local bank does not test scaling gains over Engram."
+      }
+    },
+    "dive/foundation-models/conditional-compute/comparison/foundation-models:adadsf": {
+      "source_sha256": "67fddc3f084e0c7040fa1dc6e79275355fe6ff71e0bba90d13119f35054c01bd",
+      "reviewed": true,
+      "fields": {
+        "position": "Allocate layer budgets from changes between dense teacher layers; each router computes only for Top-K tokens, bypassing others through residuals.",
+        "tradeoff": "Calibrate global active ratio and align routing to the teacher. Active-token counts are not measured GPU FLOPs or latency."
+      }
+    },
+    "dive/foundation-models/conditional-compute/comparison/foundation-models:telescopic-lm": {
+      "source_sha256": "ec42b2d384a6e793ac8ab54b8e2d71ae316e08c0b0dd9b80466e5e3004083f73",
+      "reviewed": true,
+      "fields": {
+        "position": "Train random depth prefixes while keeping a full-depth anchor so one checkpoint runs at several complete depths.",
+        "tradeoff": "Deployment depth is not fine-grained per-token routing. Local checks cover random depth and anchor gradients only."
+      }
+    },
+    "dive/foundation-models/conditional-compute/comparison/foundation-models:wide": {
+      "source_sha256": "06397eebc00080d1b2a5e68e8c4592a92bcf5ddb7ad15009617af6ecd1294980",
+      "reviewed": true,
+      "fields": {
+        "position": "Select attention head groups and FFN channel groups separately for each token, at finer granularity than a layer.",
+        "tradeoff": "Mask reordering and device-level block skipping are needed for speed. Dense-kernel local sparsity is not acceleration."
+      }
+    },
+    "dive/foundation-models/conditional-compute/analysis/0": {
+      "source_sha256": "6b7e811e4cd665c790ab94bd2424430f1c1b39c9ac262585e8f00632157c1ed0",
+      "reviewed": true,
+      "fields": {
+        "title": "Expert computation and conditional memory are different capacities",
+        "body": "Switch executes a nonlinear expert on the hidden input. Engram retrieves discrete local-pattern entries and gates them by context. Memory Grafting gets some entries from frozen offline pretrained representations. Sparse capacity therefore means different things for expert weights, learned tables, and frozen banks. Expected constant-time addressing does not eliminate lookup transfer and fusion costs."
+      }
+    },
+    "dive/foundation-models/conditional-compute/analysis/1": {
+      "source_sha256": "4ce002d98000e7be09faf8dd5eb520821906dc2b088f35541f2ecee990f113c5",
+      "reviewed": true,
+      "fields": {
+        "title": "State the unit of a conditional budget",
+        "body": "AdaDSF sets how many tokens enter each layer; Telescopic LM runs a complete depth prefix; WIDE selects each token's attention and FFN groups. Similar active ratios conceal different dependencies, workloads, and kernels. Dense computation followed by zero masking saves no latency. Consider training compatibility and actual deployment skip granularity."
+      }
+    },
+    "dive/foundation-models/conditional-compute/question/lookup-versus-expert": {
+      "source_sha256": "caad9aa26587a5dacfde7ff5cf51255793e25389db4afe1d67ccb87ed0e21d8c",
+      "reviewed": true,
+      "fields": {
+        "question": "What do a Switch expert and an Engram or Memory Grafting lookup add for a repeated phrase?",
+        "answer": "Switch adds a routed function executed on the current hidden input. Engram learns discrete n-gram values; Memory Grafting reuses frozen external phrase representations with fallback. Conditional computation and local lookup both help capacity but do not guarantee compositional answers.",
+        "example": "A repeated product name can retrieve a stable hint; comparing two products' uses still needs context and computation."
+      }
+    },
+    "dive/foundation-models/conditional-compute/question/budget-unit": {
+      "source_sha256": "a28b068dbea0fd3ac781bdefbf7d764a190206bf1ae7edfca646861580702e0c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do AdaDSF, Telescopic LM, and WIDE produce different execution graphs even at half the compute?",
+        "answer": "AdaDSF can route tokens differently across layers; Telescopic LM runs one complete prefix; WIDE routes groups within a layer per token. Equal averages do not fix slowest paths, group shapes, or memory traffic. Log token-layer assignment, actual depth, and group activation separately.",
+        "example": "Half the tokens at full depth, all tokens at half depth, and each token at half width are different forward passes."
+      }
+    },
+    "dive/foundation-models/conditional-compute/question/sparsity-versus-latency": {
+      "source_sha256": "ffac8670b3ec69be45159ce4dce567011b53c0a8e494329e1f7136a2b5e4bbc8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't Switch and WIDE speedups be inferred from mask counts?",
+        "answer": "Experts can require dispatch and imbalance handling; grouped masks need hardware skipping with different matrix and memory patterns. Dense computation then masking only changes values. Even genuine skips require counting routing, reordering, and communication. Measure the end-to-end workload.",
+        "example": "Half the FFN channels can be slower if extra rearrangement and small matrix calls replace one efficient dense matrix."
+      }
+    },
+    "dive/foundation-models/conditional-compute/update/2026-10-27/0": {
+      "source_sha256": "b57c717b037ff242f56ee6a038d89c25b922842912ee966b468a1f52222d941c",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial version: compared expert execution, discrete lookup, frozen phrase grafting, and depth/width routing, separating capacity, budget units, and hardware requirements."
+      }
+    }
+  }
+}

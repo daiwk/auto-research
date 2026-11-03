@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:sa-mrpo/basics": {
+      "source_sha256": "400479e0a31a4770f7b247f49f0d1019c64b66a48e26498e21896548537b7fc9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why track reward saturation in SA-MRPO?",
+        "answer": "Already mastered objectives can crowd out unlearned dimensions. Standardize each dimension and weight by one minus saturation; the saturation estimate must be meaningful.",
+        "example": "If format nearly always passes, prioritize still-failing factual checks."
+      }
+    },
+    "qa/post-training:sa-mrpo/comparison": {
+      "source_sha256": "51e8b2148e30126586c640199671d827b8e06e1141eb44220f8819a2dd5e129b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does saturation weighting differ from fixed reward weights?",
+        "answer": "Fixed weights ignore current mastery; saturation weighting adapts by batch. It doesn't change ultimate importance or prevent forgetting.",
+        "example": "After downweighting a mastered skill, keep monitoring rather than declare it permanently solved."
+      }
+    },
+    "qa/post-training:sa-mrpo/implementation": {
+      "source_sha256": "4fa367154b873b8a1f47324677ac9bdca7e87b396fc05f7d39a6b59ed2267996",
+      "reviewed": true,
+      "fields": {
+        "question": "Can SA-MRPO compute one saturation after aggregating rewards?",
+        "answer": "No. That removes per-dimension budget allocation. Track each mean, variance and saturation before aggregation. Candidate formulas don't reproduce checkpoint training.",
+        "example": "One aggregate hides low correctness and high format performance."
+      }
+    },
+    "qa/post-training:sa-mrpo/mechanism": {
+      "source_sha256": "9b29d70148133cae06779830e1849a4c06e60a83014ffa6bd44b76bbbfcfb56a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why adjust weights based on saturation instead of always treating objectives equally?",
+        "answer": "Mastered dimensions can waste budget needed elsewhere. Normalize per dimension, then reduce saturated goals by a specified statistic. High scores don't mean permanent mastery, and raw scale isn't mastery.",
+        "example": "Reduce formatting pressure if already solved, but check whether later reasoning training degrades it."
+      }
+    },
+    "qa/post-training:rubric-dropout/basics": {
+      "source_sha256": "d42f10e9d3eb8ad8ef551cb6b19c740c1c47289b1349ab1c71931782225a64b6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why randomly hide rubric criteria?",
+        "answer": "Fixed proxies can be repeatedly exploited. Random subsets make a single shortcut unreliable. Hidden criteria are not unimportant; the visible reward composition changes during training.",
+        "example": "A canned phrase cannot reliably earn total reward if its easy criterion is often absent."
+      }
+    },
+    "qa/post-training:rubric-dropout/comparison": {
+      "source_sha256": "b97e0d01d1964d2ef991938efc889970231bae19be3ce9e67ec636c78f31df6a",
+      "reviewed": true,
+      "fields": {
+        "question": "How does group-shared dropout differ from independent masks per response?",
+        "answer": "A shared subset keeps same-prompt responses comparable. Independent masks confound quality with scoring criteria. Randomize by group.",
+        "example": "Comparing A on format and B on correctness doesn't isolate answer quality."
+      }
+    },
+    "qa/post-training:rubric-dropout/implementation": {
+      "source_sha256": "8ea8a79a195733e98a426e65efe94bf5ed7bc6453edc8008dc07a5e8d64c730b",
+      "reviewed": true,
+      "fields": {
+        "question": "When should Rubric Dropout sample and save the mask?",
+        "answer": "Sample one mask per rollout group, freeze for scoring and log seed. Never choose masks after seeing which response benefits. No local real rubric judge.",
+        "example": "Hiding difficult criteria only after observing failure is cherry-picking, not dropout."
+      }
+    },
+    "qa/post-training:rubric-dropout/mechanism": {
+      "source_sha256": "20cf9b641ad65e431c033c3fd91e50254ee1930c43c857b72947cfd7770c9228",
+      "reviewed": true,
+      "fields": {
+        "question": "Why share a rubric subset within a rollout group?",
+        "answer": "Relative rewards need common criteria; different random criteria can misrank peers. Cross-group randomization reduces fixed shortcuts, but doesn't guarantee valid remaining criteria or protect task performance.",
+        "example": "Omit brevity for both answers, not only one."
+      }
+    },
+    "qa/post-training:rrc/basics": {
+      "source_sha256": "4f23dcbcad59212df51c1140034f161a83e4d6fb7a2aa146394bc1f72fbd94c8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why derive RRC generative reward from relative ranking?",
+        "answer": "Generative judges may compare reliably without calibrated standalone scores. Within-group ranks plus anchors yield centered rewards while exploiting comparative strength.",
+        "example": "A judge may prefer one summary reliably but inconsistently use a ten-point scale."
+      }
+    },
+    "qa/post-training:rrc/comparison": {
+      "source_sha256": "455a9c60b4cdceb83a98a2247f0eb5a18b572b4a57b571b97089bd5d720447cb",
+      "reviewed": true,
+      "fields": {
+        "question": "What do group self-competition and anchor ranks each provide?",
+        "answer": "Group comparisons separate current candidates; anchors bridge groups where ranks alone hide absolute level. Specify weights; rank gaps aren't equal quality distances.",
+        "example": "An all-bad group still has a winner; an anchor can show it remains poor."
+      }
+    },
+    "qa/post-training:rrc/implementation": {
+      "source_sha256": "cb580175e87b756a161d60b36f748e92321d6bb706439554245dc034b91a5b07",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check group size and rank direction before converting RRC ranks to rewards?",
+        "answer": "K−1 requires more than one sample. Declare whether rank one is best. No local real judging or complete capability integration.",
+        "example": "A reversed formula can give the best rank the lowest reward."
+      }
+    },
+    "qa/post-training:rrc/mechanism": {
+      "source_sha256": "80259e06fed6a24e2234f277c1745dac8e3b9f4af7522a4fb2e9a5e228be97ce",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine group and anchor ranking rather than ask for absolute scores?",
+        "answer": "Comparative judgments can be more stable than absolute scale. Group competition gives relative position; anchors give cross-group reference before centering. This still depends on candidates and judge, not absolute truth or full paper evaluation.",
+        "example": "Two group winners may have very different quality relative to a shared anchor."
+      }
+    },
+    "qa/post-training:adrs/basics": {
+      "source_sha256": "0d0b6db76107f5801c5cf6c9defdbc9b8d8520b022847c5a0babfc4bc262358e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not simply trust high privileged-teacher confidence in ADRS?",
+        "answer": "Extra skills/context may boost confidence without returns. Gate dense feedback by correlation between same-step teacher scores and observed returns.",
+        "example": "A teacher can favor a tool action that frequently fails."
+      }
+    },
+    "qa/post-training:adrs/comparison": {
+      "source_sha256": "0efc1b62f3a621cfec6364909c2f19bee0be96f0dc7dd5a0a0a3eecacf9e1478",
+      "reviewed": true,
+      "fields": {
+        "question": "How does TVA correlation gating differ from fixed distillation weight?",
+        "answer": "Fixed weight always trusts teacher; positive correlation retains signals associated with returns. Batch correlation is not causality and may not use test gold.",
+        "example": "If teacher scores don't track success, extra guidance weakens."
+      }
+    },
+    "qa/post-training:adrs/implementation": {
+      "source_sha256": "84fa2b03d0dacb921ffe4c8e77cb3669b458f9f11f7307f8ff8a1bf0e0608eb6",
+      "reviewed": true,
+      "fields": {
+        "question": "Does ADRS standardize over a full trajectory or within interaction steps?",
+        "answer": "Standardize teacher scores within each interaction step and correlate across trajectory returns, then feed host reward-to-advantage logic. Local z-scores aren't correctness labels.",
+        "example": "Compare second tool calls with other second calls, not every turn combined."
+      }
+    },
+    "qa/post-training:adrs/mechanism": {
+      "source_sha256": "405f29097d4a86eecdc66121063ae0561413ebbd4bab191a53799faff6918d4e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check teacher confidence against realized return before using token guidance?",
+        "answer": "Privileged certainty can amplify error. Normalize within interaction steps, gate by positive return association and use the existing reward-to-advantage path. Negative association isn't help; inference does not use privileged training skill/outcome.",
+        "example": "Gate out confidence in fluent but ineffective tool calls."
+      }
+    },
+    "qa/post-training:serpo/basics": {
+      "source_sha256": "6798c588de1fcf7a599c2940c4c2fffcd5b897ebb60e5f4623690060f6fbf8e6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep a Good–Normal–Bad archive in SERPO?",
+        "answer": "Different qualities inform prompt-specific rubrics and policy learning. Actor and criteria evolve; storing only highest scores loses contrasts. Classification depends on judge quality.",
+        "example": "Medium answers expose gaps and bad answers show patterns to avoid."
+      }
+    },
+    "qa/post-training:serpo/comparison": {
+      "source_sha256": "6303adb21eed687526e07e7b9cdf776d947c8a8f35ece0e327f6f029c04be550",
+      "reviewed": true,
+      "fields": {
+        "question": "How does SERPO differ from repeated RL under a fixed rubric?",
+        "answer": "It updates query-specific rubrics and archives with the actor. Fixed criteria can lose discrimination, but coevolution risks drift and self-reinforcement. Self-scores aren't proof.",
+        "example": "New criteria can distinguish harder negatives after the actor learns initial rules."
+      }
+    },
+    "qa/post-training:serpo/implementation": {
+      "source_sha256": "a12b1aa5a7ba1f73647dd9ee1678d90ec6d891b7b1dcb8f4ecd2c68f2be826e9",
+      "reviewed": true,
+      "fields": {
+        "question": "How should SERPO track its three evolving states?",
+        "answer": "Record versions and ordering of generation, archive, rubric and actor updates. Don't retrospectively score with later rubrics. Local candidates don't implement full generation/judging.",
+        "example": "Log the actual rubric used for each batch so training supervision is auditable."
+      }
+    },
+    "qa/post-training:serpo/mechanism": {
+      "source_sha256": "dc1f71bffad19b87a1daa2573987b45d759de543517ae06d8d69e0eb7f905b54",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate SERPO archive, rubric and actor roles?",
+        "answer": "The archive stores comparisons, rubric defines current standards, and actor generates. Feedback can adapt or amplify bias. New archive or rubric doesn't itself train or improve the model; use independent holdout.",
+        "example": "A short-only archive, brevity rubric and short actor may agree while neglecting facts."
+      }
+    },
+    "qa/post-training:cort/basics": {
+      "source_sha256": "3df2927752eae104f31e635662f7aa5dd201e32caf3009635cd077bdd7b0a1d4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why replay one reply with and without criteria in CoRT?",
+        "answer": "Keep response fixed so likelihood differences link rubric context to token positions, redistributing response advantage rather than adding another global score.",
+        "example": "A format requirement can affect bracket tokens and their credit."
+      }
+    },
+    "qa/post-training:cort/comparison": {
+      "source_sha256": "a4617be015c515d7a68ea62284a01b9044f5513727a385eebdf51e64451395e9",
+      "reviewed": true,
+      "fields": {
+        "question": "How does CoRT counterfactual replay differ from attention weighting?",
+        "answer": "Replay changes evaluation context and compares probabilities; attention measures one forward's information weights. Neither directly proves causality; attention isn't the specified contrast.",
+        "example": "A high-attention token may show unchanged likelihood when criteria are removed."
+      }
+    },
+    "qa/post-training:cort/implementation": {
+      "source_sha256": "d943eabaae9e9a62b139b04ab9b9afb1f8833f6f303e2e0d8593f03bb5aa3401",
+      "reviewed": true,
+      "fields": {
+        "question": "Why align both CoRT scoring passes to the same token and prefix?",
+        "answer": "Different generated text confounds the criteria intervention. Normalized weights scale fixed advantage; original student sampling must not see the privileged rubric. Candidate features aren't token replay.",
+        "example": "Scoring sentence A with criteria and B without doesn't isolate their effect."
+      }
+    },
+    "qa/post-training:cort/mechanism": {
+      "source_sha256": "d3c26cd82e6feea34a932c20c998a1c7ff72bace7cff44b1ff0249d8cbb56b97",
+      "reviewed": true,
+      "fields": {
+        "question": "Why replay the same response instead of generating separately under each rubric view?",
+        "answer": "Fixed tokens/prefixes isolate conditioning better; regenerating also changes trajectories. Use the difference to allocate original advantage, not pass scoring text into deployment. Counterfactual contexts can still bias the estimate.",
+        "example": "A citation token's likelihood can change with a citation requirement; regenerating the whole paragraph adds other changes."
+      }
+    }
+  }
+}

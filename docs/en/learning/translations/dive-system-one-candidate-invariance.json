@@ -1,0 +1,90 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/system-one/candidate-invariance": {
+      "source_sha256": "8e0c0ef1ac01d309d53e59f985d6b28ec196650e3565c6b58297abfd05f3dbf0",
+      "reviewed": true,
+      "fields": {
+        "title": "Ranking invariance, calibration, and full-set recovery are distinct promises",
+        "thesis": "Prism-1 constrains scoring dependencies, the JEV request audit designs paired interventions, and the multiple-correct audit checks whether a distribution recovers the correct set. They answer different questions: what the architecture guarantees, what the experiment changes, and what the evaluation measures. A valid output or one top-1 score cannot stand in for these answers.",
+        "axis_0": "Architectural conditions for independent option scoring",
+        "axis_1": "Interventions on questions, evidence, and candidate eligibility",
+        "axis_2": "Relative odds, absolute probabilities, and set-recovery metrics"
+      }
+    },
+    "dive/system-one/candidate-invariance/comparison/foundation-models:prism-1": {
+      "source_sha256": "4c600292e2153a97a051783831589deed1146c1b6b13d8eafa1e0169d501b652",
+      "reviewed": true,
+      "fields": {
+        "position": "Each option attends only to shared state, the current question, and its own block. Blocks reset to the same starting positions. Independent yes/no log-odds feed an option softmax.",
+        "tradeoff": "Preserves relative odds among old options under fixed evidence while allowing a new winner. Does not guarantee accuracy or resistance to shared-context injection, and does not fit cross-option semantics such as “none of the above.”"
+      }
+    },
+    "dive/system-one/candidate-invariance/comparison/foundation-models:jev-request-audit": {
+      "source_sha256": "0cd178ecf10e3a0a9c7e753f445ff764ac552e1d95a870bd061220f838ed90b2",
+      "reviewed": true,
+      "fields": {
+        "position": "Separates additions to the question, displayed evidence, and candidate eligibility into paired interventions. Measures flips, ties, conditional probabilities, and allowed-label mass separately.",
+        "tradeoff": "Measurement needs fixed public inputs and isolated scoring labels. If evidence changes, answers need not remain invariant. The local audit interface is distinct from claims about the paid models in the paper."
+      }
+    },
+    "dive/system-one/candidate-invariance/comparison/foundation-models:jev-multicorrect": {
+      "source_sha256": "7246ce62a47787ec092d2f3bcec045276c99e33d1cdc5e3f886c0f477889f892",
+      "reviewed": true,
+      "fields": {
+        "position": "Checks probability gaps for correct options, rankings, exact-set recovery after thresholding, and independent binary calibration to distinguish a categorical distribution from per-option correctness probabilities.",
+        "tradeoff": "Ranking all correct options above all wrong ones does not guarantee exact recovery at a threshold. Choose thresholds on validation. The paper's model responses are not public; local work validates only scoring and isolation contracts."
+      }
+    },
+    "dive/system-one/candidate-invariance/analysis/0": {
+      "source_sha256": "f0467125d0f311cbc75537074fe07f439e92e8c36e9be4e8703602880e53493d",
+      "reviewed": true,
+      "fields": {
+        "title": "Freeze the evidence before discussing independence",
+        "body": "Prism-1 assumes that shared state and the question are unchanged. An eligibility-only request audit keeps all displayed evidence fixed. If a new passage clarifies the question, score changes may reflect a reasonable information update. Compare A-versus-B conditional probabilities or odds. A drop in absolute probability caused by a larger softmax denominator is not a preference reversal."
+      }
+    },
+    "dive/system-one/candidate-invariance/analysis/1": {
+      "source_sha256": "15a61f92a98089051992308d23af41febe4b0b34b82b7ba6c1f5a48f92828d80",
+      "reviewed": true,
+      "fields": {
+        "title": "Independent scores do not automatically yield multilabel probabilities",
+        "body": "Even when Prism-1 makes each score independent of other options, the option softmax distributes a single unit of mass. The multiple-correct audit asks whether the entire correct set can be recovered. Correct options still compete for mass, so stable rankings do not imply that all correct options clear one threshold or that option shares are calibrated per-option correctness probabilities."
+      }
+    },
+    "dive/system-one/candidate-invariance/question/denominator-not-reversal": {
+      "source_sha256": "9d1719db17d958032b57dca97b166ba6a24842b0435ceda3fc9839fe2522bef1",
+      "reviewed": true,
+      "fields": {
+        "question": "If A's probability drops when an unrelated C is added, has the property Prism-1 protects already been violated?",
+        "answer": "Not necessarily. Fix the evidence, then compare A-to-B odds or A/(A+B). C raises the denominator, so A's absolute share can drop normally. Only a change in the old pair's relative preference calls for investigating cross-option information or position dependence. The request audit separates this normalization effect from added evidence.",
+        "example": "With exponentiated scores 2 and 1, A has 2/3 of the mass. Adding C with score 5 lowers A's share to 2/8, but A/B remains 2; the old candidates have not reversed."
+      }
+    },
+    "dive/system-one/candidate-invariance/question/ranking-versus-set-recovery": {
+      "source_sha256": "ead0896a54da4ae5b6f0f90e218b2da8c1b6f917972d3d02c8db5cfe5a9d1784",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is ranking every correct option ahead of every incorrect option insufficient to solve a multiple-answer question?",
+        "answer": "A ranking gives relative order, not how many options to select. Option softmax distributes one unit of mass, so the second correct option may have little mass. A fixed threshold may omit it, and lowering the threshold may admit an incorrect option. Measure exact-set recovery separately and select thresholds on independent validation data.",
+        "example": "A and B are correct and the shares are 0.60, 0.25, and 0.15. The ranking is perfect, but a threshold of 0.4 returns only A. Correct top-1 does not expose the missing B."
+      }
+    },
+    "dive/system-one/candidate-invariance/question/evidence-versus-eligibility": {
+      "source_sha256": "e3a09ce9edc9f9efb4adff9cded920f38b3715f2ae74c2008384687a2769d9bd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must adding C as an eligible candidate and adding evidence describing C be tested separately?",
+        "answer": "Eligibility changes the action set; evidence changes what the model knows. Prism-1 constrains independent option scores under fixed shared evidence only. The request audit separates interventions to distinguish competition effects from legitimate information updates. Multiple-correct scores must also be interpreted under fixed input conditions and a fixed correct set.",
+        "example": "If tool C is already described in full, making it selectable changes eligibility. Adding “C supports offline operations” introduces new evidence that can change the A/B preference."
+      }
+    },
+    "dive/system-one/candidate-invariance/update/2026-10-27/0": {
+      "source_sha256": "e33e23811ee5ad47ba298c0a9f59855307bdf65ded1590763ef7ab09dac77972",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial version: compared Prism-1, the JEV request audit, and the multiple-correct audit. Covered independent option scoring, interventions on questions, evidence and eligibility, and cross-paper questions."
+      }
+    }
+  }
+}

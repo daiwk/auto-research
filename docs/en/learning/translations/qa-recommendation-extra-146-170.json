@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:specformer/basics": {
+      "source_sha256": "330278bd22159f4d7e8bed29c49610f7cac6ce862ad28c8c54804d3b72200698",
+      "reviewed": true,
+      "fields": {
+        "question": "Why inspect singular spectra for representation collapse?",
+        "answer": "Concentration in a few directions reduces diversity. Spectral softening changes relative singular values; spectral positional residuals affect attention. A flatter spectrum is not task evidence.",
+        "example": "Nearly parallel user vectors struggle to distinguish interests."
+      }
+    },
+    "qa/recommendation:specformer/comparison": {
+      "source_sha256": "6f02b025924a98a5a846ae992f1f56ea3cb99cf597982699ae19f0ee8c94effa",
+      "reviewed": true,
+      "fields": {
+        "question": "How does spectral softening differ from L2-normalizing embeddings?",
+        "answer": "Unit norms control individual lengths, not collective directional spectrum. Singular-value transforms redistribute subspace energy.",
+        "example": "Unit-length vectors can still all point the same way."
+      }
+    },
+    "qa/recommendation:specformer/implementation": {
+      "source_sha256": "d90b40ce4d7d1e06ff6e8e45d15407b675bf77746194b23c4d57b9bc3961077b",
+      "reviewed": true,
+      "fields": {
+        "question": "What should local SpecFormer SVD tests verify?",
+        "answer": "Validate shapes, nonnegative singular values, reconstruction, positional residual alignment, and stability near zero rank. Public proxies do not reproduce production uplift.",
+        "example": "Correct matrix reconstruction does not show genuine interest recovery."
+      }
+    },
+    "qa/recommendation:specformer/mechanism": {
+      "source_sha256": "e3c7e792bc737da136db1d277f506bba62d10c94d4c4dc3f31922124bf794f2e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can spectral softening counter collapse?",
+        "answer": "Dominant singular modes concentrate tokens and limit deep interaction. Softening reduces disparity and spectral residuals give attention structural cues. This is not lossless equalization; weak modes can be noise.",
+        "example": "Reduce popularity dominance so genre directions can matter without assuming every weak direction helps."
+      }
+    },
+    "qa/recommendation:ssrlive/basics": {
+      "source_sha256": "1a3ea7aa5ba6e26a3654b24fb8885562231679bb8031d451becef8c011e513bb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use static and dynamic semantic IDs for live streams?",
+        "answer": "A host's stable style and current topic change on different timescales. Combine both with interactions for viewing, commerce, and engagement; dynamic updates must be fresh.",
+        "example": "A tech host can currently be traveling outdoors."
+      }
+    },
+    "qa/recommendation:ssrlive/comparison": {
+      "source_sha256": "ed5685e681a556a5c132bf57748a11169dcddb6fa3c038012ff743edb4e75e7e",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a dynamic SID differ from adding a timestamp?",
+        "answer": "It represents changing content; time alone does not identify that content. A timestamp column is not dynamic semantic generation.",
+        "example": "Knowing it is 8 pm does not reveal the product being demonstrated."
+      }
+    },
+    "qa/recommendation:ssrlive/implementation": {
+      "source_sha256": "bed0bf4ea4fa9fcae98af0dcada0b2072d09b9ce9adc4612bddfa091044e3bd5",
+      "reviewed": true,
+      "fields": {
+        "question": "What can local MovieLens SSRLive establish?",
+        "answer": "Only core static/dynamic representation and interactions, not live frames, trades, or production multitask logs. Separate task labels and snapshots from future outcomes.",
+        "example": "The next rating cannot be used to construct current dynamic features."
+      }
+    },
+    "qa/recommendation:ssrlive/mechanism": {
+      "source_sha256": "ef83375617269be090eab12e7b91a8f9ebd1dfcaa43ec62c044b9b775c4384de",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain both host-static and live-dynamic SID rather than overwrite one code?",
+        "answer": "Stable identity and temporary content carry different timescales. Separate codes preserve durable audience fit and current topic for multitask prediction. Dynamic IDs still have extraction and refresh lag.",
+        "example": "Preserve a beauty host's audience profile while indicating today's travel-storage stream."
+      }
+    },
+    "qa/recommendation:static-constraint-decoding/basics": {
+      "source_sha256": "4ac4fb22bace1232d32c3bad047450db0cfc22d42a4e4735ab67aa4d6cb8f8d7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compile legal item tries into device-side transitions?",
+        "answer": "Inventory/geography constraints need legal decoding, but CPU pointer traversals cause round trips. CSR and shallow dense lookup provide contiguous token and destination indices on accelerators.",
+        "example": "Gather legal successors from one row rather than walking a CPU trie."
+      }
+    },
+    "qa/recommendation:static-constraint-decoding/comparison": {
+      "source_sha256": "cb0c39441707d4b684c48402115c84578a2abf15b261e5a95699a0af59efc3df",
+      "reviewed": true,
+      "fields": {
+        "question": "How does legal-only softmax differ from full log-softmax then masking?",
+        "answer": "Legal renormalization changes prefix score scales according to set size. Full log-softmax preserves model probabilities while excluding invalid tokens.",
+        "example": "A parent with one legal successor gets an artificial boost if renormalized alone."
+      }
+    },
+    "qa/recommendation:static-constraint-decoding/implementation": {
+      "source_sha256": "6894e1eb08cf435bdfc3eb7e7112149aab3de3b7e5ddce731077664427db8040",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reorder prefix and trie node together after beam selection?",
+        "answer": "Prefix and legal state are paired. Children can come from different parents; mismatching states applies the wrong mask. Pin trie versions.",
+        "example": "A clothing prefix cannot keep a food node for next-step legality."
+      }
+    },
+    "qa/recommendation:static-constraint-decoding/mechanism": {
+      "source_sha256": "b526c8d557a991eef72318a0e5438c157ac427e2b57d883b5bea5c4963d55a0b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use full-vocabulary log-softmax before masking?",
+        "answer": "Constraints remove invalid paths, not alter original conditional probabilities. Legal-set renormalization favors some small sets in cross-beam comparison. CSR accelerates lookup; synchronize prefixes and states.",
+        "example": "A lone legal child should not become probability one and unfairly beat a better-supported path."
+      }
+    },
+    "qa/recommendation:steps/basics": {
+      "source_sha256": "928761ca56029d7c4a9f53df831499bdd72f2112000c7efe7488fbe3e891de0c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why decide both whether to push and when to wake again?",
+        "answer": "Fixed frequency ignores user state; polling wastes work. Planning, execution, and cheap filters jointly handle timing and cost.",
+        "example": "A no-send decision should still specify when to reevaluate."
+      }
+    },
+    "qa/recommendation:steps/comparison": {
+      "source_sha256": "9db1e3a87b8f56bbd3c03e85dd1eb2465a65ba8ba5c7b553021ada270954c59f",
+      "reviewed": true,
+      "fields": {
+        "question": "Are planning, execution, and filtering one threshold?",
+        "answer": "No. Planning predicts wake interval, execution decides send, and filtering controls cost and anomalous plans. Combining them into one probability removes scheduling and guardrails.",
+        "example": "Choosing tomorrow morning differs from choosing to send now."
+      }
+    },
+    "qa/recommendation:steps/implementation": {
+      "source_sha256": "a6b7438e036a20ca45bb6bf3f9829e2d72dc72635c565955e6ca6699c81a88a4",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local STEPS have real permissions and wall-clock wakeups?",
+        "answer": "No. MovieLens verifies decision decomposition, not push permissions, reach cost, clocks, or delivery. Actual service needs contracts and real rewards.",
+        "example": "Updating a simulated timestamp does not notify a phone."
+      }
+    },
+    "qa/recommendation:steps/mechanism": {
+      "source_sha256": "baf74aa28796b35de350487c32dba275630c78b1152cdd9195e9c4c72f015bfd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use separate wake and send agents plus a filter?",
+        "answer": "Ordinal planning decides when to observe, trajectory reward drives sending, and a light filter rejects low-value or abnormal plans. This combines observation cadence and actions, without equating waiting value to message value or local ranking with retention.",
+        "example": "Delay after an ignored notification, then still decline sending; filter one-second wake loops."
+      }
+    },
+    "qa/recommendation:swag-bid/basics": {
+      "source_sha256": "57eb3da10ff66182ccfc389aa72af61baa930d5c1165c1234a5493bec8cbdef1",
+      "reviewed": true,
+      "fields": {
+        "question": "Are SWAG-Bid episode boundaries and seven-day windows the same?",
+        "answer": "No. Episodes bound local interactions; the sliding window carries longer goals/state across episodes, not seven fixed actions. Do not reset all long-term context at every boundary.",
+        "example": "A new bidding day does not restart a seven-day objective."
+      }
+    },
+    "qa/recommendation:swag-bid/comparison": {
+      "source_sha256": "2ce22b5108fb2ca59a898c72a1044a9a8503e78e2de151ee6c83f563f0815e97",
+      "reviewed": true,
+      "fields": {
+        "question": "How does masked future planning in training differ from deployment future access?",
+        "answer": "Training can construct masked plan signals under protocol. Serving sees only then-available state and estimates, not realized later GMV or spend.",
+        "example": "Tomorrow's spend can supervise offline training but cannot be an input to today's bid."
+      }
+    },
+    "qa/recommendation:swag-bid/implementation": {
+      "source_sha256": "da870490490170f807c20f9c5a18f6b9eb05a9e6edbb81a0b162d8542bdfdcf3",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local SWAG use real bids, budgets, and GMV?",
+        "answer": "No. It ablates structure, not a production Decision Transformer. Maintain causal masks and timestamps, without filling from future outcomes.",
+        "example": "A movie action score is not an auction price."
+      }
+    },
+    "qa/recommendation:swag-bid/mechanism": {
+      "source_sha256": "aa16aca35facbb646f4bae5db6fe24effe5de9939aebc85b0a2a4478bb57bc1d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use a seven-day plan across episodes and inject it through per-step gates?",
+        "answer": "Local rewards can miss multi-day budgets. Sliding plans carry long goals; gates let immediate markets override guidance when appropriate. Masked future supervision is training-only, and a small zero-change result does not validate bidding gains.",
+        "example": "Save budget during a crowded day but act on a valuable current opportunity using only available information."
+      }
+    },
+    "qa/recommendation:tagllm/basics": {
+      "source_sha256": "98e36c270ff4a5e3cb95b286a62a9972406e6fd3d29232db04dc0090a0c74261",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use category-specific interest manuals for TagLLM?",
+        "answer": "Different content categories need different fine-grained attributes. Manuals and multimodal reasoning structure extraction; richer labels still need user validation.",
+        "example": "Food notes can encode taste and cooking method, not merely “food.”"
+      }
+    },
+    "qa/recommendation:tagllm/comparison": {
+      "source_sha256": "3e1a51d77dd68b2aeb75ca228c897fd4e92d131b6181a5796e4b94ff066b4787",
+      "reviewed": true,
+      "fields": {
+        "question": "How does two-stage distillation differ from calling a large model per note?",
+        "answer": "It transfers expensive labeling to a smaller student, reducing serving cost subject to student capacity and coverage. Cached labels alone are not training.",
+        "example": "A student must label unseen notes, not only look up old examples."
+      }
+    },
+    "qa/recommendation:tagllm/implementation": {
+      "source_sha256": "4fe9406fd6a8cd99281b62e8ae1efa28c2235cfe1515982d34f41714cbeaa99d",
+      "reviewed": true,
+      "fields": {
+        "question": "Does MovieLens verify multimodal note tagging?",
+        "answer": "No. Genre and behavior proxies test mechanisms without private images, manual generation, or production models. Teacher context H is supervision only; exclude test labels from construction.",
+        "example": "Genre prediction is not fine-grained multimodal reasoning."
+      }
+    },
+    "qa/recommendation:tagllm/mechanism": {
+      "source_sha256": "6dc83b39432260f649e99da6a4b51c8e3959e17a3d62ffc1edc4c250b203edc6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why build category manuals before distilling multimodal tagging to a small model?",
+        "answer": "Manuals define category-specific concepts that broad tags miss. A larger model supplies rich supervision and staged distillation enables cheap serving. Omitted attributes are not automatically learned.",
+        "example": "Food needs flavor/method and travel needs destination/transport rather than treating “relaxed” identically."
+      }
+    },
+    "qa/recommendation:tagr/basics": {
+      "source_sha256": "a0ebeb9ad17b1b94ebd952a8d340097b8c7d4f366baba471d30aebd16641d9e5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine LSID, IAG, and IOPO adaptation?",
+        "answer": "Dynamic codes address live content, multiscale history captures intent, and intermittent online optimization addresses reward-policy drift. One component cannot cover all three.",
+        "example": "Product changes, immediate user intent, and bidding value affect different paths."
+      }
+    }
+  }
+}

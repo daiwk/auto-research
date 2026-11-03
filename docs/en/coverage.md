@@ -4,23 +4,23 @@
 
 [English home](index.md) · [Paper catalog](papers/index.md)
 
-**427 of 1331** Chinese site pages have a corresponding English page.
+**1331 of 1331** Chinese site pages have a corresponding English page.
 The table counts document pairs, not English catalog entries that link to Chinese text.
 
 | Source section | Pages | English counterparts | Still untranslated |
 | --- | ---: | ---: | ---: |
-| Top-level pages | 56 | 15 | 41 |
-| agent-research | 269 | 107 | 162 |
-| assets | 1 | 0 | 1 |
-| design | 14 | 0 | 14 |
-| evolution | 4 | 0 | 4 |
-| experiments | 4 | 0 | 4 |
-| foundation-models | 130 | 98 | 32 |
-| learning | 73 | 0 | 73 |
-| multimodal-models | 23 | 10 | 13 |
-| paper-audits | 3 | 0 | 3 |
-| post-training | 237 | 104 | 133 |
-| recommendation-components | 17 | 14 | 3 |
-| reproductions | 430 | 73 | 357 |
-| research-audits | 53 | 0 | 53 |
-| system-one | 17 | 6 | 11 |
+| Top-level pages | 56 | 56 | 0 |
+| agent-research | 269 | 269 | 0 |
+| assets | 1 | 1 | 0 |
+| design | 14 | 14 | 0 |
+| evolution | 4 | 4 | 0 |
+| experiments | 4 | 4 | 0 |
+| foundation-models | 130 | 130 | 0 |
+| learning | 73 | 73 | 0 |
+| multimodal-models | 23 | 23 | 0 |
+| paper-audits | 3 | 3 | 0 |
+| post-training | 237 | 237 | 0 |
+| recommendation-components | 17 | 17 | 0 |
+| reproductions | 430 | 430 | 0 |
+| research-audits | 53 | 53 | 0 |
+| system-one | 17 | 17 | 0 |

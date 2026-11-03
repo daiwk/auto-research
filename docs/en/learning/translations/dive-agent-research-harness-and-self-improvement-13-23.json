@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/agent-research/harness-and-self-improvement/analysis/2": {
+      "source_sha256": "04ffa6fed7d9e43bfc630dbf50c7ef99cbd6a8d5b1d1ac138ae9835da7a994cc",
+      "reviewed": true,
+      "fields": {
+        "title": "October 29: New method and source changes",
+        "body": "RuHarness does not rank its criterion frontier by one accuracy value. A 2×3 behavior/outcome table yields a Jeffreys–Dirichlet posterior for a conservative utility quantile, while set novelty and redundancy stay fixed from observed traces. This separates finite-sample uncertainty from candidate admission: only active criteria enter the frontier and final harness edits require strictly positive independent validation gains. Local work has no LLM judge or harness generation."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/3": {
+      "source_sha256": "8899a9fe62d20196216bb1dd8b9e92ae624c50bc682abc6954cec60fdb2fbec3",
+      "reviewed": true,
+      "fields": {
+        "title": "Track edit targets, judging criteria, and evaluation budgets separately",
+        "body": "Self-Refine edits the current output. CROP instead uses training feedback to change a general system prompt for later tasks and explicitly charges output tokens; it does not claim model-weight training. RuHarness maintains a rubric frontier that distinguishes current failures. EvalAlloc decides which SEARCH items deserve real evaluation: with fixed item references it completes sparse estimates, fills only unobserved cells with predictions, then confirms on a common prefix with cached results. Rubric utility, predicted fitness, and real held-out success are different evidence. Half the cells does not mean half the LLM cost."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/revision-versus-episodic-learning": {
+      "source_sha256": "dd927bf3f03f2db24e11f93cdc887dd747514156fff3c5a9ba322ce395bf14f5",
+      "reviewed": true,
+      "fields": {
+        "question": "How do three revisions of one answer and recording a lesson for another attempt distinguish Self-Refine from Reflexion?",
+        "answer": "Self-Refine generates feedback and edits the current draft, mainly changing that artifact. Reflexion turns execution evaluation into experience readable by the next trial's actor. Both can use a frozen model and imply no gradient training. Check whether feedback enters later context, applies to the new state, and actually improves a verified result; iteration count does not establish learning.",
+        "example": "Correcting a wrong number is a current revision. Saving 'check source tables before quoting numbers' for future tasks is cross-trial state."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/population-versus-current-parent": {
+      "source_sha256": "2d0d293475c36c11afe9aec2247fd2cc3e6d81a03f456eb3077663ac940c8d5e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why aren't retaining low-scoring Agent S4 descendants and rejecting non-improving RSIFlow candidates contradictory?",
+        "answer": "They maintain different search states. The Agent S4 population retains exploration sources, and low-scoring descendants may help later search; private validation chooses parents. RSIFlow tests each candidate from a frozen parent and failure leaves the next starting state unchanged. One preserves diversity and the other governs the current version. Archive admission is not release, and neither needs the same monotonicity criterion.",
+        "example": "An interface variant with a new action can remain in S4 despite a low score. After a non-improving workflow patch, RSIFlow starts again from the original workflow."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/local-admission-versus-production": {
+      "source_sha256": "adb21efbb04f12889a6e3334536d12c41b7dfe7dd29755e9fb3246e55bbba09e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't a paired local behavior gain in HarnessLens replace AgentX production-release judgment?",
+        "answer": "Local validation asks whether the selected behavior gains positively and attributably. Deployment also involves business distributions, guardrails, and actual resources. AgentX can veto a primary gain and records positive and negative experiments. The stages can connect, but small local protocol success supplies neither traffic causality nor authorization to release.",
+        "example": "Offline recovery may improve while request latency rises in production. Functional evidence can hold and guardrails can still reject release."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/oct29-method-boundary": {
+      "source_sha256": "277364cfb62676d1663294f0c339a897009583f1d5907acad5c4ee88d612326a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't RuHarness resample novelty and redundancy with each Dirichlet draw?",
+        "answer": "They describe overlap of fixed trajectory sets, not six-cell outcome probabilities. Randomizing them changes the uncertainty model. A conservative posterior quantile also does not show that actual agents improved.",
+        "example": "Two criteria flag the same failure set. Sampling a success/failure probability should not change that overlap."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/crop-prompt-versus-current-answer": {
+      "source_sha256": "6780a5c928da17798b57d6df55173718354cae5535ec5356bad1507de36810e8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't one correction-success metric summarize CROP and Self-Refine even though both revise text from feedback?",
+        "answer": "Self-Refine mainly revises the current answer. CROP changes system prompts offline and selects evaluated candidates using accuracy and CoT-normalized output-token cost. A better current answer does not demonstrate prompt transfer; shorter prompts do not ensure shorter or correct answers. Real LLM callbacks and independent validation are additional evidence.",
+        "example": "Correcting one arithmetic answer and finding a concise prompt for unseen arithmetic are different tests. The last newly written prompt cannot be called best before evaluation."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/evalalloc-fitness-versus-rubric-frontier": {
+      "source_sha256": "357528e0b00b3d3a9cad60a3ab4f3b4e8dc45faaa677548a2b332322cb90017d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are neither high EvalAlloc predicted fitness nor high RuHarness criterion utility actual agent success rates?",
+        "answer": "EvalAlloc estimates unobserved SEARCH outcomes against fixed references, retaining observed cells and requiring confirmation. RuHarness estimates conservative diagnostic value of criteria, and candidate harnesses still need independent validation. These govern budgets and criteria, not outcomes of unexecuted tasks.",
+        "example": "If only 20 of 300 items are evaluated, completed mean 0.8 does not mean 240 actual completions. A criterion that covers failures does not solve tasks."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-10-27/0": {
+      "source_sha256": "84f298888a770918e8f96e02c32cb7bd57a0ac45966342a13871a41ab2a27746",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial version: compared current revision, cross-trial reflection, local validation, nongreedy interface populations, layered intervention, and guarded production loops."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-10-29/1": {
+      "source_sha256": "038fde052bc1650a87600562451f9b33a30cdef39997d91fc0a9719b2951fac0",
+      "reviewed": true,
+      "fields": {
+        "summary": "RuHarness does not rank its criterion frontier by one accuracy value. A 2×3 behavior/outcome table yields a Jeffreys–Dirichlet posterior for a conservative utility quantile, while set novelty and redundancy stay fixed from observed traces. This separates finite-sample uncertainty from candidate admission: only active criteria enter the frontier and final harness edits require strictly positive independent validation gains. Local work has no LLM judge or harness generation."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-10-30/2": {
+      "source_sha256": "3d8baa94bcb70ae6c6b808d9432e4f562b230104bac0ae4c0696b4b0ecca3b7f",
+      "reviewed": true,
+      "fields": {
+        "summary": "Reviewed CROP and EvalAlloc against Self-Refine and RuHarness, separating system-prompt changes, rubric utility, and SEARCH observation budgets. Added validation and CoT cost, observation-first completion, common-prefix confirmation, and limits of unimplemented MIRT and controller components."
+      }
+    }
+  }
+}

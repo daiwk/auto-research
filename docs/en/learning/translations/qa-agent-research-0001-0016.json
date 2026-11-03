@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:drago/mechanism": {
+      "source_sha256": "cd68d11bc7fb6ac15075d979473284dba432fc005f8e26ec49aa6a0ef3a1e420",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't a satisfiable result prove that a formal specification faithfully captures the task?",
+        "answer": "The solver checks only the constraints that were written. It cannot tell whether a natural-language requirement was omitted or substituted. DRAGO diagnoses vocabulary contracts, reachability probes, and alignment with the task separately. Repairs must strictly reduce blockers without gaming the check by dropping goals. A probe that runs out of budget must report unknown, not proven unsatisfiable.",
+        "example": "Example: A task requires reaching two places, but a specification listing only one can still be satisfiable. Removing the harder goal makes solving easier without repairing the specification."
+      }
+    },
+    "qa/agent-research:drago/basics": {
+      "source_sha256": "c5d775d98508e1f672fad3fd4857146bf5c1e3551cdd193a9796ba0139f71b46",
+      "reviewed": true,
+      "fields": {
+        "question": "What kind of apparent success does DRAGO guard against when an LLM converts a natural-language problem to a formal specification?",
+        "answer": "The model can produce a parseable, solvable specification that omits requirements, and the solver will faithfully solve the wrong problem. DRAGO uses localized diagnostics to constrain repairs rather than taking any solution as proof the original problem was solved. Formalization and solving need separate checks.",
+        "example": "Example: A schedule must assign both people. Omitting one person makes the scheduling problem easier, but that apparent success exposes a formalization error."
+      }
+    },
+    "qa/agent-research:drago/comparison": {
+      "source_sha256": "89fad94837f9665f3c4aecaddfe27424db18b502d67eb8f3ccc9e9efa9cef0fb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't delete relaxation and full BFS substitute for one another as reachability checks?",
+        "answer": "Delete relaxation ignores delete effects. A goal absent at its fixed point is unreachable, but goals that appear may not be jointly achievable. Full BFS retains delete effects and proves unsatisfiability only by exhausting the state space; exhausting the budget means unknown. Relaxation is cheaper but one-sided, while BFS is stricter and limited by search size.",
+        "example": "Example: Taking a key may remove a different condition. Two goals can each appear reachable under relaxation even if they cannot hold simultaneously. Full-state search exposes that conflict."
+      }
+    },
+    "qa/agent-research:drago/implementation": {
+      "source_sha256": "ea7f593e5282bdbaccc42f6143ac84f5b82130f48ad597b9a3ae334943216496",
+      "reviewed": true,
+      "fields": {
+        "question": "Is it enough for a repair to leave the total blocker weight unchanged or lower?",
+        "answer": "No. Blocker weight must strictly fall, no blocker dimension may be added, and the goal count must not decrease. Object counts may move only toward the public specification, and a previously solvable specification must not become unsatisfiable or unknown. On rejection the old object is kept and the loop stops. A non-increase rule can accept pointless rewrites, while goal deletion games the diagnostic.",
+        "example": "Example: Reject a rewrite that merely rewords a specification while leaving both blockers. Also reject a rewrite that reduces blockers by dropping a goal."
+      }
+    },
+    "qa/agent-research:janus/mechanism": {
+      "source_sha256": "39e2dae73d2e7e7858352c509101f3af2582738437915fa035e72e2a74298b46",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compare experimental proposals in pairs and then fit value scores rather than choosing the most compelling description?",
+        "answer": "Pairwise comparisons establish a calibratable ordering for expected value, information gain, and exploration benefit. A sparse tournament fits Bradley–Terry scores to connect local judgments. Predictions allocate the experiment budget; executed successes and failures update the model and skills. A high predicted score is neither a completed experiment nor a substitute for execution.",
+        "example": "Example: Proposal A promises a larger metric gain, while B better rules out a key hypothesis. Adjust exploration weight to the remaining budget rather than treating polished promises as results."
+      }
+    },
+    "qa/agent-research:janus/basics": {
+      "source_sha256": "97a587a1793c182a3a40cf89f1318db13403a24442e9f1a612ca4f85134ffff4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Janus put unexecuted proposals in the research graph?",
+        "answer": "Unexecuted proposals are research directions that can compete for budget. The system estimates value, information gain, and exploration benefit before choosing what to run. The graph also stores actual experimental feedback and abstract skills so later proposals use prior evidence. Predictions guide selection; they do not count as completed experiments or observed scores.",
+        "example": "Example: A model change and a diagnosis of a prior failure can both enter as candidates. Remaining budget determines which one gets compute first."
+      }
+    },
+    "qa/agent-research:janus/comparison": {
+      "source_sha256": "1ae6f9705488405f0917a8abc436746f040600ea48e8f36f90c50a77d6b7c0c9",
+      "reviewed": true,
+      "fields": {
+        "question": "How does selection by predicted gain alone differ from including information gain and exploration benefit?",
+        "answer": "Predicted gain alone favors currently promising regions and may overexploit them. Information gain values ruling out uncertain hypotheses, while exploration benefit gives unknown regions a chance. Janus adjusts weights with progress and remaining budget, but only actual execution can correct prediction errors.",
+        "example": "Example: A promises a small but well-understood gain. B may not improve the metric but can distinguish two mechanisms. Early in the budget, B may be worth testing first."
+      }
+    },
+    "qa/agent-research:janus/implementation": {
+      "source_sha256": "705a6df865c5127cee4252a1777630f492f7140409920207d329998965a71b38",
+      "reviewed": true,
+      "fields": {
+        "question": "How do soft comparisons in a sparse tournament become proposal value scores?",
+        "answer": "Fit the soft preferences on comparison edges by BCE on sigmoid(g_m-g_n), yielding relative Bradley–Terry scores, then weight the three benefits. This links local preferences without providing absolute success probabilities. The graph and skills update after execution; predictions cannot replace sandbox results.",
+        "example": "Example: If A slightly beats B and B beats C, fit their relative order. A's higher value does not mean its experiment has beaten the best current model."
+      }
+    },
+    "qa/agent-research:jev-lookahead/mechanism": {
+      "source_sha256": "f9c9dafbdc12fb7cae35e69f7db8e83456fb00398559e348defd6b42cf3c3d21",
+      "reviewed": true,
+      "fields": {
+        "question": "What does giving newly available successor-state actions add beyond the next observation?",
+        "answer": "The next observation describes the immediate change. Newly available actions show which future paths the step unlocks, exposing long-term value in actions without immediate payoff. Code simulates the transition on a cloned state, and the decision model evaluates public consequences only. Simulator reward or the reference plan must not leak into the scorer.",
+        "example": "Example: Picking up a key does not finish the task, but it enables opening a side door. Seeing that action reveals why the key can matter later."
+      }
+    },
+    "qa/agent-research:jev-lookahead/basics": {
+      "source_sha256": "9893d906c706d379f46d075823bcfecf2c4e4214186ee2aaefd9a2ea996a37e9",
+      "reviewed": true,
+      "fields": {
+        "question": "What do code simulation and model evaluation each do in lookahead?",
+        "answer": "Code executes legal actions on independent copies of the current state and produces actual successor observations. The model compares public consequences and selects an action. This avoids relying solely on textual guesses about transitions, but requires faithful isolation and simulation. Selection itself must not mutate the live environment.",
+        "example": "Example: Open a drawer on a copy to see its contents before deciding whether to open the real one. The scorer need not invent what is inside."
+      }
+    },
+    "qa/agent-research:jev-lookahead/comparison": {
+      "source_sha256": "950c29f591c5bb1845a7ef183df0515e20dd1f7ab05d2c442536f8aded711c1b",
+      "reviewed": true,
+      "fields": {
+        "question": "What does one-step simulation add over semantic action scoring, and why doesn't it guarantee optimality?",
+        "answer": "Semantic scoring mainly uses action names and the task description. One-step simulation also gives the next observation and newly available actions, revealing unlocked opportunities. It still looks only one step ahead and the scorer may misjudge, so the new action list is not a long-horizon planning oracle.",
+        "example": "Example: Picking up a key may not seem close to the goal until simulation reveals the open-door action. Unknown obstacles behind the door can still prevent success."
+      }
+    },
+    "qa/agent-research:jev-lookahead/implementation": {
+      "source_sha256": "884a5d2af3f02cddba8d0eacac70c1a8ec71ca30e660eae331fc3b518b0a5931",
+      "reviewed": true,
+      "fields": {
+        "question": "Does returning a different object from fork guarantee branch isolation?",
+        "answer": "No. Nested mutable state, random generators, and external resources must also be isolated. Distinct object identities do not justify sharing live files or simulator state. The step exposes only observable text, with no reward, gold plan, or success label. The selected action must be legal and is executed by the caller.",
+        "example": "Example: Two shallow copies share a backpack list, so picking up a key in the clone mutates the real backpack. Different objects did not isolate lookahead."
+      }
+    },
+    "qa/agent-research:jev-spawn/mechanism": {
+      "source_sha256": "60f9587bd8a60ecd69cbf6d16dc0c385ed81ae971f94cecef039be27861b5ffb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep several action branches rather than immediately selecting the highest score from the first distribution?",
+        "answer": "Early probabilities can be wrong. Keeping multiple composite branches leaves room to recover after contradictory evidence. New feedback reweights priors and guides future exploration; it does not rewrite past success labels. Branches consume budget, so parallel retention trades compute for lower decision risk rather than searching all possibilities.",
+        "example": "Example: Keep both searching and inspecting local files. If search fails, switch to the retained inspection branch without rebuilding the plan from scratch."
+      }
+    },
+    "qa/agent-research:jev-spawn/basics": {
+      "source_sha256": "071d3f8bc98c7a06316b67dd4672f51a1b04bd870906f46c62b74bb806d77fde",
+      "reviewed": true,
+      "fields": {
+        "question": "What options does JevSpawn preserve when one agent execution path fails?",
+        "answer": "Early judgments in long tasks can be wrong. Spending the entire budget on one action makes contradictory evidence costly. JevSpawn allocates reasoning adaptively by organizing optional actions into retainable composite branches and shifting effort after execution feedback. This preserves alternatives without promising exhaustive search.",
+        "example": "Example: Inspecting local data and searching online can both be reasonable. If the first path is blocked, continue the other prepared path rather than starting from a blank plan."
+      }
+    },
+    "qa/agent-research:jev-spawn/comparison": {
+      "source_sha256": "8bb9cf5f4d88b58e8775f155b5b9f10d9a596c2764cc4a20b9afcdfc369b6b0b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does branch retention differ from independently resampling plans every round?",
+        "answer": "Retention preserves the probabilities and states of earlier unchosen options for reuse after feedback. Independent resampling can repeat old errors or lose progress. Retention also consumes compute and memory, so more retained candidates do not prove lower cost; compare at equal budgets.",
+        "example": "Example: After search fails, switch to the existing file-inspection branch. Resampling may suggest the same failed search again."
+      }
+    },
+    "qa/agent-research:jev-spawn/implementation": {
+      "source_sha256": "558af3ab47c956cbd8902f7ccdec25849fea6ff56b122f5e6fdd5e1ba692f37b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do p(a)·exp(feedback) updates still need normalization and a branch budget?",
+        "answer": "Multiplication yields unnormalized weights. Divide by their total to obtain a distribution, then retain branches within budget. Multiplication cannot recover a branch with zero prior mass, and extreme feedback can cause numerical instability. The local test verifies a finite posterior and top-branch retention without calling a Jev checkpoint.",
+        "example": "Example: Two branches begin at one half with feedback 0 and 1. Their weight ratio becomes 1:e; e/2 is not a valid probability."
+      }
+    }
+  }
+}

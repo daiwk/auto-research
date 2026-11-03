@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:t2mem/mechanism": {
+      "source_sha256": "825bbb38ca928226bee0110258368777df520982a1637238fe948e3ecf3cb648",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does ReadRaw only accept metadata IDs that have already been observed?",
+        "answer": "Lightweight metadata provides traceable entry points. Reading raw text must bind to IDs actually returned, preventing fabricated links or access to unauthorized records. Memory builds for the current question through alternating search, reading, and answering. The metadata index is not fully understood memory and must not carry the final answer.",
+        "example": "Example: Search returns meeting M7, so ReadRaw can open its conversation. A model-invented M999 is not valid historical evidence."
+      }
+    },
+    "qa/agent-research:t2mem/basics": {
+      "source_sha256": "8752c70359bac497072dbf01e3e7fb157c4fc7cdf8c15fe7bb9a4df64809fd84",
+      "reviewed": true,
+      "fields": {
+        "question": "Why store only lightweight metadata offline and build detailed memory at query time?",
+        "answer": "What matters in a conversation depends on the question, and an offline summary can discard details too early. Event metadata retains lookup clues and raw links. SearchMeta, ReadRaw, and Answer build a query-specific cache at inference. Multiple accesses still cost work; this is not zero memory processing.",
+        "example": "Example: To answer an old travel-date question, find the event index and then read the source conversation rather than prewriting one universal summary."
+      }
+    },
+    "qa/agent-research:t2mem/comparison": {
+      "source_sha256": "6ca4f3a55eb61ea8ee6290d1af468a0330126bb9c3581b9e1955cea06caeca94",
+      "reviewed": true,
+      "fields": {
+        "question": "How does test-time memory construction differ from one retrieval with fixed context?",
+        "answer": "One retrieval fixes evidence before later gaps are known. Test-time construction updates memory alongside information needs and can search or read more. This grants tool autonomy but can also waste steps; evaluate whether it improves real answers, not just action execution.",
+        "example": "Example: A meeting mentions rescheduling. Search for a subsequent event to confirm the new date instead of clinging to the date retrieved first."
+      }
+    },
+    "qa/agent-research:t2mem/implementation": {
+      "source_sha256": "ed3de96e95fcf4127f14ef10693ed45648fc74965d42d59684caea8a1c7cf33e",
+      "reviewed": true,
+      "fields": {
+        "question": "What state is managed by excluding seen entries in SearchMeta versus appending to the query cache?",
+        "answer": "Seen entries record metadata IDs already returned and prevent duplicate results in this question. The cache accumulates useful material obtained for reasoning and answering. Raw conversations remain traceable external sources; the cache is not a prefilled answer. Separate states let you check whether search gains information and trace answer evidence.",
+        "example": "Example: Once meeting A's entry is seen, search should seek other events. Keep A's decision in the cache after reading it; skipping its entry does not erase evidence already read."
+      }
+    },
+    "qa/agent-research:near/mechanism": {
+      "source_sha256": "ca6d5cf32781f6837eebcb8478b502d0c93f95e1e19426f931bcb47896dd5fa6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why might subtracting the neighbor mean direction help find memories with unique facts?",
+        "answer": "Neighbors often share names and topics, making irrelevant entries similar. Projecting out the shared direction highlights distinguishing residuals. Queries use a precomputed reference table, not relevance labels to choose a direction. Residuals can remove useful shared clues too, so retain the original view and choose fusion on development data.",
+        "example": "Example: Two records mention the same business trip, but only one says the return is Friday. Suppressing the common trip direction can make the return fact matter more."
+      }
+    },
+    "qa/agent-research:near/basics": {
+      "source_sha256": "f9336e00818be7e9ae3b62a5d00608c7250b0b19a005ce9180f906503ca1b5b4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is the actual clue harder to find when many memories discuss the same person or project?",
+        "answer": "Whole-record representations can be dominated by common topics. Frequent names make records similar and bury rare dates or events. NEAR uses neighborhood relations to emphasize distinctions and retrieve specific facts rather than repeatedly retrieving topical material.",
+        "example": "Example: Ten records mention project A, but only one says it moved to Thursday. A date question needs that difference, not more mentions of the name."
+      }
+    },
+    "qa/agent-research:near/comparison": {
+      "source_sha256": "8f7dad37a89d3e8b75bc03d0015635e0fa3ad979565c537c5877010accde89c7",
+      "reviewed": true,
+      "fields": {
+        "question": "How do removing a shared direction and training a query-only adapter differ in their information sources?",
+        "answer": "NEAR constructs memory references, scales, and its small table only from memory states, with no query labels. A query gets its direction from the anchor table. Supervised adapters use training relevance to update query transforms. These are different information contracts; an unlabeled reference did not learn an answer-specific direction.",
+        "example": "Example: Memory neighborhoods can be built without query answers. Choosing a reference because it is the correct evidence would introduce supervision leakage."
+      }
+    },
+    "qa/agent-research:near/implementation": {
+      "source_sha256": "588007da6965c9cabb7cbe6f47a5368bcfa85dd42f505c6acc2ccb36899a74f8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not L2-normalize the whole concatenated vector after fusing layers?",
+        "answer": "Layer scores are scaled by memory–memory population variance and weighted. Concatenation coefficients make one dot product equal the fusion formula. Global normalization adds a sample-dependent denominator and changes ranking. Variance includes self-similarity, and neighborhoods are recomputed on normalized residuals at each layer rather than reused from layer one.",
+        "example": "Example: Two memories have different concatenated norms. Unit normalization penalizes the larger norm, so scores no longer equal the chosen linear combination."
+      }
+    },
+    "qa/agent-research:beyond-final-embedding/mechanism": {
+      "source_sha256": "0dfec877f1707e463e3cbbaf7fdf858a82859251cf72acffdfe0bed842317b42",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is global token top-k followed by memory-ID aggregation different from per-memory MaxSim?",
+        "answer": "In global retrieval, tokens from all memories compete for a sparse return budget. MaxSim per record searches matches independently, changing computation and candidate distributions. Unreturned positions use a shared floor rather than true zero evidence. The pooled branch preserves overall meaning and can surface a memory without retrieved local tokens.",
+        "example": "Example: One record contains a rare date that strongly matches the question. Global token search can retrieve the date then its record without first ranking the pooled record highest."
+      }
+    },
+    "qa/agent-research:beyond-final-embedding/basics": {
+      "source_sha256": "0e168f5f9b1e7638a9f576c0782bedd994dd2d40c285800f353a29e2895dd778",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a pooled embedding miss a local fact in memory?",
+        "answer": "Pooling compresses several facts into one vector, so a date or object difference can be drowned out by a shared topic. Final-layer content tokens retain finer contextual evidence for sparse matching. A token match is not an independent dictionary meaning or guaranteed fact; combine it with the global branch.",
+        "example": "Example: Two records discuss travel, but only one sentence states a rebooking date. Their pooled vectors can be close while the local date token distinguishes them."
+      }
+    },
+    "qa/agent-research:beyond-final-embedding/comparison": {
+      "source_sha256": "c24dad4d4dc15cdce66c628db7088f6574f7b589e60086f8f79a988613e945bc",
+      "reviewed": true,
+      "fields": {
+        "question": "Which representations change with a query-only adapter versus retraining the memory encoder?",
+        "answer": "Query-only training freezes the encoder and memory bank and applies a low-rank residual to query content tokens, adapting them to existing geometry. Retraining the encoder can move both sides and require re-encoding old memory under a consistent version. The smaller update cannot restore information already lost in encoding.",
+        "example": "Example: Keep a million memory vectors fixed and adjust the query for who approved on Tuesday. Updating the shared encoder may require recomputing all old vectors."
+      }
+    },
+    "qa/agent-research:beyond-final-embedding/implementation": {
+      "source_sha256": "cde6682024e9db256daf910d5746c88cf77041b9dc5715cd6a99ef8f8bb9a6b6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't the query adapter backpropagate through discrete neighbor selection?",
+        "answer": "Training uses multi-positive cross-entropy on all-memory MaxSim as a continuous surrogate; inference uses sparse token search. Discrete ANN selection does not supply a valid gradient. The low-rank residual adjusts only query content tokens while preserving norm. Encoder, memory bank, and pooled query stay frozen; validation alone chooses hyperparameters.",
+        "example": "Example: Top-K indices jump when a query changes, so they cannot be differentiated as a smooth function. Train on differentiable full matching, then use the sparse index at inference."
+      }
+    },
+    "qa/agent-research:hippocam/mechanism": {
+      "source_sha256": "3fab3db9c44726a194913848ea7726d29674fc55bf6993ca9447ee767625a11a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does hierarchical recall return one layer at a time rather than immediately expanding all raw history?",
+        "answer": "Upper-level narratives give purpose and structure first, letting the agent drill down only when needed instead of refilling context each time. Original messages remain in child nodes, so abstraction is reversible. Reserve budget for the next turn and explicitly fail if protected complete exchanges still do not fit, rather than silently truncating them.",
+        "example": "Example: An upper node says login was repaired last week. Expand the log children only when checking the error, without returning every debug output."
+      }
+    },
+    "qa/agent-research:hippocam/basics": {
+      "source_sha256": "ce408db28cb9f774412a9f0853733d559979f6566147d0b09da700e4270dfd92",
+      "reviewed": true,
+      "fields": {
+        "question": "How do nested intentions differ from an ordinary rolling summary?",
+        "answer": "Nested intentions organize current goals and subgoals. Experiences are abstracted when their intent closes, whereas rolling summaries compress primarily by time and need not know whether a task finished. Hippocam keeps an original-message tree and recalls one layer at a time, retaining traceability after abstraction.",
+        "example": "Example: Dependency checks can finish within an unresolved debugging goal. Summarize the closed subgoal without archiving the whole task as complete."
+      }
+    },
+    "qa/agent-research:hippocam/comparison": {
+      "source_sha256": "d8089bf24abfbca7eebd4db014c22f779005084c6653623698c240bfdae562d0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does it matter that Precip triggers after the response but before the tool result?",
+        "answer": "The placement lets the system process closed intentions from the completed main response without assuming an observation that has not arrived. Tool exchanges must remain complete; compression cannot split an unfinished call. Trigger timing is a state contract, not interchangeable with inserting a summary anywhere.",
+        "example": "Example: After a tool call is issued but before its result arrives, do not summarize it as a successful verification. Wait until the real observation enters a later exchange."
+      }
+    },
+    "qa/agent-research:hippocam/implementation": {
+      "source_sha256": "641552b55a41e95eff78f634fdeba82fe5baa055ca898542769f88161b60d0d0",
+      "reviewed": true,
+      "fields": {
+        "question": "Do three archives in a controlled pressure probe show autonomous learning of intent closure?",
+        "answer": "No. Three real autonomous tasks produced no closure and zero archives. The separate controlled probe verifies pressure handling and protection only. Include request overhead and the next-turn estimate in budget. If protecting K complete exchanges and the dynamic window exceeds capacity, fail before main inference rather than truncate silently.",
+        "example": "Example: A predefined closure signal exercises Palim. It does not show that a model emits the signal on unknown tasks; report these runs separately."
+      }
+    }
+  }
+}

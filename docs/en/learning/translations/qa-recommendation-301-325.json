@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:easq/comparison": {
+      "source_sha256": "ae2b357545bc3b802f5ef04559f7a65d6c0150eb24c5ba19edd1a0ba99d7929c",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a dynamic survey reference differ from a fixed SFT reference?",
+        "answer": "The fixed reference anchors to the initial distribution, while the survey expert adapts to newer satisfaction evidence. A moving reference is nonstationary and needs versions and limits. Updates need not always improve it, and LoRA alone does not prove backbone retention.",
+        "example": "A newer expert can reflect growing dislike of repetitive content, while a fixed reference may keep rewarding stale behavior."
+      }
+    },
+    "qa/recommendation:easq/implementation": {
+      "source_sha256": "0b50b730455ae3c3293e01edb553f66b537303d7d27be6e471a92b89bd290c12",
+      "reviewed": true,
+      "fields": {
+        "question": "Why verify actual trainable parameters for EASQ rather than checking only a LoRA configuration?",
+        "answer": "If the optimizer updates the backbone, the run is not an independent low-rank path for sparse satisfaction. Reference probabilities must match recorded versions, and serving dependencies must agree with training. A public proxy without surveys is not satisfaction reproduction.",
+        "example": "Full backbone updates can lower loss without proving LoRA protected ranking; inspect gradients and optimizer groups."
+      }
+    },
+    "qa/recommendation:echo-selector-loss/mechanism": {
+      "source_sha256": "45c9b2794306740884fad877cc2700075aed70e1978b8684d3964c5f4934c2bf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does ECHO distill the full teacher distribution and also penalize misses near the selection boundary?",
+        "answer": "Soft targets communicate relative history relevance but can leave crucial records outside a limited budget. Boundary pairs compare a better missed record against a weaker selected one, using detached teacher-score differences to drive swaps. The component retains addresses, and the local run verifies loss and gradients, not 100K-history performance.",
+        "example": "With budget two, the student misses a highly valued record and keeps a weak one. KD conveys overall order; the pair directly promotes the swap."
+      }
+    },
+    "qa/recommendation:echo-selector-loss/basics": {
+      "source_sha256": "690bc6d0e03a06fcc44b16c14e65ec60891d96ad74d6fade6b1558bc6a7e8ed2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain history record addresses rather than only latent interest vectors in ECHO?",
+        "answer": "Latents are compact but cannot recover concrete candidate-specific events. Addressable records enable targeted small-subset retrieval and user-side reuse. This does not imply scanning all history per candidate; serving must follow the exported index and parameter path, beyond the local loss component.",
+        "example": "A camera query can retrieve a recent macro-photography view and running shoes can retrieve exercise evidence, neither recoverable from a vague outdoors vector."
+      }
+    },
+    "qa/recommendation:echo-selector-loss/comparison": {
+      "source_sha256": "4bf157484498766042a426ad3d3ab5a7ec0813539c71542790367047823afe0e",
+      "reviewed": true,
+      "fields": {
+        "question": "How do ECHO boundary pairs and full-distribution KD supervise different errors?",
+        "answer": "KD transfers overall teacher preference; pairing missed strong records with selected weak ones focuses on swaps that change Top-K. Teacher quality gaps weight pairs. The discrete selection remains nondifferentiable; selected student logits receive gradients.",
+        "example": "Positions ten and eleven can have similar global probabilities yet determine whether a vital record is kept. Boundary loss targets that pair."
+      }
+    },
+    "qa/recommendation:echo-selector-loss/implementation": {
+      "source_sha256": "33c9fcc1b4522d00762aa98c5d8e6ac0ffe24e5a0e91a4abfb298497da41338b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why normalize ECHO by valid pair weights across the batch and detach teacher values and weights?",
+        "answer": "Averaging by row can inflate requests with few pairs. Batch normalization preserves defined pair contributions. Freeze teacher and mining weights, update matching student scores only, and exclude padding from probabilities, selection, and gradients. A finite scalar alone is insufficient verification.",
+        "example": "With ten pairs on one row and one on another, per-row means can give the lone pair tenfold relative weight; a shared denominator avoids that."
+      }
+    },
+    "qa/recommendation:egr/mechanism": {
+      "source_sha256": "6e9a6d1bd3225af918fc064202b3dc109f86ea9e7c65d466436748609409c7cd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does EGR jointly train two tasks despite sharing the backbone for item indexing and user queries?",
+        "answer": "Shared parameters alone do not align retrieval geometry. Item representation learning maintains indexable content; next-item prediction directs queries toward consumption relations. Training one side against a changing other can stale the index, and serving and evaluation must use matching versions.",
+        "example": "If new item vectors rotate while queries stay in old coordinates, nearest neighbors can break despite matching dimensions."
+      }
+    },
+    "qa/recommendation:egr/basics": {
+      "source_sha256": "7fe16aaf899f1667d816c123cf909ee4163ab90da076ad92377cc880d6f2525f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why jointly optimize item representation learning and next-item prediction in EGR?",
+        "answer": "Pure content optimization can omit recommendation distinctions. Next-item supervision retains consumption relationships while the item objective anchors semantics. Shared updates reduce separation but can conflict and do not guarantee alignment.",
+        "example": "Similar-genre movies can appeal to different audiences; joint learning can preserve that difference beyond text similarity."
+      }
+    },
+    "qa/recommendation:egr/comparison": {
+      "source_sha256": "3c3d4b9cad8193c19f34c6010236eb13f1b1414ebe0c40fc36389e7f42797acb",
+      "reviewed": true,
+      "fields": {
+        "question": "What deployment trade-off does EGR joint updating make versus freezing the item encoder?",
+        "answer": "Freezing stabilizes the index but blocks user supervision from refining item geometry. Joint learning can adapt both sides, requiring item refresh and versioned serving. The local negative result should not be replaced by the design promise.",
+        "example": "A new query direction for science fiction may not match an old index; freezing avoids drift but keeps old limitations."
+      }
+    },
+    "qa/recommendation:egr/implementation": {
+      "source_sha256": "b3325117cb99e3677cffc693c7daed811e2c41c9c38f827b2fe288c6cc526084",
+      "reviewed": true,
+      "fields": {
+        "question": "Why verify item-index and query versions after EGR updates its shared backbone?",
+        "answer": "Updates can change dot-product meaning, so old index vectors may not match new queries. Record rebuild, training, and cutover boundaries and confirm both IRL and NIP run. A shared class name with one loss disabled is not joint training.",
+        "example": "An old item coordinate system and a new user coordinate system can have equal shapes but incompatible scores."
+      }
+    },
+    "qa/recommendation:ektm/mechanism": {
+      "source_sha256": "c0c6a0f21befea91f92aadecfeea4aa0f78a860fec944234cd8a1a904292ba36",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does EKTM transfer CTR features by task similarity rather than sharing equally across conversions?",
+        "answer": "Click labels are plentiful but relate differently to each conversion. Similarity controls transfer strength, hard-example supervision reduces negative transfer, and CVR towers retain their own targets. Validate similarities; abundant CTR data are not universally trustworthy.",
+        "example": "Cart additions may relate closely to clicks while long-term renewal depends on other factors, so they should not inherit the same strength."
+      }
+    },
+    "qa/recommendation:ektm/basics": {
+      "source_sha256": "a3a48ab7749c3c29554e8d1d2f21ac4a330ac8d76122c7f5fde004c9bcd648b8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why transfer CTR knowledge into multiple EKTM CVR tasks instead of learning each from scratch?",
+        "answer": "Dense clicks can give relevance and interest knowledge to sparse conversions, but tasks differ. Similarity controls borrowing and hard-example loss limits harmful transfer. Measure each target separately.",
+        "example": "Cart and purchase can share interest signals, while returns mean something different; both zero transfer and indiscriminate transfer have risks."
+      }
+    },
+    "qa/recommendation:ektm/comparison": {
+      "source_sha256": "84df3c759d718fb12d9c56fb16d8f4607b35d26f4a11d68ca28ba6881682cdfc",
+      "reviewed": true,
+      "fields": {
+        "question": "Where does EKTM control conflicts compared with a shared-bottom model?",
+        "answer": "Shared-bottom uses the same backbone for all tasks. EKTM weights task-specific contributions during transfer and constrains harmful sharing with hard examples. This adds conditional specialization, similarity dependence, and tower cost; a movie proxy does not prove conversion improvement.",
+        "example": "A purchase tower can borrow more from add-to-cart knowledge than an unrelated tower instead of competing for an identical shared representation."
+      }
+    },
+    "qa/recommendation:ektm/implementation": {
+      "source_sha256": "0a9ac47a8db695b1061377caa476599c57e7124a70301f4cff1076be77f5a821",
+      "reviewed": true,
+      "fields": {
+        "question": "Why verify task identity, not only shape, when EKTM combines fctr and weighted CVR features?",
+        "answer": "Each similarity weight is tied to a source-target task and vectors must be semantically aligned. Preserve ordering mappings and derive hard-example masks from valid labels, never test scores. Public proxies do not create missing production conversion labels.",
+        "example": "A CTR-to-purchase weight can multiply a favorites tower without a shape error, yet corrupt supervision."
+      }
+    },
+    "qa/recommendation:elise/mechanism": {
+      "source_sha256": "8ce8cb663a918ff90bfd32b2925f9834cf73835bf5208c67ce13980f8197ce29",
+      "reviewed": true,
+      "fields": {
+        "question": "Why quantile-match before fusing semantic and lexical scores in ELISE?",
+        "answer": "Raw scores differ in scale and distribution, so a wide-range scorer can dominate. Map each score to its relative distribution position, fuse under controls, and limit semantic result count. Percentiles are not click probabilities and do not replace exact-entity checks; language shifts can require recalibration.",
+        "example": "Lexical scores in the tens would swamp cosine scores near 0–1; percentile matching balances them while preserving exact song-title controls."
+      }
+    },
+    "qa/recommendation:elise/basics": {
+      "source_sha256": "71f32983effe6faffce0d938f4ab445e24e532cafb11460072da6209f2563e8f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep lexical and semantic retrieval in ELISE?",
+        "answer": "Lexical search handles exact entities, model IDs, and constraints; dual encoders handle paraphrase and semantic association. Calibrate scores and cap semantic results so broad matches do not override explicit requirements. Either path can still err.",
+        "example": "Search a specific camera model lexically, while semantic retrieval can find waterproof gear for rainy hikes."
+      }
+    },
+    "qa/recommendation:elise/comparison": {
+      "source_sha256": "d428163f0d6d2f17f653820d824ee7336e342e6bb4ead3e59fc3593430bced05",
+      "reviewed": true,
+      "fields": {
+        "question": "How does quantile matching differ from min-max scaling?",
+        "answer": "Min-max primarily adjusts range; quantiles map positions in empirical distributions and can align different shapes. Equal percentiles are not equal relevance probabilities and drift changes their meaning. Equal numeric ranges do not establish probability calibration.",
+        "example": "A heavy lexical tail and narrow semantic distribution may not align by multiplying by a constant; novel queries can still violate old empirical distributions."
+      }
+    },
+    "qa/recommendation:elise/implementation": {
+      "source_sha256": "b36379e6ba81bed219a7ae80f60395922924741eb4458257a6ecb1bf1d65432c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why lock ELISE's mapping, fusion weights, and semantic quota before test?",
+        "answer": "Each changes candidates and ranks. Fit them on training or validation, freeze them for test, and use the same serving quota. Do not hide negative proxy results by selecting the best test mix.",
+        "example": "Choosing 70% semantic after examining test makes the report optimistic; lock the ratio and mapping before evaluating new requests."
+      }
+    },
+    "qa/recommendation:esmm/mechanism": {
+      "source_sha256": "c5b0025458acacc4394cb9de74e4f10ca628d99697bef2e09a555733dd251aeb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why train CTR and CTCVR in ESMM rather than treating nonclicks as CVR negatives?",
+        "answer": "CVR is conditional on clicking; no click does not reveal post-click purchase. CTR × CVR represents click-and-convert probability, enabling full-impression CTR and joint supervision to address sparsity and selection. The probability chain does not solve attribution, delayed feedback, or causal identification automatically.",
+        "example": "10% CTR and 20% CVR give 2% joint rate. A nonclick labels click and joint events zero but cannot label hypothetical post-click conversion."
+      }
+    },
+    "qa/recommendation:esmm/basics": {
+      "source_sha256": "4d8678979bc54416991d0ccc22eccb458ab07e619e08d6f06f39a8fc288ffd59",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is CTCVR defined on all ESMM impressions but conditional CVR is not?",
+        "answer": "Nonclicks are known negatives for click-and-convert, but whether they would convert if clicked is unobserved. The CTR–CVR product enables full-space joint supervision only under nested click-to-conversion semantics.",
+        "example": "An unclicked ad did not produce a post-click purchase, but this says nothing definitive about purchase under a click."
+      }
+    },
+    "qa/recommendation:esmm/comparison": {
+      "source_sha256": "7b59fb7ac4daa550859b8a04fee674b8203c2796dd5de2bed9f3708c31d70297",
+      "reviewed": true,
+      "fields": {
+        "question": "What impression information does ESMM add beyond CVR learned only in clicked space?",
+        "answer": "Clicked examples reflect user selection and the prior policy. Full-space CTR and CTCVR let nonclicks constrain joint outcomes, and shared features help sparse conversion. Neither AUC nor full-space supervision resolves delayed feedback or all confounding.",
+        "example": "Skipped expensive phones supply impression information, not direct counterfactual conversions if clicked."
+      }
+    },
+    "qa/recommendation:esmm/implementation": {
+      "source_sha256": "98d25abc389f221af11f2dceebe40e107eab2fb63de9cae3a1199589d12c732a",
+      "reviewed": true,
+      "fields": {
+        "question": "Which ESMM losses use nonclicks, and which head should not be directly supervised by them?",
+        "answer": "Full-impression click labels supervise CTR; full-impression CTCVR labels supervise CTR × CVR. Do not add direct CVR negatives for nonclicks. The local rating-threshold nesting validates wiring, not real ad conversions.",
+        "example": "A nonclick can lower joint probability via low CTR. Forcing CVR to zero adds an unsupported conditional label."
+      }
+    },
+    "qa/recommendation:evopilot/mechanism": {
+      "source_sha256": "52fc486056e68d54b2ef042b1a1a38f15d2b225cc20c670ca3b71ab687fc8741",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does EvoPilot treat a matched two-arm comparison, not a successful training job, as evidence?",
+        "answer": "One artifact cannot attribute improvement. EvoPilot matches base, data, evaluator, and output depth, allowing only the approved treatment and checking actual artifact state and provenance. Extra changes invalidate comparison; verification can pass for a negative result and is not release approval.",
+        "example": "A new interaction layer trained twice as long cannot claim sole credit until budgets are matched."
+      }
+    },
+    "qa/recommendation:evopilot/basics": {
+      "source_sha256": "db45de6b624f0456ce7c7e5f2b5cf0a45abd7a540f50f0c957921b8af49333f8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a negative result pass EvoPilot Verify?",
+        "answer": "Verify checks artifact integrity and comparison protocol, not performance direction. A matched, complete regression is valid evidence, and human Review checks interpretation and acceptance. Do not call verification a gain or discard a real negative result.",
+        "example": "An isolated interaction head that lowers hit rate is negative evidence; a gain after also changing data is not attributable."
+      }
+    },
+    "qa/recommendation:evopilot/comparison": {
+      "source_sha256": "c69fc44c20b890d754e7445cd5c670183d172a7b70a78b06f5bda4c760e4318f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is reusing a high-quality historical baseline not necessarily a matched treatment comparison?",
+        "answer": "Its base, data, evaluator, or output depth may differ. Match both arms so the approved treatment is the only actual change. More seeds estimate variance but cannot fix a mismatched comparison.",
+        "example": "A model with ten output layers versus a five-layer historical baseline did not only change its interaction head."
+      }
+    }
+  }
+}

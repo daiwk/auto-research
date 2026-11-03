@@ -52,4 +52,4 @@ flowchart LR
 
 The [public experiment dashboard](public-experiment-dashboard.md) indexes committed, traceable results. Compare like with like: an original paper's offline benchmark, its online A/B test, and a local public-data run answer different questions. A synthetic mechanism check or a small smoke test does not establish the full paper's capability or production gains. High-cost experiments that were not run are explicitly labeled **not reproduced**.
 
-For the source repository, see the [English README](https://github.com/daiwk/auto-research/blob/main/README.en.md). The [learning cards](../learning/index.md) and [topic deep dives](../learning/deep-dives/index.md) are currently in Chinese. The [translation coverage report](coverage.md) shows progress beyond the paper catalog.
+For the source repository, see the [English README](https://github.com/daiwk/auto-research/blob/main/README.en.md). Use the [learning cards](learning/index.md) and [topic deep dives](learning/deep-dives/index.md) to study mechanisms and compare papers. The [translation coverage report](coverage.md) covers the whole site.

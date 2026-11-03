@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:paperorchestra/implementation": {
+      "source_sha256": "a7f78bbe9c5d763df80393d0ceb3f54f76b362ae301ac1cfb6cec894f936e4c0",
+      "reviewed": true,
+      "fields": {
+        "question": "What conditions govern citation verification and revision rollback, and what was completed locally?",
+        "answer": "Citations must match real entities, include abstracts, predate the cutoff strictly, and deduplicate by paper ID. Revert revisions when scores fall or ties regress across subdimensions, at most three rounds. Local work reviews literature and costs without five agents, writing models, or metrics. A BibTeX checker is not literature synthesis.",
+        "example": "Example: Deduplicate two URLs for one paper and exclude post-cutoff research. Valid formatting does not mean the citation supports a sentence."
+      }
+    },
+    "qa/agent-research:aira2/mechanism": {
+      "source_sha256": "dcb599e5084380e8b3b7a24212cbf939d2db83247713e1f83b5d0adce294e2f0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does a steady-state worker pool use compute better than waiting for every experiment in a generation?",
+        "answer": "Experiment lengths differ, so a barrier makes quick workers wait for the slowest. A steady pool assigns the next candidate immediately. Throughput must not alter evaluation isolation: search uses fixed search scores, then untouched validation picks a winner afterward. Do not peek mid-search.",
+        "example": "Example: Three experiments finish in ten minutes and one takes an hour. Reuse idle slots while keeping the predefined data splits."
+      }
+    },
+    "qa/agent-research:aira2/basics": {
+      "source_sha256": "678e47ee98ce8b37d13b958ffd43babd11c195f865e8009a4fcba79bbb1a2dba",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is automated ML research also an experiment scheduling problem in AIR-A2?",
+        "answer": "Agents can propose many candidates, but experiments vary in runtime and devices and evaluation are finite. Proposal quality and execution throughput both affect progress. AIR-A2 keeps experiments flowing and manages feedback. Busy workers do not establish research gains; verify selected proposals on isolated evaluation.",
+        "example": "Example: Waiting for a two-hour experiment can leave devices idle after a ten-minute one finishes."
+      }
+    },
+    "qa/agent-research:aira2/comparison": {
+      "source_sha256": "79c561032a2c0c95600bb98a01b063b4a03294d050bc1ec65a789de0d4dd58de",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate the search split and final validation?",
+        "answer": "Search repeatedly uses scores and can overfit by hill climbing. Untouched validation chooses a winner only after search, reducing selection overfitting. Neither is training data, and repeatedly tuning search on validation undermines it. Hidden test stays out of the interface.",
+        "example": "Example: Explore 100 candidates by search ranking, then use the held-out validation once to choose the final model rather than inspect it after every proposal."
+      }
+    },
+    "qa/agent-research:aira2/implementation": {
+      "source_sha256": "e9bd6e466af71b8eb8c7eb822900f7b4784c756f9b6f21229e1e8c3e8bba60cf",
+      "reviewed": true,
+      "fields": {
+        "question": "Can 80/10/10 be randomly resplit for every candidate?",
+        "answer": "No. One split must be shared so data difficulty does not confound score comparisons. Local tests verify asynchronous scheduling and signal isolation, not multi-H200, Apptainer, or long-running research agents. Rank-based selection probabilities are search rules, not actual performance.",
+        "example": "Example: Identical models can rank differently if one gets easier search samples. A fixed split controls that difference."
+      }
+    },
+    "qa/agent-research:dynamic-brt/mechanism": {
+      "source_sha256": "ebb025961f96b05a27837eec059aef52d468ea54a0c462296db9a8c004513e1c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't failing on the original bug and passing on a generated patch prove the patch correct?",
+        "answer": "A self-generated test can cover only a local behavior the patch happens to satisfy. Agreement does not establish full semantics. This defines a candidate BRT; stronger evidence needs isolated reference repairs and other verification. Grouping votes by non-test patch keeps different tests from splitting the same fix.",
+        "example": "Example: A patch returns a constant and its test checks only one matching input. Both conditions pass, but other inputs remain wrong."
+      }
+    },
+    "qa/agent-research:dynamic-brt/basics": {
+      "source_sha256": "f9f04125ec06a4d08a6eca724e0fb021b1c21f9c81ef38925b246204b72cc5b9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is an executable bug-reproduction test valuable before automated repair?",
+        "answer": "Text issues can be ambiguous. A test makes failure observable and checks whether a patch changes the intended behavior. Dynamic BRT generates and selects tests during repair search. They are local evidence and may lack coverage or overfit a bad patch; they cannot replace full correctness checks.",
+        "example": "Example: Reproduce an empty-list crash with a fixed input. After that test passes, independently check other inputs."
+      }
+    },
+    "qa/agent-research:dynamic-brt/comparison": {
+      "source_sha256": "5085afa19e5da302dce081be4819b3120c32ff100354c9a97ec59a2ab9104146",
+      "reviewed": true,
+      "fields": {
+        "question": "Why group candidates by non-test patch instead of counting each generated test separately?",
+        "answer": "One fix can pair with several tests. Pairwise votes can split or inflate support for the same code. Group by non-test changes, then choose a test within the majority fix group. Identifier normalization is a heuristic, not a proof of semantic equivalence.",
+        "example": "Example: Ten traces with the same code and different assertions are one repair group, not ten independent fixes."
+      }
+    },
+    "qa/agent-research:dynamic-brt/implementation": {
+      "source_sha256": "c25101479f08eb003737c515e6650a134a9a2140c1eebd2a71fbf8ac44b1f235",
+      "reviewed": true,
+      "fields": {
+        "question": "Can any execution exception count as a successful bug reproduction?",
+        "answer": "No. A nonempty assertion must raise assertion_failed on the original, then pass on the fix with acceptable regression results. Syntax errors and unrelated exceptions do not qualify. Execution uses a bounded AST allowlist and timed isolated process, not an arbitrary hostile-code sandbox. Real LLM reviewers and private Google bugs are not run.",
+        "example": "Example: An import error does not reproduce a business-logic bug just because the patched run imports normally."
+      }
+    },
+    "qa/agent-research:watch-and-learn/mechanism": {
+      "source_sha256": "515ddcbd5a2e2c75f7843afba24e3aa003c3bc988ee6ddb42709435b47687ea6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why learn inverse dynamics from tutorials instead of treating before/after pixel differences as mouse actions?",
+        "answer": "Screen changes may come from scrolling, keystrokes, or program responses, so pixels do not identify actions uniquely. The inverse model predicts action type, coordinates, and text from screen pairs, then assembles trajectories. These are estimated labels, not rule guesses or proof an IDM was trained locally.",
+        "example": "Example: A screen can move down from a wheel or a key. Use visual context and supervision instead of labeling every downward shift as a click."
+      }
+    },
+    "qa/agent-research:watch-and-learn/basics": {
+      "source_sha256": "ba67edecb950acd5620a3dc4f7dd29faf91ac55186d14ceb6b8fd780b9d26f32",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use online tutorial videos rather than rely only on expensive action annotations?",
+        "answer": "Tutorials contain genuine software behavior without machine-readable click coordinates, keys, and actions. Converting visible demonstrations broadens training sources. Frames are not action ground truth: occlusion, edits, and missing typed text can harm conversion and execution.",
+        "example": "Example: A file moves across windows, but training data needs to distinguish dragging from a copy command rather than invent a click."
+      }
+    },
+    "qa/agent-research:watch-and-learn/comparison": {
+      "source_sha256": "76f4ad512c620edbe666a1684ad9763f3a401df03bf3a97a0f8e92b774d8185b",
+      "reviewed": true,
+      "fields": {
+        "question": "What changes when retrieving video examples versus training on annotated trajectories?",
+        "answer": "Retrieval puts a relevant demonstration in context without updating the executor. SFT writes trajectory patterns into weights. Both rely on IDM label quality, so video count is not correct action count. Similar titles do not establish actual desktop learning.",
+        "example": "Example: Use one tutorial as a prompt example or offline training input. Inference cost and how errors propagate differ."
+      }
+    },
+    "qa/agent-research:watch-and-learn/implementation": {
+      "source_sha256": "069c313f1dc91594caca18e8dd6c690b6b2cc1d03520f162b8b57bfca1fd1f4b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't one simple rule head replace action, coordinate, and text prediction?",
+        "answer": "The paper uses action classification, coordinates discretized into 0–1000 classes, and a GPT-2 small autoregressive text head with SigLIP-2 and a four-layer Transformer. Do not invent loss weights. Local work is literature and cost review, not IDM training, corpus download, or desktop evaluation.",
+        "example": "Example: A cursor-difference click rule cannot recover typed text from two frames or replace joint IDM training."
+      }
+    },
+    "qa/agent-research:toolgrad/mechanism": {
+      "source_sha256": "ef9dc878a1ad7d9390642981f9f474af14e1a179c2db6f61f2e8c0bc34a493cc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use answer-conditioned trajectory construction only in data generation, not as evaluated agent input?",
+        "answer": "Known answers support backward construction of tool chains and textual-gradient repair to reduce training annotation. Revealing the target value in evaluation leaks the solution and prevents measuring independent evidence gathering. Training construction information must remain separate from deployed inputs.",
+        "example": "Example: Use known population to construct API traces for training. At test, give the population question without the reference number."
+      }
+    },
+    "qa/agent-research:toolgrad/basics": {
+      "source_sha256": "9d1b3916a46333eec1bd613c3d929391e1da6f2a89fb0c69ad4bf053dbe706cc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does ToolGrad target the cost of high-quality tool trajectories?",
+        "answer": "Multi-step calls need correct interfaces, arguments, and linked results. Human demos cost time and direct model generation can accumulate errors. ToolGrad uses target feedback during dataset construction to repair executable traces. Construction targets must not leak to evaluated agents.",
+        "example": "Example: During data creation, verify queries reach a known result and fix parameters. At test, gather evidence without reading the answer first."
+      }
+    },
+    "qa/agent-research:toolgrad/comparison": {
+      "source_sha256": "aeeb4791fa59f60ca6140b4ab63b8addb289e8f79e3634c0d7249264b28cf9d2",
+      "reviewed": true,
+      "fields": {
+        "question": "How does textual gradient differ from a numerical gradient when repairing failed calls?",
+        "answer": "Textual feedback identifies bad arguments, tools, or order and suggests edits; it is not differentiable backpropagation through discrete calls. It depends on feedback quality and execution verification. The name does not imply end-to-end parameter updates, and an edit is not a rerun.",
+        "example": "Example: Changing a date format from feedback is text editing. Reinvoke the tool and check its response to verify repair."
+      }
+    }
+  }
+}

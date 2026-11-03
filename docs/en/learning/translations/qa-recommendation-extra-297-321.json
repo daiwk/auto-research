@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:whale/mechanism": {
+      "source_sha256": "3b525f04cdf41786e20f9629604322a6796ea1be1907dd2995d5f0910b1ed324",
+      "reviewed": true,
+      "fields": {
+        "question": "Why exchange Wukong and HSTU state bidirectionally at every layer rather than only at the end?",
+        "answer": "Field interactions model high-order combinations and sequences capture evolving behavior. Cross-attention lets each guide later processing by the other. This adds dependencies and cost, not reusable user-only caching; local evidence is scaled public evaluation.",
+        "example": "Weekend context can focus sequence attention on camping, then updated interests inform price/category interactions."
+      }
+    },
+    "qa/recommendation:wide-deep/basics": {
+      "source_sha256": "684f1c08d3bc69834d3cb61590aed6833b9f55251d0891ec42274f0c1ef5a619",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep linear and deep paths together?",
+        "answer": "Wide memorizes sparse observed crosses; deep embeddings generalize to unseen combinations. One jointly trained logit combines them, rather than alternating independent services.",
+        "example": "Memorize frequent combinations and generalize related new ones."
+      }
+    },
+    "qa/recommendation:wide-deep/comparison": {
+      "source_sha256": "5cdd2055bca3509a339d238c259bc737387a533d0f87a39565b314a072265c7b",
+      "reviewed": true,
+      "fields": {
+        "question": "How can wide memorization and deep generalization each fail?",
+        "answer": "Memorization misses unseen crosses, while similarity can overgeneralize to incompatible combinations. Capacity should match sparsity and feature engineering.",
+        "example": "Semantic similarity does not establish accessory compatibility."
+      }
+    },
+    "qa/recommendation:wide-deep/implementation": {
+      "source_sha256": "951c4e7a21bac1784ea61b91d9e9fac50b729d36be6389aee0894cff5a467f6e",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local Wide & Deep use production Google Play crosses?",
+        "answer": "No. MovieLens replaces private logs and distributed training/serving. Add logits before sigmoid and train jointly, rather than averaging post-sigmoid probabilities.",
+        "example": "sigmoid(a+b) generally differs from averaging sigmoid(a) and sigmoid(b)."
+      }
+    },
+    "qa/recommendation:wide-deep/mechanism": {
+      "source_sha256": "af919157bf215daf0df3dfc1354b47c5e85ef05df3cd27f0639d28612e862196",
+      "reviewed": true,
+      "fields": {
+        "question": "Why train crosses and deep features jointly rather than average independent scores?",
+        "answer": "Both contribute one logit and share objective gradients, allowing complementary learning. Handcrafted crosses have limited coverage and deep generalization can be wrong.",
+        "example": "Wide memorizes a frequent user–category cross while deep transfers to related new combinations."
+      }
+    },
+    "qa/recommendation:xrec/basics": {
+      "source_sha256": "311283edce9c0bd3f12cff98bd0b1837ee5f4e73aca27aa2cb63ef39b6e22985",
+      "reviewed": true,
+      "fields": {
+        "question": "Why generate X-Rec triggers on the item embedding sphere?",
+        "answer": "Normalized continuous vectors query multiple regions directly without SID quantization or token-by-token decoding. Anchors condition flow toward valid item neighborhoods.",
+        "example": "Generate different interest directions and retrieve nearby catalog items."
+      }
+    },
+    "qa/recommendation:xrec/comparison": {
+      "source_sha256": "09f413312f511e116d0fcd636a4de82c87145f03da8a22d594acac678b1fb926",
+      "reviewed": true,
+      "fields": {
+        "question": "How does spherical flow differ from Euclidean interpolation?",
+        "answer": "Geodesic paths and tangent projection preserve normalization. Straight lines can leave the sphere. Reusing earlier history layers is a separate efficiency design.",
+        "example": "The midpoint of two unit vectors is generally not unit length."
+      }
+    },
+    "qa/recommendation:xrec/implementation": {
+      "source_sha256": "16008c74852498575e361b4d3f41d2c3e8a1c5980f72c576afc8852389e217d6",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local X-Rec have a GPU throughput receipt, and what runs?",
+        "answer": "No. CPU runs scaled anchors, geodesic RFM, final-layer KV reuse, and spherical Euler. No industrial ANN, streaming, or online A/B; CPU timings are not production throughput.",
+        "example": "Caching history verifies skipped computation without proving A100 gains."
+      }
+    },
+    "qa/recommendation:xrec/mechanism": {
+      "source_sha256": "5fe995d964d3f528a9051387259f65eda0427d81aaa55cd5991a4f133bba7897",
+      "reviewed": true,
+      "fields": {
+        "question": "Why condition flow on normalized item space instead of generating SID tokens?",
+        "answer": "Continuous triggers avoid code quantization and use ANN directly. Coarse anchors condition geodesic noise-to-item flow; tangent projection preserves geometry. Cache earlier history layers and denoise final-layer tokens. Multistep cost remains and local low-budget outcomes are negative.",
+        "example": "Generate camera/lens directions around a photography anchor rather than decoding integer IDs."
+      }
+    },
+    "qa/recommendation:youtube-dnn/basics": {
+      "source_sha256": "85ae991e029cb5dadb92034c0773e767d62fc453a93c27dbedd697c4e65ec45d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use a deep user tower for YouTube candidate generation?",
+        "answer": "Combine heterogeneous history and context embeddings into a user vector, train next-watch classification, and retrieve neighbors. Fine ranking is separate.",
+        "example": "Narrow millions of videos before applying richer ranking features."
+      }
+    },
+    "qa/recommendation:youtube-dnn/comparison": {
+      "source_sha256": "9eeb37b04651f2757ee419c25b25131a1e8bf9851a96af5a49a06f540ac77954",
+      "reviewed": true,
+      "fields": {
+        "question": "What does a deep user tower add over matrix factorization?",
+        "answer": "It dynamically combines history/context instead of looking up fixed user/item factors. One vector can still compress away distinct interests.",
+        "example": "Recent preference shifts can enter the tower without retraining a user ID vector."
+      }
+    },
+    "qa/recommendation:youtube-dnn/implementation": {
+      "source_sha256": "af14e50c1324176e6895a9a4e8a1efe3b21bf0e79346d2d4ce914ed523271c0f",
+      "reviewed": true,
+      "fields": {
+        "question": "How align next-watch softmax training and serving retrieval?",
+        "answer": "Use the same score space and item-vector version with time-causal history. Do not mix sampled training probabilities and full-catalog metrics. The public implementation lacks the original inventory and stack.",
+        "example": "Refresh the item index after user-space changes."
+      }
+    },
+    "qa/recommendation:youtube-dnn/mechanism": {
+      "source_sha256": "905c4516b3940fec13b9b99b36aeec3f441ec7e973db4a148c17f7dbe97458d2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why train next watch as classification but serve nearest neighbors?",
+        "answer": "A nonlinear user tower and item dot products define training logits. The same dot-product space supports indexing candidates, avoiding a complex per-video forward. Recall scores are not final ranking utility.",
+        "example": "Compute one user vector, retrieve from a million-item index, and then apply fine ranking."
+      }
+    },
+    "qa/recommendation:youtube-freshness/basics": {
+      "source_sha256": "cc0ad88e6eefd9d64b2bea433e48d76fc9529374dbaf944cc677e882b23a26eb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate training debiasing from serving exploration for freshness?",
+        "answer": "Historical exposure favors old items. IPS/bias towers change learning signals, while uncertainty exploration changes actual exposures. Age features alone do not fix feedback loops.",
+        "example": "Old songs have more data because they were shown; new songs need actual opportunities."
+      }
+    },
+    "qa/recommendation:youtube-freshness/comparison": {
+      "source_sha256": "89f8e96fdd36d41bf574da663215959c8b1b367c2e0a57bd47c52f41714b5fee",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a removable bias tower differ from retaining recency in serving?",
+        "answer": "A tower can absorb training exposure bias then be removed. Recency remains a serving signal. Do not keep adding learned exposure bias as quality.",
+        "example": "Learning old items' logging advantage need not reward them again in deployment."
+      }
+    },
+    "qa/recommendation:youtube-freshness/implementation": {
+      "source_sha256": "04916b739c49757bf6033a573f0dce6fa03389b7d10e20d6275109eb6d32df9d",
+      "reviewed": true,
+      "fields": {
+        "question": "Do local SNGP proxies or negative results explain YouTube's live study?",
+        "answer": "No. There is no full SNGP or continual training. Report interventions, logging propensities, and budgets separately. Popularity is not a measured IPS propensity.",
+        "example": "Low popularity does not establish a low historical impression probability."
+      }
+    },
+    "qa/recommendation:youtube-freshness/mechanism": {
+      "source_sha256": "101b27e8f8b65f266d0a073c908cd47bc69cd6808af3fb59e68fbf0a27ac04fb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate debiasing and exploration instead of relying on freshness features?",
+        "answer": "Content age does not fix logged exposure selection. IPS and removable bias towers adjust training; SNGP uncertainty gives unknown items exposure online. Both depend on assumptions, and less head concentration does not prove satisfaction.",
+        "example": "A new video may lack clicks because it has never been shown; explore and collect feedback rather than boosting all new videos blindly."
+      }
+    },
+    "qa/recommendation:zenith/basics": {
+      "source_sha256": "ec1450f45ea624a2aa60314393f0da1b241e1082b3024ce4c1f5b1914f743aa9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why fuse many features into a few Prime Tokens?",
+        "answer": "Fewer wider tokens reduce interaction count and retain capacity; differentiated attention and independent enhancement counter homogenization. Compression can still lose detail.",
+        "example": "Put sparse fields in several wide slots without making every slot identical."
+      }
+    },
+    "qa/recommendation:zenith/comparison": {
+      "source_sha256": "3e9ebd606f4561a3162c88f6badfdb0eeacb3e41dd1bf656d4ffdf72027432a2",
+      "reviewed": true,
+      "fields": {
+        "question": "How does token-specific TSwiGLU differ from shared FFNs?",
+        "answer": "Independent transformations let roles specialize, but add parameters. Match budgets before attributing gains to architecture.",
+        "example": "User and item slots may benefit from different nonlinearities."
+      }
+    },
+    "qa/recommendation:zenith/implementation": {
+      "source_sha256": "db2782e9cbce50b8e87c9b414e90af601894217b6af88debf4cb07e1f0a68fb3",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local Zenith establish a scaling law?",
+        "answer": "No. Small fixed data exercises fusion, differentiated interaction, and enhancement without production hardware or size. A scaling slope needs matched multi-size curves.",
+        "example": "A win at one scale does not imply the gap grows with size."
+      }
+    },
+    "qa/recommendation:zenith/mechanism": {
+      "source_sha256": "314095b37a21229366495e6db35352ff49b5f9e86d3cde1ae79d800f4b176411",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compress heterogeneous features into wide Prime Tokens and then enhance each separately?",
+        "answer": "Token Fusion trades fewer positions for wider channels; RSA/TMHSA maintain differentiation and SwiGLU or MoE adds role-specific transformations. Check information loss and matched compute.",
+        "example": "Reduce pairwise interactions over 100 fields while preserving meaningful user/item roles."
+      }
+    },
+    "qa/recommendation:zorro/basics": {
+      "source_sha256": "da3dbc78956650cbc4f6843d7adf657923af04b9def807e7a6577abad3a4b766",
+      "reviewed": true,
+      "fields": {
+        "question": "Does zero training mean ZoRRO needs no representation model?",
+        "answer": "No. It uses existing article embeddings and categories, with fixed temporal/semantic rules instead of fitting ranker parameters. Existing models and hyperparameters still cost resources.",
+        "example": "Retrieve with external vectors without backpropagating on news logs."
+      }
+    },
+    "qa/recommendation:zorro/comparison": {
+      "source_sha256": "3431c298fcaa76ce967b6f8b57fbf89f987f4d359e7883038b3ea9867bb4e79c",
+      "reviewed": true,
+      "fields": {
+        "question": "How does time-decayed semantic scoring differ from popularity?",
+        "answer": "It changes by individual history and age, while popularity mostly shares global trends. Category adds structure; semantic similarity can still cause repetition and miss freshness.",
+        "example": "Two readers can rank the same articles differently."
+      }
+    },
+    "qa/recommendation:zorro/implementation": {
+      "source_sha256": "ccd2f3f6d40bbb695278a42a541e925385c71eadb55075586bef53b91977707c",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a movie proxy establish high-throughput online news behavior?",
+        "answer": "No. MovieLens lacks news timeliness, private traffic, and serving. Fix age, cutoff, category source, and weights; do not tune per test case and claim zero-training generalization.",
+        "example": "Movie age is only a mechanism proxy for fresh news."
+      }
+    },
+    "qa/recommendation:zorro/mechanism": {
+      "source_sha256": "de651407f610df20d2f75ef36786f492d47557bb8b876d8fe880a4ad57bc7c48",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can ZoRRO rank without training, and what limits it?",
+        "answer": "Combine history recency, semantic similarity, and category in fixed rules. New history updates scores immediately without fitting, but cannot learn complex collaborative and user-specific relations. Features, data, and hyperparameters still matter.",
+        "example": "Recent technology reading raises related articles without learning that one user prefers culture on weekends."
+      }
+    }
+  }
+}

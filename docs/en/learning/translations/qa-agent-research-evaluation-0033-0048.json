@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:finance-harness-protocol/basics": {
+      "source_sha256": "9b043cdb6c32e6214107222bb6102956820db44cb289d4ccd0072d11b9f91971",
+      "reviewed": true,
+      "fields": {
+        "question": "Is a FinanceGym rubric score of 3 a 3% success rate?",
+        "answer": "No. A rubric uses five grades from 0 through 4, and 3 is one level. Normalize within each item by its four-point maximum before averaging items. Interpretation still depends on the rubric. Raw levels, normalized item scores, and overall Outcome are distinct.",
+        "example": "For two rubrics scored 3 and 1, the item score is (3+1)/(4×2)=0.5, not 4% or a two-item hit rate."
+      }
+    },
+    "qa/agent-research:finance-harness-protocol/comparison": {
+      "source_sha256": "403cc160be181d5673be32335709075247245213a8888c122b3723dc09287610",
+      "reviewed": true,
+      "fields": {
+        "question": "How does equal weighting by item differ from pooling all rubrics?",
+        "answer": "Items have different counts. Pooling gives detailed items more weight; normalize per item first and then average. Do not replace the five-point rubric with an arbitrary continuous scale.",
+        "example": "An item with ten criteria should not automatically weigh five times one with two."
+      }
+    },
+    "qa/agent-research:finance-harness-protocol/implementation": {
+      "source_sha256": "a6097cda5b94f7e6c1fbc454b530b5d6d367bb2730ca782c6deee26ed1c87543",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a finance-protocol row with time leakage be set to zero and included in the mean?",
+        "answer": "No. Invalidate the run rather than silently dropping or zeroing the row. publication_date must be no later than cutoff, and thesis, rubric, and future evidence stay away from the agent. This is a point-in-time evaluation protocol, not investment advice.",
+        "example": "A tool finding an article published after the cutoff is not merely one wrong answer."
+      }
+    },
+    "qa/agent-research:finance-harness-protocol/mechanism": {
+      "source_sha256": "32e52dbeb87bcfe9862e03a2a36d31a71ef25d00bb98fce047a5278c4c1c921c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep predictions verifiable after the cutoff with the post-submission evaluator?",
+        "answer": "Research may use only evidence available by cutoff. Earlier access to future materials turns prediction into repetition. Thesis and rubric also remain with the grader; normalize per item before averaging. Leakage invalidates the run rather than justifying dropping or zeroing a row.",
+        "example": "Later earnings can verify a forecast after submission, but must not be backfilled into the earlier evidence pack."
+      }
+    },
+    "qa/agent-research:agentdebugx/basics": {
+      "source_sha256": "7b8bf02cf6bd934a3ada9c98035af6162f1881895125a0cc0412af4bcdf47f1b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does AgentDebugX preserve immutable raw traces and layer diagnoses on top?",
+        "answer": "Failure analysis needs the original sequence and evidence; overwriting logs hides behavior. Detect, Attribute, Recover, and Rerun produce separately traceable artifacts. The symptom step is not necessarily the cause.",
+        "example": "A tool error late in a trace may originate from bad arguments supplied earlier."
+      }
+    },
+    "qa/agent-research:agentdebugx/comparison": {
+      "source_sha256": "9a8a547597e9d38a4671105e45e8589e3aeccae5eea0e481f04a1e000f6fdcb3",
+      "reviewed": true,
+      "fields": {
+        "question": "What comparison boundary does the reference answer in Who&When introduce?",
+        "answer": "The diagnostic receives the task answer but not the responsible agent or step, so it is localization with ground truth. Do not omit that privilege and present it as an answer-free online capability test.",
+        "example": "Knowing the intended result helps find deviations but does not identify who first erred."
+      }
+    },
+    "qa/agent-research:agentdebugx/implementation": {
+      "source_sha256": "2a79deb3f1d8d608b40c68897657dfe8572a0ed15681c722c06ce0815372d96b",
+      "reviewed": true,
+      "fields": {
+        "question": "May AgentDebugX automatically replay tools from logs after proposing repairs?",
+        "answer": "No. Real reruns need a human or policy gate. Imported logs do not authorize arbitrary external commands. Score a real independent post-repair trajectory for loop evidence. Paper results did not evaluate memory or Error Hub gains.",
+        "example": "If a log contains a deletion, the debugger may propose a correction rather than rerunning the command."
+      }
+    },
+    "qa/agent-research:agentdebugx/mechanism": {
+      "source_sha256": "41b2a15b9123d9e3fcdd69d67cc5ba081a67adb532aaf471a0e064187242ef7e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must repair proposals not automatically replay arbitrary external tools from imported logs?",
+        "answer": "Logs are observations and can be stale, unauthorized, or side-effecting. Separate diagnosis and attribution from authorized execution. Layer hypotheses and suggestions over immutable traces, and create independent rerun evidence after a human or policy gate. Reference-privileged diagnosis is distinct from answer-free online ability.",
+        "example": "A recorded command deleting a temporary folder should not run on import. Suggest a repair, then let authorized execution decide."
+      }
+    },
+    "qa/agent-research:logact/basics": {
+      "source_sha256": "f357a1bb8579b1d35862a942331c52dbafca5bf39667e21b132fdbef10afb871",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does LogAct separate vote commit from execution?",
+        "answer": "Persist intent, review, and commit before execution, separating authorization from external effects and enabling crash audit. Agreement in conversation is not a trusted durable commit.",
+        "example": "Record approval before an executor calls a payment API."
+      }
+    },
+    "qa/agent-research:logact/comparison": {
+      "source_sha256": "3887c8e86ddbbb674726fd4aaca2bb450d38166657cee9e4fb942d36c02c3591",
+      "reviewed": true,
+      "fields": {
+        "question": "How does LogAct k-of-N approval differ from waiting for every vote?",
+        "answer": "A fixed threshold permits commit as soon as k approvals arrive. Reject early if approvals plus remaining votes cannot reach k. Irrelevant pending votes need not finish, and a voter counts once. This does not implement all dynamic approval policies.",
+        "example": "With three voters and a threshold of two, two approvals suffice. Two rejections make the last vote unable to reach two approvals."
+      }
+    },
+    "qa/agent-research:logact/implementation": {
+      "source_sha256": "7d9b7726df59511a0e1f22e2f1dea5c93810d0827b6efe73beebfdca2973f8b2",
+      "reviewed": true,
+      "fields": {
+        "question": "How does local LogAct handle quorum and crash recovery?",
+        "answer": "Require k approvals from N named voters, deduplicate voters, and disallow vote changes. Started without Result does not retry by default. Only explicit recovery for a known idempotent action, after excluding live executors, uses a stable key. Arbitrary dynamic policy languages are unsupported.",
+        "example": "One person's two votes do not count twice, and a commit does not justify replaying unknown side effects."
+      }
+    },
+    "qa/agent-research:logact/mechanism": {
+      "source_sha256": "798b1899a1e246df9cb78d87fd6ed89533a73c9e70af0f3a288c0402f2d68090",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't a committed action be executed again unconditionally after a crash?",
+        "answer": "Commit records approval but may not reveal whether the external side effect happened. A call can succeed before its receipt is logged. Recovery needs idempotency keys or transaction contracts to distinguish those cases. Votes govern approval, not external exactly-once execution.",
+        "example": "If payment succeeds and the process crashes before logging a result, blind replay may charge twice. Use idempotency or transaction lookup."
+      }
+    },
+    "qa/agent-research:tfrbench/basics": {
+      "source_sha256": "64072a6f7253ded2cb324276eaa9f0cb6ff95ea54835b883b7725dd994292ec8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does TFRBench check both numerical error and reasoning consistency?",
+        "answer": "A close forecast may be luck and a fluent explanation may forecast badly. References need both criteria. Labels and feedback used in construction do not yield held-out ability scores.",
+        "example": "A lucky trend guess without evidence and a justified forecast with large errors both fail full admission."
+      }
+    },
+    "qa/agent-research:tfrbench/comparison": {
+      "source_sha256": "ce5afc691410511acbd5162fd9656f9e9fd7d70a795baabddbc3802ef382e133",
+      "reviewed": true,
+      "fields": {
+        "question": "How does TFRBench MASE differ in scale from comparing raw MAE across series?",
+        "answer": "MASE divides error by historical mean absolute seasonal differences, defining thresholds relative to each series. MAE retains original units and is not directly comparable across dimensions. MASE below one is a numeric gate alongside separate consistency. Zero historical scale makes it undefined.",
+        "example": "An error of ten has different meaning for volatile sales and nearly constant temperature. Normalize by each series' historical seasonal changes."
+      }
+    },
+    "qa/agent-research:tfrbench/implementation": {
+      "source_sha256": "80cc46d409be1f395051fd48c4ce68e8caed23a974dea89aa946cd6d556919e0",
+      "reviewed": true,
+      "fields": {
+        "question": "Can TFRBench add epsilon and award a high score when historical seasonal scale is zero?",
+        "answer": "No. MASE is undefined and the sample must be rejected. Reference admission strictly requires MASE below one and S at least four. Document composite ranking weights; local settings are not the authors' unique formula. Future truth remains with the grader.",
+        "example": "Constant histories have no difference scale. Inventing a denominator does not make their errors comparable."
+      }
+    },
+    "qa/agent-research:tfrbench/mechanism": {
+      "source_sha256": "bd12ea62da05dd0e37be458e72c5c0b0dd1a4ca0566078c946bb53c2acb25f73",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must a summary forecast and pass independently after a long reasoning trace meets reference gates?",
+        "answer": "Summaries can omit decisive evidence and cannot inherit original correctness. Numerical accuracy and reasoning consistency jointly constrain references. Label-informed filtering measures construction quality, not held-out ability. Reject zero historical scales rather than adding arbitrary epsilon.",
+        "example": "A long trace explains seasonality and predicts correctly, while a summary saying only 'upward trend' may predict badly. Check compression independently."
+      }
+    }
+  }
+}

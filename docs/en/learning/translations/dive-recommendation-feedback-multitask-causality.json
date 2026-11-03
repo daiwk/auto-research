@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/recommendation/feedback-multitask-causality": {
+      "source_sha256": "3d8ddf14cb63a6e8ab9ec1c985dc9dd4f3770eb5107b543b97c82adbcdda6989",
+      "reviewed": true,
+      "fields": {
+        "title": "From CTR to satisfaction and uplift: define the supervision before sharing parameters",
+        "thesis": "ESMM constrains click-to-conversion funnel probabilities. MMoE and PLE decide how tasks share experts. FLVM distinguishes consumption, active engagement, and positive versus negative direction. Incrementality compares potential outcomes with and without an action. More prediction heads, more shared parameters, or extra latent factors do not establish causal identification.",
+        "axis_0": "Conditional events, feedback measurements, or potential-outcome differences as labels",
+        "axis_1": "Parameter sharing and routing across tasks",
+        "axis_2": "Missing observations, confounding, and counterfactual assumptions",
+        "axis_3": "Mechanism evidence versus real policy incrementality"
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/comparison/recommendation:esmm": {
+      "source_sha256": "4f3690be38fd137e8db2ea1686677a81a38274a9d85285d0a59785ccefb45e31",
+      "reviewed": true,
+      "fields": {
+        "position": "Supervises CTR and CTCVR over all impressions. Connects the conditional conversion tower with p(click and conversion) = pCTR × pCVR.",
+        "tradeoff": "The funnel addresses selection and sparsity from click-only training. A non-click is not a conditional CVR negative, and the probability identity does not establish uplift under randomized intervention."
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/comparison/recommendation:mmoe": {
+      "source_sha256": "399f1aa8318647135e8416843ea00d07fe1aa40050e094a9f4668e0bb2ca4743",
+      "reviewed": true,
+      "fields": {
+        "position": "All tasks share a set of experts; each task has a distinct softmax gate that combines experts per example.",
+        "tradeoff": "More flexible sharing than fully separate models, but experts still receive gradients from multiple tasks. Gates alone do not eliminate conflicts or exposure bias."
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/comparison/recommendation:ple": {
+      "source_sha256": "2830ab2c7e76aa601a5e4f5a5181bd7ad8d42a592603f03196d0c25c1337206e",
+      "reviewed": true,
+      "fields": {
+        "position": "Groups shared and task-specific experts. Layerwise CGC extracts common and task-specific information.",
+        "tradeoff": "Private paths can express conflicting tasks but add capacity and routing complexity. Evaluate seesaw effects per task; an overall mean does not establish improvement everywhere."
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/comparison/recommendation:flvm": {
+      "source_sha256": "4d532769c3a884bffeef23eac4c1172bbfb7e04ba8e82705d570a680f5aad4c4",
+      "reviewed": true,
+      "fields": {
+        "position": "Three latent factors represent consumption, active engagement, and positive/negative direction. Heads use fixed sparse semantic routing and a constrained stop-gradient baseline.",
+        "tradeoff": "Separates measurement factors such as duration from preference channels, but does not identify true causal preferences. The original mask is not public; local routing is an explicit testable choice. Missing feedback is not a zero label."
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/comparison/recommendation:incrementality": {
+      "source_sha256": "5a5cb654706cc3ac974cfe2214bccbcc44a42955b03ee0784218bbfeb3e4f98f",
+      "reviewed": true,
+      "fields": {
+        "position": "Estimates potential-outcome differences with and without treatment and allocates actions by uplift and uncertainty under a fixed contact budget.",
+        "tradeoff": "Measures extra value caused by action, not expected outcomes of naturally responsive users. Credible treatment/control and identification are required. Local proxies do not establish real-user incrementality."
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/comparison/recommendation:kl-mopd": {
+      "source_sha256": "3778e5303b05d10486e901878a86786ba2ef7abec14f79cc98c17c9db776ce00",
+      "reviewed": true,
+      "fields": {
+        "position": "Calibrates position-level teacher discrepancy once and minimizes two student-to-teacher KL terms with fixed alpha.",
+        "tradeoff": "Does not include initial/current student samplers, the recommendation backbone, or Semantic ID evaluation. No online gains are inherited."
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/analysis/0": {
+      "source_sha256": "cbcacfc9db7d9851ee5b190ddafbc62bc65e7137a62b9dc7b22bf0e1d0400051",
+      "reviewed": true,
+      "fields": {
+        "title": "Sharing does not replace label semantics",
+        "body": "ESMM defines CTR, conditional CVR, and joint CTCVR. MMoE and PLE determine how those or other tasks share parameters. Labeling every non-click a conditional CVR negative is wrong even with PLE, and a correct probability chain does not remove gradient conflicts. Audit label definitions, observability, and sharing separately."
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/analysis/1": {
+      "source_sha256": "a00833659d08a3b43d0075e1bda07ea3e6cf8599381a096e2dbbc1c5aab6e88f",
+      "reviewed": true,
+      "fields": {
+        "title": "Separating measurement factors does not prove uplift",
+        "body": "FLVM separates watching, active engagement, and positive/negative direction using a constrained baseline and three-factor routing, avoiding the assumption that watching a long video means liking it. Incrementality compares potential outcomes with and without action. Better observational proxies for satisfaction cannot replace a credible control for counterfactual decisions."
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/analysis/2": {
+      "source_sha256": "928e3f9e5a0c032204b097dd283d64aadc6b7ac286ff0c7c71fcd853e1692f04",
+      "reviewed": true,
+      "fields": {
+        "title": "October 29: New method and source changes",
+        "body": "KL-MOPD locates competition between clicks and value at SID positions rather than combining only item-level scores. Initial-student KL discrepancies to both teachers are calibrated once and frozen; the current student computes weighted reverse KL on its own prefixes. This is not adaptive reweighting by current KL or averaging teacher probabilities. The +1.63% online revenue belongs to the full system. Local tests check loss and gradients, not causal business gains."
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/question/probability-chain-versus-expert-sharing": {
+      "source_sha256": "bc5605c57742e8746dac70206d67b2396799c7c86c655a572b80f1fd6470e46c",
+      "reviewed": true,
+      "fields": {
+        "question": "If ESMM uses MMoE or PLE instead of two towers, can we stop distinguishing CVR and CTCVR?",
+        "answer": "No. MMoE and PLE change parameter sharing, not probability semantics. CVR is conditional on click; CTCVR is the joint post-impression event of click and conversion. A flexible network cannot mix these labels or turn non-clicks into conditional CVR negatives.",
+        "example": "From 1,000 impressions, 100 clicks, and 20 conversions, CTR is 10%, conditional CVR is 20%, and CTCVR is 2%. Expert gating does not equalize the denominators."
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/question/gates-versus-private-paths": {
+      "source_sha256": "39183b53297b6ab105f343b6ac13fc901df1798a8026d9cbade6cb0ebec56eb7",
+      "reviewed": true,
+      "fields": {
+        "question": "If MMoE already has per-task gates, why add task-specific experts in PLE?",
+        "answer": "MMoE changes gates but still mixes shared experts. Gradients can conflict in the same parameters. PLE adds private transforms while preserving a shared path. This changes the sharing boundary; it does not guarantee better scores on every task.",
+        "example": "Click prediction may favor attention-grabbing titles while satisfaction penalizes clickbait. Two gates using the same expert can still compete; private paths preserve some separate processing."
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/question/engagement-not-incrementality": {
+      "source_sha256": "e4b91e760c9d105bc9462ba7aeb612a39e559aaf04dda89267983238cff77811",
+      "reviewed": true,
+      "fields": {
+        "question": "If FLVM predicts a user likes content, why might Incrementality decide not to contact them?",
+        "answer": "FLVM estimates a latent value direction behind feedback. An intervention must consider whether the user would consume anyway. Incrementality compares potential-outcome differences and uncertainty under a budget. Users with high natural preference can have little uplift.",
+        "example": "A user's return rate rises from 90% to 92% with contact, another from 10% to 20%. The first has greater absolute return, the second greater uplift. These are illustrative numbers."
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/question/oct29-method-boundary": {
+      "source_sha256": "94791b19564f5d7cdc77a2a501760e906c7fee59470edbdbfb01e29f8402d326",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not recalculate the two teacher weights from the current student at each step?",
+        "answer": "Alpha is calibrated from the fixed initial policy, making it part of the fixed training objective. Dynamic recalculation changes both objective and gradient semantics. A dynamic variant may work but needs separate validation.",
+        "example": "An initial 1:3 gap gives weights 1/4 and 3/4. Keep them even if later gaps change."
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/update/2026-10-27/0": {
+      "source_sha256": "e41bd583c87b663e631ba74369c755b74dc232e49eb4dce5995b5a47eed8d350",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial version: compared ESMM, MMoE, PLE, FLVM, and Incrementality, with analysis and questions on label semantics, shared parameters, and routing."
+      }
+    },
+    "dive/recommendation/feedback-multitask-causality/update/2026-10-29/1": {
+      "source_sha256": "13916130bf23af849f4b58a6eff4962c58dc10021fc6f6ed94baf3891bd1a595",
+      "reviewed": true,
+      "fields": {
+        "summary": "KL-MOPD locates competition between clicks and value at SID positions rather than combining only item-level scores. Initial-student KL discrepancies to both teachers are calibrated once and frozen; the current student computes weighted reverse KL on its own prefixes. This is not adaptive reweighting by current KL or averaging teacher probabilities. The +1.63% online revenue belongs to the full system. Local tests check loss and gradients, not causal business gains."
+      }
+    }
+  }
+}

@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:mixformer/comparison": {
+      "source_sha256": "13608526d0d1fc1f146e38c5331861b16c406fa366cd4262900950f75196f40d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does a parameter-matched stacked baseline isolate MixFormer's architecture better than the old fixed semantic gate?",
+        "answer": "Actually train stacked and unified models with similar budgets to compare interaction structure. A fixed score gate only proxies fusion. Matching parameters does not remove optimization, feature, or variance differences. The source retired the old proxy; do not mix its numbers with the new experiment or claim stable industrial gains.",
+        "example": "Illustration: Comparing two trained architectures is meaningful; adding a semantic constant to existing scores tests a rule, not unified Transformer training."
+      }
+    },
+    "qa/recommendation:mixformer/implementation": {
+      "source_sha256": "957000d48dfb3c8a0ee00c26abab7efb79930b177d11bd5dff7e3f795c886900",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check whether candidates enter the shared backbone before reusing one MixFormer user encoding for all dot products?",
+        "answer": "If a candidate modifies the unified user state, swapping it invalidates reuse. The local model jointly encodes user fields and history first, then scores separate candidate vectors. Verify actual dependencies, not naming. Public genres replacing private fields also limit fidelity.",
+        "example": "Illustration: Encode four user fields and 32 events once and dot-product with shoes or a camera. If the camera went into the backbone, reusing that state for shoes would change the path."
+      }
+    },
+    "qa/recommendation:ml-dcn/mechanism": {
+      "source_sha256": "0148856e9cb352075555fcbfededf4678715df0a658cb3780328466622b682cd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why apply both low-rank projection and a learned mask before ML-DCN's explicit crosses?",
+        "answer": "Full-width crosses increase compute with capacity. Low rank maps to a configurable small dimension and back; the mask selects participating channels. These control cost and information separately. Residuals preserve the original state, but a low-rank bottleneck can still miss relationships outside its subspace.",
+        "example": "Illustration: Rather than fully crossing thousands of age, city, and device features, select useful channels and combine them in tens of dimensions, leaving budget for depth."
+      }
+    },
+    "qa/recommendation:ml-dcn/basics": {
+      "source_sha256": "87ab32f9c1f17769ac6c63d19ec4876e40998c39f65a46c26bf4202dfdf4b1f6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why mask the cross input rather than the final score in ML-DCN?",
+        "answer": "Selecting channels before multiplication changes which interactions form. Scaling a final score cannot undo bad crosses. Low rank separately controls internal width. Learned mask values are not causal importance and do not prove low-weight features can be removed everywhere.",
+        "example": "Illustration: Suppressing noisy price before interaction prevents bad combinations; scaling the final prediction suppresses useful signals too."
+      }
+    },
+    "qa/recommendation:ml-dcn/comparison": {
+      "source_sha256": "f4d953798d3c2225c6491b004c9780d509ad827e4241c2e4928cc95d59e768f5",
+      "reviewed": true,
+      "fields": {
+        "question": "How do rank and channel selection trade expressiveness against DCN-V2's full cross matrix?",
+        "answer": "A full matrix expresses more general transformations. Low rank constrains the subspace while masks select channels adaptively and save capacity budget. More layers need not restore omitted relations. The shared local scorer proxy is not a full parameter-matched DCN-V2 control.",
+        "example": "Illustration: Compressing a thousand dimensions to dozens saves compute but can lose rare geography–category relationships that masks cannot recreate."
+      }
+    },
+    "qa/recommendation:ml-dcn/implementation": {
+      "source_sha256": "2616b91837772ef47e7a34eec5ca091adee74f90dd3acf512018dfa6b78f6ebd",
+      "reviewed": true,
+      "fields": {
+        "question": "What shape relationships should ML-DCN's V, U, mask, and x0 satisfy?",
+        "answer": "Mask the current xl channelwise, map with V to the internal rank, use U to map back, multiply by original x0, then add residual and bias. Do not replace x0 with xl each layer or broadcast the mask across the batch axis incorrectly. Verify gradient flow instead of using fixed selection.",
+        "example": "Illustration: Rank 32 does not make the output 32-dimensional; it must project back before the elementwise x0 product."
+      }
+    },
+    "qa/recommendation:mlcc/mechanism": {
+      "source_sha256": "2fe8ecfd943e8b729ceb101e5af6a765a48ba9fa76f51e9dcf4cf584e240e7eb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compress before every explicit cross in MLCC instead of compressing only the initial input?",
+        "answer": "Layer states contain different interaction orders. Recompressing the current state lets the next cross use newly formed information. Dynamic crosses in compact space project back into the backbone to reduce high-dimensional cost. Parallel subspaces can cover different relations but need to retain useful directions.",
+        "example": "Illustration: First combine region and category, then compress that combination to cross it with price preference. Reusing only initial fields misses the new relationship."
+      }
+    },
+    "qa/recommendation:mlcc/basics": {
+      "source_sha256": "dce560d30d1269ec91b56c94b6db9fc3df1eacc92a17adaa62ef60ff2d0785cd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why project MLCC's compact-space crosses back into a high-dimensional backbone?",
+        "answer": "Compact z saves interaction cost, while the residual backbone retains old information. Projection P injects new combinations rather than trapping all layers in one reduced space. Compression may omit directions, and residuals do not guarantee learning every high-order cross.",
+        "example": "Illustration: Compute budget–category interaction in a small space and add it back, leaving other fields available at the next layer."
+      }
+    },
+    "qa/recommendation:mlcc/comparison": {
+      "source_sha256": "7333729af52e2393228c87816207daef712433afe0fc1c4c2516c18cd893d691",
+      "reviewed": true,
+      "fields": {
+        "question": "How do MC-MLCC's parallel subspaces differ from widening one compression space?",
+        "answer": "Separate subspaces can specialize in distinct crosses and combine outputs; one wider projection concentrates capacity. Parallel channels can specialize or duplicate each other. Match parameters and FLOPs; the mechanism does not establish universal cost and accuracy gains.",
+        "example": "Illustration: Price–budget and time–context can occupy different channels, but if both learn popularity, capacity is redundant."
+      }
+    },
+    "qa/recommendation:mlcc/implementation": {
+      "source_sha256": "2e67aeb4f50e216a6442fb455be6ca78462155c5ce656e709490e747216cde8d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must MLCC's Cl and Pl match the corresponding layer state?",
+        "answer": "Compress current xl to z, compute its dynamic gate from z, and project back to xl's width. Reusing the initial compression or the wrong layer's weights weakens progressive high-order updates. Check that each layer actually receives the updated state, not just valid residual shapes.",
+        "example": "Illustration: Layer two should compress a state that includes layer one's crosses; compressing x0 again can just repeat the first cross."
+      }
+    },
+    "qa/recommendation:mm-llm/mechanism": {
+      "source_sha256": "7c76dc580bb90439035dddb85061736a0dc7a29e067460fa7783e9bfc7f91b09",
+      "reviewed": true,
+      "fields": {
+        "question": "Why turn visual content into normalized semantic tokens in MM-LLM instead of running a large model per ranking request?",
+        "answer": "Visual vectors are rich but fine-grained semantics can be hard to use consistently. The offline visual encoder, Q-Former, and LM generate captions normalized into reusable category tokens. A smaller online ranker combines them with IDs and visual features, amortizing semantic compute.",
+        "example": "Illustration: Extract rain, camping, and gear tutorial tokens offline from a thumbnail, then rank using those features and history without asking the LM to explain the image again."
+      }
+    },
+    "qa/recommendation:mm-llm/basics": {
+      "source_sha256": "73bf4533ff1911fad79951df397d04192e1de13293f572a5ade0ff0e04c93751",
+      "reviewed": true,
+      "fields": {
+        "question": "Why normalize MM-LLM captions into categorical token IDs?",
+        "answer": "Free-form descriptions vary in wording and length. Category IDs provide a stable cacheable interface for ID, visual, and history-profile fusion. Normalization loses detail and inherits caption errors, so discrete IDs are not ground-truth annotations.",
+        "example": "Illustration: 'Camping in rain' and 'putting up a tent in the rain' can map to similar tokens; a false weather caption produces a false tag."
+      }
+    },
+    "qa/recommendation:mm-llm/comparison": {
+      "source_sha256": "2e77e8a9ecdc8529861a663200955dd95d2b181c1adb61e188f3014dc2474fbf",
+      "reviewed": true,
+      "fields": {
+        "question": "What can MM-LLM caption tokens add beyond visual embeddings?",
+        "answer": "Continuous visual representations retain perceptual structure; captions extract language-level attributes and uses. They can duplicate or contradict each other, motivating gated rather than blind fusion. The local caption ablation was near flat and Hit fell, so readability is not evidence of ranking gains.",
+        "example": "Illustration: The visual vector reflects color and layout; a caption can identify a waterproofing demo or add noise if it contributes no new concept."
+      }
+    },
+    "qa/recommendation:mm-llm/implementation": {
+      "source_sha256": "a4b933759d192a9f17ad9bdfbba0bffbd45b10360b867ec3125627e9bf9e1fbb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are MM-LLM's four local caption tokens not a full visual–LLaMA2 training reproduction?",
+        "answer": "Public content vectors replace private images, and light query cross-attention generates proxy tokens. This tests reduced fusion without the original visual encoder, Q-Former, or full large model. Report internal ID+content and DIN comparisons separately.",
+        "example": "Illustration: Four tokens made from genres do not demonstrate image understanding, even if fusion loss falls."
+      }
+    },
+    "qa/recommendation:mmoe/mechanism": {
+      "source_sha256": "448ce4cc1e7c5d707b567b25deba64eea60613764059ff1136c62696b10f94c1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can shared experts with task-specific gates in MMoE reduce shared-bottom negative transfer?",
+        "answer": "A shared bottom forces one intermediate representation and can mix conflicting gradients. MMoE lets each task conditionally combine jointly trained experts, sharing useful parts while selecting different mixtures. It enables soft specialization but does not guarantee interpretable experts or eliminate conflict.",
+        "example": "Illustration: Click and purchase can both use category knowledge while one emphasizes novelty and the other price."
+      }
+    },
+    "qa/recommendation:mmoe/basics": {
+      "source_sha256": "66357e4a9e9d61d5c0d3a1196b5e00e7da48385e5ee895dce170b18b13302e49",
+      "reviewed": true,
+      "fields": {
+        "question": "Does sharing experts but keeping private gates make MMoE tasks independent?",
+        "answer": "No. Shared expert gradients still transmit effects between tasks. Private gates change expert weights and task heads produce separate outputs. This lies between full sharing and full separation. Check actual routes and task results for specialization.",
+        "example": "Illustration: Click and purchase use the same price expert at different rates; click training still changes the expert that purchase reads."
+      }
+    },
+    "qa/recommendation:mmoe/comparison": {
+      "source_sha256": "7b3324bf42c72ec6be643bfc41b2e5f079b5db89b36d9957953b38aa7db584a9",
+      "reviewed": true,
+      "fields": {
+        "question": "What trade-off does MMoE offer between a shared bottom and independent task networks?",
+        "answer": "A shared bottom returns one representation, independent networks share no parameters, and MMoE offers several common experts combined per task. Extra experts add flexibility, computation, and collapse risk. Task relationships and data determine whether the compromise helps.",
+        "example": "Illustration: Two tasks can share interest features but differ elsewhere. Unrelated tasks may suffer from sharing, while scarce data can make independent models unstable."
+      }
+    },
+    "qa/recommendation:mmoe/implementation": {
+      "source_sha256": "022b9989417e6e63d3e6a363372f1657453016fa1263aca11565780a5b111144",
+      "reviewed": true,
+      "fields": {
+        "question": "Why normalize MMoE gates across experts, and how many sets of weights do four experts and two tasks need?",
+        "answer": "Each task has a distinct four-weight distribution per sample and combines same-space expert outputs. Normalizing across tasks makes them compete for one budget and changes the algorithm. The four-expert, two-head local control is shared-bottom.",
+        "example": "Illustration: Click and purchase each need four weights summing to one; normalizing all eight together couples them incorrectly."
+      }
+    },
+    "qa/recommendation:mosaic/mechanism": {
+      "source_sha256": "fbaf25e123dbf3c8aaec3b90b58ddc80efe2a9d2750a58fac5a4e06d7fb21f54",
+      "reviewed": true,
+      "fields": {
+        "question": "Why penalize redundancy in a new Mosaic specialist when several user embeddings already exist?",
+        "answer": "New networks can repeat old knowledge while adding serving cost. Mosaic forms a representation fleet, mines task relations to learn joint behavior, and penalizes duplication against existing vectors. The goal is complementary information for downstream readers; geometric orthogonality does not imply business independence.",
+        "example": "Illustration: If old vectors already remember brands, a new specialist could learn when users explore instead of remembering the same brands again."
+      }
+    },
+    "qa/recommendation:mosaic/basics": {
+      "source_sha256": "2917babfe543f735bb72e4b78e5420bdf288a4838d5e3196a3855bea3d28605a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't Mosaic's specialist fleet equivalent to widening one general user embedding?",
+        "answer": "Memory, dense interaction, sequence, and downstream co-training specialists optimize different knowledge and can evolve independently. Downstream consumers select interfaces. One wider model can still be dominated by one objective. A fleet adds storage and maintenance and does not guarantee independence.",
+        "example": "Illustration: A memory specialist recalls brands, a sequence specialist detects this week's trip, and a jointly trained specialist adapts to purchases; width alone need not separate these roles."
+      }
+    },
+    "qa/recommendation:mosaic/comparison": {
+      "source_sha256": "268c3de5256f5abf4db642ea1c7af556b6173ec235baf7b38aea37af69a1dd3e",
+      "reviewed": true,
+      "fields": {
+        "question": "What supervision does Mosaic's MRM joint label add beyond independent binary tasks?",
+        "answer": "Marginal labels constrain individual frequencies, whereas Cartesian-product labels represent which events co-occur. Related-task mining selects useful combinations, and label space can grow. Joint association does not establish causality; exposure can influence both.",
+        "example": "Illustration: Clicks and long views can each happen half the time together or disjointly. Marginals alone cannot distinguish them."
+      }
+    },
+    "qa/recommendation:mosaic/implementation": {
+      "source_sha256": "d2be08fae8852ef01cc36bb34eeff91a98e1c931cad3f09809536f314a127e63",
+      "reviewed": true,
+      "fields": {
+        "question": "Why warm up Mosaic's cosine redundancy loss and evaluate complementarity separately?",
+        "answer": "Strong early separation can make untrained features diverge randomly. Warm-up lets task information form before reducing overlap. Lower or negative cosine shows geometry, not useful new evidence. Preserve the local Hit decrease and head-share increase.",
+        "example": "Illustration: Random vectors can be uncorrelated and useless for ranking. First learn meaningful interests, then verify that another specialist adds value."
+      }
+    },
+    "qa/recommendation:mpformer/mechanism": {
+      "source_sha256": "337a174ff827f7f605358b11f8c5ffd10d859a4ccba86b368e670e064886178c",
+      "reviewed": true,
+      "fields": {
+        "question": "How does MPFormer's objective token produce retrieval representations for different goals from the same history?",
+        "answer": "The objective token conditions the sequence encoder, so shared layers can extract different signals for different behavior goals. Dynamic weights and quotas adjust learning and retrieval budgets by difficulty. Calibrate goals separately; they are not interchangeable next-item targets.",
+        "example": "Illustration: Click retrieval can favor novelty while purchase retrieval emphasizes recent repeated comparisons, changing both features and candidate quota."
+      }
+    },
+    "qa/recommendation:mpformer/basics": {
+      "source_sha256": "a098abcd8a73ecd5160ae9a6919df23f29ebdb181b87f89879de4d63f4d6ce97",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use objective tokens for MPFormer retrieval goals?",
+        "answer": "Different feedback goals need different views of the same history. An objective token conditions a shared backbone, and task difficulty informs capacity and candidate allocation. A token is an interface, not supervision; renaming it cannot teach an unsupported behavior.",
+        "example": "Illustration: A user may click novel items and purchase trusted ones. Training only on views does not teach purchasing by swapping the objective token."
+      }
+    }
+  }
+}

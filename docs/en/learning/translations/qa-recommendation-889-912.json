@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:rag-generation/comparison": {
+      "source_sha256": "25c82b2302d355cc323df3a9e8edcad54cdfaf2261b261421b09074043616704",
+      "reviewed": true,
+      "fields": {
+        "question": "What does RaG cross-domain reward evaluate beyond visual generation quality?",
+        "answer": "It checks recommendation fit as well as visual quality and coordinates selection with creation. Rewards may conflict or lack verification. One proxy score cannot show both personalized relevance and actual visual gains. Locally only the D-SID interface ran.",
+        "example": "Illustration: Beautiful climbing footage can be irrelevant to easy camping, while matching a keyword does not prove watchable realistic video."
+      }
+    },
+    "qa/recommendation:rag-generation/implementation": {
+      "source_sha256": "b7855fe2ef868fba4c51817142c388ad78591ac62491bf80e5f57f581716cf9c",
+      "reviewed": true,
+      "fields": {
+        "question": "What evidence would demonstrate full RaG video generation beyond the local D-SID interface?",
+        "answer": "Provide the real model and revision, conditions, generated videos, runnable training or inference commands, and quality evaluation. Discrete vectors and ranking metrics demonstrate transfer of code components, not execution. Paper online gains do not fill the local gap.",
+        "example": "Illustration: Returning two content/creative integers is a callable interface, not a video; a placeholder filename is not a visual artifact."
+      }
+    },
+    "qa/recommendation:rag-qac/mechanism": {
+      "source_sha256": "e90b5aeb0f41e63159d85aa136ddf50634d55060df9a1afbbb49adfb23a29cb4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retrieve a searchable catalog before multi-objective preference alignment in RAG-QAC?",
+        "answer": "Free generation can create plausible suggestions with no results. Catalog retrieval grounds suggestions in traceable candidates, then SFT/DPO balance relevance, safety, engagement, context, and diversity. Alignment cannot create missing inventory, and engagement should not trump factuality.",
+        "example": "Illustration: Retrieve real tents and cookware for 'light camping' before suggesting a nonexistent model."
+      }
+    },
+    "qa/recommendation:rag-qac/basics": {
+      "source_sha256": "b26f61667ad723b9f5848bb013906f4aee136338d2078f8c6622178f37348fba",
+      "reviewed": true,
+      "fields": {
+        "question": "Why assess catalog groundedness separately from contextual groundedness in RAG-QAC?",
+        "answer": "Catalog checks whether a suggestion maps to real searchable content; context checks fit with prefix and known needs. Each can pass alone and neither guarantees safety or engagement.",
+        "example": "Illustration: Real adult hiking boots fail context for children's rain boots, while an invented perfect child model fails the catalog."
+      }
+    },
+    "qa/recommendation:rag-qac/comparison": {
+      "source_sha256": "489012fbd320d7e0c95e1f67a6897c06b6bf7e6aa1d612681d632be375d22628",
+      "reviewed": true,
+      "fields": {
+        "question": "What do SFT and DPO add beyond a retrieval-template system for RAG-QAC?",
+        "answer": "Templates ground some terms but fix expression and priorities. SFT learns contextual completions and DPO compares relevance, safety, engagement, and diversity. Goals can conflict; avoid losing truth for clicks. A fixed local scorer does not prove language post-training.",
+        "example": "Illustration: Learn a trade-off between two searchable suggestions, one closer to the user and one covering a new direction."
+      }
+    },
+    "qa/recommendation:rag-qac/implementation": {
+      "source_sha256": "adb2ec1069c6fe2d1e69bafa3df26320d9f352f2214a837c067b9a0b8a763cbf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep RAG-QAC retrieval evidence separate from gold completion labels?",
+        "answer": "Evidence comes from the prefix and catalog, while gold is training supervision. Retrieving from the correct held-out completion leaks it. Verify catalog and context independently rather than treating membership as all quality checks.",
+        "example": "Illustration: Inserting the held-out tent model before generating lets the model repeat the answer rather than retrieve from the prefix."
+      }
+    },
+    "qa/recommendation:ramp/mechanism": {
+      "source_sha256": "8015d247d75a58bb96b4d310d2cc550f48527e059e123470675fdf4018371d45",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep a separate RAMP path for unavailable personalization instead of filling zeros?",
+        "answer": "Zeros conflate unavailable features with true zeros and force one representation across distinct inputs. An availability mask selects personalized or public paths, and training distills rich predictions to the restricted path. Serving remains limited to permitted features and cannot recover hidden personal history.",
+        "example": "Illustration: An unconsented request uses content and context, while authorized training examples can provide soft supervision without exposing restricted fields online."
+      }
+    },
+    "qa/recommendation:ramp/basics": {
+      "source_sha256": "4d05d4a99184d0c6dc0fb7d43db46b144ebacc8466b8ad1c084c8ad98789b4eb",
+      "reviewed": true,
+      "fields": {
+        "question": "Does RAMP's non-personalized branch predict the same thing for every request?",
+        "answer": "No. It can use ad content, public attributes, and request context without restricted personal fields. Constant output would discard allowed evidence. Follow permissions and do not disguise personal IDs as public.",
+        "example": "Illustration: Rain gear on a rainy day and food on a sunny day can score differently without private browsing history."
+      }
+    },
+    "qa/recommendation:ramp/comparison": {
+      "source_sha256": "f6a2d95d42d28a1f3937bad7beb0f88a9f25c541a33e2d72edc02c20760d1537",
+      "reviewed": true,
+      "fields": {
+        "question": "What does RAMP distillation add beyond training on missing features alone?",
+        "answer": "Missing-feature training uses hard labels. A rich teacher adds soft relational judgments, but student inputs may not recover all information and bias can transfer. A large relative gain over a tiny local baseline is not definitive industrial robustness.",
+        "example": "Illustration: A teacher can distinguish two ads with similar public features; a student may learn a trend but cannot distinguish every user without public clues."
+      }
+    },
+    "qa/recommendation:ramp/implementation": {
+      "source_sha256": "64c21c6dda3275083f9cecbca67ccb2e0588feed03ba849dcbdb2d9c06cef2f7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why derive RAMP availability masks from actual permissions rather than prediction quality?",
+        "answer": "The mask expresses feature access, not labels or which branch wins afterward. Distill on authorized samples and keep restricted test traffic free of personal features. Distinguish unavailable values from legitimate zeros.",
+        "example": "Illustration: Selecting the private branch only when a purchase occurs leaks outcomes. Use permission and field availability at request time."
+      }
+    },
+    "qa/recommendation:rankgraph2/mechanism": {
+      "source_sha256": "8c4ad08b838bfe842b4a6458791ab97bf76a504975f2fdf3a7228158a4309d1b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why correct popular edges before offline multi-hop PPR in RankGraph-2 rather than deploy a deeper online GNN?",
+        "answer": "Multi-hop propagation finds indirect links but popular nodes absorb mass and online depth costs latency. Correct transitions and compute PPR offline, then compress serving via residuals and cluster indexing. Popularity correction does not eliminate all exposure bias, and the graph needs refreshes.",
+        "example": "Illustration: A blockbuster can connect unrelated films. Reducing its incoming transition weight lets niche relations survive across hops."
+      }
+    },
+    "qa/recommendation:rankgraph2/basics": {
+      "source_sha256": "b8547009305d45613ac93c15bd4ddaedf0332a75a4ce6e3d3eeaad5a3825f508",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine restart with multi-hop propagation in RankGraph-2 PPR?",
+        "answer": "Restart preserves seed personalization while corrected multi-hop edges expand beyond immediate neighbors. Popularity adjustments reduce mass concentration, but do not prove unbiased relations. Stale graphs and index compression can lose tail paths.",
+        "example": "Illustration: Photography links through lenses to tutorials; restarting avoids drifting entirely to site-wide hits."
+      }
+    },
+    "qa/recommendation:rankgraph2/comparison": {
+      "source_sha256": "09909fcc1f1790de9f9321f315d0135cb24552c471458ee3f52b4bb3deb4bb68",
+      "reviewed": true,
+      "fields": {
+        "question": "How do offline PPR plus a compressed index and online deep GNN trade cost for freshness?",
+        "answer": "Offline computation amortizes hops and makes lookups light but may lag new edges or current intent. Online propagation is fresher but repeats work per request. PPR iteration convergence is not end-to-end throughput; the proxy is not a full production ablation.",
+        "example": "Illustration: New content with links today waits for the offline refresh, while online propagation can read it at greater serving cost."
+      }
+    },
+    "qa/recommendation:rankgraph2/implementation": {
+      "source_sha256": "aa302e589d8d7f103099f76230559d3683f6e4d9ad4fb4d76993a7b986ea28e0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why renormalize transitions after RankGraph-2 popularity correction before PPR?",
+        "answer": "Reweighting changes row sums. Renormalize to legal transitions or probability mass is spuriously lost or amplified. Check isolates and restart, and validate residual/cluster indexing separately. Designed debiasing does not prove all exposure bias is gone.",
+        "example": "Illustration: A row sum falling to 0.4 would lose 60% of mass each hop without renormalization."
+      }
+    },
+    "qa/recommendation:rankup/mechanism": {
+      "source_sha256": "315bf45666d55055ae335cc6913f041f0b18d5d5e0d085b6f71fa7ace72e0d6c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use permutation grouping and global tokens against RankUp rank collapse instead of merely adding embeddings or depth?",
+        "answer": "Added parameters can reuse the same subspace. Different groupings and tables alter interaction paths, global tokens connect groups, and external features and task decoupling add signals. These aim to turn capacity into richer directions, not guarantee effective rank.",
+        "example": "Illustration: New groupings let fields interact that never shared a group under a fixed partition."
+      }
+    },
+    "qa/recommendation:rankup/basics": {
+      "source_sha256": "e3b9ba6336e2c400105f59d1f69b53cc4b38957c59feb4d77d8b58ec3e924fa8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't higher RankUp representation rank proof of useful interests?",
+        "answer": "Rank measures independent directions, not task information. Noise can raise rank and obscure useful structure. Inspect spectra with task and subgroup metrics rather than claiming quality when tokens become less alike.",
+        "example": "Illustration: Random orthogonal user noise can yield full rank without adding any predictive preference."
+      }
+    },
+    "qa/recommendation:rankup/comparison": {
+      "source_sha256": "8b8a3dffc32b22553b59870cc580bb93825578fb375e2787bcdbd89d6462bf7f",
+      "reviewed": true,
+      "fields": {
+        "question": "How does permutation grouping change interaction opportunities versus fully shared RankUp input?",
+        "answer": "New partitions let previously separated fields meet, independent embeddings add views, and global tokens connect groups. Shared inputs can favor strong fields, while groups can miss or duplicate crosses. Combined local changes do not attribute gains to one component.",
+        "example": "Illustration: Another permutation can put age with category; unaligned parameter shuffling can instead destroy meaning."
+      }
+    },
+    "qa/recommendation:rankup/implementation": {
+      "source_sha256": "cd9d0c07404793b249016f1ed9cc6a38786b040fac9e8f5021cf738fa7baa0e0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why track RankUp permutation matrices and field identities together?",
+        "answer": "XP rearranges inputs; corresponding embedding and group weights must follow the same map. Align global-token residual widths, and do not choose permutations using test labels. A local proxy does not verify production scaling laws.",
+        "example": "Illustration: Swapping price and age while keeping the original lookup can interpret age 18 as a price."
+      }
+    },
+    "qa/recommendation:rclrec/mechanism": {
+      "source_sha256": "a37a5b90daa519ca22db8f612f5d5ab81a9bc887891238a72753dd57fa6fdae2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why put reversed conversion-related history into RCLRec's decoder prefix and weight curriculum quality?",
+        "answer": "Sparse conversion labels weakly supervise long histories. Selecting a related short subsequence and reversing it foregrounds events closer to conversion and creates intermediate supervision. Quality weighting limits weak curricula, but mistaken relevance can reinforce bias.",
+        "example": "Illustration: Start from cart addition and work back through comparison and search, while downweighting accidental browsing."
+      }
+    },
+    "qa/recommendation:rclrec/basics": {
+      "source_sha256": "99baaf5dcd0a8e44a683d8c4561d64f38ea779bfc224716ca09097cbbbe5cd03",
+      "reviewed": true,
+      "fields": {
+        "question": "Does zero RCLRec curriculum quality stop the main objective from learning?",
+        "answer": "No. Main loss plus λq(C) times the curriculum loss retains the main term at q(C)=0. Do not mask the whole sample. For gradient claims, distinguish whether the weight is trainable.",
+        "example": "Illustration: A poor curriculum can be ignored while the true purchase label still trains the primary objective."
+      }
+    },
+    "qa/recommendation:rclrec/comparison": {
+      "source_sha256": "298502ca2006ed10ff124fc275a5eb34ed3b7d3d1d8c4c69b1bd9e9664a5c2eb",
+      "reviewed": true,
+      "fields": {
+        "question": "How does quality weighting reduce uninformative curriculum supervision compared with equal weights?",
+        "answer": "q(C) limits irrelevant segments' influence on the main objective. It can be mistaken or overly concentrated and reduce coverage. Preserve the negative public proxy rather than assuming effectiveness.",
+        "example": "Illustration: Ten unrelated clicks do not deserve more auxiliary weight than one clear compare-to-cart chain."
+      }
+    },
+    "qa/recommendation:rclrec/implementation": {
+      "source_sha256": "f32a0556a5a51a2aade759263dc4f3058c7dbb82b7d4a02644edb1f1e58f53be",
+      "reviewed": true,
+      "fields": {
+        "question": "Why preserve event timing and visibility when implementing reverse sequences in RCLRec?",
+        "answer": "Reversal changes prefix order, not what was observed before the target. Define selection, order, quality masks, and causal decoding for the transformed layout. Reversing a tensor with mismatched positions is not the specified curriculum.",
+        "example": "Illustration: Pre-purchase comparisons can be reversed, but a return after purchase cannot join the prefix."
+      }
+    },
+    "qa/recommendation:real-estate-rerank/mechanism": {
+      "source_sha256": "4480b3252818de7deb00523fb04b7085a00459f523c60c6a8216d05499c12362",
+      "reviewed": true,
+      "fields": {
+        "question": "Why include candidate-set statistics in real-estate LLM reranking rather than score each listing independently?",
+        "answer": "Conversation needs can trade off budget, commute, and space across structured data and text. Set statistics provide current alternatives for relative decisions beyond vector similarity. List changes can invalidate scores, and reranking cannot recover missing listings.",
+        "example": "Illustration: If none is both quiet and near transit, the set helps identify the best compromise instead of matching each sales description alone."
+      }
+    },
+    "qa/recommendation:real-estate-rerank/basics": {
+      "source_sha256": "f0ce5a993f8c34dadf2893b96a20a66bbdb6db5b75e78b3159e00ca412cc372d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine structured property attributes with conversational needs instead of just listing prose?",
+        "answer": "Descriptions can be vague; structured price, size, and commute specify constraints, while dialogue gives priorities and trade-offs. Set statistics add context. Language reasoning cannot replace factual attribute validation or rewrite facts.",
+        "example": "Illustration: Both listings say convenient; five versus twenty minutes to transit resolves a ten-minute requirement."
+      }
+    }
+  }
+}

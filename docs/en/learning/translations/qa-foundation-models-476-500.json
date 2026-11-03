@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:dqwen35/implementation": {
+      "source_sha256": "e0f7c0eecb51137f35e9bd160e443752a087d8da39e3014d9b0b7263dc6e7d4d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why test both attention and recurrence for bidirectional conversion?",
+        "answer": "Removing the attention mask can leave recurrence one-way. Local CUDA only confirms component execution, not a 9B checkpoint or full denoising curves.",
+        "example": "Right context reaching one branch does not make the other bidirectional."
+      }
+    },
+    "qa/foundation-models:echo/mechanism": {
+      "source_sha256": "91788c791ec1ed9236177d93275e0233c7f865f334618deb8b6e82bf87727f30",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not use ECHO bonus logits as the final sampling distribution?",
+        "answer": "Frequent cheap early proposals and less frequent authoritative late checks cooperatively expand the candidate tree. Exploration may differ from the target and requires exact rejection correction. Local candidate/tensor checks do not measure throughput.",
+        "example": "A bonus branch may enter verification without being accepted automatically."
+      }
+    },
+    "qa/foundation-models:echo/basics": {
+      "source_sha256": "680e406c869eece698bb4afe9d76755861516aa2067fc9d2d39454937ec88e70",
+      "reviewed": true,
+      "fields": {
+        "question": "Why explore frequently in early layers but verify less often at the end?",
+        "answer": "Early proposals are cheap; full depth verifies reliably. Dual loops and bonus logits expand candidates while aiming to reduce waits and preserve corrected sampling.",
+        "example": "Let the light path expand promising branches for full-depth checking."
+      }
+    },
+    "qa/foundation-models:echo/comparison": {
+      "source_sha256": "7957151db03039e8b583e629ef93255fde4d932a4ed106fd6766216500c7a19a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate exploration scores from target sampling?",
+        "answer": "Bonus logits serve proposals and expansion. Exact rejection correction maintains the target distribution. Sampling bonuses directly changes behavior.",
+        "example": "Trying a favored candidate first does not entitle it to higher final probability."
+      }
+    },
+    "qa/foundation-models:echo/implementation": {
+      "source_sha256": "4b7a516706aa380841d936a1a242e24185f7b970a0a7be964444800123f7b165",
+      "reviewed": true,
+      "fields": {
+        "question": "How does candidate merge validation differ from CUDA throughput evidence?",
+        "answer": "Reference verifies merge and lossless correction; A100 receipt verifies the tensor path. Real speed needs early/late scheduling, caching, and measured time.",
+        "example": "Distribution parity does not prove ideal GPU overlap."
+      }
+    },
+    "qa/foundation-models:langdit/mechanism": {
+      "source_sha256": "f37ff81adb4c5fdcc40ef207d42e9b34052742450ed832ce735705527f32f64b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why detach only the explicit codebook shortcut, not the entire noisy input?",
+        "answer": "Both paths share a codebook. Detaching shortcut gradient still lets the codebook learn through noisy input; detaching everything breaks it. Training uses entropy-gated self-conditioning while inference uses unweighted posterior mean.",
+        "example": "Freeze one shortcut multiplication, not the same table's input construction path."
+      }
+    },
+    "qa/foundation-models:langdit/basics": {
+      "source_sha256": "1815ec1a848ba09462b56bf591935b31ca37357c1aed0e82036eba0f6a4d3069",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add a likelihood shortcut besides noisy embeddings?",
+        "answer": "Codebook-to-noisy-state relations supplement token posterior with noise-conditioned backbone and bounded calibration. This is more than a normal head and needs correct gradients and self-conditioning.",
+        "example": "At low noise, nearby codebook vectors help identify the underlying token."
+      }
+    },
+    "qa/foundation-models:langdit/comparison": {
+      "source_sha256": "dfe3580f0b1d7ffdbd08b31fe0448061d5771c61aa48c9cd131d701073f6fec3",
+      "reviewed": true,
+      "fields": {
+        "question": "Should training entropy gating also weight inference posterior means?",
+        "answer": "No. Training bootstrap confidence-attenuates and detaches feedback. Inference uses unweighted pC and no extra bootstrap. Training heuristics are not posterior guarantees.",
+        "example": "Do not discount inference probability mass a second time because training suppressed low-confidence feedback."
+      }
+    },
+    "qa/foundation-models:langdit/implementation": {
+      "source_sha256": "30dad04de335789908bca615a63de2c7451a7d658479ce5d09f5f94e27c5f4a8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why initialize calibration aψ to one and constrain it to [0.5,2]?",
+        "answer": "One preserves initial shortcut scale. Bounded exponential calibration avoids extreme amplification or suppression, with 5000 warmup steps. Verify ranges and gradient paths.",
+        "example": "Large calibration outputs must not make the shortcut dominate the vocabulary head."
+      }
+    },
+    "qa/foundation-models:loopspec/mechanism": {
+      "source_sha256": "05bd24554ee8e209a9939d8aaf2e93cc911c85ec7c0eca821c408a8bf8c2e25b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can LoopSpec use intermediate loop predictions without an independent drafter?",
+        "answer": "Shallower loop states give cheap predictions and deeper computation verifies them. Pipelined residual proposals aim to overlap waiting. Actual acceptance and scheduling determine gains; a reference scheduler does not measure GPU throughput.",
+        "example": "Reusing shallow drafts saves a separate model but frequent rejection can erase benefits."
+      }
+    },
+    "qa/foundation-models:loopspec/basics": {
+      "source_sha256": "29899a1d107b6a0e99cc0099728639a40b5fde2951060ef25802134b9bdd4ffc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is self-speculation natural for shared-block loops?",
+        "answer": "Intermediate depth provides draft predictions and deeper loops verify. This reuses model weights; pipelined residual proposals reduce intended waiting.",
+        "example": "Draft with fewer loops, then verify with more."
+      }
+    },
+    "qa/foundation-models:loopspec/comparison": {
+      "source_sha256": "100801fbea68d9180596fc589c3447378f6d46c3f5668bbadec14265d02c2f87",
+      "reviewed": true,
+      "fields": {
+        "question": "What does LoopSpec reuse compared with an independent drafter?",
+        "answer": "It reuses intermediate predictions and shared loop structure, rather than a second parameter set and path. Speed still depends on proposal quality, verification, and scheduling.",
+        "example": "Removing separate drafter weights does not ensure candidates are accepted."
+      }
+    },
+    "qa/foundation-models:loopspec/implementation": {
+      "source_sha256": "3bbadf5eba2ccea696255e4d1160cdc3b6b4872bfe73af452a68dc7c7c544d36",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a depth scheduler establish real GPU pipelining?",
+        "answer": "No. It checks proposal/depth transitions, not actual overlap, cache handoff, or verification execution. Planned concurrency is not measured throughput.",
+        "example": "A log claiming overlap cannot show synchronization did not serialize the GPU."
+      }
+    },
+    "qa/foundation-models:medusa/mechanism": {
+      "source_sha256": "90a1824c928d5cfe4456052383422fdeb3ad9b3b99ba54d848d175edb202a539",
+      "reviewed": true,
+      "fields": {
+        "question": "Why verify a candidate tree rather than concatenate each Medusa head's top token?",
+        "answer": "Heads predict different offsets from the same state and may not form a valid autoregressive chain. A tree exposes combinations for backbone validation. Independent losses do not prove correctness or sampling guarantees, and local work has no GPU tree kernel.",
+        "example": "Separately chosen nouns and verbs need not form a coherent phrase."
+      }
+    },
+    "qa/foundation-models:medusa/basics": {
+      "source_sha256": "8d06a36de2ae4a81bc0847b1787639e9f3954e11158246f78ab7a647b5a42f7e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add multiple future-token heads to one hidden state?",
+        "answer": "Different offsets provide multiple proposals at once. Tree verification can reduce sequential calls without removing backbone verification.",
+        "example": "Propose t+1 and t+2 from h_t before checking accepted combinations."
+      }
+    },
+    "qa/foundation-models:medusa/comparison": {
+      "source_sha256": "ab4ada6af7e490a0aba3f460a9449125d759cfec22a41283bac31b1fc0c307c7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why don't fewer backbone calls imply the same percentage latency reduction?",
+        "answer": "Extra heads, tree construction and validation, batch shape, kernels, and acceptance all matter. Mechanism call counts are not measured GPU speed.",
+        "example": "Halving calls may double the work per verification."
+      }
+    },
+    "qa/foundation-models:medusa/implementation": {
+      "source_sha256": "238f3699868c3f16dd7119302312586ae76617fbfcb76118ecb34621cd3d1962",
+      "reviewed": true,
+      "fields": {
+        "question": "How align Medusa's k-th head targets?",
+        "answer": "Predict x_{t+k} from h_t, matching slices and valid endpoints. One common next-token target would train duplicate offsets.",
+        "example": "Head two at h_10 predicts x_12, not x_11."
+      }
+    },
+    "qa/foundation-models:pumba/mechanism": {
+      "source_sha256": "767d695f45552aa02e3feeff7066c3baeb180468391cef856f4dadf38bdfcc5e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why propagate gradients across several PUMBA carry steps?",
+        "answer": "Carry affects future denoising, so isolated loss may not learn useful carry. Unroll on-policy reveals and backpropagate within fixed windows, truncating between windows for cost. Local work is not full diffusion LM training.",
+        "example": "Later fill-in errors should shape how earlier carry represents entity constraints."
+      }
+    },
+    "qa/foundation-models:pumba/basics": {
+      "source_sha256": "b83fda118c8ecbfaf2ae7e7de8063e1809e5cf21a22e7c4848844f4e6d15f4fa",
+      "reviewed": true,
+      "fields": {
+        "question": "Why train on the model's own progressive-unmasking trajectory?",
+        "answer": "Independent noise may miss states reached by actual multistep sampling. Carry through self-generated unrolls exposes dependent decisions.",
+        "example": "Revealed words determine the next input rather than independently recreating noise."
+      }
+    },
+    "qa/foundation-models:pumba/comparison": {
+      "source_sha256": "8cbe685ee26653a50710d9193568af49c93d6d4681c555c75b27eb3e2acf5d86",
+      "reviewed": true,
+      "fields": {
+        "question": "How does trajectory-aware carry training differ from independent steps?",
+        "answer": "BPTT lets later loss affect earlier carry. Independent examples cut those dependencies, and summing their CEs does not restore them.",
+        "example": "Step-two loss should influence step-one carry, not only local step-two computation."
+      }
+    },
+    "qa/foundation-models:pumba/implementation": {
+      "source_sha256": "d0f038d5e992b5f9f2566ca5071babdbd218d1fec941a6259141bb15695b5413",
+      "reviewed": true,
+      "fields": {
+        "question": "Should PUMBA detach carry every step or at window boundaries?",
+        "answer": "Keep gradients through the fixed window and detach between windows. Per-step detachment removes the mechanism; fully untruncated training changes memory and protocol. Local reference did not train LLaDA-8B.",
+        "example": "At window length three, step three reaches two earlier steps in the same window only."
+      }
+    },
+    "qa/foundation-models:r4t/mechanism": {
+      "source_sha256": "8fbadfdbbcc8a0428f16d41238fc52790cbe37ffbaebdd9e495ffe38f48c075e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why align retrieval sets before compiling into a diffusion fan-out retriever?",
+        "answer": "Set value includes coverage and diversity beyond item relevance. Define trade-offs with a composite set reward, then train fast diffusion retrieval to approximate it. Reward alignment may be imperfect; local work only implements the set objective.",
+        "example": "Three individually relevant duplicates can be worse than a set covering separate facts."
+      }
+    },
+    "qa/foundation-models:r4t/basics": {
+      "source_sha256": "e8af0027cbdbc45042924eba3c36c418dbe5a7ef7e47f674e5a03e10d30cd4fa",
+      "reviewed": true,
+      "fields": {
+        "question": "Why build a set-level alignment target before training a fast retriever?",
+        "answer": "Item scores alone may not guarantee whole-set properties. Compile a composite set target into diffusion fan-out to seek fewer online steps.",
+        "example": "Relevant outputs should cover different evidence rather than repeating one top item."
+      }
+    },
+    "qa/foundation-models:r4t/comparison": {
+      "source_sha256": "c846636d3e97769782193f2f22e9d5ee397009a6a1f42a1a8019bdbf146d7abf",
+      "reviewed": true,
+      "fields": {
+        "question": "How does set alignment differ from independent item ranking?",
+        "answer": "Sets account for relations and redundancy. Summing independent scores can miss coverage. The compiled retriever requires separate training and evaluation.",
+        "example": "Three high-relevance duplicates can have low diversity."
+      }
+    },
+    "qa/foundation-models:r4t/implementation": {
+      "source_sha256": "61c8eb763c66cbfe38032cf0e65f04f64b3e9e9e3f5d63f4c4ffe88ff7bdf6d0",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local R4T component train the 53.9M diffusion retriever?",
+        "answer": "No. It computes the alignment/diversity objective, without training the full generator. Scoring candidates is not generating fan-out results.",
+        "example": "A function ranking supplied sets cannot necessarily retrieve a set from a query."
+      }
+    }
+  }
+}

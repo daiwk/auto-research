@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:scipivot/mechanism": {
+      "source_sha256": "0fb9e247bf5307c72f40ced4186ba8f03414303ce40fb4c60b27573f1ade5074",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reopen an independent session after swapping options and resample by case rather than answer?",
+        "answer": "Swapping checks position stability, and separate sessions prevent the first answer from influencing the second. Both orderings still represent one project decision, not independent samples. The model sees only the pre-correction state; later records may build references but cannot be inputs or reveal human versus original LLM authorship.",
+        "example": "If plans A and B are presented in both orders in one session, the model may remember the earlier choice instead of judging again."
+      }
+    },
+    "qa/agent-research:scipivot/basics": {
+      "source_sha256": "4978d257567ba4fa7ca7e0aaf26de4e750d73c9b66218fc10a6fd6488a6c5bb5",
+      "reviewed": true,
+      "fields": {
+        "question": "Does SciPIvot test research redirection or whether a project ultimately succeeds?",
+        "answer": "It gives the pre-correction project state and two next steps and asks which is more appropriate. The reference comes from later human correction, but the tested model sees no future trajectory or option provenance. This is not prediction of eventual project success.",
+        "example": "The better next step today does not guarantee a successful project six months later."
+      }
+    },
+    "qa/agent-research:scipivot/comparison": {
+      "source_sha256": "ee37a451a5385ab84e75539992e5589011f3c804930bcfd1703878a921ed38e0",
+      "reviewed": true,
+      "fields": {
+        "question": "How does swapping option order differ from treating two answers for the same case as independent samples?",
+        "answer": "Both orderings measure and offset position bias, but they remain one case. Compute a case score, then resample cases. Counting answers independently inflates sample size and ignores correlation.",
+        "example": "AB and BA judgments for one case are not two distinct research decisions."
+      }
+    },
+    "qa/agent-research:scipivot/implementation": {
+      "source_sha256": "714830ba545048e3a290cfc7bd0ac0e50bd495ca96aca78bed64c88d763220eb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not attach SciPIvot's original questions file to the evaluated agent?",
+        "answer": "The official source includes references. Trusted ingestion exports only the ID and two options via an allowlist, storing private grader references separately. Sessions are independent and cannot access repositories or future records to bypass options-only isolation.",
+        "example": "Providing the full questions.json with an instruction not to read references is not data isolation."
+      }
+    },
+    "qa/agent-research:probe/mechanism": {
+      "source_sha256": "e4a6b5b282505a4798bdc9ef958269a0ae7d78a877a038c99db9cecba4e338e1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why decay rewards for repeated violations of the same policy but retain raw yield?",
+        "answer": "Decay prevents the auditor from farming one flaw and encourages policy coverage. Raw yield describes actual events and can exceed 100 per 100 episodes. Report deduplicated coverage separately from event volume. A local reward implementation is not the entire auditing RL pipeline.",
+        "example": "If one conversation triggers a violation three times, give decreasing or zero subsequent reward but preserve all three events."
+      }
+    },
+    "qa/agent-research:probe/basics": {
+      "source_sha256": "a8c06d3683867ae41afe99f241592c017072d2dfa6b2f2ba34ac42326250ec62",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does PROBE audit policy compliance separately from task completion?",
+        "answer": "Final state or harmful-text checks can miss violations during multi-turn tool use. An auditor interacts with a frozen target while a private verifier checks the full trace for business-policy compliance, customer realism, task progress, and coverage rather than tone alone.",
+        "example": "A task can look complete despite missing required confirmation or making an unrequested state change."
+      }
+    },
+    "qa/agent-research:probe/comparison": {
+      "source_sha256": "672743ad4c9b5d2d014389bf34bb18485309d32beb31e9ca89e2e22921ecb26d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why aren't raw violation yield, deduplicated episode-policy yield, and coverage interchangeable?",
+        "answer": "Raw yield includes repeated turn-level hits and can exceed 100 per 100 episodes. Deduplicated yield removes same-policy repetitions per episode; coverage uses all declared policies as its denominator. They describe hit volume and breadth, not one success probability.",
+        "example": "Three hits of one policy in one episode give raw yield 3, deduplicated yield 1, and add only one policy to coverage."
+      }
+    },
+    "qa/agent-research:probe/implementation": {
+      "source_sha256": "40ebb83ec9a877cd424b58700fc117b5323dcd93e701765e26bf0ba32a908a35",
+      "reviewed": true,
+      "fields": {
+        "question": "Where must PROBE reset repeated-hit counts?",
+        "answer": "n_i counts previous hits in the current episode. The first gets weight 1, the second 1/2, and later hits zero; restart each episode. Do not decay raw-yield events, and retain zero-hit and unsupported policies in denominators.",
+        "example": "Two hits in a previous episode must not turn the first hit of the next episode into zero reward."
+      }
+    },
+    "qa/agent-research:librarian-agents/mechanism": {
+      "source_sha256": "d8ef9f41f882cfea5ae3317c5c8b9212d8e97bc44ff56b587a7a6813fbe0547c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't a builder organize its hierarchical filesystem as an answer index using known evaluation questions?",
+        "answer": "The aim is a reusable workspace a frozen answerer navigates for unseen queries. Seeing questions early creates answer-oriented shortcuts instead of cross-query organization. Preserve originals for fallback; Delete must not remove raw documents. A general cost formula does not establish nonzero shaping in the main training run.",
+        "example": "Organizing by company and date supports diverse questions. Placing one anticipated answer on the front page stops the evaluation testing general organization."
+      }
+    },
+    "qa/agent-research:librarian-agents/basics": {
+      "source_sha256": "60b82a60b474d50dd0385a271153ad0258a65b87c833ce6cc7a656a202859f65",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Librarian organize a workspace before knowing future questions?",
+        "answer": "A corpus may receive many queries. Hierarchical files and source references amortize organization across documents. The builder sees only the corpus; a frozen answerer later navigates it, without prewriting test answers.",
+        "example": "Organize project files before answering several users, rather than tailoring a directory to a known question."
+      }
+    },
+    "qa/agent-research:librarian-agents/comparison": {
+      "source_sha256": "1594a8307a455c6827aca462222bc7a17724bfaaf1ebaf8e0542cc1b8279b0c2",
+      "reviewed": true,
+      "fields": {
+        "question": "Is Librarian's general cost utility the same as the paper's main training reward?",
+        "answer": "No. The general form has build, token, and read penalties, but main training sets them to zero with gamma=1, probes answerability change every eight builder turns, and checks terminal correctness. A definable cost term is not necessarily used for shaping.",
+        "example": "A token penalty in the formula does not mean this training run deducted reward for reading another file."
+      }
+    },
+    "qa/agent-research:librarian-agents/implementation": {
+      "source_sha256": "d214cf5f578d8139dae8567dbc6b6bf7c3a9cadc412261fdc1a7b6e9a0d73e70",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Librarian preserve provenance after deleting a synthetic node?",
+        "answer": "Delete archives only the synthetic node, promotes its children, and retains raw documents and historical sources. Cold load checks hashes, hierarchy, and disk content. Local work implements filesystem contracts and frozen result recomputation without training a learned builder.",
+        "example": "After removing a summary folder, original files and sources for merged subdirectories must remain discoverable."
+      }
+    },
+    "qa/agent-research:harness-decomposition/mechanism": {
+      "source_sha256": "54efe97375c7e6d388c1d7ddbed8e2728ab353b4ab78b44171dd5bbffaccc406",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is HDA residual G only an upper bound on generalization improvement, rather than direct transfer evidence?",
+        "answer": "Compute matching removes extra computation and neutralizing detected shortcuts removes some overfit, but undetected shortcuts can remain. Controls need task-aware human review and attribution starts only after confirming a significant gain. Algebraic accounting does not establish full causal identification or transfer to a new distribution.",
+        "example": "Removing a known filename shortcut may leave gains from hidden directory ordering. Do not call all remaining gains general reasoning."
+      }
+    },
+    "qa/agent-research:harness-decomposition/basics": {
+      "source_sha256": "65cf0c26f124d0a1420eeb68d75fe2028f41dd07fbad0c8f8b4c30b775d73140",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does HDA first test paired gain of evolved versus baseline?",
+        "answer": "If the observed gain could be noise, decomposing it into compute, shortcuts, and residual has no reliable starting point. First perform a two-sided paired bootstrap, then build compute-matched and shortcut-neutralized controls only after significance. Both require task-aware human review.",
+        "example": "Small fluctuations across runs on the same tasks do not justify quantifying generalization."
+      }
+    },
+    "qa/agent-research:harness-decomposition/comparison": {
+      "source_sha256": "550dcfa63df9a8ffcf4f16c725548817ae0a68f0f6c3b654a877cbda03dcea68",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't HDA's residual G be called proven generalization gain?",
+        "answer": "It is the difference after neutralizing detected shortcuts relative to the compute-matched baseline and may retain unidentified shortcuts, so it is only an upper bound. O covers detected and neutralizable mechanisms, a lower bound on overfit.",
+        "example": "Gains after eliminating one form of answer leakage do not rule out another shortcut."
+      }
+    },
+    "qa/agent-research:harness-decomposition/implementation": {
+      "source_sha256": "e30dbb87a0113220d1c0e756f69e478139c1fe0bee4f2515c755e9acaa430ea4",
+      "reviewed": true,
+      "fields": {
+        "question": "Can negative raw T, O, or G be clipped to zero before displaying HDA percentages?",
+        "answer": "Preserve signed raw effects satisfying Delta=T+O+G. Clip display shares only according to their separate rule and do not overwrite original attribution. All four arms must align by item and cost units, with human-reviewed control rationale.",
+        "example": "If neutralization improves scores, retain negative O instead of setting it to zero for a prettier chart."
+      }
+    }
+  }
+}

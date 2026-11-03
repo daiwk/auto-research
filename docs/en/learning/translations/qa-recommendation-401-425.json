@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:gese/comparison": {
+      "source_sha256": "31950da00ab09f7d6e22ba3c296c1287a63d1cd44c093e37ed0ced98e68bf245",
+      "reviewed": true,
+      "fields": {
+        "question": "How does GESE allocate compute compared with using an LLM to write each user's title in real time?",
+        "answer": "Reusable candidates amortize expensive generation across requests and leave real-time adaptation to a lightweight selector. Per-user generation is more flexible but adds latency, repeated cost, and consistency risks. Pre-generation limits coverage; deterministic local scoring does not establish production speed or quality.",
+        "example": "Generate five faithful angles once and let a thousand users run only selection. An angle outside the pool cannot be created by the selector."
+      }
+    },
+    "qa/recommendation:gese/implementation": {
+      "source_sha256": "774543fa052809d7be4b33ef9c506e2681d64f1c3038eb92476ab03e666b9ec4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is GESE's local candidate scorer not full LLM generation training?",
+        "answer": "It uses deterministic relevance, diversity, faithfulness, and contextual selection to validate the selection mechanism, not full set generation or production post-training. Report the implemented operators and negative results; paper online metrics are not local measurements.",
+        "example": "Selecting among five hand-written titles verifies a selector, not a model's ability to generate those faithful titles."
+      }
+    },
+    "qa/recommendation:glide/mechanism": {
+      "source_sha256": "f913ff50e6170e4ade2d3184f841a537129c04fa1d9dd6102e4a997e0cf646b4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does GLIDE use separate prompts for recent behavior and long-term user embeddings?",
+        "answer": "Recent behavior captures immediate intent but can repeatedly favor familiar items. The long-term representation adds stable preferences missed by a short window. Both condition SID generation, trading responsiveness and exploration; long-term features can go stale and do not establish exploration by themselves.",
+        "example": "Recent commute podcasts can inform context while stable science interest helps discover a new science show."
+      }
+    },
+    "qa/recommendation:glide/basics": {
+      "source_sha256": "9b621c1c1a9c7ee316b6bfbcdc5a85e1ce6d20708b91ee0f13ef9c50ee65f108",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate GLIDE's recent behavior and long-term embeddings into two prompt types?",
+        "answer": "The sequence retains immediate details; the embedding summarizes stable preferences. Separate inputs avoid averaging them together. Hierarchical SID paths still depend on prompt and codebook coverage; their combination does not prove reduced filter bubbles.",
+        "example": "Preserve long-term photography and recent camping signals to support outdoor cameras or campsite gear."
+      }
+    },
+    "qa/recommendation:glide/comparison": {
+      "source_sha256": "d1785c08bb988962ed61cfbe07233c739ab92436334b878e91677717fdadbb67",
+      "reviewed": true,
+      "fields": {
+        "question": "How does GLIDE's dual-prompt generation change outputs compared with transition or content retrieval?",
+        "answer": "Traditional systems directly combine similarity or transition scores. GLIDE predicts conditioned SID-path probabilities and maps them to candidates, sharing semantics through discrete codes while adding quantization and early-path errors. A local code-transition proxy does not train the full language generator.",
+        "example": "Generate a photography coarse code then refine it. Choosing the wrong branch can exclude a target that full-catalog scoring could still rank."
+      }
+    },
+    "qa/recommendation:glide/implementation": {
+      "source_sha256": "dfa7fe552bc44e9ad562a8d3ce5c1b44838ea9b1103cc436429fcca27d4ae651",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must GLIDE's long-term embedding exclude the complete post-test user history?",
+        "answer": "Both long-term summaries and recent sequences must stop at available behavior. A test target inside the long-term vector leaks even if absent from recent inputs. Document codebook fitting and the local three-level public proxy.",
+        "example": "A movie's vector cannot contribute to the history used to predict that same held-out movie."
+      }
+    },
+    "qa/recommendation:glorank/mechanism": {
+      "source_sha256": "abc9ebb46f3a0ad0e321e5b920e7116eb89c8d47b0fc22388f97293a244bce63",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does GloRank move beyond ordinary reranking when it replaces local IDs with global SIDs?",
+        "answer": "Local IDs only address upstream candidates. Global SIDs allow a broader catalog, so training learns nomination as well as list utility. Larger action spaces complicate search and legality and require evaluation different from closed-pool reranking.",
+        "example": "Index 11 is invalid in a ten-item local list; a global code can nominate a new item only if it maps to a serveable catalog entry."
+      }
+    },
+    "qa/recommendation:glorank/basics": {
+      "source_sha256": "94a3b79374e3769eabfade57f84797fad51f135575be379d8f5c4064b62f18f4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can GloRank select items outside the local candidate pool with global SIDs?",
+        "answer": "Global identifiers define actions over the catalog instead of the current list, adding nomination to reranking. This expands coverage while increasing search, legal mapping, and list-objective difficulty. Fixed-candidate assumptions no longer describe all results.",
+        "example": "A niche book omitted from five popular local candidates can be nominated globally if legal and relevant."
+      }
+    },
+    "qa/recommendation:glorank/comparison": {
+      "source_sha256": "34c36d81fa60e779ec238766c1dbd32058c4ce19d590543a5f461d524f8af4d0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why state candidate access when comparing global generation and local reranking?",
+        "answer": "Full-catalog generation can improve coverage independently of ordering. Define full or local evaluation, legal mappings, and reward protocols. Different access is not a single-component ablation, and preserve local negative results.",
+        "example": "Finding the right book outside a fixed pool does not show a better reranker; the local model could not choose it."
+      }
+    },
+    "qa/recommendation:glorank/implementation": {
+      "source_sha256": "038273808f5c75027cf32e69b27384af02e6165bbebe63fdb1d8d6a4e74540a8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't request-local indexes replace global SIDs in GloRank listwise SFT and group rewards?",
+        "answer": "Local indexes change with candidate order and cannot identify catalog items consistently. Train and decode mapped global paths, and score actual generated identities without fixing invalid codes using test answers. Do not claim full global language training from a proxy.",
+        "example": "Index three can mean camera in one request and tent in another, so it is not a stable global token."
+      }
+    },
+    "qa/recommendation:gpl-prerank/mechanism": {
+      "source_sha256": "2f3effb3a175443c6b5e04719d669ed6a2fefdf7a3c1c03906b9f515fab86945",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add pseudolabels for unexposed candidates in GPL pre-ranking?",
+        "answer": "Exposed click examples were selected by the old system and omit many early rejects. An LLM supplies additional labels based on user interest anchors, while a lightweight preranker serves. These noisy judgments are not counterfactual truth; control weight and measure bias.",
+        "example": "A relevant new category may have no logged clicks because it was never shown; estimated relevance does not mean users bought or liked it."
+      }
+    },
+    "qa/recommendation:gpl-prerank/basics": {
+      "source_sha256": "544ac718205ebe54bb8ede9a994c184509f5de15cab71fe3912a92648889a147",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does GPL target unexposed candidates rather than only adding more exposed-click logs?",
+        "answer": "The preranker sees a wider pool than final exposure. Interest anchors and LLM weak labels broaden supervision toward retrieval distribution. Inferred labels cannot replace all observed feedback.",
+        "example": "If ten out of 1,000 retrieved items are displayed, the remaining items are not necessarily bad; weak relevance labels do not establish positive user feedback."
+      }
+    },
+    "qa/recommendation:gpl-prerank/comparison": {
+      "source_sha256": "741e8c54478a44eff00458ca7de260ac822a300ceddefab90e8be77df7cf0d3d",
+      "reviewed": true,
+      "fields": {
+        "question": "What assumption does GPL pseudolabeling address compared with labeling all nonexposures negative?",
+        "answer": "Missing opportunity is not rejection. Weak labels estimate relevance from intent but can transfer LLM bias; weight them and keep real labels. Removing the LLM from serving does not prove label quality.",
+        "example": "An unseen waterproof shoe can get a weak positive from an interest anchor, yet persuasive ad copy can still fool the teacher."
+      }
+    },
+    "qa/recommendation:gpl-prerank/implementation": {
+      "source_sha256": "653a64d3c864cdfb3a48d4092ae6b4255b4eb2e11de82a83bbad2a2e0df0f3a5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why record GPL real and pseudo supervision sources and λ separately?",
+        "answer": "Labels differ in reliability and coverage, and the joint coefficient controls pseudo-example influence. Keep provenance; use available history only and exclude test targets from anchors. Public proxies do not reproduce the production LLM labeling system.",
+        "example": "Ten thousand weak labels can overwhelm 100 real clicks if equally weighted; source and weight make that auditable."
+      }
+    },
+    "qa/recommendation:gr4ad/mechanism": {
+      "source_sha256": "4aa4dfc9d5482352420a25d6881c2cf74c8fbf27ace530db86211a6ffb0ffd36",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does GR4AD combine business-value weighting and list optimization rather than only predicting the next ad code?",
+        "answer": "Next-token imitation can favor frequent low-value ads. Value weighting changes sample contribution; list objectives model relative business utility. Multi-granularity SIDs and relaxed dependencies address separate representation and compute issues. Check relevance and head concentration rather than reporting only revenue proxies.",
+        "example": "A rare high-value ad may matter more than a frequently shown low-conversion one; frequency imitation alone misses that."
+      }
+    },
+    "qa/recommendation:gr4ad/basics": {
+      "source_sha256": "9f48f45463e27b22df6ebe750bbef3cf196750a79bda4bc44ffdfe400ca8fb52",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does GR4AD address commercial SIDs, generation dependencies, and beam budgets under load?",
+        "answer": "Ads need relevance, business attributes, fast updates, and bounded latency. UA-SID provides multi-granularity codes, LazyAR relaxes sequential dependencies, value/list training aligns utility, and dynamic beams manage serving cost. Next-code accuracy cannot measure all four.",
+        "example": "An excellent ad is unusable if decoding is too slow, while overly narrow beams can miss it."
+      }
+    },
+    "qa/recommendation:gr4ad/comparison": {
+      "source_sha256": "1c9fb7dbb01e8a1a5b914aeb52d3578a9710ba25163dc225d8d193e0cb7964d9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are GR4AD VSL and RSPO respectively weighted supervision and list alignment?",
+        "answer": "VSL emphasizes high-value examples in code-prediction loss; RSPO reshapes within-list preferences using a reward distribution. They act at different granularities but may jointly concentrate exposure. Report concentration alongside NDCG, particularly when local value is proxied by popularity.",
+        "example": "Upweighting costly items and redistributing list probabilities by reward can both increase head exposure."
+      }
+    },
+    "qa/recommendation:gr4ad/implementation": {
+      "source_sha256": "10ec7c8cc09489a48fbdd5f121ee3ed063312a182348a7c27a6cfe9f126637d1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why align GR4AD RSPO's `q_j∝exp(r_j/τ)` with the candidate probability space?",
+        "answer": "Normalize within one context's legal candidates and compute cross-entropy against identical student candidate identities. Temperature controls sharpness; ordering, invalid items, and cross-request groups change the target. Public value proxies are not eCPM, and these losses do not verify full LazyAR or dynamic serving.",
+        "example": "If q column two is a camera and student column two is children's clothes, gradients are wrong even if q sums to one."
+      }
+    },
+    "qa/recommendation:grc/mechanism": {
+      "source_sha256": "3714bb9bc5bbfd834aafdbafa956b7f8c519c6b5b51909e09c6ead97da1d9954",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't a GRC corrector read the first wrong SID position during evaluation?",
+        "answer": "Gold codes only build training draft–reflection–correction supervision. Deployment must infer likely errors from candidates, attribute consistency, and uncertainty without answer leakage. Entropy allocates correction budget, but hard high-entropy cases need not improve.",
+        "example": "A training example can identify a wrong city code; live recommendation cannot know the user's eventual target code."
+      }
+    },
+    "qa/recommendation:grc/basics": {
+      "source_sha256": "5f294a766e53217b4f04d5aba8d8a52ba565ca62bba11a5e67555868729643cb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why structure GRC trajectories as draft, reflection, and corrected SID?",
+        "answer": "Early hierarchical mistakes restrict later choices. Explicit steps teach locating and repairing deviations instead of only imitating correct codes. At inference the model must identify errors itself, and valid formatting does not guarantee effective correction.",
+        "example": "Switch a home-goods draft to cameras by recognizing the request evidence, not by seeing a gold first-error index."
+      }
+    },
+    "qa/recommendation:grc/comparison": {
+      "source_sha256": "bf4c69c300b66c6925795b1206769dae10dd3d93efe4feef1f8856ba48cbe5bd",
+      "reviewed": true,
+      "fields": {
+        "question": "What does GRC trade by allocating correction to uncertainty rather than fixing every beam equally?",
+        "answer": "Reflection-token entropy prioritizes likely repair candidates under a fixed budget, reducing duplicate work. High entropy can be noise and low entropy can be confidently wrong. The reported reward rose but test ranking fell; retain both.",
+        "example": "Correct two uncertain beams out of ten first, while recognizing that a confident wrong path might be missed."
+      }
+    },
+    "qa/recommendation:grc/implementation": {
+      "source_sha256": "0417b5b90226724f5249c3e874b5ba85ac94547a6342e7c289b01fee59002b64",
+      "reviewed": true,
+      "fields": {
+        "question": "How should GRC separate training first-error labels from test reflection inputs?",
+        "answer": "Compare drafts with gold during training and use `L+1` if all levels match. At test, use only model drafts, attributes, and uncertainty. Bind reflection, correction, and reward to one trajectory without gold-based repairs.",
+        "example": "Giving the second-level gold mismatch to the test corrector makes it an answer-aware diagnostic, not autonomous repair."
+      }
+    },
+    "qa/recommendation:gris/mechanism": {
+      "source_sha256": "13a3c27ada680fd0bc01649466c0c0232389331f34adf174b05780e4c161b689",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does GrIS use both item features and collaborative edges to construct SIDs by graph partitioning?",
+        "answer": "Content proximity and co-consumption differ. Hierarchical partitions balance semantic features and collaborative links; without graph evidence fall back to content rather than inventing edges. Local partition and state checks do not verify generative or online recommendation quality.",
+        "example": "Co-consumed camping gear can connect despite visual differences; new items without edges must mainly use content."
+      }
+    },
+    "qa/recommendation:gris/basics": {
+      "source_sha256": "3c37f9883f99cf98625afb35ddd6dcf2bd953adc80217c4ecc923081f1d9736a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why formulate GrIS SID construction as hierarchical graph partitioning?",
+        "answer": "Nodes supply content and edges supply collaborative consumption relations. Recursive partitioning creates coarse-to-fine paths beyond content reconstruction. Exposure and popularity affect graph structure, so hierarchy is not a guaranteed true taxonomy.",
+        "example": "Cameras and lenses can share a high-level interest region through co-consumption and separate into lower-level content groups."
+      }
+    },
+    "qa/recommendation:gris/comparison": {
+      "source_sha256": "001bfa5f927a5da09ee3143cbf97b30489ae68c2e791ea3ceac8d5776381d51d",
+      "reviewed": true,
+      "fields": {
+        "question": "How does GrIS's content fallback for an empty graph differ from inventing adjacency?",
+        "answer": "Fallback openly uses only available content and gives a defined control. Synthetic edges presented as observations change the objective. Report graph availability and do not infer large-scale ranking from diagnostics.",
+        "example": "A new product can use title semantics, not fabricated links to popular items claimed as collaborative evidence."
+      }
+    }
+  }
+}

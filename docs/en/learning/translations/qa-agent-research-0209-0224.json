@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:vag/mechanism": {
+      "source_sha256": "3bdff79da2cad1552b6d7b175fbff5f69fbf29adf2f4fb36a610173f495a52dd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't deleting harmful skills after writing fully replace pre-admission validation?",
+        "answer": "A skill can influence new trajectories and descendant skills, spreading corruption before removal. Deleting its original entry does not undo derivatives. Precommit checks structure, behavioral harmlessness, and semantic consistency before choosing a compatible set. Admission and runtime rollback are distinct. Good individual skills may conflict together.",
+        "example": "Example: An incorrect retry rule has been absorbed into another skill. Removing the original does not repair its descendant; validate before writing to reduce inherited corruption."
+      }
+    },
+    "qa/agent-research:vag/basics": {
+      "source_sha256": "cea4edef652b8ad6bc66d113d78866fbda6281911653857a1174005ad14854ba",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is admitting experience a risky step for a self-evolving skill library?",
+        "answer": "Candidate experience influences later actions and can be abstracted into new skills. One bad suggestion can therefore harm more than the current task. VaG limits this propagation so continual learning does not gradually corrupt long-term memory. Write volume does not measure progress.",
+        "example": "Example: A temporary check bypass gets generalized into a rule and reused across tasks. A short-term success becomes long-term contamination."
+      }
+    },
+    "qa/agent-research:vag/comparison": {
+      "source_sha256": "d36f8710090c3265a9c38e25b18ff5936fc44b85e237df9b4f905d8671502172",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep separate structural, behavioral harmlessness, and semantic consistency gates?",
+        "answer": "Structure checks parsability and references, behavior checks whether known executions regress, and semantics checks intended meaning. Valid formatting can hide bad actions, and one harmless run can miss unsafe preconditions. The gates supply complementary evidence but remain limited by case coverage.",
+        "example": "Example: A perfectly formatted skill reverses 'back up, then edit.' Parsing passes it, but semantic or behavioral validation can detect the reversal."
+      }
+    },
+    "qa/agent-research:vag/implementation": {
+      "source_sha256": "2678944f11b21ec015cebaecdd76da8f7ed5c38f4803a7170748d5a0f5d323db",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not combine all individually high-scoring skills in the Hot set?",
+        "answer": "Skills can conflict or duplicate, so set utility depends on shared context. VaG selects compatible combinations by marginal gain, not the sum of independent scores. Local tests cover gates and selection, not an expensive judge or original environment. Registering discovery does not prove a promotable real controller is integrated.",
+        "example": "Example: One skill requires caching first; another clears cache every step. Each can work alone, yet loading both requires a compatibility check."
+      }
+    },
+    "qa/agent-research:gse/mechanism": {
+      "source_sha256": "1e84e6eb3332c4e34140790399265dc2cf37ad86f46dc919d37a1edf038bdf12",
+      "reviewed": true,
+      "fields": {
+        "question": "Why run replay verification after clustering and merging similar local skills?",
+        "answer": "Similar wording can hide different preconditions, and merging can remove a branch critical to some tasks. Replay checks whether global reuse sacrifices old behavior, while the relation graph manages conflicts. Compact clusters and new successes do not independently establish safe merges or cross-distribution transfer.",
+        "example": "Example: Merge parsers for files with and without headers, then replay both cases so the unified flow does not keep only one assumption."
+      }
+    },
+    "qa/agent-research:gse/basics": {
+      "source_sha256": "6d6154598386d60a7fd75ba93b513923c2fc1f3a1b29309190d0f9b41edbe036",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does GSE need a Skill Relation Graph for globally reusable skills?",
+        "answer": "Local experiences may overlap, complement, or conflict. The graph supports clustering and merges that avoid many near duplicates. Relationships still need evidence: semantic similarity does not make merging safe, especially when abstraction can erase environmental preconditions.",
+        "example": "Example: Both tasks run tests, but one first generates configuration and the other already has it. Preserve the difference when merging."
+      }
+    },
+    "qa/agent-research:gse/comparison": {
+      "source_sha256": "2d33842de50b031d878550434693d2baa1e0262f1f3a1e636d8ba3db94ea9c9a",
+      "reviewed": true,
+      "fields": {
+        "question": "How does global skill integration change the library differently from appending each task's experience independently?",
+        "answer": "Appending preserves local detail but accumulates similar, condition-specific, or conflicting skills. Integration uses relations to build reusable abstractions. It is not mere text deduplication: retain preconditions and validate old behavior. A smaller library or denser relations do not establish better execution.",
+        "example": "Example: Two export tasks save files, but one requires encryption and the other publication. Preserve those conditions rather than merge them into publish everything."
+      }
+    },
+    "qa/agent-research:gse/implementation": {
+      "source_sha256": "df25bf81e4f3febf19a63e2d452f730e46aeb5e5856fa7decd6322158138a60f",
+      "reviewed": true,
+      "fields": {
+        "question": "Do local relation-graph and regression-penalty tests reproduce industrial Agent F1?",
+        "answer": "No. The public mini-suite executes graph, selection, and regression operators without the paper's large model, private industrial environment, or expensive judge. Industrial F1 is full author-system evidence, not a consequence of smaller graphs or fixture scores.",
+        "example": "Example: Merging ten skills into five shows the merge happened. Without industrial test-generation tasks, it cannot imply precision or recall."
+      }
+    },
+    "qa/agent-research:memorycpt/mechanism": {
+      "source_sha256": "255cb785b7aa9c017831ff5ccbc7220d3c13a2f974f653517f9fb18efea398f8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Quality per Cost require more than shortening a query summary?",
+        "answer": "Cost savings can harm answer quality, so the ratio may not improve. Construction, retrieval, and summarization each have inference costs. Offline chain distillation reduces construction, RRF and query-focused summaries manage reads, and cost-aware reward judges the pipeline. Compare the same quality definition rather than call fewer tokens success.",
+        "example": "Example: Reducing 500 words to twenty may omit a crucial exception and cause a wrong answer. Eighty useful words may offer a better quality-cost trade-off."
+      }
+    },
+    "qa/agent-research:memorycpt/basics": {
+      "source_sha256": "4e4b2e3f9bb343da7d5ac1298edbb6767a002e5d4b00b2826fcde0281e263104",
+      "reviewed": true,
+      "fields": {
+        "question": "Why account separately for memory-writing and memory-use costs in long-lived assistants?",
+        "answer": "History is written continually, while repeated queries trigger retrieval and summaries. Frequencies and cost drivers differ. MemoryCPT studies the end-to-end trade-off, making construction cheaper and reads question-specific. Shortening one summary does not establish system efficiency.",
+        "example": "Example: Hundreds of daily writes and five reads make different bottlenecks than five writes and hundreds of reads."
+      }
+    },
+    "qa/agent-research:memorycpt/comparison": {
+      "source_sha256": "28bfba222499b1aaab33f792e9e8e95102bda7757be59155f958b85058fde560",
+      "reviewed": true,
+      "fields": {
+        "question": "Why optimize construction cost and per-query cost separately?",
+        "answer": "Construction processes incoming history, and reads recur with queries. They have different frequencies and useful information. MemoryCPT distills offline chains for construction and applies rank fusion and query-related summaries for reads. Sum actual write and query frequencies and check answer quality before claiming total savings.",
+        "example": "Example: Thousands of turns written but two queries can make construction dominate. Hundreds of reads from one history can compound small per-read savings."
+      }
+    },
+    "qa/agent-research:memorycpt/implementation": {
+      "source_sha256": "5aeb1d2c8891abecc15f2cd1a43a25fe3e4e4e3eb3df49d7dd4e3e955032caf6",
+      "reviewed": true,
+      "fields": {
+        "question": "Can text concatenation stand in for RRF retrieval and a LoRA summarizer?",
+        "answer": "No. RRF actually fuses rankings, the summarizer generates query-relevant context, and cost-aware GRPO needs real rewards and updates. Local tests retain core selection or state diagnostics without paper-scale training or benchmarks. Interface fields are not completed distillation or RL.",
+        "example": "Example: Concatenating two ranked lists performs neither reciprocal rank fusion nor learned summarization. Supplying the text to a model does not mean QAR ran."
+      }
+    },
+    "qa/agent-research:vermem/mechanism": {
+      "source_sha256": "d0ece44ba2de8f4e46fede524c897772cf558b822779f0ff2a353437f84bf11c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check memory actions with separate local and global verifiers?",
+        "answer": "Local checks validate one transition contract but cannot judge consistency across a long trajectory. Global verification checks the relationship between the whole trace and final memory. Both complement task reward so legal individual steps cannot quietly accumulate into false state. Verifier pass rate is not task accuracy.",
+        "example": "Example: Deleting a field may be locally valid but remove the only evidence for a later answer. Global evidence consistency should catch that."
+      }
+    },
+    "qa/agent-research:vermem/basics": {
+      "source_sha256": "af7168d37e13064a1db0b7ce877ca7d9118d14fd089c90117a69ddb4e45e7720",
+      "reviewed": true,
+      "fields": {
+        "question": "Why manage long-term memory, active context, and episodic history together?",
+        "answer": "They jointly decide where information lives and what is visible. Separate optimization can misalign writing, restoring, and reading. VerMem selects atomic operations with one policy and verifies transitions locally and evidence globally. A shared policy does not make the state types interchangeable.",
+        "example": "Example: A fact in long-term memory needs retrieve or restore before answering. Merely existing in history does not make it visible."
+      }
+    },
+    "qa/agent-research:vermem/comparison": {
+      "source_sha256": "1b81032af62004000c50f5607e57613a27526aae0ae010075c120ebbc8ef145f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do final task reward and memory-operation checks supervise different things?",
+        "answer": "Final reward measures the overall result but cannot locate a retrieval, storage, or restore fault. Verification checks transitions and evidence, while operation cost controls resource use. Success can contain illegal or wasteful steps, and legal steps can fail to solve the task. Keep the signals distinct.",
+        "example": "Example: A lucky correct answer does not justify deleting key evidence. A legal retrieval need not find the answer."
+      }
+    },
+    "qa/agent-research:vermem/implementation": {
+      "source_sha256": "52bcf6dfc971c2006798f40a3381feb40b57566ce36d7bc04350d36d37866708",
+      "reviewed": true,
+      "fields": {
+        "question": "Does nonzero local operation telemetry reproduce all seven operations and full RL?",
+        "answer": "No. The README says the local run maintains three states and executes core retrieve, add, restore, and related paths. Counts prove those branches ran, not original multi-GPU RL or full environments. Claims must follow actual operations and budgets, not method names or counts.",
+        "example": "Example: A positive restore count means recovery was invoked, not that a learned policy picks the right time on real long tasks."
+      }
+    }
+  }
+}

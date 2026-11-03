@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:flint/implementation": {
+      "source_sha256": "3d1e89611b8f99b1098103b1df93dc3bb5fcf5297d0e438072676767950dbd4e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why define FLINT padding masks and fully masked inputs explicitly?",
+        "answer": "Padding cannot participate in cross-attention; local True denotes valid tokens and wholly masked rows fail. Preserve pre-LN and both residual stages, not a bare attention pool.",
+        "example": "Padding half a batch must not change what latents read."
+      }
+    },
+    "qa/foundation-models:fpot/mechanism": {
+      "source_sha256": "1f49ade937ded7b8c68e50849b57ecbaac4e346f271de32b8ea174f85ff9f674",
+      "reviewed": true,
+      "fields": {
+        "question": "Why calibrate on the deployed 1.5 approximation to √2 in FPoT?",
+        "answer": "Exact half-exponent calibration followed by approximate execution adds unoptimized error. Choose scale and phase for the real shift-add grid. Integer shifts round, and activation/KV formats are separate.",
+        "example": "A code calibrated at √2×scale runs at 1.5×scale; awareness lets calibration choose a better code or scale."
+      }
+    },
+    "qa/foundation-models:fpot/basics": {
+      "source_sha256": "07eb1edb0fe17c0784fbcf9f068de96d0ed8bd2db0d0e5cbd3755a7b493e5108",
+      "reviewed": true,
+      "fields": {
+        "question": "Why insert half octaves in a power-of-two grid?",
+        "answer": "Half-exponent spacing increases four-bit resolution, while odd exponents use 1.5 for shift-add. This trades accuracy and execution rather than allowing arbitrary floating values.",
+        "example": "A level near 1.5 is finer than only one or two."
+      }
+    },
+    "qa/foundation-models:fpot/comparison": {
+      "source_sha256": "88e38aff3879af90c81b118d6a16128ffb58656e7b3aee42252db8330cf33f4f",
+      "reviewed": true,
+      "fields": {
+        "question": "Do FPoT weights, activations, and KV use one format?",
+        "answer": "No. Weights use a half-octave grid; activations and KV use uniform integers. Account for each format and execution cost separately.",
+        "example": "Shift-add weight codes do not remove activation scaling rules."
+      }
+    },
+    "qa/foundation-models:fpot/implementation": {
+      "source_sha256": "45a17b4b9a212fcf6a1b8e2f2a86028d4e1fc2caf722ad97631b663f9c3cf720",
+      "reviewed": true,
+      "fields": {
+        "question": "Why subtract one from nonzero magnitude code m?",
+        "answer": "Zero has a reserved code and m=e+1 otherwise. Recover e=m−1 for parity and shift. Signed right shifts can round, so do not claim exact real multiplication by 1.5.",
+        "example": "Magnitude code one is e=0, not an odd exponent."
+      }
+    },
+    "qa/foundation-models:gqa/mechanism": {
+      "source_sha256": "1cec3c6434249010cdeda757d5c4ee017fcbc77db44bfab7428551dda9a93d78",
+      "reviewed": true,
+      "fields": {
+        "question": "Does GQA reduce Q heads or KV heads, and why does it save decode memory?",
+        "answer": "Many query heads share fewer K/V heads while retaining different queries. Each historical position stores and reads fewer KV groups. This reduces independence compared with MHA, not history token count.",
+        "example": "Eight queries can use two KV groups while producing eight different attention distributions."
+      }
+    },
+    "qa/foundation-models:gqa/basics": {
+      "source_sha256": "d7e84c6eea9d3ead8fa33bb015ec5f329a4de622a5085d7758a46fff86b129c3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why share fewer K/V heads among more queries?",
+        "answer": "Queries keep distinct directions while grouped history lowers cache and read bandwidth. It interpolates between per-head MHA and single-group MQA.",
+        "example": "Four query heads can share two stored KV histories instead of four."
+      }
+    },
+    "qa/foundation-models:gqa/comparison": {
+      "source_sha256": "a07d1076846b9b6d3bea12154a26975361a53c070b4b479295fe90a3a5937b1f",
+      "reviewed": true,
+      "fields": {
+        "question": "Which head-count axis distinguishes MHA, GQA, and MQA?",
+        "answer": "MHA generally has one KV per Q, GQA shares within groups, and MQA shares globally. Query head count can remain fixed; quality and bandwidth are empirical.",
+        "example": "Keep eight Q heads with eight, two, or one KV group."
+      }
+    },
+    "qa/foundation-models:gqa/implementation": {
+      "source_sha256": "05612531078b52f03cf42087a9f420f34401442e76866914cfcee8d18753e020",
+      "reviewed": true,
+      "fields": {
+        "question": "Does temporarily expanding shared KV establish cache savings?",
+        "answer": "No. Logical broadcast can aid compute, but persistent KV must store fewer groups; retaining expanded copies loses savings. Check g(h) and distinguish local from original uptraining.",
+        "example": "Four Q heads sharing two groups should store two histories."
+      }
+    },
+    "qa/foundation-models:irekogpt/mechanism": {
+      "source_sha256": "b12c3599a5daf52fe9b2fb53d6ac980a001172a58dcc0207e1d433389bd6f619",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain projection bases for one IrekoGPT checkpoint to support nested widths?",
+        "answer": "Dropping directions fixes width. Ordered bases let each width take a prefix, and multi-ratio calibration and linear correction reduce error. Shared structure does not equal shared quality or measured throughput.",
+        "example": "Switch between narrow and wide subnets only if extra basis directions were not discarded."
+      }
+    },
+    "qa/foundation-models:irekogpt/basics": {
+      "source_sha256": "eb1eb762b7a8cb5d9fe9fd037a303b660ab7f3c1b89552b9df1c3adbf3efc3ae",
+      "reviewed": true,
+      "fields": {
+        "question": "Why expose nested widths from one checkpoint?",
+        "answer": "One ordered basis supports several budget levels without separately stored pruned models. Width k takes its first k directions and receives calibration.",
+        "example": "Narrow and wide paths share the same ordered basis."
+      }
+    },
+    "qa/foundation-models:irekogpt/comparison": {
+      "source_sha256": "71e35d3e4d441ac2dbbbdb767f6a91d82aff30bd37244fa1563b80f979dfc710",
+      "reviewed": true,
+      "fields": {
+        "question": "How do nested widths differ from single-ratio pruning in deployment?",
+        "answer": "Single-ratio pruning retains one width. Nested storage and calibration allow runtime k selection, but do not guarantee every width's quality or speed.",
+        "example": "Validating k=64 does not validate k=32 automatically."
+      }
+    },
+    "qa/foundation-models:irekogpt/implementation": {
+      "source_sha256": "0d0496daa1cdf52bb2f1e7f295c6cda7215d1d6f96e7af26188aa85b19f62558",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not fit an independent projection basis per width?",
+        "answer": "W_k=P_:kᵀWP_:k requires prefixes of one basis. Independent choices break nesting. Preserve downstream linear calibration and ridge correction; local scope is subnet diagnosis.",
+        "example": "The 32-wide basis must be the first 32 directions of the 64-wide basis."
+      }
+    },
+    "qa/foundation-models:kvmem/mechanism": {
+      "source_sha256": "0eea452622ceba119c8bf9a029a434007623f17139f7397d5420e27496c9b906",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't separating KVMEM's address space from execution window mean all-history attention?",
+        "answer": "Store paged KV across tiers, retrieve relevant blocks in attention space, and materialize a bounded native-window view. Missed evidence stays out. Local full backing cache and no complete async tiering mean no VRAM or speed claim.",
+        "example": "Load a few old KV pages per query, not every page at once."
+      }
+    },
+    "qa/foundation-models:kvmem/basics": {
+      "source_sha256": "9a34502a90afcf73d628401e12a3f37bbab2ab1e3f99b2e373fd0bb91196448f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why page long agent histories as KV?",
+        "answer": "History can exceed memory and context; summaries may lose details. KVMEM stores computed KV in tiers, indexes relevant blocks, and materializes a native-window view.",
+        "example": "Many pages can exist while only several are loaded per execution."
+      }
+    },
+    "qa/foundation-models:kvmem/comparison": {
+      "source_sha256": "8c3a16226a7298445ccde659f02b4088d363f9a71c2cce7a9cbd49f378d69a24",
+      "reviewed": true,
+      "fields": {
+        "question": "How does paged KV reuse differ from retrieving text and prefilling it?",
+        "answer": "Paged reuse materializes computed K/V; text retrieval usually computes K/V again. Position, storage, and consistency contracts differ, so retrieval count alone is not cost.",
+        "example": "Fetch cached KV versus fetch tokens and calculate their KV anew."
+      }
+    },
+    "qa/foundation-models:kvmem/implementation": {
+      "source_sha256": "c4518755a4fa3cd3a8a089e11b9b11fbeb31bc0f4bdffd2907a30aa3ed438d85",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not claim lower peak VRAM while retaining full backing cache?",
+        "answer": "A bounded working set does not prove offload. Local Python retains backing cache and does not establish production kernels. Report working set, residency, movement, and end-to-end time separately.",
+        "example": "Reading 512 of 2048 resident slots still occupies all 2048."
+      }
+    },
+    "qa/foundation-models:leapquant/mechanism": {
+      "source_sha256": "4055a64d620c3779382e62fe2a6f5246f5b1ce7766d51ab098a24931a3bc684e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why buffer high-precision updates in a window instead of quantizing each step?",
+        "answer": "Repeated rounding feeds back into recurrence. Keep a low-bit base plus precise increments and requantize at boundaries; separate compensation protects outlier directions. Buffer and compensation cost memory. Local truncated SVD is not the original kernel or throughput.",
+        "example": "Accumulate tiny updates before rounding so each is not lost individually."
+      }
+    },
+    "qa/foundation-models:leapquant/basics": {
+      "source_sha256": "3e715e4c9d985e473564eb2b73a9750493a20e76aee8c1101a234751647cee3f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why address both repeated rounding and state outliers?",
+        "answer": "Recurrence accumulates quantization error and outliers dominate scale. Window buffering reduces rounding frequency; high-precision compensation separates large directions before residual quantization.",
+        "example": "Do not recompress every token or let one direction consume the entire grid."
+      }
+    },
+    "qa/foundation-models:leapquant/comparison": {
+      "source_sha256": "79624f5267c1cd4906704c9ab9a37113b22207406d215835145c588b24e9bbe9",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the trade-off between window buffers and low-bit writes every step?",
+        "answer": "Buffers add temporary high-precision state but reduce whole-state requantization; stepwise writes round more often. Count base, updates, and compensation.",
+        "example": "Buffering eight updates before one quantization differs from eight whole-state writes."
+      }
+    },
+    "qa/foundation-models:leapquant/implementation": {
+      "source_sha256": "6bbdc6f33f852762193ee2bafc1d917cfddfd6d6f0c9e52679066caba068f7d5",
+      "reviewed": true,
+      "fields": {
+        "question": "Should the low-bit part quantize S or S−C?",
+        "answer": "Form C from truncated SVD, quantize S−C, then add C at readout. Quantizing full S and adding C counts it twice. Merge precise window updates at the prescribed boundaries.",
+        "example": "An outlier direction stored in C need not be stored in full in the residual too."
+      }
+    },
+    "qa/foundation-models:moezip/mechanism": {
+      "source_sha256": "a1bcd435ec33b936e5e0eeba41638ace47913533520c6d5442a35f3ea9da5921",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reserve routing anchors in a normal MoE KV compression budget?",
+        "answer": "KV deletions can change attention and subsequent routing. Propagate Fisher sensitivity from observed instruction positions through attention, reserve anchors, then fill with the base compressor. Sensitivity is a proxy, not a route-flip guarantee or permission to read gold.",
+        "example": "An older low-attention token can still affect expert choice and merit retention."
+      }
+    },
+    "qa/foundation-models:moezip/basics": {
+      "source_sha256": "06e9ba65975329a1deb7740a7f0996d447fd98d1e8ead9cf61652a915cd47b50",
+      "reviewed": true,
+      "fields": {
+        "question": "Why connect KV error to MoE routing?",
+        "answer": "Eviction perturbs attention outputs seen by the router. Attention quality alone can miss route-sensitive positions, so estimate anchors from observed instruction gates and attention.",
+        "example": "A nonmaximal KV can move a token across an expert boundary."
+      }
+    },
+    "qa/foundation-models:moezip/comparison": {
+      "source_sha256": "e5cf14369832e979cad1c2119043a72e2cca022a58c0368f7c4fe8f2c9c0ade7",
+      "reviewed": true,
+      "fields": {
+        "question": "Is Fisher trace an exact top-k router flip criterion?",
+        "answer": "No. It averages distribution curvature over directions and omits the router-to-hidden Jacobian. High trace does not imply a flip.",
+        "example": "Equal trace at two positions can yield different routing changes under different perturbation directions."
+      }
+    },
+    "qa/foundation-models:moezip/implementation": {
+      "source_sha256": "42cf0c543478290aecd6ca28e075f836033094727398d808d0803e2ef662494c",
+      "reviewed": true,
+      "fields": {
+        "question": "Can the base compressor select anchors again when filling budget?",
+        "answer": "No. Exclude already selected anchors and fill with distinct positions. Gather real KV in original temporal order. Use prefill instruction only, never future gold diagnostics.",
+        "example": "With 64 slots and 16 anchors, add 48 distinct non-anchor positions."
+      }
+    }
+  }
+}

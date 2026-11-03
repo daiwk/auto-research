@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/agent-research/planning-and-search": {
+      "source_sha256": "ca885453b23f90850ca7b2515852ea810a86996bcd38d9d8114082a718b287d5",
+      "reviewed": true,
+      "fields": {
+        "title": "Planning starts with when feedback arrives, then asks whether to branch",
+        "thesis": "ReAct and ReWOO change when a plan receives observations. ToT and LATS organize candidate search differently. Jev Lookahead delegates successor simulation to code, while DRAGO checks formal-plan fidelity. They address distinct uncertainties: unknown steps, route choice, reachability, and specification errors. Do not rank them all by search count or perfect local scores.",
+        "axis_0": "Whether plans are generated before or after intermediate tool observations",
+        "axis_1": "Whether the search unit is a thought, environment action, or complete plan",
+        "axis_2": "Whether value comes from model judgment, actual execution, or symbolic probes",
+        "axis_3": "Whether recoverable branches and simulated states are reliably isolated"
+      }
+    },
+    "dive/agent-research/planning-and-search/comparison/agent-research:react": {
+      "source_sha256": "949c020953819baf04adbc901ca506230ec1637736947aaa3cb01cda4a7d48ec",
+      "reviewed": true,
+      "fields": {
+        "position": "Alternates reasoning, actions, and actual observations, choosing the next action from the latest result.",
+        "tradeoff": "Adapts to changes mid-task, but history and repeated reasoning raise cost. The local classic mini-suite has deterministic observations, not the paper's real-environment results."
+      }
+    },
+    "dive/agent-research/planning-and-search/comparison/agent-research:rewoo": {
+      "source_sha256": "e9e743c6f9f264df650a3434b997845d633eadf84202f22b7f532a386db2b23e",
+      "reviewed": true,
+      "fields": {
+        "position": "The Planner drafts dependencies with evidence variables, the Worker fills tool results, and the Solver synthesizes at the end.",
+        "tradeoff": "The Planner rereads fewer observations, but exceptions can invalidate the plan. Variable dependencies still limit parallelism; local work checks decoupled control flow only."
+      }
+    },
+    "dive/agent-research/planning-and-search/comparison/agent-research:tree-of-thoughts": {
+      "source_sha256": "9c3fda3633c30b3dd0a21703b3099da3337e25bd90304a87cf75a7841c3a7ba1",
+      "reviewed": true,
+      "fields": {
+        "position": "Organizes scorable intermediate states into a thought tree, maintaining the frontier through BFS or DFS with backtracking.",
+        "tradeoff": "Can undo early choices but relies on intermediate evaluation. Local workflow coherence stands in for LM value and does not establish open-ended reasoning."
+      }
+    },
+    "dive/agent-research/planning-and-search/comparison/agent-research:lats": {
+      "source_sha256": "49e28ff5a8a88b09f2a3c632246a7bcba2385268228ce4128a4c0ae973f13355",
+      "reviewed": true,
+      "fields": {
+        "position": "Uses MCTS for actions, rollouts, and value backup. UCT balances observed reward against underexplored nodes, and failures generate reflection.",
+        "tradeoff": "Actual rollouts add external constraints and cost. Local leaves are complete plans, without the paper's LM value or WebShop."
+      }
+    },
+    "dive/agent-research/planning-and-search/comparison/agent-research:jev-lookahead": {
+      "source_sha256": "373438fce4cfec4e40f103c50391f0c7b93d20a57a4ab2a147b9934513d2bad8",
+      "reviewed": true,
+      "fields": {
+        "position": "Clones a simulated successor per action and gives the decision-maker its observation and new available actions to compare progress.",
+        "tradeoff": "Needs trusted, isolated simulation. Separate objects do not guarantee isolation of RNG or external resources. The local lexical provider is a stand-in."
+      }
+    },
+    "dive/agent-research/planning-and-search/comparison/agent-research:drago": {
+      "source_sha256": "2bfe1e75941bf26006aa0ac6cbe559e3a8de024cbee2cd725d1d2287a7f0a8f2",
+      "reviewed": true,
+      "fields": {
+        "position": "Repairs formal specifications using type, contract, reachability, and intent diagnostics, strictly reducing blockers and guarding against deleting goals.",
+        "tradeoff": "Solvers check a given formalization; it can be solvable while misrepresenting the task. Local work covers positive-precondition STRIPS, not the expensive full multi-model experiments."
+      }
+    },
+    "dive/agent-research/planning-and-search/analysis/0": {
+      "source_sha256": "f5ab9a9ef3ebfa8ad7d4d4d2bacb31b7e373d13318c555c3bc38f3035bbeed72",
+      "reviewed": true,
+      "fields": {
+        "title": "Plan all dependencies first, or wait for observations?",
+        "body": "ReWOO uses variables not to ignore evidence, but to avoid regenerating all Planner reasoning after each observation. Later arguments are still filled from earlier evidence. ReAct directly uses actual returns for the next decision and fits tasks whose paths change with outcomes. Stable tool sequences favor preplanning to reduce repeated inputs. Exceptions changing goals or available actions require a replanning path. Compare total delivery cost, not Planner calls alone."
+      }
+    },
+    "dive/agent-research/planning-and-search/analysis/1": {
+      "source_sha256": "f79bcbdd8a0993ecfdbce89d040046d3ae845163f770bbb2eff72b0d61194152",
+      "reviewed": true,
+      "fields": {
+        "title": "Search creates opportunities; validation defines the evidence",
+        "body": "ToT and LATS expand alternatives, but ToT emphasizes intermediate evaluation and frontier management while LATS also backs up execution and visitation feedback. Jev Lookahead requires code to supply observable successors, and DRAGO uses symbolic specification probes. External computation is not an infallible oracle: simulators can leak state, and solvers can solve the wrong specification. Fix what search can observe and what failures mean before comparing width, depth, and budget."
+      }
+    },
+    "dive/agent-research/planning-and-search/question/dependency-versus-adaptation": {
+      "source_sha256": "39d6cc1a4fa0a5e944cb5f5dd90002b0d80121ce00613a3ece445aa03aafbf9d",
+      "reviewed": true,
+      "fields": {
+        "question": "Can ReWOO preplan an order lookup that needs the user's identity first? What differs from ReAct?",
+        "answer": "Yes. The second step can reference the first step's evidence variable, filled by the Worker when the result arrives. Preplanning does not predict the result. The Planner is not interrupted for every observation, while ReAct chooses again from each return. An identity lookup exception can force another route, requiring failure handling and replanning beyond a prewritten graph.",
+        "example": "Look up customer_id, then orders. If the response says the customer was merged and needs human confirmation, substituting a variable value is not enough."
+      }
+    },
+    "dive/agent-research/planning-and-search/question/frontier-versus-rollout": {
+      "source_sha256": "27fb4ad5efd0d656b3b9d85c347b3240c72aa810e56c5741ade1d87848480f0a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why might LATS still roll out a thought that ToT currently values poorly?",
+        "answer": "A layer-wise frontier can prune by current value. MCTS UCT also considers visit count, giving underexplored branches a chance. External rollout may add reward evidence but is not a free fix for all value mistakes. Control budget and evaluator; deterministic local coherence is not LM value or actual environment evidence.",
+        "example": "An apparent detour may unlock an essential resource. UCT can preserve it while untried even after a fixed frontier would prune it."
+      }
+    },
+    "dive/agent-research/planning-and-search/question/simulation-versus-specification": {
+      "source_sha256": "807434b6fb5e36086e9087d1fad2390877a9e3b209b8fe0cb9bc352d0ac0b441",
+      "reviewed": true,
+      "fields": {
+        "question": "Why verify user intent even if a Jev simulation reaches the goal and a DRAGO solver says it is solvable?",
+        "answer": "Both verify consequences in an encoded environment or specification. Jev Lookahead needs faithful simulation without reward or gold leakage. DRAGO needs a faithful formalization, not solvability obtained by dropping goals. Code and solvers rule out some errors but cannot ensure every natural-language requirement became state, constraints, and objectives.",
+        "example": "A user requests delivery to A while keeping the item cold, but the specification only says deliver to A. Successful simulation and solving still do not verify temperature."
+      }
+    },
+    "dive/agent-research/planning-and-search/update/2026-10-27/0": {
+      "source_sha256": "2e3318f74115d68790c832a4d30bca067632a903d7980112f2864c0c72225e2c",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial version: compared feedback timing, thought and MCTS search, code-based successor simulation, and formal specification diagnosis, separating planning efficiency from validation evidence."
+      }
+    }
+  }
+}

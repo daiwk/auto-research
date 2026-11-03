@@ -388,26 +388,44 @@ def _collection(root: Path) -> tuple[list[dict], list[dict]]:
 
 
 def render_browser(cards: list[dict], themes: list[dict], *,
-                   path: str = "learning/all.md", filters: bool = True) -> str:
+                   path: str = "learning/all.md", filters: bool = True,
+                   english: bool = False) -> str:
     esc = html.escape
+    def label(zh: str, en: str) -> str:
+        return en if english else zh
+
+    levels = (_question_module().LEVELS if not english else {
+        "basics": "Basics", "mechanism": "Core mechanism",
+        "comparison": "Method comparison", "implementation": "Implementation details",
+    })
+    domains_by_id = DOMAINS if not english else {
+        "recommendation": "Search, ads, and recommendation",
+        "foundation-models": "Foundation models", "system-one": "Structured decisions",
+        "multimodal-models": "Multimodal models", "post-training": "LLM post-training",
+        "agent-research": "Agents",
+    }
+    all_path = label("learning/all.md", "en/learning/all.md")
+    if english and path == "learning/all.md":
+        path = all_path
+    unit = label('data-learning-unit="问"', 'data-learning-unit="questions" data-learning-lang="en"')
     lines = [
-        '<div class="ar-learning-browser" data-learning-browser data-learning-page-size="12" data-learning-unit="问">',
+        f'<div class="ar-learning-browser" data-learning-browser data-learning-page-size="12" {unit}>',
         '<div class="ar-learning-controls">',
-        '<label for="learning-search">搜索问题',
+        f'<label for="learning-search">{label("搜索问题", "Search questions")}',
         '<input id="learning-search" type="search" data-learning-search '
-        'placeholder="搜索问题、论文或机制"></label>',
+        f'placeholder="{label("搜索问题、论文或机制", "Search questions, papers, or mechanisms")}"></label>',
     ]
     if filters and themes:
         lines += [
-            '<label for="learning-theme">主题',
+            f'<label for="learning-theme">{label("主题", "Theme")}',
             '<select id="learning-theme" data-learning-theme>',
-            '<option value="">全部主题</option>',
+            f'<option value="">{label("全部主题", "All themes")}</option>',
             *[f'<option value="{theme["id"]}">{esc(theme["title"])}</option>' for theme in themes],
-            '<option value="inbox">待归类</option>',
+            f'<option value="inbox">{label("待归类", "Unclassified")}</option>',
             '</select></label>',
-            '<label for="learning-topic">子主题',
+            f'<label for="learning-topic">{label("子主题", "Subtopic")}',
             '<select id="learning-topic" data-learning-topic>',
-            '<option value="">全部子主题</option>',
+            f'<option value="">{label("全部子主题", "All subtopics")}</option>',
         ]
         for theme in themes:
             lines.extend(
@@ -418,79 +436,102 @@ def render_browser(cards: list[dict], themes: list[dict], *,
     elif filters:
         domains = sorted({card["domain"] for card in cards})
         lines += [
-            '<label for="learning-domain">研究领域',
-            '<select id="learning-domain" data-learning-domain><option value="">全部领域</option>',
-            *[f'<option value="{esc(value)}">{esc(DOMAINS.get(value, value))}</option>' for value in domains],
+            f'<label for="learning-domain">{label("研究领域", "Research domain")}',
+            '<select id="learning-domain" data-learning-domain>'
+            f'<option value="">{label("全部领域", "All domains")}</option>',
+            *[f'<option value="{esc(value)}">{esc(domains_by_id.get(value, value))}</option>' for value in domains],
             '</select></label>',
         ]
+    question_total = _question_module().question_count(cards)
+    paper_total = len({card["identity"] for card in cards})
+    tier_label = label("学习层次", "Learning level")
+    initial_status = label(f"{question_total} 个问题 · {paper_total} 篇论文",
+                           f"{question_total} questions · {paper_total} papers")
+    no_script = label("已显示全部问题；启用 JavaScript 后可搜索和筛选。",
+                      "All questions are shown. Enable JavaScript to search and filter.")
     lines += [
         "</div>",
-        '<div class="ar-learning-levels" role="group" aria-label="学习层次">',
-        '<span>学习层次</span>',
-        '<button type="button" data-learning-level="" aria-pressed="true">全部</button>',
-        *[f'<button type="button" data-learning-level="{key}" aria-pressed="false">{label}</button>'
-          for key, label in _question_module().LEVELS.items()],
+        f'<div class="ar-learning-levels" role="group" aria-label="{tier_label}">',
+        f'<span>{tier_label}</span>',
+        f'<button type="button" data-learning-level="" aria-pressed="true">{label("全部", "All")}</button>',
+        *[f'<button type="button" data-learning-level="{key}" aria-pressed="false">{value}</button>'
+          for key, value in levels.items()],
         '</div>',
-        f'<p class="ar-learning-status" data-learning-status role="status">{_question_module().question_count(cards)} 个问题 · {len({card["identity"] for card in cards})} 篇论文</p>',
-        "<noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>",
+        f'<p class="ar-learning-status" data-learning-status role="status">{initial_status}</p>',
+        f"<noscript>{no_script}</noscript>",
         '<div class="ar-learning-grid">',
     ]
     for card in cards:
-        domain_label = DOMAINS.get(card["domain"], card["domain"])
-        base_search = " ".join([card["title"], domain_label, card["organization"], card["published"],
-                           card["summary"], card["local_scope"], card["question"], card["topics"],
-                           card["theme_title"], card["subtopic_title"]])
-        label = " / ".join(filter(None, (card["theme_title"], card["subtopic_title"])))
+        domain_label = domains_by_id.get(card["domain"], card["domain"])
+        base_search = "" if english else " ".join([
+            card["title"], domain_label, card["organization"], card["published"],
+            card["summary"], card["local_scope"], card["question"], card["topics"],
+            card["theme_title"], card["subtopic_title"],
+        ])
+        topic_label = " / ".join(filter(None, (card["theme_title"], card["subtopic_title"])))
         # Missing editorial work is explicit. It never becomes a generic fake Q&A.
-        entries = sorted(card["questions"], key=lambda q: list(_question_module().LEVELS).index(q["level"])) or [None]
+        entries = sorted(card["questions"], key=lambda q: list(levels).index(q["level"])) or [None]
         for index, question in enumerate(entries):
-            search = base_search + " " + (" ".join([
-                question["question"], question["answer"], question["example"], question["added"],
-            ]) if question else "待补问答")
+            # In English the existing client falls back to rendered text. Do
+            # not serialize Chinese paper summaries and repeat English answers.
+            search_attr = ""
+            if not english:
+                search = base_search + " " + (" ".join([
+                    question["question"], question["answer"], question["example"], question["added"],
+                ]) if question else "待补问答")
+                search_attr = f' data-search="{esc(search)}"'
             anchor = _question_module().question_anchor(card["identity"], question["id"]) if question else card["anchor"]
             lines += [
                 f'<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="{esc(card["identity"])}" '
                 f'data-paper-title="{esc(card["title"])}" data-learning-pending="{"false" if question else "true"}" '
                 f'data-level="{question["level"] if question else ""}" '
                 f'data-domain="{esc(card["domain"])}" data-theme="{card["theme"]}" '
-                f'data-topic="{card["theme"]}/{card["subtopic"]}" data-search="{esc(search)}">',
-                f'<p class="ar-learning-card__domain"><a href="{_page_href(card["topic_path"], path)}">{esc(label)}</a></p>',
+                f'data-topic="{card["theme"]}/{card["subtopic"]}"{search_attr}>',
+                f'<p class="ar-learning-card__domain"><a href="{_page_href(card["topic_path"], path)}">{esc(topic_label)}</a></p>',
             ]
             if question and index == 0 and not card.get("_omit_paper_anchor"):
                 lines.append(f'<span id="{card["anchor"]}" class="ar-learning-paper-anchor"></span>')
             title = question["question"] if question else card["title"]
             if question:
-                lines.append(f'<p class="ar-learning-level">{_question_module().LEVELS[question["level"]]}</p>')
+                lines.append(f'<p class="ar-learning-level">{levels[question["level"]]}</p>')
             lines += [
                 f'<h2 id="{anchor}">{esc(title)}</h2>',
-                f'<p class="ar-learning-paper"><a href="{_page_href("learning/all.md", path)}?paper={quote(card["identity"], safe="")}">{esc(card["title"])}</a></p>' if question else '<p>待补逐篇问答。</p>',
+                f'<p class="ar-learning-paper"><a href="{_page_href(all_path, path)}?paper={quote(card["identity"], safe="")}">{esc(card["title"])}</a></p>'
+                if question else f'<p>{label("待补逐篇问答。", "Paper questions pending.")}</p>',
             ]
             if question:
                 example = re.sub(r"^(?:教学例子|教学示意|示意场景|示意|示例)[：:]\s*", "", question["example"])
                 lines += [
-                    f'<p class="ar-learning-card__meta">问答新增：{question["added"]} · {esc(card["organization"])}</p>',
-                    '<details class="ar-learning-answer"><summary>展开答案与例子</summary>',
-                    f'<p><strong>答案：</strong>{esc(question["answer"])}</p>',
-                    f'<p class="ar-learning-example"><strong>教学例子：</strong>{esc(example)}</p>',
-                    f'<p class="ar-learning-sources">依据：{esc("、".join(question["source_sections"]))}；例子用于解释机制。</p>',
+                    f'<p class="ar-learning-card__meta">{label("问答新增：", "Question added: ")}'
+                    f'{question["added"]} · {esc(card["organization"])}</p>',
+                    '<details class="ar-learning-answer">'
+                    f'<summary>{label("展开答案与例子", "Show answer and example")}</summary>',
+                    f'<p><strong>{label("答案：", "Answer: ")}</strong>{esc(question["answer"])}</p>',
+                    f'<p class="ar-learning-example"><strong>{label("教学例子：", "Illustrative example: ")}'
+                    f'</strong>{esc(example)}</p>',
+                    f'<p class="ar-learning-sources">{label("依据：", "Sections in the Chinese source: ")}'
+                    f'{esc(label("、", ", ").join(question["source_sections"]))}'
+                    f'{label("；例子用于解释机制。", ". The example illustrates the mechanism.")}</p>',
                 ]
             else:
-                lines.append(f'<p class="ar-learning-card__meta">{esc(card["organization"])} · 论文公开：{esc(card["published"])}</p>')
+                lines.append(f'<p class="ar-learning-card__meta">{esc(card["organization"])} · '
+                             f'{label("论文公开：", "Published: ")}{esc(card["published"])}</p>')
             links = [
                 f'<a href="{esc(card["paper_url"])}">{card["source_label"]}</a>',
-                f'<a href="{_page_href(card["detail_path"], path)}">实现解读</a>',
+                f'<a href="{_page_href(card["detail_path"], path)}">{label("实现解读", "Implementation write-up")}</a>',
             ]
             if card["curated_path"]:
-                links.append(f'<a href="{_page_href(card["curated_path"], path)}">阅读精选对比</a>')
+                links.append(f'<a href="{_page_href(card["curated_path"], path)}">'
+                             f'{label("阅读精选对比", "Read a curated comparison")}</a>')
             if question:
-                links.append(f'<a href="#{anchor}">问题链接</a>')
+                links.append(f'<a href="#{anchor}">{label("问题链接", "Question link")}</a>')
             lines.append(f'<p class="ar-learning-card__links">{" · ".join(links)}</p>')
             if question:
                 lines.append('</details>')
             lines.append('</article>')
     lines += [
         "</div>",
-        '<button type="button" class="ar-learning-more" data-learning-more hidden>显示更多</button>',
+        f'<button type="button" class="ar-learning-more" data-learning-more hidden>{label("显示更多", "Show more")}</button>',
         "</div>", "",
     ]
     return "\n".join(lines)

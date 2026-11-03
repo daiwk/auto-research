@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "units": {
+    "theme/recommendation": {
+      "source_sha256": "974b5efadbd010b897df8e1129be62dba2334c7dfc893b8ad9c840e6a89b0035",
+      "reviewed": true,
+      "fields": {
+        "title": "Search, ads, and recommendation",
+        "intro": "Follow the path from finding candidates to ranking and serving: semantic representations, user knowledge, long histories, generative recommendation, feedback, and deployment."
+      }
+    },
+    "theme/recommendation/retrieval-matching": {
+      "source_sha256": "f6ac24f1bcd8d8c37d5b71468278b1d4be85af40be6f523964a9079353eea7db",
+      "reviewed": true,
+      "fields": {
+        "title": "Candidate generation and search matching",
+        "question": "Can a stronger fine ranker recover relevant content that retrieval missed?",
+        "takeaway": "Retrieval determines which items the ranker can consider. Two-tower models encode requests and items separately for precomputation and nearest-neighbor search. Multi-interest methods propose candidates from several user interests. Query rewriting, hard negatives, graphs, catalog constraints, and learned indexes change coverage or match quality. Reranking then uses list context over the selected candidates.",
+        "example": "A user likes running gear and camping videos. If all 100 retrieved results are running items, no ranker can surface a camping video. Preserve both interest channels so downstream ranking can compare them.",
+        "pitfall": "Increasing retrieval from 100 to 1000 naturally raises coverage and does not establish better representations. Match candidate budgets, negative scope, index snapshots, and available inventory. Public proxy logs are not evidence of live lift.",
+        "reading_order": "Start with YouTube DNN for retrieval versus ranking, then Airbnb EBR for hard negatives and inventory constraints, and MIMA for complementary supervision across interests. Read the public-data substitution limits for the latter two."
+      }
+    },
+    "theme/recommendation/retrieval-matching/self-test": {
+      "source_sha256": "f6201abace18737da55c406dcdff7d72f8e12a61bc80d8f6cc2dc6c7c6c966ae",
+      "reviewed": true,
+      "fields": {
+        "question": "Does higher Recall@K after returning more candidates prove the user encoder improved?",
+        "answer": "No. The budget changed. Fix K, index, and filters before comparing coverage, quality, and latency."
+      }
+    },
+    "theme/recommendation/content-semantic-ids": {
+      "source_sha256": "8c7a3047f39a5230efd6be4e78e7154f6befe95aaeb13b5cf6d91b069924e389",
+      "reviewed": true,
+      "fields": {
+        "title": "Semantic representations, user knowledge, and cold start",
+        "question": "How does a new item without clicks enter a behavior-based recommender?",
+        "takeaway": "Content semantics, collaborative identity, and user preferences are different signals. KAR adds offline generated knowledge. NoteLLM learns content vectors from co-reading and generation. Semantic IDs compress continuous content into short indexable or generatable codes. User memories and neighbors add preference evidence; feedback can train content descriptions. Align representations with recommendation objectives instead of equating linguistic similarity with preference.",
+        "example": "A new running shoe has title and image evidence before clicks. Similar-looking shoes can appeal to different audiences. Build content representations, then align them using co-purchase or co-reading rather than treating text neighbors as the final ranking.",
+        "pitfall": "Better reconstruction does not ensure better recommendation. A tiny codebook collides; a large one may not learn stable collaboration. Verify generated preference descriptions rather than treating them as click labels. Cataloging a high-cost reference does not mean its model runs locally.",
+        "reading_order": "Read KAR for offline knowledge, NoteLLM for collaborative supervision, and Dual-purpose SID for short codes. All have local mechanism paths; Dual-purpose SID's small-codebook negative result illustrates quality versus compression."
+      }
+    },
+    "theme/recommendation/content-semantic-ids/self-test": {
+      "source_sha256": "49ce9a4bcc2cfe107e5ea6e8ed2a0d366436067799f7081d82fe3d48c6282756",
+      "reviewed": true,
+      "fields": {
+        "question": "How should we interpret lower semantic-ID reconstruction MSE but worse NDCG under the same protocol?",
+        "answer": "Compression preserves content better but may preserve less collaborative signal, distinguish candidates poorly, or mismatch the decoder. Check collisions, content–behavior alignment, and retrieval separately."
+      }
+    },
+    "theme/recommendation/history-ranking-backbones": {
+      "source_sha256": "7d631084ad6ea8a5053c4316540c1e369b8debfc6359dd149141b8f0ca75db5e",
+      "reviewed": true,
+      "fields": {
+        "title": "User histories and ranking backbones",
+        "question": "Should compute go to history–history, candidate–history, or heterogeneous field interactions?",
+        "takeaway": "Identify what interacts. DIN uses candidates to activate relevant history. HSTU exchanges history states across layers. RankMixer uses fixed TokenMix and independent FFNs for heterogeneous features. Long-history compression, mixed sequence and field tokens, sparse attention, and transfer choose what state to keep and when to exchange it. Backbones can complement each other; “Transformer” is not one mechanism.",
+        "example": "A user has a long gardening history and recent cat videos. Cat-food ranking can read recent cat evidence, while garden tools require older interests. Price, context, and profile still need feature crosses. History and fields serve different purposes.",
+        "pitfall": "Field-token count is not history length; do not compare their complexity tables directly. A cache can be shared only if it is candidate-independent. Public short-history results do not establish industrial long-history gains or serving throughput.",
+        "reading_order": "Read DIN for candidate-conditioned interest, HSTU for evolving history states, and RankMixer for field interaction. Then read the [topic deep dive](../../deep-dives/recommendation/history-ranking-backbones.md) for LONGER's short-query path versus SlimPer's fixed user pool. Interpret results within their data and fidelity."
+      }
+    },
+    "theme/recommendation/history-ranking-backbones/self-test": {
+      "source_sha256": "724368d1feee809b0c0a3cfbbd9281b6d1e590d951145c994e8c1b41588b0323",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a user state that already saw candidate A be reused unchanged as candidate B's shared cache?",
+        "answer": "Usually no. It depends on A and can contaminate B. Keep a candidate-independent shared path or recompute the candidate-dependent part. A module named user tower is not necessarily reusable."
+      }
+    },
+    "theme/recommendation/generative-retrieval-reasoning": {
+      "source_sha256": "7ae53a7d4fec7d8c8b0ef51832527504bbce7446351943d8108ea106070d7848",
+      "reviewed": true,
+      "fields": {
+        "title": "Generative retrieval and reasoning-based recommendation",
+        "question": "What changes when items are represented as tokens?",
+        "takeaway": "Generative retrieval predicts item codes conditioned on the user. Create catalog-recoverable identifiers, learn the code sequence distribution, and constrain decoding to eligible items. TIGER connects quantization to autoregressive retrieval, COBRA cascades sparse codes and dense representations, and PLUM continues pretraining an existing LM on recommendation data. Preference optimization and reasoning tokens change training or search. PinGER retains SID labels at every level during training but masks later history to read only dense tokens, so prior SIDs can be removed at serving. Input cost, prefix coverage, and catalog validity are different contracts.",
+        "example": "Suppose the catalog contains codes (3,7) and (3,9), but the model gives (3,5) high probability. A plausible-looking code is not an eligible item. Constrain decoding to the catalog and handle collisions or retain a later disambiguation path.",
+        "pitfall": "Lower token loss need not raise Recall. Wider beams cannot recover items excluded by a bad codebook or prefix constraint. Some papers generate whole lists; classify by the main generation mechanism and see reranking for slate value. Scaled local training is not production-scale reproduction.",
+        "reading_order": "Read TIGER for discrete ID generation, COBRA for sparse–dense cascades, and PLUM for continued pretraining of an existing LM. All have local core pipelines, but TIGER and PLUM did not verify final local retrieval gains."
+      }
+    },
+    "theme/recommendation/generative-retrieval-reasoning/self-test": {
+      "source_sha256": "70f392158a1a532d0498382bfb46833583bc0b90faeda076e19fb2746fd3cc35",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a correctly formatted three-level SID still fail retrieval?",
+        "answer": "Format guarantees length and vocabulary membership only. The combination can be absent, ambiguous, or irrelevant. Check catalog reachability, collision handling, coverage, and ranking on an isolated test set."
+      }
+    },
+    "theme/recommendation/feedback-multitask-causality": {
+      "source_sha256": "ebcebf2045ec51ef05658a3ac2a033d7fb0e86222eabe5f5252799d93b61376f",
+      "reviewed": true,
+      "fields": {
+        "title": "Learning signals, multitask learning, and feedback bias",
+        "question": "Which probability or value can observed clicks and conversions supervise?",
+        "takeaway": "Define labels before architecture. ESMM separates post-impression click probability, post-click conversion, and their joint event. MMoE shares experts with task-specific gates. PLE separates shared from task-private information. Duration, delayed conversion, exposure selection, and attribution change what supervision means. Pseudo-labels and set rewards need justification. Causal lift asks a counterfactual question not answered by prediction accuracy.",
+        "example": "With 1,000 impressions, CTR 10%, and post-click CVR 20%, joint click-and-conversion probability is 2%, or about 20 conversions. A new policy cannot claim all 20; some users would have purchased anyway.",
+        "pitfall": "Sharing tasks does not remove selection bias. Treating unclicked examples as CVR negatives confuses conditional and joint probabilities. Delay, missing features, and exposure are not one noise source. Verify each observation assumption; synthetic labels support only mechanism checks.",
+        "reading_order": "Use ESMM to establish funnel probabilities, MMoE for task-specific selection of shared experts, and PLE for private paths under conflict. All train locally on public constructed tasks, not real ad funnels."
+      }
+    },
+    "theme/recommendation/feedback-multitask-causality/self-test": {
+      "source_sha256": "c66d074cff32a2dcb82542b80fadf2c87cbe7d5b2a2e08fc2b153c606e912b2d",
+      "reviewed": true,
+      "fields": {
+        "question": "CTR rises from 10% to 20% and post-click CVR stays at 20%, doubling joint conversion to 4%. Does this prove better CVR or causal lift?",
+        "answer": "Neither follows. CTR alone can double the joint rate while conditional CVR stays unchanged. Causal lift still requires a credible control or identification assumptions."
+      }
+    },
+    "theme/recommendation/slates-business-value": {
+      "source_sha256": "1d20154db7ea9efc012580b2686cf62152f00b6625fb1048f9bede557c81e853",
+      "reviewed": true,
+      "fields": {
+        "title": "Slates and business control: reranking, bidding, and long-term value",
+        "question": "Why is sorting items by individual score not necessarily a good slate?",
+        "takeaway": "Slate value depends on neighbors, position, and selected prefix. Redundancy-aware methods estimate marginal contribution. SORT-Gen uses prefix-conditioned multi-objective slate value. Policy methods trade off exploration, ad load, revenue, and long-term feedback. Titles, creatives, and layout affect exposure and belong in the evaluation. RLBP instead chooses bounded daily PID multipliers; two Q heads learn BU and CPC, then lifecycle weighting combines them. Similar objective weights do not imply identical states, actions, or rewards.",
+        "example": "If three identical ski clips score 0.90, 0.89, and 0.88 and a camping clip scores 0.85, pointwise ranking chooses the first three. A slate model may choose the camping clip once duplicates have low marginal value. Whether this trade-off is worthwhile depends on objectives and constraints.",
+        "pitfall": "Weighted objectives do not guarantee hard ad-load or coverage constraints. Diversity does not guarantee satisfaction. MovieLens clicks, payments, or GMV proxies are mechanism evidence, not revenue. Long-term value needs a corresponding observation horizon.",
+        "reading_order": "Read CDM for relevance and redundancy, SORT-Gen for prefix-dependent value, and PRL-PUTS for prediction versus multi-objective policy. Check gaps between local proxies and production goals."
+      }
+    },
+    "theme/recommendation/slates-business-value/self-test": {
+      "source_sha256": "363030067d4ae4017a36124c45a8ce7b1e3c2dc5b22f93e54deed501216e0804",
+      "reviewed": true,
+      "fields": {
+        "question": "If item-level CTR predictions stay identical, can reordering still change page clicks?",
+        "answer": "Yes. Position exposure, duplicate neighbors, and prefix effects can change slate outcomes despite unchanged pointwise scores."
+      }
+    },
+    "theme/recommendation/research-serving-loop": {
+      "source_sha256": "b30c11e743b6b1d9cf4f65d8c2ef0dcc5600ae3149e0d7f10be60918cdaf8f4f",
+      "reviewed": true,
+      "fields": {
+        "title": "Automated research and efficient serving",
+        "question": "When is a better offline method usable under real requests and continued iteration?",
+        "takeaway": "Move compute to where it is affordable: distillation teaches a light student, request-state sharing avoids repeated encoding, and asynchronous caching removes work from the request path. Automated research tracks hypotheses, execution, validation, and conclusions. Proposing a candidate and actually running and evaluating it are separate. Both research and serving need verifiable execution and independent evaluation.",
+        "example": "An illustrative user encode costs 2 ms and a candidate interaction 0.02 ms. Re-encoding for 100 candidates costs about 202 ms; encoding once and scoring them costs about 4 ms. Real results depend on parallelism, cache, bandwidth, and operator overhead. This is not a production speedup.",
+        "pitfall": "Compare a distilled student with a same-schedule student, not with the stronger teacher. In-process timing is not GPU-cluster throughput. Search selects on validation only, and cost-closed references must not become executable candidates.",
+        "reading_order": "Read Rec-Distill for training-to-serving transfer, ROCS for request reuse, and Self-Evolving RecSys for candidate execution, validation selection, and log feedback. Local mechanisms run, while production serving and A/B remain separate limits."
+      }
+    },
+    "theme/recommendation/research-serving-loop/self-test": {
+      "source_sha256": "55e2d5b09952854349f1d10f2886026e381547aeaaaa8545b5f3f2878dd1e7ac",
+      "reviewed": true,
+      "fields": {
+        "question": "Does writing a new registry name close the research loop if the controller cannot execute or evaluate it?",
+        "answer": "No. Build the candidate, execute its path, obtain comparable validation results, and record failures and limits. A name or proposal is not evidence of improvement."
+      }
+    }
+  }
+}

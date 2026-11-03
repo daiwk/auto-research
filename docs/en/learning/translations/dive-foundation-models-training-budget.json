@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/foundation-models/training-budget": {
+      "source_sha256": "016cb54d74997b8606a3219f90dcfd111177d33876f858e528ae792a247fe10d",
+      "reviewed": true,
+      "fields": {
+        "title": "Training budgets: change the data, the update direction, or the comparison?",
+        "thesis": "Better training within one budget can come from data mixtures, per-example editing, update quality, or lower state costs. DoReMi, Mixing Laws, DataOrchestra, Muon, and ECO act at different points. Muon Paired Budget freezes model selection and asks equal-data and equal-time questions separately.",
+        "axis_0": "Change exposure frequency, content, or parameter updates",
+        "axis_1": "Online feedback, pilot fitting, or an offline teacher",
+        "axis_2": "Costs of preprocessing, development trials, and optimizer state or work",
+        "axis_3": "Equal data, wall-clock time, or frozen candidate-search budget"
+      }
+    },
+    "dive/foundation-models/training-budget/comparison/foundation-models:doremi": {
+      "source_sha256": "dab1c49400448d21a2c23626a3226d85ed46ab96f16c9298ad6ecaff86bf4e09",
+      "reviewed": true,
+      "fields": {
+        "position": "Use small-proxy group DRO on domain excess loss relative to a reference, then transfer the learned mixture to the target.",
+        "tradeoff": "Assumes proxy domain utility transfers. A local two-domain unigram checks weighting, not large-target training."
+      }
+    },
+    "dive/foundation-models/training-budget/comparison/foundation-models:data-mixing-laws": {
+      "source_sha256": "b1c6d230a414c554ac58c8d50b0e8384e8851468e7ff99e66af78970f9e63bf8",
+      "reviewed": true,
+      "fields": {
+        "position": "Run pilot mixtures, fit domain loss as a function of mixture and scale, and search previously untrained mixtures.",
+        "tradeoff": "Pilots cost compute and extrapolation can fail. A small local proxy is not a true multiscale curve."
+      }
+    },
+    "dive/foundation-models/training-budget/comparison/foundation-models:data-orchestra": {
+      "source_sha256": "239375a6643e9a746ecfb9285d83f01a032a22c99614b7e5c4259f64e038fee1",
+      "reviewed": true,
+      "fields": {
+        "position": "Choose Drop, Untouch, or Clean per chunk, then plan denoising, surface repair, or pedagogical enhancement when cleaning.",
+        "tradeoff": "Edits supervision rather than just frequency; excessive deletion or rewriting can hurt. Preserve the negative local rules-based result instead of treating it as large-model cleaning."
+      }
+    },
+    "dive/foundation-models/training-budget/comparison/foundation-models:muon": {
+      "source_sha256": "dd01ade5f7669324e8d64da5b2fc4e733e447e2b62a5bdb331e7622562397a45",
+      "reviewed": true,
+      "fields": {
+        "position": "Approximate a momentum matrix's polar factor for hidden matrix updates; other parameters still use auxiliary AdamW.",
+        "tradeoff": "Changes update geometry but adds orthogonalization and auxiliary optimizer costs. Short local runs do not reproduce efficiency at scale."
+      }
+    },
+    "dive/foundation-models/training-budget/comparison/foundation-models:muon-paired-budget": {
+      "source_sha256": "2c44d2080f2c4eaea21717af104d1e72fb8641dca54bec8e1e39f73e4b04b265",
+      "reviewed": true,
+      "fields": {
+        "position": "Match initialization, data order, and frozen development candidates, and compare data AUC, time AUC, and tuning regret.",
+        "tradeoff": "Comparison protocol, not a new optimizer. Local synthetic trajectories train neither Muon nor AdamW."
+      }
+    },
+    "dive/foundation-models/training-budget/comparison/foundation-models:eco-optimizer": {
+      "source_sha256": "49035132392c36f332be9c4b38854b7916ee98d9cdede90fd65569196603b9dc",
+      "reviewed": true,
+      "fields": {
+        "position": "Update low-precision weights directly and inject requantization error into existing momentum to avoid persistent master weights.",
+        "tradeoff": "Adam needs per-element effective steps; format and rounding matter. Buffer-free rules are not exactly equivalent in general. No local implementation/training; full experiments were too costly."
+      }
+    },
+    "dive/foundation-models/training-budget/analysis/0": {
+      "source_sha256": "3e249e1f853f7b058261535e705b4885873a7eebdb9208df7818e3a563ebf60d",
+      "reviewed": true,
+      "fields": {
+        "title": "Sampling a domain more often differs from rewriting its examples",
+        "body": "DoReMi adjusts domain frequency using excess loss, and Mixing Laws predicts mixtures from pilots. DataOrchestra chooses whether and how to edit each chunk, changing supervision. More cleaned text or lower mean loss does not guarantee target gains. Isolate data volume, content, and preprocessing cost; specify whether raw tokens, processed tokens, or steps are fixed."
+      }
+    },
+    "dive/foundation-models/training-budget/analysis/1": {
+      "source_sha256": "b103d9c1ae7cbb2473efaabc1170335a0e38e848a8b214e97052941ae91d5b15",
+      "reviewed": true,
+      "fields": {
+        "title": "The budget can reverse the conclusion",
+        "body": "Muon changes update direction; ECO changes persistent state and quantized updates. Both can change step time. Paired Budget separates equal-data and equal-time comparisons with frozen development choices, avoiding a new champion per report. Count auxiliary AdamW, preprocessing, and pilots. Formulas and synthetic curves verify accounting only, not actual training efficiency."
+      }
+    },
+    "dive/foundation-models/training-budget/question/mixture-versus-rewrite": {
+      "source_sha256": "d7c4a350f9273a69aa8d2393a3b78925d6e985cee9004829b4e013fb0a2151f0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can DoReMi upweighting and DataOrchestra cleaning change a difficult domain in opposite ways?",
+        "answer": "DoReMi samples more from domains underfit relative to a reference, assuming their contents are useful. DataOrchestra may drop, retain, or rewrite chunks. Upweighting can repeat noise, and aggressive cleaning can remove clean signal. Diagnose the issue and compare equal budgets.",
+        "example": "Rare correct equations can merit more exposure despite high excess loss, whereas corrupted text should be cleaned rather than sampled more."
+      }
+    },
+    "dive/foundation-models/training-budget/question/proxy-feedback-versus-law": {
+      "source_sha256": "457cfe5c02f0f55a3e68ac39858008c0677293bc2375ac6e1403df0a89f9ce43",
+      "reviewed": true,
+      "fields": {
+        "question": "How do DoReMi and Data Mixing Laws differ in assumptions when choosing large-model mixtures from small runs?",
+        "answer": "DoReMi assumes proxy excess-loss dynamics identify worthwhile domains. Mixing Laws assumes pilot proportions and scales sufficiently fit a loss surface for untested combinations. Proxy-target differences can break either. Record pilot costs and evaluate the target independently rather than reporting fitted scores as training.",
+        "example": "A proxy may underfit code that a large model already understands, and fitted curves may fail at extreme mixtures."
+      }
+    },
+    "dive/foundation-models/training-budget/question/equal-steps-versus-time": {
+      "source_sha256": "f8a46aeb1f94527cb6b3cf2d18c22a30748d9f3be501cb1e3dbe5a489f0a242f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't lower Muon loss at equal tokens prove a win under fixed training time?",
+        "answer": "Tokens control data exposure, not orthogonalization, auxiliary AdamW, or throughput. Compare validation on the shared observed time range using frozen development choices. Measure ECO's state savings separately, since smaller state need not mean faster steps.",
+        "example": "A more effective but twice as slow update may lose to one that sees more data in the same hour."
+      }
+    },
+    "dive/foundation-models/training-budget/update/2026-10-27/0": {
+      "source_sha256": "026867d4d97204d307d13c11b7a7f42311f9038cc687c8ded05317c9b5fdb20c",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial version: compared learned domain mixtures, pilot curve extrapolation, example-level editing, matrix optimization, and low-precision states under paired-budget comparisons."
+      }
+    }
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:residency-rl/mechanism": {
+      "source_sha256": "706631d1a6b543482b3c9043259ce698115206b6b4ce1104ecbc98be569fdf76",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep hidden references on the environment and judge side in simulations with asymmetric information?",
+        "answer": "The policy must gather evidence through questions, tools, and observations. Direct reference access bypasses long-horizon decision making. Isolate scoring dimensions before aggregation to reduce contamination, but the reward formula is not the full environment or professional capability. Local diagnostics are not clinical efficacy or decision reliability.",
+        "example": "If a state should be revealed only after querying it, do not provide the reference summary in the policy prompt and call the result autonomous evidence collection."
+      }
+    },
+    "qa/agent-research:residency-rl/basics": {
+      "source_sha256": "d50bcaca3ab5b67b34324f72f8e9ad878acf33ac533ee262b1a0a546544f0999",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does ResidencyRL use multi-turn simulation instead of only static knowledge questions?",
+        "answer": "Active inquiry, tool use, and long-horizon decisions need observed interaction effects. The method connects scenario generation, information-asymmetric environments, isolated multidimensional judges, and GRPO to train an interactive policy rather than memorizing answers.",
+        "example": "The agent must decide what to ask next from new observations rather than receiving all hidden scenario information up front."
+      }
+    },
+    "qa/agent-research:residency-rl/comparison": {
+      "source_sha256": "ff905f285b659c0565e5ee2e75959b5684e336eef12ab67ed38f51c231918989",
+      "reviewed": true,
+      "fields": {
+        "question": "How does aggregating six reward dimensions differ from implementing the full simulation training algorithm?",
+        "answer": "Aggregation combines already obtained normalized scores and penalties. The method also requires scenarios, actual interactions, separate judges, and policy updates. Fixed scores or a loss wrapper cannot replace that chain.",
+        "example": "Combining six numbers into R does not establish that the model performed and learned from a simulated interaction."
+      }
+    },
+    "qa/agent-research:residency-rl/implementation": {
+      "source_sha256": "c57238c8e163bd648abfd3ef0adf6634a5fc048d1a8cab27142417762c2e4650",
+      "reviewed": true,
+      "fields": {
+        "question": "Why cap the ResidencyRL penalty with min(3,P) rather than arbitrarily clipping total reward?",
+        "answer": "First calculate three times the weighted normalized dimension scores, then subtract a penalty capped at three. Preserve order and the distinct terms. Hidden scenario information is for the environment and judges; isolated judge calls must not pass the reference to the policy.",
+        "example": "Increasing P from 4 to 10 still deducts 3; it does not change the other dimensions' scores."
+      }
+    },
+    "qa/agent-research:envace/mechanism": {
+      "source_sha256": "566a8b85233c9fa0f69ebe75d1af5a7ae35c6273e0303660ec8b7aaf2951d952",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compute group-relative advantages separately for acting and rehearsal?",
+        "answer": "Action success and observation-prediction rewards have different scales and objectives. Centering them together lets one role's high scores suppress the other's learning. Separate groups let the shared policy learn environment prediction and plan with private rehearsal. Imagined observations are not tool feedback or execution evidence.",
+        "example": "A high score for predicting an open door should not mistakenly reward a failed real action; keep rehearsal distinct from the actual tool result."
+      }
+    },
+    "qa/agent-research:envace/basics": {
+      "source_sha256": "afee135a7bd9e82495446c98d8767ae5a02287572f82e848b1f692a18922639b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does EnvACE switch the same policy into a rehearsal role?",
+        "answer": "It predicts the next observation between real actions, performing limited private look-ahead without a separately trained world model. Training constrains acting and rehearsal; a planning prediction is not a tool execution.",
+        "example": "The agent imagines a likely response before deciding whether to take the action."
+      }
+    },
+    "qa/agent-research:envace/comparison": {
+      "source_sha256": "fcf2cd95c64d18bef32de6b038049653e6d6f77cbd0ff3ddf0b958f3661ee635",
+      "reviewed": true,
+      "fields": {
+        "question": "How does same-policy rehearsal differ architecturally from a separate world model?",
+        "answer": "Rehearsal reuses the agent policy under a role condition. An independent world model has its own prediction model and training and maintenance costs. Reuse does not guarantee accuracy: keep imagined observations and real feedback separate and compute role advantages separately.",
+        "example": "'The tool may succeed' from rehearsal is not a successful tool return."
+      }
+    },
+    "qa/agent-research:envace/implementation": {
+      "source_sha256": "5a96990eb5aaac344a34b7cc61ece8354a4712c1657ad92201fdea2f1a4b20ac",
+      "reviewed": true,
+      "fields": {
+        "question": "Why exclude rehearsal predictions from EnvACE's real tool-response count?",
+        "answer": "Counting them would disguise imagination as execution evidence. The documented mini-suite has real_tool_responses=0; rehearsal and role-wise updates establish those paths, not browser or real-tool success.",
+        "example": "Three predicted observations are three rehearsals, not three actual API calls."
+      }
+    },
+    "qa/agent-research:cipo/mechanism": {
+      "source_sha256": "68ae60752bd5b8142c851015acea66017b55c93b8937e650645d7a6d29389032",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can terminal answer rewards foster confirmation bias, and how does dense evidence credit help?",
+        "answer": "The model may guess first and retrieve only supporting information, with an accidentally correct answer hiding poor search. Credit turns where external evidence changes later actions to reward use of information rather than call counts. Keep global outcomes so novelty does not divert attention from the question.",
+        "example": "If a search disproves a guessed date and the agent checks another source, distinguish that evidence-driven change from repeating the original guess."
+      }
+    },
+    "qa/agent-research:cipo/basics": {
+      "source_sha256": "1bd586e8b6217baf3f57629c699598ee667de45f15b1ebab2ed73e88db511c1f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CIPO add evidence credit to intermediate search steps?",
+        "answer": "Final answer reward does not show whether retrieval affected decisions and may encourage confirming prior beliefs. CIPO credits later action changes informed by external evidence and combines dense credit with global outcomes.",
+        "example": "Revising a plan after finding counterevidence is more informative than appending an irrelevant citation."
+      }
+    },
+    "qa/agent-research:cipo/comparison": {
+      "source_sha256": "fca77ca8eafdd13326dec3dcb77dbc11656847a3064179dcf4d5cdd3c98854b4",
+      "reviewed": true,
+      "fields": {
+        "question": "How does CIPO evidence-impact credit differ from rewarding citation counts?",
+        "answer": "Citation counts measure surface form. Evidence credit concerns whether external information affects later actions. Seeing retrieved text alone does not establish causal influence; verify it under the method's definition.",
+        "example": "Ten links that change nothing may be less useful than one piece of evidence that changes a decision."
+      }
+    },
+    "qa/agent-research:cipo/implementation": {
+      "source_sha256": "b88b645b96861c4cf3d8bbde0fef0186900228529ad7c707c50765fb880cf3db",
+      "reviewed": true,
+      "fields": {
+        "question": "Which advantage remains at the λ=0 and λ=1 boundaries in CIPO?",
+        "answer": "λ=0 uses only outcome and λ=1 only evidence, checking the mixing direction. Intermediate values combine them. Bind turn credit to real trajectory positions, and do not replace local mini-suite results with the paper's large-model scores.",
+        "example": "If evidence still changes updates at λ=0, check coefficients or a leftover branch."
+      }
+    },
+    "qa/agent-research:agent-opsd/mechanism": {
+      "source_sha256": "8e38a325e73708027b0074830ee7acd82b0f730880e1d06f1b7e5676376cb16a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why identify pivotal turns from changes between adjacent success beliefs rather than the final belief?",
+        "answer": "The final value mixes all prior evidence and cannot localize the decisive turn. Accumulate teacher–student token probability differences in log odds and use the per-turn sigmoid belief increment to identify a local change. This is hindsight attribution for training; privileged replay and references stay out of independent evaluation policies.",
+        "example": "If a tool response causes belief to jump after several uneventful steps, its increment identifies the turn better than broadcasting a high final belief."
+      }
+    },
+    "qa/agent-research:agent-opsd/basics": {
+      "source_sha256": "dbe9a3e45e591ff1fbf6a224e74f2b6017337baec89d3e599c9fc738f04dead3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does AgentOPSD use turn evidence to update success belief recursively?",
+        "answer": "Trajectory rewards do not identify key decisions. Aggregate teacher/student token log-probability gaps from privileged replay by turn, accumulate them in log odds, and assign local credit from successive belief changes.",
+        "example": "A tool choice that sharply raises belief is easier to localize from the change than from an already high level."
+      }
+    },
+    "qa/agent-research:agent-opsd/comparison": {
+      "source_sha256": "c68db1c7d51ebe6f9da9114aacf9ee06e850ebc1ecc7451b83c162291358321d",
+      "reviewed": true,
+      "fields": {
+        "question": "Does critic-free AgentOPSD require no teacher information?",
+        "answer": "No. It has no independent value critic, but turn evidence still uses teacher/student differences in privileged replay. Mini-suite state updates do not establish actual large-model teacher rollouts and policy training.",
+        "example": "No critic network does not remove the teacher distribution required for e_t."
+      }
+    },
+    "qa/agent-research:agent-opsd/implementation": {
+      "source_sha256": "bb92a86d70b82a8a47fcee088c25d426ac3e14b6f6a1baf5541893614a042c22",
+      "reviewed": true,
+      "fields": {
+        "question": "Why accumulate AgentOPSD evidence in log odds and take sigmoid differences?",
+        "answer": "Update log-odds state ℓ_t=ℓ_{t−1}+e_t and credit the difference between adjacent sigmoid beliefs. Adding e_t directly to a probability can leave its range and changes accumulation. Compute large log odds stably, and keep privileged replay out of evaluation policy inputs.",
+        "example": "The same e_t changes different prior beliefs by different amounts; it is not a fixed additive probability adjustment."
+      }
+    }
+  }
+}

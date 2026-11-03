@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:rfpo/basics": {
+      "source_sha256": "15604872a45144ebbed4bcff87ec26b9c6a3d146100fb2d43cca3e776e83389e",
+      "reviewed": true,
+      "fields": {
+        "question": "Does RFPO reward-free mean no quality signal?",
+        "answer": "A calibrated frozen critic predicts prefix success instead of costly external terminal rewards. Supervision moves into the critic, whose reliability still matters.",
+        "example": "An unfinished solution can get a success estimate because of prior evaluation learning, not by knowing the answer from nothing."
+      }
+    },
+    "qa/post-training:rfpo/comparison": {
+      "source_sha256": "c36e1dd7f43f32c1d29cfb73625ea76a6daeac0725116beeaece8d3a31c2d1c0",
+      "reviewed": true,
+      "fields": {
+        "question": "What risk comes from sharing a critic for reward and baseline?",
+        "answer": "Shared bias can be exploited by the policy. Length debiasing and binarization limit shortcuts without ensuring attack resistance. Critic score itself isn't evidence of capability gains.",
+        "example": "If the critic favors verbosity, the policy may simply lengthen responses."
+      }
+    },
+    "qa/post-training:rfpo/implementation": {
+      "source_sha256": "41747f3c01eb2c3b4f11ecad0477c31e8bb019390f6d79eece5862f783e6fb22",
+      "reviewed": true,
+      "fields": {
+        "question": "Why freeze the RFPO critic and distinguish unfinished forecasts?",
+        "answer": "Freezing keeps the evaluation baseline stable. A forecast handles missing terminal outcomes, not verified success. Local debiasing, binary reward and GAE kernels do not train a long-reasoning model.",
+        "example": "A high estimate on a truncated trace remains an estimate, not an answer labeled correct."
+      }
+    },
+    "qa/post-training:rfpo/mechanism": {
+      "source_sha256": "4b9c23fc97eccaa34cb7964ff2a26db2c4225ea9ff252a296c950c9174544582",
+      "reviewed": true,
+      "fields": {
+        "question": "Why debias and binarize a frozen critic instead of maximizing its continuous score?",
+        "answer": "Freezing stops parameter drift, not bias. Policies can exploit length or other shortcuts. Debias and binarize prefix success estimates while using the critic for baselines and unfinished forecasts. Reward-free reuses supervision rather than removes it.",
+        "example": "A length-biased critic is exploitable even when frozen."
+      }
+    },
+    "qa/post-training:graft/basics": {
+      "source_sha256": "07d343458f04db27c0d4d90b18c5140341dd1662ed0077e3457b5c56e9d57479",
+      "reviewed": true,
+      "fields": {
+        "question": "When does GRAFT borrow a peer group?",
+        "answer": "When receiver candidates all fail and a peer group for the same prompt contains both success and failure. Only then is there transferable relative credit; it is not copying one answer from the best model.",
+        "example": "Four receiver failures can use a peer group with both correct and incorrect replies."
+      }
+    },
+    "qa/post-training:graft/comparison": {
+      "source_sha256": "e5a57a937253e1964289eddd21542c93a5fd10ffefeb10e68e9a561549a55a83",
+      "reviewed": true,
+      "fields": {
+        "question": "Why borrow a complete peer group rather than one success?",
+        "answer": "It retains internal advantages. Adding only a positive changes the group distribution and credit baseline. Borrowed trajectories are not receiver on-policy data.",
+        "example": "Keep peer failures to preserve why peer successes have relative positive advantage."
+      }
+    },
+    "qa/post-training:graft/implementation": {
+      "source_sha256": "c984b24ab9376029a36819ad904a129e5f8b94f5e8d04ce582b59af659b2dafc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use average sequence likelihood for cross-tokenizer GRAFT compatibility?",
+        "answer": "Token counts and boundaries differ, so use sequence-level compatibility then ratio clipping to bound updates. Track text rescoring, provenance and group advantages. This doesn't make policies identical.",
+        "example": "The same sentence tokenized differently cannot be compared by subtracting probabilities position by position."
+      }
+    },
+    "qa/post-training:graft/mechanism": {
+      "source_sha256": "572bb501833d9d7ac167524e153e5e8a7f606c5b9df1af2c5c60b0ab1fec8961",
+      "reviewed": true,
+      "fields": {
+        "question": "Why exchange full same-prompt peer groups instead of only a winning answer?",
+        "answer": "A receiver all-fail group lacks differentiation; the whole peer group preserves successes, failures and their relative credit. Cross-model/tokenizer mismatch needs sequence compatibility and token clipping. Do not mark borrowed data on-policy.",
+        "example": "Give the receiver a peer's complete group and credit rather than inserting a single gold answer."
+      }
+    },
+    "qa/post-training:tlm-dre/basics": {
+      "source_sha256": "b0032801e6f6bbb7d89fe25f64d784515492729b920958ec84d28481e0228220",
+      "reviewed": true,
+      "fields": {
+        "question": "Why model turns rather than average all tokens in TLM-DRE?",
+        "answer": "Turns have different roles and lengths. Multiscale weighting preserves dialogue structure; token averaging may let long turns dominate. Actual credit depends on density ratios and feedback.",
+        "example": "A short crucial tool choice should not be drowned out by a verbose explanation."
+      }
+    },
+    "qa/post-training:tlm-dre/comparison": {
+      "source_sha256": "ec0bd469dab6a8a5950169ecde467f3a4e8723bb4d5c3341dcbc94c64033be59",
+      "reviewed": true,
+      "fields": {
+        "question": "How does asymmetric positive/negative density weighting differ from uniform weights?",
+        "answer": "Positive and negative evidence reinforce and suppress differently. A common curve removes that design, but asymmetry still needs real multi-turn evaluation.",
+        "example": "Rewarding a correct action and suppressing a wrong continuation need not share weights."
+      }
+    },
+    "qa/post-training:tlm-dre/implementation": {
+      "source_sha256": "69ed43fe93f45ee89917209f2f789d390929a2d0812f845fdbd797daf118b67d",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local TLM-DRE kernel demonstrate real multi-turn agent training?",
+        "answer": "No. It computes reference turn weights and asymmetric token updates without an agent environment. Retain turn memberships; concatenating into one turn changes the method.",
+        "example": "Three tool turns collapsed into a string cannot test the original allocation."
+      }
+    },
+    "qa/post-training:tlm-dre/mechanism": {
+      "source_sha256": "b692412a69642b94f0e4f363dccee5ee84eba8e848114e5dfb34b18d743b31a4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why upweight low-confidence TLM-DRE turns?",
+        "answer": "Length-normalized reference logp proxies how well a turn is learned. Lower confidence receives greater scale, changing multi-turn density ratios and asymmetric pressure. Low likelihood does not mean wrong. Local diagnostics do not establish generalization.",
+        "example": "Correct a hesitant tool decision more strongly than a confident recap, while recognizing rare valid actions can be unlikely."
+      }
+    },
+    "qa/post-training:mad-rl/basics": {
+      "source_sha256": "d692cfbb69bd08708e8b15e1dce76fb0bb7fa5b18f39048baff1669aebed1cae",
+      "reviewed": true,
+      "fields": {
+        "question": "Why target output classes rather than token entropy in MaD-RL?",
+        "answer": "Classes measure semantic result frequencies; token entropy measures surface uncertainty. Many wordings can yield one class. Combine empirical-to-target class mismatch with correctness.",
+        "example": "Many phrasings recommending the same item category do not improve category coverage."
+      }
+    },
+    "qa/post-training:mad-rl/comparison": {
+      "source_sha256": "2b2ae3c306f4c03a5a495bd46eb4b59ac86c52ec7ef4752153f6175a7135b9fd",
+      "reviewed": true,
+      "fields": {
+        "question": "What tradeoff does distribution matching add beyond maximizing accuracy?",
+        "answer": "Accuracy can favor easy classes, while matching moves mass toward target frequencies. Report both: matching doesn't guarantee correctness and high accuracy doesn't guarantee target ratios.",
+        "example": "Balanced classes can still include wrong replies in one category."
+      }
+    },
+    "qa/post-training:mad-rl/implementation": {
+      "source_sha256": "e60346872ed98109328e444ed8e835ad580303945cbad771ff2efa897850244e",
+      "reviewed": true,
+      "fields": {
+        "question": "Can invalid outputs be dropped from MaD-RL frequency denominators?",
+        "answer": "Not arbitrarily; doing so changes empirical frequencies and rewards. Treat frequencies as fixed per update, smooth zero target probabilities explicitly, and do not invent gradients for unsampled categories. Local diagnostics aren't full training.",
+        "example": "Dropping all unclassifiable samples can make remaining frequencies appear closer to target."
+      }
+    },
+    "qa/post-training:mad-rl/mechanism": {
+      "source_sha256": "b18e7d99586bcb9f70fab832ef6f5a86ae31690f466f294f1d1b4b205e4742f0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why match output-class frequencies instead of just raising token entropy?",
+        "answer": "Randomized words can collapse to the same decision. Map outputs to classes and reward empirical-to-target similarity plus correctness. Hold frequencies fixed per update; unsampled classes get no fictitious on-policy examples. Specify invalid-output treatment.",
+        "example": "Check decisions directly even when language appears diverse."
+      }
+    },
+    "qa/post-training:tasco/basics": {
+      "source_sha256": "b0add0070254f580e5d4711fa4d80795deeb578884f9bcdd34131dfc05b5bb75",
+      "reviewed": true,
+      "fields": {
+        "question": "Does TASCO adapt backbone weights or a lightweight prefix?",
+        "answer": "Freeze the backbone and optimize an added prefix, changing conditioning without retraining the model or selecting only by sampling. It uses unlabeled current-task signals, never test gold.",
+        "example": "Update prefix vectors and reread probabilities while leaving model layers and answer labels untouched."
+      }
+    },
+    "qa/post-training:tasco/comparison": {
+      "source_sha256": "23b9056f712a01a37decdfb55e2c853f99e88c0b037660c00ffb4930e78eac1e",
+      "reviewed": true,
+      "fields": {
+        "question": "How do TASCO prefix updates and best-of-N spend extra compute differently?",
+        "answer": "TASCO optimizes conditioning before a frozen model predicts; best-of-N generates and selects more candidates. Compare optimizer forwards/backwards and generation, not just candidate count.",
+        "example": "Several gradient steps and several independently generated answers are different workloads."
+      }
+    },
+    "qa/post-training:tasco/implementation": {
+      "source_sha256": "8e575e83441c796f3a8a95fc3172a9f168875e9fd1980c408bf38310e43b9882",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local TASCO stability penalty train an actual LM prefix?",
+        "answer": "No. It implements random neighborhood perturbation and a stability reference kernel without a frozen LM prefix path. Small-vector tests do not establish test-time gains.",
+        "example": "Stable numeric features do not show a language model's prefix was optimized on tasks."
+      }
+    },
+    "qa/post-training:tasco/mechanism": {
+      "source_sha256": "fafb92e1d25cb2f02d60d73b1412a82f1e774c6963f092dc2e6614004403ff5c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check stability in addition to confidence during TASCO adaptation?",
+        "answer": "Confidence can reinforce wrong answers. Keep backbone fixed, tune a small prefix and penalize unstable predictions under neighborhood perturbations. Stability is unlabeled evidence, not a correctness oracle; no real local LM prefix training.",
+        "example": "If equivalent wording changes the answer, high original confidence alone is a poor signal."
+      }
+    },
+    "qa/post-training:probe-erpo/basics": {
+      "source_sha256": "ee19f5a6f0aa5be3d08fe7a4f42ed4fb3fba8a766575e0a77e41735a71d9fb52",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Probe-ERPO use probes independent of final answers?",
+        "answer": "Gold is unavailable during test-time adaptation. Using it would defeat unlabeled adaptation. PCR uses probe consistency to decide reinforcement vs negative constraints.",
+        "example": "Check agreement from intermediate states instead of matching to gold."
+      }
+    },
+    "qa/post-training:probe-erpo/comparison": {
+      "source_sha256": "ba70e9422decc24ebfb8d2c8854ecc6360e62907461461cd14f93d6c66c1753c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why aren't high-PCR reinforcement and low-PCR negative ranking ordinary pseudo-labeling?",
+        "answer": "Low consistency supplies no reliable positive, so constrain poor candidates rather than canonize the majority. High agreement is only a clue; entropy control and independent evaluation still matter.",
+        "example": "When candidates conflict, avoid weak ones without declaring one correct."
+      }
+    },
+    "qa/post-training:probe-erpo/implementation": {
+      "source_sha256": "f17f58f7648925ed3214be88de51feee8cc513046eefde3b6ac66f215ff71a13",
+      "reviewed": true,
+      "fields": {
+        "question": "May Probe-ERPO's negative rank mask read the answer key?",
+        "answer": "No. Use allowed probes and candidate rankings only; gold appears in independent scoring. A fixed mask validates the update path, not real probe discrimination.",
+        "example": "A fixture can specify which positions to suppress without teaching automatic error detection."
+      }
+    },
+    "qa/post-training:probe-erpo/mechanism": {
+      "source_sha256": "f190859b776ac1559798b575f04832947b5f25ab645003b8a00162326720a258",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use answer-independent probe consistency and not reinforce the majority at low agreement?",
+        "answer": "Self-labeling can repeat errors. Output-free probes estimate consistency; high/low branches differ. Low agreement constrains lower ranks while entropy preserves exploration. Consistency is not supervised correctness.",
+        "example": "Conflicting probes justify suppressing weak options without blindly rewarding the highest vote count."
+      }
+    }
+  }
+}

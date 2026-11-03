@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:tcr/basics": {
+      "source_sha256": "8c461bbf88528f74cc31fe4433e93988c7d8acf9f3215671ba3fece387d4c3ab",
+      "reviewed": true,
+      "fields": {
+        "question": "Why subtract outcome EMA from TCR process scores?",
+        "answer": "Process and outcome can double-reward success. The residual captures improvement not already explained by outcome before combining them. EMA is training state, not item truth.",
+        "example": "A correct answer should not automatically earn the same success signal again through process scores."
+      }
+    },
+    "qa/post-training:tcr/comparison": {
+      "source_sha256": "5d799e1d018d542ab1d9edf56ec9105000d2e619a0920d2e302daa758e1330be",
+      "reviewed": true,
+      "fields": {
+        "question": "How does TCR residual differ from adding process and outcome rewards?",
+        "answer": "Addition accumulates both signals. Subtracting a dynamic outcome baseline reduces duplicate credit. It does not prove exact decorrelation or remove judge bias.",
+        "example": "A higher outcome baseline reduces extra credit for an unchanged process score."
+      }
+    },
+    "qa/post-training:tcr/implementation": {
+      "source_sha256": "56b89629ede973da827131f4e4c44570fd369ec21564889f9ac0fd7cd9238208",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local TCR call a model to generate per-example checklists?",
+        "answer": "No. Candidate policies test residual computation, not real checklist generation or free-text training. Update EMA in training order, not from test performance.",
+        "example": "A hand-provided checklist does not validate automatic checklist quality."
+      }
+    },
+    "qa/post-training:tcr/mechanism": {
+      "source_sha256": "5a8104906d131bcd6baeccdd06372a9769b0cd6d61055bbc7ec5c95dfc05f2ab",
+      "reviewed": true,
+      "fields": {
+        "question": "Why subtract a moving outcome baseline rather than add both rewards directly?",
+        "answer": "Process ratings often track correctness, so direct sums can count success twice. The moving residual attempts to isolate extra reasoning benefit. It depends on checklist and baseline quality, and local proxies don't establish full reasoning performance.",
+        "example": "If correct answers routinely earn high process scores, only an improvement beyond the usual outcome level gives new evidence."
+      }
+    },
+    "qa/post-training:dynamic-rubric/basics": {
+      "source_sha256": "3e778c6e71c2576c2d78b1e6dd400a88b3ee793138f8893e3f7fdc1d06f44efb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why build DynamicRubric criteria from the current candidate set?",
+        "answer": "Old rules can saturate after policy gains. New hard negatives need discriminating dimensions and weights, while anchors limit judge drift. Not permission to change rules after outcomes arbitrarily.",
+        "example": "Once every answer meets formatting, look for evidence that still separates quality."
+      }
+    },
+    "qa/post-training:dynamic-rubric/comparison": {
+      "source_sha256": "aff55971058da2c663d5bb87cd5b28f5a576886f7ec2c98e10120517990a6bf2",
+      "reviewed": true,
+      "fields": {
+        "question": "How do discrimination and anchoring pull DynamicRubric in different directions?",
+        "answer": "Discrimination increases sensitivity to current hard cases; anchors retain prior standards and deter co-adaptation. Either alone can reward irrelevant differences or preserve stale criteria.",
+        "example": "Length is easy to distinguish, but an anchor should constrain it if unrelated to quality."
+      }
+    },
+    "qa/post-training:dynamic-rubric/implementation": {
+      "source_sha256": "2f268171d1039fb87ba41ed6c580191cc8f0e546fb9a8ec7523df13dbf8aad9c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why tie DynamicRubric weights to prompt and candidate version?",
+        "answer": "Both determine scoring and new candidates may imply new criteria. Log rubric and anchor versions; don't compare rewards under undeclared weight changes.",
+        "example": "Score changes across two rounds can reflect changed criteria, not actor gains."
+      }
+    },
+    "qa/post-training:dynamic-rubric/mechanism": {
+      "source_sha256": "b77e7b65b4075575b018d90fb5f40ceaf09e76a8415546752899cfb27ea43fd1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why balance hard-negative discrimination and anchoring?",
+        "answer": "Fixed rubrics can stop separating improved replies; dynamic dimensions help. Discrimination alone can learn stylistic shortcuts, so an anchor stabilizes the reference. Coevolution is not objective improvement without independent tests.",
+        "example": "When formatting saturates, new criteria should not simply favor verbosity unchecked."
+      }
+    },
+    "qa/post-training:taco/basics": {
+      "source_sha256": "a394669d8b20ac787c16406ed0f34a2da5e5aaf7c230586349ba9e9b6efdf1ca",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a correct TACO response contain tokens that shouldn't be reinforced?",
+        "answer": "Terminal correctness only validates the result. Uniform positive credit can reinforce lucky or implausible intermediate tokens. Tail risk smoothly reduces their positive contribution.",
+        "example": "A correct computation with a false explanation is not wholly exemplary."
+      }
+    },
+    "qa/post-training:taco/comparison": {
+      "source_sha256": "fad2594cbea3dbe7df6c88104f9bfb83dc2df29f5755446cc13386c1ed2a69e3",
+      "reviewed": true,
+      "fields": {
+        "question": "Does TACO scale positive and negative advantages the same way?",
+        "answer": "No. Reduce positive credit only for high-risk tokens, leaving nonpositive advantages unchanged. This preserves failure learning.",
+        "example": "A rare word in a failed response should not escape the original penalty solely for high risk."
+      }
+    },
+    "qa/post-training:taco/implementation": {
+      "source_sha256": "165a85e054b20fdcb1b82c912da34b18eb45a0706fa1e7ddde6d8028ac8f0bdb",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local TACO reproduce a contextual tail-risk predictor?",
+        "answer": "No. Candidate actions verify credit direction, not long-CoT token risk. Smooth weights must be between zero and one; don't simply delete all unlikely tokens.",
+        "example": "A supplied risk label tests branching, not automatic detection of implausibility."
+      }
+    },
+    "qa/post-training:taco/mechanism": {
+      "source_sha256": "76c7400bd2d4a7c369e1c889c01e030a67d5741a328bc3451c4c073c99689ced",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reduce only positive high-tail-risk credit?",
+        "answer": "Correct trajectories can contain unlikely, unsound steps. Reduce their positive reinforcement smoothly while retaining negative signals for failures. Contextual risk is not a low-probability equals wrong rule; no real local predictor.",
+        "example": "A lucky correct guess needn't be rewarded as strongly, but its negative feedback in a failed trajectory remains."
+      }
+    },
+    "qa/post-training:scar-shapley-credit/basics": {
+      "source_sha256": "5bdf1098142229703f2dde52cd0b2159001803dc3d170162dc3aed3702b89425",
+      "reviewed": true,
+      "fields": {
+        "question": "Why consider coalitional marginal contributions of spans in SCAR?",
+        "answer": "A span's value depends on other spans. Shapley weights gains over coalitions to allocate terminal reward, including negative contributions.",
+        "example": "An explanation can help only when its premise is also present."
+      }
+    },
+    "qa/post-training:scar-shapley-credit/comparison": {
+      "source_sha256": "b579e68901428c819f22cb841e5f6b07960a9536980a2ac06e90ae442767f574",
+      "reviewed": true,
+      "fields": {
+        "question": "How does the exact local Shapley component differ from the paper's SHAP/Owen pipeline?",
+        "answer": "Enumeration is exponential and accepts small complete value tables only. The full method also has adaptive segmentation and hierarchical approximation.",
+        "example": "Three spans permit all coalitions; dozens of spans do not fit the same budget."
+      }
+    },
+    "qa/post-training:scar-shapley-credit/implementation": {
+      "source_sha256": "fbbb844c34248c9543873b174489cbe1936729a4a548715d42cfc71ca4692285",
+      "reviewed": true,
+      "fields": {
+        "question": "Why place SCAR credit at span end and preserve masked positions?",
+        "answer": "Score coalitions in original order, filling excluded positions with spaces, and assign credit to each span's last token. Keep negatives and zero empty value. Reward conservation requires the corresponding γ=1 condition.",
+        "example": "Joining text across removed middle spans changes the defined coalition."
+      }
+    },
+    "qa/post-training:scar-shapley-credit/mechanism": {
+      "source_sha256": "2891dca1cdcdc04286f4a90621608ccf65b270f1af7510467e063319340398f2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain negative Shapley values and credit only the span's final token?",
+        "answer": "A span may reduce frozen RM value, so clipping breaks decomposition. End-token placement and original-order coalitions define reward scattering. Total equivalence has discount conditions; small exact enumeration isn't Owen approximation or full RLHF.",
+        "example": "A contradictory extra paragraph can reduce value; zeroing its negative credit breaks total equality."
+      }
+    },
+    "qa/post-training:intuitor/basics": {
+      "source_sha256": "d81a7eae70723a8d9637b6a18673405a597d750e72a160dd323c531fcef57253",
+      "reviewed": true,
+      "fields": {
+        "question": "Where does INTUITOR reward come from without an external verifier?",
+        "answer": "Compute self-certainty from each prefix's full next-token distribution and average across the response. This is intrinsic signal, not correctness; use independent evaluation.",
+        "example": "A sharp distribution can still produce wrong arithmetic."
+      }
+    },
+    "qa/post-training:intuitor/comparison": {
+      "source_sha256": "d285e0b489a970680975b0391948e57562ca3f874a598c6708a3dfbaf6f88087",
+      "reviewed": true,
+      "fields": {
+        "question": "Can INTUITOR's intrinsic KL and reference KL be merged?",
+        "answer": "No. Uniform-to-current KL measures certainty; reference KL anchors drift. They use different references and roles. Treating intrinsic reward as regularization changes the target.",
+        "example": "One encourages certainty while another discourages moving from old policy, potentially opposing each other."
+      }
+    },
+    "qa/post-training:intuitor/implementation": {
+      "source_sha256": "0617231555e7664547ab8099a1373eea7a3d602be4cca239b17febf097b16dab",
+      "reviewed": true,
+      "fields": {
+        "question": "Does current intuitor code implement full-vocabulary self-certainty?",
+        "answer": "No. Reward uses sampled-candidate logp+log N and diagnostic KL(p||U), lacking token-level full-vocabulary KL(U||p). Historical scores remain diagnostics even if docs are corrected.",
+        "example": "Changing the documented direction does not alter the executable branch."
+      }
+    },
+    "qa/post-training:intuitor/mechanism": {
+      "source_sha256": "47e982228e316bdd2f071fc9c2930833c999d2d92625f1ee5d3e71a2353d0799",
+      "reviewed": true,
+      "fields": {
+        "question": "Can negative entropy replace INTUITOR self-certainty?",
+        "answer": "No. The paper uses KL(U||p), unlike KL(p||U) or negative entropy; low-probability tails affect directions differently. Local sampled-candidate ratios aren't tokenwise reproduction. Confidence isn't correctness.",
+        "example": "Two distributions with similar maxima can have very different small tails, which KL directions weight differently."
+      }
+    },
+    "qa/post-training:math-shepherd/basics": {
+      "source_sha256": "476d0e918eda729d62c13ae1249d46159b3206f0fd740858b65c4ffdf0d79775",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Math-Shepherd get step supervision without human step labels?",
+        "answer": "Continue repeatedly from a prefix and estimate reachable success from final answer checks, then train a process verifier. This is not direct human judgment of each line.",
+        "example": "A prefix with mostly correct continuations receives a higher success estimate."
+      }
+    },
+    "qa/post-training:math-shepherd/comparison": {
+      "source_sha256": "c0f2687356174d52b2e639808bdccfe658a9f58055bc3b9d8f932f61789e91b7",
+      "reviewed": true,
+      "fields": {
+        "question": "How does continuation success differ from correctness of a step?",
+        "answer": "Later policy can repair an error or fail after correct reasoning. Estimated reachability combines prefix and continuation policy, not a logical proof.",
+        "example": "A wrong step followed by frequent corrections should not be imitated simply because continuations succeed."
+      }
+    },
+    "qa/post-training:math-shepherd/implementation": {
+      "source_sha256": "d30b0aa2bff687915ed2c0def7ca2e7c5cf36ecb755cd73677607ffcb30fac54",
+      "reviewed": true,
+      "fields": {
+        "question": "Can Math-Shepherd continuations see gold when constructing labels?",
+        "answer": "No. Gold is only for terminal checking; actually sample from the specified prefix rather than constructing a path from known answers. No full local LLM data/PRM training.",
+        "example": "The grader can know the result without including it in the continuation prompt."
+      }
+    },
+    "qa/post-training:math-shepherd/mechanism": {
+      "source_sha256": "e461515856557b8fb429a017b5caa78249eeb542dd2e18e2cf20cffcf79fb7b3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't a continuation-based step label a direct correctness judgment?",
+        "answer": "It estimates success under a particular policy and sampling budget. Correct prefixes can get low estimates and wrong ones can be repaired. Separate reachability from correctness; use gold only for annotation or independent scoring.",
+        "example": "Low success after a correct second step may reflect frequent final arithmetic mistakes, not a wrong second step."
+      }
+    }
+  }
+}

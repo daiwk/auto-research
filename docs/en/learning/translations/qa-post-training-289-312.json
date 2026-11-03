@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:dr-grpo/basics": {
+      "source_sha256": "7761cea6e28d164195c6fd72a9501a01a237e2e5bbd87166aeb0f5a6260b319f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why audit both response-length averaging and group standard deviation in Dr. GRPO?",
+        "answer": "They change weights by length and problem difficulty, not just numerical stability. Remove both while retaining group mean centering so reward differences preserve their scale.",
+        "example": "Equal reward gaps get different magnitudes after normalization when group variances differ."
+      }
+    },
+    "qa/post-training:dr-grpo/comparison": {
+      "source_sha256": "63e46d99facdbaabf737641c53d5011f6395f64f1882585c7fe3b67eff42abbc",
+      "reviewed": true,
+      "fields": {
+        "question": "Does Dr. GRPO still center group rewards like GRPO?",
+        "answer": "Yes. Subtract same-prompt mean, but omit the specified length and SD normalization. Dropping SD does not remove the baseline, and adding a global SD would change the target.",
+        "example": "Judge each reply relative to group mean without dividing by group variation."
+      }
+    },
+    "qa/post-training:dr-grpo/implementation": {
+      "source_sha256": "059206d1199bd73baa757bc2a6c1a006ee7384d881d70d455867b2444d0a71b4",
+      "reviewed": true,
+      "fields": {
+        "question": "Can proxy lengths establish removal of long-CoT length bias?",
+        "answer": "No. A candidate policy has no generated length distribution. Proxy lengths expose normalization differences, not real token losses or long responses.",
+        "example": "Changing a simulated length doesn't produce early stopping behavior."
+      }
+    },
+    "qa/post-training:dr-grpo/mechanism": {
+      "source_sha256": "a2c0054f531af47f81ad2e62ce40146c1151454fb1c8d6825fbf768562d42cbe",
+      "reviewed": true,
+      "fields": {
+        "question": "Why remove both group SD and within-response averaging?",
+        "answer": "SD reweights difficulty groups by their local variation; token averaging changes long-versus-short contribution. Keep centered rewards and fixed aggregation, not remove all normalization or promise universal gains.",
+        "example": "A tiny group SD can amplify a comparable reward gap; response length adds another weight."
+      }
+    },
+    "qa/post-training:dapo/basics": {
+      "source_sha256": "de019007bd0462a4b8a7dcec4502bcc65ad4b7cb487b736c1fcdafabac91b9e0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why dynamically skip all-correct and all-wrong DAPO groups?",
+        "answer": "Binary rewards without variance give no relative advantage and waste batch slots. Sample groups with distinctions; this doesn't solve exploration on every difficult problem.",
+        "example": "Four failures give no ordering, so resample rather than repeatedly train on zeros."
+      }
+    },
+    "qa/post-training:dapo/comparison": {
+      "source_sha256": "3d64fbe8aa6d4c8607bbabedc8610517acbaf06f42793912aab2fcb599f4e492",
+      "reviewed": true,
+      "fields": {
+        "question": "Which side does DAPO Clip-Higher relax?",
+        "answer": "Raise the upper bound to retain room for beneficial probability increases; lower bound remains separate. Dynamic sampling, token loss and overlength shaping are also defining pieces.",
+        "example": "Easier increase of a useful action needn't loosen downward changes."
+      }
+    },
+    "qa/post-training:dapo/implementation": {
+      "source_sha256": "7789b7c041f43eae8e3ec461e152dabea9671c26d906d62e65c1e6b25b4dadde",
+      "reviewed": true,
+      "fields": {
+        "question": "How does DAPO token-level normalization differ from per-response averages?",
+        "answer": "Sum over valid response tokens, then normalize together. Per-response means weight lengths differently. Also preserve dynamic filtering and overlength penalty. Proxy lengths don't reproduce real masks or 32B training.",
+        "example": "Averaging a short and long reply separately is not averaging every token together."
+      }
+    },
+    "qa/post-training:dapo/mechanism": {
+      "source_sha256": "b723853f0da0f69094de6cda65d2b5197bb8a6319a5aee044e8921deb4926180",
+      "reviewed": true,
+      "fields": {
+        "question": "Why drop all-correct groups in Dynamic Sampling?",
+        "answer": "Centering equal all-correct/all-wrong rewards yields no relative direction, not worthless replies. Resample differentiable groups; Clip-Higher, token aggregation and length shaping handle other effects. Never select questions on test.",
+        "example": "A mixed-success group provides group-relative learning absent from an equal-reward group."
+      }
+    },
+    "qa/post-training:reinforce-plus/basics": {
+      "source_sha256": "ee9f81fe170de595408e7d9743a70497f7992830ad0ca8cff706b2c4625cdbe2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why avoid each prompt's SD in REINFORCE++?",
+        "answer": "Few samples make local variance noisy and can overamplify some difficulty groups. Keep group centering and use a global scale without a critic.",
+        "example": "An accidentally tiny variance should not give one prompt excessive weight."
+      }
+    },
+    "qa/post-training:reinforce-plus/comparison": {
+      "source_sha256": "a053e9292b5cc72c9ffce9cfd33e01dfa9c617cb0e9f8a89b2c24e83734fa6aa",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't global EMA normalization a reordering of GRPO normalization?",
+        "answer": "Statistics use different domains. Group means compare same-prompt samples; global second moments share scale. This changes cross-problem weighting.",
+        "example": "Groups with the same gap but different variances differ under local division, not a shared scale."
+      }
+    },
+    "qa/post-training:reinforce-plus/implementation": {
+      "source_sha256": "10b04a2148bffae8fe9c11be9d578c73b0aed648699b90530a5ddaba121905d7",
+      "reviewed": true,
+      "fields": {
+        "question": "Can REINFORCE++ reestimate EMA from evaluation gold?",
+        "answer": "No. Maintain training state in batch order; test answers cannot tune scale. Small-candidate EMA validates semantics, not the large-batch distribution.",
+        "example": "Scanning all test rewards to set the denominator leaks evaluation information."
+      }
+    },
+    "qa/post-training:reinforce-plus/mechanism": {
+      "source_sha256": "d7727925177e12a75222d033dacda4b1a5f4c48b2917525b08a8532121f17be1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why center locally but scale globally?",
+        "answer": "Group mean removes common difficulty; local SD may amplify incidental low variance. Cross-batch scale makes units consistent without critic. Window and distribution matter; small EMA tests don't prove stability.",
+        "example": "Two similarly separated groups shouldn't receive very different weights just because one has tiny variance."
+      }
+    },
+    "qa/post-training:rloo/basics": {
+      "source_sha256": "271ceabf4e7475b59194a08606839ae9fe95dde4943fd986508c724794adf890",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does RLOO treat a full response as one action?",
+        "answer": "Terminal RLHF rewards suit response-level REINFORCE and avoid prefix values. Other same-prompt samples form a variance-reducing baseline; multiple samples are still needed.",
+        "example": "A summary's terminal score weights its complete logp relative to peers."
+      }
+    },
+    "qa/post-training:rloo/comparison": {
+      "source_sha256": "4d8db4eb40091e8ed20a80bd2c2a10393fa501ab3e7642165b76eb0022293794",
+      "reviewed": true,
+      "fields": {
+        "question": "How does leave-one-out differ from a mean including the current sample?",
+        "answer": "LOO excludes the sample's own reward from its baseline. Including it changes dependency and scaling. Both are critic-free, but group size matters.",
+        "example": "With two replies, the first's LOO baseline is the second, not both averaged."
+      }
+    },
+    "qa/post-training:rloo/implementation": {
+      "source_sha256": "681097e690b57589fb0608b0ecfaf6fd0a6dc49a4b7eef990d59fc3df5cc1cd4",
+      "reviewed": true,
+      "fields": {
+        "question": "Can RLOO use the same formula at K=1?",
+        "answer": "No. K−1 is zero and there are no peers. Require sufficient group size and KL-shaped returns as appropriate. Local K=4 candidates aren't 7B generation and real RM.",
+        "example": "Zero-filling an empty baseline changes the estimator."
+      }
+    },
+    "qa/post-training:rloo/mechanism": {
+      "source_sha256": "e324c8b8e2ad99dbc09dd45679b9dcd75b185b62517270bf1b53c1b5b6b53248",
+      "reviewed": true,
+      "fields": {
+        "question": "Why exclude the current response from RLOO's same-prompt baseline?",
+        "answer": "Peers provide an independent reference, not the current action's random reward. Treating a response as one action avoids a value network but still requires enough samples, consistent rewards and any specified reference/evaluator.",
+        "example": "For reply one of four, average the other three so the baseline doesn't move with its own reward."
+      }
+    },
+    "qa/post-training:grpo/basics": {
+      "source_sha256": "15fdc050ec2883715cea7b8bf72e2bf93a1b211ae3790400584bf5337f142a18",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can GRPO omit a policy-sized value model?",
+        "answer": "Same-prompt group mean and SD estimate relative advantages instead of a learned prefix value. Save critic resources but require repeated rollouts and differing feedback.",
+        "example": "Better attempts receive positive advantage relative to peers."
+      }
+    },
+    "qa/post-training:grpo/comparison": {
+      "source_sha256": "1d6d936ee6e8136f67e126544aa06b22a6953c01ae8b9b2fee49bb67baa45d54",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are GRPO old and reference policies different roles?",
+        "answer": "Old supplies rollout and proximal ratios, reference anchors long-term KL. Old can refresh each batch independently of the reference; mixing couples update limits and regularization.",
+        "example": "Fresh sampling updates old policy, not necessarily initial reference."
+      }
+    },
+    "qa/post-training:grpo/implementation": {
+      "source_sha256": "af59114381ed93f18842a46e9798419ec689eee229c212fad0708d45aa6abbb5",
+      "reviewed": true,
+      "fields": {
+        "question": "What should GRPO do with equal group rewards?",
+        "answer": "Centered advantages are zero and SD needs protection; never invent differences using evaluator gold. Local six-action candidates aren't DeepSeekMath generation.",
+        "example": "Don't rank four incorrect attempts by gold proximity unless the reward protocol actually says so."
+      }
+    },
+    "qa/post-training:grpo/mechanism": {
+      "source_sha256": "788d2ab5057d832adc9e6cd1115fc35c9beb99c5d2ee3ae77226d2ab4639bd3a",
+      "reviewed": true,
+      "fields": {
+        "question": "How does GRPO obtain advantages without critic, and what are old and reference for?",
+        "answer": "Center and scale group rewards for relative signal. Old gives sampling probabilities for ratio/clipping; reference anchors KL. Equal rewards provide no contrast. Candidate updates don't reproduce full math training.",
+        "example": "A reference change alters regularization, not the historical rollout source."
+      }
+    },
+    "qa/post-training:remax/basics": {
+      "source_sha256": "d7abc18bac1c41da84a1b64909ce6b1a2985f8fcfa89266065b0b650cfed24dd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use same-prompt greedy reward as ReMax baseline?",
+        "answer": "It gives a prompt-specific reference without training value. Reinforce samples above greedy and suppress below it; greedy need not be correct.",
+        "example": "A sampled explanation better than the usual first choice gives positive credit."
+      }
+    },
+    "qa/post-training:remax/comparison": {
+      "source_sha256": "3099f64f42540bf5f6eecd024b6499ad7d14b5bfd1a53aef417f0ee00c4cd464",
+      "reviewed": true,
+      "fields": {
+        "question": "How do ReMax and RLOO baseline sources differ?",
+        "answer": "ReMax additionally executes greedy decoding. RLOO uses other randomized responses. Both save the critic but spend generation differently and have different baseline errors.",
+        "example": "Compare one greedy rollout's cost to multiple peer samples."
+      }
+    },
+    "qa/post-training:remax/implementation": {
+      "source_sha256": "bf9350020cec267f394f55738191a40d39c17add308b47a95671c16e9ff8b5e5",
+      "reviewed": true,
+      "fields": {
+        "question": "Should ReMax differentiate through greedy baseline reward?",
+        "answer": "No. Treat it as fixed return, not a gradient through discrete decoding or scoring. Use the same prompt/protocol for both. Local greedy candidates do not establish memory or latency.",
+        "example": "Do not invent an argmax reward gradient while updating the sampled policy."
+      }
+    },
+    "qa/post-training:remax/mechanism": {
+      "source_sha256": "0d004f5b4a4daa7e3ae48ecd0e939dcc86ea7dd12a323f84f12d41153f00ac3e",
+      "reviewed": true,
+      "fields": {
+        "question": "Must the ReMax greedy baseline be correct?",
+        "answer": "No. It is a variance-reducing comparator for the same prompt. Relative returns can be positive or negative independent of absolute correctness; baseline isn't gold. Both paths still cost generation and scoring.",
+        "example": "A wrong greedy and correct sample yield positive signal; two wrong replies do not make greedy the standard answer."
+      }
+    }
+  }
+}

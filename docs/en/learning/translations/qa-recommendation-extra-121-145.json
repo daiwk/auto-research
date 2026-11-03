@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:sona/mechanism": {
+      "source_sha256": "f00404b5495e40ad3b187cd55240c1aee4f895aac854cc72a358ea18c9d1ed44",
+      "reviewed": true,
+      "fields": {
+        "question": "Why share user state between Sona generation and ranking, with teacher only in training?",
+        "answer": "Separate models repeat history encoding and can learn inconsistent representations. One chronological compressed state supports joint generation and ranking, with training-only teacher supervision. It does not eliminate missed retrieval or compression loss; retain local negative results.",
+        "example": "Both paths respond to a shift from rock to classical without calling a large teacher online."
+      }
+    },
+    "qa/recommendation:sort-gen/basics": {
+      "source_sha256": "a340c2a4a8b18b87b59e4f6487120a7c55edb73038b9f5212a7da51ad563991f",
+      "reviewed": true,
+      "fields": {
+        "question": "Does ordered regression predict item IDs or cumulative behavior thresholds?",
+        "answer": "It predicts whether a prefix reaches each click/payment count. Threshold and prefix-length axes are distinct; score the full prefix after adding a candidate.",
+        "example": "For three items, outputs can mean at least one or two clicks, not item identities."
+      }
+    },
+    "qa/recommendation:sort-gen/comparison": {
+      "source_sha256": "023ee55e1deebcdf68fd43f7162359c4e000a977c6f0a30f4d6526ec18ee5ecd",
+      "reviewed": true,
+      "fields": {
+        "question": "How does MMR during generation differ from deduplication afterward?",
+        "answer": "Choosing with marginal utility and similarity changes later prefixes. Removing duplicates only from the final list can leave holes or miss another generation trajectory.",
+        "example": "Deleting an early duplicate afterward does not recreate the alternative selection path."
+      }
+    },
+    "qa/recommendation:sort-gen/implementation": {
+      "source_sha256": "8932d680ae3e6b090186e6f12e72d228898624de2dd91c0643626208eb4c5090",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local batched execution reproduce the paper's 19ms kernel?",
+        "answer": "No. It is PyTorch masks without production optimization. MovieLens proxies clicks, trades, and upstream scores, not GMV. Align prefix targets and candidate masks.",
+        "example": "One batch call need not match a specialized kernel's device cost."
+      }
+    },
+    "qa/recommendation:sort-gen/mechanism": {
+      "source_sha256": "d75fa01af583aa4a8f1afb4b16f1a39618ab2d1a13477b45400a85955a36195c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why estimate prefix value with ordered regression instead of summing item CTRs?",
+        "answer": "Item scores miss list interactions. Predict cumulative behavior thresholds after adding a candidate. Target queues narrow search, batched masks evaluate, and MMR participates during selection. Proxy labels and search bounds do not establish global optimality.",
+        "example": "A third similar phone may add less engagement than headphones despite higher standalone CTR."
+      }
+    },
+    "qa/recommendation:sort-ranking/basics": {
+      "source_sha256": "ed1fa408d17b361e5f0b5b70642d810d75a842a8e272a3fbf5ddf59fefc45280",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't SORT Ranking simply a language Transformer for recommendations?",
+        "answer": "Industrial fields, tokenization, attention, FFNs, and hardware layout are co-designed to replace DLRM. Generic residual equations are not the full system.",
+        "example": "Sparse categorical features are not prepared like natural-language words."
+      }
+    },
+    "qa/recommendation:sort-ranking/comparison": {
+      "source_sha256": "24595d1f8eb19340801b14b978b1192f15112dcc124ee19ad4a4d3d1c6f0a67f",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a ranking Transformer differ from a traditional DLRM?",
+        "answer": "Token interaction handles features and histories; DLRMs commonly combine embeddings, explicit interactions, and MLPs. Cost and feature processing affect deployment, not names alone.",
+        "example": "The same IDs can interact at different stages with different compute reuse."
+      }
+    },
+    "qa/recommendation:sort-ranking/implementation": {
+      "source_sha256": "24cd2cdf6dda19ec42a25b36611615fe9c700934209dce50b97d0d7578a8e2ce",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local residual MHA/FFN demonstrate industrial compression?",
+        "answer": "No. Fixed public candidates exercise core paths without private features, production scale, or kernels. Model structure alone is not measured QPS or uplift.",
+        "example": "A small catalog run does not validate latency over industrial sparse tokens."
+      }
+    },
+    "qa/recommendation:sort-ranking/mechanism": {
+      "source_sha256": "d18c3ad888d1e8c39aec79b5981082c85f3fefd82041b9b5f06c191d9c672ff3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why co-design tokenization, attention, and FFNs?",
+        "answer": "Heterogeneous fields and long histories need appropriate token interfaces, information flow, and tokenwise capacity. Compression changes resource allocation. Local mechanisms do not establish full DLRM replacement throughput or quality.",
+        "example": "Organize age, category, and history rather than treating them all as ordinary text tokens."
+      }
+    },
+    "qa/recommendation:spar-prefix-balance/basics": {
+      "source_sha256": "d1b0f880b343a7b4827f3f37cd7fb152dec77fa17a68d98dfbdc1927dd370a02",
+      "reviewed": true,
+      "fields": {
+        "question": "Why repair SPAR load within each parent SID prefix?",
+        "answer": "Compare sibling load by interaction weight, not item count, while freezing centers and preserving hierarchical semantics through low-distortion moves.",
+        "example": "Two branches with ten items each may have very different traffic."
+      }
+    },
+    "qa/recommendation:spar-prefix-balance/comparison": {
+      "source_sha256": "8e1340a1e671014b21bff73e2156af7b042678c2e98d3c848aec1ccad117723a",
+      "reviewed": true,
+      "fields": {
+        "question": "How do feasible RQ-PIB moves differ from global equal buckets?",
+        "answer": "Choose a currently feasible low-distortion move under load limits and indivisible-item weights. It guarantees neither exact equality nor global optimum.",
+        "example": "A very popular item cannot be split across branches merely to equalize loads."
+      }
+    },
+    "qa/recommendation:spar-prefix-balance/implementation": {
+      "source_sha256": "2e7fd4cc7ce4004e909a8e5669d9972dfc1de5e6d85ec127e64cb68267cef785",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local SPAR implement PATH retrieval and full SFT+DPO?",
+        "answer": "No. It implements post-freeze RQ-PIB only. Skip zero-load groups, move items at most once, and keep parents and centers fixed.",
+        "example": "Local branch balancing does not train prefix personalization."
+      }
+    },
+    "qa/recommendation:spar-prefix-balance/mechanism": {
+      "source_sha256": "256c3be08f070bf6ed57b3d7ab7b3e6fbc2dd2e6e84dd571eb378c154677be45",
+      "reviewed": true,
+      "fields": {
+        "question": "Why freeze centers and use a load bound accounting for the heaviest item?",
+        "answer": "Fixing centers and parents limits semantic drift. Indivisible weights can make exact averages infeasible; move at most once per item and choose low-cost feasible destinations. Local scope excludes retrieval and preference alignment.",
+        "example": "Total load 12 across three branches cannot be exactly four each if one item weighs six."
+      }
+    },
+    "qa/recommendation:sparsectr/basics": {
+      "source_sha256": "b35a3b938de8ebe04fc1fa52e9e43f7e61e7b7c319d1df3e695e0eede0109410",
+      "reviewed": true,
+      "fields": {
+        "question": "Why chunk histories using personal time gaps?",
+        "answer": "Event counts do not separate dense sessions from long breaks. Adaptive chunks follow individual pace, with global, transition, and local attention handling different scales.",
+        "example": "A burst today and a revisit next month should not be grouped solely because events are adjacent."
+      }
+    },
+    "qa/recommendation:sparsectr/comparison": {
+      "source_sha256": "1e131d50c4392e45b4badd8c2dac2346ded2b81eacf993d0c17e2803d9b72041",
+      "reviewed": true,
+      "fields": {
+        "question": "How does three-path EvoAttention differ from a sparse local window?",
+        "answer": "Local reads details, global chunks represent cross-period interests, and transition paths model changes. Time biases capture intervals and calendar cues, not causal guarantees.",
+        "example": "Weekend patterns can correlate with interest without causing clicks."
+      }
+    },
+    "qa/recommendation:sparsectr/implementation": {
+      "source_sha256": "0c83b547eecd1b25db39d5eff114c47e506386b65db22ca15e5ad5263db18f6b",
+      "reviewed": true,
+      "fields": {
+        "question": "Do local time features replace production chronology?",
+        "answer": "No. Fixed MovieLens tests chunks and biases only. Sort pre-request events, align biases with valid masks, and exclude future labels.",
+        "example": "A shared wrong threshold can impose identical chunks on users with different rhythms."
+      }
+    },
+    "qa/recommendation:sparsectr/mechanism": {
+      "source_sha256": "319e4d7b346a014b5ba9901cd36b8d11ca424baf4046fbd8fd9111a0fec9dcf3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine time-adaptive chunks with global, transition, and local attention?",
+        "answer": "Equal event counts may span minutes or months. Time grouping respects personal rhythm; three routes capture overview, shifts, and fine details. Relative time encodes intervals/cycles but can miss sudden or sparse interests.",
+        "example": "Separate a furniture browsing burst from later supply shopping while modeling the transition."
+      }
+    },
+    "qa/recommendation:spatial-ads/basics": {
+      "source_sha256": "11e4eea8ce55a2520bdc9f65317f89ebc231c388dbb7496ef6c1c511acdb5b5f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why model interference between ad positions?",
+        "answer": "Neighboring ads affect value. Grouped disks and coverage constraints represent compatible selections, with LP and randomized rounding.",
+        "example": "Two nearby large ads can compete for attention, so values are not independent."
+      }
+    },
+    "qa/recommendation:spatial-ads/comparison": {
+      "source_sha256": "4727ac64f04e3887c21c770c7d81bcbb497ce35948d4c5f655b2a499c5932c55",
+      "reviewed": true,
+      "fields": {
+        "question": "How does LP with two-stage rounding differ from greedily placing ads?",
+        "answer": "Solve the fractional program, test conflicts on the entire first-stage sample, then thin again. Greedy tests only already-kept items and changes probabilities and guarantees.",
+        "example": "A sampled item discarded later can still create a first-stage conflict."
+      }
+    },
+    "qa/recommendation:spatial-ads/implementation": {
+      "source_sha256": "cfa8292e59287926837c57984f271e70478ff786db05ff3997bfa7804c9aa49f",
+      "reviewed": true,
+      "fields": {
+        "question": "How handle disk boundaries and invalid probabilities?",
+        "answer": "Cover only at strictly smaller distance than radius. Validate metric and thinning probabilities; fail rather than clip. Local HiGHS LP does not reproduce all auctions or the 2D PTAS.",
+        "example": "Probability above one cannot be silently clipped without changing the distribution."
+      }
+    },
+    "qa/recommendation:spatial-ads/mechanism": {
+      "source_sha256": "4d1d44d580ae639fcd12de0ac82149d8c1a134768f5a8c1f56275e04cf7185e6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check conflicts against the entire original sample?",
+        "answer": "Rounding probabilities derive from independent sampling under geometric and group constraints. Greedy acceptance changes conditional distributions. Local tests verify actual LP/rounding, not advertising uplift.",
+        "example": "Accepting A first would change B's decision; the paper instead evaluates both against one fixed sample."
+      }
+    },
+    "qa/recommendation:spear/basics": {
+      "source_sha256": "bed22adfa113f98d6b93d01db29bbc36814d8840a62bfde7f2f7cd21e73b0764",
+      "reviewed": true,
+      "fields": {
+        "question": "Why preserve original-query retrieval semantics in SPEAR?",
+        "answer": "Generic rewrites can exploit high path scores while drifting. Separate embeddings and gradients preserve retrieval; confidence times item relevance limits amplification.",
+        "example": "A running-shoe query should not rank unrelated sports items by popularity alone."
+      }
+    },
+    "qa/recommendation:spear/comparison": {
+      "source_sha256": "f97352b3f45721086e239dade0abdcf61c799cd944928e6a05545204d0a0b856",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a multiplicative gate differ from adding confidence and relevance?",
+        "answer": "Both inputs must support the product; addition can let one high score compensate for the other. Dynamic selection also calibrates request-level scale and bias.",
+        "example": "A confident rewrite cannot rescue an irrelevant item by confidence alone."
+      }
+    },
+    "qa/recommendation:spear/implementation": {
+      "source_sha256": "e4239d1899f39b6fc0d44bd53995fd5fd6555f3837e18b1a7904c5d54ed5ceda",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local two-path SPEAR proxy generate real rewrites?",
+        "answer": "No. MovieLens content proxies products/posts without private sessions or a production generator. Keep original scores and isolate embedding gradients; do not pick rewrites on test.",
+        "example": "Scoring a handwritten rewrite does not show generation."
+      }
+    },
+    "qa/recommendation:spear/mechanism": {
+      "source_sha256": "61201d75badd6ae03de5601197abbd4c9af6ff3868a5b42eb24e2fec8226bb28",
+      "reviewed": true,
+      "fields": {
+        "question": "Why multiply rewrite confidence and item relevance while separating embedding gradients?",
+        "answer": "Generic rewrites can win with misleading path scores. Product gating needs both trust and relevance; gradient isolation protects original retrieval semantics from ranking optimization. Request-level calibration does not guarantee correct confidence.",
+        "example": "Replacing waterproof hiking boots with “popular products” should lose confidence despite high clicks."
+      }
+    }
+  }
+}

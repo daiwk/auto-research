@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:right-on-q/basics": {
+      "source_sha256": "009d78438622ba6d45f4ddc8e193ca63c5b00ccc84c230d9fbff71b0b8e3af51",
+      "reviewed": true,
+      "fields": {
+        "question": "Why let the quantized student generate training prefixes?",
+        "answer": "Quantization changes visited reasoning states. Query the frozen teacher on the student's actual states rather than fixed full-precision answers.",
+        "example": "If the student takes a wrong turn, the teacher still scores the same prefix."
+      }
+    },
+    "qa/foundation-models:right-on-q/comparison": {
+      "source_sha256": "dadbf7f4548381fc4dca8d40547e131bf2c1abf875544b7acb0d8961fcf7dd27",
+      "reviewed": true,
+      "fields": {
+        "question": "How does candidate Dynamic KL differ from one fixed mixture per response?",
+        "answer": "At a prefix, some candidates are underweighted and others overweighted. α_v adapts to p_v/q_v per candidate and is detached to avoid optimizing the weight itself.",
+        "example": "Increasing support for one candidate and suppressing another need not share a mixture."
+      }
+    },
+    "qa/foundation-models:right-on-q/implementation": {
+      "source_sha256": "0b09e9cae8dc53d7fe9f54f27398cc6547e11f5df3124940c6e0152faf7a41e0",
+      "reviewed": true,
+      "fields": {
+        "question": "Can OnQ renormalize only the union of teacher and student top-20?",
+        "answer": "No. Keep a remainder bucket with student residual gradients and teacher smoothing. Truncation would erase tail differences. OPD updates latent weights and scales, with fixed zero point.",
+        "example": "If the union covers 90%, the remaining 10% stays a class."
+      }
+    },
+    "qa/foundation-models:roleq/mechanism": {
+      "source_sha256": "4c7688084797d849076f406d403d90324088be1091dfc68f1f9bf1e08a383048",
+      "reviewed": true,
+      "fields": {
+        "question": "Why scale reader outputs but writer inputs in RoleQ?",
+        "answer": "Reader output units extract information; writer inputs contribute into residual space. A uniform row axis would mix functional units. Exact unweighted ternary vector solutions are not global model optima; full flow includes rotation, compensation, and distillation.",
+        "example": "One output-projection column spreads one input feature across residual dimensions and needs its own functional scale."
+      }
+    },
+    "qa/foundation-models:roleq/basics": {
+      "source_sha256": "9779834337fdc04976fb6baa623ed64695027fb8cd8571fa9c0036538eb0a046",
+      "reviewed": true,
+      "fields": {
+        "question": "Why assign scales by role instead of one stored axis?",
+        "answer": "Reading and writing map different functional units to rows or columns. Scale those units independently rather than combining writer contributions.",
+        "example": "MLP input outputs and MLP output inputs represent corresponding hidden channels."
+      }
+    },
+    "qa/foundation-models:roleq/comparison": {
+      "source_sha256": "e76df7ffdd3358619de244e4a6cedbde41530297693261afaed58185e44518ed",
+      "reviewed": true,
+      "fields": {
+        "question": "How does exact ternary vector search differ from a fixed threshold?",
+        "answer": "Search every nonempty absolute-magnitude sorted prefix for optimal support and scale under the unweighted vector objective. A threshold tries one support; local exactness is not global model optimality.",
+        "example": "A 0.7×mean threshold can miss a support included in full prefix search."
+      }
+    },
+    "qa/foundation-models:roleq/implementation": {
+      "source_sha256": "cb8f4628311d21883ad90420c6e1b59f8138dc3c94e9424ce8e76d6c8719d651",
+      "reviewed": true,
+      "fields": {
+        "question": "Why pack and unpack ternary values and count scales?",
+        "answer": "Theoretical trit width is not storage. Pack five trits per byte and count scales and padding; all-zero vectors use zero scale/codes. Nonzero count alone is not byte evidence.",
+        "example": "Count tail padding and per-unit scales for 77 weights instead of multiplying by log₂3."
+      }
+    },
+    "qa/foundation-models:rope-relay/mechanism": {
+      "source_sha256": "d1c951a04a57aef36cba40baee671e813d740da0fbc557c90d29b42be81c3f6c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why rerotate K but not V when compacting sparse KV positions?",
+        "answer": "Undo each key's old rotation then apply its compact position; values reorder without rotation. Align unequal heads to a common right anchor and shift queries/generation. This changes coordinates, not evidence selection; scaled inverse is not simply transpose.",
+        "example": "Move old positions ten and 100 to adjacent slots, rerotate K, reorder V, and start questions at the new anchor."
+      }
+    },
+    "qa/foundation-models:rope-relay/basics": {
+      "source_sha256": "6170c293732b0f7ade765287b35d8a3fffa8e8519fd67dad509815bd8ecc2535",
+      "reviewed": true,
+      "fields": {
+        "question": "What does RoPERelay fix after selecting sparse KV?",
+        "answer": "Retained keys still carry old position phases. Sort temporally, compact coordinates, and align subsequent question and generation without reselecting contents.",
+        "example": "Retained positions 0, 100, and 500 require new coordinates and a defined question start."
+      }
+    },
+    "qa/foundation-models:rope-relay/comparison": {
+      "source_sha256": "30017552e3622da0a713c6178bc6216f4d93743db21e0e73e23537f10989159f",
+      "reviewed": true,
+      "fields": {
+        "question": "How does position reconstruction differ from prefilling selected text again?",
+        "answer": "Invert and reapply key rotations, and reorder V, without recomputing backbone representations. Re-prefill recalculates KV from text and pays a different cost.",
+        "example": "Transform existing K rather than concatenating three text spans and processing from layer one."
+      }
+    },
+    "qa/foundation-models:rope-relay/implementation": {
+      "source_sha256": "dffa653aa21efff61134ecafc5db1715c2c2b5e59bd692e1c1ac82d9f9fd4902",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use a common M rather than per-head continuation positions?",
+        "answer": "M is the maximum kept length across layers/heads. Right-align all heads, start questions at M and answer input at M+Q. Different anchors would disagree. Invert scaled RoPE correctly.",
+        "example": "Heads with eight and four entries both start questions at eight; right-align the four retained entries."
+      }
+    },
+    "qa/foundation-models:splash/mechanism": {
+      "source_sha256": "4a6a444b3be1bc8a7c90eafab926e463f00b06bd39d65f2e2ad163bd835fc084",
+      "reviewed": true,
+      "fields": {
+        "question": "Why amortize SPLASH transitions over remaining generation steps?",
+        "answer": "Layouts distribute attention weights and KV ownership differently, so switching incurs transfer/handoff. Remaining savings must repay that cost under memory limits. Local work is a planner, not CUDA handoff or serving evidence.",
+        "example": "Switching can be slower with a few tokens left and useful on a long request."
+      }
+    },
+    "qa/foundation-models:splash/basics": {
+      "source_sha256": "501e2cfa285af14a2d50eb718d67172f84c3f3c43372c957f6d706fad81ee9ca",
+      "reviewed": true,
+      "fields": {
+        "question": "Why model attention weights and KV ownership together?",
+        "answer": "TP/DP/CP/DOP assign weights, requests, and caches differently as batches and sequence lengths vary. One ownership model compares memory, communication, and switching.",
+        "example": "Four devices have different per-device memory if each request's KV is owned or sharded."
+      }
+    },
+    "qa/foundation-models:splash/comparison": {
+      "source_sha256": "2ba4ff1c98b3491203457290059289ac8a2e46de84c37f3a3ceb00d70500cc64",
+      "reviewed": true,
+      "fields": {
+        "question": "How do DOP and TP differ in simplified KV memory?",
+        "answer": "TP uses W_A/T+Bks; DOP uses W_A/T+Bks/T. Both shard weights but distribute KV differently. These are capacity estimates, not measured throughput.",
+        "example": "A dominant KV term makes distribution differences more visible."
+      }
+    },
+    "qa/foundation-models:splash/implementation": {
+      "source_sha256": "970b1ae6ddf5d087e56e9c3a035ebb0cfbc5db1594d278bb2fce6dddd224381d",
+      "reviewed": true,
+      "fields": {
+        "question": "How distinguish a transition-aware plan from executing a switch?",
+        "answer": "The planner models memory and switch cost. The system must move weights/KV and preserve request state. No local CUDA handoff or B200/H200 performance evidence.",
+        "example": "Printing “switch to DOP” does not move cache ownership."
+      }
+    },
+    "qa/foundation-models:stepquant/mechanism": {
+      "source_sha256": "49d54af722b61605f58d248252045244cfffc4e70d4f680ca245be601cd9d7f7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why allocate STEPQuant bits by remaining state lifetime and key-row impact?",
+        "answer": "Recurrence propagates errors through time, and directions affect readout differently. Allocate block precision under average bits and fit row/column scales. Local budget/error diagnostics are not throughput or renamed uniform INT8.",
+        "example": "A small direction that survives many steps may deserve more precision than a large one that soon vanishes."
+      }
+    },
+    "qa/foundation-models:stepquant/basics": {
+      "source_sha256": "9420cdaccfcce6a8fe0ad8b57872225416a4efbc874aaef83cdfeaffb859f24b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why quantize fixed-size recurrent state instead of only growing KV?",
+        "answer": "Each request holds state and repeatedly updates it; concurrency makes fixed state costly and errors can persist. Consider lifetime and spatial block influence.",
+        "example": "Small state across many requests consumes memory, and early errors can alter later outputs."
+      }
+    },
+    "qa/foundation-models:stepquant/comparison": {
+      "source_sha256": "d6902a2af47ecede6e76ea2dfb0ae80160a5ad625277933d77c42757e7215ddd",
+      "reviewed": true,
+      "fields": {
+        "question": "How does spatiotemporal allocation differ from uniform INT8?",
+        "answer": "Allocate more bits to high-risk blocks within a fixed average and use key-row/value-column scaling. Uniform INT8 ignores lifetime and position.",
+        "example": "A long-lived, high-impact block can get more bits than a quickly forgotten one."
+      }
+    },
+    "qa/foundation-models:stepquant/implementation": {
+      "source_sha256": "a48d17ea9b27f52975f40e50f2ee858bd4c4dd2f62167bb48e52332b53ec1d8d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why verify actual average bits instead of the fraction of high-precision blocks?",
+        "answer": "Width and block size both determine budget. Minimize weighted error at the actual average, and keep key-row/value-column broadcasting distinct.",
+        "example": "Average 4-bit and 8-bit blocks by element counts, not block count alone."
+      }
+    },
+    "qa/foundation-models:taskpress/mechanism": {
+      "source_sha256": "008b7d7b4711ea2ec9b333f4b5645e21cd15233675ed63be26fb5a5f68e4e367",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use task-guide attention if TaskPress is query agnostic?",
+        "answer": "Guide attention supplies reusable task-level preference, combined with value scale, without the actual downstream query. Discard guide KV and retain historical positions. A small kernel does not validate guide generation or multitask gains; full run is not reproduced due to cost.",
+        "example": "Summarization guidance can compress text before a future question; reading that question first changes the task."
+      }
+    },
+    "qa/foundation-models:taskpress/basics": {
+      "source_sha256": "9149562e816e0dcfb92f239ccc47727221884b828b68ab216df2b590a26cf321",
+      "reviewed": true,
+      "fields": {
+        "question": "Does query agnostic mean no task information?",
+        "answer": "No. Use guide-to-context attention but not the actual query. Task conditioning differs from query-specific selection.",
+        "example": "Know the task is summarization without knowing the exact future question."
+      }
+    },
+    "qa/foundation-models:taskpress/comparison": {
+      "source_sha256": "2de8229b709cc9ed06eb032e42e7ae3e8d2e9018c1ae399ab038ff8e5276d31e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why multiply key importance and value scale?",
+        "answer": "Guide attention measures read frequency and value scale captures amplitude relevant to quantization. The product accounts for matching and content; either term alone changes the method.",
+        "example": "Equal key importance can produce different scores at different value magnitudes."
+      }
+    },
+    "qa/foundation-models:taskpress/implementation": {
+      "source_sha256": "6c5e93340821abba4486f5f94fb9006104746540bb886041695e51391107ce72",
+      "reviewed": true,
+      "fields": {
+        "question": "Can edge average pooling divide by valid neighbors?",
+        "answer": "No. Use odd K, zero padding, and fixed divisor K. Keep original position IDs after gathering, discard guide KV, and note low-index tie-breaking is local.",
+        "example": "At the first token with K=3, still divide by three even if only two neighbors are valid."
+      }
+    },
+    "qa/foundation-models:twinkv/mechanism": {
+      "source_sha256": "b8864371d5f532ca61ba9c9589eac49d7b65f68a4ddd87bb3caad509a38d0f63",
+      "reviewed": true,
+      "fields": {
+        "question": "Why swap redundant donors for orphans rather than raise TwinKV budget?",
+        "answer": "The base eviction can keep duplicates and lose unique evidence. Recover dropped keys without similar retained substitutes by removing redundant retained keys with distant twins. Protect sink/recent items. Key similarity is not semantic equivalence, and reconstruction is not generation.",
+        "example": "Replace one of two repeated explanations with a unique date at the same cache size."
+      }
+    },
+    "qa/foundation-models:twinkv/basics": {
+      "source_sha256": "eccbf92b4469f670dac459528df1dfff1f396aadd2dc617de8e905cf67641d5b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why repair retention under a fixed budget?",
+        "answer": "A base policy can keep redundant keys and drop unique ones. Donor–orphan swaps address gaps without adding entries.",
+        "example": "Trade one near duplicate for unique older evidence."
+      }
+    }
+  }
+}

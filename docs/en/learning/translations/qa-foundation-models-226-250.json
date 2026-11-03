@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:wide/basics": {
+      "source_sha256": "950b3e91b65f5103a494650098e508c61a9442cdd1a814fd612f7b36263ad7c9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why give different tokens different model widths?",
+        "answer": "Static pruning uses one subnetwork for all inputs. WIDE routes attention head groups and FFN channels separately to allocate token-specific compute within layers.",
+        "example": "Simple positions can use few groups while complex evidence gets more."
+      }
+    },
+    "qa/foundation-models:wide/comparison": {
+      "source_sha256": "f736aa41477c4d6ffa41c6afa0b42fe92857883cdf3d3f9dd3ccb9b395314bf4",
+      "reviewed": true,
+      "fields": {
+        "question": "How does per-token width routing differ from pruning half the channels permanently?",
+        "answer": "Fixed pruning removes the same groups; dynamic routing selects different groups by token. Even equal average sparsity has different paths and scheduling costs.",
+        "example": "Two tokens can each use half the groups without using the same half."
+      }
+    },
+    "qa/foundation-models:wide/implementation": {
+      "source_sha256": "5582a0fe8ff31e81b29cc619b63ec76b8cd6249b0875d248e59799018504ee08",
+      "reviewed": true,
+      "fields": {
+        "question": "How should WIDE masks interact with kernels to save work?",
+        "answer": "Coordinate mask rearrangement, block skip, and on-device skipping. Multiplying a dense output by a mask does not remove matrix multiplication. Local PyTorch results are routing/sparsity/quality checks, not CUDA speed.",
+        "example": "A zero head output does not prove its QK product was skipped."
+      }
+    },
+    "qa/foundation-models:adamw4bit/mechanism": {
+      "source_sha256": "47d6c0e9eb4e98a8d98245899acb5c584274f3bb08125cac6b25c12e2ea6040a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why control second-moment rounding in preconditioner space in 4-bit AdamW?",
+        "answer": "Bias correction, square root, and reciprocal nonlinearly transform moment error into update error. ZIP-SR uses preconditioner values for stochastic rounding; ZE-EDEN handles code points and scales. Error persists through state recurrence. Use working moments for the update before packing.",
+        "example": "Small moment differences can greatly change reciprocal-root steps, so raw moment MSE misses the effective gradient scale."
+      }
+    },
+    "qa/foundation-models:adamw4bit/basics": {
+      "source_sha256": "0d58d82fa34b11a1599a2ba9cb6763395da9c2a6fdc3ee6186610a37dbc383b8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does state quantization affect later steps?",
+        "answer": "First and second moments recur, so stored errors enter optimization after decoding at the next step. Control their effects on preconditioning and future updates, not merely bytes.",
+        "example": "Repeated downward rounding of v can inflate effective learning rates across steps."
+      }
+    },
+    "qa/foundation-models:adamw4bit/comparison": {
+      "source_sha256": "0c366232ea59a24d329f906a1f9f629a2f918b64d8ea2fde4a63e9a87eb4a74f",
+      "reviewed": true,
+      "fields": {
+        "question": "How do ZIP-SR and ZE-EDEN store second moments differently?",
+        "answer": "ZIP-SR stochastically rounds in preconditioner space. ZE-EDEN excludes zero code points and calibrates block scales. Compare training loss and actual persistent bytes, not a generic four-bit rounding table.",
+        "example": "Randomly choosing adjacent codes differs from rescaling blocks to avoid zero codes."
+      }
+    },
+    "qa/foundation-models:adamw4bit/implementation": {
+      "source_sha256": "3c9b30cdf36b321f5c82e806584b85131e41591244220d4bc100d27262101d46",
+      "reviewed": true,
+      "fields": {
+        "question": "Should current working moments be quantized before updating parameters?",
+        "answer": "No. Decode old state, form new working moments, update using their unquantized values, then pack for persistence. Reversing the order injects error into the current step.",
+        "example": "Use v to precondition this step before compressing it for the next."
+      }
+    },
+    "qa/foundation-models:af-muon/mechanism": {
+      "source_sha256": "60497dd08b5b41428664120e7ab9e7b7bbeebb1cbff41ea82600a8114acf4b40",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not apply ordinary Muon to tied embeddings?",
+        "answer": "Tied vocab weights support sparse input lookup and dense output classification with different gradient geometry. AF-Muon uses spectral updates for hidden matrices, support-aware capped directions for vocab, and RMS for vectors. Output gradients can touch rows absent from the input.",
+        "example": "An unseen input word can still receive classification gradient as an output candidate."
+      }
+    },
+    "qa/foundation-models:af-muon/basics": {
+      "source_sha256": "7a02e595f36e3fd408686790d27f8680418dcf3bca0f441f9942a2694d7c3d51",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use different updates for different parameter types?",
+        "answer": "Hidden matrices, tied vocabulary, and one-dimensional parameters have different geometry and support. Use Muon, support-aware capped vocabulary directions, and RMS respectively.",
+        "example": "A sparsely visited input embedding row differs from a dense hidden matrix."
+      }
+    },
+    "qa/foundation-models:af-muon/comparison": {
+      "source_sha256": "c55270933dea172f1b31e75f04ff4451ce66ac62893af8bc32456c16e7cd6055",
+      "reviewed": true,
+      "fields": {
+        "question": "How does support-aware capped direction differ from unit-normalizing every vocab row?",
+        "answer": "It preserves zero support and caps row magnitude rather than forcing every nonzero row to equal length. Unit normalization can amplify small gradients and mishandle unsupported rows.",
+        "example": "Do not enlarge a small gradient merely to give it the same norm as a large row."
+      }
+    },
+    "qa/foundation-models:af-muon/implementation": {
+      "source_sha256": "1de49f30891cc11b0511e059d2ceea7bd4888b213f8d0e466f917eae52da3b8f",
+      "reviewed": true,
+      "fields": {
+        "question": "How avoid NaN on zero-gradient vocab rows?",
+        "answer": "Branch explicitly: zero gradients get zero directions. Multiplying by zero after computing g/‖g‖ cannot clear NaN. Local checks verify support and cap, not paper-scale pretraining.",
+        "example": "A row absent from both input and output gradients must not compute 0/0."
+      }
+    },
+    "qa/foundation-models:bit-sparse/mechanism": {
+      "source_sha256": "0515b508aeef11be9d5fac972147158beca775f7d4812af63f06e8cb8c3707ff",
+      "reviewed": true,
+      "fields": {
+        "question": "How can BitSparse save activations losslessly without recomputing forward?",
+        "answer": "ReLU-family activations contain exact zeros. Store only nonzero values, a bit per position, and tile prefixes. Reconstruct for backward without quantizing values or rerunning forward. Savings depend on zeros and metadata.",
+        "example": "For eight entries with six zeros, store eight bits and two original-precision values."
+      }
+    },
+    "qa/foundation-models:bit-sparse/basics": {
+      "source_sha256": "24a2bec287711572a2552fd1a60e3bcdf7dfc99151ea5e5fc38f5ad205fe13fa",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does BitSparse suit exact ReLU zeros?",
+        "answer": "A bitmask stores positions, positive values are packed, and tile prefixes locate data. Reconstruction is lossless without approximating nonzero values.",
+        "example": "Two positives among ten positions need two values and locations, not ten floats."
+      }
+    },
+    "qa/foundation-models:bit-sparse/comparison": {
+      "source_sha256": "075dd86cc9f3ca94b8ebcca94f5f9d66e9d4709d829d50fcbcaf223c913e0f21",
+      "reviewed": true,
+      "fields": {
+        "question": "How does lossless packing differ from checkpointing or quantization?",
+        "answer": "Checkpointing trades recomputation for memory; quantization trades precision. BitSparse exploits exact zeros. Sparse metadata and total training memory still matter.",
+        "example": "With few zeros, metadata can offset packing gains."
+      }
+    },
+    "qa/foundation-models:bit-sparse/implementation": {
+      "source_sha256": "30c3c83cbb65d51d92cdeb8e416beffc1a971c7d459cb486af025e4a107e6be3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not use one byte of bool per mask element?",
+        "answer": "The format uses one bit per position plus tile prefix and positives. Byte masks change storage accounting. Check padding, zero sign, and backward formulas such as the 2H factor in ReLU².",
+        "example": "A 32-position mask should occupy around four bytes, not 32."
+      }
+    },
+    "qa/foundation-models:bmuon/mechanism": {
+      "source_sha256": "f0bf2abc2b328746c36e942b80de4643c48fd7230cb7fc8557ba1d1456c9cb6f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why share BMuon budget across MLPs and apply it to input rows and output columns?",
+        "answer": "One hidden channel is an input row and output column pair. A shared budget reallocates compressibility across layers and guides both sides' Muon geometry. It shapes training updates, not forward gates or post-hoc independent pruning.",
+        "example": "A 100-channel budget need not split 50/50, but paired edges use the same allocation."
+      }
+    },
+    "qa/foundation-models:bmuon/basics": {
+      "source_sha256": "a3886afdc01f7f1b6f81aa1c447906aff30111fc0ce11eaf09ca6a7f4f571e84",
+      "reviewed": true,
+      "fields": {
+        "question": "What prunable structure is BMuon designed to learn?",
+        "answer": "It couples MLP hidden channel input rows and output columns under a common budget. This is optimizer geometry, not extra gates or arbitrary magnitude pruning.",
+        "example": "Consider both edges of a channel together."
+      }
+    },
+    "qa/foundation-models:bmuon/comparison": {
+      "source_sha256": "dc7efdfc2bdf41b274415cb5616dbb0675b61cbf5932e8457dc99a1059ca4872",
+      "reviewed": true,
+      "fields": {
+        "question": "How does global budgeting differ from equal per-layer retention?",
+        "answer": "All blocks compete for total K; fixed ratios preassign capacity per layer. Equal total channels can have different allocations.",
+        "example": "One layer can keep more while another keeps less instead of pruning 50% everywhere."
+      }
+    },
+    "qa/foundation-models:bmuon/implementation": {
+      "source_sha256": "7b0dac4a9d3640c252786dee689d71069a34c91ed8049f1fd029f883f1465555",
+      "reviewed": true,
+      "fields": {
+        "question": "Can BMuon reuse the old polar update after an MM budget update?",
+        "answer": "No. Use old allocation to compute MM scores, then recompute bilateral polar directions using the new shared allocation and one multiplier. Missing either paired gradient must fail rather than silently decouple.",
+        "example": "A channel moving 0.2→0.8 needs directions based on new μ."
+      }
+    },
+    "qa/foundation-models:data-mixing-laws/mechanism": {
+      "source_sha256": "40cd11e0c5c523bec9c1a7e2d50e47b2efde8d3d1a1e1e9f34dcc170f792e1a8",
+      "reviewed": true,
+      "fields": {
+        "question": "How do Data Mixing Laws search untrained mixtures, and what limits them?",
+        "answer": "Small matched runs observe domain losses, a fitted relation predicts mixture/scale performance, and a weighted objective searches it. This avoids exhaustive large runs but depends on pilot coverage and assumptions. Keep final test isolated.",
+        "example": "Use pilots at 20%, 50%, and 80% code to select a few intermediate candidates; predictions are not measured large-model results."
+      }
+    },
+    "qa/foundation-models:data-mixing-laws/basics": {
+      "source_sha256": "67345e57c609fc199cfed72f769d94e473e623a9fe35706038e901282a573000",
+      "reviewed": true,
+      "fields": {
+        "question": "Why train small pilots across mixtures?",
+        "answer": "Pilots observe each domain and support fitting mixture and scale effects. This reduces exhaustive runs but depends on coverage and modeling assumptions.",
+        "example": "Ten pilot mixes can shortlist others, not turn untrained points into measurements."
+      }
+    },
+    "qa/foundation-models:data-mixing-laws/comparison": {
+      "source_sha256": "6165a87fefdec51886aa7da8338fa4c925521f04c3cbc3068c1ecbfc41c0840b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does fitted mixture search differ from measuring every mix?",
+        "answer": "Fitted predictions save compute but can have approximation and extrapolation error. Direct runs give measured outcomes at higher cost. Independently validate a predicted optimum.",
+        "example": "A predicted best 70/30 mix has not necessarily trained at target scale."
+      }
+    },
+    "qa/foundation-models:data-mixing-laws/implementation": {
+      "source_sha256": "a84aaf4b9d8dce12e0a476e7d858169b07b0a3b2c11c6bcb689d4007022a1ab9",
+      "reviewed": true,
+      "fields": {
+        "question": "How keep test outcomes out of mixture selection?",
+        "answer": "Fit and choose domain weights/candidates under prespecified train/validation rules. Test once at the end. Mixtures are nonnegative and sum to one. A unigram proxy is not RedPajama scaling.",
+        "example": "Do not retune w_i after seeing test domain losses."
+      }
+    },
+    "qa/foundation-models:data-orchestra/mechanism": {
+      "source_sha256": "c636154d9174d59b96e4b25a432afe17fb3ac574169d9a46944e82c7942f9d8f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why allow Drop and Untouch instead of applying all three stages to every chunk?",
+        "answer": "Clean text can be damaged by costly rewrites. Choose Drop, Untouch, or Clean; only Clean plans noise pruning, surface correction, pedagogical augmentation, and per-chunk instructions. Plans are executed and verified. Optimize quality versus compute, not cleanup count.",
+        "example": "Leave a clean textbook alone, prune navigation on a web page, and drop a fragment missing content."
+      }
+    },
+    "qa/foundation-models:data-orchestra/basics": {
+      "source_sha256": "d237c76e2c8e64b83267ac0539a1198a9debe6008b9a6ace5769510a0e07f6e2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why make chunk-level data decisions?",
+        "answer": "Chunks differ in noise and quality. The orchestrator chooses Drop, Untouch, or Clean and organizes operations or instructions only when needed.",
+        "example": "Preserve a clean explanation while removing or repairing corrupted text."
+      }
+    }
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/agent-research/evaluation-and-reliability": {
+      "source_sha256": "8329644defa610acefed4da3c9c7b88fafd2eaa340053698a65484b6e02ba5bd",
+      "reviewed": true,
+      "fields": {
+        "title": "Four evaluation questions: Was it completed, is it robust, why did it work, and what did it cost?",
+        "thesis": "GAIA scores final answers. AgentPerturb tests single-target input changes; User Proxy Bench checks whether simulators bypass information gathering. AlphaDiana tracks failures and retries; HDA decomposes harness gains, and selective evaluation bounds automated judge error. High scores only become interpretable after these protocols are explicit.",
+        "axis_0": "Whether the target is final output, input robustness, user contracts, or automated-judge risk",
+        "axis_1": "Whether paired interventions change input, compute, or detected shortcuts",
+        "axis_2": "Whether ungraded cases, retries, and shared memory remain in denominators and costs",
+        "axis_3": "Whether confidence intervals and certificates use independent tasks or correlated trajectories"
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/comparison/agent-research:gaia": {
+      "source_sha256": "a2f40c19ddf59f3e8d0787a806eeeaa3493d7649a3eafd6263e36510e9ae201c",
+      "reviewed": true,
+      "fields": {
+        "position": "Scores real-tool and multimodal problems by normalized short-answer exact match with three difficulty levels.",
+        "tradeoff": "Final correctness does not explain process or assistance. Local gaia-mini tests the protocol, not the original 466-task capability."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/comparison/agent-research:agent-perturb": {
+      "source_sha256": "d214fcf8731ad3fa40a6b6678f1c160058bd938308df82bc01486e9c4a0600da",
+      "reviewed": true,
+      "fields": {
+        "position": "Crosses four input surfaces with three perturbation types, changes one target with independent solvability verification, and compares paired tasks across both sides.",
+        "tradeoff": "Syntax does not establish fidelity. Report coverage and uncertainty bounds for ungraded cases. Local arithmetic fixtures are not the official environment matrix."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/comparison/agent-research:user-proxy-bench": {
+      "source_sha256": "86c72f4ac072897817df57de268c5229313c3031dedef416bb16b45b6724b973",
+      "reviewed": true,
+      "fields": {
+        "position": "Defines UFS as the product of applicable user criteria and separately audits private-field disclosure before requests.",
+        "tradeoff": "Task reward is not proxy fidelity. Early disclosure can improve success without testing active inquiry. Local work checks rubrics and event order only."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/comparison/agent-research:alpha-diana": {
+      "source_sha256": "25ff2243a1dd8a69f39851464e946260fdafc3b789ffc99609bf56510fd6f4c3",
+      "reviewed": true,
+      "fields": {
+        "position": "Tracks attempts under stable logical samples, retains ungraded status, sums retry costs, and compares model–harness systems under a common policy.",
+        "tradeoff": "Confirmed-correct share is not the unknown-completed true success rate. Missing costs preclude complete tokens per success. Local work is synthetic accounting."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/comparison/agent-research:harness-decomposition": {
+      "source_sha256": "2316724fcf627547f6dcf77f8378322e78fe51ea270de70ae14af85235036944",
+      "reviewed": true,
+      "fields": {
+        "position": "Tests paired gain first, then constructs four arms with human-reviewed compute matching and shortcut neutralization to separate compute, detected shortcuts, and residual.",
+        "tradeoff": "Neutralization only covers discovered mechanisms; the residual may still include shortcuts and is not direct transfer evidence. Local work runs statistics on measured arms only."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/comparison/agent-research:certified-selective-eval": {
+      "source_sha256": "156fdf57d611edaa10476c46d0e74d541ba6ececc23acacdf61f84f70ccfe627",
+      "reviewed": true,
+      "fields": {
+        "position": "Bootstraps by task cluster to estimate an upper bound on error in an automated region and automates only when certification meets budget.",
+        "tradeoff": "Depends on calibration clusters and the targeted automation region; trajectories are not independent samples. Mini certificates do not establish corpus coverage or general judge reliability."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/analysis/0": {
+      "source_sha256": "6816d558885c92d0b714d0f17cef20139f81397e494a9d0dddcf350e616c9d99",
+      "reviewed": true,
+      "fields": {
+        "title": "Task success can conceal a change in what is being measured",
+        "body": "GAIA-style exact answers show whether deliverables match references. If a simulated user reveals information the agent was supposed to ask for, the task can succeed while testing less information gathering. User Proxy Bench separates UFS from reward. AgentPerturb likewise requires unchanged intent and solvability: blaming agents for broken tasks does not measure robustness. Good evaluation controls the task and visibility, not just whether scores move."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/analysis/1": {
+      "source_sha256": "01bad2bf487cba07006aa40ab5cacd6e2aa0b62c4af6379e42b6688c57e83f83",
+      "reviewed": true,
+      "fields": {
+        "title": "Paired designs still need failure records and attribution conditions",
+        "body": "AlphaDiana preserves logical sample counts across retries, sums attempt costs, and separates successful execution from grading. HDA aligns four arms itemwise, controls budgets, uses human-reviewed neutralization, and establishes gains before attribution. Selective evaluation clusters repeated trajectories by task instead of treating them as independent calibration. These govern interpretation without converting missing grades, unseen shortcuts, or uncovered tasks into verified outcomes."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/question/success-versus-proxy-fidelity": {
+      "source_sha256": "357eb6fc6fe42f220ff8e791861c8cbc584d7fb9df9b7de9e7a5e7aca565d13e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can User Proxy Bench reject evaluation even when a tool task succeeds, and why require solvability after AgentPerturb changes?",
+        "answer": "User Proxy Bench checks disclosure contracts: giving private fields unprompted bypasses clarification ability. AgentPerturb preserves goal, executability, and solvability so impossible tasks do not masquerade as robustness losses. Final accuracy measures delivery; these protocols separately constrain excess assistance and excess disruption.",
+        "example": "Providing an order number up front skips asking for it. Removing the number and forbidding clarification is also an unfair task."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/question/missing-pairs-and-retries": {
+      "source_sha256": "5073343b32a2b780253a3fc17d5b8e24d96d6792815df21bcb1d2ad2ff000183",
+      "reviewed": true,
+      "fields": {
+        "question": "If the perturbed grader fails, the clean arm is correct, and there are two retries, how do AgentPerturb and AlphaDiana avoid flattering scores?",
+        "answer": "AgentPerturb computes paired differences on matching doubly scored items and still reports coverage and unknown bounds over all requests. AlphaDiana keeps retries under one logical sample, chooses latest rather than best, and sums all known attempt costs. Missing grades or tokens must not be fabricated into full success cost.",
+        "example": "Three costly attempts ending with grader failure cannot be reduced to one prior success or removed from the planned denominator."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/question/gain-attribution-versus-risk-certificate": {
+      "source_sha256": "4fc912fb6fb2a59f43b4389d840f447a52729c9ba2456379167c936c68d2f513",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do remaining HDA gains after neutralizing shortcuts and passing a selective-evaluation risk certificate support different conclusions?",
+        "answer": "HDA compares four arms and attributes residual gain after compute and detected shortcuts, which can still include unknown shortcuts and does not prove transfer. Selective evaluation bounds error in an automated region using calibration clusters; it does not explain why a harness improved. Both require task scope and statistical units.",
+        "example": "A judge meeting its regional error bound does not show the agent improved through reasoning. Remaining gains after removing one shortcut do not ensure judges transfer to another domain."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/update/2026-10-27/0": {
+      "source_sha256": "c5abfdf29bdbb9fea2c6d80d4e7780fb58dbe3eac770a2d100ba5e0a1934e56f",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial version: compared endpoint capability, single-target perturbations, user contracts, failure/retry accounting, four-arm attribution, and cluster-level selective certification."
+      }
+    }
+  }
+}

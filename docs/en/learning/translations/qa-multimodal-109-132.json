@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:pace-vlm/implementation": {
+      "source_sha256": "c2b79aaa7889511f89ca42e3f24c0d2e3ec7fda5357da7c170c491341486f9c8",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the real-checkpoint run fully validate DDAE?",
+        "answer": "No. The small real-checkpoint smoke mainly exercises APC. DDAE is checked with equations and unit tests, without the original model fork or kernels. APC excludes diagonal self-similarity and picks the top-K deviations from the local mean. Correct compression direction does not establish lossless quality.",
+        "example": "Five correct out of eight before and after compression is a small-sample observation, not verification of DDAE in generation."
+      }
+    },
+    "qa/foundation-models:rr-vlm/mechanism": {
+      "source_sha256": "b70e3e9391e48cc02485333e626dee9cf2c1e364c77123ceda6b5514a48a5acc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a recurrent block save stored layers without reducing executed depth?",
+        "answer": "Repetition stores one set of weights but pays for every application. Pruning can damage language and the visual interface, so restore text, align the projector, then restore instruction behavior. Stored parameters and inference steps are different axes.",
+        "example": "Five core layers repeated three times execute 15 layers' worth of work while storing five sets of weights."
+      }
+    },
+    "qa/foundation-models:rr-vlm/basics": {
+      "source_sha256": "ad1fbc9b24bc4e61100f19cbb9f205f80027c3f17ea46a8e38239cce8785973f",
+      "reviewed": true,
+      "fields": {
+        "question": "What do prelude, recurrent core, and coda do in RR-VLM?",
+        "answer": "The prelude computes context h. The core combines h with the previous state and updates s repeatedly. The coda reads the final state. They are stages, not independent voting models. Do not overwrite fixed context as though it were recurrent state.",
+        "example": "Build h once, update s₁ then s₂, and let the coda read s₂."
+      }
+    },
+    "qa/foundation-models:rr-vlm/comparison": {
+      "source_sha256": "f1bfc9c298ab19df1677258f393db4ffff967675ca45058881b320154951a722",
+      "reviewed": true,
+      "fields": {
+        "question": "Why align the projector separately during staged recovery after pruning?",
+        "answer": "Surgery can disrupt both language and vision–language alignment. Recover text first, align only the projector next, then restore instructions. The projector stage excludes KD, unlike the two surrounding recovery phases.",
+        "example": "Restore text continuation before adapting image features to avoid confounding language damage and projector mismatch."
+      }
+    },
+    "qa/foundation-models:rr-vlm/implementation": {
+      "source_sha256": "2c6e9bd31aee3a57a269bdda8e1bf9ce801b59605d95322b99b6ff93c83fc55c",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the local status of frozen teacher and inter-loop KV sharing?",
+        "answer": "The teacher is a separate, intact frozen copy with detached outputs; the student updates only stage-allowed parameters. Local checks verify shared calls and manual unrolling, not incremental decoding with inter-loop KV reuse or throughput.",
+        "example": "Three calls to the same core confirm parameter sharing, not that all three share one KV cache correctly."
+      }
+    },
+    "qa/foundation-models:sink-sparse/mechanism": {
+      "source_sha256": "ff5f9011f7fd5829f93bcc23c3f40020e022025acafcaaa4d40ffda5b56afe4c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Sink-Sparse's global branch pool sink blocks as well?",
+        "answer": "It supplies low-resolution context over every token; the sparse branch computes fine selected interactions. They combine via their normalizers, not by adding only missing blocks. Excluding sink changes the compensation distribution, and test examples cannot reselect the offline support.",
+        "example": "The sparse branch reads the center closely while the global branch still summarizes the whole image, center included."
+      }
+    },
+    "qa/foundation-models:sink-sparse/basics": {
+      "source_sha256": "76778dc09da14f4cfe327cc5799d7e649750e808c088a0a914bd660d81c807c5",
+      "reviewed": true,
+      "fields": {
+        "question": "Is the static sink mask selected online from a new prompt?",
+        "answer": "No. Independent dense calibration aggregates exact block mass, then takes the shortest row prefix satisfying the mass threshold. New inputs reuse the mask. This saves selection cost but depends on cross-prompt and cross-seed stability.",
+        "example": "Fixed calibration may select two regions. A new prompt's high-scoring third region does not silently redefine the mask."
+      }
+    },
+    "qa/foundation-models:sink-sparse/comparison": {
+      "source_sha256": "a152d24dcb51c0c1d827accdc383579c6e02e5690ffc9a392a71b1425a3ce183",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a full-support sparse mask alone recover dense attention?",
+        "answer": "Not necessarily. The output still mixes a pooled global compensation branch, whose distribution may differ. Full support with gap 1 can reduce both branches to the same dense computation and is a sufficient degeneration test. General fusion is approximate.",
+        "example": "If the sparse branch sees every token but the global branch averages multiple tokens per block, their mixture can differ from dense alone."
+      }
+    },
+    "qa/foundation-models:sink-sparse/implementation": {
+      "source_sha256": "90d6c75b8236ea3ed942d6c22feb852dd4a9c21fd0539e429a881cc0b73fc90c",
+      "reviewed": true,
+      "fields": {
+        "question": "Can block mass be calibrated by averaging Q/K before softmax?",
+        "answer": "No. Compute dense token probabilities first, average over query blocks, and sum key blocks to preserve unit row mass. Softmax is nonlinear. Local Python gathers establish correctness, not speed from mask sparsity.",
+        "example": "Two queries can attend opposite ends while their mean attends the center. Early averaging loses the true mass at both ends."
+      }
+    },
+    "qa/foundation-models:softcache/mechanism": {
+      "source_sha256": "a84b70c422be9b17ac199ec29b73927562ca6397cfa6512b925c473af5f93103",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is SoftCache's step-size control more than refresh versus reuse?",
+        "answer": "Standard caches choose whether to recompute on a fixed schedule. SoftCache uses remaining staleness headroom to adjust the step and rebuild the remaining grid, so skipped nodes are not revisited. Extrapolation needs fresh anchors and early or fast-changing regions restrict jumps.",
+        "example": "Skip two of ten planned denoising nodes only if reliable, then reschedule so the same nodes are not computed later."
+      }
+    },
+    "qa/foundation-models:softcache/basics": {
+      "source_sha256": "c248a7560b692e7ec90ed1542a7ad5f5461fb07baa82f1a8d329be246c8513fc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why study which diffusion forwards to skip rather than only shrink the model?",
+        "answer": "Sampling calls the same network repeatedly; nearby states may share computation, but unconditional skipping can compound error. SoftCache adapts reuse and progress using change signals while retaining the model. Cache reliability is not a quality metric.",
+        "example": "Reuse when nearby denoising states change little and recompute when they move quickly."
+      }
+    },
+    "qa/foundation-models:softcache/comparison": {
+      "source_sha256": "bb353b6f22a6c00de5c0930e7341969f2f6aa6c00f9bf024ddca59f5346c47b5",
+      "reviewed": true,
+      "fields": {
+        "question": "How do relative probe changes and residual extrapolation serve different purposes?",
+        "answer": "Accumulated changes estimate staleness headroom and decide refresh/step size. Two fresh residuals estimate a trend for the reused value. They are scheduling versus approximation signals and not interchangeable. One anchor cannot define a slope.",
+        "example": "The probe can say change is small without giving the current residual; the recent actual residuals estimate it."
+      }
+    },
+    "qa/foundation-models:softcache/implementation": {
+      "source_sha256": "26341d20815c0f2d7148e0a682364923708a9dc0f876bf804879f717e890200f",
+      "reviewed": true,
+      "fields": {
+        "question": "Can two-point extrapolation run with one fresh residual anchor?",
+        "answer": "No; one anchor gives a constant, and two anchors must be at distinct times. For t<0.1 or probe change above 0.18, do not jump. Clip step size to the endpoint and use a separate cache for each sample.",
+        "example": "The first residual has no prior timestamp to form a slope; dividing by a nonexistent time difference is invalid."
+      }
+    },
+    "qa/multimodal-models:stacktok/mechanism": {
+      "source_sha256": "cf6ff2e11337d9b8ec1e23172ea30da95bbd4b4098229561c6be5200b2c86304",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can the highest-relevance tokens be a poor fixed-budget subset?",
+        "answer": "They may repeat the same region and omit scene structure. StackTok prioritizes relevance but switches criteria when a budget-dependent coverage reference indicates missing support. Coverage is not a fixed decoration; it depends on question and budget.",
+        "example": "Many face patches do not supply the doorway location needed for a layout question."
+      }
+    },
+    "qa/multimodal-models:stacktok/basics": {
+      "source_sha256": "84b789b696dc70e012bc71c7028e1d7abc2f5306f045b89dfea7c21965bdd73f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not keep only the most obviously relevant StackTok positions?",
+        "answer": "Some questions need several objects or a relationship. A single hotspot can consume the budget and omit necessary evidence. Coverage is not uniform sampling or unconditional diversity; the selected set should serve the question.",
+        "example": "To compare two car positions, several patches of the most prominent car are insufficient without the other car."
+      }
+    },
+    "qa/multimodal-models:stacktok/comparison": {
+      "source_sha256": "60861d6bd99c2b622bd5579905d1bfe92814411c5c3dad6abb897c8d4c705fc3",
+      "reviewed": true,
+      "fields": {
+        "question": "How does adaptive coverage differ from a fixed mixture of two rankings?",
+        "answer": "Fixed mixing holds one relevance/coverage ratio. StackTok switches criteria when current support is insufficient for the budget. This is a selection-time constraint, not a static diversity score; real fixed-budget VLM evaluation remains necessary.",
+        "example": "With two slots left and missing key regions, fill coverage; once support is sufficient, favor relevance."
+      }
+    },
+    "qa/multimodal-models:stacktok/implementation": {
+      "source_sha256": "933e05a2c39dc4fb78b834370ffa0b68b63e031b4a710517d141638dc3fe0716",
+      "reviewed": true,
+      "fields": {
+        "question": "Does passing the local single-crop selector show acceleration in five VLMs?",
+        "answer": "No. It exercises reference-gated selection on one crop, with three-seed fixtures checking ordering, gates, and budgets. No paper VLM is loaded. Correct indices do not establish a shorter forward, latency, or accuracy.",
+        "example": "Ten valid distinct indices meet the selector budget, but downstream still paying for all tokens would save no compute."
+      }
+    },
+    "qa/multimodal-models:vcola/mechanism": {
+      "source_sha256": "814f60a1b825c9b1ab39f399ae08619be289f45563aa4c17b8273f8a6664879c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't visual compression for Gated DeltaNet reuse softmax attention weights directly?",
+        "answer": "Linear recurrence does not expose the same full attention matrix. State updates and forgetting determine what survives. V-CoLA measures final-state readback for long-term retention and short-window response change for uniqueness, then merges contiguous blocks. These are not ordinary similarity scores.",
+        "example": "An initially salient patch may be overwritten and score poorly on final readback even if local similarity was high."
+      }
+    },
+    "qa/multimodal-models:vcola/basics": {
+      "source_sha256": "9686c3456be5720c4112a795e5eb3f5175bc1813bdf02b44e6a4eaedc6a677ca",
+      "reviewed": true,
+      "fields": {
+        "question": "Why need visual compression for hybrid linear-attention VLMs?",
+        "answer": "Many vision tokens consume language-layer compute and state, but linear attention stores evidence differently from softmax. V-CoLA uses actual recurrence to select what to merge or skip at deeper layers. Token count alone does not establish answer quality or inference savings.",
+        "example": "Compress redundant high-resolution background patches while preserving a small sign the question needs."
+      }
+    },
+    "qa/multimodal-models:vcola/comparison": {
+      "source_sha256": "b0e8473ada04f57aaec7dc51eea6f459b661dc49020e7fe8844c6da9f0b89ef8",
+      "reviewed": true,
+      "fields": {
+        "question": "What different omissions do long-term retention and short-term uniqueness address?",
+        "answer": "Long-term readback asks whether a token's value remains in final state. Short-term response change asks whether its update adds distinct information. Combine them 0.9/0.1 before contiguous block merging rather than deleting by static similarity alone.",
+        "example": "One token may remain useful long term while another contributes a short-lived detail; neither signal alone captures both."
+      }
+    },
+    "qa/multimodal-models:vcola/implementation": {
+      "source_sha256": "19b969cac397cd3511adad317359a6ea3e62c3e3effbbb47655554a297ce4572",
+      "reviewed": true,
+      "fields": {
+        "question": "Why document the transposed state and query probe choices?",
+        "answer": "The paper uses value×key while the official backend and local code use key×value, requiring transposed recurrence operations. Equation 7 uses a query probe and the appendix shifted keys; local chooses the former and gates on actual state replay with the official kernel. Equivalence is not assumed.",
+        "example": "Reversed axes can yield legal shapes but wrong reads, so numerical replay catches errors shape checks miss."
+      }
+    },
+    "qa/foundation-models:veto/mechanism": {
+      "source_sha256": "55629fcfd87310811cca9c28aae678fca4dd89ee13d0387ffa9d4957e00105ce",
+      "reviewed": true,
+      "fields": {
+        "question": "Why merge within frames before removing cross-frame redundancy?",
+        "answer": "Intra-frame merging shrinks per-frame candidates, lowering temporal matching cost. Matching all raw patches first already pays that search cost and can yield different correspondences. The order is part of the mechanism.",
+        "example": "Compress 100 patches per frame to 20 before matching adjacent frames; the reverse does not save the same work."
+      }
+    },
+    "qa/foundation-models:veto/basics": {
+      "source_sha256": "40e0b6c35db08c2dd8c435484207cc04d86c47513f734b215aab41f0f2dafd6f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are there both intra-frame and cross-frame redundancies in video?",
+        "answer": "Nearby patches can depict one background, and adjacent frames can repeat one scene. VETO removes duplication along space and time. Each compression axis risks losing different details, so total rate alone does not show required motion or local cues survived.",
+        "example": "A wall repeats within and across frames, but a fleeting hand movement needs both temporal coverage and spatial detail."
+      }
+    },
+    "qa/foundation-models:veto/comparison": {
+      "source_sha256": "94073d4bbd06799a887b984207a9c267c545a8f19155f2cae2f767cff7b13fcd",
+      "reviewed": true,
+      "fields": {
+        "question": "At fixed token budget, what do more frames versus more positions per frame preserve?",
+        "answer": "More frames favor temporal coverage; more positions favor spatial detail. The local tensor is frames × positions × dimensions, with each keep count bounded by its source axis and output position count equal to their product. No allocation is universally proven optimal.",
+        "example": "Four frames × 16 positions and 16 frames × four both use 64 tokens; the former sees more detail, the latter may catch brief events."
+      }
+    }
+  }
+}

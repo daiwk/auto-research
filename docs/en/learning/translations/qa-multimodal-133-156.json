@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:veto/implementation": {
+      "source_sha256": "64b104eb514d2ab02b6fc598df9db06a260f068cc809ba3c37646466af4e4b70",
+      "reviewed": true,
+      "fields": {
+        "question": "What does the local farthest-point representative test preserve, and what does it omit?",
+        "answer": "Deterministic farthest-point representatives test the space-first, time-second sequence and budget, and execute compression on GPU. There is no paper 7B VLM or real video benchmark. The heuristic does not reproduce semantic merging, and author throughput is not a local result.",
+        "example": "Meeting the token cap confirms both stages ran, not that small-object movement remains recognizable."
+      }
+    },
+    "qa/foundation-models:video-encoder-selection/mechanism": {
+      "source_sha256": "4616ed505ba58fe40c1bf241ed6bc5365717dea40bb8247b0411a2dabfd67ca3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why refine only retained anchors without adding visual tokens?",
+        "answer": "Selection first preserves addressable evidence under a fixed budget. The refiner reads neighboring frames to enrich those anchors without increasing output length. Appending neighbor tokens would break the budget and confound selection with context enrichment.",
+        "example": "Ten retained patches can read neighboring motion and still output ten vectors, not ten plus 20 appended positions."
+      }
+    },
+    "qa/foundation-models:video-encoder-selection/basics": {
+      "source_sha256": "65af6e5b0e6adf95a55794a56194ac76b67b1c62f573d38036e62c1ca79488ee",
+      "reviewed": true,
+      "fields": {
+        "question": "Why select evidence from independently encoded frames before passing them to a language model?",
+        "answer": "Framewise encoding preserves localizable evidence but produces a large sequence for long videos. Selection balances question needs, intra-frame diversity, and cross-frame links under a budget. It does not create evidence; high motion alone need not help.",
+        "example": "A question about which object was picked up first needs that object and cross-frame relations, not every changing background patch."
+      }
+    },
+    "qa/foundation-models:video-encoder-selection/comparison": {
+      "source_sha256": "fc6a4c5a70096f6eab02f05bf9ff726346940621f4e32b6a1718ed1eaeddad27",
+      "reviewed": true,
+      "fields": {
+        "question": "What do intra-frame DPP and adjacent-frame correspondence rewards constrain?",
+        "answer": "The log-determinant balances quality and diversity to avoid near-duplicate tokens within frames. Cross-frame edges reward matched endpoints that preserve traceable relations. Similarity, margin, and spatial gates apply; edges are not guaranteed true trajectories.",
+        "example": "Select a cup and hand rather than two table patches; keep the cup's reliable match in the next frame to see movement."
+      }
+    },
+    "qa/foundation-models:video-encoder-selection/implementation": {
+      "source_sha256": "31d3f8f8cda9fbb897c36fc526210a5298def65564e9fd6139eb3ea17fa03c44",
+      "reviewed": true,
+      "fields": {
+        "question": "How are tied pairs and singletons resolved, and why can the selector fill an odd budget?",
+        "answer": "Add a pair only if its per-token gain is strictly higher, otherwise add a singleton. Respect quotas and remaining budget. Even with negative gains or no temporal edge, select exactly B distinct indices. Local external uniform quotas and scene proxies are explicit deviations; SITE is not implemented.",
+        "example": "One remaining slot permits only a singleton; an equal per-token gain also selects the singleton."
+      }
+    },
+    "qa/multimodal-models:videomm/mechanism": {
+      "source_sha256": "4674d5198555d39dbe6fd7ca61c560377265565db55ed2eea036101d0b683e5a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why conditionally activate Micro Tokens after a Macro Proxy locates a region?",
+        "answer": "Coarse evidence cheaply removes irrelevant areas but can miss tiny text or movements. Activating detail only when needed focuses compute on uncertainty. This preserves coarse-to-fine evidence access rather than enforcing one low-resolution summary.",
+        "example": "Seeing someone hold up a sign may suffice for a yes/no question, but the number on it can require high-resolution tokens."
+      }
+    },
+    "qa/multimodal-models:videomm/basics": {
+      "source_sha256": "0fdad030d028133785650c9cb6aa11c9940de34b3b26e717dc46a4bac027feb3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why preview video coarsely before spending high-resolution budget?",
+        "answer": "High-fidelity long-video input is costly, and relevance varies across segments and regions. A Macro Proxy supplies location cues, then detail is requested when coarse evidence is insufficient. Localization and answer evidence are not equivalent.",
+        "example": "Locate a person entering a room, then inspect their hand rather than allocating HD tokens to every segment."
+      }
+    },
+    "qa/multimodal-models:videomm/comparison": {
+      "source_sha256": "ef9000cd16e3c3d9201a36a340fd813cbcf31d9f4d8454c719d0f607dcb9bbae",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the trade-off between consensus-triggered Micro and equal resolution budgets?",
+        "answer": "Fixed budgets may spend on simple regions; insufficient-consensus activation focuses compute but can miss details if routing fails. Compare identical videos, questions, and cost before claiming better QA.",
+        "example": "Broad scene-type questions may not need detail; distinguishing similar tools can need it even when macro evidence seems consistent."
+      }
+    },
+    "qa/multimodal-models:videomm/implementation": {
+      "source_sha256": "d2bea5f9a721bed26302657fe8bda680060b5ba0775a18392ca9cd21f02e21cc",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the macro/micro GPU receipt validate the complete video MLLM?",
+        "answer": "No. A100 executed specific state transitions, not a full video MLLM. Trigger counts, selected indices, and budgets are mechanism evidence, not LongVideoBench, throughput, or verification of semantic consensus.",
+        "example": "Supplying artificial low consensus and reaching Micro verifies branch execution, not estimating consensus from actual footage."
+      }
+    },
+    "qa/multimodal-models:vimod/mechanism": {
+      "source_sha256": "0cba612a51aef965bed98501927dd56f8fea86932583ea0c488208aef0a03a8c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does TRACE UPDATE replace the active Fine set rather than accumulate it?",
+        "answer": "Accumulation would let active context grow beyond budget. ViMoD retains Coarse while current generation history decides whether to keep or replace Fine. This changes the attention working set, not permanent storage of recoverable Fine details.",
+        "example": "Replace the left-label working set with a right gauge while keeping the overview and ability to retrieve the label later."
+      }
+    },
+    "qa/multimodal-models:vimod/basics": {
+      "source_sha256": "114f9df0e40872155567926e83911c36cbbe2a799ad3d07986230d6e7dcce7e9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why recover original detail after ViMoD compresses the image?",
+        "answer": "A need for small text or local evidence may emerge mid-generation. ViMoD keeps a compact overview and a recoverable detail cache, and text state selects what to read. This is neither permanent lossy compression nor reading every detail on every step; retrieval has its own costs.",
+        "example": "Recognize a receipt first, then recover the tax field when needed."
+      }
+    },
+    "qa/multimodal-models:vimod/comparison": {
+      "source_sha256": "adc7ebce37ce2271d320712df0ca163eb1870297df94a931e702c36b393f9f9b",
+      "reviewed": true,
+      "fields": {
+        "question": "How do DART's learned capacities differ from fixed-size pooling?",
+        "answer": "Fixed pooling assigns equal position counts to all regions. DART learns region sizes and memberships under a total-capacity constraint, using continuous capacities during training. It adapts granularity but remains budgeted and cannot guarantee every detail survives.",
+        "example": "Group a large blank area together and keep more groups for dense text; a fixed grid cannot adapt that way."
+      }
+    },
+    "qa/multimodal-models:vimod/implementation": {
+      "source_sha256": "48d75906fc7ced0b1e8655f6b45d050c3d7cde43e56791adc2576fd7fc0c863a",
+      "reviewed": true,
+      "fields": {
+        "question": "How do gradients cross DART groups when forward assignments are hard?",
+        "answer": "Constrained capacities backpropagate through an implicit Jacobian. A hard+soft−stopgrad(soft) estimator uses hard assignments forward and Sinkhorn continuous capacities backward. Stage training needs real Fine-index labels or an online teacher and must fail if missing.",
+        "example": "A patch is assigned to group A in forward, but continuous assignments can adjust capacity backward. A hardcoded answer region is not learned retrieval evidence."
+      }
+    },
+    "qa/foundation-models:alps/mechanism": {
+      "source_sha256": "e5b7bb2fe547c6903631c4cc86bfaedb891b189c9bea74da945fdaa6dbccbe14",
+      "reviewed": true,
+      "fields": {
+        "question": "Why supervise only teacher-crop B patches that fall inside student crop A in stage two?",
+        "answer": "The student sees only A, so exact targets outside A would supervise invisible content. Map geometry first, then predict frozen teacher targets at corresponding positions; appearance augmentation promotes robustness. Shared initialization does not mean the teacher updates with the student.",
+        "example": "If the student sees the left half, supervise only the overlap, not small text on the unseen right."
+      }
+    },
+    "qa/foundation-models:alps/basics": {
+      "source_sha256": "2f8b6ac46d8b72b765e306aa8b898b7f87be28a8810367d75e7d5d4e60d27c5e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does ALPS want one visual representation for language, state prediction, and image inspection?",
+        "answer": "Planning needs predictability, instruction tasks need language alignment, and inspection needs readable image recovery. Shared patch tokens support those interfaces, but each must be tested. Pixel reconstruction alone does not establish planning, nor language alignment complete physical state.",
+        "example": "A robot needs to understand “move the cup right,” predict its location, and inspect the future image."
+      }
+    },
+    "qa/foundation-models:alps/comparison": {
+      "source_sha256": "bcbfe53025820bebe0d92e9cb40755fb91dce946e4a773291f510ff9bd51d4be",
+      "reviewed": true,
+      "fields": {
+        "question": "How does the fixed stage-one teacher differ from an EMA teacher?",
+        "answer": "Stage one initializes the student and a teacher frozen through stage two. EMA would move targets with student weights, which is a different method. Training drops the cross-view predictor afterward and deploys the student encoder and language interface.",
+        "example": "Student augmentation training may change the encoder while fixed clean-crop teacher targets remain unchanged."
+      }
+    },
+    "qa/foundation-models:alps/implementation": {
+      "source_sha256": "74e2604243ac9725c108b5d83226b000626f204b341145e1e47c896ec4ef041a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why average the cross-crop loss over valid patches per image before averaging the batch?",
+        "answer": "Overlap sizes differ; per-image means prevent large overlaps dominating. A B patch is valid if its center falls in A's half-open bounds. Empty overlap safely contributes zero, while the sampler separately enforces a minimum valid count.",
+        "example": "With 100 matching patches in one image and ten in another, a flat token mean gives tenfold weight to the first; image means do not."
+      }
+    },
+    "qa/multimodal-models:aw0/mechanism": {
+      "source_sha256": "9c206d497af870915152977a97f70e7cedc7ed2918b12ce1e70b68d7b2aa6e34",
+      "reviewed": true,
+      "fields": {
+        "question": "Why allow bidirectionality within AW-0 experts but enforce code→video→action across them?",
+        "answer": "Bidirectionality organizes representations inside a modality; block causality preserves conditioning from plan to scene prediction to control. Code must not see later videos or actions, while action can use earlier code and predicted scenes. Full mutual visibility changes inference order and available information.",
+        "example": "Generate a cup-grasp program, predict the scene, then output controls; do not give the planner future ground-truth actions."
+      }
+    },
+    "qa/multimodal-models:aw0/basics": {
+      "source_sha256": "fbae844b4c962e4ef37d30ee6fe976474f4b9e8240d5ca5a52db39a566a49dc2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine composable programs, future vision, and robot action in one AW-0 model?",
+        "answer": "Programs provide reusable steps, video anticipates scenes, and continuous actions control the robot. Three experts jointly link plan to physical consequences; generated code plans by default rather than being executed. Local work reviews evidence only.",
+        "example": "Generate “grasp then place,” forecast the scene, and produce controls without running arbitrary Python."
+      }
+    },
+    "qa/multimodal-models:aw0/comparison": {
+      "source_sha256": "539d581aadb761c3a8acbe67ba19ad06a84fd6ef12822505f55620f760c8d67d",
+      "reviewed": true,
+      "fields": {
+        "question": "How do separate expert projections, normalization, and FFNs differ from fully shared transforms?",
+        "answer": "Separate transforms serve code, video, and action while joint attention exchanges information at prescribed boundaries. They add parameters and interfaces, not guaranteed improvement. The paper combines bidirectional intra-expert and block-causal cross-expert attention.",
+        "example": "Discrete code and continuous actions can use separate FFNs and still interact, without being isolated or freely bidirectional."
+      }
+    },
+    "qa/multimodal-models:aw0/implementation": {
+      "source_sha256": "aff2f5363ef17ed9ba4f7b9f325d103f5902a9085449f30611bf896a8fc69d08",
+      "reviewed": true,
+      "fields": {
+        "question": "Can flow targets and masked code diffusion use one noise and supervision mask?",
+        "answer": "No. Video and action use continuous noising and velocity regression. Code uses an independent Bernoulli mask and loss only on masked program tokens. Action noise and code masking are not determined by video noise. Mixed video sampling also needs separate clipped and normalized importance weights.",
+        "example": "Low video noise does not imply lightly masked code; one shared mask changes the paper's independent sampling."
+      }
+    },
+    "qa/foundation-models:dt-jepa/mechanism": {
+      "source_sha256": "696a0b1cf950aafc5bc167c55ce0d8c3a2673728cea4b5b77e0d057e98a92d4f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why predict future latents from history and expose true future only to the training target encoder?",
+        "answer": "The future is unavailable at decision time, so reading it would leak. History predicts a distribution and reparameterized samples condition decisions. The EMA target only supplies training alignment. Future representations distinguish dynamics even at equal return.",
+        "example": "Two trajectories can score ten, yet one hits an obstacle and the other stays clear."
+      }
+    },
+    "qa/foundation-models:dt-jepa/basics": {
+      "source_sha256": "1b3467d57625e54717b9eed6a0e4ea42f95ab5f7eff6027041e864037b142594",
+      "reviewed": true,
+      "fields": {
+        "question": "Why might a Decision Transformer need more than expected return?",
+        "answer": "Equal returns can lead to different states, so one return-to-go cannot distinguish dynamics. DT-JEPA conditions actions on a predicted future representation distribution from history, not an observed future. Manage uncertainty and isolate training-only inputs.",
+        "example": "Routes with equal reward may reach a charger or an exit; state predictions provide information absent from the scalar."
+      }
+    },
+    "qa/foundation-models:dt-jepa/comparison": {
+      "source_sha256": "ebc9a2a83d8553e3d1a90b6a4ea4fb7cc47f29b3af9769d016b1d6a00bed2c51",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the trade-off between a Gaussian future distribution and a deterministic vector?",
+        "answer": "Mean and variance express uncertainty; reparameterized samples condition DT. A deterministic vector is a single point. The diagonal Gaussian is still limited and does not cover arbitrary multimodality or allow real future input at deployment.",
+        "example": "Variance can represent uncertainty between routes, but a single Gaussian may not capture two distant discrete destinations."
+      }
+    }
+  }
+}

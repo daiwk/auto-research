@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/foundation-models/generation-paths": {
+      "source_sha256": "421ac556887e3a7a9fa629691941e3ac95a8666edacf3a8c9143a9ada472e96f",
+      "reviewed": true,
+      "fields": {
+        "title": "Fewer sequential steps: draft verification versus learned iteration",
+        "thesis": "Speculative decoding exchanges cheap proposals for expensive verification batches, preserving the target distribution with exact correction. Diffusion language models and data-space refinement instead change generation paths or training objectives. Ask who determines the final distribution, what each step does and keeps, and whether NFE or acceptance length becomes actual speed.",
+        "axis_0": "Original target verification or a new training objective",
+        "axis_1": "Separate draft, future-token heads, or denoising state",
+        "axis_2": "KV, hidden carry, or fixed noise reused across steps",
+        "axis_3": "Acceptance length, forward calls, or end-to-end wall time"
+      }
+    },
+    "dive/foundation-models/generation-paths/comparison/foundation-models:speculative-decoding": {
+      "source_sha256": "438a86fed82114158e9478eccfd8acbfe75240a77432247b69f0ab46aa587fc5",
+      "reviewed": true,
+      "fields": {
+        "position": "Draft tokens, verify with target in batches, and correct rejections from the residual distribution to preserve the target law.",
+        "tradeoff": "Savings depend on proposal cost and accepted length. Local Markov-model call counts are not large-model GPU latency."
+      }
+    },
+    "dive/foundation-models/generation-paths/comparison/foundation-models:medusa": {
+      "source_sha256": "787b1a373b23aeaa1cac2dd06f11f89022b4da332ab6ce83264de0fb56dad30d",
+      "reviewed": true,
+      "fields": {
+        "position": "Train multiple future-token heads on one backbone, build a proposal tree, and verify it jointly.",
+        "tradeoff": "Avoids a separate draft deployment but needs head training and tree verification. Parallel heads alone do not prove exactness for arbitrary sampling."
+      }
+    },
+    "dive/foundation-models/generation-paths/comparison/foundation-models:windowed-mtp": {
+      "source_sha256": "0a62516c9ca5f78b1435adc3f175094c2efb6c04eb0dcc72354819f3af3b517d",
+      "reviewed": true,
+      "fields": {
+        "position": "Restrict only draft access to sink and recent windows; keep target history and verification rules unchanged.",
+        "tradeoff": "Cheaper draft can lower acceptance. Local small-model parity and MPS timings are not million-token B200 serving."
+      }
+    },
+    "dive/foundation-models/generation-paths/comparison/foundation-models:dqwen35": {
+      "source_sha256": "44d5b5d6a61760485576be47c015bb683746a4a79742c1f27aeb64a6e1a7d5fd",
+      "reviewed": true,
+      "fields": {
+        "position": "Train a mixed attention/RNN backbone as a bidirectional masked-denoising diffusion LM.",
+        "tradeoff": "Changes conditioning and objective and requires retraining. A local bidirectional kernel without the original 9B model is not lossless AR acceleration."
+      }
+    },
+    "dive/foundation-models/generation-paths/comparison/foundation-models:pumba": {
+      "source_sha256": "0b642e5af1314cf88e3beddf1924247c8480e12ff47bfb675c7e6b560d2604b3",
+      "reviewed": true,
+      "fields": {
+        "position": "Unroll progressive unmasking on model trajectories, pass carry within windows, and train through it with BPTT.",
+        "tradeoff": "Windows and truncation determine cost and credit range. Local carry gradients are not few-step LLaDA-8B capability."
+      }
+    },
+    "dive/foundation-models/generation-paths/comparison/foundation-models:data-space-iteration": {
+      "source_sha256": "259c93f3cb94d373db94a60febe8361d729bd6c868b476f9cf5cc490fd65c392",
+      "reviewed": true,
+      "fields": {
+        "position": "Fix a noise sample, refine in data prediction space, and build generator gradients only for the current refinement using teacher/fake distillation.",
+        "tradeoff": "Step indexes are not flow times, and language objectives differ. Three seeds on small images have mixed results; pixel-feature distance is not Inception FID."
+      }
+    },
+    "dive/foundation-models/generation-paths/analysis/0": {
+      "source_sha256": "495f342649af4cf099c8c11036686bacd3b7cc7b9516c1362e77ef1e1875f24f",
+      "reviewed": true,
+      "fields": {
+        "title": "Parallel proposals need not change the target distribution",
+        "body": "Exact speculative decoding tolerates weak drafts because target verification and residual correction determine the distribution. Windowed-MTP compresses draft access, mainly risking acceptance and speed. Medusa proposes via backbone heads but its exactness depends on sampling and verification, not the tree itself. The key boundary is whether verifier history and rules are preserved."
+      }
+    },
+    "dive/foundation-models/generation-paths/analysis/1": {
+      "source_sha256": "00f6c548b89b4d34df7d3c2b3deecdd404955b2b70cb91bf7a81678052bf8ca3",
+      "reviewed": true,
+      "fields": {
+        "title": "Iterative steps have different dependencies",
+        "body": "DQwen3.5 uses masked denoising. PUMBA lets earlier carry affect later loss, while Data-Space Iteration refines under fixed noise without gradients through the prefix rollout. Compare states, conditions, and gradient spans before cost, and use task-appropriate language or image metrics rather than one step count."
+      }
+    },
+    "dive/foundation-models/generation-paths/question/draft-window-versus-target-window": {
+      "source_sha256": "a7e0dade6215b2fb772dc1733bbe7eaca519c26a97e31b161f91a0ac338e560f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does shrinking Windowed-MTP's draft window make a different quality promise than shrinking the target window?",
+        "answer": "Exact verification can preserve the original full-history target distribution despite changed proposals, provided correction is proper. Shrinking target history changes its conditional law. A cheaper draft can reduce acceptance, so divide combined draft and verification cost by actual accepted output.",
+        "example": "A full-history target can correct a draft that forgot an early name; a truncated target may not see the name either."
+      }
+    },
+    "dive/foundation-models/generation-paths/question/future-heads-versus-denoising": {
+      "source_sha256": "7d830c7b025b799efe9cac8d369074545a2935c8f92043618b0b97411f28be91",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are Medusa future-token proposals and DQwen3.5 multi-position denoising not the same parallel generation?",
+        "answer": "Medusa proposes candidates for backbone verification, while DQwen3.5 learns bidirectional masked denoising with different conditioning and objectives. Specify sampling, training investment, and quality criteria; parallel position count does not establish equivalent output laws.",
+        "example": "Propose three words and verify them versus fill several blanks and denoise again: parallel work, different contexts and acceptance rules."
+      }
+    },
+    "dive/foundation-models/generation-paths/question/carry-gradient-versus-prefix-stopgrad": {
+      "source_sha256": "045c9d49e7ca8610af356e1534ecd445c5d24c0ffd8ca4178073d888513a7881",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use different gradient rules for reused outputs in PUMBA and Data-Space Iteration?",
+        "answer": "PUMBA backpropagates through carry within its window for cross-step credit. Data-Space Iteration stops the prefix graph and updates only the selected refinement, with teacher/fake paths detached for the generator. Reuse alone does not specify gradients; swapping the rules changes memory, objective, and algorithm.",
+        "example": "Detaching all PUMBA carries removes intended credit, while backpropagating through all data-space prefixes is a different recipe."
+      }
+    },
+    "dive/foundation-models/generation-paths/update/2026-10-27/0": {
+      "source_sha256": "70fe1f0de5bc104e9bbe585e457c6e80d41dbeaddb443bcc639f7ccc70ac292c",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial version: compared exact draft verification, multiple future heads, windowed drafts, diffusion language, and data-space refinement by distribution, state, and gradient scope."
+      }
+    }
+  }
+}

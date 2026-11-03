@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:merlin/basics": {
+      "source_sha256": "f817b5fe8b2b0b3edf51b0ca8060cf3b7872c6c28d23119c244665f3d4ff8dfc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can two key segments with the same mean require different attention routing?",
+        "answer": "Mean alignment can hide strong key matches canceled by others. MERLIN also retains raw second moments and recovers query-direction alignment variance, mixing it with mean routing. It enriches segment routing without reconstructing full per-token attention.",
+        "example": "Example: Keys [-2,2] and [0,0] both average zero. Query 1 gives alignment variances 4 and 0, invisible to mean routing."
+      }
+    },
+    "qa/foundation-models:merlin/mechanism": {
+      "source_sha256": "0ea43cb9665fe1825b1dcc5f3d92821fd8b658ef6b38ff166c1c1db7f9877e3e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Eq. 7 distinguish the second moment from covariance?",
+        "answer": "It stores mean(kkᵀ), without centering, then computes variance qᵀΣq−(qᵀμ)². Passing covariance and subtracting again double-centers; treating the raw moment as variance includes mean strength. The local reference directly measures dot-product variance.",
+        "example": "Example: Keys [1,3] have mean 2, moment 5 and variance 1. Using 5 overcounts by 4; subtracting 4 from centered 1 yields the invalid −3."
+      }
+    },
+    "qa/foundation-models:merlin/comparison": {
+      "source_sha256": "b1125f4869d97e923f4509844bb770ad1494b58f8685b96e3d36dc56c678adce",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not mix logits then apply one softmax instead of mixing two softmax distributions?",
+        "answer": "Softmax is nonlinear. MERLIN normalizes mean and variance routes separately and mixes probabilities with gamma. Mixing logits first changes competition and normalization even though both outputs sum to one.",
+        "example": "Example: Mean logits [4,0], variance logits [0,0], gamma 0.5 yield [0.741,0.259]; softmax of mixed logits [2,0] gives [0.881,0.119]."
+      }
+    },
+    "qa/foundation-models:merlin/implementation": {
+      "source_sha256": "8cbba05c1946c5bf0885eea55ab7aeb68738d017a66b6d4fbefc58ca1bed57b2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why only expose completed segments to local queries?",
+        "answer": "Full-segment means and moments include future tokens for queries inside that segment. A full model could maintain prefix moments and recurrent state; the local path does not. It exposes completed segments only and rejects calls with none visible, rather than leaking future statistics.",
+        "example": "Example: Segment start 4 length 4 covers positions 4–7. It is not visible at 6, only at 7; reading all keys at 4 leaks positions 5–7."
+      }
+    },
+    "qa/foundation-models:fold-bias/basics": {
+      "source_sha256": "d1766115a7e96d8feb5927b075823ed07c1f14ade670c9f3985020328e8730a2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't a static bias folded into a key be exact for every future query?",
+        "answer": "A key shift contributes a linear function of query, whereas nonzero bias is query-independent. FoldBias fits a direction u so q·u is near 1 on context queries; future drift can increase error. It is distribution-dependent, not an identity.",
+        "example": "Example: A zero query produces zero logit change from any key shift, not bias 0.8. A query satisfying q·u=1 can express that bias exactly."
+      }
+    },
+    "qa/foundation-models:fold-bias/mechanism": {
+      "source_sha256": "2ad6e0f9685419bcc227e85b84a4fec8a12aa270449b150d2d6719dd946f587d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why rescale a ridge direction to μᵀu=1 rather than use unconstrained least squares?",
+        "answer": "Unconstrained LS trades mean offset against projection spread and may shrink all biases. The paper rescales a ridge-stabilized inverse covariance direction to force mean projection one and minimize spread under that constraint. Covariance divides by N and ridge uses its trace; replacing N with N−1 changes the objective.",
+        "example": "Example: With one-dimensional μ=2, variance 1 and no ridge, unconstrained LS gives 2/5 and mean projection 0.8. The constrained direction 1/2 gives exactly 1."
+      }
+    },
+    "qa/foundation-models:fold-bias/comparison": {
+      "source_sha256": "9d7faa5a7f84c555254895983f7589c520b5079c9fe29690f2adfd09e60e562e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is FoldBias more informed than deleting bias, but not better for every query?",
+        "answer": "Deletion multiplies bias by zero; folding multiplies by q·u and can be closer to one if future queries resemble calibration. Drift can be worse. The bound also needs bias range and value diameter and compares unrounded keys at fixed values, not a refitted serving stack.",
+        "example": "Example: q·u=0.9 leaves 10% bias error; q·u=−2 gives coefficient 3 vs deletion's 1. This is not LLM accuracy."
+      }
+    },
+    "qa/foundation-models:fold-bias/implementation": {
+      "source_sha256": "8d554c4ea047c14c7e3cc92622cfa37f0d7f0821c15a01b89c2891056be01637",
+      "reviewed": true,
+      "fields": {
+        "question": "Why actually cast keys to BF16 before refitting values?",
+        "answer": "Least squares must see attention from the rounded keys. Fitting with high-precision keys then rounding changes the matrix and invalidates the intended normal equations. The local path casts before building A and returns fit-precision coefficients; cache installation, value rounding and backend correctness need separate validation.",
+        "example": "Example: BF16 maps 1.003 to 1.0. Fitting attention with 1.003 compensates an attention table that deployment will not see."
+      }
+    },
+    "qa/foundation-models:swim/basics": {
+      "source_sha256": "2f3b601a76c47253476e95824f8ac9f159e25263dba38f0f9e4ed3c53c62258f",
+      "reviewed": true,
+      "fields": {
+        "question": "Does SWIM learn a robot policy or which state coordinates matter for distance?",
+        "answer": "It learns continuous coordinate weights from recorded actions and uses them for world-model geometry. Inverse action prediction only trains the weights. Deployment still needs image encoding, latent dynamics and planning such as CEM. Local coverage is the gate objective and metric, not a robot policy.",
+        "example": "Example: Block position can receive more weight than background light color. That changes distance, not the robot's grasp trajectory."
+      }
+    },
+    "qa/foundation-models:swim/mechanism": {
+      "source_sha256": "9ee16349665ef964346c5fb63b3f2d7870c5543373fc09ec47b63722e8791641",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not gate the current state, and why require true mismatched discrimination?",
+        "answer": "The current state is full action context; the paper gates only future displacement. Fitting positives alone can predict actions from current context and ignore displacement. A cyclic mismatch changes the future while holding current state/action fixed, encouraging behavior-relevant displacement.",
+        "example": "Example: Keep the current position and move-right action. For a negative, take the next batch row's future minus this position. Replacing the current state gives a spurious context cue."
+      }
+    },
+    "qa/foundation-models:swim/comparison": {
+      "source_sha256": "146b9ba8df237c38a59753970ea052eecb4e14e76115f9f7dcdf4090dcc28a60",
+      "reviewed": true,
+      "fields": {
+        "question": "Are multiplying state by g or sqrt(g), or standardizing again afterward, equivalent?",
+        "answer": "No. Square root scaling yields coefficient g in squared distance; scaling by g gives g². Gates weight already-standardized coordinates; re-standardization cancels scaling. Overall gate scale cancels from Pearson correlation and can be absorbed by the inverse model, so absolute gate magnitudes are not uniquely identifiable.",
+        "example": "Example: Difference 2 with g=0.25 should give 0.25×4=1. Multiplying by sqrt(g)=0.5 before squaring gives 1; multiplying by g gives 0.25. Rescaling the standard deviation afterward cancels the 0.5."
+      }
+    },
+    "qa/foundation-models:swim/implementation": {
+      "source_sha256": "d79082095d16d71c490fd8df00b678a8ac8e0f858aaf241d6c8c715923b31b69",
+      "reviewed": true,
+      "fields": {
+        "question": "How do tests distinguish L1 shrinkage from learning behavior, and prevent future state leakage?",
+        "answer": "Check gate gradients from the behavioral term alone, then real optimizer updates; parameter change alone is insufficient. In stage two state distance is stop-gradient. Future state constructs offline displacements only and must not be available to deployed planning. Constant-distance Pearson is undefined and should be rejected, not declared valid via arbitrary epsilon.",
+        "example": "Example: λsum(g) shrinks gates even with actions ignored, so also test λ=0. If all frame distances are zero, reject the zero-denominator correlation rather than report success 1."
+      }
+    }
+  }
+}

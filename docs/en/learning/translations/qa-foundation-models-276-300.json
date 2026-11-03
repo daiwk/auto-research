@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:hardware-diversity/implementation": {
+      "source_sha256": "5cb1712f768bf4275c2f35e57c0b419c1ce902711c3ff0b48cb5fc3cb7c60c52",
+      "reviewed": true,
+      "fields": {
+        "question": "Can one A100 or A30 reproduce the MI350X/B200 production system?",
+        "answer": "No. The original uses matching clusters and private workloads. This is a literature and cost review, not a reproduction. A public operator would need its own hardware and acceptance protocol.",
+        "example": "A small A100 GEMM cannot verify another cluster's end-to-end training throughput."
+      }
+    },
+    "qa/foundation-models:hilp/mechanism": {
+      "source_sha256": "cddcfa342e8144bc008969422264076ab2ab6cc186ffdf4dd43d6658da4dd520",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add a coarse temporal target to stepwise latent prediction in HiLP?",
+        "answer": "Small one-step errors can compound and lose distant structure. A coarse abstract latent supervises longer spans alongside next-token and local latent objectives. This does not eliminate rollout errors or replace long-horizon tests.",
+        "example": "Predict the next waypoint and the next stage to constrain gradual route drift."
+      }
+    },
+    "qa/foundation-models:hilp/basics": {
+      "source_sha256": "2dd699fe07ab811fdfc1ab852d16fe97f21f4fec015517deb055b37b9d33a73e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why predict both next and abstract latents?",
+        "answer": "Local rollout may accumulate error; coarse targets constrain longer-term structure while preserving immediate detail.",
+        "example": "Predict the next word state with an auxiliary constraint for the next passage."
+      }
+    },
+    "qa/foundation-models:hilp/comparison": {
+      "source_sha256": "46454798f089c7f1e1c4b9eaf6f3cd020cd11577c18c8f20d246a2e5808aec8c",
+      "reviewed": true,
+      "fields": {
+        "question": "How does coarse latent loss differ from raising the next-step weight?",
+        "answer": "Reweighting supervises the same horizon. A coarse target introduces a different span and structure, not simply larger λ1.",
+        "example": "Doubling next-second loss does not ask for a prediction of the next minute."
+      }
+    },
+    "qa/foundation-models:hilp/implementation": {
+      "source_sha256": "b5bd7c46e12a63c6922dba1df0f1f297358de1ded63bddea5654e58c4ecf91b2",
+      "reviewed": true,
+      "fields": {
+        "question": "How isolate the effect of HiLP's coarse target?",
+        "answer": "Hold split, budget, and backbone fixed; ablate the block-level abstract objective and report fine and coarse errors. Synthetic diagnostics are not paper-scale LM results.",
+        "example": "Changing data and steps while adding λH confounds attribution."
+      }
+    },
+    "qa/foundation-models:lazyflash/mechanism": {
+      "source_sha256": "1b3a6e3df2d94c5d126f47b7a29125871f5b9e18846d1f773e36a71e00a6b6e6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does LazyFlash save backward work rather than visibility?",
+        "answer": "Forward stays dense. Output-gradient block norms set backward retention probabilities, and inverse-probability weighting estimates dense gradients. A tiled backward kernel must skip actual work; masking afterward does not. A single random draw need not equal dense gradients.",
+        "example": "A low-contribution query block can be skipped in backward even though forward reads all evidence."
+      }
+    },
+    "qa/foundation-models:lazyflash/basics": {
+      "source_sha256": "34eb61957a33576af159ccc2bc36ce5b5d6da7afc55e1ce698ec2b9cf91087b9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why preserve dense forward but compress backward?",
+        "answer": "Forward determines visible context. Uneven gradient contributions let training sample/reweight backward blocks without making inference forward sparse.",
+        "example": "Read the whole document, then sample only some backward blocks."
+      }
+    },
+    "qa/foundation-models:lazyflash/comparison": {
+      "source_sha256": "9375b99c22b362f75eeef5fcd8ff68e7c67c9d5d695b2c4f56dd72eeeb3b2f3a",
+      "reviewed": true,
+      "fields": {
+        "question": "Is importance backward equivalent to fixed top-k gradient truncation?",
+        "answer": "No. Inverse-probability reweighting targets an unbiased dense-gradient estimate in expectation; fixed truncation generally does not. Individual draws still differ.",
+        "example": "A block kept with probability 0.5 is upweighted when sampled, not permanently dropped."
+      }
+    },
+    "qa/foundation-models:lazyflash/implementation": {
+      "source_sha256": "69ca0072b9f04a77b4cae767458fd1de76ad68eec20cc327c0555b9c278f4f30",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't masking gradients after dense backward a LazyFlash kernel?",
+        "answer": "Compute and memory traffic have already occurred. Skip tiles inside FlashAttention backward. No local operator or GPU receipt is claimed.",
+        "example": "Discarding half the results after computing all blocks saves no backward execution."
+      }
+    },
+    "qa/foundation-models:lct/mechanism": {
+      "source_sha256": "67de41fe4ed2ab1f5f86c2f7f700adfd2532e44eb9fe19b20b28fa45381fce2b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain rare exponents and overflow rather than drop them in LCT?",
+        "answer": "Bit-exact recovery requires escape codes with raw rare exponents and raw overflow after stream exhaustion. Sign/fraction remain separate and a fixed codebook avoids relearning. This is lossless compression, not quantization.",
+        "example": "A rare exponent uses escape plus eight original bits; overflow stays raw rather than becoming zero."
+      }
+    },
+    "qa/foundation-models:lct/basics": {
+      "source_sha256": "5e2ad65bf5b9387ed66d7363c4db52a1b4a7f61f9e8a78e1c093a63ce2c73ea7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why store exponents separately from sign and mantissa?",
+        "answer": "Exponents are often concentrated and compressible. Preserve sign/fraction verbatim, use a fixed bounded code, and handle runtime center shifts without losing bits.",
+        "example": "Shared exponent patterns can compress while fraction bits remain intact."
+      }
+    },
+    "qa/foundation-models:lct/comparison": {
+      "source_sha256": "fda94acf68e41906c89df989cd029edb68be62617641fc023c481820e2aaedb7",
+      "reviewed": true,
+      "fields": {
+        "question": "How does bounded exponent coding differ from zlib on a tensor?",
+        "answer": "LCT specifies a fixed table, length cap, escapes, stream budget, and raw overflow tail. General compression does not provide that layout. Count codebooks and metadata in total bytes.",
+        "example": "Smaller payload may still produce larger total output after metadata."
+      }
+    },
+    "qa/foundation-models:lct/implementation": {
+      "source_sha256": "ba1a4fe65de7c90f32627c6d5ca7321b7724836151a1ac001ebcc1a30e688971",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compare raw bits in LCT round trips?",
+        "answer": "Preserve signed zeros, subnormals, infinities, and NaN payloads. Numeric equality can miss these. Test all exponents, centers, and overflow paths.",
+        "example": "+0 and −0 compare equal numerically but have different bits."
+      }
+    },
+    "qa/foundation-models:me-pois/mechanism": {
+      "source_sha256": "4bc277a9291e8404ecd0aeb856381868f230de300eb2fcc1a36ffb5a2453168b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does ME-POIs transfer time information to sparse places?",
+        "answer": "High-frequency anchors contribute within each spatial scale using distance normalization; then average scales so more anchors do not dominate. Trajectories connect recent visits and long-term prototypes; text supplies distinct semantic supervision.",
+        "example": "Normalize two local anchors and 20 broader anchors separately before averaging their predictions."
+      }
+    },
+    "qa/foundation-models:me-pois/basics": {
+      "source_sha256": "75eb03b9bc10e1ecf435ef9d6e3cc343bdcd3962454c281bc628b7383200763f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine trajectories, prototypes, and text?",
+        "answer": "Sparse locations lack visits. Short trajectories connect to long-term prototypes, high-frequency anchors transfer temporal patterns, and text supplies semantic alignment.",
+        "example": "A rarely visited place can borrow time-of-day patterns from nearby busy places."
+      }
+    },
+    "qa/foundation-models:me-pois/comparison": {
+      "source_sha256": "51730d0522a88fba62aefdcf6d4902310af980c392c8e9e7942494b9bb15789b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does per-scale normalization differ from one softmax over anchors?",
+        "answer": "Normalize each scale independently before averaging. A pooled denominator changes relative scale weights based on candidate mass or count.",
+        "example": "Near and far scales each contribute one prediction regardless of candidate count."
+      }
+    },
+    "qa/foundation-models:me-pois/implementation": {
+      "source_sha256": "aa0c2d5040d1e80168c42f8677a61fa00b7cecc5806c7d1bab2be2066a597334",
+      "reviewed": true,
+      "fields": {
+        "question": "Should repeated visits duplicate a place prototype as a negative?",
+        "answer": "No. Eq. 9 uses distinct minibatch place prototypes. Keep temporal KL in direction r||q and sum across places as specified.",
+        "example": "Three visits to a POI still supply one prototype."
+      }
+    },
+    "qa/foundation-models:modular-robust-generative/mechanism": {
+      "source_sha256": "102c08ee2f156f8c4edce22babbc7127fe791c6791b3d911bb53dd7824f56eca",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't per-input gate softmax necessarily normalize a generative mixture?",
+        "answer": "Input-dependent weights cannot leave the global sum like fixed mixture weights. Local unit sums do not guarantee global mass one. Enforce total mass and distinguish worst-domain KL and NLL; silent post-normalization changes the objective.",
+        "example": "A gate can choose the highest-density expert separately at A and B, making their total mass exceed one."
+      }
+    },
+    "qa/foundation-models:modular-robust-generative/basics": {
+      "source_sha256": "4a8bec907f7e593e879338d83f3e71e307dbd9da7682657b210b7a2775586820",
+      "reviewed": true,
+      "fields": {
+        "question": "Why optimize worst-domain performance instead of average alone?",
+        "answer": "A good mean can hide severe regressions. Adversarial domain weights adjust input-dependent gates while respecting global probability mass.",
+        "example": "Two strong domains can conceal one failing domain in the average."
+      }
+    },
+    "qa/foundation-models:modular-robust-generative/comparison": {
+      "source_sha256": "83a0f99567c1ab442589cf6f895d8262f1f9349e92be59d6e7195ebc11275cf6",
+      "reviewed": true,
+      "fields": {
+        "question": "Are domain KL and NLL equivalent for gate and adversary updates?",
+        "answer": "Within one domain they differ by gate-independent entropy, so gate gradients agree. Across unequal entropies the adversary's ordering can differ. Local practice uses NLL.",
+        "example": "Subtracting different domain entropies can change which domain is worst."
+      }
+    },
+    "qa/foundation-models:modular-robust-generative/implementation": {
+      "source_sha256": "9b6345662b29fc395827c5742415ed30d684bf955ad155630be40d1ac9cdef7b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't cached noncausal teacher targets enter the router input?",
+        "answer": "Use them only as training targets. Causal router logits depend on prefix alone; the API does not prove the caller's network is causal.",
+        "example": "Knowing the target's expert probabilities during training does not let inference inspect the target token."
+      }
+    },
+    "qa/foundation-models:muon/mechanism": {
+      "source_sha256": "1cde23b914458e41cd14bfa7d21b96b964fc6e137fd0472433fb56e7ae9070dd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why treat gradients as matrices rather than adjust coordinates like AdamW?",
+        "answer": "Muon approximates the polar direction of momentum for hidden matrices, then applies shape scaling and decay. This uses spectral relationships, not just elementwise moments. Non-hidden parameters still use AdamW in the large recipe.",
+        "example": "Nearly collinear columns can yield different directions under matrix polar transformation and coordinate scaling."
+      }
+    },
+    "qa/foundation-models:muon/basics": {
+      "source_sha256": "9af3b1635d9ce1ba21714a9a8babefaafe9cf0110d0e748c60b7fa44a251ab20",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is Muon a matrix geometry update?",
+        "answer": "Hidden weights form linear maps. Approximate polar decomposition acts on momentum jointly and uses shape scaling and decay.",
+        "example": "A dominant correlated direction is handled differently from independent scalar learning rates."
+      }
+    },
+    "qa/foundation-models:muon/comparison": {
+      "source_sha256": "c704f38fdc2f6fb28b8d8a3981075bb726637a437ff090f819cd0d14fe0768c9",
+      "reviewed": true,
+      "fields": {
+        "question": "How does local Muon differ from applying it to every parameter?",
+        "answer": "Hidden matrices use Muon; embeddings, norms, biases, heads, and other parameters use AdamW. The hybrid optimizer is part of the comparison.",
+        "example": "A one-dimensional norm parameter is not suitable for matrix Newton–Schulz."
+      }
+    },
+    "qa/foundation-models:muon/implementation": {
+      "source_sha256": "480e8fb723815269c284bf8d827ccc6b5d46884cfdff8f1e1dd80f18be6a261b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why divide Newton–Schulz input by its Frobenius norm?",
+        "answer": "Normalize iteration scale before the specified polynomial; handle zero or tiny norms and preserve shape scaling. Orthogonality alone does not establish optimization quality or runtime.",
+        "example": "Scaling a gradient uniformly should not radically change the iteration's numeric range."
+      }
+    }
+  }
+}

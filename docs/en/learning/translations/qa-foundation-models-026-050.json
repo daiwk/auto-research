@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:gzip-sparse-attention/basics": {
+      "source_sha256": "c20f8d487167fd2a418ecf8b7d1827b95f6c2f514ca97de774ffc028a44fd842",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compress raw byte blocks first?",
+        "answer": "Compression ratio is a training-free proxy for unique byte density and guides long-range edges, not a semantic importance label.",
+        "example": "Repeated templates compress differently from unique IDs, but hard-to-compress gibberish can be useless."
+      }
+    },
+    "qa/foundation-models:gzip-sparse-attention/comparison": {
+      "source_sha256": "efe595c687f127ed9a74d0256d269232b648c48d4f117e41f9948573f5c03130",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a gzip mask vary compared with a fixed BigBird or Longformer pattern?",
+        "answer": "Fixed masks use predetermined positions; gzip uses per-example block compressibility for literal edges and retains local windows. It avoids learned mask weights but pays for compression and construction, so edge counts do not establish speed.",
+        "example": "Moving a unique passage can move gzip edges without changing a positional pattern."
+      }
+    },
+    "qa/foundation-models:gzip-sparse-attention/implementation": {
+      "source_sha256": "b9b71faf9f4a6d698a1c5fae5e8916c3ac6c5e38fcde76bc39746e31308db222",
+      "reviewed": true,
+      "fields": {
+        "question": "Why intersect literal, local, and self edges with the causal mask?",
+        "answer": "Their union expresses relevance, not chronology. Intersect it with causality and assign the appropriate masks to the three head types. Masking dense local scores does not accelerate a sparse kernel.",
+        "example": "Selecting two literal blocks cannot let the early one read future tokens in the other."
+      }
+    },
+    "qa/foundation-models:hymba/mechanism": {
+      "source_sha256": "72291cb9148073f902cc170d54e71bafa1cf17d01c0a2dbd6cbed8a5d3559a61",
+      "reviewed": true,
+      "fields": {
+        "question": "Why put attention and SSM in parallel within Hymba layers?",
+        "answer": "The same input gets direct historical reads and a recurrent summary in one layer, then fuses both. This combines access mechanisms, not free compute; fusion, KV, and state budgets still matter.",
+        "example": "One branch retrieves an old name while the other maintains running grammar state."
+      }
+    },
+    "qa/foundation-models:hymba/basics": {
+      "source_sha256": "5d7d8537acde309635960ad48c0b1e680ff96aa0567bd38457408b1a0f284fa3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine explicit historical reads and recurrent summaries?",
+        "answer": "Attention directly retrieves positions, while the SSM compresses history into state. The same layer can use both without forcing either to carry every dependency.",
+        "example": "Explicit access can recover a name while recurrence carries grammar context."
+      }
+    },
+    "qa/foundation-models:hymba/comparison": {
+      "source_sha256": "37dff3818fc140240591679839d9b3541a6449c42498e397145f04f2f6fd6f97",
+      "reviewed": true,
+      "fields": {
+        "question": "How does parallel Hymba differ from alternating attention and SSM layers?",
+        "answer": "Parallel branches both read the same layer input and fuse in one update. Alternating layers transform the first branch's result before the second computation. The graphs and fusion times differ at equal layer count.",
+        "example": "Two simultaneous readers share the original, unlike a second reader receiving only the first reader's summary."
+      }
+    },
+    "qa/foundation-models:hymba/implementation": {
+      "source_sha256": "8c3f2ed5b009757709a788d40c4b6edc55d97af63cf808395bdb6cd37069c403",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local Hymba path include all original features and throughput optimizations?",
+        "answer": "No. It fuses causal attention and a depthwise convolutional state branch, without meta tokens, 1.5B scale, or fused kernels. A runnable branch does not establish paper throughput.",
+        "example": "Passing a small-model gated forward is a mechanism check, not a deployment speed measurement."
+      }
+    },
+    "qa/foundation-models:kronlstm/mechanism": {
+      "source_sha256": "994c10581a61d22e9cdd79ee1f49876cddeb6773092d45446f5e81369cb132fd",
+      "reviewed": true,
+      "fields": {
+        "question": "Does KronLSTM update a full value vector or one scalar key–value association?",
+        "answer": "It uses vᵀSk and updates along vkᵀ, unlike correcting an entire vector error. Interference depends on overlap in both key and value; orthogonality on either side blocks that update's interference. Forget, erase, and write are separate; do not multiply the write coefficient by the erase gate.",
+        "example": "Similar keys with orthogonal values do not interfere under one scalar association update, without guaranteeing no future interference."
+      }
+    },
+    "qa/foundation-models:kronlstm/basics": {
+      "source_sha256": "5cf5f46b4ad667c5cd0de31fe1b44e9a2b244fb7ee1a747902ead528b54a6ae1",
+      "reviewed": true,
+      "fields": {
+        "question": "What memory quantity does KronLSTM correct?",
+        "answer": "It corrects scalar association vᵀSk rather than forcing the entire retrieved vector to equal v. The update follows vkᵀ with separate forget and erase/write gates.",
+        "example": "Adjusting one association need not rewrite every value direction for that key."
+      }
+    },
+    "qa/foundation-models:kronlstm/comparison": {
+      "source_sha256": "43eb3cb706187223459741839fa40c768d67bf67dde1fb9e501683a37edec624",
+      "reviewed": true,
+      "fields": {
+        "question": "How does KronLSTM's error differ from DeltaNet for interference analysis?",
+        "answer": "DeltaNet uses Sk−v, while KronLSTM uses scalar vᵀSk−c. Interference involves both key and value inner products; one orthogonal side removes interference from this write, not all future forgetting.",
+        "example": "Similar keys with orthogonal values can avoid interference despite key overlap."
+      }
+    },
+    "qa/foundation-models:kronlstm/implementation": {
+      "source_sha256": "b1fe05d4bcc589204da9819e046795d80b30248924db1ef9fcac7a58b65585da",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not copy ordinary delta update's forget direction and write coefficient?",
+        "answer": "Forgetting acts on the right along the key axis. The decoupled write is c·vkᵀ, not βc·vkᵀ; only erase uses β. Compare an independent vec reference instead of checking loss alone.",
+        "example": "Small β should not suppress the independent write gate c."
+      }
+    },
+    "qa/foundation-models:mamba/mechanism": {
+      "source_sha256": "cea1ba413983acb0dcc4d5a0be8293b1f6789098d8879e6c1f690e4ea5722e02",
+      "reviewed": true,
+      "fields": {
+        "question": "What does Mamba's selectivity change inside the SSM?",
+        "answer": "Token-dependent step sizes and read/write vectors control retention, write direction, and readout within recurrence. This is not output scaling of a fixed SSM. Linear sequence cost still does not guarantee exact arbitrary-token retrieval from finite state.",
+        "example": "Preserve state on filler but write differently for a key number; retrieval still depends on what remains."
+      }
+    },
+    "qa/foundation-models:mamba/basics": {
+      "source_sha256": "3cbe27072dc4295b71c1223760d91d5ed2f2a0da1587e559160d0f6ac67891ad",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Mamba selectivity depend on the current token?",
+        "answer": "Step size and read/write vectors depend on input, so retention, updates, and readout vary by content while still using recurrent state.",
+        "example": "A separator and answer token can trigger different updates."
+      }
+    },
+    "qa/foundation-models:mamba/comparison": {
+      "source_sha256": "5ed64d611058205dfe9884cc0592c1efc7f343eff8539cc5b8c2aa9365029081",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Mamba memory differ from reweighting historical KV?",
+        "answer": "Mamba accumulates history in state and uses input-dependent readout. Attention assigns weights directly to retained positions. Linear complexity does not imply lossless per-token history.",
+        "example": "A summary can retain a fact without separately addressable slots for every old word."
+      }
+    },
+    "qa/foundation-models:mamba/implementation": {
+      "source_sha256": "89dbc89b74a1961720c8e4b7711a4c5aeda7f0956d2b1aef256734a65163e50c",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a Python or PyTorch selective scan reproduce Mamba kernel throughput?",
+        "answer": "No. A loop can check input-dependent parameters and recurrence, but not a fused parallel CUDA scan. The local run also omits 2.8B pretraining. Validate correctness, language quality, and throughput separately.",
+        "example": "Seven steps agreeing with a reference check mechanics, not tokens per second."
+      }
+    },
+    "qa/foundation-models:memory-mosaics-plus/mechanism": {
+      "source_sha256": "d8b96f1b7ae6cf390029c72f186da85621669dfc7d1ebd711792496679665983",
+      "reviewed": true,
+      "fields": {
+        "question": "Why normalize current and related-task memory separately in Mosaics+?",
+        "answer": "One softmax lets numerous irrelevant past entries dilute current evidence. Two-stage retrieval normalizes each source then combines predictions. Short-term memory handles recent dependence, long-term stores predictive associations, and illegal future reads stay excluded.",
+        "example": "Three relevant current entries should not be diluted solely because there are 1,000 old records."
+      }
+    },
+    "qa/foundation-models:memory-mosaics-plus/basics": {
+      "source_sha256": "c46dff6a34b3e362887aee49e52d492da84546069eaf4f3b0c501c6781cb32ed",
+      "reviewed": true,
+      "fields": {
+        "question": "Why evaluate test-time learning rather than IID performance alone?",
+        "answer": "IID testing does not show use of newly observed task experience. Mosaics+ combines recent dependence and long-term predictive associations to organize new-task evidence.",
+        "example": "Use newly observed input/output examples to infer a rule rather than repeat old statistics."
+      }
+    },
+    "qa/foundation-models:memory-mosaics-plus/comparison": {
+      "source_sha256": "155464247467bd2d5f6eb99737afbe3bfb98db5154d082154df17d151dabdd28",
+      "reviewed": true,
+      "fields": {
+        "question": "How does two-stage Mosaics+ differ from a single softmax pool?",
+        "answer": "Separate current and related-task normalization precedes combining. In a shared pool, adding even unrelated old entries can change current weight; these are different computations.",
+        "example": "Many old items should not drown out a few important current associations by count alone."
+      }
+    },
+    "qa/foundation-models:memory-mosaics-plus/implementation": {
+      "source_sha256": "30ddbdeae773c8d19b3288f29735b17c3bf552e97a1805fb0b2c88465318fc34",
+      "reviewed": true,
+      "fields": {
+        "question": "How does predictive value at i+1 avoid a future read?",
+        "answer": "Restrict i≤t−s with s≥1. Then i+1 is within the visible boundary. Split normalization at document boundaries and handle empty memory; reference loops and future perturbations are negative controls.",
+        "example": "With skip=1, i=t−1 may use t but not t+1."
+      }
+    },
+    "qa/foundation-models:minimax-sparse-attention/mechanism": {
+      "source_sha256": "645ec0b8be3edde12bf9bc4edef0b46d1398a748ea178026723bc4788c7aa28e",
+      "reviewed": true,
+      "fields": {
+        "question": "What does MSA save and preserve by selecting blocks before exact attention?",
+        "answer": "A cheap block index reduces the historical range; main attention computes exact token interactions inside hits. Summaries select rather than replace tokens. A missed answer block cannot be recovered by exact attention on the rest.",
+        "example": "Choose two of ten pages to read word by word, saving main attention on eight but missing a date if its only page was dropped."
+      }
+    },
+    "qa/foundation-models:minimax-sparse-attention/basics": {
+      "source_sha256": "84da5ac4cadece5d2401463e45abad4b9c5ba1924b7c64d34e891a647369593e",
+      "reviewed": true,
+      "fields": {
+        "question": "Is an MSA history block a new layer or a token-axis candidate?",
+        "answer": "Blocks organize history for indexing. A light branch chooses blocks and the main branch reads their tokens. Block selection and exact attention have separate costs.",
+        "example": "Choosing a chapter in a table of contents differs from reading its sentences."
+      }
+    },
+    "qa/foundation-models:minimax-sparse-attention/comparison": {
+      "source_sha256": "8eb8f1bf72065a2ce8bf26a7180fde8dddb5862f0f41cc4dea4989a705f1ccd7",
+      "reviewed": true,
+      "fields": {
+        "question": "Does MSA indexing do the same thing as shrinking main attention KV?",
+        "answer": "The index decides where to read; main attention keeps its own exact Q/K/V inside selected blocks. Compressing KV changes what representations are read, not only where.",
+        "example": "Selecting two original passages preserves different evidence from summarizing the whole text into two passages."
+      }
+    },
+    "qa/foundation-models:minimax-sparse-attention/implementation": {
+      "source_sha256": "c4d0e5bbdee576265e59824acb27bfbb872f062bd23c399b6540e09f4589ca7b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't reduced MSA attention pair ratio imply the same speedup?",
+        "answer": "Runtime includes indexing, selection, movement, and kernels. The unfused PyTorch/MPS path has fewer pairs but takes longer. Report pair ratio, PPL, and measured time separately.",
+        "example": "An 80% pair reduction can still slow training if overhead dominates."
+      }
+    },
+    "qa/foundation-models:moba/mechanism": {
+      "source_sha256": "c24c6a1470b3ab37a68f8d18d3831d39b6177ad5b51a22e12c7fe2126e886ba9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep the current causal block when MoBA routes to a few remote ones?",
+        "answer": "Routing finds distant evidence; current-block retention protects nearby context from routing misses. Causal masking restricts visible positions, and attention inside selected blocks is exact at token level. Sparsity does not preserve every distribution.",
+        "example": "Keep the current subject even if remote chapters score higher; do not read the current block's ungenerated suffix."
+      }
+    },
+    "qa/foundation-models:moba/basics": {
+      "source_sha256": "0a217ed574ae6579577ee9dd464f711178c6a6953b6fd9a1c49f640dcd0b7da7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why group history into blocks instead of reading all of it for every query?",
+        "answer": "Routing picks a few relevant blocks, then exact attention reads inside them. This reduces candidate pairs while keeping within-block detail.",
+        "example": "A question needing two passages need not attend to every word."
+      }
+    }
+  }
+}

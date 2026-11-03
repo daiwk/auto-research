@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "units": {
+    "theme/system-one": {
+      "source_sha256": "3835c483861f11fae8175d4a067ead515beaa43215031ea5306c100a09e09045",
+      "reviewed": true,
+      "fields": {
+        "title": "Structured Decisions",
+        "intro": "Use language models for decisions over finite candidates: start with distribution readout, then test invariance, reasoning budgets, and ongoing feedback."
+      }
+    },
+    "theme/system-one/typed-readout": {
+      "source_sha256": "2fb642cfea0d2d792ee71c88531a1b80b3aa9c69b61909b196be81677b9c040b",
+      "reviewed": true,
+      "fields": {
+        "title": "Typed Readout: From Generated Sentences to Candidate Distributions",
+        "question": "When the task is just to select from candidates, how can a model return a usable decision directly?",
+        "takeaway": "Specify state, question, and candidates before choosing a readout. LLM-as-Jev reads model scores for options into a finite distribution and studies frozen models and KL-anchored fine-tuning. MetaEncoder independently encodes request and candidates, using similarity for closed-set decisions or open retrieval. The former can consider options jointly; the latter can cache candidate representations. Their interaction power and reuse costs differ.",
+        "example": "With only Search, Calculate, and Abstain as routing actions, returning probabilities is easier to constrain than parsing free text. For millions of candidates, a dual tower can pre-encode tools or items. But a single independent similarity may not express reasoning that compares two candidates in detail.",
+        "pitfall": "A valid schema guarantees neither correctness, calibration, independence, nor stable performance across candidate counts. Cached candidate embeddings must not depend on the current request. The local LLM-as-Jev evidence is mechanism-only; MetaEncoder's expensive training and evaluation were not reproduced.",
+        "reading_order": "Start with LLM-as-Jev's finite readout to see why it returns a distribution rather than a sentence. Next compare joint option interactions with MetaEncoder's shared dual tower and independent cached candidates. Check each write-up for local capability status."
+      }
+    },
+    "theme/system-one/typed-readout/self-test": {
+      "source_sha256": "cc42dba6cdd53ee59d38c3aed3490e094be215a136fb72b8446103b7c20b8b28",
+      "reviewed": true,
+      "fields": {
+        "question": "Does caching independent candidate encodings eliminate the need to re-encode requests?",
+        "answer": "No. Candidates are reusable, but a new state, question, or image still requires a new request encoding and matching or retrieval. Request-specific information in candidate encodings also invalidates the cache; draw the reuse boundary from actual dependencies."
+      }
+    },
+    "theme/system-one/candidate-invariance": {
+      "source_sha256": "7f795642eb134ca6e0b75d8301b5f2908b250c2e739d75722630dd1518967d54",
+      "reviewed": true,
+      "fields": {
+        "title": "Candidate Invariance: Order, Competitors, and Calibration",
+        "question": "Why can simply reordering options or adding an irrelevant candidate change the original preference?",
+        "takeaway": "Prism-1 starts from choice axioms: each option sees only shared state and itself, with isolated attention blocks and equal starting positions, before independent scores are normalized by softmax. The request audit separately adds questions, evidence, and candidate eligibility. This separates reliance on other questions, real new evidence, and effects from the normalization denominator.",
+        "example": "If A and B have exponentiated scores 2 and 1, adding C with score 5 drops A's probability from 2/3 to 2/8 naturally. A's odds against B should still be 2. If the old ranking reverses, investigate cross-option attention, positional changes, or schema leakage.",
+        "pitfall": "Invariance does not guarantee accuracy or prevent C from winning. Tasks such as None of the Above may need cross-option semantics. Keep strict flips separate from ties and do not interpret an interval containing zero as proof of no effect. The local audit script does not generate the paper model's predictions.",
+        "reading_order": "First read Prism-1 on independent option scores, block masks, and positions. Then read the three paired interventions in the request audit to learn how to avoid mistaking normalization for preference reversal."
+      }
+    },
+    "theme/system-one/candidate-invariance/self-test": {
+      "source_sha256": "5a2924090dce5a0d038f186ec8ba665a68067b3ad2159edf8f0c3b2a68ed085e",
+      "reviewed": true,
+      "fields": {
+        "question": "Does A's absolute probability decreasing after adding C prove a violation of candidate independence?",
+        "answer": "No. Hold shared evidence fixed and compare old conditional probability A/(A+B) or odds A/B. Adding C to the denominator naturally lowers A's absolute probability. Distinguish new evidence from eligibility alone."
+      }
+    },
+    "theme/system-one/adaptive-decisions": {
+      "source_sha256": "40b09cc5565856eef8116584a7fcec2220a29638553939f360935116b667c575",
+      "reviewed": true,
+      "fields": {
+        "title": "Decisions on Demand: Selective Reasoning, Transfer, and Feedback",
+        "question": "Which requests deserve additional reasoning, and which feedback should affect the next decision?",
+        "takeaway": "Selective Reasoning separates starting reasoning, reading a candidate distribution, and accepting and stopping. A shared reader works from both an empty prefix and intermediate reasoning. Jev-DLC keeps bounded action memory and correction directions over a frozen scorer, applying accept/revoke feedback to later requests. Transfer also tests changes in language and label budget.",
+        "example": "A user's change from tool A to B can inform similar future requests, but cannot turn the previous prediction into a success retroactively. On a harder item, read the distribution mid-reasoning and apply a preregistered stop rule. Record budget exhaustion separately from confident early stopping.",
+        "pitfall": "Low entropy is concentration, not correctness. Freeze gates and thresholds before evaluation. Keep feedback chronological and never use future labels for transfer or ongoing adaptation. Local evidence consists of recomputed published statistics or interface diagnostics on random inputs, not high-cost full-model runs.",
+        "reading_order": "Start with Selective Reasoning's start/read/stop controls for one request. Then read Jev-DLC's bounded feedback state and temporal protocol for adaptation across requests. Finally check the limits of public capability and cross-language transfer."
+      }
+    },
+    "theme/system-one/adaptive-decisions/self-test": {
+      "source_sha256": "33968a6cdc2bef8e493c516d81f1c939150b618f61d97a5b93d540518af181dc",
+      "reviewed": true,
+      "fields": {
+        "question": "Can answering a question again immediately after its correct answer is fed back count as online continual-learning success?",
+        "answer": "No. The current target has been seen, so the new answer is not an independent prediction. Log the initial decision and feedback, then evaluate the updated state only on future unrevealed requests, against a no-feedback or fixed-policy baseline on the same sequence."
+      }
+    }
+  }
+}

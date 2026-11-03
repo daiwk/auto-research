@@ -32,6 +32,8 @@
         search: (card.dataset.search || card.textContent).toLowerCase(),
       }));
       const pageSize = Number(root.dataset.learningPageSize) || 24;
+      const english = root.dataset.learningLang === "en";
+      const label = (zh, en) => english ? en : zh;
       let visible = pageSize;
       const params = new URLSearchParams(window.location.search);
       let selectedPaper = params.get("paper") || "";
@@ -42,7 +44,7 @@
       const paperName = document.createElement("span");
       const clearPaper = document.createElement("button");
       clearPaper.type = "button";
-      clearPaper.textContent = "清除论文筛选";
+      clearPaper.textContent = label("清除论文筛选", "Clear paper filter");
       paperFilter.append(paperName, clearPaper);
       root.querySelector('.ar-learning-controls').before(paperFilter);
       if (search) search.value = params.get("q") || "";
@@ -58,7 +60,8 @@
         empty = document.createElement("p");
         empty.className = "ar-learning-empty";
         empty.dataset.learningEmpty = "";
-        empty.textContent = "没有匹配的问题。试试其他关键词，或选择全部主题。";
+        empty.textContent = label("没有匹配的问题。试试其他关键词，或选择全部主题。",
+          "No matching questions. Try another search or select all themes.");
         grid.before(empty);
       }
 
@@ -110,14 +113,21 @@
         empty.hidden = matched > 0;
         levels.forEach(button => button.setAttribute("aria-pressed", String(button.dataset.learningLevel === selectedLevel)));
         root.dataset.paperFiltered = selectedPaper ? "true" : "false";
-        if (search) search.placeholder = selectedPaper ? "搜索本篇论文的问题" : "搜索问题、论文或机制";
+        if (search) search.placeholder = selectedPaper
+          ? label("搜索本篇论文的问题", "Search questions about this paper")
+          : label("搜索问题、论文或机制", "Search questions, papers, or mechanisms");
         paperFilter.hidden = !selectedPaper;
-        if (selectedPaper) paperName.textContent = '当前论文：' + (cards.find(card => card.identity === selectedPaper)?.paperTitle || selectedPaper);
-        if (status) status.textContent = `匹配 ${matchedQuestions} 问，涉及 ${papers.size} 篇，已显示 ${shownQuestions} 问。`
-          + (pending ? ` ${pending} 篇待补问答。` : "");
+        if (selectedPaper) paperName.textContent = label("当前论文：", "Selected paper: ")
+          + (cards.find(card => card.identity === selectedPaper)?.paperTitle || selectedPaper);
+        if (status) status.textContent = label(
+          `匹配 ${matchedQuestions} 问，涉及 ${papers.size} 篇，已显示 ${shownQuestions} 问。`,
+          `${matchedQuestions} matching questions across ${papers.size} papers; showing ${shownQuestions}.`
+        ) + (pending ? label(` ${pending} 篇待补问答。`, ` ${pending} papers still need questions.`) : "");
         if (more) {
           more.hidden = shown >= matched;
-          more.textContent = `再显示 ${Math.min(pageSize, matched - shown)} ${pending ? "条记录" : "个问题"}`;
+          const remaining = Math.min(pageSize, matched - shown);
+          more.textContent = label(`再显示 ${remaining} ${pending ? "条记录" : "个问题"}`,
+            `Show ${remaining} more`);
         }
       }
 

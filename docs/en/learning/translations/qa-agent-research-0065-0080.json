@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:cache-engineering/mechanism": {
+      "source_sha256": "1a58255e28f4f28a0927590481a0426b76d9c4ecbaeb2286910389f48b398d21",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can the same final text prefix correspond to different, nonreusable KV caches?",
+        "answer": "KV depends on the history and positions visible when it was computed. Dropping tokens at different times can alter later states. repos must also transform RoPE keys for their new positions; updating indices alone or rotating values is wrong. Cache identity must therefore track position versions and operation history, not just logical text.",
+        "example": "Example: Evicting a tool response before generation versus afterward changes what later tokens could see. Matching final retained text does not make those caches interchangeable."
+      }
+    },
+    "qa/agent-research:cache-engineering/basics": {
+      "source_sha256": "70c3bf9b8129224bdb6a7eaa3faa23303177d10e5648e005296553b02effb91d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a long-running agent keep its chat history while running out of inference cache memory?",
+        "answer": "Logical conversation stores text, while KV cache stores each layer's intermediate representations of past tokens. Their purpose and footprint differ. Longer conversation increases cache memory and subsequent reads. Cache Engineering manages that state directly while preserving logical history, but recovering evicted cache still costs computation.",
+        "example": "Example: Ten thousand tool-log lines can remain in the conversation even while their KV is inactive. Reusing those logs later can require recomputing representations."
+      }
+    },
+    "qa/agent-research:cache-engineering/comparison": {
+      "source_sha256": "d2e63f2b0db1813627dfdc358057d366b6ab3c9b53f44262183cd6ea7fe18e46",
+      "reviewed": true,
+      "fields": {
+        "question": "How does direct KV management differ from summarizing text for recovery and reuse?",
+        "answer": "Summarization changes logical input and can invalidate later KV, requiring fresh prefill. Direct management preserves logical history but changes active state and position versions. Different operation timing can produce different KV for the same final text and token set, so cache reuse identity must include history.",
+        "example": "Example: Dropping tool KV before versus after generating a sentence can change that sentence's hidden state even when the final retained text is identical."
+      }
+    },
+    "qa/agent-research:cache-engineering/implementation": {
+      "source_sha256": "92b5bc7fc94dbdef89a2cc473214488c47cd71390dd52c3e702a36fca3aedb36",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does repos rotate keys but not apply the same RoPE transform to values?",
+        "answer": "Moving a position from p to q adjusts an already rotated key by R(q)R(p)^-1, while the value stays unchanged. drop itself does not renumber. The cache system also needs operation history and versions. The local run does not implement AKV or serving; a few tensor rotations are not full cache engineering.",
+        "example": "Example: Moving a key from position ten to five undoes the old rotation and applies the new one. Rotating its value would change how its content is read."
+      }
+    },
+    "qa/agent-research:tokenworth/mechanism": {
+      "source_sha256": "ad61535d6692fb67b0859304f2e87e78bae17098545accb4e70e7020e2306e0d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use one memory-worth model for both retrieval and eviction rather than rank only by similarity?",
+        "answer": "Similar memories may be long, obsolete, or unreliable. Under budget, compare actual task value. Stable base features supply interpretable signals, and RFM learns a query-dependent residual. The same value scale guides retrieval and retention. Feedback updates only memories actually selected and used; do not invent outcomes for unvisited entries.",
+        "example": "Example: Two memories concern the same interface. The old one is more similar but obsolete; the newer one is shorter and reliable, and may be worth retaining instead."
+      }
+    },
+    "qa/agent-research:tokenworth/basics": {
+      "source_sha256": "b3e72db0639b49b0117b6f6983b209adaf9d327c7d23eaef40b80af33b684ccf",
+      "reviewed": true,
+      "fields": {
+        "question": "Should the most related memories always be kept, and what resource limits does TokenWorth face?",
+        "answer": "Memory capacity, interactions, and generation length are finite. A long, superficially relevant memory can crowd out more useful information. TokenWorth treats retention and use as value allocation under resource competition rather than maximizing library size or similarity alone.",
+        "example": "Example: A long guide repeats known steps, while a short note records a key permission restriction. The shorter note can deserve a slot despite weaker word overlap."
+      }
+    },
+    "qa/agent-research:tokenworth/comparison": {
+      "source_sha256": "c91deeae089c7579e2d45c22e99450abe8cd021863d6b2459216026b2073365d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate fast residual fitting from slow feature-geometry updates?",
+        "answer": "Fast updates fit value discrepancies from new feedback promptly. Slow updates use gradient statistics to adapt kernel-distance geometry without large representation swings after every observation. These are different adaptation timescales. The residual model cannot see all candidate outcomes; only used memory pairs have real labels.",
+        "example": "Example: One failure can lower a memory's residual worth. Multiple feedback observations can later change which feature differences the kernel amplifies."
+      }
+    },
+    "qa/agent-research:tokenworth/implementation": {
+      "source_sha256": "c0cb745d05a357f01737f9003845efddceb2f17f0cf70ff0c5cec36088ccda7f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a newly admitted memory still be evicted immediately?",
+        "answer": "Admission checks novelty or probe value relative to the best old memory. The expanded library then evicts the lowest overall value, and the new item competes too. Probes use real current and historical queries, not future test questions. Only selected pairs receive updates, not invented counterfactual success labels.",
+        "example": "Example: A sufficiently novel candidate enters a full library but ranks last by shared value. It should leave rather than force out a stronger existing memory."
+      }
+    },
+    "qa/agent-research:memprice/mechanism": {
+      "source_sha256": "9fd9b6815fd624f6aa4d1283d00c31ef884a7fac2c289b150efbbc76d2d02efd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why shouldn't an archive refresh reset the virtual queue and global round count?",
+        "answer": "The queue represents cumulative resource pressure, and the round count scales the dynamic price. Refresh only extracts a new representation from an external archive. Resetting both would forget past overuse and suddenly underprice detail. Hard capacity still applies every round; an average occupancy target cannot replace it.",
+        "example": "Example: After several nearly full context windows, a summary refresh should not zero the price and cause another wave of expensive full-text retention."
+      }
+    },
+    "qa/agent-research:memprice/basics": {
+      "source_sha256": "017c8327791496e21f3e405219e6987fc23656df1deae1264fedcc1602661e22",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are MemPrice's five representation levels a joint allocation problem?",
+        "answer": "Each memory can be full text, summary, abstraction, keywords, or deletion. These differ in size and usefulness and compete for one hard token budget. Independently picking the best version can exceed capacity. Optimize jointly while choosing at most one per item; deleted detail cannot be reconstructed from nothing in the current window.",
+        "example": "Example: One full-text memory can crowd out two summaries. Compare the whole group instead of choosing highest fidelity independently for every item."
+      }
+    },
+    "qa/agent-research:memprice/comparison": {
+      "source_sha256": "e6c72df34ac6cd8dcb00c28152180997fcd21a95a4b4f4b6fcaa252b66ea559e",
+      "reviewed": true,
+      "fields": {
+        "question": "How does dynamic pricing represent long-run capacity pressure that relevance Top-K misses?",
+        "answer": "Top-K uses only the current ranking. Dynamic price comes from a virtual queue of persistent occupancy, so historical overuse makes retaining detail more expensive. Hard capacity caps one round; average occupancy controls long-run pressure. They are not the same threshold, and the mechanism does not guarantee global optimality for all state paths.",
+        "example": "Example: Repeatedly filling the window raises the price and encourages lower fidelity. A currently relevant memory may no longer justify keeping a long original."
+      }
+    },
+    "qa/agent-research:memprice/implementation": {
+      "source_sha256": "0792c1d7f9aab81c5e577de876a4edf64b3b02fdd3559c0a7447d3d9b9ed458e",
+      "reviewed": true,
+      "fields": {
+        "question": "How does MemPrice fit each memory's alternatives into a hard token budget?",
+        "answer": "Enumerate full text, summary, abstraction, keywords, and deletion, then measure sizes with the tokenizer. Use multiple-choice knapsack to choose at most one representation per memory. Each round must stay within B. The average occupancy target changes price, not whether the current window may exceed capacity. Archive refresh does not invent deleted detail.",
+        "example": "Example: With one hundred tokens left and two eighty-token originals, select summaries if useful instead of combining the independently best originals."
+      }
+    },
+    "qa/agent-research:proper-agent/mechanism": {
+      "source_sha256": "5b2e8a5eecb8499baf7680ddb1ba398b88728e0a186da007ac9450b27d21592a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does a proactive assistant need a separate intervention gate after retrieving relevant memories?",
+        "answer": "Relevance means topical overlap, not that interrupting now is warranted. The gate decides whether evidence merits intervention; the generator uses the current scene and prior speech to speak or stay silent. Timing and count matter, so correct but late or repeated reminders are not perfect success.",
+        "example": "Example: A nut allergy is relevant when the food is visible and the assistant has not warned yet. Repeating the warning creates a false trigger."
+      }
+    },
+    "qa/agent-research:proper-agent/basics": {
+      "source_sha256": "688f9a8fa6b1dea4c7d57e356f6cec7bbba1283b5f1e88ceae890e8a6dfb9a63",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must MemoProAgent make one more judgment than ordinary QA when no user asks a question?",
+        "answer": "QA starts with a request. A proactive assistant must also decide whether to interrupt now, what to mention, and whether it has already said it. The paper combines long-term experience with current visual context to help at the right moment rather than maximize message count. Correct reminders can still fail through bad timing or repetition.",
+        "example": "Example: Reminding someone to bring keys before leaving can help. Repeating it three times after they already picked them up does not."
+      }
+    },
+    "qa/agent-research:proper-agent/comparison": {
+      "source_sha256": "c1c2a951e2234ccbb7b5460174cd240b51b5653337bab7212a54a94cb5357e47",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do Perfect and a Hit for saying the right thing at least once measure different behavior?",
+        "answer": "Perfect requires correct content within the trigger window and exactly one utterance. Hit does not rule out early, late, or repeated interruption. Any speech on a silent negative segment is a false trigger. Raising recall alone can hurt user experience; content hits do not replace timing and count evaluation.",
+        "example": "Example: An early reminder followed by another inside the window can count as a hit without being a perfect intervention."
+      }
+    },
+    "qa/agent-research:proper-agent/implementation": {
+      "source_sha256": "248f8d0a919f9a33c93bc7673f30ae53dd66436e9edf705a8161bdbc4a09907b",
+      "reviewed": true,
+      "fields": {
+        "question": "Can PPR retrieval and the semantic gate be replaced by one open-loop flag?",
+        "answer": "No. PPR performs actual personalized random walks with restart on entity relations. The gate decides whether the retrieved evidence warrants intervention. Training optimizes only generator tokens, not tool-injected evidence. A local fixture is not the official evaluation on authorized long videos and cannot use a flag to supply the right utterance.",
+        "example": "Example: Retrieving a relation between a cup and drinking habits still leaves the gate to determine whether the user just drank. The relation alone is not permission to speak."
+      }
+    }
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:aria/implementation": {
+      "source_sha256": "aa2210a9aece19d568df6f1754278b5d641b2a40374108ae6680dc6950599704",
+      "reviewed": true,
+      "fields": {
+        "question": "What hard constraints apply to the cut event, patch types, and size?",
+        "answer": "The cut retains the referenced observed event and, if nonempty, must precede the identified bad event. A patch allows at most eight events and 12,000 canonical JSON characters, requires nonconflicting IDs, and cannot replay the old suffix with new IDs. Only assistant messages and pending calls are allowed, not fabricated tool results. No five-stage model training ran locally.",
+        "example": "Example: Propose another order lookup, but do not insert an invented tool observation that it was paid."
+      }
+    },
+    "qa/agent-research:rated/mechanism": {
+      "source_sha256": "1ae3f9d223d584bbe454fcd63cb5c15e2e3e69dadddbb82dd4be9f9c0a1a9509",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does execution feedback update only the LinUCB arm for the tool actually selected?",
+        "answer": "Only execution exposes success, error, or timeout. Unchosen outcomes are counterfactual. Per-tool updates avoid blaming all candidates for one failure, while discounting reduces old reliability evidence over time. Semantic top-K supplies candidates; exploration does not prove an uncalled tool is better.",
+        "example": "Example: If tool A times out, update A. Do not mark unused B successful; retain uncertainty until it is tried."
+      }
+    },
+    "qa/agent-research:rated/basics": {
+      "source_sha256": "d13def201aa151d478353ce778b6d88d2799bff9e46df0a5df192b540e2f4e61",
+      "reviewed": true,
+      "fields": {
+        "question": "Why rerank by execution reliability when a tool is semantically relevant?",
+        "answer": "The best matching description may refer to a tool that fails, times out, or is unavailable. RATED retrieves semantic Top-K first, then combines static metadata and per-tool online feedback. Reliability complements relevance without justifying a tool that cannot solve the task.",
+        "example": "Example: Favor the weather API that still works over a frequently timing-out equivalent, not an irrelevant reliable calculator."
+      }
+    },
+    "qa/agent-research:rated/comparison": {
+      "source_sha256": "b5049dc891b006b55e2c5112fdf722bc3c0666b437f6c9aea97bf956bf83289d",
+      "reviewed": true,
+      "fields": {
+        "question": "What do the frozen dual encoder and online discounted LinUCB adapt to?",
+        "answer": "The offline encoder supplies semantic query-tool representations and stays frozen in deployment. LinUCB updates each arm from actual feedback and discounts older evidence as reliability changes. Bandit reranking is not online retraining of the text encoder.",
+        "example": "Example: Successful calls after service recovery can raise arm value while encoder parameters remain unchanged."
+      }
+    },
+    "qa/agent-research:rated/implementation": {
+      "source_sha256": "37509295a5ed2ef4321f7fb44dcce240b770a60ba0b0615500d826c46e574962",
+      "reviewed": true,
+      "fields": {
+        "question": "How does γ affect history for the selected tool in discounted LinUCB?",
+        "answer": "Decay the selected arm's diagonal A and b by γ, then add current squared features and execution feedback. Older evidence loses influence, and A also controls exploration uncertainty, so this is not just changing a success rate. The local encoder trained briefly, but the authorized tool binding failed; bandit updates are not tool success.",
+        "example": "Example: Recent timeouts can outweigh a long success history under decay. Permanent cumulative statistics may hide the change."
+      }
+    },
+    "qa/agent-research:jev-workflow/mechanism": {
+      "source_sha256": "e792b31e7f9bc2081a38c8895649c3349140a9cb692e6547ad88d6f53ab6e339",
+      "reviewed": true,
+      "fields": {
+        "question": "Why might faster individual decisions raise total resources per successful delivery?",
+        "answer": "Errors can cause retries, failed recovery, or premature completion. Resource per success includes cost and time for every attempt divided by successes. Matched successes compare smooth paths only and cannot replace all-attempt delivery or hide failures.",
+        "example": "Example: A route half as expensive per attempt may succeed twice in ten tries, making it costlier per delivery than a slower route that succeeds eight times."
+      }
+    },
+    "qa/agent-research:jev-workflow/basics": {
+      "source_sha256": "c7323ac7cfe86deaa0472f182c08e9134cc838a4be48c1453c42189b596a1282",
+      "reviewed": true,
+      "fields": {
+        "question": "Why evaluate cheap decisions per completed delivery instead of per invocation?",
+        "answer": "Agents combine decisions, tools, and retries. Local savings can increase downstream failures and reruns. Jev Workflow counts all resources required for delivery so cheaper decisions and extra attempts share one denominator. Report different success subsets separately rather than advertise local latency alone.",
+        "example": "Example: Saving half a second per decision may cost three extra attempts. The user pays for all of them."
+      }
+    },
+    "qa/agent-research:jev-workflow/comparison": {
+      "source_sha256": "d8b5bb55839464700ce04459196f82dc1cba1777f186d0eea46c91f58cf94f1a",
+      "reviewed": true,
+      "fields": {
+        "question": "What do matched-success and all-attempt delivery each measure?",
+        "answer": "Matched-success compares resources only on task/run pairs where both configurations succeed, isolating cost along successful paths. All-attempt includes failed resources and all successes to measure delivery. Conditioning on joint success can hide one configuration's many failures.",
+        "example": "Example: Three jointly solved tasks can show faster decisions without revealing failures among the seven others. Interpret both views."
+      }
+    },
+    "qa/agent-research:jev-workflow/implementation": {
+      "source_sha256": "13edba9cb6b6387b16d3e495dc3d80d357e8fb64dde5c697e06e8efd11dc4ebd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not compute a tidy ratio with zero successes, missing pairs, or invalid resource values?",
+        "answer": "Cost per success is undefined at zero successes. Missing task/run pairs invalidate comparisons, and negative or nonfinite resources are invalid observations. Report or reject these states rather than delete failures to repair a denominator. The infrastructure consumes real paired traces and neither loads nor fabricates Jev weights or API outputs.",
+        "example": "Example: Do not add ε to an all-failure denominator or copy a paper row as a local run."
+      }
+    },
+    "qa/agent-research:mingbird/mechanism": {
+      "source_sha256": "f13f06af18355c3360ac9fd1a3984b5354d4bdca898b068c62809c00dde1fcab",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reintroduce the original task and plan and check artifacts after the model says it is done?",
+        "answer": "A long trajectory can forget requirements or confuse executed actions with delivery. Checking the original exposes missing files, missing verification, and early stopping. Loop detection and bounded format rescue address runtime faults, not model knowledge. Budget actual UTF-8 bytes rather than character counts.",
+        "example": "Example: Creating a file does not satisfy a task that also requires a test report. Re-read the original artifact list."
+      }
+    },
+    "qa/agent-research:mingbird/basics": {
+      "source_sha256": "e661cba5f2a72f3bedb54ed420359e0e933ed018ba206190099e242da07358f5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does MingBird focus on small models doing long multi-tool tasks?",
+        "answer": "Small models have limited context, tool understanding, and error recovery. Loading all tools and all history adds pressure. MingBird organizes tools, execution loops, and completion checks under resource constraints. Components do not establish reliable arbitrary long-horizon capability; verify actual deliverables.",
+        "example": "Example: A file-and-database task first shows the relevant domain, then executes steps and verifies output rather than reading the whole catalog and declaring completion."
+      }
+    },
+    "qa/agent-research:mingbird/comparison": {
+      "source_sha256": "681a9171ed837c7f2597344c80088534718a678a641000a21f2906e563e7a939",
+      "reviewed": true,
+      "fields": {
+        "question": "What do domain routing and flattened schemas trade off against showing all original tools?",
+        "answer": "Routing narrows the tool domain. Presenting required arguments when schemas are large reduces formatting burden and irrelevant interfaces. Optional arguments can still matter, and user constraints cannot be dropped. This changes harness input and recovery, not base architecture.",
+        "example": "Example: A tool has ten parameters and two required ones. Start with a simplified schema but still honor a user-requested optional filter."
+      }
+    },
+    "qa/agent-research:mingbird/implementation": {
+      "source_sha256": "e239c6b24b707d271e76c4387bdb4709c52cacc54653030bcccfc46b8539f3e3",
+      "reviewed": true,
+      "fields": {
+        "question": "How are duplicate-call signatures and prefill budget computed?",
+        "answer": "Use tool name and canonical JSON arguments, so key order does not distinguish calls. Block the sixth repeat before execution and correct after fifteen consecutive no-output actions. Prefill counts UTF-8 bytes. JSON rescue parses registered tools only without eval; this is not a full GUI product or sandbox.",
+        "example": "Example: Reversed key order cannot evade duplicate detection. A CJK character can use multiple UTF-8 bytes, so character counts understate input."
+      }
+    },
+    "qa/agent-research:cera-moa/mechanism": {
+      "source_sha256": "d64eb0734d086b7967447e4e6a6af8afddd53ac6f98983b1939aadd065e3c5cc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use familiarity-based expert selection and assign training samples back to experts?",
+        "answer": "Routing choices and training assignments feed back: assignments shape future expertise. Middle-layer representations estimate familiarity, a cumulative threshold chooses how many experts to use, and targeted training reinforces specialization. Changing only routing while training everyone identically may not sustain distinct expertise.",
+        "example": "Example: Send code cases toward a code-familiar expert and language cases elsewhere. Ambiguous samples may activate more experts rather than use one fixed team."
+      }
+    },
+    "qa/agent-research:cera-moa/basics": {
+      "source_sha256": "0cf8c6dd92e547a5ad4d6d84b4af5e248c8132c832003ac90b03b1c87d02c4f9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CERA-MoA assign samples to experts familiar with them?",
+        "answer": "Calling the same number and set of models on all questions can waste resources and hinder specialization. Familiarity guides selection and training allocation. It is a routing signal, not proof of a correct answer; verify outcomes and total compute.",
+        "example": "Example: Code and math experts may join different samples. Role names alone do not establish effective division of labor."
+      }
+    },
+    "qa/agent-research:cera-moa/comparison": {
+      "source_sha256": "2d589e1ed39534d9df9c2a44fe7cfef49475ec149bab312da30f0f3320a2d1b4",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a cumulative threshold differ from fixed Top-2 expert selection?",
+        "answer": "Top-2 uses the same number per task. Cumulative selection adapts to score concentration: easy cases can use fewer experts and uncertain cases more. Variable counts change cost, so compare quality with total compute rather than infer efficiency from average routed count.",
+        "example": "Example: Use one clearly dominant expert or several with similar scores instead of always calling two."
+      }
+    }
+  }
+}

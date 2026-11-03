@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:pinclip/comparison": {
+      "source_sha256": "6018f3232251b7a731d862649d47c177f3ad29bd5d9a0f4748beff75127539b3",
+      "reviewed": true,
+      "fields": {
+        "question": "Where do PinCLIP positives come from in neighbor alignment versus image–text contrastive learning?",
+        "answer": "Image–text positives link modalities of one item; graph neighbors link distinct items on boards, learning pairing and interest structure. Signals can conflict, requiring weights and sampling. A sparse genre proxy cannot reproduce VLM distinctions, so its negative result is bounded.",
+        "example": "Illustration: A lamp's image and description are one positive pair; the lamp and a table on one board are another, not the same item."
+      }
+    },
+    "qa/recommendation:pinclip/implementation": {
+      "source_sha256": "37211b29076e90ef19e7cafa79b96219a637e5ec3bbb1ebe23ec877ca0a99633",
+      "reviewed": true,
+      "fields": {
+        "question": "Why exclude future test edges from PinCLIP graph training rather than just freeze the image encoder?",
+        "answer": "Future consumption edges can encode target relations even without encoder updates. Graph construction, negatives, and new-content splits need cutoffs. Distinguish local alignment from original pretraining; vector shape alone does not establish fidelity.",
+        "example": "Illustration: Adding a future saved lamp edge exposes the answer before prediction regardless of frozen parameters."
+      }
+    },
+    "qa/recommendation:pindco/mechanism": {
+      "source_sha256": "1c650fbd9bf85ee4d837fbc2fe87bd96587d449d05ff2ebda58d041f996fbfe2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why predict creative lift over a base ad and penalize pixel use in PinDCO?",
+        "answer": "Base scores already capture product–user match; increments isolate predicted image, title, and layout effects. Tall creatives consume more feed space, so a pixel adjustment weighs value against footprint. Exploration gathers new feedback. The local pixel-free proxy is not causal layout evidence.",
+        "example": "Illustration: A taller image can gain clicks but displace content. Prefer it only when added value offsets space cost."
+      }
+    },
+    "qa/recommendation:pindco/basics": {
+      "source_sha256": "b668a7b8c4c4980cdd388a30a1b1af6a8b122fe1fb339bafadf6e60e7017e1af",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use component-specific towers for images, titles, and layout in PinDCO?",
+        "answer": "Components differ in modality and statistics. Separate encoders retain roles before combining them to predict increments for one base ad. Interaction remains necessary to score combinations. A predicted lift is not randomized causal evidence.",
+        "example": "Illustration: Changing a title and changing image shape have different effects; an attractive image can still mismatch the copy."
+      }
+    },
+    "qa/recommendation:pindco/comparison": {
+      "source_sha256": "2a9e5538af94e290640c0079b3a0284684724c8e7b1cf299ef6fb8f77c6c3d25",
+      "reviewed": true,
+      "fields": {
+        "question": "How does PinDCO ε-greedy help new creatives compared with giving all traffic to historical winners?",
+        "answer": "Greedy exposure starves new creatives of evidence. Limited random exploration provides less-selected feedback for component learning, but costs traffic and does not remove all confounding. Pixel adjustment separately controls space; retain catalog and factual safeguards.",
+        "example": "Illustration: A new title with no clicks may simply lack exposure. Explore modestly without showing clearly misleading copy."
+      }
+    },
+    "qa/recommendation:pindco/implementation": {
+      "source_sha256": "b0a1f279b786b4bb13a087182c158c5197f8bf4d42da7d6e879e61601ec0a30c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why preserve PAM clipping and the precise definition of relative aspect ratio r?",
+        "answer": "P(r)=clip(1−tanh(k(r−1)),0,1) penalizes tall creatives within a legal range and multiplies base objective O. Inverting the ratio or omitting clipping changes the behavior. Local content norm is a pixel-free proxy, not real layout efficiency.",
+        "example": "Illustration: If r means height over width, using width over height reverses the screen-space penalty."
+      }
+    },
+    "qa/recommendation:pinequalizer/mechanism": {
+      "source_sha256": "4bd1e0fb38b3f6fb2678bfa30dc8af88c1f7deb9d997e06371658032dd79f492",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check fresh-content survival at every stage in PinEqualizer instead of boosting it only in fine ranking?",
+        "answer": "Items filtered in corpus or retrieval never reach the ranker. Track stage inputs and survival to locate bottlenecks. Content features, interaction dropout, and calibration reduce dependence on old exposure; separate exploration and uncertainty rewards collect feedback. Relevance still constrains exploration.",
+        "example": "Illustration: A new recipe filtered before retrieval cannot benefit from a ranking boost. Preserve entry and explore promising items selectively."
+      }
+    },
+    "qa/recommendation:pinequalizer/basics": {
+      "source_sha256": "d6fbc65912ba868117f2199b120f0dce2454aeeaf5944a779cf8a9191f627fdb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why treat PinEqualizer exploration as both a supply and a model problem?",
+        "answer": "New items can disappear in corpus, retrieval, or ranking. Content reduces dependence on old interactions, an exploration corpus allows entry, and uncertainty allocates feedback. Stage survival locates bottlenecks; a high fresh quota does not guarantee relevance.",
+        "example": "Illustration: A favorable ranker cannot recommend an item that retrieval never includes."
+      }
+    },
+    "qa/recommendation:pinequalizer/comparison": {
+      "source_sha256": "6461a3c82d5b48b8052d0a30a9eaf585c456055d9308fc99fe79d27236c21c75",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does PinEqualizer UCB consider uncertainty and relevance instead of merely lowering popular scores?",
+        "answer": "Popularity penalties do not identify worthwhile unknown items. UCB promotes low-exposure or uncertain items, with search relevance limiting unrelated exploration. Locally fresh exposure rose but overall NDCG fell, so report both.",
+        "example": "Illustration: Explore a relevant new recipe, not unrelated news just because it is obscure."
+      }
+    },
+    "qa/recommendation:pinequalizer/implementation": {
+      "source_sha256": "18080de9f39cafdeaca6c850d7f8382f7cb92a8331d8ebaf8d6cf2a91465fb30",
+      "reviewed": true,
+      "fields": {
+        "question": "Why preserve validation's UCB α=0 rather than tune α for a better fresh metric?",
+        "answer": "Validation rejected extra exploration under the current objective. Do not reselect on test. The debiased model itself can raise fresh exposure without UCB. Report freshness denominators and overall regression instead of changing objectives afterward.",
+        "example": "Illustration: If the model already increases fresh impressions severalfold and UCB hurts relevance, do not force α above zero to claim bandit use."
+      }
+    },
+    "qa/recommendation:pinfm/mechanism": {
+      "source_sha256": "6eb6ad29ab1cc4a1859242d9d127abcdb96f309353ced059dfaeef9e1b88ebce",
+      "reviewed": true,
+      "fields": {
+        "question": "How does PinFM DCAT retain early candidate fusion without re-encoding user context per item?",
+        "answer": "Early fusion lets candidates interact with history internally. DCAT self-attends once over deduplicated context, caches layer K/V, and lets candidate queries read it. Shared state must be candidate-independent. Serving savings and pretraining gains are distinct; retain local negative outcomes.",
+        "example": "Illustration: Encode 500 events once for 100 candidates rather than copying all history 100 times, while candidates still read it inside layers."
+      }
+    },
+    "qa/recommendation:pinfm/basics": {
+      "source_sha256": "58479b5c11f84c01d1fdb9b8906fa5560b7f2fe5bb58692df948e1430c016b6e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine next-, multi-, and future-token objectives in PinFM?",
+        "answer": "The immediate item, future window, and future from a specified position supply distinct time scales, helping learn more than recency before transfer. Future labels are training-only. Cross-scenario pretraining can negatively transfer despite being a foundation model.",
+        "example": "Illustration: Next click teaches immediate intent, a window teaches coexisting interests, and later targets add long-term direction."
+      }
+    },
+    "qa/recommendation:pinfm/comparison": {
+      "source_sha256": "1de13284754a2959e146d0bf8b464d02c3269b1050ed08391ba0eedf91a33d24",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does scratch versus pretrained DCAT answer a different question from DCAT versus ordinary Transformer?",
+        "answer": "Keeping DCAT fixed isolates pretraining, while changing architecture tests cache decomposition or fusion. The selected local pretrained model regressed on test; mathematical DCAT fidelity does not establish pretraining value. Measure serving efficiency separately.",
+        "example": "Illustration: Training two models with the same architecture differently says nothing about a third architecture that was never tested."
+      }
+    },
+    "qa/recommendation:pinfm/implementation": {
+      "source_sha256": "b7fc377828df7eed71264cc01d6e77f7777a70f846e8a5375b92ad9eec64fdc8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why confirm actual context K/V reuse during DCAT full-catalog inference?",
+        "answer": "Compute context self-attention once and let candidate layers perform only legal candidate-dependent work. Equal scores do not imply equal execution cost, so check call counts and dependencies. Bind caches to history and version and exclude candidate-conditioned states.",
+        "example": "Illustration: Recomputing history for 1,000 candidates can give the same NDCG while yielding no amortization."
+      }
+    },
+    "qa/recommendation:pinrec/mechanism": {
+      "source_sha256": "cf3b0cd26117a66584966702b504f443f29c8eca09b1240e2bf9e10b75856980",
+      "reviewed": true,
+      "fields": {
+        "question": "Why condition PinRec on desired outcomes and predict multiple item vectors for a future window?",
+        "answer": "One next-item target overrepresents common behavior and imposes a unique order. Desired outcomes guide heads, and multiple ANN-compatible vectors cover coexisting interests. Align predictions with window positives; do not treat duplicate popular vectors as distinct interests.",
+        "example": "Illustration: Set a save goal rather than casual browsing, and cover both gardening and baking from an unordered window."
+      }
+    },
+    "qa/recommendation:pinrec/basics": {
+      "source_sha256": "ccbf6c3e8bd016bacbfe77195e7ba95b210693455b9d93d6419be71fbaf0bd7c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is PinRec desired outcome different from the next observed feedback label?",
+        "answer": "Desired outcome is a valid request condition. Future observed action is training supervision only; selecting conditions from test outcomes leaks information. Multi-vector windows represent several possible interests, not a guaranteed behavioral sequence.",
+        "example": "Illustration: Request save-worthy candidates, but do not first check that the held-out item was saved and choose the condition accordingly."
+      }
+    },
+    "qa/recommendation:pinrec/comparison": {
+      "source_sha256": "75362cbdee0483398c5ebb48033310c2b8d98e1b21d8f4702421068a77995c85",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are PinRec unordered-window retrieval and strict next-token hits different?",
+        "answer": "Multiple window positives allow alternative orders and coexisting interests. Strict next-item metrics accept only the immediately adjacent target. Align labels and pools for comparison; both local measures were negative and a looser metric should not hide that.",
+        "example": "Illustration: Retrieving a camera and tent fits the day window, but a tent does not count as the next item if the camera came first."
+      }
+    },
+    "qa/recommendation:pinrec/implementation": {
+      "source_sha256": "a508bb5d8286c7b21e2931134beb54553444e50569e68f5ee070c37e78d07bb6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why normalize PinRec ANN outputs per head and deduplicate items?",
+        "answer": "Each vector must share index geometry and scale. Per-head normalization controls norms, and duplicate retrieved items need defined merging or deduplication. Match window target identities; repeating the same vector does not establish multi-interest learning.",
+        "example": "Illustration: Three heads returning one popular camera cover one item; count unique hits and inspect whether heads differ."
+      }
+    },
+    "qa/recommendation:pinterest-ads-llm/mechanism": {
+      "source_sha256": "2e9b3fd826f1d7fdc4a52394f47f9d77643fa31b90e4e5e6270ef95f74721ccf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why predict auxiliary advertisers and interests in Pinterest Ads LLM rather than replace real-time ad ranking?",
+        "answer": "Offline user profiles and cross-source history predict conversion-oriented advertisers and interests for supplementary retrieval and conversion features. SFT predicts the next advertiser; GRPO uses hit position and length rewards. Daily batch inference stays outside requests, while real-time scoring and auction remain.",
+        "example": "Illustration: An overnight camping-brand prediction adds a channel and feature; online conversion scoring and auctions still choose the ad."
+      }
+    },
+    "qa/recommendation:pinterest-ads-llm/basics": {
+      "source_sha256": "71c09583b5b18d1e04618f6756d927bb539834b2a4658364283aeec567b54b4f",
+      "reviewed": true,
+      "fields": {
+        "question": "Are Pinterest Ads LLM advertisers and interests one-to-one?",
+        "answer": "No. Advertisers are entities and interests are themes; one advertiser spans many topics and one topic many advertisers. Outputs provide different features and retrieval clues. Neither represents an observed conversion.",
+        "example": "Illustration: Camping can involve several brands and a department store can sell camping and home items; the topic is not one brand ID."
+      }
+    },
+    "qa/recommendation:pinterest-ads-llm/comparison": {
+      "source_sha256": "7c6a38d1647a043e6c5ed43a4f713c818ab81deae2ff4f5bd2a35fc24bb6d529",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate SFT+GRPO versus SFT from LLM features versus two-tower?",
+        "answer": "One compares advertiser generation post-training; the other measures downstream integration. Baselines and metrics differ. GRPO did not improve Recall, feature AUC improved slightly, and the supplemental quota was zero. This is not success at every stage.",
+        "example": "Illustration: A generator can stay flat while its log-probability helps prediction. That does not justify more retrieval candidates or imply Recall improved."
+      }
+    },
+    "qa/recommendation:pinterest-ads-llm/implementation": {
+      "source_sha256": "fb7a7a156b05cc82c505e65a6d14d115e69d453c824827daf008d2a3c707638d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check output-length and hit-position rewards together?",
+        "answer": "Position rewards put correct advertisers early; length penalties prevent longer lists from gaming hits. Deduplicate parsed outputs and count advertisers and interests separately, with the reduced five-item rule explicit. Preserve validation's SFT or zero-quota choices instead of retuning on test mean rank.",
+        "example": "Illustration: Fifty brands may include the target but violate a five-brand budget; a hit alone would reward that loophole."
+      }
+    },
+    "qa/recommendation:pit/mechanism": {
+      "source_sha256": "4c73b1982896ed57a0557c44dbe79532a97a04de923ea603adee8f3ceb622a13",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain multiple SIDs per item and choose by recommendation loss in PIT?",
+        "answer": "One fixed code constrains all users to one semantic path and may drift out of fit. PIT jointly trains tokenizer and recommender and selects among codes by recommendation loss. A one-to-many index preserves choices but complicates mapping and deduplication; multiple paths are not multiple items.",
+        "example": "Illustration: Office stretches may be reachable via fitness or desk health. Route by user, then merge both paths to the same video."
+      }
+    },
+    "qa/recommendation:pit/basics": {
+      "source_sha256": "32b33c24100c4acaa7060f42b456de836336ab4cd7b0fc8a45cd69dca2ac41f0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can distribution drift make old PIT SID paths inappropriate even when item text is unchanged?",
+        "answer": "Needs, inventory, and interaction frequency change, weakening the old mapping to the generative distribution. Distinguish actual data drift, model updates, and address changes from random variation. One fluctuation does not prove recoding is needed.",
+        "example": "Illustration: The same light coat serves spring commuting and autumn travel; a fixed random seed cannot remove changing preferences."
+      }
+    }
+  }
+}

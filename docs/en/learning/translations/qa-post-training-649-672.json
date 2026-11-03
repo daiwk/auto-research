@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:multiagent-opd/basics": {
+      "source_sha256": "91b177e42cb511dead7b374650aee05945bb37d79b91b6b60c77f9c556fcf3ca",
+      "reviewed": true,
+      "fields": {
+        "question": "Why train a simple Searcher–Answerer teacher first?",
+        "answer": "Team terminal rewards are coarse for search. Train a task-relevant local teacher, then freeze it to guide hierarchical Searcher. Leader and Answerer keep distinct outcome signals.",
+        "example": "Final answer correctness alone can't rate the search summary reliably."
+      }
+    },
+    "qa/post-training:multiagent-opd/comparison": {
+      "source_sha256": "f4d667a996632977e20d4d6d2ed6bb8608614e8b1b806f213a52cc21bec976b7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why restart phase two from the same base instead of continuing phase one?",
+        "answer": "Restart isolates teacher learning from hierarchical student improvement. Shared initialization doesn't imply both teacher and student keep updating.",
+        "example": "Build a search teacher first, then train a team from base rather than convert teacher weights directly."
+      }
+    },
+    "qa/post-training:multiagent-opd/implementation": {
+      "source_sha256": "a16e8cdbd57a1b05a427bf485c80519b3a743fb31fd262e8f76a65f8bbcc9453",
+      "reviewed": true,
+      "fields": {
+        "question": "Do shared MultiAgent parameters still need role-specific loss masks?",
+        "answer": "Yes. Roles use distinct advantages and KL. Searcher log ratio isn't causal contribution; mask tool observations. Activity counts environment steps with search, not raw calls.",
+        "example": "Multiple parallel searches in one step should not inflate leader activity without limit."
+      }
+    },
+    "qa/post-training:multiagent-opd/mechanism": {
+      "source_sha256": "32007c8723f1d8a3fb18310182f607a8751a1bd09155fcab1ef6d5ff90aace19",
+      "reviewed": true,
+      "fields": {
+        "question": "Why train a simple teacher but restart the hierarchical student from base?",
+        "answer": "Searcher–Answerer learns local task guidance. Restart distinguishes teacher knowledge from hierarchy learning. Shared weights still receive role-specific signals, and Searcher teacher sees real subtask/history, not global gold for all.",
+        "example": "A failed answer can reflect delegation or retrieval; uniform terminal credit misses local causes."
+      }
+    },
+    "qa/post-training:waypoint-opd/basics": {
+      "source_sha256": "e0ce83437803ac40214e5235ae0f8c2f9dd5771f6d37921f325d3c42a40e52e7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use a waypoint checkpoint from the same teacher RL run?",
+        "answer": "Endpoints hide reversal. Midpoint shows early/late directional consistency and gates endpoint credit without becoming another imitation target.",
+        "example": "Monotonic movement toward B and movement toward A then B can end similarly."
+      }
+    },
+    "qa/post-training:waypoint-opd/comparison": {
+      "source_sha256": "c44192374f6a8712580fd1c27251eaae9c51689fd0708af9663155c91f3a64e7",
+      "reviewed": true,
+      "fields": {
+        "question": "How does positive cosine consistency differ from endpoint magnitude?",
+        "answer": "Magnitude can hide oscillation. Cosine checks alignment of centered early/late shifts. It is evidence about one training path, not correctness or arbitrary cross-run chronology.",
+        "example": "Opposite segments lower gate despite a large final shift."
+      }
+    },
+    "qa/post-training:waypoint-opd/implementation": {
+      "source_sha256": "c58b6869416fb8fceca17b1925fce90110caca95d9fcb931406f782681e70a3b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why default the waypoint gate to one for tiny norms?",
+        "answer": "Undefined direction is not conflict. Fall back to one, with student-top-k weighted centering and valid-prefix batch scaling. Freeze support, teacher and advantage. Unsampled candidates may receive gradients.",
+        "example": "Near-zero early displacement shouldn't delete all endpoint credit because cosine is unstable."
+      }
+    },
+    "qa/post-training:waypoint-opd/mechanism": {
+      "source_sha256": "8794d616113dd7ba1c9ed48e58307337294f45065f600239917370fa9d369e16",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use the midpoint as gate rather than a separate target?",
+        "answer": "Equal endpoint shifts can be consistent or reversed. Compare student-weight-centered early/late directions, then scale endpoint credit only. Freeze gate with low-norm fallback; no requirement to imitate the midpoint.",
+        "example": "Two teachers raise one token eventually, but one first lowers it. Midpoint distinguishes trajectories without teaching that interim state."
+      }
+    },
+    "qa/post-training:token-teacher-selection/basics": {
+      "source_sha256": "229b3bfdcb6228536c6d7cb09b7aa28c63ae8f1dc630db0a6adfa750d4d809e5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why might selecting teachers tokenwise help compared with one per response?",
+        "answer": "A response mixes expertise and teacher–student compatibility can vary by prefix. Routing is a plausible mechanism, not a universal empirical win.",
+        "example": "Code and math explanations can benefit from different teachers."
+      }
+    },
+    "qa/post-training:token-teacher-selection/comparison": {
+      "source_sha256": "149d4d7246b53d4379396942400412f6d385277745b019312ee7e064bc33eedf",
+      "reviewed": true,
+      "fields": {
+        "question": "What assumptions underlie confidence, Hellinger and hidden-distance routing?",
+        "answer": "Confidence values certainty, distribution distance values compatibility, and hidden distance requires aligned representations. They measure different properties; unequal dimensions can't be subtracted, and closeness isn't correctness.",
+        "example": "A confident teacher far beyond student skill may receive different weights by rule."
+      }
+    },
+    "qa/post-training:token-teacher-selection/implementation": {
+      "source_sha256": "5e15c70985c80873ddb11eba63f314cd2fe459c5c9407d31879dbae866d5277e",
+      "reviewed": true,
+      "fields": {
+        "question": "Does soft teacher routing mix probabilities or logits, and what if τ=0?",
+        "answer": "Arithmetic mix probabilities; averaged logits give a geometric target. τ=0 uses hard argmax. Freeze routing/target. Local sampled-token path is not Top-K KL.",
+        "example": "Different teacher modes get different mass under probability and logit mixtures."
+      }
+    },
+    "qa/post-training:token-teacher-selection/mechanism": {
+      "source_sha256": "9a40d246296610102206949aacba4d90b67c9e6211668aaec7f37f8a398e9809",
+      "reviewed": true,
+      "fields": {
+        "question": "Why aren't average teacher probabilities and average logits equivalent?",
+        "answer": "Arithmetic mixes allocate mass across distributions; log averaging and normalization favor shared support, particularly under tail/mode disagreement. Confidence, distance and aligned features are distinct criteria without universally optimal routing.",
+        "example": "Math/code experts can favor different continuations; sharing their mass differs from requiring common support."
+      }
+    },
+    "qa/post-training:tf-opd/basics": {
+      "source_sha256": "354c770896b7f16ad51536c6ecdff859336c7727b1c8f4b8ebb4a2bd9e6781e9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does training-free TF-OPD still need teacher-generated data?",
+        "answer": "Closed-form linear merging uses input second moments from each teacher's visited states to determine output matching. No gradients does not mean no generation or calibration.",
+        "example": "Two specialists' statistics reveal different input subspaces."
+      }
+    },
+    "qa/post-training:tf-opd/comparison": {
+      "source_sha256": "6a781f38a3ce1b9df1a131bb239c42186bfc6ce4c95507f6ad75847a05c15baf",
+      "reviewed": true,
+      "fields": {
+        "question": "How does equal-Gram merging differ from summing task vectors?",
+        "answer": "Identical Gram statistics should yield a weighted average, not amplified sum. Orthogonal support can preserve separate functions. Behavior depends on statistics.",
+        "example": "Two identical experts should not produce twice the task update."
+      }
+    },
+    "qa/post-training:tf-opd/implementation": {
+      "source_sha256": "2f52648548e901106d12dee7d4049c716f5b2252ba3eca00737cf98bcee9bfa3",
+      "reviewed": true,
+      "fields": {
+        "question": "Whose responses estimate TF-OPD Grams?",
+        "answer": "Each teacher rescores its own responses after termination/loop filtering; normalize by tokens. Use FP64 linear solves, not explicit inverse, and clean hooks. Random covariance isn't teacher evidence.",
+        "example": "Scoring student-generated text changes teacher visitation statistics."
+      }
+    },
+    "qa/post-training:tf-opd/mechanism": {
+      "source_sha256": "9945d0eb2c3928a8aa2f99711d2ebef0ad9572c7456263ae159b15c62b62e624",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use teacher-specific input second moments rather than a shared covariance?",
+        "answer": "They weight output error along actually visited directions. Arbitrary shared statistics change least squares; termination filtering and token normalization matter. Gradient-free still costs generation, rescoring and solving.",
+        "example": "One shared covariance may ignore the domain-specific support of one expert."
+      }
+    },
+    "qa/post-training:shared-residual-distillation/basics": {
+      "source_sha256": "336aaa2e6856b0e5b7dc2140f4b06bf98c74c1b7845ef3bee544478712c58592",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not choose an SRD answer by majority vote?",
+        "answer": "Unverified peers can all be wrong yet contain useful local signals. Compare same-question peers with cross-question controls; retain minimum common signed residual instead of declaring a whole answer correct.",
+        "example": "Failed traces can still share one reasonable intermediate step."
+      }
+    },
+    "qa/post-training:shared-residual-distillation/comparison": {
+      "source_sha256": "91c4eea21d7b67c55134832639f2d1ed90c1805092cf48e656e9f3808f50ba93",
+      "reviewed": true,
+      "fields": {
+        "question": "How does minmod residual differ from averaging peer logits?",
+        "answer": "Keep the minimum magnitude only when all signs agree; otherwise zero. Mean can let strong opinions swamp conflict. Shared agreement can still be biased.",
+        "example": "Two positive peers and one negative don't get a positive residual by simple majority."
+      }
+    },
+    "qa/post-training:shared-residual-distillation/implementation": {
+      "source_sha256": "4d5764ecc2601018d713df942ef09e4b961dc1313cf2d0f6aa4f3cbd10cd3ac0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can an SRD coordinate-capped surrogate be negative?",
+        "answer": "It caps signed coordinate contributions, not total KL. Use q0 centering weights, exclude target from its peers and freeze teachers/targets. Clamping negative coordinates changes the objective.",
+        "example": "A negative local coordinate may be valid even when a KL interpretation concerns the full distribution."
+      }
+    },
+    "qa/post-training:shared-residual-distillation/mechanism": {
+      "source_sha256": "7d3f4cce848ca99c435889f0d775afe6a49c240d34a40d6dc735737a7f70105e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain minimum same-sign peer residual without selecting one whole answer?",
+        "answer": "Compare same-question changes to control to isolate local task effects. Conservative common magnitudes limit individual overreach. Student sees only own prefix; agreement is not truth and target cannot reinforce itself as a peer.",
+        "example": "Keep a weakly supported common middle word without declaring an unverified conclusion correct."
+      }
+    },
+    "qa/post-training:oprd-reminder/basics": {
+      "source_sha256": "65d9b137b5fcf30a582a17794e9cb7c92d89d7a8aad6a16d76713be79ad88e0a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why sample reminder-OPRD students without reminders?",
+        "answer": "Deployment is unhinted. After failure a privileged teacher rescores actual prefixes using reminders to internalize constraints. Successful traces use self-imitation rather than teacher rewrites.",
+        "example": "A missed testing constraint can guide training scoring while inference sees only original task."
+      }
+    },
+    "qa/post-training:oprd-reminder/comparison": {
+      "source_sha256": "2710b91bae72d5421bf787b51e5799b4fc26db8c427db7586d41c9c8992b3bfa",
+      "reviewed": true,
+      "fields": {
+        "question": "How do global and post-observation local reminder scopes differ?",
+        "answer": "Global reminders persist; local ones apply only to the next turn after that observation and then expire. Permanent local reminders change unrelated conditions.",
+        "example": "A fix for one error belongs to the next attempt, not every later turn."
+      }
+    },
+    "qa/post-training:oprd-reminder/implementation": {
+      "source_sha256": "cde306dad07f958d4fd3c2d20d930ee8f45e98b0ef23d17c0920cbb67eaf9dee",
+      "reviewed": true,
+      "fields": {
+        "question": "How choose reminder-OPRD Top-100 and refresh teacher?",
+        "answer": "Rank shared support by elementwise max of both logp vectors, then normalize each on it. Refresh teacher at specified milestones, otherwise freeze. Average each trace then success/failure separately.",
+        "example": "Independent supports compare different events in coordinatewise KL."
+      }
+    },
+    "qa/post-training:oprd-reminder/mechanism": {
+      "source_sha256": "2f42cfc0fea5673892e07ac10fe528dffd48a866cafb0412d6ed4cf1a0c845c5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why expire OPRD local reminders after the relevant next turn?",
+        "answer": "A specific observation triggers a short-lived constraint. Global/local scopes differ; teacher rescores actual prefixes and deployment receives no reminder. Normalize success imitation and failure distillation separately.",
+        "example": "A dependency reminder from compilation should expire after the dependency is fixed, not remain pending forever."
+      }
+    }
+  }
+}

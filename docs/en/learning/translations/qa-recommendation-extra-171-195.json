@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:tagr/comparison": {
+      "source_sha256": "9bedbb6cbebf613692f5d2fb2cfc4ad5b9b2d7105b0473bc614e8b888feff803",
+      "reviewed": true,
+      "fields": {
+        "question": "Is stable LSID vocabulary the same as freezing item-to-code assignments?",
+        "answer": "No. Token symbols can stay stable while assignments refresh. Freezing mappings also preserves path identities. Compatibility depends on which changes.",
+        "example": "The same digits can encode a stream on a new path."
+      }
+    },
+    "qa/recommendation:tagr/implementation": {
+      "source_sha256": "2e6b46cc305f6d4cd1e2a44244310c6bc0f3e1db729da3da9685d2275ee103a5",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local TAGR run real GRPO bursts and intermittent NTP?",
+        "answer": "No live bursts or production value labels; only bounded adaptation and failure cases on static public data. Real scheduling records sampling policy, both rewards, and maintenance versions.",
+        "example": "Adding static losses does not execute a timed online GRPO update."
+      }
+    },
+    "qa/recommendation:tagr/mechanism": {
+      "source_sha256": "01e48e14a572d5d5cd591535fd7262f12758881eee3535ea689a84d52a169415",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate live adaptation into code allocation, interest timescales, and intermittent policy updates?",
+        "answer": "Item content, users, and policies drift differently. LSID refreshes assignments behind a stable vocabulary, IAG fuses temporal interests, and IOPO runs NTP between on-policy bursts. Bounded local gates are not an online GRPO loop.",
+        "example": "A changed product, shifted intent, and stale policy need separate fixes."
+      }
+    },
+    "qa/recommendation:taiji/basics": {
+      "source_sha256": "969bd8441323e6f5e1108c20d08136f874a22c8d43a3863f09786ed5fe3913fc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use both semantic and collaborative-ID rewards in TAIJI?",
+        "answer": "Semantics explains content, while IDs reflect platform interactions. They can conflict. Activate recommendation reasoning and balance goals dynamically.",
+        "example": "Similar descriptions need not imply co-preference."
+      }
+    },
+    "qa/recommendation:taiji/comparison": {
+      "source_sha256": "1f5d0be5e47b9b91290264ac82e3cf7e90bbbac8e3be56a9b4bbc0a26181f10e",
+      "reviewed": true,
+      "fields": {
+        "question": "How do dynamic Pareto weights differ from fixed linear weights?",
+        "answer": "A fixed mixture covers one trade-off and can miss nonconvex frontiers. Dynamic weights adapt, but without comparisons they do not establish global Pareto optimality.",
+        "example": "One user may value semantic novelty, another stable behavioral evidence."
+      }
+    },
+    "qa/recommendation:taiji/implementation": {
+      "source_sha256": "e5e175bf00a5337c58ef79a71017d0bc3ef7b7fcdf362aab19e86afaf6073d3e",
+      "reviewed": true,
+      "fields": {
+        "question": "How isolate rejection sampling and weight fitting?",
+        "answer": "Use permitted training preferences and validation; never use test feedback to choose reasoning or weights. Local MovieLens does not reproduce the real LLM, private codes, or serving.",
+        "example": "Selecting reasoning after reading a test click leaks the target."
+      }
+    },
+    "qa/recommendation:taiji/mechanism": {
+      "source_sha256": "0d343be70415b13065130b14607610ca0807619e5a99bc1eee175e9130e21cfc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why dynamically balance semantic and collaborative rewards?",
+        "answer": "Different examples need different content/behavior trade-offs. Fixed directions can miss useful nonconvex solutions. Reverse preference reasoning and rejection sampling precede multiobjective alignment, without guaranteeing true preferences.",
+        "example": "A cold item may rely on semantics while a popular one has rich interaction evidence."
+      }
+    },
+    "qa/recommendation:tgr/basics": {
+      "source_sha256": "fe2956262ff954e8c948f3ae94cb4932a1f656047391b0246319b9ae140828be",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine ranking, generation, and offline reason in TGR?",
+        "answer": "Industry needs scalable scoring and item/list generation at controlled latency. Offline reasoning supplies inputs without costly online rollouts; distinct modules are not one attention equation.",
+        "example": "Prepare reasoning offline, then generate and rank live candidates."
+      }
+    },
+    "qa/recommendation:tgr/comparison": {
+      "source_sha256": "bbe38a550c1035aa9739ed402588f0f7856629393b92e519ff3210ca87fc9e00",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the trade-off between offline reason tokens and live inference?",
+        "answer": "Offline reduces critical-path latency but can age and miss abrupt context changes. Live reasoning is flexible but expensive. Compare inputs and update cadence.",
+        "example": "Yesterday's reasoning can miss today's trending topic."
+      }
+    },
+    "qa/recommendation:tgr/implementation": {
+      "source_sha256": "8af4339aa09af1180c705d9dd14513969a13274b25124ea4d6de55424fb7e1a3",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local path confidence reproduce production CCFormer?",
+        "answer": "No. The public core omits private SID catalog, checkpoints, and live generation. Align level probabilities and list scores explicitly; proxy fusion is not deployment evidence.",
+        "example": "A working multi-level code score is not a complete page generator or ranker."
+      }
+    },
+    "qa/recommendation:tgr/mechanism": {
+      "source_sha256": "73a724a663257d5c972dbd6492d35970785cc66d42b731a8eaf33d389e438eff",
+      "reviewed": true,
+      "fields": {
+        "question": "Why put scalable ranking, hierarchical SID generation, and offline reason tokens in one framework?",
+        "answer": "Ranking discriminates finely, SID generation spans items and pages, and offline tokens carry prepared reasoning online. Inspect generation paths, list objectives, and reasoning interfaces separately.",
+        "example": "Precompute interest explanations, generate a page from them, and rank without live long reasoning."
+      }
+    },
+    "qa/recommendation:tiger/basics": {
+      "source_sha256": "cffc8253ac4da6308df633ad2adbafa97db77738a8c1c71bb14531b22dc4349a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why quantize content into multilevel Semantic IDs?",
+        "answer": "Short discrete codes share meaning and support autoregressive generation. Content and quantization quality limit generalization, and codes must map to valid items.",
+        "example": "Similar items share early codes and differ at fine levels."
+      }
+    },
+    "qa/recommendation:tiger/comparison": {
+      "source_sha256": "2b4d291723b8a7d4faf21b617e9958367306e0a25c956811dbe884cca838e5f0",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a collision token differ from the semantic prefix?",
+        "answer": "It disambiguates item identity when several items share a semantic code. An arbitrary unique suffix is not a new semantic level.",
+        "example": "Two similar videos can share three levels but require distinct final tokens."
+      }
+    },
+    "qa/recommendation:tiger/implementation": {
+      "source_sha256": "89c4f7d37d89c6b40d95200700e56c198d604f4db39d4032e5ab7b966934f858",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local TIGER rank with a score proxy or complete code probability?",
+        "answer": "Sum token log probabilities over valid item codes, without score fusion. Match codebooks/collisions in training and decoding; exclude invalid paths.",
+        "example": "Omitting a level changes the complete item's generation probability."
+      }
+    },
+    "qa/recommendation:tiger/mechanism": {
+      "source_sha256": "ae6fe4158d5bf5874b9844daf090dfef6ae7e2011993ed8eaebe211e526516dc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why share semantics via residual SID instead of random hierarchy, and still use a collision token?",
+        "answer": "Coarse centers and residual refinement can group related items, while finite codebooks still collide. A unique suffix resolves identity. Matched random IDs isolate hierarchy from semantic hierarchy; semantic IDs need not win.",
+        "example": "Gardening books can share a prefix and split by subject or final collision suffix."
+      }
+    },
+    "qa/recommendation:tm20k/basics": {
+      "source_sha256": "bedcc6553de0595b4eba3ae8687c036fa176d304bd49022266a99b9e44f08495",
+      "reviewed": true,
+      "fields": {
+        "question": "Why let TM20K's teacher keep all tokens while the student merges?",
+        "answer": "Full-token attention and ranking provide detail for distillation. Student compression controls serving budget but does not preserve every event.",
+        "example": "Teacher reads 20,000 events; student learns from grouped summaries."
+      }
+    },
+    "qa/recommendation:tm20k/comparison": {
+      "source_sha256": "93d53d6e2fb240a2b9bd06bdc9537387580cf2f276bea90ff8290e7fc1ff955b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does sum/√n differ from average pooling?",
+        "answer": "Mean divides by n; square-root normalization retains different energy scaling as group size changes, depending on correlation.",
+        "example": "Repeating a vector changes the two resulting norms differently."
+      }
+    },
+    "qa/recommendation:tm20k/implementation": {
+      "source_sha256": "d8c122a8491cd21e0c50df805021801d7f4f56d1982ab2d3ea56f076830d7ead",
+      "reviewed": true,
+      "fields": {
+        "question": "How align attention distillation across different lengths?",
+        "answer": "Map teacher positions into student groups; do not subtract mismatched matrices. Preserve masks and sizes. Local work lacks production long histories and traffic.",
+        "example": "Specify which four teacher entries correspond to one merged slot."
+      }
+    },
+    "qa/recommendation:tm20k/mechanism": {
+      "source_sha256": "3e9f32aaf6834b0baacc354e7785d65b569c9198dbf9c9e2dc4f61ec3c8abccd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why merge as sum/√n and distill a full-token teacher?",
+        "answer": "Grouping bounds tokens, and square-root normalization moderates sum growth while retaining group-size effects. Attention and ranking distillation approximate useful fine relations without reversing compression.",
+        "example": "Merge four browses into one; teacher sees internal relationships the student cannot recover exactly."
+      }
+    },
+    "qa/recommendation:tmallgs/basics": {
+      "source_sha256": "321c778441a5205bfd8cac44822cf018ef6a6c1e6352d2bef89e980dff7a9100",
+      "reviewed": true,
+      "fields": {
+        "question": "Why learn field-specific Q/K/V in TMallGS?",
+        "answer": "Queries, user history, and item fields have different semantics and noise. Field projections, saliency, and gates shape interactions by reliability.",
+        "example": "A search term and years of browsing need not use one projection."
+      }
+    },
+    "qa/recommendation:tmallgs/comparison": {
+      "source_sha256": "02e49d408919b281f78425682805c6d46a0a6fb5a58ac237e3d06c509c77c153",
+      "reviewed": true,
+      "fields": {
+        "question": "How does FiLM differ from concatenating content features?",
+        "answer": "FiLM generates per-coordinate scale and bias; concatenation passes features onward. Progressive supervision also assigns intermediate targets, not just one MLP.",
+        "example": "Content can emphasize hidden directions rather than merely add columns."
+      }
+    },
+    "qa/recommendation:tmallgs/implementation": {
+      "source_sha256": "7cc221b0469b38cf5cf692d817cc212f3703faa4ad9c3bad39f78fae239d8b00",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a very large relative NDCG gain establish a stable win?",
+        "answer": "No. Absolute hits are few and one seed with a low denominator inflates percentages. The run exercises field, gate, FiLM, bias, and intermediate training paths.",
+        "example": "A tiny absolute improvement can have a huge percentage."
+      }
+    },
+    "qa/recommendation:tmallgs/mechanism": {
+      "source_sha256": "795f89b4a5d2b0d962a6d1eb3f94f0c77f14b415fdf6cb856a8d4c24ea1c4232",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine field-specific Q/K/V, noise gates, and layer supervision?",
+        "answer": "Separate projections address heterogeneous distributions, saliency and gates control noisy interactions, FiLM injects content, and intermediate loss guides deep learning. Gains cannot be attributed just to more heads.",
+        "example": "Downweight an accidental click while preserving an explicit search term and train intermediate relevance."
+      }
+    },
+    "qa/recommendation:tokenminds/basics": {
+      "source_sha256": "c77787a2e2c2af7f58533977004ff86aa9cbb67bb8f1c606b059308084f4ef8b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why output both dense user vectors and SID tokens?",
+        "answer": "Dense features remain compatible with ranking; discrete semantic tokens express multiple future interests. Neither free prose nor one user SID replaces both.",
+        "example": "Retain an overall vector and several prefixes for distinct interests."
+      }
+    },
+    "qa/recommendation:tokenminds/comparison": {
+      "source_sha256": "050b2d0b54260f7d095961bcb2575fbd6164d1676ab6919083abd58a170d0b48",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a 24-hour multi-target horizon differ from next-view prediction?",
+        "answer": "Several future targets dilute accidental adjacent events, and coarse prefixes represent broader meaning. Future interactions are labels only, not encoder history.",
+        "example": "One misclick should not eclipse the day's other interests."
+      }
+    }
+  }
+}

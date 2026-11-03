@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:webgpt/implementation": {
+      "source_sha256": "fd09a8cac33aea2bc616c545488ff1b91dfbef764c96b9e555a92a7e4951ea0c",
+      "reviewed": true,
+      "fields": {
+        "question": "Is choosing between two local trajectories by evidence coverage equivalent to live browsing and a reward model?",
+        "answer": "No. Local checks retain browse actions, citation constraints, and candidate selection without live web, GPT-3 training, or a human preference model. Controlled coverage cannot be renamed human win rate, TruthfulQA, or real web fact verification.",
+        "example": "Example: Selecting a preset trace with broader evidence tests rejection sampling, not the full system without real pages and preference scoring."
+      }
+    },
+    "qa/agent-research:rsi-opt/mechanism": {
+      "source_sha256": "ade17d667b5ab691aa7e95d9fffd88f7d91c591d74f425fa3f5d2a78d718b965",
+      "reviewed": true,
+      "fields": {
+        "question": "Why hide final metrics from the inner agent while letting the outer loop evaluate strategy with them?",
+        "answer": "The inner agent edits an updater from training loss and diagnostics. Final metrics would let it tune directly against evaluation. The outer loop compares fixed strategy outcomes and has a different selection role. Inherited prompts, libraries, and cadence make it recursive; normalized rankings are not unseen-task generalization.",
+        "example": "Example: Tune update rules from training loss; compare strategies after execution rather than inspect test scores for every edit."
+      }
+    },
+    "qa/agent-research:rsi-opt/basics": {
+      "source_sha256": "d2a37b1d3e800df598ebb29839c12d6cd9cafd9f4b07ff764d5435d6df00b9a7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does RSI-Opt improve optimization methods instead of only optimizing one fixed model?",
+        "answer": "An update that works now may fail on other models or stages. RSI-Opt treats the updater as the evolving object, evaluates controlled runs, and decides what to keep. Distinguish inner optimization from outer method selection. Candidate prose or one strong score does not establish broad gains.",
+        "example": "Example: Train a small model with one rule, then compare rules under equal budgets rather than retain one run's best weights."
+      }
+    },
+    "qa/agent-research:rsi-opt/comparison": {
+      "source_sha256": "ba8ae8110f5b9d686589cc8fc854a898b71b628e9ad20106d86accbb98c65bdf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why fix model, data order, and update budget across candidates rather than only seed?",
+        "answer": "Changing architecture, loss, or duration confounds updater effects. A fixed contract controls the optimization problem, and failed updater trials can roll back. Multiple seeds do not repair systematic protocol differences or make training-suite scores generalization.",
+        "example": "Example: A gets ten thousand steps and B gets a thousand. The same seed does not attribute their score difference to the updater."
+      }
+    },
+    "qa/agent-research:rsi-opt/implementation": {
+      "source_sha256": "34d4c23c56e44d99ae0ef81d485ab7414ca9e39569c76eed3a3d9bfd9fe89832",
+      "reviewed": true,
+      "fields": {
+        "question": "What are the evidence limits of archiving low-score descendants and removing exposed branches?",
+        "answer": "Archive evaluated low-score strategies to preserve failed exploration rather than fake monotonic progress. Removing a branch exposed to held-out descriptions may not remove summaries read by other descendants. The paper leaves that provenance issue open. Z-score aggregation is not significance testing.",
+        "example": "Example: Deleting a contaminated policy while retaining summaries based on it can still leak to descendants."
+      }
+    },
+    "qa/agent-research:image-rsi/mechanism": {
+      "source_sha256": "bf3b3c92aaccb45777545a6f2db3ab21af0c2a0582e819b63597fdbdda0f03bf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't a high in-loop image score automatically activate an extracted strategy?",
+        "answer": "A judge that guides repairs and scores their gains can amplify its biases. Compare with and without experience at matching request, configuration, and seed; calibrate with independent blinded judgments and admit on a held-out set. Hard constraints cannot be averaged away. Returning a fallback is not acceptance.",
+        "example": "Example: A strategy improves composition to please the judge but misses the required person count. Independent matched tests and vetoes expose this."
+      }
+    },
+    "qa/agent-research:image-rsi/basics": {
+      "source_sha256": "dcc46f04b0d6594e0a1dad8a703bc6a6d6cf2f98ab2adba28cc368f6df137103",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do fixed original requirements matter more than increasing a five-axis average?",
+        "answer": "Repair must meet original counts, relationships, wording, and identity constraints. It cannot discard difficult conditions or average away failures. Five dimensions diagnose issues; hard vetoes govern acceptance. A high score does not guarantee image facts.",
+        "example": "Example: Beauty cannot compensate for two cups when three and correct text were required. Do not change the request to two or three."
+      }
+    },
+    "qa/agent-research:image-rsi/comparison": {
+      "source_sha256": "742bdea4428214b7d02999859d61f4b7e5d03948a13c5bad837ca3512afec80f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate experience extraction from independent paired admission?",
+        "answer": "A strategy inferred from a trajectory is only a candidate. Compare with and without it under matched request, input, configuration, and seed, then blind-calibrate and use independent holdout. In-loop judges may favor their own guidance; test verdicts must not guide generation.",
+        "example": "Example: Stronger spatial wording works on one image. Pair on new requests to see if it harms other relations or styles before admitting it."
+      }
+    },
+    "qa/agent-research:image-rsi/implementation": {
+      "source_sha256": "1cd2a4f6cd47a6c4360bcb5d4c1099818994764b3d89d45f26686fcecddd6a76",
+      "reviewed": true,
+      "fields": {
+        "question": "Does returning the highest-scoring fallback after two repairs mean accepted?",
+        "answer": "No. The best of the initial image and up to two repairs may be returned even if all fail hard constraints. Judge SFT/GRPO updates between collection rounds, not within one evaluation request. Local generation, semantic judging, and training are unimplemented, so formulas are not system verification.",
+        "example": "Example: If all three images misspell required text, the prettiest fallback still fails the checklist."
+      }
+    },
+    "qa/agent-research:harnessmm/mechanism": {
+      "source_sha256": "4efd5ff2317df2b7cfe47b8ca1f50189fc4492264ca73e4e852b94268fb1c737",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do closed arguments and true guards not prove a skipped model call was correct and actually avoided?",
+        "answer": "They show an action can be reused, not that it completes the task; the original evaluator still judges semantics. Execution certificates must bind exact arguments, predecessor receipts, and tool outputs, and audit that the registered slow call did not occur. Theoretical savings differ from actual calls; include failures and recovery.",
+        "example": "Example: Directly run a saved test command, keep the receipt, and verify no extra slow model request before counting a saving."
+      }
+    },
+    "qa/agent-research:harnessmm/basics": {
+      "source_sha256": "3d7bce0492f3088ef11420bae65c25aeea71e62f60649e90f9f615d583bac318",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can another model call after tool feedback repeat an already completed decision in HarnessMM?",
+        "answer": "The prior turn can decide a later command while waiting for a prerequisite. Once a guard holds, another reasoning call may add nothing. HarnessMM reuses committed decisions to avoid slow calls, but genuinely new interpretation goes back to the model. Reuse is not arbitrary future prediction.",
+        "example": "Example: If a specified test should follow successful file creation, trigger it from the receipt. An unexpected error needs new reasoning."
+      }
+    },
+    "qa/agent-research:harnessmm/comparison": {
+      "source_sha256": "2b93fbe6ce02eebb383b0d5a25323ccba853cbf55e70cd17cf2431c0fa10b46c",
+      "reviewed": true,
+      "fields": {
+        "question": "How does reusing a fixed action differ in online freedom from planning a new action?",
+        "answer": "Reuse is limited to previously resolved actions with complete arguments and satisfied guards. It cannot invent steps or fill parameters from new evidence. Planning interprets observations and constructs actions. Reuse saves repetition only where covered; otherwise abstain. Structural success is not semantic correctness.",
+        "example": "Example: A saved test command can trigger on success. A new dependency conflict cannot be fixed by guessing a command in the reuser."
+      }
+    },
+    "qa/agent-research:harnessmm/implementation": {
+      "source_sha256": "783358a508c1f452f7c05fcb24e317001d9933e17ba405cc1e4de7662f82df02",
+      "reviewed": true,
+      "fields": {
+        "question": "Why include failures, fallbacks, and development in HarnessMM cost accounting?",
+        "answer": "An episode counts all real input and output tokens: structure generation, selection, extra context, recovery, and final synthesis, including cached input. Record development separately and amortize over deployments. One fewer slow call does not guarantee lower total tokens, latency, or energy.",
+        "example": "Example: Saving one main-model call but adding two selection/recovery calls requires counting all. Amortize graph construction over actual reuse."
+      }
+    },
+    "qa/agent-research:oo-harness/mechanism": {
+      "source_sha256": "49807ac31ab8af6c1e65d3c5335f0d4ae53595d8125fa311cb70afe231b29455",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't inheriting a parent harness method mean running several ancestor agents?",
+        "answer": "Inheritance reuses code: one instance invokes a non-overridden parent method, without separate ancestor trajectories. A subclass changes only needed hooks; deployment selects one frozen class. Cluster gains do not guarantee global gains, and self-confidence ablations are not calibrated success probability.",
+        "example": "Example: Override the search prompt while retaining the parent's terminal implementation. That is one agent, not two parallel collaborators."
+      }
+    },
+    "qa/agent-research:oo-harness/basics": {
+      "source_sha256": "bc0300a467f3ad9321a299527af1546352858e256773da3b02c63e0e9a9b6684",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use inheritable harness classes for specialization across tasks?",
+        "answer": "A generic flow may not suit every task, while copying whole implementations loses shared verified logic. Classes express reusable behavior and overrides, then route tasks to suitable variants. Inheritance organizes code and does not add runtime agents or guarantee universal improvement.",
+        "example": "Example: A browsing subclass reuses recovery and changes search. Selecting it executes one flow, not parent and child separately."
+      }
+    },
+    "qa/agent-research:oo-harness/comparison": {
+      "source_sha256": "ceb7fe52550810980b0051b424d1ffa238ddb98cac9102e42b0a397e2d56e6f2",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the trade-off between strict target-cluster admission and one global mean?",
+        "answer": "The target cluster must strictly beat its current specialist and pass extra checks, so a global mean cannot hide a local regression. This does not guarantee gains elsewhere. Routing uses public tasks and observed base traces, not test grader scores. Self-reported 0.7 is uncalibrated.",
+        "example": "Example: Validate a spreadsheet-specific change on spreadsheets. Gains on an easier unrelated cluster cannot mask no improvement there."
+      }
+    }
+  }
+}

@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:route-opd/basics": {
+      "source_sha256": "36a201ce941bf9a24bbf66defa7bacbada2969346bd455b642904b8e915cfed1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish source and destination tokens in RouteOPD?",
+        "answer": "Student-overestimated items have excess mass, underestimated items need mass. Explicit transport identifies where corrections come from and go instead of indiscriminate matching.",
+        "example": "Move mass from overpreferred wording to a teacher-supported key digit."
+      }
+    },
+    "qa/post-training:route-opd/comparison": {
+      "source_sha256": "2b6347f9a9984354a8645803b60cbff184aee9efd5312264008bb5cb9ae54f3f",
+      "reviewed": true,
+      "fields": {
+        "question": "How does transporting mass differ from replacing the student distribution with teacher probabilities?",
+        "answer": "Transport addresses selected discrepancies, not every coordinate. Require nonnegativity, conservation and defined source/destination; ordinary softmax isn't routing.",
+        "example": "Unrouted candidates can remain unchanged, unlike full replacement."
+      }
+    },
+    "qa/post-training:route-opd/implementation": {
+      "source_sha256": "d65e1f0261bd6b6e67f60be949d8df326c2355b7e6423ae2540bf755da9e2aaa",
+      "reviewed": true,
+      "fields": {
+        "question": "What invariants should RouteOPD transport check?",
+        "answer": "Never remove more mass than available; additions equal removals; final probabilities nonnegative and normalized. No transport at zero gap. A kernel doesn't reproduce teacher-model training.",
+        "example": "Removing one unit and adding only half breaks normalization."
+      }
+    },
+    "qa/post-training:route-opd/mechanism": {
+      "source_sha256": "b2995040b13825f58efb4ce765b2e612bab0a3e7547be276f3ac30dfbb99bdec",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't transport equivalent to boosting every high-probability teacher token?",
+        "answer": "Select sources/destinations by student over/underestimation relative to teacher, not absolute teacher mass. This traces corrections and conserves probability. Interpretability doesn't prove teacher correctness; control support and evaluation.",
+        "example": "An already popular word in both models may need no boost; a teacher-supported overlooked word can receive mass."
+      }
+    },
+    "qa/post-training:opdvr/basics": {
+      "source_sha256": "118d6b55a8b36baf7f55e7df63ed6a8011f8263838372d32e87eb12db8f54c60",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use a verifier to correct OPDVR teacher reward signs?",
+        "answer": "Teacher/student log ratios can oppose trajectory correctness. Retain only sign-consistent credit to avoid reinforcing errors or suppressing correct trajectories.",
+        "example": "Do not punish a different correct solution just because the teacher dislikes it."
+      }
+    },
+    "qa/post-training:opdvr/comparison": {
+      "source_sha256": "556df6874e9bb767070fe79c2c907ff321b2cad5a2c4d4c2571f21a80ef402cb",
+      "reviewed": true,
+      "fields": {
+        "question": "How does OPDVR differ from adding another RL loss?",
+        "answer": "It removes the inconsistent part of implicit reward rather than mixing two losses with compensating weights. The objectives differ.",
+        "example": "Zero out positive teacher reward on an error rather than add a negative term hoping it cancels."
+      }
+    },
+    "qa/post-training:opdvr/implementation": {
+      "source_sha256": "179938342a7935fa6dfac8cdc8dc76a851990ab9c70ee9b9b3de670a61ec7915",
+      "reviewed": true,
+      "fields": {
+        "question": "Which half-axis does OPDVR retain for correct and wrong trajectories?",
+        "answer": "Correct keeps nonnegative log ratios; wrong keeps nonpositive; zero stays zero. Verifier is a fixed training signal, not rollout input. Local candidates aren't Qwen math rollouts.",
+        "example": "A positive log ratio on a failure becomes zero, not a sign-flipped extra penalty."
+      }
+    },
+    "qa/post-training:opdvr/mechanism": {
+      "source_sha256": "a2cb9bc03d4d4d2559869287b7267a981f55306b884bca1de100959b0e292a29",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain only nonnegative teacher signal for success and nonpositive for failure?",
+        "answer": "Token ratios can conflict with terminal outcome. One-sided ReLU uses verifiable correctness to gate implicit reward, not add a standalone RL loss. Coarse labels don't prove each token and remain scoring-only.",
+        "example": "Suppress a negative imitation signal for a correct alternative without requiring teacher wording."
+      }
+    },
+    "qa/post-training:opd-search-plus/basics": {
+      "source_sha256": "235a5b4b8a4b468b27830e11f6061bb2e6fcd8326fcb94ea897f12e0a5fb1ce9",
+      "reviewed": true,
+      "fields": {
+        "question": "Should OPDSearch+ students imitate search-result text as their own output?",
+        "answer": "No. Students generate queries, reasoning and answers; search observations condition later actions. Teacher guidance doesn't make tool output a student target.",
+        "example": "Use a webpage excerpt to ask the next query rather than role-play the returned page verbatim."
+      }
+    },
+    "qa/post-training:opd-search-plus/comparison": {
+      "source_sha256": "7c57d82180be46a76599ccc30759aea4335c485029e0b7fe4717b1c2a43cd89b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does on-student search distillation differ from offline teacher demonstrations?",
+        "answer": "The teacher sees states and prefixes the student actually reached, including mistakes; offline continuations come from teacher states. Different recovery coverage isn't a universal performance ranking.",
+        "example": "Online scoring sees a wrong first query that a correct teacher demonstration never visits."
+      }
+    },
+    "qa/post-training:opd-search-plus/implementation": {
+      "source_sha256": "e98a1669ebd3e8b3d3439590ab6c0d4d8407a5379f5061b1176496620de25425",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local OPDSearch+ execute real query, reasoning and answer tokens?",
+        "answer": "No. Candidate-level process axes proxy generation/search feedback without real index/model. The real mask covers only generated text, never returned documents.",
+        "example": "A process score doesn't mean a Wikipedia search ran."
+      }
+    },
+    "qa/post-training:opd-search-plus/mechanism": {
+      "source_sha256": "22e932a2f45c669afb1023f6d00a107e1428d7f0526d3421f9cbda7259b53641",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distill from a frozen general teacher before continuing agent RL?",
+        "answer": "Dense guidance on student search traces improves the starting behavior. Verifiable RL then adapts to environmental results rather than remain bound to teacher preferences. No specialized teacher training required; bias and proxy limits remain.",
+        "example": "Learn to ask workable queries, then let retrieved evidence and final verification adjust habits."
+      }
+    },
+    "qa/post-training:r2-opd/basics": {
+      "source_sha256": "29a4d584342d2ba6b70f3570697f4e22ba33b1e5e8dd071b31f852aac84a476c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why estimate reasoning progress independently in R²-OPD?",
+        "answer": "Teacher preference needn't help solve the task. Compare independent progress and mask conflicting supervision rather than equate style with reasoning.",
+        "example": "A fluent explanation may score high with teacher while moving farther from the solution."
+      }
+    },
+    "qa/post-training:r2-opd/comparison": {
+      "source_sha256": "72bc682412a9f3c4fbc67e5fe609101e079da06aa54dbf7bece80859eb00c934",
+      "reviewed": true,
+      "fields": {
+        "question": "How does rank filtering differ from summing rewards?",
+        "answer": "Filtering requires agreement to retain teacher signal. Addition lets a large score offset a poor one. Agreement doesn't prove either judge correct.",
+        "example": "A huge teacher score cannot buy back a span rejected by progress disagreement."
+      }
+    },
+    "qa/post-training:r2-opd/implementation": {
+      "source_sha256": "d0a3cc06bed532c818ab7a5bfafab023858127a1ad5bf610781506b8831716d3",
+      "reviewed": true,
+      "fields": {
+        "question": "What identities must both R²-OPD rankings share?",
+        "answer": "Score the same spans of the same trajectories and align by identity; define ties. Local candidates do not run a real progress judge.",
+        "example": "Match a span across rankings, not the third list position."
+      }
+    },
+    "qa/post-training:r2-opd/mechanism": {
+      "source_sha256": "f31528d5bc92fcf4cff39c585c4de5e63fc3d488bc887511a38f22438a3bf72c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why mask conflicting teacher and progress rankings instead of trusting teacher?",
+        "answer": "Style can receive teacher approval without useful progress. Independent ordering checks direction. Masking signals uncertainty, not proof a span is wrong, and the progress evaluator still needs validation.",
+        "example": "Don't reinforce a polished long explanation if it leaves the key constraint unsolved."
+      }
+    },
+    "qa/post-training:sr-opsd/basics": {
+      "source_sha256": "d30229d3ef2dfa71a7fe71b4b169548317a2cf317be24d1f37522b9dacb32378",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep a reference alongside SR-OPSD self-teacher?",
+        "answer": "Self-teacher can drift or become overly strong. Reference anchors the geometrically interpolated target and Rényi sensitivity control instead of trusting self-teacher alone.",
+        "example": "Retain some prior support when teacher strongly favors a new mode."
+      }
+    },
+    "qa/post-training:sr-opsd/comparison": {
+      "source_sha256": "5a7e15b02ce44b14de548d943f8b557167838fc453b337f63ab5eec43e279d4b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does geometric interpolation differ from arithmetic averaging?",
+        "answer": "Combine weighted log probabilities then normalize; arithmetic directly mixes mass. Low support from one side affects them differently, and formulas are not interchangeable.",
+        "example": "A nearly zero mass on one side can depress a geometric target more than arithmetic average."
+      }
+    },
+    "qa/post-training:sr-opsd/implementation": {
+      "source_sha256": "233286eefe7d3b358e6e03a40b8ad86c58b98e7a757892bbb7b6d09e37872276",
+      "reviewed": true,
+      "fields": {
+        "question": "Why form SR-OPSD targets in log space and normalize explicitly?",
+        "answer": "Power products underflow. Weighted log-space softmax yields a stable distribution on aligned teacher/reference vocabulary. No full model/Rényi experiments locally.",
+        "example": "Raw elementwise product without normalization isn't a probability distribution."
+      }
+    },
+    "qa/post-training:sr-opsd/mechanism": {
+      "source_sha256": "1331a4c0e38c201710d236b3469ca712b2bd4b17173c196940f81853757b10fa",
+      "reviewed": true,
+      "fields": {
+        "question": "Why geometrically mix self-teacher and reference?",
+        "answer": "Log-space combination treats tails and disagreement differently from arithmetic mixtures. Reference anchors, teacher guides and divergence regulates projection sensitivity. Equal endpoints do not make two interpolation methods equivalent.",
+        "example": "Distributions favoring different tokens can give very different intermediate geometric and arithmetic targets."
+      }
+    },
+    "qa/post-training:u-opsd/basics": {
+      "source_sha256": "7f59b0b43cb40d0f935907c3d1569701f790800dddd5199ee80ad8fca768137e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is U-OPSD privileged view still externally unsupervised?",
+        "answer": "It comes from internal sampling consensus, without external answers/reward or a larger teacher. One view sees an extra internally produced signal, not independently verified truth.",
+        "example": "A short self-selected consensus solution can still be a shared error."
+      }
+    },
+    "qa/post-training:u-opsd/comparison": {
+      "source_sha256": "5b095cd4a1c6afde2b66675c1d4ba9768fb096913fe6cf39934375a2d271344d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish shortest consensus answer from arbitrary shortest answer?",
+        "answer": "First require majority agreement, then minimize length within eligible outputs. The shortest unrestricted may be an empty or outlier answer. Consensus isn't gold.",
+        "example": "A short erroneous refusal doesn't become privileged guidance because it saves tokens."
+      }
+    },
+    "qa/post-training:u-opsd/implementation": {
+      "source_sha256": "4be607f89839c619d5f6a0b1ad5b123ca48c9a5b87aa4d3e1a1578c385248d0a",
+      "reviewed": true,
+      "fields": {
+        "question": "Can U-OPSD use gold before choosing an internal reference?",
+        "answer": "No. Use predictions only for consensus, thresholds and length. Gold is for independent evaluation. Deterministic mini-suite isn't full multi-turn self-distillation.",
+        "example": "Filtering correctness before voting smuggles answer information into training."
+      }
+    },
+    "qa/post-training:u-opsd/mechanism": {
+      "source_sha256": "141b3a6e87e00c9e220e49f1acdbbda362ad391f13f4c3de9ce104e393e3341f",
+      "reviewed": true,
+      "fields": {
+        "question": "How avoid treating shortest consensus as truth without gold?",
+        "answer": "Consensus selects a reference and repair targets as pseudo-supervision, not correctness verification. Shared errors may be reinforced. Report internal agreement separately from external holdout and keep gold out of student inputs.",
+        "example": "Several responses can use the same wrong formula; the shortest still isn't a standard solution."
+      }
+    }
+  }
+}

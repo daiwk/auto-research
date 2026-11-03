@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:seral/comparison": {
+      "source_sha256": "79d141f221cdc08e3740b926dfef3ed941a200664153e4a8d1ffe5da840e994a",
+      "reviewed": true,
+      "fields": {
+        "question": "Is SERAL fully better if hit rate rises but novelty falls?",
+        "answer": "No. Serendipity needs relevance and unseen content. Report both and their trade-off; offline proxies do not establish real user surprise or conversions.",
+        "example": "Familiar popular items can improve hits while offering fewer unseen items."
+      }
+    },
+    "qa/recommendation:seral/implementation": {
+      "source_sha256": "098b25a8e2e41dc13a6760d52391c67cbd1a04667c9066d8ff3ca01b21805bb0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why generate and cache nearline rather than per request?",
+        "answer": "Move expensive generation off the critical path and let ranking consume cached candidates. Version profiles/cache and refresh stale candidates. Local work is not production inventory or full human CDI.",
+        "example": "Refresh after interests change instead of reusing old candidates forever."
+      }
+    },
+    "qa/recommendation:seral/mechanism": {
+      "source_sha256": "cef1a30d1c5ad2678b6e9b3899bcb6297d71ec87d2508b16f00b94573314a744",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use human and LLM CDI preferences with IPO rather than maximize logged hits?",
+        "answer": "Logs favor past exposures. Layered profiles supply context, CDI adds judgments beyond logs, IPO aligns preference pairs with SFT constraints, and nearline caching lowers serving cost. Validate relevance and novelty separately.",
+        "example": "Compare a suitable unseen film against a familiar one; logged hits alone favor repetition."
+      }
+    },
+    "qa/recommendation:sessionrec/basics": {
+      "source_sha256": "a00b9eca6f26a87cdd3324131b45b647709a5d88ef154a2993a043b02079f8d7",
+      "reviewed": true,
+      "fields": {
+        "question": "Is SessionRec's session token one item or a visit representation?",
+        "answer": "ISE aggregates multiple items into one visit representation; SSE models transitions across visits. The next visit can include several positives.",
+        "example": "Group A/B/C into one visit and target D/E together."
+      }
+    },
+    "qa/recommendation:sessionrec/comparison": {
+      "source_sha256": "ed55530165fc9564117038174e36ceb37cb60cd31385e13bdb8a74adcb5ba87e",
+      "reviewed": true,
+      "fields": {
+        "question": "Which ordering do ISE and SSE handle?",
+        "answer": "ISE aggregates items within a visit, and SSE models chronological visit transitions. Mean ISE downplays within-visit order, not all order. SSE can use Transformer or HSTU.",
+        "example": "Noon versus evening visits matter even if within-visit browse ordering is weak."
+      }
+    },
+    "qa/recommendation:sessionrec/implementation": {
+      "source_sha256": "1beca879d2aaa806d9455c56d3bf3e7a1b02e17cacc5539cc61c246788c0da53",
+      "reviewed": true,
+      "fields": {
+        "question": "Can random catalog negatives be labeled skipped exposures?",
+        "answer": "No. Hard negatives are actual exposed but unclicked items in that visit. Training samples a positive per round for CE, while evaluation keeps the full positive set.",
+        "example": "An unseen movie is not a rejected impression."
+      }
+    },
+    "qa/recommendation:sessionrec/mechanism": {
+      "source_sha256": "8f1609e5a2965fb1f063721305e8de44c78242f1cd59de02e6d18f5c23e5354c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why aggregate sessions before predicting multiple next-session positives?",
+        "answer": "Items within a visit often share intent rather than a unique order. ISE aggregates; SSE learns cross-visit transitions. Supervise all next-session positives and use actual skipped impressions. Bad session boundaries can mix intents.",
+        "example": "Group tent, bag, and mat as one shopping visit before predicting the next hiking visit."
+      }
+    },
+    "qa/recommendation:setmir/basics": {
+      "source_sha256": "29f3ef307891c361a555566542fff251b1f1056ed6bd0b562724082dd0649b01",
+      "reviewed": true,
+      "fields": {
+        "question": "Is a SetMIR query a user-entered search string?",
+        "answer": "No. It is a generated interest vector or slot for ANN. Multiple slots capture possible interests; serving rules decide which activate.",
+        "example": "Opening recommendations can produce sports and photography vectors without a typed query."
+      }
+    },
+    "qa/recommendation:setmir/comparison": {
+      "source_sha256": "bb76a9ffc62eb77d4210d12311250beb7f5c6a31bbd5a9955eebeabf6f10cec3",
+      "reviewed": true,
+      "fields": {
+        "question": "How does one-to-one set matching differ from independent slot choices?",
+        "answer": "Joint assignment limits slots from repeatedly explaining one easy positive. It needs reliable target sets; unique assignments do not prove complete interest discovery.",
+        "example": "Assign slots to sports and photography rather than both greedily choosing sports."
+      }
+    },
+    "qa/recommendation:setmir/implementation": {
+      "source_sha256": "99379af4678c5251fa9f92ff571e2691b8097b43dc799c2edcbd8591d17ed4c5",
+      "reviewed": true,
+      "fields": {
+        "question": "Which SetMIR queries actually dispatch ANN?",
+        "answer": "Only those passing presence and surviving query NMS. The public CPU path does not reproduce private histories, production Transformer, or ANN dispatch.",
+        "example": "Ten available slots need not make ten calls."
+      }
+    },
+    "qa/recommendation:setmir/mechanism": {
+      "source_sha256": "621835b8aec2190819f36ddea4fd6eb75b6c4c5e2f6fe1f30f0884af0952079a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use one-to-one matching in training and presence/NMS in serving?",
+        "answer": "Matching prevents training collapse onto one positive. Presence activates relevant slots per request; NMS removes redundant retrieval calls. These solve different problems.",
+        "example": "Activate photography and camping, then suppress two nearly identical camera queries."
+      }
+    },
+    "qa/recommendation:sid-coord/basics": {
+      "source_sha256": "6e7ccc9d7168e8bc6c3c64014d6fa233f5a46197fac7bdbcee4445bf4d6cc9ea",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep HID and SID together?",
+        "answer": "HID memorizes head interactions while hierarchical SID shares semantics for the tail. Target gating and history alignment balance them per example, not by replacing IDs.",
+        "example": "Popular items use memorization; new ones rely more on semantic neighbors."
+      }
+    },
+    "qa/recommendation:sid-coord/comparison": {
+      "source_sha256": "dd23322d96981536753f3fa0b11e04fecab43da74074682c8377a761c4327c9a",
+      "reviewed": true,
+      "fields": {
+        "question": "Are hierarchical α and HID–SID gate the same axis?",
+        "answer": "No. α mixes SID levels within an item, while the gate balances ID memory and semantics per sample. A single constant loses both distinctions.",
+        "example": "Mix coarse/fine semantics before mixing with the hash-ID branch."
+      }
+    },
+    "qa/recommendation:sid-coord/implementation": {
+      "source_sha256": "af2ee228e7a8b31bcdf24ed5a7db7181398152846a4b2f983c4719f50492786c",
+      "reviewed": true,
+      "fields": {
+        "question": "How align SID level weights and sample gates?",
+        "answer": "Level weights correspond to one item's SID levels; the gate belongs to its user–target pair, not a batch constant. MovieLens proxies do not reproduce production codes or traffic.",
+        "example": "Giving A's fine code to B misaligns semantics despite matching shapes."
+      }
+    },
+    "qa/recommendation:sid-coord/mechanism": {
+      "source_sha256": "cfca22321f94f1317b59b9b2da428dc969e9705c57482225d2787f4a1908a959",
+      "reviewed": true,
+      "fields": {
+        "question": "Why make HID/SID fusion target-dependent?",
+        "answer": "Head items have rich behavior, while tail items need semantic sharing. Target-aware gating, hierarchical fusion, and history alignment coordinate both without guaranteeing all tail gains.",
+        "example": "One user can receive more ID memorization for a hit film and more semantic weight for a new film."
+      }
+    },
+    "qa/recommendation:sid-topology/basics": {
+      "source_sha256": "0b56613dde4fa64e9b181748f4f5d41da7bbd6d94a779991fc7ed591b3041b5c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why audit catalog updates separately from continued training?",
+        "answer": "Retrieval learns query-to-SID semantics. Remapping old items changes learned paths, and continued training may not repair arbitrary reassignments.",
+        "example": "A familiar code for shoes becomes wrong if silently remapped to bags."
+      }
+    },
+    "qa/recommendation:sid-topology/comparison": {
+      "source_sha256": "ec919c7e113de3df94d816d18166173f18a68d3f25daa71f0345599c939fd870",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't acceptable wide-beam retrieval prove remapping was harmless?",
+        "answer": "Wide search can conceal rank/path drift visible under narrow serving budgets. Separate mapping and training effects and check path stability.",
+        "example": "A product found deep in a wide beam may be missing from top paths."
+      }
+    },
+    "qa/recommendation:sid-topology/implementation": {
+      "source_sha256": "f63e3bee66a20a7d41acfaf5d8bdeae0098bec20c4da0608b65ef2906f82ca74",
+      "reviewed": true,
+      "fields": {
+        "question": "Can old items shift when new items collide with exclusive tokens?",
+        "answer": "No. Freeze all old SIDs, expand permitted collisions, and declare tail capacity with failure on exhaustion. Preserve absent old items; no silent modulo or re-encoding.",
+        "example": "A new head item should not push old codes down one slot."
+      }
+    },
+    "qa/recommendation:sid-topology/mechanism": {
+      "source_sha256": "686f69f16280ac2fabc81b56b5dc6e48ece155264106b820f34edf5636645564",
+      "reviewed": true,
+      "fields": {
+        "question": "Why allow collisions rather than shifting old codes?",
+        "answer": "The generator already assigns probability to old paths. Remapping sends it to other objects and short retraining may not repair it. Expand collisions while preserving addresses; test narrow-beam stability.",
+        "example": "Keep old A pointing to its item and expand A for a newcomer rather than move the original to B."
+      }
+    },
+    "qa/recommendation:sigma/basics": {
+      "source_sha256": "1bbbc57473bfc25b6f6ad2b85eae5a9b154216a335254814ccfcbc8683c380ca",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine a short SID prefix with unique item identity?",
+        "answer": "The prefix narrows search; unique item representations retain exact identity inside its subcatalog. It is a middle ground between long SID generation and full-catalog ANN.",
+        "example": "Choose a sneaker subcatalog, then distinguish exact models."
+      }
+    },
+    "qa/recommendation:sigma/comparison": {
+      "source_sha256": "7bc7e5b78bbdfaebca9ef89a6609f8edd81afbc5f447288465de3f6b4d3150dc",
+      "reviewed": true,
+      "fields": {
+        "question": "How do multitask instructions differ from next-item-only training?",
+        "answer": "Instructions specify query, long-tail, discovery, and other goals. Evidence of following them requires task data and evaluation; prompting alone does not teach seasonality.",
+        "example": "The same history can request novelty or a familiar category."
+      }
+    },
+    "qa/recommendation:sigma/implementation": {
+      "source_sha256": "2eb60237eba26762ab4e73656f0ec26bfb35483b4902b1b1b82296398d2f8141",
+      "reviewed": true,
+      "fields": {
+        "question": "Does exact local cosine top-k establish production ANN latency?",
+        "answer": "No. It verifies retrieval logic on a small catalog with proxy tasks. It does not measure large-scale index speed or establish APF/online uplift.",
+        "example": "Scanning thousands of items differs from billion-item service."
+      }
+    },
+    "qa/recommendation:sigma/mechanism": {
+      "source_sha256": "547ff9629b92a79ecf0d376d14c3f64fa5c9961d556ae11e47c8aa43cfe9371d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use short SID prefixes and unique IDs instead of all-SID generation or global ANN?",
+        "answer": "Prefix generation locates a semantic catalog; unique IDs disambiguate items and local ANN limits cost. Multiview alignment connects semantics and behavior; APF trades precision and diversity with confidence. Missed prefixes constrain recall.",
+        "example": "Search within outdoor equipment; if only home goods was generated, local ANN cannot find tents."
+      }
+    },
+    "qa/recommendation:sim/basics": {
+      "source_sha256": "630bb676f3c599af6b38f72c3e0a64a4d0a166be8bb19f6a29637f39efef6719",
+      "reviewed": true,
+      "fields": {
+        "question": "Why run GSU search before ESU attention?",
+        "answer": "Lifelong histories are long. Cheap candidate-related retrieval narrows them before fine matching, rather than always taking recent events.",
+        "example": "A camera candidate can retrieve older photography behavior."
+      }
+    },
+    "qa/recommendation:sim/comparison": {
+      "source_sha256": "67bedc6f6d6e396fcf7c97d65525066e681f89663806c5cf2da985215e3aa966",
+      "reviewed": true,
+      "fields": {
+        "question": "How does candidate-related selection differ from one user vector?",
+        "answer": "Different candidates retrieve different evidence. A shared user vector compresses once and is easy to cache. Quality and cost still need measurement.",
+        "example": "Shoes and books can activate different historical interests for one user."
+      }
+    }
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:skill-retention/mechanism": {
+      "source_sha256": "e9ceba35b1fd843b9e2ad6a9d7a7a10b50cdbee169a7b9763db4b0501da4c898",
+      "reviewed": true,
+      "fields": {
+        "question": "Why might more synthetic skill data hurt retrieval on real tasks?",
+        "answer": "Synthetic language and distributions can differ from real requests, shifting embeddings and routing boundaries toward synthetic patterns. Replay preserves real task coverage; anchoring or distillation from an old model limits drift. These protect transfer and retention, not a guarantee that more synthetic data helps or forgetting disappears.",
+        "example": "Example: Synthetic requests always spell out tool names, while real users use abbreviations. Training only on synthetic wording may miss real requests; replaying abbreviations preserves old routing."
+      }
+    },
+    "qa/agent-research:skill-retention/basics": {
+      "source_sha256": "3b8e20e4f462721320254afa3494617080da07d8905a14a32d0902a4eafd7517",
+      "reviewed": true,
+      "fields": {
+        "question": "Why evaluate both new skills and existing user needs when training skill retrieval?",
+        "answer": "New data adapts the retriever to a larger skill catalog, but service still receives familiar real and out-of-domain queries. The goal is retaining old routing while learning new material, not only minimizing loss on new data. Improvements on new tasks do not erase the cost of forgetting existing usage.",
+        "example": "Example: A model works on synthetic examples with canonical function names, but users still describe their needs colloquially. Those queries are not obsolete."
+      }
+    },
+    "qa/agent-research:skill-retention/comparison": {
+      "source_sha256": "4edc4d3a1e7c62108aae84b8438175678ca5ac03260a50cf8b676f5e75a25cc3",
+      "reviewed": true,
+      "fields": {
+        "question": "What do real-data replay and embedding anchors or LwF constrain differently?",
+        "answer": "Replay exposes optimization to old tasks; anchors or Learning without Forgetting limit representation or output drift. One provides data coverage and the other constrains behavioral changes induced by updates. They are complementary, not redundant. Too much weight can inhibit new skill learning, so validate the trade-off.",
+        "example": "Example: Replay old colloquial requests and separately constrain their embeddings not to move far. That protects old retrieval through both examples and representation."
+      }
+    },
+    "qa/agent-research:skill-retention/implementation": {
+      "source_sha256": "ec748f4ce98425047f56a389d18b35ff546b51db2aa937b2b52be4ef7c67a1fd",
+      "reviewed": true,
+      "fields": {
+        "question": "Does passing local anchor, conflict penalty, and replay checks include training the 0.6B retriever?",
+        "answer": "No. The local reference runs route anchors and associated constraints without training the 0.6B model over more than thirty thousand skills. It checks replay participation, anchor-loss direction, and conflict handling. Synthetic state changes do not establish real or OOD retrieval retention.",
+        "example": "Example: Pulling one vector toward its old anchor verifies the gradient, not correct skill retrieval for unseen wording."
+      }
+    },
+    "qa/agent-research:grounded-memory/mechanism": {
+      "source_sha256": "c5befb37ae572752fe1c712a748fa01ec206c13b1a1f5ac13a65d5ce47bfbf41",
+      "reviewed": true,
+      "fields": {
+        "question": "Why should a memory curator probe the environment with least-privilege read-only tools before writing?",
+        "answer": "Conversation claims may be stale or environment-specific. Probing ties candidate memory to current observable facts and scope. Read-only least privilege avoids changing the observed system. A verified claim holds under those conditions, not permanently or everywhere.",
+        "example": "Example: A claim that the server runs on port eight thousand can be checked in read-only configuration and scoped to that environment. Do not edit the config to make it true."
+      }
+    },
+    "qa/agent-research:grounded-memory/basics": {
+      "source_sha256": "ff0d9e085d4b149b1d70855a812a77b2372212ecd56ccbac63c55d354178e8fc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't an enterprise agent treat a guess after one execution as long-term knowledge?",
+        "answer": "Permissions, configuration, and interfaces change, and one failure may be temporary. Grounded Memory requires traceable environmental evidence and a scope before persisting experience. Recording what happened is only part of knowing where and when it holds.",
+        "example": "Example: A repository access failure today does not mean the service is permanently unavailable. A durable conclusion needs clearer state evidence."
+      }
+    },
+    "qa/agent-research:grounded-memory/comparison": {
+      "source_sha256": "7933a6a689e7fa965ef62920ee3427fa72d633fb96daf174149e66058971290e",
+      "reviewed": true,
+      "fields": {
+        "question": "How does admission by environment probing differ from direct LLM summarization of experience?",
+        "answer": "Summarization relies on trace text and can turn guesses into facts. Independent probes can reject contradictions and narrow scope, but add query and maintenance cost and can verify only observable conditions. A verification step does not make every enterprise state reliable.",
+        "example": "Example: A missing path in one repository should not become a claim about all projects. A probe can scope it to the current repository and revision."
+      }
+    },
+    "qa/agent-research:grounded-memory/implementation": {
+      "source_sha256": "7bfb6d79e680e7f7ff61368f8830e4076c4b1d22eed3f88bb89a930c34f74d71",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must a curator not turn a least-privilege read-only tool into a repair action?",
+        "answer": "The curator verifies candidate memory. Writing changes the state it is trying to observe and introduces side effects. Local tests cover repeated probing, conflict rejection, and admission, not Copilot SDK integration. Passing call contracts does not reproduce enterprise agent costs or outcomes.",
+        "example": "Example: If a value differs, update the memory's evidence rather than editing live configuration back to the old value and calling the old memory verified."
+      }
+    },
+    "qa/agent-research:memforest/mechanism": {
+      "source_sha256": "1610b92bf8c9a838b8cce5a687b14e3bd98b96c36e0920e1de521ca359be464e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do progressively merged event trees help locate evidence better than repeatedly rewriting a global summary under pressure?",
+        "answer": "Event partitions preserve local time and causal structure. Merge only necessary nodes rather than disturbing all history. Queries propagate from semantic anchors through neighborhood links, including cross-event relations. Hierarchical summaries can still lose details; trees control loss and lookup paths without guaranteeing losslessness.",
+        "example": "Example: A failed payment and later refund are separate events linked across trees. Rewriting one global summary may blur their order."
+      }
+    },
+    "qa/agent-research:memforest/basics": {
+      "source_sha256": "2bfe502b60ff429e163d38679345e31cedbabcb88a6c129d8a3f9f8078c077d5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must long-term memory support both an overview and a return to specific events?",
+        "answer": "Reading all raw history costs too much, but a single summary can omit the source of a decision. MemForest keeps events locally structured and progressively compresses under capacity pressure while preserving paths back to evidence. It balances scale with traceable detail.",
+        "example": "Example: Finding which meeting changed a plan last month requires both its event cluster and the actual confirmation message."
+      }
+    },
+    "qa/agent-research:memforest/comparison": {
+      "source_sha256": "2ef5b79202a2204777cf5b299f1dd89215e57f0d3db8c9ae0222aa1e44f1cc1f",
+      "reviewed": true,
+      "fields": {
+        "question": "How does semantic-anchor neighborhood propagation differ from retrieving only the most similar node?",
+        "answer": "A single match may be superficially related. Propagation can add context via temporal and cross-event links. This structure expands evidence but can also add noise, so control propagation range and budget. Neighboring nodes are not automatically correct evidence.",
+        "example": "Example: After matching a rescheduling proposal, read the neighboring confirmation to learn whether the new date took effect."
+      }
+    },
+    "qa/agent-research:memforest/implementation": {
+      "source_sha256": "ca2e043cd5eae819532d85205a858e1d2933e020ee416fea4fa9fda9559249ef",
+      "reviewed": true,
+      "fields": {
+        "question": "Where does the local token-Jaccard EventTree stop short of the paper's embeddings and LLM summarizer?",
+        "answer": "Local CPU structures select trees by term Jaccard and run compression, checking partitioning and merging. They do not run author embeddings, an LLM summarizer, or long-horizon benchmarks. Structural correctness and fewer records do not establish semantic retrieval or QA capability.",
+        "example": "Example: Two nodes sharing meeting can match by Jaccard. Whether they describe the same event requires richer semantics not proved by this interface."
+      }
+    },
+    "qa/agent-research:coskill/mechanism": {
+      "source_sha256": "663b4daa65da601157f7d78fdefe5f3f47f8f07f8d6234984412d32029d760ee",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can shared team reward adapt both the reasoning and Meta-Skill policies?",
+        "answer": "Skill content determines available procedures, and reasoning choices determine which skills get execution feedback. A joint objective connects both to task results; alternating updates reduces the risk of a revised library being unused or a revised policy being limited by old skills. Shared reward does not solve credit assignment for each edit.",
+        "example": "Example: If a long skill fails, Meta-Skill can shorten it while the reasoning agent learns when to invoke the revision instead of merely storing a new document."
+      }
+    },
+    "qa/agent-research:coskill/basics": {
+      "source_sha256": "84fb2012fefb51eeaa680369cd92546be4b8e5b3d449da143de399285aefbcbf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is CoSkill's Meta-Skill Agent a learnable policy rather than a fixed script?",
+        "answer": "It edits skill contents based on execution returns. The Reasoning Agent learns to select and use task and substep skills. Roles share a backbone and update alternately, adapting the library and action policy together. Verify that edits improve actual execution before keeping them.",
+        "example": "Example: When the reasoning role finds a missing recovery step, Meta-Skill proposes a change and validates after resetting the environment instead of permanently saving every reflection."
+      }
+    },
+    "qa/agent-research:coskill/comparison": {
+      "source_sha256": "a515dc0d5a1a052485c71c19fc1e958ec347ceb23ae0b5bac60743f501bfaf0e",
+      "reviewed": true,
+      "fields": {
+        "question": "How does joint training differ from training retrieval over a fixed skill library?",
+        "answer": "A fixed library changes only what is selected. Joint training also changes skill contents that may not suit the task, increasing nonstationarity and attribution difficulty. Role credit, isolated edits, and rejecting non-improving updates matter; library growth does not imply stronger teamwork.",
+        "example": "Example: Better retrieval cannot fix steps in the wrong order. Meta-Skill can fix the order, but must check other tasks for regressions."
+      }
+    },
+    "qa/agent-research:coskill/implementation": {
+      "source_sha256": "025b05e38458108a258df171da8d1336debd835c060b1771f82b37c576257b2b",
+      "reviewed": true,
+      "fields": {
+        "question": "How should actual updates across three local seeds without promotion be interpreted?",
+        "answer": "Both roles had nonzero gradients and parameter changes, but reset validation showed no positive gain. The skill candidate was not promoted and the baseline champion stayed. Old results that read evaluation labels are void, and legacy parsing is not capability. Local Qwen ToolRoute is not comparable with paper ALFWorld/WebShop scores.",
+        "example": "Example: Large parameter movement without validation gain proves execution and rejection work, not that CoSkill improves success."
+      }
+    }
+  }
+}

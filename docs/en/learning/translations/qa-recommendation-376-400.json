@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:gear/basics": {
+      "source_sha256": "6bcd84ea3fd4486439a159d6a65f8cac659690ce2ef453216c254d6083d594e7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do GEAR BasisVQ and BasisRQ represent codes in a shared orthogonal basis?",
+        "answer": "A common basis coordinates updates; orthogonality constrains rotation so codewords do not drift independently. Hierarchical generation supplies addresses and context reranks collisions. Orthogonality does not guarantee semantic independence or collision-free coding; test quantization and ranking separately.",
+        "example": "Two similar items can still share a bucket despite a stable coordinate system."
+      }
+    },
+    "qa/recommendation:gear/comparison": {
+      "source_sha256": "471e5b2ddca937e7a362be1198f649da60d9c9a811749229fa768d53e8d1e501",
+      "reviewed": true,
+      "fields": {
+        "question": "How does GEAR's collision reranker allocate discrimination differently from indefinitely enlarging the codebook?",
+        "answer": "Larger vocabularies distinguish more items at discrete addresses. Reranking keeps finite codes and resolves within-bucket candidates using user context, saving code capacity but adding bucket compute and recall limits. Local mechanism checks and orthogonality errors do not measure recommendation quality.",
+        "example": "Rerank two same-code cameras by user needs rather than assigning unique large-vocabulary codes; oversized buckets still cost compute."
+      }
+    },
+    "qa/recommendation:gear/implementation": {
+      "source_sha256": "6dd405b0c5349de619176235934d247627ae57839e077946b6480e075387b47c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why align row-vector conventions and check B's orthogonality for GEAR's zB and inverse mapping?",
+        "answer": "Projection, nearest-code selection, and reconstruction must use consistent transposes; equal square shapes can hide mistakes. Verify orthogonality, residual quantization, and collision mapping separately. Diagnostics do not cover production generator quality.",
+        "example": "After multiplying a row by B, reconstruct using the corresponding inverse, and test the round trip on a known vector."
+      }
+    },
+    "qa/recommendation:genfacet/mechanism": {
+      "source_sha256": "ba5f1e7a7ce2036e2fa01e6fd0ad24a259f416e3e44e8dbf49022fe060d320ba",
+      "reviewed": true,
+      "fields": {
+        "question": "Why jointly optimize GenFacet facet generation and query rewriting on downstream retrieval feedback?",
+        "answer": "Plausible facet text can yield poor search, and rewrites must preserve intent under the selected facet. Multitask preference alignment uses facet quality and actual retrieval results to avoid mismatched local goals. Feedback can favor popular facets; fluency or one hit metric is insufficient.",
+        "example": "A lightweight-laptop weight facet should yield a searchable weight constraint, not a fluent rewrite about performance rankings."
+      }
+    },
+    "qa/recommendation:genfacet/basics": {
+      "source_sha256": "b20ca8d898de81988c803ec3e2782c7601a675cf21e1313fde726f9bad6c6efb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why treat GenFacet facet selection and query rewriting as one search pipeline?",
+        "answer": "A facet determines the refinement, and the rewrite turns it into a retrievable query. Independent optimization can produce attractive facets with no results or drift from intent. Joint retrieval feedback depends on catalog and reward reliability.",
+        "example": "Commuting can refine a query toward light, waterproof products, not specialist off-road equipment."
+      }
+    },
+    "qa/recommendation:genfacet/comparison": {
+      "source_sha256": "94b78c15736f87d4eb24c4c53af7156bc0aaf50c821530a3589b6e537f3e1774",
+      "reviewed": true,
+      "fields": {
+        "question": "How does GenFacet multitask preference alignment differ from text-only teacher distillation?",
+        "answer": "Text distillation copies teacher wording. Multitask rewards score the facet and retrieved results, correcting fluent but useless choices while potentially neglecting unmeasured constraints. Negative local results cannot be replaced by production design goals.",
+        "example": "Machine washable may retrieve useful items where an elegant lifestyle phrase does not, but easy keyword hits can also game the reward."
+      }
+    },
+    "qa/recommendation:genfacet/implementation": {
+      "source_sha256": "cea8aea949f27985764311ad3423f75d52fa7615d2a1db4728371f1144dded08",
+      "reviewed": true,
+      "fields": {
+        "question": "Why preserve facet-to-rewrite correspondence in GenFacet training?",
+        "answer": "Retrieval credit belongs to the context and facet that produced that query. Define task weights, reference policy, and valid-output masks. Deterministic candidate scores without actual generation and updates do not establish teacher distillation plus GRPO.",
+        "example": "Credit a successful waterproof query to its own facet, not a lightweight facet."
+      }
+    },
+    "qa/recommendation:genpage/mechanism": {
+      "source_sha256": "c9416930830cb486e5d1c00a0de9fe681a504aba28a156c415a905f9a8ce4526",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does GenPage post-train full-page generation on long-term reward rather than simply imitate past pages?",
+        "answer": "Cloning or SFT reproduces logged display behavior, not necessarily long-term effects of positions and combinations. Page-level reward evaluates the full action while post-training respects business feasibility and cold start. Public proxy lists are not production long-term retention evidence.",
+        "example": "Imitation copies rows of popular items. Adding novel content requires real evidence of sustained exploration, not just more diverse titles."
+      }
+    },
+    "qa/recommendation:genpage/basics": {
+      "source_sha256": "a63e45ad00e5c5a108dd274405f6190ab4f23be3d74ea345ee09ee3ceacc7089",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is a full-page GenPage action closer to the homepage objective than per-item prediction?",
+        "answer": "Page utility depends on content types, layout, and interactions. Individually relevant items can form repetitive pages. Condition generation on the selected prefix and evaluate overall reward, accepting harder search and credit assignment without assuming global optimality.",
+        "example": "A page of one movie franchise can be individually relevant but provide no exploration entry points."
+      }
+    },
+    "qa/recommendation:genpage/comparison": {
+      "source_sha256": "02764d5d4ff578bd60b0a21a2817162507d152da07a776c404aa65cb68b33aab",
+      "reviewed": true,
+      "fields": {
+        "question": "What evidence do GenPage WBC/SFT and long-term RL use?",
+        "answer": "Weighted demonstrations build a usable policy from existing pages. RL adjusts beyond imitation using reliable long-term environments and rewards. Movie proxies do not recover retention, and business and cold-start constraints need separate enforcement.",
+        "example": "Learn a sensible layout quickly from logs; explore more only when long-term feedback supports it."
+      }
+    },
+    "qa/recommendation:genpage/implementation": {
+      "source_sha256": "ccb0cb1020b33db9ac7323d218e9f7c190cf81d435b04bcc165c411049edb3ce",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is GenPage's MovieLens core not Netflix's production full-page implementation?",
+        "answer": "Public data lack real layout, multiple content formats, and long-term rewards. The fixed candidate protocol only checks actual implemented proxy states, constraints, and updates; a ranked list is not a homepage. Preserve negative local results independently of paper gains.",
+        "example": "A ten-movie list has no carousel, copy, or multi-day reactions and cannot verify the production UI or retention policy."
+      }
+    },
+    "qa/recommendation:genrank/mechanism": {
+      "source_sha256": "80f3104758eced5893785cfeb1514da36998e8939cda6f56f0fc5538e980a19f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does merging actions into item tokens change HSTU-style ranking cost in GenRank?",
+        "answer": "Interleaving doubles positions per event, increasing quadratic interactions. GenRank keeps action features or supervision on item positions and adds position/time biases. Fewer tokens do not guarantee equivalent expression; local quality changed alongside speed.",
+        "example": "Ten events become ten instead of twenty positions, reducing the attention matrix while potentially losing action dependencies."
+      }
+    },
+    "qa/recommendation:genrank/basics": {
+      "source_sha256": "5a4a735c1055d388117fec93ad7408227cf26251c0f05654021e48cf7adce00a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can GenRank retain multi-action learning with items and actions at one position?",
+        "answer": "Actions remain input features or supervision, just not separate positions. Position and time biases preserve temporal cues. This compresses organization, not behavioral relevance, and equivalence needs testing.",
+        "example": "An impression and its known click can share a position while clicks and skips remain different labels."
+      }
+    },
+    "qa/recommendation:genrank/comparison": {
+      "source_sha256": "af110b7fca2b0034aa3dc076ed0b08830f58a463033e08f1c9e846b3e15507b0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compare latency and AUC for GenRank versus interleaved item/action ranking?",
+        "answer": "Fewer positions reduce attention work but can sacrifice interaction expressivity. Local latency and AUC both decreased, so efficiency is not unchanged accuracy or superiority to HSTU. Hardware and candidates limit extrapolation.",
+        "example": "One hundred events can use 100 rather than 200 positions but lose action-order detail; speed alone hides that."
+      }
+    },
+    "qa/recommendation:genrank/implementation": {
+      "source_sha256": "d83c15d7e997156ce15e9748598858fa31a3e7e766eb137d718881a730baccfe",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not input GenRank's current prediction target like historical actions?",
+        "answer": "History actions are known and can accompany items; the current action is the label. Separate fields and causal masks and use only request-time information in position/time bias. Matching shapes do not rule out leakage.",
+        "example": "Include a prior camera click, not the true future click on the shoe being scored."
+      }
+    },
+    "qa/recommendation:genrec/mechanism": {
+      "source_sha256": "a650a35b721de30f1a39fa63caa8b656dcb678d3fdc88fd9cc3d3df86463efda",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does GenRec target a next-page sequence and keep NLL alongside GRPO?",
+        "answer": "Item targets alone do not teach order and complementarity within pages. Sequence targets model composition, group-relative reward shapes full-page utility, and NLL anchors to logged behavior against reward drift. Rewards that omit relevance or feasibility can still mislead.",
+        "example": "A page objective can replace one of three redundant items; an NLL anchor can restrain a novelty-only reward from recommending irrelevant content."
+      }
+    },
+    "qa/recommendation:genrec/basics": {
+      "source_sha256": "dea44e98d07b4a6d716f429b595b989d4d60d618d52b732e39c5eff134ccc2ae",
+      "reviewed": true,
+      "fields": {
+        "question": "Why organize consecutive positives as a next-page target in GenRec?",
+        "answer": "Within-page consumption has order and complementarity that point prediction misses. Generate with prefix dependence and score the entire page with grouped rewards. Pages assembled from consecutive public actions are proxies, not observed impression pages.",
+        "example": "Tent, sleeping bag, and pad can form a useful page; three consecutive movie views do not prove simultaneous display."
+      }
+    },
+    "qa/recommendation:genrec/comparison": {
+      "source_sha256": "ff421541670bcf114fe1e86b97d678681a53cb313c303f6746bbed43866a7c6e",
+      "reviewed": true,
+      "fields": {
+        "question": "What drift does GenRec's NLL limit compared with optimizing GRPO-SR reward alone?",
+        "answer": "Group-relative rewards compare page utility while NLL preserves logged behavior, limiting drift toward sparse or biased rewards. Their balance trades imitation for exploration. Local relative gains depend on proxy labels and baseline and do not establish real satisfaction.",
+        "example": "Diversity reward alone can produce irrelevant novelty; NLL retains basic interests."
+      }
+    },
+    "qa/recommendation:genrec/implementation": {
+      "source_sha256": "5f2c09bea12fe92e4e35b5242bb95486253a6130af63faa3230c81fdc73e9fc5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compare GenRec page advantages only within the same context?",
+        "answer": "Same-context pages share history and candidate difficulty, so mean subtraction measures relative quality. Mixing users confounds request difficulty. Update prefix and duplicate masks together, apply NLL to legal targets, and do not use Token Merger to expose future test pages.",
+        "example": "Compare pages within each photography or cold-start user rather than marking every harder request negative."
+      }
+    },
+    "qa/recommendation:genrec-netflix/mechanism": {
+      "source_sha256": "f1dfeaa96db74e30f065776ce7b52f3b6d3d7ed25fa2cb82fa125661eec56b53",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Netflix GenRec not generate a recommendation list token by token despite using a decoder-only LLM?",
+        "answer": "One prefill encodes text context, then a catalog-aware head scores items directly. This keeps semantic interactions while avoiding multi-step decoding and out-of-catalog generation. A joint language objective improves representation, not free-form serving; the local single seed does not establish Netflix-scale gains.",
+        "example": "Score every catalog movie once instead of writing one title and feeding it back to generate the next."
+      }
+    },
+    "qa/recommendation:genrec-netflix/basics": {
+      "source_sha256": "1f5a458295d9d111c23484fdb40b4d7e1ecd1b96d9d9e15647a97ccd89623e99",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Netflix GenRec's catalog-aware head prevent out-of-catalog hallucinations?",
+        "answer": "A pooled prefill state scores only fixed catalog item IDs, not generated names. Text context and a language objective supply semantics. In-catalog outputs can still be irrelevant or unavailable; inventory and serving mappings need separate checks.",
+        "example": "An unreleased title known to the LLM cannot be recommended if there is no output column for it."
+      }
+    },
+    "qa/recommendation:genrec-netflix/comparison": {
+      "source_sha256": "08aaf74da8c507b7eadba483ee8d7b482670b5757c85ddfcd2803a5e6e8e0130",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Netflix GenRec reward-weighted ranking differ from online RL over generated lists?",
+        "answer": "Multiple rewards weight examples in supervised catalog ranking, alongside a language objective. There is no token-by-token rollout or list policy gradient; serving uses prefill scoring. The two reward uses have different probability and compute paths.",
+        "example": "Giving a satisfied example more loss weight is not generating ten online results and running PPO."
+      }
+    },
+    "qa/recommendation:genrec-netflix/implementation": {
+      "source_sha256": "0b5ef0e6cf517cab07fd4361cd534e064d738cb6f3ac6f8118dc2a7b1057767f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't Netflix GenRec's local GRU comparison a parameter-matched architecture ablation?",
+        "answer": "The experiment loads a larger public causal LLM and trains LoRA, while the baseline is ID-only GRU. Parameters and semantic inputs differ; it compares pipelines, not one isolated operator. Single seed, reduced catalog, and proxy rewards also preclude comparing directly to reported online percentages.",
+        "example": "LLM gains may come from title semantics or pretrained weights, not entirely from the catalog head."
+      }
+    },
+    "qa/recommendation:gese/mechanism": {
+      "source_sha256": "60204424acb7bcac6985e596cdc514a41763708a62f1193aab7a768fbe3313d8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does GESE explore diverse faithful titles and then select one for current context?",
+        "answer": "One fixed title lacks personalization; online free generation costs compute and can misrepresent content. Reusable candidate creation and real-time selection are separate, and diversity cannot justify false claims. Fixed-candidate local scoring verifies selection only.",
+        "example": "A documentary can have faithful titles about photography or natural history, but not invented action scenes for clicks."
+      }
+    },
+    "qa/recommendation:gese/basics": {
+      "source_sha256": "d5a107c043aa31067351f55930b4a6e85ebd8c5c8dfe65026251cf5a7b0a4278",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate GESE title exploration from personalized selection?",
+        "answer": "Generate a relevant, diverse, faithful pool, then choose by current user and context. The selector cannot repair a pool lacking faithful options, and catchy wording does not imply satisfaction.",
+        "example": "Title variants can emphasize method, setting, or conclusion, but none may invent results absent from the article."
+      }
+    }
+  }
+}

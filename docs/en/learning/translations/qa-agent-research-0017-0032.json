@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:meta-reasoning/mechanism": {
+      "source_sha256": "2fd5bfa92a65e2b58e5352bbbf54151ebf78cd99ce91fcceb43798b6e755aba5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does the controller use a compact state while keeping full results in artifact memory?",
+        "answer": "Control decisions need progress, candidate actions, and remaining budget. Repeating full material in every prompt raises cost. Persistent artifacts hold reusable evidence for on-demand reference. Assess, Propose, Evaluate, and Dispatch divide responsibility for continuing or branching. Compressing control state must not discard actual work.",
+        "example": "Example: Two workers each write an analysis. The controller keeps the conclusions and file references, then opens the original artifact when needed instead of repeating it in every turn."
+      }
+    },
+    "qa/agent-research:meta-reasoning/basics": {
+      "source_sha256": "fc071c577f97752da2ad162b2468429a92c1fc6888cac090ed5684506b8ad603",
+      "reviewed": true,
+      "fields": {
+        "question": "How does an object-level worker differ from a meta-reasoning controller?",
+        "answer": "A worker performs task content such as retrieval, coding, or analysis. The controller assesses progress, proposes continuation or branching, compares expected benefits, and dispatches work. Control consumes model-call budget and must count in equal-budget comparisons. Persistent artifacts avoid redoing work.",
+        "example": "Example: A worker writes a test file. The controller decides whether to fix failures, try another approach, or stop. The outputs and costs differ."
+      }
+    },
+    "qa/agent-research:meta-reasoning/comparison": {
+      "source_sha256": "b954f3d4c6bbcabd6145b850dd14ecfb187d47940e8bbfb8d1848fcf6fd0f9e6",
+      "reviewed": true,
+      "fields": {
+        "question": "What are the trade-offs of separate Assess, Propose, Evaluate, and Dispatch steps versus a single direct controller?",
+        "answer": "Separation clarifies state summarization, candidate generation, comparison, and execution, and makes budget feasibility independently checkable. Extra control steps cost calls and may not pay off for simple tasks. Direct control is compact but can conflate evaluation with execution. Compare all calls and final outcomes.",
+        "example": "Example: A one-step calculation may not need four rounds of control. In complex research, assessing whether to branch can avoid expensive duplicated experiments."
+      }
+    },
+    "qa/agent-research:meta-reasoning/implementation": {
+      "source_sha256": "71e16d17c13c93e02d9b1a70a283584cfc233d3f8f8cd196fdc83bc4478a8a71",
+      "reviewed": true,
+      "fields": {
+        "question": "How does the local selector weigh expected value and call cost, and what remains unverified?",
+        "answer": "It rejects actions that exceed the budget, then selects using expected value and call cost. Full artifacts stay in persistent memory while control state stays compact. Expected values are explicit inputs, not success predictions learned from frontier workers. Three-seed diagnostics verify scheduling and state separation only.",
+        "example": "Example: With two calls left, a three-call action is infeasible regardless of expected value. Do not dispatch it and hide the budget overrun later."
+      }
+    },
+    "qa/agent-research:sage-planner/mechanism": {
+      "source_sha256": "015cd477f7b15b0aa412889910318280d0f89eff6c5866b4b3bf5b8ba9c18884",
+      "reviewed": true,
+      "fields": {
+        "question": "Why edit only the affected subgoal suffix after a failure rather than rewriting the entire plan?",
+        "answer": "The completed prefix reflects actual execution. A full rewrite can repeat actions or wrongly assume the environment reset. The symbolic gate first blocks invalid preconditions and provides a typed cause; the planner then repairs the affected future steps. Keeping the prefix preserves consistency with the current world, not blind commitment to the old plan.",
+        "example": "Example: A cup has been washed, but the cabinet is locked. Revise how to store it rather than washing it again and assuming the cabinet already opened."
+      }
+    },
+    "qa/agent-research:sage-planner/basics": {
+      "source_sha256": "1023667881a38d6444b3fbbd5f44efd0780214ec16b1865f4a623e892a4ecc34",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check preconditions before executing an action in a symbolic action gate?",
+        "answer": "Preconditions tell whether the current world permits an action. Checking first blocks known illegal or unsafe actions and gives the planner a typed reason. The gate covers only modeled rules. Passing it does not prove real-world safety when rules or state are incomplete.",
+        "example": "Example: Grasping requires an empty hand and reachable object. The gate blocks a grasp with a full hand before execution rather than explaining a collision afterward."
+      }
+    },
+    "qa/agent-research:sage-planner/comparison": {
+      "source_sha256": "b94467258337951abbbc94ee6d67f753f0413a6b11aae076850fcff71925f31f",
+      "reviewed": true,
+      "fields": {
+        "question": "What do typed failure causes add over a free-text message saying an action failed?",
+        "answer": "Typed causes distinguish missing resources, unmet preconditions, and affected subgoals, allowing a local editor to revise the relevant suffix. Generic text can cause a full rewrite or repetition of completed actions. Structured feedback still depends on accurate symbolic state and does not replace real environment feedback.",
+        "example": "Example: A locked cabinet calls for a key or another location; a missing object calls for renewed perception. Those are different recoveries."
+      }
+    },
+    "qa/agent-research:sage-planner/implementation": {
+      "source_sha256": "42bdc8484995f2cf51755de87e787519920802ec824bef45039272b04dff9083",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a zero-token gate establish a low-cost reproduction of the entire LLM planner?",
+        "answer": "No. Only the symbolic gate uses no language-model calls. Plan generation and suffix editing still have their own costs. The local run executes the gate and a reference suffix editor, not AI2-THOR. Three-seed fixture success is neither embodied task success nor end-to-end inference cost.",
+        "example": "Example: A Boolean check can refuse to open a cabinet without producing the new plan. Counting only the check misses recovery's model calls."
+      }
+    },
+    "qa/agent-research:searchatlas/mechanism": {
+      "source_sha256": "884eba91f9f4bab779c7e8d3b3a837e5e5dcf793bb3d2e37003baa8587a90d12",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can an evidential query graph reveal a gap after searching many web pages?",
+        "answer": "Page count is not constraint coverage. Directed query–evidence–answer relations must show what supports each condition and whether the conclusion crosses an unverified edge. Graph auditing separates repeated evidence from a genuinely completed reasoning chain. A passing graph interface does not establish reliable evidence collection by the search model.",
+        "example": "Example: Ten pages give a product's price, but none confirms regional availability. A claim that it is sold locally still lacks a support edge."
+      }
+    },
+    "qa/agent-research:searchatlas/basics": {
+      "source_sha256": "94d69c66287e362fb338accbeed26ba1e25ddc9591a1b513c2859fa5c507ba6a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are edges in a query–evidence–answer graph more explanatory than a list of pages?",
+        "answer": "Edges show what evidence a query found and which constraint or answer span it supports. This traces how information reaches the conclusion. A link list records visits without establishing support. Graph extraction itself can be wrong, so an edge is not definitive proof of a fact.",
+        "example": "Example: If all sources discuss price, the graph can show no incoming edge for local availability, which is harder to spot in a list of ten links."
+      }
+    },
+    "qa/agent-research:searchatlas/comparison": {
+      "source_sha256": "797be4eecdc6cd8456ba8f744e857877a32df83639b434af5d96bdf58a0b3734",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are search diversity and constraint coverage different metrics?",
+        "answer": "Diversity measures differences among queries or sources; coverage measures whether evidence supports the requested conditions. Distinct sites can repeat one fact, and a few strong sources can cover several needs. SearchAtlas audits the support structure rather than treating domain counts as evidence chains.",
+        "example": "Example: Five sites can repeat the same product specifications without covering returns. One official policy page can fill that gap."
+      }
+    },
+    "qa/agent-research:searchatlas/implementation": {
+      "source_sha256": "8145a3aba618458d643ddcc4d89c01aaa2716528b9e882842c3513b1fcdb56ce",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local validation of evidence-propagation edges include the paper's search agents and automatic parser?",
+        "answer": "No. The local run builds and checks edges on public fixtures and does not run the paper's five search agents. The paper's edge F1 measures agreement between automatic graph parsing and human annotations, not local QA accuracy. Executing the interface does not establish evidence extraction or fact judgment on real pages.",
+        "example": "Example: Checking connectivity after being given an edge from Evidence A to Constraint B does not prove the model can extract that relationship from arbitrary web pages."
+      }
+    },
+    "qa/agent-research:deeprepro/mechanism": {
+      "source_sha256": "8776c0fab5bd756db0f6032766ca9df994ea7f0933eafe0ec2bc9dcdc259509d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must a paper-to-code subplan read current repository state rather than following paper order alone?",
+        "answer": "Interfaces, dependencies, and files change during implementation. Prior assumptions can expire. Fine-grained subplans use current repository state and execution feedback to decide what to do next. The paper defines the goal; repository state defines what can run. Neither is replaced by one initial checklist.",
+        "example": "Example: The next paper step is evaluator integration, but the data interface has changed. Adapt to the new contract instead of generating scripts that no longer connect."
+      }
+    },
+    "qa/agent-research:deeprepro/basics": {
+      "source_sha256": "9e3796e9a7c97b364d2c50e632252e51e2e5a98ce9bcfc55100532106f952172",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is paper reproduction an evolving software engineering task rather than a translation of formulas?",
+        "answer": "Equations are only part of the specification. Reproduction also involves dependencies, data formats, interfaces, and tests. Each step changes what can follow. DeepRepro studies how to implement and verify within an evolving repository while retaining alignment with the paper, not how to finish by writing one long plan.",
+        "example": "Example: The network is implemented, but loading data reveals a new axis-order requirement. The training code must fit that interface rather than blindly following section order."
+      }
+    },
+    "qa/agent-research:deeprepro/comparison": {
+      "source_sha256": "ed05cdae62e116bd4777c79bcf6db8e8a22834338ca17b6357ee582c5ed68ff7",
+      "reviewed": true,
+      "fields": {
+        "question": "What can inspecting artifacts tell you, and what requires rerunning the reproduction?",
+        "answer": "Artifact inspection checks that code, logs, and tests correspond to the named paper and revision, auditing an existing execution. A rerun must actually install dependencies, call models, and run tests to see whether results reproduce now. The evidence scopes differ; a consistent local DeepRepro replay does not replace a full Code-Dev run.",
+        "example": "Example: A log shows that tests passed on one commit. Repeating the pass in a clean environment still requires installation and execution."
+      }
+    },
+    "qa/agent-research:deeprepro/implementation": {
+      "source_sha256": "0408bfe17aeb3cedc711e50f5f8d8e98c739079d0f690b162c54bd582aebc9f6",
+      "reviewed": true,
+      "fields": {
+        "question": "Does artifact replay count as rerunning official PaperBench Code-Dev?",
+        "answer": "No. Replay reads real exports from a pinned revision and checks plans, execution steps, and test coverage in paper and state order. It does not pay again for model API calls or the full implementation experiment. A perfect deterministic mini-suite verifies the state-driven path only, not official reproduction capability or cost.",
+        "example": "Example: Replaying an old test record shows whether a plan revision covered the failure; it does not regenerate code and run all tests in the current environment."
+      }
+    }
+  }
+}

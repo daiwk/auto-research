@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:discernmem/body-or-scope": {
+      "source_sha256": "5ba8905922488d086215c6d3b4a6020764927993a83e766352b4c3886556d02f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not rewrite every memory used after a team failure?",
+        "answer": "Another role, a tool or an out-of-scope scenario may have caused the failure. DiscernMem compares replay with just the suspect memory against no-memory replay on the same task, seed and configuration. It then asks whether the rule body is defective or a useful rule was used out of scope. A negative effect alone does not prove a defective body.",
+        "example": "Example: Repair the source before running tests may help with code bugs. If the test environment is broken, more source edits can harm. Add an avoid scope rather than delete a useful source-repair rule."
+      }
+    },
+    "qa/agent-research:discernmem/two-reference-retention": {
+      "source_sha256": "13b1f7ce204e0cc119dcf07559a6f26c3538c4da640c331dbb59ed955c77e692",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compare a proposed repair to both its parent memory and a no-memory baseline?",
+        "answer": "The parent may already be harmful. Merely beating it can still underperform injecting nothing. For each task in the fixed trigger and history sets, the proposal must match the better reference minus tolerance, without adding outright failures. This protects tested behavior, not every unseen task.",
+        "example": "Example: Parent 0.2, no memory 0.8, proposal 0.7. The proposal beats its parent by 0.5 but misses the 0.79 threshold with default tolerance 0.01; reject it."
+      }
+    },
+    "qa/agent-research:discernmem/trigger-vs-history": {
+      "source_sha256": "17ffb5f5969475d2aed2629e4be8429101049e2403e0582facf8607bfbd43871",
+      "reviewed": true,
+      "fields": {
+        "question": "How does testing only on the triggering failure differ from DiscernMem's cross-task validation?",
+        "answer": "A local fix can harm past capabilities. DiscernMem fixes a set of triggers, previous positive-effect tasks and related tasks, then applies thresholds per task, not to the mean. Related tasks must not regress; they need not improve. Origin tasks are excluded from history validation so the original example cannot repeatedly validate its own memory.",
+        "example": "Example: Trigger improves 0.4→0.9 and an old task drops 0.8→0.5. Reject even though the mean improves."
+      }
+    },
+    "qa/agent-research:discernmem/version-evidence-reset": {
+      "source_sha256": "11aab2e8e0f3ae1fc944dc506ee8c7c76bef143f1663039d51f8e1f3fe486a19",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't a new memory body inherit the parent's success evidence?",
+        "answer": "Effects are tied to the body actually used. The new body has not shown the same reliability. Keep identity, owner and compliant correction history, but clear previous effect evidence and mark the new version provisional. This versioning component is not evidence of LLM repair or multi-agent ability.",
+        "example": "Example: v2 worked on ten tasks. If v3 adds a stopping condition, keep v2 records but start v3's effects empty; do not say v3 passed the ten tasks."
+      }
+    },
+    "qa/agent-research:ruharness/moving-weaknesses": {
+      "source_sha256": "4a85d376561ee9aab4c7382ed326840c189d037de0dceb949dfed2ac90646e42",
+      "reviewed": true,
+      "fields": {
+        "question": "If an agent can already edit its harness, why update the rubric too?",
+        "answer": "A repaired harness changes its failure distribution. Fixed criteria may track resolved faults and miss new ones. RuHarness reevaluates criteria against current trajectories while keeping the task objective fixed, then uses criteria that still diagnose weaknesses to guide edits.",
+        "example": "Example: Initially it forgot search; later it searches but submits with insufficient evidence. Rewarding any search call misses the new failure."
+      }
+    },
+    "qa/agent-research:ruharness/joint-posterior": {
+      "source_sha256": "bc0ee3218576351645b61c927a7cb8126d50ad4058ab49ba892f93d33756bda6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compute discrimination, coverage and predictiveness from one six-cell posterior?",
+        "answer": "They are correlated because they come from the same success/failure × Violated/Satisfied/N/A table. Add 0.5 to each cell, draw 2,000 joint Dirichlet samples, recompute all three for each draw and take the 0.2 utility quantile. Independent draws would discard correlations. Trajectory-set N and Red are fixed during sampling.",
+        "example": "Example: Two observed violations both fail, giving a high point estimate. A lower posterior quantile reflects that two hits are not hundreds of stable observations."
+      }
+    },
+    "qa/agent-research:ruharness/rubric-vs-validation": {
+      "source_sha256": "8310c5c525c83aea08ed6b48ae0139162c800f1fe7735850ef5f66830c093ce7",
+      "reviewed": true,
+      "fields": {
+        "question": "Does better rubric compliance automatically promote the next harness?",
+        "answer": "No. Rubrics diagnose weaknesses and guide proposals, not task outcomes. Candidates must pass external verification and compete with the current harness on independent validation. Only the top-scoring candidate whose improvement strictly clears the threshold replaces it. Final test is excluded.",
+        "example": "Example: A candidate adds many evidence-check lines but does not improve validation success. Keep the current harness rather than promote prettier self-check logs."
+      }
+    },
+    "qa/agent-research:ruharness/outcome-blind-not-outcome-free": {
+      "source_sha256": "716565ca153ea435b7379f03624fb7fd46239071545b766fa367cf9a7fc4590a",
+      "reviewed": true,
+      "fields": {
+        "question": "Does outcome-blind judging conflict with later use of success/failure labels?",
+        "answer": "No. The judge sees behavior only when assigning rubric labels, avoiding hindsight. A separate statistical layer then joins those labels with outcomes to form the six-cell table. The component accepts both inputs but cannot prove an external judge was blinded or claim full evaluation integration.",
+        "example": "Example: Seal the label for whether the target file was checked before revealing test success; don't reinterpret an ambiguous check after learning the run failed."
+      }
+    }
+  }
+}

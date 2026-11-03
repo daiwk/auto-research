@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:coevo-mem/mechanism": {
+      "source_sha256": "6a22ad3baca88bb6f2f535ade147f5f1e6d7007ac116bc70c56aabeba20b8cb5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why alternate freezing the router and memory bank rather than updating both freely each round?",
+        "answer": "Routing changes which memories are seen; bank changes alter router feedback. If both drift together, effects are hard to attribute. Freeze one while updating the other to limit nonstationarity, and use a lightweight residual to preserve the base LLM prior. This makes feedback easier to learn and audit without guaranteeing convergence or gains.",
+        "example": "Example: Freeze memory to compare routes, then freeze routing to revise low-value entries. Changing both at once makes a failure hard to locate."
+      }
+    },
+    "qa/agent-research:coevo-mem/basics": {
+      "source_sha256": "688e457ae3f369bf9bf6ece96cbe3c50b84516e52ad46e51f6c623664cb4849a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do routing policy and memory-bank updates affect each other?",
+        "answer": "Routing determines which memories are used; outcomes update route and memory utility. Content and graph changes then change route value. Optimizing one side alone can preserve the other's defects. CoEvo-Mem alternates updates and learns only from actual trajectories, not invented results for untried routes.",
+        "example": "Example: A route keeps selecting stale records. Changing the bank alters its payoff; after the update, routing must learn which paths work."
+      }
+    },
+    "qa/agent-research:coevo-mem/comparison": {
+      "source_sha256": "ec7e342bb6d9e6cf21f8d298d09481b95dc6ea3c17b7b767d1bf3804bb51954b",
+      "reviewed": true,
+      "fields": {
+        "question": "What are the roles of the frozen LLM's routing prior and the trainable residual router?",
+        "answer": "The base LLM contributes task understanding as a routing prior. A residual changes selection using real interaction feedback without retraining the full model. The prior bounds updates, while the residual adapts to current memory. It learns from executed routes only and is not guaranteed to beat the prior.",
+        "example": "Example: A base route favors generic retrieval, but the residual learns from current tool tasks to favor an experience store. The language model's weights stay frozen."
+      }
+    },
+    "qa/agent-research:coevo-mem/implementation": {
+      "source_sha256": "8482b8b6270bfbc36ee97cc5b77b583614b065a6a68e2a400348d7ba8490ee2b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why include task axis and tool signature in a retrieval key instead of reusing by query text alone?",
+        "answer": "Similar queries may need different routes for different tasks or tool versions. Axis and signature prevent reuse across incompatible contracts. The local run checks rewrite, residual, and alternating update flow. A public mini-suite and Evolve registry entry do not establish full learning or all paper benchmarks.",
+        "example": "Example: Two order lookup services return different schemas. Matching query words do not justify a memory route that uses obsolete fields."
+      }
+    },
+    "qa/agent-research:skillrise/mechanism": {
+      "source_sha256": "a6aef9d410dd0122cca504dbb66f327d20ac3b784fa0aa7eb31611a80f73fffe",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reward skill-document curation from later tasks rather than current task success?",
+        "answer": "Current success mostly reflects solving, not whether the resulting skill helps later users or the same agent. Related tasks form a sequence, and discounted downstream returns supervise curation toward transferable experience. Apply the two phase advantages to their own generated tokens rather than broadcasting credit.",
+        "example": "Example: A lucky correct answer can still yield a reusable testing procedure. Its curation value is visible only if it helps later tasks."
+      }
+    },
+    "qa/agent-research:skillrise/basics": {
+      "source_sha256": "4c03d66c2960c360daa0f062352ec12ed885e33dd9b4a3720abdd9e50c996b30",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does one policy alternate solving the current task and curating a skill document?",
+        "answer": "Solving produces experience; curation passes transferable material directly into the next task, making cross-task learning part of behavior. Related tasks progress from easy to hard, so documents must help later rather than simply explain present success. This is not independent episode training and not a mandate to keep all experiences.",
+        "example": "Example: After a simple file search, record location and verification methods for a harder modification task instead of copying the old answer."
+      }
+    },
+    "qa/agent-research:skillrise/comparison": {
+      "source_sha256": "a18d7197790b0b976266d73de0d997ff463b17122bff6c29dc970e42bd17a575",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a connected curriculum transfer experience differently from training episodes independently?",
+        "answer": "A skill document curated from one task becomes input to the next, so transferable experience can be used and evaluated. Independent episodes normally do not expose this link. Related tasks can overfit a curriculum; distinguish downstream document benefit from current solving and do not infer generalization from transfer counts.",
+        "example": "Example: A simple table cleanup produces checks for a constrained variant next. Random unrelated tasks may never use those checks."
+      }
+    },
+    "qa/agent-research:skillrise/implementation": {
+      "source_sha256": "8c7b6e6ed2f5d878a79d3a57b5e062dad9487ddac55df8e59ca6a54be5ba0538",
+      "reviewed": true,
+      "fields": {
+        "question": "Do local document-update and downstream-credit counts mean Qwen3 was trained with RL?",
+        "answer": "No. Controlled PlanBench tests state evolution, skill transfer, and phase-specific credit without Qwen3 training or the paper's three environments. Writes show the action happened, not parameter learning. Perfect mini-suite scores are not comparable with paper Pass@k.",
+        "example": "Example: Deterministic rules can write 120 documents. Without real gradient updates, that is not the paper's shared-policy training."
+      }
+    },
+    "qa/agent-research:unimem/mechanism": {
+      "source_sha256": "1ca125dfdac11375b4b42d7b5f81df51647947418572fcba64c7a3a51c9dd668",
+      "reviewed": true,
+      "fields": {
+        "question": "Why first keep new tasks in an episodic buffer and consolidate only repeated reliable patterns?",
+        "answer": "An isolated event may be noise or exceptional. Episodic storage preserves context; repeated reliable patterns are better candidates for stable parametric knowledge. Self-routing chooses how to use both. Repetition needs reliability checks so recurring mistakes are not consolidated as rules.",
+        "example": "Example: Record the first temporary outage as an event. Only repeatedly confirmed configuration constraints should become a general pattern."
+      }
+    },
+    "qa/agent-research:unimem/basics": {
+      "source_sha256": "87cb171aff48b8061e59488305d8d539be90dc2da156068ba580e25d37dc025c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't UniMem handle streaming tasks with fixed weights alone or by accumulating raw episodes indefinitely?",
+        "answer": "Fixed weights cannot promptly absorb new situations. Raw episodes create growing retrieval and context costs. UniMem combines recent examples with stable recurring knowledge to adapt and reuse experience. Timeliness and stability matter, and frequent patterns are not necessarily correct.",
+        "example": "Example: Record a new service's first interface change as a specific event. Only after a rule continues to hold is it a candidate for a stable habit."
+      }
+    },
+    "qa/agent-research:unimem/comparison": {
+      "source_sha256": "b0f22206169758d5b7c9c23114aabc082c69e0e4a22826b6dfedaf4e24d73d72",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the trade-off between episodic retrieval and parametric memory for updates and use?",
+        "answer": "Episodic entries are easy to append, audit, and delete, but reads consume retrieval and context. Parametric memory internalizes recurring patterns for direct use, but individual facts are harder to undo. The approaches are complementary; consolidation is not merely copying tables and can accumulate errors.",
+        "example": "Example: Keep a temporary meeting date as traceable episodic memory. A stable tool-use pattern may be worth consolidating and changes less often."
+      }
+    },
+    "qa/agent-research:unimem/implementation": {
+      "source_sha256": "6c5f8069a8f1b2be5dde0e5120ac4fe43e05cd204abfd098500a81d3a5651d5c",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local parametric route actually extend LLM weight blocks?",
+        "answer": "No. Local parametric memory is a structured pattern table that tests thresholds, episodic-to-consolidated routing, and counts. It neither trains nor expands model weights. Consolidation counts and deterministic success do not establish LLM internalization or streaming capability.",
+        "example": "Example: Adding a rule after three occurrences is a state transition. If model weights did not change, it is not parametric learning."
+      }
+    },
+    "qa/agent-research:hiskill/mechanism": {
+      "source_sha256": "c39b1e12e749af29c5e83988a3f4fb536c59de978dcffe934c2918ab9655bf13",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish decomposition, temporal, and recovery edges in a skill graph?",
+        "answer": "Decomposition maps a high-level goal to AtomicOps; temporal edges constrain ordering; recovery edges provide failure paths. A generic similarity edge would lose execution semantics. After retrieving a subgraph, ground it in current state. Finding a skill name is not action completion.",
+        "example": "Example: Upload decomposes into selecting and submitting a file. A failure can follow a recovery edge to refresh login; doing that as a universal prerequisite is unnecessary."
+      }
+    },
+    "qa/agent-research:hiskill/basics": {
+      "source_sha256": "3758579ba74eb33b3be43d6456c1eba50f7c9c8aab3451627f607e7a2c535788",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are high-level skills and AtomicOps different node types?",
+        "answer": "High-level skills describe goals and reusable procedures. AtomicOps are executable actions linked through decomposition. Treating both as text snippets blurs abstract plans and immediately executable actions. Ground operations using current state and tool contracts rather than executing a high-level name.",
+        "example": "Example: Organize orders is high level; query, verify status, and write output are atomic operations that can become legal calls after decomposition."
+      }
+    },
+    "qa/agent-research:hiskill/comparison": {
+      "source_sha256": "1a1386dce6b3669dfc96e428bad09cf8e82bade26a053d89e5bb46d82dce5511",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the trade-off between retrieving a relevant skill subgraph and placing the whole graph in context?",
+        "answer": "A subgraph limits interpretation and grounding to useful decomposition, order, and recovery relations. The full graph keeps more paths but costs more context and choices. A local subgraph can miss remote prerequisites, so check execution conditions; shorter input is not necessarily better task performance.",
+        "example": "Example: Retrieve the failed upload and nearby recovery nodes. If authentication is absent, the compact subgraph still cannot execute legally."
+      }
+    },
+    "qa/agent-research:hiskill/implementation": {
+      "source_sha256": "4f7956de3c16f9b7251b4ebff0ad0bc377e37eabf7cee5806907082517bb95b9",
+      "reviewed": true,
+      "fields": {
+        "question": "Does constructing a graph from controlled trajectories show an online LLM learned to extract skill relations?",
+        "answer": "No. Local nodes and relations are supplied by controlled traces, testing hierarchy, subgraph retrieval, and reuse without online LLM extraction. AtomicOp reuse counts show real reuse within the fixture, not semantic discovery in open environments or extrapolated token savings.",
+        "example": "Example: Following a supplied recovery edge tests the graph executor. It does not show a model can infer that edge from an unseen failure log."
+      }
+    }
+  }
+}

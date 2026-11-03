@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:click-a-buy-b/mechanism": {
+      "source_sha256": "e2a6435199f1a6c5958644f82cc9bae873200e8287c62772bfe26d5a3f936468",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not attribute a purchase of B entirely to clicked item A as a conversion of A itself?",
+        "answer": "The clicked and purchased objects can differ; same-item last-click attribution misses cross-item paths. Separate Click-A-Buy-A and Click-A-Buy-B tasks and use taxonomy to describe relations between A and B. This improves observed attribution and prediction, not causal identification.",
+        "example": "A user views an entry-level camera and buys an upgrade. Same-item counting marks the first camera as worthless despite its role in the decision path."
+      }
+    },
+    "qa/recommendation:click-a-buy-b/basics": {
+      "source_sha256": "ec90815e5a7e7e3f59358adbb4d76b26a25471e0f490db233f3cc8d7bba0bc0d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Click-A-Buy-B distinguish clicked and purchased items?",
+        "answer": "An item can reveal a need and another item satisfy it through price or specs. Separate CABA and CABB supervision retains direct conversions and cross-item guidance; taxonomy offers relation cues. Observed co-occurrence does not prove that A causes purchase of B.",
+        "example": "Clicking one camera brand and buying another is not a conversion of A, but A can still participate in the decision."
+      }
+    },
+    "qa/recommendation:click-a-buy-b/comparison": {
+      "source_sha256": "6ef03932b1e5cd66e2f2a372dcbf6a9f54fa3110b4c806092e0a0897728d4753",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CABB need behavior types and item hierarchy beyond ordinary next-item prediction?",
+        "answer": "Adjacency alone need not distinguish browsing, clicking, and purchase or describe the A–B relationship. CABB explicitly supervises cross-item purchase paths and uses taxonomy to organize transferable relations. Sequential viewing preserves adjacency only and does not validate real purchase attribution.",
+        "example": "Watching movie B after A can test cross-item connections, but there is no ad-click and transaction loop."
+      }
+    },
+    "qa/recommendation:click-a-buy-b/implementation": {
+      "source_sha256": "a8e96d3bf06719767f87499aa3726520a2c41e789ee24cd236734bbf6a6826b0",
+      "reviewed": true,
+      "fields": {
+        "question": "How should a CABB viewing-sequence proxy be reported without inventing purchase labels?",
+        "answer": "State that sequential views proxy Click-A/Buy-B, compare matched data, candidates, and baselines, and limit conclusions to the proxy. Taxonomy weights connect corresponding items and must not use test targets to decide candidate categories. Public ratings are not transaction amounts.",
+        "example": "Report simulated cross-item paths from successive views, not that users really clicked A and bought B. A target category known only afterward is not an inference input."
+      }
+    },
+    "qa/recommendation:climber-pilot/mechanism": {
+      "source_sha256": "d1733129231d8118140d4cdfe7230240a08cdf69ddf4d6ce1335d9bf66376563",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Climber-Pilot account for farther-future consumption without serving a full rollout?",
+        "answer": "Time-aware multi-item prediction trains the current state on several future targets, embedding longer-horizon structure in the parameters. Serving can still generate one result; condition-guided attention adds category and business constraints without extra rollout steps. True future items belong only to training supervision.",
+        "example": "Training can learn that camera interest extends to accessories. Serving cannot read a user's future purchase to recommend now."
+      }
+    },
+    "qa/recommendation:climber-pilot/basics": {
+      "source_sha256": "36168f5539a962ce82d6c210a8a4972733989bf2de2e8a9e04aa57150cb9887b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can Climber-Pilot predict multiple future items in training but serve in one step?",
+        "answer": "Offset targets inject long-horizon consumption structure into a shared current state, and time weights differentiate offsets. Serving uses that learned model directly without simulating the future or seeing those targets.",
+        "example": "Train the current state to predict the upcoming camera, lens, and bag; score today's candidates without access to those true future events."
+      }
+    },
+    "qa/recommendation:climber-pilot/comparison": {
+      "source_sha256": "10ad3b6e1811e2819560207916deed086a266ed499e04ba675b23fcadbb4131d",
+      "reviewed": true,
+      "fields": {
+        "question": "At what stage do constraints act in Climber-Pilot's conditional sparse attention versus post-decoding filtering?",
+        "answer": "An internal attention mask changes which evidence forms the representation; post-filtering only removes generated results and cannot recover legal options that generation omitted. Internal masks must match business rules and do not eliminate the need for legality checks.",
+        "example": "A category mask can guide candidate formation. Removing all invalid candidates after generation can leave an empty list and cannot recover spent generation budget."
+      }
+    },
+    "qa/recommendation:climber-pilot/implementation": {
+      "source_sha256": "c409b81fa81b2883939206ea41cc600e4d43c7f40d3237e56ba3a3e68ab3d8d2",
+      "reviewed": true,
+      "fields": {
+        "question": "How should TAMIP time weights interact with valid-target masks in the multi-future loss?",
+        "answer": "Offset k needs a real target and its specified weight `w_k`; padding at the tail of short sequences is not positive supervision. Offsets can share a current state whose inputs stop at the cutoff. Time-weighted losses and conditional attention masks affect different tensors.",
+        "example": "With two future events, compute two loss terms. A third empty slot creates no fake target, and heavier weighting does not let a future event enter history."
+      }
+    },
+    "qa/recommendation:clockrope/mechanism": {
+      "source_sha256": "b917bd367c4ae802d974ceabd9eed4c1c89188762be4e75b07c0a7a5143068e0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can ClockRoPE give higher relevance to a one-week gap than to a two-day gap?",
+        "answer": "Behavior may recur periodically rather than decay monotonically. ClockRoPE samples rotary frequencies from the desired periodic kernel's spectrum so query-key dot products strengthen again at matching times of day or week. Ordinary RoPE can share channels to retain recency. Periodicity is a bias, not a universal user habit.",
+        "example": "Last Monday morning commute news can be more relevant to this Monday than Saturday-night entertainment."
+      }
+    },
+    "qa/recommendation:clockrope/basics": {
+      "source_sha256": "bd60a1d6ca273c638572b6ac83606f20cdc8d74b808bbefaaf25223e9862ceba",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use a periodic kernel in ClockRoPE rather than assuming relevance always decays with distance?",
+        "answer": "Habits may repeat by hour or weekday. The periodic kernel restores similarity at specific offsets through its rotary frequencies. It is a prior, and proxies without real timestamps are not evidence of periodic behavior.",
+        "example": "A Friday film habit makes a seven-day gap informative; for an irregular viewer the same periodic bonus can add noise."
+      }
+    },
+    "qa/recommendation:clockrope/comparison": {
+      "source_sha256": "0106770af57950e4466f0a2acf370a45ee897674e6d542cf50d90b3a838b31c2",
+      "reviewed": true,
+      "fields": {
+        "question": "How does ClockRoPE differ from adding a weekday feature?",
+        "answer": "A weekday feature is an absolute time label. ClockRoPE changes pairwise attention directly through relative query-key rotations and a periodic similarity kernel. They may overlap or complement one another; the mechanism alone does not guarantee better results.",
+        "example": "A Friday label says what day it is; rotation directly relates this Friday to last Friday in attention."
+      }
+    },
+    "qa/recommendation:clockrope/implementation": {
+      "source_sha256": "e12053219d2c6cd8a34577c2387a739b604c782f9b886077c33c79be0f986ad2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must ClockRoPE's day and week periods match the timestamp unit?",
+        "answer": "The local kernel uses periods 24 and 168 when gaps are in hours. Raw seconds shift phase, and sampled frequencies and mixed channels must respect rotary dimension pairing. Test re-enhancement one period apart, not just tensor shapes.",
+        "example": "Convert seven days to 168 hours. Feeding the raw second count interprets the same interval as many incorrect periods."
+      }
+    },
+    "qa/recommendation:cluster-goobs/mechanism": {
+      "source_sha256": "8e07585e4553cae99d08c83b071c611b7ccce6b284f04bb5858af6960fe44ea8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Cluster GOOBS mostly draw negatives from the positive's semantic cluster but keep random negatives?",
+        "answer": "Same-cluster items are closer to the decision boundary than easy random negatives; random draws preserve global coverage. The change is segmented maintenance and sampling in the live out-of-batch pool, not adding an online LLM. Same-cluster items can be false negatives, so validate the ratio.",
+        "example": "Other running shoes are harder negatives than refrigerators, but occasional cross-category draws preserve broader distinctions."
+      }
+    },
+    "qa/recommendation:cluster-goobs/basics": {
+      "source_sha256": "7d60a45f50d20fae1bcaee9192bdea74161989a135ac35fa97f5fd515fc06b57",
+      "reviewed": true,
+      "fields": {
+        "question": "Why change Cluster GOOBS's training negative pool rather than the online model?",
+        "answer": "The two-tower similarity is unchanged. The training denominator sees harder competitors from a live semantic cluster pool; serving requires no new scorer. The changed learning distribution should be assessed on the full catalog, not just a similarly sampled subset.",
+        "example": "Train a camera positive against similar camera or lens negatives while serving the same two-tower vector index."
+      }
+    },
+    "qa/recommendation:cluster-goobs/comparison": {
+      "source_sha256": "c89f343396484f0dff4029b579406db2b7d2b2f959d900ae2b021fdb80263753",
+      "reviewed": true,
+      "fields": {
+        "question": "What does Cluster GOOBS add beyond hard negatives from the current batch?",
+        "answer": "A continuously updated out-of-batch pool is larger and less subject to current batch size and chance; semantic segments keep sampling manageable. Balance stale vectors and false negatives with random draws. Constant sampling cost is not constant total training complexity.",
+        "example": "A batch may lack comparable movies; a cross-batch pool has same-genre options, some of which can be false negatives the user would like."
+      }
+    },
+    "qa/recommendation:cluster-goobs/implementation": {
+      "source_sha256": "e019d4153fe344ad2666e7f470d7cca1ab5b249db024c40af3f783b62be4abdf",
+      "reviewed": true,
+      "fields": {
+        "question": "How should Cluster GOOBS avoid test leakage in its random-to-cluster ratio and live-pool updates?",
+        "answer": "Build clusters and pools from training-available content and interactions; fix the ratio by design or validation, not repeated test hits. The limited local MovieLens transition proxy uses genres, not the original multimodal clusters. Full-catalog evaluation is separate from the pool.",
+        "example": "A 1:15 mixture does not mean testing only 16 items, and test targets must not enter pool updates."
+      }
+    },
+    "qa/recommendation:cmsl/mechanism": {
+      "source_sha256": "1c28a470d0c66239cb6085da1730717eb4b27c1372d1ac881d272849abadc745",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CMSL's contextual lens not prebucket events into click and purchase types?",
+        "answer": "Fixed event types need not match current latent intent. CMSL learns context-conditioned soft assignment into semantic strands, encodes them separately, and aggregates them using nonsequence context. Check duplication and loss of effective history rather than assuming strands are complementary.",
+        "example": "A kitchen-item click can indicate restocking or preparing to move. Different lenses can weight it differently without a fixed click bucket."
+      }
+    },
+    "qa/recommendation:cmsl/basics": {
+      "source_sha256": "d5387d275ddd59e5c985d9663cecefd61cf49098dee0a0bb7dbab8702575c106",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CMSL condition contextual lenses on current nonsequence context?",
+        "answer": "Context determines which historical events explain a latent intent together. Soft routing creates multiple strands for encoding and context-query aggregation, avoiding fixed business categories that hide more specific needs. Human-interpretable themes are not guaranteed; check redundancy and collapse.",
+        "example": "Travel can emphasize light equipment, while a home context emphasizes storage within the same shopping history."
+      }
+    },
+    "qa/recommendation:cmsl/comparison": {
+      "source_sha256": "514dd05f799b8f0613a4d22bc01eda02c1cbf123d44e817cddeb237ba2f6799f",
+      "reviewed": true,
+      "fields": {
+        "question": "How do CMSL strands differ from simply adding attention heads?",
+        "answer": "Heads project the same input sequence into different subspaces. A lens first reweights or groups events under context, creating distinct latent sequences before encoding. CMSL's linear HSTU uses a specific kernel approximation; strands do not automatically linearize standard HSTU.",
+        "example": "More heads read the same ledger in different ways. Lenses first reorganize it into separate ledgers, which still need effective encoding."
+      }
+    },
+    "qa/recommendation:cmsl/implementation": {
+      "source_sha256": "80e627a1b4007d874ca627f0939ad59b5167f4b7f12b3254e28d176e0116b845",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check width costs separately in CMSL's second-order feature-map approximation?",
+        "answer": "Decomposing the SiLU dot product can reorder multiplication to reduce quadratic dependence on history length. Second-order cross terms grow with feature width, so linear length scaling does not settle FLOPs or constants. The local run checks learned lenses and an HSTU-style path; verify the production kernel separately.",
+        "example": "Doubling history from 1,000 to 2,000 can roughly double the length term, while doubling feature width can expand the feature map by much more."
+      }
+    },
+    "qa/recommendation:cobra/mechanism": {
+      "source_sha256": "7b42bfcf507142a99165b5aecd14b03a473a260aa3f8f9aa4dc7839d80c31045",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does COBRA generate a dense vector conditioned on an already generated sparse SID?",
+        "answer": "Quantization retains coarse structure but loses within-code details. The discrete path narrows search; user context and that path generate a dense query to distinguish items sharing a coarse code. Joint objectives align stages, but reranking cannot guarantee recovery of paths eliminated by the beam.",
+        "example": "After choosing athletic shoes, a dense query can distinguish trail from road shoes. It cannot recover them if the beam picked appliances."
+      }
+    },
+    "qa/recommendation:cobra/basics": {
+      "source_sha256": "cdffa4f7d29303c61772666bc5aee4fbe51b8138aec483e98f51bb198d3f0c63",
+      "reviewed": true,
+      "fields": {
+        "question": "Why generate COBRA's sparse code and dense vector in separate stages?",
+        "answer": "A beam selects semantic regions by discrete code, then conditioned nearest-neighbor search preserves fine differences within each region and offsets quantization loss. Dense precision cannot recover items outside every selected region.",
+        "example": "Locate science fiction first, then distinguish hard and action science fiction. Fine ranking within family comedy will not find a science-fiction target."
+      }
+    },
+    "qa/recommendation:cobra/comparison": {
+      "source_sha256": "8f624f6b8f703f53dce6d8d1aa5a4e0afd5b6b6aeff3eec30680027f6aa384f9",
+      "reviewed": true,
+      "fields": {
+        "question": "What does COBRA borrow from continuous two-tower retrieval and pure SID generation?",
+        "answer": "Continuous towers suit ANN but often compress a user into few vectors; SID generation nominates hierarchical regions at the cost of quantization errors. COBRA uses codes for multi-region nomination and conditioned vectors for within-region detail, adding modules and calibration. Sparse-only ablation and comparison with DIN answer different questions.",
+        "example": "A beam can nominate photography and baking separately and refine both, instead of averaging interests in one vector, but both score levels need maintenance."
+      }
+    },
+    "qa/recommendation:cobra/implementation": {
+      "source_sha256": "2513199e783ffbc2538cda0e77f5307c941b5e7d8d4b449076c52402bd01df34",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine COBRA beam scores and conditioned-vector dot products at inference?",
+        "answer": "Dot products express item fit conditional on a code; beam scores preserve each path's prior plausibility. Combine on compatible scales and choose coefficients on validation. The dense training loss should actually update conditioned vectors, not be replaced by a fixed score mix.",
+        "example": "A high local dot product under an unlikely code should not automatically beat a slightly lower score under a likely code."
+      }
+    },
+    "qa/recommendation:cohortmix-ts/mechanism": {
+      "source_sha256": "24f814063c75a2b10dc1cc221b87e1454772194ab5ff22aaf1daa47458358e16",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CohortMix-TS use a mixed Beta prior with fixed strength instead of inheriting all cohort counts?",
+        "answer": "Similar cohorts can warm-start a new user, but copying their sample sizes would make personal observations ineffective for too long. Mix cohort means, use controlled pseudocounts, and update on individual exposure feedback. Thompson sampling retains exploration, and local evidence only checks the posterior mechanism.",
+        "example": "With 100,000 cohort events and three personal events, full inheritance drowns out the new user. Fixed prior strength allows personal preference to take over gradually."
+      }
+    }
+  }
+}

@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:dt-jepa/implementation": {
+      "source_sha256": "1180dcee625e3b53e15e05ef9d2f9063bbcd9443f71b7f32342267075f615017",
+      "reviewed": true,
+      "fields": {
+        "question": "Can NLL, BC, and critic reductions all use generic MSE.mean?",
+        "answer": "No. Sum NLL over latent dimensions before the batch mean; sum BC and critic over time and action dimensions before the batch mean. Reductions change relative weights. Detach target and TD bootstrap, but retain actor gradients through Q with respect to actions. Local tests omit full online data collection.",
+        "example": "Doubling action width changes an all-element mean's per-example contribution relative to other summed terms."
+      }
+    },
+    "qa/foundation-models:ego-p2c/mechanism": {
+      "source_sha256": "f3a7ef72cab69cce9393a0bdcd8df35bb6d9b3b1585cb6c5d95429904ddef202",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must role teachers score the same student tokens in segmented distillation?",
+        "answer": "Actual student interaction defines visited prefixes. Role-specific teachers score those prefixes to identify planning, perception, or direct-answer errors. A separate teacher-written answer loses on-policy supervision. Shared video KV must exclude role-private history.",
+        "example": "If a student asks for a viewpoint then makes a spatial judgment, teachers score the corresponding segments of that same trace."
+      }
+    },
+    "qa/foundation-models:ego-p2c/basics": {
+      "source_sha256": "de172df5244d2e39ccc9912fbdf3ecdd961e34f0592f7540c6baa5836458464f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why improve both question planning and perceptual answers in egocentric spatial reasoning?",
+        "answer": "Complex questions need decisions about where to look and what to ask, followed by reliable evidence extraction. Errors in either role propagate. EgoP²C improves both while respecting their information boundaries; final conclusions still need validation.",
+        "example": "For a drawer relative to a door, plan a viewpoint and subquestion; a left/right perceptual error cannot be fixed by fluent composition."
+      }
+    },
+    "qa/foundation-models:ego-p2c/comparison": {
+      "source_sha256": "4032f3fecea3d73d25f4526ec574c12a02bc9fa8f0f8446359b5385b9adf0ce1",
+      "reviewed": true,
+      "fields": {
+        "question": "Do the PC, V, and general G experts share the same parameter training boundaries?",
+        "answer": "Experts initialize from copies of the base FFN. G's FFN stays frozen, while its attention residual trains only in MOPD. PC and V supply trainable planning and perception paths. This preserves general answering without updating three full models alike.",
+        "example": "Keeping G's FFN does not forbid all adaptation; its attention residual can train later."
+      }
+    },
+    "qa/foundation-models:ego-p2c/implementation": {
+      "source_sha256": "6a83c560d9f2261af7bdda3951c0852152b7df1413f78ba6ed104cf24d5df647",
+      "reviewed": true,
+      "fields": {
+        "question": "Why normalize role length over the whole trajectory?",
+        "answer": "A role may have multiple segments; divide by all supervised tokens for that role in the trajectory, not each segment separately. Otherwise splitting a segment increases role weight. Detach teacher and old-student log probabilities, keep private decoder KV separate, and do not interpret random-teacher diagnostics as spatial capability.",
+        "example": "Ten PC tokens in two five-token segments should keep the same total weight. Separate means would double their contribution."
+      }
+    },
+    "qa/foundation-models:egojepa/mechanism": {
+      "source_sha256": "9ffe56b85060aa2c4058115fafe2560d2b4e47893f0e5e16add59e07c4cc634c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why learn latent actions instead of mapping human hand trajectories directly to robot joints?",
+        "answer": "Human hands and robot actuators have different geometry. Motion-difference conditioning learns latent actions linked to visual changes, then joint modeling and robot-specific interfaces adapt them. What transfers is the effect, not coordinate equivalence.",
+        "example": "Fingers pinching and a gripper closing have different angles but can both lift a cup."
+      }
+    },
+    "qa/foundation-models:egojepa/basics": {
+      "source_sha256": "926e411fded5ab655b491da95d54787b829145eb13875fcde981165bb3ce82ab",
+      "reviewed": true,
+      "fields": {
+        "question": "Why learn from human egocentric videos for transferable robot experience?",
+        "answer": "Robot demonstrations are costly and embodiment-specific. Human video has action–appearance relationships but not robot control signals. Learn latent visual and action structure before adapting to a robot; actual control still needs environment validation.",
+        "example": "Human drawer-opening video teaches scene change, not direct robot-arm joint commands."
+      }
+    },
+    "qa/foundation-models:egojepa/comparison": {
+      "source_sha256": "fd0cb160ed8891df4c7f1d40f85bb6bfe675fbf8d24f3b248d2e90858cd84eff",
+      "reviewed": true,
+      "fields": {
+        "question": "How do action-conditioned JEPA and later joint visual/latent-action flow matching differ?",
+        "answer": "First predict future visual representations conditioned on hand-motion differences, linking latent actions to observable effects. Then jointly model visual and action latents and adapt a robot I/O interface. Prediction and joint generation are separate and do not by themselves establish robot control.",
+        "example": "Learn which hand changes produce which visual effects before adapting the learned joint structure to an arm."
+      }
+    },
+    "qa/foundation-models:egojepa/implementation": {
+      "source_sha256": "40ceb020fb72120abe9d0417abaa1acafcd186a43ef0127194dbdc51def802f8",
+      "reviewed": true,
+      "fields": {
+        "question": "How does visibility of future visual targets differ between JEPA training and control?",
+        "answer": "In training, an encoder supplies detached targets from future frames for prediction from history and hand-motion differences. Control cannot read an unrealized future. Local work is a literature/cost record with no adapter, metrics, or GPU receipt.",
+        "example": "Use the later object-position frame to supervise prediction, not as a deployment input."
+      }
+    },
+    "qa/foundation-models:esc/mechanism": {
+      "source_sha256": "c3ca85d03bb00936c2747f3b1e116bcf1deefaa34a16b5e30cfa5e8e63ccdc7b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a sharp image with the right camera pose still fail PCC?",
+        "answer": "Realistic appearance does not ensure the same 3D scene. PCC uses bidirectional depth reprojection and visibility to detect vanished or hallucinated objects, respecting occlusion and invalid pixels. Best-of-N selects geometric consistency, not the prettiest candidate.",
+        "example": "A cup can disappear in a visually clean view; bidirectional reprojection detects the inconsistency."
+      }
+    },
+    "qa/foundation-models:esc/basics": {
+      "source_sha256": "c31df2655dc85d673947f57471b911c6e05dbc1d0b78220bf32ee95ab09f46b4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does ESC care whether objects persist across generated viewpoints?",
+        "answer": "Generators can render plausible posed images while adding or dropping objects. ESC links RGB and depth to test geometric consistency. New views should differ in pixels in spatially explainable ways, not merely look similar or good.",
+        "example": "A cup should move in projection as the camera circles a table, not vanish in an unoccluded region."
+      }
+    },
+    "qa/foundation-models:esc/comparison": {
+      "source_sha256": "a553b59423659c1b20a2727d12d0ba27c1407ae0b411dd2d4af33c81aba76b77",
+      "reviewed": true,
+      "fields": {
+        "question": "How does PCC Best-of-N differ from selecting the closest RGB image?",
+        "answer": "Correct viewpoints can change pixels. PCC projects source and target depths both ways with occlusion and valid coverage checks, detects missing or hallucinated geometry, and minimizes the score. This does not optimize every image-quality metric.",
+        "example": "A duplicate source image can have the smallest RGB difference while failing the requested camera view."
+      }
+    },
+    "qa/foundation-models:esc/implementation": {
+      "source_sha256": "6ca1eff6d831bc931f793e5ceac24011cc466ee451811cbbed4bc0d36de513e9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do reprojection checks need z-buffering and valid-pixel masks?",
+        "answer": "Multiple source points can land on one pixel and must respect occlusion. Negative depth, out-of-bounds projections, and missing source depth are not valid errors. PCC also uses thresholds, logarithmic compression, clipping, and coverage normalization. No local implementation or capability metrics.",
+        "example": "A wall can correctly occlude an object. Lack of a visible match is not disappearance."
+      }
+    },
+    "qa/foundation-models:ev-jepa/mechanism": {
+      "source_sha256": "175ecc3b173d9c560fa9a95518568873c08e80a1af2c6f5c7517cd964041b01c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why train narrow-to-wide as well as narrow and wide paths?",
+        "answer": "Individually strong widths need not exchange intermediate states successfully. The mixed route trains the widening boundary under a common frozen teacher. This differs from arbitrary slicing or splicing independent models and does not eliminate communication cost.",
+        "example": "A server's wide layers may not understand a phone's narrow intermediate state without handoff training."
+      }
+    },
+    "qa/foundation-models:ev-jepa/basics": {
+      "source_sha256": "36b0cf973d5fac8459863469bfff60d9f4ffe6fd7009e6eefe0b135a5e0d82e7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why support phone, server, and split-device budgets for one video model?",
+        "answer": "A fixed width may not fit all devices. Separate models may use incompatible representations. EV-JEPA learns shared elastic widths and compatible handoffs, but not every split is valid or free. Transfer, compression, and task quality need testing.",
+        "example": "Matching tensor shapes is not enough for a phone's narrow front half to hand off to a wide server back half."
+      }
+    },
+    "qa/foundation-models:ev-jepa/comparison": {
+      "source_sha256": "93fbbfc731a5e9d4194350b93d4569210f614e2ffab2d22af235365d7477f9fd",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a learned split-layer compressor differ from dropping tokens?",
+        "answer": "Dropping tokens may permanently hide evidence. A compressor trains reconstruction so transmitted representations remain useful to the second stage. Lower reconstruction loss is not end-to-end losslessness or proof of deployed handoff.",
+        "example": "Dropping half the spatial positions differs from encoding into fewer tokens and learning to reconstruct recoverable structure."
+      }
+    },
+    "qa/foundation-models:ev-jepa/implementation": {
+      "source_sha256": "48ea0339a0109e263e7506d1044367c7d492c46cca91a1cecde25d9adadac67c",
+      "reviewed": true,
+      "fields": {
+        "question": "Does EV-JEPA's teacher stay frozen or track the elastic student by EMA?",
+        "answer": "Frozen V-JEPA 2 supplies common targets for narrow, wide, and mixed student paths. Nested student parameters share masked-token L1 supervision in one space. Channel slicing alone is not joint training or cross-device verification.",
+        "example": "Updating shared student weights leaves the teacher's outputs fixed, not updated through EMA."
+      }
+    },
+    "qa/foundation-models:gen4p/mechanism": {
+      "source_sha256": "43cd11f5878dcd1302e588af0663b52da888e142f1229cbe6c51ec171efba8c3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a video generator support 4D perception without multistep denoising?",
+        "answer": "Gen4P reads motion and geometry representations inside a pretrained DiT. Clean video latents get one prescribed conditioned encoding; queries read tracks or depth. Frozen geometry adapters and trainable task LoRA differ. Supervision and decoders remain necessary.",
+        "example": "Train a head to query a point's 3D location after three seconds without generating another video."
+      }
+    },
+    "qa/foundation-models:gen4p/basics": {
+      "source_sha256": "3be1f3c04d9061e40f42ca1247c8147a9240d7d0625207412db87ec40a9af69d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reuse video generation knowledge for 3D and 4D perception?",
+        "answer": "Generation pretraining can learn appearance, motion, and geometry priors relevant to depth, tracks, and cameras. Gen4P extracts a clean-video scene representation and queries properties. It still needs geometry targets or task validation, not new video generation.",
+        "example": "Given a moving-camera clip, query a point's 3D trajectory instead of asking for another clip."
+      }
+    },
+    "qa/foundation-models:gen4p/comparison": {
+      "source_sha256": "4f727f23b81383c9e6d5f4e1549b5334ae0e646fb6a3dfbc6bd012b59f0e6f08",
+      "reviewed": true,
+      "fields": {
+        "question": "How do frozen depth-LoRA and trainable 4D-LoRA differ from full fine-tuning?",
+        "answer": "Freeze the base DiT and depth LoRA; train the 4D LoRA, queries, and decoders. This preserves generation and depth priors more directly than updating all weights. It does not guarantee every metric improves; the paper reports a depth regression.",
+        "example": "Train a temporal tracking adapter without modifying the depth update, then test both tasks."
+      }
+    },
+    "qa/foundation-models:gen4p/implementation": {
+      "source_sha256": "6d2e6bbbebd462971df786e80bdb3e1d23e9e101246c8b50cb60d80c03d9537a",
+      "reviewed": true,
+      "fields": {
+        "question": "What distinctions matter for continuous time queries and DiT input?",
+        "answer": "Query time interpolates endpoint embeddings with t/(T−1). DiT reads clean z0 under the final scheduler time and an empty text condition. Query time is not diffusion noise time, and this is not iterative denoising. Local work is documentation only.",
+        "example": "A midpoint time query interpolates embeddings; it does not add half-strength noise to the frame."
+      }
+    },
+    "qa/foundation-models:inside-jepa/mechanism": {
+      "source_sha256": "e01ae91d26b49f10e5e39f071bab4f1155c84d51a50ea64c0967c3dd073454ea",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use a differentiable online future encoding in the inverse-dynamics head instead of EMA?",
+        "answer": "The inverse objective must send action-explanation gradients into relationship representations on the future side. JEPA prediction can still use a stable EMA target. Entity-only and shuffled-action controls test whether relations truly supply action information.",
+        "example": "Predict the action from changes in cup–box relations; the future relation encoder needs gradients to learn such changes."
+      }
+    },
+    "qa/foundation-models:inside-jepa/basics": {
+      "source_sha256": "3a76bbbae3d647ae73c8efd5633354778fdc7c26b521b6625929f48253a95218",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Inside-JEPA want latent states to encode relationships?",
+        "answer": "Latent forecasts need not expose contact or relative position. Inside-JEPA models entities and relations and studies how action supervision shapes them. A relation channel or low prediction loss does not establish learned relational semantics; controls are needed.",
+        "example": "Two unchanged-looking objects can transition from separated to touching, altering the right action despite unchanged categories."
+      }
+    },
+    "qa/foundation-models:inside-jepa/comparison": {
+      "source_sha256": "023222a6ad9232f55cd593a506e0a8c1f3c8792f00a98e870c2dc83b06e7f1c7",
+      "reviewed": true,
+      "fields": {
+        "question": "What do INV-S, INV-R, and shuffled-label controls isolate?",
+        "answer": "INV-S reads relations only for inverse dynamics; INV-R reads entity latents only. Shuffling changes only inverse labels, while prediction still reads true actions. These controls isolate supervision sources rather than treating any auxiliary gain as relation grounding.",
+        "example": "Similar gains with random action labels suggest regularization rather than learned action–relation correspondence."
+      }
+    }
+  }
+}

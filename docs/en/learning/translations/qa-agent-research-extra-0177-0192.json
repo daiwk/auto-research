@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:gacc-bench/mechanism": {
+      "source_sha256": "f73e6e130277c6db0498879b96eec53a64ba74cecf58c01d7a33d24a4144d4a3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why generate one memory per context–goal–budget and reuse it for all follow-up questions?",
+        "answer": "Compression sees only the high-level goal, not individual questions. Reuse tests whether one memory retains evidence for the group. Recompressing per question gives the compressor extra query information and changes the task. Strict token truncation, empty memory for zero budget, and no padding determine actual reader inputs, beyond nominal budget.",
+        "example": "A project-decision goal can lead to date and reason questions. Both should read the same precompressed memory, not query-specific summaries extracted later."
+      }
+    },
+    "qa/agent-research:gacc-bench/basics": {
+      "source_sha256": "b38b70e5c49e8691d27e5150e91aedffebfabf9c44fd796790952f17548b0364",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does GACC-Bench use one compressed memory for several questions under one goal?",
+        "answer": "Only the high-level goal is visible during compression. Reuse checks whether the whole group's evidence was retained. Recompressing after seeing a question becomes targeted extraction for a known query.",
+        "example": "A travel-goal memory should answer both transport and lodging without creating a new summary per question."
+      }
+    },
+    "qa/agent-research:gacc-bench/comparison": {
+      "source_sha256": "e1b1a6bb26bb54c53c9a63f9ca22f1364eced89005b154004b453fd8b5aa5a0a",
+      "reviewed": true,
+      "fields": {
+        "question": "How can GACC Micro be high while Macro is zero?",
+        "answer": "Micro counts correct answers over all questions. Macro scores a goal only when all its questions are correct. Missing one key question in every group can retain high per-question accuracy but zero goal completeness.",
+        "example": "Two goals with two of three questions correct each yield Micro=2/3 and Macro=0."
+      }
+    },
+    "qa/agent-research:gacc-bench/implementation": {
+      "source_sha256": "19bc57c20eb549634ce2525a2481f2881eed25a822ef16d08df83859122337bc",
+      "reviewed": true,
+      "fields": {
+        "question": "What should GACC pass to the reader when compressor output exceeds budget or the budget floors to zero?",
+        "answer": "Use the fixed tokenizer to take the first L tokens and decode, without regeneration or padding. L=0 gives empty memory. Bind caches to source, goal, tokenizer, and compressor version so configurations do not share memories incorrectly.",
+        "example": "With three source tokens and retention 0.2, L=0; do not retain one token to improve scores."
+      }
+    },
+    "qa/agent-research:disagreement-routing/mechanism": {
+      "source_sha256": "6d4716cd0e2b97e98e178702553e791e354a9d67104a1849df48ea0d776082e8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why subtract strong-model self-disagreement from weak–strong disagreement?",
+        "answer": "Disagreement may come from strong-model instability rather than a fixable weak answer. Estimate self-disagreement over distinct sample indices and subtract it for a better escalation signal. The score can be negative and is not a success probability. At test time run only weak representations and probes before paying for escalation.",
+        "example": "Opposite strong answers make high weak–strong disagreement inconclusive. A consistent strong model disagreeing with the weak one provides a clearer signal."
+      }
+    },
+    "qa/agent-research:disagreement-routing/basics": {
+      "source_sha256": "a0c8523920ee66e8caf2903b72864db262a852a47fab79cd3752c97b3d7067e5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't weak-model uncertainty necessarily justify escalation?",
+        "answer": "If the strong model is also unstable on the question, escalation may not improve reliably. Subtract strong self-disagreement from weak–strong disagreement to learn escalation value. Offline equivalence comparisons need no correct-answer labels.",
+        "example": "Both models may waver between options. The weak model's hesitation alone does not show that the strong model can fix it."
+      }
+    },
+    "qa/agent-research:disagreement-routing/comparison": {
+      "source_sha256": "9ecb873698da610b850a0bb9c0f92a5d5f5d9b68b3cd8c004c3ed56c72f3c822",
+      "reviewed": true,
+      "fields": {
+        "question": "How does the corrected routing score range differ from raw weak–strong disagreement probability?",
+        "answer": "Raw disagreement is a probability. The corrected score subtracts two probe outputs, can be negative, and must not be clipped to [0,1]. Take the minimum response-level prediction across weak answers first, then subtract prompt-level strong self-disagreement.",
+        "example": "Weak–strong disagreement 0.2 and strong self-disagreement 0.5 yield −0.3."
+      }
+    },
+    "qa/agent-research:disagreement-routing/implementation": {
+      "source_sha256": "a302ac1ce8e3f66535b00fd26cdbce11bebd39fcf5aeca69d072c6026bb2fe72",
+      "reviewed": true,
+      "fields": {
+        "question": "Why exclude self-pairs when estimating strong-model self-disagreement?",
+        "answer": "Use K_s(K_s−1) ordered pairs of distinct indices. Diagonal comparisons always agree and bias disagreement down. Calibrate inference thresholds on validation only; under test distribution shift, exact routing quotas are not guaranteed.",
+        "example": "Two strong responses give two ordered cross pairs, not four pairs including both self-pairs."
+      }
+    },
+    "qa/agent-research:agent-perturb/mechanism": {
+      "source_sha256": "76875af9416697d4d28660fc3efd3ec113062abb74e292d2d525bf3d3a95a93a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why independently verify unchanged goals and solvability after perturbations pass JSON checks?",
+        "answer": "Parseable inputs can still change the task or remove essential information. Single-target semantic validation holds other factors, backend, and oracle fixed so differences reflect interaction pressure. Report paired coverage and bounds for missing scores rather than dropping failures and claiming robustness.",
+        "example": "Rewording a tool description should preserve behavior. Removing the only required tool introduces unsolvability, not the same perturbation effect."
+      }
+    },
+    "qa/agent-research:agent-perturb/basics": {
+      "source_sha256": "9afdbf865b32674d56cf19b7071d987444aeee2ca65d648cd048c0fe5a089fa0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does AgentPerturb change only one of U, P, C, or T at a time?",
+        "answer": "User request, procedure, history/context, and tool contract are distinct input surfaces. Holding others, backend, and success oracle fixed isolates pressure better. Changing several surfaces introduces confounds.",
+        "example": "A single-target pair can change only tool wording while preserving user requirements and tool implementation."
+      }
+    },
+    "qa/agent-research:agent-perturb/comparison": {
+      "source_sha256": "84fabb41fdd1707ca4df96d2f91125ab7e1e7bedde1861f44876614c691429d7",
+      "reviewed": true,
+      "fields": {
+        "question": "What do AgentPerturb syntax checks and independent semantic verification establish?",
+        "answer": "Syntax checks parseability, not goal preservation or solvability. An independent verifier checks single-target change, unchanged goal, solvability, and executability together with a native validator. A local arithmetic verifier does not prove arbitrary natural-language equivalence.",
+        "example": "Valid JSON that changes a sum into a product changes the goal and is not a robustness perturbation."
+      }
+    },
+    "qa/agent-research:agent-perturb/implementation": {
+      "source_sha256": "f7efe8f8d513593af1bfb599e2b5bc5eb806e406b0e7786b76a943972f1323ae",
+      "reviewed": true,
+      "fields": {
+        "question": "Can AgentPerturb drop unscored requests when calculating paired degradation?",
+        "answer": "Compute C, P, and Delta on scored pairs, but report coverage and unknown bounds across all requested pairs. Missing is unknown, and native partial credit must not be arbitrarily binarized to align formats.",
+        "example": "If only 60 of 100 planned pairs have both scores, do not report just their drop while hiding 40 missing pairs."
+      }
+    },
+    "qa/agent-research:ctxgap/mechanism": {
+      "source_sha256": "29ef3d9a62b81d463c9d9805f795aacd5a7eb17e23afe89436be132f3ccd4db1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't public execution materials be relabeled T_full to recompute the full report gap?",
+        "answer": "The original full view includes some unpublished reasoning or memory evidence. Without it, observer capability and answerable questions change. Pair probes and weight important facts, but separate public and full conditions. Cluster by task/run rather than assuming many probes for one task are independent.",
+        "example": "If a port appears only in private memory, a public-log observer's failure cannot represent the original full-view ceiling."
+      }
+    },
+    "qa/agent-research:ctxgap/basics": {
+      "source_sha256": "90fd1231d056dd78c5a0d460578e33178c30b205b90d0626b1b434aebf71c898",
+      "reviewed": true,
+      "fields": {
+        "question": "How does the CTXGAP reporting gap differ from task completion rate?",
+        "answer": "It compares cumulative-report and full-execution observers on the same probes, measuring how well users can recover true task state. A completed task can omit key facts in its report; a detailed report does not establish success.",
+        "example": "Code may be fixed while the report omits an unrun check, leaving users unable to judge acceptance accurately."
+      }
+    },
+    "qa/agent-research:ctxgap/comparison": {
+      "source_sha256": "f331e9e538a0e6b037ad3d5dfd187351275807639fad78645f87536fa58cdd90",
+      "reviewed": true,
+      "fields": {
+        "question": "How does CTXGAP importance-weighted accuracy differ from averaging all probes equally?",
+        "answer": "More probes in one category should not outweigh another category's important facts. Divide the number of important atomic facts by probes in the category, sum weighted scores, and normalize. Equal weighting can let many easy or similar probes hide omissions.",
+        "example": "Many questions about a trivial log should not obscure one missing acceptance fact."
+      }
+    },
+    "qa/agent-research:ctxgap/implementation": {
+      "source_sha256": "94153f91b0d7d1d821fe534f3fa7b8ec6e21d69b7e5f2dce9113d2834c7a0ba2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why resample CTXGAP intervals by task/run rather than individual probes?",
+        "answer": "Probes within one task share execution and reporting conditions and are not independent. Cluster while keeping paired conditions together. Preserve category weights and equal task aggregation rather than replacing the main gap with pooled accuracy differences.",
+        "example": "A task with 100 similar probes is not 100 independent tasks and should not artificially narrow confidence intervals."
+      }
+    }
+  }
+}

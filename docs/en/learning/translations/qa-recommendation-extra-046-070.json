@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:sasrec/basics": {
+      "source_sha256": "e35e61cd046a7889d4cd722dc0dcb70ed5030b0989be909c78ce3ecb4a0adf79",
+      "reviewed": true,
+      "fields": {
+        "question": "How does SASRec shift inputs and next-item targets?",
+        "answer": "Position i reads history through i and supervises the following item, without exposing future events. Exclude padding; each sequence yields several prefix tasks.",
+        "example": "Use A→B and A,B→C; the representation predicting B cannot read C."
+      }
+    },
+    "qa/recommendation:sasrec/comparison": {
+      "source_sha256": "84d52b26e4dcfbb1e5b14c825aff79fcecbd6ee9d5397029c4406da66da8150b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does causal next-item prediction differ from masked item recovery?",
+        "answer": "Causal training uses only history; masked recovery can use both neighbors. Right context legal for recovery is future leakage in next-item prediction.",
+        "example": "Recovering A,[MASK],C may read C; predicting B after only A may not."
+      }
+    },
+    "qa/recommendation:sasrec/implementation": {
+      "source_sha256": "c4e99a836656164c97671fed127ecaaf51f4bb3463bb016ae671548aec4d84ff",
+      "reviewed": true,
+      "fields": {
+        "question": "How preserve SASRec embeddings and negative objective?",
+        "answer": "Tie input item embeddings with output weights and use per-position positive and sampled-negative pairwise BCE, not catalog CE. Mask padding and future positions.",
+        "example": "Never sample the true positive as its own negative."
+      }
+    },
+    "qa/recommendation:sasrec/mechanism": {
+      "source_sha256": "5d4721998451997309ba7c50b17146822b9a8228e0221b2d4c969dcafc7ff93b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does SASRec balance recent and distant interests without reading future?",
+        "answer": "Content attention accesses several earlier behaviors beyond fixed-order Markov neighbors, without RNN recurrence. Position representations preserve order and causal masks restrict reads. Next item is supervision only, and attention can still read irrelevant history.",
+        "example": "Recall old sci-fi interest despite recent comedy, while position three cannot read item four."
+      }
+    },
+    "qa/recommendation:saviorrec/basics": {
+      "source_sha256": "1921259e999c46a1d5f83a9666eb7f98587d5e39a19351939b4d0518ab90fa9c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why train SaviorRec's content encoder with behavior first?",
+        "answer": "Generic image/text similarity differs from co-click or co-purchase. SaviorEnc uses actual interactions to shape content before SID quantization. Cold start still depends on features and coverage.",
+        "example": "Visually similar products may meet different needs that behavior reveals."
+      }
+    },
+    "qa/recommendation:saviorrec/comparison": {
+      "source_sha256": "74e4b021b11ce0fd6cfe93d9eab25ab6c219d53459269d10a49f00d08b29c2f3",
+      "reviewed": true,
+      "fields": {
+        "question": "How do behavior pairs differ from content-only similarity?",
+        "answer": "Interactions adapt the space to recommendation before quantization; content similarity may only reflect surface appearance. Behavior can be exposure-biased, and a later residual does not implement encoder training.",
+        "example": "Products often chosen together can align despite looking different."
+      }
+    },
+    "qa/recommendation:saviorrec/implementation": {
+      "source_sha256": "33af69ad2c9b23c32531459220a3401142526184a4369f6cfecdfb76c0e45d30",
+      "reviewed": true,
+      "fields": {
+        "question": "Why initialize MBA at zero, and what does bidirectional target attention read?",
+        "answer": "Zero residuals initially preserve frozen semantics, then learn per SID. Candidate queries history and conditions historical representations; this is not access to future outcomes.",
+        "example": "A candidate can guide matching without seeing the user's later click."
+      }
+    },
+    "qa/recommendation:saviorrec/mechanism": {
+      "source_sha256": "48407712b336f02592eca17bea37344b5ca9621a9b5b8516786a9e4f94ea37db",
+      "reviewed": true,
+      "fields": {
+        "question": "Why freeze SID but learn behavioral residuals with zero-initialized MBA?",
+        "answer": "Behavioral content training and quantization form stable semantic IDs. Changing IDs would disrupt historical mapping. MBA gradually adapts behavior per code, initially without changing embeddings. Stable codes can limit response to large shifts.",
+        "example": "Keep camping IDs stable while preferences shift toward winter equipment."
+      }
+    },
+    "qa/recommendation:scalr/basics": {
+      "source_sha256": "ae0b2952ba520b73b09d80e468c4eea57fbd57f4f0acb334e0a6a3418242a185",
+      "reviewed": true,
+      "fields": {
+        "question": "Do SCALR translated target events actually occur?",
+        "answer": "No. They are conditional samples for downstream training, not exposures, clicks, or conversions. Keep synthetic identity and weights.",
+        "example": "Generating a target-domain training click on B from a source event on A does not create an audit fact."
+      }
+    },
+    "qa/recommendation:scalr/comparison": {
+      "source_sha256": "bdd5ddcb4431cbd40a195f07a43ca73e8b0251337c4db699473dfa46bd0cad7c",
+      "reviewed": true,
+      "fields": {
+        "question": "How does data-level transfer differ from adding cross-domain modules to each model?",
+        "answer": "Synthetic events reuse the ordinary target training interface. Model-level transfer is tied to architecture. Shared interfaces ease reuse but do not guarantee equal effects.",
+        "example": "Several rankers can share events rather than each implementing a special attention module."
+      }
+    },
+    "qa/recommendation:scalr/implementation": {
+      "source_sha256": "eca060d4be5e664dc728d36a5cd69959ef577f27f08e33618e6bd5dba4b117e0",
+      "reviewed": true,
+      "fields": {
+        "question": "What isolation does conditional SCALR estimation need?",
+        "answer": "Estimate co-occurrence from overlapping train users, not target test events; handle zero denominators and missing coverage. Genre proxies are not Meta conversions or CVR.",
+        "example": "Reading test purchases before building translation probabilities leaks future outcomes."
+      }
+    },
+    "qa/recommendation:scalr/mechanism": {
+      "source_sha256": "0ce7ddb85df8a4fc754eb252d8013c537d170d06993765450a172621bcd29255",
+      "reviewed": true,
+      "fields": {
+        "question": "Why synthesize events and sample targets instead of always taking top-k?",
+        "answer": "Estimate target distributions from overlap and emit ordinary training records for different models. Sampling retains tail opportunities rather than repeating head products, without claiming the records occurred.",
+        "example": "Travel browsing may synthesize adapters or organizers, not only the highest-probability suitcase."
+      }
+    },
+    "qa/recommendation:self-evolving-rec/basics": {
+      "source_sha256": "3b9553d005371c1e17e36b56f25415b4061b246f739d1c634e54add228c1a46c",
+      "reviewed": true,
+      "fields": {
+        "question": "Does Self-Evolving Rec's journal store model parameters or experimental knowledge?",
+        "answer": "It records proposals, execution, and protocol-bound outcomes. This is distinct from checkpoint storage. A prose plan without runnable candidates and evaluation is not an experiment.",
+        "example": "Record a failed optimizer comparison so the next iteration avoids repeating it."
+      }
+    },
+    "qa/recommendation:self-evolving-rec/comparison": {
+      "source_sha256": "a753e7daaf7cf11d627a57befedab5bea8f6672ae2563e88b540a225d78be7c9",
+      "reviewed": true,
+      "fields": {
+        "question": "How does bilevel optimization differ from a hyperparameter sweep?",
+        "answer": "Inner training explores architecture, optimizer, or reward; outer governance manages online goals, resources, safety, and accumulated knowledge. Tuning can support the inner layer but does not replace the outer loop.",
+        "example": "A learning-rate sweep does not decide whether to spend live traffic or archive failures."
+      }
+    },
+    "qa/recommendation:self-evolving-rec/implementation": {
+      "source_sha256": "6f0425f91c9db7318ff146cb2b99069776ecd20ea700285d17e184a1502bc637",
+      "reviewed": true,
+      "fields": {
+        "question": "When does a local evolve operator count as integrated?",
+        "answer": "The controller must execute changes, train and evaluate on isolated validation, and leave traceable state/journal entries. Registration or simulated plans are not execution or real A/B.",
+        "example": "An optimizer suggestion that cannot run remains a proposal."
+      }
+    },
+    "qa/recommendation:self-evolving-rec/mechanism": {
+      "source_sha256": "87afb1940faf87a512b2b77b2ca88c769b0ddb02a3533a3e48fee3cfe27e8e07",
+      "reviewed": true,
+      "fields": {
+        "question": "Why should the outer state machine control real A/B promotion?",
+        "answer": "Offline agents cheaply screen ideas but cannot capture all user and serving constraints. The outer loop controls safety, resources, promotion, and journal feedback. Local loops do not replace live production A/B.",
+        "example": "Reject an offline winner with excess latency; record a later approved experiment so future rounds learn."
+      }
+    },
+    "qa/recommendation:semantic-native-longseq/basics": {
+      "source_sha256": "786695a12d39edb888e5b7728f80e12775d905dc73b57eb80448257d7811a17b",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a shared Semantic-Native SID prefix mean identical videos?",
+        "answer": "No. Prefixes encode coarse similarity; identity still depends on the complete path and catalog mapping. Semantic sharing does not merge interaction records.",
+        "example": "Distinct camping videos can share a prefix but keep different logs."
+      }
+    },
+    "qa/recommendation:semantic-native-longseq/comparison": {
+      "source_sha256": "c65b22b1ff96090380b23dc7fe40825b34714b5ff68650b93a85baa3d9ca512e",
+      "reviewed": true,
+      "fields": {
+        "question": "How does temporal folding differ from retaining only recent history?",
+        "answer": "Folding combines neighboring events into features and keeps coarse older information; truncation drops it. Folding and global queries do not preserve full temporal resolution.",
+        "example": "Four events compressed into one token can lose ordering without discarding all evidence."
+      }
+    },
+    "qa/recommendation:semantic-native-longseq/implementation": {
+      "source_sha256": "5608171a986b20b84fcc83b46d31a3f00e9bf34af2ef34d4138dca628aad9cfd",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local folding exactly match paper channel rearrangement?",
+        "answer": "No. Mean/recent is a proxy; no Google RQ-VAE or production components. Pool always-valid global queries and exclude padding.",
+        "example": "Mean folding tests coarse compression, not the paper tensor layout."
+      }
+    },
+    "qa/recommendation:semantic-native-longseq/mechanism": {
+      "source_sha256": "12e4ba347a9bd0bda175894d4ea7b75a82859abde9341e9bc96584eb6ef6e3ed",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compress both SID vocabulary and temporal sequence?",
+        "answer": "Atomic ID tables grow with inventory, and full attention grows quadratically. Bounded hierarchical SID handles representation size; event folding reduces time positions and global queries gather interests. Both sacrifice detail.",
+        "example": "Fold 48 events into 12 local tokens and share semantic codes, but do not assume original within-window order survives."
+      }
+    },
+    "qa/recommendation:sequenceo1/basics": {
+      "source_sha256": "1eb7c30aa3d570f1fbf92f75a3b29db97988a8cd431982076ecc22da0ea55d8e",
+      "reviewed": true,
+      "fields": {
+        "question": "Is a SequenceO1 sketch original distant history?",
+        "answer": "No. A fixed-budget prototype representation summarizes remote behavior while recent history remains finer. It is not event-by-event recoverable.",
+        "example": "Thousands of events can form a few prototypes without preserving exact times."
+      }
+    },
+    "qa/recommendation:sequenceo1/comparison": {
+      "source_sha256": "ed6d419b83755b8bf70f4c90b56dbbe595f91eba5b330089092ffdd8f334ff94",
+      "reviewed": true,
+      "fields": {
+        "question": "How does sketch plus recent differ from recent-only truncation?",
+        "answer": "Sketch preserves compressed long-term patterns, whereas truncation drops remote history. Prototypes can still merge different interests.",
+        "example": "An older sports preference can survive a temporary travel streak."
+      }
+    },
+    "qa/recommendation:sequenceo1/implementation": {
+      "source_sha256": "57f85c40cdcb06a0d3bf5f9e998c6908648a37a0713fe37372648f417ca781ac",
+      "reviewed": true,
+      "fields": {
+        "question": "Is the local 0.65/0.35 blend the paper's 100K-history formula?",
+        "answer": "No. It is a public scoring proxy; no production STCA or long-history service. Fix normalization and candidate masks and do not tune blend on test.",
+        "example": "Small-catalog score gains do not show end-to-end latency with 100,000 events."
+      }
+    },
+    "qa/recommendation:sequenceo1/mechanism": {
+      "source_sha256": "8561dd8e729460ddb0d704b57cac88042aab41f03be7417f913e25680a1ee5c0",
+      "reviewed": true,
+      "fields": {
+        "question": "What does a fixed remote sketch bound, and what still scales?",
+        "answer": "Candidate–sketch matching uses fixed prototypes; recent behavior remains detailed and STCA connects timescales. Reading, building, and updating the sketch still cost work. The local proxy is not the industrial path.",
+        "example": "Matching dozens of prototypes is bounded, but constructing them from 100,000 events is not free."
+      }
+    },
+    "qa/recommendation:seral/basics": {
+      "source_sha256": "2ed86c0f653629856d6fff5645619ec9116dbf15cef388d9627d64bee4b3ef96",
+      "reviewed": true,
+      "fields": {
+        "question": "Why define serendipity as relevant and unseen?",
+        "answer": "Novelty alone can be irrelevant and relevance alone can repeat a feedback loop. Layered profiles and preference controls seek both before nearline candidates enter ranking. Novelty does not guarantee satisfaction.",
+        "example": "Recommend unfamiliar content fitting a persistent interest, not an arbitrary obscure item."
+      }
+    }
+  }
+}

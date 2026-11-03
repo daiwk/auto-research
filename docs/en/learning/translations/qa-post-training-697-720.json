@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:sguid/basics": {
+      "source_sha256": "eca2c9bbcbe3c88f04ed7153de189cf6eb76acf648674b05290d8f8bc3a4c626",
+      "reviewed": true,
+      "fields": {
+        "question": "Why measure sustained teaching activity rather than similarity in SGUID?",
+        "answer": "Relevant skills can teach poorly. Generate from verified traces and check early/late persistence and verifier agreement. Retrieval frequency isn't useful teaching count.",
+        "example": "A frequently retrieved but misleading skill shouldn't stay because it looks relevant."
+      }
+    },
+    "qa/post-training:sguid/comparison": {
+      "source_sha256": "e3db191543fdb36c1e03bf25f1e85d79b4711c790471b2dac6e5cca9ac6ed30c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why restore initial round weights after SGUID probing?",
+        "answer": "Probes already update the model. Restore to isolate training with compact selected library from extra probe learning. Next round generates new skills, not a fixed manual archive.",
+        "example": "Continuing after probing all candidates would retain discarded skills' effects."
+      }
+    },
+    "qa/post-training:sguid/implementation": {
+      "source_sha256": "457067d2c5f8c7637e4c707f47bc9a6d2528e845f0ae66b9096afdc1ed2acdb2",
+      "reviewed": true,
+      "fields": {
+        "question": "May SGUID delete negative coefficients, and how should negative results be handled?",
+        "answer": "No. The objective allows negative teaching signals. Check early/late activity and quality. Validation decline after two executed rounds remains a negative result, not success because the loop ran.",
+        "example": "Early gains don't justify retention if late signals fall below thresholds."
+      }
+    },
+    "qa/post-training:sguid/mechanism": {
+      "source_sha256": "69f6389565586a5132f2845e700928db7ed575aa7d5e7fc6c681b886be5ba2b7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why restore round-start weights and retrain only selected skills?",
+        "answer": "Otherwise broad probe exposure confounds the compact curriculum effect. Reset, train selected skills, and regenerate from the updated model next round. Count sustained verifier-aligned teaching, not semantic matches.",
+        "example": "Testing ten hints gives extra practice; without a reset, later gain can't be assigned to the two selected hints."
+      }
+    },
+    "qa/post-training:meta-opd/basics": {
+      "source_sha256": "4e75187ac8b971c49aa47d37e4704dc6f875850149bbcdd9c0cc905f37b05d9c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why learn MetaOPD weights through a virtual student step?",
+        "answer": "Teacher gap does not reveal which signals improve tasks. Evaluate virtual updates against training-reference loss, use meta-gradients to learn weighting, then update the student with new weights.",
+        "example": "A large gap on a token may harm the reference task and deserve lower weight."
+      }
+    },
+    "qa/post-training:meta-opd/comparison": {
+      "source_sha256": "d79684f5078e7ef52c3624e1c1998ae7533df3db608cbc90de98e062537f9a20",
+      "reviewed": true,
+      "fields": {
+        "question": "How does differentiable virtual AdamW differ from scoring an actual step afterward?",
+        "answer": "Virtual step retains the graph to weight network for meta-gradients, while real update mutates state without that derivative. Optimizer state/order matter; arbitrary SGD isn't equivalent.",
+        "example": "Ask how weights caused the hypothetical change, not only whether a metric changed."
+      }
+    },
+    "qa/post-training:meta-opd/implementation": {
+      "source_sha256": "7853f5fb8d27578bcffe3f052727ec014ae1a9031be895c5de9bb225c298be28",
+      "reviewed": true,
+      "fields": {
+        "question": "What detaches in MetaOPD's 74-dimensional descriptors and weight transform?",
+        "answer": "Detach descriptors, not the weight network through the virtual step. Center per response, bound via tanh and normalize to mean one. Use new weights for real update; references come from allowed training data.",
+        "example": "Test references cannot supervise outer-loop weights."
+      }
+    },
+    "qa/post-training:meta-opd/mechanism": {
+      "source_sha256": "e104911dd993e52006e0fcacfcf99c0ec133ae89851f47508929804b8f0c179c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why need a differentiable virtual update instead of weighting by current loss?",
+        "answer": "High loss can be noise. A virtual step reveals downstream reference-loss effects and meta-gradients, then real student update uses learned weights. Isolate descriptors, optimizer state and training-only references.",
+        "example": "Compare whether emphasizing a stylistic high-loss word or a reasoning token better serves the reference task."
+      }
+    },
+    "qa/post-training:where-opd/basics": {
+      "source_sha256": "7b1632908aeaeb2c8880f98f6c42172b4b93ee4d9df3982f4e3601c063070b00",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use synthetic scene coordinates as privileged Where-OPD input?",
+        "answer": "Generated scenes provide exact objects/positions for teacher while student sees image/question. Internalize spatial hints without coordinate access at deployment.",
+        "example": "Teacher knows positions; student learns left/right from pixels."
+      }
+    },
+    "qa/post-training:where-opd/comparison": {
+      "source_sha256": "ff289eb493be4392b4924d4a89897be253b0b6216688ae427ab213fbbf32159d",
+      "reviewed": true,
+      "fields": {
+        "question": "How does spatial privileged text differ from ordinary text distillation?",
+        "answer": "The method needs matching actual scene images and spatial annotations. Random text distributions don't verify visual integration; privilege doesn't prove student reliance on images.",
+        "example": "A correct description paired with the wrong image still yields a computable loss but meaningless guidance."
+      }
+    },
+    "qa/post-training:where-opd/implementation": {
+      "source_sha256": "9ee3ddacec26dce069238fe4149ccb39734a527ef27014288653a0e8ca618806",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local Where-OPD generate scenes and load an MLLM?",
+        "answer": "No. It checks teacher KL under a spatial mask aligned to generated student positions, with frozen teacher. Random logits aren't visual evidence.",
+        "example": "Two hand-built left/right logits don't constitute image reasoning."
+      }
+    },
+    "qa/post-training:where-opd/mechanism": {
+      "source_sha256": "87adabda8e340608955e9cf645538aa90ce2b987d63d104e56ba43c429e15a3c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why give teacher textual coordinates while student receives only image and question?",
+        "answer": "Exact synthetic object/location metadata gives privileged scoring on student prefixes. Deployment lacks that metadata, so keep student inputs clean. Preserve spatial mask; random-logit tests don't prove spatial ability.",
+        "example": "Teacher can correct left-of-box relationships, but test students cannot be told coordinates."
+      }
+    },
+    "qa/post-training:weakest-link/basics": {
+      "source_sha256": "f22a7bd8993f744a860d784722079883eddf261ad73f23db8a19707c16a75e67",
+      "reviewed": true,
+      "fields": {
+        "question": "Why require every prefix to satisfy average cost in Weakest Link?",
+        "answer": "A final mean can hide bad early reasoning diluted by easy later tokens. First violation is absorbing. Costs are teacher negative logp.",
+        "example": "Appending common words cannot undo an unsupported prefix."
+      }
+    },
+    "qa/post-training:weakest-link/comparison": {
+      "source_sha256": "602aa7d25a98c7813c2220dcd3f85e7598cdb253c40940327e9e3e5400ad06e4",
+      "reviewed": true,
+      "fields": {
+        "question": "How does absorbing penalty differ from a recoverable moving gate?",
+        "answer": "Violation persists even if later average improves. A rolling gate might reopen. This is a prefix constraint, not proof teacher cost equals task value.",
+        "example": "One high-probability next token doesn't clear the previous violation."
+      }
+    },
+    "qa/post-training:weakest-link/implementation": {
+      "source_sha256": "124bece511a978e0707888f00da65b28bb3280e5b4c5787956950572a800b5bb",
+      "reviewed": true,
+      "fields": {
+        "question": "May counterfactual current actions use different historical costs?",
+        "answer": "No. Start from actual prefix cost and vary only current action. Exact full-vocabulary immediate gradients coexist with sampled future returns. No full LM trainer.",
+        "example": "Inventing a worse history for an unfavored action invalidates its comparison."
+      }
+    },
+    "qa/post-training:weakest-link/mechanism": {
+      "source_sha256": "fa15d4dc3f4976c8bdf675aa3c7479282952e8e1daea68507fbfc02a63d38fc8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does an early violation persist instead of being diluted by easy later tokens?",
+        "answer": "Every prefix must meet teacher cost. Absorption blocks post hoc dilution; immediate counterfactuals vary only action at the real visited prefix. Teacher improbability still doesn't prove factual error.",
+        "example": "Adding common words after an unsupported derivation may lower final cost but cannot satisfy already violated prefixes."
+      }
+    },
+    "qa/post-training:pr-opd/basics": {
+      "source_sha256": "36691541ea8526db4af1693e4660300360f74af5b7b69df2458d8cbef45e87aa",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distill representations in PR-OPD rather than only final probabilities?",
+        "answer": "Hindsight skills create privileged hidden states. Align projected states at matching layers and response positions, then combine with task reward. Teacher skill is removed at inference.",
+        "example": "A retrospective tool principle can guide internal features without being deployment input."
+      }
+    },
+    "qa/post-training:pr-opd/comparison": {
+      "source_sha256": "6f46a25d4688e8756925e9f0cfb5ed640c8e4767c494440e82bfca5d517d2724",
+      "reviewed": true,
+      "fields": {
+        "question": "How do two forwards differ from concatenating skill to student context?",
+        "answer": "Run ordinary student and privileged detached teacher separately. Giving student skill changes deployment assumptions and can teach dependency. Representation matching isn't answer supervision.",
+        "example": "A tested student should rely on learned parameters when no skill text is supplied."
+      }
+    },
+    "qa/post-training:pr-opd/implementation": {
+      "source_sha256": "c879e874e09bbb4fd47723c43a0c6c5969dab030c6d939e770c34a58641144d0",
+      "reviewed": true,
+      "fields": {
+        "question": "What masks apply to layerwise PR-OPD alignment?",
+        "answer": "Align valid tokens of the same response at corresponding layers, excluding observations/padding. Skills come from completed training traces, not gold plans. Local kernel isn't agent training.",
+        "example": "Do not align extra teacher skill tokens to student response positions."
+      }
+    },
+    "qa/post-training:pr-opd/mechanism": {
+      "source_sha256": "2e6322bedd566db409eb9fc778b3e5d3f04ebbdcd1b437682f0b2fcda442390b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why forward the same response with/without hindsight skill rather than imitate skill text?",
+        "answer": "Compare how skill changes same-token/layer representations and transfer to an unprivileged student. Copying skill or teacher replies changes targets. Detach teacher, combine task reward and remove privilege at inference.",
+        "example": "A teacher can rescore an earlier decision using a validation reminder that the deployed student never sees."
+      }
+    },
+    "qa/post-training:maestro-opd/basics": {
+      "source_sha256": "0c7902c66022a38cb00ada9ae3c7fa23ee284928b5a79942e38e7dde907d42a5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why intervene only at MAESTRO's high-disagreement prefixes?",
+        "answer": "Teacher rollouts are expensive. Top-k coverage, similarity and early-position weighting allocate limited guidance. Disagreement doesn't automatically mean student error.",
+        "example": "An early fork can matter more than a punctuation discrepancy."
+      }
+    },
+    "qa/post-training:maestro-opd/comparison": {
+      "source_sha256": "a84779351d3380a9af068311ad1483f48b3da8a3760d949acd2d302ee4ee0475",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine coverage and Bhattacharyya similarity?",
+        "answer": "Coverage checks whether student candidates include teacher support. Similarity compares mass within shared support. Either alone misses differences; high PDS isn't teacher correctness.",
+        "example": "Identical candidates can have almost opposite weights."
+      }
+    },
+    "qa/post-training:maestro-opd/implementation": {
+      "source_sha256": "ff18386f35cf6425a287068c10e80125044a080c06688169c59ef1341a17cb79",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local MAESTRO generate takeover rollouts?",
+        "answer": "No. It computes top-k coverage, normalized similarity and PDS. Real intervention needs generation, state handoff and cost accounting; no measured call savings.",
+        "example": "Hand-entered probabilities can trigger a score without any teacher rollout."
+      }
+    },
+    "qa/post-training:maestro-opd/mechanism": {
+      "source_sha256": "291f76d93d806ab10d21321abadafe70b1d35befd8f77e91ff7a9416e85d3935",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use both top-k coverage and Bhattacharyya similarity for interventions?",
+        "answer": "One checks support inclusion, the other shared probability allocation. Disagreement and position weight prioritize scarce teacher compute. It is a clue, not correctness; local PDS doesn't generate a takeover.",
+        "example": "Two models can share identical top-k words while assigning very different probabilities."
+      }
+    }
+  }
+}

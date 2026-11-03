@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:frugalevo/implementation": {
+      "source_sha256": "de16ee3923913bb8949680a149ebff0a71da82e0f3cf250ba1994314674814b3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain the parent after a generated program fails and reject fallback to bare exec?",
+        "answer": "Use failure feedback for the next revision without replacing a verified parent with invalid code. Actual generated code requires Linux isolation and resource limits; fail closed if the sandbox does not start. Do not trust model-reported scores: a trusted checker verifies bounds and non-overlap. Do not dress up a negative local result by deleting failed calls or relaxing security boundaries.",
+        "example": "An invalid radius counts as a failed proposal and costs a call. Do not substitute the parent's answer and mark the candidate successful, or run it on the host when the sandbox is unavailable."
+      }
+    },
+    "qa/agent-research:flowright/mechanism": {
+      "source_sha256": "cbad2747e1e07df7e44f9c2d1ea103d46fe78e2abcb54e332c6f0e0769d7e1e2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does topology-aware role credit use workflow structure instead of averaging terminal reward across all roles?",
+        "answer": "Roles occupy different positions and affect different downstream steps. Equal credit can conceal a bad node or a critical upstream role. Topological weights incorporate validity and successors, supporting both single-role changes and upstream/downstream collaboration in one framework. This is an attribution rule, not identification of causal contributions; use execution comparisons to test it.",
+        "example": "If a retriever's error reaches three downstream roles, repairing it may matter more than polishing the final paragraph. The topology shows the propagation range instead of dividing reward by headcount."
+      }
+    },
+    "qa/agent-research:flowright/basics": {
+      "source_sha256": "07b761fbcb871daeba7c27ef3789c8fecbb47f4b33727b3bcfbe471661f6ec40",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is it hard to decide which role to improve if a multi-agent workflow gets only a terminal result?",
+        "answer": "Success depends jointly on roles and dependencies. Giving everyone the same reward hides who moved the workflow forward or held it back. FlowRight organizes role credit using workflow structure to support improvements at different scopes. Structural weights are an attribution rule, not direct measurements of each role's causal contribution.",
+        "example": "A retriever finds good evidence but a writer misreads it. Identical failure scores could lead subsequent updates to damage a useful retrieval habit as well."
+      }
+    },
+    "qa/agent-research:flowright/comparison": {
+      "source_sha256": "32428a61081edf33ea55e24a6bd99ca4f1880db1c7df0e794728a449849ac1a2",
+      "reviewed": true,
+      "fields": {
+        "question": "Which participants change in single-role evolution, upstream–downstream collaboration, and joint multi-role evolution?",
+        "answer": "A single-role update fixes the other participants to isolate a local change. Upstream–downstream collaboration targets the dependency interface. Joint changes can improve coordination across roles, but their effects are harder to attribute. FlowRight expresses those scopes with a common workflow and credit representation. Success at one scope does not guarantee every joint update works.",
+        "example": "Changing just the writer and changing both retriever and writer may require different validation. The pair may adapt to a new evidence format, so gains cannot be attributed entirely to writing."
+      }
+    },
+    "qa/agent-research:flowright/implementation": {
+      "source_sha256": "20661b2ea35d992d1919d9c95b01e21117425bbaca5728eda21d724403aad137",
+      "reviewed": true,
+      "fields": {
+        "question": "What should an implementation of valid_i(1+children_i) check, and what was not completed locally?",
+        "answer": "Invalid roles get zero weight. Normalize over all valid weights, verify conservation of credit, and handle the no-valid-item case. The local path only executes this allocation operator; it does not generate workflows, train Qwen3.5, or run DataWright. Passing structural tests does not establish improvement from multi-agent co-evolution.",
+        "example": "An invalid node with ten children should receive no credit. When all nodes are invalid, handle the case explicitly rather than dividing by zero."
+      }
+    },
+    "qa/agent-research:active-saddler/mechanism": {
+      "source_sha256": "700053fb8acb9f84c9aead14e11f6d9d058ea336a435935d4bc212699bce5d9b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must failure modes treated as nonstationary bandit arms allow discovery of new scenarios and revisiting old weaknesses?",
+        "answer": "A harness repair changes the payoff of previous failures. A fixed curriculum may keep testing solved problems while missing newly exposed faults. The controller allocates budget using value and exploration terms, periodically introducing unseen scenarios to support both discovery and verification. Counts or priorities are curriculum signals, not model capability metrics.",
+        "example": "After fixing timeouts, practice them less often but occasionally retest for regressions while exploring previously uncovered permission errors."
+      }
+    },
+    "qa/agent-research:active-saddler/basics": {
+      "source_sha256": "21e0785781f87397ca0e20a4d62fbfe27a26d3af7dc400274dec553aa8c6d40e",
+      "reviewed": true,
+      "fields": {
+        "question": "With a limited repair budget, why does ActiveSaddler choose which failures to expose next?",
+        "answer": "A harness cannot repair all scenarios equally deeply at once, and repeatedly testing familiar problems misses new weaknesses. ActiveSaddler treats the training curriculum as a dynamic decision based on existing failures and repair feedback. Selecting a difficult scenario only creates a learning opportunity; it does not establish a repair, and scheduling counts are not real capability gains.",
+        "example": "File-editing failures have been fixed repeatedly, while browser recovery issues just appeared. The curriculum must choose whether to keep verifying old behavior or budget exploration for the new fault."
+      }
+    },
+    "qa/agent-research:active-saddler/comparison": {
+      "source_sha256": "d320120c8389451282f991872837ceb066dcdb9012cd137ac4dda0b5ae82d5c6",
+      "reviewed": true,
+      "fields": {
+        "question": "Do fixed hard-task sampling and dynamically reprioritizing failures after repairs face the same stationary rewards?",
+        "answer": "Fixed sampling generally follows preset difficulty or frequencies. Repairs change the value of prior failures: formerly frequent problems may no longer deserve repeated investment, while new ones appear. Dynamic scheduling should update with this nonstationary feedback. Historical failure rates are not permanent estimates of current reward, and revisits may yield no new information.",
+        "example": "After a parser fix, old hard examples consistently pass. Filling the curriculum with them wastes budget; newly observed authentication issues may deserve more attention."
+      }
+    },
+    "qa/agent-research:active-saddler/implementation": {
+      "source_sha256": "e39ef191c284d09b5de23d9af25ab7ae42742bb4d4ec0010e7cffbdbbaa6a289",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local dynamic arm scheduler run AutoSaddler's real repair chain?",
+        "answer": "No. It creates failure arms, explores and exploits, and updates priorities. It does not call AutoSaddler or run real GAIA2 or Terminal-Bench tasks. Observation counts and selection weights verify scheduling, not harness repair from synthetic feedback. Account for real rollout costs separately.",
+        "example": "If lowering an arm's synthetic reward reduces its selections, the controller responds to changes. It does not show that any actual tool failure was resolved."
+      }
+    },
+    "qa/agent-research:rule-evolve/mechanism": {
+      "source_sha256": "3b3227ab03fa3c7408e33f14c9ae22f01d85491fe4974b153d683b45095c9e18",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't a mutator write back a coding rule based only on its own assessment?",
+        "answer": "A plausible rule may fit only a few examples or damage old behavior. An isolated validation evaluator measures the candidate pool and variants consistently and selects what to write back, separating proposals from acceptance evidence. Selection data are development feedback; do not expose final tests to repeated mutator tuning.",
+        "example": "A new rule that retries every function sounds robust but can repeat non-idempotent operations. Independent validation can reveal this regression."
+      }
+    },
+    "qa/agent-research:rule-evolve/basics": {
+      "source_sha256": "773ab9f81a446483e0334d5476c1d3a1a6bf2083fae0552b732a325aaf7162fd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does RuleEvolve treat coding rules as development experience that can be tested and revised?",
+        "answer": "Coding-agent rules affect recurring search, editing, and testing behavior, and one manually written tip might not fit the task distribution. RuleEvolve selects variants with behavioral evidence so experience can be revised. More detailed wording is not better execution; use isolated validation rather than the generator's confidence to update rules.",
+        "example": "After adding 'check callers before editing,' test whether it helps repair the same development tasks, not just whether it sounds sensible."
+      }
+    },
+    "qa/agent-research:rule-evolve/comparison": {
+      "source_sha256": "b3f7dd4e710e0903f8b2564a7e09776d4cf8f1daae19bf906175a6f333b258cf",
+      "reviewed": true,
+      "fields": {
+        "question": "How does retaining a rule candidate pool differ from immediately overwriting the only rule, for search and rollback?",
+        "answer": "A pool compares multiple versions under one evaluation protocol and retains old rules as baselines or candidates. Immediate overwrite makes the proposal active and can lose a usable baseline after failure. A pool does not supply a correct judge by itself; it still needs an isolated evaluator. Candidate counts are not actual performance on tool tasks.",
+        "example": "Keep both a retrieval-focused rule and a testing-focused rule for comparison. If each generation immediately overwrites the rule, it is hard to tell which change caused a regression."
+      }
+    },
+    "qa/agent-research:rule-evolve/implementation": {
+      "source_sha256": "f46da9a5b3c54ce90e96370ce6cbadb6ff09698d3dfb8af15966468f5641f9f5",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local selection after mutation establish that LLM rule evolution ran?",
+        "answer": "No. It checks validation selection among mutated candidates but does not call an LLM mutator or full coding agent. Correct argmax over supplied scores is control-flow evidence; if scores come from fixtures, they do not indicate code quality. Retain old rules and failed candidates for audit.",
+        "example": "Choosing the largest of three preset scores verifies the selector. Without a model proposing rules and actually fixing code, it does not verify the whole self-evolution path."
+      }
+    },
+    "qa/agent-research:video-rsi/mechanism": {
+      "source_sha256": "5b9549b76e0370428ccb109caf98c44a5c95a3793eb34ad5a032885383987677",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can reading only a failed trace be insufficient to diagnose evidence collection in a video agent?",
+        "answer": "A trace records only what the old harness chose to observe; unseen keyframes cannot be recovered from that log. Revisit training video to gather observations and test whether evidence was omitted or reasoning was wrong, then change the interface. Acceptance retains accuracy and cost gates so a weighted total cannot hide a clear regression in either.",
+        "example": "If the old policy sampled only the opening while the key action came at the end, the trace omits it. Revisiting the original training video verifies that sampling rather than wording needs to change."
+      }
+    },
+    "qa/agent-research:video-rsi/basics": {
+      "source_sha256": "9b19b7d5fd163d5d2ec0150a58b43e133124f35e976f11fc0fe735cbcfa99a35",
+      "reviewed": true,
+      "fields": {
+        "question": "Why might a video agent need to improve evidence collection rather than just use a stronger answer prompt?",
+        "answer": "Long video spans many moments and details. The failure may occur during frame selection, localization, reading, or organizing evidence, rather than composing the final answer. Video RSI uses execution to improve the video-task harness so limited cost is spent on relevant evidence. A changed workflow alone is not better understanding; check both accuracy and actual cost.",
+        "example": "If the question asks what someone did before leaving and the agent samples only the start and end, rewording the final prompt will not reveal the key middle action. Improve evidence gathering first."
+      }
+    },
+    "qa/agent-research:video-rsi/comparison": {
+      "source_sha256": "b007114842945ec37d471155d7a8e3353ae89d754c2ef886f812eaa74ed9f4cf",
+      "reviewed": true,
+      "fields": {
+        "question": "What do dual accuracy and cost gates protect compared with a single weighted score?",
+        "answer": "A candidate must not lower accuracy or increase cost, and at least one measure must strictly improve. This prevents large gains on one objective from hiding deterioration on the other. Declare tolerances before selection rather than relaxing them to accept a candidate. Dual gates still require the same measurement protocol and do not guarantee generalization.",
+        "example": "A candidate that loses ten accuracy points while halving frame count could win a weighted sum but violates the no-regression requirement and should be rejected."
+      }
+    }
+  }
+}

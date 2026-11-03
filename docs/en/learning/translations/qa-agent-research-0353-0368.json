@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:swe-prime/implementation": {
+      "source_sha256": "d38e8f41c5ff6f66bebf8da5f642cb4aaa4206072c230e2c60d423c9706ae8e8",
+      "reviewed": true,
+      "fields": {
+        "question": "Do local filtering results show a code LLM was trained or SWE-bench ran?",
+        "answer": "No. Local filtering strategies share an observation and tool interface without training a code model or running official SWE-bench. Verify that loss masks cover only selected spans, context stays complete, and data splits remain isolated. Small tool-routing metrics are not code-repair gains.",
+        "example": "Example: More stable local routes after removing risky segments do not reproduce the paper's outcome with one tenth of its code traces."
+      }
+    },
+    "qa/agent-research:traceml/mechanism": {
+      "source_sha256": "37c092c75d6220defe92c4736360a98400dea2fb3b897bb7d0e9538892a545ea",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do versions, action intent, and edit size teach planning patterns better than score curves alone?",
+        "answer": "Scores show outcomes but cannot distinguish architecture exploration, tuning, or returning to an old approach. Linking edits to intent and effect reveals stage changes and reopened approaches for a prior. Patterns in human traces still need agent validation and are not optimal by default.",
+        "example": "Example: Two score drops can come from trying a feature or accidentally deleting configuration. Version and action records tell whether to continue or revert."
+      }
+    },
+    "qa/agent-research:traceml/basics": {
+      "source_sha256": "43dee680ec158d3ebe7a1ca76be3a4948d44cd8f7768491fd8670573eb5494c7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does TraceML record the whole human ML development process rather than just the highest-scoring model?",
+        "answer": "Final code and scores hide exploration, abandonment, revisiting, and budget allocation. TraceML records decisions and versions as planning evidence. Observed human behavior is not proof of optimality; downstream use requires independent tasks.",
+        "example": "Example: A small final model conceals the failed larger-model experiment that identified the bottleneck and motivated the pivot."
+      }
+    },
+    "qa/agent-research:traceml/comparison": {
+      "source_sha256": "bb75e5f19ee11f409fba3966afa2ca6a2ed20972b5af722c3b05ea6c606dd7ab",
+      "reviewed": true,
+      "fields": {
+        "question": "How do human stage alternation and revisiting old ideas differ from a monotonic plan?",
+        "answer": "Humans move among analysis, implementation, and evaluation and revisit hypotheses after new evidence. A monotonic plan can discard abandoned paths permanently. A prior can encourage useful revisits, not enforce cycles on every task. Closer behavior does not guarantee better scores.",
+        "example": "Example: New validation identifies a data problem, making a previously abandoned simple model worth reconsidering instead of increasing complexity."
+      }
+    },
+    "qa/agent-research:traceml/implementation": {
+      "source_sha256": "d519fb2f6e7036350cbc49725019ad9574055c7e3e93703ea02f179a11c4905f",
+      "reviewed": true,
+      "fields": {
+        "question": "Can TraceML's failure-reflection prior keep reading hidden routes on validation or test?",
+        "answer": "No. Learn the prior on train, then freeze it and act on actual tool feedback without hidden answers or routes. PlanBench stage and reopen counts are mechanism diagnostics, and ToolRoute is not the full Kaggle experiment. They are different evidence.",
+        "example": "Example: Adjust after a public test error, but do not reopen a solution by reading the reference plan."
+      }
+    },
+    "qa/agent-research:topas/mechanism": {
+      "source_sha256": "52a2540b889efd6c98177895bca80c55b3774be5e73cd16ff90c1edbd885e35d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not optimize shared-cache scheduling for prefix hit rate alone?",
+        "answer": "Hits improve local reuse but can delay critical workflow paths and incur expensive transfers or preemption. TOPAS combines longest remaining path, downstream reuse, and movement cost, with aging against starvation. Hit rate is an intermediate measure, not whole-task completion time.",
+        "example": "Example: Serving many high-hit small requests can block a nearly finished main workflow. Sacrificing hits to unblock the critical path can deliver sooner."
+      }
+    },
+    "qa/agent-research:topas/basics": {
+      "source_sha256": "03f71270b00679528169b417f455ea4c912b0bb6561add35057042413f4d4fe4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does TOPAS consider the workflow's longest remaining path rather than only individual progress?",
+        "answer": "One request can block downstream work, so local priority can increase tail waiting. Critical-path estimates include dependencies and remaining work, then trade them against prefix reuse, transfer, and preemption. Optimize completion time, not cache hits alone.",
+        "example": "Example: A short request unblocks five later nodes and may deserve priority over a long request that has already run extensively."
+      }
+    },
+    "qa/agent-research:topas/comparison": {
+      "source_sha256": "01fdaa8a5a564bc34ea31ea0dc4c04b07a29a9fe881f1016e5b3e488d78e996e",
+      "reviewed": true,
+      "fields": {
+        "question": "What latency risks do critical-path priority and aging address?",
+        "answer": "Critical-path priority identifies requests delaying whole workflows. Aging raises priority with wait time so tasks are not repeatedly starved. These address dependencies and fairness, alongside cache reuse and movement. No single priority makes every task fastest.",
+        "example": "Example: Aging eventually helps a short chain skipped for low cache reuse, while a long chain's blocked node still matters for critical-path latency."
+      }
+    },
+    "qa/agent-research:topas/implementation": {
+      "source_sha256": "f6f0099ece95bc7917f2e2a8e4a43dee04b5f0e33bb633f421472bd4f7537a74",
+      "reviewed": true,
+      "fields": {
+        "question": "Do simulated prefix hits and ToolRoute results prove real LLM serving speedup?",
+        "answer": "No. The mini-suite simulates prefix reuse, critical path, and aging. Stateful tools do not exercise real KV serving kernels. Paper mean/p99 JCT comes from real system experiments requiring requests, memory, movement, and wall-clock timing. Proxy costs and hit counts are not convertible directly.",
+        "example": "Example: Three extra hits do not save three identical prefill intervals. Prefix lengths and scheduling overhead matter."
+      }
+    },
+    "qa/agent-research:progrouter/mechanism": {
+      "source_sha256": "183b42d33601731a197bab321a944e27ee041c54ea6d374cd02ac07cbfc1c67c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why predict marginal progress for routing instead of comparing average model accuracy?",
+        "answer": "A stronger model may offer little progress in one state but unblock another. Marginal progress uses completion, trend, and quality to value the next call against time and long-run budget. Average accuracy misses stage differences, and predictions still require execution feedback.",
+        "example": "Example: A cheap model can repair formatting while a difficult proof needs stronger reasoning. Calling the average best on every step wastes budget."
+      }
+    },
+    "qa/agent-research:progrouter/basics": {
+      "source_sha256": "241e412771c86e8e67fc0c55dddb23dd0532dcc4edab24a5b8c59652527a7e38",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does ProgRouter track changing model needs during one task?",
+        "answer": "Reasoning requirements vary by stage. Always using a strong model is costly; a weak model can stall. ProgRouter routes each next call by current progress. Static rankings do not quantify help now, and real gains depend on time and call budgets.",
+        "example": "Example: A cheap model locates a file, then a stronger model handles complex inference. Overall rank alone does not justify using it for both."
+      }
+    },
+    "qa/agent-research:progrouter/comparison": {
+      "source_sha256": "25dde0c66d84bef3fbae85142de5a64ae69392b19bb75e866b1fe90c4a35f319",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a quality, time, and long-run-cost meta-gate compare with always choosing the cheapest model?",
+        "answer": "Cheap calls can accumulate retries and cost more overall. A meta-gate trades predicted progress, call price, and budget pressure, sometimes paying more for a better candidate. Report delivery quality, time, and total budget instead of just per-call cost.",
+        "example": "Example: Three cheap calls stall while one expensive call solves it. If the expensive call also stalls, execution must override the prediction."
+      }
+    },
+    "qa/agent-research:progrouter/implementation": {
+      "source_sha256": "c2c796b53728bdd90f47aadaa7ac672be6cef5034a3ec27ca6c92912ef4ca4a0",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local frozen program router have the same scope as the paper's multi-model progress predictor?",
+        "answer": "No. Local work compiles verified tool choices into routes, freezes them for validation and test, and executes. Mini-suite checks cover progress, meta-gating, and downgrade, not paper models, serving resources, or full benchmarks. Proxy costs and program selection are not measured joules or citation precision.",
+        "example": "Example: Reading two fewer candidates does not imply the same energy saving on HumanEval without actual model and hardware measurements."
+      }
+    },
+    "qa/agent-research:adavdr/mechanism": {
+      "source_sha256": "3b4890f5f4e35cb66c2a9199dc8f481a669f8df8441f01ac26cfcb81a79e7926",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate tool necessity from fallback reflection on unreliable evidence?",
+        "answer": "Necessity decides whether to gather external evidence; reflection decides whether existing evidence needs another check. Capability-based filtering saves unnecessary calls and redundancy penalties guide training. Ignoring unreliable evidence merely to call less can hurt video research, so minimum call count is not optimal by itself.",
+        "example": "Example: Do not search to confirm visible running. If identity clues disagree, recheck rather than keep the first conclusion."
+      }
+    },
+    "qa/agent-research:adavdr/basics": {
+      "source_sha256": "dfb5d80a05c2bfdb88d83726ed8f3884637a9be6e0bf6e12cce022655a57687b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why judge tool necessity relative to the target model's capabilities?",
+        "answer": "Do not repeat external calls for things the model already handles; use tools for missing information. Necessity depends on model and evidence, not an unconditional prohibition. Reflect when intermediate evidence is unreliable rather than minimize calls at the cost of needed checks.",
+        "example": "Example: Clear colors can be read directly, but small text may need zoom or retrieval. A weaker vision model changes that boundary."
+      }
+    },
+    "qa/agent-research:adavdr/comparison": {
+      "source_sha256": "e740b577c428ee6d0c9d48dd54029cfc9b637b9f28889e72b0e54a2e66c5a424",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a redundancy-aware reward differ from penalizing every call?",
+        "answer": "Redundancy penalties target unnecessary or repeated calls while preserving useful evidence gathering. A flat penalty can deter necessary tools. Evaluate answer reward and reflection as well, since recovery and verification may require justified extra cost.",
+        "example": "Example: Repeating a search with no new information can be redundant, while checking conflicting sources may be essential."
+      }
+    }
+  }
+}

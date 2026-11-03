@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/foundation-models/context-and-state": {
+      "source_sha256": "837acb7de7cd945d3ff2d25e68290878c823332fb1c20121d906d96a984db6bf",
+      "reviewed": true,
+      "fields": {
+        "title": "Long context has several axes: position, access, and state compression",
+        "thesis": "Ask first how history is stored and then how the current token reads it. RoPE changes relative position relationships; Mamba writes history into recurrence; NSA splits access across paths; OpenAttention retains proxies for unread content; and TTR fits an input-conditioned compression. MERLIN keeps routing-key moments beside compressed segment states to change how segments are read without replacing their internal recurrent writes. A single supported-length number cannot rank these designs.",
+        "axis_0": "Token-level KV, recurrent state, or input-conditioned compression coefficients",
+        "axis_1": "Whether the current query can revisit exact details",
+        "axis_2": "Whether unread history is omitted, summarized, or already folded into state",
+        "axis_3": "Costs in training, forward solving, or index access"
+      }
+    },
+    "dive/foundation-models/context-and-state/comparison/foundation-models:rope": {
+      "source_sha256": "a4d186fb599c4f0422ef0c59d79c9e9e7145b0ef372e0bc01b4f7afeb78844c0",
+      "reviewed": true,
+      "fields": {
+        "position": "Rotate two-dimensional Q/K subspaces so their dot product expresses relative position; compatible with full attention.",
+        "tradeoff": "Encodes position rather than reducing history count or KV bandwidth. The local small-model rotation does not establish arbitrary length extrapolation."
+      }
+    },
+    "dive/foundation-models/context-and-state/comparison/foundation-models:mamba": {
+      "source_sha256": "525ed5709977f2dd10da2e94f72bfcd8b174afb83e3c38e0fc477807486f0454",
+      "reviewed": true,
+      "fields": {
+        "position": "Use token-conditioned step size and read/write vectors to fold history into bounded recurrent state.",
+        "tradeoff": "Avoids retaining all token KV, but only information kept in state remains accessible. Local native PyTorch scan does not reproduce the fused kernel."
+      }
+    },
+    "dive/foundation-models/context-and-state/comparison/foundation-models:native-sparse-attention": {
+      "source_sha256": "824098a522553974cafcfff3ca3509b8149698c72fc416112bbb4cc56f12cda5",
+      "reviewed": true,
+      "fields": {
+        "position": "Use compressed blocks for overview, query-selected blocks for detail, and a sliding window for exact recency; gate their outputs together.",
+        "tradeoff": "Different paths need design and training. A coarse overview may not recover details after a selection miss. Local trainability is not reported long-context throughput."
+      }
+    },
+    "dive/foundation-models/context-and-state/comparison/foundation-models:openattention": {
+      "source_sha256": "6dd709be3dc293fcf0637a0a10ea239e6c9cf2a335d4b1820239b81dbe02a3de",
+      "reviewed": true,
+      "fields": {
+        "position": "Cluster by query geometry, allocate exact-read budget by estimated proxy error, and include unread clusters as count-weighted mean proxies in softmax.",
+        "tradeoff": "The tail is not zeroed, but within-cluster detail can disappear and ErrorGate relies on approximations. Only a single-head operator is diagnosed locally; full experiments were too expensive."
+      }
+    },
+    "dive/foundation-models/context-and-state/comparison/foundation-models:ttr-compressor": {
+      "source_sha256": "83f319c6420a0bc0ea15afd3181231584089382ccd9a889563e31589a30bb09d",
+      "reviewed": true,
+      "fields": {
+        "position": "Treat token groups as regression observations and solve regularized least squares each forward pass for input-conditioned coefficients.",
+        "tradeoff": "Neither weight training at inference nor free pooling. The dual solve has a T³ term and is attractive only when groups are much shorter than feature width. Local work is diagnostic."
+      }
+    },
+    "dive/foundation-models/context-and-state/comparison/foundation-models:select-ttt": {
+      "source_sha256": "7a10d27ee475c4cf9203545fe7cdb50c57a8eadc572901253b2f99a571ace0c6",
+      "reviewed": true,
+      "fields": {
+        "position": "Aggregate top-k low-CE positions of query tokens, scale by T×softmax, and clip write multipliers.",
+        "tradeoff": "Requires a real frozen head/RMSNorm and NTP-aligned features, not a local LLM or distributed kernel."
+      }
+    },
+    "dive/foundation-models/context-and-state/comparison/foundation-models:sleep-lti": {
+      "source_sha256": "2fd9e072679b6b21400b43997ea2d5d9854f7c7f6c9bebc459923698db282f65",
+      "reviewed": true,
+      "fields": {
+        "position": "Mix an external binary semantic reward with thresholded token edit similarity.",
+        "tradeoff": "Implements LTI reward only, not CMS, dreaming, knowledge seeding, or LoRA; full Sleep training was too expensive and not reproduced."
+      }
+    },
+    "dive/foundation-models/context-and-state/comparison/foundation-models:merlin": {
+      "source_sha256": "1dc363247f4d1a26ae7282a07aaa1a3f80898b32fea613f3b77e327cff537ae3",
+      "reviewed": true,
+      "fields": {
+        "position": "Keep segment routing-key means and raw second moments to recover query-aligned variance. Softmax the two paths separately and gate their external state readouts.",
+        "tradeoff": "Adds segment-state and moment storage without reconstructing exact token softmax. The current unfinished segment needs external recurrence; full mid-training was not reproduced."
+      }
+    },
+    "dive/foundation-models/context-and-state/analysis/0": {
+      "source_sha256": "2c6c08f57dc727789bfa184d025713f4a77ff61f00c5add321e8ea40640534cd",
+      "reviewed": true,
+      "fields": {
+        "title": "Expressible position is not accessible history",
+        "body": "RoPE defines how QK carries relative position, but full attention still processes visible history. Mamba changes storage and propagation, replacing per-token access with state. Position extrapolation failure and forgetting a detail in state are different; extra state alone cannot explain the former and changing positions cannot fix the latter. Identify whether the task needs exact lookup or persistent state updates."
+      }
+    },
+    "dive/foundation-models/context-and-state/analysis/1": {
+      "source_sha256": "fc24f647992e64bdb16a3eb91e8d773c88738a0c8cc5b1015fb9b5839165b0aa",
+      "reviewed": true,
+      "fields": {
+        "title": "Can compressed history still expose details?",
+        "body": "NSA's compressed branch sits beside query-conditioned exact block reads. OpenAttention spends budget on exact rows and leaves the rest in normalization as log-count mean proxies. TTR maps whole groups to regression coefficients with no per-item invertibility guarantee. Trace where missing information goes rather than counting output vectors. Local formulas or short runs do not rank long-text capability."
+      }
+    },
+    "dive/foundation-models/context-and-state/analysis/2": {
+      "source_sha256": "1304933a3d2b35a2374a68ea18ae6a89549ee32cd16fc7dd6ed7f348546567d0",
+      "reviewed": true,
+      "fields": {
+        "title": "October 29: new methods and evidence boundaries",
+        "body": "Select-TTT changes how strongly each context chunk writes to fast weights based on current query token probability mass; apply-before-write preserves temporal order. Clipping can leave the total below the chunk count and must not be renormalized to fake conservation. Sleep separates active learning from offline consolidation; locally only LTI reward runs. Its full method trains added parameters, so the reward operator does not establish memory written into the model."
+      }
+    },
+    "dive/foundation-models/context-and-state/analysis/3": {
+      "source_sha256": "6f7867b0928693476210be90db55ff33368055d84e9dab6ae2ff2731c5485ba0",
+      "reviewed": true,
+      "fields": {
+        "title": "Write state first, then choose which segments to read",
+        "body": "Mamba's selective recurrence controls what enters a state; MERLIN assumes compressed segments and readouts already exist and routes the current query among them. Equal key means can hide a few strong matches. Raw second moments recover aligned variance but not missing within-segment detail. Eq. 9 normalizes means and variances separately before mixing, unlike mixing logits then softmax. Equal-length segments and causal visibility are required."
+      }
+    },
+    "dive/foundation-models/context-and-state/question/position-versus-memory": {
+      "source_sha256": "dc4ea542aa64a4b18f91a6c40108b42d96a3c9ac9490ff7f89818dd6046fb000",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are changing RoPE and switching to recurrence not the same fix for a forgotten early one-off identifier?",
+        "answer": "RoPE changes position in QK, not access to original evidence. Mamba changes selective state writing; if it omits the identifier, no original KV remains to query. Diagnose position distortion, invisibility, or compression loss first, then decide whether to use detail access such as NSA.",
+        "example": "An order ID appears once on the contract cover. Correct relative positions do not ensure it is read, and bounded state does not retain every ID."
+      }
+    },
+    "dive/foundation-models/context-and-state/question/tail-proxy-versus-selection": {
+      "source_sha256": "acbf902977e484f0a500a5c527337221d3457038f4fa504827a3a33368ae04cd",
+      "reviewed": true,
+      "fields": {
+        "question": "How do selected NSA blocks and OpenAttention unread-cluster proxies handle omissions differently?",
+        "answer": "NSA gates overview, selected blocks, and recent-window outputs; OpenAttention includes unread clusters as count-corrected proxies in the same attention normalization as exact rows. Multiple coverage paths and tail mass/value approximation can both lose within-group details.",
+        "example": "One outlier among 100 records can be diluted by either a coarse summary or a mean; test whether selection routes it to an exact read."
+      }
+    },
+    "dive/foundation-models/context-and-state/question/input-adaptation-versus-parameter-update": {
+      "source_sha256": "da3018d69adbf6254a25962be99d8afc930589f4bec3d7e641f3289568b3a5a2",
+      "reviewed": true,
+      "fields": {
+        "question": "Do TTR input-wise fitting and Mamba per-token state updates mean the deployment model trains its weights?",
+        "answer": "No. TTR solves coefficients in the current group's forward pass using outer-trained targets and regularization. Mamba uses fixed parameters and current tokens to update state. These are input-dependent computation or runtime state, not optimizer updates, and have different solve versus recurrence costs.",
+        "example": "One frozen model can produce different states and coefficients for two texts without writing a new checkpoint."
+      }
+    },
+    "dive/foundation-models/context-and-state/question/oct29-method-boundary": {
+      "source_sha256": "ec9095a09852e5c1f55dbd462417804188178ccbeacdee640bc10561078fb969",
+      "reviewed": true,
+      "fields": {
+        "question": "What actual execution is evidenced by query-conditioned write coefficients versus Sleep reward changes?",
+        "answer": "Local Select-TTT updates a small fast-weight matrix, allowing pre-write outputs and final state checks. Local Sleep returns a reward without an optimizer or parameter expansion. Neither establishes long-context capability, and reward is not long-term retention.",
+        "example": "Updating a memory table and scoring a continuation 0.9 are different evidence."
+      }
+    },
+    "dive/foundation-models/context-and-state/question/merlin-routing-not-state-recurrence": {
+      "source_sha256": "b32c18a4424ef7bbcb926c14a44a101a879c004856c0b391ced6419a0f794bbf",
+      "reviewed": true,
+      "fields": {
+        "question": "Does adding a second moment turn MERLIN's bounded Mamba-like state into full attention?",
+        "answer": "No. The moment estimates alignment variance between the query and each segment's routing keys to combine readouts. Token values remain compressed and are not individually normalized; an added access cue cannot reverse compression.",
+        "example": "Means of 1 do not distinguish a segment of all ones from a segment of −1 and 3. Variance distinguishes them but cannot reconstruct every original record."
+      }
+    },
+    "dive/foundation-models/context-and-state/update/2026-10-27/0": {
+      "source_sha256": "6c841dcd353790d2992af0d251713d141646043dec76e0b9ec20bbf948ecbb34",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial version: compared position, selective state, three sparse read paths, tail proxies, and forward regression compression by how they preserve and recover history."
+      }
+    },
+    "dive/foundation-models/context-and-state/update/2026-10-29/1": {
+      "source_sha256": "c3b0245b8b90424586c96fafc6a79653d83abe790d4e5bda58a31364ed8886cf",
+      "reviewed": true,
+      "fields": {
+        "summary": "Select-TTT scales fast-weight writes by query token probability mass and preserves apply-before-write order. Do not renormalize the clipped total to the chunk count. Sleep uses distinct active and consolidation stages; only its LTI reward runs here. Unlike frozen-parameter state updates, full Sleep trains extensions, which a reward operator cannot establish."
+      }
+    },
+    "dive/foundation-models/context-and-state/update/2026-10-30/2": {
+      "source_sha256": "4e038781b38263e3982fab905b9f8e3a9347300229d7e74c13b13ddc4b012fff",
+      "reviewed": true,
+      "fields": {
+        "summary": "Reviewed MERLIN Eqs. 7–9: distinguish raw second moments, alignment variance, and two-softmax gated readout from Mamba recurrence; document completed causal segments, the external current segment, and the lack of exact attention."
+      }
+    }
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:coda/mechanism": {
+      "source_sha256": "27d8f281a99324495d6cccadc2619a27ec41ba9967ea885b4849f618c6a75cc2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why freeze the original retrieved skill set before meaning-preserving rewrites?",
+        "answer": "Retrieval could change which skills are delivered, confounding wording sensitivity with ranking. Freeze selected identities and retrieval fields, then change only content. String similarity does not prove semantic equivalence, and unchanged aggregate success can hide bidirectional flips.",
+        "example": "Provide the same three skills after paraphrasing. If three different skills are retrieved, outcome changes no longer isolate wording."
+      }
+    },
+    "qa/agent-research:coda/basics": {
+      "source_sha256": "f856772ff67b4fabe7a9f723b8e5f1905ee28411b9ad7d25fb16ebd06ac1e98f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CODA freeze retrieval before rewriting skills?",
+        "answer": "It audits dependence on delivered content and wording. Reretrieval changes selection and ranking, so fix retrieval-side fields and replace content only.",
+        "example": "If a rewritten skill is no longer retrieved, wording dependence cannot be distinguished from recall changes."
+      }
+    },
+    "qa/agent-research:coda/comparison": {
+      "source_sha256": "d423c25466157d9dd4035cb0e206558920a3dba408e71f32be3327e115d2a92d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CODA report per-task CR alongside aggregate success?",
+        "answer": "Success totals can remain unchanged when some successes become failures and other failures become successes. CR measures agreement across conditions per task; repeated unperturbed runs estimate stochastic noise.",
+        "example": "If success and failure swap across two tasks, total success remains 50% but CR is zero."
+      }
+    },
+    "qa/agent-research:coda/implementation": {
+      "source_sha256": "8ffd93d7bcc8a42ed2da4d1561bb993bc00b37cc289929ae7729a0f98f5c2557",
+      "reviewed": true,
+      "fields": {
+        "question": "Is the number of no-skill successes the CODA RR denominator?",
+        "answer": "No. RR is the proportion of all matched tasks successful under both no-skill and perturbed-skill conditions. Conditioning on successes changes the definition. Keep identical ID sets and reject missing tasks.",
+        "example": "Of 100 tasks, 20 no-skill successes and 10 joint successes give RR=10%, not 50%."
+      }
+    },
+    "qa/agent-research:alpha-diana/mechanism": {
+      "source_sha256": "2753fdd9202491520bfd1176cb6a29a20dfd531a172570f341a6e1064cefa492",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do retries add attempts without adding logical samples or choosing the best result?",
+        "answer": "Retries of a task/sample address the same request. Changing denominators or selecting the best attempt distorts sampling and hides failure costs. Report the latest record and sum costs over attempts; separate execution and grading. Ungraded is unknown, not correct or silently excluded.",
+        "example": "If a task times out then succeeds, charge both attempts' tokens while retaining one sample. Do not keep only the cheap success."
+      }
+    },
+    "qa/agent-research:alpha-diana/basics": {
+      "source_sha256": "bd000b8d64beedffc14116c8ff86d8bcebeb0c5190cee6a6deeb5df6c09b1c01",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does AlphaDiana separate execution status from grading status?",
+        "answer": "A successful run may lack a valid grader decision. Interrupted grading is unknown, neither correct nor incorrect. Separate statuses and full planned denominators expose execution failures, missing grades, and coverage.",
+        "example": "If a tool completes but the grader times out, mark ungraded rather than removing the sample."
+      }
+    },
+    "qa/agent-research:alpha-diana/comparison": {
+      "source_sha256": "3ab2177d770305686c065eb6ff27aeb0d78971a50ccb5f65098b0c253186b9d5",
+      "reviewed": true,
+      "fields": {
+        "question": "What evaluation difference arises from selecting the latest rather than best retry?",
+        "answer": "Retries leave the logical denominator unchanged, and the protocol reports latest status. Best-of selection introduces an implicit extra-attempt advantage. Costs accumulate across every attempt, not only the one shown.",
+        "example": "If a success is followed by a failed retry, latest-status reporting cannot restore the earlier success and charge only one execution."
+      }
+    },
+    "qa/agent-research:alpha-diana/implementation": {
+      "source_sha256": "bd8fff81fddcf8178a2403b7933d2c2fc1611d68b7a04b7658358c1d8d28fcbe",
+      "reviewed": true,
+      "fields": {
+        "question": "When must AlphaDiana return unknown for complete tokens per correct result?",
+        "answer": "Return None if there are no confirmed correct samples, any attempt lacks token counts, or any requested sample lacks execution records. Report known tokens and coverage separately; partial measurement is not complete cost.",
+        "example": "If one of two attempts has no token count, even an eventual correct result cannot establish full cost per correct sample."
+      }
+    },
+    "qa/agent-research:clasharness/mechanism": {
+      "source_sha256": "f73f02db0f5ac3e0437cacf2c972151414bfa089af6ad912ca2bfe8a21811cdc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why fix true state and run a reference plan to prove solvability before generating conflict scenarios?",
+        "answer": "Otherwise failures may stem from contradictions or an unusable interface rather than peer-conflict handling. Executable references establish true state, permitted goals, and obligations, then evaluation tests whether the agent finishes from the environment. Empty requirements or missing verdicts are not automatic success, and fairness adjustments must be preregistered.",
+        "example": "A peer may claim a file was deleted while it still exists and the reference can complete the task. This tests whether the agent checks the environment rather than facing an impossible case."
+      }
+    },
+    "qa/agent-research:clasharness/basics": {
+      "source_sha256": "a45fb95ec4d1a0239d3b09697db979b6cb96fa35ae21f37db1bf80477e3451db",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CLASHarness execute a reference plan before agents handle conflicting messages?",
+        "answer": "Reference execution verifies solvability under fixed true state and compiles checks from observed effects. Otherwise failure may reflect a broken scenario, not inability to handle false facts, stale state, or conflicting peer instructions.",
+        "example": "If a peer claims a file changed, verify actual state and a reachable goal first."
+      }
+    },
+    "qa/agent-research:clasharness/comparison": {
+      "source_sha256": "21de40b7cc7255d9743172d651a0d10ca7e46644efef0790f6649c6c8539608d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why report CLASHarness complete success separately from partial check pass rate?",
+        "answer": "Complete success requires a verified nonempty required list with every item passed. Partial rate reports how many checks passed. An empty conjunction or incomplete verdict list does not establish full success.",
+        "example": "Passing three of four required checks gives 75% partial credit and no complete success."
+      }
+    },
+    "qa/agent-research:clasharness/implementation": {
+      "source_sha256": "1bb5b86415ba3c637ccdccd6868cdea0e42c22c05b0fc829e013c88457bf5d96",
+      "reviewed": true,
+      "fields": {
+        "question": "Why shouldn't CLASHarness match records by list position when downgrading checks for fairness?",
+        "answer": "Identify checks by original task_id/check_index, mark specified required items diagnostic, and union overlapping categories. Reordering or duplicate labels can cause wrong removals or double counts if based on positions.",
+        "example": "A check in two disputed categories should appear only once in the downgrade set."
+      }
+    },
+    "qa/agent-research:option-channel-attack/mechanism": {
+      "source_sha256": "49f684f70d92ce03624da89d90beb7f78c658f522396a3f79f6ccf2df56df10e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can changing only option labels affect guard approval while actions and trusted policy remain fixed?",
+        "answer": "Labels are model inputs and their semantics can affect typed output selection without action changes. Separate unsafe approvals from benign denials. Conditional attack rate uses prohibited examples correctly rejected on clean inputs; an empty denominator is undefined, not zero.",
+        "example": "A misleading label for 'deny' can change the model's choice for the same prohibited call without changing the actual policy."
+      }
+    },
+    "qa/agent-research:option-channel-attack/basics": {
+      "source_sha256": "c3fe24c2d265346363963d6f91eedcf7a1dea1a289cc63872065589c78b3efed",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can Option-Channel Attack change a guard decision by altering only labels?",
+        "answer": "Typed-output names also enter the model. Misleading labels can affect the mapping from an unchanged action to allow or deny, exposing the option-name channel while trusted policy and actions stay fixed.",
+        "example": "The meaning of allow and deny is unchanged, but caller-supplied names can induce the wrong choice."
+      }
+    },
+    "qa/agent-research:option-channel-attack/comparison": {
+      "source_sha256": "ac78ac2b019d40c2ce95a9b90818ae33bb22d27546c687530eacbed6c9cd44f5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not combine fail-open and fail-closed into one safety accuracy?",
+        "answer": "Fail-open admits prohibited actions; fail-closed denies permitted actions. Safety and usability effects differ. Conditional ASR applies only to clean correctly rejected cases and cannot replace overall error rates.",
+        "example": "Rejecting everything can reduce unsafe approvals while making legitimate tasks unusable."
+      }
+    },
+    "qa/agent-research:option-channel-attack/implementation": {
+      "source_sha256": "3dcc7633e3978f9ab68cc3ba241a2ca3b94a857b48441739791acbb9f3a4aa33",
+      "reviewed": true,
+      "fields": {
+        "question": "What is conditional ASR when no clean example was correctly rejected?",
+        "answer": "Undefined because the denominator is empty; do not report zero or one. Recompute the conditional denominator in each paired bootstrap draw. Select attack labels on calibration and measure on separate evaluation data.",
+        "example": "A model already incorrectly approving every case offers no clean rejection that could flip to approval."
+      }
+    }
+  }
+}

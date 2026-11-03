@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:forte/mechanism": {
+      "source_sha256": "56d2e4b9386ecfa536cdbed83808541b6fd4bf09b4ab9bba7e656bbaa2d8947c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why require joint perturbation, retraining, and consumer review when each feature seems unnecessary alone?",
+        "answer": "Redundant features compensate during one-at-a-time tests. Check weak dependence over time and across heads, then joint removal and retraining, followed by every downstream consumer. One neutral run is not deletion authority.",
+        "example": "Age and age buckets can substitute for each other, yet deleting both can hurt new-user tasks."
+      }
+    },
+    "qa/recommendation:forte/basics": {
+      "source_sha256": "a107da210f2f393b7ec51300cf181e19ae13d050126c4a6bfad768acb3267b0a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is feature retirement a lifecycle task rather than an importance ranking?",
+        "answer": "Features may feed multiple heads and systems, and training can restore reliance. Audit time stability, joint deletion, retraining, online evidence, and lineage before retiring all consumers.",
+        "example": "The main click head may not use a field that fraud models still require."
+      }
+    },
+    "qa/recommendation:forte/comparison": {
+      "source_sha256": "254a1210ead2d1345e146489c2af5a5a963d0e1f9c13e63fdf59002b1a7bd3f7",
+      "reviewed": true,
+      "fields": {
+        "question": "What do frozen perturbation and retraining answer separately?",
+        "answer": "Perturbation measures current reliance; retraining tests adaptation to absence. Neither covers all online effects. Redundancy can hide reliance, and retraining does not erase a failed time gate. Local three-seed baseline retention is a valid negative.",
+        "example": "Age removal can hurt a frozen model but recover after retraining; joint removal can hurt despite harmless single deletion."
+      }
+    },
+    "qa/recommendation:forte/implementation": {
+      "source_sha256": "fb3d28d8b9aa9ab03dc9baf46a9be956093a58955823f8eb3cce5e3b55b3d233",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can signed_change be negative, and how does VirtualBatch isolate frozen dependence?",
+        "answer": "Higher-is-better perturbation minus baseline is negative for damage. Reuse dense/sparse/ragged inputs and perturbation maps while switching references; parameter digests rule out updates. Joint effects cannot be summed from individual effects.",
+        "example": "AUC 0.80→0.79 shows harm, not benefit; training during the probe would change its meaning."
+      }
+    },
+    "qa/recommendation:effective-training-time/mechanism": {
+      "source_sha256": "ee67b2dc92694ff0f062caf14f6c1213337d531e6e5f215984e364584c06b322",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can effective training time be low despite saturated GPUs?",
+        "answer": "ETT counts wall-clock time actually training on new data. Init, compilation, save, publishing, and recovery extend the denominator. Kernel improvements do not fix all pauses. Local lifecycle checks do not estimate production gains.",
+        "example": "Twenty new-data minutes in an hour is about one-third even if GPUs saturate during those minutes."
+      }
+    },
+    "qa/recommendation:effective-training-time/lifecycle-accounting": {
+      "source_sha256": "99c8a452eb97d08ee3f0e103e4bb0fb68b7d5241e1548b5a50d19e981f37e342",
+      "reviewed": true,
+      "fields": {
+        "question": "How does stage accounting choose between optimizing compilation, recovery, and kernels?",
+        "answer": "Separate new-data training from lifecycle losses, then identify avoidable time and owners. If training occupies little of the run, reducing interruptions can matter more than faster operators.",
+        "example": "Cutting one recovery in a run with ten training minutes and 30 recovery minutes can beat a 10% kernel speedup."
+      }
+    },
+    "qa/recommendation:effective-training-time/comparison": {
+      "source_sha256": "0bcbb8bf223f319927bdb8b85b1447258d5eca705f4a85cabee4b228bc10aba0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can ETT, stable samples/s, and MFU suggest different priorities?",
+        "answer": "Throughput measures training speed; MFU measures compute utilization; ETT measures new-data share over the full lifecycle. More failures or compilation can erase faster kernels.",
+        "example": "Steps can be 20% faster while frequent restarts reduce daily progress."
+      }
+    },
+    "qa/recommendation:effective-training-time/implementation": {
+      "source_sha256": "dd31680cffb2b5c5d22041d57522675d995f2f1625106b5eee7965389b223d79",
+      "reviewed": true,
+      "fields": {
+        "question": "Why define overlap and recovery replay in ETT?",
+        "answer": "Use actual wall time and count only training on new data. Do not double-count asynchronous save overlap or count replayed old batches as progress. Attribution can overlap without changing ratio accounting.",
+        "example": "Five overlapping minutes do not make an hour 65 minutes."
+      }
+    },
+    "qa/recommendation:hstu/mechanism": {
+      "source_sha256": "3e19cf52fd76c565d862533d4c49c26eeb86d237517f43561a84bad8bb8fe043",
+      "reviewed": true,
+      "fields": {
+        "question": "Why remove softmax but normalize after aggregation and apply a U gate?",
+        "answer": "Softmax fixes weight mass and can suppress behavior-frequency intensity. Pointwise SiLU aggregation preserves variation; post-normalization stabilizes and the token-conditioned U gate modulates output. Causal window interactions are not linear complexity.",
+        "example": "One versus ten related events can differ before the gate controls how much information passes."
+      }
+    },
+    "qa/recommendation:hstu/history-state": {
+      "source_sha256": "b3e044fcb42a618a1b445f4b33894836d642229334fa6ce52ee3c2aa41745fa1",
+      "reviewed": true,
+      "fields": {
+        "question": "Do HSTU history tokens interact, unlike a static history vector?",
+        "answer": "Yes. Each position updates by reading visible earlier tokens, producing contextual history that a target later reads. Causality restricts direction, not history interaction; outside-window events remain absent.",
+        "example": "A lens event can incorporate earlier camera context before a tripod candidate reads it."
+      }
+    },
+    "qa/recommendation:hstu/m-falcon-sharing": {
+      "source_sha256": "295ca31cc79a1875971cd55a7d6cfff0fbae8c49e51d327315516df4f9849292",
+      "reviewed": true,
+      "fields": {
+        "question": "What does M-FALCON share, and why not cache every ranking score?",
+        "answer": "Section 3.4/Appendix H isolate candidate microbatches and share per-layer candidate-independent history KV. Each candidate still projects and interacts separately. Versions and history constrain reuse; local HSTU omits this serving optimization.",
+        "example": "A thousand items can share history while cameras and shoes retain different scores."
+      }
+    },
+    "qa/recommendation:hstu/basics": {
+      "source_sha256": "0c9eb05da6f1517aa0003a69d4fdd582d5dfd2c191effc0a2fbdcad8205cf86b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do ranking and retrieval predict different objects in HSTU?",
+        "answer": "Retrieval predicts a relevant next item. Ranking conditions on the candidate to predict actions, interleaving item/action tokens. Full-catalog next-item metrics do not validate every action task.",
+        "example": "Guess a film versus predict clicks or long watch for an already given film."
+      }
+    },
+    "qa/recommendation:hstu/comparison": {
+      "source_sha256": "33c3d04020506cf668fa1a1317b17196bfc8d9a0e005f38347cb265bef1fbfe1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not interpret local matched-budget SASRec losses as industrial superiority?",
+        "answer": "Matched width, layers, loss, and steps isolate a local core. MovieLens lacks heterogeneous events, timing, long histories, and scale. Preserve local negatives without dismissing paper production evidence or importing it.",
+        "example": "A short-film-sequence loss neither predicts 100,000-event failure nor becomes a local win from online results."
+      }
+    },
+    "qa/recommendation:hstu/implementation": {
+      "source_sha256": "40313037749ee61bd7185da6c09d2ecf76d649d2077def74f42a10e232f8f99e",
+      "reviewed": true,
+      "fields": {
+        "question": "How does all-position HSTU training preserve causality?",
+        "answer": "Each valid state reads its prefix and predicts the next item; mask padding and invalid targets. One encoding supplies multiple losses. Candidate action interleaving is a separate contract.",
+        "example": "A predicts B and A/B predicts C without A seeing B or C."
+      }
+    },
+    "qa/recommendation:longer/mechanism": {
+      "source_sha256": "3e5365977e53863def74afc3acc1d5cae82e2f42f4182d96fa8ae801fdcffbbf",
+      "reviewed": true,
+      "fields": {
+        "question": "Do later LONGER layers keep updating long history after using it as KV?",
+        "answer": "The first layer uses short global/recent Q against merged long KV. Output follows Q length; later self-attention runs only on the short states. This is inter-layer compression, not upfront truncation. The local namesake lacks full fidelity.",
+        "example": "Short query cards inspect a long reference once, then only the cards are refined."
+      }
+    },
+    "qa/recommendation:longer/merge-tradeoff": {
+      "source_sha256": "d8f10bea41a9e06617a8a5cece5f0c1517ef865534eedf90e8309a61adb14a44",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can larger LONGER merge factor K fail to reduce total FLOPs?",
+        "answer": "Section 3.4 shortens positions while widening merged features, increasing projection cost but reducing attention cost. InnerTrans supplies within-group interaction. This is not fixed-width mean pooling or monotone quality.",
+        "example": "Moving from four to eight events per wider token can make matrix work rebound."
+      }
+    },
+    "qa/recommendation:longer/cache-dependency": {
+      "source_sha256": "4f55da0b34d14219d287a7accbf59ce5cfe8de12bf2b3756af4be5a18df80e2f",
+      "reviewed": true,
+      "fields": {
+        "question": "How cache user KV if some global tokens contain candidates?",
+        "answer": "Sections 3.5.2/3.6.3 mask candidate-specific globals from user sequences. Cache independent user KV and compute candidate query outputs separately. Global means aggregation role, not independence.",
+        "example": "Two products share behavior KV but use distinct globals; do not cache a user state already conditioned on product A for B."
+      }
+    },
+    "qa/recommendation:longer/basics": {
+      "source_sha256": "81a12b0c0828a479905b86b23d1e33c75e99093436599ab13f0fb2f65bec62a6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't a LONGER global token a fixed user summary?",
+        "answer": "Globals can include CLS, user, and candidate fields. Short queries propagate their first-layer states; candidate globals remain request-specific. Cacheability depends on actual dependency.",
+        "example": "A user ID can be shared but a price-derived global belongs to one item."
+      }
+    },
+    "qa/recommendation:longer/comparison": {
+      "source_sha256": "1edaf022a5702cea8443040fe1c01a71e36c983f4f1a678cb08bbf73fce19f2d",
+      "reviewed": true,
+      "fields": {
+        "question": "Where does LONGER compress compared with candidate top-k history?",
+        "answer": "Top-k discards events before fine encoding. LONGER lets short queries read merged long KV once, then propagates short output. Merging is still lossy and the local first-layer path is not fully faithful.",
+        "example": "Read a broad compressed source once rather than discard all but ten pages up front."
+      }
+    },
+    "qa/recommendation:longer/implementation": {
+      "source_sha256": "7b2f9d5e99901e21ba2d89d0c35692f918b177d26293e817fb5561dbd180cd7f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why verify first-layer Q length and subsequent state length?",
+        "answer": "The defining path is short global/recent Q over long KV, then short-only self-attention. Concatenating every input and self-attending each layer changes information flow. Inspect actual shapes and masks.",
+        "example": "With KV length 500 and Q length 100, the next layer should receive 100 positions, not over 600."
+      }
+    },
+    "qa/recommendation:rankmixer/mechanism": {
+      "source_sha256": "66e73b10571fb5fccb661d8a4bb0bac8473d3f91c9869989a001c2d07f2a63a5",
+      "reviewed": true,
+      "fields": {
+        "question": "How do independent FFNs learn interactions after fixed TokenMix?",
+        "answer": "Split every input by head and concatenate matching-index slices into new tokens, so specialized nonlinear FFNs receive cross-field signals. H=T and divisible width are layout conditions. Field mixing does not forbid sequence attention.",
+        "example": "User, product, and context slices can jointly enter an FFN without similarity weights."
+      }
+    },
+    "qa/recommendation:rankmixer/shape-invariant": {
+      "source_sha256": "6e612e787fcb0a0210b4dd053571e033ae1962b89f795daa87925982d4077623",
+      "reviewed": true,
+      "fields": {
+        "question": "Why require H=T and divisible hidden dimension?",
+        "answer": "Splitting T tokens of width D into H slices gives H outputs of width TD/H. H=T restores T×D for residual addition; D must divide by H.",
+        "example": "Four 64-wide tokens split into four 16-wide slices; three heads cannot split 64 evenly."
+      }
+    },
+    "qa/recommendation:rankmixer/dual-router": {
+      "source_sha256": "0c08f9f08c5823d9188eab168e5f0fd17342b65007760507b8d10a27473dd464",
+      "reviewed": true,
+      "fields": {
+        "question": "What do ReLU routing and DTSI solve beyond fixed top-k?",
+        "answer": "Sparse ReLU permits variable activated experts. Separate training and inference routers apply sparsity only on inference so experts can learn without starvation. Local sparse code does not validate full dual routing.",
+        "example": "Complex tokens can use more experts while rarely deployed experts still train."
+      }
+    },
+    "qa/recommendation:rankmixer/basics": {
+      "source_sha256": "d02485a13533794715a6f4fcd981108f12615a4976661e788a8f1f40e5aad5f6",
+      "reviewed": true,
+      "fields": {
+        "question": "Which attention does RankMixer replace?",
+        "answer": "It replaces attention for heterogeneous field interactions, not necessarily independent behavior sequence encoding. TokenMix and specialized FFNs process fields after feature extraction.",
+        "example": "History attention can extract photography interest before mixing it with price and item fields."
+      }
+    },
+    "qa/recommendation:rankmixer/comparison": {
+      "source_sha256": "e390dfb4117366ec75240287a29f2b015002565dc7d201f56ccc219db2b95f82",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not credit TokenMix alone for the dense versus shared-FFN gain?",
+        "answer": "Both arms use TokenMix; dedicated versus shared FFNs and different parameter counts change together. The sparse arm also trails dense. Report budgets and popularity bias; local results do not establish paper MFU or A/B.",
+        "example": "Both cars already use the same transmission, so a larger engine's gain does not isolate it."
+      }
+    }
+  }
+}

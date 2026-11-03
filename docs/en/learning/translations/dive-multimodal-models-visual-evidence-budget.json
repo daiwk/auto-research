@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/multimodal-models/visual-evidence-budget": {
+      "source_sha256": "3ede30f0331149d82b69d38d3ac7dc1a4a88ebcda77f10796da0582a31618233",
+      "reviewed": true,
+      "fields": {
+        "title": "Look less, later, or again: place the visual budget at the right stage",
+        "thesis": "Visual budgets are more than token counts. StackTok selects encoded evidence, PACE allocates input resolution, ViMoD retains recoverable detail, Frames-on-Demand retrieves frames, AdaLoop reprocesses existing state, and OmniKVQuant lowers cache precision. Track whether evidence survives and which costs have already been paid.",
+        "axis_0": "Before encoding, after encoding, during generation, or at cache storage",
+        "axis_1": "Discarding, aggregating, keeping external copies, or rereading",
+        "axis_2": "Question relevance, coverage, generated text, or stopping stability",
+        "axis_3": "Token count, peak storage, visual loops, or low-bit representations"
+      }
+    },
+    "dive/multimodal-models/visual-evidence-budget/comparison/multimodal-models:stacktok": {
+      "source_sha256": "5fb4b9e7dac04d46796a85bbd71494c248cd82baeb8beb82a2586e5a5ce680f5",
+      "reviewed": true,
+      "fields": {
+        "position": "Optimize query relevance while adjusting coverage constraints with budget and switching selection criteria.",
+        "tradeoff": "Relevance and coverage both matter. Local single-crop selector omits all five paper VLMs and is not a capability comparison."
+      }
+    },
+    "dive/multimodal-models/visual-evidence-budget/comparison/foundation-models:pace-vlm": {
+      "source_sha256": "59867d4d957180daf556fdac67876f65095bcf472c3a6f6f4510023f6f965541",
+      "reviewed": true,
+      "fields": {
+        "position": "APC previews and adaptively resizes images before encoding; DDAE uses confidence-weighted language and vision attention to extract tokens.",
+        "tradeoff": "Resizing and post-encoding selection save different stages. The real-checkpoint smoke chiefly covers APC; DDAE has formula/unit-test evidence separately."
+      }
+    },
+    "dive/multimodal-models/visual-evidence-budget/comparison/multimodal-models:vimod": {
+      "source_sha256": "3cb0707ff10171e20ce66b24bfee33872d2e61f88e03ce344d6b03d34c6a537d",
+      "reviewed": true,
+      "fields": {
+        "position": "DART retains coarse and original fine KV; TRACE holds or replaces the detail working set conditioned on causal text state.",
+        "tradeoff": "Recoverability does not eliminate fine KV memory. Real checkpoints and CUDA gradient diagnostics cover only the models specified in the README."
+      }
+    },
+    "dive/multimodal-models/visual-evidence-budget/comparison/foundation-models:frames-on-demand": {
+      "source_sha256": "82f846fed7f713eaa5b2343f126deb562343af8cda49593967058213ef2dc4ef",
+      "reviewed": true,
+      "fields": {
+        "position": "Build caption memory once and revisit relevant frames under a fixed budget when text evidence is insufficient.",
+        "tradeoff": "Captions can omit details and the gate can fail to reread. Local deterministic caption/query gates do not run a long-video VLM or learned router."
+      }
+    },
+    "dive/multimodal-models/visual-evidence-budget/comparison/foundation-models:adaloop-vision": {
+      "source_sha256": "2abc18416b8917a1291b55ccf46d4fa278cff7a28b788b01aba1841f13a79583",
+      "reviewed": true,
+      "fields": {
+        "position": "Modulate a shared frozen vision block by the question and loop over visual state, spending extra compute on vision.",
+        "tradeoff": "Loops add processing but no new raw evidence. Full multi-arm training was too costly and was not reproduced; random-token gradients are diagnostic."
+      }
+    },
+    "dive/multimodal-models/visual-evidence-budget/comparison/foundation-models:omnikvquant": {
+      "source_sha256": "942f8d103303078a5cd9389791049b2320d004704249935fd4d0c3a30d3ef5dd",
+      "reviewed": true,
+      "fields": {
+        "position": "Set key quantization ranges per short time window and rotate values independently by modality to lower KV precision.",
+        "tradeoff": "Lower bits are not fewer entries. Local two-bit NumPy reference gives no GPU kernel speed evidence."
+      }
+    },
+    "dive/multimodal-models/visual-evidence-budget/analysis/0": {
+      "source_sha256": "3dfa51bead9447f85cdc77711303107ecb23cadf019b2a23c09419b44e9c6818",
+      "reviewed": true,
+      "fields": {
+        "title": "When token count falls, ask where original details went",
+        "body": "PACE can remove details by resizing before full encoding. StackTok selects already encoded evidence using question relevance and coverage. ViMoD retains fine KV and can restore a working set mid-generation. Frames-on-Demand keeps revisitable video and a caption index. Recoverability depends on retained evidence and an executable read path."
+      }
+    },
+    "dive/multimodal-models/visual-evidence-budget/analysis/1": {
+      "source_sha256": "3fa62ad3c9a3b776246f20f51de3055090b563e8360cae6a8f628fcefceefb89",
+      "reviewed": true,
+      "fields": {
+        "title": "Account separately for active state, peak memory, and extra computation",
+        "body": "ViMoD's small active set does not erase resident fine KV. OmniKVQuant lowers bytes per entry at some error. AdaLoop adds vision iterations for a more question-specific representation. Token reduction alone omits storage, reread, and iteration overhead."
+      }
+    },
+    "dive/multimodal-models/visual-evidence-budget/question/active-versus-resident-cache": {
+      "source_sha256": "0e2afbf90cc83f546dfdf61cc4b89b28efa4917f1d3f467f1433daa7804c2cd5",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a small active ViMoD fine-KV set necessarily use less peak memory than quantized KV?",
+        "answer": "No. Original fine KV remain for recovery, so active state differs from resident state. Quantization lowers precision but incurs rotation, quantization, and unpacking work. Compare storage tiers, peak memory, and end-to-end latency on matched input; do not multiply working-set fraction and bit width into a claimed result.",
+        "example": "One book on the desk does not mean the warehouse is empty; compressing each book saves a different resource and still costs retrieval."
+      }
+    },
+    "dive/multimodal-models/visual-evidence-budget/question/shrink-before-encode-versus-recover": {
+      "source_sha256": "a1d35afbca72e09ca36d59b2c47af1cf57e950789177becba2b7c79ba35cbfe6",
+      "reviewed": true,
+      "fields": {
+        "question": "Do PACE resizing, StackTok selection, and ViMoD rereads lose information at the same point?",
+        "answer": "APC changes resolution before full encoding; StackTok selects encoded tokens; ViMoD preserves original fine KV. Information lost in low-resolution inputs cannot be recovered merely by later selection. The intervention stage determines both evidence loss and encoding already paid.",
+        "example": "Small print destroyed during resizing differs from high-resolution detail retained in an inactive cache."
+      }
+    },
+    "dive/multimodal-models/visual-evidence-budget/question/more-processing-versus-more-evidence": {
+      "source_sha256": "690126cba8702824e255128999806940324f528c390bc6e636e7e9b40ba987a8",
+      "reviewed": true,
+      "fields": {
+        "question": "Is one extra AdaLoop iteration equivalent to reading another Frames-on-Demand frame?",
+        "answer": "No. AdaLoop transforms existing state using a question-conditioned shared block. Frame retrieval adds observations. Extra compute need not add evidence, and evidence need not be used correctly. Separate iterations, frames, and stability; gold labels cannot determine serving stops.",
+        "example": "Reanalyzing a blurry screenshot is not obtaining a clearer frame from the video."
+      }
+    },
+    "dive/multimodal-models/visual-evidence-budget/update/2026-10-27/0": {
+      "source_sha256": "660a6388d22167a724951303b95c5ff449897eae922b9bbfd809310bd7db6ad4",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial version: compared StackTok, PACE, ViMoD, on-demand frames, visual loops, and KV quantization; screened 16 abstracts and closely read six papers."
+      }
+    }
+  }
+}

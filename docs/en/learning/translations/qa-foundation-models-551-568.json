@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:interpolated-null-calibration/comparison": {
+      "source_sha256": "3f65908a60f564686dbcbff29b51e608aa9b3dd6a899aa2656ea78d93d5fdc6f",
+      "reviewed": true,
+      "fields": {
+        "question": "What do standard ICR, bare-null, and no calibration subtract?",
+        "answer": "λ=1 subtracts instruction null; λ=0 subtracts bare null; only uncalibrated subtracts neither. Document all three scoring inputs and subtraction terms.",
+        "example": "A nonzero s(empty,empty) can make λ=0 rank differently from raw s(q,I)."
+      }
+    },
+    "qa/foundation-models:interpolated-null-calibration/implementation": {
+      "source_sha256": "5a197f225f947db9028da5b669ec828ecfe5d423849ec4a8715f294c77a4491c",
+      "reviewed": true,
+      "fields": {
+        "question": "Can equal-length score arrays be subtracted directly?",
+        "answer": "Document IDs and ordering must match, not just shape. Choose λ on validation, not a full-data oracle. The local score operator is not a real attention extractor.",
+        "example": "If pass two swaps docs A and B, positional subtraction applies the wrong null score."
+      }
+    },
+    "qa/foundation-models:mechanistic-etm/mechanism": {
+      "source_sha256": "942c2884ddf907cadd7286933b1a78366599d8f2f588ea4c16b4ba4133178f1b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use an SAE encoder for topic probabilities but a separate decoder for steering?",
+        "answer": "The encoder maps topic directions to feature activation probabilities for a binomial count likelihood. The decoder maps feature combinations into residual space for intervention. Do not tie them implicitly. Steering removes the old parallel component before adding desired strength. Local work omits large-model experiments.",
+        "example": "Estimate sparse feature occurrence, then decode an intervention direction; an equally shaped encoder weight is not a substitute."
+      }
+    },
+    "qa/foundation-models:mechanistic-etm/basics": {
+      "source_sha256": "24550cf1002776eb5a06404fb25dd566a8c0ba55012be6f33749c0a8d21dd0f4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why observe SAE features instead of words in Mechanistic ETM?",
+        "answer": "Sparse activations express model-internal concepts. A frozen SAE encoder maps topics to feature probabilities and fits document proportions to counts.",
+        "example": "Different words may activate similar concepts, and one word need not indicate the same topic in every context."
+      }
+    },
+    "qa/foundation-models:mechanistic-etm/comparison": {
+      "source_sha256": "a60e813569c9586a3b3a452028a2f7a0d847948aa8fad07f397871ef5c8eef5b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why model feature counts with binomial rather than ordinary multinomial bags?",
+        "answer": "Each feature can occur once per token but features are not mutually exclusive. Model each count with N_tokens trials instead of forcing total counts to token count.",
+        "example": "One token activating two features can make total feature count exceed number of tokens."
+      }
+    },
+    "qa/foundation-models:mechanistic-etm/implementation": {
+      "source_sha256": "c3ab30a50f9cccbbdf6faec92b3a178b12344bf814cf7ada4e78df0c82046de3",
+      "reviewed": true,
+      "fields": {
+        "question": "Does ETM steering strength zero leave activations unchanged?",
+        "answer": "Not necessarily. Remove the existing parallel component, add λs, and restore decoder bias. λ=0 still removes the component. Use an independent decoder, not encoder-tied weights.",
+        "example": "A strong original topic projection is removed at zero strength rather than preserved."
+      }
+    },
+    "qa/foundation-models:proeval/mechanism": {
+      "source_sha256": "37b39285754f8af712030ab03748e398f9635bc20ff8d839dd139553ca609e31",
+      "reviewed": true,
+      "fields": {
+        "question": "Why select a query before reading target scores and exclude the target from history?",
+        "answer": "Historical correlations supply a prior. Only actively selected responses update the posterior. An entire target column in covariance or selection leaks unqueried answers. Variance reduction does not guarantee robustness beyond historical distribution.",
+        "example": "Select the most informative item first and query its score, rather than preload the target's full column."
+      }
+    },
+    "qa/foundation-models:proeval/basics": {
+      "source_sha256": "7e46d277c936de52ba9e7bbd306176375cb31ee905bd0f43a37338f8d838d9aa",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reuse historical per-item scores?",
+        "answer": "Cross-model correlations form a probabilistic surrogate, updated after limited queries to estimate total score and uncertainty. Estimates are not full evaluations.",
+        "example": "Query several items and predict the rest while reporting posterior variance."
+      }
+    },
+    "qa/foundation-models:proeval/comparison": {
+      "source_sha256": "2f8bcb34cf82fe79de140b924f15a7602906d8014f03594f30128173a66cb2b1",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Bayesian quadrature acquisition differ from choosing the lowest current mean?",
+        "answer": "BQ maximizes expected reduction of overall wᵀKw variance, not difficulty. Failure-oriented acquisition has separate candidate conditions.",
+        "example": "An easy item correlated with many unqueried items can reduce score uncertainty substantially."
+      }
+    },
+    "qa/foundation-models:proeval/implementation": {
+      "source_sha256": "29f69a8e5764e6a3e7d4113941ddb93aac34af3e4642a03be68a6e57218924ce",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reject duplicate target observations and target IDs in history?",
+        "answer": "Duplicates distort query budget and posterior updates; historical target scores leak unqueried outcomes into the prior. Only selected feedback is allowed. Three history records are a local minimum, not a theorem guarantee.",
+        "example": "A target column already present in history invalidates claimed savings."
+      }
+    },
+    "qa/foundation-models:tcab/mechanism": {
+      "source_sha256": "af554c81200ad9ba7442e4ff86e53057be1fa3384d384c01140be62aafab6a40",
+      "reviewed": true,
+      "fields": {
+        "question": "Why match full context and action before sharing TCAB feedback?",
+        "answer": "Identical actions can yield different outcomes under different contexts. Tree maximal coupling matches complete pairs to share conditional rewards while preserving each policy's marginal trajectory. Coupled policies are deliberately correlated, and savings do not prove global optimality.",
+        "example": "Picking the same product for different users does not justify sharing one click observation."
+      }
+    },
+    "qa/foundation-models:tcab/basics": {
+      "source_sha256": "53ae00ff1af2c2ba77c5f1ff087aa0215680a79f22883a7416c7e77664c229cd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why share real feedback across adaptive policies?",
+        "answer": "Separate A/B/n runs may pay repeatedly for identical context/action pairs. Coupling permits valid reuse while preserving each policy's marginal trajectory distribution.",
+        "example": "If two policies choose the same action in the same state, one feedback can update both."
+      }
+    },
+    "qa/foundation-models:tcab/comparison": {
+      "source_sha256": "2bff0d2c7c948947454e5a785a25adaf91f53311d6fb8083042069aec10c4a71",
+      "reviewed": true,
+      "fields": {
+        "question": "Does correlated coupling alter each policy's own trajectory distribution?",
+        "answer": "Not necessarily. It changes joint dependence while preserving individual marginals. Equal final accuracy alone does not verify adaptive updates or marginal trajectory parity.",
+        "example": "Two draws can coincide more frequently while each retains its original probabilities."
+      }
+    },
+    "qa/foundation-models:tcab/implementation": {
+      "source_sha256": "421597bda413a722da74edf50dbbd33e8ef5bf16c9538d70eeaf26bd41522145",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not count identical action strings as saved feedback calls?",
+        "answer": "Reuse depends on full context and state conditions. The same action in different environments can yield different feedback. Compare actual shared queries and tree-edge differences.",
+        "example": "Two different users choosing A do not yield the same reusable observation."
+      }
+    },
+    "qa/foundation-models:xlgobench/mechanism": {
+      "source_sha256": "38773e936842a108f0be23d17fa3f70d0bf609663ed0b80b556f36e3bd0276a4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why don't correct local algorithm answers establish cross-lingual gaps?",
+        "answer": "Exact scoring removes judge subjectivity, but validated translations and real model outputs across complexities are needed. Local generation has limited structure, not the full noise/difficulty matrix. Gold stays in the scorer, and five task diagnostics do not measure language accuracy.",
+        "example": "An internal shortest-path solver can answer a graph, without testing whether two natural-language versions are equivalent or equally solvable."
+      }
+    },
+    "qa/foundation-models:xlgobench/basics": {
+      "source_sha256": "979a136654e18cf583f64b574877063d7aea2c95b80d31d3bb1e46892720f71d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use tasks with deterministic algorithmic answers?",
+        "answer": "Controlled difficulty and exact answers reduce open-ended judging ambiguity. Compare real models across validated language versions; a scorer alone is not capability evidence.",
+        "example": "A state transition can use the same exact solver after changing its language."
+      }
+    },
+    "qa/foundation-models:xlgobench/comparison": {
+      "source_sha256": "402accb8533f9dca218d27993a63b9b076da2f6a8f1930eff81e6ae859ad0f31",
+      "reviewed": true,
+      "fields": {
+        "question": "Is scorer correctness evidence of multilingual generalization?",
+        "answer": "No. It validates evaluation of a supplied prediction. Generalization needs real inputs and outputs across languages, complexity scans, and statistics. Small examples do not substitute for seven languages or human translation checks.",
+        "example": "Solving a 12-node shortest path internally does not show an LM can answer it in a specific language."
+      }
+    },
+    "qa/foundation-models:xlgobench/implementation": {
+      "source_sha256": "d31120903699d6de9b62cb8db091728b3c6ac0f7ea40360d045fb985f7424043",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Pr-DSA top-eight scoring ignore order but reject duplicates?",
+        "answer": "The target is the complete eight-state set after full probability propagation. Reordering is harmless; repeats hide missing states. Other tasks also use full JSON matching, not partial credit.",
+        "example": "Eight list entries beginning A,A,B may contain fewer than eight distinct states and must be rejected."
+      }
+    }
+  }
+}

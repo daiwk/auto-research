@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:mnemon/mechanism": {
+      "source_sha256": "ee6fbb1e726662b8398d6874848055557824442de446936bfb1d1a7d83cf645b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate slow search planning from fast record decisions instead of reasoning at length about every record?",
+        "answer": "Planning chooses where to seek evidence; per-record eligibility fits a bounded fast decision. Separation spends reasoning budget on search direction rather than repeatedly explaining candidates. Dated originals remain, while the answerer sees a small budgeted view. Fast decisions do not guarantee complete evidence or correct time eligibility.",
+        "example": "Example: Decide to search a release meeting, quickly screen dozens of records, then send a few originals to the answerer instead of analyzing every record at length."
+      }
+    },
+    "qa/agent-research:mnemon/basics": {
+      "source_sha256": "530c873b5697a2fef4394e5a5500a4b8c4fed723790eb532d0cf911f75baab9f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Mnemon keep dated originals but give the answering model only a small view?",
+        "answer": "Originals retain checkable details and dates. A small view gives relevant evidence within budget instead of replaying all history. Slow planning proposes searches and fast Jev decisions select records. Missing facts may require further lookup; the view is not a lossless summary.",
+        "example": "Example: Pick a few dated rescheduling events from years of records rather than resend all chats to answer when the latest change happened."
+      }
+    },
+    "qa/agent-research:mnemon/comparison": {
+      "source_sha256": "cefa0a0321d98bfbb07a1a416837b6e443c6c5ef7e616011f292404ecb184f41",
+      "reviewed": true,
+      "fields": {
+        "question": "How do dated raw records compare with repeatedly rewriting one long-term summary for traceability?",
+        "answer": "Raw records retain exact wording, time, and details for different questions, but cost storage and query-time reading. A rolling summary is compact yet can erase provenance or rare facts. Mnemon builds a budgeted view from originals for this query, not a permanent lossless replacement.",
+        "example": "Example: A summary says the customer prefers A, while the dated email says only this quarter. Check the original before answering about next quarter."
+      }
+    },
+    "qa/agent-research:mnemon/implementation": {
+      "source_sha256": "99eac80b6989064ee660c11034d61fd89d5ab9bcc012f2dd78d8b513e2d9f7ae",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local bounded-view test cover Jev semantic judgments and the original answer model?",
+        "answer": "No. It runs raw-record retrieval and budgeted view construction without a Jev checkpoint or reproducing LoCoMo scores. Record order, dates, and budget are independently checkable. Real models are needed to test semantic necessity and whether the answerer uses evidence correctly.",
+        "example": "Example: Fitting three specified records verifies the view interface, not that the judge selects them from natural language."
+      }
+    },
+    "qa/agent-research:ccm/mechanism": {
+      "source_sha256": "b61a3ac32a89d0b362f2199f6b0857d5de641dc1919e240d6241db3b37b9bbfb",
+      "reviewed": true,
+      "fields": {
+        "question": "If the training teacher sees full history, why can the next student turn see only bounded memory?",
+        "answer": "Privileged history supplies training signals, while the deployed student still sees the task, memory, and latest observation. This forces it to write necessary state into limited space. Providing full history at evaluation bypasses continuous management. Memory updates accompany actions and must serve the next decision.",
+        "example": "Example: A teacher knows a port number mentioned earlier. The student must preserve it in small memory rather than receive the whole earlier conversation on test."
+      }
+    },
+    "qa/agent-research:ccm/basics": {
+      "source_sha256": "4c58bfb0f18090cb50f7f5012fb103ccc5452aeebe996af26eaea28b47cd8acf",
+      "reviewed": true,
+      "fields": {
+        "question": "What kind of context growth is CCM trying to avoid across many turns?",
+        "answer": "Resending every observation, action, and thought grows cumulative input and can bury current state. CCM lets the agent maintain bounded memory each turn and keep acting. It studies how to compress the past into decision-sufficient state rather than retain complete history indefinitely.",
+        "example": "Example: At step ninety, current files, verified results, and pending work may suffice without every terminal output from the previous 89 steps."
+      }
+    },
+    "qa/agent-research:ccm/comparison": {
+      "source_sha256": "f630dd1c2836df65c08b7e0a59aa92cc15f1969f99603d21de9f4c37c3c19737",
+      "reviewed": true,
+      "fields": {
+        "question": "How does per-turn bounded state differ from retrieving a few old records just before answering?",
+        "answer": "CCM updates memory during each action, so retention now determines next-turn visibility. Answer-time retrieval makes the main selection later using an external index. The bottlenecks differ and can complement each other. Bounded-state omissions cannot rely on hidden history, and retrieval must count indexing and reads.",
+        "example": "Example: A terminal changes directories. CCM should immediately keep the path; later retrieving an old command alone may miss the directory change."
+      }
+    },
+    "qa/agent-research:ccm/implementation": {
+      "source_sha256": "0f2f2eb3d776fe1a2d31dca289fa94315d25e60b1e52d4dd7166c24d71776b5c",
+      "reviewed": true,
+      "fields": {
+        "question": "How do you check that CCM does not bypass bounded context with unrecorded history?",
+        "answer": "Inspect that each policy request contains only the original task, current memory, and latest observation. Prior tool results are visible only if written into memory, which has a hard cap. The local run tests these contracts without TerminalBench or WebShop checkpoints; field isolation is not task capability.",
+        "example": "Example: Hiding a full previous transcript in an extra metadata field violates the contract even if the main prompt is shorter."
+      }
+    },
+    "qa/agent-research:interactive-memory/mechanism": {
+      "source_sha256": "a6630a35a3a7efb54d7636173521bf28589056b9360ce631504480c1777646a8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why jointly learn a write Planner and read Trigger from delayed cross-session reward?",
+        "answer": "Some details reveal their usefulness only in later sessions. Retrieval timing determines whether they affect results. Shared delayed reward links writing to later use instead of rewarding summary quality alone. Evaluate in chronological order; future questions must not preselect what to write.",
+        "example": "Example: Saving a changed workplace matters for commute planning next week. Same-day chat fluency may never reward saving it."
+      }
+    },
+    "qa/agent-research:interactive-memory/basics": {
+      "source_sha256": "8d420b73546547848d327410036fa9b25ebc4d6f1c770cc8ede6e5adf9f6cccc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is it hard for a cross-session assistant to know on day one what will matter on day three?",
+        "answer": "Future requests have not occurred. The writer chooses likely durable facts from observed conversation, and the reader retrieves them in suitable contexts. Interactive Memory learns from actual future usefulness rather than giving the writer future questions.",
+        "example": "Example: A user casually mentions avoiding peanuts on day one and asks for meal planning on day three. The value of that note becomes evident later."
+      }
+    },
+    "qa/agent-research:interactive-memory/comparison": {
+      "source_sha256": "8ca5e328e76f14a597297e8cd4542d4a13d3bedf55c8ff52b2da330cf04b07b6",
+      "reviewed": true,
+      "fields": {
+        "question": "How does delayed cross-session reward differ from reward based on per-turn retrieval similarity?",
+        "answer": "Similarity is an immediate proxy that may not predict later use. Delayed reward observes later dialogue outcomes to learn long-term writing and trigger value. It introduces credit assignment; revealing future questions to the writer would no longer test learning for an unknown future.",
+        "example": "Example: An allergy detail may be unrelated to the present topic yet crucial for ordering later. Similarity can underestimate that long-term value."
+      }
+    },
+    "qa/agent-research:interactive-memory/implementation": {
+      "source_sha256": "05fd4b3c7a22b7af07c45c56d40c4bad7c351d1900079427666cff5912cf5d48",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish information available at writing time from later evaluation in an observation-safe state machine?",
+        "answer": "The writer sees observations available then. Future questions, answers, and scores can supply external reward only after the corresponding execution. Local Planner/Trigger diagnostics verify isolation and feedback, not paper-scale training or learned preferences from preset fixture rewards.",
+        "example": "Example: Hiding day three's question in day one's write input makes fact selection easy, but this lookahead leak invalidates the learning claim."
+      }
+    },
+    "qa/agent-research:evoskill-gui/mechanism": {
+      "source_sha256": "3bd2e411c25ed84bd75111043000385d86745a65c0330691cced8c80f2b8f3c8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is changing only the responsible GUI skill component more auditable than regenerating the whole skill?",
+        "answer": "A local edit ties failure evidence to one component and preserves other verified behaviors. This makes it easier to tell whether the patch fixed the defect without broad drift. A critic needs information isolation, not hidden answers. Verify the revised skill before reusing it elsewhere.",
+        "example": "Example: If login fails only when closing a pop-up, first fix that locator rather than rewrite username entry and submission too."
+      }
+    },
+    "qa/agent-research:evoskill-gui/basics": {
+      "source_sha256": "af45f8b4629775ff5c40c0e0efaebb61c8d2c161e90ce95f5dbc77214c3231cf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can GUI skills become invalid as interfaces and tasks change?",
+        "answer": "Button positions, page sequence, and preconditions can change. A skill that worked before need not execute in a new state. EvoSkill-GUI studies converting observed failures into verified improvements for later reuse. Training-free still requires real observations and execution checks.",
+        "example": "Example: A top-right button moves into a menu. Replaying the old trace fails, so revise the corresponding step from the current screen."
+      }
+    },
+    "qa/agent-research:evoskill-gui/comparison": {
+      "source_sha256": "619f1fb07b96b7a7cc8fd9d3a41b826dd682a1dc3e30bf14973490ce345e72ec",
+      "reviewed": true,
+      "fields": {
+        "question": "How does local revision by an isolated critic differ from ad hoc self-editing by the executor?",
+        "answer": "The critic independently attributes failure from permitted evidence, limits patch scope, and verifies before reuse. Ad hoc edits can carry over the executor's wrong assumptions. Isolation controls evidence and responsibility rather than guaranteeing correctness; retain failure evidence and validation results.",
+        "example": "Example: The executor assumes a page finished loading. A critic can identify a missing wait from observations instead of accepting that the button is absent."
+      }
+    },
+    "qa/agent-research:evoskill-gui/implementation": {
+      "source_sha256": "da2ee64d2628d2b4f6d7351960748779d2ff5b00c560583a51f5ad9b9f3780ed",
+      "reviewed": true,
+      "fields": {
+        "question": "Can the local public-observation patch demo establish cross-task reuse on real GUIs?",
+        "answer": "No. It reads public evidence and applies bounded reference edits without MobileWorld, AndroidWorld, or OSWorld. It verifies no gold access, patch scope, and state transitions. Real screen understanding, clicking, and validated cross-task success remain unestablished.",
+        "example": "Example: Updating a locator after a button name changes in a string verifies the patch contract, not finding that button in an actual screenshot."
+      }
+    }
+  }
+}

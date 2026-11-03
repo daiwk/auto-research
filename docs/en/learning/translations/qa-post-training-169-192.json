@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:ttpo/basics": {
+      "source_sha256": "e9c7d201e121ba88eec4698ef5fab20bc4c53db60517efdec4debdbcf6ce818a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why train TTPO majority-agreeing and dissenting trajectories separately?",
+        "answer": "The majority may be wrong, and dissent provides a different signal. Use self-distillation for agreement and grouped RL for disagreement rather than one unlabeled pseudo-target.",
+        "example": "A majority answer and an alternative path do not share the same imitation objective."
+      }
+    },
+    "qa/post-training:ttpo/comparison": {
+      "source_sha256": "9f07554e8fea14c6bd349f2563331d956cdb6d79cc005432f75a31c9fafdf1c7",
+      "reviewed": true,
+      "fields": {
+        "question": "What safeguards does TTPO add instead of treating the majority answer as gold?",
+        "answer": "Asymmetric objectives filter converged tokens and confident errors. It recognizes that consensus is not truth; filter quality matters and consensus isn't independent validation.",
+        "example": "A group can confidently agree on the same wrong answer."
+      }
+    },
+    "qa/post-training:ttpo/implementation": {
+      "source_sha256": "16988b0a5164373bd62b0106e79fea44774ac0de40dacd2688823493b953d19c",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local TTPO perform real test-time sampling and Qwen updates?",
+        "answer": "No. It tests branch objectives and token selection only. Fixed candidates are not real unlabeled adaptation. Keep gold hidden before branch assignment.",
+        "example": "Supplying answers for formula checks does not mean the model generated them on benchmark prompts."
+      }
+    },
+    "qa/post-training:ttpo/mechanism": {
+      "source_sha256": "ef5d651f25eabb4b3205ecc56e616f2417b8ef0ed3e3f7dce423ca4d43354b6c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use different objectives for majority agreement and disagreement?",
+        "answer": "Copying consensus can spread errors. Self-distill agreeing replies, apply group RL to dissent, and filter already converged positions and high-confidence errors. No gold or claim that votes are truth.",
+        "example": "Don't delete the dissenting answer outright; handle it under the relevant objective and reliability filters."
+      }
+    },
+    "qa/post-training:rlvr-fusion/basics": {
+      "source_sha256": "ce334a5d154f65f8a5ba7f952452c8fff6fec170847c3448a82ed0447cca790a",
+      "reviewed": true,
+      "fields": {
+        "question": "What resources do Merge, Mix RL and MOPD reuse in RLVR Fusion?",
+        "answer": "Merge reuses expert weight deltas; Mix RL reuses training data; MOPD distills from experts using data. Resource requirements differ, so averages cannot choose a route alone.",
+        "example": "Without original training data, available routes differ even if expert weights are present."
+      }
+    },
+    "qa/post-training:rlvr-fusion/comparison": {
+      "source_sha256": "5541ea038f6ac157c29e85a334238cff72dca8e27b913f84d4dbeb4781484a05",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't similar average performance imply per-domain equivalence?",
+        "answer": "Averages can cancel larger task gaps. Compare target domains, available experts/data and compute, not only mean scores or similar formulas.",
+        "example": "Better math and worse code can yield the same mean without meeting the same needs."
+      }
+    },
+    "qa/post-training:rlvr-fusion/implementation": {
+      "source_sha256": "40ef0b732ca4d15cc6362bcd2f88c8fdd6337a5b56afb9ad44510ccc30cdd2eb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why define Merge task vectors relative to a common base?",
+        "answer": "Expert minus base must share parameter coordinates and reference. Different bases/layouts don't express comparable deltas. Local candidate merging isn't checkpoint merging.",
+        "example": "Experts with different vocabularies or tensor layouts cannot simply average deltas."
+      }
+    },
+    "qa/post-training:rlvr-fusion/mechanism": {
+      "source_sha256": "fbd7f3680876bdd1a53e37fa486716dc64a3a5aad12f7db348869941d94b51e6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are Merge, Mix RL and MOPD different fusion operations?",
+        "answer": "Merge combines expert parameter increments, Mix RL trains on combined data, and MOPD uses expert guidance with data. Availability and budget determine feasible routes. Similar means or a probability-vector proxy do not establish lossless checkpoint fusion.",
+        "example": "Experts alone permit discussing parameter merging; data without experts cannot run the same distillation."
+      }
+    },
+    "qa/post-training:grin/basics": {
+      "source_sha256": "b4e06bc6c3ae0c9635731dc4ba70c655f13b4368c89a62ec8bc08aa676495122",
+      "reviewed": true,
+      "fields": {
+        "question": "Why inject a golden response only into GRIN failure groups?",
+        "answer": "All-fail groups lack positive contrast. Verified solutions supply direction; preserve more native exploration when the student succeeds. Gold is training supervision, not evaluation input.",
+        "example": "Add a verified answer only after all attempts fail, not to every prompt."
+      }
+    },
+    "qa/post-training:grin/comparison": {
+      "source_sha256": "44dac68fd9e2daaebf0e2515e2e355e3d301e717da6c0cb484bd5eea3ab7c46f",
+      "reviewed": true,
+      "fields": {
+        "question": "How does mixture correction differ from treating the expert answer as a student sample?",
+        "answer": "Sampling includes the injection source, so the denominator must represent the mixture. Calling it pure on-policy misweights it and hides external knowledge.",
+        "example": "An inserted expert solution was not drawn solely from the student."
+      }
+    },
+    "qa/post-training:grin/implementation": {
+      "source_sha256": "dea04b6af26c2ffa10862a3fe473e5bd4b3537985fc5b22c883530593861a55f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use q_mix rather than frozen reference in GRIN's importance ratio?",
+        "answer": "q_mix describes actual sampling; reference anchors regularization. Track mixture origins/probabilities. The deterministic diagnostic does not reproduce the paper's knowledge-acquisition data.",
+        "example": "An old reference is not interchangeable with the expert that generated a sample."
+      }
+    },
+    "qa/post-training:grin/mechanism": {
+      "source_sha256": "645153165a9af6b48e5af64dc91aee60dfffc78e8cd34967d0c51ee2b5f099f2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why correct GRIN injection by the mixed distribution?",
+        "answer": "An expert addition was not an unguided current-policy sample. Correct with the mixture denominator; reduce injection as capability improves and return to exploration. Gold must not appear in evaluation/deployment.",
+        "example": "Learn from an injected verified solution without logging it as a student exploration success."
+      }
+    },
+    "qa/post-training:erpo/basics": {
+      "source_sha256": "bdf347b89d2f26fb98dddf8548d2b63b0349c8594a5d6c4119f68aaeb3c5f556",
+      "reviewed": true,
+      "fields": {
+        "question": "Why observe drift on the input side in ERPO?",
+        "answer": "Response regularization directly limits exploration. ERPO controls induced question-distribution shift with question likelihood weights and Query-KL, moving where regularization applies.",
+        "example": "Balance which questions receive learning pressure rather than forcing old answer wording."
+      }
+    },
+    "qa/post-training:erpo/comparison": {
+      "source_sha256": "2bb146509cc6863404003e80c433d0d5a79f143f67c7e8e429bfb605aa2f52dd",
+      "reviewed": true,
+      "fields": {
+        "question": "Can Query-KL and Policy-KL be interchanged in ERPO?",
+        "answer": "No. One constrains question distribution, the other conditional replies, with different gradient boundaries. Applying pressure to the answer scoring function isn't input-only control.",
+        "example": "Which question is sampled and how it is answered are different distributions."
+      }
+    },
+    "qa/post-training:erpo/implementation": {
+      "source_sha256": "0b2e4b198dfab466406d9fbadbfaf952082aa214a7aaf298d786b949da22a162",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is local ERPO typicality only a query-likelihood proxy?",
+        "answer": "Finite candidate features approximate input typicality to test flow and gradients, not natural-question LM likelihood. Use frozen reference weights, not weights inferred from test correctness.",
+        "example": "Typical feature frequency isn't the probability of a complete Chinese question."
+      }
+    },
+    "qa/post-training:erpo/mechanism": {
+      "source_sha256": "3786e7396c59af0e73daede4cededd20238491a4acf4acb334429edab9f14679",
+      "reviewed": true,
+      "fields": {
+        "question": "How does question-side ERPO regularization differ from constraining replies?",
+        "answer": "Answer KL limits output drift and exploration directly. ERPO weighs queries with reference likelihood and constrains induced question drift, changing update allocation across inputs. It isn't a renamed answer KL; typicality does not verify real query modeling.",
+        "example": "Reweight familiar questions that dominate training rather than constrain every answer to mimic the old model."
+      }
+    },
+    "qa/post-training:gcpo/basics": {
+      "source_sha256": "26c4ae68072c5680af9f5d652ac28b4c9352f07a41e70b8c113f62f6d05741f4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why protect dominant pretrained singular spaces in GCPO?",
+        "answer": "Rollout update spikes in principal spaces may precede validation regressions. Restrict updates to bilateral orthogonal complements to avoid overwriting principal mappings. Correlation doesn't forbid learning in all dominant directions.",
+        "example": "Add task behavior in remaining directions while preserving important input/output mappings."
+      }
+    },
+    "qa/post-training:gcpo/comparison": {
+      "source_sha256": "7b9c277ffefd1d1ae41fe16d5e81ddb3ddd43d22e92e91492b9d7e039545c739",
+      "reviewed": true,
+      "fields": {
+        "question": "How does hard orthogonality differ from a soft projection penalty?",
+        "answer": "Hard constraints exclude violating updates. Soft penalties allow an optimizer to trade violations against task gains. A larger penalty doesn't establish exact bilateral orthogonality.",
+        "example": "A soft update may briefly enter the principal space; hard projection removes that component every time."
+      }
+    },
+    "qa/post-training:gcpo/implementation": {
+      "source_sha256": "46ae38015d9512dfc70fac6b571e70f9e363c1191ec6e421fba638f2424a6593",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local GCPO validate per-layer bilateral LoRA?",
+        "answer": "No. A vector policy restricts the leading right space of empirical update covariance as a proxy. The paper fixes left and right matrix projections; one-sided vector tests do not verify them.",
+        "example": "A parameter vector lacks two independent matrix axes."
+      }
+    },
+    "qa/post-training:gcpo/mechanism": {
+      "source_sha256": "d66403322fb4c70f07ab16ffb9e46190d6d462930326ceb58a04b741e6ccf25f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why project low-rank updates onto both singular complements rather than penalize overlap?",
+        "answer": "Soft cost permits principal-space drift at sufficient reward. Hard bilateral projection excludes it, keeping both input and output directions outside frozen principal spaces. Vector diagnostics are not layered LoRA training.",
+        "example": "Every valid update must avoid protected directions, rather than merely pay a penalty for touching them."
+      }
+    },
+    "qa/post-training:erils/basics": {
+      "source_sha256": "90f22e807205c1d506977f9987913e7a0c8c29dc9885d21d2f67209ed3682ea9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why introduce external rollouts in ERILS diffusion RL?",
+        "answer": "Student exploration may lack coverage, while external policies offer different denoising trajectories. Track source and length; high external reward isn't native reachability.",
+        "example": "Log an external model's alternative denoising path as external."
+      }
+    },
+    "qa/post-training:erils/comparison": {
+      "source_sha256": "cf48da9c661040b7961cc0cd9d4a4173898f0b694cd010bd61092eab3031d89a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why normalize sources separately rather than mix on/off-policy rewards?",
+        "answer": "Sources can differ in reward scale and distribution; pooled baselines can systematically suppress one. Separate normalization preserves within-source credit without solving every off-policy bias.",
+        "example": "A higher expert mean can make useful student improvements negative under one pooled baseline."
+      }
+    },
+    "qa/post-training:erils/implementation": {
+      "source_sha256": "9f640ba21b64992a1d01cb0d03e687dacef7ad85a1103033a8f4d33270f578ee",
+      "reviewed": true,
+      "fields": {
+        "question": "Why explicitly enforce external response length in ERILS?",
+        "answer": "Long trajectories consume tokens and change loss scale. Retain length constraints and source labels through normalization. Candidate-policy diagnostics do not reproduce diffusion checkpoint training.",
+        "example": "An oversized expert trajectory could consume the batch and change the intended mixture."
+      }
+    },
+    "qa/post-training:erils/mechanism": {
+      "source_sha256": "467aaa11c2f1388059133b1e6bb96fa321a331745dde77b1cc194e3cce8eea26",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not normalize native and external rollouts together?",
+        "answer": "Differences in length and rewards can turn provenance into advantage, letting one source dominate. ERILS caps external lengths and treats reward sources separately. This preserves exploration value, not immunity to off-policy errors.",
+        "example": "If outsiders are always longer and higher-scoring, pooled normalization may make every student sample negative."
+      }
+    }
+  }
+}

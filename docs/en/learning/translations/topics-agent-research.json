@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "units": {
+    "theme/agent-research": {
+      "source_sha256": "2fcdba4d595f3bde5d7cb7296ea9f2cdd7f9a9c0295a9abf40a84b6c6271b94b",
+      "reviewed": true,
+      "fields": {
+        "title": "Agents",
+        "intro": "Follow the path from the next action to a complete execution workflow: planning, memory, tool collaboration, self-improvement, training, and independent evaluation."
+      }
+    },
+    "theme/agent-research/planning-and-search": {
+      "source_sha256": "6934e8e11f62c8b96e9b0c9db65b6b2d77c855335b73883d263bba8d2bd68a80",
+      "reviewed": true,
+      "fields": {
+        "title": "Planning and search: what should happen next?",
+        "question": "With long tasks and delayed feedback, how should an agent choose its next action and undo an earlier mistake?",
+        "takeaway": "Make a single answer an observable decision process: what is known, what is missing, and what evidence can an action obtain? ReAct alternates reasoning and action so environment observations can correct plans. Tree search branches intermediate states, evaluates them, and retains or backtracks under budget. Both track state, and more branches cost model and tool calls. Draw the state, action, and observation first.",
+        "example": "For a failing unit test, read the stack trace and trace a bad input dimension to its caller. If both a data-split bug and a model-shape bug are plausible, design a small check for each and keep the branch supported by observations. A plan is useful when it guides the next evidence-gathering action. Rewriting one thought three times adds no evidence.",
+        "pitfall": "A model score is not independent correctness. More nodes cannot fix bad state or a biased evaluator. Match total call budgets. Local thought/action loops and deterministic search are mechanism checks, not reproduced task-success rates. Keep gold answers, future observations, and hidden plans outside actor inputs.",
+        "reading_order": "Read ReAct for the reason–act–observe loop, Tree of Thoughts for branching, evaluation, and backtracking, then ReWOO for planning before execution to reduce duplicate calls."
+      }
+    },
+    "theme/agent-research/planning-and-search/self-test": {
+      "source_sha256": "5e539f14e7af07697a6a0f78453b97157d34c5baf5c2998ccf14fb2e6a0a07a1",
+      "reviewed": true,
+      "fields": {
+        "question": "Under the same budget, is writing five plans the same search as running two tool checks that distinguish hypotheses?",
+        "answer": "No. The first may only expand text; the second changes observable state and rules out hypotheses. Branch search needs branch states, expansion, evaluation, retention, and backtracking rules. Choose based on information gained and tool cost, not the number of plans."
+      }
+    },
+    "theme/agent-research/memory-and-skills": {
+      "source_sha256": "3a54ef1a3ae0b64e129f3071fbbd0e7e2b3fb6a51f2d3435e7ee875e43ab5d4c",
+      "reviewed": true,
+      "fields": {
+        "title": "Memory and skills: retrieval, reuse, and invalidation",
+        "question": "When history exceeds the context window, what should be saved, when should it be retrieved, and how can stale knowledge be kept from misleading a new task?",
+        "takeaway": "Memory is state with write, retrieve, update, and eviction policies. MemGPT moves information between storage tiers so a limited window can access archives on demand. Voyager stores successful programs as retrievable skills. Facts, temporary inferences, and executable skills have different reuse conditions; facts can expire and a program may require a specific tool version. Start from the future decision and retain evidence for it. EMMA distinguishes one execution mistake, a persistent habit, a missing method, and misrouting before changing a plan, prompt, skill, or controller. Responsibility for repair matters as much as storage tier.",
+        "example": "For a data project across sessions, keep confirmed unit conventions in resident memory, the current question and intermediate statistics in working memory, and complete queries and sources in the archive. When a table changes, verify schema before reusing query skills. Invalidate old units if the user changes them. Compressing everything to “prefers brevity” cannot recover calculation rules.",
+        "pitfall": "Readable summaries may still lose essential details. A retrieval hit may not apply. Evaluate task results, storage and call budgets, propagation of errors, and cross-user isolation. Local paging, skill lookup, or state fixtures do not establish real long-term memory or runs in original environments such as Minecraft.",
+        "reading_order": "Read MemGPT for moving information between context and archives, Voyager for executable skills versus facts, and Generative Agents for connecting retrieval, reflection, and planning without treating simulated social behavior as production evidence."
+      }
+    },
+    "theme/agent-research/memory-and-skills/self-test": {
+      "source_sha256": "7127a05ebf010d6599e879cd63d4de1bd08465b32a746a4cff25bfb9c792b570",
+      "reviewed": true,
+      "fields": {
+        "question": "A skill once passed tests and has the highest retrieval score, but its tool interface just changed. Should the agent run it immediately?",
+        "answer": "First check interface version, input assumptions, and permissions, then run a cheap validation. Similarity does not establish present applicability. Track scope, feedback, and invalidation. If compatibility cannot be verified, use current evidence rather than trusting a historical pass."
+      }
+    },
+    "theme/agent-research/tools-and-collaboration": {
+      "source_sha256": "0ed4418997b7c3f34215a25eff96e881ad6daa3fcd244d1936f2c85214e90cdc",
+      "reviewed": true,
+      "fields": {
+        "title": "Tools and collaboration: turning plans into inspectable actions",
+        "question": "With a plan in hand, how does an agent choose tools, interpret results, and share reliable execution state across roles?",
+        "takeaway": "Tool calls need a contract: when to call, parameters, how outputs affect next actions, and how failures are recorded. Toolformer uses later prediction loss to filter useful API calls. CRITIC uses external feedback to revise answers. Collaboration adds ownership, state handoffs, and artifact verification. Role count is organizational; information flow, responsibility, and actual tool execution determine results.",
+        "example": "For a repository fix, a search role locates code, an execution role edits and tests, and a reviewer reads the real diff and test output. A timed-out command is not success. Separate environment failure from an incorrect fix. Three roles saying it looks right do not replace an executable check.",
+        "pitfall": "Tool output is evidence to verify and may be stale, injected, or incomplete. Limit permissions, keep failures and unknowns, and avoid repeating actions with side effects. Local interfaces, candidate filtering, and small environments do not establish full browser, production, or software benchmark capability.",
+        "reading_order": "Read Toolformer for deciding when a call helps, CRITIC for evidence-driven revision, and SWE-agent for stateful repository actions and test loops."
+      }
+    },
+    "theme/agent-research/tools-and-collaboration/self-test": {
+      "source_sha256": "34486fe3e7c8325b5d31ef60f8d2abaea7d76674c4f825b9093e2f0c29cd8f53",
+      "reviewed": true,
+      "fields": {
+        "question": "One role writes a patch, another agrees, and a third declares success. With no test execution record, is verification complete?",
+        "answer": "No. Roles can share one error. Define acceptance conditions, run relevant checks, and read the results. Keep unrun and interrupted checks separate. If execution is unavailable, report static review only; role discussion is not a passing test."
+      }
+    },
+    "theme/agent-research/harness-and-self-improvement": {
+      "source_sha256": "d3fe83f05895b09ff570eb68d0757619c83c56d1b45859e68854184f09899b58",
+      "reviewed": true,
+      "fields": {
+        "title": "Harnesses and self-improvement: which layer changes?",
+        "question": "After a failure, should the system revise one prompt, save a lesson, or change the entire task workflow?",
+        "takeaway": "Distinguish retrying the current answer, storing language experience across attempts, and changing tool orchestration or the harness. Reflexion saves feedback for the next attempt without updating weights. Full research systems also propose, implement, evaluate, and track lineage. Each change needs its own acceptance criteria; editing a workflow is not evidence of capability gains. CROP mutates the system prompt offline. EvalAlloc allocates evaluation across candidates and estimates fitness. Token objectives and evaluation-cell budgets are different mechanisms.",
+        "example": "After forgetting to verify dataset versions, save the lesson in the next plan or add version and split checks to the workflow. Evaluate on tasks not used to make the change, compare success and calls to the old process, and report same-case recovery as such. It does not establish generalization.",
+        "pitfall": "Separate development feedback from held-out evaluation. Keep hidden answers and scoring plans out of the evaluated system. Papers like AgentX involve actual research or industrial loops; local mini-suites, callbacks, and references do not reproduce them. Do not reopen expensive closed runs merely because a paper is grouped under self-improvement.",
+        "reading_order": "Read Reflexion for cross-attempt experience, Self-Refine for revision within an attempt, and AgentX for the complete proposal–evaluation–workflow-update loop and the local subset."
+      }
+    },
+    "theme/agent-research/harness-and-self-improvement/self-test": {
+      "source_sha256": "8c20e65ced9f363f75f8b40c171b2cc3cff6a14e40db2ad314eb9cc76a85cb09",
+      "reviewed": true,
+      "fields": {
+        "question": "If we add a reminder to a prompt after one failure and weights stay unchanged, did the model learn through RL?",
+        "answer": "No. The change is to prompting, memory, or execution. It may improve behavior, but report it at that layer and test on held-out tasks. Model training claims require collecting a learning signal and updating policy parameters."
+      }
+    },
+    "theme/agent-research/agent-policy-learning": {
+      "source_sha256": "2e8112239eac40a0f6e0938de5cddef4409cb4e7b8fd979b9014156afafecc13",
+      "reviewed": true,
+      "fields": {
+        "title": "Interactive policy learning: converting trajectory feedback into updates",
+        "question": "If a long task gives only a terminal success or failure, which turn should receive credit?",
+        "takeaway": "Connect actual environment trajectories to parameter updates. Agent Lightning separates execution from training so different frameworks can emit learnable transitions. GiGPO adds groups of revisited states for finer credit alongside trajectory-level information. World models, skill supervision, and interactive distillation also depend on state provenance. Distinguish student execution, expert demonstrations, and environment-model simulations.",
+        "example": "A search task has query formulation, result reading, and submission. A wrong answer could follow an off-topic query or failure to use correct evidence. Multiple actions from the same intermediate state can support a fair comparison of outcomes. Grouping unrelated states by turn number confounds task difficulty and tool behavior with action value.",
+        "pitfall": "Step credit, policy updates, and capability are separate evidence levels. Finite gradients on synthetic states or three numerical seeds do not show browsing, programming, or exploration ability. A privileged training teacher or scorer may use hidden references, not the actor. Cost-based closure leaves component evidence at its original scope.",
+        "reading_order": "Read Agent Lightning for execution, transitions, and training, GiGPO for trajectory and step credit, and ASTEROID for distinguishing student context from teacher supervision across episodes in partially observed environments."
+      }
+    },
+    "theme/agent-research/agent-policy-learning/self-test": {
+      "source_sha256": "e1669c0fe0458df58315d4e3cc20a244a1c7e4fe305a5499a6dab5e03a86cd4f",
+      "reviewed": true,
+      "fields": {
+        "question": "Two third-turn actions look identical, but only one environment retrieved the right document. Can we group them for relative advantages?",
+        "answer": "Not by turn or text alone. Define and verify observable state and conditions that affect future returns. Otherwise advantage mixes environment differences. Keep execution failures and interrupted scoring to avoid selecting only successful trajectories."
+      }
+    },
+    "theme/agent-research/evaluation-and-reliability": {
+      "source_sha256": "7dfdeb865e9d0074f8730f435d0ffecd01cf3b7e9ce11ebf6652f4b80d4aa684",
+      "reviewed": true,
+      "fields": {
+        "title": "Evaluation and reliability: how do we know it worked?",
+        "question": "How can we distinguish model success, a permissive environment, scorer bias, and unsafe overreach?",
+        "takeaway": "Fix tasks, visible inputs, allowed actions, success conditions, and budget before scoring. GAIA asks real-world questions requiring tools and reasoning. Perturbation protocols change one factor and test the same goal. Safety checks also ask whether actions were justified and authorized; a correct answer does not excuse overreach. Separation of actor and scorer information is part of the protocol.",
+        "example": "To study robustness, run one task twice, changing only an irrelevant redundant tool field with backend, data, and success condition fixed. If a necessary field is removed, the task may become impossible and cannot be counted as simple brittleness. When scoring times out, report scored outcomes and unscored counts rather than dropping unknowns.",
+        "pitfall": "Valid syntax does not guarantee preserved meaning, and simulator scores are not real-user or production evidence. The local GAIA mini-suite and AgentPerturb CPU interface are not complete official benchmarks. Safety fixtures do not establish attack-defense rates. Literature-only and cost-only reviews are not verified capabilities.",
+        "reading_order": "Read GAIA for end-to-end task design and difficulty, then AgentPerturb for single-factor, goal-preserving paired tests and independent verification. Distinguish official tasks, CPU protocols, and unrun parts in each local scope."
+      }
+    },
+    "theme/agent-research/evaluation-and-reliability/self-test": {
+      "source_sha256": "c09ded06c08fd52a4bc940f859614b75dfc7565074702b920e2e18955b1e2111",
+      "reviewed": true,
+      "fields": {
+        "question": "Of 100 tasks, 80 were scored and 60 succeeded. Can we report only 75% success and omit the other 20?",
+        "answer": "Report 75% as conditional on being scored, and keep the full denominator of 100 and 20 unknowns. With equal weights, overall success lies between 60% and 80%. Attribute execution failure, interrupted scoring, and genuine task errors separately."
+      }
+    }
+  }
+}

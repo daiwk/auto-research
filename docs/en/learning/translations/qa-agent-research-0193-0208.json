@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:skill-state/mechanism": {
+      "source_sha256": "b25722a73a709a1984f3a4262480516288f7966eec17bac847687e429060b616",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't SKILL.state the full conversation with an extra state block?",
+        "answer": "The next step receives only skill instructions, current state, and latest observation. Older conversation is not replayed, so persistent information must be written explicitly. Recursive patches preserve untouched fields and allow deletion; validation precedes commit. Full history would bypass state sufficiency and the capacity constraint.",
+        "example": "Example: Save a previously confirmed file path in state to use it next turn. Secretly keeping the full chat would not test whether state suffices."
+      }
+    },
+    "qa/agent-research:skill-state/basics": {
+      "source_sha256": "7b2527288e0e21f8c9be8af206517db8aa78081294dad21ffd04c2e7dc441818",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not rely on the model to recall current progress from all chat history in a long task?",
+        "answer": "History grows and contains many failed attempts. Continuation needs clear completed work, unmet requirements, and key resources. SKILL.state maintains them as constrained execution state so new actions use current facts instead of reconstructing the whole past. The schema must be expressive enough.",
+        "example": "Example: After changing three files, one failing test remains. The next turn should see that explicit item instead of guessing from dozens of messages."
+      }
+    },
+    "qa/agent-research:skill-state/comparison": {
+      "source_sha256": "582cb2761d0db8df717d1d5e92e3549487df8744025479a8f6158d7d21f55abf",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a fixed-schema state update differ from a generic rolling summary?",
+        "answer": "Recursive patches preserve untouched fields and use null for explicit deletion. The runtime can check field names and types. Natural-language summaries are flexible but harder to constrain for overwrite and deletion. Valid structure does not guarantee factual contents or correct model updates.",
+        "example": "Example: A patch changing progress must preserve order_id. A prose rewrite may lose that ID without a clear field-level rejection."
+      }
+    },
+    "qa/agent-research:skill-state/implementation": {
+      "source_sha256": "e6e857b9c86edd737cb0cb87f0f8189654379a756c1bb06ba234c7b16702834b",
+      "reviewed": true,
+      "fields": {
+        "question": "If action execution fails after valid state is committed, does the runtime undo state and external side effects?",
+        "answer": "No. The paper commits valid state before the action. A local executor error does not trigger blind retry or imply external rollback. The caller must process the failure as latest observation. Format-retry and character caps are local safeguards; counter events do not prove a real LLM can generate correct patches.",
+        "example": "Example: After recording a payment attempt, a network timeout does not justify resending it. Check the actual outcome to avoid double payment."
+      }
+    },
+    "qa/agent-research:caskg/mechanism": {
+      "source_sha256": "910d1315169a7a388cbc59d48ea1142843ec811d1c7c96b35f310ad5c52f3597",
+      "reviewed": true,
+      "fields": {
+        "question": "Why calibrate semantic and I/O similarity edges with remove, substitute, and reorder probes?",
+        "answer": "Similarity helps recall but does not prove a dependency or order. Text counterfactuals alter local structure to see whether the relation still holds; smoothing retains more reliable edges. This is evidence under the probes, not a verified causal effect in a real environment.",
+        "example": "Example: Two skills mention uploading files, but removing authentication exposes a prerequisite. Shared vocabulary alone does not make them interchangeable."
+      }
+    },
+    "qa/agent-research:caskg/basics": {
+      "source_sha256": "26648ffd6915ebeb1805cc522ab0ace5f850b61b80786f336a3343615b26110a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are several similar skills insufficient for an executable plan when the library grows?",
+        "answer": "Skills can have order, input/output, and substitution relations. Similar wording does not make them compose. CaSKG retrieves skills together with reliable relations to avoid related but incompatible candidates. Calibration is needed beyond text similarity to claim dependency.",
+        "example": "Example: Both lookup and modification relate to orders, but modification may require confirming payment first. Omitting that relationship can cause a bad sequence."
+      }
+    },
+    "qa/agent-research:caskg/comparison": {
+      "source_sha256": "acc4d1be0a8c62e8174f1eaf6d1301462a611ece94ce638f1129a2699588abb3",
+      "reviewed": true,
+      "fields": {
+        "question": "How does evidence from text counterfactual probes differ from real environmental interventions?",
+        "answer": "Text probes edit skill descriptions or order to calibrate relations, but may reflect judgments about wording. Real execution must verify action consequences and state. A causal name does not turn textual edge reliability into unconfounded causal evidence; distinguish mechanisms from capability.",
+        "example": "Example: A model predicts deletion of a step causes failure, but another tool may fill the same role. Test execution rather than rely on the prediction."
+      }
+    },
+    "qa/agent-research:caskg/implementation": {
+      "source_sha256": "bc83f2ba27cdcab09fa85926396287abd9bb9a6cb4cc337edb8694cd1dd9bf4e",
+      "reviewed": true,
+      "fields": {
+        "question": "What do s, n, and the prior contribute to Bayesian smoothing?",
+        "answer": "The posterior edge score is (α0+s)/(α0+β0+n). Successes add support, probe count controls shrinkage, and the prior avoids small-sample extremes. Publish only edges above threshold. One success is not probability one, and isolated local ToolRoute is not the full paper environment.",
+        "example": "Example: One probe success and a hundred successes are not equivalent once the prior and different evidence amounts are considered."
+      }
+    },
+    "qa/agent-research:skillforge/mechanism": {
+      "source_sha256": "f8a62168dd8a08baa4b43acbed6ad72ec55f691ae3060785978d4fca879b4e5d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why activate, revise, or deduplicate skill candidates instead of appending every success permanently?",
+        "answer": "One success may depend on incidental conditions. Old skills can go stale or conflict. Multi-path induction proposes candidates, then policy choices and environmental feedback determine use and revisions. Appending expands the library without ensuring fit and can reinforce bad retrievals.",
+        "example": "Example: A download skill hard-codes an old button. If it fails in a new UI, revise or deactivate it instead of stacking another similar document."
+      }
+    },
+    "qa/agent-research:skillforge/basics": {
+      "source_sha256": "1193b5b4f6b3a79b137bb25310520403d13088d1c088ce562669e1e35d1da706",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does SkillForge teach skill selection rather than merely supplying a catalog?",
+        "answer": "Procedural knowledge does not guarantee selection at the right time. Skills can be ignored, misused, or mismatched to current state. SkillForge learns invocation with actions and improves contents from execution, focusing on cooperation between knowledge and policy rather than document count.",
+        "example": "Example: A stored validate-before-import skill does not help an agent that always imports directly. Task feedback must affect selection."
+      }
+    },
+    "qa/agent-research:skillforge/comparison": {
+      "source_sha256": "46d2e942e72233fc72b493bf8992ce439f5bb21cf0ee21e2de7f40fb2e070f24",
+      "reviewed": true,
+      "fields": {
+        "question": "How does multi-path induction from success, failure, and contrasts differ from summarizing successes only?",
+        "answer": "Success supplies usable steps, failure exposes boundaries, and contrast helps identify meaningful differences. Candidates need not repeat one success, but remain hypotheses until environment validation. Do not convert guesses in failure narratives into reliable rules or generalize from one successful case.",
+        "example": "Example: Both trajectories use the same query, but only the successful one verifies results. Propose verification as important and test it rather than immediately claim causality."
+      }
+    },
+    "qa/agent-research:skillforge/implementation": {
+      "source_sha256": "39fd5668974a4e3e3a47fc46b45231e0806826f800700576bbec2b796ff9f7d5",
+      "reviewed": true,
+      "fields": {
+        "question": "What must the local check record for a_t=(environment action, skill choice)?",
+        "answer": "Record the skill selected by the policy at action time and its execution outcome; a post-hoc label is not enough. Local structured plans verify invocation, posterior, and revision control flow without LLM teacher induction or RL. Reuse counts are not a learned policy or paper environment score.",
+        "example": "Example: Selecting a similar skill after an action to explain it is not actual use. Selection must influence action generation."
+      }
+    },
+    "qa/agent-research:hymem/mechanism": {
+      "source_sha256": "aeb91796d2578b4a1b9190eeb312170f85cafa2ca5acba85de052480b1703938",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can separating planning, execution, and isolated reasoning reduce context pollution?",
+        "answer": "The layers need different detail: planning needs goal progress, execution needs current actions, and transient reasoning need not persist. Structured summaries retain necessary state across refreshes without crowding long-term facts with guesses. Isolation does not guarantee correctness; summaries must preserve constraints and provenance.",
+        "example": "Example: Pass verified interface changes and open issues from debugging to planning, not every tentative hypothesis as a lasting fact."
+      }
+    },
+    "qa/agent-research:hymem/basics": {
+      "source_sha256": "386d5b2b56b1a8c16f69241e715f79723aea1359e14ca490d81d2a8c745de664",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a multi-stage task leak irrelevant details into global decisions?",
+        "answer": "Search, execution, and reasoning create many artifacts. Sending all of them to one context lets old logs or tentative assumptions distract planning. HyMem gives each stage the information it needs and uses progress records to continue, moving necessary evidence rather than sharing every token.",
+        "example": "Example: Hundreds of compiler lines may help the repair worker; global planning may need only the cause and affected module."
+      }
+    },
+    "qa/agent-research:hymem/comparison": {
+      "source_sha256": "a403bca5e402c0ad1ab21110ec648417cddc954d4b15c9e3dd8ffde01fd7caa9",
+      "reviewed": true,
+      "fields": {
+        "question": "What do structured progress summaries versus raw execution logs retain during handoff?",
+        "answer": "Raw logs retain detail and many local attempts, leaving the next layer to identify what matters. Structured progress extracts completed work, current state, and open items, giving planning a stable starting point. Compression can omit constraints, so test whether the handoff supports continuation rather than counting text reduction.",
+        "example": "Example: Summarize installation logs as dependencies installed, tests not run due to missing credentials. 'Install succeeded' alone may be mistaken for completed verification."
+      }
+    },
+    "qa/agent-research:hymem/implementation": {
+      "source_sha256": "c129f0350c2d51f536106fc6a8667589232e12bc7f5fc715738e59c9bd47b45a",
+      "reviewed": true,
+      "fields": {
+        "question": "Do deterministic local PlanBench results show that GAIA or BrowseComp-plus ran?",
+        "answer": "No. Local tests cover layered context, refresh summaries, and mechanism counts without browsers, external tools, or the paper's large model. Cost units and saturated scores belong to the controlled protocol, not real long-horizon token costs or paper Pass@1.",
+        "example": "Example: Counting a summary as one fixture event does not show that a real web evidence summary preserves the same facts at the same cost."
+      }
+    }
+  }
+}

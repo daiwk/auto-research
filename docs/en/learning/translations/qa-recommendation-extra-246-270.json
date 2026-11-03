@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:ultra-hstu/basics": {
+      "source_sha256": "d55222af92a846fd19163672fe16f871e168533e3f438c132566236d833cf324",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add landmarks beyond the local ULTRA-HSTU window?",
+        "answer": "Local attention preserves detail; sparse landmarks connect distant behavior. LBSL widens deeper layers. Sparse access is not lossless full-HSTU equivalence.",
+        "example": "Read recent events individually and use representative remote positions."
+      }
+    },
+    "qa/recommendation:ultra-hstu/comparison": {
+      "source_sha256": "69f6748762ec1efec99f664c876e2109e8beadcfb0a1c903815558015331441e",
+      "reviewed": true,
+      "fields": {
+        "question": "How do semi-local attention and deeper wider windows differ from one fixed window?",
+        "answer": "Deeper layers gain wider direct access, while fixed windows retain identical local connections per layer. Effective reach also depends on stacking and landmarks; one formula does not cover mixture, precision, and systems changes.",
+        "example": "Read a visit closely in shallow layers, then relate cross-visit interests deeper."
+      }
+    },
+    "qa/recommendation:ultra-hstu/implementation": {
+      "source_sha256": "347c9c859936c1628b016c5ddc93bef5986f995f7ff9bed343ba26c8405209e2",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a 48-event ablation prove the 16K production scaling law?",
+        "answer": "No. It lacks 18-layer production models, dynamic topology, FP8 kernels, and private logs. Scaling needs matched runs across lengths and hardware measurement.",
+        "example": "A max-length setting of 16000 does not test long history if only dozens are loaded."
+      }
+    },
+    "qa/recommendation:ultra-hstu/mechanism": {
+      "source_sha256": "6604fac713cded672624eb3536f6c1e7ee7afb5355fb3e1accb249b9fc6dd94c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine local windows, landmarks, and increasing layer reach?",
+        "answer": "Fixed local masks lose remote paths and full attention is expensive. Sparse landmarks provide global connections, wider deeper windows integrate more context, and mixture/system changes support scale. Efficiency depends on windows, landmark counts, and kernels.",
+        "example": "Shallow layers read recent clicks, while landmarks and deeper layers connect older interests without recovering every event."
+      }
+    },
+    "qa/recommendation:uniformer/basics": {
+      "source_sha256": "b9447794955ebaf6d36dd688efc41a3c04f7bd111cf169bc574cb05296a76c6e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why tokenize feature roles and tasks in UniFormer?",
+        "answer": "One interaction interface carries candidate-independent, candidate-dependent, and task-specific states. Tokenization preserves role distinctions rather than flattening all fields.",
+        "example": "User history, current product, and click objective each get appropriate tokens."
+      }
+    },
+    "qa/recommendation:uniformer/comparison": {
+      "source_sha256": "a4fe76f35bbe9a7014cdfa23c738ea3d8182ed472855c1d118df0d74814a1243",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the trade-off versus separate models per task?",
+        "answer": "Shared interactions can transfer signal and ease maintenance; task tokens condition predictions. Parameter sharing can still cause interference.",
+        "example": "Viewing features may help clicks but conflict with commerce goals."
+      }
+    },
+    "qa/recommendation:uniformer/implementation": {
+      "source_sha256": "be8177c999f9d2544e01630298bf2136f5c1cd1e32023f2c4b6c87ee99e61f5a",
+      "reviewed": true,
+      "fields": {
+        "question": "How avoid token misalignment locally?",
+        "answer": "Match role, position, and valid mask to fields, and have each task head read its own state. MovieLens lacks industrial fields and serving.",
+        "example": "Task A reading task B's token is wrong despite matching shapes."
+      }
+    },
+    "qa/recommendation:uniformer/mechanism": {
+      "source_sha256": "ed575c08a86270785743dc4dcfce9d918173de668cfb50b8d9ec166afe69eed3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish candidate-independent, candidate-dependent, and task tokens before unified interactions?",
+        "answer": "They encode common user state, current match, and prediction objective respectively. Explicit roles ease scaling, but joint interactions can make states candidate-dependent; reuse needs masks and architecture.",
+        "example": "A shared age token is reusable, but a state containing one candidate's price is not."
+      }
+    },
+    "qa/recommendation:unimvt/basics": {
+      "source_sha256": "b0df4459f5bdec35a0aa950987f091bc4bcd75dfb7f324255f9f77e97b9479db",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate baseline click propensity and coupon-strength sensitivity?",
+        "answer": "Users may buy anyway. Separate natural propensity from treatment response to estimate increment rather than conversion under a coupon.",
+        "example": "A coupon used by someone who would buy anyway does not necessarily generate a sale."
+      }
+    },
+    "qa/recommendation:unimvt/comparison": {
+      "source_sha256": "035442c4d5b3327c0f67d2c346af5a1f011567c94c9ea33ca127a149c7481a2c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't treatment CTR uplift?",
+        "answer": "Uplift compares treated and untreated potential outcomes under matched conditions; high treated CTR can reflect selection. Counterfactual identification needs assumptions, not just two predictions.",
+        "example": "Coupons targeted to high-intent users can show high CTR without causing it."
+      }
+    },
+    "qa/recommendation:unimvt/implementation": {
+      "source_sha256": "9896d70e17ab703ad8ce77977f7ff99801e126a63184dcb2ad8118174c199e86",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local UniMVT have randomized coupon tiers and counterfactuals?",
+        "answer": "No. MovieLens checks two-tower and counterfactual constraints only. Causal estimates require overlap and confounding control; test outcomes must not define treatment.",
+        "example": "Assigning coupons by rating leaks outcomes into group assignment."
+      }
+    },
+    "qa/recommendation:unimvt/mechanism": {
+      "source_sha256": "641ca4654522594d750dbfbaf74f3b313f9890a63b0e16e04beca8aae2fac11f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate baseline and coupon sensitivity before comparing predictions?",
+        "answer": "Natural propensity can masquerade as coupon gain. Two towers model baseline/treatment; counterfactual constraints link unobserved cases, and unit uplift normalizes tier increments. Identification still depends on assignment and assumptions.",
+        "example": "A naturally 80%-likely buyer may gain less than one moving 20%→50%, subject to selection bias."
+      }
+    },
+    "qa/recommendation:unique/basics": {
+      "source_sha256": "b2fa954b56589cd5cedf9e34592303e2944241ae118f410bb38ee515aaa1f323",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use a flat UNIQUE code instead of residual levels?",
+        "answer": "It avoids stagewise quantization error, using feedback towers, frequency correction, and EMA for one level alongside retrieval and ranking losses. Flat codes need not uniquely identify items.",
+        "example": "Retrieve one semantic bucket, then rank its items."
+      }
+    },
+    "qa/recommendation:unique/comparison": {
+      "source_sha256": "105ceb2443202fc675adcc4bbeba58f4564a1f958035c29d465e6ee85c8d97d2",
+      "reviewed": true,
+      "fields": {
+        "question": "How does shared-prefix-only candidate attention differ from setwise attention?",
+        "answer": "Candidate isolation reuses user encoding and avoids peers changing scores. Setwise attention depends on the candidate set. Unified retrieval and ranking do not require item-to-item reads.",
+        "example": "Adding a candidate should not alter an existing candidate through peer attention."
+      }
+    },
+    "qa/recommendation:unique/implementation": {
+      "source_sha256": "c5ac7163cf5a447db581eb449c5be018041bf1942cb61c7ab15cd5bcbe007130",
+      "reviewed": true,
+      "fields": {
+        "question": "Do straight-through quantization and balanced code usage establish retrieval quality?",
+        "answer": "No. Straight-through preserves gradients and correction helps usage, not relevance. Three small seeds do not rebuild industrial indexes, P99, or online gains.",
+        "example": "Equally sized buckets can contain uniformly irrelevant mixtures."
+      }
+    },
+    "qa/recommendation:unique/mechanism": {
+      "source_sha256": "3e0241c48d7a4c7f5f3b1cfd6777204122c94076945033c8fc80bccbb0489d18",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use flat codes and forbid candidates from reading each other?",
+        "answer": "Flat allocation avoids error accumulation and uses feedback, frequency correction, and EMA. Shared prefixes save user encoding; item/code isolation keeps scoring independent. Joint objectives connect retrieval and ranking; monitor use and collisions.",
+        "example": "Retrieve one-level code buckets and score each candidate against the same history, not its neighbors."
+      }
+    },
+    "qa/recommendation:unir2/basics": {
+      "source_sha256": "378c43909810e95493028476cef72835722626c686b2e004de16cdd88f204f2f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use generated SID traces as a ranking bridge?",
+        "answer": "The generated path contains intermediate retrieval choices, beyond a shared encoder or final ID. A heterogeneous decoder reads the trace with item features.",
+        "example": "Rank with the semantic prefixes that led to the item."
+      }
+    },
+    "qa/recommendation:unir2/comparison": {
+      "source_sha256": "499a2221ce34676090c51421d92823424321317e0182aae514c0f7750315ec39",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do generation and ranking queries need different masks?",
+        "answer": "Generation reads only earlier SIDs; ranking can read the full path and synchronized item tokens. Future code access would leak generation targets, while restricting ranking can hide useful evidence.",
+        "example": "Level-two generation cannot read level three, but ranking can."
+      }
+    },
+    "qa/recommendation:unir2/implementation": {
+      "source_sha256": "eee5c86bc6cb771f8df7c9b0d45dbb6595c7af4a58eefd915368add8e0af0014",
+      "reviewed": true,
+      "fields": {
+        "question": "How does ranking LoRA protect the shared generation trunk?",
+        "answer": "Stop gradients through shared Q/K/V outputs in the ranking branch and train ranking-specific LoRA. This is not freezing everything or fully sharing gradients. Local scope excludes production beams and parallelism.",
+        "example": "Ranking loss changes LoRA without updating shared generation projections through that route."
+      }
+    },
+    "qa/recommendation:unir2/mechanism": {
+      "source_sha256": "2ed01581b2204dd10c6e3456271e4d306d9596a0695d415381142c3ec0cb4ead",
+      "reviewed": true,
+      "fields": {
+        "question": "Why let ranking read SID traces but detach shared outputs and train LoRA?",
+        "answer": "Paths supply retrieval evidence. Role-specific masks share forward information, while detached shared outputs and low-rank updates reduce backward interference.",
+        "example": "Rank using outdoor→camping→tent while adjusting only ranking LoRA for new scoring preferences."
+      }
+    },
+    "qa/recommendation:unirec/basics": {
+      "source_sha256": "80209e28c5368eb1029b7433ae73823092adc30de3da8709fa4a66a7e94817bd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep two separate pre-ranking and ranking towers?",
+        "answer": "Their features, candidate scales, and latency differ. Share some embeddings and align downstream preference through training, without exposing expensive online ranking input upstream.",
+        "example": "Pre-ranking learns fine-ranker preference from supervision, not its full feature set."
+      }
+    },
+    "qa/recommendation:unirec/comparison": {
+      "source_sha256": "603d01700001d0f376af409ee46e9591913328a86d885dd223a85c341ea039b2",
+      "reviewed": true,
+      "fields": {
+        "question": "How does CPPA differ from majority-voting among objectives?",
+        "answer": "Opposing evidence contributes to two softplus terms rather than discarding the minority. CAPP chooses confident directed pairs and AGRR controls group drift separately.",
+        "example": "Clicks can prefer A and watch time B; retain both directions."
+      }
+    },
+    "qa/recommendation:unirec/implementation": {
+      "source_sha256": "3267e084de13fea930f4c0c12feae22459b43ff3cf9a0e3aee2987ca97d85563",
+      "reviewed": true,
+      "fields": {
+        "question": "How keep cross-stage gradient isolation and AGRR evidence separate from pruning?",
+        "answer": "Cross-stage alignment uses survivors and freezes the fine-ranker direction. AGRR builds grouped KL targets from unpruned inputs, not centered scores. Document variance and quantile ties.",
+        "example": "Computing evidence after pruning changes the distribution AGRR should see."
+      }
+    },
+    "qa/recommendation:unirec/mechanism": {
+      "source_sha256": "84d214aaf426ff9af5d5b00dc49870388f3d2a19027a353146fb7819d685a431",
+      "reviewed": true,
+      "fields": {
+        "question": "Why preserve both directions for one pair in CPPA?",
+        "answer": "Objectives can disagree, and a majority loses strength and minority signal. Both softplus penalties remain, CAPP selects confident directions, and grouped KL limits drift. Downstream supervision is training-only.",
+        "example": "Clicks favor A while purchases favor B; majority voting can hide the purchase signal."
+      }
+    },
+    "qa/recommendation:unirec-coa/basics": {
+      "source_sha256": "f946f8d0b2161ec0e3ebb2e9fc8b2936a15419f82b4ad59dfddf413ebf51e121",
+      "reviewed": true,
+      "fields": {
+        "question": "Why generate an attribute chain before SIDs?",
+        "answer": "Explicit category, seller, and brand context can bridge generative and discriminative representations. The chain guides content and does not establish independent language reasoning.",
+        "example": "Generate category and brand before the detailed semantic path."
+      }
+    }
+  }
+}

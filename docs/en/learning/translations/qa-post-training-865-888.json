@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:follow-the-winners/basics": {
+      "source_sha256": "9756be14fe10ad02e4d28ee956f72ba70fb0e2efc14b7b80bf6654e691b5a2ea",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't FTW need same-prompt groups or a critic?",
+        "answer": "Stateful tool trajectories are expensive. Repeatedly draw minibatches from recent real FIFO traces, imitate within-batch elites and apply KL. Replay ranks replace some group sampling/value needs.",
+        "example": "One trace per task can still participate in a pool minibatch tournament."
+      }
+    },
+    "qa/post-training:follow-the-winners/comparison": {
+      "source_sha256": "e21b772b7150be7328d6ac0eeff6d3ddbad2ab56f4f9e78a86454c8e62b9034e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why aren't repeated minibatch elites equivalent to one global top-K?",
+        "answer": "Repeated batches create soft rank occupancy; near-elites sometimes win. Global hard truncation retains only top ranks. Repeated selection counts are weights, so deduplication changes the objective.",
+        "example": "A second-tier trajectory can win a batch without the strongest opponents."
+      }
+    },
+    "qa/post-training:follow-the-winners/implementation": {
+      "source_sha256": "51689a41bbfb4831bbcfddba18bdc1a6be56349b0d3fcd8bf18fc91dc33a92b1",
+      "reviewed": true,
+      "fields": {
+        "question": "What are FTW limits K=C and C=N?",
+        "answer": "K=C keeps the whole sampled minibatch and yields uniform sampling. C=N draws the whole pool and yields global elites. Verify normalized distribution and preserve repeated selections; bandits aren't tool-world results.",
+        "example": "If K=C still favors highest rank, the implementation misses the limit."
+      }
+    },
+    "qa/post-training:follow-the-winners/mechanism": {
+      "source_sha256": "619a5dbaf7d79e813bef18a6cd9be01efa724ab181a6037f48902c5abb82ea6f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why repeatedly select small-batch elites rather than pool top-K?",
+        "answer": "Random minibatches followed by local top reward yield smoothed occupancy, with repetition weighting. Hard global elites are a special case and may drop useful runners-up. No same-prompt groups/critic needed, but KL remains and local tool gains aren't proven.",
+        "example": "Strongest often wins but a runner-up can win some batches; don't deduplicate then equally weight them."
+      }
+    },
+    "qa/post-training:dars/basics": {
+      "source_sha256": "559f1d171e6772a0451cf9b08b54cfbce51fcc1ec39a217c8dd6433e1e220b67",
+      "reviewed": true,
+      "fields": {
+        "question": "Why represent DARS progress as a dependency predicate graph?",
+        "answer": "Completed steps can rely on later-invalid conditions. Graph validation, invalidation and repair update related credit without clearing independent branches.",
+        "example": "Canceling a booking can affect itinerary but not unrelated document preparation."
+      }
+    },
+    "qa/post-training:dars/comparison": {
+      "source_sha256": "be8dd0f46566223d9c1135424c2226508ada108ab02a2682c0001b244d9994df",
+      "reviewed": true,
+      "fields": {
+        "question": "How does dependency-distance decay differ from global failure penalty?",
+        "answer": "Decay depends on relation to the broken prerequisite; global penalty ignores it. Wrong graph or predicates still misassign credit, so validate them.",
+        "example": "Flight-dependent hotels are affected, not unrelated account verification."
+      }
+    },
+    "qa/post-training:dars/implementation": {
+      "source_sha256": "2e038012ed507ba99e8846b2f4b89d6ec1a6d47f1a8897408963198896ef0ee4",
+      "reviewed": true,
+      "fields": {
+        "question": "Does DARS repair change only immediate reward?",
+        "answer": "No. Update dependency state/potential and derive reward from differences. Otherwise later credit uses stale breakage. Local state kernel doesn't train paper model; upstream interfaces aren't released training code.",
+        "example": "Repaired flights restore downstream state rather than add an isolated bonus."
+      }
+    },
+    "qa/post-training:dars/mechanism": {
+      "source_sha256": "3e0a4acc9c131360218a3039652fcffe5f9e75e01a4ae1988590652baaee6fa1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why decay nearby credit rather than reset every completed step?",
+        "answer": "Invalid prerequisites affect dependent branches, not independent work. Graph-distance decay and potential differences encode breakage/repair. Valid predicates and edges are prerequisites; local transitions aren't agent gains.",
+        "example": "Ticket failure weakens hotel credit but not independent reimbursement materials."
+      }
+    },
+    "qa/post-training:gats/basics": {
+      "source_sha256": "dee23d36a7c00e1acef67a586c2b900454d804b340d01688547a60d3a52c6c51",
+      "reviewed": true,
+      "fields": {
+        "question": "Why lower GATS teacher weight as the student closes the gap?",
+        "answer": "Teacher gives direction early under sparse rewards, but near a fixed reference it can restrict independent exploration. Permanently withdraw at the target and continue reward training.",
+        "example": "After reaching teacher-level success, continued imitation may hinder improvements."
+      }
+    },
+    "qa/post-training:gats/comparison": {
+      "source_sha256": "c5064e1a1a34b8f509ea2aae792c844a71c8f9a8af0e358c290de99b9eae0c46",
+      "reviewed": true,
+      "fields": {
+        "question": "How does permanent withdrawal differ from switching per batch?",
+        "answer": "Permanent state avoids oscillatory recalls; dynamic switching can restore help after a drop. Noisy pass rates mean reaching target once isn't universal superiority.",
+        "example": "A slight later decline won't restart teacher calls by design."
+      }
+    },
+    "qa/post-training:gats/implementation": {
+      "source_sha256": "c3baa49bebb2d2b894c0745c6390fc09fa3dcb24cd21b0327786a72110812a26",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use one-step-lagged EMA and fixed teacher tail success?",
+        "answer": "Current rewards cannot alter their own schedule. Fixed teacher baseline defines gap; handle zero baseline. Only schedule kernel, not Qwen agent RL.",
+        "example": "Log current batch then let next batch read updated EMA."
+      }
+    },
+    "qa/post-training:gats/mechanism": {
+      "source_sha256": "1840e9521f40b66139a3678e8550374a07ba858a8822d08ad67b81caf6732120",
+      "reviewed": true,
+      "fields": {
+        "question": "Why lag GATS success and permanently withdraw after catching teacher?",
+        "answer": "Lag avoids same-batch feedback and fixed benchmark stabilizes comparison. Linearly reduce distillation as gap closes, then keep teacher off despite fluctuations. Noise remains and only state machine was validated.",
+        "example": "An improvement affects guidance next batch; reaching benchmark isn't a reversible toggle."
+      }
+    },
+    "qa/post-training:ross/basics": {
+      "source_sha256": "7147a8b91e19e659e582177d81e5eadf6a62ed13d44da18c8803d6fba928ca9a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reuse historical self-rollout in ROSS without imitating all of it?",
+        "answer": "Old traces contain mistakes/redundancy. Full context conditions later behavior; selective continuation labels retain only valuable segments. Visible text need not be target.",
+        "example": "Read the failure history but supervise only its selected correction."
+      }
+    },
+    "qa/post-training:ross/comparison": {
+      "source_sha256": "7c9366591795f8a364189979930689ec8cd3d05f492778ade077fecda8066c83",
+      "reviewed": true,
+      "fields": {
+        "question": "How does ROSS differ from deleting unselected spans before SFT?",
+        "answer": "Deletion changes conditional state, while full context plus masked loss preserves the trace. Selector quality still matters; mask correctness is not selector implementation.",
+        "example": "Removing a wrong prefix can change meaning/likelihood of a corrective sentence."
+      }
+    },
+    "qa/post-training:ross/implementation": {
+      "source_sha256": "17fd0d7dd049f87d6e9bd843eaad30b18c2a6d85dea8967c45d3f46af3b5deec",
+      "reviewed": true,
+      "fields": {
+        "question": "Is the local ROSS selector learned?",
+        "answer": "No. A fixture mask verifies full-context/selective-loss boundaries, not autonomous selection of useful historical steps.",
+        "example": "Marking the last two sentences manually tests adherence, not discovery."
+      }
+    },
+    "qa/post-training:ross/mechanism": {
+      "source_sha256": "5f7977aa8c85241b36d99a634bb5325417b7f41582ee73354615783d1144fcd0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain full context but supervise selected continuation only?",
+        "answer": "History determines what state the continuation addresses. Masked supervision avoids imitating mistakes/redundancy while keeping context visible. Fixed local masks do not implement the paper selector.",
+        "example": "An early error can remain visible while only a later successful repair is learned."
+      }
+    },
+    "qa/post-training:roft/basics": {
+      "source_sha256": "d2c8c1f5b7c7edc79e7bfc0e64635ceec8376e8c4091988ef8dfef7f6add5051",
+      "reviewed": true,
+      "fields": {
+        "question": "Why turn environment feedback into retrospection before ROFT learning?",
+        "answer": "Terminal reward rarely expresses reusable lessons. Text reflections summarize useful experience from successes/failures. The reflection is the target, not every historical action.",
+        "example": "A permission mistake can teach checking access before next time."
+      }
+    },
+    "qa/post-training:roft/comparison": {
+      "source_sha256": "04bbd5c50092148d9a2addb07e312cec1a00a3b5cfd02107f8b671a4986766fc",
+      "reviewed": true,
+      "fields": {
+        "question": "How does ROFT differ from cloning original actions?",
+        "answer": "Cloning repeats recorded behavior; reflection supervision can teach avoiding it. Different labels and reflection quality still matters.",
+        "example": "After deleting a wrong file, learn to check paths rather than repeat deletion."
+      }
+    },
+    "qa/post-training:roft/implementation": {
+      "source_sha256": "25423cee671cf69476700ac513d4867a24d46c73c720d2262c1fe77aa971aed3",
+      "reviewed": true,
+      "fields": {
+        "question": "How normalize losses across differently sized ROFT retrospections?",
+        "answer": "Average all valid reflection tokens globally. Keep tasks/actions/observations/feedback as context but mask their loss. Per-reflection means change length weights. No full agent data/Evolve loop.",
+        "example": "Short and long reflections contribute different total mass under token vs example means."
+      }
+    },
+    "qa/post-training:roft/mechanism": {
+      "source_sha256": "8ba9de0c58dfdad93a3f4111663555f244f596aa4a85ad52115a50d06ffffd47",
+      "reviewed": true,
+      "fields": {
+        "question": "Why supervise only retrospection tokens, not actions or feedback?",
+        "answer": "History conditions the lesson, but the target is the later reflection. Separate input and loss masks and globally average reflection tokens. Local fixtures/registry aren't a complete agent/Evolve loop.",
+        "example": "Read a bad call and error, but learn the parameter-check lesson, not the bad call or tool error text."
+      }
+    },
+    "qa/post-training:retire-opd/basics": {
+      "source_sha256": "5d05e2dc5ea19908f8aa1854e5b24e52d333820bd61a9e4f7532d529922f3f49",
+      "reviewed": true,
+      "fields": {
+        "question": "Why make RetireOPD teachers skill-specific and retirable?",
+        "answer": "Mastery varies. Retire when student approaches skill teacher and distribution improvement stalls, then explore with RL. Fixed uniform budgets can overteach known skills and underteach weak ones.",
+        "example": "Search and output format can retain different guidance."
+      }
+    },
+    "qa/post-training:retire-opd/comparison": {
+      "source_sha256": "11413bdb1ceee0d0bb03d33c6dd5720d42fd386f2f9f22c21cf2829fa04df5dd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use both success and distribution gap for retirement?",
+        "answer": "Similar success can leave valuable behavior differences. A stalled gap can occur despite low success. Joint thresholds estimate remaining teaching value, not universal teacher surpassing.",
+        "example": "Matching task scores alone don't show tool choices stopped improving."
+      }
+    },
+    "qa/post-training:retire-opd/implementation": {
+      "source_sha256": "899d083315ee59edc856a0160800b208f90c29729e0552cbb1837ddfc9014e15",
+      "reviewed": true,
+      "fields": {
+        "question": "Do local retirement conditions show actual decoupled teachers were trained?",
+        "answer": "No. Only retirement state and student update kernel. Log skill identity, success, gap trends and state; registry labels aren't multi-teacher training.",
+        "example": "A synthetic retired state tests a branch, not genuine replacement."
+      }
+    },
+    "qa/post-training:retire-opd/mechanism": {
+      "source_sha256": "342f66d329b39c181169072c1965d167aa909f10f1f8182c8bbaca35578bdcbe",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not retire every teacher once overall student success is close?",
+        "answer": "Each skill checks both outcome closeness and gap no longer shrinking. One criterion risks early withdrawal. Local mechanism checks don't reproduce paper teacher training.",
+        "example": "Search may qualify while formatting still lags; one total score can't retire both."
+      }
+    }
+  }
+}

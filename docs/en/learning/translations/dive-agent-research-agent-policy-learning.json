@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/agent-research/agent-policy-learning": {
+      "source_sha256": "50d6c6204515db58ddc1bcb725edea0b02367e9ea4d130f547cfb501fe4d243b",
+      "reviewed": true,
+      "fields": {
+        "title": "Interaction learning: How are credit and teacher information assigned after standardizing trajectories?",
+        "thesis": "Agent Lightning turns execution into trainable transitions. GiGPO, AdaStep, and DepGPO assign credit using repeated states, return variance, and command dependencies, respectively. Frontier-OPD and ASTEROID change how teacher data reaches students. Recording a trajectory is only the entry point; objectives and information access define the algorithms.",
+        "axis_0": "Whether supervision units are tokens, environment steps, command dependencies, or expert trajectories",
+        "axis_1": "Whether local credit depends on recurrent states, stochastic returns, or trusted tracing",
+        "axis_2": "Whether teachers supply distributions or short bridges versus complete successful episodes",
+        "axis_3": "Whether privileged information stays on the training side or enters deployment input"
+      }
+    },
+    "dive/agent-research/agent-policy-learning/comparison/agent-research:agent-lightning": {
+      "source_sha256": "1586a9abce78a066c4d98884baf188ae4e581db8c1525ca5b10f85d4d6b1cf67",
+      "reviewed": true,
+      "fields": {
+        "position": "Records common MDP transitions to decouple execution and training, then connects credit assignment.",
+        "tradeoff": "A common interface does not specify every credit algorithm. Locally only a controlled patch policy updates, not an LLM trained with LightningRL."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/comparison/agent-research:gigpo": {
+      "source_sha256": "3e93b53c0435f86106e3f3ee68baa9c385394cad88f56e6f79974577009bea56",
+      "reviewed": true,
+      "fields": {
+        "position": "Full trajectory groups produce macro advantages; cross-trajectory step groups sharing an anchor state provide micro relative advantages.",
+        "tradeoff": "Requires trustworthy state alignment and sufficient repetition. A shared plan step is only a local proxy for state convergence."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/comparison/agent-research:adastep": {
+      "source_sha256": "daa48937a9cd6a259e8d50f5681f5f0459c9b1fd0017c74302e9d1c754c4d905",
+      "reviewed": true,
+      "fields": {
+        "position": "Uses the fraction of return variance explained by actions to adjust local advantage, reducing correction when within-action continuation is noisy.",
+        "tradeoff": "No separately trained critic, but requires several actions and repeated samples per anchor. Synthetic local returns check estimator direction without policy updates."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/comparison/agent-research:depgpo": {
+      "source_sha256": "cdca8555bfa2a3a9b33d8b93a7ad91c470d7e0510c0bf51d4ddc1f50334cc1ce",
+      "reviewed": true,
+      "fields": {
+        "position": "Traces verifier resources back through command reads and writes, assigning credit to direct or indirect writers and supporting reads while preserving token-weighted mean advantage.",
+        "tradeoff": "Needs real traces and removal of verifier-produced resources, not guessing from shell text. Handwritten local command diagnostics are not Terminal-Bench training."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/comparison/agent-research:frontier-opd": {
+      "source_sha256": "1b50b0e3c559524080ba05aa67e744ac9defb82ff852947f91fde5c98cbbdf7c",
+      "reviewed": true,
+      "fields": {
+        "position": "Aggregates signed teacher–student disagreement with balanced trajectory weights to select intervention states. Short teacher bridges plus student continuations pass a length-matched agreement gate before only bridge responses enter training.",
+        "tradeoff": "Ranking is not admission; agreement is not success, and validation continuation stays out of training. The A100 run checks only an L1 numeric protocol; full training is expensive."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/comparison/agent-research:asteroid": {
+      "source_sha256": "ba245e57880948f132834476b597ce291288b45696b2847dc8a91e2607a6d4fc",
+      "reviewed": true,
+      "fields": {
+        "position": "Collects student exploration history, then a full expert success on the same hidden task, teaching prediction of expert actions from student history.",
+        "tradeoff": "BAMDP cross-episode conditioning differs from general POMDP takeover. The local three-door, one-step small-model training is not multistep robotics capability."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/analysis/0": {
+      "source_sha256": "c78285cb05939e9c6a5be874489f49bb9257ad2549b446954ef3de9d270d0542",
+      "reviewed": true,
+      "fields": {
+        "title": "Local credit is trustworthy only when its evidence is trustworthy",
+        "body": "GiGPO complements global advantage with return comparisons within a shared anchor. AdaStep asks how much variation is explained by actions versus random continuation. DepGPO instead uses actual file, stdout, and verifier dependencies, without requiring recurrent states. These are not interchangeable step rewards. Fine-grained numbers do not add evidence without trustworthy states or traces. Agent Lightning's common transitions help connect algorithms but do not supply missing conditions."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/analysis/1": {
+      "source_sha256": "35f1ebc02b1475d6ab5279beab7e722ac0ff2dcd4f9cb63165d537975f5948be",
+      "reviewed": true,
+      "fields": {
+        "title": "Teachers change training data, not what deployment can see",
+        "body": "Frontier-OPD selects short intervention from student-visited states. Compare a window matching actual bridge length plus continuation, and add only teacher bridge responses. ASTEROID conditions on exploration history and then supplies a full success for the same hidden task, covering contexts outside smooth expert openings. Teacher units and objectives differ. Deployment sees only public observations and its own history, not hidden tasks, gold, or future outcomes inserted for convenient replay."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/question/local-credit-evidence": {
+      "source_sha256": "9c276722771320815a074a6acc2bbd97fe1e79129bc59de0b8a2fb9e84f781fa",
+      "reviewed": true,
+      "fields": {
+        "question": "When outcomes vary widely after the same action, why do GiGPO, AdaStep, and DepGPO need different evidence?",
+        "answer": "GiGPO compares local returns across actions at one anchor. AdaStep uses within-action and total variance to assess reliability and reduces correction under high continuation randomness. DepGPO checks whether command outputs reach the verifier by dependencies rather than using within-action variance. Choose evidence according to reliable recurrent states or tracing; synthetic anchors cannot establish a fair real-state comparison.",
+        "example": "Incorrect answers after identical searches may reflect later writing variation. A terminal task can instead check whether a write command supplied data consumed by the final test."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/question/bridge-versus-successful-episode": {
+      "source_sha256": "4bd121f380125a272b61203fc2d6778728cf25efe856829bbfb572872f22fa95",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't Frontier-OPD teacher bridges and ASTEROID expert successes both be reduced to one expert label at the current state?",
+        "answer": "Frontier-OPD uses a short bridge to change reachable continuation and admits responses by equal-length agreement over bridge plus student continuation. ASTEROID conditions on student exploration before learning from a complete same-task expert episode; BAMDP preserves hidden tasks across episodes. A single label erases differences in context, collection units, and admission.",
+        "example": "Briefly helping a student past a blockage and returning control is not the same training example as a whole expert success after two student trials."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/question/transition-log-versus-actual-update": {
+      "source_sha256": "27d6146963166300699735e42f9363bceca52196ce870d3936e1ffc5da5ad142",
+      "reviewed": true,
+      "fields": {
+        "question": "When does connecting Agent Lightning transitions to GiGPO or Frontier-OPD count as training integration?",
+        "answer": "Records must contain required state, sampling policy, and permitted supervision. The trainer must update parameters with the appropriate advantage or distillation objective and evaluate. GiGPO needs valid anchor groups; Frontier-OPD needs original histories, valid bridges, and training-pool isolation. Names, counts, and callbacks are insufficient. Local controlled patch updates and L1 contracts are not LLM policy training.",
+        "example": "A thousand actions without shared-state identity or frozen teacher/student probabilities cannot compute micro advantages or validate teacher bridge admission."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/update/2026-10-27/0": {
+      "source_sha256": "15d02f9dcf7ad5dd7f3ddff76e5a83843e60a68e54932f4b3e8b4133683f5083",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial version: compared transition integration, state-group credit, variance reliability, command dependencies, and two teacher-data mechanisms, distinguishing training and deployment information."
+      }
+    }
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:rptune/mechanism": {
+      "source_sha256": "e844393918e91000598971487de9bbb42355d709b82f858110137e4fc01966be",
+      "reviewed": true,
+      "fields": {
+        "question": "Why place high-priority products in ascending order near the prompt end?",
+        "answer": "Learned query–product scores determine what stays; positions near the response are a separate optimization. Post-training adapts to that catalog input. Local tests check arrangement, not a universal position preference.",
+        "example": "With three slots, drop weak candidates, then place the best affordable product nearest the answer. Test selection and placement separately."
+      }
+    },
+    "qa/recommendation:rq-gmm/basics": {
+      "source_sha256": "834bfcfc921490428c8a13708521b7b73452a70bf07fa0a2738d5437f7343268",
+      "reviewed": true,
+      "fields": {
+        "question": "Why quantize residuals repeatedly instead of clustering once?",
+        "answer": "Early stages encode coarse semantics and later ones encode unexplained details. Soft Gaussian posterior assignments can improve utilization, depending on clusters and features.",
+        "example": "Encode category first, then details instead of asking one code to represent everything."
+      }
+    },
+    "qa/recommendation:rq-gmm/comparison": {
+      "source_sha256": "bb500067d48cdc80aa667bc26e0a3f42257ae14cd10218415da30a110f090983",
+      "reviewed": true,
+      "fields": {
+        "question": "How does separate semantic coding differ from letting CTR update the codebook?",
+        "answer": "Decoupling preserves general semantics without guaranteeing CTR optimality. End-to-end clicks can reshape code assignments and alter stability; this is a coupling comparison, not a measured ranking.",
+        "example": "Similar items can start with similar codes, but CTR gradients might redistribute codes by popularity."
+      }
+    },
+    "qa/recommendation:rq-gmm/implementation": {
+      "source_sha256": "f0a04682f5bb6466bd740b4c527c617380e9f40eea2c784f8e227781d1650bcc",
+      "reviewed": true,
+      "fields": {
+        "question": "What should the next RQ-GMM residual subtract?",
+        "answer": "Subtract the current posterior-weighted reconstruction, not a hard maximum center. Normalize probabilities and record codebook versions separately; local features proxy production multimodal inputs.",
+        "example": "A hard subtraction after soft reconstruction changes what the next layer learns."
+      }
+    },
+    "qa/recommendation:rq-gmm/mechanism": {
+      "source_sha256": "0e16b003637bfe50a48a5a4badb35907bedda9ec8ca9091723c7b6a79597e5ab",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the trade-off between Gaussian soft assignment and hard nearest-center quantization?",
+        "answer": "Hard boundaries can jump and leave centers unused. Soft posteriors combine means and pass a smoother residual to the next stage, but must connect to discrete serving. Decoupling from CTR does not guarantee click-optimal codes.",
+        "example": "A cooking/lifestyle clip can combine both categories before the next residual stage."
+      }
+    },
+    "qa/recommendation:s-grec/basics": {
+      "source_sha256": "16d3cfd7b278386654b89de189fc466a124292b0235b836fb64f657dc6cf63c0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep the large judge off S-GRec's online generation path?",
+        "answer": "Offline judging supplies per-aspect preferences; a lightweight generator emits SIDs without online LLM latency. Judge quality still depends on training data and is not cost-free.",
+        "example": "An expensive teacher trains semantic preference while a small model serves."
+      }
+    },
+    "qa/recommendation:s-grec/comparison": {
+      "source_sha256": "804ac3015b138432c19018ca0bf5f88342ff0ec098ffc6dffe32ff6c16822d07",
+      "reviewed": true,
+      "fields": {
+        "question": "How do user-conditioned aspect weights differ from one fixed vector?",
+        "answer": "The judge supplies aspect scores and an aggregator gives normalized nonnegative per-user weights. Fixed weights express one trade-off; conditional weights personalize the same content but do not prove satisfaction.",
+        "example": "One user prioritizes history fit while another prioritizes novelty."
+      }
+    },
+    "qa/recommendation:s-grec/implementation": {
+      "source_sha256": "8c9dda1f369eb7eccfa17ec446d984949578283eccbac3d04406389ce3973f1d",
+      "reviewed": true,
+      "fields": {
+        "question": "Is local S-GRec business reward real eCPM?",
+        "answer": "No. Public data lacks money signals; it uses next-item ranking. Judge, generation, and policy run at reduced scale with different labels.",
+        "example": "A correct next movie is behavioral evidence, not ad revenue."
+      }
+    },
+    "qa/recommendation:s-grec/mechanism": {
+      "source_sha256": "1ab602dd83dc185017a7aa70c38fc8d90a213acec9a778481a238bff3ec1ef86",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add bounded semantic advantage only when it agrees with business advantage?",
+        "answer": "The rewards have different scales. A2PO standardizes each within rollout groups, anchors to business advantage, and adds semantic signal only with matching sign and bounded magnitude. This does not remove reward bias.",
+        "example": "A pleasing rationale cannot turn negative business feedback positive."
+      }
+    },
+    "qa/recommendation:s2gr/basics": {
+      "source_sha256": "d7304870b5d8b378e96522574971e2bdd6f68b5d9086e3df01564750dae7c7ef",
+      "reviewed": true,
+      "fields": {
+        "question": "Is S2GR's thinking token a long free-form natural-language chain?",
+        "answer": "It is an intermediate state before each SID level, aligned to that level's codebook. SIDs remain a discrete hierarchical path; the name does not prove natural-language reasoning.",
+        "example": "Insert a state, choose a level code, and move on without emitting a prose essay."
+      }
+    },
+    "qa/recommendation:s2gr/comparison": {
+      "source_sha256": "f43e81d788d74aaba682f0a2648f09b31fa53d3ecef58928c021cebd6245d284",
+      "reviewed": true,
+      "fields": {
+        "question": "What do thinking alignment and codebook load balancing constrain?",
+        "answer": "Alignment links intermediate states to code semantics. Load balancing prevents concentrated code use. Uniform use does not establish semantics, and semantic alignment does not ensure balance.",
+        "example": "Randomly spreading examples can fix utilization while losing meaning."
+      }
+    },
+    "qa/recommendation:s2gr/implementation": {
+      "source_sha256": "664729360f7bbc931750ac3ff73216c3a8d9c4f5ebc838ac1cd5d173497019ec",
+      "reviewed": true,
+      "fields": {
+        "question": "Are the local S2GR codebook and thinking states the production model?",
+        "answer": "No. Fixed MovieLens data tests core mechanisms. Align current code, earlier codes, and thinking position; never tune balance using test catalog labels. Production gains are author-reported.",
+        "example": "Uniform use in a small catalog does not validate a production hierarchy."
+      }
+    },
+    "qa/recommendation:s2gr/mechanism": {
+      "source_sha256": "5bd8caa3f45a88730da67717e597d9681f8ad7d6611af893ea43f5a5c52aa124",
+      "reviewed": true,
+      "fields": {
+        "question": "Why insert a thinking token before each SID stage and align it to codebooks?",
+        "answer": "Early coarse codes constrain later paths. Intermediate states receive contrastive codebook supervision; collaborative graphs and balancing add behavior and usage signals. This need not be faithful natural-language reasoning.",
+        "example": "Align the intermediate outdoor-category state before selecting finer camping gear codes."
+      }
+    },
+    "qa/recommendation:safro/basics": {
+      "source_sha256": "e5554a2fe4c6092f2cdc182cdea3f67d07780371c3d0785aa833477c996cd48e",
+      "reviewed": true,
+      "fields": {
+        "question": "Does each SAFRO rollout have one reward or several task rewards?",
+        "answer": "rᵢ,ₜ indexes candidate and task separately. A candidate can score differently on immediate interaction and long-term signals; preserve that matrix for comparisons.",
+        "example": "Do not treat two objectives on one item as two items on one objective."
+      }
+    },
+    "qa/recommendation:safro/comparison": {
+      "source_sha256": "efabf5a3493fb07994f3cff12388d8a9f8c51ae454ee9705f980f08f1474a483",
+      "reviewed": true,
+      "fields": {
+        "question": "Does standardization determine the relative importance of engagement and retention?",
+        "answer": "No. It aligns scales, not business values. Relation gating combines goals without turning proxies into causal value. Specify reward definitions, axes, and fusion separately.",
+        "example": "Standardizing two exams does not determine their graduation weights."
+      }
+    },
+    "qa/recommendation:safro/implementation": {
+      "source_sha256": "53a96a9c845a12868bb60e563525087d088e48a21b052cba30cbc4a5b1c6a034",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local SAFRO on MovieLens reproduce short-video retention?",
+        "answer": "No. Public full-catalog ranking tests proxy calculations, not private search, retention, or live buckets. Preserve negative results and do not call same-seed gaps online uplift.",
+        "example": "Offline movie hits are not next-day visits."
+      }
+    },
+    "qa/recommendation:safro/mechanism": {
+      "source_sha256": "6369ec5e3209a6cc2668e3a2ae9d4511938a4dd50d8c034809360deb8386e131",
+      "reviewed": true,
+      "fields": {
+        "question": "Why normalize advantages within groups and across tasks?",
+        "answer": "Within-group ranking identifies better candidates for one objective; cross-task terms compare objectives for the same candidate. Relation gates organize search objectives, limiting domination by high-scale rewards without defining long-term value or guaranteeing joint gains.",
+        "example": "Normalize dense clicks and sparse retention separately before balancing them."
+      }
+    },
+    "qa/recommendation:sam/basics": {
+      "source_sha256": "7d55783be79c0f7bdccf843c92dd636c3d4d1b1c72e65c3f22674730e0c5d9fd",
+      "reviewed": true,
+      "fields": {
+        "question": "Does SAM blacklist same-category items after a purchase?",
+        "answer": "No. It softly suppresses attention to related history and restores it over time, not permanent candidate filtering. Other evidence can still support recommendations.",
+        "example": "Buying shampoo reduces old browsing influence without banning hair products."
+      }
+    },
+    "qa/recommendation:sam/comparison": {
+      "source_sha256": "4e3148daad3f35e77d266bfaf5802bd16963e2f146393f62e33005e111dfa52b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does SAM differ from a fixed post-purchase cooldown?",
+        "answer": "It personalizes suppression by history and long-term purchase rhythm. Errors can still hurt, and nonreplenishable products may not fit.",
+        "example": "Coffee and televisions should not share a one-week rule."
+      }
+    },
+    "qa/recommendation:sam/implementation": {
+      "source_sha256": "fc3364e9cfd37dc04f935b9751add0b98849ba8225ff8c50c3e33048af9e6fe7",
+      "reviewed": true,
+      "fields": {
+        "question": "Where is SAM's mask applied, and what are the local limits?",
+        "answer": "Add a positive log mask to attention logits with numeric safeguards, not a multiplier on final scores. No real replenishment or censored purchase logs; only mechanisms and failure boundaries.",
+        "example": "Guard near-zero masks without claiming accurate repurchase cycles."
+      }
+    },
+    "qa/recommendation:sam/mechanism": {
+      "source_sha256": "50f3bf31836613e3fc778834b0446bdedb7c696377bc6126f39080fb8512d0f3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why suppress related history after buying and restore it near replenishment?",
+        "answer": "A purchase can complete an intent. Find its related history and estimate personal rhythm; time gates and log masks suppress then restore it. Completion is not dislike. Local ratings proxy purchases, not actual replenishment.",
+        "example": "Reduce detergent repeats immediately, then restore after likely use rather than suppress forever."
+      }
+    },
+    "qa/recommendation:sarm/basics": {
+      "source_sha256": "592a0f5dd3861023475ba25ca4dd861db598122ac352773730b07967c6133dd9",
+      "reviewed": true,
+      "fields": {
+        "question": "Is a SARM semantic anchor a new item ID?",
+        "answer": "No. Offline multimodal content understanding produces it for a lightweight ranker. Identity and behavior stay separate; an anchor is not evidence of user interaction.",
+        "example": "A stream keeps its ID while its anchor describes a changing topic."
+      }
+    },
+    "qa/recommendation:sarm/comparison": {
+      "source_sha256": "1fea9399371cf77d234d5a9868030276050f2429d408799275165f4925110cb5",
+      "reviewed": true,
+      "fields": {
+        "question": "Do anchors and online ID/behavior features carry the same information?",
+        "answer": "No. Anchors describe content; IDs and behavior capture interaction and fit. Neither replaces the other, and asynchronous semantic freshness matters.",
+        "example": "Two camping streams can have similar descriptions but different engagement histories."
+      }
+    },
+    "qa/recommendation:sarm/implementation": {
+      "source_sha256": "3bd5a839d56be08e5e553944e109aa88a14e4186da1afa3925f45b557bc03333",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local SARM generate and deploy production live anchors?",
+        "answer": "No. Fixed MovieLens candidates test semantic injection and scoring, not private streams, real MLLMs, or clusters. Do not confuse the anchor encoder with a sparse autoencoder by the acronym SAE.",
+        "example": "An auditable vector proxy is not a full livestream summary."
+      }
+    },
+    "qa/recommendation:sarm/mechanism": {
+      "source_sha256": "cfe4cf8382afadd297dd5d8899417f13e9b78f31263efdb24778d7d47c8ffdaf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why generate SARM anchors offline and update lightweight ranking online?",
+        "answer": "MLLMs enrich live content but are expensive per request. Offline anchors feed lightweight ranking that learns real-time user/item matching. Stale or incomplete anchors still constrain results.",
+        "example": "A ranker can use an equipment-demo anchor, but it needs refresh when the live topic changes."
+      }
+    }
+  }
+}

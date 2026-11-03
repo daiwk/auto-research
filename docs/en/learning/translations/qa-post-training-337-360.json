@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:opcredit/basics": {
+      "source_sha256": "ce14cee83af56a88ba2dbcd198ff537348aeac52cb3d9eda2bd5cd9c737c69e2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why assign OpCredit search credit to individual operations?",
+        "answer": "Successful trajectories can detour and failed ones can explore usefully. Branch outcomes and frontier changes score local operations, then align generated reasoning/action tokens, not environment observations.",
+        "example": "Finding a key entity can be useful even if the final answer fails."
+      }
+    },
+    "qa/post-training:opcredit/comparison": {
+      "source_sha256": "50a646a1b7f96b10749a5d2f0f11f418916a512461de49deddd82448e10ee3e9",
+      "reviewed": true,
+      "fields": {
+        "question": "What does BOC branch comparison use versus FTC frontier progress?",
+        "answer": "BOC reuses outcomes from matched states; FTC assesses local frontier against a training-only answer neighborhood. Training labels can score credit afterward but remain hidden during sampling. They are distinct signals.",
+        "example": "Closeness to the training answer may score a neighbor after rollout, never enter the search request."
+      }
+    },
+    "qa/post-training:opcredit/implementation": {
+      "source_sha256": "991d558d4caeff96424d9896c8ecc5f866241123b329c5daa0925d0c4a9c1b2b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not match OpCredit branches by active entity alone?",
+        "answer": "Match problem, visited set, budget and phase to compare similar opportunities. Count each trajectory once. FTC uses the frontier's best chance, not graph-wide mean distance. Detach credit and reference.",
+        "example": "Arriving with no budget differs from arriving with resources to search."
+      }
+    },
+    "qa/post-training:opcredit/mechanism": {
+      "source_sha256": "d96872c92a7627745632c6629b082e65b74e1a148d6e20c6f74763f48a939985",
+      "reviewed": true,
+      "fields": {
+        "question": "Why match visited set, remaining budget and phase when comparing operations?",
+        "answer": "The same entity can have different future opportunities. BOC matches context and deduplicates by trajectory; FTC uses training answer neighborhoods for local improvement. Keep answers out of actor input and observations out of policy loss.",
+        "example": "Two visits to one node differ if only one has explored its neighbors."
+      }
+    },
+    "qa/post-training:mrtpo/basics": {
+      "source_sha256": "0c443581f2476ba5adff3a40fcf8c839785d1de60bb7acbea5b825417d7f5def",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not broadcast every MRTPO reward equally over a response?",
+        "answer": "Format, executability and correctness can depend on different tokens. Removing one information block and measuring distribution shift identifies likely relevant positions.",
+        "example": "SQL grammar and numerical correctness may point to different tokens."
+      }
+    },
+    "qa/post-training:mrtpo/comparison": {
+      "source_sha256": "97994de751e1e43fe9ece1b7f8baef28acb4ef039e848bb959f97bb86e20640f",
+      "reviewed": true,
+      "fields": {
+        "question": "How does information ablation differ from sampled-token probability changes?",
+        "answer": "Use full-vocabulary JS under the same frozen policy. A single token can miss mass redistribution. Association is not causal correctness, and reward info cannot enter original student sampling.",
+        "example": "The sampled token may stay constant while alternative probabilities move."
+      }
+    },
+    "qa/post-training:mrtpo/implementation": {
+      "source_sha256": "c2936ab7bc0143d56df5a49bebdcfea48b9f97b7bd6c2316bc3ab9eff04b25e0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use uniform ones when all MRTPO relevance is zero?",
+        "answer": "If localization is unavailable, uniform weights retain total credit. Keep response mean one before second-moment limits and batch normalization. Zeros delete the objective.",
+        "example": "An empty format block should not erase the format advantage."
+      }
+    },
+    "qa/post-training:mrtpo/mechanism": {
+      "source_sha256": "ad01310480c301e39096d7462d3f5eb1a0607b002e7ad8ca603c86e74ec40108",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compare vocabulary-wide JS after removing each reward block?",
+        "answer": "A sampled token may miss movement among other candidates. Full-distribution changes associate reward information with positions. Mean-preserving weights apply to both signs with bounded magnitude. Verifier context belongs only in training replay.",
+        "example": "Removing SQL-format feedback may shift mass between comma and parenthesis while the sampled token is unchanged."
+      }
+    },
+    "qa/post-training:knowgpo/basics": {
+      "source_sha256": "0f2939cbfcc16eacfbc8708af2af69affe9f43b57483e74049851a1ddf8683a7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why group KnowGPO steps by known fact sets?",
+        "answer": "Different queries/pages can yield the same knowledge. Verified atomic conditions build a monotone state, enabling comparisons of what actions add from a common start.",
+        "example": "Different wording can establish the same person and year and share a pre-state."
+      }
+    },
+    "qa/post-training:knowgpo/comparison": {
+      "source_sha256": "476d3295c7903fe841bbb2dcab83bc667ce01088a3cef61a6c3365b398391e7b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not group KnowGPO by state after the action?",
+        "answer": "Credit compares actions from a common starting point. Grouping by outcome separates actions that add different facts. Follow algorithmic pre-state despite prose ambiguity.",
+        "example": "An action finding a new fact should be compared to a miss from the same known facts."
+      }
+    },
+    "qa/post-training:knowgpo/implementation": {
+      "source_sha256": "cb42122d85a8fe2b29a7698381a7d15e6d21c661aa19fb176ee94657881171b3",
+      "reviewed": true,
+      "fields": {
+        "question": "How handle KnowGPO answer steps and tool observations in loss?",
+        "answer": "Answer steps skip process grouping but keep the terminal mixture term. Advantage covers generated reasoning/actions only. Keep verifier facts and tool observations out of actor targets. Singleton process advantage is zero.",
+        "example": "Environment search results are not model-generated tokens."
+      }
+    },
+    "qa/post-training:knowgpo/mechanism": {
+      "source_sha256": "ea9ea36016999ea2884d1e39240659c68c3e64ec086effcd4a156b9ce8354bb5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why group by pre-action knowledge rather than post-action knowledge?",
+        "answer": "Use shared initial facts to compare action benefits without conditioning on gains. A training verifier monotonically accumulates facts; combine process/terminal advantages for generated tokens only, hiding checklist from the actor.",
+        "example": "Grouping a successful and unsuccessful search by resulting facts separates the two outcomes before comparison."
+      }
+    },
+    "qa/post-training:diverge-ideation/basics": {
+      "source_sha256": "6e3fdb656ffe112deda8d9c803287ea6792a0ffaabf0488954152631a8307e44",
+      "reviewed": true,
+      "fields": {
+        "question": "Why generate a whole idea set instead of sampling independently and deduplicating?",
+        "answer": "Later ideas see predecessors and can seek genuinely different directions. Reward combines quality and dissimilarity. Different strings do not prove scientific novelty; semantic judging matters.",
+        "example": "A second approach can cover a gap rather than paraphrase the first."
+      }
+    },
+    "qa/post-training:diverge-ideation/comparison": {
+      "source_sha256": "f67378796995091df5f31e06ca3e72e804a72162409827fe6803c416c1e2bca0",
+      "reviewed": true,
+      "fields": {
+        "question": "Can DIVERGE training set reward and evaluated Creative Utility be exchanged?",
+        "answer": "Training uses distance to the closest predecessor in generation order; evaluation can reorder, discount and normalize. Greedy evaluation is only a lower bound on maximum CU.",
+        "example": "Moving the best idea first can alter evaluation but doesn't change original training order."
+      }
+    },
+    "qa/post-training:diverge-ideation/implementation": {
+      "source_sha256": "edb4a30f6fcf07d7af8c80a5ba58a8b0ae9ee239a69bc03f91361996b8cac546",
+      "reviewed": true,
+      "fields": {
+        "question": "Which fields count toward DIVERGE length penalties?",
+        "answer": "Count tokens in problem_gap, core_claim and method, not inspiration or think, using the intended tokenizer. Schema failure gives zero without a judge call. Character count isn't a substitute.",
+        "example": "A long inspiration citation isn't part of the specified length term."
+      }
+    },
+    "qa/post-training:diverge-ideation/mechanism": {
+      "source_sha256": "2de501273ff1d094aa7d9d0f736b995017c8e3f220b7faf015b398d02932be96",
+      "reviewed": true,
+      "fields": {
+        "question": "Why preserve generated order when assigning DIVERGE diversity credit?",
+        "answer": "Each idea sees preceding ideas, so nearest predecessor reflects its actual choice. Reordering changes credit. Evaluation's discounted reordered metric is separate; semantic distance and quality need independent judging.",
+        "example": "A second paraphrase deserves lower novelty under the original order; rearranging does not rewrite its training reward."
+      }
+    },
+    "qa/post-training:rap-walk/basics": {
+      "source_sha256": "8ce379066600818e7228a0b30305ebfb142525921c921035b82aea0d563e2a13",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain opponent identity and preference cycles in RAP-Walk?",
+        "answer": "Win rate loses who was beaten and where preferences conflict. Edge clarity and cycle reliability inform graph credit. Cycles can reflect multi-dimensional tradeoffs, not poor samples.",
+        "example": "A can win on motion, B visuals and C adherence, forming a meaningful cycle."
+      }
+    },
+    "qa/post-training:rap-walk/comparison": {
+      "source_sha256": "9529f2d1ebd76b6516c1d1076cf4b4c12b40f5c4797d46cb6730a23505edb61f",
+      "reviewed": true,
+      "fields": {
+        "question": "How does reliable random walk differ from averaging wins?",
+        "answer": "Propagate from losers to winners with reliability, obtain stationary credit and mix with a win-rate anchor. Minimum entropy prevents excessive concentration. Average wins lack that propagation.",
+        "example": "Beating opponents of different reliability does not yield identical propagated credit."
+      }
+    },
+    "qa/post-training:rap-walk/implementation": {
+      "source_sha256": "2b976e553796f9fa1fa049487bb00e674d50d57775bb8848396069a561b45736",
+      "reviewed": true,
+      "fields": {
+        "question": "May nonconvergent RAP-Walk automatically add PageRank teleportation?",
+        "answer": "No. Report failure per protocol. Use W_ji orientation, restandardize after mixing and detach preference graph/advantages. Teleportation changes stationary credit.",
+        "example": "Reversing loser-to-winner edges can reward opposite nodes even with a normalized matrix."
+      }
+    },
+    "qa/post-training:rap-walk/mechanism": {
+      "source_sha256": "61bba9707c72312cb91aad27de4f5eafe3c7426f3b5ef1f78639e9e34025ead9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep cyclic preferences instead of removing or labeling their videos bad?",
+        "answer": "Cycles can come from different strengths. Preserve opponent identities, edge clarity and cycle inconsistency, propagate reliably from losers to winners and adjust win-rate credit. Keep direction, convergence and entropy protocol; ordinary PageRank differs.",
+        "example": "A beats B, B beats C and C beats A across visual quality, motion and adherence; deleting all loses comparisons."
+      }
+    },
+    "qa/post-training:upturn/basics": {
+      "source_sha256": "cd27d57bd602c7a5b9cca02964f1a53682b68717ab50316410a165aea798e388",
+      "reviewed": true,
+      "fields": {
+        "question": "Does UpTurn learn token edits or where to restart correction?",
+        "answer": "It learns paragraph cut and repair gate with frozen reasoner/encoder. Keep the prefix, insert a fixed new user turn and continue with the reasoner.",
+        "example": "Restart after a bad derivation section instead of changing old token probabilities."
+      }
+    },
+    "qa/post-training:upturn/comparison": {
+      "source_sha256": "bdd8afc341755d441dd2017324f69593b40cbf4656b1250210d227ce5004e290",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a new dialogue turn differ from appending reflection to the assistant message?",
+        "answer": "Role and conditioning boundaries change. End the assistant turn, add a new user instruction and continue within remaining budget. String append doesn't imply equivalent chat semantics.",
+        "example": "A user's request to recheck differs from the assistant continuing to reflect."
+      }
+    },
+    "qa/post-training:upturn/implementation": {
+      "source_sha256": "46fa179483f2b4a7dc4af050cb51aac95cc8e264663eaaffa402815c9a9f76b6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not give UpTurn the full L_max again after cutting?",
+        "answer": "Prefix already consumes budget; suffix gets L_max minus cut position. No parseable answer means gate zero, threshold fixed. Some mechanism seeds still fail; execution is not stable success.",
+        "example": "Full budget after a late cut gives treatment extra generation cost."
+      }
+    },
+    "qa/post-training:upturn/mechanism": {
+      "source_sha256": "0aab29538546f03e5994e10ea048736387deb523dc2be6b8d0b55a8afbbeed37",
+      "reviewed": true,
+      "fields": {
+        "question": "Why learn paragraph cuts rather than fine-tune UpTurn's whole reasoner?",
+        "answer": "Freezing isolates when to insert a correction; rewards come from actual regenerated suffixes at different cuts. Keep prefix, close turn, insert fixed user turn, and obey leftover budget. It isn't whole rewrite or model training. Gate cannot use gold.",
+        "example": "Retry from a paragraph boundary with less remaining budget, not unlimited free retries."
+      }
+    }
+  }
+}

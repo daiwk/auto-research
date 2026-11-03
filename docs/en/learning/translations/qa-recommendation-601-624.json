@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:mbgr/comparison": {
+      "source_sha256": "e5a9bd06e12c4ede919f29b42d9a1fb061ef538fc6ce4e4d2bb4d2a7c27cad87",
+      "reviewed": true,
+      "fields": {
+        "question": "What does business-conditioned MoE share compared with training a separate generator for each business?",
+        "answer": "A shared expert pool learns common patterns, while business-conditioned gates produce specific representations and a conditioned autoencoder preserves SID semantics. Separate models duplicate learning but reduce conflict; shared models risk negative transfer. Genres proxy for businesses, not real cross-product labels. The local lack of gain should be retained.",
+        "example": "Illustration: Shopping and content may reuse one semantic expert at different weights. Separate models cannot exchange knowledge, but too much sharing can let high-traffic content suppress shopping."
+      }
+    },
+    "qa/recommendation:mbgr/implementation": {
+      "source_sha256": "edea54536862629111b8306f3b31d15b3089f215a26f50b231adfdb0078c459e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not fill a missing future business event with padding or the last item in MBGR?",
+        "answer": "There is no observed target for that business in the window. Filling it creates a false transition, so mask its loss. t′ must be the earliest position strictly after the current time with the right business identity, not merely a similar category. Training label availability differs from inference input visibility.",
+        "example": "Illustration: If no purchase follows, the last movie is not a shopping positive. Masking preserves 'unobserved' rather than inventing an answer."
+      }
+    },
+    "qa/recommendation:mdcns/mechanism": {
+      "source_sha256": "4bbc09b3edf5dc6119a793fe3ea0c919a0dc47fe4da6e7dd279c3053e915c00d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why consider Self–Peer disagreement in MDCNS rather than always choosing Self's highest-scoring negative?",
+        "answer": "A high Self score may be bias or an unlabeled positive; repeatedly choosing it reduces diversity. A heterogeneous Peer adds another view, disagreement finds informative candidates, and Teacher distills relationships across the full pool to Self. Disagreement does not establish a negative label; manage false negatives and training stability.",
+        "example": "Illustration: If Self over-scores popular items and Peer disagrees, the discrepancy reveals uncertainty, not proof that every disputed item is irrelevant."
+      }
+    },
+    "qa/recommendation:mdcns/basics": {
+      "source_sha256": "dcd31895ba57762ac30234d9bcaf634a8593f9ad7af099c73665ee7766563b3f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does MDCNS use Self, Peer, and Teacher for negatives?",
+        "answer": "One model's high score can reflect bias or a true unlabeled positive. Peer provides a heterogeneous judgment, Teacher aggregates both, and disagreement identifies hard informative items. False negatives remain possible; distillation over the pool conveys relations a single selected negative misses.",
+        "example": "Illustration: Self and Peer can disagree about a camera's relevance. A missing interaction does not show the user dislikes it."
+      }
+    },
+    "qa/recommendation:mdcns/comparison": {
+      "source_sha256": "9864399e827784f41654ae36c9ce4c31b75d21633013a0aaf6cbbc66c70fd194",
+      "reviewed": true,
+      "fields": {
+        "question": "Why sample randomly from top M in MDCNS instead of DNS's fixed highest-score choice?",
+        "answer": "Always taking the hardest candidate can repeatedly chase one outlier or false negative. Sampling within top M broadens hard-region coverage. Disagreement reranking and multiple losses reduce dependence on one model but still depend on pool quality. The small Markov backbone supports the sampling result only, not large sequence-model reproduction.",
+        "example": "Illustration: If one popular film always tops the negatives, sampling among five hard items avoids centering every update on that suspected false negative."
+      }
+    },
+    "qa/recommendation:mdcns/implementation": {
+      "source_sha256": "aee82ca6aba351213a6da1d3854473acec68fcc8fa29983e02f914850a932f15",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compute MDCNS Teacher KL over the whole pool instead of the chosen negative alone?",
+        "answer": "One negative supplies a local pair; the full Teacher distribution conveys relative difficulty across candidates. Align Self/Peer columns by identity and preserve temperature and τ² scaling. Build unobserved candidates at the training cutoff rather than using test answers to filter them.",
+        "example": "Illustration: Even if one pair is sampled from 30 candidates, KL can convey which of the other 29 are close. A single scalar normalized to one contains no distributional knowledge."
+      }
+    },
+    "qa/recommendation:mdl/mechanism": {
+      "source_sha256": "3131d3f14971ffa4a7665a6a0be50560428da5e388cda87b55619404999b24f4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why tokenize scenario and task in MDL rather than just choosing output heads?",
+        "answer": "Late heads cannot continuously steer feature selection. Tokens let domain queries read relevant fields across layers and task information shape shared representations. Deeper sharing may cause interference; check whether low-traffic settings are overridden by larger ones instead of assuming a unified design helps all tasks.",
+        "example": "Illustration: Home-page clicks and search conversion may need different product evidence. Scenario and task tokens can change early reads instead of splitting one summary at the end."
+      }
+    },
+    "qa/recommendation:mdl/basics": {
+      "source_sha256": "d6c8962429efa08c396bed4ea81a2eca5c87ee4e33684f25c312c459593e54c2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why turn scenario and task into tokens in MDL?",
+        "answer": "They determine which field relations matter, not only which head to use. Domain-feature attention lets scenario queries read features deep in the model, and task tokens and aggregation form specific outputs. Token roles permit interaction but do not ensure intended semantics emerge.",
+        "example": "Illustration: A user's features matter differently for live shopping and short-video viewing. A scenario token can adjust intermediate reads, not just swap the final classifier."
+      }
+    },
+    "qa/recommendation:mdl/comparison": {
+      "source_sha256": "7a5f7dbce4df0212c5179e523c9309965b549f44c07782055dff5746223adc50",
+      "reviewed": true,
+      "fields": {
+        "question": "How does MDL's deep domain-feature interaction condition more than a shallow gate?",
+        "answer": "A shallow gate adjusts already encoded features. Deep interaction repeatedly conditions representation formation, expanding joint modeling at higher compute and negative-transfer risk. Local accuracy improved with a clear rise in head exposure, not evidence that every group benefited.",
+        "example": "Illustration: The scenario can emphasize price first and combine it with budget next. A shallow gate can only reweight previously formed interactions."
+      }
+    },
+    "qa/recommendation:mdl/implementation": {
+      "source_sha256": "a3c19721ad88302d641a01edd1b4b3f4de252da884bdebc80c0d9e140b3b6b4e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why label feature, scenario, and task token identities in MDL?",
+        "answer": "Equal final dimensions do not make evidence, conditions, and predictions interchangeable. Keep attention layout and readout positions aligned. Treating scenario count as batch size or reading the wrong task position silently changes the objective. The local 19 scenarios are proxies, not 19 production businesses.",
+        "example": "Illustration: A purchase token cannot supervise viewing just because both are two-dimensional; verify identity mapping as well as shape."
+      }
+    },
+    "qa/recommendation:melo/mechanism": {
+      "source_sha256": "97273bbddfe2307195e2ae947d761cc8ed106dee302ae37c3dbecfc988b42b03",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Melo ground entities after recommendation and reflect before retrying failures?",
+        "answer": "Fluent music descriptions can name nonexistent or mismatched entities. Grounding validates outputs against the real catalog before returning them. Reflection uses the failure to revise intent or retrieval rather than arbitrarily regenerating. Catalog validity and preference quality need separate measures.",
+        "example": "Illustration: If a plausible song is absent from the catalog, revisit intent and retrieval instead of forcing a near match or treating any valid song as relevant."
+      }
+    },
+    "qa/recommendation:melo/basics": {
+      "source_sha256": "bb1216184d5be913594164f08463ed5491c106dc68976028ed1d1c683a96f9cb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why split Melo into intent, retrieval, recommendation, and explanation nodes?",
+        "answer": "Each has distinct inputs and failure conditions. Grounding maps generated entities to available items, and feedback decides whether reflection is needed. Staging makes repair traceable. A legitimate entity need not be relevant, and a fluent explanation cannot fix a wrong candidate.",
+        "example": "Illustration: Repair mapping for an invented film title before explaining it; if a real film is irrelevant, inspect intent or retrieval."
+      }
+    },
+    "qa/recommendation:melo/comparison": {
+      "source_sha256": "b7c179ea4e0ca38d358b4b663cb08ff7172b4b9d53f7bd1d03693b1fc58f021a",
+      "reviewed": true,
+      "fields": {
+        "question": "How does one reflective retry in Melo trade reliability against unbounded generation?",
+        "answer": "A bounded retry can repair grounding while controlling cost. Repeated generation can hallucinate again or eventually guess by luck. Trigger on catalog validity and confidence, then assess repaired quality independently. The local freshness increase came with overall regression, so repairs alone do not prove improvement.",
+        "example": "Illustration: Check the catalog and retry a bad film name once. Repeating until any answer matches inflates success and latency."
+      }
+    },
+    "qa/recommendation:melo/implementation": {
+      "source_sha256": "969dcdfb57fd08eb6b31dc4a20f7685c04bf7c292224634eca42c153b52de3d6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Melo need a threshold and failure state even if post-grounding argmax always yields a valid entity?",
+        "answer": "Argmax returns some catalog ID even if every score is low. Thresholds detect insufficient evidence, and original entity validity must be logged before mapping. Checking only whether the mapped result exists hides hallucinations. The local path permits one defined retry.",
+        "example": "Illustration: An invented title can map to a real but unrelated movie. Catalog membership after mapping alone misses the error."
+      }
+    },
+    "qa/recommendation:memento/mechanism": {
+      "source_sha256": "f3983f9a0a7e1fe443b093c30a2e1a5bc8351752ee20992d97337ab2db0c9bc4",
+      "reviewed": true,
+      "fields": {
+        "question": "What types of forgetting do Memento's representation and data-replay paths address?",
+        "answer": "Truncated inference history loses distant interests; the representation path retrieves relevant nonredundant events and conditions predictions. Single-use training samples can be forgotten through parameter updates; the data path replays old samples related to the current batch. Local history retrieval does not validate both paths.",
+        "example": "Illustration: Retrieve last year's photography click as input; replay old training examples to relearn a rare category. Reading an old vector is not training replay."
+      }
+    },
+    "qa/recommendation:memento/basics": {
+      "source_sha256": "2559fe9af7ac426f1aef3257fccb070295f129e66db5ebb93e63ac254eb6d941",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are Representation Memento and Data Memento different memory stores?",
+        "answer": "Representation memory retrieves long-term user evidence for a current prediction. Data memory finds forgotten examples related to the current batch and updates parameters again. Storage, updating, and evaluation differ, so implementing either does not complete both loops.",
+        "example": "Illustration: Reading old photography history today is representation memory. Replaying training examples to prevent forgetting a user segment is data memory."
+      }
+    },
+    "qa/recommendation:memento/comparison": {
+      "source_sha256": "40d1f592864818d5c59c72fcf9c9942267a674eeb10784444fd76230d3582cc5",
+      "reviewed": true,
+      "fields": {
+        "question": "How does query-conditioned MMR in Memento trade relevance and redundancy against LastN?",
+        "answer": "LastN uses recency; MMR picks query-relevant events while avoiding duplicates of already selected history. It can recover distant evidence but depends on query quality, with λ balancing relevance and coverage. Local results cover retrieval, not Ember or data replay.",
+        "example": "Illustration: Ten recent lens views are redundant; MMR can keep one and retrieve an older camera-use event, or choose poorly if the query is wrong."
+      }
+    },
+    "qa/recommendation:memento/implementation": {
+      "source_sha256": "becdbe52c90532b0e3fc2e7109050a7251f4c770f654e5c9363987bef8ec5277",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't Memento's local metrics verify Ember transformations and data replay?",
+        "answer": "Only Representation Memento's MMR ran. Ember affine/quadratic transforms, production retrieval, and historical replay were not reproduced. Broader claims need learned conditional parameters, actual replay updates, and matched controls. Choose λ on validation, not test.",
+        "example": "Illustration: Better NDCG after recovering an old photography event supports input evidence, not claims about forgetting after SGD without replay updates."
+      }
+    },
+    "qa/recommendation:memory-layer/mechanism": {
+      "source_sha256": "08f5fe02db177d4c3851f47e15c0e040411d582cecf6db6dcdfa04f81afaf23a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why embed the item cache as a sparse model parameter table in Memory Layer instead of publishing it externally?",
+        "answer": "Fresh tower outputs in training and old cache values at serving differ, and a miss bypass creates a third distribution. Model writeback and reads let training adapt to cache semantics; always-on features score misses. This changes dependencies and train–serve consistency, not guaranteed freshness or zero read cost.",
+        "example": "Illustration: Training on today's item vector but serving yesterday's can drift. An internal cache aligns the read path, while creator or topic features still score misses."
+      }
+    },
+    "qa/recommendation:memory-layer/basics": {
+      "source_sha256": "9828a99e4cd5ae55511e20b9b20df2394385e301b4027aee59da708f6c5a1d41",
+      "reviewed": true,
+      "fields": {
+        "question": "Why read the same representation in training, evaluation, and serving for Memory Layer?",
+        "answer": "Using fresh tower outputs only in training and old external cache online creates mismatch, with misses another distribution. Training writes the internal table; scoring reads it consistently and retains always-on features on misses. Record missingness and age because consistency does not ensure freshness.",
+        "example": "Illustration: Reading one shared table avoids training on the latest movie vector while serving a different version, but entries can still be stale."
+      }
+    },
+    "qa/recommendation:memory-layer/comparison": {
+      "source_sha256": "d76991b77c0fba32201aa5fe697e96d67e45ad4b7ce27ca1a85cdbd5f3a3e42d",
+      "reviewed": true,
+      "fields": {
+        "question": "How does internal writeback change consistency and maintenance versus periodic full external cache publication?",
+        "answer": "Coupling writes to training events avoids mismatch from a separate publisher. External rollout gives central control but can lag and miss items. Internal tables still have capacity, concurrency, and versioning concerns; always-on is a miss fallback. The local structure check does not establish Meta throughput.",
+        "example": "Illustration: Training updates item A immediately while unseen items stay old; periodic publishing changes the whole table at once. Hit rate alone cannot rank these schedules."
+      }
+    },
+    "qa/recommendation:memory-layer/implementation": {
+      "source_sha256": "b0eb57e5d2e9b086ed6b53a1b978ad59f21e8c257962423e0033f5d7f4b5ebe4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is Memory Layer's η=1 writeback not ordinary small-step SGD on M[i]?",
+        "answer": "It overwrites the entry with the tower output rather than moving an old value gradually along a gradient. Read from the table, zero the missing component, and retain general attributes. Check write error, coverage, and staleness; calling the table trainable does not override assignment semantics.",
+        "example": "Illustration: If the new output is [1, 2, 3], the entry should equal it after writeback, not move one tenth of the way from the old value."
+      }
+    },
+    "qa/recommendation:mesh/mechanism": {
+      "source_sha256": "4ae80029a6b4839978519c71037ea66a6eeef3cdf6a4f3db2a93430c9b64cd27",
+      "reviewed": true,
+      "fields": {
+        "question": "Why scale user, item, and context sub-towers separately in MESH before global interaction?",
+        "answer": "Flattening early lets strong common-item gradients obscure fresh and tail signals. Residual cross interactions within each sub-tower retain specialized capacity; a context gate then adjusts user–item affinity per request. A cacheable item tower does not remove candidate-dependent scoring costs.",
+        "example": "Illustration: Model a tail item's content before it competes with popular exposure counts, then judge the item in the request context."
+      }
+    },
+    "qa/recommendation:mesh/basics": {
+      "source_sha256": "f2829c6590afe3289fa48ff346ff8d3c944b2f50e31c393ee3fd3c87bee50185",
+      "reviewed": true,
+      "fields": {
+        "question": "Why scale inside the user, item, and context sub-towers first in MESH?",
+        "answer": "Flat interaction can let frequent evergreen signals dominate gradients. Separate cross interactions retain structure before a context gate adjusts affinity. The aim is more balanced capacity use, not guaranteed fresh/tail gains; inspect cohort and aggregate metrics.",
+        "example": "Illustration: Encode stable preferences, item freshness, and request context separately so popular-item statistics do not drown out context from the start."
+      }
+    }
+  }
+}

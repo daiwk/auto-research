@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:oo-harness/implementation": {
+      "source_sha256": "27d3888fda50badf897d1f189e5cc3bb79b5f4a65af1184ff6dcec8272696842",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must a specialized class start in the same initial environment, whereas selecting Base can reuse its result?",
+        "answer": "Base runs before routing, so its existing result can be used if it is ultimately selected. A specialized class must reset through tool_factory so that it does not inherit Base's progress. Real external effects are not guaranteed to roll back. Trusted local Python classes and allowlisted data isolation are not a security sandbox, and a scripted actor does not demonstrate LLM capability.",
+        "example": "If Base has already created half the files, letting a specialist continue would make it look more successful. A fair comparison starts from the same initial file state."
+      }
+    },
+    "qa/agent-research:agent-s4/mechanism": {
+      "source_sha256": "a5a8aaa2381e0d01335a1604a37b08077edd28819dbe27a941b8660832280fd7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain a temporarily low-scoring child interface repository in the population rather than keeping only changes that strictly improve on their parents?",
+        "answer": "Evolutionary search may have to pass through local valleys or combine different changes. Retaining descendants lets later mutation and crossover reuse their structure. Validation scores guide parent selection, but validation traces and labels are not exposed to the Meta-Agent. What evolves is the action and observation interface itself; the search is not greedy acceptance of the best patch in each round.",
+        "example": "An interface change may perform modestly on its own but work well with observation compression from another lineage. Immediately discarding all low-scoring children eliminates that opportunity."
+      }
+    },
+    "qa/agent-research:agent-s4/basics": {
+      "source_sha256": "17ffbd427109a1e0ce4454ae95bb0e585506c9b8e6d081d48515ce5e56ef5895",
+      "reviewed": true,
+      "fields": {
+        "question": "How does evolving the interface differ from accumulating skills composed from existing tools?",
+        "answer": "Skills generally combine procedures over a fixed action and observation interface. S4 lets a Meta-Agent change interface code and usage knowledge, changing what the task agent can see and do. The task model and harness are held fixed to isolate the interface effect, but a new interface still needs execution on real tasks; renaming the repository version is not enough.",
+        "example": "Replacing cell-by-cell editing with bulk operations over a region changes the interface. Recording that cells should be sorted before editing is usage knowledge for the existing tool."
+      }
+    },
+    "qa/agent-research:agent-s4/comparison": {
+      "source_sha256": "cb861665f5c29f98bede27eabf5bc358d918dfb4bc409267072ff859a20389f2",
+      "reviewed": true,
+      "fields": {
+        "question": "How do single-parent mutation and two-parent crossover differ in where they get their changes?",
+        "answer": "Mutation modifies the interface and usage knowledge of a single parent. Crossover combines structures or experience from two different parents. Both construct candidates from unlabeled training traces; private validation outcomes are used only for population selection, not handed to the Meta-Agent as answers. Crossover broadens the available combinations but can introduce incompatibilities, so freeze the resulting child before independently evaluating it.",
+        "example": "One parent improves screenshot observations and another improves bulk editing. Crossover can attempt both, whereas single-parent mutation works from just one current repository."
+      }
+    },
+    "qa/agent-research:agent-s4/implementation": {
+      "source_sha256": "a6afba73f52753b219dac5cecf25af14d5960c71c563774cfd0c9e794fafaac2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does BuilderContext omit validation diagnostics, and why does low-score pruning retain lineage?",
+        "answer": "Validation is used only to select parents. Passing diagnostics would turn a protected selection set into development feedback. Pruning revokes parent eligibility while retaining audit history and final candidates, including failures. The local controller uses trusted callbacks and synthetic tasks; it neither executes arbitrary interface source nor demonstrates improvement in a real GUI.",
+        "example": "If the Meta-Agent sees filenames from validation failures and fixes them directly, it is no longer developing from the permitted training traces. Deleting low-scoring records would also conceal the cost of search."
+      }
+    },
+    "qa/agent-research:aptamer-lab-loop/mechanism": {
+      "source_sha256": "ad9fbb6954df15b03a2e8b3c07f47f3802f15c48893ffd78fcea4788c61b6bf5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't high computational-proxy scores replace real experimental feedback, or be compared across rounds as fixed-test gains?",
+        "answer": "Computational scores can disagree with physical measurements. The point of the loop is that new measurements can refute predictions and preserve evidence of failures. Candidates and strategies differ across rounds, and hit rates depend on the selected distribution, so these are not directly comparable machine-learning scores on the same test set. The work assesses research orchestration and does not imply specific laboratory procedures.",
+        "example": "If one round tests only the proxy's favorite candidates and the next focuses on exploration, different hit rates may reflect selection rather than improved generalization."
+      }
+    },
+    "qa/agent-research:aptamer-lab-loop/basics": {
+      "source_sha256": "49c853149c5de76a95b949e2f6c33876d54d7d951929386a50576a3987fd83ba",
+      "reviewed": true,
+      "fields": {
+        "question": "Why should aptamer design repeatedly connect computational proposals to real experimental feedback?",
+        "answer": "A computational model estimates candidate properties from existing data; actual molecular behavior may depend on factors it did not model. This work uses real measurements to test proposals and inform the next round, making experimentation rather than a predicted score the decisive feedback. Changing candidates and selection conditions across rounds means progress in the loop does not automatically demonstrate stronger performance on a fixed test set.",
+        "example": "If a candidate favored by the model performs modestly when measured, use the counterexample in the next round. Raising its predicted score does not alter the physical measurement."
+      }
+    },
+    "qa/agent-research:aptamer-lab-loop/comparison": {
+      "source_sha256": "3a017fc16a35896d51f38ef7456afbf85d59bb2667f62f2ddfc49629fcf6d60e",
+      "reviewed": true,
+      "fields": {
+        "question": "What information is added by a new physical measurement versus repeated reanalysis of existing experimental records?",
+        "answer": "Reanalysis may improve interpretation or candidate selection but creates no new physical observation. A new measurement tests a previously unverified candidate and may expose model omissions. Both can support research, but recomputation is not an independent experiment and a simulated proxy cannot replace the experimental endpoint. For cross-round comparisons, preserve changes in candidates and measurement conditions.",
+        "example": "Reranking ten existing results still leaves ten measurements. Testing an eleventh candidate adds a genuinely new piece of external feedback."
+      }
+    },
+    "qa/agent-research:aptamer-lab-loop/implementation": {
+      "source_sha256": "020e3d984150f51412e07ce9be04d246f24fec01ed7fdd17850c38b01bb88a7a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't the local record replace the physical endpoint with simulated measurements or predicted scores?",
+        "answer": "Real experiments can falsify the computational proxy, a defining feature that would disappear if they were replaced. The local entry documents research orchestration and cost only; it includes no model, GPU receipt, capability metric, or Evolve integration. A numeric fixture cannot stand in for a specialized laboratory or feedback that takes days, and no experimental operating procedure is provided.",
+        "example": "Randomly generating a 'measurement passed' label can test a messaging interface, but does not establish physical efficacy or complete an experimental loop."
+      }
+    },
+    "qa/agent-research:terminal-rsi/mechanism": {
+      "source_sha256": "d8d4176ae436a05781fb7aa06b4884f01d4528e7132ce201b965608ebd074e62",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does TB-GAE decay by interaction turn rather than observation text length?",
+        "answer": "Longer tool output does not imply more elapsed decision steps. Treating a long observation as many recurrence nodes would arbitrarily over-discount credit for earlier actions. Recurrence runs only over generated tokens, with no decay within a turn and discounting across turns. Chunk continuation requires both value and advantage; a computational boundary is not an environment termination.",
+        "example": "Two commands can produce the same outcome with ten lines or a thousand lines of logging. Verbosity alone should not reduce earlier actions' reward credit."
+      }
+    },
+    "qa/agent-research:terminal-rsi/basics": {
+      "source_sha256": "7a4d024db25d5fc774f70c2ebb5e915b8541a5956c8c184ebb1645dc38761ef7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do long terminal-agent tasks present a harder reinforcement-learning feedback problem than single-turn answers?",
+        "answer": "Terminal tasks include commands, long observations, and state changes across turns. Success is often known only at the end, making it hard to assign credit to early actions; failure may also come just short of completion. Terminal RSI structures rewards and advantages around this interaction to support continued training. Partial progress is not completion, and observation length is not a direct measure of interaction time.",
+        "example": "An agent fixes the code but never runs the final test. A terminal failure label alone hides useful earlier actions; training should use evidence of progress without relaxing the completion standard."
+      }
+    },
+    "qa/agent-research:terminal-rsi/comparison": {
+      "source_sha256": "15e8ce1ab0db15ae05192a110bef1c902c95f40863e352bb203fd410d1c679fa",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do SPR and the plain partial-score FDR method rank outcomes differently?",
+        "answer": "FDR scales partial scores by a family divisor and has no fixed upper bound, so a high-partial-score failure can outrank a success. SPR adds strict success and constrains the partial component below one, keeping failures below strict successes. This ranking property is not a proof about policy-gradient variance or potential invariance, and the paper's overall training gains cannot be attributed to this formula alone.",
+        "example": "A high-scoring incomplete attempt can exceed one with FDR. With SPR, it stays below the minimum score of any strict success."
+      }
+    },
+    "qa/agent-research:terminal-rsi/implementation": {
+      "source_sha256": "179f1e5603a6cf8d426180d85d4f196c4a3076e44ae0387d964f7c2772d7949b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't a value bootstrap alone enough when GAE is computed in chunks?",
+        "answer": "A chunk boundary does not terminate the environment. Pass both the next value and next advantage to retain the tail of the trace; emit terminal reward only once. Observations are excluded from the recurrence. The local implementation is a numeric operator without actor, critic, RSR, or real terminal training. Equivalence in the unit-clock case does not show that TB-GAE was deployed online.",
+        "example": "If the tail advantage is reset after splitting at the eleventh generated token, credit from later rewards no longer propagates backward equivalently, even with a correct next value."
+      }
+    },
+    "qa/agent-research:rsiflow/mechanism": {
+      "source_sha256": "bd6f319d7e32c7f1f5263657faaa2390ca1e5046087c333f8986b8426979d191",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must all RSIFlow candidates start from the same frozen parent?",
+        "answer": "If the first candidate's changes leak into the second, improvements cannot be attributed to the selected Model, Harness, or Artifacts intervention. A shared parent and task batch provide a paired baseline. Only valid, strictly improving candidates are accepted; after a failure, retry from the original parent. Skills may come from training experience, but report-set scores must not leak into maintenance.",
+        "example": "Evaluate a prompt change and a model replacement separately against the same parent, rather than attributing the cumulative improvement of the second run to the model alone."
+      }
+    },
+    "qa/agent-research:rsiflow/basics": {
+      "source_sha256": "851b5b0523d3f0ad4834102203be25219df998f6e00de1239953fbabd42e49c0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does RSIFlow first diagnose what kind of object is responsible when automated research fails?",
+        "answer": "Poor results can stem from the model, the execution process, or a defect in the current artifact. Always editing prompts or always retraining would misallocate resources. RSIFlow uses execution evidence to select an intervention related to the failure. Both the diagnosis and the candidate need actual verification: choosing a branch does not show that its bottleneck was resolved.",
+        "example": "Fix the artifact if its output file has the wrong format; change the harness if the tool flow repeatedly omits verification. Neither necessarily requires retraining model weights."
+      }
+    },
+    "qa/agent-research:rsiflow/comparison": {
+      "source_sha256": "17fbd47450a6c47c26d4c957502961ee25f1ba069b1260c351906a9caaced600",
+      "reviewed": true,
+      "fields": {
+        "question": "What layer of future execution does each Model, Harness, or Artifacts intervention change?",
+        "answer": "Model interventions target the model; Harness interventions change how execution is organized; Artifacts interventions act on deliverables. Their scopes and inherited state differ. Comparisons must state what changed: a one-off file fix is not general policy learning, and out-of-scope changes cannot be mixed into the designated branch. The local variant uses trusted callbacks and skill memory.",
+        "example": "Fixing one report changes only that artifact. Changing a check that runs on every task may affect future tasks, but transfer still needs verification."
+      }
+    }
+  }
+}

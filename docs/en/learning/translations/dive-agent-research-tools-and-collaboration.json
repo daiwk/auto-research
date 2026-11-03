@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/agent-research/tools-and-collaboration": {
+      "source_sha256": "d335c16a7b74b5355a83c149b56b6aca302532a762d39b48bfff61cb85bd0b76",
+      "reviewed": true,
+      "fields": {
+        "title": "From making calls to delivering results: Tool interfaces, reliability, and collaboration contracts",
+        "thesis": "Toolformer learns when to call, SWE-agent designs action interfaces, and RATED addresses reliability among relevant tools. AutoGen programs messaging, MetaGPT structures role deliverables, and World of SWEcraft checks collective output on hidden downstream dependencies. Any layer can fail; a valid call format is not end-to-end completion.",
+        "axis_0": "Whether improvement targets call policy, interaction interface, tool selection, or team protocol",
+        "axis_1": "Whether feedback comes from language loss, actual execution, structured deliverables, or hidden downstream tasks",
+        "axis_2": "Whether collaboration state is dialogue, explicit intermediate artifacts, or persistent repository assets",
+        "axis_3": "How failures and resources are included in delivery metrics"
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/comparison/agent-research:toolformer": {
+      "source_sha256": "b647fa19e46312c41f48cc679d0d82c5ac053d8435d2130789e7d5393097a4e4",
+      "reviewed": true,
+      "fields": {
+        "position": "Samples API candidates, filters them by how actual returns improve later token loss, and continues language-model training.",
+        "tradeoff": "Training utility does not imply reliable deployment tools. A deterministic local utility stands in for GPT-J loss, without full continued training."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/comparison/agent-research:swe-agent": {
+      "source_sha256": "2d2adc926e45d9d05d6367b62a35fe8e9af2bb260038f61d1363650a3ba5ae34",
+      "reviewed": true,
+      "fields": {
+        "position": "Uses a dedicated ACI for search, viewing, precise editing, and testing, making software tasks repeatable action loops.",
+        "tradeoff": "A lower interaction burden does not replace comprehension or verification. Real local temporary repositories form a microbenchmark, not official SWE-bench resolved rates."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/comparison/agent-research:autogen": {
+      "source_sha256": "b0d9fb4d848521e9830b0d3b55eb978a6a65ec9e4b538ad05f79cdb19041d9b8",
+      "reviewed": true,
+      "fields": {
+        "position": "Programs messages with ConversableAgent, reply policies, and stop conditions, supporting group chats and nested conversations.",
+        "tradeoff": "Flexibility still needs protocol design. More roles do not guarantee better collaboration. The local path executes messaging and handoff, not the full runtime."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/comparison/agent-research:metagpt": {
+      "source_sha256": "6912e296064981aed07ff441968de1c52b77b1637846a00140a526efa8962cc5",
+      "reviewed": true,
+      "fields": {
+        "position": "Encodes software SOPs into role workflows, with structured intermediates at each step for downstream use and verification.",
+        "tradeoff": "Deliverable structure limits free-form chat but downstream roles can inherit upstream errors. Real local editing and tests are not a full LLM team."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/comparison/agent-research:rated": {
+      "source_sha256": "19f334b007513a48febcf65fbf9f314fa0e189f6e1a3a207de27b4e10cb5175f",
+      "reviewed": true,
+      "fields": {
+        "position": "Uses frozen dual encoders for semantic Top-K, then reranks using metadata and per-tool discounted LinUCB from actual feedback.",
+        "tradeoff": "Only chosen tools have observed feedback; uncalled tools cannot receive fabricated returns. Short encoder training ran locally, but authorization binding failed and original ecosystem capability was not established."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/comparison/agent-research:world-of-swecraft": {
+      "source_sha256": "642bd46edf12d8d1c5800640ad7f980791c16907d1cd013c2c4edb26983247a7",
+      "reviewed": true,
+      "fields": {
+        "position": "Creates a software world of persistent sessions, issues, PRs, and package dependencies. Hidden downstream projects install frozen versions to assess collective artifacts.",
+        "tradeoff": "Local microbenchmark success does not establish downstream gains, and instruction counts are not wall time. The expensive full 55K-session environment did not run locally."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/analysis/0": {
+      "source_sha256": "1b2d91cc583863fc0679d5eb52b244ae1ba91bb4ef6bca88ef2adf1a85b5fedc",
+      "reviewed": true,
+      "fields": {
+        "title": "Choosing a tool does not establish that it works",
+        "body": "Toolformer filters calls by prediction gains, supplying policy-training signal. SWE-agent organizes executable interfaces and their return formats. RATED separates semantic relevance from recent reliability. Record willingness to call, valid format, actual interface success, and task completion independently. Relevance does not compensate for a broken service, and successful calls do not supply counterfactual rewards for unchosen tools."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/analysis/1": {
+      "source_sha256": "be48dd9f90bc5c5ef721490fd1dfadd7ae3c73082b4529541834a543661d5900",
+      "reviewed": true,
+      "fields": {
+        "title": "Messaging protocols, intermediate artifacts, and ecosystem effects",
+        "body": "AutoGen programs who replies and when to continue or stop. MetaGPT further constrains role inputs and outputs with SOP deliverables. World of SWEcraft widens evaluation to long-term maintenance across repositories: package tests can pass while downstream consumers break. These methods address control, information handoff, and external effects respectively. Counts of messages, roles, or artifacts do not replace downstream evidence. Long-lived collaboration needs persistent assets and session budgets rather than an indefinitely growing chat."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/analysis/2": {
+      "source_sha256": "cecb6ed5630ed0d8d4786dd63ee541aab352e9f777778a8769de82086d06b567",
+      "reviewed": true,
+      "fields": {
+        "title": "October 29: New method and source changes",
+        "body": "Meta's official retrieval-programs repository is now verifiable, updating RPL's prior open-source record. The main repository is CC-BY-NC4; vendored retrieval and training components retain their licenses. Public code does not make the local typed grammar cover arbitrary Python, cross-turn state, neural retrieval, or RL. No source was copied and the existing L1 evidence did not change."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/question/usefulness-versus-reliability": {
+      "source_sha256": "011d9d4cd8a2b283333cdd7db6dc90f5eed4d69df61af72128acd59c1d0b0cdc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why might RATED deprioritize a tool whose API call Toolformer selected as useful?",
+        "answer": "Training selection shows that returned values helped prediction, not continued service availability or stable argument behavior. RATED first restricts to relevant tools, then updates reliability from selected tools' actual successes, errors, and timeouts using discounting. Training usefulness and current executability are separate, and one failure cannot assign negative rewards to all untried tools.",
+        "example": "An exchange-rate API can help training and time out repeatedly in deployment. It remains relevant, but actual reliability should affect future choices."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/question/message-protocol-versus-artifact": {
+      "source_sha256": "808ee1b2a210166c65a5760aaed7346953fb7da0b4233a40736afff41fd65e8f",
+      "reviewed": true,
+      "fields": {
+        "question": "If AutoGen already has programmer and tester roles, why do MetaGPT and SWE-agent emphasize structured deliverables and ACI?",
+        "answer": "Role names specify responsibilities, while AutoGen's replies and stopping organize interaction. MetaGPT specifies deliverables for requirements, design, and implementation to reduce drift in free chat. SWE-agent defines concrete viewing, editing, and testing actions. Control, information contracts, and action interfaces are complementary, not interchangeable.",
+        "example": "A tester can know when to reply without a clear interface specification. Even with a complete spec, an imprecise editing command can change the wrong code."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/question/local-tests-versus-downstream": {
+      "source_sha256": "5cd02f68fb38110f8986cf3bdffb05775ffab7e31298fbeef19b0a2d50fec09b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does World of SWEcraft use hidden downstream packages after MetaGPT or SWE-agent repository tests pass?",
+        "answer": "Own tests cover maintainer-visible contracts and may only improve visible microbenchmarks. API changes can break real consumers. Hidden downstream checks install frozen release versions to assess collective delivery. Retain failed packages in speed accounting and declare strict/carry semantics. A local micro pass does not establish ecosystem capability.",
+        "example": "Renaming an argument and updating library tests can still break consumers using the old name; downstream checks reveal it."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/question/oct29-method-boundary": {
+      "source_sha256": "ecd4145468137853651f88b808e2d4c44bd10acc1cd8c3d5f8b0e15315009575",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain local RPL component limitations after finding the official repository?",
+        "answer": "Source completeness and execution fidelity are different. Published training code does not make the existing constrained SDK execute the full policy, neural retrieval, or distillation. Future integration needs separate cost, execution, and license checks.",
+        "example": "Learning the official training entry point does not turn local retrieval-program syntax tests into multi-hop QA evaluation."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/update/2026-10-27/0": {
+      "source_sha256": "8f00651bd254c5437d085c94f5678f820e6ebf1acba56884732a5e810f13a896",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial version: compared call learning, ACI, message orchestration, SOP deliverables, reliability reranking, and hidden downstream evaluation."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/update/2026-10-29/1": {
+      "source_sha256": "f0b45f4cdc33bf9367a5b1f97d726f4c0ef3a38a16b185ee43d6d55c10555ef4",
+      "reviewed": true,
+      "fields": {
+        "summary": "Meta's official retrieval-programs repository is now verifiable, updating RPL's prior open-source record. The main repository is CC-BY-NC4; vendored retrieval and training components retain their licenses. Public code does not make the local typed grammar cover arbitrary Python, cross-turn state, neural retrieval, or RL. No source was copied and the existing L1 evidence did not change."
+      }
+    }
+  }
+}

@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:cross-script-knowledge-transfer/basics": {
+      "source_sha256": "37416ddc86a13234ad8e1d2b6788f69163fbf75fb57243fb4b852794817ba62f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does cross-script knowledge research test more than translation?",
+        "answer": "Another script can affect entity recognition, retrieval of parametric facts and reasoning expression. Translation is one factor. Regression/interventions separate them; this isn't a new RL algorithm.",
+        "example": "Failing on a transliterated name doesn't prove the model never learned facts about that person."
+      }
+    },
+    "qa/post-training:cross-script-knowledge-transfer/comparison": {
+      "source_sha256": "0734bd761425fdc02ef6f0bd21c654e325ab984189be1cf25cf401af7b71b67f",
+      "reviewed": true,
+      "fields": {
+        "question": "Can inference transliteration replace training-time entity interventions?",
+        "answer": "No. Training interventions study retrieval/learning pathways; transliteration changes current input and may bypass difficulty. String rules or a small classifier cannot stand in for LoRA and semantic transfer.",
+        "example": "Normalizing names to a familiar script can help without teaching cross-script transfer."
+      }
+    },
+    "qa/post-training:cross-script-knowledge-transfer/implementation": {
+      "source_sha256": "8b25df272d05d1c1915d440338ebc7f8a1efcb7307068f3a23bdfedd71d8de43",
+      "reviewed": true,
+      "fields": {
+        "question": "Is there an executable local knowledge transfer operator?",
+        "answer": "No. Literature only; real LM semantics and LoRA training are not implemented. Equations/generic SFT don't imply reproduction, and prompts must not include test answers.",
+        "example": "A working transliteration function is not the paper's parametric retrieval mechanism."
+      }
+    },
+    "qa/post-training:cross-script-knowledge-transfer/mechanism": {
+      "source_sha256": "56d8597efb4db2a0248429886d86e4d42599466ac8026e55cedcc258415be28f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't mechanical transliteration determine whether knowledge exists?",
+        "answer": "Script changes can affect identity recognition, retrieval and expression, which before/after outputs cannot disentangle. The paper uses regression, training entity prompts and actual LoRA. Local reference notes are not capability.",
+        "example": "Failure on a name in another script may be entity mismatch; hints diagnose but don't establish transfer training."
+      }
+    },
+    "qa/post-training:prompt-level-distillation/basics": {
+      "source_sha256": "8b061a4eed37ff646814f5963d095d9792a07b5405397139e6d64441f958af2c",
+      "reviewed": true,
+      "fields": {
+        "question": "Where does PLD store knowledge without parameter fine-tuning?",
+        "answer": "The teacher abstracts, clusters and revises readable system rules. A student uses frozen instructions at inference. Rules are learned artifacts despite unchanged weights.",
+        "example": "Package date-processing lessons as system instructions."
+      }
+    },
+    "qa/post-training:prompt-level-distillation/comparison": {
+      "source_sha256": "1ab1d0774fe6a82a070610006f49a566d23f1db9c045e041cf07088447ee9226",
+      "reviewed": true,
+      "fields": {
+        "question": "How does semantic DBSCAN differ from string deduplication?",
+        "answer": "Cluster paraphrased micro-rules and filter noise rather than only exact repeats. Conflicts still require training-error revisions; lists don't ensure consistency.",
+        "example": "Differently worded unit-conversion rules can share a cluster."
+      }
+    },
+    "qa/post-training:prompt-level-distillation/implementation": {
+      "source_sha256": "f273c713134224e36ae92492fdb851374cc5b6eb24d42fdca7b671948034f3c5",
+      "reviewed": true,
+      "fields": {
+        "question": "When freeze PLD rules, and can test feedback revise them?",
+        "answer": "Extract/repair on train, use validation for convergence and freeze before test. Prompt changes can leak without weight updates; track versions/provenance.",
+        "example": "Adding a test-specific date exception and rescoring is not independent evaluation."
+      }
+    },
+    "qa/post-training:prompt-level-distillation/mechanism": {
+      "source_sha256": "ad7f2d3644193298fcb88fc700ad17793a2313a7e2d4957c1115f3d4941f1873",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate train/validation/test without student weight updates?",
+        "answer": "Labeled examples shape rules through extraction, clustering and revision. They carry learned information. Validate and freeze, then never patch from test answers. PLD compiles reasoning into instructions, not parameters.",
+        "example": "Freeze date normalization after validation; adding a test-gold exception leaks even without gradients."
+      }
+    },
+    "qa/post-training:chord/basics": {
+      "source_sha256": "db8b0ba31e33724d0bd92c1e7b55cdae8b755a4dca4bead8f6535fd4c9826808",
+      "reviewed": true,
+      "fields": {
+        "question": "Why anneal CHORD SFT auxiliary weight during RL?",
+        "answer": "Expert demonstrations stabilize early exploration; excessive later imitation can restrict it. Dynamic weighting and token uncertainty ease the handoff without abrupt shift.",
+        "example": "Begin with more standard examples, then let outcome reward guide increasingly."
+      }
+    },
+    "qa/post-training:chord/comparison": {
+      "source_sha256": "ff88294e398ee737deb53e37e15faf09e3e77d93797a4a3376c02eadc6101997",
+      "reviewed": true,
+      "fields": {
+        "question": "Is CHORD the same as PIVOT's per-question switching?",
+        "answer": "No. CHORD blends losses with annealed supervision; PIVOT routes prompts by teacher perplexity to separate objectives. Granularity and schedule differ.",
+        "example": "One can apply both losses to a prompt; the other chooses its route."
+      }
+    },
+    "qa/post-training:chord/implementation": {
+      "source_sha256": "939571bf6c6abe8e44e0826ed39c34ca0af0869ab1cc81919db8b817abe2c853",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local CHORD gold candidate model real token uncertainty?",
+        "answer": "No. Deterministic expert proxy; no LLM uncertainty model. Track expert off-policy vs student rollout and anneal as specified; keep expert answers out of evaluation inputs.",
+        "example": "Fixed candidate labels don't estimate uncertainty at every long-text position."
+      }
+    },
+    "qa/post-training:chord/mechanism": {
+      "source_sha256": "5348d726b3fd323106c18caff42bad2b7cd984e334e4cdff25dd083ad91952a1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why taper expert supervision instead of switching off SFT at once?",
+        "answer": "Early guidance stabilizes exploration, but prolonged imitation constrains it. Annealing and uncertainty weights allow a gradual transition while monitoring source shift. Blending isn't universally better; local proxy isn't an uncertainty model.",
+        "example": "Give learner less expert help as it improves rather than always equal help or an abrupt cutoff."
+      }
+    },
+    "qa/post-training:spiral/basics": {
+      "source_sha256": "5c9cee90d9e9c5d5ee7b46cc5335d649991bf70cae0bf15772bf3e8081eb7e4b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why let one SPIRAL model propose and solve games?",
+        "answer": "An adversarial, decidable zero-sum game creates a curriculum as opponents evolve. Roles need distinct rewards and explicit rules; proposer cannot declare outcomes.",
+        "example": "One role creates a position, another tries to solve it, and a program judges."
+      }
+    },
+    "qa/post-training:spiral/comparison": {
+      "source_sha256": "294cdcd32985c62f3c2569ca7ab84c12b6de4437db6c9f570bfc141fc55ecd99",
+      "reviewed": true,
+      "fields": {
+        "question": "What are limits of self-play vs fixed hard-problem banks?",
+        "answer": "Self-play adapts but can get trapped in game-specific tricks. Fixed banks have defined coverage but no evolving opponent. Game gains don't imply general reasoning.",
+        "example": "Winning a word game needn't improve math, retrieval or tools."
+      }
+    },
+    "qa/post-training:spiral/implementation": {
+      "source_sha256": "2ca64d941beba6c5cf3915aebe1c17fbd515296c1aa9734369dbaa8e749b33ae",
+      "reviewed": true,
+      "fields": {
+        "question": "Why preserve zero-sum rewards across SPIRAL roles?",
+        "answer": "One outcome gives opposite credit under aligned states/rules. Rewarding both for the same victory changes the game. Local kernel isn't large multi-round training.",
+        "example": "A proposer win cannot also be a solver win."
+      }
+    },
+    "qa/post-training:spiral/mechanism": {
+      "source_sha256": "e214b888fe64386a8fe4a6d65eff1547571f0f7eab63c91f012c52a27e500cfe",
+      "reviewed": true,
+      "fields": {
+        "question": "Why require automatically decidable game rules in zero-sum SPIRAL?",
+        "answer": "Adversarial progress creates curriculum, but independent rules must decide wins. Zero-sum incentives do not guarantee broad reasoning coverage. Local state/objective checks don't reproduce self-play training.",
+        "example": "The proposer can't change rules midgame to make every solution lose."
+      }
+    },
+    "qa/post-training:absolute-zero/basics": {
+      "source_sha256": "f4de3396f63737c85318f45b7935236e69dd19424d8cb2f54d275812cdc7a155",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Absolute Zero still need an executable verifier?",
+        "answer": "Generated tasks and solutions aren't truth. Program execution provides independent reward. No human item labels isn't no supervision; task executability and verifier quality bound scope.",
+        "example": "Run generated code rather than trust its claimed output."
+      }
+    },
+    "qa/post-training:absolute-zero/comparison": {
+      "source_sha256": "7dda13d9bd9a2e9c021f26ce62f782c08074a57b11f1daf56c22037d46efc77c",
+      "reviewed": true,
+      "fields": {
+        "question": "How does making harder tasks differ from a capability-boundary curriculum?",
+        "answer": "Too hard can yield all failures and no signal. Use verifiable challenges near current ability. Legal format and novelty don't establish teaching value.",
+        "example": "A task no one can solve at the budget may be worse for learning than a moderate challenge."
+      }
+    },
+    "qa/post-training:absolute-zero/implementation": {
+      "source_sha256": "4182ecf8f92eafaee873a69dc8a577195e6952d60971eb74fbffc5fc3211f836",
+      "reviewed": true,
+      "fields": {
+        "question": "Can Absolute Zero show solver answers saved during task generation?",
+        "answer": "No. Keep execution results on verifier side; solver sees public task only. Local curriculum/state checks aren't large-model capability evidence.",
+        "example": "Don't append actual output to the program-output prediction prompt."
+      }
+    },
+    "qa/post-training:absolute-zero/mechanism": {
+      "source_sha256": "659974ac52e21d8a3c4c5d0c5831c4833021a4d10482fe0a36532ac72cc14172",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does a self-generated Absolute Zero curriculum still need verification?",
+        "answer": "Proposer creates tasks, solver answers and program execution supplies independent rewards, replacing human annotations. Verifiable tasks still supervise; exposing saved answers breaks the loop. Local diagnostics aren't full training.",
+        "example": "Generate executable code and predict output, then run it to grade instead of showing stored stdout."
+      }
+    },
+    "qa/post-training:raft/basics": {
+      "source_sha256": "c2ed26d381bb2b4ddb0cb8238c0a0ed022e5883301221affc8598814ed147e37",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep generating fresh RAFT candidates from current policy?",
+        "answer": "Fixed SFT data can't follow improvement. Resample, rank by reward and supervise better behavior next round. Coverage still limits which outputs can be chosen.",
+        "example": "Improved summarization can generate better candidates for later training."
+      }
+    },
+    "qa/post-training:raft/comparison": {
+      "source_sha256": "53b09ce604e0d5711874422cef16c2822f32dc8af3db47fe4f1ab7fc5367f181",
+      "reviewed": true,
+      "fields": {
+        "question": "How does reward enter RAFT differently from PPO?",
+        "answer": "RAFT uses reward to select texts and then applies maximum likelihood. PPO uses advantages and probability ratios directly in policy objective. Selection and continuous weighting differ.",
+        "example": "A high score can decide archive admission without proportionally increasing CE."
+      }
+    },
+    "qa/post-training:raft/implementation": {
+      "source_sha256": "13359ed05fb26f5905f2e609ec56f6466c0a645b5b1b1d035da9d610bc9c16f1",
+      "reviewed": true,
+      "fields": {
+        "question": "How isolate RAFT selection from evaluation?",
+        "answer": "Log reward model and rollout version, select among same-prompt candidates then update policy. No test answers for sorting. Local candidates aren't a real generator or reward model.",
+        "example": "Training on choices made with test correctness invalidates held-out gains."
+      }
+    },
+    "qa/post-training:raft/mechanism": {
+      "source_sha256": "8026f812f436a183ee70485e435ac22be43688d875133ac675e81cc794b54ad4",
+      "reviewed": true,
+      "fields": {
+        "question": "How does reward selection followed by maximum likelihood differ from direct policy gradients?",
+        "answer": "Rank sampled replies with the reward model and supervise selected text; scores determine selection, not per-action gradient weights. Resample with the next policy. Judge bias and missing candidates persist; local tests cover the iteration state.",
+        "example": "Learn the highest-rated candidate summary; absent good summaries can't be chosen and judge errors can be copied."
+      }
+    }
+  }
+}

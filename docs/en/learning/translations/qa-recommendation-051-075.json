@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:airbnb-ebr/mechanism": {
+      "source_sha256": "ff72eeca8c574f76658a04241afaef7089fa95b14b62df28107e00407ec23845",
+      "reviewed": true,
+      "fields": {
+        "question": "Why build hard negatives from search, browsing, and booking journeys?",
+        "answer": "Random listings often differ obviously by geography or conditions. Browsed but unbooked listings are closer decision alternatives, though not necessarily disliked; explain sampling and retain serving filters/versioning.",
+        "example": "Within a Paris trip, similar local listings are harder than Tokyo, but sold-out homes are not necessarily irrelevant."
+      }
+    },
+    "qa/recommendation:airbnb-ebr/basics": {
+      "source_sha256": "36dd2091f7b182bb04c5e2f198f90b15464bda590f14494a04012bd9de314e3f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine query/listing towers with geography and inventory filters?",
+        "answer": "Dot-product retrieval finds relevant homes, but availability and destination remain request-specific constraints. An index accelerates matching without making eligibility inferable from similarity.",
+        "example": "A highly relevant apartment can be in the wrong city or unavailable."
+      }
+    },
+    "qa/recommendation:airbnb-ebr/comparison": {
+      "source_sha256": "b31aa7803827e2c483b125a9936dd9b5e4af49fa92bef354f0053d3d3f7da724",
+      "reviewed": true,
+      "fields": {
+        "question": "How does traffic replay differ from static negatives?",
+        "answer": "Replay reconstructs real requests, journey candidates, and filters; static negatives may be too easy. Replay better matches first-stage competition but not live feedback or changing inventory.",
+        "example": "Distinguish New York listings available on matching dates, not just New York versus nationwide random homes."
+      }
+    },
+    "qa/recommendation:airbnb-ebr/implementation": {
+      "source_sha256": "4494561b21b22a457a17acd02bad841977412fc8d12dc2a3efee8e46f29f8783",
+      "reviewed": true,
+      "fields": {
+        "question": "How match hard negatives and eligible candidates with targets?",
+        "answer": "Use a positive from the same request and reasonable unselected journey listings in the contrastive denominator. Keep serving versions consistent. Local movie proxies lack inventory/geography.",
+        "example": "Two viewed but unbooked nearby homes are harder than an unavailable home in another city."
+      }
+    },
+    "qa/recommendation:akt-rec/mechanism": {
+      "source_sha256": "0fe8f83e1ab9ab98032f331d8d906b0be1d8c2fab2fd167c7a8e5761bbb9c151",
+      "reviewed": true,
+      "fields": {
+        "question": "Why teach tail items from head items asymmetrically and stop teacher gradients?",
+        "answer": "Heads have richer interactions. Weight tail-to-head transfer while preventing tail noise from altering teachers. Cluster/individual views and activity gates preserve distinctions.",
+        "example": "A new shoe borrows common knowledge without a few accidental clicks rewriting the best-selling cluster."
+      }
+    },
+    "qa/recommendation:akt-rec/basics": {
+      "source_sha256": "19843d477eb49af9d4d22a9919b22196960ba9e6b989d16cfff5d4cef66914d6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain cluster and individual views?",
+        "answer": "Clusters share knowledge where feedback is scarce; individual embeddings preserve behavior differences. Activity gates balance them and soft orthogonality encourages complementarity.",
+        "example": "Two sci-fi films can share a cluster while preserving action versus philosophical audiences."
+      }
+    },
+    "qa/recommendation:akt-rec/comparison": {
+      "source_sha256": "e6ed38f64877cff400ceb7ee8ce66adeb600a013cc7a94671052a92c11468f0e",
+      "reviewed": true,
+      "fields": {
+        "question": "Does asymmetric transfer just add more contrastive examples?",
+        "answer": "No. It weights tail-to-head learning and detaches teacher-side gradients, unlike symmetric adjustment. This assumes heads are more reliable and may fail in some clusters.",
+        "example": "A new niche film can learn from established neighbors without pulling them toward its noisy clicks."
+      }
+    },
+    "qa/recommendation:akt-rec/implementation": {
+      "source_sha256": "d41ae22434decea63c8beec0da3ea1f09ea843624d9b5e5ae515b03bbed6c0b5",
+      "reviewed": true,
+      "fields": {
+        "question": "Where are AKT-Rec's two activity gates?",
+        "answer": "First blend cluster and individual item embeddings; second blend cluster and instance histories based on user/item/cross activity. Do not collapse them or detach both contrastive sides.",
+        "example": "A new item can need cluster embeddings and a sparse user can independently need cluster history."
+      }
+    },
+    "qa/recommendation:allecompanion/mechanism": {
+      "source_sha256": "899e8e749a2af0dbeeb241ba4f14e7e191ea8d9410426996f8ed62c1c6f359fc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can strongly co-occurring products be poor complements?",
+        "answer": "Co-occurrence can reflect comparison or popularity. Complements jointly serve a need. Category evidence and adapters constrain compatibility without reading hidden target category.",
+        "example": "Comparing two cameras does not make them complements; a compatible lens may be."
+      }
+    },
+    "qa/recommendation:allecompanion/basics": {
+      "source_sha256": "fc08547afd25bbfff3b49ebef4d3a2d023abcd75a77b4850f0bd9131388e773a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why build ComCat relations before category-constrained towers?",
+        "answer": "Rules, people, LMs, and statistics define plausible complementary categories. Towers/adapters learn item-level matches within them. A category prior does not guarantee compatibility.",
+        "example": "Cameras and lenses complement each other, but mounts still need matching."
+      }
+    },
+    "qa/recommendation:allecompanion/comparison": {
+      "source_sha256": "73c38bc0584f261085380a2da5eea3e9b0c335c9bde64f2c3ad172bf63d8d89b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does complementary retrieval differ from similar-item retrieval?",
+        "answer": "Similarity finds substitutes; complement retrieval finds functionally related items used together. Next-item hits are not true complement labels, so local Amazon negatives do not alone refute ComCat.",
+        "example": "Another tent is a substitute; a sleeping bag complements a tent."
+      }
+    },
+    "qa/recommendation:allecompanion/implementation": {
+      "source_sha256": "7297643135a81b9d636daa4faea9b7c956566a7584b48fff5e305b034d51f7a1",
+      "reviewed": true,
+      "fields": {
+        "question": "Can Category Adapter inference read the hidden target category?",
+        "answer": "No. Evaluate all candidate categories using their own features and train on allowed train pairs. Local data lacks true ComCat labels, so keep diagnostic status and negative outcomes.",
+        "example": "Telling the model the answer is a lens bypasses category selection."
+      }
+    },
+    "qa/recommendation:angle/mechanism": {
+      "source_sha256": "57600f424517c0a8d4375b2b04f7b3dd12dc65dd7d947eec2074a66aab649a43",
+      "reviewed": true,
+      "fields": {
+        "question": "Why dynamically constrain decoding despite hierarchical ad IDs?",
+        "answer": "Hierarchy organizes ads but not request-specific eligibility. Constrained beams exclude invalid paths during search, while generation/discrimination/ranking learn relevance. Postfiltering can waste beams.",
+        "example": "Block an unavailable ad path before it consumes the candidate budget."
+      }
+    },
+    "qa/recommendation:angle/basics": {
+      "source_sha256": "211ffe2f6b553e1a7f64834cb8cc346fde4bb5e3a2c143acbab04912da99fc62",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is intent × summary an ad hierarchy rather than an ordinary ID?",
+        "answer": "Intent groups needs and summary refines meaning, so paths share information. Joint objectives learn predictive and discriminative IDs, but codes still need real eligible ad mapping.",
+        "example": "Generate travel preparation then portable storage, not an unrelated flat ID."
+      }
+    },
+    "qa/recommendation:angle/comparison": {
+      "source_sha256": "472ee6881d76f295d7c40df5763110c5c718a548a3279a3e60827b0012c53209",
+      "reviewed": true,
+      "fields": {
+        "question": "How does adding discrimination differ from beam selection by likelihood alone?",
+        "answer": "Likelihood expresses contextual path probability; discrimination measures target specificity and ranking links utility. Tune their trade-off on validation; neither guarantees all metrics improve.",
+        "example": "A popular summary can lose to a more suitable niche path, unless discrimination is overweighted."
+      }
+    },
+    "qa/recommendation:angle/implementation": {
+      "source_sha256": "1d6b26da068f64c8a49f4e70e62933c222d59242ada98e9962c70cd7690f722a",
+      "reviewed": true,
+      "fields": {
+        "question": "Should ANGLE filter illegal beams after generation or at every expansion?",
+        "answer": "Apply request-specific legality at every step. Global vocabulary is not current eligibility. Select fusion coefficients on validation only.",
+        "example": "Mask a region-ineligible prefix immediately rather than generate ten ads and reject nine."
+      }
+    },
+    "qa/recommendation:argus/mechanism": {
+      "source_sha256": "0f936045c947f7d53d61223f391730a4569ccdba235ca37bc389ec7f881bcab6",
+      "reviewed": true,
+      "fields": {
+        "question": "How does feedback-then-item differ from direct next-item prediction?",
+        "answer": "ARGUS factors joint action into feedback type then conditional item, sharing a trunk while preserving feedback distinctions. Inference cannot read future feedback. Local module ablation is negative.",
+        "example": "Expected long watch and quick skip can favor different items for the same history."
+      }
+    },
+    "qa/recommendation:argus/basics": {
+      "source_sha256": "0eb081a969e568278f5d3824a5a837498cb570fd895199362d1c49031e6dc9ff",
+      "reviewed": true,
+      "fields": {
+        "question": "How read ARGUS's feedback–item joint distribution?",
+        "answer": "Predict feedback from history, then condition item probability on it and multiply. True feedback is training supervision, not an inference input unless specified externally under protocol.",
+        "example": "Likes can favor relatable clips while long watches favor tutorials."
+      }
+    },
+    "qa/recommendation:argus/comparison": {
+      "source_sha256": "82c2ce3f68a126ebc495d0a7d10e1bfdcb51a266227d5d48ac6c84867462d4f5",
+      "reviewed": true,
+      "fields": {
+        "question": "How does conditional factorization differ from a parallel auxiliary head?",
+        "answer": "A parallel head adds loss without necessarily changing item prediction. ARGUS explicitly conditions items on feedback, so feedback errors can propagate. Measure both.",
+        "example": "Separate “will like” and item outputs are multitask, not a feedback-conditioned generator."
+      }
+    },
+    "qa/recommendation:argus/implementation": {
+      "source_sha256": "02b2505c355e3da002dda20343f88aebefb7ce137c86f893cc20453683faf0d3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish DIN and next-item-only baselines?",
+        "answer": "DIN compares whole models; matched next-item-only isolates feedback factorization. Both local comparisons lack gains, and neither should hide the other's negative evidence.",
+        "example": "Overall proximity to DIN can coexist with degradation after adding the feedback path."
+      }
+    },
+    "qa/recommendation:asarl/mechanism": {
+      "source_sha256": "90777583d94b1c4b7eff2495663aaf714def82bb45cccaa9a5e9546adbfd5ca9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not replace ASARL Critic and GenAgent with one LLM labeling pass?",
+        "answer": "A one-pass labeler can inherit bias and miss long-tail intent. ReasonAgent proposes, Critic finds repeated gaps, GenAgent targets them, and behavior feedback plus distillation adapts serving. Generated rationales are not automatically truth.",
+        "example": "Diagnose campus-slang mistakes, then add matching counterexamples rather than more unrelated labels."
+      }
+    },
+    "qa/recommendation:asarl/basics": {
+      "source_sha256": "68374aac50255717dfb1f4c9afdcf4ff0fc58ef12e30db232d040c24f04dadde",
+      "reviewed": true,
+      "fields": {
+        "question": "Why learn three social relevance levels before distilling an online student?",
+        "answer": "Colloquial, long-tail titles need contextual teacher supervision. Transfer fine-grained label distributions to a small model; validate against real search needs.",
+        "example": "“Weekend group” can mean gaming or hiking; teacher reasons in context and student predicts strong, weak, or irrelevant."
+      }
+    },
+    "qa/recommendation:asarl/comparison": {
+      "source_sha256": "68753e3ea0dc12ae437aee4900a3ff9a2e7699ba41f43d5ea8ea57e349ff856f",
+      "reviewed": true,
+      "fields": {
+        "question": "How does PGO differ from synthetic three-level supervision?",
+        "answer": "PGO uses interaction-validated reasoning/label preference pairs, not only generated and reviewed labels. Behavior can remain biased; lower classification loss is not retrieval evidence.",
+        "example": "Real users preferring camera-model groups can correct generic photography labels."
+      }
+    },
+    "qa/recommendation:asarl/implementation": {
+      "source_sha256": "185acac54948d30e546ce8529baf913ba21700e485af8bfcadbfa25357b6e15f",
+      "reviewed": true,
+      "fields": {
+        "question": "Does ASARL KL distill reasons or label distributions?",
+        "answer": "The online student minimizes teacher/student label-distribution KL. Reasons support data and teacher training, not online explanations. Genre proxy classification improved without ranking transfer.",
+        "example": "Learn three relevance probabilities rather than generate long reasoning per request."
+      }
+    },
+    "qa/recommendation:atomic-intent/mechanism": {
+      "source_sha256": "44bc356b8b5df909f704949b8468a7cb344783fc1374668603b085bdec540adc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't cached atomic intent equivalent to one user vector?",
+        "answer": "Hierarchical retrievable evidence lets each target select an intent chain. Expensive reasoning happens offline; candidate retrieval/fusion stays online. Local proxy does not verify full LLM intent generation.",
+        "example": "Retrieve camping for a tent and lightweight-equipment needs for a commuting bag from the same memory."
+      }
+    }
+  }
+}

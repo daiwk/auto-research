@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:cera-moa/implementation": {
+      "source_sha256": "1f8007ea5627f64ece2ee736289e29224c55b63a1ddd86a98b8630f4d857d85e",
+      "reviewed": true,
+      "fields": {
+        "question": "What does directed training assignment update beyond inference-only routing?",
+        "answer": "CERA-MoA also sends training samples to designated experts, letting routing and capability co-evolve. Selection masks alone train nothing. Local tests cover familiarity routing and a directed-update reference, not paper-scale expert training. Three-seed state statistics do not establish capability evolution.",
+        "example": "Example: A sample assignment to expert A does not show A received a gradient update. Verify parameter changes and independent task results."
+      }
+    },
+    "qa/agent-research:repoatlas/mechanism": {
+      "source_sha256": "ecb40b756017e510c0138d190bb956eb540742c36689aff8436aff59cae5e834",
+      "reviewed": true,
+      "fields": {
+        "question": "Why refresh visual topology and the precise text index together?",
+        "answer": "Topology shows module dependencies, and text locates actual editable symbols. If views disagree, a correct graph can point to an obsolete file. Select–project–refresh chooses task-related subgraphs under budget and keeps both views grounded in common sources. A diagram does not replace source evidence.",
+        "example": "Example: After moving a function, update its graph edges and indexed location; refreshing only one can leave nonexistent paths."
+      }
+    },
+    "qa/agent-research:repoatlas/basics": {
+      "source_sha256": "bce467df6bfd4caa03ec8a8bf1d63c8bee820b035c4d5f9405f2c3a659e3ae1c",
+      "reviewed": true,
+      "fields": {
+        "question": "What map does RepoAtlas build first for an unfamiliar large repository?",
+        "answer": "Reading files one at a time can lose global structure, while a broad overview cannot locate symbols. RepoAtlas combines topology and precise source entry points so agents can understand dependencies and inspect code. Navigation does not replace source evidence, and stale structure can misdirect later edits.",
+        "example": "Example: For login bugs, trace authentication and API dependencies before opening the validation function. Module names do not reveal the real conditions."
+      }
+    },
+    "qa/agent-research:repoatlas/comparison": {
+      "source_sha256": "38094888fbf77a98e5de8cb80baf9377bd07c06e6d7b18a068336f8d041f687a",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the trade-off between a task-related code subgraph and a whole-repository summary?",
+        "answer": "A subgraph keeps relevant relations within budget but can miss remote dependencies. A whole summary covers more at lower detail. Refresh selection as implementation and feedback change. A one-time snapshot or visible graph is not improved code understanding.",
+        "example": "Example: Editing authentication needs callers and configuration. If initially omitted, failed tests can justify expanding the subgraph."
+      }
+    },
+    "qa/agent-research:repoatlas/implementation": {
+      "source_sha256": "fff7b7abcf61e4e66b8ff521f319162407b85925d95312026babc375a12822f5",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local bounded text view implement a real multimodal SWE-bench repository environment?",
+        "answer": "No. Public observations produce a budgeted text view and selection/refresh state. It does not claim real browser or SWE-bench integration. Indexes, edges, and budgets are checkable; visual topology generation, model consumption, and repair outcomes need separate execution evidence.",
+        "example": "Example: Ten nodes and source locations show view data exists, not that a model viewed a graph and fixed an issue."
+      }
+    },
+    "qa/agent-research:hcrg/mechanism": {
+      "source_sha256": "6470c00309ada4fd7021733846d409662eb754ab8a005fb8ed1c6c1aa6426362",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't a cyclic dependency graph have a node-wise parents-first topological order?",
+        "answer": "Nodes in a directed cycle depend on one another, so no linear order satisfies all edges. Identify strongly connected components and separate ordering across components from migration within them. AST context reveals this limit, but it does not invent a cycle-breaking method the paper never defines.",
+        "example": "Example: A calls B and B imports A. Analyze them as a cycle, not as though migrating A first satisfies all parent dependencies."
+      }
+    },
+    "qa/agent-research:hcrg/basics": {
+      "source_sha256": "f50a4fd5b215a7549c97a17a0a86323bfa09a1f10b5961b777b6f3a889ba10f8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why identify parent dependencies before migrating callers?",
+        "answer": "Parent classes, imports, and called interfaces shape assumptions in dependent code. Migrating resolvable parents first stabilizes context. HCRG extracts AST structure up to three hops. Static graphs cannot cover all dynamic calls, and unresolved symbols should not be matched to arbitrary same-name definitions.",
+        "example": "Example: Migrating a superclass constructor signature first makes it easier to update subclasses consistently."
+      }
+    },
+    "qa/agent-research:hcrg/comparison": {
+      "source_sha256": "723ee836adcbd903ed1591a0163232bbe5576df3488180e00f47dbd70aae24e7",
+      "reviewed": true,
+      "fields": {
+        "question": "How does three-hop structural context differ from vector retrieval over 800-character chunks?",
+        "answer": "Vector chunks return textually similar fragments. Structural retrieval follows inheritance, calls, and imports, potentially finding related code with different words. Both miss things. Some paper metrics on a single repository decline, so structure does not uniformly improve migrations.",
+        "example": "Example: A utility's name has little lexical overlap with a migration issue, but a call edge still brings it into context."
+      }
+    },
+    "qa/agent-research:hcrg/implementation": {
+      "source_sha256": "9c236febd5d810835e999006876e745ac09a0ce27b4905f4d246333023364396",
+      "reviewed": true,
+      "fields": {
+        "question": "How should static graphs handle local-variable shadowing and unresolved symbols?",
+        "answer": "Same names can denote different definitions, and local binding hides globals. Do not connect unresolved calls to arbitrary same-name repository nodes. Retain scope and unresolved status, then retrieve only known structure. Local support is bounded Python AST, not all dynamic calls or other paper languages.",
+        "example": "Example: If a function assigns a local object to a global tool's name, later calls use the local binding, not a global node with the same text."
+      }
+    },
+    "qa/agent-research:feedback-scaffold/mechanism": {
+      "source_sha256": "74dd1e4de242bcaaf3269354b4c0c23202ff3e427788aad5f54c936873a40649",
+      "reviewed": true,
+      "fields": {
+        "question": "Why start with action guidance and shift to observation enrichment later?",
+        "answer": "Direct hints lower early exploration difficulty and yield learnable traces, but continued demonstration can make policy dependent. Later enriched observations retain evidence support while returning decisions to the agent, gradually reducing scaffolding. The phases serve different purposes and should not share constant strong hints.",
+        "example": "Example: Tell a beginner to find a key first. Later describe the lock and let the agent choose, rather than reveal the whole sequence."
+      }
+    },
+    "qa/agent-research:feedback-scaffold/basics": {
+      "source_sha256": "113385fb8232e8ea915a6fb0ab799cea43ca9e813a6b3943a08e7e45bd62e1e5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are fully unguided exploration and always giving answers both difficult for weaker long-horizon agents?",
+        "answer": "Unguided exploration may yield too few successful experiences. Always providing correct actions can teach reliance on help. Feedback Scaffold changes support during training so early learning starts and later decisions are independent. Evaluate capability after removing the scaffold rather than count guided success as autonomy.",
+        "example": "Example: Demonstrate the next step at first, later give observations only. Continuing to choose actions during tests hides independent ability."
+      }
+    },
+    "qa/agent-research:feedback-scaffold/comparison": {
+      "source_sha256": "d16e6ffd797634cde1046ebccd1a2da76c9b9e3add2a2f39cd90dcb0dc6edfc1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why evaluate scaffolded completion separately from autonomous completion after removing support?",
+        "answer": "Scaffolding can simplify decisions or add evidence, so success reflects both policy and support. Removal tests whether training left transferable decisions. Report visible help and do not pool different information conditions. A phase-scheduling diagnostic does not replace real transfer after training.",
+        "example": "Example: If testing still tells the model to read config first, it measures following the hint. Autonomous evaluation requires discovering that action."
+      }
+    },
+    "qa/agent-research:feedback-scaffold/implementation": {
+      "source_sha256": "c5f1e70dc6f4ed0197dc2d0763b9e0e439a21627e3287cb8fc162ceb92b43631",
+      "reviewed": true,
+      "fields": {
+        "question": "Can the local first-step workflow be read from hidden AgentTask.plan?",
+        "answer": "No. Use only a workflow explicitly supplied in public observation, then state summaries. Hidden plans never reach policy. No LLM training or real rollouts ran. The controlled path verifies isolation and schedules, not long-task learning from oracle-induced perfect scores.",
+        "example": "Example: A three-step reference plan in a fixture must not be disguised as an environment hint; that leaks the answer rather than enriches observation."
+      }
+    },
+    "qa/agent-research:swe-prime/mechanism": {
+      "source_sha256": "3c753318e0b30367c005392bbc855c4005a79b0b1584b0752d47bd3ba2ff193a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain complete context but apply SFT loss only to selected semantic segments?",
+        "answer": "Unselected spans may be necessary causal context for later behavior even if redundant, dangerous, or unhelpful to imitate. Masking separates readable context from training targets. The model sees the real process while learning useful, learnable actions; not every token in a successful trajectory deserves supervision.",
+        "example": "Example: Keep a failed dangerous command to explain a repair, without rewarding the model for generating that command."
+      }
+    },
+    "qa/agent-research:swe-prime/basics": {
+      "source_sha256": "58b524c66dd0c3b31089a9382219da657322ca1d532e764caa7b24e7a80082f6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why might a successful trajectory still be a poor full SFT target?",
+        "answer": "Success can include redundant exploration, risky commands, or steps the current model cannot learn. SWE-Prime filters trajectories by process, outcome, and representativeness, then selects segments by contribution, learnability, and risk. Outcome success does not endorse every token.",
+        "example": "Example: A bug fix ultimately passes after accidentally deleting and restoring a file. Do not teach deletion as a good action."
+      }
+    },
+    "qa/agent-research:swe-prime/comparison": {
+      "source_sha256": "e898ae789a5ec96be0c26c233961fdeb2a60529e6038e6fe6b1b959c2dff3117",
+      "reviewed": true,
+      "fields": {
+        "question": "What different data-quality problems do whole-trajectory and within-trajectory segment selection solve?",
+        "answer": "Trajectory selection chooses useful complete experiences by outcome, process, and representativeness. Segment selection chooses contributing, learnable, lower-risk behavior within them. Good traces can contain redundancy, and good fragments can come from failed overall runs. Sample selection and supervision are distinct.",
+        "example": "Example: Keep a passing repair's complete execution as context, but exclude irrelevant dependency installation from imitation targets."
+      }
+    }
+  }
+}

@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:unirec-coa/comparison": {
+      "source_sha256": "c5d8a20845fae67d4f627f87d0d5421af21e41382ebd5f967f221f38efc1f214",
+      "reviewed": true,
+      "fields": {
+        "question": "How does capacity-limited quantization differ from maximizing popular-code likelihood?",
+        "answer": "Capacity limits reduce hotspots and disperse usage, while likelihood alone follows frequency. Evaluate relevance and balance together.",
+        "example": "Avoid crowding a bucket without randomly distributing items just to equalize counts."
+      }
+    },
+    "qa/recommendation:unirec-coa/implementation": {
+      "source_sha256": "eed54c6f11b022757c18c2d2ce1bbf251034d96da4662b4e01dfec1e73044a3c",
+      "reviewed": true,
+      "fields": {
+        "question": "Can future target behavior reveal attributes used as inputs?",
+        "answer": "No. Attributes come from allowed item metadata. Target attributes can supervise generation, not be given as known answers. Public MovieLens lacks private multi-scenario serving.",
+        "example": "Supplying the true next item's brand leaks a clue."
+      }
+    },
+    "qa/recommendation:unirec-coa/mechanism": {
+      "source_sha256": "a53c8c56d5d25f493db7ce998d299bbdccdbf8734c9451f4f322c2d2fec8989e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why generate attributes before SID and constrain quantization capacity?",
+        "answer": "Category, seller, and brand condition generation explicitly. Capacity prevents popular codes monopolizing the space; task context handles differing needs. Early attribute errors propagate, so interpretable steps do not guarantee correct items.",
+        "example": "Choosing dress shoes instead of sneakers early can derail the path despite precise later decoding."
+      }
+    },
+    "qa/recommendation:uniscale/basics": {
+      "source_sha256": "9280684c9f1e43a5350277babcea5fe7e2e3e4f82653320adf15554ae80b7924",
+      "reviewed": true,
+      "fields": {
+        "question": "Why expand both data space and model capacity?",
+        "answer": "Larger models still face exposure bias; more data can also exceed current capacity. ES³ expands beyond exposure, HHSFT fuses sources, and capacity must remain deployable.",
+        "example": "Adding unexposed examples differs from adding layers to old exposure data."
+      }
+    },
+    "qa/recommendation:uniscale/comparison": {
+      "source_sha256": "585e271d9356c228001b8e78a19895f9ee089d5578871d36089403725d451c23",
+      "reviewed": true,
+      "fields": {
+        "question": "Are unexposed examples equivalent to random negatives?",
+        "answer": "No. Sources and label reliability differ. Not exposed is not disliked, and full-space expansion does not automatically remove selection bias.",
+        "example": "A user who never saw an item cannot be assumed not to click it."
+      }
+    },
+    "qa/recommendation:uniscale/implementation": {
+      "source_sha256": "0cc842a4ee11394628e8c00f7c52628c0ba877d96d5e2342285e1f85565fb980",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local UniScale gated FFN represent the full ES³ data pipeline?",
+        "answer": "No. It tests heterogeneous branches, not private full-space sampling, production models, or cheap deployment. Audit source labels, splits, and mixing weights.",
+        "example": "Working FFNs do not prove reliable exposure-external data generation."
+      }
+    },
+    "qa/recommendation:uniscale/mechanism": {
+      "source_sha256": "e976f66536872f344e12d4abe3f6bb9eb8f32251d0602bd7a720647c5dcd6753",
+      "reviewed": true,
+      "fields": {
+        "question": "Why expand exposure-external data and train hierarchically rather than only grow the model?",
+        "answer": "More parameters can overfit limited exposure. Broader data expands coverage and hierarchical fusion treats heterogeneous quality appropriately. Verify synthetic/unexposed reliability; more data need not reduce bias.",
+        "example": "Add unseen categories without giving weak labels the same weight as verified clicks."
+      }
+    },
+    "qa/recommendation:unisgr-v2/basics": {
+      "source_sha256": "3ba37589eec11ac81ee59e17cbb7b9ee29a4cca6d383d45b3333b3ad929c8c3f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why predict side features for an item not generated yet?",
+        "answer": "Item identity is unknown mid-decode. Predict continuous features by level and cross them with generation/ranking; auxiliary tasks prevent target collapse.",
+        "example": "Estimate likely attributes before emitting a brand-related code."
+      }
+    },
+    "qa/recommendation:unisgr-v2/comparison": {
+      "source_sha256": "107979100570cdc718a4f9d5738195e5af2b9ea00a23c437f39938cbffcc6420",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a one-way mask differ from disabling predicted features?",
+        "answer": "Semantic tokens cannot attend to predicted tokens; prediction can read prior semantics, and output conditioning still uses predicted features. Disabling removes the mechanism.",
+        "example": "Prevent hidden noise feedback without withholding estimated features from generation heads."
+      }
+    },
+    "qa/recommendation:unisgr-v2/implementation": {
+      "source_sha256": "5474dfa2ebe58056229bad6a6f0f294e2132120b319a9d8ce1a60e38f2825d49",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not replace the real auxiliary attribute tower with self-predictions?",
+        "answer": "A learnable target needs business labels; mutual prediction can collapse. Isolate future labels and use type-specific masks so semantic states cannot read true future attributes.",
+        "example": "Two networks can agree on a constant without learning attributes."
+      }
+    },
+    "qa/recommendation:unisgr-v2/mechanism": {
+      "source_sha256": "961809230b2e30d9fa6f9ca2ef01063291576f31b4734b62d0826abf29103238",
+      "reviewed": true,
+      "fields": {
+        "question": "Why predict target side information but mask semantic-to-prediction reads?",
+        "answer": "Target features are unavailable before decoding and estimates help each level. Prevent noisy estimates from propagating into earlier semantic states, but retain output conditioning. Ranking supervision anchors targets. Full training is not reproduced locally.",
+        "example": "Price/style estimates can guide output while staying out of prior semantic attention."
+      }
+    },
+    "qa/recommendation:univa/basics": {
+      "source_sha256": "7e537f6deb01eb2c69b60f79342085b583bc1a0f4a34fa820d4a28e0bf17846d",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the final commercial SID level just refine item semantics?",
+        "answer": "No. It keeps two semantic levels and adds commercial attributes plus within-class bid bins. Interpret the commercial mapping rather than ordinary content clusters; proxy bids are not revenue.",
+        "example": "Similar ads can differ at the final level because of bid tier."
+      }
+    },
+    "qa/recommendation:univa/comparison": {
+      "source_sha256": "cb397b972b0ecca007feecea9ef8fb87366be49c243b4fa74a3447ee4024d220",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Generation-as-Ranking differ from independent post-generation ranking?",
+        "answer": "Generation and value logits sum before normalization, so value changes every path probability. Post-ranking only reorders retrieved candidates.",
+        "example": "A high-value path can enter the beam earlier rather than be considered after recall."
+      }
+    },
+    "qa/recommendation:univa/implementation": {
+      "source_sha256": "0ea53d03977c2681e3b47e9427d726cb3bbdacfd3e99af9455b7709d246a674c",
+      "reviewed": true,
+      "fields": {
+        "question": "How distinguish local UniVA from real eCPM and personalized serving tries?",
+        "answer": "Local network/RL/trie paths use deterministic bid/business proxies. Limit requests to currently eligible inventory and accumulate fused log probability; a globally valid ad may be illegal here.",
+        "example": "Mask an ad not eligible in the current region."
+      }
+    },
+    "qa/recommendation:univa/mechanism": {
+      "source_sha256": "070a6bf738d105e4f46ac9b573b3f3ded82960cfffba45b98abd5194d790005b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine commercial SID, value logits, and request-specific tries?",
+        "answer": "Commercial IDs carry value features; fused logits and eCPM reward shape policy. The trie separately enforces current eligibility. High value does not mean legal or relevant; local value is a proxy.",
+        "example": "Block a high-bid but unavailable ad and score legal alternatives by both relevance and value."
+      }
+    },
+    "qa/recommendation:uxsid/basics": {
+      "source_sha256": "e79ad63e02400f5ea2476544b1a894a268f8af3d8e44dc66275e92b24acd3041",
+      "reviewed": true,
+      "fields": {
+        "question": "Why share UxSID memory by user and target SID?",
+        "answer": "Per-item retrieval is expensive and one user-only summary is too coarse. Similar first-level SID targets share memory, trading cache cost for targeting without assuming identical preferences.",
+        "example": "Several shoes can reuse interest memory while retaining item differences."
+      }
+    },
+    "qa/recommendation:uxsid/comparison": {
+      "source_sha256": "cd4bde2598cddc749d21f71df564d4a017ca514de43a12f231693d9427a1dbae",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are global and local probes not duplicate attention?",
+        "answer": "Query full history for a global response, gate the target SID, then read compressed anchors. The inputs differ; anchor-only loses global modulation.",
+        "example": "Determine overall category interest before inspecting individual anchors."
+      }
+    },
+    "qa/recommendation:uxsid/implementation": {
+      "source_sha256": "c0c68957edd5725f0659aa54b0d445f8213e1d4f2ffaa85fc6124a4f1c27fe43",
+      "reviewed": true,
+      "fields": {
+        "question": "What details matter for per-anchor PFFN and orthogonality?",
+        "answer": "Give anchors independent PFFNs and normalize orthogonality by the whole matrix's squared L2 norm, not row cosine norms. Local two-level k-means/residual quantization is not LETTER.",
+        "example": "Sharing one FFN changes anchor specialization even at matching shapes."
+      }
+    },
+    "qa/recommendation:uxsid/mechanism": {
+      "source_sha256": "d58c17ac8ca4afad2215c4c235ff4fd44ee179722c50a19b5bf67df2fdbeb353",
+      "reviewed": true,
+      "fields": {
+        "question": "Why share memory by first-level target SID instead of per-item or all-item compression?",
+        "answer": "Grouping amortizes full history while retaining target sensitivity. Global SID response gates anchor probing; independent PFFNs and orthogonality mitigate collapse. Within-group details can still be flattened.",
+        "example": "Camping items share one camping memory while cameras use another."
+      }
+    },
+    "qa/recommendation:wegr/basics": {
+      "source_sha256": "dfcebf6bc0b938a5debef3c9f5d205ded15cc19f72eb3571c1e493dbf6971166",
+      "reviewed": true,
+      "fields": {
+        "question": "Why grow WeGR preference optimization from short SID prefixes?",
+        "answer": "Full paths yield sparse reward; coarse prefixes provide early signal. Align rewarded horizon with optimized tokens to avoid updating unevaluated suffixes.",
+        "example": "Learn broad category before requiring an exact item code."
+      }
+    },
+    "qa/recommendation:wegr/comparison": {
+      "source_sha256": "4b82f2fee60a2cfd29c817a6f970e38b73390c5482d750eaff43473d5f4be709",
+      "reviewed": true,
+      "fields": {
+        "question": "How does CoCo-VAE collision loss differ from entropy?",
+        "answer": "Collision measures overlap across examples; entropy measures one distribution's spread. Uniform distributions can have high entropy and completely overlap.",
+        "example": "Assigning every item uniformly across all codes is not discriminative."
+      }
+    },
+    "qa/recommendation:wegr/implementation": {
+      "source_sha256": "d67ba1e245525e2bd96737605476ea647cc1088a95922e48d4d738d908c93106",
+      "reviewed": true,
+      "fields": {
+        "question": "Does WeGR refresh low-utilization codes at every layer?",
+        "answer": "Refresh from first-layer hit EMA only. Keep deeper layers fixed for refresh, align DHPO prefix length to schedule, and add multisession-positive NLL per session. Full-sequence loss is not progressive horizon.",
+        "example": "At h=1, later codes must not receive full gradients from the prefix reward."
+      }
+    },
+    "qa/recommendation:wegr/mechanism": {
+      "source_sha256": "270f49370e34de9c7ec1adf5424ce7fcbba06e3c7b77abd65e3a545b2c1cdd35",
+      "reviewed": true,
+      "fields": {
+        "question": "Why expand both DHPO reward matching and policy gradients gradually?",
+        "answer": "Short matches densify initially sparse rewards and restrict updates to evaluated tokens. Expand to full codes over time. Multi-positive SFT and CoCo-VAE serve separate roles; local evidence is bounded.",
+        "example": "Reward outdoor first, then camping, then the full tent path without reinforcing wrong unevaluated suffixes."
+      }
+    },
+    "qa/recommendation:whale/basics": {
+      "source_sha256": "dd2c6bf1605abcf511cdd9d30a7d853f3c31690d8fa6d48d305ad07f62d52fff",
+      "reviewed": true,
+      "fields": {
+        "question": "Why exchange information between Wukong and HSTU at each layer?",
+        "answer": "Sparse high-order fields and behavior sequences co-evolve instead of meeting only at final concatenation. Coupling may also cause interference.",
+        "example": "Attributes affect sequence interest and sequence states contextualize feature interactions."
+      }
+    },
+    "qa/recommendation:whale/comparison": {
+      "source_sha256": "4ce73404b734e5c9a34f83ae67f68d0fda25e84711f45a22e5c6b3e83c953e04",
+      "reviewed": true,
+      "fields": {
+        "question": "How does bidirectional cross-attention differ from late fusion?",
+        "answer": "Late-fusion paths stay independent until the end. Intermediate cross-attention changes both state streams and adds dependency costs.",
+        "example": "Layer two can already read features and change later behavior modeling."
+      }
+    },
+    "qa/recommendation:whale/implementation": {
+      "source_sha256": "8c0df150a4b7e34b605e433c5c9e06e7aa69c6eecb2a296a4b87a6746c4f7fa6",
+      "reviewed": true,
+      "fields": {
+        "question": "What update order matters for WHALE's two streams?",
+        "answer": "Follow same-layer query/key/value inputs as specified; accidental in-place overwrites change what the other stream reads. Public code lacks industrial features and scaling evidence.",
+        "example": "Updating x before h can differ from both reading old layer states."
+      }
+    }
+  }
+}

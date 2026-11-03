@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:pinger/basics": {
+      "source_sha256": "c406ad611c3390831500a075c9a022f45bb8fc339a53215a5ad38cf99d322867",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep SIDs during PinGER training but remove historical SIDs at serving?",
+        "answer": "Asymmetric masking sends historical item information forward only through dense tokens. Historical SID positions are not read by other items or dense states, so removing those positions does not alter retained dense states. Dense input can still incorporate SID features.",
+        "example": "Example: A historical item occupies three SID positions and one dense position during training. Keeping only the dense position can preserve its attention output if inputs match."
+      }
+    },
+    "qa/recommendation:pinger/mechanism": {
+      "source_sha256": "773f2aa21dd1d7c56f99039a507f2d9daa4284cac80d19574f678852e433d94f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't prefix diversity just subtracting a constant for duplicate next tokens?",
+        "answer": "Penalty depends on longest common prefix depth between parent beams and accumulated chosen slots, including the same parent. Deeper shared prefixes penalize repeated subtrees more. The next token alone drops hierarchy.",
+        "example": "Example: Parents (1,2) and (1,3) share depth one; (1,2) with itself shares depth two. After picking its child, penalties differ."
+      }
+    },
+    "qa/recommendation:pinger/comparison": {
+      "source_sha256": "26d833c85c7f0fa4ed57187222273fa6d128c468d962d39ec1476fe9ed7100e4",
+      "reviewed": true,
+      "fields": {
+        "question": "Does improved online interest coverage guarantee higher offline recall?",
+        "answer": "No. Increasing lambda from 0 to 3 increases distinct@1 but lowers R@100 in the paper. A stronger online penalty can still suit its objectives/settings. Do not conflate offline tables with production A/B under a different beam width.",
+        "example": "Example: 100 items from one category may hit an established preference but miss other interests. Diversity trades metrics off."
+      }
+    },
+    "qa/recommendation:pinger/implementation": {
+      "source_sha256": "ad047594aa6b33daae91c99712cd55147cc4c2e6e084a136b02bbd1800c6a4af",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does PinGER DPO accumulate every prefix and retain an NTP anchor?",
+        "answer": "Per-level loss gives earlier SID decisions preference signal; using only full IDs changes the objective. NTP limits drift. Reference margin offsets the logistic input, not a hard stop-gradient for correct ranking. Local checks are formula-only.",
+        "example": "Example: For three levels sum losses for prefixes 1, 1–2 and 1–3, then add NTP. Tripling only the final loss differs."
+      }
+    },
+    "qa/recommendation:pinterest-rlbp/basics": {
+      "source_sha256": "dfa90961203d063dc3fdf6d34aa1ac80f29b9f54eeff3d9273d4ad5a603f2bd6",
+      "reviewed": true,
+      "fields": {
+        "question": "Does RLBP use a neural network to bid in every auction?",
+        "answer": "No. It chooses daily PID multipliers and writes a fixed daily lookup table; the original PID controls high-frequency feedback. Production varies P and I over three factors each with D=1, giving nine actions.",
+        "example": "Example: Set P to 1.2 times its default in the morning. Individual bids still respond to PID errors."
+      }
+    },
+    "qa/recommendation:pinterest-rlbp/mechanism": {
+      "source_sha256": "180520264927c0c66c21709221020d4c479c4aec62cdd8a927d7f9d5b8aec5ac",
+      "reviewed": true,
+      "fields": {
+        "question": "Why subtract the CPC head if CPC improvement is negative lift?",
+        "answer": "Lower CPC is better and below-baseline change remains negative. In Qbu−beta×Qcpc, subtracting negative CPC raises the score. A multi-step CPC backup also uses min rather than max.",
+        "example": "Example: For equal budget score 0, CPC heads −0.1 and 0.2 with beta=1 give fused scores 0.1 and −0.2."
+      }
+    },
+    "qa/recommendation:pinterest-rlbp/comparison": {
+      "source_sha256": "4846bb2ad60325a4da5f3171897dbba9e0eed84a3cbfd8c113bd5a871b9957f4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can deployed RLBP behave like a contextual bandit despite the DQN name?",
+        "answer": "Deployed gamma=0 regresses same-day outcomes with no future Q bootstrap. The proposed multi-step extension independently maxes/mins heads before fusion and need not equal optimal Q of the combined reward. It is not the deployed long-run optimum.",
+        "example": "Example: Reward 1, future Q 100: gamma 0 yields 1, whereas gamma 0.9 changes the objective to 91."
+      }
+    },
+    "qa/recommendation:pinterest-rlbp/implementation": {
+      "source_sha256": "7543196079e40c31352c2513e612306ed90567c2f0b50c69aa8ea7356a720c54",
+      "reviewed": true,
+      "fields": {
+        "question": "Does implementing top-K softmax reproduce production action probabilities?",
+        "answer": "No. Production also needs trained Q, beta scale and post-fusion preprocessing. The component externalizes beta and preprocessing; identity is just a reference. Small tensor tests cannot supply logged propensities or actual outcomes.",
+        "example": "Example: Doubling scores often preserves top-K but sharpens softmax, changing IPS propensities despite the same argmax."
+      }
+    }
+  }
+}

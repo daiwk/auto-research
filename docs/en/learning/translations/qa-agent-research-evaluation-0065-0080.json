@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:coreflect/basics": {
+      "source_sha256": "954b834d1334c1383f69e6413ef254bf23ee6630fa3f21a22158be776d7efc60",
+      "reviewed": true,
+      "fields": {
+        "question": "What do CoReflect's planner, simulator, evaluator, and analyzer produce?",
+        "answer": "The planner organizes tasks, the simulator generates interactions, the evaluator applies current criteria, and the analyzer distills reflection that changes later tasks and criteria. These are semantic model roles, not four JSON fields. Local work did not substitute handwritten rules for them.",
+        "example": "An ambiguous criterion appears during dialogue. The analyzer identifies it, then later rounds revise the rubric and plan scenarios that test the issue."
+      }
+    },
+    "qa/agent-research:coreflect/comparison": {
+      "source_sha256": "64dff4c31231df240baf95b445d2f6a23c9fddcdcba5134b062e82efb826349a",
+      "reviewed": true,
+      "fields": {
+        "question": "How does CoReflect persona–scenario consistency checking differ from valid JSON?",
+        "answer": "Syntax only makes fields readable, not semantically compatible. The paper retains pairs passing actual LLM consistency checks. This filter is part of task quality; a state machine or manual score does not replace semantic checking and reflection.",
+        "example": "A persona unable to use the internet paired with a completed online booking can be valid JSON and still require semantic review."
+      }
+    },
+    "qa/agent-research:coreflect/implementation": {
+      "source_sha256": "10ca01fb72b3b2aba8b39c703084d52af7aa7d1583ca4fb4482be617acc1cdeb",
+      "reviewed": true,
+      "fields": {
+        "question": "Did the local project implement CoReflect's 953 scenarios and full semantic modules?",
+        "answer": "No. This is literature coverage without a heuristic adapter. JSON state transitions or averaging supplied values do not replace LLM checks and dialogue generation; formulas explain the source method.",
+        "example": "More loop iterations do not show the evaluator learned a new judgment dimension."
+      }
+    },
+    "qa/agent-research:coreflect/mechanism": {
+      "source_sha256": "a95c26f5b01a847486fa9c1b5de7cc123af9cb0cf0fc0b0609d8c24b225bf406",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't editing rubric strings or averaging supplied scores reproduce CoReflect's reflective co-evolution?",
+        "answer": "The core needs semantic planning of scenarios, dialogue simulation, evaluation, and an analyzer that uses reasons to identify deficits and update both tasks and criteria. Mechanical state transitions are scaffolding without semantic judgment or real interaction. Source formulas explain the loop, not local execution.",
+        "example": "An analyzer should identify missed empathy criteria and create relevant scenarios. Manually changing a weight from one to two does not provide that reflection."
+      }
+    },
+    "qa/agent-research:sopbench-protocol/basics": {
+      "source_sha256": "24c66a2b6971b22635382fd6e333d3a0f9686d155b4d5388d923ffe24db77b9e",
+      "reviewed": true,
+      "fields": {
+        "question": "Do SOPBench service constraint nodes record chat turns or define required pre-service checks?",
+        "answer": "The graph connects services to constraints and constraints to executable helper checks, specifying permission and prerequisites rather than summarizing dialogue order. Follow each service's dependencies to see what must be verified, not just whether final text sounds fluent.",
+        "example": "If a service requires eligibility, the graph should link to that constraint and helper rather than merely contain 'I checked.'"
+      }
+    },
+    "qa/agent-research:sopbench-protocol/comparison": {
+      "source_sha256": "af477b4114b63734b4bd5d28bfccb99fd050eac8f52e8c20eb7d5667981a176d",
+      "reviewed": true,
+      "fields": {
+        "question": "How do And, Or, and Chain constraints differ in verification order?",
+        "answer": "And needs every condition without imposing suborder. Or allows a verified true branch. Chain enforces sequence. Treating them as unordered sets permits violations like acting before checking.",
+        "example": "Identity verification before a transfer is Chain; checking after the transfer does not satisfy it."
+      }
+    },
+    "qa/agent-research:sopbench-protocol/implementation": {
+      "source_sha256": "b0b2c780e31bdc050f12c665e5d188707409a2ced284bef9465e8e178818e6f2",
+      "reviewed": true,
+      "fields": {
+        "question": "Can agent self-reports replace SOPBench helper-call records?",
+        "answer": "No. procedure_complete needs trusted execution traces showing actual checks in graph order. Gold stays with graders. This protocol component is not a full production service agent.",
+        "example": "Saying 'I verified it' is not a logged successful helper call."
+      }
+    },
+    "qa/agent-research:sopbench-protocol/mechanism": {
+      "source_sha256": "3cae120b486f985423bfac29b7db8953d28ac31af7c890eee113860e16c731e5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can correct final database state still fail SOPBench?",
+        "answer": "The service must be permitted and required helpers executed in order. And, Or, and Chain encode distinct conditions; guessing the result cannot bypass procedure. Full success requires eligibility, state, and procedure together.",
+        "example": "A refund amount can be correct while the agent skipped order eligibility. A later check does not satisfy a chain requiring eligibility first."
+      }
+    },
+    "qa/agent-research:gaia/basics": {
+      "source_sha256": "cc56a001d8fd9b623521287593ec0c875cb6054c15312209c91c1718fc62b043",
+      "reviewed": true,
+      "fields": {
+        "question": "Does GAIA expect a long reasoning transcript or a checkable short final answer?",
+        "answer": "Score the final answer by exact comparison after prescribed normalization. Solving may still require browsing, images, and tools. Reasoning and submission format are distinct, so many plausible steps do not guarantee a match, and format failure cannot be hidden as reasoning success.",
+        "example": "If a question asks for a person, submit the checkable name. Search notes without a clear final name are not automatically correct."
+      }
+    },
+    "qa/agent-research:gaia/comparison": {
+      "source_sha256": "b343f852306eaaa6792cc22f8726b00aedd5faac670008912aa23f8da2731e1d",
+      "reviewed": true,
+      "fields": {
+        "question": "How does normalized GAIA exact match differ from an LLM judge assigning semantic scores?",
+        "answer": "Exact match checks equality after fixed normalization. A semantic judge decides equivalent meaning and has different tolerance and biases. Changing the evaluator cannot silently keep the same GAIA score. Predefine normalization instead of rewriting predictions after seeing gold.",
+        "example": "One normalizer handles permitted surface variation. Asking a model to accept a vague paraphrase changes the grader."
+      }
+    },
+    "qa/agent-research:gaia/implementation": {
+      "source_sha256": "d3949d18315c4ae19524fa8b755cada223fba176ec6fc03b038a2b573943495a",
+      "reviewed": true,
+      "fields": {
+        "question": "May GAIA normalization be relaxed arbitrarily after inspecting gold?",
+        "answer": "No. Fix allowed normalization and task sets, and expose gold only to the scorer. Local interface or protocol checks lack real web and multimodal runs and cannot report benchmark scores.",
+        "example": "Changing rules because a wrong answer contains a correct substring changes the evaluation."
+      }
+    },
+    "qa/agent-research:gaia/mechanism": {
+      "source_sha256": "726fc562a9d63bf396460c27ac7ee4901f0e2cb58fcccc0d89b0058f25848113",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can exact short answers still test multi-tool reasoning rather than memorization?",
+        "answer": "Short output is the scoring interface; finding it can require browsing, multimodal understanding, calculation, and cross-source checks. Normalized matching makes endpoints clear, not evidence quality or failure location. Distinguish accuracy from executed traces and never put reference answers into agent prompts.",
+        "example": "One final year may require identifying a person from a picture, researching an event, and verifying dates."
+      }
+    },
+    "qa/agent-research:autoformbench/basics": {
+      "source_sha256": "9b663ee3c35d2d55e122868a2040476e59b55b25ba414322cb08f1cc57980e4d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does AutoformBench require all proof obligations in a task to pass?",
+        "answer": "Advanced formalization requires definitions, auxiliary lemmas, and final proof to work together. A single fragment is insufficient. Trusted Lean/Mathlib must verify all obligations; partial counts do not replace task success.",
+        "example": "A main theorem with a dependency still containing sorry is not a complete task."
+      }
+    },
+    "qa/agent-research:autoformbench/comparison": {
+      "source_sha256": "32e85dc8a487290fb1b2252e25d781650abc581fde10144041c7fe1d5682f0db",
+      "reviewed": true,
+      "fields": {
+        "question": "How does AutoformBench differ from filling one isolated Lean proof with all definitions given?",
+        "answer": "It also requires constructing definitions and supporting lemmas, then satisfying every obligation. An isolated proof usually starts with more context fixed. Shared Lean verification does not mean equal autonomous formalization work or comparable pooled success.",
+        "example": "If a definition is missing, formalize it and prove supporting lemmas. Filling only the final by block is incomplete."
+      }
+    },
+    "qa/agent-research:autoformbench/implementation": {
+      "source_sha256": "296f757cf471a83c7767711b4e523f413b30b9b8405fcfd24afca56e3580073f",
+      "reviewed": true,
+      "fields": {
+        "question": "Can the AutoformBench interface drop failed, over-budget, or infrastructure-error rows?",
+        "answer": "No. Keep the full fixed task set and actual CSV costs. Nominal caps do not imply equal spend. Importing existing verdicts is not running Harbor; mark planned runs as such if unexecuted.",
+        "example": "Counting only successfully launched tasks hides environment failures and inflates results."
+      }
+    },
+    "qa/agent-research:autoformbench/mechanism": {
+      "source_sha256": "597be084db68ab6bc73f1016dab3b948ac41f67a0f68353aeedf3a82958596e4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why aren't source-present and source-free scores comparable by task ID alone?",
+        "answer": "Visible materials change difficulty: a source or proof offers definitions and strategies, while a source-free workspace requires more autonomous construction. Matching task names do not align information. All obligations must pass, and failures, budget overruns, and infrastructure errors stay in the denominator.",
+        "example": "For the same theorem, one group reads a textbook proof while another gets only a Lean skeleton. Match source conditions before attributing score differences to the model."
+      }
+    }
+  }
+}

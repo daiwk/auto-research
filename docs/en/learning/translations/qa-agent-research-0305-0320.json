@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:leash/implementation": {
+      "source_sha256": "9c1a9178e6f0cbaac92d80189e7c9cd7647ea6914728a4394b06cdd33ab21799",
+      "reviewed": true,
+      "fields": {
+        "question": "Why calibrate the runtime gate on each task's maximum score, and when does Shadow trigger?",
+        "answer": "Calibrate reference risk on maximum action score per task, keeping all observations from a task in the same out-of-fold split. Step quantiles change the overall escalation rate. After handoff, probe every three steps from the first strong action: 1, 4, 7, with at most six interventions and a stop after two changes to strong actions.",
+        "example": "Example: Starting checks only in the third interval misses first-step risk. Splitting steps from one task across train and validation leaks task features."
+      }
+    },
+    "qa/agent-research:jev-agent-harness/mechanism": {
+      "source_sha256": "fc9aec819eefbbf3d2ac476e3b4f3955b7aed3e54b03fc68e963db413bfe8453",
+      "reviewed": true,
+      "fields": {
+        "question": "Why calibrate delegation thresholds by decision type on the agent's own shadow trajectories?",
+        "answer": "Closed-loop execution reaches states after errors, which clean offline multiple choice does not cover. Tool and argument choices also have different risks and benefits. Compare decision and strong models on matched examples, choose reliable thresholds by task value and cost, and fall back on uncertain or unseen classes.",
+        "example": "Example: A small model chooses tools correctly but often supplies wrong arguments. Give the categories separate gates instead of applying one overall accuracy."
+      }
+    },
+    "qa/agent-research:jev-agent-harness/basics": {
+      "source_sha256": "e814caf4aecbb6305cacd950cb235b6a412dee943c2c4d01608476803a068648",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not use equally expensive reasoning for every small decision in Jev Agent Harness?",
+        "answer": "Tool workflows have bounded decisions, some suitable for a cheap decider and others needing more reasoning. Explicit delegation with fallback lets savings and error costs define the scope. A cheap decider is not automatically good for open tasks; validate it on states it actually encounters.",
+        "example": "Example: A cheap model may decide whether to keep a candidate record. An open explanation with missing evidence may still require the main model."
+      }
+    },
+    "qa/agent-research:jev-agent-harness/comparison": {
+      "source_sha256": "e7bf552b29a618f5ffe12e7d6177c5cbea4bfd8e7219eda749d934b573784e35",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a cost- and task-value threshold differ from a fixed 0.7 confidence gate?",
+        "answer": "Utility uses paired correctness differences between the decision and strong models plus saved call cost. Select a confidence suffix whose bins are all nonnegative. A constant ignores class, error cost, and overconfidence. Fitting is not infallible; the paper retains failed calibration and no-gain additional training.",
+        "example": "Example: A high-stakes error can outweigh a small saving, while a recoverable decision may tolerate a lower delegation threshold."
+      }
+    },
+    "qa/agent-research:jev-agent-harness/implementation": {
+      "source_sha256": "244e29816675dbb4d2ff26a2c5437ce7e9dc68b212cfa076a42392e5997decb2",
+      "reviewed": true,
+      "fields": {
+        "question": "Should unknown classes or undersampled categories use the nearest threshold?",
+        "answer": "No. Default bins require at least twenty rows, keep equal confidence together, and merge undersized tails. Too few rows for a category, no eligible suffix, or an unknown type means fall back to the strong model. Fit uses calibration validation only; runtime sees no gold or strong-model answers. Local handwritten callbacks test the contract.",
+        "example": "Example: Three argument decisions cannot calibrate a reliable threshold. Fall back rather than borrowing a different tool class's threshold."
+      }
+    },
+    "qa/agent-research:gemini-minecraft/mechanism": {
+      "source_sha256": "1da064a67efc0c2463a020eec1d526b20cc23324f4a8681178c936414c8e65c5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't the Observer and shared notes replace each executing agent's actual environment feedback?",
+        "answer": "Summaries help coordinate but can lag or miss local changes. Programs must use world responses to determine success. Programmatic action, durable notes, and multi-session collaboration support long tasks together. A chat claim cannot advance dependent steps, and a described case is not a local run.",
+        "example": "Example: A note says a bridge was fixed, but another agent sees it destroyed. Update from current observation instead of trusting the old note."
+      }
+    },
+    "qa/agent-research:gemini-minecraft/basics": {
+      "source_sha256": "d2d7872efb5d5053507df2ab6381d96628ef0e84bc40b6193e98af198575d625",
+      "reviewed": true,
+      "fields": {
+        "question": "Why study teamwork through long-horizon Minecraft completion rather than single-instruction following?",
+        "answer": "Exploration, resource gathering, crafting, and combat create dependencies in time and materials, with new state along the way. Multiple agents, observation, and shared information support progress. One full completion demonstrates a possibility but not a probability or causal gain from one module.",
+        "example": "Example: Mining and food gathering can be divided across roles. A note that mining is done does not produce crafting material if it was never acquired."
+      }
+    },
+    "qa/agent-research:gemini-minecraft/comparison": {
+      "source_sha256": "b2026cc522d895c91c1b9a4c070b95267c029682ce45557247f4cc61bb820f2d",
+      "reviewed": true,
+      "fields": {
+        "question": "How compare evidence and costs for four collaborating agents versus one long-running agent?",
+        "answer": "Parallel roles can divide exploration and execution but add communication, duplication, and coordination. The paper gives one long success in a random Easy world, not multiseed controls establishing reliability or cost advantage. Completion does not mean four agents generally beat one.",
+        "example": "Example: Four agents can gather resources faster or all collect the same item. One success cannot isolate teamwork from extra compute."
+      }
+    },
+    "qa/agent-research:gemini-minecraft/implementation": {
+      "source_sha256": "d64f15c69861233df97e0eaa2af2bf294bd46408be9c8c44c6a5447ae578cec7",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a 27-hour completion be stated as 100% success or a local executable capability?",
+        "answer": "No. One case has no independent repetition denominator. Roughly 24,000 calls are the authors' costs. Local work records literature and cost without commercial calls, game execution, GPU receipts, or an Evolve operator. Formal interaction notation is not a Minecraft implementation.",
+        "example": "Example: One game completion is one successful case, not ten successes or a local receipt based on the authors' video."
+      }
+    },
+    "qa/agent-research:diviner/mechanism": {
+      "source_sha256": "1e643c6debe7c24912b59d1deb5a8a89b4fb3e87f1f99d0159d12d6e3b8235c1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does a tool timeout neither support nor refute a root-cause hypothesis?",
+        "answer": "A timeout means no valid observation, not that the service is healthy or faulty. Evidence must match incident, target, time window, and availability. Similar incidents are clues only. Adapting investigation is distinct from publishing a workflow or executing mitigation, which requires separate authority.",
+        "example": "Example: A ranking-log query times out. Mark unknown and gather evidence differently rather than conclude ranking was healthy or use a later postmortem as contemporaneous evidence."
+      }
+    },
+    "qa/agent-research:diviner/basics": {
+      "source_sha256": "bd02ddab3ae6614ff3d32c1b5410394fb6eb3bc6a364ee45d771ccd4434f5cae",
+      "reviewed": true,
+      "fields": {
+        "question": "Why log evidence availability time as well as event time during incident diagnosis?",
+        "answer": "An investigator may not have later aggregates or conclusions when an event happens. Diviner requires matching incident, target, and window with available time no later than as-of. That separates contemporaneous material from final explanations, but structural compliance does not prove entailment or root cause.",
+        "example": "Example: An error at 10:00 appears in a report generated at 11:00. A 10:30 investigation cannot use that report despite its earlier event time."
+      }
+    },
+    "qa/agent-research:diviner/comparison": {
+      "source_sha256": "5031e5a8276af93267ec0777b56f519a131bcdf70e98a52d83bf46d2929ca9b3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why govern live investigation adaptation differently from publishing persistent knowledge?",
+        "answer": "A current plan can adapt to new evidence with local scope. Shared workflows influence future incidents and require a new version, replay validation, and artifact-owner approval. The paper does not authorize autonomous production mitigation or turn observational MTTR changes into randomized causal effects.",
+        "example": "Example: Add a config lookup to this incident. Rewriting the team-wide playbook needs independent validation and an owner release."
+      }
+    },
+    "qa/agent-research:diviner/implementation": {
+      "source_sha256": "5b47617e2cddaa24d4d09d7d39b805a4af49b858c3b00c8e477ca84dbdb64ea4",
+      "reviewed": true,
+      "fields": {
+        "question": "What identity and time constraints must evidence satisfy before entering EvidenceLedger?",
+        "answer": "Bind records to the current incident, target, and investigation window. Distinguish event time from evidence availability, which must not exceed as-of. Otherwise unrelated logs or later summaries can be mistaken for evidence available then. Local tests verify provenance and governance, not root cause.",
+        "example": "Example: A predawn error summarized in the morning is not known to the predawn investigator. A similar error from another incident cannot be mixed in."
+      }
+    },
+    "qa/agent-research:aria/mechanism": {
+      "source_sha256": "61c25d86b16322a5f5dcdc15a7496f7bff1fedaa0a4b5b1b5ac197d99cd77a7b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why may a repaired trajectory propose a pending tool call but not write a successful tool result?",
+        "answer": "Results must come from execution; otherwise the patch fabricates evidence. The cut preserves the observed prefix, and continuation proposes new actions before comparison with a fresh control. Structural validity does not prove correct attribution or repair.",
+        "example": "Example: Proposing to rerun tests is legal. Saying all tests passed in the continuation is not; execute and observe them."
+      }
+    },
+    "qa/agent-research:aria/basics": {
+      "source_sha256": "25a2d075040199178eb49a6d062cee5cbdd8e580cc8da14e5a3c0cccaf273968",
+      "reviewed": true,
+      "fields": {
+        "question": "Why repair an early partial trajectory rather than just summarize failure at the end?",
+        "answer": "Early mistakes propagate across agent messages. Cutting and continuing during a run can prevent amplification. ARIA learns when and where to intervene and how to continue, but must execute the patch to verify it. Replacing a suffix does not prove diagnosis or exact environment rollback.",
+        "example": "Example: A message uses the wrong unit and later agents copy it. Repair before propagation rather than only explain it after completion."
+      }
+    },
+    "qa/agent-research:aria/comparison": {
+      "source_sha256": "b048e5e6c82431e7a0289b979b3227c27d2342df4775a326e22027dc5f83e775",
+      "reviewed": true,
+      "fields": {
+        "question": "Why require a patched pass and fresh-control failure together for verified repair?",
+        "answer": "A patched success alone can result from retry randomness or environmental changes. If the fresh control also succeeds, improvement cannot be attributed to a necessary patch. The pair rules out simple retries as repair evidence but is not exact causal replay of a full framework. The paper reconstructs continuation context within a stated scope.",
+        "example": "Example: Tests pass after patching, but also pass on a fresh unpatched rerun. Do not use that pair as verified repair training data."
+      }
+    }
+  }
+}

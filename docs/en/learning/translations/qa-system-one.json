@@ -1,0 +1,581 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:chinese-jev/basics": {
+      "source_sha256": "38a26402df5e249583159f833d04ab1a1f9024087c8e4917de73c81b268e45ef",
+      "reviewed": true,
+      "fields": {
+        "question": "What output tasks suit Chinese-Jev?",
+        "answer": "Finite-choice decisions such as classification, routing and candidate selection. It takes Chinese context and candidates and directly returns candidate probabilities rather than generating long free-form answers.",
+        "example": "Example: Route an inquiry to shipping or refunds from a supplied list; writing an open-ended article is a different interface."
+      }
+    },
+    "qa/foundation-models:chinese-jev/comparison": {
+      "source_sha256": "ed57ad0c0d93da4b94306565da1dcc9a8b7c62b74c3c6d89e923946045e5469d",
+      "reviewed": true,
+      "fields": {
+        "question": "Do one-hot and soft labels give Chinese-Jev the same supervision?",
+        "answer": "No. One-hot keeps a single target; soft distributions preserve probability allocation across choices, reflecting ambiguity or annotator differences. The readout is shared, not the supervision. Soft labels need trustworthy provenance and are not true accuracy by virtue of precision.",
+        "example": "Example: Labels 0.6 and 0.4 retain a close preference; 1 and 0 lose it."
+      }
+    },
+    "qa/foundation-models:chinese-jev/implementation": {
+      "source_sha256": "a6767ad10c7c4dda35007bac8b4e4b58d496f5a559a77728e5035d7af771f190",
+      "reviewed": true,
+      "fields": {
+        "question": "Which axis should Chinese-Jev softmax use?",
+        "answer": "Normalize over valid candidates within one request. Score marker states with the same function. Do not share a denominator across requests; align soft-label order to candidates.",
+        "example": "Example: Two tickets with three categories each require two distributions, not one over six scores."
+      }
+    },
+    "qa/foundation-models:chinese-jev/mechanism": {
+      "source_sha256": "d20793cf148742f58d529b0ee2710f5ac8e874d6b50298d30df72c69797f46e4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why score Chinese-Jev candidate markers rather than generate option names and parse them?",
+        "answer": "Closed decisions need a distribution across candidates. Encode context and candidates, score each marker's hidden state and normalize, avoiding free generation and parsing. Soft targets retain annotation probabilities. A candidate's share depends on its set and is not independent correctness probability; the local objective does not reproduce general pretraining.",
+        "example": "Example: A ticket receives refund, shipping and account probabilities. Adding a category changes the shares; the old refund probability isn't fixed confidence."
+      }
+    },
+    "qa/foundation-models:editjev/basics": {
+      "source_sha256": "5250aadda52594a6978810f66db30767ea5e51e1181b65d62b9a2a57ee06bc5b",
+      "reviewed": true,
+      "fields": {
+        "question": "Does EditJev predict the edited image?",
+        "answer": "No. It predicts an expected-utility vector for fixed editors and routes the request to one. That editor produces the image; router supervision comes from judging offline outputs across editors.",
+        "example": "Example: For a clothing recolor, the router picks an editor rather than painting the result."
+      }
+    },
+    "qa/foundation-models:editjev/comparison": {
+      "source_sha256": "2d177a3bd95ded4b1f6cfd40194f635c07d8651b42767ceeeccd56e806e5f1cf",
+      "reviewed": true,
+      "fields": {
+        "question": "How can EditJev express quality-first and speed-first choices in one interface?",
+        "answer": "Combine quality utility with a fixed speed score weighted by beta. Changing beta changes the choice, not the quality labels. It expresses a cost preference, not a universally best setting without evidence.",
+        "example": "Example: If quality is close, weighting speed more can select the faster editor without making it higher quality."
+      }
+    },
+    "qa/foundation-models:editjev/implementation": {
+      "source_sha256": "ab8782165f28f7027c2e988b7c08f9ee583a1df214ecd10caa615ad56f56cbf6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why normalize EditJev's pairwise loss by valid pairs per request first?",
+        "answer": "Requests have different counts of reliable pairs. Average within request and then across requests to prevent pair-rich requests dominating. A request with no valid pair contributes differentiable zero.",
+        "example": "Example: An image with many easily distinguished outputs shouldn't outweigh all others simply because more pairs can be formed."
+      }
+    },
+    "qa/foundation-models:editjev/mechanism": {
+      "source_sha256": "6fd5f70fd5c37e540c5e457de52e817ddaaf8c0a40362a46f93020ccdb3b8e0e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why run every editor offline but only the selected one at inference?",
+        "answer": "All offline outputs and their judgments supply pairwise quality labels. At deployment, predicted utility plus fixed speed preference selects once without seeing outputs. Candidate ordering must match; speed weighting is a tradeoff, not truth. The full multi-editor setup is too costly and was not reproduced.",
+        "example": "Example: For background removal, pick an editor first and call only it. Running every editor defeats the cost savings."
+      }
+    },
+    "qa/foundation-models:gliclass/basics": {
+      "source_sha256": "53901b413812d02b2c0865ec42d452b5531ebc51e568f1ea69d87dffc020d663",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a new GLiClass runtime label create a new classifier output neuron?",
+        "answer": "No. Labels are input text scored for the current request. Candidate descriptions/set change, not a fixed output parameter per label. Semantics must be carried by content and still require validation; allowing new labels is not arbitrary domain expertise.",
+        "example": "Example: Replace the refund inquiry description with shipping follow-up, rather than reusing a class number with permanent meaning."
+      }
+    },
+    "qa/foundation-models:gliclass/comparison": {
+      "source_sha256": "cc1ef955363d327a577f46c47e5bbf608fff9bbf9e1ebcf70da75c412b9e4260",
+      "reviewed": true,
+      "fields": {
+        "question": "How does GLiClass dynamic scoring differ from pairwise cross-encoders?",
+        "answer": "Pairwise methods infer separately for each text-label pair. This interface processes candidates together and emits a joint distribution. Calls and normalization differ. The local lightweight interaction kernel is not a full Transformer or a speed benchmark.",
+        "example": "Example: Ten labels do not necessarily require ten independent LM calls; actual throughput depends on implementation."
+      }
+    },
+    "qa/foundation-models:gliclass/implementation": {
+      "source_sha256": "d2a2f11ea9aa03abfafd7a94309a47c1fe8f4614736807ba364dbb2ae571da74",
+      "reviewed": true,
+      "fields": {
+        "question": "What does local rival-centered GLiClass center?",
+        "answer": "Representations of candidates within the same question, before scoring their interaction with state. Other requests do not enter the mean. This tests relative candidate interaction, not original weights or PPO.",
+        "example": "Example: Refund and shipping candidates share their ticket's center, not labels from another ticket."
+      }
+    },
+    "qa/foundation-models:gliclass/mechanism": {
+      "source_sha256": "6a5647509bc264cd4294d009866d7080b73a6e88cfebf60bfb59e2843b1cb0a1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't runtime GLiClass reduce to a fixed text-only classifier?",
+        "answer": "Scoring must use candidate content to handle changing label sets; a fixed index cannot convey new descriptions. Joint candidate scoring avoids per-candidate calls and text parsing. Local bilinear/centered scoring checks the mechanism without full weights or training.",
+        "example": "Example: The same inquiry may require different choices in account and credit-card taxonomies. New labels need descriptions, not unseen numbers."
+      }
+    },
+    "qa/foundation-models:jev-portuguese-ir/basics": {
+      "source_sha256": "9c8b5583fa87669e56432c54997fa2f2833f59cf564d284b38577ec363d65539",
+      "reviewed": true,
+      "fields": {
+        "question": "Are relevance annotation and reranking the same output in Portuguese JEV retrieval?",
+        "answer": "No. Annotation assigns ordinal relevance; reranking uses independent probabilities that each document directly answers a query. Metrics and semantics differ; class shares are not independent relevance probabilities.",
+        "example": "Example: Marking one document highly relevant and ordering a collection are distinct output types."
+      }
+    },
+    "qa/foundation-models:jev-portuguese-ir/comparison": {
+      "source_sha256": "6e5ccfe894b934a33a9eb95707679dd0e54dc9159d64ba731db8fe8e703da5dc",
+      "reviewed": true,
+      "fields": {
+        "question": "How does an independent Noul probability differ from adding BM25?",
+        "answer": "The reranker uses the independent answer probability directly without mixing BM25. Any fusion is a different method and needs separate evaluation.",
+        "example": "Example: BM25 can retrieve the initial set. Adding it again to the final score changes the specified reranker."
+      }
+    },
+    "qa/foundation-models:jev-portuguese-ir/implementation": {
+      "source_sha256": "8effc45d6d690c09e3ac091a1c057289f3cec195feca2798c9629879ac5fb812",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a missing Portuguese reranker score default to zero?",
+        "answer": "No. Collect and match every expected document for the query; reject missing, duplicate or nonfinite entries. Silent zero converts a protocol error into a relevance judgment and changes ranking.",
+        "example": "Example: If the second batch is missing, don't put those documents last and compute metrics anyway."
+      }
+    },
+    "qa/foundation-models:jev-portuguese-ir/mechanism": {
+      "source_sha256": "510c4a9fc26d94549bab1663223a9c977a7507ade854a85bc4ce50582b97a230",
+      "reviewed": true,
+      "fields": {
+        "question": "Why independently score documents rather than put all of them into one Choice?",
+        "answer": "Binary prompts estimate whether each document directly answers, making scores sortable across batches after all return. Joint Choice outputs competitive shares whose denominator changes with new documents. Ordinal labeling is separate and retains label order. No BM25 fusion or trained calibration, and zero-relevance queries stay in evaluation.",
+        "example": "Example: Two documents can each be highly likely to answer. In a two-choice distribution they must share probability mass."
+      }
+    },
+    "qa/foundation-models:llm2jev/basics": {
+      "source_sha256": "8897720f3c2e8c50cab685034a0f1a491f7afb53807456d259e99f4df9e194f2",
+      "reviewed": true,
+      "fields": {
+        "question": "How can LLM2Jev use an existing LLM for finite decisions?",
+        "answer": "Read probabilities of option markers to form a distribution without generating an explanation. Fine-tuning adds listwise supervision. This changes readout/optimization, not the need for inference.",
+        "example": "Example: Read numbered-marker probabilities to select a tool instead of generating its full name."
+      }
+    },
+    "qa/foundation-models:llm2jev/comparison": {
+      "source_sha256": "65768ec6d5d81238843ce6301d415963c5a6779c01f36cec865e6e8b0add555f",
+      "reviewed": true,
+      "fields": {
+        "question": "How does the LLM2Jev KL anchor differ from training only a listwise loss?",
+        "answer": "Listwise loss trains current choices; auxiliary KL against the base distribution limits drift on other outputs. It is a stability tradeoff, not a guarantee of retaining all prior abilities.",
+        "example": "Example: Tool selection may improve under the auxiliary constraint, but open-ended tasks still need independent evaluation."
+      }
+    },
+    "qa/foundation-models:llm2jev/implementation": {
+      "source_sha256": "cab876d1738a47bb101884c844a68488bc22b45c5ab08ccfa7b758d5530ef3f6",
+      "reviewed": true,
+      "fields": {
+        "question": "How should LLM2Jev use the reference for auxiliary KL?",
+        "answer": "Freeze the base distribution and compute KL from base to auxiliary output. Updating the reference with the policy moves the anchor and changes the regularizer.",
+        "example": "Example: As the student changes, the base stays fixed instead of chasing the student."
+      }
+    },
+    "qa/foundation-models:llm2jev/mechanism": {
+      "source_sha256": "6860d0d91a386201daf34c64435037ff1aa5744dd647c86a905396a27ccce22d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why normalize joint option-string probabilities rather than use the last token?",
+        "answer": "A multi-token option needs its full conditional chain. Fine-tuning adds a listwise objective and a base-model auxiliary KL anchor. Length and tokenization affect readout; the local candidate kernel does not evaluate a full checkpoint.",
+        "example": "Example: For a two-token marker use both conditional probabilities. Taking only the last can rank choices differently."
+      }
+    },
+    "qa/foundation-models:metaencoder/basics": {
+      "source_sha256": "7bd9ac623fabf10c8e658e6232327bf749834c4017cbe45b1a553f91ef47cbfe",
+      "reviewed": true,
+      "fields": {
+        "question": "How does MetaEncoder use one representation for closed choices and open retrieval?",
+        "answer": "Encode requests and candidates separately with a shared encoder, normalize their final-token embeddings and compare similarity. Closed choice uses supplied options; open retrieval searches a larger bank. Candidate scope and training negatives differ.",
+        "example": "Example: One request vector can choose among three tools or search a full description index."
+      }
+    },
+    "qa/foundation-models:metaencoder/comparison": {
+      "source_sha256": "112a59768f656c36d7979e492079236a20024a1763145b3ef839cfe229ac54e0",
+      "reviewed": true,
+      "fields": {
+        "question": "What does MetaEncoder's dual encoder sacrifice relative to joint deep interaction?",
+        "answer": "Separate encoding enables caching and large retrieval, but limits fine-grained pairwise reasoning. Including options in a closed-set request adds context without turning the candidate tower into an arbitrary cross-encoder.",
+        "example": "Example: Detecting a subtle contradiction between long proofs can be harder with fixed vectors than joint reading."
+      }
+    },
+    "qa/foundation-models:metaencoder/implementation": {
+      "source_sha256": "c90fa3637c5f9b007c8d6912d2d0b45cdfb3fb1a7a4332f61496ff6c336c126f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why deduplicate open-retrieval negatives over the full MetaEncoder batch?",
+        "answer": "Open retrieval uses global batch candidates. Treating duplicates as independent negatives changes training mass. The specified direction is request-to-candidate; adding a reverse term changes the objective.",
+        "example": "Example: The same tool appearing twice should not become two competing negatives."
+      }
+    },
+    "qa/foundation-models:metaencoder/mechanism": {
+      "source_sha256": "307ccaecf282530caf65263e43fcc7931fc6139fb878a15930742e3fe142efe4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do cached candidates and options in the request not imply full candidate interaction?",
+        "answer": "Shared dual towers independently encode request and candidate and match normalized last-token vectors. A candidate can be cached because it doesn't depend on the request. Training partly drops closed-set options to discourage surface matching. Cross-reasoning remains limited, and cache requires identical model, prompt and candidate content.",
+        "example": "Example: Pre-encode tools and encode each request online. A changed tool definition invalidates its old vector."
+      }
+    },
+    "qa/foundation-models:mjev-spatial/basics": {
+      "source_sha256": "3f32503c05d0e4eda217658595dc0a9c43499fff5829bb32fbc05a64e5c94069",
+      "reviewed": true,
+      "fields": {
+        "question": "How does MJev-Spatial express a 2D point as classification?",
+        "answer": "Treat image regions as candidates and select progressively finer regions. Quantities such as counts also use buckets or staged readout. The output is typed choice, not free-form coordinate parsing.",
+        "example": "Example: Pick the upper-right region, then one cell in its next 3×3 grid."
+      }
+    },
+    "qa/foundation-models:mjev-spatial/comparison": {
+      "source_sha256": "44a7b0a88664b2ab48def7bb83812ec9b2b9c4c3ed4a309d93da1b23bafe8ed7",
+      "reviewed": true,
+      "fields": {
+        "question": "How does two-stage counting differ from one class per integer?",
+        "answer": "Two smaller candidate sets compose the result as 32a₁+a₂, covering 0–1023. A large head directly scores each integer. Reusing finite-choice readout is useful, but first-stage errors affect the result; matching output spaces do not imply equivalent training.",
+        "example": "Example: a₁=2 and a₂=3 represent 67, not the sum of two independent counts."
+      }
+    },
+    "qa/foundation-models:mjev-spatial/implementation": {
+      "source_sha256": "03658263b01ff42a2a39638bdb0b83d6e414f18daf9b69f7b2239e687dc6c0e7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why average multistage spatial losses within each original question first?",
+        "answer": "Otherwise questions with more refinement stages receive more weight. Average stage cross-entropies per question, then average questions.",
+        "example": "Example: Three localization choices should not automatically count three times as much as one choice."
+      }
+    },
+    "qa/foundation-models:mjev-spatial/mechanism": {
+      "source_sha256": "64b9dcf6fdd00aa264443b037329fd8160783af7d2540932bb1e678e363fab1b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why read options using final attention Q/K rather than a separate classifier head?",
+        "answer": "Use the decision marker as query and candidate end markers as keys in the backbone's own projections. This shares a readout for options, numeric buckets and regions. Position encoding and grouped-query mapping matter. Points still need staged selection and crops from the original image; classification alone does not ensure spatial precision.",
+        "example": "Example: Select a coarse region, then crop it from the original image. Repeatedly cropping the last resized image changes coordinates and detail."
+      }
+    },
+    "qa/foundation-models:pathjev/basics": {
+      "source_sha256": "6c3f7b2a9a20be63b588f347293245b28e6625121f4304a789271eebab1802c1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why aren't PathJev typed decisions open-ended pathology QA?",
+        "answer": "Expert labels become structured choices or scores normalized over runtime candidates. This helps evaluation but does not cover all open-ended pathology explanations.",
+        "example": "Example: Choosing a predefined grade is different from writing a diagnostic report."
+      }
+    },
+    "qa/foundation-models:pathjev/comparison": {
+      "source_sha256": "2e95d86327d34a06656be0610280b75d890e9b699b5be373ead34c900d4e9c49",
+      "reviewed": true,
+      "fields": {
+        "question": "How does PathJev's unseen-organ test differ from random holdout of seen organs?",
+        "answer": "Unseen organs test cross-organ transfer. Random holdout mostly tests new samples from familiar distributions. Audit overlap to keep related states out of training. The same inherited head does not make the splits equally hard or equivalent.",
+        "example": "Example: Unseen slices of organ A after training on A are not transfer to organ B."
+      }
+    },
+    "qa/foundation-models:pathjev/implementation": {
+      "source_sha256": "1dfd239784817708e4bd0426cb22298599e680ea1a6ce8c855ec664d4b69f3da",
+      "reviewed": true,
+      "fields": {
+        "question": "Can PathJev replace the Score target with an ordinal-distance loss?",
+        "answer": "Not within the same protocol. The paper uses one-hot grade supervision; distances define a new objective even for ordered labels. Targets never enter prompts, and full training was too costly and not reproduced.",
+        "example": "Example: Grades two and three are adjacent, but changing their penalty is not reproducing the original objective."
+      }
+    },
+    "qa/foundation-models:pathjev/mechanism": {
+      "source_sha256": "1930fe87e72366c4e84937d490aaa4610cf7fde469ba2ddbf3f59923c93b255a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't PathJev just softmax on pathology images?",
+        "answer": "Its head combines candidate-linear terms, question interactions and set attention, inherited from earlier work. New evidence depends on pathology-state data, typed expert labels, overlap audit and unseen organs. A small classifier does not prove pathology transfer. Full training was not reproduced; targets stay out of prompts.",
+        "example": "Example: Tumor grades are text candidates scored at runtime and trained with source labels. A softmax gradient alone doesn't validate cross-organ recognition."
+      }
+    },
+    "qa/multimodal-models:system-one-rerank/basics": {
+      "source_sha256": "5db9dbaac71c1125a58ff3323acbbe73e75338fd6031c64ed4dcf68f7df6b9e7",
+      "reviewed": true,
+      "fields": {
+        "question": "How can one System One multimodal readout produce a full ranking?",
+        "answer": "Encode query and first-stage candidates in one context and read their label probabilities at the first answer position, then sort. The unprocessed tail stays in retrieval order. No ranking text is generated, but inputs still need encoding.",
+        "example": "Example: Read A/B/C probabilities for top images and sort them, leaving later candidates in their original order."
+      }
+    },
+    "qa/multimodal-models:system-one-rerank/comparison": {
+      "source_sha256": "5ad4faf1ddfc854f2bca4c88cd222ad4ab8de64d312a2d126493a863d8e180e5",
+      "reviewed": true,
+      "fields": {
+        "question": "How does setwise readout differ from per-document yes/no scoring?",
+        "answer": "Setwise options compete in one normalized context; binary scores judge relevance independently. Their denominators and interactions differ, so probabilities are not interchangeable. The paper's yes/no arm was not reproduced locally.",
+        "example": "Example: Two relevant documents can each have high yes probability, while two choices share total mass."
+      }
+    },
+    "qa/multimodal-models:system-one-rerank/implementation": {
+      "source_sha256": "38696c2bcd68c83595679974a2a986b04b2878eef64f3fc79f936a43c04fda94",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must candidate labels be distinct single tokens under the current tokenizer?",
+        "answer": "Readout uses one answer-position logit vector. Multi-token labels need conditional continuation scores, and another model's token IDs can name different tokens. Verify each label; do not silently use only the last piece.",
+        "example": "Example: If a new tokenizer splits a letter marker, reject it or define a different protocol rather than reuse old IDs."
+      }
+    },
+    "qa/multimodal-models:system-one-rerank/mechanism": {
+      "source_sha256": "cfa781288f6ecc8824040c9bcd4cd94be65e32eb91091f4c9bcbaf05b155f380",
+      "reviewed": true,
+      "fields": {
+        "question": "Why report both candidate probabilities and full-vocabulary label mass?",
+        "answer": "Within-label normalization always sums to one, even when the model barely supports any legal label. Full-vocabulary mass exposes low support. Labels must be distinct single tokens; the local readout is not a separately trained System One model.",
+        "example": "Example: A can lead among letters even when their combined vocabulary mass is tiny. It may rank first without high absolute confidence."
+      }
+    },
+    "qa/foundation-models:jev-multicorrect/basics": {
+      "source_sha256": "2bb5ad8764148a01a5c9a866ff2367e628bf9d9c0ea1bd05c34a648c95bcf436",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a multicorrect task require one answer or the entire correct set?",
+        "answer": "Recover all correct candidates; there may be more than one. One correct choice can miss others; choosing everything can include distractors. Interpret ranking, thresholding and exact-set metrics using a set rather than a winner.",
+        "example": "Example: Correct {A,B} is not recovered by {A} or {A,B,C}."
+      }
+    },
+    "qa/foundation-models:jev-multicorrect/comparison": {
+      "source_sha256": "3dcd81e40eee6b8fbb96b4711f9208d5199db176083526c97fd7e3b7ad1cfe19",
+      "reviewed": true,
+      "fields": {
+        "question": "Why calibrate listwise shares differently from independent binary probabilities?",
+        "answer": "Listwise shares depend on other options and sum to one; multiple binary probabilities may be simultaneously high. One threshold or calibration meaning confuses competition with correctness.",
+        "example": "Example: Adding another correct option can reduce one item's listwise share without reducing its binary probability."
+      }
+    },
+    "qa/foundation-models:jev-multicorrect/implementation": {
+      "source_sha256": "fcf6352fb4f8c26ba02e957c11b00e49a4111b596c9e92d4cc60ab78e92e1049",
+      "reviewed": true,
+      "fields": {
+        "question": "May the threshold be reselected from the test exact-set curve?",
+        "answer": "No. Deployment selects thresholds on a validation grid and freezes them for test. A same-data threshold curve is retrospective. The predictor does not see the correct set.",
+        "example": "Example: Picking the best point after seeing test is a hindsight upper bound, not unseen-data performance."
+      }
+    },
+    "qa/foundation-models:jev-multicorrect/mechanism": {
+      "source_sha256": "591f5fabf1a7f9a85224877f617976a099feb2c2c4b2322d6ccb44158e600120",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can exact-set recovery fail even when every correct option outranks distractors?",
+        "answer": "One correct choice can absorb most listwise mass, leaving another below threshold or the uniform baseline. Correct ranking differs from exact-set recovery, and shares are not independent probabilities. Fit deployment thresholds on validation only.",
+        "example": "Example: Two correct options rank first and second, but uneven shares cause thresholding to keep only one. A top-one hit misses the incomplete set."
+      }
+    },
+    "qa/foundation-models:jev-request-audit/basics": {
+      "source_sha256": "bdf585dba78b7cfa64929501f52d645d5ea3f6856f578842cacc4aaaaa58e26d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is request independence separate from structured output?",
+        "answer": "Valid JSON or candidate labels guarantee format, not whether an unrelated question changes the original decision. The audit fixes evidence and target to measure interference from grouping requests.",
+        "example": "Example: Both questions can produce valid probabilities even if placing them together flips the first decision."
+      }
+    },
+    "qa/foundation-models:jev-request-audit/comparison": {
+      "source_sha256": "de063e6015bcbaa6fbc99d3892af55ac7c5add9c08dc31de1b87bd4bdde30d4e",
+      "reviewed": true,
+      "fields": {
+        "question": "How can candidate-expansion probability drops be distinguished from preference reversals?",
+        "answer": "A new candidate enlarges the softmax denominator and can reduce old shares naturally. Compare conditional odds between original choices or strict binary flips to separate normalization from relative preference.",
+        "example": "Example: A loses share but still outranks B because C absorbs mass; A/B order has not flipped."
+      }
+    },
+    "qa/foundation-models:jev-request-audit/implementation": {
+      "source_sha256": "2a2338a31d4f77a91e2e72b7e8bce97ea18659e0ffec25ee90fceb7e17499332",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is a binary probability of exactly 0.5 not a strict flip?",
+        "answer": "Strict flips require centered probabilities on opposite sides, with product strictly negative. Equality is a separate tie. Assigning the boundary arbitrarily overstates flips and obscures precision effects.",
+        "example": "Example: 0.5 followed by a preference for yes is a boundary change, not a clear no-to-yes reversal."
+      }
+    },
+    "qa/foundation-models:jev-request-audit/mechanism": {
+      "source_sha256": "d819e99a25ec9db42c2bb873f1dae473d8b772159cc86e8b459caece66c495c4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why audit added questions, evidence and candidates separately?",
+        "answer": "Adding a question keeps proposition and evidence fixed to test interference. New evidence legitimately changes context; new candidates change normalization. Combining them prevents attribution. For expansion, compare original conditional odds. Evaluator labels, scenario names and document identity never enter predictions.",
+        "example": "Example: An irrelevant extra question flipping a decision is concerning; new evidence may justify a flip, and a third choice can reduce shares without changing relative preference."
+      }
+    },
+    "qa/foundation-models:prism-1/basics": {
+      "source_sha256": "d0ce85d16c42e3cb1173891e22f0e8b4d8d677092d1f7433e997662889dfcaed",
+      "reviewed": true,
+      "fields": {
+        "question": "Must Prism-1's original probabilities stay numerically unchanged after a third option?",
+        "answer": "No. The denominator can increase and both shares can fall. Preserve their relative odds and order; the new option may win. The consistency constraint does not require ignoring additions.",
+        "example": "Example: Original 2:1 odds can become probabilities 0.4 and 0.2 after adding C, still 2:1."
+      }
+    },
+    "qa/foundation-models:prism-1/comparison": {
+      "source_sha256": "a3385bab686d6dacfcd122941bd9dcb3106ddf5e1c233fb6e0dec3419916598c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't Prism-1's option independence suit 'none of the above'?",
+        "answer": "Independent scores see shared state, question and the option itself. 'None of the above' depends on the validity of other options and needs interaction, so imposing the same Luce constraint is inappropriate. This is a structural boundary, not a routine training error.",
+        "example": "Example: Adding a correct answer should invalidate 'none of the above', which an isolated option cannot determine."
+      }
+    },
+    "qa/foundation-models:prism-1/implementation": {
+      "source_sha256": "6db8211614b54a54cd72528c316bb76767b30fa260f5e0c71d6b1cc2dc8593f2",
+      "reviewed": true,
+      "fields": {
+        "question": "Can Prism-1 option blocks read each other or start at different positions?",
+        "answer": "No. Each reads shared context and attends causally within its own block; all start at the same position. Otherwise independent scoring breaks. This isolation does not block injection in shared context.",
+        "example": "Example: Inserting a longer option must not shift later options' position IDs."
+      }
+    },
+    "qa/foundation-models:prism-1/mechanism": {
+      "source_sha256": "60fa418c62a214a29a18c81379cab9de5c1279ed55e3b0a44c22876137e68e54",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine isolated attention and equal starting positions in Prism-1?",
+        "answer": "The score may depend only on shared state, question and its own option. Isolation prevents cross-reading; equal positions remove order effects. Joint softmax may change the denominator but should preserve old odds. This does not suit cross-option choices such as 'none of the above' or prevent injection in shared state.",
+        "example": "Example: A new tool can win and lower old shares but insertion position alone should not swap the old tools' ranking."
+      }
+    },
+    "qa/foundation-models:jev-capability/basics": {
+      "source_sha256": "904943bde594be39cd7ad52d22fcb67707d8449456f0310e6080a12db94f9ff3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is the Jev capability paper an evaluation rather than a new architecture?",
+        "answer": "It tests knowledge, reasoning and multilingual behavior under finite candidates. The contribution is protocol and capability boundaries, not a new training objective. An evaluator neither implements nor improves the model.",
+        "example": "Example: Converting public questions to four choices and scoring them measures performance; it is not a reasoning module."
+      }
+    },
+    "qa/foundation-models:jev-capability/comparison": {
+      "source_sha256": "16e538e1445d4d53b66d2bc8cf47278abb7b64aa3676819a907644b49a55944d",
+      "reviewed": true,
+      "fields": {
+        "question": "Do strong knowledge and weak math scores prove the model cannot reason?",
+        "answer": "No. Evidence is limited to tested tasks, prompts and choice interface, possibly with language/coverage effects. Report measured tasks and gaps separately instead of generalizing to every setting.",
+        "example": "Example: Failure on one arithmetic format does not establish failure in tool planning or all mathematics."
+      }
+    },
+    "qa/foundation-models:jev-capability/implementation": {
+      "source_sha256": "64553628c06f99b9bc78cb45770abfe6e67ed92c5a164c6202777d15bbdd5787",
+      "reviewed": true,
+      "fields": {
+        "question": "Why submit question and candidates once in the Jev capability evaluation?",
+        "answer": "One public decision prevents answer leakage or retry assistance. The scorer reads gold only afterward. Record vendor protocols separately and disclose missing items rather than silently removing them from the denominator.",
+        "example": "Example: Strip the answer field before calling the predictor; score through a separate stage."
+      }
+    },
+    "qa/foundation-models:jev-capability/mechanism": {
+      "source_sha256": "bcf50001d26901e73cbb2926e14c03a944584f0faec56475b5b7ed90e9a23100",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not combine vendor and local Jev capability numbers into one leaderboard?",
+        "answer": "Different prompts, backends and data protocols confound capability. Fix public prompts, candidates and one decision; join labels only in scoring, recording language and missing coverage. This is an audit, not training, and one task class cannot represent all reasoning.",
+        "example": "Example: Vendor math under another prompt and local knowledge under a fixed interface can be listed separately, not used to declare an overall winner."
+      }
+    },
+    "qa/foundation-models:jev-dlc/basics": {
+      "source_sha256": "c2d7988397423cc36a69c8f60ea4186f08ed264aa4fba7611e829eee4b270671",
+      "reviewed": true,
+      "fields": {
+        "question": "Does Jev-DLC continual adaptation need to retain complete histories?",
+        "answer": "No. A frozen scorer has two compact states: semantic counts/direction for the conservative channel and a current correction direction for the responsive channel. Feedback enters state, not an ever-growing conversation prefix.",
+        "example": "Example: Repeated routing corrections update counts and directions rather than append every old ticket."
+      }
+    },
+    "qa/foundation-models:jev-dlc/comparison": {
+      "source_sha256": "6774c85af556c45d9fe472c10838be56317e1dc942d531cfdd5a025978295ca1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate conservative and responsive Jev-DLC channels?",
+        "answer": "The conservative one builds a stable prior from repeated behavior; the responsive one tracks recent corrections. Reliability mixing balances long-term patterns and change; one state struggles to express both.",
+        "example": "Example: A long-standing preference for A and temporary switch to B can be recorded separately."
+      }
+    },
+    "qa/foundation-models:jev-dlc/implementation": {
+      "source_sha256": "454f423c0a9e993760d86576af1a30ee42d1c444b57abe208907f420ec4af66c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reject feedback on forged, replayed or stale Jev-DLC Decisions?",
+        "answer": "Feedback must refer to a committed decision from this instance; otherwise arbitrary targets or duplicated experience can alter state. Release the current public cache after update. Adaptation never overrides hard safety masks.",
+        "example": "Example: Sending the same undo event twice must not count as two corrections."
+      }
+    },
+    "qa/foundation-models:jev-dlc/mechanism": {
+      "source_sha256": "8df93e2a27f20c2872c6a392bf6ed2ab3ededd45794972132b81dbe8e3a99092",
+      "reviewed": true,
+      "fields": {
+        "question": "Why assess Jev-DLC reliability before updates and apply feedback only later?",
+        "answer": "Reliability measures prediction before feedback, not after learning the answer. The conservative state tracks repeated semantic experience, the responsive state tracks current correction, and reliability mixes them. Feedback must bind a committed decision; no forgery/replay or reading current gold before prediction.",
+        "example": "Example: A user undo can update both channels for the next request, not retroactively turn this choice into a success."
+      }
+    },
+    "qa/foundation-models:jev-regional-transfer/basics": {
+      "source_sha256": "ebe5903f8ccc5d334b3f373a933fb86719268251aea21aa832efd6ee3247f781",
+      "reviewed": true,
+      "fields": {
+        "question": "Why report accuracy, calibration and risk–coverage in regional-language transfer?",
+        "answer": "Accuracy measures aggregate correctness; calibration matches predicted probabilities to frequencies; risk–coverage asks whether confidence filtering retains reliable examples. Each informs whether a low-cost model and stronger fallback make sense.",
+        "example": "Example: Models with the same accuracy may differ greatly in how concentrated errors are at low confidence."
+      }
+    },
+    "qa/foundation-models:jev-regional-transfer/comparison": {
+      "source_sha256": "b660df4b3b58944d460731dc009e3150cc0c397f553ae9c2d88225b9b6580671",
+      "reviewed": true,
+      "fields": {
+        "question": "How does routing low-confidence examples differ from translating all examples first?",
+        "answer": "A cascade allocates extra compute to selected cases; translation changes language representation for every input. Translation gains do not show error-detection skill. Select and freeze routing fraction on validation.",
+        "example": "Example: Escalating only difficult examples need not translate them. Translating everything into Indonesian changes even easy inputs."
+      }
+    },
+    "qa/foundation-models:jev-regional-transfer/implementation": {
+      "source_sha256": "f10a1090953fab07c1daf939371c54f510a56dea8c13e91af200730342fb0ba5",
+      "reviewed": true,
+      "fields": {
+        "question": "What data may choose cascade fraction and local temperature?",
+        "answer": "Validation predictions only: select fraction by the specified grid and macro-F1, and temperature by validation NLL. Freeze before test. Temperature calibration is a local extension, not the authors' training step.",
+        "example": "Example: If test suggests escalating more, don't revise the fraction and report the same score as independent."
+      }
+    },
+    "qa/foundation-models:jev-regional-transfer/mechanism": {
+      "source_sha256": "4b3b8fb19e6097950889d3710ac235c3265c7301a927a85bc465d8237364ac02",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a well-calibrated model still route errors poorly by low confidence?",
+        "answer": "Calibration checks probabilities against aggregate correctness; routing needs errors concentrated at lower confidence than correct cases. Select fraction on validation macro-F1 and freeze for test. Parallel languages share sentence identities; cluster comparisons by sentence rather than counting independent duplicates.",
+        "example": "Example: Mean confidence matches accuracy, but errors are spread across confidence levels. Routing the lowest-confidence cases may not save compute."
+      }
+    },
+    "qa/foundation-models:selective-reasoning/basics": {
+      "source_sha256": "c2d23cd0fd6580e5b15d6498174e4ebf645ef2d9a3c88ade246acfed3eb2ffcd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not generate equally long reasoning for all Selective Reasoning questions?",
+        "answer": "Direct readout suffices for some choices; others need extra steps. Gate reasoning by expected benefit and read answers mid-generation to allocate compute where it is needed.",
+        "example": "Example: Return a simple intent immediately, but reason through multi-step arithmetic and stop when sufficiently certain."
+      }
+    },
+    "qa/foundation-models:selective-reasoning/comparison": {
+      "source_sha256": "dab090b474d66f3ea8a9cf91d9f5063ac7dce6aa074d9bb906d4f8e5812aa3c3",
+      "reviewed": true,
+      "fields": {
+        "question": "How does reading at natural generation states differ from fixed-token polling?",
+        "answer": "The trigger seeks positions suitable for explicit readout; a rate limit only bounds frequency. A shared reader and entropy rule still decide reliability. Triggering is not proof of correctness.",
+        "example": "Example: Read after an intermediate conclusion rather than mid-equation, but still inspect candidate probabilities."
+      }
+    },
+    "qa/foundation-models:selective-reasoning/implementation": {
+      "source_sha256": "5bb0c57a54f11db6897139b15e2bf8c06132d47a7abd7d236fa41680f8bd30fc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why normalize entropy by log K when candidate count changes?",
+        "answer": "Maximum entropy changes with K, so H/log K makes certainty thresholds comparable. Distinguish cancellation from budget exhaustion. Freeze gate normalization statistics and weights before evaluation, not by test feedback.",
+        "example": "Example: Four and ten choices have different raw entropy ranges; one raw threshold changes the stopping rule."
+      }
+    },
+    "qa/foundation-models:selective-reasoning/mechanism": {
+      "source_sha256": "0dffaa2356ce277186149f1ca4a15b43685d1d154b559a100783e89fb1d0fae7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate starting reasoning, triggering readout and accepting an answer?",
+        "answer": "The launch gate estimates benefit, the trigger chooses a natural prefix, and post-read normalized entropy decides acceptance/cancellation. They act on different states. Mark forced returns at budget exhaustion separately from threshold success; fitting cannot see evaluation gold.",
+        "example": "Example: Reason until a readable point, continue if the readout remains uncertain, and mark budget-limited uncertain output as forced rather than confident."
+      }
+    }
+  }
+}

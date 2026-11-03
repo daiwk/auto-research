@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:sparse-opd/basics": {
+      "source_sha256": "9d23793bc9609595647b0241136ffa24452a69168ca827b4d555ef8dc5cceb28",
+      "reviewed": true,
+      "fields": {
+        "question": "Why study supervision at one or two positions in Sparse OPD?",
+        "answer": "Dense supervision may be redundant. Select important positive teacher–student differences to test concentration of useful information. A particular experiment doesn't prove one token suffices universally.",
+        "example": "Correcting one operator can matter more than imitating many connectives."
+      }
+    },
+    "qa/post-training:sparse-opd/comparison": {
+      "source_sha256": "7b7bd16056c24137b5b6fcd89d515bfc904d4945902dd6c4f5068b077f002279",
+      "reviewed": true,
+      "fields": {
+        "question": "Why aren't sparse loss and shorter generation the same efficiency improvement?",
+        "answer": "Sparse loss reduces supervised positions while keeping full trajectories and often scores them to find key tokens. Shorter generation changes cost and state coverage.",
+        "example": "Generating a thousand tokens and training one still pays for all generation."
+      }
+    },
+    "qa/post-training:sparse-opd/implementation": {
+      "source_sha256": "bcf58fb8ff4f59a5e8a5d033ac99096d1e2853257d7c34539069d382e8a00f2b",
+      "reviewed": true,
+      "fields": {
+        "question": "How distinguish unselected-token gradients from context?",
+        "answer": "Unselected positions have no direct loss but stay as conditioning; shared weights may still affect them. Local candidate tests aren't full Qwen/Llama training.",
+        "example": "Omitting step two's loss doesn't allow deleting it before scoring step three."
+      }
+    },
+    "qa/post-training:sparse-opd/mechanism": {
+      "source_sha256": "12b987ef19957037d6f0db96dd64a9002faecd1720b7ef88df5f0aa79aa13395",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain full context while supervising only a few largest positive gaps?",
+        "answer": "Teacher distributions depend on actual preceding reasoning. Sparse gradients don't remove conditioning. Limited-position gains are setup-specific, and no local full-parameter distillation was run.",
+        "example": "Score one key correction with prior calculations intact; deleting the prefix changes the task."
+      }
+    },
+    "qa/post-training:specroll/basics": {
+      "source_sha256": "53f265c3913803eaa168eaea6689e4edc28ffbb04b7efe307904b5f6a183dd5f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use fast and slow draft adaptation in SpecRoll?",
+        "answer": "RL changes target policy. Lightweight hidden corrections handle short drift; persistent degradation triggers future-head training. Both improve proposals without replacing target.",
+        "example": "Quickly adjust a transient acceptance drop, retrain the head only if it persists."
+      }
+    },
+    "qa/post-training:specroll/comparison": {
+      "source_sha256": "8ced67d927f89b775eb4eaf7a9e1f78b5848a09c00439e1d75997450a15610ab",
+      "reviewed": true,
+      "fields": {
+        "question": "Does changing the SpecRoll draft change GRPO target?",
+        "answer": "No. Exact target verification preserves sampling distribution, so GRPO stays unchanged. Skipping verification would change behavior data.",
+        "example": "Frequent correct drafts don't make their probabilities target policy probabilities."
+      }
+    },
+    "qa/post-training:specroll/implementation": {
+      "source_sha256": "b77bd0fb0152fbfdb41738e3dbe9b48ae2b50d584aee5b70bcb8f4a2d7222bb7",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local SpecRoll registration prove large-model RL throughput?",
+        "answer": "No. Only states and selection paths are checked. Real work needs acceptance/rejection residuals, scheduling and compute measurements; listing isn't execution.",
+        "example": "A listed candidate does not demonstrate complete GPU training."
+      }
+    },
+    "qa/post-training:specroll/mechanism": {
+      "source_sha256": "276640ddd2753f0e4625cc5fbe20f452ab16e321b7898ba967f27b29b18b0258",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't fast correction or slow draft-head training replace exact verification?",
+        "answer": "They improve proposals as policy evolves; exact rejection/acceptance preserves target distribution. Skipping it changes RL data even with a strong drafter. No local large-model throughput evidence.",
+        "example": "Adapt the drafter after lag, but still verify every proposal."
+      }
+    },
+    "qa/post-training:rail/basics": {
+      "source_sha256": "ce3d4f95479118748b4e54cf52d8acec63eab2c6cddf447a3c5903d6a10f86db",
+      "reviewed": true,
+      "fields": {
+        "question": "Why learn recoverability rather than just uncertainty in RAIL?",
+        "answer": "An uncertain state may be irreparable. Intervene based on expected recovery net of cost and condition on location/action, instead of uniformly spending extra.",
+        "example": "One missing tool retry and a fundamentally wrong premise have different recovery value."
+      }
+    },
+    "qa/post-training:rail/comparison": {
+      "source_sha256": "53c0215c17bb263244bda56d812ec926e38a752cdb506f1358ec0ffc2c3f128f",
+      "reviewed": true,
+      "fields": {
+        "question": "How does shadow-to-live evaluation differ from gold-based intervention choice?",
+        "answer": "Use permitted probes and actual feedback to learn recovery value. Gold would be an unavailable oracle. Deployment state must exclude training-only diagnosis.",
+        "example": "Restarting from a known solution plan is an oracle diagnostic, not a learned controller."
+      }
+    },
+    "qa/post-training:rail/implementation": {
+      "source_sha256": "91f393223c91e4722a9580eb38a9e89fdd6df42a92101c2e5b4e196e812b87d7",
+      "reviewed": true,
+      "fields": {
+        "question": "What does the local RAIL path establish?",
+        "answer": "Reference intervention selection and cost objective, not the paper's LLMs, private environment or judges. Execute and evaluate real recoveries before capability/budget claims.",
+        "example": "Argmax over random recovery scores does not measure actual trajectory repair."
+      }
+    },
+    "qa/post-training:rail/mechanism": {
+      "source_sha256": "34850275068153a409296b37914d83de623bcf178046442c85d14114921b23e1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why optimize intervention location/method with cost instead of oversampling uncertain states?",
+        "answer": "Additional budget helps only recoverable states. Learn intervention-specific net gains from auditable shadow/live feedback as policy changes. Never use gold to decide; no local full environment.",
+        "example": "One more tool call can rescue a trace while no reasonable budget repairs a false premise; entropy alone can't tell."
+      }
+    },
+    "qa/post-training:coba-rl/basics": {
+      "source_sha256": "5f3e73062de5dd1177f92c544a81a75886b401825d660bdab65c05578776d595",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use pass@k to probe CoBA-RL boundaries before teacher help?",
+        "answer": "Pass@1 can increase by concentrating old successes. Larger-budget coverage finds currently difficult reachable edges, where teacher guidance supplies new routes for RL consolidation.",
+        "example": "Occasional successes becoming frequent differs from learning a previously unseen solution."
+      }
+    },
+    "qa/post-training:coba-rl/comparison": {
+      "source_sha256": "eec6da016a3f82c9d9f812e6b2534a675f46fd72583af25f333703981b50a6a4",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a boundary curriculum differ from ranking fixed textual difficulty?",
+        "answer": "Reestimate from current policy samples; textual complexity doesn't track mastery. Finite k can miss rare successes, so boundary depends on budget and isn't impossibility.",
+        "example": "A long problem may leave the boundary after learning a new technique."
+      }
+    },
+    "qa/post-training:coba-rl/implementation": {
+      "source_sha256": "1420988ccc428466eb11e88e41a6c30a964edb4cd84c255d9670989820a5152d",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local pass@8 establish paper pass@256 gains?",
+        "answer": "No. Teacher/student scales and sampling budgets differ. Genuine generation, triggers and cost curves support scaled mechanisms only.",
+        "example": "Failure in eight draws doesn't imply failure after over 200 draws."
+      }
+    },
+    "qa/post-training:coba-rl/mechanism": {
+      "source_sha256": "25871025684f6ffa7d085b4c8d24c2f18fa6681f2b37770b46a15129dfc7b509",
+      "reviewed": true,
+      "fields": {
+        "question": "Why inspect both pass@1 and larger pass@k for capability boundaries?",
+        "answer": "First-hit gain may just popularize known paths. Multiple samples probe coverage, then teacher and RL target boundaries. Finite budgets still miss rare paths; local small sampling does not reproduce high-k expansion.",
+        "example": "Measure whether once-never-solved prompts become reachable with broader sampling, counting teacher cost."
+      }
+    },
+    "qa/post-training:sparse-to-dense-reward-principle/basics": {
+      "source_sha256": "27d52d6c1085042830ae12dc173089a844ad0966e29b36c65f50f0e59bdb7c3a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why emphasize equal-label-budget stages in the sparse-to-dense reward principle?",
+        "answer": "Dense teachers have different supervision costs. Match label budgets and stages to understand ordering. Contribution is an empirical four-stage comparison, not another KL function.",
+        "example": "More teacher calls can improve scores without proving dense objectives caused the gain."
+      }
+    },
+    "qa/post-training:sparse-to-dense-reward-principle/comparison": {
+      "source_sha256": "825b4b62eb6800df603f517f3e4faedd03b2b04d9a327388d3e540d1550ad180",
+      "reviewed": true,
+      "fields": {
+        "question": "Is the same KL direction equivalent on teacher and student occupancy?",
+        "answer": "No. Teacher ideal and student actual prefixes visit different errors. State source and divergence together define supervision.",
+        "example": "A KL on a correct proof and on a wrong intermediate state teaches different recovery."
+      }
+    },
+    "qa/post-training:sparse-to-dense-reward-principle/implementation": {
+      "source_sha256": "692b1be9004c7439954478d336cf7a3a3897ce0cdb3640dcda21d5d5adda75ef",
+      "reviewed": true,
+      "fields": {
+        "question": "Do existing GRPO and OPD operators reproduce the four stages?",
+        "answer": "No. Literature only; no full scheduling, real frozen teacher or equal-budget runs. Shared tokenizer and other prerequisites still matter. Stage labels aren't execution.",
+        "example": "Listing four configuration stages does not validate their data flow."
+      }
+    },
+    "qa/post-training:sparse-to-dense-reward-principle/mechanism": {
+      "source_sha256": "a54e95a4b3ffdca80f20395a51231d07b2436f0e11d55d6d1827e371f8ba8778",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't the principle just sequencing GRPO and KL functions?",
+        "answer": "The paper tests four stages under equal label budgets and distinguishes forward KL on teacher-visited states from reverse KL on student states. Operators alone don't reproduce it. No local complete training.",
+        "example": "The same KL name on a teacher solution and a student error refers to different supervision."
+      }
+    },
+    "qa/post-training:lightning-opd/basics": {
+      "source_sha256": "393ef6fb3f6dcc5a861b2f463b1cbb89e541fb46cb6f5e118c8859b4272806ab",
+      "reviewed": true,
+      "fields": {
+        "question": "Why cache Lightning OPD teacher scores before updates?",
+        "answer": "Online teacher inference can bottleneck training. Score initial student traces once and reuse labels. This front-loads cost rather than eliminating generation/scoring.",
+        "example": "Prepare teacher scores per prefix and reread them for multiple updates."
+      }
+    },
+    "qa/post-training:lightning-opd/comparison": {
+      "source_sha256": "0b4b08b2f7fe45c1f52fb4cf44153f657491897891bf317cb8cdddf39af038e7",
+      "reviewed": true,
+      "fields": {
+        "question": "How does offline cache coverage differ from refreshing rollouts each step?",
+        "answer": "Cache covers initial student visits; updated policy may reach new states. Refreshing covers those at higher cost. Cached isn't always on-policy.",
+        "example": "A newly learned solution's prefixes won't appear automatically in an old cache."
+      }
+    },
+    "qa/post-training:lightning-opd/implementation": {
+      "source_sha256": "7f7de91092bb874f9e41b959b671ee14e06a204c8843714a11f494d521b37674",
+      "reviewed": true,
+      "fields": {
+        "question": "What Lightning cache identities must match?",
+        "answer": "Teacher checkpoint, prompt, tokenizer, response and position mask. Changes invalidate labels. Local data flow is not Qwen vocabulary distillation or AIME.",
+        "example": "A tokenizer update can misalign stored token scores despite the same filename."
+      }
+    },
+    "qa/post-training:lightning-opd/mechanism": {
+      "source_sha256": "4aa165e1238b61a78cb08b92f0b46fa89f7e7b5c35a79cad3845516722eefad8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't cached teacher scoring equivalent to continuously online distillation?",
+        "answer": "Initial student samples are scored under one teacher config. Later updates shift visitation without refreshing labels. Coverage and teacher consistency govern the cost tradeoff; local evidence is data flow only.",
+        "example": "Cached early error prefixes help initially but later new approaches need an explicit refresh protocol."
+      }
+    }
+  }
+}

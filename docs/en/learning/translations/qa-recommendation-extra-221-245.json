@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:tsgr/mechanism": {
+      "source_sha256": "063376649cabc0fa8f8a38aa53e72a2cbb00a17f886b5028a64ca002c9edace0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why assign global and query-conditioned value codes under one semantic prefix?",
+        "answer": "Semantics groups relevance, while value differs overall and by query. Parallel codes and joint VRM combine generator state with item details without a disconnected pre-ranker. Public rating proxies are not transaction value.",
+        "example": "A middling camera accessory may be especially valuable for macro photography."
+      }
+    },
+    "qa/recommendation:tubifm/basics": {
+      "source_sha256": "a926bf9ab9b007eb2e5d6d3166033edc66e6192a5d8342984e55183320f14332",
+      "reviewed": true,
+      "fields": {
+        "question": "Why serialize cross-page activity as a Tubi user story?",
+        "answer": "Item, carousel, and search activity relates across the journey. One history and task prompts share evidence while preserving task-specific ranking.",
+        "example": "Search then browse a collection to explain what film the viewer now wants."
+      }
+    },
+    "qa/recommendation:tubifm/comparison": {
+      "source_sha256": "36ef835d4feedf9ba73d118ae123b65f27c4e1bb79cba89872f0dc9dd79dfeac",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the trade-off between one task-prompted model and separate page models?",
+        "answer": "Sharing can transfer signals and simplify maintenance, but may cause interference. Evaluate each task under matched budgets.",
+        "example": "Long-term home-feed taste should not override a precise search intent automatically."
+      }
+    },
+    "qa/recommendation:tubifm/implementation": {
+      "source_sha256": "19be7b3571079a37e44ae156fa3d5681d5e2b82b0a1266b2cbaec310a73b2f2d",
+      "reviewed": true,
+      "fields": {
+        "question": "How does local task serialization differ from the production foundation model?",
+        "answer": "Fixed public candidates test model state and task-conditioned scores, not private features, scale, or traffic. Align task tokens, histories, and labels.",
+        "example": "Three prompts must change execution, not just log labels."
+      }
+    },
+    "qa/recommendation:tubifm/mechanism": {
+      "source_sha256": "1986e1100ad5f21f0d7899949f396ad8f47c0fc9d685d2998a77f627b4501ffe",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use one cross-page story and task prompts for item, carousel, and search?",
+        "answer": "Separate page models miss links between events. One sequence shares the journey, while prompts identify scoring targets. Shared input does not equal shared objectives or calibrated candidate types.",
+        "example": "Use suspense search and carousel browsing as common context, then specify whether ranking films, rows, or results."
+      }
+    },
+    "qa/recommendation:twice/basics": {
+      "source_sha256": "c979a59b831ef947d814197438387b66229c4603c27403e66bb03cb06cd90d03",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish not-yet-converted from never-converting?",
+        "answer": "A recent click can convert later. Final CVR times delay CDF describes current observation without treating immature negatives as permanent.",
+        "example": "Today's click can become tomorrow's order."
+      }
+    },
+    "qa/recommendation:twice/comparison": {
+      "source_sha256": "b7398b9518575e4fa5ad5487bc414b209e57b88e725e114a5481ce738ff1ef41",
+      "reviewed": true,
+      "fields": {
+        "question": "What do click-clock status and conversion-clock delay measure?",
+        "answer": "One measures maturity since click, the other the conversion delay distribution. Joint windows correct observation bias; one clock can mix event likelihood with timing.",
+        "example": "Equal waits can differ in label maturity under different sampling windows."
+      }
+    },
+    "qa/recommendation:twice/implementation": {
+      "source_sha256": "44103770e04831ace12ece22c56694b39d8fb721d53ede95e02983aa56737b4a",
+      "reviewed": true,
+      "fields": {
+        "question": "What monotonic boundary must the delay CDF satisfy?",
+        "answer": "Stay in [0,1] and never decrease with time. Keep it separate from final CVR. Public proxies lack actual ad delay, aggregates, and revenue.",
+        "example": "A two-day CDF cannot fall below the one-day value."
+      }
+    },
+    "qa/recommendation:twice/mechanism": {
+      "source_sha256": "343e94b4d25df911bfa931405ca9a64eadf6d71904163b40408f7164c322e153",
+      "reviewed": true,
+      "fields": {
+        "question": "Why learn final conversion and delay CDF separately?",
+        "answer": "An unobserved conversion may be delayed. Event probability times delay CDF gives observable status. Two clocks/windows address maturity bias, subject to a suitable delay model. Public timestamps are not ad results.",
+        "example": "Five minutes without purchase is not equivalent to a week without purchase."
+      }
+    },
+    "qa/recommendation:twin-v2/basics": {
+      "source_sha256": "40f2c7195d0d5da6859eb5175b8f03fc9495d818051e0d1539254ab368a48b19",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compress lifelong history into sized virtual items?",
+        "answer": "Per-event matching over millions is expensive. Offline hierarchy summarizes groups and tracks size, then online retrieval and ranking read relevant clusters.",
+        "example": "Many repeated events should differ from one isolated event."
+      }
+    },
+    "qa/recommendation:twin-v2/comparison": {
+      "source_sha256": "76bafa062da1c6b834cabe639c8baef76e93c101ecfb1c044fba94c9ac0b1f38",
+      "reviewed": true,
+      "fields": {
+        "question": "How does cluster retrieval differ from SIM raw-behavior search?",
+        "answer": "Cluster search filters prototypes before finer interaction; raw retrieval selects original behaviors. Compression changes coverage, accuracy, and cost, with possible rare-detail loss.",
+        "example": "A large cluster may hide a niche event that raw search can still find."
+      }
+    },
+    "qa/recommendation:twin-v2/implementation": {
+      "source_sha256": "7c2512c202794c23cdef69dd808edf883e0218ef12ae4287db680affe0c9707f",
+      "reviewed": true,
+      "fields": {
+        "question": "Does public full-catalog ranking verify million-event serving?",
+        "answer": "No. It tests candidate search and hierarchical compression without private lifelong logs or serving. Align memberships, sizes, and time masks.",
+        "example": "Small MovieLens retrieval is not production latency evidence."
+      }
+    },
+    "qa/recommendation:twin-v2/mechanism": {
+      "source_sha256": "f2c1f73b5008e0cbdf2b9d23b6d791f7937348b23b24dbfb5db8d065a6d2ea69",
+      "reviewed": true,
+      "fields": {
+        "question": "Why build sized virtual items before candidate-related retrieval?",
+        "answer": "Offline clustering compresses repeated events. GSU retrieves relevant clusters and ESU performs size-aware interactions without naively duplicating large groups. Rare details may disappear.",
+        "example": "Represent years of similar shoe browsing with a count rather than recomputing attention on thousands of events."
+      }
+    },
+    "qa/recommendation:twitch-mor/basics": {
+      "source_sha256": "61e6b1eee7319ea5d7615e679d6507555f28f88b7b2ec7366b4aaae8dba069c1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish immediate and delayed feedback in Twitch ranking?",
+        "answer": "Views and interactions appear fast, while follows and payments may mature later. Lifecycle groups also value objectives differently.",
+        "example": "A new viewer who has not paid yet is not an immediate negative for value."
+      }
+    },
+    "qa/recommendation:twitch-mor/comparison": {
+      "source_sha256": "cff331d026119c710cba37f9a9597fb32dd9bd32e0f521f4527a0184cbea1d0a",
+      "reviewed": true,
+      "fields": {
+        "question": "Are MMoE gates and segment weights at the same level?",
+        "answer": "Gates select expert mixtures per task; segment weights alter task contribution. One global weight does not implement expert interactions.",
+        "example": "New users can emphasize viewing while each task still has a different expert mixture."
+      }
+    },
+    "qa/recommendation:twitch-mor/implementation": {
+      "source_sha256": "34c87fb305e40dea3e037955fef11bc812a2af964148a63cab3cbb70b7bcbc5f",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local Twitch-MOR explain production gains?",
+        "answer": "No. It lacks private features, mature delay labels, and traffic. Fix segments and maturity windows; never define segments using future test payments.",
+        "example": "Labeling future payers as currently high value leaks outcomes."
+      }
+    },
+    "qa/recommendation:twitch-mor/mechanism": {
+      "source_sha256": "6fc34408ef281c860a399b833c843476e329db143e075f01d3d9538926bb2b9b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why handle delays, lifecycle weighting, and MMoE gates together?",
+        "answer": "Outcomes differ in observation time and user stage. Immediate/delayed models address labels, segments encode objectives, and MMoE shares/selects experts. Overall metrics cannot prove all groups improve.",
+        "example": "Support viewing habits for new users and deeper engagement for established users without letting immediate clicks dominate delayed payment."
+      }
+    },
+    "qa/recommendation:uame/basics": {
+      "source_sha256": "b8798f7243c49f9b0b57c1be862f37e8846b1e792cb150e4f955d70c9a71da4e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why predict a mean and variance in UAME?",
+        "answer": "Multiple proxy scores can conflict. A Gaussian pair probability uses uncertainty during training, while serving reads only the mean.",
+        "example": "High clicks and low watch can make relative preference less certain."
+      }
+    },
+    "qa/recommendation:uame/comparison": {
+      "source_sha256": "40be60e75859602ea8ba00fd5e0cab27e76cde9773791be41bd3c38bf0fdc99a",
+      "reviewed": true,
+      "fields": {
+        "question": "How does uncertainty weighting differ from averaging pxtr scores?",
+        "answer": "It emphasizes conflicting pairs and models comparison probability, unlike a fixed average. Variance is not observed satisfaction, and larger weights do not solve every conflict.",
+        "example": "Two candidates strong on different metrics should not be collapsed without showing uncertainty."
+      }
+    },
+    "qa/recommendation:uame/implementation": {
+      "source_sha256": "52285fce3f388cd5bb39e38ca30d9b6f1a06f4a5dd7a5edda085ce17e2ff07d8",
+      "reviewed": true,
+      "fields": {
+        "question": "Does UAME sample Gaussian noise online, and how interpret local negatives?",
+        "answer": "Serving uses mean only. Proxy losses do not reproduce author gains or refute private tests. Handle variance and zero-range weighting explicitly.",
+        "example": "Equal uncertainties give a zero min–max denominator; do not produce NaNs."
+      }
+    },
+    "qa/recommendation:uame/mechanism": {
+      "source_sha256": "979bbfb3f196760b2a745e61431cad0f465d014d54752f97a5dac9d468c14f4c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why learn mean and variance, emphasize conflict in training, and serve only means?",
+        "answer": "Gaussian score comparisons express proxy disagreement. Train using analytic wins, weight uncertain pairs, and regularize variance. Mean-only serving keeps cost low. Modeled uncertainty is not measured satisfaction.",
+        "example": "A click-friendly and a long-watch video create an uncertain pair; train on it but serve one mean score."
+      }
+    },
+    "qa/recommendation:ug-sep/basics": {
+      "source_sha256": "5c44efc7f23e5d26789e81c07ae2887244df46ee8e03a71aa9bf0e88137f5fe2",
+      "reviewed": true,
+      "fields": {
+        "question": "Do UG-Sep user and candidate tokens describe two users?",
+        "answer": "No. One request has a shared user block and an item-specific candidate block. Isolation controls information flow, not user groups.",
+        "example": "Several candidate blocks can reuse the same user's history."
+      }
+    },
+    "qa/recommendation:ug-sep/comparison": {
+      "source_sha256": "d19aac8def47fd6874b77d8a96e32e64210dc464d35eaeb72919b746c6406d2f",
+      "reviewed": true,
+      "fields": {
+        "question": "Can Information Compensation turn candidate-conditioned state into reusable cache?",
+        "answer": "No. It restores candidate-specific scoring interactions. Shared state must remain candidate-independent, so caching compensation for another item reintroduces contamination.",
+        "example": "Item A's compensated state is not general user state for B."
+      }
+    },
+    "qa/recommendation:ug-sep/implementation": {
+      "source_sha256": "efebedcce96ada6f3771aa2b0a63ef9bac43307d7e9244ecca0a87505c1226e4",
+      "reviewed": true,
+      "fields": {
+        "question": "How test whether the UG-Sep mask permits safe sharing?",
+        "answer": "Fix user and vary candidates: protected user representations must stay unchanged while item output may change. Check attention and TokenMixer, not only masks. No production kernels/QPS.",
+        "example": "A masked attention path is insufficient if the mixer leaks candidate information back."
+      }
+    },
+    "qa/recommendation:ug-sep/mechanism": {
+      "source_sha256": "874ff54407737f1d5e083d7b86b33629f57261df2d6fd0a4e62a674e8f469b60",
+      "reviewed": true,
+      "fields": {
+        "question": "Why block candidate-to-user flow and then compensate?",
+        "answer": "Isolation makes user encoding reusable; it may weaken bidirectional expressiveness, so compensation restores interactions in the item scoring path only. Do not cache compensated state as public.",
+        "example": "Compute one item-free user state for 100 candidates, then apply separate per-item compensation."
+      }
+    }
+  }
+}

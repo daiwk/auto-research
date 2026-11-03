@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:lats/mechanism": {
+      "source_sha256": "4d3925f049f04a42ac2deb4fce39a7106008bd31e190d512daac13b39a19e2c7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can UCT's exploration term give a low-scoring action another try?",
+        "answer": "Mean value reflects observed returns. The exploration bonus grows as the parent is visited more and the child remains rare, giving uncertain branches a chance. Execution feedback updates values and failure reflection guides later expansion. Always taking the current best estimate can lock in a wrong branch, and model self-scores cannot replace environmental feedback.",
+        "example": "Example: Action A was mediocre across ten tries; B failed on its only try. UCT may try B again to reduce uncertainty rather than eliminate it permanently."
+      }
+    },
+    "qa/agent-research:lats/basics": {
+      "source_sha256": "21593c9c3051211cf55d75a5661416162a2bbcf00658b6e0bd2796cf18b667b3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is one plausible reasoning chain insufficient for the tool tasks LATS addresses?",
+        "answer": "Tools or environments may return unexpected results, and a single route may not recover after failure. LATS puts reasoning and actions in an explorable search tree, tests candidates through execution feedback, and uses failure reflection to try alternatives. It links proposals to environment results, though search budget and judgment errors still matter.",
+        "example": "Example: The first search result lacks a price. Return to an earlier search node and revise the keywords instead of inventing an answer from the wrong page."
+      }
+    },
+    "qa/agent-research:lats/comparison": {
+      "source_sha256": "df8c9b0f6a06a3f4346b55e4368a71c4fc69b1450bbcc920ff6f9c3b9c1f0945",
+      "reviewed": true,
+      "fields": {
+        "question": "How does LATS's MCTS allocate budget differently from retaining several thoughts per layer?",
+        "answer": "MCTS repeatedly selects branches from the current tree, runs rollouts, and backs up returns and visit counts, directing future budget to paths worth revisiting. Layer-wise search usually compares and prunes a frontier at one depth. Both depend on candidate and evaluation quality; different organization and feedback use do not guarantee one wins on a given task type.",
+        "example": "Example: A depth-two route nearly succeeded. MCTS can deepen it later, while a fixed-width search may retain only the best currently rated candidates at that layer."
+      }
+    },
+    "qa/agent-research:lats/implementation": {
+      "source_sha256": "ee3ae1b2320742ba99d739758bcb53d79cb5c1167f1794deec50c4812b06249a",
+      "reviewed": true,
+      "fields": {
+        "question": "Is local search over leaves that are complete plans equivalent to the paper's LM-value search?",
+        "answer": "No. The local path retains MCTS statistics, environmental reward, reflection, and backtracking but uses complete plans as leaves. It does not call an LM value function, the HumanEval executor, or WebShop. A perfect deterministic score verifies the search path, not code-generation or web-task success.",
+        "example": "Example: Choosing a valid route from four premade plans differs from generating actions and evaluating intermediate nodes on a real website."
+      }
+    },
+    "qa/agent-research:rewoo/mechanism": {
+      "source_sha256": "e69e047795075a07000d21f896e1065668309af1a176e66d42397d73abdb463a",
+      "reviewed": true,
+      "fields": {
+        "question": "How can a planner express tool dependencies without rereading intermediate observations?",
+        "answer": "The planner writes dependencies as variable references. The Worker substitutes obtained evidence into later tool arguments, and the Solver combines results at the end. This reduces repeated planning calls without deleting data flow. A static plan is less adaptive if an unexpected observation determines a later route that was never encoded.",
+        "example": "Example: Store a person's birthplace as E1, then look up its population using E1. The city is bound later without regenerating the whole plan."
+      }
+    },
+    "qa/agent-research:rewoo/basics": {
+      "source_sha256": "17ed818eb2662aa131dee82e0f23009901dde7c6c1ccf3debd4e0854d840d1a3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a multi-step tool task spend heavily on rereading existing content?",
+        "answer": "If every return makes the planner reread the task, old plan, and all evidence, input grows even when the next action only substitutes a known result. ReWOO separates planning, tool execution, and final synthesis to reduce repetition. It fits workflows whose dependencies can be expressed in advance, while surprises still need recovery.",
+        "example": "Example: Finding an author and then their birthplace is a known two-step pattern. Each returned string does not require regenerating the plan and rereading all earlier evidence."
+      }
+    },
+    "qa/agent-research:rewoo/comparison": {
+      "source_sha256": "a2869596b26801d54e88b926ef3a289c320550d03f4726397532ed7dbdab447b",
+      "reviewed": true,
+      "fields": {
+        "question": "What do ReWOO and ReAct trade off when handling unexpected intermediate results?",
+        "answer": "ReAct reasons after each observation and can revise its route, but repeated model calls cost more. ReWOO plans before execution and avoids repeatedly reading evidence, but relies more on a workable initial dependency plan. Unexpected errors require separate recovery; a static plan is not inherently a feedback loop.",
+        "example": "Example: When the first query returns several namesakes, ReAct can add disambiguation immediately. ReWOO needs an outer recovery if its original plan has no such branch."
+      }
+    },
+    "qa/agent-research:rewoo/implementation": {
+      "source_sha256": "5ff043016ac3d7d4eda87a7208ca98979277288b5567ab4893e172267c3ae53f",
+      "reviewed": true,
+      "fields": {
+        "question": "When can a Worker run tools in parallel, and when must it wait for an evidence variable?",
+        "answer": "Calls without unmet dependencies can run in parallel. A call referencing an earlier E variable must wait for that result. The Solver reads both the plan and actual evidence at the end, not imagined planner results. Local tests verify control flow and counts without real search APIs or a multi-size LLM comparison.",
+        "example": "Example: Weather requests for two known cities can run together. Weather for the newly found city must wait for lookup rather than guess its argument."
+      }
+    },
+    "qa/agent-research:tree-of-thoughts/mechanism": {
+      "source_sha256": "7d34f6e220bc745f002e84aa54cf7cc3f87027147fd53a16920ee638ff9ff7bb",
+      "reviewed": true,
+      "fields": {
+        "question": "How does searching a tree of thoughts differ from generating several complete answers at once?",
+        "answer": "Intermediate thoughts are states that can be evaluated and expanded separately. Search can retain early alternatives, prune dead ends, and backtrack. Complete answers are often compared only at the end, paying repeatedly for bad prefixes. ToT still depends on value estimation and width/depth budgets; a tree does not make its evaluator correct.",
+        "example": "Example: An arithmetic problem has three possible initial decompositions. Check which preserve feasible remaining values before expanding, rather than finishing a full answer for obviously impossible ones."
+      }
+    },
+    "qa/agent-research:tree-of-thoughts/basics": {
+      "source_sha256": "f179f877443b4d447e1ec45e2425841e3d891a73ca16a3ee91388c04fd135191",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is ToT suited to reasoning that requires trying paths and backing out of dead ends?",
+        "answer": "Local choices affect later feasibility. One uninterrupted answer can carry a bad choice to the end. ToT represents expandable intermediate states, retaining directions, judging progress, and backtracking. This requires states that can be meaningfully evaluated; search does not supply a reliable judgment rule by itself.",
+        "example": "Example: If a partial expression cannot reach the target number, change the previous grouping instead of regenerating the entire solution."
+      }
+    },
+    "qa/agent-research:tree-of-thoughts/comparison": {
+      "source_sha256": "1c2919609aa7e85a956309a3db218df6a1fd564d5755af12f3fc1fbd10e9cd76",
+      "reviewed": true,
+      "fields": {
+        "question": "How do BFS and DFS spend limited ToT search budgets?",
+        "answer": "BFS retains multiple states at one layer, making it easy to compare alternatives at similar progress but requiring a broad evaluated frontier. DFS goes deep on one path and backtracks, keeping a narrower frontier but potentially wasting depth on a bad branch. Width, depth, and pruning thresholds depend on evaluation reliability.",
+        "example": "Example: With three opening moves, BFS explores one step from each. DFS may follow the first to the end before trying the second."
+      }
+    },
+    "qa/agent-research:tree-of-thoughts/implementation": {
+      "source_sha256": "68ef6b31e3dfcc7d9d4d0f519f292073b2fc770a45369cf80b231dbd6bcbbf0b",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local workflow-coherence value represent GPT-4 self-evaluation quality?",
+        "answer": "No. A small PlanBench uses deterministic workflow coherence, a fixed beam, and backtracking to test thought-tree control flow, not GPT-4 or Game of 24. Counts of nodes and backtracks show that search happens. A perfect score does not establish an open-ended language value function.",
+        "example": "Example: A rule can flag an action that violates a precondition. That does not prove a large model can reliably score the future promise of a creative-writing fragment."
+      }
+    },
+    "qa/agent-research:react/mechanism": {
+      "source_sha256": "93a0fa5c75405b6e1493069a19b4d4faf67077928042b25156cdc3778d885580",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must observations return to the next context instead of letting the model continue its own reasoning alone?",
+        "answer": "Actions obtain real external feedback so the next step can revise beliefs and plans. Without observations, the model can treat expectations as actual outcomes and lose the action-reasoning loop. ReAct alternates reasoning, executable actions, and observations, rather than merely mentioning tools in text.",
+        "example": "Example: The model expects a file to exist, but reading it returns not found. Change the search path rather than analyzing imagined contents."
+      }
+    },
+    "qa/agent-research:react/basics": {
+      "source_sha256": "baa2c7672b8c7a600f4358358d8e1ae3ae7e0f1158fd87e4876caa9d2f013f48",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does ReAct put answering and interacting with the outside world in one loop?",
+        "answer": "Internal knowledge may lack current facts and cannot establish whether an action succeeded. ReAct interleaves reasoning with tool or environment calls and uses results in later decisions. This fits tasks mixing information and actions. Observations support correction, but tool failures and misinterpretation can still cause errors.",
+        "example": "Example: Check inventory before deciding whether to order or choose an alternative, rather than guessing stock from general knowledge."
+      }
+    },
+    "qa/agent-research:react/comparison": {
+      "source_sha256": "8a7eab90588f0a037d039b7d6b0be9d62f74c91954a3f4da4edc846b6aabf884",
+      "reviewed": true,
+      "fields": {
+        "question": "How do ReAct and pure chain-of-thought differ in when errors surface?",
+        "answer": "Pure chain-of-thought can keep developing internal assumptions without confronting external facts. ReAct gets observations through action and can revise plans mid-run. Feedback may still be incomplete or tools may fail, so alternation does not guarantee facts; verify tool results and their support for the conclusion.",
+        "example": "Example: Search can reveal that author B, not A, wrote a book. Pure internal reasoning may continue inventing details about A."
+      }
+    },
+    "qa/agent-research:react/implementation": {
+      "source_sha256": "4341ba84a852eae59831c71401d28803965ec7dddefa1f21cfae865bb816644d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish generated tokens from environment tokens during ReAct training or evaluation?",
+        "answer": "Tool observations are external state, not policy actions. Do not count them as generated capability or train policy gradients on them. The local deterministic suite verifies the loop and counts; the separate isolated capability protocol also prevents the policy from reading references. Shared method names do not make the evidence interchangeable.",
+        "example": "Example: A 100-word tool return is not 100 words generated successfully by the policy, and hidden answers must not enter a visible reference field."
+      }
+    }
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:polca/implementation": {
+      "source_sha256": "8a0fa6180b5bb68b4adbee192c9fa177111e04129a3baa96ec41cce6f8bec6c0",
+      "reviewed": true,
+      "fields": {
+        "question": "How are untested proposals and observations completed before failure recorded after the metric budget is exhausted?",
+        "answer": "Charge each actual call before making it and keep observations completed before failure. Mark unevaluated proposals deferred_budget and omit them from observed-reward statistics. Old and new candidates use the same with-replacement batch. There is no mock LLM fallback; deep-copy callback inputs and outputs to protect history. Local tests do not demonstrate real generative optimization.",
+        "example": "If the last budget evaluates one new proposal, the other three are neither zero scores nor default successes. They have no observations and must remain separate from evaluated candidates."
+      }
+    },
+    "qa/agent-research:mars-research/mechanism": {
+      "source_sha256": "8c2e8d698f026612d8c786a24e5a27fa6e150c56ef0a6cffba2c8578e77f03d5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why should research-search node value include both performance and runtime?",
+        "answer": "Under a fixed training budget, an equally good but slower option crowds out later exploration. MARS normalizes execution metrics, adds a time penalty, and bounds improvement or debugging. Reflection uses code diffs and real results, not the model's predicted performance in place of node measurements.",
+        "example": "If two options reach similar validation scores but one takes ten times longer, prioritize the faster one to test more structural hypotheses."
+      }
+    },
+    "qa/agent-research:mars-research/basics": {
+      "source_sha256": "8cbf08a3a0e81f2de985631c058aa098ef6ca3f4320cec7525216c048e42944d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Design–Split–Implement first produce a modular repository?",
+        "answer": "Research changes touch several components. Defining design and module boundaries before implementation lets branches improve locally and reuse debugging experience instead of rewriting everything. Interfaces can still be incomplete; actual training establishes behavior, not tidy structure or small diffs.",
+        "example": "Separate loading, model, and evaluation so a branch can replace only the model under an unchanged evaluation entry point, without confounding data changes."
+      }
+    },
+    "qa/agent-research:mars-research/comparison": {
+      "source_sha256": "1c95ba11aac3bc1a48dafea40b1a44284da94008dff633faaf8d09ee4e26f1b6",
+      "reviewed": true,
+      "fields": {
+        "question": "What do the new, improve, and debug search actions change?",
+        "answer": "New explores a different research proposal; improve builds on a valid node; debug repairs a candidate that cannot execute validly. They produce different evidence: fewer errors are not higher metrics, and executability does not justify more search. MARS selects by execution status and budget and caps debugging and descendants. Estimated scores for failures are not measurements.",
+        "example": "Debug an import error before measuring performance. Improve a valid but promising score; create a new branch to try a wholly different approach."
+      }
+    },
+    "qa/agent-research:mars-research/implementation": {
+      "source_sha256": "fd40b9dae85a24f4ec7c96055e1ca239cd4523f4a17df9ba3bbc70ea9723cb36",
+      "reviewed": true,
+      "fields": {
+        "question": "What boundaries apply to identical node metrics, debugging, and experience capacity?",
+        "answer": "If the metric range is zero, normalize to 0.5 rather than divide by zero. The paper caps search at ten debugging attempts, two improvement children, and thirty recent experiences. There is no local implementation or training. Author code and released traces do not establish a fully reproducible controller, and copying a reward formula is not research capability.",
+        "example": "If all AUC values tie, do not produce NaN or assign an arbitrary candidate a very high score. The common midpoint leaves factors such as time active."
+      }
+    },
+    "qa/agent-research:self-refine/mechanism": {
+      "source_sha256": "7d0f5ca10d3d55691128312fc1e4304c1089fde6beea9fe0f2d73dccf2493c33",
+      "reviewed": true,
+      "fields": {
+        "question": "Why generate explicit feedback separately when the same model writes both draft and feedback?",
+        "answer": "Explicit feedback converts unmet constraints into actionable edits, avoiding mere random resampling. Generation, feedback, and refinement play distinct roles, and stopping still depends on the model. No extra training does not make feedback correct, and repeated polishing is not independent fact-checking.",
+        "example": "A draft omits units. Feedback to add units to each number gives a concrete target that 'write it better' does not."
+      }
+    },
+    "qa/agent-research:self-refine/basics": {
+      "source_sha256": "960060d1f3dbeebf4724499e8e754f354de0b8dff03c3504c9c2d2da2a0b6c47",
+      "reviewed": true,
+      "fields": {
+        "question": "Why treat an output as a draft that can be improved against specific requirements in Self-Refine?",
+        "answer": "Open-ended generation may require correctness, completeness, clarity, and style; one attempt may meet only some. Self-Refine generates, diagnoses shortcomings, and revises without extra parameter training. The loop needs actionable feedback, and mistaken feedback can make later drafts worse; more rounds do not imply better quality.",
+        "example": "A correct first explanation lacks an example. Point out the gap before revising; 'make it better' may not identify what to change."
+      }
+    },
+    "qa/agent-research:self-refine/comparison": {
+      "source_sha256": "253813bba8ce310c79807fc8640d21a94df57993c6fe9ceb926ee9ee2aefc2b3",
+      "reviewed": true,
+      "fields": {
+        "question": "Compared with Reflexion's cross-trial episodic memory, what loop does Self-Refine emphasize?",
+        "answer": "Self-Refine revises the current draft through feedback. Reflexion saves failure experience in bounded memory for a later trial. They can be combined but use different state. Refinement does not automatically form long-term memory, and repeated rewriting is not parameter RL.",
+        "example": "Revising one email three times is Self-Refine. Saving 'check recipients first' for tomorrow's email involves cross-trial memory."
+      }
+    },
+    "qa/agent-research:self-refine/implementation": {
+      "source_sha256": "347712ceb68583f4918a58c3daecfa3582a7d896aae5fad49eec796cbfb1e645",
+      "reviewed": true,
+      "fields": {
+        "question": "Does stopping under a deterministic local critic demonstrate reliable real-LLM self-evaluation?",
+        "answer": "No. A controlled critic verifies generation, feedback, revision, and stopping states, without a general LLM or the seven original benchmarks. Stopping verifies the contract, not reliable recognition of factual correctness on open tasks. Local perfect scores cannot stand in for human preferences.",
+        "example": "A rule can stop once text length is sufficient even when facts are wrong. Real self-assessment can be satisfied too early and needs independent evidence."
+      }
+    },
+    "qa/agent-research:reflexion/mechanism": {
+      "source_sha256": "40fc60a324a33b96e15760b76bae33b770b52af70ae1ff120f4154f30ecddf08",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is verbal reinforcement not reinforcement-learning updates to model parameters?",
+        "answer": "Feedback becomes natural-language experience in bounded episodic memory. The next attempt sees a different context without gradient updates to weights. Reflection can communicate more than binary success but can be wrong. An Evaluator must still judge execution rather than treating reflection's claims as learning evidence.",
+        "example": "Remember 'check the file path before editing' after failure. Reading that note changes behavior next round even with identical weights."
+      }
+    },
+    "qa/agent-research:reflexion/basics": {
+      "source_sha256": "2acac66f09d951e2b9f27d126871abc23e2044bdaebb903d1b10a1fa8d35c75d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Reflexion retain failure lessons between attempts rather than just resample?",
+        "answer": "Repeatedly trying the same task by resampling may repeat errors. Reflexion converts execution evaluation into readable experience so feedback survives across trials. Storing a lesson does not establish accuracy or transfer. Distinguish external reward from text reflection; neither automatically updates model weights with RL.",
+        "example": "If the first search stalls on an irrelevant page, reflection can advise checking sources and expanding the query. Restarting without the lesson can follow the same route."
+      }
+    },
+    "qa/agent-research:reflexion/comparison": {
+      "source_sha256": "e455c5c5888e6d675b00bf6f88f3602cbc520c344121c84ade23b7484f836578",
+      "reviewed": true,
+      "fields": {
+        "question": "What does actionable reflection add over saving a binary failure reward?",
+        "answer": "Binary reward only says the attempt failed. Reflection proposes a cause and actions to try or avoid, supplying actionable context. That inference may be wrong and needs actual next-trial feedback. Do not place the hidden reference plan into reflection and credit later success to autonomous learning.",
+        "example": "'Failure' does not locate the problem. 'The date parameter needs ISO format' is useful, but must come from a visible error rather than a gold route."
+      }
+    },
+    "qa/agent-research:reflexion/implementation": {
+      "source_sha256": "58584218d4e6458709f7475568b80d1d2b5e2ce74cb3032739ca1b88e73fc311",
+      "reviewed": true,
+      "fields": {
+        "question": "Why interpret the mini-suite score of 0.9 separately from isolated ToolRoute results?",
+        "answer": "The mini-suite deterministically fails the first attempt in each family and then reuses feedback, with fixed reflection templates and evaluator. ToolRoute is a different tool environment without a reference-policy interface. Neither is HumanEval pass@1. Bounded append and failure retention can be checked, but scores cannot rank across protocols or replace the paper.",
+        "example": "One deliberately failed task in each of twelve families sets the aggregate rate, unlike natural model errors across 120 independent coding problems."
+      }
+    },
+    "qa/agent-research:frontier-opd/mechanism": {
+      "source_sha256": "f87462b834bd20fb4b8778f302afb19ab46f54f2fde90aec6387929343a0ae4e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why average student–teacher disagreement within trajectories and then across trajectories instead of across node visits?",
+        "answer": "Loops repeatedly visit states; counting each visit as independent evidence lets one circling path dominate. Two-stage averaging balances trajectory weight. Representative histories then support real teacher-bridge trials. Signed disagreement for ranking differs from agreement for validation; a high node score does not guarantee takeover helps.",
+        "example": "Three visits at disagreement ten in one trajectory and one zero in another give a balanced score of five. Visit averaging gives 7.5 and overweights the loop."
+      }
+    },
+    "qa/agent-research:frontier-opd/basics": {
+      "source_sha256": "40960a22106d9cebda09709b52174581db26a8455b80907caaa6fe91e7b72502",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Frontier-OPD ask teachers to take over only at selected states instead of generating all training trajectories?",
+        "answer": "Full teacher interaction is expensive, and imitating smooth teacher trajectories may miss student bottlenecks. Frontier-OPD finds teachable frontiers from student-visited states, briefly bridges with the teacher, then hands control back. Savings must be accompanied by verifying that the student can continue after the bridge.",
+        "example": "If the student repeatedly gets stuck opening a door after finding its key, test a short teacher intervention there rather than having the teacher finish every task from scratch."
+      }
+    },
+    "qa/agent-research:frontier-opd/comparison": {
+      "source_sha256": "801b8733cd20f2a75622d7d7862829f1a24887fb586cd16e37de6de006f700e7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use different criteria for high-ranking frontier nodes and valid teacher bridges?",
+        "answer": "Signed teacher–student disagreement prioritizes where to spend limited teacher budget. Bridge validation compares actual takeover plus student continuation to an equally long historical window, requiring valid replay and nondecreasing agreement. Prioritization is not training-data admission; a high-ranked node does not prove teaching works.",
+        "example": "High disagreement may warrant a trial even if the student still cannot continue after takeover. Do not add that failed bridge to training merely because it ranked high."
+      }
+    }
+  }
+}

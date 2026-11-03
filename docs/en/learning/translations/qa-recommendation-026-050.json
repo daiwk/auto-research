@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:rankmixer/implementation": {
+      "source_sha256": "1a81e7edece206340e1a2577032434e6b4f33b4435566ecb17311ceedfc49aab",
+      "reviewed": true,
+      "fields": {
+        "question": "Do RankMixer per-token FFNs attach to original fields or mixed positions?",
+        "answer": "Each FFN sees a mixed token containing same-index slices from all fields. Its parameters specialize in that subspace, not one original field. Preserve field/head/output layout.",
+        "example": "The first mixed FFN processes parts of all four fields, not only the first one."
+      }
+    },
+    "qa/recommendation:adaf2m2/mechanism": {
+      "source_sha256": "f775af92eb4ee6cc83b2ccb26810cf442cf9470854c6d2d4492af19ae130586c",
+      "reviewed": true,
+      "fields": {
+        "question": "How do AdaF²M² multiple masked forwards differ from dropping features once?",
+        "answer": "Several masks retain complementary views. A state-aware adapter combines them by user/item reliability; one perturbed output or uniform averaging does not implement this.",
+        "example": "Combine behavior-masked and content-masked views differently for new and mature items."
+      }
+    },
+    "qa/recommendation:adaf2m2/basics": {
+      "source_sha256": "071c5610c6ca9259e4ca7eca0a50129d89f076bf5d984e9a7e08cbddc13c7a0e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does state-aware fusion vary across examples?",
+        "answer": "Activity and feedback change which signals are trustworthy. The adapter weights complementary masks per state; one fusion coefficient is not permanent importance.",
+        "example": "Behavioral history can dominate for an established user and content for a new one."
+      }
+    },
+    "qa/recommendation:adaf2m2/comparison": {
+      "source_sha256": "2232aa90edde2284d71b1f9c81e2d55faddd86326e4c344b97d8188b4f016347",
+      "reviewed": true,
+      "fields": {
+        "question": "How does multi-forward fusion differ from feature dropout?",
+        "answer": "Single dropout trains robustness to missing inputs. Multi-forward retains alternatives and learns state-specific fusion, adding execution cost even at equal parameter count.",
+        "example": "Keeping price-present and price-absent predictions for fusion differs from randomly deleting price once."
+      }
+    },
+    "qa/recommendation:adaf2m2/implementation": {
+      "source_sha256": "41e9776e6084733bbec1f72e6d2f7b4905dcef612683b528e1f13385ca058e1f",
+      "reviewed": true,
+      "fields": {
+        "question": "Which axis should AdaF²M² softmax normalize?",
+        "answer": "Normalize branches separately for each example, with compatible representation widths. Do not couple different users through a batch-level softmax.",
+        "example": "Two users with three views each need two independent three-weight sums."
+      }
+    },
+    "qa/recommendation:adaptive-ad-load/mechanism": {
+      "source_sha256": "481f948f766f95ead52a7325b0ad6978d090a1c3026b82ed9aed7bcb196657c5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not always choose the ad count maximizing immediate ad revenue?",
+        "answer": "Count affects organic experience and conversions as well as revenue. Randomized field experiments estimate count responses; constrained decisions use Lagrangian trade-offs. Correlation logs or ranking proxies are not causal or market evidence.",
+        "example": "Shopping and navigation queries can react differently to adding one ad."
+      }
+    },
+    "qa/recommendation:adaptive-ad-load/basics": {
+      "source_sha256": "303a801641bd909edaeb659b776582d0c3b72c910e59f47f12bccf651f818561",
+      "reviewed": true,
+      "fields": {
+        "question": "Why optimize per-request ad quantity, not just order?",
+        "answer": "Ranking fills given slots; load chooses their number and affects experience, revenue, and conversion. Estimate marginal response over feasible counts.",
+        "example": "Identical ad candidates can support different loads for shopping and exploratory requests."
+      }
+    },
+    "qa/recommendation:adaptive-ad-load/comparison": {
+      "source_sha256": "c373fd1d8b2a50933e6558971c60f589edf18091d8d95b483e97811ab7d05e24",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use randomized field evidence instead of comparing high-revenue logs?",
+        "answer": "Existing policies choose load based on intent, which confounds revenue differences. Randomized load helps identify intervention effects. Public ranking without interventions cannot establish causal count effects.",
+        "example": "Many ads on already high-intent requests does not justify increasing all loads."
+      }
+    },
+    "qa/recommendation:adaptive-ad-load/implementation": {
+      "source_sha256": "17166588a41fe3a6b6f92ce0f95bf71d0d28806bf058292150b6a3cb90f8e6c4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why enumerate feasible counts with consistent revenue and conversion definitions?",
+        "answer": "Score each legal k under inventory and business limits, using comparable revenue and weighted conversion terms. Tune coefficients on validation, not test.",
+        "example": "Do not output five ads when zero to three are legal or compare inconsistent per-request/per-ad metrics."
+      }
+    },
+    "qa/recommendation:adasid/mechanism": {
+      "source_sha256": "c8281a17a359a57374353970bda5449bea273c17fb21b61f00560b30c0359f1e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not penalize all same-SID pairs equally?",
+        "answer": "Some overlap is useful semantics, some harmful congestion. AdaSID adapts to load, compatibility, and training phase. Uniform penalties can destroy meaningful sharing or tolerate overloaded collisions.",
+        "example": "Similar running shoes can share a coarse code; shoes and ovens sharing a crowded code may need stronger correction."
+      }
+    },
+    "qa/recommendation:adasid/basics": {
+      "source_sha256": "8db13eb1f260d736d7688ccc4e90f757bea3c953998d4f3c859906ee5bd4fcd0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't SID overlap always harmful?",
+        "answer": "Semantic sharing transfers related information; harmful collisions obstruct discrimination or overload learning. Adapt penalties rather than maximize separation everywhere.",
+        "example": "Color variants can share coarse clothing semantics while still differing at fine inventory codes."
+      }
+    },
+    "qa/recommendation:adasid/comparison": {
+      "source_sha256": "32d0ceb1c298be57d20936df8ae76ff6568dac3e923385d0e5ba6be52dc3ad15",
+      "reviewed": true,
+      "fields": {
+        "question": "What does an adaptive coefficient change compared with fixed collision loss?",
+        "answer": "Pair and training time affect severity, allowing early semantic organization and later discrimination. Flexibility adds calibration cost and still needs matched evaluation.",
+        "example": "Related books can share a code early, with high-load distinctions strengthened later."
+      }
+    },
+    "qa/recommendation:adasid/implementation": {
+      "source_sha256": "90a063ddf43125cf0321840927150ff50950ea2cb7acf305fc3ac829c5ede0ba",
+      "reviewed": true,
+      "fields": {
+        "question": "Is AdaSID's collision coefficient a single scalar?",
+        "answer": "λij(t) depends on pair load, compatibility, and time. Apply it to the corresponding overlap before summing and report the schedule. A constant removes adaptation.",
+        "example": "Shoes and books can receive different penalties at the same step and change later."
+      }
+    },
+    "qa/recommendation:agent-web-rec/mechanism": {
+      "source_sha256": "36593cc9eadca7235c1dadd99908e969a1fc3b3d0ad97be1cadc35a62d07efc1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why ask neighboring agents only when private evidence is insufficient?",
+        "answer": "Personal relevant memories are primary. Retrieve with semantics and recency; low confidence triggers compact neighbor patterns rather than raw history. Local gate/fusion checks are not full agent capability.",
+        "example": "Use repeated vegetarian preferences directly; seek general travel patterns for vague new interest without sharing itineraries."
+      }
+    },
+    "qa/recommendation:agent-web-rec/basics": {
+      "source_sha256": "08a0175def2a36a21b01de44f2338510a312acd784a59dc3c16c6637c542bb6b",
+      "reviewed": true,
+      "fields": {
+        "question": "What do private memory and neighbor patterns each provide?",
+        "answer": "Private memory is personal evidence retrieved by meaning and recency. Neighbor patterns supplement weak coverage, without overriding strong direct evidence or becoming facts about the target.",
+        "example": "Use the user's lightweight-camera preference before asking about an unfamiliar outdoor need."
+      }
+    },
+    "qa/recommendation:agent-web-rec/comparison": {
+      "source_sha256": "2f2b418385bc300e4ec5d280159d93ebad8bfaef8a6bc305d156578a1b05c3e9",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the trade-off versus always aggregating neighbors?",
+        "answer": "Always collaborating may cover more but adds communication and noise. Confidence gating saves calls; overconfidence misses help, underconfidence calls too often. Local results are diagnostic.",
+        "example": "Do not inject popular gaming patterns into a request with clear photography evidence."
+      }
+    },
+    "qa/recommendation:agent-web-rec/implementation": {
+      "source_sha256": "eaa404a2c315a77bc8c75c2d1f69f122e58bd9372723482fb22e6e581f570e2a",
+      "reviewed": true,
+      "fields": {
+        "question": "What should time decay and collaboration thresholds test separately?",
+        "answer": "Keep time units consistent and avoid giving future events anomalous gains. Compare confidence κ to its own threshold, separate from retrieval rank. Check sorting, expiry, and trigger boundaries.",
+        "example": "A top-scoring memory is not automatically sufficient evidence."
+      }
+    },
+    "qa/recommendation:agentic-rec-tune/mechanism": {
+      "source_sha256": "55376fcc7dc8dbe5a3b22e1cb5c4dd19a3f52a9c200276e1d282deab70dcb6c9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why require Critic, SkillHub, and real feedback after an Actor proposes a winner?",
+        "answer": "Proposals are hypotheses. Critic checks feasibility, runs supply evidence, and Insight/Skill record conditions and failures. Self-ratings are not results. Local search is bounded and selection must isolate test.",
+        "example": "Record a diverse but over-budget configuration so future rounds avoid repeating it."
+      }
+    },
+    "qa/recommendation:agentic-rec-tune/basics": {
+      "source_sha256": "f30dd0f5345ef46e2b69dd4a4f7a041e71bc3e479b9e7079f1bb9fadea636e1e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why search cross-stage recipes instead of one learning rate?",
+        "answer": "Retrieval, fusion, and reranking shape each other's distributions. Agents propose and review quality/diversity/risk across the recipe, with evidence for each stage and end-to-end effects.",
+        "example": "Diversifying ranker scores cannot help if retrieval never provides varied categories."
+      }
+    },
+    "qa/recommendation:agentic-rec-tune/comparison": {
+      "source_sha256": "ae8a34e291cc87df5550034dded32eee1417e2dca510dd919bb6525ee0bee2c6",
+      "reviewed": true,
+      "fields": {
+        "question": "How does SkillHub differ from restarting each round with the same prompt?",
+        "answer": "It retains auditable feedback-backed constraints and strategies, reducing repeated failures. One high score is not automatically reliable and transfer depends on context.",
+        "example": "Carry forward the finding that one diversity setting hurts new users."
+      }
+    },
+    "qa/recommendation:agentic-rec-tune/implementation": {
+      "source_sha256": "3bb9dd2b7900d7eb1cfa31fb406204731aeb0c97bbfe362ee4d57e250983f0bb",
+      "reviewed": true,
+      "fields": {
+        "question": "How prevent test tuning across three local rounds?",
+        "answer": "Actor proposes bounded genomes and Critic selects only on validation, then saves evidence. Run test once after final selection. No real online authority is involved.",
+        "example": "Do not switch winners after seeing a disappointing final test score."
+      }
+    },
+    "qa/recommendation:aigq/mechanism": {
+      "source_sha256": "78bed45319c9dc90113bf2c40019a19ea749969197d1ea1fdb545eece44a1aa6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep Direct and Reasoning query paths?",
+        "answer": "Easy intent benefits from low latency and complex intent from deeper inference. IL-GRPO aligns query groups, while hybrid offline/online serving reduces request cost. Local proxies do not reproduce CTR rewards or the live stack.",
+        "example": "Directly complete a brand, but reason about recipient and use for vague gifts."
+      }
+    },
+    "qa/recommendation:aigq/basics": {
+      "source_sha256": "b491f83c787640055d0ea0bf2fc46c7732614c7f1b5e253484799bc59aba3272",
+      "reviewed": true,
+      "fields": {
+        "question": "Why treat suggested queries as a set rather than independent strings?",
+        "answer": "A group defines exploration coverage. Per-item plausibility can yield repetitive outputs; group rewards evaluate coverage and engagement, subject to reward quality.",
+        "example": "Five paraphrases add less than options covering director, mood, and duration."
+      }
+    },
+    "qa/recommendation:aigq/comparison": {
+      "source_sha256": "94766e9109240349fefc0c06ec27558d5ca231d8515dd680d4965436d553616a",
+      "reviewed": true,
+      "fields": {
+        "question": "What update risk does KL control beyond CTR reward?",
+        "answer": "Reference KL penalizes drifting into narrow or reward-hacking queries. It balances feedback against prior behavior without guaranteeing unbiased rewards or independent quality.",
+        "example": "Avoid making every suggestion clickbait just because clicks rise temporarily."
+      }
+    },
+    "qa/recommendation:aigq/implementation": {
+      "source_sha256": "29d71f5df7014e3cd731d8fe95f78057b383d4fa5362a210bcaabf2175d9f6ad",
+      "reviewed": true,
+      "fields": {
+        "question": "Does MovieLens validate live IL-GRPO and latency?",
+        "answer": "No. Same candidates/seeds and validation-tuned proxy weights test ranking mechanisms only, without real query CTR or hybrid serving. Account separately for ranking, policy training, and measured latency.",
+        "example": "Movie NDCG gains do not establish millisecond query latency or online RL."
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:crop/basics": {
+      "source_sha256": "3b845d18f2f814734298a5ea65416f044b919325ab36f7c1052eb5220618a23a",
+      "reviewed": true,
+      "fields": {
+        "question": "Does CROP optimize model parameters, individual answers or the system prompt?",
+        "answer": "It freezes model weights and iterates the system prompt offline. The model generates; task and length critics identify accuracy and redundancy problems; a meta-optimizer rewrites the prompt. Deployment uses the selected prompt for one generation. This is neither hard truncation nor RL weight updates.",
+        "example": "Example: Iteratively changing “explain every step” to “keep the combined calculation and remove repetition” is prompt optimization; cutting any reply after 50 tokens is not."
+      }
+    },
+    "qa/agent-research:crop/mechanism": {
+      "source_sha256": "6b961631ecc1c8af61abd4cf60d783f0a710d582d971f8560addf7967ff5cc99",
+      "reviewed": true,
+      "fields": {
+        "question": "Why threshold the length critic, and how are the two textual gradients combined?",
+        "answer": "Section 3.3 runs length criticism only when generation strictly exceeds the threshold. Eq. 3 concatenates task critique, newline and length critique per sample for the meta-optimizer, rather than averaging numeric losses. Gradually remove narrative redundancy while keeping required calculations.",
+        "example": "Example: Threshold 40 does not trigger at 40 tokens but does at 41. “Check unit conversion” and “remove the repeated intro” cannot be replaced by scalar 0.7."
+      }
+    },
+    "qa/agent-research:crop/comparison": {
+      "source_sha256": "810ba59068ea71b3cdccf13c86e76c893d5df9eb1e9da49af04dff909dc4a4c1",
+      "reviewed": true,
+      "fields": {
+        "question": "What does CROP add beyond accuracy-only prompt tuning, and are token savings lossless?",
+        "answer": "It adds length feedback and selection by output-token cost. Table 3 includes accuracy drops: Gemini2Flash on ObjectCounting goes 96.0%→94.8% while mean tokens go 101.2→19.6. Report both sides of the tradeoff, not universal losslessness.",
+        "example": "Example: At equal 0.9 accuracy a 50-token prompt can beat a 100-token one. If the short prompt is less accurate, do not report only length."
+      }
+    },
+    "qa/agent-research:crop/implementation": {
+      "source_sha256": "443e112839ba22588d5a9a013201f1083aeef4b39f128765cfb353f8804e2036",
+      "reviewed": true,
+      "fields": {
+        "question": "How does local selection avoid test data or a final unevaluated prompt, and what do callbacks establish?",
+        "answer": "Selection requires fixed validation revision/IDs matching the frozen CoT length baseline, disjoint training IDs, and no train/test scoring for selection. Each round validates the current prompt before proposing the next, so the final unevaluated one cannot win. Deterministic model/critic fixtures verify gating, concatenation and selection, not real LLM improvement.",
+        "example": "Example: Measured A=0.8 and B=0.9; last proposal C has no validation. Return B, not newest C."
+      }
+    }
+  }
+}

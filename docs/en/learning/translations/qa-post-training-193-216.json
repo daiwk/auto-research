@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:reco-grpo/basics": {
+      "source_sha256": "925f185853db7a58f474b72f4e58e748aa3f1f1f00c8269207a0075e4accdd63",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does ReCo address both duplicate replies and saturated tokens?",
+        "answer": "Common responses dominate sample weight and already-certain tokens can be reinforced repeatedly. Expected response counts and token variance ratios target different redundancies to retain exploration.",
+        "example": "Repeated solutions and their nearly certain format tokens can both dominate gradients."
+      }
+    },
+    "qa/post-training:reco-grpo/comparison": {
+      "source_sha256": "528e03034eafedbb1507164ade569e798058397b7e2ed7ab65aaa6ffee8f509c",
+      "reviewed": true,
+      "fields": {
+        "question": "Is deduplication equivalent to ReCo expected-count weighting?",
+        "answer": "Hard dedup drops repeated samples; expected-count weights vary continuously with policy likelihood. A separate variance ratio adjusts tokens. The objectives differ.",
+        "example": "Two responses may appear only once each while one has much higher underlying probability and different weight."
+      }
+    },
+    "qa/post-training:reco-grpo/implementation": {
+      "source_sha256": "8d06223ca0b69489d97f19faf208bee49aceb7961265aef0963ba7c28ed52743",
+      "reviewed": true,
+      "fields": {
+        "question": "Why preserve old versus current probability in ReCo's Bernoulli variance ratio?",
+        "answer": "Compare current p(1−p) to old variance for changes in decision saturation. Protect near-zero denominators, not use current on both sides and get one. Candidate tests aren't text pass@64.",
+        "example": "Check numerical stability when old probability is near a boundary instead of accepting an enormous anomalous signal."
+      }
+    },
+    "qa/post-training:reco-grpo/mechanism": {
+      "source_sha256": "8876934862e7473a2fdc63b875a25cf36c42bbfcbc845862b8fba3e7c05034bb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why downweight common replies and adjust individual-token variance separately?",
+        "answer": "Response weights correct expected repetition across the group; token variance measures local plasticity. Neither replaces the other. Coverage isn't arbitrary randomness; candidate probabilities do not show long-text coverage.",
+        "example": "Downweighting repeated template responses can still leave nearly deterministic final tokens dominating."
+      }
+    },
+    "qa/post-training:code-optimization-rl/basics": {
+      "source_sha256": "6a364bd9d51da10e2af337b43f778432539c9254ce34a948918d402f7c2919b8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't correctness alone enough for code optimization RL?",
+        "answer": "The task also targets speed, but input size and load affect timing. Use dedicated tests and calibration to separate actual improvements from noise.",
+        "example": "Two correct algorithms may show complexity differences only at larger inputs."
+      }
+    },
+    "qa/post-training:code-optimization-rl/comparison": {
+      "source_sha256": "8cb523bf03e640d98f55ff45897329ae869de95e9f0b6a98f90367f6fdf30505",
+      "reviewed": true,
+      "fields": {
+        "question": "How does runtime reward differ from a math verifier?",
+        "answer": "Correctness can be relatively deterministic; time depends on inputs, sandbox and load. Use gates and reference percentiles, not one wall-clock observation.",
+        "example": "A busy shared worker can slow unchanged code without a regression."
+      }
+    },
+    "qa/post-training:code-optimization-rl/implementation": {
+      "source_sha256": "79f97d4663ebccbddeede44d68ba06f464b00a3e6d30ad18e8df4bbbcdc48b45",
+      "reviewed": true,
+      "fields": {
+        "question": "Can the local code-optimization component replace a timing service?",
+        "answer": "No. Real rewards need correctness and optimization tests, independent sandbox calibration, and handling sparse advantages and stale batches. A reward formula is not execution or acceleration evidence.",
+        "example": "Synthetic speed scores test update plumbing without timing code."
+      }
+    },
+    "qa/post-training:code-optimization-rl/mechanism": {
+      "source_sha256": "191eb584230a82ca1119f010ad13722b32b3c3cc614be47fcf215d024651584b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why calibrate timing before rewarding speed?",
+        "answer": "Noise from workers and small tests can teach exploitation rather than optimization. Independent timing, correctness and performance tests define valid rewards, with sparse/stale handling afterward. Syntax/fixtures don't prove faster production.",
+        "example": "Repeat timing under matched conditions instead of rewarding a run that happened on an idle host."
+      }
+    },
+    "qa/post-training:off-context-grpo/basics": {
+      "source_sha256": "df99b97f354770e5ba488594f59291347b9789059f2fd11ac3c17c94e9379c3c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why let only Off-Context GRPO behavior see privileged hints?",
+        "answer": "Hints help collect successes while the target sees the original prompt as deployed. Letting target see the solution evidence would change the task.",
+        "example": "A sampler can see a draft; omit it when scoring the target."
+      }
+    },
+    "qa/post-training:off-context-grpo/comparison": {
+      "source_sha256": "7af0b5045ec0697c33af3b0a9e46a87559e1d1273bf989a0d0666a6fbe5c9518",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Off-Context GRPO differ from SFT on hinted replies?",
+        "answer": "It retains verifiable rewards and relative group signals and corrects hinted behavior versus unhinted target. Imitation doesn't automatically correct that shift. Both must isolate evaluation gold.",
+        "example": "A hint makes a path common without implying the unhinted model originally sampled it often."
+      }
+    },
+    "qa/post-training:off-context-grpo/implementation": {
+      "source_sha256": "baad68986a7f1b4f060c6827ef81c1a99888ef6328fc2446f322348ec1ceffe9",
+      "reviewed": true,
+      "fields": {
+        "question": "What contexts condition numerator and denominator in Off-Context GRPO?",
+        "answer": "Numerator uses target probability on the original prompt; denominator uses actual behavior probability with privileged context. Same reply prefix, different contexts; don't add the hint to both.",
+        "example": "Strip hints only from target scoring, not from the sampled behavior's probability."
+      }
+    },
+    "qa/post-training:off-context-grpo/mechanism": {
+      "source_sha256": "3d5232ce0245596f3c059779aba5b7f2cd5c3b42ff35c7f5916fc48b23ed0ba3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why sample with hints but optimize and infer without them?",
+        "answer": "Hints increase successful trajectories and shift behavior. Correct using unhinted target versus hinted behavior ratio. Dropping denominator or retaining hints at evaluation changes the claimed task.",
+        "example": "A training draft can help collect a solution; the student and test still see only the problem."
+      }
+    },
+    "qa/post-training:iso-rlvr/basics": {
+      "source_sha256": "2bd4f5113c107f13385498de8235b433b14321c955493d16a7cf4a8279ac4b36",
+      "reviewed": true,
+      "fields": {
+        "question": "Why freeze singular values but adjust singular frames in ISO?",
+        "answer": "Fixed spectral strength and rotated input/output directions constrain adaptation without freezing the whole layer or keeping function unchanged.",
+        "example": "The same stretches in rotated bases can act on different features."
+      }
+    },
+    "qa/post-training:iso-rlvr/comparison": {
+      "source_sha256": "b237b526e7bb9fe4867e5b5fce35dcac25fd1876a7ebc8d4f6662b725b4ad2e2",
+      "reviewed": true,
+      "fields": {
+        "question": "Are ISO fixed spectrum and GCPO protected subspaces the same?",
+        "answer": "No. ISO fixes values and changes frames; GCPO excludes updates into selected principal directions. They fix different quantities and allow different changes.",
+        "example": "Rotating directions at fixed scale isn't holding principal directions fixed and using their complement."
+      }
+    },
+    "qa/post-training:iso-rlvr/implementation": {
+      "source_sha256": "4e763342ebf21f41b7c4a1a83c7ff797cd5a53a46403a768c42c0c23795c814b",
+      "reviewed": true,
+      "fields": {
+        "question": "How avoid training Σ in ISO?",
+        "answer": "Keep Σ0 fixed and optimize only permitted input/output frames, checking structure. Free matrix updates change spectrum. Local candidate tests don't cover the full LLM stack.",
+        "example": "Unrestricted gradients on a reconstructed weight bypass fixed singular values."
+      }
+    },
+    "qa/post-training:iso-rlvr/mechanism": {
+      "source_sha256": "e9bb7c78d1025648cc23e370c7bb574c6318551ab07c46d40ee36aae9d3d9196",
+      "reviewed": true,
+      "fields": {
+        "question": "How does fixed-spectrum ISO differ from ordinary low-rank updates?",
+        "answer": "It adjusts input/output singular directions while retaining magnitudes, rather than adding arbitrary low-rank changes. This constrains reachable weights and structures expert merges. Small tests don't establish full model optimization.",
+        "example": "Equal singular values with rotated directions can implement different mappings."
+      }
+    },
+    "qa/post-training:ripo/basics": {
+      "source_sha256": "94e6326fc3343606feaea16f4b18cb0f9fc7a4aa52d10dab8f75a3ab1f766ef0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does a fixed ratio clip give uneven distance budgets in RIPO?",
+        "answer": "Equal ratio changes have different geometric effects at different old probabilities. Fisher–Rao geometry adjusts bounds for more comparable local budgets.",
+        "example": "The same relative increase for rare and frequent actions need not move the distribution equally."
+      }
+    },
+    "qa/post-training:ripo/comparison": {
+      "source_sha256": "38db476f40d259c883daf031a2482e9a09ae7c3a6afc78db9658e0486333ce24",
+      "reviewed": true,
+      "fields": {
+        "question": "How do adaptive RIPO bounds differ from raising global PPO ε?",
+        "answer": "Global ε broadens every action. RIPO conditions bounds on old probability rather than uniformly becoming more aggressive, without guaranteeing universal stability.",
+        "example": "Exploration needs in low-probability regions need not relax frequent actions equally."
+      }
+    },
+    "qa/post-training:ripo/implementation": {
+      "source_sha256": "f01954877c5b594be360b4c907038a66208356f23a7c95aed74a25b377f3cea2",
+      "reviewed": true,
+      "fields": {
+        "question": "Should RIPO dynamic clipping read pre- or post-update probabilities?",
+        "answer": "Set boundaries from frozen old-policy action probabilities while evaluating current ratios. Recomputing from current shifts the trust region during updates. Candidate tests aren't long-CoT training.",
+        "example": "Increasing an action's probability should not rewrite that round's original bound."
+      }
+    },
+    "qa/post-training:ripo/mechanism": {
+      "source_sha256": "94a668f398517df5aee290f0cfc97c839886643540fc15b8e8c06bfaf69b419c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't one PPO ratio interval the same policy distance at every old probability?",
+        "answer": "Local geometry and KL cost depend on old probability. RIPO uses Fisher–Rao probability-dependent bounds, not different advantage labels. Actual update stability still needs verification.",
+        "example": "Doubling rare and common actions affects remaining mass differently."
+      }
+    },
+    "qa/post-training:sis/basics": {
+      "source_sha256": "499c8965ee7074f89a5941a158a5ae83d7591705ca0da72efe70c20c95d5f378",
+      "reviewed": true,
+      "fields": {
+        "question": "Why convert some old-policy SIS tokens into usable current-policy samples?",
+        "answer": "Asynchrony/reuse induce staleness and products of ratios have high variance. Rejection sampling reduces correction for accepted tokens; the host method handles rejected ones without dropping all data.",
+        "example": "Retain useful accepted positions within an old batch."
+      }
+    },
+    "qa/post-training:sis/comparison": {
+      "source_sha256": "9fdbdb16fe8aa5c5bfb384bcf1d77b5aa33a966de5f371c12bfc4b9b61b0ac7e",
+      "reviewed": true,
+      "fields": {
+        "question": "Is setting accepted token ratios to one the same as clipping to one?",
+        "answer": "No. Acceptance is a distributional rejection-sampling event, not numerical capping. Exact envelopes and behavior top-K approximations have different guarantees.",
+        "example": "Replacing every large ratio with one gives no sampling guarantee."
+      }
+    },
+    "qa/post-training:sis/implementation": {
+      "source_sha256": "ab5c48629bc6d41ce7210ea494f2f0b2ac52e82036006b0066c14ddb9486eb6d",
+      "reviewed": true,
+      "fields": {
+        "question": "Which policy supplies SIS top-K, and what happens to rejections?",
+        "answer": "Approximate the envelope on behavior top-K. Set accepted ratios to one, keep GRPO/DAPO/GSPO correction for rejected tokens, rather than deleting or resetting them.",
+        "example": "One rejected token does not force dropping the full reply."
+      }
+    },
+    "qa/post-training:sis/mechanism": {
+      "source_sha256": "2f7a4f6802d2b6daa185e9e09f8f3fcdf9881a20f944d6d1cad8c3896f5419bb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does SIS set accepted ratios to one, and does this make the whole trajectory on-policy?",
+        "answer": "Under ideal rejection sampling the accepted conditional action distribution is corrected at a fixed prefix, so no original ratio is needed there. Rejects follow host correction. Whole histories remain old, and top-K is approximate.",
+        "example": "Accepting one position never sets all trajectory ratios to one."
+      }
+    }
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:ontrack/mechanism": {
+      "source_sha256": "87e374271caa5a24b4e595863abb378c64009080117464f7d8cca5c482e817c0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not rescale old prefix-node mass to 1/t whenever a new event arrives?",
+        "answer": "Rescaling changes historical weights merely because the stream grows, confounding progress with normalization. Fixed prefix mass, streaming warm starts, and structural coupling preserve comparisons over time. Before intervening, increase the solver budget and recompute; irreversible-action gates cannot rely on stale frontier caches.",
+        "example": "A new log read should not automatically reduce the mass of an earlier critical edit. Otherwise a score change can come from the denominator rather than actual drift."
+      }
+    },
+    "qa/agent-research:ontrack/basics": {
+      "source_sha256": "1980af46b53abeec181b99fd5d0da71bebdccb67fe978d833e7c8e2ab30cfe5a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does OnTrack represent trajectories as dependency graphs rather than compare action text?",
+        "answer": "Order and artifact dependencies determine deviation, and independent branches may have different valid orders. Structured unbalanced alignment allows partial prefix/reference matches. Without a reference, explicitly fall back to loop, retry, and stagnation signals.",
+        "example": "Swapping the order of two independent files should not be labeled deviation merely because indices change."
+      }
+    },
+    "qa/agent-research:ontrack/comparison": {
+      "source_sha256": "916b57d7e6ed08412b75c7f77ad40cecf7bec0f3c9776f5c1a0d6b9ff9d8371e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use different weights for OnTrack's early exploration grace and final alignment?",
+        "answer": "Online new nodes receive age discount and a frontier mask to avoid premature penalties. At termination, cold-start without these adjustments to check the complete trace. Keeping exploration grace in final scores can hide unresolved drift.",
+        "example": "A temporary artifact gets early grace, but if still unused at termination it needs full review."
+      }
+    },
+    "qa/agent-research:ontrack/implementation": {
+      "source_sha256": "81dbcf32a97730c1046d94cca1289728de3ebf860b0cf2e65ad022ae08b4f969",
+      "reviewed": true,
+      "fields": {
+        "question": "May OnTrack reset existing node mass from 1/m to 1/t at each event?",
+        "answer": "No. Agent nodes receive fixed prefix mass 1/m_bar. Rescaling changes old masses and leakage conventions. Recompute the frontier with current coupling before irreversible actions. Planner references can warn but cannot automatically halt execution.",
+        "example": "One unrelated new event should not lower all prior masses solely by changing a denominator."
+      }
+    },
+    "qa/agent-research:specguard/mechanism": {
+      "source_sha256": "5b5622b612e001e578a82118fa62e03ab253922c96df6b3a87b26eb76e066a57",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a Lean proof still yield inconclusive even though SpecAgent never sees tests?",
+        "answer": "Test isolation keeps intent independent of potentially wrong or malicious requirements, and the Certifier checks conflict. A proof applies only to translations and connector expressions. If natural-language meaning cannot be aligned faithfully, kernel success does not prove the original task is corrupted; keep inconclusive.",
+        "example": "Sorting versus reverse-order requirements can be formalized as a conflict. Ambiguity over 'stable sorting' should not be settled solely by a limited proof."
+      }
+    },
+    "qa/agent-research:specguard/basics": {
+      "source_sha256": "e388024501853cff7c040f7d33279c6090c845ca7b390f4b5299adfc99f2128c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't SpecGuard let SpecAgent see tests?",
+        "answer": "Tests may conflict with trusted task descriptions; copying them into intent would prove only the tests' own requirements. SpecAgent sees description and code, TestAgent translates independently, and Lean checks conflict after semantic connection.",
+        "example": "If the description says add one but tests demand 2 become 4, do not write '2 becomes 4' into the intent specification."
+      }
+    },
+    "qa/agent-research:specguard/comparison": {
+      "source_sha256": "469014396fae50804ba1bb4661e32b81b203e10639bdc5a33bd9d347a80e3172",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a Lean-kernel conflict certificate prove that the original natural-language task must conflict?",
+        "answer": "It establishes no common implementation for the generated specification and test constraints, not faithful translation. Semantic connection or intent extraction may be wrong. Allow inconclusive when expression or alignment fails.",
+        "example": "A proof obtained after translating 'add one' as 'add two' does not validate the original task."
+      }
+    },
+    "qa/agent-research:specguard/implementation": {
+      "source_sha256": "fe8579b3c785d93e91157b7fe47c0ac935414529e598530cb23beadd6263c866",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a passed SpecGuard A100 receipt show real end-to-end model success?",
+        "answer": "No. All three archived small-model cases were inconclusive with zero conflict certificates and stopped at Spec. Passed verifies real CUDA execution and provenance. Handwritten Lean passes test mechanics, not model output.",
+        "example": "A working GPU command and saved failures do not establish that the model reached TestAgent and connector stages."
+      }
+    },
+    "qa/agent-research:veriharness/mechanism": {
+      "source_sha256": "8b6f8cf1c805c8cedb655e56d2152354ebc5a47cb64905cc0a8f6fe8daf7c46c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add a consensus challenger after multiple verifiers agree?",
+        "answer": "Consensus can share mistakes or omissions. Resolving explicit disagreement cannot find requirements everyone skipped. The challenger questions consensus and gaps; the resolver gathers evidence for conflicts. Use evidence tools rather than majority counts as truth.",
+        "example": "If three reviewers inspect screenshots but none examines downloaded files, the challenger can flag missing artifact review even without disagreement."
+      }
+    },
+    "qa/agent-research:veriharness/basics": {
+      "source_sha256": "55ce45327f59a348150573f8990dc0214a27d40ec4c41c556533e149f1c0bda2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does VeriHarness challenge consensus as well as resolve disagreement?",
+        "answer": "Multiple matching answers can share missing evidence or omitted requirements. The resolver investigates disputed claims; the challenger questions shared claims and gaps. Evidence tools and workspaces keep agreement from substituting for correctness.",
+        "example": "Three agents can cite the same unchecked claim, which still needs verification despite unanimous votes."
+      }
+    },
+    "qa/agent-research:veriharness/comparison": {
+      "source_sha256": "52eec7317b3950b6cbbcd32a262001e03e7ac6fc55f0ffe0e72b34c460ff23ab",
+      "reviewed": true,
+      "fields": {
+        "question": "How does VeriHarness evidence scoring differ from simple majority voting?",
+        "answer": "Voting counts opinions. The score also considers supporting evidence, contradictions involving consensus, and a claim-count penalty. More votes or claims do not improve verifiability automatically. The local fixture checker is not the paper's actual tool environment.",
+        "example": "One precise, supported claim can be preferable to ten repeated but contradictory claims."
+      }
+    },
+    "qa/agent-research:veriharness/implementation": {
+      "source_sha256": "2b4206ab8120cb40624a0fe8f91160756f2fd5e73c7f64093a741435adec1c6d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why record claim segmentation when implementing the VeriHarness claim-count penalty?",
+        "answer": "The score includes epsilon times claim count, so splitting or merging content changes the penalty. Preserve support, contradiction, and count to explain selection. Fixture verdicts are not real-world fact verification.",
+        "example": "Splitting one sentence into three claims changes the penalty; use consistent segmentation across candidates."
+      }
+    },
+    "qa/agent-research:safe-self-improvement/mechanism": {
+      "source_sha256": "ee415e17914051dcfc2d54c6ed87bd3f4772b1a59180230705b43a649f9f3b8b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why select the currently executable version separately from the next edit source?",
+        "answer": "A promising edit parent may not run safely under present conditions. Revalidate execution candidates and select from the qualified set. If none pass, return to founder rather than using a failed incumbent. Restoring execution and continuing search differ, and historical passes are not permanent eligibility.",
+        "example": "Keep a failed incumbent for edit analysis if useful, but execute a currently qualified version or roll back to founder."
+      }
+    },
+    "qa/agent-research:safe-self-improvement/basics": {
+      "source_sha256": "4f354558028027d12ef62bdd25ff9a93c597b0d0b2ec05d61d15ddcdef48bd5c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Safe Self-Improvement distinguish the next edit source from the current implementation?",
+        "answer": "A program can be a useful starting point without meeting current execution conditions. Detection, executable selection, and edit-source selection are separate, and candidates are revalidated under current conditions so old passes do not conceal current failure.",
+        "example": "Useful code from an old version does not make the entire version safe to run today."
+      }
+    },
+    "qa/agent-research:safe-self-improvement/comparison": {
+      "source_sha256": "f3672cc4b1c84085e95a7a99e646ed0a83029afd1a23f34e93d51b0b9ae81686",
+      "reviewed": true,
+      "fields": {
+        "question": "How does founder rollback differ from continuing with the incumbent when nothing passes?",
+        "answer": "Select the highest score only among currently valid candidates. If none qualify, roll back to founder. Continuing with a failed incumbent bypasses validation; rollback is a recovery protocol, not proof founder is always safe in any new condition.",
+        "example": "A top-scoring candidate that currently fails cannot keep the execution role on the strength of past scores."
+      }
+    },
+    "qa/agent-research:safe-self-improvement/implementation": {
+      "source_sha256": "00d124ca6fa2d4eb31d518ea7b70306598fcacc6c12951dd995bda0432b91589",
+      "reviewed": true,
+      "fields": {
+        "question": "Can Safe Self-Improvement reuse a candidate's previous pass flag directly?",
+        "answer": "No. Recheck current conditions and choose the highest-scoring current pass. The local path executes verification and founder fallback selection, without the paper's edit model or Bedrock experiments.",
+        "example": "Changed tool permissions or task conditions invalidate unconditional reuse of an old passed flag."
+      }
+    }
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:mem-plus-plus/mechanism": {
+      "source_sha256": "079b2f8f50d062769735f162fe28dc129f9aba47cff7eb3720faa54c97637aff",
+      "reviewed": true,
+      "fields": {
+        "question": "Why filter by the question's time before reading instead of telling the model not to use future information afterward?",
+        "answer": "Future documents can influence the model once they enter context, even with an instruction not to use them. Time eligibility first restricts lexical and semantic ranking to documents available then. Retaining verbatim text, date, and author aids audit but does not guarantee retrieval of the right record.",
+        "example": "Example: A March organizational decision cannot use an April announcement, however similar it is, as evidence of what was known in March."
+      }
+    },
+    "qa/agent-research:mem-plus-plus/basics": {
+      "source_sha256": "52623f4dbdc09c87e2ee2e83cb7b073f8daedcbada30d0f5492e9fe5fc31f928",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do Mem++ non-destructive writes retain date and author?",
+        "answer": "Original text carries facts, date supports as-of queries and version selection, and author preserves provenance and context. The write does not irreversibly rewrite records with a model, so later questions can reinterpret them. Raw storage does not guarantee retrieval and costs more storage and reads.",
+        "example": "Example: Keeping the dates and authors of two policy updates helps distinguish an older suggestion from a later official notice instead of blending them."
+      }
+    },
+    "qa/agent-research:mem-plus-plus/comparison": {
+      "source_sha256": "e89e37c53247f5caf8a334b2c7ff24f37ae6bd4dd50f289e8bf72e0ff92984ad",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep both lexical and semantic ranking in Mem++?",
+        "answer": "Lexical retrieval is good for exact names, IDs, and quotations. Semantic retrieval handles paraphrases and vocabulary changes. Fusion uses both on time-eligible original records and cannot create missing facts. Returned evidence may overlap or conflict, so the final answer must verify contents and provenance.",
+        "example": "Example: A ticket number can hit lexically. A query about the last database outage may match a record saying storage service interruption semantically."
+      }
+    },
+    "qa/agent-research:mem-plus-plus/implementation": {
+      "source_sha256": "b5086949651e2cde3df4a83befba7ee856994a3c292f03db6d4dc4beee4c8ceb",
+      "reviewed": true,
+      "fields": {
+        "question": "Did the local full-write and hybrid-retrieval test run OrgMemBench or an external embedding service?",
+        "answer": "No. It runs verbatim retention, as-of filtering, and a reference lexical-semantic blend. Three seeds verify mechanism invariants. Organizational memory outcomes are the authors' benchmark; preset vectors and fixed records do not establish real assistant gains.",
+        "example": "Example: A future record being filtered verifies the date rule. Without real organizational QA and encoders, there is no comparable OrgMemBench capability score."
+      }
+    },
+    "qa/agent-research:causal-memory-policy/mechanism": {
+      "source_sha256": "866a97998da125d8923a0181e50f8cff6b1ee6d89948b8d6657dd8f017b593df",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not delete a memory just because it often appears in failed tasks?",
+        "answer": "Hard tasks can preferentially retrieve that memory, biasing the correlation. Balanced randomized exposure gives comparable treatment and control observations, and standard errors protect uncertain items. Replacing one entry in fixed slots changes exposure of others, so the effect is specific to the design rather than universally additive.",
+        "example": "Example: A manual used in the hardest incidents can have low success because incidents are difficult. Randomized exposure helps test whether the manual itself hurts."
+      }
+    },
+    "qa/agent-research:causal-memory-policy/basics": {
+      "source_sha256": "7147af3b3c0e269bb79e6c658f5bcc7322b3d038b744683446a220ee1a43ebd7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why measure a memory's effect on execution before cleaning up a library?",
+        "answer": "Memory takes context and may help, hinder, or be irrelevant. Deletion needs evidence of outcome utility. CMP makes utility estimable with retrieval-exposure experiments and retains uncertain items. It studies interventions under a fixed design, not frequency-based archiving.",
+        "example": "Example: Two old guides are both frequent. One helps recover from errors and the other repeats background. Outcome comparisons support keeping them differently."
+      }
+    },
+    "qa/agent-research:causal-memory-policy/comparison": {
+      "source_sha256": "39ae76fc344f8cf313abb621cfeba31b2276165a70168811a28e75e4ced863ac",
+      "reviewed": true,
+      "fields": {
+        "question": "How does protecting uncertain memories differ from deleting any with a negative estimated mean?",
+        "answer": "With high variance and few samples, a negative mean can conceal a positive effect. CMP combines standard errors with asymmetric deletion cost, refuses estimates with inadequate support, and returns noop under infinite uncertainty. One negative outcome is not permanent forgetting.",
+        "example": "Example: Two treatment runs that happen to fail are insufficient to prove harm. Wide uncertainty calls for retention or more evidence."
+      }
+    },
+    "qa/agent-research:causal-memory-policy/implementation": {
+      "source_sha256": "1737b05d4746aa98cb7b0a257a734d468f8c6f44336ee3b8c9b4537665a52ef7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do fixed k exposure slots prevent interpreting effects as independent additive coefficients?",
+        "answer": "Exposing one more memory changes the others' distribution inside fixed slots. The measured effect includes replacement under the randomized design. Each row has k entries, column exposures are roughly balanced, and each arm needs at least two observations. Recovering synthetic utilities is not a long-term cross-query policy or real QA accuracy.",
+        "example": "Example: In two slots, adding A displaces another candidate. The result measures the net effect of A replacing some content, not A's isolated contribution."
+      }
+    },
+    "qa/agent-research:belief-state-pos/mechanism": {
+      "source_sha256": "d3e14548685ba1f99ced8ab66376fea39cea2cf6e10431f16eaa5293386e58fc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do explicit unresolved requirements detect stalls more easily than a history summary?",
+        "answer": "A summary describes work done. Unresolved requirements make progress comparable. If successive actions do not reduce them, the agent may be cycling and can recover around the specific gap. Action count is not progress. Facts and requirements must update from actual observations, not confidence.",
+        "example": "Example: Five searches still have not verified a date. The unresolved item exposes that activity did not move the goal forward."
+      }
+    },
+    "qa/agent-research:belief-state-pos/basics": {
+      "source_sha256": "9db9a421d4070c9016ba16e28391c9482da114713a15d5b75c635928ebeef3fb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does explicit belief track both facts and unresolved requirements?",
+        "answer": "Facts describe the currently believed world; unresolved requirements describe what the task still lacks. History text alone can mask repeated work as progress. An explicit set supports stall detection, but entries need evidence before removal.",
+        "example": "Example: The user's address is known, while inventory is unconfirmed. Rereading the address does not resolve inventory."
+      }
+    },
+    "qa/agent-research:belief-state-pos/comparison": {
+      "source_sha256": "92a066364bc87fff2caf5ad030bf8dbecf6dd8a957d0ef2ccfb0e4ed8763d398",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Belief Trapping differ from checking for repeated actions?",
+        "answer": "Action repetition checks surface behavior. Belief stalling checks whether unresolved requirements decrease. Different actions can circle the same bad assumption, and the same query may help after a state change. Diagnose progress from facts and requirements, not action strings alone.",
+        "example": "Example: Three search phrases fail to confirm payment despite different wording. Checking again after a transaction settles may actually make progress."
+      }
+    },
+    "qa/agent-research:belief-state-pos/implementation": {
+      "source_sha256": "d094fecf71dda8f84e4be2d97ad817cf8565784cd037b550143219537ea4e818",
+      "reviewed": true,
+      "fields": {
+        "question": "Does Δ|unresolved|≥0 prove a task is unsolvable?",
+        "answer": "No. It means that the window did not reduce outstanding requirements. Necessary preparation, missing evidence, or a bad updater can cause it. Trigger targeted recovery rather than declaring unsatisfiability. The local run tests belief updates and stall detection without external tools or learned extraction; rule activation is not long-horizon success.",
+        "example": "Example: Preparing identity verification may leave requirements unchanged but enable the next query. Stopping immediately would cut off a legal path."
+      }
+    },
+    "qa/agent-research:autocompact/mechanism": {
+      "source_sha256": "3e3b5b395efda8ec38d882c89ba3b35b4889f24b113bc6de87c1beb1e83225a5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why should a judge correct compression timing, summary content, and next action together?",
+        "answer": "These decisions interact. Early compression can lose evidence, missing facts can induce bad actions, and later behavior can squander a correct summary. Executing the corrected tuple lets training observe joint consequences. Summary fluency alone cannot establish sufficiency for long-horizon coding.",
+        "example": "Example: A clear summary omitting a parameter constraint can cause the next edit to break an interface. Correct both memory and action."
+      }
+    },
+    "qa/agent-research:autocompact/basics": {
+      "source_sha256": "ce82eb8d336b845c84636178beabc7c0b956cc474b773307020949e4bb8ca8a6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why shouldn't a long-horizon coding agent wait until context is full before considering compression?",
+        "answer": "Work includes pending edits, test feedback, and delivery requirements. Bad timing can discard precisely what the next step needs. AutoCompact learns when to compress and how to continue, aiming for task continuity under context pressure rather than shorter text alone.",
+        "example": "Example: Forced compression just after a failing test appears may drop the key error before its cause is recorded. Choose timing with task progress in mind."
+      }
+    },
+    "qa/agent-research:autocompact/comparison": {
+      "source_sha256": "996b08083c6bcdbcb4a45e208cbe099dfecbd4bd596b953408f7a0302db4814f",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the trade-off between learned compression timing and a fixed length threshold?",
+        "answer": "A fixed threshold responds only to capacity and cannot distinguish moments with fragile commitments or unfinished work. A learned decision can use task state but requires reliable supervision and can err. Evaluate actual downstream coding results and cost alongside context reduction.",
+        "example": "Example: Compression just after a tool return and before recording its conclusion is risky. Waiting until state is clear can preserve what matters."
+      }
+    },
+    "qa/agent-research:autocompact/implementation": {
+      "source_sha256": "c381296984a89c14ed48800008f1fd6b7ddca4a7174fa90d5ff68d1d37ac36a9",
+      "reviewed": true,
+      "fields": {
+        "question": "After a judge corrects the tuple, should the environment execute the original action or the corrected one?",
+        "answer": "Execute the corrected decision, summary, and action together so training records match consequences. SFT plus outcome RL needs real execution feedback. The local run verifies the three-field in-place correction contract without training a coding agent or running SWE containers. Field checks are not code-repair results.",
+        "example": "Example: If the judge changes 'submit now' to 'run the failing test first,' executing the old submit action makes its reward invalid evidence for the corrected policy."
+      }
+    }
+  }
+}

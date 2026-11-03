@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:sensenova-u1-5/basics": {
+      "source_sha256": "cb9bf0f9a3e6e6ba40849f158bed7e27d3694cb6683e2288fa3a48269b6c78d3",
+      "reviewed": true,
+      "fields": {
+        "question": "Do visual understanding and generation in SenseNova-U1.5 have the same input–output direction?",
+        "answer": "No. Understanding conditions on vision to answer or judge, while generation produces visual content from conditions. A unified model needs both signals. Spatial patch reconstruction concerns generation representations; expert OPD concerns post-training supervision. One operator does not establish both capabilities.",
+        "example": "Answering what is in an image and creating an image on request are different acceptance tests."
+      }
+    },
+    "qa/foundation-models:sensenova-u1-5/comparison": {
+      "source_sha256": "46aa0237a486b0fe5129007e493beae7f5272833ce8a392f5fb828a096d56a09",
+      "reviewed": true,
+      "fields": {
+        "question": "How does multi-expert OPD differ from a single teacher?",
+        "answer": "Experts supply different tasks or abilities; the unified model must reconcile signals rather than match one teacher distribution. Coverage can grow, but so can conflicts. More teachers do not guarantee improvement in both understanding and generation.",
+        "example": "A teacher emphasizing object relations and another emphasizing image reconstruction do not simply repeat the same target."
+      }
+    },
+    "qa/foundation-models:sensenova-u1-5/implementation": {
+      "source_sha256": "8e9e37c30cc1e03e2fae8284c3ac4a6aec4809a82713c509c475089889f84bde",
+      "reviewed": true,
+      "fields": {
+        "question": "Do the local masked-patch and expert OPD results establish a unified 8B model?",
+        "answer": "No. Deterministic reference kernels and three-seed state-transition diagnostics cover masked targets and expert fusion, not multistage 8B training. Gating and loss values verify paths, not real understanding or generation benchmarks.",
+        "example": "Correctly summing expert weights in a tensor does not demonstrate usable images or real visual answers from an eight-billion-parameter model."
+      }
+    },
+    "qa/foundation-models:siglip2/mechanism": {
+      "source_sha256": "666fa34f731d571e3117499126d22e8e682367a066d1fed075ba43ff0ac64add",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add local self-distillation and masked prediction to pairwise sigmoid alignment?",
+        "answer": "Global matching constrains whole-image compatibility with text but need not train local or dense features. Local distillation and masking supervise spatial detail; captioning and data selection improve semantic inputs. Ablate these separately rather than credit sigmoid alone.",
+        "example": "A street caption may only mention a car, while recovery around its masked wheel encourages finer spatial features."
+      }
+    },
+    "qa/foundation-models:siglip2/basics": {
+      "source_sha256": "1babaa2833a933f1db00f2c6f9552195e5b6792e025eb28067fcbacad1c93512",
+      "reviewed": true,
+      "fields": {
+        "question": "Does SigLIP 2 NaFlex change the number of class labels?",
+        "answer": "No. Dynamic resolution changes how vision input is represented and where compute goes. Labels are separate. SigLIP 2 combines input adaptation, global semantics, and local feature training; a fixed-resolution loss kernel does not cover the complete recipe.",
+        "example": "The same cat and dog labels can accompany images of different sizes."
+      }
+    },
+    "qa/foundation-models:siglip2/comparison": {
+      "source_sha256": "962e0529b5f29774b6b697d6e5e6956dc39302cacabbd4677d0daf2907c91dc8",
+      "reviewed": true,
+      "fields": {
+        "question": "How does pairwise sigmoid differ from CLIP batch softmax?",
+        "answer": "Softmax normalizes over each row or column so a matching pair competes with other batch entries. Sigmoid gives each image–text pair an independent positive or negative classification term. Normalization, temperature, and bias differ; effectiveness is empirical.",
+        "example": "Cat image–cat text is positive and cat image–dog text negative; sigmoid applies two separate binary constraints."
+      }
+    },
+    "qa/foundation-models:siglip2/implementation": {
+      "source_sha256": "6b34eca56ea6bef3592712a27cdc0f291929299eba65263bbd42547df68b3a35",
+      "reviewed": true,
+      "fields": {
+        "question": "How do label signs and bias enter sigmoid pair loss?",
+        "answer": "Use z=+1 or −1 in log(1+exp(−z·score)), with scaled dot product plus bias as score. Substituting 0/1 without changing the formula removes the negative gradient. Local work covers class text and masked-view consistency only.",
+        "example": "z=−1 penalizes high negative-pair similarity; z=0 makes loss constant."
+      }
+    },
+    "qa/foundation-models:smolvlm/mechanism": {
+      "source_sha256": "a5dc6f4939d955a2817a1c19e360974b3cc4772a345c06de6b2ca9ba5cba361b",
+      "reviewed": true,
+      "fields": {
+        "question": "Where does pixel shuffle put neighborhood information when it reduces visual token count?",
+        "answer": "It concatenates nearby spatial tokens along channels and projects them through an MLP to the LM. It trades attention length for wider local representations rather than dropping patches. Fine text and spatial relations still require task-specific verification.",
+        "example": "Four adjacent patches merge into one wider vector, quartering token count but coarsening the LM's spatial granularity."
+      }
+    },
+    "qa/foundation-models:smolvlm/basics": {
+      "source_sha256": "0a81883be714c5b7194f2e7fe727f6ac43a3b0f5968fd37c8b22b85350c70e8f",
+      "reviewed": true,
+      "fields": {
+        "question": "Does SmolVLM just remove language-model layers?",
+        "answer": "No. It reallocates vision and language compute with visual token compression, tiling, positional tokens, long context, and data mixtures. Parameter count and vision input cost are separate; one rearrangement operator is not the full recipe.",
+        "example": "A smaller LM still pays vision encoding and context costs if given many high-resolution visual tokens."
+      }
+    },
+    "qa/foundation-models:smolvlm/comparison": {
+      "source_sha256": "040dff79d4598e29772527416ebba3c316984bde955040e1fd50777c686f953e",
+      "reviewed": true,
+      "fields": {
+        "question": "What does space-to-depth preserve compared with averaging four patches?",
+        "answer": "Averaging erases independent patch positions; space-to-depth concatenates them in fixed spatial order so later projection can distinguish them. It trades shorter sequences for wider input tokens. Fine recognition still depends on projector capacity and training.",
+        "example": "Swapping black upper-left and white lower-right blocks can preserve their average but change their ordered concatenation."
+      }
+    },
+    "qa/foundation-models:smolvlm/implementation": {
+      "source_sha256": "87c8c97ed989acbd7a656084559de9acbe4475d3ab1d065eec458c1282c6029f",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local r=2 check include SmolVLM's high-resolution and long-video recipe?",
+        "answer": "No. It uses 32×32 clothing images and 2×2 space-to-depth without high-resolution tiling, video sampling, long context, learned position tokens, or a SmolLM decoder. Results only check the rearrangement and projection.",
+        "example": "Reducing 16 patches to four verifies tensor shapes, not cross-frame localization or 8,000-token context."
+      }
+    },
+    "qa/multimodal-models:umrm/mechanism": {
+      "source_sha256": "58c0457742f99ae798170d322dfd8d950a57145760376d62fbc2428331428710",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does UMRM compare all B² positive–negative pairs?",
+        "answer": "All positives and negatives in the batch contribute ranking constraints instead of isolated pairs. Pool only response tokens so prompt/image features do not swamp response distinctions. Synthetic negatives define training signals but do not cover every real policy hallucination.",
+        "example": "Two positives and two negatives give four comparisons rather than two matched pairs, without creating human preference labels."
+      }
+    },
+    "qa/multimodal-models:umrm/basics": {
+      "source_sha256": "5ae12f4522702c128046a4c419b3d91bceedc8cdbe25beb9b075be1efb4a0f5e",
+      "reviewed": true,
+      "fields": {
+        "question": "Does UMRM's unsupervised label mean no labels are used anywhere?",
+        "answer": "No. Caption perturbations construct preference pairs without human pairwise annotation. Layer selection uses a labeled development set, and bootstrapping uses cheap verifier labels. Preference construction, model selection, and deployment-utility supervision differ.",
+        "example": "Change “two cups” to “three cups” automatically, but validation labels can still determine the best layer."
+      }
+    },
+    "qa/multimodal-models:umrm/comparison": {
+      "source_sha256": "23b7ab0a7d36f8c4786274a74572b79b6cd37f8ae945fdace0e1f66979d23061",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can caption-perturbation accuracy and real-policy selection utility move in opposite directions?",
+        "answer": "Synthetic negatives may differ from actual policy errors. A reward head can learn artifacts of artificial editing. Bootstrapping on policy candidates with a verifier changes the supervision and may improve Best-of-N even if a reward benchmark falls.",
+        "example": "Spotting swapped colors does not ensure that a reward head can select a faithful response when policy candidates omit objects."
+      }
+    },
+    "qa/multimodal-models:umrm/implementation": {
+      "source_sha256": "5d50daa94c456c66256f2a82574deab62763705f84b3de76aae6a792f13d1a64",
+      "reviewed": true,
+      "fields": {
+        "question": "Should UMRM change the image to match a perturbed negative description?",
+        "answer": "No. The external sampler edits the response while holding the image fixed. It can change a span, splice tails, shuffle clauses, or use a cross-image caption with default probability 0.15. Swapping the image changes the contrast. Do not pool image or prompt tokens into the response representation.",
+        "example": "Change “two dogs” to “three dogs,” but keep the original image with two dogs."
+      }
+    },
+    "qa/foundation-models:wemm-embedding/mechanism": {
+      "source_sha256": "857ba3c1b3b7e5467ee25fc23b74eb5855eae6781138657d2ec4f059ea1d8786",
+      "reviewed": true,
+      "fields": {
+        "question": "Why align at scale before curated relevance and cross-scale distillation in WeMM?",
+        "answer": "Initial alignment builds a shared space; refined relevance addresses items that look similar but fail the query. Distillation and Matryoshka representations carry semantics across sizes. Closeness alone is not business relevance or correctness.",
+        "example": "Red shoes match “red items,” but “shoes for rain” needs relevance supervision beyond appearance."
+      }
+    },
+    "qa/foundation-models:wemm-embedding/basics": {
+      "source_sha256": "9848b84b5f69b905969e3d193b537127b1137525cac979feaab779a05bbfb43c",
+      "reviewed": true,
+      "fields": {
+        "question": "How does interleaved WeMM input differ from a single image vector?",
+        "answer": "One input can combine text, images, video, and document segments in order before encoding. It represents combinations rather than indexing each modality in isolation. A shared space does not remove the need to train and validate combinations.",
+        "example": "A product photo plus “same design in blue” differs from either the photo or the color term alone."
+      }
+    },
+    "qa/foundation-models:wemm-embedding/comparison": {
+      "source_sha256": "b62d2c330a4a7597a566cb460656f936bf1a43124ff1c2e99642ee24f18607ad",
+      "reviewed": true,
+      "fields": {
+        "question": "How does WeMM cross-scale KD differ from supervising only the largest embedding?",
+        "answer": "It sums teacher-to-student KL at designated Matryoshka sizes, so smaller outputs receive explicit signals. A common semantic target does not guarantee identical quality or arbitrary truncation. Compare retrieval quality and cost at specified sizes.",
+        "example": "Aligning the full vector does not guarantee the first half works well; the multiscale loss explicitly supervises that distribution."
+      }
+    },
+    "qa/foundation-models:wemm-embedding/implementation": {
+      "source_sha256": "c266e628bc5909021a1ba7c6e45d3d082d092eed83f69560b44c3a06e1f7fca3",
+      "reviewed": true,
+      "fields": {
+        "question": "Can local MovieLens Matryoshka results replace WeChat A/B?",
+        "answer": "No. Public content and collaborative views test shared space, refinement, and truncation without the original checkpoint or private multimodal pairs. MMEB and WeChat results belong to the authors' system. Local low-dimensional proxies cannot reproduce business effects or rank on the same table.",
+        "example": "Compare Recall for four- and 16-dimensional proxy vectors locally; do not project it to video-feed percentage gains."
+      }
+    },
+    "qa/foundation-models:adaloop-vision/mechanism": {
+      "source_sha256": "ab47008255822ff9d2acdc6fe2e9e2626178df3f719a98b17e12cb76de04e5ec",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can repeated vision loops change representations when encoder weights are frozen?",
+        "answer": "Frozen parameters do not freeze hidden state. Each loop feeds updated state into a shared block modulated by the question vector. Deep supervision trains different depths, and deployment stopping must compare predictions without reading gold.",
+        "example": "A question about objects and another about occlusion can direct the same encoder toward different details."
+      }
+    },
+    "qa/foundation-models:adaloop-vision/basics": {
+      "source_sha256": "9309cc5471fadbca21fd88d4cd4a2dcd2aed68f58202199987388d1ef9c16124",
+      "reviewed": true,
+      "fields": {
+        "question": "Should visual AdaLoop use identical modulation for different questions about the same image?",
+        "answer": "No. The pooled question vector conditions the visual block on the evidence each question needs. Loops add processing opportunities, not a guarantee of locating details. Shared images do not imply identical visual processing.",
+        "example": "Counting cups and reading text on them can produce different modulation vectors."
+      }
+    },
+    "qa/foundation-models:adaloop-vision/comparison": {
+      "source_sha256": "39e72e68b1098a72253124d9aa07c41499ba84b05a059e70c0ff51751bdfdcf3",
+      "reviewed": true,
+      "fields": {
+        "question": "How do vision loops differ from adding language-model reasoning tokens?",
+        "answer": "Extra language steps operate in the text stream. AdaLoop spends compute on question-conditioned visual encoding with shared weights and updated visual state. Compare matched training and budgets before claiming superiority.",
+        "example": "Counting occluded objects can revisit vision features instead of only extending text reasoning after a single encoding."
+      }
+    },
+    "qa/foundation-models:adaloop-vision/implementation": {
+      "source_sha256": "12ab71ec79e148d37b7ea0bf188d6ba745358eeb882ded9abe05f6c5487d704f",
+      "reviewed": true,
+      "fields": {
+        "question": "Can stable-answer stopping inspect the gold label?",
+        "answer": "No. Deployment checks whether successive predictions agree. Training supervises several depths with positive weights summing to one. The local C interface also requires externally supplied detached draft embeddings and a fixed separator; it does not generate drafts itself.",
+        "example": "Two consecutive predictions of “three” can trigger stopping even when the true answer is “four.”"
+      }
+    }
+  }
+}

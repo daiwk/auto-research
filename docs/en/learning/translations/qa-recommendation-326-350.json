@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:evopilot/implementation": {
+      "source_sha256": "3644e6d5f8c68541338980ae150b56c8281b3408777bfd77d489eb07a1e0229f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why read EvoPilot final state and provenance from actual artifacts rather than scheduler success?",
+        "answer": "A job can partially fail, use the wrong config, or leave stale files. Missing final state, version, or actual differences must fail closed. The local check rejects output-depth mismatch, demonstrating validation of execution rather than declarations.",
+        "example": "A completed job with missing metrics cannot reuse last round's JSON as current evidence."
+      }
+    },
+    "qa/recommendation:evorec/mechanism": {
+      "source_sha256": "c1a0de1bc7737182868fd5602e8ba347ae2b19d3cc3a16f2a6664ccc1eae321f",
+      "reviewed": true,
+      "fields": {
+        "question": "What does EvoRec's Skill Evolver evolve beyond preserving final model code?",
+        "answer": "Code and weights do not record how a useful change was found or under which conditions. Skill Evolver distills reusable optimization skills from durable experiment memory for future Research and Code Agents. Skills still require actual execution and validation before generalization claims.",
+        "example": "A sampler helps only the long tail; remember both effective and failed slices, and test on the next dataset rather than copying the champion."
+      }
+    },
+    "qa/recommendation:evorec/basics": {
+      "source_sha256": "f77162fb775359f562533e22b63ab506788c5e5b7008ee27cdc9cc2472dea8a8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does EvoRec distill optimization skills as well as evolving models?",
+        "answer": "Code alone loses what was attempted and where it worked, leading to repeated failures. Skill Evolver summarizes durable experiments to inform future Research and Code Agent proposals. A skill is bounded evidence, not a rule exempt from verification.",
+        "example": "Record that strengthening content helps under a validated short-history condition, not just the final two-tower model."
+      }
+    },
+    "qa/recommendation:evorec/comparison": {
+      "source_sha256": "c41543c905fc113e05855213c5933ac54a7e8f8efd324c3d8e3100633e049f11",
+      "reviewed": true,
+      "fields": {
+        "question": "How does EvoRec skill memory change exploration compared with fixed grid search?",
+        "answer": "A fixed grid repeats predefined configurations; remembered skills can reprioritize or combine methods from prior feedback. Competition among a few preset skills validates only bounded control flow, not open-ended invention. Select on validation; test must not guide iteration.",
+        "example": "A skill library can prioritize a useful representation transform instead of running ten fixed trials; three skills do not prove arbitrary architecture discovery."
+      }
+    },
+    "qa/recommendation:evorec/implementation": {
+      "source_sha256": "538cafbb91e2830d8b341a0dd57ed0b7ce14f6749ed2744247343131c381cf81",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain data protocols and failure conditions in EvoRec memory?",
+        "answer": "A winning name cannot establish applicability. Bind the candidate to validation, observations, and constraints, including failures, and execute real operators when reusing skills. A registry label is not integration, and three local generations establish only the tested space.",
+        "example": "Record better matched-budget results on sparse histories and that long histories remain unverified, rather than declaring content towers always better."
+      }
+    },
+    "qa/recommendation:evoskillrec/mechanism": {
+      "source_sha256": "a8e07d355fb1989ab4e37e455e45d3436ad8651394229a2db373118143531297",
+      "reviewed": true,
+      "fields": {
+        "question": "Why type-check adjacent skills in a genome instead of chaining high-scoring modules arbitrarily?",
+        "answer": "Individually good modules may have incompatible shapes and semantics. Check input/output contracts, construct executable candidates, evaluate validation, and store only promoted combinations. Names and types alone do not integrate a skill; three local seeds check composition and state transitions, not capability rankings.",
+        "example": "An item-vector producer cannot feed a full-history consumer without a suitable adapter and semantic validation."
+      }
+    },
+    "qa/recommendation:evoskillrec/basics": {
+      "source_sha256": "9725bc209d6a39821cabc06c88c28531ecde0db160d7681a84f087acf5e6f453",
+      "reviewed": true,
+      "fields": {
+        "question": "Why require executable skill I/O contracts in EvoSkillRec?",
+        "answer": "Natural-language names do not ensure composability. Types make genomes executable and uniformly evaluable but are only the first check; semantics and recommendation quality need validation and promotion separately.",
+        "example": "A sequence encoder can feed a vector head, but a candidate-set consumer needs an explicit conversion."
+      }
+    },
+    "qa/recommendation:evoskillrec/comparison": {
+      "source_sha256": "f3824e141891709101b597cae4ac85f4a673c9f15b0c5c171ac2f9bdc4366124",
+      "reviewed": true,
+      "fields": {
+        "question": "How does validation promotion protect EvoSkillRec's reuse library versus keeping every skill?",
+        "answer": "Only innovations exceeding a baseline threshold become reusable, reducing propagation of untested or harmful modules. The threshold is still bounded by budget and data, and neither type checks nor repeated test selection establish quality. Keep failures as failures.",
+        "example": "Record a shape-correct module that lowered validation, but do not promote it as a default skill."
+      }
+    },
+    "qa/recommendation:evoskillrec/implementation": {
+      "source_sha256": "c9cda412209046493c4175b0e386b365eb7f500ccbebb6d9e58eaf7bd88316a9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is matching final tensor width insufficient for skill type checks?",
+        "answer": "B×d user vectors, B×C×d candidate tensors, and B×T×d sequence states have distinct roles. Check batch, candidate, and time semantics, then execute and evaluate. Local state-transition diagnostics do not rank capability.",
+        "example": "Broadcasting one user vector over all candidates can run but loses candidate differences."
+      }
+    },
+    "qa/recommendation:feedback-policy/mechanism": {
+      "source_sha256": "468a540b682a81e66146aa7f1682572438f21d1e2b303c6d42e28dd2cbab0a4f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Feedback Policy distill teacher relations instead of only independent item scores?",
+        "answer": "Knowledge also resides in candidate similarities and preferences. Relation matching transfers feedback-derived structure to a lightweight ranker without serving an LLM. Teacher biases can transfer, and smaller matrix error need not improve user feedback.",
+        "example": "Two similarly scored products can be substitutes for a request. Capturing that relation informs list composition beyond copying static scores."
+      }
+    },
+    "qa/recommendation:feedback-policy/basics": {
+      "source_sha256": "69df90d6a6d2e03a61beef4840ac7dbeea3ad306e345bb54c70dade34417d7ce",
+      "reviewed": true,
+      "fields": {
+        "question": "Why turn Feedback Policy feedback into relational supervision rather than caching strategy text?",
+        "answer": "Feedback reveals similarity and substitution structures that a lightweight model can learn from a relation matrix without online LLM explanations. The matrix is a teacher proxy with possible bias and incomplete reasoning. Text storage alone does not update model behavior.",
+        "example": "Learning that two tutorials are substitutes can prevent them dominating a list; a note to diversify does not change embeddings."
+      }
+    },
+    "qa/recommendation:feedback-policy/comparison": {
+      "source_sha256": "36d0d20f04d7743d4940bfca9582e76291f178d2b89da7d7e7c2f57eefe08ab7",
+      "reviewed": true,
+      "fields": {
+        "question": "How do relation-matrix and per-item logit distillation emphasize different errors?",
+        "answer": "Logits match absolute outputs; matrices match relative layouts and can be less sensitive to global scale shifts. Structural matching can miss probability calibration. Compare under a fixed protocol rather than assuming more constraints improve quality.",
+        "example": "Adding a constant to all teacher scores leaves order intact but changes independent errors; relative distillation need not constrain absolute click probability."
+      }
+    },
+    "qa/recommendation:feedback-policy/implementation": {
+      "source_sha256": "3e9a3c341de57ea7a22079c7ed91e715d2971a23ca126119ae785123c0e51161",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use the same identity order for teacher and student relation matrices?",
+        "answer": "Every cell denotes a specific pair, so wrong ordering fits wrong relationships despite equal shapes. Match valid entries, normalization, and padding masks and use allowed evidence. The local proxy does not validate the complete real-user feedback loop.",
+        "example": "Camera in teacher row two and novel in student row two is an invalid comparison; align by item ID first."
+      }
+    },
+    "qa/recommendation:filterllm/mechanism": {
+      "source_sha256": "e771967029871d6bd9282f56ff61a7f042ac47c67c6c14af4d7988f05ef24484",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does FilterLLM predict an audience distribution from item text rather than asking an LLM about each user?",
+        "answer": "Pairwise decisions scale with audience size and are costly for new items. Encode the item once and predict probabilities over a compressed user vocabulary supervised by historical behavior. Compression trades sharing for resolution; group probabilities are not reliable personalized judgments for each member.",
+        "example": "Predict an audience distribution once for a new article instead of generating one LLM answer per user, while accepting loss of individual detail."
+      }
+    },
+    "qa/recommendation:filterllm/basics": {
+      "source_sha256": "6ed25a624ff180c67e812e8e293287cabd844df6984f58cd4c0e2e68c46376e9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why predict audiences rather than next items from new product text in FilterLLM?",
+        "answer": "Cold-start items have little interaction, so the task is to find likely users proactively. One encoding yields a compressed audience distribution mapped back to people. Scores are modeled inclinations, not observed reactions or explicit rejection.",
+        "example": "Estimate interest among camping and travel audiences for a new tent without a billion individual LLM calls, then collect real feedback."
+      }
+    },
+    "qa/recommendation:filterllm/comparison": {
+      "source_sha256": "8a22639976ca344ab0c1d2e8adbf8e14a331be99fdfa7e2ca3aa73a303a50ac2",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a compressed user vocabulary trade output size against personalization versus per-user classification?",
+        "answer": "Clustering users produces a smaller distribution covering many individuals but loses within-group detail and changes with data and grouping. The local genre-text proxy regressed, so scalability alone is not cold-start quality evidence.",
+        "example": "A highly scored beginner photography group includes someone who just bought a camera and may not need another."
+      }
+    },
+    "qa/recommendation:filterllm/implementation": {
+      "source_sha256": "10b7251a6a1c1276ac35a50848de4962efec086b9e24eb7c6064b9b2eff736ee",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not equate nonexposure with dislike in FilterLLM target distributions?",
+        "answer": "Observed interactions reflect exposure. Specify `q(u|i)` normalization, vocabulary mapping, and training cutoff; test interactions cannot build targets. Otherwise the model copies prior exposure or leaks future evidence.",
+        "example": "A user who never saw a tent might like camping; forcing zero for all unexposed users prevents finding new audiences."
+      }
+    },
+    "qa/recommendation:finesid/mechanism": {
+      "source_sha256": "07f9fe56879e6567d9ae9b5e7171bfc5520cb57280fa5fb3c1b70f8149c9d849",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does FineSID need more than SID embeddings when transferring relevance pretraining to CTR?",
+        "answer": "Relevance pretraining teaches ordered content fusion and HiFormer interactions across embeddings, dense layers, and normalization state. Copying only the vocabulary loses much of that learning. Change the CTR head and handle optimizer state explicitly. Full experiments were excluded for cost; random-token fixtures are not substitutes.",
+        "example": "Copying codes without the layers that match query uses to image details transfers a dictionary but not how to read it."
+      }
+    },
+    "qa/recommendation:finesid/basics": {
+      "source_sha256": "5a44e863dea6135a53d464f5f4031181064ecf6dd8d19b463bd88e507439618f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep fine-grained visual and text tokens rather than a single product code in FineSID?",
+        "answer": "A single code can discard local texture, regions, and text details that drive relevance and clicks. Discrete local tokens support richer interactions through relevance pretraining but cost more in training and serving. More granularity does not guarantee better recommendations.",
+        "example": "Two coats differ mainly in cuffs or pockets; a single summary code may lose the deciding detail."
+      }
+    },
+    "qa/recommendation:finesid/comparison": {
+      "source_sha256": "5861b4cfb97a97693f213c2f989199489aa75d8eb4d045a0d5e6d2a62be4ed85",
+      "reviewed": true,
+      "fields": {
+        "question": "How does full FineSID predictor transfer differ from freezing a content encoder and adding a CTR head?",
+        "answer": "A frozen encoder mainly transfers content features; FineSID also retains cross-token fusion, interaction networks, and state learned on relevance, then adapts to personalized CTR. This costs more and requires matched interfaces. The repository completed cost review, not a reduced-model performance run.",
+        "example": "Transfer the matching network that relates query conditions to item details, not just a content vocabulary."
+      }
+    },
+    "qa/recommendation:finesid/implementation": {
+      "source_sha256": "53650b97e358a1a33a7a44852aea97270e1a54e5c4192f1bb8bf0c851109d953",
+      "reviewed": true,
+      "fields": {
+        "question": "Why explicitly handle optimizer and normalization state at FineSID stage transitions?",
+        "answer": "Full transfer includes interaction layers and normalization statistics beyond SID embeddings. Keeping or resetting optimizer state changes training dynamics and must follow the stage contract, as must conversion to the CTR head. These requirements are documented; no local training validates performance.",
+        "example": "Copying weights without their normalization can change scale abruptly, and old task momentum should not silently enter a new CTR head."
+      }
+    },
+    "qa/recommendation:fluid/mechanism": {
+      "source_sha256": "9164fcd70b689258dd274852c65ffc361129d567e510b47beb851a0db215d1b3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does FLUID keep slice and room LUCIDs and phase out item IDs?",
+        "answer": "Short-lived rooms accumulate little stable ID feedback. Slice codes describe current content and room codes aggregate stable history. Late fusion keeps the time scales distinct; add slices, remove IDs, then add rooms to ease training transitions. Content codes can still collide or go stale.",
+        "example": "A sportswear room may currently sell shoes; room and slice codes describe different evidence."
+      }
+    },
+    "qa/recommendation:fluid/basics": {
+      "source_sha256": "691093b5073228fda3dc21c98f3d479b76be4ea3876937ada865385fc84ca12e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why treat live slices and room-history summaries as distinct tokens in FLUID?",
+        "answer": "The slice LUCID reflects fast-changing current content while the room LUCID aggregates stable historical semantics. Late fusion prevents historical majority from erasing fresh themes. A room vote can miss minority changes and cannot replace the slice.",
+        "example": "A beauty creator currently discussing travel storage has different room and slice signals."
+      }
+    },
+    "qa/recommendation:fluid/comparison": {
+      "source_sha256": "8b962683013f42544251d4d91de3387d1d427528085949885db2c369f88f4a6e",
+      "reviewed": true,
+      "fields": {
+        "question": "What shared information does FLUID use after removing transient item IDs instead of randomly initializing new room IDs?",
+        "answer": "Random IDs learn only after interactions. Semantic prefixes reuse cross-domain content patterns immediately, useful for short-lived rooms, but lose distinct identity memory. Removing IDs lowered overall local quality; report that alongside improved freshness.",
+        "example": "A ten-minute stream has little time to train an ID. Content can place it immediately but may not distinguish hosting styles."
+      }
+    },
+    "qa/recommendation:fluid/implementation": {
+      "source_sha256": "c6f53f6660f392f2341d510a7c3f4176fa4c26f1bb570f22b79285fed49a0378",
+      "reviewed": true,
+      "fields": {
+        "question": "Why index each LUCID embedding by the full prefix rather than an isolated codeword?",
+        "answer": "A later code depends on earlier residual choices; cumulative prefix indexes retain path identity. Isolated codewords merge different branches. Final candidate tokens must contain only room and slice codes to implement item-ID removal.",
+        "example": "Fine code 3 after beauty and after travel needs separate embedding entries."
+      }
+    }
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:rd-attnres/mechanism": {
+      "source_sha256": "d522573650467bac4b4c4fe9b8f113b3bd6b29851be1d8251cd6d56d7ea233bc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add a separate depth route for V but retain shared Q/K routing?",
+        "answer": "Q/K determine matching while V supplies retrieved content. RD-AttnRes retains the source set and attention mechanism, but learns separate depth weights for content. Routing does not create new source information.",
+        "example": "Q/K can favor deep semantics while V preserves shallow lexical details."
+      }
+    },
+    "qa/foundation-models:rd-attnres/basics": {
+      "source_sha256": "bbc84570c75a2891a94b00074d8bdc536bfa4d04a9d0be176939b5e85bbf4611",
+      "reviewed": true,
+      "fields": {
+        "question": "Does depth routing choose tokens or historical layer representations?",
+        "answer": "It combines residual sources from different depths, separately for QK and V, not token-level experts.",
+        "example": "Use deeper matching features for QK and shallower content for V."
+      }
+    },
+    "qa/foundation-models:rd-attnres/comparison": {
+      "source_sha256": "549883206b9933cef72df4216e56fd4c41515265f1844ca390fcf74b0f007bfb",
+      "reviewed": true,
+      "fields": {
+        "question": "What does the Block AttnRes comparison hold fixed?",
+        "answer": "Residual sources and main attention stay the same; only V gets an independent depth route. This isolates role separation rather than changing the backbone.",
+        "example": "Both arms read the same layer set, with one allowing different V weights."
+      }
+    },
+    "qa/foundation-models:rd-attnres/implementation": {
+      "source_sha256": "521b20b5e355b53fad4aae5b429d58bc1364f3649f97e0e7dd24f1e4b3ca9e9a",
+      "reviewed": true,
+      "fields": {
+        "question": "Should Q and K also get separate routes?",
+        "answer": "No. Both use h_QK, with h_V separate. Splitting Q/K adds another variable. Check actual weight divergence without treating it as guaranteed PPL improvement.",
+        "example": "Q and K project from one mixed representation, while V projects from another."
+      }
+    },
+    "qa/foundation-models:repeat-aware-moe/mechanism": {
+      "source_sha256": "b31579bb79cf88c136d3ec133d31cee3d608e66f8f81e4c74b2b5317d821fbfc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can repeated data affect MoE and dense models differently at equal token counts?",
+        "answer": "Token count does not equal unique information. Routed experts may memorize repeated samples faster. Study stronger masking/dropout, and use held-out data; decreasing train loss is insufficient.",
+        "example": "Ten passes over one corpus differ from ten distinct corpora despite equal token budgets."
+      }
+    },
+    "qa/foundation-models:repeat-aware-moe/basics": {
+      "source_sha256": "6b1f6358103ea84c7ae6c7608fd7f4681580b66ebf56b799a04d86100cf5e350",
+      "reviewed": true,
+      "fields": {
+        "question": "Why treat repetition as an independent variable?",
+        "answer": "Same tokens can contain different unique information. Repetition can worsen expert memorization; study its interaction with sparsity and regularizers.",
+        "example": "Ten reads of 10,000 examples differ from one read of 100,000 examples."
+      }
+    },
+    "qa/foundation-models:repeat-aware-moe/comparison": {
+      "source_sha256": "ee6f2cba2887ef48c21374300ef82d3258d51517258ce93ea52b81494b4402f6",
+      "reviewed": true,
+      "fields": {
+        "question": "Is matching steps enough to compare repeated-data overfitting?",
+        "answer": "Match or report total tokens, unique data, repetition, and sparsity. The work studies memorization under these conditions, not universal MoE inferiority.",
+        "example": "If one arm sees more repeats, architecture alone cannot explain its generalization gap."
+      }
+    },
+    "qa/foundation-models:repeat-aware-moe/implementation": {
+      "source_sha256": "6ac2db5ed2214546c560009173d5f0787e6b8d831d67bebc47d7efa73d13ece7",
+      "reviewed": true,
+      "fields": {
+        "question": "How should a local repeat-aware schedule be accepted?",
+        "answer": "Check that repeat and sparsity actually change masking/dropout according to the definition, and record applied settings. State-transition fixtures are not large pretraining or generalization evidence.",
+        "example": "Higher repetition should alter effective regularization, not just a config name."
+      }
+    },
+    "qa/foundation-models:sparse-decoding/mechanism": {
+      "source_sha256": "f102c93bd1920c282cf9808ef2b9678b6e95970985395ef3f956be6e8c7cf977",
+      "reviewed": true,
+      "fields": {
+        "question": "Why calibrate SparseDecoding on actual decode activations and exclude prefill?",
+        "answer": "Deployment generates its own prefixes, whose states differ from teacher-forced and prefill states. Collect genuine dense autoregressive activations before pruning. Collection protocol is separate from SparseGPT or Wanda backend choices.",
+        "example": "A self-generated departure from the reference can use channels that teacher-forcing calibration never sees."
+      }
+    },
+    "qa/foundation-models:sparse-decoding/basics": {
+      "source_sha256": "67d313380dc3f1c7ef9725578e6802c5cf1d9cebedccc281883e93e4f74e47f7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate activation collection from the pruning algorithm?",
+        "answer": "The protocol collects actual autoregressive decode activations and passes them to a backend. Substituting Wanda does not implement SparseGPT's optimization.",
+        "example": "Different pruners can consume the same decode activations."
+      }
+    },
+    "qa/foundation-models:sparse-decoding/comparison": {
+      "source_sha256": "fb12f1cbc6b99d64e7e3765aafe7cd102f612e150b4aa76aa6904f33160602dc",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local Wanda use the same optimization as SparseGPT?",
+        "answer": "No. Wanda ranks N:M entries using weight magnitude times activation statistics, without Hessian inversion or error compensation. Sparsity does not make them equivalent.",
+        "example": "Both can keep half the weights but retain different entries and handle error differently."
+      }
+    },
+    "qa/foundation-models:sparse-decoding/implementation": {
+      "source_sha256": "0c0c467e9a2798cc3680fa9e129283d23f5b06ad8e01df0b638455f009468beb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why verify bit counts and value order in 32-column sparse packs?",
+        "answer": "At 50% sparsity each group must contain 16 set bits and values packed in increasing retained-column order. Mismatches read wrong weights. Dense zero-multiplication is not sparse SpMV.",
+        "example": "Packed value two maps to the second set bit, not original column two."
+      }
+    },
+    "qa/foundation-models:switch-transformer/mechanism": {
+      "source_sha256": "7a82603ecf20cd374e869f9b495c69d13c6bd3a1cccd0b265af39243b47d5cd7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does top-1 Switch still need load balancing?",
+        "answer": "Top-1 caps experts per token but may concentrate traffic, bottlenecking winners and starving other experts. The auxiliary term combines actual dispatch proportions and mean router probabilities. More parameters do not imply proportional throughput.",
+        "example": "One of eight experts receiving 90% of tokens can overload despite one FFN per token."
+      }
+    },
+    "qa/foundation-models:switch-transformer/basics": {
+      "source_sha256": "937367f81170a9e7953e38fd303f2f7adf09773a4dceb77012701e2c24049a26",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Switch increase parameters without using all experts per token?",
+        "answer": "Replace the FFN with experts and dispatch each token to one. This grows capacity without computing all expert branches, although routing and communication remain.",
+        "example": "Four experts can be available while one runs per token."
+      }
+    },
+    "qa/foundation-models:switch-transformer/comparison": {
+      "source_sha256": "1f15cb65213c9b20bc4463dca49a4ea568759276d769d5d73394a372fa5d789d",
+      "reviewed": true,
+      "fields": {
+        "question": "How does true top-1 dispatch differ from computing all outputs then one-hot masking?",
+        "answer": "Sparse dispatch executes selected experts only. Dense masking can match outputs while paying every expert's cost. Inspect actual execution.",
+        "example": "Computing four experts and discarding three is not one-expert compute."
+      }
+    },
+    "qa/foundation-models:switch-transformer/implementation": {
+      "source_sha256": "e935d795b40bb6ac66d6caf74dc8628ad608e7a14486efd36a8acd696c9ab9b0",
+      "reviewed": true,
+      "fields": {
+        "question": "What do f_i and mean p_i count in Switch's load term?",
+        "answer": "f_i is actual dispatch frequency; mean p_i is average router probability. Preserve the chosen expert's gate. Local code does not cover capacity overflow or cross-device all-to-all.",
+        "example": "High dispatch and probability may correlate but are separate statistics."
+      }
+    },
+    "qa/foundation-models:swrouter/mechanism": {
+      "source_sha256": "ba7e1a6110fda1cce547c19e20a16b55872c60971e69a231dcf446b0c0b10cc2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why evaluate SWRouter context compression separately from model choice?",
+        "answer": "It first contracts conversation windows by adjacent semantic similarity, then routes. Losing a constraint can make even a good model fail; full context also does not guarantee a good route. Separate measurements locate failures.",
+        "example": "If turn two changes the budget and compression drops it, don't blame the routed model alone."
+      }
+    },
+    "qa/foundation-models:swrouter/basics": {
+      "source_sha256": "eeb643c643e349bb5245ceab12297a6ffb65d52bbf8b44c7ba3439f53ed17bc4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why contract multi-turn context before routing?",
+        "answer": "Adjacent semantic similarity can identify repetition or unnecessary history. Construct a budgeted window first, then route on that context.",
+        "example": "Consolidate repeated clarifications before deciding what model is needed."
+      }
+    },
+    "qa/foundation-models:swrouter/comparison": {
+      "source_sha256": "5fa2c26e1233bd2640712c6d7d212e705a7033590a7915fc32ceb08a26486fdc",
+      "reviewed": true,
+      "fields": {
+        "question": "How does semantic contraction differ from keeping the last few turns?",
+        "answer": "A recency window assumes newer is better; semantic contraction uses adjacent meaning to segment. Compare context quality separately from routing accuracy.",
+        "example": "An older key turn need not be removed merely because it is old."
+      }
+    },
+    "qa/foundation-models:swrouter/implementation": {
+      "source_sha256": "c9c7ae404c6b8defc02571bb567a95b6443baa1313e55c45186294c4e71aa9e9",
+      "reviewed": true,
+      "fields": {
+        "question": "Is local profile-overlap routing the paper's trained contrastive encoder?",
+        "answer": "No. It executes segmentation and profile-overlap routing without contrastive training. Test these as separate local components, not as paper-level learned performance.",
+        "example": "Selecting from keyword overlap shows rule execution, not learned contrastive representations."
+      }
+    },
+    "qa/foundation-models:telescopic-lm/mechanism": {
+      "source_sha256": "edbb1065f347a0c59ec359070119a52dafaa0ab36e134f5b231e75005eef9690",
+      "reviewed": true,
+      "fields": {
+        "question": "Why train multiple depth prefixes instead of truncating a finished deep model?",
+        "answer": "Standard training supervises the full path, not necessarily viable intermediate exits. Telescopic trains sampled prefixes with next-token supervision plus a full-depth anchor. Evaluate shallow and deep capabilities separately.",
+        "example": "Running eight versus 24 layers is supported only if the eight-layer exit was explicitly trained."
+      }
+    },
+    "qa/foundation-models:telescopic-lm/basics": {
+      "source_sha256": "b7d151ee8584508a95d4103b83a29139ecb7f14d8bce142998cd4b826a72a014",
+      "reviewed": true,
+      "fields": {
+        "question": "Why support multiple depths in one Telescopic checkpoint?",
+        "answer": "Budgets and inputs can need different depths. Supervise prefixes and full depth so shallow execution is an explicit trained option.",
+        "example": "Choose a shorter prefix rather than train one checkpoint per depth."
+      }
+    },
+    "qa/foundation-models:telescopic-lm/comparison": {
+      "source_sha256": "1b926be73bf21d7fb51ecf8a4671bb37296f09d3ce050d5225cde60985be4b2c",
+      "reviewed": true,
+      "fields": {
+        "question": "How do sampled prefixes differ from training all depths every step?",
+        "answer": "Sampled training gives prefix supervision to selected depths plus the full anchor; all depths cost more per step. Match compute rather than only parameter count.",
+        "example": "One three-layer exit is not equivalent in cost to every exit from one to 12."
+      }
+    },
+    "qa/foundation-models:telescopic-lm/implementation": {
+      "source_sha256": "95a2ea518727ef24ce86b0a10eabac7f0e5f163467aabb44e9a6a15fe9783815",
+      "reviewed": true,
+      "fields": {
+        "question": "How check that random prefixes do not replace the full-depth anchor?",
+        "answer": "Verify full-depth loss and gradients on every specified step and record the sampled depth. Local diagnostics do not reproduce 20B-token pretraining.",
+        "example": "Even when sampling a shallow exit, confirm full-depth parameters still receive their signal."
+      }
+    },
+    "qa/foundation-models:wide/mechanism": {
+      "source_sha256": "bad9af51b77a4d48caf0244c3e60189ee4ab06f71aa9e69f125a299363b8c6c7",
+      "reviewed": true,
+      "fields": {
+        "question": "How is WIDE more fine-grained than skipping layers?",
+        "answer": "It chooses attention-head and FFN-channel groups per token within a layer. Real savings require mask rearrangement, block skipping, and device kernels. Dense zero-masking alone pays full compute.",
+        "example": "An easy token may use fewer groups than a hard token, but only skipped execution improves latency."
+      }
+    }
+  }
+}

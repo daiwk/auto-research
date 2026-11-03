@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:constitutional-ai/basics": {
+      "source_sha256": "ba65f3b4bbd093eb082b3bb6cc316c64286bffbc988b3ee2c3114113a4ee0903",
+      "reviewed": true,
+      "fields": {
+        "question": "What role does the constitution play in Constitutional AI?",
+        "answer": "Explicit natural-language principles guide critique, revision and AI preference judgments. They supply human supervision, not absolute values discovered by the model.",
+        "example": "Use a stated principle to explain a revision instead of an unexplained good/bad score."
+      }
+    },
+    "qa/post-training:constitutional-ai/comparison": {
+      "source_sha256": "a30efdfb539f511ce5215e39ac4ce486acd954dfef2f2ba46e63425e725262ff",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish principle-based revision SFT from RLAIF?",
+        "answer": "The former learns revised text; the latter uses AI preferences to train reward and optimize policy. Data and execution differ. Local simplification does not establish a separate preference model or PPO; arithmetic principles are not safety red-team evidence.",
+        "example": "Repairing one answer supplies a demonstration, not evidence of completed reward-driven RL."
+      }
+    },
+    "qa/post-training:constitutional-ai/implementation": {
+      "source_sha256": "4d44be89bd33ac4a12f9783db8f51b16fbafbabed0e3b59335de95b8c8ceb11d",
+      "reviewed": true,
+      "fields": {
+        "question": "What safety claims do local Constitutional AI principles support?",
+        "answer": "Deterministic axes such as correctness, format, process and brevity test principle scoring and state updates. They do not cover real harmful requests or train a complete safety reward model.",
+        "example": "Valid formatting doesn't establish reliable refusal of dangerous advice."
+      }
+    },
+    "qa/post-training:constitutional-ai/mechanism": {
+      "source_sha256": "3b772da35234a5de17e52fbffebb6fcd76e41709a6582120e5e6de2ac71cdb45",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are critique/revision and AI preference training separate stages?",
+        "answer": "First critique and revise by principles, then supervise the revised texts. Next compare responses by those principles and use preference learning for RL. Demonstrations and choice labels differ. Principles and local updates do not establish harmlessness or full red teaming.",
+        "example": "Rewrite a reply to avoid privacy leakage, then compare two rewrites; text and winner labels are distinct inputs."
+      }
+    },
+    "qa/post-training:moer/basics": {
+      "source_sha256": "8225f7d068e84eb83c007d30166c5ad62b5bedf7c176ec0f77350c0dcf5a4533",
+      "reviewed": true,
+      "fields": {
+        "question": "Why progressively shorten MOER expert prefixes?",
+        "answer": "Complete solutions limit exploration, but no guidance can be too hard. Shortening transfers more continuation to the student. If continuation fails, roll back to a verified complete expert trace rather than treating failure as demonstration.",
+        "example": "Give two steps, then one, leaving more of the derivation to the student."
+      }
+    },
+    "qa/post-training:moer/comparison": {
+      "source_sha256": "e9f17231fe6fb0101139356f0c5e60660efe2c944e397740434469a51f4d492b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does MOER distinguish native on-policy and guided trajectories?",
+        "answer": "The whole guided trace is off-policy even if the student wrote the suffix, because its starting state was externally influenced. Use different objectives, not token authorship to reclassify the suffix.",
+        "example": "A student writing step three after two expert steps remains in the guided trace."
+      }
+    },
+    "qa/post-training:moer/implementation": {
+      "source_sha256": "84c0dc8673929f1f289598b4f7aa3aba95c8c1d6c3eaca7c54e8ec9edb3b0e53",
+      "reviewed": true,
+      "fields": {
+        "question": "How can MOER's off-policy ratio equal one forward yet have gradients?",
+        "answer": "The denominator is detached and numerator differentiable, so equal values do not cancel derivatives. Joint group advantages are not divided by SD; normalize over all valid response tokens, not extra mixture-weighted counts.",
+        "example": "A numerator divided by its detached copy is one, but differentiating numerator still changes loss."
+      }
+    },
+    "qa/post-training:moer/mechanism": {
+      "source_sha256": "10e0646cd730c3c020cb20664319031206b9ac619676fbd9cb39ec5fa6edbd11",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is a student continuation after an expert prefix still off-policy?",
+        "answer": "It is conditional on a supplied prefix, not a complete sample from unguided student. MOER keeps successful guided traces and falls back to verified expert traces on failure, using distinct objectives. Expert data stay in training.",
+        "example": "Completing a proof after the teacher provides the key step is not reaching that state independently."
+      }
+    },
+    "qa/post-training:cord/basics": {
+      "source_sha256": "39b2be43170821a691b13ad460325e2c79fc5f72398f68e56be8eda6d1634a7e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CORD select a protected objective first?",
+        "answer": "Adding conflicting task and teacher gradients can cancel them. The protected direction states whose first-order progress must not be harmed; modify the other minimally. It is a tradeoff.",
+        "example": "Protecting task reward versus teacher imitation defines different projections."
+      }
+    },
+    "qa/post-training:cord/comparison": {
+      "source_sha256": "96c65555516567de59f4cfa1a8ba8370e7456e54170044b5220d365ce66fac14",
+      "reviewed": true,
+      "fields": {
+        "question": "How do CORD conflict-only and always-project variants differ?",
+        "answer": "Conflict gating keeps helpful aligned components and projects only for negative dot product. Always projecting removes even helpful parallel components. The resulting direction is different; no finite adaptive-optimizer descent guarantee.",
+        "example": "Aligned gradients add directly under conflict gating; always-project still removes a parallel component."
+      }
+    },
+    "qa/post-training:cord/implementation": {
+      "source_sha256": "36c921ec84e34ab0bb14c6ffdb4a75586a01a0645ded1ac5da874cd3ea2d6767",
+      "reviewed": true,
+      "fields": {
+        "question": "Why aggregate a full CORD optimizer batch before projecting once?",
+        "answer": "Projection is nonlinear, so per-microbatch projection and summation usually differ. After fixed aggregation apply objective weight λ first. Skip projection if protected gradient is zero; λ=0 returns first objective direction.",
+        "example": "Conflicts in two microbatches can cancel in the aggregate; early projection changes the result."
+      }
+    },
+    "qa/post-training:cord/mechanism": {
+      "source_sha256": "3aaaa29af1133296129ae9910cdb7f5224ddd353ddaa9465da4e047de20675c8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why project one gradient relative to a chosen protected gradient?",
+        "answer": "Minimally change the conflicting other vector to preserve the selected objective. Swapping protection changes updates. Conflict-only and always differ; project after full-batch accumulation. This is pre-optimizer first-order geometry, not guaranteed finite AdamW descent.",
+        "example": "Task reward and imitation may push a parameter oppositely; changing which is protected changes what survives."
+      }
+    },
+    "qa/post-training:orl-diffusion/basics": {
+      "source_sha256": "608b83519cc4ec26847101b5829bd7328277f3641e559efbd7c26420709f794c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why train ORL diffusion on its own induced residual contexts?",
+        "answer": "The previous prediction creates the next residual and carries model errors at inference. Ideal residuals induce a state mismatch; online collection and replay expose encountered states.",
+        "example": "A denoising step must see wrong prior probabilities to learn recovery from them."
+      }
+    },
+    "qa/post-training:orl-diffusion/comparison": {
+      "source_sha256": "ec0f5ab3159cbd892ba3fe0f8456f780c73d3d8b91cbd171d1b73c1208477656",
+      "reviewed": true,
+      "fields": {
+        "question": "How does ORL differ from smoothing outputs after inference?",
+        "answer": "Postprocessing changes final outputs only. ORL feeds previous distributions into later model states and trains on them, including exact replay and entropy contraction; simple averaging is not equivalent.",
+        "example": "Averaging two answers doesn't teach denoising from a mistaken previous state."
+      }
+    },
+    "qa/post-training:orl-diffusion/implementation": {
+      "source_sha256": "3d1f2c2b188fbd1ba168ea57f99e97fb90a27d44da1f99445b4274bc11c6803b",
+      "reviewed": true,
+      "fields": {
+        "question": "Can the repository call an ORL adapter for residual traces?",
+        "answer": "No. Literature-only: no adapter, metrics or GPU receipt. Equations are explanatory; generic diffusion or a registry name does not implement online collection and exact replay.",
+        "example": "Adding an evolve key cannot create the trajectory process."
+      }
+    },
+    "qa/post-training:orl-diffusion/mechanism": {
+      "source_sha256": "37e4d0910ceb6f6b19d915cde6ace10b98584434d42db7678ee8acff26cb02cd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why replay model-generated residual states instead of fixed residual inputs?",
+        "answer": "Predictions become subsequent context and propagate errors. Fixed/ideal training can miss the model's inference-state distribution. Online collection and exact replay with entropy contraction address this during training, not through final-output fixes. No local full training evidence.",
+        "example": "An early wrong token bias affects the next denoising step; perfect residuals may never teach this correction."
+      }
+    },
+    "qa/post-training:ggpo/basics": {
+      "source_sha256": "da8d1b9751164d3449c9994e0ca3830d11ff17ca649cbf0f9844bb36bc97c838",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish GGPO behavior and reference policies?",
+        "answer": "Behavior generates the sampled data; reference anchors KL. They needn't match. Refreshing reference changes the later objective without resampling old data.",
+        "example": "One frozen policy collects replies and another anchors deviation penalties."
+      }
+    },
+    "qa/post-training:ggpo/comparison": {
+      "source_sha256": "97a1729261bd39f27ebcdb6517ef8fde16f853a39c3552b6b36f4e0760e796b9",
+      "reviewed": true,
+      "fields": {
+        "question": "How does GGPO's Gibbs gap differ from learner/behavior importance weighting?",
+        "answer": "Differentiate adjusted-reward log-mean-exp minus mean within groups. No extra learner/behavior ratio multiplies updates. Off-policy data alone do not justify adding one.",
+        "example": "Old-policy data do not imply every objective must use the same importance ratio."
+      }
+    },
+    "qa/post-training:ggpo/implementation": {
+      "source_sha256": "7ded56c10563a0146b8887c55cfd629dacd72b8ac53504233fda29b4222ab2cb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not backpropagate directly through clipped GGPO LME?",
+        "answer": "Compute frozen coefficients with clipped learner/reference ratios, then update original sequence logp. Backpropagating through clamp zeroes saturated gradients and changes the surrogate. Keep full-batch normalization/filtering.",
+        "example": "Clipping weight construction doesn't remove saturated positions from learning."
+      }
+    },
+    "qa/post-training:ggpo/mechanism": {
+      "source_sha256": "e0b098f5f4668c68a51a2d3afb96adbada06a6aa7b272c891710628467722eef",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't GGPO behavior and reference be treated as the same role?",
+        "answer": "Behavior is the sample source; reference defines KL-anchored Gibbs objective. Optimize adjusted log-mean-exp vs mean without extra behavior IS. Reference refresh cannot rewrite sampling provenance; filtered/normalized logs are not raw theorem quantities.",
+        "example": "A batch collected by an old policy remains old-policy data after changing the optimization anchor."
+      }
+    },
+    "qa/post-training:tapo-trajectory/basics": {
+      "source_sha256": "bf9a47df141bf613165a21302f0f2bc92b585c653ed54129f8c07c83bf76c527",
+      "reviewed": true,
+      "fields": {
+        "question": "Why track prefix-state shift rather than only the current ratio in trajectory TAPO?",
+        "answer": "Small earlier shifts accumulate into later visitation changes. A current action ratio misses prior branching. Prefix geometric log-ratios supply trajectory context with tighter position-dependent bounds.",
+        "example": "A similar final-action ratio does not mean earlier branches left its state unchanged."
+      }
+    },
+    "qa/post-training:tapo-trajectory/comparison": {
+      "source_sha256": "3be789b68a53acbc68f40d2be6f895c31922fd2ddeea99e669bf5bbe7d8bed5c",
+      "reviewed": true,
+      "fields": {
+        "question": "How does prefix geometric mean differ from multiplying probability ratios?",
+        "answer": "Exponentiate average log ratio to limit extreme length scaling. This is a different estimator, not an equivalent numerically stable product.",
+        "example": "Many small per-step shifts can create an extreme product while the geometric mean retains typical scale."
+      }
+    },
+    "qa/post-training:tapo-trajectory/implementation": {
+      "source_sha256": "580a11054b0504b65e675efb06804cc749f5c3bce31e3a1735a23d1c64aafcf4",
+      "reviewed": true,
+      "fields": {
+        "question": "How does TAPO prevent prefix weighting from dividing current-token gradients by position?",
+        "answer": "Detach the geometric ratio and multiply by current probability divided by its detached copy. Forward keeps the weight; backward follows only current action, without prior gradients or inverse-prefix dilution.",
+        "example": "Step ten can use ten-step context without automatically receiving one-tenth gradient."
+      }
+    },
+    "qa/post-training:tapo-trajectory/mechanism": {
+      "source_sha256": "88dc1e6253d973af4a81d67b823ccd3bd74951d2671e2145f00a2d7b56946af9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why stop gradient through TAPO's prefix geometric ratio?",
+        "answer": "The ratio measures state drift, but current credit should not backpropagate into all earlier tokens. Freeze the geometric weight and preserve the current log-probability gradient separately. This avoids cross-position gradients and length dilution.",
+        "example": "Adjust step ten for prefix drift without rewriting credit for steps one through nine."
+      }
+    }
+  }
+}

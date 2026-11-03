@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:ragen/mechanism": {
+      "source_sha256": "a6fef18594ededa90b761f6924220acdb10ea303ac97476d5447399a04590dd1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't collapsed reward variance necessarily mean stable task learning?",
+        "answer": "The policy may repeat failures or rigid behavior. Collapsed variance with gradient spikes signals Echo Trap risk. Trajectory filtering, a critic baseline, and decoupled clipping address data, estimates, and update stability separately. Real task performance is still required; low variance alone is not successful convergence.",
+        "example": "If all rollouts repeat one ineffective command, returns are zero with no variance. This is exploration collapse, not mature capability."
+      }
+    },
+    "qa/agent-research:ragen/basics": {
+      "source_sha256": "7db87fe8397b25ff4c79e7dfebf323aa09dd254d4a65addd8b41a3031ebba5b8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does RAGEN monitor Echo Trap separately?",
+        "answer": "Multi-turn stochastic training can enter self-reinforcing repetition, with collapsed reward variance and gradient spikes. StarPO-S uses trajectory filtering, a critic baseline, and gradient/clipping stabilization rather than interpreting low variance as learning.",
+        "example": "A policy can consistently follow a failed path without any improvement."
+      }
+    },
+    "qa/agent-research:ragen/comparison": {
+      "source_sha256": "872b261368ca857e1448d1656b6d9fb5bfea5ef5f393b831c913d98d7ee0a6c6",
+      "reviewed": true,
+      "fields": {
+        "question": "How does StarPO-S trajectory filtering differ from clipping ratios only inside PPO loss?",
+        "answer": "Filtering controls which trajectories enter the objective. Ratio clipping limits drift for admitted samples, while the critic and gradient controls are separate. One clipping operation does not replace the complete stabilization chain.",
+        "example": "Repeated low-information trajectories can still dominate training samples even if their ratios are clipped."
+      }
+    },
+    "qa/agent-research:ragen/implementation": {
+      "source_sha256": "8e4efbeaefc55e8cf37a8ce552344e2773bd0c6bfdcb36e73c1c316e75d29a83",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a periodic local Echo Trap probe measure the paper's training-collapse curve?",
+        "answer": "No. It makes a stability path observable. The policy selects among deterministic candidates and never updates LLM parameters. Distinguish probe triggers, actual gradients, and large-scale training curves; counts are not evidence of model collapse.",
+        "example": "Checking every few rounds does not imply that the paper's Echo Trap occurred in those rounds."
+      }
+    },
+    "qa/agent-research:deepresearcher/mechanism": {
+      "source_sha256": "d0c7c3891b23d3f1097c43c0d82f6986c6e693f182a806248a70684ceaa60554",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't citation count enough when adding citation rewards to answer rewards?",
+        "answer": "Citations connect claims to real evidence, while counts can reward repeated or irrelevant links. Search, browsing, and answering form one trajectory. Joint objectives should enforce support and correctness while penalizing wasted queries. Check claim–source links; one browse call does not establish evidence use.",
+        "example": "Ten irrelevant links should not beat two sources that directly support the conclusion, or the policy will learn link stuffing."
+      }
+    },
+    "qa/agent-research:deepresearcher/basics": {
+      "source_sha256": "22a69665645ac26507b3c8aa680a883aeddd3caa249a579e60ad0f98ed2e1edc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does DeepResearcher treat search, browsing, evidence, and answers as one trajectory?",
+        "answer": "Answers depend on how evidence is found and used, and final text alone obscures credit. Answer and citation rewards plus query cost balance quality and expense over the full search.",
+        "example": "One useful browse can make the answer verifiable, beyond making its final sentence fluent."
+      }
+    },
+    "qa/agent-research:deepresearcher/comparison": {
+      "source_sha256": "0ade339273b7b45cb14e4f905a9f642fca9bba62c86f807d97bb810eed24332a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why aren't citation quality rewards and query-count penalties the same efficiency objective?",
+        "answer": "Citation reward measures evidential support; query penalty controls cost. Fewer searches do not ensure reliable evidence, and more citations do not ensure useful searches. The three weights govern trade-offs; short traces alone do not establish research quality.",
+        "example": "Answering quickly after one bad query is cheap but unsupported."
+      }
+    },
+    "qa/agent-research:deepresearcher/implementation": {
+      "source_sha256": "fbde043e33a443ec4552a6810ad150f931976112620cbc9e443c1c09e6269e35",
+      "reviewed": true,
+      "fields": {
+        "question": "How should DeepResearcher align citation rewards with actual retrieved evidence?",
+        "answer": "Citations must point to genuinely available material supporting corresponding statements, not just count as links. N_query counts actual search calls. The mini-suite has no real web or full LLM RL, so fixture citations are not external evidence.",
+        "example": "A title never retrieved and irrelevant to the claim should not receive credit for looking like a citation."
+      }
+    },
+    "qa/agent-research:search-r1/mechanism": {
+      "source_sha256": "dba5aa1a02fe11885cac45531f5adfc10ee0174023346eea3a2970c96aca6ce9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why mask retrieved tokens even though they occur in the input sequence?",
+        "answer": "Search returns are environment output, not sampled policy actions. Policy loss there would teach the model to generate external evidence. Only its queries, reasoning, and answers are policy tokens; retrieval conditions later decisions. Iterative adaptation is not equivalent to a single static RAG retrieval.",
+        "example": "A search result that says 'published Tuesday' is not agent behavior. Train how to query and answer from evidence, not how to generate that environment text."
+      }
+    },
+    "qa/agent-research:search-r1/basics": {
+      "source_sha256": "01eb4d42c6752b3ed124a0a19af323f1add89b604ee9254fcd268235a2c0f842",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Search-R1 repeatedly decide whether to search rather than using one-shot RAG?",
+        "answer": "Intermediate evidence can expose questions or revise a belief, requiring another query. Search is an environment; reasoning and search alternate, and final answer outcomes train the policy.",
+        "example": "A first retrieval reveals entity ambiguity, so the agent can query disambiguating conditions before answering."
+      }
+    },
+    "qa/agent-research:search-r1/comparison": {
+      "source_sha256": "a828e23b64a465dc19d05907c1bb6a38eab05c0274839d4e1d33743798c812aa",
+      "reviewed": true,
+      "fields": {
+        "question": "How does visible search context differ from training on retrieved text as policy-generated tokens?",
+        "answer": "Documents can condition later actions, but their tokens come from the environment, not the policy. Mask their loss. Treating them as student outputs corrupts action probabilities for policy optimization.",
+        "example": "A thousand-character webpage does not count as a thousand-character agent action with policy gradients."
+      }
+    },
+    "qa/agent-research:search-r1/implementation": {
+      "source_sha256": "92b871905e6ae6eafb8999fcab04e7a021429212e8b423a815c1af4ffa04684f",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Search-R1's loss mask avoid masking the query action?",
+        "answer": "Separate model-generated reasoning and search instructions from environment information. The former remain policy tokens and the latter get mask zero. Use provenance boundaries, not a text match for 'search.'",
+        "example": "The query inside `<search>` is an action; the following `<information>` text is an observation."
+      }
+    },
+    "qa/agent-research:loop/mechanism": {
+      "source_sha256": "e8f24b6a93d30b63e120a80101171b72c36f735500caa99094f70a3a8a9ce13e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why exclude the current trajectory from its leave-one-out baseline?",
+        "answer": "Other group returns supply a critic-free reference without using the trajectory's own reward in it. Long rollouts are expensive, making token-level ratio clipping and batch reuse useful, but repeated updates still face policy drift. Old trajectories do not become indefinitely fresh on-policy data.",
+        "example": "For rewards one, one, and zero, compare the first with the mean of the other two, then clip locally drifting tokens separately."
+      }
+    },
+    "qa/agent-research:loop/basics": {
+      "source_sha256": "ea26be59b9d95a7a3f8b46918c6bcec9bb1230943804fb6216304522be4538a9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does LOOP use several same-task trajectories instead of an independent value network?",
+        "answer": "Their returns provide a leave-one-out baseline without maintaining a critic. A PPO trust region supports reuse of expensive rollouts. Removing a value network does not remove importance ratios or drift control.",
+        "example": "Compare one trajectory against the mean return of the other traces for its task."
+      }
+    },
+    "qa/agent-research:loop/comparison": {
+      "source_sha256": "aeac84fdc5773176b2a9c061d996ec47f657475cddacdcd9a64bdf5985c96bf1",
+      "reviewed": true,
+      "fields": {
+        "question": "How does LOOP token-level clipping differ from discarding a trajectory as soon as one token drifts?",
+        "answer": "Local clipping constrains drift while retaining other useful parts of a long trace. Whole-trajectory dropping loses more expensive interaction data. Reuse must preserve old behavior probabilities; off-policy samples are not newly on-policy.",
+        "example": "One abnormal ratio in a hundred-step trajectory need not erase all other feedback."
+      }
+    },
+    "qa/agent-research:loop/implementation": {
+      "source_sha256": "ad10a2c29108c4af6a9a25b5c5a1e286a143b044601a812e6866d35aeeb134b4",
+      "reviewed": true,
+      "fields": {
+        "question": "Can LOOP compute its leave-one-out baseline directly when K=1?",
+        "answer": "No. K−1 is zero, so a singleton fails the group definition and needs explicit handling or rejection. Multi-epoch reuse must preserve the corresponding old policy probabilities and episode identity, not reinsert the sample's own return into its baseline.",
+        "example": "With one example, the mean of other examples does not exist."
+      }
+    }
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/post-training/teacher-and-context": {
+      "source_sha256": "4163d2ad98f31489433f2f918a827d0841bdb6c9f851257c87e98266003cd442",
+      "reviewed": true,
+      "fields": {
+        "title": "Even stronger teachers can teach the wrong thing: evidence, compatibility, and preserving success",
+        "thesis": "Teacher value is more than aggregate score. OPSD changes training visibility, MOPD and token routing organize multiple teachers, CSD aligns probability events, SPOD protects successful student actions, and VAD isolates corrections attributable to visual evidence. Verify these constraints independently before imitation.",
+        "axis_0": "Teacher source: a privileged same-weight view or independent domain experts",
+        "axis_1": "Combination granularity: domains, token routing, and successful action protection",
+        "axis_2": "Comparable interfaces: shared vocabulary coordinates or common text events",
+        "axis_3": "Attribution: privileged evidence, language priors, and existing student skills"
+      }
+    },
+    "dive/post-training/teacher-and-context/comparison/post-training:opsd": {
+      "source_sha256": "3331189d3ba2121cf0b36756af1dc1b78500b9b0937d5c436f54de540abaf038",
+      "reviewed": true,
+      "fields": {
+        "position": "Uses the same weights under two conditions: a teacher reads a verified answer, while a student generates its own answer-free prefix.",
+        "tradeoff": "Extra evidence is training-teacher-only. The local dual-view candidate path does not reproduce Qwen parameter training."
+      }
+    },
+    "dive/post-training/teacher-and-context/comparison/post-training:mopd": {
+      "source_sha256": "d5b3535e066f655c3d964ef37b3dc0796b5634f406c466a4a11b94ab0c4d5952",
+      "reviewed": true,
+      "fields": {
+        "position": "Trains domain RL teachers independently, then combines domain distributions over the same student rollout.",
+        "tradeoff": "Reuses expertise but can still cause inter-domain interference in the shared student. A deterministic local mini-suite is not large-model capability fusion."
+      }
+    },
+    "dive/post-training/teacher-and-context/comparison/post-training:token-teacher-selection": {
+      "source_sha256": "2f44b83a7165f717a3103091a2115962e59a49fbf20d2b78d55ad8452d7c8d6d",
+      "reviewed": true,
+      "fields": {
+        "position": "Selects teachers at each student prefix by confidence, Hellinger distance, or aligned feature distance. Soft routing mixes probabilities arithmetically.",
+        "tradeoff": "Confidence is not suitability, and features in different dimensions cannot be subtracted directly. Full training was not reproduced; a random-policy L1 component exists."
+      }
+    },
+    "dive/post-training/teacher-and-context/comparison/post-training:spod": {
+      "source_sha256": "71a2522316c79d2b3a040dd3acf8d45741303862e2303179d0069cef92e3bd54",
+      "reviewed": true,
+      "fields": {
+        "position": "Protects decisions within successful episodes where teacher raw complete-action probability is lower, canceling distillation there and applying a soft floor.",
+        "tradeoff": "Other decisions still learn. A soft floor cannot guarantee no regression under shared parameters. Full agent runs were too costly and not reproduced."
+      }
+    },
+    "dive/post-training/teacher-and-context/comparison/post-training:csd": {
+      "source_sha256": "ac08603631f175d4d0ffe370122b9f16d8600b42fa227838a6e214c9894d2b94",
+      "reviewed": true,
+      "fields": {
+        "position": "Builds common chunk events from character spans and decoded text, using chained probabilities and REST for unmatched mass.",
+        "tradeoff": "Cross-tokenizer comparison no longer assumes identical IDs mean the same text, but event coverage is limited. Local work verifies small-vocabulary alignment and gradients."
+      }
+    },
+    "dive/post-training/teacher-and-context/comparison/post-training:vad": {
+      "source_sha256": "44367bcd3bf8caaf016e67080bed2647936b2364102ad33a0585b10e8cd608f1",
+      "reviewed": true,
+      "fields": {
+        "position": "Contrasts evidence-present and evidence-removed views of the same teacher, one-sided projects corrections onto the visual direction, then rebuilds a student-anchored target.",
+        "tradeoff": "Operational contrasts do not prove all corrections causally visual. Local process-evidence features replace real crops; the original visual model was not run."
+      }
+    },
+    "dive/post-training/teacher-and-context/analysis/0": {
+      "source_sha256": "ea33465dfc6eb7d3fc9a2d14bb5132d9e3c753607ed47b2b681d2013571c82fb",
+      "reviewed": true,
+      "fields": {
+        "title": "Check whether teacher signals describe the same event before mixing",
+        "body": "MOPD and token routing can mix teachers but differ in domain-level and per-position selection. With different tokenizers, CSD first aligns decoded text events rather than mixing coordinates directly. OPSD can use the same model with extra conditions instead of adding independent experts."
+      }
+    },
+    "dive/post-training/teacher-and-context/analysis/1": {
+      "source_sha256": "48b03296cfbc0a5449886ce1e417e955dfc34e469b4aed83e18f75abf782259c",
+      "reviewed": true,
+      "fields": {
+        "title": "Teacher corrections should be examined rather than accepted wholesale",
+        "body": "SPOD protects specific successful actions the teacher disfavors, not whole successful episodes. VAD asks whether a privileged correction comes from visual evidence or shared language bias. Student success and evidence attribution are separate checks even when the teacher scores higher overall."
+      }
+    },
+    "dive/post-training/teacher-and-context/question/same-weights-privileged-view": {
+      "source_sha256": "c37861003cfe2f3500f06e0403501a585020e8a2dca06c3a5be991d4dd3a7697",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't same-weight OPSD just letting the student copy verified answers?",
+        "answer": "Conditions differ. The student only reads the question and generates its own prefix; the training teacher reads a verified answer before scoring that prefix. Supervision targets an unprivileged student. MOPD instead uses independent domain teachers. Neither can feed training answers into formal student prediction.",
+        "example": "Teaching example: A teacher can know the solution while evaluating the student's next step, but giving it to the student changes the task."
+      }
+    },
+    "dive/post-training/teacher-and-context/question/mixture-events-before-probabilities": {
+      "source_sha256": "04b258870fee4743b4b6c6f667f69908ba71cbc9b5c8cda181d1bd90cd3e360c",
+      "reviewed": true,
+      "fields": {
+        "question": "Can token teacher routing average same-ID logits from different tokenizers?",
+        "answer": "No. Soft routing mixes probabilities over identical events, not generally logits or log-probabilities. Different tokenizers can assign the same ID to different text. CSD aligns textual events and preserves REST mass first. Fine-grained routing cannot fix incompatible event identity.",
+        "example": "Teaching example: Token 17 could be a whole word for one teacher and a fragment for the student; shared numbering does not make them the same event."
+      }
+    },
+    "dive/post-training/teacher-and-context/question/success-not-whole-episode-freeze": {
+      "source_sha256": "44a89c9837b8671ec350de786a7d5cdcc1c8a7dab05b65b9cea4804b1d94e763",
+      "reviewed": true,
+      "fields": {
+        "question": "Does SPOD freeze a successful episode when the teacher disfavors one action?",
+        "answer": "No. Success and raw complete-action probabilities identify qualifying decisions; only there does SPOD remove distillation and add a soft floor. Other decisions keep learning. MOPD and OPSD do not automatically protect this behavior.",
+        "example": "Teaching example: If step two works despite being unusual, protecting it need not discard useful corrections to steps one and three."
+      }
+    },
+    "dive/post-training/teacher-and-context/question/privilege-not-visual-attribution": {
+      "source_sha256": "835f6f3f365fc39c4db9ef09e788d6166d1859f239dc32714e7f2919878b0bc9",
+      "reviewed": true,
+      "fields": {
+        "question": "Does giving an OPSD teacher more visual evidence prove its corrections are visual?",
+        "answer": "No. Language priors, style, and prior prefix mistakes can also change. VAD contrasts evidence presence and removal with the same teacher and student prefix, then projects the original correction. Privileged inputs alone do not supply attribution, and the local proxy is not genuine visual attribution.",
+        "example": "Teaching example: A crop might cause shorter phrasing even if brevity is not supported by the image; compare views to distinguish shared changes."
+      }
+    },
+    "dive/post-training/teacher-and-context/update/2026-10-27/0": {
+      "source_sha256": "88f0f3d63ce4944d804046ff33c717c4c3ebb7a6b799e1ea6b7ec17b0576bc63",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial edition: compares privileged self-teachers, multidomain and token routing, CSD text-event alignment, SPOD success protection, and VAD visual attribution; 47 abstracts and six close reads."
+      }
+    }
+  }
+}

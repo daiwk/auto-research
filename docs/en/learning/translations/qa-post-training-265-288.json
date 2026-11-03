@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:gspo/basics": {
+      "source_sha256": "bf5a044e6275817fdca065f0146c95c1c0dbf03ab16fad784f80df4dccc8c2e9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use one importance ratio for a full response in GSPO?",
+        "answer": "Terminal reward is sequence-level, and token outliers can cause fragmented clipping. Average token log ratios to form one response weight and avoid local outlier dominance.",
+        "example": "One rare token's large shift need not determine distinct clips throughout a long reply."
+      }
+    },
+    "qa/post-training:gspo/comparison": {
+      "source_sha256": "2ca782ef7b6150cdb0014d1a77f9b73fc050f00b4f094975068aeb471da648de",
+      "reviewed": true,
+      "fields": {
+        "question": "Is GSPO's geometric-mean ratio the actual sequence probability ratio?",
+        "answer": "No. GSPO exponentiates the mean log ratio; the exact sequence ratio exponentiates the sum, multiplying token ratios. Averaging changes length scaling and the objective.",
+        "example": "Repeated small shifts accumulate in a product but the geometric mean measures typical shift."
+      }
+    },
+    "qa/post-training:gspo/implementation": {
+      "source_sha256": "6b96108eb77acd69ec535c3f0efc60fc88a2d3b14d810022ad9dcf1381e53e62",
+      "reviewed": true,
+      "fields": {
+        "question": "Should GSPO clip per token or per response?",
+        "answer": "Clip one ratio per response, shared across tokens. Mask padding from length. Candidate experiments do not reproduce real token rollouts, MoE routes or clusters.",
+        "example": "Clipping each token and averaging usually differs from averaging then clipping."
+      }
+    },
+    "qa/post-training:gspo/mechanism": {
+      "source_sha256": "971f56aaf604bc95b16b02e9fa6c143890199e4ef541f7477dbfc87f1598a543",
+      "reviewed": true,
+      "fields": {
+        "question": "Why average token log ratios before exponentiation and clipping?",
+        "answer": "One outcome belongs to one answer. One geometric weight gives all tokens the same relative advantage and clipping decision despite local noise. It changes credit aggregation and doesn't eliminate all length/MoE mismatches.",
+        "example": "A correct answer with one anomalous ratio gets different credit under token clipping and shared weighting."
+      }
+    },
+    "qa/post-training:rlcr/basics": {
+      "source_sha256": "8ad7261bcd027249d378e05647c37235560d72a136ba9b59e280800bdb77b826",
+      "reviewed": true,
+      "fields": {
+        "question": "Why predict both an answer and confidence in RLCR?",
+        "answer": "Correctness-only reward does not incentivize honest probabilities. A proper score evaluates probability and outcome, rewarding truthful probabilities in expectation under its assumptions.",
+        "example": "A model that often errs should report moderate confidence instead of certainty."
+      }
+    },
+    "qa/post-training:rlcr/comparison": {
+      "source_sha256": "985c28f07d2c5b85e405943b812f9f0dcc5c30ac199bb82cc68077a077e9b120",
+      "reviewed": true,
+      "fields": {
+        "question": "How does RLCR differ from displaying confidence after training?",
+        "answer": "A displayed field needn't affect optimization; RLCR incorporates a scoring rule. Local Brier/hybrid objectives are mechanism evidence, not full rollouts.",
+        "example": "A 90% badge doesn't mean bad calibration was penalized in training."
+      }
+    },
+    "qa/post-training:rlcr/implementation": {
+      "source_sha256": "fad435d8b0270cb4a7d50e317ddcbec19e37fbd0ea9b964109530ca224563d74",
+      "reviewed": true,
+      "fields": {
+        "question": "Which classes receive local RLCR Brier gradients?",
+        "answer": "Compute squared differences between the complete softmax distribution and one-hot target and backpropagate over all candidates, not just the displayed choice. Hybrid includes CE; no paper-checkpoint RL.",
+        "example": "Unselected classes consume probability mass and contribute to scoring."
+      }
+    },
+    "qa/post-training:rlcr/mechanism": {
+      "source_sha256": "a49218c6ab791adc85211b5ebcdb7d2d57ebe2eef4eaaef0bdb931de48c92935",
+      "reviewed": true,
+      "fields": {
+        "question": "Why need proper scoring in addition to correctness rewards?",
+        "answer": "Binary reward cannot distinguish justified caution from false certainty. Proper scoring couples probabilities with outcomes to incentivize honesty. Report accuracy and calibration separately; local Brier gradients aren't full RL.",
+        "example": "A quiz bot claiming certainty on unfamiliar items can be penalized for that confidence even when ordinary rewards ignore it."
+      }
+    },
+    "qa/post-training:cispo/basics": {
+      "source_sha256": "2b11e3f0153d4b8cf6ab17abcb8e039e77a88566fe9fd331723af5f6d7ee75aa",
+      "reviewed": true,
+      "fields": {
+        "question": "Why clip importance weights in CISPO?",
+        "answer": "Bound magnitude while preserving advantage direction and learning, unlike PPO min-surrogate flat regions. Separate frozen weights from differentiable logp.",
+        "example": "A capped positive weight can still reinforce through logp."
+      }
+    },
+    "qa/post-training:cispo/comparison": {
+      "source_sha256": "f670541ed95c417c522eff5ae3ce755e82aff4a65fa298411407930a2e23a351",
+      "reviewed": true,
+      "fields": {
+        "question": "Why aren't CISPO and PPO the same because both clip?",
+        "answer": "PPO takes the minimum of clipped and unclipped surrogates. CISPO multiplies logp and advantage by clipped weight. Backward and out-of-range behavior differ despite matching bounds.",
+        "example": "One boundary can stop gradients; the other preserves updates."
+      }
+    },
+    "qa/post-training:cispo/implementation": {
+      "source_sha256": "addf2f1e965e6ffba0ae5163f002ac76f4019f0a2276b2c21ffc00c889094edd",
+      "reviewed": true,
+      "fields": {
+        "question": "What if CISPO differentiates directly through the clipped ratio?",
+        "answer": "Extra weight derivatives change the policy-gradient objective. Keep rollout, weight construction and logp path separate. Local checks do not reproduce MiniMax training.",
+        "example": "Current action logp should supply gradient without duplicating it through the weight branch."
+      }
+    },
+    "qa/post-training:cispo/mechanism": {
+      "source_sha256": "a53d9c5a9552137dfb66ed5b0ab7539130884612eccf6f96748364f3f29e317a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CISPO retain gradients for some tokens PPO would clip flat?",
+        "answer": "Clipped weights scale log-probability gradients while retaining advantage direction. PPO's minimum is flat in certain quadrants. Test gradients, not only values or clipped advantages.",
+        "example": "A rare negative-advantage token can still receive bounded suppression even if PPO is flat."
+      }
+    },
+    "qa/post-training:ttrl/basics": {
+      "source_sha256": "6b83741f0580c6e6adf2076875187e988529751560bca18fcd855949757f923c",
+      "reviewed": true,
+      "fields": {
+        "question": "Where does TTRL get rewards on unlabeled test tasks?",
+        "answer": "Sample several answers, use majority consensus as a pseudo-label, reward agreement and update online. No gold, but consensus can be wrong; evaluate separately.",
+        "example": "Repeatedly guessing the same wrong number creates agreement, not truth."
+      }
+    },
+    "qa/post-training:ttrl/comparison": {
+      "source_sha256": "767244733a7842a43301bd87aec4e789f4602b9713c2a776c3cb711f416e1c01",
+      "reviewed": true,
+      "fields": {
+        "question": "How does TTRL differ from majority-vote inference?",
+        "answer": "Voting just aggregates outputs; TTRL updates parameters using pseudo-rewards and affects later behavior. Account for training compute and persistent state.",
+        "example": "After the same samples, voting returns; TTRL additionally optimizes."
+      }
+    },
+    "qa/post-training:ttrl/implementation": {
+      "source_sha256": "e5174ab9bc89c38d3c3108c889edde2ddabb10379289e2cf512f1dfc8d3893a6",
+      "reviewed": true,
+      "fields": {
+        "question": "May TTRL answer normalization see test gold?",
+        "answer": "No. Equivalence and votes must use permitted output rules; gold is scored afterward. Local loops aren't paper-scale real rollouts.",
+        "example": "Do not filter by the correct number before claiming an autonomous vote."
+      }
+    },
+    "qa/post-training:ttrl/mechanism": {
+      "source_sha256": "398a5053fab46e65f4f45f5a7cf37b375d92bf9b770b97468e0855593c1ecbdf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why label TTRL as adaptation rather than fixed-model evaluation?",
+        "answer": "Test inputs trigger sampling and immediate parameter updates, so the evaluated model changes. Report sampling/adaptation budgets and keep gold in independent scoring. Pseudo-label consensus can reinforce errors; unlabeled isn't no learning.",
+        "example": "Sampling and updating before answering differs from one call to the original model even without gold."
+      }
+    },
+    "qa/post-training:luffy/basics": {
+      "source_sha256": "97b42b02d051d290d1a205c46097a5b2f7552b2914c3831e383c4e4a5c9168d6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine offline demonstrations and online exploration in LUFFY?",
+        "answer": "Demonstrations reveal paths students rarely sample; online rollouts preserve current exploration. Handle shared support and source probabilities rather than pure imitation or narrow exploration.",
+        "example": "Experts show a proof while the student still generates attempts and receives feedback."
+      }
+    },
+    "qa/post-training:luffy/comparison": {
+      "source_sha256": "253fda02ca48fa3944fa8a37f1463a6ba3c32f698439c5eae7b42b3ca2e65fde",
+      "reviewed": true,
+      "fields": {
+        "question": "How does LUFFY differ from inserting demonstrations into an ordinary GRPO group?",
+        "answer": "External demonstrations have another sampling source and need correction/regularization. Treating them as student samples gives wrong denominator. Source-aware updates are more than adding good text.",
+        "example": "An inserted expert solution is not a lucky current-policy sample."
+      }
+    },
+    "qa/post-training:luffy/implementation": {
+      "source_sha256": "f8716e3f1f3f4a8e5d1c6784e4c154129aed9e8a261c9ec81a716a2ca58a0e2f",
+      "reviewed": true,
+      "fields": {
+        "question": "What roles do μ and ref have in LUFFY?",
+        "answer": "μ describes mixture sampling; ref anchors KL. Track online vs demonstration provenance. Local candidates aren't paper text/distributed training.",
+        "example": "Expert data and initial-student reference need not have the same probabilities."
+      }
+    },
+    "qa/post-training:luffy/mechanism": {
+      "source_sha256": "8f04d522cbff98f08a28a5858d4a751738601d1d8b9a0ac8787ca8feaa22f0e4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why track behavior μ in mixed demonstration/rollout batches?",
+        "answer": "Shared batch doesn't make sources on-policy. Importance ratios and regularization address source shift while keeping exploration. Students must still reach uncovered states; do not leak demos into evaluated inputs.",
+        "example": "Record expert success separately from failed student rollouts, not as a student sample."
+      }
+    },
+    "qa/post-training:vapo/basics": {
+      "source_sha256": "ae8deffa1ecb9caf536531817b859e0f8ad163d9e38ccebf5d4b4831ed8a2bca",
+      "reviewed": true,
+      "fields": {
+        "question": "Why emphasize a critic for long reasoning in VAPO?",
+        "answer": "Sparse terminal rewards leave prefixes without direct feedback; a critic supplies a baseline. Bias can grow with length, motivating pretrained value and length adaptation.",
+        "example": "Estimate later returns before an intermediate reasoning step gets terminal reward."
+      }
+    },
+    "qa/post-training:vapo/comparison": {
+      "source_sha256": "2ae417d2d39cd283c5e31f556981062b063bee8a68408479a488b7250755c8fc",
+      "reviewed": true,
+      "fields": {
+        "question": "What does VAPO trade for critic-free GRPO?",
+        "answer": "GRPO uses same-prompt relative rewards without a critic. VAPO trains a critic for prefix values. Their costs and error sources differ; fewer models isn't higher capability.",
+        "example": "An all-wrong group has no relative signal while a critic can still estimate, possibly incorrectly."
+      }
+    },
+    "qa/post-training:vapo/implementation": {
+      "source_sha256": "155db31f9b91f61eccaae37f31496f9333cbd1f4471a8d6b01042e3eb8fa10f4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't the local VAPO critic a reproduced pretrained value model?",
+        "answer": "Candidate actions and proxy lengths simulate value–length coupling, not real long prefixes. Retain response-dependent GAE λ rather than claiming a fixed λ is equivalent.",
+        "example": "A table of candidate values isn't a neural critic reading thousands of reasoning tokens."
+      }
+    },
+    "qa/post-training:vapo/mechanism": {
+      "source_sha256": "1bdd6d230872d4a72fe0ea34da7c2768b166235ebfe56881356c41d074f1a93c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why repair critic quality and adapt GAE to length instead of dropping the critic?",
+        "answer": "Sparse rewards and varying horizons amplify value error. VAPO pretrains the critic and adapts advantage estimation and actor to length. It doesn't remove value learning, and local proxy lengths aren't long-CoT evidence.",
+        "example": "Short and long solutions receive reward at different delays, so one estimator can have different bias/variance across them."
+      }
+    }
+  }
+}

@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:mopd/basics": {
+      "source_sha256": "158cd5a12d894157aaef9fe569aa9bdf37eef2d96e215b98204d3b06232792e0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why train independent domain teachers first in MOPD?",
+        "answer": "Joint RL can couple domain gradients. Separate specialists optimize their domains before sharing dense student-prefix supervision. Integration still shares parameters and can interfere.",
+        "example": "Train math and code teachers separately, then guide one student."
+      }
+    },
+    "qa/post-training:mopd/comparison": {
+      "source_sha256": "ad038c8704158ac68891237f2bcef2b3af79392c95f5b801653b5b2a952f5320",
+      "reviewed": true,
+      "fields": {
+        "question": "Where do probability mixture and parameter averaging merge teachers?",
+        "answer": "Probability mixtures form supervision at shared student states and require teacher inference. Parameter averaging directly combines comparable weights and can disrupt coordination. No superiority without matched experiments.",
+        "example": "Adding output distributions differs from averaging weight matrices."
+      }
+    },
+    "qa/post-training:mopd/implementation": {
+      "source_sha256": "6671919dc861ad613c59eb2f93117e4dfea3170782c030b28e8fb8f4a79bf1b6",
+      "reviewed": true,
+      "fields": {
+        "question": "What must MOPD teacher weights and dimensions satisfy?",
+        "answer": "Align vocabulary/candidates and normalize weights by the defined rule. Freeze teachers and update student only. Deterministic mini-suite teachers aren't trained specialists.",
+        "example": "Different vocabulary IDs don't align merely by renormalizing the sum."
+      }
+    },
+    "qa/post-training:mopd/mechanism": {
+      "source_sha256": "9d34033c02c9e16d3e794ad0aa54b967b1e9e7adf4ea492e1c04f571833eb270",
+      "reviewed": true,
+      "fields": {
+        "question": "Why query multiple teachers on student traces rather than concatenate expert traces?",
+        "answer": "Actual student prefixes reveal visited states. Matched teachers give dense supervision there, reducing trajectory mismatch. Supervision fusion isn't parameter averaging or guaranteed skill retention; local evidence is candidate-level.",
+        "example": "Both teachers can guide a mixed math/code intermediate state absent from their complete answers."
+      }
+    },
+    "qa/post-training:polaris-hri/basics": {
+      "source_sha256": "dac9ebc13143b528ad18935c9b52f6eed0667a16327f2520a3759d1e816f4983",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add a teacher-forced reference story to POLARIS policy stories?",
+        "answer": "Long story evaluation is sparse; a reference anchors quality under the same external rubric. It is additional training supervision, not test gold or a supplied copyrighted story.",
+        "example": "Practice with a reference story but generate independently at evaluation."
+      }
+    },
+    "qa/post-training:polaris-hri/comparison": {
+      "source_sha256": "4f70b130c99d2014426e6700f7c00b72c86283ba118900794828b0f4492f0ab3",
+      "reviewed": true,
+      "fields": {
+        "question": "How does gradual reference injection differ from equal mixing at the start?",
+        "answer": "Reference weight rises from zero to avoid early domination; policy stories alone determine mean/variance. Equal mixing changes strength and potentially baselines.",
+        "example": "Reference advantage weight at step zero must be zero."
+      }
+    },
+    "qa/post-training:polaris-hri/implementation": {
+      "source_sha256": "65648038d84ffb0f9715fb89127fa6824626da8f4feadc8d3944622d29820018",
+      "reviewed": true,
+      "fields": {
+        "question": "How does POLARIS avoid overflow without changing clipped objective?",
+        "answer": "Choose the exact branch by advantage sign in log-ratio space, clear padding/zero advantage first and exponentiate afterward. No extra clamp. Full story training was too costly; tensor gradients aren't capability.",
+        "example": "A capped branch doesn't need to compute a huge exp before taking min."
+      }
+    },
+    "qa/post-training:polaris-hri/mechanism": {
+      "source_sha256": "2845789fa22a5cf2b2f39cc28173e3df2030827129b4737212eac1a44b83b619",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use policy-only statistics and gradually add reference advantage in POLARIS HRI?",
+        "answer": "Including reference in mean/SD would change every policy advantage. Use policy-only stats, scale reference gradually from zero, and apply identical rubric. Local component isn't full long-story training.",
+        "example": "Five policy stories determine baseline; reference computes its own advantage against them, not inside their average."
+      }
+    },
+    "qa/post-training:opcd/basics": {
+      "source_sha256": "574c3e7d3ff74b4eea50cbdfb24acb162520123622638cb205cc1ae09cba1e46",
+      "reviewed": true,
+      "fields": {
+        "question": "What context-dependent learning can OPCD preserve?",
+        "answer": "Prompt, retrieval or past experience vanishes when context clears. Distill a context-rich teacher into a context-free student on its own trajectories to internalize behavior.",
+        "example": "Learn a tool-use lesson that remains useful when the hint is absent next time."
+      }
+    },
+    "qa/post-training:opcd/comparison": {
+      "source_sha256": "e66a72c4d0473ad6a7261c2be4f16837f817fba0c6dbd351fde8fe42b61add92",
+      "reviewed": true,
+      "fields": {
+        "question": "How does OPCD differ from retrieving the same experience at inference?",
+        "answer": "Retrieval depends on external context and read cost. Distillation reduces that dependence but can forget or overgeneralize. They can complement each other; compare empirically.",
+        "example": "Updated documents can be swapped immediately; older knowledge distilled into weights doesn't automatically update."
+      }
+    },
+    "qa/post-training:opcd/implementation": {
+      "source_sha256": "6fd6e655c5811982d8ba0f4ffb0410a736e9187b6bf08fa6b7bf1253417bacfd",
+      "reviewed": true,
+      "fields": {
+        "question": "What is OPCD reverse-KL direction and student input?",
+        "answer": "KL from no-experience student to experience-conditioned teacher on identical student prefix. Experience stays teacher-only. Local conditional distributions aren't long prompts or paper environment.",
+        "example": "Swapping numerator to teacher changes KL direction."
+      }
+    },
+    "qa/post-training:opcd/mechanism": {
+      "source_sha256": "f4d99dd456f34f02e2403ff8fe16095a39f1e838acec01927edc173a2859775e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why roll out without experience and score with an experience-aware teacher?",
+        "answer": "Internalize external knowledge rather than preserve dependency. Student gets task only; teacher scores same prefix with experience; update by student-to-teacher reverse KL. Reliability matters and local checks don't reproduce long system prompts.",
+        "example": "Remove the instruction at evaluation to test whether the operation lesson lives in weights."
+      }
+    },
+    "qa/post-training:opsd/basics": {
+      "source_sha256": "351cb7a71316de6cb16e4e7e58d3dae23393d85be4ca61627224584573e64297",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can the same model be a more informed OPSD teacher?",
+        "answer": "Teacher additionally sees a verified solution, while student gets problem only. The difference is information, not model size. It depends on reliable solutions.",
+        "example": "Judging with the conclusion known differs from solving it independently."
+      }
+    },
+    "qa/post-training:opsd/comparison": {
+      "source_sha256": "59b4c8e78350ab2188d83b1fbb82dfb7f5344d289550ba4908f0ccfe8ced39fb",
+      "reviewed": true,
+      "fields": {
+        "question": "How does OPSD isolation differ from answer-conditioned SFT?",
+        "answer": "Hide solution during student sampling and score its states with privileged teacher. Adding solution to student would teach unavailable deployment dependence. Full distribution distillation isn't imitation of one answer.",
+        "example": "A useful intermediate expression can appear for teacher but not as a shortcut in student prompt."
+      }
+    },
+    "qa/post-training:opsd/implementation": {
+      "source_sha256": "b88a52a984307f38918e494df021c42c4198ae643a15265d06dbf934066ff33f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why clip OPSD pointwise rather than one response coefficient?",
+        "answer": "Limit per-token divergence so unusual stylistic positions cannot dominate. Freeze teacher target and align masks. Local views aren't Qwen competition-math training.",
+        "example": "One anomalous format token needn't amplify the entire sequence's guidance."
+      }
+    },
+    "qa/post-training:opsd/mechanism": {
+      "source_sha256": "3fafb8ba96e692524d3b15c0e687d126c2f11b23247ede8aa20f8bacee8aefb6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must OPSD student rollouts not see the verified solution?",
+        "answer": "The teacher uses it to score actual student prefixes; student stays in deployment conditions. Pointwise clipping bounds stylistic outliers. Giving student the answer bypasses learning. Local checks cover mechanism only.",
+        "example": "Teacher can evaluate a half-completed derivation knowing the answer; student cannot use that answer during independent generation."
+      }
+    },
+    "qa/post-training:ask-to-distill/basics": {
+      "source_sha256": "d1def571a651bcdcc43d3da9fe9f762e1b7cd30716aeb72869f1c73eaec7fe98",
+      "reviewed": true,
+      "fields": {
+        "question": "Why train an A2D question synthesizer before training student?",
+        "answer": "Questions determine visited prefixes and usable guidance. Freeze scorer teacher/student, optimize question distribution, screen pool then distill from original student. Separate curriculum learning from student gains.",
+        "example": "Find learnable challenge problems without accumulating student updates while selecting them."
+      }
+    },
+    "qa/post-training:ask-to-distill/comparison": {
+      "source_sha256": "53b84baf3011117dff834020a194671ca9dd6b709e7915093a1edf37ddd892d9",
+      "reviewed": true,
+      "fields": {
+        "question": "How does A2D compatibility differ from pure disagreement reward?",
+        "answer": "A big gap can mean impossible. Compatibility measures teacher mass on student support. Product balances room for learning and reachability rather than reward distance alone.",
+        "example": "A teacher-only path can have high disagreement but poor teachability."
+      }
+    },
+    "qa/post-training:ask-to-distill/implementation": {
+      "source_sha256": "c16fe6a352d9879e2bc54bf868d321766b92a570e494857af4364e5197ff040f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not renormalize A2D compatibility on the candidate union?",
+        "answer": "Use raw full-vocabulary teacher mass on student candidates; renormalization hides mass outside. Deduplicate across complete scoring batch, not one GRPO group; don't arbitrarily restandardize downstream advantages.",
+        "example": "If teacher mostly supports inaccessible tokens, local normalization overstates compatibility."
+      }
+    },
+    "qa/post-training:ask-to-distill/mechanism": {
+      "source_sha256": "f2690569408436c9125c0434fde2be2f74d7e9d072df33cf1831b94b75526497",
+      "reviewed": true,
+      "fields": {
+        "question": "Why require disagreement and teacher support within student reach?",
+        "answer": "Disagreement alone can choose unlearnable problems, compatibility alone mastered ones. Reward their product using raw teacher mass, freeze scorers, then distill from original student.",
+        "example": "A teacher refinement near two known approaches has useful gap; mass almost entirely off-support should score low."
+      }
+    },
+    "qa/post-training:tar-adaptive-replay/basics": {
+      "source_sha256": "daacef73d6a677dc93e1f42665ff3a86d5a6cc54afa6476464ae9898189591da",
+      "reviewed": true,
+      "fields": {
+        "question": "Why collect actual correct base samples for TAR memory?",
+        "answer": "Recover modes base could truly generate and current training suppresses. Generate, verify with training-only checker and choose diverse prototypes. No correct samples means no bank; hand-written gold is not reachability evidence.",
+        "example": "A never-generated base solution cannot be labeled a forgotten skill."
+      }
+    },
+    "qa/post-training:tar-adaptive-replay/comparison": {
+      "source_sha256": "674392ecd0b4a550627c371af13ad11145e306d6e5f267d76cf05cdab3b42f8b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does adaptive TAR differ from repeated SFT on fixed archive?",
+        "answer": "Open the gate only when relative-to-base suppression occurs, focusing suppressed tokens. Fixed replay always supervises, potentially constraining new adaptation.",
+        "example": "Skip a still-common old solution until its likelihood falls."
+      }
+    },
+    "qa/post-training:tar-adaptive-replay/implementation": {
+      "source_sha256": "287e379a5e5972677ae33b711540606b72e52b925575be0f1bd372f2766df71a",
+      "reviewed": true,
+      "fields": {
+        "question": "May TAR average only active gate trajectories?",
+        "answer": "No. Divide by all bank traces, including zero gates. Detach gate/token weights and use stable mixed precision. Active-only normalization amplifies rare activation.",
+        "example": "If just one trace is suppressed, active-only averaging makes it stronger than the bank mean."
+      }
+    },
+    "qa/post-training:tar-adaptive-replay/mechanism": {
+      "source_sha256": "aacfb3e1a5a7243163b3a51525e9dc0f3d45d96793a32f51933a18e44a99b572",
+      "reviewed": true,
+      "fields": {
+        "question": "Why replay only correct traces suppressed relative to base?",
+        "answer": "Verified real base samples store diverse reachable solutions. Gate inactive if unchanged; if suppressed, concentrate on lowered tokens. Detached selection prevents optimization through the gate, and test labels are excluded.",
+        "example": "Restore disappearing algebra steps without repeatedly forcing a still-common diagram solution or inventing archived samples."
+      }
+    }
+  }
+}

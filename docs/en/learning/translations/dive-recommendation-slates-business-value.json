@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/recommendation/slates-business-value": {
+      "source_sha256": "b178401046438b451740b0a403347cec7a4e8f1e07ad5efe4211b0b68df87f75",
+      "reviewed": true,
+      "fields": {
+        "title": "From slate marginal value to bid control: policy weights and constraints",
+        "thesis": "CDM distills teacher choices balancing relevance and redundancy. SORT-Gen estimates prefix-conditioned marginal slate value. PRL-PUTS sweeps multi-objective policy weights. Primal-Dual Decoding updates multipliers using constraint slack during decoding. They change list context, utility modeling, policy selection, and constraint control respectively. More diversity or improvement on one metric is not an overall win. RLBP applies multi-objective governance to daily PID parameter choices, whose BU/CPC rewards and actions are not per-item slate utility.",
+        "axis_0": "Value for one item, a selected prefix, or an entire policy",
+        "axis_1": "Training-time distillation versus inference-time search",
+        "axis_2": "Fixed weights, Pareto screening, and dynamic multipliers",
+        "axis_3": "Soft objectives, hard feasibility, and proxy revenue limits"
+      }
+    },
+    "dive/recommendation/slates-business-value/comparison/recommendation:cdm": {
+      "source_sha256": "070d9242f9d73aba35aca6467df7fb150b19d7fbc8197fc73fcd6155b8d3a83a",
+      "reviewed": true,
+      "fields": {
+        "position": "An MMR teacher subtracts maximum similarity to already-selected items from relevance, giving contextual marginal supervision for a low-latency student.",
+        "tradeoff": "Compresses slate deduplication into a serving model, but inherits the teacher's objectives and similarity definition. Less similarity need not improve satisfaction. Public data do not establish production gains."
+      }
+    },
+    "dive/recommendation/slates-business-value/comparison/recommendation:sort-gen": {
+      "source_sha256": "171e3664d7db118fcaef42bcefb3e69b33760636c8f4b40578b32b222d8bd8d8",
+      "reviewed": true,
+      "fields": {
+        "position": "A causal Transformer predicts ordered-regression probabilities for cumulative CLICK/PAY counts conditioned on the prefix, estimating an added item's marginal value. Multi-objective queues and masks narrow search.",
+        "tradeoff": "Explicitly models prefix effects but introduces candidate-queue limits and batched-search approximations. Local click, transaction, and GMV metrics are public proxies; one PyTorch call is not production kernel latency."
+      }
+    },
+    "dive/recommendation/slates-business-value/comparison/recommendation:prl-puts": {
+      "source_sha256": "a720848e40fba3a12bb35028270c84a50360dd69e8a91df00136e38b4ce55f3d",
+      "reviewed": true,
+      "fields": {
+        "position": "Two Q heads estimate Repin and P2P utility. Pareto sweeping evaluates policy weights before online selection under governance constraints.",
+        "tradeoff": "Nondomination means no candidate is at least as good on all objectives and better on one. It does not require beating the original policy on both. Policy weight selection is not within-list marginal estimation."
+      }
+    },
+    "dive/recommendation/slates-business-value/comparison/recommendation:primal-dual-decoding": {
+      "source_sha256": "c3bd23c7220a77b9316f743aa2456a96202d5ace38dc600c1c43ae424e5f7cef",
+      "reviewed": true,
+      "fields": {
+        "position": "Keeps the generator frozen, adds auxiliary contributions per position, and updates multipliers via mirror descent on remaining constraint slack.",
+        "tradeoff": "Multipliers adjust pressure by prefix, but soft penalties do not prove feasibility. No weight can make an infeasible remaining set feasible. Local work verifies proxy mechanisms only."
+      }
+    },
+    "dive/recommendation/slates-business-value/comparison/recommendation:pinterest-rlbp": {
+      "source_sha256": "7415102e239f3319f55cac5ac7891c9567a4199c541a9dea18ef012450c6947e",
+      "reviewed": true,
+      "fields": {
+        "position": "Chooses among nine daily P/I multiplier pairs with fixed D. Production gamma=0 regresses relative BU/CPC lift. Inference uses Qbu minus beta times Qcpc and top-K softmax; PID remains in serving.",
+        "tradeoff": "Different from PRL-PUTS Repin/P2P policy sweeps. Improved CPC still has negative reward. Multi-step max/min is an extension; production beta and numeric preprocessing are external."
+      }
+    },
+    "dive/recommendation/slates-business-value/analysis/0": {
+      "source_sha256": "b0639ca97923c5af61ecb3ebf28e3d9bbe1e03d3cfb5d348ff290002022acbb5",
+      "reviewed": true,
+      "fields": {
+        "title": "The same score may answer different levels of questions",
+        "body": "CDM's MMR teacher discounts redundancy with selected items. SORT-Gen puts the slate prefix into the predictor so expected clicks and transactions vary by prefix. PRL-PUTS instead picks differently weighted policies above Q estimates. That does not give each item a universally correct fixed score. Separate utility estimation, candidate search, and policy governance."
+      }
+    },
+    "dive/recommendation/slates-business-value/analysis/1": {
+      "source_sha256": "ecbe06d6c9a72997977467270397485f6607ef6b826555c2ed348e966fe8063e",
+      "reviewed": true,
+      "fields": {
+        "title": "Multi-objective preferences cannot replace feasibility checks",
+        "body": "PRL-PUTS keeps trade-off candidates through a Pareto sweep; Primal-Dual Decoding changes pressure through multipliers. Both express preferences. SORT-Gen's selected-item mask blocks duplicates, a distinct feasibility rule. Finite weights allow objectives to compensate for one another, so hard ad-load, inventory, or deduplication constraints need independent checks."
+      }
+    },
+    "dive/recommendation/slates-business-value/analysis/2": {
+      "source_sha256": "5d3b3a6c1cc4b391ad46411d7d64c5fc5a97d509e92bda1a4b0ae436263c19ed",
+      "reviewed": true,
+      "fields": {
+        "title": "The same two-head form does not mean the same control problem",
+        "body": "PRL-PUTS estimates Repin/P2P utilities then sweeps policy weights. RLBP heads predict daily BU/CPC change from a production baseline and select PID coefficients, not items. Lower CPC is better, so do not flip a negative lift before subtracting it during fusion. Production gamma=0 uses no cross-day bootstrapping; external beta sets lifecycle trade-offs. Multi-step max/min per head does not guarantee the optimal combined Q. The seven-day A/B and two-month unbalanced holdout need separate interpretation."
+      }
+    },
+    "dive/recommendation/slates-business-value/question/prefix-changes-marginal-value": {
+      "source_sha256": "567d8507836e6879c1ae53dac16b8979acc1aec7e96cd49afc18b25c8588152d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why shouldn't CDM or SORT-Gen treat an item's standalone CTR as fixed value throughout a slate?",
+        "answer": "The prefix changes incremental contribution. CDM subtracts redundancy using maximum similarity to the prefix. SORT-Gen predicts cumulative actions conditioned on the prefix to estimate marginal value. Both reject fixed point scores as sufficient for page utility, but whether sacrificing immediate score is worthwhile still requires evaluation.",
+        "example": "The top three videos show the same ski run. A camping clip has a lower independent score but could add more information to a skiing-heavy prefix. That is not a measured CTR gain."
+      }
+    },
+    "dive/recommendation/slates-business-value/question/pareto-is-not-universal-win": {
+      "source_sha256": "cffd06cee0e74924e881bd17a0351a4a13252299c7402b90b193f3067f87c2a9",
+      "reviewed": true,
+      "fields": {
+        "question": "Does keeping a PRL-PUTS Pareto policy mean Repin, P2P, and slate quality all improve?",
+        "answer": "No. Nondomination is defined relative to candidate policies and estimated objectives. Repin can improve while P2P declines. SORT-Gen and CDM model a different slate-context level; two-objective nondomination does not guarantee all list metrics improve.",
+        "example": "Policies A=(10,6) and B=(8,9) are both nondominated. Keeping B does not show overall superiority or tell us anything about repeat exposure."
+      }
+    },
+    "dive/recommendation/slates-business-value/question/adaptive-weights-not-hard-guarantees": {
+      "source_sha256": "91181fe0ba03ed51f1561975e3e906b9a5bc2e961247435d9adc513ccbab94b6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check slate feasibility even when Primal-Dual Decoding raises multipliers dynamically?",
+        "answer": "Multipliers change soft pressure, not whether any feasible combination remains. If early selections rule out a required category, later weighting cannot restore it. SORT-Gen's duplicate mask illustrates hard exclusion versus scoring. PRL-PUTS weight sweeps do not enforce every hard business rule.",
+        "example": "If one position remains and two mutually exclusive categories must be included, no multiplier can satisfy both. Report infeasibility or use a predefined fallback, not just a better total score."
+      }
+    },
+    "dive/recommendation/slates-business-value/question/rlbp-two-heads-not-listwise-q": {
+      "source_sha256": "f2d5c7c8b2a9063ed900a3dbc884d2a6331788087c71c8fc7766eae8b0f3812a",
+      "reviewed": true,
+      "fields": {
+        "question": "RLBP and PRL-PUTS both have two Q heads and tunable weights. Why are actions and rewards not interchangeable?",
+        "answer": "PRL-PUTS trades off Repin and P2P in a recommendation policy. RLBP chooses daily PID multipliers to balance budget utilization and CPC. Negative CPC lift is retained, so subtracting beta times Qcpc favors lower cost. Production gamma=0 is a one-step daily objective, not a generic long-horizon slate Q.",
+        "example": "CPC decreasing from 1 to 0.9 gives reward -0.1. Subtracting beta times this value raises the fused score. Flipping it to +0.1 first would penalize lower cost."
+      }
+    },
+    "dive/recommendation/slates-business-value/update/2026-10-27/0": {
+      "source_sha256": "cb288db56ed614d0a891792df5902f82e4eb3e449acd0de29a8d762519600b78",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial version: compared CDM, SORT-Gen, PRL-PUTS, and Primal-Dual Decoding. Added analysis and questions on item, prefix, and policy value and the roles of distillation and search."
+      }
+    },
+    "dive/recommendation/slates-business-value/update/2026-10-30/1": {
+      "source_sha256": "09fbc86db1eeece27f0af88392ee4878b24b4372e3b296a2bf78c6cea0682556",
+      "reviewed": true,
+      "fields": {
+        "summary": "Reviewed RLBP's nine daily actions, production gamma=0, negative CPC lift, Q fusion, and external preprocessing. Distinguished states, actions, and rewards from PRL-PUTS policy sweeps. Broadened the topic title without changing its stable ID or route."
+      }
+    }
+  }
+}

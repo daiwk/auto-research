@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/multimodal-models/alignment-interfaces": {
+      "source_sha256": "43bc068f2cfaab719c2ab9c7d414cd9288520dd3e81397057b7635ecca8596a4",
+      "reviewed": true,
+      "fields": {
+        "title": "What does multimodal alignment align: vectors, visual interfaces, or evidence dependence?",
+        "thesis": "CLIP and EmbeddingGemma 2 produce comparable vectors. BLIP-2 and LLaVA connect vision to conditional generation, CV-OPD trains visual evidence use, and UMRM scores responses. Their supervision and interfaces differ, not a single capability ladder.",
+        "axis_0": "Retrieval vectors, visual tokens, generated responses, or rewards",
+        "axis_1": "Dual towers, connectors, policy distributions, or heads on frozen features",
+        "axis_2": "Paired similarity, instruction labels, view contrasts, or perturbation preferences",
+        "axis_3": "Visual sequence length, embedding width, teacher, and scorer costs"
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/comparison/foundation-models:clip": {
+      "source_sha256": "4ab64c794acc6da421854ca677d12cbeab814b4546adc283e73543649cf5bee4",
+      "reviewed": true,
+      "fields": {
+        "position": "Independent image and text encoders map to the unit sphere with symmetric in-batch contrastive loss.",
+        "tradeoff": "Category text can be a zero-shot prototype, but similarity is not open answers. Local clothing retrieval does not reproduce 400M image-text pretraining."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/comparison/foundation-models:blip2": {
+      "source_sha256": "52235e56d3f6f7220a1304dfe9a4031aad11316ab9f5995d496b442836e257ac",
+      "reviewed": true,
+      "fields": {
+        "position": "Q-Former extracts visual features with a fixed set of learned cross-attention queries and feeds a frozen LLM.",
+        "tradeoff": "The trainable bottleneck limits visual sequence length and can miss detail. Four local queries do not reproduce full two-stage training."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/comparison/foundation-models:llava": {
+      "source_sha256": "78b6109c07c30f17f31abb7ef808616c495ad8acc0c1c18a210a1bc32cd717de",
+      "reviewed": true,
+      "fields": {
+        "position": "Project vision into the language-token space and learn conditional responses with multimodal instructions.",
+        "tradeoff": "Shape alignment is not semantic or instruction alignment. A local lightweight QA head does not generate GPT-4 instruction data or train LLaVA-13B."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/comparison/multimodal-models:embedding-gemma2": {
+      "source_sha256": "909fec7efb146bfdc25e0eb73fc6a7d4e22b6e35b266ba74bf4e9d4563b7c2e3",
+      "reviewed": true,
+      "fields": {
+        "position": "Independent modality towers produce shared 768-dimensional vectors; MRL supports specified prefix truncation followed by renormalization.",
+        "tradeoff": "Narrower embeddings and fewer visual inputs are distinct budgets. Official local checkpoint validation covers text and images, not all four modalities."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/comparison/multimodal-models:cv-opd": {
+      "source_sha256": "4d64dbe11fe430d65a872f6c885bbc7e23eecb2908968d86795dbe890f8518cc",
+      "reviewed": true,
+      "fields": {
+        "position": "The student reads the full image; positive and negative teachers differ only in crop and share the student prefix. JSD and CDL constrain evidence use.",
+        "tradeoff": "Negative crops and sample/token gates shape supervision. Local evidence includes actual VLM L1 updates and A100 diagnostics, not complete visual capability."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/comparison/multimodal-models:umrm": {
+      "source_sha256": "0e83fe8b7df22c5fada1341558b9d96bc5d54719e060e4e39e4a5a2acde34ff6",
+      "reviewed": true,
+      "fields": {
+        "position": "Freeze VLM hidden states, pool only the response, and train a bias-free reward head on caption perturbation preferences.",
+        "tradeoff": "No human preferences does not mean no labels: layer selection and a bootstrap verifier use supervision. Local reward accuracy does not ensure policy-selection utility."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/analysis/0": {
+      "source_sha256": "a9e65b8ee0f3c48f0731b72565a5691d4124df56026a8e98af57489ad56f4f0d",
+      "reviewed": true,
+      "fields": {
+        "title": "A shared retrieval space is not a language input space",
+        "body": "CLIP and EmbeddingGemma 2 align vector similarities; the latter supports selected MRL dimensions. BLIP-2 queries and LLaVA projections condition an LLM and require generative training to use them. Matching dimensions or retrieval semantics do not make a vector a general-purpose visual soft prompt."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/analysis/1": {
+      "source_sha256": "2f59df53a783756b26efc00058dad957bd153ecdf1708c555c959e6f87d23c9b",
+      "reviewed": true,
+      "fields": {
+        "title": "A good-looking answer and genuine image evidence use differ",
+        "body": "UMRM learns rewards from caption perturbations and checks selection of policy-generated responses, rather than only hand-built negatives. CV-OPD changes teacher crops under a fixed student prefix to constrain distributions directly. Evaluation and distillation can complement each other without a reward benchmark proving visual attribution."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/analysis/2": {
+      "source_sha256": "b66fb3fa2c4ffabd39d8457514d91b5faa2c8d5cc60ac86ed443ddb47b5a56d6",
+      "reviewed": true,
+      "fields": {
+        "title": "October 29: publication update and evidence boundary",
+        "body": "The formal EmbeddingGemma 2 paper is the October 6 model, not a new identity. It describes pooling 512-dimensional backbone features then projecting to 768. Pinned official code projects before returning `last_hidden_state`; equal-weight masked means commute with that linear map. Keep the 16-image GPU result at its prior evidence grade, not audio/video or seven-benchmark acceptance."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/question/embedding-versus-answer": {
+      "source_sha256": "2bdb636a11566e4bcc0ad0d5f4ad57ae5c1c853a6b8158492a77ddbab0f5c92c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't correct image retrieval with CLIP or EmbeddingGemma 2 show LLaVA can answer image questions?",
+        "answer": "Retrieval matches candidate representations. LLaVA generates answer tokens from an image, question, and context, which needs a generative interface and supervision. Compare the same output task, not retrieval hits pooled with answer correctness.",
+        "example": "Retrieving an image of cups does not establish counting them, citing evidence, or following an answer format."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/question/two-compression-axes": {
+      "source_sha256": "82a0768e0a44711a0c7bb32aad3ead627d5e7a89f2da08c28c61b430c5cb4dff",
+      "reviewed": true,
+      "fields": {
+        "question": "Do fewer BLIP-2 queries and narrower EmbeddingGemma 2 vectors save the same resource?",
+        "answer": "Q-Former queries determine visual sequence length to the LLM. MRL width affects retrieval-vector storage and similarity. Both can lose information but at different stages; use trained prefixes with renormalization, not coordinate deletion as visual pooling.",
+        "example": "Thirty-two visual tokens and a 256-dimensional vector are length and width, not directly comparable."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/question/reward-versus-visual-dependence": {
+      "source_sha256": "d31467104d79ecb15206fab32c522f912fa793271459b0fc592ab313ad27a852",
+      "reviewed": true,
+      "fields": {
+        "question": "Does UMRM detecting a caption color perturbation show the CV-OPD student uses the right image region?",
+        "answer": "UMRM ranks one negative distribution, while policy errors can differ. CV-OPD compares student and positive/negative crop teachers on a shared prefix. Correct judging, receiving that training signal, and genuinely changing evidence use are separate checks.",
+        "example": "A judge spotting red changed to blue does not show the student stopped guessing common colors."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/question/oct29-method-boundary": {
+      "source_sha256": "dba811895ffe8855b59acc841df18f1b9870810550ffe4850d23343e5b4487c1",
+      "reviewed": true,
+      "fields": {
+        "question": "When can prior results survive a difference between paper and code operator order?",
+        "answer": "Check the actual operations. The same bias-free linear projection commutes with equal-weight masked averaging and the pinned code/checkpoint did not change. Nonlinearity, different weights, or retraining do not inherit equivalence. Only provenance changes here.",
+        "example": "`mean(W h1,W h2)=W mean(h1,h2)`; averaging two GELU outputs generally does not equal GELU of their mean."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/update/2026-10-27/0": {
+      "source_sha256": "8d52cc9d00624985b070e592c5f0cc345628726b2ac1285e33c31cf5e2e39467",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial version: compared CLIP and EmbeddingGemma 2 retrieval, BLIP-2/LLaVA interfaces, CV-OPD evidence use, and UMRM rewards; screened 20 abstracts and read six papers closely."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/update/2026-10-29/1": {
+      "source_sha256": "6ee69191e926be2e1cf43b43574114b5deb03372021ee8979fc66ec4454fe17e",
+      "reviewed": true,
+      "fields": {
+        "summary": "The formal EmbeddingGemma 2 paper describes the October 6 model, so no duplicate identity is added. It pools 512-dimensional features before projection to 768; pinned code projects before `last_hidden_state`, equivalent under equal-weight masked averaging. The prior 16-image GPU run does not qualify audio, video, or seven full benchmarks."
+      }
+    }
+  }
+}

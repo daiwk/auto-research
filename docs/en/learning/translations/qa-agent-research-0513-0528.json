@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:rsiflow/implementation": {
+      "source_sha256": "04795152d577789cc9d84f784a3d50c0ef67d2d1dc4846e740934fa198295e58",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a CPU controller with trusted callbacks demonstrate that full RSIFlow is integrated with Evolve?",
+        "answer": "No. The callbacks and structural evidence verify parent protection, paired acceptance, failure retention, and separation of training from reporting. There is no built-in LLM, arbitrary program execution, or six-benchmark training. Declared edit scopes and high numerical fixture scores cannot replace real candidate execution and promotion evaluation, and the in-process interface is not a sandbox for malicious code.",
+        "example": "A scalar proposer that changes one number and improves a score shows that a controller branch is reachable. It does not show that real model parameters or a harness were updated as in the paper."
+      }
+    },
+    "qa/agent-research:auto-sft/mechanism": {
+      "source_sha256": "bb7421d5500bf6d1c1e2bf2eeb738addb36436483a23a20915c55fe0a2f41319",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is retraining from the same base each round important for attributing the effects of data research?",
+        "answer": "This makes cross-round changes primarily attributable to the data pool, mix, and order, rather than cumulative learning from the previous round's weights. Fix the trainer and budget and register intervention hypotheses to compare whether the predicted mechanisms appear. Proposals from different analytical views are not completed experiments, and predictions must not be rewritten after seeing the scores.",
+        "example": "If round two repairs examples with incorrect answers, retrain from the same base. Continuing from round one's weights would confound the change with extra optimization steps."
+      }
+    },
+    "qa/agent-research:auto-sft/basics": {
+      "source_sha256": "0cd1c7ac83dd1a422a61dc983ffea5e132375af8b036ef7ab06deae5fadda6d2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does AutoSFT make the selection and organization of training data an object of automated research?",
+        "answer": "Different data contents, quality levels, and combinations can produce different capabilities from the same base, while manually trying many recipes is costly. AutoSFT proposes and tests data hypotheses rather than changing a training hyperparameter once. To understand a data change, control training conditions and isolate evaluation; rising development scores do not establish final generalization.",
+        "example": "If formatting errors may stem from a shortage of examples, add those examples and compare from the same base. Reusing previous-round weights introduces extra training history."
+      }
+    },
+    "qa/agent-research:auto-sft/comparison": {
+      "source_sha256": "668bef83630d0c12237ffa6863981a16c1e569794469a2fc0f9b9ce389c8fba2",
+      "reviewed": true,
+      "fields": {
+        "question": "How do four analytical views differ from a single agent adjusting only dataset proportions?",
+        "answer": "Data, failures, training signals, and past research provide different evidence. Execution subagents return traceable artifacts and the Meta Agent chooses interventions beyond changing the mixture. The authors' six action categories were identified retrospectively rather than used as a fixed menu; a table of rule-based options is not open-ended data research.",
+        "example": "Failure analysis may suggest correcting answers, while training signals point to ordering. Compare the two proposals using evidence, rather than increasing one category's share by five percentage points every round."
+      }
+    },
+    "qa/agent-research:auto-sft/implementation": {
+      "source_sha256": "cc22297f5c71a0ca8739495d648667821745808c0a3f30d613cef52768290621",
+      "reviewed": true,
+      "fields": {
+        "question": "Why preregister hypotheses before training, and why retain an independent external holdout after decontamination?",
+        "answer": "Record the change, control, expected direction, and evidence in advance to prevent rewriting predictions after the fact. Repeatedly using the same evaluation failures and choosing the best score can adapt to that evaluation even without direct n-gram duplication. Only a separate, frozen holdout offers a distinct test of generalization. The local project did not run the eight-H800 training or the paid research campaign and supplies no simulated training metrics.",
+        "example": "If the score increases but the predicted evidence does not appear, report that the hypothesis was not confirmed. Do not revise the earlier prediction to match the outcome."
+      }
+    },
+    "qa/agent-research:athanor/mechanism": {
+      "source_sha256": "c1e54fb9b04583c213883109d6d7ace77a5f095205dcfe22c46eef21aa11dc5b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does an independent training service also need frozen evaluation and checkpoint lineage?",
+        "answer": "Asynchronous experiments produce many combinations of data, algorithms, and stages, which filenames alone cannot identify. Lineage makes parent-child relations traceable, frozen evaluation limits drift as search progresses, and a final held-out set isolates the researcher's selection. A single highest development score can be noise, not evidence of robust capability gains.",
+        "example": "For a model that underwent SFT, merging, and then self-distillation, missing parent checkpoints make it difficult to explain which intervention changed the score or to reproduce the candidate."
+      }
+    },
+    "qa/agent-research:athanor/basics": {
+      "source_sha256": "7716b039cc1f8c0cc7342f8ebc96c0db7f96eb86f1fc0b5325c28a58d79f7bd6",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the role of separating the research agent from the asynchronous training and evaluation service?",
+        "answer": "The agent selects data, algorithms, and stages. The service trains, decontaminates, runs frozen evaluation, and saves checkpoint lineage, connecting proposals to real artifacts. Separation also helps restrict access to the final held-out set. Development scores returned by the service remain noisy and are not the true performance of every proposal.",
+        "example": "After the agent proposes self-distillation, wait for the service to complete and record the new checkpoint and evaluation. A proposal saying 'expected to improve' is not an outcome."
+      }
+    },
+    "qa/agent-research:athanor/comparison": {
+      "source_sha256": "1d79dfb9cf16e616d8d984e08486916c1fa1096e48581d67f9dbf427886969f1",
+      "reviewed": true,
+      "fields": {
+        "question": "If external teachers are prohibited, how does self-distillation differ from using a stronger commercial teacher?",
+        "answer": "Self-distillation uses permitted models and existing data within the system. An external teacher introduces additional capability, cost, and data provenance, violating the research contract. A commercial model may power the research agent, but its answers must not be slipped into training labels. Keep research control separate from supervision of the model being trained.",
+        "example": "A commercial agent may plan the next round, but adding its high-quality solutions directly to the dataset no longer satisfies the no-external-teacher setting."
+      }
+    },
+    "qa/agent-research:athanor/implementation": {
+      "source_sha256": "492ee3e8a3724bfec06af1945fd4b859a92e5caf0cc41d4280af7c3e570d1ff3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't the highest development score found during search serve as the final formal result?",
+        "answer": "Selecting the maximum over repeated proposals on a noisy development set introduces selection bias. Formal comparisons must distinguish the campaign, submitted multi-seed averages, and reevaluation under consistent decoding; the final held-out set is hidden from researchers. The local entry is a literature and cost review only, with no automated research run, model execution, or GPU receipt.",
+        "example": "One chance high score in a hundred evaluations does not establish a checkpoint's expected ability. Freeze selection and reevaluate under an independent protocol."
+      }
+    },
+    "qa/agent-research:torsi/mechanism": {
+      "source_sha256": "6d5e079fc41c80eeaa241402a20aa795b67b6a493a313576da1b1947d8cfa86f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why shouldn't response latency and action age be combined into one metric?",
+        "answer": "Response latency ends when the model returns; action age also includes queuing and applying the action. A live environment keeps changing, so a fast response can still be obsolete when applied. A slow teacher may practice and refine guidance from feedback only between attempts, and independent validation decides whether to replace it. It cannot peek at future live-test states to correct actions.",
+        "example": "The model decides to jump within one second, but the command is queued for another two seconds and the obstacle is already gone. The three-second action age explains the failure better than one-second response latency alone."
+      }
+    },
+    "qa/agent-research:torsi/basics": {
+      "source_sha256": "cef13f557f99d5493409f6dfb7d92ab6b7fb97c79d48fd090ed69234cd72a66e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why might a real-time agent reason better but still act incorrectly because it responds too slowly?",
+        "answer": "The environment keeps changing during inference, so an action based on an old observation can be stale by execution. TORSI studies improving a small execution policy under real-time constraints without putting all high-quality guidance on the online critical path. Account for offline learning and online response separately; static accuracy is not effective action in a live environment.",
+        "example": "A model spends a long time choosing a correct action for a moving target's old position and misses when it acts. Both response speed and observation freshness matter."
+      }
+    },
+    "qa/agent-research:torsi/comparison": {
+      "source_sha256": "7cd7b3d3e020b55f6bf34156ff028cc6a9348507df5900bd526a30b4004784a4",
+      "reviewed": true,
+      "fields": {
+        "question": "How does slow-teacher online takeover differ from TORSI's offline guidance between attempts?",
+        "answer": "Online takeover places the slow model in real-time control, where delay can make its decisions obsolete. TORSI has the slow teacher analyze feedback and practice between attempts; guidance is then frozen and the fast student executes independently. The teacher cannot revise from test data. Guidance is accepted only for strictly positive gains on independent validation, and replay practice is not live execution.",
+        "example": "A teacher can explain a failed tracking run offline. In the next live run, the student must choose actions quickly on its own rather than pausing the world for step-by-step answers."
+      }
+    },
+    "qa/agent-research:torsi/implementation": {
+      "source_sha256": "d10269a79e8d0e9ae4c48d26e773ce2f93d350c11112e54e7bf36c1286645903",
+      "reviewed": true,
+      "fields": {
+        "question": "Does TORSI accept new guidance on a validation tie, and what was tested locally?",
+        "answer": "No. Complete pairs with identical task IDs must show a strictly positive mean gain, and feedback, validation, and test remain separate. Timestamps must be finite and ordered. The local tests cover timing and numeric selection contracts only, with no game engine, Jev, or teacher run. Fixture differences in action age are not improvements in game progress.",
+        "example": "If old and new guidance earn the same validation score, do not replace the old one because the new explanation is longer. Nor can you select it retroactively because its test score was slightly higher."
+      }
+    },
+    "qa/agent-research:harmony-harness/mechanism": {
+      "source_sha256": "a22410004e29f80ee4f47e1e3d77dadaf5c0fabf5c8804b34dfa794978673366",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't min(functional success rate, safety success rate) the joint success rate?",
+        "answer": "The two marginal rates can come from different trajectories. Joint success requires both criteria to be met in the same execution. Multiobjective search uses preferences and neighborhood replacement to maintain trade-offs rather than increasing functional scores by weakening safety. Final selection and held-out reporting sets also need to remain separate, or reporting environments become search feedback.",
+        "example": "In ten executions, eight can be functionally successful and eight safe while their failures do not overlap. Joint success can then be only six, so taking the minimum marginal count of eight overstates it."
+      }
+    },
+    "qa/agent-research:harmony-harness/basics": {
+      "source_sha256": "8ffa7802a507d02e07384ccf55b586b71691737c82d2bbf1559aad67ea637845",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not combine functionality and safety into an unconstrained average first?",
+        "answer": "Better functionality might come from relaxed checks, and an average can let a high functionality score offset serious safety regression. Harmony keeps both objectives and searches through preference subproblems and neighborhood replacement so deployments account for each. It is not a proof of safety against all attacks, and separate marginal rates are not joint success on the same trajectory.",
+        "example": "A trajectory can finish the task while leaking protected data. Mark functional success and safety failure rather than averaging it into a passing result."
+      }
+    },
+    "qa/agent-research:harmony-harness/comparison": {
+      "source_sha256": "b0b9eb1a81b9b96eac41ce59eb5ea8b9670f4da2eb3f1229252919f441840456",
+      "reviewed": true,
+      "fields": {
+        "question": "How does weighted Chebyshev differ from fixed linear weighting when retaining candidates?",
+        "answer": "Chebyshev uses the largest weighted deviation from the ideal point, emphasizing the weakest objective. Different preference vectors maintain separate harnesses; replacements require strict improvement in the neighborhood, with at most two per step. A fixed linear sum can let a large gain on one objective offset losses on another. The selection geometries differ, but both depend on reliable evaluation.",
+        "example": "For a candidate with 90% functional success and 30% safety, maximum deviation highlights the safety weakness, whereas a simple average may still beat a more balanced option."
+      }
+    }
+  }
+}

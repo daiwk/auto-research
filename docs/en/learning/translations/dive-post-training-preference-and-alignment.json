@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/post-training/preference-and-alignment": {
+      "source_sha256": "5b1759198b5c8e36b951ea97af841c91e5e8ababcf85196606216f25aa7603c5",
+      "reviewed": true,
+      "fields": {
+        "title": "Preference is not one score: establish feedback format before choosing an alignment objective",
+        "thesis": "DPO, KTO, SimPO, ORPO, and IPO change how feedback is used; CleanRM first asks whether feedback is reliable. References, length normalization, finite margins, and label-noise corrections are independent axes even if all distinguish better from worse responses.",
+        "axis_0": "Supervision unit: same-prompt pairs, individual desirability labels, or noisy labels",
+        "axis_1": "Reference and scale: reference log-ratio, length average, and odds",
+        "axis_2": "Objective shape: increasing separation, finite margin, or joint SFT and preference",
+        "axis_3": "Source of error: excessive optimization pressure versus noisy labels"
+      }
+    },
+    "dive/post-training/preference-and-alignment/comparison/post-training:dpo": {
+      "source_sha256": "0c73ca449bc05466026e5b2d078dfdfb947bc525dee76cacff18504af442638f",
+      "reviewed": true,
+      "fields": {
+        "position": "Classifies chosen versus rejected answers to the same prompt using log-ratios against a frozen reference, without training a separate reward model.",
+        "tradeoff": "Removes explicit reward-model training and online RL but still requires reliable preference pairs. The local candidate-action loss does not train the original autoregressive LLM."
+      }
+    },
+    "dive/post-training/preference-and-alignment/comparison/post-training:kto": {
+      "source_sha256": "3139deaf26a00c0a323afcdcf90c55da07e7b10c664508710d7552a449b8dc12",
+      "reviewed": true,
+      "fields": {
+        "position": "Uses individual desirable/undesirable feedback and a KL reference point from policy to reference to construct utility.",
+        "tradeoff": "No manufactured same-prompt pairs are needed. Class weights, imbalance, and reference distribution still matter. The local implementation uses a six-candidate linear policy."
+      }
+    },
+    "dive/post-training/preference-and-alignment/comparison/post-training:simpo": {
+      "source_sha256": "6713f51c4f81b3627a21390f971b48f20f117f08fc782ec05c3399c08938a3dc",
+      "reviewed": true,
+      "fields": {
+        "position": "Uses per-token mean policy log-probability as implicit reward with a fixed preference margin, omitting reference forwards.",
+        "tradeoff": "Length scale and preference pressure are explicit. No reference does not mean no feedback. A real token-loss path exists, but original model scale and judge were not reproduced."
+      }
+    },
+    "dive/post-training/preference-and-alignment/comparison/post-training:orpo": {
+      "source_sha256": "344da0b47848e9312441881d53a7641358586a8b280aab1b6bfcfc9e76f0fb8d",
+      "reviewed": true,
+      "fields": {
+        "position": "Combines chosen-answer SFT NLL with a chosen/rejected odds-ratio preference term.",
+        "tradeoff": "One stage trains absolute likelihood and relative preference, but odds have numerical boundaries. Local complete-candidate actions do not reproduce original LM training."
+      }
+    },
+    "dive/post-training/preference-and-alignment/comparison/post-training:ipo": {
+      "source_sha256": "3f968dc17ecd9aed8dadf19c4f85093d39fa38b89caeaa3d2991e76d70a3b452",
+      "reviewed": true,
+      "fields": {
+        "position": "Fits a finite reference-relative preference gap of 1/(2τ) rather than requiring indefinite separation.",
+        "tradeoff": "Overshooting also draws the gap back, changing objective shape. A reduced token-level free-generation path exists, but cannot establish original large-model performance."
+      }
+    },
+    "dive/post-training/preference-and-alignment/comparison/post-training:clean-rm": {
+      "source_sha256": "a674d760ee68683c40124ea9182a611253f0ecb58d19e8b0a650b0a80f252917",
+      "reviewed": true,
+      "fields": {
+        "position": "Uses clean calibration data and joint optimal transport over semantics and recovered preferences to estimate two-way noise, then freezes the estimator to correct reward-model risk.",
+        "tradeoff": "Depends on noise rates and calibration representativeness; do not clip signed losses to zero. Full RM/RLHF was too costly and not reproduced; local evidence is an L1 component."
+      }
+    },
+    "dive/post-training/preference-and-alignment/analysis/0": {
+      "source_sha256": "bf62e02e9829984bbad84bc84dc06f0069878b1fb5da21bf0df1e43c02933610",
+      "reviewed": true,
+      "fields": {
+        "title": "Start from observed data, not labels implied by a fashionable loss",
+        "body": "DPO, SimPO, ORPO, and IPO use relative outcomes between responses to the same question. KTO can use single-answer feedback. Pairing reactions across questions invents an unobserved comparison. CleanRM instead estimates how noisy labels differ from clean preferences and corrects training risk; swapping the preference objective does not do this."
+      }
+    },
+    "dive/post-training/preference-and-alignment/analysis/1": {
+      "source_sha256": "4d13691d7da1b57eb25796f41d7087c44c661373366d99935a53c84ceb33476e",
+      "reviewed": true,
+      "fields": {
+        "title": "Reference-free and less overfitting are separate choices",
+        "body": "SimPO removes the reference but keeps mean token reward and a fixed margin. ORPO combines SFT and odds preference. IPO keeps the reference and fits a finite gap. Analyze memory, length scaling, chosen-text likelihood, and saturation separately rather than collapsing them to one local accuracy number."
+      }
+    },
+    "dive/post-training/preference-and-alignment/question/binary-feedback-versus-pair": {
+      "source_sha256": "455085e0175c8a8a39a8d1f132d3dd89290326f0791ac9dc7b9cf71100ba5d9c",
+      "reviewed": true,
+      "fields": {
+        "question": "Should individual thumbs-up/down feedback be forced into DPO pairs or handled with KTO?",
+        "answer": "Preserve the observed feedback unit. DPO needs a same-prompt comparison; KTO uses individual desirability and a KL reference. Reactions across prompts do not form a preference pair. Collect or reliably construct real same-prompt comparisons before choosing a pairwise loss.",
+        "example": "Teaching example: A thumbs-up on question A and thumbs-down on question B do not say which two answers to A are preferred."
+      }
+    },
+    "dive/post-training/preference-and-alignment/question/reference-free-two-objectives": {
+      "source_sha256": "5c74540749ccbe1c094f76192bfc72a23027b5652c8bed949ddc02815418ca9a",
+      "reviewed": true,
+      "fields": {
+        "question": "Can SimPO and ORPO be interchanged by turning off DPO's reference?",
+        "answer": "No. SimPO compares length-averaged policy log-probabilities against a fixed margin. ORPO also improves chosen likelihood and compares odds. Removing a reference does not supply either definition or equalize length and probability bounds.",
+        "example": "Teaching example: ORPO's chosen NLL independently contributes gradients even when preference separation increases; it is not a SimPO margin."
+      }
+    },
+    "dive/post-training/preference-and-alignment/question/finite-margin-versus-label-cleaning": {
+      "source_sha256": "7950a250195d89a6da3c7fc373b419d6096b431a90267e53f6d0c4e1af345f38",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a finite IPO margin fix a correct answer mislabeled rejected?",
+        "answer": "Not automatically. IPO bounds the target gap but still uses the supplied direction. CleanRM instead estimates noise and corrects risk, contingent on estimator quality. Reduced pressure does not clean labels.",
+        "example": "Teaching example: Making the actually better answer lose by a smaller amount still does not reverse the wrong label."
+      }
+    },
+    "dive/post-training/preference-and-alignment/update/2026-10-27/0": {
+      "source_sha256": "17334f429fd4acb8c18d81359cbdc0d75e659f7689baa0608c8b069a52f63f30",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial edition: compares DPO/KTO feedback units, SimPO/ORPO reference-free objectives, IPO finite margins, and CleanRM noise correction; 25 abstracts reviewed and six papers read closely."
+      }
+    }
+  }
+}

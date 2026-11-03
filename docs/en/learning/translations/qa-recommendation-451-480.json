@@ -1,0 +1,275 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:harmonrank/mechanism": {
+      "source_sha256": "64fbc266a67a2cce36e091582417688ff12b0a7fc2829a9247617213a4799033",
+      "reviewed": true,
+      "fields": {
+        "question": "Why align task ranks before fusing raw predicted probabilities in HarmonRank?",
+        "answer": "Different base rates and scales make raw fusion sensitive to calibration and sparsity. Differentiable rank-sum learns within-task order; inter-task attention models dependencies such as purchases and comments before unified ranking. Rank alignment discards magnitude and is not a general probability calibrator.",
+        "example": "Purchase probabilities are much smaller than click probabilities; ranking candidates within each task reduces raw-scale dominance."
+      }
+    },
+    "qa/recommendation:harmonrank/basics": {
+      "source_sha256": "c0275006e0cca0afb9f3199248ef5d497b90104863f9abdd05d0cd1239469856",
+      "reviewed": true,
+      "fields": {
+        "question": "Why move from classification scores to rank relationships in HarmonRank?",
+        "answer": "Different target base rates and scales can dominate arithmetic fusion. Differentiable rank-sum/AUC first emphasizes each task's internal order, then learns task dependencies. Ranking loses absolute value magnitude rather than preserving every business unit.",
+        "example": "A purchase score can be numerically tiny but still rank items meaningfully, without saying how much more value one brings."
+      }
+    },
+    "qa/recommendation:harmonrank/comparison": {
+      "source_sha256": "6af6352c16913967a885a18e78047edfd10d3e5591870671c9e10bbd0b1fbed4",
+      "reviewed": true,
+      "fields": {
+        "question": "How does inter-objective self-attention handle conflicts differently from fixed fusion?",
+        "answer": "Fixed coefficients impose a global trade-off. Attention learns dependencies and conditional combinations, increasing flexibility but risking domination by frequent objectives. Check by task and example; the local negative result does not establish quality benefits.",
+        "example": "A highly clicked but rarely purchased item can be treated differently from one high on both, instead of applying the same 7:3 ratio."
+      }
+    },
+    "qa/recommendation:harmonrank/implementation": {
+      "source_sha256": "9bbcbc7de61d6f5bd76bce39b3c87a89c5d38c64c5bb68d4264d3903e0cd0291",
+      "reviewed": true,
+      "fields": {
+        "question": "Why require both classes and identify invalid tasks in a soft-AUC batch?",
+        "answer": "AUC needs comparable positive-negative pairs; one-class slices must be masked or reported not estimable, not scored as perfect. Align candidate IDs across tasks. Temperature and sampling affect the differentiable approximation and its gradients, not actual full-data AUC.",
+        "example": "An all-zero purchase batch has no pairs and must not send a perfect score into task fusion."
+      }
+    },
+    "qa/recommendation:harness-lm/mechanism": {
+      "source_sha256": "2264c4290bcd05bbe913e868be84c1e3d3e4d3ee7a0bf6a947dafa76faf8b713",
+      "reviewed": true,
+      "fields": {
+        "question": "Why freeze the strong document tower during HARNESS-LM refinement and train only the small query encoder?",
+        "answer": "Document vectors can be precomputed; query encoding is latency-sensitive. Align the small tower to the teacher query space, then contrastively refine in the fixed document space to avoid index drift and costly rebuilds. Freezing limits adaptation and does not guarantee teacher quality.",
+        "example": "A student searches an existing million-ad coordinate system instead of changing it and invalidating the index."
+      }
+    },
+    "qa/recommendation:harness-lm/basics": {
+      "source_sha256": "7488efbfb747fee9962a8089edfad31e2f8ece942f54a0939ffd9ad45e3a01f3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can HARNESS-LM use a large offline document encoder and a small online query encoder?",
+        "answer": "Document work is amortized through reuse, while live queries are encoded on demand. Align the student query space, then refine against frozen documents. A smaller student can still lose complex intent distinctions.",
+        "example": "Precompute a million ad vectors overnight while processing each live query in milliseconds."
+      }
+    },
+    "qa/recommendation:harness-lm/comparison": {
+      "source_sha256": "14301ee1a5a33f2a274f8b887f61c84f383a7aa0db5ad986634a0e1f2e6dbba6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are HARNESS-LM L2 alignment and subsequent InfoNCE refinement not redundant?",
+        "answer": "L2 initializes query coordinates close to the teacher; InfoNCE directly distinguishes relevant from competing fixed documents rather than minimizing coordinate error. Local loss convergence alongside retrieval regression shows that these are distinct signals.",
+        "example": "A vector closer to the teacher can still misorder similar ads; contrastive refinement explicitly compares them."
+      }
+    },
+    "qa/recommendation:harness-lm/implementation": {
+      "source_sha256": "fc0eb85d4dafaedbe3201758cb6e4ee7215119f8a3ae3179477d34053fea99d6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why verify no teacher document gradients during HARNESS-LM refinement?",
+        "answer": "A frozen document tower preserves the existing index while the student adapts. Changing documents invalidates the no-rebuild contract. Check gradients or parameter fingerprints rather than optimizer names, and do not infer online index deployment from alignment.",
+        "example": "After one step query parameters may change but document parameters must not; moving document vectors breaks an old index."
+      }
+    },
+    "qa/recommendation:hcub/mechanism": {
+      "source_sha256": "cebdeb30912b1e2a2aa509ef5da17f1c1bd36a2e693950783d8a46eb31c20860",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does HCUB inherit parent rewards in sparse contexts while preserving exploration?",
+        "answer": "Fine-grained estimates have high variance. Parent rewards give a stable starting point, and local data gradually gain weight. Choose by incremental value plus uncertainty to avoid early lock-in. Hierarchical sharing can mask minorities, so do not replace all local evidence with parent averages.",
+        "example": "A sparse device group borrows regional experience until feedback reveals its own preferences, with exploration helping discover that difference."
+      }
+    },
+    "qa/recommendation:hcub/basics": {
+      "source_sha256": "5d6694671219f60c50b4aba4c2598c1ce6e66e73809b21ac2214ac6ede700d92",
+      "reviewed": true,
+      "fields": {
+        "question": "Why choose context-tree granularity dynamically in HCUB?",
+        "answer": "Fine nodes are relevant but sparse; parents are better sampled but coarse. Reward inheritance handles cold starts and yields to local data. Tree design and mixing affect bias, so more partitions do not ensure accuracy.",
+        "example": "Borrow a parent estimate after two events, then rely more on the child after 100 observations."
+      }
+    },
+    "qa/recommendation:hcub/comparison": {
+      "source_sha256": "ba3ad1565a1991599dc2dbdd2dc70dbe7e254488100a712053656a5a098e9709",
+      "reviewed": true,
+      "fields": {
+        "question": "How does HCUB incremental reward plus UCB differ from greedy absolute CTR?",
+        "answer": "Increment measures change relative to a reference, and the exploration bonus addresses uncertainty. CTR greedy favors already responsive groups. Increment needs suitable causal data; confidence bonuses are not identification, and movie proxies do not establish interventions.",
+        "example": "An active group might click anyway, while a less active group may respond more to the action."
+      }
+    },
+    "qa/recommendation:hcub/implementation": {
+      "source_sha256": "84646124058a9c6ececfb2b405cb003eef4b6c408e054428de468db4b8cec1e3",
+      "reviewed": true,
+      "fields": {
+        "question": "How should HCUB avoid propagating one sparse child's feedback to every node?",
+        "answer": "Define local statistics and parent prior update scopes. Reading a mixture does not copy one outcome across the tree. Use defined η and uncertainty, retain action identities, and do not invent failures for unobserved arms.",
+        "example": "Update a child's observed success and permitted ancestor aggregates without marking every sibling as a success."
+      }
+    },
+    "qa/recommendation:helix/mechanism": {
+      "source_sha256": "a824b53af07388367dd46397ee3580f7952eb82f8fc4eee5f8dcc406795bf513",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does HELIX forbid candidate tokens from writing back to shared sequence state?",
+        "answer": "One-way dependence keeps expensive user-history encoding candidate-independent and reusable within a request while candidates repeatedly read it for deep interaction. Writes back would make history candidate-dependent. Local checks cover sensitivity and cache invariance, not production throughput or gains.",
+        "example": "A shoe can reuse the history read by a camera only if the camera did not modify that state."
+      }
+    },
+    "qa/recommendation:helix/basics": {
+      "source_sha256": "7b30b9fb01a759cff8dc9fd534a3a347d4c9f05484962a4eaf0f3a83dce9f135",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does HELIX expand both sequence modeling and heterogeneous feature interaction?",
+        "answer": "History and feature combinations supply distinct information. Interleaved modules let candidate states read history at multiple depths while preserving user-only state. This is not late concatenation, and caching constrains direction.",
+        "example": "Layers can combine travel history with price and device features; enlarging either path alone cannot provide the other's evidence."
+      }
+    },
+    "qa/recommendation:helix/comparison": {
+      "source_sha256": "d2562b15e6eb2b92f5a4b00cdcff37d7b2a8bb8b8412c7902bf555859fef2d58",
+      "reviewed": true,
+      "fields": {
+        "question": "How do HELIX one-way communication and WHALE-style bidirectional exchange differ in cacheability?",
+        "answer": "HELIX blocks candidate-conditioned writes into public sequence state. Bidirectional exchange allows deeper co-evolution but creates candidate dependence. Both can use cross-attention without equivalent dependencies, and no universal quality ordering follows.",
+        "example": "After a camera reads shared history, shoes can read the same cache only if the camera state never wrote back."
+      }
+    },
+    "qa/recommendation:helix/implementation": {
+      "source_sha256": "cbc6fadf4ba7e4cc661a993e2524f32a57dde43ca4b93291a6fe944f30913fd8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check candidate deltas, invariant user caches, and finite gradients in HELIX?",
+        "answer": "Candidate changes should alter scores without changing public user state. Missing either indicates ignored candidates or cache pollution; finite loss and gradients test trainability. These are diagnostics, not quality metrics.",
+        "example": "Identical scores suggest candidate insensitivity; changing scores and cache together breaks sharing despite successful forward execution."
+      }
+    },
+    "qa/recommendation:hge/mechanism": {
+      "source_sha256": "aa7dfa36a88b68166d1bba37ecedffc6f3b049c81390094f11ae7c3a3710add6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does HGE separately predict container conversion, conditional item purchases, and quantities instead of one store GMV?",
+        "answer": "Aggregate GMV is sparse and noisy. Decompose transaction probability and conditional item contributions, with residuals for top-K omissions. Items are not mutually exclusive, and the fusion gate uses context rather than realized conversion.",
+        "example": "A shopper can buy two inexpensive items or one expensive item; one categorical choice cannot represent both patterns."
+      }
+    },
+    "qa/recommendation:hge/basics": {
+      "source_sha256": "82d01c997110a4d05c78c0916df7f1f09821af4e48a036e67452496cab7632aa",
+      "reviewed": true,
+      "fields": {
+        "question": "Are HGE's top-K items the displayed recommendations or inputs within one container?",
+        "answer": "They are item inputs for each candidate store or room. Set attention models internal relations and combines user/query context to score the container. Top-K is partial inventory, not a list of K stores or item outputs.",
+        "example": "Three internal products from each of two stores yield six encoded items but only two store scores."
+      }
+    },
+    "qa/recommendation:hge/comparison": {
+      "source_sha256": "0c7cbc1a030299c538bdb86b005eb4864d9824f6eadfc1a8c32eae8bce400d11",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do HGE item sigmoid and mutually exclusive softmax imply different business assumptions?",
+        "answer": "A transaction can contain multiple items, so independent sigmoid scores can all be high. Softmax forces one distribution with a fixed sum and changes basket semantics. Quantity is a distinct head.",
+        "example": "Buying coffee and bread together should not require the probability of bread to fall when coffee increases."
+      }
+    },
+    "qa/recommendation:hge/implementation": {
+      "source_sha256": "687598a2aba54a9da1c9eaab150fd8478d556dc1261d6e01ed70e33537914e20",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must HGE not select residual and fusion branches using realized conversion?",
+        "answer": "Residuals can correct over- and underestimation and need not be nonnegative. Predict gates from pre-impression context, not observed transaction labels. The component lacks full multitask training, and differentiating squared output is a gradient diagnostic only.",
+        "example": "Using the decomposition only after learning a store converted leaks the answer and inflates test results."
+      }
+    },
+    "qa/recommendation:higr/mechanism": {
+      "source_sha256": "d55d2bd807964c527a6f685ba79be731a85c0831eb0e5297b7299b1df7ee1ebc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does HiGR need whole-page preference alignment after choosing semantic clusters then items?",
+        "answer": "Hierarchical codes make identification easier but individual relevance does not ensure useful order or complementarity. The Hierarchical Slate Decoder generates coarse-to-fine choices; ORPO reshapes combinations from preferred and rejected pages. Evaluated preferences do not guarantee long-tail or utility gains.",
+        "example": "Sports clusters can yield only near-duplicate shoes; page preferences can add socks or training content."
+      }
+    },
+    "qa/recommendation:higr/basics": {
+      "source_sha256": "71aa48b9a0e034229884f64fb072d883a82ca8fff7ee75ee5f89c8ca58e6fd87",
+      "reviewed": true,
+      "fields": {
+        "question": "Why choose semantic clusters before items in HiGR's page generation?",
+        "answer": "Hierarchy divides a large space into coarse interests and precise identities, enabling composition across groups. Wrong coarse codes restrict later candidates, and apparent diversity does not prove relevance. Evaluate both quantization and whole-page utility.",
+        "example": "Choose tutorial, tool, and example groups before specific items, while recognizing a wrong entertainment branch can remain diverse but irrelevant."
+      }
+    },
+    "qa/recommendation:higr/comparison": {
+      "source_sha256": "1cd0cb559129e61f3e58fe932a1a2a53c946b9c12260f227b3d563d9ee9bb56f",
+      "reviewed": true,
+      "fields": {
+        "question": "How does HiGR ORPO preference evidence differ from page-level SFT?",
+        "answer": "SFT imitates positive pages. ORPO compares preferred and rejected page odds to teach relative composition. Preference and quantization biases remain, and local NDCG declined; report it with head-share changes instead of declaring overall improvement.",
+        "example": "An equally relevant but more complementary page can beat a repetitive one; a winner-only target provides no explicit relative signal."
+      }
+    },
+    "qa/recommendation:higr/implementation": {
+      "source_sha256": "091c80942bac5bfccce51a041827cfcd11c7f3eec95bc73a4c5ef51f11454a9c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why define HiGR sequence probabilities and numerical boundaries before calculating log odds?",
+        "answer": "Page probability is a product of conditional token probabilities and can underflow; use stable log-space arithmetic for both the joint and its complement. Arbitrary scores are not probabilities. Match hierarchical mappings and repetition constraints to page identity.",
+        "example": "Taking logs after a long-page probability rounded to zero fails; silently replacing the sequence probability with a length average changes the objective."
+      }
+    },
+    "qa/recommendation:hill-index/mechanism": {
+      "source_sha256": "a728f96cad32dbe3edbff1121c512b4e583013ba4f325e6e1e4ea3d62bf8e7f1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does HILL train index nodes with users and interaction towers instead of only clustering item vectors?",
+        "answer": "Pure item geometry may not match an interaction model's choices. Train node proxies in user–item scoring and let deeper residuals recover information missed above. Beam search can still omit paths; isolated test answers cannot guide any test-time updates or selection.",
+        "example": "Similar products may serve different users, so interaction-informed nodes can organize them better than content proximity alone."
+      }
+    },
+    "qa/recommendation:hill-index/basics": {
+      "source_sha256": "4e2d989dede98fd31f542256ce9db9a21c5afe7b61f345a288a384706ae0b760",
+      "reviewed": true,
+      "fields": {
+        "question": "Why involve user and interaction signals in HILL index-node training?",
+        "answer": "ANN organizes item neighbors geometrically, which may disagree with complex relevance. Scoring pseudo-items with users transfers retrieval relations to the tree before narrowing candidates. Training, tree versions, and serving need to stay aligned.",
+        "example": "Two content neighbors with different audiences can be organized by recommendation value, not just item distance."
+      }
+    },
+    "qa/recommendation:hill-index/comparison": {
+      "source_sha256": "2e754cb5e23679024761ce8677f7946481ec8704e023aba59c6fd991e695f2cd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can HILL residual layers complement each other instead of repeating raw-vector clustering?",
+        "answer": "Each layer quantizes the prior layer's unexplained residual, while repeated clustering can relearn dominant directions. Complementarity is not guaranteed and beam budgets can miss items. Local compression worked but quality regressed; fewer candidates are not automatically better.",
+        "example": "After a coarse electronics node, residuals can express use and price rather than repeatedly learning the broad theme."
+      }
+    },
+    "qa/recommendation:hill-index/implementation": {
+      "source_sha256": "7cbb879193ee2602eea369fbd682d1831f6e959ad9568a15a6e5b8f3a7f4060e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why validate HILL soft assignments and hierarchical beam separately?",
+        "answer": "Continuous training assignments create pseudo-items and gradients; serving explores a limited discrete tree. Check normalization, residual updates, parent-child mapping, and actual budgets independently, including small-catalog variance. Good reconstruction does not establish beam coverage.",
+        "example": "A target can receive small mass from several soft nodes and be absent from every retained hard branch."
+      }
+    },
+    "qa/recommendation:hisac/mechanism": {
+      "source_sha256": "704beb5b215b2b30229e2d9dab0f948841e582c6cc9938315686c1a7a1551511",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does HiSAC form hierarchical interest agents and route each query to only a few?",
+        "answer": "Full-history attention is expensive and one summary can lose long-tail interests. Hierarchical codes and voting create personalized compressed units; queries read only relevant ones. These are not autonomous LLMs, and routing cannot recover interests lost in compression or assignment.",
+        "example": "For lenses, read the photography agent rather than cooking or cycling; discarded astrophotography evidence remains unavailable."
+      }
+    },
+    "qa/recommendation:hisac/basics": {
+      "source_sha256": "98b5215038f97d91b091e0c8879b115cfc23f17e7a4f9fa2b08d43770822a6bc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why aren't HiSAC interest agents a group of live language agents?",
+        "answer": "Each is a representation aggregated from hierarchical codes and behavior. Quantization, voting, routing, and weighting operate over related nodes without independent LLM calls. The name describes structure, not agent reasoning or serving cost.",
+        "example": "Photography and camping agents can be two vectors; selecting one needs no inter-agent messages or generated text."
+      }
+    }
+  }
+}

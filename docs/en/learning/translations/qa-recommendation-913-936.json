@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:real-estate-rerank/comparison": {
+      "source_sha256": "70bae58a9fd4d42f75bab800f51981ff96836a159eb1947afb4a301cca7f3343",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't LLM relative reranking replace vector retrieval, or vice versa?",
+        "answer": "Retrieval cheaply builds a pool from a large catalog but can miss complex needs. LLM reranking compares a small pool in detail but cannot choose absent items. Set conditioning adds cost; local movies lack real dialogue and housing constraints.",
+        "example": "Illustration: If the best school-and-commute match misses the top 100, reranking explanations cannot restore it."
+      }
+    },
+    "qa/recommendation:real-estate-rerank/implementation": {
+      "source_sha256": "0777ffa0fe369dfa98496dfbead498e00d0b3e4687e99a2086a3f034056eacfa",
+      "reviewed": true,
+      "fields": {
+        "question": "Why recompute Agg(X) whenever a real-estate candidate set changes?",
+        "answer": "It summarizes the current pool. Adding or removing listings changes relative budget and feasible options. Align structured fields and descriptions by identity and never choose candidates by real transaction labels. A local pointwise scorer is not full conversational reranking.",
+        "example": "Illustration: An initially cheap listing may cease to look cheap after adding lower-priced homes. The old mean misrepresents context."
+      }
+    },
+    "qa/recommendation:rec-distill/mechanism": {
+      "source_sha256": "a26d5d304977383357d681d43eac608e913a20efe86f97784021927bcaccd610",
+      "reviewed": true,
+      "fields": {
+        "question": "Why correct Rec-Distill teacher sampling probabilities and distill into an auxiliary tower rather than the serving main tower?",
+        "answer": "Different sampling makes logits represent different probabilities. Correct to the student convention, then train aux on labels and distillation while transferring through shared layers. Main only uses true labels and serves, reducing direct calibration distortion. Teacher quality and freshness still matter.",
+        "example": "Illustration: A teacher downsampling negatives more aggressively cannot supply raw click probabilities unchanged. Correct it and give soft supervision to aux."
+      }
+    },
+    "qa/recommendation:rec-distill/basics": {
+      "source_sha256": "999280be714d089e94613c2fd1add0f86a12b397a6ec7c720667ecc58ef3dfee",
+      "reviewed": true,
+      "fields": {
+        "question": "Why asynchronously share black-box teacher logits across Rec-Distill students?",
+        "answer": "Running a large teacher for every student call is expensive. Reuse outputs generated during training and let students consume them on separate schedules. Sampling and freshness still need calibration and versioning. Black-box exchange reduces coupling but hides intermediate teacher states.",
+        "example": "Illustration: Two small models can consume one batch of teacher scores without running the teacher themselves, provided sample and version provenance are known."
+      }
+    },
+    "qa/recommendation:rec-distill/comparison": {
+      "source_sha256": "5b1c384ee496e5bf9cd43c6d865f4e418963cee6c0c7b2e6a3d402bdb9e7698c",
+      "reviewed": true,
+      "fields": {
+        "question": "What does main/aux distillation protect versus directly fitting serving main to the teacher?",
+        "answer": "Main keeps the real-label objective, while aux learns both real and teacher labels and transfers indirectly through the shared backbone. This reduces direct calibration bias but is not full isolation. The strong local teacher still transferred negatively.",
+        "example": "Illustration: Aux can learn relative knowledge while main fits clicks; fitting uncorrected probabilities directly can copy the wrong baseline."
+      }
+    },
+    "qa/recommendation:rec-distill/implementation": {
+      "source_sha256": "6d8a57bb0bf666f44d02b6d1790a4889732b804bf45142b60a67d7b193177c9e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why report raw student and teacher metrics when the Rec-Distill transferability denominator is small?",
+        "answer": "η is student distillation gain divided by available teacher gain. Near zero, it is unstable. Teacher is not a serving baseline and arms need matching schedules and candidates. Report negative transfer instead of reframing lower head share as success.",
+        "example": "Illustration: Tiny student changes can yield large ratios when the teacher barely exceeds the student. Show all three raw metrics."
+      }
+    },
+    "qa/recommendation:recap/mechanism": {
+      "source_sha256": "09ab080cf11ca7c7a8224b55a60fd118c7c8fc123389a051fd280f3b1ae47ca5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate RECAP LLM semantic edits and deterministic lifecycle management, then train from recommendation feedback?",
+        "answer": "The LLM interprets new behavior but cannot guarantee capacity, merging, or eviction. A state machine enforces lifecycle while the LLM edits semantics. An evaluator rewards usefulness for future behavior instead of summary resemblance. Proxy bias can still be amplified.",
+        "example": "Illustration: Update running to cycling after new behavior and let rules evict stale entries; reward better prediction of later cycling."
+      }
+    },
+    "qa/recommendation:recap/basics": {
+      "source_sha256": "2eebfc8f7a300201eca8ec9f76ee699102874bd760a505d0a29300a8ba5b3adc",
+      "reviewed": true,
+      "fields": {
+        "question": "Are RECAP's LLM judge and two-tower evaluator the same role?",
+        "answer": "No. The judge screens behavior pairs for label consistency to create training data. The two-tower evaluator learns profile–behavior matching and provides update rewards. Either can be wrong and neither is true user satisfaction.",
+        "example": "Illustration: A judge can approve a pair, but saying 'good' does not train a deployable two-tower reward model."
+      }
+    },
+    "qa/recommendation:recap/comparison": {
+      "source_sha256": "67680ecc992e09a39d809df069b5bba040a9e952d4069ba4c301ecf1c9090baa",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can closed-loop RECAP GRPO increase reward while test ranking falls relative to open-loop SFT?",
+        "answer": "SFT imitates updates, whereas GRPO optimizes evaluator preferences. If the proxy diverges from true next-item behavior, optimizing it can hurt generalization. This happened locally. Use independent evaluation plus reference, format, and diversity constraints.",
+        "example": "Illustration: A judge that likes detailed interests can reward verbosity while the user's main need gets diluted."
+      }
+    },
+    "qa/recommendation:recap/implementation": {
+      "source_sha256": "dfa9b2580129970294ff0ccbc2549cf554ab5b39c7eb93f0570f6fdf5dfb22d9",
+      "reviewed": true,
+      "fields": {
+        "question": "Who should enforce RECAP capacity |Pt|≤C, and why isn't a prompt sufficient?",
+        "answer": "A deterministic state machine enforces lifecycle, merges, and evictions after validating LLM output. Bind updates, evidence, and rewards to the same round and exclude future targets. Expose invalid format and overflow rather than silently masking failure.",
+        "example": "Illustration: If seven entries arrive for capacity four, reject or merge by rule and log it; silent truncation does not prove compliance."
+      }
+    },
+    "qa/recommendation:recap-ctr/mechanism": {
+      "source_sha256": "a60407362b769cd58b0e2e0d67fd6639a7e0ca9a0e5c171fbff59085cb443a0c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why share recursive blocks in RECAP-CTR yet average routes and retain a training-trajectory EMA?",
+        "answer": "Different routes through shared blocks produce multiple logits without independent models. Averaging reduces route fluctuations; EMA smooths weights over training time. Correlated routes limit benefit. Local evidence verifies state and operator invariants only.",
+        "example": "Illustration: Two recursive routes yield slightly different click scores; average those while separately smoothing neighboring training checkpoints."
+      }
+    },
+    "qa/recommendation:recap-ctr/basics": {
+      "source_sha256": "09c26317bf1d625174a4a04cc3905c69ec50685686d7d81d3124c44bb2f80286",
+      "reviewed": true,
+      "fields": {
+        "question": "Is averaging RECAP-CTR route logits equivalent to averaging click probabilities?",
+        "answer": "No. Sigmoid is nonlinear. The source averages logits first, which does not turn shared routes into independent complete models.",
+        "example": "Illustration: With logits 0 and 4, sigmoid of their mean is about 0.88; mean sigmoid is about 0.74."
+      }
+    },
+    "qa/recommendation:recap-ctr/comparison": {
+      "source_sha256": "33dadd4a342eb56fe86a9b9486935864245496177c15d6948cb1250f9c9d899f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't route averaging replace trajectory EMA in RECAP-CTR?",
+        "answer": "Route averaging combines simultaneous outputs; EMA smooths parameters over time. Shared routes can remain correlated and EMA can lag drift. Local invariants do not show CTR lift from smoothing.",
+        "example": "Illustration: All routes can share a high bias, and EMA can smooth an unusual step without adding a missing feature."
+      }
+    },
+    "qa/recommendation:recap-ctr/implementation": {
+      "source_sha256": "357dfa7be546238eef74fcc053cd9a2e2f751f6df303b5325910728cc7290ba1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why checkpoint RECAP-CTR EMA state separately?",
+        "answer": "EMA accumulates parameter history across steps, so losing it changes the estimator on resume. Match route count and averaging denominator rather than treating missing routes as zero. Verify recurrence, EMA updates, and export separately.",
+        "example": "Illustration: Resetting EMA to current parameters after interruption loses thousands of smoothed steps even if training resumes."
+      }
+    },
+    "qa/recommendation:recevolve/mechanism": {
+      "source_sha256": "c10181d41e4be0b36e59e0e3f3694656391b3131805b764bab63f9c49a1bd7e7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why put gates, independent validation, and rollback outside the RecEvolve research agent?",
+        "answer": "Agents can propose useful mutations or exploit a metric. External gates reject invalid candidates, then independent validation compares against the champion. Atomically promote only evidence-backed gains; otherwise retain the incumbent and record failure. Keep test out of the search loop.",
+        "example": "Illustration: Reject an illegally sharp low-temperature candidate; keep the champion if another candidate runs but scores worse on validation."
+      }
+    },
+    "qa/recommendation:recevolve/basics": {
+      "source_sha256": "9fa6565190eb039a80a9e1d14e6f33bdbcf30e952d460e141b5985f8e8aff3c6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why aren't RecEvolve's knowledge base and runnable model artifacts interchangeable?",
+        "answer": "The knowledge base stores proposals, protocols, findings, and failures for later choices. Artifacts store parameters and configuration for execution. Promotion evidence must link to the specific runnable version.",
+        "example": "Illustration: 'The content branch won' cannot be rerun without config, and bare weights do not show how they beat the champion."
+      }
+    },
+    "qa/recommendation:recevolve/comparison": {
+      "source_sha256": "c0f69f2aab84ca925b2cc53fc5e679b481bd844bd9c6e41414f3e265077c3c4c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can an external critic gate reduce metric gaming compared with agent self-evaluation?",
+        "answer": "Self-review can favor proposals or shortcuts. An executable external gate fixes allowable changes and independent validation decides promotion. It governs evidence, not innovation, and test cannot feed routine search.",
+        "example": "Illustration: Reject an extreme temperature by a fixed constraint rather than accept the agent's assurance it did not cheat."
+      }
+    },
+    "qa/recommendation:recevolve/implementation": {
+      "source_sha256": "f771e4d7a7ef1703feba597b3d67bb0f858d83184ead41b41176a9d20d97e5f8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why finish validation artifacts before atomically updating the RecEvolve champion pointer?",
+        "answer": "Incomplete training, missing metrics, and interrupted writes must not overwrite a working incumbent. Verify terminal state and J before switching the pointer. No promotion is a valid outcome, and small local effects do not establish online gains.",
+        "example": "Illustration: A half-written checkpoint should leave the champion pointing to the old complete model."
+      }
+    },
+    "qa/recommendation:recgpt-mobile/mechanism": {
+      "source_sha256": "d6da9520c9d3593fc19e7319792312afb631a8c9d86c2e9096d51389fb36fca5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why regenerate RecGPT-Mobile queries only when joint drift passes a threshold?",
+        "answer": "On-device inference still costs battery and time. Entropy, overlap, and divergence test meaningful intent changes, and a prompt budget limits per-call cost. The device converts behavior to intent and the server retrieves; gating may miss subtle important shifts.",
+        "example": "Illustration: Repeated shoe views need not trigger repeatedly, while switching to baby products can trigger a new server query."
+      }
+    },
+    "qa/recommendation:recgpt-mobile/basics": {
+      "source_sha256": "6e772d9f9dd6445ceac7c1e7e4d5623759e0b6eea9eaa5ba6f8381c4cfbcb149",
+      "reviewed": true,
+      "fields": {
+        "question": "Why run behavior-to-query on-device but keep RecGPT-Mobile retrieval server-side?",
+        "answer": "Local context can generate a query with a small quantized model without sending raw history. The server maintains the large catalog. Devices still pay energy, compute, and updates. Privacy depends on actual transmission, not the label on-device.",
+        "example": "Illustration: Send a camping-light query, not the browsing log that generated it."
+      }
+    },
+    "qa/recommendation:recgpt-mobile/comparison": {
+      "source_sha256": "c82d41e96b6318ad4299a6735a307a8222c244d3cea6ab95e0fa724c828ee148",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are INT8 storage reduction and INT8 inference speed distinct evidence?",
+        "answer": "Eight-bit serialization reduces file size; dequantizing to float kernels can leave runtime unchanged or slower. True quantized compute needs supported hardware and operators. The Mac did not enable INT8 linear, so half storage is not half latency.",
+        "example": "Illustration: A compressed file saves transfer while unpacking and generation still take time."
+      }
+    },
+    "qa/recommendation:recgpt-mobile/implementation": {
+      "source_sha256": "21ccc159d2a4a2462a8450b916deb600369e5fa662b609be20e5b70ad4ce2799",
+      "reviewed": true,
+      "fields": {
+        "question": "How verify RecGPT-Mobile's prompt budget and drift trigger separately?",
+        "answer": "Select components by marginal gain within a token cap, and trigger by entropy, Jaccard, and JS changes. These govern per-call cost and call frequency. Future test queries cannot choose either. Small-sample semantic accuracy is not device interaction success.",
+        "example": "Illustration: A needed refresh does not permit an unlimited prompt; even a short prompt need not be recomputed if intent is stable."
+      }
+    },
+    "qa/recommendation:recgpt-v2/mechanism": {
+      "source_sha256": "64311e3c070cab689eb529a633e2eb0480f50f601a78fffc62debff41f286c59",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use hierarchical agents and dynamic meta-prompts rather than several fixed reasoning chains in RecGPT-V2?",
+        "answer": "Fixed chains can repeat interests and ignore context. Hierarchical agents separate intents, compress behavior, and construct task-specific prompts so paths specialize. Rewards and judges help refine outputs, but agent count does not ensure independent knowledge; check repetition, bias, and cost.",
+        "example": "Illustration: Extract travel and photography needs separately instead of repeating 'likes photography' across three templates."
+      }
+    },
+    "qa/recommendation:recgpt-v2/basics": {
+      "source_sha256": "65989e11f01d91805cca2a015ce14131a9304e54ae29f82d86f249dd5b6af094",
+      "reviewed": true,
+      "fields": {
+        "question": "Which RecGPT-V2 inputs are evidence and which are reasoning instructions?",
+        "answer": "Compressed behavior summarizes observations; the meta-prompt specifies how to use them. Instructions can shift attention but cannot create facts or recover lost evidence reliably. Preserve this boundary across agents.",
+        "example": "Illustration: Use 'prioritize discovery' or 'prioritize practical choices' on the same history without inventing a diving trip."
+      }
+    }
+  }
+}

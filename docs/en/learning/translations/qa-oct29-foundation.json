@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:rescom/basics": {
+      "source_sha256": "8e91dbf9f7a558367f65c4fa61784dc84c93ec3bc1d58479b11f4879e8f013cf",
+      "reviewed": true,
+      "fields": {
+        "question": "How can a quantized model recover information from the current activation's rounding residual?",
+        "answer": "Quantization maps a range of continuous inputs to one grid value. The forward pass can access both pre-rounding and rounded activations, so their difference retains information the quantized value lost. ResCom reads that residual through a fixed low-rank branch rather than retraining the quantizer.",
+        "example": "Example: 1.01 and 1.04 both round to 1.0. Residuals of 0.01 and 0.04 let compensation differ. This is not a model accuracy result."
+      }
+    },
+    "qa/foundation-models:rescom/mechanism": {
+      "source_sha256": "1322d6eb7ecb921e6ce4f7d4bc61441fdfc6f35416e0e95a4911c737c8fdce4f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does ResCom decompose whitened output cross-statistics rather than truncate the original weights?",
+        "answer": "Rank should go to residual directions that occur on calibration data and affect outputs. The Gram matrix measures residual scale and correlations; error–residual cross-statistics measure output impact. Cholesky whitening then truncated SVD solves a ridge-regularized output-reconstruction objective. Direct weight truncation ignores residual distribution and solves a different problem.",
+        "example": "Example: A large residual may have little output effect while a small one is amplified. Allocate rank by output error, not residual size alone."
+      }
+    },
+    "qa/foundation-models:rescom/comparison": {
+      "source_sha256": "5fbc1c624be2bbe517752010f9269d1eb6f3d1120d7b0e9924ff208eabdf5761",
+      "reviewed": true,
+      "fields": {
+        "question": "What changes when a low-rank branch sees rounding residuals rather than quantized input?",
+        "answer": "A branch reading quantized input cannot distinguish two inputs on the same grid point. A residual branch reads the discarded component. ResCom leaves the original path frozen, unlike approaches that remove high-precision weights before quantizing the remainder.",
+        "example": "Example: Removing weights before quantization changes calibration; adding UVd+b beside a frozen path does not change its quantization settings."
+      }
+    },
+    "qa/foundation-models:rescom/implementation": {
+      "source_sha256": "4af1d72f45e72a70912d93816b640039a91956312c9f77dae349965f198b6efa",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not attach each layer's compensation as soon as its statistics are collected?",
+        "answer": "Early compensation changes the activations at later layers, so statistics no longer describe the same frozen model. Collect every target layer first, then install branches. Streaming merges only data from the same frozen mapping. G and C are sums: averaging without adjusting ridge changes the solution.",
+        "example": "Example: Doubling samples doubles G and C, changing a fixed ridge's relative strength. Dividing them by sample count is a different objective unless ridge is adjusted."
+      }
+    },
+    "qa/foundation-models:select-ttt/basics": {
+      "source_sha256": "78b831edd771b34bdf179813eb796becbf863132cb10f81b28cb76ba8a994111",
+      "reviewed": true,
+      "fields": {
+        "question": "Does Select-TTT change retrieval or the strength of writes to fast weights?",
+        "answer": "It keeps In-Place TTT chunk writes and scales each chunk's learning rate with question relevance. Scores come from question-token negative log probabilities under the frozen LM head. It neither trains a retriever nor discards all low-scoring chunks. Different questions can induce different multipliers.",
+        "example": "Example: A long conversation may favor different passages for a moving date and food preferences, without labels telling the model where the answer is."
+      }
+    },
+    "qa/foundation-models:select-ttt/mechanism": {
+      "source_sha256": "ea404d2516242fe764ed16e08f71f8a08ea00ad4a02d595e1471edabee0b2ec6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why average the lowest-CE positions in a chunk rather than the highest?",
+        "answer": "CE is mean negative log probability of question tokens under the current hidden state's vocabulary distribution. Lower values mean the position predicts question words better. Averaging the lowest k preserves local relevance more robustly than a single minimum. Reversing it reinforces irrelevant positions.",
+        "example": "Example: For CE 1 and 6, select 1 as more relevant. Repeated question tokens count as many times as they appear."
+      }
+    },
+    "qa/foundation-models:select-ttt/comparison": {
+      "source_sha256": "bf2aa3ded366cf9c866a32940cf33935f946c78ff5b0fcd423b6807ecd06cc3e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't Select-TTT a strictly conserved write-budget allocation?",
+        "answer": "Softmax multiplied by chunk count sums to that count before clipping. An upper cap can lower the sum. Approximate mean learning-rate preservation is not strict conservation. Renormalization changes Eq. 10 and can violate the per-chunk cap.",
+        "example": "Example: Three chunks can start near [3,0,0]. A cap of 1.2 gives total about 1.2, not 3; this is a formula example, not a QA result."
+      }
+    },
+    "qa/foundation-models:select-ttt/implementation": {
+      "source_sha256": "a4fd79bd66d86d277f8add14433bad55d7e05bc41ea8caaf12b6301aa4cd8d31",
+      "reviewed": true,
+      "fields": {
+        "question": "Why emit the current chunk before writing its keys and values?",
+        "answer": "Its outputs read the pre-update state; only later chunks use the new information. Writing first leaks the current update into an earlier output and changes causal order. The local reference tests tensor-state transitions, not real NTP-aligned features, backbone integration or long-dialogue evaluation.",
+        "example": "Example: Start with W=0. Chunk one outputs 0 then writes W=1. Chunk two can read 1; an output of 1 in chunk one would use its write prematurely."
+      }
+    },
+    "qa/foundation-models:gui-jepa/basics": {
+      "source_sha256": "b853049e88bbde7bce6b468d35db0c7036038f1096aa937e4d6be6956fdf7bb0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't GUI-JEPA generate actions token by token?",
+        "answer": "It enumerates actions from the accessibility tree and conditions visual latents on each candidate, then scores the batch. The action space comes from observations rather than free-form text generation. Speed depends on candidate count and a11y input, which pixel-only agents may lack, so not all GUI systems are directly comparable.",
+        "example": "Example: Score three valid button actions and choose the best, instead of generating JSON and parsing coordinates."
+      }
+    },
+    "qa/foundation-models:gui-jepa/mechanism": {
+      "source_sha256": "a5cdba274398f5f23bbefefd412bb149a6ca164b9df2f2bb6a864686413ff493",
+      "reviewed": true,
+      "fields": {
+        "question": "Why route action and ROI through the residual predictor rather than directly to the structured scoring head?",
+        "answer": "The paper forces candidate-conditioned visual information through the JEPA predictor rather than a shortcut. Action and ROI condition a query; a three-layer Transformer creates a residual latent, followed by ROI and global pooling. Training with a decision loss does not prove accurate future-screen prediction.",
+        "example": "Example: Two click candidates with different ROI content and positions should give different latents. A bypass from raw ROI to the scorer cannot demonstrate predictor utility."
+      }
+    },
+    "qa/foundation-models:gui-jepa/comparison": {
+      "source_sha256": "1c0f281dd2d3c9a6724f9f921b1b9ce1cf0277c30903ee5bf10c6613b4b893db",
+      "reviewed": true,
+      "fields": {
+        "question": "How does GUI-JEPA scoring differ from predicting a next state and choosing the one closest to a goal?",
+        "answer": "Latents are decision features trained by listwise action loss; distance to a goal latent is not the value. A randomly initialized predictor can match a dynamics-pretrained one in the paper, so useful decision features are not necessarily good dynamics predictions.",
+        "example": "Example: Confirming may finish a task with little visual change, while an animation looks closer to a target image but is wrong. Action score is not image or latent similarity."
+      }
+    },
+    "qa/foundation-models:gui-jepa/implementation": {
+      "source_sha256": "ef58b406ca59b7216d6b8c56ecaa46155be02a1fa6341f6c6585ef5ceddf63d2",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a verified three-layer predictor and gradient path mean the repository can operate Android?",
+        "answer": "No. It receives external screen/condition latents and verifies the residual head, candidate masking and weighted listwise loss. It has no encoder, a11y enumeration, MiniLM ranker or executor. Positive labels are loss-only, not forward inputs. A GPU tensor check is not AndroidControl success.",
+        "example": "Example: Backpropagating on two valid candidate latents only checks gradients. Launching an app also requires screen encoding, candidate discovery, execution and observing the next screen."
+      }
+    }
+  }
+}
