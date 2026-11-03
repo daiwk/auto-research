@@ -108,6 +108,21 @@ nav:
           - Multimodal models: en/papers/multimodal-models.md
           - LLM post-training: en/papers/post-training.md
           - Agents: en/papers/agent-research.md
+      - Project and workflow guides:
+          - Research library: en/research-library.md
+          - Automated research: en/auto-research.md
+          - Evolution domains: en/evolution-domains.md
+          - Multi-round evolution: en/model-evolution.md
+          - Evolve operator compatibility: en/evolution-operators.md
+          - UniRank benchmark: en/unirank.md
+          - Architecture and extension: en/architecture.md
+          - Runtime: en/runtime.md
+          - GPU validation: en/gpu-validation.md
+          - Paper specifications: en/paper-specs.md
+          - Experiment tracking: en/experiment-tracking.md
+          - Local preview and publishing: en/getting-started.md
+      - Public experiment dashboard: en/public-experiment-dashboard.md
+      - Translation coverage: en/coverage.md
       - Keeping both languages current: en/contributing.md
 
 theme:

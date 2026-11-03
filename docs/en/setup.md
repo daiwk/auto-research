@@ -41,7 +41,7 @@ auto-research-install-runtime --extras plum
 python -m pip install -e '.[dev]'
 ```
 
-The runtime installer previews the dependency plan and refuses to change the installed PyTorch version unless explicitly allowed. See the [runtime guide (Chinese)](../runtime.md) for CPU-only and driver-compatible CUDA builds.
+The runtime installer previews the dependency plan and refuses to change the installed PyTorch version unless explicitly allowed. See the [runtime guide](runtime.md) for CPU-only and driver-compatible CUDA builds.
 
 ## Choose the device and data
 
@@ -128,7 +128,7 @@ auto-research evolve --model agent --dataset swebench-local \
   --generations 3 --population 5 --workers 2 --agent-episodes 12
 ```
 
-These runs select on validation, keep test separate, record parent/child genomes and failed trials, and produce an HTML report. The [evolution guide (Chinese)](../model-evolution.md) documents the full argument set.
+These runs select on validation, keep test separate, record parent/child genomes and failed trials, and produce an HTML report. The [evolution guide](model-evolution.md) documents the full argument set.
 
 ## Checkpoint and benchmark paths
 

@@ -81,7 +81,7 @@ jobs:
       - run: python scripts/sync_project_readme.py --check
       - name: Check English catalog and translation freshness
         run: python scripts/english_docs.py
-      - name: Require English for new or changed paper write-ups
+      - name: Require English for new pages and changed paper write-ups
         if: github.event_name == 'pull_request'
         env:
           PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
