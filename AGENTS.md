@@ -34,6 +34,7 @@
 - The block must list the paper link, company or author institution, exact original publication date, whether the original authors released source code (including its link when available), the local adapter key, and the local reproduction-code directory.
 - An absent upstream repository must be written explicitly as not found/not released; never omit the field.
 - New or updated reproductions must keep this metadata complete and covered by documentation tests.
+- For every newly cataloged paper (including review-only papers) or edit to a cataloged Chinese paper write-up, deliver the reviewed English write-up in the same PR as an adjacent `README-en.md`. Keep the source fingerprint, links, facts, and reproduction boundaries current in both languages. Older unchanged papers may be labeled untranslated. See [the bilingual documentation workflow](docs/en/contributing.md); regenerate the English catalog with `python scripts/english_docs.py --write`.
 
 ## Paper learning questions
 

@@ -4,11 +4,13 @@ on:
   pull_request:
     paths:
       - "README.md"
+      - "README.en.md"
       - "readme_*.md"
       - "docs/**"
       - "mkdocs.yml"
       - "requirements-docs.txt"
       - "scripts/sync_project_readme.py"
+      - "scripts/english_docs*.py"
       - "scripts/generate_research_catalogs.py"
       - "scripts/generate_public_experiment_dashboard.py"
       - "scripts/generate_learning_cards.py"
@@ -23,16 +25,19 @@ on:
       - "tests/test_learning_deep_dives.py"
       - "tests/test_project_readme_sync.py"
       - "tests/test_site_tour.py"
+      - "tests/test_english_docs.py"
       - ".github/workflows/docs.yml"
   push:
     branches: [main]
     paths:
       - "README.md"
+      - "README.en.md"
       - "readme_*.md"
       - "docs/**"
       - "mkdocs.yml"
       - "requirements-docs.txt"
       - "scripts/sync_project_readme.py"
+      - "scripts/english_docs*.py"
       - "scripts/generate_research_catalogs.py"
       - "scripts/generate_public_experiment_dashboard.py"
       - "scripts/generate_learning_cards.py"
@@ -47,6 +52,7 @@ on:
       - "tests/test_learning_deep_dives.py"
       - "tests/test_project_readme_sync.py"
       - "tests/test_site_tour.py"
+      - "tests/test_english_docs.py"
       - ".github/workflows/docs.yml"
   workflow_dispatch:
 
@@ -64,6 +70,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -71,7 +79,14 @@ jobs:
           cache-dependency-path: requirements-docs.txt
       - run: pip install -r requirements-docs.txt pytest 'Pillow>=11,<13'
       - run: python scripts/sync_project_readme.py --check
-      - run: python -m pytest tests/test_project_readme_sync.py tests/test_site_tour.py tests/test_learning_deep_dives.py
+      - name: Check English catalog and translation freshness
+        run: python scripts/english_docs.py
+      - name: Require English for new or changed paper write-ups
+        if: github.event_name == 'pull_request'
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: python scripts/english_docs.py --base "$PR_BASE_SHA"
+      - run: python -m pytest tests/test_project_readme_sync.py tests/test_site_tour.py tests/test_learning_deep_dives.py tests/test_english_docs.py tests/test_docs_math.py
       - run: python scripts/generate_public_experiment_dashboard.py
       - run: git diff --exit-code -- docs/assets/data/experiment-dashboard.json
       - run: python scripts/generate_learning_cards.py --require-questions --require-deep-dives
