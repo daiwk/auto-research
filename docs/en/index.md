@@ -33,7 +33,7 @@ Start with the [paper catalog](papers/index.md). Entries link to original source
 
 Start from a research topic, or supply a supported system, dataset, and research direction. The controller retrieves paper evidence, proposes testable hypotheses, runs registered candidates under a shared budget, and uses validation performance to guide the next round. Test data stays isolated from selection.
 
-Supported examples include RankMixer and HyFormer, a local micro-LLM, post-training objectives, and combinations of agent memory, planner, tool policy, and critic. Newly discovered methods with no executable implementation remain evidence only. The [evolution overview (Chinese)](../auto-research.md) covers adapter and workflow details.
+Supported examples include RankMixer and HyFormer, a local micro-LLM, post-training objectives, and combinations of agent memory, planner, tool policy, and critic. Newly discovered methods with no executable implementation remain evidence only. The [evolution overview](auto-research.md) covers adapter and workflow details.
 
 ```mermaid
 flowchart LR
@@ -50,6 +50,6 @@ flowchart LR
 
 ## Read the evidence
 
-The [public experiment dashboard (Chinese interface)](../public-experiment-dashboard.md) indexes committed, traceable results. Compare like with like: an original paper's offline benchmark, its online A/B test, and a local public-data run answer different questions. A synthetic mechanism check or a small smoke test does not establish the full paper's capability or production gains. High-cost experiments that were not run are explicitly labeled **not reproduced**.
+The [public experiment dashboard](public-experiment-dashboard.md) indexes committed, traceable results. Compare like with like: an original paper's offline benchmark, its online A/B test, and a local public-data run answer different questions. A synthetic mechanism check or a small smoke test does not establish the full paper's capability or production gains. High-cost experiments that were not run are explicitly labeled **not reproduced**.
 
-For the source repository, see the [English README](https://github.com/daiwk/auto-research/blob/main/README.en.md). The [learning cards](../learning/index.md) and [topic deep dives](../learning/deep-dives/index.md) are currently in Chinese. The English catalog distinguishes translated write-ups from entries for which only the Chinese write-up is available.
+For the source repository, see the [English README](https://github.com/daiwk/auto-research/blob/main/README.en.md). The [learning cards](../learning/index.md) and [topic deep dives](../learning/deep-dives/index.md) are currently in Chinese. The [translation coverage report](coverage.md) shows progress beyond the paper catalog.

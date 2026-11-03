@@ -34,4 +34,8 @@ mkdocs build --strict
 
 To reproduce the pull-request gate locally, pass the full base commit SHA to `python scripts/english_docs.py --base <base-sha>`. The gate checks all existing pairs for drift and requires English for newly added catalog entries or edited Chinese paper pages. The English catalog is generated from the same manifest as the Chinese site; do not edit its rows by hand.
 
-This workflow covers the public entry pages and paper write-ups. Existing learning cards, audit records and other specialist guides may still be Chinese-only.
+New non-paper site pages also need English in the same pull request. Place the English counterpart under `docs/en/` at the same path relative to the documentation root (for example, `docs/architecture.md` pairs with `docs/en/architecture.md`). Existing pairs are checked for drift and the site adds a link from the Chinese page. The installation guide is the existing exception: `readme_setup.md` pairs with `docs/en/setup.md`.
+
+The [coverage report](coverage.md) tracks the entire Chinese site, including learning and audit pages. A catalog link to a Chinese-only paper does not count as a translation. Use `python scripts/english_docs.py --list-untranslated` for the exact source paths. `python scripts/english_docs.py --require-complete` is the explicit full-site check; it is expected to report missing pages while the translation backlog is still open.
+
+For generated collections, translate the underlying text fields rather than editing every repeated output. Keep source IDs, evidence files, formulas, and experiment values shared. Also check interactive labels (such as search and pagination) in the rendered English page.
