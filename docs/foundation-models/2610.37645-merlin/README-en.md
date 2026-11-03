@@ -44,21 +44,21 @@ flowchart TD
 
 ### Core equations
 
-For equal-length segments \(C_i\) and routing keys \(k'_j\), Equation 7 stores
+For equal-length segments $C_i$ and routing keys $k'_j$, Equation 7 stores
 
 $$
 \mu_i=\frac1{|C_i|}\sum_{j\in C_i}k'_j,\qquad
 \Sigma_i=\frac1{|C_i|}\sum_{j\in C_i}k'_j{k'_j}^{\top}.
 $$
 
-Here \(\Sigma_i\) is **not a centered covariance**. Equation 8 computes the mean and variance of alignment in the routing-query direction:
+Here $\Sigma_i$ is **not a centered covariance**. Equation 8 computes the mean and variance of alignment in the routing-query direction:
 
 $$
 r^\mu_{t,i}={q'_t}^{\top}\mu_i,\qquad
 r^{\mathrm{var}}_{t,i}={q'_t}^{\top}\Sigma_iq'_t-(r^\mu_{t,i})^2.
 $$
 
-Equation 9 applies a softmax per branch and then mixes the probabilities. The \(\tau\) values multiply the scores:
+Equation 9 applies a softmax per branch and then mixes the probabilities. The $\tau$ values multiply the scores:
 
 $$
 \lambda_{t,i}=\gamma_t\operatorname{softmax}_i(\tau_\mu r^\mu_{t,i})

@@ -86,7 +86,7 @@ jobs:
         env:
           PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
         run: python scripts/english_docs.py --base "$PR_BASE_SHA"
-      - run: python -m pytest tests/test_project_readme_sync.py tests/test_site_tour.py tests/test_learning_deep_dives.py tests/test_english_docs.py
+      - run: python -m pytest tests/test_project_readme_sync.py tests/test_site_tour.py tests/test_learning_deep_dives.py tests/test_english_docs.py tests/test_docs_math.py
       - run: python scripts/generate_public_experiment_dashboard.py
       - run: git diff --exit-code -- docs/assets/data/experiment-dashboard.json
       - run: python scripts/generate_learning_cards.py --require-questions --require-deep-dives

@@ -42,17 +42,17 @@ flowchart LR
 
 ### Core equations
 
-The conceptual token layout for item \(i\) is \([s_i^1,\ldots,s_i^L,e_i]\). Under the Section 3.3 mask, a dense query can read \(e_j\) for \(j\le i\). An SID query \(s_i^\ell\) can read earlier items' dense tokens and its own \(s_i^1,\ldots,s_i^\ell\), but not its own \(e_i\) or another item's SID tokens. Visibility of the current input position does not expose a future label; next-token targets still need to be shifted correctly.
+The conceptual token layout for item $i$ is $[s_i^1,\ldots,s_i^L,e_i]$. Under the Section 3.3 mask, a dense query can read $e_j$ for $j\le i$. An SID query $s_i^\ell$ can read earlier items' dense tokens and its own $s_i^1,\ldots,s_i^\ell$, but not its own $e_i$ or another item's SID tokens. Visibility of the current input position does not expose a future label; next-token targets still need to be shifted correctly.
 
-Equation 5 selects \(W\) candidates sequentially at one level. Let \(n_w\) be the number of selections already assigned to parent beam \(w\), and \(m(w,w')\) the longest common prefix length of two parents:
+Equation 5 selects $W$ candidates sequentially at one level. Let $n_w$ be the number of selections already assigned to parent beam $w$, and $m(w,w')$ the longest common prefix length of two parents:
 
 $$
 \arg\max_w\left[s(w,v_w^{n_w+1})-\lambda\sum_{w'}m(w,w')n_{w'}\right].
 $$
 
-A parent contributes to its own depth penalty. With \(\lambda=0\), this becomes ordinary top-\(W\) selection. The local implementation returns the single-level selection with original scores and the penalized scores at selection time; it does not guess production bookkeeping across levels or implement the fused GPU loop.
+A parent contributes to its own depth penalty. With $\lambda=0$, this becomes ordinary top-$W$ selection. The local implementation returns the single-level selection with original scores and the penalized scores at selection time; it does not guess production bookkeeping across levels or implement the fused GPU loop.
 
-With \(s_\theta(c_{1:\ell})\) denoting cumulative prefix log probability, Equation 6 is
+With $s_\theta(c_{1:\ell})$ denoting cumulative prefix log probability, Equation 6 is
 
 $$
 \mathcal L=\mathcal L_{NTP}
@@ -63,9 +63,9 @@ Sum over all prefixes for each pair, then average across the batch. The referenc
 
 ### Results reported by the authors
 
-Section 5.3 reports a two-week production Related Pins A/B test against PinRec with a fixed candidate budget. Table 4 reports **+0.62% saves** and **+3.60% fresh-Pins saves**, significant at the reported two-sided 5% level. Production used beam width 60 and \(\lambda=3\), not the offline beam-100 setting.
+Section 5.3 reports a two-week production Related Pins A/B test against PinRec with a fixed candidate budget. Table 4 reports **+0.62% saves** and **+3.60% fresh-Pins saves**, significant at the reported two-sided 5% level. Production used beam width 60 and $\lambda=3$, not the offline beam-100 setting.
 
-Table 3 shows the diversity trade-off: \(\lambda=3\) raises distinct@1 from 11.9 to 93.6 while reducing R@100 from 4.00% to 1.42%. The production gains belong to the complete tokenizer, features, model and serving stack. They are not local measurements of the mask or loss.
+Table 3 shows the diversity trade-off: $\lambda=3$ raises distinct@1 from 11.9 to 93.6 while reducing R@100 from 4.00% to 1.42%. The production gains belong to the complete tokenizer, features, model and serving stack. They are not local measurements of the mask or loss.
 
 ## Local reproduction and limits
 

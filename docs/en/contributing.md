@@ -18,7 +18,9 @@
 
 Put a single `<!-- source-sha256: <64 lowercase hexadecimal characters> -->` comment near the top of the English page. After reviewing the English against the final Chinese text, obtain the digest of the **Chinese source file** with `shasum -a 256 path/to/README.md` (or `sha256sum` on Linux). Review even changes that do not alter the English meaning, such as a typo correction, before refreshing the digest. The digest detects source drift; it does not verify translation quality.
 
-Link back to the Chinese page (for papers, `[简体中文](README.md)`). The site automatically links Chinese paper pages to their English siblings. Older pages without English can be translated incrementally; they are marked as untranslated in the catalog until a companion is added.
+In each English paper write-up, link back to the adjacent `README.md` with the label “简体中文”. The site automatically links Chinese paper pages to their English siblings. Older pages without English can be translated incrementally; they are marked as untranslated in the catalog until a companion is added.
+
+Use the repository's portable math delimiters in both languages: single dollar signs for inline math and double dollar signs on their own lines for display math.
 
 ## Regenerate and check
 

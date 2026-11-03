@@ -59,7 +59,7 @@ $$
 g_{\mathrm{task},i}=\mathcal E_{\mathrm{task}}(p,x_i,\hat y_i,y_i).
 $$
 
-The length critique \(g_{\mathrm{reg},i}\) is generated only if \(\mathrm{tokens}(\hat y_i)>\tau\); otherwise it is empty. Each text gradient is the literal concatenation of the task critique, a newline and the length critique. Section 3.3 uses a strict threshold: an answer exactly at the threshold does not trigger the critic. Token counts come from a real tokenizer or provider, not character counts. Appendix A.5 also supplies the query to the length critic. Appendix A.6 gives the optimizer the current prompt, query, generated answer and both critiques, without a direct reference-answer field.
+The length critique $g_{\mathrm{reg},i}$ is generated only if $\mathrm{tokens}(\hat y_i)>\tau$; otherwise it is empty. Each text gradient is the literal concatenation of the task critique, a newline and the length critique. Section 3.3 uses a strict threshold: an answer exactly at the threshold does not trigger the critic. Token counts come from a real tokenizer or provider, not character counts. Appendix A.5 also supplies the query to the length critic. Appendix A.6 gives the optimizer the current prompt, query, generated answer and both critiques, without a direct reference-answer field.
 
 Equation 4 scores a prompt by
 
@@ -68,7 +68,7 @@ S(p)=\mathrm{Accuracy}(p)-\lambda
 \frac{\mathrm{MeanOutputTokens}(p)}{\mathrm{MeanOutputTokens}(p_{\mathrm{CoT}})}.
 $$
 
-The denominator is the fixed chain-of-thought baseline's **mean output length**, not the prompt length or the longest response. The paper searches \(\lambda\in[0.01,0.5]\) on validation and selects 0.2; the local default is 0.2, not a value tuned on a user's data. Algorithm 1 monitors training batches and saves a best prompt before updating. The local implementation instead selects on a fixed, independent validation cohort. In either case, an unmeasured final proposal must not be returned as the best prompt.
+The denominator is the fixed chain-of-thought baseline's **mean output length**, not the prompt length or the longest response. The paper searches $\lambda\in[0.01,0.5]$ on validation and selects 0.2; the local default is 0.2, not a value tuned on a user's data. Algorithm 1 monitors training batches and saves a best prompt before updating. The local implementation instead selects on a fixed, independent validation cohort. In either case, an unmeasured final proposal must not be returned as the best prompt.
 
 ### Results reported by the authors
 

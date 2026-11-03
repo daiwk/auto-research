@@ -44,16 +44,16 @@ Unredrawn Figure 1 from the [original paper](https://arxiv.org/html/2610.36437v1
 
 ### Core equations
 
-A response passes at \(p_i\ge 1/2\). For a gated raw auxiliary score \(s_{ik}\), use \(r_{ik}=\min(s_{ik},p_i)\) when it fails and \(r_{ik}=s_{ik}\) when it passes. Standardize within the group as \(z_{ik}=(r_{ik}-\bar r_k)/d_k\), using the sample standard deviation \(d_k\) and zero for a constant group. The projection is
+A response passes at $p_i\ge 1/2$. For a gated raw auxiliary score $s_{ik}$, use $r_{ik}=\min(s_{ik},p_i)$ when it fails and $r_{ik}=s_{ik}$ when it passes. Standardize within the group as $z_{ik}=(r_{ik}-\bar r_k)/d_k$, using the sample standard deviation $d_k$ and zero for a constant group. The projection is
 
 $$
 \hat z_k=\arg\min_{v\in C}\|v-z_k\|_2^2,\qquad
 C_{\le}(p)=\{v:p_i>p_j\Rightarrow v_i\ge v_j\}.
 $$
 
-The ceiling-tie variant additionally requires \(p_i=p_j=1\Rightarrow v_i=v_j\); the implementation follows the appendix's \(p\ge1-10^{-6}\) tolerance. Average the ceiling scores when that constraint applies, then sort by `(primary, score)` and apply the pool-adjacent-violators algorithm (PAVA). Equal primary scores below the ceiling are **not** all averaged. Combine projected and unchanged terms using declared weights and whiten across the entire batch.
+The ceiling-tie variant additionally requires $p_i=p_j=1\Rightarrow v_i=v_j$; the implementation follows the appendix's $p\ge1-10^{-6}$ tolerance. Average the ceiling scores when that constraint applies, then sort by `(primary, score)` and apply the pool-adjacent-violators algorithm (PAVA). Equal primary scores below the ceiling are **not** all averaged. Combine projected and unchanged terms using declared weights and whiten across the entire batch.
 
-CONCUR-A counts only pairs of passing responses with unequal primary scores. Each reading is the number of agreements minus reversals divided by the number of eligible pairs; groups with no eligible pair produce no reading. For each task and auxiliary reward, the cumulative evidence includes the current batch. Relax the tie at \(n\ge61\) and \(\bar a>2\,\mathrm{se}\). This is a fixed decision threshold, not an i.i.d. significance guarantee, and later observations can restore the constraint.
+CONCUR-A counts only pairs of passing responses with unequal primary scores. Each reading is the number of agreements minus reversals divided by the number of eligible pairs; groups with no eligible pair produce no reading. For each task and auxiliary reward, the cumulative evidence includes the current batch. Relax the tie at $n\ge61$ and $\bar a>2\,\mathrm{se}$. This is a fixed decision threshold, not an i.i.d. significance guarantee, and later observations can restore the constraint.
 
 ### Results reported by the authors
 

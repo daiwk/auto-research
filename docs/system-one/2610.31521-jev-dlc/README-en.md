@@ -30,7 +30,7 @@ Original Figure 2, with scientific content unchanged. See [figure provenance and
 
 ### Two channels, PA-I updates and reliability
 
-Shared projection and unit normalization map external frozen representations to \(r(a)\). For action \(a\), with frozen base score \(b(a)\), the conservative channel uses a smoothed prior over the action's semantic class \(c(a)\):
+Shared projection and unit normalization map external frozen representations to $r(a)$. For action $a$, with frozen base score $b(a)$, the conservative channel uses a smoothed prior over the action's semantic class $c(a)$:
 
 $$
 q(a)=\lambda_c\log\frac{n(c(a))+\alpha}{N+\alpha K},\qquad
@@ -46,7 +46,7 @@ $$
 \mu'=\mu+\tau d.
 $$
 
-Do not update the vector when \(d=0\). An accept event uses the highest-probability remaining safe candidate as the contrast; a revoke event uses the explicitly withdrawn committed choice. The defaults are \(\alpha=0.5\) and \(\lambda_c=\lambda_p=2\). The channel probabilities are mixed geometrically. After feedback is revealed, reliability is updated using the channels' **pre-update** predictions, their 0/1 loss, a learning rate of 0.25 and fixed share of 0.1. The initial log weights are \((2,0)\), not equal.
+Do not update the vector when $d=0$. An accept event uses the highest-probability remaining safe candidate as the contrast; a revoke event uses the explicitly withdrawn committed choice. The defaults are $\alpha=0.5$ and $\lambda_c=\lambda_p=2$. The channel probabilities are mixed geometrically. After feedback is revealed, reliability is updated using the channels' **pre-update** predictions, their 0/1 loss, a learning rate of 0.25 and fixed share of 0.1. The initial log weights are $(2,0)$, not equal.
 
 ### Results reported by the authors
 
@@ -65,4 +65,4 @@ The three-seed diagnostics check PA-I against an independent minimization refere
 
 ### Full experiment: not reproduced
 
-The complete study requires a Qwen3.8-27B LoRA scorer trained for 300 steps, a \(32\times5120\) projection fitted on training users, target-isolated caches and evaluation across all tracks. These are outside the local budget and were not launched. The component remains `diagnostic_only=true`, `promotion_eligible=false` and `evolve_integrated=false`.
+The complete study requires a Qwen3.8-27B LoRA scorer trained for 300 steps, a $32\times5120$ projection fitted on training users, target-isolated caches and evaluation across all tracks. These are outside the local budget and were not launched. The component remains `diagnostic_only=true`, `promotion_eligible=false` and `evolve_integrated=false`.

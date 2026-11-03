@@ -22,7 +22,7 @@
 
 Advertisers want to spend their budgets while keeping cost per click (CPC) low. The system keeps the high-frequency PID feedback loop. At the start of each day, RL chooses PID coefficient multipliers for each campaign and publishes a lookup table. The live bidder does not load the Q-network or have a neural network choose every auction bid directly.
 
-Separate Q-heads learn relative budget-utilization and CPC outcomes. The system combines them according to the remaining campaign lifetime. Production uses \(\gamma=0\), so it fits daily outcomes as a contextual bandit. The paper also presents Bellman backups for a multi-step extension, but the DQN terminology does not mean production bootstraps across days.
+Separate Q-heads learn relative budget-utilization and CPC outcomes. The system combines them according to the remaining campaign lifetime. Production uses $\gamma=0$, so it fits daily outcomes as a contextual bandit. The paper also presents Bellman backups for a multi-step extension, but the DQN terminology does not mean production bootstraps across days.
 
 ### Original paper figure
 
@@ -45,7 +45,7 @@ flowchart LR
 
 ### Core equations
 
-Equation 3 uses \(k_j=m_jk_j^0\). Production tunes P and I, choosing each multiplier from \(\{1-\alpha,1,1+\alpha\}\), while D stays at multiplier 1. This gives nine actions. The default \(\alpha=0.2\) is an illustrative paper value, not a disclosed production setting.
+Equation 3 uses $k_j=m_jk_j^0$. Production tunes P and I, choosing each multiplier from $\{1-\alpha,1,1+\alpha\}$, while D stays at multiplier 1. This gives nine actions. The default $\alpha=0.2$ is an illustrative paper value, not a disclosed production setting.
 
 Equation 9 supplies relative rewards, and Equations 4–6 give the separate head targets and squared-error loss:
 
@@ -60,13 +60,13 @@ $$
 +\operatorname{mean}\!\left[(Q^{cpc}(s,a)-y^{cpc})^2\right].
 $$
 
-A CPC reduction stays a negative relative change. Equation 7 scores actions as \(\widehat Q=Q^{bu}-\beta(d)Q^{cpc}\), so lower costs improve the fused score. Equation 8 applies a temperature softmax to the top \(K\) preprocessed scores; all other actions receive zero probability. The scale of \(\beta\) and production preprocessing are not fully disclosed. The local component accepts explicit inputs/a callback instead of inventing a production calibration; identity preprocessing is just a reference default.
+A CPC reduction stays a negative relative change. Equation 7 scores actions as $\widehat Q=Q^{bu}-\beta(d)Q^{cpc}$, so lower costs improve the fused score. Equation 8 applies a temperature softmax to the top $K$ preprocessed scores; all other actions receive zero probability. The scale of $\beta$ and production preprocessing are not fully disclosed. The local component accepts explicit inputs/a callback instead of inventing a production calibration; identity preprocessing is just a reference default.
 
-Equation 10 computes ordinary inverse propensity scoring (IPS), \(N^{-1}\sum_i\pi(a_i\mid s_i)r_i/\widehat\pi(a_i\mid s_i)\), not a self-normalized estimator. Zero baselines and zero logging propensities are rejected instead of silently adding an epsilon.
+Equation 10 computes ordinary inverse propensity scoring (IPS), $N^{-1}\sum_i\pi(a_i\mid s_i)r_i/\widehat\pi(a_i\mid s_i)$, not a self-normalized estimator. Zero baselines and zero logging propensities are rejected instead of silently adding an epsilon.
 
 ### Results reported by the authors
 
-Section 6.2 reports a seven-day production A/B test on the same serving infrastructure against default PID without RL adjustment. Across all treated campaign-days, eCPC decreased by **0.25%** (\(p<0.05\)) and revenue was roughly flat. For the separate lifetime-ended subgroup, revenue rose 0.43%, clicks rose 0.25%, and eCPC rose 0.18%. These are different aggregations; the study does not show improvement on every metric.
+Section 6.2 reports a seven-day production A/B test on the same serving infrastructure against default PID without RL adjustment. Across all treated campaign-days, eCPC decreased by **0.25%** ($p<0.05$) and revenue was roughly flat. For the separate lifetime-ended subgroup, revenue rose 0.43%, clicks rose 0.25%, and eCPC rose 0.18%. These are different aggregations; the study does not show improvement on every metric.
 
 The holdout after a two-month rollout is directional only: traffic was unbalanced and the authors did not test significance. In the multi-step extension, separate greedy backups do not establish that the fused Q is optimal for the combined reward. No advertising outcomes were measured locally.
 
@@ -77,7 +77,7 @@ PYTHONPATH=src python -c 'from auto_research.reproductions.pinterest_rlbp import
 PYTHONPATH=src python -m pytest tests/test_oct30_pinterest.py -q
 ```
 
-Small-tensor checks cover the distinct backups, no future Q access at \(\gamma=0\), frozen targets, actual parameter updates, negative CPC rewards, fusion direction, top-\(K\) support, the P/I action table and ordinary IPS. External preprocessing runs once after fusion and must preserve shape, device, dtype and finiteness. Scaling can change probabilities, so temperature and production calibration are not assumed interchangeable.
+Small-tensor checks cover the distinct backups, no future Q access at $\gamma=0$, frozen targets, actual parameter updates, negative CPC rewards, fusion direction, top-$K$ support, the P/I action table and ordinary IPS. External preprocessing runs once after fusion and must preserve shape, device, dtype and finiteness. Scaling can change probabilities, so temperature and production calibration are not assumed interchangeable.
 
 The caller supplies Q-values and rewards. Campaign encoding, numerical BatchNorm, production training logs and propensity collection, daily serving jobs and conversion of PID error to bids are not implemented. Fitting synthetic rewards with randomly initialized Q parameters does not show that a production network learned to bid.
 
