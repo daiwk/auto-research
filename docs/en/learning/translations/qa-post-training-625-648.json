@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:minimal-edit-opd/basics": {
+      "source_sha256": "9ea64c0c161d2cc0d7862579f7d0254a2c2baee89ada0370a07c5ecb5690ebfd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why skip teacher correction for correct ME-OPD replies?",
+        "answer": "Successful traces retain task reward without stylistic interference. Failures alone select original tokens the teacher supports less. The teacher scores existing responses instead of writing new ones.",
+        "example": "Do not rewrite a valid alternative solution just because its style differs."
+      }
+    },
+    "qa/post-training:minimal-edit-opd/comparison": {
+      "source_sha256": "3d7126a35245e7b163261a4f5be60db91913c57a1beb056e05290192224659eb",
+      "reviewed": true,
+      "fields": {
+        "question": "How do ME-OPD and Projected Distillation produce corrections differently?",
+        "answer": "ME-OPD teacher-forces and suppresses chosen original error tokens. Projected Distillation generates a verified revision and compares edited spans via DPO. Scoring existing tokens and producing paired text differ.",
+        "example": "Only the latter needs a newly written answer aligned to the original."
+      }
+    },
+    "qa/post-training:minimal-edit-opd/implementation": {
+      "source_sha256": "be1514fcaac2c026f7ee7afd759a09d9f7c35039cce73348ec0aec5732a4b757",
+      "reviewed": true,
+      "fields": {
+        "question": "Compute ME-OPD group advantages before or after splitting successes and failures?",
+        "answer": "Use all K rewards before splitting. A success-only group has constant reward. Use frozen old student for strict-greater mask and divide by selected correction tokens across the minibatch.",
+        "example": "Teacher and old student ties are not selected; do not remake mask from updated scores."
+      }
+    },
+    "qa/post-training:minimal-edit-opd/mechanism": {
+      "source_sha256": "53380efe04510021ebc570a1053cfb1619a3d9d3f9fadc7a5ebdc29f1a133f59",
+      "reviewed": true,
+      "fields": {
+        "question": "Why skip correction for successes and select only some tokens from failures?",
+        "answer": "Preserve successful student behavior with task reward. Compare teacher and old student only for errors, correcting less teacher-supported tokens. Full group advantage precedes split. Reference solution and full reply are teacher training inputs only.",
+        "example": "A misread geometry label can receive focused suppression without reworking a successful alternative response."
+      }
+    },
+    "qa/post-training:csd/basics": {
+      "source_sha256": "7fd680e11027270024777f3a3760ef5f6273b83275d075c6622a75d450556bcf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why align shared textual events rather than token IDs in CSD?",
+        "answer": "Tokenizers differ in IDs, vocabulary and segmentation. Verify decoded character spans, then compare probability of common text events.",
+        "example": "One tokenizer can split a word in two; identical IDs wouldn't establish matching text."
+      }
+    },
+    "qa/post-training:csd/comparison": {
+      "source_sha256": "2a7a75061e71d3065b3d34dbf2c00b86f478dbb607797d44ae4cc2833e1b5d3e",
+      "reviewed": true,
+      "fields": {
+        "question": "What does REST preserve that renormalizing common candidates removes?",
+        "answer": "It retains probability of unmatched events instead of pretending their intersection is the whole distribution. Do not replace chain probability with a length mean.",
+        "example": "A small shared intersection may appear very similar after softmax while most mass was omitted."
+      }
+    },
+    "qa/post-training:csd/implementation": {
+      "source_sha256": "56c336b64547635293a96524be9375f76f8bfe018bdb156219845c8fdc338ded",
+      "reviewed": true,
+      "fields": {
+        "question": "Do CSD student gradients flow only through the final token of a chunk?",
+        "answer": "No. Include prefix chain factors, final token and REST. Freeze teacher. Non-1:1 weights don't enter denominator count; fall back to CE for no KD/shared event and detach overall ratio.",
+        "example": "Ignoring the first of two pieces miscomputes its entire text event."
+      }
+    },
+    "qa/post-training:csd/mechanism": {
+      "source_sha256": "67daa3dd981815ed2f4c59c40fc93fe8ec417e9b677a729e8e9d88254e5c2e76",
+      "reviewed": true,
+      "fields": {
+        "question": "Why preserve REST across tokenizers rather than softmax common matches?",
+        "answer": "Build common text events from verified decoded boundaries and chain probabilities. REST carries omitted mass; renormalization discards it and changes divergence. Don't align by position or IDs alone.",
+        "example": "Two tokens and one token may express one word, but unmatched continuation probability still exists."
+      }
+    },
+    "qa/post-training:visually-attributable-opd/basics": {
+      "source_sha256": "84e38b441992ee4030f7741cba82af4063aef2ebe2d166a731bf023edff4a6ad",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compare evidence-preserving and degraded crops in VAG?",
+        "answer": "Privileged corrections can mix visual evidence with style. Contrast matched visual conditions to estimate direction, retain agreeing corrections and bound modulation of verifier advantage.",
+        "example": "After cropping, check whether a teacher's revision follows changed visual evidence."
+      }
+    },
+    "qa/post-training:visually-attributable-opd/comparison": {
+      "source_sha256": "ab10a3f660abd0e084ac94304ae4f76c862899cecb7d8e048be53be52dc89900",
+      "reviewed": true,
+      "fields": {
+        "question": "How does VAG differ from fixed textual teacher logits?",
+        "answer": "The definition needs the same EMA vision model under real paired views. Fixed logits only simulate the formula, not visual sensitivity or attribution.",
+        "example": "Two manually supplied scores aren't an occlusion experiment."
+      }
+    },
+    "qa/post-training:visually-attributable-opd/implementation": {
+      "source_sha256": "2d4777a876399fe0cd72addc2de9b8fff12771b499db1f844200fac040ac1d8e",
+      "reviewed": true,
+      "fields": {
+        "question": "Can VAG's teacher branches be different models, and was this run?",
+        "answer": "Not under the same protocol: one EMA teacher, only visual input changes. The local page describes equations without executing multimodal training. Keep strict sign agreement and verifier advantage.",
+        "example": "Comparing a large vision teacher to a small text model confounds architecture and evidence."
+      }
+    },
+    "qa/post-training:visually-attributable-opd/mechanism": {
+      "source_sha256": "5d43432d27eb9d1a750bcd1610b9267a8e70a0de33c3e18d8b9861d287939e08",
+      "reviewed": true,
+      "fields": {
+        "question": "Why accept only teacher corrections matching the visual contrast sign?",
+        "answer": "Privileged crop changes may be stylistic. Require compatible evidence direction and use bounded modulation of verifier advantage. Only visual input changes in same EMA model; arbitrary text logits and local documentation do not reproduce the chain.",
+        "example": "If preference changes after privileged crop but not after occluding evidence, don't automatically treat it as visual guidance."
+      }
+    },
+    "qa/post-training:apsd/basics": {
+      "source_sha256": "b1410a29e9cb4de9744c8cfadfb59403225ae6c6e94aeb249aec933e1a450eac",
+      "reviewed": true,
+      "fields": {
+        "question": "Why interpolate APSD successes but extrapolate beyond teacher for failures?",
+        "answer": "Success should retain existing student preferences with gentle interpolation. Failures use stronger teacher-direction correction. Feedback selects a target regime, not guaranteed correctness.",
+        "example": "Use lighter changes after a correct response and stronger correction after failure."
+      }
+    },
+    "qa/post-training:apsd/comparison": {
+      "source_sha256": "7bbab9eb863ddd31e9eabb35be637e619207405e3ec82be201d40d6d21d0e97c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't freezing APSD self-teacher the same as detaching its entire target?",
+        "answer": "Teacher q is frozen, but product-of-experts target also depends differentiably on p. Whole-target detach removes a defining coupling term, despite identical forward values.",
+        "example": "Detaching a target branch partly built from current student changes optimization, not merely memory."
+      }
+    },
+    "qa/post-training:apsd/implementation": {
+      "source_sha256": "6311d9af03a6954853706e5ef46133078f54385d16c993fefa4acd219e45be29",
+      "reviewed": true,
+      "fields": {
+        "question": "Which PoE tensors retain APSD gradients, and how interpret default α?",
+        "answer": "Student and its target branch are differentiable, teacher detached. Use log space to avoid underflow. Correct α is between zero and one, error α above one. Local RLRF settings differ from paper RLVR.",
+        "example": "Local 0.5 and 1.5 aren't universal paper settings."
+      }
+    },
+    "qa/post-training:apsd/mechanism": {
+      "source_sha256": "ca5086ba3efecad748436f06f9e9bcfd0d271a6a8fa3204ffdaa092fd2b96d58",
+      "reviewed": true,
+      "fields": {
+        "question": "Why freeze only APSD teacher rather than detach the interpolated/extrapolated target?",
+        "answer": "Target depends on current student as well as teacher. Detach loses the student coupling that differs for success/failure. Forward equality doesn't imply backward equality. Feedback is privileged training context only.",
+        "example": "Identical target probabilities can yield different parameter updates when only one graph retains target dependence."
+      }
+    },
+    "qa/post-training:spod/basics": {
+      "source_sha256": "10beb8e8e49d80abeeef68f4fa6780bbea61de72cdb72f36122dc8aef78bbcc9",
+      "reviewed": true,
+      "fields": {
+        "question": "Is a SPOD decision one token or an action of multiple tokens?",
+        "answer": "Protect a full state-conditioned action including native termination, not one token or an episode. Labels are episode-level but protection is decision-specific.",
+        "example": "Tool name, arguments and terminator form one action within a possibly multi-action success."
+      }
+    },
+    "qa/post-training:spod/comparison": {
+      "source_sha256": "f0fb4ec59838507ceb2c1cd6870dc3d426a7ba33665610e0840f2890f87227a4",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a SPOD soft floor differ from masking an entire successful episode?",
+        "answer": "Only selected actions are protected; other decisions still distill. A soft penalty below threshold isn't a hard guarantee and shared updates can change protected behavior.",
+        "example": "One useful successful decision need not block all teacher learning in its episode."
+      }
+    },
+    "qa/post-training:spod/implementation": {
+      "source_sha256": "03e5276e60aa787c0b722c6291afd1a04a29daeebf463424d0e2b17e2c46bd85",
+      "reviewed": true,
+      "fields": {
+        "question": "Does SPOD compare temperature sampling probability or raw full-action probability?",
+        "answer": "Use raw pre-temperature/pre-constraint probabilities including termination, sum token logp. Recompute gate pre-update but detach it; average by action, state and episode so long traces don't dominate.",
+        "example": "Mean token probability isn't full-action probability and changes protection by length."
+      }
+    },
+    "qa/post-training:spod/mechanism": {
+      "source_sha256": "32ca7228aae131c72ffb9eeff906f59afbcce9fd2b0717553f84b10218401c95",
+      "reviewed": true,
+      "fields": {
+        "question": "Why protect full-action probabilities instead of token votes or masking the whole success?",
+        "answer": "A specific action in a success is protected when teacher supports it less; probability combines all its tokens. Cancel distillation there and add a soft floor, leaving other actions learnable. Shared parameter changes can still erode protected actions.",
+        "example": "Teacher can like some tool-call tokens and dislike others, so token votes can oppose the whole-call probability."
+      }
+    },
+    "qa/post-training:treeopsd/basics": {
+      "source_sha256": "18225eab47fb94135cf0b53abfa60abe9b88dfa6a98728d01a568e33a0771be3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why organize TreeOPSD shared prefixes as a tree?",
+        "answer": "Different continuations from one history reveal outcomes. Back up leaf rewards with behavior likelihood into local credit and count shared turns once.",
+        "example": "Shared first three steps don't get duplicated because later branches differ."
+      }
+    },
+    "qa/post-training:treeopsd/comparison": {
+      "source_sha256": "4787de82c202f2683d363ff8886b258cba9f25257f302e9f36d9e90211f27d8b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does bounded Bernoulli teaching differ from repeatedly applying fixed advantage?",
+        "answer": "Frozen posterior gives a finite target: gradient stops at the desired relative change and reverses beyond it. Fixed advantages can keep pushing under repeated updates.",
+        "example": "After sufficient adjustment, stop rather than drive the action farther on the same batch."
+      }
+    },
+    "qa/post-training:treeopsd/implementation": {
+      "source_sha256": "d117677c2ec13f7742a2a77c22bd24ee83d80117b9dcd8d3b32b2eb9bebb2468",
+      "reviewed": true,
+      "fields": {
+        "question": "Is TreeOPSD's Bernoulli a full next-token teacher?",
+        "answer": "No. A two-point posterior describes a sampled turn relative to old policy. Use full actor-span likelihood and leaf-reward sample SD, exclude observations, and retain bounded-target derivation.",
+        "example": "The two outcomes are not two vocabulary tokens."
+      }
+    },
+    "qa/post-training:treeopsd/mechanism": {
+      "source_sha256": "f7a6e325391fd3ef30b93c764aede75e9ab9acd1d2c09b59698b3668b4c8b027",
+      "reviewed": true,
+      "fields": {
+        "question": "Why convert backed-up tree credit into a bounded Bernoulli target?",
+        "answer": "Rewards set direction but no stopping distance. A fixed finite target stops or reverses gradients when reached or exceeded. Deduplicate shared turns and weight branches by full actor-span likelihood, not average token score.",
+        "example": "Repeatedly training one success group stops when it has learned enough instead of reinforcing indefinitely."
+      }
+    }
+  }
+}

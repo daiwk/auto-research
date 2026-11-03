@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:oxygenrec-v2/comparison": {
+      "source_sha256": "fcf365c87faf006be6baa618645f1f4adb6b11216b3461ce7ad5ad307a5c2f95",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is training with privileged future supervision different from serving with future features?",
+        "answer": "The training teacher can use later behavior to construct richer targets for a student that reads current inputs only. Future events are not yet available online. High-entropy forward KL constrains the distribution; it does not make future inputs legal.",
+        "example": "Illustration: A later lantern purchase can supervise a training example, but feeding it into the test prefix bypasses prediction."
+      }
+    },
+    "qa/recommendation:oxygenrec-v2/implementation": {
+      "source_sha256": "4bfe9012f90f149b152d8ea950e95a0801f6671f4174e17089ae0be8d4dc158f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why marginalize the three proxy behaviors in local OxygenREC-v2 instead of selecting the held-out target's class?",
+        "answer": "MovieLens has no click/cart/order. Choosing a condition by the target's popularity leaks identity clues. Marginalizing avoids that hint but changes the original task, so conclusions remain proxy-only. Verify privileged views, entropy routing, and losses separately.",
+        "example": "Illustration: Telling the model in advance the target is low-popularity narrows search; combine the unknown conditions without using the target."
+      }
+    },
+    "qa/recommendation:pa-bridge/mechanism": {
+      "source_sha256": "2389948a9ef66be414a73acb55178624096f7b1a68628ed36495de606cd767ad",
+      "reviewed": true,
+      "fields": {
+        "question": "Why align passive browsing to active queries before discretization and reweighting in PA-Bridge?",
+        "answer": "Browsing says what was seen, while active queries express what users want to ask. Direct reuse can suggest familiar but poor conversation starters. Distribution alignment bridges intent spaces, and discrete units with reweighting reduce repeated dominance by popular exposures.",
+        "example": "Illustration: Frequent fitness videos may coexist with a specific need to ask about training with knee discomfort; query alignment can surface the latter."
+      }
+    },
+    "qa/recommendation:pa-bridge/basics": {
+      "source_sha256": "82e1ecdccefe761c9f624dfd3757fce7660c0f20a1525ddab28daa32d36b6fd8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't PA-Bridge passive-to-active transfer just rewriting browsed titles as questions?",
+        "answer": "Active queries express actions and problems absent from passive views. Align distributions, then use semantic codes and weights to reduce exposure loops. A question mark cannot create user intent, and model inference is not an explicit request.",
+        "example": "Illustration: 'How do I exercise?' rewrites a title but may miss the actual question about protecting a knee."
+      }
+    },
+    "qa/recommendation:pa-bridge/comparison": {
+      "source_sha256": "bde2a1afa9cb40d4ad80479dace2513346723d492b19c0db1597aeabe71b4583",
+      "reviewed": true,
+      "fields": {
+        "question": "How does PA-Bridge reweighting differ from selecting the most-browsed topic?",
+        "answer": "Counts reflect prior exposure, so top frequency reinforces what was already shown. Reweighting reduces dominant semantic units and broadens active topics, but too much favors irrelevant tail content. Diversity is not satisfaction or causal debiasing.",
+        "example": "Illustration: Reweighting can surface related strength training alongside common weight-loss content, not justify arbitrary unrelated topics."
+      }
+    },
+    "qa/recommendation:pa-bridge/implementation": {
+      "source_sha256": "2293579724e8426ef943952ca89a9d43578c79eef15f6362dfccc305677c1ac9",
+      "reviewed": true,
+      "fields": {
+        "question": "What temporal constraint applies when fitting PA-Bridge hpassive to hactive pairs?",
+        "answer": "Use active queries as training targets and cut passive context before the query. Codes and weights must also use allowed history. The public proxy lacks genuine active-query logs, so an Align function alone does not demonstrate cross-behavior transfer.",
+        "example": "Illustration: Rehab videos watched after asking about a knee cannot be part of the prefix used to predict that question."
+      }
+    },
+    "qa/recommendation:pair/mechanism": {
+      "source_sha256": "b05e7bde73aae1b0ebc78ce66754e73437135e1702b5b2a16a8aef9ff2b94db3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't PAIR's multi-negative preference loss token-level DPO?",
+        "answer": "Clicked candidates, non-clicked candidates from the same exposure, and random members train profile and history encoders for complementary relevance. This is a multi-negative contrastive score objective with no token probability ratios, explicit reference, or KL term. The preference comes from exposure-conditioned supervision.",
+        "example": "Illustration: A job seeker selects a recruiter over a similar job seeker; compare candidate representations, not answer-token probabilities."
+      }
+    },
+    "qa/recommendation:pair/basics": {
+      "source_sha256": "11ded7906f7140a209de995027faa538bd15b9db57eb94d41ca01507ea5e97af",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does PAIR model professional relevance as complementarity rather than mere similarity?",
+        "answer": "A member may need a recruiter, client, or different skill set. Shared profile encoding and history use clicked versus skipped members under the same exposure to learn such relationships. Complementarity remains scenario-dependent, not a rule to recommend dissimilar people.",
+        "example": "Illustration: An engineer looking for work may need a recruiter; when looking for a technical peer, another engineer may be relevant."
+      }
+    },
+    "qa/recommendation:pair/comparison": {
+      "source_sha256": "7d205b7c86547267654af5084157f9f0f36dd84010569b9ac453b6c57a68a50c",
+      "reviewed": true,
+      "fields": {
+        "question": "What difficulty do same-exposure non-clicks and random member negatives add in PAIR?",
+        "answer": "Exposed non-clicks represent real competitors; random members offer broad, often easier contrast. The mix learns fine choice and global structure. Non-clicks can reflect position or opportunity, not true negatives. Preference does not imply token DPO or removal of exposure bias.",
+        "example": "Illustration: Two local recruiters create a fine comparison; a random unrelated student is easier and does not replace the exposed choice."
+      }
+    },
+    "qa/recommendation:pair/implementation": {
+      "source_sha256": "318ce80be6807981f7e5b2de9a0360c506027fecd566d246d1369e5f1e8d086a",
+      "reviewed": true,
+      "fields": {
+        "question": "How verify PAIR history positions, padding, and candidate identity without future clicks?",
+        "answer": "Use only pre-request events, ensure masked padding changes cannot affect scores, and align candidate profiles with labels. Position changes may affect results as designed. Gradient checks and CUDA smoke verify operators, not professional recommendation gains. Do not add a reference KL to the contrastive objective.",
+        "example": "Illustration: Perturbing masked history should not change a score; reading a future clicked candidate to improve prediction leaks the answer."
+      }
+    },
+    "qa/recommendation:pearl-percentile/mechanism": {
+      "source_sha256": "6fe7931949b90a38630ff6e2f5b765a3a1aff567214b6371d84237c4ded4508e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why estimate PEARL percentiles via repeated comparisons rather than regress raw behaviors?",
+        "answer": "Raw values differ in scale and bias. Comparing a behavior against references estimates its relative position, with more independent comparisons reducing variance. Value weighting and long-term co-training connect objectives. Percentiles depend on the reference and are not causally debiased value.",
+        "example": "Illustration: Thirty seconds means different things for a 15-second clip and a ten-minute video; compare within suitable references."
+      }
+    },
+    "qa/recommendation:pearl-percentile/basics": {
+      "source_sha256": "586ba901b8548c2f37d9003ba7eddcdd44d170706506df216ee60f3e79ef3c49",
+      "reviewed": true,
+      "fields": {
+        "question": "Why identify PEARL's reference distribution when reporting a percentile?",
+        "answer": "A percentile is the fraction of reference outcomes exceeded, so users, context, and windows change its meaning. More comparisons reduce sampling noise, and value weights connect goals. Relative rank does not remove logging bias or prove causal incrementality.",
+        "example": "Illustration: Thirty seconds can be high for short clips and low for long tutorials; a wrong reference reverses interpretation."
+      }
+    },
+    "qa/recommendation:pearl-percentile/comparison": {
+      "source_sha256": "6b4a5cdc343304f13f14ffe1ddaa6edabe7305c8658e10b9908631f87591db82",
+      "reviewed": true,
+      "fields": {
+        "question": "How do repeated pairwise comparisons trade scale and variance against raw-label regression?",
+        "answer": "Regression preserves units but is sensitive to extremes. Comparisons organize relative position across scales but lose absolute gaps and introduce sampling error. Under independence, larger N reduces variance; bootstrap does not remove systematic bias. Neither objective is universally superior.",
+        "example": "Illustration: 100 and 101 seconds can differ in percentile despite a small raw gap, while a huge anomaly no longer dominates linearly."
+      }
+    },
+    "qa/recommendation:pearl-percentile/implementation": {
+      "source_sha256": "85abfb7e6f3131d92e8e3f3542aaeeb75242216c965e4c8def780d8edc6f07f9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check dependence among PEARL comparisons before using p(1−p)/N?",
+        "answer": "The expression assumes appropriate Bernoulli comparisons and sampling. Repeated or correlated references do not add N independent observations. Record weights, bootstrap, and co-training provenance; sampling variance is not training variance. Do not use test references to choose targets.",
+        "example": "Illustration: Comparing the same video 100 times does not reduce uncertainty tenfold as 100 independent references might."
+      }
+    },
+    "qa/recommendation:piano/mechanism": {
+      "source_sha256": "e2675f225d59a8fadf4a96ab6b6a26ed20d278fc901ec1897208f7536e6eb559",
+      "reviewed": true,
+      "fields": {
+        "question": "Why extract query-relevant history and condition item predictions on the entire slate in PIANO?",
+        "answer": "History selection captures current search intent; slate aggregation tells each CTR/CVR prediction which alternatives surround the item. They model different relationships. A change in candidates can change every score, so these are not independent cacheable item values.",
+        "example": "Illustration: A hiking-shoe search reads outdoor history, while the same shoe has different appeal among premium models versus beginner models."
+      }
+    },
+    "qa/recommendation:piano/basics": {
+      "source_sha256": "0b27e07df44eee300d9ab3cbd758a01a9b9a10ee64b97d2a164c9bcd62d98e53",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does PIANO's IAN read the entire candidate list?",
+        "answer": "Choice depends on substitutes and competitors on the page. Aggregation conditions item CTR/CVR on the current alternatives, while query-related history represents needs. This differs from static item value and changes when the list changes.",
+        "example": "Illustration: A mid-priced shoe can look practical among expensive models but not among cheap ones."
+      }
+    },
+    "qa/recommendation:piano/comparison": {
+      "source_sha256": "8c9631ed0786a8b817d4ff507fa968afe49b2ccd1c3d882c8d66f4dd7105d314",
+      "reviewed": true,
+      "fields": {
+        "question": "How does PIANO list conditioning change caching and evaluation versus pointwise CTR?",
+        "answer": "Independent scores can be reused for fixed user–item inputs; list-conditioned scores also depend on candidate membership. Extra context may help competition modeling but costs compute and is distribution-sensitive. The public proxy was negative, not universal superiority.",
+        "example": "Illustration: Removing the cheapest item can alter all other predictions. Reusing old scores would ignore the new IAN context."
+      }
+    },
+    "qa/recommendation:piano/implementation": {
+      "source_sha256": "a423894181b450f80a3649c89b8a02039763b0b961fd0c8362cfd0f7708c55df",
+      "reviewed": true,
+      "fields": {
+        "question": "How avoid leaking gold target position through PIANO list aggregation?",
+        "answer": "The candidate list is allowed, but never order or flag it using real clicks. Labels enter loss only. Mask padding and candidate count, and query only past history. Otherwise IAN can learn a position shortcut.",
+        "example": "Illustration: Always putting the correct product first inflates test results if that layout is repeated; use a serving-equivalent unlabeled list."
+      }
+    },
+    "qa/recommendation:pin-scale/mechanism": {
+      "source_sha256": "9431e5f599068223c3f98f4268d57a0edd1f38bc8e17c1ea40ee08719e630179",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain residual Semantic ID levels and add engagement and multi-view supervision in Pin-SCALE?",
+        "answer": "Content codes transfer to new items but are not necessarily discriminative for behavior. Residual hierarchy and cascading pooling preserve coarse-to-fine details, while engagement, query–item, and item–item objectives align codes to recommendation. SIDs participate in training, not just replace vectors with integers.",
+        "example": "Illustration: Two living-room posts share a coarse theme but need finer audience distinctions; engagement and co-occurrence can refine them."
+      }
+    },
+    "qa/recommendation:pin-scale/basics": {
+      "source_sha256": "f29a9a5f7990772b1afefd7713496fa066ac770896ef3f744f26ccb253a5368a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use hierarchical SIDs for discriminative dense retrieval in Pin-SCALE?",
+        "answer": "Cascading pooling maps transferable coarse and fine semantic codes into a retrieval embedding, and engagement/multi-view losses align it to the task. Discriminative nearest neighbors do not require autoregressive code decoding.",
+        "example": "Illustration: Pool gardening and indoor-plant codes into a two-tower vector instead of generating two codes at serving time."
+      }
+    },
+    "qa/recommendation:pin-scale/comparison": {
+      "source_sha256": "a4344def9e8b88b23789619375caaa18a87fa24b1a95396eba3e1b6b36c431eb",
+      "reviewed": true,
+      "fields": {
+        "question": "How does engagement-aware tokenization differ from pure content reconstruction?",
+        "answer": "Reconstruction preserves content geometry; engagement emphasizes differences affecting consumption. It can introduce exposure and popularity bias, so check tail generalization. The local fresh cohort's small denominator prevents interpreting large relative changes as industrial gains.",
+        "example": "Illustration: Behavior can distinguish similar renovation images by user purpose but may also favor a popular style over new content."
+      }
+    },
+    "qa/recommendation:pin-scale/implementation": {
+      "source_sha256": "15c0db7569e2d688e11f0ce9933179c8649615c603ce5f2bff80a3dc24bb6023",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't one sample's positive layer weight wi necessarily change Pin-SCALE nearest-code argmin?",
+        "answer": "Multiplying all distances by the same positive scalar leaves their order unchanged. The weight may instead change codebook updates or global learning. Check where it is applied; zero and candidate-dependent weights are different.",
+        "example": "Illustration: Multiplying distances two and five by three still selects two. Later assignment can change if weighted learning moves centers."
+      }
+    },
+    "qa/recommendation:pinclip/mechanism": {
+      "source_sha256": "75d4da7dfc1c8a31fa3ff2cad6ff9cbf1d538cb224ae4e0f1b8b02844749d555",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add Pin–Board neighbor alignment beyond image–text alignment in PinCLIP?",
+        "answer": "Generic image–text alignment captures content compatibility, while user boards expose platform-specific relationships. Neighbor supervision adds graph semantics and multigranular features retain details for new content. Exposure bias can persist, so graph alignment is not unbiased preference estimation.",
+        "example": "Illustration: A table and a lamp may look different but share Scandinavian décor boards, letting a new lamp connect to related furniture."
+      }
+    },
+    "qa/recommendation:pinclip/basics": {
+      "source_sha256": "52163d045d3cda3b2f070b8e3f3ac220007c69bc231fa34e7079c41c13916e48",
+      "reviewed": true,
+      "fields": {
+        "question": "Why connect new PinCLIP content to the recommendation graph through content vectors?",
+        "answer": "New items lack collaboration. Existing board neighbors teach platform semantics and the content encoder transfers them to unseen items. Fine image–text detail helps, but graph exposure bias remains. Evaluate cold start separately.",
+        "example": "Illustration: An unclicked lamp can connect to décor-board furniture through content; that is not an observed co-purchase."
+      }
+    }
+  }
+}

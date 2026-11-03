@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:certified-selective-eval/basics": {
+      "source_sha256": "3a15db2b036d26c24c71db8d356184677644996a585c74f95cd06f26cc4c3869",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can selective automated evaluation defer some cases to people?",
+        "answer": "The aim is to automate reliable regions within a certified error budget, not apply machine judgments to every trace. If the upper confidence bound fails the budget, retain human or other evaluation. Report coverage together with risk.",
+        "example": "Automate clear cases while routing ambiguous ones to reviewers; accuracy on automated cases alone is incomplete."
+      }
+    },
+    "qa/agent-research:certified-selective-eval/comparison": {
+      "source_sha256": "42caf816292d2c99dafd5b38fdd7509f505ec2a547f96b58dce48357fce61b64",
+      "reviewed": true,
+      "fields": {
+        "question": "What does an error upper confidence bound control beyond empirical error in the automated region?",
+        "answer": "Empirical error summarizes observed samples, while the upper bound reflects uncertainty from finite evidence. Automate only below budget; even zero observed errors can be insufficient. Certification concerns risk in the selected region, not guaranteed correctness on every item.",
+        "example": "No observed errors in a small region does not imply a low enough upper bound or justify expanding coverage."
+      }
+    },
+    "qa/agent-research:certified-selective-eval/implementation": {
+      "source_sha256": "5bbb572c0b44cba8d69b1aac742e4e67f2501516fdf06f941d6ec044f46efed4",
+      "reviewed": true,
+      "fields": {
+        "question": "Can the local bootstrap certificate be reported as coverage on the paper's corpus?",
+        "answer": "No. The mini-suite tests clustered resampling and the upper-bound takeover rule. Fix traceable task identities, automated regions, and error labels. The confidence bound rather than point error must satisfy budget.",
+        "example": "Low sample error with a high bound does not establish that the error budget is met."
+      }
+    },
+    "qa/agent-research:certified-selective-eval/mechanism": {
+      "source_sha256": "9e06a22d6028f936e6f566ed7807b90585617229347b01c1b27d24e345465682",
+      "reviewed": true,
+      "fields": {
+        "question": "Why bootstrap by task clusters for an automated-region error certificate instead of treating all traces as independent?",
+        "answer": "Traces from the same task share difficulty and structure, so independent resampling understates correlation and uncertainty. Cluster sampling builds an error upper bound; automate only below budget, with human or external review otherwise. Low average error does not certify arbitrary thresholds, and the certificate depends on calibration distribution and selection.",
+        "example": "A hundred similar traces from one task are not a hundred independent successes. Resample them as one task cluster."
+      }
+    },
+    "qa/agent-research:harness-design-study/basics": {
+      "source_sha256": "f6d01ad4ad48695afb3f89ee120b910eec1111a78f098525867942a1762f48ee",
+      "reviewed": true,
+      "fields": {
+        "question": "What decisions outside the model does the harness encompass in a harness design study?",
+        "answer": "It organizes planning, available actions, and context management and executes tasks through an underlying loop. These are workflow decisions, not model-weight changes. Identifying editable components explains why the same model behaves differently under different execution designs.",
+        "example": "One coding model may see a single file fragment or compressed context from several files. That is a harness change."
+      }
+    },
+    "qa/agent-research:harness-design-study/comparison": {
+      "source_sha256": "dcb01c43241bec68bbe1a85c3548903afbf1bceb243b5226683d6a51798951b8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not combine more detailed planning and a richer action space into one improvement claim?",
+        "answer": "They affect cost and behavior through different pathways. A combined change does not reveal individual contributions; controlled factors are needed, and interactions may occur. Do not assign a combined gain to one component.",
+        "example": "Success after adding both planning and tools does not tell which helped most."
+      }
+    },
+    "qa/agent-research:harness-design-study/implementation": {
+      "source_sha256": "ce3a2a13ff8f84d930a774f73d9f9e8f63c47e1263f7c33469ea40b2be4baf88",
+      "reviewed": true,
+      "fields": {
+        "question": "Does testing controllable local harness factors mean SWE-bench was run?",
+        "answer": "No. The mini-suite verifies factors and control flow. Keep model version, budget, and tool protocol fixed, and do not report benchmark capability without actual tasks and execution evidence.",
+        "example": "A simulated tool success cannot be converted into a real repository repair rate."
+      }
+    },
+    "qa/agent-research:harness-design-study/mechanism": {
+      "source_sha256": "336c182754c72c011b8bb1eee6e68b0a8c75bebdcc93146558cf0c723c3a2dd8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why vary planning, action space, and context separately while fixing the execution loop?",
+        "answer": "Full-harness comparisons change many factors, confounding more reasoning, easier actions, and improved state management. Control components separately under the same loop and evaluate effects and costs. References or statistical contracts do not run the paper's large coding workloads.",
+        "example": "Change only the editor to precise replacement while keeping prompts and budgets fixed, rather than crediting a simultaneous model change to the action space."
+      }
+    },
+    "qa/agent-research:fuse-evaluator/basics": {
+      "source_sha256": "bf9298507ad81745bdc7e11c87147991991eff0d5d65dc25104901c9282c0284",
+      "reviewed": true,
+      "fields": {
+        "question": "Does FUSE train a social agent or provide a verifiable social-reasoning evaluation environment?",
+        "answer": "It is an evaluation: a multi-agent simulation with verifiable hidden motives tests how assistants interpret user retellings and social context. Hidden state supplies grading evidence, not assistant answers. Implementing the simulator or local kernel does not train a stronger social reasoner.",
+        "example": "The simulation knows a character's true intent, while the assistant judges from the retelling. The evaluator checks afterward without revealing it first."
+      }
+    },
+    "qa/agent-research:fuse-evaluator/comparison": {
+      "source_sha256": "ded8b3200712158adebabd141b9fae9e7e32b536dfefae5358425e0316a5fd2e",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a framing-bias evaluation differ from ordinary QA accuracy?",
+        "answer": "Framing can influence attribution even with unchanged facts. Comparing retellings against hidden state measures shifts in social judgment. Small simulated state machines do not establish comprehensive real-world social understanding.",
+        "example": "Describing the same lateness as indifference or a traffic delay can change the assistant's judgment."
+      }
+    },
+    "qa/agent-research:fuse-evaluator/implementation": {
+      "source_sha256": "77353eba5b612ac81b5ef8470580d5173464e04d2755013d792904ea69aea9d6",
+      "reviewed": true,
+      "fields": {
+        "question": "What boundaries did the local FUSE evaluator execute, and did it call twelve external LLMs?",
+        "answer": "It runs only an observation-safe evaluation state machine, not the external model matrix. Project public observations separately from private motives; never pass an internal object containing gold to the actor callback.",
+        "example": "The grader may know the actual relationship without exposing that field in the assistant input."
+      }
+    },
+    "qa/agent-research:fuse-evaluator/mechanism": {
+      "source_sha256": "a0c3f421a18ff525d76688262d662070d2d0fb015284a14eb0a3475bdda01c6d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are verifiable hidden motives better for social-reasoning evaluation than judging the fluency of retellings?",
+        "answer": "Retellings can be biased or incomplete. Fluent replies may not identify real goals. A simulator keeps motives and event conditions hidden from the actor and uses them to check inferences rather than textual agreement. Only the verifier sees references, and fixed fixtures are not actual multi-agent semantic interaction.",
+        "example": "A user calls a coworker's refusal hostility while the simulated cause is a resource conflict. Evaluate whether the assistant distinguishes them from visible evidence rather than echoing the framing."
+      }
+    },
+    "qa/agent-research:silr/basics": {
+      "source_sha256": "f9adb17c4b1f9d124a04d9ba62113bdd3ebc259228188a6d3e6b095998d96f67",
+      "reviewed": true,
+      "fields": {
+        "question": "Does SiLR shadow execution undo actions after real execution fails?",
+        "answer": "No. It evaluates proposed state effects on a shadow path before a gate admits real execution. Separate proposal assessment from real effects; executing first cannot establish prevention, especially for irreversible effects.",
+        "example": "Simulate which constraints a configuration edit touches before committing, rather than breaking the configuration and then attempting rollback."
+      }
+    },
+    "qa/agent-research:silr/comparison": {
+      "source_sha256": "626ae3e47383767f94db915394e663e207ae116b854764638959aa51451b9ac6",
+      "reviewed": true,
+      "fields": {
+        "question": "How does product order differ from adding violation severities into one score?",
+        "answer": "Componentwise non-worsening prevents improvement on one branch from offsetting deterioration on another. A scalar can hide that exchange. Preserve constraints; a weighted sum is not an equivalent safety gate.",
+        "example": "Storage savings do not justify expanded permissions even if a combined score decreases."
+      }
+    },
+    "qa/agent-research:silr/implementation": {
+      "source_sha256": "69bd2589e29a893f29b949deb34d52ea44024d8d3d2a70ca30948d8452e530ec",
+      "reviewed": true,
+      "fields": {
+        "question": "Can SiLR substitute an unreliable simulator for real effects during shadow execution?",
+        "answer": "Not as a safety claim. Admission requires deterministic, adequately covering verification. Shadow first, compare states, then execute. Without a real simulator, local checks establish only structured criteria and process signals.",
+        "example": "If shadowing omits deletion side effects, an unchanged vector can conceal actual risk."
+      }
+    },
+    "qa/agent-research:silr/mechanism": {
+      "source_sha256": "4cecbfc696538c6b675c3b2dc2f3f3f3beddabd36ad26713f64970b2e71b7065",
+      "reviewed": true,
+      "fields": {
+        "question": "Why shouldn't a safety gate reject every action that leaves any residual violation?",
+        "answer": "Recovery can require intermediate states that remain partly unsafe. Rejecting all of them can deadlock the system. SiLR shadow-executes and requires every constrained branch not to worsen, allowing gradual improvement. A total can hide branch regressions, and shadow outcomes must match real execution contracts.",
+        "example": "Revoke one of two problematic permissions first. The system remains imperfect but improves; requiring all violations to disappear in one step can block recovery."
+      }
+    }
+  }
+}

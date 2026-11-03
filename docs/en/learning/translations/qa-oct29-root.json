@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:kl-mopd/basics": {
+      "source_sha256": "d14d3c3c28fd3047ab18fdde9a4d01873203fce5c0293f0ccf38c57f61434773",
+      "reviewed": true,
+      "fields": {
+        "question": "Why estimate each teacher's difficulty at each SID position in KL-MOPD?",
+        "answer": "An item ID needs several correct tokens. The click teacher may be easy to imitate early and the value teacher later. Fixed half weights ignore this; KL-MOPD upweights the harder teacher based on each initial student-to-teacher KL gap.",
+        "example": "Example: A three-part code starts with category and ends with attributes. If a teacher diverges only on category, one sequence-wide weight obscures that difference."
+      }
+    },
+    "qa/recommendation:kl-mopd/mechanism": {
+      "source_sha256": "2f6b1d0c9594edd9844c803553d212c948288d1ac6cd58e00e6922836a09c0f4",
+      "reviewed": true,
+      "fields": {
+        "question": "Does KL-MOPD compute alpha from the current student or the frozen initial student?",
+        "answer": "Calibrate once before training using the frozen initial student's own sampled prefixes. Training loss uses current student prefixes but does not recalculate alpha from current gaps. Dynamic weights would define a different objective.",
+        "example": "Example: Initial gaps 1 and 3 produce fixed weights 1/4 and 3/4. Later gaps of 2 and 1 do not swap them."
+      }
+    },
+    "qa/recommendation:kl-mopd/comparison": {
+      "source_sha256": "765aac8ac2684a5053c221a4d97e3bed5819d5dc31367711befe3587ca69b107",
+      "reviewed": true,
+      "fields": {
+        "question": "Is weighting two reverse KL losses equivalent to averaging teacher probabilities and computing one KL?",
+        "answer": "Not in general. Weight the separate student-to-teacher KL losses, not an arithmetic mixture of teacher probabilities, and keep KL(student||teacher), not forward KL. Negative controls distinguish the computations without establishing recommendation gains.",
+        "example": "Example: Teachers favor different tokens. An arithmetic mixture keeps mass on both modes; weighted reverse KL involves log teacher probabilities and yields different gradients."
+      }
+    },
+    "qa/recommendation:kl-mopd/implementation": {
+      "source_sha256": "aca8af7633d0a89fc240bcbf92c3d4bed26edd7b976079877a0303a832fc44e7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't a gradient-tested tensor loss establish on-policy recommender training?",
+        "answer": "Logits alone don't tell the kernel who sampled a prefix. Initial calibration, current student generation, frozen teacher scoring, SID decoding and real splits require external integration. Only the loss component and small CPU/CUDA mechanism evidence are present.",
+        "example": "Example: The kernel accepts cached old-policy prefixes, but that does not make them samples from the current student."
+      }
+    },
+    "qa/foundation-models:sleep-lti/basics": {
+      "source_sha256": "8035fd13c4aec26e069d93a18088cfdb62a35b4eb9c0cd1b198637afb03c48a7",
+      "reviewed": true,
+      "fields": {
+        "question": "Is Sleep just a pause or a separate learning stage?",
+        "answer": "It is offline consolidation. Before applying precomputed base updates, expand slow modules and use the pre-update teacher to consolidate fast memories into the student to be updated. Then apply the update and clear sending-layer experts. It is not just a pause or brief replay, and the full chain is not implemented locally.",
+        "example": "Example: Verify notes copied into a long-term library before deleting the temporary notes. Computing note similarity is not consolidation."
+      }
+    },
+    "qa/foundation-models:sleep-lti/mechanism": {
+      "source_sha256": "07fc0843b1a0aec1912d1e811618f1b90f569302d0e893cd4f8ca575aa21932d",
+      "reviewed": true,
+      "fields": {
+        "question": "Does LTI's edit-distance threshold cap edit count or a similarity ratio?",
+        "answer": "It caps the absolute number of token edits, inclusively. For accepted pairs the literal reward is one minus distance divided by the longer completion length. A fixed similarity-ratio threshold differs.",
+        "example": "Example: Threshold 1 admits one substitution in both 6- and 60-token completions, with rewards 5/6 and 59/60."
+      }
+    },
+    "qa/foundation-models:sleep-lti/comparison": {
+      "source_sha256": "27d2089306475d3df0fbe49995a4df55cbbec7b6da681a54202873539df7861a",
+      "reviewed": true,
+      "fields": {
+        "question": "Does crossing the literal-distance threshold also zero semantic reward?",
+        "answer": "No. A separate frozen judge assigns binary semantic reward. The threshold only gates the literal branch. Very different wording can preserve meaning; replacing the judge with edit distance changes the method.",
+        "example": "Example: With gamma 0.4 and a positive semantic judgment, a zero literal branch still yields total reward 0.4."
+      }
+    },
+    "qa/foundation-models:sleep-lti/implementation": {
+      "source_sha256": "8d82574da4f2678fd2946a7ca26dc8b16feed7bb91c1454e3b4c042e7da64bbc",
+      "reviewed": true,
+      "fields": {
+        "question": "Can the local Sleep reward prove the model retains knowledge long term?",
+        "answer": "No. It receives tokenized completions and external semantic labels and checks reward boundaries. No dream sampling, CMS, expansion, LoRA, screening or forgetting evaluation. The costly full experiment is not reproduced; the kernel is not an Evolve capability operator.",
+        "example": "Example: Reward 0.9 for two integer sequences confirms the formula for that input, not any update to model weights."
+      }
+    },
+    "qa/recommendation:pailitao-mmsearch2/basics": {
+      "source_sha256": "e10c5bba6bbe52ecfa298e72c0b613ea67a8dc8dbb6ac3bd32bba1229db0e80a",
+      "reviewed": true,
+      "fields": {
+        "question": "Does PailitaoMMSearch2.0 rewrite queries or directly generate items?",
+        "answer": "It consumes the original image and free text and generates three-level SIDs that map to products. Decoding produces candidates. Some deployments still mix them with incumbent retrieval results; end-to-end generation does not remove every production module.",
+        "example": "Example: Upload a shirt and request matching pants; outputs are product IDs, not just a rewritten query for another engine."
+      }
+    },
+    "qa/recommendation:pailitao-mmsearch2/mechanism": {
+      "source_sha256": "be9fea9dc6d512e49f7d1561e514abd6a27fce9c7cd466e5c4a18fdc161dfb71",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Sample–Beam separate sampled reasoning from item beam generation?",
+        "answer": "Serving returns an item set; sampling one response does not match that structure. Sample reasoning, then beam-expand the SID to train RL on a serving-like candidate set. Intent rewards and trajectories are still needed; beam search alone is not the full method.",
+        "example": "Example: Expand ten product codes under one rationale instead of sampling ten unrelated rationale–ID pairs."
+      }
+    },
+    "qa/recommendation:pailitao-mmsearch2/comparison": {
+      "source_sha256": "4d015af9f93f33c01c730b092e9f708d035ee2de90b1690db9c70261d9dddc54",
+      "reviewed": true,
+      "fields": {
+        "question": "Does more reasoning always improve PailitaoMMSearch2.0 retrieval?",
+        "answer": "No. The 0.8B No-think variant has highest macro ER; 2B Low-think better balances overall quality and latency, and 4B varies by intent. Consider scale, intent and serving cost rather than generalizing a single optimum.",
+        "example": "Example: A clearly visible exact-match attribute may need no rationale, while a match with several constraints can benefit."
+      }
+    },
+    "qa/recommendation:pailitao-mmsearch2/implementation": {
+      "source_sha256": "c8e10a8d83b3d2a485d2d5eead2deb1f06e5aafddd2ae11ef9f11dba185b9e91",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a 0.58 percentage-point CTR gain be reported as 0.58% relative?",
+        "answer": "No. Percentage points are absolute; relative change depends on baseline CTR. The paper's result is from full deployment. This repository records the work only, without model, private-data training or A/B; don't attribute production lift to a local stub.",
+        "example": "Example: 10%→10.58% is +0.58 points but +5.8% relative. This illustrates units, not the paper baseline."
+      }
+    }
+  }
+}

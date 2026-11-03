@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:recgpt-v2/comparison": {
+      "source_sha256": "1cd7d830d7b85516acc4ee4b6dd65b990b035e9043d360e16149adf3ee6d23eb",
+      "reviewed": true,
+      "fields": {
+        "question": "How do agent judges and real user feedback differ in evaluation bias?",
+        "answer": "Judges quickly score semantics or format; users reveal behavior, but exposure biases it. Mixed rewards can use both without treating either as true satisfaction. Self-proposal and self-judging can reinforce bias, requiring independent validation. Local proxies do not establish production judging/RL.",
+        "example": "Illustration: A judge may like long explanations while users want quick results. Record semantic scores separately from behavior."
+      }
+    },
+    "qa/recommendation:recgpt-v2/implementation": {
+      "source_sha256": "36cb5a0750ec08a59520887e679fa9848c501ef86cb87cf6598c66f2fa073d4e",
+      "reviewed": true,
+      "fields": {
+        "question": "How avoid counting duplicated RecGPT-V2 paths as extra ability in π=Σgkπk?",
+        "answer": "Align path distributions over one candidate space, normalize the gate across actual paths, and check duplicated outputs and call costs. Copies of one policy add no information. Fixed-score proxies do not reproduce hierarchical memory and dynamic prompts merely by mixing.",
+        "example": "Illustration: Three paths returning the same ten popular items do not triple interest coverage."
+      }
+    },
+    "qa/recommendation:recgpt-v3/mechanism": {
+      "source_sha256": "00a8ce844cb02e65500e78b023c5239162ac8e65e1ab02a74cbfda92b0bd6ef4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why change memory, item interface, and reasoning representation together in RecGPT-V3?",
+        "answer": "CoT compression alone leaves repeated history reads and losses mapping natural language to items. Memory Hub updates traceable units incrementally, SID connects to products, and latent tokens cut reasoning output. They address different costs, while production ranking feedback also contributes.",
+        "example": "Illustration: Update only the photography memory after a camera view, emit an item code, and use shorter latent reasoning. Text length alone misses the other savings."
+      }
+    },
+    "qa/recommendation:recgpt-v3/basics": {
+      "source_sha256": "92ad218760da439117c8109e8197db6eded1dbd5cf8e0c8f0c7d50b433d8458c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why store original behavior references and timestamps in a RecGPT-V3 memory unit?",
+        "answer": "Provenance enables evidence tracing and incremental updates instead of letting summaries drift. Only relevant units change, but traceability is not lossless or causal correctness. Refresh and expiry still matter.",
+        "example": "Illustration: Link 'planning to camp' to dated browsing records so the right unit can be updated when needs change."
+      }
+    },
+    "qa/recommendation:recgpt-v3/comparison": {
+      "source_sha256": "b776a16b30c74e27a19b95055addf67e0db6ba548bf3b3e5afb74eed730a0e0a",
+      "reviewed": true,
+      "fields": {
+        "question": "What training protection does latent internalization add beyond deleting explicit CoT?",
+        "answer": "Segment, cross-segment, and full-chain reconstruction transfer teacher information into latent slots. Removing output alone only saves text. Reconstruction does not prove faithful reasoning, and teacher quality and freezing matter. Local synchronous drift failed before teacher warm-up and freezing improved results.",
+        "example": "Illustration: Teaching four slots to support prior explanations differs from not printing an explanation; moving teacher and student together can destabilize targets."
+      }
+    },
+    "qa/recommendation:recgpt-v3/implementation": {
+      "source_sha256": "b21c8f46645ebaf28ea8157328c7689354ad726501545009ebd4e1afb35488ac",
+      "reviewed": true,
+      "fields": {
+        "question": "Why report RecGPT-V3 selection history and head share with final local metrics?",
+        "answer": "Teacher warm-up and freezing were selected through iterations; the final single seed is not preregistered stability evidence. Rising head share can signal a popularity shortcut. Counts of memory and latent tokens are structural, not latency or 14B measurements.",
+        "example": "Illustration: Reducing 40 events to 14 inputs changes budget but does not promise a 65% speedup."
+      }
+    },
+    "qa/recommendation:recharness/mechanism": {
+      "source_sha256": "7be18bfdb11bcb9ed6f2e0d027744f3e5b923615a7c8fcc09cf133904cd1d8e8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does RecHarness allocate experiments by gain and uncertainty rather than always choose the best observed architecture?",
+        "answer": "Greedy mean selection can abandon underexplored directions too early. Confidence bonuses let uncertain arms receive experiments and winners inform later candidates. It allocates finite research budget, not globally optimal architectures, and gains require one validation protocol.",
+        "example": "Illustration: An arm tried once may merit exploration against a slightly stronger arm tried ten times; final choice still needs independent test."
+      }
+    },
+    "qa/recommendation:recharness/basics": {
+      "source_sha256": "be4d3ee9c4ed474d025513523ab93db826f6f78b0e70460729a4e099ca9ac2c0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why discretize RecHarness architecture changes into finite arms?",
+        "answer": "Explicit actions support gain and uncertainty estimates for budget allocation, with feedback guiding future trials. The bandit manages experiments, not direct recommendation. Predefined actions limit the search space.",
+        "example": "Illustration: Widening, gate replacement, and adding content are separate arms, not arbitrary novel code generated from scratch."
+      }
+    },
+    "qa/recommendation:recharness/comparison": {
+      "source_sha256": "0e28ce3375bbd8fce863db831fa18f307636dc246aa7ce45a35c9717b899d885",
+      "reviewed": true,
+      "fields": {
+        "question": "When is UCB preferable to equal round-robin experiments?",
+        "answer": "It spends more on high or uncertain gains rather than repeatedly testing poor arms. Nonstationarity and unequal evaluation noise can distort estimates. Exploration does not correct unfair baselines or leakage.",
+        "example": "Illustration: An arm with five regressions can receive less budget than a promising arm, provided exploration avoids premature rejection."
+      }
+    },
+    "qa/recommendation:recharness/implementation": {
+      "source_sha256": "8c8818f85645f8b286055506fa2799e34ec1f440e0a472ec6c394e89dba6a52f",
+      "reviewed": true,
+      "fields": {
+        "question": "How handle RecHarness na=0 and multi-round records without fabricated trials?",
+        "answer": "Prioritize untested arms or define infinite exploration explicitly. Increment counts only for real completed trials with fixed validation outcomes. Persist actual state on interruption; submission is not feedback. Small proxies do not establish production research throughput.",
+        "example": "Illustration: Record training failure as a failure, not a zero validation reward or successful completed trial."
+      }
+    },
+    "qa/recommendation:reco-reward/mechanism": {
+      "source_sha256": "2bd0a91ac032b0a2c962920ad700869ebc43a8e1194541d9b78f45e8db1f45a6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reward target minus non-target affinity in Reco-Reward rather than general appeal?",
+        "answer": "Target-only scores can favor generic popular copy. Subtracting non-target affinity encourages audience-distinguishing features. A frozen two-tower model provides a stable reward, and serving consumes descriptions without real-time user profiles. Proxy gains are not verified satisfaction.",
+        "example": "Illustration: Specify acidity and brewing parameters for pour-over fans rather than write 'everyone loves it.'"
+      }
+    },
+    "qa/recommendation:reco-reward/basics": {
+      "source_sha256": "94758342d37cfa1c1fac32af72070fcc7d742dc7ae3dc858310d7d5e5c3d33bc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why optimize content descriptions rather than generate user profiles online in Reco-Reward?",
+        "answer": "A frozen recommender rewards audience fit while serving reads the optimized description without generating a profile. Training uses audience signals without exposing profiles online. Descriptions must remain factual despite reward pressure.",
+        "example": "Illustration: Mention real pour-over attributes; do not invent them to increase affinity."
+      }
+    },
+    "qa/recommendation:reco-reward/comparison": {
+      "source_sha256": "e1b6d05c01a2ce86ff2551c3bcee6efb4e714c9d397dea3ccc977959668af91e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is higher frozen Reco-Reward not equivalent to users liking copy more?",
+        "answer": "A fixed two-tower RAS estimates affinity difference and can be exploited. Freezing stabilizes the yardstick, not its correctness. Separately verify reward, fidelity, and independent behavior.",
+        "example": "Illustration: Stuffing audience keywords may raise model affinity while making text unreadable or misleading."
+      }
+    },
+    "qa/recommendation:reco-reward/implementation": {
+      "source_sha256": "294ce5bfbc13768ff74f3f48e5e25fbac4b0ff800735db3931b090be9aff8588",
+      "reviewed": true,
+      "fields": {
+        "question": "Why freeze the two towers and track non-target provenance for RAS?",
+        "answer": "A drifting reward model can raise scores without better descriptions, and negative-population choice changes the subtraction. Isolate generation/selection and evaluation; test users cannot supervise training. The history-centroid proxy is not the production tower.",
+        "example": "Illustration: A weaker description can score higher if the evaluator drifts; a fixed evaluator still needs independent validation."
+      }
+    },
+    "qa/recommendation:repair-state/mechanism": {
+      "source_sha256": "d30838a4cc2bb65eaf4aef0cc3d1b66b8be441558d8a63ce4ba2873074953604",
+      "reviewed": true,
+      "fields": {
+        "question": "Why repair preference with cached state differences while freezing Repair-State's encoder and head?",
+        "answer": "Cached states retain evidence at different times. Select long-range, recent, or burst segments and add weighted differences to restore compressed directions without retraining. It cannot recover uncached evidence and can reintroduce stale interests.",
+        "example": "Illustration: Retrieve recent baby-product activity from cache to supplement a profile dominated by long-term movie viewing."
+      }
+    },
+    "qa/recommendation:repair-state/basics": {
+      "source_sha256": "5afa11174daec2764409f2fc7ef907d12d2e47a7e98e1a7f195cee8c5b0b6282",
+      "reviewed": true,
+      "fields": {
+        "question": "Why aren't a historical ht and current preference z interchangeable?",
+        "answer": "ht represents a contextual position and z summarizes current preference for the head. Equal dimensions do not imply the same time or coverage. Repair selects evidence while retaining current state rather than replacing it wholesale.",
+        "example": "Illustration: Last year's camera state cannot replace a current profile that includes camping."
+      }
+    },
+    "qa/recommendation:repair-state/comparison": {
+      "source_sha256": "a325c5faff2c62711f4d890c5d5b13133c2c561f3f38555c8d9437b3a059f8da",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Repair-State differ from retraining the encoder?",
+        "answer": "Postprocessing uses an existing forward cache while preserving encoder and head, reducing deployment cost. Retraining can change feature extraction. Residuals cannot recreate omitted evidence, and selection may not transfer to all tasks. The local diagnostic does not establish capability rankings.",
+        "example": "Illustration: A stored burst can be restored, but an event ignored entirely by the encoder cannot."
+      }
+    },
+    "qa/recommendation:repair-state/implementation": {
+      "source_sha256": "650fa70dc071fc7cc31734865f7dc24b1b2b7064eb95cb671c3b7d8135979d78",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check valid history before Repair-State top-k and masked softmax?",
+        "answer": "Mask padding, future states, and other users before selection and normalize only selected valid states. Align differences with z. Define empty-history fallback rather than injecting random evidence. Frozen encoders do not prevent data leakage.",
+        "example": "Illustration: With two events and k=5, zero-scored padding must not beat valid negative scores and pull z toward zero."
+      }
+    },
+    "qa/recommendation:rest/mechanism": {
+      "source_sha256": "4b0d689360f0a0e9135a88ca15e667deba4c2515db6a6988fd4d24e4869d11d3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate heavy user encoding and light candidate interaction in ReST compute-once, decode-many?",
+        "answer": "Long-history gated attention, order, and time intervals are shared user compute. Candidate cross-decoders read relevant evidence without rerunning history. Dual gates suppress noise, but only candidate-independent state is reusable and history/version changes invalidate it.",
+        "example": "Illustration: Encode history once for 200 films, then let each query it; never share one film's interaction result as general user state."
+      }
+    },
+    "qa/recommendation:rest/basics": {
+      "source_sha256": "19935dd26d32bcc1d91412e17eec8a8fb8ea0f964aab02305af68edc4572e777",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine RoPE and relative time in ReST?",
+        "answer": "Position and elapsed time differ: adjacent events can be a minute or a year apart. RoPE represents order, time encoding adds cadence, and dual gates filter noise. Not all periodicity is captured and large gaps are not always irrelevant.",
+        "example": "Illustration: Camera views five minutes apart suggest one comparison; views six months apart may mark a new need."
+      }
+    },
+    "qa/recommendation:rest/comparison": {
+      "source_sha256": "1e0a4416a8bcc15cc047764379b986b8fbd19dd88af99c5887c1a6e20aefa3e7",
+      "reviewed": true,
+      "fields": {
+        "question": "What evidence does ReST gating preserve compared with truncation?",
+        "answer": "Truncation discards events; gating can suppress noise across broader history while retaining distant evidence for candidate decoding. It can suppress important items too and still incurs input cost. A small local regression does not show gating beats recent-window baselines.",
+        "example": "Illustration: Keep a small weight on old photography and downweight accidental news; truncation could remove the useful photography event entirely."
+      }
+    },
+    "qa/recommendation:rest/implementation": {
+      "source_sha256": "178341405a6a6f127fbc628ab980e542d630f0c79fe4a10227f13a54e4501033",
+      "reviewed": true,
+      "fields": {
+        "question": "What dependencies matter before reusing ReST encoder caches across requests?",
+        "answer": "Same-request hU reuse requires unchanged history and version. New events, relative time encodings, or model updates can invalidate cross-request state. Candidate decoder outputs remain private to their candidates. Local structure does not prove production QPS or cache lifecycle.",
+        "example": "Illustration: After a user buys a camera, update history instead of reusing the old summary forever because user ID matches."
+      }
+    },
+    "qa/recommendation:reward-guided-decoding/mechanism": {
+      "source_sha256": "1d80f34312019a3650eed10e708c241c688ae2669b3c364f2f14adc860f6ea36",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does exponential reward-guided decoding preserve a prior while depending on KL temperature?",
+        "answer": "The tilted distribution multiplies prior probability by exponentiated reward. Smaller temperature follows reward more aggressively; larger approaches the prior. Search and normalization affect approximation, and reward errors can hurt even without training.",
+        "example": "Illustration: Moderate novelty can elevate relevant niche movies; too low a temperature can select irrelevant novelties."
+      }
+    },
+    "qa/recommendation:reward-guided-decoding/basics": {
+      "source_sha256": "bb951f41057719d3ea03d66e9b664cebac93696d79fa06d2a348c9e643d32600",
+      "reviewed": true,
+      "fields": {
+        "question": "Can reward-guided decoding give positive mass to a sequence with P0=0?",
+        "answer": "Not under the closed form. Multiplying strict zero by an exponential stays zero, and normalization does not create support. Smoothing, candidate expansion, or generator changes are separate steps.",
+        "example": "Illustration: A movie absent from all legal candidates cannot be recovered by assigning a high novelty reward."
+      }
+    },
+    "qa/recommendation:reward-guided-decoding/comparison": {
+      "source_sha256": "523e826d6dc56ee281e00775ebbf2e485f9fd750959779f6d0edc1270d429bf8",
+      "reviewed": true,
+      "fields": {
+        "question": "When does exponential tilting correspond to adding logits, and when does it not?",
+        "answer": "On identical support, log Q equals log P0+R/β up to a shared normalizer. Adding reward to raw P0 instead changes the distribution. Candidate truncation also changes support and normalization and is not the exact closed form.",
+        "example": "Illustration: Adding one to probabilities 0.9 and 0.1 has a different effect from adding it in log space."
+      }
+    },
+    "qa/recommendation:reward-guided-decoding/implementation": {
+      "source_sha256": "09fa69b62b1ecded4d8fc07ae3cda0a0643b14456ac565aac01d212e33a904eb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why implement reward tilting with logsumexp and test temperature limits?",
+        "answer": "Raw exponentials overflow. Normalize in log space; large β should approach the prior, small β emphasize reward, and illegal entries stay masked. Separate truncated approximation from exact normalization. Local novelty reward reduced NDCG, so higher reward did not establish better ranking.",
+        "example": "Illustration: exp(1000) can overflow; stable normalization fixes numerics, not irrelevant novelty at low temperature."
+      }
+    }
+  }
+}

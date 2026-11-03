@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:pn-mix/mechanism": {
+      "source_sha256": "b98fd7a0c0008d2df0f43a3224579b15d2dd0db955f22d3febb2d5e98c024e46",
+      "reviewed": true,
+      "fields": {
+        "question": "Why score true RoPE pairs with Q/K norm products rather than K magnitude alone?",
+        "answer": "Attention error depends on both query and key. Score each rotation plane jointly to preserve coupling. Choose high-precision pairs per shared KV head during prefill and reuse them without future decode data. Memory adjacency need not be a true pair.",
+        "example": "A large key direction rarely used by queries may not deserve precision; adjacent Llama channels need not rotate together."
+      }
+    },
+    "qa/foundation-models:pn-mix/basics": {
+      "source_sha256": "6d7c029dcd65ba55833d2dd4ad2de22ca822f28bed1d9f575c44024a7e456928",
+      "reviewed": true,
+      "fields": {
+        "question": "Why assign higher precision to some RoPE pairs?",
+        "answer": "Rotation planes differ in QK impact. Prefill average Q/K norm products estimate importance, and each KV head fixes its high-precision set, trading cache width for attention error.",
+        "example": "Preserve both dimensions of a high-impact rotation pair together."
+      }
+    },
+    "qa/foundation-models:pn-mix/comparison": {
+      "source_sha256": "39aa424fad5085ef488719f81e563d64d203f7b4d8dbc76a772d6ddac38e7895",
+      "reviewed": true,
+      "fields": {
+        "question": "Are PN-Mix 1-bit correction and FP16 residual buffering the same?",
+        "answer": "No. Correction shifts 1-bit reconstruction bins without extra residual codes. The buffer holds new not-yet-quantized tokens. They have distinct numerical and storage roles.",
+        "example": "Corrected quantized groups can coexist with a new full-precision token batch."
+      }
+    },
+    "qa/foundation-models:pn-mix/implementation": {
+      "source_sha256": "52e3fb7e4d1c2664850a7f2b60b3822bf9cb128306c721ba35db3654cf992e44",
+      "reviewed": true,
+      "fields": {
+        "question": "Can Llama/SmolLM2 RoPE pairs be formed from adjacent coordinates?",
+        "answer": "No for split-half layout: pair corresponding coordinates across the halves, unlike interleaved layout. Pin the prefill-selected mask across pages, without decode lookahead.",
+        "example": "Pair index i in the first half with index i in the second, not necessarily i+1."
+      }
+    },
+    "qa/foundation-models:qevict/mechanism": {
+      "source_sha256": "752e9d89f23634003301e4371305c64d61d50ce21376a25f454d67bd55b1135e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add a recoverable quantized tier between full precision and deletion?",
+        "answer": "Attention relevance can drift. Lower storage preserves approximate content for promotion when accumulated attention rises. Permanent deletion cannot recover it; dequantization does not restore lost precision. Local state checks are not serving performance.",
+        "example": "Demote an old clue, then read it again when a later question needs it."
+      }
+    },
+    "qa/foundation-models:qevict/basics": {
+      "source_sha256": "a21d640b8b2d107ef1d252884a4d7f8297c8e3da992d1dbf3584393724bae135",
+      "reviewed": true,
+      "fields": {
+        "question": "Why have full, recoverable quantized, and deleted states?",
+        "answer": "The middle tier keeps dormant history available with less storage and supports promotion under renewed attention, unlike deletion.",
+        "example": "A previously irrelevant window can return to high-priority reading."
+      }
+    },
+    "qa/foundation-models:qevict/comparison": {
+      "source_sha256": "ce0375aa174e4d0c0581aec084354b1b06dbfa5b39b307c5b08a65312c86fe12",
+      "reviewed": true,
+      "fields": {
+        "question": "Is promotion from quantized cache equivalent to never quantizing it?",
+        "answer": "Not necessarily. Dequantization restores access, not every original bit. Measure quantization error separately from the advantage over deletion.",
+        "example": "Converting a low-bit vector to float does not restore original decimals."
+      }
+    },
+    "qa/foundation-models:qevict/implementation": {
+      "source_sha256": "5e2289485bcfe478172ef90d3faac6858b562e5f949562838ee5854af12d8bb7",
+      "reviewed": true,
+      "fields": {
+        "question": "What should QEvict verify when cumulative scores update?",
+        "answer": "Verify decay γ, current attention increments, promotion threshold, and slot budget. Keep actual recoverable quantized content. A log state alone does not migrate data.",
+        "example": "Crossing τ should restore the stored vector, not just increment a count."
+      }
+    },
+    "qa/foundation-models:race-rope-compression/mechanism": {
+      "source_sha256": "20b8fb6da6563c8a3410944a17e2f6ddf2648b622acd0276eca639373deeb326",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep original RoPE frequencies and head scaling after RACE narrows attention?",
+        "answer": "This is a subspace of an existing model. Preserve complete matched Q/K rotation pairs, original frequencies and width scaling; fold V projections into weights for native low-dimensional compute. Calibration energy optimizes a bound, not global LM loss.",
+        "example": "Keep original second and fifth frequencies rather than renumbering them first and second."
+      }
+    },
+    "qa/foundation-models:race-rope-compression/basics": {
+      "source_sha256": "7e71f18c8f517c6dd5a99229ffa6c8c338a7db0bb104ce6643c0e75057b79a0e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why directly reduce native attention head width?",
+        "answer": "Low-rank storage followed by full reconstruction saves memory but adds work. RACE folds selections and V subspaces into projections so attention runs on retained dimensions.",
+        "example": "Run four-dimensional attention directly instead of rebuilding eight dimensions."
+      }
+    },
+    "qa/foundation-models:race-rope-compression/comparison": {
+      "source_sha256": "433fddd2d69c95f12626c55ffcda13f30e8055cf7d7d8d851f600262975a0842",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compress Q/K in pairs but V with an SVD subspace?",
+        "answer": "Q/K preserve common RoPE planes and matching geometry. Values carry aggregated content and can use a calibrated right singular space. One common pruning rule changes their roles.",
+        "example": "Keep the corresponding K pair for each Q pair; V need not use those coordinates."
+      }
+    },
+    "qa/foundation-models:race-rope-compression/implementation": {
+      "source_sha256": "4dff42d418a2a4e2bb1ca2bdfb691fed606965d12c8afc58c2572a64ba9ab2ae",
+      "reviewed": true,
+      "fields": {
+        "question": "Why fold W_O when compressing V?",
+        "answer": "W_V′=W_VP_V and W_O′=P_VᵀW_O define one subspace path. Changing V alone mismatches shape or function. Detach calibration and SVD while retaining gradients through folded forward.",
+        "example": "A four-dimensional V needs a matching output map, not the original eight-dimensional interpretation."
+      }
+    },
+    "qa/foundation-models:random-attention/mechanism": {
+      "source_sha256": "32d2c01116f9435b14a2d9157d00ddbd46d78d4fcc64e870c7f8e9161f39c1be",
+      "reviewed": true,
+      "fields": {
+        "question": "Why protect full prompts but sample generated history independently per head?",
+        "answer": "Prompt preservation keeps task conditions and initial evidence fixed. Per-head random retention avoids scoring and gives diverse coverage, but may miss important reasoning and must fit the protected prompt budget. GPU reconstruction is not full task or kernel evaluation.",
+        "example": "Different heads can see different reasoning fragments while all still read the original question."
+      }
+    },
+    "qa/foundation-models:random-attention/basics": {
+      "source_sha256": "93fe458c47a22d31e43ca8e0e8d33e5d05b0eabe89ceb8270b4bd0a4decd2790",
+      "reviewed": true,
+      "fields": {
+        "question": "Why omit KV importance scoring in Random Attention?",
+        "answer": "Scoring costs compute and can impose one shared ranking. Protect the prompt and sample generated positions uniformly per head as a simpler cache trade-off.",
+        "example": "Keep part of each head's history without scanning all tokens for importance first."
+      }
+    },
+    "qa/foundation-models:random-attention/comparison": {
+      "source_sha256": "3e6f1bd8203e38ebe490a5ef65a1bc7c395df6b698ce11b899fe4101e84dca8b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does independent per-head sampling differ from a shared random set?",
+        "answer": "Head-specific sets vary evidence coverage; shared sampling applies one restriction everywhere. Average budgets can match while errors and coverage correlations differ.",
+        "example": "One head can keep position five and another eight."
+      }
+    },
+    "qa/foundation-models:random-attention/implementation": {
+      "source_sha256": "bdbb18cf09e03f8d023d6dddb728c0393e098e176b4364f226dbfddffe3e92de",
+      "reviewed": true,
+      "fields": {
+        "question": "May the method drop prompt entries if B is smaller than prompt length?",
+        "answer": "Not under full prompt protection. B−|P| must be a valid generation budget. Raise the budget or report infeasibility rather than changing the method silently.",
+        "example": "A 100-entry prompt cannot fit untouched into 80 slots."
+      }
+    },
+    "qa/foundation-models:remote-kv-tiers/mechanism": {
+      "source_sha256": "401644839b0df243009d3e994a296fa7e3bfcf2dca20f9e6005399f739385f2e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a remote KV hit be slower than re-prefill?",
+        "answer": "Fetch has fixed request latency and volume-dependent transfer; recompute depends on prefill throughput. Break-even depends on length and bandwidth, and asynchronous shards must avoid head-of-line blocking. Hit rate is not latency. No local remote implementation or GPU results.",
+        "example": "A short hit can spend more time opening the connection than local recompute takes."
+      }
+    },
+    "qa/foundation-models:remote-kv-tiers/basics": {
+      "source_sha256": "ebcb4eabd47ea7072a84045ffcda76b7cd492293209ac56d50f763ac58a68b8c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why analyze fetch versus re-prefill break-even first?",
+        "answer": "Remote hits pay request and transfer costs; GPU recompute can be fast. Compare both paths by length and bandwidth, not only hit rate.",
+        "example": "Fetching a short cached prefix can be slower than recreating KV."
+      }
+    },
+    "qa/foundation-models:remote-kv-tiers/comparison": {
+      "source_sha256": "d7a72b331858560dcaf1cf5f2f0bccc59db5cc66e98d292957296f2b5a7aaa47",
+      "reviewed": true,
+      "fields": {
+        "question": "Does B>sR with fixed T0 guarantee fetch is faster at every length?",
+        "answer": "No. It gives asymptotic bandwidth advantage. Compare T0+sn/B against n/R for finite requests; fixed cost can dominate short ones.",
+        "example": "Fast per-token transfer does not erase first-packet latency."
+      }
+    },
+    "qa/foundation-models:remote-kv-tiers/implementation": {
+      "source_sha256": "88230d295775b96369ad2f2452c02e48a601d1c56e44e1fae58c91b53082f9aa",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use per-PCP-rank remote instances and async loading?",
+        "answer": "MLA cache is sharded by rank; independent instances and async loads reduce head-of-line blocking. Validation needs the multi-node service and workload, not a single A100/A30 fixture.",
+        "example": "A large request on one rank should not hold a small load on another."
+      }
+    },
+    "qa/foundation-models:replayssm/mechanism": {
+      "source_sha256": "778beed105419b30a40d477ae908642de3ca155feb89a8b76fb1117b876aa50a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why commit only accepted inputs and keep a high-precision anchor separate from low-precision reads?",
+        "answer": "Replay outputs from a checkpoint and short input log without full writes every token. Rejected drafts cannot enter committed state. Refresh from the high-precision anchor and raw records to avoid rounding feedback. Reassociation preserves recurrence dependencies.",
+        "example": "Accept two of four drafts and advance only two steps; do not refresh from the rejected tail or rounded copy."
+      }
+    },
+    "qa/foundation-models:replayssm/basics": {
+      "source_sha256": "3e600a2a754df70482dc3ee8c54af8d0db56622195ce88d512d98899fc702b89",
+      "reviewed": true,
+      "fields": {
+        "question": "Why cache small inputs instead of writing a full matrix each token?",
+        "answer": "Matrix-state traffic can be bandwidth-bound. Refresh periodically and record inputs for reassociated reads, especially output-only speculative checks.",
+        "example": "Store one anchor and several small inputs instead of a whole matrix per step."
+      }
+    },
+    "qa/foundation-models:replayssm/comparison": {
+      "source_sha256": "a23c5a6661d85dec643e0a0f1a189fedbb8bdfe325d794e33c461f79f9e6e2b0",
+      "reviewed": true,
+      "fields": {
+        "question": "How should output-only replay match stepwise recurrence?",
+        "answer": "Compute equivalent readout without materializing each state. Persistent refresh uses only committed inputs. Computation and writes change, not the reference accepted sequence.",
+        "example": "Match ordinary recurrence on accepted tokens; rejected drafts affect neither committed state."
+      }
+    },
+    "qa/foundation-models:replayssm/implementation": {
+      "source_sha256": "2af4f3999358544989977343f4455d35bcaca86849ff384ddfe8eab375e23e7d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why preserve raw values and recompute residuals when refreshing GDN?",
+        "answer": "Residuals depend on the precise anchor. Reusing rounded reads or stale residuals feeds error back. Refresh from committed raw records and separately produce high/low copies; zero accepted tokens leave the anchor unchanged.",
+        "example": "Rejected drafts may have computed outputs without updating committed recurrence."
+      }
+    },
+    "qa/foundation-models:right-on-q/mechanism": {
+      "source_sha256": "706adf5785aa923cd1eb13d033d38bbedd65509f1c9aa7ace43398b316d034ee",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distill on the quantized student's prefixes with per-candidate KL mixing?",
+        "answer": "Quantization changes visited states, so score the student's own prefixes. Teacher/student probability ratios mix forward and reverse KL per candidate to treat over- and underestimation differently. Detach mixture weights and retain a residual mass bucket.",
+        "example": "A correct number underweighted and a connective overweighted at one position need different coefficients, not ideal teacher prefixes."
+      }
+    }
+  }
+}

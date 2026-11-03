@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:soar/basics": {
+      "source_sha256": "fb0d7381e9358398728f762fd3b4734ac3a398026171b381a4360d3693e21ce3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why require explicit source claims in SOAR answers?",
+        "answer": "Correctness alone doesn't verify evidential dependence. Record internal recall and external retrieval separately, then test whether the claimed stream supports the answer.",
+        "example": "A retrieval claim must be supported by retrieval records, not by a lucky memory."
+      }
+    },
+    "qa/post-training:soar/comparison": {
+      "source_sha256": "8c9ff9b06ad3a396fc5d07f27361ca14d349a0381956069dc329c1868486f7f6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't SOAR internal recall see prior reasoning or retrieval?",
+        "answer": "The audit distinguishes existing knowledge from external findings. Isolate recall before external evidence; contamination invalidates source matching.",
+        "example": "Recalling a fact after reading a webpage isn't independent memory."
+      }
+    },
+    "qa/post-training:soar/implementation": {
+      "source_sha256": "76360d63bf0021e9415839b95bb95bb152564ef59a35fedad58de8061e275a92",
+      "reviewed": true,
+      "fields": {
+        "question": "Can SOAR award matching credit from the other evidence stream?",
+        "answer": "No. Check only the declared stream. Tool observations and recall text aren't actor-loss actions. Explicitly normalize reward before group advantage; mechanism execution isn't external capability.",
+        "example": "If an answer claims recall but only a webpage supports it, correctness doesn't earn source credit."
+      }
+    },
+    "qa/post-training:soar/mechanism": {
+      "source_sha256": "20549a79718b519ed914681b7edd166dd23c14248e0435e72747821a9b87188c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why ignore an answer found in the nondeclared evidence stream?",
+        "answer": "A declared source should actually support the answer; cross-stream rescue would reward invented dependency. Separate recall/retrieval, keep old reasoning and external evidence out of recall, and exclude observations from actor actions.",
+        "example": "If a reply cites retrieval but only recall contains the fact, provenance is inconsistent."
+      }
+    },
+    "qa/post-training:residual-advantage/basics": {
+      "source_sha256": "f173941eb5f5fac7773d3efdcd3cdcc5bbb1c96d64df79da07d9b3b44b03201a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why turn teacher–student probability residuals into local advantages?",
+        "answer": "Teacher differences supply dense guidance. Subtract the student-distribution expectation to get relative local credit, then combine with verifier advantages rather than only terminal teacher scores.",
+        "example": "A teacher preferring another word at the same prefix suggests a local update."
+      }
+    },
+    "qa/post-training:residual-advantage/comparison": {
+      "source_sha256": "fc790c838ca53259e1be6216efd430ebd56abd715ace80cb4dfe5cbb94d4f41a",
+      "reviewed": true,
+      "fields": {
+        "question": "How do residual advantages differ from full-distribution KL distillation?",
+        "answer": "Bound and center local advantages to feed policy updates, while KL directly constrains distribution differences. Gradients and reward combination differ despite using teacher probabilities.",
+        "example": "Subtract student expectation and response mean rather than copying logits."
+      }
+    },
+    "qa/post-training:residual-advantage/implementation": {
+      "source_sha256": "90dd150107ee09e71092b456b4037df7da5afc941f48a2e8876a59bbd699307b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't Co-RA change teachers midway through a scored batch?",
+        "answer": "Student/teacher consume the same scored batch. Teacher LoRA uses fixed verifier advantages, and the new teacher is used next round. Relabeling midway changes targets and provenance.",
+        "example": "Old teacher on the first half and updated teacher on the second is not fixed supervision."
+      }
+    },
+    "qa/post-training:residual-advantage/mechanism": {
+      "source_sha256": "dfcb3e0bc4aaeef590026f005e4d21c81ba076c3e4be2b2658a78cdec2b9149a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why subtract expected residual under the student and then center per response?",
+        "answer": "Raw differences depend on student coverage. Student expectation yields relative local credit; response centering separates positional effects. Add to verifier advantage, not replace it. Fix scoring across the batch and refresh teacher only next round.",
+        "example": "One word's positive residual isn't sufficient if alternatives have similarly positive residuals."
+      }
+    },
+    "qa/post-training:tvrl/basics": {
+      "source_sha256": "c27d510c1ef9e0efadd56aac23f23e97a336386e38b3868c1d48dbda9f6f8a51",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use gradient sensitivity for video-token credit in TVRL?",
+        "answer": "Terminal video reward is coarse. Sensitivity through a frozen evaluator localizes group advantage. Sensitivity means response to perturbations, not verified correctness.",
+        "example": "Action terms may affect video reward more than connective words."
+      }
+    },
+    "qa/post-training:tvrl/comparison": {
+      "source_sha256": "5920f742cdb9a6b1c168b425df585d2ef62b93ee648cc5cbfb081252c1dbc03c",
+      "reviewed": true,
+      "fields": {
+        "question": "How does TVRL sensitivity differ from uniformly broadcasting advantage?",
+        "answer": "Normalized gradient norms emphasize sensitive positions while uniform credits ignore them. Quality depends on the frozen VLM; gradients alone are not causal evidence.",
+        "example": "Evaluator sensitivity to a word can be a shortcut."
+      }
+    },
+    "qa/post-training:tvrl/implementation": {
+      "source_sha256": "7bf8af36f0413cf8fd234baf373ab69193625ff1fe540f4f73c56612668ca51c",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local TVRL train a video diffusion model?",
+        "answer": "No. It computes gradient-based credits and mean normalization. Real video, frozen VLM gradients and policy training remain; handle all-zero norms explicitly. Random inputs are not video capability.",
+        "example": "Hand-supplied gradient sizes validate weighting without generating videos."
+      }
+    },
+    "qa/post-training:tvrl/mechanism": {
+      "source_sha256": "1f60751480353eebc6c536252db4792a51ba0cdd4584dfefa5372e48ad4d3241",
+      "reviewed": true,
+      "fields": {
+        "question": "Why interpret high VLM-reward gradient as sensitivity rather than correct credit?",
+        "answer": "It measures local response of the current reward function. Mean-normalized token reweighting controls scale, but shortcut-driven sensitivities need not be causal. Local checks neither train videos nor prove perception gains.",
+        "example": "A corner watermark can receive a large gradient without being a route to better video quality."
+      }
+    },
+    "qa/post-training:my-fault/basics": {
+      "source_sha256": "daa9dcfcfa2e2610db1f3f6a4f614de10fc50c0e3f5b312b9d1b04adfc0e7d53",
+      "reviewed": true,
+      "fields": {
+        "question": "Why verify My FAULT self-diagnoses before pricing errors?",
+        "answer": "Self-explanations can invent causes. Only evidence-supported categories/locations enter online pricing; relative costs allocate terminal credit.",
+        "example": "A claim that the tool failed needs trace evidence before penalizing tool steps."
+      }
+    },
+    "qa/post-training:my-fault/comparison": {
+      "source_sha256": "4de0a0667be71ff2745a99a4769f9f096a0bb7e47957ca5f9e41fca43243da27",
+      "reviewed": true,
+      "fields": {
+        "question": "How does conserved redistribution differ from an extra error penalty?",
+        "answer": "Conservation preserves total terminal return and changes only allocation. Extra penalties change the objective and incentives.",
+        "example": "Lower one step's credit and offset elsewhere rather than deduct from the entire return twice."
+      }
+    },
+    "qa/post-training:my-fault/implementation": {
+      "source_sha256": "6c445615ae57c7980b84537b95b3274d3479d35a150630759a3633b19e9932e3",
+      "reviewed": true,
+      "fields": {
+        "question": "What conservation invariant should My FAULT check?",
+        "answer": "Valid-step credits sum to original return. Mean cost and step count use the same mask. Local screening/cost/conservation does not jointly train a policy and diagnosis model.",
+        "example": "Including padding in mean cost breaks conservation on valid steps."
+      }
+    },
+    "qa/post-training:my-fault/mechanism": {
+      "source_sha256": "48a39996b070d9bab3e06691c1c0edeb5ea0665706c453e6ca8c1b39fccc865c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why verify diagnostic claims before error pricing?",
+        "answer": "Hindsight explanations can rationalize. Evidence-verified location and class drive relative online prices and conserved terminal credit redistribution. No invented success reward or jointly trained local diagnosis model.",
+        "example": "If search was correct but summary dropped a fact, don't penalize search merely because the model blames it."
+      }
+    },
+    "qa/post-training:carm/basics": {
+      "source_sha256": "70e9b58cbb307d76de52a288111fc136b26f623c1fa08b4e5a4c9f7adace7717",
+      "reviewed": true,
+      "fields": {
+        "question": "Why take absolute token log ratios in CARM?",
+        "answer": "Signed shifts can cancel across positions and conceal severe drift. Average absolute magnitude and use a response-level gate to detect cancellation risk.",
+        "example": "A sharp rise at one token and equal fall at another can average to zero."
+      }
+    },
+    "qa/post-training:carm/comparison": {
+      "source_sha256": "90443db66935073b3b5377fadb46d8987c27be73a2280bbd7d9ae8b2f52115e0",
+      "reviewed": true,
+      "fields": {
+        "question": "How does CARM differ from filtering on geometric ratio near one?",
+        "answer": "Geometric ratios allow signed cancellation; CARM measures unsigned change and can reject internally shifted responses near ratio one. This is not quality scoring.",
+        "example": "A balanced ledger can still hide large cash movements."
+      }
+    },
+    "qa/post-training:carm/implementation": {
+      "source_sha256": "ba2f834994561846f34808ee7428d4500c62bb12ba31a6c4f9d83dbf81bef61f",
+      "reviewed": true,
+      "fields": {
+        "question": "Should CARM differentiate through the response gate?",
+        "answer": "No. Freeze selection, measure valid response tokens only and apply the specified threshold. No Qwen3.5 training or measured stability improvement.",
+        "example": "Don't add gradients through a threshold recomputed from updated probabilities."
+      }
+    },
+    "qa/post-training:carm/mechanism": {
+      "source_sha256": "7823a766ebd817e17b68f57e79d05a97935089ea8ca8bf6aa943133502fafe74",
+      "reviewed": true,
+      "fields": {
+        "question": "Why take absolute log ratios before response averaging?",
+        "answer": "Opposing probability shifts can cancel in a normal sequence mean. Absolute averaging detects magnitude and masks large mismatch. It measures policy shift, not answer quality, with a detached gate.",
+        "example": "Opposite shifts across sentence halves produce near-zero total signed drift but large mean absolute drift."
+      }
+    },
+    "qa/post-training:t2spo/basics": {
+      "source_sha256": "e272048d0b709ccc0096526c8df018710aae94a893e42cb9bbd16c0943b8f85f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use remaining steps in successful traces as T2SPO distance?",
+        "answer": "Successful history offers state/remaining-step support examples for a frozen in-context predictor, giving denser progress than terminal success. Failure cannot be relabeled as close to success.",
+        "example": "A state three steps from completion provides a support label."
+      }
+    },
+    "qa/post-training:t2spo/comparison": {
+      "source_sha256": "4a4c2d63860d41010c54f9693a1982ecc68e2129fd697a1af55698bd5053a7fd",
+      "reviewed": true,
+      "fields": {
+        "question": "How does distance-improvement credit complement terminal success?",
+        "answer": "Distance differences guide intermediate steps; terminal reward still measures outcome. Mask/scale imperfect forecasts. TabPFN prediction errors don't establish task success.",
+        "example": "An action can move toward the goal without completing it; still verify terminal result."
+      }
+    },
+    "qa/post-training:t2spo/implementation": {
+      "source_sha256": "e3a07b5166235147aaf43ebf308b746b65bcb931978015ed137bf77c4f8184ae",
+      "reviewed": true,
+      "fields": {
+        "question": "Does T2SPO optimizer=ppo provide a full PPO trainer?",
+        "answer": "No. It changes truncation semantics only, no critic/GAE. GRPO zeroes truncated credit; PPO uses predicted real successor. Fit standardization/SVD only on historical supports.",
+        "example": "Changing an option string does not create a value network."
+      }
+    },
+    "qa/post-training:t2spo/mechanism": {
+      "source_sha256": "da947cd73e66b5a2b5736c2e7734bc2beead4ac97d13021aab53abd81220ea78",
+      "reviewed": true,
+      "fields": {
+        "question": "Why set successor distance to zero at success but directly zero progress at failure?",
+        "answer": "Success reaches the goal; failure only stops execution, so treating it as distance zero creates false progress. Score before updating successful history to avoid leakage. Handle time truncation according to GRPO/PPO.",
+        "example": "A tool-exhaustion exit is not zero steps to success and must not reward the final failure."
+      }
+    }
+  }
+}

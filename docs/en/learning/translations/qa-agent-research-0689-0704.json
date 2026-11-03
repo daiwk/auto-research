@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:dr-credit/implementation": {
+      "source_sha256": "ab655be474e4c85cf2ec834a555ddf1fa53270c775b0ecc9df450d00911aca31",
+      "reviewed": true,
+      "fields": {
+        "question": "What can local fixture rubrics and support scores validate?",
+        "answer": "They validate history updates, no repeat credit for duplicates, and direction of incremental credit. They do not test whether a semantic judge correctly recognizes support. The policy does not read gold answers, and a three-seed mini-suite is not Deep Research capability. Stronger claims need real sources, trustworthy matching, and actual training.",
+        "example": "A fixture stating that evidence A supports criterion one can test that the second retrieval adds zero credit. It does not test whether a model recognizes that support on a webpage."
+      }
+    },
+    "qa/agent-research:dependency-refinement/mechanism": {
+      "source_sha256": "d42ec46aabdb06264bd160dd94998b96b0a8f3e85adccf2c9dab1b85f5e7a1ae",
+      "reviewed": true,
+      "fields": {
+        "question": "Why prune leaves first when compressing multi-turn traces instead of deleting the longest message?",
+        "answer": "A dependency DAG marks turns supporting the final answer; leaves are more likely to be redundant branches with no downstream dependency. Strict and then relaxed merging reduce repetition while preserving required information flow. The longest message may contain the key tool evidence, so length-only pruning can remove necessary causal context.",
+        "example": "A long log may contain the only error code, while short chat has no dependents. Prune the chat leaf rather than discarding the log because it is longer."
+      }
+    },
+    "qa/agent-research:dependency-refinement/basics": {
+      "source_sha256": "715e61b62d9d1af173dc1f8e308f4ef30d86636c04948847b680c842e6aad4bb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't long multi-turn training trajectories simply be truncated by length?",
+        "answer": "Tool traces depend on observations, reasoning, and actions. Early or long content may support the final conclusion, and mechanical truncation makes later turns inexplicable. Dependency Refinement retains necessary semantic connections while reducing cost. Annotations may be wrong; shorter traces do not prove more learning or that deleted content never matters.",
+        "example": "If the first turn establishes authorized scope and the final action relies on it, keeping only recent messages makes the action appear unsupported."
+      }
+    },
+    "qa/agent-research:dependency-refinement/comparison": {
+      "source_sha256": "00acca7724635133fca888657e6624fe230a2f8cb0f660aed38336b7b6afab98",
+      "reviewed": true,
+      "fields": {
+        "question": "How do leaf pruning and turn merging differ in semantic preservation?",
+        "answer": "Pruning removes branches that no longer serve the objective. Merging compactly represents steps that can be expressed together. Strict merging applies tighter constraints; relaxed merging seeks more compression at greater risk. Preserve order and dependency invariants instead of substituting arbitrary summaries.",
+        "example": "Two reads of identical state can be merged. Keep the causal order between a change and verification, not a vague 'handled' summary."
+      }
+    },
+    "qa/agent-research:dependency-refinement/implementation": {
+      "source_sha256": "81da744aa5bf267cb3e0be4468c1b71c93c8e6253ebf1c68588534a72fd73c4a",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the auditable local DAG include an actual LLM dependency annotator?",
+        "answer": "No. It prunes and merges a supplied fixture DAG to verify structure and rejection paths, not automatic semantic annotation. If input omits a key edge, pruning may legally drop a necessary turn. Compression ratios and mechanism passes are not agent fine-tuning quality or paper-level results.",
+        "example": "If a fixture omits 'the answer depends on turn two,' the pruner cannot infer the edge. Correct test graphs do not validate dependency extraction on open trajectories."
+      }
+    },
+    "qa/agent-research:harness-bandit/mechanism": {
+      "source_sha256": "0d1337f0ae61220867907927097a494e0170041d01708a39028608093d09d5ca",
+      "reviewed": true,
+      "fields": {
+        "question": "Why schedule multi-harness training using both learnability and transferability?",
+        "answer": "An easy harness may teach only its specific interface; a transferable but currently hard one may need exploration. Combining both signals and a bonus allocates limited budget and avoids overfitting to easy scores. Scheduling weights are training decisions; a reference function or multi-seed diagnostics are not cross-harness ability evidence.",
+        "example": "A provides many hints and B resembles deployment. Do not give A all budget for faster near-term gains without checking whether the learning transfers."
+      }
+    },
+    "qa/agent-research:harness-bandit/basics": {
+      "source_sha256": "c07fc7153a0bd2efecc563df3f1d55fbc16f9567cccc12181298f33270715e26",
+      "reviewed": true,
+      "fields": {
+        "question": "Why might learning in one harness fail to improve performance under other interfaces?",
+        "answer": "Tool protocols, prompts, and workflows change which states and actions are encountered. Some learning is specific to that organization. Harness Bandit allocates budget across harnesses for both learning and transfer. In-training gains are not cross-interface generalization; report evaluation conditions separately.",
+        "example": "A model familiar with one edit command may face different arguments elsewhere. More practice on the known interface can improve its score without improving transfer."
+      }
+    },
+    "qa/agent-research:harness-bandit/comparison": {
+      "source_sha256": "056b375dbaaa0723eaceacc4d570f95c42b3d525a89bafa1c1bfb2cf1d44a5d1",
+      "reviewed": true,
+      "fields": {
+        "question": "What trade-offs distinguish uniform multi-harness allocation from bandit scheduling?",
+        "answer": "Uniform allocation does not adapt to changing payoffs. A bandit can sample more from environments worth learning or uncertain at the current stage. It may favor short-term proxies and spend budget on exploration, so assess scheduling cost and transfer rather than only within-harness efficiency.",
+        "example": "After one harness saturates, shift budget to paths with transferable gains, while occasionally revisiting it to guard against stale estimates."
+      }
+    },
+    "qa/agent-research:harness-bandit/implementation": {
+      "source_sha256": "37f9fde7f13e8822bfc95f732b69c5e998cc68c49a92f199279f26f5477b967b",
+      "reviewed": true,
+      "fields": {
+        "question": "Do local online harness-selection counts establish completed multi-harness LLM RL?",
+        "answer": "No. The reference runs gates, allocation, and state updates, without real LLM RL, full rollouts, or transfer benchmarks. Synthetic learnability and transferability check weight response, not portable capability. Three-seed scheduling statistics cannot establish training effects.",
+        "example": "More allocations to an arm with a supplied high transfer score verify the scheduler. A manually set score does not measure model transfer."
+      }
+    },
+    "qa/agent-research:t1-terminal-rl/mechanism": {
+      "source_sha256": "0f2cb5a27bddb4fcb65a90ad2eca089cf93150e3ad66739f0a2f84c3a006b208",
+      "reviewed": true,
+      "fields": {
+        "question": "Why train on token IDs actually sampled in rollouts rather than retokenizing complete interaction text?",
+        "answer": "Joining tool observations and turns before tokenization can alter boundaries or token IDs, so policy probabilities no longer correspond to sampled actions. TITO retains sampled IDs, boundary repair handles drift, and MoE route replay addresses expert-path differences. Alignment is a training contract, not evidence that terminal tasks were learned.",
+        "example": "Concatenating a command and an observation can create different subtokens or include non-action content. Keep sampled IDs to align training with the original action."
+      }
+    },
+    "qa/agent-research:t1-terminal-rl/basics": {
+      "source_sha256": "a9b02c7529c6f0a791e0e8aab231041610929777024edbe3ca97cb4fd7282663",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must inference trajectories match optimizer examples when training large terminal agents?",
+        "answer": "Terminal interactions include generated tokens, observations, and potentially changing execution paths. Reconstructed samples can optimize behavior that was never sampled. T1 keeps long rollouts traceably aligned with updates and supports scale. Record consistency is necessary for correct training, but does not establish capability or final gains.",
+        "example": "If tool output sits between model turns and concatenation changes token boundaries, computed probabilities may no longer represent the original action."
+      }
+    },
+    "qa/agent-research:t1-terminal-rl/comparison": {
+      "source_sha256": "2c70f96889cb151a70ce87bdf8272e70f2b070c8af4eb995f569a968c16e533e",
+      "reviewed": true,
+      "fields": {
+        "question": "How does MoE route replay differ from replaying generated tokens alone?",
+        "answer": "Expert routes may differ for identical tokens because of implementation or state. R3 saves and replays routing choices to narrow execution-path mismatch between training and inference. Token equality is necessary but insufficient; route equality also does not guarantee task gains without real model and log-probability comparisons.",
+        "example": "If a token originally selects experts A and B but training recomputes A and C, outputs and gradients can change despite identical token IDs."
+      }
+    },
+    "qa/agent-research:t1-terminal-rl/implementation": {
+      "source_sha256": "94d75fbbb774d541c93e4f788d78bec59dbe3291e9987dc0d3bdffaf4fc3d326",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a local exact-token/route audit cover training a 122B MoE?",
+        "answer": "No. It checks sampled sequences and route replay contracts, without a 122B model, cloud sandboxes exceeding 300 turns, or full terminal RL. Log consistency does not demonstrate a smaller training–inference gap. Paper scores and gap measurements belong to the authors' real system, not fixtures with matching fields.",
+        "example": "A fixture route array that replays element by element confirms indexing, not actual MoE dispatch or backpropagation."
+      }
+    },
+    "qa/agent-research:multi-harness-rl/mechanism": {
+      "source_sha256": "6c5761286bdfdba1caf88279270b7ab24a5082a486c41b8cdd32826522d44a07",
+      "reviewed": true,
+      "fields": {
+        "question": "What confound is isolated by freezing task–harness trajectories and changing only advantage grouping?",
+        "answer": "Multi-harness training changes both data diversity and credit comparison groups. Comparing complete systems confounds them. Fixed trajectories let within-task comparison of cross-harness and within-harness normalization more directly test grouping. Report transfer differences and uncertainty on unseen minimal harnesses.",
+        "example": "Reuse trajectories for one repair task under two interfaces and recompute grouped advantages without resampling. This reduces attribution of sampling changes to the credit rule."
+      }
+    },
+    "qa/agent-research:multi-harness-rl/basics": {
+      "source_sha256": "ef0739513adf2bc4c926125244923ccdb6d347261a827424d6cf37be3d7a419b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate base-model capability from execution-interface effects in multi-harness RL?",
+        "answer": "Different prompts, tools, and workflows change success on the same task; grouping changes the meaning of rewards. Multi-Harness RL examines their effects on learning and transfer. If the base, tasks, or samples also change, attribution is difficult. Control trajectories and evaluation definitions instead of calling all cross-harness gains capability growth.",
+        "example": "One harness fills arguments automatically while another requires the model to fill them. Success differences may reflect interface help rather than base reasoning."
+      }
+    },
+    "qa/agent-research:multi-harness-rl/comparison": {
+      "source_sha256": "92a85ed38092c2a59639cac6895584ef5cc58e57b2a411063284be77fe4cca36",
+      "reviewed": true,
+      "fields": {
+        "question": "How do Within and Cross change the relative meaning of the same reward?",
+        "answer": "Within normalizes inside each task–harness group, comparing sibling trajectories in one environment. Cross normalizes across harnesses for the same task, including between-environment reward differences in advantages. It can learn environment preferences; portability needs paired tests on an unseen minimal harness, not just training means.",
+        "example": "A stronger-tool harness can earn generally positive Cross advantages because its rewards are higher. That does not imply better code repair on a minimal interface."
+      }
+    }
+  }
+}

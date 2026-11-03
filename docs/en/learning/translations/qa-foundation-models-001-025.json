@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:alibi/mechanism": {
+      "source_sha256": "b9b7926b32f0b72b74b90ce45176a6ecb022dba997892397a06eedf3c5a1930b",
+      "reviewed": true,
+      "fields": {
+        "question": "Without position vectors, how does ALiBi tell how far apart tokens are?",
+        "answer": "It subtracts a distance-proportional bias from each head's attention logits. Distant tokens need a stronger content match, and slopes vary by head. The rule extrapolates without a fixed-length table, but that does not guarantee arbitrary-length retrieval.",
+        "example": "Equal content scores at distances 2 and 20 favor the closer token; a distant answer can still win with a stronger match."
+      }
+    },
+    "qa/foundation-models:alibi/basics": {
+      "source_sha256": "339ee5163ea059958e92e7ef1c844bfe1a99157097c4dcf5e0c94c0757a478da",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does ALiBi address training short and testing long?",
+        "answer": "Position mechanisms fitted only to training lengths can fail at greater distances. ALiBi computes a distance penalty directly in logits. The positional rule extrapolates; long-context accuracy is empirical.",
+        "example": "After training on 512 words, compute distances for word 800 without looking up a learned 800th position."
+      }
+    },
+    "qa/foundation-models:alibi/comparison": {
+      "source_sha256": "67ef3ba92bf508eea6271ff7157e341fef430d6c8f4f3bf0c664e0e5e7ba66b5",
+      "reviewed": true,
+      "fields": {
+        "question": "Where do linear bias and position embeddings act?",
+        "answer": "Position embeddings modify token inputs before Q/K/V projections. ALiBi does not learn position vectors; it modifies per-head matching logits directly. These are distinct information paths.",
+        "example": "The same content vectors can have different logit penalties at different distances."
+      }
+    },
+    "qa/foundation-models:alibi/implementation": {
+      "source_sha256": "6e3fa2b28f8032f7a7612847e2563d9edfce562439beb120a2dc9f68a2726d2c",
+      "reviewed": true,
+      "fields": {
+        "question": "Can ALiBi's distance penalty replace causal masking?",
+        "answer": "No. Bias changes preferences among visible positions, while the mask excludes future ones. Broadcast each head's slope and keep causality. Small local models do not establish the paper's large-scale gain.",
+        "example": "Token 3 cannot read token 4 even though their distance is one."
+      }
+    },
+    "qa/foundation-models:autonomy-heads/mechanism": {
+      "source_sha256": "090052520d6d1ce40dcd3e73635aa94ce0d885163992aa6f6cba722206befd0f",
+      "reviewed": true,
+      "fields": {
+        "question": "How can Autonomy-of-Heads assign sparse patterns without calibration examples?",
+        "answer": "It analyzes frozen Q/K projections and uses spectral effective rank to characterize potential matching geometry, separating retrieval-oriented from streaming heads. No sample-based calibration or runtime selector is needed, but real tasks must validate the pattern.",
+        "example": "Two heads with equal budgets can emphasize very different numbers of directions; assign patterns accordingly and test evidence retention."
+      }
+    },
+    "qa/foundation-models:autonomy-heads/basics": {
+      "source_sha256": "222fe1d513c65e26b7e626a86382e82239288f7e8d7c90e36b85225926b9815e",
+      "reviewed": true,
+      "fields": {
+        "question": "What does data-free omit in Autonomy-of-Heads?",
+        "answer": "It uses frozen Q/K geometry rather than calibration examples and runtime gating to choose sparsity. This does not remove model pretraining or post-sparsification evaluation.",
+        "example": "Assign head types from weights before deployment, then check actual answers."
+      }
+    },
+    "qa/foundation-models:autonomy-heads/comparison": {
+      "source_sha256": "5fec043980b69898af9f0af9395b0cb670e149b4b2edafc2f9c8363551478a5e",
+      "reviewed": true,
+      "fields": {
+        "question": "How does weight-based head assignment differ from dynamic attention selection?",
+        "answer": "Weight geometry gives stable assignments and avoids per-input selector work. Dynamic methods adapt to content but pay selection cost. Neither accuracy follows from calibration cost alone.",
+        "example": "A fixed retrieval head always reads far away, while a dynamic gate may allocate different ranges for short and long prompts."
+      }
+    },
+    "qa/foundation-models:autonomy-heads/implementation": {
+      "source_sha256": "dd1be379f2ba4f6d5d49e780bb60d7a24f1c10a8e0f2577414e4e8d15ef220fb",
+      "reviewed": true,
+      "fields": {
+        "question": "Can singular values be used as probabilities directly for spectral entropy?",
+        "answer": "Normalize them into a distribution, or rescaling the matrix changes entropy's meaning. Handle degenerate cases. Local mini-suite checks data flow, not checkpoint quality.",
+        "example": "[2,2] and [20,20] both normalize to [0.5,0.5]."
+      }
+    },
+    "qa/foundation-models:conv-llm/mechanism": {
+      "source_sha256": "d002b8f695875b04d6da4307fe06e2928e52605bd1d2a5a65f60b4b520accf23",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add three-tap convolution after Q/K/V despite having attention?",
+        "answer": "Attention selects history by content. Short depthwise residual convolution adds nearby ordered patterns to projected Q/K/V before attention, without replacing global interaction. Left padding preserves causality.",
+        "example": "Local context can combine negation with already seen neighboring words before matching faraway context, but cannot read an unseen word."
+      }
+    },
+    "qa/foundation-models:conv-llm/basics": {
+      "source_sha256": "2e93c361674bb1689ade60e22d427839e5d48758827cfa5602b18a0b80866aac",
+      "reviewed": true,
+      "fields": {
+        "question": "What information preference does Conv-LLM add to attention?",
+        "answer": "Global matching accesses distant tokens without inherently emphasizing local word combinations. Short convolution first enriches Q/K/V with local order, while attention handles global interaction.",
+        "example": "Aggregate nearby words in “not very good” before reading broader context."
+      }
+    },
+    "qa/foundation-models:conv-llm/comparison": {
+      "source_sha256": "b7476794a5d05737a2fea677eac20b0d1bee83c8e614b97288ab851db128e9bd",
+      "reviewed": true,
+      "fields": {
+        "question": "How does depthwise QKV convolution differ from replacing attention with convolution?",
+        "answer": "It enriches projections without removing global attention. Depthwise kernels do not fully mix channels, keeping overhead small, and attention still serves long-range access.",
+        "example": "Combine three adjacent positions, then still read a name hundreds of words earlier."
+      }
+    },
+    "qa/foundation-models:conv-llm/implementation": {
+      "source_sha256": "1f6602a0a0c4310db89d5e5ef71d6800933a246cdec60dba71fe0d2fdf495896",
+      "reviewed": true,
+      "fields": {
+        "question": "How should QKV residual convolution handle padding, activation, and bypass?",
+        "answer": "Use causal left padding, add the convolution to projected Q/K/V, then run attention. Do not insert normalization or activation into this documented bypass.",
+        "example": "Width three at t uses t, t−1, t−2, not symmetric future padding."
+      }
+    },
+    "qa/foundation-models:dart/mechanism": {
+      "source_sha256": "e2a6e1ec074834d81218590a4606fd51bd551877587f69af3741723eadaf032b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep recurrent states from several chunks instead of one final DART state?",
+        "answer": "Fixed-capacity recurrence can overwrite old facts. DART decodes chunk-state contributions into queryable K/V, attends to them from the current token, and fuses memory reads with Mamba. Addressability costs extra storage and retrieval.",
+        "example": "A later chapter may overwrite an earlier author's name; retrieve the first chunk instead of relying on the final state."
+      }
+    },
+    "qa/foundation-models:dart/basics": {
+      "source_sha256": "400ae522eb20026a041153dfc2384eeece135d50cbeb11d8ce544dce95bd649a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why make recurrent state queryable rather than only use it as a final summary?",
+        "answer": "Continuous updates can erase old information. DART retains chunk contributions for targeted access, giving long-range dependencies an addressable path.",
+        "example": "Retrieve chapter one's state to answer a name question after many chapters."
+      }
+    },
+    "qa/foundation-models:dart/comparison": {
+      "source_sha256": "d582990deeeb8324733780e0feca7758fcf7824d549c137ce8fb7d1f34e71eda",
+      "reviewed": true,
+      "fields": {
+        "question": "How does DART state memory differ from storing all token KV?",
+        "answer": "It reads K/V decoded from compressed recurrent chunks, not original K/V for every token. This trades storage and access flexibility and can still lose detail.",
+        "example": "Retrieving a chunk representation need not reconstruct every word."
+      }
+    },
+    "qa/foundation-models:dart/implementation": {
+      "source_sha256": "62edbfdc244cb7f502dd9200a779d1a117d24de1ce705d1485d0715a70a89236",
+      "reviewed": true,
+      "fields": {
+        "question": "Which path should DART's gate g_t modulate?",
+        "answer": "Mamba is the main output; add gated state-memory attention. Separate recurrent updates, state-to-K/V decoding, and query reads. Do not gate the entire sum.",
+        "example": "Near-zero g_t suppresses memory reads while preserving Mamba."
+      }
+    },
+    "qa/foundation-models:frac-ssm/mechanism": {
+      "source_sha256": "f9b7c26e0ef4cd234b1942e269ffd098ac103a4bf8f6067f937cf608bf7914d7",
+      "reviewed": true,
+      "fields": {
+        "question": "How do finitely many recurrent states approximate long fractional-order power-law memory?",
+        "answer": "One exponential has one decay timescale. Log-spaced modes approximate a power-law tail: fast modes handle recent changes and slow ones keep older influence. Finite capacity and approximation range do not give unlimited exact memory.",
+        "example": "Fast, medium, and slow channels combine into a longer tail than one decay."
+      }
+    },
+    "qa/foundation-models:frac-ssm/basics": {
+      "source_sha256": "ed4aa3017c2409febf077dae768300a9fa6b3a2dfa8c31449438fe310f49819a",
+      "reviewed": true,
+      "fields": {
+        "question": "How does power-law memory differ from a recent window?",
+        "answer": "Old influence fades gradually instead of becoming zero at a fixed boundary. Frac-SSM approximates this with finite exponential modes at several timescales.",
+        "example": "A past event can still matter weakly beyond the latest 100 steps."
+      }
+    },
+    "qa/foundation-models:frac-ssm/comparison": {
+      "source_sha256": "2a275fd709e069c7ad208939721f3906dddce13c3550b37c697dfea88c6599a6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do multiple decay rates approximate a long tail better?",
+        "answer": "Log-spaced modes span recent and distant timescales, unlike a single exponential. Their finite combination approximates a bounded range, not infinite exact history.",
+        "example": "Fast modes track fluctuations while slow ones retain trends."
+      }
+    },
+    "qa/foundation-models:frac-ssm/implementation": {
+      "source_sha256": "be8bf374d514339ee97213d4ada4e4bba36db1f0014e53dbb8f8230e14a93836",
+      "reviewed": true,
+      "fields": {
+        "question": "What should finite-mode recurrence tests verify besides shape?",
+        "answer": "Verify equivalence to the finite-mode calculation, long-tail invariants, and state propagation. Operator checks are not reproduction of 1.3B training or model quality.",
+        "example": "Inject an early impulse and compare combined decay over time with the defined approximation."
+      }
+    },
+    "qa/foundation-models:gated-attention/mechanism": {
+      "source_sha256": "5b6526e981c84ad73587b43d4d44a3e7e53ff3884f13360a009316966d0975c8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why put the Gated Attention gate after SDPA rather than in logits?",
+        "answer": "Aggregate each head first, then use an input-conditioned sigmoid before output projection. It controls how much of what was read is passed onward and adds nonlinearity between aggregation and projection. This is not changing historical softmax probabilities.",
+        "example": "Suppress a head's formatting output while retaining another head's answer evidence."
+      }
+    },
+    "qa/foundation-models:gated-attention/basics": {
+      "source_sha256": "5785f4a83e9a39b92959715f87e2ad369391739fcce273e1c90e554ee6080f61",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the Gated Attention gate decide where to read or how much to emit?",
+        "answer": "Attention first selects and aggregates positions. The current input then controls how much of each SDPA head output goes forward.",
+        "example": "A head can read a formatting marker but emit less when irrelevant."
+      }
+    },
+    "qa/foundation-models:gated-attention/comparison": {
+      "source_sha256": "ca6148aec24d9e63f762a016aa3bc063762a0aefe953732c1072f64afa3d181b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't a pre-SDPA sigmoid equivalent to a post-SDPA gate?",
+        "answer": "Gating scores or values changes aggregation itself. The post-SDPA gate modulates the already aggregated output; placement is a documented ablation result.",
+        "example": "Scaling one contribution before combining differs from scaling the whole combined result."
+      }
+    },
+    "qa/foundation-models:gated-attention/implementation": {
+      "source_sha256": "7cb7ec54cdefa4537388d215459306c1088a8e73f3aad0ea61d83197b974842b",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a fixed constant replace a query-dependent per-head gate?",
+        "answer": "A constant loses input dependence and head selectivity. Produce sigmoid gates from current hidden state and multiply SDPA output before projection. Local gate statistics only verify a nontrivial path.",
+        "example": "Different questions over the same article can use different gates instead of always multiplying by 0.5."
+      }
+    },
+    "qa/foundation-models:gzip-sparse-attention/mechanism": {
+      "source_sha256": "1375ad8705ac8b7f7f1a0308b7d8c6b8ed2515a890c2db8ada558303b6cb691a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why give hard-to-gzip blocks long-range edges, and are they necessarily important?",
+        "answer": "Blocks above the sample's average compression-ratio threshold are treated as literal-rich and connected at range while preserving local windows and causality. Compressibility is a training-free proxy, not semantic gold; random noise can also be incompressible and too many literal blocks make edges costly.",
+        "example": "An unusual ID may need cross-section access while a repeated template compresses easily, but incompressible gibberish need not help."
+      }
+    }
+  }
+}

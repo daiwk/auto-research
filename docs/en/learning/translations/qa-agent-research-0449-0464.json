@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:critic/implementation": {
+      "source_sha256": "25f036abf08c7e8166747b06fb596a14bf0a1478c36e319a1eb452227b1eec85",
+      "reviewed": true,
+      "fields": {
+        "question": "What feedback does the local real-traceback loop cover?",
+        "answer": "It writes a defective patch, runs unittest, edits from observed feedback, reruns, and records commands and exit codes each round. This verifies controlled code feedback and iteration, not search engines, toxicity classifiers, or a general LLM critic. Running tests does not validate all paper tasks.",
+        "example": "Example: A second patch turning a failed test into a pass verifies this code instance, not open-domain QA or harmlessness."
+      }
+    },
+    "qa/agent-research:camel/mechanism": {
+      "source_sha256": "e16f8d51dc997dcccd07d93d57cd5ca09766d44141d5c3bf33198f89588d957b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is inception prompting with roles, goals, and boundaries more than naming two models?",
+        "answer": "Prompts define responsibilities, permitted requests, and cooperation. Alternating messages advance a common task under constraints. Renaming without capability or boundary differences can produce duplicates rather than collaboration. A social trace does not prove goal achievement; check deliverables separately.",
+        "example": "Example: One role specifies implementation and the other proposes solutions without changing the overall goal. Mutual praise does not move the task forward."
+      }
+    },
+    "qa/agent-research:camel/basics": {
+      "source_sha256": "d266c5c838445a373b67fa9f2d805b60b95488670b687c42ff24b322ea50e652",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CAMEL study role collaboration instead of only a single model answer?",
+        "answer": "Some tasks need requests, actions, and feedback over time. Two constrained roles can produce a longer collaboration process and data. Dialogue length and role division do not prove quality; roles can misunderstand goals, repeat, or drift. Inspect outcomes.",
+        "example": "Example: One role requests analysis and another implements with feedback. Repeating the request across turns does not complete the analysis."
+      }
+    },
+    "qa/agent-research:camel/comparison": {
+      "source_sha256": "f222265451bccf5fe6c299b49fe6283ba87fa4858df4a82b637b159b694e6b5b",
+      "reviewed": true,
+      "fields": {
+        "question": "What does alternating two-role cooperation trade off against one complete model response?",
+        "answer": "Dialogue can clarify and divide reasoning, but adds turns, communication, and error propagation. Models sharing biases cannot validate one another by agreement. Evaluate task outcomes and total cost rather than natural-sounding social messages.",
+        "example": "Example: An executor can ask for missing input. If both roles misread the goal, more turns only extend the mistake."
+      }
+    },
+    "qa/agent-research:camel/implementation": {
+      "source_sha256": "328a62de6d38b268aa71d87b0503fec3d62ca218aacf5c84f8c41ccd7a187698",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local collaboration state machine match the full paper's multi-agent instruction-following scope?",
+        "answer": "No. It tests role messages, state updates, and budget without full large-model social traces or benchmarks. Scripted lines can verify handoffs but not autonomous cooperation or general open-task success.",
+        "example": "Example: Two templated replies show alternation works, not that models maintain role and goal boundaries on unfamiliar tasks."
+      }
+    },
+    "qa/agent-research:hugginggpt/mechanism": {
+      "source_sha256": "3a50864706f2acb5ed48489bf1a63767eb2c3a09436cdea7b0b378d5f663cb6b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why obey subtask dependencies instead of calling all multimodal experts simultaneously?",
+        "answer": "A later expert may require actual outputs from detection, recognition, or transcription. Build a DAG, select compatible experts, run in topological order, then synthesize. Similar names do not imply compatible interfaces. Parallelize independent work, not dependencies.",
+        "example": "Example: Translate only after receiving real speech transcription. Starting translation concurrently and guessing the transcript breaks provenance."
+      }
+    },
+    "qa/agent-research:hugginggpt/basics": {
+      "source_sha256": "bcfe968245e96bc25116283447fc938b051c5fb440ef77bcc9b7d6c511002812",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does HuggingGPT use expert model descriptions as a searchable capability catalog?",
+        "answer": "The controller matches subtasks to model-card descriptions and invokes experts instead of implementing all vision and speech itself. Descriptions guide selection, not guarantee capability. Verify versions, input/output types, and availability.",
+        "example": "Example: Object recognition calls detection; audio-to-text calls ASR. Their media and output contracts differ."
+      }
+    },
+    "qa/agent-research:hugginggpt/comparison": {
+      "source_sha256": "0ddee4730133b12047771dcc876c3a1fe3ca12ef736da3eb6061b32b78cb003c",
+      "reviewed": true,
+      "fields": {
+        "question": "What does the language controller do versus a specialist multimodal model?",
+        "answer": "The controller interprets requests, selects specialists, and schedules subtasks. Specialists process vision or audio and the controller synthesizes results. Correct routing does not ensure correct predictions, and individual predictions do not guarantee a correct final answer. Verify selection, I/O, and interpretation separately.",
+        "example": "Example: A controller schedules image recognition before speech generation. The image and speech models execute their roles; the controller does not acquire their parameters."
+      }
+    },
+    "qa/agent-research:hugginggpt/implementation": {
+      "source_sha256": "491cfcac44482beb7ca4dbf1e21ac37fe73e2558236d644a5c2a71c59df61d3c",
+      "reviewed": true,
+      "fields": {
+        "question": "Do the local capability registry and dependency edges run downloaded expert models?",
+        "answer": "No. Local tool descriptions replace the model catalog to check matching and topological execution. No hundreds of Hugging Face checkpoints or ChatGPT calls ran. Edge counts verify flow, not cross-modal quality or real costs.",
+        "example": "Example: A detection node's rule-generated output can reach the answer node without establishing actual vision recognition."
+      }
+    },
+    "qa/agent-research:art/mechanism": {
+      "source_sha256": "86e58706ea76c84c044640eaa241918853303459a38552c72ea894f64a4914a9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why pause at a tool marker and resume after execution instead of generating a whole program with results at once?",
+        "answer": "Pausing conditions later text on real tool returns rather than imagined outcomes. Retrieved reasoning/tool examples reduce manual prompts, but the runner must detect markers and inject observations. Frozen weights do not prevent tool feedback changing context and future output.",
+        "example": "Example: Execute a database query at its marker, then summarize the three returned rows rather than claim ten and add an unrun query."
+      }
+    },
+    "qa/agent-research:art/basics": {
+      "source_sha256": "d3f6991e556030f88fd88b3073eb834e883c5e57253fa053427cac73e75aa51f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does ART reuse reasoning and tool demonstrations for new tasks?",
+        "answer": "Handwriting full CoT and tool flows for each task is costly. Prior examples offer transferable structure. ART retrieves examples and generates workflows using external computation. Validate current inputs and actual outputs; copying old answers or assuming cross-domain transfer is invalid.",
+        "example": "Example: Reuse a calculator-based cost comparison procedure for a new bill, but obtain new numbers and execution results."
+      }
+    },
+    "qa/agent-research:art/comparison": {
+      "source_sha256": "a2ad7ca6150f45f5c04da2fb1e2ccbcd3bc429822f902e03cb87721de909f001",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the trade-off between retrieving examples automatically and hand-writing CoT for each task?",
+        "answer": "Retrieval reuses library patterns and reduces human authoring, but similar examples may miss current constraints. Human revisions can extend the library, and new programs still need verification. Copying an example does not solve a new task or eliminate maintenance.",
+        "example": "Example: Reuse search-then-compute structure, but use queries and arguments from the new problem rather than copy the old answer."
+      }
+    },
+    "qa/agent-research:art/implementation": {
+      "source_sha256": "070a5a1af4340c5dc91a7af3631bce57054a56a0c6314210bf1f2c06f4da4b62",
+      "reviewed": true,
+      "fields": {
+        "question": "How does the local tool-signature task bank differ from program generation by a frozen LLM?",
+        "answer": "Local tests check small-library retrieval, per-tool pause/resume, and updates without a frozen large model or BIG-Bench/MMLU. Pause counts show branches ran, not model-generated program semantics. Proxy costs are not paper tokens.",
+        "example": "Example: Three pauses from a structured template test the runner, not automatic programming for arbitrary natural language."
+      }
+    },
+    "qa/agent-research:toolformer/mechanism": {
+      "source_sha256": "91cf4ded53c85721d2fbbe59a5dd92479f1cada83f2e5bc3d48da5c6c1ff1591",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compare later loss with the API return visible, hidden, and without a call?",
+        "answer": "Call syntax alone can look useful without tool information. Counterfactual return conditions test whether actual output lowers later prediction loss. Keep calls beating the threshold for training to learn utility. This self-supervised proxy is not universal task accuracy or business gain.",
+        "example": "Example: Calculator syntax does not reveal the product. If the real return improves subsequent prediction, keep that call."
+      }
+    },
+    "qa/agent-research:toolformer/basics": {
+      "source_sha256": "6d9a6b13a0dc74e7dac488840377e40bcf973bdca972be5a50b143658548061c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why learn when to use external tools from text training in Toolformer?",
+        "answer": "Fluent models may still struggle with arithmetic, fresh facts, or retrieval. Toolformer inserts helpful API calls into training so the model learns timing, arguments, and return usage. Screening supplies learning signals, not guaranteed usefulness. A local filter does not train the model.",
+        "example": "Example: Insert a calculator call when a multiplication result helps complete the sentence, not after every number."
+      }
+    },
+    "qa/agent-research:toolformer/comparison": {
+      "source_sha256": "e0d03126caf25cbd2a690e98bba556a418d897983372601ea83c59ad89d0896f",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Toolformer construct call data differently from manually labeled tool trajectories?",
+        "answer": "Human examples directly demonstrate actions. Toolformer starts with a few demonstrations, samples calls, filters by how much returns improve subsequent text prediction, then trains on retained data. This reduces per-call annotation without eliminating demonstrations, tools, or filtering requirements.",
+        "example": "Example: Instead of manually tagging each calculator call, generate candidates and filter by loss. Some bad candidates still need rejection."
+      }
+    }
+  }
+}

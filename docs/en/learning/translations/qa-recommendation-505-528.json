@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:inthq/comparison": {
+      "source_sha256": "9bcc985a8889eef4d9f80bcdca26ede3cb594937bdf21214a3e3c6e3a1c1ac71",
+      "reviewed": true,
+      "fields": {
+        "question": "What structure does IntHQ's two-stream interaction preserve compared with concatenating behavior and context once?",
+        "answer": "The streams distinguish events from context before task queries read across layers, avoiding undifferentiated mixing from the outset. One concatenation is simpler, but it is harder to track source and task conditions explicitly. Stronger structure does not guarantee results: the local public proxy regressed, and query names cannot replace evaluation.",
+        "example": "Illustration: A weekday lunch hour is context; recent restaurant clicks are behavior. The two streams can encode them separately before answering when and where, without forcing both to affect every target equally."
+      }
+    },
+    "qa/recommendation:inthq/implementation": {
+      "source_sha256": "9bb4d7eab7043ef12bd5a841c682ab01845878fa00f334f6cdfecf8e27fcb601",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must IntHQ keep the task axis separate from the history axis in multilayer query aggregation?",
+        "answer": "Each task query reads the relevant stream or layer's K/V and forms a task state. Softmax belongs on the candidate evidence axis. Normalizing over the four tasks as if they were historical records would make tasks compete. Role alignment matters more than matching final dimensions, and the public proxy does not cover all real spatiotemporal tasks.",
+        "example": "Illustration: The when query should distribute weight over historical times, not share a sum of one with the where query; otherwise adding a location task changes the time task's evidence budget."
+      }
+    },
+    "qa/recommendation:intsr/mechanism": {
+      "source_sha256": "cbdc14956f41a167dcf9dfdb1753cbf2ce203134f3200a6d8958989f2da4e6c2",
+      "reviewed": true,
+      "fields": {
+        "question": "How does IntSR handle both explicit search terms and recommendation intent without a query?",
+        "answer": "An explicit query expresses the current request; implicit session history supplies unspoken needs. Both inform latent intent, and results are generated in a unified item or POI vocabulary. Time context helps determine whether needs still apply and bridges search and recommendation. Sharing a vocabulary does not excuse ignoring query constraints or treating old interests as explicit current requests.",
+        "example": "Illustration: When a user searches for nearby coffee, a history of quiet venues can supplement the query. With no search, the session can suggest a need, but yesterday's location should not be assumed to apply today."
+      }
+    },
+    "qa/recommendation:intsr/basics": {
+      "source_sha256": "e4049fea90916a42f3c835fdca95f70024eb45d33b6be89689a74baefe5f3969",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine explicit queries and implicit session intent in the same item space in IntSR?",
+        "answer": "Search terms can omit background, while session activity offers context without directly stating the current request. Joint intent inference uses both, and a shared vocabulary avoids fragmented item identities across the two entry points. Time represents drift. An absent query should follow a defined missing-input path, not be replaced with something the user supposedly said.",
+        "example": "Illustration: A query of 'nearby' combined with a recent vegetarian search can suggest dining. A recommendation-only visit should use its session without inventing a user query."
+      }
+    },
+    "qa/recommendation:intsr/comparison": {
+      "source_sha256": "7879f0a60a4e26fcf976f58f2fb573579c53c170d9910d51d394937fd448c841",
+      "reviewed": true,
+      "fields": {
+        "question": "What does IntSR's latent-intent mixture make explicit compared with concatenating q and h for scoring?",
+        "answer": "It first estimates an intent distribution and then generates items conditioned on intent and time, keeping multiple plausible needs explicit. Direct concatenation may express this implicitly without learning the same structure. A latent variable need not have a stable human meaning, and a more decomposable output does not prove recovery of true intent.",
+        "example": "Illustration: 'Weekend activities' could mean hiking or an exhibition. Keeping probabilities for both before choosing a venue is natural, but those probabilities remain model estimates."
+      }
+    },
+    "qa/recommendation:intsr/implementation": {
+      "source_sha256": "d351de7eb032e50eb7ea6f00ba7cb78968175b35825ee698acb99d6779a43655",
+      "reviewed": true,
+      "fields": {
+        "question": "How should IntSR distinguish an absent query from a real empty-string search?",
+        "answer": "Use the missingness marker or branch specified by the model contract. Time conditioning may only use the request timestamp, and the target POI must not enter latent-intent estimation. Both entry points share item identity, not necessarily every label. The source's movie proxy cannot test real locations or opening hours.",
+        "example": "Illustration: Never starting a search and deliberately submitting a blank query can have different log meanings. Do not collapse them to one unexplained string and leave the model to guess."
+      }
+    },
+    "qa/recommendation:journeyformer/mechanism": {
+      "source_sha256": "e9be187b26aeea5125bc57a71ae62d24ad21bf841a376b77e1656e068fbf4468",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does JourneyFormer encode event types and time in the guest journey rather than just listing viewed properties?",
+        "answer": "The same property means different things during search, viewing, saving, and booking. Time gaps distinguish one trip from older plans. A shared journey sequence learns relations between stages while retaining both long-term preferences and immediate travel needs. Caching and sparsity reduce cost but do not relax which events were visible at request time.",
+        "example": "Illustration: A user saved a seaside listing last year but now searches downtown and views business apartments. Listing IDs alone do not distinguish the trips; event type and timing can reveal the current one."
+      }
+    },
+    "qa/recommendation:journeyformer/basics": {
+      "source_sha256": "3f8dacf057c5c24019a25debe92c7f8593c008398d61c501defd5eee31eda5d6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why encode a guest journey rather than a set of viewed listings in JourneyFormer?",
+        "answer": "Searches, views, saves, and bookings mark different stages, and elapsed time affects whether a need still applies. Type and time embeddings let the same property mean different things in different paths and jointly represent long- and short-term behavior. Event labels are not causal explanations, and a completed past trip need not match current demand.",
+        "example": "Illustration: A seaside listing booked three months ago and an urban apartment saved today should not count equally as unmet needs. A set of listing IDs loses that distinction."
+      }
+    },
+    "qa/recommendation:journeyformer/comparison": {
+      "source_sha256": "ea4a99e1d32db34c2635f4c2dfecdd5cc391b821d3e2038c8b083e5d232c6361",
+      "reviewed": true,
+      "fields": {
+        "question": "What does a unified long and short guest journey retain, and what does it cost compared with a recent window?",
+        "answer": "Long history preserves stable destinations and accommodation preferences, while the short window shows the current trip stage. Joint encoding can connect them but adds attention and update costs, motivating caches and sparsity. Older trips can be stale, and more history need not be more accurate. The source's local negative result applies only to its proxy.",
+        "example": "Illustration: A family-room preference may remain relevant during a business trip, but the new context also matters. The newest events alone can forget the stable need, while equal weighting of every old trip can distract."
+      }
+    },
+    "qa/recommendation:journeyformer/implementation": {
+      "source_sha256": "5e6e0ea959b6211cada559e8f72e0057b36bffa6c756e97a889758085b9db9fb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must listing, event type, and time use one version in JourneyFormer's incremental cache?",
+        "answer": "All three determine state, so changing an event type or time encoding makes the old cache inconsistent with new inputs. A causal sequence can contain only events already observed, not future bookings. The local proxy lacks real lodging inventory and full production refreshes, so its latency does not establish online performance.",
+        "example": "Illustration: If a view is corrected to a booking, a stale cache will still treat the user as exploring and may keep recommending. Refreshing the listing vector alone will not fix the event state."
+      }
+    },
+    "qa/recommendation:kar/mechanism": {
+      "source_sha256": "8ee5eb1bf6cd8ad44af9a31897fa2be33f7a394a5f17da292bc246b6b0e6c4c9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does KAR generate user preference knowledge separately from item facts before applying a hybrid-expert adapter?",
+        "answer": "User knowledge describes why someone might like an item; item knowledge describes the item's attributes. Their sources and meanings differ, so plain concatenation may not fit an ID model. Shared and specialized experts compress and align the knowledge for prediction with the original representations. Offline caching avoids online autoregressive generation, but LLM inferences can be wrong and are not user statements.",
+        "example": "Illustration: Waterproof material is an item fact; frequently viewing rainy-day hiking content suggests a user preference. An adapter can match them without claiming the user explicitly wants those shoes."
+      }
+    },
+    "qa/recommendation:kar/basics": {
+      "source_sha256": "bcc5d4ad450dd18920cdace326bed82c9732fad1bde5c04516d7ec7ecfcf4bb6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate user preference knowledge and item facts in KAR?",
+        "answer": "A preference explains why a user might like something, while a fact describes what it is; evidence and update frequencies differ. Factorization prompting generates them separately, and the hybrid-expert adapter injects them into the ID recommender rather than conflating facts and guesses in one text. Generated knowledge can still hallucinate and is not observed ground truth.",
+        "example": "Illustration: Enjoying light plots is an inferred preference; a film's release year is factual. Writing the preference as an item attribute can contaminate matching and explanations."
+      }
+    },
+    "qa/recommendation:kar/comparison": {
+      "source_sha256": "b68c40e1a450c1b68129744c8b8633e94903f0121f6d2fc06e45e7a6ae22c82b",
+      "reviewed": true,
+      "fields": {
+        "question": "How do cost and error propagation differ between KAR's offline knowledge enhancement and online LLM recommendation?",
+        "answer": "Offline generation reuses a cache, so serving runs only the adapter and original recommender without autoregressive latency. Mistakes are also reused, making versions and refreshes important. Online generation is more flexible but incurs a cost on every request. The twenty-user reduction in the source shows only a small trend, not general industrial gains.",
+        "example": "Illustration: One cached film fact can serve many users, but an incorrect year propagates until refreshed. Asking on each request can update it at the cost of extra latency and inconsistency."
+      }
+    },
+    "qa/recommendation:kar/implementation": {
+      "source_sha256": "65442653882c4182ec9f0a08032d0caeb4ccb50397fc70f993b0161a14ed59d6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why validate KAR's four-expert gate together with the original ID representations?",
+        "answer": "The gate mixes knowledge vectors from shared and specialized experts, then the result is scored with user and item IDs. Dimensions, identities, and gradient flow must agree. Pre-generating a knowledge file does not prove the ranker learned to use it. Cache only from training-visible behavior so preferences do not absorb test answers.",
+        "example": "Illustration: A ranker can output scores while never reading the knowledge on disk, but that is not KAR. Summarizing user preferences after seeing test behavior instead leaks the target into evaluation."
+      }
+    },
+    "qa/recommendation:kgd/mechanism": {
+      "source_sha256": "ebef053cda9ac839e14a8ef4be6035f5f47a7f7db3d5a69eb54817fd7608361d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does KGD select related future items and make the transfer residual orthogonal to the knowledge anchor?",
+        "answer": "An immediately adjacent click can be noise or a task switch. BMTP picks collaboratively or semantically related future targets to focus pretraining. During transfer, the refreshable knowledge encoder is frozen for the task to read; the residual removes its projection onto the anchor to add new geometry without directly overwriting learned knowledge. Orthogonality constrains direction, not lossless coexistence of all task information.",
+        "example": "Illustration: An adjacent accidental click should not provide the same supervision as a persistent photography interest. A new task can try to add price sensitivity outside that anchor rather than rewriting the existing photography semantics."
+      }
+    },
+    "qa/recommendation:kgd/basics": {
+      "source_sha256": "1de34d1fe6b6830d34f638e91d7fb2a1f904f3d6536430276b243e29b0017f0f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does KGD's BMTP select related future items rather than supervise all adjacent clicks equally?",
+        "answer": "Adjacent events can be accidental or express different needs; predicting them blindly encodes unhelpful transitions. BMTP selects more meaningful future targets by collaborative or semantic relations and later exposes the knowledge as read-only. Bad relations can miss real emerging interests, and future labels remain training supervision only.",
+        "example": "Illustration: An accidental sports-news click after camera browsing need not define a strong transition. A related future lens looks more like the same need, but that is not a reason to exclude all cross-topic exploration."
+      }
+    },
+    "qa/recommendation:kgd/comparison": {
+      "source_sha256": "853d0c117e0117f5985efe4859a39ca6ea70fecd2e5c59e44ec86a56d5aabf92",
+      "reviewed": true,
+      "fields": {
+        "question": "What kind of overwrite does KGD's orthogonal ACR restrict relative to an ordinary residual adapter?",
+        "answer": "ACR removes the residual projection along the knowledge anchor to avoid directly changing the existing main direction. An ordinary residual can add in any direction, increasing flexibility and the risk of interference. Orthogonality is a geometric constraint, not proof that knowledge is unchanged or semantics independent. Verify effects by task.",
+        "example": "Illustration: If the anchor already points toward photography, an adapter can add budget distinctions instead of only amplifying that direction. A perpendicular vector could still contain noise."
+      }
+    },
+    "qa/recommendation:kgd/implementation": {
+      "source_sha256": "4ef163eea6abd912e00965c3adb7397f25c46a1b2c07b3ee52aa665a6cca552f",
+      "reviewed": true,
+      "fields": {
+        "question": "How should KGD verify gradient flow and zero-norm handling for read-only knowledge and orthogonal projection?",
+        "answer": "Freeze the knowledge encoder or explicitly version its refreshes; task loss must not update it through the read-only interface. ACR's projection denominator depends on anchor norm, so define handling for zero or near-zero anchors. Merely subtracting r−e is not orthogonal projection. The bounded local mechanism does not reproduce full streaming production transfer.",
+        "example": "Illustration: A zero anchor has no direction, so division by its norm is invalid. If knowledge parameters change after backward, the transfer is not read-only even if output shapes look right."
+      }
+    },
+    "qa/recommendation:kuafu/mechanism": {
+      "source_sha256": "8dba71dbc4f3d2272a8d0288f73d339d2ba57c5eb7ad23ad4df0b6e4524bf833",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compress and cache individual behaviors in KuaFu rather than compressing a user's entire history into one vector first?",
+        "answer": "Individual behavior encodings can be reused across users or profiling tasks, and a new event needs only its cache entry. Compressing the whole history binds shared content to user context and can force recomputation on every change. The decoder reads compressed events chronologically and can compose them. Compression loses information, and cache efficiency must not hide the negative local diagnostic.",
+        "example": "Illustration: Several users can reuse the encoding of the same video behavior. When one watches another video, append its cached representation and decode in order rather than re-encoding all old text."
+      }
+    },
+    "qa/recommendation:kuafu/basics": {
+      "source_sha256": "629152917662e1d508ebb50f0221fc666285b2a36e92dea5f697d1481dc9c99d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does KuaFu compress both memory token count and channel dimension?",
+        "answer": "A behavior first has a high-dimensional memory representation, then is projected into fewer, lower-dimensional cached vectors. This saves sequence positions and storage bandwidth separately, and the decoder composes entries in sequence order. Two-axis compression can lose information; reconstructing some answers is not evidence of preserving every temporal or causal relationship.",
+        "example": "Illustration: Compressing a 24-word event into two low-dimensional vectors saves more storage than merely halving the word count, but names or times may disappear. Measure that with task metrics, not compression rate alone."
+      }
+    },
+    "qa/recommendation:kuafu/comparison": {
+      "source_sha256": "ec3ebc7a0886a72b6cc7bdf479074b624f3d3d7e68bfdb5639fa570f2933cd16",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do KuaFu's input ablation and independently trained raw-text baseline have different evidentiary strength?",
+        "answer": "Switching a decoder trained on compressed inputs to raw text confounds the comparison with adaptation to the input distribution. Training the same model separately under the raw-text budget better compares the training paths. The source remained negative after the independent control, and the comparison was not formal equal-FLOPs evaluation, so do not report compression efficiency alone.",
+        "example": "Illustration: A decoder trained only on compressed codes might struggle with truncated text because it is unfamiliar. Training the raw-text branch independently reduces that confound."
+      }
+    },
+    "qa/recommendation:kuafu/implementation": {
+      "source_sha256": "53d62e7fcacd1d3513e6428a48b97d45b8482ba9e23ef810f311e1108eb06757",
+      "reviewed": true,
+      "fields": {
+        "question": "Why should KuaFu report skipped_zero_advantage when every reward in the RL smoke test is equal?",
+        "answer": "Identical group rewards yield no relative advantage and no usable policy-gradient signal. Invoking the optimizer does not mean RL succeeded. The source preserves the skipped update and verifies QA compression training separately from RL. A GPU forward pass does not prove successful reward optimization.",
+        "example": "Illustration: Four answers each score one, so their normalized advantages are zero. The model cannot prefer any answer from that signal; report no update instead of calling the four high rewards learning."
+      }
+    },
+    "qa/recommendation:kunlun/mechanism": {
+      "source_sha256": "69b2ff3abfdf6f9e01b3bf9afe9094ec6948d8086e9ff840b23693a7c2e18348",
+      "reviewed": true,
+      "fields": {
+        "question": "Why interleave sequence and interaction blocks in Kunlun rather than making only one tower larger?",
+        "answer": "The sequence model handles historical dependencies and the heterogeneous interaction model handles field relationships. Scaling one side alone can leave the other as an information bottleneck. Kunlun exchanges sequence seeds and non-sequence information between layers, uses gating and residuals to control deep updates, and relies on parallel engineering to scale. Joint structure does not make every module free to reuse: distinguish candidate dependence from serving cost.",
+        "example": "Illustration: A long history reveals outdoor interest, but price and context interactions arriving only at the end cannot guide deeper interpretation. Interleaving lets them cooperate across layers instead of concatenating once."
+      }
+    },
+    "qa/recommendation:kunlun/basics": {
+      "source_sha256": "7e0fb82ba9d3e73c41ba5b8bd0c834ace353c3ca14fd239b457f6708169858b9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Kunlun put a sequence block and an interaction block in the same layer?",
+        "answer": "The sequence block extracts behavioral dependencies and the interaction block combines heterogeneous fields. Global Interaction passes information between layers to prevent isolated towers from hitting a communication bottleneck. HSP summarizes sequence seeds, while system parallelism and CompSkip address deep scaling. Enlarging one FFN does not reproduce these separate mechanisms.",
+        "example": "Illustration: History reveals camping intent, and a budget field in the interaction block changes its interpretation and later fusion. Towers concatenated only at the end see each other's clues much later."
+      }
+    }
+  }
+}

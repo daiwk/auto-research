@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:stare/basics": {
+      "source_sha256": "4b7580c7cc9739e751358ecc7ba12758a495196cda0b942b3a3151cb212af588",
+      "reviewed": true,
+      "fields": {
+        "question": "Why focus STARE on surprising tokens rather than equally reinforce a trajectory?",
+        "answer": "The same advantage can affect entropy differently by position. Select critical surprisal quantiles and adjust weights with target-entropy feedback, not terminal reward alone.",
+        "example": "An uncertain branch and punctuation can share reward without serving equal exploration roles."
+      }
+    },
+    "qa/post-training:stare/comparison": {
+      "source_sha256": "62f26a368d5fa0aba3528f01948483afe8a20aaff8366acb35cd6308b08d51e5",
+      "reviewed": true,
+      "fields": {
+        "question": "How does STARE's entropy feedback differ from a fixed entropy bonus?",
+        "answer": "Fixed bonuses always push one direction; feedback reacts to the current–target gap. Targets and measurement matter. Higher entropy is not inherently better and surprise doesn't imply correctness.",
+        "example": "Above-target entropy requires a different control direction from below-target entropy."
+      }
+    },
+    "qa/post-training:stare/implementation": {
+      "source_sha256": "3cea3b7fc6e7e4fe18cc99d0b09629a1c10da63c24448c75616d523fe09480db",
+      "reviewed": true,
+      "fields": {
+        "question": "Why identify STARE positions by batch quantiles?",
+        "answer": "Quantiles measure relative salience in the current batch, not an absolute threshold. Fix valid-token masks and probability source; exclude padding. Local checks cover weighting and feedback only.",
+        "example": "Artificial low padding probabilities can shift the critical quantile."
+      }
+    },
+    "qa/post-training:stare/mechanism": {
+      "source_sha256": "dae01938309cda4bdd2cfc969d062c4b4b8ee66556260c20280e18890dcb708f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine surprisal with target entropy rather than always reward surprising tokens?",
+        "answer": "Surprising positions can influence entropy strongly; amplifying them always can overdisperse policy. Select batch quantiles, then adjust advantages based on entropy error. Surprise is not a correct-action label.",
+        "example": "A rare token can need opposite adjustments under an overconfident vs overrandom policy."
+      }
+    },
+    "qa/post-training:kpop/basics": {
+      "source_sha256": "59d174e4a025265385cfd8bc856bd8657ab4091ab6244584e72ad99d59fbab43",
+      "reviewed": true,
+      "fields": {
+        "question": "Why represent one token and the remaining vocabulary as binary in KPop?",
+        "answer": "A sampled ratio ignores absolute mass. Binary comparison includes both token and complement, using forward/reverse KL to gate train–serve mismatch.",
+        "example": "Equal multiplicative changes for rare and common tokens affect complement mass differently."
+      }
+    },
+    "qa/post-training:kpop/comparison": {
+      "source_sha256": "da96066b1dd1ccf3e0845e333b780ac8ae17edf8c20345b7bdaf3c71b12d08ad",
+      "reviewed": true,
+      "fields": {
+        "question": "How does bidirectional binary KL differ from a fixed ratio mask?",
+        "answer": "KL depends on probability level, whereas a ratio mask uses relative multiples. Both directions must pass because KL is asymmetric. A mask doesn't validate synchronization of real asynchronous serving.",
+        "example": "Small KL one way can hide mismatch the other way."
+      }
+    },
+    "qa/post-training:kpop/implementation": {
+      "source_sha256": "2297d4961db715dc5f0ec5552f447fe757db275f30057f169501a05cf92025af",
+      "reviewed": true,
+      "fields": {
+        "question": "Does KPop retain a token if either KL is small or only if both are?",
+        "answer": "Both directions must be at or below threshold. Stabilize boundary probabilities and track serving vs training source. No local real train/inference engine or MoE cluster.",
+        "example": "Passing only train-to-serve KL still means mask out."
+      }
+    },
+    "qa/post-training:kpop/mechanism": {
+      "source_sha256": "93b963210a696b88b4a11254125d3a32677355189208888cc42eec9766810997",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compare both binary KLs rather than only bound a ratio?",
+        "answer": "The same ratio means different movement at different token probabilities. The binary distribution captures token and complement, and KL asymmetry motivates both directions. Passing does not establish token correctness or system-wide lack of bias.",
+        "example": "The same relative shift for a rare and common word is not geometrically equivalent."
+      }
+    },
+    "qa/post-training:gprl/basics": {
+      "source_sha256": "0ae0e20dc5546f5a27f1f13b0a7d294de0d7d12a3e2f2be0c00e713835de0ea5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compute GPRL group advantages per preference dimension?",
+        "answer": "Dimensions have different units and variance. Normalize separately, then aggregate by task context. Normalization avoids accidental numerical dominance, not a claim of equal importance.",
+        "example": "A 100-point format scale would swamp binary correctness under raw summation."
+      }
+    },
+    "qa/post-training:gprl/comparison": {
+      "source_sha256": "b6a79013a0cdb3888e8d47a1149b5c561f1201e92bcd074a5e4adf96d64b6e26",
+      "reviewed": true,
+      "fields": {
+        "question": "How does GPRL differ from summing rewards then applying GRPO?",
+        "answer": "Summation mixes scales and conflicts before normalization. Separate standardization preserves each dimension's relative information before aggregation; the operations do not commute. Test context weights and drift separately.",
+        "example": "One high-variance dimension can dominate normalized totals while others barely matter."
+      }
+    },
+    "qa/post-training:gprl/implementation": {
+      "source_sha256": "35849cd19850ef3cb012c0cfc936eb99b4e5ccf0f4812b8a9af371a46fa6ed05",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local GPRL exact-answer regression refute the paper's open-ended results?",
+        "answer": "No. Retain the negative accuracy result, but real human multi-dimensional preferences and open generation judging are absent. Track per-dimension mean, variance and effective weights.",
+        "example": "Brevity can improve while exact match worsens, so answer score alone isn't complete."
+      }
+    },
+    "qa/post-training:gprl/mechanism": {
+      "source_sha256": "5a6683a3fe84baa4b357816d36dca88b416af4eb2016f364409bd1006b3137c1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why normalize GPRL advantages by dimension before context aggregation?",
+        "answer": "Raw sums let large scales or variance dominate and hide tradeoffs among helpfulness, format and brevity. Standardize, weight by context and monitor drift. Normalization isn't value prioritization; exact accuracy isn't a multi-dimensional evaluation.",
+        "example": "Separate a 100-point metric's units from how much users want it weighted."
+      }
+    },
+    "qa/post-training:conspo/basics": {
+      "source_sha256": "272e891b4abab443928ee820b4bd86810150c83f8a834fa657772a10535c9583",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use group InfoNCE for sequence preference in ConSPO?",
+        "answer": "Multiple same-prompt sequences compete in one objective. Average logp reduces length scale effects and temperature controls separation.",
+        "example": "Boost a good solution relative to alternatives rather than score its likelihood alone."
+      }
+    },
+    "qa/post-training:conspo/comparison": {
+      "source_sha256": "4366e7723adc9d726ae0361f230bc75332be636f5a46305a1efe661599f89faf",
+      "reviewed": true,
+      "fields": {
+        "question": "How does ConSPO group contrast differ from independent binary pairs?",
+        "answer": "One denominator couples all candidates, unlike independent pair losses. Group size and negative composition change the objective.",
+        "example": "A new competitor changes the shared denominator, not just one pair."
+      }
+    },
+    "qa/post-training:conspo/implementation": {
+      "source_sha256": "11cd6ff847e84a300fbd4f2c0cba3a717debd18398f1f765280642e3d51c5a46",
+      "reviewed": true,
+      "fields": {
+        "question": "Where do length normalization and temperature apply in ConSPO?",
+        "answer": "Average valid-response logp, divide by temperature, then use stable group log-sum-exp. Exclude prompts/padding. Local kernel is not paper-scale training.",
+        "example": "Changing tokenwise temperature and denominator arbitrarily departs from sequence scoring."
+      }
+    },
+    "qa/post-training:conspo/mechanism": {
+      "source_sha256": "11257e532b557c2b065d64fc8dd67a0bd78cf2ace4700c6ab3d25006393feabf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use length-normalized sequence scores for InfoNCE rather than cumulative token reward?",
+        "answer": "Summed logp changes scale with length and can confuse verbosity with quality. Average per response then contrast within the same prompt. Temperature and normalization still affect gradients; relative quality is not absolute correctness.",
+        "example": "Two correct replies can differ in length; average before comparing so raw sum does not penalize the longer one."
+      }
+    },
+    "qa/post-training:missing-old-logits/basics": {
+      "source_sha256": "097bfe85d1a51b873d99dfa488732e392365a998524d612afac3c5783bb62cf5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is Missing Old Logits more than a logging issue?",
+        "answer": "Historical training-side probabilities separate train–inference mismatch from stale weights. Serving probabilities alone conflate both, making the correction ambiguous.",
+        "example": "Token drift can come from engine differences or several policy updates."
+      }
+    },
+    "qa/post-training:missing-old-logits/comparison": {
+      "source_sha256": "710939a58d1d03d212103699cac47f17a2e00b73f7f9669b7339771de2539aa0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do train–inference and staleness corrections need different denominators?",
+        "answer": "One compares training and serving implementations of the same old policy; the other compares current and old training policies. Their product is the total ratio, not interchangeable terms.",
+        "example": "Changing inference engines at fixed weights can create mismatch without training staleness."
+      }
+    },
+    "qa/post-training:missing-old-logits/implementation": {
+      "source_sha256": "47f9053f22689797312885331b5a6a4c6ef004166360cc8b8f5c931961fe0c12",
+      "reviewed": true,
+      "fields": {
+        "question": "Can current logits simply replace missing old training logits?",
+        "answer": "No. Snapshots, old-logit models, interrupted synchronization and EWMA are explicit alternatives with costs/assumptions. Local decomposition and state tests are not cluster deployment.",
+        "example": "Rescoring old samples with updated weights rewrites the baseline rather than restoring history."
+      }
+    },
+    "qa/post-training:missing-old-logits/mechanism": {
+      "source_sha256": "d8dd919388524c9648c161669c51129f921304f6079a4e0a6c39340932656460",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't the total ratio disentangle mismatch and staleness without old training logits?",
+        "answer": "Current training vs old inference factors through old training probabilities. Missing that intermediate hides whether changes come from the engine or updates. Recover the anchor by snapshot or an old-logit model, not zero-fill.",
+        "example": "A changed score on an old sample cannot identify the original engine gap without its training snapshot."
+      }
+    },
+    "qa/post-training:luspo/basics": {
+      "source_sha256": "9c162c35c6d884e35e57da733f4155f7761822b1e2b18a1fa6b026aba65279ca",
+      "reviewed": true,
+      "fields": {
+        "question": "Why examine response-length trajectories in LUSPO?",
+        "answer": "RLVR objectives implicitly weight length differently, potentially causing collapse or drift. Normalize sequence logp as prescribed to separate reward learning from length scale.",
+        "example": "Stable accuracy with shrinking replies can still lose long-reasoning coverage."
+      }
+    },
+    "qa/post-training:luspo/comparison": {
+      "source_sha256": "c067e7effa44526332393d9632af5f22752f617668870db267c57f6697afc165",
+      "reviewed": true,
+      "fields": {
+        "question": "How does the LUSPO sequence ratio differ from tokenwise clipping?",
+        "answer": "Exponentiate length-normalized sequence log-ratio and share the signal over the response. Tokenwise clips act locally, with different dynamics. Sequence aggregation alone doesn't guarantee long-length stability.",
+        "example": "An increased token ratio and a decreased one can cancel in a sequence but clip differently."
+      }
+    },
+    "qa/post-training:luspo/implementation": {
+      "source_sha256": "d13eb71c1ff6b2d6877a41ab2dd4baef2bc8c14f4dca16e40f2027d9e45c93e0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why don't local short arithmetic tasks establish long-CoT length stability?",
+        "answer": "Generation, sequence ratios and normalization run, but short replies do not cover long reasoning dynamics. Use effective response length without padding/prompt.",
+        "example": "A dozen-word answer doesn't test drift across thousands of tokens."
+      }
+    },
+    "qa/post-training:luspo/mechanism": {
+      "source_sha256": "d2949d0353ce0bda2d675d1ee7cfcc3013234026830e4a2a4b6b3df442538fa7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can sequence-level LUSPO updates still need length-bias checks?",
+        "answer": "Aggregation does not remove length coupling in cumulative logp. LUSPO reorganizes scores to avoid systematic length pressure. Short-task normalization checks do not validate long-CoT dynamics.",
+        "example": "Two replies with similar per-token changes can have different cumulative ratios solely because of length."
+      }
+    }
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:sim/implementation": {
+      "source_sha256": "4f9a58b41107ba08c7d0d307d672ee320e88fcae40633ebcf8c583eee65da3d7",
+      "reviewed": true,
+      "fields": {
+        "question": "How prevent future leakage in SIM top-k history?",
+        "answer": "GSU searches only pre-request history, separate from the target label. ESU sees selected entries only. MovieLens verifies mechanism, not production or online A/B.",
+        "example": "Do not add the next actual click before searching history."
+      }
+    },
+    "qa/recommendation:sim/mechanism": {
+      "source_sha256": "380ef0ee9d621d7c6be777b606c42a9c7c6d615802e3e49f288aa8f06708b561",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use GSU then ESU instead of scoring lifelong history directly?",
+        "answer": "Most history is irrelevant per candidate. Cheap GSU narrows it, then ESU attends precisely to selected behavior. Fine matching cannot recover evidence omitted by coarse retrieval.",
+        "example": "If category filtering excludes old lens interactions, later camera attention cannot see them."
+      }
+    },
+    "qa/recommendation:sirf/basics": {
+      "source_sha256": "94fe4bcfc3538e7e1bcdd58175b53d5423c03943be242f19efa43f4a95a26ecc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why train on both triggers and exemptions in SIRF?",
+        "answer": "Safety decisions depend on exceptions as well as triggers. Synthetic rules and continued pretraining aim to cover rare combinations; thresholds manage precision.",
+        "example": "A keyword need not violate policy in an explicitly exempt explanatory context."
+      }
+    },
+    "qa/recommendation:sirf/comparison": {
+      "source_sha256": "907f7426bf2323e40b8dbf2cf8a613d2c410e31e12c6c1bbbd1969015cdf814f",
+      "reviewed": true,
+      "fields": {
+        "question": "How does learned rule internalization differ from a runtime rules engine?",
+        "answer": "Learned models can generalize language and context but need not obey every rule exactly. Explicit engines obey coded conditions with limited coverage. Accuracy is not formal proof.",
+        "example": "A model may retain an old policy after the rule changes."
+      }
+    },
+    "qa/recommendation:sirf/implementation": {
+      "source_sha256": "0021433696d4c5be1bad0064f1ecbef3fdbada3fea26d6a826bf0dff9bc3defe",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local high-precision threshold reproduce full 8B continued pretraining?",
+        "answer": "No. It uses trigger/exemption proxies, not private accounts, EntiGraph/MAGA generation, or large training. Select thresholds on validation and keep held-out reporting separate.",
+        "example": "A small classifier reaching precision target does not reproduce a safety foundation model."
+      }
+    },
+    "qa/recommendation:sirf/mechanism": {
+      "source_sha256": "852caaf7a9313a3bb967bc7e0da84adaee0e23040749f3c685998d41fb117b98",
+      "reviewed": true,
+      "fields": {
+        "question": "Why train synthetic trigger/exemption rules and threshold one verdict?",
+        "answer": "Long-tail combinations are scarce in logs. Rule graphs, rewrites, and account reasoning teach combinations during continued pretraining; one verdict saves online work. Threshold trades precision and recall. Local interactions are not production capability.",
+        "example": "Frequent trades can trigger concern, but verified merchant status may exempt them."
+      }
+    },
+    "qa/recommendation:smes/basics": {
+      "source_sha256": "ef8f81fb420916f1a81719804b35ae61865d0f521552d9a562f3de8fbc2a1918",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use both shared and private experts in SMES?",
+        "answer": "Stable shared experts hold common signals, task-private experts preserve differences, and global load balances cross-task dispatch.",
+        "example": "Viewing and buying share interest features but can retain distinct decision experts."
+      }
+    },
+    "qa/recommendation:smes/comparison": {
+      "source_sha256": "99d1eebfa596b18b76b966ec50243f22dacbe7434e2558d5d47de3d44d43369c",
+      "reviewed": true,
+      "fields": {
+        "question": "How do shared/private pools differ from one MoE router?",
+        "answer": "Separate pools constrain common and task-specific selections; one pool lets all compete. This does not guarantee less negative transfer.",
+        "example": "Reserving all shared capacity for purchases can harm other tasks."
+      }
+    },
+    "qa/recommendation:smes/implementation": {
+      "source_sha256": "74e3b2a1e594f18fab8d8392b6584994397eda2a9193e2e3efd48f44d84e7939",
+      "reviewed": true,
+      "fields": {
+        "question": "Can balancing be computed separately per task only?",
+        "answer": "No. Separate balance can miss aggregate expert overload. Use cross-task counts. MovieLens lacks production sparse scheduling, so dispatch counts are not throughput.",
+        "example": "Individually spread tasks can all favor the same two experts globally."
+      }
+    },
+    "qa/recommendation:smes/mechanism": {
+      "source_sha256": "01537c1717e0789484f34537631b4de62b61dd73e0bb71c8ba44f24f079f254a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine fixed shared activation, adaptive private experts, and global balance?",
+        "answer": "Shared capacity handles commonality, private routing handles task differences, and global balance detects concentration hidden within tasks. Actual specialization and balance penalties still require evaluation.",
+        "example": "Clicks and purchases can share interest experts while choosing novelty or price specialists, unless global dispatch overloads one."
+      }
+    },
+    "qa/recommendation:snap-dpa-relevance/basics": {
+      "source_sha256": "5c9b91b3cd8f75cee814a6b4d97aff6600fa047b4e3b7074a38a6e6ce4d68d1b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compress intent rather than equate clicks with Snap DPA relevance?",
+        "answer": "Clicks are sparse and exposure-biased. Group recent behavior by SID and event type, then apply business-aligned relevance criteria. This is a separate demand metric, not renamed CTR.",
+        "example": "Repeated recent cart additions can be stronger intent evidence than one exposure."
+      }
+    },
+    "qa/recommendation:snap-dpa-relevance/comparison": {
+      "source_sha256": "ea1836e012b274fbac7fd54651b6451239b1136ab6c69cca80d5cd6f2866d9ae",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can MicroRel and MacroRel disagree?",
+        "answer": "Micro averages user–candidate pairs, while macro weights users equally. Users with many candidates dominate micro more. Report both rather than cherry-pick.",
+        "example": "Active users with many candidates affect micro disproportionately."
+      }
+    },
+    "qa/recommendation:snap-dpa-relevance/implementation": {
+      "source_sha256": "67e8f553fdadc45353a0b1e4de19b4cf72316109cd5f7750e2af114679333c34",
+      "reviewed": true,
+      "fields": {
+        "question": "Can gold relevance labels stand in for detector predictions?",
+        "answer": "No. Train a real detector on discovered, human-reviewed business criteria and evaluate independently. Rule discovery has bootstrap and per-class F1 requirements; coverage review cannot be skipped.",
+        "example": "Copying gold computes a score without learning relevance."
+      }
+    },
+    "qa/recommendation:snap-dpa-relevance/mechanism": {
+      "source_sha256": "daaf1ecfc7367114ee5bc25cc16a22dcd58c24eabf7f9da9ee4ad8778f7af936",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish MicroRel and MacroRel and vet criteria first?",
+        "answer": "Compressed history supplies intent; a criteria-trained detector judges candidates. Pair-level and user-level averages answer different questions, but neither repairs wrong relevance judgments. Private review and commercial model workflows are not reproduced.",
+        "example": "With 100 and ten candidates, user one weighs ten times as much in micro but equally in macro."
+      }
+    },
+    "qa/recommendation:snaplgr/basics": {
+      "source_sha256": "5f0329a3d66cf0749350de5b2a92af660e9a2ec145d7e231d3c8ef809bc05cb1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why build a co-engagement graph before SnapLGR SIDs?",
+        "answer": "Propagation adds collaborative relationships, residual quantization turns them into hierarchical paths, and generation predicts codes from history. Behavior complements content.",
+        "example": "Visually different items consumed by one audience can become connected."
+      }
+    },
+    "qa/recommendation:snaplgr/comparison": {
+      "source_sha256": "15942888b637ac43181101ee4b2b5fd07d1386086f9e5a98f66861bc82a44f9a",
+      "reviewed": true,
+      "fields": {
+        "question": "What does grounding SID tokens add beyond discrete-code likelihood?",
+        "answer": "Alignment preserves content meaning instead of learning only code transitions. Its benefit depends on embedding and graph quality, not any arbitrary semantic code.",
+        "example": "Related videos' code representations should reflect their content relationship."
+      }
+    },
+    "qa/recommendation:snaplgr/implementation": {
+      "source_sha256": "7b7abd66aadaf141488c81f504573e7840f2bdc25aa0ab059710560fc0386968",
+      "reviewed": true,
+      "fields": {
+        "question": "What behavior can graph propagation and quantization use?",
+        "answer": "Only allowed training co-engagement, without future test edges. Pin codebook and mapping versions. Public features do not reproduce Snap logs, scale, or traffic.",
+        "example": "Test clicks in the graph leak retrieval relationships."
+      }
+    },
+    "qa/recommendation:snaplgr/mechanism": {
+      "source_sha256": "79eafa01dd8912a93adf4aa1fdb7f0d46a0d02de172212cb7e20131d552ec828",
+      "reviewed": true,
+      "fields": {
+        "question": "Why propagate co-engagement, quantize, then ground generated tokens?",
+        "answer": "Graphs add collaborative signals, quantization encodes them in discrete paths, grounding ties codes back to content, and next-SID prediction learns transitions. Popularity bias can propagate too.",
+        "example": "Visually different co-consumed items can become neighbors, but codes still must resolve reliably to relevant content."
+      }
+    },
+    "qa/recommendation:solaris/basics": {
+      "source_sha256": "645e0bc1a32e55a1baf445d702a57d0a9b5d7b6a645e7aa3deec0d21e5f396f7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why predict future user–item pairs before computing SOLARIS latents?",
+        "answer": "Computing all pairs online is expensive. Predict likely pairs and asynchronously precompute them for lightweight consumption. Misses need fallback and wrong guesses waste budget.",
+        "example": "Prepare representations for a shortlist instead of an entire catalog."
+      }
+    },
+    "qa/recommendation:solaris/comparison": {
+      "source_sha256": "8f6e2018215bdc2e2247c22bca616a1d9242c0a5ac4e4dc0a9c4a28dd04fe51f",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a latent cache differ from a final list cache?",
+        "answer": "A latent is a middle feature the lightweight ranker can combine with current inputs. A cached list fixes ordering. Latents still age and need version consistency.",
+        "example": "Reusing a latent with today's price can change yesterday's order."
+      }
+    },
+    "qa/recommendation:solaris/implementation": {
+      "source_sha256": "f1ccc0654aa7650219524fc7b61791ccb9701f7ef5856728ad171267fc66af45",
+      "reviewed": true,
+      "fields": {
+        "question": "What should a SOLARIS cache key capture?",
+        "answer": "User/item identity, model and feature versions, and validity; define hit and fallback paths. An abstract implementation or hit rate does not prove service latency.",
+        "example": "Do not silently reuse a latent from a previous model version."
+      }
+    },
+    "qa/recommendation:solaris/mechanism": {
+      "source_sha256": "55986ed79677fea4bed59e747fb89d54826ded11ed909af6e21d59488199ddb9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why cache predicted pair latents instead of one user vector?",
+        "answer": "Deep interactions depend on a particular item. Predict likely pairs, compute asynchronously, use hits and fallback on misses. Coverage, freshness, and budget matter. Future outcomes can supervise training, not online selection.",
+        "example": "Precompute ten likely products, but serve an unexpected one through fallback."
+      }
+    },
+    "qa/recommendation:sona/basics": {
+      "source_sha256": "d0ca24e256e1a27fd26bb64324c04a6da0315ba4f5d7f921f0eed9021dbcc664",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use both SID generation and ranking in Sona?",
+        "answer": "Share user state across candidate generation and fine ranking instead of duplicating representations. A large teacher guides training only; one model serves.",
+        "example": "Generate songs and score specific songs from the same user state."
+      }
+    },
+    "qa/recommendation:sona/comparison": {
+      "source_sha256": "dd30179e2f88a17f7be3c07a11af992fde78cba89785392b868500b50921b244",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a unified model differ from deleting an intermediate ranker?",
+        "answer": "Joint generation, ranking, and distillation must replace functionality and handle long history. Compare coverage and robustness; fewer models alone do not prove improvement.",
+        "example": "Dropping pre-ranking without joint training can just remove functionality."
+      }
+    },
+    "qa/recommendation:sona/implementation": {
+      "source_sha256": "c39bb25e5c59f4b4ec330c21109bc2de9e112a644da3122bb0d87d93e4cdc5da",
+      "reviewed": true,
+      "fields": {
+        "question": "Does Sona call its teacher at serving?",
+        "answer": "No. Teacher is training-only. Local work omits the full teacher, music tokenizer, and 15-plus-source production stack. Generation/ranking losses share state with distinct masks.",
+        "example": "Calling the large teacher online changes the cost contract."
+      }
+    }
+  }
+}

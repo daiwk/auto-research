@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:race/implementation": {
+      "source_sha256": "d0908764791995ff598d7c55b4b36b1675ba55c0ca96bc4bbea075329ac0ec56",
+      "reviewed": true,
+      "fields": {
+        "question": "How do real trajectory requirements and the local bounded-calculator run limit conclusions?",
+        "answer": "Real training data need an environment, revision, split, and reasoning/action/observation records. QA rows are not tool trajectories. The local calculator actually samples actions and runs SFT/on-policy updates, but is L1 mechanism evidence only. A few successes under one seed do not replicate ScienceWorld or four-environment RL.",
+        "example": "Calling two real calculation tools demonstrates interactive training, not long-horizon web or embodied capability."
+      }
+    },
+    "qa/agent-research:depgpo/mechanism": {
+      "source_sha256": "1c23f2e478e6cac4b2037ad9f9601dca39f1a931b5ce6927d6ab1277402f34bc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why connect file reads to the writers of the still-current versions in a command dependency graph?",
+        "answer": "Reads consume the version active at that moment. Earlier overwritten writes may not affect the final artifact. Trace backward from verifier-checked outputs to connect data-contributing commands to the result and avoid sharing terminal advantage with unrelated steps. Graph construction needs trusted execution records, not guesses from command text.",
+        "example": "If a configuration is written and overwritten before a test reads it, the unused old write should not receive the same credit as the current version."
+      }
+    },
+    "qa/agent-research:depgpo/basics": {
+      "source_sha256": "a3c62331ec13a32f7af742f6abb2d0fdc4e288596420693e523eb6dc241965db",
+      "reviewed": true,
+      "fields": {
+        "question": "Why track command dependencies in DEPGPO when terminal tasks only yield final success or failure?",
+        "answer": "A long trace contains many file reads and writes; terminal reward cannot identify which commands produced the result. DEPGPO connects verification to earlier effective work through actual dependencies. Dataflow is not causal contribution of every command, and missing records or verifier side effects require explicit boundaries.",
+        "example": "Trace the source file read by a final test to the command that wrote it. Unrelated directory browsing should not get equal credit just because it appeared in the trace."
+      }
+    },
+    "qa/agent-research:depgpo/comparison": {
+      "source_sha256": "5d5443962ca7f4a56594907698d87399833692d33f61a39436bb2c965b3fb292",
+      "reviewed": true,
+      "fields": {
+        "question": "How does dependency credit differ from uniform trajectory weighting in GRPO?",
+        "answer": "Unit weights do not distinguish supporting actions, final writes, and unrelated commands. DepGPO distributes step credit by traceable writes and distance, then normalizes to preserve token-weighted mean advantage and sign. It depends on tracer accuracy and does not prove causality or individual necessity.",
+        "example": "An input read followed by an answer write can get indirect credit. Unrelated temporary-file cleanup gets less weight, while negative trajectory advantage stays negative."
+      }
+    },
+    "qa/agent-research:depgpo/implementation": {
+      "source_sha256": "dfd5da79c9f625edd4c9e42d2bd3f612b53c04f50fededaac9a2e786b2e7d9fe",
+      "reviewed": true,
+      "fields": {
+        "question": "What boundaries apply to multiple commands per step, missing records, and verifier-generated files?",
+        "answer": "Sum command credits within one step, rather than averaging. Missing records or fully tied weights revert to unit weights. Exclude verifier-written resources and stdout values already present in the task prompt; paths and line numbers come from trusted tracing. Local work parses no shell, runs no real Qwen RL, and only verifies the mechanism on four hand-built chains.",
+        "example": "If the grader generates a result file, treating it as an agent write rewards a nonexistent contribution. Remove such artifacts from the tracer input."
+      }
+    },
+    "qa/agent-research:adastep/mechanism": {
+      "source_sha256": "5d51c05e60fabbccfe6675f9e7283c088f90e28e96ecdd1a0df3012882fb032f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why lower local credit correction when within-action return variance is high at the same anchor state?",
+        "answer": "Random continuations after one action can produce very different outcomes, implying the local action explains little of the variation. Variance decomposition trusts local advantage more when between-action differences dominate; otherwise it preserves global advantage and suppresses the correction. Estimate weights from raw returns rather than arbitrarily normalizing away variance relationships.",
+        "example": "If rollouts from both actions A and B produce zeros and perfect scores, continuation randomness dominates. Do not strongly attribute a single outcome to either action."
+      }
+    },
+    "qa/agent-research:adastep/basics": {
+      "source_sha256": "61f885a5e22824f7400952662e4fec0a64000c01f9f217a15519f14fb836f683",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does AdaStep distinguish an action's effect from luck in later trajectories?",
+        "answer": "At the same intermediate state, later decisions still affect success. Assigning terminal differences directly to the first action is noisy. AdaStep uses multiple observed trajectories to assess local credit reliability, retaining global outcomes while cautiously adjusting step signals. It trains no separate critic and does not prove causal effects from few samples.",
+        "example": "After the same lookup, one continuation answers correctly and another transcribes incorrectly. Compare between-action differences with within-action fluctuations rather than blaming the lookup for all variation."
+      }
+    },
+    "qa/agent-research:adastep/comparison": {
+      "source_sha256": "8bc99fd046c6eac8d94eb30d6dd0eef443f8d881e6b29bfa0c8b49abb8478466",
+      "reviewed": true,
+      "fields": {
+        "question": "How does AdaStep's return-statistics approach differ from training a critic for step evaluation?",
+        "answer": "A critic learns state or action values to organize credit. AdaStep estimates local-correction reliability directly from observed returns for different actions at the same anchor, with no separate critic. It saves a predictor but still needs repeated states and sample coverage. Critic-free does not imply noiseless or universally more accurate.",
+        "example": "Repeated actions from the same webpage state supply empirical variation. A single occurrence cannot provide a reliable local estimate by itself."
+      }
+    },
+    "qa/agent-research:adastep/implementation": {
+      "source_sha256": "b0eacd4c9cb2254f57bd2216e16da34758652d23e13382a45e08591b7f4a5fb4",
+      "reviewed": true,
+      "fields": {
+        "question": "How are few actions, few samples, zero variance, and normalized returns handled?",
+        "answer": "Estimate the ratio only with at least two actions, two samples per action, and positive total variance; otherwise use the paper's w=1 fallback. Equal returns give zero local advantage. Weight statistics use raw returns, and groups include task IDs to avoid mixing names across tasks. No real environment or policy training ran locally.",
+        "example": "One action cannot reveal between-action variation, but that does not justify inventing w=0. Identical rewards should not create local correction out of nothing."
+      }
+    },
+    "qa/agent-research:graphhca/mechanism": {
+      "source_sha256": "3764289e11ea8ab4ade4dd5dee4366834b5b9c6e6513fb77be3c619ddb87c00e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why solve a discounted state-graph fixed point before assigning action credit by differences in log potential?",
+        "answer": "Propagate terminal successes and failures as boundary conditions over observed transitions to obtain discounted success potential. Differences in adjacent log potentials turn long-range evidence into local progress, then standardize across actions from a shared state. Complete rollouts support training attribution; do not expose hindsight success boundaries as observations to evaluated agents.",
+        "example": "Two paths through one intermediate state can share downstream success evidence. Compare whether actions leaving that state approach success or lead toward a dead end."
+      }
+    },
+    "qa/agent-research:graphhca/basics": {
+      "source_sha256": "a6355641c3a09c980758f4895296aa6a52e7ac766a322de203bc0a328de5e6f1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does GraphHCA give long-horizon actions a structured training signal before terminal success?",
+        "answer": "Sparse terminal feedback can obscure early exploration and key transitions behind one trajectory reward. GraphHCA organizes observed transitions in a graph and propagates success to connected states to estimate action progress. The graph covers observed data only, its potential is not ground truth, and deployment actors cannot see training success labels in advance.",
+        "example": "If several routes reach success after opening a key door, the graph connects that experience. It cannot assume success behind an unseen door."
+      }
+    },
+    "qa/agent-research:graphhca/comparison": {
+      "source_sha256": "4aff9c3053c0106fd946900b581f7778eeefbdd82f405b652632627493ff7c30",
+      "reviewed": true,
+      "fields": {
+        "question": "How do differences in graph potential differ from broadcasting one advantage to the whole trajectory?",
+        "answer": "Trajectory advantage does not distinguish steps moving toward promising states. Potential differences highlight improved or worsened state value and are standardized among actions sharing a start. They depend on empirical transition probabilities and ε, not independent causal contribution or guaranteed loop penalties.",
+        "example": "In trajectories with the same terminal result, moving to high potential and returning to low potential can get different local credits instead of one shared value."
+      }
+    },
+    "qa/agent-research:graphhca/implementation": {
+      "source_sha256": "52fe13898327f68f0f1376311fc09225d1bdb3eb7822455ebcc09f3b2706aaca",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do local Transition and success inputs stay with the estimator rather than the actor?",
+        "answer": "Terminal labels estimate training-side potential. The actor reads only the public state then available, not future success boundaries. No language model was trained or integrated into Evolve. Fixed-point convergence and credit rankings are mechanism evidence; full integration needs real rollouts, updates, and isolated evaluation.",
+        "example": "Labeling a terminal state after training interaction can help compute credit. Telling a test agent which successor leads to success leaks the result."
+      }
+    },
+    "qa/agent-research:dr-credit/mechanism": {
+      "source_sha256": "f6ce69395a57270ad52410e0cc813b8b700d0228d612b11f7f73d2bf0cafd2c0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why shouldn't retrieving duplicate evidence repeatedly earn the same process reward?",
+        "answer": "Credit should measure new support relative to accepted evidence, not tool calls. Track historical rubric coverage and score new or partial support to discourage reward farming. Retain outcome advantage so local novelty remains aligned with research goals, and require verifiable support relationships.",
+        "example": "Retrieving the same date twice earns no full second reward without a new constraint. Finding previously missing affiliation evidence adds support."
+      }
+    },
+    "qa/agent-research:dr-credit/basics": {
+      "source_sha256": "6b68a6bdf030d03e103944c28924c6badfb909dd3a3cca1e45b15ab0f60395db",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Dr.Credit ask whether each deep-research retrieval adds new evidence for the answer?",
+        "answer": "An agent can search repeatedly and collect near-duplicates without completing the facts needed. Dr.Credit links process feedback to rubric support so retrieval actually advances the answer. Rewards come from training-side judgments of support, not document counts; judge and rubric reliability still limit credit quality.",
+        "example": "Three reposts of a known price do not establish warranty terms. Finding the original warranty can add a missing answer requirement."
+      }
+    },
+    "qa/agent-research:dr-credit/comparison": {
+      "source_sha256": "acd455d9a6a2ba59b71ea486c5a0bafecec2728bb0656e83fb798e0604de1adc",
+      "reviewed": true,
+      "fields": {
+        "question": "How does incremental rubric-based process feedback differ in timing from grading only the final answer?",
+        "answer": "Terminal scoring judges the deliverable but cannot easily isolate useful retrievals. Incremental support checks when individual requirements gain evidence and links feedback to those actions. Supported evidence can still be misused in the final answer; neither signal replaces the other, and evaluated actors must not see the training rubric.",
+        "example": "A retrieval can find the correct date and complete a process requirement while the final answer copies the year incorrectly. Terminal scoring should still mark that error."
+      }
+    }
+  }
+}

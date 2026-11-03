@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:onelatent/comparison": {
+      "source_sha256": "8f9aad8846a879e42c5fb8fca4493af696547f8dfd84eccc81591684c9b11ec9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is OneLatent's interface not latent MSE distillation with an extra encoder/projector?",
+        "answer": "OneLatent trains all parameters of a causal student to reconstruct single- or multi-view reasons and predict SIDs, with no extra projector or strict bottleneck. MSE aligns feature coordinates, not generation. A fixture replacing the objective would be a new diagnostic; no such substitute was run locally.",
+        "example": "Illustration: Reconstructing reasons from markers supervises generatable content; shrinking Euclidean distance between vectors does not demonstrate that ability."
+      }
+    },
+    "qa/recommendation:onelatent/implementation": {
+      "source_sha256": "91553a8c1953fbbd2d7eb555eb64d3ac6f9140cdb7fb8bf10db3407f866e1c56",
+      "reviewed": true,
+      "fields": {
+        "question": "Why average OneLatent reconstruction over each rationale's tokens, then over available perspectives?",
+        "answer": "Summation overweights long reasons and examples with more perspectives. Two-level averaging controls length and missingness. Teachers can read positives to create reasons, but the student prefix must exclude the target SID and positive description. Async serving caches and training costs are separate; local work is review-only.",
+        "example": "Illustration: A 200-word rationale should not dominate a 20-word one by length alone, and a missing attribution view is not a real empty-text target."
+      }
+    },
+    "qa/recommendation:onemall/mechanism": {
+      "source_sha256": "3778a531e9f3bc6c13f8948654643ff9174e195ec8a56f8651c0df7e143c0866",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does OneMall need scenario conditioning and multi-behavior cross-attention after unifying Semantic IDs?",
+        "answer": "One output vocabulary gives each item one identity across scenes, not one behavior meaning. Scenario conditions specify the task and cross-attention selects pertinent history. Query-Former compression and sparse experts manage context and capacity. A unified model family still needs scene-specific behavior.",
+        "example": "Illustration: The same jacket can be clicked in a card or ordered after a livestream. Its ID is shared, but live recommendation needs different behavior evidence."
+      }
+    },
+    "qa/recommendation:onemall/basics": {
+      "source_sha256": "f6037279584f71f9d45e52724f556cd69543516a2c5e0a39bf92eb56aa72e682",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are shared item codes useful across OneMall cards, short videos, and livestreams?",
+        "answer": "Shared identity avoids fragmented mappings and separate modeling. Scene conditions and multi-behavior evidence distinguish consumption contexts. The code does not equalize exposure goals, video completion, commerce, or watch time, and transfer can conflict.",
+        "example": "Illustration: Jacket videos and cards share a code, but video completion and orders should not become equally strong positives."
+      }
+    },
+    "qa/recommendation:onemall/comparison": {
+      "source_sha256": "67a893288806e6f4d52f41f8f404fe28f8a7aa10c479be5ef65273e80a4a247c",
+      "reviewed": true,
+      "fields": {
+        "question": "How does OneMall's sparse MoE change capacity and specialization relative to a dense generator?",
+        "answer": "Experts add conditional capacity while sparse activation limits per-request compute. Dense sharing is simpler but can favor frequent scenes. Experts can starve or duplicate, so total parameters are not effective capacity. Local SID and scene fusion do not reproduce full MoE/RL.",
+        "example": "Illustration: Live shopping and video can use different expert mixtures. If the gate always uses one expert, unused experts add no specialization."
+      }
+    },
+    "qa/recommendation:onemall/implementation": {
+      "source_sha256": "218eb383519ea06f627a15016e9bae35c459d7a02618b7e42832daa7ec8c8d39",
+      "reviewed": true,
+      "fields": {
+        "question": "Why don't local three-level SIDs and a scene prompt prove OneMall Query-Former, MoE, and RL were reproduced?",
+        "answer": "The local path adds scene conditions, residual codes, and cross-behavior fusion. Query compression, actual routing, and policy updates need separate evidence. Report the small NDCG increase and Hit decrease within that scope rather than invoking the full paper family.",
+        "example": "Illustration: Three emitted item codes do not imply experts. Naming a loss 'reward' does not establish RL without rollout and updates."
+      }
+    },
+    "qa/recommendation:onemodel/mechanism": {
+      "source_sha256": "b308412da8a4cb51268ef37cedd9ee456ea60b5711a09184cdf237f34cae497b",
+      "reviewed": true,
+      "fields": {
+        "question": "What specialization does SAIM retain after OneModel shares a causal backbone?",
+        "answer": "Scenario projections map heterogeneous events into one history space, but sharing every FFN activation can flatten differences. SAIM conditions shared FFN channels on scene embeddings. Global and recent states separately preserve stable and immediate signals.",
+        "example": "Illustration: Travel browsing and purchases can share history, while ads and content use different gates and recent flight booking remains in the local state."
+      }
+    },
+    "qa/recommendation:onemodel/basics": {
+      "source_sha256": "2e8ee6c4447be47b4c2ace5cbfdfa9949d1f3112335e63bb6e2d315f72b7f796",
+      "reviewed": true,
+      "fields": {
+        "question": "Why map heterogeneous scenario fields into uniform event tokens in OneModel?",
+        "answer": "Different businesses log different fields and actions. Scene projections establish a common width and attach scene, action, time, and position before the causal backbone. Shared width does not equal shared meaning; gates and hierarchical states preserve differences.",
+        "example": "Illustration: A ten-second view and a purchase should not be two untyped IDs. Event metadata tells the model what each action means."
+      }
+    },
+    "qa/recommendation:onemodel/comparison": {
+      "source_sha256": "ff15f363df62cc71f573997cc35c57dc780264c303838e809827470321552757",
+      "reviewed": true,
+      "fields": {
+        "question": "What time scales does OneModel global/local fusion preserve beyond a pooled user state?",
+        "answer": "Global attentive pooling summarizes stable patterns, while recent states retain rapid changes. A single pooled vector may average away new needs. Genre-derived scenes lower density in the proxy; report the negative result without extrapolating it to real cross-business logs.",
+        "example": "Illustration: Long-term travel and a new renovation need can coexist without years of travel events dominating a single average."
+      }
+    },
+    "qa/recommendation:onemodel/implementation": {
+      "source_sha256": "1a2b5e9eae6a460d1d656a5eb742eae34f974210c4d281c42d79904681dd3171",
+      "reviewed": true,
+      "fields": {
+        "question": "What should generate OneModel's SAIM gate, and why not use outcomes after prediction?",
+        "answer": "Use the scenario embedding known at request time to modulate the shared FFN. Outcomes supervise only. Maintain causal masking and correct domain projections. Local genre-derived scenes are proxies, not real recommendation, ad, and merchant logs.",
+        "example": "Illustration: An ad-request flag is available now; selecting a gate because the user later purchased leaks future information."
+      }
+    },
+    "qa/recommendation:onepiece/mechanism": {
+      "source_sha256": "eadd69a2a409ed92cede4c929c3ca1278bf9ca04c18a835af32cd28b8021e53b",
+      "reviewed": true,
+      "fields": {
+        "question": "How do OnePiece's latent blocks and progressive task weights differ from simply summing all losses?",
+        "answer": "Residual blocks repeatedly update contextual state before heads read it. Scheduled weights change which objectives dominate training stages so shared representations adapt to retrieval, click, and value. Both path and order matter; a local proxy does not prove verifiable linguistic reasoning in latent states.",
+        "example": "Illustration: Learn relevance before raising purchase-value weight to avoid an early sparse objective dominating basic ranking."
+      }
+    },
+    "qa/recommendation:onepiece/basics": {
+      "source_sha256": "7e4a096e51b5ec0aec5b7582af2d1b36eba2983bad5a1811672a4c308638d737",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does OnePiece jointly cover retrieval, clicks, and value?",
+        "answer": "Cascade stages have distinct labels and independent training can lose transferable clues. Shared context and latent updates model multiple needs, while progressive weights schedule learning. Objectives can conflict; a 'reasoning' name does not verify language reasoning.",
+        "example": "Illustration: Relatedness, click likelihood, and expected value complement one another, but high clicks need not imply purchases."
+      }
+    },
+    "qa/recommendation:onepiece/comparison": {
+      "source_sha256": "197aa9de17b869efab340991165c217316f619a79730b991653eae0853ff29eb",
+      "reviewed": true,
+      "fields": {
+        "question": "How does progressive weighting change learning order relative to fixed equal task weights?",
+        "answer": "Fixed weights exert the same pressure throughout. A schedule lets basic relevance and harder value objectives converge in stages. This can reduce conflicts or cause forgetting, so inspect stage metrics. Proxy results do not make all curricula superior.",
+        "example": "Illustration: Emphasize relevance early and transaction value later; forgetting relevance could yield expensive but unrelated items."
+      }
+    },
+    "qa/recommendation:onepiece/implementation": {
+      "source_sha256": "3cd12a9f48ec546845e707517c1efb4c7ced392557503e77e9ac77fde009ae0f",
+      "reviewed": true,
+      "fields": {
+        "question": "How verify OnePiece's H(k+1) residual update and αt(k) schedule separately?",
+        "answer": "One updates contextual state per block, the other weights losses per training stage. Distinguish the two meanings of k and verify both state propagation and applied loss weights. A fixed scorer proxy cannot establish full cascade training.",
+        "example": "Illustration: More blocks do not imply progressive weights, and changing losses does not establish multi-step latent updates."
+      }
+    },
+    "qa/recommendation:onerank/mechanism": {
+      "source_sha256": "e2ab7aa5efd6cc4b44fb1c8f35e8918f3b5e87c60309ad3f108b41839bbbced3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain task-private channels and isolate their gradients inside OneRank's unified sequence?",
+        "answer": "Task tokens condition shared features but cannot prevent conflicting losses from competing for shared parameters. Private channels add dedicated capacity that other tasks cannot update directly. Shared inputs still exchange evidence, and conflict is controlled at specific paths rather than assumed absent.",
+        "example": "Illustration: Clicks value novelty and purchases value reliability. Both share user and item history, but click loss must not overwrite purchase-private features."
+      }
+    },
+    "qa/recommendation:onerank/basics": {
+      "source_sha256": "0cc5332c439343a6d44231380d0375ed73958038c051f2e53a4745a6853d931e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why put OneRank task tokens inside the encoder instead of using them only to select output heads?",
+        "answer": "Conditioning inside layers changes how each task interprets fields before prediction. Private channels retain specialization, so unified inputs do not mean complete sharing. The presence of a token does not prove it is used.",
+        "example": "Illustration: Purchase can read budget early and clicks can read freshness; a late head gets one already compressed representation."
+      }
+    },
+    "qa/recommendation:onerank/comparison": {
+      "source_sha256": "f8e76e5f24a125fb11918115579dbb324123dc756165de4517c405b0bc54c404",
+      "reviewed": true,
+      "fields": {
+        "question": "What differs between OneRank's private channels and MMoE task-specific gates?",
+        "answer": "A gate mixes shared experts that other tasks still update. Private channels own task-specific parameters and block other tasks' gradients. Both retain sharing, not complete independence. The public proxy does not establish that industrial negative transfer is solved.",
+        "example": "Illustration: A purchase gate changes expert weights but clicks can update those experts. Click loss should not change purchase-private parameters."
+      }
+    },
+    "qa/recommendation:onerank/implementation": {
+      "source_sha256": "111ebe184ce64861a3997c6e4640f54db888e15e6ea966efcfdf4018a9206ccd",
+      "reviewed": true,
+      "fields": {
+        "question": "How check that OneRank loss Lj cannot update another task's φk without freezing shared θ?",
+        "answer": "Backpropagate one task loss. Other private gradients must be zero; its own private and permitted shared parameters can receive gradients. Detaching the whole backbone loses joint training and detaching only outputs may leave private internal paths. Align parameter groups with tasks.",
+        "example": "Illustration: Click training should preserve purchase-private weights but can update shared fields; zeroing all shared gradients is frozen adaptation."
+      }
+    },
+    "qa/recommendation:oneranker/mechanism": {
+      "source_sha256": "47dc3834d3599fdfd086a40c773b97e538e15b8f1186ddb845c0db37e6be3848",
+      "reviewed": true,
+      "fields": {
+        "question": "Why align OneRanker's generation distribution and value head preferences?",
+        "answer": "Generation controls candidate availability and value controls ranking afterward. Reranking cannot recover valuable items the generator never produces. A shared fake-item token aligns interfaces and a consistency loss aligns distributions. Balance generation fit, value accuracy, and consistency to avoid suppressing useful differences.",
+        "example": "Illustration: If generation favors cheap accessories while value prefers durable tools, reranking accessories cannot show tools. Consistency aims to give tools a generation chance."
+      }
+    },
+    "qa/recommendation:oneranker/basics": {
+      "source_sha256": "df5fbebc7747c02d09c7be268318dfe8f17fd45f20161ec9aeb2f4e442e7841a",
+      "reviewed": true,
+      "fields": {
+        "question": "What prediction interfaces does OneRanker's fake item token unify?",
+        "answer": "A shared representation conditions generation likelihood and value ranking, reducing objective separation. The token is an architectural placeholder, not a real item. Map outputs to a legal catalog and preserve each head's objective.",
+        "example": "Illustration: One candidate state answers likelihood and expected value, but the placeholder itself cannot be served as an ad."
+      }
+    },
+    "qa/recommendation:oneranker/comparison": {
+      "source_sha256": "ec1e0a0d762d47526601cb13c09733f71e0f3322ff509c19edc2979dac945ca0",
+      "reviewed": true,
+      "fields": {
+        "question": "What does generation consistency KL enforce beyond a shared backbone?",
+        "answer": "Different heads can learn opposing preferences despite shared parameters. KL aligns distributions over identical candidates. This may reduce conflict or constrain useful specialization, so calibrate it. Agreement alone does not improve recommendation; both may prefer the wrong popular items.",
+        "example": "Illustration: A backbone does not stop accessory generation and tool value rankings from disagreeing. KL penalizes that disagreement, with direction still mattering."
+      }
+    },
+    "qa/recommendation:oneranker/implementation": {
+      "source_sha256": "0403693885e341db26dfe51dac77fc1ebcecd69b1db05563b2808ce78223da75",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not subtract raw pgen and prank logits for OneRanker's KL?",
+        "answer": "KL compares normalized probabilities over aligned candidates and consistent temperatures. Mask padding and illegal candidates identically; do not expose value labels to generation. Fixed score mixing does not demonstrate learned distribution alignment.",
+        "example": "Illustration: A constant logit shift leaves probabilities unchanged but changes squared differences. Full-catalog and ten-item normalizations cannot be treated as the same KL."
+      }
+    },
+    "qa/recommendation:onerec/mechanism": {
+      "source_sha256": "4722d58f1d57b98afc34a578b7b19dadcde1880957cbe40252e9b97c98220c41",
+      "reviewed": true,
+      "fields": {
+        "question": "Why train OneRec preference pairs from full current-policy sessions rather than individual items?",
+        "answer": "Session-level generation and reward can model coherence and diversity. Self-hard winner/loser pairs focus DPO on complete outputs the model confuses, comparing probability changes against a reference. Reward errors can steer updates incorrectly, and local results do not validate online gains.",
+        "example": "Illustration: Two five-video slates can be individually relevant but differ in repetition and flow. Session preferences teach which items work together."
+      }
+    },
+    "qa/recommendation:onerec/basics": {
+      "source_sha256": "6efd0ffb3e309fd9da3a6cda1bfd75caa9917a40c4db532985193a57b70530de",
+      "reviewed": true,
+      "fields": {
+        "question": "Why concatenate multiple item SIDs into one autoregressive OneRec session target?",
+        "answer": "Later items can condition on earlier selections, unlike independent item generation. Hierarchical SIDs give composable addresses and reward evaluates the session. Order still matters, and diversity is not guaranteed.",
+        "example": "Illustration: Follow a beginner photography tutorial with advanced practice instead of generating three independently relevant beginner videos."
+      }
+    }
+  }
+}

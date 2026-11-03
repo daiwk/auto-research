@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:atomrec/mechanism": {
+      "source_sha256": "bf0fbf465d76a645e967551ed549a01e6bad26cd8966eb3ca91f597d7ac4edc8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does an atomic user profile help keep new preferences from overwriting old ones?",
+        "answer": "Updates touch matching fact fields without rewriting the whole profile, reducing incidental deletions or semantic drift. Semantic collaborative edges and multi-hop paths connect recommendation evidence separately from preference values. Atomic fields still require conflict and time handling; old facts are not automatically permanent.",
+        "example": "Example: A new no-spicy-dinner preference changes that field only, preserving commute budget and breakfast preferences."
+      }
+    },
+    "qa/agent-research:atomrec/basics": {
+      "source_sha256": "b8838a4a16e484cdd45d67d8b2efdf6109c71b7eb8d049148cad4ab8266deaca",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does a recommendation assistant need user memory that tracks changes and evidence?",
+        "answer": "Behavior reflects long-term preferences, short-term intent, and item-specific feedback. A fixed profile is hard to update or explain. AtomRec evolves evidence at a fine granularity and uses history relations to explain candidates. A single click need not imply long-term preference, so retain context and provenance.",
+        "example": "Example: A gift perfume purchase should not make the system infer that the user personally prefers that scent long term."
+      }
+    },
+    "qa/agent-research:atomrec/comparison": {
+      "source_sha256": "bd7c27bb13af37c84648ed13163232ec4fdacd8ffd8ce93858e88acb36fa74ef",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a multi-hop evidence path differ from one collaborative user–item edge?",
+        "answer": "A direct edge gives overall association. A multi-hop path can trace preference through a historical item attribute to a candidate. Semantic edges may still be wrong, so reachability is not causal proof of preference. Evaluate downstream ranking on a closed candidate set with target isolation.",
+        "example": "Example: Linking the lightweight attribute of previously liked shoes to a new pair is more traceable than saying they are often bought together, if the attribute link is grounded in actual history."
+      }
+    },
+    "qa/agent-research:atomrec/implementation": {
+      "source_sha256": "174b1b1ad0710cf00255feda154c461d59a3ac67f00ab065ac1aadcc33d6484d",
+      "reviewed": true,
+      "fields": {
+        "question": "What do local pre-target reconstruction and zeroing illegal links prevent?",
+        "answer": "Rebuild memory from history strictly before each held-out target to prevent future behavior leakage. Generated links can cite only provided historical IDs; malformed or illegal output fails without reference-answer backfill. The small local test is negative, so executed data flow is not a recommendation or online gain.",
+        "example": "Example: Seeing the target product in later history makes the task easier. Remove it in the time-correct reconstruction, not just hide the prompt field name."
+      }
+    },
+    "qa/agent-research:skilldreamer/mechanism": {
+      "source_sha256": "f089c200809ddd885e9b51d641ba65f2862c914f164909c71e58ea4d9af4d7de",
+      "reviewed": true,
+      "fields": {
+        "question": "After generating a pseudo skill, why does CSI recheck capability fit before execution?",
+        "answer": "The pseudo skill turns a goal into a procedural retrieval proxy. It may locate related documents, but it is not verified and may not fit the subgoal. CSI rechecks evidence, constraints, and the next bounded action, linking retrieval to correct use without assuming imagined steps are executable.",
+        "example": "Example: A pseudo skill can find a web download procedure. Before executing, check whether the current page requires login instead of following a similar document title blindly."
+      }
+    },
+    "qa/agent-research:skilldreamer/basics": {
+      "source_sha256": "7d693404a71b2ef89c8f28cf1e029fd811d96963f771261e74f616310eaa8811",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is a pseudo skill a retrieval proxy rather than a verified procedure?",
+        "answer": "The model imagines capabilities and procedure-like descriptions to bridge task wording and skill documents. These descriptions have not been executed and may omit steps or violate conditions. Load and validate the real procedure before acting; a complete-looking description is not proof.",
+        "example": "Example: A pseudo skill says export and verify files in bulk. It helps find the export skill, but real parameters, permissions, and checks come from the actual documentation."
+      }
+    },
+    "qa/agent-research:skilldreamer/comparison": {
+      "source_sha256": "bdb9b033dc60904c17a5f5e24f2cc875bc5a0beeec0064a68a8a31819093233a",
+      "reviewed": true,
+      "fields": {
+        "question": "What is HSR capability round-robin trading off against global top-score selection?",
+        "answer": "Global top scores can all come from one easily matched capability, missing other requirements. HSR ranks within capability and cycles through rows with deduplication to preserve coverage. Min–max normalization within candidate sets makes scores set-dependent, not calibrated success probabilities across tasks.",
+        "example": "Example: A task needs cleaning, plotting, and export. Round-robin gives each a candidate instead of using all five slots for cleaning."
+      }
+    },
+    "qa/agent-research:skilldreamer/implementation": {
+      "source_sha256": "98474ef69ae787da2ee345fe3ffb48ad76e1b73a54b4a8f4b434877e49f484ca",
+      "reviewed": true,
+      "fields": {
+        "question": "Does CSI check every five reasoning turns or every five executed actions?",
+        "answer": "It counts actually executed actions. Before the next action, recheck the current subgoal, evidence, and constraints; MATCH or PARTIAL_MATCH loads the real procedure first. Loading is not tool success, and invalid pseudo skills are not heuristically fabricated. Report loads, executions, and final passes separately.",
+        "example": "Example: Three reflections without tool execution do not advance the action counter or trigger the periodic check early."
+      }
+    },
+    "qa/agent-research:spt/mechanism": {
+      "source_sha256": "9c9ffbc9543a9c7c26b22e410af4d706c8f16f8b0a23bcb5377a1cc69ebd5887",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is inserting referenced files near first use more complete than pretraining on skill instructions alone?",
+        "answer": "Skill packages put argument rules or examples in companion files. Inlining at first reference exposes real dependencies at the right position in causal context rather than training on dangling references. Mixing with general text limits distribution shift. Reading skill documents is not validated execution.",
+        "example": "Example: 'Use schema.json for arguments' does not teach the field constraints if the schema is absent; inserting it near the reference supplies them."
+      }
+    },
+    "qa/agent-research:spt/basics": {
+      "source_sha256": "4836c49d3c0286687775a593f510a6cf4b55fc41db33efb6e8d4a077f8fe5be7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can multi-file skill packages serve as mid-training data for a causal LM?",
+        "answer": "They contain reusable procedures and referenced materials. Predicting this text before post-training can build workflow priors. This is not a single execution trace or real tool use during training; downstream SFT or RL still must turn document patterns into behavior.",
+        "example": "Example: Instructions with a configuration example and helper script teach a reusable method, not the accidental full tool log of one task."
+      }
+    },
+    "qa/agent-research:spt/comparison": {
+      "source_sha256": "d852b9a13fc4174f5cceceb7b69887c00b3eb004fb91a3d0b990738848ec49d4",
+      "reviewed": true,
+      "fields": {
+        "question": "How does skill mid-training differ from retrieving skill documents only at deployment?",
+        "answer": "Mid-training writes procedural patterns into weights, so the same document need not be retrieved each time. Runtime retrieval puts up-to-date skills explicitly in context but costs tokens. They can complement each other. Training on skill text does not prove tool execution; verify a real policy and environment.",
+        "example": "Example: A model may remember to verify before submitting, while a changed API argument still needs current runtime documentation."
+      }
+    },
+    "qa/agent-research:spt/implementation": {
+      "source_sha256": "e1800f4c3f47eda955d169b4430180cccda2eec166897f9e2d89799c66207186",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain general text and control its mixture with skill data in mid-training?",
+        "answer": "Training data changes both what a model learns and the text distribution it sees. An explicit mixture coefficient α controls the share of procedural packages. Replacing all training with skill documents does not leave other capabilities unchanged by assumption. Local assembly and mixture tests cannot establish general capability retention or execution skill.",
+        "example": "Example: A batch includes instructions and general prose. Raising the skill ratio changes the training emphasis, which requires training evaluation, not a file-count check."
+      }
+    },
+    "qa/agent-research:covemem/mechanism": {
+      "source_sha256": "6efc3bf62807cf1054706ae8efe4cefd5f57bbf778e86edee8acc75bbf22911a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use semantic alignment and a masked listwise objective instead of simply making LightGCN vectors soft tokens?",
+        "answer": "Matching projection dimension does not ensure use of collaborative geometry. Semantic alignment constrains the interface, and within-candidate ranking forces relevant memory to affect predictions. Candidate-driven retrieval changes history by option set. A frozen bank does not remove connector training or make explanations inherently faithful.",
+        "example": "Example: The same user needs different history for movies and books. Ranking supervision must teach soft tokens to affect the corresponding candidate scores."
+      }
+    },
+    "qa/agent-research:covemem/basics": {
+      "source_sha256": "056d5a16ff844097d9dad700406af43f71192bbc4a244159febceec514e5425d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CoVeMem retrieve collaborative memory based on the current candidate set?",
+        "answer": "The average collaborative candidate representation describes the local need. The system retrieves matching history and projects it into LLM-readable soft tokens. This focuses memory on the ranking task rather than a fixed text profile of all history. New candidates can change retrieval for the same user.",
+        "example": "Example: Outdoor-gear candidates may retrieve related purchases, while skin-care candidates retrieve a different portion of the same user's history."
+      }
+    },
+    "qa/agent-research:covemem/comparison": {
+      "source_sha256": "2d9870ba5089b2c45b73aea78a4fc8e2153a6f1d07b9d811cfe9f9a074826e44",
+      "reviewed": true,
+      "fields": {
+        "question": "How does collaborative soft-token memory differ from repeatedly rewriting a textual profile?",
+        "answer": "Soft tokens preserve collaborative geometry from a frozen LightGCN bank and use projection and alignment to interface with an LM. Text profiles are readable but require generative rewrites and can lose catalog structure. Vector interfaces need training and interpretation limits. No extra text-maintenance calls does not mean zero inference cost.",
+        "example": "Example: Ranking can read collaborative vectors without asking an LLM to rewrite preferences, but projection, retrieval, and language forward passes still consume compute."
+      }
+    },
+    "qa/agent-research:covemem/implementation": {
+      "source_sha256": "8465ef4292e849bed3e8717f6b54d1d20781f6ab92390c9a6c3457d9bb6844b8",
+      "reviewed": true,
+      "fields": {
+        "question": "How does the mean candidate vector choose which collaborative memories to read from user history?",
+        "answer": "Average the current candidates' vectors in the frozen bank, score historical items against that mean, select relevant items, and project them for the LLM. Changing candidates can change the read even when history is fixed. The local run verifies conditional retrieval, not training the paper's LightGCN, connector, or LoRA.",
+        "example": "Example: Switching the candidate set from cameras to hiking boots changes the mean and can surface photography versus outdoor interactions."
+      }
+    }
+  }
+}

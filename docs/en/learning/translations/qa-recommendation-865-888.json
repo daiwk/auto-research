@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:proximity-features/comparison": {
+      "source_sha256": "66ddc285e6dbd213d71c4ec15914a74ca1f81a3fb96bdb3a44a0756541625b49",
+      "reviewed": true,
+      "fields": {
+        "question": "What does Airbnb proximity aggregation add beyond a global cold-start aggregate?",
+        "answer": "Global aggregates give all anonymous requests one prior. Proximity aggregates condition on nearby groups with adequate support. They capture local demand but reduce samples per bucket and may amplify regional bias. ZIP proxies test local signals, not recovered personal tastes.",
+        "example": "Illustration: A group may favor weekend trips while the global population favors large cities; one traveler in that group can still want an international trip."
+      }
+    },
+    "qa/recommendation:proximity-features/implementation": {
+      "source_sha256": "3c704e754003d36d5dd165992f0b5d851c5c333b5ac2b5a6e69889f70874e4c5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why version proximity coordinate quantization, hashes, and daily aggregation?",
+        "answer": "Group behavior is accumulated by stable keys. Changing precision or hashing can move a region to a new bucket and mismatch serving history. Handle small groups and missing coordinates explicitly, without secretly using precise personal locations. Small MovieLens buckets are not production groups of around a thousand or privacy evidence.",
+        "example": "Illustration: Changing decimal precision today and looking up yesterday's key can read the wrong aggregate; successful base64 encoding proves little."
+      }
+    },
+    "qa/recommendation:psg/mechanism": {
+      "source_sha256": "5c7e70a53e2f3e2a257cc835efaf65e1b9736611d672146d519b0b3807de9e26",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do PSG pair tokens reduce steps but need internal order?",
+        "answer": "Each token jointly models two positions and can be losslessly expanded, halving autoregressive steps for even lengths. Pair order affects display and future conditions, while cross-pair duplicates can invalidate the slate. Some complexity moves to the larger pairing/scoring space.",
+        "example": "Illustration: Six items take three ordered pairs. Coffee machine then beans differs from beans then machine; another pair containing the machine needs duplicate handling."
+      }
+    },
+    "qa/recommendation:psg/basics": {
+      "source_sha256": "e21c0e3e5df117e7a6f351e765c113ae5cb8aa1adf77b24781f3d8235bdd5543",
+      "reviewed": true,
+      "fields": {
+        "question": "Does lossless PSG expansion mean pair and item models have the same probabilities?",
+        "answer": "No. The mapping recovers both items and their order for a given pair; the scorer and search distribution can still change. Fewer steps do not imply equal training error, coverage, or quality.",
+        "example": "Illustration: Packing A B C D as AB and CD recovers it exactly, but the new model can prefer other pairs."
+      }
+    },
+    "qa/recommendation:psg/comparison": {
+      "source_sha256": "2e9c0412aa687371794c8ac8ba685a63ee68e098d3276cd43d5517d11eac8a9f",
+      "reviewed": true,
+      "fields": {
+        "question": "What dependency can PSG pair scoring capture beyond parallel individual item heads?",
+        "answer": "Joint scoring evaluates two items and their order as one action, modeling complementarity. Parallel independent heads may not. The pair action space can be large, and the proxy regressed, so half-length alone is not lossless speedup.",
+        "example": "Illustration: Camera plus lens can be better than two redundant high-scoring cameras, but all possible pairs outnumber individual items."
+      }
+    },
+    "qa/recommendation:psg/implementation": {
+      "source_sha256": "eae7b0b404b59b521ddaddb9776612880d2085a507f543389d98c4150ae5c6a3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why deduplicate across PSG pairs instead of only within each pair?",
+        "answer": "Local uniqueness does not prevent repeats across a slate. Check new pairs against the selected prefix and preserve internal order when expanding. Define odd lengths, leftovers, and empty legal sets instead of repeating items to fill slots.",
+        "example": "Illustration: Camera–lens and camera–bag are each unique internally but repeat the camera after expansion."
+      }
+    },
+    "qa/recommendation:pushdualgen/mechanism": {
+      "source_sha256": "0bd1c83d6f123dd1072c9eddfb4f457cb381873179b111d86404cd7cec6947aa",
+      "reviewed": true,
+      "fields": {
+        "question": "Why generate a servable SID before optionally generating explanation copy in PushDualGen?",
+        "answer": "SID identifies the recommendation and lets it enter serving immediately. A gate adds text only when needed, conditioned on that SID and history, saving decoding elsewhere. Fusion and consistency keep copy about the selected item; the recommendation remains usable without text.",
+        "example": "Illustration: A feed can return the item code alone, while a notification generates a reason about those running shoes, not an unrelated novel."
+      }
+    },
+    "qa/recommendation:pushdualgen/basics": {
+      "source_sha256": "002d718832e32bb85777f53b2ae8cf68ce2e7ae0b1f76027938564f6e63fc242",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a valid PushDualGen SID guarantee correct copy?",
+        "answer": "No. Catalog legality identifies a servable item. Copy also needs factual consistency, user evidence, and no exaggeration. Check identity and explanation quality independently.",
+        "example": "Illustration: Ordinary running shoes are a valid item, but claiming they are fireproof fails factual verification."
+      }
+    },
+    "qa/recommendation:pushdualgen/comparison": {
+      "source_sha256": "ed207083e05cb19a8024d40f08f4a63ebb9f457623e8d32ecff7ca7f072ed372",
+      "reviewed": true,
+      "fields": {
+        "question": "What budget and coverage trade-offs come from on-demand copy versus always generating explanations?",
+        "answer": "Gating saves average decoding cost by reserving copy for useful scenarios, but some users may miss helpful explanations. Validate gating, caching, and scores for both modes. Do not present latency from one and effectiveness from the other as one path.",
+        "example": "Illustration: Report item-only feed speed separately from notification engagement with a generated sentence."
+      }
+    },
+    "qa/recommendation:pushdualgen/implementation": {
+      "source_sha256": "5cbbff3c7acd33ef6406bae228f38cea00820a25b9bc7f6d8f082a251e9fab6d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why define copy tensors and losses explicitly when PushDualGen has g=0?",
+        "answer": "The skipped branch cannot require missing text; define masks and fallback states. At g=1, generate from the same SID and history. Placeholders are not explanations, and the local core scorer does not prove complete online copy generation.",
+        "example": "Illustration: A zero vector can mark missing text, not justify decoding generic praise and claiming personalized consistency."
+      }
+    },
+    "qa/recommendation:qgs/mechanism": {
+      "source_sha256": "d7706738e4179247fbe24b74764e029d252860d7bece8debd04faf8d6dbf3d56",
+      "reviewed": true,
+      "fields": {
+        "question": "Why serialize query and item together in QGS and still add feature interactions?",
+        "answer": "Joint serialization conditions generation on search query and history from the first item path, not just a general user vector. History encoding controls context cost and HFG-Attention adds sparse heterogeneous crosses. Its efficiency is architecture-specific, not proof every HSTU is linear.",
+        "example": "Illustration: 'Travel camera' and 'indoor lighting' steer different paths; device and region interactions can further influence candidates."
+      }
+    },
+    "qa/recommendation:qgs/basics": {
+      "source_sha256": "a49aac2d6bc201b5d9ea5fdb01218c6eebb424926ecae9895d3046f5b4406ecb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does QGS conditional probability describe a complete path rather than justify greedy per-step choices?",
+        "answer": "p(y|q,h) multiplies probabilities conditioned on prior generated tokens. Locally best choices need not maximize joint probability. Accumulate log probabilities under legal catalog paths. This identity alone does not establish the full search path in a local proxy.",
+        "example": "Illustration: A slightly stronger first token may have weak legal continuations; another branch can win overall."
+      }
+    },
+    "qa/recommendation:qgs/comparison": {
+      "source_sha256": "9b3a9a45826fecdb37e9699e169a79d979599ff0b82ccad545b647b75da57654",
+      "reviewed": true,
+      "fields": {
+        "question": "Why don't Linear HSTU and ordinary HSTU have the same complexity just because they share a name?",
+        "answer": "Linear forms need a specific kernel approximation or reordering. Standard SiLU(QKᵀ)V still has pairwise interactions, and HFG fusion adds separate costs. Do not invent kernel details absent from the source or omit dimensions and fields.",
+        "example": "Illustration: Removing softmax does not eliminate the N×N matrix; the actual rewrite or sparse execution matters."
+      }
+    },
+    "qa/recommendation:qgs/implementation": {
+      "source_sha256": "dcb5cb9d26ab59b10de1238929c52d05e8f93a27e9ac5aecd7079f95e7d2a0e5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't local QGS +0.73% NDCG validate full generation and a linear kernel?",
+        "answer": "A shared scorer proxy changes rank scores without production queries or full kernel throughput measurements. Verify joint input, legal generation, field interaction, and attention separately. Hit declined and should also be reported.",
+        "example": "Illustration: A cross term on movie-transition scores can change NDCG without producing SID decoding traces."
+      }
+    },
+    "qa/recommendation:quasid/mechanism": {
+      "source_sha256": "273f70df2f085569270f47515a2c7096f1b393f4ed9d17a8c062312db52ff1ea",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use business-eligibility-dependent collision margins in QuaSID instead of repelling every similar item equally?",
+        "answer": "Nearby codes share semantics, but collisions can confuse items that must remain distinct in serving. Eligibility weights allocate separation where it matters, including sparse items, while uniform repulsion wastes capacity and breaks useful neighborhoods. Outcomes still depend on signal quality.",
+        "example": "Illustration: Nearly identical items may share a coarse code but need different fine codes for distinct delivery eligibility."
+      }
+    },
+    "qa/recommendation:quasid/basics": {
+      "source_sha256": "2b4c52abde450fe093069e3d5a6319901f732eaa2dcd5e43b81bf03902d64108",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a larger QuaSID distance imply one item is preferred?",
+        "answer": "No. Margin and eligibility indicate which pairs need distinguishable addresses, not user preference direction. Both items can be relevant or irrelevant. User-conditioned scoring still determines ranking.",
+        "example": "Illustration: Two delivery eligibility classes can separate cleanly without making either item desirable to the user."
+      }
+    },
+    "qa/recommendation:quasid/comparison": {
+      "source_sha256": "fe03c1af95b65323e787c592c7f8e883d8f2796ed02f8d81e83807c220ef894d",
+      "reviewed": true,
+      "fields": {
+        "question": "How do differentiated QuaSID margins allocate code space compared with uniform collision repulsion?",
+        "answer": "Uniform pressure can waste capacity and damage semantic neighborhoods. Eligibility-weighted separations prioritize business requirements, but depend on accurate and current eligibility. The public proxy regressed slightly; design specificity is not measured improvement.",
+        "example": "Illustration: Separate items with incompatible inventory eligibility, but erroneous eligibility could split otherwise useful substitutes."
+      }
+    },
+    "qa/recommendation:quasid/implementation": {
+      "source_sha256": "5cf45722a1332363d3193d66ccb6e85b07559532f39afbb7a058b20819611cf5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why stop pushing QuaSID distances after the margin?",
+        "answer": "[mij−d]+ is zero beyond the margin: enough separation is the goal. Align qij and margin with the same pair and use training-visible eligibility. Fix distance and symmetry conventions; do not derive favorable pairs from test eligibility.",
+        "example": "Illustration: Always minimizing negative distance would repel already-separated codes and destroy useful semantic structure."
+      }
+    },
+    "qa/recommendation:radar/mechanism": {
+      "source_sha256": "1ab4ca50d486f1743341878ea3458be182a5397e49699428f17f5fa46d45d0a5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use asynchronous post-request ranking to supplement retrieval for the next RADAR request?",
+        "answer": "A strong ranker cannot usually scan the entire catalog within request latency. RADAR does the expensive scan afterward, caches good candidates, and merges them with live retrieval next time. Old history makes caches stale, so live retrieval still captures new intent.",
+        "example": "Illustration: Precompute likely movies after one visit and add them on the next, while live retrieval uses newly observed clicks."
+      }
+    },
+    "qa/recommendation:radar/basics": {
+      "source_sha256": "8885dbf1ac64d139eaa5d520fcd2d5e7ae04f363bc88f6f45db5e182b70114f0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is RADAR's cached top-k a nomination rather than guaranteed exposure?",
+        "answer": "It was selected under previous history and still competes with live candidates under current needs and eligibility. A cached score is neither exposure nor a click. Distinguish nominations to assess freshness and downstream value.",
+        "example": "Illustration: A cached movie can be filtered because the user watched it or now wants children's content."
+      }
+    },
+    "qa/recommendation:radar/comparison": {
+      "source_sha256": "b5d2cb1dc250235fc42f99e68641d889e3ed955427cc20fdbc74a3abd0c51acd",
+      "reviewed": true,
+      "fields": {
+        "question": "How does RADAR's prior-request cache differ from a predicted future pair-latent cache?",
+        "answer": "RADAR caches selected item IDs under previous history. Pair-latent caching stores intermediate interactions for specific user–item pairs. Reuse, misses, and invalidation differ, so one hit rate cannot represent both costs or establish a quality ordering.",
+        "example": "Illustration: Reusing a movie list saves nomination; intermediate vectors are different artifacts and may still need current scoring."
+      }
+    },
+    "qa/recommendation:radar/implementation": {
+      "source_sha256": "0dbc2e4bd3cdc5590343cd269d6f172db2b2f4c1b57c069a225127f95f3d629b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why deduplicate and recheck eligibility when merging RADAR live and cached top-k?",
+        "answer": "Old items may be unavailable, consumed, or ineligible. Merge by item ID and preserve provenance for incremental evaluation. Record cache generation time and history cutoff; the next target cannot enter the async job ahead of time.",
+        "example": "Illustration: Drop a listing that filled since yesterday and count a movie retrieved by both channels only once."
+      }
+    },
+    "qa/recommendation:rag-generation/mechanism": {
+      "source_sha256": "21f52b433468af4002586fce1770405cec58f08064688736d1ffa55af4ec0a1c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use disentangled SIDs to connect recommendation and generation in RaG?",
+        "answer": "Recommendation picks suitable content and generation controls creative attributes; entangling both can interfere. D-SIDs separate interfaces and cross-domain rewards coordinate what to recommend with how to produce it. The local discrete interface does not demonstrate video quality or full business lift.",
+        "example": "Illustration: A camping theme code supports selection while creative codes control shots or presentation."
+      }
+    },
+    "qa/recommendation:rag-generation/basics": {
+      "source_sha256": "df82be0fb8a9b0ac544b072b135fec9f0eabaa6cfe54fb8bbb88d38426e93f22",
+      "reviewed": true,
+      "fields": {
+        "question": "Can RaG retrieval hits alone measure new video quality?",
+        "answer": "No. Retrieval evaluates existing candidates, while generated video requires visual, factual, and interest consistency. D-SID bridges interfaces, not success criteria. Local ranking cannot substitute for an unimplemented generator.",
+        "example": "Illustration: Correctly choosing camping can still yield physically impossible footage; pretty footage can also be irrelevant."
+      }
+    }
+  }
+}

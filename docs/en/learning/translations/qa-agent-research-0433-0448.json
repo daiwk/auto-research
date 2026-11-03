@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:swe-agent/implementation": {
+      "source_sha256": "4c4400b05150efdb6e40e4ebf2f4e3da7cbafe447ab760fb2c5a4ed1bdb19223",
+      "reviewed": true,
+      "fields": {
+        "question": "What do the initial failure and fixed unittest prove in local swebench-local?",
+        "answer": "A real initial failure shows a problem exists. The exit code after editing verifies the covered regression. Local tools only read files, write solution.py, and run fixed tests. This is executable micro-benchmark evidence, not official SWE-bench Lite or broader coverage.",
+        "example": "Example: Fixing arithmetic until one suite passes verifies the edit-and-run path, not official GitHub issue resolved rate."
+      }
+    },
+    "qa/agent-research:autogen/mechanism": {
+      "source_sha256": "676e87f5e45d33cad66916defeca7a5a5dc89897f03a6d030a6c3ee18212daa5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does conversation programming need explicit termination instead of endless role replies?",
+        "answer": "Messages can keep triggering responses. Without responsibilities, tool boundaries, and stopping rules, collaboration can repeat or loop. Conversation programming composes these controls for group and nested chats. More roles do not guarantee effective division; completion still needs verified artifacts.",
+        "example": "Example: A writer and reviewer repeatedly suggest improvements. Define a stop after verification passes or budget ends."
+      }
+    },
+    "qa/agent-research:autogen/basics": {
+      "source_sha256": "0b9980cab205c0d854963f482ce012147247e2da8053ecc09c6aaa21da6b7adf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does AutoGen organize multi-agent applications as programmable conversations?",
+        "answer": "Models, execution tools, and people may need repeated feedback beyond one question and answer. Configurable roles and messages let tool results or replies trigger later steps. Role names are not collaboration ability; specify responders, handoff, stop conditions, and actual artifact checks.",
+        "example": "Example: An assistant proposes code, an executor returns an error, and the assistant revises under a protocol rather than endless chat."
+      }
+    },
+    "qa/agent-research:autogen/comparison": {
+      "source_sha256": "8cd559b01462db90352c4fc1d740317ff3a7db33e36b87c2f143484b3d7c8aa8",
+      "reviewed": true,
+      "fields": {
+        "question": "How does message-driven orchestration differ from a fixed linear script?",
+        "answer": "A linear script predefines one order. Message policies choose recipients, nested conversations, and stopping based on state or content. Flexibility helps tools and humans collaborate but can add useless chatter and loops. More messages or roles do not prove gains; count their costs.",
+        "example": "Example: A failed review can trigger one nested repair, while a pass ends immediately instead of always running five turns."
+      }
+    },
+    "qa/agent-research:autogen/implementation": {
+      "source_sha256": "15e79b438ce65d08a19a495a52e679fbd9c876bf93c6f25f9732d03e85cdfee4",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local planner/executor/critic protocol run the full AutoGen runtime?",
+        "answer": "No. It implements deterministic handoff, message logs, and stopping without full runtime, real LLM group chat, or container execution. Round counts verify the protocol; perfect scores are not the paper's multi-application ability or development efficiency.",
+        "example": "Example: One rule-based message per role can pass a protocol without solving an open software task."
+      }
+    },
+    "qa/agent-research:metagpt/mechanism": {
+      "source_sha256": "86cd80dfdcd604a5ad1ffe76a0b97d5059668880d9b7f006450656acb5fd50fb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can structured artifacts reduce hallucination cascades compared with free role chat?",
+        "answer": "Downstream roles consume requirements, designs, and test contracts whose fields and constraints can be checked instead of trusting verbal promises. SOPs define order and dependencies so faults are easier to locate. Valid format does not ensure correct content or usable software; verify and execute.",
+        "example": "Example: An architect's interface lets engineers check signatures. 'The design is done' lets every role imagine a different contract."
+      }
+    },
+    "qa/agent-research:metagpt/basics": {
+      "source_sha256": "dd42ff928b1dce0058e8718a656df5a35b0cd04c0881b75247749a9b74f99f32",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does MetaGPT organize agents around software roles and deliverables?",
+        "answer": "Requirements, design, implementation, and testing depend on each other. Free chat can distort handoffs. MetaGPT gives roles explicit responsibilities and checkable artifacts. Organization helps but complete documents are not correct code; run verification.",
+        "example": "Example: An architect defines the interface, engineers implement it, and testers check it. Chat-only definitions can lead to inconsistent parameters."
+      }
+    },
+    "qa/agent-research:metagpt/comparison": {
+      "source_sha256": "1ff280e6710a203bd9621e0c4019b60237d2b0315e786dacdb4ca93e347eb745",
+      "reviewed": true,
+      "fields": {
+        "question": "How is PM, Architect, Engineer, and QA specialization different from repeated self-paraphrase?",
+        "answer": "Each stage has distinct inputs, outputs, and artifacts: requirements, design, implementation, and tests. Gains depend on contracts and feedback, not labels that merely sound independent. Shared wrong assumptions can still break every stage.",
+        "example": "Example: QA should run tests rather than rephrase the engineer's claim that the code looks correct."
+      }
+    },
+    "qa/agent-research:metagpt/implementation": {
+      "source_sha256": "77ae688a1db198ee86bb23c6b3d91b2182f34a2ebb9588a9f10d01373e3b77e3",
+      "reviewed": true,
+      "fields": {
+        "question": "How does the local temporary-repository test differ from a full MetaGPT LLM team?",
+        "answer": "Four roles leave structured artifacts; engineering actually edits Python and QA runs fixed unittest. Full LLM collaboration and official SWE-bench are absent. This supports an auditable execution path, not HumanEval, MBPP, or real team delivery rates.",
+        "example": "Example: A file hash and test output verify one change and run, not autonomous architecture for unknown requirements."
+      }
+    },
+    "qa/agent-research:toolbench/mechanism": {
+      "source_sha256": "8b7586fafe07bf1dfffaeb5750685e7d2db7604568c958e5b5034fa63fd73e85",
+      "reviewed": true,
+      "fields": {
+        "question": "Why constrain format and check real execution in addition to retrieving usage examples?",
+        "answer": "Examples show when and how to call tools but cannot guarantee schema or argument meaning. Format constraints ensure parseability; execution tests whether the goal is achieved. Experience, contracts, and observed results are distinct. JSON-like text is not actual tool capability.",
+        "example": "Example: A complete weather-call schema can still name the wrong city. Valid JSON does not answer the requested forecast."
+      }
+    },
+    "qa/agent-research:toolbench/basics": {
+      "source_sha256": "d9194abddcc0788a00c81355fb71eec283700d49d6ce316294b6fd81b432495f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why teach a model multiple tools rather than handwrite calls for each ToolBench task?",
+        "answer": "Real catalogs have varied interfaces and parameters. A model must understand intent, find relevant demonstrations, and generate executable calls. ToolBench studies data and constraints for transferable tool use. Format is one step; verify API behavior, outputs, and final answers rather than synthetic success alone.",
+        "example": "Example: Weather and map tools require different fields. Use each contract instead of copying one fixed template."
+      }
+    },
+    "qa/agent-research:toolbench/comparison": {
+      "source_sha256": "55cb622dacce22ccbf5ff746d4352cfe52fb333bbfa39aea36e054d6783b0ff0",
+      "reviewed": true,
+      "fields": {
+        "question": "How does retrieving in-context demonstrations differ from always using one fixed example set?",
+        "answer": "Retrieval chooses examples for the current task, avoiding irrelevant context and broader coverage gaps of fixed examples. It can still choose badly or encourage copied arguments. Reuse procedures, not answers. Compare fixed models and tasks and include example-reading cost.",
+        "example": "Example: SQL examples help database queries more than weather samples, but their table names cannot be reused unverified."
+      }
+    },
+    "qa/agent-research:toolbench/implementation": {
+      "source_sha256": "5b76a1661398cfabe58fb4a216caf59c67015ee24b7a23c9273b0f4524f5d284",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local planbench-mini tool success equal the paper's eight tasks or live API success?",
+        "answer": "No. Local work tests demonstration, constraint, or state protocols without paper-scale models, training, or the full real tool matrix. Tool results and scoring require independent execution. Perfect controlled results are not public benchmark scores, and similarly named ToolBench datasets must not be conflated.",
+        "example": "Example: A preset plan can parse and execute without proving the model can call an unseen service from documentation."
+      }
+    },
+    "qa/agent-research:critic/mechanism": {
+      "source_sha256": "3f02fc5d8fafce22b4fc7240fc8b4d5df0335b1985cdfefd0d4a347ee6b5c232",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can external tool feedback reveal persistent errors that rereading an answer misses?",
+        "answer": "Self-critique may inherit the original model's assumptions. Search facts or code outputs provide independently observable constraints. Evidence guides revision in a loop. Tools can fail or return nothing; no feedback is not verification, and success must not be fabricated.",
+        "example": "Example: A wrong product may still look right to the model. A calculator result provides a concrete contradiction for revision."
+      }
+    },
+    "qa/agent-research:critic/basics": {
+      "source_sha256": "d3565f510663a8f45df17850f54cc20434159d6b34a34e7872676c55e086b2d8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CRITIC try to find and fix errors after the model has already written an answer?",
+        "answer": "Drafts can contain factual, reasoning, or code errors despite confidence. CRITIC gathers external checks for critique and revision. Observable evidence helps, but tools have limited coverage and edits can add errors. Evaluate checks and final outcomes separately.",
+        "example": "Example: Execute code on a boundary input, observe an exception, and revise. Rereading the same explanation gives no equivalent evidence."
+      }
+    },
+    "qa/agent-research:critic/comparison": {
+      "source_sha256": "382ae08d063ce86bdf38459699548e50834bb45ccf7799eeff041ca4822687c0",
+      "reviewed": true,
+      "fields": {
+        "question": "What evidence does code execution provide for critique versus web retrieval?",
+        "answer": "Execution shows outputs or exceptions for a specific input. Web retrieval supplies external text whose source and support must be assessed. Both extend self-evaluation, with different limits: untested code can still fail, and a search hit need not support the answer.",
+        "example": "Example: Division by zero proves one run failed. A related web result still needs its actual passage read, not just its title."
+      }
+    }
+  }
+}

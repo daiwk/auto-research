@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:ppo-rlhf/basics": {
+      "source_sha256": "316819ea89e184ba8a19067102e4904d457a3d920277cb73623de9d32e5e79ff",
+      "reviewed": true,
+      "fields": {
+        "question": "What supervision enters each InstructGPT stage?",
+        "answer": "Human demonstrations train SFT; human rankings train a reward model; PPO optimizes reward with reference KL. Models and data differ, so a PPO loss alone is not the pipeline.",
+        "example": "Having demonstrations without rankings doesn't mean a reward model was trained."
+      }
+    },
+    "qa/post-training:ppo-rlhf/comparison": {
+      "source_sha256": "0fc18d5081012930e6486aad7c762cd354dd595647fd89d984b750020bdee92c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish PPO clipping from reference KL?",
+        "answer": "Clipping limits a proximal step relative to old policy; KL anchors drift relative to a reference over longer horizons. They aren't substitutes and don't prevent reward exploitation.",
+        "example": "Repeated small steps can still travel far from the initial policy."
+      }
+    },
+    "qa/post-training:ppo-rlhf/implementation": {
+      "source_sha256": "a9af1710af853d0cd63e9695b356924bcd077e40ecc95f670297a2b21fa457b6",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local PPO-RLHF include a learned reward model?",
+        "answer": "No. Deterministic outcome/process axes reward a linear candidate policy. Actor, old policy, critic, clip and KL structure do not imply GPT-3 training or human data.",
+        "example": "A numerical critic can verify baseline updates without reproducing RLHF."
+      }
+    },
+    "qa/post-training:ppo-rlhf/mechanism": {
+      "source_sha256": "48f14bce049f0594056c46a787fa1749dd91b1879598d9cd76d35c0bd75f2683",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish reward model, critic, old policy and reference?",
+        "answer": "Reward model scores preferences, critic predicts returns for advantages, old policy records sampling, and reference anchors SFT drift. Shared initialization doesn't merge roles. Candidate updates aren't human ranking, reward-model training or large-scale RLHF.",
+        "example": "A reward model rates a reply, a critic forecasts its return, and reference measures deviation."
+      }
+    },
+    "qa/post-training:mart-grpo/basics": {
+      "source_sha256": "7f943e6784010734710b1e3c233da0726e268b580ccf9a47a421a641f46ac49f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why mask late feedback on MART-GRPO failures?",
+        "answer": "Terminal failure doesn't mean every later action caused it. Find the last unrecovered error and mask subsequent negative credit while retaining relevant earlier signal; execution itself is not stopped early.",
+        "example": "A failed regrasp after a drop needn't be punished equally solely because the episode failed."
+      }
+    },
+    "qa/post-training:mart-grpo/comparison": {
+      "source_sha256": "27a753ec3497e0ad96909cf58267a6792959632fa615fdcbc63e27048be233c3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't a retrospective VLM boundary automatically a theoretical stopping time?",
+        "answer": "The VLM sees future trajectory, unlike a decision based only on the past. Arbitrary masks don't inherit unbiasedness or variance reduction guarantees.",
+        "example": "Choosing an important step after seeing the outcome differs from deciding as it happens."
+      }
+    },
+    "qa/post-training:mart-grpo/implementation": {
+      "source_sha256": "bac3de98f40807177aa34f12d5620e6f39b2f27dd6605befb2d0af8513fb4a07",
+      "reviewed": true,
+      "fields": {
+        "question": "May MART recompute advantages or renormalize by unmasked tokens?",
+        "answer": "No. Keep original group advantages and valid-action denominator; apply the mask only to feedback. Valid interval includes its upper endpoint. Invalid format/identity/bounds are errors, not semantic-uncertainty fallback.",
+        "example": "Shrinking the denominator after masking amplifies retained gradients and changes the method."
+      }
+    },
+    "qa/post-training:mart-grpo/mechanism": {
+      "source_sha256": "d078c0157e067695ad3824eb77962e619c55fc1223b524811ecf0b52efeeb63d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep original advantages and denominator after masking penalties beyond the last unrecovered error?",
+        "answer": "Masking isolates where failure credit applies. Changing group rewards/advantages or denominator adds other effects. Execute whole rollout before VLM hindsight; that does not guarantee stopping-time theory applies.",
+        "example": "Mask idle behavior after a mishap without amplifying punishment for the remaining actions."
+      }
+    },
+    "qa/post-training:mge-po/basics": {
+      "source_sha256": "cdea4009bd2f91d250d58ceb005b6061a214d75fc81ecad8d2e5752b7f3f7a1b",
+      "reviewed": true,
+      "fields": {
+        "question": "Are MGE-PO success/failure and high/low entropy the same label?",
+        "answer": "No. Verified outcome and policy uncertainty are distinct axes; all four combinations occur. Entropy alone is not correctness.",
+        "example": "A model can confidently be wrong or hesitate and get it right."
+      }
+    },
+    "qa/post-training:mge-po/comparison": {
+      "source_sha256": "5654f14c35ffd53b31af07c6d8eccc65c5ddbe43e82bc9413120c5768aa198d8",
+      "reviewed": true,
+      "fields": {
+        "question": "How do MGE-PO quadrants differ from rewarding low entropy alone?",
+        "answer": "Combine outcome with entropy; confidence is not inherently good. Low-entropy reward alone can reinforce confident errors. Verifiable correctness is needed without leaking evaluation gold.",
+        "example": "Low-entropy correct and low-entropy wrong replies need different credit."
+      }
+    },
+    "qa/post-training:mge-po/implementation": {
+      "source_sha256": "69e375b3a63d1f8825804f436c7fa044ad92158bb33910780f694897b4d3e98a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a truncated response have nonzero final advantage after zero direct correction?",
+        "answer": "Zero direct increment doesn't prevent batch recentering from moving all advantages. Use lagged problem EMA for curriculum and cached sampling-policy entropy, not future generations.",
+        "example": "Positive corrections on peers shift the mean and move an uncorrected reply relatively."
+      }
+    },
+    "qa/post-training:mge-po/mechanism": {
+      "source_sha256": "5abc7fb02e83f244c253dbc032a15a54c32d8a4260d16ca986573f0edeb1085f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use generation-time cached entropy rather than recalculate after an update?",
+        "answer": "Credit describes uncertainty at sampling. New policy entropy would mix policy changes into old trajectory judgment. Combine outcome and entropy quadrants with separate curriculum/KL; truncated replies can still shift through recentering.",
+        "example": "A reply becoming more certain after training was not necessarily sampled confidently."
+      }
+    },
+    "qa/post-training:tag-reward-gating/basics": {
+      "source_sha256": "810fa038b960ff77614719fb25f816f788542b57e542f549013fee63422fc17e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why choose a reliable anchor before TAG multi-reward training?",
+        "answer": "Auxiliary objectives can be gamed while harming the main goal. Enable auxiliary credit only when the anchor is met; this differs from shrinking its coefficient.",
+        "example": "A short incorrect answer shouldn't get positive brevity credit on its own."
+      }
+    },
+    "qa/post-training:tag-reward-gating/comparison": {
+      "source_sha256": "046fc651c49ff9b816191877d500d5fb7f0deee1c629b970f99ee6194ae5278a",
+      "reviewed": true,
+      "fields": {
+        "question": "How does TAG's low-drift probe selection differ from manually selecting correctness?",
+        "answer": "Probe each reward from the same baseline, choose via probe-to-baseline reverse KL, discard probes and retrain. A manually chosen anchor skips that process.",
+        "example": "Fast reward growth can cause large drift, not make it the chosen anchor."
+      }
+    },
+    "qa/post-training:tag-reward-gating/implementation": {
+      "source_sha256": "0ec3be29ff8de91e5bb79fc2c8d6f82a6bd8006674a89f200fc9bec2ccc040db",
+      "reviewed": true,
+      "fields": {
+        "question": "Why estimate TAG drift on each probe's own trajectories?",
+        "answer": "Reverse-KL expectation is under the probe. Baseline sampling changes direction. Pool all generated tokens, not per-response means. A finite-sample estimate may be negative; do not clamp.",
+        "example": "Long and short responses contribute their tokens jointly rather than equal response weights."
+      }
+    },
+    "qa/post-training:tag-reward-gating/mechanism": {
+      "source_sha256": "1fd2fbc3df5a3078e7a659eda4bb1730dd27f0fac3aa120e45069558cdb1920f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why discard anchor probes and restart, and when do auxiliary rewards apply?",
+        "answer": "Separate probes measure reward-induced drift, not supply final weights. Restart from the common baseline to isolate selection. Anchor failure blocks auxiliary credit. Sample under each probe to preserve KL direction.",
+        "example": "Brevity can't raise credit on an incorrect answer if correctness is the anchor."
+      }
+    },
+    "qa/post-training:sif/basics": {
+      "source_sha256": "add55a5e23141f951a8e919b4655bbec7244aa824b4c88d88ac14786032f19fa",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not treat mean self-certainty as a correct label in SIF?",
+        "answer": "Confidence may grow for wrong answers. Compare ranked certainty windows across same-prompt replies, then use two-level voting for relative reward. This is not independent truth.",
+        "example": "A confident error does not become right due to a high mean."
+      }
+    },
+    "qa/post-training:sif/comparison": {
+      "source_sha256": "653a0267a2d7f3dbec1306cd45d94f0ee71b1420dc0856771dec526f662388b9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't SIF's KL(U||π) negative entropy?",
+        "answer": "It averages log probabilities uniformly; negative entropy weights by policy probabilities. Direction and low-probability sensitivity differ, as does using only sampled tokens.",
+        "example": "A rare token approaching zero affects uniform-to-policy KL differently from policy-weighted entropy."
+      }
+    },
+    "qa/post-training:sif/implementation": {
+      "source_sha256": "9d06a9e9777e5e4233942fa6bee0975deaafc87cb4b6c7ebbb06976fc0bd3068",
+      "reviewed": true,
+      "fields": {
+        "question": "Should ineligible SIF replies disable KL as well?",
+        "answer": "Yes. Policy and KL use the same selection mask. Keep original response normalization, eligibility, strict comparisons and sample SD. A tie isn't a win.",
+        "example": "Turning off policy loss but retaining KL would still update a filtered response."
+      }
+    },
+    "qa/post-training:sif/mechanism": {
+      "source_sha256": "7d89f39e9bcd20d4adbde31653afa53db991036a35ce5b32407d6e810be65eb6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compare sorted certainty windows instead of using entropy or high-probability tokens as labels?",
+        "answer": "Mean confidence can amplify errors. Build a profile using uniform-to-policy KL, then compare eligible same-prompt replies at window and peer levels. This is not entropy or sampled probability; filter ineligible/equal-reward groups and share policy/KL masks.",
+        "example": "Multiple windows distinguish a few extreme positions from broadly uniform certainty."
+      }
+    },
+    "qa/post-training:progress-reward/basics": {
+      "source_sha256": "9aa76957b615e377bf00f73b861c2a3649f3ef9e651474e6133cafb2fc2caaf0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does PRM4RL provide subtask semantics and a progress potential?",
+        "answer": "Subtask meaning enriches state with current phase; potential differences supply dense progress despite sparse terminal success. One changes inputs, the other rewards, and planning can be offline.",
+        "example": "A robot knows it is grasping and receives progress for moving closer."
+      }
+    },
+    "qa/post-training:progress-reward/comparison": {
+      "source_sha256": "34fab1ed016e1a692140f4f97e3bb46ae57bca44fbf4cd2b52856c53f2bc87b0",
+      "reviewed": true,
+      "fields": {
+        "question": "How does potential shaping differ from rewarding raw progress at each step?",
+        "answer": "Discounted differences compare transitions and telescope, while repeated high potential can reward idling. Terminal conditions matter; differencing alone does not guarantee policy invariance.",
+        "example": "Staying at a high-progress state without finishing can accrue reward under raw per-step scores."
+      }
+    },
+    "qa/post-training:progress-reward/implementation": {
+      "source_sha256": "55b920843bb4653aaa959c9a0e02eab011012e8c7d8aa6054aff87b88e7c7956",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish true termination from time truncation in PRM4RL?",
+        "answer": "An absorbing terminal can have zero potential; time-limited states can retain successor value. Use the formula absent explicit termination and review generated functions.",
+        "example": "Timeout with a resumable task differs from actual success or failure."
+      }
+    },
+    "qa/post-training:progress-reward/mechanism": {
+      "source_sha256": "ac0013ab7152f9d33df051e856739500f7005d30755c1cb7805846ff0fb1c3b3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use discounted potential differences and not treat timeout as termination?",
+        "answer": "Neighbor terms telescope to endpoints. Correct absorbing boundary prevents terminal potential changing the objective. A timeout may leave future progress possible, so don't zero it automatically. Subtask encoding and shaping remain independent.",
+        "example": "Zeroing potential when time expires near a goal can fabricate a progress penalty."
+      }
+    }
+  }
+}

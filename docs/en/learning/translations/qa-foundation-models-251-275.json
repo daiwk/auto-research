@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:data-orchestra/comparison": {
+      "source_sha256": "5909ca06ca696f24cd444ae03aaf7f2dad23ecbcedfad3a0d0df5c3cea1292ed",
+      "reviewed": true,
+      "fields": {
+        "question": "Why preserve Untouch in sample-level orchestration?",
+        "answer": "It explicitly allows no processing, avoiding cleaning rate as a false quality goal. Per-sample plans select stages; one corpus pipeline can overrewrite and waste tools.",
+        "example": "Rewriting correct code may consume compute and damage content."
+      }
+    },
+    "qa/foundation-models:data-orchestra/implementation": {
+      "source_sha256": "63db20094bed750a55bf161fb45c73e754cd07fd388217ed9ad3fef8eb78db6b",
+      "reviewed": true,
+      "fields": {
+        "question": "Can raw teacher plans be used as final SFT targets without verification?",
+        "answer": "No. Execute tools and verify results; correct failed rewrites up to a limit and remove stages with lost content or insufficient change. Only verified evolved plans train the orchestrator.",
+        "example": "A format repair that deletes content must not remain a success example."
+      }
+    },
+    "qa/foundation-models:data-quality-lsa/mechanism": {
+      "source_sha256": "c0374c0ffabc5207f01eaaed75d4d9910f0d6d8bfb1e1167b172f57d938cb81d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't OS in the data-quality theory full RL post-training?",
+        "answer": "OS is outcome-supervised regression on final predictions. The comparison is SFT on teacher intermediate states. Linear attention and covariance assumptions enable closed-form analysis, not policy sampling, advantage estimation, or policy gradients.",
+        "example": "Squared error on final weights differs from intermediate-state matching without becoming reward-driven policy optimization."
+      }
+    },
+    "qa/foundation-models:data-quality-lsa/basics": {
+      "source_sha256": "77c8dbfb7bbdf14f1d71da2fbd60762695ed9f287d9c063bbbf2576dc5922191",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use linear regression to analyze pre- and post-training?",
+        "answer": "Controlled linear attention exposes how covariance, initialization, and supervision affect weight prediction and permits closed-form references. It is not empirical evidence for full LLM training.",
+        "example": "Change task covariance in a small matrix and isolate how initialization affects fitting."
+      }
+    },
+    "qa/foundation-models:data-quality-lsa/comparison": {
+      "source_sha256": "3d155164ec21bc1255a7791e31332e95d6bdfa28e6babd15a961ee7ebfce86cb",
+      "reviewed": true,
+      "fields": {
+        "question": "How do SFT and OS differ in information supplied?",
+        "answer": "SFT supervises intermediate teacher weights. OS runs an autonomous rollout and supervises only its final prediction, without implying policy gradients.",
+        "example": "Stepwise standard results and a single final weight check are distinct signals."
+      }
+    },
+    "qa/foundation-models:data-quality-lsa/implementation": {
+      "source_sha256": "a60f1c2d17f8145ae8daca86eca95fe3914dd5e606bb93229770f44cdc28f053",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must autonomous rollout not receive true w*?",
+        "answer": "Ground-truth weights belong only in training loss, not prediction inputs. Use public context for rollout, feed targets only to the explicit loss, and preserve initialization's nullspace in closed-form SFT.",
+        "example": "A predictor cannot receive the exact weights it must recover."
+      }
+    },
+    "qa/foundation-models:doremi/mechanism": {
+      "source_sha256": "b23aee717e564a3371df79e65d3b1bf688d3f52cc4068fef3dd7001f32ac183a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why emphasize excess loss rather than maximum raw loss in DoReMi?",
+        "answer": "Raw loss mixes irreducible difficulty and underfitting. Subtract reference loss and use group DRO on a small proxy to derive target mixture. This is relative to the reference and data, not a preference for all high-entropy domains.",
+        "example": "A has loss 5 vs reference 4.9; B has 3 vs 2. B's larger excess can get more weight."
+      }
+    },
+    "qa/foundation-models:doremi/basics": {
+      "source_sha256": "63ab4f2d526cfebd494fb452627fdb8c6b404552a58b093d7900179a4824d379",
+      "reviewed": true,
+      "fields": {
+        "question": "Why learn target-model mixtures with a small proxy?",
+        "answer": "Repeated large runs are costly. Small-proxy group DRO adjusts weights from excess loss, then target training uses that mixture. Transfer needs verification.",
+        "example": "Estimate reference-relative gaps cheaply before allocating large-run data."
+      }
+    },
+    "qa/foundation-models:doremi/comparison": {
+      "source_sha256": "7b164082d5d6756578abeb5ba839694ef324da202bfd8d8da7d8f2e92d7fb456",
+      "reviewed": true,
+      "fields": {
+        "question": "How do dynamic DoReMi weights differ from uniform sampling?",
+        "answer": "Uniform probabilities stay fixed. DoReMi exponentiates reference-relative excess-loss updates and renormalizes, responding to underfitting rather than raw loss alone.",
+        "example": "A high loss from an intrinsically hard domain may not imply a large excess."
+      }
+    },
+    "qa/foundation-models:doremi/implementation": {
+      "source_sha256": "7f55461e673da1d62a6ee0ad2676a8c799775bc89d3c2e86535e7910abae864d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why normalize α across domains after each update?",
+        "answer": "Exponential updates yield relative weights, not probabilities; normalization sums to one. Keep the same reference. Local two-domain unigram work is not a Pile 280M-to-8B transfer.",
+        "example": "Relative weights 2 and 3 become 0.4 and 0.6."
+      }
+    },
+    "qa/foundation-models:eco-optimizer/mechanism": {
+      "source_sha256": "8b1ca5a59e1b16e1d37e2ff1e08e741f130eda3ff1d838e3c678ed48b79612e8",
+      "reviewed": true,
+      "fields": {
+        "question": "How does ECO preserve small updates without high-precision masters?",
+        "answer": "Update quantized weights and feed requantization error into existing momentum without a separate persistent buffer. Compensation depends on step size, elementwise for Adam. The buffer-free derivation is approximate, not exact high-precision equivalence.",
+        "example": "A sub-grid update can leave weights unchanged but influence momentum and later steps."
+      }
+    },
+    "qa/foundation-models:eco-optimizer/basics": {
+      "source_sha256": "4c2677270474db202c531cefbb75471d833a37049b2c760a06d364d25bb0028b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why remove both master weights and a dedicated error buffer?",
+        "answer": "Both consume persistent memory. ECO injects error into existing momentum to accumulate small updates without storing them separately.",
+        "example": "An update too small for one quantization step can still affect later optimization."
+      }
+    },
+    "qa/foundation-models:eco-optimizer/comparison": {
+      "source_sha256": "9f12ac3493525732dcdd2582b9b4eaff3b28dcfd4bb224b08a551817a7c8efd6",
+      "reviewed": true,
+      "fields": {
+        "question": "Is buffer-free compensation exactly equivalent to storing full adjacent errors?",
+        "answer": "No. It uses an approximation that neighboring errors are close, with separate convergence analysis. It is not exact under arbitrary quantization.",
+        "example": "Large differences between adjacent errors can invalidate the approximation."
+      }
+    },
+    "qa/foundation-models:eco-optimizer/implementation": {
+      "source_sha256": "0401174204aaf5541867c19978e079fa98cc272bb96bbd5c93c61ed8bc44b98c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't ECO use the same scalar coefficient when moving from SGDM to Adam?",
+        "answer": "Bias correction and second moments create elementwise effective η_t in Adam; use that for error injection. Record quantization format and scale granularity.",
+        "example": "Two coordinates with different preconditioning cannot share a scalar compensation denominator."
+      }
+    },
+    "qa/foundation-models:gaugequant/mechanism": {
+      "source_sha256": "7889a64d25926f0fa9af6d74895fc88a92d00a464127428794332edad0cca0db",
+      "reviewed": true,
+      "fields": {
+        "question": "How can GaugeQuant change coordinates without changing the floating-point function?",
+        "answer": "Valid symmetries apply an orthogonal basis on one side and its inverse on the other. Quantization depends on coordinate distributions, so equivalent bases can yield different outliers/errors. Learn quantization-friendly bases only at valid locations.",
+        "example": "Spread an extreme channel across several axes while inverse transformation preserves the floating-point output."
+      }
+    },
+    "qa/foundation-models:gaugequant/basics": {
+      "source_sha256": "efeea031b9253feae8e1359d509d6d89d25a1baf29708990b8166449d199f8e9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can activation outliers hurt typical values during quantization?",
+        "answer": "Fixed bit width must cover the range; large channels enlarge spacing for ordinary values. GaugeQuant learns an orthogonal basis with an outlier objective. Floating-point equivalence need not preserve quantization error.",
+        "example": "A few levels spanning 1, 2, and 1000 struggle to distinguish 1 from 2."
+      }
+    },
+    "qa/foundation-models:gaugequant/comparison": {
+      "source_sha256": "48cf560823129b7fa8e47924466aed3dd80792ffa4635600645adb58ad987b4e",
+      "reviewed": true,
+      "fields": {
+        "question": "How does GaugeQuant's optimization timing differ from offline calibration?",
+        "answer": "Train bases and outlier objectives with the LM. Offline methods commonly freeze the model and calibrate from samples later. Bit width alone hides training and data differences.",
+        "example": "Both can be W4A4 while one learns a basis during training and the other calibrates afterward."
+      }
+    },
+    "qa/foundation-models:gaugequant/implementation": {
+      "source_sha256": "8287bcff41f8b3fc4b2119ccb8c34c6d6613c23ae49067d4a4b089f67533e2d8",
+      "reviewed": true,
+      "fields": {
+        "question": "How distinguish functional equivalence, fake quantization, and actual int4 execution?",
+        "answer": "Check orthogonality and equivalent transforms, then quantization and gradients. STE fake quant can use floating kernels. The local work has no int4 kernel, so no throughput or bandwidth conclusion.",
+        "example": "Sixteen levels do not imply bit packing or int4 instructions."
+      }
+    },
+    "qa/foundation-models:gemini-for-google/mechanism": {
+      "source_sha256": "65b37be7362febe5e8a8980ac9fc6d31fd3e7bd8cdad3a42be4462d9a52bd781",
+      "reviewed": true,
+      "fields": {
+        "question": "Why include general replay in enterprise code adaptation?",
+        "answer": "Internal examples teach private code, tools, and workflows but can displace general ability. Replay adds a retention constraint; deduplication, filtering, and contamination controls protect the comparison. Validate both sides.",
+        "example": "Learning internal build commands need not preserve general reasoning if training drops all general examples."
+      }
+    },
+    "qa/foundation-models:gemini-for-google/basics": {
+      "source_sha256": "8eb7920a6c181377efe9008500a7a00a02675f99a27ea5be8dc6ed4ed5ed7430",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not continue training on all internal code unchanged?",
+        "answer": "Extract high-value history and interactions, deduplicate, filter, and control contamination before midtraining and internal-tool post-training. Data curation and evaluation are integral.",
+        "example": "Generated duplicate files and valuable fixes should not receive equal treatment by default."
+      }
+    },
+    "qa/foundation-models:gemini-for-google/comparison": {
+      "source_sha256": "ca650a91bfe99ee7aa4c2629a57be9b2ae9701214b6a349fcb78fde9027c414a",
+      "reviewed": true,
+      "fields": {
+        "question": "What extra constraints distinguish enterprise midtraining?",
+        "answer": "It includes internal code, interaction, and tools while controlling duplicates and evaluation leakage and preserving general ability. General training loss does not replace internal workflow evaluation.",
+        "example": "Memorizing old fixes can lower loss without helping new internal problems."
+      }
+    },
+    "qa/foundation-models:gemini-for-google/implementation": {
+      "source_sha256": "fb8e21cba8504ffa804ef6d7169050b182816a7f771ec84c59d192acf5844e5d",
+      "reviewed": true,
+      "fields": {
+        "question": "What do the two extreme replay weights verify?",
+        "answer": "λ=0 leaves enterprise loss and λ=1 leaves general replay. This checks branch wiring and coefficient direction. Local tests use no Google private data, Gemini weights, or A/B.",
+        "example": "Enterprise loss dominating at λ=1 suggests reversed weighting or routing."
+      }
+    },
+    "qa/foundation-models:hardware-diversity/mechanism": {
+      "source_sha256": "f1b0eeac5b4053b674d2ea12ef1fec0127344e3d8bc0724543200d0f4f402623",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't CUDA-to-HIP compatibility establish performance portability?",
+        "answer": "Running code does not align compute units, memory hierarchy, tiles, and parallelism. The work co-designs model, memory, parallel strategy, and kernels and estimates tail stalls. Hardware constants and optima vary.",
+        "example": "A tile filling one GPU's compute units can be limited by shared memory or tail imbalance on another."
+      }
+    },
+    "qa/foundation-models:hardware-diversity/basics": {
+      "source_sha256": "7d088a812886ffeedd44ed02895052ca27ada2ca44d0d280879884adf506226d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is Meta/AMD hardware diversity a co-design report?",
+        "answer": "It changes model, parallelism, memory strategy, GEMM and kernel porting together for recommender training. Performance depends on the combined system, not HIP conversion alone.",
+        "example": "A compiling operator can still use the wrong tile or memory layout."
+      }
+    },
+    "qa/foundation-models:hardware-diversity/comparison": {
+      "source_sha256": "22d5ef36a068ef3c1483e4e9acd06c176bb90eb3bf01bd171a03635875d530f2",
+      "reviewed": true,
+      "fields": {
+        "question": "Do predicted tile cycles and end-to-end throughput measure the same thing?",
+        "answer": "The analytical model estimates compute, hierarchical memory, pipelines, and idle tail work. End-to-end results include actual workload and system effects. Neither constants nor local optima transfer automatically.",
+        "example": "A faster GEMM tile may be offset by synchronization or other stages."
+      }
+    }
+  }
+}

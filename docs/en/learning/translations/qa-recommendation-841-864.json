@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:precise/comparison": {
+      "source_sha256": "b22217c8f905a7bc1e792243a7078ad91eb9667c20113b3e8c45372ddc21c45f",
+      "reviewed": true,
+      "fields": {
+        "question": "What details does PRECISE token-attention MoE retain compared with averaging text?",
+        "answer": "Token experts can focus on distinct spans and top-k routing can combine perspectives, while averaging flattens them. Experts can duplicate one another and strong text can suppress IDs, motivating the frozen-text stage. Validate complementarity and cold/tail outcomes.",
+        "example": "Illustration: Different experts can preserve 'beginner' versus 'professional'; experts all reading celebrity names do not retain meaningful detail."
+      }
+    },
+    "qa/recommendation:precise/implementation": {
+      "source_sha256": "35dbff53af657fc308e277ba9f3f7b6202a83fa0bb436a98ecb01755bd3d7b78",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must PRECISE still exclude target items when switching from causal UT to noncausal TT?",
+        "answer": "TT can read observed history bidirectionally, not the held-out target. Remove the target before constructing the sequence; the concatenation MLP sees legal positions only. Repeated in-batch items must not be treated as mutually exclusive negatives, as fixed in source.",
+        "example": "Illustration: Historical A and B can attend to one another, while test C remains outside the input."
+      }
+    },
+    "qa/recommendation:primal-dual-decoding/mechanism": {
+      "source_sha256": "d5ef284a44ae5ab2952c758f913c8d45692e147b4a8341807f9a79c52c7d0211",
+      "reviewed": true,
+      "fields": {
+        "question": "Why adjust primal–dual decoding multipliers dynamically rather than add a fixed diversity bonus?",
+        "answer": "Fixed weights cannot react to remaining slack. Per-position scoring combines model relevance with auxiliary contribution and adjusts multipliers so later choices can compensate. No retraining is needed, but candidate availability and local search limit results, with possible relevance loss and no guarantee for arbitrary hard constraints.",
+        "example": "Illustration: If four of five slots include only one new author but two are desired, raise the last-slot incentive; reduce pressure once satisfied."
+      }
+    },
+    "qa/recommendation:primal-dual-decoding/basics": {
+      "source_sha256": "e89d4e9eadc41e11fee03df15c37480b7d1a4961b92efb817ad8c4beb1bccf59",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can primal–dual decoding work without retraining a generator?",
+        "answer": "Serving search combines original relevance with auxiliary scores and updates multipliers while leaving weights unchanged. It cannot create knowledge missing from the candidates or generator. Measure runtime, relevance loss, and constraint satisfaction separately.",
+        "example": "Illustration: Increase new-author weight when lacking one, without changing the base model's scores."
+      }
+    },
+    "qa/recommendation:primal-dual-decoding/comparison": {
+      "source_sha256": "63fac40440e44271ca49b7430cd0fe0face6b89930c63c0a349ac1e65b0ae155",
+      "reviewed": true,
+      "fields": {
+        "question": "Can primal–dual soft objectives replace hard eligibility constraints?",
+        "answer": "No. Multipliers shift preferences but unavailable or out-of-catalog items must be explicitly excluded. A larger multiplier cannot create feasible items. Soft optimization trades objectives within hard eligibility; no arbitrary-constraint guarantee is reported.",
+        "example": "Illustration: Encourage new authors softly, but mask out-of-stock items rather than let them win after a penalty."
+      }
+    },
+    "qa/recommendation:primal-dual-decoding/implementation": {
+      "source_sha256": "92861f96c597f61bd21b9cd14db7192abcfd4b1a80a39e54ed20d01bb3396cb6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep mirror-descent multipliers nonnegative and control exponent ranges?",
+        "answer": "Nonnegative multipliers preserve penalty direction, and positive initialization with multiplicative updates preserves sign. Large steps can overflow or become extreme. Match auxiliary units, R/K targets, and relevance scores; follow actual probability/logit conventions rather than interchanging them.",
+        "example": "Illustration: Raw seconds mixed into probabilities can dominate. Repeated exponential increases can pursue quota at the expense of relevance even without an error."
+      }
+    },
+    "qa/recommendation:prl-puts/mechanism": {
+      "source_sha256": "39f2b3fa907b51e4c356c87a1641ece9e24b23bcd6e7fdae22f91d1ccb8eb128",
+      "reviewed": true,
+      "fields": {
+        "question": "Why preselect PRL-PUTS weights via two Q heads and a Pareto sweep?",
+        "answer": "Each head estimates a business utility and weight mixtures choose trade-offs. An offline sweep drops dominated strategies and yields a governable frontier; serving can switch weights without swapping models. Q estimation error and drift make offline non-dominance insufficient for online superiority.",
+        "example": "Illustration: Keep one policy strong in saves and another strong in deeper interactions, and discard one worse in both rather than testing arbitrary weights on traffic."
+      }
+    },
+    "qa/recommendation:prl-puts/basics": {
+      "source_sha256": "abf3ab97de9ca9e9944a729b57634c9b33674329f95edebe91234e520feafcf4",
+      "reviewed": true,
+      "fields": {
+        "question": "Does Pareto non-dominance in PRL-PUTS require improvement on all objectives?",
+        "answer": "No. A policy remains when none is at least as good on every goal and better on at least one. Different Repin/P2P trade-offs can be nondominated. Suitability still depends on business needs, constraints, and estimation error.",
+        "example": "Illustration: (8,3) and (6,5) trade off while (5,2) is dominated. The first two are not necessarily better than production."
+      }
+    },
+    "qa/recommendation:prl-puts/comparison": {
+      "source_sha256": "2acc27057f3e64bf7e592ba53b82b2b72ed849ba24de6ead57bc345d8cb2d9f3",
+      "reviewed": true,
+      "fields": {
+        "question": "What choices does Pareto sweeping retain beyond one highest weighted PRL-PUTS score?",
+        "answer": "One weighting selects one compromise. Sweeping and removing dominated strategies retains options for changing goals. Offline noise can create false frontier points, so uncertainty and online tests matter.",
+        "example": "Illustration: Keep stronger-save and stronger-engagement policies, but reject one worse on both rather than promoting it for an arbitrary score."
+      }
+    },
+    "qa/recommendation:prl-puts/implementation": {
+      "source_sha256": "34b924283fb70b14b146428730b3987cdef6abdd6766b1e312c61f84918d0446",
+      "reviewed": true,
+      "fields": {
+        "question": "Why hold Q model and action-space versions fixed when switching PRL-PUTS weights?",
+        "answer": "Weight effects are identifiable only over the same comparable Q values and action set. Keep α in range and record each head's units and reward definition. A fixed local scorer does not reproduce full long-term Q-learning and online governance.",
+        "example": "Illustration: Switching 70/30 to 50/50 while retraining a Q head confounds attribution."
+      }
+    },
+    "qa/recommendation:promise/mechanism": {
+      "source_sha256": "f68f18d271087b5e30a0fed160865c4cf255035ca5c294b2dd6fdf3372cd2c5b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reward intermediate SID paths in PROMISE rather than score only complete items?",
+        "answer": "Early wrong semantic branches waste later computation. A lightweight process reward supplies dense training feedback and prunes drifting beams at inference. Wider beams can explore better paths but depend on reward quality and cost, not automatic improvement.",
+        "example": "Illustration: Reject a home-decoration prefix early for a hiking request instead of waiting to generate a cushion."
+      }
+    },
+    "qa/recommendation:promise/basics": {
+      "source_sha256": "04ea816ab6b3accd212ca6d498f366f990a8943e9753495985328ee52e6fedd9",
+      "reviewed": true,
+      "fields": {
+        "question": "What does a SID prefix represent in PROMISE, and why does pruning remove many items?",
+        "answer": "It is a hierarchical address prefix shared by a reachable subset of items. Descendants only refine that branch. Pruning can remove many unexplored items at once, so a bad process score can cause broad misses.",
+        "example": "Illustration: Pruning photography excludes all cameras, lenses, and accessories below it, including a perfectly relevant lens."
+      }
+    },
+    "qa/recommendation:promise/comparison": {
+      "source_sha256": "8cefe43c18036234e98c07d88a8f62fa89dbe7433ec9228fb0a074d29c43acd5",
+      "reviewed": true,
+      "fields": {
+        "question": "What extra judgment does PRM-guided beam widening add beyond likelihood?",
+        "answer": "Likelihood prioritizes current model probability; PRM adds process value, allowing lower-likelihood but task-relevant paths. Scoring costs compute and can be biased. Test-time scaling is a budget–quality curve, not a guarantee.",
+        "example": "Illustration: PRM can keep a less popular but correct branch; a popularity-biased PRM may still explore the wrong region."
+      }
+    },
+    "qa/recommendation:promise/implementation": {
+      "source_sha256": "cc8010005fac1b1fae2da1c1daef0172f4ee62787901abbd9c295210dd8663b4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why define comparable scales across prefix lengths in PROMISE reward accumulation?",
+        "answer": "Long paths naturally sum more terms, potentially creating length bias. Compare beam candidates at consistent depths or with defined length handling, calibrate log-probability and λR, and retain legality, deduplication, and termination separately.",
+        "example": "Illustration: Three positive rewards are not inherently better than one if the paths have different depths. High PRM cannot legitimize an illegal item."
+      }
+    },
+    "qa/recommendation:prompt-generation/mechanism": {
+      "source_sha256": "37e53668b810e4d1e35b253b158d60c3d27b0b32d6face9ca93c11082468c789",
+      "reviewed": true,
+      "fields": {
+        "question": "Why configure Prompt Generation's preprocessor, projector, and merger with templates?",
+        "answer": "Separate training and serving implementations drift. One protocol composes cleaning, projection, and fusion/compression with common interpretation. Merger changes token cost and information loss, not merely text assembly. Mean compression does not justify discarding all order.",
+        "example": "Illustration: Configure cleaning, projection, and pooling for one title token in both paths; truncating to ten words only on one side creates skew."
+      }
+    },
+    "qa/recommendation:prompt-generation/basics": {
+      "source_sha256": "d33dc5d6a491be53e48bff12d785259599b0182ee85a9f3ad6f4e98760f74ad3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate feature type from processing components in Prompt Generation?",
+        "answer": "Text, embedding, combo, and sequence say what the input is; preprocessing, projection, and merger say how to transform it. Orthogonal configuration composes without changing model code, but bad configuration can lose data or introduce skew.",
+        "example": "Illustration: A title and a behavior sequence can reuse component families with different settings; text does not imply one fixed pipeline."
+      }
+    },
+    "qa/recommendation:prompt-generation/comparison": {
+      "source_sha256": "4649315dafa2c24fcaf23f9aeff8e483166703288a273717ce94f53d6ac260dc",
+      "reviewed": true,
+      "fields": {
+        "question": "What are the defaults and costs of parameterless mean merger versus learned compression?",
+        "answer": "Mean pooling is simple, cheap, and consistent without new weights. It loses order and details. Learned compression is flexible but adds cost and overfitting. Compression ratio is not relevance evidence, and mean need not fit every feature.",
+        "example": "Illustration: Pool redundant item attributes, but averaging a history with negation and ordering can lose critical meaning."
+      }
+    },
+    "qa/recommendation:prompt-generation/implementation": {
+      "source_sha256": "5df5648cec16462aa284e12d12b57787101bf98070d4bac554ecc6dfb41a84f5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check PG_train(x,c)=PG_serve(x,c) by replaying raw serving features?",
+        "answer": "Matching JSON does not ensure tokenizer, dependencies, truncation, or missingness match. Replay inputs and compare final tensors with versioned interpreters/configurations. Validation selected Title but test regressed; shorter compression does not establish effectiveness.",
+        "example": "Illustration: If serving strips model numbers but training retains them, replay reveals skew despite the same configuration name."
+      }
+    },
+    "qa/recommendation:promptshift/mechanism": {
+      "source_sha256": "ba9a7d6130534a31d49387e39d093cc5a808824e4e0af93cd22fd78dca4c58e1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why hold history fixed and vary only identity prompts in PromptShift, then measure Drift and SliceShift separately?",
+        "answer": "Changing both confounds actual preference and identity cues. Drift measures overlap/rank changes and SliceShift measures cohort popularity direction; mainstreamness conditions relevance and inverse-popularity blending. This is a controlled sensitivity diagnostic, not causal discrimination proof.",
+        "example": "Illustration: Use the same movie history with and without identity text to see whether rankings shift toward cohort-popular films."
+      }
+    },
+    "qa/recommendation:promptshift/basics": {
+      "source_sha256": "d0fee99c7662b721c5c642eac5aa169c4706f0b4ec0e03ec1bcb7c77c5841a76",
+      "reviewed": true,
+      "fields": {
+        "question": "Does high PromptShift Drift directly imply lower accuracy?",
+        "answer": "No. Drift measures list change, not relevance of old and new items. SliceShift adds popularity direction, not quality. Independent relevance or feedback is needed; do not relabel sensitivity as accuracy loss.",
+        "example": "Illustration: Swapping two equally suitable films changes rank drift without necessarily hurting the user."
+      }
+    },
+    "qa/recommendation:promptshift/comparison": {
+      "source_sha256": "c1a62a3f555bcff6e36a37463530d450ddb3d77dbef87d38d67367abaf1a28a2",
+      "reviewed": true,
+      "fields": {
+        "question": "Where does user conditioning enter adaptive inverse-popularity blending versus a uniform tail bonus?",
+        "answer": "Mainstreamness m changes the mix of relevance and inverse popularity, unlike a uniform bonus. Both can hurt relevance. Diagnostics do not establish real fairness or satisfaction and do not belong on formal capability leaderboards.",
+        "example": "Illustration: A mainstream user and a niche user may need different corrections; pushing even more obscurity can be unhelpful for the latter."
+      }
+    },
+    "qa/recommendation:promptshift/implementation": {
+      "source_sha256": "b489f91f6105b4785a9477dba62b60344c9a218f77cc7a5c32f1ab3db48d51b8",
+      "reviewed": true,
+      "fields": {
+        "question": "What must stay fixed between PromptShift's reference and identity-prompt lists?",
+        "answer": "Keep history, candidates, model, and decoding as consistent as possible and vary the identity cue only. Handle shared item ranks and set changes as defined; do not pair disjoint items artificially. Do not choose mitigation on test.",
+        "example": "Illustration: If one arm also has recent clicks, drift may come from the extra behavior rather than identity."
+      }
+    },
+    "qa/recommendation:proximity-features/mechanism": {
+      "source_sha256": "347e80ae055bf7a195e2c284a53a11dffd16a94871ebee7807e41fc60823530d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why split dense regions and merge sparse regions in Airbnb proximity keys?",
+        "answer": "A fixed grid can be too coarse downtown and contain too few users elsewhere. Hash subdivision and coarser merging maintain group support. Daily aggregates provide anonymous cold-start priors, not persistent personal identity. Geography proxies cohort preferences, not individual interests.",
+        "example": "Illustration: Split a block with thousands of users, but enlarge an equally sized suburban cell with ten people."
+      }
+    },
+    "qa/recommendation:proximity-features/basics": {
+      "source_sha256": "ddbfc88898f0f51ca0ae980c711551671cb5547184ba0cce6926ec42bc855a5b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are Proximity Features group keys rather than anonymous personal IDs?",
+        "answer": "Keys aggregate geographic groups meeting count thresholds, with denser regions split and sparser ones merged. Serving consumes group behavior without persistent individual tracking. Cohort priors miss fine individual preferences, and proxy ZIP counts are not production privacy thresholds.",
+        "example": "Illustration: Nearby users' short-stay preferences can seed an anonymous request without identifying one user's bookings."
+      }
+    }
+  }
+}

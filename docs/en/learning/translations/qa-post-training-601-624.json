@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:beta-opsd/basics": {
+      "source_sha256": "8cc08eb78d9bed5b6754a145af9d6f9bff03ad38a5d67aec068e249a42991930",
+      "reviewed": true,
+      "fields": {
+        "question": "Why view β-OPSD as a case of regularized policy optimization?",
+        "answer": "Reference and privileged teacher define a geometric target; token-logit distillation replaces expensive policy optimization. β has the derivation's specific role, not arbitrary mixture weight.",
+        "example": "Same guidance with different regularization yields different effective targets."
+      }
+    },
+    "qa/post-training:beta-opsd/comparison": {
+      "source_sha256": "68c24d0494cae1173eb4ffc38af50a55228ecbf8b973e2a13016a1cdc666bebf",
+      "reviewed": true,
+      "fields": {
+        "question": "How does return-to-go differ from a current-token log gap?",
+        "answer": "It accumulates discounted future gaps, assigning later consequences to current decisions. Longer horizons can add variance and depend on termination; not automatically more accurate.",
+        "example": "A single early error can cause several later deviations invisible to immediate gap."
+      }
+    },
+    "qa/post-training:beta-opsd/implementation": {
+      "source_sha256": "fe2a1ed980418319b4bbe9a0ac0105b941738999fc426b27f13952f96c65b8af",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local β-OPSD execute long CoT with its linear-position proxy?",
+        "answer": "No. Candidate actions and linear returns replace tokens/trajectory positions. Freeze teacher/reference and preserve ordering; proxy results aren't Qwen LoRA evidence.",
+        "example": "Suffix sums over a few numbers don't demonstrate equivalent credit in real generation."
+      }
+    },
+    "qa/post-training:beta-opsd/mechanism": {
+      "source_sha256": "de534443e8510e368f9a573ccbd24a89b581ac67dc85bbdd9f69fbf28d63c9d7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine geometric teacher/reference interpolation with return-to-go?",
+        "answer": "Interpolation controls target direction/strength; return-to-go controls temporal credit. Vanilla is a specific setting, not proof arbitrary logit averages solve the same objective. Local positions aren't long sequences.",
+        "example": "How much to trust teacher and how far later errors influence early choices are separate decisions."
+      }
+    },
+    "qa/post-training:relay-opd/basics": {
+      "source_sha256": "14f0ac7ab9d6d328472d3c5e914d3506b1c196d62012d1f8495e3f2ad103cfbd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why let Relay-OPD teacher briefly take over then return control?",
+        "answer": "An invalid prefix can trap future learning. Short, budgeted intervention returns to a learnable region while student still acts after handoff.",
+        "example": "Teacher repairs a few critical steps, then student finishes."
+      }
+    },
+    "qa/post-training:relay-opd/comparison": {
+      "source_sha256": "cc8507e5e529278adc5f72010b81020e6fbcce7b9ea2da1f6ef6294301cc8347",
+      "reviewed": true,
+      "fields": {
+        "question": "How do relayed traces differ from native student rollouts?",
+        "answer": "Teacher intervention changes action sources and states; log takeover interval and budget. Teacher-assisted success is not autonomous student success.",
+        "example": "A teacher bypassing a hard step requires separate no-teacher evaluation."
+      }
+    },
+    "qa/post-training:relay-opd/implementation": {
+      "source_sha256": "b7ca65bea57a51aaeee13dd9dbdd9a3a5b183bb173bc0a4400d190456e9d8d4c",
+      "reviewed": true,
+      "fields": {
+        "question": "How does the Relay state machine prevent budget overrun?",
+        "answer": "Track cumulative handoff lengths, enforce total and record takeover/return/termination. Local teacher is cached candidate distribution, not real Qwen or eight-GPU training.",
+        "example": "Once budget is spent, do not start a second handoff."
+      }
+    },
+    "qa/post-training:relay-opd/mechanism": {
+      "source_sha256": "a57aac04d439aa57de5bd25b1645f2e3e20886cbfc22da35404a2251d79785cb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not count a relayed trace as purely student on-policy?",
+        "answer": "Teacher generates intervened actions and changes later student conditioning. It is a mixture. Budget keeps help local and provenance tracks writers. Include teacher cost and don't claim independent success.",
+        "example": "A student finishing after two teacher steps need not succeed unaided."
+      }
+    },
+    "qa/post-training:opd-lm/basics": {
+      "source_sha256": "e0c2d551a4f603bdeb28e771375c40be13b524dc404664171d6980f3b2c44699",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distill an AR teacher on a diffusion student's own decoding path in OPDLM?",
+        "answer": "Moving to bidirectional denoising can forget learned behavior. Random masks can miss confidence-decoding states. Actual student rollouts reduce mismatch with inference.",
+        "example": "Train on the reveal order actually visited, not only random masking."
+      }
+    },
+    "qa/post-training:opd-lm/comparison": {
+      "source_sha256": "fd38b1a2aae1e2e5e254478c3bccc982020c7126e5c6e0e8c9446b47a97be073",
+      "reviewed": true,
+      "fields": {
+        "question": "Do AR teacher and bidirectional student see the same information at a position?",
+        "answer": "No. AR teacher scores causal history, student denoises visible unmasked tokens. Align positions and state what each sees instead of treating conditioning differences as quality.",
+        "example": "Student may see a revealed token to the right while teacher sees only left context."
+      }
+    },
+    "qa/post-training:opd-lm/implementation": {
+      "source_sha256": "9d3945cfe969cc3ca91a23ca9693fc8753aeb82ee7b174670db504a9bd1939c6",
+      "reviewed": true,
+      "fields": {
+        "question": "Where should OPDLM compute loss and does teacher update?",
+        "answer": "Use specified masked/supervised positions, freeze AR teacher and align logits to student trajectories. Mini-suite does not fully convert/train a real bidirectional LM.",
+        "example": "Including already determined tokens changes denoising supervision."
+      }
+    },
+    "qa/post-training:opd-lm/mechanism": {
+      "source_sha256": "f4cc12d762ae0902fcad92366b03c11ea950b0cc955ddb11ff9b235ed41dd4a2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distill along actual bidirectional decoding rather than random masks?",
+        "answer": "Confidence decoding visits different contexts and attention conversion can cause forgetting. Score student-visited states with frozen AR targets while retaining its causal condition. Different visible evidence cannot be equated positionwise arbitrarily.",
+        "example": "A confidence-first reveal produces contexts random-mask training might never encounter."
+      }
+    },
+    "qa/post-training:gkd/basics": {
+      "source_sha256": "735e9735dd5ca1785831453eca37305a5b069b05b423351d3aa25093cfe6a2bb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does GKD ask a teacher to score student-generated prefixes?",
+        "answer": "Teacher paths can be idealized and miss visited errors. Sample student trajectories and ask for full teacher distributions at those prefixes, teaching recovery without only copying demonstrations.",
+        "example": "Teacher can guide next actions after the student's second step goes wrong."
+      }
+    },
+    "qa/post-training:gkd/comparison": {
+      "source_sha256": "fbc02d3f42d2bdccb49fe738ad3bff44c064be51ff76c4963e2f82b6c00b0168",
+      "reviewed": true,
+      "fields": {
+        "question": "Is GKD student data fraction the same as IPD token mixing?",
+        "answer": "No. GKD controls training-source mix of fixed and student traces. IPD mixes policies at each state. Dataset mixtures and one-step mixtures generally visit different trajectories.",
+        "example": "Half the batch from fixed answers is not choosing teacher with 50% probability at every token."
+      }
+    },
+    "qa/post-training:gkd/implementation": {
+      "source_sha256": "cf9f1116b9885e40e507c7ce3f52f3d3b355fec30412092e89fdde2701d6c3f0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why specify which distribution comes first in GKD KL?",
+        "answer": "Forward/reverse KL and generalized JSD differ in coverage and concentration. Freeze teacher on identical student prefixes. Candidate teacher distributions aren't real T5 translation/summarization.",
+        "example": "KL(T||S) and KL(S||T) yield different gradients despite both being KL."
+      }
+    },
+    "qa/post-training:gkd/mechanism": {
+      "source_sha256": "3c4cd632c11e651ba7315ad3faea6725cb0df5aa9caff55486e7f6d5dc94d903",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does same-prefix teacher scoring reach student mistakes better than complete teacher answers?",
+        "answer": "Fixed teacher trajectories avoid many student errors. Teacher distributions on sampled student prefixes reach those states; data fraction controls fixed/on-policy mixture. Coverage doesn't guarantee teacher recovery or determine divergence choice.",
+        "example": "A correct demonstration never visits the student's wrong step, while prefix scoring can help from that actual state."
+      }
+    },
+    "qa/post-training:minillm/basics": {
+      "source_sha256": "690ee28b4ac0456ea42f5750f9869ca8ff130fa544990f917058f28ea7324e88",
+      "reviewed": true,
+      "fields": {
+        "question": "Why favor reverse KL in MiniLLM?",
+        "answer": "Small students may not cover all teacher modes. Reverse KL concentrates on student-supported reliable teacher regions, possibly missing modes. Sharpness isn't always desirable.",
+        "example": "Learn several reliable phrasings rather than spread over all teacher continuations."
+      }
+    },
+    "qa/post-training:minillm/comparison": {
+      "source_sha256": "2af9b0b685b2a21eb7ee0cb7098a9b55d1ec016e74e291efa342231bda9d04bc",
+      "reviewed": true,
+      "fields": {
+        "question": "What coverage tradeoff separates MiniLLM from forward KL?",
+        "answer": "Forward emphasizes teacher-mass coverage; reverse follows student-sampled modes. Teacher-mixed sampling and variance reduction also matter; direction alone isn't the full method.",
+        "example": "Few reliable modes versus many weak modes requires task evaluation."
+      }
+    },
+    "qa/post-training:minillm/implementation": {
+      "source_sha256": "de9922df0a96b93f572869b4618ae021c2ef5413d34cf883c63a0484c6b0eb90",
+      "reviewed": true,
+      "fields": {
+        "question": "Whose distribution defines MiniLLM reverse-KL expectation?",
+        "answer": "Student, with explicit teacher-mixed sampling and corrections in practice. Arbitrary fixed teacher text is not a substitute. Local candidates lack real tokenizer, long generation and GPT judging.",
+        "example": "Scoring teacher solutions with a KL-looking formula doesn't provide student on-policy coverage."
+      }
+    },
+    "qa/post-training:minillm/mechanism": {
+      "source_sha256": "21e8151f1dd30ddd451633a16a2c35da6cb0d4fe927a9d8920891519997457fd",
+      "reviewed": true,
+      "fields": {
+        "question": "How does reverse KL affect small students' treatment of teacher tails?",
+        "answer": "Student expectation focuses capacity on visited teacher-supported modes; forward KL covers teacher mass. Direction changes gradients and expectation. Preserve teacher-mixed stabilization; candidate checks aren't long-text distillation.",
+        "example": "A limited student may concentrate on a few reliable phrasings rather than cover every rare teacher expression."
+      }
+    },
+    "qa/post-training:aopd/basics": {
+      "source_sha256": "5fee95b20af58d759e6c913f4cea248c83429a2ffd76f1f58de733d1d57302c5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why ask whether the student can complete an AOPD teacher action?",
+        "answer": "Teacher's favored next step may be beyond student continuation skill. Relative terminal advantage measures usable guidance from existing student rollouts without counterfactual generations.",
+        "example": "An advanced proof start is not useful if the student cannot continue it."
+      }
+    },
+    "qa/post-training:aopd/comparison": {
+      "source_sha256": "eb19b2b93bd9140b61757e94a086688632a501f32c0aeb755e55fb587aa18030",
+      "reviewed": true,
+      "fields": {
+        "question": "How does AOPD differ from multiplying KL by reward?",
+        "answer": "It includes a sampled term and full-distribution term under the same unnormalized truncated teacher measure, plus independent leave-one-out returns. Simple reward multiplication loses that estimator structure.",
+        "example": "Weighting one sampled word doesn't reproduce subtraction of the vocabulary-wide term."
+      }
+    },
+    "qa/post-training:aopd/implementation": {
+      "source_sha256": "e0ec520b4b4710743f500a85697cb10b1466574266528a04f66c6b289b72f8f7",
+      "reviewed": true,
+      "fields": {
+        "question": "Can AOPD clip only the sampled term or replace rollout S with current student?",
+        "answer": "No. Both terms share the unnormalized truncated teacher measure; denominator is frozen rollout S. Update only Sθ, with groups larger than one for independent LOO. Don't change behavior probabilities across steps.",
+        "example": "Re-softmax after truncation changes total mass and correspondence between terms."
+      }
+    },
+    "qa/post-training:aopd/mechanism": {
+      "source_sha256": "9a6d9e08b5587c523341823bbb6efd4c1fd2b12bfd751d386eb3c06048164034",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do both AOPD terms share a truncated teacher measure?",
+        "answer": "The estimator combines terms that cancel to measure teacher-action advantage for student continuation. Clipping only one or renormalizing changes the objective. Use other same-prompt rollouts for LOO, with frozen teacher/behavior and no new counterfactual continuations.",
+        "example": "Evaluate a teacher-preferred opening against the student's actual returns rather than reinforce it solely from teacher likelihood."
+      }
+    }
+  }
+}

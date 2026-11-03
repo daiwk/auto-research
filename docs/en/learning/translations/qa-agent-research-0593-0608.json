@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:agentx-model-replay/implementation": {
+      "source_sha256": "21dccd193d1bea71c67e11b6b11a6fbae82ea5bd1f266739671ed581ad4d205d",
+      "reviewed": true,
+      "fields": {
+        "question": "When are candidate outcomes revealed in historical replay, and how does local data avoid future leakage?",
+        "answer": "A child can be selected only after its parent, and the candidate's result is revealed only after selection. MovieLens holds out the last two chronological interactions for validation and test; training statistics cannot read future events, and champions use validation only. A rule-based selector and logistic-regression replay are not the paper's LLM research agent or an online A/B replication.",
+        "example": "Even if the logs contain a high score from another branch, the selector cannot read it before deciding to try that branch. Otherwise it has a future-metric oracle."
+      }
+    },
+    "qa/agent-research:sciencebuddy/mechanism": {
+      "source_sha256": "a81dad3d68ccda715e9c6e678960a95562ed2acb091abd8c75105c47f4cbb742",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't inner harness evolution and outer policy updates be reduced to repeatedly rewriting a prompt?",
+        "answer": "The two levels change different objects. The inner loop optimizes interaction, while the outer loop uses successful trajectories to update the scientific agent's parameterized policy, which affects the next inner search. Actual execution, filtering, and training must close the loop to demonstrate recursion within recursion. Reference gates or synthetic statistics cannot replace the models and environments involved.",
+        "example": "Find a better experimental checking process, then train the agent on successful trajectories so it uses that process better next time. Rewriting the prompt three times has no second-layer update."
+      }
+    },
+    "qa/agent-research:sciencebuddy/basics": {
+      "source_sha256": "e90e209db540a7fc77e245c2a77a8ae4aeb99948514599312e1603bca040daf7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does ScienceBuddy put tool interaction and policy learning into one continuing process for scientific tasks?",
+        "answer": "Scientific tasks involve proposing actions, using tools, interpreting observations, and adjusting plans. A fixed prompt is unlikely to handle ongoing feedback. ScienceBuddy studies improving workflows and policies together during interaction. Track the two levels separately; simulated state updates are not evidence of a real scientific environment or model training.",
+        "example": "A search finds the original hypothesis lacks evidence, so the workflow can require source checks first. Whether the policy learned that judgment needs validation on subsequent real tasks."
+      }
+    },
+    "qa/agent-research:sciencebuddy/comparison": {
+      "source_sha256": "b005b61757efe968ad41c285466225fd3133bf6bb2502ad9576f3823c42f04f8",
+      "reviewed": true,
+      "fields": {
+        "question": "What trade-offs arise from two-level feedback versus single-level training with a fixed harness?",
+        "answer": "Two levels can improve both data generation and policy, but simultaneous changes complicate attribution and introduce nonstationarity. Record versions, trajectory provenance, and updates separately. A fixed harness is easier to control but can constrain exploration. Mechanism comparisons do not replace scientific-task or experimental outcomes.",
+        "example": "A higher outer-loop score might come from better tool feedback or from new parameters. Without versions, the contributions are hard to distinguish."
+      }
+    },
+    "qa/agent-research:sciencebuddy/implementation": {
+      "source_sha256": "50078c64f238e7bf4b59ebe21b4c163e3e8b1751816f12e4ae09c98cf82fd48f",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local double-state reference include a lab and real scientific policy learning?",
+        "answer": "No. It runs a reference two-level state update and gate, without a real laboratory, full scientific tasks, or paper-scale training. Three-seed intermediate values verify branches and information flow, not reproducible scientific discovery rates. Counts of state updates do not validate full recursive learning.",
+        "example": "Two inner changes and one outer update show control-state movement. Without real trajectories and gradients, they do not show that the policy learned a task."
+      }
+    },
+    "qa/agent-research:maple/mechanism": {
+      "source_sha256": "198560013612122d462ba06cc9743a9d7df2c6f97524a7a441c188512e2dcc6d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can starting subsequent problems from an accepted program accumulate optimization knowledge better than reprompting from scratch?",
+        "answer": "Program state preserves verified executable structure and trade-offs. The next task can modify it rather than reconstruct details from language. Acceptance prevents unexecuted ideas from overwriting a reliable parent. Cross-problem evolution still needs to account for task differences: a specialized program for one instance is not universally best.",
+        "example": "If the previous problem already has reliable parsing, change its objective for the next task rather than regenerate a blank script and repeat format mistakes."
+      }
+    },
+    "qa/agent-research:maple/basics": {
+      "source_sha256": "5e8b26ddb9ea4dd7f3e76a7ac03000bb28b14ffc12033bcb718c658ee896f496",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does MAPLE aim to retain optimization knowledge across consecutive solves?",
+        "answer": "Related tasks often share structure. Starting each proposal from scratch makes verified program improvements hard to accumulate. MAPLE uses executable solutions as persistent research state and explores subsequent problems from accepted programs. Inheritance can carry stale assumptions, so verify the new constraints rather than treating executability or historical success as proof of current optimality.",
+        "example": "Reuse a scheduling program that already resolves resource conflicts, but implement and test the new time-window constraint."
+      }
+    },
+    "qa/agent-research:maple/comparison": {
+      "source_sha256": "50567b68ae0bef91a35e7bf4a117bf2817e5b9717e7ce273e927748e3a41e20f",
+      "reviewed": true,
+      "fields": {
+        "question": "How does accepting an executable program differ from accepting an optimization description that sounds better?",
+        "answer": "A description conveys intent. A program must run and pass the relevant comparison before becoming evolvable state. Executability does not imply improvement: validity and benefit are separate gates. A one-time gain does not generalize to all future tasks, and failed proposals should not be inherited unconditionally.",
+        "example": "'Reduce redundant search' is advice. Accept the optimization only after it changes the call logic and verifies that required evidence was not missed."
+      }
+    },
+    "qa/agent-research:maple/implementation": {
+      "source_sha256": "cffd11017322e236d3a76f88198499563b9e2e683a4125d69ea283a7c06a3a46",
+      "reviewed": true,
+      "fields": {
+        "question": "How does local validation of nonempty named-operation plans differ from the authors' solver?",
+        "answer": "The local path accepts public plans made of nonempty named operations and checks reuse. It has no author solver, trained model, or external tools. Structural execution contracts can be tested, but perfect mini-suite scores are not paper-level optimization or general program evolution. A missing solver cannot be substituted with a registry name.",
+        "example": "Nodes named 'search' and 'verify' pass the nonempty structural check, but do not demonstrate that a real search algorithm outperforms its predecessor."
+      }
+    },
+    "qa/agent-research:ecdysis/mechanism": {
+      "source_sha256": "68c777de301863df24adf2e8cf40deb772d88d2bfe8f0c93207b3ed71e2031e7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why aggregate similar failures across tasks to diagnose a systemic harness defect?",
+        "answer": "A single failure may be due to randomness or a particular prompt. A recurring pattern more strongly suggests a shared execution interface problem. Multi-role diagnosis turns the evidence into a testable repair specification instead of changing global behavior after each failure. Correlation is not sufficient causal proof; compare affected behaviors after repair.",
+        "example": "Many tasks losing error codes when logs are truncated gives stronger reason to inspect the output interface than one bad guess. Target truncation rather than generally replacing the model."
+      }
+    },
+    "qa/agent-research:ecdysis/basics": {
+      "source_sha256": "2700b3146758c2875c55349fa6375fa278ffdd66104e36dfbdb1453179edc5eb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Ecdysis ask whether failures are occasional model behavior or shared runtime defects?",
+        "answer": "Failures across tasks can be individual misunderstandings, or recurrent effects of tool wrapping, context, and recovery. Ecdysis looks across executions for repairable harness defects so changes target shared causes. Recurrence is a diagnostic clue, not a completed fix without execution and verification.",
+        "example": "If several tasks lose evidence because tool output is truncated, suspect a common interface. A single task that misreads content does not justify immediately changing every workflow."
+      }
+    },
+    "qa/agent-research:ecdysis/comparison": {
+      "source_sha256": "772e8f496268f33489f78ae752dd035c7591dd25a41eac6ac81142a9b8a43015",
+      "reviewed": true,
+      "fields": {
+        "question": "Where do a repair specification and direct execution of a harness patch sit in the improvement chain?",
+        "answer": "FDCR's multi-role diagnosis organizes failure evidence into a discussable repair specification describing what to change and why. Execution still requires a concrete patch, runtime integration, and verification. A diagnosis is not a changed system; gate triggers or counts of repair suggestions do not indicate task-success gains. This boundary is especially important for the local reference.",
+        "example": "A specification says 'preserve tool error fields.' Check the patch and execution logs separately to see whether the code actually changed and worked in later tasks."
+      }
+    },
+    "qa/agent-research:ecdysis/implementation": {
+      "source_sha256": "e7e573476bc5bb12a2bdd83c625fc081a27d87e1e52e86d140de43791d644432",
+      "reviewed": true,
+      "fields": {
+        "question": "Does triggering the local FDCR repair gate mean a harness patch was generated or executed?",
+        "answer": "No. The local path aggregates signatures from public observations and triggers a bounded repair gate. It does not generate or execute code or run paper-scale training. A trigger shows the statistics satisfy a condition, not correct diagnosis or actual repair. Three-seed counts cannot be converted into paper speed or accuracy.",
+        "example": "A 'needs repair' state after three similar failures is a scheduling signal. Without a patch and rerun, the defect is not resolved."
+      }
+    },
+    "qa/agent-research:cobra-skills/mechanism": {
+      "source_sha256": "299c772a630884a90ac0775e7ed27c1358bbcdcd115dbbf8f7e06896083fb3f2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use a budgeted contextual bandit for dynamic skill candidates rather than ranking historical best scores alone?",
+        "answer": "Skill payoff depends on the current task, and new or revised candidates lack history. A contextual bandit balances exploiting known gains and exploring informative candidates under an evaluation budget, then evolves from execution feedback. Historical maxima can favor early lucky skills and ignore context and uncertainty about untested candidates.",
+        "example": "If an old skill excels at files but new tasks are web-based, giving new candidates a few trials may be more informative than repeatedly testing the old champion."
+      }
+    },
+    "qa/agent-research:cobra-skills/basics": {
+      "source_sha256": "c549078d5f7ce173cfe714a0b6bb492d9c20879e0189b026217eaf4cdfec7183",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't COBRA-Skills give each candidate the same number of trials as the skill pool grows?",
+        "answer": "Evaluating skills consumes execution budget while the number and quality of candidates change. Equal allocation can waste trials on clearly useless or duplicate entries. COBRA-Skills combines current context with past feedback to direct limited trials. Selectors may only use available evidence, not presume effects of unexecuted candidates.",
+        "example": "Ten similar skills have repeatedly failed and a newly generated one may deserve limited exploration. Running every candidate a hundred times is not feasible on a tight budget."
+      }
+    },
+    "qa/agent-research:cobra-skills/comparison": {
+      "source_sha256": "6f956e0e1b6b9027fb056610c70c66b9512ef5917ade52e2489942483d71213b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate proposing a skill variant from measuring its execution reward?",
+        "answer": "A proposal uses existing experience to describe potentially better behavior but does not establish usefulness on this task. Only execution supplies feedback for budget allocation and evolution. The space may grow dynamically, but membership does not imply positive reward. COBRA-Skills bandit selection must distinguish measured payoff from uncertainty rather than fill missing results with proposal self-assessment.",
+        "example": "A more detailed skill can be scheduled for a trial. Only actual execution shows whether it helps; 'expected improvement' is not a successful sample."
+      }
+    }
+  }
+}

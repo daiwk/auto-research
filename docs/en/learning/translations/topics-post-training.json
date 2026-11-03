@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "units": {
+    "theme/post-training": {
+      "source_sha256": "6abca303e1524323d416beecc80dff3cb90cb7d30e09f0956c839794b884b164",
+      "reviewed": true,
+      "fields": {
+        "title": "LLM post-training",
+        "intro": "Start by identifying the feedback source, then study policy updates, credit assignment, teacher supervision, and data and compute allocation."
+      }
+    },
+    "theme/post-training/preference-and-alignment": {
+      "source_sha256": "458fa5e7e9966847a93506722f16589e04cc3444593fb7d66ae16275ecde2751",
+      "reviewed": true,
+      "fields": {
+        "title": "Preference and alignment: identify the feedback first",
+        "question": "How do we turn pairwise preferences or a thumbs-up on one answer into a trainable objective?",
+        "takeaway": "DPO uses preferred and rejected answers to the same prompt and classifies preferences through the current-to-reference policy log ratio. KTO uses individually desirable or undesirable feedback without pairs. Reward models, AI raters, and controllable SFT change the source or organization of feedback. The feedback format, reference distribution, and annotation reliability constrain the objective; algorithm names alone do not justify swapping losses.",
+        "example": "A support system may have ranked pairs for one group and accept/reject labels on individual answers for another. Use true same-prompt pairs for DPO, not arbitrary pairs from different questions. If groups disagree on style, retain preference distributions and annotation provenance so a judge's style preference is not mistaken for factual correctness.",
+        "pitfall": "Better preference scores do not guarantee facts, safety, or production gains. Match data, reference model, and evaluation, and check length/style confounds. Closed-form losses, candidate policies, and preference fixtures validate their own mechanisms. A scorer contract or an unreproduced experiment does not show the model is aligned.",
+        "reading_order": "Read DPO for paired feedback and the reference log ratio, then KTO for unpaired binary feedback, then probabilistic Autorater for confidence distributions rather than a single winner."
+      }
+    },
+    "theme/post-training/preference-and-alignment/self-test": {
+      "source_sha256": "46503a1f61fc88dd1069a23c7124f40739ffa62320dcfdf69e5b042da4094000",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a liked answer and a disliked answer to a different question form a DPO pair?",
+        "answer": "Usually not. Standard DPO compares answers under the same condition. Cross-question pairing confounds difficulty and content. Collect same-prompt alternatives or use an unpaired objective with explicit label distribution, reference policy, and independent evaluation."
+      }
+    },
+    "theme/post-training/policy-optimization": {
+      "source_sha256": "80f6dc2285fa1b70a57bfe3a104ce8547abc728693b42b6102865dfd96e52552",
+      "reviewed": true,
+      "fields": {
+        "title": "Policy optimization: which policy samples and which policy learns?",
+        "question": "Which quantities must remain distinct across online sampling, old-policy probabilities, and current-policy updates?",
+        "takeaway": "RL post-training collects trajectories and rewards, then computes advantages and an update objective. GRPO uses relative rewards for a group of answers to one prompt instead of a separate critic. DAPO changes clipping, uninformative groups, and length handling. Asynchrony, off-policy replay, and inference/training engine differences change the sampling distribution. Old, current, and reference policies play different roles; their probabilities are not interchangeable.",
+        "example": "For rewards 0, 0, 1, 1 on four answers, within-group advantages give a direction. If all four fail and get the same reward, group centering cannot distinguish them. Replaying cached trajectories does not freeze current probabilities, so do not blindly reuse old advantages and density ratios. Check whether importance weights are required and which sampler they refer to.",
+        "pitfall": "Stability and capability require separate evidence. Finite gradients, clipping tests, and ratio checks do not prove better reasoning. Low offline loss cannot replace actual rollout comparisons. Full checkpoint and long-trajectory runs retain the cost and GPU gates; a runnable formula is not finished training.",
+        "reading_order": "Start with GRPO sampling, advantages, ratios, and reference KL. Then read DAPO for zero-variance groups and training stability, and TIS for probability conventions across the sampling and training engines."
+      }
+    },
+    "theme/post-training/policy-optimization/self-test": {
+      "source_sha256": "1f1ce33f9c55e2bf3f2fc3230141686ca877b3458dd7a690b55ec3b6fb031b12",
+      "reviewed": true,
+      "fields": {
+        "question": "If every answer in a group has the same reward, can a larger batch or repeated calculation of the same advantages create a new direction?",
+        "answer": "Not from the same centered rewards. Check whether reward is too coarse, tasks are too easy or hard, or resampling or another legitimate signal would help. Do not read test answers to manufacture nonzero advantages. Recheck the objective and budget after any change."
+      }
+    },
+    "theme/post-training/reward-and-credit": {
+      "source_sha256": "f4f78da91654dc6bc223b30623f94fee044aa5248898b850c14dc8dd63392b56",
+      "reviewed": true,
+      "fields": {
+        "title": "Reward and credit: which steps deserve a good final score?",
+        "question": "How can one final score become a training signal that does not reward wrong steps?",
+        "takeaway": "Reward defines what is good; credit determines which actions receive it. Process supervision labels intermediate steps. Math-Shepherd samples continuations and uses their eventual solvability to construct step labels. Rubrics and multiple objectives must map criteria to tokens and prevent one reward from overpowering another. Outcome rewards, process evidence, and advantages are related but distinct. CONCUR shows that even correctness-gated length rewards can reverse primary-reward order after normalization, motivating an explicit projection constraint rather than only reducing the auxiliary weight.",
+        "example": "A math response can reason well for two steps, make a mistake at step three, and still guess the correct answer. Applying terminal reward to all steps can reinforce the error. Independent continuations or step checks give finer evidence, but a failed continuation may reflect inadequate sampling rather than an incorrect prefix.",
+        "pitfall": "Judge agreement does not establish truth, and style or shortcuts can manipulate rubric scores. Evaluate label quality, the credit formula, and capability separately. Keep hidden answers inside the evaluator. Synthetic credit checks are not evidence of reasoning, robotics, or video-generation ability.",
+        "reading_order": "Read Process Supervision for step versus outcome labels, Math-Shepherd for continuation-based labels, and TACO for why even correct answers can contain tokens that should not be reinforced."
+      }
+    },
+    "theme/post-training/reward-and-credit/self-test": {
+      "source_sha256": "ed58c3800dce0f91a9dd76345b622b055f0fa1a5b96a35c1f58cff9de39919b4",
+      "reviewed": true,
+      "fields": {
+        "question": "If a long answer ends correctly, can uniform positive token credit prove every step was correct?",
+        "answer": "No. Terminal reward says only that the final output met the acceptance condition. Uniform credit is an estimation choice that can reinforce wrong steps. Fine-grained credit likewise needs a reliable source and independent comparisons; a judge score is not process ground truth."
+      }
+    },
+    "theme/post-training/student-trajectory-distillation": {
+      "source_sha256": "3055a58f47a1a2d68f2ffefb914dbcd061e832b727adf22e54fecf33f46f8d60",
+      "reviewed": true,
+      "fields": {
+        "title": "Trajectory distillation: students, proposals, and prefix distributions",
+        "question": "If a student generates from its own mistaken prefixes at inference, why might imitating complete teacher answers miss those states?",
+        "takeaway": "Autoregressive students visit their own prefixes at inference. GKD generates with the student and asks the teacher to supervise distributions on those states, reducing train–test state mismatch. MiniLLM shows that divergence direction changes which teacher probability mass a student covers. Track where trajectories come from, which prefix both models see, and how discrepancies become updates. MPOPD learns a separate proposal that samples near the geometric mixture of teacher and student. Student loss, proposal loss, and frozen one-step ratios have different roles, so trajectory distillation need not sample directly from the current student.",
+        "example": "The teacher first computes area then a ratio; the student writes the wrong formula. SFT on teacher prefixes may never teach recovery. OPD can query teacher probabilities on the student's prefix, but the teacher might also follow the mistake. Better coverage does not guarantee correct supervision; check teacher quality, divergence, and validation.",
+        "pitfall": "Scoring student trajectories is not generating a new teacher answer or transferring all teacher capabilities. KL values, finite gradients, and candidate diagnostics support local mechanisms. Lightweight GKD and MiniLLM do not reproduce full checkpoint training. Multiple numerical seeds are not a capability comparison.",
+        "reading_order": "Read GKD to separate sampling from teacher scoring, MiniLLM for divergence direction and sampling stabilization, and Learning Signals to distinguish high loss from a useful learning direction."
+      }
+    },
+    "theme/post-training/student-trajectory-distillation/self-test": {
+      "source_sha256": "6ce383cc5b7895263abb529c06b1843a9a73b7895c904a07f4bb8151a6f622e5",
+      "reviewed": true,
+      "fields": {
+        "question": "Does training ten times on cached teacher answers make the data student-on-policy?",
+        "answer": "No. The trajectories remain fixed teacher samples. Check which student policy sampled, and whether the teacher supervised on student prefixes. Offline student replay still needs a distribution-shift and update contract; the label “student” does not make it current on-policy data."
+      }
+    },
+    "theme/post-training/teacher-and-context": {
+      "source_sha256": "0d6abd1b79464fe4c5161c8db1d89995b60a3648897a0301334443e2acc5b457",
+      "reviewed": true,
+      "fields": {
+        "title": "Teachers and correction: when extra context can help",
+        "question": "How can a teacher with answers, visual evidence, or specialist hints help a student that cannot see them?",
+        "takeaway": "Teacher and student may be different conditional views of one model. OPSD gives the training teacher verified answers or reasoning while the student sees only deployable inputs. Multiple teachers and token routing select who supervises each position. Check how the extra information changes supervision, whether it suits the student, and whether it erodes already successful behavior.",
+        "example": "A student misreads a chart scale. A training teacher sees a crop or explanation and can give a correction distribution on the same student prefix. The student is updated with nonprivileged inputs. If math and code use separate experts, soft routing combines valid probabilities in a common vocabulary; averaging logits is not the same as mixing predictive distributions.",
+        "pitfall": "Privileged references stay inside allowed training-teacher or scorer boundaries, not evaluated student inputs. A more confident teacher may be wrong; multiple teachers may not complement each other. Two-view, routing, and gradient components are not complete model distillation. Keep high-cost non-reproduction and local diagnostic boundaries visible.",
+        "reading_order": "Read OPSD for shared parameters with different conditioning, Token-Level Teacher Selection for positionwise routing and mixtures, and MOPD for capability conflict and retention across teachers."
+      }
+    },
+    "theme/post-training/teacher-and-context/self-test": {
+      "source_sha256": "c5afe0f59a94fb582b92cb0432213a02b75d6a5a5178dd510cc181ffe3cf8a0a",
+      "reviewed": true,
+      "fields": {
+        "question": "If the same model acts as teacher and student, is there necessarily no new signal?",
+        "answer": "No. Identical parameters can yield different conditional distributions under different evidence, contexts, or reasoning paths. That difference can train the student, but its benefit must be tested. Identical distributions or irrelevant style differences do not promise stable gains."
+      }
+    },
+    "theme/post-training/data-and-budget": {
+      "source_sha256": "5bc5706a25bf5874048010c4c9a3f81ab0c4a8757ec8877f11253a11b5986394",
+      "reviewed": true,
+      "fields": {
+        "title": "Data and budgets: where to spend the next unit of compute",
+        "question": "Should a limited budget buy more questions, more rollouts, or more supervision at valuable positions?",
+        "takeaway": "Question selection changes visited states, curricula change difficulty, and trimming supervision or rollout reduces per-example cost. Difficulty estimates age as the policy improves. Separate data selection from target tasks and a fixed evaluation set. LESSER makes selection cheaper through output-layer gradient features; it does not replace the selection objective. Compare quality under the total budget and identify which step actually gets cheaper.",
+        "example": "With 100 answers per day, more rollouts on solved questions may add little; unsolvable questions may provide no positive rewards. Re-estimate success on training data, sample the difficulty band with remaining signal, and retain a hard control. If rollouts end halfway, token inclusion probabilities change and the old unweighted objective may no longer apply.",
+        "pitfall": "Faster is not better learning and fewer tokens are not matched quality. Include teacher forward passes, question synthesis, screening, and retries in cost. Select curricula or budgets on validation and report isolated test. CPU gradient and clipping checks do not prove training speedup, and cross-script transfer research is not an executable optimizer.",
+        "reading_order": "Read GRPO Difficulty Curriculum for policy-dependent difficulty, LESSER for cheap gradient features versus selection rules, and STOPD for early stopping with explicit sampling and weighting."
+      }
+    },
+    "theme/post-training/data-and-budget/self-test": {
+      "source_sha256": "39b304b9ff8c9f1916dd678122124477a8b0d9b3eb49c5628fca58824b2f1ae8",
+      "reviewed": true,
+      "fields": {
+        "question": "Can we keep the previous round's “medium difficulty” label after the policy changes?",
+        "answer": "Not by default. Difficulty depends on the current policy and sampling budget. Re-estimate under the chosen curriculum using permitted training/validation information, not final test. If budget forces reuse, state that limitation; fixed prompt length is not success-probability difficulty."
+      }
+    }
+  }
+}

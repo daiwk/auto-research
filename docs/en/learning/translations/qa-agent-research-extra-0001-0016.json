@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:agent-g2/mechanism": {
+      "source_sha256": "88d6e364c454f14d319223109d788a0e5fd1310c77d2dc7c19fc980a20ee785c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why sample guidance depth by difficulty cluster rather than retain the same expert-prefix length for every task?",
+        "answer": "Too much prefix on easy tasks reduces independent exploration; too little on difficult tasks can produce only failures. Cluster success rates and variability from existing rollouts set the center and variance of a guidance band, then depths are sampled per task, avoiding extra per-item probes. Training prefixes are scaffolding and must not be provided in independent evaluation.",
+        "example": "An easy door task may need a very short hint; a complex multiroom task can need a longer start. Giving both half a prefix can overguide one and underguide the other."
+      }
+    },
+    "qa/agent-research:agent-g2/basics": {
+      "source_sha256": "e41de11bc998f203cd66d89c7c9f43fca576ce1b0935ce6ace667373c874ba38",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Agent-G² provide partial expert trajectories before exploration rather than relying only on random trial and error?",
+        "answer": "An expert prefix brings the policy to a state with more learning value, then the current policy explores from there. Existing rollouts estimate guidance proportions by difficulty cluster, balancing help with autonomy and avoiding costly per-example probes.",
+        "example": "A hard task can receive a longer start, while the policy takes over earlier on an easy task."
+      }
+    },
+    "qa/agent-research:agent-g2/comparison": {
+      "source_sha256": "44b3b00f14ce1a02bd588b09c18d3a4bec50c213bde1cae9cda6754a54eb3de5",
+      "reviewed": true,
+      "fields": {
+        "question": "How does cluster-level guidance-band estimation differ in cost from repeated per-task probes?",
+        "answer": "Clusters reuse success rates and variation from existing policy rollouts, reducing extra per-task trials. Individual probes can be finer but cost additional rollouts. Neither fixed nor cluster-based help establishes optimal depth for each task.",
+        "example": "Similar tasks can share a depth distribution rather than repeatedly testing every task to find a starting point."
+      }
+    },
+    "qa/agent-research:agent-g2/implementation": {
+      "source_sha256": "a97083b3bff34b48557d70034d5fc57df52413e6c80404db0781601ca19d1cd6",
+      "reviewed": true,
+      "fields": {
+        "question": "What does Agent-G² do if it samples a negative guidance depth or a proportion beyond the expert trajectory?",
+        "answer": "Bound the mean and clip Gaussian samples to [0,1], with a variance floor. Expert prefixes are training guidance; the hidden expert plan must not be supplied to policies in independent capability evaluation.",
+        "example": "Clip r=1.2 to 1 rather than indexing past the trajectory or treating overflow as extra oracle information."
+      }
+    },
+    "qa/agent-research:auso/mechanism": {
+      "source_sha256": "a057e3a29913c8368d296020d87cd3c0e9b6adb7b938ad21c857483016ce60f0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why bound action-level JSD weighting and preserve the original trajectory advantage's sign?",
+        "answer": "Distribution differences with and without skills show action sensitivity, not whether the action benefited. Preserve the outcome-advantage sign so local weights only adjust credit magnitude and a highly divergent step in a failed trace does not become positive reward. Separate internalization, exploration, and utilization to reduce persistent external skill-context costs.",
+        "example": "If an action in a failed run heavily depends on a skill, it can receive stronger corrective learning, not a success reward merely for depending on that skill."
+      }
+    },
+    "qa/agent-research:auso/basics": {
+      "source_sha256": "ba9e4c349e0c9d54cd84f3f56efd8ac5ca2f3e0ce268632b3c7b420efa6309d4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does AUSO both internalize skills and retain an action-level skill utilization stage?",
+        "answer": "Retrieving external skills costs context, but fully internalized skills are harder to select per task. AUSO first uses skill-conditioned teachers for general internalization, then explores and compares action distributions with and without skills to adjust learning emphasis.",
+        "example": "Common steps can be learned into the policy while a complex action may still benefit from a particular skill hint."
+      }
+    },
+    "qa/agent-research:auso/comparison": {
+      "source_sha256": "693c7ac2603ead72a083557683037626ad56af4001673cb7f4fe3c8d97130b33",
+      "reviewed": true,
+      "fields": {
+        "question": "Do AUSO's action-level JSD and whole-trajectory success tell us the same thing?",
+        "answer": "Success describes the outcome of the whole process. Action-level differences show a particular step's sensitivity to skill conditioning. A large JSD does not establish causal benefit; combine it with outcomes and bounded weighting rather than equating divergence with improvement.",
+        "example": "Only one tool choice in a successful trajectory may really be affected by the skill."
+      }
+    },
+    "qa/agent-research:auso/implementation": {
+      "source_sha256": "6608244455139fe20ef168f3f5478cc2a792b4051f7f423e86205b15f1e58523",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compare skill-conditioned and unconditioned policies at the same h_t and action-distribution granularity?",
+        "answer": "Changing other context confounds JSD. Compare the distributions at the same action boundary, and verify that actual w is nonnegative and bounded. Writing 1±β alone does not ensure the advantage sign is preserved.",
+        "example": "If one distribution sees a tool result and the other does not, the difference cannot be attributed only to skill S."
+      }
+    },
+    "qa/agent-research:sapo/mechanism": {
+      "source_sha256": "00efbbdec7498207cedaa4953701b0154b891e410a25fa0fec6f288f5ee861df",
+      "reviewed": true,
+      "fields": {
+        "question": "Why specify different causal boundaries when one autoregressive backbone outputs both policy and value?",
+        "answer": "Action probabilities use only visible history before the decision, and value estimates must match the correct time. Post-action observations can leak future information into advantages. A shared backbone saves structure, but PPO, SARSA, and GAE still need state/action alignment; a single rollout does not remove bootstrap and termination semantics.",
+        "example": "The value before a command cannot already see the command's passing test result. Such credit would be precise only because the future leaked."
+      }
+    },
+    "qa/agent-research:sapo/basics": {
+      "source_sha256": "830b6c6b9f1ae2b27e0bf831828eb173399ef142f39debd0477c8f109c6ea2d8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does SAPO use one autoregressive backbone for policy and value?",
+        "answer": "A shared backbone reads action decisions and value signals at different causal positions and combines PPO, on-policy SARSA, and trajectory GAE. Sharing parameters does not erase the different input boundaries.",
+        "example": "Policy information available before action generation and later information permitted for value estimates must follow the protocol separately."
+      }
+    },
+    "qa/agent-research:sapo/comparison": {
+      "source_sha256": "d3ec9e9e1461881e67c737e94734e48b6ad5bae8245fc18ae136b05a3cacb337",
+      "reviewed": true,
+      "fields": {
+        "question": "How does single-rollout optimization differ from sampling many branches at one state for group comparisons?",
+        "answer": "SAPO organizes policy, value, and temporal advantage from a single on-policy trajectory. Branch-group comparison needs multiple rollouts. Data requirements, value estimation, and credit assignment differ, regardless of whether final success rates match.",
+        "example": "An executed trajectory does not give the actual returns of untried alternatives at the same state."
+      }
+    },
+    "qa/agent-research:sapo/implementation": {
+      "source_sha256": "5bead4539ae7f9802ccb47702d824a7328f12bfbbba00d88363c4ac8af771f5c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain trajectory boundaries when calculating GAE instead of concatenating episodes?",
+        "answer": "Advantages accumulate later TD residuals. Concatenating episodes would propagate another task's rewards into the current one. Respect terminal boundaries for bootstrapping and accumulation. The deterministic local mini-suite is not a browser run or full RL training.",
+        "example": "The first record after task A ends belongs to B and is not A's future reward."
+      }
+    },
+    "qa/agent-research:spade/mechanism": {
+      "source_sha256": "2feba85b76eb04e2b4a122de6393726acd3041f9cf1b8512d1cc033c8ca17cff",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use hinted versus unhinted regret for the environment designer rather than simply maximizing agent failure?",
+        "answer": "Failure alone can reward impossible or overly hard environments. A hint that substantially improves a difficult unhinted outcome identifies a more learnable frontier. Environments must still execute, and privileged information stays in training comparisons rather than leaking into unhinted evaluation.",
+        "example": "A difficult maze solvable with direction hints can be useful. A maze with no exit fails both agents and should not score well just for being hard."
+      }
+    },
+    "qa/agent-research:spade/basics": {
+      "source_sha256": "03e150e31274ff65c3207b4b9b31fe16cc5c62fd28a90ed00dbe1e39889c9a73",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does SPADE use the same LLM as environment designer and inference agent?",
+        "answer": "The designer creates executable synthetic environments, the agent tries them, and the difference between hinted and unhinted rewards identifies frontier tasks. The aim is learnable challenges rather than arbitrary unsolvable problems.",
+        "example": "An environment that fails without hints but succeeds with them may be more informative than one that fails both conditions."
+      }
+    },
+    "qa/agent-research:spade/comparison": {
+      "source_sha256": "bd1f370aeb5538cde97f0d0a5c5eed8ed35ae5bc98469979e8264f1675b864da",
+      "reviewed": true,
+      "fields": {
+        "question": "Do maximizing failure rate and maximizing hint/no-hint regret favor the same environments?",
+        "answer": "No. Failure alone can favor unsolvable or meaningless environments. Regret also requires privileged help to improve return, distinguishing solvable but currently difficult tasks. It still needs real execution and feedback rather than a fixed difficulty label.",
+        "example": "An environment that scores zero for both agents has a high failure rate but zero regret."
+      }
+    },
+    "qa/agent-research:spade/implementation": {
+      "source_sha256": "6d740307b24e0928c053c4894325669a0ffc74d10c97db880d71eaee758bae7b",
+      "reviewed": true,
+      "fields": {
+        "question": "May a SPADE agent retain hints in the no-hint evaluation condition?",
+        "answer": "No. Isolate condition inputs. Privileged hints belong only to their training or comparison branch and must not enter the unhinted policy. Executable environment checks still matter; the local mini-suite did not run original external environments or large-model training.",
+        "example": "If an unhinted callback still receives the designer's saved plan, the return difference cannot be interpreted."
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:hope-hilbert/basics": {
+      "source_sha256": "b45f52190e6e2220b36e16a812d671bdf3d21ea1f6f004178b0daef82847a3af",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't HOPE simply remove neurons with small weights?",
+        "answer": "Scaling a ReLU neuron's input and BN scale up and its output weights down can leave the function unchanged. Raw weight magnitude is therefore unreliable. HOPE compares Hilbert-operator capacity from activation functions and output vectors under a Gaussian surrogate, not proven importance on real data.",
+        "example": "Example: Multiply the hidden activation by seven and divide output weights by seven. Predictions and functional capacity stay unchanged, although weight magnitude falls."
+      }
+    },
+    "qa/foundation-models:hope-hilbert/mechanism": {
+      "source_sha256": "26cbe5ff1c3c0bb1a431f5e506e0ae1a613e12590442b59f397f0a945185b00e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is an input function times an output vector a rank-one operator?",
+        "answer": "A neuron returns a scalar activation, which only changes the magnitude along one output-weight vector. The input function maps into one output direction, forming a rank-one tensor. Neuron inner products multiply an activation kernel by the output-vector inner product, not input-weight cosine alone.",
+        "example": "Example: Activation 0.2→0.8 changes 0.2w→0.8w, still along w. Changing the output vector changes functional similarity."
+      }
+    },
+    "qa/foundation-models:hope-hilbert/comparison": {
+      "source_sha256": "b655a987d823de03c3f476ef0c9edbebffd4f7bcf07855a09c1d147b138b490e",
+      "reviewed": true,
+      "fields": {
+        "question": "Is HOPE Hilbert compression the same as the Hope network in Sleep?",
+        "answer": "No. Hilbert Operator for Progressive Encoding analyzes frozen-network functional capacity and compresses with PRUNE, MERGE and EVICT. Sleep's Hope is a multi-frequency memory network updated in learning and offline consolidation. Local coverage is the former's kernel, pruning and one-step restoration components.",
+        "example": "Example: Scoring a frozen ResNet's neurons for removal is not teaching a language model during sleep."
+      }
+    },
+    "qa/foundation-models:hope-hilbert/implementation": {
+      "source_sha256": "cd8c87e92d703522b6213c47c4dd3d7f175885989c24cdffc08923995da0bbe9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why freeze initial parameter savings and adjust downstream BN mean during pruning?",
+        "answer": "The pruning priority divides distortion by initial parameter savings; recomputing from shrinking neighbor shapes changes the criterion. Remove the deleted activation's mean contribution from dense consumers' BN running means to avoid an extra shift. This does not preserve every prediction, and exact undo does not prove lossless accuracy.",
+        "example": "Example: Mean activation 0.8 and output weights [1,2] imply subtracting [0.8,1.6] from the consumer's BN mean, not adding it."
+      }
+    }
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:adadsf/basics": {
+      "source_sha256": "f0d0b812bf82d19b28c8bbcf346970bcc47fcdf8022d820ef8d67d2a02fffe0b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not give each AdaDSF layer the same token budget?",
+        "answer": "Layers transform inputs by different amounts. Dense-teacher similarities allocate more to stronger transformations; routers and sparse paths then align with the teacher.",
+        "example": "A nearly identity layer may need fewer active tokens than one that reorganizes features."
+      }
+    },
+    "qa/foundation-models:adadsf/comparison": {
+      "source_sha256": "e36c897810ec2f0729a2ed8f0709c17a4b179d560e184694aba2258de0867e0a",
+      "reviewed": true,
+      "fields": {
+        "question": "What controls should AdaDSF share with Uniform Mixture-of-Depths?",
+        "answer": "Match global budget, teacher initialization, alignment steps, and optimizer. Vary layerwise allocation. The local negative result shows adaptation is not necessarily better.",
+        "example": "Comparing 80% and 50% retention confounds strategy with compute."
+      }
+    },
+    "qa/foundation-models:adadsf/implementation": {
+      "source_sha256": "d532355f44775bb60750f11f732415c92d54de65b2e550a0e00178e71d53f17e",
+      "reviewed": true,
+      "fields": {
+        "question": "Should tokens outside layer top-k be removed?",
+        "answer": "No. Bypass the block with the residual and merge in original order. Correct layer ratios to the global budget. Dropping/reordering positions changes later attention and teacher alignment.",
+        "example": "Token five can skip one layer but stays at position five for the next."
+      }
+    },
+    "qa/foundation-models:blt/mechanism": {
+      "source_sha256": "b5e2438eb84dcd2a82022f78447ec8b0d2349380f68d56201a4f67227d3f1a73",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't BLT pay equal global compute for every byte?",
+        "answer": "Local modules handle bytes, entropy sets variable patch boundaries, and global attention operates on patches before local byte decoding. Easy spans can use longer patches. This saves global interactions, not byte handling, and is not fixed tokenization.",
+        "example": "Repeated patterns can produce fewer global patches than equally long unpredictable bytes."
+      }
+    },
+    "qa/foundation-models:blt/basics": {
+      "source_sha256": "d817fb551dacd3b9b6cf3c89e48b6ee4111ee96a5c4f69adef5615d265db0493",
+      "reviewed": true,
+      "fields": {
+        "question": "Why put patches between bytes and global attention?",
+        "answer": "Per-byte global compute is costly. Next-byte uncertainty forms variable patches and local encoders/decoders bridge them to byte inputs and outputs.",
+        "example": "Predictable bytes can group more densely than difficult spans."
+      }
+    },
+    "qa/foundation-models:blt/comparison": {
+      "source_sha256": "6781b426503893e7af3c75ff358415330310503e5752a72a521e99e1278b4fce",
+      "reviewed": true,
+      "fields": {
+        "question": "How do BLT boundaries differ from fixed tokenizer boundaries?",
+        "answer": "A fixed tokenizer uses predefined subword rules. BLT uses prefix-dependent next-byte entropy, changing compute granularity by uncertainty.",
+        "example": "The same character sequence may get different boundaries in different contexts."
+      }
+    },
+    "qa/foundation-models:blt/implementation": {
+      "source_sha256": "7a3432bcbfc5dfc419317659d223a6e9412fbecd9eefdb78a5bbc5a2e1e1d732",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't the local surprisal boundary path full BLT?",
+        "answer": "A 512-symbol tokenizer approximates bytes with learned boundaries and shared latents, but does not implement full local encoders/decoders or 8B training. Do not label the approximate alphabet raw bytes.",
+        "example": "Boundary-aware grouping alone does not supply the complete byte-to-byte architecture."
+      }
+    },
+    "qa/foundation-models:ce-guided-moe/mechanism": {
+      "source_sha256": "0148781f895ea5c56caaf44af67e0fdd6cef09703c3cd1c063c439cab769d38a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why predict expert error in addition to affinity?",
+        "answer": "Affinity need not reflect expected next-token loss. An error head attenuates high-predicted-error logits before top-k and learns from actual next-token CE. Route using predictions available before the answer, not true CE.",
+        "example": "Between similar experts, predicted error can promote the more suitable one without seeing the true next token online."
+      }
+    },
+    "qa/foundation-models:ce-guided-moe/basics": {
+      "source_sha256": "75b0d878d48a4fcdd2ea45e96fccbf9b96acbc6c08ece5350163999ab5fd7cde",
+      "reviewed": true,
+      "fields": {
+        "question": "What do affinity and token error express?",
+        "answer": "Affinity is original router preference, while predicted error estimates quality for this token. Correct logits before top-k and supervise the head with actual next-token CE.",
+        "example": "A strongly matched expert can still be bad at that token type."
+      }
+    },
+    "qa/foundation-models:ce-guided-moe/comparison": {
+      "source_sha256": "cd0063b28212b406c81e99136363660369a5cdcff4e2fc88b65abaf8c041a4f9",
+      "reviewed": true,
+      "fields": {
+        "question": "How does error-aware routing differ from load balancing?",
+        "answer": "Error-aware routing seeks token quality; balancing allocates compute evenly. Neither objective automatically supplies the other.",
+        "example": "Equal token counts can still send difficult cases to unsuitable experts."
+      }
+    },
+    "qa/foundation-models:ce-guided-moe/implementation": {
+      "source_sha256": "f6e89ecd158ed8506a2899215631ba6db7a26f64497657c38cd5b1bfbcbaebcd",
+      "reviewed": true,
+      "fields": {
+        "question": "Is applying the error penalty after top-k equivalent?",
+        "answer": "No. Pre-softmax correction can change which experts are selected. Post-selection only reweights winners. Use true next-token CE to supervise the error head, not arbitrary heuristics.",
+        "example": "A third-ranked expert can replace a high-error first choice only before the selection is final."
+      }
+    },
+    "qa/foundation-models:cots/mechanism": {
+      "source_sha256": "0bf1a6ebd666f2e13621b7468b822c51efa2abe0823dede281ea869480d10b2b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does CoTS preserve the sampled discrete trajectory under soft mixing?",
+        "answer": "Top-two competition sets the mixing fraction, capped at half, so the sampled embedding remains at least half even outside the soft set. End-of-reasoning disables soft mixing permanently; format guards can affect one step.",
+        "example": "Probabilities 0.6 and 0.4 give base mix 0.4 and keep 0.6 discrete; a larger gap weakens mixing."
+      }
+    },
+    "qa/foundation-models:cots/basics": {
+      "source_sha256": "6151b6a85a8800998bd6cdad3120ce1d5eefdee63d33b703f1d1b9dd08328ad2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep the sampled token rather than replace it with a soft token?",
+        "answer": "Soft embeddings express alternatives but may drift from the sampled trajectory. The discrete anchor keeps at least half the weight while top-two competition controls the remainder.",
+        "example": "Close candidates raise soft mixing without removing the sampled token."
+      }
+    },
+    "qa/foundation-models:cots/comparison": {
+      "source_sha256": "e1905cad0f0679b7bcf443c386a2655d5e1acca393e83a2fc10edc9929f26573",
+      "reviewed": true,
+      "fields": {
+        "question": "How does CoTS differ from averaging top-k embeddings?",
+        "answer": "Form a probability-weighted soft vector and mix it with the discrete anchor using top-two-dependent α. An unweighted mean ignores probabilities and anchoring; phase-lock controls eligibility.",
+        "example": "0.9/0.1 and 0.5/0.5 distributions should not produce the same uniform representation."
+      }
+    },
+    "qa/foundation-models:cots/implementation": {
+      "source_sha256": "d4254da5a0150db808c81ee2145a5c5d8a9648513ccec257c970a6ef2ad3af30",
+      "reviewed": true,
+      "fields": {
+        "question": "Can soft mixing restart after the end-of-reasoning marker?",
+        "answer": "No. Per-example phase-lock is irreversible starting at the step emitting </think>. One-step format protection differs. Keep the discrete anchor even when it falls outside top-k.",
+        "example": "Later close probabilities do not reopen mixing after a sample finishes reasoning."
+      }
+    },
+    "qa/foundation-models:elastic-expert-routing/mechanism": {
+      "source_sha256": "f5e9827361ac08679f20c9f020601989cdeb5ea1ff30a49164da639097c5278b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does elastic routing preserve expected compute with a random expert count?",
+        "answer": "A legal symmetric support centered at k balances more and fewer experts, keeping expectation k. Boundary experts get real sparse exposure. Deployment fixes k; training load counts actual dispatch, not fixed row length.",
+        "example": "Equal probabilities for one, two, or three experts average two, but selecting three really costs more than one."
+      }
+    },
+    "qa/foundation-models:elastic-expert-routing/basics": {
+      "source_sha256": "54e39da9fc7370d021f1220100c80a8e3af5103b983f5294e27f7ca79922cd12",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the fixed top-k exposure problem?",
+        "answer": "Experts just below rank k rarely receive the actual token computation and training. Elastic budgets give near-boundary experts chances before fixed-k deployment.",
+        "example": "At k=2, a frequently third-ranked expert can be useful but rarely trained on those tokens."
+      }
+    },
+    "qa/foundation-models:elastic-expert-routing/comparison": {
+      "source_sha256": "6c51d97782d926ac451ca1315170dc613bdec7a3a5d0795a9e3395b5c8ef7832",
+      "reviewed": true,
+      "fields": {
+        "question": "How does elastic budget perturbation differ from raising fixed k?",
+        "answer": "Raising k always spends more. Symmetric perturbation preserves expected k while changing exposure. Match parameters, initialization, and average dispatch before comparing.",
+        "example": "Equal chances of two and four experts average three, not four every time."
+      }
+    },
+    "qa/foundation-models:elastic-expert-routing/implementation": {
+      "source_sha256": "cd426b4d05bcac913082b95cbf991f9d9ae3bb35bfbb9fb82b018adda9a25a9b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not truncate one side of the discrete Gaussian arbitrarily?",
+        "answer": "Keep support symmetric around k and legal to preserve E[r]=k. Execute only selected experts, count actual loads, and fix k at inference.",
+        "example": "Near the upper limit, deleting only the high side lowers mean budget."
+      }
+    },
+    "qa/foundation-models:engram/mechanism": {
+      "source_sha256": "d0c89839dc67d3424fafceebbc3893ae65344e93061658cd08fb51120255028a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is Engram conditional memory rather than another set of MoE experts?",
+        "answer": "MoE conditionally executes networks; Engram hashes normalized n-grams to deterministic table lookups and gates them into state. Stored patterns complement compositional compute, but memory size, collisions, bandwidth, and fusion cost remain.",
+        "example": "A common phrase can fetch a vector, but context still determines its meaning here."
+      }
+    },
+    "qa/foundation-models:engram/basics": {
+      "source_sha256": "542a3a6bcaf2c59808972ef529907158e465792e38c237029221f9ede9246eba",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add lookup memory for frequent local patterns?",
+        "answer": "Reconstructing common patterns repeatedly consumes compute. A learned n-gram table provides gated cached representations so attention and FFNs can focus on combinations.",
+        "example": "Look up a common phrase locally and compute novel combinations in the backbone."
+      }
+    },
+    "qa/foundation-models:engram/comparison": {
+      "source_sha256": "6b5c14e5800e9899828347d8722517a2283fdd4af54b2664a5965dbdde70219a",
+      "reviewed": true,
+      "fields": {
+        "question": "How do Engram and MoE increase different resources?",
+        "answer": "MoE routes compute experts. Engram reads embeddings by n-gram address. O(1) lookup still requires storing, training, and moving table values.",
+        "example": "Neural expert execution differs from fetching a phrase vector."
+      }
+    },
+    "qa/foundation-models:engram/implementation": {
+      "source_sha256": "bf1a3db2816a7e6a6d407fab55bd3b4bf09ae3fa6ade1ef61f5849afed7375fe",
+      "reviewed": true,
+      "fields": {
+        "question": "Should Engram replace h_t with retrieved m_t?",
+        "answer": "No. h′=h+sigmoid(W[h;m])⊙m preserves the residual and gates by context. Record bucket count, n-gram orders, and added-parameter training budget; preserve small-budget negative results.",
+        "example": "A poorly trained memory should not overwrite the original hidden state unconditionally."
+      }
+    },
+    "qa/foundation-models:lift-feedback/mechanism": {
+      "source_sha256": "f3a5db40596240063a7ed748a14c0adb542f70079268639c205990c5a4cf96ab",
+      "reviewed": true,
+      "fields": {
+        "question": "Why predict next token and next continuous state in LIFT, and where does inference state come from?",
+        "answer": "Training turns the teacher's top-k next-token distribution into a continuous input and jointly supervises token and state. This relays deeper signals beyond one token. Inference feeds back the model's own state, not the teacher's future distribution.",
+        "example": "A sampled word can be accompanied by other likely alternatives in state; test accumulation of model feedback errors."
+      }
+    },
+    "qa/foundation-models:lift-feedback/basics": {
+      "source_sha256": "99e5ff2966dfd16600517a28e4457a87ef2b3d0743bd57e691b6e4875dbc7811",
+      "reviewed": true,
+      "fields": {
+        "question": "What carries deep information back to the next shallow step in LIFT?",
+        "answer": "A continuous state accompanies the next discrete token. Training uses teacher top-k states and predicts token and next state; inference uses self-predicted states.",
+        "example": "Pass a richer distribution alongside the generated word."
+      }
+    }
+  }
+}

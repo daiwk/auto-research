@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:clean-rm/basics": {
+      "source_sha256": "fb213d2af0fc54120b6f11073e00261216babac1265cfe496abd123813bf69e1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish two preference-flip rates rather than estimate one overall error rate?",
+        "answer": "True positives flipped negative and true negatives flipped positive can have different causes. Estimating each conditional rate corrects observed-label risks separately; one error rate hides asymmetry.",
+        "example": "A length-biased annotator may reject correct short answers at a different rate than they accept incorrect long answers."
+      }
+    },
+    "qa/post-training:clean-rm/comparison": {
+      "source_sha256": "3cb493f05571e47b89c4ff3d8786e76b0c03155f62a4010f3140eca18cfe61ca",
+      "reviewed": true,
+      "fields": {
+        "question": "How does freezing the CleanRM noise estimator differ from jointly updating it with the reward model?",
+        "answer": "A frozen estimator defines a fixed corrected risk. Joint updates move its coefficients and can lower loss by changing the explanation of noise. This is a different objective without the same fixed-rate risk interpretation.",
+        "example": "Estimate label flips before training; don't reinterpret temporarily misclassified samples as noisier."
+      }
+    },
+    "qa/post-training:clean-rm/implementation": {
+      "source_sha256": "d7a61e5b2cd839ee258a861ba9f5ffeaa497dbe980d3fed31d04d35d1dc6d27b",
+      "reviewed": true,
+      "fields": {
+        "question": "Should CleanRM clamp recovered labels or corrected losses to their conventional ranges?",
+        "answer": "No. Recovered preferences can fall outside [0,1] and corrected risks are signed. Clamping changes the debiasing objective. Require rates summing to less than one and freeze the estimator during RM updates.",
+        "example": "A valid negative corrected loss should not be reset to zero for prettier curves."
+      }
+    },
+    "qa/post-training:clean-rm/mechanism": {
+      "source_sha256": "befb40712ad39fc4469ba7afa54783da3f4d03dc27254b9bfd92a9df000d6482",
+      "reviewed": true,
+      "fields": {
+        "question": "Why match semantics as well as recovered preference, and may negative risk be clipped?",
+        "answer": "Matching preference proportions alone can align semantically unrelated examples. Joint optimal transport uses representation distances and recovered preferences to estimate both noise rates. Fixed corrected loss can be negative; clipping changes its expectation, and inaccurate rates also break unbiasedness.",
+        "example": "Two domains can have half positive labels while one flips them often; use semantic representations to expose the difference."
+      }
+    },
+    "qa/post-training:gaw-po/basics": {
+      "source_sha256": "4126a52b2e44503ba25530eeb3df5f0dbbda942ed6e1bf1ecf22933a58aa24f2",
+      "reviewed": true,
+      "fields": {
+        "question": "Does GAW-PO label complete replies or each token as preferred/rejected?",
+        "answer": "Labels compare two replies to one prompt; there is no per-token annotation. Rejected replies can contain good steps or shared wording. Gradient alignment supplies credit at a finer granularity, not additional human token truth.",
+        "example": "If both answers start with the correct equation and differ only at the end, the rejection does not label the shared equation wrong."
+      }
+    },
+    "qa/post-training:gaw-po/comparison": {
+      "source_sha256": "b87fba601641a39ca01424ce1cfaad34ab4a6aed30d10a7d74517000d34353a6",
+      "reviewed": true,
+      "fields": {
+        "question": "How does GAW-PO gradient alignment differ from weighting by token likelihood?",
+        "answer": "Likelihood measures how often the current model produces a token. Alignment measures whether penalizing it conflicts with preferred updates. Common tokens can be irrelevant and rare tokens helpful; this is a mechanism comparison, not an empirical ranking.",
+        "example": "Do not punish a rare term merely for low probability if it supports a correct explanation."
+      }
+    },
+    "qa/post-training:gaw-po/implementation": {
+      "source_sha256": "0e200596f9c68b83bba1ec5ac9ed2d289f0e39e5eee43e3294b2a9f10f0a7bef",
+      "reviewed": true,
+      "fields": {
+        "question": "How does GAW-PO's positive-part cosine handle aligned, orthogonal and opposite gradients?",
+        "answer": "Weight is one minus positive cosine. Perfect alignment approaches zero; orthogonal/opposite directions keep weight one; partial positive alignment reduces penalty. Actual gradients are required. Local evidence is only the weight kernel.",
+        "example": "A negative cosine is first set to zero, so the weight does not exceed one."
+      }
+    },
+    "qa/post-training:gaw-po/mechanism": {
+      "source_sha256": "608aec80488bc707ea9ae875fc66005aaa98d5dcb771a524b40a834e2e26e699",
+      "reviewed": true,
+      "fields": {
+        "question": "Why penalize rejected-response tokens less if they support the preferred direction?",
+        "answer": "A whole response's rejection does not condemn all tokens. Smaller negative weights for aligned gradients avoid suppressing shared useful steps. This changes credit, not factual verification.",
+        "example": "If both openings are right and only the rejected conclusion is wrong, an aligned opening needn't receive the same penalty."
+      }
+    },
+    "qa/post-training:compo/basics": {
+      "source_sha256": "5beb1874f51d2fca1fff7b02014b860e82974164a1cc170ab7868058b11b562b",
+      "reviewed": true,
+      "fields": {
+        "question": "Does COMPO's black-box optimization change prompts instead of weights?",
+        "answer": "No. It updates model parameters without backpropagating through the preference objective. It needs parameter perturbation and an objective comparator. Prompt-only remote access does not satisfy that requirement.",
+        "example": "Load and compare two nearby checkpoints; editing chat prompts is another search."
+      }
+    },
+    "qa/post-training:compo/comparison": {
+      "source_sha256": "bb4cba5c78f2ffd999b6cdd2737d85e48f5c024b87502f4028df45a8dc632558",
+      "reviewed": true,
+      "fields": {
+        "question": "What information do COMPO's zeroth-order comparisons and first-order backpropagation need?",
+        "answer": "First order needs a differentiable objective and backward access; zeroth order ranks perturbed evaluations. Repeated comparisons still cost compute and noise affects direction; no backward pass does not imply free or more accurate.",
+        "example": "A preference judge can rank two variants without returning gradients for any layer."
+      }
+    },
+    "qa/post-training:compo/implementation": {
+      "source_sha256": "75b8379913b67eef1a9b7d0aecb2fc5b97fd0cc1258a43871e4ffe854bd274ef",
+      "reviewed": true,
+      "fields": {
+        "question": "Why threshold each coordinate after a COMPO one-bit update?",
+        "answer": "One comparison gives coarse information and weak coordinates may reflect noise. Thresholding suppresses them but can remove small genuine signals. Local tests cover comparison oracle and threshold kernel, not LLM alignment.",
+        "example": "A coordinate consistently near zero may be suppressed, not automatically deemed useless."
+      }
+    },
+    "qa/post-training:compo/mechanism": {
+      "source_sha256": "3493e5d7fae11b1a62dd76e484217c452949935b5920f85dec9e419430993ec7",
+      "reviewed": true,
+      "fields": {
+        "question": "How does COMPO infer a direction from paired perturbations, and why threshold it?",
+        "answer": "Which of positive and negative perturbations performs better on the same objective gives a directional sign. One-bit feedback is noisy, so coordinate thresholds suppress unreliable components. Objective sampling and evaluation still cost resources.",
+        "example": "Compare small forward/backward perturbations under fixed preferences; leave unreliable coordinates unchanged."
+      }
+    },
+    "qa/post-training:sd-dpo/basics": {
+      "source_sha256": "f3b1d1b7eb266781a01a16848203b567abecfeb059fbeac16ab239232f5518bb",
+      "reviewed": true,
+      "fields": {
+        "question": "Does Style-Debiased DPO update knowledge or enforce one writing style?",
+        "answer": "Synthetic preferences should update knowledge; stylistic differences are confounders. Concision or ornament is not factual truth. That distinction motivates factual checks and group balancing rather than stylistic personalization.",
+        "example": "The same knowledge may be expressed in a sentence or a paragraph; both should stay correct."
+      }
+    },
+    "qa/post-training:sd-dpo/comparison": {
+      "source_sha256": "c8c2ae6d54848ced51d128f2355c85dc41efe23bc84d7c5e8a10a3d73e8f7b17",
+      "reviewed": true,
+      "fields": {
+        "question": "How does SD-DPO reversal differ from dropping stylistic pairs?",
+        "answer": "Dropping removes their contribution. Reversing with group-proportion weighting seeks to cancel an existing style direction. Factual correctness must be assessed first, or reversal could promote wrong answers.",
+        "example": "Check both formal and colloquial variants for correctness before balancing their style signals."
+      }
+    },
+    "qa/post-training:sd-dpo/implementation": {
+      "source_sha256": "7e11ae97a7e33498348ada7179fe8880c22e42ea98398a485376d9095baee261",
+      "reviewed": true,
+      "fields": {
+        "question": "Do local SD-DPO factual scores establish that a real judge recognizes truth?",
+        "answer": "No. Fixed inputs supply the scores. The code tests reversal and group-balanced loss under given labels, not automated factual judging or knowledge gains.",
+        "example": "If the test declares an answer factual, correct reversal validates the rule, not identification of the fact."
+      }
+    },
+    "qa/post-training:sd-dpo/mechanism": {
+      "source_sha256": "85cffc295acdaae55b1274834552e93594254667b92c85ecb48311aae5224ef1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reverse a preference if the rejected answer is factual?",
+        "answer": "Synthetic preferences can mislabel stylistic differences as knowledge errors, causing ordinary DPO to suppress correct expressions. Identify those replies and reverse their preferences with group-ratio weights to cancel style gradients. Reliable factual assessment and grouping are prerequisites.",
+        "example": "If both replies are factual but one is more courteous, directly following the label may teach courtesy rather than knowledge."
+      }
+    },
+    "qa/post-training:normalized-dpo/basics": {
+      "source_sha256": "4fa66144990873a3053e1c3adb761b8296c68e49b33e2963f8d6a04061f2a3a8",
+      "reviewed": true,
+      "fields": {
+        "question": "Is Normalized DPO's margin a human score gap or a model-relative preference?",
+        "answer": "It is the model-side value in the loss. Data identify the winner; policy and reference probabilities determine the margin and beta sets its scale in the preference curve. Normalization does not rewrite labels.",
+        "example": "A human says A beats B without saying by three points; current probabilities still give a margin."
+      }
+    },
+    "qa/post-training:normalized-dpo/comparison": {
+      "source_sha256": "eb72119df427012e57c4f86f07f45177f82c943aaa9b8de56f8b8d0d159838e1",
+      "reviewed": true,
+      "fields": {
+        "question": "Is Normalized DPO equivalent to changing the learning rate?",
+        "answer": "Centering and dividing by beta rescales loss gradients. Learning rate scales the optimizer's update. They can be related under simple conditions, but momentum/adaptive statistics can change the trajectory.",
+        "example": "A second-moment optimizer need not maintain identical state under external step-size and loss scaling."
+      }
+    },
+    "qa/post-training:normalized-dpo/implementation": {
+      "source_sha256": "5aa3b057ce6bf24ff4b0b42a60e5187e50e5b8c4a66f3b35aa21767dad8f33a9",
+      "reviewed": true,
+      "fields": {
+        "question": "How can normalized DPO avoid zero-over-zero for tiny beta?",
+        "answer": "Compute centered softplus minus log 2 stably or use its small-beta limit. The gradient is negative sigmoid and does not vanish from an extra beta factor. Test the limit rather than substituting zero in the quotient. Candidate checks are not full training.",
+        "example": "Confirm finite limiting loss and gradient instead of catching exceptions and returning zero."
+      }
+    },
+    "qa/post-training:normalized-dpo/mechanism": {
+      "source_sha256": "144b73e2d4f536d2d539e52abda0e9fe978f78289a0808d536df945ea414c2d0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can dividing by beta change gradients without moving Normalized DPO's optimum?",
+        "answer": "At fixed positive beta, subtracting a constant and multiplying by a positive scalar preserve optima. Ordinary DPO couples preference-curve scale with update size; dividing centered softplus by beta removes an extra beta in the margin gradient.",
+        "example": "Reducing beta can weaken ordinary updates; normalization separates curve scale from step-size effects."
+      }
+    },
+    "qa/post-training:grip/basics": {
+      "source_sha256": "c4abd714726fe1ca17fea2fb375bdceb8500a11fd897bb4ea4a52414399086d1",
+      "reviewed": true,
+      "fields": {
+        "question": "Does GRIP produce one merged model or run thinking and instruct models on every request?",
+        "answer": "It interpolates corresponding aligned parameters into one model and runs that model. It does not select experts online or generate two answers and vote. Arbitrary architectures cannot be combined without matching weights.",
+        "example": "Combine same-shape layer weights before one forward pass, not two responses followed by length selection."
+      }
+    },
+    "qa/post-training:grip/comparison": {
+      "source_sha256": "7b7e12a00bc4b97e28f5520dc81b20f50eaad5d0f6a269d31b3da813fca5b73a",
+      "reviewed": true,
+      "fields": {
+        "question": "How does GRIP interpolation differ from lowering inference temperature?",
+        "answer": "Weight interpolation changes distributions across contexts. Temperature rescales existing logits for one forward pass. Both can change length without representing the same mechanism or combining learned capabilities.",
+        "example": "Merging can change the favored reasoning step; lower temperature generally emphasizes already higher logits."
+      }
+    },
+    "qa/post-training:grip/implementation": {
+      "source_sha256": "996a46da76e1f80868326bad4fca1967610d267a8b1a3ddaf2e68160d58a1697",
+      "reviewed": true,
+      "fields": {
+        "question": "What shape and evaluation constraints apply to GRIP interpolation?",
+        "answer": "Weight tensors and coefficients must align at the stated granularity; broadcasting must match layer or parameter semantics. Rewards must follow the allowed data protocol. A deterministic candidate diagnostic does not prove paper-checkpoint reasoning or length gains.",
+        "example": "Do not broadcast layer coefficients as vocabulary-column coefficients merely because multiplication works."
+      }
+    },
+    "qa/post-training:grip/mechanism": {
+      "source_sha256": "73050332be032c5759f653c00fff1a85999dda01d850ad091a0cdb5d61b322f6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why learn fine-grained interpolation instead of one ratio for thinking and instruct weights?",
+        "answer": "Layers and parameters serve different capabilities, so a uniform mix can weaken reasoning and brevity. Reward-guided coefficients vary across weights. The local probability interpolation is a proxy, not the paper's weight-combination validation.",
+        "example": "Preserve computation habits while reducing redundant explanation by using different coefficients across parameter regions."
+      }
+    }
+  }
+}

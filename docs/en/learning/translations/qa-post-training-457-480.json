@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:process-supervision/basics": {
+      "source_sha256": "231febf67e2da27482aa85c57661a56479bfdc0c9dc028bd03856e78d1c8bd8f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do process supervision methods label steps rather than only outcomes?",
+        "answer": "Failure doesn't identify the broken step. Local labels provide finer learning and selection, requiring annotations or reliable process judges. Do not broadcast terminal correctness as step truth.",
+        "example": "If step three fails, steps one and two needn't be marked wrong."
+      }
+    },
+    "qa/post-training:process-supervision/comparison": {
+      "source_sha256": "6a4a75b63c429e2840a91efaaff4d24bd67e9cae6ab4feee1ddc193609c91409",
+      "reviewed": true,
+      "fields": {
+        "question": "What tradeoff separates active uncertain-step labeling from random labeling?",
+        "answer": "Active selection spends budget on hard judgments; random selection better reflects the original distribution. Uncertainty isn't importance and selection bias/label quality remain.",
+        "example": "An ambiguous formatting step can be less valuable to review than a key mathematical transition."
+      }
+    },
+    "qa/post-training:process-supervision/implementation": {
+      "source_sha256": "6c22773ebb36f66a2e04134661ccb430ac32f1fe2cb06c45865239adaa1b9955",
+      "reviewed": true,
+      "fields": {
+        "question": "How separate PRM labels and predictions?",
+        "answer": "Step truth is fixed supervision, probabilities differentiable, and entropy used only in allowed acquisition. Test step labels cannot select training samples. Candidate budget tests mechanism only.",
+        "example": "Training on observed test-label errors leaks evaluation."
+      }
+    },
+    "qa/post-training:process-supervision/mechanism": {
+      "source_sha256": "f7ac0d14c1109b2998d8e558e96a04c09a22a501d781b45733ffbd308f76c811",
+      "reviewed": true,
+      "fields": {
+        "question": "Why actively label uncertain steps instead of only checking final answers?",
+        "answer": "Final outcomes don't locate early mistakes. Step labels provide detailed reward-model supervision; uncertainty targets current ambiguous decisions but isn't a universal error proxy. Control candidate/evaluation budgets; no full local annotation dataset.",
+        "example": "Review an uncertain key algebraic move rather than repeatedly labeling obvious format."
+      }
+    },
+    "qa/post-training:opst/basics": {
+      "source_sha256": "5949d59680e4b4b461f76dd357d979b4a08a1ee3ec0a874f3666e4b65fedd254",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does OPST generate both problems and privileged clues?",
+        "answer": "Reduce reliance on human problem banks and give teacher extra solving context while students generate from prompts only. Validate generated tasks through independent re-answering, meaning-preserving rewrites and difficulty filtering.",
+        "example": "Resolve a generated problem independently to reject inconsistent prompts or answers."
+      }
+    },
+    "qa/post-training:opst/comparison": {
+      "source_sha256": "07878151084151a1f1e0c883e657795cfd8b988f4e1e01e3a43937c6d1122e18",
+      "reviewed": true,
+      "fields": {
+        "question": "How does OPST easy filtering differ from removing student consensus?",
+        "answer": "Only unanimous matches to the candidate answer are too easy. Unanimous disagreement may signal a gap or bad problem. Removing all consensus changes the gate.",
+        "example": "Identical wrong results don't establish mastery."
+      }
+    },
+    "qa/post-training:opst/implementation": {
+      "source_sha256": "76bc6e4558a20a5c643766937ae123c8e23fc426fd30eec33b92050313d4f00b",
+      "reviewed": true,
+      "fields": {
+        "question": "Is OPST EMA β old-teacher momentum or new-student weight?",
+        "answer": "It is new-student weight: after each student update, use (1−β) old teacher + β new student. Normalize per response then average equally. Document formula ambiguity instead of claiming unquestioned exactness.",
+        "example": "Small β means slowly absorb the student, not almost replace the teacher."
+      }
+    },
+    "qa/post-training:opst/mechanism": {
+      "source_sha256": "2c544390a547f1259fa6f34f1cb93ba9f31c64664fc6adf3b7f7d04e322502fb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reject as easy only unanimous matches to the verified candidate answer?",
+        "answer": "Agreement alone doesn't show mastery. All students can agree on the wrong answer. Privileged clues only guide teacher scoring on student prefixes; self-generated problems need independent re-answering and meaning-preserving checks.",
+        "example": "A unanimous wrong number remains useful until compared with the verified candidate answer."
+      }
+    },
+    "qa/post-training:userarena-optd/basics": {
+      "source_sha256": "48a8e2f38c853b31d43c211674cbba596dc67e39386b29996ab3b35a8f8b05de",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does UserArena report more than next-action accuracy?",
+        "answer": "Simulation should preserve trajectory dynamics, cross-session preferences and cohort differences, and reproduce differences between recommendation policies. Local hits aren't whole-user fidelity.",
+        "example": "Good click prediction with wrong long-run interest drift can still distort policy evaluation."
+      }
+    },
+    "qa/post-training:userarena-optd/comparison": {
+      "source_sha256": "3fc1cc2fef06c4561b3de831d15dbebd02a7c7cd53290f72e24d8acd9030ab2c",
+      "reviewed": true,
+      "fields": {
+        "question": "How does OPTD teacher intent differ from giving the student future trajectories?",
+        "answer": "Only frozen teacher sees abstract intent, excluding concrete action/item identity, price and outcome. Student continues its own prefixes. Trust regions bound effects but don't prove no extraction leakage.",
+        "example": "Lightweight-item preference is allowed, next clicked product is not."
+      }
+    },
+    "qa/post-training:userarena-optd/implementation": {
+      "source_sha256": "ca96dc6a9a7a858147b97411cf76564ff79dab05a85819c71ce29fed9ea6b8b1",
+      "reviewed": true,
+      "fields": {
+        "question": "May OPTD grounding replace gold tokens on a student rollout prefix?",
+        "answer": "No. Grounding uses separate true-prefix logits; teacher views score identical student prefixes. Use feasible lower endpoint per token with KL from mixed to no-intent teacher, not batch-mean reverse KL.",
+        "example": "Injecting the actual next action after a divergent student history is not teacher forcing on a real trajectory."
+      }
+    },
+    "qa/post-training:userarena-optd/mechanism": {
+      "source_sha256": "9addad78cd084ded259c8dd4d83d9e02b68bd11a23c9cfe291efa3747c6eb711",
+      "reviewed": true,
+      "fields": {
+        "question": "Why give only teacher abstract intent and bound it token by token?",
+        "answer": "Whole trajectories leak future products/actions. Filter abstract preferences for teacher only, preserving student deployment input. Compare teacher views on the same prefix, constrain added guidance and ground on actual responses. KL can't replace leakage checks.",
+        "example": "Durability preference may be available; next item IDs and purchase outcomes may not."
+      }
+    },
+    "qa/post-training:gift/basics": {
+      "source_sha256": "fc17bf0cda8078e5415c7ff4bc4ca090e67de77d19cb3d1c2c6c053b07f155fd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why inspect RL and distillation gradient geometry in GIFT?",
+        "answer": "Teacher signal can conflict or add an orthogonal direction. Select by local logit gradients to reduce conflict and narrow supervision rather than imitate every token.",
+        "example": "Teacher format preferences can oppose task reward, so inspect the directions."
+      }
+    },
+    "qa/post-training:gift/comparison": {
+      "source_sha256": "9037675e5a483d2109af30cea3438beafc6ccc85fce5098213e7dcf7f0818a15",
+      "reviewed": true,
+      "fields": {
+        "question": "How does GIFT token selection differ from projecting teacher gradients?",
+        "answer": "Selected tokens retain original distillation losses; gradients aren't rotated. Exact quotas may admit weak conflicts, so there is no universal finite-step safety guarantee.",
+        "example": "An accepted position uses its original loss, not a geometrically replaced gradient."
+      }
+    },
+    "qa/post-training:gift/implementation": {
+      "source_sha256": "11fa430f377de3b26157d35a4240b0109b2c7d99f0952e67d4377784ca872628",
+      "reviewed": true,
+      "fields": {
+        "question": "Can GIFT renormalize by selected token count?",
+        "answer": "No. Divide by all valid tokens. Quotas depend on subbatch valid/eligible sets. Follow explicit handling for missing RL and zero teacher gradients rather than automatically treating them as novel directions.",
+        "example": "Selecting half and dividing by half doubles retained contribution."
+      }
+    },
+    "qa/post-training:gift/mechanism": {
+      "source_sha256": "fed53793a2285469165a69e57f731118ae34b36799587972d1182f51316a5f3e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't gradient-based GIFT selection promise permanent absence of conflict?",
+        "answer": "Prioritize nonconflicting and orthogonally informative tokens; quotas can require weaker conflicts. Selection isn't projection, and normalize by all valid tokens. Local logit geometry doesn't guarantee finite shared-parameter updates.",
+        "example": "A subbatch quota larger than conflict-free availability can select the least conflicting extras."
+      }
+    },
+    "qa/post-training:projected-distillation/basics": {
+      "source_sha256": "2793a512f1b180f6cd461e333b2ee03472ca11dd2867c0c9d8f4d096ac7a2315",
+      "reviewed": true,
+      "fields": {
+        "question": "Why minimally repair a wrong student response before projected distillation?",
+        "answer": "Expert prose can be far from student distribution. Minimal edits retain current behavior while correcting what is needed, with independent verification. This is an approximation, not exact most-likely correct output.",
+        "example": "Correct one wrong symbol instead of replacing the whole derivation."
+      }
+    },
+    "qa/post-training:projected-distillation/comparison": {
+      "source_sha256": "527069ce5a33df2d8e6953f6614bdb57d5930dbd9be0bc4df13cacbbae6a4e80",
+      "reviewed": true,
+      "fields": {
+        "question": "How does edited-span DPO differ from SFT on a complete repaired answer?",
+        "answer": "Span DPO contrasts only original and verified edit positions; unchanged text is not directly included. Full SFT is for student-generated successes, not projector repairs.",
+        "example": "An externally repaired reply is not an autonomous success from this round."
+      }
+    },
+    "qa/post-training:projected-distillation/implementation": {
+      "source_sha256": "399b14611e99ddadaded7b33428fa969de3fe6606c62c3df35737d9a249d8f0a",
+      "reviewed": true,
+      "fields": {
+        "question": "Can edited-span scoring drop the preceding text?",
+        "answer": "No. Score each edit under its own complete causal prefix, summing span logp without length averaging. One insertion/deletion side may be empty but pair needs an edit. Zero direct gradient elsewhere does not protect shared weights.",
+        "example": "Editing step three changes step four's context; don't borrow another response's prefix."
+      }
+    },
+    "qa/post-training:projected-distillation/mechanism": {
+      "source_sha256": "4626c53503de46efac50c1ed387a54a0e23e83f30edecb05ebf92af5e4b7f5f3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why restrict DPO to edits and SFT to student successes?",
+        "answer": "Minimal repair preserves generated structure and focuses preference credit on corrections. Repaired and independently correct responses have different provenance. Score both sides under their full causal contexts; shared parameters can still change.",
+        "example": "If only the last operator is wrong, verify its replacement and contrast the edit rather than imitate all teacher wording."
+      }
+    },
+    "qa/post-training:optd/basics": {
+      "source_sha256": "148851f314c7a45422da90174e1ba2699b761c2cbb06990d1a800602ce029926",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't inter-layer OPTD only align final predictions?",
+        "answer": "Final agreement can hide different depth-wise revisions. Supervise shallow-to-deep log-probability increments and retain final OPD. This is prediction paths, not hidden-vector matching.",
+        "example": "Two models can end on A after very different intermediate changes."
+      }
+    },
+    "qa/post-training:optd/comparison": {
+      "source_sha256": "411770729ff648615a6bab0319c503a47ec6f06bbf5e14bc76cb6e48e1afd6c7",
+      "reviewed": true,
+      "fields": {
+        "question": "How does transition supervision differ from independent top-k at each layer?",
+        "answer": "Final student layer chooses fixed token identities for the entire path. Independent sets mix different objects when comparing increments.",
+        "example": "If shallow top is A and deep top B, subtracting their logp doesn't measure A's change."
+      }
+    },
+    "qa/post-training:optd/implementation": {
+      "source_sha256": "5c7d919d91c0eb7e39c761acbb67734df7f7f59dc8cd03898e39d1aaa7645912",
+      "reviewed": true,
+      "fields": {
+        "question": "Which OPTD increment endpoints receive gradients and how is practical scale handled?",
+        "answer": "Both adjacent student readouts are differentiable. Teacher, candidate weights and correction coefficients are frozen. Appendix sums transitions while main text averages; neither is exact reverse transition KL.",
+        "example": "A sum of three transitions cannot silently become a mean at the same objective scale."
+      }
+    },
+    "qa/post-training:optd/mechanism": {
+      "source_sha256": "60faf241d7370b88a0b6feab1ba9c134a59f9928d7516afcff67a506824283e8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why choose candidate tokens once at the final student layer?",
+        "answer": "Track the same predictions through depth. Independent top-k confounds identity with changes. Use full-vocabulary-normalized log-probability increments plus final OPD, with detach and destination-layer weights, not hidden MSE or exact transition KL.",
+        "example": "If shallow favors A and deep B, retain both identities to trace their rise/fall."
+      }
+    }
+  }
+}

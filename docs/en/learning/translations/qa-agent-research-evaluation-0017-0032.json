@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:redevoagent/basics": {
+      "source_sha256": "b630f71ed705d93875757eafebee51bbc83158992a638ac6091a33878b039e1a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does RedEvoAgent distill experience into skills rather than store whole traces?",
+        "answer": "Long traces contain noise and consume context. Readable abstract skills improve reuse, and tool credit focuses on decisive steps. Abstraction can lose detail, so skills require held-out validation before promotion.",
+        "example": "Extract 'verify permission boundaries first' from a long investigation rather than copying every irrelevant attempt."
+      }
+    },
+    "qa/agent-research:redevoagent/comparison": {
+      "source_sha256": "96c1e36bd3bfd67ad08e341b88f5628e2af948e1c92dd786b9b40eb6d2c82b29",
+      "reviewed": true,
+      "fields": {
+        "question": "How does attributing only decisive tools differ from crediting every tool in a successful trace?",
+        "answer": "Trace success does not mean each call contributed. Equal credit can fossilize irrelevant steps into skills. Decisive attribution retains experiences that change audit outcomes, reducing library noise. An attribution score does not establish a universal causal law.",
+        "example": "An irrelevant lookup before a decisive tool should not become a required skill simply because the trace succeeded."
+      }
+    },
+    "qa/agent-research:redevoagent/implementation": {
+      "source_sha256": "8aca89e55fcf716993923948074c32ba808b5665fbbc2ad4bad717db0e4cd00c",
+      "reviewed": true,
+      "fields": {
+        "question": "Has RedEvoAgent locally red-teamed an actual product?",
+        "answer": "No. A safety mini-suite checks attribution and skill-update control flow. Replaying public artifacts is not a new external attack. Record skill provenance, evaluation splits, and replacement evidence without calling replay fresh execution.",
+        "example": "Loading an existing result confirms the protocol can be read, not that an attack just occurred."
+      }
+    },
+    "qa/agent-research:redevoagent/mechanism": {
+      "source_sha256": "19bab77c9f03c63ffeedaadbd2c355d858fda9a76b96cf8cd5dfd01a3f08640e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must an experience skill beat the incumbent on a holdout rather than just come from a successful audit trace?",
+        "answer": "The original success supports only one context. Abstraction may overfit wording or credit irrelevant tools. Holdout comparison measures reuse, and only strict gains replace an incumbent to prevent low-quality accumulation. Readable skills still need real execution; a local filter is not full evaluation.",
+        "example": "An audit skill that succeeds on its original example but fails on related unseen cases should not become the default."
+      }
+    },
+    "qa/agent-research:spec-driven-tests/basics": {
+      "source_sha256": "5797c236e564485b55d9b11ddc67bfa2400acef22cb64bce62b5cac015aa65a7",
+      "reviewed": true,
+      "fields": {
+        "question": "What do Pre, Post, and Sug mean in specification-driven testing, and can suggestions replace behavior contracts?",
+        "answer": "Pre defines conditions before a call. Post specifies behavior given those conditions. Sug suggests verification. Suggestions are not contracts; define valid inputs and outcomes first, then mark tested and untested conditions to identify omissions.",
+        "example": "For sorting, Pre may require comparable elements, Post requires order and element preservation, and Sug proposes duplicate and empty-list tests."
+      }
+    },
+    "qa/agent-research:spec-driven-tests/comparison": {
+      "source_sha256": "bd33948bba1a3523af0c441d8570d772bebab90b66f6388168821fdb8c6d98f4",
+      "reviewed": true,
+      "fields": {
+        "question": "How does fixed-source input differ from exposing historical bugs to test generation?",
+        "answer": "The generator sees only repaired source and public requirements; the private evaluator uses buggy versions. Old patches or bug locations change difficulty and no longer test discovery under the same protocol.",
+        "example": "Knowing which line broke supports targeted tests, not independent contract inference."
+      }
+    },
+    "qa/agent-research:spec-driven-tests/implementation": {
+      "source_sha256": "f778104aa8932c428341e07ec5f4734c48f2085aa00fbcd95818e306d10f0c8c",
+      "reviewed": true,
+      "fields": {
+        "question": "Does compilation failure or modifying source count as bug detection?",
+        "answer": "No. The same test must compile and pass on fixed code and compile but fail a real assertion on buggy code. Illegal file edits invalidate runs; use an external trusted diff, not self-reports.",
+        "example": "An intentional call to a nonexistent API that breaks old compilation is not a valid regression test."
+      }
+    },
+    "qa/agent-research:spec-driven-tests/mechanism": {
+      "source_sha256": "aa0a4819e039c85098e6e757e9e070fb94c715c5c4c7bfedd88654ae3f790e2f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does writing preconditions and postconditions first expose coverage gaps missed by direct test generation?",
+        "answer": "Specifications list input restrictions and guaranteed behavior per unit, then mark tested and untested items so tests target auditable coverage. Source interpretation can still be unfaithful. The paper's automated comparison did not include human edits, so don't treat optional developer steps as executed.",
+        "example": "A specification can flag empty input returning an empty list as an untested postcondition, whereas copying normal examples can miss it indefinitely."
+      }
+    },
+    "qa/agent-research:harnessopt-bench/basics": {
+      "source_sha256": "7e8680ba3588e71600cd0a335c3821b3c7e6a37e246979c4e97792245179a785",
+      "reviewed": true,
+      "fields": {
+        "question": "What may HarnessOpt-Bench optimize, and does that include retraining the base model?",
+        "answer": "It searches prompt, tools, control flow, and memory under a target-evaluation budget. Arbitrary base-model retraining or hidden training data are not the same search space. Record candidate versions and allowed edit scope.",
+        "example": "A search can try context compression, but replacing the base with a stronger model confounds harness gains."
+      }
+    },
+    "qa/agent-research:harnessopt-bench/comparison": {
+      "source_sha256": "8b4c4b1fd1b3e4d9325410af3ff2fb2783bbe1f9950e7d8a9520745cc97c0adb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate open search feedback from hidden test?",
+        "answer": "Search uses visible feedback to choose versions, while hidden evaluation measures generalization. Repeatedly reading test during search turns it into tuning data; score gains no longer reflect unseen ability.",
+        "example": "Choosing the highest test score after dozens of variants overstates performance on unseen tasks."
+      }
+    },
+    "qa/agent-research:harnessopt-bench/implementation": {
+      "source_sha256": "57eee754f4f31e7040715f415bd0e9353bcc7b18f19cdfc8e431e29a9d9b1005",
+      "reviewed": true,
+      "fields": {
+        "question": "Can local candidate registration replace trusted execution and version audit?",
+        "answer": "No. Count real budget, snapshot candidates, and isolate execution. Do not report benchmark scores without the actual model and environment. Define epsilon for relative gains near a zero baseline rather than silently changing the denominator.",
+        "example": "Adding a configuration name does not mean the optimizer changed and tested it."
+      }
+    },
+    "qa/agent-research:harnessopt-bench/mechanism": {
+      "source_sha256": "c2a42f6ba697080cf67d774ad0da97b54d7a9504141ec7380a2adf4122e547a8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why fix target-evaluation budget instead of comparing the highest final score alone?",
+        "answer": "More evaluations create more search opportunities and confound optimizer quality with resources. Hidden tests isolate selection, while trusted environments and version records audit changes. Relative gains depend on baseline scale; the best visible search score is not final unseen performance.",
+        "example": "An optimizer that tries a thousand candidates versus ten is not necessarily better because its best is higher. Match call budgets first."
+      }
+    },
+    "qa/agent-research:os-shepherd/basics": {
+      "source_sha256": "38bf3806ec750923c3d904c78c22523a71fc491153b8fc83d817d8d38213a896",
+      "reviewed": true,
+      "fields": {
+        "question": "Does OS-Shepherd operate the computer or judge trajectory success?",
+        "answer": "It judges complete computer-operation traces. The evaluated actor clicks and types. OSReward provides human-verified tasks and trajectories for testing reward models. Do not confuse recognizing success with performing the task.",
+        "example": "The actor attempts to save a file and the judge checks the trace. A correct verdict does not mean the judge saved it."
+      }
+    },
+    "qa/agent-research:os-shepherd/comparison": {
+      "source_sha256": "2a40a116c1ba9734391e45ff99ef26365c834c5e0650ffd3c5817a58110bf4b0",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a judge reading the last five states plus text history differ from using only the final screenshot?",
+        "answer": "A final image can omit process and implicit requirements, while history supplies evidence but also noise. An arbitrary summary changes the observation protocol and is not directly comparable with the paper's scores.",
+        "example": "An open window at the end does not show that prior file edits were saved."
+      }
+    },
+    "qa/agent-research:os-shepherd/implementation": {
+      "source_sha256": "5821c2d5fe8fcddfb7bc313e92bf3cb0b116f5e648d8c9c3adbb90ea8c8f5c39",
+      "reviewed": true,
+      "fields": {
+        "question": "Did the local OSReward path train an open 9B or 35B vision judge?",
+        "answer": "No. It did not download official screenshot trajectories either; it only implements the evaluation contract. Join predictions with human labels on the grading side. Explicitly report empty class denominators rather than filling fake balanced accuracy.",
+        "example": "A batch with no failures cannot estimate failure recall."
+      }
+    },
+    "qa/agent-research:os-shepherd/mechanism": {
+      "source_sha256": "aba2f3e85b0bb24f1147eab3b4aa5b99bc9c43acee5bfe03025a7b896d600f38",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can ordinary accuracy conceal a reward model that predicts almost everything successful?",
+        "answer": "With many successes, approving every trace can score well while missing actual failures. Report success recall, failure recall, and their mean. Cross-system and hard-subset conclusions need real labels; interface diagnostics do not measure open judge capability.",
+        "example": "At 90% successes, predicting all successes gives 90% accuracy and zero failure recall, so balanced accuracy is only 50%."
+      }
+    }
+  }
+}

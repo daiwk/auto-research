@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/post-training/policy-optimization": {
+      "source_sha256": "6c09c51d1bea62402d68b9f8aea7bbddd99e0c77f3d475d2ca67cad86a4867fc",
+      "reviewed": true,
+      "fields": {
+        "title": "Beyond the GRPO name: advantage scales, clipping units, and train–rollout mismatch",
+        "thesis": "The GRPO family differs in how rewards become advantages, which likelihood ratio is clipped, and which distribution produced samples. Dr. GRPO, DAPO, GSPO, and TIS/IcePop modify different parts; not every ratio is the same off-policy correction.",
+        "axis_0": "Advantage scale: group mean, group standard deviation, and length normalization",
+        "axis_1": "Update unit: token surrogate or sequence ratio",
+        "axis_2": "Sampling validity: zero-variance groups and dynamic resampling",
+        "axis_3": "Distribution roles: current training policy, old training policy, and rollout engine"
+      }
+    },
+    "dive/post-training/policy-optimization/comparison/post-training:grpo": {
+      "source_sha256": "37ddb79faee4384fb2ca0f42797ac22635394c0d2afc8d07c90bca6db5d9f9c6",
+      "reviewed": true,
+      "fields": {
+        "position": "Replaces a critic with same-question group reward mean and standard deviation, retaining old-policy ratios, clipping, and reference KL.",
+        "tradeoff": "Avoids a value model but needs multiple responses per question. Uniform rewards give no relative direction. Local complete-candidate actions are not DeepSeekMath training."
+      }
+    },
+    "dive/post-training/policy-optimization/comparison/post-training:dr-grpo": {
+      "source_sha256": "d61b977152e5c1f0d296fa4effc7f35d114ca3e082412ec42fd3c52d9fe26892",
+      "reviewed": true,
+      "fields": {
+        "position": "Removes within-response length averaging and group standard deviation but keeps group centering, examining implicit difficulty and length weights.",
+        "tradeoff": "Removing normalizers changes relative gradient scales without creating signal in all-wrong groups. Local synthetic lengths are diagnostic only."
+      }
+    },
+    "dive/post-training/policy-optimization/comparison/post-training:dapo": {
+      "source_sha256": "1e6b92a5c92b642e52ed5eaad50297856926124aaa610aeebcd99d2fcfbad12a",
+      "reviewed": true,
+      "fields": {
+        "position": "Combines Clip-Higher, zero-variance group filtering, token-level loss, and overlong reward handling.",
+        "tradeoff": "Count effective training samples separately from actual generation budget. Local pseudo-tokens do not reproduce distributed long-CoT training."
+      }
+    },
+    "dive/post-training/policy-optimization/comparison/post-training:gspo": {
+      "source_sha256": "b55384e0971e099f4a14dbe44d3318f949c268b258f3688527c82320e4f81635",
+      "reviewed": true,
+      "fields": {
+        "position": "Averages response log-ratios before exponentiating and clips the entire response with a shared sequence ratio.",
+        "tradeoff": "Changes how anomalous tokens affect the trajectory, not the reward itself. Local work has no actual token trajectories or MoE routing."
+      }
+    },
+    "dive/post-training/policy-optimization/comparison/post-training:tis": {
+      "source_sha256": "fe0f256b67591e009a8f8b68443ea0793e9572a4a6b783fc93039a4b8d2291c0",
+      "reviewed": true,
+      "fields": {
+        "position": "Corrects training versus rollout engine probabilities and caps only large weights from above.",
+        "tradeoff": "Retains small ratios and limits heavy tails, but does not replace stale-policy correction. Local deterministic engine perturbations verify gradient behavior."
+      }
+    },
+    "dive/post-training/policy-optimization/comparison/post-training:icepop": {
+      "source_sha256": "76a6610730d6036a3aa2a356ce05f2b2a578283c0b5d16c9eee83553bcbd75d9",
+      "reviewed": true,
+      "fields": {
+        "position": "Uses a two-sided validity interval for engine ratios, retaining the original ratio inside and zeroing policy gradients outside.",
+        "tradeoff": "Drops severely mismatched tokens instead of clamping all ratios to interval boundaries. No real MoE cluster was run locally."
+      }
+    },
+    "dive/post-training/policy-optimization/analysis/0": {
+      "source_sha256": "f100bd05c3187680654ecfe54ce3a1c67b6e8f8375af289207b09aed1bef17f3",
+      "reviewed": true,
+      "fields": {
+        "title": "Identify the numerator and denominator before discussing stability",
+        "body": "GSPO aggregates response log-ratios of current versus old policy. TIS and IcePop compare probabilities under the same weights across training and rollout engines. One controls update size and the other corrects implementation mismatch. A training loop can need both; neither automatically covers the other's bias."
+      }
+    },
+    "dive/post-training/policy-optimization/analysis/1": {
+      "source_sha256": "f33b4f34c6f7a3ec51f313c341c6cdb9939075ae033cbf812ae1a0170b75169c",
+      "reviewed": true,
+      "fields": {
+        "title": "Normalization changes weights, not missing signals",
+        "body": "GRPO standard deviation, its removal in Dr. GRPO, and DAPO aggregation over valid tokens alter sample contributions. An all-right or all-wrong group can still have no direction after centering. Dynamic sampling controls whether such groups reach updates. Count discarded generation work, not just optimizer steps."
+      }
+    },
+    "dive/post-training/policy-optimization/question/all-failed-group": {
+      "source_sha256": "cd59e09d9323bf7078230c510fcf583af484c93bb6d7c5ebbf894065f6cbc982",
+      "reviewed": true,
+      "fields": {
+        "question": "If all four responses are wrong, does changing GRPO to Dr. GRPO create a learning direction?",
+        "answer": "Not when rewards remain identical: removing standard deviation leaves centered advantages zero. Dr. GRPO changes scale bias; DAPO filters such groups and samples again. If budget never yields distinguishable outcomes, improve exploration or supervision rather than relabel normalization.",
+        "example": "Teaching example: With all rewards zero, subtracting the mean still yields zero. A constant denominator does not make one trajectory better."
+      }
+    },
+    "dive/post-training/policy-optimization/question/sequence-ratio-not-token-average": {
+      "source_sha256": "afafaf1dad22dfddd789873721e9c12ae1fe80cede180beed6a92cc4634c1e09",
+      "reviewed": true,
+      "fields": {
+        "question": "Is GSPO equivalent to clipping each token with PPO and then averaging?",
+        "answer": "No. GSPO aggregates log-ratios into one response ratio before clipping. Per-token clipping applies nonlinear selection first. Averaging and clipping do not commute, so outlier tokens have different effects. Sequence rewards do not mathematically require one unique surrogate.",
+        "example": "Teaching example: With one very high ratio and other ratios near one, per-token clipping can clip just that token; GSPO assigns the aggregate weight to the entire response."
+      }
+    },
+    "dive/post-training/policy-optimization/question/tis-versus-icepop": {
+      "source_sha256": "b77ba9f2613867c54d1248b1c899a4ba8e4d047c2e2af5875dcdc86e12e5f8fc",
+      "reviewed": true,
+      "fields": {
+        "question": "How do TIS and IcePop handle a very small engine ratio, and is that policy staleness?",
+        "answer": "TIS caps only large ratios and retains the small one. IcePop zeros its policy gradient below the lower bound. Both address engine mismatch, not drift between current and old sampling weights. Masking is not standard PPO clipping or a cure for stale policies.",
+        "example": "Teaching example: Different kernels giving different probabilities at identical weights is an engine issue. Sampling from weights several updates old introduces separate policy staleness."
+      }
+    },
+    "dive/post-training/policy-optimization/update/2026-10-27/0": {
+      "source_sha256": "552ef00cd3a68379f84e578e4ec8ae2c925a7036770977df28f4b382b3407766",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial edition: compares GRPO/Dr. GRPO/DAPO advantages and normalization, GSPO sequence ratios, and TIS/IcePop engine correction; 54 abstracts reviewed and six papers read closely."
+      }
+    }
+  }
+}

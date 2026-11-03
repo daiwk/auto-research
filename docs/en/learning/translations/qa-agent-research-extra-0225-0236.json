@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:pace-capability/mechanism": {
+      "source_sha256": "d7696e26ad6f69778f36580d5c279db0dfd512f8f3e7cf79b6c3f4c37edc0785",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't safe memory ingestion guarantee that its content has authority at execution time?",
+        "answer": "Ingestion checks content then; execution also limits real effects under the authenticated request and verifies trusted provenance. Both authority and provenance must pass so untrusted memory cannot use a legitimate tool beyond scope. Text claiming authorization does not replace system authentication or per-effect checks.",
+        "example": "A stored webpage that says to delete files does not authorize deletion, even if ingestion found no danger. Check effects and provenance before execution."
+      }
+    },
+    "qa/agent-research:pace-capability/basics": {
+      "source_sha256": "0fff455f86124cd8f4f89b544e9095671b78fccfc9e7ebfaecbcff47235956e0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does PACE check capability and provenance before tool side effects?",
+        "answer": "Trusted stored material does not grant authority for every action. Derive authority from authenticated requests and check it with input provenance before each effect, preventing low-trust content from expanding permissions.",
+        "example": "A webpage saying 'send the file' is not user authorization to send it."
+      }
+    },
+    "qa/agent-research:pace-capability/comparison": {
+      "source_sha256": "d7b6770c3504136a4ec33f1abbd9264decd7ad9e5f51931f357c7e065b5a4d5b",
+      "reviewed": true,
+      "fields": {
+        "question": "Can PACE use capability or provenance checks alone?",
+        "answer": "Allow an effect only if authority covers it and provenance is trusted. Capability limits what can be done; provenance checks whether the present basis is trustworthy. Both are required.",
+        "example": "General file-read permission does not imply approving this specific read instruction from an untrusted page."
+      }
+    },
+    "qa/agent-research:pace-capability/implementation": {
+      "source_sha256": "522aee96b7be0c789f900fcd2673f383cbb0b57ed0ba3622d4eb31657bd73236",
+      "reviewed": true,
+      "fields": {
+        "question": "Can PACE execute a tool first and apply the gate later from logs?",
+        "answer": "No. A pre-effect gate must obtain the complete effect set before execution and compare authority and provenance. Later logs only audit; they cannot undo effects. The local path tests selection without operating system or browser tools.",
+        "example": "Finding untrusted provenance after an email is sent misses the opportunity to prevent it."
+      }
+    },
+    "qa/agent-research:defa/mechanism": {
+      "source_sha256": "9d4d95f18ed83efbc81c74161a31a7d925c52f6391b5ddd08bea4432f2f94e76",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain the propagation subgraph when locating a decisive error instead of labeling only the last failed action?",
+        "answer": "Final failure may stem from earlier facts, parameters, or agent messages. Backward dependencies connect the source with affected nodes. Protocol relations give structure and semantic dependencies capture information flow. Maximum error scores still need evidence and do not prove complete causality.",
+        "example": "Deployment can fail because an early read used stale configuration. A propagation graph follows stale fields into the final arguments instead of blaming only deployment."
+      }
+    },
+    "qa/agent-research:defa/basics": {
+      "source_sha256": "c6e6715e59761df4510af208710f49f9a5c3c4e5ed3f3e685862fd75ffdbaf06",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does DeFA trace backward along dependencies from the final violation?",
+        "answer": "The last error may be downstream of a propagated mistake. Combine protocol and semantic relationships into an event graph, trace the source, and retain downstream propagation and responsible agent to distinguish trigger from decisive error.",
+        "example": "The deploying agent is not necessarily at fault if earlier configuration was written incorrectly."
+      }
+    },
+    "qa/agent-research:defa/comparison": {
+      "source_sha256": "fd7d47cddb307db0b12df09317f1c7507a60599ac0922d182d68c578dcf08c43",
+      "reviewed": true,
+      "fields": {
+        "question": "How does DeFA choose a decisive error differently from taking the last failure?",
+        "answer": "It selects by error magnitude among ancestors of the violation and retains responsibility and propagation. The last event is just a time position. Graph selection depends on supplied edges and error definition, not independent causal proof.",
+        "example": "A final retry timeout may be a symptom of wrong parameters generated earlier."
+      }
+    },
+    "qa/agent-research:defa/implementation": {
+      "source_sha256": "2225640412c3cafedb25a509572d67e58af87585c11a007ed4546bdaee0b6918",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain dependencies and responsibility rather than only event text in DeFA propagation graphs?",
+        "answer": "Candidates come from Ancestor(V); missing edges hide upstream sources and wrong edges add unrelated events. Preserve protocol/semantic dependencies, event IDs, error magnitudes, and responsible agents. The local path reads no gold plan and runs no multimodal judge.",
+        "example": "If two agents write a file, trace the specific version consumed by the failure to identify the relevant write."
+      }
+    },
+    "qa/agent-research:user-proxy-bench/mechanism": {
+      "source_sha256": "f5de8ba8edfccffbab2ed172bc3e97a9ed44bf51ba13ceccbe0a9c79146fa085",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can premature disclosure by a user simulator improve task success but reduce UFS?",
+        "answer": "The agent should ask for information, and unsolicited disclosure bypasses that capability. UFS separately checks every applicable user contract per episode rather than reusing task reward. Completion and fidelity are distinct; success alone does not establish simulator quality.",
+        "example": "Giving an order number before being asked may make refunds succeed without testing whether the agent knew when to request it."
+      }
+    },
+    "qa/agent-research:user-proxy-bench/basics": {
+      "source_sha256": "02aa3fb5a3654f8409cacebf76020633276ca0ca9ff4f57a42d41769c21ddef7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does UserProxyBench separate simulator fidelity from task reward?",
+        "answer": "Simulators can leak private fields and let agents succeed with less information collection. Independent UFS checks every user contract, avoiding misreading reward on an easier task as real interaction ability.",
+        "example": "An unrequested hidden order number can enable success without showing strong clarification ability."
+      }
+    },
+    "qa/agent-research:user-proxy-bench/comparison": {
+      "source_sha256": "b2c5580d38a01ee899f18f17a2599d0efb1f910b942dae09b3b5d7e61b4e344a",
+      "reviewed": true,
+      "fields": {
+        "question": "How does the UFS all-criteria product differ from averaging criterion pass rates?",
+        "answer": "An episode scores one only when all applicable criteria pass; any failure gives zero. Per-criterion means can let other passes offset a key violation and are a different metric. Report UFS separately from task reward.",
+        "example": "Passing nine of ten criteria gives 90% per-criterion average but strict UFS zero for that episode."
+      }
+    },
+    "qa/agent-research:user-proxy-bench/implementation": {
+      "source_sha256": "538ac0ec8c5b19482a8ad2a048d4f6f4290a0c5393f6e8bf7dd3f8d7d699af63",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain the order of request and disclosure when auditing premature disclosure?",
+        "answer": "Prematurity depends on whether the relevant request came first, not whether a field eventually appears. Local evaluation checks public interaction events against the rubric while keeping private blueprints on the grading side. It does not run paper enterprise tasks or the closed-proxy matrix.",
+        "example": "Disclosing the same field before or after a question can leave identical final text but different fidelity verdicts."
+      }
+    }
+  }
+}

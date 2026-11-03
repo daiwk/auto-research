@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:ap-opd/basics": {
+      "source_sha256": "7fc2e95cb40f9d76d79aeee24d3f5945179d8c401c1f0287156b59606d013c69",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does AP-OPD target penalty jumps rather than uniformly high penalties?",
+        "answer": "Persistent disagreement and sudden local deterioration differ. Compare adjacent original block statistics and attenuate the later block to limit spike dominance.",
+        "example": "A hard entire response differs from one getting abruptly worse after a particular step."
+      }
+    },
+    "qa/post-training:ap-opd/comparison": {
+      "source_sha256": "84ad31050c00ddfc9edeb97f119953b88e12010ee52ea2c94c29513e5b87cddc",
+      "reviewed": true,
+      "fields": {
+        "question": "How does AP-OPD attenuation differ from dropping outlier tokens?",
+        "answer": "Apply one factor to all signed coefficients in a block, preserving signs and including negatives. Dropping tokens is a different selection rule. The detector is not a calibrated significance test.",
+        "example": "Negative log ratios in the later block are also scaled."
+      }
+    },
+    "qa/post-training:ap-opd/implementation": {
+      "source_sha256": "e4725212505b8bbbffa0ab0f0c24dd2c070a250fd1ff1aa4c0611128e52d7af9",
+      "reviewed": true,
+      "fields": {
+        "question": "Can the next AP-OPD boundary use previously attenuated statistics?",
+        "answer": "No. Always detect from original unweighted means/variance to avoid recursive distortion. No renormalization or hidden floor; previous mean zero may produce zero weight. Sample variance needs enough tokens.",
+        "example": "Detecting from an already reduced block can create artificial jumps."
+      }
+    },
+    "qa/post-training:ap-opd/mechanism": {
+      "source_sha256": "29b47a9677e04efea501008c8aeccc5673a335f4758d6fec488561d564c6e503",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use original block statistics and scale negative coefficients too?",
+        "answer": "Weighted statistics would recursively alter subsequent reference levels. Detect from original positive penalty means but attenuate all signed supervision in the later block. Preserve direction, allow zero weight, and do not interpret threshold as calibrated significance.",
+        "example": "Compare block three to block two's original level even if block two was already reduced."
+      }
+    },
+    "qa/post-training:simopd/basics": {
+      "source_sha256": "07e93ff40ada8fe357b245d05946ed9bea7db4462a741e7866a9b4235a0ce082",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can SimOPD handle different teacher/student hidden dimensions?",
+        "answer": "Each space compares current reply to paired historical replies. Distill distributions indexed by shared answer identities rather than subtract cross-model vectors.",
+        "example": "A 100-dimensional model and wider model can both rank similarities to the same old answers."
+      }
+    },
+    "qa/post-training:simopd/comparison": {
+      "source_sha256": "a411a390b69abab27aa461480f721c6cb88e5943bad57f7bb183c8aca89bbd72",
+      "reviewed": true,
+      "fields": {
+        "question": "How does relational SimOPD differ from hidden-state MSE?",
+        "answer": "MSE requires comparable coordinates. Relationship matching preserves geometry without forcing coordinates and differs from vocabulary distillation: targets are similarities to historical answers.",
+        "example": "Rotating a map changes coordinates without changing city distances."
+      }
+    },
+    "qa/post-training:simopd/implementation": {
+      "source_sha256": "c541e1e439e84fc16addcf52c2d7850e9839d2138d97a4aa9ddb24dd8a0114f5",
+      "reviewed": true,
+      "fields": {
+        "question": "When does SimOPD enqueue and why reject a one-item bank?",
+        "answer": "After optimization enqueue frozen paired representations captured before it, using synchronized FIFO; first batch only warms up. One bank item makes the distribution constant and uninformative. Only current student representation gets gradients.",
+        "example": "Misaligned FIFO positions compare relations to different answers."
+      }
+    },
+    "qa/post-training:simopd/mechanism": {
+      "source_sha256": "d336f73d22e69fdd7ea2b483ccece35537359acff3a035ad6324278ff2184c16",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not project teacher/student hidden states into one coordinate system first?",
+        "answer": "Compute similarities in each own space, match distributions over paired historical IDs. Freeze teacher/bank and maintain synchronized FIFO. A single historical point cannot provide relational supervision.",
+        "example": "Two teachers can agree a reply is closer to historical A than B without identical coordinates."
+      }
+    },
+    "qa/post-training:gr-opd/basics": {
+      "source_sha256": "db95e91533f69c459a3d0409106be2648a3451c2682910f0c7c236db8bf170b2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why pool token feedback into sequence scores in GR-OPD?",
+        "answer": "Local teacher confidence needn't mean good overall reasoning. Discount and aggregate sequence feedback, then compare same-prompt replies for relative credit.",
+        "example": "Teacher preference for formatting tokens doesn't make a wrong trajectory preferable."
+      }
+    },
+    "qa/post-training:gr-opd/comparison": {
+      "source_sha256": "1055999d2b10850cc508051b1349a07d414d1ab9e3d1bb1355565c6b01c2a28d",
+      "reviewed": true,
+      "fields": {
+        "question": "How does retaining mean pressure differ from pure group centering?",
+        "answer": "Pure centering removes teacher's common direction across replies. An extra mean term preserves some shared pressure; its coefficient may be zero. Treat configurations separately.",
+        "example": "If every reply diverges from teacher, relative ranks alone hide shared mismatch."
+      }
+    },
+    "qa/post-training:gr-opd/implementation": {
+      "source_sha256": "0ea3e656c8f9355591762fd682f75f7772a7085f14aca718e3dcf8c6542e9f76",
+      "reviewed": true,
+      "fields": {
+        "question": "Does GR-OPD average tokens globally or per response?",
+        "answer": "Average valid actor tokens within each response then average replies equally. Clip and discount-normalize feedback first. Freeze teacher/old policy/credit. Bare theoretical sums don't imply guarantees under practical clipping and reuse.",
+        "example": "Length alone doesn't give a response more total weight."
+      }
+    },
+    "qa/post-training:gr-opd/mechanism": {
+      "source_sha256": "50735874c107f4794dacf18101297f1168d75b5e24902d78ffbf38ec08f71f39",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain mean pressure after group centering?",
+        "answer": "Pure centering keeps only within-group ranking and can erase shared correction. Add mean pressure before broadcasting credit to actions. Discount, standardization and clipping alter the practical estimator's guarantees.",
+        "example": "All replies can be similarly unsupported; centering nearly zeroes them while mean term preserves correction."
+      }
+    },
+    "qa/post-training:ig-opd/basics": {
+      "source_sha256": "8d8f2b2267f9c889b37b181974bc32ec780acafe2a014a63b0ab72f5ad3cabb2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why judge IG-OPD queries after retrieval?",
+        "answer": "Teacher phrasing preferences can dislike effective searches. Changes in answer support after retrieval indicate useful information. Answer probes are training-only.",
+        "example": "An awkward query retrieving key evidence can be valuable despite its wording."
+      }
+    },
+    "qa/post-training:ig-opd/comparison": {
+      "source_sha256": "1bea69b0bba12c4e6b9def776fec5eecb393473eeea9bdb793b17fc0fab930e1",
+      "reviewed": true,
+      "fields": {
+        "question": "Do ITC and IQC change credit magnitude or direction?",
+        "answer": "ITC budgets turns by absolute gain; IQC uses signed gain to calibrate action tokens. Large negative gain merits attention, not positive reinforcement.",
+        "example": "Misleading retrieval that lowers confidence needs correction, not reward."
+      }
+    },
+    "qa/post-training:ig-opd/implementation": {
+      "source_sha256": "b9795a55ac55a6e8ed6a432f60449ef4c55b6bbcb28482729a6aa92a980c2a03",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is IQC outside ITC, and what does λ=0 mean?",
+        "answer": "Total action credit is warm-up coefficient times gain, not multiplied again by turn budget. λ=0 gives equal turn budget, not equal token weight. Final response gain is zero but base distillation remains.",
+        "example": "A short call and long answer with equal budgets have different token weights."
+      }
+    },
+    "qa/post-training:ig-opd/mechanism": {
+      "source_sha256": "59fbcbc8062784c4bbf8ed2c43d1d87f1e7723c575c54fc2afb4f04f707b6de9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why budget with absolute gain but update queries with signed gain?",
+        "answer": "Large positive or negative changes deserve supervision; action credit must distinguish help from harm. The additive parts act on different sets. Answers belong to frozen training probes only; long final replies must not absorb short-query budgets.",
+        "example": "Misleading results can justify large correction but negative rather than positive direction."
+      }
+    },
+    "qa/post-training:divergence-routed-opd/basics": {
+      "source_sha256": "6e85058cf292a99027e21aff7fe064774c617f6a687507ce09cea194be7a3131",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add forward KL at high-disagreement positions in DrOPD?",
+        "answer": "Reverse-KL gradients depend on student mass and can be weak on teacher modes students nearly ignore. Forward KL restores missing coverage locally while retaining RKL everywhere.",
+        "example": "Teacher-supported digits with near-zero student mass need an extra coverage signal."
+      }
+    },
+    "qa/post-training:divergence-routed-opd/comparison": {
+      "source_sha256": "24564b354b70f7aa8ece5c34b7f64e3bfc4f6858b29efca7e7e0cad6d2daf5e5",
+      "reviewed": true,
+      "fields": {
+        "question": "How does DrOPD routing differ from replacing the whole loss with forward KL?",
+        "answer": "Add FKL only on routed positions and keep RKL globally. Full replacement changes concentration/coverage elsewhere. PPO candidate-advantage updates also aren't a static two-KL gradient.",
+        "example": "Low-disagreement format tokens keep the original objective; difficult positions get extra correction."
+      }
+    },
+    "qa/post-training:divergence-routed-opd/implementation": {
+      "source_sha256": "fb1b335457e2468e9e54312969ed1a7462ffd00a394272bcce36e0cdaeb9e969",
+      "reviewed": true,
+      "fields": {
+        "question": "Should ties at DrOPD's kth-largest JS be broken to keep exactly K?",
+        "answer": "No. Retain all at threshold, possibly more than K. Compute K from valid positions as specified; K=0 adds no FKL. Deduplicate and renormalize the top-k teacher/student union. Freeze teacher, route and advantage.",
+        "example": "Don't drop tied boundary positions to force an exact quota."
+      }
+    },
+    "qa/post-training:divergence-routed-opd/mechanism": {
+      "source_sha256": "0860322a4e15cbeda39f15457ef1591f9176293c1c7de687002c082790b9dcf0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep RKL everywhere and add FKL only at high disagreement?",
+        "answer": "RKL imitates covered modes but can weakly move near-absent teacher modes. JS routing localizes FKL's coverage correction. Union support, detached advantages and PPO matter; not switching all KL or only updating the sampled token.",
+        "example": "If teacher strongly prefers A and student only B, extra local FKL can lift A."
+      }
+    },
+    "qa/post-training:state-opd/basics": {
+      "source_sha256": "a3fa2e1924ab7472ddf91b3aaab529a2c8ba09abb6cfdd900d9ae00624d46dff",
+      "reviewed": true,
+      "fields": {
+        "question": "Why hide old reasoning from the State-OPD teacher?",
+        "answer": "Old reasoning can be wrong. The teacher sees executed actions/observations to avoid inheriting false narratives; student still sees its full history.",
+        "example": "Teacher should trust a tool's failure result over previous reasoning claiming success."
+      }
+    },
+    "qa/post-training:state-opd/comparison": {
+      "source_sha256": "07a14c0cc08a2cdf7f1b0ba1ff744db014abb6d5560a5de61abcb043c06125e2",
+      "reviewed": true,
+      "fields": {
+        "question": "How does high-entropy oversampling differ from executing all extra actions?",
+        "answer": "Generate extra reasoning/actions for training comparison, but execute none of them. The actual environment follows the original trace. Executing them changes state visitation and budget.",
+        "example": "Scoring alternative tools doesn't mean using every one."
+      }
+    },
+    "qa/post-training:state-opd/implementation": {
+      "source_sha256": "71b8308a09f5ae3bfd3efcf077b36d2d96b2385c94247c48983a1cbbb6b2fea4",
+      "reviewed": true,
+      "fields": {
+        "question": "Can sampled-token surprisal replace State-OPD entropy?",
+        "answer": "No. Average full-vocabulary entropies across tokens and follow the stated state selection/count formula. Keep sampled-K1 double clipping rather than heuristic teacher ranking.",
+        "example": "A sampled rare word does not imply high entropy of the whole distribution."
+      }
+    },
+    "qa/post-training:state-opd/mechanism": {
+      "source_sha256": "23671f85a4d9cb20c49517011a76494ced93c5e23b991cd8e42f0a5bc9c80bee",
+      "reviewed": true,
+      "fields": {
+        "question": "Why omit old reasoning for the teacher and not execute extra actions?",
+        "answer": "Executed observations are real even when student reasoning is mistaken. Use them for teacher state while student retains full context. Compare oversampled candidates at the same high-entropy state; executing them breaks alignment. Entropy is vocabulary-wide.",
+        "example": "Use actual click results instead of mistaken prior narrative, and score extra proposed clicks without pressing every button."
+      }
+    }
+  }
+}

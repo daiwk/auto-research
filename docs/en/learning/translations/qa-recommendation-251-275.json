@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:din/mechanism": {
+      "source_sha256": "a8c3f9289c6891b6fe379919ce583fba5a8ad7c78e87306a4390ceec48fc094f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can DIN produce different interest vectors for the same user?",
+        "answer": "Which historical actions matter depends on the candidate. DIN learns activations from each candidate-action feature combination and pools accordingly. Greater expressivity prevents blanket reuse of the resulting state across candidates; compare against matched-budget pooling.",
+        "example": "Running socks emphasize running-shoe history, while baking tools emphasize oven activity in the same user history."
+      }
+    },
+    "qa/recommendation:din/basics": {
+      "source_sha256": "d5d9eaf87e1ff1a05cab80ac5dc5f660e1b777aea6d887e142ba270a8cd4b372",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is DIN local interest candidate-conditioned rather than a single short-term interest?",
+        "answer": "Local means the relevant subset of all history for the current target. A user can have several interests; candidate changes alter activations and aggregation without requiring one label. Attention cannot create missing evidence, and low activation does not imply permanent disinterest.",
+        "example": "The same user can like science fiction and cooking, activating different histories for a movie and cookware."
+      }
+    },
+    "qa/recommendation:din/comparison": {
+      "source_sha256": "89aa7125478ac521a2f58d2012500c995bdc9eba34e381e8e606ebb96cd5e803",
+      "reviewed": true,
+      "fields": {
+        "question": "How does DIN local activation differ from dot-product attention?",
+        "answer": "It takes the candidate, action, difference, and elementwise product to learn richer matching. Dice adapts its boundary to feature distributions. This does not imply causality or guaranteed gain; the local matched comparison showed no improvement over mean pooling.",
+        "example": "Near-equal dot products can hide price differences and shared categories that the difference and product features highlight."
+      }
+    },
+    "qa/recommendation:din/implementation": {
+      "source_sha256": "fb92f4ee49bce34a4d8c80120bed793a898516875a3a0cb63b9ee8d0f3caf8ba",
+      "reviewed": true,
+      "fields": {
+        "question": "Over which axis should DIN normalize weights, and how should it handle padding?",
+        "answer": "Normalize over valid history positions for one user and candidate, masking padding first. Do not normalize across candidates or batch examples. Keep Dice training statistics and serving state consistent without adjusting from test labels.",
+        "example": "With three actions and five pads, distribute weights only over the three valid positions."
+      }
+    },
+    "qa/recommendation:director/mechanism": {
+      "source_sha256": "382fe4c450e5c919488b0e07137045c4391f5bbd0e0f8f83e1d9e22bf92f047f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does DIRECTOR combine Sinkhorn with global matching rather than independently choosing each position's top item?",
+        "answer": "Independent predictions can select the same item. Sinkhorn constructs a soft transport plan constrained by row and column marginals; global hard matching then creates a conflict-free list. Soft probabilities alone are not a displayable permutation.",
+        "example": "If all three positions favor A, matching assigns it where most useful and places B and C elsewhere."
+      }
+    },
+    "qa/recommendation:director/basics": {
+      "source_sha256": "a27c334eef91ffddd61aee0fb483bf4de16bc82bd44c8667820cff9d81ed8cd2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does DIRECTOR's dynamic index distribution cover all display positions jointly?",
+        "answer": "Positions draw from competing candidate sets. Joint transport connects position supply and item allocation, and hard matching creates a feasible slate. Parallel generation reduces sequential dependencies, but still requires relevance and legality checks.",
+        "example": "Five positions can all favor the same movie; joint allocation restricts it to its allowed count and assigns other options elsewhere."
+      }
+    },
+    "qa/recommendation:director/comparison": {
+      "source_sha256": "4613eeb21cd9721c87b4e8b8b6bdafdbc2970bca043de0cd93f80627600c8c9f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not decode DIRECTOR's Sinkhorn matrix with independent row argmaxes?",
+        "answer": "Continuous soft constraints do not guarantee that independent maxima choose distinct columns. Discrete global matching trades per-position scores for total feasible assignment quality. Temperature and iteration affect approximation, not rowwise legality.",
+        "example": "If both rows favor A at 0.6 over B at 0.4, independent choices conflict; hard matching must give B to one row."
+      }
+    },
+    "qa/recommendation:director/implementation": {
+      "source_sha256": "4a6675ec9f03b777c08941d8336488f96532a728c73fa30b4dd05f873efcb114",
+      "reviewed": true,
+      "fields": {
+        "question": "How should DIRECTOR align score matrices and final permutations with candidate IDs?",
+        "answer": "Rows are positions and columns are candidate identities. Maintain column identity through transport and matching, and retrieve by matched global indexes rather than per-row rank. Explicitly handle duplicate IDs or too few candidates. Local movie proxies do not establish production valid views.",
+        "example": "If column two was movie B, indexing a reshuffled candidate table after matching can display the wrong movie."
+      }
+    },
+    "qa/recommendation:dme/mechanism": {
+      "source_sha256": "789a51a1dfbd3e0f84ca624d075b6171d780632ffbb702423e2fa9313d4c8488",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are DME's reasoning and reconstruction heads used only during training?",
+        "answer": "Contrastive retrieval can lose fine-grained evidence. Typed latent targets and cross-reconstruction push embeddings to retain relevant information about the other side. Serving uses efficient similarity without per-pair reasoning text; auxiliary losses do not guarantee faithful explainability.",
+        "example": "Teach query vectors to retain relevant material and use cases, then serve nearest-neighbor retrieval without generating explanations."
+      }
+    },
+    "qa/recommendation:dme/basics": {
+      "source_sha256": "bb531c5b6f2ce570aadb48d0ff86548f353f93656cb66b9c201f7076ade0f346",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does DME use cross-conditioned reconstruction as well as contrastive learning?",
+        "answer": "Contrastive supervision tells embeddings which examples should be near but can lose distinctions. Reconstructing document details from queries and query details from documents encourages compressed embeddings to keep useful semantics, not lossless reconstruction or extra serving information.",
+        "example": "Two camping documents share a theme but differ in winter warmth versus light weight; reconstruction encourages preserving that difference."
+      }
+    },
+    "qa/recommendation:dme/comparison": {
+      "source_sha256": "12e8fa9a89df7eada054a50ea636ecc169ec931aca82d13ff25268efaf86fed2",
+      "reviewed": true,
+      "fields": {
+        "question": "What does DME typed latent evidence retain or give up compared with online chain of thought?",
+        "answer": "Structured internal evidence trains embeddings while serving stays vector-based. Online CoT provides readable steps at extra latency. DME trades that textual explanation for retrieval efficiency, and latent evidence does not establish faithful chains. Local reconstruction proxies are not full multimodal heads.",
+        "example": "Train with place and purpose evidence types but serve retrieval only, without claiming the system generated a stepwise rationale."
+      }
+    },
+    "qa/recommendation:dme/implementation": {
+      "source_sha256": "350313f388d9faf2907050f92810014197c68400bd4cdcccc2b1b86714f3290a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why verify that DME's generation heads are removed from serving?",
+        "answer": "Both heads provide training supervision only. Running reconstruction online violates intended latency and dependencies; never training the heads does not establish reconstruction learning. The local ridge diagnostic is distinct from the paper's large multimodal heads.",
+        "example": "Log both reconstruction losses and export only the two encoders. Turning heads on for quality and off for latency would evaluate different models."
+      }
+    },
+    "qa/recommendation:dos/mechanism": {
+      "source_sha256": "205609099d291e6d5a79db59a47dc8cf27d9c3f0a0031d3779168912ca36e9e1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does DOS orthogonally rotate content vectors before residual quantization?",
+        "answer": "Original directions can concentrate information in a few coordinates. Rotation redistributes directions while preserving geometry; residual quantization allocates coarse and fine information, with both behavior and content calibrating the codebook. Orthogonality does not make semantics independent or prove recommendation utility.",
+        "example": "Rotation can spread concentrated coordinate variance, but only behavioral targets show whether it separates attributes users care about."
+      }
+    },
+    "qa/recommendation:dos/basics": {
+      "source_sha256": "3d5ab608940168e01bed562df46ae77c9dc0940e4c2ce18eca67d193e0dbd353",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do DOS behavior and semantic streams shape one codebook together?",
+        "answer": "Reconstruction alone can miss collaborative distinctions. Behavior provides consumption relations and content preserves semantic structure. Balance both to avoid popularity overwhelming details; co-occurrence is not semantic identity.",
+        "example": "Similar-topic movies with different audiences can separate, while different genres sharing travel interests may gain useful links."
+      }
+    },
+    "qa/recommendation:dos/comparison": {
+      "source_sha256": "754eb8caba82a2dbfdfbaba8b70ddb029c9f69889fb62553597cbc2640aa00df",
+      "reviewed": true,
+      "fields": {
+        "question": "Why constrain DOS projection to be orthogonal rather than freely learned?",
+        "answer": "Orthogonal transforms preserve distances and norms while reorienting the space for quantization. General projections can distort scales. Constraints reduce freedom but do not minimize quantization error or ensure independent semantic factors. The local Procrustes path is a specific controlled version.",
+        "example": "Rotating axes preserves pairwise distance, unlike stretching an axis, but a better grid orientation does not causally decompose preferences."
+      }
+    },
+    "qa/recommendation:dos/implementation": {
+      "source_sha256": "505462eeee93e95c0e63c3c87d2fff5ab8b47dae1c60c46a463140a768117f62",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check both orthogonality and reconstruction errors in DOS?",
+        "answer": "`WᵀW` near identity verifies rotation only. Reconstruction checks residual-code approximation; good values on both still do not prove retrieval quality. Use the same rotation version for training and evaluation and document mapping changes before reusing codes.",
+        "example": "A perfectly orthogonal W may align points poorly with the codebook, so near-zero orthogonality error cannot replace reconstruction or ranking scores."
+      }
+    },
+    "qa/recommendation:downstream-rewards/mechanism": {
+      "source_sha256": "6cfdf10192b4d5b0ea6536fedc4665917cb8cab815ab2ca1f0a2feb4e7694d91",
+      "reviewed": true,
+      "fields": {
+        "question": "Why screen downstream rewards for future engagement instead of adding all immediate behavior to ranking?",
+        "answer": "Immediate responses can conflict with satisfaction or amplify noise. Test candidate signals for future engagement and connect only selected heads. Predictive association does not imply causal benefit; evaluate each product and do not add short-term gains as retention.",
+        "example": "Opening a large image may be accidental; deeper collection browsing might predict later activity better and is worth checking."
+      }
+    },
+    "qa/recommendation:downstream-rewards/basics": {
+      "source_sha256": "cf3dbab2c66f7fd4bc085152e44125c740727b49e67e99e3b64ea02f42b6eea3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why screen immediate behaviors with future engagement in Downstream Rewards?",
+        "answer": "Short-term clicks or saves can be fleeting. Find signals predictive of later activity, then train online-predictable auxiliary heads to account for longer-horizon value. Association remains provisional and each product needs independent verification.",
+        "example": "Compare accidental image opens with deeper collection exploration before selecting a reward target."
+      }
+    },
+    "qa/recommendation:downstream-rewards/comparison": {
+      "source_sha256": "7556308acdfbeada391068c160497f5c765f090a2d12f11cec11b916832484b7",
+      "reviewed": true,
+      "fields": {
+        "question": "How does adding a downstream reward head differ from replacing the ranker?",
+        "answer": "An auxiliary head preserves the backbone and adds a filtered long-horizon proxy to loss or score fusion across surfaces. Replacement changes more features and serving logic. Model-agnostic integration does not imply shared label semantics or improved component metrics.",
+        "example": "A feed can keep relevance and add deep-consumption prediction. Notification weights can differ, and saves are not notification retention."
+      }
+    },
+    "qa/recommendation:downstream-rewards/implementation": {
+      "source_sha256": "54c598ae65c8daa11e2281cdd76c2ad3a9ed696e7f2e2d57501c4958ac5b0687",
+      "reviewed": true,
+      "fields": {
+        "question": "Where does future-window information belong when training a downstream reward head?",
+        "answer": "Use it for reward screening and supervision, not features beyond request time. Select fusion strength on validation and freeze it. Local future category coverage is a proxy, not platform retention; do not read held-out future events.",
+        "example": "Tomorrow's new-topic exploration can label today's prediction, but cannot be today's input."
+      }
+    },
+    "qa/recommendation:dream/mechanism": {
+      "source_sha256": "661215ea9491c955401eb7db72e34885a53341529347879ca6c22677194f4d54",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does DREAM translate bounded LLM semantic levels into parameters deterministically?",
+        "answer": "Free-form text cannot reliably meet service schemas and ranges. Separate intent, planning, and compilation; the model proposes permitted directions and levels, while one outlet enforces whitelists and bounds. Only verified feedback enters policy memory. The LLM cannot arbitrarily rewrite production or amplify weights.",
+        "example": "An increase-diversity level compiles to a bounded diversification count instead of executing a vague instruction to promote novel content."
+      }
+    },
+    "qa/recommendation:dream/basics": {
+      "source_sha256": "215b0c77f290f0b4737f29dbe31d9c29f2c1eed53830756b0f23591ea0253e4d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is DREAM a control plane over an existing recommendation pipeline?",
+        "answer": "Intent and Meta Engine infer state and plans. Unified Outlet applies typed bounded parameters to existing retrieval, ranking, and reranking; underlying models still score items. Executability does not establish effectiveness without observed feedback.",
+        "example": "Control adjusts category weights and diversification for camping interest without replacing the model that scores every candidate."
+      }
+    },
+    "qa/recommendation:dream/comparison": {
+      "source_sha256": "0357f8ce943d5800b04aea8e9e4304cd6e18580a77dfdbde570de01dea8309c8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is DREAM's shadow online gate not a real production A/B test?",
+        "answer": "Independent shadow data reduce offline selection overfitting, but the public proxy and fixed reaction environment lack actual user feedback. Production double loops need real experiments. Local relevance improved while concentration rose and novelty fell; report all separately.",
+        "example": "Splitting validation users prevents repeated tuning on one group, but cannot measure adaptation, churn, or week-long live engagement."
+      }
+    },
+    "qa/recommendation:dream/implementation": {
+      "source_sha256": "9e8c05dae50665d88c307872a9f8a9e199325bb9e381c3dfb455305d17aef2f6",
+      "reviewed": true,
+      "fields": {
+        "question": "How does DREAM compile semantic levels into legal, bounded parameters?",
+        "answer": "Discrete levels must go through whitelists and deterministic translation. Ranking overrides use original weights and levels; category diversification count is `max(1, default_count + bc)`. Record executed parameters, not an unexecuted proposal, so feedback is attributable.",
+        "example": "A default count of one plus a level of −2 still compiles to at least one, never a negative serving parameter."
+      }
+    },
+    "qa/recommendation:drem/mechanism": {
+      "source_sha256": "b0de9665e6ea2df04e3a5f1e144d4d368946c01a6a7ee2ab757c4f1378f618fa",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does DrEM correct preference-flip risk instead of averaging prediction scores?",
+        "answer": "Prediction noise can reverse pair preferences, and averaging can still learn the wrong order. DrEM selects perturbation-stable pairs, corrects the objective for flip risk, and applies consistency fusion to limit ranking drift. Correction assumes a noise estimate and becomes unstable near its boundary.",
+        "example": "A small CTR perturbation can reverse a close video pair; model that risk rather than trusting the observed order as a clean label."
+      }
+    }
+  }
+}

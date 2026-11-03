@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:muon-paired-budget/mechanism": {
+      "source_sha256": "adf4116a15573dfa9ff9f354ddeee490c148a68df453de7db5a05c01a44adcb8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't lower Muon loss at equal steps prove superiority at equal compute or tuning cost?",
+        "answer": "Step latency, throughput, and tuning can differ. Pair initialization, data order, and candidates; compare processed data, elapsed training time, and fixed tuning budget separately. Freeze selection before test.",
+        "example": "Twice-slower steps can win at 100 steps but lose at ten minutes; retuning for time confounds the comparison."
+      }
+    },
+    "qa/foundation-models:muon-paired-budget/basics": {
+      "source_sha256": "d03e190bdb060aea5c23ca8c148845fb0c9d3c5dfa336f48b31c82dfb6419f05",
+      "reviewed": true,
+      "fields": {
+        "question": "Why report data, elapsed time, and tuning costs separately?",
+        "answer": "Per-step and per-second quality and the cost of finding parameters differ. Equal-data gains need not hold at equal time or search budget.",
+        "example": "Lower loss for equal tokens can still lose after one hour if steps are slower."
+      }
+    },
+    "qa/foundation-models:muon-paired-budget/comparison": {
+      "source_sha256": "43cfbff05f05a73b206603f5e7f6a5e2422037957e50c8bcc63189bda6f79324",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't random-access regret on a fixed candidate pool prospective adaptive HPO?",
+        "answer": "It studies random order within precomputed candidates. Adaptive HPO uses prior results to propose or choose new trials, with different information and time costs.",
+        "example": "Randomly inspect 23 existing settings versus inventing a 24th from feedback."
+      }
+    },
+    "qa/foundation-models:muon-paired-budget/implementation": {
+      "source_sha256": "c0eda13e1652357284b69a7577a60677158731c12030d84a96f7b09898719160",
+      "reviewed": true,
+      "fields": {
+        "question": "Why sample the same seed indices in paired bootstrap?",
+        "answer": "Paired trajectories share initialization and data order. Mismatching seeds loses correlation. Integrate AUC over common measurement support and freeze validation-selected settings for all budget axes.",
+        "example": "Sample seed 42 for both optimizers, not 42 for one and 44 for the other."
+      }
+    },
+    "qa/foundation-models:musec/mechanism": {
+      "source_sha256": "7db114b3e41ec60295c7d6f14b62335f201ca503766c547380893919c7bfce2f",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Musec spectral clipping differ from shrinking all gradients?",
+        "answer": "Smoothly constrain large momentum singular values without uniformly shrinking every direction. This changes update geometry, not proof of stability or final quality.",
+        "example": "Control one abnormally large direction without multiplying every normal direction by 0.1."
+      }
+    },
+    "qa/foundation-models:musec/basics": {
+      "source_sha256": "63cbe7e48e90f55a08535ae3ebd5163d00b6e7ef437a72aafa8fe50e7643d672",
+      "reviewed": true,
+      "fields": {
+        "question": "What instability does Musec target?",
+        "answer": "Smoothly clip excessive momentum singular directions so they do not dominate Muon-type updates. Controlling spectrum alone does not guarantee better loss.",
+        "example": "Limit a few huge singular values without equally scaling normal ones."
+      }
+    },
+    "qa/foundation-models:musec/comparison": {
+      "source_sha256": "5a1fa648978c691580889dd3fda642c9f3716a7ebb5478488120f623d3a8b6da",
+      "reviewed": true,
+      "fields": {
+        "question": "What differs between smooth spectral clipping and a hard threshold?",
+        "answer": "Hard decisions can jump at the boundary; smooth mapping responds continuously. Specify the exact rule and budget rather than just claiming stability.",
+        "example": "Slightly crossing a threshold need not abruptly change update magnitude."
+      }
+    },
+    "qa/foundation-models:musec/implementation": {
+      "source_sha256": "e125ca8cd99a77fc5f63d5134d33749ac0a88b91f1e79ddc9ef79836095d919a",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local full-SVD soft clipping establish large-model throughput?",
+        "answer": "No. It validates decomposition, smooth mapping, and reconstruction, not large training or optimized kernels. Verify numerical correctness and runtime separately.",
+        "example": "Small-matrix parity does not establish cost per step on a large model."
+      }
+    },
+    "qa/foundation-models:open-1b-audit/mechanism": {
+      "source_sha256": "776729d0ad764baced885f77a49c7b31b1a7133651935356ce67b667e50e9820",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is a seed insufficient for auditing stepwise replay?",
+        "answer": "Batch order, kernel reductions, and collectives affect floating-point trajectories. OPEN-1B records them and per-step state hashes to localize discrepancies. Hashes detect but do not explain differences or guarantee cross-hardware parity.",
+        "example": "Different summation order can cause drift; hashes locate the first differing step."
+      }
+    },
+    "qa/foundation-models:open-1b-audit/basics": {
+      "source_sha256": "edc2230a06a6f43830f25ae7c416362d4d5f7ca8974ff5295afa89117b749c23",
+      "reviewed": true,
+      "fields": {
+        "question": "Why audit states inside the training loop?",
+        "answer": "The final checkpoint does not explain its trajectory. Fix data and execution order and record hashes to replay and compare a specific step.",
+        "example": "If drift starts at step 100, inspect its inputs and state instead of only final accuracy."
+      }
+    },
+    "qa/foundation-models:open-1b-audit/comparison": {
+      "source_sha256": "202c292193f4e4dd9d70a838e46313e046e1e05a7d7a002601e48d6ba28c4aa6",
+      "reviewed": true,
+      "fields": {
+        "question": "How does fixing seeds differ from fixing reductions, batches, and communication?",
+        "answer": "Seeds control only part of randomness. Floating reductions, batch order, and collectives must be explicit for replay; equal seeds do not imply bitwise equivalence across hardware.",
+        "example": "Changing addition order can introduce drift despite identical initialization."
+      }
+    },
+    "qa/foundation-models:open-1b-audit/implementation": {
+      "source_sha256": "3914e638d0ab457c44e3ed60e9a5d0b989df92c5a16bcd3902b638df1bcac505",
+      "reviewed": true,
+      "fields": {
+        "question": "Does matching a canonical hash prove full 400B-token reproduction?",
+        "answer": "No. Local work checks fixed-order reduction and hashing. Full audit requires actual batches, states, and replay; a hash neither executes training nor proves correctness.",
+        "example": "Equal hashes on two small tensors do not replay the paper's entire training."
+      }
+    },
+    "qa/foundation-models:open-language-model/mechanism": {
+      "source_sha256": "ea652a5ec4d209cd4d523991b9d4602ca9e458d23129838ceebd0fa2d5ec1cb7",
+      "reviewed": true,
+      "fields": {
+        "question": "How do composable Block, Residual, and Repeat help isolate ablations?",
+        "answer": "Separate ordinary PyTorch modules from wiring such as repetition, residuals, and parallel branches. This reduces coupling to the trainer and distributed execution and aids matched comparisons. Composability is an engineering property, not quality evidence.",
+        "example": "Change serial to parallel wiring without changing data and training loop."
+      }
+    },
+    "qa/foundation-models:open-language-model/basics": {
+      "source_sha256": "73569fb1bbbe30a643dabd4eb78ffc4d79edbc2ccb4420afc1c2705a8618fb65",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep components as ordinary PyTorch modules?",
+        "answer": "Tight coupling to training and distribution obscures structure and ablations. Plain modules and composable wiring improve transparency and portability across notebooks, CPUs, and GPUs.",
+        "example": "Replace one block without also replacing the training framework."
+      }
+    },
+    "qa/foundation-models:open-language-model/comparison": {
+      "source_sha256": "129861bd636ff36156effb4886f7fcc48b155a9c268ff8a8d7b7a80585a11493",
+      "reviewed": true,
+      "fields": {
+        "question": "Do DSL equivalence tests establish a better architecture?",
+        "answer": "No. Equivalence checks preserve semantics under rewiring; architecture studies test quality after changes. Near-identical PPL supports equivalence, not improvement.",
+        "example": "Rewriting x+f(x) as Residual(f) should give the same result."
+      }
+    },
+    "qa/foundation-models:open-language-model/implementation": {
+      "source_sha256": "3c7a25fd2eee2cb9077af9cee330c82b2bf405652e08aa599be2acaced550419",
+      "reviewed": true,
+      "fields": {
+        "question": "How avoid incorrect Residual or Parallel wiring?",
+        "answer": "Residual(f)(x)=x+f(x); Parallel(f,g)(x)=f(x)+g(x). Check dimensions and repetition parameter sharing. Parallel addition is not serial composition, and not all upstream presets are local.",
+        "example": "f(x)+g(x) generally differs from g(f(x)) at the same shape."
+      }
+    },
+    "qa/foundation-models:ppl-factory/mechanism": {
+      "source_sha256": "cb1a40b90a5515782bc383764fd1bf8bcfc332b67fc29b66a6cbba40ab68d16f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does PPL-Factory vary the selection band by task and budget instead of always choosing hardest?",
+        "answer": "Difficulty and usefulness are not monotone. A frozen model scores under the task protocol, and easy, middle, or random middle sampling trade learning signal and coverage. Reasoning SFT ranks response loss only.",
+        "example": "With dozens of examples, hardest-only can lack useful signal; random midrange may retain coverage, while larger budgets differ."
+      }
+    },
+    "qa/foundation-models:ppl-factory/basics": {
+      "source_sha256": "38aba687ea8449b7c8f339bf7a4307136c0ed574e6027e30edd2c6cedc6c646b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why tie example selection to task and budget?",
+        "answer": "No fixed easiest/hardest policy suits all budgets. Task-specific frozen-model NLL guides easy, middle, or mid-random selection.",
+        "example": "A narrow band at tiny budget may hurt coverage; random sampling within the middle pool offers another trade-off."
+      }
+    },
+    "qa/foundation-models:ppl-factory/comparison": {
+      "source_sha256": "d6fb5cd9db852659d49c4ffcb2c0a42f000cd7b84b8ca3ad8cc4f3a09a9eec97",
+      "reviewed": true,
+      "fields": {
+        "question": "Can response-only and prompt-plus-response NLL ranks differ?",
+        "answer": "Yes. Full sequence includes prompt length and predictability; response-only isolates reasoning/answer tokens. Packed-block LM scoring is another protocol.",
+        "example": "A long easy prompt can hide a difficult answer in aggregate NLL."
+      }
+    },
+    "qa/foundation-models:ppl-factory/implementation": {
+      "source_sha256": "da09530bdb58d552cf1b037fd93683401d7755b86ae49b3332966b8d86bdcee0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why match frozen scorer and starting checkpoint across subsets?",
+        "answer": "Changing score model or initialization confounds selection. Match block count and tuning budget; preserve negative transfer of middle selection and do not retune on test.",
+        "example": "Random, Easy, and Middle must start from the same checkpoint to attribute PPL differences."
+      }
+    },
+    "qa/foundation-models:rkl-policy-distillation/mechanism": {
+      "source_sha256": "fa0efb2c7616f3978b7a308b8515219bb1ff3a85c733c1d0673bbac4a5ece304",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not fit token reverse KL on old rollout states alone?",
+        "answer": "Risk is under the candidate's visitation distribution. The method uses clipped prefix importance ratios and cumulative KL increments for bounded candidate comparison, then updates whole-policy weights. Exclude current action and weight both sides of the difference identically.",
+        "example": "A failure branch often visited by the old policy can be rare for the candidate and should not dominate."
+      }
+    },
+    "qa/foundation-models:rkl-policy-distillation/basics": {
+      "source_sha256": "62676da124b7ccb22d85f05266c90f35a18ce5b98ae1fd9dfe31f915da74c0d8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why care which states the student visits?",
+        "answer": "Accumulate teacher/student KL under candidate-specific visitation. Equal weighting of all historical states can misrepresent actual risk.",
+        "example": "A branch nearly never visited by a candidate should not count equally merely because it occurs in old rollouts."
+      }
+    },
+    "qa/foundation-models:rkl-policy-distillation/comparison": {
+      "source_sha256": "383649edc563d2086380a5ef6f3a6a4cd5f4788fdca8e40a8b45964172909aa9",
+      "reviewed": true,
+      "fields": {
+        "question": "How does full-feedback teacher information differ from a sampled answer?",
+        "answer": "Complete action probabilities enable reverse KL and candidate comparisons at visited states. A single sample does not give them. Teacher support must include candidate-positive actions or KL can be infinite.",
+        "example": "Seeing A sampled reveals neither B nor C probabilities."
+      }
+    },
+    "qa/foundation-models:rkl-policy-distillation/implementation": {
+      "source_sha256": "faad8cb5ab01177f6d3495d725991c8cf02a5f3db3c9ea72d5dbae0876d8dee4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why exclude the current action and apply the same prefix ratio to both terms?",
+        "answer": "r_h multiplies actions only at u<h and weights the difference of candidate and rollout cumulative KL increments. Including the current action or weighting one side changes the bounded objective.",
+        "example": "At state three, the arrival ratio uses only actions one and two."
+      }
+    },
+    "qa/foundation-models:smrc-pmrc/mechanism": {
+      "source_sha256": "7c4f2624a16100cfd77078ef2b1d8a72abea5ad23c4aa62b1c0d3fee1e7c1390",
+      "reviewed": true,
+      "fields": {
+        "question": "How do SMRC and PMRC recover gradient directions outside low-rank momentum?",
+        "answer": "Use low-dimensional momentum inside the subspace and current raw orthogonal residual outside, without persistent full residual state. SMRC uses low-dimensional EMA; PMRC modifies matrix direction treatment, and basis changes differ. Neither is just projected SGD.",
+        "example": "Keep momentum for two dominant directions while adding useful current gradient from a third."
+      }
+    }
+  }
+}

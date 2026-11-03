@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/system-one/adaptive-decisions": {
+      "source_sha256": "e13c8e4de551c7aecfa416b811dbd31fccd2ee6c06ee018d72d42b668c8334ab",
+      "reviewed": true,
+      "fields": {
+        "title": "When do extra reasoning, cross-language routing, and continual feedback change decisions?",
+        "thesis": "Adaptive decisions operate on three timelines. Selective Reasoning allocates reasoning and readout within one question; a cross-language cascade routes requests across backends; Jev-DLC uses observed feedback to change later requests. Capability evaluations establish a baseline without automatically validating any control strategy. Freeze or make choices before revealing the current test target.",
+        "axis_0": "Within-request control versus between-request state updates",
+        "axis_1": "Entropy, calibration, error ranking, and task accuracy",
+        "axis_2": "Validation-selected thresholds and test-time information isolation",
+        "axis_3": "Paper capabilities, recomputed statistics, and local real-model measurements"
+      }
+    },
+    "dive/system-one/adaptive-decisions/comparison/foundation-models:selective-reasoning": {
+      "source_sha256": "182d0cc728f6f1c472c2332e58b1673974407084cf144423c023f469f63114e2",
+      "reviewed": true,
+      "fields": {
+        "position": "A shared reader scores the empty prefix and intermediate reasoning states. A benefit gate, read trigger, and accept/stop thresholds serve distinct roles.",
+        "tradeoff": "Low entropy indicates concentration only. Record budget-forced stops separately. The full online experiment was not reproduced; the controller and recomputed author statistics are not regenerated answers."
+      }
+    },
+    "dive/system-one/adaptive-decisions/comparison/foundation-models:jev-dlc": {
+      "source_sha256": "eed461e234ed8107327100c6e8b872b06ff6fbbe9ecf5b5ceca6d7365abad709",
+      "reviewed": true,
+      "fields": {
+        "position": "Maintains conservative and responsive channels above a frozen scorer. PA-I updates the correction direction, and errors in pre-feedback predictions adjust reliability.",
+        "tradeoff": "Does not store full interactions, but still needs external representations and a fixed vocabulary. Receive feedback only after submitting the current choice; updates cannot change its score. The local state component uses random external logits."
+      }
+    },
+    "dive/system-one/adaptive-decisions/comparison/foundation-models:jev-regional-transfer": {
+      "source_sha256": "02d1658649b5c92037b61adf3332309e29a958a6bcfcfe27a66fc90218d13371",
+      "reviewed": true,
+      "fields": {
+        "position": "Measures cross-language accuracy, probability calibration, and error ranking separately. Selects the low-confidence routing fraction by validation macro-F1, then freezes it for test.",
+        "tradeoff": "Temperature calibration need not put errors first, and translation is not always beneficial. Cluster language variants of the same sentence rather than treating them as independent samples."
+      }
+    },
+    "dive/system-one/adaptive-decisions/comparison/foundation-models:jev-capability": {
+      "source_sha256": "e9da40d3eb7d263533f0a188e7a45aafc30b458f1f2130b8d1a259a6f1f335f0",
+      "reviewed": true,
+      "fields": {
+        "position": "Normalizes knowledge, reasoning, and multilingual tasks to finite options and scores a single choice with isolated labels. Separates vendor-reported values from measurements.",
+        "tradeoff": "An evaluation protocol, not an adaptive algorithm. Local NanoJev ARC results do not represent closed Jev, and support for 13 task interfaces does not mean all 13 ran in full."
+      }
+    },
+    "dive/system-one/adaptive-decisions/analysis/0": {
+      "source_sha256": "318a126ebedcbedec6ee7fc9f2ce66daaf22194ee43793266b1c736273e8b663",
+      "reviewed": true,
+      "fields": {
+        "title": "Compute feedback and user feedback are different loops",
+        "body": "Selective Reasoning observes intermediate distributions while the answer is unknown and decides whether to keep generating or read out. Jev-DLC receives accept/revoke after a request and changes the next request's state. The former cannot require the current gold answer to stop; the latter can use feedback without retroactively changing the score. They can be combined, but log per-question compute and generalization after cross-question adaptation separately."
+      }
+    },
+    "dive/system-one/adaptive-decisions/analysis/1": {
+      "source_sha256": "58ad85b199ac0b2a1637a1a460598236ab2b4456012144b1bbd573b789908f42",
+      "reviewed": true,
+      "fields": {
+        "title": "Well-calibrated probabilities are not the same as finding hard questions",
+        "body": "Cross-language transfer uses ECE and Brier scores for calibration and measures error ranking with metrics such as risk–coverage. Selective Reasoning's normalized entropy measures concentration in the current distribution. A temperature can improve calibration without improving error ranking. Strong knowledge and weak math scores do not directly yield a per-question trigger. Set routing and budgets on validation, then measure tasks and languages independently."
+      }
+    },
+    "dive/system-one/adaptive-decisions/question/within-versus-between-requests": {
+      "source_sha256": "09c25067c17093f514434461a310a6b640360ed432125cdcc12b0d5b0fe6a3b3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do Selective Reasoning's intermediate readout and Jev-DLC's revoke update need different evaluation clocks?",
+        "answer": "The intermediate read occurs before the current target is revealed and tests whether extra compute changes the current choice. A revoke has already revealed what should replace the old choice, so it can update only later requests. Rescoring the current response after feedback leaks the label into prediction and does not demonstrate continual adaptation.",
+        "example": "For question 10, the model first selects A and then receives “change to B.” DLC can use that for question 11; question 10 is scored on A. Reading an intermediate distribution on question 10 happens before that feedback."
+      }
+    },
+    "dive/system-one/adaptive-decisions/question/calibration-does-not-route-errors": {
+      "source_sha256": "a354f78fb153cbabd1135938e998cf6130bf0dd99eba4c2047618226b6b425dd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why test low-confidence routing and entropy stopping separately after calibration improves?",
+        "answer": "Calibration asks whether probabilities match aggregate correctness frequencies. Routing needs errors concentrated at low confidence, while entropy stopping sees only whether one distribution is concentrated. Cross-language transfer tests these separately. Selective Reasoning allocates budget with validation-selected controls; lower ECE alone does not show better early stopping or fallback.",
+        "example": "Two models may each be correct 80% of the time in their 0.8-confidence bins. Across the full confidence ranking, one places more errors at the bottom while the other spreads errors across bins. That single bin cannot determine how much a cascade saves."
+      }
+    },
+    "dive/system-one/adaptive-decisions/question/validation-budget-versus-test": {
+      "source_sha256": "8ec91636e43cc0eef5f587d892a3677785fc0767e0f24ecbff10931ab839b232",
+      "reviewed": true,
+      "fields": {
+        "question": "If a language or math task appears weak, can we try many routing fractions on test and report the best?",
+        "answer": "No. Capability measurements suggest checking coverage and errors by task but do not turn test into a strategy-selection set. Choose the smallest routing fraction that meets the validation macro-F1 target, then freeze it. Likewise, fix reasoning triggers and entropy thresholds in advance and preserve budget-forced cases.",
+        "example": "Validation chooses to route the lowest-confidence 20% to the stronger model. Even if 30% looks better on test, it is not the predefined strategy unless evaluated on a separate confirmation set."
+      }
+    },
+    "dive/system-one/adaptive-decisions/update/2026-10-27/0": {
+      "source_sha256": "05abb079641b3bb6e3b845a4e38458ca7f11abeea04b6a1b6b09cef4963321d7",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial version: compared Selective Reasoning, Jev-DLC, cross-language transfer, and the JEV capability evaluation. Covered within-request control, between-request state, entropy, calibration, error ranking, accuracy, and cross-paper questions."
+      }
+    }
+  }
+}

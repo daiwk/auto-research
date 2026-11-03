@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:manta/implementation": {
+      "source_sha256": "2a26a63513beeedcf05e93f8ba571a0235ad9726975718caba628847159fc48d",
+      "reviewed": true,
+      "fields": {
+        "question": "What does Π_budget do in topology updates, and what does local evidence establish?",
+        "answer": "Project proposed roles, edges, and order changes into allowed resources before execution rather than running an oversized team and accounting for only part of it. The deterministic suite checks state and scheduling without real multi-agent models or environments. Topology change counts are not five-benchmark generalization.",
+        "example": "Example: If a proposal asks for ten roles but only four fit, construct an executable bounded graph before running, not after omitting six costs."
+      }
+    },
+    "qa/agent-research:cam-df/mechanism": {
+      "source_sha256": "f6c131d2cbb3eb69b5f960dbd3e85c9729df3cabf5c134135dfaf29dae37df02",
+      "reviewed": true,
+      "fields": {
+        "question": "Why derive stop labels from the payoff gap between the current prefix and best later prefix?",
+        "answer": "Relevance ranking does not say how many exposed tools are sufficient. Early stop can miss capability and late stop costs resources. Virtual payoff subtracts cost from sufficiency; the difference sets stop or continue and its magnitude gives regret. This happens before execution, so virtual payoff is not tool success.",
+        "example": "Example: Two tools already suffice, while a related but expensive third reduces payoff. Stop labels should reflect that cost rather than rank alone."
+      }
+    },
+    "qa/agent-research:cam-df/basics": {
+      "source_sha256": "766d0b1e39997a69b5ab0b85b4a24c3cd81c927a447525a47bddb72ea04a204d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why decide how many tools to expose after ranking them?",
+        "answer": "Rank order does not identify a sufficient set. Too many tools add cost and distraction, while too few miss interfaces. CAM-DF compares virtual prefixes and heterogeneous costs before execution. It controls exposure, not dynamic stopping after actual calls.",
+        "example": "Example: If the first two tools only query and the third modifies, a modification task may need the third regardless of the earlier scores."
+      }
+    },
+    "qa/agent-research:cam-df/comparison": {
+      "source_sha256": "3bfe211a9392cecf5568b794d46abcae3126b6f7db1c5d1be1b05019a3b3918a",
+      "reviewed": true,
+      "fields": {
+        "question": "How is regret weighting different from ordinary stop/continue labels?",
+        "answer": "Error costs can differ. Gap sign supplies the class and magnitude represents lost payoff. Equal weights treat near ties like missed essential tools. A best later prefix is a comparison estimate that depends on sufficiency scoring, not hidden deployment truth.",
+        "example": "Example: Exposing one cheap extra tool has little cost. Stopping before an essential refund interface is a large error that deserves greater weight."
+      }
+    },
+    "qa/agent-research:cam-df/implementation": {
+      "source_sha256": "90a8192e91eda66d906230ae60fd633f247ce2003dda6326fba5522ccd181495",
+      "reviewed": true,
+      "fields": {
+        "question": "Can local required-tools sufficiency be a general deployment scorer?",
+        "answer": "No. Required-tools lists in the auditable mini-suite diagnose prefix choices rather than act as a learned semantic scorer. Do not reveal hidden requirements to an evaluated policy. Lower exposure is not live τ-bench token or success improvement.",
+        "example": "Example: Knowing the third tool is required is useful for offline payoff, but a runtime router reading that list bypasses the learned sufficiency problem."
+      }
+    },
+    "qa/agent-research:autoformbot/mechanism": {
+      "source_sha256": "eb79cd616244b26a0b6d17dc870367b942a4a9c6cc48a79ca466bb31abb63876",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do formalization workers need separate worktrees and a merge queue before checking the global goal?",
+        "answer": "Isolation reduces concurrent file conflicts, the dependency DAG identifies available declarations, and merge review preserves shared consistency. Local Lean success does not cover the entire textbook. The supervisor checks overall progress and replans. Failed experience can become skills, but a branch is not a merged proof.",
+        "example": "Example: Two workers prove separate lemmas. Check name collisions and main theorem dependencies after integration before claiming full formalization."
+      }
+    },
+    "qa/agent-research:autoformbot/basics": {
+      "source_sha256": "7c0ac576a7cfd6aa08208a65434600bcc2a84127d086d172ca5b7645f3cc26dd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't formalizing a whole textbook independent translation of each statement into Lean?",
+        "answer": "Later theorems use earlier definitions and lemmas, and work must preserve shared repository state, compilation, and source meaning. AutoFormBot coordinates workers through these dependencies and merges local results into global goals. Compilation only establishes acceptance by the formal system, not faithfulness.",
+        "example": "Example: A changed foundation can break other proofs even if their branches compiled earlier. Recheck after merging."
+      }
+    },
+    "qa/agent-research:autoformbot/comparison": {
+      "source_sha256": "ae75866b8c91a525bee05315b2192f96eb5965b61ddac44891ec12f892271d8c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't mechanical compilation a substitute for independent fidelity review?",
+        "answer": "The Lean kernel checks proofs of formal statements. Added axioms, sorry, weakened claims, or hidden dependencies can bypass the intended problem. Compilation is necessary but not sufficient; verify the original statement, dependencies, and independent review. Completed scheduling is not mathematical fidelity.",
+        "example": "Example: Replacing all natural numbers with zero can make a theorem easy to prove while failing to formalize the original."
+      }
+    },
+    "qa/agent-research:autoformbot/implementation": {
+      "source_sha256": "e05875c5786d88f74f6be69d2ee490f26b413a005a59ff8ef8c42244b9c0e9f0",
+      "reviewed": true,
+      "fields": {
+        "question": "Did the local run execute textbook-scale Lean agents or only record the protocol?",
+        "answer": "It records the paper's methods, dependencies, and costs without Lean jobs, paid calls, training, or GPU runs. A DAG state machine cannot reproduce days and huge token budgets per book. Over forty thousand declarations are author results, and not every book finished.",
+        "example": "Example: Scheduling forty goals does not mean forty Lean proofs compiled and passed fidelity review."
+      }
+    },
+    "qa/agent-research:prompts/mechanism": {
+      "source_sha256": "e7a30014900b3910f51b7603aa4f6c0dc112ee874703f7d54819b89f1d0d2171",
+      "reviewed": true,
+      "fields": {
+        "question": "Why ground sharding proposals in profiling rather than retrieving a common best configuration?",
+        "answer": "Optimal parallelism depends on measured compute, communication, and memory constraints. The knowledge base offers options; Analyzer locates bottlenecks, Proposal generates explainable candidates, and Coordinator organizes verification. A config or formula check does not run training or measure speedup.",
+        "example": "Example: A configuration is fast on a model card, but local profiling shows all-reduce dominates. Compare options that address communication."
+      }
+    },
+    "qa/agent-research:prompts/basics": {
+      "source_sha256": "aa211b135cef0afde21c8f4761f91b1fcddd1b4827c5c36f07a4981455e436d3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does PROMPTS treat model-parallel partitioning as iterative measured optimization?",
+        "answer": "Training bottlenecks vary by hardware and configuration among compute, memory, and communication. Agents use profiler evidence to propose partitioning and observe effects rather than apply stock settings. A recommendation is not a speedup until measured for runtime, resources, and feasibility on target hardware.",
+        "example": "Example: More sharding may save memory but slow cross-device communication. Profiling distinguishes the bottleneck."
+      }
+    },
+    "qa/agent-research:prompts/comparison": {
+      "source_sha256": "c9521e9f54c1e2066e24850b60f2c2f9e80709216462dc1694ce1976ebb9ef76",
+      "reviewed": true,
+      "fields": {
+        "question": "How does separating Coordinator, Analyzer, and Proposal differ from configuration-table search?",
+        "answer": "Separate roles coordinate work, explain bottlenecks, and propose targeted settings from evidence. Table search mainly enumerates predefined options. Multiple agents have their own cost; real training or serving results determine benefit, not explanation length or votes.",
+        "example": "Example: Analyzer identifies communication as dominant, then Proposal changes sharding accordingly instead of testing every dimension randomly."
+      }
+    },
+    "qa/agent-research:prompts/implementation": {
+      "source_sha256": "20f0b2dd419a18ee82c6cf117a4362e839a2a35c09e87af96aba0b3e37bf906c",
+      "reviewed": true,
+      "fields": {
+        "question": "Do local profiler ranking and bounded proposals include TPU/GSPMD measurements?",
+        "answer": "No. Local reference tests cover evidence ranking and proposal constraints without Google TPU profiling, GSPMD, or a production workload matrix. Top-three hits and peak gains are author measurements, not consequences of local candidate ordering.",
+        "example": "Example: Synthetic profiling can recommend less communication. Until compiling and running that configuration, there is no observed training speed."
+      }
+    },
+    "qa/agent-research:paperorchestra/mechanism": {
+      "source_sha256": "4f91594c33036fe72eb352b1812ef70b0cc505db2cd5e24b724c6531de1c8d2e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't citation checks and revision acceptance replace real experiments and research arguments?",
+        "answer": "Citation identity, abstracts, and cutoff checks verify sources and time eligibility. Revision scores constrain edits to existing content. Five writing roles organize actual ideas and logs; they do not create results. Mechanical BibTeX checks and judges are not full literature synthesis or research capability.",
+        "example": "Example: A chart agent can plot real logs, but cannot invent metrics to complete a manuscript. Authentic citations do not make fabricated results true."
+      }
+    },
+    "qa/agent-research:paperorchestra/basics": {
+      "source_sha256": "1524af7a58afd6f76fe8133164e85fd515fe8fe208b58b7f30a74bc86367ec78",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does PaperOrchestra organize actual experiment material into an argument instead of just writing fluent prose?",
+        "answer": "Scientific writing connects question, method, evidence, and citations. Fluent text can conceal missing tests or unsupported conclusions. PaperOrchestra coordinates roles to write, verify, and revise from ideas and logs. Automation cannot supply absent validation, and a citation may not support the claim.",
+        "example": "Example: With logs for two datasets, explain those two. Stronger wording cannot create a third experiment or generalization result."
+      }
+    },
+    "qa/agent-research:paperorchestra/comparison": {
+      "source_sha256": "881090da30788671d6856ed6c4255f7a9c795528c83abbaeac500954c63ecc8a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why aren't automated judging and human preferences equivalent evidence of writing quality?",
+        "answer": "Automated judges can favor form and fluency, while people assess literature reviews differently. The paper reports weak correlation. Higher revision score still needs factual and dimension-specific checks. One judge improvement does not verify real paper quality or scientific correctness.",
+        "example": "Example: More topical vocabulary may boost automatic scores while misaligned citations and overstated results make experts rate a review worse."
+      }
+    }
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:mild/implementation": {
+      "source_sha256": "06cc371f183039ba5b897049d60be0777d78acd6dc8ed89ab6dfe6a2e4a255bb",
+      "reviewed": true,
+      "fields": {
+        "question": "May mild route using true candidate costs at inference?",
+        "answer": "No. Routing uses inference features only; costs and labels are unavailable. Fit margins on train and select on validation. Use stable log-sum-exp and choose the highest expert index on ties as specified.",
+        "example": "Training knows answer costs; a new question does not reveal who answers correctly."
+      }
+    },
+    "qa/foundation-models:mirror-moe/mechanism": {
+      "source_sha256": "1382ade08ad8d1c3ac6ec54f24d6e1532dfb78b451763e9aa787301b01f155df",
+      "reviewed": true,
+      "fields": {
+        "question": "Should MirrorMoE use mixed mirror probabilities to weight outputs?",
+        "answer": "No. Mix forward and negated-logit distributions for exploratory selection only, annealing back to standard routing. Selected outputs retain original probabilities. Track actual dispatch separately; mixing or renormalizing output weights changes the mechanism.",
+        "example": "A low-probability expert can run for exposure without receiving a larger output coefficient."
+      }
+    },
+    "qa/foundation-models:mirror-moe/basics": {
+      "source_sha256": "23779e69cbf57f873d93d4a511d0cd5608a2594072478793d2106349dab90757",
+      "reviewed": true,
+      "fields": {
+        "question": "Why select near-boundary experts early?",
+        "answer": "Dominant shared experts and many fine-grained combinations can obscure alternatives. Mirror routing temporarily suppresses some usual winners to train other combinations, then anneals back.",
+        "example": "Avoid always giving the same winners every early token."
+      }
+    },
+    "qa/foundation-models:mirror-moe/comparison": {
+      "source_sha256": "cbe8ae75b9ec9950878d065f4b7ea7fa05c3974282431c4c8a24d273f428e0ae",
+      "reviewed": true,
+      "fields": {
+        "question": "How does mirror selection differ from arbitrary router noise?",
+        "answer": "Apply softmax to negated logits and mix with original probabilities using an annealing coefficient. Arbitrary noise does not reproduce its distribution or endpoint.",
+        "example": "At ρ=0, selection returns to ordinary top-k."
+      }
+    },
+    "qa/foundation-models:mirror-moe/implementation": {
+      "source_sha256": "c599271a2c31d4ea5a48a59954acad901e6bdebff51d62fd4778190138f59a64",
+      "reviewed": true,
+      "fields": {
+        "question": "Which probabilities and frequencies enter MirrorMoE's load term?",
+        "answer": "Use actual dispatch frequencies and original ξ, not mixed p. Aggregate outputs with original weights and Z=1 without renormalizing selected experts. Selection, load, and aggregation differ.",
+        "example": "Mirror probability can change whether an expert runs, but not its original output weight."
+      }
+    },
+    "qa/foundation-models:msar/mechanism": {
+      "source_sha256": "f5e0538ab870cf2bc24aba6318c4f353e35d03d238484d78368dad9106b0a9d7",
+      "reviewed": true,
+      "fields": {
+        "question": "How do MSAR streams differ from channel-split heads, and where does softmax apply?",
+        "answer": "Each stream keeps the full hidden vector at a different sequence scale. Softmax retrieves depth sources separately per stream; sigmoid combines retrieved streams without unit-sum weights. Persistent expanded views also change cost.",
+        "example": "Raw, short, and long views each contain full vectors, then independently choose historical layers."
+      }
+    },
+    "qa/foundation-models:msar/basics": {
+      "source_sha256": "8540b9e5a851ab1d55351b9ab02e9931ab209e1885f3ba6f2acf3525a1b1f063",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retrieve earlier depth representations at the current layer?",
+        "answer": "Ordinary residuals accumulate updates in one vector. MSAR makes full-width views at several time scales and retrieves across depth to access history differently.",
+        "example": "Use raw, short-window, and smoother views to form a layer input."
+      }
+    },
+    "qa/foundation-models:msar/comparison": {
+      "source_sha256": "55426976d9170f746c59517e7b40db341c8a30424b45641af6d8dbb1d7f22805",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Block MSAR's persistent summary differ from caching all expanded views?",
+        "answer": "Store embeddings, completed block summaries, and the current partial sum only. Expand streams at read time; permanently storing them changes capacity and lifetime.",
+        "example": "Four views can serve one read without retaining four historical copies."
+      }
+    },
+    "qa/foundation-models:msar/implementation": {
+      "source_sha256": "deaf741ec2478791988917528512a7cb2533df5b960455586500fb9cc823102f",
+      "reviewed": true,
+      "fields": {
+        "question": "Is a zero source harmless before a block has a partial sum?",
+        "answer": "No. Zero still enters the depth softmax denominator and dilutes other sources. Omit the absent partial, and use sigmoid rather than stream softmax in the final mixer.",
+        "example": "A zero vector added to two valid sources changes their normalized weights."
+      }
+    },
+    "qa/foundation-models:novelty-patching/mechanism": {
+      "source_sha256": "1cacb76584c9ac7dfa44ac80cff34ee2f99e5e423ea391a3772da8d04efa86d4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use matching length offline but a two-byte lookup online?",
+        "answer": "Longer recent matches define offline novelty labels. Deployment uses a prefix-indexed table and low-count fallback instead of reading a future span. Offline labels are not available when deciding a boundary.",
+        "example": "Train with full template matches, then estimate from the two already generated bytes online."
+      }
+    },
+    "qa/foundation-models:novelty-patching/basics": {
+      "source_sha256": "2da6f0fcfd8f24481ad1979e3f57902783f24614a47a83ef461a9ccd740de991",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use recent repetition to choose byte patches?",
+        "answer": "Byte patches reduce global calls. Recent match length captures repeatability, and a cheap two-byte predictor estimates novelty instead of relying only on entropy.",
+        "example": "A recently seen span may be reusable, whereas a novel span may need finer boundaries."
+      }
+    },
+    "qa/foundation-models:novelty-patching/comparison": {
+      "source_sha256": "6688c24f58214b22e5a60635b565fb3c245bbbf8d94e061d93fc2f14e6422b02",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a two-byte table differ from recomputing future match length online?",
+        "answer": "Future match lengths are offline labels. Deployment uses already generated bytes and a frozen threshold; looking past the current position leaks future information.",
+        "example": "Do not inspect whether the next 16 unseen bytes occurred before generating them."
+      }
+    },
+    "qa/foundation-models:novelty-patching/implementation": {
+      "source_sha256": "b7e69d78af1e76f2dfeb0c7c0a13d60da77a7e62ba48dd10771115a0fd10ae48",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Novelty Patching handle rare byte pairs?",
+        "answer": "Below 20 observations, back off to one-byte means, then the global mean. Calibrate τ on training bytes and reset history at document boundaries.",
+        "example": "One observed match should not determine online boundaries for a rare pair."
+      }
+    },
+    "qa/foundation-models:penelope/mechanism": {
+      "source_sha256": "08d5fa1ce997d5d5c563f9c286c936a79a3157d12feaab00df4a3c9815695b3f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not rerun the full decoder for Penelope latent steps?",
+        "answer": "A shared recurrent transform and gated state refine one decoder boundary repeatedly. Only that local computation increases; task gains require measurement and loop count is not reasoning ability.",
+        "example": "Refine a structured problem three times at the boundary without rerunning completed lower layers."
+      }
+    },
+    "qa/foundation-models:penelope/basics": {
+      "source_sha256": "ae21f3c000ea79727ff9c7500e702bc38dfde005711d3ec538717f6ef9880787",
+      "reviewed": true,
+      "fields": {
+        "question": "What does Penelope repeatedly refine?",
+        "answer": "A continuous hidden state at a local decoder boundary, with shared latent blocks and a gate before higher layers. It does not emit visible text on every loop.",
+        "example": "Refine one hidden position twice instead of writing the answer twice."
+      }
+    },
+    "qa/foundation-models:penelope/comparison": {
+      "source_sha256": "8be243329538f22814bb21195d5b0a641fc8809e6bbea22ff54684e08e603acf",
+      "reviewed": true,
+      "fields": {
+        "question": "How does local recurrence differ from repeating the whole decoder?",
+        "answer": "It only repeats the designated latent block. Full reruns repeat lower and upper layers as well. Equal step counts do not match compute or information paths.",
+        "example": "Two small block calls cost less than two complete passes."
+      }
+    },
+    "qa/foundation-models:penelope/implementation": {
+      "source_sha256": "f8ccfd9dabdadef858b3a73696a50a5a3932231bbbd94a04e4ace3d580b26d34",
+      "reviewed": true,
+      "fields": {
+        "question": "Can K independent layers replace K Penelope updates?",
+        "answer": "No. Recurrence reuses Fθ and GRU/time gates; independent layers add parameters and alter the constraint. The local budget omits the paper's CoT-to-latent curriculum.",
+        "example": "Reusing one block twice differs from running two separately parameterized blocks."
+      }
+    },
+    "qa/foundation-models:persistent-recurrent-memory/mechanism": {
+      "source_sha256": "3a15accc004cc0957c25016fa74ebb83f1e0ad63f862108f70c2b0df50e14298",
+      "reviewed": true,
+      "fields": {
+        "question": "What path changes when persistent recurrent memory sits between decoder halves?",
+        "answer": "Observe the intermediate state, update persistent state with a GRU, then gate its influence into later layers. This is neither a static prefix nor unconditional addition. Capacity and reset boundaries remain.",
+        "example": "One layer group observes a new constraint and the next can use the updated memory if relevant."
+      }
+    },
+    "qa/foundation-models:persistent-recurrent-memory/basics": {
+      "source_sha256": "d7fc80ecdda50766d63e2bdd085990461e15f1619bf6ce634d520778a5a9b49b",
+      "reviewed": true,
+      "fields": {
+        "question": "What extra state does Persistent Recurrent Memory add?",
+        "answer": "Between layer groups, current representations observe and update a persistent recurrent state that then influences computation through gates. It is distinct from residual accumulation.",
+        "example": "Earlier extracted information can persist and assist the subsequent layer group."
+      }
+    },
+    "qa/foundation-models:persistent-recurrent-memory/comparison": {
+      "source_sha256": "27100e4cfcb4bea32c2072e05bacc2b35c149a56dc55eac50920a8c9bf7c9ae3",
+      "reviewed": true,
+      "fields": {
+        "question": "How does persistent GRU memory differ from a residual connection?",
+        "answer": "A residual passes representation through the current graph. Observe–update–influence maintains extra state with a separate lifetime and update rule. It is not infinite token storage.",
+        "example": "A persistent state can survive without reconstructing prior inputs word for word."
+      }
+    },
+    "qa/foundation-models:persistent-recurrent-memory/implementation": {
+      "source_sha256": "0c59380285bff8dea3e1ac13a1aa999c82ea47331a1e071193faf37d619ef014",
+      "reviewed": true,
+      "fields": {
+        "question": "Can observe, GRU update, and gated influence be reordered?",
+        "answer": "Not without changing the topology. Specify observation source, old state, and whether later layers read pre- or post-update state; compare a reference. Local checks do not reproduce full TinyStories curves.",
+        "example": "Reading old state before updating differs from influencing with freshly updated state."
+      }
+    },
+    "qa/foundation-models:rare/mechanism": {
+      "source_sha256": "969875a8d7e9da823b08308fedbb7f0c399e01880a3e69e6da3d8485a8795288",
+      "reviewed": true,
+      "fields": {
+        "question": "How does RARE steer representations without rerouting MoE tokens?",
+        "answer": "Direct edits can change router-visible coordinates. Project edits into the current router's nullspace, then remove newly visible drift at protected later layers. This separates behavior edits from route changes, not all nonlinear effects.",
+        "example": "Remove a style edit's routing component initially and correct drift after intervening transformations."
+      }
+    },
+    "qa/foundation-models:rare/basics": {
+      "source_sha256": "b5ae86d91da4d965fa31e006d902a6aa7b35db6d0d6d5733f8976e7be2736a7a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can direct activation steering change expert selection?",
+        "answer": "The router reads hidden state. Editing it can move expert logits and alter the computation path, confounding behavioral effects.",
+        "example": "An intended style change may also send the token to different experts."
+      }
+    },
+    "qa/foundation-models:rare/comparison": {
+      "source_sha256": "f5c4fc59512558ba7317d330dd6cdd895c3ad861d3718be07ef11d82bb5cc978",
+      "reviewed": true,
+      "fields": {
+        "question": "How does RARE nullspace projection differ from reducing edit strength?",
+        "answer": "A smaller edit can still shift logits. Nullspace projection gives RΔh=0 for the protected linear router. Behavioral improvement still needs measurement.",
+        "example": "A tiny nonzero score change can cross top-k; the nullspace removes that direction."
+      }
+    },
+    "qa/foundation-models:rare/implementation": {
+      "source_sha256": "c690f8de8ff989a12d2c6729c805bdd3a80b0b5a003f4304e4614433b04f63d8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why correct later protected layers after the first projection?",
+        "answer": "Nonlinear propagation can create new router-visible components. At each protected layer, project the edited-minus-clean difference into that router's nullspace.",
+        "example": "The first router can stay unchanged while the next one needs correction."
+      }
+    }
+  }
+}

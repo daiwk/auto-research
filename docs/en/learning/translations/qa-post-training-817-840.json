@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:stopd/basics": {
+      "source_sha256": "f56f83c3613fee7588f7c61dbda1004c4e056160e7d188a052cfb750a338a4a5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why choose STOPD cutoff randomly before generating?",
+        "answer": "Independent advance sampling defines each position's inclusion probability and saves actual generation. Trimming after generation only saves supervision and can bias selection. Natural EOS remains valid.",
+        "example": "Choose a block cutoff before seeing the answer, not the most favorable length afterward."
+      }
+    },
+    "qa/post-training:stopd/comparison": {
+      "source_sha256": "211dfbb51c65425142f7b172be75d2978191b3e8bcbe9dcae28e675311ff636a",
+      "reviewed": true,
+      "fields": {
+        "question": "Does inverse-inclusion weighting make each Adam step identical?",
+        "answer": "No. The weighted gradient sum can match full-sum expectation, but normalization and nonlinear optimizer state matter. It is not per-batch update or final-training equality.",
+        "example": "Two short draws may average toward the full sum while giving different adaptive steps."
+      }
+    },
+    "qa/post-training:stopd/implementation": {
+      "source_sha256": "ba10da07d46a9eca9b94f159662039954674bb264af9881a3fb46baf3f3e373c",
+      "reviewed": true,
+      "fields": {
+        "question": "How handle partial final blocks and STOPD normalizer?",
+        "answer": "Use exact coverage probabilities for the short tail and previous batch's weighted count as current normalizer. Keep begin/loss/finish lifecycle against reuse. Do not replace with current random count.",
+        "example": "A maximum length not divisible by block width still has exact tail probabilities."
+      }
+    },
+    "qa/post-training:stopd/mechanism": {
+      "source_sha256": "4da1f3898e9664ed5e70db826f575b1737823a3df31a692012001e517fed212e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not normalize inverse-probability gradients by current random token count?",
+        "answer": "Late positions are less observable and inverse probabilities debias the sum. Dividing by a correlated random denominator needn't preserve expectation. Use previous weighted count, detached along with weights. Nonlinear optimizer steps still differ.",
+        "example": "Upweight seldom-observed later steps without claiming one short average equals full generation."
+      }
+    },
+    "qa/post-training:synthself/basics": {
+      "source_sha256": "b5e849d61fc25b338b2942586bd14e9236b75b548f3f127eb891cf14598051a5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use a larger same-family SynthSelf rewriter?",
+        "answer": "Small self-rewrites can distort content and original style may be difficult for students. A larger aligned rewriter supplies candidates verified by answer checks; shorter isn't automatically better.",
+        "example": "Convert a proof with skipped steps into learnable steps while retaining the correct result."
+      }
+    },
+    "qa/post-training:synthself/comparison": {
+      "source_sha256": "6b1215279bd01322ec1991b0bf6271b08dc0319d93d32263fb0c8a10167d530b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does answer rejection sampling differ from validating format?",
+        "answer": "Valid structure does not ensure correctness. Check rewritten answers, then test distribution/fidelity constraints empirically. Same family guarantees neither.",
+        "example": "A syntactically correct JSON result with wrong arithmetic should be rejected."
+      }
+    },
+    "qa/post-training:synthself/implementation": {
+      "source_sha256": "4fb98f6d146db1abc1ed37ff8c2d527e50045ecc5f63b22970103c6f4e7badb0",
+      "reviewed": true,
+      "fields": {
+        "question": "Where may SynthSelf use gold?",
+        "answer": "Offline training demonstrations can guide and validate rewrites. Never give evaluation answers to student or use them for curriculum. Real SFT remains necessary; preserve failed and repaired evidence separately.",
+        "example": "Text filtering without a parameter update isn't complete training."
+      }
+    },
+    "qa/post-training:synthself/mechanism": {
+      "source_sha256": "9b2b11e8fa37be5273127c391cbb21e8e245a9a9c2672f289508600821540886",
+      "reviewed": true,
+      "fields": {
+        "question": "Why rewrite with a larger related model and check the answer again?",
+        "answer": "It can adapt training demonstrations to students but may introduce mistakes. Accept through answer checking and test fidelity/distribution requirements. Do not use evaluation answers to rewrite or condition the student.",
+        "example": "Verify that a simplified solution reaches the same conclusion; using test solutions invalidates generalization."
+      }
+    },
+    "qa/post-training:progressive-contraction/basics": {
+      "source_sha256": "6bb99725fc906e6960c329ccc39d2350df0ccc487c5ac5d419cf6e72c310c566",
+      "reviewed": true,
+      "fields": {
+        "question": "Why select high branching uncertainty among correct trajectories?",
+        "answer": "Correct endings can hide fragile branch points. Monte Carlo continuations identify teachable states beyond binary original correctness.",
+        "example": "A proof with confusing mid-course formula options is useful despite a correct ending."
+      }
+    },
+    "qa/post-training:progressive-contraction/comparison": {
+      "source_sha256": "619ef8798d8abc74a0f771171eb4cf579b3eb5518ef627e033990ceb2054b473",
+      "reviewed": true,
+      "fields": {
+        "question": "What do teacher profiling and student NLL rerouting each solve?",
+        "answer": "Teacher stage finds potentially difficult reasoning states; student probes find current gaps. Teacher difficulty isn't permanent student difficulty and isn't length.",
+        "example": "Move budget if the student already mastered a teacher-profiled difficult step."
+      }
+    },
+    "qa/post-training:progressive-contraction/implementation": {
+      "source_sha256": "b5bd8e9c7e7a44399ea903757c602aa566927bde2a3a8aaa761dac867be6f584",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't reduced exposure imply equivalent total GPU acceleration?",
+        "answer": "Exposure counts student training only, omitting real teacher profiling, probes and overhead. Log separately and keep evidence of generation.",
+        "example": "Expensive screening may outweigh two fewer training epochs."
+      }
+    },
+    "qa/post-training:progressive-contraction/mechanism": {
+      "source_sha256": "9aca65b0bc7f1d42fc2dd333286d26086e8d9eb540d8f25ac26470977e332f08",
+      "reviewed": true,
+      "fields": {
+        "question": "Why profile teacher branch uncertainty, then select by student loss?",
+        "answer": "Monte Carlo continuations identify fragile points on correct traces; shrink by teacher profile, then probe students and train on current high-loss items. Rerouting follows learning. Reduced student exposure is not end-to-end speedup.",
+        "example": "Keep a fragile proof first and switch after mastery; correctness alone cannot choose."
+      }
+    },
+    "qa/post-training:grpo-difficulty-curriculum/basics": {
+      "source_sha256": "5bb77a5a37eaae50cfa994761f62d23a8fb170831bf2da6f46d213e698cd0a9a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does GRPO curriculum difficulty change as policy improves?",
+        "answer": "Measure difficulty through current sampled pass rate; learning and forgetting move items between bands. Static text length or old scores aren't the same.",
+        "example": "Yesterday's failed short prompt can become easy today."
+      }
+    },
+    "qa/post-training:grpo-difficulty-curriculum/comparison": {
+      "source_sha256": "a3aad83af519a547852a01611309eef2a9451ca42ec5a09a55af41754333baec",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't online fixed-medium equivalent to progressing to hardest band?",
+        "answer": "Fixed-medium preserves learnable success rates. Hardest progression can lose signal, and reported hardest-stage regression should remain visible.",
+        "example": "A curriculum crossing capability may yield only failures rather than progress."
+      }
+    },
+    "qa/post-training:grpo-difficulty-curriculum/implementation": {
+      "source_sha256": "dd31fbe5ce90fd9434ea86518e24d9f18ebdc0d397767555497ed765323bd8e9",
+      "reviewed": true,
+      "fields": {
+        "question": "May phase selection use test scores or length reward to define difficulty?",
+        "answer": "No. Select by validation, restore selected checkpoint and reestimate pass rates from actual current rollouts. Length reward is auxiliary, not difficulty. Static mock rates aren't online.",
+        "example": "Long output alone does not make a problem hard."
+      }
+    },
+    "qa/post-training:grpo-difficulty-curriculum/mechanism": {
+      "source_sha256": "e66834759e581ec50f02d38490b994134126f0eb5c28d74fca09550a61bb7b3b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why remeasure success instead of using fixed question length?",
+        "answer": "Difficulty is policy- and budget-dependent, so real-rollout success bands shift with learning. Select phases on validation and retain hard-stage controls; length reward doesn't replace difficulty or justify test selection.",
+        "example": "A short arithmetic problem may be harder for current model than a familiar long problem."
+      }
+    },
+    "qa/post-training:branch-opd/basics": {
+      "source_sha256": "2abaacce6b47d8502fd43d98cb14f91447ca765780b051adf165aa4a2e28b8c3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why sample extra suffixes at uncertain BranchOPD forks?",
+        "answer": "One rollout shows only one continuation. Frozen student branches expose multiple choices at the same state, focusing teacher supervision on disagreement rather than teacher-selected text.",
+        "example": "Try two continuations independently from the same proof prefix."
+      }
+    },
+    "qa/post-training:branch-opd/comparison": {
+      "source_sha256": "d47b46babb8ce5ceaa20830e8351715ae4adcf32ee44fd4579055a5c81f7888f",
+      "reviewed": true,
+      "fields": {
+        "question": "How does disagreement branching differ from retaining only correct branches?",
+        "answer": "It doesn't filter by outcome; success-only changes distribution after sampling. Preserve teacher scoring, termination supervision and matched cost/provenance.",
+        "example": "Failed branches still expose visited states; don't remove them for prettier scores."
+      }
+    },
+    "qa/post-training:branch-opd/implementation": {
+      "source_sha256": "b10345e3637cb66a08ffe84d7b4225b9308fe4ba7a960608cb756262605c7ece",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not count shared BranchOPD prefix loss for every branch?",
+        "answer": "Added coverage is in suffixes. Deduplicate prefix and align valid positions. PBR supervises defined endings; boxed-then-EOS isn't arbitrary early stop.",
+        "example": "Five branches shouldn't multiply unrelated early-token learning fivefold."
+      }
+    },
+    "qa/post-training:branch-opd/mechanism": {
+      "source_sha256": "5309743d4e9aafcd257a3af43d6dc6d3ef3e86f4076213a3703fb4d2e45f75e1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why count shared prefix only once?",
+        "answer": "Branching widens continuations, not earlier supervision. Select uncertain/disagreeing forks and sample independent frozen-student suffixes for teacher scores, without teacher forcing or gold filters.",
+        "example": "Count three shared steps once, then each of two suffixes separately."
+      }
+    },
+    "qa/post-training:boundary-evo/basics": {
+      "source_sha256": "16d700fee6dd99e08d19f9172fb721302711a5f898585a30510631e045a29c23",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reevaluate old BoundaryEvo problems each round?",
+        "answer": "Student capability changes; mastered boundary questions should leave replay and new ones enter. Curriculum coevolves rather than replay static hard problems.",
+        "example": "Move to new gaps after mastering an old proof."
+      }
+    },
+    "qa/post-training:boundary-evo/comparison": {
+      "source_sha256": "8dbf012329aa4c870564899c7bf7ba36e450d99b1239d23e1c6ff42976f9ee59",
+      "reviewed": true,
+      "fields": {
+        "question": "How does capability priming differ from verified teacher supervision?",
+        "answer": "Priming is small-scale behavioral warmup without correctness filtering. Later select questions, generate fresh teacher responses and independently validate. Don't present warmup as verified.",
+        "example": "Style imitation and checking a solution's correctness use different acceptance rules."
+      }
+    },
+    "qa/post-training:boundary-evo/implementation": {
+      "source_sha256": "45445122e41180fafe0346d4714ffcdcf4c2e94de9f678557029df56245010e5",
+      "reviewed": true,
+      "fields": {
+        "question": "What must BoundaryEvo record before SFT?",
+        "answer": "Select tasks from current student/fixed expert/analyzer gap and quality, generate fresh verified teacher traces, and supervise only response tokens. No test references or old answers mislabeled fresh.",
+        "example": "A previous answer for another question breaks selection-to-supervision alignment."
+      }
+    },
+    "qa/post-training:boundary-evo/mechanism": {
+      "source_sha256": "b6d4e7f21bce2e67bf7073240250ff44c6effff9c429c899c8df47762b03b10f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why choose capability-boundary tasks then regenerate and verify teacher traces?",
+        "answer": "Value depends on current expert–student gap and old tasks need rechecking. Generate and verify anew to avoid carrying stale wrong answers. Priming and verified supervision have different rules.",
+        "example": "Retire mastered decompositions and validate the teacher's new boundary solution instead of reusing an unchecked draft."
+      }
+    }
+  }
+}

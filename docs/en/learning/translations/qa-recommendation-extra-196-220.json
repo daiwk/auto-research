@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:tokenminds/implementation": {
+      "source_sha256": "f63acfdce7804e833ac08036238c04f7fae1c248de9bb0c6ecf6cc7da8140500",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local TokenMinds run full production multi-context decoding?",
+        "answer": "No. A small GRU and SID heads preserve dual output, not Gemini scale, 15 targets, beam 40, or KV refresh serving.",
+        "example": "Dense and code outputs do not establish shared prefill or million-read caching."
+      }
+    },
+    "qa/recommendation:tokenminds/mechanism": {
+      "source_sha256": "ff02b2e2cd5e0af6c4e2557d3f0f0c967278d120bb80e6a7d62087e2e3f6fb68",
+      "reviewed": true,
+      "fields": {
+        "question": "Why output both a dense vector and future-interest SID tokens?",
+        "answer": "Dense output fits existing rankers but can flatten multiple interests. Item-space SID prefixes provide several actionable clusters without prose. Future-window targets are training only.",
+        "example": "Represent baking and photography with separate prefixes plus a general user vector."
+      }
+    },
+    "qa/recommendation:tokenmixer-large/basics": {
+      "source_sha256": "a1db8a4e3a50623a1a678a680dd84c059b668647bfbb896cf2fdc2c5082ff0a1",
+      "reviewed": true,
+      "fields": {
+        "question": "Does parameter-free mixing make the whole TokenMixer-Large parameter-free?",
+        "answer": "No. Mix/revert are fixed rearrangements; headwise and tokenwise SwiGLU, deep residuals, and auxiliary losses still learn.",
+        "example": "Channel shuffling is fixed, but the FFNs processing channels train."
+      }
+    },
+    "qa/recommendation:tokenmixer-large/comparison": {
+      "source_sha256": "85f5fe0e27ef0c2565f00881a25720909bdeb04a5c962bd7ea3d6060beaa131c",
+      "reviewed": true,
+      "fields": {
+        "question": "What does mix–headFFN–revert add over tokenwise FFN?",
+        "answer": "Rearrangement exposes slices from different tokens to a nonlinear head transform, then restores layout. It is not dynamic attention, and one small gain cannot replace all attention.",
+        "example": "Each token can receive transformed evidence from other tokens after reverting."
+      }
+    },
+    "qa/recommendation:tokenmixer-large/implementation": {
+      "source_sha256": "4d0a745e690004fc0728eb455d2ca10a7fa740afc7d2ab004385729cd10762d1",
+      "reviewed": true,
+      "fields": {
+        "question": "What can the local RankMixer comparison establish?",
+        "answer": "Match width, depth, negatives, and steps, but the result is small single-seed and lacks full attention controls. Bind FFNs to mixed positions and preserve revert order.",
+        "example": "The first mixed head need not be the first original feature slot."
+      }
+    },
+    "qa/recommendation:tokenmixer-large/mechanism": {
+      "source_sha256": "6e2330a22da195daa7d9e9b9c1524d99cd48efaec718ec4fc6df12b5cd5f3491",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use headwise SwiGLU after mixing and tokenwise SwiGLU after revert?",
+        "answer": "The former learns cross-token combinations from rearranged channels; the latter refines restored per-token states. Residual intervals and intermediate supervision support depth. Rearrangement moves information but does not learn interactions.",
+        "example": "Mix price and preference channels, learn interactions, then restore fields for token-specific processing."
+      }
+    },
+    "qa/recommendation:toolrec/basics": {
+      "source_sha256": "b51a76cb8e5ef651429f4d9297e14249718578390e35d9918e21b91f8deebc96",
+      "reviewed": true,
+      "fields": {
+        "question": "Does tool frequency mean more calls are better?",
+        "answer": "No. It is a system calibration signal, not user relevance or successful-call quality. Evaluate use distribution and utility separately.",
+        "example": "Raising an uncommon tool's rate does not make it relevant to unrelated questions."
+      }
+    },
+    "qa/recommendation:toolrec/comparison": {
+      "source_sha256": "696bd824c9b5b0e891b976e7c34a8cfbd89e374812e0181ae984b966173ce455",
+      "reviewed": true,
+      "fields": {
+        "question": "How do dynamic frequency weights differ from a fixed positive/negative ratio?",
+        "answer": "Dynamic weights follow tool-use statistics; fixed ratios do not. Frequency is not utility, so do not trade relevance away and report only triggers.",
+        "example": "A low-use tool can get more opportunities only where appropriate."
+      }
+    },
+    "qa/recommendation:toolrec/implementation": {
+      "source_sha256": "c1223a987c09bba9efbc9c533a1d1cca2d37371a95235cc499298e07b6190f5c",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local ToolRec execute real tools?",
+        "answer": "No. MovieLens tests calibration/scoring without private sessions or tool calls. Use versioned training-window frequencies, not future test rates.",
+        "example": "Movie genre counts are not API cost or service load."
+      }
+    },
+    "qa/recommendation:toolrec/mechanism": {
+      "source_sha256": "abbc590327c490187f9b30e7b90c6259cda0d62deda59a6101c2b1560e1626ae",
+      "reviewed": true,
+      "fields": {
+        "question": "Why calibrate user preference and tool frequency rather than reward triggers alone?",
+        "answer": "Trigger-only rewards overcall irrelevant tools; user-only optimization may ignore supply/use imbalance. Dynamic weights balance both, but frequency is governance, not quality.",
+        "example": "Live flight questions may need a tool, whereas definitions need not call it to boost frequency."
+      }
+    },
+    "qa/recommendation:transact-v2/basics": {
+      "source_sha256": "2576e0106ee60990177d4b4d0b90346c5ce2230e7771d64100fe38a7e3f74eaa",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine lifelong and recent histories in TransAct V2?",
+        "answer": "Candidate retrieval finds relevant older evidence, while recent history captures immediate intent. One Transformer fuses both with candidates early.",
+        "example": "A current browse and a similar older interest can both support a candidate."
+      }
+    },
+    "qa/recommendation:transact-v2/comparison": {
+      "source_sha256": "d5692c5041767f2027a14c03e7e4f340b6fdb1e94ec4f25bbfffc31ca5f3ba57",
+      "reviewed": true,
+      "fields": {
+        "question": "How does guaranteed recent retention differ from full-history top-k?",
+        "answer": "It keeps fresh behavior even with low similarity, while other positions come from candidate search. Extra context costs compute; gains depend on data.",
+        "example": "A new interest may not rank highly under an old similarity model."
+      }
+    },
+    "qa/recommendation:transact-v2/implementation": {
+      "source_sha256": "a6df0e9f6e0ed7975ad70aafb8765d768143b7b471186716b21b6c3c711815f5",
+      "reviewed": true,
+      "fields": {
+        "question": "Can Next Action Loss labels enter the current input?",
+        "answer": "No. Next positive behavior is supervision only; input reads the past, and negatives must be valid. Local model scope excludes production SKUT/request dedup and throughput.",
+        "example": "Adding the future click to history trivially leaks the auxiliary target."
+      }
+    },
+    "qa/recommendation:transact-v2/mechanism": {
+      "source_sha256": "c0a795ce0c0f78e49a99cee637d3e8eb025a05e657cbf6fcc528c2f0af487b35",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep raw recent events and add Next Action Loss?",
+        "answer": "Candidate matching retrieves old evidence but can miss emerging intent. Keep recent events and fuse with retrieved history. NAL learns next positive action beyond CTR; missed remote events and serving performance remain separate.",
+        "example": "A tent candidate finds old camping while raw history shows new family-travel interest."
+      }
+    },
+    "qa/recommendation:transretrieval/basics": {
+      "source_sha256": "e83b4f4a682691e9510a3b9679d0ed0e646a408b497b974143f9cbadb6047aba",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compress source history and target tokens?",
+        "answer": "Source noise and many target tokens both raise cross-attention cost. Norm-aware pooling and target compression act at different ends; domain embeddings limit confusion. Compression loses detail.",
+        "example": "Summarize source behavior and combine target fields before interaction."
+      }
+    },
+    "qa/recommendation:transretrieval/comparison": {
+      "source_sha256": "7d817fb7c87e049b8c56a1c8042c7070d08a7e5db590ab47e109dc1ed63e2255",
+      "reviewed": true,
+      "fields": {
+        "question": "How does norm weighting differ from averaging source tokens?",
+        "answer": "Larger norms get more weight, whereas mean is uniform. Norm is a proxy, not causal importance. Domain position encoding is not one shared constant.",
+        "example": "A high-amplitude noisy feature may receive too much influence."
+      }
+    },
+    "qa/recommendation:transretrieval/implementation": {
+      "source_sha256": "d06c43174f8d78de8f7496d0a0145c9f5ea1d301e3e7f2f486c12cdedb2bd4d3",
+      "reviewed": true,
+      "fields": {
+        "question": "Does 85% fewer target FLOPs imply equal end-to-end latency savings?",
+        "answer": "No. Structural counts omit memory movement and other service stages. No original 40B interactions, large ads catalog, or ANN are reproduced.",
+        "example": "Preprocessing or retrieval can dominate even if attention arithmetic falls."
+      }
+    },
+    "qa/recommendation:transretrieval/mechanism": {
+      "source_sha256": "1497e4b38266ba1dab8c00377a9313f271c51d9bd19c9fe9e27fea8cde66d355",
+      "reviewed": true,
+      "fields": {
+        "question": "Why norm-pool source history, compress target tokens, and add domain positions?",
+        "answer": "Norm weighting selects among noisy source events; target compression reduces cross-domain compute, while position/domain identity separates business meanings. Norm is not guaranteed relevant and compression can lose target detail.",
+        "example": "Mark article saves and product purchases as different while compressing both sides for ad retrieval."
+      }
+    },
+    "qa/recommendation:transx/basics": {
+      "source_sha256": "c40dc31d083f95622689a0387ba84f4e211b566b255eee86eb8d132142fbbadd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why split behavior and request streams?",
+        "answer": "Cache global/local historical states asynchronously, then let short candidate requests cross-attend. Share only candidate-independent portions.",
+        "example": "Several candidates read one user cache but retain separate matching."
+      }
+    },
+    "qa/recommendation:transx/comparison": {
+      "source_sha256": "0a9621645d621dfe2d7f3a32c9682583e6d046efaa1763bb2a27dffa576531f6",
+      "reviewed": true,
+      "fields": {
+        "question": "How does shared multi-cutoff pooling compare with independent pooling?",
+        "answer": "Merge softmax statistics to reuse prefix work, with equivalent forward and gradients. This is compute reuse, not a changed score. Base, Retrieval, and Ranking are distinct production tests.",
+        "example": "Shared pooling should match independent computation on the same input."
+      }
+    },
+    "qa/recommendation:transx/implementation": {
+      "source_sha256": "49defb0d2add29da117a45b80581df36c6d0a4a457fa54e18903c98352443817",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine duplicate sparse row gradients before squaring?",
+        "answer": "Squaring is nonlinear: sum logical-step gradients first. Small A100 tensors verify this rule, not the 32-H200 system or an upgraded adapter grade.",
+        "example": "Opposite gradients should cancel before the square."
+      }
+    },
+    "qa/recommendation:transx/mechanism": {
+      "source_sha256": "5e62dbef3174029a781e962ee9becd6c8bb3e7f6a945a7f036c44329204ec77d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why cache global/local behavior and cross-attend only from the short service stream?",
+        "answer": "Behavior changes slower than requests, allowing historical encoding amortization. Global represents overall interests, local recent detail. Cache building/refresh still cost work, and candidate-dependent states are not public user caches.",
+        "example": "Reuse long history across opens and refresh local data without re-encoding years per candidate."
+      }
+    },
+    "qa/recommendation:tsgr/basics": {
+      "source_sha256": "46b53f4b1dc16d8a875a46b9577e4dfd20a1ab2c9fb6fff2af7bf9e9481fccc7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why encode business value in TSGR generation?",
+        "answer": "Semantic-only retrieval followed by isolated pre-ranking separates retrieval from value. Global and query-conditioned codes plus joint VRM connect generation states with fine business ranking.",
+        "example": "Among semantically similar items, include transaction fit for the current query."
+      }
+    },
+    "qa/recommendation:tsgr/comparison": {
+      "source_sha256": "67a685cb525e64ca009d19de0b158db918d808f17716a39f09d2ef42c9882f9e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain global and query-conditioned value codes?",
+        "answer": "Global summarizes broad value; conditional code expresses value for specific demand. Global can favor head items and conditional needs reliable query statistics.",
+        "example": "A bestseller may be worse for a specialist query than a niche product."
+      }
+    },
+    "qa/recommendation:tsgr/implementation": {
+      "source_sha256": "0ade50a1120cf56f8e757ef98846fd3a8d5de89078db1ebe3b0bcfbb70697c8a",
+      "reviewed": true,
+      "fields": {
+        "question": "What leakage must local TSGR IDs and VRM avoid?",
+        "answer": "Use training-period value estimates and code assignments, align query conditions with item identity, and update VRM jointly under protocol. Never encode test conversion.",
+        "example": "Putting a future order amount into an item code leaks the prediction target."
+      }
+    }
+  }
+}

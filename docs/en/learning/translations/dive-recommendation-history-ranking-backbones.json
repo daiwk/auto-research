@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/recommendation/history-ranking-backbones": {
+      "source_sha256": "7ab069028e7b692f00e56d4c2f4438c56e245788d6d47e2297719afe28dc2403",
+      "reviewed": true,
+      "fields": {
+        "title": "DIN, HSTU, LONGER, SlimPer, and RankMixer: what interacts with what?",
+        "thesis": "Before comparing ranking backbones, trace history-to-history, candidate-to-history, and field-to-field edges. DIN activates history by candidate; HSTU updates historical states across layers; LONGER merges tokens before a short query reads long KV; SlimPer repeatedly reads the user pool but propagates only a small knowledge base; RankMixer replaces heterogeneous field interactions. These mechanisms may occupy different stages in one pipeline. A single length variable or local leaderboard cannot rank them all.",
+        "axis_0": "Interactions within history, target readout, or field mixing",
+        "axis_1": "Propagated state and continued access to original history",
+        "axis_2": "How candidate dependencies limit user-cache sharing",
+        "axis_3": "Complexity variables and limits of local and production evidence"
+      }
+    },
+    "dive/recommendation/history-ranking-backbones/comparison/recommendation:din": {
+      "source_sha256": "888589797262853338ce6fe0939cd8808c6090ff7d61f3589dcbd5f191e8ce89",
+      "reviewed": true,
+      "fields": {
+        "position": "Computes local activation between candidate q and each historical action, then pools a target-specific interest rather than one final user interest for all candidates.",
+        "tradeoff": "Direct target relevance, but each candidate needs its own activation and aggregation. This main path does not create HSTU-style layer-by-layer history interactions."
+      }
+    },
+    "dive/recommendation/history-ranking-backbones/comparison/recommendation:hstu": {
+      "source_sha256": "d9b80cb8a3e9d2aaab2f315c4fa0a7859c379866bd0cd02b4b24ace029544e97",
+      "reviewed": true,
+      "fields": {
+        "position": "Updates history tokens inside the window through causal pointwise aggregation, post-pooling normalization, and a U gate, preserving historical dependencies.",
+        "tradeoff": "Removing softmax does not make all-pairs interactions linear. The paper's M-FALCON can reuse candidate-independent historical KV, but target-side queries and outputs are still dependent. M-FALCON has not been implemented locally; the reuse is not measured here."
+      }
+    },
+    "dive/recommendation/history-ranking-backbones/comparison/recommendation:longer": {
+      "source_sha256": "aeefd53589b1caa30a89d4830d0c51aef24c2c79b7df1601dd5f20c7e052e97b",
+      "reviewed": true,
+      "fields": {
+        "position": "Merges adjacent behavior tokens. In the first layer, a few global/recent queries read long KV and yield query-length outputs; later self-attention operates only on the short output.",
+        "tradeoff": "Merging and short-query compression are separate and may lose fine-grained addressing. Merging increases width and projection cost. The local implementation only has InnerTrans/ordinary self-attention after aggregation, not the paper's first-layer short-Q/long-KV cross-causal attention or causal mask. Prior metrics cannot validate that path or cache throughput."
+      }
+    },
+    "dive/recommendation/history-ranking-backbones/comparison/recommendation:slimper": {
+      "source_sha256": "21dc96c1f8fd4a92dbbd077acbdef3c251b0545db836e1b7846e4f6e547ae961",
+      "reviewed": true,
+      "fields": {
+        "position": "Refines a fixed-slot, candidate-dependent knowledge base with Select–Match–Refine. Each layer rereads the shared user token pool and propagates the small KB instead of all historical hidden states.",
+        "tradeoff": "The user pool still grows with history length, and initial encoding may include local interactions. Candidate-independent user encodings can be shared; final candidate KBs cannot. Short local histories do not establish production long-sequence QPS."
+      }
+    },
+    "dive/recommendation/history-ranking-backbones/comparison/recommendation:rankmixer": {
+      "source_sha256": "30c0fecfff6d2b55ab407534cb9a570ab091cdc402009417d512db18416f5440",
+      "reviewed": true,
+      "fields": {
+        "position": "Rearranges heterogeneous feature tokens by head and token, then applies a separate FFN at each output position. Learns combinations when rearranged components meet, replacing attention for field interactions.",
+        "tradeoff": "Token counts must match head and width constraints. Upstream history modules may still use attention; field mixing does not compress very long histories. Check sparse routing and implementation scope separately before generalizing that the full model is attention-free."
+      }
+    },
+    "dive/recommendation/history-ranking-backbones/analysis/0": {
+      "source_sha256": "e33d8c8ffd6540b0611168179a2264470462ee537cd9c89d6ddb1977f12a334e",
+      "reviewed": true,
+      "fields": {
+        "title": "Compare layer-to-layer state before FLOPs",
+        "body": "HSTU updates the history window in every layer; LONGER continues on short query outputs after the first; SlimPer keeps original user tokens readable while propagating a small KB. They save different things. Eliminating full-length propagated state does not eliminate long-history reads, and eliminating softmax does not eliminate pairwise history interactions. DIN's target pooling and RankMixer's field mixing also do not fit one N²-versus-N table."
+      }
+    },
+    "dive/recommendation/history-ranking-backbones/analysis/1": {
+      "source_sha256": "09697222605192df27f8ff3efaecce69d8cc358545aa36df792dddcd432cc638",
+      "reviewed": true,
+      "fields": {
+        "title": "A user-side label does not guarantee reuse across candidates",
+        "body": "DIN pooling already reads the candidate. SlimPer's KB begins with item/cross information, so candidate B cannot reuse A's refined KB. HSTU M-FALCON and LONGER user KV reuse require a shared path that has not consumed target-dependent information. RankMixer often mixes candidates, sequence summaries, and fields late, so its final state is not inherently a reusable user cache. Trace dependencies rather than module names."
+      }
+    },
+    "dive/recommendation/history-ranking-backbones/question/which-history-remains-readable": {
+      "source_sha256": "d65147163fddf14b80457218513e5a077f72f2e7d5db85b356f10d28a2b08b97",
+      "reviewed": true,
+      "fields": {
+        "question": "LONGER and SlimPer both compress state. Why does compressing once and never reading the full history again describe only some paths?",
+        "answer": "LONGER's first short queries read long KV; later layers mostly work on the short output. SlimPer's small KB queries the user token pool at every layer, retaining access to original evidence. HSTU instead updates history within the window across layers. Ask what each layer can still access instead of calling all three short-sequence compression.",
+        "example": "If an old gardening interaction was missed in layer one, SlimPer can query it again later. LONGER cannot reread it from the full history if the short sequence did not retain it."
+      }
+    },
+    "dive/recommendation/history-ranking-backbones/question/candidate-dependent-cache": {
+      "source_sha256": "8424a77da085217c3a9ba0be93e0c1e05f1ce78fa6d787c91fff9790abe02be6",
+      "reviewed": true,
+      "fields": {
+        "question": "When scoring 100 candidates for one user, can DIN interests, SlimPer KBs, and HSTU historical KV all be cached once?",
+        "answer": "No. DIN interests and SlimPer's final KB depend on the candidate. Only base encodings that have not read the target are shareable. Under M-FALCON, HSTU reuses candidate-independent historical KV, but each target still needs its own query and output. A cache requires fixed dependencies, not just the same user.",
+        "example": "A cat-food candidate makes the KB focus on cat ownership. A gardening-tool candidate should attend to flower growing. Reusing the cat-food KB would mistake one target-conditioned state for a general user state."
+      }
+    },
+    "dive/recommendation/history-ranking-backbones/question/field-mixing-not-history-replacement": {
+      "source_sha256": "3bdb8d95d6dca240f356cf22c914c466bf05f1a265fe6a7734f59544efb1abc7",
+      "reviewed": true,
+      "fields": {
+        "question": "If RankMixer does not use attention for interactions, why can it coexist with LONGER or HSTU?",
+        "answer": "RankMixer handles interactions across heterogeneous field tokens. LONGER and HSTU focus on behavioral history. A history module can produce a summary or state as input fields for TokenMix and PFFN. Field count T and history length N are different variables, so replacing field attention does not determine full-model cost or long-history capability.",
+        "example": "A history module emits recent and long-term interests. Alongside price, device, and candidate category, these make five field tokens. Late TokenMix does not replace upstream history retrieval and encoding."
+      }
+    },
+    "dive/recommendation/history-ranking-backbones/update/2026-10-27/0": {
+      "source_sha256": "84ad6597951442fe7053540eefdc4f785e7b7168870230d7093f075b726414f8",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial version: compared DIN, HSTU, LONGER, SlimPer, and RankMixer. Added analysis and questions on interaction targets, layerwise state, and continued access to original history."
+      }
+    }
+  }
+}

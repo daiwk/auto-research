@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:lift-feedback/comparison": {
+      "source_sha256": "a59c1c20d95267c10118bddec01fcd9f776856a074c5da3fbfedd9265b52b9ea",
+      "reviewed": true,
+      "fields": {
+        "question": "How does LIFT state feedback differ from returning only the sampled token?",
+        "answer": "A token preserves one discrete choice. State carries continuous top-k distribution information through the shared embedding space. Dedicated state supervision remains necessary; adding any extra vector is not equivalent.",
+        "example": "Two nearly tied options contain information a single sampled word loses."
+      }
+    },
+    "qa/foundation-models:lift-feedback/implementation": {
+      "source_sha256": "278bb1070b131c714d66b12d5b139d821fd23ba749750d5df615a2ac9b621f83",
+      "reviewed": true,
+      "fields": {
+        "question": "Can the student loss update LIFT teacher state?",
+        "answer": "No. Stop teacher gradients; train with token CE and forward KL on the normalized teacher top-k distribution. Inference must use the model's own state.",
+        "example": "Student errors update the student, not teacher targets to match its mistakes."
+      }
+    },
+    "qa/foundation-models:lngram-v2/mechanism": {
+      "source_sha256": "886e34d8e3d2921f80789d4e269f5605bb85a3178bf1caa16d5f78141355d80d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use counterfactual neighbor addresses and a zero sink with hard Lngram v2 lookups?",
+        "answer": "Binary addresses are discrete and ordinary indexing gives no smooth address gradient. Neighbor comparisons train address choice. GQA reads retrieved tokens alongside a zero sink so irrelevant memory need not be injected.",
+        "example": "A neighbor may be more useful than the addressed phrase; if neither helps, attend to zero."
+      }
+    },
+    "qa/foundation-models:lngram-v2/basics": {
+      "source_sha256": "e77e6a42a4d19aaaa855ea8ca79848966344b0013caa601acd1a7389f4af1722",
+      "reviewed": true,
+      "fields": {
+        "question": "Why turn hidden states into discrete n-gram addresses?",
+        "answer": "Recent-state combinations index a memory table in expected O(1); multiple results feed back into the backbone. Explicit addressing has a trainable projection and is not lookup of literal strings only.",
+        "example": "Two binary hidden-state codes can form a 2-gram key."
+      }
+    },
+    "qa/foundation-models:lngram-v2/comparison": {
+      "source_sha256": "a4128fc73a72bf99999534ac4dfe4bc748d4cef6102702e4633153bd5f34d49f",
+      "reviewed": true,
+      "fields": {
+        "question": "How do latent addresses differ from text n-gram hashes?",
+        "answer": "Backbone hidden projections carry context, while text hashes depend directly on discrete input fragments. They do not share an address space or interpretation.",
+        "example": "The same word in different contexts can yield different latent addresses."
+      }
+    },
+    "qa/foundation-models:lngram-v2/implementation": {
+      "source_sha256": "b2803d8e6852cdf17c16ff33d6fa18742930ac64c1aa33625bbdd4b2340fbcf0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why include a zero sink instead of always using lookup results?",
+        "answer": "It lets GQA reject irrelevant memory. Counterfactual adjacent addresses supply training signals; the integer index is not ordinarily differentiable.",
+        "example": "A query can attend to zero to keep an unhelpful lookup out of the residual."
+      }
+    },
+    "qa/foundation-models:looped-latent-attention/mechanism": {
+      "source_sha256": "dcaf089f4576dee09ea8c5d09d52633ea96662037d233b42800867f4513f76ca",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can loop KV be compressed even when looped Transformer weights are shared?",
+        "answer": "Loops with shared weights still generate different KV. LLA stores shared low-rank latents and reconstructs loop-specific KV. Rank and error bound savings, and reconstruction costs compute.",
+        "example": "Four iterations can store a small latent plus four maps rather than four full KV copies, subject to reconstruction quality."
+      }
+    },
+    "qa/foundation-models:looped-latent-attention/basics": {
+      "source_sha256": "8674a9b466dd1082dd5b48e9715ff3701030e5a31ba8ef21b849286b73306be8",
+      "reviewed": true,
+      "fields": {
+        "question": "How does sharing weights differ from sharing runtime state?",
+        "answer": "The repeated transform is the same, but KV depends on each loop's hidden inputs. LLA shares a latent while rebuilding each loop's K/V.",
+        "example": "One machine processing different intermediate materials produces different outputs."
+      }
+    },
+    "qa/foundation-models:looped-latent-attention/comparison": {
+      "source_sha256": "32460728269aebdb131bbe9a377a51793d84d4c71dcc97df2b5989d96cf7a278",
+      "reviewed": true,
+      "fields": {
+        "question": "What differs between LLA KV compression and reducing parameter count?",
+        "answer": "Weight sharing reduces parameter storage. Latent compression reduces history cache and adds reconstruction. Their memory scales differ.",
+        "example": "Cache keeps growing with generated length while model weights remain fixed."
+      }
+    },
+    "qa/foundation-models:looped-latent-attention/implementation": {
+      "source_sha256": "224497163e03ccb0e767a06928275a438f80e8be750ee7becee8f26209db7fee",
+      "reviewed": true,
+      "fields": {
+        "question": "What must stay loop-specific when reconstructing KV?",
+        "answer": "A shared projection produces z, then separate loop matrices U reconstruct K/V. One identical KV for all loops removes the defining difference. The small model is not a post-hoc codec or fused server kernel.",
+        "example": "Use U¹ and U² on the same z to produce two K outputs."
+      }
+    },
+    "qa/foundation-models:macro/mechanism": {
+      "source_sha256": "b7029fec614b6482830757516a5d05352ce9761defb34acb4f577fa938514d65",
+      "reviewed": true,
+      "fields": {
+        "question": "How does MACRO change input computation without changing weights?",
+        "answer": "A context-conditioned routing program can skip, repeat, or residual-add layers. Feedback updates route probabilities and search selects programs; the backbone is fixed. Use validation, not isolated test gold, for selection.",
+        "example": "Two prompts can execute different paths through identical layers."
+      }
+    },
+    "qa/foundation-models:macro/basics": {
+      "source_sha256": "78dd966d1e868a0f6f618afb5c158d61debf5598be64dfcba57e604450171309",
+      "reviewed": true,
+      "fields": {
+        "question": "Why treat layer execution as a program?",
+        "answer": "Context-conditioned Markov routes support skip, repeat, and residual-add rather than one fixed order. Feedback updates routes and candidate decoding chooses programs.",
+        "example": "One input can skip a layer and repeat another."
+      }
+    },
+    "qa/foundation-models:macro/comparison": {
+      "source_sha256": "582689ce174de4cee34bed79d5871ffa2c56cdfc9436144ed5822d15a73845bf",
+      "reviewed": true,
+      "fields": {
+        "question": "What does routing search change compared with fine-tuning?",
+        "answer": "It changes how fixed layers execute, not internal parameters. Costs and generalization can differ, and a route is not a new trained backbone.",
+        "example": "Rearranging blocks differs from reshaping them."
+      }
+    },
+    "qa/foundation-models:macro/implementation": {
+      "source_sha256": "27dfb99ef9922e33c97a2fcaf5ec9dac6b840171e508f1d2b8c01fb805091cf0",
+      "reviewed": true,
+      "fields": {
+        "question": "Can MACRO greedily concatenate the highest-probability operation at each step?",
+        "answer": "Not generally. Top-k Viterbi preserves Markov dependencies. Locally greedy choices can miss a better full program; the classification mini-suite is not the paper's scale.",
+        "example": "A likely repeat now can reduce the score of all later reachable paths."
+      }
+    },
+    "qa/foundation-models:memory-grafting/mechanism": {
+      "source_sha256": "6daf84e55a0b64bc93f4cce942046a3268dc51607017fe8d0b7d4072c79ad0c5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why pre-encode frequent phrases and fall back to hashed Engram?",
+        "answer": "An offline model encodes common n-grams into frozen memory; the recipient tries longest-suffix exact lookup. Trainable hash memory covers misses. Projection and contextual gating decide how to use the result, separating offline knowledge cost from online access.",
+        "example": "A common trigram hits the bank while a rare combination falls back to hashing; either can be gated away."
+      }
+    },
+    "qa/foundation-models:memory-grafting/basics": {
+      "source_sha256": "b47459a0d590aac237bb8bb8e1e65e3de36e65a2d05396fe8bd61c349d2c617e",
+      "reviewed": true,
+      "fields": {
+        "question": "What are the roles of grafting model and recipient?",
+        "answer": "The grafting model supplies offline intermediate phrase states; the recipient reads this frozen memory online without rerunning the teacher for each phrase.",
+        "example": "Encode phrases once and look up values later."
+      }
+    },
+    "qa/foundation-models:memory-grafting/comparison": {
+      "source_sha256": "d6940579668e270576f81b4805aa320f6c1231bc731f33461e45f4f966e4e2a8",
+      "reviewed": true,
+      "fields": {
+        "question": "How does grafted memory differ from Engram trained from scratch?",
+        "answer": "A pretrained model encodes and freezes the exact bank; longest-suffix lookup precedes trainable hash fallback. Table size alone is not the difference, and local results do not beat equal-parameter Engram.",
+        "example": "An absent exact phrase uses the explicit hash fallback, not a fabricated value."
+      }
+    },
+    "qa/foundation-models:memory-grafting/implementation": {
+      "source_sha256": "2480991227a5e38224b614887db52c9948f12c7ed6876fcedfe1dcf4c6d903b8",
+      "reviewed": true,
+      "fields": {
+        "question": "Which phrase state is stored in the offline bank?",
+        "answer": "Freeze the final token's hidden state at the specified intermediate grafting layer. The recipient uses separate projection, context gate, and short convolution. End-to-end bank retraining changes the method.",
+        "example": "Store token four's state for a four-word phrase rather than arbitrarily averaging all four."
+      }
+    },
+    "qa/foundation-models:mhc/mechanism": {
+      "source_sha256": "c804a9de277ccab0ac087d51e1ffd3a978d8d8273597f03f56f32a91351f67a0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why constrain mHC residual mixing to a doubly stochastic matrix?",
+        "answer": "Repeated unconstrained mixing can amplify deep residual signals. Nonnegative entries and unit row/column sums constrain exchanges while retaining communication. This does not bound growth of the whole nonlinear network.",
+        "example": "Two streams can mix 0.7/0.3 under both constraints; repeated unconstrained sums may grow quickly."
+      }
+    },
+    "qa/foundation-models:mhc/basics": {
+      "source_sha256": "1eaacb69696b77918d188647e7897e3b495aa004696d8115b499ae09f4405575",
+      "reviewed": true,
+      "fields": {
+        "question": "What freedom do multiple residual streams add?",
+        "answer": "They exchange information dynamically, build attention/FFN inputs, and write back to several streams. Mixing needs constraints because it can amplify depth.",
+        "example": "Keep different histories and mix as needed rather than using one cumulative vector."
+      }
+    },
+    "qa/foundation-models:mhc/comparison": {
+      "source_sha256": "d57b287107cedb3e10903280517534e3214f5e0c9ad0e187f7fd7b225cf0e0c6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is mHC more than another normalization layer?",
+        "answer": "It restricts residual maps to nonnegative doubly stochastic matrices and pre/post maps to nonnegative values. Hidden normalization does not impose those operator constraints.",
+        "example": "Normalized outputs do not imply row and column sums of one."
+      }
+    },
+    "qa/foundation-models:mhc/implementation": {
+      "source_sha256": "8022a3ff021a5ee8193c35bead362617541207d4019c2be62d2ee6be84e51604",
+      "reviewed": true,
+      "fields": {
+        "question": "Are unit row sums enough to validate mHC?",
+        "answer": "No. Check nonnegativity and unit column sums as well as separate pre/post constraints. A nonexpansive residual mixer does not prove the full nonlinear model is nonexpansive or better trained.",
+        "example": "Two rows concentrating on one column satisfy row sums but fail column sums."
+      }
+    },
+    "qa/foundation-models:mild/mechanism": {
+      "source_sha256": "0d7089dcc7d66c88a00ed66ef78bb902e45ea9cfc3f5566c8b174249eb1718f3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why vary expert margins rather than add minority class weights?",
+        "answer": "Margins change score separation geometry; weights scale loss contributions. mild retains full training costs or rewards instead of reducing each to a winner. Estimate margins on training and never read unknown expert costs at inference.",
+        "example": "Hard minimum-cost labels can discard near-ties involving a specialist."
+      }
+    },
+    "qa/foundation-models:mild/basics": {
+      "source_sha256": "be3d1b39d69b9b1fe09a3fa3f80969123e8c191eab830764abb947b74547501c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can imbalance hurt rare specialist experts?",
+        "answer": "Broad experts can dominate router learning despite specialists serving particular inputs. Expert-specific margins and full training reward structure retain more information than hard minimum-cost labels.",
+        "example": "Majority-oriented training may ignore a specialist for a rare question type."
+      }
+    },
+    "qa/foundation-models:mild/comparison": {
+      "source_sha256": "50568ebb6bd49f08e5b9d7f98fa4368647c4e8681dbbb72f0954f571ceb1ab99",
+      "reviewed": true,
+      "fields": {
+        "question": "What does full expert cost/reward supervision retain over argmin labels?",
+        "answer": "Argmin keeps only the winner. A cost-based surrogate and expert margins preserve differences and relative score constraints.",
+        "example": "A close second and an expensive second need not give identical supervision."
+      }
+    }
+  }
+}

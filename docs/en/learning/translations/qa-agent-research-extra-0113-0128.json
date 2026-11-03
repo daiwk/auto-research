@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:mua-rl/mechanism": {
+      "source_sha256": "6b5d37e7b7006192152abd1db5026fe3dd4c3035a0060b940ce1a7ab45051868",
+      "reviewed": true,
+      "fields": {
+        "question": "Why exclude simulated-user messages from agent policy-token loss just like tool responses?",
+        "answer": "They are produced by the environment's user policy or tools, not chosen by the agent. Supervising them confuses actions with conditions. Dynamic users support clarification and changing requirements, but final reward should measure completion rather than imitation of simulated user text. Simulation does not cover all real behavior.",
+        "example": "If a user changes the date to Friday, the agent should reschedule, not learn to generate the user's phrase 'move it to Friday' itself."
+      }
+    },
+    "qa/agent-research:mua-rl/basics": {
+      "source_sha256": "a01abb3ade8b4b2c10adec3636cfacd22b077fb5187cdf6cc1175f0686a5df54",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does MUA-RL include the user in dynamic rollouts instead of using only an initial request?",
+        "answer": "Real users can clarify or change intent, requiring the policy to adjust tool actions. The method interacts with simulated users and learns from final completion rather than treating user input as static.",
+        "example": "A new constraint in turn two should change later tool arguments."
+      }
+    },
+    "qa/agent-research:mua-rl/comparison": {
+      "source_sha256": "90986b4af659307aeb690f8a55dbfc2ef2d9d1b7ee88e57fb2db3276f2b045ee",
+      "reviewed": true,
+      "fields": {
+        "question": "What differs between dynamic user simulation and tool results as the only environmental feedback?",
+        "answer": "User messages can change or clarify goals; tool results mainly report post-action state. Both are environment inputs with different roles. Static tool traces cannot cover policies for evolving requests.",
+        "example": "A tool can report success and a user clarify that they wanted a different outcome; the agent still needs to understand the request."
+      }
+    },
+    "qa/agent-research:mua-rl/implementation": {
+      "source_sha256": "1c3c74e90b9e568ef1a06a3a579e78c6f4ab46ffdd0ec78aed3b2240d1f9b91e",
+      "reviewed": true,
+      "fields": {
+        "question": "Can the MUA-RL simulated user expose the scenario's complete hidden goal directly?",
+        "answer": "Only reveal what a user could say under the interaction protocol, not private references or the entire solution. Loss covers agent responses only. A deterministic local user and mini tools are not an external LLM or production database.",
+        "example": "The user can reveal a constraint after clarification rather than attaching the full canonical tool sequence at the beginning."
+      }
+    },
+    "qa/agent-research:agent-lightning/mechanism": {
+      "source_sha256": "0f36528db260343328ce4c231d1a5d4be5158ec54c9d7c32194e1d26c82bcc96",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is separating training and execution more than storing logs on a different machine?",
+        "answer": "A common transition contract converts framework behavior into attributable MDP data for return and advantage calculation, while execution keeps its tool orchestration. Missing state/action boundaries or mixed environment tokens prevent correct updates despite physical separation. Decoupling alone does not establish improvement for any agent.",
+        "example": "A trainer can update from standardized query actions and results. An unsegmented chat transcript is not directly an action sequence."
+      }
+    },
+    "qa/agent-research:agent-lightning/basics": {
+      "source_sha256": "b3b54676dc23aebf6d5a02e1ad203041d96724b545791cc93065413e2fb1cb65",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Agent Lightning first convert execution events into common transitions?",
+        "answer": "Agent runtimes log differently. Common MDP transitions and credit decomposition let training interpret states, actions, and rewards independently of execution, not just store logs elsewhere.",
+        "example": "A failed test after a code edit should connect to that patch action and state, not remain an isolated log message."
+      }
+    },
+    "qa/agent-research:agent-lightning/comparison": {
+      "source_sha256": "721f01c9633fb01369025ce870e0e76bb51c4e18f8cffc7de34956b0f55d3d5c",
+      "reviewed": true,
+      "fields": {
+        "question": "How does execution/training decoupling differ from asynchronously collecting logs?",
+        "answer": "Decoupling also maps traces into trainable transitions, assigns credit, and sends updated policies back to execution. Asynchronous logging only records and transmits. Without an execution path consuming updates, the loop is not connected.",
+        "example": "Growing logs while every subsequent run uses an unchanged policy does not let training affect execution."
+      }
+    },
+    "qa/agent-research:agent-lightning/implementation": {
+      "source_sha256": "9b9d0335c1151819c54f1f140b4c8157233a48d1b4787fe36b17c6f2fdc92669",
+      "reviewed": true,
+      "fields": {
+        "question": "Which policy does the local Agent Lightning update using real test rewards?",
+        "answer": "The code sandbox uses test exit codes to credit patches, updates a bounded patch policy, and reuses it by bug family. It does not run LightningRL on LLM parameters. Check command, edit, and test events separately from rewards and memory use.",
+        "example": "Failed tests can change later patch choices without updating LLM weights with RL."
+      }
+    },
+    "qa/agent-research:webagent-r1/mechanism": {
+      "source_sha256": "74fb423a24b9c2aa013eaaca8b842888ab40ee77fcf8e2f6a8489a109d79550d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does multi-turn web GRPO need dynamic context rather than repeated single-turn answer training?",
+        "answer": "Clicks, inputs, and navigation change page state. Later actions need the current page and relevant history. Full rollouts connect terminal success to generated actions, and dynamic retention limits HTML growth. Behavior cloning and initialization also shape exploration; a group-advantage formula is not complete web interaction training.",
+        "example": "After login, a changed page requires reading the new form. Repeated answers from the first screenshot cannot teach that transition."
+      }
+    },
+    "qa/agent-research:webagent-r1/basics": {
+      "source_sha256": "f3aafa99b68a7bdbf1402ee03367db7f562f9acc900d3b53868a67cf6999d0e6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does WebAgent-R1 train on complete multi-turn web trajectories?",
+        "answer": "State, HTML, and action history change during interaction, and success depends on multiple decisions. The method manages recent and relevant context dynamically, collects full traces, and updates from group-relative outcomes instead of optimizing isolated answers repeatedly.",
+        "example": "After clicking to a new page, choose the next action from the new state, not the initial page."
+      }
+    },
+    "qa/agent-research:webagent-r1/comparison": {
+      "source_sha256": "5d9637ccb48131195b2ebdeaef4f70c70b211fbbbd6399297e257b77b011748b",
+      "reviewed": true,
+      "fields": {
+        "question": "What training problems do behavior-cloning warm-up and subsequent M-GRPO address?",
+        "answer": "Warm-up establishes basic interaction and initialization. M-GRPO uses relative full-task success to optimize the policy. The stages have distinct supervision; a GRPO registry name cannot replace the paper's behavior and long-CoT initialization.",
+        "example": "First learn legal clicks and inputs, then improve long-horizon choices from task outcomes."
+      }
+    },
+    "qa/agent-research:webagent-r1/implementation": {
+      "source_sha256": "9d2afb9dec5d5ff8c4ebc011d254d2a84627fb7d2acf709b35412e10eacd0b1e",
+      "reviewed": true,
+      "fields": {
+        "question": "How can compressed web state avoid treating old DOM as the current actionable page?",
+        "answer": "Bind each action to the then-current observation and compressed context; a fixed initial page cannot substitute for dynamic state. The mini-suite uses deterministic text observations with no real DOM effects or Qwen/Llama updates.",
+        "example": "A button ID may become invalid after navigation even if it appears in history."
+      }
+    },
+    "qa/agent-research:gigpo/mechanism": {
+      "source_sha256": "3afc806a5242c7ebb000ebec223ada1e4c84c11d0d684b412df9617e6c1a8b0e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compare micro advantages among actions from the same recurrent anchor state?",
+        "answer": "Different states vary in available actions and remaining difficulty, confounding direct return comparisons. A shared anchor controls local conditions better. Micro credit complements trajectory-level macro advantage; stochastic continuation means differences are not noiseless causal effects or a replacement for terminal success.",
+        "example": "Compare looking for a key and pushing a locked door from the same point, not against a trajectory already at the goal."
+      }
+    },
+    "qa/agent-research:gigpo/basics": {
+      "source_sha256": "59e5d4906a6b46b77160854f03a5abb7e37201f4d572fd18155412da8d037e54",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does GiGPO need both macro trajectory advantage and micro step advantage?",
+        "answer": "Terminal outcomes summarize the trajectory but do not identify useful steps. GiGPO compares trajectories, then actions grouped by recurrent anchor state, and adds global and local credit.",
+        "example": "Two trajectories can ultimately fail while one action from their shared intermediate state is more helpful."
+      }
+    },
+    "qa/agent-research:gigpo/comparison": {
+      "source_sha256": "ba8ef739472c972a93463e638b2fe1f0c4fc05bc8ae8a5cd10d30da0e4fc0d03",
+      "reviewed": true,
+      "fields": {
+        "question": "How do same-anchor micro groups differ from ranking all steps together?",
+        "answer": "A shared state makes comparisons more comparable; mixing states confounds difficulty and consequences. Shared plan steps can be local proxies but do not establish identical underlying environment states.",
+        "example": "A high return in an easy state should not be the same baseline for a difficult one."
+      }
+    },
+    "qa/agent-research:gigpo/implementation": {
+      "source_sha256": "914beb291cacb3a66d6e6ffb5331156808fef7cf4c0f158dcbad693fed111a5d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why record anchor identity and the corresponding action with GiGPO micro advantage?",
+        "answer": "The mean comes from the same G(s_t), so wrong keys or mixed states change the baseline. Keep macro/micro logs, actual group membership, and state-proxy boundaries, not only combined advantage.",
+        "example": "Two screens with the same title can have different task state and should not be merged by title alone."
+      }
+    }
+  }
+}

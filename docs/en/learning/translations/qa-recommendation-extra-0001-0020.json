@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:slimper/comparison": {
+      "source_sha256": "44a7909c48018ae533f1dca5ab6dbb5375b11638f91f1d8774118cbb412c1e93",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is SlimPer not just a sequence encoder when compared with HSTU or LONGER?",
+        "answer": "SlimPer models user–item relevance. Its knowledge base also receives item and cross features, and each Select–Match–Refine layer forms a personalized ranking state. A matched comparison needs candidate interactions and the task head, not only a user-sequence vector.",
+        "example": "Two candidates can produce different knowledge bases from the same history. Do not compare them solely to a candidate-independent encoder output."
+      }
+    },
+    "qa/recommendation:slimper/implementation": {
+      "source_sha256": "da010da50f2b377931b57eaa8d25a35ffbaec63b7b6113cf9150f7391d11916e",
+      "reviewed": true,
+      "fields": {
+        "question": "Once SlimPer fixes the knowledge-base size, can later layers stop reading long histories?",
+        "answer": "No. Each layer queries shared original tokens. It saves updates to N history states at each layer but still accesses KN query–history pairs. Short MovieLens runs, AdamW, and analytical element counts do not reproduce production QPS or Shampoo results.",
+        "example": "A small bank must still revisit the evidence; it is not a one-shot compression that discards the history."
+      }
+    },
+    "qa/recommendation:slimper/mechanism": {
+      "source_sha256": "6a09c39afec05f1529eb6e68f17b5ad0c551f7c521ce1bccea9350bae6b69c8b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does SlimPer keep its knowledge base fixed in size while reading the full history at every layer?",
+        "answer": "Only a small set of candidate-specific slots is updated. Original user tokens are revisited as read-only evidence. Select retrieves relevant evidence, Match compares it with templates, and Refine updates slots. The full hidden history does not propagate between layers. Candidates share user encodings, but each evolves its own knowledge base rather than using one final interest vector.",
+        "example": "Shoe and camera candidates can read the same purchase records but organize size and photography signals in separate banks. Slots updated for shoes must not be reused unchanged for cameras."
+      }
+    },
+    "qa/recommendation:slimper/select-vs-match": {
+      "source_sha256": "4888f3d1064d19fb40ccece7ba4245308e573fbaf2fd5cc06a965ba79306a43b",
+      "reviewed": true,
+      "fields": {
+        "question": "If SlimPer already selects evidence with attention, why explicitly dot-product it with knowledge templates?",
+        "answer": "Select builds queries from the current bank and aggregates a few user evidence vectors. Match compares those vectors with templates from the same bank, yielding a query-by-template relevance matrix. Refine updates knowledge from these explicit relations rather than treating the aggregate as final interest. Retrieval and aspect-specific relevance are separate.",
+        "example": "For running shoes, Select finds running distances and sizes. Match evaluates comfort and intended use separately. Finding evidence does not tell which candidate aspect it supports."
+      }
+    },
+    "qa/recommendation:slimper/history-context": {
+      "source_sha256": "bc94a5bcf61d04afdda272b31ed0e4001ed74491f81dcd7ab6c5def50714aff8",
+      "reviewed": true,
+      "fields": {
+        "question": "Does not updating all history at each SlimPer layer eliminate relationships between adjacent behaviors?",
+        "answer": "No. Section 2.5 adds local context when tokenizing events, for example via convolution or windowed attention. Later layers repeatedly read those tokens and update a fixed bank. This avoids deep all-pairs history interaction, not every historical relation. Fixed slots cap intermediate state; storing and reading inputs still grows with history length.",
+        "example": "Search, compare, and add-to-cart events can get local context before candidate-specific slots read them, without rewriting the full history at every layer."
+      }
+    },
+    "qa/recommendation:rgalign-rec/basics": {
+      "source_sha256": "d88cee3f307c3972a1702c8833d15ea1c9ea4cdfbd9cb7ce41520aee9ae1c936",
+      "reviewed": true,
+      "fields": {
+        "question": "Is an RGAlign-Rec latent query an actual search term typed by the user?",
+        "answer": "No. It is verbalized intent generated from user context to connect item retrieval with ranking needs. Fluent text does not establish that the user said it. Distinguish observed behavior from inferred intent to understand the supervision.",
+        "example": "After a user views camping content, the model may infer “lightweight tent” even if no such search appears in the log."
+      }
+    },
+    "qa/recommendation:rgalign-rec/comparison": {
+      "source_sha256": "514f106dfe52167bedde478ca2d1cbb503addd2b5a6dff93e5020d58ef845d44",
+      "reviewed": true,
+      "fields": {
+        "question": "How does ranking-guided query alignment differ from ordinary language SFT?",
+        "answer": "SFT maximizes demonstration text likelihood. Ranking guidance constructs preferred and rejected queries from downstream item preferences, tying verbalized intent to ranking. Ranker preferences can be biased and are not causal user ground truth.",
+        "example": "A fancier query may retrieve worse candidates; downstream feedback can distinguish the two."
+      }
+    },
+    "qa/recommendation:rgalign-rec/implementation": {
+      "source_sha256": "721fac7622bc2af634952ee6196c86dc07d9dcba87a836101637e3e8db8e6284",
+      "reviewed": true,
+      "fields": {
+        "question": "How should we distinguish local RGAlign queries from the production LLM pipeline?",
+        "answer": "A fixed public MovieLens candidate protocol checks the ranking-guided core, not private features, the production base, or traffic. Compare positive and negative queries under the same context and candidates. Do not choose winners with test labels.",
+        "example": "Better offline candidate scores do not establish higher live conversion."
+      }
+    },
+    "qa/recommendation:rgalign-rec/mechanism": {
+      "source_sha256": "85743bcac8a6be8a6d9df69016f178669220b8d471c0bdd89725a1f804ff2eea",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does RGAlign use the ranker's item preferences to choose query winners and losers?",
+        "answer": "A fluent latent query can miss items the ranker values. Generate alternatives, rank the items they retrieve, and derive demonstrations and preference pairs to align query generation with top-ranked retrieval. RG-SFT learns the mapping and DPO strengthens relative preferences. Supervision still inherits the ranker's judgment, not independent satisfaction.",
+        "example": "History may suggest beginner photography or professional lenses. If ranking favors a lightweight beginner camera, prefer the first query rather than the one phrased most naturally."
+      }
+    },
+    "qa/recommendation:rocs/basics": {
+      "source_sha256": "dae4d3c3177c77dda9b37045acd7e49f64df4d0390dbee515b379cc43b538cd8",
+      "reviewed": true,
+      "fields": {
+        "question": "What are the units of computation in ROCS: one request and its candidates?",
+        "answer": "A request contains user-side context. Candidates are separate items scored within it. They share user input but have separate features and outputs. More candidates do not mean more independent requests. Distinguish these axes to identify reusable versus per-candidate work.",
+        "example": "One user opening a page that scores one hundred items is one request with one hundred candidates, not one hundred user requests."
+      }
+    },
+    "qa/recommendation:rocs/comparison": {
+      "source_sha256": "a558d28a6c52e91fcc3ad6a6a190296b9d03e96258a53362488c325732685ce8",
+      "reviewed": true,
+      "fields": {
+        "question": "Are request-representation sharing and IKBO's reduced on-device copying the same optimization?",
+        "answer": "No. Model information flow makes representations shareable; device broadcasting moves a valid shared representation into candidate computation efficiently. Caching a user vector can verify the division of work, not a production broadcast kernel or throughput. Each layer needs its own implementation and measurements.",
+        "example": "First ensure candidate inputs cannot contaminate the user state. In-process cache timings do not replace GPU broadcast kernel measurements."
+      }
+    },
+    "qa/recommendation:rocs/implementation": {
+      "source_sha256": "9504d9e019031437f72d7aad50a080ec0cfab020ce12c4f6559ad825cbe2511d",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local ROCS implement production GLM masks and IKBO CUDA broadcasting?",
+        "answer": "No. It covers the division between shared representation and scoring, not a specialized kernel or Meta cluster. Architectural reuse and on-device broadcasting need distinct evidence, and throughput claims require measurement.",
+        "example": "A Python loop reusing one vector does not show that a GPU kernel shares loads."
+      }
+    },
+    "qa/recommendation:rocs/mechanism": {
+      "source_sha256": "411dc6d246e500d3c269fbda65d2dbd0c5453500a59deaa58593eb6947402638",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does ROCS need candidate isolation to avoid redoing user computation for every candidate?",
+        "answer": "A state that has read one candidate is not a common cache. Generalized Layer Masking preserves isolation and Deep Cross Attention delays candidate interaction, so a request representation is computed once. Kernel broadcasting further reduces copies. The local in-process microbenchmark compares repeated and shared encoding, not full production throughput.",
+        "example": "One request scores a hundred items. Encode the user independently, then broadcast to each item branch. If item A contaminates user state first, reusing it for item B leaks information."
+      }
+    },
+    "qa/recommendation:rolegen/basics": {
+      "source_sha256": "0d80e602eba6be1cb9f1c80a6878e2bf206661a459bb3fb9c05b1f258e1d1b6d",
+      "reviewed": true,
+      "fields": {
+        "question": "Does “role” in RoleGen mean a user identity or an item's function along a conversion path?",
+        "answer": "It means an item's function in the conversion path, not a user occupation or demographic. An LLM Reasoner infers item roles and passes candidates to the SID generator and feedback loop. The roles are model interpretations, not observed causal identities.",
+        "example": "An item can help comparison in one trajectory and be the purchase in another, regardless of whether the user is a student."
+      }
+    },
+    "qa/recommendation:rolegen/comparison": {
+      "source_sha256": "8b4d05427485695af5acd5918a6c2cd3844f2e6dc90e0fbc1b5865e1b2f2ced4",
+      "reviewed": true,
+      "fields": {
+        "question": "How does counterfactual instrumental contribution differ from co-occurrence similarity?",
+        "answer": "Co-occurrence describes what appears together. Instrumentality asks how an outcome might change if the item were removed. A local proxy and do notation do not identify real causal effects.",
+        "example": "Phones and chargers may be bought together without charger recommendations causing phone purchases."
+      }
+    },
+    "qa/recommendation:rolegen/implementation": {
+      "source_sha256": "3724aae454358e9a952bcb9ebc70cc5cdc8a867ad162270f03d87ec3320632ef",
+      "reviewed": true,
+      "fields": {
+        "question": "Can RoleGen's local public data establish production conversion among dormant users?",
+        "answer": "No. A MovieLens subset and proxy objective check the core path, without private dormant-user logs or actual traffic buckets. Log score provenance, candidates, and feedback. Do not present proxy deltas as live intervention effects.",
+        "example": "A movie preference ranking change is not causal lift in e-commerce conversion."
+      }
+    },
+    "qa/recommendation:rolegen/mechanism": {
+      "source_sha256": "52b5e1d42cc8d5d6d4a0857cfd814c5d853531b1f08a57c1a341f88ca019046d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does RoleGen infer conversion-path functions rather than rely on similarity to reactivate dormant users?",
+        "answer": "For inactive users, repeatedly serving similar old items can narrow interests. Functional roles model exploration, comparison, and conversion. Counterfactual paths estimate an item's instrumental contribution, which feeds the SID generator and iterative reflection. These estimates rely on model and data assumptions, not causality identified by observed trajectories alone.",
+        "example": "A camera buyer may have watched reviews and photography tutorials. A tutorial is not similar to a camera listing but may reactivate interest."
+      }
+    },
+    "qa/recommendation:rptune/basics": {
+      "source_sha256": "cb0a62ccfd491a8fd557d54685524186b75ace18a3bee7b3331612c808d7ddda",
+      "reviewed": true,
+      "fields": {
+        "question": "What does RPTune pruning decide, and what does positioning decide?",
+        "answer": "Pruning decides which catalog products enter the prompt; positioning sets the order of retained products. One changes the selectable set and the other changes context for reading the same set. Reordering cannot recover a dropped product.",
+        "example": "Keep ten products out of a thousand, then reorder the ten. The second step cannot restore deleted items."
+      }
+    },
+    "qa/recommendation:rptune/comparison": {
+      "source_sha256": "1a403c7916368ad08b1f4c86a6fe5d8cf3c68ad651b1e0ae799b2b90cabdcdb3",
+      "reviewed": true,
+      "fields": {
+        "question": "Are RPTune's product scoring and prompt ordering both just vector top-k?",
+        "answer": "No. Scoring adds learned query and product adjustments to the semantic dot product. After top-k, a prescribed positioning rule orders the LLM input. Vector top-k alone has neither learned adjustment nor that order. Ablate set selection and positioning separately.",
+        "example": "Two methods can keep the same ten products in different orders, or choose different sets under the same ordering rule."
+      }
+    },
+    "qa/recommendation:rptune/implementation": {
+      "source_sha256": "b70e23ace0a86a0d691278f0497150a9ceee16d804d97100261bc8c10bc88914",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does RPTune sort retained top-k products in ascending score order?",
+        "answer": "Its layout puts high scores near the end. After retention, sort ascending rather than defaulting to descending. The local rank/prune/position kernel does not call the paper's LLM or run full post-training, so it cannot report full catalog-search gains.",
+        "example": "Placing the top-scoring item first reverses the intended end preference."
+      }
+    }
+  }
+}

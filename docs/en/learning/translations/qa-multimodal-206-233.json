@@ -1,0 +1,257 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/multimodal-models:raw-video-midtraining/mechanism": {
+      "source_sha256": "fbbe315e3e71536a28f63a0616c629d3c2edbd7cc6649a1d82ba1f9449ec82b5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does target stop-gradient not freeze the entire vision tokenizer?",
+        "answer": "Detaching targets prevents them from moving or collapsing with predictions. The input-side tokenizer still receives gradients through the LM and prediction head. Caption-free midtraining learns visual sequence relations and needs matched instruction tuning for comparison.",
+        "example": "The next patch is detached as target, but prediction error still updates the tokenizer through earlier input patches."
+      }
+    },
+    "qa/multimodal-models:raw-video-midtraining/basics": {
+      "source_sha256": "ab409e838df08074f4e7e9f06c68d6582b6442c7fcded62de98e86e9c8aff638",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can uncaptioned video provide a useful language-model midtraining signal?",
+        "answer": "Ordered frames contain objects, motion, and spatiotemporal relationships not fully captured by text. The method turns frame patches into continuous sequences and predicts future representations causally. This is not captioning or proof of physical understanding; test after matched tuning.",
+        "example": "Video of lifting a cup preserves motion that the caption “someone picks up a cup” may omit."
+      }
+    },
+    "qa/multimodal-models:raw-video-midtraining/comparison": {
+      "source_sha256": "c264c037a100f366aa35ae60397381919c4dead74713a9a15cea6b024f22710d",
+      "reviewed": true,
+      "fields": {
+        "question": "What supervision bottleneck does raw video avoid compared with captions?",
+        "answer": "Captions capture only described information, often omitting continuous motion and detail. Continuous token prediction uses raw order but costs longer sequences and vision regression. Better semantics are not guaranteed; match subsequent instruction tuning.",
+        "example": "“A ball moves” omits path and speed variation; raw video contains them, but downstream tests show whether the model uses them."
+      }
+    },
+    "qa/multimodal-models:raw-video-midtraining/implementation": {
+      "source_sha256": "a9bbbae8d006a3cd53102298c4d67939164c562451411e8d3c0ac7b5106fb6fe",
+      "reviewed": true,
+      "fields": {
+        "question": "Why match image-text instruction tuning after video midtraining?",
+        "answer": "Final ability depends on both stages. Different later tuning would confound the raw-video effect. The paper matches later tuning, so text-retention conclusions apply to that protocol, not arbitrary captionless training. A local component is not the full comparison.",
+        "example": "Giving only the video arm extra high-quality instructions would confound a later visual QA gain."
+      }
+    },
+    "qa/foundation-models:smolwam/mechanism": {
+      "source_sha256": "b90ba27d1bf56534b8838706c1da1c55394c8540c6b0a79d406e538e072a844c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why preserve original token positions and rectified-flow direction when shrinking action queries?",
+        "answer": "The pretrained trunk expects particular position semantics and a data-to-noise velocity. A lighter interface that changes them adds distribution shift. SmolWAM restores compatibility stage by stage; checkpoint loading alone does not establish equivalent behavior.",
+        "example": "Reading teacher velocity noise-minus-data with an opposite-sign recovery rule can move actions the wrong way."
+      }
+    },
+    "qa/foundation-models:smolwam/basics": {
+      "source_sha256": "902a0aa22790d6785bd5c09d6888abc8469bfb87ba0c148de018801374881099",
+      "reviewed": true,
+      "fields": {
+        "question": "Why lighten the entire video-generative robot interface in SmolWAM?",
+        "answer": "Vision encoding, video backbone, text conditioning, and action representation all cost compute. A small action head alone can leave most costs. Each change needs compatibility checks and recovery training before real control validation.",
+        "example": "A tiny action head still pays for a large VAE, long visual input, and multistep denoising."
+      }
+    },
+    "qa/foundation-models:smolwam/comparison": {
+      "source_sha256": "b9c055b115c843db8fbe0aba0cf66c4b2c96f862b2e274d18b0f66f0290ff597",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a single-frame VAE plus adapter differ from directly replacing the VAE?",
+        "answer": "The teacher expects a video-clip latent distribution. The adapter maps single-frame outputs back into that space to preserve a usable trunk interface. Matching shape or token positions alone does not align numeric scale or spatiotemporal semantics.",
+        "example": "Two encoders can output identically shaped tensors but different distributions; the adapter learns compatibility."
+      }
+    },
+    "qa/foundation-models:smolwam/implementation": {
+      "source_sha256": "6c686a7821e173b775489eb34843091aa55c3a4368732c6934a00114c770a325",
+      "reviewed": true,
+      "fields": {
+        "question": "Does SmolWAM use the same rectified-flow velocity direction as LeWAM?",
+        "answer": "No. SmolWAM follows teacher data-to-noise interpolation xτ=(1−τ)x0+τε, with velocity ε−x0 and a consistent clean estimate. LeWAM uses the opposite direction. Retain the 12 specified blocks, original positions, and zero-bias sink rather than borrowing another formula.",
+        "example": "Reversing velocity during recovery moves the action in the wrong direction even if loss code runs."
+      }
+    },
+    "qa/foundation-models:time-jepa/mechanism": {
+      "source_sha256": "de15350036facc6cb8b1978146eb23a1c31d00a61143a037f86e7ba285588add",
+      "reviewed": true,
+      "fields": {
+        "question": "How can training-only physical time series improve a video-only encoder?",
+        "answer": "Auxiliary heads predict speed or joint angles from video and send gradients back to the encoder. Remove the head at deployment; sensor values never enter inputs. Mask invalid frames and fit normalization on training only.",
+        "example": "Train with synchronized speed labels and test on video alone. Supplying speed at test would change the task."
+      }
+    },
+    "qa/foundation-models:time-jepa/basics": {
+      "source_sha256": "396c7798f7ee9a9a6862f915da22606821e28c17ce3486001bd018ee019c7c10",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are action classes different from exact speeds or joint angles?",
+        "answer": "Classification can be invariant across speeds and poses, while control and physical analysis need continuous detail. Time-JEPA adds temporal physical supervision without using sensors at deployment. Correct labels cannot establish numeric precision.",
+        "example": "Two clips can both show “raising a hand” with different speeds and elbow angles."
+      }
+    },
+    "qa/foundation-models:time-jepa/comparison": {
+      "source_sha256": "36ca9a99f57dc546fc1e93a43aa8035f3f348fdd1d44cc1a03a75a2dfd7de2ba",
+      "reviewed": true,
+      "fields": {
+        "question": "What does physical supervision add beyond masked latent prediction?",
+        "answer": "Latent prediction encourages predictability without ensuring precise physical variables survive. Synchronized labels directly encourage those variables in the encoder. Benefits depend on variable coverage and distribution; one domain's probe does not establish universal physical or control ability.",
+        "example": "A model can predict road texture while ignoring speed differences until a speed target requires them."
+      }
+    },
+    "qa/foundation-models:time-jepa/implementation": {
+      "source_sha256": "dbf20473e691eca4fd0760bbd98f38313309302f136fb77f8e0cf8e0a6c4332c",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a fully missing variable in one tubelet be filled with a valid zero?",
+        "answer": "No. Average valid frames independently per variable; empty tubelets remain invalid. Fit and freeze normalization on training. Apply SmoothL1 with β=0.5 only to valid entries, with domain-specific heads, statistics, and weights.",
+        "example": "If neither frame has a joint-angle measurement, skip that variable instead of treating missing as a true zero angle."
+      }
+    },
+    "qa/multimodal-models:uniaction/mechanism": {
+      "source_sha256": "ffa01919d1d2c6124483a349cf6b222740fb49954fc8ba1f30f6df90532c404b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does adding log(Nref/Na) to action logits cancel identical action-token duplication?",
+        "answer": "In joint softmax, copying identical keys, values, and positions increases the action exponent sum. The log-count bias cancels that multiplicity while preserving relative action logits. Different new content or positions can still affect outputs.",
+        "example": "Duplicating each token with identical position would raise uncorrected action weight; corrected output should not change from count alone."
+      }
+    },
+    "qa/multimodal-models:uniaction/basics": {
+      "source_sha256": "a7efc840d6cb6a9b6c10a6bfc9900425c3c4e953d08beb9fea50b2f9deeba30b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why should action token count not directly represent importance across formats?",
+        "answer": "Equivalent actions can be tokenized at different granularity. UniAction separates element identity and position and corrects joint attention for count effects. Genuine added actions still carry new information; not every longer encoding is meaningless duplication.",
+        "example": "Splitting a path into 20 rather than ten segments does not double importance, but adding a real grasp matters."
+      }
+    },
+    "qa/multimodal-models:uniaction/comparison": {
+      "source_sha256": "c6f84169ff1662b448aacbbb00007aa4ad6ae6b5806c4d21d624b498dae7001a",
+      "reviewed": true,
+      "fields": {
+        "question": "How does corrected joint softmax differ from separately normalizing video and action then summing?",
+        "answer": "Joint normalization shares one denominator and applies log(Nref/Na) to action logits. Separate softmax gives each stream total mass one before merging, a different cross-modal weighting even if internal action ranks match.",
+        "example": "Strong video and weak action evidence can yield low total action weight jointly, but separate softmax forces a full action share."
+      }
+    },
+    "qa/multimodal-models:uniaction/implementation": {
+      "source_sha256": "45c06506a08f8b061a1a3a2f19cced0e094cbad6ce531b84e9c85b042aa45b72",
+      "reviewed": true,
+      "fields": {
+        "question": "Does duplication invariance allow arbitrary added actions or changed positions?",
+        "answer": "No. Exact invariance requires identical key, value, and position representations. Na counts valid actions per request; padding is excluded and has zero attention. Supply the native position callback explicitly; local diagnostics are not Wan's native position mechanism.",
+        "example": "Copying the same action at another time changes position, so changed output does not violate invariance."
+      }
+    },
+    "qa/foundation-models:vbvr-pro/mechanism": {
+      "source_sha256": "09a30bada09d020f1a25571353db7ca5f3fea16e89381b54ecc063b3b139c157",
+      "reviewed": true,
+      "fields": {
+        "question": "Why prefer an executable scorer to a general VLM judge for some spatiotemporal constraints?",
+        "answer": "Explicit intermediate states, constraints, and goals can be checked per example rather than by fluency. Executable rewards cover only defined rules. Scorer correctness, gold isolation, and actual trajectory generation still need separate checks.",
+        "example": "Verify each move avoids walls and reaches the target; a fluent explanation does not excuse crossing a wall."
+      }
+    },
+    "qa/foundation-models:vbvr-pro/basics": {
+      "source_sha256": "bc3b042f1fddd9b8cd84a0462b1db086c37dcedfda10406d40799e00920dea90",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can an attractive final image fail the visual reasoning task?",
+        "answer": "Rules may constrain motion, intermediate states, and forbidden areas. A correct-looking ending can hide process violations. VBVR-Pro turns known rules into executable checks, without measuring undefined quality or assuming every task has a reliable scorer.",
+        "example": "An object can reach its goal by crossing a forbidden area; only the trajectory check catches it."
+      }
+    },
+    "qa/foundation-models:vbvr-pro/comparison": {
+      "source_sha256": "b499385d445fabca184a2febac05742cb14d1b979f324143c4a76bd350e3dbc1",
+      "reviewed": true,
+      "fields": {
+        "question": "Is a weighted constraint reward equivalent to requiring all constraints to pass?",
+        "answer": "No. Weighted sums permit compensation; a hard conjunction makes any violation infeasible. Higher total reward does not guarantee every constraint. This compares objective semantics, not an additional author ablation.",
+        "example": "One of two equally weighted checks gives half credit, while a mandatory safety check cannot be offset by success elsewhere."
+      }
+    },
+    "qa/foundation-models:vbvr-pro/implementation": {
+      "source_sha256": "4784f6fafbaca731772c400f340b72fd0e0b4516fc1c71767146e7972945fe8d",
+      "reviewed": true,
+      "fields": {
+        "question": "What does the local programmatic reward's gain over a noisy baseline to a perfect score show?",
+        "answer": "It shows deterministic task scoring and failure attribution on the supplied programs are more stable than a noisy judge analogue. It does not show a multimodal generator gained ability after RLVR. Real trajectories, model updates, and independent evaluation are still needed.",
+        "example": "Scoring a known valid trajectory as one tests the scorer, not a generator's ability to discover it."
+      }
+    },
+    "qa/foundation-models:vjepa-policy/mechanism": {
+      "source_sha256": "fca03ef8aa81a11059a74d0bf4c6e79a9f1fff674bf5f2fcd8ddb68ccbb30eb4",
+      "reviewed": true,
+      "fields": {
+        "question": "How does reading predicted future latents differ from reading actual future frames?",
+        "answer": "Predictions come from current observations and instructions and are available at deployment. Real future is training-only supervision. The action expert reads computable foresight, not actual outcomes. Frozen visual encoders do not prevent forecast errors from accumulating.",
+        "example": "Predict a cup's position after grasping; do not feed the real post-grasp photo before judging policy success."
+      }
+    },
+    "qa/foundation-models:vjepa-policy/basics": {
+      "source_sha256": "f123a00b0292b2eb3047404ba91f2cd3b0bd9e4a4934472defe8e6c5985a8b92",
+      "reviewed": true,
+      "fields": {
+        "question": "Why condition robot actions on what the model expects to see?",
+        "answer": "Current images alone may not indicate how the goal changes the scene. V-JEPA Policy connects instruction-conditioned prediction with action learning, giving the action expert predicted context. No future ground truth enters control, and actual execution must still be tested.",
+        "example": "Predict the cup inside a box without reading an actual completion image before the robot moves."
+      }
+    },
+    "qa/foundation-models:vjepa-policy/comparison": {
+      "source_sha256": "e190b20150cabc3dd9dbea6e976c6edf8e3ee25e386b34a7f87d0fe87a984626",
+      "reviewed": true,
+      "fields": {
+        "question": "How does joint world/action training differ from separately training a predictor and action head?",
+        "answer": "Joint training coordinates future context and action flow so predictions can serve control needs. Independent stages need not align. The vision encoder stays frozen; joint predictor/action training does not update every visual parameter.",
+        "example": "Future grasp context can adapt to the action head while the V-JEPA encoder weights remain unchanged."
+      }
+    },
+    "qa/foundation-models:vjepa-policy/implementation": {
+      "source_sha256": "bd410c07c82addc092a4a7ec929cc768f84af35c371499edb9234e1eb9ffe7ad",
+      "reviewed": true,
+      "fields": {
+        "question": "How are future-target gradients isolated, and what is locally implemented?",
+        "answer": "Encode actual future with frozen vision and stop gradients. Apply masked L1 and train action velocity. Local work checks future-latent isolation and flow only; no V-JEPA 2.1 checkpoint or robot dataset. Three-seed small tensors do not validate a LIBERO policy.",
+        "example": "No target gradient confirms supervision isolation, not robot success without rollouts."
+      }
+    },
+    "qa/multimodal-models:woven/mechanism": {
+      "source_sha256": "bc6415cd3d66cb0be5f4f4d8b322545ae1e481c41c632e5c3286fe4cc41d755c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why split WOVEN by initial scene or source rather than random QA rows?",
+        "answer": "One image can yield several actions, questions, and counterfactuals. Random row splits can put nearly identical states in both sets. Grouped isolation reduces shortcuts, and scene, action, and reasoning transfer need separate checks.",
+        "example": "Group two questions about different pushes on the same table rather than splitting their common source across train and test."
+      }
+    },
+    "qa/multimodal-models:woven/basics": {
+      "source_sha256": "bf9998e836e8b01038f736735003bb9010f9ed291db66351c7588425c4d99553",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't WOVEN transition supervision ordinary static classification?",
+        "answer": "It models relations among initial state, action, and outcome, including forward prediction, inverse action, and counterfactuals. Generated video rollouts supply visual transitions and intermediate frames, not outcomes stated in prompts. Recognizing object classes is insufficient.",
+        "example": "The same ball starts in one place but moves differently for left and right pushes; choose the action or outcome, not whether there is a ball."
+      }
+    },
+    "qa/multimodal-models:woven/comparison": {
+      "source_sha256": "41ca91084c31182ce77a5f907dd7dfd464be6196ae1a6c83465d9ebd8e093e27",
+      "reviewed": true,
+      "fields": {
+        "question": "What distinct generalization problems do scene-OOD and state perturbation test?",
+        "answer": "Scene-OOD changes scene distribution; state perturbation changes state and tests robustness. High in-distribution accuracy does not solve either. The paper also controls action and reasoning axes, and per-benchmark subsets do not establish one universal model gain.",
+        "example": "A new restaurant can be handled well while tiny object-position shifts in one scene still cause errors."
+      }
+    },
+    "qa/multimodal-models:woven/implementation": {
+      "source_sha256": "a0fcb1caae9453b647c0cbe112629ed946cef7b782ebd9bd071daf3b64c1e1b0",
+      "reviewed": true,
+      "fields": {
+        "question": "What do four option permutations and source_id grouping guard against?",
+        "answer": "Move the correct letter with its option and image to prevent letter shortcuts. Split by initial source to prevent related variants leaking across sets. The prompt exposes only question, options, and actual images, not answer-related distractor_type. Local training runs SFT, not GRPO.",
+        "example": "Put three questions from one initial frame together in train or holdout so source memorization cannot masquerade as test generalization."
+      }
+    }
+  }
+}

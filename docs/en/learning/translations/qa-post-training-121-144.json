@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:gppo-framework/basics": {
+      "source_sha256": "0e6225424053ecb1cf25dbcb553dfa7a08434fa2ad10d3c82044809cddd013d6",
+      "reviewed": true,
+      "fields": {
+        "question": "What two independent choices define GPPO's proximal updates?",
+        "answer": "Choose f-divergence geometry and its estimation topology. Combinations allow different ratio ranges; a common framework does not make instances train identically.",
+        "example": "Different treatment of complement probability can change trust regions for the same divergence."
+      }
+    },
+    "qa/post-training:gppo-framework/comparison": {
+      "source_sha256": "8c739818c6b2593a7bd06031f5da1ac2924319cb6637ee7cfaff43cfe311025d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are MC, atomic and binary topologies more than implementation details?",
+        "answer": "They count sampled actions and unsampled complements differently, changing estimated divergence and admissible ratios. Name mappings establish no equivalence without the matching definitions.",
+        "example": "Binary accounts for one minus action probability, not just a renamed atomic result."
+      }
+    },
+    "qa/post-training:gppo-framework/implementation": {
+      "source_sha256": "947be01dd6e9b55f208aa7eceb009d1c5093cb09651de1b0af4d542aa6d321d0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why expose literal KL and two-sided log separately in GPPO?",
+        "answer": "Some algorithm mappings and printed formulas differ; keep both explicit rather than silently fix one. Ratios must be positive and binary complements valid; solve the selected trust region instead of copying PPO bounds.",
+        "example": "A configuration called KL that actually computes two-sided log obscures what was verified."
+      }
+    },
+    "qa/post-training:gppo-framework/mechanism": {
+      "source_sha256": "cb275e4bc18cf675e9cee73d66039e3bfec9ab5a0caec1b89c3ee8c42cbab6c1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can the same f-divergence give different trust regions with MC, atomic or binary estimation?",
+        "answer": "Topology decides how action and complement probabilities enter. Even fixed function/radius need not yield the same ratio interval. GPPO separates these choices and uses the resulting bounds. Preserve different KL forms instead of renaming GRPO.",
+        "example": "Constraining only a rare action versus also the remaining mass can allow different changes."
+      }
+    },
+    "qa/post-training:zcpo/basics": {
+      "source_sha256": "4c699da0e1a25af6df85230fd13b9ff1abe2de79e1d0886bc3d0c5ffae8a056f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why put KL drift into ZCPO group coefficients rather than an independent loss?",
+        "answer": "A standalone KL can update policy with no reward distinction. Center relative KL and rewards into zero-sum coefficients for the existing surrogate and relative group credit.",
+        "example": "Equal rewards should not trigger a training step merely because a separate KL exists."
+      }
+    },
+    "qa/post-training:zcpo/comparison": {
+      "source_sha256": "1034fc71709fe69dc6ef02b8db5ef88f73478069c9d5026de8c518518f32a92c",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a sampled-token log ratio substitute for ZCPO conditional KL?",
+        "answer": "No. Use full-vocabulary conditional KL, averaged along each response and centered across group. A sampled ratio is a different noisy estimator.",
+        "example": "A rare sampled token's drift does not describe the entire conditional distribution."
+      }
+    },
+    "qa/post-training:zcpo/implementation": {
+      "source_sha256": "d0a9f0b700c86a2f57db00ec0bcaa0fb836ed529fa492323671ab7fdb23d5c17",
+      "reviewed": true,
+      "fields": {
+        "question": "Why skip optimizer updates for all-equal rewards in ZCPO?",
+        "answer": "Reward scale is zero, and AdamW decay may move parameters even with a zero loss. Skip the group/step; undersized groups also cannot form relative coefficients.",
+        "example": "Zero logged gradient plus weight decay can still alter the model."
+      }
+    },
+    "qa/post-training:zcpo/mechanism": {
+      "source_sha256": "22a4f8952bc4b61f184072e5857fd3ce1b884a70ef464c3a8b5bde921b18fb0f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use zero-sum KL coefficients instead of adding KL loss?",
+        "answer": "Independent KL can update when reward gradients cancel or rewards tie. Center average conditional-KL drift with group rewards and feed the existing surrogate. Skip zero-scale/ineligible groups, including optimizer side effects, rather than returning zero loss and stepping.",
+        "example": "All rewards equal gives no relative signal; verify no optimizer update rather than rely on the logged loss."
+      }
+    },
+    "qa/post-training:sharpening-tax/basics": {
+      "source_sha256": "3fba24c2d5e59beee40ad4b8bbc9cc6fd68d197c00b38c6771415ae81c5b0b96",
+      "reviewed": true,
+      "fields": {
+        "question": "Why measure both first-attempt success and fixed-budget coverage in Sharpening Tax?",
+        "answer": "Training may raise probability of familiar successes while making other solutions or tasks unreachable. Fixed-budget coverage exposes this tradeoff.",
+        "example": "One problem becomes usually correct while another never yields a correct sample, reducing coverage."
+      }
+    },
+    "qa/post-training:sharpening-tax/comparison": {
+      "source_sha256": "0a68c35a0a0f23cf03041495d7ba54c22dfd0a0db493f8c7d606856966f92b7a",
+      "reviewed": true,
+      "fields": {
+        "question": "How does posterior-conditioned temperature differ from uniformly raising temperature?",
+        "answer": "Allocate temperature by estimated difficulty to balance exploitation and coverage. Global heating treats all tasks alike. Bad estimates may misallocate, so recovery isn't guaranteed.",
+        "example": "Mastered problems may need little exploration while difficult problems benefit from branching."
+      }
+    },
+    "qa/post-training:sharpening-tax/implementation": {
+      "source_sha256": "f6765e26a629c4544d50cb34ea41ee650860b2f1ba07bd1232128282c2cc5de7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why hold K and task inputs fixed when computing Tax_K?",
+        "answer": "Coverage changes with samples and tasks. Match both and retain the sign of base minus post-training coverage. Local code is a metric only.",
+        "example": "Many base samples against one post-training sample confound the estimated tax."
+      }
+    },
+    "qa/post-training:sharpening-tax/mechanism": {
+      "source_sha256": "f2202eb511823fa586e0e1b53b6b4aeebfa4e1492f86d96b103d4b7f698c2da1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why measure fixed-budget task coverage even when pass@1 improves?",
+        "answer": "Sharper distributions hit familiar solutions more often but may lose rare solutions accessible with several draws. Compare base/post coverage under equal budget and adapt temperature by difficulty. First-hit accuracy, entropy and task coverage are not interchangeable.",
+        "example": "Better common-item answers can hide lost rare correct solutions."
+      }
+    },
+    "qa/post-training:rlcpr/basics": {
+      "source_sha256": "0bc5fe71a615a8e25d229a4bfce015414a3ade0d1b6320e8d91f970735aaae5a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not apply a uniform length penalty to all long replies in RLCPR?",
+        "answer": "Long reasoning can be necessary. Enable relative penalty only when all group replies are long and answer posteriors concentrated, where length may add little distinction.",
+        "example": "Repeated explanation after agreement differs from exploring uncertain critical branches."
+      }
+    },
+    "qa/post-training:rlcpr/comparison": {
+      "source_sha256": "34c318b3c87e5647cfa43bf8d0ba65fc2e2cbb63630b29e05647468ce0385f18",
+      "reviewed": true,
+      "fields": {
+        "question": "Are RLCPR entropy strata and length gating the same choice?",
+        "answer": "Entropy strata shape examples before sampling. Length/posterior gates adjust rewards inside generated groups. Different inputs and stages, not one global length threshold.",
+        "example": "Deciding which tasks to sample precedes checking whether current replies are all redundant."
+      }
+    },
+    "qa/post-training:rlcpr/implementation": {
+      "source_sha256": "866a529029fa73a348c2054d8ac05e931ca5f5d9ce512b265a6d42fde9cb185c",
+      "reviewed": true,
+      "fields": {
+        "question": "Do exact length or posterior thresholds activate RLCPR?",
+        "answer": "No. Minimum length must strictly exceed its threshold and posterior range must be strictly below its bound. Entropy CDF also uses strict less-than on ties. Handcrafted numbers test formulas, not RL gains.",
+        "example": "Minimum length exactly at threshold is not penalized."
+      }
+    },
+    "qa/post-training:rlcpr/mechanism": {
+      "source_sha256": "c9a8e1ddb83572ca9546ea3a39a73e151161b937fd4f28034a7e319919b04594",
+      "reviewed": true,
+      "fields": {
+        "question": "Why penalize relative length only if all answers are long and posteriors concentrated?",
+        "answer": "Similar posteriors indicate limited distinction from reasoning length; widespread long replies support compressing redundant ones. Penalize relatively only after both gates. Equality and quantile rules matter; real entropy/posteriors must come from a model.",
+        "example": "Favor shorter among equally supported long replies, not a long reply that clearly increases answer support."
+      }
+    },
+    "qa/post-training:range-grpo/basics": {
+      "source_sha256": "4a8e3112beb2b50f641191d4d1ded7f1c0114d8425fca6a4bdc3f9480aadf89f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use reward intervals instead of point scores in Range-GRPO?",
+        "answer": "A point hides judge uncertainty. Intervals identify pair orderings that can be justified and avoid treating tiny noise as preference.",
+        "example": "Strongly overlapping score ranges need not produce a winner."
+      }
+    },
+    "qa/post-training:range-grpo/comparison": {
+      "source_sha256": "a2f21f056ef05826fbe68a53bd290190d27df73ad2eca6473790d7ac58f04e76",
+      "reviewed": true,
+      "fields": {
+        "question": "How does treating overlap as uncertain differ from midpoint ranking?",
+        "answer": "Midpoints always impose order even inside large uncertainty. Interval comparison discards dubious direction, at the cost of sparser supervision. It does not prove faster/better training.",
+        "example": "Different midpoints with overlap needn't imply a clear preference."
+      }
+    },
+    "qa/post-training:range-grpo/implementation": {
+      "source_sha256": "d8c2a2cdd2ad1d76ae45f3f5caddee99283a07001378ab962b91776b0027645c",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local Range-GRPO calibrate a conformal judge?",
+        "answer": "No. It consumes intervals and tests comparisons and the point limit. Coverage needs real calibration data/judging. Degenerate intervals should recover the DR-GRPO limit, not arbitrary smoothing.",
+        "example": "A wide interval passing an interface test doesn't establish coverage."
+      }
+    },
+    "qa/post-training:range-grpo/mechanism": {
+      "source_sha256": "fbd7501f77c524060a4f9e430801f7d185bbbffc5e210960cfd41f1aadaeeb92",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not rank replies with overlapping reward intervals?",
+        "answer": "Small point differences may be judge noise. Use determinate calibrated interval relations and aggregate relative group advantage without inventing directions. Degenerate intervals recover point rewards. The kernel is not judge calibration.",
+        "example": "Do not favor one broad overlapping interval merely because its center is higher."
+      }
+    },
+    "qa/post-training:gmc-grpo/basics": {
+      "source_sha256": "4a8e7ab93899dba65ccf777470cce7d6ba479f4681f7fc6f4e52420a305be3d2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why cap total group importance mass in GMC-GRPO?",
+        "answer": "Asynchronous stale policies can produce huge ratios. Apply one multiplier to the group to cap mass while preserving within-group proportions, unlike independent clipping.",
+        "example": "Scale the whole inflated group instead of cutting only its largest member."
+      }
+    },
+    "qa/post-training:gmc-grpo/comparison": {
+      "source_sha256": "b1eeab0aec2e8c52dbf3759bae4c9bf62ae9c7fdcac22fc5b0a3b04137b03204",
+      "reviewed": true,
+      "fields": {
+        "question": "What does a group cap preserve that per-trajectory clipping may not?",
+        "answer": "Common scaling retains ratios between weights. Independent caps change them. Theory still requires conditions such as common second moments; it does not repair arbitrary staleness.",
+        "example": "Clipping may make large and medium weights equal, while group scaling preserves their ratio."
+      }
+    },
+    "qa/post-training:gmc-grpo/implementation": {
+      "source_sha256": "e5b087e08d1c63003ff26264a6243dd9b4ded2d10ef245472f01ac05d3bbbc10",
+      "reviewed": true,
+      "fields": {
+        "question": "How do GMC weights behave below the total cap?",
+        "answer": "Use multiplier one until total exceeds cap; then multiply by cap divided by sum. Check nonnegative weights and group boundaries. Local kernel does not measure asynchronous cluster throughput.",
+        "example": "Do not pool two prompts: a large weight in one should not scale the other."
+      }
+    },
+    "qa/post-training:gmc-grpo/mechanism": {
+      "source_sha256": "04a2fe862b98bf581ad67d94dda7b16c7ac8e603a71a997f694a3e3d4493460d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why rescale an entire group instead of clipping trajectories one by one?",
+        "answer": "Independent clipping changes relative weights. A shared factor limits total ratio mass and retains relative contributions. Sampling and moment assumptions remain; a formula test is not an asynchronous training system.",
+        "example": "Uniformly scale stale trajectories when total mass is too large; separate caps can flatten differences."
+      }
+    }
+  }
+}

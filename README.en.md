@@ -13,8 +13,8 @@ Read research papers, inspect their implementations, and run iterative experimen
 
 ## Explore the library without installing anything
 
-- **Find a paper.** The English catalog lists the research domains and links to original papers and available English write-ups. Older entries without translations are labeled, with the Chinese write-up still available.
-- **Learn a method.** The [learning cards](https://daiwk.github.io/auto-research/learning/) cover fundamentals, mechanisms, comparisons, and implementation. The [topic deep dives](https://daiwk.github.io/auto-research/learning/deep-dives/) compare papers across those levels. The learning-card collection is currently in Chinese.
+- **Find a paper.** The English catalog links to original publications and bilingual project write-ups across all six research domains.
+- **Learn a method.** The [English learning cards](docs/en/learning/index.md) cover fundamentals, mechanisms, comparisons, and implementation. [Topic deep dives](docs/en/learning/deep-dives/index.md) compare papers across those levels.
 - **Check what was actually measured.** The [public experiment dashboard](docs/en/public-experiment-dashboard.md) indexes committed results by domain, method, dataset, and metric. It retains negative results and evaluation limits. The site's [video tour](docs/assets/media/site-tour.mp4) demonstrates the Chinese interface.
 - **Run your own research.** The [automated research and evolution workflow](docs/en/auto-research.md) retrieves evidence, executes registered components under a fixed protocol, selects candidates on validation data, and evaluates selected candidates on isolated test data. A retrieved paper is not automatically executable code.
 
@@ -40,4 +40,4 @@ See [Installation, datasets, and demos](docs/en/setup.md) for optional training 
 
 Results reported by the original paper, including production A/B tests, are distinct from local public-data experiments. A diagnostic can validate a mechanism without reproducing the paper's model or headline result. Full experiments that exceed the project budget are explicitly marked **not reproduced**; this does not place them in a retry queue. New CUDA implementations require evidence from an actual A100 or A30 run.
 
-To contribute, see [Issues](https://github.com/daiwk/auto-research/issues), [repository instructions](AGENTS.md), and the [bilingual documentation workflow](docs/en/contributing.md). Submit new or updated paper write-ups in Chinese and English together, reuse their source figures and result artifacts, and keep the Chinese learning questions and topic deep dives up to date. The [architecture guide](docs/en/architecture.md) explains adapter, data-isolation, and evaluation contracts. See the [translation coverage report](docs/en/coverage.md) for remaining pages.
+To contribute, see [Issues](https://github.com/daiwk/auto-research/issues), [repository instructions](AGENTS.md), and the [bilingual documentation workflow](docs/en/contributing.md). Update Chinese and English write-ups and learning material together, sharing original figures and result artifacts. The [architecture guide](docs/en/architecture.md) explains adapter, data-isolation, and evaluation contracts. The [translation coverage report](docs/en/coverage.md) tracks all site pages.

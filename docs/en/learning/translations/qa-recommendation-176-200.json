@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:cohortmix-ts/basics": {
+      "source_sha256": "bf20d97a810bcfad56dc3f706a66b75a906b1cb2eeff737462c7d8080abba68c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CohortMix-TS construct a mixed cohort prior before sufficient personal data arrive?",
+        "answer": "Few personal observations give unstable success estimates. Infer cohort memberships from metadata and mix historical item-arm means to guide initial exploration. Fixed strength limits borrowed confidence so individual feedback can gradually revise it. Shared membership does not imply identical preferences.",
+        "example": "Initialize a new user's movie success rates from two cohorts, then let a few personal outcomes move the posterior away from the group average."
+      }
+    },
+    "qa/recommendation:cohortmix-ts/comparison": {
+      "source_sha256": "546bf4bb8a8e4b509da6ac975d176e417db8345ee3dc02a02eba9adcffd9cfb6",
+      "reviewed": true,
+      "fields": {
+        "question": "How does CohortMix-TS explore differently from always choosing the highest posterior mean?",
+        "answer": "Greedy selection ignores uncertainty. Thompson sampling draws from each posterior, giving uncertain but promising arms a chance; more evidence naturally reduces uncertainty. It does not improve every round, and the local three-seed state-transition diagnostic is not recommendation capability evidence.",
+        "example": "A slightly lower-mean, rarely observed arm can sometimes beat a well-known arm in sampled scores, while greedy selection may never try it."
+      }
+    },
+    "qa/recommendation:cohortmix-ts/implementation": {
+      "source_sha256": "a468fb160b9f475215fb558c219d4e66aeabb8184818ce09a3538637e730ed5d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep independent Beta counts per new user and exclude previously exposed slate items in CohortMix-TS?",
+        "answer": "The cohort prior only initializes state. Subsequent success and failure belong to that user's arm, not every new user. Select from unseen items each round for sequential exploration; unexposed arms do not receive invented failures.",
+        "example": "A comedy click updates only the viewing user's success count. An action movie not shown receives no feedback."
+      }
+    },
+    "qa/recommendation:connectionmind/mechanism": {
+      "source_sha256": "04a39dc13e59c67ff3202c1440073cabe708d0e9908233d228b29d4ab370b48e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does ConnectionMind produce evidence paths and distill its path teacher into a GNN?",
+        "answer": "Paths expose intermediate graph relations and support step-level supervision and rewards. An LLM searches heterogeneous subgraphs for complex requests, while a distilled student handles ordinary traffic at lower cost. Paths must come from the visible graph; training shortest positive paths cannot be supplied as evaluation answers.",
+        "example": "A path through a followed creator and photography topic to a tutorial is inspectable. The student can reuse the relation pattern without full LLM search for every request."
+      }
+    },
+    "qa/recommendation:connectionmind/basics": {
+      "source_sha256": "e8ac857527bbc3b80f7bf2993659adc41419fbe86be6e0c475cc87365f4a6500",
+      "reviewed": true,
+      "fields": {
+        "question": "Why output graph evidence paths instead of only a social recommendation score in ConnectionMind?",
+        "answer": "A path shows which user, item, and semantic relations support the recommendation, enabling checks of edges, timestamps, and weights and supervision at each step. It is an explicit trajectory, not a fabricated explanation. Legality does not guarantee recommendation utility.",
+        "example": "Show the graph edges from a friend's photography collection to a tutorial. A claim that friends might like it is not equivalent evidence."
+      }
+    },
+    "qa/recommendation:connectionmind/comparison": {
+      "source_sha256": "b0fcc0b159ba4b1bc0c880306d4d49b9f320bd1851bb1472cd3e417380176c5d",
+      "reviewed": true,
+      "fields": {
+        "question": "How does ConnectionMind's stepwise policy compare with fixed GNN aggregation in scope and serving cost?",
+        "answer": "The policy selects task-dependent frontier expansions and relation paths; a GNN aggregates over fixed propagation structure. Full search is more flexible and expensive, so only complex minority traffic uses it. Locally, perfect path legality coexisted with negative recommendation results.",
+        "example": "Complex requests can explore friends and shared tags, while ordinary ones use a distilled model. Legal steps can still lead mostly to overly popular items."
+      }
+    },
+    "qa/recommendation:connectionmind/implementation": {
+      "source_sha256": "79f7a556c35f32d6b9b858cc67d38c58299ca07e4892a41c4c5b9f554eb8fd97",
+      "reviewed": true,
+      "fields": {
+        "question": "When can ConnectionMind's shortest-path demonstrations use target answers?",
+        "answer": "Training can derive step supervision from positive targets. Evaluation searches only the visible graph and current context, without held-out targets or gold paths. Keep format, recommendation, and path-shaping rewards distinct. Giving the agent a test answer path is diagnostic only.",
+        "example": "Showing how to navigate to a known item teaches training; revealing the correct movie node before test search cannot establish recommendation capability."
+      }
+    },
+    "qa/recommendation:coral/mechanism": {
+      "source_sha256": "efa390349262c104a603bf902744b5fd21cadd7d64a6506ec23b7f0eba570fe4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CORAL project configurations onto a budget-feasible set and retain only recent experiment memory?",
+        "answer": "LLM proposals can contain negative allocations or exceed quotas. Projection creates executable candidates before real feedback informs the next round. Short memory helps adapt to change and limits stale guidance but does not justify deleting audit records. Feasible proposals still need quality validation.",
+        "example": "If three retrieval allocations exceed a request cap, adjust them before testing. After traffic shifts, an old optimum should not automatically dominate."
+      }
+    },
+    "qa/recommendation:coral/basics": {
+      "source_sha256": "c749b25182ff27e6e62b5e7c726bc002d8b3e01eb99826ad6da13c21592485eb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CORAL require structured objectives and budgets rather than free-form LLM optimization advice?",
+        "answer": "A system must verify, execute, and compare configurations. Budgets define legal allocations and objectives translate observations into feedback. A successful loop is not by itself production causal evidence.",
+        "example": "Asking for more retrieval compute is not executable until channels and amounts are specified and checked against the cap."
+      }
+    },
+    "qa/recommendation:coral/comparison": {
+      "source_sha256": "8fd43b8ead341f7b933122f849d250c64dfd9b54f4ba7942d17c8bec00532bbb",
+      "reviewed": true,
+      "fields": {
+        "question": "When is CORAL's short memory preferable to retaining the all-time best configuration?",
+        "answer": "Recent feedback is more useful when the environment shifts; all-time maxima assume greater stability. CORAL updates from recent observations under projected constraints, potentially forgetting valuable long-run experience. A small proxy score cannot resolve the trade-off universally.",
+        "example": "A holiday ad mix can be poor afterward. Recent evidence should matter, while durable safety constraints should not be forgotten."
+      }
+    },
+    "qa/recommendation:coral/implementation": {
+      "source_sha256": "1c5cd434aec2a87c17395b40d580aa80389c2e13b7042299a23be1f75a4d6864",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not clip each CORAL allocation separately when projecting onto nonnegative values under a total budget?",
+        "answer": "Per-coordinate clipping fixes negative values but not the coupled sum bound B. Joint projection enforces both. Store the executed configuration with its observations, not the infeasible proposal. The five-round local run verifies constraints and loop executability only.",
+        "example": "Three individually legal allocations of 6 total 18, exceeding a cap of 10. Adjust together and record what actually ran."
+      }
+    },
+    "qa/recommendation:core-relevance/mechanism": {
+      "source_sha256": "5c231c1abe2bc6e1b3c61d110d4bcba3f0f3ac482e69b4fb48e71cac4b658cc9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CORE classify High versus Non-High first, then distinguish Mid and Low only for Non-High?",
+        "answer": "Ordered labels have different boundaries; a flat three-way classifier conflates exact matching with looser substitution. Conditional heads specialize, and step rewards apply only to executed steps. High examples must not produce a Mid/Low step gradient. Aggregate teacher probabilities correctly in distillation.",
+        "example": "First check exact model match; only a non-match requires deciding whether it is substitutable or unrelated."
+      }
+    },
+    "qa/recommendation:core-relevance/basics": {
+      "source_sha256": "ecccf9a22ba74d4e0c6e35f9edbd3cc1b816bdbbecab429a5d0c1767d2368121",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are CORE's High, Mid, and Low not simply unordered categories?",
+        "answer": "High emphasizes strict entity and intent match; Mid versus Low distinguishes acceptable substitutes from unrelated results. Different criteria and error costs motivate conditional heads, but ordering does not imply equally spaced numerical targets.",
+        "example": "The requested phone model is High, a suitable alternative may be Mid, and an unrelated accessory may be Low."
+      }
+    },
+    "qa/recommendation:core-relevance/comparison": {
+      "source_sha256": "38c0a4744861b3e9e99ecb35179231135d1190c87eb213578df19b80d15b0f16",
+      "reviewed": true,
+      "fields": {
+        "question": "How does CORE step-GRPO allocate credit differently from one reward for the final class?",
+        "answer": "Final reward cannot identify the first judgment, the conditional second step, or format as the source of error. Step rewards normalize within groups for valid steps, masking Mid/Low after High. Credit depends on verifiable steps, not on longer reasoning text.",
+        "example": "A correct High decision should not force a Mid/Low response or ambiguous updates to a step that never ran."
+      }
+    },
+    "qa/recommendation:core-relevance/implementation": {
+      "source_sha256": "40f3ffa04468292af38009a01cfb867e5becae7086f8405e1d5ee9c8ab5e1851",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CORE distillation use logsumexp for the Non-High teacher logit?",
+        "answer": "Non-High combines Mid and Low probabilities, so use `log(exp z_M + exp z_L)`, not their logit mean. The second head compares only Mid and Low with aligned masks and conditional labels. Copying three logits into both heads changes their meaning.",
+        "example": "Two substantial Mid and Low probabilities can together exceed High; averaging logits misses their combined mass."
+      }
+    },
+    "qa/recommendation:cq-sid/mechanism": {
+      "source_sha256": "f8daa404a2ad9b4f0ed999f8d8230459035b110a29daa1d79830ce90e6a9570e",
+      "reviewed": true,
+      "fields": {
+        "question": "What does CQ-SID gain and lose by fixing the first code to the item category?",
+        "answer": "The category organizes coarse search and business constraints; residual codes encode within-category detail. Wrong categories can make candidates unreachable, and cross-category substitutes may be split. Expert-guided reward balances clicks, purchases, and constraints; taxonomy alone does not ensure relevance.",
+        "example": "Generate a shoe code before styles, but a multifunctional product wrongly classified as luggage may never appear in a shoe search."
+      }
+    },
+    "qa/recommendation:cq-sid/basics": {
+      "source_sha256": "f4373e7e5818e74c213a4b6def4e3eb92ebb61228ebd0d4d7b1ee87ccc534039",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use a category first and within-category residuals afterward in CQ-SID?",
+        "answer": "Categories give controllable semantic boundaries; later codes distinguish details inside them. This aligns decoding with catalog constraints but may block items under a wrong category or separate cross-category neighbors.",
+        "example": "Choose camera first, then distinguish mirrorless from action cameras. A product misfiled under phone accessories follows the wrong path."
+      }
+    },
+    "qa/recommendation:cq-sid/comparison": {
+      "source_sha256": "8e22d9466e8c478f3dbd328b792e238b3688561166f6c3df7f4142ecec346228",
+      "reviewed": true,
+      "fields": {
+        "question": "Where does CQ-SID's category constraint differ from a freely learned RQ first code?",
+        "answer": "Free quantization groups coarse codes by representation distance. CQ-SID fixes alignment with taxonomy in training and decoding, reducing semantic drift but depending on catalog quality. Expert-Guided RL separately aligns feedback; clear categories do not ensure higher recall.",
+        "example": "A photography book and tutorial video may share a free prefix but split under a fixed catalog taxonomy."
+      }
+    },
+    "qa/recommendation:cq-sid/implementation": {
+      "source_sha256": "e79219a5f1a38bcb68982c29e84534821fec01f89760beb9e027c09612d75611",
+      "reviewed": true,
+      "fields": {
+        "question": "Within what scope should CQ-SID normalize grouped advantages?",
+        "answer": "Compute reward mean and standard deviation among rollouts for the same context and use the defined epsilon near zero variance. Mixing requests confounds different reward difficulties. Category and residual codes must share the legal vocabulary interface.",
+        "example": "Five high rewards for an easy request must not lower all advantages for a hard request; compare candidates within their own request."
+      }
+    },
+    "qa/recommendation:cross-domain-kd/mechanism": {
+      "source_sha256": "1cb6510e1e4d00e4327c15a0789224c7af0713ca8c5a8a81c75f2d3996d02e37",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can cross-domain distillation omit source training data but not blindly trust the source teacher?",
+        "answer": "The teacher can provide task and auxiliary signals directly on target examples, so raw source logs are unnecessary. The teacher may still be miscalibrated or lack important new-domain features. Use target supervision, and do not hide negative local comparisons behind teacher size.",
+        "example": "Video-domain preferences can inform music, but equating video viewing habits with music listening can transfer errors."
+      }
+    },
+    "qa/recommendation:cross-domain-kd/basics": {
+      "source_sha256": "0a1c5c22145fe9589eeab7aecb62a7854cf01aee79095c6b370e6f6eee46e7e5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can cross-domain KD run a source teacher on target examples without source logs?",
+        "answer": "Teacher output distributions and auxiliary signals carry knowledge without replaying source training data. Target labels constrain the real serving task and the teacher must understand available target features. Removing data access does not verify new-domain calibration.",
+        "example": "A video teacher provides soft preferences to a music student without sharing video logs; some video preferences may not transfer."
+      }
+    },
+    "qa/recommendation:cross-domain-kd/comparison": {
+      "source_sha256": "6e1f37f4aeaa6165e3319dd9171358ee7b3b3a8362511f241b9c11e6dcaf98c7",
+      "reviewed": true,
+      "fields": {
+        "question": "What do target-only student and same-domain DIN controls test in cross-domain KD?",
+        "answer": "The target-only comparison isolates added distillation knowledge; DIN anchors overall model quality. Internal gains do not mean matching a stronger baseline, and the source reports very different results under the two controls. A temperature ablation cannot replace matched data, candidates, and budget.",
+        "example": "A student improving from 10 to 11 is an internal gain, but does not beat a DIN score of 30."
+      }
+    },
+    "qa/recommendation:cross-domain-kd/implementation": {
+      "source_sha256": "ffa96567a41806b690d1118819c48cb33ca7e8da53f091a58d864fd8a9619cf2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does temperature distillation use `T²`, and how should auxiliary logits align in cross-domain KD?",
+        "answer": "Temperature changes softmax sharpness and gradient scale; `T²` compensates for the latter. Teacher and student tasks and classes must correspond semantically, not merely by shape. Serving only needs the student.",
+        "example": "A teacher long-watch head should not be matched to a student payment head. Higher temperature cannot fix a task mismatch."
+      }
+    },
+    "qa/recommendation:cross-task-relationships/mechanism": {
+      "source_sha256": "850ef9df7f664518c81bf6ecf34f94a8d37a47cf8e90a39d42af4831ae5b0373",
+      "reviewed": true,
+      "fields": {
+        "question": "Why predict a joint like-and-click label when both marginal rates are already predicted?",
+        "answer": "Marginals do not determine whether feedback occurs on the same examples. A joint head models dependence for shared representation supervision and downstream decisions; validate the benefits separately. Check feasibility when reconstructing the distribution rather than clipping negative probabilities and claiming calibration.",
+        "example": "Both rates can be 20% with complete overlap or complete separation. Marginals alone cannot tell how to combine objectives."
+      }
+    },
+    "qa/recommendation:cross-task-relationships/basics": {
+      "source_sha256": "1bf1b4a103fa3353e234ee638abfea4d3b77184bda32d19c6c096aa60b575554",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can multitask models with the same marginals predict different joint behavior?",
+        "answer": "Marginals give frequencies, not co-occurrence. Covariance is joint probability minus the product of marginals, adding dependence information to shared representations and decisions. The task pair needs enough nondegenerate combinations; mutually exclusive or constant labels do not support the same interpretation.",
+        "example": "Click and long-watch can each have probability one half while always coinciding or never coinciding."
+      }
+    }
+  }
+}

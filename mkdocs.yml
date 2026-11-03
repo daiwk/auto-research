@@ -102,14 +102,49 @@ nav:
       - Installation and demos: en/setup.md
       - Paper catalog:
           - All domains: en/papers/index.md
-          - Search, ads, and recommendation: en/papers/recommendation.md
-          - Foundation models: en/papers/foundation-models.md
-          - Structured decisions: en/papers/system-one.md
-          - Multimodal models: en/papers/multimodal-models.md
-          - LLM post-training: en/papers/post-training.md
-          - Agents: en/papers/agent-research.md
+          - Search, ads, and recommendation:
+              - Overview: en/reproductions/industrial.md
+              - Method index: en/reproductions/catalog/README.md
+              - By company: en/reproductions/catalog/by-company.md
+              - By topic: en/reproductions/catalog/by-topic.md
+              - By month: en/reproductions/catalog/by-month.md
+          - Foundation models:
+              - Overview: en/foundation-models/README.md
+              - Method index: en/foundation-models/catalog.md
+              - By institution: en/foundation-models/catalog/by-organization.md
+              - By topic: en/foundation-models/catalog/by-topic.md
+              - By year: en/foundation-models/catalog/by-year.md
+          - Structured decisions:
+              - Overview: en/system-one/README.md
+              - Method index: en/system-one/catalog.md
+              - By institution: en/system-one/catalog/by-organization.md
+              - By topic: en/system-one/catalog/by-topic.md
+              - By year: en/system-one/catalog/by-year.md
+          - Multimodal models:
+              - Overview: en/multimodal-models/README.md
+              - Method index: en/multimodal-models/catalog.md
+              - By institution: en/multimodal-models/catalog/by-organization.md
+              - By topic: en/multimodal-models/catalog/by-topic.md
+              - By year: en/multimodal-models/catalog/by-year.md
+          - LLM post-training:
+              - Overview: en/post-training/README.md
+              - Method index: en/post-training/catalog.md
+              - By institution: en/post-training/catalog/by-organization.md
+              - By topic: en/post-training/catalog/by-topic.md
+              - By year: en/post-training/catalog/by-year.md
+          - Agents:
+              - Overview: en/agent-research/README.md
+              - Method index: en/agent-research/catalog.md
+              - By institution: en/agent-research/catalog/by-organization.md
+              - By topic: en/agent-research/catalog/by-topic.md
+              - By year: en/agent-research/catalog/by-year.md
       - Project and workflow guides:
           - Research library: en/research-library.md
+          - Project README: en/project-readme.md
+          - Run experiments: en/readme_experiments.md
+          - Development and evidence: en/readme_development.md
+          - Delivery and audit record: en/readme_updates.md
+          - Astra collaboration: en/astra-collaboration.md
           - Automated research: en/auto-research.md
           - Evolution domains: en/evolution-domains.md
           - Multi-round evolution: en/model-evolution.md
@@ -122,6 +157,12 @@ nav:
           - Experiment tracking: en/experiment-tracking.md
           - Local preview and publishing: en/getting-started.md
       - Public experiment dashboard: en/public-experiment-dashboard.md
+      - Learning cards:
+          - Learning home: en/learning/index.md
+          - Recent questions: en/learning/recent.md
+          - All paper questions: en/learning/all.md
+          - Topic deep dives: en/learning/deep-dives/index.md
+          - Unclassified papers: en/learning/inbox.md
       - Translation coverage: en/coverage.md
       - Keeping both languages current: en/contributing.md
 

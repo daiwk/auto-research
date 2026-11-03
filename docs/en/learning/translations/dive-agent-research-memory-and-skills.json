@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/agent-research/memory-and-skills": {
+      "source_sha256": "b41fb122dd8a2bc310800a94d6d32e05668ae8707a9f895060d688eb70ae1e50",
+      "reviewed": true,
+      "fields": {
+        "title": "Long-term experience needs storage, utility, and admission checks",
+        "thesis": "MemGPT decides where information lives, MemPrice allocates fidelity within a limited window, and CMP studies how to identify utility. Voyager turns successful programs into skills, VaG manages admission risk, and SkillRise tests curation on later tasks. Fit, relevance, legitimacy, and future usefulness are four different questions. EMMA assigns structured memory to controller, agent, and skill, limiting each edit by failure scope and requiring actual use in the next attempt.",
+        "axis_0": "Whether the object is a raw event, compressed representation, runtime state, or executable skill",
+        "axis_1": "Whether decisions happen at write, read, eviction, or durable admission",
+        "axis_2": "Whether value comes from similarity, current success, randomized exposure, or downstream tasks",
+        "axis_3": "Whether raw details and faulty descendants can be recovered or reverted"
+      }
+    },
+    "dive/agent-research/memory-and-skills/comparison/agent-research:memgpt": {
+      "source_sha256": "168c84d8398c5c232af3bc57e8aa02f02ef75fbab390852265101c2019a43094",
+      "reviewed": true,
+      "fields": {
+        "position": "Manages core data, active context, and external archives in tiers; function calls and heartbeat control paging.",
+        "tradeoff": "External capacity is not present visibility, and retrieval can omit evidence. Deterministic local keys and proxy costs are not a semantic retrieval service."
+      }
+    },
+    "dive/agent-research/memory-and-skills/comparison/agent-research:memprice": {
+      "source_sha256": "9e737cc17264966c7432771c5704865779b71032ea4a2118516522e0ca4661db",
+      "reviewed": true,
+      "fields": {
+        "position": "Chooses one form per memory from raw, summary, abstraction, keywords, or delete. Knapsack enforces a hard budget; queue price reflects persistent occupancy.",
+        "tradeoff": "Joint allocation depends on utility and token sizes. Details evicted from the window require archive refresh. The local path executes DP and state contracts only."
+      }
+    },
+    "dive/agent-research/memory-and-skills/comparison/agent-research:causal-memory-policy": {
+      "source_sha256": "1bb47a40e51109ae98a8a1d1f5300d26733c9f869a656c2c203bf73dc0ba1e24",
+      "reviewed": true,
+      "fields": {
+        "position": "Reserves balanced randomized exposure in a fixed candidate pool, estimates net treatment/control effects and standard errors under that design, and protects uncertain memories.",
+        "tradeoff": "Treatment of one item changes other slots' distributions, so effects are not independent additive coefficients. Synthetic results do not establish real QA or long-term deletion policies."
+      }
+    },
+    "dive/agent-research/memory-and-skills/comparison/agent-research:voyager": {
+      "source_sha256": "2913e0ccc17d770a8b824811e91fbc6bad430280b0f9d7c52360fa2ae221b12b",
+      "reviewed": true,
+      "fields": {
+        "position": "An automatic curriculum proposes tasks. After execution and feedback-driven revision, successful programs become retrievable, composable skills.",
+        "tradeoff": "One environment success has prerequisites. Local skills are structured tool plans without Mineflayer, GPT-4, or real Minecraft."
+      }
+    },
+    "dive/agent-research/memory-and-skills/comparison/agent-research:vag": {
+      "source_sha256": "606abb60fb1e420027c8195c454f718c18b3fdd73591dbe8c28db4b1be5f9b40",
+      "reviewed": true,
+      "fields": {
+        "position": "Checks structure, harmless behavior, and semantic consistency before durable write-back, then selects compatible Hot sets by marginal value.",
+        "tradeoff": "Pre-write checks precede reactive deletion but are limited by coverage. Local core operators do not turn candidate discovery into complete capability evolution."
+      }
+    },
+    "dive/agent-research/memory-and-skills/comparison/agent-research:skillrise": {
+      "source_sha256": "3078bec836be26ae94b9dcfc4ef78f041ce560f32704a53b89ca301c971070b8",
+      "reviewed": true,
+      "fields": {
+        "position": "One policy alternates solving and document curation. Current outcomes supervise solving; discounted downstream outcomes supervise curation.",
+        "tradeoff": "Task sequences must expose transfer value. Local tests check state and phase credit, not the paper's model RL."
+      }
+    },
+    "dive/agent-research/memory-and-skills/comparison/agent-research:discernmem": {
+      "source_sha256": "9f190689c08441f8b1b151cc0d5ccb0138b2dd88fbf5fe7f7dcacdc5837cd3e8",
+      "reviewed": true,
+      "fields": {
+        "position": "Uses paired effects, scope-first attribution, dual-reference repair gates, and resets evidence on version change.",
+        "tradeoff": "Scope, defect, and replay scores are external. Rules do not replace LLM diagnosis or repair."
+      }
+    },
+    "dive/agent-research/memory-and-skills/comparison/agent-research:emma": {
+      "source_sha256": "fd2752e290c57dc729ebffe902187f2b09d165eb5344eb917847903244b0bde0",
+      "reviewed": true,
+      "fields": {
+        "position": "Organizes persistent memory by controller, agent, and skill, editing only the responsible entry for the failure scope. Execution slips do not become durable experience; overflow first splits incomplete steps.",
+        "tradeoff": "A single-edit guard does not establish semantics, and safety judgment is external. Exercise an accepted edit on the next attempt; an unused final edit is not improvement. The full multi-environment system was not reproduced."
+      }
+    },
+    "dive/agent-research/memory-and-skills/analysis/0": {
+      "source_sha256": "a61dc2ca53e2a2d6e14cace24f461658f49e46a3f5e97b838b39e9f23e6a12c6",
+      "reviewed": true,
+      "fields": {
+        "title": "Allocation needs utility but does not create causal evidence",
+        "body": "MemGPT moves information to archives, and MemPrice allocates representation levels within the window. Both need a keep decision. CMP studies identification instead: a memory retrieved disproportionately on difficult questions cannot be blamed for associated failures without randomized controls. When feeding CMP estimates into allocation, retain exposure design and uncertainty; net effects under fixed slots are not freely additive item values."
+      }
+    },
+    "dive/agent-research/memory-and-skills/analysis/1": {
+      "source_sha256": "ea84f4291501a3f5a6588b0040a124d76b22c5b399c6472fa2959bbeaed4934b",
+      "reviewed": true,
+      "fields": {
+        "title": "Current success, durable admission, and future usefulness happen at different times",
+        "body": "Voyager accumulates successful programs as skills. VaG considers effects on descendants, checking before write-back and assessing compatibility in use. SkillRise scores curation from downstream outcomes: current success mainly evaluates solving, not whether documentation helps later. These are different evidence contracts, not a ranking. Record execution, admission, and cross-task learning separately."
+      }
+    },
+    "dive/agent-research/memory-and-skills/analysis/2": {
+      "source_sha256": "c9cf34e85dd0480db32cfbb36c9cbe6708c2a2d9e4fcd02161d89ecd04f45d28",
+      "reviewed": true,
+      "fields": {
+        "title": "October 29: New method and source changes",
+        "body": "DiscernMem separates wrong memory scope from content defects. Pair single-memory and no-memory replays under the same task, seed, and configuration, then check repairs against both parent-memory and no-memory references. This constrains simple reflection append: poor team results cannot be blamed on one memory, and a new version cannot inherit old measured effects. Local work covers measurement and version contracts, not LLM repair or replay."
+      }
+    },
+    "dive/agent-research/memory-and-skills/analysis/3": {
+      "source_sha256": "543fef5bf0967e7b23c5f836fed0db5b8a445fd5d34b7ff0e4a24292c56da187",
+      "reviewed": true,
+      "fields": {
+        "title": "Identify which entry to change, then show the change helps",
+        "body": "DiscernMem uses isolated injection and paired no-memory replay to distinguish scope from defects and gates repairs against parent-memory and no-memory references. EMMA organizes editing by controller, agent specialization, and skill ownership; each reflection edits only one responsible entry, while execution slips affect only the temporary plan. One measures attribution and repair; the other limits the edit layer and how it must be exercised. Structural legality is not paired benefit, and an external semantic-safety Boolean is not an implemented LLM review."
+      }
+    },
+    "dive/agent-research/memory-and-skills/question/allocation-versus-identification": {
+      "source_sha256": "70760c2447211acc0b4045e9fa7e23cb0621f8358c961222fd925511f4de0dee",
+      "reviewed": true,
+      "fields": {
+        "question": "If MemPrice selects a high-utility memory, why does CMP ask how utility was measured?",
+        "answer": "Knapsack optimizes supplied utilities and sizes, not their reliability. Low success on tasks that often retrieve a memory can reflect selection bias. CMP uses balanced randomized exposure and controls to estimate net effect with a standard error. Slot substitution affects the result, so it cannot become an independent additive knapsack value unconditionally.",
+        "example": "A troubleshooting memory is retrieved for the hardest incidents. Determine what happens without it before interpreting low success or budgeting window space."
+      }
+    },
+    "dive/agent-research/memory-and-skills/question/successful-skill-versus-admission": {
+      "source_sha256": "efe9959636054933ab1ce16f550668032b5eeff1b9b92d943f997798c13effb9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't a Voyager program that succeeded once enter VaG's long-term library unchecked alongside all other skills?",
+        "answer": "One execution supports that path under its environment, not harmlessness under other prerequisites or compatibility with existing skills. VaG checks structure, behavior, and semantics before writing, then chooses compatible sets by marginal value. Success, harmlessness, and combined benefits remain separate gates.",
+        "example": "A skill works in an empty directory but implicitly deletes old files. The original success does not validate a shared directory."
+      }
+    },
+    "dive/agent-research/memory-and-skills/question/current-outcome-versus-future-skill": {
+      "source_sha256": "303d1624f62e6b7cbb197714a175569fbd58c311aade85febc50e6f727bc9f0c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't SkillRise use Voyager-style current success to reward curation directly?",
+        "answer": "Current success measures actions just taken; a document's utility emerges on later related tasks. SkillRise separates solve and curate phases and applies discounted downstream returns to the latter's generated tokens. Successful program admission does not supply this cross-task credit. A polished but unhelpful summary should not be rewarded automatically.",
+        "example": "A solver can succeed by luck but record only the answer. Downstream evaluation reveals the lack of reusable steps."
+      }
+    },
+    "dive/agent-research/memory-and-skills/question/oct29-method-boundary": {
+      "source_sha256": "c1e2aa4fb3d3bc3caa1f2a8c8bf18107621af52afca326e94eaa1dd8b9771f33",
+      "reviewed": true,
+      "fields": {
+        "question": "Why might a repaired memory that beats its parent still be rejected?",
+        "answer": "The parent can be harmful. A candidate must also match or beat no-memory, retain historical task performance, and not increase complete failures. One positive difference does not satisfy both non-regression references.",
+        "example": "Parent memory scores 0.2, the repair 0.4, and no memory 0.8. Beating the parent does not establish usefulness."
+      }
+    },
+    "dive/agent-research/memory-and-skills/question/emma-single-edit-versus-memory-effect": {
+      "source_sha256": "cf8e7d14f9d6ca741b13213dcfe374c20e669c8cfc7e597d100765c886b697a7",
+      "reviewed": true,
+      "fields": {
+        "question": "Does EMMA's one-entry edit satisfy DiscernMem's causal attribution and repair checks?",
+        "answer": "No. Single edits limit scope and clarify responsibility but still need actual exercise and rerun. DiscernMem separately uses paired isolated memory and no-memory results on matching tasks and seeds, then checks that the candidate is no worse than both parent and no-memory. Structure and effect have different acceptance conditions.",
+        "example": "Writing a transient retrieval typo into a permanent skill violates EMMA scope. Correcting the skill text does not prove that memory helps more than omitting it."
+      }
+    },
+    "dive/agent-research/memory-and-skills/update/2026-10-27/0": {
+      "source_sha256": "353596e09f23175034af6c22ad353ed5da5bf2bccbe204bb8a59bc7550691d1d",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial version: compared tiered storage, memory pricing, utility under randomized exposure, accumulation of successful programs, precommit admission, and downstream skill credit."
+      }
+    },
+    "dive/agent-research/memory-and-skills/update/2026-10-29/1": {
+      "source_sha256": "950c82b86820524892e5149f1da3f93ac43c788430bc99c0ab4269322e239986",
+      "reviewed": true,
+      "fields": {
+        "summary": "DiscernMem separates wrong memory scope from content defects. Pair single-memory and no-memory replays under the same task, seed, and configuration, then check repairs against both parent-memory and no-memory references. This constrains simple reflection append: poor team results cannot be blamed on one memory, and a new version cannot inherit old measured effects. Local work covers measurement and version contracts, not LLM repair or replay."
+      }
+    },
+    "dive/agent-research/memory-and-skills/update/2026-10-30/2": {
+      "source_sha256": "a069489010950b5fbfaf7d97cc9309829f66b186228ea3e97e3c57a8f9872a3e",
+      "reviewed": true,
+      "fields": {
+        "summary": "Reviewed EMMA's three ownership levels, single edits by scope, overflow, and required exercise on the next attempt. Distinguished these from DiscernMem's paired attribution and dual-baseline repair gate and preserved the boundary around unimplemented semantic services."
+      }
+    }
+  }
+}

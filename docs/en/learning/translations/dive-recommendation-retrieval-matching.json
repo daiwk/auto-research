@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/recommendation/retrieval-matching": {
+      "source_sha256": "965a1297c3f1b406cf504b9e99f80c015b6b134be1ca395b84edf16108d742f7",
+      "reviewed": true,
+      "fields": {
+        "title": "Where does retrieval coverage come from? User representations, positive examples, and negative difficulty",
+        "thesis": "Candidate generation determines what downstream ranking can see. YouTube DNN uses one user vector for nearest-neighbor retrieval; Airbnb EBR ties supervision to the search–browse–booking journey; MIMA allocates multiple positives from a request to complementary interests; MDCNS changes negative difficulty and provides multi-view supervision. These alter representations, labels, interest specialization, and gradients, respectively. More retrieved candidates are not a common explanation.",
+        "axis_0": "Retrieval interface: single vector or multiple interest channels",
+        "axis_1": "Positives from next actions, journeys, or same-request sets",
+        "axis_2": "How negative difficulty and teacher supervision change gradients",
+        "axis_3": "Fixed candidate budgets and inventory/data substitution limits"
+      }
+    },
+    "dive/recommendation/retrieval-matching/comparison/recommendation:youtube-dnn": {
+      "source_sha256": "5432c75941d25a7a0384bcafe983611a2f63b0e830f447253f03c03fb026c724",
+      "reviewed": true,
+      "fields": {
+        "position": "Aggregates watch history and context into a user vector using a DNN. Trains as large-scale next-video classification, then serves dot-product nearest neighbors against video vectors.",
+        "tradeoff": "Independent item vectors are indexable; a single user vector must encode multiple interests. Retrieval still has a separate role from ranking. Small public data do not reproduce a million-scale production index."
+      }
+    },
+    "dive/recommendation/retrieval-matching/comparison/recommendation:airbnb-ebr": {
+      "source_sha256": "e39344ab8671231d53eb89aaae568c090c11b131c3d9bf57b6b548896acbe8d7",
+      "reviewed": true,
+      "fields": {
+        "position": "Retains query/item dot-product dual encoders, but constructs positives and hard negatives across searching, browsing, and booking. Traffic replay aligns first-stage retrieval.",
+        "tradeoff": "Labels better reflect the marketplace journey. Real coverage also depends on geography, inventory updates, and indexing. The local MovieLens proxy cannot validate lodging availability constraints or online gains."
+      }
+    },
+    "dive/recommendation/retrieval-matching/comparison/recommendation:mima": {
+      "source_sha256": "0dc9d738f9ed6fc230efcf35d76a4b1d33cddf9189c7b98f7313ab2d9e97e40e",
+      "reviewed": true,
+      "fields": {
+        "position": "A causal decoder emits multiple interests, supervised by one-to-one optimal matching against same-request positives. Interest activation probabilities calibrate channel scores.",
+        "tradeoff": "Exclusive assignment discourages all positives collapsing into one interest, but depends on real multi-positive sets and routing calibration. Neighboring actions substitute for same-request conversions locally, so this does not establish production interest decomposition."
+      }
+    },
+    "dive/recommendation/retrieval-matching/comparison/recommendation:mdcns": {
+      "source_sha256": "aba17eae70d87119b09f73b63fbedacd1321d946ffd1dd29cea64925cd47d811",
+      "reviewed": true,
+      "fields": {
+        "position": "Self, Peer, and Teacher score the candidate pool from multiple views. Model disagreement adjusts hard-negative ranking; the teacher's full-pool soft distribution is distilled into Self.",
+        "tradeoff": "Adds supervision beyond one high-scoring negative. Hard negatives may still be false negatives, and disagreement does not establish ground truth. Align candidate pools, sampling budgets, and training costs."
+      }
+    },
+    "dive/recommendation/retrieval-matching/analysis/0": {
+      "source_sha256": "928cc8832b88f00809edfd5f54c094326827527e65272357d03833ff40816ae0",
+      "reviewed": true,
+      "fields": {
+        "title": "Locate the bottleneck: coverage, supervision, or interest collapse",
+        "body": "YouTube DNN compresses history into one user vector. Airbnb EBR keeps a similar retrieval interface but reorganizes journey supervision. A similar dual-encoder shape does not make their training problems equivalent. MIMA's defining change is one-to-one assignment of same-request positives, not merely emitting more vectors; otherwise interests may converge on one positive. Fix the final return budget to separate better representations from retrieving more items."
+      }
+    },
+    "dive/recommendation/retrieval-matching/analysis/1": {
+      "source_sha256": "ae34e0ae11c020a84f9a0baa129b284460d4c5b07610cf618061e5d7d090023c",
+      "reviewed": true,
+      "fields": {
+        "title": "Hard negatives and multiple positives have different roles",
+        "body": "MDCNS finds unobserved candidates models find difficult and disagree on, giving Self full-pool teacher supervision. MIMA learns interest specialization from real positive sets. Labeling all unclicked items as negatives or treating adjacent behaviors as complementary same-request positives changes the meaning of supervision. Airbnb EBR's journey reminds us to record behavioral stages and exposure before interpreting a lower loss."
+      }
+    },
+    "dive/recommendation/retrieval-matching/question/more-interests-not-more-budget": {
+      "source_sha256": "66489cda8eae2de4338f3641714219b572f0ccc9b49501541da28bc420fe5a4c",
+      "reviewed": true,
+      "fields": {
+        "question": "If recall rises after MIMA returns multiple interests, how can we distinguish complementarity from a larger candidate budget?",
+        "answer": "Fix total K after merging and deduplicating channels, then compare with single-vector retrieval. Check whether positive assignments and hits complement each other. The mechanism is MIMA's one-to-one supervision and activation calibration; YouTube DNN gives a single-vector starting point. Giving each interest an extra K makes a coverage gain impossible to attribute to interest modeling alone.",
+        "example": "If running and photography each return 50 items, compare the merged 100-item budget to one channel with 100, not 50."
+      }
+    },
+    "dive/recommendation/retrieval-matching/question/hard-negative-is-not-ground-truth": {
+      "source_sha256": "0994c9788b5abf32be4a066946a3ee662bfa9ced85de5d2a51365a4498517906",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do Airbnb EBR and MDCNS emphasize negatives without simply taking the highest-scoring unclicked item as the best negative?",
+        "answer": "Airbnb interprets hard negatives in their journey and behavioral stage. MDCNS uses disagreement across views rather than only Self's preferences. A non-click can reflect underexposure, substitution, or a missing label. A high score means the current model sees similarity, not that the item is certainly irrelevant. Control false negatives, diversity, and sampling budget.",
+        "example": "A user booked one property, but two other suitable properties were sold out. Treating them as definitely irrelevant mistakes inventory outcomes for semantic preferences."
+      }
+    },
+    "dive/recommendation/retrieval-matching/question/recall-versus-ranking-boundary": {
+      "source_sha256": "dd8d83703e362b67b854386749ac378e185469e6e618beab3f0193e14e5f2fe6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't a stronger ranker recover an interest missed by retrieval, and where can a new training objective help?",
+        "answer": "The ranker only sorts existing candidates. YouTube DNN separates the stages; MIMA changes which interests nominate candidates using multi-positive assignments; MDCNS changes the negative gradients received by retrieval representations. Check coverage, fixed-K quality, and downstream ranking separately instead of diagnosing the bottleneck from clicks alone.",
+        "example": "If all 100 candidates are running shoes, a ranker cannot show a camera. Multi-interest retrieval must nominate the camera before ranking can compare its value with the shoes."
+      }
+    },
+    "dive/recommendation/retrieval-matching/update/2026-10-27/0": {
+      "source_sha256": "c613f3f317077306dc771e23e001fcf5e69f7f82c2b7e3db26a3486135d3b876",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial version: compared YouTube DNN, Airbnb EBR, MIMA, and MDCNS. Added analysis and cross-paper questions on retrieval interfaces and next-action, journey, or same-request positives."
+      }
+    }
+  }
+}

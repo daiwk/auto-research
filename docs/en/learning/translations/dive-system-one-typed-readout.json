@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/system-one/typed-readout": {
+      "source_sha256": "d98df739cf2896cc11cd078d145c3fe7d53d34148a57225ed47504be5893a2b3",
+      "reviewed": true,
+      "fields": {
+        "title": "They all output candidate distributions. Why do their readout and caching boundaries differ?",
+        "thesis": "Typed decisions constrain the output space, but avoiding long generated sentences does not prescribe a single architecture. LLM2Jev reads the language probability of option labels; System One reranking reads candidate letters at the first answer position; MJev-Spatial reuses native attention Q/K; and MetaEncoder encodes requests and candidates separately. Trace scoring dependencies before judging what can be cached, whether open retrieval is possible, or how continuous outputs are discretized.",
+        "axis_0": "Scores from the language vocabulary, native attention, or vector similarity",
+        "axis_1": "Joint candidate contextualization and which representations can be cached",
+        "axis_2": "Closed-set choice, open retrieval, or multi-stage spatial refinement",
+        "axis_3": "Training readouts and the scope of local validation"
+      }
+    },
+    "dive/system-one/typed-readout/comparison/foundation-models:llm2jev": {
+      "source_sha256": "d2c6260ad586c5b23bbf50cd5c4ba2de00ed178ce4207e07dd40d4c1c7e4ccc0",
+      "reviewed": true,
+      "fields": {
+        "position": "Sums token log-probabilities for numbered options in parentheses to obtain a finite-option distribution. Fine-tuning combines a listwise decision loss with KL anchoring of auxiliary base-model outputs.",
+        "tradeoff": "Reuses the language-model readout, but multi-token labels must be scored in full. Finite-candidate probabilities do not automatically imply candidate invariance. Local work covers the scoring/KL components only, not the 4B JevBench run."
+      }
+    },
+    "dive/system-one/typed-readout/comparison/foundation-models:metaencoder": {
+      "source_sha256": "9e5d5628dfcbe660aaa0759470d4f96ebe17dafcdbcb09bd11162c4dc5a26457",
+      "reviewed": true,
+      "fields": {
+        "position": "A shared causal encoder encodes requests and candidates separately, taking normalized final-token vectors and using temperature-scaled cosine scores for decisions or retrieval.",
+        "tradeoff": "Independent candidates can be precomputed. A request can include options, so the request representation is not necessarily invariant to the candidate set. Dual-encoder compression limits fine-grained joint reasoning. The full 30B evaluation was too expensive and was not reproduced."
+      }
+    },
+    "dive/system-one/typed-readout/comparison/foundation-models:mjev-spatial": {
+      "source_sha256": "a31ecaa010c85b6e502b5e592f40f3418a72cf6a0811ee31b60dd92eb0806523",
+      "reviewed": true,
+      "fields": {
+        "position": "Scores the decision marker's native Q against each candidate-end marker's native K, without an extra classifier head. Counts use buckets; 2D points use three levels of region selection.",
+        "tradeoff": "Bounded discrete steps replace continuous output, but cropping and bucketing change resolution and the number of calls. Average losses within each multi-stage question first instead of treating extra stages as extra samples."
+      }
+    },
+    "dive/system-one/typed-readout/comparison/multimodal-models:system-one-rerank": {
+      "source_sha256": "31b0ced1ed2efc694ff961d7d0d5f3d24e68c715cf7b003f5b92994d00a8702e",
+      "reviewed": true,
+      "fields": {
+        "position": "The query and first-stage top-K candidates enter one multimodal prompt. Read the distinct single-token letter logits at the first answer position and normalize within the candidates.",
+        "tradeoff": "Joint context enables setwise comparison, so candidate representations cannot be reused as independent cache entries. Only the top-K are reranked; the remainder retain their order. The local diagnostic does not reproduce the full large-model retrieval matrix or decision-head training."
+      }
+    },
+    "dive/system-one/typed-readout/analysis/0": {
+      "source_sha256": "68a9cd66dbec12aa045e1ba5aad275cabee698ca8d4afa397f434a6af2d2be79",
+      "reviewed": true,
+      "fields": {
+        "title": "Separate a single readout from a single task step",
+        "body": "LLM2Jev and System One reranking both read probabilities directly, but an option label can span multiple tokens, and reranking must verify that each letter is a single token. A single MJev-Spatial candidate readout does not make the whole spatial task a single call: point localization chooses three successive 3×3 regions and counting uses a hierarchical representation. Compare the total forward passes and inputs for the same task, not just the final output format."
+      }
+    },
+    "dive/system-one/typed-readout/analysis/1": {
+      "source_sha256": "b1bc2b02fac3a109c4a14fe74f5ef83c54a410c8db1cd4febe77e12871436fe4",
+      "reviewed": true,
+      "fields": {
+        "title": "Caching gains come from dependencies",
+        "body": "MetaEncoder encodes each candidate from its own content, which supports building an offline vector index. System One reranking places candidates in a shared context, so changing the other candidates may change the contextualized representation. A closed-set MetaEncoder request may still contain its options: reusable candidate caches do not imply that the request vector is option-invariant. One favors indexability, the other joint comparison; neither interface guarantees higher accuracy."
+      }
+    },
+    "dive/system-one/typed-readout/question/candidate-cache-dependency": {
+      "source_sha256": "edcd97146f5b3ab17a2a804cdf2c51a57910f9871e3f20c828dcbab5df296f33",
+      "reviewed": true,
+      "fields": {
+        "question": "Both output candidate probabilities. Why can MetaEncoder pre-encode candidates while System One reranking generally cannot?",
+        "answer": "MetaEncoder runs its candidate encoder independently, without reading the current request or other candidates. In joint reranking, candidates are contextualized in the same prompt; caching a representation outside that set does not guarantee the same score. Computation is cacheable when its dependencies are unchanged, regardless of whether the output is a probability.",
+        "example": "One tool description can be encoded once for retrieval by a thousand dual-encoder queries. A VLM comparing it jointly against five other tools receives a different input when those five competitors change."
+      }
+    },
+    "dive/system-one/typed-readout/question/spatial-choice-granularity": {
+      "source_sha256": "3b7f232441afcb3f459fe3fe4eb55f9b36217374975b91abd0db35f339b9b5c7",
+      "reviewed": true,
+      "fields": {
+        "question": "How can counting and point localization be cast as choices, and why is this not the same as a single ordinary multiple-choice question?",
+        "answer": "MJev-Spatial decomposes numeric outputs into bounded discrete decisions, refining regions over multiple point-localization steps. LLM2Jev instead assigns a distribution to fixed given options. In spatial refinement the next input depends on the region chosen before it, and errors can propagate across stages. Account for the full pipeline rather than each softmax in isolation.",
+        "example": "First choose the upper-right region of a 3×3 grid, then subdivide that region of the original image. A perfectly precise second choice cannot recover a location excluded by the first."
+      }
+    },
+    "dive/system-one/typed-readout/question/conditional-mass-confidence": {
+      "source_sha256": "11b8d98611b21c39ea929109ef99f998e59bca191fd90350a4dacf6a27fe453e",
+      "reviewed": true,
+      "fields": {
+        "question": "If the top candidate gets a normalized probability of 0.9, is the model 90% confident that it is correct?",
+        "answer": "Not necessarily. System One reranking normalizes only over candidate letters even when their total vocabulary mass is tiny. MetaEncoder's temperature-scaled softmax likewise expresses relative fit among the current candidates. Calibration against the actual correctness rate requires separately labeled data; a relative share alone is not a correctness guarantee.",
+        "example": "If two candidate letters have vocabulary probabilities of 0.009 and 0.001, candidate-only normalization gives 0.9 and 0.1 even though the remaining 0.99 mass falls on other tokens."
+      }
+    },
+    "dive/system-one/typed-readout/update/2026-10-27/0": {
+      "source_sha256": "ba1c4e002eb55e9338737821fac69a9c795ca7c0dcedcdb4bd2bcd2a1663a0c5",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial version: compared LLM2Jev, MetaEncoder, MJev-Spatial, and System One reranking, covering scoring sources, joint contextualization, cacheability, and cross-paper questions."
+      }
+    }
+  }
+}

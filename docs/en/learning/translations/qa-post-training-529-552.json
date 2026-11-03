@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:flowmap-opd/basics": {
+      "source_sha256": "781684b691bff66abf2a49863a73c32b8b1e32572bc7ee6c9f8e18b89e86f85c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate rollout distribution and optimization kernel in FlowMap-OPD?",
+        "answer": "Sampling supplies states with specified marginals; a local kernel compares teacher/student flows or velocities. Separate data provision from gradients rather than backpropagating through sampling arbitrarily.",
+        "example": "Freeze a sampled intermediate state, then compare local predictions."
+      }
+    },
+    "qa/post-training:flowmap-opd/comparison": {
+      "source_sha256": "1a1fc028380b07db31449fcd87fc85d8c0bb4e2a179cc0603542f257b7a7b51f",
+      "reviewed": true,
+      "fields": {
+        "question": "How does detaching states differ from end-to-end differentiation through the sampler?",
+        "answer": "Detach trains student kernel parameters only. Differentiating through states adds dependency gradients and changes the estimator despite equal scalar loss.",
+        "example": "Current model may affect both states and predictions; freezing states deliberately cuts the former path."
+      }
+    },
+    "qa/post-training:flowmap-opd/implementation": {
+      "source_sha256": "7ff33d119c65e3d0541125dcc575a59af581eaa2451ba0d1624f61f891d660eb",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local FlowMap train a real image generator?",
+        "answer": "No. It verifies state detach and local KL. Freeze teacher; caller ensures required rollout marginals. Random vectors need not follow the paper's distribution.",
+        "example": "Computing KL for an arbitrary vector doesn't validate generation provenance."
+      }
+    },
+    "qa/post-training:flowmap-opd/mechanism": {
+      "source_sha256": "cefb9042f426686cfcd95765d8a95327c889c9406e7f1fd116c5ff9ff763f145",
+      "reviewed": true,
+      "fields": {
+        "question": "Why freeze rollout states for kernel gradients?",
+        "answer": "Rollout supplies required marginals; kernel compares flows or velocity at those states. Differentiating through generation adds unspecified trajectory terms. Detached states can be recollected from later policies, not permanently fixed.",
+        "example": "Sample intermediate states, freeze them for one local teacher comparison, and don't backpropagate through entire sampling."
+      }
+    },
+    "qa/post-training:drift-opd/basics": {
+      "source_sha256": "69bd6986055d459a3ba0c6784df3669c75d46f12e33632e187f5d08b3fced5f4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add future potential beyond current chunk distillation in DriftOPD?",
+        "answer": "Actions alter future robot states. One-step matching misses downstream effects. Sequential reverse KL includes a future term estimated from offline demonstration critic.",
+        "example": "A plausible grasp can prevent later placement."
+      }
+    },
+    "qa/post-training:drift-opd/comparison": {
+      "source_sha256": "c366596a74837b6804a29bad6993cc4d9858469e92def5356ba2b6fd3bfb15d4",
+      "reviewed": true,
+      "fields": {
+        "question": "How does future potential differ from an immediate reward?",
+        "answer": "It estimates downstream outcomes within a sequence decomposition; immediate reward rates current behavior. Critic approximation matters and adding value is not exact sequence KL.",
+        "example": "Lifting the object earns immediate credit even if placement becomes impossible."
+      }
+    },
+    "qa/post-training:drift-opd/implementation": {
+      "source_sha256": "92fdf73d7a697a5854fa1d041a7bf8b014b84192c6ef1682d75e645f9be3773e",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local DriftOPD execute a robotics closed loop?",
+        "answer": "No. It verifies objective decomposition and teacher detach. Real work needs an offline-trained future critic, chunk/state alignment and environment evaluation.",
+        "example": "A computed potential term does not show a robot completed the task."
+      }
+    },
+    "qa/post-training:drift-opd/mechanism": {
+      "source_sha256": "1590a25679fb008aa482763ecd9ee68fb1de8cb215e1795ecc0703a392dcbd4e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add future potential to current chunk reverse KL?",
+        "answer": "Immediate matching cannot capture state transitions. A demonstration-trained critic approximates long-horizon effects to retain timing in sequential decomposition. Coverage/critic accuracy matter; no local environment validation.",
+        "example": "Two grabs look teacher-like now, but one puts the object out of reach later."
+      }
+    },
+    "qa/post-training:dr-opd/basics": {
+      "source_sha256": "67ee5447690340e4df716eed9965afb1604052f51bfecb8cdd397c97ad341bdf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Dr. OPD give teacher tokens different weights?",
+        "answer": "Fixing key reasoning matters more than rephrasing. A bilevel approximation weights by expected post-update student reward, not just disagreement.",
+        "example": "At equal probability gap, correcting an operator may matter more than changing a connective."
+      }
+    },
+    "qa/post-training:dr-opd/comparison": {
+      "source_sha256": "1de5506917fb91b49834355025801193aa021359cc81faa062efeeb6f34e9f67",
+      "reviewed": true,
+      "fields": {
+        "question": "How does reward JVP weighting differ from ranking by KL disagreement?",
+        "answer": "Disagreement measures distance; JVP estimates downstream reward change along a direction. Combine gap and value, but a local gradient isn't independent correctness evidence.",
+        "example": "A large stylistic disagreement can have weak reward effect."
+      }
+    },
+    "qa/post-training:dr-opd/implementation": {
+      "source_sha256": "0d71ec1faa84ee2a648d22e6cb7e30cdec82ddc4db735837365e232fd35d88f6",
+      "reviewed": true,
+      "fields": {
+        "question": "What order should Dr. OPD use for weights and student updates?",
+        "answer": "Solve weights from fixed batch signals, clip and mean-normalize, then update student by weighted RKL. Do not differentiate the student through weight selection. Local d×g is a proxy.",
+        "example": "Choose supervision positions before the student step rather than changing the selector with that step."
+      }
+    },
+    "qa/post-training:dr-opd/mechanism": {
+      "source_sha256": "1f302bb8e01e25120c78073c981c191a2735a62cedd351ddcc6f7dfa1d4cca1a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why weight by downstream reward JVP rather than disagreement size alone?",
+        "answer": "Large gaps may be stylistic. JVP estimates reward sensitivity along correction, then closed-form weights are bounded and normalized for OPD. Local reward and approximation do not prove global causal contribution.",
+        "example": "Teacher and student can disagree on an operator and politeness, but only one affects task reward."
+      }
+    },
+    "qa/post-training:lspd/basics": {
+      "source_sha256": "90706b428c6fadba97fdf2f3520dba77f70374ea4cc2ec209c67c5f06941bd46",
+      "reviewed": true,
+      "fields": {
+        "question": "Why treat teacher–student logp gaps as robust residuals in LSPD?",
+        "answer": "Squared loss shrinks ordinary gaps; Huber-like linear tails limit gradients from extreme ones. Residual regression can reuse older trajectories.",
+        "example": "A rare token's huge log gap should not dominate a batch indefinitely."
+      }
+    },
+    "qa/post-training:lspd/comparison": {
+      "source_sha256": "7312a6eaa7b1f5f09e431e684334b05f120d028b2af2fb897fdaeb8ac94dba6d",
+      "reviewed": true,
+      "fields": {
+        "question": "How does robust LSPD behave in tails compared with reverse KL?",
+        "answer": "It explicitly limits residual slope; KL is defined through distribution/probability weights. Clipping KL isn't equivalent. Replay also changes state provenance.",
+        "example": "Doubling tail residual changes linear and unbounded quadratic gradients differently."
+      }
+    },
+    "qa/post-training:lspd/implementation": {
+      "source_sha256": "507428f64e8fba25824c1ade4691baf9045a09421d64bb120112f9db92a3663b",
+      "reviewed": true,
+      "fields": {
+        "question": "How handle teacher gradients and lengths in LSPD?",
+        "answer": "Freeze teacher logp. Average differentiable student gaps over valid tokens per response, then responses equally, with specified entropy subtraction. Registry presence doesn't prove executable Evolve.",
+        "example": "Long replies do not automatically receive twice the weight."
+      }
+    },
+    "qa/post-training:lspd/mechanism": {
+      "source_sha256": "a9f91bd465d1b8a0f7eedf36b4e54b42b5e5fbf5b596692d8a707887c527307e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use a quadratic center with Huber tails instead of squared loss throughout?",
+        "answer": "Quadratic shrinks small logp gaps while linear tails bound outlier influence and retain correction direction. Average responses equally. Reused old traces are not fresh current-policy samples.",
+        "example": "One teacher-improbable token can dominate squared loss; robust tails curb it."
+      }
+    },
+    "qa/post-training:recursive-opsd/basics": {
+      "source_sha256": "7da9884e97b471164ebc44e115b274bb992f3038b6af31606ef16c59c8e57834",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Recursive OPSD DCE keep teacher aligned to student updates?",
+        "answer": "Both use current shared weights, teacher additionally sees the reference solution and is detached. Updated weights become both views next round, not a separately trained or initial teacher.",
+        "example": "A newly learned correction is available to the next privileged teacher."
+      }
+    },
+    "qa/post-training:recursive-opsd/comparison": {
+      "source_sha256": "f225c9b19730089c5e51933997b19c658799dcd4db0113e167f06496f2a9b348",
+      "reviewed": true,
+      "fields": {
+        "question": "How does SRCL rewriting differ from showing a teacher gold to rewrite?",
+        "answer": "Rewrite sees only problem and its own response. Gold is for acceptance. Require shorter, self-contained, naturally ended and correct outputs to avoid mistaking privileged copying for autonomous revision.",
+        "example": "Do not include the reference solution in the shortening prompt."
+      }
+    },
+    "qa/post-training:recursive-opsd/implementation": {
+      "source_sha256": "81ad966d8c2e4cb5f4978c60f4f76c4b5ff081e0d95932746aa47bd576d4dbd0",
+      "reviewed": true,
+      "fields": {
+        "question": "What if no shorter revision qualifies in Recursive OPSD?",
+        "answer": "Run DCE only; don't force failed or longer rewrites into SFT. Identify prompt-role differences in frozen teacher controls; the local assistant-side arm isn't the original user-side OPSD baseline.",
+        "example": "A correct but longer answer does not pass SRCL and must stay excluded."
+      }
+    },
+    "qa/post-training:recursive-opsd/mechanism": {
+      "source_sha256": "ff0bf04c4e7eede38a4c4abf1b4018d4a0cb9f632ce727b4af00b2444a7290f0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why impose different gold boundaries on DCE and SRCL although both update one model?",
+        "answer": "DCE uses current privileged teacher to score actual prefixes, then refreshes both roles after updates. SRCL rewrites its own answer without gold and validates afterward. Giving gold to rewriter changes self-revision into copying. No second teacher is independently trained.",
+        "example": "Score a student attempt using a reference solution, then let it shorten its own response with correctness checked only afterward."
+      }
+    },
+    "qa/post-training:gamma-opd/basics": {
+      "source_sha256": "5b6666d99775139459879620f28c7c6a5b3cd602f018e76d8e8b2a6360449927",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add temporal credit to Gamma-OPD instead of only immediate log gaps?",
+        "answer": "Choices shape future sequence. Discounted future teacher gaps inform current credit, with verifiable return constraining direction. This isn't only immediate imitation.",
+        "example": "An early branch can cause several later divergences that its local log gap underestimates."
+      }
+    },
+    "qa/post-training:gamma-opd/comparison": {
+      "source_sha256": "6cb0a274f3bcdf902a6303d827fc62d0c7791f55ae77123623402fbe1b96b928",
+      "reviewed": true,
+      "fields": {
+        "question": "How does discounted teacher credit differ from adding unbounded outcome reward?",
+        "answer": "Discounting carries sequential distillation; bounded advantage controls strength of verified outcomes. Arbitrary reward weights change the balance without proving one better.",
+        "example": "A giant terminal reward should not overwhelm temporal guidance without limits."
+      }
+    },
+    "qa/post-training:gamma-opd/implementation": {
+      "source_sha256": "39022b6978b2ae50a1ab235cbf7680f00d6632b269e9a5bcc2e3b1e47a3e179a",
+      "reviewed": true,
+      "fields": {
+        "question": "What does the local Gamma-OPD kernel verify?",
+        "answer": "Discounted propagation and bounded reward, not full language model training. Preserve order, terminal masks and frozen teacher signals. Shuffling tokens cannot verify temporal credit.",
+        "example": "Moving future credit to another response loses trajectory meaning even when sums are computable."
+      }
+    },
+    "qa/post-training:gamma-opd/mechanism": {
+      "source_sha256": "f52f0ec00183824131263c2814ee3f7c88d989d396935a1022dadcfdc9792064",
+      "reviewed": true,
+      "fields": {
+        "question": "Why propagate teacher credit backward and add verifiable advantage?",
+        "answer": "Later teacher evidence captures effects of early actions; verified outcomes align imitation with task returns. Teacher preference isn't correctness. Local formula checks don't establish capability.",
+        "example": "An early bad choice may cause several later gaps; credit it upstream while still requiring final verification."
+      }
+    }
+  }
+}

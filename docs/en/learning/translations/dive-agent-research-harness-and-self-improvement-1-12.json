@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/agent-research/harness-and-self-improvement": {
+      "source_sha256": "350314ff39800a4aceb18b3ead901bdc8e711bf8f1954a95158b50bae99a0eb2",
+      "reviewed": true,
+      "fields": {
+        "title": "Identify what self-improvement changes: answers, experience, interfaces, and system versions",
+        "thesis": "Self-Refine revises the current artifact, Reflexion changes what experience the next attempt can read, HarnessLens checks local workflow changes, Agent S4 evolves interface repositories, RSIFlow chooses the intervention layer, and AgentX brings candidates into a production loop with guardrails. More rounds are not a shared algorithm: persistent state and acceptance rules define what changes. CROP edits system prompts offline and penalizes output cost. EvalAlloc allocates SEARCH evaluations instead of repairing candidate code, estimates fitness against fixed references, and runs paired confirmation.",
+        "axis_0": "Whether the mutable object is an answer, textual experience, interface, model, or artifact",
+        "axis_1": "Whether a change serves only the current task or becomes a persistent version",
+        "axis_2": "Whether feedback proposes edits, selects parents, accepts candidates, or authorizes release",
+        "axis_3": "Whether failures are rolled back, retained in a population, or stored as knowledge"
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:self-refine": {
+      "source_sha256": "e53b769bdd557acc819fc537039d6f3e302aaf329ce62d8fc677434bc5aa4169",
+      "reviewed": true,
+      "fields": {
+        "position": "One model explicitly generates a draft, task-specific feedback, and a revision, stopping when requirements are met.",
+        "tradeoff": "Primarily a current-output loop, whose self-evaluation can repeat errors. The deterministic local critic verifies state transitions only."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:reflexion": {
+      "source_sha256": "3728ac292ad5310a83097394c39e4d1120d4e0299bd59dc53bbca7090d5b351c",
+      "reviewed": true,
+      "fields": {
+        "position": "Converts execution feedback into natural-language reflections for the next trial's bounded episodic memory.",
+        "tradeoff": "Context changes rather than gradient weights, and lessons can be wrong or stale. Interpret local template reflection separately from isolated ToolRoute."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:harnesslens": {
+      "source_sha256": "45fd5e38df61e72fc2f8dcd516a7187c7cc5216ce99274156f7f6ec15e92ae62",
+      "reviewed": true,
+      "fields": {
+        "position": "Chooses paired validation tasks by affected behavior and requires both positive gain and attribution to the candidate change.",
+        "tradeoff": "Local acceptance saves evaluation without covering all capabilities. Local ToolRoute is not all paper benchmarks."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:agent-s4": {
+      "source_sha256": "3e01330abe05717da135d360d17604651c540c9a82955e3864ba5a580a640912",
+      "reviewed": true,
+      "fields": {
+        "position": "Freezes the task agent and harness, editing interface code and usage knowledge. Mutated or crossed descendants enter the population even if temporarily low scoring.",
+        "tradeoff": "Validation selects parents without exposing results to builders. The local path is a trusted-callback controller without desktop-interface evolution; full experiments are expensive."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:rsiflow": {
+      "source_sha256": "99c1973ef161d5058457e32ce80b03895acfeb8fcb3b636e0fa997a819f2c81e",
+      "reviewed": true,
+      "fields": {
+        "position": "Selects Model, Harness, or Artifacts interventions from evidence and compares the same parent and task batch. Accepts only valid positive gains.",
+        "tradeoff": "Failures retry from the frozen parent. This is not arbitrary code self-modification. Local scope, pairing, and skill records run without model training."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:agentx": {
+      "source_sha256": "4499006269df5e82aaaa97b5f817686ba1b657b37d3979868602874a16d3f2a0",
+      "reviewed": true,
+      "fields": {
+        "position": "Connects evidence-based proposals, repository implementation, guarded online A/B, and retention of positive and negative results in recommendation iteration.",
+        "tradeoff": "Guardrails can veto primary metric gains. Author production evidence differs from the deterministic local mini-loop without traffic or large-model SGPO."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:ruharness": {
+      "source_sha256": "564a50efb01d8f95da37141e215e016b48e6017e8ce78986e5f72cad6e5e8a32",
+      "reviewed": true,
+      "fields": {
+        "position": "Uses a six-cell joint posterior, 2,000 draws with a 0.2 quantile, an active frontier, and validation admission.",
+        "tradeoff": "Behavior labels, executions, and validation scores are external. Statistical ranking is not a full self-evolution run."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:crop": {
+      "source_sha256": "f68b9f8727962c0fbe3937267976e3ba64c1023df569571e02f0a42055b15ac6",
+      "reviewed": true,
+      "fields": {
+        "position": "Fixes objective weights, combines task critiques with over-threshold length critiques, and uses an external meta-optimizer to rewrite system prompts. Selects evaluated prompts by accuracy minus CoT-normalized token cost.",
+        "tradeoff": "Unlike Self-Refine, it does not edit the current answer. Local validation selection explicitly tightens leakage prevention. Deterministic callback diagnostics do not show lossless LLM shortening or full evolution."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:evalalloc": {
+      "source_sha256": "14ea96bfb036cab9f0319cef147b07c0616df7bceec272854abedbdab28bb29e",
+      "reviewed": true,
+      "fields": {
+        "position": "Uses SEARCH observation informativeness to choose a common core and items without replacement. Infers only new candidate parameters under fixed external item references, then fills the cache on a common confirmation prefix and applies paired correction.",
+        "tradeoff": "Predictions cannot overwrite observed cells. Fewer evaluation cells do not imply proportional token savings. Warmup MIRT, cross-fit refitting, and full successive halving are not implemented."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/0": {
+      "source_sha256": "4706ebb4aba6f5d603e26c32e92bc553dcdb10de411043195febbc0eff111ccd",
+      "reviewed": true,
+      "fields": {
+        "title": "Separate remembering how to change from actually changing the system",
+        "body": "Self-Refine changes the current output; Reflexion persists text for later attempts. Agent S4 versions interface code and knowledge so available observations and actions can change. RSIFlow separates model, workflow, and artifact. Future outcomes may improve in each case, but do not call all of them model learning. Record what changed, how it executes, and what the next task inherits rather than one policy-update count."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/1": {
+      "source_sha256": "50783ce697523647ae4138cdd0fc0457b6aaec9337160444fa5976086c5ff6d5",
+      "reviewed": true,
+      "fields": {
+        "title": "Population admission, acceptance, and release are distinct",
+        "body": "Agent S4 retains temporarily low-scoring descendants for later parent selection, a nongreedy search. RSIFlow changes current state only for valid improvements over the same parent. HarnessLens limits acceptance to attributable behavioral evidence. Production AgentX also requires guardrails. Archiving a candidate, passing local validation, and affecting live traffic are not one 'integrated' status. Compare rules and scope rather than ranking incompatible paper scores."
+      }
+    }
+  }
+}

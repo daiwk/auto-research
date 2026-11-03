@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/multimodal-models:embedding-gemma2/implementation": {
+      "source_sha256": "f64f4f264655f168478b96f60027f281b30c136271f1910a68c858c547105e8b",
+      "reviewed": true,
+      "fields": {
+        "question": "What details matter for mean pooling, truncation, and precision?",
+        "answer": "Attention-mask pooling excludes padding, followed by prefix truncation and L2 renormalization. Queries and documents use their respective text prefixes; images use none. Official activation ranges can produce non-finite FP16 values, so the local path pins FP32 and rejects non-finite or zero vectors.",
+        "example": "Identical text padded to different lengths should yield the same masked representation. Including padding makes it length-dependent."
+      }
+    },
+    "qa/multimodal-models:flexglue/mechanism": {
+      "source_sha256": "179cac3afa164e1d1d4c1429f45fd4a21fadc32cb9adbbeb11a83df456ba3b0e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does FlexGlue read coordinates near a peak rather than take a global expectation?",
+        "answer": "Similar structures can create several peaks, making a global average land between valid matches. A local window around the strongest candidate avoids averaging modes; refinement then predicts a displacement. Covisibility votes and hard negatives separately assess whether the images are matchable.",
+        "example": "If two identical windows score highly, the global average lands on the wall. Read coordinates around the chosen window for a plausible starting point."
+      }
+    },
+    "qa/multimodal-models:flexglue/basics": {
+      "source_sha256": "067b94a14da7d6c57c5c00d254e1df9d246ddc5c7814dce834c6570dd4202b9e",
+      "reviewed": true,
+      "fields": {
+        "question": "How does FlexGlue's dense grid support arbitrary-position queries?",
+        "answer": "Features interact globally on a stride-8 grid. Interpolation reads the requested coordinate's feature, and cross-image attention estimates the corresponding location. Queries need not coincide with cell centers or be restricted to fixed keypoints.",
+        "example": "For a query between four cells, interpolate its feature before matching instead of snapping to the nearest cell."
+      }
+    },
+    "qa/multimodal-models:flexglue/comparison": {
+      "source_sha256": "cb01a642a090a95b8ef8401f4a7fcdbc25bb895867addf9f96a0d9bfd30d12f0",
+      "reviewed": true,
+      "fields": {
+        "question": "When does FlexGlue's layer-wise covisibility gate exit early?",
+        "answer": "Every layer produces token-level sigmoid votes. Exit when the mean across both images falls below that layer's threshold tγ^(L−k). This tests whether matching should continue, not just the strongest local match. Reliability of the gate matters; fewer layers do not prove higher quality.",
+        "example": "Two symmetric buildings can contain nearly identical local features but have low overall covisibility, so exit rather than refine a confident false match."
+      }
+    },
+    "qa/multimodal-models:flexglue/implementation": {
+      "source_sha256": "ef736584d02aaf082a6d3ce072df94d0036560b475e30223aabb505173959a6a",
+      "reviewed": true,
+      "fields": {
+        "question": "Can ordinary softmax and cross-entropy reproduce FlexGlue's coarse matching?",
+        "answer": "No. The paper uses 1.5-entmax and Fenchel–Young loss, with bilinear weights on four cells surrounding the subpixel target and detached coarse coordinates during refinement. No full local operator, training metrics, or GPU receipt exists.",
+        "example": "A target at a four-cell junction gives all four weights. Snapping to one cell changes the supervision."
+      }
+    },
+    "qa/foundation-models:gas/mechanism": {
+      "source_sha256": "69e260e7eabd9d91a21e1081e0ebca01e22b14c501fc4caa20831e844155c255",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can GAS remove its entire auxiliary generation branch at deployment?",
+        "answer": "During training it predicts continuous visual embeddings and backpropagates into a lower vision path shared with understanding. Its upper generation parameters are separate and not used by inference. Removing the branch retains the trained shared parameters.",
+        "example": "Train on image understanding and target visual embeddings, then deploy only image question answering with the learned shared vision path."
+      }
+    },
+    "qa/foundation-models:gas/basics": {
+      "source_sha256": "3fe2e3cafdbf91d1f6e19ff52aa0360194bcc4e203af63e190850d750cbfe239",
+      "reviewed": true,
+      "fields": {
+        "question": "Does GAS next-embedding prediction output discrete image tokens?",
+        "answer": "No. It predicts continuous embeddings in the LM's visual input space, with cosine alignment to an EMA-projected target. It does not classify a discrete image codebook. Generation is auxiliary to understanding and deployment need not generate images.",
+        "example": "Predict the direction of a target patch embedding instead of choosing an index from thousands of image codes."
+      }
+    },
+    "qa/foundation-models:gas/comparison": {
+      "source_sha256": "8cb8dc5e5bb9211a4aed3d4ac37b754433257e9c0c35534d357ef4213082a41a",
+      "reviewed": true,
+      "fields": {
+        "question": "How does GAS next-embedding prediction differ from reconstructing the current patch?",
+        "answer": "NEP predicts the next position from prior visual embeddings and allowed autoregressive context; an EMA projection supplies the target. Feeding the target at the same position changes what the model sees and can reduce the task to copying. Removability of the branch does not replace the shifted objective.",
+        "example": "To predict visual embedding i, provide earlier positions and allowed context, not embedding i itself."
+      }
+    },
+    "qa/foundation-models:gas/implementation": {
+      "source_sha256": "8126f9c281b1345526efe341c51e0350e1acb1ef59f8855f670d2b6c4b61e5ea",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check inference dependencies before claiming GAS adds no deployment parameters?",
+        "answer": "The generation upper layers, vision head, and EMA projector are removable only if understanding no longer reads them. Training still needs shifted prediction, EMA targets, and branch isolation. A local mirror-target diagnostic cannot validate the gains of large-scale generative data.",
+        "example": "Feeding an intermediate generation output back into understanding keeps that branch necessary at inference despite a claim of zero added parameters."
+      }
+    },
+    "qa/foundation-models:lamp/mechanism": {
+      "source_sha256": "9e67d204fb82d6a4f4449eeb714eaaa55668f3a8d665c4eae0c9dc8bdd141974",
+      "reviewed": true,
+      "fields": {
+        "question": "Why mix LAMP's layer predictions in class-score space rather than concatenate features?",
+        "answer": "Different layers have different widths and similarity geometry. Concatenation would introduce projection assumptions. Each LAMP branch fits support-set residuals relative to CLIP, then mixes scores in common class space. If text prototypes change, the residuals must change as well.",
+        "example": "A shallow texture branch and a deeper semantic branch each score cat versus dog before their scores are combined."
+      }
+    },
+    "qa/foundation-models:lamp/basics": {
+      "source_sha256": "5e96f01f1a75ca86cfa3c6a240f723b627b78093b1bec704539fc3e8a74d4c77",
+      "reviewed": true,
+      "fields": {
+        "question": "Relative to what does LAMP compute its label residuals?",
+        "answer": "Subtract the original CLIP text-prototype scores from true support labels. Each layer's kernel predictor corrects the prior rather than relearning all classes. If prototypes change, the residual must follow or the correction no longer matches its target.",
+        "example": "If a cat support image has a low CLIP cat score, the kernel branch learns the difference rather than retraining the vision encoder."
+      }
+    },
+    "qa/foundation-models:lamp/comparison": {
+      "source_sha256": "5f3231d9513a33067bd9a6b43c91b3a8ad1cdb36fbd59b50ef48343915d1be13",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a support-bank regional kernel differ from including evaluation queries in its centering statistics?",
+        "answer": "Both m(x) and b use the support set as the reference; queries are scored against the fixed reference. Adding test queries would make an individual result depend on the evaluation batch. Test labels must not select mixing weights.",
+        "example": "With fixed support, query A uses the same calibration alone or with query B; B does not redefine the support mean."
+      }
+    },
+    "qa/foundation-models:lamp/implementation": {
+      "source_sha256": "3f14658b0b8e1ea809995987d8c83df472c225ed34fe45b64dc8a446b2eb2dcd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must LAMP-F update the cached response when text prototypes change?",
+        "answer": "Updating prototypes changes both query priors and support residuals. The cached linear response represents how the kernel solution changes and allows exact updates without a complete solve. Updating just the query prior omits a term. Kernel statistics and mixture weights remain frozen.",
+        "example": "Moving the prototype toward cat images raises the prior for support cats, so their residual should shrink. Keeping the old correction double counts."
+      }
+    },
+    "qa/foundation-models:llava/mechanism": {
+      "source_sha256": "3c04808393140c18885141c9efcdb29ba68a8aead3f9436ed11ec849f5e8887d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is projecting visual features to the LLM width insufficient for following visual instructions?",
+        "answer": "Matching shape does not align meaning. The connector learns a visual-to-language interface, and instruction supervision teaches how to answer questions conditioned on images. Projection alone does not confer recognition, localization, or multiround responses.",
+        "example": "A cat image can enter as a vector, but QA training is needed to answer “Where is it?”"
+      }
+    },
+    "qa/foundation-models:llava/basics": {
+      "source_sha256": "3d46136fd6d76a68fe5107246c5c0d33d7aa7d15f2e73cea21800f660f8052e8",
+      "reviewed": true,
+      "fields": {
+        "question": "What does LLaVA's visual projector do between image and answer?",
+        "answer": "It maps image-encoder features into visual tokens that the language model reads alongside questions and conversation history. It connects the interfaces; multimodal instruction training, not shape alone, teaches instruction following.",
+        "example": "A width-matching projection maps encoder features to LM size, but the model still must learn which features address the user's question."
+      }
+    },
+    "qa/foundation-models:llava/comparison": {
+      "source_sha256": "d16fa72811f9b208cc4659c8f38704bfdd850f85e303e526a62545a0b786483d",
+      "reviewed": true,
+      "fields": {
+        "question": "How does LLaVA instruction supervision differ from CLIP's dual-encoder contrastive training?",
+        "answer": "LLaVA learns conditional answer tokens from images and questions. CLIP brings paired images and texts together in a shared embedding space for matching. Retrieval scores are not instruction-generation quality, and architecture alone does not establish superiority.",
+        "example": "Answering why two people hold umbrellas is conditional generation; selecting a supplied matching caption is a different output contract."
+      }
+    },
+    "qa/foundation-models:llava/implementation": {
+      "source_sha256": "07378a90e3742eb5d5ad41c2fc57b2255aae932ddb5578f5287d8c5ccb118799",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local two-layer projector's negative result refute LLaVA's instruction tuning?",
+        "answer": "No. The local run fixes a small patch encoder, classification head, and budget, and compares a linear projector with a two-layer MLP. It does not generate GPT-4 instructions or train LLaVA-13B. Extra connector capacity did not help this configuration, not all tasks.",
+        "example": "A decline in small clothing classification says nothing directly about large-model multiround image dialogue."
+      }
+    },
+    "qa/foundation-models:mllmclip/mechanism": {
+      "source_sha256": "21d38bb133667a58f82b9a36c409f459f85d1b932ebe7cc5d8a54dab6db2e871",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can CKA distill structure when teacher and student feature widths differ?",
+        "answer": "CKA aligns relationships between examples without coordinate-by-coordinate equality. The teacher selects informative tokens by attention; CKA constrains student image and text representations. The deployed student stays dual-tower and does not reproduce the teacher's entire reasoning.",
+        "example": "A 1,000-dimensional teacher and 500-dimensional student can both put similar examples close without matching coordinates."
+      }
+    },
+    "qa/foundation-models:mllmclip/basics": {
+      "source_sha256": "2c16045760ddfb908a22384ce357ac7fbf7f68e55ab5292a30c5a61de9be5df1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use a multimodal LLM teacher but keep a dual-tower MLLMCLIP student?",
+        "answer": "The teacher supplies rich cross-modal semantics but is expensive to deploy as a generator. The student distills relationships while encoding images and text independently. Teacher training cost and online retrieval cost are separate.",
+        "example": "Distill offline, cache item image embeddings, and retrieve with a text vector without generating an answer for each item."
+      }
+    },
+    "qa/foundation-models:mllmclip/comparison": {
+      "source_sha256": "587c49fc8b186732168af149b2128885ca2cfaa159564db87c2f7bf1cde7c0e7",
+      "reviewed": true,
+      "fields": {
+        "question": "How does attention token selection change MLLMCLIP supervision relative to distilling all tokens?",
+        "answer": "It builds structural supervision from selected informative teacher positions across layers rather than every position. This changes information selection, not CKA's ability to handle different widths. Selection can miss useful details, so superiority requires a controlled comparison.",
+        "example": "Select a subset of locations when a teacher layer includes many background tokens. More tokens do not necessarily give the student more useful knowledge."
+      }
+    }
+  }
+}

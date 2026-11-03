@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:ltv-video-ranking/comparison": {
+      "source_sha256": "948ef892f67dea94fb59fff0944fa6e33685f2cf14a2997e9e7f440d134415c8",
+      "reviewed": true,
+      "fields": {
+        "question": "How does long-term creator value differ from ranking by seconds watched on one video?",
+        "answer": "Watch time rewards immediate consumption; a cross-day creator objective may reward consistent supply rather than one attention-grabbing video. Define how to combine the two and check whether the long-term proxy favors incumbent creators. The public proxy lacks real creator cycles and does not establish retention or ecosystem gains.",
+        "example": "Illustration: A sensational video can hold attention once, while a reliable series brings people back for days. Watch time alone can miss the latter contribution."
+      }
+    },
+    "qa/recommendation:ltv-video-ranking/implementation": {
+      "source_sha256": "77799eaa0e65bddcc8c8e54970c270d23feb04aee32639e69bc15f618b7f5972",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must PDQ distinguish the original position distribution from the reference distribution?",
+        "answer": "Find the outcome's quantile in its original position's conditional distribution, then invert it in a common reference distribution. Inverting in the original distribution would nearly recover the original value. Fit distributions from allowed data and do not tune on future test behavior; without real position logs this is a proxy.",
+        "example": "Illustration: Map a fifth-position video's top-decile watch time to the reference position's top-decile value, not back to the fifth position."
+      }
+    },
+    "qa/recommendation:lum/mechanism": {
+      "source_sha256": "ab8f83c07b4386a108cee380d95940b54ad47d6ea8aa2c32b3645a24b1c31ef8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why place LUM's condition before the item being predicted rather than after the previous item as feedback?",
+        "answer": "The condition specifies the upcoming choice's context, query, or category and should constrain the next-item distribution. Attaching it to the previous item instead explains past behavior. LUM learns queryable user knowledge through conditional generation and extracts offline interest features for a DLRM rather than serving the full generator.",
+        "example": "Illustration: Entering kitchenware should condition the next cookware prediction, not be interpreted as feedback on the previous running shoe."
+      }
+    },
+    "qa/recommendation:lum/basics": {
+      "source_sha256": "6cc83f0f13f37cd1b766f6829732cef54a164310848224ac5604769687f6c005",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does LUM separate user-knowledge generation and online DLRM ranking into three stages?",
+        "answer": "First train a generative model on conditional user relationships; then query and cache different interests offline; finally supply knowledge vectors and target-match scores to the existing discriminative ranker. This avoids serving the large model on every request. Transfer through a DLRM interface is not necessarily lossless, and freshness and condition definitions matter.",
+        "example": "Illustration: Prepare multiple interest profiles offline and let the online DLRM match them to a product without replacing its real-time feature system."
+      }
+    },
+    "qa/recommendation:lum/comparison": {
+      "source_sha256": "cf5c6483d7fdda50066b9d6495b6dada60964cc0c84ea5004c21c379178ab1f4",
+      "reviewed": true,
+      "fields": {
+        "question": "How do LUM's multiple conditional queries organize information differently from a fixed user embedding?",
+        "answer": "One vector compresses all needs; conditional queries can extract distinct contexts or preferences for the downstream target. More queries require cache space and can be redundant. Gains over a sequence-free ID-DLRM include several new information sources and cannot be assigned solely to condition tokens.",
+        "example": "Illustration: High-rating and low-rating queries may reveal likes and dislikes separately, while an average can mix them together."
+      }
+    },
+    "qa/recommendation:lum/implementation": {
+      "source_sha256": "d6c3676c1cf03b6c183d644e3377566cc457649ad978fb37b5b3bc6e058d3133",
+      "reviewed": true,
+      "fields": {
+        "question": "Why mask query-to-query attention when appending several LUM conditions offline?",
+        "answer": "Each condition should independently read the same shared history. Mutual attention makes results depend on query order and breaks reuse. Predict the immediately following item from the condition output, not from an action after the item. Bind caches to the same prefix and condition version.",
+        "example": "Illustration: High- and low-rating queries should not exchange clues; reversing their order must not change the knowledge each retrieves."
+      }
+    },
+    "qa/recommendation:lwgr/mechanism": {
+      "source_sha256": "6751a8182cca983de831b48a68c867a22a9fe96502fae723eb5df20d5833298a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does LWGR learn personalized soft instructions while limiting degradation against a frozen reference?",
+        "answer": "A fixed prompt cannot adapt across users. Subspace codebooks produce trainable soft tokens to personalize knowledge extraction. LLM knowledge can conflict with behavioral evidence, so the frozen reference anchors a confidence degradation constraint; nearline computation controls serving cost. Learned prompts do not make extracted knowledge true or more reliable.",
+        "example": "Illustration: Two travelers care about price and photography respectively. Soft prompts can retrieve different knowledge, while the constraint should discourage new evidence from overriding reliable existing scores."
+      }
+    },
+    "qa/recommendation:lwgr/basics": {
+      "source_sha256": "a59ddd1d24457de97eb148b3ca0f60f322f2efcdd29cb6aa2877e36d23974d3b",
+      "reviewed": true,
+      "fields": {
+        "question": "How can LWGR's soft instruction express user differences beyond handwritten wording?",
+        "answer": "Split user context into subspaces and select codewords from independent codebooks. The resulting differentiable prompt tokens and history generate user knowledge; recommendation supervision can change them. Capacity and training coverage limit personalization, and the tokens need not correspond to readable instructions.",
+        "example": "Illustration: A photography novice and a professional may select different soft tokens even though the handwritten prompt says 'analyze interests' for both."
+      }
+    },
+    "qa/recommendation:lwgr/comparison": {
+      "source_sha256": "81855d33b55e8b7c09ef9cb497b99c787279a663687f108fba962cd658ce05ee",
+      "reviewed": true,
+      "fields": {
+        "question": "What does LWGR's reference confidence constraint protect compared with ordinary KL?",
+        "answer": "It penalizes the amount by which a positive target's mean token log-probability falls below the reference tolerance. KL instead measures whole-distribution drift. Updating the multiplier is not sufficient: locally λ changed without an improvement in degradation, so protection was not demonstrated.",
+        "example": "Illustration: Moving probability to another reasonable candidate may raise KL without much target damage; a large target drop directly activates the one-sided constraint."
+      }
+    },
+    "qa/recommendation:lwgr/implementation": {
+      "source_sha256": "f17ab9d43f0c810a28c400ebe8a0e3e3c8dd94b9956c7dba4c02cb48067d49b9",
+      "reviewed": true,
+      "fields": {
+        "question": "How should LWGR's straight-through code selection and dual update be checked separately?",
+        "answer": "Use hard codes forward and soft-distribution gradients backward; verify soft-instruction parameters change. Update λ using C−ε and project to nonnegative values. A rising multiplier signals violation, not satisfaction. Frozen reference, BOS fusion, and nearline cache are separate interfaces.",
+        "example": "Illustration: If C remains above tolerance while λ rises, report failure to satisfy the constraint. A hard index cutting gradients also prevents learning even though it selects codes."
+      }
+    },
+    "qa/recommendation:m6rec/mechanism": {
+      "source_sha256": "3e80172f950d4295d9bed78ca44507b9abf7ad9887afbbaf2a0bbc966981f61c",
+      "reviewed": true,
+      "fields": {
+        "question": "What do option tuning and adapters change in M6-Rec's multitask setup?",
+        "answer": "The frozen backbone preserves pretrained capability. Option parameters provide a small task decision interface, and layerwise adapters add compact task-specific transforms. Shared parameter-efficient adaptation does not automatically make inference cheap; edge deployment needs separate compression and serving design. Local small tasks do not demonstrate full giant-M6 transfer.",
+        "example": "Illustration: Use different options and adapters for relevance and content explanation on one frozen model, but both still execute the large backbone."
+      }
+    },
+    "qa/recommendation:m6rec/basics": {
+      "source_sha256": "cbcbdf5905ddff8210fc9cfe3f5dab921008a78d3e1c7ffc1451c2eebd6e84d6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why turn anonymous behavior and candidates into natural language for M6-Rec?",
+        "answer": "A text interface lets one pretrained model receive different recommendation problems. Options and adapters encode task differences without maintaining a full model per scenario. Retrieval, explanation, and classification still have distinct outputs and decoding costs.",
+        "example": "Illustration: The same model can make a yes/no movie recommendation and explain it; explanation accuracy is not retrieval hit rate."
+      }
+    },
+    "qa/recommendation:m6rec/comparison": {
+      "source_sha256": "67342bddf288bb06f0386ed46ce11f362349ae0085a34de509ae639730667c3a",
+      "reviewed": true,
+      "fields": {
+        "question": "What does option-adapter tuning learn beyond option tuning?",
+        "answer": "Option prototypes mainly change the output decision interface. Adapters add low-rank nonlinear transformations between frozen layers and can adapt intermediate representations. They still use far fewer parameters than full fine-tuning, but the small and variable local trend does not establish stable production gains.",
+        "example": "Illustration: Moving yes/no prototypes changes the ruler; adapters can change the features it measures. The two arms do not have identical parameter budgets."
+      }
+    },
+    "qa/recommendation:m6rec/implementation": {
+      "source_sha256": "387180b9f7c0518a02754f4486d0ed2b3fe6cbbb75e3d6cfcf19ba4be38934e2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check normalization and temperature for M6-Rec's local frozen-backbone binary option scores?",
+        "answer": "The source scores normalized representations against trainable prototypes, with temperature controlling the class distribution. Without normalization, norms can change the mechanism. Freeze both backbones and update only options and permitted adapters. BERT-tiny is a reduced task path, not full generative M6.",
+        "example": "Illustration: An unrestricted prototype can win by growing its norm instead of learning direction; normalization and temperature enforce the defined scoring."
+      }
+    },
+    "qa/recommendation:maps-creative/mechanism": {
+      "source_sha256": "7ec8a088c7dfe68db3770bc48fc982b440dc0d74c5b9a5124b7fc7b7ae93bac6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does MAPS's Reflector separate profile errors from script errors and route a minimal edit?",
+        "answer": "Poor feedback can arise from misunderstanding the user or from messaging and factual mistakes. Rebuilding everything wastes compute and can damage correct stages. Role attribution targets the relevant stage and keeps profile, script, and video generation auditable. Mixed rewards cover structure, personalization, and factuality. Large models and private environments make this review-only; there is no keyword substitute.",
+        "example": "Illustration: Fix a script that overstates product performance when the profile is right. If the gift recipient was misunderstood, polishing shots cannot fix targeting."
+      }
+    },
+    "qa/recommendation:maps-creative/basics": {
+      "source_sha256": "2bbc2fbd5034ecd7c2757056e630c1e0e8ddf51aef122f3e6fbc0619cbce5548",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does MAPS split creative generation into Profile, Scripter, Director, and Reflector?",
+        "answer": "The roles extract needs and style, write product messaging and scenes, execute video, and route feedback. This localizes errors rather than rebuilding all stages. Role names do not confer capability; real semantic models, video generation, and a credible environment are needed. The local scope is review-only for cost.",
+        "example": "Illustration: Fix copy that overclaims, or fix video execution that violates the script, rather than forcing the profiling agent to rewrite a correct preference."
+      }
+    },
+    "qa/recommendation:maps-creative/comparison": {
+      "source_sha256": "9cea01c231bcdd74afcd0da839bbf0f9cf5abc2c978a3c4a9ba9362cb655c086",
+      "reviewed": true,
+      "fields": {
+        "question": "What does MAPS's mixed reward measure that keyword counts cannot?",
+        "answer": "Structure includes scene roles and physical plausibility; semantic judges score personalization and product consistency. Keyword coverage cannot detect contradictions or user fit. A proxy can test interfaces but is not algorithm evidence. Reward weights do not guarantee judge quality, and text scores differ from creative outcomes.",
+        "example": "Illustration: 'Durable' and 'perfect for you' can satisfy keywords while calling ordinary shoes fireproof. Product consistency must check facts."
+      }
+    },
+    "qa/recommendation:maps-creative/implementation": {
+      "source_sha256": "d03b3f1a9373accbba4e6721bd819232ed0d60d425744f268bc4bae4ca472a4b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't MAPS perform effective RL when group feedback never differs?",
+        "answer": "Scripts in the same context need different rewards. Identical rewards yield zero centered advantage and no preference direction. The actual judge and video pipeline also matter. The source explicitly avoids a keyword proxy; evaluating the formula alone does not reproduce training or the environment.",
+        "example": "Illustration: If a crude rule gives all four scripts full marks, an optimizer call cannot teach which is more personalized or establish improved four-agent video creation."
+      }
+    },
+    "qa/recommendation:marc/mechanism": {
+      "source_sha256": "cf95a8b8060f5c8cf50dcf35dc5096ffb3160bd7430685bf273ca67dc1825d6c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate representation compression from recommendation adaptation in MARC, and why might an intermediate LLM layer be chosen?",
+        "answer": "The last layer favors the language objective, whereas an intermediate layer can retain more compressible general features. What compression preserves is not necessarily what recommendation needs. Separate modules and information constraints distinguish dimensional cost from task relevance. Intermediate-layer superiority must be measured per model and dataset.",
+        "example": "Illustration: The final layer excels at next-word prediction, but a middle layer may retain product use. Reconstruction alone can preserve costly language details irrelevant to purchase preferences."
+      }
+    },
+    "qa/recommendation:marc/basics": {
+      "source_sha256": "c82dc473bd170c244833550bfa7ce0694406560a9250eb886c231c680a3ae3e5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why might MARC choose an intermediate layer instead of assuming the LLM's final layer is best?",
+        "answer": "Final layers specialize in pretraining outputs. MRA observations motivate separating compression and adaptation to remove proxy-task interference while retaining recommendation information. Select layers on validation; middle layers are not universally superior.",
+        "example": "Illustration: A middle layer may distinguish two user groups better in a compact representation even if the final layer is best at predicting words."
+      }
+    },
+    "qa/recommendation:marc/comparison": {
+      "source_sha256": "f897c27e83329d856462aeffe0841ec9dbacc95438e701af32571cfde4f9dd99",
+      "reviewed": true,
+      "fields": {
+        "question": "What are the benefits and risks of separate MARC compression and adaptation versus one linear reducer?",
+        "answer": "One projection conflates information loss with task learning. Separate modules make each effect measurable, but add choices and objective interactions. Removing a supposed nuisance can delete useful signals. The public proxy was negative, so information constraints alone do not establish generalization.",
+        "example": "Illustration: Removing content-specific style may help matching unless style itself drives user preference. Ablate both stages."
+      }
+    },
+    "qa/recommendation:marc/implementation": {
+      "source_sha256": "c03090f4680d4e2e1af37284be03f6a85ac0b93a73a846e7d27d204d314d6c9a",
+      "reviewed": true,
+      "fields": {
+        "question": "How should MARC avoid mixing validation and test during layer and nuisance-projection selection?",
+        "answer": "Estimate directions from training data and choose layer, dimension, and removed directions on validation, then freeze for test. Match projections to the selected hidden-state space. A fixed-score proxy without full information-objective training must be described within that boundary.",
+        "example": "Illustration: Choosing the highest test NDCG layer turns test into tuning. Pick it first, then check transfer on independent data."
+      }
+    },
+    "qa/recommendation:mbgr/mechanism": {
+      "source_sha256": "814bdf6a4c5fbfc7e5c5b6c175ae862c16f4d9ccf560399671ea85811c0b03c3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does MBGR find the nearest future event for each business rather than just supervising the next log event?",
+        "answer": "Interleaved streams let frequent businesses dominate adjacent labels. LDR finds each business's nearest future target from a shared current state and conditions on business identity, exposing multiple prediction paths. Mask missing futures. This is training supervision only; future events are not current inputs.",
+        "example": "Illustration: A video may always be next, while a product search comes later. Per-business targets preserve shopping supervision without feeding future purchase IDs into the current recommender."
+      }
+    },
+    "qa/recommendation:mbgr/basics": {
+      "source_sha256": "9d3c262abaa78d881e530cdf94bd3ab78e051e4fe877dead5e7f06185a73473e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why look up the nearest future interaction separately for each business in MBGR?",
+        "answer": "A global next-item label covers only one business. LDR looks ahead per business so a shared state learns multiple directions and masks missing labels. Multi-task supervision does not let future events enter history.",
+        "example": "Illustration: A current state can learn about both the next short video and later shopping instead of letting abundant video labels drown out shopping."
+      }
+    }
+  }
+}

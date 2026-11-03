@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:ipo/basics": {
+      "source_sha256": "320fec69c5e2339bd7d4bbe51b3405a2ac733b484ed610a798360952ae836ca0",
+      "reviewed": true,
+      "fields": {
+        "question": "Does increasing τ increase or decrease IPO's target gap?",
+        "answer": "The finite target is 1/(2τ), so increasing positive τ decreases the gap. It is not a label-strength score; training outcomes also depend on data, policy and optimization.",
+        "example": "Changing τ from 1 to 2 changes 1/2 to 1/4; this is formula arithmetic."
+      }
+    },
+    "qa/post-training:ipo/comparison": {
+      "source_sha256": "c38f5aed243112c343c3eb806e1084a02446197f88b7a210c0560a41882451ec",
+      "reviewed": true,
+      "fields": {
+        "question": "Does fitting IPO's gap require the chosen response's absolute probability to increase?",
+        "answer": "No. The gap is chosen-minus-rejected policy/reference log ratios. Raising chosen, lowering rejected or both can reach the target. Chosen probability alone omits the relative comparison and global normalization.",
+        "example": "Chosen can stay fixed while rejected falls and the gap grows."
+      }
+    },
+    "qa/post-training:ipo/implementation": {
+      "source_sha256": "45d210a9b7289e4e84fa96ad4946a79baebd8f9187b28af7ff532707c599571f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use a cross policy/reference probability ratio in IPO?",
+        "answer": "It measures how much the preferred-over-rejected relationship changed relative to reference, not just policy probability difference. Use a fixed positive τ and target 1/(2τ), aggregate response tokens correctly and retain reference terms.",
+        "example": "If reference already favors a wording, the cross-ratio distinguishes inherited preference from added change."
+      }
+    },
+    "qa/post-training:ipo/mechanism": {
+      "source_sha256": "9e83dcf4d2b52f3209ac8065047af2f83c30dd00ae01e58614656dab448291b1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why fit a finite IPO gap rather than always separating chosen and rejected farther?",
+        "answer": "Logistic losses can keep enlarging a separable margin, risking overfit. IPO squares error to a finite reference-relative log-ratio target. Overshooting reverses the gradient. This changes loss shape, not just learning rate.",
+        "example": "Once separation is sufficient, continued suppression of rejection need not help; excess separation is corrected."
+      }
+    },
+    "qa/post-training:steerlm/basics": {
+      "source_sha256": "48662be6b9318d98d30c15ca3f16a6d3dec0870794823709a6f31ffe666220ce",
+      "reviewed": true,
+      "fields": {
+        "question": "Are SteerLM's attribute predictor and conditioned generator the same role?",
+        "answer": "No. The predictor annotates existing answers with helpfulness, quality and other dimensions. The generator learns to produce answers under target attributes supplied at inference; it does not need a future answer scored first.",
+        "example": "Annotate training replies as concise/helpful, then request new replies conditioned on those attributes."
+      }
+    },
+    "qa/post-training:steerlm/comparison": {
+      "source_sha256": "7c4a6ee5949456acdaa92e8fd48a392819cd5d0988a8cd9da61e91a37d9281cf",
+      "reviewed": true,
+      "fields": {
+        "question": "How does SteerLM differ from asking for brevity in an inference prompt?",
+        "answer": "Attribute-conditioned SFT systematically associates labeled values with response patterns. A one-off natural-language instruction needn't have that training signal. They can coexist, but adding attribute text alone is not conditioned training.",
+        "example": "Training examples across concision levels give an inference level learned meaning beyond wording."
+      }
+    },
+    "qa/post-training:steerlm/implementation": {
+      "source_sha256": "35a0c4f4cfa437322988152a8fa726e9af835379ae23c8287cc78bfd5d735564",
+      "reviewed": true,
+      "fields": {
+        "question": "Are local SteerLM attribute labels equivalent to the authors' predictor?",
+        "answer": "No. Deterministic reward axes on public candidates supply local labels to test the interface. No large attribute predictor or free-text conditioned generator is trained. Preserve attribute order and value domains.",
+        "example": "Swapping quality and length columns may run while reversing user controls."
+      }
+    },
+    "qa/post-training:steerlm/mechanism": {
+      "source_sha256": "23e720302c925ca527f728434e2df114753026e440729507ea2cc46d6c0fa88c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why condition generation on attributes instead of aggregating all rewards?",
+        "answer": "A single scalar makes preference mixtures hard to change at inference. Predict attributes, then train conditional SFT so users can specify combinations. Labels must be reliable, and control does not guarantee precise independent satisfaction.",
+        "example": "Ask for detailed but restrained or concise and friendly without retraining a policy for each combination."
+      }
+    },
+    "qa/post-training:rlaif/basics": {
+      "source_sha256": "edcf7f6b7d90500219f7a6309e8542c0ff336c9e2a0e91b92e6d7fa7a7c2fb0f",
+      "reviewed": true,
+      "fields": {
+        "question": "Which human work does RLAIF replace?",
+        "answer": "AI compares candidate preferences to reduce pairwise human labeling and supplies strategy training signals. Evaluation criteria and independent assessment remain. AI labels can have position, style and knowledge biases.",
+        "example": "People can specify criteria while AI compares summaries; its scores aren't objective truth."
+      }
+    },
+    "qa/post-training:rlaif/comparison": {
+      "source_sha256": "76194f97a2b99b4147c8e959e296fac2bee18ef16025179bd95b47a4bd272e95",
+      "reviewed": true,
+      "fields": {
+        "question": "How does RLAIF training differ from an AI choosing an answer at inference?",
+        "answer": "Training converts judgments to data and updates parameters. Inference selection changes one response without learning. Similar judges may be used, but costs and effects on future requests differ.",
+        "example": "Selecting a reply today changes today's output; training on the pair may change tomorrow's policy."
+      }
+    },
+    "qa/post-training:rlaif/implementation": {
+      "source_sha256": "295e861800a6a0a80646f5b380abb79c8edb5b198d44e1cc0a2f0a0f6630a0e4",
+      "reviewed": true,
+      "fields": {
+        "question": "How does local RLAIF keep identities straight when swapping order?",
+        "answer": "Map each judgment back to original candidate IDs before combining labels. Fixed labels verify mapping and update, not a full judge or large RL.",
+        "example": "If left wins on pass two and B is now left, credit B rather than A."
+      }
+    },
+    "qa/post-training:rlaif/mechanism": {
+      "source_sha256": "ab57396af78b64330282675e64e2305c7e13a617087425ee7efc6d05519f1261",
+      "reviewed": true,
+      "fields": {
+        "question": "Why swap candidate order for RLAIF judging, and can raw scores be averaged?",
+        "answer": "Judges may favor earlier positions. Evaluate both orders and combine only after mapping to the same candidate identity. Raw positional averaging can cancel a true preference. It controls position, not factual, style or value biases.",
+        "example": "Convert both trials to A's win score before averaging."
+      }
+    },
+    "qa/post-training:dpo/basics": {
+      "source_sha256": "286a0d36c4319c6b4f028cf99a629f98c5bb4008ef0be89a70d35b9ad791b193",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't DPO need a separately fitted reward model?",
+        "answer": "The KL-regularized policy expresses implicit reward as a policy/reference log ratio. Direct paired classification uses chosen and rejected labels. Reward information still comes from preference supervision.",
+        "example": "With labels on two answers, compute the paired loss without first training a scorer."
+      }
+    },
+    "qa/post-training:dpo/comparison": {
+      "source_sha256": "94c2f7f9aa6c5938731defdf499b35732f2e3877257cace33da4921b4edf6333",
+      "reviewed": true,
+      "fields": {
+        "question": "How does DPO's data flow differ from reward-model PPO?",
+        "answer": "Classic DPO consumes fixed preference pairs without sampling and reward-model scoring at every step. PPO usually includes those stages. A fixed dataset may omit states future policies visit.",
+        "example": "A preference bank without a wrong-prefix category doesn't automatically gain it from offline updates."
+      }
+    },
+    "qa/post-training:dpo/implementation": {
+      "source_sha256": "3521929dc95fd0347c1fa99b1e47e6c9cd9a2ddf6d5d8eebfc35e0b827aebb04",
+      "reviewed": true,
+      "fields": {
+        "question": "Why freeze DPO's reference and align response masks?",
+        "answer": "The reference anchors changes; updating it changes the objective. Score identical response tokens in both paths, with neither prompt nor padding mismatches.",
+        "example": "Adding prompt likelihood only to reference introduces irrelevant input length into the margin."
+      }
+    },
+    "qa/post-training:dpo/mechanism": {
+      "source_sha256": "cb3df3b5803efedc743d2f0ca177f0694e96456fe9a68a674ba2877c3cf4d12e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use DPO policy changes relative to reference instead of raw answer probabilities?",
+        "answer": "Raw scores inherit pretraining preferences. Relative ratios measure redistribution against the baseline, jointly comparing preferred/rejected in the classification margin implied by KL regularization. No explicit reward model, but same-prompt preferences and fixed reference remain.",
+        "example": "If a phrase starts with high likelihood, distinguish inherited preference from a further supervised increase."
+      }
+    },
+    "qa/post-training:slic-hf/basics": {
+      "source_sha256": "07e6ef7fdcd7a04ceeae94621c7df4619a3e1fb991be4b4f99bf8d203c749fc4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine sequence calibration and supervised loss in SLiC-HF?",
+        "answer": "Ranking makes preferred likelihood exceed rejected likelihood. Supervision learns trusted content rather than succeeding only by suppressing bad replies. Both train the generator directly.",
+        "example": "Separate good from bad summaries while learning the good summary itself."
+      }
+    },
+    "qa/post-training:slic-hf/comparison": {
+      "source_sha256": "614a6ceb4976afc9a469f85f4796e5cf6815aec2dc0ee1e84fb10baf4fed7dbb",
+      "reviewed": true,
+      "fields": {
+        "question": "How does SLiC-HF's hinge margin differ from DPO's reference-relative one?",
+        "answer": "The hinge directly constrains sequence likelihood differences alongside supervision. DPO contrasts log ratios relative to a frozen policy. Both baseline and loss shape differ.",
+        "example": "Once the hinge margin is met, ranking penalty can stop; reference-relative preference is different."
+      }
+    },
+    "qa/post-training:slic-hf/implementation": {
+      "source_sha256": "78cfbb54bbfdcb642d57f165d0b92476f375a3f0af1e9ebc200fea4729f00512",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can SLiC-HF use pairs collected by another model?",
+        "answer": "The objective can score fixed responses and doesn't need current-policy samples. Keep sources and same-prompt pairing. Local candidate calculations are not the paper's T5 and human evaluation.",
+        "example": "Old summaries can be scored by the current policy if labels still belong to those summaries."
+      }
+    },
+    "qa/post-training:slic-hf/mechanism": {
+      "source_sha256": "55ca9d50472a6d395c9392380a4f3436f641d0cc409203e1782a37e0e64be00d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep supervised cross-entropy when SLiC-HF already has a preference margin?",
+        "answer": "Relative ranking does not prevent overall language drift. Cross-entropy preserves reference response likelihood, combining calibration and generation learning. Off-policy data do not remove coverage, length or source differences.",
+        "example": "Suppressing bad answers can satisfy ranking even while good answers get worse; supervision retains good generation."
+      }
+    },
+    "qa/post-training:rrhf/basics": {
+      "source_sha256": "5ea5cd9bca88486dcc3357e74ba685bbdba5d0be614bf37597f9e197951d2112",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use a full ordering of multiple same-prompt answers in RRHF?",
+        "answer": "Multi-source responses provide more relative comparisons than one pair. Match length-averaged log likelihood to reward order and supervise the best answer. Ranking quality depends on labels/reward.",
+        "example": "Good, middling and poor responses supply several orderings, not one winner pair."
+      }
+    },
+    "qa/post-training:rrhf/comparison": {
+      "source_sha256": "112ef4d46302ba3d84efa89a789e080138f627565605cdd06cf82245e1a5ce42",
+      "reviewed": true,
+      "fields": {
+        "question": "What do best-response SFT and RRHF ranking each add?",
+        "answer": "Ranking corrects relative order; SFT directly raises best-response likelihood. Ranking alone can succeed by suppressing alternatives. The combination isn't a universal optimum.",
+        "example": "A good answer should be learned, not merely score above a bad one."
+      }
+    },
+    "qa/post-training:rrhf/implementation": {
+      "source_sha256": "3682b2513a75d22fef8054333c7f05f5a43f81b13bfe0f58f7efd6c5ccdcc265",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't RRHF p_i raw probability?",
+        "answer": "It is length-normalized response log probability. The hinge compares this order within one prompt with consistent reward direction. Candidate tests do not reproduce full 7B training.",
+        "example": "Using decimal probabilities in place of mean logp changes margins and gradients."
+      }
+    },
+    "qa/post-training:rrhf/mechanism": {
+      "source_sha256": "4797fb7b25320d483dae08904f9d3bbc940e45b36abc22c9d25a1f84565ccee6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why still apply SFT to the best answer after ranking responses?",
+        "answer": "The hinge only fixes ordering conflicts and can stop giving a useful generation signal once sorted. SFT raises high-quality content likelihood. External rewards and length normalization do not guarantee factual correctness.",
+        "example": "Even with three answers ranked correctly, the best may be rare; its SFT term can still increase likelihood."
+      }
+    }
+  }
+}

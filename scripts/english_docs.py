@@ -13,6 +13,13 @@ import re
 import subprocess
 from urllib.parse import urlsplit
 
+if __package__:
+    from . import english_browse_catalogs
+    from . import english_learning_pages
+else:
+    import english_browse_catalogs
+    import english_learning_pages
+
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = "docs/research-manifest.json"
@@ -160,12 +167,16 @@ def catalog_pages(root: Path, rows: list[dict]) -> dict[str, str]:
             lines.append(f"| {paper_title_link(row)} | {date} | {language} |")
         pages[f"{CATALOG}/{domain}.md"] = "\n".join(lines) + "\n"
         links.append(f"- [{heading}]({domain}.md): {len(entries)} catalog entries, {translated} English write-ups")
+    availability = f"English write-ups available: {len(available)}."
+    if len(available) < len(rows):
+        availability += (
+            " For entries without a translation, the original publication and the Chinese "
+            "write-up remain available where listed."
+        )
     index = [
         GENERATED.rstrip(), "", "# Paper catalog", "",
         "[English home](../index.md) · [中文研究库](../../research-library.md)", "",
-        f"The catalog lists {len(rows)} entries from the shared research manifest. "
-        f"English write-ups available: {len(available)}. For older entries without a translation, "
-        "the original publication and the Chinese write-up remain available where listed.",
+        f"The catalog lists {len(rows)} entries from the shared research manifest. {availability}",
         "", "## Browse by domain", "", *links, "",
     ]
     if available:
@@ -180,12 +191,44 @@ def catalog_pages(root: Path, rows: list[dict]) -> dict[str, str]:
 def check_catalog(root: Path, rows: list[dict], *, write: bool) -> list[str]:
     errors = []
     pages = catalog_pages(root, rows) | {COVERAGE: coverage_page(root, rows)}
+    # A domain's grouped browse views are published together. As soon as a
+    # generated view is committed, require all its siblings to stay in sync.
+    browse = english_browse_catalogs.CATALOG_PAIRS
+    for domain in SECTIONS:
+        source_domain = "reproductions" if domain == "recommendation" else domain
+        group = {source: target for source, target in browse.items()
+                 if source.startswith(f"docs/{source_domain}/")}
+        if not group or not all((root / source).is_file() for source in group):
+            continue
+        if any((root / target).exists() for target in group.values()):
+            try:
+                pages.update(english_browse_catalogs.catalog_pages(root, rows, pairs=group))
+            except ValueError as error:
+                errors.append(str(error))
     for name, text in pages.items():
         path = root / name
         if write:
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_text(text, encoding="utf-8")
         elif not path.is_file() or path.read_text(encoding="utf-8") != text:
+            errors.append(f"{name}: regenerate with python scripts/english_docs.py --write")
+    return errors
+
+
+def check_learning(root: Path, *, write: bool, initialize: bool = False) -> list[str]:
+    if not initialize and not (root / "docs/en/learning/index.md").is_file():
+        return []
+    try:
+        pages = english_learning_pages.render_pages(root)
+    except ValueError as error:
+        return [str(error)]
+    errors = []
+    for name, content in pages.items():
+        path = root / name
+        if write:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(content, encoding="utf-8")
+        elif not path.is_file() or path.read_text(encoding="utf-8") != content:
             errors.append(f"{name}: regenerate with python scripts/english_docs.py --write")
     return errors
 
@@ -239,11 +282,29 @@ def main() -> int:
     parser.add_argument("--base", help="require English for new pages and papers added or edited since this commit")
     parser.add_argument("--list-untranslated", action="store_true", help="list each outstanding source path")
     parser.add_argument("--require-complete", action="store_true", help="fail if any Chinese site page lacks English")
+    parser.add_argument("--write-browse", action="store_true",
+                        help="write all grouped English browse pages once their detail translations are ready")
+    parser.add_argument("--write-learning", action="store_true",
+                        help="write all English learning pages once the reviewed source units are complete")
     args = parser.parse_args()
     rows = json.loads((ROOT / MANIFEST).read_text(encoding="utf-8"))["papers"]
     changed, added = changes_since(ROOT, args.base, rows) if args.base else (set(), set())
-    errors = translation_errors(ROOT, rows, changed=changed, added_sources=added)
+    errors = []
+    if args.write_browse:
+        if not args.write:
+            parser.error("--write-browse requires --write")
+        try:
+            for name, content in english_browse_catalogs.catalog_pages(ROOT, rows).items():
+                path = ROOT / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text(content, encoding="utf-8")
+        except ValueError as error:
+            errors.append(str(error))
+    if args.write_learning and not args.write:
+        parser.error("--write-learning requires --write")
+    errors.extend(check_learning(ROOT, write=args.write, initialize=args.write_learning))
     errors.extend(check_catalog(ROOT, rows, write=args.write))
+    errors.extend(translation_errors(ROOT, rows, changed=changed, added_sources=added))
     if args.require_complete or args.list_untranslated:
         missing = untranslated_pages(ROOT, rows)
         if args.list_untranslated:

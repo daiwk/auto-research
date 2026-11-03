@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:multi-harness-rl/implementation": {
+      "source_sha256": "89a7bb9182bce78d525e5c5babae1b68a14e8d7d36b226b77366a2029bd39913",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does a held-out Cross−Within interval spanning zero fail to establish transfer?",
+        "answer": "A small positive point estimate is still compatible with no change; interpret the paper alongside its paired confidence interval. Old local gold-reading scores are invalid. Current checks cover grouping, gradients, and protocols, without Qwen RL, actual coding harnesses, or a sealed oracle. Counts are not SWE-bench capability.",
+        "example": "A 0.25 percentage-point gain with negative values inside the interval does not establish reliable superiority over Within. Do not omit the interval and report only the positive estimate."
+      }
+    },
+    "qa/agent-research:ace-data/mechanism": {
+      "source_sha256": "9df27dbfca83446e40e3e0b97fcd4b3adf03c2f5bad37c4d255b4cd5d440d814",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must Complexity be calibrated to a specific learner instead of assigning a universal difficulty label?",
+        "answer": "Learnability differs across models. Very easy examples add little signal and very hard ones may only generate failures. Accuracy first ensures credible samples, learner-relative complexity finds a useful band, and Diversity adds environment and behavior coverage. All three matter; length and tool count do not establish better data.",
+        "example": "A novice can learn from three-step tool tasks and fail every twenty-step one. A stronger model may need the latter, so the curriculum band should depend on the learner."
+      }
+    },
+    "qa/agent-research:ace-data/basics": {
+      "source_sha256": "bfcd6bd23aeb08756b4094dc60b9bd6683c55a9df71beff6b13d42a617aef64a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does ACE say more agent trajectories do not necessarily make better training data?",
+        "answer": "Trajectories may be incorrect, too hard for the learner, or repetitive, and more data can amplify those issues. ACE selects for Accuracy, Complexity, and Diversity to account for quality and learner fit. Define and evaluate each empirically rather than inferring benefits from more steps or topics.",
+        "example": "A thousand copies of an incorrect tool call are not good data. Many simple tasks the learner has mastered may also teach little."
+      }
+    },
+    "qa/agent-research:ace-data/comparison": {
+      "source_sha256": "3fa0fca6b6faec62d7863b67bc339ee1779f68f08150445f8f5091a0984eaf9a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep Complexity as learner challenge and Diversity as coverage separate?",
+        "answer": "Complexity measures difficulty for the specified learner; Diversity measures differences among samples and coverage of task space. Diverse data can be easy and difficult data can repeat one pattern. Both require Accuracy: a novel but wrong trajectory is not good supervision, and static labels do not establish training benefit.",
+        "example": "Ten different tools used once each offer broad but easy coverage. Ten similar hard error cases challenge the learner but cover a narrow area."
+      }
+    },
+    "qa/agent-research:ace-data/implementation": {
+      "source_sha256": "707dc75e291ff8b3d2d6d6ddb2c70a2105953f5ee4917c96e92f4f1557afd3f2",
+      "reviewed": true,
+      "fields": {
+        "question": "How does public artifact evaluation prevent three-stage admission from becoming fictitious training results?",
+        "answer": "Pin an actual dataset revision; record environments, questions, trajectories, verifier, and learner loss. Compare random and three-stage selection under equal budgets. The local path has admission contracts and artifact replay, not trained checkpoints or SOTA claims. Do not fill missing provenance or failures with synthetic high scores.",
+        "example": "A JSONL export that passes field checks is an auditable input. Without training and independent model evaluation, it cannot show an ACE success-rate gain."
+      }
+    },
+    "qa/agent-research:spo-plus-plus/mechanism": {
+      "source_sha256": "5733dcc6411dad89cd6f4997de8e68471d640c89651aafc4b2a20930efbab05d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why weight advantage standardization by action-token count for a token-mean actor loss?",
+        "answer": "Equal trajectory votes during whitening conflict with token-mean loss and change how long and short rollouts influence updates. Token weighting aligns normalization with the optimization measure. Freezing the baseline at dispatch prevents completion-order leakage; it is separate from redefining rewards by text length.",
+        "example": "A 100-token trace occupies more loss positions than a 10-token trace. Giving them one vote each in normalization would mismatch actual gradient averaging."
+      }
+    },
+    "qa/agent-research:spo-plus-plus/basics": {
+      "source_sha256": "40e4874f2926e5adb8e63f9ff0844cd97fd7fbe55859e9626fdc78cf2abc54f4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can asynchronous agent RL depend on which task finishes first?",
+        "answer": "Long tasks have variable durations, so asynchronous training uses results as they arrive. Completion order can correlate with difficulty and policy version. SPO++ keeps throughput while aligning advantage baselines and statistics with the correct generation events. Fast completion is not representativeness; track sampling-time conditions rather than backfilling from later outcomes.",
+        "example": "Easy tasks may return early and change historical values. A hard task dispatched earlier should not be treated as sampled with that new baseline."
+      }
+    },
+    "qa/agent-research:spo-plus-plus/comparison": {
+      "source_sha256": "bd04032f60353c4abdc7834bdd1904a08b8a504b62ecd814712c86d0e8ac0a21",
+      "reviewed": true,
+      "fields": {
+        "question": "What changes between freezing a baseline at dispatch and using the latest baseline at completion?",
+        "answer": "Freezing associates each rollout with prompt value visible when dispatched. The newest value at completion incorporates later arrivals, affecting rollouts differently by duration. SPO++ indexes evidence by generation-policy events, so later history cannot override frozen conditions. This correction is independent of token-weighted standardization.",
+        "example": "A goes out before B but finishes after it. B can update future baselines without retroactively entering A's dispatch-time history."
+      }
+    },
+    "qa/agent-research:spo-plus-plus/implementation": {
+      "source_sha256": "f44660545a69520f746a46b5c7e52a7165ca2bd5d8682d46a1147f24a1b25a11",
+      "reviewed": true,
+      "fields": {
+        "question": "Do local event-time and token-measure checks include asynchronous Qwen training?",
+        "answer": "No. A deterministic mini-suite checks frozen values, history timing, and action-token weighting, without real asynchronous models, ALFWorld, or Math-TIR. Event counts verify branches, not paper reward-curve area or throughput gains.",
+        "example": "Out-of-order completion of ten fixtures tests timing, not real worker latency, policy staleness, or parameter updates."
+      }
+    },
+    "qa/agent-research:ahead/mechanism": {
+      "source_sha256": "f674146dfa4a757239076827817daba05fb38d77b189cd1447d9e0f646e609d1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why give a corrective hint only to the teacher on critical error steps instead of sharing full answers at every step?",
+        "answer": "Ordinary steps already get environment feedback. Blanket privileged hints waste signal and hide where correction matters. After locating an error, compare log probabilities for the same generated action with and without the hint, then adjust terminal advantage within bounds. Hints stay on the training teacher side and cannot enter deployment student context.",
+        "example": "If only the third step chooses the wrong tool, target that choice. Letting every step see the final solution is not autonomous completion."
+      }
+    },
+    "qa/agent-research:ahead/basics": {
+      "source_sha256": "0f99d0abd41e1ab984c0bbea633b1981d4fbb898dad8e5e40088fddf45fb692d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does AHEAD want more than one success or failure signal across an entire long-horizon agent trajectory?",
+        "answer": "A few critical errors may determine the outcome, while other steps are reasonable or merely affected by them. Uniform credit cannot identify what to fix. AHEAD uses targeted teacher signals to adjust learning on those steps. Fine-grained credit depends on error localization, and privileged teacher information is not available to the deployed agent.",
+        "example": "If only the third retrieval query strays, later failure should not assign equal responsibility to every correct evidence collection step."
+      }
+    },
+    "qa/agent-research:ahead/comparison": {
+      "source_sha256": "9b3cea29bd0956822681d163f9ec49914a49fc97f70967b3e75c9dbdc11a44e9",
+      "reviewed": true,
+      "fields": {
+        "question": "How does multiplying the original episode advantage differ from using the teacher gap as a new reward?",
+        "answer": "Multiplication modulates the original advantage within clip and λ limits, preserving the terminal signal. Replacement would turn teacher preferences into a separate objective. The gap is a likelihood difference for the same token in two contexts, not success probability or causal contribution.",
+        "example": "A hint's stronger support for a token in a failed trajectory does not unconditionally reward it as success; original advantage and the bounded factor still apply."
+      }
+    },
+    "qa/agent-research:ahead/implementation": {
+      "source_sha256": "7262a1dbcb31d2ad4bd8c43d7527bdaa24609a5f90ea4936d2f26e7292bea6c6",
+      "reviewed": true,
+      "fields": {
+        "question": "How do deterministic local error locations, real ToolRoute, and the paper's LLM analyzer differ?",
+        "answer": "The mini-suite uses deterministic positions to test hint routing, with no LLM analyzer, Qwen GRPO, or three original benchmarks. ToolRoute is a different isolated feedback protocol, not complete algorithm training. Hints, gold, and reference actions stay in permitted training contexts and are not visible to the test policy.",
+        "example": "A fixture that identifies step six as wrong tests gating, not autonomous localization of that step in a real long failure."
+      }
+    },
+    "qa/agent-research:autosaddler/mechanism": {
+      "source_sha256": "dda72cc3cc97e18a5fc11e871afd5fae4c228e9de89518a33e42d199962ff993",
+      "reviewed": true,
+      "fields": {
+        "question": "Why select patches on a development set and record EvoDAG after a same-batch check?",
+        "answer": "The original failures help diagnose direction but can be overfit by a targeted patch. Recompare on development data; the version graph records parent harness and evidence for future iteration and rollback. Bounded structured patches do not imply semantic safety, and final reporting tests cannot choose updates.",
+        "example": "After fixing three identical errors, check other development tasks for regressions and save the parent–child relation instead of overwriting the only harness file."
+      }
+    },
+    "qa/agent-research:autosaddler/basics": {
+      "source_sha256": "5063452b19ce6c978f671f8b3bc60b91b2f8735dcc0f7c65763b0174715d36f5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does AutoSaddler turn one task's failures into workflow improvements usable later?",
+        "answer": "Prompt, tool configuration, and middleware flaws can repeatedly cause long-task failures. Fixing one answer does not address shared causes. AutoSaddler proposes bounded harness edits from execution evidence and maintains persistent versions. Only execution validation and later reuse show a patch's effect; version counts are not capability.",
+        "example": "Repeatedly skipping pre-submission tests suggests a shared workflow change. Manually testing the current task fixes one deliverable, not future omissions."
+      }
+    },
+    "qa/agent-research:autosaddler/comparison": {
+      "source_sha256": "401367c91114a4eeb6184796e92a3ef2c51f3a64d5c5b471a1a5ed6e2db5fd86",
+      "reviewed": true,
+      "fields": {
+        "question": "Which persistent state changes when editing harness code versus base-model weights?",
+        "answer": "Harness edits change how prompts, tool configuration, or middleware organize later execution. Weight updates change the model's behavior distribution. AutoSaddler iterates on the harness as a persistent code asset; workflow repair is not model training. The approaches can complement one another but require separate evidence, versions, and rollback targets.",
+        "example": "A recovery branch after failed tests changes workflow code. If the checkpoint is unchanged, its parameters have not learned error recovery."
+      }
+    },
+    "qa/agent-research:autosaddler/implementation": {
+      "source_sha256": "f81580ac1adb723b7530c53d06265dbedcab486511a36a20089d35fc302bf686",
+      "reviewed": true,
+      "fields": {
+        "question": "What do local durable-update and reuse counts establish?",
+        "answer": "They show that the optimization loop, validation gate, and persistent reuse state run on a public mini-suite, without original GAIA2, SWE-Bench Pro, Terminal-Bench, or production harnesses. Diagnostic and write counts are not real LLM diagnosis, and proxy cost is not API cost, human efficiency, or online benefit.",
+        "example": "Twelve rule updates and 108 reuses verify the version path. Without real models and tools, the authors' nine-to-ten-point gain does not carry over."
+      }
+    }
+  }
+}

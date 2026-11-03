@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:harmony-harness/implementation": {
+      "source_sha256": "847a4bbee12bc09656454cce3dd34068aa4617c1c967ecda21ff92700fa8f355",
+      "reviewed": true,
+      "fields": {
+        "question": "Can the final max-min selection choose the best harness on held-out OOD tasks?",
+        "answer": "No. Select the final harness by max-min over functionality and safety estimates from the search set, leaving held-out ID and OOD for evaluation. Joint success requires both criteria on the same trajectory. Locally there is no MOEA/D, real Docker environment, or exploit evaluation; a scalarization formula does not validate complete self-evolution.",
+        "example": "If the marginal rates are 80% functional and 70% safe, joint success is not necessarily 70%. Failures may occur on different tasks, so intersect successes trajectory by trajectory."
+      }
+    },
+    "qa/agent-research:rsi-anything/mechanism": {
+      "source_sha256": "e2612c790fecc9dd66766f556fedceb6df3b6703040f1d21be6f348c1d943c79",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check policy–predictor pair compatibility after each component passes its own checks?",
+        "answer": "The policy may depend on the old predictor's state or assumptions. A new predictor can be accurate in isolation but incompatible with it. Test the behavior of both together and revert to the known pair if it fails. Predictor adaptation also requires insufficient reliability and enough data and budget. Automatic retraining each round or isolated component passes do not establish system improvement.",
+        "example": "If a predictor changes the action encoding order and the policy still expects the old order, both unit tests may pass while integration fails. Roll back the combination rather than just recording two passes."
+      }
+    },
+    "qa/agent-research:rsi-anything/basics": {
+      "source_sha256": "1f9e67af35083c35b7a3ea8ad54a584359834df25f235ca203a523c6b5a0e390",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does a world model's prediction still need external validation feedback?",
+        "answer": "A prediction can screen consequences in advance but can be wrong; external tools or the environment supply actual evidence. RSI-Anything uses feedback to update persistent policy or workflow and updates the predictor only if reliability is insufficient and adaptation data and budget are adequate. A high predicted score is not verified task success.",
+        "example": "A programmatic layout predicted to be valid still needs a trusted geometry checker. If the result conflicts, record the prediction error instead of using the prediction as verification."
+      }
+    },
+    "qa/agent-research:rsi-anything/comparison": {
+      "source_sha256": "89519dd7850d80d84a029e5486adcb6e598157bb9cd5c15abb2b177b4729f56e",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the trade-off between updating only the policy and adapting the world model too?",
+        "answer": "A fixed predictor gives a stable evaluator but may mislead persistently. Adaptation can address distribution shift, yet costs more and can alter interfaces the policy depends on. The framework gates adaptation by reliability, data, and budget and runs component and paired checks. Lower predictor loss does not by itself establish a better overall policy.",
+        "example": "The old workflow may read the wrong field once the predictor learns a new feedback format. Check the pair rather than just verifying that both components can run in isolation."
+      }
+    },
+    "qa/agent-research:rsi-anything/implementation": {
+      "source_sha256": "8c0a4fd3dde008168c8ba1ce3ecda5a956f26ea09d1832210dc4fdb30afffd16",
+      "reviewed": true,
+      "fields": {
+        "question": "When may the predictor adapt, and why not update it after every failure?",
+        "answer": "Adaptation is triggered only when world-model reliability is insufficient, adaptation data are sufficient, and the remaining update budget covers the estimated cost. Failures do not necessarily come from the predictor, and updating on too few samples can chase noise. External verification does not remove the need for version attribution and pair compatibility checks. A short local run does not establish long-term self-improvement.",
+        "example": "A single erroneous prediction suggests unreliability, but without enough adaptation data or remaining budget, do not force training and call the resulting noisy update learning."
+      }
+    },
+    "qa/agent-research:harness2/mechanism": {
+      "source_sha256": "fb01a83328fec4b937ebc00ced43c47292b483b9031f2f4cd8f9e36baba8c64d",
+      "reviewed": true,
+      "fields": {
+        "question": "Without answers or rubrics, how does Propose–Probe–Compose avoid treating self-scores as a correctness oracle?",
+        "answer": "Candidates are actually executed before composing them using public tasks and behavioral differences. Evidence comes from traces and artifacts rather than hidden answers. Anonymize artifacts during selection to reduce preference based on harness identity. This open-ended improvement procedure does not guarantee correctness; selector, reflection, and probe calls must count toward cost, not just final executions.",
+        "example": "A general proposal may strengthen verification and a domain proposal may improve retrieval. Combine useful parts after running them rather than assuming that a self-declared winner completed the task correctly."
+      }
+    },
+    "qa/agent-research:harness2/basics": {
+      "source_sha256": "8983eba17c9390dbb465496d03c30cf0bfce1e8015f0d80a4b63866f7064770f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Harness² study improving agent workflows without reference answers or scoring rubrics?",
+        "answer": "Many real tasks specify a deliverable without providing a callable correctness oracle. Execution probes can still expose workflow weaknesses. Harness² studies constructing a better harness through proposal, probing, and composition. Observed changes or high self-ratings do not show that an answer is correct; final artifacts need selection and checks separate from generation.",
+        "example": "An open-ended research report has no unique answer. Probe source collection and organization and then inspect anonymized artifacts rather than trusting the author's self-assessment."
+      }
+    },
+    "qa/agent-research:harness2/comparison": {
+      "source_sha256": "feb9e21f6bc2e6c12b7220d31a85962e7a3146743e5f836607258e3d32d303cc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do parallel independent compositions and sequential recursive improvements have different candidate dependencies?",
+        "answer": "The parallel mode proposes general and domain candidates separately, then forms independent composites. Each sequential step reads the preceding harness and the within-task history, so it depends on earlier results. Both use 4k executions and 3k proposals; selectors and reflection are counted separately. Less waiting from parallelism does not reduce call cost.",
+        "example": "With k=2, parallel execution yields two independent final composites, whereas the second sequential attempt builds on the first. Candidate dependencies are therefore different."
+      }
+    },
+    "qa/agent-research:harness2/implementation": {
+      "source_sha256": "41cdb3e5ab046a18e7f9d951179ca2f5a9b4b1c00b267638225968c14a58f7a9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can the final selector only inspect anonymized artifacts, rather than harness identities or rewriting answers?",
+        "answer": "Anonymity reduces preference based on proposal origin. The selector can only choose from final artifacts actually executed, without reference answers, proposal intermediates, or newly generated answers. At k=1, take the sole result directly. Trusted local scripted probes verify the execution accounting, not open-ended LLM performance, and outer arithmetic checks cannot feed back into the editor or reflector.",
+        "example": "If the selector knows which output came from an 'advanced' plan, it might favor that identity. If it edits the answer, it is no longer choosing from completed artifacts."
+      }
+    },
+    "qa/agent-research:memento3/mechanism": {
+      "source_sha256": "a7fab2aee19b4bd63570e7d5d75442f86d41a86e656de0d512c1f18d6c5d1c99",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must historical replay avoid resetting simulated state from the next real observation at every step?",
+        "answer": "Per-step resets hide accumulation of world-model errors and can make an incorrect model appear to match history. Continuous replay initializes from the first observation only, then generates subsequent states solely through model transitions, testing whether the rulebook really explains the trajectory. Semantic fidelity is checked separately; fitting finite history does not show general correctness.",
+        "example": "If the first transition predicts the wrong door position, feeding the real screenshot at the second step erases the error. Continuous replay exposes its downstream consequences."
+      }
+    },
+    "qa/agent-research:memento3/basics": {
+      "source_sha256": "74f88fb381c89cd45409956c2d4b905ab0b40ba8339c4939f343c87da982afb2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Memento 3 learn environmental rules for planning from black-box interaction?",
+        "answer": "A new environment may not publish its transition rules. An agent sees actions and outcomes and can repeatedly err by guessing plans in language alone. Memento 3 organizes observations into a rulebook, compiles it into an executable model, and checks it with history and new actions so planning can occur in the model first. Learned rules are revisable hypotheses; agreement with history does not guarantee correctness in unseen states.",
+        "example": "After a button changes an object's orientation, propose a rotation rule and check other observed transitions. Revise the rule when new observations contradict it rather than ignoring the counterexample."
+      }
+    },
+    "qa/agent-research:memento3/comparison": {
+      "source_sha256": "751f1f46065e53d4bf1f8239524ac86323222a7b9bd444e163dfa609c4083455",
+      "reviewed": true,
+      "fields": {
+        "question": "How does uniform sampling over complete-plan equivalence classes differ from voting by model member?",
+        "answer": "Several models may propose exactly the same action sequence. Sampling by member gives duplicates more probability. Group nonempty complete sequences and sample their classes uniformly to emphasize behavioral diversity rather than model counts. Follow the selected plan until completion, mismatch, or replanning; do not randomly switch paths at every step.",
+        "example": "If three models propose left-left and one proposes right-up, member sampling has 3:1 odds, while the two plan classes each get one-half probability. Duplicates do not amplify a route."
+      }
+    },
+    "qa/agent-research:memento3/implementation": {
+      "source_sha256": "8dbe358a7b5af60e7d0436ab50ead17bd9cd024c0989156dd4001a7be8580bb0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must new world-model code pass both semantic fidelity and historical execution checks?",
+        "answer": "Code might fit some observations without expressing the current rulebook, or faithfully implement an incorrect rule. The semantic check verifies that the compiled model matches the rules; historical replay checks that it recreates observed transitions. They constrain representation and behavior separately. Mismatches on new actions still trigger repairs, and a GPU execution receipt does not establish general rule correctness.",
+        "example": "A rulebook specifies clockwise rotation, but the code hardcodes an output image. Passing one example by chance is not a faithful implementation of the rule."
+      }
+    },
+    "qa/agent-research:mass/mechanism": {
+      "source_sha256": "b7e9391712293ec79f157b20ad5fe23fb4ed2c204b9f53fb1aef9a73e7bd7ee3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why remove the orchestrator's initial workflow prompt before training but retain worker role assignments?",
+        "answer": "The initial prompt contains the searched workflow. Retaining it directly could teach the model to rely on an external instruction rather than internalize useful collaboration. Worker roles preserve the execution structure and supervision applies to assistant tokens. Bradley–Terry ranking filters trajectories but self-ranked outcomes do not establish independent task capability.",
+        "example": "If the search prompt specifies retrieval then verification, remove that initial prompt so the model learns from successful execution, but keep the actual retriever and verifier turns."
+      }
+    },
+    "qa/agent-research:mass/basics": {
+      "source_sha256": "fda49a2ee5dce1916f4e1c05e15875d3dd5aa38a891deb008bc9147795bf936c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why collect trajectories separately for frozen-weight search and subsequent SFT?",
+        "answer": "Search for workflows first without confounding exploration with parameter changes. Then generate and rank fresh trajectories, train on better samples, reserve one for validation, and only then update the shared model. The same model executes, proposes, and evaluates, but that does not make self-scoring unbiased. Self-generated validation loss is not independent task accuracy.",
+        "example": "A promising workflow during search still needs separately collected execution trajectories for training. An accidental high score from the same search trace is not independent validation."
+      }
+    },
+    "qa/agent-research:mass/comparison": {
+      "source_sha256": "64dfdc6da17ef21c9642662115b20b1a076d7478fd1f3fd006f7638b78467dc9",
+      "reviewed": true,
+      "fields": {
+        "question": "How does holding out the Kth Bradley–Terry-ranked trajectory differ from using all top trajectories for SFT?",
+        "answer": "After frozen-weight search, MASS independently collects trajectories and builds a BT ranking from pairwise comparisons. The first K−1 train the model and the Kth is for validation. The holdout separates training and checking targets, but the validation signal still comes from the chosen evaluator, not independent real-task success. Search traces cannot double as both training and generalization evidence.",
+        "example": "Use the top two of three ranked trajectories to train and the third to validate. If the third also contributes to gradients, the validation loss no longer measures a true holdout."
+      }
+    }
+  }
+}

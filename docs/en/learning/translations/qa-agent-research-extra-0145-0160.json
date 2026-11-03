@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:physical-engineering-exam/mechanism": {
+      "source_sha256": "eb509cc3827ef500543b527238e1065324b42444cd879a154b5548d700428229",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use hard gate G to cut off objective credit instead of letting high objective values offset failed hard constraints?",
+        "answer": "Engineering artifacts may optimize a target while violating requirements. All hard constraints must pass for the gated reward. Constraint ratios retain component information, and missing tasks score zero in the full denominator. Local aggregation consumes external grades, not independent physical or regulatory judgments.",
+        "example": "A lightweight design that fails a load-bearing constraint cannot compensate with weight savings. Missing artifacts cannot be dropped from the average."
+      }
+    },
+    "qa/agent-research:physical-engineering-exam/basics": {
+      "source_sha256": "9880e8e7eb461a0b877ea4eaecec37aa485a3c8a2739fa9880c94d46eabded86",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does PLE require auditable engineering artifacts rather than only written answers?",
+        "answer": "Long engineering tasks have multimodal inputs, constraints, and deliverable files. Experts or independent graders check whether actual outputs meet requirements. Fluent descriptions do not establish completed designs.",
+        "example": "A written explanation does not prove the corresponding engineering file exists or passes constraints."
+      }
+    },
+    "qa/agent-research:physical-engineering-exam/comparison": {
+      "source_sha256": "10ec51770bdbf143320c6bb47e8de18fd1e4a668d6100e418a8e42c952c011fe",
+      "reviewed": true,
+      "fields": {
+        "question": "How does PLE's hard-gated constraint score differ from scoring continuously by objective value alone?",
+        "answer": "When any hard constraint fails, G=0 and objective optimization earns nothing; higher objective values cannot offset the violation. Expert rubrics and special site/MEP graders have separate rules, so one formula does not cover every task.",
+        "example": "High efficiency cannot earn the 0.6GO′ term after any hard-constraint failure."
+      }
+    },
+    "qa/agent-research:physical-engineering-exam/implementation": {
+      "source_sha256": "a838538fc6ba0e49adec386123835fc8a22bd37eeb22cd8c95b72918fc8c8310",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain the complete task denominator and missing items in PLE aggregation?",
+        "answer": "Average each run over all tasks with missing scores at zero, then average three run means. Conditioning on successful submissions inflates results. Local scoring accepts external grades and artifact bytes, not independent certification of physical or regulatory correctness.",
+        "example": "If only 10 of 85 tasks are complete, their average is not the full benchmark mean."
+      }
+    },
+    "qa/agent-research:scope-replay/mechanism": {
+      "source_sha256": "9a10ebde0a01f20176e2bc8b0a46325b75e554b190401f7ae658c2e5f2800ec2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't successful API tape replay prove program equivalence for every input or serve as a candidate acceptance gate?",
+        "answer": "Replay checks recorded cases with given state, responses, and exceptions, leaving unseen inputs unknown. It selects divergences worth diagnosing natively rather than requiring rollback of a successful candidate. Only native-environment success updates the accepted program; replay divergence is not environment failure.",
+        "example": "Changed return ordering on an old tape can prompt targeted retesting. A candidate that completed the native task is not rejected solely because an old tape is incompatible."
+      }
+    },
+    "qa/agent-research:scope-replay/basics": {
+      "source_sha256": "3251e8dfbb923317cebc2cec0618a34ee1666b276b8f842e5358d54f904ab5e8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does SCOPE save stateful API tapes from successful executions?",
+        "answer": "Rerunning all earlier scenarios after a program edit is expensive. A full tape records requests, public state before and after, and results or exceptions, enabling same-instance replay and surfacing differences for native diagnosis.",
+        "example": "A complete tape can screen an old successful case without immediately restarting the robot environment."
+      }
+    },
+    "qa/agent-research:scope-replay/comparison": {
+      "source_sha256": "550eb14a6186013e9495e1d59d3b9452fa4be8c6e93da010b2a7f4663b67d839",
+      "reviewed": true,
+      "fields": {
+        "question": "Are SCOPE replay divergence and failure in the actual environment the same conclusion?",
+        "answer": "No. Divergence means the candidate differs from or cannot use a recorded witness and informs further search. Native failure requires real execution. Unknown is not failure, and replay cannot establish equivalence over all inputs.",
+        "example": "An extra API query can diverge from the tape without showing that the actual task fails."
+      }
+    },
+    "qa/agent-research:scope-replay/implementation": {
+      "source_sha256": "f7bf133b3e739083cdec3ebed226c3d0417d259466bc5bd58fe8cd7459d700f3",
+      "reviewed": true,
+      "fields": {
+        "question": "Is matching only API names and return values enough for stateful SCOPE replay?",
+        "answer": "Also match requests and prior state, restore subsequent mutations, exceptions, and aliases, consume the complete tape, and make no extra external calls. Native success updates the accepted program; do not turn replay into acceptance or rollback.",
+        "example": "If two objects share one list, replaying them as independent copies changes later behavior even when the immediate result matches."
+      }
+    },
+    "qa/agent-research:tool-bottleneck-bench/mechanism": {
+      "source_sha256": "420ae651102b40c58af536c079be37a7ba8e392237d68c274699e41c3afbc3f9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't recording the first unmet obligation a completed causal attribution?",
+        "answer": "Obligation ordering provides a consistent label, but later failures can coexist. Hold task facts fixed and manipulate catalog, menu, workflow, and return state to study pressure. Truth-assisted routed menus are diagnostic, not oracle-free deployment ability.",
+        "example": "Failure to retrieve a tool is labeled first, but argument logic may also be wrong. Fixing retrieval may expose it; label order is not causal proof."
+      }
+    },
+    "qa/agent-research:tool-bottleneck-bench/basics": {
+      "source_sha256": "47f55679af5ee9e262f621c6db777f9b801060b13331a7bbc4989147efea2f41",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does ToolBottleneckBench control tool catalogs, menus, workflows, and return encoding?",
+        "answer": "Tool-agent failure may reflect interface and budget interactions rather than only model capability. Hold task facts and decisions fixed and manipulate R/V/W/D separately to identify pressure associated with outcomes.",
+        "example": "A longer visible menu can raise selection costs for the same model without proving weaker reasoning."
+      }
+    },
+    "qa/agent-research:tool-bottleneck-bench/comparison": {
+      "source_sha256": "0a0738ee94d9c36a9cd401eb3fcaff860265fd20ac1bf1d4736aba11e7163a53",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a truth-assisted routed menu differ from an oracle-free production router?",
+        "answer": "Truth-assisted narrowing is a controlled condition. It localizes bottlenecks but does not show that a live system can autonomously find the same menu.",
+        "example": "Showing only the already-known correct tool is different from retrieving it from a large catalog at deployment."
+      }
+    },
+    "qa/agent-research:tool-bottleneck-bench/implementation": {
+      "source_sha256": "657ebd013563d7e4d188d52335e2845b7149a53415f829021dbae39d427c3286",
+      "reviewed": true,
+      "fields": {
+        "question": "Can missing retrievals and infrastructure failures be dropped from the catalog-pressure ITT denominator?",
+        "answer": "No. Keep them in the planned denominator; conditioning on available requests inflates selection rates. Distinguish first unmet obligation from separately logged termination reasons. Neither automatically establishes causation.",
+        "example": "If only 80 of 100 planned requests obtain a menu, still report outcomes over all 100."
+      }
+    },
+    "qa/agent-research:shortcut-sensitivity/mechanism": {
+      "source_sha256": "80b4ba92abbb6d7098a8a8f36438690f4c54b167ca15989031c3bc54abab5b0c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't tool-name predictability prove a guard uses the shortcut?",
+        "answer": "Label predictability shows a construction cue. Guard association is a second check. Changing only the cue under matched conditions gives stronger behavioral evidence. Control random inconsistency and placebos; association, unsigned flips, and signed effects are distinct.",
+        "example": "A name lookup can score well when dangerous samples share a tool name. To test guard reliance, rename it without changing behavior and compare decisions."
+      }
+    },
+    "qa/agent-research:shortcut-sensitivity/basics": {
+      "source_sha256": "d2796382bfd6bf4d102006a889f524308b1f4ec19d0b879db25d0165c26c24b9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Shortcut Sensitivity first inspect construction cues in evaluation inputs?",
+        "answer": "Tool names, lengths, source markers, and repeated interactions can predict labels without genuine risk judgment. Audit label predictability, guard association, and construct-preserving paired interventions separately.",
+        "example": "If a tool name occurs in every unsafe case, a model may score well using that cue alone."
+      }
+    },
+    "qa/agent-research:shortcut-sensitivity/comparison": {
+      "source_sha256": "256f06c95bdb19ac8676ac909c29d7777cd2dffdcf8bd6d399bf97ef90efdb8b",
+      "reviewed": true,
+      "fields": {
+        "question": "Do label predictability, guard-decision association, and paired intervention effects imply each other?",
+        "answer": "No. The first two motivate testing. Interventions must change only the cue while preserving risk and controlling random guard behavior and format placebos. Correlation is insufficient to establish shortcut use.",
+        "example": "A tool name can correlate with unsafe while removing it leaves guard decisions unchanged. Evidence of reliance remains insufficient."
+      }
+    },
+    "qa/agent-research:shortcut-sensitivity/implementation": {
+      "source_sha256": "9f6f08d1010e7229789236d264e5cbb99787454bc62aa3a59925b28b61846aea",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not compute F1 per interaction and then average when weighting interactions equally?",
+        "answer": "Assign steps weight 1/n_g, sum weighted TP/TN/FP/FN, then calculate F1. F1 is nonlinear, so averaging group F1s defines another metric. Signed paired effects also cannot be replaced by unsigned flip rates.",
+        "example": "Long interactions should not carry more total confusion-matrix weight just because they have more steps."
+      }
+    }
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:memscope/mechanism": {
+      "source_sha256": "08ff4b956e4c81dae7f79b6be8da8235441f20135d0cf0d5daa7217a042005b9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't an unchanged memory-provider signature prove a patch is compatible with existing memories?",
+        "answer": "A signature constrains call shape, not internal field meanings or read/write semantics. MemScope combines raw traces, runtime memory, and code, patches in a bounded transaction, and probes real formats. Failure must preserve old code and memory; insufficient evidence can also mean no patch.",
+        "example": "Example: The parameter is still named memory, but a patch changes timestamps from seconds to days. Old records can be misread even though the code passes syntax checks."
+      }
+    },
+    "qa/agent-research:memscope/basics": {
+      "source_sha256": "b1ed4c79f120c687380c36f51fbcdd2cd21e71d495e650e487b1b5bcd5352414",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does MemScope inspect raw trajectories, runtime memory, and provider code together?",
+        "answer": "The same failure can come from writing, retrieval, or use, which a total score cannot distinguish. Traces show actions, memory shows stored contents, and code explains the rules. Together they support a bounded repair. If evidence is insufficient, return no-patch rather than forcing edits every round.",
+        "example": "Example: A fact written but never retrieved requires a different fix than a fact never written. A wrong answer alone does not distinguish them."
+      }
+    },
+    "qa/agent-research:memscope/comparison": {
+      "source_sha256": "43a000b5d6fcebd3d27aef8ecefa7de4dc94f1955a79f61176ec710f7d7590a5",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the trade-off between an in-place patch and regenerating the whole memory provider?",
+        "answer": "A local edit preserves provider identity and reduces compatibility and format drift. Keeping the interface still does not guarantee unchanged semantics, so run real probes. A full rewrite gives more freedom but can make old memory uninterpretable. Lines of code do not measure either strategy's effectiveness.",
+        "example": "Example: Adjusting a retrieval threshold can preserve stored records. Replacing the schema without migration may silently ignore them."
+      }
+    },
+    "qa/agent-research:memscope/implementation": {
+      "source_sha256": "1198a3be8669ece79f2822c8813cef18f42b5beb395f912403f16679f59d6df8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must replaceOnce match exactly once, and why allow no-patch when evidence is weak?",
+        "answer": "A local patch must identify the intended logic. Replacing arbitrary duplicate text can change the wrong behavior. replaceOnce requires a unique target and respects interface identity, syntax, and edit budgets. If localization or probe evidence is weak, do not submit a patch. Engineering validity alone is not semantic improvement.",
+        "example": "Example: Two sites have identical field reads. A patch specifying only that string cannot disambiguate them, so decline instead of changing the first match."
+      }
+    },
+    "qa/agent-research:hy-memory/mechanism": {
+      "source_sha256": "48f9dca2eff5b02d2915ae9979c05075787ef3aaecfb562ee33b107c57e2bcef",
+      "reviewed": true,
+      "fields": {
+        "question": "Why freeze the reader and judge before optimizing the memory writer?",
+        "answer": "Changing reader and judge together confounds better writing with stronger reading. Holding them fixed lets chunk probes and factual attribution isolate writer contributions; a storage-growth penalty prevents keeping everything. Each rollout gets one vote per chunk. More calls are not more independent evidence.",
+        "example": "Example: Give both writers' outputs to the same reader. Differences better reflect which facts were retained than whether one writer happened to get a stronger answer model."
+      }
+    },
+    "qa/agent-research:hy-memory/basics": {
+      "source_sha256": "d3691220399221bd765d7629ea1fe36cea6099911992f3ebd85dc238524c5ba9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are storing every conversation and writing memories for future questions different tasks?",
+        "answer": "Raw conversations are large and later readers have limited context. A writer must preserve usable facts and relationships while controlling storage growth. Hy-Memory trains that policy rather than merely enlarging the archive. The useful test is whether later answers can be grounded in the resulting memory.",
+        "example": "Example: A discussion reschedules a meeting repeatedly. A later question needs the final date and its confirmation, not a mechanical archive of every repeated message."
+      }
+    },
+    "qa/agent-research:hy-memory/comparison": {
+      "source_sha256": "49dfb29f0a4b17f0e7dcf63a92d3c9ca81e1cf9ccf7a6be48320abbf7e8f6fca",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use both per-chunk probes and final outcome rewards?",
+        "answer": "Final answer feedback is sparse. Chunk probes give nearer signals about writing quality, and cross-chunk attribution estimates factual contributions. A growth penalty discourages storing everything. High local probe scores do not ensure cross-session answers, and a final outcome alone cannot identify the useful write.",
+        "example": "Example: An early chunk saves the right date, then a later chunk overwrites it incorrectly. Local probes and final attribution need to reveal the damage together."
+      }
+    },
+    "qa/agent-research:hy-memory/implementation": {
+      "source_sha256": "881224cf2434cd1408ebb2f001c4fb8a389bab111bd01046cca2c74ad15a4efa",
+      "reviewed": true,
+      "fields": {
+        "question": "Can multiple calls for the same chunk count as multiple reward votes?",
+        "answer": "No. Each rollout casts one vote per chunk, and advantages are normalized within chunk groups. Counting calls would give extra influence to more active trajectories. Gold stays with the judge, not writer, reader, or retrieval query. Large-scale writer RL was not run locally.",
+        "example": "Example: Five calls checking one chunk and one call in another rollout still contribute one vote each, not five versus one."
+      }
+    },
+    "qa/agent-research:transparent-compact/mechanism": {
+      "source_sha256": "29336fe322effd251dd6475a8ca5027a8db4a45dd32f6f7b51f93605191553f5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are verbatim messages and omission markers more transparent than a fluent regenerated summary?",
+        "answer": "Verbatim text preserves commitment wording. Omission markers identify what was moved out and provide a route back to the full conversation. This avoids silently turning guesses into facts. A recovery index does not mean the model found the evidence, and historical search can require paid subagent inference.",
+        "example": "Example: Summarizing 'do not deploy for now' without 'for now' changes the requirement. Keeping the original wording and marking removed tool logs makes the compression easier to audit."
+      }
+    },
+    "qa/agent-research:transparent-compact/basics": {
+      "source_sha256": "4e1130d7a8b6df438ea9dd4dd66e1d8869c5da71537614fa8166de53e1b6cd1e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are user commitments and constraints especially easy to lose when compressing long coding sessions?",
+        "answer": "Large tool logs and discussions compete for context. Summaries can omit small but binding phrases or turn conditional requests into unconditional ones. Transparent compression marks what stays and what moves, with a path back to original materials, so continuation knows what is visible and what needs retrieval.",
+        "example": "Example: 'Submit only after confirming tests' summarized as 'prepare to submit' can make a later agent mistake conditional permission for unconditional authorization."
+      }
+    },
+    "qa/agent-research:transparent-compact/comparison": {
+      "source_sha256": "cb943e21e33f4990efcb0f3ff2363c0958a4f9bf503da12bd5efc43be236e917",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't deterministic compression and model-subagent context_lookup both be called zero-call?",
+        "answer": "Compression rules need no model, but semantic historical search uses a model subagent and has separate capability and cost. The local run restores exact IDs and checks hashes, not the paper's model retrieval. Fewer visible characters indicate a view change, not memory-QA ability or proportional total storage savings.",
+        "example": "Example: Reading a log by its known ID is model-free. Finding which commitment matters without an ID may need extra inference."
+      }
+    },
+    "qa/agent-research:transparent-compact/implementation": {
+      "source_sha256": "bff730675205f09db3ee7334ffceb4343147635b2bf923a4de206e23353ddcfd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must Pi branch structure and tool metadata survive even when body text is removed?",
+        "answer": "Read only ancestors of the chosen leaf so sibling histories cannot leak in. Tool pairing IDs, names, errors, and exit states preserve invocation semantics after body removal. A character cap evicts the oldest full blocks and leaves recovery markers, so the active context no longer contains every original statement.",
+        "example": "Example: Preserve isError=false rather than treating false as missing; otherwise later compression can lose proof the call succeeded."
+      }
+    },
+    "qa/agent-research:formcraft/mechanism": {
+      "source_sha256": "1f9a924891898f8dede733ac6f48be8bc8a8cc532557b2b83edbc9965a42ab8d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate forming a composite capability from admitting it to a persistent skill library?",
+        "answer": "Compatible interfaces show that operations compose, not that the composition meets intended behavior. Independent validation gates admission. Persistent identity binds parents, types, and composition, while loading checks references and acyclicity. Later direct invocation saves search, not the real underlying computation.",
+        "example": "Example: Sorting then deduplicating can be wired together but may fail on empty input. Validate before storing it for direct reuse."
+      }
+    },
+    "qa/agent-research:formcraft/basics": {
+      "source_sha256": "3fa02a672edd417cd44a84d0a32991a0da4b637ada6811dc0ab359fee6c79730",
+      "reviewed": true,
+      "fields": {
+        "question": "What distinguishes a first-class composite capability from a stored formation history?",
+        "answer": "A first-class capability has its own type, public call ID, and execution semantics, so it is a candidate in later compositions. Formation history records how it was assembled and may require searching again. Direct reuse avoids formation work, but still runs recursive computation on the current input rather than caching an old answer.",
+        "example": "Example: Append 01 can become an ordinary operator by ID. It still appends both items to today's input, not returning yesterday's result."
+      }
+    },
+    "qa/agent-research:formcraft/comparison": {
+      "source_sha256": "733ba8728afd21c8659cf45f8c2040c6db944be4bd8fa84e389eab3a220a34cb",
+      "reviewed": true,
+      "fields": {
+        "question": "What work does invoking an admitted composite save over expanding and searching again?",
+        "answer": "A first-class composite can participate as a typed operation with an identity, so later tasks do not repeat formation search. Expanding again must recover parent operations and wiring. Reuse saves search and assembly, while inner computation still runs. Count calls, formation attempts, and underlying work separately.",
+        "example": "Example: Reuse a learned filter-then-sort operation directly. Filtering and sorting still execute; skipping assembly does not make them free."
+      }
+    },
+    "qa/agent-research:formcraft/implementation": {
+      "source_sha256": "3613241af521a659e9e6ff7a7da900462ace700d96a1949066c0de6f903f0927",
+      "reviewed": true,
+      "fields": {
+        "question": "Why recheck the canonical hash, parent references, and acyclicity on cold load?",
+        "answer": "Persistent identity comes from canonical JSON of types, operations, and parent IDs. Files can be corrupted or tampered with. Complete parent references and acyclicity ensure legal recursion. True persistence testing destroys the old object and cold-loads the same snapshot. A local sequence-domain result is not general Lean or LLM capability.",
+        "example": "Example: A file can set its own ID as a parent without changing its name, creating a cycle. Keeping a live object in memory does not verify recovery from disk."
+      }
+    }
+  }
+}

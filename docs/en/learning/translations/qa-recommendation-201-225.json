@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:cross-task-relationships/comparison": {
+      "source_sha256": "2c923ef2053369f87b49add1d27b97a2b351b8dc1d3acd1a692030d45cf0acb4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compare true cross-label auxiliary supervision with shuffled labels rather than only adding or removing parameters?",
+        "answer": "An extra head can change the backbone through more gradients or regularization. Shuffling keeps the training form while destroying real task relations, helping isolate the relation signal. A sparse small slice is still only diagnostic and does not support stable capability claims.",
+        "example": "If real click-and-long-watch labels help but equal-sized shuffled labels do not, that supports useful joint information; similar results may reflect auxiliary training alone."
+      }
+    },
+    "qa/recommendation:cross-task-relationships/implementation": {
+      "source_sha256": "34f561760df19a034b984f1e291bc77d9a1961e17e2616f5091fea58847287ab",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not silently clip negative probabilities when reconstructing four joint cells from pX, pY, and pXY?",
+        "answer": "The cells must be nonnegative and sum to one; pXY is also bounded by the marginals. Negatives expose inconsistent predictions. Preserve an infeasible marker instead of clipping and claiming calibration; observed labels belong in loss and evaluation, not pre-impression inputs.",
+        "example": "pX=0.2 and pXY=0.4 imply negative click-only probability, which should be reported as inconsistent."
+      }
+    },
+    "qa/recommendation:crsd/mechanism": {
+      "source_sha256": "84a09125150f5cfb39ba4f22576f21a8a3faeed7b4bec6a7916a8552ab7f48b2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CRSD compare reasoning and no-reasoning views in one student instead of serving reasoning chains?",
+        "answer": "The reasoning view offers richer relationships; the plain view is the low-latency input used in production. Self-distillation and contrastive learning transfer judgment to the plain path while label supervision anchors correctness. Leaked answers or view distribution mismatch can make a lower loss misleading.",
+        "example": "Train relevance with an attribute-comparison rationale, then require similar decisions from query and item alone without generating a rationale per candidate."
+      }
+    },
+    "qa/recommendation:crsd/basics": {
+      "source_sha256": "9120437ee16bce03592ad80c3ac173b5ccbba104427badc494bf2e4599ad40d8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is reasoning a training augmentation in CRSD rather than a permanent serving requirement?",
+        "answer": "Rationales can enrich supervision but cost real-time generation. A student learns from plain and rationale-augmented views, transferring augmented-view distributions to the plain path. This does not guarantee retention of complete reasoning or faithful explanations.",
+        "example": "Train with a commuting-lightweight rationale, but serve on current features without first generating a long explanation."
+      }
+    },
+    "qa/recommendation:crsd/comparison": {
+      "source_sha256": "b71d1c1b4892b67da6c21ade6c9145a69a3275255861b4099a86d437a8741d41",
+      "reviewed": true,
+      "fields": {
+        "question": "How does CRSD's contrastive self-distillation differ from fitting external teacher logits?",
+        "answer": "One lightweight student produces distributions under both views, and a contrastive loss also constrains representations. Shared parameters can reduce scale mismatch but do not eliminate erroneous rationales. Check actual gradient and stop-gradient paths rather than assuming self-distillation is unbiased.",
+        "example": "The same model reads ordinary product information and an augmented rationale; a separate fixed teacher would not share its parameters."
+      }
+    },
+    "qa/recommendation:crsd/implementation": {
+      "source_sha256": "88624d7e627781fe3a07a671932ea7c5f1b2dd38cd89f30b63dbfe0ee2a3c8e2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why would appending reasoning r at serving violate CRSD's distillation objective?",
+        "answer": "The plain `pS(·|x)` learns from augmented `pS(·|x,r)` specifically to remove online rationale generation. Requiring r restores cost and does not verify plain-path learning. Test training losses and rationale-free inference separately; local proxies do not verify full domain LLM training.",
+        "example": "Generating rationales before scoring tests the augmented pipeline; serving only raw x tests the intended lightweight path."
+      }
+    },
+    "qa/recommendation:cs3/mechanism": {
+      "source_sha256": "e4f9a7447ee0b687eddb1708ec2faadcc8c30f4e6a9364258bc505fd00b3d4bf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't CS3 write candidate vectors back into all shared user representations to strengthen interaction?",
+        "answer": "Efficient two-tower retrieval needs independently computed user and item vectors. Candidate-specific user states cannot retrieve the full catalog with one query. CS3 uses deployable cyclic refinement and knowledge collaboration; track which updates are offline-materializable and which depend on candidates. Training interactions are not free ANN features.",
+        "example": "Adding item A's details can improve scoring A but makes the vector unsuitable as the same query for B and C."
+      }
+    },
+    "qa/recommendation:cs3/basics": {
+      "source_sha256": "72ac0d13d5e6c29105f8ae49d2301d036e866244d1886180a1995a5817e9888b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is interaction in CS3 a trade-off between retrieval efficiency and expressivity?",
+        "answer": "Independent towers enable precomputed item vectors and one user vector for nearest-neighbor retrieval. Deep interactions usually depend on pairs and cannot be globally cached. Cyclic refinement and knowledge collaboration add links while respecting deployment boundaries.",
+        "example": "If each user's item vector differed, a single shared index could not serve it."
+      }
+    },
+    "qa/recommendation:cs3/comparison": {
+      "source_sha256": "3b93763c1a30f7125adf21dc1b8a8c66495677a758aad3cede98a04df642061d",
+      "reviewed": true,
+      "fields": {
+        "question": "How does CS3 gated residual refinement differ from replacing the two towers with a cross-encoder?",
+        "answer": "Gated residuals make controlled updates around the two-tower state and use collaborative losses while retaining the serving interface. Cross-encoders jointly encode each pair. Their compute and index dependencies differ; the matched local result was negative, so quality preservation is not established.",
+        "example": "A bounded correction to a retrievable vector is cheaper and structurally different from re-encoding every user-item pair from scratch."
+      }
+    },
+    "qa/recommendation:cs3/implementation": {
+      "source_sha256": "053eb5376202695a6a4a9ee7aa9d7abd3dd60ca9a3ea3f1d2fcdee62f59481c9",
+      "reviewed": true,
+      "fields": {
+        "question": "How should CS3 cyclic refinement distinguish offline item state from online candidate-dependent state?",
+        "answer": "Trace whether an update reads the current user or candidate; downstream tensors are no longer global cache values. Match gate and residual dimensions and specify previous versus current iteration state, avoiding accidental in-place semantics. Preserve the actual cycle, cross-sync, and loss paths.",
+        "example": "Refining item i for user A must not overwrite the generic vector read by user B."
+      }
+    },
+    "qa/recommendation:cwm/mechanism": {
+      "source_sha256": "47d9ac7a290cbf43734d84e2b434dabd570733081d217465e614e8cd38b8091b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why might counterfactual watch-time scoring better capture preferences than raw watched seconds?",
+        "answer": "Raw seconds combine attraction with the viewing opportunity allowed by duration. CWM estimates potential watch benefit under a common duration intervention. This depends on counterfactual assumptions, is not just dividing by duration, and local proxies do not establish that actual duration or exposure confounding was removed.",
+        "example": "Completing a 20-second clip and abandoning a long clip after 30 seconds may imply a different preference under equal viewing opportunity."
+      }
+    },
+    "qa/recommendation:cwm/basics": {
+      "source_sha256": "cbeb552bf3b5658436ab1d49b60d4f1cb6f0e483a5bd38bf16dddd8b0b7631aa",
+      "reviewed": true,
+      "fields": {
+        "question": "How does CWM's potential watch benefit under common duration differ from observed watched seconds?",
+        "answer": "Observed seconds mix preference, duration constraints, and content-type relationships. A common duration intervention compares potential outcomes at equal opportunity, reducing inherent long-video advantage. It is unobserved and requires modeling and identification assumptions.",
+        "example": "Completing a 15-second clip versus watching two minutes of a longer clip cannot determine preference from seconds alone."
+      }
+    },
+    "qa/recommendation:cwm/comparison": {
+      "source_sha256": "08b5e58a837e083f67a55fca68b2457d8999e2038dad746652fc28fb92289de5",
+      "reviewed": true,
+      "fields": {
+        "question": "How do CWM and completion-rate ranking differ in their assumptions about duration?",
+        "answer": "Completion rate is an observed ratio and can favor short content; it has no explicit counterfactual. CWM estimates a potential outcome under common duration to separate preferences and duration effects. Bias differs, and misspecification can prevent the causal objective from helping.",
+        "example": "A three-second ad is easy to complete, unlike a long tutorial. CWM instead asks which would offer more value at equal duration."
+      }
+    },
+    "qa/recommendation:cwm/implementation": {
+      "source_sha256": "2f4a70e2b3211206fa3ba7c8c0b6d99774d7312203db618a2737423583d083d8",
+      "reviewed": true,
+      "fields": {
+        "question": "How should training and prediction duration differ for CWM's `do(D=d0)`?",
+        "answer": "Fit the duration mechanism using observed D; for prediction comparisons fix d0 and output the defined potential quantity and bias term. Using each item's original duration is not a common intervention. Local movie proxies do not measure real short-video potential watch benefit.",
+        "example": "Set the same d0 for a 30-second clip and a five-minute clip; setting 30 and 300 reintroduces the original difference."
+      }
+    },
+    "qa/recommendation:dadf/mechanism": {
+      "source_sha256": "815f82d751b28e47a8319d1a7c4b1eb2de23763a4a0e443fa65d789610c19a87",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does DADF freeze the mature first-stage model and learn a multiplicative factor?",
+        "answer": "Retraining can damage established capabilities or interfaces. Distribution-conditioned proportional residuals adapt to inputs and base predictions while preserving the scalar output. Tiny predictions can destabilize ratios, so check denominator protection and conditional distribution calibration.",
+        "example": "If two groups each start at 10 seconds but one is overestimated and one underestimated, learn distinct factors instead of adding five seconds everywhere."
+      }
+    },
+    "qa/recommendation:dadf/basics": {
+      "source_sha256": "3b0458aa3c08cda1404c590d9f647325aad2305618ff2e5b7353bb1ea0b0fb22",
+      "reviewed": true,
+      "fields": {
+        "question": "Why treat DADF's mature predictor as a baseline and learn a relative correction?",
+        "answer": "The predictor already captures stable relationships. A separate factor focuses on conditional systematic errors with the same scalar interface and less risk than full retraining. Near-zero or badly misspecified predictions are harder to correct, and factors cannot recreate missing information.",
+        "example": "Correct a 10% long-video underestimate without discarding every learned user-content relationship."
+      }
+    },
+    "qa/recommendation:dadf/comparison": {
+      "source_sha256": "bddcd8872cc05c5e2de6f27d9d1efa24c32b0a905bc1f185eefa83c96c4ad115",
+      "reviewed": true,
+      "fields": {
+        "question": "How do DADF's multiplicative and additive residuals affect scale differently?",
+        "answer": "Multiplication expresses proportional error and therefore larger absolute adjustments for large predictions; addition expresses fixed-unit error. Choose based on error structure. The local ranking was unchanged, so calibration changes are not automatic recommendation gains.",
+        "example": "A 10% underestimate at 10 and 100 seconds suits multiplication; a consistent five-second error suits addition. A global multiplier preserves ranking."
+      }
+    },
+    "qa/recommendation:dadf/implementation": {
+      "source_sha256": "8faa5945e1c98fc2be304569133c43899b10706d4e9e918bd9fd91700e1089b3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check small denominators in DADF's `y/max(y0,ε)` even with frozen y0?",
+        "answer": "Freezing stabilizes supervision but tiny predictions can produce huge noisy ratios. Record epsilon and use the same baseline version for correction inputs, ratio targets, and output multiplication. Do not update the first-stage model while claiming second-stage-only training.",
+        "example": "An observed 10 seconds divided by a 0.01-second baseline creates a huge factor that is not necessarily reliable preference evidence."
+      }
+    },
+    "qa/recommendation:danet/mechanism": {
+      "source_sha256": "043ec32ece5edf6a448d06a2ba73ad20e93cfe1221e7ec5e2210c83b73965220",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does DANet separate high- and low-frequency discount history rather than using only today's discount?",
+        "answer": "Current price cannot describe long-term sensitivity and short-term promotion reactions. DPN separates stable patterns from fast variations and modulates preferences with similar purchases and promotion context; another network models general interest. Purchase-only discount labels are auxiliary and do not identify causal effects.",
+        "example": "Two users see 20% off, but one shops only during annual events and the other reacts to regular small offers."
+      }
+    },
+    "qa/recommendation:danet/basics": {
+      "source_sha256": "a7dd8facfe6a6e66ddec82b09c79d0cc30d8e3ba7d935e0cb8fb7c2032efbc30",
+      "reviewed": true,
+      "fields": {
+        "question": "Why model general interest and discount preference separately in DANet?",
+        "answer": "Category interest is not the same as willingness to wait for discounts. IPN models general interest, DPN learns discount rhythms, and user and promotion context modulate them. The signals can interact but are not interchangeable.",
+        "example": "Two sneaker fans may buy at full price or wait for a season-end sale despite similar browsing."
+      }
+    },
+    "qa/recommendation:danet/comparison": {
+      "source_sha256": "551f65a050fe043dc6c946fc4dcc739cada109a607b1cbe8c09308d02ea678ce",
+      "reviewed": true,
+      "fields": {
+        "question": "What structure does DANet's FFT frequency decomposition preserve beyond a recent discount average?",
+        "answer": "A mean compresses trends and fluctuations into one number. Frequency separation reveals promotion rhythm, but depends on temporal sampling and quality, and high frequencies can be noise. Public data without prices provide proxy diagnostics only.",
+        "example": "Steady 10% off with a rare 50% sale can average similarly to weekly swings between 20% off and full price, but behavior can differ."
+      }
+    },
+    "qa/recommendation:danet/implementation": {
+      "source_sha256": "2035b010b61eca4cd8dd06264b4fb59936610af469160a7322f64faeab8bc3b2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does DANet regress observed discounts only on purchases?",
+        "answer": "The target is a transaction discount conditioned on purchase, which unpurchased items lack. Mask with purchase positives rather than inventing labels. After FFT filtering, low-frequency reconstruction plus high-frequency residual should recover the sequence. Local popularity/rating intensity is not real coupon-price regression.",
+        "example": "An unpurchased shoe has no transaction discount; do not assign it zero. Use actual purchase discounts for this head and separate click or ranking supervision."
+      }
+    },
+    "qa/recommendation:dceo/mechanism": {
+      "source_sha256": "fb88f4db81d6c46140329ad67acb3060442d40b243e97d659ecc622250de1d08",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does DCEO use an actor to output contextual objective weights instead of one sitewide CTR/CVR/GMV mix?",
+        "answer": "Fixed weights assume identical trade-offs across user states. The actor emits dynamic weights summing to one; the critic assesses relative intervention effects in training while serving uses the lightweight actor. Dynamic weights do not establish causal identification without credible controls.",
+        "example": "Exploration may matter for a new user and conversion for a mature shopper, but compare appropriate long-term feedback rather than just clicks."
+      }
+    },
+    "qa/recommendation:dceo/basics": {
+      "source_sha256": "d4bd02e4030d932580d1caab51797f0126695d0d95c315e157994e7861611138",
+      "reviewed": true,
+      "fields": {
+        "question": "What do DCEO's actor and user-level critic each do?",
+        "answer": "The actor gives contextual weights to fuse click, conversion, and value scores immediately. The critic estimates the action's relative long-term effects during training. Serving keeps only the actor; that does not validate critic causality assumptions.",
+        "example": "The critic checks whether a shift from relevance toward transaction value yields incremental long-term benefit without running that evaluator at serving."
+      }
+    },
+    "qa/recommendation:dceo/comparison": {
+      "source_sha256": "39fef94c1df1c76488e787d4f79e5132696a3377856541267493b20035064fe7",
+      "reviewed": true,
+      "fields": {
+        "question": "What does DCEO's dynamic simplex weighting add over fixed log fusion, and what are its risks?",
+        "answer": "Nonnegative weights summing to one can express different trade-offs per request. More flexibility can overfit or exploit proxy rewards, requiring validation and per-objective checks. Local Hit rose but NDCG fell slightly, so this is not a clean sweep.",
+        "example": "Pushing popular items forward can raise hits while degrading positions of relevant items."
+      }
+    }
+  }
+}

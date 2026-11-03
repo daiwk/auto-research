@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:flvm/mechanism": {
+      "source_sha256": "1edae32036ddfcd2e4639c5e2d0813046d027bb31f5f87dd401fd8c9feddba98",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does FLVM place measurement confounders in a restricted baseline and correct feedback heads through routed latents?",
+        "answer": "Watch time reflects length and user habits, not pure preference. The baseline explains measurement conditions; separate consumption, active engagement, and polarity factors reach only relevant heads. Stop-gradient prevents the residual objective from rewriting its reference. These constraints do not fully identify causal latents.",
+        "example": "Similar watched seconds can come from completing a short clip or abandoning a long one; length opportunity and active liking should not become one score."
+      }
+    },
+    "qa/recommendation:flvm/basics": {
+      "source_sha256": "52108d1782141df9480c8fca0348ce9a35505ecc3d8802d56ad9f628175f5bf4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate consumption, active engagement, and direction in FLVM?",
+        "answer": "Watching, acting, and liking are different, and negative feedback can be highly active. Restricted heads use relevant factors rather than counting all engagement positively. Latents do not automatically identify psychological concepts and require semantic checks.",
+        "example": "Finishing a controversial video and disliking it gives high consumption and engagement but low positive direction."
+      }
+    },
+    "qa/recommendation:flvm/comparison": {
+      "source_sha256": "41da6716b5eb66e2967cc084442440e3e30fa527b1936bd45d552c0c86cf4ef3",
+      "reviewed": true,
+      "fields": {
+        "question": "What shortcut do FLVM's constrained baseline and stop-gradient restrict compared with a shared multitask tower?",
+        "answer": "Duration and time first explain the measurement baseline. Full user-item information contributes via latents and fixed semantic routing, while baseline gradients train separately. This limits unrestricted mixing but does not remove all confounding; local factor separation was not stable.",
+        "example": "Let length explain greater opportunity to accumulate seconds, rather than using long as a direct synonym for liked."
+      }
+    },
+    "qa/recommendation:flvm/implementation": {
+      "source_sha256": "20f3a7b2f3391430cd22b5a9c35a06650114367fef992f1df4350145a21df727",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish FLVM feedback masks from fixed latent routing masks?",
+        "answer": "Observation masks indicate whether sample labels exist; routing masks restrict which factors heads read, on different axes. Missing labels are not zero, baseline addition stops the specified gradients, and ranking uses the defined combination of consumption and polarity rather than rewarding activity as positive.",
+        "example": "An unobserved dislike is not a like. Even when observed, a dislike head cannot read unrelated factors to bypass routing."
+      }
+    },
+    "qa/recommendation:friend-gnn/mechanism": {
+      "source_sha256": "f5d3efbcd4b744a2e88d02d807e1da5ba862620d7fa539396cd4ce8d88584c53",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Friend-GNN need both multi-hash user representations and temporal-prefix neighbor sampling?",
+        "answer": "Multi-hash tables reduce storage but do not prevent time leakage. Temporal CSR sorts edges so queries sample only pre-cutoff neighbors before graph aggregation. Verify memory and observational legality separately from ranking scores.",
+        "example": "Tuesday's friend recommendation cannot use Friday's new connection, no matter how compact the user embeddings are."
+      }
+    },
+    "qa/recommendation:friend-gnn/basics": {
+      "source_sha256": "36e457915fe3722e278daed3b4f9a11a03287904d65083a38d59e61f248416fd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why address both user-ID storage and temporal edge visibility in Friend-GNN?",
+        "answer": "Massive graphs make per-user tables expensive; shared hashes compress identities. Edges after prediction expose outcomes, so constrain time separately before GNN propagation. Neither property establishes recommendation accuracy.",
+        "example": "A billion users can share hash tables, but predicting yesterday still cannot sample today's friend links."
+      }
+    },
+    "qa/recommendation:friend-gnn/comparison": {
+      "source_sha256": "331378bdc04c832649c125db7e91fd6e005e45d59c92fe4b123ef41cb352e51f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do three independent concatenated hashes mitigate rather than eliminate collisions?",
+        "answer": "A single hash gives same-bucket users one embedding. Multiple addresses reduce the chance all buckets match, and projection combines them. Partial sharing and complete collisions remain; this is not an independent ID table.",
+        "example": "Two users with the same first bucket can differ in the other two, but identical triples remain indistinguishable by this encoding."
+      }
+    },
+    "qa/recommendation:friend-gnn/implementation": {
+      "source_sha256": "fa18e9b1f6636929ebf6d9b5257b71ea228f99cda02ed04d919d26e1c384353a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why sort per-user neighbor times before taking a historical prefix in temporal CSR?",
+        "answer": "Binary search needs sorted timestamps to locate cutoff `τ−Δ`, then sample only its legal prefix. Use `lower_bound` semantics to determine cutoff inclusion rather than claiming the current full graph was filtered.",
+        "example": "Unsorted January, February, and March edges can cause a binary search for a February cutoff to admit March."
+      }
+    },
+    "qa/recommendation:fuxi-alpha/mechanism": {
+      "source_sha256": "f0e403144e3bf6304503e448bfbea9bd2d785ab3edf453a78cad4bed3fc327a2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does FuXi-α use multiple interaction channels and staged FFNs instead of widening one attention path?",
+        "answer": "One path can mix unlike relationships in the same space. Adaptive channels model different interactions and multistage FFNs combine them gradually. Additional channels can still learn redundant patterns; compare single-channel and matched-budget configurations.",
+        "example": "User–item, context–item, and history–candidate relations can be learned separately, but identical attention channels only add cost."
+      }
+    },
+    "qa/recommendation:fuxi-alpha/basics": {
+      "source_sha256": "3edacc6f60d79cbaf57624309c095c120260b591ceca1cdfe3115f61b421909f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why divide feature interactions across FuXi-α channels?",
+        "answer": "Heterogeneous fields encode different relations; widening one space can still favor the strongest. Separate adaptive channels and staged FFN fusion can retain complementary structure, not guarantee it.",
+        "example": "Channels can specialize in user–item fit and context–price interaction, or all collapse to popularity."
+      }
+    },
+    "qa/recommendation:fuxi-alpha/comparison": {
+      "source_sha256": "1c18a0b84b909d2dbced6657015ecf6ab718031c441721ce5b4562e2c6ceb202",
+      "reviewed": true,
+      "fields": {
+        "question": "Where does FuXi-α's staged fusion differ from concatenating channel outputs only at the final head?",
+        "answer": "Intermediate FFNs fuse current state and channel outputs before later layers, allowing further relation composition. Late fusion has one opportunity. Additional capacity costs more and did not prevent local NDCG decline.",
+        "example": "A later layer can combine nighttime context and price sensitivity into demand for evening promotions rather than only merging final summaries."
+      }
+    },
+    "qa/recommendation:fuxi-alpha/implementation": {
+      "source_sha256": "0356d0716b343c3ca7ea8cc4ebec2fbc4436cd8e3b6256b67183500f4263f0ec",
+      "reviewed": true,
+      "fields": {
+        "question": "What shapes and update order does FuXi-α require for progressive residual fusion?",
+        "answer": "Channels may have distinct Q/K/V. Project their concatenated state back to backbone width for residual addition, preserve layer and old/new state order, and train channel weights rather than concatenate fixed similarities. Local comparisons only cover the implemented budget.",
+        "example": "Three d-wide channel outputs plus backbone features must pass through an FFN back to d before addition."
+      }
+    },
+    "qa/recommendation:g2rec/mechanism": {
+      "source_sha256": "9c83d62ef44fd9c092b4a0587dd4b6f6a6af0700ba74f20ba9174b4652f03361",
+      "reviewed": true,
+      "fields": {
+        "question": "Why allow each G2Rec item to belong softly to multiple interest prototypes?",
+        "answer": "The same item can serve several audiences, and hard assignment loses cross-interest relations. Learn soft memberships from the global co-engagement graph and alternate prototype-combined interest tokens with items. Build the graph only from visible training behavior to prevent leakage.",
+        "example": "A camping cooking video can contribute to outdoor and cooking prototypes without forcing either audience into one label."
+      }
+    },
+    "qa/recommendation:g2rec/basics": {
+      "source_sha256": "0d94c4876c3c29f60bbfd057f4b5f84546e4f7103ed05b2821c4c604289338f5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why insert interest-profile tokens between G2Rec item tokens?",
+        "answer": "Item tokens preserve identity; profiles expose shared graph-based interests from multiple memberships. Alternating tokens lets generation use both. Profiles are model structure, not extra consumed events.",
+        "example": "A travel photography book can carry both interests through an adjacent mixed profile instead of its ID alone."
+      }
+    },
+    "qa/recommendation:g2rec/comparison": {
+      "source_sha256": "3aaeec063457990b65d81c0f54a1fdc827e5c7217790d6d87fcd1851c35bb125",
+      "reviewed": true,
+      "fields": {
+        "question": "How does G2Rec soft modularity form interest groups differently from a fixed taxonomy?",
+        "answer": "Taxonomy imposes buckets. Soft modularity learns overlapping communities from co-engagement while accounting for degree background. Communities need not match human categories and can reflect exposure. Graph quality does not guarantee sequence ranking improvement.",
+        "example": "A camera and travel bag can share a community while one book partially belongs to a second one."
+      }
+    },
+    "qa/recommendation:g2rec/implementation": {
+      "source_sha256": "35eed1dcac2778c580c2cbd0fee3fce623fa06360b0d7b009860e7542143ff56",
+      "reviewed": true,
+      "fields": {
+        "question": "What should be checked in G2Rec's prototype means and alternating sequences?",
+        "answer": "Weight item vectors by membership and divide by total weight with explicit handling for empty or tiny clusters. Align item/profile positions and causal masks; auxiliary targets cannot read future items. Local evaluation uses one positive and 99 negatives, not full-catalog ranking.",
+        "example": "Item A must be followed by A's profile, not B's, even if a misaligned sequence still reduces loss."
+      }
+    },
+    "qa/recommendation:gala/mechanism": {
+      "source_sha256": "c92f59655e05057f71588d7045b333a6381d714e4ed3557214a3e021c4358f3e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does GALA use behavior rewards and gated ID fusion after image-text pretraining?",
+        "answer": "Content alignment does not ensure personalized consumption relevance. Behavior rewards adapt multimodal representations, while a gate balances semantic and collaborative ID evidence per example, including cold starts. Biased rewards or a collapsed gate can fail; multimodal retrieval is not final recommendation value.",
+        "example": "Matching product images and copy do not make a product right for this user; established and new items can rely on different evidence."
+      }
+    },
+    "qa/recommendation:gala/basics": {
+      "source_sha256": "04ec93434f9dcafd341609a462c33f1415ae7bcbce0b7991361245b8ef8f6e1f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are GALA multimodal and ID representations complementary?",
+        "answer": "Content transfers semantics and IDs retain platform behavior history. A contextual gate chooses their contributions, and behavior rewards align pretrained semantics to recommendation. Neither replaces the other universally, particularly with new items lacking feedback.",
+        "example": "A new product relies on image/text use cues, whereas a popular older one has rich click history."
+      }
+    },
+    "qa/recommendation:gala/comparison": {
+      "source_sha256": "b9b0bacf07b06ecc0c889c06436122e293f471da0d245b3f424df31e74348b36",
+      "reviewed": true,
+      "fields": {
+        "question": "How does GALA's behavioral GRPO differ from image-text pretraining in supervision?",
+        "answer": "Pretraining aligns queries, images, and text. Behavior-driven post-training compares options under actual recommendation targets rather than content similarity alone. Exposure bias and loss of semantic capability remain possible; a public proxy does not establish full policy training.",
+        "example": "Visually similar coats can perform differently for commuter users; behavioral alignment can capture that beyond correct image-text pairing."
+      }
+    },
+    "qa/recommendation:gala/implementation": {
+      "source_sha256": "e910cd1e8ff34a9cbecc31610ca1459743925f66e8fa26bab53df94d06692941",
+      "reviewed": true,
+      "fields": {
+        "question": "Why align dimensions and item identity before applying GALA's sigmoid gate?",
+        "answer": "Elementwise gates need equal-width multimodal and ID vectors for the same candidate, and their inputs must match that pair. Bounded sigmoid values cannot repair mismatches; handle missing cold-start IDs explicitly and distinguish local proxies from full training.",
+        "example": "Mixing item A's image/text vector with item B's ID can yield finite values without representing either item correctly."
+      }
+    },
+    "qa/recommendation:gatesid/mechanism": {
+      "source_sha256": "0b2b784301e5f362a2e08573bcda549601c77708bff42255787df648ba01593a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does GateSID let cold-start degree control semantic–collaborative fusion and alignment strength?",
+        "answer": "Sparse feedback makes collaborative vectors noisy, so strong alignment can corrupt content. Rich feedback contains distinctions that content averaging may erase. Condition both fusion and alignment on evidence strength, adapting as interactions arrive instead of assigning all new items permanently to content only.",
+        "example": "Two textually similar items differ because one has strong audience feedback while the other just launched; a fixed 50:50 mix ignores that."
+      }
+    },
+    "qa/recommendation:gatesid/basics": {
+      "source_sha256": "f70d2a3b87f3f0ba7b03ec1a1811398688b2d6b506b135b8b46c62ee1dd52dba",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use cold-start degree to set semantic and collaborative proportions in GateSID?",
+        "answer": "Content shares knowledge when collaborative feedback is scarce; mature ID behavior should preserve distinctions. A state-conditioned gate avoids one ratio across items but activity is not the only reliability signal and can mislead.",
+        "example": "A new running shoe borrows content, while an established one keeps audience-specific behavior despite similar descriptions."
+      }
+    },
+    "qa/recommendation:gatesid/comparison": {
+      "source_sha256": "87a7e5b2702eed1ea2f50abb3d467f0e9f8863e765ef56763c7ceee707386dde",
+      "reviewed": true,
+      "fields": {
+        "question": "How does gating alignment strength in GateSID differ from mixing final scores?",
+        "answer": "Final blending only changes use of existing representations. Training-time alignment changes how closely the spaces are learned together. Strong alignment can propagate noisy evidence, so conditional gating limits it; the mechanism does not prove gains in all cold-start slices.",
+        "example": "Lowering a new item's ID score at the end may not undo semantic corruption caused by forcing early alignment to a noisy ID."
+      }
+    },
+    "qa/recommendation:gatesid/implementation": {
+      "source_sha256": "c74ab777ca373a00a062c5d0c1b0180188d54104ebd02bc679a7ae3388ac2679",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must GateSID's cold-start features use only pre-cutoff data?",
+        "answer": "Counts and activity set the gate. Test-future interactions reveal later maturity and corrupt the cold-start scenario. Align dimensions before fusion and use real per-example adaptation rather than calling a fixed validation constant adaptive.",
+        "example": "An item that goes viral during test cannot use the week's final click count for an earlier recommendation."
+      }
+    },
+    "qa/recommendation:gear/mechanism": {
+      "source_sha256": "4e0770237bff3e6c68df99efed58b64a969a05af3ca22c44f57754da599f4c9d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does GEAR use a shared orthogonal basis instead of freely updating each code vector?",
+        "answer": "A shared basis constrains codebook geometry and stabilizes relationships as it changes. Hierarchical generation selects coarse-to-fine codes, then context reranks collision groups. Structure neither eliminates collisions nor replaces ranking supervision. Local checks cover quantization, state, and gradients, not full ad retrieval.",
+        "example": "Update codes within one coordinate system, but still distinguish two ads in the same code with current user context."
+      }
+    }
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:stratified-sparse-attention/mechanism": {
+      "source_sha256": "18f804ccef2fa7aad44b33eaf65496624f01419d1b468314bb506308a5c654ad",
+      "reviewed": true,
+      "fields": {
+        "question": "Why correct by the probability of at least one draw after deduplicating SSA samples?",
+        "answer": "A repeated token appears only once in the set, so inclusion is 1−(1−p)^m rather than single-draw p. Deterministically retained heavy items have inclusion one. The final self-normalized ratio is not strictly unbiased.",
+        "example": "At p=0.2 and two draws, weight one retained row using 0.36, not 0.2."
+      }
+    },
+    "qa/foundation-models:stratified-sparse-attention/basics": {
+      "source_sha256": "fc3230d57eec3573bdd1f4c4cc036f7e1a2bf19df24cefd8f9b5e21e1cd7358d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain heavy entries deterministically and sample the tail?",
+        "answer": "Top-k drops the tail; uniform sampling can waste budget. SSA uses proxy scores to divide deterministic and residual budgets, then corrects by inclusion probability.",
+        "example": "Strong evidence remains while weaker entries have a chance of inclusion."
+      }
+    },
+    "qa/foundation-models:stratified-sparse-attention/comparison": {
+      "source_sha256": "718465ad69a1388e56089ae990ddcd0f827fd5d38faa2ccfc6bc4a657e9ed4a6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not correct deduplicated with-replacement samples by 1/p_i?",
+        "answer": "Each token enters once with π_i=1−(1−p_i)^m. Divide by inclusion, not per-draw probability. The self-normalized numerator/denominator ratio still need not be unbiased.",
+        "example": "A token drawn three times but retained once is not three independent weighted observations."
+      }
+    },
+    "qa/foundation-models:stratified-sparse-attention/implementation": {
+      "source_sha256": "a58102456fe8cf2ca489247af7392cc8f751fc6d664dad2b29c13048842606ac",
+      "reviewed": true,
+      "fields": {
+        "question": "How does SSA compute small inclusion probabilities and test full budget?",
+        "answer": "Use −expm1(m·log1p(−p)) and log-space normalization for stability. Return dense attention explicitly at k=N. Detached discrete allocation is not a gradient path.",
+        "example": "A budget of all keys must match dense output without randomly losing tail tokens."
+      }
+    },
+    "qa/foundation-models:switch-attention/mechanism": {
+      "source_sha256": "04c4980e89fec4976fa59335170be1cd7cc00352acbb3260dadcbff0fdf64b7c",
+      "reviewed": true,
+      "fields": {
+        "question": "Does Switch Attention choose one path per layer or per token?",
+        "answer": "A fine-grained router chooses full or local for each token. Training must account for discrete selection; actual savings depend on global call rate and overhead, and sparsity does not guarantee quality.",
+        "example": "Nearby conjunctions can use local reads, while citing an early name may need global history in the same layer."
+      }
+    },
+    "qa/foundation-models:switch-attention/basics": {
+      "source_sha256": "f78eb2c6cd84f09e80c0b704e5d102f1617ce2e76daddaebeb798b08ab5a3f45",
+      "reviewed": true,
+      "fields": {
+        "question": "What can Switch Attention's local and full paths read?",
+        "answer": "Local reads the visible window; full reads all causal history, never the future. The router trades evidence range and compute per token.",
+        "example": "A nearby phrase may need only local context, while an old fact needs a wider read."
+      }
+    },
+    "qa/foundation-models:switch-attention/comparison": {
+      "source_sha256": "5e2157c51e831a5037a0310951068465e269a920ccebd004b695f0a145159b65",
+      "reviewed": true,
+      "fields": {
+        "question": "How does hard switching differ from continuously mixing both branches?",
+        "answer": "Hard selection can execute only one branch. Continuous mixing generally computes both and weights outputs. Gradients and savings differ; the local soft router is not the paper's STE hard router.",
+        "example": "Multiplying an already computed attention output by nearly zero does not save its execution."
+      }
+    },
+    "qa/foundation-models:switch-attention/implementation": {
+      "source_sha256": "95060a0f4f479bcff80e04ae080a4c3994ce6328fcd46cdf187af6231ea620d8",
+      "reviewed": true,
+      "fields": {
+        "question": "Can the local soft router demonstrate a branch-selective kernel speedup?",
+        "answer": "No. It checks mixing without hard routing, 32K continued pretraining, or fused selective kernels. Verify actual executed branches and runtime separately from gate values.",
+        "example": "A 90% local weight does not prove 90% of global calls were skipped."
+      }
+    },
+    "qa/foundation-models:transmem/mechanism": {
+      "source_sha256": "fdec0ffb52a5149d8e8eff009c21ae80a241007d08122bff7b0bc6fb01b170a6",
+      "reviewed": true,
+      "fields": {
+        "question": "How does parameter memory from hidden states differ from retaining original history?",
+        "answer": "TransMem converts sparse states from a frozen backbone to reusable gated deltas. It avoids re-reading the same original tokens but trades reuse for detail lost in selection/compression. Learned gating does not retrain the backbone per history.",
+        "example": "A compressed document can support later queries without recovering an omitted exact ID."
+      }
+    },
+    "qa/foundation-models:transmem/basics": {
+      "source_sha256": "1fb9dffc78896bc122a318ad8d19261557f375d5dedf5def54af411b4b5e31d0",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a frozen TransMem backbone mean nothing learns?",
+        "answer": "No. The backbone stays fixed but evidence-conditioned self-distillation trains memory gating. Changing memory is not updating backbone weights.",
+        "example": "A new branch can learn when to inject history into the current state."
+      }
+    },
+    "qa/foundation-models:transmem/comparison": {
+      "source_sha256": "ab5e5a9f31cc9236c1e418e0df9f1a69a50612f783597f5b40458c200c6d4e59",
+      "reviewed": true,
+      "fields": {
+        "question": "How does parameter memory differ from appending old text?",
+        "answer": "T(H_sparse) transforms selected states into hidden-state updates, while text concatenation re-reads original tokens. This changes storage and fusion, and omitted detail may be lost.",
+        "example": "Keeping a fact representation does not reproduce every omitted word."
+      }
+    },
+    "qa/foundation-models:transmem/implementation": {
+      "source_sha256": "c7a88bae809b44f705eaa961f995062ee0e450d5b2f23ec75ea3403069de5e55",
+      "reviewed": true,
+      "fields": {
+        "question": "Should TransMem replace the original hidden state?",
+        "answer": "No. h′=h+g⊙T(H_sparse) preserves the main path. Keep selection, transformation, and gated injection distinct. The mini-suite is not paper-scale training.",
+        "example": "With g=0, output is h rather than zero."
+      }
+    },
+    "qa/foundation-models:triadic-linear-attention/mechanism": {
+      "source_sha256": "c6a423a2e5c3536d9dadd071b8b24d3f369d39c36f5aa2fa1915854ddb611d2c",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a second key change Triadic Linear Attention?",
+        "answer": "It adds an independently addressed key axis to ordinary key–value state and contracts with two queries. Capacity grows with that dimension, not for free. E=1 should recover ordinary linear attention.",
+        "example": "A person's value can depend on the scene as a second address, at the cost of a larger joint state."
+      }
+    },
+    "qa/foundation-models:triadic-linear-attention/basics": {
+      "source_sha256": "7cda4e190d7afaab85bbe9a1a10c3aa62f7651013da09bc228015cb048a98a3f",
+      "reviewed": true,
+      "fields": {
+        "question": "Is linear-attention state a history list or accumulated associative memory?",
+        "answer": "It accumulates key/value outer products into a matrix queried by contraction. Triadic adds another key axis, not a raw per-token KV list.",
+        "example": "Multiple writes combine in a table with an added address dimension."
+      }
+    },
+    "qa/foundation-models:triadic-linear-attention/comparison": {
+      "source_sha256": "5ebb8df14041ace83c9f8fd2299751a3c789e0c1ba719c4848af9942bee25ccc",
+      "reviewed": true,
+      "fields": {
+        "question": "How is a second key axis different from widening values?",
+        "answer": "Dimension E increases state capacity by E and enables an independent query contraction. Wider values add output content but not dual-key addressing.",
+        "example": "Adding more fields to records is different from adding a search key."
+      }
+    },
+    "qa/foundation-models:triadic-linear-attention/implementation": {
+      "source_sha256": "29cc5d6c6f7a11b33006a77cec7298c96a865f3102e1a750037c35462da8389f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why test the E=1 limit instead of merely checking forward execution?",
+        "answer": "It must exactly reduce to ordinary linear attention, testing construction and contraction of the extra axis. Also compare explicit history sums, causality, and gradients; this is not long-book language quality.",
+        "example": "Remove the second key's freedom and match the same-input two-dimensional reference."
+      }
+    },
+    "qa/foundation-models:ttcd/mechanism": {
+      "source_sha256": "fc7a01937d97e8eec4b1f7c2ce4ab386fbd0570bc7ebdf61072ff0a3a5f317de",
+      "reviewed": true,
+      "fields": {
+        "question": "What does a short-window TTCD student learn beyond final answers?",
+        "answer": "Long-window teacher hidden states supervise fast weights to retain context useful for future predictions. The student must select information under finite memory, not uniformly preserve every token. State distillation is not lossless.",
+        "example": "Store an early variable definition in fast weights to match later teacher state, rather than memorizing one answer."
+      }
+    },
+    "qa/foundation-models:ttcd/basics": {
+      "source_sha256": "e6c4bc84545b122ed451a362da6e2767a9b1ff41f7e5a21563fdc5afc96c2ac7",
+      "reviewed": true,
+      "fields": {
+        "question": "What information differs between teacher and student?",
+        "answer": "Teacher sees longer history, while student relies on its window or fast weights. Hidden-state targets teach retention without giving deployed students full history.",
+        "example": "A teacher reads background; deployment still uses finite learned memory."
+      }
+    },
+    "qa/foundation-models:ttcd/comparison": {
+      "source_sha256": "79692002aaac98f8680a44b7d8f3e227064cbcf11114b60c015c53017fa01716",
+      "reviewed": true,
+      "fields": {
+        "question": "What does state distillation constrain beyond final token matching?",
+        "answer": "It aligns intermediate teacher and student representations to train memory, not just output probabilities. Supervision location and space differ.",
+        "example": "Two students can predict the same token while retaining different historical information."
+      }
+    },
+    "qa/foundation-models:ttcd/implementation": {
+      "source_sha256": "8ead327bb8b14c4a24e20bc1145ed1c943122b45e94e8b6547c1311b8d9dc775",
+      "reviewed": true,
+      "fields": {
+        "question": "Why align teacher and student positions and representations?",
+        "answer": "Hidden loss compares the same t with compatible dimensions. Offsets or accidental broadcasting optimize the wrong target. Local results are not paper-scale long-context validation.",
+        "example": "Student step 20 aligns to teacher step 20, not the final document state."
+      }
+    },
+    "qa/foundation-models:ttr-compressor/mechanism": {
+      "source_sha256": "8c4fad1f20699fe4445603d39ba5b34d867ed590f8d9198581780ecf8f934414",
+      "reviewed": true,
+      "fields": {
+        "question": "Why normalize TTR keys but preserve target magnitudes?",
+        "answer": "Unit keys group by direction; targets retain token strength. A static projection from the same normalized keys could be fit trivially and lose input-dependent compression. Per-forward coefficients do not update persistent parameters.",
+        "example": "Same-direction tokens of norm one and three have the same key but different targets; normalizing both would erase that distinction."
+      }
+    },
+    "qa/foundation-models:ttr-compressor/basics": {
+      "source_sha256": "9ca6b6fc3d209e24f17116d855a292050a6082282adba37ce3ed227d6f3f8179",
+      "reviewed": true,
+      "fields": {
+        "question": "Does test-time compression retrain model parameters at inference?",
+        "answer": "It solves coefficients anew for each token group. Outer loss learns target projection and regularizer; closed-form per-input fitting does not update those parameters at inference.",
+        "example": "Two inputs share a and ρ but solve different h."
+      }
+    },
+    "qa/foundation-models:ttr-compressor/comparison": {
+      "source_sha256": "10b31c07ebeb815c323340dd88f0e6e61ae3d42b0f00cd3652341f22bffb3bac",
+      "reviewed": true,
+      "fields": {
+        "question": "How does TTR differ from fixed mean pooling?",
+        "answer": "It formulates and exactly solves a group-dependent ridge regression. Differentiating through the solve trains outer parameters; this is a different compression objective, not just new weights.",
+        "example": "Groups with equal means but different directional correlations can yield different coefficients."
+      }
+    },
+    "qa/foundation-models:ttr-compressor/implementation": {
+      "source_sha256": "8ea63c505c4d24df82f25b74bf428f92340e0ddb9eadf9d3b55d148041cb91b4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why solve a T×T token-space system, and why not detach?",
+        "answer": "Scale K by D inverse square root, solve I_T plus the scaled K Gram matrix by Cholesky, then map to d dimensions. The outer loss needs solve gradients for projection and regularization. Complexity retains a cubic T term.",
+        "example": "Token-space is attractive when T≪d but is not always only O(T²d)."
+      }
+    },
+    "qa/foundation-models:adadsf/mechanism": {
+      "source_sha256": "74fe8c22e7c95427857951ec2577b3362672562a12195bdc817dafea522ec95e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why give more compute to AdaDSF layers with lower input/output similarity?",
+        "answer": "Lower cosine suggests a stronger representation transformation. Dense calibration maps layer differences to a globally corrected budget. Layer routers choose tokens and others bypass residually; allocation and alignment training serve different roles.",
+        "example": "With fixed total budget, run the more transformative layer on more tokens instead of uniformly skipping half in each."
+      }
+    }
+  }
+}

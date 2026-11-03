@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:toolformer/implementation": {
+      "source_sha256": "e856b5862f74e72294540e4cbd157933d2ae90f489ea9c1e210989d2cfd74209",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't local utility-loss filtering completed GPT-J continued training?",
+        "answer": "Local loss comes from deterministic utility. It preserves the candidate rule without GPT-J token likelihood, 6.7B training, or five real API classes. Candidate and acceptance counts show filtering ran, not learned timing or paper zero-shot capability.",
+        "example": "Example: A preset useful tool lowering rule-based loss verifies screening, not discovery of tool value in real training text."
+      }
+    },
+    "qa/agent-research:pal/mechanism": {
+      "source_sha256": "a4e0f8a7ca3ca9bcc2d18e8671390cee9cc31d3943872922d4b1378e241a64f5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can PAL still answer incorrectly after delegating arithmetic to Python?",
+        "answer": "A deterministic runtime executes the given program, not the intended problem. The model still represents variables, relations, and control flow. Wrong units or discount order yield precisely wrong results. PAL reduces arithmetic errors without eliminating modeling mistakes.",
+        "example": "Example: The task discounts the subtotal before shipping, but code discounts both. Execution is correct for the wrong formula."
+      }
+    },
+    "qa/agent-research:pal/basics": {
+      "source_sha256": "8fb6dfc08044a9f89011fa67e777c68110b8c24a853a58b87559105389b7a8d4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does PAL generate programs and leave calculation to an interpreter?",
+        "answer": "Word problems require both interpreting relationships and exact computation. Models turn interpretation into runnable code and the interpreter handles arithmetic. This reduces manual calculation burden, assuming the program captures the task. Execution cannot detect omitted conditions.",
+        "example": "Example: Assign people and prices to variables, but forgetting a half-price child means accurate execution of an incorrect total."
+      }
+    },
+    "qa/agent-research:pal/comparison": {
+      "source_sha256": "6dfe367a0c0a3ae000578762832f65b45f332ae9f0c6aa7a500048995a02b0eb",
+      "reviewed": true,
+      "fields": {
+        "question": "How do error sources differ in PAL and manual chain-of-thought arithmetic?",
+        "answer": "CoT handles understanding, steps, and arithmetic together. PAL gives exact arithmetic to programs, reducing numerical mistakes but introducing code and interface errors. Inspect intermediates and verify inputs and formulas. Determinism alone cannot predict accuracy or cost.",
+        "example": "Example: An interpreter avoids multiplication mistakes, but treating a tax rate as a monetary amount remains a modeling error."
+      }
+    },
+    "qa/agent-research:pal/implementation": {
+      "source_sha256": "2f6b877507282ddc286059a1ba090d061fc35572f11d24a253be8c98e2598d2a",
+      "reviewed": true,
+      "fields": {
+        "question": "Is the local CALL/RETURN intermediate representation arbitrary Python execution?",
+        "answer": "No. A controlled interpreter verifies program construction and execution separation without Codex or paper GSM8K. Narrow actions help check contracts but do not establish open Python synthesis or a general security sandbox.",
+        "example": "Example: Predefined CALL nodes do not cover arbitrary loops, files, or external dependencies in a real runtime."
+      }
+    },
+    "qa/agent-research:mrkl/mechanism": {
+      "source_sha256": "39e9145c96298b643f68acd26507c0109282cc5b683d7da67c053ba0c527b277",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't routing to deterministic modules guarantee a correct system answer?",
+        "answer": "Calculators and databases are reliable only within their contracts. Routers may choose the wrong module or inputs, and language synthesis can misread outputs. MRKL separates precise capabilities from generation. Local determinism and end-to-end correctness are different guarantees.",
+        "example": "Example: A calculator receives an incorrect tax rate. Its result is precise and reproducible but wrong for the user."
+      }
+    },
+    "qa/agent-research:mrkl/basics": {
+      "source_sha256": "665f64705dca0422d7d8db8ccbd2b0f9c10ac1e68b440e4658e7671ac5fa81bb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does MRKL combine an LLM with several external experts?",
+        "answer": "Open questions can need language understanding, precise calculation, database access, or specialized knowledge. The LLM routes work and integrates results. Modularity separates capability sources but introduces routing and interface risks. One reliable module does not make the whole system reliable.",
+        "example": "Example: Fetch a balance from a database, calculate the difference, then explain it. Querying the wrong account invalidates even exact arithmetic."
+      }
+    },
+    "qa/agent-research:mrkl/comparison": {
+      "source_sha256": "6dbdcc470db77afc93c5937081725d14666a4deab4ee092533a4fcc5eacea4b4",
+      "reviewed": true,
+      "fields": {
+        "question": "What do modular experts trade off against one LLM doing everything?",
+        "answer": "Experts can improve control of exact computation or fresh knowledge. One LLM has simpler interfaces but can rely on stale internal guesses. Routing, conversions, and errors add modular costs and depend on expert coverage. A calculator does not confer provable whole-system correctness.",
+        "example": "Example: A calendar computes the date difference; explaining why something was delayed still needs language and evidence."
+      }
+    },
+    "qa/agent-research:mrkl/implementation": {
+      "source_sha256": "f149c40cee7906e2d7290c377b84c24e82ba036d4f57fab721ac80e03934facb",
+      "reviewed": true,
+      "fields": {
+        "question": "Do local specialist call counts include Jurassic-X or a real knowledge base?",
+        "answer": "No. Deterministic calculator and calendar specialists test routing and counts without Jurassic-X, search, or private databases. Proxy cost is not online latency. Symbolic call counts do not establish open QA or fresh knowledge quality.",
+        "example": "Example: A fixture database record tests scheduling, not real permissions, failures, or data updates."
+      }
+    },
+    "qa/agent-research:saycan/mechanism": {
+      "source_sha256": "664c24d4fff6d47315564587fb6003313f0688a91757f97f9a98fa5248ad9470",
+      "reviewed": true,
+      "fields": {
+        "question": "Why multiply language relevance by affordance to filter plausible but impossible actions?",
+        "answer": "Language scoring measures fit to instructions and history; the value function estimates execution success in the current world. Both need to be high. Language alone can suggest unreachable objects, and feasibility alone can pick irrelevant skills. Coverage and value estimates still limit selection.",
+        "example": "Example: A cup in a locked cabinet is relevant but not directly graspable. Opening the cabinet first can score better."
+      }
+    },
+    "qa/agent-research:saycan/basics": {
+      "source_sha256": "82b855a6f459342c373f80b6561a2e96c3bc99927b43502a97c65769ec18b9d1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't a robot directly execute a plausible language-model plan?",
+        "answer": "Language reasoning may not know robot position, skill limits, or physical conditions. SayCan connects task meaning to affordance, selecting related and feasible next steps. Feasibility estimates can err, so report simulated plans separately from real completion.",
+        "example": "Example: Getting a cup is semantically right for a drink request, but the robot may need an executable approach step if it cannot reach the cup."
+      }
+    },
+    "qa/agent-research:saycan/comparison": {
+      "source_sha256": "e848f6199a88b839f60ff0476f18bbc1dfbad1cc06abc93dcde81ae650bf5579",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are plan success and execution success different robot metrics?",
+        "answer": "A sound plan can fail through perception, grasp, or control errors. Execution includes physical risk. SayCan reports both; higher planning rates are not completion rates. A deterministic local gate does not cover real control failures.",
+        "example": "Example: Picking up a cup and placing it on a table is a valid plan. A slipping gripper still makes execution fail."
+      }
+    },
+    "qa/agent-research:saycan/implementation": {
+      "source_sha256": "7bc34a9d1ef44a13e09000fa9857230392c420c6682b9fc61934d6115cc5efe5",
+      "reviewed": true,
+      "fields": {
+        "question": "Do local affordance checks validate real value-function training?",
+        "answer": "No. Deterministic feasibility filters required and distractor skills while preserving two-score step selection. No vision, robot policy, or value network was trained. Check counts show execution paths, not calibrated success predictions or physical task results.",
+        "example": "Example: A rule can block grasping with a full hand without estimating reachability from images or grasp probability."
+      }
+    },
+    "qa/agent-research:webgpt/mechanism": {
+      "source_sha256": "71130ce55a53ac2a79c288299295b538822a625068b4b67bd7e5ad210c40e173",
+      "reviewed": true,
+      "fields": {
+        "question": "Why rank citation-bearing browsing trajectories by human preference instead of simply requiring links?",
+        "answer": "A URL does not guarantee support or answer quality. Behavior cloning learns browser actions, then preference reward selects better trajectories. Citations are checkable entry points, but selective quoting or unvisited sources are not reliable and must map to claims.",
+        "example": "Example: Two answers cite the same article; one reports the date correctly and one overstates its conclusion. Link counts cannot distinguish them."
+      }
+    },
+    "qa/agent-research:webgpt/basics": {
+      "source_sha256": "c4d2ff7c8be4cc2b0391ca1b8342efc9122f1b3f9e3bd3ebb412d77cb646c72c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does WebGPT include browsing and source support in long-form QA rather than rely on memory?",
+        "answer": "Open questions can need current facts and multiple sources. Browsing collects evidence for cited answers, and human feedback rates quality. Retrieved text still needs interpretation. Citation count neither proves support for individual claims nor covers all material facts.",
+        "example": "Example: Comparing two policies requires both primary descriptions. One related link cannot support every figure in the paragraph."
+      }
+    },
+    "qa/agent-research:webgpt/comparison": {
+      "source_sha256": "80b094053bfda9858070b63fa0cb1df5ac42a85441c595696da988d93cfbdfe5",
+      "reviewed": true,
+      "fields": {
+        "question": "What roles do behavior cloning and human-preference rejection sampling play?",
+        "answer": "Cloning learns search, browsing, and answering from demonstrations. A preference model ranks and selects among candidate trajectories. Selection does not create facts, and can incur judge bias and sampling cost. Best-of-64 is not a single-call efficiency comparison.",
+        "example": "Example: Choosing one of 64 responses may improve preference scores while paying for multiple browsing and generation runs."
+      }
+    }
+  }
+}

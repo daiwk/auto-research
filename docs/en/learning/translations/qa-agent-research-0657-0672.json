@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:frontier-opd/implementation": {
+      "source_sha256": "b1c53bbb499155c9d32b256e4602570d5f6b60081a2ad30954456cae85c1a129",
+      "reviewed": true,
+      "fields": {
+        "question": "How are windows compared when the bridge is shorter than K, and can its continuation enter training?",
+        "answer": "Compare equal windows of actual bridge length plus H. Require valid replay, nonterminal handoff, and complete continuation; accept bridge responses only when agreement does not decrease. Student continuation used for validation cannot enter training, and retain repeated responses separately. The local path is only the L1 numeric protocol, without the trainer or full experience pool.",
+        "example": "If K caps the bridge at two turns but the teacher uses one, compare windows of one plus H. Do not use a longer historical window or train on the validation continuation as teacher demonstration."
+      }
+    },
+    "qa/agent-research:asteroid/mechanism": {
+      "source_sha256": "fb96d3ef9d71aeca4dad5276cdbcff8f6f72884731e5478f607e17d8c521da1d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why let the student explore before learning the expert's full successful trajectory for the same hidden task?",
+        "answer": "An expert knows the hidden goal, so a direct success omits the context of continuing after mistakes. Condition expert-action prediction on the student's actual history, teaching task inference from observations and rewards. The hidden goal stays unavailable during deployment, and student exploration actions are not automatically correct labels.",
+        "example": "After the student searches two wrong rooms, the expert's success on the same task can teach how to narrow the search from that history rather than merely memorize a direct opening."
+      }
+    },
+    "qa/agent-research:asteroid/basics": {
+      "source_sha256": "b33a02f03c55eb752be1cb5fc133625da7171529a865247327b76d7bea2dea4e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why might imitating expert successes be insufficient in a hidden-task environment?",
+        "answer": "The student tries imperfect actions and encounters information and states absent from smooth expert paths. ASTEROID combines student exploration with expert success to cover actual uncertainty. Exploration uses visible interaction, and expert training information remains isolated rather than exposing hidden tasks or solutions during evaluation.",
+        "example": "The expert takes the right path immediately, while the student tries the wrong door first. Learning only the expert's opening does not show the student how to use observed failure information."
+      }
+    },
+    "qa/agent-research:asteroid/comparison": {
+      "source_sha256": "c597a28c967873a91a687d2017845290a6512fb56ad0219ea13b8a477e1ed46c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why shouldn't cross-episode BAMDP conditioning and generic POMDP takeover be reduced to single-step DAgger?",
+        "answer": "A fixed-latent BAMDP accumulates task knowledge across episodes and pairs it with an expert episode on the same task. A generic POMDP hands over at an intermediate student state. Complete expert traces and context are defining; a single current-action label discards them. Deployment cannot keep invoking a latent-aware expert.",
+        "example": "If the hidden door stays the same across three attempts, first-round failure informs the next. If the door changes each round, the same cross-episode history no longer conveys that knowledge."
+      }
+    },
+    "qa/agent-research:asteroid/implementation": {
+      "source_sha256": "4fb48dd59d4007c1e4ac78586b820a3aa66eb8f60a0f1941f7adcc36e4c6c433",
+      "reviewed": true,
+      "fields": {
+        "question": "How does the local single-step three-door diagnostic preserve complete expert trajectories, and what are its limits?",
+        "answer": "Each door choice is a complete one-step episode, so expert length one reflects the environment rather than general simplification of a multistep method. A real small Transformer is supervised only on the terminal expert query, not student-history actions. Deployment starts with empty history and no expert; there is no general POMDP or robotics comparison.",
+        "example": "An incorrect student attempt stays in context, but loss does not train it to repeat the error. The correct expert action is stored separately as the training target."
+      }
+    },
+    "qa/agent-research:rsipo/mechanism": {
+      "source_sha256": "0f1ebc6ad896d67c9165ac49536a324bf2a8fd08862ff0db17f6e74039547b37",
+      "reviewed": true,
+      "fields": {
+        "question": "Why shrink estimated skill gains by reliability before setting skill-enhanced teacher distillation weights?",
+        "answer": "Some skills are useless or worse than the student, so equal trust can transfer regressions. Independent controls and same-start replay estimate utility differences. Shrink noisy estimates toward the group mean and use more reliable gains to adjust distillation trust. Skill reward and shrinkage-based trust have distinct roles; invalid replay is not paired evidence.",
+        "example": "One lucky successful trial merits shrinkage because the gain is uncertain. A skill that works repeatedly in same-start controls can receive more distillation weight."
+      }
+    },
+    "qa/agent-research:rsipo/basics": {
+      "source_sha256": "c82b860e12bcdf1b0f495d32a930a385ebe97ddb5b990d8d89b51b19349595f4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does RSIPO update old skills as the policy improves?",
+        "answer": "Older skills reflect older policies and can become redundant, obsolete, or worse than direct solving by the current student. RSIPO forms skills from current trajectories and tests same-start gains, allowing skills and policy to co-evolve. Assistance is not inherently beneficial; keep independent controls and do not include original answers in evaluation input.",
+        "example": "An early skill uses a long search while the current policy finds evidence directly. Re-measure instead of forcing an older, potentially slower skill."
+      }
+    },
+    "qa/agent-research:rsipo/comparison": {
+      "source_sha256": "121651992de5379071394b9521d1f8866f4dfea64e2039959dcc8d2e354de4a5",
+      "reviewed": true,
+      "fields": {
+        "question": "How does dynamic skill–policy co-updating differ from a fixed offline skill library in freshness?",
+        "answer": "A fixed library stabilizes retrieval conditions but preserves experience from old policies and tasks. Co-updating builds skills from current trajectories and tests benefits with independent controls and same-start replay, tracking changing ability. It adds nonstationarity and evaluation cost. Update counts are not benefit or evidence of a reliable teacher.",
+        "example": "After a policy learns a shorter evidence path, a new skill can reflect it. A fixed old library may continue recommending the obsolete path."
+      }
+    },
+    "qa/agent-research:rsipo/implementation": {
+      "source_sha256": "2f38fd1d86205c5e35bf871aaf24d9f20f9735999740bf4a8a453b607d098ef4",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local project have an RSIPO adapter, real skill replay, and policy training?",
+        "answer": "No. It records the specification and cost decision only, with no paper adapter, metrics, or GPU pass. An implementation must preserve current-policy skills, valid same-start replay, independent controls, and training/test separation. Another skill operator or fixed rule cannot substitute for full RSIPO or Evolve integration.",
+        "example": "A working GRPO trainer does not establish skill utility estimation or reliability-weighted OPSD. Without those, the algorithm is not implemented."
+      }
+    },
+    "qa/agent-research:evo2/mechanism": {
+      "source_sha256": "75c19359ac7422537d7c9b35105c28c37f3bb75acb62fec013ba7287d6dd4fa5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does training the Proposer and Reflector with a frozen executor improve the evolver itself?",
+        "answer": "The task model stays fixed, but parameters of the policies that propose and repair harnesses change. Effective edit trajectories provide training signals for both roles. Improvement targets how harnesses are changed, not just the candidates. Keep actions still earn zero; unchanged proposals are not successful innovations.",
+        "example": "The same executor handles tasks, but the trained proposer chooses better log compression and the reflector fixes bad hooks. The gain comes from changing the improvement process."
+      }
+    },
+    "qa/agent-research:evo2/basics": {
+      "source_sha256": "fb70087b6ea79e1b103e8cd47245c3d46d758809aa5faea9764dfbae1e6fcd80",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Evo2 want proposal and reflection abilities to learn from search experience?",
+        "answer": "A fixed evolver repeats the same proposal habits and may persist with low-value or invalid changes. Evo2 trains generation and reflection from search experience while freezing the task executor to clarify what updates. New search versions do not mean the base executor trained, and benefits still require independent execution evaluation.",
+        "example": "Train a proposer to learn from repeated invalid structures without necessarily changing the weights of the model that executes the tasks."
+      }
+    },
+    "qa/agent-research:evo2/comparison": {
+      "source_sha256": "b9cd7f702fb76d13c4b242906a64be520073069fa42dc1cca90f6651cd6c7d63",
+      "reviewed": true,
+      "fields": {
+        "question": "How does tree-parent weight ε+|V−1/2| differ from favoring only high-success nodes?",
+        "answer": "It favors values far from the midpoint and retains a fixed root sampling share. This allocates search rather than monotonically choosing higher scores. Cross-branch crossover and the reflector also produce new harnesses; greedy champion-only search is not equivalent.",
+        "example": "V=0 and V=1 are both farther from the center than V=1/2, so parents are not selected simply in descending success-rate order."
+      }
+    },
+    "qa/agent-research:evo2/implementation": {
+      "source_sha256": "66ccee8ad91d8487207aa5b31010dda1556dd17efe7e9dc955d04c3c9ce80991",
+      "reviewed": true,
+      "fields": {
+        "question": "How are keep rewards, role advantages, and truncated tokens handled in the loss?",
+        "answer": "Keep earns zero. For each role, subtract the group mean reward. Normalize token loss by fixed Lmax and mask truncated outputs so length does not alter training scale. The real local path has specific environment and resource limits: a 7B policy/executor plus frozen copies is not presumed to fit A30 or constitute the full paper benchmark.",
+        "example": "Do not supervise an incomplete truncated tail as a correct edit. Averaging by the shorter actual length would also alter the original training weight."
+      }
+    },
+    "qa/agent-research:race/mechanism": {
+      "source_sha256": "2608a9612635f6c50a2f034d1bf4f0247a2dbf6c4c0aded10c3b978fc700d49f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check likelihood changes for all later original actions when deleting a turn's reasoning?",
+        "answer": "An unchanged immediate action does not show earlier reasoning is irrelevant to later planning. After tentative deletion, evaluate later actions in the affected context and proceed only if changes stay within tolerance. Accepted deletions persist for later compression. Checking only the current turn misses long-range dependencies, and removed token counts are not task success.",
+        "example": "Reasoning may record a safety restriction while the current action only reads a file. A later deletion relies on that restriction, so a current-turn-only check can wrongly remove critical reasoning."
+      }
+    },
+    "qa/agent-research:race/basics": {
+      "source_sha256": "21aa0d9a60c97e8d92cde41d2f2d8aa546428c9e01cfa89810e4245286f6b31b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does RACE remove reasoning that does not help an agent's trajectory?",
+        "answer": "Long-horizon agents generate much reasoning that repeats information or does not affect later actions, yet adds training and inference load. RACE reduces redundancy while preserving behavioral support. Shorter is not inherently better: deletion can remove needed context, so check downstream effects rather than using word count alone.",
+        "example": "Repeating a goal without changing later choices may be redundant. A brief note with a critical path cannot be removed just because it is short."
+      }
+    },
+    "qa/agent-research:race/comparison": {
+      "source_sha256": "caee56cc0cf95ce0161ae7052889acb74732eaf6aa5808bfac69434e8c3e6341",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a reasoning loss mask differ from actually deleting training context?",
+        "answer": "A mask removes supervision for deemed-removable tokens, while other actions train under prescribed conditions. Deleting context directly changes later prediction distributions. RACE also supervises early closing and keeps denominators for all original policy tokens and turns; rescaling by amount removed would silently change the objective.",
+        "example": "If half the reasoning supervision is removed, still normalize by original token count to avoid inadvertently doubling the weight of remaining actions."
+      }
+    }
+  }
+}

@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:trajectory-learnability/basics": {
+      "source_sha256": "8c1523069bfb96072b65c6491b6226397c37bca1ac37f5ab95812e026391850c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't trajectory learnability just success reward?",
+        "answer": "Success describes outcome, whereas current student mastery determines learning value. Token likelihood changes between successful reference and current policy reweight offline traces for remaining opportunity.",
+        "example": "Two correct solutions can differ because student already knows one and misses the other's key step."
+      }
+    },
+    "qa/post-training:trajectory-learnability/comparison": {
+      "source_sha256": "678c66a7c81bbf89e0fb642b16344a480dd758d4a1f978e4c004b80f6cfaba7d",
+      "reviewed": true,
+      "fields": {
+        "question": "How does offline reweighting differ from collecting fresh on-policy data?",
+        "answer": "Weight allocates budget inside existing coverage. New sampling reaches new states. OPD in the name doesn't make replay current-policy generation.",
+        "example": "Reweighting a cache cannot create an absent solution."
+      }
+    },
+    "qa/post-training:trajectory-learnability/implementation": {
+      "source_sha256": "c620de838db121676e500e593c2a8d484eb0845c8515b823a67eb6332a874f38",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local learnability aggregation include full GPU training?",
+        "answer": "No. It implements token aggregation and trajectory weighting. Score identical text/prefix under both versions and record them; don't subtract different responses.",
+        "example": "Old model scoring A and current model scoring B confounds text change."
+      }
+    },
+    "qa/post-training:trajectory-learnability/mechanism": {
+      "source_sha256": "1223ddef886283353f08ca71c4353f8c136be6d5eb9fb8d8c9bbe77b3794cbc3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compare token likelihoods rather than rank offline traces by reward?",
+        "answer": "Success alone doesn't locate learning opportunities. Train reference on successes and compare likelihoods to current policy to estimate learnability. Depends on reference and offline coverage; local kernel only.",
+        "example": "Reweight two correct traces differently when one is mastered and the other has a difficult turning point."
+      }
+    },
+    "qa/post-training:growmtp/basics": {
+      "source_sha256": "b2df094be0553f910ae2c2ab0bb18b9635598cc9a921188c047b8c5d09fe02e7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why grow draft heads during RL in GrowMTP?",
+        "answer": "Main policy evolves, making static drafters stale. Train multi-token heads with rollout acceptance to follow policy. Faster drafting isn't task capability improvement.",
+        "example": "If policy learns new phrasing, drafter should propose it to retain acceptance."
+      }
+    },
+    "qa/post-training:growmtp/comparison": {
+      "source_sha256": "6516ce50c31b382ddfdc1482e5c9e6c217a7c2e4617e0f35cf11613fa9b83d76",
+      "reviewed": true,
+      "fields": {
+        "question": "How does acceptance-depth learning differ from equal future-head supervision?",
+        "answer": "A later head helps only after earlier proposals are accepted. Depth coupling reflects use, unlike equal head contributions. Still verify with target.",
+        "example": "Head three saves a step only if the first two proposals pass."
+      }
+    },
+    "qa/post-training:growmtp/implementation": {
+      "source_sha256": "0cd6fd92a3bd13832df1f8aa35a168ba261afee1f158f8c85246d0cabd52acaf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why decouple GrowMTP gradients, and was speed measured?",
+        "answer": "Keep draft optimization from inadvertently changing main RL objective. Local code tests acceptance-depth loss only, without measured GPU throughput. End-to-end speed needs timing.",
+        "example": "More accurate drafting may also add compute."
+      }
+    },
+    "qa/post-training:growmtp/mechanism": {
+      "source_sha256": "db0ebb752b3e23b3fb8a096b523e00ac8b72e8ab4ba802e7d63dd3cfec8fa4c6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why train by actual accepted depth and detach from backbone gradients?",
+        "answer": "Later drafts only contribute after earlier acceptance, so observed depth reflects use. Decoupling protects reward learning. Hardware and verification costs determine actual speed; local loss isn't acceleration or capability evidence.",
+        "example": "A third draft token isn't as reachable as first, and improving it doesn't prove stronger policy."
+      }
+    },
+    "qa/post-training:stride-opd/basics": {
+      "source_sha256": "788678c0c15d699f9b925c410781cc5eee7ea62cd604a5b5697c31f8731b68c7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why restart STRIDE-OPD from the weakest correct turn?",
+        "answer": "A cached learnable state focuses budget on barely mastered turns rather than regenerating familiar prefix. Correct qualification ensures a valid starting point.",
+        "example": "Retry from a second turn that only just succeeds once the first is stable."
+      }
+    },
+    "qa/post-training:stride-opd/comparison": {
+      "source_sha256": "6f11a1905e19c2899052b0b29d61ea24cb26c049f4971ee8eb5adcb29b27f7b9",
+      "reviewed": true,
+      "fields": {
+        "question": "How does early stopping differ from uniform truncation?",
+        "answer": "Teacher cumulative confidence triggers a state-dependent stop paired with prefix restart. A fixed length limit changes coverage differently; shortness doesn't guarantee completion or savings.",
+        "example": "A solved trace and exploratory trace need not stop at the same token count."
+      }
+    },
+    "qa/post-training:stride-opd/implementation": {
+      "source_sha256": "4f133f8b9f26107a919d849df77cde3b61930293e0feab265a6442307fddc738",
+      "reviewed": true,
+      "fields": {
+        "question": "Can STRIDE restore any environment from cached prefix text?",
+        "answer": "Align cached prefix with executed actions and observations. Text alone may omit environment state. Local state machine isn't LLM rollout throughput.",
+        "example": "Do not duplicate a tool side effect on restore and call it the same state."
+      }
+    },
+    "qa/post-training:stride-opd/mechanism": {
+      "source_sha256": "6adc894ad419187eadde5fb4288ea79785f5782ec6c1a3fc4feb937c8b3a5281",
+      "reviewed": true,
+      "fields": {
+        "question": "Why pair early stopping and restart from weakest correct turn?",
+        "answer": "Teacher cumulative confidence avoids spending on low-value continuations. A weak but correct cached turn reassigns budget to practice. These are distinct choices, not jumps to gold. No real-model throughput validation.",
+        "example": "Stop an uninformative continuation, then retry from an earlier barely successful turn rather than repeatedly replay the familiar beginning."
+      }
+    },
+    "qa/post-training:df-opd/basics": {
+      "source_sha256": "ff03f2bf749acdcd1a0a222852e14b3895e7f24474c8304e49b148546be137b9",
+      "reviewed": true,
+      "fields": {
+        "question": "What dependency does data-free OPD reduce?",
+        "answer": "Teacher-generated prompts reduce collection of a separate post-training problem bank. Teacher knowledge and sampling still provide information.",
+        "example": "Teacher can create exercises without a human bank using existing learned skills."
+      }
+    },
+    "qa/post-training:df-opd/comparison": {
+      "source_sha256": "071ce787df7dbe1b0506435462118fc7c7c5321831e443839876a705a63aa413",
+      "reviewed": true,
+      "fields": {
+        "question": "How does generated curriculum trade off with fixed public tasks?",
+        "answer": "Generated tasks can target teacher skills but repeat or omit topics. Fixed banks have auditable coverage and collection cost. Validate quality; linguistic format isn't task validity.",
+        "example": "A teacher repeating linear equations does not cover geometry automatically."
+      }
+    },
+    "qa/post-training:df-opd/implementation": {
+      "source_sha256": "fc820cebec62e2169d7919a394fc7f08c5ebcaecab8fb1b24bf4c13036208425",
+      "reviewed": true,
+      "fields": {
+        "question": "Has local DF-OPD generated a real natural-language training set?",
+        "answer": "No. Only policy-feature diagnostics for generated questions. Need actual generation, filtering and distillation provenance, not changing candidate indices.",
+        "example": "A feature ID isn't a verified math problem."
+      }
+    },
+    "qa/post-training:df-opd/mechanism": {
+      "source_sha256": "4c239f24769485d77a6d2849ee6435b1ac22e24b571ce9b3574482e06a3efe48",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't self-generated data-free OPD independent of prior knowledge?",
+        "answer": "Teacher parameters, sampling and filters determine curriculum even without a separate task bank. Generated tasks can be repetitive/unreliable. Local diagnostics have not generated a natural-language dataset.",
+        "example": "Generating code exercises avoids human curation but repeated loop problems do not teach omitted concurrency."
+      }
+    },
+    "qa/post-training:locus/basics": {
+      "source_sha256": "0952a1a80e4e7d09e5ad23ea954f1ab0bdb8bdf94ac77632e671e5b0f76cf97e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why constrain LOCUS updates to task-related low rank?",
+        "answer": "Compact directions can improve token efficiency while limiting unrelated drift. If subspace misses key skills, performance can suffer.",
+        "example": "Removing redundant language may not require unrestricted changes to all parameters."
+      }
+    },
+    "qa/post-training:locus/comparison": {
+      "source_sha256": "e5c7d5a9a5ba21692e35707301c236e85fb2fd2d96b56353001f4adda607d132",
+      "reviewed": true,
+      "fields": {
+        "question": "How does low-rank learning differ from truncating output?",
+        "answer": "Train more concise behavior rather than deleting already generated steps. Check correctness alongside length, not shorter alone.",
+        "example": "Omitting repetition and cutting a proof's conclusion both shorten text but differ in quality."
+      }
+    },
+    "qa/post-training:locus/implementation": {
+      "source_sha256": "2f939a8bca0d0b1153b01b5d749dbe48a9434e0bae632fdcf45c8d2569734ddd",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local LOCUS SVD train a real language model?",
+        "answer": "No. It projects policy gradients in a feature subspace. Check rank, orthogonality and gradient paths. A random low-rank matrix isn't learned semantic direction.",
+        "example": "Projection success doesn't establish coverage of core reasoning."
+      }
+    },
+    "qa/post-training:locus/mechanism": {
+      "source_sha256": "dfb8ae0ebe9a5b7904c35cdebb35df1421bcb8f74924bd9f3a5a95b350014d4e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can task-related low-rank updates shorten responses without truncation?",
+        "answer": "Learning operates on parameter directions and aims to preserve task-relevant changes. Truncation deletes content afterward, potentially essential. Validate subspace, correctness and efficiency; proxy SVD isn't LLM evidence.",
+        "example": "Learn to omit redundant checks, not cut the second half of every proof."
+      }
+    },
+    "qa/post-training:adaptive-opd-gate/basics": {
+      "source_sha256": "c7588f28735d5088dd7a41c56cf74be7187387ff8d1a47b9a9154fc9f89ee392",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine multiple signals for adaptive OPD gating?",
+        "answer": "Entropy, uncertainty, reference drift and teacher/student gap capture different conditions. Combine them to allocate per-token forward/reverse KL; signal utility must be validated.",
+        "example": "Teacher confident but far from reference differs from uncertain but close to student."
+      }
+    },
+    "qa/post-training:adaptive-opd-gate/comparison": {
+      "source_sha256": "f143fbc49ccdcaf36616d16e52c195787309257f53126e95be0315383aa6d7fe",
+      "reviewed": true,
+      "fields": {
+        "question": "How does per-token FKL/RKL differ from one ratio per reply?",
+        "answer": "Token gates vary coverage vs concentration by position; fixed mixture applies everywhere. Flexibility increases tuning/overfit risk; diagnostics aren't consistent wins.",
+        "example": "A reasoning branch and predictable format token need not receive the same mix."
+      }
+    },
+    "qa/post-training:adaptive-opd-gate/implementation": {
+      "source_sha256": "c73ca1b7a8aa769533ba443790e265eabfb2cd1c41ddf4b2b91b8f3cfc8dfced",
+      "reviewed": true,
+      "fields": {
+        "question": "Can local four-signal gates qualify for capability promotion?",
+        "answer": "No. Deterministic mechanism tests don't establish full-model effects or fair compute. Specify direction, signal versions and gradients; registry changes are not training.",
+        "example": "One improved small-candidate score doesn't generalize to open language."
+      }
+    },
+    "qa/post-training:adaptive-opd-gate/mechanism": {
+      "source_sha256": "2f96bb835cc3f8387ca3d1ac74a93e94a1021c2c5eb2de5ccf2ee7fbf2004707",
+      "reviewed": true,
+      "fields": {
+        "question": "Why mix FKL and RKL per token rather than select one direction per answer?",
+        "answer": "Uncertainty, gaps and reference drift vary by token. Allocate coverage and concentration accordingly. Gate is a supervision heuristic, not truth, and local tests don't show stable superiority.",
+        "example": "Preserve multiple options at a pivotal branch and use concentrated guidance for settled format."
+      }
+    }
+  }
+}

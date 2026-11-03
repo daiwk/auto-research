@@ -1,0 +1,179 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/multimodal-models/world-state-actions": {
+      "source_sha256": "6ceedc006eb0a6cd13ed31460d3f24625430c558396a1f8783a935bd98b4cc3d",
+      "reviewed": true,
+      "fields": {
+        "title": "Predicting the next scene is not the same as acting or preserving a world",
+        "thesis": "World models must separately show what state retains, how actions alter futures, how plans are evaluated, and how memory persists across segments. LeWAM and V-JEPA Policy connect prediction and actions; prediction–planning evaluation decomposes errors; WOVEN supervises visual transitions; PPMem maintains geometry; VBVR-Pro executes task checks. SWIM learns relative state-coordinate weights from offline action predictability to shape latent distances without giving deployment planners real future states.",
+        "axis_0": "Future latents, actions, visual transitions, or persistent geometry",
+        "axis_1": "Jointly shaped or frozen vision encoders",
+        "axis_2": "Latent loss, physical state error, or actual planning success",
+        "axis_3": "Candidate generation, executable constraints, and cross-view consistency"
+      }
+    },
+    "dive/multimodal-models/world-state-actions/comparison/foundation-models:lewam": {
+      "source_sha256": "894591ab3f6e164c54b4e296315a96f5ac8648691eda573e6b0d383444061f46",
+      "reviewed": true,
+      "fields": {
+        "position": "Jointly train the visual encoder, action-conditioned latent dynamics, and flow-matching policy, with refinement of candidate plans.",
+        "tradeoff": "Control can shape representations but predictions and planning still need separate tests. The scaled A100 closed loop was non-holdout and found no planning advantage."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/comparison/foundation-models:vjepa-policy": {
+      "source_sha256": "c4215482d7da5fcc8da80aca2a5653425807b89e52e312878c5b87a2f399b695",
+      "reviewed": true,
+      "fields": {
+        "position": "Freeze V-JEPA 2.1 vision; jointly train a future latent predictor and action expert conditioned on predicted context.",
+        "tradeoff": "Uses pretrained vision without control gradients changing it. Local work only checks L1 stop-gradient and flow components, not the original model or robot data."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/comparison/foundation-models:jepa-prediction-planning": {
+      "source_sha256": "f6d1a690536a80f17b4b0fd5d2206e7d5b7265d990c842db0ec16a10d99fc039",
+      "reviewed": true,
+      "fields": {
+        "position": "Use one frozen physical decoder on real and predicted latents to separate representation, prediction, and excess error, then evaluate planning independently.",
+        "tradeoff": "One-step errors do not measure long-horizon success. Full multi-environment retraining/MPC was too expensive; CPU results only diagnose interfaces."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/comparison/multimodal-models:woven": {
+      "source_sha256": "6c4238110defc93745e3e82c012c596feea762d586d9675cb4420e5281d50b14",
+      "reviewed": true,
+      "fields": {
+        "position": "Organize actually generated video rollouts as `(s,a,s′)` for forward, inverse, and counterfactual visual transition supervision of an MLLM.",
+        "tradeoff": "Transition fidelity and OOD tasks need independent checks. A small local real-transition SFT ran, but later GRPO did not."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/comparison/foundation-models:ppmem": {
+      "source_sha256": "c61c5d5acb2b44abead3132d1e1bfda9333078f1d1f90a6904d24f18df822ffc",
+      "reviewed": true,
+      "fields": {
+        "position": "Merge local planar primitives into a persistent world-coordinate pool and feed rasterized depth into later video chunks.",
+        "tradeoff": "Geometry compression must address occlusion, deduplication, and cameras. Research documentation only; full video/geometry training was too costly."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/comparison/foundation-models:vbvr-pro": {
+      "source_sha256": "9ab73611ec98babb1a5b7951e9846f901e2d7e6ae75ed901b49a86174d564dfa",
+      "reviewed": true,
+      "fields": {
+        "position": "Use executable task-specific scorers for intermediate and final state and constraint checks, supplying reward to generators.",
+        "tradeoff": "Deterministic rules cover defined tasks only. Local scorers are not trained 14B/19B video models."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/comparison/foundation-models:gui-jepa": {
+      "source_sha256": "e68b3e972448b653b0d0d980ec4759f1afa084acab14ab003fee1206798e48ef",
+      "reviewed": true,
+      "fields": {
+        "position": "Predict candidate-action-conditioned residual successors and score ROI/global structure with a listwise positive loss.",
+        "tradeoff": "Real screen encoding, candidate generation, and environment are external. No GUI benchmark capability result."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/comparison/foundation-models:swim": {
+      "source_sha256": "427097ddcf17fa2281fb45c7234ee202ba19d2fb464338f8b202f4b5f09d57bf",
+      "reviewed": true,
+      "fields": {
+        "position": "Predict fixed recorded action chunks from current state and gated future displacement. Learn gates with NLL, cyclic discrimination, and L1, then calibrate latent distances with `sqrt(g)` weights.",
+        "tradeoff": "Offline behavior labels are not planning inputs. Gates encode relative weights and must not be standardized again. No local visual encoder, SIGReg, environment, CEM, or full training."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/analysis/0": {
+      "source_sha256": "db68d86f889187f92fd5a814031ece2c8c4157acfc81992eb7cc703cb018625b",
+      "reviewed": true,
+      "fields": {
+        "title": "Readable state, predictable futures, and successful action are separate checks",
+        "body": "LeWAM jointly shapes vision with control and prediction; V-JEPA Policy learns prediction/actions on frozen vision. Either way, test if latents retain physical state, how much additional error prediction adds, and whether planning succeeds. A common physical decoder separates the first two; planning is run independently rather than inferred from latent loss."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/analysis/1": {
+      "source_sha256": "2a4e157fb3bb90bfa0bcbc84123bf7a5e017d5d81745f5467f23a08e8c815974",
+      "reviewed": true,
+      "fields": {
+        "title": "Generating plausible transitions and verifying consistency need separate interfaces",
+        "body": "WOVEN supplies generated video transitions whose visible changes must actually supervise learning instead of revealing outcomes in prompts. PPMem preserves geometry across chunks and views; future camera paths do not reveal real future frames. VBVR-Pro checks executable constraints, but a scorer does not train a capable generator. These are data, memory, and verification respectively."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/analysis/2": {
+      "source_sha256": "81f4f50a97f65b2c25e5808208e737623ea799bf4858b936c86ac205cc0ae58f",
+      "reviewed": true,
+      "fields": {
+        "title": "October 29: new method and evidence boundary",
+        "body": "GUI-JEPA predicts residual successors in current screen latents and combines action-specific ROI/global regions and structural cosine scores. This differs from pixel-video supervision and actual GUI execution. The component receives external frozen latents and text matching scores, retains a trained three-layer predictor and head, and does not use positive training labels to choose actions in forward inference."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/analysis/3": {
+      "source_sha256": "15b157e758dd7919da496c6acd3c2b09532e8e74ed504cc40275559a7002ea41",
+      "reviewed": true,
+      "fields": {
+        "title": "Behavior can shape geometry without becoming a future-state oracle",
+        "body": "GUI-JEPA predicts candidate-conditioned latent residuals and learns listwise decision scoring. SWIM uses offline action chunks to learn which state displacements predict those actions, then freezes continuous gates as supervision for latent geometry. Neither latent check establishes execution. SWIM's h changes future-state spacing, not the fixed current action chunk. Inverse dynamics and true future states stay out of planning; coordinate standardization after `sqrt(g)` cancels the weights."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/question/frozen-versus-joint-encoder": {
+      "source_sha256": "34b55ad9150465c452fe2a179f925f4ca911bb9bc1c742fc9295b50270836d97",
+      "reviewed": true,
+      "fields": {
+        "question": "Do LeWAM and V-JEPA Policy differ only in their visual backbone?",
+        "answer": "No. LeWAM jointly updates encoder, dynamics, and policy with online targets; V-JEPA Policy freezes pretrained vision and detaches future targets. Whether control gradients shape vision and whether targets move are different training contracts.",
+        "example": "Grasping supervision can adjust vision in the joint path, while the frozen path mainly changes prediction and action modules."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/question/low-prediction-loss-not-planning": {
+      "source_sha256": "b3db4e680e46afc7497e1dff6c23e680d7e1e91b2df6e49b43e2e86039b991f0",
+      "reviewed": true,
+      "fields": {
+        "question": "Does lower JEPA prediction error show LeWAM candidate planning beats a reactive policy?",
+        "answer": "No. Prediction error mixes latent readability and added dynamics error; plans also depend on action candidates, accumulation, and goals. Decode with the same physical head to separate errors and test planning independently. Local non-holdout LeWAM did not observe an advantage.",
+        "example": "Predicting a static scene accurately does not choose actions that reach a target."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/question/rollout-memory-verifier": {
+      "source_sha256": "eb017ab3796e369145215467f503624842fe21343d2cc01c23da7036078f62fe",
+      "reviewed": true,
+      "fields": {
+        "question": "Which of WOVEN's videos, PPMem's geometry, and VBVR-Pro's scorer guarantees correctness?",
+        "answer": "They serve different roles: action-conditioned transition data, persistent memory, and executable checks. Realistic video does not guarantee a valid transition, stored geometry can err, and scores cover only defined rules. Verify data, state maintenance, and scoring independently.",
+        "example": "Memory may preserve object position at an old viewpoint, but counting and ordering require their own validation."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/question/oct29-method-boundary": {
+      "source_sha256": "54ea6e8ef9a1895313e05da2aea9d1933e2de913eafb557db3221053abd8cc00",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't a GUI-JEPA successor prediction a successful action verified on a phone?",
+        "answer": "A learned latent can omit real state constraints. Success needs environment feedback; small latent forward passes, candidate permutation equivariance, and gradients verify only the module.",
+        "example": "A predicted page vector near the target does not show that a real button was clickable or the request succeeded."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/question/swim-training-future-not-planning-oracle": {
+      "source_sha256": "fa10acd1887000ee3f35753bdfb1ff6f5c6c3679a937b2f03d9fde4a78849e6b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why may neither SWIM nor GUI-JEPA give a real successor state to a deployment policy?",
+        "answer": "`q(t+h)` is offline supervision for SWIM inverse dynamics and gating; only weighted latent geometry transfers to image-based planning. GUI-JEPA likewise predicts rather than observes candidate successors. Real successors would turn the evaluation into an oracle.",
+        "example": "Offline future frames can label displacements, but action selection cannot see those answers. Varying h also does not stretch the fixed five-frame action target across the entire h interval."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/update/2026-10-27/0": {
+      "source_sha256": "1914fa2a2220802161a277c11c9e9cf1236bcd170f9b31ca553ab3c32348139f",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial version: compared joint and frozen vision for action, prediction versus planning tests, WOVEN transitions, PPMem geometry, and VBVR program scores; screened 22 abstracts and read six papers."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/update/2026-10-29/1": {
+      "source_sha256": "380fa128ea2795f06eed8ad1d1315b3a0d4735e6d2348b92c31773c0e5d90fa6",
+      "reviewed": true,
+      "fields": {
+        "summary": "GUI-JEPA predicts action-conditioned residual screen successors and uses ROI/global structural cosine scoring, not pixel generation or a real GUI executor. The component takes external frozen latents and text scores, implements the three-layer predictor and head, and does not use positive training labels to make forward choices."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/update/2026-10-30/2": {
+      "source_sha256": "883551e1a76496279c1af6d335b54a5fd5733f195e45fcbbc5cfd4af48a4968e",
+      "reviewed": true,
+      "fields": {
+        "summary": "Reviewed corrected SWIM: distinguish fixed action chunks from h, use ungated current state, cyclic negatives, real gate gradients, and `sqrt(g)` geometry transfer. Compare GUI-JEPA candidate residuals without exposing future training states to planners."
+      }
+    }
+  }
+}

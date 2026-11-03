@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:dceo/implementation": {
+      "source_sha256": "3594cc43bb5c83ca040ac5db08b6c097f14ce268b69eb062c1ad4e92206d107c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does local DCEO run the held-out test only once for the validation champion?",
+        "answer": "`causal_gain` and temperature define 20 candidate configurations evaluated only on fixed validation utility. Test only the selected champion to avoid using test variation as search feedback. Public proxy scores and the method's causal name are not evidence of real intervention effects.",
+        "example": "Testing all 20 and taking the highest converts test into validation. Lock the champion first and report any NDCG regression honestly."
+      }
+    },
+    "qa/recommendation:dcn-v2/mechanism": {
+      "source_sha256": "2a2ce689daa028893ad476475a0cd8e8ed0c67cad0455d12aeff56d1d121f08a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does each DCN-V2 cross layer multiply the current transform by the original input x₀?",
+        "answer": "The original anchor creates traceable higher-order combinations as depth increases instead of relying solely on implicit MLP interactions. Matrix crosses increase expressivity; low-rank factors and expert gating control cost. Compression can reduce capacity and must be tested with the deep path.",
+        "example": "Cross user and category first, then multiply by the original time feature to form a third-order interaction."
+      }
+    },
+    "qa/recommendation:dcn-v2/basics": {
+      "source_sha256": "ca4b2bf950a89b13a3bc198ec8bfbbe9b35ebb9e4ee350693702b304a0e9a1ef",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does depth control the order of explicit crosses in DCN-V2?",
+        "answer": "Each layer elementwise multiplies a transform of current state by the original input, building higher orders while residuals retain lower ones. This gives traceable polynomial interaction paths, unlike generic MLP fitting. Rank, width, and training still constrain effective expressivity.",
+        "example": "A user age–category interaction can gain another original feature at the next layer without losing its lower-order residual."
+      }
+    },
+    "qa/recommendation:dcn-v2/comparison": {
+      "source_sha256": "4dcf5a19cf7483458f999416aba9ec60ee709858a353b684d4c5a9f1257ec7fb",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the capacity-compute trade-off between DCN-V2 low-rank expert mixing and a full cross matrix?",
+        "answer": "U and V factor the large matrix through a smaller subspace. Multiple gated experts add input-dependent flexibility but also storage and routing. A single low-rank expert limits representable directions; parameter savings do not imply equal end-to-end latency savings because embeddings and other modules still cost time.",
+        "example": "Project thousands of dimensions to dozens and back, with separate expert crosses. Too little rank can lose rare, important relationships."
+      }
+    },
+    "qa/recommendation:dcn-v2/implementation": {
+      "source_sha256": "69b4ac32f6abaa9b40624ca8aa0545a8f7ea503110efc5e8acb6b04bd8bc1c92",
+      "reviewed": true,
+      "fields": {
+        "question": "Which layers provide x0 and xl in DCN-V2?",
+        "answer": "x0 is always the cross stack's original input and xl its current state; replacing x0 with xl changes the cross. Map each low-rank expert back to original width before multiplication and normalize gates over experts. Matching residual shapes does not verify the operator.",
+        "example": "Layer two still multiplies the original user and item vectors rather than squaring the previous state, despite matching shapes."
+      }
+    },
+    "qa/recommendation:deepfm/mechanism": {
+      "source_sha256": "117060c66aff1d9bffe28f0658c65604a85e823f5f1dfd1e3ad3b85ada8344e2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do DeepFM's FM and DNN share field embeddings?",
+        "answer": "FM explicitly models first- and second-order terms and the DNN learns higher-order nonlinear interactions. Shared field semantics reduce duplicated parameters and manual crosses and let both paths train the embeddings. Their coupled gradients need not be conflict-free.",
+        "example": "FM learns occupation–category pairs, while DNN combines occupation, category, and price; both update the same field vectors."
+      }
+    },
+    "qa/recommendation:deepfm/basics": {
+      "source_sha256": "c38aba58e884424bbd377c9eac24c491da375fd2fd42e222e21d01846700c5e2",
+      "reviewed": true,
+      "fields": {
+        "question": "What do DeepFM's first-order, second-order, and DNN outputs contribute?",
+        "answer": "First-order terms give individual effects, FM vector products capture pairs, and the DNN learns richer nonlinear interactions. They meet in one click logit with shared embeddings; orders can overlap and probabilities should not be added.",
+        "example": "A city effect, a city–category pair, and a more complex price/time condition all contribute to the same logit."
+      }
+    },
+    "qa/recommendation:deepfm/comparison": {
+      "source_sha256": "0a2e7283156f257d96f4755787544bef932dddb4463d9c8d48a4786e23b0ec49",
+      "reviewed": true,
+      "fields": {
+        "question": "How do DeepFM's engineering assumptions differ from hand-crossed Wide & Deep?",
+        "answer": "FM learns pairwise relations from vector inner products and shares fields with the deep path, reducing manual crosses. Explicit crosses offer exact rules but cost coverage and maintenance. Embedding limits remain, as do field design and governance.",
+        "example": "FM can learn city–category effects without one column per pair, but an illegal business combination still needs an explicit constraint."
+      }
+    },
+    "qa/recommendation:deepfm/implementation": {
+      "source_sha256": "b7921d38eacf8ab5eec9e5c4a253b1817e0253cd01cf440a1d6474c53e40ac4b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why sum only i<j in DeepFM's second-order term?",
+        "answer": "FM models distinct feature pairs. Self-products add squares and counting both orders changes scale. Efficient computation uses half the difference between the square of the sum and the sum of squares. The FM and DNN must share parameters, not copies with the same initial values.",
+        "example": "Count age–category once, not age–age. Copies of vectors would diverge once the two paths train."
+      }
+    },
+    "qa/recommendation:degr/mechanism": {
+      "source_sha256": "9c2aba53812c00856d93ed11617267c0d51bbce0a7a072f2c566daf90fd90012",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does DEGR constrain same-cohort representations and adapt preference update strength to exploration reward?",
+        "answer": "High per-request scores can still expose similar items repeatedly across requests. Representation regularization reduces directional overlap, adaptive preference updates avoid reinforcing exploration without gains, and inference diversity selection acts on the final list. Spread vectors do not guarantee perceived diversity; measure relevance and exploration feedback.",
+        "example": "Similar shoes may dominate successive sensible lists. Spread candidate directions and separately verify that a new category provides worthwhile exploration."
+      }
+    },
+    "qa/recommendation:degr/basics": {
+      "source_sha256": "68f4f615464fa30c12476121f15c117674e35ff935d556e5e6ab8de1475908e3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why feed exploration feedback into DEGR's generator rather than just inserting random items at the end?",
+        "answer": "Random insertions collect feedback but do not teach the generator which new content is valuable. Reward-adaptive preference updates retain useful exploration, while same-cohort regularization and inference selection reduce repeats. Lower head share alone is not user benefit.",
+        "example": "Positive feedback on an uncommon outdoor item can inform future generation; random insertion alone starts from scratch each time."
+      }
+    },
+    "qa/recommendation:degr/comparison": {
+      "source_sha256": "329261d7b7b66cfbeac4aef189e1ea5d04e5c93fd46dbd4bb7a36f91c14baea4",
+      "reviewed": true,
+      "fields": {
+        "question": "Where do DEGR training diversity regularization and inference diversity-aware greedy selection act?",
+        "answer": "Squared cosine regularization spreads same-cohort embeddings; greedy selection limits redundancy relative to items already in the current list. Neither substitutes for the other. Excessive regularization separates truly similar items, and overly strong selection can hurt relevance, so ablate each.",
+        "example": "Spread embeddings do not guarantee variety on one screen; forced screen variety does not fix a representation collapsed around popular items."
+      }
+    },
+    "qa/recommendation:degr/implementation": {
+      "source_sha256": "cf480768b18edcc4ded9cacb34b5a28d7816618d047099bbd54cfcca1edf0403",
+      "reviewed": true,
+      "fields": {
+        "question": "How should local DEGR with unchanged NDCG and lower head share be interpreted?",
+        "answer": "Logs confirm actual preference and diversity-pair updates; report ranking and exposure distribution separately. Zero NDCG gain means no main ranking improvement under this protocol, and slightly lower head share only indicates reduced concentration. Loss presence and update counts are not user value.",
+        "example": "A less popular list without better relevant positions supports wider exposure, not necessarily happier users."
+      }
+    },
+    "qa/recommendation:degre/mechanism": {
+      "source_sha256": "a4d1841aa8b92c0fa5c8e2e770c60cd8afdc77eb115993290f926d26ff0b2715",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does DeGRe use offline beam lookahead but only a greedy generator online?",
+        "answer": "Lookahead scores future list value across prefixes but is costly online. Offline search finds valuable lists and distills value distributions over remaining candidates under each prefix into soft targets. Greedy serving approximates future effects; it learns estimated values, not a guaranteed optimum, and may inherit evaluator bias.",
+        "example": "The highest-scoring first item can force redundant later choices. Offline search can find a better opening and teach it without online permutation search."
+      }
+    },
+    "qa/recommendation:degre/basics": {
+      "source_sha256": "dd927ff2444b8326383bfb7c029bbb4fabae9180c490dead7bb7a0ffe9a99e05",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use DeGRe's offline cumulative-return evaluator instead of only the next logged item?",
+        "answer": "A point label describes one logged path, not the future list value of alternatives. Beam search uses prefix-dependent lookahead values and distills them into the generator. This expands beyond single-path imitation but can carry evaluator errors.",
+        "example": "A basic tutorial can enable useful advanced items despite a low immediate click probability."
+      }
+    },
+    "qa/recommendation:degre/comparison": {
+      "source_sha256": "246979fcdbe131704f585e6d65414e773b765f5175db4e3e0b5a6af3756319ee",
+      "reviewed": true,
+      "fields": {
+        "question": "How are DeGRe dense soft labels richer than distilling only the best beam list?",
+        "answer": "A winning list supplies one target per step. Dense labels distribute probability across all remaining candidates under that prefix by lookahead value, with list weights emphasizing better trajectories. Denser targets can also spread evaluator bias.",
+        "example": "Two good books can both get high target probabilities rather than one winner; a popularity-biased evaluator can still mis-score both."
+      }
+    },
+    "qa/recommendation:degre/implementation": {
+      "source_sha256": "8bef14c95130db150ca1691542ead2710c64cce319cfd3dbb2f706ac7751e6aa",
+      "reviewed": true,
+      "fields": {
+        "question": "Why mask selected items and normalize DeGRe's q_t over candidates remaining under the same prefix?",
+        "answer": "The target represents legal next choices. Repeated items must be excluded, scores must share a prefix, and target softmax and student masks must agree. Greedy serving still updates selected state step by step without a beam.",
+        "example": "After movie A is selected, step two distributes probability among other movies. Keeping A in the denominator can train repeated recommendations."
+      }
+    },
+    "qa/recommendation:dien/mechanism": {
+      "source_sha256": "fa5c98e583df831901378caf95afff637bf629fd3949e3f2abf54739e9855fd0",
+      "reviewed": true,
+      "fields": {
+        "question": "How does DIEN multiplying target relevance into a GRU update gate differ from final history pooling?",
+        "answer": "Auxiliary prediction learns per-step interests, and candidate attention modulates each state update, letting relevant events revise memory while suppressing irrelevant changes. Late pooling cannot undo earlier overwrites. More recurrent computation need not help short histories.",
+        "example": "For a lens recommendation, a random food-ad click should weakly update a strong photography state rather than overwrite it before final pooling."
+      }
+    },
+    "qa/recommendation:dien/basics": {
+      "source_sha256": "1e65d10bc9a2a0cf75280a8dcff5fadfa9d7c43948fc46f1cc93abb8930f0437",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate interest extraction and target-related evolution in DIEN?",
+        "answer": "The first stage extracts predictive interest states from behavior with auxiliary supervision. The second uses candidate relevance to control their update strength for the target. This avoids equating raw clicks with interests and remains sensitive to auxiliary negatives and noisy histories.",
+        "example": "Camera and lens views establish photography interest, which matters more for a travel camera than for a novel."
+      }
+    },
+    "qa/recommendation:dien/comparison": {
+      "source_sha256": "297db71b83918b9b847b0e7e93bca1d82b5e25da2d88989f59dce8ee25e90a2e",
+      "reviewed": true,
+      "fields": {
+        "question": "When does candidate information enter DIEN compared with DIN target attention?",
+        "answer": "DIN weights history at aggregation, whereas DIEN multiplies relevance into each recurrent update gate, controlling retained and new state throughout evolution. Extra computation and training are not guaranteed improvements; the local gain did not reproduce.",
+        "example": "A lens view can revise recurrent state immediately for a camera candidate; late weighting only reads what survives existing compression."
+      }
+    },
+    "qa/recommendation:dien/implementation": {
+      "source_sha256": "e4177214e70b5ffbeedcb6d8dab0451b7ab4ef91c85faf91a8291af8242f9fc1",
+      "reviewed": true,
+      "fields": {
+        "question": "How should DIEN auxiliary next-event supervision avoid confusing training labels with test futures?",
+        "answer": "Use next events as training labels while extraction inputs stop at current time and negatives follow training rules. Do not feed a held-out event into the GRU at evaluation. Target gating must update recurrent state step by step, not merely weight the final vector.",
+        "example": "Predict event three from position two during training; feeding event three when evaluating that prediction leaks the answer."
+      }
+    },
+    "qa/recommendation:diffureason/mechanism": {
+      "source_sha256": "4f3f9f8b5c10b7aa6600908d3f6c228633de6bd9aa6d3158dfc29a28a4897384",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does DiffuReason iteratively refine latent intent through diffusion instead of predicting one final recommendation representation?",
+        "answer": "One prediction can compress conflicting interests into an unstable direction. Latent Thinking Tokens carry intent and iterative denoising revisits cues; GRPO aligns continuous generation with discrete ranking feedback. Extra steps cost compute and can accumulate bias; a local proxy does not establish full latent reasoning capability.",
+        "example": "Fitness and dessert signals can be reconciled for a request without interpreting intermediate vectors as literal human thoughts."
+      }
+    },
+    "qa/recommendation:diffureason/basics": {
+      "source_sha256": "ff9442b84c62706c08abc0fa3e3b0aaab73befc93ad18e340003da6399131b1c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why denoise DiffuReason's continuous Thinking Tokens rather than generating a long language rationale?",
+        "answer": "Continuous variables can hold several interest cues and be revised from history without language decoding at each step. Discrete ranking reward aligns the internal process through policy training. Latents are not automatically readable reasons, and iteration does not guarantee conflict resolution.",
+        "example": "A vector may adjust novelty and budget preferences without a textual explanation proving each choice."
+      }
+    },
+    "qa/recommendation:diffureason/comparison": {
+      "source_sha256": "82c6e3097175d4b6158683856888a9eb8a6126d4b6a362902e90ccc0e4bc898e",
+      "reviewed": true,
+      "fields": {
+        "question": "What benefits and serving costs does DiffuReason's iterative update assume versus a one-shot user vector?",
+        "answer": "Denoising can revisit history at intermediate states, adding iteration cost and sampling uncertainty. Repeating the same bias need not help. Keep public proxies separate from actual diffusion policy training; a final score cannot verify the full path.",
+        "example": "Later steps might correct an initial popularity bias if niche evidence is available, but ten steps cannot invent evidence missing from conditioning."
+      }
+    },
+    "qa/recommendation:diffureason/implementation": {
+      "source_sha256": "c8aa73d3f3b4018f520452c31ad31501ae30ee739d1954a67ad04fc11a9d225a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is a fixed reward added to final scores insufficient to implement DiffuReason denoising and GRPO?",
+        "answer": "Denoising needs defined timesteps, state transitions, and noise. Policy updates need same-context rollouts, rewards, and matching probabilities. A score addition does not train the continuous generation distribution or establish gradients. Local proxies do not replace end-to-end evidence.",
+        "example": "Multiplying popularity by 0.1 changes ranking but not latent denoising. Verify trajectories and real parameter updates before claiming policy training."
+      }
+    }
+  }
+}

@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:frames-on-demand/mechanism": {
+      "source_sha256": "04b6af144a230fc0e9599e659c767bab969c84be698cd078c60e7b2dd6b04ddd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add a visual-need router after building caption memory?",
+        "answer": "Text remembers broad events but may omit details needed later. The router decides whether text evidence suffices and spends more vision budget only when needed. This controls evidence-acquisition cost; captions are not lossless and a routing decision is not an answer.",
+        "example": "“Someone picks up a box” can answer whether an object was taken, but reading its serial number may require looking at frames."
+      }
+    },
+    "qa/foundation-models:frames-on-demand/basics": {
+      "source_sha256": "d143e3622658f6624a0c9f20e9659366ccadcfa1840c84f7a008c08ae028701f",
+      "reviewed": true,
+      "fields": {
+        "question": "Does caption-once mean writing a new video caption for each question?",
+        "answer": "No. Build one reusable text memory, then route and budget additional vision separately for each question. Count initial captioning and per-query frame access separately; memory reuse does not mean all queries avoid visual compute.",
+        "example": "Five questions can share one caption, and only the question needing additional detail may require frames."
+      }
+    },
+    "qa/foundation-models:frames-on-demand/comparison": {
+      "source_sha256": "0994aba67ac3a21e4976f07d99fd690dbe065346312bba82e38e8ef05f113ccd",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the trade-off versus uniformly resampling the video for every question?",
+        "answer": "Uniform sampling repeatedly pays vision cost. On-demand access reuses a caption and focuses on uncertain frames, but a missed detail or routing error can hide key evidence. Compare real quality on identical questions and budgets.",
+        "example": "Ten event-order queries may share memory; a brief action in the last query still needs the right frame."
+      }
+    },
+    "qa/foundation-models:frames-on-demand/implementation": {
+      "source_sha256": "de54b84aad464b94a50cd9597e2d72ba14203fa97f7c952106d49df3152f5c1b",
+      "reviewed": true,
+      "fields": {
+        "question": "Do three-seed local caption/query gates validate the learned visual-need router?",
+        "answer": "No. Reference state transitions check gating, top-K frame selection, and budget; there is no long-video VLM or trained semantic router. This does not prove the system can tell which questions text answers or reproduce frame savings.",
+        "example": "A rule can select at most three frames without knowing whether any contains the answer."
+      }
+    },
+    "qa/foundation-models:hawk/mechanism": {
+      "source_sha256": "51994c6aa14126b076c9a52e64460d8e18fbe9e9c307900a87b92ee810593a9a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why train the HAWK drafter on shifted trajectories after its own proposals?",
+        "answer": "Proposed tokens put the system on drafter-generated prefixes. Training only on teacher prefixes hides that shift. Shifted trajectories align supervision with actual proposal states, and a mix of teacher layers conveys visual information. The target must still verify acceptance.",
+        "example": "If the first draft token chooses different wording, the second should learn the target distribution under that actual prefix."
+      }
+    },
+    "qa/foundation-models:hawk/basics": {
+      "source_sha256": "ccc0c71b18325160d223ed5480e174a26baa7086c41bc717cc153c41d4b8b02f",
+      "reviewed": true,
+      "fields": {
+        "question": "What are the target and drafter roles in HAWK speculative decoding?",
+        "answer": "The cheaper drafter proposes tokens; the target verifies them and preserves the output distribution. HAWK compresses multiple target layers for a shallow drafter to improve proposals, not to bypass verification.",
+        "example": "A shallow model proposes several words, then the larger model checks how many can be accepted."
+      }
+    },
+    "qa/foundation-models:hawk/comparison": {
+      "source_sha256": "fd1edb47e1b063f429d6ef9abe3380327a8766b5b87125bf62d5e8192552b47b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does HAWK's learned layer mix differ from using only the final target layer?",
+        "answer": "Softmax-normalized trainable weights combine hidden states from multiple layers; final-only is a fixed choice of one source. Weights sum to one but need not be equal. Mixing alone proves neither acceptance-rate gains nor speed.",
+        "example": "A high layer weight increases its share in the mixed representation rather than concatenating layers as extra tokens."
+      }
+    },
+    "qa/foundation-models:hawk/implementation": {
+      "source_sha256": "680b0778e333ecc77e714e6b10e1379119604bbb2ecd9032d602ecf4dbb805e3",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local HAWK validation include a specialized decoding kernel?",
+        "answer": "No. It checks softmax-weighted target hidden states, shifted-target supervision, and target isolation. It does not run a complete speculative verification loop or specialized kernel, so cannot demonstrate end-to-end lossless speedup.",
+        "example": "Checking that three weights sum to one does not measure accepted tokens or saved generation time."
+      }
+    },
+    "qa/foundation-models:muse-glimmer-30b/mechanism": {
+      "source_sha256": "678fe820f226d4fdc73d9888b9ed246f0fdd3facb687aec89acb1c524514e78f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is three local layers followed by one global layer different from shortening every context window?",
+        "answer": "Local layers limit most interactions, while global layers still exchange distant information. GQA separately reduces KV heads. These are architectural trade-offs, not reproduction of distillation, post-training, or device performance.",
+        "example": "A distant heading can affect the current paragraph in a global layer, while local layers process adjacent sentences."
+      }
+    },
+    "qa/foundation-models:muse-glimmer-30b/basics": {
+      "source_sha256": "4e874ea1a881f02545b3595597767b16c68669d2290bbd1e49a407954ba73407",
+      "reviewed": true,
+      "fields": {
+        "question": "Why count weights, KV, vision, and drafter memory together for Muse Glimmer?",
+        "answer": "Device memory must hold the entire inference process. Long agent context grows KV, and vision and speculative heads add memory. A quantized language model under a size cap does not alone fit a 32GB device. Use real inputs and deployment settings.",
+        "example": "Weights below 20 GB may still leave too little space for long-trajectory KV and temporary vision tensors."
+      }
+    },
+    "qa/foundation-models:muse-glimmer-30b/comparison": {
+      "source_sha256": "e6f18485fefdf945a23e6e79b1221dbdb889aaefc6346019334d390836a96b87",
+      "reviewed": true,
+      "fields": {
+        "question": "How does late-stage cross-entropy differ from fitting truncated teacher logits?",
+        "answer": "Distillation uses teacher predictions, but top-k truncation drops the tail. Late cross-entropy directly supervises the target token; the paper connects the switch to truncation bias. It is not correct to describe the entire recipe as teacher matching.",
+        "example": "CE still uses a target token even if the saved teacher top-k omitted it."
+      }
+    },
+    "qa/foundation-models:muse-glimmer-30b/implementation": {
+      "source_sha256": "3cfe371ddf77d0f77908429c9c4c9293ccf567ef208585aad1fc61ae5c42b55b",
+      "reviewed": true,
+      "fields": {
+        "question": "Can the 52 layers share one attention and RoPE template?",
+        "answer": "No. Repeat [Local, Local, Local, Global] 13 times with 32 query heads and two KV heads. Only local layers apply RoPE. The vision branch separately compresses 1024 patches to 256 tokens via 2×2 grouping. One layer is not the 29.6B model.",
+        "example": "Applying RoPE everywhere or alternating local and global changes the architecture even with 52 layers."
+      }
+    },
+    "qa/foundation-models:mwop/mechanism": {
+      "source_sha256": "6f4cd91969850eff44e0ebc6acc351a160dd14fb0028b5c5f850360a2d1195b8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why re-estimate FFN channel importance after pruning attention paths?",
+        "answer": "Pruning changes FFN input distributions, making old rankings stale. MWOP treats paths such as vision→vision and text→vision separately and prunes FFN channels by modality. Measure quality and actual speed independently.",
+        "example": "Removing text-to-vision paths can change how much fusion channels contribute."
+      }
+    },
+    "qa/foundation-models:mwop/basics": {
+      "source_sha256": "da2065d0fb1c00a1f422a1018621dcf25a3244be5dfd3054755a178d1656a6be",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can one MWOP attention head have different modality-path importance?",
+        "answer": "One head can support vision→vision, text→vision, and text→text interactions with unequal contributions. MWOP assesses and prunes paths within a head rather than treating it as indivisible.",
+        "example": "Keep text reading vision in a head that contributes little to vision-only interaction."
+      }
+    },
+    "qa/foundation-models:mwop/comparison": {
+      "source_sha256": "2e0deb1e0675a6adba66769bf9323fc914e732f467f85b30c4eba8f7e8fb65ba",
+      "reviewed": true,
+      "fields": {
+        "question": "What changes with modality-specific FFN pruning instead of one common channel mask?",
+        "answer": "Text and vision tokens can retain different channel sets and capacities. One mask may hide different channel contributions. Sparse masking needs execution support; it does not guarantee hardware speedup.",
+        "example": "Text-related channels and texture channels may not overlap. Separate masks preserve both kinds, but the kernel must actually skip work."
+      }
+    },
+    "qa/foundation-models:mwop/implementation": {
+      "source_sha256": "999aab6f09d1361189bf18d1d4bb43899735bf804d793cfc41080745093cd447",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not rank MWOP pruning by |w| rather than |w·∂L/∂w|?",
+        "answer": "The product captures magnitude and current loss sensitivity. Magnitude alone omits sensitivity; absolute value prevents signed contributions from canceling. This local estimate depends on calibration data and path, not a guarantee deletion is harmless.",
+        "example": "Two equal weights with different gradients rank differently under the product but tie by magnitude."
+      }
+    },
+    "qa/foundation-models:omnikvquant/mechanism": {
+      "source_sha256": "49960b0429097277f725c8c366ff6ea6c82caf0f0bc152387a132cb7fb60e7e5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not share one global quantization range and rotation across multimodal KV?",
+        "answer": "Keys may drift over time so a global range loses local precision. Value geometry also differs by modality. Short-window ranges handle temporal shifts and modality-specific rotations handle value geometry; one static rule need not control both errors.",
+        "example": "Small audio keys can lose precision when later video keys set the global range; value structure still needs separate checks."
+      }
+    },
+    "qa/foundation-models:omnikvquant/basics": {
+      "source_sha256": "91f0724f5dbbfc21a8689c54983b8d2c2bed608985b889126f6951b06e3725cd",
+      "reviewed": true,
+      "fields": {
+        "question": "Does OmniKVQuant compress weights or the current context's KV cache?",
+        "answer": "It targets key/value states stored during inference, not fixed network parameters. Cache grows with context and contains different modality representations; quantized weights do not remove it.",
+        "example": "The same model has identical weights for short text and long audiovisual context, but different KV storage."
+      }
+    },
+    "qa/foundation-models:omnikvquant/comparison": {
+      "source_sha256": "e0877bcdf728205a63be961052f1d930086dc7800fcd128af55ae38ddb8b635e",
+      "reviewed": true,
+      "fields": {
+        "question": "How does modality-specific rotation differ from using one matrix for all values?",
+        "answer": "A shared rotation assumes one coordinate transform suits all modalities. Separate rotations allow distinct coordinate systems for audio, vision, and text. Accuracy still depends on calibration and actual distributions.",
+        "example": "Image and audio values may have different high-variance directions; one rotation might suit only one."
+      }
+    },
+    "qa/foundation-models:omnikvquant/implementation": {
+      "source_sha256": "8c3418302891e352e9d4177fd6e116aca71651be7b4e42bacfec5c5f2de09176",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local 2-bit NumPy reference demonstrate a faster GPU KV kernel?",
+        "answer": "No. It checks window quantization and modality-specific transforms. Actual Triton or other kernels need real A100/A30 validation. Packing, unpacking, memory traffic, and fusion affect latency beyond bit width.",
+        "example": "Theoretically two-bit values stored and decoded in floating arrays do not yet deliver real two-bit VRAM or bandwidth savings."
+      }
+    },
+    "qa/foundation-models:pace-vlm/mechanism": {
+      "source_sha256": "f14b7a5a887c781f3e82cfddc757df56ca4165f737a4d5479d7252af45f26ea0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate image scaling and question-dependent token extraction in PACE?",
+        "answer": "Scaling controls input encoding cost; extraction controls what continues downstream. Late token dropping cannot reclaim prior encoding. A shallow preview estimates difficulty, and extraction mixes language and visual attention by confidence rather than using one fixed rule.",
+        "example": "Shrink a blank image more than a dense menu, then use the question to select relevant regions."
+      }
+    },
+    "qa/foundation-models:pace-vlm/basics": {
+      "source_sha256": "91e1c5b321f0886b47a15e9f6d9cfbcde677e8925158ddc80ea4a305ee0badd0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't PACE infer equal vision budgets from equal image sizes?",
+        "answer": "Equal-sized images can differ in global semantic density and local detail. APC estimates both off-diagonal feature similarities and top-K details that differ from background. Pixel count is not a substitute, and budget signals do not guarantee correctness.",
+        "example": "A blank wall and a densely printed page at the same resolution need not preserve the same amount of detail."
+      }
+    },
+    "qa/foundation-models:pace-vlm/comparison": {
+      "source_sha256": "3bb55b2f38d3ebe5b8ac6b19b83f5655198007f900080fc2257e7a342031bc16",
+      "reviewed": true,
+      "fields": {
+        "question": "How does DDAE differ from an equal-weight attention average?",
+        "answer": "It converts the dispersions of two normalized attention maps into confidence weights using temperature softmax. Weights can favor different streams depending on evidence. Dispersion is a method signal, not a calibrated probability of correctness.",
+        "example": "Concentrated language attention and diffuse vision attention may favor language; another question can reverse the weights."
+      }
+    }
+  }
+}

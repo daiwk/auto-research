@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:state2state/mechanism": {
+      "source_sha256": "88860514b71f98f9f2ed7ccb7aa25a04a033af311c1817b874bff5e9d8aaacb8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can tasks built from initial and target states omit expert action trajectories?",
+        "answer": "The goal says where to arrive while the policy explores how. Rule-based state matching only verifies the endpoint, separating task generation from demonstrations and widening mid-training sources. Verifier-internal goals or rules are not stepwise correct-action hints. Matching must preserve task-relevant state.",
+        "example": "Given initial and target object layouts, the agent moves objects itself and the environment compares the result; it does not need a prescribed left-then-right sequence."
+      }
+    },
+    "qa/agent-research:state2state/basics": {
+      "source_sha256": "4baab335298b71cf086738777c383f3ffa68dc3897cfe20f9bdf4df8307b1477",
+      "reviewed": true,
+      "fields": {
+        "question": "How does State2State construct training tasks automatically through environment exploration?",
+        "answer": "Exploration yields reachable initial and target states. A fixed projection T matches terminal state as the verifier, giving tasks without human-written descriptions or expert trajectories for every item. The policy still finds its own path.",
+        "example": "Knowing a room's initial and target layouts does not identify the sequence of actions."
+      }
+    },
+    "qa/agent-research:state2state/comparison": {
+      "source_sha256": "df1b3f48bcc6c17e9680c3584f2ae7d78df8c3f41bf284fa5bf6a013857760a2",
+      "reviewed": true,
+      "fields": {
+        "question": "Does target-state supervision give the same information as behavior cloning from an expert?",
+        "answer": "A target state defines success; behavior cloning also provides the action sequence. Goal supervision permits multiple valid routes. Passing verifier-computed expert paths to the policy would invalidate the no-demonstration setting.",
+        "example": "Two different paths can both succeed by reaching the goal, without copying a canonical sequence."
+      }
+    },
+    "qa/agent-research:state2state/implementation": {
+      "source_sha256": "23e9e53247d8b279e034c91de5ef93fc7ae5f69bd8230e2b6442df101e926b68",
+      "reviewed": true,
+      "fields": {
+        "question": "Why predefine the State2State projection in T(s_T)=T(s*)?",
+        "answer": "The projection determines which differences matter. Changing T after observing results changes the task. Verify initial and terminal states, legal transitions, and matching fields. A local state operator does not replace actual large-model mid-training in the paper's environment.",
+        "example": "If a goal specifies object positions, do not remove position from matching after a failure to manufacture success."
+      }
+    },
+    "qa/agent-research:ocsd/mechanism": {
+      "source_sha256": "22ca2c12652a9bef7b313eb3c765c8cce21d630c008b8770df11c3a3aa70fa65",
+      "reviewed": true,
+      "fields": {
+        "question": "Why subtract structurally matched Observation-Ablated replay from Full replay?",
+        "answer": "Comparing replay with future observations directly against the student conflates observation content and extra scaffolding. Keep the structure and remove only observations, then subtract to isolate information contribution better and amplify updates only on uncertain steps. Future information is for training attribution, not test-time input.",
+        "example": "If the replay template adds 'please check,' keep it in both versions. Only observation availability should differ so the prompt effect is not counted as observation evidence."
+      }
+    },
+    "qa/agent-research:ocsd/basics": {
+      "source_sha256": "ad7a7479f74a9d590e27a62e6e8d8de27af039a5a7d8eac144c499adc9d1ea09",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does OCSD worry that replay scaffolding itself changes token scores?",
+        "answer": "Extra structure and prompt formatting during future-observation replay can affect predictions independently of the observation. Use structurally matched Full and Observation-Ablated controls to extract a residual better focused on the observation.",
+        "example": "A long replay template can change probabilities, so not every change comes from environmental evidence."
+      }
+    },
+    "qa/agent-research:ocsd/comparison": {
+      "source_sha256": "867ea1b7e0d562e984bb6bee3cb6f3b2c0194e8c63176533587c521aadcd8d42",
+      "reviewed": true,
+      "fields": {
+        "question": "What does the Full–Ablated residual control for beyond the Full–Student gap?",
+        "answer": "A single gap includes both observation content and scaffolding. A matched ablated condition removes the observation while preserving structure, so subtraction cancels shared effects. Unmatched templates leave new confounds.",
+        "example": "If Full alone includes another instruction, Full−Ablated also captures that instruction's effect."
+      }
+    },
+    "qa/agent-research:ocsd/implementation": {
+      "source_sha256": "a13981e4a66a9fda9cbaea310f392d93251da361b8809cc05c863b846b9d1e8b",
+      "reviewed": true,
+      "fields": {
+        "question": "How do the two student log probabilities cancel in the OCSD residual?",
+        "answer": "For the same token and student condition, r=(logπ_full−logπ_S)−(logπ_abl−logπ_S)=logπ_full−logπ_abl. If the student values come from different prefixes or alignments, fix matching before cancellation.",
+        "example": "Compare both expressions on the same input to detect sign or position mistakes."
+      }
+    },
+    "qa/agent-research:evoharness-rl/mechanism": {
+      "source_sha256": "3988e9415fbf96e643d68b7110c5ed7814ac17201bf9f6016ea842bc9694d17a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why make Belief, Progress, and Experience external state the policy can read and write?",
+        "answer": "A fixed harness can make inappropriate decisions about storage and merging. Explicit actions teach the policy to manage belief, progress, and experience, using SFT to learn the interface and then optimizing task reward minus management cost. More writing is not inherently useful, and state must reflect actual observations.",
+        "example": "Write new constraints to Belief and merge duplicates into Experience. Appending every log each turn can consume more than the task gains."
+      }
+    },
+    "qa/agent-research:evoharness-rl/basics": {
+      "source_sha256": "e0654e45281ae9be07edd2bd10181a0fb04286f55257e4403c01b79e27f03330",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does EvoHarness-RL make runtime-state reads and writes trainable actions?",
+        "answer": "If fixed scripts maintain Belief, Progress, and Experience, the policy cannot learn when updates or merging are worthwhile. SFT teaches harness actions, then task rewards and costs train when to use them.",
+        "example": "A simple task may need few experience edits, while a long task benefits from saving intermediate progress."
+      }
+    },
+    "qa/agent-research:evoharness-rl/comparison": {
+      "source_sha256": "f469fb74565a27df5ce5439e2c048751d8e20c6e4d077840e21d518f31af4f01",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a learned harness policy differ from configuring fixed memory?",
+        "answer": "A fixed module prescribes read/write behavior. A learned harness policy chooses when to read, write, or merge and pays operation costs. An 'evolvable' registry label on a fixed pipeline does not establish learned external-state management.",
+        "example": "Saving all history every turn is different from deciding whether to save based on current progress."
+      }
+    },
+    "qa/agent-research:evoharness-rl/implementation": {
+      "source_sha256": "9f82711406f1ceb796e75040ddd72f70fc569467734ffa705479d308d36b9868",
+      "reviewed": true,
+      "fields": {
+        "question": "Why bind EvoHarness-RL's harness cost to actual execution logs?",
+        "answer": "In R=R_task−λC_harness, cost must reflect executed reads, writes, and merges, not proposals alone. Check whether later policy steps read the updated state. The local mini-suite is not full paper-scale LLM RL.",
+        "example": "Text saying 'merge experience' without a state update is not a successful harness action."
+      }
+    },
+    "qa/agent-research:hindsearch/mechanism": {
+      "source_sha256": "05f93b54721ad119e7ad9488463da5801c5841f1959d44155d10fd6684baf051",
+      "reviewed": true,
+      "fields": {
+        "question": "If a judge can read gold to generate critiques, why can't that critique be supplied directly during search evaluation?",
+        "answer": "Gold helps the training judge explain failures and turn sparse outcomes into actionable distillation signals. A reference-derived critique for the same evaluation task indirectly discloses answer information, invalidating independent search. Freezing the judge does not remove privileges in its inputs.",
+        "example": "Training feedback can use the correct date to identify a wrong source, but testing must provide only the question, not a critique revealing that Wednesday is correct."
+      }
+    },
+    "qa/agent-research:hindsearch/basics": {
+      "source_sha256": "64db88fbc2f4d326e63b044a48f883ba77fecb63aa93a3dceb0eace4539565a1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does HindSearch generate hindsight critique after a failed search trace completes?",
+        "answer": "Terminal success is sparse. A frozen judge can use gold to identify problems in a completed failure and supply auxiliary on-policy distillation signals. Hindsight explains training failures; it is not future answer information available during evaluation.",
+        "example": "After training execution, note that search ignored key evidence to improve the next policy rather than answer the current test item."
+      }
+    },
+    "qa/agent-research:hindsearch/comparison": {
+      "source_sha256": "354665fdaf1930d8c335ad06ad50cfe024a63f3d31ae3ad13a30959c07757e76",
+      "reviewed": true,
+      "fields": {
+        "question": "What does a trajectory-level hindsight critique add beyond binary success or failure values?",
+        "answer": "Critique can identify specific shortcomings and their relationships, while binary outcomes only show success. A teacher or judge produces it at a cost and may be wrong; longer explanations are not automatically more accurate supervision.",
+        "example": "Two zero-scoring traces could reflect missing retrieval versus misread evidence, which a single zero does not distinguish."
+      }
+    },
+    "qa/agent-research:hindsearch/implementation": {
+      "source_sha256": "e1a81f2d4cf9b7891a2ec7495e8940782a5135a001c7ba097374fa9777611bf1",
+      "reviewed": true,
+      "fields": {
+        "question": "Who can read gold in HindSearch, and which inputs must stay out of independent search evaluation?",
+        "answer": "Only the frozen training judge and independent scoring side get gold. Critique derived from it is privileged training feedback. The evaluated policy cannot receive the current item's gold, judge object, or gold-derived hints without contaminating success rates.",
+        "example": "Placing a judge's answer-based corrective suggestion in a test search prompt is not leakage-free inference."
+      }
+    }
+  }
+}

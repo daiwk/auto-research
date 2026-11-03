@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:video-rsi/implementation": {
+      "source_sha256": "6f4a458a7c2fee3c3f3b6b4bd271af5585fec2d34ad6881080edaa28a73ca743",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't a passing local Pareto gate registered as an executable Evolve operator?",
+        "answer": "There is no real video decoding, code-rewriting sandbox, or cross-generation stopping condition, so the controller cannot fully execute and evaluate a candidate. The gate only checks acceptance relations over supplied metrics. Fixture scores do not establish video-agent improvement, and a registry name or three-seed rule check is not end-to-end evolution.",
+        "example": "Two sets of numbers suffice to calculate dominance, but without obtaining them by running a candidate harness on video there is no capability evidence for promotion."
+      }
+    },
+    "qa/agent-research:meta-skills/mechanism": {
+      "source_sha256": "1eeab1d9996983b12b7bb0bcd51b7386c9040143ba8a5e28a4ea0c287b8e7527",
+      "reviewed": true,
+      "fields": {
+        "question": "Why specify when, provide, and use in a meta-skill rather than just 'verify more in future'?",
+        "answer": "When gives the trigger, provide specifies the resource, and use describes integration. Together they turn generic advice into retrievable design knowledge. Freeze the library after development and retrieve only to construct the harness in testing. If test results revise the library, the test no longer measures transfer of fixed skills to unseen tasks.",
+        "example": "'When tool output is incomplete, provide access to raw logs and inspect them before retrying' can become a concrete runtime component more readily than 'be more careful.'"
+      }
+    },
+    "qa/agent-research:meta-skills/basics": {
+      "source_sha256": "6e6ba8509684db126a04fbbc8f73505b97297d62a8d709b693ff11d67d11f984",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Meta-Skills focus on transferable experience about configuring how an agent works?",
+        "answer": "Similar tasks can share planning, evidence collection, or verification routines. Keeping only individual answers forces the next task to redesign the workflow. Meta-Skills makes procedural experience reusable through retrieval that guides the harness. Experience needs applicability conditions; a prompt that helped one question should not be applied everywhere.",
+        "example": "Building an evidence table before comparing numbers across sources is procedural knowledge. The actual numbers belong to the original task and should not be reused as new answers."
+      }
+    },
+    "qa/agent-research:meta-skills/comparison": {
+      "source_sha256": "7ec1f3b15df828957999ee4152f2e49c5857d9d70da1c713eb4da443bdd99b4b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does frozen-library retrieval during testing differ from writing experience back while testing?",
+        "answer": "Freezing tests transfer from development. Writing back from test feedback lets later tasks exploit evaluation results and changes the test information contract. Allowed observations in the current task can inform its harness, but private test scores cannot revise the long-term library or reselect reported results.",
+        "example": "Adding a rule tailored to a failed test1 and rerunning test1 is not frozen-library generalization. Report it under a separate learning protocol."
+      }
+    },
+    "qa/agent-research:meta-skills/implementation": {
+      "source_sha256": "d7d8f94dc0824aff55016d8c1ac9bc21a8499588d4e4823ccbb35c246cadf5e4",
+      "reviewed": true,
+      "fields": {
+        "question": "How do local development refinement and frozen retrieval limit the conclusions?",
+        "answer": "Local checks verify that the library accepts development feedback, freezes against write-back during retrieval, and maintains related state invariants. Fixture rewards are not the AI4AI benchmark. Without a real harness proposer and task model, matching a when field neither establishes generalizable design learning nor reproduces reported paper gains.",
+        "example": "Finding a meta-skill tagged 'long text' tests routing. It does not test whether the skill improves real long-context tasks."
+      }
+    },
+    "qa/agent-research:branch-mixture/mechanism": {
+      "source_sha256": "38ebd4ea67da1e010c2abc7175d7caaa5e844bab614c0b144b61d89fff882c6f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why remove development examples solved by every branch while retaining examples that distinguish branches?",
+        "answer": "Shared solved examples provide little information about branch differences and can dilute weaknesses while consuming budget. Each branch retains a discriminating subset and proposal strategy, and a deployment router picks a development champion by input. An adaptive development set is not an independent final test; routing cannot use test labels to choose a winner.",
+        "example": "If all branches solve simple sorting but graph search distinguishes two strategies, devote more curriculum budget to the latter rather than repeatedly testing common strengths."
+      }
+    },
+    "qa/agent-research:branch-mixture/basics": {
+      "source_sha256": "594317fb3201ab30fbbc043e71697869eefc815273f0cb2a1b1f19e8d874bdc8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why should branches maintain different development subsets and proposal policies?",
+        "answer": "When all branches see the same examples and use the same proposals, they can converge to redundant harnesses. Distinct subsets and strategies preserve specialization that the router can select by input. Additional branches also increase development cost; do not hide total search budget when comparing with one branch.",
+        "example": "One branch can specialize in tool formats and another in long-horizon verification, giving routing meaningful alternatives rather than copies under different names."
+      }
+    },
+    "qa/agent-research:branch-mixture/comparison": {
+      "source_sha256": "382550b0750b31453cce5e3677f01c6d1f74723112a47f6e393073c048bba1c2",
+      "reviewed": true,
+      "fields": {
+        "question": "What assumption differs between routing across specialist branches and always running one global champion?",
+        "answer": "A global champion assumes one harness covers all inputs. Branch mixtures allow workflows to specialize and choose among them from public input features. Specialization may improve fit but adds routing errors and maintenance cost. Routing must use deployment-visible information, not current test gold scores.",
+        "example": "Code and browsing tasks can have different development champions. Routing by task features is deployable; reading both branches' gold scores on the current test before choosing is not."
+      }
+    },
+    "qa/agent-research:branch-mixture/implementation": {
+      "source_sha256": "ac1047f34cb7310d757110aa4a1d567d84192fec519d8127d9a2594d2c01766e",
+      "reviewed": true,
+      "fields": {
+        "question": "May a deployment router read branches' true scores on the current test item to pick the winner?",
+        "answer": "No. Use input features to select a development champion without test labels or future execution scores. The local implementation provides subset diversification and linear routing, not LLM-generated harnesses or SWE-bench runs. Correct branch choice on fixtures does not show real mixture gains.",
+        "example": "Running all branches and selecting the hidden judge's best result is an oracle ensemble, not deployment routing based on request inputs."
+      }
+    },
+    "qa/agent-research:harness-learning/mechanism": {
+      "source_sha256": "cf37fada212a5d9030ae5c60a954854119fd13066316044bbb4d0728cba92df3",
+      "reviewed": true,
+      "fields": {
+        "question": "How can test-time adaptation occur with frozen task-model weights?",
+        "answer": "Adaptation changes executable components outside the model, such as verification, interpreters, retrieval, and retry protocols. Execution feedback changes that scaffolding and therefore later behavior of the same model. This is not fine-tuning and cannot route hidden answers through the interface to a proposer. Local classification-policy updates are not the paper's full LLM adaptation chain.",
+        "example": "Keep the model fixed, but add shell-output truncation and error localization after a failure. The next attempt can process the output better without any neural-weight change."
+      }
+    },
+    "qa/agent-research:harness-learning/basics": {
+      "source_sha256": "342e3d83a0dd1d32233ac9b8cdf3e042506a266845005d83ad82d5ebaba4c557",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Harness Learning treat tool protocols, memory, and planning as learnable objects?",
+        "answer": "With the same weights, the external workflow still controls what the model sees, when it calls tools, and how it recovers. Harness Learning uses feedback to revise executable organization rather than attributing every weakness to the base model. Workflow adaptation is a distinct scope and does not imply new capability learned in model parameters.",
+        "example": "Add testing before every submission without changing the base model. Outcomes may change because execution was organized differently, not because weights were trained."
+      }
+    },
+    "qa/agent-research:harness-learning/comparison": {
+      "source_sha256": "567e97c60bccdf8c17d43c64efe0b8e3d8f40a55903bc8b7d8d3932b782d4fe3",
+      "reviewed": true,
+      "fields": {
+        "question": "How does within-group relative-reward training of the revision policy differ from fixed hand-written rules?",
+        "answer": "Locally, subtract the group's mean execution score from each candidate score to form advantages and apply REINFORCE to revision logits. Feedback can change proposal preferences; fixed rules learn no parameters. The small classification proposer is not the paper's general harness learner, and a formula alone does not establish safe arbitrary component changes.",
+        "example": "A revision that performs better within its group gets positive advantage and becomes more likely, instead of being predetermined by a rule author."
+      }
+    },
+    "qa/agent-research:harness-learning/implementation": {
+      "source_sha256": "cb1bcce5188877a1ff07a0808615d66531ac335cd80c2825db2970bb7e019b16",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do external callbacks not establish integration with a general agent runner or Evolve?",
+        "answer": "A trusted callback is an execution interface. A general system must safely run arbitrary harnesses and isolate validation. That full chain is missing. Adaptation inputs allow only scores and failure categories, not gold data or hidden verifier fields. Mini-suite success is not open-ended agent capability.",
+        "example": "A callback that returns a preset high score can test loop control, but without real candidate execution it supplies no promotion evidence."
+      }
+    },
+    "qa/agent-research:agentx-model-replay/mechanism": {
+      "source_sha256": "012be6018e83ea37dd11a54a9c275ca9a1967bcc1101d4113eb145a8c0a1d9ed",
+      "reviewed": true,
+      "fields": {
+        "question": "Why connect the Research Agent and Model Agent through proposals instead of sharing full experiment logs?",
+        "answer": "Proposals specify the question, constraints, and approved direction. The model implementer runs iterative experiments under fixed business inputs and prediction tasks, preventing mutual context overload. Return interim bests, negative results, and unresolved questions for the next research decision. The interface carries evidence, not just one appealing final score.",
+        "example": "Researchers can propose a long-history compression hypothesis. The model agent reports the best version and when it fails, allowing the next hypothesis without showing every compilation log."
+      }
+    },
+    "qa/agent-research:agentx-model-replay/basics": {
+      "source_sha256": "b767604aa10071d033668065dc032f83926373291898f6e9af8968fb03e2b5cf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does AgentX-Model need to connect each research choice to actual experiments?",
+        "answer": "Automated research must choose what to try and obtain new evidence through implementation and evaluation, not just generate proposals. Research and model execution roles exchange proposals so search history reflects attempted candidates. Historical replay only reenacts revelation and selection of existing outcomes; it does not rerun training locally.",
+        "example": "After a proposal to change the loss, the implementer returns results only after training. A replay should likewise reveal a score only after selecting the candidate, without peeking at future outcomes."
+      }
+    },
+    "qa/agent-research:agentx-model-replay/comparison": {
+      "source_sha256": "a5ff4e3eed8d505933e42bf2b3b6d281999a6c5cf0dc2852db1d06aa9c6ff486",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does improvement over a parent differ from setting a new best over the entire ancestral path?",
+        "answer": "If a parent regressed, its child can recover some performance without beating an older champion. Track both the parent delta and comparable ancestral delta to avoid presenting recovery as a breakthrough. Diagnose actions primarily reduce uncertainty and should not be ranked by the same immediate AUC objective as improvement actions.",
+        "example": "If an ancestor has AUC .80, parent .75, and child .78, the child gains .03 over its parent but is still .02 below the path best. Report both."
+      }
+    }
+  }
+}

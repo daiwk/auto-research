@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:convapparel/basics": {
+      "source_sha256": "627e80ec9b362bfb9f73854fae15611ee6ba4747608d87c5d95e39086a3bdcf0",
+      "reviewed": true,
+      "fields": {
+        "question": "Is ConvApparel's PLSA the topic model with the same acronym?",
+        "answer": "No. Population-Level Statistical Alignment compares behavior distributions of simulated and human populations. The local kernel uses KS distance and tie-aware MWU. Group alignment does not establish human realism in every dialogue.",
+        "example": "Comparing human and simulator turn-count distributions is population alignment, not learning latent topics from shopping text."
+      }
+    },
+    "qa/agent-research:convapparel/comparison": {
+      "source_sha256": "1305f84def8a1b52f4155566c2fa3fc745eb71f3990915764c87abbbcc5ceb9a",
+      "reviewed": true,
+      "fields": {
+        "question": "How does cross-recommender validation differ from testing under the policy used to generate simulated data?",
+        "answer": "Same-policy testing may show adaptation to a familiar interaction. Cross-policy tests put a simulator trained under one recommender into another to see whether behavior transfers. This complements distribution matching and discrimination but does not guarantee every deployment policy.",
+        "example": "Train with a popularity-oriented recommender, then check whether shopping responses remain reasonable under an exploration-oriented one."
+      }
+    },
+    "qa/agent-research:convapparel/implementation": {
+      "source_sha256": "0264118fdd59637879908c9a98df83269a3fbf5f0e64cc459835e676ac351ae2",
+      "reviewed": true,
+      "fields": {
+        "question": "Is PLSA a topic model here, and how are local statistical choices documented?",
+        "answer": "No; it is Population-Level Statistical Alignment. Exact permutation for small samples and fixed-seed, plus-one-corrected Monte Carlo for larger ones are explicit local choices. Train and validate the HLS classifier independently rather than filling predictions from gold.",
+        "example": "A passing KS-distance calculation verifies the statistic, not human alignment."
+      }
+    },
+    "qa/agent-research:convapparel/mechanism": {
+      "source_sha256": "c4f6279cfcd274edca4b71feffdeb144637880ebd30718555b924b451d27a2ae",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't achieving a simulated shopping goal prove that the simulator behaves like a human?",
+        "answer": "Success measures cooperation with the current recommender. Tone, behavior distributions, and response patterns can still be unrealistic. Population statistics, trained real/fake discrimination, and cross-policy counterfactuals test distinct dimensions. HLS is the classifier's probability of human behavior, not task success or human approval.",
+        "example": "A simulator accepting the first item immediately can succeed quickly without human-like comparison and may fail under another recommender."
+      }
+    },
+    "qa/agent-research:causal-armor/basics": {
+      "source_sha256": "f7ab4fdbdc3942d7dd50251a63b12257d3317f04fcb45bd65c53e777434379c7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CausalArmor compare user and tool attribution before privileged actions?",
+        "answer": "Untrusted tool content can dominate a proposal. Leave-one-out ablation measures likelihood changes for the same action. If tool attribution exceeds user attribution, selectively sanitize and propose again rather than executing the original action.",
+        "example": "A webpage can suggest deleting files despite no such user request."
+      }
+    },
+    "qa/agent-research:causal-armor/comparison": {
+      "source_sha256": "c0be521e72f192bcb6094fa339a6257162ad20e6e12ae0e16bb0dd1b8adb66c8",
+      "reviewed": true,
+      "fields": {
+        "question": "How does targeted sanitation of flagged tool spans differ from deleting all tool results?",
+        "answer": "Keep unflagged evidence, sanitize flagged spans, and mask potentially contaminated assistant content after the first hit before reproposing. Deleting all tool results also removes legitimate evidence. Reevaluate the new proposal; text removal does not guarantee safety.",
+        "example": "Sanitize an injected instruction and remove affected later drafts while retaining unrelated valid retrieval evidence."
+      }
+    },
+    "qa/agent-research:causal-armor/implementation": {
+      "source_sha256": "512f0f0e5bec47b5eeab1964532d2197ca797b8a4aa02cc269ba2ba1d850e9a8",
+      "reviewed": true,
+      "fields": {
+        "question": "What happens when CausalArmor has no sanitizer or reproposal callback?",
+        "answer": "Withhold the action and mark intervention_required instead of fabricating sanitation or reruns. Mask assistant content after the first hit. Larger τ flags more spans; preserve the sign and require normal authorization for any eventual action.",
+        "example": "Without a real sanitizer, deleting a string is not a successful defense loop."
+      }
+    },
+    "qa/agent-research:causal-armor/mechanism": {
+      "source_sha256": "e4fdcac65620172977df64097cff329aea662e6a15740675da2654706fb09c3d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't lower action likelihood after removing an untrusted span a causal safety proof?",
+        "answer": "Leave-one-out ablation shows a change in probability, but removal can change context structure or remove legitimate evidence. Compare user attribution, sanitize only flagged spans, mask contaminated continuation, and repropose. Preserve threshold direction and recomputation; low user attribution alone does not establish an attack.",
+        "example": "If a paragraph contains both a necessary number and a suspicious instruction, its likelihood effect cannot all be attributed to malicious content."
+      }
+    },
+    "qa/agent-research:airs-bench/basics": {
+      "source_sha256": "381d3503567624c9def5a1541c839675004352aefcc513d857f437466d14ece2",
+      "reviewed": true,
+      "fields": {
+        "question": "Is a written method suggestion enough for AIRS-Bench?",
+        "answer": "No. Starting from a problem, dataset, and metric, the agent must propose a method, implement training, analyze experiments, and revise. The agent, search scaffold, and execution harness are distinct. A plausible plan is not a completed experiment.",
+        "example": "Suggesting a different loss is a start; implement and run it, then revise using permitted feedback."
+      }
+    },
+    "qa/agent-research:airs-bench/comparison": {
+      "source_sha256": "4529a976d31e2638c9cb992af2accf4fb0b1b713744770bd132e5b54689ddd28",
+      "reviewed": true,
+      "fields": {
+        "question": "Why match budgets when comparing sequential MLGym with tree-search AIRA-dojo?",
+        "answer": "Search design affects coverage and cost, and unrestricted branching can consume more evaluations. Fix resources and isolate labels to assess scaffold differences. Metrics from different tasks cannot simply be added.",
+        "example": "A tenfold increase in candidates can yield better models without the gain coming entirely from the search method."
+      }
+    },
+    "qa/agent-research:airs-bench/implementation": {
+      "source_sha256": "a3316bd8851f7fd9cc5344eec66c0d24af3a6c47ecf54bcb6a544f28557f748b",
+      "reviewed": true,
+      "fields": {
+        "question": "Does access to an AIRS-Bench scoring script imply access to test labels?",
+        "answer": "No. Submit predictions to isolated test scoring and use only permitted validation feedback for selection. Author results above SOTA on some tasks are not local results; full research training must actually run for a reproduction claim.",
+        "example": "Knowing the metric is accuracy does not reveal any example's correct class."
+      }
+    },
+    "qa/agent-research:airs-bench/mechanism": {
+      "source_sha256": "1ae04eff7de49c530f2f57af4f90556b673c3153a54c2d41f93b5caa96715432",
+      "reviewed": true,
+      "fields": {
+        "question": "Why give AIRS-Bench problems, data, and metrics without directly providing baseline solutions?",
+        "answer": "Research involves proposals, implementation, analysis, and revision; complete solutions reduce autonomous design. Distinguish agent, search scaffold, and runtime so outer tree-search gains are not fully attributed to the model. Human SOTA is a comparison, not an answer script.",
+        "example": "Give classification data and scoring rules and let the agent design experiments. Providing the best training code would mostly test script execution."
+      }
+    },
+    "qa/agent-research:lifeagentbench/basics": {
+      "source_sha256": "b69605c3a51b0fbc0fdc134afe5ec60ba620b634a36942b77de7ef63654f13c7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do LifeAgentBench's long-term life records require more than classifying one event?",
+        "answer": "Questions span times, dimensions, or users across diet, sleep, activity, and mood records. Gather relevant evidence before calculating or comparing. Filtering and aggregation scope are part of the answer; a single record rarely suffices.",
+        "example": "To compare activity and sleep for one user over a week, use both kinds of records for the same dates. One day's step count is incomplete."
+      }
+    },
+    "qa/agent-research:lifeagentbench/comparison": {
+      "source_sha256": "eaa4c10778d4d030cd9bed364a689e24517e2446c09e5071244762c01a6de7ff",
+      "reviewed": true,
+      "fields": {
+        "question": "How do executable SQL, complete evidence, and final correctness differ?",
+        "answer": "Executability concerns syntax and runtime. EX measures evidence completeness on its defined denominator, and Acc|EX checks answers given complete evidence. Mixing denominators conceals retrieval or reasoning problems.",
+        "example": "A query can execute but omit a required user and fail to collect all evidence."
+      }
+    },
+    "qa/agent-research:lifeagentbench/implementation": {
+      "source_sha256": "d9a051bfd2bfa429d5262748c95d89e333e573e07f8afed677b777ec4e09fd2f",
+      "reviewed": true,
+      "fields": {
+        "question": "How do read-only SQL and Context Prompting isolate gold answers?",
+        "answer": "For SQL, the model generates an allowed query before receiving results. Context Prompting selects public evidence by user first. Gold stays with the scorer. Numeric grading follows piecewise tolerances, and multi-item answers must match item counts, not merely substrings.",
+        "example": "A correct term accompanied by extra incorrect items is not a fully correct answer."
+      }
+    },
+    "qa/agent-research:lifeagentbench/mechanism": {
+      "source_sha256": "83619001a49593353e7fed83d44a2d7ab3abb08b48750f696a74e798b1a2abb5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't an SQL scorer computing definitive answers implement LifeAgent tool reasoning?",
+        "answer": "The scorer uses rules and records to verify final answers; it does not decompose tasks, retrieve evidence, maintain statistics, or revise plans. Keep scorer and tool baseline distinct and do not let actors read reference calculations. Field checks are not long-term health-record reasoning; this describes evaluation, not health advice.",
+        "example": "A verifier can compute mean weekly sleep, but the agent must choose the window, query records, and check missing values without calling the reference-answer function."
+      }
+    }
+  }
+}

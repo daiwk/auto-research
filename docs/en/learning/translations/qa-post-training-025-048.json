@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:pto/basics": {
+      "source_sha256": "b04253378cf6577c8ece70e2e4cf9778c980177369bc1cde6e4852e6cd064b75",
+      "reviewed": true,
+      "fields": {
+        "question": "What do PTO's dialogue policy, virtual user and oracle do, and which is updated?",
+        "answer": "The policy proposes replies, the virtual user continues possible interactions, and the oracle evaluates expanded branches. Their comparisons label preferences for the current state and update only the dialogue policy. Simulated users and evaluators provide training signals, not real user behavior or joint updates.",
+        "example": "A consultation agent asks two possible questions, the simulator answers each, and the oracle compares progress. Train the agent's current reply selection."
+      }
+    },
+    "qa/post-training:pto/comparison": {
+      "source_sha256": "61fba7660f9c778b9b2f6d379361921ec4441d67b9d99510c3a6df6bd24f2148",
+      "reviewed": true,
+      "fields": {
+        "question": "What does adding more PTO branches expand compared with looking farther ahead?",
+        "answer": "Width compares more actions at one state; depth observes consequences farther into the future. Both cost simulations and judgments but aren't substitutes. Shallow branches can miss delayed effects; one deep branch can miss better starts. This is a search distinction, not an empirical ranking.",
+        "example": "Five openings with one turn each increase width; one opening with many turns increases depth."
+      }
+    },
+    "qa/post-training:pto/implementation": {
+      "source_sha256": "57e7c8bf00ddb903115884ac1898e9f91b8507c9b49e0dc6c51af570b205d848",
+      "reviewed": true,
+      "fields": {
+        "question": "Why preserve the mapping from current histories to future PTO branches?",
+        "answer": "One preference pair compares actions from the same state. Continue each action in its own branch and do not leak future outcomes into policy inputs. Deterministic local evaluators replace the expensive oracle only to test tree and credit flow.",
+        "example": "If A prompts clarification and B confusion, attaching A's success to B reverses the preference."
+      }
+    },
+    "qa/post-training:pto/mechanism": {
+      "source_sha256": "34374aad74e43efb9754636f30a854ea81f4b7e321850182b8c282697a497fc2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why simulate later dialogue before labeling a current PTO response?",
+        "answer": "A pleasing immediate reply may harm long-term goals. Compare rolled-out user interactions and turn branch-level differences into current-response DPO preferences. Depth changes cost and horizon; simulator/oracle bias becomes training bias and is not real feedback.",
+        "example": "Guessing a need can read better in turn one, while simulating another turn may show clarification prevents a wrong direction."
+      }
+    },
+    "qa/post-training:c2-dpo/basics": {
+      "source_sha256": "c87ae8df45ceebf5e6df5c5cdc68c40200a38b57b5b4da086376dc31cc0a0b01",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does C²-DPO require a response pair and two contexts?",
+        "answer": "Chosen/rejected compare responses to the same prompt; complete/degraded context varies evidence. They are independent axes. Hold the responses fixed to isolate context's effect.",
+        "example": "Compare red car and blue car with the original and degraded images, not with different questions."
+      }
+    },
+    "qa/post-training:c2-dpo/comparison": {
+      "source_sha256": "fbe65cdcc7069977a342f271e430a10f9c556525fc352508095c1ddfb5f4d771",
+      "reviewed": true,
+      "fields": {
+        "question": "Is positive context preference gain the same as the chosen response winning under full context?",
+        "answer": "No. CPG compares the two margins; winning needs a positive full-context margin. An improved but negative margin can still favor the wrong reply. Context gain and original preference ordering are separate constraints.",
+        "example": "A change from −3 to −1 gives positive gain without a chosen win."
+      }
+    },
+    "qa/post-training:c2-dpo/implementation": {
+      "source_sha256": "86b712c08b7d6606ade68f92b0bfd293dc1e8406c160ce84bca040352b5737c0",
+      "reviewed": true,
+      "fields": {
+        "question": "What must stay consistent across C²-DPO's margins?",
+        "answer": "Use one prompt and one chosen/rejected pair under both contexts. Degraded context must not contain the answer. Local work does not complete fine-tuning the named multimodal model/data.",
+        "example": "Subtracting a full-image A/B comparison from degraded-image C/D does not isolate visual evidence."
+      }
+    },
+    "qa/post-training:c2-dpo/mechanism": {
+      "source_sha256": "4cc11dc1497d76df8fe5580e2a67f07a99eab5acb79bf9284af39f116fd343b3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compare full and degraded context margins rather than only raise chosen likelihood?",
+        "answer": "Chosen likelihood may exploit language priors and ignore images. Context preference gain rewards the same pair changing preference with evidence while preserving the original ordering. It depends on appropriate degradation and does not itself establish correct visual understanding.",
+        "example": "If masking a chart leaves preference unchanged, language priors may dominate; correct evidence should provide extra support."
+      }
+    },
+    "qa/post-training:rm-memorization-protocol/basics": {
+      "source_sha256": "a9abc46a15f0362da692f4aa77472102f0993fd28bb622e8147fc20a5131121d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate in-training and held-out performance in reward-model memorization?",
+        "answer": "A high score on a seen pair could reflect broad learning or memorization. Compare the same pair across actual runs including and excluding it; the difference measures conditional memorization.",
+        "example": "Compare models trained with this pair to models that did not see it."
+      }
+    },
+    "qa/post-training:rm-memorization-protocol/comparison": {
+      "source_sha256": "45be7d47b1c90fff2b538524f0d95c3697b7dcb7f98031714e8fbb6a03a74b3a",
+      "reviewed": true,
+      "fields": {
+        "question": "How does CM differ from training accuracy minus test accuracy?",
+        "answer": "CM compares the same pair across runs and splits by user to avoid leakage. Aggregate split means also mix difficulty differences. CM depends on split and training quality; it is not proof of verbatim memorization per item.",
+        "example": "A train–test gap between different user groups may reflect their difficulty rather than memory of any one preference."
+      }
+    },
+    "qa/post-training:rm-memorization-protocol/implementation": {
+      "source_sha256": "a3c8fdd17fb61774bf76ec8b6a6e0193683ec6e6b2e8c577b76b58553c46c964",
+      "reviewed": true,
+      "fields": {
+        "question": "Can inclusion in reward-model training be inferred from a high score?",
+        "answer": "No. Use actual run manifests to assign inclusion and held-out status; scores are outcomes. Inferring inclusion from outcomes is circular. Check user-level isolation. The local aggregator does not create the paper's training runs.",
+        "example": "A high-scoring held-out pair stays held out; do not move it to support a memorization story."
+      }
+    },
+    "qa/post-training:rm-memorization-protocol/mechanism": {
+      "source_sha256": "b806722303d89cd6bbedd14ec403079a5d3d9d67fb5c64fdaf1565e5ce9720fa",
+      "reviewed": true,
+      "fields": {
+        "question": "Why sigmoid each reward margin before averaging by inclusion?",
+        "answer": "Sigmoid is nonlinear. Convert each actual run's margin into a probability, then separately average seen and held-out runs for memorization and generalization. Their difference can be negative. Group by actual manifests and keep users isolated.",
+        "example": "Large margin differences can be hidden by averaging before probability saturation; retain each run's membership."
+      }
+    },
+    "qa/post-training:sa-dpo/basics": {
+      "source_sha256": "882411633855e2dbdd6f6906c7330869c653495d831cd5dffc0299ec7d0220ca",
+      "reviewed": true,
+      "fields": {
+        "question": "Does SA-DPO measure semantic distance between responses or between prompts?",
+        "answer": "It compares preferred and dispreferred answers to one prompt. It is not a margin from prompt difficulty/length. Frozen response representations supply semantic distances independently of preference labels; distances aren't correctness scores.",
+        "example": "Two paraphrases of one answer can be close; two similar prompts are not the comparison unit."
+      }
+    },
+    "qa/post-training:sa-dpo/comparison": {
+      "source_sha256": "a328ab9f7526fb52bee78c8abbb2dce51345464c431120bb0bb6f0f1e55ca2a3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why match mean margin when comparing SA-DPO to a fixed-margin method?",
+        "answer": "Otherwise performance can change from overall training pressure rather than semantic allocation. Matching means better isolates allocation without proving semantic judgments always correct.",
+        "example": "An easier objective from a smaller mean margin does not establish better semantics."
+      }
+    },
+    "qa/post-training:sa-dpo/implementation": {
+      "source_sha256": "6294145b595266250417d1dbe52af3bf9cef0b5ab141098c32b899d8844da366",
+      "reviewed": true,
+      "fields": {
+        "question": "What should SA-DPO do when response distance is zero?",
+        "answer": "Set extra distance margin to zero, but retain the policy/reference log-ratio difference in preference loss. Use frozen distances, not constants or test-label calibration.",
+        "example": "Removing extra separation for identical wording does not make the whole loss zero."
+      }
+    },
+    "qa/post-training:sa-dpo/mechanism": {
+      "source_sha256": "b4f4ee83f19d8c24b6e69ce3367fa9ab78394587f33ba41c6a7258f3cb4ab1f9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why require less separation for semantically similar answers?",
+        "answer": "A large fixed margin spends capacity separating paraphrases and amplifies label noise. SA-DPO scales the added margin with frozen semantic distance, zero at zero distance, while keeping relative-to-reference preference. Control encoder quality and mean pressure separately.",
+        "example": "'The answer is three' and 'The result is 3' need less separation than right vs wrong answers; wording can still bias distances."
+      }
+    },
+    "qa/post-training:group-dpo/basics": {
+      "source_sha256": "5489cb14af492a0b244b88606fef17e2a2304a21e7e6b09785b176da06162630",
+      "reviewed": true,
+      "fields": {
+        "question": "Does GroupDPO concatenate all responses into one long response?",
+        "answer": "No. One prompt has nonempty positive and negative sets; responses retain separate probabilities and IDs. The joint objective uses set relationships without requiring simultaneous activation storage.",
+        "example": "Two positive and two negative answers are encoded independently while the objective compares both sets."
+      }
+    },
+    "qa/post-training:group-dpo/comparison": {
+      "source_sha256": "64fbe940ac5bcd012f011310c9dc28a8eabc237d6cb96d45e8e86ef53772e5b7",
+      "reviewed": true,
+      "fields": {
+        "question": "Are GroupDPO Margin, MPO, Softmax and All-Pairs equivalent objectives?",
+        "answer": "No. They compare sets differently. What is shared is precomputing derivatives of the chosen full-group objective and replaying separately. Changing the objective differs from changing compute batches while retaining its first derivative.",
+        "example": "All pairwise comparisons may assign different coefficients than pooling positives first; the same memory method serves both."
+      }
+    },
+    "qa/post-training:group-dpo/implementation": {
+      "source_sha256": "32934414cb845ba43f5336d03a7f6a4ed0122e7d28e99d3f7919afa47c417fd4",
+      "reviewed": true,
+      "fields": {
+        "question": "Can GroupDPO coefficients be reused after the optimizer step?",
+        "answer": "No. Derivatives change with parameters. Recompute. Do not divide microbatch backpropagation by local groups or microbatch count; positive NLL also uses the full-batch group normalization.",
+        "example": "Reusing old coefficients saves a pass but becomes a stale approximation, not exact current gradients."
+      }
+    },
+    "qa/post-training:group-dpo/mechanism": {
+      "source_sha256": "107f6cf8a77795d3f18c9a23c56e4634c40d7b8ffe4ec3fbe308c1b335ca75e4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not recompute GroupDPO coefficients inside each response microbatch?",
+        "answer": "Freeze derivatives from the entire group at the same parameter point and replay response gradients to recover the first-order result. Local recomputation changes sets and normalization. Recompute after every update. Loss values and Hessians are not equivalent.",
+        "example": "Each response carries fixed full-group credit rather than re-ranking within a small compute batch."
+      }
+    },
+    "qa/post-training:probabilistic-autorater/basics": {
+      "source_sha256": "c6dfeabf566ef50374d81a04dd92bdb2f1f9df312cb7d48fbc20b880b3f3f0d0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why should a probabilistic autorater output a preference probability, not just a winner?",
+        "answer": "Real preferences can disagree. Brier/log rewards fit observed preference frequencies rather than force binary certainty. Reliable target distributions matter; arbitrary numbers are not calibrated.",
+        "example": "Near-even annotator votes warrant an intermediate probability rather than an absolute winner."
+      }
+    },
+    "qa/post-training:probabilistic-autorater/comparison": {
+      "source_sha256": "2402e373148da69c4f7c68300bd82bd92663714e647ef90c32594c6fe0f3b24c",
+      "reviewed": true,
+      "fields": {
+        "question": "How do Brier and log rewards penalize confident errors differently?",
+        "answer": "Both are proper probability scores, but squared and logarithmic tails differ; log loss is especially sensitive to extremely confident mistakes. Parse failures also have a separate reward, beyond legal probability gradients.",
+        "example": "A near-certain win prediction followed by defeat is penalized by both, with different magnitudes."
+      }
+    },
+    "qa/post-training:probabilistic-autorater/implementation": {
+      "source_sha256": "3ddb6cf0f8e328a3885c29f8e0265298a1d712bc49c89c80804a6f8ef90e994d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't invalid numbers enter the formula before multiplying by a zero mask?",
+        "answer": "Separate invalid outputs first. NaN can propagate through nonlinearities and multiplication by zero; out-of-range values are not probabilities. Use the parse-failure reward. The local strict parser is a contract, not the authors' parser or full RL.",
+        "example": "Route NaN directly to invalid reward rather than computing log(NaN) first."
+      }
+    },
+    "qa/post-training:probabilistic-autorater/mechanism": {
+      "source_sha256": "d27aff8da4bc072c1ca044061d420f00e5e4caca8ff9f1ad688aeaa3d9dcc253",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't Autorater backpropagate through parsed probability text?",
+        "answer": "The policy generates text, parses it to a fixed reward and uses policy gradients. Discrete text-to-float parsing has no ordinary differentiable path. Brier/log rewards encourage calibration, with separate invalid penalties. Derivatives of numeric scores alone are not GRPO.",
+        "example": "An unformatted 'very confident' response fails parsing; don't silently substitute a plausible number."
+      }
+    }
+  }
+}

@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:mesh/comparison": {
+      "source_sha256": "2af821042997b2eae913c3330a5a4775a2c87f3677802c5fcaca0cd7c8b37b3f",
+      "reviewed": true,
+      "fields": {
+        "question": "When can MESH's parallel towers be faster than a flat serial model?",
+        "answer": "Independent towers permit concurrency and async item caching, but speed depends on runtime, hardware, batch size, and synchronization. A parallelizable graph is not necessarily executed in parallel by small-batch Python. The local slowdown is valid evidence. Compare quality and compute separately instead of inferring throughput from tower count.",
+        "example": "Illustration: Three towers run sequentially in one CPU loop with no GPU concurrency and more scheduling overhead; they do not become three times faster by design alone."
+      }
+    },
+    "qa/recommendation:mesh/implementation": {
+      "source_sha256": "8c8943c805a8ec036a6f1161c65331486daee5142513a75dbb2f0db508d068b5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does RGBC gate elementwise user–item affinity with context and add a context residual?",
+        "answer": "The product models corresponding dimensions of user and item vectors. A sigmoid context gate selects affinities useful now, while the residual retains context itself. Align dimensions and identity across towers. Averaging context loses sample conditioning, and layer-normalization and residual placement matter.",
+        "example": "Illustration: Commuting and weekend contexts can emphasize different affinity dimensions for the same pair, while context independently represents time. A final constant bias cannot do this."
+      }
+    },
+    "qa/recommendation:metastrategy/mechanism": {
+      "source_sha256": "6975af0fd078b72ca2be9a53485adafa46db8ef3e5fe9ce0363633aff85020fe",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does MetaStrategy generate typed policies rather than final item order?",
+        "answer": "Typed objective weights, category preferences, and position constraints are explicit and compiled deterministically against real candidates. This bounds execution and makes failures auditable. The LLM interprets intent and the compiler executes it; evaluate them separately. Valid JSON proves interface compliance, not utility, and self-scores do not replace replay feedback.",
+        "example": "Illustration: For less repetition, emit a bounded category-diversity rule. If matching candidates are absent, expose the limit rather than inventing items."
+      }
+    },
+    "qa/recommendation:metastrategy/basics": {
+      "source_sha256": "f075e176e4a2b7f754e027b21609fa06e53b742824f8ea3d6d8c49d9f921d414",
+      "reviewed": true,
+      "fields": {
+        "question": "Why put objective weights, preferences, constraints, and position rules into typed JSON in MetaStrategy?",
+        "answer": "A fixed scorer is hard to steer on demand, and free text is difficult to execute reliably. Typed parameters separate semantic planning from deterministic ranking. Validity is only a format gate; still check ranges, replay, and feedback.",
+        "example": "Illustration: Raising a freshness weight with a placement limit is executable, unlike 'show more new items,' but it may still be bad for the user."
+      }
+    },
+    "qa/recommendation:metastrategy/comparison": {
+      "source_sha256": "2c7f40651569eb71fb03e01e925dae07f5f43cec42e79d645793794e816df82a",
+      "reviewed": true,
+      "fields": {
+        "question": "What is auditable and reusable in MetaStrategy compared with direct item-list generation?",
+        "answer": "A list is bound to its candidates, whereas a policy can be inspected and reapplied after candidates change. Compiler expressiveness limits which preferences it can encode. The typed-bundle proxy is not full production distillation or equivalent intelligence.",
+        "example": "Illustration: 'At most one per author' works across candidate lists; a fixed ten-book list goes stale. The rule cannot interpret all content semantics."
+      }
+    },
+    "qa/recommendation:metastrategy/implementation": {
+      "source_sha256": "62a6841c001cdf01674ee31b1cd9983ceb088ad51134ccc771cd42d526167833",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must MetaStrategy's compiler reject unknown fields and out-of-range values?",
+        "answer": "Otherwise generated policies can escape the allowed space, breaking equivalence between evaluation and serving. Bind the schema and defaults to actual output and record failures rather than guessing intent. A JSON file does not implement online reward routing or teacher–student OPD.",
+        "example": "Illustration: Reject 'increase purchase weight without limit' and unknown fields rather than interpreting them as arbitrary executable expressions."
+      }
+    },
+    "qa/recommendation:mfli/mechanism": {
+      "source_sha256": "60772fdfe70062ef2062d190a252fffc38ed7b094debab20c692e6e9cec8e59d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why learn the index in MFLI and allocate retrieval budget per request and facet?",
+        "answer": "One geometry struggles to represent semantics, popularity, and freshness, and an offline index can lag the model. Learned facets preserve distinct structures, and each request allocates candidate quotas among them. Maintain coverage and update consistency; removing traditional ANN does not automatically improve quality and cost.",
+        "example": "Illustration: Exploration can favor freshness, while an exact category can favor semantics. Equal quotas on every request do not exploit context."
+      }
+    },
+    "qa/recommendation:mfli/basics": {
+      "source_sha256": "b3c3b7dfef1f769804b61cb140e02052b0ea5af2a63d426d197d365793f4d2c3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why learn a retrieval index in MFLI rather than build ANN on existing vectors?",
+        "answer": "Independent ANN organizes geometric neighbors; multiple objectives share one space and updates can lag. Learned facets organize semantics, popularity, and time differently and allocate request-dependent budgets. Task linkage does not eliminate update cost or coverage issues.",
+        "example": "Illustration: An item can occupy separate semantic and freshness facets, and the request decides which to search more."
+      }
+    },
+    "qa/recommendation:mfli/comparison": {
+      "source_sha256": "4f7a80f7da29e7a71d099cc9315c9361c5982eba09a8cd56529b63e13920eef3",
+      "reviewed": true,
+      "fields": {
+        "question": "How does MFLI allocate budgets differently from concatenating multiple retrieval outputs?",
+        "answer": "It jointly designs learned facets and request weights a(q), which affect resource allocation. Simple concatenation can use fixed quotas and unrelated spaces. Learned facets do not guarantee less popularity bias: local head share increased, so inspect the actual distribution.",
+        "example": "Illustration: Search freshness more for new products and semantics more for a specific model. Ten from each branch for every request can duplicate popular items."
+      }
+    },
+    "qa/recommendation:mfli/implementation": {
+      "source_sha256": "178145c39366e500eff761bf8138d148de733882c52d29edc2b3b15278112125",
+      "reviewed": true,
+      "fields": {
+        "question": "Why verify MFLI facet softmax and actual candidate quotas separately?",
+        "answer": "Weights summing to one do not establish correct integer allocation. Rounding, total budget, and empty facets matter. Map code identities back to items and deduplicate. The four-facet local proxy does not measure industrial refresh or throughput.",
+        "example": "Illustration: Rounding three equal shares of a ten-item budget yields only nine; define where the remainder goes."
+      }
+    },
+    "qa/recommendation:mgoe/mechanism": {
+      "source_sha256": "24e778c3e352a678de900507edd94e5f6e70fe004ad62a768193240a30bb0a7e",
+      "reviewed": true,
+      "fields": {
+        "question": "What does MGOE's explicit task graph add to MMoE's sample-level gate?",
+        "answer": "Sample-level mixtures do not explicitly encode stable task relationships. Graph bottom and experts propagate between related objectives before task towers, separating global structure from local routing. Wrong edges can propagate negative transfer. Compare related and unrelated tasks rather than assuming the graph is correct.",
+        "example": "Illustration: Clicks, cart additions, and purchases may share paths, while reports need other signals; the gate need not relearn every task relationship per sample."
+      }
+    },
+    "qa/recommendation:mgoe/basics": {
+      "source_sha256": "4880d4c43784da5bdb3554242507f29114eb599962325ac84395edeb219900d4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why build a Macro Task Merging Graph before expert propagation in MGOE?",
+        "answer": "The graph represents stable sharing relations that a per-sample gate does not explicitly encode. Macro Graph Bottom/Experts propagate information before task-specific towers. Relations can change across scenarios, and edges do not establish causality.",
+        "example": "Illustration: Click, watch time, and purchase can share information without implying clicks cause purchases."
+      }
+    },
+    "qa/recommendation:mgoe/comparison": {
+      "source_sha256": "1a4c4d72ad305210159b6fab2ef0bc6dd00c5d5ceba6d584dc47f88c0e60fc3a",
+      "reviewed": true,
+      "fields": {
+        "question": "What additional sharing bias does MGOE introduce relative to independent MMoE task gates?",
+        "answer": "MMoE shares experts implicitly by example. MGOE adds graph-constrained task propagation, which can help sparse objectives or transmit wrong relations. Overall gains and changed head share do not establish all-task improvement.",
+        "example": "Illustration: A sparse purchase task can borrow click knowledge; a mistakenly connected returns task may inherit the wrong direction."
+      }
+    },
+    "qa/recommendation:mgoe/implementation": {
+      "source_sha256": "26cec0a4956283176ece9fe554b650158b3a97281e88f254f9bcb87d69d14ce6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why align MGOE's normalized adjacency and task indices with expert tensors?",
+        "answer": "Rows and columns of A identify nodes and task towers must read the correct propagated rows of H. Normalization, self-loops, and depth determine mixing. Use labels only in training; do not rebuild the graph from test feedback.",
+        "example": "Illustration: A purchase node paired with watch-time features still multiplies correctly but shares the wrong information."
+      }
+    },
+    "qa/recommendation:mim/mechanism": {
+      "source_sha256": "d6856aeecb805c070839857f24aee7a18a9d2a52682309acfed71234840d3ed8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why follow multimodal masked reconstruction with content-interest-aware SFT in MIM?",
+        "answer": "Reconstruction learns internal content structure but not which differences users care about. SFT aligns semantic features with consumption interests, then content and ID interest fuse to combine cold-start and collaborative signals. Reconstruction alone does not establish ranking relevance, and either branch can overwhelm the other.",
+        "example": "Illustration: Reconstructing product color does not show whether users care about lightness or durability. Interest alignment introduces consumption evidence."
+      }
+    },
+    "qa/recommendation:mim/basics": {
+      "source_sha256": "4e012a031e2d91ce38f5f05b0b09d852fbb6f59488aeda4669da7693328f6bbf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why align content with interest after multimodal reconstruction in MIM?",
+        "answer": "Reconstruction teaches recoverable features, not their relation to user preference. Content-interest-aware SFT links semantic and collaborative information; CiUBM combines content and ID interests. Low reconstruction loss cannot substitute for ranking evidence.",
+        "example": "Illustration: Recovering poster colors does not identify a preference for hard science fiction over comedy without behavioral supervision."
+      }
+    },
+    "qa/recommendation:mim/comparison": {
+      "source_sha256": "6bdc2298b0690ff5e2516233ec7a678b4e36d00b6bea961cafd62242e877ca6b",
+      "reviewed": true,
+      "fields": {
+        "question": "What cold-start clues does MIM's dual-interest fusion add beyond ID co-occurrence?",
+        "answer": "ID co-occurrence needs feedback; shared multimodal semantics can transfer to sparse items. Content noise and bad mappings can hurt ranking. Local NDCG rose slightly while Hit fell, so report both and evaluate a dedicated new-item cohort.",
+        "example": "Illustration: An unseen movie may be identified as science fiction from content, but a misleading action poster can also hurt otherwise sound ID scores."
+      }
+    },
+    "qa/recommendation:mim/implementation": {
+      "source_sha256": "9f1749fe2eab98b621269f64b2ff6733d89619810f0bb2c53d7efaabd8bbb3a5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use different visibility rules for MIM masked reconstruction and recommendation targets?",
+        "answer": "Training can mask content and reconstruct it, but recommendation input stops at the current history cutoff. Future items and feedback are targets only. Modality masking cannot fix a future item already present in the user representation.",
+        "example": "Illustration: Masking part of a historical poster is valid content training; putting the test film's full vector in history before predicting it leaks the target."
+      }
+    },
+    "qa/recommendation:mima/mechanism": {
+      "source_sha256": "a4b1ff9aa4d1c546f340a8d43b5d89cad95ab369a11d090103125d57977d242f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why match multiple positives in a MIMA request one-to-one with interests instead of independently choosing the closest?",
+        "answer": "Independent selection can send all gradients to one interest. MIMA forms an interest–positive similarity cost matrix and finds a globally optimal one-to-one assignment, giving distinct interests supervision. Activation probabilities then calibrate channels. Specialization comes from set supervision, not just more vectors.",
+        "example": "Illustration: Running shoes and a hiking pack can both choose one sports channel under independent matching. A one-to-one assignment makes two channels explain the positives separately."
+      }
+    },
+    "qa/recommendation:mima/basics": {
+      "source_sha256": "def2be1d98894e1a4a0641183463ef815e5523cb8b804d5161c2aad911a1eb25",
+      "reviewed": true,
+      "fields": {
+        "question": "Why treat positives in one MIMA request as a set rather than imposing an order?",
+        "answer": "Coexisting interests need not be assigned by artificial order. Set matching is permutation-insensitive and encourages specialization; routing estimates actual activation. Historical encoding can still be causal; only positive supervision changes.",
+        "example": "Illustration: A request can like shoes and a pack without defining which to learn first or letting the strongest sports channel explain both."
+      }
+    },
+    "qa/recommendation:mima/comparison": {
+      "source_sha256": "d0c43a874cabb90d240fa8f6d3294bc9eb8f1b3c31772927e0d9a4cc2bdde611",
+      "reviewed": true,
+      "fields": {
+        "question": "How does one-to-one MIMA matching avoid crowding one channel compared with independently taking the nearest interest?",
+        "answer": "Independent argmax can give all positives to one interest and starve the others. Global assignment distributes slots to minimize total cost. Define unmatched handling when counts differ; forced matching can also give a noisy positive its own channel and does not ensure semantic independence.",
+        "example": "Illustration: Two items slightly prefer interest one. One-to-one matching evaluates the total cost of assigning either to interest two, unlike greedy independent matching."
+      }
+    },
+    "qa/recommendation:mima/implementation": {
+      "source_sha256": "209cd83b42cf099a9a83e8d3ef3bc52a92789fbd96dedd1a011b91dfd0126398",
+      "reviewed": true,
+      "fields": {
+        "question": "When do exhaustive search and Hungarian matching optimize the same MIMA objective, and what cannot replace them?",
+        "answer": "Both solve the same cost matrix's optimal one-to-one assignment; exhaustive search can verify small cases. Greedy matching is generally not equivalent. Use aligned interest–positive similarities and separately calibrate channels with log activation probability. Plausible pairs do not establish optimality.",
+        "example": "Illustration: A greedy first positive can take the only good slot for the second. Exhaustive enumeration can find the lower-cost allocation."
+      }
+    },
+    "qa/recommendation:mixformer/mechanism": {
+      "source_sha256": "48409fb0a6f10f7c1eda8930cb3c8f52e421467f284fc60c83988e457f49da61",
+      "reviewed": true,
+      "fields": {
+        "question": "How does MixFormer's shared token space change information flow versus concatenating two towers at the end?",
+        "answer": "Late concatenation finishes field interactions and sequence encoding separately. MixFormer updates both token types together across layers and scales joint modeling. Serving can still decouple reusable user computation from candidate-dependent work rather than rerunning all user history per candidate.",
+        "example": "Illustration: A rainy setting can shape early interpretation of outdoor browsing and reinforce waterproof needs across layers, while late fusion sees two completed summaries."
+      }
+    },
+    "qa/recommendation:mixformer/basics": {
+      "source_sha256": "95fa70aaa18b00d9c2235ebfe6aa87cff28c7b6d2a5b7e5311d47501e2fa87d9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why include both dense fields and behaviors in MixFormer's unified token space?",
+        "answer": "Separate encoders postpone communication. Joint layers update both representations and scale their capacity together. Heterogeneous fields need proper projection, not treatment as literal words. Serving still separates user and candidate dependencies; not every state can be shared.",
+        "example": "Illustration: A rain field helps interpret outdoor clicks early, and the refined interest feeds back into field interactions before any final concatenation."
+      }
+    }
+  }
+}

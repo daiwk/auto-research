@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:memskill/mechanism": {
+      "source_sha256": "95b8f16c9d3d5849bd260f7ff10c635de5a94aa9351beb89736bc6c3091ece2c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are controller memory selection and designer skill compilation different jobs?",
+        "answer": "Selection decides which experiences the current task reads. Compilation turns recurring successes into reusable procedures on a longer timescale. Feedback also drives versions. One retrieved success does not establish that every detail should be consolidated; distinguish reusable steps from incidental conditions.",
+        "example": "Example: Retrieve a prior fix for today's error and compile a skill only after confirming a repeated pattern. Do not hard-code a temporary account from one log."
+      }
+    },
+    "qa/agent-research:memskill/basics": {
+      "source_sha256": "7a73d1f84a47aba047f56741ec8c4c5984f036748525f6413b90c6bb210909eb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why turn one-off experiences into callable operational knowledge in MemSkill?",
+        "answer": "Episodic memory records what happened, while later tasks may need repeatable steps, preconditions, and recovery. MemSkill extracts skills and lets execution select relevant memories. Over-abstraction can lose conditions, and repeated success is not universal applicability. Check transfer through actual execution.",
+        "example": "Example: A spreadsheet repair includes long dialogue. Future work needs check column names before date conversion and the conditions where that rule applies."
+      }
+    },
+    "qa/agent-research:memskill/comparison": {
+      "source_sha256": "e649189d8a0c4abc3f7d17f8434ae64cbf411c09b8620073c5ebc1377851c9fa",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is repeated success stronger evidence for consolidation than a single successful trace?",
+        "answer": "One success may depend on chance or hidden help. Repetition supports a pattern across instances and makes it a better skill candidate. It does not prove causal necessity; inspect prerequisites, failures, and version changes. Frequency does not replace validation.",
+        "example": "Example: Three successes clear cache first because those tasks may all need it. Record the condition rather than mandate clearing cache everywhere."
+      }
+    },
+    "qa/agent-research:memskill/implementation": {
+      "source_sha256": "750987614fd355461fc7bb0ed58477ff1178beddedbca50c98487e623c250338",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the evidence boundary between local skill-version updates and full designer learning?",
+        "answer": "The local run verifies selection, compilation-style transitions, versions, and budgets without the paper's LLM, RL, or real environment. Version increments show the path ran, not reliable skill extraction from natural-language logs. Perfect controlled scores are not paper cross-task ability.",
+        "example": "Example: Rules can convert recurring steps to a template for a pipeline test. Without a learned designer, do not claim open-task procedure discovery."
+      }
+    },
+    "qa/agent-research:sage/mechanism": {
+      "source_sha256": "aeb5dae276f5d0f1a270e4b074ff5c90b2cd21461fa190ead38263dcaebf2022",
+      "reviewed": true,
+      "fields": {
+        "question": "Why revise or retire skills from successful trajectories after later failures?",
+        "answer": "Success establishes utility under past conditions, not new ones. Returns train selection and reveal obsolete content. Revision and eviction stop accumulation of errors. An append-only library can keep retrieving relevant-looking stale skills and reinforce incorrect behavior.",
+        "example": "Example: A download skill worked before a site redesign. Update or disable it rather than rank it first based on old success."
+      }
+    },
+    "qa/agent-research:sage/basics": {
+      "source_sha256": "a2207d6bcd91b05ec81c5eb1bc52d4427854af1ff2d01810bedb043a59fbd6c8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why make use of accumulated skills a learning objective in SAGE?",
+        "answer": "Stored skills need timely, correct selection and can harm when mismatched. SAGE connects experience-derived skills to retrieval and uses later outcomes to govern their lifecycle. It studies durable use of experience, not library size or successful trace count.",
+        "example": "Example: A migration skill is irrelevant to looking up one row. Knowing when not to invoke it is useful skill selection."
+      }
+    },
+    "qa/agent-research:sage/comparison": {
+      "source_sha256": "fee36827c90191012535b5e5a72897858bb35fb1ccfcd929f22a0d7e1bfbfd14",
+      "reviewed": true,
+      "fields": {
+        "question": "How does learned retrieval qφ differ from fixed semantic nearest neighbors?",
+        "answer": "Semantic nearest neighbors use description similarity. Learned retrieval adapts to which skills improve execution returns. Outcomes are confounded by environment and task difficulty, so success after invocation is not independent causal contribution. Inspect updates with bank state and visible evidence.",
+        "example": "Example: Two skills sound like file organization. A more reliable route can get a higher learned score even if it shares fewer words."
+      }
+    },
+    "qa/agent-research:sage/implementation": {
+      "source_sha256": "835f6ee531c62a28f713d96e0cd70b55cad44631bc925f0b87c7539f8700afa9",
+      "reviewed": true,
+      "fields": {
+        "question": "Can SAGE and sage-planner share implementation conclusions because they have the same name?",
+        "answer": "No. SAGE concerns an RL-driven skill library; sage-planner concerns symbolic action gates and suffix edits. The local SAGE run tests skill state and budgets, without paper-scale models or benchmarks. Shared names do not fill evidence gaps.",
+        "example": "Example: A skill-library revision invokes no symbolic gate. Gate tests from the other method cannot verify this one."
+      }
+    },
+    "qa/agent-research:legomem/mechanism": {
+      "source_sha256": "cfc4de2813b132311acc4aa398e8f95821b8add2d6bc376adf86e0fd0e28cf55",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate orchestration and execution memory for recombination on new tasks?",
+        "answer": "Decomposition and delegation capture high-level dependencies, while action templates ground calls. One full trace binds them to particular people and environments. Layers can reuse structure while swapping execution units. Admit verified units only and recheck interfaces and prerequisites when combining them.",
+        "example": "Example: Collect, verify, and summarize stays the same while data comes from a database in one task and a file in another."
+      }
+    },
+    "qa/agent-research:legomem/basics": {
+      "source_sha256": "c2839865df90c220323200281c0719b4121cad9bfdb0087301e7eb74b5e3665e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does LegoMem focus on recurring workflows with multiple roles and steps?",
+        "answer": "Office workflows share portions but change goals and roles. Reorganizable procedures let new tasks reuse the right steps rather than copy one complete run. Units must retain dependencies and context; pieces that look composable can still lack inputs.",
+        "example": "Example: Weekly reports and project briefs both need collection and source verification, but different approvers. Reuse collection and replan handoff."
+      }
+    },
+    "qa/agent-research:legomem/comparison": {
+      "source_sha256": "ed3cb237a2010577ae1ae9f6de42a9d78761655ed3bba7b90a9906762696af79",
+      "reviewed": true,
+      "fields": {
+        "question": "What generalization trade-off separates procedural recombination from whole-trace retrieval?",
+        "answer": "Whole traces preserve complete context but may be tied to one task. Procedural units recombine for new needs but can lose cross-unit prerequisites. Legal dependencies and validation are needed; individual success does not imply arbitrary compositions work.",
+        "example": "Example: Reading a spreadsheet and sending email may both work alone. Verify recipients and data permissions before combining."
+      }
+    },
+    "qa/agent-research:legomem/implementation": {
+      "source_sha256": "26893bd87def80ef080aa1f391b347aae35cefc74f109e390dc6812ad8710556",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local reused_plans verify real multi-agent Office delegation?",
+        "answer": "No. The local run extracts action/domain units from structured verifiable plans and reuses high-level and fine-grained steps. It does not execute Office apps, LLM delegation, or complete recovery. Reuse counts are neither OfficeBench success nor real tool cost.",
+        "example": "Example: A rule reuses a subplan 100 times without showing a model can delegate between real document and email apps."
+      }
+    },
+    "qa/agent-research:memtool/mechanism": {
+      "source_sha256": "67f6cc8ebb353c470c5be7539182cfcb9ca1eb704d4d086f65240ab3748fb7f2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why protect workflow-required tools before considering recency or historic success?",
+        "answer": "Retention scores reflect past usage and may undervalue an uncalled but required future tool. Protect dependencies first, then evict lower-scoring unprotected entries. If required tools exceed capacity, silent truncation does not preserve a valid workflow.",
+        "example": "Example: Upload is required at the end of archiving even if not recently used. Do not remove it solely for low recency."
+      }
+    },
+    "qa/agent-research:memtool/basics": {
+      "source_sha256": "712120b5945c23dc567ca4476bee2d2e547c0393a5a35cd948dc32aa1f5ea86a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do tool descriptions need bounded dynamic memory?",
+        "answer": "MCP schemas and instructions consume context, while static truncation can remove tools in use. MemTool protects current workflow requirements and manages other descriptions dynamically. Preserve executable interfaces rather than maximizing removals.",
+        "example": "Example: An order lookup followed by refund still needs the refund tool even if it was not called recently."
+      }
+    },
+    "qa/agent-research:memtool/comparison": {
+      "source_sha256": "c5b00b6e80fd5bb6711319141bfc7be2ad5eee3330cb62784e49ff5483c3883a",
+      "reviewed": true,
+      "fields": {
+        "question": "How do autonomous, workflow, and hybrid tool-description policies make decisions?",
+        "answer": "Autonomous lets the agent decide retention; workflow uses current process requirements; hybrid protects those requirements and dynamically manages remaining tools. Freedom and structural constraints differ. Removal rate is insufficient if eviction prevents completion.",
+        "example": "Example: An agent may discard rare payments before one is needed. Workflow information protects payment while hybrid manages other entries."
+      }
+    },
+    "qa/agent-research:memtool/implementation": {
+      "source_sha256": "ebcf3a225c7c81beffc4ac6681a4858b3e748195df6d43d4798b6dc300a45360",
+      "reviewed": true,
+      "fields": {
+        "question": "How should recency and historical success scores evict unprotected tools?",
+        "answer": "Restrict candidates to those outside the protected workflow set. Keep scores λ times recency plus (1−λ) times success; evict the lowest. The weight trades off recency and history without redefining protection. Local deterministic descriptions and eviction counts do not establish live tool completion.",
+        "example": "Example: One evictable tool was just used but often fails; another is older but reliable. λ controls the choice, and required tools do not enter this ranking."
+      }
+    }
+  }
+}

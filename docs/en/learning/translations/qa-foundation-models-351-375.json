@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:bakron/comparison": {
+      "source_sha256": "f3a77b37f1fadfde84518df833f4ce99ac270977085f5023c557517a07ce912f",
+      "reviewed": true,
+      "fields": {
+        "question": "What does BaKron add over input-side GPTQ-style rounding?",
+        "answer": "Weight vectorized error with A⊗B to include both curvatures. Optimization must match that bilateral objective; row-wise rounding is not equivalent.",
+        "example": "Lower ordinary MSE can still incur greater bilateral weighted error."
+      }
+    },
+    "qa/foundation-models:bakron/implementation": {
+      "source_sha256": "4f5835a93a4ea31f101ae45b42bbb65f9acf585682a28f006dada1e522569328",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check vectorization order and Kronecker factors together?",
+        "answer": "Flattening convention determines which side each factor acts on. Swapped axes optimize a different error. Compare an explicit vectorized reference; random small weights are not checkpoint-scale evidence.",
+        "example": "Row- and column-major flattening require consistent factor conventions."
+      }
+    },
+    "qa/foundation-models:beaconkv/mechanism": {
+      "source_sha256": "e5a3bb41f18a31087be4ce607fd4e23cd0021dc8a75b94fbbef66a5b3cafe3e9",
+      "reviewed": true,
+      "fields": {
+        "question": "How does BeaconKV preserve plans that recent-only queries would evict?",
+        "answer": "Maintain a small set of representative historical beacons, score KV across phases, and protect a recent window. Representatives approximate future access, not guarantee all distant evidence survives.",
+        "example": "Ten arithmetic steps may ignore an opening constraint that the final answer needs; a beacon can keep it important."
+      }
+    },
+    "qa/foundation-models:beaconkv/basics": {
+      "source_sha256": "47431d83a11118badbd10a97954d083489d0a07d9c955ecf4419fb6bdeae5331",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain representative queries in addition to recent ones?",
+        "answer": "Long reasoning may revisit an early plan. Beacons cover diverse attention directions for budgeted retention.",
+        "example": "The last few queries can miss the original instruction needed at the end."
+      }
+    },
+    "qa/foundation-models:beaconkv/comparison": {
+      "source_sha256": "e8cc1a7e948c74fd23be88ad2da6b58b4fe4bea87539b3cc3a04bfdae395939b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does beacon scoring differ from evicting by age?",
+        "answer": "Age assumes newer is better. Beacon scoring uses query-space coverage and key matches, plus recent protection. It can still miss evidence and is not a future-query oracle.",
+        "example": "An old KV matching a planning query may outlast irrelevant old entries."
+      }
+    },
+    "qa/foundation-models:beaconkv/implementation": {
+      "source_sha256": "abe6d684394a9d73c5b9e7ecbfa9a1e313f26520adfdc96e039f0ed1b0054278",
+      "reviewed": true,
+      "fields": {
+        "question": "Why count the Python selector and backing cache in system costs?",
+        "answer": "Selection and indexing may be expensive, and retaining full backing cache does not free GPU memory. Public checkpoint tests saw slowdown and quality loss; report quality, working set, and full cost separately.",
+        "example": "A 512-item attention set can still keep all KV and spend time scoring it."
+      }
+    },
+    "qa/foundation-models:c2kv/mechanism": {
+      "source_sha256": "796039acf92914f8179bb85b930890afd7a12a696ef3c860934f41436e651260",
+      "reviewed": true,
+      "fields": {
+        "question": "Why jointly train compression and concatenation reuse in C²KV?",
+        "answer": "Independently compressed KV can depend on original positions or context. Compression tokens and structured attention train representations that work together across segments. This still has information loss and interface constraints.",
+        "example": "Two compressed documents should jointly supply evidence, not only reconstruct individually."
+      }
+    },
+    "qa/foundation-models:c2kv/basics": {
+      "source_sha256": "48305da2b30440c32edd9b14794be34c071c8bbce3ca9714a93b37f696be2225",
+      "reviewed": true,
+      "fields": {
+        "question": "Why make compressed C²KV both short and reusable by concatenation?",
+        "answer": "Short single-segment cache does not guarantee combined use. Train compression tokens and structured attention for both compression and reuse.",
+        "example": "Reuse several compressed fragments on a new query rather than prefill them again."
+      }
+    },
+    "qa/foundation-models:c2kv/comparison": {
+      "source_sha256": "5f131644ce2df5aba2b396dc2849c6e604b8ce4d46f5a51851aa636f5f2120d8",
+      "reviewed": true,
+      "fields": {
+        "question": "How does joint training differ from compressing each segment and arbitrarily concatenating?",
+        "answer": "Joint training accounts for position-independent composition. Independent compression can lose cross-segment evidence. Equal compression ratios do not imply equal concatenation behavior.",
+        "example": "Two fragments can answer local questions individually yet fail cross-fragment queries when combined."
+      }
+    },
+    "qa/foundation-models:c2kv/implementation": {
+      "source_sha256": "5462f21f2f24c77bf17afc3266af14a2e7eb891b862eaf11dd1b5fa541402807",
+      "reviewed": true,
+      "fields": {
+        "question": "What interface checks matter between Extractor output and concatenated input?",
+        "answer": "Verify per-segment Z shape, concatenation boundaries, and structured attention visibility. Local mini-suite omits paper-scale training and kernels; concatenability alone is insufficient.",
+        "example": "Correct lengths with wrong boundaries can cause reads from the wrong segment."
+      }
+    },
+    "qa/foundation-models:distillcache/mechanism": {
+      "source_sha256": "175ce956c5b667cff476115187ae194757789906f07ab4c336d85d60affdf44c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reward predictive KL rather than token deletions in DistillCache?",
+        "answer": "Deletion is a resource action; retaining predictive information is the goal. Compare full and evicted distributions per step so the policy can trade behavior loss against budget. The reference is training-only, and low KL is not universally lossless.",
+        "example": "Padding and a key ID both save one KV, but only the latter may sharply change next-token probabilities."
+      }
+    },
+    "qa/foundation-models:distillcache/basics": {
+      "source_sha256": "5d634b656189aa15778a97271a8c8d6984534c4cda82f249db40147fbdaef36f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why treat KV eviction as a multistep decision?",
+        "answer": "A deletion changes later available history. Local salience may not predict future loss. Stepwise full-versus-evicted KL trains a policy for later prediction.",
+        "example": "A currently unused KV can become answer evidence and may not be recoverable after deletion."
+      }
+    },
+    "qa/foundation-models:distillcache/comparison": {
+      "source_sha256": "56074791e4dc3bd91b494465b962904b508b969e47ef9f5937a6c493a07d186f",
+      "reviewed": true,
+      "fields": {
+        "question": "Would KL-guided and minimum-cache rewards prefer the same policy?",
+        "answer": "Not generally. One penalizes prediction drift; the other rewards space. Compare at fixed budget or explicit quality limits.",
+        "example": "Deleting all KV minimizes cache but can strongly change predictions."
+      }
+    },
+    "qa/foundation-models:distillcache/implementation": {
+      "source_sha256": "2a7949ab4cc20fe7775b8d5ad15c691c2f216e57dc782daf32232e9854388981",
+      "reviewed": true,
+      "fields": {
+        "question": "How sanity-check DistillCache's negative KL?",
+        "answer": "Equal distributions yield zero. Larger KL gives a lower reward. Use −KL(p_full||p_evict), not the reverse or a positive sign. Mini-suite does not prove policy training or deployment gains.",
+        "example": "Moving evicted predictions farther from full should not raise reward."
+      }
+    },
+    "qa/foundation-models:drop-kv/mechanism": {
+      "source_sha256": "b27be8c101e51a67ce8d177f897650dad24b1d9547e9d5d6b58cddc20565830e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why consider value versus current output rather than only attention weight in DropKV?",
+        "answer": "Removing a term removes its value and renormalizes the rest. Change depends on p/(1−p) times output–value difference. Unusual low-weight values can matter more than redundant high-weight ones; combining single scores is approximate.",
+        "example": "Two tokens both weighted 0.1 can cause very different changes if one value equals the aggregate."
+      }
+    },
+    "qa/foundation-models:drop-kv/basics": {
+      "source_sha256": "e5ffea02fddc84b5c2a6126af555ffa051ad5a7113891360cbc800e6a7d94734",
+      "reviewed": true,
+      "fields": {
+        "question": "Why score removal by output perturbation?",
+        "answer": "Weight alone omits value geometry. Estimate each removal's output change and aggregate across observed queries for eviction.",
+        "example": "A high-weight value close to the output may be safe to remove."
+      }
+    },
+    "qa/foundation-models:drop-kv/comparison": {
+      "source_sha256": "e036beeda257c9ebc00f2db67b72b26069392d9a2d9d1cd06862f0f860acada1",
+      "reviewed": true,
+      "fields": {
+        "question": "Does exact single removal guarantee optimal multiple removal?",
+        "answer": "No. Joint removal renormalizes and interacts. Per-item ranking approximates the combination, and theoretical guarantees have conditions.",
+        "example": "Two compensating values can each seem unimportant yet jointly change the output."
+      }
+    },
+    "qa/foundation-models:drop-kv/implementation": {
+      "source_sha256": "10a11e942525cf28db7cefd0f8a29fa31b79e9d375e53a7a2004073ebd5b678f",
+      "reviewed": true,
+      "fields": {
+        "question": "Does an epsilon preserve the formula when p_j rounds to one?",
+        "answer": "No. p_j/(1−p_j) is singular, and local code rejects it. Check infinite recent protection, MaxPool, and averaging GQA scores into physical KV heads.",
+        "example": "Epsilon makes a finite approximation, not the exact zero-denominator result."
+      }
+    },
+    "qa/foundation-models:dualquant/mechanism": {
+      "source_sha256": "62da831752ae2c66581cf826970df126e1e046cb66a33aa349990cbef3b0cd51",
+      "reviewed": true,
+      "fields": {
+        "question": "Why fit both row and column scales without calibration activations?",
+        "answer": "Row scaling cannot resolve shared outlier columns. Fit both to static weight reconstruction and use column scales for runtime activation rescaling. With fixed codes solve scalar least squares, project to legal scales, and requantize; code changes need not be monotone.",
+        "example": "A column large across many rows needs joint treatment and compatible input scaling."
+      }
+    },
+    "qa/foundation-models:dualquant/basics": {
+      "source_sha256": "b6b927d29b6173284064312f96b8cf811ecbad34cd7ee85bef503761c51fa898",
+      "reviewed": true,
+      "fields": {
+        "question": "How can DualQuant rescale activations without calibrating on them?",
+        "answer": "Fit row/block and column scales from W alone. Apply learned column scales reciprocally to X at runtime. A solver that never reads X does not mean inference never transforms X.",
+        "example": "Derive column scales offline, then rescale input channels before quantization."
+      }
+    },
+    "qa/foundation-models:dualquant/comparison": {
+      "source_sha256": "ae3025b585d36ac685862b0cf206c9bfe8a944b24bd021d30840e6f0924201ec",
+      "reviewed": true,
+      "fields": {
+        "question": "How does alternating closed-form scaling differ from heuristic exponent search?",
+        "answer": "Separate grid assignment and scales; solve scalar least squares at fixed codes, project to legal formats, and requantize. Heuristics do not implement this optimization or its conditional descent result.",
+        "example": "A fixed-code optimal scale must be reconsidered after codes change."
+      }
+    },
+    "qa/foundation-models:dualquant/implementation": {
+      "source_sha256": "1a71bb843e7ab0083dfd06f29fe114b0e426e85bd3b3c41122167fc7567dd645",
+      "reviewed": true,
+      "fields": {
+        "question": "Can column fitting use old codes after changing row inverse scales?",
+        "answer": "No. Project row inverse scales, synchronize inner copies, and requantize before solving columns, then requantize again. The supported INT4 subset is not MXFP4.",
+        "example": "Fitting columns to stale codes violates alternating optimization."
+      }
+    },
+    "qa/foundation-models:flint/mechanism": {
+      "source_sha256": "fa0def9e06c98b66e2c20730057b0198c0411b7d850f0595ce4f3f26b4d7ae51",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't FLINT score a symmetric mean similarity at fixed V?",
+        "answer": "Learned latents read tokens on both sides. Score each query latent by its best document match, then sum across queries. Fixed budgets do not make pooling arbitrary or scoring symmetric.",
+        "example": "Location and time query latents each find evidence; reversing which side is summed generally changes the score."
+      }
+    },
+    "qa/foundation-models:flint/basics": {
+      "source_sha256": "5f2cb41c74c5ebafd93895ab4ca070d28ef3fd0a8b4dc16179634e53ebad271d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compress both query and document to a fixed vector count?",
+        "answer": "Token-level multivector indexing and search grow with length. Separate learned latents produce fixed V vectors per side for explicit cost control.",
+        "example": "Long and short documents can both yield four vectors, as can queries."
+      }
+    },
+    "qa/foundation-models:flint/comparison": {
+      "source_sha256": "73fa3cda57141d8c09c8eadb85adfe0433b1e139a5d18d153f91dab77e1f0e9c",
+      "reviewed": true,
+      "fields": {
+        "question": "How does latent pooling differ from truncation or averaging?",
+        "answer": "Cross-attention reads all valid tokens before residuals and FFN, producing task-relevant fixed-budget vectors. Truncation loses tails and means use different aggregation.",
+        "example": "A latent can attend to a fact at the end that first-four truncation never sees."
+      }
+    }
+  }
+}

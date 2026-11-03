@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:memfit/mechanism": {
+      "source_sha256": "cb2b064a38c58065680230e7980da0d7e1cc5c00d150c2a5c0c9bca307e7fca8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why store append-only raw turns separately from searchable segment summaries?",
+        "answer": "Summaries make compact indexes but can omit details. Keeping raw records unchanged gives later close reading traceable evidence. Writes avoid expensive model rewrites of all history; reads combine lexical, semantic, and reranking signals. An index hit is only an entry point, and an omitted summary detail may still exist.",
+        "example": "Example: A segment summary says payment API discussion. Read the original turn to find the exact timeout; keeping only the summary might lose it permanently."
+      }
+    },
+    "qa/agent-research:memfit/basics": {
+      "source_sha256": "16dc16f68bf3883a8625623ca5644d63af201aa8274ce7ef328bb2090720f6f6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does MemFit focus on write costs for high-frequency conversations?",
+        "answer": "A long-lived assistant continually receives turns. Rewriting all memory with a costly model on every turn incurs cost before retrieval and can erase details. MemFit keeps writes lightweight and originals traceable, moving query-specific filtering to reads while facing the growing index size.",
+        "example": "Example: A support system gains hundreds of turns per day, many never queried. Complex semantic rewriting of each turn can cost more than useful future queries."
+      }
+    },
+    "qa/agent-research:memfit/comparison": {
+      "source_sha256": "ea4a1acf5bef48143c14d9a2cf726afd5c88fe71b8b0aef139c89eae9796148b",
+      "reviewed": true,
+      "fields": {
+        "question": "What does inexpensive append-only writing trade off against LLM memory rewriting every turn?",
+        "answer": "Append-only avoids repeated generation and irreversible rewriting, but raw storage grows and retrieval and indexing do more filtering. LLM writes can abstract early but lose details. Compare writing, storage, and final retrieval quality together, not just call counts in one stage.",
+        "example": "Example: Saving a thousand raw turns is cheap, but a later query must quickly locate one address change. Inexpensive writes do not guarantee cheap reads."
+      }
+    },
+    "qa/agent-research:memfit/implementation": {
+      "source_sha256": "0dd1b4e5492abce4760f95814ca696a7c15f32e8c640f61a9ed457bc563df40e",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local hybrid retrieval hook mean embedding and cross-encoder inference ran?",
+        "answer": "No. The hook accepts lexical, semantic, and reranking signals but does not call a real embedder or cross-encoder. It tests append-only behavior and score combination. Fixture semantic scores cannot establish real long-conversation retrieval quality or paper latency.",
+        "example": "Example: Correctly sorting three records with preset semantic scores tests fusion, not whether a model derives reliable scores from natural language."
+      }
+    },
+    "qa/agent-research:upliftmem/mechanism": {
+      "source_sha256": "266f1df971e77ef26ab27c60ccbaf094173674e80133e471b985159168e3a7f8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't the utility of a memory set the sum of individual relevance scores?",
+        "answer": "Items can complement, duplicate, or conflict, so set-level execution effects are not additive relevance. The method supervises on the difference with and without memory for the same frozen executor. Additional rollouts go where they can change the local choice. Relevance proposes candidates, not measured uplift.",
+        "example": "Example: One item gives an API name and another its argument constraints; together they enable execution. Two similar copies of the API introduction may be less useful."
+      }
+    },
+    "qa/agent-research:upliftmem/basics": {
+      "source_sha256": "95c942f2a41eb8631194e8b1164647726d56006133e19332b0c9b8f0c8d35b4a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does UpliftMem distinguish relevant retrieval from helping the agent complete a task?",
+        "answer": "Similar memories can duplicate what is known or conflict with other records. Relevance scores need not measure execution value. UpliftMem asks whether a complete set gives a fixed executor additional benefit, reserving context for evidence combinations that change outcomes.",
+        "example": "Example: Three high-similarity records give the right API name but omit authentication. The task still fails, so similarity alone does not establish utility."
+      }
+    },
+    "qa/agent-research:upliftmem/comparison": {
+      "source_sha256": "ab945608f56b64ea3df67970d4025bfaad490961fe9f36c28c910aeceede6ef5",
+      "reviewed": true,
+      "fields": {
+        "question": "How does EVSI allocation differ from giving each candidate the same number of extra rollouts?",
+        "answer": "Uniform allocation ignores whether uncertainty can change the selection. EVSI asks how much an observation is expected to change the local retrieval decision. A correlated Gaussian posterior expresses candidate dependencies. This allocates budget; the highest predicted mean is not observed success.",
+        "example": "Example: Extra probing is low-value when two sets are far apart. A rollout can be more useful for two close, uncertain alternatives."
+      }
+    },
+    "qa/agent-research:upliftmem/implementation": {
+      "source_sha256": "8fbf1e7e917eae625160c516ff845a43c43687d93e18cbfb59b777aacd838627",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does set_level_uplift require paired treatment and control?",
+        "answer": "Compare memory versus no memory on the same task, frozen executor, and matched conditions to reduce task and model confounds. The local run implements paired differences and EVSI on a fixed posterior, not full set construction, shared scoring, or real execution. Component outputs are not agent success gains.",
+        "example": "Example: A memory set on a hard problem versus no memory on an easy one is not comparable. Both conditions must face the same instance."
+      }
+    },
+    "qa/agent-research:remem/mechanism": {
+      "source_sha256": "d224b828d6114d7b39e8a973cdd953056b339682390201e2ed006601a70f3341",
+      "reviewed": true,
+      "fields": {
+        "question": "Why improve both item perception and bounded memory in a recommendation agent instead of only shortening history?",
+        "answer": "Bad page extraction makes even a sophisticated preference memory retain wrong semantics. OCR perception first produces compact item representations, then dynamic memory updates preferences under budget. Several memory views share policy training while supplying distinct evidence. Test preference answers must never be injected to create apparent gains.",
+        "example": "Example: A price in small print on an image cannot be corrected by compressing browsing history. Extract reliable attributes first, then retain information relevant to the user's budget."
+      }
+    },
+    "qa/agent-research:remem/basics": {
+      "source_sha256": "849073eb676f1cd8379f6bf7c2f04ee916545b3a4121acebd8c65ce892d96e47",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are the input challenges of long-context recommendation agents broader than long history?",
+        "answer": "The agent must understand heterogeneous item pages and track preferences through accumulating user behavior. Errors on either side can lead to poor recommendations. ReMem studies perception and evolving memory together to provide enough decision evidence within a fixed budget, not simply add history.",
+        "example": "Example: Product weight is embedded in an image and the user now prefers light items. Shorter chat history alone neither reads the weight nor guarantees an updated preference."
+      }
+    },
+    "qa/agent-research:remem/comparison": {
+      "source_sha256": "33cf584154c6a08c2991439c69f3c858c809f38f943f95271edba2913c695067",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the trade-off between dynamic fixed-budget memory and full history?",
+        "answer": "Full history retains more but costs grow with interactions. Dynamic memory ranks by relevance and recency and emphasizes current preferences within budget, at the risk of losing rare important constraints. Recent observations do not replace auditing long-term facts, and real user episodes are needed to measure recommendation quality.",
+        "example": "Example: Recent running-shoe purchases should not erase a longstanding material allergy. Verify the constraint survived compression."
+      }
+    },
+    "qa/agent-research:remem/implementation": {
+      "source_sha256": "23b7bca22a9a15aed6575b3e51d8f803059ac6e95b8faaf67dbc926cbd9edd07",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't Multi-Memory GRPO mix all memory views into one advantage group?",
+        "answer": "Normalize rewards separately within each memory view for the same query, then share the clipped policy update. Mixing views can confuse differences in view difficulty with action advantage. The local run tests budget, temporal updates, and objectives, not OCR, browsers, or real recommendation episodes.",
+        "example": "Example: Sparse views may have lower rewards overall. Mixing them with rich views can wrongly attribute that difficulty to particular responses."
+      }
+    },
+    "qa/agent-research:context-lm/mechanism": {
+      "source_sha256": "d5172728976ee91f2885dd9f1047227db883dd7d253ca78adf709b1eef95d470",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does letting a model edit a context file also change KV reuse cost?",
+        "answer": "The file prefix determines whether cached representations still match. Changing early tokens usually requires re-prefilling the suffix. File transforms therefore determine both what to remember and future runtime cost. Shorter text is not always cheaper when it invalidates a large cache.",
+        "example": "Example: Appending an observation at the end can preserve prefix KV. Rewriting the opening summary can force recomputation despite fewer total words."
+      }
+    },
+    "qa/agent-research:context-lm/basics": {
+      "source_sha256": "d7b4098cdf3a7707139e7a4fbc32fb24c4522d754a1065d4e101cc0e9d45a188",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is a context file part of model behavior rather than a fixed external summary?",
+        "answer": "The model chooses what to keep, delete, and reorganize; later actions read the edited state. In a fixed harness, external rules choose what and when to compress. Model editing changes responsibility and risks losing important constraints, so capacity and execution contracts still matter.",
+        "example": "Example: Delete an obsolete log and keep its conclusion proactively instead of waiting for a length threshold to summarize all history."
+      }
+    },
+    "qa/agent-research:context-lm/comparison": {
+      "source_sha256": "576c848d90ef310ea89322f6743b12a6682e192ba5ca054ba36e610f41aace9b",
+      "reviewed": true,
+      "fields": {
+        "question": "How do context editing and direct KV eviction differ in what logical history remains?",
+        "answer": "File edits change the logical token sequence the model sees and require prefix matching before reuse. Direct KV eviction can retain logical text while changing active cache state. Reducing active context in both cases does not imply the same cache identity or recovery semantics.",
+        "example": "Example: Deleting early file text changes the prefix for all later tokens, so the old full KV cannot be copied. Dropping KV alone can leave the text intact."
+      }
+    },
+    "qa/agent-research:context-lm/implementation": {
+      "source_sha256": "d55309cc17e8383b0a46d961c37f73233765d3ae4d89ef98920417512ea9e9ad",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must suffix cache reuse recompute from the first token mismatch?",
+        "answer": "Causal hidden states depend on earlier tokens. After the first mismatch, later identical text can still have different KV. Keep only the longest common prefix and check file capacity explicitly. The local run tests edits and boundaries without CLM training or a long multi-agent swarm.",
+        "example": "Example: Changing token 100 can alter token 101 and all following states, not just the replaced position."
+      }
+    }
+  }
+}

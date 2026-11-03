@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:toolgrad/implementation": {
+      "source_sha256": "a1475047506a4835b1ddc2b8e74c2ed0db91b4d864843714ff1c68b64f5b75ff",
+      "reviewed": true,
+      "fields": {
+        "question": "Do local answer-first and deduplicated edits cover ToolGrad-12B and BFCL?",
+        "answer": "No. Local references execute backward route construction and deduplicated text repair, without training 12B or running BFCL. Answers stay training-only, execution outcomes must be real, and failures are not backfilled. State transitions do not establish generated-data quality or downstream skill.",
+        "example": "Example: Deduplicating two corrections of the same bad argument verifies the edit rule, not automatic correct traces for unknown APIs."
+      }
+    },
+    "qa/agent-research:toolrl/mechanism": {
+      "source_sha256": "9ae1da352bd4cd1cbcc46b5812eaa2e7f16799feaf9d3559143e363bb3188385",
+      "reviewed": true,
+      "fields": {
+        "question": "Why dynamically scale rewards by tool when their reward difficulties differ?",
+        "answer": "High raw rewards from easy tools can dominate updates, burying improvements on harder tools. Center and scale by tool distribution to compare relative performance while retaining selection, argument, execution, and answer signals. Normalization does not fix wrong rewards or equalize actual difficulty.",
+        "example": "Example: Calculator successes are common and database queries often fail. Normalize separately so easy calculator rewards do not monopolize learning."
+      }
+    },
+    "qa/agent-research:toolrl/basics": {
+      "source_sha256": "0a0be2eabc47b3c0b94409f897a991a3fe37dcb8f45f01e1b453f97f01d88909",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't checking only ToolRL's final answer establish a good tool policy?",
+        "answer": "The result conflates choosing tools, generating arguments, executing, and using outputs. Granular feedback constrains each behavior. Calibrate rewards without letting format or execution hide wrong answers. Local reward computation is not large-model RL.",
+        "example": "Example: A weather tool can be correct but use the wrong city. A single answer score cannot identify argument versus selection failure."
+      }
+    },
+    "qa/agent-research:toolrl/comparison": {
+      "source_sha256": "b524f62559c9ec7045ad0eac747bd48e6b9b2f962235150fa9f0dd81e0689465",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are tool-selection, execution, and answer rewards not substitutes?",
+        "answer": "Selection checks task fit, execution checks whether a call runs, and answer reward checks final goal. Correct tools can fail from bad arguments, and successful calls can return irrelevant data. Separate signals expose different errors; any one high score does not establish end-to-end ability.",
+        "example": "Example: A database query runs with the wrong month. Selection and execution pass without deserving answer reward."
+      }
+    },
+    "qa/agent-research:toolrl/implementation": {
+      "source_sha256": "4158ed05ad71de3ecf844743e98304fdaf727b0efeb8ce86125a8d28c2f21c3f",
+      "reviewed": true,
+      "fields": {
+        "question": "Do local reward and state updates prove full multi-tool RL training?",
+        "answer": "No. Local tests cover paper objectives, transitions, and budgets without the original large model, multi-GPU RL, or full real-tool benchmark. Correct reward arithmetic still needs policy sampling, real external execution, and parameter updates. Registration and perfect mini-suites cannot fill those gaps.",
+        "example": "Example: Computing advantage from four reward dimensions tests an objective, not learned argument generation."
+      }
+    },
+    "qa/agent-research:retool/mechanism": {
+      "source_sha256": "108ab98fc33bdbd5c931f84ad9565894030f977f1a2adca2132787bfb7339b92",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not learn to avoid tools entirely when calls carry penalties?",
+        "answer": "The objective also rewards correct answers. Fewer calls matter only if quality does not suffer. Alternating reasoning and actual feedback teaches when to outsource, recover, and stop. Optimizing call count alone may replace needed computation with fluent guesses.",
+        "example": "Example: Mental arithmetic can avoid calls, but complex statistics need code. One reliable result can be worth more than saving a call and answering incorrectly."
+      }
+    },
+    "qa/agent-research:retool/basics": {
+      "source_sha256": "d78845e8fb8e702484e56e132db5b9401cf00f9e34de44ef2f8df5e18cc1743d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does ReTool learn calling, correction, and stopping together?",
+        "answer": "Tools can help but fail and cost resources. A policy must decide when to call, how to respond to errors, and when evidence suffices. Tool syntax alone does not control a full trajectory. Early stopping and repeated unnecessary calls can both hurt.",
+        "example": "Example: Run code to check a calculation, fix arguments after an error, then stop once results agree rather than loop or submit unchecked."
+      }
+    },
+    "qa/agent-research:retool/comparison": {
+      "source_sha256": "ea623094fd791c728f2deb5309ef3d20ffdded51d1f21712628bb30fe8e44473",
+      "reviewed": true,
+      "fields": {
+        "question": "How does outcome reward minus call cost compare with one fixed call per task?",
+        "answer": "Fixed counts ignore difficulty and evidence, wasting calls on simple tasks and starving complex ones. Costed rewards adapt counts to value but can suppress needed tools if penalties are excessive. Report correctness and total call costs, not reductions alone.",
+        "example": "Example: Mental arithmetic can use zero calls, while multi-stage calculation may need two checks. One call does not fit both."
+      }
+    },
+    "qa/agent-research:retool/implementation": {
+      "source_sha256": "0d870d97febc4980b842f35db9f59a24a15e86fdc9d14801083129d36f988f55",
+      "reviewed": true,
+      "fields": {
+        "question": "Can the model fill in a tool observation to complete a reasoning/action trajectory?",
+        "answer": "No. Actual tool or environment execution must supply feedback. The model generates its reasoning and actions only. Fabricated outputs remove learning evidence for calls and corrections. Local controlled state/budget tests do not train the paper model or run real math benchmarks.",
+        "example": "Example: Writing 'Python output: 42' without running code is neither tool success nor grounds for execution reward."
+      }
+    },
+    "qa/agent-research:openhands/mechanism": {
+      "source_sha256": "697661527a13c1764769336553fd44341b969bd19e19c0b391760559f4f79e89",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does a unified event stream make editor, terminal, and browser workflows auditable?",
+        "answer": "Actions and sandbox returns enter one timeline. Policies continue from observed results and reviewers can trace changes and validation. Shared events do not erase tool-specific semantics or establish code safety and correctness. Isolation, permissions, and tests have distinct roles.",
+        "example": "Example: Editor events change a file, terminal events run tests, and browser events check a page. The stream shows whether tests preceded or followed edits."
+      }
+    },
+    "qa/agent-research:openhands/basics": {
+      "source_sha256": "8b4b56f78ff6dd3ee84c06f986db618c7e9c2c335abae77cd530f60ecb01d102",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is OpenHands a software-agent work platform for editing, execution, and browsing?",
+        "answer": "Real software tasks require inspecting files, commands, pages, and continuing long workflows, not only generating code. OpenHands connects operations to feedback in a consistent environment. Platform support and a controller's ability are separate evidence; tools alone do not make policies reliable.",
+        "example": "Example: After editing a frontend, start the service, inspect the page, and return to code when it fails. Code generation alone misses that loop."
+      }
+    },
+    "qa/agent-research:openhands/comparison": {
+      "source_sha256": "f7e833b096aeb585c62cf39300c9721a99763b2330f1b92aeeb533bb322a7b4c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are platform runtime and agent controller distinct contributions?",
+        "answer": "The runtime supplies actions, observations, and isolation. A controller chooses plans and tool usage; different policies can share one platform. Running editor and terminal verifies execution paths, not full model reasoning or official SWE-bench resolution.",
+        "example": "Example: A script and LLM may use the same sandbox without equal issue understanding or repair ability."
+      }
+    },
+    "qa/agent-research:openhands/implementation": {
+      "source_sha256": "9a6bc5d4ed8ad5f68e326d8e76370215d8b22bdd839704387b4c565b2e4bd788",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a local browser interface mean real web interaction is connected?",
+        "answer": "No. Local work emits editor events and runs fixed regressions in an isolated temp directory. Browser action semantics are retained without a live environment or full controller. Claim only observed events and outcomes, not real navigation from a type definition.",
+        "example": "Example: Recording browser_open does not open a page, fetch its DOM, or click an element. Those require real browser evidence."
+      }
+    },
+    "qa/agent-research:swe-agent/mechanism": {
+      "source_sha256": "e208c354f593166fc7619c88d634b3bfe789074e0f9f29f72c3a90259e88d7e3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a specialized ACI work better than an unrestricted shell?",
+        "answer": "Broad actions and verbose output increase selection and localization load. An ACI makes search, viewing, precise edits, and tests easier to act on and interpret. This improves the repository interaction contract, not hidden patch access. Real tests still verify completion.",
+        "example": "Example: Showing nearby lines and an exact replacement makes editing easier than printing a whole file, but regression tests must validate the patch."
+      }
+    },
+    "qa/agent-research:swe-agent/basics": {
+      "source_sha256": "43432a627b4e795cf2f8e9b2d94b368457b62af02524af3546cdcca5b1388a51",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does a GitHub issue agent need a convenient repository viewing and editing interface?",
+        "answer": "The model must locate unknown code, read needed context, make small edits, and verify. Raw terminal output can be long or fragile. SWE-agent's interface better fits that workflow without replacing issue understanding or tests. A successful command does not mean resolution.",
+        "example": "Example: Open matching files and relevant lines rather than printing the repository, then run the target tests after edits."
+      }
+    },
+    "qa/agent-research:swe-agent/comparison": {
+      "source_sha256": "72b7210b49459cfda215bf31730bab4c669408b6493dbf6a0ebab07a6ed0ee05",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compare ACI with raw shell using the same model and tasks?",
+        "answer": "Otherwise stronger models or easier tasks confound interface effects. ACI changes action and observation boundaries, so control other conditions and assess actual patches and tests. One good edit or valid command syntax cannot establish broad repair ability.",
+        "example": "Example: Give the same model the same bug with a narrow editor versus a raw shell to isolate differences in localization and editing."
+      }
+    }
+  }
+}

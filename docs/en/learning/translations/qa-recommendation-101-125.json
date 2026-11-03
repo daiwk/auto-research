@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:baseline-incremental/comparison": {
+      "source_sha256": "bdb9c11caa51660d264922b7796635f059644d6bafdd1847a9ee06aa5d3954fe",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use log-odds differences for probabilities but original-unit differences for regression?",
+        "answer": "An equal absolute probability difference has a different meaning near zero or one; logit differences express change on the odds scale. Regression targets already have natural units. These distinct scoring responses are intentional and do not confer a causal interpretation.",
+        "example": "Click-through rates of 1% to 2% and 40% to 41% both gain one point but change odds differently; extra watch time can be compared directly in seconds."
+      }
+    },
+    "qa/recommendation:baseline-incremental/implementation": {
+      "source_sha256": "7ad865e6cf074d5b98adc137d08fed2d17cc68f6584b1f98fada9a3139032470",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not implement Baseline-Incremental's demotion gate as the negative of its promotion gate?",
+        "answer": "When the promotion amplitude is prediction p, it naturally vanishes near zero. Negating it would barely penalize the low-p candidates that most need demotion. Preserve the constant and gap amplitudes and piecewise limits from the source, explicitly clip probabilities before taking logits, and verify the gates separately.",
+        "example": "A candidate with p near zero receives almost no penalty from −p, while constant demotion can still suppress it."
+      }
+    },
+    "qa/recommendation:beque/mechanism": {
+      "source_sha256": "ffa3fceac57f93722012e5228ceb3572fd0bbc7aa01b31fe28331dc4b8524f03",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does BEQUE apply PRO to multiple self-sampled rewrites after SFT?",
+        "answer": "SFT learns demonstration rewrites, not necessarily their retrieval effects. BEQUE samples several candidates for each query, builds a preference ordering from offline search feedback, and uses length-normalized sequence scores to learn relative quality. The feedback combines objectives such as relevance and incremental recall; a composite win can hide a component regression.",
+        "example": "Two fluent rewrites may differ because one retrieves only existing popular items and the other adds relevant long-tail items. Search feedback detects that difference; also check incremental coverage."
+      }
+    },
+    "qa/recommendation:beque/basics": {
+      "source_sha256": "767f8a12219fafce155f7245d2f63e1e4447fe49d8227f86785efd7aec5689e6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not evaluate BEQUE rewrites only by their textual similarity to human rewrites?",
+        "answer": "Similar wording does not guarantee relevance, coverage, or hits in the retrieved item set. BEQUE scores self-sampled rewrites using a real search system and trains the generator on the induced preferences. Improvements in the chosen composite feedback do not guarantee that all metrics improve.",
+        "example": "A polished rewrite of a damp-proof camping query into outdoor lifestyle can lose sleeping-mat results. Inspect the retrieval, not the wording alone."
+      }
+    },
+    "qa/recommendation:beque/comparison": {
+      "source_sha256": "5c4f5bd267da9cc479e3ed557747c7af5f22f451e4fde0fdfcddb3c14f7776ed",
+      "reviewed": true,
+      "fields": {
+        "question": "How does BEQUE's PRO supervision differ from continuing SFT only on the best rewrite?",
+        "answer": "Winner-only SFT discards relations among other candidates for the same query. PRO contrasts ranked candidates successively, teaching probability ordering across quality levels while retaining SFT for stability. Length normalization and temperature affect the comparison, and the feedback design still limits what a composite improvement means.",
+        "example": "With four ordered rewrites, winner-only SFT imitates the first; PRO additionally learns that the second beats the third and the third beats the fourth."
+      }
+    },
+    "qa/recommendation:beque/implementation": {
+      "source_sha256": "671b79775e214b976d9f7b8a77a0712a2b69ae4921b8e216d15bbc6fd687fc16",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must BEQUE's local PRO ordering exclude human SFT targets from its candidates?",
+        "answer": "Alignment evaluates actual model-generated rewrites. Inserting a gold target introduces an answer the generator might not have produced, changing the experiment. Use model candidates and a label-free fallback, rank by catalog feedback, and isolate training and test preference sets.",
+        "example": "If all four beams miss the right category, report that feedback; injecting the correct rewrite and selecting it disguises a generation failure."
+      }
+    },
+    "qa/recommendation:bst/mechanism": {
+      "source_sha256": "78a9de8c1077723fbb7d01e83717e6d57a92bb21d8d68cb37d9a38bee49267d8",
+      "reviewed": true,
+      "fields": {
+        "question": "How does BST jointly attending over a candidate and history differ from DIN using a candidate to weight history?",
+        "answer": "DIN mainly learns candidate-to-action activation. BST also enables interactions among past actions and embeds the candidate jointly, allowing context to change an action's meaning. This costs more sequence computation and can limit reuse across candidates; compare matched budgets and history windows.",
+        "example": "A camera click might be incidental, but later lens and tutorial views reinforce photography intent. A different candidate can change this jointly encoded state."
+      }
+    },
+    "qa/recommendation:bst/basics": {
+      "source_sha256": "d1270b9a8624ce1d64b9eb8579a1bd4e4adba8bbc39fb38fe380aecbf1f9d9f2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why include BST's candidate token in history encoding rather than concatenating it only in the final MLP?",
+        "answer": "Attention with the candidate lets history representations adapt early and learns both behavior-to-behavior and target-to-history relations. Late concatenation only interacts with an already compressed representation. The result is candidate-conditioned, not universal.",
+        "example": "Hiking shoes can amplify a related camping and hiking history, while a camera should refocus the encoding on photography."
+      }
+    },
+    "qa/recommendation:bst/comparison": {
+      "source_sha256": "52946de322b5f45830e847a3345212ad95efc2419e01bbd9e39208667f1c86cc",
+      "reviewed": true,
+      "fields": {
+        "question": "What does BST's self-attention add over fixed history pooling, and at what cost?",
+        "answer": "Fixed pooling uses predetermined or simplified action weights and can miss combinations. BST learns pairwise contextual dependencies, with sequence-length-related computation and possible re-encoding for each candidate. Flexibility alone is not a win; compare matching data, budgets, and candidate protocols.",
+        "example": "A camera view followed by a lens view can reflect a different purchase stage than a camera view alone. Attention can combine them but costs more with thousands of events."
+      }
+    },
+    "qa/recommendation:bst/implementation": {
+      "source_sha256": "7498820e16f7006db1c21f6f323717bbb4c24e56d9ec170344a0bc476018db21",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not cache BST's candidate-conditioned state as a user embedding shared by all candidates?",
+        "answer": "A candidate participating in self-attention can write into hidden history states; substituting it changes downstream inputs. Without an isolation mask, caching is valid only for the specific dependency conditions. The local candidate-aware Transformer versus DIN is not a demonstration of shared user-side caching.",
+        "example": "A state computed for shoes can emphasize shoe history and bias a movie score. A shared cache must stop before candidate information is written."
+      }
+    },
+    "qa/recommendation:cadet/mechanism": {
+      "source_sha256": "c396e0d147c1d798b51b69244665755ad5cbb00939fefc449d6829de7367e2fd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CADET put cacheable history and post-scoring context in different information-flow stages?",
+        "answer": "The cache must remain valid when candidates or later context change. CADET encodes history and scores candidates before injecting post-scoring context at the allowed stage, preventing use of information unavailable at serving time. Mixing everything from the start can invalidate reuse and create training-serving mismatch despite better offline scores.",
+        "example": "Do not write ad A's post-scoring context into shared history before evaluating ad B. Keep the shared prefix distinct from later conditional state."
+      }
+    },
+    "qa/recommendation:cadet/basics": {
+      "source_sha256": "f588de86402c60e7643c65f7143ba63686dd4b0b3a5db9c5b98b2162e90a76ca",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CADET emphasize when post-scoring context becomes visible?",
+        "answer": "Training logs may include information created only after scoring. Using it before scoring misaligns training and serving. Encode cacheable history first, then introduce context only at its legitimate stage; timing is part of the feature contract.",
+        "example": "A user's reaction after an impression can enter the next history, but cannot predict the current click before that impression."
+      }
+    },
+    "qa/recommendation:cadet/comparison": {
+      "source_sha256": "03270725edd3e6e8f42ac6c04935616e4ba8026421c939a9cde0c21feed6f27d",
+      "reviewed": true,
+      "fields": {
+        "question": "How does staged context in CADET differ from feeding all log fields into a Transformer together?",
+        "answer": "Indiscriminate concatenation can expose unavailable fields and leak candidate computations into shared history. Separating cacheable state from post-scoring context limits arbitrary interactions but preserves serving consistency. Local public-data proxies do not verify the full timing of production advertising features.",
+        "example": "Mixing current-request features with the next action in one sequence invites a shortcut; stage boundaries allow only evidence available when the request arrives."
+      }
+    },
+    "qa/recommendation:cadet/implementation": {
+      "source_sha256": "eb8e023645216f98330abd5741c574b2107f95006e82b2494a981e19c5e78f8a",
+      "reviewed": true,
+      "fields": {
+        "question": "When does new CADET context invalidate cached history K/V?",
+        "answer": "Check whether it changes history inputs, masks, or model parameters. The shared K/V stays valid only if context enters a later candidate-query path. The source formula lets a context query read prior history; it does not authorize feeding arbitrary context back into the cached backbone. Inspect actual tensor dependencies.",
+        "example": "A change to the query can reuse the history K/V; changing history time encodings requires recomputation."
+      }
+    },
+    "qa/recommendation:camie/mechanism": {
+      "source_sha256": "6286c720d96e6a6598746fbadcaf45a50f2ecb51250bd4cd3d2633e0c10e45ba",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add co-engagement contrastive learning rather than training CAMIE item vectors only on image-text similarity?",
+        "answer": "Content resemblance does not guarantee a consumption relationship. CAMIE uses item pairs jointly engaged with in a user journey for symmetric contrastive supervision, shaping multimodal embeddings for recommendation. The shared encoder supports variable modality availability. Co-engagement still reflects exposure and context, not universal complementarity or causal demand.",
+        "example": "Similar furniture can serve incompatible uses, while visually different desks and chairs are often considered together. Behavior supervision adds that relation."
+      }
+    },
+    "qa/recommendation:camie/basics": {
+      "source_sha256": "350dc3f64d8264363b07f93143869bedf3b64fc9ebfc60809d3ba3b1734aa11b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why should one CAMIE checkpoint support image-text and text-only products?",
+        "answer": "Real catalog modality availability varies. A shared interface lets products without pictures enter the same retrieval space instead of requiring separate models. Joint training and behavior alignment support matching across inputs, but a missing image removes information, so accuracy need not be equal.",
+        "example": "A title-only launch and an item with images and attributes can both be indexed, but the former has no visual details to recover."
+      }
+    },
+    "qa/recommendation:camie/comparison": {
+      "source_sha256": "92d4a49d40a638239168f58af2b1d3bb3fc634fa7706c18e499bf7dc6e376183",
+      "reviewed": true,
+      "fields": {
+        "question": "How do CAMIE's co-engagement positives differ from generic image-text contrastive positives?",
+        "answer": "Image-text positives typically pair modalities of the same content. Co-engagement pairs different items that share user interactions in a journey, encoding potential complementarity or sequential needs. Exposure still affects which items co-occur, so it is not an unbiased complementarity label.",
+        "example": "A tent and sleeping bag may convert together despite very different images; two popular items may merely co-occur because both receive heavy exposure."
+      }
+    },
+    "qa/recommendation:camie/implementation": {
+      "source_sha256": "8167be1176aac012b2fce9113d01d23e54edb56abce03f5541ee334f51647fa5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compute both directions of CAMIE's symmetric in-batch InfoNCE?",
+        "answer": "One direction uses a as query and its paired b as positive among the batch's b values. Swap sides to supervise both encoders and average the losses. Pairs must share the intended journey relation, temperature controls sharpness, and duplicated positives should not blindly count as negatives.",
+        "example": "Learn camera-to-lens and lens-to-camera matching. A duplicate row for the same positive lens would otherwise give contradictory supervision."
+      }
+    },
+    "qa/recommendation:capts/mechanism": {
+      "source_sha256": "d7ca20b94daa8edc4290645665f26bcab1616429e3c6349bd5578905e829e8dc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CAPTS value a trigger through downstream content consumption instead of trigger clicks?",
+        "answer": "A trigger is an entry point, and its direct feedback may not describe what it retrieves. VAM attributes consumption of two-hop content to the trigger; CATR jointly assigns triggers to I2I channels while rewarding value and penalizing overlap. Popular entry points can waste limited candidate slots by returning the same content.",
+        "example": "Two popular triggers retrieve the same comedy videos, while a less popular one adds valuable science videos. Value and complementarity can guide a better allocation."
+      }
+    },
+    "qa/recommendation:capts/basics": {
+      "source_sha256": "0f649b1ad0333f275a0e8e1a6d2b14241679a17532095de7c6ef419c15e9f7fc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why define CAPTS trigger value after the two-hop retrieval chain?",
+        "answer": "A trigger retrieves other content; its clicks need not predict the value of those candidates. VAM attributes downstream consumption back to the entry point within its I2I channel; CATR allocates routes for complementary coverage. Trigger value depends on the downstream channel.",
+        "example": "A popular watched video may yield redundant candidates, while an obscure history item surfaces a new topic the user likes."
+      }
+    },
+    "qa/recommendation:capts/comparison": {
+      "source_sha256": "dc15e5fac7f762f3325b4027be952547ef84363a019cff4c341bb6b434cb0790",
+      "reviewed": true,
+      "fields": {
+        "question": "How does CAPTS joint channel routing differ from selecting the strongest trigger for each I2I channel independently?",
+        "answer": "Independent optimization can send every channel through the same trigger and produce overlapping sets. The joint objective balances downstream value against overlap to allocate distinct roles. Coverage may trade against precision; the reported task measurements are not proof of cost-free improvement across every channel.",
+        "example": "Rather than retrieving the same popular sequels three times, let one channel keep them and another explore related work through director interest."
+      }
+    },
+    "qa/recommendation:capts/implementation": {
+      "source_sha256": "0b90b2d21e481de607c9462d5e7eb0ae72bf94638c7d6e4c8ef20e1c85da691d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain trigger, channel, and downstream item indexes when aggregating CAPTS value?",
+        "answer": "The same trigger can return different candidates and contributions by channel. Attribute weights and feedback to the correct path and use it to compute channel overlap during joint selection. A global item score loses trigger credit. Public proxy consumption labels are not production value.",
+        "example": "When two triggers retrieve the same item, do not credit each with the entire consumption event. Keep path and weight to identify what each trigger actually added."
+      }
+    },
+    "qa/recommendation:casi/mechanism": {
+      "source_sha256": "5ba616bb8f426181981b81d93a9c521dc3a45d19d90a77907b962ace8a55124b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CASI freeze retrieval snapshots and recombine subsets rather than split the set reward evenly?",
+        "answer": "Actions can complement or substitute for each other. CASI retrieves once per action, computes marginal value across subsets of fixed results, and shapes advantages with Shapley credit. This avoids repeated-retrieval noise but does not establish an identical unbiased gradient to the original set objective.",
+        "example": "If rewrites A and B retrieve the same products and C adds a new category, averaging overstates redundant actions; fixed-set recombination exposes C's contribution."
+      }
+    },
+    "qa/recommendation:casi/basics": {
+      "source_sha256": "3d2ff22f531d24bdd04971dbc0f093cf09bcf827b1f2d691e0b75961136b7252",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CASI separate one retrieval per action from re-evaluation of subsets?",
+        "answer": "Reretrieval can change action results across subsets, mixing backend randomness with cooperation effects. Freeze action candidate snapshots first and then recombine them to compare marginal contributions over identical evidence. State assumptions about evaluation backend sensitivity.",
+        "example": "Removing one of two equivalent queries may leave the set unchanged. If reretrieval changes the results, redundancy and retrieval fluctuation are no longer distinguishable."
+      }
+    },
+    "qa/recommendation:casi/comparison": {
+      "source_sha256": "683027290834dad79d895efdee68bf136cda718526554a1b5f181d9511cf7a4c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are Singleton and LOO generally insufficient to recover CASI's Shapley credit with four or more actions?",
+        "answer": "Singleton observes individual values and leave-one-out observes removal from the full set. Shapley averages marginal contributions across all coalitions, including intermediate subsets with higher-order cooperation. Equal endpoint values do not fix intermediate values; additive cases need no extra intervention.",
+        "example": "Two queries may be useless alone but jointly cover a need, and a third can replace one. Singles or full-set removals can miss the dependency."
+      }
+    }
+  }
+}

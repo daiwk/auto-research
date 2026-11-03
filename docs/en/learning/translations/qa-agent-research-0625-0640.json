@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:openloopevolve/implementation": {
+      "source_sha256": "353ee9ab0ee59a8d57c6b1990dae33a5420f283843ebdaeb1ab8e8cfbc412041",
+      "reviewed": true,
+      "fields": {
+        "question": "Do local version and rollback states demonstrate real long-term online self-evolution?",
+        "answer": "No. Deterministic local PlanBench verifies mechanism branches, version state, and reporting, with no real browser, service, or YC-Bench. Proxy costs, release flags, and rollback counts are control evidence, not online risk or success metrics. Do not present the paper's online or offline results as local measurements.",
+        "example": "Rules can change a state from challenger to champion. Without running actual models and tools, this does not establish deployment of a stronger agent."
+      }
+    },
+    "qa/agent-research:agentx/mechanism": {
+      "source_sha256": "fc96679e3f7c4c1d2d79f467465539ad26f74d5860c1e89d344b37f3c3e1516a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a guardrail violation veto release after significant improvement in the primary metric?",
+        "answer": "Recommendation systems must jointly satisfy target gains and key constraints. A single gain can come at the expense of stability or other important experience. The Evaluation Agent uses online evidence and guardrails to veto release, records both successes and failures, and learns from full traces rather than selecting winners and creating optimistic bias.",
+        "example": "A higher click-through rate does not justify release if critical latency violates its limit. Record the failure cause for the next proposal."
+      }
+    },
+    "qa/agent-research:agentx/basics": {
+      "source_sha256": "0b2e23a097f8e1ec0935653a7147b4b7a89a6cca6aac1843cbfff82a05058fd0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does the four-stage loop put failure traces in the experiment knowledge base too?",
+        "answer": "Failures reveal implementation limits, guardrail risks, and unsupported hypotheses. Recording only successes creates survivorship bias and encourages repeated mistakes. Brainstorm, Developing, Evaluation, and SGPO connect evidence, code, online checks, and knowledge updates. Distinguish the authors' production system from local control flow.",
+        "example": "If a feature improves offline scores but hurts online latency, recording the failure and conditions can prevent repeating the high-risk proposal."
+      }
+    },
+    "qa/agent-research:agentx/comparison": {
+      "source_sha256": "34e76279b489819c9b39b1e5482886473a4c7d1b25e4f6fdc9ab2ead41a4ac92",
+      "reviewed": true,
+      "fields": {
+        "question": "What conclusions do offline implementation checks and production A/B tests support in AgentX?",
+        "answer": "Offline checks find code, data, and runtime-contract problems before safe traffic exposure. Online A/B tests measure the primary metric and guardrails in a business environment. The tasks and risks differ, so offline success cannot replace release evaluation. Local small episodes or update counts are not the authors' production evidence.",
+        "example": "Unit tests can establish that recommendation code is ready for further experimentation. User behavior and latency effects require a controlled comparison on corresponding traffic."
+      }
+    },
+    "qa/agent-research:agentx/implementation": {
+      "source_sha256": "2bee1b3563994ea753cc788d082070be0d812355523787ea306847c156540a85",
+      "reviewed": true,
+      "fields": {
+        "question": "Do policy-update counts from 120 local episodes demonstrate large-model SGPO training?",
+        "answer": "No. They verify four-stage execution, asset management, and reuse without Kuaishou's repositories, user traffic, or SGPO training. Average proxy cost is not human efficiency, revenue, or user time. Production gains are author-reported; deterministic perfect scores do not replicate industrial recommendation iteration.",
+        "example": "108 experiment-knowledge reuses are a local workflow count. Without actual A/B tests, they cannot be converted to annual revenue or production value."
+      }
+    },
+    "qa/agent-research:scientist-one/mechanism": {
+      "source_sha256": "1a566b66e8f60537f4f6f71427c2448347a644cc7065fe55fee577322c4257e6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check metric, stage, unit, and direction even when the source and logs exist?",
+        "answer": "A log can contain training, ablation, and formal evaluation values that are not interchangeable. Match each claim to evidence with consistent identity and protocol, then check recomputability and method–code consistency. Provenance rate is empty when there are no quantitative claims, not perfect. A source's existence does not show it supports the claim.",
+        "example": "A log may record lower training loss while a report claims higher test accuracy. Traceability to a number is not matching evidence."
+      }
+    },
+    "qa/agent-research:scientist-one/basics": {
+      "source_sha256": "e8485e19a8179114a17806f431db38a3035d3c6a2b3973512cfea1f247a39750",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Scientist-One make research claims independently traceable and checkable?",
+        "answer": "Automated research can generate code, charts, and conclusions whose reported numbers lack actual execution or do not match source definitions. Scientist-One connects claims, evidence, and run records so readers can inspect their origin. This chain is an audit entry point, not proof by hash; still check contents, units, and experiment stage.",
+        "example": "An accuracy gain should trace to the corresponding split and run. Finding a hashed file does not show the value inside is accuracy."
+      }
+    },
+    "qa/agent-research:scientist-one/comparison": {
+      "source_sha256": "2ad5ab0f52c4e6fae38f57c97a0f721e17b40e81f480e6de1365fe267accb188",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are numeric CPR and scholarly citation authenticity different issues?",
+        "answer": "CPR checks whether quantitative claims trace to numerically matching execution logs with consistent metric, stage, unit, and direction. Citation verification separately requires retrieval and semantic disambiguation. A number can match while a citation is fabricated, and a real paper may not support the claim. Neither check replaces the other.",
+        "example": "Training loss cannot support test accuracy even if the numbers happen to match. A real paper with the same title does not show it reported the claimed result."
+      }
+    },
+    "qa/agent-research:scientist-one/implementation": {
+      "source_sha256": "1af389bec1ec612fffc234b6069223675c6310a6e1d0b48bb85634d28722ac42",
+      "reviewed": true,
+      "fields": {
+        "question": "How should five zero-mean recomputations, no quantitative claims, and tied votes be handled?",
+        "answer": "For a deterministic zero mean, require exact zero without a loose epsilon. CPR is null without quantitative claims, not perfect. No majority or abstention leaves the result unverified. I1 uses population standard deviation for tolerance. Trusted evaluation and log provenance are ensured upstream, and fixtures do not verify the whole study.",
+        "example": "A draft with no numbers does not earn CPR=1 from a zero denominator. Opposing votes from two reviewers do not default to majority approval."
+      }
+    },
+    "qa/agent-research:hyperagents/mechanism": {
+      "source_sha256": "902a4a690fe57047f35de8220ca715f7860768fcc3e8347713b94be058c5be20",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does parent sampling consider both performance and existing offspring count?",
+        "answer": "Selecting only top scores repeatedly expands the same branch and reduces diversity. Penalizing offspring count gives viable, less explored parents opportunities. Both the task agent and its modification mechanism are editable, allowing the improvement process itself to evolve. Sampling probability allocates budget; it does not accept every child or guarantee monotonic gains.",
+        "example": "A champion with twenty children may get fewer chances than a slightly weaker parent tried once, opening other improvement paths rather than polishing one branch indefinitely."
+      }
+    },
+    "qa/agent-research:hyperagents/basics": {
+      "source_sha256": "8f71ba9ca064c7c39cc8ce8ad5867c6ff558e0fa2c14f1421d7a41a625b232b6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does HyperAgents edit both task solutions and the program that generates the next solution?",
+        "answer": "A fixed improver searches with the same proposal and reflection routines, whose limitations can block progress. HyperAgents makes the task and meta programs editable to study whether improvement methods evolve through experience. Self-modifying code is harder to validate; a new archived version does not establish actual performance or sustained gains.",
+        "example": "If one version always suggests similar changes, try editing the proposer itself. Then verify that the new proposer actually produces more effective candidates."
+      }
+    },
+    "qa/agent-research:hyperagents/comparison": {
+      "source_sha256": "d482535440dd4d058cffbb54359dea4d4f73f48af21ed90bb5a90943ddb725ba",
+      "reviewed": true,
+      "fields": {
+        "question": "How does fixing the meta-agent versus making it editable change the search space?",
+        "answer": "A fixed improver generates variants only in the task-solution space. Editing the meta-agent can also change candidate generation and improvement procedures. The extra freedom adds failure and attribution challenges, requiring separate execution and evaluation. Local archive operations generate or run no arbitrary source, so lineage is not full program self-modification.",
+        "example": "Changing a sorting function is task-level. Changing how functions are selected for trials is meta-level, and the extra freedom may not help."
+      }
+    },
+    "qa/agent-research:hyperagents/implementation": {
+      "source_sha256": "0f84eff6810ab782e8f37153d05a4b64c51214fd80163b4403a175aa9c7d7eac",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local archive step execute model-generated source or shell commands?",
+        "answer": "No. It calculates parent distributions and maintains a bounded structured archive. Generated code and shell execution are prohibited, so the path does not validate self-referential program modification. Probabilities summing to one and correct lineage updates are search-control evidence, not task- and meta-agent behavior evaluation.",
+        "example": "Editing one field tests the archive, but without running the changed program we cannot know whether it breaks the task or improves search."
+      }
+    },
+    "qa/agent-research:polca/mechanism": {
+      "source_sha256": "321d47309f982ba490975817db6c26ba9448f351b60d0f702975ecde939b23b5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why maintain a history-based mean and use a semantic epsilon-net to limit redundancy?",
+        "answer": "Random data and evaluators introduce noise, so one high score may be accidental. Repeated observations stabilize candidate comparisons. Semantic distance constraints prevent budget waste on near-duplicates; recompute distances after adding candidates. Keep empirical-mean rules distinct from theoretical UCB, and don't interpret rankings as statistical significance.",
+        "example": "Semantic filtering can avoid evaluating ten prompts differing only in punctuation. Combine a lucky first score with later evaluations rather than making it a permanent champion."
+      }
+    },
+    "qa/agent-research:polca/basics": {
+      "source_sha256": "03046b2a6f33d8642e0ad5f1c4bf903e3bbe8c9ec47c6c2858865e6f32752fdd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does noisy optimization easily mistake a lucky high score for a good solution?",
+        "answer": "Random batches, execution, and evaluation vary the score of one candidate. Keeping only observed maxima favors luck. POLCA uses evaluation history and global experience while limiting redundant proposals. More history does not eliminate bias: use consistent evaluation and budgets, and do not replace actual observations with expected outcomes of untested proposals.",
+        "example": "Configuration A may score high on an easy batch while B is stable across batches. Comparing only maxima can choose wrongly; keep full histories to check."
+      }
+    },
+    "qa/agent-research:polca/comparison": {
+      "source_sha256": "46de0900d11e9735eb3b2f6e01937a657c5216ab866b6b71e7fa6279dfb0fafb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish empirical-mean priority in the POLCA main text from the theoretical UCB variant?",
+        "answer": "Empirical mean ranks candidates by their observed average reward; UCB explicitly adds an exploration bonus for uncertainty. They can prioritize rarely evaluated candidates differently and change budget use and selection history. Describe implementation and theoretical rules separately; properties do not transfer to an unimplemented variant by name.",
+        "example": "A candidate evaluated once might not rank high by mean. UCB can give it another trial because uncertainty is high, producing a different next round."
+      }
+    }
+  }
+}

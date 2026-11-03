@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:onerec/comparison": {
+      "source_sha256": "788c42b5aaf3aa1fa8628256205d2c262dab715614c6dfd9387db5d4208b6833",
+      "reviewed": true,
+      "fields": {
+        "question": "Does OneRec self-hard DPO change the model or the search compared with widening the beam?",
+        "answer": "A wider beam explores the existing distribution; DPO updates policy probabilities using current-policy session pairs. Weak reward judging can hurt: local DPO loss fell quickly while NDCG went to zero. Preference fit does not establish ranking quality.",
+        "example": "Illustration: Search may find a good list, but training on the judge's wrong winners can worsen future distributions despite a lower loss."
+      }
+    },
+    "qa/recommendation:onerec/implementation": {
+      "source_sha256": "cc649907afadac629e76573782403267a20f6c935c8fb11a677eaa1d3175a23f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why don't legal SID prefix constraints solve semantic-collision identity problems in OneRec?",
+        "answer": "A legal prefix proves catalog existence, not a unique item. Collisions require defined expansion or disambiguation, and uniqueness affects evaluation. Generate winners and losers from the current policy without gold injection. Legality, rewards, and ranking are separate checks; retain negative results.",
+        "example": "Illustration: Two films can share one legal code. Expanding to the correct film by reading the test label leaks the answer."
+      }
+    },
+    "qa/recommendation:onerec-v2/mechanism": {
+      "source_sha256": "7db50f5bc3e34ddbd80a1c562fc29270c2e5e62ef8cb705f26b13b840301a144",
+      "reviewed": true,
+      "fields": {
+        "question": "Why supervise only the latest impression and share context K/V across OneRec-V2 decoder layers?",
+        "answer": "Latest-impression supervision avoids full decoding for every history position. Context Processor produces one reusable K/V state and Lazy blocks read it to generate short SIDs. This reduces repeated history encoding and per-layer cache costs. Real-feedback alignment is separate and its effects cannot all be assigned to shared K/V.",
+        "example": "Illustration: For three SID levels after a long history, each layer reads one shared memory rather than building its own full cache."
+      }
+    },
+    "qa/recommendation:onerec-v2/basics": {
+      "source_sha256": "1b572945008980853eb91f468195290a982df92a06109d6707dd37aba7ce1d1c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use real playback and negative feedback instead of an extra reward model in OneRec-V2?",
+        "answer": "Direct behavior avoids reward-model training and error propagation. DARS adjusts duration opportunity and GBPO controls signed updates. Real behavior is still a biased satisfaction proxy. Removing a reward model does not remove calibration or constraints.",
+        "example": "Illustration: Long videos offer more watch seconds. Compare in user and duration buckets instead of treating all long watches as high satisfaction."
+      }
+    },
+    "qa/recommendation:onerec-v2/comparison": {
+      "source_sha256": "bbf2a4fa707e9ba190a3c5a6f2b992bc24dd7d4c0acb49af3b389bdea45372f4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't GBPO's dynamic denominator equivalent to PPO clipping?",
+        "answer": "PPO clips the probability ratio; GBPO uses different stopped-gradient denominators by advantage sign. These limit updates differently. Replacing them with clipping loses defining behavior. Local feedback-weighted probability is not NDCG or online lift, and not all three seeds improved.",
+        "example": "Illustration: Positive and negative advantages respond differently as current probability changes; a symmetric clip does not establish equivalence."
+      }
+    },
+    "qa/recommendation:onerec-v2/implementation": {
+      "source_sha256": "655d532f393387e86f229b3a6bf49d648d7bd5500088a5f103dabea51c78ca45",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compute DARS quantiles within a user and duration bucket and detach GBPO denominators?",
+        "answer": "Buckets compare similar viewing opportunities instead of mixing user habits and lengths. Stop-gradient prevents the denominator from adding unintended derivatives. Separate explicit dislike negatives from other zero advantages. Labels stay in post-training, not request inputs.",
+        "example": "Illustration: Thirty seconds on a ten-second and ten-minute video are not directly comparable; differentiating through a numerically identical denominator changes the update."
+      }
+    },
+    "qa/recommendation:oneshot-index/mechanism": {
+      "source_sha256": "b59a97fbcefcf216988ff9ece448f2f92da026640f55e0798e9cb68d13fa80a2",
+      "reviewed": true,
+      "fields": {
+        "question": "How does OneShot train discrete hierarchical addresses on ranking rather than embedding-distance clusters?",
+        "answer": "Forward passes take discrete paths; straight-through gradients approximate ranking-loss feedback to assignment parameters. Global balancing avoids crowded paths, and neural scoring ranks retrieved candidates. Joint learning aligns objectives, but approximate gradients and balanced load do not guarantee relevance.",
+        "example": "Illustration: Similar text with different audiences can be assigned to different paths by behavior; balancing can keep popular items from overloading one bucket."
+      }
+    },
+    "qa/recommendation:oneshot-index/basics": {
+      "source_sha256": "a46b594d8c5f3cc22b63451a8e200ab92caa161da323d22d6b0ef7201dbf7eaf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why make the index path part of OneShot rather than cluster after training?",
+        "answer": "Post-training clustering follows existing geometry and can disagree with ranking. Joint training uses behavior loss to shape buckets, then a strong scorer distinguishes retrieved items. Discrete routing and balancing can still reduce coverage and may not help at every scale.",
+        "example": "Illustration: Ranking can separate items with similar text but distinct buyers. A fixed bucket can hide the right item from even a good scorer."
+      }
+    },
+    "qa/recommendation:oneshot-index/comparison": {
+      "source_sha256": "2569626e64a57bd83bde70f65ab3cc697da71801b93c6732cbc0692ff7968cf5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do OneShot path balancing and popularity penalties affect different objects?",
+        "answer": "Path balancing manages bucket load and resources. Popularity penalties alter recommendation preference. Balanced buckets may spread popular items without reducing their exposure, so measure index use and business distribution separately.",
+        "example": "Illustration: Ten popular items can fill ten distinct buckets and still all be recommended."
+      }
+    },
+    "qa/recommendation:oneshot-index/implementation": {
+      "source_sha256": "4c9a6c72d8dcd9bbed4ec94c65320efcf8a2329909c74252d08d2421c8be3282",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check OneShot's straight-through forward and backward behavior separately?",
+        "answer": "Forward must choose a real discrete one-hot route; backward approximates with softmax gradients. Fully soft assignment is not discrete serving, while hard argmax may block gradients. Align path, item map, and scorer versions to verify ranking trains addresses.",
+        "example": "Illustration: Routing weights receive gradients, but one forward still chooses one prescribed path, not a mix of all buckets."
+      }
+    },
+    "qa/recommendation:onetrans/mechanism": {
+      "source_sha256": "eeaff8fa4ddffb0c3819267c1276e05f39745eaa39642ab2d8e8b40a129decca",
+      "reviewed": true,
+      "fields": {
+        "question": "Why place behavior before non-sequence fields in OneTrans and use different parameter sharing for each?",
+        "answer": "Causal order lets later fields read behavior while keeping history independent of later candidates. Homogeneous events share QKV and FFN, while heterogeneous fields use position-specific parameters. Pyramid shortening saves later query work. Reuse still depends on time window, versions, and dependencies.",
+        "example": "Illustration: Reuse earlier click history when swapping a candidate; candidate fields read that history using parameters suited to price and category."
+      }
+    },
+    "qa/recommendation:onetrans/basics": {
+      "source_sha256": "bf38a163ca2fa05a91ff23f03cebe659be5502b15829805a3e470b69a5d8b580",
+      "reviewed": true,
+      "fields": {
+        "question": "Why share S-token weights but use position-specific NS-token weights in OneTrans?",
+        "answer": "Behavior events have similar roles, whereas user and item fields are heterogeneous. Joint causal interaction does not make them homogeneous. Position-specific weights cost capacity and must move with field order.",
+        "example": "Illustration: Clicks share QKV, but age and price may use separate FFNs. Swapping fields without their mapping treats price like age."
+      }
+    },
+    "qa/recommendation:onetrans/comparison": {
+      "source_sha256": "d92884a907232179f3d53c9eae593b2b8f411fef0fcc06bea1f924470dded302",
+      "reviewed": true,
+      "fields": {
+        "question": "Where does OneTrans's pyramid of S queries save work compared with keeping full length in every layer?",
+        "answer": "Later layers update fewer recent queries, reducing output and interactions. Older evidence can survive through earlier states or legal K/V; it is not dropped from the input or absent everywhere. The small-data head concentration is not generalization evidence.",
+        "example": "Illustration: Read broad history in shallow layers and focus on recent queries later, unlike deleting distant events first."
+      }
+    },
+    "qa/recommendation:onetrans/implementation": {
+      "source_sha256": "920bd80eeb52f63919d66796edecac307cadbebc08ba896b813dc4fe5940306d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do OneTrans NS order and causal masking determine visibility?",
+        "answer": "S-first lets later fields read history while history cannot read later candidates, enabling shared state. Visibility between NS positions depends on the actual mask. Validate history, time encoding, and model versions before reusing cross-request caches, not just user ID.",
+        "example": "Illustration: Move a candidate before history and later events may see it, invalidating the old cache contract."
+      }
+    },
+    "qa/recommendation:onetrans-v2/mechanism": {
+      "source_sha256": "8e4f863b603a12f79fc3cce45c5ada9c55ac40f8667d3f0084744eab946986a1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why share user context but forbid cross-stage token attention in OneTrans-V2?",
+        "answer": "Three stages can reuse costly behavior encoding while retaining distinct inputs and objectives. Each reads only prior behavior, avoiding downstream or future leakage. Fine-to-pre-ranking knowledge travels through controlled distillation, not unrestricted reads. Local work lacks independent three-stage controls.",
+        "example": "Illustration: All stages share observed browsing, but retrieval cannot see later clicks or fine-rank labels. Preranking learns from a stopped-gradient teacher."
+      }
+    },
+    "qa/recommendation:onetrans-v2/basics": {
+      "source_sha256": "a84fd542ed709d6e92f2b09d32728defd4387735e825e341836db9827cfff629",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep three stages' own inputs and targets while sharing OneTrans-V2 user context?",
+        "answer": "Retrieval, preranking, and fine ranking have different candidate counts and features. Shared causal history saves encoding, while stage-specific tokens preserve constraints and controlled losses transfer knowledge. A stage cannot read another's future labels.",
+        "example": "Illustration: Retrieval sees codes while fine ranking sees item details; shared history does not expose posteriors to retrieval."
+      }
+    },
+    "qa/recommendation:onetrans-v2/comparison": {
+      "source_sha256": "7edc99bd7217bf40409d5916732487fe8945c6e5a78e2b98d094b17cf38ccac3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why aren't independent stage attention and fine-to-pre-rank distillation contradictory?",
+        "answer": "Forward isolation controls serving inputs; training distillation transfers stopped-gradient soft supervision into parameters. It need not expose the fine-ranker online. Runnable stages without an independent three-stage baseline do not establish cascade gains.",
+        "example": "Illustration: Teach preranking to mimic fine ranking offline. Running fine ranking first on every request defeats ordering and cost."
+      }
+    },
+    "qa/recommendation:onetrans-v2/implementation": {
+      "source_sha256": "45abf5403265515af624e6121a3264fd182b427de3fed53925e5a108f3d12003",
+      "reviewed": true,
+      "fields": {
+        "question": "Why should OneTrans-V2 decision offsets directly change only decision logits?",
+        "answer": "The local test offsets two observable proxy decisions. Given a decision, it should not directly rewrite SID distributions or pre-/fine-rank outputs. This tests interface independence, not unobserved purchase value or ad supply. Proxy thresholds are not CTR/CVR.",
+        "example": "Illustration: Raising the discovery offset can change decision likelihood, not add a constant to all fine-rank scores."
+      }
+    },
+    "qa/recommendation:open-web-ufm/mechanism": {
+      "source_sha256": "3cabeb2e866c6c5154ba7976b79e952feca1c5b9d8da1036ea6d9950359c34c6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why jointly train masked prediction and sequence contrastive learning in Open Web UFM rather than one CTR label?",
+        "answer": "Masking recovers local events from partial context; contrastive views teach whole-sequence consistency. Pretraining can support CTR and win-rate heads with sparse labels. Identity discontinuity and privacy affect input distribution; a local zero gain is not evidence of cross-task benefit.",
+        "example": "Illustration: A three-visit trajectory without click labels still supports masked recovery and two-view positives before fitting a small CTR head."
+      }
+    },
+    "qa/recommendation:open-web-ufm/basics": {
+      "source_sha256": "d1ede523c6dd10cacaf7d6344bb8f07937ef2f693a7c0ecc2744fa6c0c65d195",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't Open Web UFM assume a stable long-term user ID and complete history?",
+        "answer": "RTB identity depends on permissions, platforms, and privacy, creating short disconnected paths. Learn transferable features from limited browsing for CTR and auction tasks. Logged-in MovieLens histories cannot directly verify open-web identity modeling.",
+        "example": "Illustration: One person can appear as several short device-specific paths. Do not silently reconstruct a universal ID."
+      }
+    },
+    "qa/recommendation:open-web-ufm/comparison": {
+      "source_sha256": "a0847d1d6e7515a83297bd1e911bbdc2be8102de19104bb03807fa46a521c684",
+      "reviewed": true,
+      "fields": {
+        "question": "What kinds of consistency do masked recovery and sequence InfoNCE enforce?",
+        "answer": "MLM predicts missing events from local context, while contrastive learning aligns whole-trajectory views. They complement each other but strong corruptions or false negatives can mislead. The local zero result does not verify transfer merely because both losses exist.",
+        "example": "Illustration: Nearby visits can recover one masked visit, and partial trajectories can retain the same intent, unless the views now represent genuinely different needs."
+      }
+    },
+    "qa/recommendation:open-web-ufm/implementation": {
+      "source_sha256": "17083853cf2268dcefe2914099ce3a4a58d4e99eeabe27fb8c401960bd6b1119",
+      "reviewed": true,
+      "fields": {
+        "question": "Why make UFM recipe lifters auditable rather than let them change data and evaluation freely?",
+        "answer": "Define permitted changes to attribute feedback while preserving budgets and data contracts. Changing examples or metrics can create fake gains; LLM proposals cannot edit answers. Retain the zero result under the same encoder and 45 steps.",
+        "example": "Illustration: Varying mask rate is comparable; deleting hard test users changes the task rather than improving pretraining."
+      }
+    },
+    "qa/recommendation:oxygenrec-v2/mechanism": {
+      "source_sha256": "1f59d1dbffa5bcc6e590b1ab4acf9bb95c98b5803da3a0f4c6a0ac06a24e0198",
+      "reviewed": true,
+      "fields": {
+        "question": "Why condition OxygenREC-v2 from the first SID and select post-training constraints by uncertainty?",
+        "answer": "Late reranking cannot recover omitted items. A click/cart/order instruction shapes the whole decoding path. Training-only future behavior gives low-entropy positions confident teacher targets and high-entropy positions forward KL to preserve alternatives. Future events must not enter serving inputs.",
+        "example": "Illustration: An order instruction favors buyable branches from the start; uncertain branches retain several plausible products instead of one hard answer."
+      }
+    },
+    "qa/recommendation:oxygenrec-v2/basics": {
+      "source_sha256": "1aa44ea2fe5bc94d202ac56279d74d9c4b01a3c6eb825a1634c8dfc6b9a7c661",
+      "reviewed": true,
+      "fields": {
+        "question": "Why put click, cart, and order into OxygenREC-v2 decoder instructions?",
+        "answer": "Goals change which candidates should be generated. Conditioning from the first SID can improve coverage before ranking, while weighted pretraining and post-training connect feedback. Use a legitimate task input, not one inferred from the test target. Local popularity is not real multibehavior supervision.",
+        "example": "Illustration: Cart and casual click can need different first branches; reranking click-heavy candidates may miss order items."
+      }
+    }
+  }
+}

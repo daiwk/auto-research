@@ -1,0 +1,203 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:mllmclip/implementation": {
+      "source_sha256": "9c6332dd0962fe405365dba3395817238bb1c074bf4e4820a26a4b05ba431e78",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the real-checkpoint path train the full CLIP student?",
+        "answer": "No. It freezes SmolVLM2 and the CLIP encoders, trains a dimension-matching feature projection, and selects weights on separate validation. Held-out CKA and neighbor overlap do not improve consistently across three seeds. A perfect score caused by degenerate labels was invalidated.",
+        "example": "Running CKA after projection checks the operator path, not full student training over the paper's 26 benchmarks."
+      }
+    },
+    "qa/multimodal-models:mveb/mechanism": {
+      "source_sha256": "d334a68a152f4911915c23d0734a6b03e6a1019eeb6f9e4c59dcf308061d3fb8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use identical clips for MVEB's video-only and audio-plus-video comparison?",
+        "answer": "Otherwise changes in sample difficulty confound the contribution of audio. Keep clips paired, encoders frozen, and task-specific probes or retrieval metrics fixed; respect each model's frame and audio configuration. An invented audio score for an unsupported model invalidates the comparison.",
+        "example": "Evaluate the same door-knocking video with and without sound, not a different easier clip."
+      }
+    },
+    "qa/multimodal-models:mveb/basics": {
+      "source_sha256": "b5f9ca90fea2cdd048ab51d3f9ace669519ebd5ca195537eb215754a2ae198c8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is MVEB's video question answering still an embedding evaluation?",
+        "answer": "VCQA embeds candidate answers in a retrieval pool, chooses a match for the video, and reports pool accuracy. It is not free generation. The embedding model is frozen; classification and other tasks use their prescribed probes, so output metrics differ by task.",
+        "example": "Select the closest of four supplied action descriptions rather than freely generating an action and judging its wording."
+      }
+    },
+    "qa/multimodal-models:mveb/comparison": {
+      "source_sha256": "391b17cbad6e64faa453f9d7b96c2709c926202f5d64cdb4c9567b302075d06f",
+      "reviewed": true,
+      "fields": {
+        "question": "Is forcing every MVEB video model to take 64 frames fairer than respecting its configuration?",
+        "answer": "Not necessarily. MVEB uses 2 fps and up to 64 frames for variable-length models, but follows training configuration for fixed-frame models. Fixed clips are needed for audio/video pairing, and models without audio support must not receive fabricated results.",
+        "example": "Feeding 64 frames into an eight-frame model and calling the failure low embedding quality is not a fair test."
+      }
+    },
+    "qa/multimodal-models:mveb/implementation": {
+      "source_sha256": "9751bf4e7357cd31713a70cba9fe5940365a44c12f5fa1717d1071f238351c54",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a single cosine aggregator implement all MVEB tasks locally?",
+        "answer": "No. Official task evaluators include retrieval nDCG@10, clustering V-measure, eight-example-per-class logistic regression, and candidate QA accuracy, each with input and sampling constraints. The local page reviews resources and cost only; no model calls or formal metrics.",
+        "example": "Retrieval must calculate nDCG from relevance labels. Mean cosine is neither a replacement nor QA accuracy."
+      }
+    },
+    "qa/multimodal-models:naijas2st/mechanism": {
+      "source_sha256": "571b34eb427be07e709e359a143d628117e085b7de3e15c0c98849f7a370899f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not use exact match against reference text for speech-to-speech translation?",
+        "answer": "Audio output needs real ASR before scoring with prescribed semantic translation metrics. Both transcription and translation errors matter. Exact text matching rejects valid paraphrases and bypasses audio. Few-shot examples come from development data, not test references.",
+        "example": "Two spoken versions of “Please come tomorrow” can both be correct with different wording; preserve both the semantic and audio pipeline."
+      }
+    },
+    "qa/multimodal-models:naijas2st/basics": {
+      "source_sha256": "36cd7e97de83fcdafd003804f51b4fa1f62acb5b14b7c3fae02c1c23c02574ba",
+      "reviewed": true,
+      "fields": {
+        "question": "What does accent diversity require in NaijaS2ST evaluation?",
+        "answer": "Pronunciation variation affects understanding and speech evaluation. Cover multiple speakers and accents, report translation directions separately, and distinguish speech-to-text from speech-to-speech. One direction or a few speakers cannot characterize all Nigerian languages or accents.",
+        "example": "English→Hausa is not Hausa→English, and understanding one accent does not prove reliable synthesis of another."
+      }
+    },
+    "qa/multimodal-models:naijas2st/comparison": {
+      "source_sha256": "f48f6ef472c711225ccb79b96a59715311b96cf99257bf0200a7f4233d7c2ca5",
+      "reviewed": true,
+      "fields": {
+        "question": "Do SSA-COMET and ChrF++ measure the same kind of agreement?",
+        "answer": "SSA-COMET uses a multilingual semantic model; ChrF++ mainly uses character and word n-gram overlap. The scores are complementary and not interchangeable accuracy percentages. Speech output still needs the prescribed ASR path.",
+        "example": "Two valid paraphrases can preserve meaning with different character overlap; the larger number is not automatically a larger fraction correct."
+      }
+    },
+    "qa/multimodal-models:naijas2st/implementation": {
+      "source_sha256": "7156038f7ec1c7f6281a95f63e244c797c4f1fd6ffcbbc21eb15cc5ae417f902",
+      "reviewed": true,
+      "fields": {
+        "question": "What limits apply to NaijaS2ST five-shot examples and proxy language tokens?",
+        "answer": "Take five examples from DEV, never formal test. Some Seamless adaptations map Hausa to Arabic and Naijá to French tokens as conventions, not native model support. Local work has not downloaded audio or run complete training and evaluation.",
+        "example": "Assigning an Arabic control token for Hausa fine-tuning does not mean the audio is translated to Arabic or that untrained Hausa support exists."
+      }
+    },
+    "qa/foundation-models:omni-embed-mini/mechanism": {
+      "source_sha256": "279b3097a6d92a0fd43097665ff87f3cd3e5b80d522fd0052e3a89072592bbd0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can distilling from descriptions reduce disruption to the text backbone when adding media?",
+        "answer": "A frozen text backbone supplies stable semantic coordinates. Dense descriptions become teacher targets; a projector and controlled LoRA learn media mappings into that space. Stop gradients through the targets, and check for relevant media information that descriptions omit.",
+        "example": "An action-and-scene description anchors a video embedding, but missing small text cannot be recovered from the target alone."
+      }
+    },
+    "qa/foundation-models:omni-embed-mini/basics": {
+      "source_sha256": "e909c34001c327c74b996f986f12080a5a0776f71385ba68db23911c62f3f39d",
+      "reviewed": true,
+      "fields": {
+        "question": "Does Omni-Embed-Mini output new media or a retrieval vector?",
+        "answer": "It learns a semantic media embedding comparable to description embeddings, not image, audio, or video generation. Dense descriptions supply training targets, but the media path must still encode the input itself.",
+        "example": "An audio vector comparable to a text query is representation learning; synthesizing sound from text is a generation task."
+      }
+    },
+    "qa/foundation-models:omni-embed-mini/comparison": {
+      "source_sha256": "ef7afbd2c796e60483b739765a7c6b14f8060eefa38d7f963656cfc7921c648a",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the trade-off between frozen-text distillation and joint full-parameter multimodal training?",
+        "answer": "Freezing offers stable coordinates for new modalities and limits changes to existing text representations. Full training has broader flexibility but can shift old text capabilities. The scope of updates alone does not determine which performs better.",
+        "example": "Preserving existing text vectors makes an audio retrieval index easier to maintain, but text-space constraints can still limit audio-specific distinctions."
+      }
+    },
+    "qa/foundation-models:omni-embed-mini/implementation": {
+      "source_sha256": "bd739d358c4bdbaee635df35bd5da0e3f678501eab6936685824092374aebbd1",
+      "reviewed": true,
+      "fields": {
+        "question": "Where should stop-gradient apply in cosine distillation?",
+        "answer": "Detach the description target from the frozen text backbone. Cosine loss updates only allowed media-side parameters. The local same-space dense-description diagnostic does not train the full six-modality encoder or reproduce retrieval leaderboards.",
+        "example": "Reduce the angle by moving the media mapping only. Updating both vectors would move the supposedly fixed semantic anchor."
+      }
+    },
+    "qa/foundation-models:physics-mm-pretraining/mechanism": {
+      "source_sha256": "83005ff456df3846123b466cd7b2b18caf6e165b0e7682a41f50172a34cd4a83",
+      "reviewed": true,
+      "fields": {
+        "question": "What do shared attention and normalization versus modality-specific FFNs control?",
+        "answer": "Shared components allow cross-modal interactions, while separate FFNs preserve modality-specific transformations and capacity and may reduce competition. Hold data, loss weights, and budgets fixed to identify synergy; a better aggregate does not imply equal gains for every modality.",
+        "example": "Images and text use the same attention path but separate FFNs. Evaluate each separately."
+      }
+    },
+    "qa/foundation-models:physics-mm-pretraining/basics": {
+      "source_sha256": "560815d4a6a55b5a1547252db36cd75e12ad878a79ad1d30619452b5c63b98d0",
+      "reviewed": true,
+      "fields": {
+        "question": "Does modality synergy simply mean adding more data?",
+        "answer": "It asks whether training on one modality improves knowledge or representations for another. Controlled experiments distinguish synergy from competition. Adding data alone changes compute, coverage, and task weighting together.",
+        "example": "If text reasoning improves after adding image training, check total tokens and compute before attributing it to shared knowledge."
+      }
+    },
+    "qa/foundation-models:physics-mm-pretraining/comparison": {
+      "source_sha256": "1acf4d2bc1742d47617b9f8ced24f8ad96a3e8211d667977efec01ca3d28bad5",
+      "reviewed": true,
+      "fields": {
+        "question": "How does early joint training differ from concatenating separately trained modality vectors?",
+        "answer": "Joint losses update shared interaction parameters and can produce cross-modal gradient synergy or competition. Concatenation only changes downstream visible features after training; it does not create shared pretraining, even at equal data volume.",
+        "example": "Updating shared attention from text and retesting vision can reveal transfer. Placing two frozen vectors side by side does not create that update."
+      }
+    },
+    "qa/foundation-models:physics-mm-pretraining/implementation": {
+      "source_sha256": "7c1d302cbcb1cb5d9cfde0c447b77ff66960f979122b3c1ac6f2df8056b9252e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are joint objective weights part of the reproduction contract?",
+        "answer": "Text, understanding, and generation terms have different gradients into shared parameters. The two coefficients alter their balance and therefore the conditions for synergy or competition. A runnable mini-suite or one perfect seed does not reproduce a 13.5B MoE trained on two trillion tokens.",
+        "example": "Increasing generation weight tenfold changes optimization pressure although loss names stay the same."
+      }
+    },
+    "qa/foundation-models:retoken/mechanism": {
+      "source_sha256": "febede0fb7133a4f963ecab1f734c5f38e81f0ff2fd65133984b5898a67ba49e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why score retrieval in the final-layer value space in ReToken?",
+        "answer": "Prefilled vision KV already contains image representations. Similarities in the same value space can reuse cache without rerunning an external retriever and re-encoding images. A learned retrieval token and projection adapt relevance; a frozen VLM does not eliminate supervision or guarantee generalization.",
+        "example": "With 10 prefetched images, score their average value vectors against the new query's retrieval token and reuse selected images."
+      }
+    },
+    "qa/foundation-models:retoken/basics": {
+      "source_sha256": "06170bab8ab6a4bf615e4937a68069a29c18af86136b4524247c5896932dd8fa",
+      "reviewed": true,
+      "fields": {
+        "question": "Is ReToken's learned RET token a fixed ID for one image?",
+        "answer": "No. It is a shared learned input marker whose contextual VLM state is projected and matched to each image's average value. Shared parameters do not imply identical query states or selected images, and the token does not encode an entire catalog.",
+        "example": "Two questions with the same RET marker can yield different relevance scores for the same image pool."
+      }
+    },
+    "qa/foundation-models:retoken/comparison": {
+      "source_sha256": "b54d97689d59b93ea132acc4ff653d696dcb9cf6ebd299400f3dc066fdc9cee1",
+      "reviewed": true,
+      "fields": {
+        "question": "How does ReToken per-image BCE differ from softmax with one positive candidate?",
+        "answer": "BCE scores each relevance label independently, weighting classes without forcing sigmoid scores to sum to one. Single-positive softmax makes candidates share probability mass. Do not silently discard valid additional positives while claiming the same supervision.",
+        "example": "A question can require two relevant images. Both can be positive rather than relabeling one negative to force one winner."
+      }
+    },
+    "qa/foundation-models:retoken/implementation": {
+      "source_sha256": "4cab97072d5992bf64d7364419d0968dc1d472e19fdb79ee4887057fbafa689d",
+      "reviewed": true,
+      "fields": {
+        "question": "What is missing between ReToken's local text cache experiment and the visual training?",
+        "answer": "WikiText-2 trains a single retrieval target, value scoring, and sparse selection, not the frozen large VLM, MIRAGE vision-language supervision, or long video. Short prefixes cannot fill top-K and affect retention. Report worse PPL as a text mechanism result, not a visual gain.",
+        "example": "With three history tokens and top-K ten, at most three can be retained; average retention across lengths is not a fixed compression ratio."
+      }
+    },
+    "qa/foundation-models:sensenova-u1-5/mechanism": {
+      "source_sha256": "95d771bf4bf038576a8ced01ba7fc44e470c620cd66492f551305fb0fa2dcb0e",
+      "reviewed": true,
+      "fields": {
+        "question": "How does spatial patch reconstruction differ from predicting discrete image codes?",
+        "answer": "Discrete methods use a tokenizer or VAE to turn images into codes, then predict those codes. Patch reconstruction targets local spatial structure directly and relies less on that intermediate interface. This changes representation and supervision, not proof of zero bottleneck or lower cost.",
+        "example": "One method predicts codebook IDs and the other reconstructs spatial patches. Their error sources differ."
+      }
+    }
+  }
+}

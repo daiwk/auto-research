@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:memcon/mechanism": {
+      "source_sha256": "2779b3a06043662813bd0188598890f0195bbcdbfa2af6d0d3c10e7ff5d5116d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must the memory controller count UCB visits per discrete state rather than use global action frequencies?",
+        "answer": "An operation useful early may not help later or under memory pressure. State-local values and counts let the controller learn those trade-offs separately. It explores unvisited actions first, then updates from terminal success and efficiency. No extra LLM call applies to selection; retrieval and execution still have costs.",
+        "example": "Example: Deep retrieval may help at the start and delay completion near the end. Count attempts separately instead of sharing one global success rate."
+      }
+    },
+    "qa/agent-research:memcon/basics": {
+      "source_sha256": "f68ef8fc1b675622bcd97bd834ea208da5300d63b8b25e3bdfb6978352f4e6c8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does MemCon make whether to use memory a control action?",
+        "answer": "Retrieval, plan injection, query changes, and maintenance cost work. Some simple tasks are cheaper without memory. MemCon selects based on discrete progress, repetition, and memory size, then learns from terminal success and efficiency. Memory need not run on every turn.",
+        "example": "Example: With an obvious next tool, skip retrieval. After repeated failure and with a relevant successful plan, inject it or search deeper."
+      }
+    },
+    "qa/agent-research:memcon/comparison": {
+      "source_sha256": "4000adb5426aaa171e40c38218d327b7b9ec60d960694d0b755ddc12d42491f1",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the trade-off between tabular UCB and asking an LLM to choose a memory policy every round?",
+        "answer": "Tabular control needs no extra model call and has interpretable states and actions, but limited discrete features cannot express arbitrary semantic contexts. LLM control is flexible but costs calls. State-local UCB does not guarantee convergence as the environment and memory change.",
+        "example": "Example: A repetition flag can trigger deeper retrieval immediately. Semantically different tasks with the same discrete state may still look identical to the table."
+      }
+    },
+    "qa/agent-research:memcon/implementation": {
+      "source_sha256": "1b8402e3cc2af068a8423133bb44954c2712eff528465b6966e0d1cc51583bc3",
+      "reviewed": true,
+      "fields": {
+        "question": "Can MemCon's Q update use sample-mean UCB or TD bootstrapping?",
+        "answer": "No. The local implementation follows v3 state-local counts, discounts terminal success and efficiency by distance, and updates repeated state-action pairs in reverse order. It does not bootstrap future Q. Unvisited actions go first with initial Q tie-breaking. Differences from mutable upstream main counts are documented.",
+        "example": "Example: An action seen twice in one episode receives two discounted updates in reverse order, not one reward averaged by visits."
+      }
+    },
+    "qa/agent-research:memento-skills/mechanism": {
+      "source_sha256": "5125ce5686979e4fadaecbf46c2c08ac624624bdf0a31eb721da6ed1d1c94223",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are versioned skills more reusable than appending raw execution logs to context?",
+        "answer": "A log describes one run. Structured skills extract applicability and steps for later retrieval. Versioned merge tracks corrections instead of keeping contradictory old copies. Abstraction must preserve provenance and failure conditions; shorter wording does not make it a reliable general procedure.",
+        "example": "Example: A deployment log contains temporary directories and retry noise. The skill retains dependency checks and rollback conditions, and a later version fixes obsolete arguments."
+      }
+    },
+    "qa/agent-research:memento-skills/basics": {
+      "source_sha256": "9a50c74aaea676fb76ce2277d5c1020265ea6f0c35424b2905c7310e9c90d50d",
+      "reviewed": true,
+      "fields": {
+        "question": "What repeated work does Memento-Skills avoid across similar tasks?",
+        "answer": "A run records useful steps, errors, and conditions. Raw logs still need interpretation next time. Memento-Skills makes experience searchable and updatable for reuse. Usefulness depends on applicability and actual execution; storage and version counts do not measure capability.",
+        "example": "Example: After discovering a billing date-format issue, reuse a skill with format validation instead of rereading the entire failure log."
+      }
+    },
+    "qa/agent-research:memento-skills/comparison": {
+      "source_sha256": "2b8d961ea39d9cd3c77840d33d01e4b827b35967032109132075220b0e5cd4af",
+      "reviewed": true,
+      "fields": {
+        "question": "How does versioned Merge differ from appending a new skill every time?",
+        "answer": "Merge integrates feedback into relevant existing skills and records changes rather than accumulating near duplicates. Appending is simpler but can retain contradictory versions. Merge must preserve applicability and check regressions; one topical or successful example does not justify a global replacement.",
+        "example": "Example: Update an export skill for a pagination limit. If it applies to one service only, keep that condition rather than requiring pagination everywhere."
+      }
+    },
+    "qa/agent-research:memento-skills/implementation": {
+      "source_sha256": "74d4baa28bedd3ea0deedb37d9611e3f7de8a62e57e00fe8d4e30c727d7cf74b",
+      "reviewed": true,
+      "fields": {
+        "question": "What does low local joint success with nonzero skill telemetry show?",
+        "answer": "The mechanism ran and many tasks still failed. Creation or reuse counts cannot be cherry-picked as improvement. Local tests cover state updates and fair budgets without the original large model, real web, or full benchmark. Keep negative outcomes with process evidence.",
+        "example": "Example: Ten skill retrievals show invocation happened. If the task failed, they do not establish correct content or execution benefit."
+      }
+    },
+    "qa/agent-research:u-mem/mechanism": {
+      "source_sha256": "c82186d8bec04b242c5517e988363c18f1d502f1b1127023215d0034cd1068b1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why escalate acquisition from self or teacher to tool research to an expert instead of always asking the strongest expert?",
+        "answer": "Costs differ. Try cheaper potentially adequate paths first and reserve costly help for persistent uncertainty. Thompson sampling combines historical utility and uncertainty, and memory is verified before writing. The cascade orders value and cost decisions, not a claim that cheap sources are always correct.",
+        "example": "Example: Check memory for common configuration, then docs, then an expert only if ambiguity remains."
+      }
+    },
+    "qa/agent-research:u-mem/basics": {
+      "source_sha256": "4e6cdbd798a7a08157af56151c805e6c2107894971b3a3649572289dc5c80f34",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does U-Mem treat missing knowledge as an active acquisition problem?",
+        "answer": "Similar memories can omit a necessary fact or procedure. Repeated retrieval can leave the same gap. U-Mem learns to acquire information from self, tools, or experts as needed and considers reuse afterward. New knowledge needs provenance and feedback; an expert label does not guarantee truth.",
+        "example": "Example: Memory contains only an obsolete API call. Find new documentation for missing arguments instead of returning the old fragment repeatedly."
+      }
+    },
+    "qa/agent-research:u-mem/comparison": {
+      "source_sha256": "f46a60c38a493eb6810dca0d4fe73e8124bed5359af4c9fb5e44bc7aba5693da",
+      "reviewed": true,
+      "fields": {
+        "question": "How does semantic similarity plus Thompson sampling differ from ranking memory by similarity alone?",
+        "answer": "Similarity favors related content. Beta posterior samples explore uncertain memories that may be useful, then outcomes update the posterior. This is not random insertion of irrelevant material. The uncertainty–relevance balance depends on real feedback rather than confidence alone.",
+        "example": "Example: Two records are equally related, one well tested and one new. Sampling can occasionally test the newer one instead of always selecting the highest old score."
+      }
+    },
+    "qa/agent-research:u-mem/implementation": {
+      "source_sha256": "c83a62dc2a366055bc114eae29859d5a1559e39756a304dd49cac5ae2f181382",
+      "reviewed": true,
+      "fields": {
+        "question": "What limits follow from deterministic local experts and knowledge sources?",
+        "answer": "They omit real search failures, hallucination, paid models, and token cost. They verify escalation, validation, writes, and proxy cost accounting only. Receiving preset correct knowledge after low confidence does not reproduce HotpotQA, AIME, or real savings.",
+        "example": "Example: A fixture expert always returns a supplied fact. That tests escalation control flow, not real expert request success or cost."
+      }
+    },
+    "qa/agent-research:pahf/mechanism": {
+      "source_sha256": "1668b164c2b5d4dc16166755db023be3edea6acba580612f00e74e85c2ed791f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why allow users to correct preferences after action even when prior memory is confident?",
+        "answer": "Confidence describes current memory, not whether preferences changed with time or context. Retrieval and clarification before action address uncertainty; afterward correction replaces stale content. Accepting feedback only at low confidence can permanently lock in learned mistakes or drifted preferences.",
+        "example": "Example: A user previously preferred early flights but changed routines. Update the preference after rejection rather than booking early flights on old confidence."
+      }
+    },
+    "qa/agent-research:pahf/basics": {
+      "source_sha256": "2f981861a027acaf000c9f313eabccc9c5ed71a04902978529b782964da9acb6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do pre-action clarification and post-action correction complement each other?",
+        "answer": "Clarify unknown or uncertain preferences before acting to reduce guesses. Feedback after execution corrects the action and stale memory, handling drift. A confident old belief is not grounds to reject correction when preferences change by context or time.",
+        "example": "Example: Someone formerly liked spicy food but wants mild today. Ask first if uncertain; if an order is already wrong, update based on the explicit correction."
+      }
+    },
+    "qa/agent-research:pahf/comparison": {
+      "source_sha256": "de38aa210213420a45b4df6ee0b70f2fb13769dd330be19b5abe1707d18a3ffc",
+      "reviewed": true,
+      "fields": {
+        "question": "How does explicit preference memory differ from providing a hidden user persona as ground truth?",
+        "answer": "Memory comes from actual user feedback and has observable provenance. Hidden persona or gold action belongs only to evaluation. Giving it early removes the personalization problem. PAHF learns preferences and drift through interactions rather than reading a test specification.",
+        "example": "Example: Store that a user said they avoid coffee on workdays. Do not feed the identical statement from a hidden fixture before interaction."
+      }
+    },
+    "qa/agent-research:pahf/implementation": {
+      "source_sha256": "cf20a9677dad90f5baa19fffa48f73ac6ccb0a02c4bf3d1a6a98b87709bd6bef",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep current context and remembered preference together in PAHF policy input?",
+        "answer": "Actions depend on instructions, observations, explicit memory, and pre-action feedback. A preference is not a context-free global command. Tie new feedback to its context to avoid converting one situational change into a permanent rule. The local implementation tests memory and feedback contracts, not the original robot or shopping simulator.",
+        "example": "Example: Selecting sugar-free drinks for guests today does not necessarily change personal taste. Keep the scene to understand correction scope."
+      }
+    }
+  }
+}

@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:tapo/mechanism": {
+      "source_sha256": "1b33acfb7ae700660ed48705742b493550bd899d564bc618cf3872e8f95447d7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can learning next observations from reused rollouts add training signal without adding deployment inference steps?",
+        "answer": "Each transition already has state, action, and next observation. An auxiliary prediction target on the shared backbone uses them without new expert or policy rollouts. Deployment keeps the original policy without explicitly calling a predictor. Controlled comparisons must establish task gains; predicting feedback does not imply choosing good actions.",
+        "example": "An ls command already returns a directory listing. Train transition prediction from it, but deploy the policy to choose commands without first imagining a listing at each step."
+      }
+    },
+    "qa/agent-research:tapo/basics": {
+      "source_sha256": "9f3815c9536c6358a1ab54fc5c91d42aad3a960b62b92dd90645055bf8c4ab72",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does TAPO reuse observed environment transitions to add training signal?",
+        "answer": "A rollout contains each post-action observation as well as terminal reward. Predicting s_{t+1} from (s_t,a_t) teaches the shared backbone action consequences without additional expert demonstrations.",
+        "example": "Use actual tool responses to teach the model what feedback its actions produce."
+      }
+    },
+    "qa/agent-research:tapo/comparison": {
+      "source_sha256": "020eae09f7966ed5fbf51c1416599dd75affb417539d590d64e38100c071a468",
+      "reviewed": true,
+      "fields": {
+        "question": "Is TAPO's training-time transition prediction the same as an extra world-model call at deployment?",
+        "answer": "No. Its auxiliary objective trains a shared backbone without requiring extra prediction at deployment. Explicit world-model planning adds online calls. More training supervision need not add inference cost.",
+        "example": "The model can learn next-observation prediction and still generate only the original action before using a tool."
+      }
+    },
+    "qa/agent-research:tapo/implementation": {
+      "source_sha256": "e80a28c09301f7114e5e7d6b78dc82e5f584ffa91fa4b3139af5f2e33038468e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check that s_t, a_t, and the next observation belong together in TAPO targets?",
+        "answer": "Misalignment or cross-episode concatenation supervises the wrong action result. Targets must come from legal feedback in the same rollout, without exposing s_{t+1} in prediction input. High mini-suite accuracy is not real tool modeling capability.",
+        "example": "Step two should predict the third observation it caused, not the first observation in the next task."
+      }
+    },
+    "qa/agent-research:grsd/mechanism": {
+      "source_sha256": "66f5755b00d01eac1b0ee78e073f1482d01e7a34d8f0d4eacfdcfbf936a7a9e0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why generate DO/AVOID guidance with a stop-gradient snapshot and make it visible only during training?",
+        "answer": "Guidance comes from verified same-task successes and failures. A frozen snapshot prevents the guidance path from drifting with current gradients. It modulates turn credit without leaking hindsight group outcomes to evaluation policies. Positive multipliers preserve outcome-advantage direction rather than making reflection an answer or reward oracle.",
+        "example": "If successes check dependencies and failures edit directly, derive training guidance from that contrast. A new test task cannot receive reflections from its own future success and failure group."
+      }
+    },
+    "qa/agent-research:grsd/basics": {
+      "source_sha256": "4ed50a3b4e81d4a29722355cc3a7cf6b7391947026b62e78d781f3ba2850aee4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does GRSD reflect on verified success and failure trajectories for the same task?",
+        "answer": "Terminal reward mixes useful behavior, repeated mistakes, and chance. Contrasting reflections within a task yields specific DO/AVOID guidance to modulate turn credit.",
+        "example": "Both trajectories retrieve information, but only one checks a key condition. The contrast helps isolate useful behavior."
+      }
+    },
+    "qa/agent-research:grsd/comparison": {
+      "source_sha256": "9e00a6e251b555c97c23328704cd0b8c29a776bd8be57b2bac2c486182d7dbc3",
+      "reviewed": true,
+      "fields": {
+        "question": "How does GRSD's success/failure group comparison differ from copying one successful trajectory?",
+        "answer": "A success can contain accidental or unnecessary steps. Group comparison uses failures to identify what to do or avoid. It is training guidance, not an oracle for independent testing.",
+        "example": "An irrelevant tool call in a successful trace is not automatically worth learning."
+      }
+    },
+    "qa/agent-research:grsd/implementation": {
+      "source_sha256": "4f03ca80c36286403438928355af2ae66e5443dc33df141a38c3b254d2fa8ee9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check GRSD's positive modulation m_t separately from outcome advantage?",
+        "answer": "m_t>0 adjusts magnitude while preserving the outcome advantage's sign; a negative value reverses the update. A stop-gradient snapshot provides training-only guidance, which must not remain in evaluation inputs.",
+        "example": "An action that should become less likely must still become less likely after multiplication by positive m."
+      }
+    },
+    "qa/agent-research:cast/mechanism": {
+      "source_sha256": "65652fc53621b30817ff8b13e51f45c8944625ecae38f5b6d3509614557c7b12",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does a solver's value difference between adjacent states complement rather than replace terminal outcomes?",
+        "answer": "Value change provides local progress credit toward solvability and can identify important steps. Solver estimates can be imperfect and local improvement can end in failure, so retain outcome advantage as a global constraint. Any hidden answers available to the training-side solver must be isolated from evaluation actors.",
+        "example": "Simplifying constraints can earn positive local credit, but a later invalid result still makes the trajectory unsuccessful."
+      }
+    },
+    "qa/agent-research:cast/basics": {
+      "source_sha256": "1374a8dfdbfb4bbf05926fd21a5114cedb404b28d6769607c17be86702dc002e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CAST query a solver for values of adjacent states instead of relying only on final wins or losses?",
+        "answer": "Terminal signals cannot localize contributions in long games. Solver value before and after an action yields turn-level credit alongside outcome to indicate how each step changed the situation.",
+        "example": "A step can materially improve reachability before completion; its value difference supplies earlier feedback."
+      }
+    },
+    "qa/agent-research:cast/comparison": {
+      "source_sha256": "3a8d4343732a9eceb9ab0455fa1fce60866db246c8ef657cdb22624dff196e00",
+      "reviewed": true,
+      "fields": {
+        "question": "Do solver state values and a learned policy value critic have the same source of supervision?",
+        "answer": "A solver computes values externally in a solvable environment, while a critic usually learns estimates from experience. Solvability and query costs constrain solvers; accuracy of a tiny shortest-path oracle does not generalize to arbitrary agent tasks.",
+        "example": "Exact solutions on small deterministic graphs do not imply a similarly cheap perfect solver exists for web tasks."
+      }
+    },
+    "qa/agent-research:cast/implementation": {
+      "source_sha256": "899f72582474ec6b01bf1a157880fafa32ca28aef08bb0c99038a66d13ffc65c",
+      "reviewed": true,
+      "fields": {
+        "question": "How does CAST avoid reversing states in V(s_{t+1})−V(s_t)?",
+        "answer": "Bind before and after states to the same action and use a consistent value direction. Reversing them records progress as negative credit. Count actual solver calls and keep training-side values from becoming a hidden-answer interface for evaluated policies.",
+        "example": "A value change from 0.2 to 0.5 should give +0.3, not −0.3."
+      }
+    },
+    "qa/agent-research:seed/mechanism": {
+      "source_sha256": "4a2bc7a0b7b0d9592fa2dea35002c9244d3ddf361f536d2368ae9f0a18effed4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distill probability differences with and without hindsight skills on original actions instead of copying new expert traces?",
+        "answer": "Skills come from completed-trajectory reflection. Compare conditional probabilities on states and actions actually visited by the student for denser local supervision. Hindsight explains original behavior without requiring a teacher to take another route. Deployment must not receive future answers for the same task, and skill mistakes can contaminate signals, requiring verification boundaries.",
+        "example": "If the student checked a directory and reflection finds it useful, compare the probability of that same action with and without the skill rather than substituting a teacher's command."
+      }
+    },
+    "qa/agent-research:seed/basics": {
+      "source_sha256": "25eccc111eb49cd27f786a77847018ea6a51814ea5d29bc3597fde471bff25b7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does SEED turn reflections on completed trajectories into reusable hindsight skills?",
+        "answer": "Reflections attached only to an answer do not accumulate as stable training signal. SEED extracts skills, compares probabilities for original actions with and without them, and combines dense distillation with outcome RL to reuse experience.",
+        "example": "A failure can yield the skill 'check tool preconditions first' as training guidance for later tasks."
+      }
+    },
+    "qa/agent-research:seed/comparison": {
+      "source_sha256": "bef9abfd3eed5ca48c1e0cf4da9e7eadd2711cc1b1bb8faad1e2a8879e3a6fb5",
+      "reviewed": true,
+      "fields": {
+        "question": "How does SEED rescoring on original actions differ from letting a teacher generate a full successful trace?",
+        "answer": "Rescoring keeps the actual student states and actions, measuring skill-conditioning changes. A new expert trace may visit different states. This is on-policy rescoring, not imitation of a separate ideal execution.",
+        "example": "If the student executed A, compare A in both conditions instead of replacing it with unexecuted B."
+      }
+    },
+    "qa/agent-research:seed/implementation": {
+      "source_sha256": "c1b94cfba37fc1b752e21b7fb9a369418f2fd62b56af2ae10cea615e005c751c",
+      "reviewed": true,
+      "fields": {
+        "question": "What alignment must remain fixed when calculating a SEED skill log-probability difference?",
+        "answer": "Use the same s_t, a_t, and policy evaluation convention, changing only skill conditioning z. Otherwise the gap includes state or action changes. Hindsight is training feedback; do not leak test-answer-derived skills into the policy.",
+        "example": "Scoring A with the skill and B without it does not measure the effect of skill guidance on A."
+      }
+    }
+  }
+}

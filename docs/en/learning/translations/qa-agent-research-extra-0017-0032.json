@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:rtpo/mechanism": {
+      "source_sha256": "195888eb3a7ac9224af400c94bee4661c62a2aa5db98a06a094a3ba91568d6b7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do reverse-turn updates help keep decisions aligned with on-policy downstream continuations?",
+        "answer": "Early action value depends on later policies. If downstream behavior has changed substantially, credit from old continuations can be inconsistent. A reverse tree handles turns near the outcome first, then propagates evidence backward so early decisions reflect the updated continuation. Update order does not remove importance or execution-alignment checks.",
+        "example": "After the last two steps learn recovery, assess opening decisions using that new recovery ability instead of values from the old failing continuation."
+      }
+    },
+    "qa/agent-research:rtpo/basics": {
+      "source_sha256": "8973e78e4fd0b0cece5b1be0e2a33a9741ffed7c6dce60daff9d4cb6ff342522",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does RTPO organize multi-turn decisions into reverse updates?",
+        "answer": "Early action value depends on downstream continuation. RTPO arranges rollouts in a sparse reverse tree and updates turns backward to keep decisions aligned with the downstream policy evaluating them.",
+        "example": "Handle the consequences of late actions first, then return to earlier decisions rather than treating the trajectory as unstructured text."
+      }
+    },
+    "qa/agent-research:rtpo/comparison": {
+      "source_sha256": "cbab1d9c25b78e907a2f2bc12bb456d22ded026549628149941012f773152212",
+      "reviewed": true,
+      "fields": {
+        "question": "Are reverse-turn updates the same as training on reversed token text?",
+        "answer": "No. Reverse order applies to decision updates and continuation dependencies. Causal language-model input still follows the legal trajectory. Reversing text changes the task and visibility and cannot substitute for reverse policy optimization.",
+        "example": "Updating turn three before turn two does not mean reading turn-three observations to predict a turn-one action."
+      }
+    },
+    "qa/agent-research:rtpo/implementation": {
+      "source_sha256": "2840a94649a753ee5b223db5f3715386089b67d027f4e3eaa464684415ff214b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why record both behavior policy and downstream continuation version for each RTPO turn?",
+        "answer": "Early advantages based on mismatched later policies can lose on-policy correspondence. Reversing indices alone is insufficient: check tree nodes, state, and continuation ownership. Local control flow is not complete external-environment RL.",
+        "example": "After a node is reevaluated under a new continuation policy, its old continuation reward is not the current return for the same state."
+      }
+    },
+    "qa/agent-research:planpo/mechanism": {
+      "source_sha256": "03469c8830446c97dbf39848da297047f6d98de0659dd9f02ab0a8a025885277",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compare turn counts and response lengths only among successful traces rather than rewarding every short trace?",
+        "answer": "Short can mean efficient planning or premature abandonment. First separate successes by outcome, then compare turns and response length among comparable successes. Coarse-to-fine advantages supplement outcome, not correctness, and fewer tokens cannot excuse skipped evidence collection.",
+        "example": "Two successful bug fixes can differ by three wasted searches. A shorter trace that declares completion without editing files should get no efficiency reward."
+      }
+    },
+    "qa/agent-research:planpo/basics": {
+      "source_sha256": "89ffd6bcbe6bdff0be78bb1886b312e278a0a807d1e183fe8265b1516c8537f8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does PlanPO split planning efficiency into turn count and response length per turn?",
+        "answer": "Fewer environment interactions and shorter generated responses are distinct costs. PlanPO compares successes coarse-to-fine and combines efficiency with outcome advantage, retaining completion while improving the process.",
+        "example": "Two successful traces can differ in tool calls and explanation length; evaluate those dimensions separately."
+      }
+    },
+    "qa/agent-research:planpo/comparison": {
+      "source_sha256": "fe213c95aabf0842b2e60f38b37108c95691126a13893f11bb2f7256e5abd361",
+      "reviewed": true,
+      "fields": {
+        "question": "How does PlanPO efficiency among successes differ from rewarding the shortest answer?",
+        "answer": "A direct length reward can favor failure or early stopping. Comparing successful traces first requires completion, then optimizes turns and length. Length advantage is not global outcome advantage and must remain separate.",
+        "example": "An unexecuted one-line 'done' should not beat a successful multi-turn execution just because it is short."
+      }
+    },
+    "qa/agent-research:planpo/implementation": {
+      "source_sha256": "a01d1621318c08f3d82f84e684946da564e3bd05a73b7a3ca0552aef97a2973b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish agent responses from environment observations when counting turns and response lengths?",
+        "answer": "The two axes measure interaction turns and per-turn generation. Counting long tool returns as agent output changes credit. Record success filtering, counting boundaries, and each advantage coefficient, not just total mean tokens.",
+        "example": "A tool can return a long page without the agent generating the same number of tokens."
+      }
+    },
+    "qa/agent-research:trca/mechanism": {
+      "source_sha256": "3d4c032a36218162837d5bd413ae70a87bfe73385bd3d391f38944301d9a08c2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why score Evidence, Execution, and Invalidity separately instead of one process score?",
+        "answer": "A transition can add evidence but fail to execute, or be well formed without advancing the task. Rubric components distinguish those cases and penalize invalid behavior. Breakthrough credit identifies key progress without a successful anchor, but still needs actual transitions, not fixed template scores.",
+        "example": "A search can reveal an error cause, followed by a command syntax failure. A total score alone obscures whether retrieval or invocation needs fixing."
+      }
+    },
+    "qa/agent-research:trca/basics": {
+      "source_sha256": "c454a780f089d4f476ceba633cde78dbe950bd0535048c3a340742173cb0f8cf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does TRCA define a rubric for every state transition rather than scoring only the outcome?",
+        "answer": "Terminal outcomes hide important actions. Transition rubrics separately check evidence, execution, and invalid behavior and add breakthrough rewards. They do not require a successful anchor and supply more detailed credit.",
+        "example": "A step can gather key evidence while failing execution, with separate scores rather than zeroing both."
+      }
+    },
+    "qa/agent-research:trca/comparison": {
+      "source_sha256": "4178108179c7a10c41055674a02b8e05b3d2c290138b6cc6539a2b653e2191a9",
+      "reviewed": true,
+      "fields": {
+        "question": "How does TRCA's lack of a success anchor differ from feedback that needs a successful reference trace?",
+        "answer": "Reference-based approaches first need a comparable successful execution. TRCA derives base and breakthrough rewards from actual transition rubrics without first finding a success. This is a feedback prerequisite, not proof of a higher task-success rate.",
+        "example": "Even when both full traces fail, a transition can collect useful evidence and receive rubric feedback."
+      }
+    },
+    "qa/agent-research:trca/implementation": {
+      "source_sha256": "128fb57137c6607dd3ce5e3d8966a281a145e65e541f353deebcabe558571acd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why verify the sign and component logs when aggregating TRCA invalidity?",
+        "answer": "Subtract r_invalid and add the other base and breakthrough terms as defined. Missing the negative sign rewards invalid behavior. Keep component scores linked to transitions, since a total can conceal mistakes. Fixed values are not real evaluation.",
+        "example": "With other terms fixed, increasing invalidity must lower total reward."
+      }
+    },
+    "qa/agent-research:sinkflex-rl/mechanism": {
+      "source_sha256": "2ff192231e1e1b8a64d461860e05ee6638b0568e9066649a4d496869747087bd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why preserve model-specific sink scaling when using a sliding-window or causal mask?",
+        "answer": "Sparse visibility and sink scaling affect different parts of attention. Mask changes do not justify dropping the model's scaling. Training still needs real environment state, long context, and GRPO data flow; a passing formula or kernel is not full on-policy rollout and tool-task verification.",
+        "example": "If the window retains recent text and sink but also removes special sink scaling, output changes combine two interventions and cannot be attributed to the window alone."
+      }
+    },
+    "qa/agent-research:sinkflex-rl/basics": {
+      "source_sha256": "49022db90fa96253a779dcf42b3e6c42b266fb685957341bcc8c536672c75719",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does SinkFlex-RL address both rollout environments and attention memory?",
+        "answer": "Long tool traces require multi-turn state management and face context and training-memory bottlenecks. It combines environments, fresh trajectory groups, value-model-free GRPO, and sink-aware FlexAttention, not just a compressed mask.",
+        "example": "Saving attention memory still requires correct environment state for actual multi-turn policy updates."
+      }
+    },
+    "qa/agent-research:sinkflex-rl/comparison": {
+      "source_sha256": "ecd3930808c50e2f7dc2aa997070fed933f3863282ec7088fcbceb817daa14cb",
+      "reviewed": true,
+      "fields": {
+        "question": "How do GRPO group-relative advantage and PPO with an independent value model differ in training dependencies?",
+        "answer": "This approach builds relative advantages from groups without a separate value model, then applies a clipped policy objective and KL regularization. Changing advantage estimation alters rollout and memory needs; it is not an optimizer name change.",
+        "example": "Grouped returns provide a relative baseline, not a trained per-state critic."
+      }
+    },
+    "qa/agent-research:sinkflex-rl/implementation": {
+      "source_sha256": "60471eb18dbf546d319d663a417e941427d4b5ffed820d6fcb7fb2672be084f0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not replace SinkFlex-RL token averaging with per-trajectory averaging and equal weights?",
+        "answer": "The denominator is total valid length ΣT_i, giving long and short trajectories a different weighting from equal per-trajectory means. Preserve model sink scaling and verify the actual mask. The local mini-suite does not reproduce FlexAttention GPU memory curves.",
+        "example": "Trajectories of lengths 10 and 100 contribute differently to the token mean than to a mean with half the weight each."
+      }
+    }
+  }
+}

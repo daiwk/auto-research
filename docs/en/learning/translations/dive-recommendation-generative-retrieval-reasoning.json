@@ -1,0 +1,171 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/recommendation/generative-retrieval-reasoning": {
+      "source_sha256": "7438a8e5ab0f98eeb46ccb35fb0b9b381fa2f3dfd98759cb0b44ded7d250f266",
+      "reviewed": true,
+      "fields": {
+        "title": "Generating an item crosses three gates: codebook, model distribution, and legal catalog",
+        "thesis": "TIGER converts items to hierarchical codes and learns the next code sequence. COBRA adds a conditioned dense vector after sparse codes. PLUM continues pretraining an existing LLM in behavior and SID space. STATIC changes how legal decoding executes without changing representation; Reward Guided Decoding tilts existing support toward business preferences. Locate the changed gate before assuming an omitted item can be recovered. PinGER separates historical inputs from SID supervision and treats prefix diversity, hierarchical DPO, and catalog legality separately.",
+        "axis_0": "Item representation: discrete codes, sparse–dense cascades, and LLM continual pretraining",
+        "axis_1": "What learned distributions and inference search change independently",
+        "axis_2": "Legal catalog constraints versus business rewards",
+        "axis_3": "Prior support, beam budgets, and small-scale evidence"
+      }
+    },
+    "dive/recommendation/generative-retrieval-reasoning/comparison/recommendation:tiger": {
+      "source_sha256": "108f3696b9972f2f630f6bccaa1abc694f1e3b2c6f3c6e8ce68eda7addfbf195",
+      "reviewed": true,
+      "fields": {
+        "position": "RQ-VAE quantizes content residuals in stages and adds a collision-resolution token to the item SID. An encoder–decoder autoregressively predicts the next item's code sequence.",
+        "tradeoff": "Shared semantic prefixes share parameters, but code collisions and early path errors affect reachability. The local experiment sums token log probabilities over legal item IDs, not production beam throughput."
+      }
+    },
+    "dive/recommendation/generative-retrieval-reasoning/comparison/recommendation:cobra": {
+      "source_sha256": "5fd5797473e70e64086ded1d62deec34e48506997c98e7a19e17506966224b79",
+      "reviewed": true,
+      "fields": {
+        "position": "Generates a sparse code, then a dense query conditioned on code and history. Cascades beam code scores with dense similarity.",
+        "tradeoff": "Adds distinctions lost by quantization but introduces a dense index, fusion weights, and two-stage budgets. If a target code never enters the beam, the dense stage generally cannot recover it."
+      }
+    },
+    "dive/recommendation/generative-retrieval-reasoning/comparison/recommendation:plum": {
+      "source_sha256": "5afff24bad7be1d1ed994a09ba9382f2f80b51815e219e1172f1d47349fcf7d6",
+      "reviewed": true,
+      "fields": {
+        "position": "Initializes an existing MoE LLM, aligns it with behavior and video metadata through continual pretraining, then retrieves via next-SID prediction. SID-v2 constrains reconstruction, quantization, and co-occurrence.",
+        "tradeoff": "Shifts capacity from large ID tables to the backbone but depends on pretraining recipes and resources. Online SID generation avoids dot-product indexes, not SID mapping, catalog maintenance, or decoding costs."
+      }
+    },
+    "dive/recommendation/generative-retrieval-reasoning/comparison/recommendation:static-constraint-decoding": {
+      "source_sha256": "59a7deb4bd4dbed41b853814d9ab32486bc974ed729a921ddc401e7975a8817f",
+      "reviewed": true,
+      "fields": {
+        "position": "Compiles legal paths into accelerator-resident CSR transitions. Runs full-vocabulary log-softmax before masking invalid tokens to negative infinity and tracks beam prefixes and node states together.",
+        "tradeoff": "Changes constraint execution and legality without creating new preferences. Renormalizing over each legal subset does not preserve original model path scores."
+      }
+    },
+    "dive/recommendation/generative-retrieval-reasoning/comparison/recommendation:reward-guided-decoding": {
+      "source_sha256": "811fe1d685bea45214d66f70fca7e68947f74873330b370c9f3428410b24b31d",
+      "reviewed": true,
+      "fields": {
+        "position": "Fixes the generative prior P0 and tilts it by exp(R/β) to obtain Q. KL temperature controls deviation without retraining the generator.",
+        "tradeoff": "Rewards reorder existing support, not paths with zero prior mass. A proxy reward is not online value; the local MovieLens construction does not measure production gains."
+      }
+    },
+    "dive/recommendation/generative-retrieval-reasoning/comparison/recommendation:pailitao-mmsearch2": {
+      "source_sha256": "e16d32b8b8574972444f32d1d601a256361716297e798180361e1385d4f5759f",
+      "reviewed": true,
+      "fields": {
+        "position": "Maps joint image/text requests to SID sets and aligns multi-intent, mixed-budget training with Sample–Beam serving.",
+        "tradeoff": "The complete multi-model, multi-stage system and private production experiments are too expensive to reproduce. No local placeholder model."
+      }
+    },
+    "dive/recommendation/generative-retrieval-reasoning/comparison/recommendation:pinger": {
+      "source_sha256": "2fcac35f7622ec6179d6550f915c379a0653362f3b6ccb3eb8e3fc9889d73191",
+      "reviewed": true,
+      "fields": {
+        "position": "Interleaves SID and dense inputs during training while blocking cross-item SID reads. Drops past SIDs during serving. Applies LCP-depth penalties per beam, with DPO over all SID prefixes and an NTP anchor.",
+        "tradeoff": "Unlike TIGER's per-item historical SID inputs. Prefix diversity does not provide STATIC's legality guarantee and may reduce offline recall. The complete tokenizer and serving stack are not local."
+      }
+    },
+    "dive/recommendation/generative-retrieval-reasoning/analysis/0": {
+      "source_sha256": "4b346d69aaab89aa86919cc52c078673e7f23637b620796799a46bf397e6b64d",
+      "reviewed": true,
+      "fields": {
+        "title": "Check item reachability before ranking quality",
+        "body": "TIGER and PLUM determine item-to-SID mappings and step probabilities. COBRA recovers detail within nominated sparse regions. Unresolved collisions, pruned prefixes, or catalog omissions cannot be fixed simply by increasing reward weight. Measure token prediction, valid item coverage, and final ranking separately. A wider beam is not proof of a better codebook."
+      }
+    },
+    "dive/recommendation/generative-retrieval-reasoning/analysis/1": {
+      "source_sha256": "26907ce00dd9cbb5d5616984b5b7c998d9b6f21c9c3670f60852b7b77635d85d",
+      "reviewed": true,
+      "fields": {
+        "title": "Legality and preference are different scores",
+        "body": "STATIC decides which tokens can continue a prefix to a valid item. Reward Guided Decoding tilts the allowed distribution toward a reward. Negative infinity defines the feasible set; exponential tilting is a soft preference. A finite stock-violation penalty can still admit a high-reward invalid item. Keep constraint compilation, model probability, and business value distinct."
+      }
+    },
+    "dive/recommendation/generative-retrieval-reasoning/analysis/2": {
+      "source_sha256": "921931773934938aaf1ae1c7fcf1d429b1369cfdf2d1180975b5aad4b19917f0",
+      "reviewed": true,
+      "fields": {
+        "title": "October 29: New method and source changes",
+        "body": "PailitaoMMSearch2.0 directly decodes multi-intent image/text requests into item SID sets, scaling serving with data tools, continual pretraining, mixed-budget SFT, and intent-balanced RL. Sample–Beam aligns inference sampling and beam candidate generation with training and display needs respectively. Larger models or longer reasoning do not guarantee improvement on every intent. Compare on fixed candidate sets, budgets, and production blending rules rather than model names. The full system is not reproduced locally."
+      }
+    },
+    "dive/recommendation/generative-retrieval-reasoning/analysis/3": {
+      "source_sha256": "bd2b1657fc9bed674b59055df74eaaa6122d361444ac99e55ec253bc66201e81",
+      "reviewed": true,
+      "fields": {
+        "title": "History inputs, candidate coverage, and legal paths have separate costs",
+        "body": "TIGER represents historical items as multilevel SIDs. PinGER keeps levelwise SID supervision but restricts the backbone so later items see only historical dense inputs. Those dense inputs can still fuse SID information. PinGER's LCP penalty spreads beam slots across prefixes; it does not exclude nonexistent SIDs. STATIC compiles legal transitions. Greater spread has a trade-off: at λ=3 the paper reports higher distinct@1 and lower R@100. Do not attribute full-stack online lift to local mask or DPO components."
+      }
+    },
+    "dive/recommendation/generative-retrieval-reasoning/question/dense-cannot-recover-pruned-code": {
+      "source_sha256": "daecb8485a06ba3eb33b9eb9522ad15bb54a993ecc5f81726d0eeb564bf0001f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't COBRA's dense vector guarantee recovery of items missed early in a TIGER-style code path?",
+        "answer": "COBRA conditions dense queries on sparse codes, usually reranking within regions the beam nominated. If a target code is absent, the dense stage does not automatically search all omitted regions. It restores fine-grained distinction within a quantized region rather than repairing arbitrary recall misses.",
+        "example": "If the first beam keeps only running shoes and prunes photography, perfect dense ranking of shoes will not retrieve a camera."
+      }
+    },
+    "dive/recommendation/generative-retrieval-reasoning/question/legal-mask-and-reward-tilt": {
+      "source_sha256": "fbf6c0a072d409cdd77ecf0ebf8746a348305db66b696b31be9196afc3ee31f0",
+      "reviewed": true,
+      "fields": {
+        "question": "How should we interpret a conflict between STATIC's legal mask and high reward in Reward Guided Decoding?",
+        "answer": "The mask defines eligible results. Reward expresses preferences within that set. Exponential tilting still multiplies the prior, so neither prior-zero nor mask-zero results can reappear. Replacing a mask with a finite penalty creates a different objective that allows violations to be offset.",
+        "example": "An out-of-stock item may have high predicted revenue but is still excluded by the catalog. Subtracting a little value does not guarantee exclusion."
+      }
+    },
+    "dive/recommendation/generative-retrieval-reasoning/question/same-sid-not-same-training": {
+      "source_sha256": "ba8f06ed5ec19b78a034d26bb2b0cb4787e5b4e655a77dc46a713fb642358acf",
+      "reviewed": true,
+      "fields": {
+        "question": "Both TIGER and PLUM predict SIDs. Why doesn't the same next-token loss make them the same training recipe?",
+        "answer": "TIGER builds a pipeline from content quantization and sequence generation. PLUM inherits an LLM, aligns language and collaborative spaces using behavior, text, and ASR continual pretraining, and adds co-occurrence and progressive-depth reconstruction in SID-v2. Shared outputs do not equal shared initialization, data, or representation learning. Fix catalog and budget when comparing.",
+        "example": "Two models predict three-level codes. One learns only behavior sequences; the other first sees mixed metadata and behavior. Calling both final losses cross-entropy does not erase that difference."
+      }
+    },
+    "dive/recommendation/generative-retrieval-reasoning/question/oct29-method-boundary": {
+      "source_sha256": "7395d48b2cfa1f7aba1378bcb78c4cd7bd10fb7454ac725bcad4fa5254dfb644",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't Pailitao's complete online gain be attributed causally to Sample–Beam alone?",
+        "answer": "The online test measures a complete deployment with training data, model, presentation, and blending. A controlled offline ablation supplies different evidence about one module. Local work is documentation only, with no executable interface.",
+        "example": "If transactions rise after changing training data, the model, and blending, the increase cannot all be assigned to the beam recipe simply because it also changed."
+      }
+    },
+    "dive/recommendation/generative-retrieval-reasoning/question/pinger-prefix-spread-versus-static-legality": {
+      "source_sha256": "5256fba6c2f50f3a5c17dcbdb873271dbbd3ae989b801a9432dd35f1f9cedd90",
+      "reviewed": true,
+      "fields": {
+        "question": "Can PinGER prefix diversity replace STATIC's legal mask or guarantee higher TIGER-style offline recall?",
+        "answer": "No. LCP penalties spread slots across parent prefixes as a soft preference. STATIC determines which paths reach valid items. Wider subtree spread can lower recall for one held-out item, as PinGER's table shows. Removing SIDs from inputs, adding diversity, and ensuring legality are different interventions.",
+        "example": "Three semantic categories may each receive beam slots while still containing nonexistent catalog leaves. Removing illegal leaves also does not guarantee retention of the target."
+      }
+    },
+    "dive/recommendation/generative-retrieval-reasoning/update/2026-10-27/0": {
+      "source_sha256": "5f8d5f7e45ef146b9026716b7e6ec2ce2a68f0fc7b5c1a521124b74c604d0b8c",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial version: compared TIGER, COBRA, PLUM, STATIC, and Reward Guided Decoding, with analysis and questions on item representations, learned distributions, and inference search."
+      }
+    },
+    "dive/recommendation/generative-retrieval-reasoning/update/2026-10-29/1": {
+      "source_sha256": "90dab1bebf8755e011113566348a78e9144dd71481d2de43838ca206196d874e",
+      "reviewed": true,
+      "fields": {
+        "summary": "PailitaoMMSearch2.0 directly decodes multi-intent image/text requests into item SID sets, scaling serving with data tools, continual pretraining, mixed-budget SFT, and intent-balanced RL. Sample–Beam aligns inference sampling and beam candidate generation with training and display needs respectively. Larger models or longer reasoning do not guarantee improvement on every intent. Compare on fixed candidate sets, budgets, and production blending rules rather than model names. The full system is not reproduced locally."
+      }
+    },
+    "dive/recommendation/generative-retrieval-reasoning/update/2026-10-30/2": {
+      "source_sha256": "4757b5b2ee780f46781b9a4a12cf40a9c1ed974125982d41ed0775479bd60353",
+      "reviewed": true,
+      "fields": {
+        "summary": "Reviewed PinGER's three masking rules, per-level LCP penalty, and prefix-wise anchored DPO. Compared historical SID cost with TIGER and legal transitions with STATIC, retaining the diversity/recall trade-off and limits of full-stack online evidence."
+      }
+    }
+  }
+}

@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:hisac/comparison": {
+      "source_sha256": "53ce63de466fc691feaeaf042c1954506adef205f3b1fd747f32c1fc431195da",
+      "reviewed": true,
+      "fields": {
+        "question": "What choices does HiSAC's hierarchical interest routing retain compared with a single fixed user vector?",
+        "answer": "Separate nodes preserve interests at different levels of granularity, and a query can use them as needed instead of averaging away multiple modes. A single vector gives a simpler interface but makes individual sub-interests harder to recover. Routing may miss rare, low-weight needs, and quantization can lose detail. The source's small NDCG increase and Hit decrease should be interpreted separately.",
+        "example": "Illustration: A camera query can read the photography node for a user who likes photography and running, while running shoes can read the sports node. Averaging the two interests into one vector may dilute both."
+      }
+    },
+    "qa/recommendation:hisac/implementation": {
+      "source_sha256": "0e7c21556369f6c029b5b2c99f1a256490efde86fdbd9b5b5266cb3a87a4d607",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must HiSAC explicitly handle empty nodes and repeated votes when aggregating behavior by code?",
+        "answer": "The node mean is normalized by total valid weight. An empty node provides no evidence of an interest and must not produce a strong signal. Hierarchical votes and query-selected subsets must preserve identity. Repeated behavior should count as defined, but expanding one event across levels must not turn it into several independent consumption events.",
+        "example": "Illustration: One photography event can populate both a coarse and a fine node without implying two purchases. An empty diving node is not a real interest just because its initial vector happens to look similar."
+      }
+    },
+    "qa/recommendation:hpgr/mechanism": {
+      "source_sha256": "b68ef65fb059c95d5d18f165eff491f5ea0cb6879e36de622705c1b10ccb010c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does HPGR use masked session pretraining before selecting history with preference-guided sparse attention?",
+        "answer": "Session structure captures relationships within a stretch of behavior. Learning it with masking avoids treating the entire long history as a flat sequence of interchangeable events. At fine-tuning time, the current preference selects related history so computation focuses on useful evidence rather than just cutting by recency. Sparse selection can still miss rare but decisive interests, so check selection coverage along with final predictions.",
+        "example": "Illustration: Last week's camera comparisons belong to one session and can be retrieved together for today's lens candidate. The latest unrelated purchase should not displace that organized history just because it is newer."
+      }
+    },
+    "qa/recommendation:hpgr/basics": {
+      "source_sha256": "f725d3d655181d20f482e5baad8ae8889d143151ea3e13574a8894f2b4f4d7e1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does HPGR use masked session modeling to learn a behavioral hierarchy?",
+        "answer": "Events in a session often share intent, while a change of session may reflect a shift in intent. Learning both levels gives the later preference selector a more meaningful state. A flat sequence based on adjacent positions can mix separate visits. Pretraining supervision comes from observed training data; test input must not reveal a target that should be unknown.",
+        "example": "Illustration: One visit focuses on tents and sleeping bags, the next on hiking boots. A session encoder can distinguish the two needs rather than treating every item as part of one continuous intent."
+      }
+    },
+    "qa/recommendation:hpgr/comparison": {
+      "source_sha256": "8638fec01f3c8cb0715e3360acb9d92618533886cc52209cb4ed31dc09e8a095",
+      "reviewed": true,
+      "fields": {
+        "question": "What older evidence can HPGR use that a fixed recent window might miss?",
+        "answer": "A recent window retains events by time. Preference-guided sparse selection picks events for the current intent, letting older relevant history compete for a limited budget. It depends on the selector: downstream layers cannot read omitted events, and hierarchical pretraining does not guarantee correct selection. The public proxy gains in the source apply only to its protocol.",
+        "example": "Illustration: If the latest browsing was for novels but the current candidate is a camera, the selector may find older photography history that the last ten events omit. A bad selector could also revive an outdated interest."
+      }
+    },
+    "qa/recommendation:hpgr/implementation": {
+      "source_sha256": "b9e6dea06ce26a02b2270481687d634a07b81fdb5d739d09f707cce791cf506d",
+      "reviewed": true,
+      "fields": {
+        "question": "How should HPGR keep padding and future targets out of its top-k attention?",
+        "answer": "Score only eligible historical events, mask padding before top-k, and enforce the current-time cutoff. If there are fewer than k events, use the valid count instead of duplicating dummy records. Align session boundaries with the preference query; do not use the gold next item to create a condition unavailable at test time.",
+        "example": "Illustration: With three valid events and k=5, attention can read only those three. Unmasked zero-scored padding can beat real events with negative scores."
+      }
+    },
+    "qa/recommendation:hrpo/mechanism": {
+      "source_sha256": "df9d88289415d3d779f952572391dafdf88436a7b78d739d5b70d80d895fa7dc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does HRPO split the final reward into prefix residual credit and credit-to-go?",
+        "answer": "Broadcasting a whole-item reward to each SID token assigns identical responsibility to distinct decisions and can raise variance. HRPO smooths prefix utilities within user clusters, takes differences between neighboring prefixes as local credit, and accumulates subsequent credit so earlier decisions can learn their longer-term effects. Prefix utility is estimated: the decomposition does not automatically remove bias, and inference cannot read the true target path.",
+        "example": "Illustration: The first code can choose the wrong category and doom the entire path, while the last only refines a choice within the category. Prefix credit tries to distinguish those roles rather than treating all codes alike."
+      }
+    },
+    "qa/recommendation:hrpo/basics": {
+      "source_sha256": "9f58b25d6bedaaffaf9ee1b6625994e6a20b3e576e30fe9c442a269fc68a6ee1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does HRPO decompose prefix utility into residual credits?",
+        "answer": "Final item rewards are sparse, and giving all SID tokens the same score obscures which steps contribute. Differences in prefix utility supply the marginal credit of a newly added code, and credit-to-go accumulates later effects for earlier decisions. Smoothing depends on user clusters and estimation quality; a difference is not a directly observed causal contribution.",
+        "example": "Illustration: The first token correctly chooses outdoor goods, but the next goes to irrelevant decoration. The two can receive different feedback despite the same failed final outcome."
+      }
+    },
+    "qa/recommendation:hrpo/comparison": {
+      "source_sha256": "859cd45206e8be1efbd2013064eb60f6cf0634b7c861f712c8f644938ccc9286",
+      "reviewed": true,
+      "fields": {
+        "question": "How does credit-to-go differ from using only each token's own delta in HRPO?",
+        "answer": "A single-step delta ignores how early choices constrain later ones. Credit-to-go sums residuals from the current step through the end, preserving long-term consequences. It can also accumulate estimation noise, and RRPO uses conservative updates to limit drift. The mechanism alone guarantees neither variance reduction nor an unbiased gradient of the original objective; those need a derivation for the specific case.",
+        "example": "Illustration: Choosing cameras early makes a good lens reachable later. Summing later credits lets the first token see that benefit, but an erroneous later utility can also propagate backward."
+      }
+    },
+    "qa/recommendation:hrpo/implementation": {
+      "source_sha256": "1cfa3bb36ecfe5aa56a032c3b9f0f194aadb74c074229dead68bb82b77c14c7b",
+      "reviewed": true,
+      "fields": {
+        "question": "How can a telescoping check verify HRPO's prefix differences?",
+        "answer": "Adjacent deltas should use the same version of utility. Their sum should equal final-prefix utility minus empty-prefix utility, and credit-to-go sums from the current position, not the start. User-cluster smoothing must not include future test feedback. The local binary SID verifies this bounded mechanism, not large-scale generative post-training performance.",
+        "example": "Illustration: If the empty-prefix utility is zero and the next three utilities are 1, 3, and 2, the deltas are 1, 2, and −1, which sum to 2. A different total from mixed smoothing tables exposes an inconsistency."
+      }
+    },
+    "qa/recommendation:hyformer/mechanism": {
+      "source_sha256": "6e4b9bbc02093ab6980a2a7dd75b8182c05525e34b8f4bdc8e85280ea0ff4643",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does HyFormer apply Query Boosting after every history read and pass the queries back to the next layer?",
+        "answer": "If history is compressed once before field interactions, those interactions cannot change what evidence is read next. HyFormer alternates sequence reads and non-sequence token mixing, letting new evidence enter field interactions and boosted queries return to history. The compact queries and field representations co-evolve; this does not require rewriting the raw history for every candidate.",
+        "example": "Illustration: The first layer finds an outdoor interest. After mixing in rainy weather and item material, the next query can focus on waterproof gear. A one-shot summary followed by an MLP cannot easily ask that new question of the history."
+      }
+    },
+    "qa/recommendation:hyformer/basics": {
+      "source_sha256": "ffde1cf53145861408a10765bca298fd9a71e95817d4400edd7be9559d5888b4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why initialize HyFormer's Global Queries from non-sequence fields and the sequence mean?",
+        "answer": "The query needs the current global context and a history overview so it can read the long sequence purposefully instead of starting from an unconditional slot. Each decoding step is followed by boosting to combine fields with history. The initial summary can lose details; later reads can help but cannot guarantee complete recovery.",
+        "example": "Illustration: A travel setting and a photography-heavy history can steer the initial query toward lightweight camera needs. A constant query sees the current setting only in a later layer."
+      }
+    },
+    "qa/recommendation:hyformer/comparison": {
+      "source_sha256": "67cbe160276edd3b8efcc45767421be30007610b182b906331d5043e3e80918a",
+      "reviewed": true,
+      "fields": {
+        "question": "When do interactions occur in HyFormer's query co-evolution versus LONGER followed by RankMixer?",
+        "answer": "The serial path summarizes the sequence before field mixing, so the initial history read cannot react to later field results. HyFormer sends boosted queries back for another read, conditioning it over several layers. Earlier interaction adds expressiveness but may also strengthen popularity bias: the source reports a large local increase in head share, not unequivocally better personalization.",
+        "example": "Illustration: One round finds camping signals, field mixing adds a budget constraint, and the next round seeks lightweight gear. A completed one-shot summary generally cannot reread raw history under the new constraint."
+      }
+    },
+    "qa/recommendation:hyformer/implementation": {
+      "source_sha256": "5634a1538cf87d536d3581394d76989323870436bfdc6e2d9ab6cf087a95e973",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must HyFormer feed the boosted query back into the next cross-attention layer?",
+        "answer": "Reusing the original Q would make each layer repeat the same question and eliminate co-evolution. Sequence K/V, decoded queries, and non-sequence tokens also need aligned layouts; per-token transforms operate on the mixed layout. The local two-query reduction is a specific implementation, not an exact match for production parameters and cache paths.",
+        "example": "Illustration: The second query should carry the first layer's budget and use-case information. If code accidentally reuses Q0, a deeper model can still reduce loss without implementing the paper's iterative information loop."
+      }
+    },
+    "qa/recommendation:idproxy/mechanism": {
+      "source_sha256": "621998b868fc0c48a7c44cfc32c35e3498384d17e8206ade7b021a5dbd463623",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does IDProxy align the MLLM and ID spaces before injecting multilayer proxy residuals into a ranker?",
+        "answer": "Multimodal semantics describe content but need not match the collaborative coordinates learned from long-term CTR training. Replacing IDs outright can destroy that geometry. Coarse contrastive alignment establishes a correspondence, then multilayer proxies extract knowledge at different abstraction levels and a gate controls its contribution. A residual protects the original path, but controlled comparisons still matter: overly strong semantics can swamp useful collaborative distinctions.",
+        "example": "Illustration: Two visually similar products may have different audiences, so semantics cannot simply override ID preferences. First align the spaces, then borrow attributes such as shape or use at appropriate levels."
+      }
+    },
+    "qa/recommendation:idproxy/basics": {
+      "source_sha256": "716a1a195823deb602726d9aed0544c57c96bc70fea9d003710bc4c5172ab0ef",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is an IDProxy proxy not just the original MLLM embedding?",
+        "answer": "The MLLM learns content semantics, whereas ranking IDs capture collaborative behavior; their directions and scales can differ. After coarse alignment and multilayer adaptation, a gated proxy increment supplements the original ID representation. A concatenation that happens to run is not evidence of successful space adaptation.",
+        "example": "Illustration: Similar-looking products can have distinct audiences that raw content embeddings miss but ID history preserves. The proxy should add information without replacing that distinction."
+      }
+    },
+    "qa/recommendation:idproxy/comparison": {
+      "source_sha256": "2dbfad3f0989d75f283bd948c6b3fcff2330b860f2dcaed8834c94cab8b7878a",
+      "reviewed": true,
+      "fields": {
+        "question": "What fallback does IDProxy's residual gate preserve relative to completely replacing item IDs?",
+        "answer": "Replacement discards existing collaborative memory; the gate adds adapted semantics on top of the original ID and can limit an unreliable increment. It can still favor one side too much, so check cold and tail items separately from head items. A lower contrastive pretraining loss does not guarantee better ranking; the source supports only its small public protocol.",
+        "example": "Illustration: An established item with abundant feedback may need little semantic input. A new item with a weak ID can borrow more content, but a gate cannot guarantee detection of every content error."
+      }
+    },
+    "qa/recommendation:idproxy/implementation": {
+      "source_sha256": "dd14385fc00446930357d7e90e4c0ececc171014f6bd211ff4d566f12791951a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must IDProxy construct coarse-alignment pairs using the same item identity?",
+        "answer": "PAL brings an MLLM vector zi near its corresponding ID vector ei, with other IDs in the batch contributing to the denominator. Misaligned columns force unrelated items together. The residual adapter must project to the original ID dimension before addition, and the gate must belong to that candidate. Collect multilayer hidden states from the actual model version rather than substituting random vectors.",
+        "example": "Illustration: Camera content paired with a children's clothing ID can still reduce training loss while learning the wrong mapping. Matching shapes and plausible values cannot replace identity checks."
+      }
+    },
+    "qa/recommendation:incrementality/mechanism": {
+      "source_sha256": "b8e778311783af8a94e2977ce68aa10661ece7bb31f5e5684705e5805c15c2af",
+      "reviewed": true,
+      "fields": {
+        "question": "Why might a likely buyer not be the best target under a limited outreach budget?",
+        "answer": "The policy cares about how much taking the action changes the outcome. High purchase probability may mean the user would buy without outreach. The method estimates treated and untreated outcomes and allocates the budget by uplift after an uncertainty penalty. A credible difference needs experimental support and identification conditions; two prediction heads alone do not make it causal.",
+        "example": "Illustration: A often buys either way, while B may buy only after seeing a relevant recommendation. B's raw purchase rate can be lower while B provides more incremental value for the same outreach slot."
+      }
+    },
+    "qa/recommendation:incrementality/basics": {
+      "source_sha256": "3b6d965c365996e47aa60d1862a8d01d94cec7bd27a8540a2093028e3717cc13",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Incrementality define the value of outreach as μ1−μ0?",
+        "answer": "μ1 estimates the outcome under treatment and μ0 without it. Their difference distinguishes what the action creates from what would happen anyway. Give scarce capacity to people whose behavior can change, not merely those likely to respond. The two potential outcomes cannot be observed together, so estimation needs support and identification assumptions.",
+        "example": "Illustration: A would buy without a message; B changes their choice only with one. A high treated purchase rate does not imply high incremental value, so it is not enough to rank by that outcome alone."
+      }
+    },
+    "qa/recommendation:incrementality/comparison": {
+      "source_sha256": "465d810f6c8168eae38d1e9d357ef43b38394ac5cee29f23d3a88b38e6894732",
+      "reviewed": true,
+      "fields": {
+        "question": "How does allocating by τ−λσ differ from ranking by mean uplift alone?",
+        "answer": "The uncertainty penalty deprioritizes poorly supported, possibly overestimated candidates and favors robust budget value. A mean-only policy may chase high-variance extremes. The penalty can also miss genuinely promising new groups and is not an exploration policy. A single proxy policy-value estimate cannot settle the trade-off universally.",
+        "example": "Illustration: Two users have the same estimated uplift, but one has abundant history and the other one response. Conservative allocation prefers the former; active exploration may require a separate budget."
+      }
+    },
+    "qa/recommendation:incrementality/implementation": {
+      "source_sha256": "3ab82f41ec962eaff0f8f221768a062e4d6ee61d2c52fe2d8caa78199ba554d7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why should fixed-budget allocation check B but allow some budget to remain unused?",
+        "answer": "The constraint caps actions at B; it does not require all B. If risk-adjusted values are negative, do not send unhelpful messages just to fill the quota. Ranking and allocation must use consistent identities and cutoff features, without selecting people based on future test outcomes. The source's fixed-percentage proxy is not real long-term online incrementality.",
+        "example": "Illustration: If ten messages are available but only three users have positive risk-adjusted value, sending all ten can lower value. Unless the business explicitly requires it, the constraint does not force full use."
+      }
+    },
+    "qa/recommendation:inthq/mechanism": {
+      "source_sha256": "3149bb9883aad0c42ab53bf60453c01fb9dbc8d41f32b6bff39ba07d35c4a1d4",
+      "reviewed": true,
+      "fields": {
+        "question": "What does IntHQ gain by using when, where, how, and via queries within multiple encoder layers rather than only four output heads?",
+        "answer": "With heads only at the end, the encoder may compress every kind of evidence the same way. Task queries read separate behavior and context streams at multiple layers, so the task can guide evidence selection: time can favor periodicity and channel can favor entry points. Shared lower layers can capture common structure, but task conflict does not disappear automatically; verify that the queries really specialize.",
+        "example": "Illustration: In the same lunchtime search event, the time query cares about a lunch-break pattern and the channel query about search as the entry point. Letting both ask inside the encoder is more flexible than giving each a head on one summary."
+      }
+    },
+    "qa/recommendation:inthq/basics": {
+      "source_sha256": "b6d2555515a2b526087fcad1b7734505e0818f0f313d8e95eaca6eda20f54ca6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are when, where, how, and via query roles rather than just labels in IntHQ?",
+        "answer": "Queries extract different evidence from behavior and context streams, affecting intermediate representations instead of merely producing four final predictions. The two streams preserve distinct sources; multilayer interactions connect time, location, manner, and channel. The names suggest specialization, which still needs to be checked.",
+        "example": "Illustration: When someone returns depends more on intervals, whereas where they go depends more on location history. Two heads attached to the same fixed vector cannot separately guide the early read."
+      }
+    }
+  }
+}

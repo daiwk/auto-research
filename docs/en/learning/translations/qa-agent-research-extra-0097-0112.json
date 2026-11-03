@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:dmast/mechanism": {
+      "source_sha256": "efce5d8479649dcbf554acf7ba300d0a665b217d8b9f505677f08ffde20d5b47",
+      "reviewed": true,
+      "fields": {
+        "question": "Why calculate group mean and variance from raw rewards while applying successful-response length penalty only in the advantage numerator?",
+        "answer": "Length penalty modulates credit for one successful response, not the group's baseline and scale. Attacked groups also combine raw attacker and defender returns. Penalizing before whitening changes their comparison and the algorithm. Exclude zero-variance groups rather than using arbitrary epsilon to manufacture signal.",
+        "example": "Two equally successful responses differ in length. Penalize the longer advantage without letting extra text drag the common raw-return baseline."
+      }
+    },
+    "qa/agent-research:dmast/basics": {
+      "source_sha256": "971de3c1af82480a340f379cc4041e2403a6a720ada99a78e9e7152fa818da60",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does DMAST share VLM parameters across agent and attacker roles?",
+        "answer": "Role conditioning supports interaction and self-play with shared parameters, so robustness training covers defense decisions and attack trajectories. The full method also uses teacher imitation and oracle-reasoning SFT; the Stage 3 reward formula is one part.",
+        "example": "One base model generates both kinds of trajectories under different role prompts, not two independent policies."
+      }
+    },
+    "qa/agent-research:dmast/comparison": {
+      "source_sha256": "da2e120f1c5fa19c58f43e9e15650b6455a8cc8117366e0c231dc944aaf95068",
+      "reviewed": true,
+      "fields": {
+        "question": "What is missing if only DMAST's group-statistics objective is implemented?",
+        "answer": "It can verify loss and gradients. Full visual-agent adversarial training needs a real VLM, environment interaction, teacher imitation, oracle SFT, and self-play. A mathematical diagnostic generates no attack payload and does not establish browser success or robustness.",
+        "example": "One SGD step on a tiny policy cannot support the same capability claim as all training stages in an interactive environment."
+      }
+    },
+    "qa/agent-research:dmast/implementation": {
+      "source_sha256": "d4dd6c423b117afc91959c8370eb15fdc6f78d4cc76499f42158fe616f3652b3",
+      "reviewed": true,
+      "fields": {
+        "question": "Should DMAST's training-to-sampling probability ratio multiply both PG and KL?",
+        "answer": "No. Only PG receives min(π_old/π_sampling,1), and PG is zero if the ratio is below 0.1. KL is not scaled by that condition. Exclude zero-variance groups and normalize by all valid response tokens in the batch rather than averaging per role.",
+        "example": "Dropping PG for a low-ratio token does not justify deleting its reference KL."
+      }
+    },
+    "qa/agent-research:pearl/mechanism": {
+      "source_sha256": "5efa7a8cc3a829eb00d0baeb4ac0eaa7cdf8136d515b1d2757c4569c22722b4c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why jointly reward tool chains and outcomes even with separate Planner and Executor roles?",
+        "answer": "A well-formed plan does not ensure tools exist, order is executable, or the answer is correct. An executor can supply bad arguments despite a sound plan. Offline trial and error records usage and failures; dense online signals separately constrain tool choice, order, and result. A high process component is not actual success.",
+        "example": "Looking up an order before refunding is a correct sequence, but a wrong order ID still fails. Reward both chain quality and final outcome."
+      }
+    },
+    "qa/agent-research:pearl/basics": {
+      "source_sha256": "acf5139b261b8fec2cdd688f750ad1936323d435eabee8b397ce44b146df129d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does PEARL run offline tool trial and error before online planning?",
+        "answer": "Hallucinated tools and wrong arguments break multi-hop plans. Offline exploration collects tool usage and failure conditions, then online separates Planner and Executor so planning can use more reliable experience.",
+        "example": "Learn required parameters and failure conditions before the Planner decides a call sequence."
+      }
+    },
+    "qa/agent-research:pearl/comparison": {
+      "source_sha256": "835a381a7865c9fbb394f9133b68188886f9d340dab6d6cbfe1f1941fc5c3ace",
+      "reviewed": true,
+      "fields": {
+        "question": "How does training feedback differ between decoupled Planner/Executor and one model thinking and calling tools as it goes?",
+        "answer": "Decoupling can use tool choice, order, and final success as planning rewards while the Executor handles execution feedback. A good plan does not guarantee success: verify arguments and runtime effects.",
+        "example": "A plan can pick all three tools correctly yet fail because the Executor supplies wrong arguments."
+      }
+    },
+    "qa/agent-research:pearl/implementation": {
+      "source_sha256": "06be5f7dc70fc143ba607b8f84f1b594e325f0ceeced3961b0e20bcc0487f5ff",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain PEARL tool/order/success components rather than only total reward?",
+        "answer": "Each component measures tool identity, ordering, or completion, helping localize planning signals and check weight directions. A total hides defective components. Local exploration and reuse are not live ToolHop API calls or complete GRPO.",
+        "example": "If tools are correct but ordered incorrectly, the order term should explain the lower reward."
+      }
+    },
+    "qa/agent-research:agent0/mechanism": {
+      "source_sha256": "c47c39f55baccd8442beff287112da8f60a01b285821d54f7a926278fdb9548c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must task verifiers check majority votes rather than treating agreement as truth?",
+        "answer": "Executors may share wrong assumptions. Voting measures agreement, not independent factual correctness. External task rules verify candidates, and curricula advance near the current ability boundary. If the generator or voter sees references, leakage invalidates claims of autonomous tool capability.",
+        "example": "Five executors can agree on the same wrong unit conversion. A verifier uses the task contract, not the number of votes."
+      }
+    },
+    "qa/agent-research:agent0/basics": {
+      "source_sha256": "300943c714d16d1cfb89bff103872b4e497eac20adcad3cfa571538004953fda",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Agent0 create a curriculum with a task generator and several execution agents?",
+        "answer": "Verifiable tasks create training opportunities automatically, multiple candidates give group feedback, and difficulty rises with the capability frontier. Zero human data does not mean no success criteria; the verifier still constrains curriculum quality.",
+        "example": "After executors master a task family, propose a slightly harder but still verifiable task."
+      }
+    },
+    "qa/agent-research:agent0/comparison": {
+      "source_sha256": "ba2c9e948899bbeb0de407dcdb70dec351cd99a891447c26301c43e6c712f1f5",
+      "reviewed": true,
+      "fields": {
+        "question": "Do agent majority agreement and independent verifier acceptance provide the same evidence?",
+        "answer": "Agreement checks whether candidates match; verification checks task satisfaction. Shared errors can win a vote. Candidate groups cannot prove themselves correct, and agreement alone cannot establish improvement for curriculum advancement.",
+        "example": "Five identical wrong results still agree, but the verifier should mark failure."
+      }
+    },
+    "qa/agent-research:agent0/implementation": {
+      "source_sha256": "d1f2041091b971cf63e9974a9439849dcca10410aadaec72aab13a08958ec964",
+      "reviewed": true,
+      "fields": {
+        "question": "Can Agent0's verifier return its internal solution or gold answer directly to executors?",
+        "answer": "Execution and evaluation inputs should contain public task conditions only; hidden references stay with the verifier. Check task executability and feedback provenance. Saturated mini-suite success cannot establish LLM self-evolution.",
+        "example": "If the generator hides a canonical action sequence in the execution prompt, success no longer establishes autonomous solving."
+      }
+    },
+    "qa/agent-research:agent-r1/mechanism": {
+      "source_sha256": "4f6356af53011b3cf9b1b0268e234864a18ba1b66ffb727962b16a7dabf940f6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do independent interaction transitions help switch between token-level and step-level credit?",
+        "answer": "They explicitly preserve state, action, and next-observation boundaries, enabling attribution at generated-token or environment-step granularity instead of flattening the transcript. Pluggable context management cannot change transition semantics. Tool output stays an environmental observation, not a policy action loss term merely because it is logged together.",
+        "example": "A query can return a long table and still be one action. Assign step credit or split credit only among tokens that generated the query."
+      }
+    },
+    "qa/agent-research:agent-r1/basics": {
+      "source_sha256": "a088b2b08a9a42c7693489088d1079271e4affbf68a532f98e865d14fc4f325d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Agent-R1 record each agent–environment interaction separately?",
+        "answer": "A transition links state, action, and next observation for pluggable context management and environments, plus selectable token- or step-level credit. It is more structured than one text example containing the whole chat.",
+        "example": "A tool call and its return form a distinct training record."
+      }
+    },
+    "qa/agent-research:agent-r1/comparison": {
+      "source_sha256": "152223102126d29b206acfc57411cf6eb704e5fca2a1f2425dfb99d1a1990f2b",
+      "reviewed": true,
+      "fields": {
+        "question": "Are token-level and step-level credit just two loss names?",
+        "answer": "No. Decision units, value boundaries, and action-length treatment differ. Explicit transitions make choices auditable. Renaming the optimizer does not fix confused observation and policy-response boundaries.",
+        "example": "A tool action with 20 tokens is one environment step, not 20 pieces of environment feedback."
+      }
+    },
+    "qa/agent-research:agent-r1/implementation": {
+      "source_sha256": "86bc787bcaaf68017392ec6d40a07e3c27792a2e92a7a3aae85489903a91bf5f",
+      "reviewed": true,
+      "fields": {
+        "question": "How do Agent-R1 transition logs prevent the next observation from becoming visible to the current action?",
+        "answer": "Keep temporal boundaries among s_t, a_t, and o_{t+1}; generating a_t cannot read o_{t+1}. Cut advantage recurrence at episode termination. Local mechanism updates are not actual multi-GPU agent training.",
+        "example": "Before a tool call, policy input cannot already contain its future response."
+      }
+    }
+  }
+}

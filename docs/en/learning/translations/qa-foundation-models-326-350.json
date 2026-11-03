@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:smrc-pmrc/basics": {
+      "source_sha256": "11f20ab333c44ca5653981790eaeb64a458939761a0992f3e7567c5278a36d43",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not keep only the low-rank projected gradient?",
+        "answer": "Dominant singular directions can contain noise and exclude useful descent. Low-dimensional momentum handles in-subspace gradients; current orthogonal residual restores outside directions without full residual momentum.",
+        "example": "A smaller useful direction should not be permanently excluded by a large principal direction."
+      }
+    },
+    "qa/foundation-models:smrc-pmrc/comparison": {
+      "source_sha256": "1c1e56a66f75edf5bb20af9349e7d51d30cd153f03e0393811f000c94863776c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why aren't SMRC and PMRC the same optimizer?",
+        "answer": "SMRC maps EMA momentum back directly; PMRC first applies matrix sign. SMRC corrects parameters at stage boundaries, unlike the theoretical PMRC shift rule. One projected SGD function cannot substitute.",
+        "example": "Applying msign to M before mapping generally changes direction."
+      }
+    },
+    "qa/foundation-models:smrc-pmrc/implementation": {
+      "source_sha256": "5af9058e48819644a4930a834e8db64f4e95319aa02f60536b0e7d461b01978d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why correct SMRC parameters and rerun backward before refreshing the basis?",
+        "answer": "At stage end, correct parameters and zero momentum. A new forward/backward at the changed parameters supplies the refresh gradient. A stale gradient mismatches state; local β weights the new gradient, unlike some APIs.",
+        "example": "Do not reuse the gradient from before the parameter correction."
+      }
+    },
+    "qa/foundation-models:t-muon/mechanism": {
+      "source_sha256": "f7797ff0f4b3af1b63a083f7f0f71848c64c2e40159d7f77a705d28e48f8a790",
+      "reviewed": true,
+      "fields": {
+        "question": "Why stack related matrices into a tensor instead of flattening them for ordinary Muon?",
+        "answer": "Transform along the third axis, compute polar directions slice-wise, and invert the transform. This couples related matrices. Grouping and transform are separate choices. Restore original matrix scaling and zero rank-zero slices to avoid spurious updates.",
+        "example": "Q/K/V transform-domain slices are not equivalent to one flattened matrix."
+      }
+    },
+    "qa/foundation-models:t-muon/basics": {
+      "source_sha256": "7f16169935a6ab2bfca406b2be8eaf977baa5abefbf256c95eedb34c48d4535f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why put related matrices on the third tensor axis?",
+        "answer": "It lets layers, QKV, or heads interact through a third-axis transform before slice-wise polar and inverse mapping. Both grouping and transform define the method.",
+        "example": "Stacking Q/K/V couples them instead of handling three unrelated matrices."
+      }
+    },
+    "qa/foundation-models:t-muon/comparison": {
+      "source_sha256": "3cc9865ef3ddb1469576fd261b98e133d6c1f58fd7667a67eeced4c5b34800a8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why ablate grouping and transforms separately?",
+        "answer": "Grouping decides which matrices share a tensor; the transform decides how slices mix. Changing both confounds causes.",
+        "example": "QKV with DCT versus heads with DFT does not isolate DFT."
+      }
+    },
+    "qa/foundation-models:t-muon/implementation": {
+      "source_sha256": "705dabaa90f81c3164d2565e3c4233992167f7964b1e2c91737fcb251799fa9e",
+      "reviewed": true,
+      "fields": {
+        "question": "Should fan scaling use head slices or original matrices?",
+        "answer": "Use original fan_out/fan_in after reconstruction. Rank-zero slices must yield zero instead of arbitrary thin-SVD nullspace updates. Exact local SVD does not establish production polar throughput.",
+        "example": "Even after slicing by head, scale using the unsplit dimensions."
+      }
+    },
+    "qa/foundation-models:taco-optimizer/mechanism": {
+      "source_sha256": "a5eeca97109c1a9bd8f752c56022f41a364c793701fe926c6f1b60b4387c7c57",
+      "reviewed": true,
+      "fields": {
+        "question": "How is one gradient position per TACO column different from elementwise sign?",
+        "answer": "Select the maximum absolute gradient row per column and retain only its sign. Low-precision column state saves memory. SignSGD updates all nonzero locations and is not one-sparse.",
+        "example": "[0.2,−0.9,0.4] yields only a negative update at row two rather than +,−,+."
+      }
+    },
+    "qa/foundation-models:taco-optimizer/basics": {
+      "source_sha256": "b267b9b840d45d412c98fbdd71c62088083a4b7d39819e62fb28b2bf12d8818c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep one position per column?",
+        "answer": "The max absolute entry yields a one-sparse signed direction and permits low-precision column-level state instead of dense per-parameter state.",
+        "example": "A column with many nonzeros updates only its largest-magnitude entry this step."
+      }
+    },
+    "qa/foundation-models:taco-optimizer/comparison": {
+      "source_sha256": "6b50268b156a5ebbd4f5a107e67e2dff73d4348c7c01f7653a0a94786c138250",
+      "reviewed": true,
+      "fields": {
+        "question": "What differs between TACO and elementwise signSGD?",
+        "answer": "TACO chooses one max-absolute row and keeps its sign; signSGD can update all nonzero entries. Their supports differ even though both use signs.",
+        "example": "For [1,−4,2], only TACO's second entry is −1 and the others are zero."
+      }
+    },
+    "qa/foundation-models:taco-optimizer/implementation": {
+      "source_sha256": "9d039a023ddf95b9718cb46bf09cc5c2830ddbce913a46338d5de7f409f6c09e",
+      "reviewed": true,
+      "fields": {
+        "question": "What if TACO's argmax runs along the wrong axis?",
+        "answer": "Maximize over rows separately for each column, not columns per row. Check zeroed positions and low-precision column momentum, not shape alone.",
+        "example": "A 3×5 matrix has up to one selected entry in each of five columns."
+      }
+    },
+    "qa/foundation-models:tess/mechanism": {
+      "source_sha256": "2eef73e5df3510ac8f6efddf8e8f9a44fee76670a6d3a57a230b88f3e7d6a391",
+      "reviewed": true,
+      "fields": {
+        "question": "Why train TESS on loss-gap pseudolabels instead of directly optimizing selection?",
+        "answer": "Compare train-only and validation-guided models from the same initialization per example, then learn a transferable pointwise selector. Separating valuation from prediction avoids some degenerate direct objectives. Validation guidance is not test data.",
+        "example": "Use loss changes to learn which examples help, then predict candidate value without reading test outcomes."
+      }
+    },
+    "qa/foundation-models:tess/basics": {
+      "source_sha256": "37988c2a4a72b2a93a3677a4391f45373731b60011e15139d01733658239f5f9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why make training-example value a learned prediction?",
+        "answer": "Teacher loss gaps create pseudolabels, then a selector scores an independent pool. This amortizes expensive valuation rather than rerunning training across the large pool.",
+        "example": "Estimate value on a small set, then score candidates unseen by the teacher models."
+      }
+    },
+    "qa/foundation-models:tess/comparison": {
+      "source_sha256": "41f05895829932d4c622e075a7e8739f67e5a673197fbbed5ffdf70cab510377",
+      "reviewed": true,
+      "fields": {
+        "question": "How do loss gaps differ from selecting the highest raw loss?",
+        "answer": "A shared-init model pair estimates response to validation guidance; raw loss measures difficulty. Hard examples need not be useful.",
+        "example": "Persistent noise can have high loss without a valuable guided change."
+      }
+    },
+    "qa/foundation-models:tess/implementation": {
+      "source_sha256": "c32ead5d021be2f67385c67416cb3bc1db0362597aa50971b8bc87651ae021d3",
+      "reviewed": true,
+      "fields": {
+        "question": "Can selector gradients flow back through Δ_i into U/W?",
+        "answer": "No. Train U/W in order from identical initialization and detach their saved loss gaps. Scores may be negative; do not use them as probabilities without transformation or substitute test for validation.",
+        "example": "A negative value label should not be silently clamped to zero."
+      }
+    },
+    "qa/foundation-models:agentkv/mechanism": {
+      "source_sha256": "51b4edea1b510ffbb98d32cdf4da0b592c16d7cc672ee4100579f2762bb6cdda",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep representative queries from several agent phases for KV eviction?",
+        "answer": "Planning, tools, and reporting need different evidence. Recent queries alone may underrate material needed later. Phase representatives broaden retention scoring but cannot recover deleted KV or guarantee representativeness.",
+        "example": "Tool arguments dominate recent access, but the final summary still needs the original task constraints."
+      }
+    },
+    "qa/foundation-models:agentkv/basics": {
+      "source_sha256": "475b2f3442815eca795f9d3074b10a4985cdbde8d02078ad621abcc453ebc0fc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use agent phase in KV eviction?",
+        "answer": "Different phases read different history. Representatives help assess future usefulness beyond current few accesses.",
+        "example": "An early plan can regain importance during final reporting."
+      }
+    },
+    "qa/foundation-models:agentkv/comparison": {
+      "source_sha256": "6e409dbc8f221306fb6c1a068c33c39371243bc6c51400c8d02c80213650c6dc",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a phase-aware buffer differ from a recent window?",
+        "answer": "A recent window uses time. Phase-aware scoring compares history with representatives from multiple phases. It may preserve older evidence but is limited by budget and representative quality.",
+        "example": "An old plan outside the window can still be retained when a phase query matches it."
+      }
+    },
+    "qa/foundation-models:agentkv/implementation": {
+      "source_sha256": "aa0e56128ecc42d83ddc043d36138675f69b5726a0346d9c7d22812469b3e71c",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local phase-aware scoring modify SGLang's real KV manager?",
+        "answer": "No. It is a scoring reference with phase and cache statistics, without SGLang or CUDA kernel changes. Real eviction, indexing, and execution still need verification.",
+        "example": "Retained indices alone do not prove GPU memory was freed and read correctly."
+      }
+    },
+    "qa/foundation-models:awq/mechanism": {
+      "source_sha256": "7679784310f713c0f85272a683a194dd8ab72f92e8dca1fffb41bef1453b98e2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use equivalent scaling in AWQ rather than separately storing a few higher-precision weights?",
+        "answer": "Calibration activations identify output-sensitive input channels. Reciprocal input/weight scaling preserves the float function while making those weights easier to represent in one low-bit format. Large weights alone do not determine sensitivity, and KV growth is unrelated.",
+        "example": "Equal weight errors have different output effects on channels with small versus large activations."
+      }
+    },
+    "qa/foundation-models:awq/basics": {
+      "source_sha256": "b90d4ca5bd2bbe8da832f284cbaf3ed290cc04b915ab3e33bb1eaeae43d5b7c3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use activations instead of weight magnitude alone?",
+        "answer": "Output error depends on input activation. Calibration identifies salient channels and equivalent scaling protects them before uniform low-bit weight-only quantization.",
+        "example": "The same weight error is more consequential when multiplied by large activations."
+      }
+    },
+    "qa/foundation-models:awq/comparison": {
+      "source_sha256": "8e640da0e04fa1d15fb977fa873b454c9929745ee1eca3424f9b10dce114fd96",
+      "reviewed": true,
+      "fields": {
+        "question": "What does AWQ add over round-to-nearest W4?",
+        "answer": "Search activation-aware equivalent channel scales before W4 rounding. RTN uses the given scale and nearest grid. Both can retain a uniform low-bit format.",
+        "example": "Rescale an important channel before rounding rather than round original weights directly."
+      }
+    },
+    "qa/foundation-models:awq/implementation": {
+      "source_sha256": "1210282b96f4d7fca64cfc98f08a08adf65735294a7db26b63309eef378cb7da",
+      "reviewed": true,
+      "fields": {
+        "question": "Must input be inversely scaled when weights are scaled by S?",
+        "answer": "Yes: XW=(XS⁻¹)(SW). Without reciprocal scaling the floating function already changes. Search scales by quantized reconstruction error; local MSE does not establish TinyChat throughput.",
+        "example": "Multiply one weight channel by two and divide its input by two."
+      }
+    },
+    "qa/foundation-models:bakron/mechanism": {
+      "source_sha256": "8d83d9ed4ab31de7bc1ce35979699ff5e0783ce67050c3dd54f9aace2f719e99",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use bilateral Kronecker curvature instead of input activation alone?",
+        "answer": "Output-side curvature also changes the impact of weight error. A Kronecker approximation includes both sides in a quadratic objective, with structured parallel/divide-and-conquer rounding instead of a full Hessian. Independent rounding is not equivalent.",
+        "example": "Equal input errors can differ in loss sensitivity along different output directions."
+      }
+    },
+    "qa/foundation-models:bakron/basics": {
+      "source_sha256": "b36b251fbb577d2e97b8a6d0c4b6500b0e433d0d8fc510bf41c875e93ed868b4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't BaKron ordinary elementwise rounding?",
+        "answer": "It minimizes curvature-weighted joint error, not distance to each scalar grid point. Correlated rounding errors can amplify or cancel.",
+        "example": "Two small errors aligned in one output can be worse than a larger pair that cancels."
+      }
+    }
+  }
+}

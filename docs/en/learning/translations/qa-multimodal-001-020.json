@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:blip2/mechanism": {
+      "source_sha256": "21b164e4ed81557cec02afbe260b950e12df08ae157d11848c12988118d2794e",
+      "reviewed": true,
+      "fields": {
+        "question": "How can Q-Former learn to connect images to a language model when both the vision encoder and language model are frozen?",
+        "answer": "Gradients can still flow through frozen modules to the connector; only parameter updates are frozen. Learnable queries select visual information through cross-attention and are projected into soft prompts the language model can consume. Two training stages address vision–language representation alignment and the generation interface. The bottleneck can still lose detail.",
+        "example": "Compressing 16 image features into four queries gives the language model four visual prompts, but reading small text may need more capacity."
+      }
+    },
+    "qa/foundation-models:blip2/basics": {
+      "source_sha256": "aa50f55653c731eec4da850e16b53980d714ea96cbbc39b34ddd69e0a236248c",
+      "reviewed": true,
+      "fields": {
+        "question": "Are Q-Former queries the text of the question to answer?",
+        "answer": "They are a fixed number of learnable vectors, not the user's question. Cross-attention reads tokens from the frozen vision encoder and passes selected information to the language side. Their fixed count forms a visual bottleneck: more complex images do not automatically produce more output tokens.",
+        "example": "Four learnable queries can attend to hundreds of image patches while sending only four vectors to the language model."
+      }
+    },
+    "qa/foundation-models:blip2/comparison": {
+      "source_sha256": "89a7c928fd9bdd51ccddbf44c461138d75df038b0dad3161351544f3c8bc31d9",
+      "reviewed": true,
+      "fields": {
+        "question": "How does BLIP-2's interface differ from linearly projecting each visual patch?",
+        "answer": "Per-patch projection primarily changes feature dimensions and usually preserves token count. Q-Former actively aggregates visual information with learnable queries before projection. This changes both selection and sequence length; lost detail depends on training and the task, not architecture alone.",
+        "example": "Clothing recognition may need only an outline, while reading small text may need local detail. Four queries are not guaranteed to suffice for both."
+      }
+    },
+    "qa/foundation-models:blip2/implementation": {
+      "source_sha256": "65db1629180042fd72e833836bc78344df16099f995c886b45e7189fe83e7b05",
+      "reviewed": true,
+      "fields": {
+        "question": "Do the local four-query results validate the paper's two-stage pretraining?",
+        "answer": "No. The local work uses real Fashion-MNIST pixels and four-query cross-attention, without ViT-g, a large LM, ITC/ITM/ITG, or large-scale second-stage training. It checks token compression and small-budget behavior, not original zero-shot capability.",
+        "example": "Reducing 16 visual tokens to four proves this interface shortens the sequence, not that it pretrained on over 100 million images."
+      }
+    },
+    "qa/foundation-models:clip/mechanism": {
+      "source_sha256": "02a8bd5e729bdaace9af60e7cade0e066300c741e42957df03ddcd465b65cf68",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CLIP use both image-to-text and text-to-image contrastive learning?",
+        "answer": "The same batch supplies two classification problems: find each image's paired text and each text's paired image. Both directions shape the shared similarity space. Other in-batch pairs provide negatives, but overall matching scores do not establish fine-grained factual accuracy.",
+        "example": "Cat and dog images pair with their respective descriptions, and both retrieval directions should rank each matching pair first."
+      }
+    },
+    "qa/foundation-models:clip/basics": {
+      "source_sha256": "7bb44fc78425691932d48ec2231b7a763c6d9104572c0cc071cd14655a3d50d2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can CLIP do zero-shot classification without retraining a classifier head?",
+        "answer": "Separate encoders normalize image and class-description vectors and compare them in a shared space. The descriptions are class prototypes and can be replaced to define new labels. This depends on pretraining and does not guarantee arbitrary new concepts or fine-grained relationships are recognized.",
+        "example": "Compare a shoe image with descriptions such as “a shoe” and “a coat,” then choose the higher similarity without training another linear head."
+      }
+    },
+    "qa/foundation-models:clip/comparison": {
+      "source_sha256": "f7bf019ef8d18f22f2e902fa223844621fdd33b9e3d121116dde06ee7104490c",
+      "reviewed": true,
+      "fields": {
+        "question": "How do CLIP's class text embeddings differ from autoregressive label generation?",
+        "answer": "CLIP compares similarities among supplied class texts and returns a choice or ranking within the candidates. An autoregressive model predicts a label token sequence that requires generation and parsing. CLIP's descriptions are input prototypes, not generated targets, so this interface does not provide open-ended captioning.",
+        "example": "Given “a photo of a cat” and “a photo of a dog,” CLIP compares their scores without generating “This is a cat.”"
+      }
+    },
+    "qa/foundation-models:clip/implementation": {
+      "source_sha256": "510c670acb9340ed64fb3405a291a87ad18d294a6f18063b41c4e9ce44849782",
+      "reviewed": true,
+      "fields": {
+        "question": "Why normalize each vector before computing CLIP's similarity matrix?",
+        "answer": "Normalization makes dot products track direction instead of letting vector norms inflate scores; temperature controls sharpness. Matching pairs are on the diagonal, and the two directional losses use the matrix and its transpose. Not every pairing is a positive.",
+        "example": "Doubling an image vector should not make it more correct for every text. With unit normalization only a direction change alters cosine similarity."
+      }
+    },
+    "qa/multimodal-models:cue2narrate-drl/mechanism": {
+      "source_sha256": "5fe62608472de435b4115d920441ee7b0290c615589c40b4f2c38d2f46a17186",
+      "reviewed": true,
+      "fields": {
+        "question": "Why backpropagate through a negative caption's current likelihood if a frozen model generated it?",
+        "answer": "Freezing its generator fixes the negative text, not the trainable model's scores. DRL compares mean target-token log likelihoods for positive and negative texts with the same visual input. Gradients improve their relative preference; detaching the negative score changes the contrastive optimization.",
+        "example": "For the same scene, one caption says a person walks and the other says they run. The strings are fixed, but the trainable model still changes their relative scores."
+      }
+    },
+    "qa/multimodal-models:cue2narrate-drl/basics": {
+      "source_sha256": "c48e38cbb72ff24295549f794694d542f85babafb7015e747f3e94ab206ab988",
+      "reviewed": true,
+      "fields": {
+        "question": "Why pair the negative caption with the same visual cue and prompt?",
+        "answer": "Matching conditions isolates whether the descriptions suit the intended audio-description task. Changing image or prompt could instead change task difficulty. Offline negative captions are training material, not an extra deployment generation step.",
+        "example": "Score “She sets down the cup” and an unrelated-action caption with the same film clip and instruction."
+      }
+    },
+    "qa/multimodal-models:cue2narrate-drl/comparison": {
+      "source_sha256": "3ea962cc0c5c3161638717e8319d7e62604cb4821d524cf56365f18f7188c868",
+      "reviewed": true,
+      "fields": {
+        "question": "What does DRL add beyond SFT on positive descriptions?",
+        "answer": "SFT raises correct target-token likelihood; DRL explicitly separates positive and negative mean log probabilities. This adds a relative signal whose meaning depends on how negatives are built. Trivial negatives do not automatically teach detailed visual grounding.",
+        "example": "Raising the likelihood of “She sits down” need not lower the model's score for the wrong “She runs away.” The relative loss constrains the pair directly."
+      }
+    },
+    "qa/multimodal-models:cue2narrate-drl/implementation": {
+      "source_sha256": "ef67f222361216c63ea218e5dc98ff31d0528e5dd6bd23473a75b41ade94f193",
+      "reviewed": true,
+      "fields": {
+        "question": "Can SFT and DRL use one shared length normalization?",
+        "answer": "No. The pinned SFT sums valid target tokens per sample before the batch mean. DRL averages token log probabilities separately in each description. Both exclude prompt and padding; freezing the negative generator does not stop gradients through the current model's negative-caption scores.",
+        "example": "For 10 positive tokens and 20 negative tokens, DRL compares their means. Raw sums would additionally penalize the longer description."
+      }
+    },
+    "qa/multimodal-models:cv-opd/mechanism": {
+      "source_sha256": "3f50fbf1cdd1c79f263775902d818a482c6cf09aeb81ade19063bfc6c7fef642",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CV-OPD give both teachers the same student prefix and change only the visual crop?",
+        "answer": "Differences then primarily come from the region, not text history. On its own rollout prefixes, the student moves toward the correct-region teacher and away from the negative-region teacher by a bounded JSD margin. This addresses answer distillation that might learn only a language prior.",
+        "example": "For cup color, the positive crop shows the cup and the same-size negative crop shows background. Both teachers see identical student-generated text so far."
+      }
+    },
+    "qa/multimodal-models:cv-opd/basics": {
+      "source_sha256": "9fa426abc45c56e60cd1b4eaffec434735aecfa38edbfd09135cd51881db835e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why prepare positive and negative crops from the same image in CV-OPD?",
+        "answer": "The positive provides local evidence; the same-image, same-size, low-overlap negative is a visual counterfactual. The student sees the full image, while teacher inputs differ only in region. This tests whether learning follows the evidence rather than a language prior.",
+        "example": "For a street sign, use the sign in the positive crop and nearby wall in the negative crop. Both teachers share parameters."
+      }
+    },
+    "qa/multimodal-models:cv-opd/comparison": {
+      "source_sha256": "07575c273a7c20acc863819fdfa1421f05cf0f733ccc78809abe562380216798",
+      "reviewed": true,
+      "fields": {
+        "question": "What does CDL add over distillation from a positive-crop teacher alone?",
+        "answer": "Positive-only distillation pulls the student toward the positive distribution. CDL also requires sufficient JSD from the negative teacher using a margin on a bounded divergence. It neither requires unlimited separation nor guarantees improvements on every benchmark.",
+        "example": "A student equally close to both teachers may have low positive-only loss, but still incur a margin penalty for failing to distinguish regions."
+      }
+    },
+    "qa/multimodal-models:cv-opd/implementation": {
+      "source_sha256": "1de3f167be98c666d9e00097699b49f85cf4edac887fcb999d0224661c20b757",
+      "reviewed": true,
+      "fields": {
+        "question": "If at least one rollout is correct, should the other rollouts be dropped?",
+        "answer": "No. Keep all rollouts of a sample that passes the at-least-one-correct gate. DAG gates tokens across the retained batch with JSD strictly above the mean. Teachers, generation, and gate do not backpropagate. The top-100 JSD approximation must preserve the full tail bucket.",
+        "example": "If one of eight rollouts is correct, keep all eight; removing the other seven changes the training distribution."
+      }
+    },
+    "qa/multimodal-models:embedding-gemma2/formal-paper-projection": {
+      "source_sha256": "1cfe56296436f7ac17eed9aaa9e4482d8d2541da30665eb42e354d47e5d96a1f",
+      "reviewed": true,
+      "fields": {
+        "question": "The formal paper pools before projection, but the local path pools official last_hidden_state. Is a layer missing?",
+        "answer": "No. The pinned official implementation applies a bias-free embedding_projection before returning its 768-dimensional token states. Equal-weight masked mean commutes with linear projection, so pooling those outputs matches the paper; projecting again would be incorrect. The formal paper does not upgrade the existing 16-image GPU run to seven full benchmarks.",
+        "example": "Averaging two tokens after multiplying each by the same matrix equals averaging first and then multiplying. Nonlinearity or token-dependent transformations break this equivalence."
+      }
+    },
+    "qa/multimodal-models:embedding-gemma2/mechanism": {
+      "source_sha256": "de17f9db0fd1226976c3122749f71912a8b270fc7c5e9df9624db99626ca6ba8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why renormalize a truncated Matryoshka embedding?",
+        "answer": "The retained prefix generally no longer has unit norm. Raw dot products would mix differences in retained energy with similarity. Renormalizing restores cosine scale. This relies on trained prefix representations, not arbitrary truncation, and pooling must exclude padding.",
+        "example": "Truncate two 768-dimensional vectors to 128 dimensions and normalize each again so larger retained norms do not confer an advantage."
+      }
+    },
+    "qa/multimodal-models:embedding-gemma2/basics": {
+      "source_sha256": "553e22d66483ee3d2ab6f8d412568b4a04f16c8f19c8a4abd754a19fa7344cb7",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a shared 768-dimensional space require all four modalities at once?",
+        "answer": "No. A shared space lets all modalities use comparable vector similarities, while towers load as needed. Supported inputs and actually verified paths differ. Local official-checkpoint validation covers text and images only, not audio and video pipelines.",
+        "example": "Image-to-text search needs only the image and text paths; their validation does not establish audio retrieval."
+      }
+    },
+    "qa/multimodal-models:embedding-gemma2/comparison": {
+      "source_sha256": "8d42b3dd9d3cab60f4681fe03c0f65d29ab97e243c33ec11b88171f3ed46a2f3",
+      "reviewed": true,
+      "fields": {
+        "question": "How does MRL truncation differ from randomly dropping dimensions?",
+        "answer": "MRL trains designated prefixes, such as 128, 256, or 512 dimensions, to serve as representations after renormalization. Random subsets lack that training convention. Shorter prefixes save storage and retrieval cost, but quality must be reported by task and fixed size.",
+        "example": "Taking the first 128 of 768 dimensions follows the trained contract; randomly drawing 128 each time is a different compression method."
+      }
+    }
+  }
+}

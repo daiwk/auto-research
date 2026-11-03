@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:cobra-skills/implementation": {
+      "source_sha256": "f761ce5060a72bc19d418f98307f561412be15756e0cb6b31ce170b8f301762a",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local contextual-UCB allocation cover actual LLM skill evolution?",
+        "answer": "No. It executes a reference allocator and feedback admission gate, with no external LLM or six environments. Candidate indices, confidence terms, and budget can be checked independently, but actual skill-text generation and task execution did not occur. Fixture feedback is not actual cost savings or capability gain.",
+        "example": "Selecting a numeric arm after its UCB grows checks the bandit formula. It does not demonstrate that the corresponding natural-language skill works on web tasks."
+      }
+    },
+    "qa/agent-research:procedural-graphs/mechanism": {
+      "source_sha256": "d5d7b5f660dd93ae3dc9c82c1fb819ba16d020f1926ff82c87785b0b30a2b15f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why localize experience as a graph edit before a held-out gate?",
+        "answer": "Procedural relations affect multiple paths, and overwriting them with whole episodes can contaminate unrelated skills. Local edits identify the affected node or relation; held-out verification tests whether the change goes beyond incidental success in the originating trace. A pass supports only its evaluation scope, not global reliability inferred from coherent training traces.",
+        "example": "Add only a recovery edge to refresh a token after authentication failure. Check independent tasks for redundant authentication rather than rewriting the whole upload graph."
+      }
+    },
+    "qa/agent-research:procedural-graphs/basics": {
+      "source_sha256": "138eb962d8d3262227a9b7fbbcdc617d38678430bcad1676bada08cba358b892",
+      "reviewed": true,
+      "fields": {
+        "question": "What does a procedure–relation–procedure graph add beyond storing skill snippets?",
+        "answer": "A graph explicitly represents dependencies and compositions, so new experience can change a local execution structure rather than add similar prose. Correct relations matter for downstream paths. Validate edits on an independent holdout before permanent write-back, not just because a trace succeeded once.",
+        "example": "'Query after authentication' is an ordering relation and 'refresh credentials if the query fails' is recovery. Two separate text snippets might not express those links."
+      }
+    },
+    "qa/agent-research:procedural-graphs/comparison": {
+      "source_sha256": "e4dffa4d497a8f4ab774abec63c4039bfab936a1c2641c2bc2bb02fc8db02551",
+      "reviewed": true,
+      "fields": {
+        "question": "What trade-offs arise from a local graph edit versus rewriting the entire procedure graph?",
+        "answer": "Local changes reduce unrelated effects and ease attribution and rollback. Whole-graph rewrites allow more freedom but can break old interfaces and valid paths. Locality does not guarantee safety: one central node can affect many downstream procedures. Check independent behavior, not just graph format.",
+        "example": "Replacing a query node can change all downstream inputs. Despite editing one node, check whether its dependent routes still work."
+      }
+    },
+    "qa/agent-research:procedural-graphs/implementation": {
+      "source_sha256": "10720b02ef8a5080aafbf705d1335372c3190b8629e231d024939de18b8ccf17",
+      "reviewed": true,
+      "fields": {
+        "question": "Does preserving the first and last nodes locally constitute full held-out capability verification?",
+        "answer": "No. The local deterministic edit gate requires existing routes to retain endpoints and tests acceptance and rejection without real tools. It checks a structural condition but cannot establish semantic correctness of middle steps or generalization of the edited graph. The policy must not see hidden plans or answers.",
+        "example": "A graph can retain start and end while deleting required authentication and still pass structurally. That contract cannot replace real task-success evaluation."
+      }
+    },
+    "qa/agent-research:harnesslens/mechanism": {
+      "source_sha256": "31255eba394be915aaa6d1fa38025cb7081a7ef59f8b4102920b94ae2fe527cc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is behavior-aware paired validation better than a fixed validation-set average at finding local regressions?",
+        "answer": "A change affects only some behaviors. Unrelated tasks dilute differences and waste rollouts. Compare parent and child on affected tasks and require attribution to the change, distinguishing actual repair from noise. State the scope of a local pass; one behavior's improvement does not establish that every task improved.",
+        "example": "If only retry behavior changes, pair timeout and recovery tasks. Many easy successes could hide a retry loop in an overall mean."
+      }
+    },
+    "qa/agent-research:harnesslens/basics": {
+      "source_sha256": "b816cfdacdcd1a5533cbfc0a25035e0496695f456b663b016f1ef9909ecee774",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does HarnessLens treat validation cost as a bottleneck for harness search?",
+        "answer": "Fully running a fixed validation set for each candidate consumes many rollouts, and its mean can hide regressions in a few affected behaviors. HarnessLens focuses validation on behavior actually touched by a change, making evidence more targeted under a budget. State local coverage; saving evaluation does not justify skipping attribution or expanding quality claims.",
+        "example": "Rerunning every unrelated math problem after changing browser recovery can waste effort. Find matching behavior tasks, while noting that other behaviors have no new coverage."
+      }
+    },
+    "qa/agent-research:harnesslens/comparison": {
+      "source_sha256": "3fba2528de503a97b6ef6b9543d82a12ad0500a4267020ac9de76eb24dc430ab",
+      "reviewed": true,
+      "fields": {
+        "question": "How does passing a local behavior acceptance gate differ from proving overall agent improvement?",
+        "answer": "The local gate requires positive paired gains on target behavior and evidence they are attributable, answering whether the particular change is worth accepting for that behavior. Overall capability includes uncovered tasks, other behaviors, and resource effects. Neither Δ_b nor A_b generalizes automatically. Retain the validation set and change scope rather than relabeling a local pass as broad validation.",
+        "example": "Improvements on five recovery cases can support limited acceptance. They do not show better code generation, mathematics, or all browsing tasks."
+      }
+    },
+    "qa/agent-research:harnesslens/implementation": {
+      "source_sha256": "9140d6c7f06b556fe1f77672f075394d804487caf198dd14fc86cc1b54e83489",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is A_b required in addition to Δ_b>0?",
+        "answer": "A positive difference may come from random retries or environmental changes; A_b requires evidence attributable to the candidate. The local project has a real tool-feedback protocol without answer/guide but did not run the paper's four complete benchmarks. Local success cannot replace reported held-out gains, and structural labels do not prove causality.",
+        "example": "If two runs differ randomly and the candidate behavior was never checked for activation, do not credit the entire positive difference to the patch."
+      }
+    },
+    "qa/agent-research:jit-agent/mechanism": {
+      "source_sha256": "ca82e5ccfdfaef566cdbfe7483d1651bac3ab4fcff25fc1b3f6e3ac66f7b4ef9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate memory, planning, action protocol, and tools when generating a harness per task?",
+        "answer": "Task bottlenecks vary by layer. Modules make proposals and repairs target the right object and let configuration archives yield transferable patterns. Just-in-time generation still needs validation; each module must meet its execution contract. Editing prompt text without generating matching tools or state interfaces does not implement all four modules.",
+        "example": "A long task may need new memory, whereas short arithmetic needs only a calculation tool. Do not rebuild everything or mix incompatible protocols."
+      }
+    },
+    "qa/agent-research:jit-agent/basics": {
+      "source_sha256": "94c001927ea1f0c1a5429f57d7268ecd2b5178e2e64e4d91cbf5d7202d4a8993",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Jit-Agent generate a workflow for the current task rather than choose only a fixed prompt?",
+        "answer": "Tasks need different memory, planning, action protocols, and tools. A universal harness can be heavy or lack key support. Jit-Agent composes a workflow when a task arrives so execution organization matches the request. Instant generation still needs quality constraints and frozen evaluation. Complete modules do not guarantee an advantage over fixed workflows.",
+        "example": "One-step arithmetic may not need long-term memory, whereas organizing several pages can need evidence collection and progress tracking. Task features should guide which modules are used."
+      }
+    },
+    "qa/agent-research:jit-agent/comparison": {
+      "source_sha256": "f771734ac4cfafbed6b2af8dd4206da36bed3aa8c13e0de8ecb847de5e217fad",
+      "reviewed": true,
+      "fields": {
+        "question": "What are the trade-offs between on-demand generation and reusing one fixed harness?",
+        "answer": "On-demand configuration fits diverse tasks, and an archive can help transfer. Generation and repair add development cost and possible instability. A fixed harness is easier to maintain but can be overly generic. Count candidate generation and actual failures rather than cherry-picking the final successful configuration and ignoring exploration cost.",
+        "example": "Long retrieval may need citation checking, whereas simple calculation may not. Task-specific generation distinguishes them, but an unnecessary checker may slow the easy task."
+      }
+    },
+    "qa/agent-research:jit-agent/implementation": {
+      "source_sha256": "f9aa6a1d57a299149a6c4cb7e14bee51467616d05bca12beb0d228f45195cf59",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate local training-time route repairs from frozen test execution?",
+        "answer": "Training tasks can write repair experience. After freezing, validation and test use only public observations, tool metadata, and real feedback, not answers or reference plans. Report low controlled success rates and real ToolRoute results under their own protocols. Without the original model and full DeepSearchQA, do not import author scores.",
+        "example": "A test error may be handled using a frozen recovery rule. Adding the hidden correct route to the archive and then calling it successful adaptation is invalid."
+      }
+    },
+    "qa/agent-research:openloopevolve/mechanism": {
+      "source_sha256": "71d911b5a64c4d3325806163139db657f914784280a9dfbfe43c1f495fd3e335",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are release monitoring and rollback needed in addition to Champion–Challenger evaluation?",
+        "answer": "An offline candidate that beats the champion may still be unstable after deployment or over long interactions. Monitoring must allow traceable restoration of the old version when regressions appear. Version observations, planning, memory, verification, and recovery assets rather than only model names. Release governance is part of the evolution loop, not replaced by one passing candidate test.",
+        "example": "A challenger saves calls during development but loops on permission errors in production. Monitoring should identify its version and roll back instead of allowing unbounded trial and error."
+      }
+    },
+    "qa/agent-research:openloopevolve/basics": {
+      "source_sha256": "5a00f958840e323304458f52330546ce516c8c7a99d7965e4ad64dc6eb3cee71",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is a Loop Policy more than a system prompt?",
+        "answer": "Observation, planning, memory, action, verification, and recovery assets jointly shape long-horizon behavior. Version both components and combinations. Prompt changes may miss the real bottleneck; executable versions, comparison, and monitoring make evolution traceable. Complete files do not imply effective behavior.",
+        "example": "A prompt may say 'retry after failure,' but if recovery middleware cannot identify timeouts, the actual loop may still not recover."
+      }
+    },
+    "qa/agent-research:openloopevolve/comparison": {
+      "source_sha256": "c8b8e4956b176bf729a228f008c5c832edf952fcc1f53888638f9693a1004fda",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Champion–Challenger differ from overwriting the current policy each round?",
+        "answer": "Keep the champion as a verified baseline, compare challengers before release, and roll back under runtime monitoring if needed. This reduces persistent contamination by unverified changes. A release gate needs actual evaluation and version evidence rather than favorable self-assessment; online monitoring does not authorize arbitrary external deployment.",
+        "example": "If a recovery policy validates well but regresses after release, you should be able to restore a specific old version rather than having only an overwritten configuration."
+      }
+    }
+  }
+}

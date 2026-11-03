@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:benchmark-self-bias/basics": {
+      "source_sha256": "1518d02a6145473ad94bf0dc5506d17eaef959ff479ec301549725e8e4e13061",
+      "reviewed": true,
+      "fields": {
+        "question": "Which axis is target, which is benchmark role, and which cell measures self-evaluation?",
+        "answer": "The target is evaluated; the benchmark role performs evaluation. Self-evaluation is the diagonal where they match. Compare own and other roles for one fixed target, not different targets.",
+        "example": "A answering with B judging is off-diagonal; A answering and judging is diagonal. Keep A as the target in both."
+      }
+    },
+    "qa/post-training:benchmark-self-bias/comparison": {
+      "source_sha256": "d2f688e4d534c5cd7b7cc7d513ac32d94fff0a2f360fbdbb7c9bb9ffd3f1f8f7",
+      "reviewed": true,
+      "fields": {
+        "question": "How does the protocol distinguish self-evaluation advantage from a stronger model?",
+        "answer": "Compare one target's ranks under its own role and peers to isolate evaluator preference from target quality. Peers can share biases, so this is relative audit evidence, not a definitive capability verdict.",
+        "example": "Consistently leading under all judges differs from leading only under one's own judge."
+      }
+    },
+    "qa/post-training:benchmark-self-bias/implementation": {
+      "source_sha256": "01190111b819bb0c5c6057443685780d347a4ab83443744d33fef2e872639f60",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do axis order and leave-self-out matter for self-bias?",
+        "answer": "Rank within segments, average over segments, then subtract the peer mean excluding self from the diagonal. Specify whether scores are higher- or lower-is-better; negative bias indicates favorable self-rank.",
+        "example": "MetricX-QE is lower-is-better. Descending ranks would reverse the bias direction."
+      }
+    },
+    "qa/post-training:benchmark-self-bias/mechanism": {
+      "source_sha256": "dd27b64c8a0dcfe7e51b49d52fd6da7fc4022f13002e51963fe22a2cfa6c636c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why rank each segment and exclude self from the peer mean?",
+        "answer": "Segment scales may differ, so rank before averaging to preserve the protocol. Remove self from the peer comparison. Score direction, axes and tie handling affect the sign; peer consensus is not external truth.",
+        "example": "A low-is-better metric and high-is-better metric need consistent rank direction. Never put the self score back into peers."
+      }
+    },
+    "qa/post-training:simpo/basics": {
+      "source_sha256": "adae071698d6e0a0417e5067fbfcc81800aae4604c559a2537844c10de8a26d9",
+      "reviewed": true,
+      "fields": {
+        "question": "Does reference-free SimPO mean there is no training feedback?",
+        "answer": "No. Chosen/rejected pairs still supply preferences. It removes a resident reference model, using length-averaged policy log-probability as implicit reward with a fixed margin.",
+        "example": "You still need a better answer label; no frozen reference scores need be computed."
+      }
+    },
+    "qa/post-training:simpo/comparison": {
+      "source_sha256": "3b4a30b8bc155cfb14050626b27cca2786567609c808d24dce48a3d018f30a07",
+      "reviewed": true,
+      "fields": {
+        "question": "Is SimPO's training margin equivalent to reducing inference temperature?",
+        "answer": "No. Margin sets desired average-reward separation and changes parameter gradients. Temperature rescales next-token logits at inference. They can coexist but shorter output at one temperature does not validate the margin.",
+        "example": "Training compares complete response average log probabilities; inference temperature doesn't read that preference pair."
+      }
+    },
+    "qa/post-training:simpo/implementation": {
+      "source_sha256": "4066343f29b298b742c700000a80ff3dc45d43dc73088d42b8da39f3742bc2ba",
+      "reviewed": true,
+      "fields": {
+        "question": "Which tokens enter SimPO's log-probability sum and length?",
+        "answer": "Use the same valid-response mask for both; no padding or prompt tokens. The loss updates only the policy. A token objective does not reproduce the paper's judge/model matrix.",
+        "example": "Counting padding in the denominator distorts the short answer's average reward."
+      }
+    },
+    "qa/post-training:simpo/mechanism": {
+      "source_sha256": "eec0aa7debabfc09889ed3669b480d11111986695676dca501978f5823dd92bc",
+      "reviewed": true,
+      "fields": {
+        "question": "Without a reference, how does SimPO avoid favoring short responses by sequence probability?",
+        "answer": "Total log probability accumulates per token and changes reward scale with length. Average per token and require the preferred response to beat the rejected one by a margin, without an extra reference forward. This removes one length effect, not all quality bias.",
+        "example": "A short wrong answer can beat a longer correct one on summed log probability; averaging removes the direct sum-length penalty."
+      }
+    },
+    "qa/post-training:orpo/basics": {
+      "source_sha256": "ca65275de9d9440c3a8875796abc259c1f4aa1a3ef105729f65551b71704d28f",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the difference between ORPO odds and probability?",
+        "answer": "Probability p is an event's share of all outcomes. Odds p/(1−p) compare occurrence to nonoccurrence and can exceed one. ORPO compares preferred and rejected odds, not percentages.",
+        "example": "p=1/2 gives odds 1; p=3/4 gives odds 3, not 300% probability."
+      }
+    },
+    "qa/post-training:orpo/comparison": {
+      "source_sha256": "cee38553d40d867e7ab7e23f91b4e9d7d32cef4381a8d8132a217a33516ebfc4",
+      "reviewed": true,
+      "fields": {
+        "question": "How does ORPO's single stage differ from SFT followed by separate preference optimization?",
+        "answer": "One policy update combines chosen NLL and preference odds without a resident frozen reference for another stage. Two-stage training first produces an SFT policy then changes objective/reference. One stage is not universally better.",
+        "example": "One preference batch supplies NLL and odds gradients instead of finishing chosen-only SFT first."
+      }
+    },
+    "qa/post-training:orpo/implementation": {
+      "source_sha256": "d198953ae73fd1fd499978a07c905fa64b4ede86ce0c8319aaa1c866407e1066",
+      "reviewed": true,
+      "fields": {
+        "question": "Why handle probabilities near zero or one in ORPO's log-odds margin?",
+        "answer": "Log odds are log(p)−log(1−p), then contrasted across replies. Boundaries cause log zero or huge ratios. The local kernel adds 1e−12 to both terms and uses logaddexp, not probability subtraction. Candidate probabilities are not token-level response probabilities.",
+        "example": "0.9→0.99 is +0.09 probability but odds go 9→99."
+      }
+    },
+    "qa/post-training:orpo/mechanism": {
+      "source_sha256": "fe2bb3212721cb61fc4cdf299b1fe6f3694c9b570aa1d3d72adc1c3b25c8e418",
+      "reviewed": true,
+      "fields": {
+        "question": "What do SFT and the odds-ratio term each constrain in ORPO?",
+        "answer": "SFT raises chosen likelihood; the odds term widens separation from rejection. Both update one policy without reference in the objective. Odds are boundary-sensitive. Reporting reference KL as a diagnostic does not add it to training.",
+        "example": "Raising only chosen likelihood can also raise similar bad answers; odds explicitly separate them."
+      }
+    },
+    "qa/post-training:kto/basics": {
+      "source_sha256": "c95603d3344fda2e00433a44c234fe66211151c64123214bbb3c137129b82d92",
+      "reviewed": true,
+      "fields": {
+        "question": "Are KTO desirable and undesirable weights feedback probabilities?",
+        "answer": "No. Labels describe single accepted/rejected outputs; λ weights control class utility contributions. Class frequency and explicit weight are separate, neither a predicted satisfaction probability.",
+        "example": "Rebalance many upvotes and few downvotes without inventing matched same-question pairs."
+      }
+    },
+    "qa/post-training:kto/comparison": {
+      "source_sha256": "5fcfc49898453250bc6d07f86d5909539e40b7bf6fbf2616ffeeb4abe82436c3",
+      "reviewed": true,
+      "fields": {
+        "question": "Does KTO differ from DPO only by unpairing the data?",
+        "answer": "No. KTO defines gains/losses around a KL reference point; DPO compares same-prompt response margins. Standalone feedback cannot be arbitrarily paired, and class weights alter tradeoffs.",
+        "example": "One user's upvote and another's downvote on different queries do not order their answers to one prompt."
+      }
+    },
+    "qa/post-training:kto/implementation": {
+      "source_sha256": "6fa0d39f18620332223d56725c3b784736207273c158308defd7ebc0a941bf77",
+      "reviewed": true,
+      "fields": {
+        "question": "What is KTO's reference point, and what does the local policy establish?",
+        "answer": "It is expected policy-to-reference KL, not one answer's log ratio. Separate aggregate baseline and sample signal. The local six-candidate linear policy checks this relation, not free generation.",
+        "example": "Compare a high log ratio to the moving baseline; don't treat the example as the entire KL expectation."
+      }
+    },
+    "qa/post-training:kto/mechanism": {
+      "source_sha256": "c9988b801e57d796444b85bb615511763df55daebe1bd08eebf3ffd6313df0a2",
+      "reviewed": true,
+      "fields": {
+        "question": "How does KTO update from single desirable feedback without same-prompt pairs?",
+        "answer": "Use response policy/reference log ratio against expected KL as a dynamic baseline and define separate desirable/undesirable utilities. Independent examples can be reweighted without fictitious comparisons. Reference and imbalance still matter; a label is not absolute reward.",
+        "example": "Upvote and downvote on separate inquiries enter separate branches, not a fabricated preference pair."
+      }
+    },
+    "qa/post-training:self-rewarding/basics": {
+      "source_sha256": "d14f1d0d99095d20262fb03c5a85f259acb68c62f8dd79835349017ce20334ee",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a Self-Rewarding judge tie reveal the preferred answer?",
+        "answer": "No. A tie gives no strict preference; display order cannot create one. Candidate count and distinguishable judging are separate. Even unequal scores are the current judge's judgment, not new human truth.",
+        "example": "If two candidates tie, don't label the first shown the winner."
+      }
+    },
+    "qa/post-training:self-rewarding/comparison": {
+      "source_sha256": "4b9043dcc56b202416707bd279101d93145ae8ef7f943db4f449252b89bf755b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Self-Rewarding differ from a fixed external reward model?",
+        "answer": "A fixed judge doesn't coevolve; self-reward hopes both generation and judgment improve but can amplify shared errors. Compare at equal budget with independent evaluation, not rising self-scores.",
+        "example": "A model can learn to please its own scoring rule without becoming more useful to users."
+      }
+    },
+    "qa/post-training:self-rewarding/implementation": {
+      "source_sha256": "293e46c15f2677bbf8446e7ab61ee06163263bf1ee419023635a8dcb02a986ab",
+      "reviewed": true,
+      "fields": {
+        "question": "What provenance must Self-Rewarding iterations retain?",
+        "answer": "Record generating policy round, judge round and pair-selection rule. Don't backfill old data with post-update scores. Use isolated evaluation. Local tests cover state and objective, not paper judge quality.",
+        "example": "After training a new model, don't rescore old candidates and present those scores as original supervision."
+      }
+    },
+    "qa/post-training:self-rewarding/mechanism": {
+      "source_sha256": "9d802db020710e1460bda6f30b6989659195c44a2519f5a4deb0decb61158129",
+      "reviewed": true,
+      "fields": {
+        "question": "Where do Self-Rewarding LM preferences come from, and why can errors compound?",
+        "answer": "Each round ranks its own generated candidates and trains the next round with DPO on those judgments. They are not independent human labels; persistent judge biases can become stronger. Keep external held-out evaluation.",
+        "example": "A judge rewarding verbosity may repeatedly choose long arithmetic errors; an external check can break the loop."
+      }
+    },
+    "qa/post-training:spin/basics": {
+      "source_sha256": "2a47d12dca67f0ef7f4652ca0829fb863af5ba286f5cc7caaa3e4cd98d206b9d",
+      "reviewed": true,
+      "fields": {
+        "question": "Where do SPIN positives come from without new human preference data?",
+        "answer": "Existing human SFT demonstrations stay positive. The previous policy generates negatives on the same prompts. Self-play changes negatives and reference; it still uses demonstrations and generated replies are not necessarily factually wrong.",
+        "example": "A standard answer already exists; generate a comparison without asking a human to rank it again."
+      }
+    },
+    "qa/post-training:spin/comparison": {
+      "source_sha256": "84218770e525167fae3756cd6a01716d382191e787406b4432c4cdea9247fb1d",
+      "reviewed": true,
+      "fields": {
+        "question": "How does SPIN's refreshed negatives differ from repeated SFT on fixed examples?",
+        "answer": "SFT raises fixed demonstration likelihood. SPIN resamples a comparison distribution from the previous policy on the same prompts and distinguishes demonstrations from it. Both negatives and relative reference change, not just training rounds.",
+        "example": "After fixing earlier mistakes, the next opponent may make different ones. Fixed SFT won't refresh those negatives."
+      }
+    },
+    "qa/post-training:spin/implementation": {
+      "source_sha256": "d2e936272de6f7ba7307ebb06a3a6d05d3e9a800e6887269dfcae36379cf751d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why freeze SPIN's opponent during a round and refresh it afterward?",
+        "answer": "The previous policy supplies both samples and the reference. Changing it mid-round changes the objective. Refresh after the round to align generation, scoring and updates. No full-scale local text experiment.",
+        "example": "Using old reference for half the batches and a new one for the rest does not define one consistent round."
+      }
+    },
+    "qa/post-training:spin/mechanism": {
+      "source_sha256": "27257fa190277c600740361ec6b2c3c44307ba169892f7880876fa2f1240348a",
+      "reviewed": true,
+      "fields": {
+        "question": "How does SPIN's previous-policy negative differ from self-judged preferences?",
+        "answer": "Human demonstrations are positives; prior-policy samples are negatives. Train relative to the prior policy, then refresh it. No self-judge scoring is needed. Human supervision remains and negatives aren't necessarily false.",
+        "example": "Use fixed expert examples and regenerate opponents next round instead of replaying all old negatives."
+      }
+    }
+  }
+}

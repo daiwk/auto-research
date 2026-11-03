@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:turn-opd/mechanism": {
+      "source_sha256": "18a573ee20657b4c868a9aef1d3b7ae75f035751f92994938bd27de80cba7e34",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does normalizing KL by turn length change the training weight of long and short turns?",
+        "answer": "Token sums naturally give long turns more loss, potentially drowning out short critical decisions. Turn-normalized supervision averages within a turn; separate probes allocate rollout depth to informative interactions under limited teacher budget. Weighting and sampling changes do not imply that deeper or greater supervision always helps.",
+        "example": "A key tool choice may be 10 tokens and an explanation 200. Turn averaging reduces the twentyfold weighting difference caused by length alone."
+      }
+    },
+    "qa/agent-research:turn-opd/basics": {
+      "source_sha256": "e83d71070569b0d27c36a8f70aed06c847b5ad6be3714bc908ae79b86ff016a1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does TurnOPD study both rollout depth and within-turn supervision normalization?",
+        "answer": "Later turns differ in training value and cost. Probes choose sampling depth, while turn-normalized KL changes supervision shares for long and short turns, separately controlling sampling budget and update weight.",
+        "example": "Sampling fewer turns and reducing the relative weight of one long turn are distinct savings."
+      }
+    },
+    "qa/agent-research:turn-opd/comparison": {
+      "source_sha256": "c4e975a148dcb993246380799af0b19d0bc8b3d74ef7a7199feffb3d1821777e",
+      "reviewed": true,
+      "fields": {
+        "question": "How do token-averaged KL and a sum of length-normalized turn KL differ in weighting?",
+        "answer": "Token-level aggregation gives long turns more terms. Dividing each turn by its own length gives turns more comparable weights. The same token batch can still define different objectives.",
+        "example": "A 100-token turn does not automatically get ten times the weight of a 10-token turn if both are first normalized separately."
+      }
+    },
+    "qa/agent-research:turn-opd/implementation": {
+      "source_sha256": "d8a01b6e2d0ccb2c7732c80eb12fb97c6f121fd02e318a3617067f6d40406068",
+      "reviewed": true,
+      "fields": {
+        "question": "After dynamic truncation, may TurnOPD retain teacher scores from omitted turns in the loss?",
+        "answer": "Supervision must match actual cutoff L* and not use fictitious targets for uncollected turns. Respect valid response lengths. The current teacher is a deterministic task oracle, not a task-specific large model.",
+        "example": "If this rollout stops at turn three, prefabricated answers for turns four through six are not training evidence for it."
+      }
+    },
+    "qa/agent-research:steppo/mechanism": {
+      "source_sha256": "f280c6e3975b3b76f3165100a46022f89091b5bbbf650844f3f57bdff27c66db",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does StepPO aggregate token ratios within a step before clipping the step ratio?",
+        "answer": "The environment executes a whole action, so independent token clipping differs from action-level probability change. Average within-step log ratios and exponentiate, then compute value and GAE at step boundaries, aligning credit with environment transitions. Exclude tool observations from action tokens and preserve consistent length normalization.",
+        "example": "A shell command has many tokens but executes once when complete. Evaluate the step's overall change rather than assigning its state reward independently to each subword."
+      }
+    },
+    "qa/agent-research:steppo/basics": {
+      "source_sha256": "916e2fdd73f4e88cd4b4575ee248fd36dbbf5ff3835dba06883b9b594823e06d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does StepPO use observation–action as the natural decision unit?",
+        "answer": "Tool actions span tokens while environment feedback follows the complete action. StepPO computes value and GAE at step boundaries and aggregates action-token ratios into a step ratio before clipping.",
+        "example": "A tool call has a name and arguments, but the environment returns feedback only after the complete invocation."
+      }
+    },
+    "qa/agent-research:steppo/comparison": {
+      "source_sha256": "a7c979fab3b04bcb6f912eccc4da4e868c9e850f7318b7447660e68ee00061ec",
+      "reviewed": true,
+      "fields": {
+        "question": "Is clipping token ratios before averaging equivalent to aggregating and clipping a step ratio?",
+        "answer": "No. Clipping is nonlinear, so order changes which actions are constrained. Average log ratios and exponentiate to obtain a geometric step ratio, not the arithmetic mean of raw ratios.",
+        "example": "For one large and one small ratio in an action, geometric aggregation can produce a different update from individual clipping."
+      }
+    },
+    "qa/agent-research:steppo/implementation": {
+      "source_sha256": "165b468166558d695bec0dd4a616a66229bf772b214346e5ff49b49d3d4940d6",
+      "reviewed": true,
+      "fields": {
+        "question": "How does StepPO keep observation tokens out of action-ratio aggregation?",
+        "answer": "Mark step and response-token boundaries and aggregate only policy ratios of tokens in the action. Observations are conditions, not generated actions. Deterministic local tool plans verify a step state machine but not real LLM token rollouts.",
+        "example": "A thousand-character tool response must not become a thousand policy tokens in the action's ratio mean."
+      }
+    },
+    "qa/agent-research:searl/mechanism": {
+      "source_sha256": "613a831d71e142e29484b5df88bc52363b26011190709bf982b4ea6110c606da",
+      "reviewed": true,
+      "fields": {
+        "question": "Why update both graph memory and policy with new rollouts rather than freeze the tool graph?",
+        "answer": "Executions reveal usable and failed tool transitions, which should change edge weights. The policy also learns to use updated relationships. Fixed graphs limit exploration to older experience, while updating the graph alone does not ensure consumption. Both sides need real rewards, not preset successful edges.",
+        "example": "If a tool's output can newly feed another tool, adding the edge is not enough; the policy should learn to select that route."
+      }
+    },
+    "qa/agent-research:searl/basics": {
+      "source_sha256": "8abf63058123531ac44807e04cd0563d168f58fa4bf23ed3f652316ade50f130",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does SEARL store tool experience in a graph with successful transitions?",
+        "answer": "The graph represents relationships between tools and effective transitions for retrieval and policy decisions. New rollouts update edge weights and the policy, so experience changes with actual outcomes rather than remaining static.",
+        "example": "Repeated success for one tool sequence can make that relationship easier to retrieve for later tasks."
+      }
+    },
+    "qa/agent-research:searl/comparison": {
+      "source_sha256": "cc8c03f1d61dda692553bd210780d13aa3652109173e7b779290b48c5d21e8d6",
+      "reviewed": true,
+      "fields": {
+        "question": "How does SEARL's joint graph and policy update differ from editing memory only?",
+        "answer": "Graph changes alter retrieved external information. Joint updates also change how the policy uses it and acts. Training the policy with a fixed graph likewise misses experience structure evolution. Record both state histories separately.",
+        "example": "A new successful edge does not show that policy parameters learned to use it in relevant states."
+      }
+    },
+    "qa/agent-research:searl/implementation": {
+      "source_sha256": "e18a6d96859b4cbddd1df5c435ce52915a69b2813095da2e2a7ae88b8e78f5b4",
+      "reviewed": true,
+      "fields": {
+        "question": "How can SEARL show later decisions actually consume graph updates rather than only logging writes?",
+        "answer": "Compare edge weights before and after rollouts, later retrieval hits, and policy inputs to confirm that updated experience is available. Nonzero telemetry proves events, not real browsing or multi-GPU RL capability from the mini-suite.",
+        "example": "If edge weights change on disk but the policy reads stale cache, the experience loop did not close."
+      }
+    },
+    "qa/agent-research:simula/mechanism": {
+      "source_sha256": "ca62c9a6edb8d84a17b0dbde91f7ec432dd95bec167540c79b249cda0f6a2dd0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why aren't correctness and incorrectness critiques just repeated versions of the same decision?",
+        "answer": "A single critic may accept surface plausibility. Separately asking for evidence of correctness and looking for errors gives complementary filters. Admission requires satisfying requirements, positive correctness, and negative incorrectness judgments. Factor trees ensure coverage and batch-relative difficulty calibrates complexity; rule checks cannot replace semantic critiques as quality evidence.",
+        "example": "A polished question may contain mutually exclusive requirements. An error-seeking critic should uncover them rather than echoing 'looks good.'"
+      }
+    },
+    "qa/agent-research:simula/basics": {
+      "source_sha256": "f637e75822a84ed33d1668bd7e7a05c6e8540768c8c9120d4a67532b530b6acb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Simula build a factor taxonomy before generating examples?",
+        "answer": "Direct seed expansion can limit coverage and produce similar samples. A tree organizes factors and combinations; generation controls global node combinations and local scenarios before independent critique and relative complexity calibration.",
+        "example": "Separate task type, conditions, and difficulty factors before combining them into distinct cases instead of repeatedly rewording one item."
+      }
+    },
+    "qa/agent-research:simula/comparison": {
+      "source_sha256": "9f3bf993fa9c2896aae22e91934fee993ce5bd20f9f1815da59aeb0563ffa56b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Simula's Elo-based relative complexity differ from absolute model-assigned difficulty?",
+        "answer": "Elo updates within-batch rankings through pairwise outcomes and depends on matchups and settings. Absolute scores use a different scale. Local initial 1000, scale 400, and k=32 are explicit settings, not claimed as the authors' unique values.",
+        "example": "Harder than other examples in this batch does not give a universal unit of difficulty across tasks."
+      }
+    },
+    "qa/agent-research:simula/implementation": {
+      "source_sha256": "2d1529721339dbfb54e721ba1e4afd3d3bcc3cec44724f95dd3ba0269ba083e8",
+      "reviewed": true,
+      "fields": {
+        "question": "If Simula's two critics share a base model, may the second see the first verdict?",
+        "answer": "No. Call independently with only the sample. Admission requires the requirements critic to pass, correct to affirm, and incorrect to deny. Semantic generation and critique are central; fixture callbacks or zero 13-gram overlap on short text do not establish full quality or absence of contamination.",
+        "example": "Telling the error critic that the other critic already passed the sample breaks independence."
+      }
+    }
+  }
+}

@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:kunlun/comparison": {
+      "source_sha256": "8447b2d9fb75a7dacb2cb6e4e3b5f096938c5cdc715422dfa5dd9576f7a64a7b",
+      "reviewed": true,
+      "fields": {
+        "question": "Where does Kunlun's gated GDPA affect evidence compared with ordinary softmax attention?",
+        "answer": "The gate's log-sigmoid is added to attention logits, suppressing relations before normalization rather than scaling the final vector afterward. It can suppress noise or rare important events. CompSkip separately changes residual depth.",
+        "example": "Illustration: Downweighting an accidental click before normalization reallocates attention to other events; multiplying the whole user vector afterward cannot reproduce that change."
+      }
+    },
+    "qa/recommendation:kunlun/implementation": {
+      "source_sha256": "bff326cd38e65f7c51eee4982b080af635487c6aaf8af9521bb6862251a8cf34",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must Kunlun's CompSkip align the dimensions of the old state and F output?",
+        "answer": "h(l+1)=αhl+(1−α)Fl(hl) combines states in the same representation space. Specify the range and broadcast axis of α rather than gating across candidates or batch examples accidentally. Respect synchronized sequence and interaction updates. The four-layer local compact core's quality variation is not production throughput evidence.",
+        "example": "Illustration: A per-layer α must not accidentally become candidate-dependent and contaminate a shared state merely because broadcasting succeeds."
+      }
+    },
+    "qa/recommendation:l2rec/mechanism": {
+      "source_sha256": "88e1ba4ab3ee5cbe0a97795f3c928818c15ce26e3c3c57dc9a640d941e053d96",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does L2Rec use separate user-routed LoRA experts for semantic and behavioral views?",
+        "answer": "Content and collaborative behavior can complement or contradict each other. Sharing all adapter parameters can let the stronger signal overwhelm the other. The experts learn view-specific low-rank directions, user routing picks mixtures, and a cross-view gate fuses them. Parameter efficiency still needs supervision, and a router that always selects the same expert defeats specialization.",
+        "example": "Illustration: Content can help a new user; rich co-consumption may matter more for an established user. Separate views can adapt before being combined per user."
+      }
+    },
+    "qa/recommendation:l2rec/basics": {
+      "source_sha256": "ddd2c0c2428a19733cc82ef1807f442200fcb98c5f0b629b2c85721aeb224d0b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish semantic and behavioral LoRA experts in L2Rec's shared LLM?",
+        "answer": "Text meaning differs from collaborative consumption. View-specific low-rank updates, user routing, and cross-view gating preserve a common backbone alongside distinct task geometries. Experts are shared, not independent models for each user, and personalization depends on routing and data.",
+        "example": "Illustration: A semantic expert understands suspense; a behavioral expert captures that group's consumption habits. They need not point in the same direction."
+      }
+    },
+    "qa/recommendation:l2rec/comparison": {
+      "source_sha256": "62142ca7c5e52b92a31650c342aeb24148336af55dee35cc5f5daa3ac91ce153",
+      "reviewed": true,
+      "fields": {
+        "question": "How does user-routed LoRA-MoE change parameter sharing compared with one global LoRA?",
+        "answer": "A global LoRA gives all users the same update. MoE picks combinations from a shared pool, adding conditional capacity without storing a whole model per user. Sparse training can starve experts, so total parameter count does not establish effective capacity or ranking quality.",
+        "example": "Illustration: Photographers and bakers can use different expert proportions while sharing general experts. Always picking one expert reduces MoE to something close to global LoRA."
+      }
+    },
+    "qa/recommendation:l2rec/implementation": {
+      "source_sha256": "c73e976ade8a20a0e46f8c31b53258d38c89f3de1bb23805e8708e1c51116079",
+      "reviewed": true,
+      "fields": {
+        "question": "Which axes and parameters must remain distinct in L2Rec's BA updates and top-k gating?",
+        "answer": "Each view and expert owns A and B. Form an update shaped like the original weight, then weight it with the user gate. Select top-k on the expert axis and handle cross-view fusion separately. Shapes cannot reveal semantic/behavioral identity mismatches, and local proxy scores do not establish full expert-path training.",
+        "example": "Illustration: Pairing a semantic expert's A with a behavioral expert's B can pass shape checks but changes the mapping. Selecting users instead of experts implements another algorithm."
+      }
+    },
+    "qa/recommendation:lazformer/mechanism": {
+      "source_sha256": "8e38a62bdea037f1a76772ea9ebebdce5c7c8ab30f2d397b8b8d0393a165bf1f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep a ranking residual adapter alongside LazFormer's transferable pretrained backbone?",
+        "answer": "Generative pretraining learns broad sequence patterns, but industrial ranking needs candidate interaction and frequent updates. A residual adds ranking-specific behavior without wholesale overwrite; dense recent and sparse distant tokens with sparse attention control long-history cost. Local deterministic mapping and adapter composition do not reproduce full generative pretraining.",
+        "example": "Illustration: The backbone knows long-term consumption, while a promotion needs extra price interactions. A fixed weighted scorer cannot prove the original training pipeline ran."
+      }
+    },
+    "qa/recommendation:lazformer/basics": {
+      "source_sha256": "9d4044154e93d2014b02253f26374d7d2026ea89e27adbae1c8e037cc0e310ad",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish transferable generative pretraining from the ranking residual adapter in LazFormer?",
+        "answer": "Pretraining learns general sequence and semantic structure. Ranking needs candidate value and serving objectives; the residual adds a task-specific update without rewriting the base. Dense recent and sparse distant inputs and sparse attention separately control history cost. Verify training and serving mechanisms individually.",
+        "example": "Illustration: Pretraining learns a camera-to-lens progression; adaptation adds the current candidate's price, a business trade-off not necessarily learned by transfer alone."
+      }
+    },
+    "qa/recommendation:lazformer/comparison": {
+      "source_sha256": "3b8c65c93aa7b61e5138561cd93c732faccfa4966494390ecb5f349c5a2fdcad",
+      "reviewed": true,
+      "fields": {
+        "question": "What long-range information do dense recent and sparse distant tokens retain versus fixed recent truncation?",
+        "answer": "Truncation drops old history entirely. The mixed representation keeps coarse older evidence and detailed recent events, and sparse connections lower pairwise cost. Compression can lose rare events. The deterministic mapping and residual in the local version are interfaces, not original long-sequence pretraining.",
+        "example": "Illustration: Keep every click from the last two days but summarize last year's history by groups. This remembers more than ten recent clicks, yet an important old exception may be lost."
+      }
+    },
+    "qa/recommendation:lazformer/implementation": {
+      "source_sha256": "5ac3b5ea3c85e32ebb02f9075f60a749f6f80d22b6eb99b17b8eb90c7ac6842d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must the LazFormer local implementation not report the paper's two-week A/B numbers as its own training results?",
+        "answer": "The local version has deterministic candidate scoring, transferable mapping, and a ranking residual with fusion selected on validation. It lacks full large-model training and online serving. Report the negative public-protocol result and separately cite the paper's business gains.",
+        "example": "Illustration: A residual in local movie scores does not imply generative pretraining; copying the paper's GMV percentages into local metrics would mix evidence sources."
+      }
+    },
+    "qa/recommendation:leadre/mechanism": {
+      "source_sha256": "f1ee8af91e14bad720552a1dc8ed2de481ec2da743bc8d9e9eb8b441a3e758d7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why train LEADRE ad SID generation with an intent prompt, semantic auxiliary tasks, and DPO?",
+        "answer": "Predicting only discrete codes can memorize exposed IDs instead of using ad content and cross-domain needs. The intent prompt organizes long-term and real-time signals; semantic and commercial value objectives make codes more useful; DPO adjusts preference trade-offs. Report SFT-to-DPO changes separately because preference tuning need not improve every retrieval metric.",
+        "example": "Illustration: Two appliance ads may differ in relevance to current renovation, even if one appears much more often. Semantic and value supervision can separate them, but too much DPO weight on commercial feedback may hurt new relevant candidates."
+      }
+    },
+    "qa/recommendation:leadre/basics": {
+      "source_sha256": "0baff8bae958c1d8352ead35e9aab123af87548fc199c055d4503e41c21cdcc6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine cross-domain, long-term, and real-time behavior in LEADRE's intent-aware prompt?",
+        "answer": "Cross-domain activity supplies clues unavailable in ads, long-term summaries retain stable interests, and real-time behavior reflects change. Together they help S-ID generation do more than memorize IDs. Summaries and caches can be stale and sources may conflict; a longer prompt is not full user understanding.",
+        "example": "Illustration: A stable photography preference, recent travel search, and current camera browsing suggest portable gear even if the new ad has no in-domain click history."
+      }
+    },
+    "qa/recommendation:leadre/comparison": {
+      "source_sha256": "ef215b375b85b4ad493b63709a65a89cfcd42c21f809cd2e3c4e7bead321973e",
+      "reviewed": true,
+      "fields": {
+        "question": "How can LEADRE's full system improve while its DPO ablation worsens?",
+        "answer": "The full system changes SID and semantic/value auxiliary tasks, whereas the ablation adds preference updates to the same SFT. Beating DIN does not validate each change. The local DPO result regressed relative to SFT, so do not attribute the full gain to alignment.",
+        "example": "Illustration: Pretraining may deliver a large gain, DPO may give some back, and the final system still beats a weaker baseline."
+      }
+    },
+    "qa/recommendation:leadre/implementation": {
+      "source_sha256": "696bedebdcc1e09f324a77d188f9b354f8ad7c2852310bdea4a8b956da3aee5e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must LEADRE keep the reference and context aligned when constructing winning and losing ad SID paths?",
+        "answer": "The objective compares winner and loser probability changes relative to a reference under the same user intent. Switching requests or references changes the target. Construct legal SID mappings and auxiliary labels at the cutoff, do not use test answers in prompts, and version long-term caches with real-time inputs.",
+        "example": "Illustration: Two legal SID paths preferred by user A must not be scored against a reference conditioned on user B's history."
+      }
+    },
+    "qa/recommendation:learn/mechanism": {
+      "source_sha256": "29576509548465eeb94316b0bbeb444d2de96e4b996a5f6580e93c3839a4531b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does LEARN freeze LLM content encoding but train a causal PCH to learn preferences?",
+        "answer": "A frozen content encoder retains open-world semantics at lower update cost, but semantic closeness is not co-consumption. PCH learns order and next-item prediction from historical content vectors, then projects them into recommendation space. Respect history cutoffs; freezing the LLM does not mean nothing is trained or that semantic similarity proves transfer.",
+        "example": "Illustration: Two films mention adventure, but the user's viewing sequence can reveal a more specific storytelling preference that frozen text semantics alone do not express."
+      }
+    },
+    "qa/recommendation:learn/basics": {
+      "source_sha256": "0e65e0006ddfc05392585b7663bb9ed0ccf81bbd9771bcc650666293f1772cf5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why freeze the content LLM while letting LEARN's PCH learn?",
+        "answer": "The LLM provides stable content semantics; recommendation objectives still need to adapt behavioral relationships. PCH reads the content sequence, models causal preference dependencies, and projects into serving space. Freezing saves cost but limits content adjustment. Pretrained semantics are not collaborative preferences and need not improve all cold-start cases.",
+        "example": "Illustration: Films of the same genre may have different audiences. PCH can learn the difference from viewing order, whereas averaging frozen vectors does not train preference structure."
+      }
+    },
+    "qa/recommendation:learn/comparison": {
+      "source_sha256": "8c3099e95f31eeae77e2b1a9ff1f7e47e5f9b2cb12daf69d3cdfc7c3721d71a9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't LEARN's large gain over frozen semantic mean necessarily a cold-start gain?",
+        "answer": "The mean lacks trainable preference modeling, so PCH can improve ranking by learning sequences. The source also shows strong head concentration, so gains may come from popularity rather than new-item understanding. Cold-start subgroups and matched controls are needed; overall NDCG does not prove gains for all groups.",
+        "example": "Illustration: Recommending popular movies can substantially beat a semantic average without helping a new film reach its audience."
+      }
+    },
+    "qa/recommendation:learn/implementation": {
+      "source_sha256": "6b61dbba2c9a53a1b3b4ebe0c3abce711a721678f5f57c5ba246b954561e8e7b",
+      "reviewed": true,
+      "fields": {
+        "question": "Is a frozen content cache enough to prevent future leakage in PCH next-item prediction?",
+        "answer": "No. Enforce a causal mask and cutoff in PCH: the next item belongs only on the target side and must not enter pooling. Align encoder and projection versions. Frozen parameters prevent gradient updates, not input leakage.",
+        "example": "Illustration: Putting the test movie's frozen vector into history before predicting it still leaks the answer."
+      }
+    },
+    "qa/recommendation:light-heads/mechanism": {
+      "source_sha256": "07d16248b897bc5d9deff63710a634182df9900c4c9bffc5cd7f15e4a4c5fde3",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a new Light Heads objective improve the backbone after a stop-gradient on shared features?",
+        "answer": "Not through that loss path: it trains the shallow head but cannot update the shared backbone, reducing interference with existing tasks. Window resets make head training ages comparable but may sacrifice fit on sparse objectives. Gradient isolation and resets are separate; improved head AUC does not establish an improved backbone.",
+        "example": "Illustration: Add a feedback head without harming a mature click tower; resetting weekly supports fair upstream comparisons but may leave a rare objective undertrained."
+      }
+    },
+    "qa/recommendation:light-heads/basics": {
+      "source_sha256": "e5ffec29b346db1f9c301161f90f229d91232b5eb3b26db13a70618075f7cb77",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do Light Heads introduce a shallow head instead of changing the shared backbone immediately?",
+        "answer": "A production system can try a new objective quickly while protecting existing tasks and interfaces. The head reads shared features and updates only itself, making a cheap probe. It can exploit but not improve the backbone through this loss, and cannot recover information absent from those features.",
+        "example": "Illustration: Probe sparse satisfaction on current user embeddings without changing the click network. Adding a head cannot conjure details the embeddings never captured."
+      }
+    },
+    "qa/recommendation:light-heads/comparison": {
+      "source_sha256": "f0f1bf15aa5c59e082ea76a61eb01edb13110815e184c7c88da7dd2065bad22c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why trade off training-age comparability against sparse fitting when resetting a Light Head?",
+        "answer": "Resetting each window equalizes training age across upstream variants. Keeping the head preserves sparse label experience and may fit better. Short-window resets clearly regressed in the local source, so the right choice depends on the experimental goal and available data.",
+        "example": "Illustration: A head trained three weeks versus a head trained one day confounds an upstream comparison. Reset both for a fairer comparison, but rare labels may not be enough to relearn."
+      }
+    },
+    "qa/recommendation:light-heads/implementation": {
+      "source_sha256": "8df59bef2f82ddf38f91daa5e102fc88c056c8a773393cf6148aad590075b7d3",
+      "reviewed": true,
+      "fields": {
+        "question": "What should be checked separately for Light Head gradient isolation and reset?",
+        "answer": "With only the new-task loss, shared θ must receive zero gradient while light-head ψ receives nonzero gradient. At a window boundary, reinitialize only ψ and preserve existing θ and main head φ as specified. Resetting does not imply isolation; do not erase backbone optimizer state accidentally.",
+        "example": "Illustration: A changed shared parameter after the new-task update violates isolation. Resetting the main click head too would destroy the baseline."
+      }
+    },
+    "qa/recommendation:linkedin-feed-sr/mechanism": {
+      "source_sha256": "4660c87159ae96b1a9ec24a1e9e795b75bbfffe55d771e61759e23ab4334aef5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does LinkedIn Feed's sequential model stress evaluation without random negative sampling?",
+        "answer": "A few easy random negatives simplify ranking and conceal hard distinctions in a large pool. A model that jointly processes candidates, history, and context needs a consistent candidate protocol to test scaling and incremental serving. A local proxy is not LinkedIn's production distribution, and gains cannot be compared across different negative counts.",
+        "example": "Illustration: Finding one positive among nine obviously irrelevant items differs from finding it among thousands of similar Feed candidates, even with the same model."
+      }
+    },
+    "qa/recommendation:linkedin-feed-sr/basics": {
+      "source_sha256": "858be7101e8df7cabc9f0adbd8bac99e9194412830225b5e39fd0eead1e3eb27",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does LinkedIn Feed combine candidates, interaction history, and context into a sequence?",
+        "answer": "They jointly determine current content value, so a common backbone lets evidence interact before the final stage. Very long history retains career interests but adds compute and candidate dependence, motivating incremental serving. A unified representation does not make all states reusable across candidates.",
+        "example": "Illustration: Recent job seeking, a long-running interest in engineering, and a current job-listing candidate together explain value better than a set of liked articles."
+      }
+    }
+  }
+}

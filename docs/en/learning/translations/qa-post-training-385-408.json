@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:sharpo/basics": {
+      "source_sha256": "cfbe55ac13de16c242955aa932d91aca62847d9446e6f6e83ba49d6eedd3cb70",
+      "reviewed": true,
+      "fields": {
+        "question": "Why give SHARPO a successful same-group trajectory as teacher context?",
+        "answer": "An in-task success guides rescoring student logp within interaction segments and scales original GRPO advantage. Teacher context is training credit, not a deployment gold plan.",
+        "example": "Use a successful path to strengthen related behavior without pasting it into the inference prompt."
+      }
+    },
+    "qa/post-training:sharpo/comparison": {
+      "source_sha256": "3cc68e60462059d8be564bd70aeed448d2e51344b3f4971315c0d1089b8510b7",
+      "reviewed": true,
+      "fields": {
+        "question": "How does bounded SHARPO multiplication differ from adding teacher advantage?",
+        "answer": "Twice sigmoid lies between zero and two, so scaling preserves sign and cannot turn zero nonzero. Additive terms can flip credit. The teacher modulates intensity rather than rewriting outcomes.",
+        "example": "A failed segment can be penalized less but not rewarded merely by teacher preference."
+      }
+    },
+    "qa/post-training:sharpo/implementation": {
+      "source_sha256": "db358eb0e0643ffbd968a0868fb0f9c874a8d183f1cabe564ede7737f7fe2036",
+      "reviewed": true,
+      "fields": {
+        "question": "What constraints apply to SHARPO segments and gold plans?",
+        "answer": "Average teacher–student gaps within matching interaction segments and broadcast there, excluding tool observations. Local segments use no gold plan or 7B training; fixtures aren't capability evidence.",
+        "example": "Mixing a tool call with a different turn's answer gives the wrong segment mean."
+      }
+    },
+    "qa/post-training:sharpo/mechanism": {
+      "source_sha256": "2a6dfa00ee863199af845e7cbb317e7460ab15975edbd63a8681b633dfda872c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use bounded scaling after rescoring segments against a successful path?",
+        "answer": "Same-group success supplies extra context at the actual prefix. Segment logp gaps express local support. Bounded factors limit amplification and preserve original GRPO direction. Success context remains training-only.",
+        "example": "Retrieval in a failed trace may resemble a successful path while synthesis diverges, so weight the two segments differently."
+      }
+    },
+    "qa/post-training:pact/basics": {
+      "source_sha256": "30cc67f55d259d070936855cedc44253fcf7137e47b50a8b00f369a1ebd85a1b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why tie PACT token credit to prefix value?",
+        "answer": "One terminal reward is coarse. Prefix-conditioned expected return contextualizes it; R−V approximates advantage. Exact credit needs theoretical assumptions; a learned critic is an approximation.",
+        "example": "The same failure can yield different advantages at an easy versus difficult prefix."
+      }
+    },
+    "qa/post-training:pact/comparison": {
+      "source_sha256": "7ba1bef2cbbac00101bc4151519f0730c6282f833998345cdbeb969b612a0442",
+      "reviewed": true,
+      "fields": {
+        "question": "Why update actor before critic in PACT instead of fitting the old policy?",
+        "answer": "The critic should follow the updated policy. Correct observed returns with a current-token new/old ratio, not an exact full-future continuation product.",
+        "example": "Once actor actions change, replaying uncorrected old returns leaves the critic behind."
+      }
+    },
+    "qa/post-training:pact/implementation": {
+      "source_sha256": "10ca834bea4794d6b32c310e4de3b3f50dedc1f4a97e0810e2313fe8ea2c7598",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not send ρR above one to ordinary probability BCE?",
+        "answer": "Use the specified softplus(z)−Yz form and filter out-of-range ratios. Standard BCE may reject or alter targets outside [0,1]. Sparse nonzero local outcomes aren't reliable gains.",
+        "example": "Reward one times a ratio slightly above one naturally exceeds one; do not clamp it."
+      }
+    },
+    "qa/post-training:pact/mechanism": {
+      "source_sha256": "7a42e126888b550e850c3c910c6ab56c7eea5361c3237f3d354ce24cb56135a4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why recompute PACT ratios after actor update, and may targets above one be clipped?",
+        "answer": "New/old token ratios correct old returns toward the updated actor's critic target. The product can exceed one; clipping changes the objective. Use stable softplus and the prescribed update order.",
+        "example": "A more likely successful action after update should change critic weighting instead of fitting only old sampling."
+      }
+    },
+    "qa/post-training:tiao/basics": {
+      "source_sha256": "342b2a179fc26541435e6da2753371d1f10cc5e2045cb74bb2d2136ff75dbcfd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why mask the source document in TIAO?",
+        "answer": "Summaries should use evidence. Comparing probabilities with and without source locates evidence-sensitive tokens for trajectory/token credit. Dependence is association, not verified truth.",
+        "example": "Removing a relevant sentence can affect a name more than a conjunction."
+      }
+    },
+    "qa/post-training:tiao/comparison": {
+      "source_sha256": "a0d5d65d4fc155688554f746cf7dfd1470ec04da291c2824656241b5dcdc2d53",
+      "reviewed": true,
+      "fields": {
+        "question": "How does TIAO dual-scale credit differ from one summary score?",
+        "answer": "Whole-summary score captures overall quality; token dependence redistributes local updates. A good aggregate doesn't supervise every token correctly.",
+        "example": "One hallucinated date in a good summary calls for localized correction."
+      }
+    },
+    "qa/post-training:tiao/implementation": {
+      "source_sha256": "34fdb9fc997b31d26fa431fbddd5952573e94f7955722ad0c1ceb845ff130810",
+      "reviewed": true,
+      "fields": {
+        "question": "Which response should both TIAO views score?",
+        "answer": "Use identical response and prefixes under complete/masked source. Otherwise generation changes confound the intervention. Local dependence kernel does not train the paper's 7B model.",
+        "example": "Scoring A with source and generating B without it doesn't isolate source removal."
+      }
+    },
+    "qa/post-training:tiao/mechanism": {
+      "source_sha256": "c5e268543fefcc65a81bf9ed520e6fcfdb230768483b96509c0399367656a41e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use masked-source token probability changes rather than length-based credit?",
+        "answer": "Tokens vary in evidence dependence; paired scoring supplies local clues and shapes both trajectory and token credit. Length doesn't identify provenance. Masking can itself shift distribution, so association is not factual attribution.",
+        "example": "A date and a connective at similar positions need not receive the same evidence credit."
+      }
+    },
+    "qa/post-training:spear/basics": {
+      "source_sha256": "57e0f8d7d476ca8961a94a4dd19fc4862d762447451fd028d886e47960225521",
+      "reviewed": true,
+      "fields": {
+        "question": "Why convert teacher reasoning to symbolic milestones in SPEAR?",
+        "answer": "Terminal reward is sparse and neural process judges costly. Domain milestones permit ordered alignment and dense progress, if extraction preserves important reasoning.",
+        "example": "Match key equations rather than copying all teacher wording."
+      }
+    },
+    "qa/post-training:spear/comparison": {
+      "source_sha256": "9e6a907340c5956747d3a3d52f24d6799e450720d57dbde63d4e3f502f5215b1",
+      "reviewed": true,
+      "fields": {
+        "question": "How does LCS-F1 differ from unordered overlap?",
+        "answer": "LCS respects order; F1 measures coverage and redundancy. Reordered dependencies can retain the same set yet deserve different credit.",
+        "example": "Putting a conclusion before its premises can look identical to set overlap."
+      }
+    },
+    "qa/post-training:spear/implementation": {
+      "source_sha256": "acd72757ccd8bc4002ff3d46abaf7a9d4a75637950d65cdda463745ef1e74267",
+      "reviewed": true,
+      "fields": {
+        "question": "Does local SPEAR extract natural-language milestones?",
+        "answer": "No. Candidate process/format axes proxy milestones for LCS-F1. Teacher-text extraction is separate; known symbolic labels don't prove extraction.",
+        "example": "Supplying symbols directly cannot test extracting them from a long proof."
+      }
+    },
+    "qa/post-training:spear/mechanism": {
+      "source_sha256": "bb5c5eb21022483ae189ca03d6157fc9a7d9de068fb6ace067c58d96272e5ada",
+      "reviewed": true,
+      "fields": {
+        "question": "Why align milestones with LCS-F1 instead of checking the same symbols?",
+        "answer": "Identical sets can break reasoning order. LCS preserves relative order and precision/recall detect redundancy and omissions, providing dense feedback. Extraction can err; local candidate axes are not a natural-language extractor.",
+        "example": "Substituting conditions before solving differs from writing the result then inventing conditions."
+      }
+    },
+    "qa/post-training:v-rubrics/basics": {
+      "source_sha256": "e613767cbe063b91edb21866b0c21b08392805a7986754fead04faab3fd4685d",
+      "reviewed": true,
+      "fields": {
+        "question": "What do VF, RC and IF measure in V-Rubrics?",
+        "answer": "Visual faithfulness, reasoning consistency and instruction following. They are separate axes, not candidates or ordered steps; identify error type before assigning reward and prefix credit.",
+        "example": "Wrong requested bullet count is IF; inventing an object is VF."
+      }
+    },
+    "qa/post-training:v-rubrics/comparison": {
+      "source_sha256": "6ab6d753df5787a3e5ac80e01a80005f6bb194673823dca1df0c4e8b2c1b668c",
+      "reviewed": true,
+      "fields": {
+        "question": "Can V-Rubrics dimension weights replace criterion coverage?",
+        "answer": "No. Weights combine detected dimensions; coverage determines which errors are seen. Raising VF cannot penalize errors none of its rubrics detect. Objective tradeoff and measurement reliability differ.",
+        "example": "Object-type-only checks may miss two becoming three regardless of VF weight."
+      }
+    },
+    "qa/post-training:v-rubrics/implementation": {
+      "source_sha256": "9c4caa865b334e3a6a08a3811f3cf945b6d437ef601f2d8566e15990c366cbca",
+      "reviewed": true,
+      "fields": {
+        "question": "Do fixed V-Rubrics scores establish actual visual judging?",
+        "answer": "No. Deterministic public candidates/plans test reward and credit without paper checkpoints, private data or full benchmarks. Fixed scores aren't vision.",
+        "example": "A supplied VF score tests aggregation, not seeing an image."
+      }
+    },
+    "qa/post-training:v-rubrics/mechanism": {
+      "source_sha256": "570b5ff159c27a86dd688916f7636d26f21f446ae6c5e986d5fcdf420ec640c7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate vision, reasoning and instruction following instead of one score?",
+        "answer": "A visually correct reply can reason poorly; a coherent one may invent details. Atomic rubrics localize evidence to prefixes instead of obscuring it with terminal reward. Weights don't validate labels; local proxies aren't visual models.",
+        "example": "Correct formatting doesn't excuse a nonexistent object used as a premise."
+      }
+    },
+    "qa/post-training:srpo/basics": {
+      "source_sha256": "89444697b96d71764a9bc9f8bf00823096cbc333c460491f83dfa8c5fed84b77",
+      "reviewed": true,
+      "fields": {
+        "question": "Why create a reflection patch after SRPO failure?",
+        "answer": "The patch converts coarse outcome feedback into privileged corrective context. The same model uses it to score actual student prefixes densely, not copy the failed trace.",
+        "example": "After a tool error, a parameter-check reminder can guide teacher rescoring."
+      }
+    },
+    "qa/post-training:srpo/comparison": {
+      "source_sha256": "b96440f0fc80b8a2136d08a2877ec6916cc71c52abc75d1e7cc8e4a97b9cacbb",
+      "reviewed": true,
+      "fields": {
+        "question": "How does SRPO self-reflection differ from an independent external teacher?",
+        "answer": "Weights are shared and conditioning differs via feedback/patch, not additional parameters. A bad reflection can amplify shared bias; it isn't independent verification.",
+        "example": "Someone judging after seeing the outcome knows more, but isn't a second expert."
+      }
+    },
+    "qa/post-training:srpo/implementation": {
+      "source_sha256": "829e08df6aadaf79e41c380f015c707713a71302096fba41e99ff6b34772d066",
+      "reviewed": true,
+      "fields": {
+        "question": "Should SRPO rescore a teacher-generated ideal prefix?",
+        "answer": "No. Keep actual student on-policy prefixes; patch changes teacher context only. Detach reward difference and advantage. Local proxy axes do not generate real patches or execute a large tool model.",
+        "example": "Score the student's wrong third step as it occurred instead of replacing it with a correct one."
+      }
+    },
+    "qa/post-training:srpo/mechanism": {
+      "source_sha256": "92ef884238318ba615e91fc11b1aa8f4f0d6124207e0f78b8a718fed62e67ae1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep original rollout prefixes when a same-weight teacher sees a reflection patch?",
+        "answer": "The patch is hindsight training context for evaluating visited states. Rewriting student prefixes or giving the patch at deployment changes the task. Token teacher/old-student log ratios supply dense credit; reflection isn't independently proven truth.",
+        "example": "After a failed retrieval, a teacher may know the missed constraint while scoring, but the student didn't know it during the original choice."
+      }
+    }
+  }
+}

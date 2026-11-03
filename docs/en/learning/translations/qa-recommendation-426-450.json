@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:gris/implementation": {
+      "source_sha256": "123fbca7dec8e3a6671c6829fc843a52704d5c4cebbbfadfd142cc2d282f9b9a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why save node identities and parent paths at each GrIS recursive split?",
+        "answer": "Refinement stays inside each current subgraph. Without parent paths, local child IDs from distinct branches can collide. Implement smoothing, semantic combination, and empty-graph handling explicitly; integer outputs alone do not verify content-and-collaboration hierarchy.",
+        "example": "Two parent clusters can each have child 2, but their full SIDs must differ."
+      }
+    },
+    "qa/recommendation:growthgr/mechanism": {
+      "source_sha256": "7f2e21f43aa6fcebcfa85ac073deba5abf42c1d5508455a60b901a932a1abd36",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does GrowthGR use ItemLTV incremental value and multi-objective post-training instead of only increasing new-item exposure?",
+        "answer": "Exposure is a means, not an outcome. ItemLTV estimates changes in future orders or value relative to what would happen anyway; multi-objective training balances click, purchase, and coverage. Clip rare high-value weights to limit instability. Counterfactual assumptions and rewards need validation; more new items do not prove growth.",
+        "example": "A first exposure can open a sustained use case or cause one accidental click; equal traffic treats these differently valuable opportunities alike."
+      }
+    },
+    "qa/recommendation:growthgr/basics": {
+      "source_sha256": "27aca9e991646d4de3678871f6cec361602054410579ec8c36850eff1b1d06a3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use ItemLTV instead of immediate new-item purchases in GrowthGR?",
+        "answer": "Low initial exposure leads to few immediate purchases and can hide effects of first clicks on later orders. ItemLTV separates baseline and increment; MoPO aligns generation with multiple behavioral goals. Predicted incremental value is not inherently causal without credible assumptions and feedback.",
+        "example": "A click today might lead to a later series purchase despite no same-day conversion."
+      }
+    },
+    "qa/recommendation:growthgr/comparison": {
+      "source_sha256": "776af14099489949756ee5da990d714c4dbb392600935f388b7eaf06a18b6c2a",
+      "reviewed": true,
+      "fields": {
+        "question": "How do GrowthGR rare high-value weights differ from a uniform novelty reward?",
+        "answer": "A novelty reward uses newness alone. Rarity weights use previous-policy probability and multi-objective value to emphasize potentially useful low-opportunity items. Low probability is not quality; clipping limits amplified noise. Neither alone proves growth.",
+        "example": "Two new items with little exposure should not get identical boosts if estimated long-term relevance differs, though a bad estimate can be amplified."
+      }
+    },
+    "qa/recommendation:growthgr/implementation": {
+      "source_sha256": "20d57f86dbf6da9c22a922746290bb40d9f2917fa60e7864dc99a0594886fa40",
+      "reviewed": true,
+      "fields": {
+        "question": "Why clip GrowthGR rarity weights based on `−log πold` and fix the reference policy?",
+        "answer": "Tiny old probabilities create extreme weights, high variance, and single-sample dominance. πold must match the sample's generating policy and context, not current probabilities. Policy ratios and reward weights have different roles; separate ItemLTV proxies from real orders.",
+        "example": "Clipping can stop one noisy low-probability example from dominating a batch without making its value estimate reliable."
+      }
+    },
+    "qa/recommendation:grp/mechanism": {
+      "source_sha256": "c21a130d1301d6022cf1c7eb6b33b096ecaa49f5d6df4595bcca19e7a81a8b3e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why activate GRP's one-sided logged-target margin only when original-target retrieval suffers?",
+        "answer": "Reward optimization can move mass to a few high-reward outputs and lower logged-target probability. Penalize decreases past tolerance while permitting other improvements. Freeze and stop gradients through the ranking reward head to prevent co-adaptation. Local objectives and gradients do not verify production funnel replacement.",
+        "example": "Improve new candidates without a penalty if the original target remains competitive; penalize shifting all mass to one high-reward category."
+      }
+    },
+    "qa/recommendation:grp/basics": {
+      "source_sha256": "d58dd63aa27220f2400bca58f8e7d66aece276262432e502f539540924d45202",
+      "reviewed": true,
+      "fields": {
+        "question": "Why migrate GRP's recommendation funnel gradually instead of replacing all stages at once?",
+        "answer": "Established systems serve several goals and risks. Introduce an additional retrieval source, replace weak sources, increase quota, and then bypass ranking progressively. Keep original recall protections and separate evidence and permissions per stage; a unified design is not a finished rollout.",
+        "example": "Start with a small candidate share and expand only after validation rather than removing retrieval and fine ranking on one offline win."
+      }
+    },
+    "qa/recommendation:grp/comparison": {
+      "source_sha256": "d7cc2d910775e266f90dbc199292c564616c1042f695a82920b1fea86ad16301",
+      "reviewed": true,
+      "fields": {
+        "question": "What freedom does GRP's one-sided margin retain compared with symmetric probability constraints?",
+        "answer": "Only a logged-target drop beyond reference tolerance incurs penalty, leaving other preference improvements free. Symmetric constraints may suppress beneficial changes too. Target preservation does not validate the new reward, and local checks only cover surrogate objectives and gradients.",
+        "example": "Raise better candidates while preserving the logged target without penalty; a large abandonment of that target activates the guard."
+      }
+    },
+    "qa/recommendation:grp/implementation": {
+      "source_sha256": "4fccdf8a14bb123d208ab5836afa25f217cfd4246e08e7696ef301cca2b4fb80",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does GRP's MHP ranking head read detached generator representations?",
+        "answer": "Ranking gradients through shared encoding and SID paths can damage existing retrieval. Stop-gradient trains the ranker without changing the generator from this loss. Version it when frozen as RL reward and verify actual gradient separation rather than only registration.",
+        "example": "Updating ranking BCE should change the head but not send gradients into the SID-generation backbone."
+      }
+    },
+    "qa/recommendation:gryphon-v2/mechanism": {
+      "source_sha256": "8c5dd157fa29d283cb8a9638a8c25079e97961473508aca1303005d9de04f9e1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distill both current rollouts and actual exposure candidates in Gryphon-v2?",
+        "answer": "A changing generator proposes items rare in old logs; exposure-only training may not score its outputs well. Rollout-only training discards established coverage. One teacher calibrates both distributions, and a shared encoder links generation and ranking. Teacher bias can still transfer.",
+        "example": "Rollout supervision covers niche movies proposed by the new generator, while real exposures preserve knowledge of existing popular ones."
+      }
+    },
+    "qa/recommendation:gryphon-v2/basics": {
+      "source_sha256": "0eede1705dabf567dd13f1e222badadf5b80ca5b32b74ac31c14e00851db2b43",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do Gryphon-v2's generation and ranking heads share a history encoder?",
+        "answer": "Re-encoding the same history wastes computation and can produce inconsistent user states. A shared encoder supports SID nomination and ranking, but the ranker still depends on the generated candidate set and cannot recover omissions.",
+        "example": "Both heads see a user's recent switch to jazz, but missing jazz items cannot be reranked."
+      }
+    },
+    "qa/recommendation:gryphon-v2/comparison": {
+      "source_sha256": "b5327f4ff28b5f3a38844126b6eee62b1eaf1bd82e4a82ea055fb47a399d8bc0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does dual-source distillation better reflect generator serving candidates than logged impressions alone?",
+        "answer": "Old impressions are policy-selected and can miss the current rollout distribution. Combined training sees actual exposure evidence plus the generator's outputs. The teacher may be unreliable in new regions; the local comparison was negative despite broader coverage.",
+        "example": "Niche instrumental candidates missing from old logs get rollout supervision, but can inherit teacher bias."
+      }
+    },
+    "qa/recommendation:gryphon-v2/implementation": {
+      "source_sha256": "5604a12174265b91bbe288152d1840fc34acb6f97e911b68e3bbb57462ca2f0f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep Gryphon-v2 rollout and impression distillation provenance separate?",
+        "answer": "Counts, weights, and candidate identities from different distributions affect the loss. Compare teacher and student on matching items and cutoffs and track which source dominates. Both objectives updated locally, but quality regressed; updates are not gains.",
+        "example": "Sixty thousand distilled rollout items are not 60,000 real impressions and must not be labeled user clicks."
+      }
+    },
+    "qa/recommendation:guess-where-you-go/mechanism": {
+      "source_sha256": "03a5eb5de324e5c46972b77e5cc4583a1d525e5997ddeb921c653c1d91433520",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does next-POI generation need spatiotemporal context rather than ordinary place IDs?",
+        "answer": "Distance, time, and travel state constrain feasibility. Hierarchical semantic IDs organize places, contextual features constrain present needs, and curriculum training adds more complex feedback gradually. Long-horizon rewards need actual observations; co-occurrence or one hit does not establish route-planning value.",
+        "example": "A coffee lover can reach different shops on a morning commute and a weekend trip."
+      }
+    },
+    "qa/recommendation:guess-where-you-go/basics": {
+      "source_sha256": "9de6df337f615812b319115a6ae80cdb1b68d84397cf93c86f8ccf0f65a9c37b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does next-POI generation rely on spatiotemporal context more than content recommendation?",
+        "answer": "Current area, time, accessibility, opening hours, and trip stage affect destinations. SIDs represent places; context selects meaningful paths. Pure co-occurrence can recommend semantically related but unreachable places.",
+        "example": "A lunchtime request in Shanghai should favor nearby food, not a favorite Beijing café."
+      }
+    },
+    "qa/recommendation:guess-where-you-go/comparison": {
+      "source_sha256": "d3a2951f76497685e4a53f4488ae152a8c218ab9e369989728a6ce3cff2d557a",
+      "reviewed": true,
+      "fields": {
+        "question": "What stages do curriculum pretraining/SFT and long-term POI policy updates address?",
+        "answer": "Curriculum and supervision establish place semantics, timing, spatial relationships, and generation; later feedback adjusts long-term preference without exploring a huge space from sparse reward alone. Public movie proxies do not verify mobility or POI capability.",
+        "example": "Learn legal regions and visit sequences first, then refine routes based on satisfaction rather than expecting one reward to teach city geography."
+      }
+    },
+    "qa/recommendation:guess-where-you-go/implementation": {
+      "source_sha256": "6e6e747f338c7af94808e051c272310fc0719453b46da0ce610f4b58d4cbfb55",
+      "reviewed": true,
+      "fields": {
+        "question": "Which POI SID training targets must not become request features?",
+        "answer": "Target locations and future stay feedback can enter loss only. Inputs use prior trajectories and contemporaneous context, not next-stop coordinates for filtering. Codes map to the matching directory version, and proxy score fusion is not full policy training.",
+        "example": "Filtering by the true destination's shopping district leaks the answer; use the user's current area and legal constraints."
+      }
+    },
+    "qa/recommendation:ha-moe/mechanism": {
+      "source_sha256": "3409e6fbe5328eba7a2edb14d9fa82bc22fbb481732cfc165df508b6dda5191c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why route HA-MoE experts by content heterogeneity and monitor domain DL-AUC?",
+        "answer": "In mixed feeds, frequent domains can dominate shared gradients. Contextual gates combine general and specialist experts, and per-domain metrics plus utilization reveal degradation masked by averages. More experts do not prove specialization.",
+        "example": "News volume can hide sports-video losses in aggregate scores, which domain monitoring exposes."
+      }
+    },
+    "qa/recommendation:ha-moe/basics": {
+      "source_sha256": "b0a84cca441e84be891b36dae2ddea64db36849da58af85cc52473910a8880b6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why choose HA-MoE experts by heterogeneity instead of one fixed model per content type?",
+        "answer": "Independent models cannot share common knowledge, while one tower can favor high-volume content. Gated combinations share useful general signals while retaining specialization, which must be measured rather than assumed from expert names.",
+        "example": "Sports news can use both a freshness expert and a sports specialist."
+      }
+    },
+    "qa/recommendation:ha-moe/comparison": {
+      "source_sha256": "7a85f2e66135d0358adaeddab8c3c9a64dda6a4301d6d60931301c14917e0546",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can LENS per-domain DL-AUC disagree with aggregate AUC?",
+        "answer": "High-volume domains dominate aggregates. Slice metrics and expert usage show which types are ignored and where gains originate. Monitoring does not guarantee learning; local NDCG did not rise, and lower head share is not a quality substitute.",
+        "example": "If video is 90% of traffic, a slight video gain can mask a large news regression."
+      }
+    },
+    "qa/recommendation:ha-moe/implementation": {
+      "source_sha256": "b517ab35a571bb6cb2dc97dd0d76536d34ce305c8942e6e368e15f3c18dac02d",
+      "reviewed": true,
+      "fields": {
+        "question": "Over what axis should HA-MoE apply gate softmax, and what should LENS group by?",
+        "answer": "Normalize per example over experts and align expert outputs before mixing. Record utilization by domain and time. Local session entropy proxies heterogeneity and measures a fixed expert set, not all open-web content.",
+        "example": "Give one news request weights over four experts; do not normalize news and video examples together."
+      }
+    },
+    "qa/recommendation:hap/mechanism": {
+      "source_sha256": "e4a48e27779f08289f40a7aa343d8eacd0879100783a8e5cb3184afd5b99675d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why harmonize HAP scores after routing difficult candidates to the strong branch?",
+        "answer": "Branch compute differs and raw score distributions may not be comparable. Difficulty routing allocates work and harmonization aligns rankings across branches. Misrouting can still lose key items, so measure ranking quality alongside compute.",
+        "example": "A light branch averaging 0.8 would unfairly dominate a strong branch averaging 0.4 without scale alignment."
+      }
+    },
+    "qa/recommendation:hap/basics": {
+      "source_sha256": "4f880fcd33bf8f58cae23f29675dd78de90703cd027252d8477998d07c7daffe",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does HAP allocate light or strong pre-ranking by candidate difficulty?",
+        "answer": "Easy negatives need little compute, while ambiguous candidates benefit from more interactions. Routing has cost and can err, sending important items to the light branch. Dynamic budgeting is not simply extra work for popular items.",
+        "example": "Quickly reject clearly irrelevant products and compare two nearly identical eligible products with the strong model."
+      }
+    },
+    "qa/recommendation:hap/comparison": {
+      "source_sha256": "03ad603d9978d5dde4021be2d43a64f5c714896f705f04fd4eaafc1d6f2039b9",
+      "reviewed": true,
+      "fields": {
+        "question": "What cross-path relation does HAP harmonization address beyond calibrating only the strong branch?",
+        "answer": "Items from both paths compete in one ranking; internal accuracy is insufficient. Harmonization aligns score scales and preferences across budgets to prevent route identity becoming an advantage. It can limit specialization, so measure cost and quality.",
+        "example": "A simple candidate scored 0.8 should not automatically beat a difficult valuable one scored 0.4 by a different branch."
+      }
+    },
+    "qa/recommendation:hap/implementation": {
+      "source_sha256": "9cf19a3344c5dd6bea267e982c391d23129e1acae2b7344080b787b628602d9c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish soft HAP training from actual compute budgets?",
+        "answer": "Soft mixtures can execute both branches even when a gate is near zero or one. Hard serving routes need explicit thresholds and fallbacks; local ranking proxies do not measure production latency.",
+        "example": "Running both networks then multiplying by a binary gate changes output but saves no FLOPs; verify the inactive branch actually does not run."
+      }
+    }
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:inside-jepa/implementation": {
+      "source_sha256": "4a84cfe374bf78e8430313c59b97fb68fe90e4f3c316126401fd6bcd34a47707",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is the four-entity K=8 state 256-dimensional, not 224 after removing diagonals?",
+        "answer": "Entity latents occupy 4×32 and ordered pair slots occupy 4×4×8. Padding and diagonals stay present but zero. JEPA uses detached EMA future targets; inverse dynamics needs differentiable online future state. Mixing them cuts a defining gradient.",
+        "example": "Zeroing diagonal relationships does not delete their 32 slots or shrink the predictor interface."
+      }
+    },
+    "qa/foundation-models:jepa-prediction-planning/mechanism": {
+      "source_sha256": "803ef9f0d2c0fdf81849b02ad1a58be5bc5479315cd0154ec2c5bc3e5893119a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why subtract decoding error on true next representations from decoding error on predicted ones?",
+        "answer": "Decoding error mixes encoder readability, decoder limitations, and prediction error. Using the same frozen decoder for both isolates excess error attributable to prediction more closely. It can be negative and must not be clipped. Long-horizon planning needs separate paired tests.",
+        "example": "If real representations decode two cells off and predicted ones three cells off, do not attribute all three cells to prediction."
+      }
+    },
+    "qa/foundation-models:jepa-prediction-planning/basics": {
+      "source_sha256": "8cd0cb9d4fb8b134a1331c4cfe01703fb786427b1ea48eb9ee1f9697fc93605c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does a small one-step JEPA latent loss not establish understanding of physical motion?",
+        "answer": "Latents use encoder-specific coordinates; closeness need not mean accurate position, angle, speed, or long-horizon planning. This work checks physical decoding and actual planning separately, with shared training scales.",
+        "example": "Similar latent vectors may decode to different object angles, so measure physical error and planning success."
+      }
+    },
+    "qa/foundation-models:jepa-prediction-planning/comparison": {
+      "source_sha256": "d6d21ed8a48a6f8313430f4703f66052ca9cd127b2ca02e1b13ad9b720e87e39",
+      "reviewed": true,
+      "fields": {
+        "question": "Why measure one-step physical error and planning success separately?",
+        "answer": "A planner repeatedly queries the model; errors can accumulate around key actions or alter search. One-step means miss closed-loop effects. Test actual planning with paired seeds and the same checkpoint and task.",
+        "example": "Better accuracy on common stationary states can lower average error even if near-collision mistakes make plans crash."
+      }
+    },
+    "qa/foundation-models:jepa-prediction-planning/implementation": {
+      "source_sha256": "c9d7065cd586c6097661bddb80832b3221098310ff30d08cfc6f2e541b03311f",
+      "reviewed": true,
+      "fields": {
+        "question": "Should negative E_excess be clipped to zero?",
+        "answer": "No. It is decoded error from predictions minus decoded error from true representations; predictions may happen to fit the frozen decoder better. Identical representations must yield zero. Fit state variance on shared training data, never refit the decoder on predicted test latents.",
+        "example": "True error three and predicted error two gives −1; clipping hides decoder extrapolation behavior."
+      }
+    },
+    "qa/foundation-models:lewam/mechanism": {
+      "source_sha256": "800e0c49cca7f70d4aa3c3552607263462324eafa6ea2a8bfe7a65afe468226d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why prevent LeWAM's noisy-action branch from seeing clean actions indirectly?",
+        "answer": "Clean actions supervise future dynamics for state queries but are unavailable to the deployed action policy. Indirect access through shared attention would let the noisy branch copy targets. Separate parameters alone do not prevent leakage; enforce visibility across layers.",
+        "example": "A provided “push left” label can train prediction but must not be read by the action generator and counted as a decision."
+      }
+    },
+    "qa/foundation-models:lewam/basics": {
+      "source_sha256": "dd19b69274de70ff8dd2a8562196472a40e47e4d2ccda7e78f63a00b0a5e6237",
+      "reviewed": true,
+      "fields": {
+        "question": "Why link predicting consequences with producing usable actions in LeWAM training?",
+        "answer": "A world model can predict an action's future without finding goal-reaching actions efficiently. A separate policy may not shape visual representations. Joint state, dynamics, and stochastic action learning shares signals, but does not remove isolation or execution requirements.",
+        "example": "Knowing a push moves an object is not the same as deciding which direction and distance to push."
+      }
+    },
+    "qa/foundation-models:lewam/comparison": {
+      "source_sha256": "e7345466dc92415db13ff9da2667f7e5e815383488c9bfbcd1807a4064d0a28c",
+      "reviewed": true,
+      "fields": {
+        "question": "How does action flow differ from wide Gaussian random search?",
+        "answer": "Flow matching learns velocities from noise to action data, proposing candidates nearer the learned distribution before planning in latent dynamics. Wide Gaussian search relies on unstructured coverage. Actual task advantage requires controlled validation.",
+        "example": "A learned proposal might favor plausible pushes along a table instead of many trajectories through it."
+      }
+    },
+    "qa/foundation-models:lewam/implementation": {
+      "source_sha256": "649859bf1102d780eb8cf6fbbcee46925aed0b1dc7f1df374d36e6af06969ffb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why refine actions with a proximity penalty but select by the original goal cost?",
+        "answer": "Adam penalizes deviations from the sampled plan to constrain refinement. Final selection compares unpenalized goal cost, retaining original samples in case refinement worsens them. Planning updates actions, not model weights, and does not guarantee real success.",
+        "example": "A refined action that deviates more can still win if it reaches the predicted goal more closely; keep the original if refinement fails."
+      }
+    },
+    "qa/foundation-models:locale-jepa/mechanism": {
+      "source_sha256": "8ca20db3de04a98a632811c73429d94f07f2007ab2c6462335dcf5789b80a26e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not pull all LocaLeJEPA clusters toward one Gaussian?",
+        "answer": "Local clusters have different geometries and positions. A global pull can destroy layout. Fix group assignments, recenter residuals per cluster, and match a uniform solid-ball distribution, with an explicit small-cluster fallback.",
+        "example": "Two clusters for different motion modes can keep distinct centers while each has a regular local shape."
+      }
+    },
+    "qa/foundation-models:locale-jepa/basics": {
+      "source_sha256": "dcc11a76f95e3b1d11ff0cd0d28c424add8303c1d672ea2885a1880abe21a794",
+      "reviewed": true,
+      "fields": {
+        "question": "Why prevent collapse if two views of the same image should agree?",
+        "answer": "A constant vector also gives perfect view agreement. LocaLeJEPA wants invariance across augmentations and distinguishable representations across inputs while respecting local geometry. A low agreement loss does not establish useful features.",
+        "example": "Cat crops should be close, but collapsing cats and cars together ruins retrieval."
+      }
+    },
+    "qa/foundation-models:locale-jepa/comparison": {
+      "source_sha256": "007ae32825d02cfd2a452e4f887fef390b03f16e856244d71a96a1877534d801",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a uniform solid ball differ from a Gaussian or a unit sphere surface?",
+        "answer": "The solid ball puts mass inside radius √(d+2), giving identity covariance. A Gaussian is unbounded and a sphere surface has mass at a fixed radius only. Their characteristic functions differ. Gaussian formulas or vector normalization cannot replace the target.",
+        "example": "A uniform disk includes points near its center; a circle does not, and a Gaussian extends to arbitrary radius."
+      }
+    },
+    "qa/foundation-models:locale-jepa/implementation": {
+      "source_sha256": "84fcc4edac234d899c81122cf029f839363561625cfefe3813ab44e931015ccc",
+      "reviewed": true,
+      "fields": {
+        "question": "How do small-cluster filtering and cluster count change regularization strength?",
+        "answer": "Keep clusters with at least four samples; fall back to the full batch and log it if none qualify. Multiply each cluster statistic by sample count, then average equally over valid clusters and views. Count changes both granularity and scale. Integrate the ball characteristic function, not a Gaussian target.",
+        "example": "Splitting into more valid small clusters changes the value through weighting and averaging even with the same λ."
+      }
+    },
+    "qa/multimodal-models:mice/mechanism": {
+      "source_sha256": "52e8582545a8097b06ac24e6a5a6003c93b5d7922712b885c0d2ebeb0c4c35e7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why need both text-group isolation and smooth spatial bias for multi-instance editing?",
+        "answer": "Text isolation stops one instruction directly modifying another group's semantics. Smooth spatial bias binds edits to instances while blending at boundaries. Hard cuts can show seams; global text can leak color. This attention control does not train a new editor.",
+        "example": "Keep “left shoe red” and “right shoe blue” semantically separate while blending each localized edit naturally."
+      }
+    },
+    "qa/multimodal-models:mice/basics": {
+      "source_sha256": "cad2d346dcfe8a9ae5b186a9b2a577a2f7d15a356b81fa8ad1cddbb5bc467511",
+      "reviewed": true,
+      "fields": {
+        "question": "How does attribute leakage violate a multi-instance edit?",
+        "answer": "Different objects may need different changes, but unbound color, shape, or texture can spread to other objects. MICE maintains local assignments and contextual blending without new training. Success is applying each requested change only to the right instance, not just making a prettier image.",
+        "example": "Left cup red and right cup blue should not yield two purple cups."
+      }
+    },
+    "qa/multimodal-models:mice/comparison": {
+      "source_sha256": "2791b5c995bf6ae27283336098ac62f6fd687214f318a91de29b0dde9916f2bc",
+      "reviewed": true,
+      "fields": {
+        "question": "How does smooth spatial bias differ from a hard mask outside the region?",
+        "answer": "Log-smoothed masks give finite negative bias that fades near boundaries; hard masks prohibit interactions. Unrelated text groups still use negative infinity, and pixels belonging to other instances are zeroed. Local behavior follows paper_v1, not every author default.",
+        "example": "Weak interactions near a shadow can aid blending while isolating another instance's exclusive pixels."
+      }
+    },
+    "qa/multimodal-models:mice/implementation": {
+      "source_sha256": "f2d40ccfa2cf7979444d9f3af3de5a2970703e813416e938d515fcedd65ea225",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use at least float32 for ε=10^-30 and avoid arbitrary context-to-vision masks?",
+        "answer": "FP16 can underflow ε and turn finite log bias into −∞. Softmax and accumulation need at least FP32. The local implementation follows text Case 5: context sees the full visual domain without spatial bias, rather than mixing incompatible diagram or processor defaults.",
+        "example": "Computing log(ε) after underflow changes intended soft decay into a hard exclusion."
+      }
+    },
+    "qa/foundation-models:oob-regularization/mechanism": {
+      "source_sha256": "4216738298dfc431e45ebe7104153e7baa84ed55451993997d2550b6f978610a",
+      "reviewed": true,
+      "fields": {
+        "question": "How does OOB provide near-dataset-scale anti-collapse supervision with a small batch?",
+        "answer": "Periodically encode the training set and cache anchors per sample, then read fixed targets during small-batch optimization. This avoids estimating the full distribution every step but requires refresh as the model changes. It is not a minibatch variance or covariance loss.",
+        "example": "If memory holds eight images, precompute full-training-set quantile targets and match each of those eight to its own anchor."
+      }
+    },
+    "qa/foundation-models:oob-regularization/basics": {
+      "source_sha256": "e3e52f62659d4b71db40ffad1c69d979e55050deee3268784a8967e99a18e4ae",
+      "reviewed": true,
+      "fields": {
+        "question": "Why might a small-batch SSL model align views without learning distinguishable features?",
+        "answer": "Positive alignment alone allows a constant encoder. Anti-collapse needs overall spread, which small batches estimate poorly. OOB uses broader statistics under memory constraints, but downstream performance still needs independent evaluation.",
+        "example": "Several similar embeddings may reflect genuinely similar images or global collapse; view agreement alone cannot tell."
+      }
+    },
+    "qa/foundation-models:oob-regularization/comparison": {
+      "source_sha256": "1c38b3bc28e795a7ce8e153f51245ef7642f3f8b7fc47f9ac2da698c5270a6fa",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Gaussian sorted-quantile matching differ from enforcing zero mean and unit variance?",
+        "answer": "Sorted quantiles assign normal targets to samples along random projections, constraining distributions and assignments. Mean and variance constrain only two moments. This is not the original Epps–Pulley statistic; matched baselines need the same quantile loss.",
+        "example": "Equal mass at −1 and +1 has mean zero and variance one but not normal quantiles."
+      }
+    },
+    "qa/foundation-models:oob-regularization/implementation": {
+      "source_sha256": "4e49df07dba4d46d6c3e63077e693860c5a4b2a582e16b150b71711b4f0aa32e",
+      "reviewed": true,
+      "fields": {
+        "question": "How should refresh directions, targets, and gradients be isolated?",
+        "answer": "Freeze refreshed directions and per-sample targets, detach them and store on CPU. Normalize online loss by batch B, views V, and directions M; no gradients through refresh. The spherical variant optimizes unit anchors, not Gaussian targets. Stable sample IDs are required.",
+        "example": "After dataloader shuffling, look up each original ID rather than pairing the first cached anchor with the first current image."
+      }
+    },
+    "qa/foundation-models:ppmem/mechanism": {
+      "source_sha256": "d7936d5f62d2d664b7589a64b721c231b81ca40f0cfba285ecee8e3b92ce0c27",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is plane eviction using the next camera path not reading real future video?",
+        "answer": "The path can be a provided generation control: it says where the camera will point, not what real pixels will appear. The plane pool prepares for better observations, but the model must generate them. Unknown future observations or gold geometry would be leakage.",
+        "example": "A specified orbit around a table tells where to look without revealing the texture on the back."
+      }
+    },
+    "qa/foundation-models:ppmem/basics": {
+      "source_sha256": "92bb7249f5b2b48b5f53a164de91a2c943eeb9da3e0551d59fe0afda0816f867",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do long video generators forget scene layout when returning to an old viewpoint?",
+        "answer": "A few recent frames omit earlier geometry; storing all pixels or points is costly. PPMem maintains compact rasterizable planes across chunks for revisits. Planes approximate scenes and still need occlusion/error management. Persistence alone is not consistency.",
+        "example": "When a camera returns to a desk, persistent memory can preserve a bookshelf that has been absent from recent frames."
+      }
+    },
+    "qa/foundation-models:ppmem/comparison": {
+      "source_sha256": "e6e49bca8407fb28f0db04afb3770b196ed56509b6a4f45c496b41dc64a0c7d7",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a persistent plane pool differ from conditioning only on recent frames?",
+        "answer": "Recent context forgets distant views. A world-coordinate pool supplies geometry during revisits and requires occlusion voting, quality deduplication, and eviction. Known future camera pose does not supply real future video.",
+        "example": "A room orbit can reuse an old wall while eviction knows the next camera location, not future pixels."
+      }
+    },
+    "qa/foundation-models:ppmem/implementation": {
+      "source_sha256": "3eafb60f5e23f4fbc8f2757c0f2e48306c0ea2ece6c74c546721c449909bcb02",
+      "reviewed": true,
+      "fields": {
+        "question": "Is geometry LoRA enabled at every video denoising step?",
+        "answer": "No. Denoise with the frozen stage-one backbone and geometry LoRA off. After generating video, run one extra geometry forward with LoRA to extract planes. Training also uses depth, normals, rasterization, and smoothing, with no rasterization loss in the first thousand steps. Local status is documentation only.",
+        "example": "Generate a 25-frame chunk through multiple steps, then extract planes once and merge the pool."
+      }
+    }
+  }
+}

@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:moba/comparison": {
+      "source_sha256": "d08db1f84d3c65f89e227f136117d0f6a89be71882e9480d1598524bf0b34348",
+      "reviewed": true,
+      "fields": {
+        "question": "What can content-routed MoBA recover that a recent window cannot?",
+        "answer": "A window excludes positions by age. Routing can recover relevant distant blocks but can still miss evidence. Cost depends on block size and routing budget; it is not lossless pruning.",
+        "example": "A name at the beginning can return through content matching instead of being automatically excluded."
+      }
+    },
+    "qa/foundation-models:moba/implementation": {
+      "source_sha256": "7e469a97cf65f32092970bc9ec4736c26004c24062700ad0ad47657b24ca2794",
+      "reviewed": true,
+      "fields": {
+        "question": "Does selecting the current MoBA block remove the need for causality inside it?",
+        "answer": "No. Mask positions after the query inside the selected block. The local eight-token, top-two configuration is not a million-context fused kernel.",
+        "example": "Word three cannot read word seven merely because both share an eight-token block."
+      }
+    },
+    "qa/foundation-models:mobius-rope/mechanism": {
+      "source_sha256": "567a72d201a7c7e68e4a1e8585126f20ab307f99d18c5bbee137230fc0c1f9f0",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Möbius position encoding differ from standard RoPE across a training window?",
+        "answer": "Antiperiodic frequencies on some heads yield −I at one window and I at two. Other heads retain standard RoPE for language modeling. This changes positional geometry, not accessible history or guaranteed retrieval at all lengths.",
+        "example": "At N positions the selected heads reverse phase; at 2N they realign. Actual retrieval still depends on Q/K and training."
+      }
+    },
+    "qa/foundation-models:mobius-rope/basics": {
+      "source_sha256": "036e56295af12ceb87213a61fc576a59bce29e75ddc572db1aabe0c7d40e8eab",
+      "reviewed": true,
+      "fields": {
+        "question": "What retrieval instability is Möbius RoPE intended to address?",
+        "answer": "Standard RoPE long-range needle retrieval can vary strongly by training seed. Antiperiodic frequencies on some heads aim to stabilize cross-window phase while leaving others unchanged.",
+        "example": "Identical needles in long text can produce very different retrieval results across seeds."
+      }
+    },
+    "qa/foundation-models:mobius-rope/comparison": {
+      "source_sha256": "fecf9a8c628d71c2d19e51ada00a9309dbf8d29d521b8a75831f3da9fac4a781",
+      "reviewed": true,
+      "fields": {
+        "question": "What explicit frequency boundary does Möbius add?",
+        "answer": "Set some two-dimensional frequencies to π(2i+1)/N, producing −I across N and I across 2N. Other heads keep standard RoPE. This is geometry, not measured improvement.",
+        "example": "Reverse phase after one window and recover after two, not arbitrary scaling across every head."
+      }
+    },
+    "qa/foundation-models:mobius-rope/implementation": {
+      "source_sha256": "ed44bf627f07d54419b3f092abc8ccf85afc5d8e608bd6a1aba25a8dd88133b9",
+      "reviewed": true,
+      "fields": {
+        "question": "Should Möbius RoPE change N dynamically with inference length?",
+        "answer": "No. N is fixed training context; local N=64 replaces one of four heads. Dynamic N changes frequencies for identical positions and breaks the boundary definition. Retain negative local results.",
+        "example": "Length-32 and length-80 inputs both use the same training N."
+      }
+    },
+    "qa/foundation-models:ms-gla/mechanism": {
+      "source_sha256": "2bfd2726f62f4f6cf50594e76ecf40f6193217b0e53a8fe69186bbbf86f1142e",
+      "reviewed": true,
+      "fields": {
+        "question": "How does MS-GLA avoid leaking later tokens when pooling a block?",
+        "answer": "Each coarse branch masked-averages nonoverlapping blocks and runs GLA. A summary becomes visible only at the block end; causal hold restores token resolution without broadcasting into earlier positions. Input-conditioned weights fuse scales.",
+        "example": "In a four-token block, position two cannot see the average including positions three and four."
+      }
+    },
+    "qa/foundation-models:ms-gla/basics": {
+      "source_sha256": "0f4a654c4d9e55d69d47c6dc945c1735f3536933c59f74731a4955996f6bcc35",
+      "reviewed": true,
+      "fields": {
+        "question": "Why give MS-GLA heads different temporal scales?",
+        "answer": "One resolution can bottleneck representations. Some heads preserve token-level variation, others use pooled history, and their outputs combine.",
+        "example": "Phrase detail and trends across phrases can use different update rates."
+      }
+    },
+    "qa/foundation-models:ms-gla/comparison": {
+      "source_sha256": "70fb73f4ffddbfaebccc5830ffca156826255808f62b5971cb9019764bf0bd9c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is multiscale GLA more than a larger window?",
+        "answer": "Each scale pools at a different nonoverlapping granularity before GLA, changing temporal update resolution. Extending a window still updates at the original rate.",
+        "example": "Updating once per four words differs from updating every word while looking farther back."
+      }
+    },
+    "qa/foundation-models:ms-gla/implementation": {
+      "source_sha256": "6767a116c5c853a27f318281d0c753c7b4f024ae4ef59d8287b1b94d793e7196",
+      "reviewed": true,
+      "fields": {
+        "question": "When may tokens access scale-four pooled state?",
+        "answer": "At or after the block's final token. Use causal hold and input softmax fusion rather than broadcasting full means to every token.",
+        "example": "Token one cannot use the average of words one through four before word four arrives."
+      }
+    },
+    "qa/foundation-models:naju/mechanism": {
+      "source_sha256": "893e7dcbab7e84ffbc01e2828ff172cb38fc1843fd8819e40355068adc60d809",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate retention and writing rather than use complementary gates in Naju?",
+        "answer": "A complementary write would shrink whenever retention is strong. Independent gates on native discrete dynamics can preserve old state and write new evidence together. Token-dependent directions, convolution, and feedthrough still matter.",
+        "example": "Keep a name while adding age instead of erasing the name in proportion to the new write."
+      }
+    },
+    "qa/foundation-models:naju/basics": {
+      "source_sha256": "515032d2767429fd927bdfef73fbfa968fb5e274bee6705df8d6dd79fca35132",
+      "reviewed": true,
+      "fields": {
+        "question": "Why independently control old-state retention and new writes?",
+        "answer": "A shared complementary gate creates a tradeoff. Separate retain/write gates in the discrete transition let both adjust independently.",
+        "example": "Reading an important new fact need not erase an old fact."
+      }
+    },
+    "qa/foundation-models:naju/comparison": {
+      "source_sha256": "eb1ff605fa7509a0446aebd4194ac2cf0e5b7b9b36a1e598b7b7e6b2af02b1de",
+      "reviewed": true,
+      "fields": {
+        "question": "How do Naju's native discrete poles differ from Mamba discretizing continuous dynamics?",
+        "answer": "Naju directly parameterizes discrete retention. Mamba derives a transition from continuous dynamics and input-dependent time steps. Both recur but formulas and gate coupling differ.",
+        "example": "One learns the retained fraction per step directly; the other derives it from a time step and continuous matrix."
+      }
+    },
+    "qa/foundation-models:naju/implementation": {
+      "source_sha256": "4fc19bbc0cf6ab4e1c6222d25632542bea881698e9e3b4f42406cca493373144",
+      "reviewed": true,
+      "fields": {
+        "question": "How should preserve-first initialization set Naju's two gates?",
+        "answer": "forget_bias=5 and write_bias=−2 create strong initial retention and weak writes. Retain token-dependent B/C and direct feedthrough.",
+        "example": "Sigmoid(5)≈0.993 and sigmoid(−2)≈0.119 are not equal gates."
+      }
+    },
+    "qa/foundation-models:native-sparse-attention/mechanism": {
+      "source_sha256": "8c0bdad08dc4037a7d877e2d039341ebd662ea1bc8cbf8e5276e5c1fc44d710d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain original blocks and a sliding window in addition to compressed NSA history?",
+        "answer": "Compression gives cheap global context but can lose details. Query-selected original blocks recover precise evidence, and a window covers recent tokens. All three paths learn and fuse from pretraining and remain causal.",
+        "example": "A summary can identify the chapter about dates; exact selected tokens resolve the year and the window preserves current qualifiers."
+      }
+    },
+    "qa/foundation-models:native-sparse-attention/basics": {
+      "source_sha256": "5232b681467821d4a283f93ca8bcd83a16654f18d37440fd8a22e7a640702d77",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use compression, selection, and window paths together?",
+        "answer": "They provide global overview, exact selected detail, and exact recent context, respectively. Learned gates combine them; one sparsity pattern need not serve all roles.",
+        "example": "Get topic summary, a distant key sentence, and current phrase detail from different paths."
+      }
+    },
+    "qa/foundation-models:native-sparse-attention/comparison": {
+      "source_sha256": "4cd0c9b79d41749b32786f505ca3998df663aa91b263f3fda3e1e29f62d1acd3",
+      "reviewed": true,
+      "fields": {
+        "question": "How does NSA differ from pruning low attention weights after training?",
+        "answer": "Three paths and their gates are trained jointly from pretraining, changing what the model learns to access. Post-hoc deletion from a dense model does not provide the same adaptation.",
+        "example": "The model learns to trade summary and detailed blocks rather than suddenly losing history."
+      }
+    },
+    "qa/foundation-models:native-sparse-attention/implementation": {
+      "source_sha256": "ac227aa3b43f977eca7fc53bac669e4129d665bcc42875c125c5eb796cdb8edd",
+      "reviewed": true,
+      "fields": {
+        "question": "Do all three NSA branches need causal boundaries?",
+        "answer": "Yes. Compressed blocks, selected fine blocks, and windows cannot expose future information. Align output dimensions before gated fusion. Local edge counts do not measure paper Triton throughput.",
+        "example": "Mask future words in a selected block spanning the query position."
+      }
+    },
+    "qa/foundation-models:oal/mechanism": {
+      "source_sha256": "b0b71e40c7de85c7abf1fc00a0d44be4fafd606dd7b9724cd5622842bb05009b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why group QK contribution dimensions and calibrate OAL against output error?",
+        "answer": "A few coordinates can dominate softmax approximation error. OAL finds stable post-RoPE groups and learns positive-definite quadratic kernels for shared groups and pairs. Vectors after aggregation, not only weights, reveal impact; positivity protects normalization.",
+        "example": "Equal weight errors have different effects if one location has a large or very different value."
+      }
+    },
+    "qa/foundation-models:oal/basics": {
+      "source_sha256": "f0d20045229de0fdf7afb660725588571185fb1ff2c3ad5d6fd94e370c39a038",
+      "reviewed": true,
+      "fields": {
+        "question": "Why focus on high-contribution post-RoPE QK coordinates?",
+        "answer": "Coordinate contributions are uneven; a high-contribution tail can dominate error. Grouping and positive quadratic kernels target these differences rather than treating every coordinate alike.",
+        "example": "A few coordinates driving most score changes merit different approximation from low-contribution ones."
+      }
+    },
+    "qa/foundation-models:oal/comparison": {
+      "source_sha256": "0555b79ef0bd845dd4ee434b39a56209db3273c5c8047d069dd530a0990f9edb",
+      "reviewed": true,
+      "fields": {
+        "question": "How does OAL output MSE differ from fitting attention weights?",
+        "answer": "Output depends on values and normalized aggregation, so equal weight errors can affect outputs differently. Calibrate the kernel to actual readouts.",
+        "example": "Swapping weights on identical values changes nothing, unlike swapping opposite values."
+      }
+    },
+    "qa/foundation-models:oal/implementation": {
+      "source_sha256": "49f3b06b6df9fee24e64a460046507273618251f37e7eeda80ebddc5940701b4",
+      "reviewed": true,
+      "fields": {
+        "question": "Which OAL grouping, calibration, and initialization choices may use test data?",
+        "answer": "None. Train supports grouping, calibration, and LoRA; validation selects initialization and checkpoint; test comes last. Keep ε in the positive kernel to ensure a positive denominator.",
+        "example": "Do not replace the validation-selected kernel with one found better on test and report that same test again."
+      }
+    },
+    "qa/foundation-models:oda/mechanism": {
+      "source_sha256": "ce3c8db3ab84bdf10d79e2f448fadf370df1aa3541e5d9b90c9a06a13d4f4ece",
+      "reviewed": true,
+      "fields": {
+        "question": "When does On-Demand Attention trigger global retrieval?",
+        "answer": "A cheap recall head predicts benefit before expensive global attention and triggers it only for worthwhile tokens. Full KV stays stored; it saves some reads, not cache capacity. Misses can hide relevant distant evidence.",
+        "example": "Punctuation may use local context, while quoting an opening number triggers global reading; decide before paying for it."
+      }
+    },
+    "qa/foundation-models:oda/basics": {
+      "source_sha256": "2615aeee7a72b450ace27a37cfc6b4ae7de75d27a5b734d2c839bc56a10d0fd1",
+      "reviewed": true,
+      "fields": {
+        "question": "Are ODA local and remote history divided by importance?",
+        "answer": "No. They describe distance relative to the current token. Relevant evidence can be far and nearby words irrelevant, motivating optional global reads.",
+        "example": "A name at the document start can be critical outside the current window."
+      }
+    },
+    "qa/foundation-models:oda/comparison": {
+      "source_sha256": "c807b32e3b4a9599b7900f9444f91b7007ea080ab5db805eb017dfa20b03c4b7",
+      "reviewed": true,
+      "fields": {
+        "question": "How does on-demand retrieval differ from evicting old KV?",
+        "answer": "ODA retains all KV and varies when it is read. Eviction removes historical entries from the accessible set and changes memory capacity as well.",
+        "example": "A token skipped now may still be retrieved next step if retained."
+      }
+    }
+  }
+}

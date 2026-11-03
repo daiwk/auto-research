@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/post-training/data-and-budget": {
+      "source_sha256": "c474aadd20de5eae3caab5663367ced3bcb5652da01c5920e7f62cf1c4fa2e97",
+      "reviewed": true,
+      "fields": {
+        "title": "Which compute changes: question selection, shorter generation, branching, or conditional replay?",
+        "thesis": "Data and budget methods intervene at different points in training. Curricula reassess current difficulty, LESSER reduces selection-feature cost, STOPD randomly generates less and corrects estimates, BranchOPD adds important branches, Lightning caches teacher scores, and TAR retrieves suppressed correct modes. One fewer teacher call does not mean the entire run costs less.",
+        "axis_0": "Selection unit: question, token position, suffix, or historical trajectory",
+        "axis_1": "Extra costs: difficulty estimation, forward features, teacher scoring, and bank construction",
+        "axis_2": "Statistical contracts: inverse-probability weights, independent branches under a fixed policy, and cache consistency",
+        "axis_3": "Student changes: difficulty reassessment, current log-probability refresh, and gates for suppressed modes"
+      }
+    },
+    "dive/post-training/data-and-budget/comparison/post-training:grpo-difficulty-curriculum": {
+      "source_sha256": "c2e00ead2fd450fc4f26a938b6d2c65ec756f6ee8deb22500eafee4b50efe20a",
+      "reviewed": true,
+      "fields": {
+        "position": "Reassesses question difficulty from actual rollout success of the current policy and retains samples by curriculum stage.",
+        "tradeoff": "Difficulty is not length or a permanent label. The local scaled curriculum and B5 control do not reproduce the full original progression."
+      }
+    },
+    "dive/post-training/data-and-budget/comparison/post-training:lesser": {
+      "source_sha256": "91664817a71fc9ebef2d499497c845a1d62899f5cbd8d51b5440677b52133d6b",
+      "reviewed": true,
+      "fields": {
+        "position": "Uses one forward pass to compute analytical output-layer gradient features instead of expensive per-example full-parameter gradients, without changing the selection rule.",
+        "tradeoff": "The feature formula applies with an independent readout; it is not full-model gradient equivalence. Current evidence uses fixed random tensors, not downstream LLM training."
+      }
+    },
+    "dive/post-training/data-and-budget/comparison/post-training:stopd": {
+      "source_sha256": "80ce7a7db9e72d07f647ffe3c1e6685477000eeb1e3157d73496433098f40015",
+      "reviewed": true,
+      "fields": {
+        "position": "Samples anchors and sets block cutoffs independently before generation, weighting retained tokens by exact inclusion probability.",
+        "tradeoff": "Unbiasedness concerns the gradient sum, not equality of normalized Adam updates. Full long rollouts were not reproduced; a real short-policy L1 component exists."
+      }
+    },
+    "dive/post-training/data-and-budget/comparison/post-training:branch-opd": {
+      "source_sha256": "8cc33d260305fd3f1fd00d48e37a9d7acbee4182909c404897f8c9c2f4603849",
+      "reviewed": true,
+      "fields": {
+        "position": "Chooses forks by student uncertainty and teacher–student disagreement, samples independent suffixes from the same frozen student, and counts shared prefixes once.",
+        "tradeoff": "Spends more budget at important states, not truncation or teacher forcing. The local short checkpoint lacks an executed equal-budget single-path baseline."
+      }
+    },
+    "dive/post-training/data-and-budget/comparison/post-training:lightning-opd": {
+      "source_sha256": "69b532ec10cd3ab4099ed377cdd7b00ffe2d55b1ab6af96acecfcf317f721923",
+      "reviewed": true,
+      "fields": {
+        "position": "Samples student trajectories and caches a consistent teacher's one-time scores for training.",
+        "tradeoff": "Moves teacher cost into prefilling, not zero teacher cost or continual trajectory refresh. The local candidate cache does not reproduce Qwen token-distribution training."
+      }
+    },
+    "dive/post-training/data-and-budget/comparison/post-training:tar-adaptive-replay": {
+      "source_sha256": "2b48c1da601411a8b99c2e9bcffc3c109ca6e56d202866174d5e8df592b6656a",
+      "reviewed": true,
+      "fields": {
+        "position": "Builds a diverse prototype bank from correct base trajectories and replays only trajectories and tokens that the current policy suppresses relative to the base.",
+        "tradeoff": "Count bank generation and verification costs; the bank is finite. Full experiments were not reproduced and the random-model L1 diagnostic does not establish semantic diversity."
+      }
+    },
+    "dive/post-training/data-and-budget/analysis/0": {
+      "source_sha256": "c9398fdb12301e4ef8b57ca6dd4705075f53644939968729a1a4b6d232d3d4ac",
+      "reviewed": true,
+      "fields": {
+        "title": "Hard questions are not necessarily the most valuable for the current student",
+        "body": "The curriculum uses current success rates, so an example can move into or out of a difficulty band after an update. LESSER approximates task-relevant gradient features rather than selecting by length or mistakes. Curriculum estimation costs rollouts, while LESSER needs candidate and target-query forwards. Compare total selection costs and never draw target queries from final test."
+      }
+    },
+    "dive/post-training/data-and-budget/analysis/1": {
+      "source_sha256": "981cd8196ab3865d7b62ae2ce1adf358c7cafb60fca2eec372eb871d2ed1d202",
+      "reviewed": true,
+      "fields": {
+        "title": "Generation, scoring, and replay are different costs",
+        "body": "STOPD randomly truncates before generation and corrects by retention probability. BranchOPD expands student suffixes at a fork without duplicating prefix credit. Lightning caches teacher scores; TAR caches verified base behavior and activates it according to current suppression. They add or remove different work, so neither training-step count nor teacher calls during training alone suffice."
+      }
+    },
+    "dive/post-training/data-and-budget/question/hardness-versus-selection-value": {
+      "source_sha256": "6241174d8168504be1a90306dc6cde3daec81c16f56de661956836c32a40bee6",
+      "reviewed": true,
+      "fields": {
+        "question": "If a curriculum finds a question too hard, should LESSER also discard it?",
+        "answer": "Not necessarily. A curriculum selects by current policy success, while LESSER applies its selection rule to candidate and target-query output gradients. A difficult example may share target knowledge or be beyond reach; difficulty alone does not determine gradient relevance. Both incur selection costs.",
+        "example": "Teaching example: A domain question the student cannot yet solve may still share a target gradient direction. That neither guarantees value nor makes it zero."
+      }
+    },
+    "dive/post-training/data-and-budget/question/cutoff-versus-branch": {
+      "source_sha256": "f0879725c8ee8c0c9ad1a65d31490dbfabbc7ecf6e7f744be9ad54840ebe8932",
+      "reviewed": true,
+      "fields": {
+        "question": "STOPD and BranchOPD both change suffix budgets. Why not use the same early stop?",
+        "answer": "STOPD randomly fixes a cutoff before generation and corrects retained tokens by inclusion probabilities. BranchOPD selects a fork and independently samples multiple continuations from the same frozen policy, counting the prefix once. One observes less and reweights; the other explores more at key states. Arbitrary post hoc truncation has neither contract.",
+        "example": "Teaching example: Randomly stopping at token 64 and branching into three continuations at token 64 are opposite uses of budget."
+      }
+    },
+    "dive/post-training/data-and-budget/question/teacher-cache-versus-behavior-bank": {
+      "source_sha256": "09236ddcfaf7343cff0bbaa383d1f808e632343ad7d3dc2d369cc9c1dfa7a8e3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does TAR need current student probabilities while Lightning and TAR both reuse data?",
+        "answer": "Lightning caches consistent teacher scores on initial student trajectories. TAR stores verified base behaviors and activates replay only where the current policy suppresses them relative to base, including token-level focus. A fixed bank does not fix weights, and zero teacher calls during training do not erase construction cost.",
+        "example": "Teaching example: A base solution still produced frequently can get zero TAR replay even though cached teacher scores still exist."
+      }
+    },
+    "dive/post-training/data-and-budget/update/2026-10-27/0": {
+      "source_sha256": "4259ae64265a43a726226466328d411252d60f5cfdb0847427bd3142b7661cb9",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial edition: compares curriculum/LESSER selection, STOPD short generation, BranchOPD branching, Lightning teacher caching, and TAR conditional replay; 38 abstracts reviewed and six papers read closely."
+      }
+    }
+  }
+}

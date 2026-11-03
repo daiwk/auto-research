@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:recal/basics": {
+      "source_sha256": "a0633e30fb124b969925c2adb441f57be156c472fc26796837498204c5a92202",
+      "reviewed": true,
+      "fields": {
+        "question": "Why account for recoverability before pruning in ReCal?",
+        "answer": "Severe pruning can induce poor student states that distillation struggles to repair. Probe damage informs channel reselection toward recoverable structures instead of relying solely on later training.",
+        "example": "Removing a key arithmetic path may not be fixed by simply distilling longer."
+      }
+    },
+    "qa/post-training:recal/comparison": {
+      "source_sha256": "d9c70d80635fdc4a381a6684ca59c0e3322b538e028ee204140c1b3bb325284e",
+      "reviewed": true,
+      "fields": {
+        "question": "How does damage-weighted calibration differ from activation-size pruning?",
+        "answer": "Probe teacher states for damage, then reweight unpruned model statistics. Activation magnitude alone ignores recovery. Match target width and restoration protocol for fair comparison.",
+        "example": "A rare but badly damaged state can gain calibration weight."
+      }
+    },
+    "qa/post-training:recal/implementation": {
+      "source_sha256": "ca593385f4de2d55a95b8802049fd581695e0a7090a81e82d27a9b36c9fc1178",
+      "reviewed": true,
+      "fields": {
+        "question": "May ReCal drop probability outside teacher top candidates and renormalize?",
+        "answer": "No. Keep top events and remainder mass to estimate damage. Normalize response damage weights to unit scale; zero damage becomes uniform. Recompute selection from unpruned stats.",
+        "example": "Movement outside top tokens is invisible after local renormalization."
+      }
+    },
+    "qa/post-training:recal/mechanism": {
+      "source_sha256": "8ce9a22ba15f3a2ad73779903556c35d9cd4f97c35c3ae07a95205a7591d3201",
+      "reviewed": true,
+      "fields": {
+        "question": "Why measure pruning damage on a probe but reselect channels on the unpruned model?",
+        "answer": "Probe reveals harmed teacher states; use their damage to reweight original activations. This can avoid poor student trajectories that are hard to repair. Preserve remaining vocabulary mass in damage KL.",
+        "example": "Raise calibration weight on carry states harmed by the probe instead of patching already removed channels arbitrarily."
+      }
+    },
+    "qa/post-training:pivot/basics": {
+      "source_sha256": "34c1188d876223e5c088640a893790293145de8355165b417441df068be1e7cd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why switch PIVOT prompts to RL individually?",
+        "answer": "Students are not equally ready on all prompts. Uniform switching removes guidance too early for hard cases. Rank teacher perplexity on student replies and expand RL among low-perplexity prompts.",
+        "example": "Let familiar tasks explore rewards while unfamiliar ones still distill."
+      }
+    },
+    "qa/post-training:pivot/comparison": {
+      "source_sha256": "7e7b7ff502d17b041c131cb5896adf8e687a2cc54a67443d095b161726155575",
+      "reviewed": true,
+      "fields": {
+        "question": "Why aren't teacher perplexity and verified correctness interchangeable?",
+        "answer": "Perplexity measures teacher support for student wording, not task result. High support can be wrong and low support an effective novel route. It is a routing proxy.",
+        "example": "Teacher unfamiliarity with phrasing does not make the conclusion false."
+      }
+    },
+    "qa/post-training:pivot/implementation": {
+      "source_sha256": "c75a398e7782398e038d531d00a8428d4af2a074f8c62ac1adbaa0e96915d322",
+      "reviewed": true,
+      "fields": {
+        "question": "How turn PIVOT response scores into problem routing?",
+        "answer": "Exponentiate each response's mean teacher negative logp, average per prompt, standardize within batch and choose lowest via cosine proportion. Preserve separate GRPO/OPD normalizations, not token-level routing.",
+        "example": "Don't decide a whole question from only its easiest completion."
+      }
+    },
+    "qa/post-training:pivot/mechanism": {
+      "source_sha256": "f29aeff182a0e20a4658b6fd9dd13fbbb4ffda52166a4b27338981bcfd860ca9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why route low-perplexity problems to RL earlier?",
+        "answer": "Teacher support on actual student responses indicates readiness for reward exploration. High perplexity retains supervision; aggregate by prompt and ramp RL share. This isn't a correctness or intrinsic difficulty test.",
+        "example": "Switch familiar teacher-supported steps sooner, while frequently divergent prompts continue distillation."
+      }
+    },
+    "qa/post-training:magicbeanstalk/basics": {
+      "source_sha256": "c98840a077af23b17003ba6c03b921fcd1fb1dd81dbec25a1217c1c5470f6288",
+      "reviewed": true,
+      "fields": {
+        "question": "Why recursively decompose and compose MagicBeanStalk problems?",
+        "answer": "All-fail hard tasks provide no advantage. Effective subproblem examples reveal dependency blueprints to synthesize new leaves and compose tasks with mixed current-policy outcomes. Valid format isn't efficacy.",
+        "example": "Practice manageable parts and recombine them without losing key dependencies."
+      }
+    },
+    "qa/post-training:magicbeanstalk/comparison": {
+      "source_sha256": "26d3be5f7e39b11ee6bb13f26e13eba39cba184fb7aa1c92d6ace104aa23ce3b",
+      "reviewed": true,
+      "fields": {
+        "question": "What do subproblem effectivity and target-policy Goldilocks each verify?",
+        "answer": "Effectivity asks if subexamples improve a student's parent success. Goldilocks requires mixed outcomes and at least one normally terminated success under target budget. One doesn't replace the other.",
+        "example": "An auxiliary learner may improve while target still fails every final sample."
+      }
+    },
+    "qa/post-training:magicbeanstalk/implementation": {
+      "source_sha256": "114d43039a80b251aed441b36dda3a6158d455e36e8dbea15fa0077f229407c6",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a well-formed local MBS problem be considered accepted?",
+        "answer": "No. Need complete correct solution, independent validation, blueprint/novelty and effectivity/Goldilocks checks. Retain real construction failures; isolated teacher diagnostics aren't acceptance.",
+        "example": "Valid JSON and dependencies do not rescue an unsolvable task."
+      }
+    },
+    "qa/post-training:magicbeanstalk/mechanism": {
+      "source_sha256": "0d9b2578ea7d171392108e4715d2f8d106c8d9f8acb2e5111a2201e3ea367a1e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't subproblem effectivity replace final Goldilocks selection?",
+        "answer": "Parent improvement checks decomposition on one learner. Final task must not be all-correct or all-wrong under target budget and needs normally completed correct trace. Local teacher probes don't complete recursive construction.",
+        "example": "Helpful subproblems for one student do not make a composed task learnable if target never solves it."
+      }
+    },
+    "qa/post-training:grpo-dropout/basics": {
+      "source_sha256": "f45354d08542b70d933ab1aa1f17468b3f7cb5e6abaf4aaae131a54611316d70",
+      "reviewed": true,
+      "fields": {
+        "question": "Why drop some high-probability positive-advantage replies in GRPODropout?",
+        "answer": "They can oversharpen common modes. Selectively drop by entropy contribution while retaining failures. It isn't neuron dropout and doesn't refund generated rollouts.",
+        "example": "Reinforce fewer repeats of a common successful template."
+      }
+    },
+    "qa/post-training:grpo-dropout/comparison": {
+      "source_sha256": "69ac0dedf71b831e3214c54dbe40fea42e702e9c8f937d41d2639b4b3bcf0115",
+      "reviewed": true,
+      "fields": {
+        "question": "How does response dropout differ in cost from generating fewer replies?",
+        "answer": "Generate full group then filter updates; fewer samples would reduce generation and coverage, changing estimator. Less backward work isn't equal end-to-end savings.",
+        "example": "Using six of eight generated replies does not cost only six generations."
+      }
+    },
+    "qa/post-training:grpo-dropout/implementation": {
+      "source_sha256": "45e623a4deee3dd81a475bd02f96c2307b31c8af4dc3e86bd16ae96d38e3380e",
+      "reviewed": true,
+      "fields": {
+        "question": "Can GRPODropout keep original centered advantages after filtering?",
+        "answer": "No. Restore all nonpositive samples and recenter retained ones by old-policy probability. Dropping either condition changes feedback/baseline.",
+        "example": "Removing strong positives shifts the reference and requires recentering."
+      }
+    },
+    "qa/post-training:grpo-dropout/mechanism": {
+      "source_sha256": "e32730d6ce0acc77ec797429b6e2c6a207e1c2d3ead7619d7b7c12f27ede53df",
+      "reviewed": true,
+      "fields": {
+        "question": "Why filter high-probability positives but retain all nonpositives?",
+        "answer": "Dominant successes can further reduce entropy; select by entropy contribution, not random removal. Preserve negative learning and recenter with old probabilities. Generation cost is already paid.",
+        "example": "Downweight repeated successful templates without turning failures into omitted feedback."
+      }
+    },
+    "qa/post-training:dial-opd/basics": {
+      "source_sha256": "0907c7d4926b218d8cc60643c7f244b00dfccae652be6fc2c9e65c90fd501094",
+      "reviewed": true,
+      "fields": {
+        "question": "Why multiply DIAL-OPD log gaps by logarithmic probability mean?",
+        "answer": "Tokens near impossible under both models can have large log differences. Scaling downweights such noise and prioritizes supported disagreements. Selection is not verifier truth.",
+        "example": "A bizarre word differing tenfold may matter less than a small gap on a key digit."
+      }
+    },
+    "qa/post-training:dial-opd/comparison": {
+      "source_sha256": "ca471098ef4868670ff141d2a869de949658622b1b5bf970b78051b495bb6e2f",
+      "reviewed": true,
+      "fields": {
+        "question": "How does sparse DIAL supervision differ from deleting unselected text?",
+        "answer": "Unselected tokens stay as context but have masked losses. Removing text changes later prefixes and teacher scores.",
+        "example": "Keep preceding arithmetic/connectives even when not training their tokens."
+      }
+    },
+    "qa/post-training:dial-opd/implementation": {
+      "source_sha256": "3d5e6562c9f413e7094c5a96d2ff6ec10d674bd4c2ab754f2be52fd8f3a4e664",
+      "reviewed": true,
+      "fields": {
+        "question": "How handle equal p and q in DIAL's logarithmic mean?",
+        "answer": "Use its continuous limit. Choose each response's own valid-position quota, detach advantages and differentiate final student logp only. Global ranking can let long answers dominate.",
+        "example": "Equal probabilities have a finite limit, not NaN or an arbitrary large score."
+      }
+    },
+    "qa/post-training:dial-opd/mechanism": {
+      "source_sha256": "e4748d48d1aa903a2a7b88ab86b85a3c741bad71c345c5004bcf987707024661",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not select solely by largest teacher–student logp gaps?",
+        "answer": "Huge gaps can occur in negligible mass. Logarithmic probability mean rescales priorities. Keep masked tokens as context; sparse supervision does not reduce generation or prove errors.",
+        "example": "An unlikely odd word should not drown out disagreement on a realistic key step."
+      }
+    },
+    "qa/post-training:lesser/basics": {
+      "source_sha256": "dcc196467bd7b77248e57b36ccff9aff5ddf9df60786adc25c91251ea7368699",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use output-layer gradients as LESSER selection features?",
+        "answer": "Full per-example backprop is costly. Independent readout gradient follows analytically from prediction residual and final hidden state in one forward, then project for the existing selector.",
+        "example": "Keep query similarity selection but replace expensive gradient features."
+      }
+    },
+    "qa/post-training:lesser/comparison": {
+      "source_sha256": "10583971565371c38dac341fab589eb1a7d9bcf2c28b2b0cc86a04e9d4531fe9",
+      "reviewed": true,
+      "fields": {
+        "question": "Is LESSER fully equivalent to full-model gradient similarity?",
+        "answer": "No. Exactness applies to an independent output layer; tied embeddings add hidden-state paths. Projection also approximates geometry and downstream performance needs testing.",
+        "example": "Similar final-layer directions do not guarantee similar middle-layer updates."
+      }
+    },
+    "qa/post-training:lesser/implementation": {
+      "source_sha256": "45e277abaafb700a74978054fe6baef368ba0ebb2451083779c15ee50aa42adf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why share random projections between LESSER candidates and queries?",
+        "answer": "Only shared coordinates support comparison. Project both residual and hidden sides without materializing the full outer product. Use validation query proxies, never test selection; local random tensors are diagnostics.",
+        "example": "Independent projection draws per sample destroy comparability."
+      }
+    },
+    "qa/post-training:lesser/mechanism": {
+      "source_sha256": "16a02052ac2ae26a8d0fa06bb409564a9a81a959d8d0088498af76405e34eab3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't one-forward analytic output gradient an exact full-model substitute?",
+        "answer": "The outer product is exact for an independent readout; shared bilateral projection compresses it for existing selection. Tied embeddings can introduce indirect gradients. Use validation proxies and isolate test. This is not all-layer gradient equality.",
+        "example": "Select training examples using readout gradients of validation queries, not test examples."
+      }
+    }
+  }
+}

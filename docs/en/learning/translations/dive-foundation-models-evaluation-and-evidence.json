@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/foundation-models/evaluation-and-evidence": {
+      "source_sha256": "af85fe7a0f106ba9129be1cc969ad746d90ff54b5eaaf31727484fbf044db9ea",
+      "reviewed": true,
+      "fields": {
+        "title": "Evidence of capability: scoring accurately, observing less, and explaining predictions",
+        "thesis": "Distinguish how correctness is defined, which example to test next, how judges are combined, and what an explanation says. XLGoBench, ProEval, FUSE, TCAB, and DetectorScope change different parts. Fewer observations and additive explanations do not imply stronger underlying capability.",
+        "axis_0": "Correctness labels, posterior overall scores, rankings, or additive explanations",
+        "axis_1": "When labels become available and who holds them",
+        "axis_2": "Deterministic algorithms, cross-model correlations, or verifier identification assumptions",
+        "axis_3": "Saving scoring calls, duplicate feedback, or explanation cost"
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/comparison/foundation-models:xlgobench": {
+      "source_sha256": "f3d244c52dfd9faed3ce6707dbba21e1ef7a238beccbfdbca509d2446ee1501d",
+      "reviewed": true,
+      "fields": {
+        "position": "Use deterministic algorithm tasks and exact scorers; the model sees the task/problem, never scorer gold.",
+        "tradeoff": "Measures specified families and complexities, not open QA. The five-task local slice omits the full language and complexity matrix."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/comparison/foundation-models:proeval": {
+      "source_sha256": "c14f6d9f65432c88ab0e97a88a62d6963dc45b63d6b8bb16b49e4f43dfbab0c5",
+      "reviewed": true,
+      "fields": {
+        "position": "Build an empirical GP from historical model-by-question correlations and choose informative observations for target-score estimation.",
+        "tradeoff": "Relies on transfer of historical relations. Target scores appear only after queries. A four-question math fixture does not establish real evaluation savings."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/comparison/foundation-models:fuse-verifiers": {
+      "source_sha256": "96fafe05c7d806f844107ce1e55c345d78ab759ac9fb4c6b290064d26ad0f309",
+      "reviewed": true,
+      "fields": {
+        "position": "Estimate verifier quality and correctness posteriors from a score matrix, then learn an ensemble; external evaluation keeps true labels.",
+        "tradeoff": "Assumptions such as better-than-random majority and conditional independence can fail with correlated judges. No local ensemble implementation."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/comparison/foundation-models:tcab": {
+      "source_sha256": "0a9bc8b432409c184d71478a33de5dcb17d08b5cb166b80cdbbcb0bdfa87c2b7",
+      "reviewed": true,
+      "fields": {
+        "position": "Use maximal coupling to share feedback when adaptive policies make identical choices, organizing shared decisions as a tree while preserving marginal trajectories.",
+        "tradeoff": "Correct coupling is required; outcomes cannot be copied to different actions. Local mini-suite does not establish asymptotic savings or production A/B gains."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/comparison/foundation-models:detector-scope": {
+      "source_sha256": "e4bf53caa10e7e3d296db46525f36b118ca5ccfb3bac92938e8187183b60d082",
+      "reviewed": true,
+      "fields": {
+        "position": "Screen external SAE concepts and apply a sparse linear head with logit contributions verifiable by zeroing pooled features.",
+        "tradeoff": "Feature attribution is not a causal effect of rewriting text. Local synthetic activations validate the L1 component, not a full detector or SAE."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/analysis/0": {
+      "source_sha256": "21720265bb0bb3930d9a646cb8db7d466fb2f6a34d2cea35b351bcdb1a9cc0d2",
+      "reviewed": true,
+      "fields": {
+        "title": "What do deterministic scoring and probabilistic surrogates answer?",
+        "body": "XLGoBench computes exact algorithmic answers for structured outputs. ProEval keeps task correctness fixed and predicts overall performance from observed scores. Posterior means and variances come from model relationships, not real scoring of every question. Combine the ideas by isolating scorer gold, then deciding which legitimate scores to pay for while separating inferred and observed outcomes."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/analysis/1": {
+      "source_sha256": "a5707bef4dfb8f8ec63835e1210e3c3b122e90226997cb77056d8ef2d3dca6d2",
+      "reviewed": true,
+      "fields": {
+        "title": "An extra layer of evidence is not automatically reliable",
+        "body": "FUSE uses multiple verifiers without true labels, but correlations and identification assumptions govern its posterior. DetectorScope decomposes logits exactly but shows only numerical contributions of pooled features, not truthful concepts or causal text effects. TCAB constrains marginal distributions under feedback reuse. These checks address different issues, and neither fluent explanations nor reuse rates verify capability."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/question/oracle-versus-surrogate": {
+      "source_sha256": "a318ea8f39eca327d5fddb82f673e86a6e82f330dcac43e4a3b9b71ed454a97d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must sparse ProEval testing still isolate real scorers and gold answers as XLGoBench does?",
+        "answer": "ProEval changes measurement selection and total-score estimation; observations still need legitimate task scoring. Leaking answers to the model or unqueried scores to the posterior contaminates results. Keep predictions, revealed scores, and scorer-internal gold separate.",
+        "example": "Query item two before reading its score. Initializing with all target scores defeats a small-query evaluation."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/question/posterior-versus-explanation": {
+      "source_sha256": "53a84a9cd416b4db25344b0088cc7457e4959077b76a3ca6b9a2b454fe6152ef",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are FUSE correctness posteriors and DetectorScope concept contributions not direct truth proofs?",
+        "answer": "FUSE estimates correctness under verifier behavior assumptions and can inherit correlated errors. DetectorScope measures the logit change when a pooled feature is zeroed, not whether a concept story is true or causally supported by text. Validate statistical reliability and explanations independently.",
+        "example": "Judges that all prefer long answers can share a mistake, and a strong detector feature may reflect a dataset shortcut."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/question/shared-feedback-versus-imputed-feedback": {
+      "source_sha256": "983fc4781e3d8e09166a97255a13d3befb85e379e527cc501798216a399fb77b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not record TCAB shared feedback and ProEval imputed scores as the same observations?",
+        "answer": "TCAB reuses real feedback only on valid coupled identical decisions while preserving each policy's marginal process. ProEval predicts unqueried scores using historical covariance. Neither licenses reporting a different action's outcome or an untested score as executed.",
+        "example": "Two policies choosing action A can share A's feedback. If another chooses B, its correlated history does not authorize assigning A's success to B."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/update/2026-10-27/0": {
+      "source_sha256": "685c53bfd78f88efa00f720088186022d7d036697835172c70661f9e6ab68ded",
+      "reviewed": true,
+      "fields": {
+        "summary": "Initial version: compared exact algorithm scoring, probabilistic evaluation surrogates, unlabeled verifier ensembles, feedback coupling, and additive concept attribution, separating observation from inference."
+      }
+    }
+  }
+}

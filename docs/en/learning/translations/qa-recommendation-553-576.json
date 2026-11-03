@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:linkedin-feed-sr/comparison": {
+      "source_sha256": "cc5bd020d6df8fe42382a55d20cdf69b0634a891ee05d19870f03385eb525744",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is evaluation without random negatives harder than testing one positive and a few random negatives?",
+        "answer": "Sampled sets often omit real competitors. Metrics vary with negative count and difficulty, potentially overstating ranking ability. A fuller pool better represents serving competition but costs more. Evaluation without random negatives does not imply no training negatives or justify comparing percentages across protocols.",
+        "example": "Illustration: Ranking among 99 irrelevant articles is easier than beating many similar articles in the full professional corpus. The metric can be named NDCG in both without measuring the same task."
+      }
+    },
+    "qa/recommendation:linkedin-feed-sr/implementation": {
+      "source_sha256": "9ea944f16f46fffef4c8683a9bd1673e7bb18407a742643e76cad2f6904b5adc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why validate candidate-independent history state before incremental serving in LinkedIn Feed?",
+        "answer": "A reusable prefix must not depend on the candidate being swapped. History and model changes also invalidate caches. Candidate attention may read shared state but must not reuse candidate-conditioned history for other candidates. The local core proxy lacks the full LinkedIn system and does not measure true long-sequence throughput.",
+        "example": "Illustration: A new article may read old history K/V through a different query. If the old article was written into that state, sharing it with the new one leaks candidate information despite fast execution."
+      }
+    },
+    "qa/recommendation:llatte/mechanism": {
+      "source_sha256": "8ff85660274b28a1e606b467edbf9412b2c0e2741386644066706c0cba6af1ca",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does LLaTTE still read recent history with candidate-aware attention after caching LLM user representations?",
+        "answer": "Async long-history encoding supports more compute but refreshes periodically and compresses details. The online short sequence adds recent behavior, and the candidate query picks relevant evidence. Stable knowledge and real-time relevance are distinct responsibilities. Measure transfer of upstream gains downstream instead of assuming all of them survive.",
+        "example": "Illustration: An overnight cache remembers photography, but a new backpack search signals travel. Online history adds the new intent and lets the current candidate read relevant knowledge."
+      }
+    },
+    "qa/recommendation:llatte/basics": {
+      "source_sha256": "ce5a6df9cd1167971773202390cdf1f643c7c5759bd89bb3960dca6d551af433",
+      "reviewed": true,
+      "fields": {
+        "question": "Why scale LLaTTE's async long history separately from the online short sequence?",
+        "answer": "The upstream model processes more history and caches an overview. The downstream model uses fresh events and candidate-aware interactions without rerunning the big model on each request. Each stage has a bottleneck, so measure compression and transfer efficiency rather than assuming all upstream gains reach serving.",
+        "example": "Illustration: A cached profile retains years of interests, while recent baby-product browsing can change ranking immediately instead of waiting for the next refresh."
+      }
+    },
+    "qa/recommendation:llatte/comparison": {
+      "source_sha256": "60a71806e1207730558f603aba0c12994214f55bf86f5a173b4417c6ef16ff84",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't LLaTTE's transfer efficiency τ just the upstream NE improvement?",
+        "answer": "A better upstream model need not yield proportional downstream gains: cache size, fusion capacity, and task objectives can discard information. τ compares the two improvements to help decide where to spend compute. A tiny denominator or mismatched protocols makes the ratio unstable; an empirical trend is not a theorem.",
+        "example": "Illustration: If upstream NE improves and downstream NE barely changes, candidate-aware fusion may be more useful than adding upstream parameters."
+      }
+    },
+    "qa/recommendation:llatte/implementation": {
+      "source_sha256": "d75018cb67ed31e7a1fb6dffb141e753f631143892afbd8093fc77883c67baf7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't LLaTTE's local four latent queries and recent-12 path establish the value of a 2,000-dimensional production cache?",
+        "answer": "The small setup trains long summaries, short history, and gating but does not fully measure production refreshes, roughly 400 online events, or multisource features. Verify gradient flow and candidate dependence, then report the matched short baseline and head exposure. Size differences cannot become measured QPS or conversion gains.",
+        "example": "Illustration: Four summary vectors reading 24 movie events test information flow, not the latency of a production cache over tens of thousands of multisource events."
+      }
+    },
+    "qa/recommendation:llm-ad-retrieval/mechanism": {
+      "source_sha256": "e28a4da7b8d58a78908c08bbe61ea312ee088564b9eb5fe169968bcb7dce3057",
+      "reviewed": true,
+      "fields": {
+        "question": "Why add A/A′ predictability checks to LLM ad retrieval instead of only measuring Recall?",
+        "answer": "Small edits preserving creative semantics can still change delivery sharply through IDs and sparse signals, without showing up in Recall. A primary/shadow pair measures conversion and exposure drift; hierarchical semantic attributes and an ad graph offer transferable connections. Control sampling noise before declaring a small difference a failure.",
+        "example": "Illustration: Rephrasing an ad without changing its meaning can nearly erase its impressions while standard hit rates remain good. A paired shadow ad specifically tests such sensitivity."
+      }
+    },
+    "qa/recommendation:llm-ad-retrieval/basics": {
+      "source_sha256": "b6f04c44800805c76c53b614decef296d6041f57be6037cdfb0bb46133974f62",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must an A/A′ shadow-ad perturbation preserve ad meaning?",
+        "answer": "It tests stability to irrelevant changes. Meaningful edits can reasonably change distribution. Alter formatting or equivalent wording to probe reliance on IDs or superficial sparse features. Stability is distinct from relevance: identical wrong retrieval is stable too.",
+        "example": "Illustration: Punctuation and equivalent year formats should largely preserve audience; replacing children's shoes with hiking boots genuinely changes the product."
+      }
+    },
+    "qa/recommendation:llm-ad-retrieval/comparison": {
+      "source_sha256": "8adaec38b496f73f6b7f6965bad374f1f17272c34aa4543b3153240a3f34c6b9",
+      "reviewed": true,
+      "fields": {
+        "question": "What does an LLM semantic graph add for new ads and stability compared with a collaborative item graph?",
+        "answer": "Collaborative edges come from co-consumption. Semantic attributes connect behavior-sparse creatives and can reduce drift under meaningless rewrites. Hallucinations require confidence and expansion budgets. The local result is a fixed-budget routing increment, not end-to-end ad effectiveness or strong evidence about training variance.",
+        "example": "Illustration: An ad with no co-click edge can connect by brand and use. A misidentified brand can also expand to wrong candidates, so more edges alone are not better."
+      }
+    },
+    "qa/recommendation:llm-ad-retrieval/implementation": {
+      "source_sha256": "03015ff7866efcd7efe6ff16318b4732edb6d69f6ff45a5354d5a903b9d4d7b9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why don't three identical tie-breaking seeds prove zero training variance in local LLM ad retrieval?",
+        "answer": "The model was not independently retrained for each seed, and there were no score ties to break. Identical results establish deterministic postprocessing only. Report A/A′ attribute and score drift separately from Recall and NDCG.",
+        "example": "Illustration: Changing the tie-breaking seed for one checkpoint on a list with no ties naturally produces the same list, not three independently stable training results."
+      }
+    },
+    "qa/recommendation:llm-ts-prior/mechanism": {
+      "source_sha256": "fb2b3d882bc7abbbe314ed5e2bbc550dd2be71995552c8657b939b7830d68590",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is prior strength κ as important as the probability p when turning an LLM judgment into Beta pseudocounts?",
+        "answer": "p sets the initial preference and κ controls how much real feedback changes it. A large κ can let wrong semantics dominate for too long, while a tiny one barely helps cold start. Thompson sampling explores and updates the posterior, so the LLM is a starting point. A grouped local proxy does not establish general usefulness of text priors.",
+        "example": "Illustration: Two items start at 80%, but one prior represents a few observations and the other thousands. Repeated failures overturn the first much sooner."
+      }
+    },
+    "qa/recommendation:llm-ts-prior/basics": {
+      "source_sha256": "5434d252fefcab648b0ce39e2b26d6642a6d266320bf84ce103b670adcbc9a2f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why turn LLM judgments into Beta pseudocounts instead of making direct recommendations in LLM-TS Prior?",
+        "answer": "Pseudocounts encode an initial success probability in a Bayesian state that feedback can update. Thompson sampling balances exploration, and real observations should be able to override the prior. Text can be biased and user clusters need not be homogeneous.",
+        "example": "Illustration: A favorable text judgment supplies a moderate prior for one group. Later clicks and skips correct it instead of the system recommending the item forever."
+      }
+    },
+    "qa/recommendation:llm-ts-prior/comparison": {
+      "source_sha256": "2a336589d776e19c9ea3fa60c72932a35d5b33364f79d7d7db977ec34b4d3a9a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do equal p and unequal κ produce different responses to early feedback?",
+        "answer": "p determines the mean, while κ determines how much pseudo-evidence supports it. A stronger prior resists real observations, changing exploration even at the same mean. Too strong can lock in errors; too weak loses useful knowledge. No κ is universally better for all groups.",
+        "example": "Illustration: Two 60% priors represent two and 200 observations. Three failures change the former far more."
+      }
+    },
+    "qa/recommendation:llm-ts-prior/implementation": {
+      "source_sha256": "1cbc301b263071c00e3663c08801250443b47852ed365b285c5751336f7eed73",
+      "reviewed": true,
+      "fields": {
+        "question": "Why distinguish prior pseudocounts from observed successes and failures when updating a Beta prior?",
+        "answer": "Initialize parameters as 1+κp and 1+κ(1−p). Add counts only for arms actually shown and observed, and keep groups separate as specified. Future test feedback cannot initialize the prior. The local genre proxy does not prove actual LLM semantic calls.",
+        "example": "Illustration: An unselected arm has no outcome this round. Counting it as a failure because another arm won distorts the posterior and suppresses exploration."
+      }
+    },
+    "qa/recommendation:long-history-transformer/mechanism": {
+      "source_sha256": "4652b6a5016b0120e33bba452f03548fe90b0a8bb142cda44599b72ca4fda093",
+      "reviewed": true,
+      "fields": {
+        "question": "Why keep recent events in a lightweight online Transformer when a long-history cache already exists?",
+        "answer": "The cache covers stable patterns but refresh lag excludes recent events. A short online window plus cached state responds without re-encoding all history. Auxiliary objectives support both representations. A small cache can lose information; do not mix fresh offline states with stale online caches in evaluation.",
+        "example": "Illustration: Overnight history records photography, but today's sudden childcare searches need a recent path without waiting for a refresh or re-encoding all past events."
+      }
+    },
+    "qa/recommendation:long-history-transformer/basics": {
+      "source_sha256": "1bb2670eecd092d338512b0f6c8072973b38865fe13d049a9d5f912eccdaf476",
+      "reviewed": true,
+      "fields": {
+        "question": "Why pair the offline Long-History Transformer cache with a recent online path?",
+        "answer": "Async long history retains stable interests but lags. A small online model reads recent changes and the cache, combining coverage with responsiveness. Compression can lose details, and auxiliary pretraining and ad fine-tuning are distinct stages. Concatenating a long vector does not reproduce all of this.",
+        "example": "Illustration: Baby-product browsing can change a prediction immediately even while the background cache still emphasizes photography."
+      }
+    },
+    "qa/recommendation:long-history-transformer/comparison": {
+      "source_sha256": "5e6a58e2d778cbc8ecd9c7edbd0e8645d931ca5c33d9ff7553dd73bb9501c14c",
+      "reviewed": true,
+      "fields": {
+        "question": "What costs move to the background in a two-stage async model compared with request-time full history encoding?",
+        "answer": "The background encodes long history and caches fixed-width state, avoiding repeated long self-attention at serving time. Refresh, storage, invalidation, and compression costs remain. The source lacks actual Yandex feature-store measurements, so structure alone cannot establish latency gains.",
+        "example": "Illustration: Requests can share a daily summary, but if updates are frequent and requests rare, background compute may not pay off."
+      }
+    },
+    "qa/recommendation:long-history-transformer/implementation": {
+      "source_sha256": "1d410d498b99c44ba6e25f00a5376e27a412b6e6c9b41dd08bc66c1a9a877af6",
+      "reviewed": true,
+      "fields": {
+        "question": "How should the local 24-step offline, four-step online model enforce input cutoffs?",
+        "answer": "Both branches use only events before the prediction. Define overlap handling and never build a cache from the full sequence including test events. Next-item and feedback auxiliary labels stay on the training side. A 32-dimensional cache is a scale-down, not the original history length or feature scale.",
+        "example": "Illustration: A cache containing the final film leaks it even if the online branch reads only four earlier events."
+      }
+    },
+    "qa/recommendation:lsvcr/mechanism": {
+      "source_sha256": "5c1f1b05e1bb81787c157a427fc1b31a30e1494ad6d3d0a62c07c3880e40c85e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why give LSVCR personalized LLM preferences during training if no generative LLM runs at serving time?",
+        "answer": "Video and comment semantics differ and may exceed what ID sequences capture. Cross-fusion and alignment transfer teacher knowledge into a deployable dual-sequence model. Tasks can interfere: local video and comment metrics move in different directions, so neither alone establishes overall success.",
+        "example": "Illustration: A teacher can explain sarcasm in a comment during training; the serving student must judge from available sequences without secretly consulting it."
+      }
+    },
+    "qa/recommendation:lsvcr/basics": {
+      "source_sha256": "539aaa09d69384c4e15fa34d0d5237598dc7bf1f2f7b887d22220242a3021e53",
+      "reviewed": true,
+      "fields": {
+        "question": "Why encode video and comment consumption separately in LSVCR instead of treating comments as video metadata?",
+        "answer": "Comments have their own reading behavior and semantics. Dual sequences preserve the distinction before cross-fusion, and the training-time LLM adds personalized knowledge. Co-consumption can correlate or conflict, so better comment ranking does not prove better video ranking.",
+        "example": "Illustration: Someone may dislike a video but enjoy its discussion. Adding comment text only to a video description can lose this independent preference."
+      }
+    },
+    "qa/recommendation:lsvcr/comparison": {
+      "source_sha256": "f76d5c4d643694c211b4b439daae911c7f1fb4fc79c747f8569d4ec43ad191eb",
+      "reviewed": true,
+      "fields": {
+        "question": "What relationships do LSVCR's SSC and VCC constrain?",
+        "answer": "SSC aligns the sequential recommender's user preferences with the LLM; VCC links video or item preferences with comment preferences. They operate across models and across objects, respectively, and can conflict. The local comment metric improved while the item metric declined; report both.",
+        "example": "Illustration: Learning the teacher's photography preference is different from deciding whether a user likes photography products and photography comments equally."
+      }
+    },
+    "qa/recommendation:lsvcr/implementation": {
+      "source_sha256": "1c656318fb75f4919341ffc0fe06b1180706c1e20f7cdde3c4763205537ef7a7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why sample an ordered subset for LSVCR position encoding instead of shuffling positions?",
+        "answer": "A short alignment sequence should cover the span of the full position table without changing chronology. An ordered subset samples uneven gaps; shuffling changes temporal relations. Cross-sequence fusion must also exclude target video and comment events not yet observed.",
+        "example": "Illustration: Assign positions 3, 20, and 80 from a 1–100 table. Assigning 80, 3, and 20 instead changes which event appears newest."
+      }
+    },
+    "qa/recommendation:ltv-video-ranking/mechanism": {
+      "source_sha256": "fb06141edc2ebaea0fe40f719e106d7d4d1d5cb7af21f73af6ac03d464921eb9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why correct position bias before including session and cross-day creator value in LTV video ranking?",
+        "answer": "Top positions generate more views, so raw engagement can reward exposure rather than long-term contribution. Correction aims for comparable feedback before session attribution and creator-cycle objectives assign longer-horizon value. Quantile mappings and attribution have assumptions; their combined score is not identified causal retention lift.",
+        "example": "Illustration: A creator always shown first gets more clicks than one shown lower. Align exposure opportunity before judging who drives sustained consumption."
+      }
+    },
+    "qa/recommendation:ltv-video-ranking/basics": {
+      "source_sha256": "cb5430f8f1df6e9c0ecf20d47cada6efe9eaf7fe41d26339792983af2923041d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does LTV Video Ranking correct position before assigning long-term session value?",
+        "answer": "Position affects views and interactions. PDQ aligns outcomes across positions before aggregating session and cross-day creator value to avoid confusing exposure with contribution. Quantile correction relies on distributional assumptions and does not remove all exposure confounding.",
+        "example": "Illustration: The first video is easier to see than the fifth. Match position conditions before attributing subsequent consumption to creator quality."
+      }
+    }
+  }
+}
