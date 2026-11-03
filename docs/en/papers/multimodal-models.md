@@ -8,11 +8,11 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
-| [UniAction: Unified Action Conditioning for World Models](<https://arxiv.org/abs/2610.32977v1>) | 2026-10-23 | English write-up not yet available · [Chinese](../../multimodal-models/2610.32977-uniaction/README.md) |
-| [FlexGlue: Sparse-to-Dense Feature Matching and Visual Disambiguation](<https://arxiv.org/abs/2610.32976v1>) | 2026-10-23 | English write-up not yet available · [Chinese](../../multimodal-models/2610.32976-flexglue/README.md) |
-| [Agentic World Action Models](<https://arxiv.org/abs/2610.30136v1>) | 2026-10-21 | English write-up not yet available · [Chinese](../../multimodal-models/2610.30136-aw0/README.md) |
+| [UniAction: Unified Action Conditioning for World Models](<https://arxiv.org/abs/2610.32977v1>) | 2026-10-23 | [English](../../multimodal-models/2610.32977-uniaction/README-en.md) · [Chinese](../../multimodal-models/2610.32977-uniaction/README.md) |
+| [FlexGlue: Sparse-to-Dense Feature Matching and Visual Disambiguation](<https://arxiv.org/abs/2610.32976v1>) | 2026-10-23 | [English](../../multimodal-models/2610.32976-flexglue/README-en.md) · [Chinese](../../multimodal-models/2610.32976-flexglue/README.md) |
+| [Agentic World Action Models](<https://arxiv.org/abs/2610.30136v1>) | 2026-10-21 | [English](../../multimodal-models/2610.30136-aw0/README-en.md) · [Chinese](../../multimodal-models/2610.30136-aw0/README.md) |
 | [Multimodal Reranking Is a System One Decision](<https://arxiv.org/abs/2610.28435v1>) | 2026-10-20 | [English](../../multimodal-models/2610.28435-system-one-rerank/README-en.md) · [Chinese](../../multimodal-models/2610.28435-system-one-rerank/README.md) |
-| [CV-OPD: Contrastive Vision On-policy Distillation](<https://arxiv.org/abs/2610.13264>) | 2026-10-09 | English write-up not yet available · [Chinese](../../reproductions/2610.13264-cv-opd/README.md) |
+| [CV-OPD: Contrastive Vision On-policy Distillation](<https://arxiv.org/abs/2610.13264>) | 2026-10-09 | [English](../../reproductions/2610.13264-cv-opd/README-en.md) · [Chinese](../../reproductions/2610.13264-cv-opd/README.md) |
 | [WOVEN: Weaving Visual World Modeling into Multimodal LLMs](<https://arxiv.org/abs/2610.12417>) | 2026-10-08 | English write-up not yet available · [Chinese](../../reproductions/2610.12417-woven/README.md) |
 | [V-CoLA: Vision Token Compression with Linear Attention](<https://arxiv.org/abs/2610.11251>) | 2026-10-08 | English write-up not yet available · [Chinese](../../multimodal-models/2610.11251-vcola/README.md) |
 | [Unsupervised Multimodal Reward Modeling](<https://arxiv.org/abs/2610.12707>) | 2026-10-08 | English write-up not yet available · [Chinese](../../reproductions/2610.12707-umrm/README.md) |
