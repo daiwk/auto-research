@@ -97,6 +97,18 @@ nav:
       - A100 高保真证据晋级: evidence-promotion.md
       - 本地预览与发布: getting-started.md
       - 设计记录: design/automated-w2s-adoption.md
+  - English:
+      - Home: en/index.md
+      - Installation and demos: en/setup.md
+      - Paper catalog:
+          - All domains: en/papers/index.md
+          - Search, ads, and recommendation: en/papers/recommendation.md
+          - Foundation models: en/papers/foundation-models.md
+          - Structured decisions: en/papers/system-one.md
+          - Multimodal models: en/papers/multimodal-models.md
+          - LLM post-training: en/papers/post-training.md
+          - Agents: en/papers/agent-research.md
+      - Keeping both languages current: en/contributing.md
 
 theme:
   name: material
@@ -127,6 +139,7 @@ theme:
 
 hooks:
   - scripts/learning_cards_hook.py
+  - scripts/english_docs_hook.py
 
 plugins:
   - search:

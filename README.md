@@ -1,5 +1,7 @@
 # Auto Research
 
+简体中文 · [English README](README.en.md) · [English documentation](docs/en/index.md)
+
 读懂论文，查验实现，再用公开数据做研究迭代。覆盖搜广推、基础模型、LLM 后训练、Agent、多模态与结构化决策。
 
 [![Python quality](https://github.com/daiwk/auto-research/actions/workflows/quality.yml/badge.svg)](https://github.com/daiwk/auto-research/actions/workflows/quality.yml)
