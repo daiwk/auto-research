@@ -128,6 +128,16 @@
   "fixture_demo": true,
   "formal_comparison": false,
   "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "three-seed synthetic mechanism diagnostic; not a capability comparison"
+  },
   "promotion_eligible": false,
   "evolve_integrated": false,
   "full_experiment_status": "not_reproduced_high_cost",
@@ -137,6 +147,7 @@
   "provenance": {
     "commit": "3f6f422472dc6ed486d97160328560e22ce03cb9",
     "artifact_path": "docs/post-training/2611.02455-rlid/metrics/component-cuda-seeds42-44.json",
+    "dataset_fingerprint": "sha256:f8e6d789a3f35bee77cad1c485403d77bf1c7faa9aa886a1eff1d97244458ee0",
     "accelerator": "NVIDIA A100-SXM4-80GB",
     "executed_source_sha256": {
       "scripts/run_nov04_components.py": "61d35d574d9561e4611d2647174b8a6af07fabf8c30b6909e21e253542cf4336",

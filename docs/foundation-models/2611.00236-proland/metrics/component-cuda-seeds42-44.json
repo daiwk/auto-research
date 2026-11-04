@@ -105,6 +105,16 @@
   "fixture_demo": true,
   "formal_comparison": false,
   "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "three-seed synthetic mechanism diagnostic; not a capability comparison"
+  },
   "promotion_eligible": false,
   "evolve_integrated": false,
   "full_experiment_status": "not_reproduced_high_cost",
@@ -114,6 +124,7 @@
   "provenance": {
     "commit": "3f6f422472dc6ed486d97160328560e22ce03cb9",
     "artifact_path": "docs/foundation-models/2611.00236-proland/metrics/component-cuda-seeds42-44.json",
+    "dataset_fingerprint": "sha256:9b8d659a87a24c89bbcc055ae39d765d70222ae1d80ced0e47245d20e68d85ac",
     "accelerator": "NVIDIA A100-SXM4-80GB",
     "executed_source_sha256": {
       "scripts/run_nov04_components.py": "61d35d574d9561e4611d2647174b8a6af07fabf8c30b6909e21e253542cf4336",

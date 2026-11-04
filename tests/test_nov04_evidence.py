@@ -1,6 +1,7 @@
 import copy
 import hashlib
 import json
+import math
 from pathlib import Path
 import sys
 
@@ -8,7 +9,11 @@ import pytest
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
-from curate_nov04_components import AUDIT, COMPONENTS, metrics, validate_raw  # noqa: E402
+from curate_nov04_components import (  # noqa: E402
+    AUDIT, COMPONENTS, aggregate_metrics, evaluation_protocol,
+    generated_input_fingerprint, metrics, validate_raw,
+)
+from migrate_metric_schema_v2 import migrate_payload  # noqa: E402
 from auto_research.gpu_validation import load_gpu_receipt  # noqa: E402
 
 
@@ -38,6 +43,30 @@ def test_missing_seed_or_false_check_cannot_be_accepted():
     with pytest.raises(ValueError):validate_raw(raw,'cuda',load('frozen-sources.json'))
 
 
+def test_metric_means_are_not_dependent_on_builtin_sum_rounding():
+    rows=[{'metrics':{'value':value}} for value in [1e16,1.,-1e16]]
+    assert aggregate_metrics(rows)=={'value':1/3}
+    proland=[{'metrics':{'loss':value}} for value in
+             [1.3162159359053247,0.8409383751499768,1.5075069305948812]]
+    assert aggregate_metrics(proland)=={'loss':1.2215537472167275}
+
+
+@pytest.mark.parametrize('rows',[[],[{'metrics':{}}],[{'x':1},{'y':1}],
+                                  [{'x':float('nan')}],[{'x':float('inf')}]])
+def test_metric_aggregation_rejects_incomplete_or_nonfinite_rows(rows):
+    with pytest.raises(ValueError):aggregate_metrics(rows)
+
+
+def test_synthetic_input_fingerprint_binds_recipe_seeds_and_generators():
+    dataset={'id':'synthetic:example','recipe':'seeded contract'}
+    hashes={'generator.py':'a'*64}
+    descriptor={'dataset':dataset,'seeds':[42,43,44],'executed_source_sha256':hashes}
+    expected='sha256:'+hashlib.sha256(json.dumps(descriptor,sort_keys=True).encode()).hexdigest()
+    assert generated_input_fingerprint(dataset,hashes)==expected
+    assert generated_input_fingerprint(dataset|{'recipe':'different'},hashes)!=expected
+    assert generated_input_fingerprint(dataset,{'generator.py':'b'*64})!=expected
+
+
 def test_catalog_metrics_and_receipts_agree_with_actual_raw():
     specs={}
     for path in (ROOT/'src/auto_research/paper_specs/catalog').glob('*/*.json'):
@@ -53,8 +82,14 @@ def test_catalog_metrics_and_receipts_agree_with_actual_raw():
         assert evidence['diagnostic_only'] and not evidence['promotion_eligible']
         assert evidence['provenance']['commit']==raw['code_commit']
         assert evidence['provenance']['raw_runner_artifact_sha256']==hashlib.sha256((AUDIT/f'raw-{device}.json').read_bytes()).hexdigest()
-        expected={k:sum(metrics(r)[k] for r in evidence['per_seed'])/3 for k in metrics(evidence['per_seed'][0])}
+        expected={k:math.fsum(metrics(r)[k] for r in evidence['per_seed'])/len(evidence['per_seed'])
+                  for k in metrics(evidence['per_seed'][0])}
         assert evidence['metrics']==expected
+        assert evidence['metrics']==aggregate_metrics(evidence['per_seed'])
+        assert evidence['evaluation_protocol']==evaluation_protocol()
+        assert evidence['provenance']['dataset_fingerprint']==generated_input_fingerprint(
+            evidence['dataset'],raw['source_sha256'])
+        assert migrate_payload(ROOT/relative,evidence)==evidence
         if device=='cuda':
             receipt=load_gpu_receipt(ROOT/spec['gpu_validation_artifact'])
             assert receipt['adapter_key']==key and spec['gpu_validation_passed']

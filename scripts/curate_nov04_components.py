@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 from pathlib import Path
 import subprocess
 import sys
@@ -37,6 +38,29 @@ def freeze():
 def metrics(row):
     values=row.get('metrics',row)
     return {k:v for k,v in values.items() if type(v) in (int,float) and k!='seed'}
+
+
+def aggregate_metrics(rows):
+    """Keep accepted means identical across Python 3.11/3.12 sum algorithms."""
+    values=[metrics(row) for row in rows]
+    keys=set(values[0]) if values else set()
+    if not keys or any(set(row)!=keys for row in values):
+        raise ValueError('metric keys differ across seeds')
+    if any(not math.isfinite(value) for row in values for value in row.values()):
+        raise ValueError('metric values must be finite')
+    return {key:math.fsum(row[key] for row in values)/len(values) for key in sorted(keys)}
+
+
+def evaluation_protocol():
+    return {'tier':'l1_mechanism','seeds':list(SEEDS),'formal_comparison':False,
+            'claim_policy':'three-seed synthetic mechanism diagnostic; not a capability comparison'}
+
+
+def generated_input_fingerprint(dataset, hashes):
+    # This identifies the synthetic recipe, seeds and exact generators, not
+    # downloaded data or a public capability benchmark that was never run.
+    recipe={'dataset':dataset,'seeds':SEEDS,'executed_source_sha256':hashes}
+    return 'sha256:'+hashlib.sha256(json.dumps(recipe,sort_keys=True).encode()).hexdigest()
 
 
 def validate_raw(raw, device, frozen):
@@ -77,18 +101,18 @@ def ingest(cpu_path, cuda_path):
         if spec.get('requires_gpu_validation') is not (device=='cuda'):
             raise ValueError('catalog does not declare the actual device contract')
         rows=raw[device]['components'][key]['per_seed']
-        keys=set(metrics(rows[0]))
-        if not keys or any(set(metrics(r))!=keys for r in rows):raise ValueError('metric keys differ across seeds')
-        aggregate={k:sum(metrics(r)[k] for r in rows)/3 for k in sorted(keys)}
+        aggregate=aggregate_metrics(rows)
         relative=Path('docs')/Path(spec['detail_path']).parent/f'metrics/component-{device}-seeds42-44.json'
         dataset={'id':f'synthetic:nov04-{key}-v1','revision':'sha256:'+frozen['source_sha256']['src/auto_research/'+COMPONENTS[key][0]],
                  'recipe':'small seeded mechanism/state/index contracts; no public capability benchmark','capability_benchmark':False}
         result={'schema_version':2,'method':key,'manifest_ref':spec['domain']+':'+key,'dataset':dataset,'seed':SEEDS,'seeds':SEEDS,
                 'per_seed':rows,'metrics':aggregate,'diagnostic_only':True,'fixture_demo':True,'formal_comparison':False,
                 'evaluation_tier':'l1_mechanism','promotion_eligible':False,'evolve_integrated':False,
+                'evaluation_protocol':evaluation_protocol(),
                 'full_experiment_status':'not_reproduced_high_cost','full_experiment_review_done':True,
                 'automatic_retry':False,'automatic_implementation_queue':False,
                 'provenance':{'commit':frozen['commit'],'artifact_path':relative.as_posix(),'accelerator':raw[device]['accelerator'],
+                              'dataset_fingerprint':generated_input_fingerprint(dataset,frozen['source_sha256']),
                               'executed_source_sha256':frozen['source_sha256'],'raw_runner_artifact_sha256':hashlib.sha256(blobs[device]).hexdigest()}}
         pending.append((ROOT/relative,result))
         if device=='cuda':

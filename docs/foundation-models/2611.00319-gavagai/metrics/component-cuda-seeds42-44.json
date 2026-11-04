@@ -111,6 +111,16 @@
   "fixture_demo": true,
   "formal_comparison": false,
   "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "three-seed synthetic mechanism diagnostic; not a capability comparison"
+  },
   "promotion_eligible": false,
   "evolve_integrated": false,
   "full_experiment_status": "not_reproduced_high_cost",
@@ -120,6 +130,7 @@
   "provenance": {
     "commit": "3f6f422472dc6ed486d97160328560e22ce03cb9",
     "artifact_path": "docs/foundation-models/2611.00319-gavagai/metrics/component-cuda-seeds42-44.json",
+    "dataset_fingerprint": "sha256:7920ad02125e8dbf755b2017c1ef238a044e58ed94ae7092be210a88e1df2fd8",
     "accelerator": "NVIDIA A100-SXM4-80GB",
     "executed_source_sha256": {
       "scripts/run_nov04_components.py": "61d35d574d9561e4611d2647174b8a6af07fabf8c30b6909e21e253542cf4336",
