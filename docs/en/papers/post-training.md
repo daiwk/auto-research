@@ -8,6 +8,8 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding](<https://arxiv.org/abs/2611.02846v1>) | 2026-11-02 | [English](../../post-training/2611.02846-specopd/README-en.md) · [Chinese](../../post-training/2611.02846-specopd/README.md) |
+| [RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs](<https://arxiv.org/abs/2611.02455v1>) | 2026-11-02 | [English](../../post-training/2611.02455-rlid/README-en.md) · [Chinese](../../post-training/2611.02455-rlid/README.md) |
 | [Proposing Better Rollouts for On-Policy Distillation](<https://arxiv.org/abs/2610.36477v2>) | 2026-10-27 | [English](../../post-training/2610.36477-mpopd/README-en.md) · [Chinese](../../post-training/2610.36477-mpopd/README.md) |
 | [CONCUR: Concordant Auxiliary Rewards for Multi-Task, Multi-Reward Reinforcement Learning](<https://arxiv.org/abs/2610.36437v1>) | 2026-10-27 | [English](../../post-training/2610.36437-concur/README-en.md) · [Chinese](../../post-training/2610.36437-concur/README.md) |
 | [When to Stop Penalizing Actions? Martingale GRPO for VLA Reinforcement Learning](<https://arxiv.org/abs/2610.32431v1>) | 2026-10-23 | [English](../../post-training/2610.32431-mart-grpo/README-en.md) · [Chinese](../../post-training/2610.32431-mart-grpo/README.md) |

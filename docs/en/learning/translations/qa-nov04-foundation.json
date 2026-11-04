@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:proland/basics": {
+      "source_sha256": "3c887cdef2a0c30f0d180e7fc22f991f4c82d4a96bd212620e7ed08cdf2e5152",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does ProLand optimize while B is temporarily nonorthogonal instead of projecting it back every step?",
+        "answer": "It separates the objective direction for BA from Landing restoration of B's orthogonality. BᵀDB=0 makes the objective update perturb the Gram error only at second order, while an independent correction restores feasibility. Per-step retraction changes the trajectory and is not the same algorithm; temporary infeasibility does not imply stability at arbitrary step sizes.",
+        "example": "Teaching example: A one-dimensional basis with BᵀB=1.08 can move horizontally and then subtract ρB×0.08. Direct normalization to 1 follows a different path. This is not a GLUE result."
+      }
+    },
+    "qa/foundation-models:proland/mechanism": {
+      "source_sha256": "32798bde0394ad81acea398ad55b7063eb0200472d8bf914de8e9dd1e554a9be",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reproject momentum into the current product space rather than retain the old dense direction unchanged?",
+        "answer": "Changing B and A changes the space realizable by their first-order variations. ProLand projects the previous EMA through the current Π before mixing the current projected gradient, keeping momentum realizable. The thin-factor algorithm reconstructs this quantity from gradients of the same loss; it is not ordinary independent Muon momentum for A and B.",
+        "example": "Teaching example: If old B spans the first coordinate and new B turns toward the second, an old-space direction may no longer be realizable unchanged. Compute Π using the new PB and PA before updating the EMA."
+      }
+    },
+    "qa/foundation-models:proland/comparison": {
+      "source_sha256": "eb8bd0d20f1b706bcb430280a51ffed8df7d4f13bc2ae1c013f2ede529883457",
+      "reviewed": true,
+      "fields": {
+        "question": "How does polar on A and B separately differ from a product-space polar direction realized through factor updates?",
+        "answer": "Polar is nonlinear and the factors have a scaling gauge. Independent spectral updates do not ensure their combined effect matches the selected product-space direction. ProLand constructs DA=B†Y and DB=(I−PB)YA† from one Y, ensuring BDA+DBA=ΠY and BᵀDB=0.",
+        "example": "Teaching example: Multiplying B by 2 and dividing A by 2 preserves BA but changes independent factor-gradient scales and geometry. Calling polar in both paths does not make their ΔW updates equivalent."
+      }
+    },
+    "qa/foundation-models:proland/implementation": {
+      "source_sha256": "8463c8fe062676eebd47fae55e409c499c9b5e00bb7f72b78b97e060db7dd647",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not update A first and use new A for B, or multiply ρ by the learning rate again?",
+        "answer": "Algorithms 1/2 compute DA, DB and Gram error from one old factor pair and apply them simultaneously. Sequential updates add coupling terms. Landing's ρ is an independent step size, with no additional γ. Compact polar must preserve zero singular directions, and numerical ill-conditioning near rank changes must remain explicit.",
+        "example": "Teaching example: With γ=.01 and ρ=.05, the Landing coefficient is .05, not .0005; the latter weakens restoration 100-fold. A full UVᵀ on a zero core can also invent updates under zero gradients."
+      }
+    },
+    "qa/foundation-models:gavagai/basics": {
+      "source_sha256": "0a19e1edb70d2723b3dab7e37a20cf2472aecbd1f325762e0e1de5ab0375f606",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does GAVAGAI need both Nothing and region capacities?",
+        "answer": "Nothing lets nonreferential words avoid forced assignment to backgrounds; capacities stop a few persistent regions from absorbing many words. Capacity without Nothing still forces mass onto visual regions. Nothing without capacities cannot limit concentration on one background. They address different failures.",
+        "example": "Teaching example: An utterance contains hungry and ball while the image contains a ball and hand. Hungry can go to Nothing and ball to the ball; a hand capacity also prevents many unrelated words from accumulating there. These assignments are illustrative, not measured."
+      }
+    },
+    "qa/foundation-models:gavagai/mechanism": {
+      "source_sha256": "f9aeaa6731a3d89f12ba39e668e87287ac5ec9b0f9c4361f3e186f633cfd3f7d",
+      "reviewed": true,
+      "fields": {
+        "question": "Despite Balanced OT in the title, why not fix every visual column marginal by equality?",
+        "answer": "Eq. 1 sets each word-row sum to 1 but only bounds visual column sums by b; Nothing is uncapped. Thus the dual update is v=min(1,b/(Kᵀu)). Requiring every column sum to equal b would assign mass to unnamed regions, changing the feasible set and interpretation.",
+        "example": "Teaching example: If neither of two words names a visible object and a visual column has capacity .8, nearly all mass 2 may legally go to Nothing and almost none to the region. Do not force reference just to spend the .8 capacity."
+      }
+    },
+    "qa/foundation-models:gavagai/comparison": {
+      "source_sha256": "e817bd71a3af85fd897fa216c5e19e596c84167731c96b70d7eeb71f4d0687bf",
+      "reviewed": true,
+      "fields": {
+        "question": "How does GAVAGAI reduce to row softmax when capacities are inactive, and does that erase the method's distinction?",
+        "answer": "If every visual capacity is at least the word count n, column multipliers remain 1, giving row softmax including Nothing. Removing Nothing then recovers forced visual reference. This degeneration is a useful check, not equivalence under active capacities or evidence of SAYCam improvement.",
+        "example": "Teaching example: With 3 words and capacity 3 per column, no visual column can exceed its cap. Changing that cap to .4 couples row and column scalings as words compete for the region."
+      }
+    },
+    "qa/foundation-models:gavagai/implementation": {
+      "source_sha256": "bfdbb774459b728524888a95c80bf9cf53d1d8b457e802d5c3368466e30d4029",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not renormalize rows after eight Sinkhorn steps, and why detach the plan in alignment loss?",
+        "answer": "Final column scaling enforces upper capacities, but finite-iteration row sums can differ from 1. Row renormalization can exceed capacities again, so expose residuals. Eq. 3 fixes P and backpropagates only through C, giving gradient λP. V1 does not specify another differentiable route for the Nothing hinge; local coverage reports a fixed-plan value, not full anti-collapse training.",
+        "example": "Teaching example: Renormalizing a row summing to .8 multiplies its visual mass by 1.25 and can violate an already saturated column. With λ=.1, cost gradient is .1P, not differentiation through eight scaling iterations."
+      }
+    },
+    "qa/foundation-models:xla-trenches/basics": {
+      "source_sha256": "a1edaa76ec78342f9cb63cfc7cdf606ef040dc572e9065af7a8ede5d26571dc0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why don't successful compilation and crash-free execution establish XLA correctness?",
+        "answer": "Silent miscompilations can return finite, correctly shaped tensors while indexing, rounding, buffers, or synchronization are wrong. Completion and briefly normal loss miss failures with no error signal. The paper uses differential references on valid inputs plus hierarchical isolation, not launch success as correctness evidence.",
+        "example": "Teaching example: A narrow-integer iota wrap can make a write at index 5 also modify 261. Execution completes; comparison against correct indexing semantics exposes it."
+      }
+    },
+    "qa/foundation-models:xla-trenches/mechanism": {
+      "source_sha256": "cfcf32fdaa5ba767e4e80cca2773c07337d9da37eaffe94ff59de9aba7049e0f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why combine backward input constraints with VREG inspection inside intact fusions?",
+        "answer": "Backward constraints prevent invalid inputs such as negative square roots or division by zero from creating false differences. Macro isolation only finds a fusion; lowering faults inside it still require register intermediates. Splitting it changes memory precision and pipelining and can hide the bug, so a correct split graph does not validate the original fusion.",
+        "example": "Teaching example: r=x−f32(f16(x)) becomes zero if VREG rounding is skipped. Splitting for debugging can spill to 16-bit HBM and restore rounding. Inspect the original fusion rather than replacing it."
+      }
+    },
+    "qa/foundation-models:xla-trenches/comparison": {
+      "source_sha256": "0602aa69eee0953e9fa35b84aa4dbc8f2c5b224838be3bd8973a7ed8366d1f23",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are 142 resolved bugs, 103 under review, and online A/B gains three different kinds of evidence?",
+        "answer": "Resolved counts describe defects closed through engineering review. Pending findings can still be rejected or revised, so they do not make 245 resolved bugs. User A/B requires actual randomized comparisons and business metrics, not inference from bug counts. The paper qualifies as Google systems infrastructure, not as industrial recommendation evidence passing an A/B gate.",
+        "example": "Teaching example: Of 10 submitted patches, if 6 landed and 4 are pending, 6 are completed, not 10. Even landing all 10 supplies no randomized CTR experiment."
+      }
+    },
+    "qa/foundation-models:xla-trenches/implementation": {
+      "source_sha256": "677f2fc9550e3ac3edc4bb53f3f3359db161d94ceec8560cdb9a400bc9f6edc5",
+      "reviewed": true,
+      "fields": {
+        "question": "With OpenXLA public, why mark the full paper not reproduced instead of running an A100 substitute?",
+        "answer": "Public macro isolation and evaluation are only part of the pipeline. Production graphs, the internal agent harness, target ISA/MXU simulation, VREG hardware stepping, and physical-TPU confirmation do not come with the framework. A100 has different register, rounding, and compilation semantics; a CUDA example cannot validate TPU defects. Resource and availability mismatch justifies review DONE/not reproduced rather than fabricated success.",
+        "example": "Teaching example: Correctly executing two casts in CUDA does not show that TPU lowering retained them. Matching outputs do not cover the original TPU-generated code."
+      }
+    }
+  }
+}

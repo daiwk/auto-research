@@ -8,6 +8,7 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search](<https://arxiv.org/abs/2611.00530v1>) | 2026-10-31 | [English](../../recommendation-components/2611.00530-wesearch/README-en.md) · [Chinese](../../recommendation-components/2611.00530-wesearch/README.md) |
 | [PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search](<https://arxiv.org/abs/2610.36958v1>) | 2026-10-27 | [English](../../recommendation-components/2610.36958-pailitao-mmsearch2/README-en.md) · [Chinese](../../recommendation-components/2610.36958-pailitao-mmsearch2/README.md) |
 | [KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation](<https://arxiv.org/abs/2610.36973v1>) | 2026-10-27 | [English](../../recommendation-components/2610.36973-kl-mopd/README-en.md) · [Chinese](../../recommendation-components/2610.36973-kl-mopd/README.md) |
 | [PinGER: Token-Efficient Generative Retrieval with Semantic IDs](<https://arxiv.org/abs/2610.33435v1>) | 2026-10-24 | [English](../../recommendation-components/2610.33435-pinger/README-en.md) · [Chinese](../../recommendation-components/2610.33435-pinger/README.md) |

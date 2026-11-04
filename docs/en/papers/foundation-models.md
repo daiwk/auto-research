@@ -8,6 +8,9 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [XLA from the Trenches: Correctness on TPU Workloads at Scale](<https://arxiv.org/abs/2611.00624>) | 2026-10-31 | [English](../../foundation-models/2611.00624-xla-trenches/README-en.md) · [Chinese](../../foundation-models/2611.00624-xla-trenches/README.md) |
+| [ProLand: A New Infeasible Manifold Optimization Method for LoRA Fine-Tuning](<https://arxiv.org/abs/2611.00236>) | 2026-10-30 | [English](../../foundation-models/2611.00236-proland/README-en.md) · [Chinese](../../foundation-models/2611.00236-proland/README.md) |
+| [GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport](<https://arxiv.org/abs/2611.00319>) | 2026-10-30 | [English](../../foundation-models/2611.00319-gavagai/README-en.md) · [Chinese](../../foundation-models/2611.00319-gavagai/README.md) |
 | [Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training](<https://arxiv.org/abs/2610.36794v1>) | 2026-10-27 | [English](../../foundation-models/2610.36794-select-ttt/README-en.md) · [Chinese](../../foundation-models/2610.36794-select-ttt/README.md) |
 | [SWIM: Learning What Matters from Behaviors for JEPA World Models](<https://arxiv.org/abs/2610.36662v1>) | 2026-10-27 | [English](../../foundation-models/2610.36662-swim/README-en.md) · [Chinese](../../foundation-models/2610.36662-swim/README.md) |
 | [Multi-State Linear Attention with Generalized Second-Order Routing](<https://arxiv.org/abs/2610.37645v1>) | 2026-10-27 | [English](../../foundation-models/2610.37645-merlin/README-en.md) · [Chinese](../../foundation-models/2610.37645-merlin/README.md) |

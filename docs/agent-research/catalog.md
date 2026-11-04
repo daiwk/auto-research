@@ -10,6 +10,8 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| Harness 与自我改进 | [Strategist: Evolving Reasoning with Agents](2611.03618-strategist/README.md) | Princeton University，2026-11-02 | [原作者入口](https://github.com/zlab-princeton/Strategist)；作者官方仓库公开search、blueprint、retrieval、paired_pick和空初始库；已只读核对默认hidden_best与two_percent规则，未执行上游完整搜索 | `strategist`：仅低成本组件，完整实验不复现 |
+| 统一评测与可靠性 | [AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers](2610.39234-agentheal/README.md) | University of Science and Technology of China，2026-10-29 | [原作者入口](https://github.com/Lzzzzzzzzzzy/AgentHeal)；论文链接的作者官方代码与数据仓库公开；已核对agentheal、dataset、dataset_real、scripts与tests目录，未执行上游全部模型评测 | `agentheal`：仅低成本组件，完整实验不复现 |
 | Agent记忆 | [Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems](2610.36652-discernmem/README.md) | East China Normal University，2026-10-27 | [原作者入口](https://github.com/ECNU-ICALK/DiscernMem)；原作者代码已公开；2026-10-29核验HEAD 0d59f5fce155cbf5c695ada7f040c1d283e43ada与MIT许可。本地依据论文独立实现数值与版本规则，不复制上游数据或运行LLM。 | `discernmem`：仅低成本组件，完整实验不复现 |
 | Agent自我进化 | [When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement](2610.36826-ruharness/README.md) | Harbin Institute of Technology，2026-10-27 | 未发现官方代码 | `ruharness`：仅低成本组件，完整实验不复现 |
 | 自进化与工作流 | [Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?](2610.37276-evalalloc/README.md) | The University of Hong Kong，2026-10-27 | 未发现官方代码 | `evalalloc`：仅低成本组件，完整实验不复现 |

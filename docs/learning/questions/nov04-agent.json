@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "agent-research:strategist": {
+      "questions": [
+        {"id":"blueprint-not-model-weights","level":"basics","question":"Strategist积累的是模型参数、当前答案，还是另一种跨任务资产？","answer":"它冻结执行模型，把推理程序表示成有统一execute接口的Python blueprint，并在实测后连同测量卡和训练轨迹经验进入跨任务库。具体任务提示与结构分开；后续任务可组合或复用旧结构，不等于模型经过梯度训练，也不只是当前答案修订。","example":"教学例：一次发现“先做三个候选再独立审查”的流程，可在下一领域换提示继续测试；保存某道题的最终数字并不是可复用blueprint机制。","source_sections":["背景与主要改动","代码映射"],"added":"2026-11-04"},
+        {"id":"two-bands-two-splits","level":"mechanism","question":"准确率提高2个百分点、成本下降刚好2%，是否自动满足Strategist的胜出规则？","answer":"不满足，超过2个百分点或成本比严格小于0.98才构成对应的改善；同时另一指标不能恶化超过其容忍带。候选还须在validation与hidden都胜出，最终再按hidden准确率增益、成本比排序。默认规则不是置信区间检验，不能因为计算了标准误就称显著提升。","example":"教学例：d=0.02、成本比=0.98只是两项并列；d=0、成本比=0.97可构成成本胜出，但如果hidden准确率下降3个百分点，仍不能晋级。","source_sections":["核心公式","数据协议与实现边界"],"added":"2026-11-04"},
+        {"id":"strategy-library-versus-evaluation-budget","level":"comparison","question":"Strategist与EvalAlloc都看候选测量，它们实际优化的是同一个对象吗？","answer":"不是。Strategist提出并组合可执行推理策略，把结构及经验保留给后续任务；EvalAlloc主要治理哪些SEARCH评测cell值得执行、如何利用共享参照估计候选fitness并最终确认。低成本观测或高预测分不等于已生成更好的策略，单纯策略入库也不等于通过留出集。","example":"教学例：少测100个item是评测预算变化；把单次回答换成可复用的分解—审查程序是策略结构变化。两者可结合，但应分别记录费用和真实留出成功。","source_sections":["背景与主要改动","本地结果与负控","高成本完整实验"],"added":"2026-11-04"},
+        {"id":"ast-and-external-evidence-boundary","level":"implementation","question":"为什么本地AST去重、DAG和paired-pick全部通过，仍不能称已经完成Strategist或Evolve接入？","answer":"模块不调用设计器或执行模型，检索分数和候选评价由外部提供。显式prompt剔除只是结构指纹，不能证明helper语义或动态依赖；paired-pick也不隔离Python进程的hidden数据。真实候选生成、执行、检索和信息流隔离都要独立验收，当前只允许CPU组件诊断，不支持能力晋级。","example":"教学例：合成0.7准确率、成本10和8的两臂能检验成本比0.8与回退规则，却没有任何模型真正回答过题目，更没有证明跨任务搜索有效。","source_sections":["数据协议与实现边界","本地结果与负控","代码映射"],"added":"2026-11-04"}
+      ]
+    },
+    "agent-research:agentheal": {
+      "questions": [
+        {"id":"resource-recovery-preserves-request","level":"basics","question":"网页被登录墙挡住后，为什么找到标题相近的页面还不能算AgentHeal恢复成功？","answer":"替代资源可能是不同作品或不可核对来源的look-alike，也可能是同作品的旧版本。AgentHeal保留原目标：有同版本副本时应优先使用；只有其他版本时要声明差异；根本无合法替代时要弃答并解释障碍，必要时向用户求助，而不是把相似主题当作等价。","example":"教学例：用户要论文v2的某指标，搜索到同名v1不能悄悄当v2；如果v2有机构仓库副本就应使用它，否则仅有v1时明确版本差异。","source_sections":["背景与主要改动","核心公式"],"added":"2026-11-04"},
+        {"id":"copy-version-and-policy-product","level":"mechanism","question":"AgentHeal的副本分支与其他版本分支，来源集合条件为什么不能写成同一个判断？","answer":"原文Eq1在精确副本可达时要求来源集合与副本集合交集非空；只有其他版本可达时则要求非空来源集合全部属于这些版本，并声明other。任何禁止行动又会把最终成功乘成0。自行把前者增强为全部来源都属副本，或把后者放宽为含一个版本，都改变了原文。","example":"教学例：只有v1可达时，用v1加一个诱饵拼出答案，即使声明other也失败；有v2副本时，Eq1本身只检查来源含v2，不能把它解释成语义答案正确性已经被证明。","source_sections":["核心公式","数据协议与实现边界"],"added":"2026-11-04"},
+        {"id":"honest-dead-end-versus-unfair-perturbation","level":"comparison","question":"AgentPerturb要求扰动后仍可解，AgentHeal却包含不可恢复任务，为什么不矛盾？","answer":"它们的测量目标不同。AgentPerturb比较同目标的配对稳健性，不应把破坏可解性当作能力下降；AgentHeal显式标记不可恢复regime，测是否诚实弃答、准确诊断并尊重政策，而非继续要求不存在的答案。可恢复与不可恢复必须分组报告，不能把它们混成总答题准确率。","example":"教学例：删掉唯一证据又要求回答原数字，会构成不公平扰动；把该情况明确设为无解并评价是否拒绝编造，才是在测恢复可靠性。","source_sections":["背景与主要改动","核心公式","本地结果与负控"],"added":"2026-11-04"},
+        {"id":"evaluator-metadata-is-not-actor-observation","level":"implementation","question":"本地诊断知道work、version和可达资源，这会不会让Agent直接看到正确恢复路径？","answer":"这些是独立评测者的标注，模块根本不调用actor，不能把它们作为被测Agent的观察。来源归因和逐动作政策判断也由外层提供，不由本地字符串规则自动完成。四条合成真值表得到TS=0.5仅说明判定合同，不能当Agent真实能力；真正浏览器评测仍需分离actor、gold和judge。","example":"教学例：把copy_id直接给模型再测恢复率会泄露路径；只在模型提交后让独立评价者检查其访问记录和引用来源，才维持评测边界。","source_sections":["数据协议与实现边界","本地结果与负控","代码映射"],"added":"2026-11-04"}
+      ]
+    }
+  }
+}

@@ -10,6 +10,9 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 推理与系统效率 | [XLA from the Trenches: Correctness on TPU Workloads at Scale](2611.00624-xla-trenches/README.md) | Google，2026-10-31 | [原作者入口](https://github.com/openxla/xla/blob/main/docs/hlo_isolation.md)；原文明确macro-graph isolator已上游到OpenXLA，公开HLO isolation文档及evaluator；完整内部agent harness、TPU工具层、生产图集与微融合硬件调试路径未公开，不等于本文整套作者实现已开源 | 计划键 `xla-trenches`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
+| 多模态基础模型 | [GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport](2611.00319-gavagai/README.md) | St Thomas’ College of Engineering and Technology，2026-10-30 | 未发现官方代码 | `gavagai`：仅低成本组件，完整实验不复现 |
+| 预训练与数据 | [ProLand: A New Infeasible Manifold Optimization Method for LoRA Fine-Tuning](2611.00236-proland/README.md) | Shanghai Jiao Tong University，2026-10-30 | 未发现官方代码 | `proland`：仅低成本组件，完整实验不复现 |
 | 推理与系统效率 | [Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels](2610.36520-fold-bias/README.md) | Independent Researcher，2026-10-27 | 未发现官方代码 | `fold-bias`：仅低成本组件，完整实验不复现 |
 | JEPA与世界模型 | [GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents](2610.36877-gui-jepa/README.md) | Shanghai Jiao Tong University / Nanyang Technological University，2026-10-27 | [原作者入口](https://github.com/bcwang-sjtu/GUI-JEPA)；原作者仓库可访问但固定commit仅README占位；方法源码尚未发布，不能称已开源可执行GUI-JEPA | `gui-jepa`：仅低成本组件，完整实验不复现 |
 | 注意力与长上下文 | [Multi-State Linear Attention with Generalized Second-Order Routing](2610.37645-merlin/README.md) | Princeton University，2026-10-27 | 未发现官方代码 | `merlin`：仅低成本组件，完整实验不复现 |

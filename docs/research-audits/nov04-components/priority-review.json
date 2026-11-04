@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-11-04",
+  "selected_priority_keys": [
+    "strategist",
+    "xla-trenches"
+  ],
+  "official_dispositions": [
+    {
+      "title": "FabScore: Fine-Grained Evaluation of Fabrications in Automated AI Research",
+      "organization": "Google collaboration",
+      "source_url": "https://research.google/pubs/fabscore-fine-grained-evaluation-of-fabrications-in-automated-ai-research-2/",
+      "decision": "historical_duplicate_title_with_new_readable_source",
+      "review_done": false,
+      "blocking": false,
+      "evidence": "Old official title already exists in the October archive; the new URL points to readable author PDF and MIT author repository https://github.com/chchenhui/fabscore. OpenReview/API challenge still prevents exact first-publication date confirmation. No November-new identity or implementation is invented.",
+      "source_attempts": [
+        {
+          "url": "https://chchenhui.github.io/papers/FabScore.pdf",
+          "result": "readable35-pagePDF;method/figure/taxonomychecked"
+        },
+        {
+          "url": "https://api2.openreview.net/notes?id=6gYWcYQcWM",
+          "result": "HTTP403"
+        },
+        {
+          "url": "https://openreview.net/forum?id=6gYWcYQcWM",
+          "result": "browserverificationinterstitial"
+        }
+      ],
+      "reopen_condition": "A primary exact original public date becomes available; no periodic retry without changed evidence",
+      "automatic_retry": false
+    },
+    {
+      "title": "Entitlement Is Not Authorization",
+      "organization": "Google",
+      "source_url": "https://research.google/pubs/entitlement-is-not-authorization/",
+      "decision": "outside_current_topic_scope",
+      "review_done": true,
+      "reason": "General entitlement consistency/billing model checking and seeded subscription simulation, not an LLM,Agent,JEPA or search/recommendation method. Google priority does not remove topic boundaries."
+    },
+    {
+      "title": "What Limits Us? Analyzing Self-Reported Limitations in NLP Research",
+      "organization": "Google collaboration",
+      "id": "2609.15191",
+      "source_url": "https://research.google/pubs/what-limits-us-analyzing-self-reported-limitations-in-nlp-research/",
+      "decision": "already_reviewed_historical_identity",
+      "review_done": true,
+      "previous_record": "docs/research-audits/google-emnlp25-closure/review-decisions.json",
+      "reason": "Known human-AI qualitative research meta-analysis; new directory URL is not a new autonomous RSI implementation."
+    },
+    {
+      "title": "Hierarchical Functional Fault Grading: A Chiplet-Based Methodology to Supplement Structural ATPG Coverage",
+      "organization": "Google",
+      "source_url": "https://research.google/pubs/hierarchical-functional-fault-grading-a-chiplet-based-methodology-to-supplement-structural-atpg-coverage-3/",
+      "decision": "outside_current_topic_scope",
+      "review_done": true,
+      "reason": "Manufacturing-defect fault simulation for chiplets,not ML model training/inference or an agent algorithm;no claimed new AI implementation."
+    },
+    {
+      "title": "EmbeddingGemma 2: Unified and Efficient Multimodal Representations",
+      "organization": "Google DeepMind",
+      "source_url": "https://deepmind.google/research/publications/279443/",
+      "decision": "already_catalogued_official_url_addition",
+      "review_done": true,
+      "catalog_key": "embedding-gemma2",
+      "reason": "Known model/paper and existing checkpoints;directory URL delta is not a second model or new-first-publication count."
+    }
+  ]
+}

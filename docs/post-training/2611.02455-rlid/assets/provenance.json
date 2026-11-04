@@ -1,0 +1,13 @@
+{
+  "paper_id": "2611.02455v1",
+  "figure": "1",
+  "source_page": "https://arxiv.org/html/2611.02455v1#S1.F1",
+  "source_url": "https://arxiv.org/html/2611.02455v1/fig1_overview.png",
+  "image": "paper-figure-01.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "990aebe5f437266fdf133e638e8c3717c0ac34a86efcb6818e064645775aff1d",
+  "license": "CC BY 4.0",
+  "transformation": "none",
+  "visual_review": "2026-11-04目视核对官方HTML Figure1：token-plane生成/解析和无效输出、decision-plane编译菜单/单前向/选动作、同动作不同措辞及LDM轨迹蒸馏。原PNG未裁剪未重绘；本地未实现图中完整Agent",
+  "checked_on": "2026-11-04"
+}

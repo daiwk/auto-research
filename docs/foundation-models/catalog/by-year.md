@@ -4,6 +4,9 @@
 
 ## 2026
 
+- 2026-10 · [XLA from the Trenches: Correctness on TPU Workloads at Scale](../../foundation-models/2611.00624-xla-trenches/README.md)（`xla-trenches`）：编译器成功生成并执行程序，不保证数值正确。Google 将模板引导合成程序、生产 autotuner 的真实融合配置和 agent swarm 组合，发现静默错编译；随后从大 HLO 图定位到单个 fusion，再保留 fusion 原貌检查 VREG 中间值。它是编译正确性基础设施，不是新的推荐模型或通过 A/B 门槛的工业推荐条目。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- 2026-10 · [GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport](../../foundation-models/2611.00319-gavagai/README.md)（`gavagai`）：照护者语言中许多内容词并不指向当前可见物体。逐词对视觉区域 softmax 会强制这些词选择背景，常在画面中的手、地板便吞噬词汇。GAVAGAI 同时加入无容量限制的 Nothing 列和视觉区域的容量上界，不把每个视觉列强制填满。
+- 2026-10 · [ProLand: A New Infeasible Manifold Optimization Method for LoRA Fine-Tuning](../../foundation-models/2611.00236-proland/README.md)（`proland`）：LoRA 的两因子 $\Delta W=BA$ 可以产生冗余基方向。ProLand 约束 $B^\top B=I$，但不每步强制投回流形；它先在 $BA$ 的乘积空间形成协调的谱方向，再独立以 Landing 恢复可行性。不能用“对 A、B 各自运行一次 Muon”替代该定义。
 - 2026-10 · [Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels](../../foundation-models/2610.36520-fold-bias/README.md)（`fold-bias`）：Attention Matching（AM）保留部分 keys，拟合每个保留项的静态 logit bias 和 values。标准 KV cache / attention 内核未必接收这项 bias；直接丢掉它，会改变压缩后注意力。FoldBias 在每个 head 的上下文 queries 上拟合一个共享方向，把每项 bias 写成沿该方向的 key 位移，保持 head 维度和模型自身 query 路径。
 - 2026-10 · [GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents](../../foundation-models/2610.36877-gui-jepa/README.md)（`gui-jepa`）：多数 GUI Agent 依靠 7B 级视觉语言模型逐 token 生成动作。GUI-JEPA 则从 accessibility tree 枚举可执行动作，用冻结 JEPA 编码器只编码一次画面；动作类型、坐标与 ROI 特征条件化残差 predictor，为每个候选生成 latent，再一次批量打分选 argmax，不解码动作文本。
 - 2026-10 · [Multi-State Linear Attention with Generalized Second-Order Routing](../../foundation-models/2610.37645-merlin/README.md)（`merlin`）：多状态线性注意力把上下文切成段，每段保留一个压缩状态。查询先读取多个状态，再加权汇总。只用位置或每段 key 均值做路由，会忽略同段 key 与查询对齐程度的分布：两个均值相同的段，可能只有一个含特别匹配的 key。

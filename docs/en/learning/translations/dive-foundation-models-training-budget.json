@@ -2,11 +2,11 @@
   "schema_version": 1,
   "units": {
     "dive/foundation-models/training-budget": {
-      "source_sha256": "016cb54d74997b8606a3219f90dcfd111177d33876f858e528ae792a247fe10d",
+      "source_sha256": "a40225f759cef4969796f687abc5618f95ae6cb5dcc4d2e84f9f8b85596e3119",
       "reviewed": true,
       "fields": {
         "title": "Training budgets: change the data, the update direction, or the comparison?",
-        "thesis": "Better training within one budget can come from data mixtures, per-example editing, update quality, or lower state costs. DoReMi, Mixing Laws, DataOrchestra, Muon, and ECO act at different points. Muon Paired Budget freezes model selection and asks equal-data and equal-time questions separately.",
+        "thesis": "Better training within one budget can come from data mixtures, per-example editing, update quality, or lower state costs. DoReMi, Mixing Laws, DataOrchestra, Muon, and ECO act at different points. Muon Paired Budget freezes model selection and asks equal-data and equal-time questions separately. ProLand changes LoRA's product-space update geometry; GAVAGAI adds explicit word-region alignment to captioning. They are not the same intervention merely because both affect training.",
         "axis_0": "Change exposure frequency, content, or parameter updates",
         "axis_1": "Online feedback, pilot fitting, or an offline teacher",
         "axis_2": "Costs of preprocessing, development trials, and optimizer state or work",

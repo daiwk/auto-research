@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "post-training:specopd": {
+      "questions": [
+        {"id":"fixed-anchors-current-branches","level":"basics","question":"SpecOPD的reference固定，为什么还叫on-policy？","answer":"固定的是外层reference上下文；每次更新在anchor后用当前draft重新采分支，教师监督的prefix含当前draft自己的历史。它不宣称完整reference响应由当前策略采样，也不要求等待顺序draft-and-verify完成整条响应。","example":"教学例：reference在a之后是quiet，当前draft可采出short；下一token的教师条件必须是a short，而不是a quiet。两条历史不同。","source_sections":["背景与主要改动","核心公式"],"added":"2026-11-04"},
+        {"id":"overlap-prefix-not-token-average","level":"mechanism","question":"为什么相同的逐token overlap，顺序不同会改变SpecOPD损失？","answer":"E2E-TV累加从分支开头到各位置的overlap乘积。早期mismatch会压低所有后续prefix项，末尾mismatch只影响末尾项。因此它不等于逐token TV的平均，且对有历史依赖的proposal只是训练surrogate，并非serving接受长度的无偏估计。","example":"教学例：overlap为[0.6,1,1]时三个prefix都是0.6；[1,1,0.6]时为1、1、0.6，后者损失更小。不是任何模型实测。","source_sections":["核心公式","结果、负控与边界"],"added":"2026-11-04"},
+        {"id":"support-mass-versus-renormalization","level":"comparison","question":"只取draft top-k时，把teacher也归一化到top-k上，与完整teacher比较有何区别？","answer":"会删除teacher在draft无法提出的token上的质量，从而改变接受overlap目标。SpecOPD保留完整teacher归一化；draft支持之外q为零，仍会贡献分布不匹配。它不是为了计算方便就可任意换成teacher top-k条件分布。","example":"教学例：q=[.5,.5,0]、p=[.4,.4,.2]的overlap是.8；把p前两项归一化后会假装完全一致，错把损失.2变成0。","source_sections":["核心公式","结果、负控与边界"],"added":"2026-11-04"},
+        {"id":"ancestry-and-predecessor-readout","level":"implementation","question":"proposal tree已经有因果mask，为什么还要单独检查prediction row？","answer":"祖先mask防止读取未来reference和其他分支；但如果从当前采样token自身的hidden row预测该token，输入已经含答案。首token必须读anchor，后续读前驱token行，并使用语义位置而非packed offset。正确mask不能替代正确readout。","example":"教学例：采到short evening后，anchor行预测short，short行预测evening；拿evening自身行给evening打分仍然泄漏，即使该行只看自己的祖先。","source_sections":["核心公式","数据协议与代码映射","结果、负控与边界"],"added":"2026-11-04"}
+      ]
+    },
+    "post-training:rlid": {
+      "questions": [
+        {"id":"decision-not-free-text-command","level":"basics","question":"RLiD的一个动作，和让LLM写一句动作命令有什么根本差别？","answer":"RLiD在已编译的合法单token菜单标签上归一化概率，一次前向直接选可执行动作，不生成或解析自由文本。收益依赖菜单和观测接口；它没有自动保留长推理文本带来的额外计算，也不能声称所有任务更强。","example":"教学例：菜单只有open、take两个动作时，选标签B直接映射take；自由文本可能写成没有可执行命令的解释。合法输出来自接口合同，不是100%任务成功。","source_sections":["背景与主要改动","核心公式"],"added":"2026-11-04"},
+        {"id":"same-policy-rao-blackwell-scope","level":"mechanism","question":"RLiD的方差定理能证明新训练的LDM一定比生成式LLM更好吗？","answer":"不能。恒等式在同一个文本策略内，把映射到同一动作的不同措辞边缘化；优势在给定动作后不能依赖措辞。它保持期望更新并去掉措辞方差，不比较不同参数化/训练的模型，也不消除跨时间信用估计的噪声。","example":"教学例：open drawer和I should open drawer映射同一动作，可枚举并边缘化；若奖励另外奖励措辞礼貌，优势已依赖措辞，便不满足该前提。","source_sections":["核心公式","数据协议与代码映射"],"added":"2026-11-04"},
+        {"id":"marginal-balance-not-row-entropy","level":"comparison","question":"RLiD的KL(uniform到菜单边际)，是否等同于让每条决策都更随机？","answer":"不等同。先按菜单把微批次动作分布求均值，再约束该标签边际接近均匀；每条决策仍可很确定。逐决策entropy会鼓励每条都分散，改变了目标。外部校准减法又是另一种标签偏置处理，不能混成一个更新时序。","example":"教学例：两条二动作决策分别接近[1,0]和[0,1]，均值是[.5,.5]，边际KL为零，但各自entropy都低。","source_sections":["核心公式","结果、负控与边界"],"added":"2026-11-04"},
+        {"id":"old-policy-and-episode-weight-contract","level":"implementation","question":"只实现合法菜单和clipped PPO，是否就完成RLiD的Agent训练？","answer":"没有。old-policy logp和优势必须来自外部真实采样，保持冻结且与同菜单对齐；本地不提供LM、compiler、记忆、GiGPO或蒸馏。若传入平均episode长度除以本episode长度的权重，应对加权决策取均值，不能再随意除以权重和。","example":"教学例：两步episode每步权重.75，单步episode权重1.5，两者总权重同为1.5；这只检查长度平衡公式，不代表ALFWorld完整路线已达到论文99.3%。","source_sections":["数据协议与代码映射","结果、负控与边界","高成本完整实验"],"added":"2026-11-04"}
+      ]
+    }
+  }
+}

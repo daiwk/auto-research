@@ -118,6 +118,8 @@
       ],
       "reading_order": "先读 DoReMi，明确域权重为什么由 excess loss 而非原始 loss 决定；再读 Muon 的矩阵更新，理解优化方向与非矩阵参数边界。之后看数据选择、低精度状态和训练系统。",
       "papers": [
+        "foundation-models:gavagai",
+        "foundation-models:proland",
         "foundation-models:adamw4bit",
         "foundation-models:af-muon",
         "foundation-models:bit-sparse",
@@ -250,6 +252,7 @@
       ],
       "reading_order": "先读 XLGoBench，理解同底层任务、语言和难度受控的比较；再读 ProEval，理解 GP 替身、主动选题与总体分数估计。之后再看探针、校准、安全检测或在线实验。",
       "papers": [
+        "foundation-models:xla-trenches",
         "foundation-models:activation-model-scanner",
         "foundation-models:combinatorial-watermark",
         "foundation-models:criticl",

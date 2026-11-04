@@ -7,7 +7,7 @@ hide:
 
 # 候选生成与搜索匹配
 
-[搜广推](index.md) / 144 个问题 · 36 篇论文
+[搜广推](index.md) / 148 个问题 · 37 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">144 个问题 · 36 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">148 个问题 · 37 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:wesearch" data-paper-title="WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search 搜广推与 LLM 应用 Tencent 2026-10-31 多主题文档很难绑定唯一SID路径，早期前缀失误又会永久丢掉相关文档。WeSearch只用簇收缩候选空间，不让簇承担完整语义标识；在并集内对原子文档先粗后精匹配。OPQ旋转和码本参与相关性学习，不能以固定随机量化器代替论文训练。滚动挂载复用已有参数，模型和全量索引刷新则需版本整体切换。 完整模型与生产实验成本过高，不复现（审查 DONE）；L1 CPU索引/数值组件，diagnostic only。完整模型与生产实验成本过高，不复现（审查 DONE）；未接入执行型Evolve。只用固定种子42/43/44生成小矩阵，验证ADC与显式重构距离相等、候选并集、粗排顺序、输入非法码拒绝及快照隔离。不是公开检索benchmark，不含训练/验证/测试候选调参，更不是推荐质量比较。平局以稳定簇序/文档ID决定，属于本地可复现约定。  召回 聚类候选空间与量化检索 搜广推 候选生成与搜索匹配 WeSearch选择簇和生成完整SID路径有什么根本区别？ 簇只限定候选空间，选中多个簇后合并其原子文档，再单独做文档匹配；它不要求簇路径完整描述文档语义。固定SID逐前缀生成则可能在早期错误处永久剪掉相关文档。簇候选仍可能漏召回，不是消除了所有误差。 教学例：一篇同时谈摄影和旅行的文章很难只有一条语义路径；先取摄影和旅行两个候选簇，再比较具体文章，和强制先选唯一顶层前缀不同。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<span id="paper-recommendation-wesearch-d1861392" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-91069595aef5a495">WeSearch选择簇和生成完整SID路径有什么根本区别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Awesearch">WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Tencent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>簇只限定候选空间，选中多个簇后合并其原子文档，再单独做文档匹配；它不要求簇路径完整描述文档语义。固定SID逐前缀生成则可能在早期错误处永久剪掉相关文档。簇候选仍可能漏召回，不是消除了所有误差。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一篇同时谈摄影和旅行的文章很难只有一条语义路径；先取摄影和旅行两个候选簇，再比较具体文章，和强制先选唯一顶层前缀不同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.00530v1">原论文</a> · <a href="../../../../recommendation-components/2611.00530-wesearch/">实现解读</a> · <a href="#qa-91069595aef5a495">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:wesearch" data-paper-title="WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search 搜广推与 LLM 应用 Tencent 2026-10-31 多主题文档很难绑定唯一SID路径，早期前缀失误又会永久丢掉相关文档。WeSearch只用簇收缩候选空间，不让簇承担完整语义标识；在并集内对原子文档先粗后精匹配。OPQ旋转和码本参与相关性学习，不能以固定随机量化器代替论文训练。滚动挂载复用已有参数，模型和全量索引刷新则需版本整体切换。 完整模型与生产实验成本过高，不复现（审查 DONE）；L1 CPU索引/数值组件，diagnostic only。完整模型与生产实验成本过高，不复现（审查 DONE）；未接入执行型Evolve。只用固定种子42/43/44生成小矩阵，验证ADC与显式重构距离相等、候选并集、粗排顺序、输入非法码拒绝及快照隔离。不是公开检索benchmark，不含训练/验证/测试候选调参，更不是推荐质量比较。平局以稳定簇序/文档ID决定，属于本地可复现约定。  召回 聚类候选空间与量化检索 搜广推 候选生成与搜索匹配 ADC查表求和得到的数值是否就是粗排分数？ 不是。子空间表存的是旋转query到码字的平方L2，按文档码查表求和得到平方距离。论文粗排分数是其负平方根。二者排序等价，但距离阈值和数值不能直接互换；重构向量也还在旋转空间。 教学例：两个子空间距离平方为9和16，ADC和为25，粗排分数是-5，不是-25；若误用阈值-10，接受集合会改变。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-94d79897c1a830c4">ADC查表求和得到的数值是否就是粗排分数？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Awesearch">WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Tencent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。子空间表存的是旋转query到码字的平方L2，按文档码查表求和得到平方距离。论文粗排分数是其负平方根。二者排序等价，但距离阈值和数值不能直接互换；重构向量也还在旋转空间。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个子空间距离平方为9和16，ADC和为25，粗排分数是-5，不是-25；若误用阈值-10，接受集合会改变。</p>
+<p class="ar-learning-sources">依据：核心公式、代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.00530v1">原论文</a> · <a href="../../../../recommendation-components/2611.00530-wesearch/">实现解读</a> · <a href="#qa-94d79897c1a830c4">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:wesearch" data-paper-title="WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search 搜广推与 LLM 应用 Tencent 2026-10-31 多主题文档很难绑定唯一SID路径，早期前缀失误又会永久丢掉相关文档。WeSearch只用簇收缩候选空间，不让簇承担完整语义标识；在并集内对原子文档先粗后精匹配。OPQ旋转和码本参与相关性学习，不能以固定随机量化器代替论文训练。滚动挂载复用已有参数，模型和全量索引刷新则需版本整体切换。 完整模型与生产实验成本过高，不复现（审查 DONE）；L1 CPU索引/数值组件，diagnostic only。完整模型与生产实验成本过高，不复现（审查 DONE）；未接入执行型Evolve。只用固定种子42/43/44生成小矩阵，验证ADC与显式重构距离相等、候选并集、粗排顺序、输入非法码拒绝及快照隔离。不是公开检索benchmark，不含训练/验证/测试候选调参，更不是推荐质量比较。平局以稳定簇序/文档ID决定，属于本地可复现约定。  召回 聚类候选空间与量化检索 搜广推 候选生成与搜索匹配 ADC与显式重构距离完全相等，是否证明比SID检索或双塔召回更好？ 不能。它只说明对同一量化表示的计算等价，不说明表示质量、簇覆盖或精排效果。质量比较还需要训练过的查询模型、码本、特征FFN和固定候选预算。原文A/B属于完整生产系统，不能归因于本地查表核。 教学例：坏码本把所有文档压成同一码时，ADC仍可与显式距离精确一致，但文档已经不可区分。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-b4d890676ff06c9d">ADC与显式重构距离完全相等，是否证明比SID检索或双塔召回更好？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Awesearch">WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Tencent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。它只说明对同一量化表示的计算等价，不说明表示质量、簇覆盖或精排效果。质量比较还需要训练过的查询模型、码本、特征FFN和固定候选预算。原文A/B属于完整生产系统，不能归因于本地查表核。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：坏码本把所有文档压成同一码时，ADC仍可与显式距离精确一致，但文档已经不可区分。</p>
+<p class="ar-learning-sources">依据：论文离线与线上效果、数据协议与结果解释；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.00530v1">原论文</a> · <a href="../../../../recommendation-components/2611.00530-wesearch/">实现解读</a> · <a href="#qa-b4d890676ff06c9d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:wesearch" data-paper-title="WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search 搜广推与 LLM 应用 Tencent 2026-10-31 多主题文档很难绑定唯一SID路径，早期前缀失误又会永久丢掉相关文档。WeSearch只用簇收缩候选空间，不让簇承担完整语义标识；在并集内对原子文档先粗后精匹配。OPQ旋转和码本参与相关性学习，不能以固定随机量化器代替论文训练。滚动挂载复用已有参数，模型和全量索引刷新则需版本整体切换。 完整模型与生产实验成本过高，不复现（审查 DONE）；L1 CPU索引/数值组件，diagnostic only。完整模型与生产实验成本过高，不复现（审查 DONE）；未接入执行型Evolve。只用固定种子42/43/44生成小矩阵，验证ADC与显式重构距离相等、候选并集、粗排顺序、输入非法码拒绝及快照隔离。不是公开检索benchmark，不含训练/验证/测试候选调参，更不是推荐质量比较。平局以稳定簇序/文档ID决定，属于本地可复现约定。  召回 聚类候选空间与量化检索 搜广推 候选生成与搜索匹配 新文档挂载能否顺便修改旧码本，并把构造新数组叫原子更新？ 不能。挂载复用固定簇、旋转和码本，修改参数会使旧码失配，需要完整模型/索引版本刷新。构造不可变新快照只保证旧视图不被原地修改，真正可见性切换和分布式原子性仍由外部服务负责。 教学例：旧码1代表蓝色，刷新码本后码1变红，旧文档会被错误解释；应把新模型和重编码索引一起切换，而非只覆盖码本。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-a76ddeb841d4bdd8">新文档挂载能否顺便修改旧码本，并把构造新数组叫原子更新？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Awesearch">WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Tencent</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。挂载复用固定簇、旋转和码本，修改参数会使旧码失配，需要完整模型/索引版本刷新。构造不可变新快照只保证旧视图不被原地修改，真正可见性切换和分布式原子性仍由外部服务负责。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：旧码1代表蓝色，刷新码本后码1变红，旧文档会被错误解释；应把新模型和重编码索引一起切换，而非只覆盖码本。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.00530v1">原论文</a> · <a href="../../../../recommendation-components/2611.00530-wesearch/">实现解读</a> · <a href="#qa-a76ddeb841d4bdd8">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:pair" data-paper-title="PAIR: Preference-Aligned Intent Retrieval for Premium People Recommendation at LinkedIn" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="PAIR: Preference-Aligned Intent Retrieval for Premium People Recommendation at LinkedIn 搜广推与 LLM 应用 LinkedIn 2026-10-22 职业社交中的相关性往往是互补而非相似：求职者可能需要招聘者，不是与自己背景最相近的人。PAIR 从被点击候选、同次曝光未点击候选和随机会员构造偏好，训练共享的 profile/document 编码器，并用历史塔刻画短期意图。论文明确说它不是 token 级 DPO，也没有显式参考模型或 KL 项；损失在计算形式上就是多负例对比学习，差别在曝光条件下的监督语义。 成本过高，不复现（审查 DONE）；这些是公式与接口诊断，不是模型准确率、完整推荐能力或线上提升。固定三种子证据见组件指标，真实CUDA回执为 docs/gpu-validations/pair-a100-20261023.json。验证比较独立标量余弦/交叉熵公式与梯度，执行三次真实更新，检查掩码历史无影响、位置顺序有效、曝光负例不混入点击正例。这些是公式与接口诊断，不是模型准确率、完整推荐能力或线上提升。  召回与匹配 曝光偏好与历史意图 搜广推 候选生成与搜索匹配 PAIR 为什么将职业社交相关性理解为互补，而不只相似？ 求职者可能需要招聘者、客户或不同技能伙伴，资料最像的人未必最有帮助。共享资料编码加历史塔，利用同次曝光的点击与未点击构造偏好，让空间反映这种需求。互补关系仍依场景，不能一律推荐背景不同者。 示意：工程师找招聘者时另一工程师更相似却不合任务；若在找技术同伴，工程师又可能合适，当前历史意图决定相关性含义。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
 <span id="paper-recommendation-pair-40d29d93" class="ar-learning-paper-anchor"></span>

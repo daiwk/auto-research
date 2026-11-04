@@ -4,19 +4,27 @@
 
 [English home](../index.md) · [中文研究库](../../research-library.md)
 
-The catalog lists 1053 entries from the shared research manifest. English write-ups available: 1053.
+The catalog lists 1061 entries from the shared research manifest. English write-ups available: 1061.
 
 ## Browse by domain
 
-- [Search, ads, recommendation, and LLM applications](recommendation.md): 323 catalog entries, 323 English write-ups
-- [Foundation models](foundation-models.md): 201 catalog entries, 201 English write-ups
+- [Search, ads, recommendation, and LLM applications](recommendation.md): 324 catalog entries, 324 English write-ups
+- [Foundation models](foundation-models.md): 204 catalog entries, 204 English write-ups
 - [Structured decisions / System One](system-one.md): 6 catalog entries, 6 English write-ups
 - [Multimodal models](multimodal-models.md): 17 catalog entries, 17 English write-ups
-- [LLM post-training](post-training.md): 242 catalog entries, 242 English write-ups
-- [Agents](agent-research.md): 264 catalog entries, 264 English write-ups
+- [LLM post-training](post-training.md): 244 catalog entries, 244 English write-ups
+- [Agents](agent-research.md): 266 catalog entries, 266 English write-ups
 
 ## Read in English
 
+- [Strategist: Evolving Reasoning with Agents](../../agent-research/2611.03618-strategist/README-en.md)
+- [SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding](../../post-training/2611.02846-specopd/README-en.md)
+- [RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs](../../post-training/2611.02455-rlid/README-en.md)
+- [XLA from the Trenches: Correctness on TPU Workloads at Scale](../../foundation-models/2611.00624-xla-trenches/README-en.md)
+- [WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search](../../recommendation-components/2611.00530-wesearch/README-en.md)
+- [ProLand: A New Infeasible Manifold Optimization Method for LoRA Fine-Tuning](../../foundation-models/2611.00236-proland/README-en.md)
+- [GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport](../../foundation-models/2611.00319-gavagai/README-en.md)
+- [AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers](../../agent-research/2610.39234-agentheal/README-en.md)
 - [Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?](../../agent-research/2610.37276-evalalloc/README-en.md)
 - [When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement](../../agent-research/2610.36826-ruharness/README-en.md)
 - [Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training](../../foundation-models/2610.36794-select-ttt/README-en.md)

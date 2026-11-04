@@ -7,7 +7,7 @@ hide:
 
 # 同一个GRPO名字之外：优势尺度、裁剪单位与训推失配
 
-[LLM 后训练](../index.md) · 更新 2026-10-27 · 54 篇主题资料 / 6 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-04 · 55 篇主题资料 / 7 篇重点对照
 
 GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比被裁剪、样本到底由哪个分布生成。Dr. GRPO、DAPO、GSPO与TIS/IcePop分别改动这些环节，不能把所有ratio都叫同一种off-policy校正。
 
@@ -25,6 +25,7 @@ GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比�
 
 | 论文与来源 | 机制定位 | 得到了什么，付出什么 |
 | --- | --- | --- |
+| [RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs](../../../post-training/2611.02455-rlid/README.md) · [原始来源](https://arxiv.org/abs/2611.02455v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 将优化单位从自由文本改为合法菜单动作概率，单前向label readout后做决策级PPO；同策略内边缘化措辞可去掉对应方差。 | 菜单、记忆和afterstate改变接口；方差恒等式不比较不同模型，也不消除时序信用噪声。本地仅概率/PPO/枚举审计，完整多环境训练成本过高不复现。 |
 | [DeepSeekMath / GRPO](../../../post-training/2402.03300-grpo/README.md) · [原始来源](https://arxiv.org/abs/2402.03300)<br>章节：背景与主要改动、核心公式、复现边界 | 用同题组的奖励均值和标准差替代critic，保留old-policy ratio、clip和reference KL。 | 省去价值模型，却需要同题多响应；全组同奖励没有相对方向。本地是完整候选action，不是DeepSeekMath训练。 |
 | [Dr. GRPO](../../../post-training/2503.20783-dr-grpo/README.md) · [原始来源](https://arxiv.org/abs/2503.20783)<br>章节：背景与主要改动、核心公式、复现边界 | 去掉response内长度平均和组标准差，保留组内中心化，审查隐含难度与长度权重。 | 去归一化改变不同组与轨迹的梯度相对尺度，不会创造全错组信号；本地伪长度仅用于诊断。 |
 | [DAPO](../../../post-training/2503.14476-dapo/README.md) · [原始来源](https://arxiv.org/abs/2503.14476)<br>章节：背景与主要改动、核心公式、复现边界 | 组合Clip-Higher、零方差组过滤、token-level loss和过长奖励处理。 | 有效更新样本与实际生成预算要分别计数；本地长度来自伪token，未复刻长CoT分布式训练。 |
@@ -48,9 +49,25 @@ GRPO组标准差、Dr. GRPO移除该尺度、DAPO按有效token汇总，都会�
 
 对照来源：[grpo](../../../post-training/2402.03300-grpo/README.md) · [dr-grpo](../../../post-training/2503.20783-dr-grpo/README.md) · [dapo](../../../post-training/2503.14476-dapo/README.md)
 
+### 更新单位先于裁剪公式：文本和决策不是同一变量
+
+GRPO/GSPO主要调整既有文本策略的优势或ratio单位，RLiD先把被优化的概率事件改成编译菜单中的动作。其Rao-Blackwell解释只在同一文本策略里对同动作措辞求条件期望；不能凭这个恒等式断言另训LDM更强。菜单是否包含afterstate、记忆来自何处、标签校准及接口对齐，都需在比较前写清；PPO公式相同并不能抹去这些差别。
+
+对照来源：[rlid](../../../post-training/2611.02455-rlid/README.md) · [grpo](../../../post-training/2402.03300-grpo/README.md) · [gspo](../../../post-training/2507.18071-gspo/README.md)
+
 ## 跨论文问答 {#questions}
 
 先想自己的答案，再展开；每个问题至少联系两篇论文。
+
+### 把文本映射到动作后方差下降，为什么不意味着RLiD在每个任务都胜过带推理token的策略？ {#cross-same-policy-marginalization-not-new-model-win}
+
+??? note "展开答案与例子"
+
+    **答案：** 该结论固定同一个文本策略和只依赖动作的优势，边缘化措辞后保持期望更新并删去措辞方差。真正LDM有不同参数化和训练路径，文本推理还提供额外计算；时序信用和菜单接口也未被恒等式解决。论文ARC的Qwen3.5-2B上token策略仍更高，必须保留这个反例。
+
+    **教学例子：** 教学例：一个策略用两种句子表达open可被边缘化；把它换成另一个只看label的网络，已超出同策略恒等式的比较范围。
+
+    对照来源：[rlid](../../../post-training/2611.02455-rlid/README.md) · [grpo](../../../post-training/2402.03300-grpo/README.md)
 
 ### 同题四条回答全错，把GRPO改成Dr. GRPO就能得到学习方向吗？ {#cross-all-failed-group}
 
@@ -86,14 +103,19 @@ GRPO组标准差、Dr. GRPO移除该尺度、DAPO按有效token汇总，都会�
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
 
+**2026-11-04** · 精读RLiD，增加文本概率事件与可执行动作事件这一比较轴，明确同策略方差边缘化不等于不同LDM优越性，并补充标签边际KL与逐行entropy的区别；仅L1组件，完整训练成本过高不复现。
+
+涉及：[rlid](../../../post-training/2611.02455-rlid/README.md)
+
 **2026-10-27** · 首版：比较GRPO/Dr. GRPO/DAPO的优势与归一化、GSPO序列ratio、TIS/IcePop训推校正；已阅54篇摘要，精读6篇。
 
 覆盖 54 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 54 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 55 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
+- [RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs](../../../post-training/2611.02455-rlid/README.md)
 - [MOER: Mix-Policy Optimization under Expert Prefix Guidance with Selective Rollback](../../../post-training/2610.30873-moer/README.md)
 - [CORD: Conflict-Aware Optimization for Joint RL and Distillation in Agents](../../../post-training/2610.29965-cord/README.md)
 - [On-Policy Residual Learning for Diffusion Language Models](../../../post-training/2610.20687-orl-diffusion/README.md)

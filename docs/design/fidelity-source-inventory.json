@@ -21,6 +21,40 @@
         "fingerprint": "3dbfa927dd7b6f5bfe8e1ae71a23c01a4c7211423a4928886edaa0c1cf48de0d"
       }
     ],
+    "src/auto_research/agent_research/agentheal.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "__post_init__",
+        "line": 87,
+        "qualified_name": "Report.__post_init__",
+        "expression": "self.answer",
+        "fingerprint": "4070f9569c410bb803e298005e93cc976f3411edac8addeb092261f5598ca867"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "__post_init__",
+        "line": 88,
+        "qualified_name": "Report.__post_init__",
+        "expression": "self.answer",
+        "fingerprint": "4070f9569c410bb803e298005e93cc976f3411edac8addeb092261f5598ca867"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "__post_init__",
+        "line": 95,
+        "qualified_name": "Report.__post_init__",
+        "expression": "self.answer",
+        "fingerprint": "4070f9569c410bb803e298005e93cc976f3411edac8addeb092261f5598ca867"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "score",
+        "line": 134,
+        "qualified_name": "score",
+        "expression": "report.answer",
+        "fingerprint": "171533e472517cc01b5947930e3e82868bfd5a913364ccd5bac18dc7d1907f29"
+      }
+    ],
     "src/auto_research/agent_research/alpha_diana.py": [
       {
         "kind": "label_access_requires_role_review",

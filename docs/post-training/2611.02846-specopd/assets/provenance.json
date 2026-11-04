@@ -1,0 +1,13 @@
+{
+  "paper_id": "2611.02846v1",
+  "figure": "2",
+  "source_page": "https://arxiv.org/html/2611.02846v1#S2.F2",
+  "source_url": "https://arxiv.org/html/2611.02846v1/fig02-proposal-tree.png",
+  "image": "paper-figure-01.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "9bfc4d91d9e14a39a889fcadc70345b43d9773ce4a22f3a96e961128ebef794b",
+  "license": "CC BY 4.0",
+  "transformation": "none",
+  "visual_review": "2026-11-04目视核对官方HTML Figure2：sample anchors、draft branches与attach branches三阶段，reference trunk共享且两个私有分支；原PNG未裁剪未重绘。图中的模型不代表本地已加载",
+  "checked_on": "2026-11-04"
+}

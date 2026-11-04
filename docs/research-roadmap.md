@@ -1,5 +1,9 @@
 # 统一后续路线图与 TODO
 
+## 2026-11-04 新公告与双语学习资料
+
+[本轮8篇固定范围](research-audits/nov04-components/README.md)：Google XLA/TPU仅高成本资料收录，Meta合作Strategist与WeSearch优先交付；另有ProLand、GAVAGAI、SpecOPD、RLiD、AgentHeal，共7个低成本L1组件。4项CUDA在真实A100三seed核验，3项纯CPU；完整高成本实验不复现（审查DONE），不提升为模型能力或Evolve证据。32条新问答、7个专题深读和英文版同批更新。实际最新公告为11月3日；7篇相对前轮快照新首发、1篇近期补漏，未审线索单列，统一审查水位不变。
+
 ## 2026-10-30 来源零增量与重叠补漏
 
 [本轮固定10项交付与来源差集](research-audits/oct30-overlap-components/README.md)：Google合作CONCUR/MERLIN优先，另补Google四月CROP、两篇有生产A/B的Pinterest论文及五篇基础模型/后训练/Agent组件。6项CUDA已在真实A100三种子执行，4项纯CPU；完整高成本实验不复现、审查DONE。40个逐篇四层问答与9个专题精读同步。官方最新公告仍为10月28日，八类new及共享recent日期、Google/Meta/DeepMind有界目录身份差集均为0；这是补漏，不是10篇当天新首发，全局水位不变。

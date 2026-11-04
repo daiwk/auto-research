@@ -7,7 +7,7 @@ hide:
 
 # 轨迹蒸馏：采样者、提案与散度方向分开看
 
-[LLM 后训练](../index.md) · 更新 2026-10-30 · 41 篇主题资料 / 7 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-04 · 42 篇主题资料 / 8 篇重点对照
 
 “on-policy”描述监督发生在哪些状态，FKL/RKL/JSD描述在这些状态怎样比较分布。GKD和MiniLLM建立这两个轴，DrOPD、AP-OPD再调整纠错位置或强度，Semi-OPD与学习信号诊断则提醒：离线复用和残余损失各有不同含义。 MPOPD再把采样者变成可学习proposal：几何混合是提案target，学生仍向教师做RKL，二者不能混成同一个蒸馏分布。
 
@@ -25,6 +25,7 @@ hide:
 
 | 论文与来源 | 机制定位 | 得到了什么，付出什么 |
 | --- | --- | --- |
+| [SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding](../../../post-training/2611.02846-specopd/README.md) · [原始来源](https://arxiv.org/abs/2611.02846v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 在固定reference anchors重新采当前draft私有历史，以共享trunk并行收集teacher分布，按overlap的prefix乘积优化接受长度surrogate。 | 改的是监督采集依赖与draft目标，不是普通学生RKL的同义写法；teacher全词表质量与predecessor readout必须保留。完整混合target训练/serving未复现，局部张量不证明加速。 |
 | [GKD](../../../post-training/2306.13649-gkd/README.md) · [原始来源](https://arxiv.org/abs/2306.13649)<br>章节：背景与主要改动、核心公式、复现边界 | 让教师在学生实际生成的前缀上给分布监督，用student data fraction混合固定数据与on-policy状态。 | 改善状态覆盖并不指定唯一散度；本地候选支撑集未训练原文T5序列模型。 |
 | [MiniLLM](../../../post-training/2306.08543-minillm/README.md) · [原始来源](https://arxiv.org/abs/2306.08543)<br>章节：背景与主要改动、核心公式、复现边界 | 在学生生成分布上优化RKL，并用teacher-mixed sampling、baseline和长度处理稳定估计。 | 偏向学生可承载的教师模态，可能弱化欠覆盖方向；本地为候选采样与梯度方向验证。 |
 | [Divergence-Routed On-Policy Distillation for Language Models](../../../post-training/2610.19572-divergence-routed-opd/README.md) · [原始来源](https://arxiv.org/abs/2610.19572v1)<br>章节：背景与主要改动、核心公式、结果与验收 | 所有位置保留RKL，仅在高JS分歧位置增加FKL，以候选并集的PPO surrogate实施纠正。 | 路由支持教师高概率但学生少采到的候选，不等于全局改用FKL；完整训练未复现，微型在线更新为L1诊断。 |
@@ -55,9 +56,25 @@ GKD让教师在学生访问的前缀上监督，MiniLLM进一步选定学生到�
 
 对照来源：[mpopd](../../../post-training/2610.36477-mpopd/README.md) · [gkd](../../../post-training/2306.13649-gkd/README.md) · [minillm](../../../post-training/2306.08543-minillm/README.md)
 
+### 固定外层reference仍可有当前策略内层分支
+
+GKD/MiniLLM让teacher在学生访问状态上监督，MPOPD再训练独立proposal改变可达性；SpecOPD则针对推测draft，把固定reference作为外层锚点，每步重采内层draft分支以打破整响应验证依赖。reference固定不等于分支off-policy；但这也不是完全自由的学生轨迹。其E2E-TV优化前缀存活，需要完整teacher质量，且teacher query必须读私有前驱历史；loss通过不能证明混合注意力target已经正确共享状态或真实serving更快。
+
+对照来源：[specopd](../../../post-training/2611.02846-specopd/README.md) · [gkd](../../../post-training/2306.13649-gkd/README.md) · [mpopd](../../../post-training/2610.36477-mpopd/README.md)
+
 ## 跨论文问答 {#questions}
 
 先想自己的答案，再展开；每个问题至少联系两篇论文。
+
+### SpecOPD的reference anchor后分支已偏离原文，教师仍应按原reference后缀来打分吗？ {#cross-branch-prefix-is-not-reference-label}
+
+??? note "展开答案与例子"
+
+    **答案：** 不应。当前分支token的教师条件由reference前缀和该分支已采样token组成，不能用reference后缀替换，也不能看到未来或兄弟。第一token读anchor，后续读前驱行。否则改变监督历史，甚至从自身行泄漏答案；不再是原方法的分支监督。
+
+    **教学例子：** 教学例：reference是a quiet，draft采short evening；预测evening必须以a short为条件，而不能回到a quiet，也不能把evening先喂入再打自己的分。
+
+    对照来源：[specopd](../../../post-training/2611.02846-specopd/README.md) · [gkd](../../../post-training/2306.13649-gkd/README.md)
 
 ### GKD与MiniLLM都沿学生轨迹学习，为什么DrOPD还会额外加入FKL？ {#cross-on-policy-not-one-kl}
 
@@ -103,6 +120,10 @@ GKD让教师在学生访问的前缀上监督，MiniLLM进一步选定学生到�
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
 
+**2026-11-04** · 精读SpecOPD，分开固定reference外层、当前draft内层分支及E2E-TV目标；相对GKD/MPOPD补充采集依赖这一轴，保留teacher完整质量、祖先隔离与predecessor读出，不把L1张量通过写成serving加速。
+
+涉及：[specopd](../../../post-training/2611.02846-specopd/README.md)
+
 **2026-10-30** · 精读MPOPD v2，把独立proposal、学生RKL、教师top-k支持与滞后一token的冻结单步ratio分开；相对GKD/MiniLLM补充采样者可学习这一轴，保留proposal重置等外部前提。
 
 涉及：[mpopd](../../../post-training/2610.36477-mpopd/README.md) · [gkd](../../../post-training/2306.13649-gkd/README.md) · [minillm](../../../post-training/2306.08543-minillm/README.md)
@@ -111,10 +132,11 @@ GKD让教师在学生访问的前缀上监督，MiniLLM进一步选定学生到�
 
 覆盖 40 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 41 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 42 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
+- [SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding](../../../post-training/2611.02846-specopd/README.md)
 - [On-Policy Self-Training: Data-Free Self-Improvement in Large Language Models](../../../post-training/2610.32770-opst/README.md)
 - [UserArena: Benchmarking Interactive User Simulation for Long-Horizon Shopping Agents](../../../post-training/2610.30932-userarena-optd/README.md)
 - [GIFT: Gradient Informed Filtering for Distillation Augmented Reasoning RL](../../../post-training/2610.30796-gift/README.md)

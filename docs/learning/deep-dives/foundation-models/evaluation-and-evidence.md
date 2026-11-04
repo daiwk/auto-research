@@ -7,9 +7,9 @@ hide:
 
 # 能力证据：准确打分、节省观测与解释预测
 
-[基础模型](../index.md) · 更新 2026-10-27 · 13 篇主题资料 / 5 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-04 · 14 篇主题资料 / 6 篇重点对照
 
-先区分“正确答案怎样定义”“下一题测谁”“多个裁判怎样融合”和“预测怎样解释”。XLGoBench、ProEval、FUSE、TCAB 与 DetectorScope 分别改变这些环节；观测更少或解释可加，不等于被测能力本身更强。
+先区分“正确答案怎样定义”“下一题测谁”“多个裁判怎样融合”和“预测怎样解释”。XLGoBench、ProEval、FUSE、TCAB 与 DetectorScope 分别改变这些环节；观测更少或解释可加，不等于被测能力本身更强。XLA from the Trenches还提醒：评分之前，编译后程序本身就可能静默偏离原始数值语义，不能把编译成功当作执行正确。
 
 [机制对照](#comparison) · [取舍分析](#analysis) · [跨论文问答](#questions) · [更新记录](#updates) · [本主题逐篇问答](../../paths/foundation-models/evaluation-and-evidence.md)
 
@@ -30,6 +30,7 @@ hide:
 | [FUSE: Ensembling Verifiers with Zero Labeled Data](../../../foundation-models/2604.18547-fuse-verifiers/README.md) · [原始来源](https://arxiv.org/abs/2604.18547v1)<br>章节：背景与主要改动、核心公式、本地复现与成本判断 | 从多个验证器的分数矩阵估计质量与正确后验，再学习集成，真实正确标签留给外部评价。 | 依赖多数优于随机、条件独立等识别假设，不保证相关裁判下可靠；本地尚未实现集成器。 |
 | [Fast A/B/n Testing: Exact Multi-Policy Comparison via Tree-Coupled Feedback Sharing](../../../reproductions/2608.12831-tcab/README.md) · [原始来源](https://arxiv.org/abs/2608.12831)<br>章节：背景与主要改动、核心公式、复现边界 | 最大耦合让自适应策略在相同决策时共享反馈，以树结构组织共享，同时维持各策略边际轨迹。 | 节省反馈要求正确耦合，不能任意复制异动作回报；本地 mini-suite 不证明理论渐近节约或生产A/B收益。 |
 | [Building Auditable AI Text Detectors with Sparse Autoencoders](../../../foundation-models/2610.30006-detector-scope/README.md) · [原始来源](https://arxiv.org/abs/2610.30006v1)<br>章节：背景与主要改动、核心公式、代码映射与边界 | 把外部SAE概念筛选后交给稀疏线性头，输出可由池化特征置零核验的logit贡献。 | 解释是特征级而非改写文本的因果效果；本地只验合成激活上的L1组件，未训练完整检测器或SAE。 |
+| [XLA from the Trenches: Correctness on TPU Workloads at Scale](../../../foundation-models/2611.00624-xla-trenches/README.md) · [原始来源](https://arxiv.org/abs/2611.00624)<br>章节：核心机制与数值例子、论文工程与线上证据、资源与复现边界 | 在合法输入和目标TPU数值语义下做差分检查，从大图隔离到完整fusion内部VREG，避免调试拆图改变故障。 | 编译器正确性证据不是模型能力分数；内部生产图和TPU工具不可用，公开OpenXLA只是部分链路，本地review-only且无CUDA替身。 |
 
 </div>
 
@@ -46,6 +47,12 @@ XLGoBench 由算法生成精确答案，适合判断一次结构化输出是否�
 FUSE 试图利用多个验证器而不直接读取真实标签，但其后验仍受相关性和识别假设限制。DetectorScope 的线性结构可精确分解 logit，却只证明某个池化特征对预测的数值贡献，不证明概念描述或输入文本的因果关系。TCAB 则约束共享反馈时的边际分布。三者把不同环节做得更可检查，不能互相代替，更不能仅凭解释流畅或反馈复用率高宣布能力已验证。
 
 对照来源：[fuse-verifiers](../../../foundation-models/2604.18547-fuse-verifiers/README.md) · [detector-scope](../../../foundation-models/2610.30006-detector-scope/README.md) · [tcab](../../../reproductions/2608.12831-tcab/README.md)
+
+### 参考语义也必须匹配被测执行环境
+
+XLGoBench强调scorer与gold隔离，XLA案例进一步显示：即使测试题和标签合法，编译后的计算也可能因寄存器舍入或融合调度偏离原程序。差分参考既不能接受非法输入制造NaN伪警，也不能把合法TPU近似函数误报为故障。拆fusion后正确不代表原fusion正确；A100上算对也不证明TPU lowering正确。因此本轮保留TPU环境缺失，不用CPU/CUDA演示替代硬件结论。
+
+对照来源：[xlgobench](../../../foundation-models/2605.30788-xlgobench/README.md) · [xla-trenches](../../../foundation-models/2611.00624-xla-trenches/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -81,18 +88,33 @@ FUSE 试图利用多个验证器而不直接读取真实标签，但其后验仍
 
     对照来源：[tcab](../../../reproductions/2608.12831-tcab/README.md) · [proeval](../../../foundation-models/2604.23099-proeval/README.md)
 
+### 如果XLGoBench有精确gold，为什么仍不能靠“程序跑完了”保证本次模型评测可信？ {#cross-nov04-labels-versus-execution-semantics}
+
+??? note "展开答案与例子"
+
+    **答案：** 精确gold只定义正确输出，不证明模型的编译执行保持原语义。XLA显示静默错编译能在不崩溃时改变数值；还需合法输入、匹配硬件的差分参考与故障隔离。把正确标签和正确执行分开检查，才能判断错误来自模型还是后端。
+
+    **教学例子：** 教学例：数学gold为非零量化残差，TPU fused kernel却因省略cast全输出0；即使scorer完全准确，也只能判本次输出错，不能自动归因于模型不会该题。
+
+    对照来源：[xlgobench](../../../foundation-models/2605.30788-xlgobench/README.md) · [xla-trenches](../../../foundation-models/2611.00624-xla-trenches/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-04** · 补入Google XLA:TPU编译器正确性研究，区分合法评分、参考硬件语义、静默错编译及工程bug计数；完整内部TPU实验高成本不复现，审查DONE。
+
+涉及：[xla-trenches](../../../foundation-models/2611.00624-xla-trenches/README.md)
 
 **2026-10-27** · 首版：比较精确算法评分、概率评测替身、无标签验证器融合、反馈耦合与可加概念解释，明确观测和推断的边界。
 
 覆盖 13 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 13 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 14 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
+- [XLA from the Trenches: Correctness on TPU Workloads at Scale](../../../foundation-models/2611.00624-xla-trenches/README.md)
 - [Detecting Safety Training Modification in Language Models via Activation Analysis](../../../foundation-models/2608.05578-activation-model-scanner/README.md)
 - [Detecting Post-generation Edits to Watermarked LLM Outputs via Combinatorial Watermarking](../../../foundation-models/2510.01637-combinatorial-watermark/README.md)
 - [CritICL: Inference-Time Weak-to-Strong Generalization from Small Language Model Failure Modes](../../../foundation-models/2608.27455-criticl/README.md)

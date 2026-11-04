@@ -7,7 +7,7 @@ hide:
 
 # 训练预算：数据配比、目标与优化器
 
-[基础模型](index.md) / 112 个问题 · 28 篇论文
+[基础模型](index.md) / 120 个问题 · 30 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,115 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">112 个问题 · 28 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">120 个问题 · 30 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gavagai" data-paper-title="GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport 基础模型 St Thomas’ College of Engineering and Technology 2026-10-30 照护者语言中许多内容词并不指向当前可见物体。逐词对视觉区域 softmax 会强制这些词选择背景，常在画面中的手、地板便吞噬词汇。GAVAGAI 同时加入无容量限制的 Nothing 列和视觉区域的容量上界，不把每个视觉列强制填满。 完整实验成本过高，不复现（审查 DONE）；capped_transport 执行 Eq.2；ReferentialAlignment 实际构造单位归一化成本、可训练 Nothing head、停梯度计划和目标，接受固定外部成本先验。区域 proposal、内容词选择与跨场景先验统计必须由调用方提供，不用标签生成它们。  多模态基础模型 词区域对齐与容量约束传输 基础模型 训练预算：数据配比、目标与优化器 GAVAGAI 为什么同时需要 Nothing 和区域容量，而不是二选一？ Nothing允许不指称可见物体的词不被强制分给背景；区域容量防止少数常见背景吸收许多不同词。只有容量而没有Nothing仍须把质量塞进视觉区域；只有Nothing而无容量则不能限制某个背景区域的集中吸收。两条约束处理不同故障。 教学例：一句话含hungry、ball，图中有球和手。hungry可去Nothing，ball去球；手的容量还阻止许多无关词都被分到手。教学分配不是模型测量。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<span id="paper-foundation-models-gavagai-10f9efba" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-3e555cebb13ccaa8">GAVAGAI 为什么同时需要 Nothing 和区域容量，而不是二选一？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Agavagai">GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · St Thomas’ College of Engineering and Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Nothing允许不指称可见物体的词不被强制分给背景；区域容量防止少数常见背景吸收许多不同词。只有容量而没有Nothing仍须把质量塞进视觉区域；只有Nothing而无容量则不能限制某个背景区域的集中吸收。两条约束处理不同故障。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一句话含hungry、ball，图中有球和手。hungry可去Nothing，ball去球；手的容量还阻止许多无关词都被分到手。教学分配不是模型测量。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.00319">原论文</a> · <a href="../../../../foundation-models/2611.00319-gavagai/">实现解读</a> · <a href="#qa-3e555cebb13ccaa8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gavagai" data-paper-title="GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport 基础模型 St Thomas’ College of Engineering and Technology 2026-10-30 照护者语言中许多内容词并不指向当前可见物体。逐词对视觉区域 softmax 会强制这些词选择背景，常在画面中的手、地板便吞噬词汇。GAVAGAI 同时加入无容量限制的 Nothing 列和视觉区域的容量上界，不把每个视觉列强制填满。 完整实验成本过高，不复现（审查 DONE）；capped_transport 执行 Eq.2；ReferentialAlignment 实际构造单位归一化成本、可训练 Nothing head、停梯度计划和目标，接受固定外部成本先验。区域 proposal、内容词选择与跨场景先验统计必须由调用方提供，不用标签生成它们。  多模态基础模型 词区域对齐与容量约束传输 基础模型 训练预算：数据配比、目标与优化器 论文标题提到Balanced OT，为什么实现不能固定所有视觉列的边际等式？ Eq1真正约束是每词行和等于1，而视觉列和只要求不超过b，Nothing不封顶。对应对偶更新是v=min(1,b/(Kᵀu))。强制列和恰等于b会让图中未被命名的区域也被分配质量，改变可行域和方法含义。 教学例：两个词都不对应图中物体、某视觉列容量.8时，合法解可把接近2的质量送到Nothing、视觉列接近0；不能为了花完.8容量而强行指称该物体。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-67e9c8815f05713f">论文标题提到Balanced OT，为什么实现不能固定所有视觉列的边际等式？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Agavagai">GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · St Thomas’ College of Engineering and Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Eq1真正约束是每词行和等于1，而视觉列和只要求不超过b，Nothing不封顶。对应对偶更新是v=min(1,b/(Kᵀu))。强制列和恰等于b会让图中未被命名的区域也被分配质量，改变可行域和方法含义。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个词都不对应图中物体、某视觉列容量.8时，合法解可把接近2的质量送到Nothing、视觉列接近0；不能为了花完.8容量而强行指称该物体。</p>
+<p class="ar-learning-sources">依据：核心公式、检查与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.00319">原论文</a> · <a href="../../../../foundation-models/2611.00319-gavagai/">实现解读</a> · <a href="#qa-67e9c8815f05713f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gavagai" data-paper-title="GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport 基础模型 St Thomas’ College of Engineering and Technology 2026-10-30 照护者语言中许多内容词并不指向当前可见物体。逐词对视觉区域 softmax 会强制这些词选择背景，常在画面中的手、地板便吞噬词汇。GAVAGAI 同时加入无容量限制的 Nothing 列和视觉区域的容量上界，不把每个视觉列强制填满。 完整实验成本过高，不复现（审查 DONE）；capped_transport 执行 Eq.2；ReferentialAlignment 实际构造单位归一化成本、可训练 Nothing head、停梯度计划和目标，接受固定外部成本先验。区域 proposal、内容词选择与跨场景先验统计必须由调用方提供，不用标签生成它们。  多模态基础模型 词区域对齐与容量约束传输 基础模型 训练预算：数据配比、目标与优化器 容量不活跃时，GAVAGAI与逐行softmax的关系是什么？这代表完整方法没有区别吗？ 若每个视觉容量至少为词数n，所有列乘子保持1，OT就退化为包含Nothing的逐行softmax；再删Nothing才得到强制视觉指称的朴素基线。这是有用的退化核验，不表示容量活跃时也等价，更不能据小矩阵结果声称SAYCam提升。 教学例：3个词时将每列容量设为3，视觉列不可能超额；把同一容量改为.4后，多个词竞争该区域，行与列的缩放就耦合起来。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-c93acf7533ea3f56">容量不活跃时，GAVAGAI与逐行softmax的关系是什么？这代表完整方法没有区别吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Agavagai">GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · St Thomas’ College of Engineering and Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>若每个视觉容量至少为词数n，所有列乘子保持1，OT就退化为包含Nothing的逐行softmax；再删Nothing才得到强制视觉指称的朴素基线。这是有用的退化核验，不表示容量活跃时也等价，更不能据小矩阵结果声称SAYCam提升。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：3个词时将每列容量设为3，视觉列不可能超额；把同一容量改为.4后，多个词竞争该区域，行与列的缩放就耦合起来。</p>
+<p class="ar-learning-sources">依据：核心公式、检查与负控、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.00319">原论文</a> · <a href="../../../../foundation-models/2611.00319-gavagai/">实现解读</a> · <a href="#qa-c93acf7533ea3f56">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gavagai" data-paper-title="GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport 基础模型 St Thomas’ College of Engineering and Technology 2026-10-30 照护者语言中许多内容词并不指向当前可见物体。逐词对视觉区域 softmax 会强制这些词选择背景，常在画面中的手、地板便吞噬词汇。GAVAGAI 同时加入无容量限制的 Nothing 列和视觉区域的容量上界，不把每个视觉列强制填满。 完整实验成本过高，不复现（审查 DONE）；capped_transport 执行 Eq.2；ReferentialAlignment 实际构造单位归一化成本、可训练 Nothing head、停梯度计划和目标，接受固定外部成本先验。区域 proposal、内容词选择与跨场景先验统计必须由调用方提供，不用标签生成它们。  多模态基础模型 词区域对齐与容量约束传输 基础模型 训练预算：数据配比、目标与优化器 为什么8次Sinkhorn后不能随手把每行再归一化，又为何对齐loss必须停掉plan梯度？ 最后一次列缩放保证容量上界，但有限次迭代的行和可能偏离1；再归一化行可能重新超容量，应暴露残差而非隐藏。Eq3规定P固定、梯度只经成本C，因此对齐项梯度是λP。Nothing hinge的额外可微路径在v1未说明，本地只记录固定plan值，不伪造完整防塌缩训练。 教学例：某行和.8，归一化会把其视觉质量乘1.25，原本刚好饱和的视觉列可能超标。λ=.1时成本梯度应是.1P，而不是再穿过8次缩放的自动微分图。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-0d9f24e7690e5a6d">为什么8次Sinkhorn后不能随手把每行再归一化，又为何对齐loss必须停掉plan梯度？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Agavagai">GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · St Thomas’ College of Engineering and Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>最后一次列缩放保证容量上界，但有限次迭代的行和可能偏离1；再归一化行可能重新超容量，应暴露残差而非隐藏。Eq3规定P固定、梯度只经成本C，因此对齐项梯度是λP。Nothing hinge的额外可微路径在v1未说明，本地只记录固定plan值，不伪造完整防塌缩训练。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：某行和.8，归一化会把其视觉质量乘1.25，原本刚好饱和的视觉列可能超标。λ=.1时成本梯度应是.1P，而不是再穿过8次缩放的自动微分图。</p>
+<p class="ar-learning-sources">依据：核心公式、检查与负控、成本判断与复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.00319">原论文</a> · <a href="../../../../foundation-models/2611.00319-gavagai/">实现解读</a> · <a href="#qa-0d9f24e7690e5a6d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:proland" data-paper-title="ProLand: A New Infeasible Manifold Optimization Method for LoRA Fine-Tuning" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="ProLand: A New Infeasible Manifold Optimization Method for LoRA Fine-Tuning 基础模型 Shanghai Jiao Tong University 2026-10-30 LoRA 的两因子可以产生冗余基方向。ProLand 约束，但不每步强制投回流形；它先在的乘积空间形成协调的谱方向，再独立以 Landing 恢复可行性。不能用“对 A、B 各自运行一次 Muon”替代该定义。 现有资源是单张 A100/A30 或 Mac，完整矩阵成本过高，不复现（审查 DONE）。未下载 checkpoint、未测完整训练小时、未验证语言分数或吞吐。step 实际执行 Algorithm 2，接受两因子的真实梯度并返回同时更新的因子与 thin momentum；调用方负责复制回参数。支持 FP32/FP64，拒绝不匹配的 shape、device、dtype、非有限输入和非法配置；不暗加 weight decay 或伪逆正则项。  预训练与数据 优化器与参数高效微调 基础模型 训练预算：数据配比、目标与优化器 ProLand 为什么在 B 的正交约束暂时不满足时仍允许优化，而不是每步投回去？ 它将乘积 BA 的目标方向与恢复 B 正交性的 Landing 分开。水平条件 BᵀDB=0 让目标更新只在二阶扰动 Gram 偏差，独立校正再逐步拉回约束附近。每步 retraction 会改变优化路径，并不是同一个算法；允许暂时不可行也不代表任何步长都稳定。 教学例：BᵀB=1.08 的一维基可以先沿水平目标方向前进，再减去ρB×0.08；若直接把 B 归一化到1，则走了不同的路径。这个例子不是GLUE效果。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<span id="paper-foundation-models-proland-fc0beeb7" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-569c506454b78c35">ProLand 为什么在 B 的正交约束暂时不满足时仍允许优化，而不是每步投回去？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aproland">ProLand: A New Infeasible Manifold Optimization Method for LoRA Fine-Tuning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Shanghai Jiao Tong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它将乘积 BA 的目标方向与恢复 B 正交性的 Landing 分开。水平条件 BᵀDB=0 让目标更新只在二阶扰动 Gram 偏差，独立校正再逐步拉回约束附近。每步 retraction 会改变优化路径，并不是同一个算法；允许暂时不可行也不代表任何步长都稳定。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：BᵀB=1.08 的一维基可以先沿水平目标方向前进，再减去ρB×0.08；若直接把 B 归一化到1，则走了不同的路径。这个例子不是GLUE效果。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.00236">原论文</a> · <a href="../../../../foundation-models/2611.00236-proland/">实现解读</a> · <a href="#qa-569c506454b78c35">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:proland" data-paper-title="ProLand: A New Infeasible Manifold Optimization Method for LoRA Fine-Tuning" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="ProLand: A New Infeasible Manifold Optimization Method for LoRA Fine-Tuning 基础模型 Shanghai Jiao Tong University 2026-10-30 LoRA 的两因子可以产生冗余基方向。ProLand 约束，但不每步强制投回流形；它先在的乘积空间形成协调的谱方向，再独立以 Landing 恢复可行性。不能用“对 A、B 各自运行一次 Muon”替代该定义。 现有资源是单张 A100/A30 或 Mac，完整矩阵成本过高，不复现（审查 DONE）。未下载 checkpoint、未测完整训练小时、未验证语言分数或吞吐。step 实际执行 Algorithm 2，接受两因子的真实梯度并返回同时更新的因子与 thin momentum；调用方负责复制回参数。支持 FP32/FP64，拒绝不匹配的 shape、device、dtype、非有限输入和非法配置；不暗加 weight decay 或伪逆正则项。  预训练与数据 优化器与参数高效微调 基础模型 训练预算：数据配比、目标与优化器 为什么 momentum 必须重投影到当前 BA 的乘积空间，而不能原样保留旧稠密方向？ B、A 改变后，可由当前因子一阶变化实现的子空间也会改变。ProLand先用当前Π重投影旧EMA，再与当前投影梯度混合，确保动量仍位于当前可实现空间。thin-factor算法从同一loss的两因子梯度重建这个量，并非给A和B各维护一个普通Muon动量。 教学例：旧B只覆盖第一坐标，新B转向第二坐标，旧空间的方向未必能由新因子保持原样实现；应先按新PB与PA计算Π，再更新EMA。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-1d0852acd4a51274">为什么 momentum 必须重投影到当前 BA 的乘积空间，而不能原样保留旧稠密方向？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aproland">ProLand: A New Infeasible Manifold Optimization Method for LoRA Fine-Tuning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Shanghai Jiao Tong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>B、A 改变后，可由当前因子一阶变化实现的子空间也会改变。ProLand先用当前Π重投影旧EMA，再与当前投影梯度混合，确保动量仍位于当前可实现空间。thin-factor算法从同一loss的两因子梯度重建这个量，并非给A和B各维护一个普通Muon动量。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：旧B只覆盖第一坐标，新B转向第二坐标，旧空间的方向未必能由新因子保持原样实现；应先按新PB与PA计算Π，再更新EMA。</p>
+<p class="ar-learning-sources">依据：核心公式、检查与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.00236">原论文</a> · <a href="../../../../foundation-models/2611.00236-proland/">实现解读</a> · <a href="#qa-1d0852acd4a51274">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:proland" data-paper-title="ProLand: A New Infeasible Manifold Optimization Method for LoRA Fine-Tuning" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="ProLand: A New Infeasible Manifold Optimization Method for LoRA Fine-Tuning 基础模型 Shanghai Jiao Tong University 2026-10-30 LoRA 的两因子可以产生冗余基方向。ProLand 约束，但不每步强制投回流形；它先在的乘积空间形成协调的谱方向，再独立以 Landing 恢复可行性。不能用“对 A、B 各自运行一次 Muon”替代该定义。 现有资源是单张 A100/A30 或 Mac，完整矩阵成本过高，不复现（审查 DONE）。未下载 checkpoint、未测完整训练小时、未验证语言分数或吞吐。step 实际执行 Algorithm 2，接受两因子的真实梯度并返回同时更新的因子与 thin momentum；调用方负责复制回参数。支持 FP32/FP64，拒绝不匹配的 shape、device、dtype、非有限输入和非法配置；不暗加 weight decay 或伪逆正则项。  预训练与数据 优化器与参数高效微调 基础模型 训练预算：数据配比、目标与优化器 对 A 和 B 分别求 polar，与先在 BA 空间求 polar 再分解方向，有什么区别？ polar不是线性映射，两因子的参数化还存在缩放自由度；独立谱更新无法保证两者组合就是乘积空间选中的方向。ProLand由Y统一构造DA=B†Y与DB=(I−PB)YA†，使BDA+DBA等于ΠY，并满足BᵀDB=0。 教学例：把B乘2、A除2不改变BA，却改变独立因子梯度的尺度与几何；仅因为两条路径都调用polar，不能认定它们更新相同的ΔW。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-a6768fdeaa95e98e">对 A 和 B 分别求 polar，与先在 BA 空间求 polar 再分解方向，有什么区别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aproland">ProLand: A New Infeasible Manifold Optimization Method for LoRA Fine-Tuning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Shanghai Jiao Tong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>polar不是线性映射，两因子的参数化还存在缩放自由度；独立谱更新无法保证两者组合就是乘积空间选中的方向。ProLand由Y统一构造DA=B†Y与DB=(I−PB)YA†，使BDA+DBA等于ΠY，并满足BᵀDB=0。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把B乘2、A除2不改变BA，却改变独立因子梯度的尺度与几何；仅因为两条路径都调用polar，不能认定它们更新相同的ΔW。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.00236">原论文</a> · <a href="../../../../foundation-models/2611.00236-proland/">实现解读</a> · <a href="#qa-a6768fdeaa95e98e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:proland" data-paper-title="ProLand: A New Infeasible Manifold Optimization Method for LoRA Fine-Tuning" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="ProLand: A New Infeasible Manifold Optimization Method for LoRA Fine-Tuning 基础模型 Shanghai Jiao Tong University 2026-10-30 LoRA 的两因子可以产生冗余基方向。ProLand 约束，但不每步强制投回流形；它先在的乘积空间形成协调的谱方向，再独立以 Landing 恢复可行性。不能用“对 A、B 各自运行一次 Muon”替代该定义。 现有资源是单张 A100/A30 或 Mac，完整矩阵成本过高，不复现（审查 DONE）。未下载 checkpoint、未测完整训练小时、未验证语言分数或吞吐。step 实际执行 Algorithm 2，接受两因子的真实梯度并返回同时更新的因子与 thin momentum；调用方负责复制回参数。支持 FP32/FP64，拒绝不匹配的 shape、device、dtype、非有限输入和非法配置；不暗加 weight decay 或伪逆正则项。  预训练与数据 优化器与参数高效微调 基础模型 训练预算：数据配比、目标与优化器 实现时为什么不能先改 A 再用新 A 计算 B 的更新，也不能把ρ再乘学习率？ Algorithm1/2规定DA、DB、Gram偏差均由同一旧因子对计算，再同时应用；顺序更新会引入额外耦合项。Landing的ρ是独立步长，公式中没有额外γ。还需紧致polar把零奇异方向保持零，并承认秩变附近伪逆的浮点病态性。 教学例：γ=.01、ρ=.05时Landing系数是.05，不是.0005；误乘会把恢复强度缩小100倍。零核心若误用完整UVᵀ，还可能在零梯度时凭空更新。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-7fa337cf3dc2f2d3">实现时为什么不能先改 A 再用新 A 计算 B 的更新，也不能把ρ再乘学习率？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aproland">ProLand: A New Infeasible Manifold Optimization Method for LoRA Fine-Tuning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Shanghai Jiao Tong University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Algorithm1/2规定DA、DB、Gram偏差均由同一旧因子对计算，再同时应用；顺序更新会引入额外耦合项。Landing的ρ是独立步长，公式中没有额外γ。还需紧致polar把零奇异方向保持零，并承认秩变附近伪逆的浮点病态性。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：γ=.01、ρ=.05时Landing系数是.05，不是.0005；误乘会把恢复强度缩小100倍。零核心若误用完整UVᵀ，还可能在零梯度时凭空更新。</p>
+<p class="ar-learning-sources">依据：核心公式、实现与运行、检查与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.00236">原论文</a> · <a href="../../../../foundation-models/2611.00236-proland/">实现解读</a> · <a href="#qa-7fa337cf3dc2f2d3">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:lazyflash" data-paper-title="LazyFlash: Forward-Dense, Backward-Sparse Attention for Accelerated Long-Context Fine-Tuning" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="LazyFlash: Forward-Dense, Backward-Sparse Attention for Accelerated Long-Context Fine-Tuning 基础模型 Microsoft 2026-10-22 与稀疏前向attention不同，LazyFlash保留训练和部署前向完全dense。它按query block的dO Frobenius范数衡量梯度贡献，用gradient-mass budget约束预计丢弃量，并importance采样反向block。必须在tiled FlashAttention反向内部跳过内存访问/计算，才能兑现论文速度；用PyTorch dense backward后置零或toy mask不构成该方法的低成本完整实现。 成本过高，不复现（审查 DONE）。原文8张H200、65,536长度、2500steps，多个Qwen3模型和语音50K小时训练数据；所有计时在H200。自定义FlashAttention反向kernel及跨长度/模型/精度验证本身也超过本轮单卡低成本范围。不安装/编译kernel或加载权重来“试试”。无本地operator、metrics或GPUreceipt；无capability/evolve声明。原方法的定义性产物是可执行的tiled backward kernel，本轮不以通用softmax/mask代理充数。已读方法、实验及附录后终结完整复现成本审查。  推理与系统效率 长上下文训练 基础模型 训练预算：数据配比、目标与优化器 LazyFlash 为什么在训练时保留 dense 前向，却压缩反向工作？ 前向决定模型读取的完整上下文；反向不同query块的梯度贡献可能很不均匀。方法把节省放在训练梯度计算上，避免把部署时的可见信息范围改成稀疏前向。 示意：模型仍看全文作预测，但本次训练反向只抽取部分贡献块并做相应重权。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
 <span id="paper-foundation-models-lazyflash-43455fcb" class="ar-learning-paper-anchor"></span>

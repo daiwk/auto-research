@@ -7,7 +7,7 @@ hide:
 
 # 运行流程与自进化：改的是哪一层
 
-[Agent](index.md) / 184 个问题 · 46 篇论文
+[Agent](index.md) / 188 个问题 · 47 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">184 个问题 · 46 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">188 个问题 · 47 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:strategist" data-paper-title="Strategist: Evolving Reasoning with Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Strategist: Evolving Reasoning with Agents Agent Princeton University 2026-11-02 模型权重不是 Agent 的全部：单步回答、投票、分解、审查、多模型路由等推理程序也决定效果和成本。论文不训练执行模型，而让一个 meta-agent 在小开发集上提出并实测这些程序，将它们表示为统一 execute(llm, task) -&gt; str 的 Python blueprint。一个 blueprint 可调用此前已存在的 blueprint，构成无环组合图；与任务提示配对才形成具体策略。 高成本完整实验：成本过高，不复现（审查 DONE）。组件状态：component_only，CPU / L1 控制与数值诊断。组件状态：component_only，CPU / L1 控制与数值诊断。没有运行 LLM 设计器、执行器或真实搜索，不是推理能力比较，也未接入统一 Evolve。高成本完整实验：成本过高，不复现（审查 DONE）。也可使用 Python 接口：  Harness 与自我改进 RSI 推理策略组合与跨任务积累 Agent 运行流程与自进化：改的是哪一层 Strategist积累的是模型参数、当前答案，还是另一种跨任务资产？ 它冻结执行模型，把推理程序表示成有统一execute接口的Python blueprint，并在实测后连同测量卡和训练轨迹经验进入跨任务库。具体任务提示与结构分开；后续任务可组合或复用旧结构，不等于模型经过梯度训练，也不只是当前答案修订。 教学例：一次发现“先做三个候选再独立审查”的流程，可在下一领域换提示继续测试；保存某道题的最终数字并不是可复用blueprint机制。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-strategist-e4eab6e6" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-9e13afb92bd736c7">Strategist积累的是模型参数、当前答案，还是另一种跨任务资产？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Astrategist">Strategist: Evolving Reasoning with Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Princeton University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它冻结执行模型，把推理程序表示成有统一execute接口的Python blueprint，并在实测后连同测量卡和训练轨迹经验进入跨任务库。具体任务提示与结构分开；后续任务可组合或复用旧结构，不等于模型经过梯度训练，也不只是当前答案修订。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一次发现“先做三个候选再独立审查”的流程，可在下一领域换提示继续测试；保存某道题的最终数字并不是可复用blueprint机制。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.03618">原论文</a> · <a href="../../../../agent-research/2611.03618-strategist/">实现解读</a> · <a href="#qa-9e13afb92bd736c7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:strategist" data-paper-title="Strategist: Evolving Reasoning with Agents" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Strategist: Evolving Reasoning with Agents Agent Princeton University 2026-11-02 模型权重不是 Agent 的全部：单步回答、投票、分解、审查、多模型路由等推理程序也决定效果和成本。论文不训练执行模型，而让一个 meta-agent 在小开发集上提出并实测这些程序，将它们表示为统一 execute(llm, task) -&gt; str 的 Python blueprint。一个 blueprint 可调用此前已存在的 blueprint，构成无环组合图；与任务提示配对才形成具体策略。 高成本完整实验：成本过高，不复现（审查 DONE）。组件状态：component_only，CPU / L1 控制与数值诊断。组件状态：component_only，CPU / L1 控制与数值诊断。没有运行 LLM 设计器、执行器或真实搜索，不是推理能力比较，也未接入统一 Evolve。高成本完整实验：成本过高，不复现（审查 DONE）。也可使用 Python 接口：  Harness 与自我改进 RSI 推理策略组合与跨任务积累 Agent 运行流程与自进化：改的是哪一层 准确率提高2个百分点、成本下降刚好2%，是否自动满足Strategist的胜出规则？ 不满足，超过2个百分点或成本比严格小于0.98才构成对应的改善；同时另一指标不能恶化超过其容忍带。候选还须在validation与hidden都胜出，最终再按hidden准确率增益、成本比排序。默认规则不是置信区间检验，不能因为计算了标准误就称显著提升。 教学例：d=0.02、成本比=0.98只是两项并列；d=0、成本比=0.97可构成成本胜出，但如果hidden准确率下降3个百分点，仍不能晋级。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-47c56ce966b3f834">准确率提高2个百分点、成本下降刚好2%，是否自动满足Strategist的胜出规则？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Astrategist">Strategist: Evolving Reasoning with Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Princeton University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不满足，超过2个百分点或成本比严格小于0.98才构成对应的改善；同时另一指标不能恶化超过其容忍带。候选还须在validation与hidden都胜出，最终再按hidden准确率增益、成本比排序。默认规则不是置信区间检验，不能因为计算了标准误就称显著提升。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：d=0.02、成本比=0.98只是两项并列；d=0、成本比=0.97可构成成本胜出，但如果hidden准确率下降3个百分点，仍不能晋级。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与实现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.03618">原论文</a> · <a href="../../../../agent-research/2611.03618-strategist/">实现解读</a> · <a href="#qa-47c56ce966b3f834">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:strategist" data-paper-title="Strategist: Evolving Reasoning with Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Strategist: Evolving Reasoning with Agents Agent Princeton University 2026-11-02 模型权重不是 Agent 的全部：单步回答、投票、分解、审查、多模型路由等推理程序也决定效果和成本。论文不训练执行模型，而让一个 meta-agent 在小开发集上提出并实测这些程序，将它们表示为统一 execute(llm, task) -&gt; str 的 Python blueprint。一个 blueprint 可调用此前已存在的 blueprint，构成无环组合图；与任务提示配对才形成具体策略。 高成本完整实验：成本过高，不复现（审查 DONE）。组件状态：component_only，CPU / L1 控制与数值诊断。组件状态：component_only，CPU / L1 控制与数值诊断。没有运行 LLM 设计器、执行器或真实搜索，不是推理能力比较，也未接入统一 Evolve。高成本完整实验：成本过高，不复现（审查 DONE）。也可使用 Python 接口：  Harness 与自我改进 RSI 推理策略组合与跨任务积累 Agent 运行流程与自进化：改的是哪一层 Strategist与EvalAlloc都看候选测量，它们实际优化的是同一个对象吗？ 不是。Strategist提出并组合可执行推理策略，把结构及经验保留给后续任务；EvalAlloc主要治理哪些SEARCH评测cell值得执行、如何利用共享参照估计候选fitness并最终确认。低成本观测或高预测分不等于已生成更好的策略，单纯策略入库也不等于通过留出集。 教学例：少测100个item是评测预算变化；把单次回答换成可复用的分解—审查程序是策略结构变化。两者可结合，但应分别记录费用和真实留出成功。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-4e88e95c2628b4d5">Strategist与EvalAlloc都看候选测量，它们实际优化的是同一个对象吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Astrategist">Strategist: Evolving Reasoning with Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Princeton University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。Strategist提出并组合可执行推理策略，把结构及经验保留给后续任务；EvalAlloc主要治理哪些SEARCH评测cell值得执行、如何利用共享参照估计候选fitness并最终确认。低成本观测或高预测分不等于已生成更好的策略，单纯策略入库也不等于通过留出集。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：少测100个item是评测预算变化；把单次回答换成可复用的分解—审查程序是策略结构变化。两者可结合，但应分别记录费用和真实留出成功。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、本地结果与负控、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.03618">原论文</a> · <a href="../../../../agent-research/2611.03618-strategist/">实现解读</a> · <a href="#qa-4e88e95c2628b4d5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:strategist" data-paper-title="Strategist: Evolving Reasoning with Agents" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Strategist: Evolving Reasoning with Agents Agent Princeton University 2026-11-02 模型权重不是 Agent 的全部：单步回答、投票、分解、审查、多模型路由等推理程序也决定效果和成本。论文不训练执行模型，而让一个 meta-agent 在小开发集上提出并实测这些程序，将它们表示为统一 execute(llm, task) -&gt; str 的 Python blueprint。一个 blueprint 可调用此前已存在的 blueprint，构成无环组合图；与任务提示配对才形成具体策略。 高成本完整实验：成本过高，不复现（审查 DONE）。组件状态：component_only，CPU / L1 控制与数值诊断。组件状态：component_only，CPU / L1 控制与数值诊断。没有运行 LLM 设计器、执行器或真实搜索，不是推理能力比较，也未接入统一 Evolve。高成本完整实验：成本过高，不复现（审查 DONE）。也可使用 Python 接口：  Harness 与自我改进 RSI 推理策略组合与跨任务积累 Agent 运行流程与自进化：改的是哪一层 为什么本地AST去重、DAG和paired-pick全部通过，仍不能称已经完成Strategist或Evolve接入？ 模块不调用设计器或执行模型，检索分数和候选评价由外部提供。显式prompt剔除只是结构指纹，不能证明helper语义或动态依赖；paired-pick也不隔离Python进程的hidden数据。真实候选生成、执行、检索和信息流隔离都要独立验收，当前只允许CPU组件诊断，不支持能力晋级。 教学例：合成0.7准确率、成本10和8的两臂能检验成本比0.8与回退规则，却没有任何模型真正回答过题目，更没有证明跨任务搜索有效。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-cc71f470d55ad83b">为什么本地AST去重、DAG和paired-pick全部通过，仍不能称已经完成Strategist或Evolve接入？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Astrategist">Strategist: Evolving Reasoning with Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Princeton University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>模块不调用设计器或执行模型，检索分数和候选评价由外部提供。显式prompt剔除只是结构指纹，不能证明helper语义或动态依赖；paired-pick也不隔离Python进程的hidden数据。真实候选生成、执行、检索和信息流隔离都要独立验收，当前只允许CPU组件诊断，不支持能力晋级。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：合成0.7准确率、成本10和8的两臂能检验成本比0.8与回退规则，却没有任何模型真正回答过题目，更没有证明跨任务搜索有效。</p>
+<p class="ar-learning-sources">依据：数据协议与实现边界、本地结果与负控、代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.03618">原论文</a> · <a href="../../../../agent-research/2611.03618-strategist/">实现解读</a> · <a href="#qa-cc71f470d55ad83b">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:evalalloc" data-paper-title="Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution? Agent The University of Hong Kong 2026-10-27 搜索过程需要便宜但可比较的反馈，最后选冠军则需要更精确的实测确认。EvalAlloc先完整评测少量warmup候选，选出共享信息项并拟合响应模型；搜索时固定item参照，只推断新候选参数，再把真实观测与未观测预测补全。最终以公共随机prefix逐轮确认，复用搜索缓存而不是重新全跑。 完整LLM搜索/多基准实验成本过高，不复现（审查 DONE）；API只有SEARCH item索引和稀疏真实观测，没有DEV/TEST答案或完整隐藏成绩矩阵。FrozenItemModel复制并只读保存外部item参数/prior，MAP只改新candidate参数；来自外部的拟合数据与cross-fit provenance仍须调用者核验，布尔/身份声明不能替代真实训练证据。  自进化与工作流 预算分配与可靠选择 Agent 运行流程与自进化：改的是哪一层 搜索反馈便宜就够了，为什么最后仍要做额外确认？ 搜索时只需足够可比的低成本反馈来指导提案；最后选冠军需要区分接近的候选。EvalAlloc因此把预算分成共享信息项的稀疏搜索和复用缓存的配对确认，最终完整prefix靠真实观测决定，而不是一直相信模型补全。 教学例：两个候选预测分只差0.01时，可以先据便宜反馈继续探索，但最终选哪个不应只看这个不确定的差值。 2026-10-30">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-evalalloc-e28d06aa" class="ar-learning-paper-anchor"></span>

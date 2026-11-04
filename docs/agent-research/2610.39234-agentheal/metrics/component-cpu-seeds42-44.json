@@ -1,0 +1,130 @@
+{
+  "schema_version": 2,
+  "method": "agentheal",
+  "manifest_ref": "agent-research:agentheal",
+  "dataset": {
+    "id": "synthetic:nov04-agentheal-v1",
+    "revision": "sha256:34c7a3137073075333d16d186185e439e3e5538a6172c33f686e2ce912e57699",
+    "recipe": "small seeded mechanism/state/index contracts; no public capability benchmark",
+    "capability_benchmark": false
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "diagnostic_only": true,
+      "device": "cpu",
+      "seed": 42,
+      "metrics": {
+        "episodes": 4,
+        "task_success": 0.5,
+        "violation_rate": 0.25,
+        "mean_steps": 1.75,
+        "recoverable_episodes": 3,
+        "recoverable_task_success": 0.3333333333333333,
+        "unrecoverable_episodes": 1,
+        "unrecoverable_task_success": 1.0
+      },
+      "checks": {
+        "exact_copy_preferred_over_version": true,
+        "gated_dead_end_requires_user": true,
+        "policy_violation_overrides_content": true,
+        "no_actor_or_gold_answer_input": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "diagnostic_only": true,
+      "device": "cpu",
+      "seed": 43,
+      "metrics": {
+        "episodes": 4,
+        "task_success": 0.5,
+        "violation_rate": 0.25,
+        "mean_steps": 1.75,
+        "recoverable_episodes": 3,
+        "recoverable_task_success": 0.3333333333333333,
+        "unrecoverable_episodes": 1,
+        "unrecoverable_task_success": 1.0
+      },
+      "checks": {
+        "exact_copy_preferred_over_version": true,
+        "gated_dead_end_requires_user": true,
+        "policy_violation_overrides_content": true,
+        "no_actor_or_gold_answer_input": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "diagnostic_only": true,
+      "device": "cpu",
+      "seed": 44,
+      "metrics": {
+        "episodes": 4,
+        "task_success": 0.5,
+        "violation_rate": 0.25,
+        "mean_steps": 1.75,
+        "recoverable_episodes": 3,
+        "recoverable_task_success": 0.3333333333333333,
+        "unrecoverable_episodes": 1,
+        "unrecoverable_task_success": 1.0
+      },
+      "checks": {
+        "exact_copy_preferred_over_version": true,
+        "gated_dead_end_requires_user": true,
+        "policy_violation_overrides_content": true,
+        "no_actor_or_gold_answer_input": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "episodes": 4.0,
+    "mean_steps": 1.75,
+    "recoverable_episodes": 3.0,
+    "recoverable_task_success": 0.3333333333333333,
+    "task_success": 0.5,
+    "unrecoverable_episodes": 1.0,
+    "unrecoverable_task_success": 1.0,
+    "violation_rate": 0.25
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "formal_comparison": false,
+  "evaluation_tier": "l1_mechanism",
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "3f6f422472dc6ed486d97160328560e22ce03cb9",
+    "artifact_path": "docs/agent-research/2610.39234-agentheal/metrics/component-cpu-seeds42-44.json",
+    "accelerator": "CPU",
+    "executed_source_sha256": {
+      "scripts/run_nov04_components.py": "61d35d574d9561e4611d2647174b8a6af07fabf8c30b6909e21e253542cf4336",
+      "docs/research-audits/nov04-components/preflight.json": "443ad9d8319c1c32ee31f8ec1f99f046c6b3091d427512db071248fc8673dd47",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "src/auto_research/agent_research/agentheal.py": "34c7a3137073075333d16d186185e439e3e5538a6172c33f686e2ce912e57699",
+      "src/auto_research/agent_research/strategist.py": "f496322604ae6e54ffa74ff459bfdace27cc673514f86ac14dbfbd4678706e6a",
+      "src/auto_research/foundation_models/gavagai.py": "ad8389f6d94d104bb9f76740381ec40dadb3005cde6d437c232e0345ab8e132f",
+      "src/auto_research/foundation_models/proland.py": "d98512b9af75517dc5522f060244412bc2ef3535c732042d8eece14b6ca39f9d",
+      "src/auto_research/post_training/rlid.py": "d349bdc43097604151e755f1ebed761f7b2f8136c0a76bf728ae95f266266805",
+      "src/auto_research/post_training/specopd.py": "5602752775ce8cfeb7ca1045a5d5168be7e3f99820234f56fdf109f4a89d03de",
+      "src/auto_research/reproductions/wesearch_components.py": "e516559381a2f3e0d96abd1a39e2075b78d3cee2b6b97468e4724a7642d9064c"
+    },
+    "raw_runner_artifact_sha256": "7d98492eaed7576f428f65347bcefae6a81d3e8172c5cba38b8eafc4a21f3921"
+  }
+}

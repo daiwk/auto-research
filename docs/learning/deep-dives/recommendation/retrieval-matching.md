@@ -7,7 +7,7 @@ hide:
 
 # 召回覆盖从哪里来：用户表示、正例组织与负例难度
 
-[搜广推](../index.md) · 更新 2026-10-27 · 36 篇主题资料 / 4 篇重点对照
+[搜广推](../index.md) · 更新 2026-11-04 · 37 篇主题资料 / 5 篇重点对照
 
 候选生成先决定后续排序能看见什么。YouTube DNN说明单用户向量如何进入近邻检索，Airbnb EBR把监督放回搜索—浏览—预订旅程，MIMA让同请求多正例分配给互补兴趣，MDCNS改变负例的难度与多视角监督。这四种改动分别作用于表示、标签、兴趣分工和梯度，不能用召回数变大统一解释。
 
@@ -29,6 +29,7 @@ hide:
 | [Applying Embedding-Based Retrieval to Airbnb Search](../../../reproductions/2601.06873-airbnb-ebr/README.md) · [原始来源](https://arxiv.org/abs/2601.06873)<br>章节：背景与主要改动、核心公式、复现边界 | 仍使用query/item内积双塔，但按搜索、浏览、预订旅程构造正例与hard negatives，并用流量replay对齐首阶段召回。 | 训练标签更贴近市场旅程，实际覆盖还受地理过滤、库存更新和索引影响；本地MovieLens代理不能验证住宿库存约束或线上收益。 |
 | [MIMA: Multi-Interest Recommendation via Multi-Positive Exclusive Assignment](../../../reproductions/2609.12842-mima/README.md) · [原始来源](https://arxiv.org/abs/2609.12842)<br>章节：背景与主要改动、核心公式、复现边界 | causal decoder产生多个兴趣，同请求多正例用一对一最优匹配监督，再以兴趣激活概率校准多通道分数。 | 排他分配抑制所有正例挤到同一兴趣，但依赖真实多正例集合及路由校准；本地相邻行为组替代同请求成交，不能直接证明生产兴趣分解。 |
 | [Divergence Meets Consensus: A Multi-Source Negative Sampling Framework for Sequential Recommendation](../../../reproductions/2605.19651-mdcns/README.md) · [原始来源](https://arxiv.org/abs/2605.19651)<br>章节：背景与主要改动、核心公式、本地复现 | Self、Peer、Teacher多视角在候选池上评分，以模型分歧修正难负例排序，再把Teacher整池软分布蒸馏回Self。 | 比单一高分负例提供更多监督，但难负例仍可能是假负例，分歧也不等于标签真错；需要对齐候选池、采样预算和训练成本。 |
+| [WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search](../../../recommendation-components/2611.00530-wesearch/README.md) · [原始来源](https://arxiv.org/abs/2611.00530v1)<br>章节：背景与主要改动、核心公式、代码映射 | 簇只收缩候选空间，再对原子文档做OPQ粗排和特征FFN精排；固定簇/码本还能挂载新文档，不必逐SID前缀解码。 | 簇选择仍有漏召回风险；查表精确仅说明对既有量化向量的距离恒等，不等于训练表示或生产质量更好。局部快照也不等于分布式原子刷新。 |
 
 </div>
 
@@ -45,6 +46,12 @@ YouTube DNN把历史压到一个用户向量，Airbnb EBR保留类似检索接�
 MDCNS从未交互候选中寻找模型认为困难且有分歧的负例，让Self接收整池教师信号；MIMA则从真实正例集合学习兴趣分工。把未点击候选一律当负例，或把时间相邻行为自动当同请求互补正例，都会改变监督含义。Airbnb EBR的旅程定义提醒我们：先记录行为阶段和曝光条件，再解释损失变小意味着什么。
 
 对照来源：[mdcns](../../../reproductions/2605.19651-mdcns/README.md) · [mima](../../../reproductions/2609.12842-mima/README.md) · [airbnb-ebr](../../../reproductions/2601.06873-airbnb-ebr/README.md)
+
+### 簇的职责是约束候选，不是替文章决定唯一语义路径
+
+WeSearch在簇并集内保留原子文档，再区分粗排与特征精排；MIMA则让多个用户兴趣各自提出候选。两者都应在最终去重预算固定时比较覆盖，不能因多取候选宣称表征改善。ADC恒等式只验证同一量化向量的计算，新文档挂载复用固定参数也不能替代完整训练或模型/索引联合刷新。
+
+对照来源：[wesearch](../../../recommendation-components/2611.00530-wesearch/README.md) · [mima](../../../reproductions/2609.12842-mima/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -84,14 +91,19 @@ MDCNS从未交互候选中寻找模型认为困难且有分歧的负例，让Sel
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
 
+**2026-11-04** · 加入WeSearch，区分簇约束候选、兴趣分工、ADC距离等价和固定参数挂载；L1 CPU证据不升级为完整检索器能力，生产A/B与本地机制继续分开。
+
+涉及：[wesearch](../../../recommendation-components/2611.00530-wesearch/README.md)
+
 **2026-10-27** · 首版：比较youtube-dnn、airbnb-ebr、mima、mdcns，围绕召回接口：单向量还是多兴趣通道与正例来自下一行为、旅程还是同请求集合建立分析和跨论文问答。
 
 覆盖 36 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 36 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 37 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
+- [WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search](../../../recommendation-components/2611.00530-wesearch/README.md)
 - [Applying Embedding-Based Retrieval to Airbnb Search](../../../reproductions/2601.06873-airbnb-ebr/README.md)
 - [Beyond Co-purchase Relation: Evolution of Complementary Recommendations at Allegro](../../../reproductions/2609.05063-allecompanion/README.md)
 - [ASARL: Autonomous Social-Aware Relevance Learning for QQ Search](../../../reproductions/2607.26593-asarl/README.md)

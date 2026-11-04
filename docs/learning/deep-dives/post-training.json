@@ -219,8 +219,9 @@
     "policy-optimization": {
       "title": "同一个GRPO名字之外：优势尺度、裁剪单位与训推失配",
       "thesis": "GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比被裁剪、样本到底由哪个分布生成。Dr. GRPO、DAPO、GSPO与TIS/IcePop分别改动这些环节，不能把所有ratio都叫同一种off-policy校正。",
-      "updated": "2026-10-27",
+      "updated": "2026-11-04",
       "reviewed_papers": [
+        "post-training:rlid",
         "post-training:moer",
         "post-training:cord",
         "post-training:orl-diffusion",
@@ -283,6 +284,12 @@
         "分布角色：当前训练、旧训练、rollout引擎"
       ],
       "comparisons": [
+        {
+          "paper": "post-training:rlid",
+          "position": "将优化单位从自由文本改为合法菜单动作概率，单前向label readout后做决策级PPO；同策略内边缘化措辞可去掉对应方差。",
+          "tradeoff": "菜单、记忆和afterstate改变接口；方差恒等式不比较不同模型，也不消除时序信用噪声。本地仅概率/PPO/枚举审计，完整多环境训练成本过高不复现。",
+          "sections": ["背景与主要改动", "核心公式", "结果、负控与边界"]
+        },
         {
           "paper": "post-training:grpo",
           "position": "用同题组的奖励均值和标准差替代critic，保留old-policy ratio、clip和reference KL。",
@@ -362,9 +369,21 @@
             "post-training:dr-grpo",
             "post-training:dapo"
           ]
+        },
+        {
+          "title": "更新单位先于裁剪公式：文本和决策不是同一变量",
+          "body": "GRPO/GSPO主要调整既有文本策略的优势或ratio单位，RLiD先把被优化的概率事件改成编译菜单中的动作。其Rao-Blackwell解释只在同一文本策略里对同动作措辞求条件期望；不能凭这个恒等式断言另训LDM更强。菜单是否包含afterstate、记忆来自何处、标签校准及接口对齐，都需在比较前写清；PPO公式相同并不能抹去这些差别。",
+          "papers": ["post-training:rlid", "post-training:grpo", "post-training:gspo"]
         }
       ],
       "questions": [
+        {
+          "id": "same-policy-marginalization-not-new-model-win",
+          "question": "把文本映射到动作后方差下降，为什么不意味着RLiD在每个任务都胜过带推理token的策略？",
+          "answer": "该结论固定同一个文本策略和只依赖动作的优势，边缘化措辞后保持期望更新并删去措辞方差。真正LDM有不同参数化和训练路径，文本推理还提供额外计算；时序信用和菜单接口也未被恒等式解决。论文ARC的Qwen3.5-2B上token策略仍更高，必须保留这个反例。",
+          "example": "教学例：一个策略用两种句子表达open可被边缘化；把它换成另一个只看label的网络，已超出同策略恒等式的比较范围。",
+          "papers": ["post-training:rlid", "post-training:grpo"]
+        },
         {
           "id": "all-failed-group",
           "question": "同题四条回答全错，把GRPO改成Dr. GRPO就能得到学习方向吗？",
@@ -515,6 +534,12 @@
             "post-training:remax": "b4f69fb52c4ee7f11f904590183f96ea4a0ccd1db1876c4ed99a3e49d674484f",
             "post-training:ppo-rlhf": "d68c63a67f0b4d8005ab931d028b7478c93ba9b1565aae48c2409d570db084ab"
           }
+        },
+        {
+          "date": "2026-11-04",
+          "summary": "精读RLiD，增加文本概率事件与可执行动作事件这一比较轴，明确同策略方差边缘化不等于不同LDM优越性，并补充标签边际KL与逐行entropy的区别；仅L1组件，完整训练成本过高不复现。",
+          "papers": ["post-training:rlid"],
+          "source_revisions": {"post-training:rlid": "2968f36a0c7cc21f327588b91c4b61361ae5c2953cd25a9245e524d33b110bec"}
         }
       ]
     },
@@ -808,8 +833,9 @@
     "student-trajectory-distillation": {
       "title": "轨迹蒸馏：采样者、提案与散度方向分开看",
       "thesis": "“on-policy”描述监督发生在哪些状态，FKL/RKL/JSD描述在这些状态怎样比较分布。GKD和MiniLLM建立这两个轴，DrOPD、AP-OPD再调整纠错位置或强度，Semi-OPD与学习信号诊断则提醒：离线复用和残余损失各有不同含义。 MPOPD再把采样者变成可学习proposal：几何混合是提案target，学生仍向教师做RKL，二者不能混成同一个蒸馏分布。",
-      "updated": "2026-10-30",
+      "updated": "2026-11-04",
       "reviewed_papers": [
+        "post-training:specopd",
         "post-training:opst",
         "post-training:userarena-optd",
         "post-training:gift",
@@ -859,6 +885,12 @@
         "证据类型：训练目标、缓存合同、学习信号诊断"
       ],
       "comparisons": [
+        {
+          "paper": "post-training:specopd",
+          "position": "在固定reference anchors重新采当前draft私有历史，以共享trunk并行收集teacher分布，按overlap的prefix乘积优化接受长度surrogate。",
+          "tradeoff": "改的是监督采集依赖与draft目标，不是普通学生RKL的同义写法；teacher全词表质量与predecessor readout必须保留。完整混合target训练/serving未复现，局部张量不证明加速。",
+          "sections": ["背景与主要改动", "核心公式", "结果、负控与边界"]
+        },
         {
           "paper": "post-training:gkd",
           "position": "让教师在学生实际生成的前缀上给分布监督，用student data fraction混合固定数据与on-policy状态。",
@@ -957,9 +989,21 @@
             "post-training:gkd",
             "post-training:minillm"
           ]
+        },
+        {
+          "title": "固定外层reference仍可有当前策略内层分支",
+          "body": "GKD/MiniLLM让teacher在学生访问状态上监督，MPOPD再训练独立proposal改变可达性；SpecOPD则针对推测draft，把固定reference作为外层锚点，每步重采内层draft分支以打破整响应验证依赖。reference固定不等于分支off-policy；但这也不是完全自由的学生轨迹。其E2E-TV优化前缀存活，需要完整teacher质量，且teacher query必须读私有前驱历史；loss通过不能证明混合注意力target已经正确共享状态或真实serving更快。",
+          "papers": ["post-training:specopd", "post-training:gkd", "post-training:mpopd"]
         }
       ],
       "questions": [
+        {
+          "id": "branch-prefix-is-not-reference-label",
+          "question": "SpecOPD的reference anchor后分支已偏离原文，教师仍应按原reference后缀来打分吗？",
+          "answer": "不应。当前分支token的教师条件由reference前缀和该分支已采样token组成，不能用reference后缀替换，也不能看到未来或兄弟。第一token读anchor，后续读前驱行。否则改变监督历史，甚至从自身行泄漏答案；不再是原方法的分支监督。",
+          "example": "教学例：reference是a quiet，draft采short evening；预测evening必须以a short为条件，而不能回到a quiet，也不能把evening先喂入再打自己的分。",
+          "papers": ["post-training:specopd", "post-training:gkd"]
+        },
         {
           "id": "on-policy-not-one-kl",
           "question": "GKD与MiniLLM都沿学生轨迹学习，为什么DrOPD还会额外加入FKL？",
@@ -1107,6 +1151,12 @@
             "post-training:gkd": "2ab62ef8abeb52d245df7464048bea93a0622c2239fa7baae80261321f6ecd3e",
             "post-training:minillm": "9d3642836d8f054f83bb4909e0bca73de51c9c166c318255c456470d03da6648"
           }
+        },
+        {
+          "date": "2026-11-04",
+          "summary": "精读SpecOPD，分开固定reference外层、当前draft内层分支及E2E-TV目标；相对GKD/MPOPD补充采集依赖这一轴，保留teacher完整质量、祖先隔离与predecessor读出，不把L1张量通过写成serving加速。",
+          "papers": ["post-training:specopd"],
+          "source_revisions": {"post-training:specopd": "932961849d1006c4840c5fad45e2a4d9d31aaf9aaec265b96898d2259fba7a03"}
         }
       ]
     },

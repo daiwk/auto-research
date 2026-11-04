@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:wesearch/clusters-not-semantic-paths": {
+      "source_sha256": "e6f04e2dcae81aa8e5427b74d6e9e0139c70b63f97229f18d6d72f70941b84ca",
+      "reviewed": true,
+      "fields": {
+        "question": "How does WeSearch cluster selection differ from generating a complete semantic-ID path?",
+        "answer": "Clusters constrain the candidate space. After unioning atomic documents from several clusters, document matching remains separate. A cluster need not fully describe a document's semantics. Sequential SID decoding may irreversibly prune a relevant document after an early prefix error. Cluster retrieval can still miss candidates; it does not remove all recall errors.",
+        "example": "Example: An article about travel photography can relate to both topics. Retrieving both clusters and comparing the articles differs from committing to one top-level prefix."
+      }
+    },
+    "qa/recommendation:wesearch/adc-is-squared-distance": {
+      "source_sha256": "1c29a4c25bddab0833ad9c7eeeb3f8c1803efe1298bf822d44016dd1a3ca357b",
+      "reviewed": true,
+      "fields": {
+        "question": "Is the sum of ADC table lookups already the coarse-ranking score?",
+        "answer": "No. Tables contain squared L2 from the rotated query to subspace codewords. Their sum is squared distance, whereas the paper scores with its negative square root. Rankings agree, but numerical distances and thresholds are not interchangeable. Reconstructed vectors also remain in rotated space.",
+        "example": "Example: Squared subspace distances 9 and 16 sum to 25. The score is -5, not -25; using a threshold of -10 would select different candidates."
+      }
+    },
+    "qa/recommendation:wesearch/quantizer-not-quality-proof": {
+      "source_sha256": "32727beeb704d16f92671d073a580e4a92b95f5424ef578cca9d8fa551c425c9",
+      "reviewed": true,
+      "fields": {
+        "question": "Does exact agreement between ADC and reconstructed distance prove better retrieval than SIDs or dual towers?",
+        "answer": "No. It proves computational equivalence for the same quantized representation, not representation quality, cluster coverage or ranking performance. Quality comparisons require trained query models, codebooks and feature FFNs under a fixed candidate budget. The paper's A/B measures the complete production system, not the local lookup kernel.",
+        "example": "Example: If a bad codebook maps every document to one code, ADC can remain exactly equal to explicit distance while documents become indistinguishable."
+      }
+    },
+    "qa/recommendation:wesearch/mount-versus-refresh": {
+      "source_sha256": "cefee55598c4eb8c0b0735738d9dee66035a4223702fdb96aba0153bde8a2e35",
+      "reviewed": true,
+      "fields": {
+        "question": "Can fresh-document mounting modify the old codebook and call new-array construction an atomic update?",
+        "answer": "No. Mounting reuses fixed clusters, rotation and codebooks. Parameter changes can invalidate old codes and require a complete model/index version refresh. Constructing an immutable snapshot preserves the old view but does not implement visibility swaps or distributed atomicity; those remain external service responsibilities.",
+        "example": "Example: Code 1 meant blue before refresh but means red afterward. Old documents would be misinterpreted. Switch the new model with its re-encoded index, rather than replacing only the codebook."
+      }
+    }
+  }
+}

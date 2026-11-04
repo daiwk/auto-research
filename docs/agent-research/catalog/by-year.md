@@ -4,6 +4,8 @@
 
 ## 2026
 
+- 2026-11 · [Strategist: Evolving Reasoning with Agents](../2611.03618-strategist/README.md)（`strategist`）：模型权重不是 Agent 的全部：单步回答、投票、分解、审查、多模型路由等推理程序也决定效果和成本。论文不训练执行模型，而让一个 meta-agent 在小开发集上提出并实测这些程序，将它们表示为统一 `execute(llm, task) -> str` 的 Python blueprint。
+- 2026-10 · [AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers](../2610.39234-agentheal/README.md)（`agentheal`）：网页可能已删除、改版、需要登录、限流或不允许抓取。简单重试不是恢复；找到标题相似页面也不一定完成原目标。
 - 2026-10 · [Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems](../2610.36652-discernmem/README.md)（`discernmem`）：团队失败不代表注入的每条记忆都有错。DiscernMem把“规则内容有缺陷”和“好规则用错场景”分开：以相同任务、seed和配置运行完整团队，仅向原拥有者注入一条记忆，再与所有角色都无记忆的执行比较。
 - 2026-10 · [When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement](../2610.36826-ruharness/README.md)（`ruharness`）：Agent解决早期缺陷后，固定rubric可能继续奖励已经会做的事，却遗漏后来出现的行为问题。RuHarness交替进化rubric与harness：从执行轨迹发现可检验的标准，先让看不到任务最终结果的judge判断Satisfied、Violated或N/A，再把这些行为判断与外部任务结果统计关联，找出仍能解释当前失败的标准。
 - 2026-10 · [Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?](../2610.37276-evalalloc/README.md)（`evalalloc`）：搜索过程需要便宜但可比较的反馈，最后选冠军则需要更精确的实测确认。EvalAlloc先完整评测少量warmup候选，选出共享信息项并拟合响应模型；搜索时固定item参照，只推断新候选参数，再把真实观测与未观测预测补全。

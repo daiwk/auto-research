@@ -1,0 +1,15 @@
+{
+  "source_url": "https://arxiv.org/pdf/2611.00236v1",
+  "figure": "Figure 1",
+  "asset": "paper-figure-01.png",
+  "arxiv_id": "2611.00236",
+  "sha256": "bd4dacdd6482891f509ce8c16e38957861ddaa0b6868a77be45b90f8eb41d1f5",
+  "width": 935,
+  "height": 1210,
+  "visually_inspected": true,
+  "inspected_on": "2026-11-04",
+  "transformation": "unaltered full PDF page rendered at110dpi,figure and caption retained",
+  "copyright": "Copyright original authors; used for attributed research explanation, not relicensed",
+  "pdf_page": 5,
+  "pdf_sha256": "4f0cb65c0e64d5660431bcc592c1f4310bc6269bb99ea18e26e067bb83863ca6"
+}

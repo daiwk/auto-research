@@ -5,7 +5,7 @@
     "retrieval-matching": {
       "title": "召回覆盖从哪里来：用户表示、正例组织与负例难度",
       "thesis": "候选生成先决定后续排序能看见什么。YouTube DNN说明单用户向量如何进入近邻检索，Airbnb EBR把监督放回搜索—浏览—预订旅程，MIMA让同请求多正例分配给互补兴趣，MDCNS改变负例的难度与多视角监督。这四种改动分别作用于表示、标签、兴趣分工和梯度，不能用召回数变大统一解释。",
-      "updated": "2026-10-27",
+      "updated": "2026-11-04",
       "axes": [
         "召回接口：单向量还是多兴趣通道",
         "正例来自下一行为、旅程还是同请求集合",
@@ -52,6 +52,16 @@
             "核心公式",
             "本地复现"
           ]
+        },
+        {
+          "paper": "recommendation:wesearch",
+          "position": "簇只收缩候选空间，再对原子文档做OPQ粗排和特征FFN精排；固定簇/码本还能挂载新文档，不必逐SID前缀解码。",
+          "tradeoff": "簇选择仍有漏召回风险；查表精确仅说明对既有量化向量的距离恒等，不等于训练表示或生产质量更好。局部快照也不等于分布式原子刷新。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "代码映射"
+          ]
         }
       ],
       "analysis": [
@@ -71,6 +81,14 @@
             "recommendation:mdcns",
             "recommendation:mima",
             "recommendation:airbnb-ebr"
+          ]
+        },
+        {
+          "title": "簇的职责是约束候选，不是替文章决定唯一语义路径",
+          "body": "WeSearch在簇并集内保留原子文档，再区分粗排与特征精排；MIMA则让多个用户兴趣各自提出候选。两者都应在最终去重预算固定时比较覆盖，不能因多取候选宣称表征改善。ADC恒等式只验证同一量化向量的计算，新文档挂载复用固定参数也不能替代完整训练或模型/索引联合刷新。",
+          "papers": [
+            "recommendation:wesearch",
+            "recommendation:mima"
           ]
         }
       ],
@@ -143,7 +161,8 @@
         "recommendation:toolrec",
         "recommendation:transretrieval",
         "recommendation:youtube-dnn",
-        "recommendation:zorro"
+        "recommendation:zorro",
+        "recommendation:wesearch"
       ],
       "updates": [
         {
@@ -224,6 +243,16 @@
             "recommendation:transretrieval": "c4e21e56d78c153b71d44a5b03573aca08fc268363a1e8c5aa12cd4163286902",
             "recommendation:youtube-dnn": "6fdbc162f51c3c282c0b19893ca9138b7b299fb5c34e21b118524d0311332dc2",
             "recommendation:zorro": "8a0d47cc26dbfea76c6038b056e5db2d7930234af560e789a8d1ee285e8491ba"
+          }
+        },
+        {
+          "date": "2026-11-04",
+          "summary": "加入WeSearch，区分簇约束候选、兴趣分工、ADC距离等价和固定参数挂载；L1 CPU证据不升级为完整检索器能力，生产A/B与本地机制继续分开。",
+          "papers": [
+            "recommendation:wesearch"
+          ],
+          "source_revisions": {
+            "recommendation:wesearch": "b9df98a4ba9bcd275dd5979b9457fb2370b15e4b9b01d2de83309c585075b933"
           }
         }
       ]
