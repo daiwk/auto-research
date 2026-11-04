@@ -10,6 +10,9 @@ import math
 import torch
 from torch import Tensor
 
+REQUIRES_GPU_VALIDATION = True
+GPU_VALIDATION_ARTIFACT = "docs/gpu-validations/rlid-a100-20261104.json"
+
 
 def menu_log_probabilities(label_logits: Tensor, menu_mask: Tensor, *, calibration: Tensor | None = None) -> Tensor:
     """Equation 1: softmax over executable single-token menu labels only.

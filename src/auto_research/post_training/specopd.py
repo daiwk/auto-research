@@ -11,6 +11,9 @@ import math
 import torch
 from torch import Tensor
 
+REQUIRES_GPU_VALIDATION = True
+GPU_VALIDATION_ARTIFACT = "docs/gpu-validations/specopd-a100-20261104.json"
+
 
 @dataclass(frozen=True)
 class ProposalTree:
