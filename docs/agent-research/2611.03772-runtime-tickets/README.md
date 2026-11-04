@@ -35,7 +35,7 @@ flowchart LR
 
 [![RuntimeTickets 原论文 Figure 2：冻结ticket与逐发送检查](assets/paper-figure-01.png)](https://arxiv.org/pdf/2611.03772v1#page=4)
 
-> **原论文 Figure 2**：从 PDF 第 4 页裁取并实际视觉核对，保留原始结构与图注；来源为[论文 v1](https://arxiv.org/pdf/2611.03772v1)，版权归原作者所有，原文 CC BY 4.0。
+> **原论文 Figure 2**：从 PDF 第 4 页裁取并实际视觉核对，保留原始结构与图注；图片来自[原论文](https://arxiv.org/pdf/2611.03772v1)，版权归原作者所有，原文 CC BY 4.0。
 <!-- paper-figure:end -->
 
 ### 核心公式

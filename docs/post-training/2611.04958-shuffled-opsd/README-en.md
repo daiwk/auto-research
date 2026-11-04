@@ -1,6 +1,6 @@
 # Shuffled OPSD: disrupt the shared problem, preserve the teacher example
 
-<!-- source-sha256: 5467ac283f9cf9c9bdd20c8cfdf69af87a3ee4b9999243a3b8d66a938521b188 -->
+<!-- source-sha256: 5f0e2447e663b953ea24142c31d3056b509bce0310c84371761294fb0e750b4d -->
 
 [简体中文](README.md)
 
@@ -30,7 +30,7 @@ In OPSD, a student samples from a problem while a frozen initial teacher scores 
 
 ![Shuffled OPSD Figure 2: shared-problem transformation and teacher-only reference](assets/paper-figure-01.png)
 
-From the author's original SVG for [Figure 2](https://arxiv.org/html/2611.04958v1#S2.F2), retained alongside the PNG. It is only rasterized for the website, not redesigned. Copyright remains with the authors; source, transformation and visual review are in `assets/provenance.json`.
+From the author's original SVG for Figure 2 in the [original paper](https://arxiv.org/html/2611.04958v1#S2.F2), retained alongside the PNG. It is only rasterized for the website, not redesigned. Copyright remains with the authors; source, transformation and visual review are in `assets/provenance.json`.
 <!-- paper-figure:end -->
 
 ```mermaid

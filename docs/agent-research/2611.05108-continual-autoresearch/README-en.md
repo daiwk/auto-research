@@ -1,6 +1,6 @@
 # Continual AutoResearch: Finding Solutions Earlier Is Not Selecting Better Final Solutions
 
-<!-- source-sha256: c8cf62bc2d2bfd1c422c69c4d938637a720aead2aa0002c612a97b09edf8f04f -->
+<!-- source-sha256: 861e021ad2fda7fa07f2687dc06150994f6fc9a1e56acbdbb2a258fe7acaa364 -->
 
 [简体中文](README.md)
 
@@ -38,7 +38,7 @@ flowchart LR
 
 [![Continual AutoResearch original Figure 1: matched persistent/reset research protocol](assets/paper-figure-01.png)](https://arxiv.org/pdf/2611.05108v1#page=2)
 
-> **Original Figure 1:** cropped from PDF page 2 and visually inspected, preserving the original diagram and caption. Copyright remains with the authors under CC BY 4.0. Source: [paper v1](https://arxiv.org/pdf/2611.05108v1).
+> **Original Figure 1:** cropped from PDF page 2 and visually inspected, preserving the original diagram and caption. Copyright remains with the authors under CC BY 4.0. Image from the [original paper](https://arxiv.org/pdf/2611.05108v1).
 <!-- paper-figure:end -->
 
 ### Core Equations

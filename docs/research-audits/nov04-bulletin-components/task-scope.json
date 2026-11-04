@@ -310,7 +310,8 @@
           "source_kind": "reviewed-fixed-primary-paper",
           "source_url": "https://arxiv.org/html/2611.03768v1"
         }
-      ]
+      ],
+      "reason": "成本过高，不复现（审查 DONE）；完整fp8DeepSeekV3.2/GLM5、8H200TP8和长上下文服务矩阵超过单A100/A30预算；不做常数计时或伪CUDA调度替代"
     },
     {
       "domain": "recommendation",
@@ -525,7 +526,8 @@
           "source_kind": "reviewed-fixed-primary-paper",
           "source_url": "https://arxiv.org/html/2611.03698v1"
         }
-      ]
+      ],
+      "reason": "完整轨迹采集、9B/35B-A3B微调及每任务5–10小时评测成本过高，不复现（审查 DONE）；不下载资源，不创建runtime/metrics或GPU收据。"
     },
     {
       "domain": "agent-research",

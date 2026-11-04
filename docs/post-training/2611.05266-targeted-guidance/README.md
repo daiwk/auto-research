@@ -26,7 +26,7 @@
 
 ![Targeted Guidance 原文 Figure 2：每轮反馈产生逐token引导](assets/paper-figure-01.png)
 
-来自[原论文 Figure 2](https://arxiv.org/html/2611.05266v1#S4.F2)的原始PNG，未重绘。版权归原作者所有；来源和视觉核验见 `assets/provenance.json`。图中的模型、judge与RL流水线不是本地已实现的系统。
+图片来自[原论文](https://arxiv.org/html/2611.05266v1#S4.F2) 的 Figure 2 原始 PNG，未重绘。版权归原作者所有；来源和视觉核验见 `assets/provenance.json`。图中的模型、judge与RL流水线不是本地已实现的系统。
 <!-- paper-figure:end -->
 
 ```mermaid

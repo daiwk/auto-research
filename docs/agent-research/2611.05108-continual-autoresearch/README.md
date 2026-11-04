@@ -34,7 +34,7 @@ flowchart LR
 
 [![Continual AutoResearch 原论文 Figure 1：匹配的持续与重置研究流程](assets/paper-figure-01.png)](https://arxiv.org/pdf/2611.05108v1#page=2)
 
-> **原论文 Figure 1**：从原 PDF 第 2 页裁取并实际视觉核对，保留原图与图注；版权归原作者所有，原文 CC BY 4.0。来源为[论文 v1](https://arxiv.org/pdf/2611.05108v1)。
+> **原论文 Figure 1**：从原 PDF 第 2 页裁取并实际视觉核对，保留原图与图注；版权归原作者所有，原文 CC BY 4.0。图片来自[原论文](https://arxiv.org/pdf/2611.05108v1)。
 <!-- paper-figure:end -->
 
 ### 核心公式

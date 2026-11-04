@@ -1,6 +1,6 @@
 # RSI-Dojo: Environments and Trajectories for Agents That Train Models
 
-<!-- source-sha256: ab991a497c5c3e6223382482e1c10c9783aafc2c92ab41752a5faf6140dc11cc -->
+<!-- source-sha256: c522dbbca9e5276b623466d56bf068784110d238426c6172784e6115d0af58ff -->
 
 [简体中文](README.md)
 
@@ -37,7 +37,7 @@ flowchart LR
 
 [![RSI-Dojo original Figure 2: RSI-Craft environment construction](assets/paper-figure-01.png)](https://arxiv.org/html/2611.03698v1/overview2.png)
 
-> **Original Figure 2:** the authors' original image, visually inspected. Source: [paper v1](https://arxiv.org/html/2611.03698v1); copyright remains with the authors. Showing the pipeline does not mean these stages ran locally.
+> **Original Figure 2:** the authors' original image, visually inspected. Image from the [original paper](https://arxiv.org/html/2611.03698v1); copyright remains with the authors. Showing the pipeline does not mean these stages ran locally.
 <!-- paper-figure:end -->
 
 ### Core Equations

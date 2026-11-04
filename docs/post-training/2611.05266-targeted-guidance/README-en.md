@@ -1,6 +1,6 @@
 # Targeted Guidance: directional self-distillation only at failed agent turns
 
-<!-- source-sha256: bc0b37f057662ea12f6673c4f820f5dd7540f8152e62f7843c084fb88e3ad9bb -->
+<!-- source-sha256: e1a728445c450d1921e6e62940270a07d72ecd7d6f907ce00bacbee34fc82628 -->
 
 [简体中文](README.md)
 
@@ -30,7 +30,7 @@ Scalar RL rewards reinforce explored behaviors but may not communicate how to co
 
 ![Targeted Guidance Figure 2: turn-level feedback produces token-level guidance](assets/paper-figure-01.png)
 
-Unmodified PNG from [Figure 2](https://arxiv.org/html/2611.05266v1#S4.F2). Copyright remains with the authors; source and visual review are in `assets/provenance.json`. The depicted model, judge and RL pipeline are not locally implemented systems.
+Unmodified PNG from Figure 2 in the [original paper](https://arxiv.org/html/2611.05266v1#S4.F2). Copyright remains with the authors; source and visual review are in `assets/provenance.json`. The depicted model, judge and RL pipeline are not locally implemented systems.
 <!-- paper-figure:end -->
 
 ```mermaid

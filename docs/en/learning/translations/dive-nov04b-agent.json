@@ -18,7 +18,7 @@
       }
     },
     "dive/agent-research/tools-and-collaboration/update/2026-11-05/2": {
-      "source_sha256": "f1e28c0d4a2c2463c91c7cb46756e9bb77221f850e6c241838b6c24f26296678",
+      "source_sha256": "44725203f3c15abbabe9ca6397426fe2ea680cf4c347aa60a2c51943df1d568a",
       "reviewed": true,
       "fields": {
         "summary": "Added RuntimeTickets to separate tool authority from delivery contracts: an allowed recipient can still receive an invalid object or excessive data. Pre-effect deny/defer/allow branches, recording before execution and suppressing resend after uncertain callback failure are runtime contracts distinct from tool availability. CPU negative controls do not establish network security. Full experiments are not reproduced because of cost, review DONE."
@@ -57,7 +57,7 @@
       }
     },
     "dive/agent-research/harness-and-self-improvement/update/2026-11-05/4": {
-      "source_sha256": "ebda0a7b17c8abec320d6863ee4e1f145bc72c68c2e5a253492ddae0ff38be03",
+      "source_sha256": "daae9e1199d0d188d92da217be414ccfb702dde34efe404bdea85c99f0d1bd35",
       "reviewed": true,
       "fields": {
         "summary": "Separated three objects often grouped as RSI: Meta² freezes transferable guidance while editing only the current run; Continual AutoResearch measures whether session/workspace experience finds good candidates earlier without guaranteeing better final choices; RSI-Dojo internalizes post-training procedures through environments and filtered trajectories, with full experiments not reproduced because of cost. Meta² and Continual AutoResearch have only CPU contract components, while RSI-Dojo is catalog-only. None provides model capability-improvement evidence; full experiments are not reproduced because of cost, review DONE."

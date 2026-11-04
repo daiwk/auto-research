@@ -897,7 +897,7 @@
           "summary": "补入RuntimeTickets，将工具权限与具体交付合同分开：相同合法接收端仍可能承载非法对象或超额发送。逐副作用前的失败、未知、允许分支，先留记录再执行，以及不确定回调后的不重发，是与工具是否可调用不同的运行时合同；CPU负控不等于真实网络安全验收。完整实验高成本不复现，审查DONE。",
           "papers": ["agent-research:runtime-tickets"],
           "source_revisions": {
-            "agent-research:runtime-tickets": "821a28cc2c2133713d70603feabbb309b8f4e0f107d8e3f4bd7d3d16310c6d94"
+            "agent-research:runtime-tickets": "5b00948adf9bb0542e98df053cfe7028c1ab6925099a181503296520a390d8d4"
           }
         }
       ]
@@ -1351,9 +1351,9 @@
           "summary": "把三种常被混叫RSI的对象拆开：Meta²冻结跨任务指导，只修改当前run；Continual AutoResearch度量会话、工作区经验是否更早产生好候选，而不保证最终选得更好；RSI-Dojo用训练环境和筛选轨迹把后训练过程内化进模型，完整实验高成本不复现。Meta²与Continual AutoResearch仅实现CPU合同组件，RSI-Dojo只收录；三者均不是模型能力提升证据，完整实验高成本不复现、审查DONE。",
           "papers": ["agent-research:meta-square", "agent-research:continual-autoresearch", "agent-research:rsi-dojo"],
           "source_revisions": {
-            "agent-research:meta-square": "8aa494ae6aabf5476345a15f97b6c1dda0be3e4dca24503070f8fe60e1b45095",
-            "agent-research:continual-autoresearch": "c8cf62bc2d2bfd1c422c69c4d938637a720aead2aa0002c612a97b09edf8f04f",
-            "agent-research:rsi-dojo": "ab991a497c5c3e6223382482e1c10c9783aafc2c92ab41752a5faf6140dc11cc"
+            "agent-research:meta-square": "ee8dd7f6bba65ffcdccb9d6c70b2d140e7e387ac25e59c52691d68a3a50f7be6",
+            "agent-research:continual-autoresearch": "861e021ad2fda7fa07f2687dc06150994f6fc9a1e56acbdbb2a258fe7acaa364",
+            "agent-research:rsi-dojo": "c522dbbca9e5276b623466d56bf068784110d238426c6172784e6115d0af58ff"
           }
         }
       ]

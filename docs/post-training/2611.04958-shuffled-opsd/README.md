@@ -26,7 +26,7 @@ OPSD 中学生根据问题采样，冻结初始教师在同一生成前缀上评
 
 ![Shuffled OPSD 原文 Figure 2：共享问题变换与教师私有示例](assets/paper-figure-01.png)
 
-来自[原论文 Figure 2](https://arxiv.org/html/2611.04958v1#S2.F2) 的作者 SVG，原文件同时保留；仅栅格化供网页显示，没有重新设计流程。版权归原作者所有，来源、转换和视觉核对见 `assets/provenance.json`。
+图片来自[原论文](https://arxiv.org/html/2611.04958v1#S2.F2) 的 Figure 2 作者 SVG，原文件同时保留；仅栅格化供网页显示，没有重新设计流程。版权归原作者所有，来源、转换和视觉核对见 `assets/provenance.json`。
 <!-- paper-figure:end -->
 
 ```mermaid

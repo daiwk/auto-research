@@ -34,7 +34,7 @@ flowchart LR
 
 [![Meta² 原论文 Figure 2：离线知识、在线演化与Meta-Skill结构](assets/paper-figure-01.png)](https://arxiv.org/html/2611.05139v1/main-figure_v2.png)
 
-> **原论文 Figure 2**：原作者发布的原图，已视觉核对；来源为[论文 v1](https://arxiv.org/html/2611.05139v1)，版权归原作者所有，遵守原文 CC BY-NC-ND 4.0，不把流程重绘冒充原图。
+> **原论文 Figure 2**：原作者发布的原图，已视觉核对；图片来自[原论文](https://arxiv.org/html/2611.05139v1)，版权归原作者所有，遵守原文 CC BY-NC-ND 4.0，不把流程重绘冒充原图。
 <!-- paper-figure:end -->
 
 ### 核心公式

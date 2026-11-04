@@ -26,7 +26,7 @@
 
 ![P²-MOPD 原文 Figure 2：学生权重通道和系数通道](assets/paper-figure-01.png)
 
-来自[原论文 Figure 2](https://arxiv.org/html/2611.03953v1#S3.F2)，原始 PNG 未重绘。版权归原作者所有，来源、许可边界和视觉核对见 `assets/provenance.json`。图中的教师与 rollout 系统不代表本地已实现。
+图片来自[原论文](https://arxiv.org/html/2611.03953v1#S3.F2) 的 Figure 2，原始 PNG 未重绘。版权归原作者所有，来源、许可边界和视觉核对见 `assets/provenance.json`。图中的教师与 rollout 系统不代表本地已实现。
 <!-- paper-figure:end -->
 
 ```mermaid

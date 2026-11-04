@@ -33,7 +33,7 @@ flowchart LR
 
 [![RSI-Dojo 原论文 Figure 2：RSI-Craft环境构建流程](assets/paper-figure-01.png)](https://arxiv.org/html/2611.03698v1/overview2.png)
 
-> **原论文 Figure 2**：作者原始图片，已实际视觉核对；来源为[论文 v1](https://arxiv.org/html/2611.03698v1)，版权归原作者所有。图示流程不代表本地已执行这些阶段。
+> **原论文 Figure 2**：作者原始图片，已实际视觉核对；图片来自[原论文](https://arxiv.org/html/2611.03698v1)，版权归原作者所有。图示流程不代表本地已执行这些阶段。
 <!-- paper-figure:end -->
 
 ### 核心公式

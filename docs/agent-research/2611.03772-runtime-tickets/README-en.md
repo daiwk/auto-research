@@ -1,6 +1,6 @@
 # RuntimeTickets: Source-Grounded Delivery Contracts Before Effects
 
-<!-- source-sha256: 821a28cc2c2133713d70603feabbb309b8f4e0f107d8e3f4bd7d3d16310c6d94 -->
+<!-- source-sha256: 5b00948adf9bb0542e98df053cfe7028c1ab6925099a181503296520a390d8d4 -->
 
 [简体中文](README.md)
 
@@ -39,7 +39,7 @@ flowchart LR
 
 [![RuntimeTickets original Figure 2: frozen ticket and send-level gate](assets/paper-figure-01.png)](https://arxiv.org/pdf/2611.03772v1#page=4)
 
-> **Original Figure 2:** cropped from PDF page 4 and visually inspected, retaining the original structure and caption. Source: [paper v1](https://arxiv.org/pdf/2611.03772v1). Copyright remains with the authors under CC BY 4.0.
+> **Original Figure 2:** cropped from PDF page 4 and visually inspected, retaining the original structure and caption. Image from the [original paper](https://arxiv.org/pdf/2611.03772v1). Copyright remains with the authors under CC BY 4.0.
 <!-- paper-figure:end -->
 
 ### Core Equations

@@ -1,6 +1,6 @@
 # DARS: within-group outcome-density reward scaling
 
-<!-- source-sha256: c674746ca845bf722e7fab83b53e25158dc5f9076aeca7bb3f9b7cc37e5bfe69 -->
+<!-- source-sha256: b81f25b975f3240afb2043b3c86d630f8ac9c293d45971c1887606c65e78a238 -->
 
 [简体中文](README.md)
 
@@ -37,7 +37,7 @@ flowchart LR
 
 [![Original Figure 2: DARS-GRPO image-prompt adaptation and within-group density](assets/paper-figure-01.png)](https://arxiv.org/html/2611.04792v1#S5)
 
-> Original fixed-v1 HTML Figure 2 JPEG, losslessly re-encoded as PNG with identical pixels and visually checked; not regenerated or cropped. The language policy produces prompt rewrites, frozen image generation/encoding supply rewards and representations, and density-scaled rewards update the policy. Copyright belongs to the authors; CC BY 4.0. Not a local execution screenshot.
+> Original fixed-v1 HTML Figure 2 JPEG from the [original paper](https://arxiv.org/html/2611.04792v1#S5), losslessly re-encoded as PNG with identical pixels and visually checked; not regenerated or cropped. The language policy produces prompt rewrites, frozen image generation/encoding supply rewards and representations, and density-scaled rewards update the policy. Copyright belongs to the authors; CC BY 4.0. Not a local execution screenshot.
 <!-- paper-figure:end -->
 
 ### Core equations

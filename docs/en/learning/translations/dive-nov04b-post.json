@@ -52,7 +52,7 @@
       }
     },
     "dive/post-training/teacher-and-context/update/2026-11-05/1": {
-      "source_sha256": "a190eb6e90e55c3aa6a7e6be9933fc47c0c639531428fd6e90b1800335792d73",
+      "source_sha256": "e4d59c9b5270e89aa0a82485c580e5e5c1d4e03037df08837e0737cae8d2ce39",
       "reviewed": true,
       "fields": {
         "summary": "Adds P²-MOPD's parameter-prior channels and Targeted Guidance's failed-turn feedback against MOPD teacher supervision and OPSD privileged context, retaining separate update directions, original denominators and cost-deferred full-experiment boundaries."
@@ -84,7 +84,7 @@
       }
     },
     "dive/post-training/student-trajectory-distillation/update/2026-11-05/3": {
-      "source_sha256": "e4cf8775a38216125b672e688e5261486591cd504dc5df419f4a8c12efc60561",
+      "source_sha256": "50f7652c901bc5b0dd95618a4e2b1ea96a7715bbb0e576df57b7ef8bfed01cbe",
       "reviewed": true,
       "fields": {
         "summary": "Adds Shuffled OPSD's shared-problem transformation against GKD's student-visited-prefix principle, separating fixed reference pairing, signed upper capping and intact-problem evaluation without calling input perturbation or L1 gradients a capability reproduction."
@@ -116,7 +116,7 @@
       }
     },
     "dive/post-training/reward-and-credit/update/2026-11-05/2": {
-      "source_sha256": "11204e235f61233143cb44db48d404fae398406e2815568d2c9b1d3b89338876",
+      "source_sha256": "2344ae0752bb8c68b5ec58bf92ef35fad1fb7e5a9459ff3972d7b1e6e5f1b2da",
       "reviewed": true,
       "fields": {
         "summary": "Adds DARS alongside TACO and CONCUR, separating terminal-outcome density, positive token credit and primary-reward ordering while retaining self/duplicate handling, scaled-reward zero variance, nonnegative rewards and L1 evidence limits."

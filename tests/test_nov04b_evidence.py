@@ -170,6 +170,12 @@ def test_high_cost_reference_only_decisions_are_terminal_not_fake_implementation
     assert not spec['promotion_eligible'] and not spec['evolve_integrated']
     assert not spec['automatic_retry'] and not spec['automatic_implementation_queue']
     assert spec['cost_assessment']['estimated_cost_basis']
+    scope_row = next(row for row in load('task-scope.json')['papers'] if row['key'] == key)
+    ledger = json.loads((ROOT / 'docs/paper-discovery-ledger.json').read_text())
+    batch = next(row for row in ledger['batches'] if row['batch'] == '2026-11-04-new-bulletin-components')
+    ledger_row = next(row for row in batch['candidates'] if row['key'] == key)
+    assert scope_row['reason'] == ledger_row['reason'] == spec['deferral_reason']
+    assert '不复现（审查 DONE）' in scope_row['reason']
     assert not (ROOT / 'docs' / Path(spec['detail_path']).parent / 'metrics').exists()
 
 
@@ -250,7 +256,12 @@ def test_selected_papers_have_original_figures_and_four_specific_question_levels
         assert len(matches) == 1 and matches[0]['visually_inspected']
         assert matches[0]['sha256'] == hashlib.sha256(
             (ROOT / matches[0]['asset']).read_bytes()).hexdigest()
-        assert '版权' in (ROOT / page).read_text()
+        text = (ROOT / page).read_text()
+        assert '版权' in text
+        if row['domain'] in {'post-training', 'agent-research'}:
+            for marker in ('<!-- paper-figure:start -->', '### 原论文关键图',
+                           '图片来自[原论文]', '版权归原作者所有', '<!-- paper-figure:end -->'):
+                assert marker in text
         paper_questions = questions[row['domain'] + ':' + row['key']]
         assert {question['level'] for question in paper_questions} == {
             'basics', 'mechanism', 'comparison', 'implementation',

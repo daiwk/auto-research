@@ -95,6 +95,10 @@ def record(directory):
         if component:
             device=COMPONENTS[key][1]
             row['component_evidence']=(Path('docs')/Path(spec['detail_path']).parent/f'metrics/component-{device}-seeds42-44.json').as_posix()
+        else:
+            if not spec.get('deferral_reason'):
+                raise ValueError('reference-only high-cost closure requires an explicit reason')
+            row['reason']=spec['deferral_reason']
         rows.append(row)
     official=[]
     for name in ['Google','Meta','Google DeepMind']:

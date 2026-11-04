@@ -35,7 +35,7 @@ flowchart LR
 
 [![原论文 Figure 2：DARS-GRPO 图像prompt适配与组内density路径](assets/paper-figure-01.png)](https://arxiv.org/html/2611.04792v1#S5)
 
-> 直接取自固定 v1 HTML 的 Figure 2 原始 JPEG 图本体，无损转换为 PNG，像素一致且已视觉核对；未重新生成或裁剪。原图说明：语言策略产生同 prompt 多个改写，冻结文生图与图像 encoder 提供奖励/表示，组内密度修正奖励后更新策略。版权归原作者所有；原文为 CC BY 4.0。该图不是本地执行截图。
+> 图片来自[原论文](https://arxiv.org/html/2611.04792v1#S5) 固定 v1 HTML 的 Figure 2 原始 JPEG 图本体，无损转换为 PNG，像素一致且已视觉核对；未重新生成或裁剪。原图说明：语言策略产生同 prompt 多个改写，冻结文生图与图像 encoder 提供奖励/表示，组内密度修正奖励后更新策略。版权归原作者所有；原文为 CC BY 4.0。该图不是本地执行截图。
 <!-- paper-figure:end -->
 
 ### 核心公式

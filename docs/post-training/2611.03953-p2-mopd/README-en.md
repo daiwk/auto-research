@@ -1,6 +1,6 @@
 # P²-MOPD: expert parameters as learnable optimization directions
 
-<!-- source-sha256: 6d2a3a096180543571b4aaf924aca02276bc99957b1f4e8864623060216c6161 -->
+<!-- source-sha256: 55c6bbe1e2cff065d1cb2ff2cc0496073a2e8b6871aec7487e0b8329daf58843 -->
 
 [简体中文](README.md)
 
@@ -30,7 +30,7 @@ Multi-teacher OPD supervises student-generated trajectories with domain experts,
 
 ![P²-MOPD Figure 2: student-weight and coefficient update channels](assets/paper-figure-01.png)
 
-Unmodified original PNG from [Figure 2](https://arxiv.org/html/2611.03953v1#S3.F2). Copyright remains with the authors; source, license boundary and visual review are in `assets/provenance.json`. The depicted teacher and rollout systems are not local implementations.
+Unmodified original PNG from Figure 2 in the [original paper](https://arxiv.org/html/2611.03953v1#S3.F2). Copyright remains with the authors; source, license boundary and visual review are in `assets/provenance.json`. The depicted teacher and rollout systems are not local implementations.
 <!-- paper-figure:end -->
 
 ```mermaid

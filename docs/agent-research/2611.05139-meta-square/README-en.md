@@ -1,6 +1,6 @@
 # Meta²: Frozen Evolution Knowledge and Run-Local Edits
 
-<!-- source-sha256: 8aa494ae6aabf5476345a15f97b6c1dda0be3e4dca24503070f8fe60e1b45095 -->
+<!-- source-sha256: ee8dd7f6bba65ffcdccb9d6c70b2d140e7e387ac25e59c52691d68a3a50f7be6 -->
 
 [简体中文](README.md)
 
@@ -38,7 +38,7 @@ flowchart LR
 
 [![Meta² original Figure 2: offline knowledge, online evolution and Meta-Skill structure](assets/paper-figure-01.png)](https://arxiv.org/html/2611.05139v1/main-figure_v2.png)
 
-> **Original Figure 2:** the authors' original image, visually inspected. Source: [paper v1](https://arxiv.org/html/2611.05139v1). Copyright remains with the authors under CC BY-NC-ND 4.0. The redraw above is not presented as this original.
+> **Original Figure 2:** the authors' original image, visually inspected. Image from the [original paper](https://arxiv.org/html/2611.05139v1). Copyright remains with the authors under CC BY-NC-ND 4.0. The redraw above is not presented as this original.
 <!-- paper-figure:end -->
 
 ### Core Equations
