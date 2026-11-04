@@ -561,8 +561,9 @@
     "reward-and-credit": {
       "title": "奖励从哪里来，信用才该分到哪里",
       "thesis": "过程标签、最终结果、模型自置信与回溯归因是不同证据。逐步PRM、MRTPO、TACO和MART-GRPO分别做标签获取、奖励定位、正信用降权和失败后缀过滤；INTUITOR则改用内在分布信号，不能把它当外部正确性验证器。 CONCUR另处理奖励维度之间的优先级，把门控辅助优势投影到主奖励保序锥；这不是沿时间轴分配token信用。",
-      "updated": "2026-10-30",
+      "updated": "2026-11-05",
       "reviewed_papers": [
+        "post-training:dars-density",
         "post-training:mart-grpo",
         "post-training:mge-po",
         "post-training:tag-reward-gating",
@@ -677,6 +678,16 @@
             "核心公式",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "post-training:dars-density",
+          "position": "同prompt组内对结果表示计算含self的Gaussian KDE，以非负reward除以density后再标准化，原GRPO目标不变。",
+          "tradeoff": "终局结果拥挤度不是token置信或奖励优先级；重复点在窄带宽仍计多次，原reward常数不代表缩放后常数。std约定和零方差策略显式，L1不证明已学到奖励比例分布。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "检查与负控"
+          ]
         }
       ],
       "analysis": [
@@ -704,6 +715,15 @@
           "papers": [
             "post-training:concur",
             "post-training:taco"
+          ]
+        },
+        {
+          "title": "结果密度是组内新坐标，不是token风险或主奖励优先级",
+          "body": "TACO按局部tail risk降低正token信用，负信用保留；CONCUR按主奖励顺序投影组内辅助优势。DARS改的是另一层：相同prompt下结果表示的拥挤度，先用含self的Gaussian密度缩放非负终局reward，再计算组优势。原reward都相同也可能因density不同产生不同缩放值；只有缩放后reward为常数时才出现零方差。重复点在窄带宽仍有重复计数，不能一律当density趋1。embedding、bandwidth、std约定决定该坐标，合成KDE检查不是策略分布覆盖或图像质量证据。",
+          "papers": [
+            "post-training:dars-density",
+            "post-training:taco",
+            "post-training:concur"
           ]
         }
       ],
@@ -747,6 +767,17 @@
           "papers": [
             "post-training:concur",
             "post-training:taco"
+          ]
+        },
+        {
+          "id": "outcome-density-not-token-or-priority",
+          "question": "原reward全为1时，DARS一定和不改reward的组标准化一样给零优势吗？",
+          "answer": "不一定。密度不同会把相同reward缩放成不同值，再标准化就可能有非零相对信号；零方差判断必须看缩放后reward。TACO根据token风险调正信用，CONCUR依据主奖励约束辅助排序，都没有仅由原reward相等就等价于DARS的理由。三种方法读取的证据和作用坐标不同。",
+          "example": "教学例：同组结果y=(0,0,100)、极窄带宽、r=(1,1,1)，含self密度约(2,2,1)，缩放后为(0.5,0.5,1)并非常数；若三个结果全重合才得到共同密度和常数缩放值。",
+          "papers": [
+            "post-training:dars-density",
+            "post-training:taco",
+            "post-training:concur"
           ]
         }
       ],
@@ -842,14 +873,29 @@
             "post-training:concur": "e811ed06ea3b661df16afeb6c0ee2dd6859f63a1b6bc343ad0102b18361c92d1",
             "post-training:taco": "d0440e75bb674d0ae0ffc721691df4c8194541c9a460fd517b52cdb3f7955572"
           }
+        },
+        {
+          "date": "2026-11-05",
+          "summary": "补入DARS，按终局结果密度、token正信用和主奖励保序三轴对照TACO/CONCUR；明确含self与重复点、缩放后零方差、非负reward和L1机制证据边界。",
+          "papers": [
+            "post-training:dars-density",
+            "post-training:taco",
+            "post-training:concur"
+          ],
+          "source_revisions": {
+            "post-training:dars-density": "c674746ca845bf722e7fab83b53e25158dc5f9076aeca7bb3f9b7cc37e5bfe69",
+            "post-training:taco": "d0440e75bb674d0ae0ffc721691df4c8194541c9a460fd517b52cdb3f7955572",
+            "post-training:concur": "e811ed06ea3b661df16afeb6c0ee2dd6859f63a1b6bc343ad0102b18361c92d1"
+          }
         }
       ]
     },
     "student-trajectory-distillation": {
       "title": "轨迹蒸馏：采样者、提案与散度方向分开看",
       "thesis": "“on-policy”描述监督发生在哪些状态，FKL/RKL/JSD描述在这些状态怎样比较分布。GKD和MiniLLM建立这两个轴，DrOPD、AP-OPD再调整纠错位置或强度，Semi-OPD与学习信号诊断则提醒：离线复用和残余损失各有不同含义。 MPOPD再把采样者变成可学习proposal：几何混合是提案target，学生仍向教师做RKL，二者不能混成同一个蒸馏分布。",
-      "updated": "2026-11-04",
+      "updated": "2026-11-05",
       "reviewed_papers": [
+        "post-training:shuffled-opsd",
         "post-training:specopd",
         "post-training:opst",
         "post-training:userarena-optd",
@@ -979,6 +1025,16 @@
             "核心公式",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "post-training:shuffled-opsd",
+          "position": "同时改变学生采样和教师评分的共享问题词序，保留固定111偏移的完整其他题示例为教师私有上下文，使用逐词表有符号上截断监督。",
+          "tradeoff": "变的是共享输入与访问状态，不是重排已采轨迹；词multiset不保证token预算不变。负项与response等权归约不能被普通KL替代，完整数学评测仍用原始题。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ]
         }
       ],
       "analysis": [
@@ -1016,6 +1072,14 @@
             "post-training:specopd",
             "post-training:gkd",
             "post-training:mpopd"
+          ]
+        },
+        {
+          "title": "同为学生轨迹，题目条件本身也会改变访问状态",
+          "body": "GKD强调教师应在学生实际访问的前缀上监督，但不固定唯一散度。Shuffled OPSD把共享题目也作为设计变量：相同T(x)同时决定学生采样与教师评分，固定其他题参考只在teacher中出现。只打乱教师输入或生成完再打乱续写，都不是该条件结构。其signed pointwise cap保留负项，与普通KL不同；负总损失可以来自定义而非错误。状态来源、共享输入、教师私有信息和数值目标仍需分别检查，局部loss通过不能证明数学能力提升。",
+          "papers": [
+            "post-training:shuffled-opsd",
+            "post-training:gkd"
           ]
         }
       ],
@@ -1072,6 +1136,16 @@
             "post-training:mpopd",
             "post-training:gkd",
             "post-training:minillm"
+          ]
+        },
+        {
+          "id": "shared-input-shuffle-not-offpolicy",
+          "question": "GKD要求沿学生轨迹监督，Shuffled OPSD把题目打乱后是不是就变成了off-policy？",
+          "answer": "不因此变成off-policy。若学生确实在变换后的共享问题上采样，教师评分同一问题和同一已采前缀，监督仍来自学生实际访问状态。需要另外区分训练输入发生变化、teacher私有示例和截断损失；把原题轨迹缓存后仅改教师题目才改变了条件对齐。",
+          "example": "教学例：学生在“coins red five contains box”上生成y，教师也评分T(x),y的同一前缀；若学生实际读的是原题，教师却读打乱题，已不是同一条件实验。",
+          "papers": [
+            "post-training:shuffled-opsd",
+            "post-training:gkd"
           ]
         }
       ],
@@ -1187,14 +1261,28 @@
           "source_revisions": {
             "post-training:specopd": "90be88540d6ff85984692f45f29d7aae0f8b8fdb02cf70f9b887e810a22bdeb8"
           }
+        },
+        {
+          "date": "2026-11-05",
+          "summary": "补入Shuffled OPSD的共享题目变换，对照GKD的学生访问前缀原则；明确固定参考配对、有符号上截断及原题评测，未把输入扰动或L1梯度检查当作能力复现。",
+          "papers": [
+            "post-training:shuffled-opsd",
+            "post-training:gkd"
+          ],
+          "source_revisions": {
+            "post-training:shuffled-opsd": "5467ac283f9cf9c9bdd20c8cfdf69af87a3ee4b9999243a3b8d66a938521b188",
+            "post-training:gkd": "2ab62ef8abeb52d245df7464048bea93a0622c2239fa7baae80261321f6ecd3e"
+          }
         }
       ]
     },
     "teacher-and-context": {
       "title": "教师更强仍可能教错：信息、兼容性与成功行为保护",
       "thesis": "教师的价值不只取决于总分。OPSD改变训练期可见信息，MOPD与逐token路由组织多教师，CSD先统一概率事件，SPOD保护学生已成功选择，VAD筛出可归于视觉证据的修正；这些约束要在模仿之前分别成立。",
-      "updated": "2026-10-27",
+      "updated": "2026-11-05",
       "reviewed_papers": [
+        "post-training:p2-mopd",
+        "post-training:targeted-guidance",
         "post-training:aopd",
         "post-training:minimal-edit-opd",
         "post-training:csd",
@@ -1309,6 +1397,26 @@
             "核心公式",
             "复现边界"
           ]
+        },
+        {
+          "paper": "post-training:p2-mopd",
+          "position": "把冻结专家任务向量保留为可学习优化方向；自由学生权重与系数由同一更新前梯度共同推进，推理仍使用一个物化学生模型。",
+          "tradeoff": "不只改变教师logit或合并初始点；未裁剪系数梯度、独立全局clip和零decay决定多步等价。完整MOPD模型/轨迹未复现，本地只验参数更新L1。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "paper": "post-training:targeted-guidance",
+          "position": "在失败Agent turn前加入文本反馈，以同权重反馈条件教师做完整词表reverse KL，并保留criterion的普通RL奖励。",
+          "tradeoff": "只在失败处蒸馏，按整条响应token数归一；全部满足后恢复原RL。组件不提供实际judge、反馈有效性筛选或Agent轨迹，不能凭loss下降声称代码能力提高。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -1328,6 +1436,22 @@
           "papers": [
             "post-training:spod",
             "post-training:vad",
+            "post-training:opsd"
+          ]
+        },
+        {
+          "title": "教师既给logit，也能给参数方向，但两条证据不能互换",
+          "body": "MOPD组织领域教师在学生轨迹上的监督；P²-MOPD进一步把专家bank的任务向量保留为连续可学习方向。教师选择回答谁给token反馈，参数先验则还改变权重空间怎样走。自由B允许离开任务向量空间，系数学习低维方向，导出仍是单学生。原文采用的支持受限MOPD surrogate、同一未裁剪梯度和双通道optimizer时序都有独立合同，旧候选混合接口不能直接冒充该完整训练。",
+          "papers": [
+            "post-training:p2-mopd",
+            "post-training:mopd"
+          ]
+        },
+        {
+          "title": "特权上下文应作用在哪里，与有没有teacher同样重要",
+          "body": "OPSD区分学生可见问题与teacher私有参考；Targeted Guidance把特权信息换成失败turn前的文本反馈，并只在这些轮次施加辅助reverse KL，同时保留普通criterion RL。稀疏门控选择梯度位置，整条response-token归一控制每条rollout的总体尺度，两者不能混成删token后重算均值。无失败时严格退化原RL是数值合同，不代表反馈已经通过有效性筛选或代码任务真的提升。",
+          "papers": [
+            "post-training:targeted-guidance",
             "post-training:opsd"
           ]
         }
@@ -1373,6 +1497,26 @@
           "papers": [
             "post-training:opsd",
             "post-training:vad"
+          ]
+        },
+        {
+          "id": "parameter-prior-not-teacher-mixture",
+          "question": "P²-MOPD学到一个更大的专家系数，是否等于MOPD提高了该教师的token混合权重？",
+          "answer": "不等同。参数先验系数乘的是固定权重任务向量，改变学生参数空间的更新方向；教师路由或混合系数作用于输出监督分布。P²-MOPD仍要由领域教师给学生轨迹评分，不能用一个方向系数替代反馈分布，也不能把两类系数拿来直接解释同一种置信度。",
+          "example": "教学例：沿医疗专家参数方向把alpha从0.25改为0.3，不等于每个token的医疗教师概率都从25%混到30%；神经网络的参数到输出映射并不线性。",
+          "papers": [
+            "post-training:p2-mopd",
+            "post-training:mopd"
+          ]
+        },
+        {
+          "id": "feedback-mask-not-global-privilege",
+          "question": "OPSD和Targeted Guidance都有额外教师上下文，能统一为整条轨迹的teacher KL吗？",
+          "answer": "不能抹掉门控与归约。Targeted Guidance只在criterion失败的Agent turn施加student到冻结teacher的完整词表KL，分母仍是整条响应有效token，并保留普通RL奖励；普通OPSD的特权参考不自动包含这些局部失败合同。额外信息只允许进入训练教师，不能交给正式学生作为未来错误提示。",
+          "example": "教学例：100个响应token中只有1个失败token且KL为2，辅助量按2/100计算；把其余99个token删掉后平均会变成2，也不再是原门控强度。",
+          "papers": [
+            "post-training:targeted-guidance",
+            "post-training:opsd"
           ]
         }
       ],
@@ -1476,6 +1620,22 @@
             "post-training:mopd": "7da71c090377ae140bf459093ade7127dc3aa1437d327be7aa38bf692a287f80",
             "post-training:polaris-hri": "600e093d03dd7f7fd810ba42af8e484cc7985bdd20d6c46380445977ec6bea6b",
             "post-training:opcd": "8b236d0a1786b547d76b657c05f447322ec70892dd78e12582424ab45963d39a",
+            "post-training:opsd": "8082928a5bc28763d2b28f8f7f640f9498cf8516f2e58f3841760950f405df74"
+          }
+        },
+        {
+          "date": "2026-11-05",
+          "summary": "补入P²-MOPD参数先验双通道和Targeted Guidance失败turn反馈；对照MOPD教师监督与OPSD特权上下文，保留独立更新方向、原分母及完整实验高成本未复现边界。",
+          "papers": [
+            "post-training:p2-mopd",
+            "post-training:targeted-guidance",
+            "post-training:mopd",
+            "post-training:opsd"
+          ],
+          "source_revisions": {
+            "post-training:p2-mopd": "6d2a3a096180543571b4aaf924aca02276bc99957b1f4e8864623060216c6161",
+            "post-training:targeted-guidance": "bc0b37f057662ea12f6673c4f820f5dd7540f8152e62f7843c084fb88e3ad9bb",
+            "post-training:mopd": "7da71c090377ae140bf459093ade7127dc3aa1437d327be7aa38bf692a287f80",
             "post-training:opsd": "8082928a5bc28763d2b28f8f7f640f9498cf8516f2e58f3841760950f405df74"
           }
         }

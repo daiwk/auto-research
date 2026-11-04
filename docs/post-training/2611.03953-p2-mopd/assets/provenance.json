@@ -1,0 +1,15 @@
+{
+  "paper_id": "2611.03953v1",
+  "figure": "2",
+  "source_page": "https://arxiv.org/html/2611.03953v1#S3.F2",
+  "source_url": "https://arxiv.org/html/2611.03953v1/P2-MOPD.png",
+  "image": "paper-figure-01.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "2a22bf1554e3ee30242457a15c209f55cf38f95661f7fe32a3edc0e3220d28e9",
+  "width": 1820,
+  "height": 609,
+  "license": "arXiv.org perpetual non-exclusive license; figure copyright retained by the authors",
+  "transformation": "none",
+  "visual_review": "2026-11-04目视核对原PNG：左侧冻结专家/可训练alpha/自由学生权重，右侧student rollout与frozen teacher，双通道backprop和legend清晰，无裁切；未加载图示模型",
+  "checked_on": "2026-11-04"
+}

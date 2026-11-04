@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:meta-square/knowledge-versus-local-edits": {
+      "source_sha256": "f0928bf873987f9bb6e110ede47614db210c65aca463b15e30eb0e7f5f054a8b",
+      "reviewed": true,
+      "fields": {
+        "question": "What does Meta² reuse across tasks: the same harness or something else?",
+        "answer": "It reuses a frozen Meta-Skill: knowledge about when to act, hold or avoid an intervention. Concrete harness edits affect only the current run and are discarded when that task ends. It neither applies every edit permanently to all tasks nor updates base-model weights.",
+        "example": "Teaching example: the lesson to check that an output actually exists can transfer. A directory-specific check added for Task A should not automatically persist into Task B."
+      }
+    },
+    "qa/agent-research:meta-square/terminal-evolve-keeps-progress": {
+      "source_sha256": "44caaff37bbd8141013c2af45c3d965810156e4937235915edeb77d12490d76c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must terminal EVOLVE not clear the environment and restart?",
+        "answer": "Terminal EVOLVE returns a bounded correction to the same active run, preserving its workspace, progress and trajectory. Terminal KEEP accepts completion. Resetting changes within-run adaptation into a retry experiment with different algorithm and cost semantics.",
+        "example": "Teaching example: if a file is complete but one test is missing, EVOLVE requests that test in the existing workspace. Deleting the file and restarting is not one continuous trajectory."
+      }
+    },
+    "qa/agent-research:meta-square/offline-guidance-not-online-verifier": {
+      "source_sha256": "78d08eaf60ee4a55fb694d08f8b68b734419960d3c4d7c26edf5baffc73c0141",
+      "reviewed": true,
+      "fields": {
+        "question": "Does verifier access in training arm C permit the deployed evolver to choose edits using final hidden scores?",
+        "answer": "No. C's privilege is restricted to training contrasts, and deployment knowledge is frozen. Online decisions use only public evidence available then. Providing final hidden scores changes online adaptation into answer-informed selection rather than the paper's deployment protocol.",
+        "example": "Teaching example: an evolver may read a tool report that a file is missing. It must not first inspect a hidden failing-test line and then pass the precise answer to the executor as a notice."
+      }
+    },
+    "qa/agent-research:meta-square/typed-boundary-not-secret-detector": {
+      "source_sha256": "8916a82475fa93f5e6968e6a88b49521bddf57719b9703de9512e8a0d88a7026",
+      "reviewed": true,
+      "fields": {
+        "question": "Does rejecting hidden_verifier establish that hidden answers cannot leak?",
+        "answer": "No. An exact field whitelist blocks extra structured feedback from entering checkpoints, but callers can still paste secrets into public text. Same-process Python objects are not a sandbox. This component validates interfaces and lifetimes, not a trained evolver, terminal execution or capability improvement.",
+        "example": "Teaching example: adding a gold_answer key is rejected. Hiding an answer inside a trajectory_delta string still requires external host isolation; a legal field name does not make its content public."
+      }
+    },
+    "qa/agent-research:continual-autoresearch/early-search-versus-selected-outcome": {
+      "source_sha256": "876d0409a68ca7dfbf76954844c2fd18148505b9496447b459540becb99d85a7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can finding a strong candidate earlier still lead to a worse final outcome?",
+        "answer": "Search efficiency measures the area under the budgeted hidden-test best-so-far curve, whereas final outcome scores the agent's actual selection. An agent can find a good solution early, later overfit development data and select a worse one.",
+        "example": "Teaching example: finding 0.8 at time 2, then 0.5 at time 6 and selecting the latter gives good early search but a final score of only 0.5."
+      }
+    },
+    "qa/agent-research:continual-autoresearch/fixed-horizon-best-curve": {
+      "source_sha256": "875c5dbf68a68a2fb6ce8856889a28902a697cd928f2c49a108708445b6466f5",
+      "reviewed": true,
+      "fields": {
+        "question": "With budget 10 and scores 0.8 at time 2 and 0.5 at time 6, why is search utility 0.64 rather than 0.52?",
+        "answer": "Reward is zero before the first valid submission. Thereafter best-so-far remains 0.8 despite the worse later candidate. The area is 0 times 2 plus 0.8 times 8, or 6.4; dividing by 10 gives 0.64. A value of 0.52 incorrectly uses the most recent candidate instead of the best discovered so far.",
+        "example": "Teaching example: the worse time-6 candidate does not erase discovery of the 0.8 solution. The final-selection metric must nevertheless remain 0.5 rather than being replaced by the oracle best."
+      }
+    },
+    "qa/agent-research:continual-autoresearch/posthoc-hidden-not-selection-feedback": {
+      "source_sha256": "e8a8591187f342e8350651e1eaf843a9eeb1a7ced335f8e9e510cbbfe680215e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does post-hoc hidden-test scoring of every submission differ from using test scores to pick an Evolve champion?",
+        "answer": "An independent evaluator constructs the research-efficiency curve only after the run; the scores must not reach the online agent. Final selection uses training/development information available during execution. Using the post-hoc curve to choose candidates would violate test isolation.",
+        "example": "Teaching example: seal all submissions and the final selected ID before computing hidden-test AUC. Showing a live hidden-test leaderboard and choosing the final model from it is not allowed."
+      }
+    },
+    "qa/agent-research:continual-autoresearch/training-normalization-stream-unit": {
+      "source_sha256": "71fa93a5d70edcc5b1f4cbdbbc9b39fdcb1f6bf7612ddcca9d3f908fbf0115ea",
+      "reviewed": true,
+      "fields": {
+        "question": "Which units must be preserved in RMSE normalization and transfer aggregation?",
+        "answer": "RMSE uses the training-set channel standard deviation, not test statistics. Persistent/reset records must match task, budget and normalization. Task 1 has no prior experience, so transfer starts at Task 2. Average within each stream, then weight streams equally rather than automatically favoring longer streams.",
+        "example": "Teaching example: RMSE 6 with training SD 2 gives reward 1/(1+3)=0.25. A ten-task stream and a two-task stream contribute one stream mean each, not an unqualified twelve-task average."
+      }
+    },
+    "qa/agent-research:runtime-tickets/send-permission-not-delivery-contract": {
+      "source_sha256": "1b1133de4d514d82750a1c334171255c7f8cdf80e4d5791f7deb2d3280d96ba9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is permission to send to a service insufficient to prevent data exposure?",
+        "answer": "An attack can reuse the task's permitted recipient to send secrets or extra content. A ticket must also require a trusted object validator and cumulative-amount limit. Recipient or tool-name checks alone do not express the delivery contract.",
+        "example": "Teaching example: the same endpoint can receive either an approved report or a secret key. The report validator rejects the key even when the endpoint is on the host allow-list."
+      }
+    },
+    "qa/agent-research:runtime-tickets/deny-before-unknown-and-pre-effect-log": {
+      "source_sha256": "8494c098b3fd870db133542770a8fedb2f78761d509129ea71c7e665178827c7",
+      "reviewed": true,
+      "fields": {
+        "question": "Should a request with a wrong recipient and an unknown object-validation result Defer or Deny?",
+        "answer": "Deny takes precedence. Missing authority, any explicit failed obligation or exceeded budget denies. Only without failures can an unknown condition defer; all checks must pass to allow. Record the decision before the callback effect, and only Allow consumes quota and forwards.",
+        "example": "Teaching example: a wrong recipient remains Deny even when its validator is temporarily unavailable. An unknown check cannot turn known unauthorized access into waiting. A valid request reaches the callback only after its Allow record exists."
+      }
+    },
+    "qa/agent-research:runtime-tickets/attenuation-and-source-grounding": {
+      "source_sha256": "74043c3cb28d85e54e70710ee02dfd71d6d04c062fff55b64b3a8f95298567fa",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a ticket differ from a permission list declared by the Skill itself?",
+        "answer": "It attenuates a trusted host grant and cannot introduce unauthorized operations, resources or recipients. Obligations bind to the exact Skill version and source lines. Skill text is evidence to examine, not authority to approve access. The local compiler checks structural boundaries, not LLM semantic relevance.",
+        "example": "Teaching example: a Skill asking for an extra upload to other does not authorize other. Citing a nonexistent line 20 also fails source validation."
+      }
+    },
+    "qa/agent-research:runtime-tickets/local-chain-not-complete-account": {
+      "source_sha256": "2535f6ab56888b5484545a8e269ed58a472c78408b279183e708998d812e2f55",
+      "reviewed": true,
+      "fields": {
+        "question": "Do a valid HMAC chain and at-most-once callback establish a complete Supported proof and network exactly-once delivery?",
+        "answer": "Neither. HMAC checks content and order in the supplied local records; a truncated prefix may remain valid. Full Supported needs a sealed, closed observation account. Callback failure leaves delivery unknown, so consumed quota is retained and the same ID is not resent. This is only local at-most-once invocation.",
+        "example": "Teaching example: a server may receive data before the connection fails. Restoring quota and retrying could duplicate delivery. The component preserves that uncertainty rather than treating missing confirmation as no effect."
+      }
+    },
+    "qa/agent-research:rsi-dojo/training-environment-versus-rl-loss": {
+      "source_sha256": "a19af9217516fff7094dc7ac676c952f84528ffea90c3b75639250ecb4f1a384",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are RSI-Dojo's 281 environments not simply another RL loss?",
+        "answer": "The contribution is executable post-training tasks and filtered agent trajectories that teach data selection, training and iteration. Environment-selection thresholds are not a generic policy-gradient objective. External harness improvement also differs from internalizing skills through trajectory fine-tuning.",
+        "example": "Teaching example: a task supplies data, an evaluation script and feedback. The agent then chooses training steps from that feedback. Writing a reward formula does not create 281 runnable environments."
+      }
+    },
+    "qa/agent-research:rsi-dojo/reliability-and-discriminability-gates": {
+      "source_sha256": "00fbfaee1ab98c2c836ef776c9737601713b1a5a07839ea4aabc23ccfac806c6",
+      "reviewed": true,
+      "fields": {
+        "question": "Would a stable 400-example task be retained if both small and large models score 0.9?",
+        "answer": "No. Above 300 examples it is first downsampled to 300, but both scores above 80% fail discriminability filtering. The score gap must also be at least ten percentage points. Executability alone does not establish a useful post-training signal.",
+        "example": "Teaching example: 0.9 versus 0.9 is too easy. Scores 0.45 and 0.60 avoid the both-high/both-low regions and differ by fifteen points, so they can proceed to other protocol checks."
+      }
+    },
+    "qa/agent-research:rsi-dojo/process-and-outcome-both-needed": {
+      "source_sha256": "06b8af8940d4565dfd8404b46ac04785fa8ef3ae3ed02c352d4b55fd8840459a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is a trajectory that finishes a training command not automatically high-quality supervision?",
+        "answer": "The paper separately filters undesirable process patterns using a rubric and requires measurable final-submission improvement with an outcome filter. Successful commands, complete logs, lower training loss and target-benchmark gains are different evidence. One alone does not establish post-training competence.",
+        "example": "Teaching example: training can finish and reduce loss while evaluation uses an invalid output format. That trajectory does not demonstrate target improvement. A high final score also does not excuse clearly improper data use."
+      }
+    },
+    "qa/agent-research:rsi-dojo/review-done-is-not-runtime": {
+      "source_sha256": "93a8cf15fb88a72f985192d42f66d170d7693386c6aa8d4117e462462cd410be",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is cataloging this paper without runtime or metrics not an automatic-retry TODO?",
+        "answer": "It is a terminal published-cost decision: 9B/35B-A3B fine-tuning, frontier trajectories and five- or ten-hour task evaluations exceed the low-cost single-device scope. Review DONE means the method and nonreproduction boundary were reviewed, not that code or capability exists. Do not invent receipts, Evolve operators or repeated retries.",
+        "example": "Teaching example: a learning card may explain thresholds using 0.45 and 0.60, but those teaching values must not become metrics claiming real Qwen/GPT evaluation."
+      }
+    }
+  }
+}

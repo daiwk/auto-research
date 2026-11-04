@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:dars-density/outcome-not-entropy": {
+      "source_sha256": "cd7ce8476834f4126870e9ac3e9c77d72f516c3960a7b3680d61c99f76b24846",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does DARS correct rewards in outcome-representation space rather than merely increase action entropy?",
+        "answer": "Random actions need not cover several terminal modes. Different rewrites can produce similar images. DARS reduces the relative reward of crowded outcome regions within one prompt group, targeting terminal coverage rather than simply randomizing each action.",
+        "example": "Teaching example: Ten different wordings all produce the same sunset composition. Prompt vocabulary is diverse but image modes still collapse; image-embedding density can reveal this crowding."
+      }
+    },
+    "qa/post-training:dars-density/self-and-duplicates": {
+      "source_sha256": "8883006654d848fc32451b9e9438f8b17a63d59f0bf7f092eedc7b4dc6806a02",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must Gaussian KDE retain self terms, and what happens to duplicates at narrow bandwidth?",
+        "answer": "The sum includes every group member, including a self contribution of one, so density is at least one. Narrow bandwidth suppresses contributions between distinct points, not coincident points. Duplicates retain their multiplicity; removing self or setting every density to one changes rewards.",
+        "example": "Teaching example: Outcomes (0,0,100) at h=.001 have densities (2,2,1). Unit rewards become (.5,.5,1). Narrow bandwidth does not make the two coincident points invisible to one another."
+      }
+    },
+    "qa/post-training:dars-density/bandwidth-and-std": {
+      "source_sha256": "f78d29201010ccbcdbc4710ee6f82f6aae3ccbc1d6ac563788bd31bfbed51d47",
+      "reviewed": true,
+      "fields": {
+        "question": "When does wide bandwidth reduce to GRPO, and why still declare the standard-deviation convention?",
+        "answer": "When all densities approach the same G, their common reward scale cancels under the same standard-deviation convention, recovering ordinary group normalization. Population versus sample deviation changes advantage scale. The paper leaves this unspecified, so the local choice must be explicit rather than presented as an algorithmic gain.",
+        "example": "Teaching example: For G=3, sample deviation is sqrt(3/2) times population deviation, scaling advantages by sqrt(2/3). This is a convention difference, not less mode collapse."
+      }
+    },
+    "qa/post-training:dars-density/group-stopgrad": {
+      "source_sha256": "207acab63511e8623c77d42b766bb64efdb3430743f914a022ff228613d8003e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not mix densities across prompts, and why stop gradients through outcomes and rewards?",
+        "answer": "DARS measures crowding within one conditioning input's rollout group. Mixing prompts penalizes outcomes under unrelated conditions. The component processes policy-gradient rewards, not gradients through frozen image encoders or rewards. Zero-variance groups explicitly return zero advantages or raise instead of hiding the issue with epsilon.",
+        "example": "Teaching example: A cat prompt and a car prompt can yield similar backgrounds without needing to suppress each other's rewards. A frozen feature passed with requires_grad=True must still receive no gradient from advantage processing."
+      }
+    }
+  }
+}

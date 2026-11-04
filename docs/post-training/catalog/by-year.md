@@ -4,6 +4,10 @@
 
 ## 2026
 
+- 2026-11 · [Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling](../2611.04792-dars/README.md)（`dars-density`）：期望奖励最大化容易持续强化已密集采样的结果。DARS 在同一条件输入的 rollout 组内估计结果表示密度，以 $r/\rho$ 替换原奖励，再执行常规 GRPO 组优势标准化；不引入 density 网络或替换 policy objective。
+- 2026-11 · [Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation?](../2611.04958-shuffled-opsd/README.md)（`shuffled-opsd`）：OPSD 中学生根据问题采样，冻结初始教师在同一生成前缀上评分，但额外看到 worked example。本文区分“双方共享的问题”和“只有教师看到的示例”：用另一个问题的完整示例作教师上下文，打乱共享问题的 whitespace 词块，却保留教师示例的顺序。
+- 2026-11 · [Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning](../2611.05266-targeted-guidance/README.md)（`targeted-guidance`）：标量RL奖励只能强化已有可探索行为，难以告诉Agent“怎样修正一种此前几乎不会的工具格式/沟通风格”。本文把每个criterion的文本反馈放在出错的Agent turn之前，同一策略在反馈条件下成为stop-gradient教师；学生仍在自己的实际历史上学习。
+- 2026-11 · [P²-MOPD: Accelerating Multi-Teacher On-Policy Distillation via Parameter Priors](../2611.03953-p2-mopd/README.md)（`p2-mopd`）：多教师 OPD 用各领域专家监督学生自己的轨迹，但一个已合并的学生可能长期学不到某个专家的方向。P²-MOPD 不只改合并初始点，而是把每个 projection 写成“自由学生权重 + 可学习系数乘固定专家任务向量”。
 - 2026-11 · [RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs](../2611.02455-rlid/README.md)（`rlid`）：文本策略会把一次动作的优势赋给推理、格式和命令 token。RLiD 将观测、过去反馈形成的记忆和合法菜单编译成输入，单次前向仅在标签之间选动作，再做决策级 RL。
 - 2026-11 · [SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding](../2611.02846-specopd/README.md)（`specopd`）：普通 OPD 要逐轮 draft-and-verify 才能继续收集上下文。SpecOPD 在已有 reference 的多个 anchor 上重新采当前 draft 的私有续写，合并成共享 trunk 的 proposal tree，再并行给教师打分。
 - 2026-10 · [CONCUR: Concordant Auxiliary Rewards for Multi-Task, Multi-Reward Reinforcement Learning](../2610.36437-concur/README.md)（`concur`）：多奖励RL常让主奖励决定辅助奖励是否生效，但逐分量标准化会破坏原先优先级：辅助分量可能反转主奖励的排序；所有响应都已正确时，微小长度差异也可能独自决定更新。CONCUR不重写奖励或调低全局权重，而是在每个prompt组内把门控辅助优势投影到与主奖励相容的最近分数。

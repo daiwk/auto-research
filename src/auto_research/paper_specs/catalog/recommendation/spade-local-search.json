@@ -1,0 +1,65 @@
+{
+  "domain": "recommendation",
+  "key": "spade-local-search",
+  "title": "SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search",
+  "paper_url": "https://arxiv.org/abs/2611.04662v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.04662v1",
+  "reviewed_version": "v1",
+  "detail_path": "recommendation-components/2611.04662-spade-local-search/README.md",
+  "topic": [
+    "本地搜索",
+    "业务对齐分词与多样性解码"
+  ],
+  "browse_company": "Meituan",
+  "browse_topic": [
+    "生成、排序与冷启动",
+    "训练目标与决策优化"
+  ],
+  "first_author": "Chenxu Wang",
+  "first_author_affiliation": "Meituan",
+  "published": "2026-11-03",
+  "published_at": "2026-11-03T10:50:31Z",
+  "announced_on": "2026-11-04",
+  "code": null,
+  "code_status": "固定v1全文及arXiv链接未发现SPADE原作者实现仓库；同名其他项目不是开源证据",
+  "code_license": "作者源码未发现；论文arXiv非独占许可；本地独立实现",
+  "upstream_revision": null,
+  "adapter": null,
+  "priority": "P0",
+  "intake_class": "newly_announced_first_collection",
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "local_operator": "auto_research.reproductions.spade_components.sdbs_step",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.reproductions.spade_components import diagnostic; print(diagnostic(42))'",
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "online_ab": [
+    {
+      "product": "Meituan local-search query suggestion",
+      "metric": "Module CTR",
+      "lift_percent": 1.88,
+      "traffic": "one-week production A/B vs production baseline, 20% traffic per arm, p<0.05",
+      "source_url": "https://arxiv.org/html/2611.04662v1",
+      "source_location": "Section4.8; SearchVolume+0.177%, SearchDAU+0.105%, all p<0.05; paper system evidence only"
+    }
+  ],
+  "cost_assessment": {
+    "source_url": "https://arxiv.org/html/2611.04662v1",
+    "source_location": "Sections3/4.1/4.8",
+    "available_resource": "one NVIDIA A100 or A30, or local Mac",
+    "model_scale": "6-layer decoder, dim512,8heads plus Qwen3-32B independent evaluator; 8 data-center training GPUs",
+    "data_scale": "100K users,1.48M queries,7.79M pretraining and3.08M alignment samples,private GPS/production feedback;3+1 epochs",
+    "estimated_cost_basis": "multi-million private samples, multi-GPU training and production query execution/judging exceed a cheap single-device reproduction; exactGPU-hours not disclosed",
+    "decision": "完整实验成本过高，不复现（审查 DONE）；仅CPU OA-BPE局部统计/合并和SDBS外部logp扩展裁剪，不下载模型或日志"
+  },
+  "summary": "OA-BPE用业务价值加权token-pair计数，STAR以软门控编码时空位置，MARS-DPO对齐生产偏好，SDBS按父beam排序给予有界sigmoid奖励。本地只实现分词/解码算子；首beam自身零奖励不意味着任意参数下top1永不被其他beam超过。"
+}

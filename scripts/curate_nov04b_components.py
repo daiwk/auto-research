@@ -15,9 +15,15 @@ from curate_nov04_components import (  # noqa: E402
 )
 from oct18_frozen_sources import capture_sources, verify_sources  # noqa: E402
 from run_nov04_components import validate_diagnostic  # noqa: E402
-from run_nov04b_components import COMPONENTS, PREFLIGHT, RUNNER, SEEDS, sources  # noqa: E402
+from run_nov04b_components import (  # noqa: E402
+    COMPONENTS as EXECUTION_COMPONENTS, PREFLIGHT, RUNNER, SEEDS, sources,
+)
 
 AUDIT = ROOT/'docs/research-audits/nov04-bulletin-components'
+# Keep the actual frozen run unchanged. Its short DARS execution label refers to
+# 2611.04792, not the already catalogued 2610.01207 Dependency-Aware DARS.
+EXECUTION_KEYS = {'dars-density' if key == 'dars' else key: key for key in EXECUTION_COMPONENTS}
+COMPONENTS = {key: EXECUTION_COMPONENTS[execution_key] for key, execution_key in EXECUTION_KEYS.items()}
 
 
 def freeze():
@@ -41,7 +47,7 @@ def catalogue():
 
 
 def validate_raw(raw,device,frozen):
-    expected = set(COMPONENTS) if device=='cpu' else {key for key,(_,required) in COMPONENTS.items() if required=='cuda'}
+    expected = set(EXECUTION_COMPONENTS) if device=='cpu' else {key for key,(_,required) in EXECUTION_COMPONENTS.items() if required=='cuda'}
     if (device not in ('cpu','cuda') or raw.get('device')!=device or set(raw.get('components',{}))!=expected
             or raw.get('seeds')!=SEEDS or raw.get('code_commit')!=frozen['commit']
             or raw.get('source_sha256')!=frozen['source_sha256']
@@ -60,7 +66,7 @@ def validate_raw(raw,device,frozen):
     for result in raw['components'].values():
         rows = result['per_seed']
         if len(rows)!=3 or [row['seed'] for row in rows]!=SEEDS:
-            raise ValueError('three actual independent seed rows required')
+            raise ValueError('three actual seed rows required; not a formal capability comparison')
         for row,seed in zip(rows,SEEDS):
             validate_diagnostic(row,seed)
             if (row.get('diagnostic_only') is not True or row.get('evaluation_tier')!='l1_mechanism'
@@ -82,10 +88,11 @@ def ingest(cpu_path,cuda_path):
                 or spec.get('full_experiment_status')!='not_reproduced_high_cost'
                 or spec.get('full_experiment_review_done') is not True):
             raise ValueError('cost/device contract must be declared before evidence admission')
-        rows = raw[device]['components'][key]['per_seed']
+        execution_key = EXECUTION_KEYS[key]
+        rows = raw[device]['components'][execution_key]['per_seed']
         aggregate = aggregate_metrics(rows)
         relative = Path('docs')/Path(spec['detail_path']).parent/f'metrics/component-{device}-seeds42-44.json'
-        dataset = {'id':f'synthetic:nov04b-{key}-v1','revision':'sha256:'+frozen['source_sha256']['src/auto_research/'+module],
+        dataset = {'id':f'synthetic:nov04b-{execution_key}-v1','revision':'sha256:'+frozen['source_sha256']['src/auto_research/'+module],
                    'recipe':'small seeded tensor/arithmetic/state contracts; no public capability benchmark','capability_benchmark':False}
         result = {'schema_version':2,'method':key,'manifest_ref':spec['domain']+':'+key,
                   'dataset':dataset,'seed':SEEDS,'seeds':SEEDS,'per_seed':rows,'metrics':aggregate,
@@ -99,6 +106,8 @@ def ingest(cpu_path,cuda_path):
                                 'dataset_fingerprint':generated_input_fingerprint(dataset,frozen['source_sha256']),
                                 'executed_source_sha256':frozen['source_sha256'],
                                 'raw_runner_artifact_sha256':hashlib.sha256(blobs[device]).hexdigest()}}
+        if execution_key != key:
+            result['provenance']['execution_component_key'] = execution_key
         pending.append((ROOT/relative,result))
         if device=='cuda':
             receipt_path=f'docs/gpu-validations/{key}-a100-20261104.json'

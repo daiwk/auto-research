@@ -7,7 +7,7 @@ hide:
 
 # 自改进先标对象：答案、经验、接口与系统版本
 
-[Agent](../index.md) · 更新 2026-11-04 · 47 篇主题资料 / 10 篇重点对照
+[Agent](../index.md) · 更新 2026-11-05 · 50 篇主题资料 / 13 篇重点对照
 
 Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。
 
@@ -35,6 +35,9 @@ Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens �
 | [CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization](../../../agent-research/2604.14214-crop/README.md) · [原始来源](https://arxiv.org/abs/2604.14214v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 固定目标权重，拼接任务与超阈值长度文本批评，外部元优化器重写系统提示；按准确率减CoT归一化token成本选已测提示。 | 不同于Self-Refine修当前答案；本地validation选优是明确防泄漏加强。确定性callback诊断不代表真实LLM无损缩短或完整evolve。 |
 | [Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?](../../../agent-research/2610.37276-evalalloc/README.md) · [原始来源](https://arxiv.org/abs/2610.37276v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 用SEARCH观测的信息度选共享core与无放回item，固定外部item参照仅推断新候选参数；最终公共prefix补缓存并作配对校正。 | 预测不能覆盖已测cell，评测cell减少不等于token费用等比下降；warmup MIRT、cross-fit refit和完整successive halving未实现。 |
 | [Strategist: Evolving Reasoning with Agents](../../../agent-research/2611.03618-strategist/README.md) · [原始来源](https://arxiv.org/abs/2611.03618)<br>章节：背景与主要改动、核心公式、数据协议与实现边界、高成本完整实验 | 冻结执行模型，把可执行推理blueprint组成跨任务无环库，检索相关与邻域素材，按开发集实际准确率与分层token成本选策略。 | 库保留未获胜结构供后续任务复用，但最终候选仍须validation和hidden双过门槛；本地只实现AST/DAG、外部检索分数核和配对选择，不是meta-agent搜索。 |
+| [Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents](../../../agent-research/2611.05139-meta-square/README.md) · [原始来源](https://arxiv.org/abs/2611.05139)<br>章节：核心公式、数据协议与实现边界、高成本完整实验 | 冻结离线Meta-Skill，在同环境、同轨迹checkpoint上有界KEEP/EVOLVE；具体编辑任务结束即弃。 | 可复用的是演化指导，不是所有任务共享的最终Harness；本地没有LLM演化器或知识学习。 |
+| [From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?](../../../agent-research/2611.05108-continual-autoresearch/README.md) · [原始来源](https://arxiv.org/abs/2611.05108)<br>章节：核心公式、数据协议与实现边界、高成本完整实验 | 相同任务流与预算配对持续、重置运行，运行后分别计算首解、最优曲线和实际最终选择。 | 效率优势可与最终效果下降并存；本地仅离线评分合同，无自主研究或记忆收益验证。 |
+| [Training LLM Agents to Automate LLM Post-Training with RSI-Dojo](../../../agent-research/2611.03698-rsi-dojo/README.md) · [原始来源](https://arxiv.org/abs/2611.03698)<br>章节：核心公式、数据协议与实现边界、高成本完整实验 | 构建可执行训练环境，筛选过程与结果均合格的轨迹，微调自动后训练Agent。 | 9B/35B-A3B与每任务5至10小时全矩阵高成本不复现；只收录，不声明运行时或权重能力。 |
 
 </div>
 
@@ -69,6 +72,12 @@ Self-Refine修当前输出，CROP则在训练样本反馈下改下一次通用�
 Strategist把可执行推理结构、测量卡与训练轨迹经验组成跨任务资产，和Reflexion只留下可读教训不同；它可保留测过但未获胜的结构，给未来任务组合机会。当前交付选择则另设validation和hidden双门槛，且test不参与。EvalAlloc治理花在哪些评测cell上的成本，而不代替提出策略。三者都依赖真实执行反馈，但经验积累、结构复用与预算分配是不同机制；合成分数通过任何选择规则，都不提供LLM能力证据。
 
 对照来源：[strategist](../../../agent-research/2611.03618-strategist/README.md) · [reflexion](../../../agent-research/2303.11366-reflexion/README.md) · [evalalloc](../../../agent-research/2610.37276-evalalloc/README.md)
+
+### 编辑生命周期、经验持久性和模型内化不是同一条演化轴
+
+Strategist将可执行推理程序与测量经验放入跨任务库；Meta²则把跨任务保留对象限制为冻结的演化知识，避免把某个任务修复永久带到另一任务。Continual AutoResearch进一步要求把首解、搜索曲线与最终选择分别评估：更快找到0.8候选但最终选择0.5，不能写成最终提升。RSI-Dojo改变的又是模型权重学习阶段，不能把阈值过滤器或未执行环境注册视为训练完成。比较前应先固定跨任务可见状态、编辑的生效范围以及验证反馈何时可见。
+
+对照来源：[strategist](../../../agent-research/2611.03618-strategist/README.md) · [meta-square](../../../agent-research/2611.05139-meta-square/README.md) · [continual-autoresearch](../../../agent-research/2611.05108-continual-autoresearch/README.md) · [rsi-dojo](../../../agent-research/2611.03698-rsi-dojo/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -148,6 +157,10 @@ Strategist把可执行推理结构、测量卡与训练轨迹经验组成跨任�
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
 
+**2026-11-05** · 把三种常被混叫RSI的对象拆开：Meta²冻结跨任务指导，只修改当前run；Continual AutoResearch度量会话、工作区经验是否更早产生好候选，而不保证最终选得更好；RSI-Dojo用训练环境和筛选轨迹把后训练过程内化进模型，完整实验高成本不复现。Meta²与Continual AutoResearch仅实现CPU合同组件，RSI-Dojo只收录；三者均不是模型能力提升证据，完整实验高成本不复现、审查DONE。
+
+涉及：[meta-square](../../../agent-research/2611.05139-meta-square/README.md) · [continual-autoresearch](../../../agent-research/2611.05108-continual-autoresearch/README.md) · [rsi-dojo](../../../agent-research/2611.03698-rsi-dojo/README.md)
+
 **2026-11-04** · 精读Strategist，并与Reflexion、EvalAlloc区分跨任务可执行结构库、可读教训和评测预算。新增AST去重的显式prompt边界、validation/hidden双门槛与2个百分点/2%成本带解释；未把CPU合成选择核宣传为真实搜索，原文8×H200完整矩阵高成本不复现、审查DONE。
 
 涉及：[strategist](../../../agent-research/2611.03618-strategist/README.md) · [reflexion](../../../agent-research/2303.11366-reflexion/README.md) · [evalalloc](../../../agent-research/2610.37276-evalalloc/README.md)
@@ -164,10 +177,13 @@ Strategist把可执行推理结构、测量卡与训练轨迹经验组成跨任�
 
 覆盖 43 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 47 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 50 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
+- [Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents](../../../agent-research/2611.05139-meta-square/README.md)
+- [From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?](../../../agent-research/2611.05108-continual-autoresearch/README.md)
+- [Training LLM Agents to Automate LLM Post-Training with RSI-Dojo](../../../agent-research/2611.03698-rsi-dojo/README.md)
 - [Strategist: Evolving Reasoning with Agents](../../../agent-research/2611.03618-strategist/README.md)
 - [RSI-Opt: Recursive Self-Improvement Optimizer Agents For Model Training](../../../agent-research/2610.32026-rsi-opt/README.md)
 - [ImageRSI: Verification-Driven Recursive Self-Improvement for Agentic Image Generation](../../../agent-research/2610.32120-image-rsi/README.md)

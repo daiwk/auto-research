@@ -5563,6 +5563,16 @@
         "fingerprint": "3ba91c9bacbf0da7ace3307a96c02fb3a39165c4a3fc12f34b1e021c913e058f"
       }
     ],
+    "src/auto_research/agent_research/meta_square.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "checkpoint",
+        "line": 121,
+        "qualified_name": "DeploymentRun.checkpoint",
+        "expression": "self._edits += (edit,)",
+        "fingerprint": "802357dd307bdceb7dbfafd1c6d06391772c6796b88f744fe7d6f0eb1b647315"
+      }
+    ],
     "src/auto_research/agent_research/method_families/memory.py": [
       {
         "kind": "label_access_requires_role_review",
@@ -10613,6 +10623,16 @@
         "qualified_name": "AgentResearchRunner.run",
         "expression": "task.plan",
         "fingerprint": "3cc30613c8d97fd816917f53b7e8d63ea6e5aa7154938405df47df134cf4359d"
+      }
+    ],
+    "src/auto_research/agent_research/runtime_tickets.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "dispatch",
+        "line": 183,
+        "qualified_name": "Gate.dispatch",
+        "expression": "self._used += len(request.payload)",
+        "fingerprint": "6318f752795539878aaf2e75811b38cd6936caf248aa78244da4e2f97f71fc54"
       }
     ],
     "src/auto_research/agent_research/sentry.py": [

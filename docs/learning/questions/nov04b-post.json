@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "post-training:p2-mopd": {
+      "questions": [
+        {"id":"prior-not-inference-capacity","level":"basics","question":"P²-MOPD保留专家参数，是否意味着推理时还要同时运行多个专家？","answer":"不是。任务向量是训练时的优化方向，前向仍使用物化后的单一学生权重。系数增量被折入普通权重，导出不需教师或系数元数据。专家评分与参数先验是两条训练作用，不能混成推理期的多模型投票。","example":"教学例：W=B+0.3τ1+0.2τ2先合成一个矩阵，输入只乘W；不是分别算三个输出再投票。本地实现矩阵更新，不加载这些专家模型。","source_sections":["背景与主要改动","核心公式"],"added":"2026-11-04"},
+        {"id":"unclipped-gradient-two-budgets","level":"mechanism","question":"为什么不能先裁剪学生梯度，再计算P²-MOPD系数梯度？","answer":"论文把同一个更新前梯度分给两个独立通道。系数梯度是未裁剪G与固定任务向量的内积；随后权重和系数分别受各自全局范数预算约束。先裁剪G会让权重预算提前缩放系数通道，改变两个通道的相对更新与Adam状态。","example":"教学例：G=[3,4]、τ=[2,0]时系数梯度为6。若先把G范数裁到0.01，内积变为0.012，已经不是论文规定的原始系数梯度。","source_sections":["核心公式","结果、负控与边界"],"added":"2026-11-04"},
+        {"id":"free-weights-versus-task-arithmetic","level":"comparison","question":"P²-MOPD与只学习task arithmetic合并系数，表达能力和优化路径有何不同？","answer":"只学习系数的合并被限制在固定任务向量的仿射空间；P²-MOPD还保留完整自由学生权重，模型类与普通学生相同，能离开该空间。它改变优化几何和沿专家方向的可达性，并非靠更多推理参数获得能力。","example":"教学例：唯一任务方向是[1,0]时，纯系数更新不能改变第二坐标；自由学生权重仍能沿[0,1]更新。小张量检查这种自由度，不证明四领域实际恢复。","source_sections":["背景与主要改动","核心公式","数据协议与代码映射"],"added":"2026-11-04"},
+        {"id":"zero-decay-and-atomic-skip","level":"implementation","question":"物化W的实现，哪些细节会破坏与显式B加系数的多步等价？","answer":"非零weight decay会分别收缩W与B，产生额外任务向量收缩，破坏等价；两个通道还必须保持独立optimizer state和同一更新前梯度。非有限梯度/范数要跳过整步，不能一个通道已经更新后再发现另一个失败。","example":"教学例：B=1、ατ=1、W=2时，相同decay系数对W和B的收缩量相差一倍。先更新W再因α梯度NaN停止，也会留下半步状态。","source_sections":["核心公式","结果、负控与边界","高成本完整实验"],"added":"2026-11-04"}
+      ]
+    },
+    "post-training:shuffled-opsd": {
+      "questions": [
+        {"id":"shared-target-not-generated-trace","level":"basics","question":"Shuffled OPSD打乱的是学生生成轨迹，还是学生和教师的输入？","answer":"打乱双方共享的问题输入，并在这个相同变换条件上采学生轨迹和算教师分布；生成出来的续写从不被打乱。只有教师看到的其他题worked example保持完整，评测又回到原始完整问题且不给教师上下文。","example":"教学例：把“red box contains five coins”置换为“coins red five contains box”，双方看到同一新顺序；学生之后生成的推导仍保持原采样顺序。","source_sections":["背景与主要改动","核心公式"],"added":"2026-11-04"},
+        {"id":"signed-pointwise-cap-not-kl","level":"mechanism","question":"为什么本地Shuffled OPSD的损失可以为负，不能把它修正成非负KL？","answer":"论文对每个有符号的q log(q/p)词表贡献只做上界0.05截断，保留负项。上截断会打破完整KL求和的非负性。把负项置零、先求完整KL再clip或改普通KL，都会改变论文实际目标及梯度。","example":"教学例：q=[0.5,0.5]、p=[0.99,0.01]时第一项约-0.342，第二项约1.956被截为0.05，总和约-0.292；负值不是数值下溢。","source_sections":["核心公式","结果、负控与边界"],"added":"2026-11-04"},
+        {"id":"fixed-reference-shift-and-token-count","level":"comparison","question":"既然是打乱词序，为什么还要固定111偏移，并区分词数和token数？","answer":"固定(i+111)%N的其他题参考，才能在不同target变换间保持教师私有上下文不变，避免混入配对变化。whitespace词块置换只保证词multiset，不保证分词器token数不变；不能把字词保持当成token预算完全一致。","example":"教学例：N=5时参考索引是[1,2,3,4,0]，但N=3会自配，局部组件应拒绝而不是悄悄换配对。带前导空格的分词器也可能对同词不同位置给出不同token数。","source_sections":["核心公式","数据协议与代码映射"],"added":"2026-11-04"},
+        {"id":"response-mean-and-teacher-isolation","level":"implementation","question":"两条响应长度不同，怎样归约Shuffled OPSD损失并防止教师信息泄漏？","answer":"每条响应先对有效token取均值，再对响应等权平均；不是把全批有效token混在一起平均。教师概率和采样轨迹固定，prompt/padding排除，worked example仅在teacher字段。温度改变分布，但论文没有额外T平方倍率。","example":"教学例：一条有1个有效token、另一条有3个，两条响应权重各为一半，不是四分之一与四分之三。给学生拼入完整教师示例则改变了学习条件，而非实现优化。","source_sections":["核心公式","数据协议与代码映射","高成本完整实验"],"added":"2026-11-04"}
+      ]
+    },
+    "post-training:targeted-guidance": {
+      "questions": [
+        {"id":"feedback-conditioned-same-policy-teacher","level":"basics","question":"Targeted Guidance需要比学生更大的外部教师吗？","answer":"定义的教师是与学生相同权重、但在失败轮次前多看到文本反馈的策略，并停止教师分支梯度。反馈先要经独立检查确实改善目标criterion。相同参数不等于相同条件分布，本地loss接口不负责伪造反馈的有效性。","example":"教学例：学生漏写工具参数，反馈条件分支额外看到“请提供返回行数参数”；它可为同一前缀提供不同token分布，但不等于部署时学生能看到未来错误或gold。","source_sections":["背景与主要改动","核心公式"],"added":"2026-11-04"},
+        {"id":"failed-turn-gate-all-token-denominator","level":"mechanism","question":"只有一轮失败时，为什么KL分母还要包含整条rollout的响应token？","answer":"门控决定哪些token得到辅助蒸馏梯度，整条响应token归一则控制一条rollout的总体压力。只除失败token会把一个很小错误放大成完整平均蒸馏力度。非失败turn的辅助梯度应为零，但它们的有效token仍贡献分母。","example":"教学例：100个响应token中1个失败token的KL是2，论文口径贡献为2/100；若误除失败token数，变成2，放大100倍。padding不应进入这100个。","source_sections":["核心公式","数据协议与代码映射"],"added":"2026-11-04"},
+        {"id":"reverse-kl-plus-rl-not-global-opsd","level":"comparison","question":"为什么不能用整条轨迹的普通OPSD，替代失败turn的reverse KL加RL？","answer":"全文方法把辅助信号限制在失败处，完整词表方向是student到冻结teacher，并保留criterion的普通RL奖励。全轨迹蒸馏会对已经满足标准的行为继续施压，改变多样性和主要任务；forward KL或采样token估计也不是这里的数值目标。所有criterion满足后辅助项应消失。","example":"教学例：前一轮工具格式正确、后一轮错误时，只给后一轮辅助梯度；修正后两轮都正确，应退回原GRPO目标，而不是继续模仿反馈教师的所有文风。","source_sections":["核心公式","论文离线与线上效果","结果、负控与边界"],"added":"2026-11-04"},
+        {"id":"external-judgments-not-capability-fixture","level":"implementation","question":"有了failed-turn mask和loss，是否就实现了论文的代码Agent训练？","answer":"没有。真实学生采样、criterion judge、反馈插入和有效性筛选、同前缀teacher评分、外部GRPO优势及工具环境仍由调用方提供。组件只核验门控和梯度；把gold或固定正确动作交给被评Agent会破坏评测，不会因成功率为1而变成能力证据。","example":"教学例：用小随机logits核对非失败token梯度为0是合法L1测试；把隐藏测试答案写进学生历史来“纠错”，再宣称代码pass rate提高则是泄漏。","source_sections":["数据协议与代码映射","结果、负控与边界","高成本完整实验"],"added":"2026-11-04"}
+      ]
+    }
+  }
+}

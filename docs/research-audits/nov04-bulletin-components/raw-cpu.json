@@ -1,0 +1,822 @@
+{
+  "schema_version": 2,
+  "code_commit": "0b1fe011eda69ed0e75c6583ac9c01c463f20124",
+  "source_sha256": {
+    "scripts/run_nov04b_components.py": "06f58e7cd3e8ad0b6dbea483b3c897c0eb27fe66ffda6a98452443101f50d874",
+    "docs/research-audits/nov04-bulletin-components/preflight.json": "cfcd5b5d8387425e188732a2db3894c6393ae441f66d93fb08fa15dec501bb45",
+    "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+    "scripts/run_nov04_components.py": "61d35d574d9561e4611d2647174b8a6af07fabf8c30b6909e21e253542cf4336",
+    "src/auto_research/agent_research/continual_autoresearch.py": "61da0faef12c8d52299f91630b77b8d2308e9fdd1000256a78577345cfa93a98",
+    "src/auto_research/agent_research/meta_square.py": "15c884218cc5dc8c4902cb3aff7ec89f989e50a3a0ca32fd45c15b3a2a84ffb8",
+    "src/auto_research/agent_research/runtime_tickets.py": "64032a6d05e64ffe421fe74786abe251f0eee690dfa54a0a3ce31b7f0bb99464",
+    "src/auto_research/foundation_models/anchor_kv.py": "902ca24d5a9792068d19e51973e71e6605e606e2a48d1d07dec66c0e18bda730",
+    "src/auto_research/foundation_models/semantic_block_sparse_attention.py": "05b8ddd8580fc2d2f9d30ceb4541b1a2e8c5d62a47e9ae1766dc7bf839248d97",
+    "src/auto_research/post_training/dars.py": "ef1e75afcd7af800bb05a7a611db04036ea757817c0ca255cb38a20a96cf16e1",
+    "src/auto_research/post_training/p2_mopd.py": "027c0d60499271589bd7fdac3d4c7f0978504e3d29419be6a75fd9c66ea617f4",
+    "src/auto_research/post_training/shuffled_opsd.py": "655bf0283a7f04312b9c04b01e239996a21d5ac1e9dd85db738f6a2b504b906e",
+    "src/auto_research/post_training/targeted_guidance.py": "edb5b26b1603f5f07aaaafc5284f30d3336692278ed33748a0db150b472d296a",
+    "src/auto_research/reproductions/onetrans_gsr_components.py": "2d17c9b4cb20731a95061924e0c28d5faf630770eeafd4064a2b475ed320d6ce",
+    "src/auto_research/reproductions/reusegr_components.py": "ebb6e49576ae0c2d872b002c2a446bde20fb27eb5ffce1bb1bccc2928ddcac69",
+    "src/auto_research/reproductions/spade_components.py": "bdebc7bd22da1f40be6800c6afd14f9e7196f586a6c84ecec5bb505054595550"
+  },
+  "device": "cpu",
+  "accelerator": "CPU",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "components": {
+    "reusegr": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "selected_depth": 2,
+            "first_depth_coverage": 1.0,
+            "first_depth_wilson_lower": 0.6755843804891231
+          },
+          "checks": {
+            "whole_row_not_single_click": true,
+            "ancestors_required": true,
+            "depth_zero_not_miss": true,
+            "suffix_score_exact": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "selected_depth": 2,
+            "first_depth_coverage": 1.0,
+            "first_depth_wilson_lower": 0.6755843804891231
+          },
+          "checks": {
+            "whole_row_not_single_click": true,
+            "ancestors_required": true,
+            "depth_zero_not_miss": true,
+            "suffix_score_exact": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "selected_depth": 2,
+            "first_depth_coverage": 1.0,
+            "first_depth_wilson_lower": 0.6755843804891231
+          },
+          "checks": {
+            "whole_row_not_single_click": true,
+            "ancestors_required": true,
+            "depth_zero_not_miss": true,
+            "suffix_score_exact": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ]
+    },
+    "spade-local-search": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "rare_pair_weighted_count": 3.4591401976868257,
+            "rank_one_bonus": 0.09242343145200196,
+            "accumulated_best_score": -0.017576568547998037
+          },
+          "checks": {
+            "weighted_count_changes_merge_order": true,
+            "top_parent_unperturbed": true,
+            "rank_not_semantic_distance": true,
+            "ordinary_beam_limit": true,
+            "nonoverlap_merge": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "rare_pair_weighted_count": 2.55782775900607,
+            "rank_one_bonus": 0.09242343145200196,
+            "accumulated_best_score": -0.017576568547998037
+          },
+          "checks": {
+            "weighted_count_changes_merge_order": true,
+            "top_parent_unperturbed": true,
+            "rank_not_semantic_distance": true,
+            "ordinary_beam_limit": true,
+            "nonoverlap_merge": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "rare_pair_weighted_count": 3.1128038188817406,
+            "rank_one_bonus": 0.09242343145200196,
+            "accumulated_best_score": -0.017576568547998037
+          },
+          "checks": {
+            "weighted_count_changes_merge_order": true,
+            "top_parent_unperturbed": true,
+            "rank_not_semantic_distance": true,
+            "ordinary_beam_limit": true,
+            "nonoverlap_merge": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ]
+    },
+    "onetrans-gsr": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "finite_quota_penalty": -0.1,
+            "constant_objective_floor_reward": 0.00010000000000000009,
+            "advantage_mean": -8.789265611615822e-17
+          },
+          "checks": {
+            "dedup_hard_mask": true,
+            "quota_not_hard_by_default": true,
+            "constant_objective_keeps_positive_floor": true,
+            "separate_group_centering": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "finite_quota_penalty": -0.1,
+            "constant_objective_floor_reward": 0.00010000000000000009,
+            "advantage_mean": 9.251858538542972e-17
+          },
+          "checks": {
+            "dedup_hard_mask": true,
+            "quota_not_hard_by_default": true,
+            "constant_objective_keeps_positive_floor": true,
+            "separate_group_centering": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "finite_quota_penalty": -0.1,
+            "constant_objective_floor_reward": 0.00010000000000000009,
+            "advantage_mean": -3.700743415417188e-17
+          },
+          "checks": {
+            "dedup_hard_mask": true,
+            "quota_not_hard_by_default": true,
+            "constant_objective_keeps_positive_floor": true,
+            "separate_group_centering": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ]
+    },
+    "meta-square": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "accepted_edits": 1,
+            "public_checkpoints": 2
+          },
+          "checks": {
+            "terminal_evolve_continues": true,
+            "terminal_keep_closes": true,
+            "task_edits_do_not_transfer": true,
+            "unknown_feedback_field_rejected": true,
+            "knowledge_unchanged": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "accepted_edits": 1,
+            "public_checkpoints": 2
+          },
+          "checks": {
+            "terminal_evolve_continues": true,
+            "terminal_keep_closes": true,
+            "task_edits_do_not_transfer": true,
+            "unknown_feedback_field_rejected": true,
+            "knowledge_unchanged": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "accepted_edits": 1,
+            "public_checkpoints": 2
+          },
+          "checks": {
+            "terminal_evolve_continues": true,
+            "terminal_keep_closes": true,
+            "task_edits_do_not_transfer": true,
+            "unknown_feedback_field_rejected": true,
+            "knowledge_unchanged": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ]
+    },
+    "continual-autoresearch": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "initialization": 0.8,
+            "outcome": 0.5,
+            "search_utility": 0.64,
+            "selection_regret": 0.30000000000000004
+          },
+          "checks": {
+            "best_curve_not_last_candidate": true,
+            "selected_not_oracle_best": true,
+            "selection_regret_preserved": true,
+            "live_feedback_rejected": true,
+            "negative_r2_supported": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "initialization": 0.8,
+            "outcome": 0.5,
+            "search_utility": 0.64,
+            "selection_regret": 0.30000000000000004
+          },
+          "checks": {
+            "best_curve_not_last_candidate": true,
+            "selected_not_oracle_best": true,
+            "selection_regret_preserved": true,
+            "live_feedback_rejected": true,
+            "negative_r2_supported": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "initialization": 0.8,
+            "outcome": 0.5,
+            "search_utility": 0.64,
+            "selection_regret": 0.30000000000000004
+          },
+          "checks": {
+            "best_curve_not_last_candidate": true,
+            "selected_not_oracle_best": true,
+            "selection_regret_preserved": true,
+            "live_feedback_rejected": true,
+            "negative_r2_supported": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ]
+    },
+    "runtime-tickets": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "decisions_recorded": 3,
+            "allowed_bytes": 2,
+            "forward_callbacks": 1
+          },
+          "checks": {
+            "valid_delivery_allowed": true,
+            "retry_not_resent": true,
+            "recipient_blocked": true,
+            "same_recipient_bad_object_blocked": true,
+            "record_chain_valid": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "decisions_recorded": 3,
+            "allowed_bytes": 2,
+            "forward_callbacks": 1
+          },
+          "checks": {
+            "valid_delivery_allowed": true,
+            "retry_not_resent": true,
+            "recipient_blocked": true,
+            "same_recipient_bad_object_blocked": true,
+            "record_chain_valid": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "decisions_recorded": 3,
+            "allowed_bytes": 2,
+            "forward_callbacks": 1
+          },
+          "checks": {
+            "valid_delivery_allowed": true,
+            "retry_not_resent": true,
+            "recipient_blocked": true,
+            "same_recipient_bad_object_blocked": true,
+            "record_chain_valid": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ]
+    },
+    "semantic-block-sparse-attention": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "dense_reference_max_error": 0.0,
+            "query_gradient_l1": 14.894806690562925,
+            "future_positions_selected": 0,
+            "mean_selected_positions": 8.666666666666666
+          },
+          "checks": {
+            "dense_limit_agrees": true,
+            "causal_support": true,
+            "actual_attention_gradient": true,
+            "no_empty_support": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "dense_reference_max_error": 0.0,
+            "query_gradient_l1": 11.815861383453797,
+            "future_positions_selected": 0,
+            "mean_selected_positions": 8.333333333333334
+          },
+          "checks": {
+            "dense_limit_agrees": true,
+            "causal_support": true,
+            "actual_attention_gradient": true,
+            "no_empty_support": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "dense_reference_max_error": 0.0,
+            "query_gradient_l1": 13.03754264451537,
+            "future_positions_selected": 0,
+            "mean_selected_positions": 8.5
+          },
+          "checks": {
+            "dense_limit_agrees": true,
+            "causal_support": true,
+            "actual_attention_gradient": true,
+            "no_empty_support": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ]
+    },
+    "anchor-kv": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "identity_reader_error": 0.0,
+            "read_map_gradient_l1": 0.006375118996205609,
+            "gate_gradient_l1": 0.0015956832891890881,
+            "written_revision": 1
+          },
+          "checks": {
+            "identity_initialized_readers": true,
+            "learnable_reader_receives_gradient": true,
+            "learnable_gate_receives_gradient": true,
+            "old_state_preserved": true,
+            "one_shared_matrix": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "identity_reader_error": 0.0,
+            "read_map_gradient_l1": 0.018820459365249398,
+            "gate_gradient_l1": 0.0036268803919873955,
+            "written_revision": 1
+          },
+          "checks": {
+            "identity_initialized_readers": true,
+            "learnable_reader_receives_gradient": true,
+            "learnable_gate_receives_gradient": true,
+            "old_state_preserved": true,
+            "one_shared_matrix": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "identity_reader_error": 0.0,
+            "read_map_gradient_l1": 0.014741770899469488,
+            "gate_gradient_l1": 0.002718061518957722,
+            "written_revision": 1
+          },
+          "checks": {
+            "identity_initialized_readers": true,
+            "learnable_reader_receives_gradient": true,
+            "learnable_gate_receives_gradient": true,
+            "old_state_preserved": true,
+            "one_shared_matrix": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ]
+    },
+    "dars": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "kde_reference_max_error": 4.440892098500626e-16,
+            "advantage_mean_error": 1.7578531223231644e-16,
+            "advantage_population_variance_error": 0.0,
+            "minimum_density": 1.0165519226468007
+          },
+          "checks": {
+            "gaussian_reference_agrees": true,
+            "self_density_included": true,
+            "group_normalization": true,
+            "frozen_outcome_reward_processing": true,
+            "identical_density_is_group_size": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "kde_reference_max_error": 2.220446049250313e-16,
+            "advantage_mean_error": 2.220446049250313e-16,
+            "advantage_population_variance_error": 1.1102230246251565e-16,
+            "minimum_density": 1.027627842744099
+          },
+          "checks": {
+            "gaussian_reference_agrees": true,
+            "self_density_included": true,
+            "group_normalization": true,
+            "frozen_outcome_reward_processing": true,
+            "identical_density_is_group_size": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "kde_reference_max_error": 2.220446049250313e-16,
+            "advantage_mean_error": 1.2027416100105862e-16,
+            "advantage_population_variance_error": 1.1102230246251565e-16,
+            "minimum_density": 1.0187917259244565
+          },
+          "checks": {
+            "gaussian_reference_agrees": true,
+            "self_density_included": true,
+            "group_normalization": true,
+            "frozen_outcome_reward_processing": true,
+            "identical_density_is_group_size": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ]
+    },
+    "p2-mopd": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "initial_component_loss": 2.61369880332402,
+            "final_component_loss": 2.1423486637490265,
+            "explicit_equivalence_max_error": 4.440892098500626e-16,
+            "coefficient_change_norm": 0.24680705815309315,
+            "outside_task_vector_span_norm": 0.38824095280579374,
+            "optimizer_steps": 5,
+            "model_calls": 0
+          },
+          "checks": {
+            "five_step_explicit_adam_equivalence": true,
+            "coefficient_channel_moves": true,
+            "student_channel_leaves_task_vector_span": true,
+            "task_vectors_frozen": true,
+            "component_objective_decreases": true,
+            "nonfinite_batch_no_partial_update": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "initial_component_loss": 2.1845800444879657,
+            "final_component_loss": 1.5779736976562766,
+            "explicit_equivalence_max_error": 5.551115123125783e-16,
+            "coefficient_change_norm": 0.28301322622830516,
+            "outside_task_vector_span_norm": 0.4189686416609643,
+            "optimizer_steps": 5,
+            "model_calls": 0
+          },
+          "checks": {
+            "five_step_explicit_adam_equivalence": true,
+            "coefficient_channel_moves": true,
+            "student_channel_leaves_task_vector_span": true,
+            "task_vectors_frozen": true,
+            "component_objective_decreases": true,
+            "nonfinite_batch_no_partial_update": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "initial_component_loss": 3.643646440894966,
+            "final_component_loss": 2.860998153754535,
+            "explicit_equivalence_max_error": 8.881784197001252e-16,
+            "coefficient_change_norm": 0.2701569415434658,
+            "outside_task_vector_span_norm": 0.4361701968025994,
+            "optimizer_steps": 5,
+            "model_calls": 0
+          },
+          "checks": {
+            "five_step_explicit_adam_equivalence": true,
+            "coefficient_channel_moves": true,
+            "student_channel_leaves_task_vector_span": true,
+            "task_vectors_frozen": true,
+            "component_objective_decreases": true,
+            "nonfinite_batch_no_partial_update": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ]
+    },
+    "shuffled-opsd": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "loss": -0.05830231251371559,
+            "loss_after": -0.05833919127235547,
+            "manual_loss_error": 1.3877787807814457e-17,
+            "signed_cap_negative_example": -0.2915484223532219,
+            "gradient_norm": 0.06073120798560617,
+            "model_calls": 0
+          },
+          "checks": {
+            "student_teacher_share_exact_transformed_problem": true,
+            "word_multisets_preserved": true,
+            "fixed_shift_and_intact_teacher_reference": true,
+            "signed_capped_manual_reference_agrees": true,
+            "negative_contributions_retained": true,
+            "teacher_frozen": true,
+            "padding_zero_gradient": true,
+            "gradient_finite_nonzero": true,
+            "small_update_reduces_component_loss": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "loss": -0.06733357568176837,
+            "loss_after": -0.06740169427035256,
+            "manual_loss_error": 2.7755575615628914e-17,
+            "signed_cap_negative_example": -0.2915484223532219,
+            "gradient_norm": 0.0825386110687577,
+            "model_calls": 0
+          },
+          "checks": {
+            "student_teacher_share_exact_transformed_problem": true,
+            "word_multisets_preserved": true,
+            "fixed_shift_and_intact_teacher_reference": true,
+            "signed_capped_manual_reference_agrees": true,
+            "negative_contributions_retained": true,
+            "teacher_frozen": true,
+            "padding_zero_gradient": true,
+            "gradient_finite_nonzero": true,
+            "small_update_reduces_component_loss": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "loss": -0.0437121364055737,
+            "loss_after": -0.0437724560813809,
+            "manual_loss_error": 2.7755575615628914e-17,
+            "signed_cap_negative_example": -0.2915484223532219,
+            "gradient_norm": 0.07766867343415221,
+            "model_calls": 0
+          },
+          "checks": {
+            "student_teacher_share_exact_transformed_problem": true,
+            "word_multisets_preserved": true,
+            "fixed_shift_and_intact_teacher_reference": true,
+            "signed_capped_manual_reference_agrees": true,
+            "negative_contributions_retained": true,
+            "teacher_frozen": true,
+            "padding_zero_gradient": true,
+            "gradient_finite_nonzero": true,
+            "small_update_reduces_component_loss": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ]
+    },
+    "targeted-guidance": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "auxiliary_loss": 0.054158211589413904,
+            "auxiliary_loss_after": 0.05415417317072505,
+            "manual_loss_error": 0.0,
+            "gradient_norm": 0.02009604540751748,
+            "failed_tokens": 3,
+            "model_calls": 0
+          },
+          "checks": {
+            "all_token_denominator_manual_reference_agrees": true,
+            "teacher_frozen": true,
+            "nonfailed_and_padding_zero_auxiliary_gradient": true,
+            "failed_turn_has_finite_nonzero_gradient": true,
+            "small_update_reduces_component_loss": true,
+            "all_criteria_satisfied_recovers_original_rl_loss": true,
+            "padding_not_a_failed_turn": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "auxiliary_loss": 0.0920508265690428,
+            "auxiliary_loss_after": 0.09204277863665374,
+            "manual_loss_error": 2.7755575615628914e-17,
+            "gradient_norm": 0.028369198588540635,
+            "failed_tokens": 3,
+            "model_calls": 0
+          },
+          "checks": {
+            "all_token_denominator_manual_reference_agrees": true,
+            "teacher_frozen": true,
+            "nonfailed_and_padding_zero_auxiliary_gradient": true,
+            "failed_turn_has_finite_nonzero_gradient": true,
+            "small_update_reduces_component_loss": true,
+            "all_criteria_satisfied_recovers_original_rl_loss": true,
+            "padding_not_a_failed_turn": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "auxiliary_loss": 0.07916918522628175,
+            "auxiliary_loss_after": 0.07915963927217057,
+            "manual_loss_error": 0.0,
+            "gradient_norm": 0.03089696975367494,
+            "failed_tokens": 3,
+            "model_calls": 0
+          },
+          "checks": {
+            "all_token_denominator_manual_reference_agrees": true,
+            "teacher_frozen": true,
+            "nonfailed_and_padding_zero_auxiliary_gradient": true,
+            "failed_turn_has_finite_nonzero_gradient": true,
+            "small_update_reduces_component_loss": true,
+            "all_criteria_satisfied_recovers_original_rl_loss": true,
+            "padding_not_a_failed_turn": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ]
+    }
+  },
+  "elapsed_seconds": 2.899624416953884,
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "pretrained_model_calls": 0,
+  "full_experiments_executed": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false
+}

@@ -837,6 +837,9 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        "semantic-block-sparse-attention": ("注意力与长上下文", "稀疏、门控与动态注意力"),
+        "anchor-kv": ("注意力与长上下文", "跨层共享状态与测试时训练"),
+        "multi-layer-indexer": ("推理与系统效率", "稀疏注意力选择与服务重叠"),
         "proland": ("预训练与数据", "优化器与参数高效微调"),
         "gavagai": ("多模态基础模型", "词语与区域对齐"),
         "xla-trenches": ("推理与系统效率", "编译器正确性与分层故障隔离"),

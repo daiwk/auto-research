@@ -312,7 +312,9 @@
         "recommendation:wegr",
         "recommendation:xrec",
         "recommendation:pailitao-mmsearch2",
-        "recommendation:pinger"
+        "recommendation:pinger",
+        "recommendation:reusegr",
+        "recommendation:spade-local-search"
       ]
     },
     {
@@ -425,7 +427,8 @@
         "recommendation:taiji",
         "recommendation:uame",
         "recommendation:youtube-freshness",
-        "recommendation:pinterest-rlbp"
+        "recommendation:pinterest-rlbp",
+        "recommendation:onetrans-gsr"
       ]
     },
     {

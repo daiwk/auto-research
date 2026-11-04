@@ -76,6 +76,13 @@
 
 - [COBRA-Skills: Contextual Bandit-Guided Evolution for Agent Skill Optimization](../2609.11682-cobra-skills/README.md)（`cobra-skills`）：把技能优化视为动态候选空间中的预算化 contextual bandit，优先评估高收益或高信息量技能，再依据执行反馈演化。
 
+### Harness 与自我改进
+
+- [From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?](../2611.05108-continual-autoresearch/README.md)（`continual-autoresearch`）：持续会话可能复用代码和经验，更快找到有效方案，但未必提高最终留出效果。论文在相同任务流、模型、数据和逐任务时间预算下比较 stateful 与 reset Agent；保留首个有效提交、所有提交及最终选择，完成后才由私有测试评价。
+- [Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents](../2611.05139-meta-square/README.md)（`meta-square`）：一个共享 Harness 不一定适合所有新任务，而毫无经验的在线修改又可能扰乱仍在推进的执行。Meta² 离线对照无演化器、普通演化器和获得**训练期** verifier 信息的演化器，用反思、聚合和更新构建可复用 Meta-Skill。
+- [Strategist: Evolving Reasoning with Agents](../2611.03618-strategist/README.md)（`strategist`）：模型权重不是 Agent 的全部：单步回答、投票、分解、审查、多模型路由等推理程序也决定效果和成本。论文不训练执行模型，而让一个 meta-agent 在小开发集上提出并实测这些程序，将它们表示为统一 `execute(llm, task) -> str` 的 Python blueprint。
+- [Training LLM Agents to Automate LLM Post-Training with RSI-Dojo](../2611.03698-rsi-dojo/README.md)（`rsi-dojo`）：优化外部 Harness 与让模型内化“如何做后训练”不是同一问题。RSI-Craft 从论文/InspectAI 找任务，实际安装并检验评测，标准化环境，再过滤执行不稳定或无法区分模型的任务。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ### Agent评测与自进化
 
 - [HarnessMM: Recursive Self-Improvement for Harness Token Efficiency](../2610.32813-harnessmm/README.md)（`harnessmm`）：Agent 在得到工具反馈后经常再调用模型，即使上一轮推理已确定下一步命令。HarnessMM 的 EDG 只保存先前确实完成语义解析的动作及完整字面参数；GDR 检查前置任务完成、public guard 真和参数闭合，再选一个合格节点或 abstain。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
@@ -203,6 +210,10 @@
 
 - [RedEvoAgent: Automatic Red-Teaming Agent with Experience-Driven Skill Evolution](../2608.27439-redevoagent/README.md)（`redevoagent`）：RedEvoAgent 不直接检索冗长攻击轨迹，而把跨案例经验蒸馏成可读技能；只归因真正决定成败的工具，并且新技能必须在留出验证集上优于 incumbent 才能晋级。
 
+### Agent安全
+
+- [RuntimeTickets: Source-Grounded Security Obligations for Agent Skills](../2611.03772-runtime-tickets/README.md)（`runtime-tickets`）：允许调用“发送”并不等于允许给任意接收者发送任意内容。论文让模型只在运行前提出有原文行依据的 obligations，host 审批后冻结 ticket；运行时由确定性 gate 检查真实副作用，而不再问语言模型。
+
 ### RSI 安全
 
 - [Safety Must Survive Self-Improvement: Why Failures Persist and How Agents Recover](../2610.01073-safe-self-improvement/README.md)（`safe-self-improvement`）：把检测、当前可执行实现选择和下一轮编辑源分开；所有候选必须对当前条件重新验证，若无候选通过则回滚 founder，而不是继续运行已失败 incumbent。
@@ -250,10 +261,6 @@
 ### 工具使用
 
 - [Grounding AI Agents in Contracts: An Empirical Evaluation of Spec-Driven Test Generation](../2608.17177-spec-driven-tests/README.md)（`spec-driven-tests`）：直接让模型编写单元测试，可能遗漏输入边界或隐含的行为约定。本文先让Agent读取修复后的源码，写出每个代码单元的描述、前置条件、后置条件与测试建议；把条件标为已测试或未测试，保存为`.spec.md`，之后才允许生成测试。
-
-### Harness 与自我改进
-
-- [Strategist: Evolving Reasoning with Agents](../2611.03618-strategist/README.md)（`strategist`）：模型权重不是 Agent 的全部：单步回答、投票、分解、审查、多模型路由等推理程序也决定效果和成本。论文不训练执行模型，而让一个 meta-agent 在小开发集上提出并实测这些程序，将它们表示为统一 `execute(llm, task) -> str` 的 Python blueprint。
 
 ### Agent 验证
 

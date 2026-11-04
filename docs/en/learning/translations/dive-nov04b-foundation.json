@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/foundation-models/context-and-state/comparison/foundation-models:semantic-block-sparse-attention": {
+      "source_sha256": "a9ae89925d33a01f1e59db1b48812285c2588a545f3958a88c821db19318bd6a",
+      "reviewed": true,
+      "fields": {
+        "position": "Cluster keys spherically per prompt and KV head into noncontiguous semantic blocks. Apply centroid softmax independently per GQA query head, sum those scores, penalize visible block size, and attend to original QKV after selecting whole blocks.",
+        "tradeoff": "Retains original KV rather than treating centroids as values; whole-block selection may exceed the budget. Fitting centroids on the entire prompt means causal attention support does not establish strict streaming-causal invariance. Local coverage is an L1 indexing and attention reference, not the paper's fused kernel or full long-context experiments."
+      }
+    },
+    "dive/foundation-models/context-and-state/comparison/foundation-models:anchor-kv": {
+      "source_sha256": "09460cb3cd4a470285398642a86e336913a49ffbc5bbc9772287c07abfb1efc8",
+      "reviewed": true,
+      "fields": {
+        "position": "Share one recurrent KV state across a group of layers, use identity-initialized linear read maps to adapt each reader's coordinate frame, and combine its readout with local SWA through an input-dependent sigmoid gate.",
+        "tradeoff": "Shared content does not imply shared coordinates. Full training still requires the actual LaCT/Muon inner writer, and interior TTT is removed only at deployment. Local coverage accepts external state and verifies cross-layer read maps, gates and state revisions; it is neither full TTT nor a retrieval-capability reproduction."
+      }
+    },
+    "dive/foundation-models/context-and-state/analysis/4": {
+      "source_sha256": "d9b378c01f266564e9536ae1d519896da6371037c846175ebbe5b6e5a91caae6",
+      "reviewed": true,
+      "fields": {
+        "title": "Retaining original history and sharing compressed state are different access routes",
+        "body": "NSA preserves distinct detail-access paths through summaries, selected blocks and sliding windows. Without retraining the model, CSB reorganizes original KV into semantic blocks and reads whole blocks. Anchor instead shares an already compressed recurrent state across layers, aligns coordinate frames with per-layer read maps, and gates the result into local output. CSB centroids select content; they do not replace the values read. Anchor still depends on a real writer: injecting a matrix externally does not implement TTT. Also separate causal support from index construction: although CSB masks future positions, whole-prompt clustering can let future keys change earlier routing, so it does not establish a strictly streaming-causal language model. Neither local L1 component provides full-model capability, end-to-end speedup or evidence for Evolve promotion."
+      }
+    },
+    "dive/foundation-models/context-and-state/question/nov04b-routing-versus-shared-state": {
+      "source_sha256": "7d34562d22d4bd87609e962e8d36542f29d94df22873f6c12ead4996a753f7b6",
+      "reviewed": true,
+      "fields": {
+        "question": "If CSB selects history positions and Anchor shares a state, why can't a causal mask alone establish their full long-context capability?",
+        "answer": "CSB masks future positions in original-QKV attention, but whole-prompt clustering can let future keys influence centroids and earlier selections; masking does not remove that indexing dependency. Anchor's read maps and gates specify how to read external shared state, while correct memory content still depends on the actual TTT writer and training. Local L1 contracts separately verify selection/attention and shared readout. They establish neither strict streaming-causal invariance nor long-range retrieval capability.",
+        "example": "Teaching example: Appending new keys and rebuilding clusters may change earlier block selections. Likewise, a correct Anchor reader output from a manually supplied matrix does not show that a model learned to write an order number into it."
+      }
+    },
+    "dive/foundation-models/context-and-state/update/2026-11-04/3": {
+      "source_sha256": "67f0b43039792fac0964b33e62d6585318eadba0068cc93eb09921baa3547e84",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add CSB and Anchor, comparing semantic block selection over original KV with coordinate-adapted readout from shared recurrent state. Document the non-streaming-causal boundary of whole-prompt clustering and that an external writer is not full TTT. Both are L1 components; costly full experiments are not reproduced."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/comparison/foundation-models:multi-layer-indexer": {
+      "source_sha256": "022dce58d18ffd42373a7464294a4981a944d8b4f9776cf448ca3ed87d359cf5",
+      "reviewed": true,
+      "fields": {
+        "position": "Let a layer consume a fresh selection computed for the same token by an earlier full layer. Run the indexer on a side stream, overlapping main-stream attention, projection and FFN, then join at the first consumer while retaining tensor lifetimes.",
+        "tradeoff": "Restructures dependencies and scheduling; it neither compresses KV nor reuses a previous token's stale selection. The full path requires eight H200s, TP8 large models and SGLang kernels. Local status is review-only, with no runtime implementation or throughput metrics."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/analysis/4": {
+      "source_sha256": "8207f3ead5efbe62c5bc0b81b9e19dd865406ea542f6ab9bdc16429f5aafccfb",
+      "reviewed": true,
+      "fields": {
+        "title": "Critical dependencies can be rearranged without reducing data volume",
+        "body": "GQA reduces KV heads per position, while KVMEM controls when historical blocks enter the execution view. MLI does not aim to reduce KV bytes: it separates selection production and consumption across full layers, overlapping same-token indexing with main computation. The lookback counts full layers that retain indexers, not physical layer numbers; initial layers lacking predecessors keep the standard schedule. Concurrent execution must also wait on events at the first consumer and hold inputs and outputs until the join, or even a correct logical dependency graph can read unfinished results or reused memory. This is not caching old selections across tokens. A CPU dependency simulation or ordinary synchronous CUDA forward pass cannot establish the paper's overlap. This repository provides review only: the costly full experiment is not reproduced, with no local runtime or throughput evidence."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/question/nov04b-overlap-not-kv-compression": {
+      "source_sha256": "3dcb55957cbde5548742a7be5ca4ab222ebdf9c8d41be9defc5208dde3bc412d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is MLI consuming an earlier layer's selection different from KVMEM retrieving an old block or reusing a previous generated token's selection?",
+        "answer": "MLI moves the consumer of a selection within the same token; that token's indexer still computes a fresh selection, creating an overlap window across full layers. KVMEM retrieves historical KV blocks and materializes them in a bounded execution view. A previous token's selection may no longer suit the current query, so cross-token reuse cannot substitute for MLI. Real overlap also requires event waits, tensor lifetimes and actual serving kernels. Local status is review-only, not a CPU simulation advertised as an implementation.",
+        "example": "Teaching example: Reading top-k freshly computed for the current token by an earlier full layer rearranges dependencies. Taking top-k left by the previous generated token changes selection freshness. Similar-looking forms of reuse are not the same algorithm."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/update/2026-11-04/3": {
+      "source_sha256": "fef0bff77f065d0b0dac78ef623324b874d743715aa413b7b9a07ef41078bb01",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add MLI alongside GQA and KVMEM: it rearranges same-token selection dependencies across full layers, without compressing KV or reusing old-token selections. Document event and tensor-lifetime requirements. The full eight-H200 experiment is too costly and not reproduced; local status is review-only, without runtime or throughput metrics."
+      }
+    }
+  }
+}

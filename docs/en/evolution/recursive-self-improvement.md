@@ -1,6 +1,6 @@
 # Recursive self-improvement (RSI)
 
-<!-- source-sha256: 7f59106940dbacdd9fe1559853f4ec6c655650cdf5a38eefa817ccf397def2e2 -->
+<!-- source-sha256: 83d4e1ef46328a1ba1e011ca0a508c6fd54232659b819b67d6ab73966e81b36e -->
 
 [简体中文](../../evolution/recursive-self-improvement.md)
 
@@ -31,6 +31,12 @@ A model writing a reflection is not enough. **Persist the change**, **inherit it
 ## Papers and evaluation leads
 
 The entries below distinguish local mechanisms from candidates still to review. An external paper is not a local reproduction.
+
+Updated on 2026-11-05. The following three papers were announced on 2026-11-04; their detail pages retain the respective original v1 dates. Meta² provides a boundary comparison between task-local edits and transferable guidance, while Continual AutoResearch is a protocol for evaluating retained experience. Inclusion here does not mean all three have a complete local RSI implementation.
+
+- [Meta²](../../agent-research/2611.05139-meta-square/README-en.md): Freezes an offline Meta-Skill and makes bounded KEEP/EVOLVE decisions at checkpoints within one environment and trajectory. Concrete edits apply only to the current task; evolution guidance, not the final harness, transfers across tasks. Local work covers only CPU state-lifetime and feedback-isolation contracts, without an LLM evolver or Meta-Skill learning. Full multi-model/API experiments are not reproduced because of cost (review DONE). Meta² is not a Meta-company paper.
+- [Continual AutoResearch](../../agent-research/2611.05108-continual-autoresearch/README-en.md): Pairs persistent and reset sessions/workspaces, separately measuring initialization, the best-so-far curve under budget and actual final selection. Finding a good candidate earlier is not automatically a better final outcome. Local work covers only post-run CPU scoring and pairing protocols, not autonomous research, and does not expose hidden scores to evaluated agents. The full multi-task, multi-model research matrix is not reproduced because of cost (review DONE).
+- [RSI-Dojo](../../agent-research/2611.03698-rsi-dojo/README-en.md): Filters executable training environments and trajectories that satisfy both process and outcome criteria, then fine-tunes post-training agents to internalize research procedures in model weights. The complete 9B/35B-A3B matrix with five-to-ten-hour task budgets is not reproduced because of cost (review DONE). This is documentation only, with no local runtime, training results or capability metrics; environment registration or threshold filters do not stand in for completed training.
 
 - [DiscernMem](../../agent-research/2610.36652-discernmem/README-en.md): Paired replay distinguishes scope from content problems. Repairs must preserve parent-memory and no-memory baselines; a new version resets old effect evidence. Local work covers CPU measurements and versioning, not LLM repair or a real memory environment.
 - [RuHarness](../../agent-research/2610.36826-ruharness/README-en.md): Co-evolves rubrics and harnesses, choosing rules with a conservative utility quantile over a six-cell joint posterior and updating only after independent validation. Local work covers the statistical frontier and gates, not a full self-evolving agent.

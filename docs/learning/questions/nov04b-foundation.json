@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "foundation-models:semantic-block-sparse-attention": {
+      "questions": [
+        {"id":"semantic-blocks","level":"basics","question":"Coarse Semantic Blocks 为什么不直接把连续 token 当作一个块？","answer":"它按归一化 key 的相似度聚类，允许相距很远的位置进入同一块。连续位置共享上下文窗口，却未必表达相似信息；语义块用一次 centroid 打分检索多个相关位置。大块也会混入低相关 token，所以降低路由开销不保证检索质量不降。","example":"教学例：文章开头与末尾都讨论温度，两处 key 可进同一块；它们之间谈人物的 token 属别块。这个例子解释索引，不是RULER结果。","source_sections":["背景与主要改动","核心公式"],"added":"2026-11-04"},
+        {"id":"gqa-order","level":"mechanism","question":"GQA 内为什么先对每个 query head 做 centroid softmax，再求和和大小惩罚？","answer":"每个头先得到自己的块偏好分布，组内求和汇总偏好，随后除以可见块大小的幂，避免大块无代价占用预算。先合并 logits 再 softmax 是非线性顺序变化，会让一头的强负分抵消另一头的支持，不是原式。","example":"教学例：两头分别强烈支持A和B，正确求和可保留两种偏好；先平均logits可能让两者变成模糊平票。若A有8个可见token、B只有2个，还要按各自大小惩罚。","source_sections":["核心公式","实现与运行"],"added":"2026-11-04"},
+        {"id":"routing-versus-attention","level":"comparison","question":"路由使用归一化表示，为什么最终不能直接拿 centroid 或归一化 key 计算 attention？","answer":"归一化球面表示只用于选择支持；最终attention仍须原始QKV和缩放点积。用centroid代替成员value会压缩掉各token内容，用归一化key则改变attention幅值。全预算退化稠密参考是检查这一边界的负控。","example":"教学例：两个同方向key范数分别1和10，路由可把它们放一块；原始attention仍可能更重视范数10的token。把两者都归一化就删除了这一差别。","source_sections":["核心公式","检查与负控"],"added":"2026-11-04"},
+        {"id":"budget-and-causality","level":"implementation","question":"实现时 K=1 为什么可能读到3个历史 token，causal mask 又能证明什么？","answer":"论文按整块累加直到达到或超过K，末块可超额，不能切块凑数。mask仅保证最终attention不读取未来位置；整prompt拟合centroid仍可能受后文key影响，不等于严格流式因果模型。未建索引的生成token也必须保留在无条件可读区域。","example":"教学例：最高分块含3个历史token，K=1时仍取全部3个；另加当前token。若修改未来key并重建索引，早期选集可能改变，因此不能用支持为零宣称所有未来影响都被排除。","source_sections":["检查与负控","成本判断与复现边界"],"added":"2026-11-04"}
+      ]
+    },
+    "foundation-models:anchor-kv": {
+      "questions": [
+        {"id":"basis-mismatch","level":"basics","question":"Anchor 既然发现状态跨层冗余，为什么不能直接给所有层读同一矩阵？","answer":"冗余指内容相关，不代表坐标基相同。各reader需要可学习线性read-map，把共享内容表达成该层可用的坐标；writer保留自己的基。仅复制同一状态而没有映射，会把共享和基不匹配混为一谈。","example":"教学例：同一个二维方向在一层写成(1,0)，另一层习惯的坐标是(0,1)。共享内容不变，但reader需要旋转映射才读到正确语义方向。","source_sections":["背景与主要改动","核心公式"],"added":"2026-11-04"},
+        {"id":"learned-gate","level":"mechanism","question":"输入相关 gate 在 Anchor 的共享 readout 中解决什么问题？","answer":"gate控制每个头将多少长期readout加到局部输出。只需短窗口时可抑制有噪声的memory，需要远距离信息时可使用它。gate是可训练sigmoid投影，不是固定0.5，也不把两个分支先拼接后任意重评分。","example":"教学例：局部输出为2、memory为10，gate接近0时输出接近2，gate为0.2时为4；这些是加法门控算例，不是任务准确率。","source_sections":["核心公式","检查与负控"],"added":"2026-11-04"},
+        {"id":"train-deploy-state","level":"comparison","question":"为什么 Anchor 的部署状态减少不能直接作为从头删 interior 分支训练的依据？","answer":"论文在训练两阶段保留interior TTT以稳定梯度，部署时才去掉。部署的内存节约不说明训练时删除这些分支仍收敛，也不说明各层状态本来就完全相同。本地read-map组件没有验收整个训练配方。","example":"教学例：训练保留多个梯度入口，推理只保留共享入口，类似先搭脚手架再拆；不能因为最终建筑没有脚手架，就认定施工也不需要。","source_sections":["背景与主要改动","成本判断与复现边界"],"added":"2026-11-04"},
+        {"id":"external-writer","level":"implementation","question":"本地 external writer 接口为何不等于 LaCT/Muon 的 TTT 更新已经实现？","answer":"它只接受外部计算好的状态、校验指定writer和递增revision，并让readers学习read-map/gate。实际LaCT的inner objective、momentum/Muon和模型安装均在边界外，不能用随意SGD或固定矩阵把完整Anchor冒充通过。","example":"教学例：把观测KV矩阵以revision=1写入可验证共享读取；reader再用revision=2写入必须拒绝。两种接口行为正确，仍没有证明7B模型的TTT训练有效。","source_sections":["实现与运行","检查与负控","成本判断与复现边界"],"added":"2026-11-04"}
+      ]
+    },
+    "foundation-models:multi-layer-indexer": {
+      "questions": [
+        {"id":"dependency-removal","level":"basics","question":"Multi-layer Indexer 为什么能让 indexer 与 attention 重叠，而普通 DSA 要串行？","answer":"普通DSA的attention必须等本层selection完成。MLI改为消费较早full层已经产生的selection，当前索引器便可为后续消费者并行工作。改变的是依赖与消费层，不是把索引器运算凭空省掉。","example":"教学例：第2层attention使用第1层selection时，第2层indexer可同时计算第3层将用的selection；若attention仍等自己的selection，另开stream也不能消除依赖。","source_sections":["背景与主要改动","核心公式"],"added":"2026-11-04"},
+        {"id":"lag-versus-retention","level":"mechanism","question":"retention 和 lag depth 为什么是两个不同参数？","answer":"retention决定哪些层保留索引器，lag depth沿保留索引器的full层集合回退多少个。缺少前驱的最前几个full层仍走标准schedule。把回退k个full层误写为回退k个物理层，会在稀疏retention下消费错误selection。","example":"教学例：full层为0、4、8，lag=1时第8层读第4层selection，不是第7层；最开始第0层没有前驱，必须自己计算后再消费。","source_sections":["核心公式","背景与主要改动"],"added":"2026-11-04"},
+        {"id":"not-token-cache","level":"comparison","question":"MLI 与 IndexCache 组合是否等于沿用上一个生成 token 的索引？","answer":"不是。二者复用发生在同一个当前token的不同层之间；MLI保留的full索引器仍计算当前token的新selection。跨token沿用旧selection会额外引入时间陈旧性，不是论文的跨层调度。","example":"教学例：生成第100个token时，第4层给第8层的新selection仍来自第100个token的hidden；拿第99个token缓存来代替，会改变被审查的算法。","source_sections":["背景与主要改动","核心公式"],"added":"2026-11-04"},
+        {"id":"lifetime-and-cost","level":"implementation","question":"为什么一张依赖图和一次 A100 常数计时不能验收 MLI 的生产吞吐？","answer":"真正实现要在首个消费点join事件并保持输入输出引用，防止allocator复用；还需实际SGLang生产buffer、CUDA graph及真实模型运行。原配置为8H200 TP8，大模型长上下文超出单卡预算，所以本轮只收录、不造runtime或metrics。","example":"教学例：side stream尚未读完hidden时释放其引用，主stream可能复用同一内存，即便图上箭头正确也会产生错误。用固定sleep模拟耗时既测不到该风险，也不是模型吞吐。","source_sections":["核心公式","已核查与未实现","成本判断与复现边界"],"added":"2026-11-04"}
+      ]
+    }
+  }
+}

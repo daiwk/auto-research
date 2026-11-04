@@ -8,6 +8,9 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [Coarse Semantic Blocks for Efficient Training-Free Sparse Attention](<https://arxiv.org/abs/2611.04313>) | 2026-11-03 | [English](../../foundation-models/2611.04313-semantic-block-sparse-attention/README-en.md) · [Chinese](../../foundation-models/2611.04313-semantic-block-sparse-attention/README.md) |
+| [Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training](<https://arxiv.org/abs/2611.04327>) | 2026-11-03 | [English](../../foundation-models/2611.04327-anchor-kv/README-en.md) · [Chinese](../../foundation-models/2611.04327-anchor-kv/README.md) |
+| [Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention](<https://arxiv.org/abs/2611.03768>) | 2026-11-02 | [English](../../foundation-models/2611.03768-multi-layer-indexer/README-en.md) · [Chinese](../../foundation-models/2611.03768-multi-layer-indexer/README.md) |
 | [XLA from the Trenches: Correctness on TPU Workloads at Scale](<https://arxiv.org/abs/2611.00624>) | 2026-10-31 | [English](../../foundation-models/2611.00624-xla-trenches/README-en.md) · [Chinese](../../foundation-models/2611.00624-xla-trenches/README.md) |
 | [ProLand: A New Infeasible Manifold Optimization Method for LoRA Fine-Tuning](<https://arxiv.org/abs/2611.00236>) | 2026-10-30 | [English](../../foundation-models/2611.00236-proland/README-en.md) · [Chinese](../../foundation-models/2611.00236-proland/README.md) |
 | [GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport](<https://arxiv.org/abs/2611.00319>) | 2026-10-30 | [English](../../foundation-models/2611.00319-gavagai/README-en.md) · [Chinese](../../foundation-models/2611.00319-gavagai/README.md) |

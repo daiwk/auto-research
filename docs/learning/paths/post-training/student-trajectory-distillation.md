@@ -7,7 +7,7 @@ hide:
 
 # 轨迹蒸馏：学生、提案与前缀分布
 
-[LLM 后训练](index.md) / 168 个问题 · 42 篇论文
+[LLM 后训练](index.md) / 172 个问题 · 43 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">168 个问题 · 42 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">172 个问题 · 43 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:shuffled-opsd" data-paper-title="Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation?" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation? LLM 后训练 Duke University 2026-11-03 OPSD 中学生根据问题采样，冻结初始教师在同一生成前缀上评分，但额外看到 worked example。本文区分“双方共享的问题”和“只有教师看到的示例”：用另一个问题的完整示例作教师上下文，打乱共享问题的 whitespace 词块，却保留教师示例的顺序。该变换同时改变学生采样和教师评分的条件，不是在生成后打乱轨迹，也不是只把教师输入打乱。 完整多模型训练与长推理评测：成本过高，不复现（审查 DONE）。L1 条件构造与损失组件，diagnostic only。完整多模型训练与长推理评测：成本过高，不复现（审查 DONE）。本地没有运行 LLM rollout 或数学 benchmark；evolve_integrated=false。prepare_shared_inputs 保留原始 worked example，仅给 teacher 字段，返回共享问题视图和固定配对索引；不生成 chat template，也不替调用方接入 checkpoint。  On-policy distillation 教师上下文与输入变换 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 Shuffled OPSD打乱的是学生生成轨迹，还是学生和教师的输入？ 打乱双方共享的问题输入，并在这个相同变换条件上采学生轨迹和算教师分布；生成出来的续写从不被打乱。只有教师看到的其他题worked example保持完整，评测又回到原始完整问题且不给教师上下文。 教学例：把“red box contains five coins”置换为“coins red five contains box”，双方看到同一新顺序；学生之后生成的推导仍保持原采样顺序。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<span id="paper-post-training-shuffled-opsd-320b8d1d" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-452ffeccf17a7e98">Shuffled OPSD打乱的是学生生成轨迹，还是学生和教师的输入？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ashuffled-opsd">Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Duke University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>打乱双方共享的问题输入，并在这个相同变换条件上采学生轨迹和算教师分布；生成出来的续写从不被打乱。只有教师看到的其他题worked example保持完整，评测又回到原始完整问题且不给教师上下文。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把“red box contains five coins”置换为“coins red five contains box”，双方看到同一新顺序；学生之后生成的推导仍保持原采样顺序。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04958v1">原论文</a> · <a href="../../../../post-training/2611.04958-shuffled-opsd/">实现解读</a> · <a href="#qa-452ffeccf17a7e98">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:shuffled-opsd" data-paper-title="Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation?" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation? LLM 后训练 Duke University 2026-11-03 OPSD 中学生根据问题采样，冻结初始教师在同一生成前缀上评分，但额外看到 worked example。本文区分“双方共享的问题”和“只有教师看到的示例”：用另一个问题的完整示例作教师上下文，打乱共享问题的 whitespace 词块，却保留教师示例的顺序。该变换同时改变学生采样和教师评分的条件，不是在生成后打乱轨迹，也不是只把教师输入打乱。 完整多模型训练与长推理评测：成本过高，不复现（审查 DONE）。L1 条件构造与损失组件，diagnostic only。完整多模型训练与长推理评测：成本过高，不复现（审查 DONE）。本地没有运行 LLM rollout 或数学 benchmark；evolve_integrated=false。prepare_shared_inputs 保留原始 worked example，仅给 teacher 字段，返回共享问题视图和固定配对索引；不生成 chat template，也不替调用方接入 checkpoint。  On-policy distillation 教师上下文与输入变换 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 为什么本地Shuffled OPSD的损失可以为负，不能把它修正成非负KL？ 论文对每个有符号的q log(q/p)词表贡献只做上界0.05截断，保留负项。上截断会打破完整KL求和的非负性。把负项置零、先求完整KL再clip或改普通KL，都会改变论文实际目标及梯度。 教学例：q=[0.5,0.5]、p=[0.99,0.01]时第一项约-0.342，第二项约1.956被截为0.05，总和约-0.292；负值不是数值下溢。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-ec542e847a6059bf">为什么本地Shuffled OPSD的损失可以为负，不能把它修正成非负KL？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ashuffled-opsd">Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Duke University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>论文对每个有符号的q log(q/p)词表贡献只做上界0.05截断，保留负项。上截断会打破完整KL求和的非负性。把负项置零、先求完整KL再clip或改普通KL，都会改变论文实际目标及梯度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：q=[0.5,0.5]、p=[0.99,0.01]时第一项约-0.342，第二项约1.956被截为0.05，总和约-0.292；负值不是数值下溢。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04958v1">原论文</a> · <a href="../../../../post-training/2611.04958-shuffled-opsd/">实现解读</a> · <a href="#qa-ec542e847a6059bf">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:shuffled-opsd" data-paper-title="Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation?" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation? LLM 后训练 Duke University 2026-11-03 OPSD 中学生根据问题采样，冻结初始教师在同一生成前缀上评分，但额外看到 worked example。本文区分“双方共享的问题”和“只有教师看到的示例”：用另一个问题的完整示例作教师上下文，打乱共享问题的 whitespace 词块，却保留教师示例的顺序。该变换同时改变学生采样和教师评分的条件，不是在生成后打乱轨迹，也不是只把教师输入打乱。 完整多模型训练与长推理评测：成本过高，不复现（审查 DONE）。L1 条件构造与损失组件，diagnostic only。完整多模型训练与长推理评测：成本过高，不复现（审查 DONE）。本地没有运行 LLM rollout 或数学 benchmark；evolve_integrated=false。prepare_shared_inputs 保留原始 worked example，仅给 teacher 字段，返回共享问题视图和固定配对索引；不生成 chat template，也不替调用方接入 checkpoint。  On-policy distillation 教师上下文与输入变换 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 既然是打乱词序，为什么还要固定111偏移，并区分词数和token数？ 固定(i+111)%N的其他题参考，才能在不同target变换间保持教师私有上下文不变，避免混入配对变化。whitespace词块置换只保证词multiset，不保证分词器token数不变；不能把字词保持当成token预算完全一致。 教学例：N=5时参考索引是[1,2,3,4,0]，但N=3会自配，局部组件应拒绝而不是悄悄换配对。带前导空格的分词器也可能对同词不同位置给出不同token数。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-603e38b98e0b81ee">既然是打乱词序，为什么还要固定111偏移，并区分词数和token数？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ashuffled-opsd">Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Duke University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>固定(i+111)%N的其他题参考，才能在不同target变换间保持教师私有上下文不变，避免混入配对变化。whitespace词块置换只保证词multiset，不保证分词器token数不变；不能把字词保持当成token预算完全一致。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：N=5时参考索引是[1,2,3,4,0]，但N=3会自配，局部组件应拒绝而不是悄悄换配对。带前导空格的分词器也可能对同词不同位置给出不同token数。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04958v1">原论文</a> · <a href="../../../../post-training/2611.04958-shuffled-opsd/">实现解读</a> · <a href="#qa-603e38b98e0b81ee">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:shuffled-opsd" data-paper-title="Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation?" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation? LLM 后训练 Duke University 2026-11-03 OPSD 中学生根据问题采样，冻结初始教师在同一生成前缀上评分，但额外看到 worked example。本文区分“双方共享的问题”和“只有教师看到的示例”：用另一个问题的完整示例作教师上下文，打乱共享问题的 whitespace 词块，却保留教师示例的顺序。该变换同时改变学生采样和教师评分的条件，不是在生成后打乱轨迹，也不是只把教师输入打乱。 完整多模型训练与长推理评测：成本过高，不复现（审查 DONE）。L1 条件构造与损失组件，diagnostic only。完整多模型训练与长推理评测：成本过高，不复现（审查 DONE）。本地没有运行 LLM rollout 或数学 benchmark；evolve_integrated=false。prepare_shared_inputs 保留原始 worked example，仅给 teacher 字段，返回共享问题视图和固定配对索引；不生成 chat template，也不替调用方接入 checkpoint。  On-policy distillation 教师上下文与输入变换 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 两条响应长度不同，怎样归约Shuffled OPSD损失并防止教师信息泄漏？ 每条响应先对有效token取均值，再对响应等权平均；不是把全批有效token混在一起平均。教师概率和采样轨迹固定，prompt/padding排除，worked example仅在teacher字段。温度改变分布，但论文没有额外T平方倍率。 教学例：一条有1个有效token、另一条有3个，两条响应权重各为一半，不是四分之一与四分之三。给学生拼入完整教师示例则改变了学习条件，而非实现优化。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-f2a5815e6534ca4d">两条响应长度不同，怎样归约Shuffled OPSD损失并防止教师信息泄漏？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ashuffled-opsd">Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Duke University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>每条响应先对有效token取均值，再对响应等权平均；不是把全批有效token混在一起平均。教师概率和采样轨迹固定，prompt/padding排除，worked example仅在teacher字段。温度改变分布，但论文没有额外T平方倍率。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一条有1个有效token、另一条有3个，两条响应权重各为一半，不是四分之一与四分之三。给学生拼入完整教师示例则改变了学习条件，而非实现优化。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04958v1">原论文</a> · <a href="../../../../post-training/2611.04958-shuffled-opsd/">实现解读</a> · <a href="#qa-f2a5815e6534ca4d">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:specopd" data-paper-title="SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding LLM 后训练 Qwen Business Unit of Alibaba / University of Science and Technology of China 2026-11-02 普通 OPD 要逐轮 draft-and-verify 才能继续收集上下文。SpecOPD 在已有 reference 的多个 anchor 上重新采当前 draft 的私有续写，合并成共享 trunk 的 proposal tree，再并行给教师打分。这里 on-policy 指固定外层上下文上的新 draft 采样，不是无限制完整响应 rollout。混合模型还分别需要 sparse indexer 一致性和 recurrent state replay，单靠 attention mask 不够。 完整训练与 serving 实验：成本过高，不复现（审查 DONE）。L1 数值组件，diagnostic only。完整训练与 serving 实验：成本过高，不复现（审查 DONE）。本地张量验证不等于真实推测解码加速；evolve_integrated=false。proposal_tree 仅接收 reference 长度、zero-based anchor 和分支宽度，生成 parent、语义位置、attention 可见性与预测行；不接触参考文本内容或答案。prediction_logits 在调用方提供的 hidden/head 上执行前驱行读出，不伪装成教师 checkpoint。  On-policy distillation 推测解码与接受长度 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 SpecOPD的reference固定，为什么还叫on-policy？ 固定的是外层reference上下文；每次更新在anchor后用当前draft重新采分支，教师监督的prefix含当前draft自己的历史。它不宣称完整reference响应由当前策略采样，也不要求等待顺序draft-and-verify完成整条响应。 教学例：reference在a之后是quiet，当前draft可采出short；下一token的教师条件必须是a short，而不是a quiet。两条历史不同。 2026-11-04">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
 <span id="paper-post-training-specopd-8cfb4e60" class="ar-learning-paper-anchor"></span>

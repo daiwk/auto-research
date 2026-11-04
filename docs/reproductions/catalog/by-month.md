@@ -423,3 +423,8 @@
 
 ## 2016-06
 - [Wide & Deep](../1606.07792-wide-deep/README.md)：联合记忆型 wide 交叉和泛化型 deep tower，是工业深度推荐的经典起点。
+
+## 2026-11
+- [OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer](../../recommendation-components/2611.04720-onetrans-gsr/README.md)：统一自回归policy生成商品/视频/直播/广告的整页序列；离线RM集成、正值几何多目标奖励与SeparateStandardization指导后训练，在线保留硬mask和软业务偏置。本地仅核局部约束/去重和奖励公式，既不声称局部规则保证全局可行，也不把RM代理分数当真实GMV。
+- [ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse](../../recommendation-components/2611.04259-reusegr/README.md)：7B离线模型按query规划SID前缀，0.5B在当前用户历史下补全后缀；ReuseCut以历史覆盖选择复用深度，BudgetCut再学习集合相关的分支准入。本地只核深度标签/冷miss与准备好depth0的区别及分数接口，不把固定规则冒充学习的BudgetCut。
+- [SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search](../../recommendation-components/2611.04662-spade-local-search/README.md)：OA-BPE用业务价值加权token-pair计数，STAR以软门控编码时空位置，MARS-DPO对齐生产偏好，SDBS按父beam排序给予有界sigmoid奖励。本地只实现分词/解码算子；首beam自身零奖励不意味着任意参数下top1永不被其他beam超过。

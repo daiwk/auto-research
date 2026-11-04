@@ -7,7 +7,7 @@ hide:
 
 # 教师更强仍可能教错：信息、兼容性与成功行为保护
 
-[LLM 后训练](../index.md) · 更新 2026-10-27 · 47 篇主题资料 / 6 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-05 · 49 篇主题资料 / 8 篇重点对照
 
 教师的价值不只取决于总分。OPSD改变训练期可见信息，MOPD与逐token路由组织多教师，CSD先统一概率事件，SPOD保护学生已成功选择，VAD筛出可归于视觉证据的修正；这些约束要在模仿之前分别成立。
 
@@ -31,6 +31,8 @@ hide:
 | [Beyond the Teacher: Understanding and Preserving Distillation Overshoot in Agentic On-Policy Distillation](../../../post-training/2610.25034-spod/README.md) · [原始来源](https://arxiv.org/abs/2610.25034v1)<br>章节：背景与主要改动、核心公式、结果、代码映射与边界 | 仅保护成功episode中教师原始完整action概率更低的decision，取消该处蒸馏并加软floor。 | 其余decision继续学，soft floor不保证共享参数下永不退化；完整Agent实验因成本未复现。 |
 | [CSD: Common-Support Distillation for Cross-Tokenizer Knowledge Transfer](../../../post-training/2610.28895-csd/README.md) · [原始来源](https://arxiv.org/abs/2610.28895v1)<br>章节：背景与主要改动、核心公式、结果、代码映射与边界 | 先按字符区间与解码文本构造共同chunk事件，用链式概率及REST保留未匹配质量。 | 跨tokenizer不再假装同ID同含义，但事件覆盖受限；本地是不同小词表的对齐与梯度诊断。 |
 | [VAD](../../../post-training/2607.28590-vad/README.md) · [原始来源](https://arxiv.org/abs/2607.28590)<br>章节：背景与主要改动、核心公式、复现边界 | 对比同一教师证据存在/移除视图，将原修正单侧投影到视觉方向后重建学生锚定目标。 | 操作性对比不证明所有修正皆真视觉因果；本地过程证据轴替代真实crop，未运行原视觉模型。 |
+| [P²-MOPD: Accelerating Multi-Teacher On-Policy Distillation via Parameter Priors](../../../post-training/2611.03953-p2-mopd/README.md) · [原始来源](https://arxiv.org/abs/2611.03953v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 把冻结专家任务向量保留为可学习优化方向；自由学生权重与系数由同一更新前梯度共同推进，推理仍使用一个物化学生模型。 | 不只改变教师logit或合并初始点；未裁剪系数梯度、独立全局clip和零decay决定多步等价。完整MOPD模型/轨迹未复现，本地只验参数更新L1。 |
+| [Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning](../../../post-training/2611.05266-targeted-guidance/README.md) · [原始来源](https://arxiv.org/abs/2611.05266v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 在失败Agent turn前加入文本反馈，以同权重反馈条件教师做完整词表reverse KL，并保留criterion的普通RL奖励。 | 只在失败处蒸馏，按整条响应token数归一；全部满足后恢复原RL。组件不提供实际judge、反馈有效性筛选或Agent轨迹，不能凭loss下降声称代码能力提高。 |
 
 </div>
 
@@ -47,6 +49,18 @@ MOPD和token路由都可能混合多个教师，但域级组合与逐位置选�
 SPOD指出学生成功动作也可能不符合教师偏好，保护粒度是具体action而不是整段成功episode。VAD进一步区分特权教师的修正来自视觉证据还是共享语言偏差。这两种约束分别审查“学生已有成功”与“教师证据来源”，不能只看teacher总分更高就跳过。
 
 对照来源：[spod](../../../post-training/2610.25034-spod/README.md) · [vad](../../../post-training/2607.28590-vad/README.md) · [opsd](../../../post-training/2601.18734-opsd/README.md)
+
+### 教师既给logit，也能给参数方向，但两条证据不能互换
+
+MOPD组织领域教师在学生轨迹上的监督；P²-MOPD进一步把专家bank的任务向量保留为连续可学习方向。教师选择回答谁给token反馈，参数先验则还改变权重空间怎样走。自由B允许离开任务向量空间，系数学习低维方向，导出仍是单学生。原文采用的支持受限MOPD surrogate、同一未裁剪梯度和双通道optimizer时序都有独立合同，旧候选混合接口不能直接冒充该完整训练。
+
+对照来源：[p2-mopd](../../../post-training/2611.03953-p2-mopd/README.md) · [mopd](../../../post-training/2606.30406-mopd/README.md)
+
+### 特权上下文应作用在哪里，与有没有teacher同样重要
+
+OPSD区分学生可见问题与teacher私有参考；Targeted Guidance把特权信息换成失败turn前的文本反馈，并只在这些轮次施加辅助reverse KL，同时保留普通criterion RL。稀疏门控选择梯度位置，整条response-token归一控制每条rollout的总体尺度，两者不能混成删token后重算均值。无失败时严格退化原RL是数值合同，不代表反馈已经通过有效性筛选或代码任务真的提升。
+
+对照来源：[targeted-guidance](../../../post-training/2611.05266-targeted-guidance/README.md) · [opsd](../../../post-training/2601.18734-opsd/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -92,18 +106,44 @@ SPOD指出学生成功动作也可能不符合教师偏好，保护粒度是具�
 
     对照来源：[opsd](../../../post-training/2601.18734-opsd/README.md) · [vad](../../../post-training/2607.28590-vad/README.md)
 
+### P²-MOPD学到一个更大的专家系数，是否等于MOPD提高了该教师的token混合权重？ {#cross-parameter-prior-not-teacher-mixture}
+
+??? note "展开答案与例子"
+
+    **答案：** 不等同。参数先验系数乘的是固定权重任务向量，改变学生参数空间的更新方向；教师路由或混合系数作用于输出监督分布。P²-MOPD仍要由领域教师给学生轨迹评分，不能用一个方向系数替代反馈分布，也不能把两类系数拿来直接解释同一种置信度。
+
+    **教学例子：** 教学例：沿医疗专家参数方向把alpha从0.25改为0.3，不等于每个token的医疗教师概率都从25%混到30%；神经网络的参数到输出映射并不线性。
+
+    对照来源：[p2-mopd](../../../post-training/2611.03953-p2-mopd/README.md) · [mopd](../../../post-training/2606.30406-mopd/README.md)
+
+### OPSD和Targeted Guidance都有额外教师上下文，能统一为整条轨迹的teacher KL吗？ {#cross-feedback-mask-not-global-privilege}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能抹掉门控与归约。Targeted Guidance只在criterion失败的Agent turn施加student到冻结teacher的完整词表KL，分母仍是整条响应有效token，并保留普通RL奖励；普通OPSD的特权参考不自动包含这些局部失败合同。额外信息只允许进入训练教师，不能交给正式学生作为未来错误提示。
+
+    **教学例子：** 教学例：100个响应token中只有1个失败token且KL为2，辅助量按2/100计算；把其余99个token删掉后平均会变成2，也不再是原门控强度。
+
+    对照来源：[targeted-guidance](../../../post-training/2611.05266-targeted-guidance/README.md) · [opsd](../../../post-training/2601.18734-opsd/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-05** · 补入P²-MOPD参数先验双通道和Targeted Guidance失败turn反馈；对照MOPD教师监督与OPSD特权上下文，保留独立更新方向、原分母及完整实验高成本未复现边界。
+
+涉及：[p2-mopd](../../../post-training/2611.03953-p2-mopd/README.md) · [targeted-guidance](../../../post-training/2611.05266-targeted-guidance/README.md) · [mopd](../../../post-training/2606.30406-mopd/README.md) · [opsd](../../../post-training/2601.18734-opsd/README.md)
 
 **2026-10-27** · 首版：比较特权自教师、多领域与逐token路由、CSD文本事件对齐、SPOD成功保护和VAD视觉归因；已阅47篇摘要，精读6篇。
 
 覆盖 47 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 47 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 49 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
+- [P²-MOPD: Accelerating Multi-Teacher On-Policy Distillation via Parameter Priors](../../../post-training/2611.03953-p2-mopd/README.md)
+- [Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning](../../../post-training/2611.05266-targeted-guidance/README.md)
 - [When to Follow the Teacher: Advantage-Based On-Policy Distillation](../../../post-training/2610.31563-aopd/README.md)
 - [Edit, Don&#x27;t Imitate: Minimal-Edit On-Policy Distillation for Multimodal Reasoning](../../../post-training/2610.30231-minimal-edit-opd/README.md)
 - [CSD: Common-Support Distillation for Cross-Tokenizer Knowledge Transfer](../../../post-training/2610.28895-csd/README.md)

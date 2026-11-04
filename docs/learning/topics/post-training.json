@@ -141,6 +141,7 @@
       ],
       "reading_order": "先读Process Supervision，区分逐步标签与终局标签；再读Math-Shepherd，看如何用续写构造步骤信号；最后读TACO，理解为什么正确回答内部也可能存在不该被强化的token。",
       "papers": [
+        "post-training:dars-density",
         "post-training:mart-grpo",
         "post-training:mge-po",
         "post-training:tag-reward-gating",
@@ -198,6 +199,7 @@
       ],
       "reading_order": "先读GKD，把采样前缀与教师评分画成两条线；再读MiniLLM，比较散度方向及采样稳定化；最后读Learning Signals，区分损失尚大与真正仍有有效学习方向。",
       "papers": [
+        "post-training:shuffled-opsd",
         "post-training:specopd",
         "post-training:opst",
         "post-training:userarena-optd",
@@ -260,6 +262,8 @@
       ],
       "reading_order": "先读OPSD，分清同参数、不同条件视图；再读Token-Level Teacher Selection，理解按位置选择教师及概率混合；最后读MOPD，思考多教师整合中的能力冲突与保留。",
       "papers": [
+        "post-training:p2-mopd",
+        "post-training:targeted-guidance",
         "post-training:aopd",
         "post-training:minimal-edit-opd",
         "post-training:csd",

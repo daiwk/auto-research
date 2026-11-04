@@ -7,7 +7,7 @@ hide:
 
 # 生成一个物品，先后跨过码本、模型分布与合法目录三道关
 
-[搜广推](../index.md) · 更新 2026-10-30 · 62 篇主题资料 / 7 篇重点对照
+[搜广推](../index.md) · 更新 2026-11-04 · 64 篇主题资料 / 9 篇重点对照
 
 TIGER把物品变成层次码并学习下一码序列，COBRA在稀疏码后补回条件稠密向量，PLUM把已有LLM通过继续预训练接到行为/SID空间。STATIC不改表示而改变合法解码的执行方式，Reward Guided Decoding则在既有支持上倾斜业务偏好。先定位改变的是哪一关，再判断它能否找回漏掉的物品。 PinGER再把历史输入与SID监督拆开，并将前缀多样化选择、分层DPO和合法目录分别治理。
 
@@ -32,6 +32,8 @@ TIGER把物品变成层次码并学习下一码序列，COBRA在稀疏码后补�
 | [Reward Guided Decoding for Generative Recommendation](../../../reproductions/2607.25344-reward-guided-decoding/README.md) · [原始来源](https://arxiv.org/abs/2607.25344)<br>章节：背景与主要改动、核心公式、复现边界 | 固定生成先验P0，用exp(R/β)倾斜得到Q，以KL温度限制偏离，不重新训练生成器。 | reward可重排既有支持，却不能令P0为零的路径凭空出现；代理reward和线上价值不同，本地MovieLens构造任务不等于生产收益。 |
 | [PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search](../../../recommendation-components/2610.36958-pailitao-mmsearch2/README.md) · [原始来源](https://arxiv.org/abs/2610.36958v1)<br>章节：背景与主要改动、核心公式 | 统一图文到SID集合，多意图/预算训练与Sample–Beam服务对齐。 | 完整多模型多阶段和私有生产实验高成本不复现；无本地占位模型。 |
 | [PinGER: Token-Efficient Generative Retrieval with Semantic IDs](../../../recommendation-components/2610.33435-pinger/README.md) · [原始来源](https://arxiv.org/abs/2610.33435v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 训练交错SID/dense并关闭跨商品SID读取，服务删除过去SID；按LCP深度逐beam惩罚，所有SID前缀DPO与NTP锚联合后训练。 | 不同于TIGER逐项历史SID输入，也不能把前缀多样性当STATIC合法性；多样性会牺牲离线recall，本地无完整tokenizer/服务。 |
+| [ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse](../../../recommendation-components/2611.04259-reusegr/README.md) · [原始来源](https://arxiv.org/abs/2611.04259v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 按query共享7B规划的SID前缀，0.5B读取当前用户历史补全；ReuseCut以逐级覆盖准则选择复用深度。 | 比缓存完整结果保留更多个性化空间，但深缓存会限制可达目标；准备好depth0与冷miss使用不同模型，低成本标签核不等于学习BudgetCut。 |
+| [SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search](../../../recommendation-components/2611.04662-spade-local-search/README.md) · [原始来源](https://arxiv.org/abs/2611.04662v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 用业务价值重加权BPE合并，再以父beam名次的有界sigmoid奖励控制自由文本query生成的裁剪。 | 与固定SID子树的约束和LCP惩罚不同；名次奖励不测两候选语义距离，也不无条件保留最终top1。本地不含STAR/MARS-DPO或完整query模型。 |
 
 </div>
 
@@ -60,6 +62,12 @@ PailitaoMMSearch2.0将多意图图文请求直接解码为商品SID候选集合�
 TIGER把历史商品表示成多级SID序列；PinGER保留SID逐级监督，却限制主干内的读取角色，让后续商品只读历史dense。这里dense仍可包含SID fusion，不能误写成没有离散信息。PinGER的LCP惩罚只改变同层beam如何分散名额，不负责排除不存在的SID；STATIC才显式编译合法迁移。更广前缀也非免费收益：原文λ=3时distinct@1上升而R@100下降。原文整栈线上增益不能被归到本地mask或DPO单核。
 
 对照来源：[pinger](../../../recommendation-components/2610.33435-pinger/README.md) · [tiger](../../../reproductions/2305.05065-tiger/README.md) · [static-constraint-decoding](../../../recommendation-components/2602.22647-static-constraint-decoding/README.md)
+
+### 共享哪部分计算、输出什么对象，与怎样拉开候选并非同一问题
+
+TIGER用语义码把物品变成可生成路径，ReuseGR沿用SID分层却将query前缀规划跨用户共享，当前历史仍影响后缀。SPADE生成的是可执行自由文本query，OA-BPE先改变切词先验，再用父beam名次奖励调节搜索存活；它不执行PinGER的共同SID前缀惩罚。比较时先固定候选预算和输出对象，再分别记录历史输入成本、离线规划成本与在线解码成本，不能把前缀可达覆盖当作完整召回提升。
+
+对照来源：[reusegr](../../../recommendation-components/2611.04259-reusegr/README.md) · [spade-local-search](../../../recommendation-components/2611.04662-spade-local-search/README.md) · [tiger](../../../reproductions/2305.05065-tiger/README.md) · [pinger](../../../recommendation-components/2610.33435-pinger/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -115,9 +123,23 @@ TIGER把历史商品表示成多级SID序列；PinGER保留SID逐级监督，却
 
     对照来源：[pinger](../../../recommendation-components/2610.33435-pinger/README.md) · [tiger](../../../reproductions/2305.05065-tiger/README.md) · [static-constraint-decoding](../../../recommendation-components/2602.22647-static-constraint-decoding/README.md)
 
+### ReuseGR、PinGER和SPADE都谈prefix或多样性，能把三者的控制量合成一个分数吗？ {#cross-reuse-prior-rank-and-semantic-distance}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能不加区分地合并。ReuseGR控制共享到哪一层及可达子树，PinGER用共同SID前缀惩罚重复子树，SPADE按父beam名次加奖励且输出自由query。它们作用于不同对象和阶段，应先对齐服务预算，再分别测可达性、去冗余和最终质量。
+
+    **教学例子：** 教学例：缓存两层prefix节省计算，并不自动让候选更分散；给排名靠后的自由query加奖励，也没有计算它与已选query的语义距离。
+
+    对照来源：[reusegr](../../../recommendation-components/2611.04259-reusegr/README.md) · [spade-local-search](../../../recommendation-components/2611.04662-spade-local-search/README.md) · [pinger](../../../recommendation-components/2610.33435-pinger/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-04** · 补入ReuseGR与SPADE，区分query前缀复用、用户历史条件、业务分词先验和父beam名次奖励；对照TIGER/PinGER保留不同输出对象与候选预算边界，不把CPU算子或完整A/B混成同层证据。
+
+涉及：[reusegr](../../../recommendation-components/2611.04259-reusegr/README.md) · [spade-local-search](../../../recommendation-components/2611.04662-spade-local-search/README.md) · [tiger](../../../reproductions/2305.05065-tiger/README.md) · [pinger](../../../recommendation-components/2610.33435-pinger/README.md)
 
 **2026-10-30** · 精读PinGER三mask规则、单层LCP惩罚和逐prefixDPO锚；与TIGER历史SID成本及STATIC合法迁移分轴对照，保留多样性/recall取舍和整栈线上证据边界。
 
@@ -131,7 +153,7 @@ TIGER把历史商品表示成多级SID序列；PinGER保留SID逐级监督，却
 
 覆盖 60 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 62 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 64 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -197,6 +219,8 @@ TIGER把历史商品表示成多级SID序列；PinGER保留SID逐级监督，却
 - [X-Rec Technical Report](../../../reproductions/2609.29180-xrec/README.md)
 - [PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search](../../../recommendation-components/2610.36958-pailitao-mmsearch2/README.md)
 - [PinGER: Token-Efficient Generative Retrieval with Semantic IDs](../../../recommendation-components/2610.33435-pinger/README.md)
+- [ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse](../../../recommendation-components/2611.04259-reusegr/README.md)
+- [SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search](../../../recommendation-components/2611.04662-spade-local-search/README.md)
 
 </details>
 

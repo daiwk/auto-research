@@ -7,7 +7,7 @@ hide:
 
 # 长上下文：注意力、递归状态与记忆
 
-[基础模型](index.md) / 136 个问题 · 34 篇论文
+[基础模型](index.md) / 144 个问题 · 36 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,115 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">136 个问题 · 34 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">144 个问题 · 36 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:anchor-kv" data-paper-title="Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training 基础模型 University of Arizona 2026-11-03 不同层可能存储相近信息，却使用不同坐标基。Anchor 让一组层共享一个 recurrent state，以各层可学习 read-map 变换读出，再由输入相关 gate 与局部 SWA 合并。训练时保留 interior TTT 分支，部署时才删除，不能把部署结构直接当作训练配方。依据固定 v1 §3.2、§4.1、Appendix C。 完整训练与配置矩阵成本过高，不复现（审查 DONE）。诊断使用明确提供的人工 KV 矩阵，并非 LaCT 训练。SharedKVReadout 接收外部已更新 KVState，只允许指定 writer 推进 revision；复制输入 buffer 以免调用方后续修改旧证据。多个 reader 共享该 state，各自学习 identity 初始化的线性变换与 sigmoid gate。外部 writer 的 autograd 图不会被暗自 detach。  注意力与长上下文 跨层共享状态与测试时训练 基础模型 长上下文：注意力、递归状态与记忆 Anchor 既然发现状态跨层冗余，为什么不能直接给所有层读同一矩阵？ 冗余指内容相关，不代表坐标基相同。各reader需要可学习线性read-map，把共享内容表达成该层可用的坐标；writer保留自己的基。仅复制同一状态而没有映射，会把共享和基不匹配混为一谈。 教学例：同一个二维方向在一层写成(1,0)，另一层习惯的坐标是(0,1)。共享内容不变，但reader需要旋转映射才读到正确语义方向。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-anchor-kv-2d58f519" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-98ae0a3c522d4faa">Anchor 既然发现状态跨层冗余，为什么不能直接给所有层读同一矩阵？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aanchor-kv">Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · University of Arizona</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>冗余指内容相关，不代表坐标基相同。各reader需要可学习线性read-map，把共享内容表达成该层可用的坐标；writer保留自己的基。仅复制同一状态而没有映射，会把共享和基不匹配混为一谈。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一个二维方向在一层写成(1,0)，另一层习惯的坐标是(0,1)。共享内容不变，但reader需要旋转映射才读到正确语义方向。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04327">原论文</a> · <a href="../../../../foundation-models/2611.04327-anchor-kv/">实现解读</a> · <a href="#qa-98ae0a3c522d4faa">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:anchor-kv" data-paper-title="Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training 基础模型 University of Arizona 2026-11-03 不同层可能存储相近信息，却使用不同坐标基。Anchor 让一组层共享一个 recurrent state，以各层可学习 read-map 变换读出，再由输入相关 gate 与局部 SWA 合并。训练时保留 interior TTT 分支，部署时才删除，不能把部署结构直接当作训练配方。依据固定 v1 §3.2、§4.1、Appendix C。 完整训练与配置矩阵成本过高，不复现（审查 DONE）。诊断使用明确提供的人工 KV 矩阵，并非 LaCT 训练。SharedKVReadout 接收外部已更新 KVState，只允许指定 writer 推进 revision；复制输入 buffer 以免调用方后续修改旧证据。多个 reader 共享该 state，各自学习 identity 初始化的线性变换与 sigmoid gate。外部 writer 的 autograd 图不会被暗自 detach。  注意力与长上下文 跨层共享状态与测试时训练 基础模型 长上下文：注意力、递归状态与记忆 输入相关 gate 在 Anchor 的共享 readout 中解决什么问题？ gate控制每个头将多少长期readout加到局部输出。只需短窗口时可抑制有噪声的memory，需要远距离信息时可使用它。gate是可训练sigmoid投影，不是固定0.5，也不把两个分支先拼接后任意重评分。 教学例：局部输出为2、memory为10，gate接近0时输出接近2，gate为0.2时为4；这些是加法门控算例，不是任务准确率。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-6287dfe38707de43">输入相关 gate 在 Anchor 的共享 readout 中解决什么问题？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aanchor-kv">Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · University of Arizona</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>gate控制每个头将多少长期readout加到局部输出。只需短窗口时可抑制有噪声的memory，需要远距离信息时可使用它。gate是可训练sigmoid投影，不是固定0.5，也不把两个分支先拼接后任意重评分。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：局部输出为2、memory为10，gate接近0时输出接近2，gate为0.2时为4；这些是加法门控算例，不是任务准确率。</p>
+<p class="ar-learning-sources">依据：核心公式、检查与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04327">原论文</a> · <a href="../../../../foundation-models/2611.04327-anchor-kv/">实现解读</a> · <a href="#qa-6287dfe38707de43">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:anchor-kv" data-paper-title="Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training 基础模型 University of Arizona 2026-11-03 不同层可能存储相近信息，却使用不同坐标基。Anchor 让一组层共享一个 recurrent state，以各层可学习 read-map 变换读出，再由输入相关 gate 与局部 SWA 合并。训练时保留 interior TTT 分支，部署时才删除，不能把部署结构直接当作训练配方。依据固定 v1 §3.2、§4.1、Appendix C。 完整训练与配置矩阵成本过高，不复现（审查 DONE）。诊断使用明确提供的人工 KV 矩阵，并非 LaCT 训练。SharedKVReadout 接收外部已更新 KVState，只允许指定 writer 推进 revision；复制输入 buffer 以免调用方后续修改旧证据。多个 reader 共享该 state，各自学习 identity 初始化的线性变换与 sigmoid gate。外部 writer 的 autograd 图不会被暗自 detach。  注意力与长上下文 跨层共享状态与测试时训练 基础模型 长上下文：注意力、递归状态与记忆 为什么 Anchor 的部署状态减少不能直接作为从头删 interior 分支训练的依据？ 论文在训练两阶段保留interior TTT以稳定梯度，部署时才去掉。部署的内存节约不说明训练时删除这些分支仍收敛，也不说明各层状态本来就完全相同。本地read-map组件没有验收整个训练配方。 教学例：训练保留多个梯度入口，推理只保留共享入口，类似先搭脚手架再拆；不能因为最终建筑没有脚手架，就认定施工也不需要。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-8944d4335eeacb8a">为什么 Anchor 的部署状态减少不能直接作为从头删 interior 分支训练的依据？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aanchor-kv">Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · University of Arizona</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>论文在训练两阶段保留interior TTT以稳定梯度，部署时才去掉。部署的内存节约不说明训练时删除这些分支仍收敛，也不说明各层状态本来就完全相同。本地read-map组件没有验收整个训练配方。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：训练保留多个梯度入口，推理只保留共享入口，类似先搭脚手架再拆；不能因为最终建筑没有脚手架，就认定施工也不需要。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、成本判断与复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04327">原论文</a> · <a href="../../../../foundation-models/2611.04327-anchor-kv/">实现解读</a> · <a href="#qa-8944d4335eeacb8a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:anchor-kv" data-paper-title="Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training 基础模型 University of Arizona 2026-11-03 不同层可能存储相近信息，却使用不同坐标基。Anchor 让一组层共享一个 recurrent state，以各层可学习 read-map 变换读出，再由输入相关 gate 与局部 SWA 合并。训练时保留 interior TTT 分支，部署时才删除，不能把部署结构直接当作训练配方。依据固定 v1 §3.2、§4.1、Appendix C。 完整训练与配置矩阵成本过高，不复现（审查 DONE）。诊断使用明确提供的人工 KV 矩阵，并非 LaCT 训练。SharedKVReadout 接收外部已更新 KVState，只允许指定 writer 推进 revision；复制输入 buffer 以免调用方后续修改旧证据。多个 reader 共享该 state，各自学习 identity 初始化的线性变换与 sigmoid gate。外部 writer 的 autograd 图不会被暗自 detach。  注意力与长上下文 跨层共享状态与测试时训练 基础模型 长上下文：注意力、递归状态与记忆 本地 external writer 接口为何不等于 LaCT/Muon 的 TTT 更新已经实现？ 它只接受外部计算好的状态、校验指定writer和递增revision，并让readers学习read-map/gate。实际LaCT的inner objective、momentum/Muon和模型安装均在边界外，不能用随意SGD或固定矩阵把完整Anchor冒充通过。 教学例：把观测KV矩阵以revision=1写入可验证共享读取；reader再用revision=2写入必须拒绝。两种接口行为正确，仍没有证明7B模型的TTT训练有效。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-1ac32bc7c0c54bdc">本地 external writer 接口为何不等于 LaCT/Muon 的 TTT 更新已经实现？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aanchor-kv">Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · University of Arizona</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它只接受外部计算好的状态、校验指定writer和递增revision，并让readers学习read-map/gate。实际LaCT的inner objective、momentum/Muon和模型安装均在边界外，不能用随意SGD或固定矩阵把完整Anchor冒充通过。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把观测KV矩阵以revision=1写入可验证共享读取；reader再用revision=2写入必须拒绝。两种接口行为正确，仍没有证明7B模型的TTT训练有效。</p>
+<p class="ar-learning-sources">依据：实现与运行、检查与负控、成本判断与复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04327">原论文</a> · <a href="../../../../foundation-models/2611.04327-anchor-kv/">实现解读</a> · <a href="#qa-1ac32bc7c0c54bdc">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:semantic-block-sparse-attention" data-paper-title="Coarse Semantic Blocks for Efficient Training-Free Sparse Attention" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Coarse Semantic Blocks for Efficient Training-Free Sparse Attention 基础模型 Preferred Networks 2026-11-03 位置相邻的 token 未必语义相关。本文用归一化 key 的球面聚类建立不连续位置的语义块；每个 query 选择少量块，再对其中原始 KV 做注意力。大块降低路由开销，但选择粒度更粗。免训练指不更新预训练模型权重，不等于没有逐 prompt 建索引成本。依据固定 v1 §3、Appendix B。 大 KV、长生成和完整矩阵超出本轮单 A100/A30 或 Mac 的轻量预算，成本过高，不复现（审查 DONE）。小张量诊断检查全预算退化为独立稠密参考、非连续块、GQA 选择、原始 QKV 梯度和不可见位置零支持；build_index 实现逐 KV head 的球面 k-means；select_positions 保留 GQA 头独立 softmax 后求和、可见大小惩罚与末块超预算；sparse_attention 对选中支持执行原始 QKV 注意力并保留梯度。接口只处理单 prompt，可显式传入独立路由 query。  注意力与长上下文 免训练语义块稀疏注意力 基础模型 长上下文：注意力、递归状态与记忆 Coarse Semantic Blocks 为什么不直接把连续 token 当作一个块？ 它按归一化 key 的相似度聚类，允许相距很远的位置进入同一块。连续位置共享上下文窗口，却未必表达相似信息；语义块用一次 centroid 打分检索多个相关位置。大块也会混入低相关 token，所以降低路由开销不保证检索质量不降。 教学例：文章开头与末尾都讨论温度，两处 key 可进同一块；它们之间谈人物的 token 属别块。这个例子解释索引，不是RULER结果。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-semantic-block-sparse-attention-d240ec17" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-71133fb6ad7e7dfb">Coarse Semantic Blocks 为什么不直接把连续 token 当作一个块？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asemantic-block-sparse-attention">Coarse Semantic Blocks for Efficient Training-Free Sparse Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Preferred Networks</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它按归一化 key 的相似度聚类，允许相距很远的位置进入同一块。连续位置共享上下文窗口，却未必表达相似信息；语义块用一次 centroid 打分检索多个相关位置。大块也会混入低相关 token，所以降低路由开销不保证检索质量不降。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：文章开头与末尾都讨论温度，两处 key 可进同一块；它们之间谈人物的 token 属别块。这个例子解释索引，不是RULER结果。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04313">原论文</a> · <a href="../../../../foundation-models/2611.04313-semantic-block-sparse-attention/">实现解读</a> · <a href="#qa-71133fb6ad7e7dfb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:semantic-block-sparse-attention" data-paper-title="Coarse Semantic Blocks for Efficient Training-Free Sparse Attention" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Coarse Semantic Blocks for Efficient Training-Free Sparse Attention 基础模型 Preferred Networks 2026-11-03 位置相邻的 token 未必语义相关。本文用归一化 key 的球面聚类建立不连续位置的语义块；每个 query 选择少量块，再对其中原始 KV 做注意力。大块降低路由开销，但选择粒度更粗。免训练指不更新预训练模型权重，不等于没有逐 prompt 建索引成本。依据固定 v1 §3、Appendix B。 大 KV、长生成和完整矩阵超出本轮单 A100/A30 或 Mac 的轻量预算，成本过高，不复现（审查 DONE）。小张量诊断检查全预算退化为独立稠密参考、非连续块、GQA 选择、原始 QKV 梯度和不可见位置零支持；build_index 实现逐 KV head 的球面 k-means；select_positions 保留 GQA 头独立 softmax 后求和、可见大小惩罚与末块超预算；sparse_attention 对选中支持执行原始 QKV 注意力并保留梯度。接口只处理单 prompt，可显式传入独立路由 query。  注意力与长上下文 免训练语义块稀疏注意力 基础模型 长上下文：注意力、递归状态与记忆 GQA 内为什么先对每个 query head 做 centroid softmax，再求和和大小惩罚？ 每个头先得到自己的块偏好分布，组内求和汇总偏好，随后除以可见块大小的幂，避免大块无代价占用预算。先合并 logits 再 softmax 是非线性顺序变化，会让一头的强负分抵消另一头的支持，不是原式。 教学例：两头分别强烈支持A和B，正确求和可保留两种偏好；先平均logits可能让两者变成模糊平票。若A有8个可见token、B只有2个，还要按各自大小惩罚。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-4b6efe762227b2d8">GQA 内为什么先对每个 query head 做 centroid softmax，再求和和大小惩罚？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asemantic-block-sparse-attention">Coarse Semantic Blocks for Efficient Training-Free Sparse Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Preferred Networks</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>每个头先得到自己的块偏好分布，组内求和汇总偏好，随后除以可见块大小的幂，避免大块无代价占用预算。先合并 logits 再 softmax 是非线性顺序变化，会让一头的强负分抵消另一头的支持，不是原式。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两头分别强烈支持A和B，正确求和可保留两种偏好；先平均logits可能让两者变成模糊平票。若A有8个可见token、B只有2个，还要按各自大小惩罚。</p>
+<p class="ar-learning-sources">依据：核心公式、实现与运行；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04313">原论文</a> · <a href="../../../../foundation-models/2611.04313-semantic-block-sparse-attention/">实现解读</a> · <a href="#qa-4b6efe762227b2d8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:semantic-block-sparse-attention" data-paper-title="Coarse Semantic Blocks for Efficient Training-Free Sparse Attention" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Coarse Semantic Blocks for Efficient Training-Free Sparse Attention 基础模型 Preferred Networks 2026-11-03 位置相邻的 token 未必语义相关。本文用归一化 key 的球面聚类建立不连续位置的语义块；每个 query 选择少量块，再对其中原始 KV 做注意力。大块降低路由开销，但选择粒度更粗。免训练指不更新预训练模型权重，不等于没有逐 prompt 建索引成本。依据固定 v1 §3、Appendix B。 大 KV、长生成和完整矩阵超出本轮单 A100/A30 或 Mac 的轻量预算，成本过高，不复现（审查 DONE）。小张量诊断检查全预算退化为独立稠密参考、非连续块、GQA 选择、原始 QKV 梯度和不可见位置零支持；build_index 实现逐 KV head 的球面 k-means；select_positions 保留 GQA 头独立 softmax 后求和、可见大小惩罚与末块超预算；sparse_attention 对选中支持执行原始 QKV 注意力并保留梯度。接口只处理单 prompt，可显式传入独立路由 query。  注意力与长上下文 免训练语义块稀疏注意力 基础模型 长上下文：注意力、递归状态与记忆 路由使用归一化表示，为什么最终不能直接拿 centroid 或归一化 key 计算 attention？ 归一化球面表示只用于选择支持；最终attention仍须原始QKV和缩放点积。用centroid代替成员value会压缩掉各token内容，用归一化key则改变attention幅值。全预算退化稠密参考是检查这一边界的负控。 教学例：两个同方向key范数分别1和10，路由可把它们放一块；原始attention仍可能更重视范数10的token。把两者都归一化就删除了这一差别。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-cd74fc8a1e3d6afc">路由使用归一化表示，为什么最终不能直接拿 centroid 或归一化 key 计算 attention？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asemantic-block-sparse-attention">Coarse Semantic Blocks for Efficient Training-Free Sparse Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Preferred Networks</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>归一化球面表示只用于选择支持；最终attention仍须原始QKV和缩放点积。用centroid代替成员value会压缩掉各token内容，用归一化key则改变attention幅值。全预算退化稠密参考是检查这一边界的负控。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个同方向key范数分别1和10，路由可把它们放一块；原始attention仍可能更重视范数10的token。把两者都归一化就删除了这一差别。</p>
+<p class="ar-learning-sources">依据：核心公式、检查与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04313">原论文</a> · <a href="../../../../foundation-models/2611.04313-semantic-block-sparse-attention/">实现解读</a> · <a href="#qa-cd74fc8a1e3d6afc">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:semantic-block-sparse-attention" data-paper-title="Coarse Semantic Blocks for Efficient Training-Free Sparse Attention" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Coarse Semantic Blocks for Efficient Training-Free Sparse Attention 基础模型 Preferred Networks 2026-11-03 位置相邻的 token 未必语义相关。本文用归一化 key 的球面聚类建立不连续位置的语义块；每个 query 选择少量块，再对其中原始 KV 做注意力。大块降低路由开销，但选择粒度更粗。免训练指不更新预训练模型权重，不等于没有逐 prompt 建索引成本。依据固定 v1 §3、Appendix B。 大 KV、长生成和完整矩阵超出本轮单 A100/A30 或 Mac 的轻量预算，成本过高，不复现（审查 DONE）。小张量诊断检查全预算退化为独立稠密参考、非连续块、GQA 选择、原始 QKV 梯度和不可见位置零支持；build_index 实现逐 KV head 的球面 k-means；select_positions 保留 GQA 头独立 softmax 后求和、可见大小惩罚与末块超预算；sparse_attention 对选中支持执行原始 QKV 注意力并保留梯度。接口只处理单 prompt，可显式传入独立路由 query。  注意力与长上下文 免训练语义块稀疏注意力 基础模型 长上下文：注意力、递归状态与记忆 实现时 K=1 为什么可能读到3个历史 token，causal mask 又能证明什么？ 论文按整块累加直到达到或超过K，末块可超额，不能切块凑数。mask仅保证最终attention不读取未来位置；整prompt拟合centroid仍可能受后文key影响，不等于严格流式因果模型。未建索引的生成token也必须保留在无条件可读区域。 教学例：最高分块含3个历史token，K=1时仍取全部3个；另加当前token。若修改未来key并重建索引，早期选集可能改变，因此不能用支持为零宣称所有未来影响都被排除。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-1a5d81bbbe5d186d">实现时 K=1 为什么可能读到3个历史 token，causal mask 又能证明什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asemantic-block-sparse-attention">Coarse Semantic Blocks for Efficient Training-Free Sparse Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Preferred Networks</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>论文按整块累加直到达到或超过K，末块可超额，不能切块凑数。mask仅保证最终attention不读取未来位置；整prompt拟合centroid仍可能受后文key影响，不等于严格流式因果模型。未建索引的生成token也必须保留在无条件可读区域。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：最高分块含3个历史token，K=1时仍取全部3个；另加当前token。若修改未来key并重建索引，早期选集可能改变，因此不能用支持为零宣称所有未来影响都被排除。</p>
+<p class="ar-learning-sources">依据：检查与负控、成本判断与复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04313">原论文</a> · <a href="../../../../foundation-models/2611.04313-semantic-block-sparse-attention/">实现解读</a> · <a href="#qa-1a5d81bbbe5d186d">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:merlin" data-paper-title="Multi-State Linear Attention with Generalized Second-Order Routing" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Multi-State Linear Attention with Generalized Second-Order Routing 基础模型 Princeton University 2026-10-27 多状态线性注意力把上下文切成段，每段保留一个压缩状态。查询先读取多个状态，再加权汇总。只用位置或每段 key 均值做路由，会忽略同段 key 与查询对齐程度的分布：两个均值相同的段，可能只有一个含特别匹配的 key。MERLIN 在独立、较小维度的 routing 投影上保存 key 的均值和原始二阶矩，恢复每个查询的对齐均值及方差，再把两路 softmax 分布按门控混合。它改变的是段级 readout 的汇总，不是用二阶矩替换原模型的递归记忆，也不是精确还原完整 softmax 注意力。 完整训练与长上下文评测：成本过高，不复现（审查 DONE）；本地状态：L1 路由公式组件，diagnostic only。只验证由外部 routing keys / queries 和分段 readout 计算权重，不实现完整线性注意力层或 LLM。完整训练与长上下文评测：成本过高，不复现（审查 DONE）；不接入 evolve 晋级。组件接受等长分段的 routing keys，计算矩统计、对齐分数、两路权重和外部 readout 汇总。  注意力与长上下文 多状态线性注意力与段级路由 基础模型 长上下文：注意力、递归状态与记忆 为什么分段 key 均值相同，多状态注意力仍需要区别对待？ 均值只描述平均对齐，不能区分段内是否存在很强但被其他 keys 抵消的匹配。MERLIN额外保存原始二阶矩，从中计算特定query方向的对齐方差，再与均值路由混合。这是增加段级路由信息，不是恢复每个token的完整attention。 教学例子：一维两段keys分别为[-2,2]与[0,0]，均值都是0；query为1时，前者对齐方差4，后者0，均值路由看不出差别。 2026-10-30">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
 <span id="paper-foundation-models-merlin-4afaa9c4" class="ar-learning-paper-anchor"></span>

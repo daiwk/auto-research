@@ -637,6 +637,12 @@
             "核心公式",
             "本地复现与成本判断"
           ]
+        },
+        {
+          "paper": "agent-research:runtime-tickets",
+          "position": "从宿主授权收紧得到有源冻结ticket，在发送前核对接收者、对象和累计额度，先判Deny，再判Defer，最后才Allow。",
+          "tradeoff": "依赖可信宿主validator和真实副作用边界；本地仅原子CPU gate与记录链，不实现完整代理、观测账户或安全能力。",
+          "sections": ["核心公式", "数据协议与实现边界", "高成本完整实验"]
         }
       ],
       "analysis": [
@@ -665,6 +671,11 @@
             "agent-research:toolformer",
             "agent-research:rpl"
           ]
+        },
+        {
+          "title": "被允许的工具也必须受交付对象和额度约束",
+          "body": "只按工具名或接收端授权会遗漏复用合法端点的数据外泄。RuntimeTickets让宿主冻结来源可追溯的recipient/object/amount约束，再由模型无关gate逐副作用检查。它仍依赖完整可信网络边界和观察覆盖；本地HMAC前缀可校验但不能证明完整账户已sealed/closed，也不能因为callback至多一次而宣称网络exactly-once。",
+          "papers": ["agent-research:runtime-tickets", "agent-research:toolformer", "agent-research:swe-agent"]
         }
       ],
       "questions": [
@@ -711,8 +722,9 @@
           ]
         }
       ],
-      "updated": "2026-10-29",
+      "updated": "2026-11-05",
       "reviewed_papers": [
+        "agent-research:runtime-tickets",
         "agent-research:rpl",
         "agent-research:world-of-swecraft",
         "agent-research:tracer",
@@ -879,6 +891,14 @@
           "source_revisions": {
             "agent-research:rpl": "4d76525fdffa5b6b2b80c6edeca04b18238a2f018752ad63bbc3b4da41635ae8"
           }
+        },
+        {
+          "date": "2026-11-05",
+          "summary": "补入RuntimeTickets，将工具权限与具体交付合同分开：相同合法接收端仍可能承载非法对象或超额发送。逐副作用前的失败、未知、允许分支，先留记录再执行，以及不确定回调后的不重发，是与工具是否可调用不同的运行时合同；CPU负控不等于真实网络安全验收。完整实验高成本不复现，审查DONE。",
+          "papers": ["agent-research:runtime-tickets"],
+          "source_revisions": {
+            "agent-research:runtime-tickets": "821a28cc2c2133713d70603feabbb309b8f4e0f107d8e3f4bd7d3d16310c6d94"
+          }
         }
       ]
     },
@@ -991,6 +1011,24 @@
             "数据协议与实现边界",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "agent-research:meta-square",
+          "position": "冻结离线Meta-Skill，在同环境、同轨迹checkpoint上有界KEEP/EVOLVE；具体编辑任务结束即弃。",
+          "tradeoff": "可复用的是演化指导，不是所有任务共享的最终Harness；本地没有LLM演化器或知识学习。",
+          "sections": ["核心公式", "数据协议与实现边界", "高成本完整实验"]
+        },
+        {
+          "paper": "agent-research:continual-autoresearch",
+          "position": "相同任务流与预算配对持续、重置运行，运行后分别计算首解、最优曲线和实际最终选择。",
+          "tradeoff": "效率优势可与最终效果下降并存；本地仅离线评分合同，无自主研究或记忆收益验证。",
+          "sections": ["核心公式", "数据协议与实现边界", "高成本完整实验"]
+        },
+        {
+          "paper": "agent-research:rsi-dojo",
+          "position": "构建可执行训练环境，筛选过程与结果均合格的轨迹，微调自动后训练Agent。",
+          "tradeoff": "9B/35B-A3B与每任务5至10小时全矩阵高成本不复现；只收录，不声明运行时或权重能力。",
+          "sections": ["核心公式", "数据协议与实现边界", "高成本完整实验"]
         }
       ],
       "analysis": [
@@ -1040,6 +1078,11 @@
             "agent-research:reflexion",
             "agent-research:evalalloc"
           ]
+        },
+        {
+          "title": "编辑生命周期、经验持久性和模型内化不是同一条演化轴",
+          "body": "Strategist将可执行推理程序与测量经验放入跨任务库；Meta²则把跨任务保留对象限制为冻结的演化知识，避免把某个任务修复永久带到另一任务。Continual AutoResearch进一步要求把首解、搜索曲线与最终选择分别评估：更快找到0.8候选但最终选择0.5，不能写成最终提升。RSI-Dojo改变的又是模型权重学习阶段，不能把阈值过滤器或未执行环境注册视为训练完成。比较前应先固定跨任务可见状态、编辑的生效范围以及验证反馈何时可见。",
+          "papers": ["agent-research:strategist", "agent-research:meta-square", "agent-research:continual-autoresearch", "agent-research:rsi-dojo"]
         }
       ],
       "questions": [
@@ -1115,7 +1158,7 @@
           ]
         }
       ],
-      "updated": "2026-11-04",
+      "updated": "2026-11-05",
       "reviewed_papers": [
         "agent-research:rsi-opt",
         "agent-research:image-rsi",
@@ -1163,7 +1206,10 @@
         "agent-research:ruharness",
         "agent-research:crop",
         "agent-research:evalalloc",
-        "agent-research:strategist"
+        "agent-research:strategist",
+        "agent-research:meta-square",
+        "agent-research:continual-autoresearch",
+        "agent-research:rsi-dojo"
       ],
       "updates": [
         {
@@ -1298,6 +1344,16 @@
             "agent-research:strategist": "78dace5f984684a0a520bb86cb998a0799110a69997864feb631e670a0632dbe",
             "agent-research:reflexion": "1e965361376edeaffb32977018bf433c52f7192a6a8cd44509c0730cbdc53f4d",
             "agent-research:evalalloc": "04e5b9c3cea405eb2244d2e0f4f062a70ae83b5076595524c750a99f4b3629be"
+          }
+        },
+        {
+          "date": "2026-11-05",
+          "summary": "把三种常被混叫RSI的对象拆开：Meta²冻结跨任务指导，只修改当前run；Continual AutoResearch度量会话、工作区经验是否更早产生好候选，而不保证最终选得更好；RSI-Dojo用训练环境和筛选轨迹把后训练过程内化进模型，完整实验高成本不复现。Meta²与Continual AutoResearch仅实现CPU合同组件，RSI-Dojo只收录；三者均不是模型能力提升证据，完整实验高成本不复现、审查DONE。",
+          "papers": ["agent-research:meta-square", "agent-research:continual-autoresearch", "agent-research:rsi-dojo"],
+          "source_revisions": {
+            "agent-research:meta-square": "8aa494ae6aabf5476345a15f97b6c1dda0be3e4dca24503070f8fe60e1b45095",
+            "agent-research:continual-autoresearch": "c8cf62bc2d2bfd1c422c69c4d938637a720aead2aa0002c612a97b09edf8f04f",
+            "agent-research:rsi-dojo": "ab991a497c5c3e6223382482e1c10c9783aafc2c92ab41752a5faf6140dc11cc"
           }
         }
       ]

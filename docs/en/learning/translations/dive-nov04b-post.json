@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/post-training/teacher-and-context/comparison/post-training:p2-mopd": {
+      "source_sha256": "1b98f8a0bde11a5f198f0225335c72f7d7d9de3314c808d3de83e14855306950",
+      "reviewed": true,
+      "fields": {
+        "position": "Retains frozen expert task vectors as learnable optimization directions. Free student weights and coefficients share one pre-update gradient, while inference uses one materialized student.",
+        "tradeoff": "Changes more than teacher logits or merge initialization. Raw coefficient gradients, independent global clipping and zero decay determine multi-step equivalence. Full MOPD models and trajectories are not reproduced; local evidence covers the L1 update only."
+      }
+    },
+    "dive/post-training/teacher-and-context/comparison/post-training:targeted-guidance": {
+      "source_sha256": "5a3ab043018b93cc2e1f1516924d30c1f7fc1d856920119f5feb669bfe7c9ead",
+      "reviewed": true,
+      "fields": {
+        "position": "Adds feedback before failed agent turns, using full-vocabulary reverse KL toward a feedback-conditioned same-weight teacher while retaining ordinary per-criterion RL rewards.",
+        "tradeoff": "Distills only at failures and normalizes by all response tokens; satisfying all criteria restores the original RL objective. No actual judge, feedback screening or agent trajectories are supplied, so lower loss is not coding improvement."
+      }
+    },
+    "dive/post-training/teacher-and-context/analysis/2": {
+      "source_sha256": "a8965da81f5f86509c0320eb8acf192ef3f245aa56f755856776af9025625aa4",
+      "reviewed": true,
+      "fields": {
+        "title": "Teachers can supply logits and parameter directions, but the evidence paths are distinct",
+        "body": "MOPD organizes domain-teacher supervision on student trajectories; P²-MOPD additionally retains task vectors from the expert bank as continuously learned directions. Teacher selection determines who supplies token feedback, whereas parameter priors also change movement in weight space. Free B can leave the task-vector span while coefficients learn low-dimensional directions, and export remains a single student. The paper's support-restricted MOPD surrogate, shared unclipped gradient and two-channel optimizer ordering have separate contracts; a legacy candidate-mixture interface is not that complete training pipeline."
+      }
+    },
+    "dive/post-training/teacher-and-context/analysis/3": {
+      "source_sha256": "7845087585db8cebb45e617aa363ab244019a439cc888ac45244ee86f8420e86",
+      "reviewed": true,
+      "fields": {
+        "title": "Where privileged context acts matters as much as whether a teacher exists",
+        "body": "OPSD separates student-visible problems from teacher-only references. Targeted Guidance instead inserts feedback before failed turns and restricts auxiliary reverse KL to those turns while retaining ordinary criterion RL. Sparse gating chooses gradient locations; whole-response-token normalization controls each rollout's overall scale. They are not equivalent to dropping tokens and recomputing a mean. Exact recovery of the original RL loss without failures is a numerical contract, not evidence that feedback was screened or coding improved."
+      }
+    },
+    "dive/post-training/teacher-and-context/question/parameter-prior-not-teacher-mixture": {
+      "source_sha256": "f901eb236005cbc713fb681a04f304092fd823d71a41dd955ba6992556c6e9b1",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a larger P²-MOPD expert coefficient mean a larger MOPD token-mixture weight for that teacher?",
+        "answer": "No. A parameter-prior coefficient multiplies a fixed weight-space task vector and changes the student's update direction. Routing or mixture coefficients operate on output supervision distributions. P²-MOPD still needs domain-teacher scoring on student trajectories; a direction coefficient cannot replace that distribution or be read as the same confidence measure.",
+        "example": "Teaching example: Moving a medical task-vector coefficient from 0.25 to 0.3 does not mix every token's medical-teacher probability from 25% to 30%; a neural network's weight-to-output map is nonlinear."
+      }
+    },
+    "dive/post-training/teacher-and-context/question/feedback-mask-not-global-privilege": {
+      "source_sha256": "a3c71fbbfaac25254a5f5c0bf9a3e98b599bc36b049583c17568002e20b9afdc",
+      "reviewed": true,
+      "fields": {
+        "question": "Can OPSD and Targeted Guidance both be reduced to whole-trajectory teacher KL because both provide extra context?",
+        "answer": "No. Targeted Guidance applies full-vocabulary student-to-frozen-teacher KL only at criterion-failing agent turns, keeps all valid response tokens in the denominator and retains ordinary RL rewards. A privileged OPSD reference does not automatically supply these local-failure contracts. Extra information belongs only in the training teacher, not in a deployed student's history as a hint about future errors.",
+        "example": "Teaching example: One failed token with KL 2 among 100 response tokens contributes 2/100. Removing the other 99 tokens before averaging gives 2 and changes the intended strength."
+      }
+    },
+    "dive/post-training/teacher-and-context/update/2026-11-05/1": {
+      "source_sha256": "a190eb6e90e55c3aa6a7e6be9933fc47c0c639531428fd6e90b1800335792d73",
+      "reviewed": true,
+      "fields": {
+        "summary": "Adds P²-MOPD's parameter-prior channels and Targeted Guidance's failed-turn feedback against MOPD teacher supervision and OPSD privileged context, retaining separate update directions, original denominators and cost-deferred full-experiment boundaries."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/comparison/post-training:shuffled-opsd": {
+      "source_sha256": "bb7e5c1c55ac3b0b74a82a9ffd42b1125f90fe14f7083df9c349273a797dab0c",
+      "reviewed": true,
+      "fields": {
+        "position": "Changes shared problem order for both student sampling and teacher scoring while keeping a complete unrelated example at fixed offset 111 as teacher-only context, using upper-capped signed vocabulary supervision.",
+        "tradeoff": "Changes shared inputs and visited states, not already generated trajectories. Word multisets do not guarantee identical token budgets. Negative terms and equal-response reduction are not ordinary KL; full mathematical evaluation still uses intact problems."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/analysis/4": {
+      "source_sha256": "1908757e2d2a37b64a643256f2b12e0df87f4cc263daf14c99310cb163b8b4f1",
+      "reviewed": true,
+      "fields": {
+        "title": "Even on student trajectories, the problem condition changes which states are visited",
+        "body": "GKD supervises prefixes actually visited by the student without requiring one unique divergence. Shuffled OPSD makes the shared problem a design variable: the same T(x) determines both student sampling and teacher scoring, while a fixed unrelated reference appears only in the teacher. Shuffling only teacher inputs or generated continuations changes that structure. Its signed pointwise cap retains negatives rather than ordinary KL, so a negative total can be intentional. State source, shared input, privileged context and the numerical objective remain separate checks; passing a local loss test does not establish mathematical improvement."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/question/shared-input-shuffle-not-offpolicy": {
+      "source_sha256": "14f808449041867f6376448a26a230de4aab72225a9e886bf25ca43f9182e2da",
+      "reviewed": true,
+      "fields": {
+        "question": "Does shuffling the problem in Shuffled OPSD make supervision off-policy under GKD's student-trajectory principle?",
+        "answer": "Not by itself. If the student actually samples from the transformed shared problem and the teacher scores that same problem and sampled prefix, supervision still concerns student-visited states. Changed training inputs, teacher-only references and the capped objective remain separate issues. Caching intact-problem trajectories and changing only the teacher's problem breaks condition alignment.",
+        "example": "Teaching example: The student samples y from coins red five contains box and the teacher scores the same T(x),y prefix. A student that actually saw the intact problem paired with a teacher seeing the shuffled one is a different condition."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/update/2026-11-05/3": {
+      "source_sha256": "e4cf8775a38216125b672e688e5261486591cd504dc5df419f4a8c12efc60561",
+      "reviewed": true,
+      "fields": {
+        "summary": "Adds Shuffled OPSD's shared-problem transformation against GKD's student-visited-prefix principle, separating fixed reference pairing, signed upper capping and intact-problem evaluation without calling input perturbation or L1 gradients a capability reproduction."
+      }
+    },
+    "dive/post-training/reward-and-credit/comparison/post-training:dars-density": {
+      "source_sha256": "b9661a6621e4e625865f19a67b49c8646dca7417381e4c6d49abdb645ce360b1",
+      "reviewed": true,
+      "fields": {
+        "position": "Computes within-prompt Gaussian KDE over outcome representations including self, divides nonnegative rewards by density before normalization and leaves the GRPO objective unchanged.",
+        "tradeoff": "Terminal-outcome crowding is not token confidence or reward priority. Duplicates retain multiplicity at narrow bandwidth; constant raw rewards need not remain constant after scaling. Std and zero-variance policies are explicit, and L1 checks do not establish learned reward-proportional behavior."
+      }
+    },
+    "dive/post-training/reward-and-credit/analysis/3": {
+      "source_sha256": "35759905e7a4a8566f7403306f2c8b6424b53ecdaac295c78972e9cb859713ee",
+      "reviewed": true,
+      "fields": {
+        "title": "Outcome density is a group-level coordinate, not token risk or primary-reward priority",
+        "body": "TACO reduces positive token credit by local tail risk while preserving negative credit. CONCUR projects within-group auxiliary advantages to respect primary-reward order. DARS acts elsewhere: crowding among outcome representations under the same prompt. It scales nonnegative terminal rewards by Gaussian density including self before computing group advantages. Equal raw rewards can become unequal after density scaling; zero variance concerns the scaled rewards. Duplicate points retain multiplicity at narrow bandwidth instead of universally approaching density one. Embeddings, bandwidth and std conventions define this coordinate; synthetic KDE checks are not policy coverage or image-quality evidence."
+      }
+    },
+    "dive/post-training/reward-and-credit/question/outcome-density-not-token-or-priority": {
+      "source_sha256": "609e3660f28aaf06dab57a3e0e029f9274ba66489c816ca289badbadd1e64db8",
+      "reviewed": true,
+      "fields": {
+        "question": "With every raw reward equal to one, must DARS yield the same zero advantages as unmodified group normalization?",
+        "answer": "No. Unequal densities can turn equal raw rewards into unequal scaled values, yielding nonzero relative signals after normalization. The zero-variance check must use scaled rewards. TACO calibrates positive credit by token risk, while CONCUR constrains auxiliary ranking by primary reward; equal raw rewards do not make either equivalent to DARS. They consume different evidence and act on different coordinates.",
+        "example": "Teaching example: For y=(0,0,100), a very narrow bandwidth and r=(1,1,1), self-inclusive densities are about (2,2,1), producing nonconstant scaled rewards (0.5,0.5,1). Three coincident outcomes instead share a density and retain constant scaled rewards."
+      }
+    },
+    "dive/post-training/reward-and-credit/update/2026-11-05/2": {
+      "source_sha256": "11204e235f61233143cb44db48d404fae398406e2815568d2c9b1d3b89338876",
+      "reviewed": true,
+      "fields": {
+        "summary": "Adds DARS alongside TACO and CONCUR, separating terminal-outcome density, positive token credit and primary-reward ordering while retaining self/duplicate handling, scaled-reward zero variance, nonnegative rewards and L1 evidence limits."
+      }
+    }
+  }
+}

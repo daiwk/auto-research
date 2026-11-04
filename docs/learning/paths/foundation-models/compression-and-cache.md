@@ -7,7 +7,7 @@ hide:
 
 # 推理压缩：权重、KV 缓存与服务带宽
 
-[基础模型](index.md) / 128 个问题 · 32 篇论文
+[基础模型](index.md) / 132 个问题 · 33 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">128 个问题 · 32 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">132 个问题 · 33 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:multi-layer-indexer" data-paper-title="Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention 基础模型 Writer AI Research, Writer Inc. 2026-11-02 DSA 层通常先扫描索引缓存、取 top-k，再执行稀疏 attention。MLI 让当前层读较早 full layer 的选择，当前索引器于是可在另一 CUDA stream 与主计算重叠。它可与 IndexCache 组合，但不是跨生成 token 复用过期选择。依据固定 v1 §3、§4、Appendix A。 成本过高，不复现（审查 DONE）。已核查 selection routing、双 stream 生命周期、IndexCache 组合、实验资源和作者代码。没有本地调度器、稀疏 kernel、SGLang 安装、代理计时器或假 metrics；不会把常数延迟模拟器宣称为生产路径。  推理与系统效率 稀疏注意力双流调度 基础模型 推理压缩：权重、KV 缓存与服务带宽 Multi-layer Indexer 为什么能让 indexer 与 attention 重叠，而普通 DSA 要串行？ 普通DSA的attention必须等本层selection完成。MLI改为消费较早full层已经产生的selection，当前索引器便可为后续消费者并行工作。改变的是依赖与消费层，不是把索引器运算凭空省掉。 教学例：第2层attention使用第1层selection时，第2层indexer可同时计算第3层将用的selection；若attention仍等自己的selection，另开stream也不能消除依赖。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<span id="paper-foundation-models-multi-layer-indexer-a806ea48" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-c9a4d310dd98f418">Multi-layer Indexer 为什么能让 indexer 与 attention 重叠，而普通 DSA 要串行？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Amulti-layer-indexer">Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Writer AI Research, Writer Inc.</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>普通DSA的attention必须等本层selection完成。MLI改为消费较早full层已经产生的selection，当前索引器便可为后续消费者并行工作。改变的是依赖与消费层，不是把索引器运算凭空省掉。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：第2层attention使用第1层selection时，第2层indexer可同时计算第3层将用的selection；若attention仍等自己的selection，另开stream也不能消除依赖。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.03768">原论文</a> · <a href="../../../../foundation-models/2611.03768-multi-layer-indexer/">实现解读</a> · <a href="#qa-c9a4d310dd98f418">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:multi-layer-indexer" data-paper-title="Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention 基础模型 Writer AI Research, Writer Inc. 2026-11-02 DSA 层通常先扫描索引缓存、取 top-k，再执行稀疏 attention。MLI 让当前层读较早 full layer 的选择，当前索引器于是可在另一 CUDA stream 与主计算重叠。它可与 IndexCache 组合，但不是跨生成 token 复用过期选择。依据固定 v1 §3、§4、Appendix A。 成本过高，不复现（审查 DONE）。已核查 selection routing、双 stream 生命周期、IndexCache 组合、实验资源和作者代码。没有本地调度器、稀疏 kernel、SGLang 安装、代理计时器或假 metrics；不会把常数延迟模拟器宣称为生产路径。  推理与系统效率 稀疏注意力双流调度 基础模型 推理压缩：权重、KV 缓存与服务带宽 retention 和 lag depth 为什么是两个不同参数？ retention决定哪些层保留索引器，lag depth沿保留索引器的full层集合回退多少个。缺少前驱的最前几个full层仍走标准schedule。把回退k个full层误写为回退k个物理层，会在稀疏retention下消费错误selection。 教学例：full层为0、4、8，lag=1时第8层读第4层selection，不是第7层；最开始第0层没有前驱，必须自己计算后再消费。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-cbe5f04d12d15ba5">retention 和 lag depth 为什么是两个不同参数？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Amulti-layer-indexer">Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Writer AI Research, Writer Inc.</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>retention决定哪些层保留索引器，lag depth沿保留索引器的full层集合回退多少个。缺少前驱的最前几个full层仍走标准schedule。把回退k个full层误写为回退k个物理层，会在稀疏retention下消费错误selection。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：full层为0、4、8，lag=1时第8层读第4层selection，不是第7层；最开始第0层没有前驱，必须自己计算后再消费。</p>
+<p class="ar-learning-sources">依据：核心公式、背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.03768">原论文</a> · <a href="../../../../foundation-models/2611.03768-multi-layer-indexer/">实现解读</a> · <a href="#qa-cbe5f04d12d15ba5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:multi-layer-indexer" data-paper-title="Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention 基础模型 Writer AI Research, Writer Inc. 2026-11-02 DSA 层通常先扫描索引缓存、取 top-k，再执行稀疏 attention。MLI 让当前层读较早 full layer 的选择，当前索引器于是可在另一 CUDA stream 与主计算重叠。它可与 IndexCache 组合，但不是跨生成 token 复用过期选择。依据固定 v1 §3、§4、Appendix A。 成本过高，不复现（审查 DONE）。已核查 selection routing、双 stream 生命周期、IndexCache 组合、实验资源和作者代码。没有本地调度器、稀疏 kernel、SGLang 安装、代理计时器或假 metrics；不会把常数延迟模拟器宣称为生产路径。  推理与系统效率 稀疏注意力双流调度 基础模型 推理压缩：权重、KV 缓存与服务带宽 MLI 与 IndexCache 组合是否等于沿用上一个生成 token 的索引？ 不是。二者复用发生在同一个当前token的不同层之间；MLI保留的full索引器仍计算当前token的新selection。跨token沿用旧selection会额外引入时间陈旧性，不是论文的跨层调度。 教学例：生成第100个token时，第4层给第8层的新selection仍来自第100个token的hidden；拿第99个token缓存来代替，会改变被审查的算法。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-c32c1710261893ed">MLI 与 IndexCache 组合是否等于沿用上一个生成 token 的索引？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Amulti-layer-indexer">Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Writer AI Research, Writer Inc.</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。二者复用发生在同一个当前token的不同层之间；MLI保留的full索引器仍计算当前token的新selection。跨token沿用旧selection会额外引入时间陈旧性，不是论文的跨层调度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：生成第100个token时，第4层给第8层的新selection仍来自第100个token的hidden；拿第99个token缓存来代替，会改变被审查的算法。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.03768">原论文</a> · <a href="../../../../foundation-models/2611.03768-multi-layer-indexer/">实现解读</a> · <a href="#qa-c32c1710261893ed">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:multi-layer-indexer" data-paper-title="Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention 基础模型 Writer AI Research, Writer Inc. 2026-11-02 DSA 层通常先扫描索引缓存、取 top-k，再执行稀疏 attention。MLI 让当前层读较早 full layer 的选择，当前索引器于是可在另一 CUDA stream 与主计算重叠。它可与 IndexCache 组合，但不是跨生成 token 复用过期选择。依据固定 v1 §3、§4、Appendix A。 成本过高，不复现（审查 DONE）。已核查 selection routing、双 stream 生命周期、IndexCache 组合、实验资源和作者代码。没有本地调度器、稀疏 kernel、SGLang 安装、代理计时器或假 metrics；不会把常数延迟模拟器宣称为生产路径。  推理与系统效率 稀疏注意力双流调度 基础模型 推理压缩：权重、KV 缓存与服务带宽 为什么一张依赖图和一次 A100 常数计时不能验收 MLI 的生产吞吐？ 真正实现要在首个消费点join事件并保持输入输出引用，防止allocator复用；还需实际SGLang生产buffer、CUDA graph及真实模型运行。原配置为8H200 TP8，大模型长上下文超出单卡预算，所以本轮只收录、不造runtime或metrics。 教学例：side stream尚未读完hidden时释放其引用，主stream可能复用同一内存，即便图上箭头正确也会产生错误。用固定sleep模拟耗时既测不到该风险，也不是模型吞吐。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-16f709b859c1316a">为什么一张依赖图和一次 A100 常数计时不能验收 MLI 的生产吞吐？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Amulti-layer-indexer">Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Writer AI Research, Writer Inc.</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>真正实现要在首个消费点join事件并保持输入输出引用，防止allocator复用；还需实际SGLang生产buffer、CUDA graph及真实模型运行。原配置为8H200 TP8，大模型长上下文超出单卡预算，所以本轮只收录、不造runtime或metrics。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：side stream尚未读完hidden时释放其引用，主stream可能复用同一内存，即便图上箭头正确也会产生错误。用固定sleep模拟耗时既测不到该风险，也不是模型吞吐。</p>
+<p class="ar-learning-sources">依据：核心公式、已核查与未实现、成本判断与复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.03768">原论文</a> · <a href="../../../../foundation-models/2611.03768-multi-layer-indexer/">实现解读</a> · <a href="#qa-16f709b859c1316a">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:fold-bias" data-paper-title="Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels 基础模型 Independent Researcher 2026-10-27 Attention Matching（AM）保留部分 keys，拟合每个保留项的静态 logit bias 和 values。标准 KV cache / attention 内核未必接收这项 bias；直接丢掉它，会改变压缩后注意力。FoldBias 在每个 head 的上下文 queries 上拟合一个共享方向，把每项 bias 写成沿该方向的 key 位移，保持 head 维度和模型自身 query 路径。 完整质量 / serving 实验：成本过高，不复现（审查 DONE）；本地诊断用合成张量检验方程，不读 checkpoint 或 benchmark。本地状态：L1 key 折叠与 value 重拟合组件，diagnostic only。不实现完整 AM 压缩、LLM prefill 或 vLLM 注入。完整质量 / serving 实验：成本过高，不复现（审查 DONE）；不宣称加速或 evolve 能力。输入必须是调用者提供的上下文 queries、实际选中的 keys、AM 已拟合 biases，以及 full-cache 参考输出；没有用任意输出张量冒称真实 AM 校准。  推理与系统效率 KV缓存压缩与静态偏置编译 基础模型 推理压缩：权重、KV 缓存与服务带宽 把静态bias移进key，为什么不可能对所有未来query都严格等价？ key位移贡献的是query的线性函数，而非零bias是与query无关的常数；两者无法在整个query空间相等。FoldBias拟合共享方向u，让上下文query的q·u尽量接近1，未来query漂移仍可能导致误差。因此它是分布相关的近似，不是通用代数恒等替换。 教学例子：若query取零向量，任何key位移产生的logit变化都为0，不可能等于非零bias0.8；若某个query满足q·u=1，则该query的bias可精确表达。 2026-10-30">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-fold-bias-1b8893e9" class="ar-learning-paper-anchor"></span>

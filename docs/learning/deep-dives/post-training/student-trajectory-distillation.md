@@ -7,7 +7,7 @@ hide:
 
 # 轨迹蒸馏：采样者、提案与散度方向分开看
 
-[LLM 后训练](../index.md) · 更新 2026-11-04 · 42 篇主题资料 / 8 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-05 · 43 篇主题资料 / 9 篇重点对照
 
 “on-policy”描述监督发生在哪些状态，FKL/RKL/JSD描述在这些状态怎样比较分布。GKD和MiniLLM建立这两个轴，DrOPD、AP-OPD再调整纠错位置或强度，Semi-OPD与学习信号诊断则提醒：离线复用和残余损失各有不同含义。 MPOPD再把采样者变成可学习proposal：几何混合是提案target，学生仍向教师做RKL，二者不能混成同一个蒸馏分布。
 
@@ -33,6 +33,7 @@ hide:
 | [When Do We Need On-Policy Distillation? Distilling on Offline Student Rollouts Is Often Better](../../../post-training/2610.11291-semi-opd/README.md) · [原始来源](https://arxiv.org/abs/2610.11291)<br>章节：背景与主要改动、核心公式、代码映射与复现边界 | 固定初始学生轨迹与教师评分，但每步重算当前学生logp及优势。 | 省去重复采集，却不会自动覆盖新学生访问的全部状态；短预算checkpoint只验训练链路。 |
 | [Why On-Policy Distillation Sometimes Fails: Vanishing Learning Signals](../../../post-training/2610.11247-opd-learning-signals/README.md) · [原始来源](https://arxiv.org/abs/2610.11247)<br>章节：背景与主要改动、核心公式、代码映射与复现边界 | 同时观察残余loss、截断前梯度、两折occupancy、参数位移与CKA，区分损失和可用学习信号。 | 这是相关性诊断设施，不是新优化算法；本地三步运行不复现长平台期，也不能证明失败原因。 |
 | [Proposing Better Rollouts for On-Policy Distillation](../../../post-training/2610.36477-mpopd/README.md) · [原始来源](https://arxiv.org/abs/2610.36477v2)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 用独立proposal拟合更新后师生的归一化几何混合，学生沿proposal轨迹以滞后一token的冻结单步ratio加权RKL。 | ratio不是累积乘积；每轮proposal从更新后学生重置。完整采样、LM复制和优化器编排未实现，小张量loss不能证明真实on-policy。 |
+| [Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation?](../../../post-training/2611.04958-shuffled-opsd/README.md) · [原始来源](https://arxiv.org/abs/2611.04958v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射 | 同时改变学生采样和教师评分的共享问题词序，保留固定111偏移的完整其他题示例为教师私有上下文，使用逐词表有符号上截断监督。 | 变的是共享输入与访问状态，不是重排已采轨迹；词multiset不保证token预算不变。负项与response等权归约不能被普通KL替代，完整数学评测仍用原始题。 |
 
 </div>
 
@@ -61,6 +62,12 @@ GKD让教师在学生访问的前缀上监督，MiniLLM进一步选定学生到�
 GKD/MiniLLM让teacher在学生访问状态上监督，MPOPD再训练独立proposal改变可达性；SpecOPD则针对推测draft，把固定reference作为外层锚点，每步重采内层draft分支以打破整响应验证依赖。reference固定不等于分支off-policy；但这也不是完全自由的学生轨迹。其E2E-TV优化前缀存活，需要完整teacher质量，且teacher query必须读私有前驱历史；loss通过不能证明混合注意力target已经正确共享状态或真实serving更快。
 
 对照来源：[specopd](../../../post-training/2611.02846-specopd/README.md) · [gkd](../../../post-training/2306.13649-gkd/README.md) · [mpopd](../../../post-training/2610.36477-mpopd/README.md)
+
+### 同为学生轨迹，题目条件本身也会改变访问状态
+
+GKD强调教师应在学生实际访问的前缀上监督，但不固定唯一散度。Shuffled OPSD把共享题目也作为设计变量：相同T(x)同时决定学生采样与教师评分，固定其他题参考只在teacher中出现。只打乱教师输入或生成完再打乱续写，都不是该条件结构。其signed pointwise cap保留负项，与普通KL不同；负总损失可以来自定义而非错误。状态来源、共享输入、教师私有信息和数值目标仍需分别检查，局部loss通过不能证明数学能力提升。
+
+对照来源：[shuffled-opsd](../../../post-training/2611.04958-shuffled-opsd/README.md) · [gkd](../../../post-training/2306.13649-gkd/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -116,9 +123,23 @@ GKD/MiniLLM让teacher在学生访问状态上监督，MPOPD再训练独立propos
 
     对照来源：[mpopd](../../../post-training/2610.36477-mpopd/README.md) · [gkd](../../../post-training/2306.13649-gkd/README.md) · [minillm](../../../post-training/2306.08543-minillm/README.md)
 
+### GKD要求沿学生轨迹监督，Shuffled OPSD把题目打乱后是不是就变成了off-policy？ {#cross-shared-input-shuffle-not-offpolicy}
+
+??? note "展开答案与例子"
+
+    **答案：** 不因此变成off-policy。若学生确实在变换后的共享问题上采样，教师评分同一问题和同一已采前缀，监督仍来自学生实际访问状态。需要另外区分训练输入发生变化、teacher私有示例和截断损失；把原题轨迹缓存后仅改教师题目才改变了条件对齐。
+
+    **教学例子：** 教学例：学生在“coins red five contains box”上生成y，教师也评分T(x),y的同一前缀；若学生实际读的是原题，教师却读打乱题，已不是同一条件实验。
+
+    对照来源：[shuffled-opsd](../../../post-training/2611.04958-shuffled-opsd/README.md) · [gkd](../../../post-training/2306.13649-gkd/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-05** · 补入Shuffled OPSD的共享题目变换，对照GKD的学生访问前缀原则；明确固定参考配对、有符号上截断及原题评测，未把输入扰动或L1梯度检查当作能力复现。
+
+涉及：[shuffled-opsd](../../../post-training/2611.04958-shuffled-opsd/README.md) · [gkd](../../../post-training/2306.13649-gkd/README.md)
 
 **2026-11-04** · 精读SpecOPD，分开固定reference外层、当前draft内层分支及E2E-TV目标；相对GKD/MPOPD补充采集依赖这一轴，保留teacher完整质量、祖先隔离与predecessor读出，不把L1张量通过写成serving加速。
 
@@ -132,10 +153,11 @@ GKD/MiniLLM让teacher在学生访问状态上监督，MPOPD再训练独立propos
 
 覆盖 40 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 42 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 43 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
+- [Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation?](../../../post-training/2611.04958-shuffled-opsd/README.md)
 - [SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding](../../../post-training/2611.02846-specopd/README.md)
 - [On-Policy Self-Training: Data-Free Self-Improvement in Large Language Models](../../../post-training/2610.32770-opst/README.md)
 - [UserArena: Benchmarking Interactive User Simulation for Long-Horizon Shopping Agents](../../../post-training/2610.30932-userarena-optd/README.md)

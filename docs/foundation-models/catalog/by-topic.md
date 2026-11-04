@@ -87,20 +87,13 @@
 
 ## 注意力与长上下文
 
-### 多状态线性注意力
+### 跨层共享状态与测试时训练
 
-- [Multi-State Linear Attention with Generalized Second-Order Routing](../../foundation-models/2610.37645-merlin/README.md)（`merlin`）：多状态线性注意力把上下文切成段，每段保留一个压缩状态。查询先读取多个状态，再加权汇总。只用位置或每段 key 均值做路由，会忽略同段 key 与查询对齐程度的分布：两个均值相同的段，可能只有一个含特别匹配的 key。
-
-### 查询条件测试时训练
-
-- [Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training](../../foundation-models/2610.36794-select-ttt/README.md)（`select-ttt`）：In-Place TTT 把 MLP 下投影作为 fast weights，边读上下文边写入；对所有 chunk 使用相同学习率会把无关内容也等强写进去。Select-TTT 不新增检索编码器或可学习门控，而从冻结输出头读取上下文 hidden 对**用户问题 token**的预测程度，为每个 chunk 生成连续写入倍率。
-
-### 注意力内核与反向传播
-
-- [LazyFlash: Forward-Dense, Backward-Sparse Attention for Accelerated Long-Context Fine-Tuning](../../foundation-models/2610.31911-lazyflash/README.md)（`lazyflash`）：与稀疏前向attention不同，LazyFlash保留训练和部署前向完全dense。它按query block的dO Frobenius范数衡量梯度贡献，用gradient-mass budget约束预计丢弃量，并importance采样反向block。必须在tiled FlashAttention反向内部跳过内存访问/计算，才能兑现论文速度；用PyTorch dense backward后置零或toy mask不构成该方法的低成本完整实现。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training](../../foundation-models/2611.04327-anchor-kv/README.md)（`anchor-kv`）：不同层可能存储相近信息，却使用不同坐标基。Anchor 让一组层共享一个 recurrent state，以各层可学习 read-map 变换读出，再由输入相关 gate 与局部 SWA 合并。训练时保留 interior TTT 分支，部署时才删除，不能把部署结构直接当作训练配方。依据固定 v1 §3.2、§4.1、Appendix C。
 
 ### 稀疏、门控与动态注意力
 
+- [Coarse Semantic Blocks for Efficient Training-Free Sparse Attention](../../foundation-models/2611.04313-semantic-block-sparse-attention/README.md)（`semantic-block-sparse-attention`）：位置相邻的 token 未必语义相关。本文用归一化 key 的球面聚类建立不连续位置的语义块；每个 query 选择少量块，再对其中**原始** KV 做注意力。大块降低路由开销，但选择粒度更粗。免训练指不更新预训练模型权重，不等于没有逐 prompt 建索引成本。依据固定 v1 §3、Appendix B。
 - [OpenAttention: One Percent Is Enough with Tail Proxies](../../foundation-models/2610.30951-openattention/README.md)（`openattention`）：低读取率稀疏注意力不只需要选出少量重要 KV，还需要处理未读取的尾部。OpenAttention 在 query 二阶矩定义的几何空间内聚类，以 ErrorGate 估计簇内代理误差并分配精确读取预算；每个簇的未读部分成为一个带计数的均值代理。它不是单纯的 top-k 截断或均值池化。
 - [Orthros: Phase-Aware Heterogeneous Attention for Efficient Transformers](../../reproductions/2610.13735-orthros/README.md)（`orthros`）：长 prompt、短回答的推理中，prefill 与 decode 的计算角色不同。Orthros 保留两个 token 流：base tokens 对所有位置执行固定窗口 SWA，并构建完整的逐层 KV；output-specific tokens 只在需预测输出的位置出现，用共享 KV 做全历史 causal cross-attention。
 - [Register Tokens for Bounded-State Reasoning in Diffusion Language Models](../../foundation-models/2609.16372-register-tokens-dllm/README.md)（`register-tokens-dllm`）：清除上一段文本后仅携带固定数量的连续 register hidden states，让扩散语言模型跨 chunk 推理。
@@ -113,6 +106,18 @@
 - [Gated Attention for Large Language Models: Non-linearity, Sparsity, and Attention-Sink-Free](../../reproductions/2505.06708-gated-attention/README.md)（`gated-attention`）：softmax attention 的 value aggregation 到 output projection 之间基本是线性映射。论文系统比较 30 种门控变体，发现最简单稳定的方案是在每个 attention head 的 SDPA 输出后施加 query-dependent sigmoid gate：既增加非线性，也能稀疏抑制无用 head 输出。
 - [MoBA: Mixture of Block Attention for Long-Context LLMs](../../reproductions/2502.13189-moba/README.md)（`moba`）：把序列切成 block，以可微 router 为每个 query 选择少量相关块，同时保留当前因果块。
 - [Native Sparse Attention: Hardware-Aligned and Natively Trainable Sparse Attention](../../reproductions/2502.11089-native-sparse-attention/README.md)（`native-sparse-attention`）：全注意力的计算和 KV 读取随上下文长度平方增长。NSA 不是在训练后裁剪 attention，而是从预训练开始并行学习三条路径：压缩历史块负责全局轮廓，query 相关的 block selection 恢复重要细节，滑窗保留近期精确信息；三路输出再由可学习门控融合。
+
+### 多状态线性注意力
+
+- [Multi-State Linear Attention with Generalized Second-Order Routing](../../foundation-models/2610.37645-merlin/README.md)（`merlin`）：多状态线性注意力把上下文切成段，每段保留一个压缩状态。查询先读取多个状态，再加权汇总。只用位置或每段 key 均值做路由，会忽略同段 key 与查询对齐程度的分布：两个均值相同的段，可能只有一个含特别匹配的 key。
+
+### 查询条件测试时训练
+
+- [Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training](../../foundation-models/2610.36794-select-ttt/README.md)（`select-ttt`）：In-Place TTT 把 MLP 下投影作为 fast weights，边读上下文边写入；对所有 chunk 使用相同学习率会把无关内容也等强写进去。Select-TTT 不新增检索编码器或可学习门控，而从冻结输出头读取上下文 hidden 对**用户问题 token**的预测程度，为每个 chunk 生成连续写入倍率。
+
+### 注意力内核与反向传播
+
+- [LazyFlash: Forward-Dense, Backward-Sparse Attention for Accelerated Long-Context Fine-Tuning](../../foundation-models/2610.31911-lazyflash/README.md)（`lazyflash`）：与稀疏前向attention不同，LazyFlash保留训练和部署前向完全dense。它按query block的dO Frobenius范数衡量梯度贡献，用gradient-mass budget约束预计丢弃量，并importance采样反向block。必须在tiled FlashAttention反向内部跳过内存访问/计算，才能兑现论文速度；用PyTorch dense backward后置零或toy mask不构成该方法的低成本完整实现。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ### 序列压缩与可微测试时回归
 
@@ -337,6 +342,10 @@
 - [BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models](../../reproductions/2301.12597-blip2/README.md)（`blip2`）：BLIP-2 冻结已有视觉 encoder 和 LLM，只训练轻量 Q-Former。固定数量的可学习 query 通过 cross-attention 从视觉 token 提取与语言最相关的信息；第一阶段做图文表征学习，第二阶段将 query 输出投影成冻结 LLM 的 soft visual prompt。
 
 ## 推理与系统效率
+
+### 稀疏注意力选择与服务重叠
+
+- [Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention](../../foundation-models/2611.03768-multi-layer-indexer/README.md)（`multi-layer-indexer`）：DSA 层通常先扫描索引缓存、取 top-k，再执行稀疏 attention。MLI 让当前层读较早 full layer 的选择，当前索引器于是可在另一 CUDA stream 与主计算重叠。它可与 IndexCache 组合，但不是跨生成 token 复用过期选择。依据固定 v1 §3、§4、Appendix A。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ### 编译器正确性与分层故障隔离
 

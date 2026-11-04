@@ -7,7 +7,7 @@ hide:
 
 # 列表与业务控制：重排、出价和长期价值
 
-[搜广推](index.md) / 148 个问题 · 37 篇论文
+[搜广推](index.md) / 152 个问题 · 38 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">148 个问题 · 37 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">152 个问题 · 38 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:onetrans-gsr" data-paper-title="OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer 搜广推与 LLM 应用 ByteDance 2026-11-03 传统Generator–Evaluator系统先用多种规则生成候选整页，再由小模型选择。OneTrans-GSR以一个自回归policy从统一候选池顺序选择商品、短视频、直播与广告，重排/混排一起处理。较大的整页RM仅用于离线训练；在线按累计序列logp选择生成页，不按RM给所有页重新打分。硬约束仍在解码保留，软业务偏好进入奖励，不是“全部规则都取消”。 完整实验成本过高，不复现（审查 DONE）；未训练OneTrans策略、RM或执行线上A/B，未接入执行型Evolve。L1 CPU约束/奖励算术参考，diagnostic only。完整实验成本过高，不复现（审查 DONE）；未训练OneTrans策略、RM或执行线上A/B，未接入执行型Evolve。business_logits接收外部logits、当前prefix、显式规则与未来tag可用数量上界；实现局部quota、去重、相似度和广告偏置。geometric_reward/separate_advantages对应Eq.11/13–15的float64 CPU数学参考；  重排与混排 生成式整页策略与多目标后训练 搜广推 列表与业务控制：重排、出价和长期价值 OneTrans-GSR用统一policy生成整页，为何不是取消所有业务规则？ 它替换的是多generator加evaluator的整页搜索结构。强制要求仍以硬mask执行，有限配额偏置和多样性/广告偏置仍作用于logit，软业务偏好另外影响训练reward。学习policy和保留规则并不冲突。 教学例：policy可以统一决定商品和视频的顺序，但已展示item仍不能再次选择；禁止重复的mask不应由模型是否记住规则来决定。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 列表与业务控制：重排、出价和长期价值</a></p>
+<span id="paper-recommendation-onetrans-gsr-bccf9567" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-07ffc89d8e76250b">OneTrans-GSR用统一policy生成整页，为何不是取消所有业务规则？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aonetrans-gsr">OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · ByteDance</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它替换的是多generator加evaluator的整页搜索结构。强制要求仍以硬mask执行，有限配额偏置和多样性/广告偏置仍作用于logit，软业务偏好另外影响训练reward。学习policy和保留规则并不冲突。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：policy可以统一决定商品和视频的顺序，但已展示item仍不能再次选择；禁止重复的mask不应由模型是否记住规则来决定。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04720v1">原论文</a> · <a href="../../../../recommendation-components/2611.04720-onetrans-gsr/">实现解读</a> · <a href="#qa-07ffc89d8e76250b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:onetrans-gsr" data-paper-title="OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer 搜广推与 LLM 应用 ByteDance 2026-11-03 传统Generator–Evaluator系统先用多种规则生成候选整页，再由小模型选择。OneTrans-GSR以一个自回归policy从统一候选池顺序选择商品、短视频、直播与广告，重排/混排一起处理。较大的整页RM仅用于离线训练；在线按累计序列logp选择生成页，不按RM给所有页重新打分。硬约束仍在解码保留，软业务偏好进入奖励，不是“全部规则都取消”。 完整实验成本过高，不复现（审查 DONE）；未训练OneTrans策略、RM或执行线上A/B，未接入执行型Evolve。L1 CPU约束/奖励算术参考，diagnostic only。完整实验成本过高，不复现（审查 DONE）；未训练OneTrans策略、RM或执行线上A/B，未接入执行型Evolve。business_logits接收外部logits、当前prefix、显式规则与未来tag可用数量上界；实现局部quota、去重、相似度和广告偏置。geometric_reward/separate_advantages对应Eq.11/13–15的float64 CPU数学参考；  重排与混排 生成式整页策略与多目标后训练 搜广推 列表与业务控制：重排、出价和长期价值 为何先分别标准化RM奖励与规则奖励，而不是先相加再标准化？ 两种信号尺度和组内方差不同，先混合会让高方差的一项主导；SeparateStandardization先各自中心化/按人口方差归一化，再以lambda组合。跨RM目标的几何聚合又是更前面的独立步骤，需要先minmax和正值floor。 教学例：RM整组恒定、规则分为0/1/2时，RM优势应全0，最终只保留lambda乘规则优势；不能因为RM原值100就制造巨大的共同学习信号。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 列表与业务控制：重排、出价和长期价值</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-5d527a3b8c4a0f2e">为何先分别标准化RM奖励与规则奖励，而不是先相加再标准化？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aonetrans-gsr">OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · ByteDance</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>两种信号尺度和组内方差不同，先混合会让高方差的一项主导；SeparateStandardization先各自中心化/按人口方差归一化，再以lambda组合。跨RM目标的几何聚合又是更前面的独立步骤，需要先minmax和正值floor。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：RM整组恒定、规则分为0/1/2时，RM优势应全0，最终只保留lambda乘规则优势；不能因为RM原值100就制造巨大的共同学习信号。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04720v1">原论文</a> · <a href="../../../../recommendation-components/2611.04720-onetrans-gsr/">实现解读</a> · <a href="#qa-5d527a3b8c4a0f2e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:onetrans-gsr" data-paper-title="OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer 搜广推与 LLM 应用 ByteDance 2026-11-03 传统Generator–Evaluator系统先用多种规则生成候选整页，再由小模型选择。OneTrans-GSR以一个自回归policy从统一候选池顺序选择商品、短视频、直播与广告，重排/混排一起处理。较大的整页RM仅用于离线训练；在线按累计序列logp选择生成页，不按RM给所有页重新打分。硬约束仍在解码保留，软业务偏好进入奖励，不是“全部规则都取消”。 完整实验成本过高，不复现（审查 DONE）；未训练OneTrans策略、RM或执行线上A/B，未接入执行型Evolve。L1 CPU约束/奖励算术参考，diagnostic only。完整实验成本过高，不复现（审查 DONE）；未训练OneTrans策略、RM或执行线上A/B，未接入执行型Evolve。business_logits接收外部logits、当前prefix、显式规则与未来tag可用数量上界；实现局部quota、去重、相似度和广告偏置。geometric_reward/separate_advantages对应Eq.11/13–15的float64 CPU数学参考；  重排与混排 生成式整页策略与多目标后训练 搜广推 列表与业务控制：重排、出价和长期价值 每条局部配额规则都通过，就能保证剩下所有位置一定能填满吗？ 不能。不同tag或内容类型的配额可能互相冲突；论文明确局部检查不是全局可行性证明。软规则只是有限惩罚，mandatory才硬mask；全mask时必须报告不可行，不能静默放宽规则后还声称严格约束。 教学例：最后一个位置同时被两条规则要求必须是互斥的两种内容，即使较早每条局部检查各自通过，最终仍可能没有合法候选。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 列表与业务控制：重排、出价和长期价值</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-e8d9d03057ea0437">每条局部配额规则都通过，就能保证剩下所有位置一定能填满吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aonetrans-gsr">OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · ByteDance</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。不同tag或内容类型的配额可能互相冲突；论文明确局部检查不是全局可行性证明。软规则只是有限惩罚，mandatory才硬mask；全mask时必须报告不可行，不能静默放宽规则后还声称严格约束。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：最后一个位置同时被两条规则要求必须是互斥的两种内容，即使较早每条局部检查各自通过，最终仍可能没有合法候选。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04720v1">原论文</a> · <a href="../../../../recommendation-components/2611.04720-onetrans-gsr/">实现解读</a> · <a href="#qa-e8d9d03057ea0437">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:onetrans-gsr" data-paper-title="OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer 搜广推与 LLM 应用 ByteDance 2026-11-03 传统Generator–Evaluator系统先用多种规则生成候选整页，再由小模型选择。OneTrans-GSR以一个自回归policy从统一候选池顺序选择商品、短视频、直播与广告，重排/混排一起处理。较大的整页RM仅用于离线训练；在线按累计序列logp选择生成页，不按RM给所有页重新打分。硬约束仍在解码保留，软业务偏好进入奖励，不是“全部规则都取消”。 完整实验成本过高，不复现（审查 DONE）；未训练OneTrans策略、RM或执行线上A/B，未接入执行型Evolve。L1 CPU约束/奖励算术参考，diagnostic only。完整实验成本过高，不复现（审查 DONE）；未训练OneTrans策略、RM或执行线上A/B，未接入执行型Evolve。business_logits接收外部logits、当前prefix、显式规则与未来tag可用数量上界；实现局部quota、去重、相似度和广告偏置。geometric_reward/separate_advantages对应Eq.11/13–15的float64 CPU数学参考；  重排与混排 生成式整页策略与多目标后训练 搜广推 列表与业务控制：重排、出价和长期价值 CPU几何奖励与约束测试通过，为什么不能据此宣称复现GMV/u提升？ 输入RM分数和logits由外部提供，本地没有训练policy、RM或观察真实用户。RM代理相对增益与账户随机A/B的GMV/u不是同一指标；未曝光的反事实slate没有真实label，不能用合成反馈补成能力证据。 教学例：给某页手工输入更高RM分，几何公式算出更高reward只说明算术正确，不表示真实用户会多下单，更不能转记为论文+2.63%的线上提升。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 列表与业务控制：重排、出价和长期价值</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-00f804ce0b50c132">CPU几何奖励与约束测试通过，为什么不能据此宣称复现GMV/u提升？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aonetrans-gsr">OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · ByteDance</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>输入RM分数和logits由外部提供，本地没有训练policy、RM或观察真实用户。RM代理相对增益与账户随机A/B的GMV/u不是同一指标；未曝光的反事实slate没有真实label，不能用合成反馈补成能力证据。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：给某页手工输入更高RM分，几何公式算出更高reward只说明算术正确，不表示真实用户会多下单，更不能转记为论文+2.63%的线上提升。</p>
+<p class="ar-learning-sources">依据：论文离线与线上效果、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04720v1">原论文</a> · <a href="../../../../recommendation-components/2611.04720-onetrans-gsr/">实现解读</a> · <a href="#qa-00f804ce0b50c132">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:pinterest-rlbp" data-paper-title="Reinforcement Learning for Controller Parameters in the Auto-Bidding System at Pinterest" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="Reinforcement Learning for Controller Parameters in the Auto-Bidding System at Pinterest 搜广推与 LLM 应用 Pinterest Inc. 2026-10-23 广告主既希望预算顺利花完，也希望点击成本低。论文保留高频 PID 反馈，只在每天开始由 RL 为 campaign 选择 PID 系数倍率，产出查找表供当天服务；线上 bidder 不加载 Q 网络。它不是神经网络逐次直接决定拍卖出价。两个 Q 头分别学习预算利用率和 CPC 的相对变化，再按剩余生命周期融合。实际生产配置，是按日结果回归的 contextual bandit；文中多步 Bellman 公式是扩展，不可把“DQN”名称误当作生产已经进行了跨日 bootstrap。 完整实验成本过高，不复现（审查 DONE），未接入 Evolve。本地为 L1 张量公式组件 / diagnostic only，只覆盖有界动作、双头目标、奖励、融合与 IPS。没有真实广告数据、拍卖环境、生产 Q 网络或在线出价；完整实验成本过高，不复现（审查 DONE），未接入 Evolve。小张量验证两头不同 backup、默认不读取未来 Q、冻结目标、真实参数梯度下降、负 CPC 奖励、融合方向、top-K 支持、P/I 动作表及普通 IPS。外部预处理必须在融合后执行一次，并保持形状、device、dtype 和有限值；缩放可改变概率，不能据此假定温度和生产标定可互换。  广告出价与预算控制 RL与PID元控制 搜广推 列表与业务控制：重排、出价和长期价值 RLBP是在每次拍卖直接由神经网络出价吗？ 不是。它每天选择PID参数倍率，写入当天固定的查找表；高频反馈仍由原PID完成。生产只调P/I各三个倍率、D固定为1，共9种动作，这是一层受限元控制。 教学例：一天开始把比例系数调为默认值1.2倍，不代表神经网络决定当天每一笔报价；中途反馈仍由PID误差项驱动。 2026-10-30">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 列表与业务控制：重排、出价和长期价值</a></p>
 <span id="paper-recommendation-pinterest-rlbp-750ac5e6" class="ar-learning-paper-anchor"></span>

@@ -10,6 +10,9 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 重排与混排 | [OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer](../../recommendation-components/2611.04720-onetrans-gsr/README.md) | ByteDance，2026-11-03 | 未发现官方代码 | `onetrans-gsr`：仅低成本组件，完整实验不复现 |
+| 生成式召回 | [ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse](../../recommendation-components/2611.04259-reusegr/README.md) | Xidian University，2026-11-03 | 未发现官方代码 | `reusegr`：仅低成本组件，完整实验不复现 |
+| 本地搜索 | [SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search](../../recommendation-components/2611.04662-spade-local-search/README.md) | Meituan，2026-11-03 | 未发现官方代码 | `spade-local-search`：仅低成本组件，完整实验不复现 |
 | 召回 | [WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search](../../recommendation-components/2611.00530-wesearch/README.md) | Tencent，2026-10-31 | 未发现官方代码 | `wesearch`：仅低成本组件，完整实验不复现 |
 | 多目标蒸馏 | [KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation](../../recommendation-components/2610.36973-kl-mopd/README.md) | Zhejiang University，2026-10-27 | [原作者入口](https://github.com/Yandorn/KL-MOPD)；作者正文链接仓库可访问，固定28d9bcbd8fc9f5ccaa52def5db77d4c34bade965；本地独立据公式实现，不复制上游 | `kl-mopd`：仅低成本组件，完整实验不复现 |
 | 多模态生成式搜索 | [PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search](../../recommendation-components/2610.36958-pailitao-mmsearch2/README.md) | Taobao & Tmall Group of Alibaba，2026-10-27 | 未发现官方代码 | 计划键 `pailitao-mmsearch2`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |

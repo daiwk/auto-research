@@ -10,6 +10,10 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 奖励与信用分配 | [Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling](2611.04792-dars/README.md) | National University of Singapore，2026-11-03 | 未发现官方代码 | `dars-density`：仅低成本组件，完整实验不复现 |
+| On-policy distillation | [Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation?](2611.04958-shuffled-opsd/README.md) | Duke University，2026-11-03 | 未发现官方代码 | `shuffled-opsd`：仅低成本组件，完整实验不复现 |
+| Agentic RL | [Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning](2611.05266-targeted-guidance/README.md) | Cursor Research / UC Berkeley，2026-11-03 | 未发现官方代码 | `targeted-guidance`：仅低成本组件，完整实验不复现 |
+| On-policy distillation | [P²-MOPD: Accelerating Multi-Teacher On-Policy Distillation via Parameter Priors](2611.03953-p2-mopd/README.md) | Australian Institute for Machine Learning, Adelaide University / StepFun，2026-11-02 | 未发现官方代码 | `p2-mopd`：仅低成本组件，完整实验不复现 |
 | 策略优化 | [RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs](2611.02455-rlid/README.md) | University of Illinois Urbana-Champaign，2026-11-02 | 未发现官方代码 | `rlid`：仅低成本组件，完整实验不复现 |
 | On-policy distillation | [SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding](2611.02846-specopd/README.md) | Qwen Business Unit of Alibaba / University of Science and Technology of China，2026-11-02 | 未发现官方代码 | `specopd`：仅低成本组件，完整实验不复现 |
 | 策略优化 | [CONCUR: Concordant Auxiliary Rewards for Multi-Task, Multi-Reward Reinforcement Learning](2610.36437-concur/README.md) | Carnegie Mellon University，2026-10-27 | 未发现官方代码 | `concur`：仅低成本组件，完整实验不复现 |

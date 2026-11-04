@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:p2-mopd/prior-not-inference-capacity": {
+      "source_sha256": "49a881051f3fd46e5c2ec084266b38ef5b097a9e17e454d9fa5bcaf23caebb86",
+      "reviewed": true,
+      "fields": {
+        "question": "Does retaining expert parameters mean P²-MOPD runs multiple experts at inference?",
+        "answer": "No. Task vectors are training-time optimization directions; the forward pass uses one materialized student weight tensor. Coefficient increments fold into ordinary weights, and exported inference needs neither teachers nor coefficient metadata. Teacher scoring and parameter priors are two training roles, not inference-time ensemble voting.",
+        "example": "Teaching example: W=B+0.3τ1+0.2τ2 is composed into one matrix and inputs multiply W, rather than voting across three outputs. Local code updates matrices without loading expert models."
+      }
+    },
+    "qa/post-training:p2-mopd/unclipped-gradient-two-budgets": {
+      "source_sha256": "f520f58241de3e668cb1871c24242ec00865095fe88d92e6babcb4b91a65b9f7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why compute P²-MOPD coefficient gradients before clipping student gradients?",
+        "answer": "The paper sends the same pre-update gradient through two independently budgeted channels. Coefficient gradients are inner products of unclipped G and fixed task vectors; weight and coefficient channels are then globally clipped separately. Clipping G first lets the weight budget prematurely scale the coefficient channel, changing relative updates and Adam state.",
+        "example": "Teaching example: G=[3,4] and τ=[2,0] give coefficient gradient 6. Clipping G to norm 0.01 first gives an inner product of 0.012, no longer the prescribed raw coefficient gradient."
+      }
+    },
+    "qa/post-training:p2-mopd/free-weights-versus-task-arithmetic": {
+      "source_sha256": "6afce66ce0182cb75123b9a42a7fbd43c4d9d2f6b2af3d3c0c860f1f8b7e0ed9",
+      "reviewed": true,
+      "fields": {
+        "question": "How does P²-MOPD differ from learning only task-arithmetic coefficients?",
+        "answer": "Coefficient-only merging stays in the fixed task vectors' affine span. P²-MOPD retains full free student weights, preserving the model class of an ordinary student and allowing motion outside that span. It changes optimization geometry and reachability along expert directions, not inference parameter capacity.",
+        "example": "Teaching example: With only task direction [1,0], coefficient updates cannot change coordinate two, but free student weights can move along [0,1]. Small-tensor checks establish this freedom, not actual recovery across four domains."
+      }
+    },
+    "qa/post-training:p2-mopd/zero-decay-and-atomic-skip": {
+      "source_sha256": "a7a39c471568609696c7f0bf62a2944973584e33541db3496640182064bacea1",
+      "reviewed": true,
+      "fields": {
+        "question": "What breaks multi-step equivalence between materialized W and explicit B plus coefficients?",
+        "answer": "Nonzero weight decay shrinks W and B differently, adding unintended task-vector shrinkage. Both channels also need independent optimizer state and the same pre-update gradient. Non-finite gradients or norms must skip the entire step rather than updating one channel before discovering the other's failure.",
+        "example": "Teaching example: With B=1, ατ=1 and W=2, identical decay settings shrink W twice as much as B. Updating W before stopping on a NaN coefficient gradient likewise leaves a partial step."
+      }
+    },
+    "qa/post-training:shuffled-opsd/shared-target-not-generated-trace": {
+      "source_sha256": "3f72950b23151f5105f006f605cd99f097696836e85e2ef578817d3f18f4a788",
+      "reviewed": true,
+      "fields": {
+        "question": "Does Shuffled OPSD shuffle generated trajectories or the student and teacher inputs?",
+        "answer": "It transforms the shared problem, then uses that identical transformed condition for student sampling and teacher scoring. Generated continuations are never shuffled. The unrelated worked example seen only by the teacher remains intact, while evaluation returns to intact problems without teacher-only context.",
+        "example": "Teaching example: red box contains five coins becomes coins red five contains box, identically for both branches. The student's subsequently sampled reasoning retains its generated order."
+      }
+    },
+    "qa/post-training:shuffled-opsd/signed-pointwise-cap-not-kl": {
+      "source_sha256": "9b4359f7d462e56a1f6a58257a95453e561ec33c74e09520c3d70cd78d03e96f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can the Shuffled OPSD loss be negative, instead of being repaired into nonnegative KL?",
+        "answer": "The paper upper-caps each signed vocabulary contribution q log(q/p) at 0.05 while retaining negative terms. This destroys the nonnegativity guarantee of the complete KL sum. Zeroing negatives, clipping after summation or substituting ordinary KL changes both the actual objective and its gradients.",
+        "example": "Teaching example: q=[0.5,0.5] and p=[0.99,0.01] give about -0.342 for the first term; the second, about 1.956, caps at 0.05. Their sum is about -0.292, not a numerical underflow error."
+      }
+    },
+    "qa/post-training:shuffled-opsd/fixed-reference-shift-and-token-count": {
+      "source_sha256": "9927ff02fc54951c300de9dea927691487edc06ce3e004207ddd69421d565868",
+      "reviewed": true,
+      "fields": {
+        "question": "Why fix the reference offset at 111 and distinguish word counts from token counts?",
+        "answer": "Using the fixed unrelated reference (i+111)%N holds teacher-only context constant across target transformations, avoiding a pairing confound. Whitespace-block permutations preserve the word multiset, not necessarily tokenizer-token counts. Lexical preservation is not proof of identical token budgets.",
+        "example": "Teaching example: N=5 gives reference indices [1,2,3,4,0], but N=3 would self-pair, so the local component rejects that pool rather than silently changing pairing. Leading-space tokenization may also encode a word differently after it moves."
+      }
+    },
+    "qa/post-training:shuffled-opsd/response-mean-and-teacher-isolation": {
+      "source_sha256": "d0091a6c386c2ed9267dcd9d79a0b402647ad91a0644d1a8dd97a5fd4aef8cc6",
+      "reviewed": true,
+      "fields": {
+        "question": "How should unequal-length Shuffled OPSD responses be reduced without leaking teacher context?",
+        "answer": "Average valid tokens within each response, then weight responses equally; do not pool all valid tokens into one batch mean. Teacher probabilities and sampled histories remain fixed, prompt/padding are excluded, and worked examples appear only in teacher fields. Temperature changes distributions but adds no T-squared multiplier in the published objective.",
+        "example": "Teaching example: Responses with one and three valid tokens each receive half the batch weight, not one quarter versus three quarters. Giving the complete teacher example to the student changes the learning condition, not merely implementation efficiency."
+      }
+    },
+    "qa/post-training:targeted-guidance/feedback-conditioned-same-policy-teacher": {
+      "source_sha256": "3fcc748a22248e15f039df288a268afbc85464a5f9f55915ade56fd97c59eaf2",
+      "reviewed": true,
+      "fields": {
+        "question": "Does Targeted Guidance need a larger external teacher?",
+        "answer": "Its teacher shares student weights but receives textual feedback immediately before a failed turn, with teacher gradients stopped. Feedback must first be independently checked to improve the intended criterion. Identical parameters need not imply identical conditional distributions; the local loss interface does not fabricate feedback effectiveness.",
+        "example": "Teaching example: After a student omits a tool argument, the feedback-conditioned branch sees a reminder to provide the returned-line count. It can score the same prefix differently, but this does not let a deployed student see future errors or gold answers."
+      }
+    },
+    "qa/post-training:targeted-guidance/failed-turn-gate-all-token-denominator": {
+      "source_sha256": "72cfca39dc4427c671bbb9938dd4ce26acba3b551055699f50100752b9cd84e5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does the KL denominator include all response tokens when only one turn fails?",
+        "answer": "Gating selects where auxiliary distillation gradients apply; whole-response normalization controls the rollout's total pressure. Dividing only by failed tokens amplifies a tiny error to full average distillation strength. Nonfailed turns have zero auxiliary gradient but their valid response tokens still count in the denominator.",
+        "example": "Teaching example: If one failed token among 100 response tokens has KL 2, the contribution is 2/100. Dividing by failed-token count gives 2, a 100-fold amplification. Padding must not count among those 100 tokens."
+      }
+    },
+    "qa/post-training:targeted-guidance/reverse-kl-plus-rl-not-global-opsd": {
+      "source_sha256": "18a9f2a3fc16542468084b8a1b412ff75b53e4e4850bc2c6a463f35e888ed4c2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not replace failed-turn reverse KL plus RL with whole-trajectory OPSD?",
+        "answer": "The method restricts its auxiliary signal to failures, uses full-vocabulary student-to-frozen-teacher KL and retains ordinary per-criterion RL rewards. Whole-trajectory distillation keeps pressuring already compliant behavior, changing diversity and the primary task. Forward KL and sampled-token estimators are also different numerical objectives. The auxiliary term disappears once every criterion passes.",
+        "example": "Teaching example: If one tool turn is valid and the next invalid, only the latter receives auxiliary gradients. Once both are valid, recover the original GRPO objective instead of continuing to imitate every aspect of the feedback teacher's style."
+      }
+    },
+    "qa/post-training:targeted-guidance/external-judgments-not-capability-fixture": {
+      "source_sha256": "307a78a3e36ae46ca7af9266cd93578e23369bdad81eaa0e73c8791f4af4a99d",
+      "reviewed": true,
+      "fields": {
+        "question": "Do failed-turn masks and the loss complete the paper's coding-agent training?",
+        "answer": "No. The caller still owns actual student sampling, criterion judgments, feedback placement and screening, same-prefix teacher scoring, external GRPO advantages and the tool environment. The component checks masks and gradients. Giving an evaluated agent gold answers or fixed correct actions breaks evaluation; a success rate of one would not repair that boundary.",
+        "example": "Teaching example: Checking zero nonfailed-token gradients with small random logits is a valid L1 test. Placing hidden test answers in student history to correct it and then claiming a coding pass-rate improvement is leakage."
+      }
+    }
+  }
+}

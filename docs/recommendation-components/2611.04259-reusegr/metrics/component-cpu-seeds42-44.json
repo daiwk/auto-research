@@ -1,0 +1,127 @@
+{
+  "schema_version": 2,
+  "method": "reusegr",
+  "manifest_ref": "recommendation:reusegr",
+  "dataset": {
+    "id": "synthetic:nov04b-reusegr-v1",
+    "revision": "sha256:ebb6e49576ae0c2d872b002c2a446bde20fb27eb5ffce1bb1bccc2928ddcac69",
+    "recipe": "small seeded tensor/arithmetic/state contracts; no public capability benchmark",
+    "capability_benchmark": false
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "selected_depth": 2,
+        "first_depth_coverage": 1.0,
+        "first_depth_wilson_lower": 0.6755843804891231
+      },
+      "checks": {
+        "whole_row_not_single_click": true,
+        "ancestors_required": true,
+        "depth_zero_not_miss": true,
+        "suffix_score_exact": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "selected_depth": 2,
+        "first_depth_coverage": 1.0,
+        "first_depth_wilson_lower": 0.6755843804891231
+      },
+      "checks": {
+        "whole_row_not_single_click": true,
+        "ancestors_required": true,
+        "depth_zero_not_miss": true,
+        "suffix_score_exact": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "selected_depth": 2,
+        "first_depth_coverage": 1.0,
+        "first_depth_wilson_lower": 0.6755843804891231
+      },
+      "checks": {
+        "whole_row_not_single_click": true,
+        "ancestors_required": true,
+        "depth_zero_not_miss": true,
+        "suffix_score_exact": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "first_depth_coverage": 1.0,
+    "first_depth_wilson_lower": 0.6755843804891231,
+    "selected_depth": 2.0
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "formal_comparison": false,
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "three-seed synthetic mechanism diagnostic; not a capability comparison"
+  },
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "0b1fe011eda69ed0e75c6583ac9c01c463f20124",
+    "artifact_path": "docs/recommendation-components/2611.04259-reusegr/metrics/component-cpu-seeds42-44.json",
+    "accelerator": "CPU",
+    "dataset_fingerprint": "sha256:73263fde7bdcbcbe3e4f419c3105ce944bccca5409a7f168276bafa8b6dab538",
+    "executed_source_sha256": {
+      "scripts/run_nov04b_components.py": "06f58e7cd3e8ad0b6dbea483b3c897c0eb27fe66ffda6a98452443101f50d874",
+      "docs/research-audits/nov04-bulletin-components/preflight.json": "cfcd5b5d8387425e188732a2db3894c6393ae441f66d93fb08fa15dec501bb45",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "scripts/run_nov04_components.py": "61d35d574d9561e4611d2647174b8a6af07fabf8c30b6909e21e253542cf4336",
+      "src/auto_research/agent_research/continual_autoresearch.py": "61da0faef12c8d52299f91630b77b8d2308e9fdd1000256a78577345cfa93a98",
+      "src/auto_research/agent_research/meta_square.py": "15c884218cc5dc8c4902cb3aff7ec89f989e50a3a0ca32fd45c15b3a2a84ffb8",
+      "src/auto_research/agent_research/runtime_tickets.py": "64032a6d05e64ffe421fe74786abe251f0eee690dfa54a0a3ce31b7f0bb99464",
+      "src/auto_research/foundation_models/anchor_kv.py": "902ca24d5a9792068d19e51973e71e6605e606e2a48d1d07dec66c0e18bda730",
+      "src/auto_research/foundation_models/semantic_block_sparse_attention.py": "05b8ddd8580fc2d2f9d30ceb4541b1a2e8c5d62a47e9ae1766dc7bf839248d97",
+      "src/auto_research/post_training/dars.py": "ef1e75afcd7af800bb05a7a611db04036ea757817c0ca255cb38a20a96cf16e1",
+      "src/auto_research/post_training/p2_mopd.py": "027c0d60499271589bd7fdac3d4c7f0978504e3d29419be6a75fd9c66ea617f4",
+      "src/auto_research/post_training/shuffled_opsd.py": "655bf0283a7f04312b9c04b01e239996a21d5ac1e9dd85db738f6a2b504b906e",
+      "src/auto_research/post_training/targeted_guidance.py": "edb5b26b1603f5f07aaaafc5284f30d3336692278ed33748a0db150b472d296a",
+      "src/auto_research/reproductions/onetrans_gsr_components.py": "2d17c9b4cb20731a95061924e0c28d5faf630770eeafd4064a2b475ed320d6ce",
+      "src/auto_research/reproductions/reusegr_components.py": "ebb6e49576ae0c2d872b002c2a446bde20fb27eb5ffce1bb1bccc2928ddcac69",
+      "src/auto_research/reproductions/spade_components.py": "bdebc7bd22da1f40be6800c6afd14f9e7196f586a6c84ecec5bb505054595550"
+    },
+    "raw_runner_artifact_sha256": "a39082ef9275700c422d0fdf1186d40df3d5ffd97f1e5fac756e31a08ee3e9bb"
+  }
+}

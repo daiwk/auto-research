@@ -482,6 +482,10 @@
 
 - 2026-10-01 · 一作：Bo Deng · [DeFA: Dependency-Guided Failure Attribution for LLM Agents](../2610.01256-defa/README.md)（`defa`）：融合 protocol relation 和语义依赖构造 event dependency graph，再从违规事件逆向追踪 source 与下游影响，形成 failure propagation graph 并定位 decisive error。
 
+## RBC Borealis / ELLIS Institute Tübingen / Max Planck Institute for Intelligent Systems
+
+- 2026-11-03 · 一作：Jeremy Qin · [From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?](../2611.05108-continual-autoresearch/README.md)（`continual-autoresearch`）：持续会话可能复用代码和经验，更快找到有效方案，但未必提高最终留出效果。论文在相同任务流、模型、数据和逐任务时间预算下比较 stateful 与 reset Agent；保留首个有效提交、所有提交及最终选择，完成后才由私有测试评价。
+
 ## Renmin University of China
 
 - 2026-10-08 · 一作：Yiruo Cheng · [When Should Agents Think? Adaptive Reasoning via Cross-Turn Estimation](../2610.12061-race/README.md)（`race`）：LoGiC 从第二轮逐步删除推理，检查本轮及所有后续原动作的平均 token 对数似然变化，已接受删除继续影响后续上下文。成功轨迹压缩后用于 SFT；RL 屏蔽可删推理并监督提前闭合。
@@ -566,6 +570,7 @@
 
 ## The Chinese University of Hong Kong
 
+- 2026-10-29 · 一作：Shuzheng Gao · [Training LLM Agents to Automate LLM Post-Training with RSI-Dojo](../2611.03698-rsi-dojo/README.md)（`rsi-dojo`）：优化外部 Harness 与让模型内化“如何做后训练”不是同一问题。RSI-Craft 从论文/InspectAI 找任务，实际安装并检验评测，标准化环境，再过滤执行不稳定或无法区分模型的任务。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-10-01 · 一作：Yaodong Yang · [Code Owns the Simulation, Jev Owns the Evaluation](../2610.01834-jev-lookahead/README.md)（`jev-lookahead`）：让可执行代码负责模拟每个动作的后继状态，让 Jev 只负责比较动作带来的进展。除了当前动作和下一观察，还显式提供“执行后新出现的可用动作”，降低纯语义动作评分难以预判长期可达性的缺陷。
 
 ## The Chinese University of Hong Kong, Shenzhen
@@ -663,6 +668,10 @@
 
 - 2026-08-05 · 一作：Xuying Ning · [EvoHarness-RL: Learning Self-Evolving Runtime Harness for Long-Horizon LLM Agents](../2608.05446-evoharness-rl/README.md)（`evoharness-rl`）：**主题：Harness policy RL。** 把 Belief、Progress、Experience 暴露为策略可操作的外部状态；先 SFT 学会 harness action，再以成本感知 GRPO 学习何时读写和合并。
 
+## University of Maryland
+
+- 2026-11-03 · 一作：Lingzhi Yuan · [Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents](../2611.05139-meta-square/README.md)（`meta-square`）：一个共享 Harness 不一定适合所有新任务，而毫无经验的在线修改又可能扰乱仍在推进的执行。Meta² 离线对照无演化器、普通演化器和获得**训练期** verifier 信息的演化器，用反思、聚合和更新构建可复用 Meta-Skill。
+
 ## University of Maryland / Google
 
 - 2026-05-18 · 一作：Yuran Ding · [PROMPTS: Performance Optimization via Multi-Agent Planning for LLM Training and Serving](../mlsys2026-prompts/README.md)（`prompts`）：Coordinator、Analyzer 和 Proposal Agent 联合读取 profiler 与知识库，诊断瓶颈并输出可解释的 sharding 候选。
@@ -685,6 +694,7 @@
 
 ## University of North Carolina at Chapel Hill
 
+- 2026-11-02 · 一作：Kuiyi Gao · [RuntimeTickets: Source-Grounded Security Obligations for Agent Skills](../2611.03772-runtime-tickets/README.md)（`runtime-tickets`）：允许调用“发送”并不等于允许给任意接收者发送任意内容。论文让模型只在运行前提出有原文行依据的 obligations，host 审批后冻结 ticket；运行时由确定性 gate 检查真实副作用，而不再问语言模型。
 - 2025-11-20 · 一作：Peng Xia · [Agent0](../2511.16043-agent0/README.md)（`agent0`）：任务生成 Agent 提议可验证工具任务，多个执行 Agent 产生候选并多数投票，课程按当前能力边界升级。
 
 ## University of Osaka

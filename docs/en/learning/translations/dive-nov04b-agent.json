@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/agent-research/tools-and-collaboration/comparison/agent-research:runtime-tickets": {
+      "source_sha256": "137f7b059eb8687273bf0e48868721d2a47cdbf70fb4218cb54ce0185216cee3",
+      "reviewed": true,
+      "fields": {
+        "position": "Attenuate host authority into a frozen source-bound ticket; check recipient, object and cumulative amount before sending, with Deny before Defer before Allow.",
+        "tradeoff": "Trusted host validators and a real effect boundary remain necessary. The local atomic CPU gate and record chain are not a complete proxy, observation account or security capability."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/analysis/3": {
+      "source_sha256": "ef0f87e87a797fd5b3b4c4668d4b312ab24fb2ca4c6974d52c956454281b0ca2",
+      "reviewed": true,
+      "fields": {
+        "title": "Even permitted tools need object and amount constraints",
+        "body": "Tool-name or recipient allow-lists miss exfiltration through a legitimate endpoint. RuntimeTickets freezes source-grounded recipient/object/amount obligations and checks each effect with a model-free gate. It still depends on trusted egress and observation coverage. A valid local HMAC prefix is not a complete sealed/closed account, and at-most-once callback invocation is not network exactly-once delivery."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/update/2026-11-05/2": {
+      "source_sha256": "f1e28c0d4a2c2463c91c7cb46756e9bb77221f850e6c241838b6c24f26296678",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added RuntimeTickets to separate tool authority from delivery contracts: an allowed recipient can still receive an invalid object or excessive data. Pre-effect deny/defer/allow branches, recording before execution and suppressing resend after uncertain callback failure are runtime contracts distinct from tool availability. CPU negative controls do not establish network security. Full experiments are not reproduced because of cost, review DONE."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:meta-square": {
+      "source_sha256": "1c8bdbeaca0ac858288fbde1ed44986af62131f674403d569b9843b8f6615fbd",
+      "reviewed": true,
+      "fields": {
+        "position": "Freeze an offline Meta-Skill and make bounded KEEP/EVOLVE decisions within one environment and trajectory; discard concrete edits at task end.",
+        "tradeoff": "The transferable asset is evolution guidance, not one final harness for every task. No local LLM evolver or skill learning is implemented."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:continual-autoresearch": {
+      "source_sha256": "ea29818340b7079a30251f4b6eb560f8bb867030519dbdf74f0171d6b03d9062",
+      "reviewed": true,
+      "fields": {
+        "position": "Match persistent/reset runs on task streams and budgets, then separately score initialization, the best-so-far curve and actual final selection.",
+        "tradeoff": "Efficiency gains can coexist with worse final outcomes. The local code is only an offline metric contract, not autonomous research or memory-benefit validation."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:rsi-dojo": {
+      "source_sha256": "b5ca1bcc6720dab161f19c13184580321c48c235f32beb7171053cc6b1658d05",
+      "reviewed": true,
+      "fields": {
+        "position": "Build executable training environments, filter trajectories for both process and outcomes, then fine-tune post-training agents.",
+        "tradeoff": "The 9B/35B-A3B and five-to-ten-hour-per-task matrix is not reproduced because of cost. This is catalog-only, not a runtime or learned capability."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/5": {
+      "source_sha256": "3927a8ee82db7fa9b13733927796e3cd6585b7b25de6f7d6290c2b5f103e8ca6",
+      "reviewed": true,
+      "fields": {
+        "title": "Edit lifetime, experience persistence and model internalization are different axes",
+        "body": "Strategist accumulates executable reasoning programs and measured experience across tasks. Meta² instead transfers frozen evolution knowledge while keeping realized edits task-local. Continual AutoResearch separates first-solution quality, search utility and final choice: finding a 0.8 candidate sooner but selecting 0.5 is not a final improvement. RSI-Dojo changes a further axis, model-weight learning, so a threshold filter or unexecuted environment registration does not complete training. Compare methods only after fixing retained state, edit scope and feedback timing."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-05/4": {
+      "source_sha256": "ebda0a7b17c8abec320d6863ee4e1f145bc72c68c2e5a253492ddae0ff38be03",
+      "reviewed": true,
+      "fields": {
+        "summary": "Separated three objects often grouped as RSI: Meta² freezes transferable guidance while editing only the current run; Continual AutoResearch measures whether session/workspace experience finds good candidates earlier without guaranteeing better final choices; RSI-Dojo internalizes post-training procedures through environments and filtered trajectories, with full experiments not reproduced because of cost. Meta² and Continual AutoResearch have only CPU contract components, while RSI-Dojo is catalog-only. None provides model capability-improvement evidence; full experiments are not reproduced because of cost, review DONE."
+      }
+    }
+  }
+}
