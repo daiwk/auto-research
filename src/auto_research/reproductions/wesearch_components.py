@@ -53,7 +53,8 @@ def quantize(documents, rotation, codebooks):
 def reconstruct(codes, codebooks):
     """Eq.11 returns vectors in ROTATED space, not original embeddings."""
     z, b = _integer(codes, 2), _float(codebooks, 3)
-    if z.shape[1] != len(b) or (z < 0).any() or (z >= b.shape[1]).any():
+    if (z.shape[1] != len(b) or (z < 0).any() or (z >= b.shape[1]).any()
+            or len(z) * len(b) * b.shape[2] > 1_048_576):
         raise ValueError('one valid integer code per subspace required')
     return b[np.arange(len(b))[None], z].reshape(len(z), -1)
 
