@@ -288,7 +288,11 @@
           "paper": "post-training:rlid",
           "position": "将优化单位从自由文本改为合法菜单动作概率，单前向label readout后做决策级PPO；同策略内边缘化措辞可去掉对应方差。",
           "tradeoff": "菜单、记忆和afterstate改变接口；方差恒等式不比较不同模型，也不消除时序信用噪声。本地仅概率/PPO/枚举审计，完整多环境训练成本过高不复现。",
-          "sections": ["背景与主要改动", "核心公式", "结果、负控与边界"]
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、负控与边界"
+          ]
         },
         {
           "paper": "post-training:grpo",
@@ -373,7 +377,11 @@
         {
           "title": "更新单位先于裁剪公式：文本和决策不是同一变量",
           "body": "GRPO/GSPO主要调整既有文本策略的优势或ratio单位，RLiD先把被优化的概率事件改成编译菜单中的动作。其Rao-Blackwell解释只在同一文本策略里对同动作措辞求条件期望；不能凭这个恒等式断言另训LDM更强。菜单是否包含afterstate、记忆来自何处、标签校准及接口对齐，都需在比较前写清；PPO公式相同并不能抹去这些差别。",
-          "papers": ["post-training:rlid", "post-training:grpo", "post-training:gspo"]
+          "papers": [
+            "post-training:rlid",
+            "post-training:grpo",
+            "post-training:gspo"
+          ]
         }
       ],
       "questions": [
@@ -382,7 +390,10 @@
           "question": "把文本映射到动作后方差下降，为什么不意味着RLiD在每个任务都胜过带推理token的策略？",
           "answer": "该结论固定同一个文本策略和只依赖动作的优势，边缘化措辞后保持期望更新并删去措辞方差。真正LDM有不同参数化和训练路径，文本推理还提供额外计算；时序信用和菜单接口也未被恒等式解决。论文ARC的Qwen3.5-2B上token策略仍更高，必须保留这个反例。",
           "example": "教学例：一个策略用两种句子表达open可被边缘化；把它换成另一个只看label的网络，已超出同策略恒等式的比较范围。",
-          "papers": ["post-training:rlid", "post-training:grpo"]
+          "papers": [
+            "post-training:rlid",
+            "post-training:grpo"
+          ]
         },
         {
           "id": "all-failed-group",
@@ -538,8 +549,12 @@
         {
           "date": "2026-11-04",
           "summary": "精读RLiD，增加文本概率事件与可执行动作事件这一比较轴，明确同策略方差边缘化不等于不同LDM优越性，并补充标签边际KL与逐行entropy的区别；仅L1组件，完整训练成本过高不复现。",
-          "papers": ["post-training:rlid"],
-          "source_revisions": {"post-training:rlid": "2968f36a0c7cc21f327588b91c4b61361ae5c2953cd25a9245e524d33b110bec"}
+          "papers": [
+            "post-training:rlid"
+          ],
+          "source_revisions": {
+            "post-training:rlid": "5dba42f70fe5f7e2322cb6137471b81ced364774d7a28938655ab19dad7fd83f"
+          }
         }
       ]
     },
@@ -889,7 +904,11 @@
           "paper": "post-training:specopd",
           "position": "在固定reference anchors重新采当前draft私有历史，以共享trunk并行收集teacher分布，按overlap的prefix乘积优化接受长度surrogate。",
           "tradeoff": "改的是监督采集依赖与draft目标，不是普通学生RKL的同义写法；teacher全词表质量与predecessor readout必须保留。完整混合target训练/serving未复现，局部张量不证明加速。",
-          "sections": ["背景与主要改动", "核心公式", "结果、负控与边界"]
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、负控与边界"
+          ]
         },
         {
           "paper": "post-training:gkd",
@@ -993,7 +1012,11 @@
         {
           "title": "固定外层reference仍可有当前策略内层分支",
           "body": "GKD/MiniLLM让teacher在学生访问状态上监督，MPOPD再训练独立proposal改变可达性；SpecOPD则针对推测draft，把固定reference作为外层锚点，每步重采内层draft分支以打破整响应验证依赖。reference固定不等于分支off-policy；但这也不是完全自由的学生轨迹。其E2E-TV优化前缀存活，需要完整teacher质量，且teacher query必须读私有前驱历史；loss通过不能证明混合注意力target已经正确共享状态或真实serving更快。",
-          "papers": ["post-training:specopd", "post-training:gkd", "post-training:mpopd"]
+          "papers": [
+            "post-training:specopd",
+            "post-training:gkd",
+            "post-training:mpopd"
+          ]
         }
       ],
       "questions": [
@@ -1002,7 +1025,10 @@
           "question": "SpecOPD的reference anchor后分支已偏离原文，教师仍应按原reference后缀来打分吗？",
           "answer": "不应。当前分支token的教师条件由reference前缀和该分支已采样token组成，不能用reference后缀替换，也不能看到未来或兄弟。第一token读anchor，后续读前驱行。否则改变监督历史，甚至从自身行泄漏答案；不再是原方法的分支监督。",
           "example": "教学例：reference是a quiet，draft采short evening；预测evening必须以a short为条件，而不能回到a quiet，也不能把evening先喂入再打自己的分。",
-          "papers": ["post-training:specopd", "post-training:gkd"]
+          "papers": [
+            "post-training:specopd",
+            "post-training:gkd"
+          ]
         },
         {
           "id": "on-policy-not-one-kl",
@@ -1155,8 +1181,12 @@
         {
           "date": "2026-11-04",
           "summary": "精读SpecOPD，分开固定reference外层、当前draft内层分支及E2E-TV目标；相对GKD/MPOPD补充采集依赖这一轴，保留teacher完整质量、祖先隔离与predecessor读出，不把L1张量通过写成serving加速。",
-          "papers": ["post-training:specopd"],
-          "source_revisions": {"post-training:specopd": "932961849d1006c4840c5fad45e2a4d9d31aaf9aaec265b96898d2259fba7a03"}
+          "papers": [
+            "post-training:specopd"
+          ],
+          "source_revisions": {
+            "post-training:specopd": "90be88540d6ff85984692f45f29d7aae0f8b8fdb02cf70f9b887e810a22bdeb8"
+          }
         }
       ]
     },

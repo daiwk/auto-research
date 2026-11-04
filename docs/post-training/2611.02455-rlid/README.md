@@ -27,7 +27,7 @@
 
 ![RLiD 原文 Figure 1：文本平面、决策平面和轨迹蒸馏](assets/paper-figure-01.png)
 
-直接来自[原文 Figure 1](https://arxiv.org/html/2611.02455v1#S1.F1)的 PNG，未裁剪/未重绘；已目视核对生成与解析、合法菜单单前向、同动作措辞边缘化及蒸馏两支。图中环境、LDM、记忆编译器和蒸馏器不代表本地已实现。作者版权、CC BY 4.0 与 SHA-256 见 `assets/provenance.json`。
+图片来自[原论文](https://arxiv.org/html/2611.02455v1#S1.F1) Figure 1 的 PNG，未裁剪/未重绘；已目视核对生成与解析、合法菜单单前向、同动作措辞边缘化及蒸馏两支。图中环境、LDM、记忆编译器和蒸馏器不代表本地已实现。版权归原作者所有，CC BY 4.0 与 SHA-256 见 `assets/provenance.json`。
 <!-- paper-figure:end -->
 
 ```mermaid

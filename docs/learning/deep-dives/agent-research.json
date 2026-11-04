@@ -985,7 +985,12 @@
           "paper": "agent-research:strategist",
           "position": "冻结执行模型，把可执行推理blueprint组成跨任务无环库，检索相关与邻域素材，按开发集实际准确率与分层token成本选策略。",
           "tradeoff": "库保留未获胜结构供后续任务复用，但最终候选仍须validation和hidden双过门槛；本地只实现AST/DAG、外部检索分数核和配对选择，不是meta-agent搜索。",
-          "sections": ["背景与主要改动", "核心公式", "数据协议与实现边界", "高成本完整实验"]
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与实现边界",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -1030,7 +1035,11 @@
         {
           "title": "策略能入库，不代表它能成为当前冠军",
           "body": "Strategist把可执行推理结构、测量卡与训练轨迹经验组成跨任务资产，和Reflexion只留下可读教训不同；它可保留测过但未获胜的结构，给未来任务组合机会。当前交付选择则另设validation和hidden双门槛，且test不参与。EvalAlloc治理花在哪些评测cell上的成本，而不代替提出策略。三者都依赖真实执行反馈，但经验积累、结构复用与预算分配是不同机制；合成分数通过任何选择规则，都不提供LLM能力证据。",
-          "papers": ["agent-research:strategist", "agent-research:reflexion", "agent-research:evalalloc"]
+          "papers": [
+            "agent-research:strategist",
+            "agent-research:reflexion",
+            "agent-research:evalalloc"
+          ]
         }
       ],
       "questions": [
@@ -1099,7 +1108,11 @@
           "question": "Strategist把失败策略也入库，与Reflexion记录教训、EvalAlloc确认冠军，有哪些不同？",
           "answer": "入库保存可执行结构与实测卡，不自动采用为当前答案流程；最终仍要两split都胜出。Reflexion主要保存下次可读的文字经验，EvalAlloc决定观测预算与最终确认，不替系统生成结构。结构档案、经验内容和获准采用的策略必须分别记录。",
           "example": "教学例：某次投票策略不划算仍可作为未来分解程序的组件，但不能因已入库就覆盖当前更便宜的基线。",
-          "papers": ["agent-research:strategist", "agent-research:reflexion", "agent-research:evalalloc"]
+          "papers": [
+            "agent-research:strategist",
+            "agent-research:reflexion",
+            "agent-research:evalalloc"
+          ]
         }
       ],
       "updated": "2026-11-04",
@@ -1276,9 +1289,13 @@
         {
           "date": "2026-11-04",
           "summary": "精读Strategist，并与Reflexion、EvalAlloc区分跨任务可执行结构库、可读教训和评测预算。新增AST去重的显式prompt边界、validation/hidden双门槛与2个百分点/2%成本带解释；未把CPU合成选择核宣传为真实搜索，原文8×H200完整矩阵高成本不复现、审查DONE。",
-          "papers": ["agent-research:strategist", "agent-research:reflexion", "agent-research:evalalloc"],
+          "papers": [
+            "agent-research:strategist",
+            "agent-research:reflexion",
+            "agent-research:evalalloc"
+          ],
           "source_revisions": {
-            "agent-research:strategist": "69b56dbb607c65c2583cefcf1227962745e10cf9a00384a33a7b13f90622c092",
+            "agent-research:strategist": "78dace5f984684a0a520bb86cb998a0799110a69997864feb631e670a0632dbe",
             "agent-research:reflexion": "1e965361376edeaffb32977018bf433c52f7192a6a8cd44509c0730cbdc53f4d",
             "agent-research:evalalloc": "04e5b9c3cea405eb2244d2e0f4f062a70ae83b5076595524c750a99f4b3629be"
           }
@@ -1655,7 +1672,12 @@
           "paper": "agent-research:agentheal",
           "position": "显式构造无障碍、可恢复和不可恢复资源三联，按副本/版本关系、障碍诊断和访问政策联合评价目标保真。",
           "tradeoff": "不可恢复时正确行为是诚实弃答而非强行回答；需要独立来源与政策标注，本地真值表不具备浏览器或语义judge能力。",
-          "sections": ["背景与主要改动", "核心公式", "数据协议与实现边界", "本地结果与负控"]
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与实现边界",
+            "本地结果与负控"
+          ]
         }
       ],
       "analysis": [
@@ -1680,7 +1702,11 @@
         {
           "title": "无解任务何时是合理评测，而不是破坏后的假稳健性",
           "body": "AgentPerturb要求扰动后仍保留原目标与可解性，避免凭空制造失败。AgentHeal则把真正不可恢复作为明确标注的独立regime，评价诚实弃答、障碍诊断和合规，而不强求不存在的答案；可恢复时又要求优先精确副本或披露版本差异。GAIA式最终答案正确性不能替代这类来源与过程条件。只有明确每组期待行为并分组保留分母，回答率、恢复率和可靠性才不会混淆。",
-          "papers": ["agent-research:agentheal", "agent-research:agent-perturb", "agent-research:gaia"]
+          "papers": [
+            "agent-research:agentheal",
+            "agent-research:agent-perturb",
+            "agent-research:gaia"
+          ]
         }
       ],
       "questions": [
@@ -1720,7 +1746,11 @@
           "question": "为什么AgentHeal可以奖励不可恢复任务中的弃答，而AgentPerturb却不能随意把任务扰坏到无解？",
           "answer": "两者预先定义的目标不同：AgentPerturb测同目标配对稳健性，要求仍可解；AgentHeal测资源恢复，明确区分可恢复与不可恢复，后者要求准确诊断并诚实停止或请求用户协助。不能将该弃答算成终局答题准确率，也不能用总分掩盖不同regime的行为。",
           "example": "教学例：唯一文件消失且无合法备份时，说明障碍而不编造内容是可靠性成功；同一情况若作为仍应答出数值的扰动题，就是改坏了题。",
-          "papers": ["agent-research:agentheal", "agent-research:agent-perturb", "agent-research:gaia"]
+          "papers": [
+            "agent-research:agentheal",
+            "agent-research:agent-perturb",
+            "agent-research:gaia"
+          ]
         }
       ],
       "updated": "2026-11-04",
@@ -1868,9 +1898,13 @@
         {
           "date": "2026-11-04",
           "summary": "补AgentHeal，并对照AgentPerturb与GAIA解释不可恢复regime、目标版本、来源归因与政策乘积。区分精确副本的交集条件与其他版本的子集条件，独立gold标注仅给评价者；本地TS=0.5是四条合成真值表，不是Agent准确率。855任务×13模型完整矩阵高成本不复现、审查DONE。",
-          "papers": ["agent-research:agentheal", "agent-research:agent-perturb", "agent-research:gaia"],
+          "papers": [
+            "agent-research:agentheal",
+            "agent-research:agent-perturb",
+            "agent-research:gaia"
+          ],
           "source_revisions": {
-            "agent-research:agentheal": "12d8188acc6dc0aa0e3d7921a43a59569e32889bd9bcd4d4eeb621de3e65a2bb",
+            "agent-research:agentheal": "68c172c45d549e915d3f7e15e28e894848846d4e6761a3b84e2410a319f019aa",
             "agent-research:agent-perturb": "48a9e1dc9ba05b73631fee28a656c334e3f3d207d76bb6e1b08f3dee0110b68b",
             "agent-research:gaia": "d8d18cafe45824ad6fa4841b6479dcba2a378c11b88c2ae895ce595192a50d1f"
           }

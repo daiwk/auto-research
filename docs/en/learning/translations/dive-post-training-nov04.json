@@ -27,7 +27,7 @@
       }
     },
     "dive/post-training/policy-optimization/update/2026-11-04/1": {
-      "source_sha256": "6087b4392a4c8deb9ac53e6a146486ef10f60c0a8b3cb6921c74d4931558b692",
+      "source_sha256": "5b7aa79442811d5bf5eeee5591d796abdb1c9236657e924154a3e481a96a398a",
       "reviewed": true,
       "fields": {
         "summary": "Reviewed RLiD and added the text-event versus executable-action axis. Same-policy variance marginalization is not superiority of differently trained LDMs; label-marginal KL also differs from row entropy. L1 components only; costly full training is not reproduced."
@@ -59,7 +59,7 @@
       }
     },
     "dive/post-training/student-trajectory-distillation/update/2026-11-04/2": {
-      "source_sha256": "19877417080773aff5c4bf39fd37be5b323fcf7d4a322cde129f51ddd0103d7a",
+      "source_sha256": "c88536db56da1ed3dc4ca3a2f2afe95a7b68e4dffe3c8c7c08f11601f8d4ad9c",
       "reviewed": true,
       "fields": {
         "summary": "Reviewed SpecOPD, separating the fixed outer reference, current-draft inner branches, and E2E-TV. Adds collection dependencies beyond GKD/MPOPD, retaining full teacher mass, ancestry isolation, and predecessor readout without calling L1 tensor checks serving speedup."

@@ -1,6 +1,6 @@
 # SpecOPD: independent supervision branches and acceptance-prefix optimization
 
-<!-- source-sha256: 932961849d1006c4840c5fad45e2a4d9d31aaf9aaec265b96898d2259fba7a03 -->
+<!-- source-sha256: 90be88540d6ff85984692f45f29d7aae0f8b8fdb02cf70f9b887e810a22bdeb8 -->
 
 [简体中文](README.md)
 

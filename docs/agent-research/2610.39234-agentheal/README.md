@@ -34,9 +34,9 @@ flowchart LR
 <!-- paper-figure:start -->
 ### 原论文关键图
 
-[![AgentHeal 原论文 Figure 2：障碍构造、回放与目标保真评测流程](assets/paper-figure-01.jpg)](https://arxiv.org/html/2610.39234v1/figures/AgentHeal_Pipeline.jpg)
+[![AgentHeal 原论文 Figure 2：障碍构造、回放与目标保真评测流程](assets/paper-figure-01.png)](https://arxiv.org/html/2610.39234v1/figures/AgentHeal_Pipeline.jpg)
 
-> **原论文 Figure 2**：控制合法副本、其他版本和诱饵，再独立核对恢复、报告和政策。图片来自[论文 v1](https://arxiv.org/html/2610.39234v1)，版权归原作者所有；本地保存原图。
+> **原论文 Figure 2**：控制合法副本、其他版本和诱饵，再独立核对恢复、报告和政策。图片来自[原论文](https://arxiv.org/html/2610.39234v1)，版权归原作者所有；原始JPEG仅无损封装为PNG，像素、尺寸和图中文字不变，未重绘或缩放。
 <!-- paper-figure:end -->
 
 ### 核心公式

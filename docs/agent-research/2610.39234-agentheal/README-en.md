@@ -1,6 +1,6 @@
 # AgentHeal: Recovering Resources Without Changing the User's Goal
 
-<!-- source-sha256: 12d8188acc6dc0aa0e3d7921a43a59569e32889bd9bcd4d4eeb621de3e65a2bb -->
+<!-- source-sha256: 68c172c45d549e915d3f7e15e28e894848846d4e6761a3b84e2410a319f019aa -->
 
 [简体中文](README.md)
 
@@ -38,7 +38,9 @@ flowchart LR
 <!-- paper-figure:start -->
 ### Key Original Figure
 
-[![AgentHeal Figure 2: barrier construction, replay, and goal-preserving evaluation](assets/paper-figure-01.jpg)](https://arxiv.org/html/2610.39234v1/figures/AgentHeal_Pipeline.jpg)
+[![AgentHeal Figure 2: barrier construction, replay, and goal-preserving evaluation](assets/paper-figure-01.png)](https://arxiv.org/html/2610.39234v1/figures/AgentHeal_Pipeline.jpg)
+
+The original JPEG is losslessly stored as PNG with identical decoded pixels and dimensions; no redraw or resizing is applied.
 
 > **Original Figure 2:** controlled legitimate copies, other versions, and decoys, followed by independent recovery, reporting, and policy checks. The saved original comes from [paper v1](https://arxiv.org/html/2610.39234v1); copyright remains with the authors.
 <!-- paper-figure:end -->

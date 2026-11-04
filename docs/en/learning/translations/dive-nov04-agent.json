@@ -27,7 +27,7 @@
       }
     },
     "dive/agent-research/harness-and-self-improvement/update/2026-11-04/3": {
-      "source_sha256": "a40692688c110bb42bac28c335023eb233641daf20d787d2764f30640d168445",
+      "source_sha256": "888afd2ecceb6f307904ceae0f6291192027d66bdeae1a792c561fbb58659c03",
       "reviewed": true,
       "fields": {
         "summary": "Reviewed Strategist against Reflexion and EvalAlloc to separate cross-task executable libraries, readable lessons, and evaluation budgets. Added explicit prompt boundaries for AST deduplication, validation/hidden gates, and the two-percentage-point/2%-cost bands. CPU synthetic selection kernels are not real search; the original eight-H200 matrix is not reproduced because of high cost, review DONE."
@@ -59,7 +59,7 @@
       }
     },
     "dive/agent-research/evaluation-and-reliability/update/2026-11-04/1": {
-      "source_sha256": "b8f2eba92e79bc6f0d0a88cb5c9abacb336fb66ba458dbd98f9d17384462ba80",
+      "source_sha256": "c47d88dc5ec1dadf1a721e1010511971d31cb1483c8ddc4fe11a2bca35f2eb0a",
       "reviewed": true,
       "fields": {
         "summary": "Added AgentHeal against AgentPerturb and GAIA to explain unrecoverable regimes, requested versions, attribution, and the policy product. Distinguished the exact-copy intersection from the other-version subset condition, with gold annotations visible only to evaluators. Local TS=0.5 is a four-case synthetic truth table, not agent accuracy. The 855-task, 13-model full matrix is not reproduced because of high cost, review DONE."

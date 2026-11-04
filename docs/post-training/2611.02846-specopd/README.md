@@ -27,7 +27,7 @@
 
 ![SpecOPD 原文 Figure 2：采 anchor、采分支和共享主干](assets/paper-figure-01.png)
 
-原始 PNG 来自[原文 Figure 2](https://arxiv.org/html/2611.02846v1#S2.F2)，未裁剪、未重绘；已目视核对三个阶段与私有分支。模型、采样器和生产 kernel 不代表本地已实现。原作者版权与 CC BY 4.0 许可、SHA-256 见 `assets/provenance.json`。
+图片来自[原论文](https://arxiv.org/html/2611.02846v1#S2.F2) Figure 2 的原始 PNG，未裁剪、未重绘；已目视核对三个阶段与私有分支。模型、采样器和生产 kernel 不代表本地已实现。版权归原作者所有，CC BY 4.0 许可与 SHA-256 见 `assets/provenance.json`。
 <!-- paper-figure:end -->
 
 ```mermaid

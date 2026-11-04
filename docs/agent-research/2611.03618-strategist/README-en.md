@@ -1,6 +1,6 @@
 # Strategist: A Cross-Task Library of Executable Reasoning Strategies
 
-<!-- source-sha256: 69b56dbb607c65c2583cefcf1227962745e10cf9a00384a33a7b13f90622c092 -->
+<!-- source-sha256: 78dace5f984684a0a520bb86cb998a0799110a69997864feb631e670a0632dbe -->
 
 [简体中文](README.md)
 

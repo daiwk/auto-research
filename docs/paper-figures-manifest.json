@@ -14163,13 +14163,13 @@
     "figure": "Figure 2",
     "original_caption": "See original figure/caption in attributed source",
     "source_url": "https://arxiv.org/html/2610.39234v1/figures/AgentHeal_Pipeline.jpg",
-    "extraction": "original-reviewed-paper-figure",
-    "asset": "docs/agent-research/2610.39234-agentheal/assets/paper-figure-01.jpg",
+    "extraction": "original-reviewed-paper-figure-lossless-png",
+    "asset": "docs/agent-research/2610.39234-agentheal/assets/paper-figure-01.png",
     "width": 10675,
     "height": 2891,
     "score": 0,
     "error": "",
     "visually_inspected": true,
-    "sha256": "4d5d2ef9f0af3ee1f9554b8380b9f5afa87166b412a61832bba5505095d6217f"
+    "sha256": "f72a1b7059fd8c106f2852c148ab90c693946d4dd7fc35ca3b2f4c346435c977"
   }
 ]

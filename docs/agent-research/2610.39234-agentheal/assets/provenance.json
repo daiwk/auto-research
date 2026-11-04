@@ -1,13 +1,14 @@
 {
   "source_url": "https://arxiv.org/html/2610.39234v1/figures/AgentHeal_Pipeline.jpg",
   "figure": "Figure 2",
-  "asset": "paper-figure-01.jpg",
+  "asset": "paper-figure-01.png",
   "arxiv_id": "2610.39234",
-  "sha256": "4d5d2ef9f0af3ee1f9554b8380b9f5afa87166b412a61832bba5505095d6217f",
+  "sha256": "f72a1b7059fd8c106f2852c148ab90c693946d4dd7fc35ca3b2f4c346435c977",
   "width": 10675,
   "height": 2891,
   "visually_inspected": true,
   "inspected_on": "2026-11-04",
-  "transformation": "none;original HTML image",
-  "copyright": "Copyright original authors; used for attributed research explanation, not relicensed"
+  "transformation": "Original JPEG losslessly re-encoded as PNG; identical decoded pixels, mode and dimensions; no redraw or resampling",
+  "copyright": "Copyright original authors; used for attributed research explanation, not relicensed",
+  "original_source_sha256": "4d5d2ef9f0af3ee1f9554b8380b9f5afa87166b412a61832bba5505095d6217f"
 }

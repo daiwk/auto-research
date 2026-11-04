@@ -37,7 +37,7 @@ flowchart LR
 
 [![Strategist 原论文 Figure 5：四阶段跨任务策略积累流程](assets/paper-figure-01.png)](https://arxiv.org/html/2611.03618v1/pipeline.png)
 
-> **原论文 Figure 5**：检索、提案、实测、积累的闭环。图片来自[论文 v1](https://arxiv.org/html/2611.03618v1)，版权归原作者所有；本地保存原图，不将流程重绘冒充原图。
+> **原论文 Figure 5**：检索、提案、实测、积累的闭环。图片来自[原论文](https://arxiv.org/html/2611.03618v1)，版权归原作者所有；本地保存原图，不将流程重绘冒充原图。
 <!-- paper-figure:end -->
 
 ### 核心公式
