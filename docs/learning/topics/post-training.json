@@ -66,6 +66,7 @@
       ],
       "reading_order": "先读GRPO，区分采样、优势、ratio和参考KL；再读DAPO，观察零方差组与训练稳定性的处理；最后读TIS，把实际采样引擎和训练引擎的概率口径纳入检查。",
       "papers": [
+        "post-training:rlid",
         "post-training:moer",
         "post-training:cord",
         "post-training:orl-diffusion",
@@ -197,6 +198,7 @@
       ],
       "reading_order": "先读GKD，把采样前缀与教师评分画成两条线；再读MiniLLM，比较散度方向及采样稳定化；最后读Learning Signals，区分损失尚大与真正仍有有效学习方向。",
       "papers": [
+        "post-training:specopd",
         "post-training:opst",
         "post-training:userarena-optd",
         "post-training:gift",

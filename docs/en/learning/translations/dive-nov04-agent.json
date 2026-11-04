@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:strategist": {
+      "source_sha256": "379ec5101a2485270cf6bff8155607fc9d2d9eb12ea79e20a9f89d7c96ab5eda",
+      "reviewed": true,
+      "fields": {
+        "position": "Freezes executor models, composes executable reasoning blueprints into a cross-task acyclic library, retrieves relevant and adjacent material, and selects by measured development accuracy and tier-weighted token costs.",
+        "tradeoff": "Nonwinning structures can remain useful for later reuse, but final candidates must win on validation and hidden. Local AST/DAG, external retrieval-score kernels, and paired selection are not meta-agent search."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/4": {
+      "source_sha256": "6045dc0d24844188533cb01ddc8a036f36cdf72577ba5aa6ac2eb8deec5ae45a",
+      "reviewed": true,
+      "fields": {
+        "title": "Library admission does not make a strategy the current champion",
+        "body": "Strategist turns executable structure, measurement cards, and training-trace experience into cross-task assets, unlike Reflexion's readable lessons. Evaluated nonwinners may remain available for future composition. Selecting the current deliverable separately requires validation and hidden gates, with test data excluded. EvalAlloc governs which evaluation cells receive budget rather than proposing strategy structure. All depend on real execution feedback, but experience accumulation, structural reuse, and budget allocation are distinct mechanisms. Synthetic scores passing any selection rule provide no LLM capability evidence."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/blueprint-archive-versus-current-pick": {
+      "source_sha256": "e1ab9fd555b5c0c3893ced2ae876ef806274bddf4214c2b4e5e66141de2ad3dd",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Strategist retaining failed strategies differ from Reflexion storing lessons and EvalAlloc confirming champions?",
+        "answer": "Library admission preserves executable structures and measurement cards without adopting them for the current answer. Final selection still requires both splits to win. Reflexion mainly stores readable experience, whereas EvalAlloc controls observations and confirmation rather than generating structure. Structural archives, lessons, and adopted strategies need separate records.",
+        "example": "Teaching example: an expensive voting strategy may remain a component for a future decomposition program, without replacing the current cheaper reference merely because it entered the library."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-04/3": {
+      "source_sha256": "888afd2ecceb6f307904ceae0f6291192027d66bdeae1a792c561fbb58659c03",
+      "reviewed": true,
+      "fields": {
+        "summary": "Reviewed Strategist against Reflexion and EvalAlloc to separate cross-task executable libraries, readable lessons, and evaluation budgets. Added explicit prompt boundaries for AST deduplication, validation/hidden gates, and the two-percentage-point/2%-cost bands. CPU synthetic selection kernels are not real search; the original eight-H200 matrix is not reproduced because of high cost, review DONE."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/comparison/agent-research:agentheal": {
+      "source_sha256": "fcea39bb99bc83cf70b75fa16e15d1414c071beb8004c4c969b4573d36a75b45",
+      "reviewed": true,
+      "fields": {
+        "position": "Constructs barrier-free, recoverable, and unrecoverable resource triples, jointly evaluating goal preservation through copy/version relations, barrier diagnoses, and access policy.",
+        "tradeoff": "Honest abstention, not forced answering, is appropriate on unrecoverable tasks. Independent provenance and policy annotations are required; local truth tables provide neither browser nor semantic-judge capability."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/analysis/2": {
+      "source_sha256": "b178fcaf0d9e92e6970fdac7e8379b3a59bde24d8641174d732a87eb08f3d790",
+      "reviewed": true,
+      "fields": {
+        "title": "When an unsolvable task is valid evaluation rather than artificially broken robustness",
+        "body": "AgentPerturb preserves the original objective and solvability after perturbation, avoiding manufactured failures. AgentHeal instead labels genuine unrecoverability as its own regime, assessing honest abstention, diagnosis, and compliance without demanding nonexistent answers. Recoverable cases still require preferring exact copies or disclosing version differences. GAIA-style final-answer correctness does not replace source and process conditions. Answer rates, recovery rates, and reliability stay distinct only when expected behavior and denominators are explicit for each regime."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/question/unrecoverable-is-a-different-contract": {
+      "source_sha256": "35f7556966dbb32a012fbef280152dc9f76401c951215d5864ba8966edc9bc45",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can AgentHeal reward abstention on unrecoverable tasks while AgentPerturb cannot arbitrarily break tasks until they are unsolvable?",
+        "answer": "Their predefined objectives differ. AgentPerturb measures paired robustness under the same solvable objective. AgentHeal measures resource recovery, explicitly distinguishing recoverable and unrecoverable cases; the latter require diagnosis and honest stopping or user assistance. Such abstention is not final-answer accuracy, and an aggregate score must not conceal different regimes.",
+        "example": "Teaching example: when the only file disappears without a lawful backup, describing the barrier instead of fabricating content is a reliability success. Requiring the original number on that same condition as a perturbation task instead breaks the question."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/update/2026-11-04/1": {
+      "source_sha256": "c47d88dc5ec1dadf1a721e1010511971d31cb1483c8ddc4fe11a2bca35f2eb0a",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added AgentHeal against AgentPerturb and GAIA to explain unrecoverable regimes, requested versions, attribution, and the policy product. Distinguished the exact-copy intersection from the other-version subset condition, with gold annotations visible only to evaluators. Local TS=0.5 is a four-case synthetic truth table, not agent accuracy. The 855-task, 13-model full matrix is not reproduced because of high cost, review DONE."
+      }
+    }
+  }
+}

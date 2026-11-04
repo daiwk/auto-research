@@ -203,6 +203,7 @@
       ],
       "reading_order": "先读 Reflexion，看语言经验如何跨尝试保存；再读 Self-Refine，对比单次反馈修订；最后读 AgentX，理解候选开发、评估与运行流程更新的完整边界，并对照本地仅实现的部分。",
       "papers": [
+        "agent-research:strategist",
         "agent-research:rsi-opt",
         "agent-research:image-rsi",
         "agent-research:harnessmm",
@@ -341,6 +342,7 @@
       ],
       "reading_order": "先读 GAIA，明确端到端任务与难度；再读 AgentPerturb，理解单因素、目标保持和独立验证的配对评测。阅读每篇本地边界，分别识别官方任务、CPU协议诊断和未运行部分。",
       "papers": [
+        "agent-research:agentheal",
         "agent-research:physical-engineering-exam",
         "agent-research:scope-replay",
         "agent-research:tool-bottleneck-bench",

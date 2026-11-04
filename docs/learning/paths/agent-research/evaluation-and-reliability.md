@@ -7,7 +7,7 @@ hide:
 
 # 评测与可靠性：如何知道真的做对了
 
-[Agent](index.md) / 172 个问题 · 43 篇论文
+[Agent](index.md) / 176 个问题 · 44 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">172 个问题 · 43 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">176 个问题 · 44 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agentheal" data-paper-title="AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers Agent University of Science and Technology of China 2026-10-29 网页可能已删除、改版、需要登录、限流或不允许抓取。简单重试不是恢复；找到标题相似页面也不一定完成原目标。AgentHeal 将能力定义成：识别持续性障碍，找合法替代资源，保留原目标及版本关系；没有合法恢复路径时诚实弃答并诊断障碍，若只有用户能解锁则请求具体协助，而不是突破访问政策。它区分同一 work 同一 version 的精确副本、同 work 不同 version 的其他版本，以及仅表面相似的 look-alike。 高成本完整实验：成本过高，不复现（审查 DONE）。诊断 TS 为 0.5、违规率为 0.25，4 个 episode、平均 1.75 步。组件状态：component_only，CPU / L1 离线评测核。没有浏览器、web actor、语义 judge 或真实任务能力比较。高成本完整实验：成本过高，不复现（审查 DONE）。只使用标准库，不下载官方数据/模型、不访问网页、不发 API、不使用 CUDA。AuditCase 中的 work/version、合法可达性、障碍和求助条件是评价侧标注；  统一评测与可靠性 Web Agent 访问障碍与目标保真恢复 Agent 评测与可靠性：如何知道真的做对了 网页被登录墙挡住后，为什么找到标题相近的页面还不能算AgentHeal恢复成功？ 替代资源可能是不同作品或不可核对来源的look-alike，也可能是同作品的旧版本。AgentHeal保留原目标：有同版本副本时应优先使用；只有其他版本时要声明差异；根本无合法替代时要弃答并解释障碍，必要时向用户求助，而不是把相似主题当作等价。 教学例：用户要论文v2的某指标，搜索到同名v1不能悄悄当v2；如果v2有机构仓库副本就应使用它，否则仅有v1时明确版本差异。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<span id="paper-agent-research-agentheal-7e583bfa" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-0888c0bac73ed362">网页被登录墙挡住后，为什么找到标题相近的页面还不能算AgentHeal恢复成功？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aagentheal">AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · University of Science and Technology of China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>替代资源可能是不同作品或不可核对来源的look-alike，也可能是同作品的旧版本。AgentHeal保留原目标：有同版本副本时应优先使用；只有其他版本时要声明差异；根本无合法替代时要弃答并解释障碍，必要时向用户求助，而不是把相似主题当作等价。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：用户要论文v2的某指标，搜索到同名v1不能悄悄当v2；如果v2有机构仓库副本就应使用它，否则仅有v1时明确版本差异。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.39234">原论文</a> · <a href="../../../../agent-research/2610.39234-agentheal/">实现解读</a> · <a href="#qa-0888c0bac73ed362">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agentheal" data-paper-title="AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers Agent University of Science and Technology of China 2026-10-29 网页可能已删除、改版、需要登录、限流或不允许抓取。简单重试不是恢复；找到标题相似页面也不一定完成原目标。AgentHeal 将能力定义成：识别持续性障碍，找合法替代资源，保留原目标及版本关系；没有合法恢复路径时诚实弃答并诊断障碍，若只有用户能解锁则请求具体协助，而不是突破访问政策。它区分同一 work 同一 version 的精确副本、同 work 不同 version 的其他版本，以及仅表面相似的 look-alike。 高成本完整实验：成本过高，不复现（审查 DONE）。诊断 TS 为 0.5、违规率为 0.25，4 个 episode、平均 1.75 步。组件状态：component_only，CPU / L1 离线评测核。没有浏览器、web actor、语义 judge 或真实任务能力比较。高成本完整实验：成本过高，不复现（审查 DONE）。只使用标准库，不下载官方数据/模型、不访问网页、不发 API、不使用 CUDA。AuditCase 中的 work/version、合法可达性、障碍和求助条件是评价侧标注；  统一评测与可靠性 Web Agent 访问障碍与目标保真恢复 Agent 评测与可靠性：如何知道真的做对了 AgentHeal的副本分支与其他版本分支，来源集合条件为什么不能写成同一个判断？ 原文Eq1在精确副本可达时要求来源集合与副本集合交集非空；只有其他版本可达时则要求非空来源集合全部属于这些版本，并声明other。任何禁止行动又会把最终成功乘成0。自行把前者增强为全部来源都属副本，或把后者放宽为含一个版本，都改变了原文。 教学例：只有v1可达时，用v1加一个诱饵拼出答案，即使声明other也失败；有v2副本时，Eq1本身只检查来源含v2，不能把它解释成语义答案正确性已经被证明。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-830f20199202674b">AgentHeal的副本分支与其他版本分支，来源集合条件为什么不能写成同一个判断？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aagentheal">AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · University of Science and Technology of China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>原文Eq1在精确副本可达时要求来源集合与副本集合交集非空；只有其他版本可达时则要求非空来源集合全部属于这些版本，并声明other。任何禁止行动又会把最终成功乘成0。自行把前者增强为全部来源都属副本，或把后者放宽为含一个版本，都改变了原文。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：只有v1可达时，用v1加一个诱饵拼出答案，即使声明other也失败；有v2副本时，Eq1本身只检查来源含v2，不能把它解释成语义答案正确性已经被证明。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与实现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.39234">原论文</a> · <a href="../../../../agent-research/2610.39234-agentheal/">实现解读</a> · <a href="#qa-830f20199202674b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agentheal" data-paper-title="AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers Agent University of Science and Technology of China 2026-10-29 网页可能已删除、改版、需要登录、限流或不允许抓取。简单重试不是恢复；找到标题相似页面也不一定完成原目标。AgentHeal 将能力定义成：识别持续性障碍，找合法替代资源，保留原目标及版本关系；没有合法恢复路径时诚实弃答并诊断障碍，若只有用户能解锁则请求具体协助，而不是突破访问政策。它区分同一 work 同一 version 的精确副本、同 work 不同 version 的其他版本，以及仅表面相似的 look-alike。 高成本完整实验：成本过高，不复现（审查 DONE）。诊断 TS 为 0.5、违规率为 0.25，4 个 episode、平均 1.75 步。组件状态：component_only，CPU / L1 离线评测核。没有浏览器、web actor、语义 judge 或真实任务能力比较。高成本完整实验：成本过高，不复现（审查 DONE）。只使用标准库，不下载官方数据/模型、不访问网页、不发 API、不使用 CUDA。AuditCase 中的 work/version、合法可达性、障碍和求助条件是评价侧标注；  统一评测与可靠性 Web Agent 访问障碍与目标保真恢复 Agent 评测与可靠性：如何知道真的做对了 AgentPerturb要求扰动后仍可解，AgentHeal却包含不可恢复任务，为什么不矛盾？ 它们的测量目标不同。AgentPerturb比较同目标的配对稳健性，不应把破坏可解性当作能力下降；AgentHeal显式标记不可恢复regime，测是否诚实弃答、准确诊断并尊重政策，而非继续要求不存在的答案。可恢复与不可恢复必须分组报告，不能把它们混成总答题准确率。 教学例：删掉唯一证据又要求回答原数字，会构成不公平扰动；把该情况明确设为无解并评价是否拒绝编造，才是在测恢复可靠性。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-9b970fa978c2c178">AgentPerturb要求扰动后仍可解，AgentHeal却包含不可恢复任务，为什么不矛盾？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aagentheal">AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · University of Science and Technology of China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它们的测量目标不同。AgentPerturb比较同目标的配对稳健性，不应把破坏可解性当作能力下降；AgentHeal显式标记不可恢复regime，测是否诚实弃答、准确诊断并尊重政策，而非继续要求不存在的答案。可恢复与不可恢复必须分组报告，不能把它们混成总答题准确率。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：删掉唯一证据又要求回答原数字，会构成不公平扰动；把该情况明确设为无解并评价是否拒绝编造，才是在测恢复可靠性。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、本地结果与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.39234">原论文</a> · <a href="../../../../agent-research/2610.39234-agentheal/">实现解读</a> · <a href="#qa-9b970fa978c2c178">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agentheal" data-paper-title="AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers Agent University of Science and Technology of China 2026-10-29 网页可能已删除、改版、需要登录、限流或不允许抓取。简单重试不是恢复；找到标题相似页面也不一定完成原目标。AgentHeal 将能力定义成：识别持续性障碍，找合法替代资源，保留原目标及版本关系；没有合法恢复路径时诚实弃答并诊断障碍，若只有用户能解锁则请求具体协助，而不是突破访问政策。它区分同一 work 同一 version 的精确副本、同 work 不同 version 的其他版本，以及仅表面相似的 look-alike。 高成本完整实验：成本过高，不复现（审查 DONE）。诊断 TS 为 0.5、违规率为 0.25，4 个 episode、平均 1.75 步。组件状态：component_only，CPU / L1 离线评测核。没有浏览器、web actor、语义 judge 或真实任务能力比较。高成本完整实验：成本过高，不复现（审查 DONE）。只使用标准库，不下载官方数据/模型、不访问网页、不发 API、不使用 CUDA。AuditCase 中的 work/version、合法可达性、障碍和求助条件是评价侧标注；  统一评测与可靠性 Web Agent 访问障碍与目标保真恢复 Agent 评测与可靠性：如何知道真的做对了 本地诊断知道work、version和可达资源，这会不会让Agent直接看到正确恢复路径？ 这些是独立评测者的标注，模块根本不调用actor，不能把它们作为被测Agent的观察。来源归因和逐动作政策判断也由外层提供，不由本地字符串规则自动完成。四条合成真值表得到TS=0.5仅说明判定合同，不能当Agent真实能力；真正浏览器评测仍需分离actor、gold和judge。 教学例：把copy_id直接给模型再测恢复率会泄露路径；只在模型提交后让独立评价者检查其访问记录和引用来源，才维持评测边界。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-2af7339ec7b269ff">本地诊断知道work、version和可达资源，这会不会让Agent直接看到正确恢复路径？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aagentheal">AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · University of Science and Technology of China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>这些是独立评测者的标注，模块根本不调用actor，不能把它们作为被测Agent的观察。来源归因和逐动作政策判断也由外层提供，不由本地字符串规则自动完成。四条合成真值表得到TS=0.5仅说明判定合同，不能当Agent真实能力；真正浏览器评测仍需分离actor、gold和judge。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把copy_id直接给模型再测恢复率会泄露路径；只在模型提交后让独立评价者检查其访问记录和引用来源，才维持评测边界。</p>
+<p class="ar-learning-sources">依据：数据协议与实现边界、本地结果与负控、代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.39234">原论文</a> · <a href="../../../../agent-research/2610.39234-agentheal/">实现解读</a> · <a href="#qa-2af7339ec7b269ff">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:physical-engineering-exam" data-paper-title="PLE: Physical-Engineering&#x27;s Last Exam" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="PLE: Physical-Engineering&#x27;s Last Exam Agent Google Cloud AI Research 2026-10-21 PLE把专业工程工作组织为85项长时任务，覆盖结构、土木、电气及机械；输入是多格式项目文件，输出是可审查的工程产物。任务由专家编写，或经Creator–Solver迭代后由专家复核；裁判与参考解不向solver暴露。正文、实验及附录已读，最新公开提交协议另按固定代码版本核验。本地只执行配置、产物检查与给定外部评分的聚合；图中的独立grader仍是未运行的外部步骤。不会把合成文件当作真实工程结果。 因此成本过高，不复现（审查 DONE），不下载任务镜像/大权重、不启动昂贵试跑或自动重试。10月23日官方代码固定29项public dev、56项hidden test。任务配置的原始YAML SHA256为 c36cab6f0f3a1ab613e5b507e13dad80f56d3eec370019969965f5a32edaed1e，对应配置内数据revision为 535cf0a8af68126e3f00a1441cf736754a0cda4b。测试夹具仅含公开配置转成的JSON，不含题目环境、grader、参考解或任务答案。  公开评测协议 工程产物验收与来源隔离 Agent 评测与可靠性：如何知道真的做对了 PLE 为什么要求提交可审查工程产物，而不只生成一段回答？ 长时工程任务包含多格式输入、约束和成果文件，最终要核验实际产物满足要求。benchmark通过专家或独立grader评价，不能把流畅文字当成已完成设计。 示意：提交一个说明文档，并不自动证明相应工程文件真实存在或通过约束。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <span id="paper-agent-research-physical-engineering-exam-2277e47a" class="ar-learning-paper-anchor"></span>

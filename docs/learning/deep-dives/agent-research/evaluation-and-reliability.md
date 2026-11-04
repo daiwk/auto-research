@@ -7,7 +7,7 @@ hide:
 
 # 评测追问四件事：完成了、稳健吗、靠什么、花多少
 
-[Agent](../index.md) · 更新 2026-10-27 · 43 篇主题资料 / 6 篇重点对照
+[Agent](../index.md) · 更新 2026-11-04 · 44 篇主题资料 / 7 篇重点对照
 
 GAIA测最终任务回答，AgentPerturb检查单目标输入扰动，User Proxy Bench检查用户模拟是否偷省信息获取；AlphaDiana完整记录失败与重试，HDA拆解harness涨分来源，选择性评测则约束自动裁判的错误区域。高分只有在这些协议讲清后才有可解释性。
 
@@ -31,6 +31,7 @@ GAIA测最终任务回答，AgentPerturb检查单目标输入扰动，User Proxy
 | [AlphaDiana: A Measurement System for Agents in Verifiable Reasoning Tasks](../../../agent-research/2610.20675-alpha-diana/README.md) · [原始来源](https://arxiv.org/abs/2610.20675)<br>章节：背景与主要改动、核心公式、无 gold 边界与限制 | 以稳定逻辑样本区分attempt，保留未评分状态并累计所有重试成本，在统一政策下比较模型—Harness系统。 | 已确认正确比例不是未知评分补齐后的真实成功率；缺成本时不报完整每成功token。本地只有合成会计协议。 |
 | [Harness-Delta Attribution: Dissecting Gains From Harness Evolution](../../../agent-research/2610.22466-harness-decomposition/README.md) · [原始来源](https://arxiv.org/abs/2610.22466)<br>章节：背景与主要改动、核心公式、本地复现与边界 | 先检验配对增益，再构造人审算力匹配与捷径中和四臂，分解额外算力、已检测捷径和剩余项。 | 中和只能覆盖已发现机制，剩余项仍可能含捷径，不能直接当迁移证据；本地只执行已测四臂统计。 |
 | [Certified Selective Automation of LLM Agent Evaluation](../../../agent-research/2609.34320-certified-selective-eval/README.md) · [原始来源](https://arxiv.org/abs/2609.34320)<br>章节：背景与主要改动、复现边界 | 以任务簇bootstrap估计自动判断区域的错误率上界，证书低于预算才自动接管。 | 依赖校准任务簇与目标自动区域，不能把轨迹数当独立样本；本地mini证书不代表论文语料覆盖或通用裁判可靠。 |
+| [AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers](../../../agent-research/2610.39234-agentheal/README.md) · [原始来源](https://arxiv.org/abs/2610.39234)<br>章节：背景与主要改动、核心公式、数据协议与实现边界、本地结果与负控 | 显式构造无障碍、可恢复和不可恢复资源三联，按副本/版本关系、障碍诊断和访问政策联合评价目标保真。 | 不可恢复时正确行为是诚实弃答而非强行回答；需要独立来源与政策标注，本地真值表不具备浏览器或语义judge能力。 |
 
 </div>
 
@@ -47,6 +48,12 @@ GAIA式终局精确答案说明交付是否匹配参考，但若模拟用户提�
 AlphaDiana强调逻辑样本不随重试扩张，所有attempt成本都要累计，运行成功与已评分分开。HDA的四臂要求逐样本对齐、预算控制与人审中和，且先确认涨分再归因。选择性评测的簇级证书则处理另一种相关性：同任务多条轨迹不能伪装成许多独立校准样本。它们共同约束怎样解释数字，却没有把未知评分、未检测捷径或未覆盖任务自动变成已验证。
 
 对照来源：[alpha-diana](../../../agent-research/2610.20675-alpha-diana/README.md) · [harness-decomposition](../../../agent-research/2610.22466-harness-decomposition/README.md) · [certified-selective-eval](../../../agent-research/2609.34320-certified-selective-eval/README.md)
+
+### 无解任务何时是合理评测，而不是破坏后的假稳健性
+
+AgentPerturb要求扰动后仍保留原目标与可解性，避免凭空制造失败。AgentHeal则把真正不可恢复作为明确标注的独立regime，评价诚实弃答、障碍诊断和合规，而不强求不存在的答案；可恢复时又要求优先精确副本或披露版本差异。GAIA式最终答案正确性不能替代这类来源与过程条件。只有明确每组期待行为并分组保留分母，回答率、恢复率和可靠性才不会混淆。
+
+对照来源：[agentheal](../../../agent-research/2610.39234-agentheal/README.md) · [agent-perturb](../../../agent-research/2610.21624-agent-perturb/README.md) · [gaia](../../../agent-research/2311.12983-gaia/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -82,18 +89,33 @@ AlphaDiana强调逻辑样本不随重试扩张，所有attempt成本都要累计
 
     对照来源：[harness-decomposition](../../../agent-research/2610.22466-harness-decomposition/README.md) · [certified-selective-eval](../../../agent-research/2609.34320-certified-selective-eval/README.md)
 
+### 为什么AgentHeal可以奖励不可恢复任务中的弃答，而AgentPerturb却不能随意把任务扰坏到无解？ {#cross-unrecoverable-is-a-different-contract}
+
+??? note "展开答案与例子"
+
+    **答案：** 两者预先定义的目标不同：AgentPerturb测同目标配对稳健性，要求仍可解；AgentHeal测资源恢复，明确区分可恢复与不可恢复，后者要求准确诊断并诚实停止或请求用户协助。不能将该弃答算成终局答题准确率，也不能用总分掩盖不同regime的行为。
+
+    **教学例子：** 教学例：唯一文件消失且无合法备份时，说明障碍而不编造内容是可靠性成功；同一情况若作为仍应答出数值的扰动题，就是改坏了题。
+
+    对照来源：[agentheal](../../../agent-research/2610.39234-agentheal/README.md) · [agent-perturb](../../../agent-research/2610.21624-agent-perturb/README.md) · [gaia](../../../agent-research/2311.12983-gaia/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-04** · 补AgentHeal，并对照AgentPerturb与GAIA解释不可恢复regime、目标版本、来源归因与政策乘积。区分精确副本的交集条件与其他版本的子集条件，独立gold标注仅给评价者；本地TS=0.5是四条合成真值表，不是Agent准确率。855任务×13模型完整矩阵高成本不复现、审查DONE。
+
+涉及：[agentheal](../../../agent-research/2610.39234-agentheal/README.md) · [agent-perturb](../../../agent-research/2610.21624-agent-perturb/README.md) · [gaia](../../../agent-research/2311.12983-gaia/README.md)
 
 **2026-10-27** · 首版：比较终局能力、单目标扰动、用户合同、失败重试会计、四臂归因与簇级选择性证书。
 
 覆盖 43 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 43 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 44 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
+- [AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers](../../../agent-research/2610.39234-agentheal/README.md)
 - [PLE: Physical-Engineering&#x27;s Last Exam](../../../agent-research/2610.30537-physical-engineering-exam/README.md)
 - [SCOPE: Selective Certification of Program Edits for Embodied Heuristic Learning](../../../agent-research/2610.23128-scope-replay/README.md)
 - [ToolBottleneckBench: Measuring Tool-Agent Performance under Controlled Pressures and Fixed Harness Budgets](../../../agent-research/2610.21098-tool-bottleneck-bench/README.md)

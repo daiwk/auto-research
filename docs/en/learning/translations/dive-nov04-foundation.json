@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/foundation-models/training-budget/comparison/foundation-models:proland": {
+      "source_sha256": "8d93db6552a67ffb4d45d47c6f517d7ea2357e34baada4c04ababb8808960e1e",
+      "reviewed": true,
+      "fields": {
+        "position": "Reproject momentum and compute a spectral direction in the product space BA; coordinate the factors with horizontal DB and independently restore B's orthogonality through Landing.",
+        "tradeoff": "Not independent Muon on A/B. A smaller core saves state but does not remove ill-conditioned pseudoinverses. Local coverage verifies exact thin-factor updates only; full multi-model fine-tuning is too costly and not reproduced."
+      }
+    },
+    "dive/foundation-models/training-budget/comparison/foundation-models:gavagai": {
+      "source_sha256": "5427c047ac221cf596e9719eef14b9218ccfe7102b5181ceb6907a2d66f2bdbf",
+      "reviewed": true,
+      "fields": {
+        "position": "Use Nothing for nonreferential words and visual-column upper capacities for regional competition, then add fixed-plan alignment cost to caption CE.",
+        "tradeoff": "Changes supervision rather than the optimizer. Eight scaling steps do not guarantee row-marginal convergence, and v1 leaves any extra Nothing-hinge gradient unspecified. Local coverage claims neither full anti-collapse nor SAYCam training."
+      }
+    },
+    "dive/foundation-models/training-budget/analysis/2": {
+      "source_sha256": "e3344516e13656b3ae97b6b95ecc426fa06f17f7bcc6d5939f6bfc22c214ede7",
+      "reviewed": true,
+      "fields": {
+        "title": "Separate how parameters update from what the model must learn",
+        "body": "ProLand keeps the supplied loss while changing LoRA updates through product-space spectral directions and Landing. GAVAGAI adds referential variables to the objective and addresses supervision mismatch with Nothing and capacities. Descent and feasibility recovery do not validate a new alignment loss; feasible small-matrix transport does not establish real-image grounding gains. A future combination should fix data, backbone and budget, then ablate objective changes independently of update geometry. Both are L1 components here; no costly joint training is launched."
+      }
+    },
+    "dive/foundation-models/training-budget/question/nov04-objective-versus-geometry": {
+      "source_sha256": "05aba0ccdefa9ebc7fddd6d7c189f5eabeb7fe4567ff426d498605a0f886e1b5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't one decreasing loss classify ProLand and GAVAGAI as the same training improvement?",
+        "answer": "ProLand changes parameter updates and feasibility restoration for a given objective; GAVAGAI changes the objective with word-region assignments and Nothing. Their losses may not even be comparable. Fix task and data, then separately test update equivalence, transport constraints, independent validation performance and total costs. Small-matrix descent is not capability evidence.",
+        "example": "Teaching example: Adding a potentially negative alignment cost lowers CE-plus-cost numerically without necessarily improving captions. Likewise, reducing MSE with ProLand does not show that words were grounded in images."
+      }
+    },
+    "dive/foundation-models/training-budget/update/2026-11-04/1": {
+      "source_sha256": "b89cdb9efbcbb9e1d381de1dbc23c17ac27a8e910352206070cadcaefa078635",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add ProLand and GAVAGAI, separating product-space update geometry from new alignment supervision. Document independent references, finite-iteration and gradient boundaries; both full training experiments are too costly and not reproduced."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/comparison/foundation-models:xla-trenches": {
+      "source_sha256": "8aac4638b6fe11b36a9fc42e74cd5a03949e3a7e77f1a61280ae9f4f639cff5f",
+      "reviewed": true,
+      "fields": {
+        "position": "Check differences on valid inputs under target-TPU numerics, isolate large graphs, then inspect VREGs inside intact fusions without debugging away the fault.",
+        "tradeoff": "Compiler correctness is not a model-capability score. Private production graphs and TPU tools are unavailable; public OpenXLA covers only part of the pipeline. Local status is review-only, with no CUDA surrogate."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/analysis/2": {
+      "source_sha256": "87332ea90703aa55eae2019ade5d3c8b4c11fccdab9923e482c5d7b7852ef1b7",
+      "reviewed": true,
+      "fields": {
+        "title": "The reference must match execution semantics too",
+        "body": "XLGoBench separates scorers from gold. XLA shows that even valid tasks and labels do not guarantee compiled computation preserves program semantics: register rounding or fusion scheduling can change results. Differential references must exclude NaN-producing invalid inputs without flagging legitimate TPU approximations as bugs. A correct split fusion does not validate the intact fusion, and correct A100 computation does not validate TPU lowering. This batch preserves the missing TPU environment instead of replacing hardware conclusions with CPU/CUDA demonstrations."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/question/nov04-labels-versus-execution-semantics": {
+      "source_sha256": "8397f4c31474ab7b8c769698925e89143f2aedb9e43afc565d53841fef8602d9",
+      "reviewed": true,
+      "fields": {
+        "question": "With exact XLGoBench gold, why doesn't completing a program guarantee trustworthy model evaluation?",
+        "answer": "Exact gold defines correct output, not whether compiled model execution preserves semantics. XLA demonstrates silent numerical changes without crashes. Valid inputs, hardware-matched differential references and isolation are still needed. Check label correctness separately from execution correctness to distinguish model errors from backend errors.",
+        "example": "Teaching example: Gold requires a nonzero quantization residual, but a TPU fused kernel outputs zeros after skipping casts. An exact scorer can mark the output wrong; it cannot automatically conclude the model lacks the ability."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/update/2026-11-04/1": {
+      "source_sha256": "0f86876306a55700f854e3f710a96ae07a3fe5b36e487e980b64f89a80f9a352",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add Google's XLA:TPU compiler-correctness research, distinguishing valid scoring, reference hardware semantics, silent miscompilation and engineering bug counts. Full internal TPU experiments are too costly and not reproduced; review DONE."
+      }
+    }
+  }
+}

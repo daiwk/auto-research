@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/post-training/policy-optimization/comparison/post-training:rlid": {
+      "source_sha256": "0c102f291cd1ee56e219be0fe9d92b73e9e128d298e1615167757e4de4cf25e9",
+      "reviewed": true,
+      "fields": {
+        "position": "Changes the optimization event from free text to executable menu-action probabilities, with single-pass label readout and decision PPO. Marginalizing realizations within one policy removes their variance.",
+        "tradeoff": "Menus, memory, and afterstates change the interface. The identity neither compares different models nor removes temporal-credit noise. Local work is probability/PPO/enumeration auditing only; full multi-environment training is not reproduced because of cost."
+      }
+    },
+    "dive/post-training/policy-optimization/analysis/2": {
+      "source_sha256": "52c45d7d30645d2a8c6873c0eaf7c6247a48a1b3ea6e18a7ebb01f14e3469cef",
+      "reviewed": true,
+      "fields": {
+        "title": "Choose the update event before clipping: text and decisions are different variables",
+        "body": "GRPO/GSPO mainly change advantages or ratio units of an existing text policy. RLiD first changes the probability event to a compiled menu action. Its Rao–Blackwell account conditions on alternative wordings of the same action within one text policy; it does not prove a separately trained LDM stronger. Afterstate menus, memory provenance, label calibration, and interface matching must be specified first. Sharing a PPO formula does not remove these differences."
+      }
+    },
+    "dive/post-training/policy-optimization/question/same-policy-marginalization-not-new-model-win": {
+      "source_sha256": "2948c6bf996d637bdd3fb2407453f06c2801322e7a746bb25428557c0c7b0a30",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does lower variance after text-to-action marginalization not imply RLiD wins every task over reasoning-token policies?",
+        "answer": "The result fixes one text policy and action-dependent advantages, preserving expected updates while removing realization variance. Real LDMs have different parameterizations and training paths, while reasoning adds computation. Temporal credit and menu interfaces remain separate. The paper's Qwen3.5-2B ARC result still favors token policies; that counterexample must be retained.",
+        "example": "Teaching example: Two wordings of open from one policy can be marginalized. Replacing it with another label-only network lies outside that same-policy identity."
+      }
+    },
+    "dive/post-training/policy-optimization/update/2026-11-04/1": {
+      "source_sha256": "5b7aa79442811d5bf5eeee5591d796abdb1c9236657e924154a3e481a96a398a",
+      "reviewed": true,
+      "fields": {
+        "summary": "Reviewed RLiD and added the text-event versus executable-action axis. Same-policy variance marginalization is not superiority of differently trained LDMs; label-marginal KL also differs from row entropy. L1 components only; costly full training is not reproduced."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/comparison/post-training:specopd": {
+      "source_sha256": "d69e074ff1e18a3d197a4ea09a55570a42c9ee4dee593222862ef5a19f277100",
+      "reviewed": true,
+      "fields": {
+        "position": "Resamples current-draft private histories at fixed reference anchors, shares the trunk for parallel teacher scoring, and optimizes an acceptance-length surrogate using overlap prefix products.",
+        "tradeoff": "Changes supervision-collection dependencies and the draft objective, not merely ordinary student RKL terminology. Full teacher mass and predecessor readout must remain intact. Full hybrid-target training/serving is not reproduced; tensor checks do not establish speedup."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/analysis/3": {
+      "source_sha256": "7e1b4056ad7aeb25b189a869075f75bc102895c2559ab2702c20becaeae68457",
+      "reviewed": true,
+      "fields": {
+        "title": "A fixed outer reference can contain current-policy inner branches",
+        "body": "GKD/MiniLLM supervise student-visited states; MPOPD adds an independently trained proposal to change reachability. SpecOPD instead targets speculative drafters: fixed reference anchors host freshly sampled inner branches, removing full-response verification dependencies. Fixed reference does not make these branches off-policy, but neither is this unrestricted student generation. E2E-TV needs full teacher mass and private predecessor histories. Passing its loss checks proves neither hybrid-target state sharing nor faster serving."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/question/branch-prefix-is-not-reference-label": {
+      "source_sha256": "22afbde04d23ea53c4c3c2c2c8586a2beb0c5416dcd00b66af41b02b0b4f0219",
+      "reviewed": true,
+      "fields": {
+        "question": "If a SpecOPD branch diverges after its reference anchor, should the teacher still score using the reference suffix?",
+        "answer": "No. The teacher conditions on the reference prefix and the branch's sampled predecessors, not the reference continuation, future tokens, or siblings. The anchor predicts the first sample; predecessor rows predict later ones. Changing this history or reading the token's own row changes the method and can leak the answer.",
+        "example": "Teaching example: With reference a quiet and draft short evening, evening is predicted from a short, not a quiet, and must not be supplied as its own input first."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/update/2026-11-04/2": {
+      "source_sha256": "c88536db56da1ed3dc4ca3a2f2afe95a7b68e4dffe3c8c7c08f11601f8d4ad9c",
+      "reviewed": true,
+      "fields": {
+        "summary": "Reviewed SpecOPD, separating the fixed outer reference, current-draft inner branches, and E2E-TV. Adds collection dependencies beyond GKD/MPOPD, retaining full teacher mass, ancestry isolation, and predecessor readout without calling L1 tensor checks serving speedup."
+      }
+    }
+  }
+}

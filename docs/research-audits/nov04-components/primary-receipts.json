@@ -1,0 +1,527 @@
+[
+  {
+    "url": "https://research.google/pubs/entitlement-is-not-authorization/",
+    "checked_at": "2026-11-04T04:42:15.927330+00:00",
+    "status": "retrieved",
+    "sha256": "8b377bf986648443c6ef165cea8221dac07c8f386eb1ae5c2e0a3c7d53f33cda",
+    "bytes": 145611,
+    "title": "Entitlement Is Not Authorization",
+    "links": [
+      {
+        "label": "",
+        "url": "https://github.com/google-research"
+      }
+    ],
+    "figures": []
+  },
+  {
+    "url": "https://research.google/pubs/fabscore-fine-grained-evaluation-of-fabrications-in-automated-ai-research-2/",
+    "checked_at": "2026-11-04T04:42:15.929881+00:00",
+    "status": "retrieved",
+    "sha256": "3c4194d884ff06c68a21be1a7a2abd487c0d6e13194111c266cd6096c7a6fee1",
+    "bytes": 148092,
+    "title": "FabScore: Fine-Grained Evaluation of Fabrications in Automated AI Research",
+    "links": [
+      {
+        "label": "Download",
+        "url": "https://chchenhui.github.io/papers/FabScore.pdf"
+      },
+      {
+        "label": "",
+        "url": "https://github.com/google-research"
+      }
+    ],
+    "figures": []
+  },
+  {
+    "url": "https://research.google/pubs/what-limits-us-analyzing-self-reported-limitations-in-nlp-research/",
+    "checked_at": "2026-11-04T04:42:15.930031+00:00",
+    "status": "retrieved",
+    "sha256": "706c6bcd6cbc67fb4d1fde648582e8d0fb89cd290f3619d0911a3633e2d0a908",
+    "bytes": 147115,
+    "title": "What Limits Us? Analyzing Self-Reported Limitations in NLP Research",
+    "links": [
+      {
+        "label": "",
+        "url": "https://github.com/google-research"
+      }
+    ],
+    "figures": []
+  },
+  {
+    "url": "https://research.google/pubs/hierarchical-functional-fault-grading-a-chiplet-based-methodology-to-supplement-structural-atpg-coverage-3/",
+    "checked_at": "2026-11-04T04:42:15.930117+00:00",
+    "status": "retrieved",
+    "sha256": "802ca99e28f048edd430d4dddde5a79c9da2a904c6a2c91bbd88e0f311c121ea",
+    "bytes": 142601,
+    "title": "Hierarchical Functional Fault Grading: A Chiplet-Based Methodology to Supplement Structural ATPG Coverage",
+    "links": [
+      {
+        "label": "",
+        "url": "https://github.com/google-research"
+      }
+    ],
+    "figures": []
+  },
+  {
+    "url": "https://arxiv.org/abs/2611.00530v1",
+    "checked_at": "2026-11-04T04:42:15.930201+00:00",
+    "status": "retrieved",
+    "sha256": "6d22303f58fbfb1530183e3ced981411a4c3cf2349479f2cb0febb94fb062f1d",
+    "bytes": 43947,
+    "title": "[2611.00530v1] WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search",
+    "links": [
+      {
+        "label": "",
+        "url": "https://arxiv.org/IgnoreMe"
+      },
+      {
+        "label": "",
+        "url": "https://arxiv.org/"
+      },
+      {
+        "label": "Search",
+        "url": "https://arxiv.org/search"
+      },
+      {
+        "label": "Submit",
+        "url": "https://arxiv.org/submit"
+      },
+      {
+        "label": "Donate",
+        "url": "https://info.arxiv.org/about/donate.html"
+      },
+      {
+        "label": "Log in",
+        "url": "https://arxiv.org/login"
+      },
+      {
+        "label": "Advanced search",
+        "url": "https://arxiv.org/search/advanced"
+      },
+      {
+        "label": "Kepu Zhang",
+        "url": "https://arxiv.org/search/cs?searchtype=author&query=Zhang,+K"
+      },
+      {
+        "label": "Yuzhe Cai",
+        "url": "https://arxiv.org/search/cs?searchtype=author&query=Cai,+Y"
+      },
+      {
+        "label": "Yue Shu",
+        "url": "https://arxiv.org/search/cs?searchtype=author&query=Shu,+Y"
+      },
+      {
+        "label": "Dawei Chen",
+        "url": "https://arxiv.org/search/cs?searchtype=author&query=Chen,+D"
+      },
+      {
+        "label": "Jinhai Zhu",
+        "url": "https://arxiv.org/search/cs?searchtype=author&query=Zhu,+J"
+      },
+      {
+        "label": "Yuan Xu",
+        "url": "https://arxiv.org/search/cs?searchtype=author&query=Xu,+Y"
+      },
+      {
+        "label": "Zehua Dai",
+        "url": "https://arxiv.org/search/cs?searchtype=author&query=Dai,+Z"
+      },
+      {
+        "label": "Tongke Ni",
+        "url": "https://arxiv.org/search/cs?searchtype=author&query=Ni,+T"
+      },
+      {
+        "label": "Ziyao Chen",
+        "url": "https://arxiv.org/search/cs?searchtype=author&query=Chen,+Z"
+      },
+      {
+        "label": "Chen Fu",
+        "url": "https://arxiv.org/search/cs?searchtype=author&query=Fu,+C"
+      },
+      {
+        "label": "Jie Shao",
+        "url": "https://arxiv.org/search/cs?searchtype=author&query=Shao,+J"
+      },
+      {
+        "label": "Chao Wang",
+        "url": "https://arxiv.org/search/cs?searchtype=author&query=Wang,+C"
+      },
+      {
+        "label": "Xiangmin Wang",
+        "url": "https://arxiv.org/search/cs?searchtype=author&query=Wang,+X"
+      },
+      {
+        "label": "Ruifeng Zhao",
+        "url": "https://arxiv.org/search/cs?searchtype=author&query=Zhao,+R"
+      },
+      {
+        "label": "Rongchun Yao",
+        "url": "https://arxiv.org/search/cs?searchtype=author&query=Yao,+R"
+      },
+      {
+        "label": "Jie Yin",
+        "url": "https://arxiv.org/search/cs?searchtype=author&query=Yin,+J"
+      },
+      {
+        "label": "Weixin Qiu",
+        "url": "https://arxiv.org/search/cs?searchtype=author&query=Qiu,+W"
+      },
+      {
+        "label": "Nan Song",
+        "url": "https://arxiv.org/search/cs?searchtype=author&query=Song,+N"
+      },
+      {
+        "label": "Junyang Li",
+        "url": "https://arxiv.org/search/cs?searchtype=author&query=Li,+J"
+      },
+      {
+        "label": "Fan Li",
+        "url": "https://arxiv.org/search/cs?searchtype=author&query=Li,+F"
+      },
+      {
+        "label": "Quanchao Hui",
+        "url": "https://arxiv.org/search/cs?searchtype=author&query=Hui,+Q"
+      },
+      {
+        "label": "Yulong Ou",
+        "url": "https://arxiv.org/search/cs?searchtype=author&query=Ou,+Y"
+      },
+      {
+        "label": "Qiang Chen",
+        "url": "https://arxiv.org/search/cs?searchtype=author&query=Chen,+Q"
+      },
+      {
+        "label": "Hao Cao",
+        "url": "https://arxiv.org/search/cs?searchtype=author&query=Cao,+H"
+      },
+      {
+        "label": "Sen Yang",
+        "url": "https://arxiv.org/search/cs?searchtype=author&query=Yang,+S"
+      },
+      {
+        "label": "HTML (experimental)",
+        "url": "https://arxiv.org/html/2611.00530v1"
+      },
+      {
+        "label": "arXiv:2611.00530",
+        "url": "https://arxiv.org/abs/2611.00530"
+      },
+      {
+        "label": "arXiv:2611.00530v1",
+        "url": "https://arxiv.org/abs/2611.00530v1"
+      },
+      {
+        "label": "HTML (experimental)",
+        "url": "https://arxiv.org/html/2611.00530v1"
+      },
+      {
+        "label": "view license",
+        "url": "http://arxiv.org/licenses/nonexclusive-distrib/1.0/"
+      },
+      {
+        "label": "Google Scholar",
+        "url": "https://scholar.google.com/scholar_lookup?arxiv_id=2611.00530"
+      },
+      {
+        "label": "",
+        "url": "http://www.bibsonomy.org/BibtexHandler?requTask=upload&url=https://arxiv.org/abs/2611.00530&description=WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search"
+      },
+      {
+        "label": "",
+        "url": "https://reddit.com/submit?url=https://arxiv.org/abs/2611.00530&title=WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search"
+      },
+      {
+        "label": "What is the Explorer?",
+        "url": "https://info.arxiv.org/labs/showcase.html#arxiv-bibliographic-explorer"
+      },
+      {
+        "label": "What is Replicate?",
+        "url": "https://replicate.com/docs/arxiv/about"
+      },
+      {
+        "label": "Learn more about arXivLabs",
+        "url": "https://info.arxiv.org/labs/index.html"
+      },
+      {
+        "label": "What is MathJax?",
+        "url": "https://info.arxiv.org/help/mathjax.html"
+      },
+      {
+        "label": "major funders",
+        "url": "https://info.arxiv.org/about/major_funders.html"
+      },
+      {
+        "label": "member institutions",
+        "url": "https://info.arxiv.org/about/ourmembers.html"
+      },
+      {
+        "label": "About",
+        "url": "https://info.arxiv.org/about"
+      },
+      {
+        "label": "Help",
+        "url": "https://info.arxiv.org/help"
+      },
+      {
+        "label": "Contact",
+        "url": "https://info.arxiv.org/help/contact.html"
+      },
+      {
+        "label": "Subscribe",
+        "url": "https://info.arxiv.org/help/subscribe.html"
+      },
+      {
+        "label": "Copyright",
+        "url": "https://info.arxiv.org/help/license/index.html"
+      },
+      {
+        "label": "Privacy",
+        "url": "https://info.arxiv.org/help/policies/privacy_policy.html"
+      },
+      {
+        "label": "Accessibility",
+        "url": "https://info.arxiv.org/help/web_accessibility.html"
+      },
+      {
+        "label": "Operational Status (opens in new tab)",
+        "url": "https://status.arxiv.org/"
+      }
+    ],
+    "figures": []
+  },
+  {
+    "url": "https://arxiv.org/html/2611.00530v1",
+    "checked_at": "2026-11-04T04:42:15.930302+00:00",
+    "status": "retrieved",
+    "sha256": "569fa743bc5b20563b49761b8de7f7a8b40b0ba0fa8e708e9a36ea8f7009c6ce",
+    "bytes": 260142,
+    "title": "WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search",
+    "links": [
+      {
+        "label": "",
+        "url": "https://arxiv.org/IgnoreMe"
+      },
+      {
+        "label": "",
+        "url": "https://arxiv.org/"
+      },
+      {
+        "label": "Why HTML?",
+        "url": "https://info.arxiv.org/about/accessible_HTML.html"
+      },
+      {
+        "label": "License: arXiv.org perpetual non-exclusive license",
+        "url": "https://info.arxiv.org/help/license/index.html#licenses-available"
+      },
+      {
+        "label": "https://arxiv.org/abs/1707.00143",
+        "url": "https://arxiv.org/abs/1707.00143"
+      },
+      {
+        "label": "https://proceedings.neurips.cc/paper_files/paper/2019/file/09853c7fb1d3f8ee67a61b6bf4a7f8e6-Paper.pdf",
+        "url": "https://proceedings.neurips.cc/paper_files/paper/2019/file/09853c7fb1d3f8ee67a61b6bf4a7f8e6-Paper.pdf"
+      },
+      {
+        "label": "https://arxiv.org/abs/2411.11739",
+        "url": "https://arxiv.org/abs/2411.11739"
+      },
+      {
+        "label": "https://arxiv.org/abs/2609.08762",
+        "url": "https://arxiv.org/abs/2609.08762"
+      },
+      {
+        "label": "https://arxiv.org/abs/1909.08053",
+        "url": "https://arxiv.org/abs/1909.08053"
+      },
+      {
+        "label": "https://proceedings.neurips.cc/paper_files/paper/2022/file/892840a6123b5ec99ebaab8be1530fba-Paper-Conference.pdf",
+        "url": "https://proceedings.neurips.cc/paper_files/paper/2022/file/892840a6123b5ec99ebaab8be1530fba-Paper-Conference.pdf"
+      },
+      {
+        "label": "https://arxiv.org/abs/2508.21038",
+        "url": "https://arxiv.org/abs/2508.21038"
+      },
+      {
+        "label": "https://arxiv.org/abs/2609.08310",
+        "url": "https://arxiv.org/abs/2609.08310"
+      },
+      {
+        "label": "https://openreview.net/forum?id=zeFrfgyZln",
+        "url": "https://openreview.net/forum?id=zeFrfgyZln"
+      },
+      {
+        "label": "the following issues",
+        "url": "https://github.com/arXiv/html_feedback/issues"
+      },
+      {
+        "label": "list of packages that need conversion",
+        "url": "https://github.com/brucemiller/LaTeXML/wiki/Porting-LaTeX-packages-for-LaTeXML"
+      },
+      {
+        "label": "developer contributions",
+        "url": "https://github.com/brucemiller/LaTeXML/issues"
+      },
+      {
+        "label": "major funders",
+        "url": "https://info.arxiv.org/about/major_funders.html"
+      },
+      {
+        "label": "member institutions",
+        "url": "https://info.arxiv.org/about/ourmembers.html"
+      },
+      {
+        "label": "About",
+        "url": "https://info.arxiv.org/about"
+      },
+      {
+        "label": "Help",
+        "url": "https://info.arxiv.org/help"
+      },
+      {
+        "label": "Contact",
+        "url": "https://info.arxiv.org/help/contact.html"
+      },
+      {
+        "label": "Subscribe",
+        "url": "https://info.arxiv.org/help/subscribe.html"
+      },
+      {
+        "label": "Copyright",
+        "url": "https://info.arxiv.org/help/license/index.html"
+      },
+      {
+        "label": "Privacy",
+        "url": "https://info.arxiv.org/help/policies/privacy_policy.html"
+      },
+      {
+        "label": "Accessibility",
+        "url": "https://info.arxiv.org/help/web_accessibility.html"
+      },
+      {
+        "label": "Operational Status (opens in new tab)",
+        "url": "https://status.arxiv.org/"
+      }
+    ],
+    "figures": [
+      {
+        "id": "S0.F1",
+        "caption": "Figure 1 : Comparison between the existing retrieval system and the proposed retrieval system. (a) The existing system combines multiple lexical and dense retrieval sources. (b) The proposed system uses model-centric retrieval as the primary semantic retrieval path and retains one syntax tree as a complementary lexical retrieval source.",
+        "images": [
+          "2611.00530v1/wesearch_online.png"
+        ]
+      },
+      {
+        "id": "S3.F2",
+        "caption": "Figure 2 : Overview of WeSearch. Clusters first define a query-specific candidate document space, over which fine-grained document-level ranking produces the final results.",
+        "images": [
+          "2611.00530v1/wesearch_overview.png"
+        ]
+      },
+      {
+        "id": "alg1",
+        "caption": "Algorithm 1 Online inference with WeSearch 1: Query q q ; cluster collection 𝒞 \\mathcal{C} with embeddings 𝐄 𝒞 \\mathbf{E}_{\\mathcal{C}} ; OPQ-coded document representations; document-side features 2: Top- K K retrieved documents 𝒟 @ ​ K ≺ \\mathcal{D}_{@K}^{\\prec} 3: Encode query: 𝐡 q ← f θ ​ ( q ) \\mathbf{h}_{q}\\leftarrow f_{\\theta}(q) 4: // Stage 1: Cluster-level candidate-space reduction 5: Retrieve relevant clusters: 𝒞 q ← TopN c ∈ 𝒞 ⁡ s c ​ ( q , c ) \\mathcal{C}_{q}\\leftarrow\\operatorname{TopN}_{c\\in\\mathcal{C}}s_{c}(q,c) 6: Gather candidate documents: 𝒟 q ← ⋃ c ∈ 𝒞 q 𝒟 c \\mathcal{D}_{q}\\leftarrow\\bigcup_{c\\in\\mathcal{C}_{q}}\\mathcal{D}_{c} 7: // Stage 2: Document-level ranking 8: Coarse shortlist by ADC-accelerated semantic similarity: 𝒟 q P ← TopP d ∈ 𝒟 q ⁡ s coarse ​ ( q , d ) \\mathcal{D}_{q}^{P}\\leftarrow\\operatorname{TopP}_{d\\in\\mathcal{D}_{q}}s_{\\text{coarse}}(q,d) 9: Reconstruct 𝐡 ^ d \\widehat{\\mathbf{h}}_{d} from OPQ codes and gather 𝐞 f \\mathbf{e}_{f} for all d ∈ 𝒟 q P d\\in\\mathcal{D}_{q}^{P} 10: Compute fine-grained scores s d ​ ( q , d , 𝐞 f ) s_{d}(q,d,\\mathbf{e}_{f}) for all d ∈ 𝒟 q P d\\in\\mathcal{D}_{q}^{P} 11: return 𝒟 @ ​ K ≺ ← TopK d ∈ 𝒟 q P ⁡ s d ​ ( q , d , 𝐞 f ) \\mathcal{D}_{@K}^{\\prec}\\leftarrow\\operatorname{TopK}_{d\\in\\mathcal{D}_{q}^{P}}s_{d}(q,d,\\mathbf{e}_{f})",
+        "images": []
+      },
+      {
+        "id": "S3.F3",
+        "caption": "Figure 3 : The offline index construction procedure.",
+        "images": [
+          "2611.00530v1/offline.png"
+        ]
+      },
+      {
+        "id": "S5.F4",
+        "caption": "Figure 4 : Rolling mounting of fresh documents. New documents are assigned to the existing cluster space, quantized with fixed codebooks, and made visible through an atomic index update.",
+        "images": [
+          "2611.00530v1/rolling_moount.png"
+        ]
+      },
+      {
+        "id": "S6.F5",
+        "caption": "Figure 5 : Experimental results on the Base corpus.",
+        "images": []
+      },
+      {
+        "id": "S6.T1",
+        "caption": "Clustering Doc Memory Recall@300 2 ​ k × 1 ​ k 2k\\times 1k OPQ ( 32,256 ) (32,256) 46.66% 2 ​ k × 1 ​ k 2k\\times 1k OPQ ( 32,512 ) (32,512) 47.10% 2 ​ k × 1 ​ k 2k\\times 1k OPQ ( 64,256 ) (64,256) 51.54% 10 ​ k × 200 10k\\times 200 OPQ ( 64,256 ) (64,256) 51.34% 2 ​ k × 1 ​ k 2k\\times 1k Dense( 32 32 ) 33.07% Table 1 : Ablation on clustering structure and document memory. a × b a\\times b denotes two-level RQ-KMeans with a a coarse clusters, each split into b b sub-clusters. OPQ ​ ( m , K ) \\text{OPQ}(m,K) denotes m m sub-spaces\nwith codebook size K K (Sec. 3.2.2 ); Dense( 32 32 ) stores a 32 32 -dim embedding without quantization. Cluster Recall@ 10 ​ k 10k is stable across all rows and is therefore omitted.",
+        "images": []
+      },
+      {
+        "id": "S6.T2",
+        "caption": "Method Relevance–1 Relevance–2 Long Dwell Effective Click Online 0.3621 0.3087 0.4407 0.4604 WeSearch w/o features & mining 0.4072 0.3277 0.4323 0.4379 WeSearch w/o mining 0.4271 0.3865 0.4961 0.4973 WeSearch (full) 0.4344 0.3794 0.5505 0.5481 Table 2 : Ablation of structured document features and training-data mining in WeSearch, measured by Recall@100. “w/o features & mining”\nuses only semantic embeddings and the basic relevance supervision;\n“w/o mining” adds structured document features; the full model\nfurther incorporates multi-source positive/negative mining.",
+        "images": []
+      },
+      {
+        "id": "S6.T3",
+        "caption": "Method Satisfaction density Relevance density Online 0.1732 0.4575 WeSearch 0.1871 0.4662 WeSearch + one syntax tree 0.2088 0.4854 Table 3 : Teacher-assessed high-quality result density.",
+        "images": []
+      },
+      {
+        "id": "S6.T4",
+        "caption": "Evaluation group CTR Base corpus +0.27% Expanded corpus +0.61% Expanded corpus with Fresh corpus +0.53% Long-query traffic † +1.10% Table 4 : Relative changes in CTR in the one-week online A/B test, compared with the corresponding production baselines. The first three rows report full-traffic results under each corpus configuration. † Long-query traffic is evaluated on the Expanded corpus with Fresh corpus configuration. Bold values indicate statistically\nsignificant gains ( p < 0.05 p<0.05 ).",
+        "images": []
+      },
+      {
+        "id": "S6.T5",
+        "caption": "Metric Relative change CTR +0.68% Dwell time † +0.71% Article clicks ‡ +2.27% Table 5 : Relative changes in the one-month online A/B test on the Expanded corpus with Fresh corpus under full traffic, compared with the corresponding production baseline. † Average per-user dwell time on the search results page. ‡ Per-user clicks on WeChat Official Account articles from\nsearch results. Bold values indicate statistically significant gains\n( p < 0.05 p<0.05 ).",
+        "images": []
+      }
+    ]
+  },
+  {
+    "url": "https://api2.openreview.net/notes?id=6gYWcYQcWM",
+    "checked_at": "2026-11-04T04:42:16.422779+00:00",
+    "status": "failed",
+    "error": "HTTPError: HTTP Error 403: Forbidden"
+  },
+  {
+    "url": "https://research.google/blog/",
+    "checked_at": "2026-11-04T04:42:16.546223+00:00",
+    "status": "retrieved",
+    "sha256": "793884a4a0eef7fa19ee925163304245fa62987ca02cb056187730a638334c37",
+    "bytes": 181420,
+    "title": "Latest News from Google Research Blog - Google Research",
+    "links": [
+      {
+        "label": "",
+        "url": "https://github.com/google-research"
+      }
+    ],
+    "figures": []
+  },
+  {
+    "url": "https://ai.meta.com/blog/",
+    "checked_at": "2026-11-04T04:42:16.767358+00:00",
+    "status": "retrieved",
+    "sha256": "0c3c48cc08b4545dcb98b8ccf8f11e4b1543d9ac9fc03b3d3ed076a687fddaee",
+    "bytes": 211752,
+    "title": "AI at Meta Blog",
+    "links": [
+      {
+        "label": "GitHub",
+        "url": "https://github.com/facebookresearch/"
+      },
+      {
+        "label": "GitHub",
+        "url": "https://github.com/facebookresearch/"
+      }
+    ],
+    "figures": []
+  },
+  {
+    "url": "https://deepmind.google/blog/",
+    "checked_at": "2026-11-04T04:42:16.867428+00:00",
+    "status": "retrieved",
+    "sha256": "41f22dc61c7a48829d970630a369ccdc1e6961ae4ed5a3647860bbd6fb34f1f8",
+    "bytes": 193569,
+    "title": "News — Google DeepMind",
+    "links": [
+      {
+        "label": "",
+        "url": "https://github.com/google-deepmind"
+      }
+    ],
+    "figures": []
+  }
+]

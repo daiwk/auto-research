@@ -7,9 +7,9 @@ hide:
 
 # 训练预算：改数据、改更新方向，还是改比较口径
 
-[基础模型](../index.md) · 更新 2026-10-27 · 28 篇主题资料 / 6 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-04 · 30 篇主题资料 / 8 篇重点对照
 
-同一预算内训练得更好，可能来自更合适的数据、逐样本处理、更有效更新或更低状态开销。DoReMi、Mixing Laws、DataOrchestra、Muon 和 ECO 改动不同环节；Muon Paired Budget 则提醒先冻结选参规则，再分别回答等数据和等时间问题。
+同一预算内训练得更好，可能来自更合适的数据、逐样本处理、更有效更新或更低状态开销。DoReMi、Mixing Laws、DataOrchestra、Muon 和 ECO 改动不同环节；Muon Paired Budget 则提醒先冻结选参规则，再分别回答等数据和等时间问题。ProLand改变LoRA乘积空间的更新几何，GAVAGAI则给captioning增加显式词区域对齐目标，二者不能仅因都改善训练就混为一类。
 
 [机制对照](#comparison) · [取舍分析](#analysis) · [跨论文问答](#questions) · [更新记录](#updates) · [本主题逐篇问答](../../paths/foundation-models/training-budget.md)
 
@@ -31,6 +31,8 @@ hide:
 | [Muon is Scalable for LLM Training](../../../reproductions/2502.16982-muon/README.md) · [原始来源](https://arxiv.org/abs/2502.16982)<br>章节：背景与主要改动、核心公式、复现边界 | 以 momentum 矩阵近似极分解形成隐藏矩阵更新方向，其他参数仍用辅助 AdamW。 | 每步更新几何不同，正交化与辅助优化器也有时间开销；本地短预算没有复现论文规模效率。 |
 | [When Does Muon Actually Win? A Paired Data-, Time-, and Tuning-Budget Benchmark](../../../foundation-models/2610.21555-muon-paired-budget/README.md) · [原始来源](https://arxiv.org/abs/2610.21555)<br>章节：背景与主要改动、核心公式、代码映射与边界 | 固定初始化、数据顺序与开发候选池，分别用数据 AUC、时间 AUC 和选参 regret 评价优化器。 | 它是比较协议而非新优化公式；本地只做合成轨迹诊断，没有训练 Muon 或 AdamW。 |
 | [ECO: Quantized Training without Full-Precision Master Weights](../../../foundation-models/2601.22101-eco-optimizer/README.md) · [原始来源](https://arxiv.org/abs/2601.22101v1)<br>章节：背景与主要改动、核心公式、本地复现与成本判断 | 直接更新低精度权重，把重量化误差注入已有动量，避免常驻 master weights。 | Adam 需逐元素有效步长，格式与舍入会影响误差；无缓冲规则不是任意情况精确等价。本地未实现或训练，完整实验高成本。 |
+| [ProLand: A New Infeasible Manifold Optimization Method for LoRA Fine-Tuning](../../../foundation-models/2611.00236-proland/README.md) · [原始来源](https://arxiv.org/abs/2611.00236)<br>章节：核心公式、检查与负控、成本判断与复现边界 | 在BA乘积空间重投影动量并求谱方向，以水平DB协调两因子，同时独立用Landing恢复B正交性。 | 不是给A/B各做Muon；小核节省状态不消除病态伪逆。本地只验精确thin-factor更新，完整多模型微调高成本不复现。 |
+| [GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport](../../../foundation-models/2611.00319-gavagai/README.md) · [原始来源](https://arxiv.org/abs/2611.00319)<br>章节：核心公式、检查与负控、成本判断与复现边界 | 以Nothing吸收非指称词，以视觉列容量上界约束区域竞争，再将固定plan成本和caption CE相加。 | 改变监督而非优化器；8次缩放不保证行边际已收敛，v1未定义Nothing hinge的额外反传。本地不声称完整防塌缩或SAYCam训练。 |
 
 </div>
 
@@ -47,6 +49,12 @@ DoReMi 根据 excess loss 调整域频率，Mixing Laws 通过 pilot 曲线预�
 Muon 改变每步下降方向，ECO 改变持久状态与量化更新，二者都可能改变每步耗时。Muon Paired Budget 的价值在于把等数据与等时间分开，并冻结开发阶段选参，不为每种报告口径重新挑冠军。训练比较还要包括辅助 AdamW、预处理或 pilot 的实际成本；本地公式诊断与合成曲线只验证这些记账规则，不能作为真实训练效率胜负。
 
 对照来源：[muon](../../../reproductions/2502.16982-muon/README.md) · [eco-optimizer](../../../foundation-models/2601.22101-eco-optimizer/README.md) · [muon-paired-budget](../../../foundation-models/2610.21555-muon-paired-budget/README.md)
+
+### 改变怎样更新，与改变要学什么，必须拆开验证
+
+ProLand保持给定损失，通过乘积空间谱方向和Landing改变LoRA更新；GAVAGAI把词区域指称变量加入训练目标，并用Nothing/容量处理错误监督。前者的下降与约束恢复不能证明新增对齐目标有用，后者的小矩阵传输可行也不证明真实图像grounding提升。若未来组合，应先固定数据、骨干和预算，独立消融目标变化与更新几何；本轮二者都是L1组件，不启动高成本联合训练。
+
+对照来源：[proland](../../../foundation-models/2611.00236-proland/README.md) · [gavagai](../../../foundation-models/2611.00319-gavagai/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -82,18 +90,34 @@ Muon 改变每步下降方向，ECO 改变持久状态与量化更新，二者�
 
     对照来源：[muon](../../../reproductions/2502.16982-muon/README.md) · [muon-paired-budget](../../../foundation-models/2610.21555-muon-paired-budget/README.md) · [eco-optimizer](../../../foundation-models/2601.22101-eco-optimizer/README.md)
 
+### ProLand与GAVAGAI都能对训练产生影响，为什么不能只看一次loss下降就归为同一种改进？ {#cross-nov04-objective-versus-geometry}
+
+??? note "展开答案与例子"
+
+    **答案：** ProLand在给定目标上改变参数更新和约束恢复；GAVAGAI直接改变目标，引入词区域分配和Nothing。两种loss甚至可能不可直接比较。需要固定任务和数据，分别检查更新等价性、传输约束、独立验证效果与总成本，不能让小矩阵下降代替能力证据。
+
+    **教学例子：** 教学例：把原CE加上一个可能为负的对齐成本，数值变低不等于caption质量改善；同样，ProLand让MSE下降也不代表学到了图像中的词所指。
+
+    对照来源：[proland](../../../foundation-models/2611.00236-proland/README.md) · [gavagai](../../../foundation-models/2611.00319-gavagai/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-04** · 加入ProLand与GAVAGAI，区分乘积空间更新几何和新增对齐监督；新增独立参考、有限迭代与反传边界，二者完整训练高成本不复现。
+
+涉及：[proland](../../../foundation-models/2611.00236-proland/README.md) · [gavagai](../../../foundation-models/2611.00319-gavagai/README.md)
 
 **2026-10-27** · 首版：比较域配比学习、配比曲线外推、逐样本处理、矩阵优化与低精度状态，并用配对预算协议解释结论口径。
 
 覆盖 28 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 28 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 30 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
+- [GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport](../../../foundation-models/2611.00319-gavagai/README.md)
+- [ProLand: A New Infeasible Manifold Optimization Method for LoRA Fine-Tuning](../../../foundation-models/2611.00236-proland/README.md)
 - [Rounding in Preconditioner Space: Redesigning 4-bit AdamW Optimizer-State Quantization](../../../foundation-models/2610.12444-adamw4bit/README.md)
 - [AF-Muon: An AdamW-Free Muon Optimizer for Tied-Embedding Models](../../../foundation-models/2610.01395-af-muon/README.md)
 - [BitSparse: Compact Activation Storage for ReLU Feed-Forward Networks](../../../foundation-models/2610.22256-bit-sparse/README.md)

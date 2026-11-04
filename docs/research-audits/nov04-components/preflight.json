@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-04-priority-components",
+  "recorded_on": "2026-11-04",
+  "available_resource": "one NVIDIA A100 or A30, or local Mac; no concurrent GPU assumption",
+  "accepted_scope": "Seven standalone L1 formula/index/control components; one Google TPU paper is review-only. No checkpoints, capability datasets, paid API calls or full training.",
+  "estimated_component_cost": "Small seeded matrices and deterministic state protocols; expected seconds to minutes for three seeds. This is a preflight estimate; actual times are in raw execution artifacts.",
+  "full_experiment_decision": "成本过高，不复现（审查 DONE）",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "components": {
+    "wesearch": "CPU-only supplied-artifact OPQ/ADC, candidate union and fresh snapshot construction; no encoder/FFN/service",
+    "strategist": "CPU-only blueprint/control/measurement/selection protocol; no frozen executor or meta-agent search",
+    "agentheal": "CPU-only externally supplied evidence/provenance decisions; no browser actor or LLM judge",
+    "proland": "Small thin-factor optimizer equivalence checks; no pretrained model fine-tuning",
+    "gavagai": "Small capped-transport/grounding loss kernels; no multimodal backbone training",
+    "specopd": "Small tree-mask/readout/loss tensor checks; no teacher/student LLM rollouts",
+    "rlid": "Small menu-policy/calibration/objective checks; no LLM actor or environment rollouts"
+  },
+  "reference_only": {"xla-trenches": "Private production TPU graphs and internal multi-generation compiler/agent fleet; unavailable on a single NVIDIA device; no CPU/GPU substitute run"}
+}

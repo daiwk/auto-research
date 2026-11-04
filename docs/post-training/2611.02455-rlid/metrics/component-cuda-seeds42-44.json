@@ -1,0 +1,166 @@
+{
+  "schema_version": 2,
+  "method": "rlid",
+  "manifest_ref": "post-training:rlid",
+  "dataset": {
+    "id": "synthetic:nov04-rlid-v1",
+    "revision": "sha256:d349bdc43097604151e755f1ebed761f7b2f8136c0a76bf728ae95f266266805",
+    "recipe": "small seeded mechanism/state/index contracts; no public capability benchmark",
+    "capability_benchmark": false
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "device": "cuda",
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "loss": -0.225,
+        "loss_after": -0.2254309822478238,
+        "gradient_norm": 0.20760333876546286,
+        "mean_update_max_error": 2.7755575615628914e-17,
+        "text_variance_trace": 0.3391835423243354,
+        "decision_variance_trace": 0.1013288752211105,
+        "realization_second_moment": 0.2378546671032249,
+        "variance_identity_error": 0.0,
+        "model_calls": 0
+      },
+      "checks": {
+        "only_menu_actions_have_mass": true,
+        "menu_mass_one": true,
+        "gradient_finite_nonzero": true,
+        "padding_gradient_zero": true,
+        "old_advantage_calibration_frozen": true,
+        "small_update_decreases_surrogate": true,
+        "same_policy_expected_update_preserved": true,
+        "realization_variance_identity": true,
+        "realization_variance_positive": true,
+        "uniform_label_penalty_zero": true
+      },
+      "execution_device": "cuda",
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    },
+    {
+      "seed": 43,
+      "device": "cuda",
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "loss": -0.225,
+        "loss_after": -0.2266003116552401,
+        "gradient_norm": 0.39998153278921156,
+        "mean_update_max_error": 2.7755575615628914e-17,
+        "text_variance_trace": 0.1893407601246771,
+        "decision_variance_trace": 0.10217774765702331,
+        "realization_second_moment": 0.08716301246765376,
+        "variance_identity_error": 2.7755575615628914e-17,
+        "model_calls": 0
+      },
+      "checks": {
+        "only_menu_actions_have_mass": true,
+        "menu_mass_one": true,
+        "gradient_finite_nonzero": true,
+        "padding_gradient_zero": true,
+        "old_advantage_calibration_frozen": true,
+        "small_update_decreases_surrogate": true,
+        "same_policy_expected_update_preserved": true,
+        "realization_variance_identity": true,
+        "realization_variance_positive": true,
+        "uniform_label_penalty_zero": true
+      },
+      "execution_device": "cuda",
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    },
+    {
+      "seed": 44,
+      "device": "cuda",
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "loss": -0.225,
+        "loss_after": -0.22569514902081098,
+        "gradient_norm": 0.26371676555470075,
+        "mean_update_max_error": 2.7755575615628914e-17,
+        "text_variance_trace": 0.21199545394414548,
+        "decision_variance_trace": 0.16690655185562606,
+        "realization_second_moment": 0.04508890208851941,
+        "variance_identity_error": 2.0816681711721685e-17,
+        "model_calls": 0
+      },
+      "checks": {
+        "only_menu_actions_have_mass": true,
+        "menu_mass_one": true,
+        "gradient_finite_nonzero": true,
+        "padding_gradient_zero": true,
+        "old_advantage_calibration_frozen": true,
+        "small_update_decreases_surrogate": true,
+        "same_policy_expected_update_preserved": true,
+        "realization_variance_identity": true,
+        "realization_variance_positive": true,
+        "uniform_label_penalty_zero": true
+      },
+      "execution_device": "cuda",
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    }
+  ],
+  "metrics": {
+    "decision_variance_trace": 0.12347105824458664,
+    "gradient_norm": 0.2904338790364584,
+    "loss": -0.225,
+    "loss_after": -0.22590881430795828,
+    "mean_update_max_error": 2.7755575615628914e-17,
+    "model_calls": 0.0,
+    "realization_second_moment": 0.12336886055313269,
+    "text_variance_trace": 0.24683991879771935,
+    "variance_identity_error": 1.61907524424502e-17
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "formal_comparison": false,
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "three-seed synthetic mechanism diagnostic; not a capability comparison"
+  },
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "3f6f422472dc6ed486d97160328560e22ce03cb9",
+    "artifact_path": "docs/post-training/2611.02455-rlid/metrics/component-cuda-seeds42-44.json",
+    "dataset_fingerprint": "sha256:f8e6d789a3f35bee77cad1c485403d77bf1c7faa9aa886a1eff1d97244458ee0",
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "executed_source_sha256": {
+      "scripts/run_nov04_components.py": "61d35d574d9561e4611d2647174b8a6af07fabf8c30b6909e21e253542cf4336",
+      "docs/research-audits/nov04-components/preflight.json": "443ad9d8319c1c32ee31f8ec1f99f046c6b3091d427512db071248fc8673dd47",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "src/auto_research/agent_research/agentheal.py": "34c7a3137073075333d16d186185e439e3e5538a6172c33f686e2ce912e57699",
+      "src/auto_research/agent_research/strategist.py": "f496322604ae6e54ffa74ff459bfdace27cc673514f86ac14dbfbd4678706e6a",
+      "src/auto_research/foundation_models/gavagai.py": "ad8389f6d94d104bb9f76740381ec40dadb3005cde6d437c232e0345ab8e132f",
+      "src/auto_research/foundation_models/proland.py": "d98512b9af75517dc5522f060244412bc2ef3535c732042d8eece14b6ca39f9d",
+      "src/auto_research/post_training/rlid.py": "d349bdc43097604151e755f1ebed761f7b2f8136c0a76bf728ae95f266266805",
+      "src/auto_research/post_training/specopd.py": "5602752775ce8cfeb7ca1045a5d5168be7e3f99820234f56fdf109f4a89d03de",
+      "src/auto_research/reproductions/wesearch_components.py": "e516559381a2f3e0d96abd1a39e2075b78d3cee2b6b97468e4724a7642d9064c"
+    },
+    "raw_runner_artifact_sha256": "c841b9c5fe0be8bd68197d1bca22cc80c83ed62a404db7fc02523577eee413f4"
+  }
+}

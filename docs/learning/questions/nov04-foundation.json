@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "foundation-models:proland": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "ProLand 为什么在 B 的正交约束暂时不满足时仍允许优化，而不是每步投回去？",
+          "answer": "它将乘积 BA 的目标方向与恢复 B 正交性的 Landing 分开。水平条件 BᵀDB=0 让目标更新只在二阶扰动 Gram 偏差，独立校正再逐步拉回约束附近。每步 retraction 会改变优化路径，并不是同一个算法；允许暂时不可行也不代表任何步长都稳定。",
+          "example": "教学例：BᵀB=1.08 的一维基可以先沿水平目标方向前进，再减去ρB×0.08；若直接把 B 归一化到1，则走了不同的路径。这个例子不是GLUE效果。",
+          "source_sections": ["背景与主要改动", "核心公式"],
+          "added": "2026-11-04"
+        },
+        {
+          "id": "mechanism",
+          "level": "mechanism",
+          "question": "为什么 momentum 必须重投影到当前 BA 的乘积空间，而不能原样保留旧稠密方向？",
+          "answer": "B、A 改变后，可由当前因子一阶变化实现的子空间也会改变。ProLand先用当前Π重投影旧EMA，再与当前投影梯度混合，确保动量仍位于当前可实现空间。thin-factor算法从同一loss的两因子梯度重建这个量，并非给A和B各维护一个普通Muon动量。",
+          "example": "教学例：旧B只覆盖第一坐标，新B转向第二坐标，旧空间的方向未必能由新因子保持原样实现；应先按新PB与PA计算Π，再更新EMA。",
+          "source_sections": ["核心公式", "检查与负控"],
+          "added": "2026-11-04"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "对 A 和 B 分别求 polar，与先在 BA 空间求 polar 再分解方向，有什么区别？",
+          "answer": "polar不是线性映射，两因子的参数化还存在缩放自由度；独立谱更新无法保证两者组合就是乘积空间选中的方向。ProLand由Y统一构造DA=B†Y与DB=(I−PB)YA†，使BDA+DBA等于ΠY，并满足BᵀDB=0。",
+          "example": "教学例：把B乘2、A除2不改变BA，却改变独立因子梯度的尺度与几何；仅因为两条路径都调用polar，不能认定它们更新相同的ΔW。",
+          "source_sections": ["背景与主要改动", "核心公式"],
+          "added": "2026-11-04"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "实现时为什么不能先改 A 再用新 A 计算 B 的更新，也不能把ρ再乘学习率？",
+          "answer": "Algorithm1/2规定DA、DB、Gram偏差均由同一旧因子对计算，再同时应用；顺序更新会引入额外耦合项。Landing的ρ是独立步长，公式中没有额外γ。还需紧致polar把零奇异方向保持零，并承认秩变附近伪逆的浮点病态性。",
+          "example": "教学例：γ=.01、ρ=.05时Landing系数是.05，不是.0005；误乘会把恢复强度缩小100倍。零核心若误用完整UVᵀ，还可能在零梯度时凭空更新。",
+          "source_sections": ["核心公式", "实现与运行", "检查与负控"],
+          "added": "2026-11-04"
+        }
+      ]
+    },
+    "foundation-models:gavagai": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "GAVAGAI 为什么同时需要 Nothing 和区域容量，而不是二选一？",
+          "answer": "Nothing允许不指称可见物体的词不被强制分给背景；区域容量防止少数常见背景吸收许多不同词。只有容量而没有Nothing仍须把质量塞进视觉区域；只有Nothing而无容量则不能限制某个背景区域的集中吸收。两条约束处理不同故障。",
+          "example": "教学例：一句话含hungry、ball，图中有球和手。hungry可去Nothing，ball去球；手的容量还阻止许多无关词都被分到手。教学分配不是模型测量。",
+          "source_sections": ["背景与主要改动", "核心公式"],
+          "added": "2026-11-04"
+        },
+        {
+          "id": "mechanism",
+          "level": "mechanism",
+          "question": "论文标题提到Balanced OT，为什么实现不能固定所有视觉列的边际等式？",
+          "answer": "Eq1真正约束是每词行和等于1，而视觉列和只要求不超过b，Nothing不封顶。对应对偶更新是v=min(1,b/(Kᵀu))。强制列和恰等于b会让图中未被命名的区域也被分配质量，改变可行域和方法含义。",
+          "example": "教学例：两个词都不对应图中物体、某视觉列容量.8时，合法解可把接近2的质量送到Nothing、视觉列接近0；不能为了花完.8容量而强行指称该物体。",
+          "source_sections": ["核心公式", "检查与负控"],
+          "added": "2026-11-04"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "容量不活跃时，GAVAGAI与逐行softmax的关系是什么？这代表完整方法没有区别吗？",
+          "answer": "若每个视觉容量至少为词数n，所有列乘子保持1，OT就退化为包含Nothing的逐行softmax；再删Nothing才得到强制视觉指称的朴素基线。这是有用的退化核验，不表示容量活跃时也等价，更不能据小矩阵结果声称SAYCam提升。",
+          "example": "教学例：3个词时将每列容量设为3，视觉列不可能超额；把同一容量改为.4后，多个词竞争该区域，行与列的缩放就耦合起来。",
+          "source_sections": ["核心公式", "检查与负控", "论文离线与线上效果"],
+          "added": "2026-11-04"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "为什么8次Sinkhorn后不能随手把每行再归一化，又为何对齐loss必须停掉plan梯度？",
+          "answer": "最后一次列缩放保证容量上界，但有限次迭代的行和可能偏离1；再归一化行可能重新超容量，应暴露残差而非隐藏。Eq3规定P固定、梯度只经成本C，因此对齐项梯度是λP。Nothing hinge的额外可微路径在v1未说明，本地只记录固定plan值，不伪造完整防塌缩训练。",
+          "example": "教学例：某行和.8，归一化会把其视觉质量乘1.25，原本刚好饱和的视觉列可能超标。λ=.1时成本梯度应是.1P，而不是再穿过8次缩放的自动微分图。",
+          "source_sections": ["核心公式", "检查与负控", "成本判断与复现边界"],
+          "added": "2026-11-04"
+        }
+      ]
+    },
+    "foundation-models:xla-trenches": {
+      "questions": [
+        {
+          "id": "basics",
+          "level": "basics",
+          "question": "编译成功、程序没有崩溃，为什么还不能说明XLA执行正确？",
+          "answer": "静默错编译会返回合法形状的有限张量，但索引、舍入、buffer或同步语义已出错。没有错误信号，只看运行完成或loss短期正常会漏检；论文依赖合法输入下的差分参考及逐层隔离，不把成功启动当作正确性证据。",
+          "example": "教学例：一次窄整数iota回绕可能让索引5的写操作也改到261，程序仍执行完成，只有与正确索引语义的输出比较才暴露问题。",
+          "source_sections": ["背景与主要改动", "核心机制与数值例子"],
+          "added": "2026-11-04"
+        },
+        {
+          "id": "mechanism",
+          "level": "mechanism",
+          "question": "为什么分层隔离既要反向约束输入，又要保留fusion检查VREG？",
+          "answer": "反向约束避免负数开方、除零等非法输入制造伪差异；宏图定位只缩小到fusion，内部lowering错误仍需查看寄存器中间值。拆fusion会改变内存精度和流水，使原bug消失，因此不能把拆图后正常当作原融合已经正确。",
+          "example": "教学例：r=x−f32(f16(x))若在VREG中被省略舍入会全零；调试拆图后落入16位HBM反而恢复舍入，因此应观察原fusion而非替换它。",
+          "source_sections": ["核心机制与数值例子", "资源与复现边界"],
+          "added": "2026-11-04"
+        },
+        {
+          "id": "comparison",
+          "level": "comparison",
+          "question": "142项已修复、103项审查中，以及线上A/B收益，为什么是三种不同证据？",
+          "answer": "已修复描述经工程流程解决的缺陷数；审查中仍可能被驳回或修改，不能相加成245项已修复。用户A/B需要真实分流对照和业务指标，不能从bug数量推出。本文符合Google系统基础设施收录，但不是因此通过工业推荐A/B门槛。",
+          "example": "教学例：提交10个补丁、合入6个、其余4个审查中，完成数是6而不是10；即使全部合入，也没有给出CTR提升的随机实验。",
+          "source_sections": ["论文工程与线上证据", "背景与主要改动"],
+          "added": "2026-11-04"
+        },
+        {
+          "id": "implementation",
+          "level": "implementation",
+          "question": "有公开OpenXLA代码，为什么本库仍将完整论文标为不复现，而不在A100跑个替代？",
+          "answer": "公开macro隔离和evaluator只是部分链路；内部生产图、agent harness、目标ISA与MXU模拟、VREG逐步硬件调试和真实TPU确认并不随框架开源。A100没有相同寄存器/舍入/编译语义，运行CUDA例子不能验证TPU缺陷。资源和可得性不匹配，所以审查DONE、不复现而不伪造通过。",
+          "example": "教学例：在CUDA上正确执行两次cast，不能证明某TPU lowering没有跳过cast；两者最终数值相同也没有覆盖原始TPU生成代码。",
+          "source_sections": ["已核查与未实现", "资源与复现边界"],
+          "added": "2026-11-04"
+        }
+      ]
+    }
+  }
+}

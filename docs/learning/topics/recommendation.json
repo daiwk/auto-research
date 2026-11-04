@@ -21,6 +21,7 @@
       ],
       "reading_order": "先用YouTube DNN理解召回与精排分工，再读Airbnb EBR看难负例和库存约束，最后用MIMA理解多兴趣为何需要互补监督；后两篇的公开数据替代边界需同时阅读。",
       "papers": [
+        "recommendation:wesearch",
         "recommendation:airbnb-ebr",
         "recommendation:allecompanion",
         "recommendation:asarl",

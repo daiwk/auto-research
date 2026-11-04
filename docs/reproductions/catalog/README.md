@@ -10,6 +10,7 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 召回 | [WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search](../../recommendation-components/2611.00530-wesearch/README.md) | Tencent，2026-10-31 | 未发现官方代码 | `wesearch`：仅低成本组件，完整实验不复现 |
 | 多目标蒸馏 | [KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation](../../recommendation-components/2610.36973-kl-mopd/README.md) | Zhejiang University，2026-10-27 | [原作者入口](https://github.com/Yandorn/KL-MOPD)；作者正文链接仓库可访问，固定28d9bcbd8fc9f5ccaa52def5db77d4c34bade965；本地独立据公式实现，不复制上游 | `kl-mopd`：仅低成本组件，完整实验不复现 |
 | 多模态生成式搜索 | [PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search](../../recommendation-components/2610.36958-pailitao-mmsearch2/README.md) | Taobao & Tmall Group of Alibaba，2026-10-27 | 未发现官方代码 | 计划键 `pailitao-mmsearch2`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 生成式召回 | [PinGER: Token-Efficient Generative Retrieval with Semantic IDs](../../recommendation-components/2610.33435-pinger/README.md) | Pinterest，2026-10-24 | 未发现官方代码 | `pinger`：仅低成本组件，完整实验不复现 |

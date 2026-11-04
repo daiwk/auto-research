@@ -8,6 +8,8 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [Strategist: Evolving Reasoning with Agents](<https://arxiv.org/abs/2611.03618>) | 2026-11-02 | [English](../../agent-research/2611.03618-strategist/README-en.md) · [Chinese](../../agent-research/2611.03618-strategist/README.md) |
+| [AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers](<https://arxiv.org/abs/2610.39234>) | 2026-10-29 | [English](../../agent-research/2610.39234-agentheal/README-en.md) · [Chinese](../../agent-research/2610.39234-agentheal/README.md) |
 | [Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?](<https://arxiv.org/abs/2610.37276v1>) | 2026-10-27 | [English](../../agent-research/2610.37276-evalalloc/README-en.md) · [Chinese](../../agent-research/2610.37276-evalalloc/README.md) |
 | [When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement](<https://arxiv.org/abs/2610.36826v1>) | 2026-10-27 | [English](../../agent-research/2610.36826-ruharness/README-en.md) · [Chinese](../../agent-research/2610.36826-ruharness/README.md) |
 | [Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems](<https://arxiv.org/abs/2610.36652v1>) | 2026-10-27 | [English](../../agent-research/2610.36652-discernmem/README-en.md) · [Chinese](../../agent-research/2610.36652-discernmem/README.md) |

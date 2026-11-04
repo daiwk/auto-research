@@ -7,7 +7,7 @@ hide:
 
 # 轨迹蒸馏：学生、提案与前缀分布
 
-[LLM 后训练](index.md) / 164 个问题 · 41 篇论文
+[LLM 后训练](index.md) / 168 个问题 · 42 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">164 个问题 · 41 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">168 个问题 · 42 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:specopd" data-paper-title="SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding LLM 后训练 Qwen Business Unit of Alibaba / University of Science and Technology of China 2026-11-02 普通 OPD 要逐轮 draft-and-verify 才能继续收集上下文。SpecOPD 在已有 reference 的多个 anchor 上重新采当前 draft 的私有续写，合并成共享 trunk 的 proposal tree，再并行给教师打分。这里 on-policy 指固定外层上下文上的新 draft 采样，不是无限制完整响应 rollout。混合模型还分别需要 sparse indexer 一致性和 recurrent state replay，单靠 attention mask 不够。 完整训练与 serving 实验：成本过高，不复现（审查 DONE）。L1 数值组件，diagnostic only。完整训练与 serving 实验：成本过高，不复现（审查 DONE）。本地张量验证不等于真实推测解码加速；evolve_integrated=false。proposal_tree 仅接收 reference 长度、zero-based anchor 和分支宽度，生成 parent、语义位置、attention 可见性与预测行；不接触参考文本内容或答案。prediction_logits 在调用方提供的 hidden/head 上执行前驱行读出，不伪装成教师 checkpoint。  On-policy distillation 推测解码与接受长度 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 SpecOPD的reference固定，为什么还叫on-policy？ 固定的是外层reference上下文；每次更新在anchor后用当前draft重新采分支，教师监督的prefix含当前draft自己的历史。它不宣称完整reference响应由当前策略采样，也不要求等待顺序draft-and-verify完成整条响应。 教学例：reference在a之后是quiet，当前draft可采出short；下一token的教师条件必须是a short，而不是a quiet。两条历史不同。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<span id="paper-post-training-specopd-8cfb4e60" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-1ad5cbdcca534c70">SpecOPD的reference固定，为什么还叫on-policy？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aspecopd">SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Qwen Business Unit of Alibaba / University of Science and Technology of China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>固定的是外层reference上下文；每次更新在anchor后用当前draft重新采分支，教师监督的prefix含当前draft自己的历史。它不宣称完整reference响应由当前策略采样，也不要求等待顺序draft-and-verify完成整条响应。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：reference在a之后是quiet，当前draft可采出short；下一token的教师条件必须是a short，而不是a quiet。两条历史不同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.02846v1">原论文</a> · <a href="../../../../post-training/2611.02846-specopd/">实现解读</a> · <a href="#qa-1ad5cbdcca534c70">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:specopd" data-paper-title="SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding LLM 后训练 Qwen Business Unit of Alibaba / University of Science and Technology of China 2026-11-02 普通 OPD 要逐轮 draft-and-verify 才能继续收集上下文。SpecOPD 在已有 reference 的多个 anchor 上重新采当前 draft 的私有续写，合并成共享 trunk 的 proposal tree，再并行给教师打分。这里 on-policy 指固定外层上下文上的新 draft 采样，不是无限制完整响应 rollout。混合模型还分别需要 sparse indexer 一致性和 recurrent state replay，单靠 attention mask 不够。 完整训练与 serving 实验：成本过高，不复现（审查 DONE）。L1 数值组件，diagnostic only。完整训练与 serving 实验：成本过高，不复现（审查 DONE）。本地张量验证不等于真实推测解码加速；evolve_integrated=false。proposal_tree 仅接收 reference 长度、zero-based anchor 和分支宽度，生成 parent、语义位置、attention 可见性与预测行；不接触参考文本内容或答案。prediction_logits 在调用方提供的 hidden/head 上执行前驱行读出，不伪装成教师 checkpoint。  On-policy distillation 推测解码与接受长度 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 为什么相同的逐token overlap，顺序不同会改变SpecOPD损失？ E2E-TV累加从分支开头到各位置的overlap乘积。早期mismatch会压低所有后续prefix项，末尾mismatch只影响末尾项。因此它不等于逐token TV的平均，且对有历史依赖的proposal只是训练surrogate，并非serving接受长度的无偏估计。 教学例：overlap为[0.6,1,1]时三个prefix都是0.6；[1,1,0.6]时为1、1、0.6，后者损失更小。不是任何模型实测。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-5f0bf91ae8f4e09e">为什么相同的逐token overlap，顺序不同会改变SpecOPD损失？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aspecopd">SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Qwen Business Unit of Alibaba / University of Science and Technology of China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>E2E-TV累加从分支开头到各位置的overlap乘积。早期mismatch会压低所有后续prefix项，末尾mismatch只影响末尾项。因此它不等于逐token TV的平均，且对有历史依赖的proposal只是训练surrogate，并非serving接受长度的无偏估计。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：overlap为[0.6,1,1]时三个prefix都是0.6；[1,1,0.6]时为1、1、0.6，后者损失更小。不是任何模型实测。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.02846v1">原论文</a> · <a href="../../../../post-training/2611.02846-specopd/">实现解读</a> · <a href="#qa-5f0bf91ae8f4e09e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:specopd" data-paper-title="SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding LLM 后训练 Qwen Business Unit of Alibaba / University of Science and Technology of China 2026-11-02 普通 OPD 要逐轮 draft-and-verify 才能继续收集上下文。SpecOPD 在已有 reference 的多个 anchor 上重新采当前 draft 的私有续写，合并成共享 trunk 的 proposal tree，再并行给教师打分。这里 on-policy 指固定外层上下文上的新 draft 采样，不是无限制完整响应 rollout。混合模型还分别需要 sparse indexer 一致性和 recurrent state replay，单靠 attention mask 不够。 完整训练与 serving 实验：成本过高，不复现（审查 DONE）。L1 数值组件，diagnostic only。完整训练与 serving 实验：成本过高，不复现（审查 DONE）。本地张量验证不等于真实推测解码加速；evolve_integrated=false。proposal_tree 仅接收 reference 长度、zero-based anchor 和分支宽度，生成 parent、语义位置、attention 可见性与预测行；不接触参考文本内容或答案。prediction_logits 在调用方提供的 hidden/head 上执行前驱行读出，不伪装成教师 checkpoint。  On-policy distillation 推测解码与接受长度 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 只取draft top-k时，把teacher也归一化到top-k上，与完整teacher比较有何区别？ 会删除teacher在draft无法提出的token上的质量，从而改变接受overlap目标。SpecOPD保留完整teacher归一化；draft支持之外q为零，仍会贡献分布不匹配。它不是为了计算方便就可任意换成teacher top-k条件分布。 教学例：q=[.5,.5,0]、p=[.4,.4,.2]的overlap是.8；把p前两项归一化后会假装完全一致，错把损失.2变成0。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-53ac65bf03322827">只取draft top-k时，把teacher也归一化到top-k上，与完整teacher比较有何区别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aspecopd">SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Qwen Business Unit of Alibaba / University of Science and Technology of China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>会删除teacher在draft无法提出的token上的质量，从而改变接受overlap目标。SpecOPD保留完整teacher归一化；draft支持之外q为零，仍会贡献分布不匹配。它不是为了计算方便就可任意换成teacher top-k条件分布。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：q=[.5,.5,0]、p=[.4,.4,.2]的overlap是.8；把p前两项归一化后会假装完全一致，错把损失.2变成0。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.02846v1">原论文</a> · <a href="../../../../post-training/2611.02846-specopd/">实现解读</a> · <a href="#qa-53ac65bf03322827">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:specopd" data-paper-title="SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding LLM 后训练 Qwen Business Unit of Alibaba / University of Science and Technology of China 2026-11-02 普通 OPD 要逐轮 draft-and-verify 才能继续收集上下文。SpecOPD 在已有 reference 的多个 anchor 上重新采当前 draft 的私有续写，合并成共享 trunk 的 proposal tree，再并行给教师打分。这里 on-policy 指固定外层上下文上的新 draft 采样，不是无限制完整响应 rollout。混合模型还分别需要 sparse indexer 一致性和 recurrent state replay，单靠 attention mask 不够。 完整训练与 serving 实验：成本过高，不复现（审查 DONE）。L1 数值组件，diagnostic only。完整训练与 serving 实验：成本过高，不复现（审查 DONE）。本地张量验证不等于真实推测解码加速；evolve_integrated=false。proposal_tree 仅接收 reference 长度、zero-based anchor 和分支宽度，生成 parent、语义位置、attention 可见性与预测行；不接触参考文本内容或答案。prediction_logits 在调用方提供的 hidden/head 上执行前驱行读出，不伪装成教师 checkpoint。  On-policy distillation 推测解码与接受长度 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 proposal tree已经有因果mask，为什么还要单独检查prediction row？ 祖先mask防止读取未来reference和其他分支；但如果从当前采样token自身的hidden row预测该token，输入已经含答案。首token必须读anchor，后续读前驱token行，并使用语义位置而非packed offset。正确mask不能替代正确readout。 教学例：采到short evening后，anchor行预测short，short行预测evening；拿evening自身行给evening打分仍然泄漏，即使该行只看自己的祖先。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-f46606171c4ce0ed">proposal tree已经有因果mask，为什么还要单独检查prediction row？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aspecopd">SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Qwen Business Unit of Alibaba / University of Science and Technology of China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>祖先mask防止读取未来reference和其他分支；但如果从当前采样token自身的hidden row预测该token，输入已经含答案。首token必须读anchor，后续读前驱token行，并使用语义位置而非packed offset。正确mask不能替代正确readout。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：采到short evening后，anchor行预测short，short行预测evening；拿evening自身行给evening打分仍然泄漏，即使该行只看自己的祖先。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.02846v1">原论文</a> · <a href="../../../../post-training/2611.02846-specopd/">实现解读</a> · <a href="#qa-f46606171c4ce0ed">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:mpopd" data-paper-title="Proposing Better Rollouts for On-Policy Distillation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Proposing Better Rollouts for On-Policy Distillation LLM 后训练 University of Illinois Urbana-Champaign 2026-10-27 普通OPD从学生采样，教师却可能很少走到这些前缀，师生可达区域差距会被后续学生更新放大。MPOPD把采样策略本身作为优化对象：理想提案是学生与教师概率的几何混合，实际训练一个独立proposal近似它，从而生成时只运行proposal。这不等于把几何混合直接当学生蒸馏target：学生仍向教师做反向KL；几何target用于下一轮proposal，并需要处理proposal与学生的采样差距。 完整多模型/长rollout实验成本过高，不复现（审查 DONE）；只读外部对齐logits、采样token ID和连续response mask，不接收问题标准答案。freeze_rollout_weights以完整词表采样概率构造冻结ratio；student_loss与proposal_loss使用明确的教师支持，按每轨迹token求和、再平均轨迹。teacher、old proposal和构造target的更新后学生不收梯度；padding在非线性计算前清理。  On-policy distillation 提案分布与重要性校正 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 MPOPD把几何混合用在采样策略上，和用它当学生蒸馏target有什么区别？ 前者改变实际访问的prefix，由学到的proposal产生轨迹；学生仍向教师做反向KL，并处理proposal与old学生的差距。直接把混合分布当学生target改变的是训练目标，却不一定让原学生采样到教师更支持的路径。两者不能作为同一个算法。 教学例：一条好路径在学生下几乎不被采到，给已采到的坏路径重加权并不能补出这条未采集路径；proposal改采样分布才可能访问它。 2026-10-30">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
 <span id="paper-post-training-mpopd-f637bd45" class="ar-learning-paper-anchor"></span>

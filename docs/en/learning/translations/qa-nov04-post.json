@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:specopd/fixed-anchors-current-branches": {
+      "source_sha256": "30b6f2122ab8e50f21beb109ad781046153ab61c1b4b796dbce85a71a08cb2df",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is SpecOPD on-policy if its reference remains fixed?",
+        "answer": "Only the outer reference context is fixed. Each update samples new branches from the current draft after anchors, so teacher-supervised prefixes contain the draft's own history. The complete reference response need not be sampled by the current policy, and collection need not wait for sequential draft-and-verify rounds to finish a response.",
+        "example": "Teaching example: The reference has quiet after a, but the current draft samples short. The next teacher query must condition on a short, not a quiet; these are different histories."
+      }
+    },
+    "qa/post-training:specopd/overlap-prefix-not-token-average": {
+      "source_sha256": "991e081b8267e9bf8594c6a6381a7a7cf6bdb0c65f70e34487442a55d161d262",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does reordering identical token-overlap values change the SpecOPD loss?",
+        "answer": "E2E-TV sums overlap products from the beginning of each branch to every position. Early mismatch reduces every subsequent prefix term; a final mismatch affects only the final term. It is not mean token TV. For history-dependent proposals it is a training surrogate, not an unbiased serving-acceptance estimate.",
+        "example": "Teaching example: Overlaps [0.6,1,1] produce prefix values 0.6,0.6,0.6; [1,1,0.6] gives 1,1,0.6 and a lower loss. These are illustrative, not model measurements."
+      }
+    },
+    "qa/post-training:specopd/support-mass-versus-renormalization": {
+      "source_sha256": "5b669c46ead29978dcbbb029eedf0bf3a7df3dade71c874a4b20aa7cbdab8131",
+      "reviewed": true,
+      "fields": {
+        "question": "When the draft uses top-k support, how does renormalizing the teacher there change the comparison?",
+        "answer": "It discards teacher probability on tokens the draft cannot propose, changing the acceptance-overlap objective. SpecOPD retains full-vocabulary teacher normalization. Outside draft support, q is zero but the missing teacher mass still matters. Replacing the teacher by a top-k conditional distribution is not an innocent computational shortcut.",
+        "example": "Teaching example: q=[.5,.5,0] and p=[.4,.4,.2] have overlap .8. Renormalizing the first two teacher entries invents a perfect match, incorrectly changing loss .2 to zero."
+      }
+    },
+    "qa/post-training:specopd/ancestry-and-predecessor-readout": {
+      "source_sha256": "3cd2adfbea0e9d21829b77ed108b2f20f25e969008cf82d563269063094c05a7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check prediction rows separately when the proposal tree already has a causal mask?",
+        "answer": "Ancestry masking blocks future reference tokens and siblings. But predicting a sampled token from its own hidden-state row already exposes the answer as input. The first token must read its anchor and later tokens their predecessors, with semantic rather than packed positions. Correct masking does not replace correct readout.",
+        "example": "Teaching example: For samples short evening, the anchor predicts short and the short row predicts evening. Scoring evening from its own row still leaks it even if that row sees only its ancestors."
+      }
+    },
+    "qa/post-training:rlid/decision-not-free-text-command": {
+      "source_sha256": "f5d58d9a646fbc436e88cfe4022804c7bb4ac410b6d12abd27fc1b053a2c6adc",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a RLiD action differ fundamentally from an LLM writing an action command?",
+        "answer": "RLiD normalizes over compiled executable single-token menu labels and selects an action in one forward pass, without generating or parsing free text. Benefits depend on the menu and observation interface. It does not automatically preserve the extra computation provided by long reasoning, or guarantee stronger performance on every task.",
+        "example": "Teaching example: With only open and take in the menu, label B maps directly to take; free text might contain only an explanation. Legal output follows from an interface contract, not 100% task success."
+      }
+    },
+    "qa/post-training:rlid/same-policy-rao-blackwell-scope": {
+      "source_sha256": "640fabac612d4da95aa0f434013ac90e447aa17c67f9524d9c96391b87b34ca1",
+      "reviewed": true,
+      "fields": {
+        "question": "Does RLiD's variance theorem prove a newly trained LDM must beat a generative LLM?",
+        "answer": "No. Within one text policy, the identity marginalizes alternative wordings that map to the same action. Given that action, advantage must not depend on wording. It preserves expected updates and removes realization variance, not differences between model parameterizations or training runs, nor temporal-credit noise.",
+        "example": "Teaching example: open drawer and I should open drawer can be marginalized into one action. If reward separately values polite wording, advantage depends on wording and the assumption fails."
+      }
+    },
+    "qa/post-training:rlid/marginal-balance-not-row-entropy": {
+      "source_sha256": "db0562c28723013ebedc050b12a81ad05d5469bafd93634df7780b24e8419d98",
+      "reviewed": true,
+      "fields": {
+        "question": "Is KL from uniform to the menu marginal equivalent to making every decision more random?",
+        "answer": "No. It first averages microbatch action distributions within a menu group, then encourages that label marginal toward uniformity. Individual decisions can remain confident. Per-decision entropy instead encourages each row to spread out, changing the target. External calibration subtraction is another label-bias treatment with a separate update schedule.",
+        "example": "Teaching example: Decisions near [1,0] and [0,1] average to [.5,.5], giving zero marginal KL despite low entropy in each row."
+      }
+    },
+    "qa/post-training:rlid/old-policy-and-episode-weight-contract": {
+      "source_sha256": "3127ab40bb9f6bbf055333f3ae5e6b46b78977629d89097247bbf63e26a8b451",
+      "reviewed": true,
+      "fields": {
+        "question": "Do executable menus and clipped PPO complete RLiD agent training?",
+        "answer": "No. Old-policy log-probabilities and advantages must come from actual external sampling, stay frozen, and align with the same menu. Local code supplies no LM, compiler, memory, GiGPO, or distillation. With mean-episode-length divided by each episode's length as weights, average weighted decisions without arbitrarily dividing again by total weight.",
+        "example": "Teaching example: A two-step episode with .75 per step and a one-step episode with weight 1.5 both total 1.5. This checks weighting, not the paper's 99.3% ALFWorld full-route result."
+      }
+    }
+  }
+}

@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "review_done": false,
+  "all_sources_exhaustive": false,
+  "leads": [
+    {
+      "id": "2611.00911",
+      "title": "S1CogBench",
+      "source_url": "https://arxiv.org/html/2611.00911v1",
+      "read_scope_and_limit": "Public protocol candidate,24tasks27modes;somePsych101gated;no full scorer/ingestion review accepted this round",
+      "status": "unreviewed_not_selected",
+      "blocking_selected_scope": false,
+      "implemented": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.00015",
+      "title": "Output-Aware Block Influence (J-BI)",
+      "source_url": "https://arxiv.org/abs/2611.00015v1",
+      "read_scope_and_limit": "Official v1 reports September30 despite November3new listing;historical/late-announcement,not Novemberfirstpublication;not selected",
+      "status": "unreviewed_not_selected",
+      "blocking_selected_scope": false,
+      "implemented": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.01878",
+      "title": "DialogGRPO/VagueBench",
+      "source_url": "https://arxiv.org/html/2611.01878v1",
+      "read_scope_and_limit": "Method/costread:Qwen3.5-27BLoRA8xH200;fullcostdecisionnotreproduced;firstauthoraffiliationmappingunconfirmed,not a complete accepted catalog record",
+      "status": "unreviewed_not_selected",
+      "blocking_selected_scope": false,
+      "implemented": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.03133",
+      "title": "SPTA",
+      "source_url": "https://arxiv.org/html/2611.03133v1",
+      "read_scope_and_limit": "Title/method lead;not fully reviewed or implemented in this fixed scope",
+      "status": "unreviewed_not_selected",
+      "blocking_selected_scope": false,
+      "implemented": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.03625",
+      "title": "FADE",
+      "source_url": "https://arxiv.org/html/2611.03625v1",
+      "read_scope_and_limit": "Title/method lead;not fully reviewed or implemented in this fixed scope",
+      "status": "unreviewed_not_selected",
+      "blocking_selected_scope": false,
+      "implemented": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2610.39155",
+      "title": "REALM",
+      "source_url": "https://arxiv.org/abs/2610.39155",
+      "read_scope_and_limit": "Abstract retrieved;HTML twice timedout;not declared reviewedDONE",
+      "status": "unreviewed_not_selected",
+      "blocking_selected_scope": false,
+      "implemented": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2610.39158",
+      "title": "VEvo-Harness",
+      "source_url": "https://arxiv.org/abs/2610.39158",
+      "read_scope_and_limit": "Abstract-only lead,not implemented or full-reviewed",
+      "status": "unreviewed_not_selected",
+      "blocking_selected_scope": false,
+      "implemented": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.01870",
+      "title": "ASpec",
+      "source_url": "https://arxiv.org/html/2611.01870v1",
+      "read_scope_and_limit": "PublicHTML;method not fully reviewed in selected scope",
+      "status": "unreviewed_not_selected",
+      "blocking_selected_scope": false,
+      "implemented": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.01446",
+      "title": "I-PTC",
+      "source_url": "https://arxiv.org/html/2611.01446v1",
+      "read_scope_and_limit": "Public method candidate,no verified author repository;240-problem fullmatrix not accepted for execution",
+      "status": "unreviewed_not_selected",
+      "blocking_selected_scope": false,
+      "implemented": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.00044",
+      "title": "SparseWAM",
+      "source_url": "https://arxiv.org/abs/2611.00044",
+      "read_scope_and_limit": "Title/abstract lead;frozenDINOv2+causalMoT,NAVSIM,author release pending;not fully reviewed or falsely cost-closed",
+      "status": "unreviewed_not_selected",
+      "blocking_selected_scope": false,
+      "implemented": false,
+      "automatic_implementation_queue": false
+    }
+  ]
+}

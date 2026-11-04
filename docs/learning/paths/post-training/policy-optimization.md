@@ -7,7 +7,7 @@ hide:
 
 # 策略优化：谁在采样，谁在被更新
 
-[LLM 后训练](index.md) / 216 个问题 · 54 篇论文
+[LLM 后训练](index.md) / 220 个问题 · 55 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">216 个问题 · 54 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">220 个问题 · 55 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:rlid" data-paper-title="RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs LLM 后训练 University of Illinois Urbana-Champaign 2026-11-02 文本策略会把一次动作的优势赋给推理、格式和命令 token。RLiD 将观测、过去反馈形成的记忆和合法菜单编译成输入，单次前向仅在标签之间选动作，再做决策级 RL。菜单、afterstate 和记忆本身会改变问题，比较必须对齐接口。它不消除跨时间信用估计，也不证明无推理 token 总优于有推理 token。 完整多环境训练、蒸馏与能力评测：成本过高，不复现（审查 DONE）。诊断不输出 answer accuracy/plan success，不比较两个真实策略，不晋级 evolve。L1 决策概率 / PPO / 方差恒等式组件，diagnostic only。完整多环境训练、蒸馏与能力评测：成本过高，不复现（审查 DONE）。evolve_integrated=false，不把小数组恒等式当作 Agent 成功率。menu_log_probabilities 接收对齐的单标签 logits、合法菜单 mask 和外部冻结校准。  策略优化 决策级信用分配 LLM 后训练 策略优化：谁在采样，谁在被更新 RLiD的一个动作，和让LLM写一句动作命令有什么根本差别？ RLiD在已编译的合法单token菜单标签上归一化概率，一次前向直接选可执行动作，不生成或解析自由文本。收益依赖菜单和观测接口；它没有自动保留长推理文本带来的额外计算，也不能声称所有任务更强。 教学例：菜单只有open、take两个动作时，选标签B直接映射take；自由文本可能写成没有可执行命令的解释。合法输出来自接口合同，不是100%任务成功。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<span id="paper-post-training-rlid-6c4a96d3" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-535bebd40c60bf5c">RLiD的一个动作，和让LLM写一句动作命令有什么根本差别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Arlid">RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · University of Illinois Urbana-Champaign</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>RLiD在已编译的合法单token菜单标签上归一化概率，一次前向直接选可执行动作，不生成或解析自由文本。收益依赖菜单和观测接口；它没有自动保留长推理文本带来的额外计算，也不能声称所有任务更强。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：菜单只有open、take两个动作时，选标签B直接映射take；自由文本可能写成没有可执行命令的解释。合法输出来自接口合同，不是100%任务成功。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.02455v1">原论文</a> · <a href="../../../../post-training/2611.02455-rlid/">实现解读</a> · <a href="#qa-535bebd40c60bf5c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:rlid" data-paper-title="RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs LLM 后训练 University of Illinois Urbana-Champaign 2026-11-02 文本策略会把一次动作的优势赋给推理、格式和命令 token。RLiD 将观测、过去反馈形成的记忆和合法菜单编译成输入，单次前向仅在标签之间选动作，再做决策级 RL。菜单、afterstate 和记忆本身会改变问题，比较必须对齐接口。它不消除跨时间信用估计，也不证明无推理 token 总优于有推理 token。 完整多环境训练、蒸馏与能力评测：成本过高，不复现（审查 DONE）。诊断不输出 answer accuracy/plan success，不比较两个真实策略，不晋级 evolve。L1 决策概率 / PPO / 方差恒等式组件，diagnostic only。完整多环境训练、蒸馏与能力评测：成本过高，不复现（审查 DONE）。evolve_integrated=false，不把小数组恒等式当作 Agent 成功率。menu_log_probabilities 接收对齐的单标签 logits、合法菜单 mask 和外部冻结校准。  策略优化 决策级信用分配 LLM 后训练 策略优化：谁在采样，谁在被更新 RLiD的方差定理能证明新训练的LDM一定比生成式LLM更好吗？ 不能。恒等式在同一个文本策略内，把映射到同一动作的不同措辞边缘化；优势在给定动作后不能依赖措辞。它保持期望更新并去掉措辞方差，不比较不同参数化/训练的模型，也不消除跨时间信用估计的噪声。 教学例：open drawer和I should open drawer映射同一动作，可枚举并边缘化；若奖励另外奖励措辞礼貌，优势已依赖措辞，便不满足该前提。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-1896ad1c56eb6817">RLiD的方差定理能证明新训练的LDM一定比生成式LLM更好吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Arlid">RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · University of Illinois Urbana-Champaign</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。恒等式在同一个文本策略内，把映射到同一动作的不同措辞边缘化；优势在给定动作后不能依赖措辞。它保持期望更新并去掉措辞方差，不比较不同参数化/训练的模型，也不消除跨时间信用估计的噪声。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：open drawer和I should open drawer映射同一动作，可枚举并边缘化；若奖励另外奖励措辞礼貌，优势已依赖措辞，便不满足该前提。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.02455v1">原论文</a> · <a href="../../../../post-training/2611.02455-rlid/">实现解读</a> · <a href="#qa-1896ad1c56eb6817">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:rlid" data-paper-title="RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs LLM 后训练 University of Illinois Urbana-Champaign 2026-11-02 文本策略会把一次动作的优势赋给推理、格式和命令 token。RLiD 将观测、过去反馈形成的记忆和合法菜单编译成输入，单次前向仅在标签之间选动作，再做决策级 RL。菜单、afterstate 和记忆本身会改变问题，比较必须对齐接口。它不消除跨时间信用估计，也不证明无推理 token 总优于有推理 token。 完整多环境训练、蒸馏与能力评测：成本过高，不复现（审查 DONE）。诊断不输出 answer accuracy/plan success，不比较两个真实策略，不晋级 evolve。L1 决策概率 / PPO / 方差恒等式组件，diagnostic only。完整多环境训练、蒸馏与能力评测：成本过高，不复现（审查 DONE）。evolve_integrated=false，不把小数组恒等式当作 Agent 成功率。menu_log_probabilities 接收对齐的单标签 logits、合法菜单 mask 和外部冻结校准。  策略优化 决策级信用分配 LLM 后训练 策略优化：谁在采样，谁在被更新 RLiD的KL(uniform到菜单边际)，是否等同于让每条决策都更随机？ 不等同。先按菜单把微批次动作分布求均值，再约束该标签边际接近均匀；每条决策仍可很确定。逐决策entropy会鼓励每条都分散，改变了目标。外部校准减法又是另一种标签偏置处理，不能混成一个更新时序。 教学例：两条二动作决策分别接近[1,0]和[0,1]，均值是[.5,.5]，边际KL为零，但各自entropy都低。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-9651f0731d322a25">RLiD的KL(uniform到菜单边际)，是否等同于让每条决策都更随机？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Arlid">RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · University of Illinois Urbana-Champaign</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不等同。先按菜单把微批次动作分布求均值，再约束该标签边际接近均匀；每条决策仍可很确定。逐决策entropy会鼓励每条都分散，改变了目标。外部校准减法又是另一种标签偏置处理，不能混成一个更新时序。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两条二动作决策分别接近[1,0]和[0,1]，均值是[.5,.5]，边际KL为零，但各自entropy都低。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.02455v1">原论文</a> · <a href="../../../../post-training/2611.02455-rlid/">实现解读</a> · <a href="#qa-9651f0731d322a25">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:rlid" data-paper-title="RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs LLM 后训练 University of Illinois Urbana-Champaign 2026-11-02 文本策略会把一次动作的优势赋给推理、格式和命令 token。RLiD 将观测、过去反馈形成的记忆和合法菜单编译成输入，单次前向仅在标签之间选动作，再做决策级 RL。菜单、afterstate 和记忆本身会改变问题，比较必须对齐接口。它不消除跨时间信用估计，也不证明无推理 token 总优于有推理 token。 完整多环境训练、蒸馏与能力评测：成本过高，不复现（审查 DONE）。诊断不输出 answer accuracy/plan success，不比较两个真实策略，不晋级 evolve。L1 决策概率 / PPO / 方差恒等式组件，diagnostic only。完整多环境训练、蒸馏与能力评测：成本过高，不复现（审查 DONE）。evolve_integrated=false，不把小数组恒等式当作 Agent 成功率。menu_log_probabilities 接收对齐的单标签 logits、合法菜单 mask 和外部冻结校准。  策略优化 决策级信用分配 LLM 后训练 策略优化：谁在采样，谁在被更新 只实现合法菜单和clipped PPO，是否就完成RLiD的Agent训练？ 没有。old-policy logp和优势必须来自外部真实采样，保持冻结且与同菜单对齐；本地不提供LM、compiler、记忆、GiGPO或蒸馏。若传入平均episode长度除以本episode长度的权重，应对加权决策取均值，不能再随意除以权重和。 教学例：两步episode每步权重.75，单步episode权重1.5，两者总权重同为1.5；这只检查长度平衡公式，不代表ALFWorld完整路线已达到论文99.3%。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-aacc956d8ee80eb3">只实现合法菜单和clipped PPO，是否就完成RLiD的Agent训练？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Arlid">RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · University of Illinois Urbana-Champaign</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>没有。old-policy logp和优势必须来自外部真实采样，保持冻结且与同菜单对齐；本地不提供LM、compiler、记忆、GiGPO或蒸馏。若传入平均episode长度除以本episode长度的权重，应对加权决策取均值，不能再随意除以权重和。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两步episode每步权重.75，单步episode权重1.5，两者总权重同为1.5；这只检查长度平衡公式，不代表ALFWorld完整路线已达到论文99.3%。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.02455v1">原论文</a> · <a href="../../../../post-training/2611.02455-rlid/">实现解读</a> · <a href="#qa-aacc956d8ee80eb3">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:moer" data-paper-title="MOER: Mix-Policy Optimization under Expert Prefix Guidance with Selective Rollback" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="MOER: Mix-Policy Optimization under Expert Prefix Guidance with Selective Rollback LLM 后训练 City University of Hong Kong 2026-10-22 既有混合策略训练直接加入完整专家解法，可能削弱探索；专家前缀引导虽允许学生续写，却可能把错误续写继续作为监督。MOER 逐步缩短专家 CoT 前缀：成功则保留前缀加续写，失败则回滚到已有的完整、已验证专家轨迹。它把整个引导轨迹都视为 off-policy，包括学生续写部分，并为两类轨迹采用不同目标。 完整实验：成本过高，不复现（审查 DONE），不自动重试。不得用三 seed 将诊断升级为能力复现。本地状态：L1 精确数值组件，diagnostic only。保留 Eq. 1、3–6 与单候选回滚，不是 LLM 训练器、验证器或能力复现。完整实验：成本过高，不复现（审查 DONE），不自动重试。moer.py 独立实现论文公式与单候选回滚。每个 prompt 限定一个已验证 off-policy 行、至少一个 on-policy 行，对应作者主配置 n_prefix=1；调用方提供完整响应 token mask。guided 行的前缀与续写必须都有效，prompt/padding 不参与损失。  后训练算法组件 Mix-policy RL CoT prefix guidance and selective rollback LLM 后训练 策略优化：谁在采样，谁在被更新 MOER为什么用逐渐缩短的专家前缀引导学生？ 完整专家解法减少探索空间，完全无指导又可能难以成功。逐步减少前缀让学生承担更多续写；失败时回滚到已验证完整专家轨迹，避免把错误续写继续当示范。 例如先提示前两步，再只提示第一步，学生逐渐自己完成剩余推导。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
 <span id="paper-post-training-moer-39449a72" class="ar-learning-paper-anchor"></span>

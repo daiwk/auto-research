@@ -1,8 +1,12 @@
 # Unified roadmap and TODOs
 
-<!-- source-sha256: 74283ee9d6a8a8b0df0be8e93acf71b5e11efdb3c106dfe7b7f3604243a91343 -->
+<!-- source-sha256: 7cd41510cbc9c36cbaeb05c6dc77084afc79ba5aadb6d2d348d0bb47874f046b -->
 
 [简体中文](../research-roadmap.md)
+
+## 2026-11-04: New announcements and bilingual learning material
+
+[Eight-paper fixed scope](research-audits/nov04-components/README.md): Google's XLA/TPU paper is reference-only due to cost. Meta-collaborative Strategist and WeSearch are prioritized, alongside ProLand, GAVAGAI, SpecOPD, RLiD and AgentHeal: seven L1 components, four with actual A100 three-seed validation and three CPU-only. All expensive full experiments are not reproduced (review DONE); no model-capability or Evolve evidence is claimed. Thirty-two new questions, seven deep-dive updates and reviewed English versions ship together. The latest observed announcement is November 3: seven first publications since the prior capture and one overlap backfill. Unreviewed leads remain separate, and the global watermark is unchanged.
 
 ## 2026-10-30: No new source entries; overlap follow-up
 

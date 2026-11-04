@@ -2,11 +2,11 @@
   "schema_version": 1,
   "units": {
     "dive/foundation-models/evaluation-and-evidence": {
-      "source_sha256": "af85fe7a0f106ba9129be1cc969ad746d90ff54b5eaaf31727484fbf044db9ea",
+      "source_sha256": "369808a7ed9e43eb12f0af5ac7caa140de7600ebaff34e5c09195a2457cb9bf7",
       "reviewed": true,
       "fields": {
         "title": "Evidence of capability: scoring accurately, observing less, and explaining predictions",
-        "thesis": "Distinguish how correctness is defined, which example to test next, how judges are combined, and what an explanation says. XLGoBench, ProEval, FUSE, TCAB, and DetectorScope change different parts. Fewer observations and additive explanations do not imply stronger underlying capability.",
+        "thesis": "Distinguish how correctness is defined, which example to test next, how judges are combined, and what an explanation says. XLGoBench, ProEval, FUSE, TCAB, and DetectorScope change different parts. Fewer observations and additive explanations do not imply stronger underlying capability. XLA from the Trenches adds a prior concern: compiled execution can silently depart from numerical program semantics. Successful compilation does not establish correct execution.",
         "axis_0": "Correctness labels, posterior overall scores, rankings, or additive explanations",
         "axis_1": "When labels become available and who holds them",
         "axis_2": "Deterministic algorithms, cross-model correlations, or verifier identification assumptions",

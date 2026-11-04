@@ -1,0 +1,66 @@
+{
+  "domain": "recommendation",
+  "key": "wesearch",
+  "title": "WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search",
+  "paper_url": "https://arxiv.org/abs/2611.00530v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.00530v1",
+  "reviewed_version": "v1",
+  "detail_path": "recommendation-components/2611.00530-wesearch/README.md",
+  "topic": [
+    "召回",
+    "聚类候选空间与量化检索"
+  ],
+  "browse_company": "Tencent",
+  "browse_topic": [
+    "多阶段排序与混排",
+    "大模型能力与推荐融合"
+  ],
+  "first_author": "Kepu Zhang",
+  "first_author_affiliation": "Tencent",
+  "published": "2026-10-31",
+  "published_at": "2026-10-31T01:35:20Z",
+  "announced_on": "2026-11-03",
+  "code": null,
+  "code_status": "固定v1全文、arXiv资源与作者链接未找到WeSearch原作者代码；引用的OPQ/检索框架不等于本文实现",
+  "upstream_revision": null,
+  "code_license": "原方法源码未找到；论文arXiv非独占许可；本地按公式独立实现",
+  "adapter": null,
+  "priority": "P0",
+  "intake_class": "new_first_publication_since_previous_capture",
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "local_operator": "auto_research.reproductions.wesearch_components.adc_squared_distance",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.reproductions.wesearch_components import diagnostic; print(diagnostic(42))'",
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "online_ab": [
+    {
+      "product": "WeChat Search",
+      "metric": "CTR",
+      "lift_percent": 0.68,
+      "traffic": "one-month full-traffic A/B, Expanded plus Fresh corpus, production baseline, p<0.05; fully deployed to100% traffic",
+      "source_url": "https://arxiv.org/html/2611.00530v1",
+      "source_location": "Section6.5.2/Table5;article clicks+2.27%,dwell time+0.71%;not local evidence"
+    }
+  ],
+  "cost_assessment": {
+    "source_url": "https://arxiv.org/html/2611.00530v1",
+    "source_location": "Sections3–6,especially6.1.1/6.5",
+    "available_resource": "one NVIDIA A100 or A30, or local Mac",
+    "model_scale": "private pretrained query encoder,feature-awareFFN,learnedOPQ and2-levelRQ-KMeans",
+    "data_scale": "hundreds of millions to billions of private documents plus tens of millions fresh documents,private behavior/relevance teachers",
+    "paper_configuration": "rolling training,atomic model/index refresh,distributed online serving and month-long paid-traffic A/B",
+    "estimated_cost_basis": "exact GPU-hours not disclosed; corpus,private models and production deployment are unavailable in the single-device budget; not a local measurement",
+    "decision": "完整实验成本过高，不复现（审查 DONE）；只执行CPU候选并集、固定OPQ量化/ADC恒等式及不可变新快照，不模拟完整检索器或线上收益。"
+  },
+  "summary": "先检索粗粒度簇并合并其中的原子文档，再用OPQ查表粗排和特征FFN精排，避免固定SID的早期路径错误；固定簇与码本支持新文档滚动挂载。本地仅验证候选空间、量化距离恒等式与新旧快照隔离，不代表训练/生产质量复现。"
+}

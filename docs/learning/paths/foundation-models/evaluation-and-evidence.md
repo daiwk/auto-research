@@ -7,7 +7,7 @@ hide:
 
 # 能力证据：评测采样、读出与可靠性
 
-[基础模型](index.md) / 52 个问题 · 13 篇论文
+[基础模型](index.md) / 56 个问题 · 14 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">52 个问题 · 13 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">56 个问题 · 14 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:xla-trenches" data-paper-title="XLA from the Trenches: Correctness on TPU Workloads at Scale" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="XLA from the Trenches: Correctness on TPU Workloads at Scale 基础模型 Google 2026-10-31 编译器成功生成并执行程序，不保证数值正确。Google 将模板引导合成程序、生产 autotuner 的真实融合配置和 agent swarm 组合，发现静默错编译；随后从大 HLO 图定位到单个 fusion，再保留 fusion 原貌检查 VREG 中间值。它是编译正确性基础设施，不是新的推荐模型或通过 A/B 门槛的工业推荐条目。 完整实验成本过高，不复现（审查 DONE）。只读核对固定 v1 的 Sections2–4、上游 isolation/evaluator 链接与日期；没有运行、训练或调用其内部 harness，没有本地算法目录、metrics、GPU 收据或 Evolve 映射。公开宏图工具不意味着 agent 编排、目标 ISA/MXU 仿真、VREG stepping 和生产样本全部公开。  推理与系统效率 编译器正确性与分层故障隔离 基础模型 能力证据：评测采样、读出与可靠性 编译成功、程序没有崩溃，为什么还不能说明XLA执行正确？ 静默错编译会返回合法形状的有限张量，但索引、舍入、buffer或同步语义已出错。没有错误信号，只看运行完成或loss短期正常会漏检；论文依赖合法输入下的差分参考及逐层隔离，不把成功启动当作正确性证据。 教学例：一次窄整数iota回绕可能让索引5的写操作也改到261，程序仍执行完成，只有与正确索引语义的输出比较才暴露问题。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<span id="paper-foundation-models-xla-trenches-c37e2d34" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-80a43e3611b0011e">编译成功、程序没有崩溃，为什么还不能说明XLA执行正确？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Axla-trenches">XLA from the Trenches: Correctness on TPU Workloads at Scale</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Google</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>静默错编译会返回合法形状的有限张量，但索引、舍入、buffer或同步语义已出错。没有错误信号，只看运行完成或loss短期正常会漏检；论文依赖合法输入下的差分参考及逐层隔离，不把成功启动当作正确性证据。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一次窄整数iota回绕可能让索引5的写操作也改到261，程序仍执行完成，只有与正确索引语义的输出比较才暴露问题。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与数值例子；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.00624">原论文</a> · <a href="../../../../foundation-models/2611.00624-xla-trenches/">实现解读</a> · <a href="#qa-80a43e3611b0011e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:xla-trenches" data-paper-title="XLA from the Trenches: Correctness on TPU Workloads at Scale" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="XLA from the Trenches: Correctness on TPU Workloads at Scale 基础模型 Google 2026-10-31 编译器成功生成并执行程序，不保证数值正确。Google 将模板引导合成程序、生产 autotuner 的真实融合配置和 agent swarm 组合，发现静默错编译；随后从大 HLO 图定位到单个 fusion，再保留 fusion 原貌检查 VREG 中间值。它是编译正确性基础设施，不是新的推荐模型或通过 A/B 门槛的工业推荐条目。 完整实验成本过高，不复现（审查 DONE）。只读核对固定 v1 的 Sections2–4、上游 isolation/evaluator 链接与日期；没有运行、训练或调用其内部 harness，没有本地算法目录、metrics、GPU 收据或 Evolve 映射。公开宏图工具不意味着 agent 编排、目标 ISA/MXU 仿真、VREG stepping 和生产样本全部公开。  推理与系统效率 编译器正确性与分层故障隔离 基础模型 能力证据：评测采样、读出与可靠性 为什么分层隔离既要反向约束输入，又要保留fusion检查VREG？ 反向约束避免负数开方、除零等非法输入制造伪差异；宏图定位只缩小到fusion，内部lowering错误仍需查看寄存器中间值。拆fusion会改变内存精度和流水，使原bug消失，因此不能把拆图后正常当作原融合已经正确。 教学例：r=x−f32(f16(x))若在VREG中被省略舍入会全零；调试拆图后落入16位HBM反而恢复舍入，因此应观察原fusion而非替换它。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-098b3c2d60311839">为什么分层隔离既要反向约束输入，又要保留fusion检查VREG？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Axla-trenches">XLA from the Trenches: Correctness on TPU Workloads at Scale</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Google</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>反向约束避免负数开方、除零等非法输入制造伪差异；宏图定位只缩小到fusion，内部lowering错误仍需查看寄存器中间值。拆fusion会改变内存精度和流水，使原bug消失，因此不能把拆图后正常当作原融合已经正确。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：r=x−f32(f16(x))若在VREG中被省略舍入会全零；调试拆图后落入16位HBM反而恢复舍入，因此应观察原fusion而非替换它。</p>
+<p class="ar-learning-sources">依据：核心机制与数值例子、资源与复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.00624">原论文</a> · <a href="../../../../foundation-models/2611.00624-xla-trenches/">实现解读</a> · <a href="#qa-098b3c2d60311839">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:xla-trenches" data-paper-title="XLA from the Trenches: Correctness on TPU Workloads at Scale" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="XLA from the Trenches: Correctness on TPU Workloads at Scale 基础模型 Google 2026-10-31 编译器成功生成并执行程序，不保证数值正确。Google 将模板引导合成程序、生产 autotuner 的真实融合配置和 agent swarm 组合，发现静默错编译；随后从大 HLO 图定位到单个 fusion，再保留 fusion 原貌检查 VREG 中间值。它是编译正确性基础设施，不是新的推荐模型或通过 A/B 门槛的工业推荐条目。 完整实验成本过高，不复现（审查 DONE）。只读核对固定 v1 的 Sections2–4、上游 isolation/evaluator 链接与日期；没有运行、训练或调用其内部 harness，没有本地算法目录、metrics、GPU 收据或 Evolve 映射。公开宏图工具不意味着 agent 编排、目标 ISA/MXU 仿真、VREG stepping 和生产样本全部公开。  推理与系统效率 编译器正确性与分层故障隔离 基础模型 能力证据：评测采样、读出与可靠性 142项已修复、103项审查中，以及线上A/B收益，为什么是三种不同证据？ 已修复描述经工程流程解决的缺陷数；审查中仍可能被驳回或修改，不能相加成245项已修复。用户A/B需要真实分流对照和业务指标，不能从bug数量推出。本文符合Google系统基础设施收录，但不是因此通过工业推荐A/B门槛。 教学例：提交10个补丁、合入6个、其余4个审查中，完成数是6而不是10；即使全部合入，也没有给出CTR提升的随机实验。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-0719ea969a0fdbee">142项已修复、103项审查中，以及线上A/B收益，为什么是三种不同证据？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Axla-trenches">XLA from the Trenches: Correctness on TPU Workloads at Scale</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Google</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>已修复描述经工程流程解决的缺陷数；审查中仍可能被驳回或修改，不能相加成245项已修复。用户A/B需要真实分流对照和业务指标，不能从bug数量推出。本文符合Google系统基础设施收录，但不是因此通过工业推荐A/B门槛。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：提交10个补丁、合入6个、其余4个审查中，完成数是6而不是10；即使全部合入，也没有给出CTR提升的随机实验。</p>
+<p class="ar-learning-sources">依据：论文工程与线上证据、背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.00624">原论文</a> · <a href="../../../../foundation-models/2611.00624-xla-trenches/">实现解读</a> · <a href="#qa-0719ea969a0fdbee">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:xla-trenches" data-paper-title="XLA from the Trenches: Correctness on TPU Workloads at Scale" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="XLA from the Trenches: Correctness on TPU Workloads at Scale 基础模型 Google 2026-10-31 编译器成功生成并执行程序，不保证数值正确。Google 将模板引导合成程序、生产 autotuner 的真实融合配置和 agent swarm 组合，发现静默错编译；随后从大 HLO 图定位到单个 fusion，再保留 fusion 原貌检查 VREG 中间值。它是编译正确性基础设施，不是新的推荐模型或通过 A/B 门槛的工业推荐条目。 完整实验成本过高，不复现（审查 DONE）。只读核对固定 v1 的 Sections2–4、上游 isolation/evaluator 链接与日期；没有运行、训练或调用其内部 harness，没有本地算法目录、metrics、GPU 收据或 Evolve 映射。公开宏图工具不意味着 agent 编排、目标 ISA/MXU 仿真、VREG stepping 和生产样本全部公开。  推理与系统效率 编译器正确性与分层故障隔离 基础模型 能力证据：评测采样、读出与可靠性 有公开OpenXLA代码，为什么本库仍将完整论文标为不复现，而不在A100跑个替代？ 公开macro隔离和evaluator只是部分链路；内部生产图、agent harness、目标ISA与MXU模拟、VREG逐步硬件调试和真实TPU确认并不随框架开源。A100没有相同寄存器/舍入/编译语义，运行CUDA例子不能验证TPU缺陷。资源和可得性不匹配，所以审查DONE、不复现而不伪造通过。 教学例：在CUDA上正确执行两次cast，不能证明某TPU lowering没有跳过cast；两者最终数值相同也没有覆盖原始TPU生成代码。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-c830109380a835e9">有公开OpenXLA代码，为什么本库仍将完整论文标为不复现，而不在A100跑个替代？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Axla-trenches">XLA from the Trenches: Correctness on TPU Workloads at Scale</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Google</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>公开macro隔离和evaluator只是部分链路；内部生产图、agent harness、目标ISA与MXU模拟、VREG逐步硬件调试和真实TPU确认并不随框架开源。A100没有相同寄存器/舍入/编译语义，运行CUDA例子不能验证TPU缺陷。资源和可得性不匹配，所以审查DONE、不复现而不伪造通过。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：在CUDA上正确执行两次cast，不能证明某TPU lowering没有跳过cast；两者最终数值相同也没有覆盖原始TPU生成代码。</p>
+<p class="ar-learning-sources">依据：已核查与未实现、资源与复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.00624">原论文</a> · <a href="../../../../foundation-models/2611.00624-xla-trenches/">实现解读</a> · <a href="#qa-c830109380a835e9">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:detector-scope" data-paper-title="Building Auditable AI Text Detectors with Sparse Autoencoders" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Building Auditable AI Text Detectors with Sparse Autoencoders 基础模型 University of Pennsylvania 2026-10-21 DetectorScope 把黑盒检测器的残差流转换为 SAE 稀疏特征，按 token 取最大值后跨层拼接，再用自动解释的验证分数筛掉不可靠概念。轻量 L1 线性头只使用保留特征，因此每个预测能分解成可置零核验的概念贡献，而不是在黑盒输出后补写理由。原文还包含 SAE 训练、Gemini 描述生成与验证、大语料特征缓存和多条件检测实验；这些不是本地稀疏头的隐式功能。描述文字存在不代表语义正确，Spearman 分数也不是人工审查或误伤风险担保。 完整实验成本过高，不复现（审查 DONE）。诊断使用小规模合成激活张量，12 个训练文档、4 个隔离预测输入；本地仅实现 L1 小张量机制：冻结 SAE 特征接口、描述验证分数、稀疏线性头与精确归因。不是完整 AI 文本检测器，也不是公开 benchmark 能力复现。完整实验成本过高，不复现（审查 DONE）。本轮已在CPU及真实NVIDIA A100上执行同一冻结版本、42/43/44三个种子：独立机制指标、脱敏GPU凭证。仅验收下述L1组件，不宣称完整模型能力。  可解释性 稀疏特征与可审计检测 基础模型 能力证据：评测采样、读出与可靠性 DetectorScope 为什么把检测预测建立在可检查的稀疏特征上？ 它先池化SAE特征并筛除描述不可靠的概念，再用轻量稀疏线性头预测，使每次logit能分解为明确特征贡献。可解释性来自实际计算结构，而非预测后补写一句理由。 示意：某概念贡献可通过置零该特征核对，不必相信一段与检测分数无关的生成解释。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
 <span id="paper-foundation-models-detector-scope-a45f37d9" class="ar-learning-paper-anchor"></span>

@@ -135762,6 +135762,563 @@
           "track": "foundation-model"
         }
       ]
+    },
+    {
+      "schema_version": 1,
+      "batch": "2026-11-04-priority-components",
+      "date": "2026-11-04",
+      "selected_scope_complete": true,
+      "delivery_status": "bounded_scope_complete",
+      "all_sources_exhaustive": false,
+      "review_watermark_advanced": false,
+      "review_watermark": {
+        "before": "2026-10-15",
+        "after": "2026-10-15"
+      },
+      "counts": {
+        "selected_papers": 8,
+        "component_implementations": 7,
+        "gpu_validated_components": 4,
+        "cpu_only_components": 3,
+        "reference_only_high_cost_review_done": 1,
+        "new_first_publications_since_previous_capture": 7,
+        "recent_overlap_backfills": 1,
+        "capability_reproductions_claimed": 0
+      },
+      "additional_dispositions": [
+        {
+          "title": "FabScore: Fine-Grained Evaluation of Fabrications in Automated AI Research",
+          "organization": "Google collaboration",
+          "source_url": "https://research.google/pubs/fabscore-fine-grained-evaluation-of-fabrications-in-automated-ai-research-2/",
+          "decision": "historical_duplicate_title_with_new_readable_source",
+          "review_done": false,
+          "blocking": false,
+          "evidence": "Old official title already exists in the October archive; the new URL points to readable author PDF and MIT author repository https://github.com/chchenhui/fabscore. OpenReview/API challenge still prevents exact first-publication date confirmation. No November-new identity or implementation is invented.",
+          "source_attempts": [
+            {
+              "url": "https://chchenhui.github.io/papers/FabScore.pdf",
+              "result": "readable35-pagePDF;method/figure/taxonomychecked"
+            },
+            {
+              "url": "https://api2.openreview.net/notes?id=6gYWcYQcWM",
+              "result": "HTTP403"
+            },
+            {
+              "url": "https://openreview.net/forum?id=6gYWcYQcWM",
+              "result": "browserverificationinterstitial"
+            }
+          ],
+          "reopen_condition": "A primary exact original public date becomes available; no periodic retry without changed evidence",
+          "automatic_retry": false
+        },
+        {
+          "title": "Entitlement Is Not Authorization",
+          "organization": "Google",
+          "source_url": "https://research.google/pubs/entitlement-is-not-authorization/",
+          "decision": "outside_current_topic_scope",
+          "review_done": true,
+          "reason": "General entitlement consistency/billing model checking and seeded subscription simulation, not an LLM,Agent,JEPA or search/recommendation method. Google priority does not remove topic boundaries."
+        },
+        {
+          "title": "What Limits Us? Analyzing Self-Reported Limitations in NLP Research",
+          "organization": "Google collaboration",
+          "id": "2609.15191",
+          "source_url": "https://research.google/pubs/what-limits-us-analyzing-self-reported-limitations-in-nlp-research/",
+          "decision": "already_reviewed_historical_identity",
+          "review_done": true,
+          "previous_record": "docs/research-audits/google-emnlp25-closure/review-decisions.json",
+          "reason": "Known human-AI qualitative research meta-analysis; new directory URL is not a new autonomous RSI implementation."
+        },
+        {
+          "title": "Hierarchical Functional Fault Grading: A Chiplet-Based Methodology to Supplement Structural ATPG Coverage",
+          "organization": "Google",
+          "source_url": "https://research.google/pubs/hierarchical-functional-fault-grading-a-chiplet-based-methodology-to-supplement-structural-atpg-coverage-3/",
+          "decision": "outside_current_topic_scope",
+          "review_done": true,
+          "reason": "Manufacturing-defect fault simulation for chiplets,not ML model training/inference or an agent algorithm;no claimed new AI implementation."
+        },
+        {
+          "title": "EmbeddingGemma 2: Unified and Efficient Multimodal Representations",
+          "organization": "Google DeepMind",
+          "source_url": "https://deepmind.google/research/publications/279443/",
+          "decision": "already_catalogued_official_url_addition",
+          "review_done": true,
+          "catalog_key": "embedding-gemma2",
+          "reason": "Known model/paper and existing checkpoints;directory URL delta is not a second model or new-first-publication count."
+        }
+      ],
+      "scope_kind": "bounded-priority-and-topic-scan",
+      "source_artifact": "research-audits/nov04-components/README.md",
+      "candidates": [
+        {
+          "domain": "recommendation",
+          "key": "wesearch",
+          "title": "WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search",
+          "paper_url": "https://arxiv.org/abs/2611.00530v1",
+          "detail_path": "recommendation-components/2611.00530-wesearch/README.md",
+          "priority": "P0",
+          "first_author": "Kepu Zhang",
+          "first_author_affiliation": "Tencent",
+          "published": "2026-10-31",
+          "published_at": "2026-10-31T01:35:20Z",
+          "code": null,
+          "code_status": "固定v1全文、arXiv资源与作者链接未找到WeSearch原作者代码；引用的OPQ/检索框架不等于本文实现",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2611.00530v1",
+            "source_location": "Sections3–6,especially6.1.1/6.5",
+            "available_resource": "one NVIDIA A100 or A30, or local Mac",
+            "model_scale": "private pretrained query encoder,feature-awareFFN,learnedOPQ and2-levelRQ-KMeans",
+            "data_scale": "hundreds of millions to billions of private documents plus tens of millions fresh documents,private behavior/relevance teachers",
+            "paper_configuration": "rolling training,atomic model/index refresh,distributed online serving and month-long paid-traffic A/B",
+            "estimated_cost_basis": "exact GPU-hours not disclosed; corpus,private models and production deployment are unavailable in the single-device budget; not a local measurement",
+            "decision": "完整实验成本过高，不复现（审查 DONE）；只执行CPU候选并集、固定OPQ量化/ADC恒等式及不可变新快照，不模拟完整检索器或线上收益。"
+          },
+          "implementation_status": "component_only",
+          "requires_gpu_validation": false,
+          "gpu_validation_passed": false,
+          "gpu_validation_artifact": null,
+          "id": "2611.00530",
+          "status": "implemented",
+          "resolution": "bounded_l1_component_accepted",
+          "doc": "recommendation-components/2611.00530-wesearch/README.md",
+          "catalog_key": "wesearch",
+          "catalog_detail": "recommendation-components/2611.00530-wesearch/README.md",
+          "track": "recommendation",
+          "intake_class": "new_first_publication_since_previous_capture",
+          "review_done": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "full_experiment_review_done": true,
+          "component_implemented": true,
+          "component_accepted": true,
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "verified_priority_organizations": [],
+          "full_text_review": {
+            "scope": "defining method,evidence,resources,authorship and source-release review; not every reference or appendix claim",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-paper",
+              "source_url": "https://arxiv.org/html/2611.00530v1"
+            }
+          ],
+          "reason": "固定低成本L1组件已验收；完整高成本实验不复现，不宣称模型能力或Evolve改善",
+          "component_evidence": "docs/recommendation-components/2611.00530-wesearch/metrics/component-cpu-seeds42-44.json"
+        },
+        {
+          "domain": "agent-research",
+          "key": "agentheal",
+          "title": "AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers",
+          "paper_url": "https://arxiv.org/abs/2610.39234",
+          "detail_path": "agent-research/2610.39234-agentheal/README.md",
+          "priority": "P1",
+          "first_author": "Zhiyi Liu",
+          "first_author_affiliation": "University of Science and Technology of China",
+          "published": "2026-10-29",
+          "published_at": "2026-10-29T02:51:58Z",
+          "code": "https://github.com/Lzzzzzzzzzzy/AgentHeal",
+          "code_status": "论文链接的作者官方代码与数据仓库公开；已核对agentheal、dataset、dataset_real、scripts与tests目录，未执行上游全部模型评测",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2610.39234v1",
+            "source_location": "Section5.1 and evaluation protocol",
+            "available_resource": "one NVIDIA A100 or A30, or local Mac",
+            "model_scale": "13 models,including8B/9B/27B local checkpoints and paid API models,plus semantic LLM judge",
+            "data_scale": "855 tasks,up to60 steps per episode,real web replay and independent audit",
+            "estimated_cost_basis": "full actor/model/task/judge matrix is long-running and resource cost is not bounded by the lightweight evaluator;published configuration,not a measured local runtime",
+            "decision": "完整实验成本过高，不复现（审查 DONE）；只执行独立评价侧状态合同，不调浏览器、模型或judge，不自动重试"
+          },
+          "implementation_status": "component_only",
+          "requires_gpu_validation": false,
+          "gpu_validation_passed": false,
+          "gpu_validation_artifact": null,
+          "id": "2610.39234",
+          "status": "implemented",
+          "resolution": "bounded_l1_component_accepted",
+          "doc": "agent-research/2610.39234-agentheal/README.md",
+          "catalog_key": "agentheal",
+          "catalog_detail": "agent-research/2610.39234-agentheal/README.md",
+          "track": "agent",
+          "intake_class": "recent_overlap_backfill",
+          "review_done": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "full_experiment_review_done": true,
+          "component_implemented": true,
+          "component_accepted": true,
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "verified_priority_organizations": [],
+          "full_text_review": {
+            "scope": "defining method,evidence,resources,authorship and source-release review; not every reference or appendix claim",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-paper",
+              "source_url": "https://arxiv.org/html/2610.39234v1"
+            }
+          ],
+          "reason": "固定低成本L1组件已验收；完整高成本实验不复现，不宣称模型能力或Evolve改善",
+          "component_evidence": "docs/agent-research/2610.39234-agentheal/metrics/component-cpu-seeds42-44.json"
+        },
+        {
+          "domain": "agent-research",
+          "key": "strategist",
+          "title": "Strategist: Evolving Reasoning with Agents",
+          "paper_url": "https://arxiv.org/abs/2611.03618",
+          "detail_path": "agent-research/2611.03618-strategist/README.md",
+          "priority": "P0",
+          "first_author": "Taiming Lu",
+          "first_author_affiliation": "Princeton University",
+          "published": "2026-11-02",
+          "published_at": "2026-11-02T18:51:04Z",
+          "code": "https://github.com/zlab-princeton/Strategist",
+          "code_status": "作者官方仓库公开search、blueprint、retrieval、paired_pick和空初始库；已只读核对默认hidden_best与two_percent规则，未执行上游完整搜索",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2611.03618v1",
+            "source_location": "Experiment and implementation configuration",
+            "available_resource": "one NVIDIA A100 or A30, or local Mac",
+            "model_scale": "frozen8B executor plus external meta-agent inference;authors8xH200 setup",
+            "data_scale": "30 benchmarks,10 iterations x5 candidates per task,about20K candidate-samples/task and108 baseline configurations",
+            "estimated_cost_basis": "multi-benchmark repeated model calls and paid meta-agent searches exceed the single-device bounded scope;published configuration,not a local measurement",
+            "decision": "完整实验成本过高，不复现（审查 DONE）；只执行CPU控制与测量协议，不进行模型搜索、下载或自动重试"
+          },
+          "implementation_status": "component_only",
+          "requires_gpu_validation": false,
+          "gpu_validation_passed": false,
+          "gpu_validation_artifact": null,
+          "id": "2611.03618",
+          "status": "implemented",
+          "resolution": "bounded_l1_component_accepted",
+          "doc": "agent-research/2611.03618-strategist/README.md",
+          "catalog_key": "strategist",
+          "catalog_detail": "agent-research/2611.03618-strategist/README.md",
+          "track": "agent",
+          "intake_class": "new_first_publication_since_previous_capture",
+          "review_done": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "full_experiment_review_done": true,
+          "component_implemented": true,
+          "component_accepted": true,
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "verified_priority_organizations": [
+            "Meta"
+          ],
+          "full_text_review": {
+            "scope": "defining method,evidence,resources,authorship and source-release review; not every reference or appendix claim",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-paper",
+              "source_url": "https://arxiv.org/html/2611.03618v1"
+            }
+          ],
+          "reason": "固定低成本L1组件已验收；完整高成本实验不复现，不宣称模型能力或Evolve改善",
+          "component_evidence": "docs/agent-research/2611.03618-strategist/metrics/component-cpu-seeds42-44.json"
+        },
+        {
+          "domain": "foundation-models",
+          "key": "gavagai",
+          "title": "GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport",
+          "paper_url": "https://arxiv.org/abs/2611.00319",
+          "detail_path": "foundation-models/2611.00319-gavagai/README.md",
+          "priority": "P1",
+          "first_author": "Rajdeep Pal",
+          "first_author_affiliation": "St Thomas’ College of Engineering and Technology",
+          "published": "2026-10-30",
+          "published_at": "2026-10-30T19:39:12Z",
+          "code": null,
+          "code_status": "固定v1全文、摘要及方法名作者名检索未找到可核验原作者实现；未找到/尚未发布",
+          "cost_assessment": {
+            "source": "固定v1 Section3.4：https://arxiv.org/html/2611.00319v1#S3.SS4",
+            "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+            "model_scale": "微调DINOv2视觉初始化与6层8头hidden512随机初始化文本decoder，12个区域proposal",
+            "data_scale": "SAYCam train split，40epochs，batch256，另需手标2000-token内容词过滤训练",
+            "paper_configuration": "作者报告4张NVIDIA A10040GB约11墙钟小时；3epoch caption-only warmup后加入对齐",
+            "estimated_cost_basis": "4卡×11h为作者报告，不是本地测量，也不直接线性外推单卡墙钟；完整训练超出现有轻量预算",
+            "decision": "完整实验成本过高，不复现（审查DONE）；仅实现可调用的容量上界OT、Nothing成本head与固定plan对齐损失，不声称SAYCam能力或完整防塌缩训练。"
+          },
+          "implementation_status": "component_only",
+          "requires_gpu_validation": true,
+          "gpu_validation_passed": true,
+          "gpu_validation_artifact": "docs/gpu-validations/gavagai-a100-20261104.json",
+          "id": "2611.00319",
+          "status": "implemented",
+          "resolution": "bounded_l1_component_accepted",
+          "doc": "foundation-models/2611.00319-gavagai/README.md",
+          "catalog_key": "gavagai",
+          "catalog_detail": "foundation-models/2611.00319-gavagai/README.md",
+          "track": "foundation-model",
+          "intake_class": "new_first_publication_since_previous_capture",
+          "review_done": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "full_experiment_review_done": true,
+          "component_implemented": true,
+          "component_accepted": true,
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "verified_priority_organizations": [],
+          "full_text_review": {
+            "scope": "defining method,evidence,resources,authorship and source-release review; not every reference or appendix claim",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-paper",
+              "source_url": "https://arxiv.org/html/2611.00319v1"
+            }
+          ],
+          "reason": "固定低成本L1组件已验收；完整高成本实验不复现，不宣称模型能力或Evolve改善",
+          "component_evidence": "docs/foundation-models/2611.00319-gavagai/metrics/component-cuda-seeds42-44.json"
+        },
+        {
+          "domain": "foundation-models",
+          "key": "xla-trenches",
+          "title": "XLA from the Trenches: Correctness on TPU Workloads at Scale",
+          "paper_url": "https://arxiv.org/abs/2611.00624",
+          "detail_path": "foundation-models/2611.00624-xla-trenches/README.md",
+          "priority": "P0",
+          "first_author": "Ignacio Cano",
+          "first_author_affiliation": "Google",
+          "published": "2026-10-31",
+          "published_at": "2026-10-31T04:48:13Z",
+          "code": "https://github.com/openxla/xla/blob/main/docs/hlo_isolation.md",
+          "code_status": "原文明确macro-graph isolator已上游到OpenXLA，公开HLO isolation文档及evaluator；完整内部agent harness、TPU工具层、生产图集与微融合硬件调试路径未公开，不等于本文整套作者实现已开源",
+          "cost_assessment": {
+            "source": "固定v1 Sections2.3、3.1.3、3.2、4：https://arxiv.org/html/2611.00624v1",
+            "available_resource": "单张NVIDIA A100或A30，或本地Mac，不具备TPU内部调试环境",
+            "model_scale": "多代TPU上真实生产HLO/LLO融合图、内部ISA与硬件精确MXU模拟器",
+            "data_scale": "约20万私有生产图样本、4万余静态测试定义和参数化后约20万测试，每轮跨后端逾百万次执行",
+            "paper_configuration": "内部多agent harness与TPU工具层，硬件VREG逐步调试，最后以物理TPU确认",
+            "estimated_cost_basis": "资源类型不匹配且私有生产/内部调试依赖不可获取，未虚构GPU小时或尝试CUDA替代",
+            "decision": "完整实验成本过高且环境不可用，不复现（审查DONE）；只保留方法/证据/上游可见边界，不实现伪TPU检查器，不产生metrics或GPU收据。"
+          },
+          "implementation_status": "deferred_high_cost",
+          "requires_gpu_validation": false,
+          "gpu_validation_passed": false,
+          "gpu_validation_artifact": null,
+          "id": "2611.00624",
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "doc": "foundation-models/2611.00624-xla-trenches/README.md",
+          "catalog_key": "xla-trenches",
+          "catalog_detail": "foundation-models/2611.00624-xla-trenches/README.md",
+          "track": "foundation-model",
+          "intake_class": "new_first_publication_since_previous_capture",
+          "review_done": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "full_experiment_review_done": true,
+          "component_implemented": false,
+          "component_accepted": false,
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "verified_priority_organizations": [
+            "Google"
+          ],
+          "full_text_review": {
+            "scope": "defining method,evidence,resources,authorship and source-release review; not every reference or appendix claim",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-paper",
+              "source_url": "https://arxiv.org/html/2611.00624v1"
+            }
+          ],
+          "reason": "Google TPU系统，reviewDONE/高成本不复现；不运行CUDA替身"
+        },
+        {
+          "domain": "foundation-models",
+          "key": "proland",
+          "title": "ProLand: A New Infeasible Manifold Optimization Method for LoRA Fine-Tuning",
+          "paper_url": "https://arxiv.org/abs/2611.00236",
+          "detail_path": "foundation-models/2611.00236-proland/README.md",
+          "priority": "P1",
+          "first_author": "Chenyu Zhou",
+          "first_author_affiliation": "Shanghai Jiao Tong University",
+          "published": "2026-10-30",
+          "published_at": "2026-10-30T18:18:00Z",
+          "code": null,
+          "code_status": "固定v1全文、摘要及作者名方法名检索未找到可核验原作者ProLand实现；未找到/尚未发布，不把Muon或其他LoRA方法代码算作本文代码",
+          "cost_assessment": {
+            "source": "固定v1 Sections 3、5与Appendix L：https://arxiv.org/html/2611.00236v1",
+            "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+            "model_scale": "DeBERTa-v3-base、Qwen2.5-3B、Llama-3.2-3B、Moonlight-16B-A3B，多adapter ranks",
+            "data_scale": "4项GLUE验证任务及7项语言benchmark，多模型与rank配置和消融",
+            "paper_configuration": "附录L在H100 80GB上给出rank16、sequence512、effective batch640、290 updates的主实验和9次primary runs；另有消融配置",
+            "estimated_cost_basis": "依据论文模型、训练与消融矩阵做只读判断；未测量完整单卡小时，也未为证明成本下载checkpoint",
+            "decision": "完整实验成本过高，不复现（审查DONE）；本地仅执行小矩阵精确thin-factor优化器与独立稠密参考，不宣称11任务效果或生产吞吐。"
+          },
+          "implementation_status": "component_only",
+          "requires_gpu_validation": true,
+          "gpu_validation_passed": true,
+          "gpu_validation_artifact": "docs/gpu-validations/proland-a100-20261104.json",
+          "id": "2611.00236",
+          "status": "implemented",
+          "resolution": "bounded_l1_component_accepted",
+          "doc": "foundation-models/2611.00236-proland/README.md",
+          "catalog_key": "proland",
+          "catalog_detail": "foundation-models/2611.00236-proland/README.md",
+          "track": "foundation-model",
+          "intake_class": "new_first_publication_since_previous_capture",
+          "review_done": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "full_experiment_review_done": true,
+          "component_implemented": true,
+          "component_accepted": true,
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "verified_priority_organizations": [],
+          "full_text_review": {
+            "scope": "defining method,evidence,resources,authorship and source-release review; not every reference or appendix claim",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-paper",
+              "source_url": "https://arxiv.org/html/2611.00236v1"
+            }
+          ],
+          "reason": "固定低成本L1组件已验收；完整高成本实验不复现，不宣称模型能力或Evolve改善",
+          "component_evidence": "docs/foundation-models/2611.00236-proland/metrics/component-cuda-seeds42-44.json"
+        },
+        {
+          "domain": "post-training",
+          "key": "specopd",
+          "title": "SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding",
+          "paper_url": "https://arxiv.org/abs/2611.02846v1",
+          "detail_path": "post-training/2611.02846-specopd/README.md",
+          "priority": "P1",
+          "first_author": "Tianyu Liu",
+          "first_author_affiliation": "Qwen Business Unit of Alibaba / University of Science and Technology of China",
+          "published": "2026-11-02",
+          "published_at": "2026-11-02T09:47:06Z",
+          "code": null,
+          "code_status": "截至2026-11-04，官方abs/HTML未给SpecOPD作者仓库；精确题名及GitHub检索未核实作者实现。原文引用的DFlash/Draft-OPD仓库不是SpecOPD开源证据。本地据公式独立重写",
+          "cost_assessment": {
+            "source": "Sec.3、Appendix A.2-A.8及B.2；https://arxiv.org/html/2611.02846v1",
+            "model_scale": "8B全注意力、27B全-线性混合、125B稀疏-线性混合target及DFlash/DSpark/DFlash V2 drafter",
+            "data_scale": "Open-PerfectBlend外层reference及多个dialogue/code/math/agentic评测；作者保留子集与准确checkpoint仍未完整公布",
+            "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+            "paper_configuration": "27B训练吞吐对照使用8张高性能GPU；8B drafter比较涉及10000步，27B主选择checkpoint为36000步；部分serving context40960、并发32",
+            "estimated_cost_basis": "原文多模型、长上下文、多并发、万步训练矩阵明显超出单卡低成本预算；不将native吞吐倍数当作单卡训练耗时估算",
+            "decision": "成本过高，不复现（审查 DONE）；仅L1小张量组件，不下载模型和数据、不完整训练、不自动重试"
+          },
+          "implementation_status": "component_only",
+          "requires_gpu_validation": true,
+          "gpu_validation_passed": true,
+          "gpu_validation_artifact": "docs/gpu-validations/specopd-a100-20261104.json",
+          "id": "2611.02846",
+          "status": "implemented",
+          "resolution": "bounded_l1_component_accepted",
+          "doc": "post-training/2611.02846-specopd/README.md",
+          "catalog_key": "specopd",
+          "catalog_detail": "post-training/2611.02846-specopd/README.md",
+          "track": "post-training",
+          "intake_class": "new_first_publication_since_previous_capture",
+          "review_done": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "full_experiment_review_done": true,
+          "component_implemented": true,
+          "component_accepted": true,
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "verified_priority_organizations": [],
+          "full_text_review": {
+            "scope": "defining method,evidence,resources,authorship and source-release review; not every reference or appendix claim",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-paper",
+              "source_url": "https://arxiv.org/abs/2611.02846v1"
+            }
+          ],
+          "reason": "固定低成本L1组件已验收；完整高成本实验不复现，不宣称模型能力或Evolve改善",
+          "component_evidence": "docs/post-training/2611.02846-specopd/metrics/component-cuda-seeds42-44.json"
+        },
+        {
+          "domain": "post-training",
+          "key": "rlid",
+          "title": "RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs",
+          "paper_url": "https://arxiv.org/abs/2611.02455v1",
+          "detail_path": "post-training/2611.02455-rlid/README.md",
+          "priority": "P1",
+          "first_author": "Ziyi Chen",
+          "first_author_affiliation": "University of Illinois Urbana-Champaign",
+          "published": "2026-11-02",
+          "published_at": "2026-11-02T03:17:51Z",
+          "code": null,
+          "code_status": "截至2026-11-04，官方abs/HTML未给作者公开仓库URL；文中ldmrl/和llmdistill/raw/路径不是可访问开源链接，精确题名/编号检索未找到已核实作者仓库。本地据公式独立重写",
+          "cost_assessment": {
+            "source": "Sec.3 compute accounting、Sec.6及Appendix N；https://arxiv.org/html/2611.02455v1#S3",
+            "model_scale": "Qwen2.5 0.5B/1.5B/3B/7B及Qwen3.5 2B/4B/9B LoRA rank16；另有跨模型学生",
+            "data_scale": "ARC、Countdown、Sokoban、FrozenLake、ALFWorld多环境，多seed、教师轨迹收集、蒸馏及RL",
+            "available_resource": "单张NVIDIA A100或A30，或本地Mac",
+            "paper_configuration": "ALFWorld每episode最多50步、每组8轨迹；完整训练-蒸馏链路作者报告12.7 H100 GPU-hours，对照17.3 GPU-hours",
+            "estimated_cost_basis": "作者实测已为小时级，且其H100结果不能当成本地A100耗时承诺；多环境、多模型与完整轨迹蒸馏矩阵超出本轮低成本预算",
+            "decision": "成本过高，不复现（审查 DONE）；只验证数值readout、决策PPO和同策略方差恒等式，不加载权重、不跑环境或完整训练、不自动重试"
+          },
+          "implementation_status": "component_only",
+          "requires_gpu_validation": true,
+          "gpu_validation_passed": true,
+          "gpu_validation_artifact": "docs/gpu-validations/rlid-a100-20261104.json",
+          "id": "2611.02455",
+          "status": "implemented",
+          "resolution": "bounded_l1_component_accepted",
+          "doc": "post-training/2611.02455-rlid/README.md",
+          "catalog_key": "rlid",
+          "catalog_detail": "post-training/2611.02455-rlid/README.md",
+          "track": "post-training",
+          "intake_class": "new_first_publication_since_previous_capture",
+          "review_done": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "full_experiment_review_done": true,
+          "component_implemented": true,
+          "component_accepted": true,
+          "diagnostic_only": true,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "verified_priority_organizations": [],
+          "full_text_review": {
+            "scope": "defining method,evidence,resources,authorship and source-release review; not every reference or appendix claim",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_kind": "fixed-primary-paper",
+              "source_url": "https://arxiv.org/abs/2611.02455v1"
+            }
+          ],
+          "reason": "固定低成本L1组件已验收；完整高成本实验不复现，不宣称模型能力或Evolve改善",
+          "component_evidence": "docs/post-training/2611.02455-rlid/metrics/component-cuda-seeds42-44.json"
+        }
+      ]
     }
   ]
 }

@@ -10,7 +10,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="retrieval-matching/">候选生成与搜索匹配</a></h2>
 <p>精排模型再强，能否找回召回阶段漏掉的好内容？</p>
-<p class="ar-learning-topic-meta">144 个问题 · 36 篇论文</p>
+<p class="ar-learning-topic-meta">148 个问题 · 37 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="content-semantic-ids/">语义表征、用户知识与冷启动</a></h2>

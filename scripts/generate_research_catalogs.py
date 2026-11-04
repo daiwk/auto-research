@@ -837,6 +837,9 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        "proland": ("预训练与数据", "优化器与参数高效微调"),
+        "gavagai": ("多模态基础模型", "词语与区域对齐"),
+        "xla-trenches": ("推理与系统效率", "编译器正确性与分层故障隔离"),
         "merlin": ("注意力与长上下文", "多状态线性注意力"),
         "fold-bias": ("推理与系统效率", "KV cache 与上下文压缩"),
         "swim": ("网络架构", "JEPA 与决策表征"),

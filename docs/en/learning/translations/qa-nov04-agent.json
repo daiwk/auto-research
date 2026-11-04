@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:strategist/blueprint-not-model-weights": {
+      "source_sha256": "a7a6b914f7c89a787a8a8c8e0bd405db059e21d6db5f21f209c8d38c70c9b094",
+      "reviewed": true,
+      "fields": {
+        "question": "Does Strategist accumulate model parameters, the current answer, or another cross-task asset?",
+        "answer": "It freezes executor models and represents reasoning programs as Python blueprints with one execute interface. After evaluation, they enter a cross-task library with measurement cards and training-trace experience. Task prompts are separate from structure; later tasks can compose or reuse structures. This is neither gradient training nor merely editing the current answer.",
+        "example": "Teaching example: a discovered procedure that creates three candidates and reviews them independently can be retested with new prompts in another domain. Saving one problem's final number is not reusable blueprint accumulation."
+      }
+    },
+    "qa/agent-research:strategist/two-bands-two-splits": {
+      "source_sha256": "5739dd6e52ec0a8aed221ec335b75fec365cc08356f6aca7be2408215ae0e794",
+      "reviewed": true,
+      "fields": {
+        "question": "Do exactly two percentage points of accuracy gain and exactly 2% lower cost automatically satisfy Strategist's win rule?",
+        "answer": "No. Improvement requires more than two percentage points or a cost ratio strictly below 0.98; the other metric must remain within its tolerance band. The candidate must win on validation and hidden, then ranks by hidden accuracy gain and cost ratio. The default rule is not a confidence test, even though standard errors are computed.",
+        "example": "Teaching example: d=0.02 and cost ratio 0.98 are ties. d=0 and ratio 0.97 can be a cost win, but a three-percentage-point hidden accuracy loss still prevents selection."
+      }
+    },
+    "qa/agent-research:strategist/strategy-library-versus-evaluation-budget": {
+      "source_sha256": "a62995d65c6e60a48dd76953bea0d2853ff22e61d20ecfedc8899ad9af004aff",
+      "reviewed": true,
+      "fields": {
+        "question": "Both Strategist and EvalAlloc inspect candidate measurements. Do they optimize the same object?",
+        "answer": "No. Strategist proposes and composes executable reasoning strategies, retaining structures and experience for later tasks. EvalAlloc mainly determines which SEARCH evaluation cells to execute, how shared references estimate fitness, and how final confirmation works. Cheap observations or high predicted scores do not generate better strategies, and library admission does not establish held-out success.",
+        "example": "Teaching example: evaluating 100 fewer items changes the observation budget. Replacing direct answering with a reusable decomposition-and-review program changes strategy structure. They can be combined, but costs and real held-out success need separate records."
+      }
+    },
+    "qa/agent-research:strategist/ast-and-external-evidence-boundary": {
+      "source_sha256": "4f4ec4e1046ec2b2bd29b26b84a8134e95754925dfc0bba4b43cf500872a41bc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do passing AST, DAG, and paired-pick tests not establish a complete Strategist or Evolve integration?",
+        "answer": "The module calls no designer or executor model; retrieval scores and candidate evaluations are supplied externally. Explicit prompt elision is only a structural fingerprint, not proof about helper semantics or dynamic dependencies. Paired-pick does not isolate hidden data within a Python process. Actual proposal, execution, retrieval, and information-flow isolation require separate acceptance. The present CPU diagnostic is not promotion-eligible capability.",
+        "example": "Teaching example: synthetic arms with accuracy 0.7 and costs 10 and 8 verify ratio 0.8 and fallback behavior. No model has answered a question, and cross-task search has not been demonstrated."
+      }
+    },
+    "qa/agent-research:agentheal/resource-recovery-preserves-request": {
+      "source_sha256": "a9c23ea15dd61e3b13f0f1ee6b9e5f070d96ac7d5f0e1fe8f088a59c6ab71c5f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is finding a similarly titled page after hitting a login wall not necessarily successful AgentHeal recovery?",
+        "answer": "It may be another work, an unverifiable look-alike, or an older version. AgentHeal preserves the original objective: prefer an exact-version copy when available; disclose differences when only other versions remain; otherwise abstain and diagnose the barrier, asking the user for help when necessary. Topic similarity is not equivalence.",
+        "example": "Teaching example: a requested metric from paper v2 cannot silently be replaced by v1. Use an institutional v2 copy if one exists; if only v1 remains, explicitly disclose the version difference."
+      }
+    },
+    "qa/agent-research:agentheal/copy-version-and-policy-product": {
+      "source_sha256": "95a3f677dd8e822f5b2805db7a5d8446c8718040f4eb1803f6e1980ec1595f59",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must AgentHeal's exact-copy and alternative-version source conditions remain different?",
+        "answer": "Equation 1 requires the attributed source set to intersect available exact copies. When only other versions remain, the nonempty source set must lie entirely within those versions and declare other. Any prohibited action multiplies final success by zero. Strengthening the first branch to copies only, or relaxing the second to one version somewhere, changes the paper.",
+        "example": "Teaching example: with only v1 reachable, mixing v1 and a decoy fails even with an other declaration. When v2 is available, Equation 1 itself only checks that v2 is among the sources; it does not prove answer semantics are correct."
+      }
+    },
+    "qa/agent-research:agentheal/honest-dead-end-versus-unfair-perturbation": {
+      "source_sha256": "03f57a84bb2d8efe8fe5aad5752a2040f40c858261304f188d345104ae6fe71a",
+      "reviewed": true,
+      "fields": {
+        "question": "AgentPerturb requires solvability after perturbation, whereas AgentHeal includes unrecoverable tasks. Is that contradictory?",
+        "answer": "They target different behaviors. AgentPerturb compares paired robustness under the same objective and must not count destroyed solvability as capability loss. AgentHeal explicitly labels unrecoverable regimes to assess honest abstention, accurate diagnosis, and policy compliance rather than demand nonexistent answers. Recoverable and unrecoverable cases need separate reporting, not one undifferentiated answer-accuracy score.",
+        "example": "Teaching example: deleting the only evidence while still requiring the original number is an unfair perturbation. Labeling that condition unsolvable and testing refusal to fabricate instead measures recovery reliability."
+      }
+    },
+    "qa/agent-research:agentheal/evaluator-metadata-is-not-actor-observation": {
+      "source_sha256": "717f405c5ffe99bf1a9ba9945551608fedfc6f44e888958ec8492c895791e4fe",
+      "reviewed": true,
+      "fields": {
+        "question": "The local diagnostic knows work, version, and reachable resources. Does it reveal the recovery path to an agent?",
+        "answer": "Those are independent evaluator annotations. The module calls no actor and must not supply them as actor observations. Source attribution and per-action policy judgments also come from external evaluators rather than local string rules. TS=0.5 across four synthetic truth-table cases verifies the decision contract, not agent capability. Real browser evaluation still needs separation of actor, gold, and judge.",
+        "example": "Teaching example: directly providing copy_id to a model before scoring recovery leaks the path. An independent evaluator should inspect visits and attributed sources only after the model submits."
+      }
+    }
+  }
+}

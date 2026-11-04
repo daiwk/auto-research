@@ -382,6 +382,9 @@
 - [SORT-Gen](../2505.07197-sort-gen/README.md)：以 ordered regression 估计列表前缀价值，再按 CLICK/PAY 队列、mask 和 MMR 生成混排结果。
 - [CDM](../2406.09021-cdm/README.md)：用 MMR 教师生成可控多样性列表并蒸馏上下文边际收益。
 
+### 大模型能力与推荐融合
+- [WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search](../../recommendation-components/2611.00530-wesearch/README.md)：先检索粗粒度簇并合并其中的原子文档，再用OPQ查表粗排和特征FFN精排，避免固定SID的早期路径错误；固定簇与码本支持新文档滚动挂载。本地仅验证候选空间、量化距离恒等式与新旧快照隔离，不代表训练/生产质量复现。
+
 ## 内容理解、审核与风险控制
 
 ### 内容理解与语义表征

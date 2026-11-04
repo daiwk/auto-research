@@ -71,6 +71,17 @@ def _label_map(raw: str) -> dict[str, str]:
 
 
 _LABELS = _label_map("""
+决策级信用分配 = Decision-level credit assignment
+召回 = Candidate retrieval
+推测解码与接受长度 = Speculative decoding and acceptance length
+推理策略组合与跨任务积累 = Composing inference strategies and cross-task accumulation
+统一评测与可靠性 = Unified evaluation and reliability
+聚类候选空间与量化检索 = Cluster-constrained candidates and quantized retrieval
+访问障碍与目标保真恢复 = Access barriers and goal-preserving recovery
+词区域对齐与容量约束传输 = Word–region alignment and capacity-constrained transport
+优化器与参数高效微调 = Optimizers and parameter-efficient fine-tuning
+词语与区域对齐 = Word–region alignment
+编译器正确性与分层故障隔离 = Compiler correctness and hierarchical fault isolation
 Agent 研究论文与资料索引 = Agent research papers and materials
 Agent 研究：按主题 = Agent research by topic
 Agent 研究：按年份 = Agent research by year

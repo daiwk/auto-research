@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/recommendation/retrieval-matching/comparison/recommendation:wesearch": {
+      "source_sha256": "ef80f9c75d11e28f728b9579f1a27e6d4aa8711ae9013648cecccf3a345db699",
+      "reviewed": true,
+      "fields": {
+        "position": "Clusters constrain candidates before OPQ coarse ranking and feature-aware FFN ranking over atomic documents. Fixed clusters/codebooks can mount fresh documents without sequential SID-prefix decoding.",
+        "tradeoff": "Cluster selection can still miss documents. Exact lookup proves a distance identity for existing quantized vectors, not better trained representations or production quality. A local snapshot is not a distributed atomic refresh."
+      }
+    },
+    "dive/recommendation/retrieval-matching/analysis/2": {
+      "source_sha256": "39771e9b59476a2afb29d8a0a656bfd917549fdd845beecb49f0f84a003de52d",
+      "reviewed": true,
+      "fields": {
+        "title": "A cluster constrains candidates instead of assigning a unique semantic path",
+        "body": "WeSearch retains atomic documents inside a cluster union and separates coarse ranking from feature-aware ranking. MIMA instead lets multiple user interests propose candidates. Both require a fixed final deduplicated budget when comparing coverage; collecting more candidates does not establish better representations. The ADC identity verifies computation for one quantized representation, and fixed-artifact mounting does not replace training or coordinated model/index refresh."
+      }
+    },
+    "dive/recommendation/retrieval-matching/update/2026-11-04/1": {
+      "source_sha256": "3187691963eed01a1c164db32976187563817c9c2ccc72725f1c51f534f96a97",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added WeSearch to distinguish cluster-constrained candidates, interest specialization, ADC distance equivalence and fixed-artifact mounting. L1 CPU evidence is not promoted to complete-retriever capability; production A/B and local mechanisms remain separate."
+      }
+    }
+  }
+}

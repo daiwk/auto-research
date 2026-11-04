@@ -7,7 +7,7 @@ hide:
 
 # 自改进先标对象：答案、经验、接口与系统版本
 
-[Agent](../index.md) · 更新 2026-10-30 · 46 篇主题资料 / 9 篇重点对照
+[Agent](../index.md) · 更新 2026-11-04 · 47 篇主题资料 / 10 篇重点对照
 
 Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。
 
@@ -34,6 +34,7 @@ Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens �
 | [When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement](../../../agent-research/2610.36826-ruharness/README.md) · [原始来源](https://arxiv.org/abs/2610.36826v1)<br>章节：背景与主要改动、核心公式 | 六格联合后验、2000次抽样0.2分位、active frontier与validation准入。 | 行为标签、执行结果和验证分数外置；统计排序不是完整自进化运行。 |
 | [CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization](../../../agent-research/2604.14214-crop/README.md) · [原始来源](https://arxiv.org/abs/2604.14214v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 固定目标权重，拼接任务与超阈值长度文本批评，外部元优化器重写系统提示；按准确率减CoT归一化token成本选已测提示。 | 不同于Self-Refine修当前答案；本地validation选优是明确防泄漏加强。确定性callback诊断不代表真实LLM无损缩短或完整evolve。 |
 | [Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?](../../../agent-research/2610.37276-evalalloc/README.md) · [原始来源](https://arxiv.org/abs/2610.37276v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 用SEARCH观测的信息度选共享core与无放回item，固定外部item参照仅推断新候选参数；最终公共prefix补缓存并作配对校正。 | 预测不能覆盖已测cell，评测cell减少不等于token费用等比下降；warmup MIRT、cross-fit refit和完整successive halving未实现。 |
+| [Strategist: Evolving Reasoning with Agents](../../../agent-research/2611.03618-strategist/README.md) · [原始来源](https://arxiv.org/abs/2611.03618)<br>章节：背景与主要改动、核心公式、数据协议与实现边界、高成本完整实验 | 冻结执行模型，把可执行推理blueprint组成跨任务无环库，检索相关与邻域素材，按开发集实际准确率与分层token成本选策略。 | 库保留未获胜结构供后续任务复用，但最终候选仍须validation和hidden双过门槛；本地只实现AST/DAG、外部检索分数核和配对选择，不是meta-agent搜索。 |
 
 </div>
 
@@ -62,6 +63,12 @@ RuHarness的criterion frontier不是按一次正确率排序：2×3行为/结果
 Self-Refine修当前输出，CROP则在训练样本反馈下改下一次通用系统提示，并明确计算输出token成本；它不把权重训练称为已完成。RuHarness维护能区分当前失败的rubric frontier，EvalAlloc另问应把真实评测cell花在哪些SEARCH items上：固定item参照做稀疏补全，只用预测填未观测项，最终以公共prefix与缓存确认。高rubric效用、较高预测fitness和留出任务真成功是三种证据，尤其不能把少一半cell直接宣传为少一半LLM费用。
 
 对照来源：[crop](../../../agent-research/2604.14214-crop/README.md) · [evalalloc](../../../agent-research/2610.37276-evalalloc/README.md) · [self-refine](../../../agent-research/2303.17651-self-refine/README.md) · [ruharness](../../../agent-research/2610.36826-ruharness/README.md)
+
+### 策略能入库，不代表它能成为当前冠军
+
+Strategist把可执行推理结构、测量卡与训练轨迹经验组成跨任务资产，和Reflexion只留下可读教训不同；它可保留测过但未获胜的结构，给未来任务组合机会。当前交付选择则另设validation和hidden双门槛，且test不参与。EvalAlloc治理花在哪些评测cell上的成本，而不代替提出策略。三者都依赖真实执行反馈，但经验积累、结构复用与预算分配是不同机制；合成分数通过任何选择规则，都不提供LLM能力证据。
+
+对照来源：[strategist](../../../agent-research/2611.03618-strategist/README.md) · [reflexion](../../../agent-research/2303.11366-reflexion/README.md) · [evalalloc](../../../agent-research/2610.37276-evalalloc/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -127,9 +134,23 @@ Self-Refine修当前输出，CROP则在训练样本反馈下改下一次通用�
 
     对照来源：[evalalloc](../../../agent-research/2610.37276-evalalloc/README.md) · [ruharness](../../../agent-research/2610.36826-ruharness/README.md)
 
+### Strategist把失败策略也入库，与Reflexion记录教训、EvalAlloc确认冠军，有哪些不同？ {#cross-blueprint-archive-versus-current-pick}
+
+??? note "展开答案与例子"
+
+    **答案：** 入库保存可执行结构与实测卡，不自动采用为当前答案流程；最终仍要两split都胜出。Reflexion主要保存下次可读的文字经验，EvalAlloc决定观测预算与最终确认，不替系统生成结构。结构档案、经验内容和获准采用的策略必须分别记录。
+
+    **教学例子：** 教学例：某次投票策略不划算仍可作为未来分解程序的组件，但不能因已入库就覆盖当前更便宜的基线。
+
+    对照来源：[strategist](../../../agent-research/2611.03618-strategist/README.md) · [reflexion](../../../agent-research/2303.11366-reflexion/README.md) · [evalalloc](../../../agent-research/2610.37276-evalalloc/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-04** · 精读Strategist，并与Reflexion、EvalAlloc区分跨任务可执行结构库、可读教训和评测预算。新增AST去重的显式prompt边界、validation/hidden双门槛与2个百分点/2%成本带解释；未把CPU合成选择核宣传为真实搜索，原文8×H200完整矩阵高成本不复现、审查DONE。
+
+涉及：[strategist](../../../agent-research/2611.03618-strategist/README.md) · [reflexion](../../../agent-research/2303.11366-reflexion/README.md) · [evalalloc](../../../agent-research/2610.37276-evalalloc/README.md)
 
 **2026-10-30** · 精读CROP与EvalAlloc：以Self-Refine/RuHarness为对照，分开系统提示修改、rubric价值和SEARCH观测预算；补validation/CoT成本、观测优先补全、公共prefix确认及未实现MIRT/controller边界。
 
@@ -143,10 +164,11 @@ Self-Refine修当前输出，CROP则在训练样本反馈下改下一次通用�
 
 覆盖 43 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 46 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 47 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
+- [Strategist: Evolving Reasoning with Agents](../../../agent-research/2611.03618-strategist/README.md)
 - [RSI-Opt: Recursive Self-Improvement Optimizer Agents For Model Training](../../../agent-research/2610.32026-rsi-opt/README.md)
 - [ImageRSI: Verification-Driven Recursive Self-Improvement for Agentic Image Generation](../../../agent-research/2610.32120-image-rsi/README.md)
 - [HarnessMM: Recursive Self-Improvement for Harness Token Efficiency](../../../agent-research/2610.32813-harnessmm/README.md)

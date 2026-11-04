@@ -529,7 +529,7 @@
     },
     "training-budget": {
       "title": "训练预算：改数据、改更新方向，还是改比较口径",
-      "thesis": "同一预算内训练得更好，可能来自更合适的数据、逐样本处理、更有效更新或更低状态开销。DoReMi、Mixing Laws、DataOrchestra、Muon 和 ECO 改动不同环节；Muon Paired Budget 则提醒先冻结选参规则，再分别回答等数据和等时间问题。",
+      "thesis": "同一预算内训练得更好，可能来自更合适的数据、逐样本处理、更有效更新或更低状态开销。DoReMi、Mixing Laws、DataOrchestra、Muon 和 ECO 改动不同环节；Muon Paired Budget 则提醒先冻结选参规则，再分别回答等数据和等时间问题。ProLand改变LoRA乘积空间的更新几何，GAVAGAI则给captioning增加显式词区域对齐目标，二者不能仅因都改善训练就混为一类。",
       "axes": [
         "改变数据出现频率、数据内容还是参数更新",
         "使用在线反馈、先导拟合或离线教师",
@@ -596,6 +596,18 @@
             "核心公式",
             "本地复现与成本判断"
           ]
+        },
+        {
+          "paper": "foundation-models:proland",
+          "position": "在BA乘积空间重投影动量并求谱方向，以水平DB协调两因子，同时独立用Landing恢复B正交性。",
+          "tradeoff": "不是给A/B各做Muon；小核节省状态不消除病态伪逆。本地只验精确thin-factor更新，完整多模型微调高成本不复现。",
+          "sections": ["核心公式", "检查与负控", "成本判断与复现边界"]
+        },
+        {
+          "paper": "foundation-models:gavagai",
+          "position": "以Nothing吸收非指称词，以视觉列容量上界约束区域竞争，再将固定plan成本和caption CE相加。",
+          "tradeoff": "改变监督而非优化器；8次缩放不保证行边际已收敛，v1未定义Nothing hinge的额外反传。本地不声称完整防塌缩或SAYCam训练。",
+          "sections": ["核心公式", "检查与负控", "成本判断与复现边界"]
         }
       ],
       "analysis": [
@@ -616,6 +628,11 @@
             "foundation-models:eco-optimizer",
             "foundation-models:muon-paired-budget"
           ]
+        },
+        {
+          "title": "改变怎样更新，与改变要学什么，必须拆开验证",
+          "body": "ProLand保持给定损失，通过乘积空间谱方向和Landing改变LoRA更新；GAVAGAI把词区域指称变量加入训练目标，并用Nothing/容量处理错误监督。前者的下降与约束恢复不能证明新增对齐目标有用，后者的小矩阵传输可行也不证明真实图像grounding提升。若未来组合，应先固定数据、骨干和预算，独立消融目标变化与更新几何；本轮二者都是L1组件，不启动高成本联合训练。",
+          "papers": ["foundation-models:proland", "foundation-models:gavagai"]
         }
       ],
       "questions": [
@@ -649,9 +666,16 @@
             "foundation-models:muon-paired-budget",
             "foundation-models:eco-optimizer"
           ]
+        },
+        {
+          "id": "nov04-objective-versus-geometry",
+          "question": "ProLand与GAVAGAI都能对训练产生影响，为什么不能只看一次loss下降就归为同一种改进？",
+          "answer": "ProLand在给定目标上改变参数更新和约束恢复；GAVAGAI直接改变目标，引入词区域分配和Nothing。两种loss甚至可能不可直接比较。需要固定任务和数据，分别检查更新等价性、传输约束、独立验证效果与总成本，不能让小矩阵下降代替能力证据。",
+          "example": "教学例：把原CE加上一个可能为负的对齐成本，数值变低不等于caption质量改善；同样，ProLand让MSE下降也不代表学到了图像中的词所指。",
+          "papers": ["foundation-models:proland", "foundation-models:gavagai"]
         }
       ],
-      "updated": "2026-10-27",
+      "updated": "2026-11-04",
       "reviewed_papers": [
         "foundation-models:adamw4bit",
         "foundation-models:af-muon",
@@ -680,7 +704,9 @@
         "foundation-models:smrc-pmrc",
         "foundation-models:t-muon",
         "foundation-models:taco-optimizer",
-        "foundation-models:tess"
+        "foundation-models:tess",
+        "foundation-models:proland",
+        "foundation-models:gavagai"
       ],
       "updates": [
         {
@@ -745,6 +771,15 @@
             "foundation-models:t-muon": "35c5fe95a5d70dfb421f6500636c4bb507442ca61ffd6e844789b95ee96768e2",
             "foundation-models:taco-optimizer": "5320893df645d8a44b41461d3e667d4b0e6908f0175bffc6e1786610b2233425",
             "foundation-models:tess": "a55eeba07f32c67aff112f92e5f2fda2333e601534e6c88e387bdba408b486d1"
+          }
+        },
+        {
+          "date": "2026-11-04",
+          "summary": "加入ProLand与GAVAGAI，区分乘积空间更新几何和新增对齐监督；新增独立参考、有限迭代与反传边界，二者完整训练高成本不复现。",
+          "papers": ["foundation-models:proland", "foundation-models:gavagai"],
+          "source_revisions": {
+            "foundation-models:proland": "275d98175b4b5d888c6ccc97f04fa6557753a442a671f465e091e376a8fc3e35",
+            "foundation-models:gavagai": "1a7e35bf34453c39ed0546866ee662989d49a7f9b0971987ee48dcb064213fc7"
           }
         }
       ]
@@ -1251,7 +1286,7 @@
     },
     "evaluation-and-evidence": {
       "title": "能力证据：准确打分、节省观测与解释预测",
-      "thesis": "先区分“正确答案怎样定义”“下一题测谁”“多个裁判怎样融合”和“预测怎样解释”。XLGoBench、ProEval、FUSE、TCAB 与 DetectorScope 分别改变这些环节；观测更少或解释可加，不等于被测能力本身更强。",
+      "thesis": "先区分“正确答案怎样定义”“下一题测谁”“多个裁判怎样融合”和“预测怎样解释”。XLGoBench、ProEval、FUSE、TCAB 与 DetectorScope 分别改变这些环节；观测更少或解释可加，不等于被测能力本身更强。XLA from the Trenches还提醒：评分之前，编译后程序本身就可能静默偏离原始数值语义，不能把编译成功当作执行正确。",
       "axes": [
         "输出是任务正确标签、总分后验、候选排序还是可加解释",
         "真实标签何时可见、由谁持有",
@@ -1308,6 +1343,12 @@
             "核心公式",
             "代码映射与边界"
           ]
+        },
+        {
+          "paper": "foundation-models:xla-trenches",
+          "position": "在合法输入和目标TPU数值语义下做差分检查，从大图隔离到完整fusion内部VREG，避免调试拆图改变故障。",
+          "tradeoff": "编译器正确性证据不是模型能力分数；内部生产图和TPU工具不可用，公开OpenXLA只是部分链路，本地review-only且无CUDA替身。",
+          "sections": ["核心机制与数值例子", "论文工程与线上证据", "资源与复现边界"]
         }
       ],
       "analysis": [
@@ -1327,6 +1368,11 @@
             "foundation-models:detector-scope",
             "foundation-models:tcab"
           ]
+        },
+        {
+          "title": "参考语义也必须匹配被测执行环境",
+          "body": "XLGoBench强调scorer与gold隔离，XLA案例进一步显示：即使测试题和标签合法，编译后的计算也可能因寄存器舍入或融合调度偏离原程序。差分参考既不能接受非法输入制造NaN伪警，也不能把合法TPU近似函数误报为故障。拆fusion后正确不代表原fusion正确；A100上算对也不证明TPU lowering正确。因此本轮保留TPU环境缺失，不用CPU/CUDA演示替代硬件结论。",
+          "papers": ["foundation-models:xlgobench", "foundation-models:xla-trenches"]
         }
       ],
       "questions": [
@@ -1359,9 +1405,16 @@
             "foundation-models:tcab",
             "foundation-models:proeval"
           ]
+        },
+        {
+          "id": "nov04-labels-versus-execution-semantics",
+          "question": "如果XLGoBench有精确gold，为什么仍不能靠“程序跑完了”保证本次模型评测可信？",
+          "answer": "精确gold只定义正确输出，不证明模型的编译执行保持原语义。XLA显示静默错编译能在不崩溃时改变数值；还需合法输入、匹配硬件的差分参考与故障隔离。把正确标签和正确执行分开检查，才能判断错误来自模型还是后端。",
+          "example": "教学例：数学gold为非零量化残差，TPU fused kernel却因省略cast全输出0；即使scorer完全准确，也只能判本次输出错，不能自动归因于模型不会该题。",
+          "papers": ["foundation-models:xlgobench", "foundation-models:xla-trenches"]
         }
       ],
-      "updated": "2026-10-27",
+      "updated": "2026-11-04",
       "reviewed_papers": [
         "foundation-models:activation-model-scanner",
         "foundation-models:combinatorial-watermark",
@@ -1375,7 +1428,8 @@
         "foundation-models:mechanistic-etm",
         "foundation-models:proeval",
         "foundation-models:tcab",
-        "foundation-models:xlgobench"
+        "foundation-models:xlgobench",
+        "foundation-models:xla-trenches"
       ],
       "updates": [
         {
@@ -1411,6 +1465,12 @@
             "foundation-models:tcab": "4e44170ed798db644200079ceb211363e7fab52b15b9f010f8f5648a0f41bea7",
             "foundation-models:xlgobench": "12c2082c37310106a20523d6a6845ba8f75628d01b7386fb40617c965c5df153"
           }
+        },
+        {
+          "date": "2026-11-04",
+          "summary": "补入Google XLA:TPU编译器正确性研究，区分合法评分、参考硬件语义、静默错编译及工程bug计数；完整内部TPU实验高成本不复现，审查DONE。",
+          "papers": ["foundation-models:xla-trenches"],
+          "source_revisions": {"foundation-models:xla-trenches": "8d0084d662cf8f2c947333f64603556d3da43a5cf47fab26b5eb1aab086313a7"}
         }
       ]
     }

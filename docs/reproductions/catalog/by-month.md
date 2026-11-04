@@ -3,6 +3,7 @@
 同月论文保留在同一小节，但每篇独占一行，并附主要方法简介。
 
 ## 2026-10
+- [WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search](../../recommendation-components/2611.00530-wesearch/README.md)：先检索粗粒度簇并合并其中的原子文档，再用OPQ查表粗排和特征FFN精排，避免固定SID的早期路径错误；固定簇与码本支持新文档滚动挂载。本地仅验证候选空间、量化距离恒等式与新旧快照隔离，不代表训练/生产质量复现。
 - [KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation](../../recommendation-components/2610.36973-kl-mopd/README.md)：先在冻结初始学生的生成前缀上按位置估计到两位教师的反向KL，以其比例固定教师权重。当前学生在自己的前缀上最小化加权反向KL；本地仅实现校准和可微损失，不运行推荐器或继承线上收入增益。
 - [PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search](../../recommendation-components/2610.36958-pailitao-mmsearch2/README.md)：以原图和自由文本直接生成商品SID集合，用组合数据工具、商品知识CPT、混合推理预算SFT和意图均衡RL扩展统一多模态搜索。Sample–Beam分离推理采样与SID束生成以对齐多结果服务；完整实验高成本不复现。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [PinGER: Token-Efficient Generative Retrieval with Semantic IDs](../../recommendation-components/2610.33435-pinger/README.md)：用训练专用SID与历史dense的非对称mask保留多级监督而压缩服务输入，再按共同前缀深度分配beam并用所有前缀DPO加NTP锚校准排序偏好。本地仅实现可核对的数值机制，不实现生产模型/稀疏kernel或复现线上收益。
