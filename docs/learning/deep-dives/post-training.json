@@ -893,7 +893,7 @@
     "student-trajectory-distillation": {
       "title": "轨迹蒸馏：采样者、提案与散度方向分开看",
       "thesis": "“on-policy”描述监督发生在哪些状态，FKL/RKL/JSD描述在这些状态怎样比较分布。GKD和MiniLLM建立这两个轴，DrOPD、AP-OPD再调整纠错位置或强度，Semi-OPD与学习信号诊断则提醒：离线复用和残余损失各有不同含义。 MPOPD再把采样者变成可学习proposal：几何混合是提案target，学生仍向教师做RKL，二者不能混成同一个蒸馏分布。",
-      "updated": "2026-11-05",
+      "updated": "2026-11-06",
       "reviewed_papers": [
         "post-training:shuffled-opsd",
         "post-training:specopd",
@@ -937,7 +937,8 @@
         "post-training:opd-lm",
         "post-training:gkd",
         "post-training:minillm",
-        "post-training:mpopd"
+        "post-training:mpopd",
+        "post-training:cord-rollout"
       ],
       "axes": [
         "状态来源：教师示范、当前学生、初始学生固定轨迹",
@@ -1035,6 +1036,15 @@
             "核心公式",
             "数据协议与代码映射"
           ]
+        },
+        {
+          "paper": "post-training:cord-rollout",
+          "position": "CoRD 直接在每个共享前缀上构造几何混合 q；先从学生提议，再最大耦合地保留或替换，发出边缘恰为 q。蒸馏仍向教师做反向 KL。",
+          "tradeoff": "相对 MPOPD，不用另外拟合提案，也没有冻结的滞后一 token ratio；代价是在每个采样前缀同时得到师生概率，且中间权重只保留两者支持集的交集。",
+          "sections": [
+            "核心公式",
+            "数据协议与代码映射"
+          ]
         }
       ],
       "analysis": [
@@ -1080,6 +1090,14 @@
           "papers": [
             "post-training:shuffled-opsd",
             "post-training:gkd"
+          ]
+        },
+        {
+          "title": "同一几何目标，两条生成路线",
+          "body": "MPOPD 拟合并使用独立 proposal 生成，学生训练用冻结旧策略的滞后一 token 单步 ratio；CoRD 在同一前缀直接计算 q，并通过正残差替换把发出分布精确移到 q。两者都保留面向教师的反向 KL。做对照时要区分 proposal 近似误差、教师逐步调用预算和损失加权，不能把差异都归为几何混合。",
+          "papers": [
+            "post-training:cord-rollout",
+            "post-training:mpopd"
           ]
         }
       ],
@@ -1146,6 +1164,16 @@
           "papers": [
             "post-training:shuffled-opsd",
             "post-training:gkd"
+          ]
+        },
+        {
+          "id": "cord-rollout-vs-mpopd",
+          "question": "用 MPOPD 的拟合提案替代 CoRD 的最大耦合，还能保证精确发出 q、最少改动学生提议吗？",
+          "answer": "不能。MPOPD 的 proposal 近似 q，但不是与学生提议的最大耦合。CoRD 的保留质量为 min(pS, q)，替换只填正残差，因此既得到目标边缘，替换概率也达到总变差距离。",
+          "example": "若学生概率为 (0.8, 0.2)、q 为 (0.5, 0.5)，CoRD 仅把 0.3 的总质量从第一项移到第二项；提案即使边缘等于 q，独立抽取它仍会以 0.5 的概率和学生提议不同。",
+          "papers": [
+            "post-training:cord-rollout",
+            "post-training:mpopd"
           ]
         }
       ],
@@ -1273,13 +1301,25 @@
             "post-training:shuffled-opsd": "5f0e2447e663b953ea24142c31d3056b509bce0310c84371761294fb0e750b4d",
             "post-training:gkd": "2ab62ef8abeb52d245df7464048bea93a0622c2239fa7baae80261321f6ecd3e"
           }
+        },
+        {
+          "date": "2026-11-06",
+          "summary": "加入 CoRD 轨迹采样，与 MPOPD 对读几何目标、最大耦合与独立提案；本地只验证分布机制，不运行学生训练。",
+          "papers": [
+            "post-training:cord-rollout",
+            "post-training:mpopd"
+          ],
+          "source_revisions": {
+            "post-training:cord-rollout": "a67422453982ead1fe3cd4cf66ceb7a1b8b975644412150e78370f0694873be6",
+            "post-training:mpopd": "d0449fdb3b1d63ecef157d1fa8bb1b7f2e2ddd6ce25378481dd8cba142ad90e2"
+          }
         }
       ]
     },
     "teacher-and-context": {
       "title": "教师更强仍可能教错：信息、兼容性与成功行为保护",
       "thesis": "教师的价值不只取决于总分。OPSD改变训练期可见信息，MOPD与逐token路由组织多教师，CSD先统一概率事件，SPOD保护学生已成功选择，VAD筛出可归于视觉证据的修正；这些约束要在模仿之前分别成立。",
-      "updated": "2026-11-05",
+      "updated": "2026-11-06",
       "reviewed_papers": [
         "post-training:p2-mopd",
         "post-training:targeted-guidance",
@@ -1329,7 +1369,8 @@
         "post-training:mopd",
         "post-training:polaris-hri",
         "post-training:opcd",
-        "post-training:opsd"
+        "post-training:opsd",
+        "post-training:ragcompass"
       ],
       "axes": [
         "教师来源：同参数特权视图或独立领域专家",
@@ -1417,6 +1458,15 @@
             "核心公式",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "post-training:ragcompass",
+          "position": "RAGCompass 把每组检索证据交给同一个 reranker；将固定 reader 的离线答案 F1 软化为整组候选的监督分布，优化候选集 KL。",
+          "tradeoff": "不需要检索器 ID 或相互不可比的置信度，但训练标签依赖固定 reader 与有参考答案的离线数据。推理只比较分数，不用真实 F1 或筛选 gap。",
+          "sections": [
+            "核心公式",
+            "数据协议与代码映射"
+          ]
         }
       ],
       "analysis": [
@@ -1453,6 +1503,15 @@
           "papers": [
             "post-training:targeted-guidance",
             "post-training:opsd"
+          ]
+        },
+        {
+          "title": "额外信息进入教师条件，还是只定义训练标签？",
+          "body": "OPSD 把验证解交给同权重教师，在学生前缀上给词表分布；Targeted Guidance 只在失败轮次插入判定反馈，再加上普通 RL 奖励。RAGCompass 的参考答案只在候选证据产生答案后计算离线 F1 标签，监督轴是整个候选集合，不是 token。三者都要防止把训练期可见的额外信息带到推理。",
+          "papers": [
+            "post-training:ragcompass",
+            "post-training:opsd",
+            "post-training:targeted-guidance"
           ]
         }
       ],
@@ -1516,6 +1575,16 @@
           "example": "教学例：100个响应token中只有1个失败token且KL为2，辅助量按2/100计算；把其余99个token删掉后平均会变成2，也不再是原门控强度。",
           "papers": [
             "post-training:targeted-guidance",
+            "post-training:opsd"
+          ]
+        },
+        {
+          "id": "ragcompass-offline-gap",
+          "question": "两个检索候选的离线 F1 很接近，能否在 RAGCompass 推理时沿用 0.05 门槛？它和 OPSD 的特权信息有什么不同？",
+          "answer": "不能。门槛只用于筛选有参考答案的离线样本；推理用 reranker 或比较头的得分。OPSD 的特权解进入教师输入，改变词表预测；RAGCompass 的参考答案只定义候选标签，不输入候选 scorer。",
+          "example": "离线 F1 是 0.50 和 0.48 时，该样本不满足筛选门槛。部署时如果两个 scorer 分数是 0.2 和 0.7，仍选第二个；不能查真值 F1 重新筛选。",
+          "papers": [
+            "post-training:ragcompass",
             "post-training:opsd"
           ]
         }
@@ -1637,6 +1706,20 @@
             "post-training:targeted-guidance": "e1a728445c450d1921e6e62940270a07d72ecd7d6f907ce00bacbee34fc82628",
             "post-training:mopd": "7da71c090377ae140bf459093ade7127dc3aa1437d327be7aa38bf692a287f80",
             "post-training:opsd": "8082928a5bc28763d2b28f8f7f640f9498cf8516f2e58f3841760950f405df74"
+          }
+        },
+        {
+          "date": "2026-11-06",
+          "summary": "加入 RAGCompass 候选证据效用蒸馏，与 OPSD 和 Targeted Guidance 对读监督轴、反馈入口及离线筛选与部署分界。",
+          "papers": [
+            "post-training:ragcompass",
+            "post-training:opsd",
+            "post-training:targeted-guidance"
+          ],
+          "source_revisions": {
+            "post-training:ragcompass": "36cbf84b0c356d709501888ddd785daefddacac12e341663c3074987b07ba430",
+            "post-training:opsd": "8082928a5bc28763d2b28f8f7f640f9498cf8516f2e58f3841760950f405df74",
+            "post-training:targeted-guidance": "e1a728445c450d1921e6e62940270a07d72ecd7d6f907ce00bacbee34fc82628"
           }
         }
       ]

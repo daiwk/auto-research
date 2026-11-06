@@ -57,7 +57,8 @@
         "recommendation:toolrec",
         "recommendation:transretrieval",
         "recommendation:youtube-dnn",
-        "recommendation:zorro"
+        "recommendation:zorro",
+        "recommendation:ured"
       ]
     },
     {
@@ -428,7 +429,8 @@
         "recommendation:uame",
         "recommendation:youtube-freshness",
         "recommendation:pinterest-rlbp",
-        "recommendation:onetrans-gsr"
+        "recommendation:onetrans-gsr",
+        "recommendation:ice"
       ]
     },
     {

@@ -1,0 +1,62 @@
+{
+  "domain": "recommendation",
+  "key": "ured",
+  "title": "From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation",
+  "paper_url": "https://arxiv.org/abs/2611.05997",
+  "reviewed_version": "v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.05997v1",
+  "detail_path": "recommendation-components/2611.05997-ured/README.md",
+  "topic": [
+    "召回",
+    "高分未曝光候选回收"
+  ],
+  "browse_company": "Alibaba",
+  "browse_topic": [
+    "召回与匹配",
+    "召回、触发与多通道路由"
+  ],
+  "first_author": "Ge Fan",
+  "first_author_affiliation": "Alibaba Taobao & Tmall Group",
+  "published": "2026-11-04",
+  "published_at": "2026-11-04T05:45:30Z",
+  "announced_on": "2026-11-05",
+  "code": null,
+  "code_status": "固定 v1 和论文链接未找到原作者公开实现。",
+  "adapter": null,
+  "priority": "P0",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.reproductions.ured_components.mine_ured",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.reproductions.ured_components import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "online_ab": [
+    {
+      "product": "Taobao video feed",
+      "metric": "discovered categories",
+      "lift_percent": 3.47,
+      "traffic": "user-randomized, control existing pipeline 10%, treatment adds URED 5–10%, each reported experiment >1 week",
+      "source_location": "§5 and Table 2; richness +8.47%, completed views +2.62%, total views +0.36% not significant",
+      "source_url": "https://arxiv.org/html/2611.05997v1"
+    }
+  ],
+  "cost_assessment": {
+    "source_url": "https://arxiv.org/html/2611.05997v1",
+    "source_location": "§§3–5, Tables 1–3",
+    "available_resource": "one NVIDIA A100 or A30, or local Mac",
+    "model_scale": "existing production ranker, no retraining; HDFS/Hive/Redis recall pipeline and production comparison",
+    "data_scale": "private 30-day candidate and exposure logs; tens of millions of daily users and billions of requests per day",
+    "estimated_cost_basis": "reported idle distributed batch parallelism up to 1000 cores, private traffic/data and online control; not a local timing estimate",
+    "decision": "完整私有数据、生产评估与线上对照成本过高，不复现（审查 DONE）；只运行独立低成本组件。"
+  },
+  "summary": "从排序器已打分但未展示的候选中按会话保留高分项，聚合后按时间去重，再按近期曝光类目和商品去重筛选。本地仅验证时间、截断与过滤顺序。"
+}

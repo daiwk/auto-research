@@ -7,7 +7,7 @@ hide:
 
 # 教师与纠错：额外信息何时能帮到学生
 
-[LLM 后训练](index.md) / 196 个问题 · 49 篇论文
+[LLM 后训练](index.md) / 200 个问题 · 50 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">196 个问题 · 49 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">200 个问题 · 50 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ragcompass" data-paper-title="RAGCompass: Generalizable Retriever Routing via Reranking" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="RAGCompass: Generalizable Retriever Routing via Reranking LLM 后训练 University of Virginia 2026-11-03 固定候选池的 query-only 分类器可能不能给从未见过的检索器打分。RAGCompass 把各检索器返回的整组证据作为候选，复用同一个 Qwen3-Reranker-0.6B 独立读每组 passage，不依赖检索器身份或各自不可比的置信度。先用答案效用微调 backbone 的 yes logit，后在冻结 backbone 表示上训练跨候选的两层比较头。目标是选出一组证据供 reader 回答，不是融合所有 passage。 完整实验成本过高，不复现（审查 DONE）。未训练 reranker 或 reader；L1 候选集蒸馏目标，diagnostic only。未训练 reranker 或 reader；完整实验成本过高，不复现（审查 DONE）。distillation_objective 从外部给定的同序 logits、离线 F1 向量和正温度计算稳定的候选集 KL 与解析梯度。eligible_query 单独实现离线 gap 条件；select_retriever 仅接收分数，不接收 gold、F1 或候选身份。没有从 gold 反推实际预测，也没有实现 passage 编码与比较头训练。  知识蒸馏 检索器路由 LLM 后训练 教师与纠错：额外信息何时能帮到学生 RAGCompass 为什么给一组证据打分，而不是直接预测检索器名字？ 它用同一个重排器读取每个检索器返回的证据组，候选不由固定检索器 ID 定义。新增检索器只要返回同样形式的证据就能被打分，但这个接口属性不保证跨检索器指标提高。 教学例：新向量检索器返回五段证据，可以与旧 BM25 的五段竞争；固定的 BM25/旧向量二分类头没有新检索器这一类。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<span id="paper-post-training-ragcompass-a7b92c9e" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-236494f1a7102ca0">RAGCompass 为什么给一组证据打分，而不是直接预测检索器名字？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aragcompass">RAGCompass: Generalizable Retriever Routing via Reranking</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of Virginia</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它用同一个重排器读取每个检索器返回的证据组，候选不由固定检索器 ID 定义。新增检索器只要返回同样形式的证据就能被打分，但这个接口属性不保证跨检索器指标提高。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：新向量检索器返回五段证据，可以与旧 BM25 的五段竞争；固定的 BM25/旧向量二分类头没有新检索器这一类。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05596v1">原论文</a> · <a href="../../../../post-training/2611.05596-ragcompass/">实现解读</a> · <a href="#qa-236494f1a7102ca0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ragcompass" data-paper-title="RAGCompass: Generalizable Retriever Routing via Reranking" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="RAGCompass: Generalizable Retriever Routing via Reranking LLM 后训练 University of Virginia 2026-11-03 固定候选池的 query-only 分类器可能不能给从未见过的检索器打分。RAGCompass 把各检索器返回的整组证据作为候选，复用同一个 Qwen3-Reranker-0.6B 独立读每组 passage，不依赖检索器身份或各自不可比的置信度。先用答案效用微调 backbone 的 yes logit，后在冻结 backbone 表示上训练跨候选的两层比较头。目标是选出一组证据供 reader 回答，不是融合所有 passage。 完整实验成本过高，不复现（审查 DONE）。未训练 reranker 或 reader；L1 候选集蒸馏目标，diagnostic only。未训练 reranker 或 reader；完整实验成本过高，不复现（审查 DONE）。distillation_objective 从外部给定的同序 logits、离线 F1 向量和正温度计算稳定的候选集 KL 与解析梯度。eligible_query 单独实现离线 gap 条件；select_retriever 仅接收分数，不接收 gold、F1 或候选身份。没有从 gold 反推实际预测，也没有实现 passage 编码与比较头训练。  知识蒸馏 检索器路由 LLM 后训练 教师与纠错：额外信息何时能帮到学生 为什么 RAGCompass 的 KL 在同一 query 的候选轴上计算？ 每个效用来自固定 reader 使用一组证据后的答案 F1；softmax 把同一 query 的效用变为训练目标分布。损失是 KL(目标∥预测)，对分数的梯度为 p−u。跨 query 混合归一化会改变每条请求独立选证据的目标。 教学例：给定 p=(0.5,0.5)、u=(0.8,0.2)，梯度为 (−0.3,0.3)，梯度下降提高第一个候选相对分数。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-d8ba1f51584631d9">为什么 RAGCompass 的 KL 在同一 query 的候选轴上计算？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aragcompass">RAGCompass: Generalizable Retriever Routing via Reranking</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of Virginia</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>每个效用来自固定 reader 使用一组证据后的答案 F1；softmax 把同一 query 的效用变为训练目标分布。损失是 KL(目标∥预测)，对分数的梯度为 p−u。跨 query 混合归一化会改变每条请求独立选证据的目标。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：给定 p=(0.5,0.5)、u=(0.8,0.2)，梯度为 (−0.3,0.3)，梯度下降提高第一个候选相对分数。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05596v1">原论文</a> · <a href="../../../../post-training/2611.05596-ragcompass/">实现解读</a> · <a href="#qa-d8ba1f51584631d9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ragcompass" data-paper-title="RAGCompass: Generalizable Retriever Routing via Reranking" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="RAGCompass: Generalizable Retriever Routing via Reranking LLM 后训练 University of Virginia 2026-11-03 固定候选池的 query-only 分类器可能不能给从未见过的检索器打分。RAGCompass 把各检索器返回的整组证据作为候选，复用同一个 Qwen3-Reranker-0.6B 独立读每组 passage，不依赖检索器身份或各自不可比的置信度。先用答案效用微调 backbone 的 yes logit，后在冻结 backbone 表示上训练跨候选的两层比较头。目标是选出一组证据供 reader 回答，不是融合所有 passage。 完整实验成本过高，不复现（审查 DONE）。未训练 reranker 或 reader；L1 候选集蒸馏目标，diagnostic only。未训练 reranker 或 reader；完整实验成本过高，不复现（审查 DONE）。distillation_objective 从外部给定的同序 logits、离线 F1 向量和正温度计算稳定的候选集 KL 与解析梯度。eligible_query 单独实现离线 gap 条件；select_retriever 仅接收分数，不接收 gold、F1 或候选身份。没有从 gold 反推实际预测，也没有实现 passage 编码与比较头训练。  知识蒸馏 检索器路由 LLM 后训练 教师与纠错：额外信息何时能帮到学生 答案效用监督与 passage 相关度监督有何区别？ 单段相关并不意味着整组证据足以支持正确回答。RAGCompass 用固定 reader 从整组证据回答后的 F1 监督路由，能反映证据互补与 reader 能力，但也使目标依赖所用 reader 和 gold 定义。 教学例：一个候选只有人物资料中的相关段落；另一个候选还补足事件日期。问事件发生时间时，第二组更可能带来高答案 F1。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-f30740ae3afcdd60">答案效用监督与 passage 相关度监督有何区别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aragcompass">RAGCompass: Generalizable Retriever Routing via Reranking</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of Virginia</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>单段相关并不意味着整组证据足以支持正确回答。RAGCompass 用固定 reader 从整组证据回答后的 F1 监督路由，能反映证据互补与 reader 能力，但也使目标依赖所用 reader 和 gold 定义。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个候选只有人物资料中的相关段落；另一个候选还补足事件日期。问事件发生时间时，第二组更可能带来高答案 F1。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05596v1">原论文</a> · <a href="../../../../post-training/2611.05596-ragcompass/">实现解读</a> · <a href="#qa-f30740ae3afcdd60">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ragcompass" data-paper-title="RAGCompass: Generalizable Retriever Routing via Reranking" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="RAGCompass: Generalizable Retriever Routing via Reranking LLM 后训练 University of Virginia 2026-11-03 固定候选池的 query-only 分类器可能不能给从未见过的检索器打分。RAGCompass 把各检索器返回的整组证据作为候选，复用同一个 Qwen3-Reranker-0.6B 独立读每组 passage，不依赖检索器身份或各自不可比的置信度。先用答案效用微调 backbone 的 yes logit，后在冻结 backbone 表示上训练跨候选的两层比较头。目标是选出一组证据供 reader 回答，不是融合所有 passage。 完整实验成本过高，不复现（审查 DONE）。未训练 reranker 或 reader；L1 候选集蒸馏目标，diagnostic only。未训练 reranker 或 reader；完整实验成本过高，不复现（审查 DONE）。distillation_objective 从外部给定的同序 logits、离线 F1 向量和正温度计算稳定的候选集 KL 与解析梯度。eligible_query 单独实现离线 gap 条件；select_retriever 仅接收分数，不接收 gold、F1 或候选身份。没有从 gold 反推实际预测，也没有实现 passage 编码与比较头训练。  知识蒸馏 检索器路由 LLM 后训练 教师与纠错：额外信息何时能帮到学生 为什么 0.05 的效用差筛选不能放到推理路径里？ 效用差需要参考答案计算 F1，因此只属于离线筛选，不是路由特征。推理接口只收候选分数并取最大值。目标/梯度测试、无标签签名和真实分布迁移评测是不同证据。 教学例：训练中两个候选 F1 为 0.52、0.50，可因差值 0.02 排除；服务请求没有 gold，仍应从模型实际分数中选一个候选。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-cfff2f4eb43da12f">为什么 0.05 的效用差筛选不能放到推理路径里？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aragcompass">RAGCompass: Generalizable Retriever Routing via Reranking</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of Virginia</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>效用差需要参考答案计算 F1，因此只属于离线筛选，不是路由特征。推理接口只收候选分数并取最大值。目标/梯度测试、无标签签名和真实分布迁移评测是不同证据。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：训练中两个候选 F1 为 0.52、0.50，可因差值 0.02 排除；服务请求没有 gold，仍应从模型实际分数中选一个候选。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05596v1">原论文</a> · <a href="../../../../post-training/2611.05596-ragcompass/">实现解读</a> · <a href="#qa-cfff2f4eb43da12f">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:targeted-guidance" data-paper-title="Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning LLM 后训练 Cursor Research / UC Berkeley 2026-11-03 标量RL奖励只能强化已有可探索行为，难以告诉Agent“怎样修正一种此前几乎不会的工具格式/沟通风格”。本文把每个criterion的文本反馈放在出错的Agent turn之前，同一策略在反馈条件下成为stop-gradient教师；学生仍在自己的实际历史上学习。关键不是全轨迹无差别OPSD，而是失败轮次门控的最小定向信号 + 对应criterion的普通RL奖励，避免蒸馏持续挤压多样性并干扰主要代码任务。 完整30B Agent RL：成本过高，不复现（审查 DONE）。L1 门控损失组件，diagnostic only。完整30B Agent RL：成本过高，不复现（审查 DONE）。未实现代码Agent、文本反馈judge或真实rollout；evolve_integrated=false。token_failure_mask 将外部给定的failed-turn表映射到token，-1为非turn；不生成判定、不读gold。  Agentic RL 定向反馈与蒸馏 LLM 后训练 教师与纠错：额外信息何时能帮到学生 Targeted Guidance需要比学生更大的外部教师吗？ 定义的教师是与学生相同权重、但在失败轮次前多看到文本反馈的策略，并停止教师分支梯度。反馈先要经独立检查确实改善目标criterion。相同参数不等于相同条件分布，本地loss接口不负责伪造反馈的有效性。 教学例：学生漏写工具参数，反馈条件分支额外看到“请提供返回行数参数”；它可为同一前缀提供不同token分布，但不等于部署时学生能看到未来错误或gold。 2026-11-04">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
 <span id="paper-post-training-targeted-guidance-8f74e1a3" class="ar-learning-paper-anchor"></span>

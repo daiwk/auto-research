@@ -25,7 +25,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="harness-and-self-improvement/">运行流程与自进化：改的是哪一层</a></h2>
 <p>失败之后，是改一次提示、积累经验，还是改变整个任务执行流程？</p>
-<p class="ar-learning-topic-meta">200 个问题 · 50 篇论文</p>
+<p class="ar-learning-topic-meta">204 个问题 · 51 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="agent-policy-learning/">交互策略学习：把轨迹反馈变成更新</a></h2>
@@ -35,7 +35,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="evaluation-and-reliability/">评测与可靠性：如何知道真的做对了</a></h2>
 <p>怎样区分模型成功、环境碰巧放行、评分器偏差和不安全的越权？</p>
-<p class="ar-learning-topic-meta">176 个问题 · 44 篇论文</p>
+<p class="ar-learning-topic-meta">180 个问题 · 45 篇论文</p>
 </article>
 </div>
 

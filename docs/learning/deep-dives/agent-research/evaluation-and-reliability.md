@@ -7,7 +7,7 @@ hide:
 
 # 评测追问四件事：完成了、稳健吗、靠什么、花多少
 
-[Agent](../index.md) · 更新 2026-11-04 · 44 篇主题资料 / 7 篇重点对照
+[Agent](../index.md) · 更新 2026-11-06 · 45 篇主题资料 / 8 篇重点对照
 
 GAIA测最终任务回答，AgentPerturb检查单目标输入扰动，User Proxy Bench检查用户模拟是否偷省信息获取；AlphaDiana完整记录失败与重试，HDA拆解harness涨分来源，选择性评测则约束自动裁判的错误区域。高分只有在这些协议讲清后才有可解释性。
 
@@ -32,6 +32,7 @@ GAIA测最终任务回答，AgentPerturb检查单目标输入扰动，User Proxy
 | [Harness-Delta Attribution: Dissecting Gains From Harness Evolution](../../../agent-research/2610.22466-harness-decomposition/README.md) · [原始来源](https://arxiv.org/abs/2610.22466)<br>章节：背景与主要改动、核心公式、本地复现与边界 | 先检验配对增益，再构造人审算力匹配与捷径中和四臂，分解额外算力、已检测捷径和剩余项。 | 中和只能覆盖已发现机制，剩余项仍可能含捷径，不能直接当迁移证据；本地只执行已测四臂统计。 |
 | [Certified Selective Automation of LLM Agent Evaluation](../../../agent-research/2609.34320-certified-selective-eval/README.md) · [原始来源](https://arxiv.org/abs/2609.34320)<br>章节：背景与主要改动、复现边界 | 以任务簇bootstrap估计自动判断区域的错误率上界，证书低于预算才自动接管。 | 依赖校准任务簇与目标自动区域，不能把轨迹数当独立样本；本地mini证书不代表论文语料覆盖或通用裁判可靠。 |
 | [AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers](../../../agent-research/2610.39234-agentheal/README.md) · [原始来源](https://arxiv.org/abs/2610.39234)<br>章节：背景与主要改动、核心公式、数据协议与实现边界、本地结果与负控 | 显式构造无障碍、可恢复和不可恢复资源三联，按副本/版本关系、障碍诊断和访问政策联合评价目标保真。 | 不可恢复时正确行为是诚实弃答而非强行回答；需要独立来源与政策标注，本地真值表不具备浏览器或语义judge能力。 |
+| [XStack: A Benchmark for ML Repo Migration](../../../agent-research/2611.08472-xstack/README.md) · [原始来源](https://arxiv.org/abs/2611.08472)<br>章节：评估协议、论文离线与线上效果、复现与验证边界 | 以干净 TPU 全规模重训、独立判分、反作弊与原框架权重回载共同定义通过；二阶段只公开配方并冻结入口外代码。 | 补配方与训练复现是不同诊断阶段；GPU 初步实验不可替代主 TPU 矩阵。本地只收录。 |
 
 </div>
 
@@ -54,6 +55,12 @@ AlphaDiana强调逻辑样本不随重试扩张，所有attempt成本都要累计
 AgentPerturb要求扰动后仍保留原目标与可解性，避免凭空制造失败。AgentHeal则把真正不可恢复作为明确标注的独立regime，评价诚实弃答、障碍诊断和合规，而不强求不存在的答案；可恢复时又要求优先精确副本或披露版本差异。GAIA式最终答案正确性不能替代这类来源与过程条件。只有明确每组期待行为并分组保留分母，回答率、恢复率和可靠性才不会混淆。
 
 对照来源：[agentheal](../../../agent-research/2610.39234-agentheal/README.md) · [agent-perturb](../../../agent-research/2610.21624-agent-perturb/README.md) · [gaia](../../../agent-research/2311.12983-gaia/README.md)
+
+### 明确配方与改坏任务不是同一种协议变化
+
+AgentPerturb 只改一个输入面，并独立验证目标保持和可解性，配对差值才可归因于该扰动。XStack 的第二阶段却是在同一迁移产物上补主实验配方，锁住入口脚本外代码且不公开目标；它是在区分实验选择错误与迁移错误，不是输入扰动稳健性测量。两者都需要评分者独立于执行 Agent，不能让执行者看到用于判定的隐含目标。
+
+对照来源：[xstack](../../../agent-research/2611.08472-xstack/README.md) · [agent-perturb](../../../agent-research/2610.21624-agent-perturb/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -99,9 +106,23 @@ AgentPerturb要求扰动后仍保留原目标与可解性，避免凭空制造�
 
     对照来源：[agentheal](../../../agent-research/2610.39234-agentheal/README.md) · [agent-perturb](../../../agent-research/2610.21624-agent-perturb/README.md) · [gaia](../../../agent-research/2311.12983-gaia/README.md)
 
+### 同一个迁移在 XStack 第一阶段失败、第二阶段通过，为什么不能当作 AgentPerturb 式的稳健性配对分数？ {#cross-aligned-recipe-not-robustness-pair}
+
+??? note "展开答案与例子"
+
+    **答案：** XStack 只对失败单元追加配方并约束修改范围，判的是同一迁移在正确配方下能否重训达标；AgentPerturb 对共同任务的干净和扰动输入分别执行且保持目标与可解性。分母、干预和通过条件不同。
+
+    **教学例子：** 教学例：原来误跑较小数据集，澄清后换入口并全规模达标，说明该迁移路径可运行，不说明 Agent 能应对不同工具说明扰动。
+
+    对照来源：[xstack](../../../agent-research/2611.08472-xstack/README.md) · [agent-perturb](../../../agent-research/2610.21624-agent-perturb/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-06** · 补入 XStack，将真实跨框架执行、隔离来源判定和权重回载与输入稳健性分开。主实验 TPU 成本高，仅资料审查，不把 Appendix G 或静态合同当成本地能力结果。
+
+涉及：[xstack](../../../agent-research/2611.08472-xstack/README.md) · [agent-perturb](../../../agent-research/2610.21624-agent-perturb/README.md)
 
 **2026-11-04** · 补AgentHeal，并对照AgentPerturb与GAIA解释不可恢复regime、目标版本、来源归因与政策乘积。区分精确副本的交集条件与其他版本的子集条件，独立gold标注仅给评价者；本地TS=0.5是四条合成真值表，不是Agent准确率。855任务×13模型完整矩阵高成本不复现、审查DONE。
 
@@ -111,7 +132,7 @@ AgentPerturb要求扰动后仍保留原目标与可解性，避免凭空制造�
 
 覆盖 43 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 44 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 45 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -159,6 +180,7 @@ AgentPerturb要求扰动后仍保留原目标与可解性，避免凭空制造�
 - [SOPBench: Evaluating Language Agents at Following Standard Operating Procedures and Constraints](../../../agent-research/2503.08669-sopbench-protocol/README.md)
 - [GAIA](../../../agent-research/2311.12983-gaia/README.md)
 - [AutoformBench: A Lean Formalization Benchmark for Advanced Mathematics](../../../agent-research/autoformbench/README.md)
+- [XStack: A Benchmark for ML Repo Migration](../../../agent-research/2611.08472-xstack/README.md)
 
 </details>
 

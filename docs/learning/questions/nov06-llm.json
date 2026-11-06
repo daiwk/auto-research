@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "foundation-models:convpe": {
+      "questions": [
+        {
+          "id": "bias-is-not-window-mask",
+          "level": "basics",
+          "question": "ConvPE 在窗口外的偏置为零，是否意味着注意力只能看最近 W 个 key？",
+          "answer": "不是。ConvPE 只改 softmax 之前的加性分数。窗口外的历史 key 仍可按原始 QK 分数参与注意力，未来位置是否可见则由独立的因果 mask 决定。",
+          "example": "教学例：W=3，query 位于 5 时，key 0 的距离是 5，偏置为零但仍可读；key 7 也没有该偏置，却因因果 mask 不可读。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-06"
+        },
+        {
+          "id": "lag-and-modulo-head-mapping",
+          "level": "mechanism",
+          "question": "同一个查询的卷积输出，怎样映射到具体注意力头与 key？",
+          "answer": "把卷积的 H_bW 个输出重排为偏置头和滞后距离。对头 h 和 key t，取头 h mod H_b、距离 s−t 的格子；距离越界时加零，不能按相邻头分组或使用 t−s。",
+          "example": "教学例：H=4、H_b=2、W=3，查询 5 对 key 3 读取距离 2。头 0 和 2 读偏置头 0，头 1 和 3 读偏置头 1。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-06"
+        },
+        {
+          "id": "position-bias-versus-rotations",
+          "level": "comparison",
+          "question": "ConvPE 与 RoPE 改变注意力的哪一部分？远处 key 的注意力权重一定不变吗？",
+          "answer": "RoPE 通过旋转 Q/K 改变点积，ConvPE 则叠加内容相关的局部分数偏置。窗口外原始 logit 不变，不等于归一化后的权重不变；局部 logit 变化也会改变 softmax 分母。",
+          "example": "教学例：历史远近两个可见 key 的原始分数都为 0。只给近 key 加 2，远 key 的分数仍是 0，但权重从 0.5 降为约 0.119。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果"
+          ],
+          "added": "2026-11-06"
+        },
+        {
+          "id": "streaming-needs-hidden-history",
+          "level": "implementation",
+          "question": "解码块为什么要带入此前的隐状态，不能每块重新左补零？",
+          "answer": "因果卷积依赖当前位置前的 W−1 个投影输入。真正序列起点才补零；在中间切块需给出相同层的原始隐状态及绝对偏移，保证输出与全序列计算切片一致。",
+          "example": "教学例：W=3，从位置 4 开始解码，需要位置 2、3 的原始隐状态；把这两个 tap 当作零一般会改变位置 4 的偏置，即使 KV 缓存本身正确。",
+          "source_sections": [
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-06"
+        }
+      ]
+    },
+    "post-training:cord-rollout": {
+      "questions": [
+        {
+          "id": "rollout-marginal-not-teacher-loss",
+          "level": "basics",
+          "question": "CoRD 的 qα 替换了普通 OPD 的蒸馏教师吗？",
+          "answer": "没有。qα 是发出下一个 token 的边缘，决定后续会访问哪些前缀；在已访问前缀上，原文仍用学生 pS 到冻结教师 pT 的全词表反向 KL。",
+          "example": "教学例：学生少走的一条解法开头，经耦合采样变得更常见；到达新前缀后，评分仍来自教师 pT，而不是 pS 与 pT 的插值。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-06"
+        },
+        {
+          "id": "maximal-coupling-residual-tv",
+          "level": "mechanism",
+          "question": "为什么正残差重抽能恰好得到目标边缘，而且替换率是总变差？",
+          "answer": "学生在每个 token 上被保留的无条件质量是 min(pS,qα)，它是两侧可以共享的最大对角质量。剩余接受不到的目标质量正是 (qα−pS)+；补上它得到 qα，总替换率为 TV。",
+          "example": "教学例：pS=(0.6,0.4)，qα=(0.3,0.7)。第一 token 保留一半提议，第二 token 全保留；拒绝质量 0.3 全补到第二 token，发出比例为 (0.3,0.7)。",
+          "source_sections": [
+            "核心公式",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-06"
+        },
+        {
+          "id": "same-reject-rate-wrong-replacements",
+          "level": "comparison",
+          "question": "保留同一个接受率，拒绝后改为直接从教师重抽，为什么不是等价实现？",
+          "answer": "拒绝规则只决定需要移动多少质量，重抽方向决定它落到哪里。无条件教师分布仍可能给学生已高估的 token 正质量；只有归一化正残差恰好填平目标缺口。",
+          "example": "教学例：pS=(0.6,0.4)，α=1 时 qα=pT=(0.3,0.7)。先保留第一 token 的 0.3；拒绝的 0.3 若直接从教师重抽，又给第一 token 加 0.09，边缘 0.39 错于目标 0.30。",
+          "source_sections": [
+            "核心公式",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-06"
+        },
+        {
+          "id": "geometric-zero-support-and-endpoints",
+          "level": "implementation",
+          "question": "几何插值遇到零概率，为什么要把端点与中间 α 分开实现？",
+          "answer": "中间 α 只对两侧同时为正的 token 归一化；空交集没有合法目标。端点直接返回各自原分布，避免对 log(0) 乘零。α=0 不需要额外接受抽样，能保留本地学生采样的随机数序列。",
+          "example": "教学例：pS=(1,0)，pT=(0,1) 时 α=0.5 应拒绝，而 α=0 恒发第一 token，α=1 恒发第二 token，均有明确定义。",
+          "source_sections": [
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-06"
+        }
+      ]
+    }
+  }
+}

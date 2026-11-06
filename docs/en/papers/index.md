@@ -4,23 +4,31 @@
 
 [English home](../index.md) · [中文研究库](../../research-library.md)
 
-The catalog lists 1075 entries from the shared research manifest. English write-ups available: 1075.
+The catalog lists 1083 entries from the shared research manifest. English write-ups available: 1083.
 
 ## Browse by domain
 
-- [Search, ads, recommendation, and LLM applications](recommendation.md): 327 catalog entries, 327 English write-ups
-- [Foundation models](foundation-models.md): 207 catalog entries, 207 English write-ups
+- [Search, ads, recommendation, and LLM applications](recommendation.md): 329 catalog entries, 329 English write-ups
+- [Foundation models](foundation-models.md): 209 catalog entries, 209 English write-ups
 - [Structured decisions / System One](system-one.md): 6 catalog entries, 6 English write-ups
 - [Multimodal models](multimodal-models.md): 17 catalog entries, 17 English write-ups
-- [LLM post-training](post-training.md): 248 catalog entries, 248 English write-ups
-- [Agents](agent-research.md): 270 catalog entries, 270 English write-ups
+- [LLM post-training](post-training.md): 250 catalog entries, 250 English write-ups
+- [Agents](agent-research.md): 272 catalog entries, 272 English write-ups
 
 ## Read in English
 
+- [XStack: A Benchmark for ML Repo Migration](../../agent-research/2611.08472-xstack/README-en.md)
+- [EnvOpt: Automated Optimization for Agent Environments](../../agent-research/2611.07372-envopt/README-en.md)
+- [ConvPE: Convolutional Position Embedding Improves Transformers](../../foundation-models/2611.07749-convpe/README-en.md)
+- [CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation](../../post-training/2611.07959-cord/README-en.md)
+- [Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking](../../recommendation-components/2611.07591-ice/README-en.md)
+- [From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation](../../recommendation-components/2611.05997-ured/README-en.md)
+- [Turbocharging PiPNN for Proximity and k-NN Graph Building](../../foundation-models/2611.05690-pipnn-ii/README-en.md)
 - [Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning](../../post-training/2611.05266-targeted-guidance/README-en.md)
 - [Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation?](../../post-training/2611.04958-shuffled-opsd/README-en.md)
 - [SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search](../../recommendation-components/2611.04662-spade-local-search/README-en.md)
 - [ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse](../../recommendation-components/2611.04259-reusegr/README-en.md)
+- [RAGCompass: Generalizable Retriever Routing via Reranking](../../post-training/2611.05596-ragcompass/README-en.md)
 - [OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer](../../recommendation-components/2611.04720-onetrans-gsr/README-en.md)
 - [Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents](../../agent-research/2611.05139-meta-square/README-en.md)
 - [From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?](../../agent-research/2611.05108-continual-autoresearch/README-en.md)

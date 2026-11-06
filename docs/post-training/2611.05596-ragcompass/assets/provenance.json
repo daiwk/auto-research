@@ -1,0 +1,18 @@
+{
+  "page": "docs/post-training/2611.05596-ragcompass/README.md",
+  "paper_url": "https://arxiv.org/abs/2611.05596",
+  "arxiv_id": "2611.05596",
+  "figure": "Figure 2",
+  "original_caption": "See Figure 2 in the fixed source: evidence reranking and training-only answer-utility supervision.",
+  "source_url": "https://arxiv.org/pdf/2611.05596v1#page=4",
+  "extraction": "PyMuPDF raster crop of the original PDF vector artwork, page 4, clip [73,61,538,245] pt, 3x, no redrawing",
+  "asset": "docs/post-training/2611.05596-ragcompass/assets/paper-figure-01.png",
+  "width": 1395,
+  "height": 552,
+  "score": 0,
+  "error": "",
+  "visually_inspected": true,
+  "sha256": "1baaccefa8adfd3c1a5f188e849d0343183c36b16ad4adfdc2ffdbdb712fc301",
+  "source_sha256": "3d017a40b8283fef3ccf220503cc20cc7564f229648a68607d731cf63cd3ac4c",
+  "license": "arXiv perpetual non-exclusive license; no Creative Commons claim"
+}

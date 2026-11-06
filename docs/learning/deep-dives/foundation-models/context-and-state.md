@@ -7,7 +7,7 @@ hide:
 
 # 长上下文不是一条轴：位置、读取与状态压缩
 
-[基础模型](../index.md) · 更新 2026-11-04 · 36 篇主题资料 / 10 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-06 · 37 篇主题资料 / 11 篇重点对照
 
 先问历史以什么形式存在，再问当前 token 怎样读它。RoPE 改变相对位置关系，Mamba 把历史写入递归状态，NSA 在多条读取路径间分工，OpenAttention 为未精读部分保留代理，TTR 则为当前输入求一个压缩表示。这些方法不能只按“支持多长”排成一列。 MERLIN在多个压缩状态之外保留routing key矩统计，改变段间读取权重，而不替换每段内部的递归写入。
 
@@ -35,6 +35,7 @@ hide:
 | [Multi-State Linear Attention with Generalized Second-Order Routing](../../../foundation-models/2610.37645-merlin/README.md) · [原始来源](https://arxiv.org/abs/2610.37645v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 保存每段routing key均值与原始二阶矩，恢复query对齐方差；两路分别softmax再按门控混合外部state readouts。 | 增加分段状态和矩存储，不精确重建逐token softmax；当前未完成段需外部递归处理，完整中期训练不复现。 |
 | [Coarse Semantic Blocks for Efficient Training-Free Sparse Attention](../../../foundation-models/2611.04313-semantic-block-sparse-attention/README.md) · [原始来源](https://arxiv.org/abs/2611.04313)<br>章节：背景与主要改动、核心公式、成本判断与复现边界 | 按逐prompt、逐KV head的球面key聚类形成非连续语义块；各GQA query head独立softmax后求和，惩罚可见块大小，整块选择后对原始QKV做注意力。 | 保留原始KV而非把centroid当value；整块预算可超额。全prompt拟合centroid使因果支持不等于严格流式因果不变性。本地仅L1索引与注意力参考，不含论文融合kernel或完整长文能力实验。 |
 | [Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training](../../../foundation-models/2611.04327-anchor-kv/README.md) · [原始来源](https://arxiv.org/abs/2611.04327)<br>章节：背景与主要改动、核心公式、成本判断与复现边界 | 一组层共享recurrent KV state，以各reader的identity初始化线性read-map调整坐标基，再由输入相关sigmoid gate与局部SWA输出融合。 | 共享内容不代表共享坐标；完整训练仍需真实LaCT/Muon内层writer，且interior TTT只在部署时移除。本地接外部状态，只验证跨层读映射、gate和状态版本，不能称完整TTT或检索能力复现。 |
+| [ConvPE: Convolutional Position Embedding Improves Transformers](../../../foundation-models/2611.07749-convpe/README.md) · [原始来源](https://arxiv.org/abs/2611.07749)<br>章节：背景与主要改动、核心公式、数据协议与代码映射 | 将原始隐状态低维投影，经只在左侧补零的因果卷积，为每个查询生成相对距离偏置；注意力头按取模共享偏置头，在 softmax 前加到分数。 | 窗口外偏置为零而不是屏蔽。需要最近 W−1 个原始隐状态才能在分块解码中重建偏置；不减少 KV 条数。本地只验证默认一维偏置，不复现完整长上下文训练、融合核或吞吐。 |
 
 </div>
 
@@ -69,6 +70,12 @@ Mamba的选择性递推决定历史如何进入单个状态；MERLIN假设已有
 NSA用概览、选中块和滑窗保留不同细节路径；CSB不重新训练模型，而是把原始KV按语义重分块后整块读取。Anchor则让多层共享已经压缩的recurrent state，利用各层read-map协调坐标基，再门控融合局部输出。CSB的centroid负责选择，不代替被读value；Anchor的共享状态仍依赖真实writer，外部注入一个矩阵不等于完成TTT。另须分开因果支持与索引构建：CSB虽然mask未来位置，整prompt聚类仍可能让未来key改变早期路由，不能据此声称严格流式因果语言模型。两项本地L1组件都不提供完整模型能力、端到端加速或Evolve晋级证据。
 
 对照来源：[native-sparse-attention](../../../reproductions/2502.11089-native-sparse-attention/README.md) · [semantic-block-sparse-attention](../../../foundation-models/2611.04313-semantic-block-sparse-attention/README.md) · [anchor-kv](../../../foundation-models/2611.04327-anchor-kv/README.md)
+
+### 位置偏置有窗口，不等于可见历史有窗口
+
+RoPE 旋转 Q/K 并通过相对位移进入点积；ConvPE 从最近隐状态预测一个随内容变化的分数修正，超出偏置窗口的可见 key 仍按原 QK 参与 softmax。CSB 则选取整组原始 KV 改变读取支持。三者改动的是点积表示、加性分数或支持集合，不应把 W 直接记为 KV 预算。分块解码时 ConvPE 还需要调用方提供真实左侧隐状态；分块与整序列切片的一致性验证的是偏置合同，不是完整长文能力或速度。
+
+对照来源：[rope](../../../reproductions/2104.09864-rope/README.md) · [convpe](../../../foundation-models/2611.07749-convpe/README.md) · [semantic-block-sparse-attention](../../../foundation-models/2611.04313-semantic-block-sparse-attention/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -134,9 +141,23 @@ NSA用概览、选中块和滑窗保留不同细节路径；CSB不重新训练�
 
     对照来源：[semantic-block-sparse-attention](../../../foundation-models/2611.04313-semantic-block-sparse-attention/README.md) · [anchor-kv](../../../foundation-models/2611.04327-anchor-kv/README.md)
 
+### ConvPE 偏置窗口 W=4 时，距离 8 的因果 key 会消失吗？这和 CSB 哪一步不同？ {#cross-nov06-bias-window-not-support}
+
+??? note "展开答案与例子"
+
+    **答案：** 不会。ConvPE 对该项加零偏置，原 QK 分数与因果 mask 仍在；CSB 若没选择该历史 key 所在块且不在无条件区域，该 key 不进入注意力支持。ConvPE 的 W=4 还表示分块首项最多需要 3 个左侧原始隐状态，不是只允许看 4 个历史位置。
+
+    **教学例子：** 教学例：距离 8 的 key 本来分数很高，ConvPE 加 0 后仍可能获高权重；被 CSB 排除则不能以原始 value 参与当前读出。
+
+    对照来源：[convpe](../../../foundation-models/2611.07749-convpe/README.md) · [semantic-block-sparse-attention](../../../foundation-models/2611.04313-semantic-block-sparse-attention/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-06** · 增加 ConvPE，与 RoPE、CSB 区分点积表示、窗口化加性偏置与可见支持；注明分块原始隐状态条件及完整训练、融合核不复现。
+
+涉及：[convpe](../../../foundation-models/2611.07749-convpe/README.md)
 
 **2026-11-04** · 增加CSB与Anchor，比较原始KV的语义选块与共享recurrent state的坐标变换读出；明确全prompt聚类的非流式因果边界、外部writer不等于完整TTT，以及两项仅L1组件、完整高成本实验不复现。
 
@@ -154,7 +175,7 @@ NSA用概览、选中块和滑窗保留不同细节路径；CSB不重新训练�
 
 覆盖 31 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 36 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 37 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -194,6 +215,7 @@ NSA用概览、选中块和滑窗保留不同细节路径；CSB不重新训练�
 - [Multi-State Linear Attention with Generalized Second-Order Routing](../../../foundation-models/2610.37645-merlin/README.md)
 - [Coarse Semantic Blocks for Efficient Training-Free Sparse Attention](../../../foundation-models/2611.04313-semantic-block-sparse-attention/README.md)
 - [Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training](../../../foundation-models/2611.04327-anchor-kv/README.md)
+- [ConvPE: Convolutional Position Embedding Improves Transformers](../../../foundation-models/2611.07749-convpe/README.md)
 
 </details>
 

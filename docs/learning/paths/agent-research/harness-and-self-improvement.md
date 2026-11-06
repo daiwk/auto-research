@@ -7,7 +7,7 @@ hide:
 
 # 运行流程与自进化：改的是哪一层
 
-[Agent](index.md) / 200 个问题 · 50 篇论文
+[Agent](index.md) / 204 个问题 · 51 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">200 个问题 · 50 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">204 个问题 · 51 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:envopt" data-paper-title="EnvOpt: Automated Optimization for Agent Environments" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="EnvOpt: Automated Optimization for Agent Environments Agent University of California, Berkeley / University of Chicago / Bespoke Labs 2026-11-05 长期稳定的工作环境可以承载多类查询。EnvOpt 固定目标模型与 Harness，让研究 Agent 改变同一信息的可访问表示，例如用 SQLite 目录索引散落的表定义，或为既有接口写索引手册。优化对象是环境目录，不是底座权重，也不是每个任务重写一份工作流程。研究 Agent 在不相交的训练分片上读取目标 Agent 轨迹，训练不提供 verifier；验证阶段才独立度量候选环境，测试任务不参与选择。 完整实验成本过高，不复现（审查 DONE）。实现边界：CPU / L1，离线回放论文 Algorithm 1 的接受与回滚规则。没有运行 Agent、API 或真实工作区，没有验证成本收益，也没有接入 Evolve。完整实验成本过高，不复现（审查 DONE）。select_training_environment 仅接收已记录的候选成本与代理判断，没有验证分数、真实答案或测试接口。外层 replay_environment_evolution 检查训练 ID 分片互斥且与验证 ID 不重叠、候选 Harness 标识一致、验证聚合绑定训练选定环境，并在首次回归时回放停止及回滚。  Harness 与自我改进 环境表示演进 Agent 运行流程与自进化：改的是哪一层 EnvOpt 固定信息 I 后究竟在优化什么？ 它优化信息的表示和访问路径，固定目标 Agent 的模型和 Harness。把同一批散落定义组织为可查询索引，改变每个任务探索所需成本，并不改变问题或答案。 教学例：表定义仍在原有文件里，但 SQLite 目录记录每张表对应的路径；Agent 无须遍历所有文件。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-envopt-86d4756e" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-982f53c2f1665a72">EnvOpt 固定信息 I 后究竟在优化什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aenvopt">EnvOpt: Automated Optimization for Agent Environments</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of California, Berkeley / University of Chicago / Bespoke Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它优化信息的表示和访问路径，固定目标 Agent 的模型和 Harness。把同一批散落定义组织为可查询索引，改变每个任务探索所需成本，并不改变问题或答案。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：表定义仍在原有文件里，但 SQLite 目录记录每张表对应的路径；Agent 无须遍历所有文件。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07372">原论文</a> · <a href="../../../../agent-research/2611.07372-envopt/">实现解读</a> · <a href="#qa-982f53c2f1665a72">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:envopt" data-paper-title="EnvOpt: Automated Optimization for Agent Environments" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="EnvOpt: Automated Optimization for Agent Environments Agent University of California, Berkeley / University of Chicago / Bespoke Labs 2026-11-05 长期稳定的工作环境可以承载多类查询。EnvOpt 固定目标模型与 Harness，让研究 Agent 改变同一信息的可访问表示，例如用 SQLite 目录索引散落的表定义，或为既有接口写索引手册。优化对象是环境目录，不是底座权重，也不是每个任务重写一份工作流程。研究 Agent 在不相交的训练分片上读取目标 Agent 轨迹，训练不提供 verifier；验证阶段才独立度量候选环境，测试任务不参与选择。 完整实验成本过高，不复现（审查 DONE）。实现边界：CPU / L1，离线回放论文 Algorithm 1 的接受与回滚规则。没有运行 Agent、API 或真实工作区，没有验证成本收益，也没有接入 Evolve。完整实验成本过高，不复现（审查 DONE）。select_training_environment 仅接收已记录的候选成本与代理判断，没有验证分数、真实答案或测试接口。外层 replay_environment_evolution 检查训练 ID 分片互斥且与验证 ID 不重叠、候选 Harness 标识一致、验证聚合绑定训练选定环境，并在首次回归时回放停止及回滚。  Harness 与自我改进 环境表示演进 Agent 运行流程与自进化：改的是哪一层 一项改动在训练代理判断下更省，为什么还能在外层被回滚？ 训练内层只看相同分片上的严格成本降低和代理保真；留出验证独立比较上一轮聚合成本及准确率，成本升或准确率降超容差就停止并保留上一轮。 教学例：索引使训练成本从 10 降到 7，但验证准确率从 0.875 降到 0.625，容差 0.125；仍应回滚。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-4867e6c97481d81a">一项改动在训练代理判断下更省，为什么还能在外层被回滚？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aenvopt">EnvOpt: Automated Optimization for Agent Environments</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of California, Berkeley / University of Chicago / Bespoke Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>训练内层只看相同分片上的严格成本降低和代理保真；留出验证独立比较上一轮聚合成本及准确率，成本升或准确率降超容差就停止并保留上一轮。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：索引使训练成本从 10 降到 7，但验证准确率从 0.875 降到 0.625，容差 0.125；仍应回滚。</p>
+<p class="ar-learning-sources">依据：核心公式、本地结果与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07372">原论文</a> · <a href="../../../../agent-research/2611.07372-envopt/">实现解读</a> · <a href="#qa-4867e6c97481d81a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:envopt" data-paper-title="EnvOpt: Automated Optimization for Agent Environments" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="EnvOpt: Automated Optimization for Agent Environments Agent University of California, Berkeley / University of Chicago / Bespoke Labs 2026-11-05 长期稳定的工作环境可以承载多类查询。EnvOpt 固定目标模型与 Harness，让研究 Agent 改变同一信息的可访问表示，例如用 SQLite 目录索引散落的表定义，或为既有接口写索引手册。优化对象是环境目录，不是底座权重，也不是每个任务重写一份工作流程。研究 Agent 在不相交的训练分片上读取目标 Agent 轨迹，训练不提供 verifier；验证阶段才独立度量候选环境，测试任务不参与选择。 完整实验成本过高，不复现（审查 DONE）。实现边界：CPU / L1，离线回放论文 Algorithm 1 的接受与回滚规则。没有运行 Agent、API 或真实工作区，没有验证成本收益，也没有接入 Evolve。完整实验成本过高，不复现（审查 DONE）。select_training_environment 仅接收已记录的候选成本与代理判断，没有验证分数、真实答案或测试接口。外层 replay_environment_evolution 检查训练 ID 分片互斥且与验证 ID 不重叠、候选 Harness 标识一致、验证聚合绑定训练选定环境，并在首次回归时回放停止及回滚。  Harness 与自我改进 环境表示演进 Agent 运行流程与自进化：改的是哪一层 EnvOpt 和 Meta-Harness 是同一类搜索吗？ 两者都想改进任务完成成本或成功率，但 EnvOpt 迁移的是可复用的环境表示，固定模型和 Harness；Meta-Harness 搜索控制 Agent 运行的流程。可以叠加，不能把两种干预的效应混报。 教学例：预建目录索引改变可访问的数据组织；改变何时重试工具调用属于 Harness 控制。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-508bf6ac9e672c77">EnvOpt 和 Meta-Harness 是同一类搜索吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aenvopt">EnvOpt: Automated Optimization for Agent Environments</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of California, Berkeley / University of Chicago / Bespoke Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>两者都想改进任务完成成本或成功率，但 EnvOpt 迁移的是可复用的环境表示，固定模型和 Harness；Meta-Harness 搜索控制 Agent 运行的流程。可以叠加，不能把两种干预的效应混报。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：预建目录索引改变可访问的数据组织；改变何时重试工具调用属于 Harness 控制。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07372">原论文</a> · <a href="../../../../agent-research/2611.07372-envopt/">实现解读</a> · <a href="#qa-508bf6ac9e672c77">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:envopt" data-paper-title="EnvOpt: Automated Optimization for Agent Environments" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="EnvOpt: Automated Optimization for Agent Environments Agent University of California, Berkeley / University of Chicago / Bespoke Labs 2026-11-05 长期稳定的工作环境可以承载多类查询。EnvOpt 固定目标模型与 Harness，让研究 Agent 改变同一信息的可访问表示，例如用 SQLite 目录索引散落的表定义，或为既有接口写索引手册。优化对象是环境目录，不是底座权重，也不是每个任务重写一份工作流程。研究 Agent 在不相交的训练分片上读取目标 Agent 轨迹，训练不提供 verifier；验证阶段才独立度量候选环境，测试任务不参与选择。 完整实验成本过高，不复现（审查 DONE）。实现边界：CPU / L1，离线回放论文 Algorithm 1 的接受与回滚规则。没有运行 Agent、API 或真实工作区，没有验证成本收益，也没有接入 Evolve。完整实验成本过高，不复现（审查 DONE）。select_training_environment 仅接收已记录的候选成本与代理判断，没有验证分数、真实答案或测试接口。外层 replay_environment_evolution 检查训练 ID 分片互斥且与验证 ID 不重叠、候选 Harness 标识一致、验证聚合绑定训练选定环境，并在首次回归时回放停止及回滚。  Harness 与自我改进 环境表示演进 Agent 运行流程与自进化：改的是哪一层 本地离线回放怎样阻止把验证答案当成训练策略输入？ 内层函数的输入只有候选成本、代理布尔判断、环境及 Harness 标识。宿主验证聚合只用于外层停止，且训练与验证 ID 不重叠。接口不是真实沙箱，不能认证调用方提供的记录。 教学例：验证聚合绑定索引版本 A，却声称训练选中 B，会报错；训练 ID 与验证 ID 相同也会拒绝。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-70468eddb0c7a884">本地离线回放怎样阻止把验证答案当成训练策略输入？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aenvopt">EnvOpt: Automated Optimization for Agent Environments</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of California, Berkeley / University of Chicago / Bespoke Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>内层函数的输入只有候选成本、代理布尔判断、环境及 Harness 标识。宿主验证聚合只用于外层停止，且训练与验证 ID 不重叠。接口不是真实沙箱，不能认证调用方提供的记录。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：验证聚合绑定索引版本 A，却声称训练选中 B，会报错；训练 ID 与验证 ID 相同也会拒绝。</p>
+<p class="ar-learning-sources">依据：数据协议与实现边界、本地结果与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07372">原论文</a> · <a href="../../../../agent-research/2611.07372-envopt/">实现解读</a> · <a href="#qa-70468eddb0c7a884">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:continual-autoresearch" data-paper-title="From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks? Agent RBC Borealis / ELLIS Institute Tübingen / Max Planck Institute for Intelligent Systems 2026-11-03 持续会话可能复用代码和经验，更快找到有效方案，但未必提高最终留出效果。论文在相同任务流、模型、数据和逐任务时间预算下比较 stateful 与 reset Agent；保留首个有效提交、所有提交及最终选择，完成后才由私有测试评价。第一任务没有历史可转移，不能计入跨任务增益。正文 §3 高成本完整实验：成本过高，不复现（审查 DONE）。组件状态：CPU / L1 component_only，运行后离线 scorer 与匹配协议；没有运行自主研究 Agent，也未接入统一 Evolve。高成本完整实验：成本过高，不复现（审查 DONE）。只接收 ClosedRun(closed=True)，每个候选保留唯一 ID、单调完成时刻、valid 标记和外部私有测试分数。无效候选不能附隐藏分数，最终选择须为确实有效的提交；预算外候选和未结束记录被拒绝。scorer 不向 actor 提供接口，不运行训练，也无法防止调用者把离线分数另行泄露。  Harness 与自我改进 RSI 跨任务研究评测 Agent 运行流程与自进化：改的是哪一层 更快找到高分候选，为什么仍可能最终效果更差？ 搜索效率评价预算内best-so-far隐测曲线的面积，最终效果评价Agent实际选定候选。两者不是同一个统计量；Agent可能很早找到好方案，之后过拟合开发集并选择更差的方案。 教学例：时刻2找到0.8、时刻6找到0.5并最终选择后者，早期搜索很好但最终分数只有0.5。 2026-11-04">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-continual-autoresearch-b46d9b72" class="ar-learning-paper-anchor"></span>

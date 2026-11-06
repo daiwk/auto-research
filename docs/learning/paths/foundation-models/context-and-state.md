@@ -7,7 +7,7 @@ hide:
 
 # 长上下文：注意力、递归状态与记忆
 
-[基础模型](index.md) / 144 个问题 · 36 篇论文
+[基础模型](index.md) / 148 个问题 · 37 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">144 个问题 · 36 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">148 个问题 · 37 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:convpe" data-paper-title="ConvPE: Convolutional Position Embedding Improves Transformers" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="ConvPE: Convolutional Position Embedding Improves Transformers 基础模型 Nanjing University 2026-11-05 RoPE 旋转 query/key；ConvPE 改的是 softmax 前的加性分数。它先把当前层隐状态投影到少量通道，再从当前及最近若干隐状态学习各相对距离的偏置。每个查询只得到窗口内偏置；窗口外偏置为零，不是把远处 key 屏蔽。因果和 padding mask 仍由注意力层负责。论文还讨论分组、低秩与二维变体，此处仅实现 §3.1 的默认无分组、无分解一维公式。 依据论文配置判断，完整训练/TileLang 对比超出单张 A100/A30 或 Mac 的本轮低成本预算，成本过高，不复现（审查 DONE）。ConvPEBias.compact_bias 输入浮点 [batch, query, model_dim]，输出 [batch, query, bias_head, lag]。其 forward 将这些偏置映射到稠密参考分数矩阵，不计算 QK、mask 或 softmax。解码块须传入绝对 query_start 与前置的 min(query_start, W-1) 个原始隐状态，而不是已经投影的 KV；跨序列不复用这些状态。  注意力与长上下文 卷积位置偏置 基础模型 长上下文：注意力、递归状态与记忆 ConvPE 在窗口外的偏置为零，是否意味着注意力只能看最近 W 个 key？ 不是。ConvPE 只改 softmax 之前的加性分数。窗口外的历史 key 仍可按原始 QK 分数参与注意力，未来位置是否可见则由独立的因果 mask 决定。 教学例：W=3，query 位于 5 时，key 0 的距离是 5，偏置为零但仍可读；key 7 也没有该偏置，却因因果 mask 不可读。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-convpe-a877fbf3" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-133f35f7b515da6d">ConvPE 在窗口外的偏置为零，是否意味着注意力只能看最近 W 个 key？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aconvpe">ConvPE: Convolutional Position Embedding Improves Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Nanjing University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。ConvPE 只改 softmax 之前的加性分数。窗口外的历史 key 仍可按原始 QK 分数参与注意力，未来位置是否可见则由独立的因果 mask 决定。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：W=3，query 位于 5 时，key 0 的距离是 5，偏置为零但仍可读；key 7 也没有该偏置，却因因果 mask 不可读。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07749">原论文</a> · <a href="../../../../foundation-models/2611.07749-convpe/">实现解读</a> · <a href="#qa-133f35f7b515da6d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:convpe" data-paper-title="ConvPE: Convolutional Position Embedding Improves Transformers" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="ConvPE: Convolutional Position Embedding Improves Transformers 基础模型 Nanjing University 2026-11-05 RoPE 旋转 query/key；ConvPE 改的是 softmax 前的加性分数。它先把当前层隐状态投影到少量通道，再从当前及最近若干隐状态学习各相对距离的偏置。每个查询只得到窗口内偏置；窗口外偏置为零，不是把远处 key 屏蔽。因果和 padding mask 仍由注意力层负责。论文还讨论分组、低秩与二维变体，此处仅实现 §3.1 的默认无分组、无分解一维公式。 依据论文配置判断，完整训练/TileLang 对比超出单张 A100/A30 或 Mac 的本轮低成本预算，成本过高，不复现（审查 DONE）。ConvPEBias.compact_bias 输入浮点 [batch, query, model_dim]，输出 [batch, query, bias_head, lag]。其 forward 将这些偏置映射到稠密参考分数矩阵，不计算 QK、mask 或 softmax。解码块须传入绝对 query_start 与前置的 min(query_start, W-1) 个原始隐状态，而不是已经投影的 KV；跨序列不复用这些状态。  注意力与长上下文 卷积位置偏置 基础模型 长上下文：注意力、递归状态与记忆 同一个查询的卷积输出，怎样映射到具体注意力头与 key？ 把卷积的 H_bW 个输出重排为偏置头和滞后距离。对头 h 和 key t，取头 h mod H_b、距离 s−t 的格子；距离越界时加零，不能按相邻头分组或使用 t−s。 教学例：H=4、H_b=2、W=3，查询 5 对 key 3 读取距离 2。头 0 和 2 读偏置头 0，头 1 和 3 读偏置头 1。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-f9b27b0187e38e82">同一个查询的卷积输出，怎样映射到具体注意力头与 key？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aconvpe">ConvPE: Convolutional Position Embedding Improves Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Nanjing University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>把卷积的 H_bW 个输出重排为偏置头和滞后距离。对头 h 和 key t，取头 h mod H_b、距离 s−t 的格子；距离越界时加零，不能按相邻头分组或使用 t−s。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：H=4、H_b=2、W=3，查询 5 对 key 3 读取距离 2。头 0 和 2 读偏置头 0，头 1 和 3 读偏置头 1。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07749">原论文</a> · <a href="../../../../foundation-models/2611.07749-convpe/">实现解读</a> · <a href="#qa-f9b27b0187e38e82">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:convpe" data-paper-title="ConvPE: Convolutional Position Embedding Improves Transformers" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="ConvPE: Convolutional Position Embedding Improves Transformers 基础模型 Nanjing University 2026-11-05 RoPE 旋转 query/key；ConvPE 改的是 softmax 前的加性分数。它先把当前层隐状态投影到少量通道，再从当前及最近若干隐状态学习各相对距离的偏置。每个查询只得到窗口内偏置；窗口外偏置为零，不是把远处 key 屏蔽。因果和 padding mask 仍由注意力层负责。论文还讨论分组、低秩与二维变体，此处仅实现 §3.1 的默认无分组、无分解一维公式。 依据论文配置判断，完整训练/TileLang 对比超出单张 A100/A30 或 Mac 的本轮低成本预算，成本过高，不复现（审查 DONE）。ConvPEBias.compact_bias 输入浮点 [batch, query, model_dim]，输出 [batch, query, bias_head, lag]。其 forward 将这些偏置映射到稠密参考分数矩阵，不计算 QK、mask 或 softmax。解码块须传入绝对 query_start 与前置的 min(query_start, W-1) 个原始隐状态，而不是已经投影的 KV；跨序列不复用这些状态。  注意力与长上下文 卷积位置偏置 基础模型 长上下文：注意力、递归状态与记忆 ConvPE 与 RoPE 改变注意力的哪一部分？远处 key 的注意力权重一定不变吗？ RoPE 通过旋转 Q/K 改变点积，ConvPE 则叠加内容相关的局部分数偏置。窗口外原始 logit 不变，不等于归一化后的权重不变；局部 logit 变化也会改变 softmax 分母。 教学例：历史远近两个可见 key 的原始分数都为 0。只给近 key 加 2，远 key 的分数仍是 0，但权重从 0.5 降为约 0.119。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-6f7c1a5d0d6e0fed">ConvPE 与 RoPE 改变注意力的哪一部分？远处 key 的注意力权重一定不变吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aconvpe">ConvPE: Convolutional Position Embedding Improves Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Nanjing University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>RoPE 通过旋转 Q/K 改变点积，ConvPE 则叠加内容相关的局部分数偏置。窗口外原始 logit 不变，不等于归一化后的权重不变；局部 logit 变化也会改变 softmax 分母。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：历史远近两个可见 key 的原始分数都为 0。只给近 key 加 2，远 key 的分数仍是 0，但权重从 0.5 降为约 0.119。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07749">原论文</a> · <a href="../../../../foundation-models/2611.07749-convpe/">实现解读</a> · <a href="#qa-6f7c1a5d0d6e0fed">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:convpe" data-paper-title="ConvPE: Convolutional Position Embedding Improves Transformers" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="ConvPE: Convolutional Position Embedding Improves Transformers 基础模型 Nanjing University 2026-11-05 RoPE 旋转 query/key；ConvPE 改的是 softmax 前的加性分数。它先把当前层隐状态投影到少量通道，再从当前及最近若干隐状态学习各相对距离的偏置。每个查询只得到窗口内偏置；窗口外偏置为零，不是把远处 key 屏蔽。因果和 padding mask 仍由注意力层负责。论文还讨论分组、低秩与二维变体，此处仅实现 §3.1 的默认无分组、无分解一维公式。 依据论文配置判断，完整训练/TileLang 对比超出单张 A100/A30 或 Mac 的本轮低成本预算，成本过高，不复现（审查 DONE）。ConvPEBias.compact_bias 输入浮点 [batch, query, model_dim]，输出 [batch, query, bias_head, lag]。其 forward 将这些偏置映射到稠密参考分数矩阵，不计算 QK、mask 或 softmax。解码块须传入绝对 query_start 与前置的 min(query_start, W-1) 个原始隐状态，而不是已经投影的 KV；跨序列不复用这些状态。  注意力与长上下文 卷积位置偏置 基础模型 长上下文：注意力、递归状态与记忆 解码块为什么要带入此前的隐状态，不能每块重新左补零？ 因果卷积依赖当前位置前的 W−1 个投影输入。真正序列起点才补零；在中间切块需给出相同层的原始隐状态及绝对偏移，保证输出与全序列计算切片一致。 教学例：W=3，从位置 4 开始解码，需要位置 2、3 的原始隐状态；把这两个 tap 当作零一般会改变位置 4 的偏置，即使 KV 缓存本身正确。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-f3a8236e5f08063f">解码块为什么要带入此前的隐状态，不能每块重新左补零？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aconvpe">ConvPE: Convolutional Position Embedding Improves Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Nanjing University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>因果卷积依赖当前位置前的 W−1 个投影输入。真正序列起点才补零；在中间切块需给出相同层的原始隐状态及绝对偏移，保证输出与全序列计算切片一致。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：W=3，从位置 4 开始解码，需要位置 2、3 的原始隐状态；把这两个 tap 当作零一般会改变位置 4 的偏置，即使 KV 缓存本身正确。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07749">原论文</a> · <a href="../../../../foundation-models/2611.07749-convpe/">实现解读</a> · <a href="#qa-f3a8236e5f08063f">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:anchor-kv" data-paper-title="Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training 基础模型 University of Arizona 2026-11-03 不同层可能存储相近信息，却使用不同坐标基。Anchor 让一组层共享一个 recurrent state，以各层可学习 read-map 变换读出，再由输入相关 gate 与局部 SWA 合并。训练时保留 interior TTT 分支，部署时才删除，不能把部署结构直接当作训练配方。依据固定 v1 §3.2、§4.1、Appendix C。 完整训练与配置矩阵成本过高，不复现（审查 DONE）。诊断使用明确提供的人工 KV 矩阵，并非 LaCT 训练。SharedKVReadout 接收外部已更新 KVState，只允许指定 writer 推进 revision；复制输入 buffer 以免调用方后续修改旧证据。多个 reader 共享该 state，各自学习 identity 初始化的线性变换与 sigmoid gate。外部 writer 的 autograd 图不会被暗自 detach。  注意力与长上下文 跨层共享状态与测试时训练 基础模型 长上下文：注意力、递归状态与记忆 Anchor 既然发现状态跨层冗余，为什么不能直接给所有层读同一矩阵？ 冗余指内容相关，不代表坐标基相同。各reader需要可学习线性read-map，把共享内容表达成该层可用的坐标；writer保留自己的基。仅复制同一状态而没有映射，会把共享和基不匹配混为一谈。 教学例：同一个二维方向在一层写成(1,0)，另一层习惯的坐标是(0,1)。共享内容不变，但reader需要旋转映射才读到正确语义方向。 2026-11-04">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
 <span id="paper-foundation-models-anchor-kv-2d58f519" class="ar-learning-paper-anchor"></span>

@@ -8,6 +8,8 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [XStack: A Benchmark for ML Repo Migration](<https://arxiv.org/abs/2611.08472>) | 2026-11-05 | [English](../../agent-research/2611.08472-xstack/README-en.md) · [Chinese](../../agent-research/2611.08472-xstack/README.md) |
+| [EnvOpt: Automated Optimization for Agent Environments](<https://arxiv.org/abs/2611.07372>) | 2026-11-05 | [English](../../agent-research/2611.07372-envopt/README-en.md) · [Chinese](../../agent-research/2611.07372-envopt/README.md) |
 | [Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents](<https://arxiv.org/abs/2611.05139>) | 2026-11-03 | [English](../../agent-research/2611.05139-meta-square/README-en.md) · [Chinese](../../agent-research/2611.05139-meta-square/README.md) |
 | [From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?](<https://arxiv.org/abs/2611.05108>) | 2026-11-03 | [English](../../agent-research/2611.05108-continual-autoresearch/README-en.md) · [Chinese](../../agent-research/2611.05108-continual-autoresearch/README.md) |
 | [Strategist: Evolving Reasoning with Agents](<https://arxiv.org/abs/2611.03618>) | 2026-11-02 | [English](../../agent-research/2611.03618-strategist/README-en.md) · [Chinese](../../agent-research/2611.03618-strategist/README.md) |

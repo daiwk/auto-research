@@ -1029,6 +1029,16 @@
           "position": "构建可执行训练环境，筛选过程与结果均合格的轨迹，微调自动后训练Agent。",
           "tradeoff": "9B/35B-A3B与每任务5至10小时全矩阵高成本不复现；只收录，不声明运行时或权重能力。",
           "sections": ["核心公式", "数据协议与实现边界", "高成本完整实验"]
+        },
+        {
+          "paper": "agent-research:envopt",
+          "position": "固定模型与 Harness，把可复用的信息表示作为跨任务资产；无训练 verifier 的成本/代理筛选之后，用独立验证决定是否保留。",
+          "tradeoff": "更便宜的代理轨迹可错判，验证回归即回滚；本地仅回放选择规则，不生成环境或运行 Agent。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与实现边界"
+          ]
         }
       ],
       "analysis": [
@@ -1083,6 +1093,15 @@
           "title": "编辑生命周期、经验持久性和模型内化不是同一条演化轴",
           "body": "Strategist将可执行推理程序与测量经验放入跨任务库；Meta²则把跨任务保留对象限制为冻结的演化知识，避免把某个任务修复永久带到另一任务。Continual AutoResearch进一步要求把首解、搜索曲线与最终选择分别评估：更快找到0.8候选但最终选择0.5，不能写成最终提升。RSI-Dojo改变的又是模型权重学习阶段，不能把阈值过滤器或未执行环境注册视为训练完成。比较前应先固定跨任务可见状态、编辑的生效范围以及验证反馈何时可见。",
           "papers": ["agent-research:strategist", "agent-research:meta-square", "agent-research:continual-autoresearch", "agent-research:rsi-dojo"]
+        },
+        {
+          "title": "跨任务保留环境、演化指导与会话经验是三种干预",
+          "body": "EnvOpt 保留能服务不同查询的环境表示，内层成本下降且代理保真才接受，验证回归即停止并回滚；Meta² 保留冻结 Meta-Skill，具体 Harness 编辑只作用于当前 run；Continual AutoResearch 固定任务流比较会话/工作区状态，独立测量搜索速度与最终选择。应分别记录变更产物的生效范围、外层验证可见性和跨任务继承对象，不能因搜索轨迹更省就推断模型能力提高。",
+          "papers": [
+            "agent-research:envopt",
+            "agent-research:meta-square",
+            "agent-research:continual-autoresearch"
+          ]
         }
       ],
       "questions": [
@@ -1156,9 +1175,20 @@
             "agent-research:reflexion",
             "agent-research:evalalloc"
           ]
+        },
+        {
+          "id": "environment-index-versus-in-run-edit",
+          "question": "预建跨任务文件索引和某次任务失败时追加一个工具提醒，能用同一张训练收益表吗？",
+          "answer": "不能直接合并。EnvOpt 的索引改变任务共享的环境表示，要在未用于该轮提出改动的验证任务上看成本和效果；Meta² 的提醒是当前 run 的有界 Harness 编辑，跨任务保留的是指导如何演进的知识，不是同一个提醒。",
+          "example": "教学例：搜索任务都可复用同一目录索引；只针对一次缺失权限发出的恢复提醒不应永久植入其他任务。",
+          "papers": [
+            "agent-research:envopt",
+            "agent-research:meta-square",
+            "agent-research:continual-autoresearch"
+          ]
         }
       ],
-      "updated": "2026-11-05",
+      "updated": "2026-11-06",
       "reviewed_papers": [
         "agent-research:rsi-opt",
         "agent-research:image-rsi",
@@ -1209,7 +1239,8 @@
         "agent-research:strategist",
         "agent-research:meta-square",
         "agent-research:continual-autoresearch",
-        "agent-research:rsi-dojo"
+        "agent-research:rsi-dojo",
+        "agent-research:envopt"
       ],
       "updates": [
         {
@@ -1354,6 +1385,20 @@
             "agent-research:meta-square": "ee8dd7f6bba65ffcdccb9d6c70b2d140e7e387ac25e59c52691d68a3a50f7be6",
             "agent-research:continual-autoresearch": "861e021ad2fda7fa07f2687dc06150994f6fc9a1e56acbdbb2a258fe7acaa364",
             "agent-research:rsi-dojo": "c522dbbca9e5276b623466d56bf068784110d238426c6172784e6115d0af58ff"
+          }
+        },
+        {
+          "date": "2026-11-06",
+          "summary": "补入 EnvOpt，明确模型/Harness 固定时可演进的第三层环境表示；与 Meta² 的单次运行编辑和 Continual AutoResearch 的会话经验测量分开。留出验证回滚不等于暴露训练金标；本地 CPU 离线核不是完整自主环境优化。",
+          "papers": [
+            "agent-research:envopt",
+            "agent-research:meta-square",
+            "agent-research:continual-autoresearch"
+          ],
+          "source_revisions": {
+            "agent-research:envopt": "d8b536710de4a590c4026908eebe5e3abefc24ea1b7d190f1d094378aa84bdee",
+            "agent-research:meta-square": "ee8dd7f6bba65ffcdccb9d6c70b2d140e7e387ac25e59c52691d68a3a50f7be6",
+            "agent-research:continual-autoresearch": "861e021ad2fda7fa07f2687dc06150994f6fc9a1e56acbdbb2a258fe7acaa364"
           }
         }
       ]
@@ -1734,6 +1779,16 @@
             "数据协议与实现边界",
             "本地结果与负控"
           ]
+        },
+        {
+          "paper": "agent-research:xstack",
+          "position": "以干净 TPU 全规模重训、独立判分、反作弊与原框架权重回载共同定义通过；二阶段只公开配方并冻结入口外代码。",
+          "tradeoff": "补配方与训练复现是不同诊断阶段；GPU 初步实验不可替代主 TPU 矩阵。本地只收录。",
+          "sections": [
+            "评估协议",
+            "论文离线与线上效果",
+            "复现与验证边界"
+          ]
         }
       ],
       "analysis": [
@@ -1762,6 +1817,14 @@
             "agent-research:agentheal",
             "agent-research:agent-perturb",
             "agent-research:gaia"
+          ]
+        },
+        {
+          "title": "明确配方与改坏任务不是同一种协议变化",
+          "body": "AgentPerturb 只改一个输入面，并独立验证目标保持和可解性，配对差值才可归因于该扰动。XStack 的第二阶段却是在同一迁移产物上补主实验配方，锁住入口脚本外代码且不公开目标；它是在区分实验选择错误与迁移错误，不是输入扰动稳健性测量。两者都需要评分者独立于执行 Agent，不能让执行者看到用于判定的隐含目标。",
+          "papers": [
+            "agent-research:xstack",
+            "agent-research:agent-perturb"
           ]
         }
       ],
@@ -1807,9 +1870,19 @@
             "agent-research:agent-perturb",
             "agent-research:gaia"
           ]
+        },
+        {
+          "id": "aligned-recipe-not-robustness-pair",
+          "question": "同一个迁移在 XStack 第一阶段失败、第二阶段通过，为什么不能当作 AgentPerturb 式的稳健性配对分数？",
+          "answer": "XStack 只对失败单元追加配方并约束修改范围，判的是同一迁移在正确配方下能否重训达标；AgentPerturb 对共同任务的干净和扰动输入分别执行且保持目标与可解性。分母、干预和通过条件不同。",
+          "example": "教学例：原来误跑较小数据集，澄清后换入口并全规模达标，说明该迁移路径可运行，不说明 Agent 能应对不同工具说明扰动。",
+          "papers": [
+            "agent-research:xstack",
+            "agent-research:agent-perturb"
+          ]
         }
       ],
-      "updated": "2026-11-04",
+      "updated": "2026-11-06",
       "reviewed_papers": [
         "agent-research:physical-engineering-exam",
         "agent-research:scope-replay",
@@ -1854,7 +1927,8 @@
         "agent-research:sopbench-protocol",
         "agent-research:gaia",
         "agent-research:autoformbench",
-        "agent-research:agentheal"
+        "agent-research:agentheal",
+        "agent-research:xstack"
       ],
       "updates": [
         {
@@ -1963,6 +2037,18 @@
             "agent-research:agentheal": "68c172c45d549e915d3f7e15e28e894848846d4e6761a3b84e2410a319f019aa",
             "agent-research:agent-perturb": "48a9e1dc9ba05b73631fee28a656c334e3f3d207d76bb6e1b08f3dee0110b68b",
             "agent-research:gaia": "d8d18cafe45824ad6fa4841b6479dcba2a378c11b88c2ae895ce595192a50d1f"
+          }
+        },
+        {
+          "date": "2026-11-06",
+          "summary": "补入 XStack，将真实跨框架执行、隔离来源判定和权重回载与输入稳健性分开。主实验 TPU 成本高，仅资料审查，不把 Appendix G 或静态合同当成本地能力结果。",
+          "papers": [
+            "agent-research:xstack",
+            "agent-research:agent-perturb"
+          ],
+          "source_revisions": {
+            "agent-research:xstack": "51d91541689c57e382cc9191be913e8284207a8e950eab0ba6f4f1eb6d8c9574",
+            "agent-research:agent-perturb": "48a9e1dc9ba05b73631fee28a656c334e3f3d207d76bb6e1b08f3dee0110b68b"
           }
         }
       ]

@@ -241,7 +241,8 @@
         "post-training:opd-lm",
         "post-training:gkd",
         "post-training:minillm",
-        "post-training:mpopd"
+        "post-training:mpopd",
+        "post-training:cord-rollout"
       ]
     },
     {
@@ -310,7 +311,8 @@
         "post-training:mopd",
         "post-training:polaris-hri",
         "post-training:opcd",
-        "post-training:opsd"
+        "post-training:opsd",
+        "post-training:ragcompass"
       ]
     },
     {

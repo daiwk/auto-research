@@ -46,6 +46,8 @@
 - 2026-09 · [MIMA](../2609.12842-mima/README.md)：将同请求物品组成多正例集合，以排他匹配监督互补兴趣，并用 activation routing 校准多通道分数。
 
 ## Alibaba
+- [Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking](../../recommendation-components/2611.07591-ice/README.md)：将展示到点击拆成达到曝光与条件点击；浏览深度尾和约束曝光，停止梯度门控抑制未曝光上下文，列表 KL 建模点击竞争。本地只验证张量组件。
+- [From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation](../../recommendation-components/2611.05997-ured/README.md)：从排序器已打分但未展示的候选中按会话保留高分项，聚合后按时间去重，再按近期曝光类目和商品去重筛选。本地仅验证时间、截断与过滤顺序。
 - [ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse](../../recommendation-components/2611.04259-reusegr/README.md)：7B离线模型按query规划SID前缀，0.5B在当前用户历史下补全后缀；ReuseCut以历史覆盖选择复用深度，BudgetCut再学习集合相关的分支准入。本地只核深度标签/冷miss与准备好depth0的区别及分数接口，不把固定规则冒充学习的BudgetCut。
 - [KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation](../../recommendation-components/2610.36973-kl-mopd/README.md)：先在冻结初始学生的生成前缀上按位置估计到两位教师的反向KL，以其比例固定教师权重。当前学生在自己的前缀上最小化加权反向KL；本地仅实现校准和可微损失，不运行推荐器或继承线上收入增益。
 - [PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search](../../recommendation-components/2610.36958-pailitao-mmsearch2/README.md)：以原图和自由文本直接生成商品SID集合，用组合数据工具、商品知识CPT、混合推理预算SFT和意图均衡RL扩展统一多模态搜索。Sample–Beam分离推理采样与SID束生成以对齐多结果服务；完整实验高成本不复现。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**

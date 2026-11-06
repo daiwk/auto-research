@@ -1,0 +1,18 @@
+{
+  "page": "docs/agent-research/2611.07372-envopt/README.md",
+  "paper_url": "https://arxiv.org/abs/2611.07372",
+  "arxiv_id": "2611.07372",
+  "figure": "Figure 2",
+  "original_caption": "See original figure and caption in the attributed source",
+  "source_url": "https://arxiv.org/pdf/2611.07372v1",
+  "extraction": "pdf-region-rendered-and-visually-reviewed",
+  "asset": "docs/agent-research/2611.07372-envopt/assets/paper-figure-01.png",
+  "width": 871,
+  "height": 664,
+  "score": 0,
+  "error": "",
+  "visually_inspected": true,
+  "sha256": "c604c4a335e44c9bade8d37c0a4732902c45deda9dd87c6e065cd99557ec15da",
+  "rendering_recipe": {"page": 3, "dpi": 130, "crop_pixels_xywh": [118, 140, 871, 664]},
+  "license": "CC BY 4.0"
+}

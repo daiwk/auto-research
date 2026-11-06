@@ -7,7 +7,7 @@ hide:
 
 # 教师更强仍可能教错：信息、兼容性与成功行为保护
 
-[LLM 后训练](../index.md) · 更新 2026-11-05 · 49 篇主题资料 / 8 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-06 · 50 篇主题资料 / 9 篇重点对照
 
 教师的价值不只取决于总分。OPSD改变训练期可见信息，MOPD与逐token路由组织多教师，CSD先统一概率事件，SPOD保护学生已成功选择，VAD筛出可归于视觉证据的修正；这些约束要在模仿之前分别成立。
 
@@ -33,6 +33,7 @@ hide:
 | [VAD](../../../post-training/2607.28590-vad/README.md) · [原始来源](https://arxiv.org/abs/2607.28590)<br>章节：背景与主要改动、核心公式、复现边界 | 对比同一教师证据存在/移除视图，将原修正单侧投影到视觉方向后重建学生锚定目标。 | 操作性对比不证明所有修正皆真视觉因果；本地过程证据轴替代真实crop，未运行原视觉模型。 |
 | [P²-MOPD: Accelerating Multi-Teacher On-Policy Distillation via Parameter Priors](../../../post-training/2611.03953-p2-mopd/README.md) · [原始来源](https://arxiv.org/abs/2611.03953v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 把冻结专家任务向量保留为可学习优化方向；自由学生权重与系数由同一更新前梯度共同推进，推理仍使用一个物化学生模型。 | 不只改变教师logit或合并初始点；未裁剪系数梯度、独立全局clip和零decay决定多步等价。完整MOPD模型/轨迹未复现，本地只验参数更新L1。 |
 | [Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning](../../../post-training/2611.05266-targeted-guidance/README.md) · [原始来源](https://arxiv.org/abs/2611.05266v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 在失败Agent turn前加入文本反馈，以同权重反馈条件教师做完整词表reverse KL，并保留criterion的普通RL奖励。 | 只在失败处蒸馏，按整条响应token数归一；全部满足后恢复原RL。组件不提供实际judge、反馈有效性筛选或Agent轨迹，不能凭loss下降声称代码能力提高。 |
+| [RAGCompass: Generalizable Retriever Routing via Reranking](../../../post-training/2611.05596-ragcompass/README.md) · [原始来源](https://arxiv.org/abs/2611.05596v1)<br>章节：核心公式、数据协议与代码映射 | RAGCompass 把每组检索证据交给同一个 reranker；将固定 reader 的离线答案 F1 软化为整组候选的监督分布，优化候选集 KL。 | 不需要检索器 ID 或相互不可比的置信度，但训练标签依赖固定 reader 与有参考答案的离线数据。推理只比较分数，不用真实 F1 或筛选 gap。 |
 
 </div>
 
@@ -61,6 +62,12 @@ MOPD组织领域教师在学生轨迹上的监督；P²-MOPD进一步把专家ba
 OPSD区分学生可见问题与teacher私有参考；Targeted Guidance把特权信息换成失败turn前的文本反馈，并只在这些轮次施加辅助reverse KL，同时保留普通criterion RL。稀疏门控选择梯度位置，整条response-token归一控制每条rollout的总体尺度，两者不能混成删token后重算均值。无失败时严格退化原RL是数值合同，不代表反馈已经通过有效性筛选或代码任务真的提升。
 
 对照来源：[targeted-guidance](../../../post-training/2611.05266-targeted-guidance/README.md) · [opsd](../../../post-training/2601.18734-opsd/README.md)
+
+### 额外信息进入教师条件，还是只定义训练标签？
+
+OPSD 把验证解交给同权重教师，在学生前缀上给词表分布；Targeted Guidance 只在失败轮次插入判定反馈，再加上普通 RL 奖励。RAGCompass 的参考答案只在候选证据产生答案后计算离线 F1 标签，监督轴是整个候选集合，不是 token。三者都要防止把训练期可见的额外信息带到推理。
+
+对照来源：[ragcompass](../../../post-training/2611.05596-ragcompass/README.md) · [opsd](../../../post-training/2601.18734-opsd/README.md) · [targeted-guidance](../../../post-training/2611.05266-targeted-guidance/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -126,9 +133,23 @@ OPSD区分学生可见问题与teacher私有参考；Targeted Guidance把特权�
 
     对照来源：[targeted-guidance](../../../post-training/2611.05266-targeted-guidance/README.md) · [opsd](../../../post-training/2601.18734-opsd/README.md)
 
+### 两个检索候选的离线 F1 很接近，能否在 RAGCompass 推理时沿用 0.05 门槛？它和 OPSD 的特权信息有什么不同？ {#cross-ragcompass-offline-gap}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。门槛只用于筛选有参考答案的离线样本；推理用 reranker 或比较头的得分。OPSD 的特权解进入教师输入，改变词表预测；RAGCompass 的参考答案只定义候选标签，不输入候选 scorer。
+
+    **教学例子：** 离线 F1 是 0.50 和 0.48 时，该样本不满足筛选门槛。部署时如果两个 scorer 分数是 0.2 和 0.7，仍选第二个；不能查真值 F1 重新筛选。
+
+    对照来源：[ragcompass](../../../post-training/2611.05596-ragcompass/README.md) · [opsd](../../../post-training/2601.18734-opsd/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-06** · 加入 RAGCompass 候选证据效用蒸馏，与 OPSD 和 Targeted Guidance 对读监督轴、反馈入口及离线筛选与部署分界。
+
+涉及：[ragcompass](../../../post-training/2611.05596-ragcompass/README.md) · [opsd](../../../post-training/2601.18734-opsd/README.md) · [targeted-guidance](../../../post-training/2611.05266-targeted-guidance/README.md)
 
 **2026-11-05** · 补入P²-MOPD参数先验双通道和Targeted Guidance失败turn反馈；对照MOPD教师监督与OPSD特权上下文，保留独立更新方向、原分母及完整实验高成本未复现边界。
 
@@ -138,7 +159,7 @@ OPSD区分学生可见问题与teacher私有参考；Targeted Guidance把特权�
 
 覆盖 47 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 49 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 50 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -191,6 +212,7 @@ OPSD区分学生可见问题与teacher私有参考；Targeted Guidance把特权�
 - [POLARIS: Guiding Small Models to Write Long Stories](../../../post-training/2606.04095-polaris-hri/README.md)
 - [OPCD](../../../post-training/2602.12275-opcd/README.md)
 - [OPSD](../../../post-training/2601.18734-opsd/README.md)
+- [RAGCompass: Generalizable Retriever Routing via Reranking](../../../post-training/2611.05596-ragcompass/README.md)
 
 </details>
 

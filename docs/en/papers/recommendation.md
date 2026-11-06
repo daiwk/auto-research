@@ -8,6 +8,8 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking](<https://arxiv.org/abs/2611.07591>) | 2026-11-05 | [English](../../recommendation-components/2611.07591-ice/README-en.md) · [Chinese](../../recommendation-components/2611.07591-ice/README.md) |
+| [From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation](<https://arxiv.org/abs/2611.05997>) | 2026-11-04 | [English](../../recommendation-components/2611.05997-ured/README-en.md) · [Chinese](../../recommendation-components/2611.05997-ured/README.md) |
 | [SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search](<https://arxiv.org/abs/2611.04662v1>) | 2026-11-03 | [English](../../recommendation-components/2611.04662-spade-local-search/README-en.md) · [Chinese](../../recommendation-components/2611.04662-spade-local-search/README.md) |
 | [ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse](<https://arxiv.org/abs/2611.04259v1>) | 2026-11-03 | [English](../../recommendation-components/2611.04259-reusegr/README-en.md) · [Chinese](../../recommendation-components/2611.04259-reusegr/README.md) |
 | [OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer](<https://arxiv.org/abs/2611.04720v1>) | 2026-11-03 | [English](../../recommendation-components/2611.04720-onetrans-gsr/README-en.md) · [Chinese](../../recommendation-components/2611.04720-onetrans-gsr/README.md) |

@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "recommendation:ice": {
+      "questions": [
+        {
+          "id": "reach-before-conditional-click",
+          "level": "basics",
+          "question": "列表已经展示，为什么不能把条件 CTR 当成展示后点击概率？",
+          "answer": "条件 CTR 的分母只含实际曝光，未到达的位置根本没有点击机会。ICE 把达到概率乘上条件 CTR，再求列表效用。",
+          "example": "示意：两个位置条件 CTR 都是 0.4，达到概率分别为 1 和 0.25，则展示后点击概率分别是 0.4 和 0.1。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-06"
+        },
+        {
+          "id": "survival-and-detached-mask",
+          "level": "mechanism",
+          "question": "如何从深度分布得到单调曝光，点击分支为何不反传这条门控？",
+          "answer": "第 k 位曝光是所有 T≥k 的尾和，越往后累加的集合越小。点击分支把这个值当置信度使用，停止梯度避免经门控直接改写曝光分支。",
+          "example": "示意：三种深度概率为 0.2、0.3、0.5，则曝光为 1、0.8、0.5。改变点击损失时，门控本身不向这三个深度 logits 回传。",
+          "source_sections": [
+            "核心公式",
+            "数据协议、代码映射与结果边界"
+          ],
+          "added": "2026-11-06"
+        },
+        {
+          "id": "listwise-budget-not-pointwise-click",
+          "level": "comparison",
+          "question": "列表 KL 和逐位置条件点击 BCE 为什么不是重复监督？",
+          "answer": "BCE 在已曝光位置分别校准绝对点击率；KL 通过归一化分布比较相对点击分配。零点击列表的 KL 目标均匀，并不要求每个位置的条件 CTR 等于 1/L。",
+          "example": "示意：所有位置 logit 同时加 1，softmax 不变，条件点击 sigmoid 变大；所以两项 loss 对共同偏移的反应不同。",
+          "source_sections": [
+            "核心公式",
+            "数据协议、代码映射与结果边界"
+          ],
+          "added": "2026-11-06"
+        },
+        {
+          "id": "prefix-label-and-probability-saturation",
+          "level": "implementation",
+          "question": "浏览深度只有 1 到 L 时，如何处理首位未曝光、以及几乎为零的尾和？",
+          "answer": "首位未曝光不在此模型支持内，明确拒绝而不伪造标签。合法尾部用 logcumsumexp 计算曝光和未曝光的 log 概率，避免先算接近 0 的概率再取 log。",
+          "example": "示意：两位置深度 logits 为 1000 和 -1000，若实际到达位置 2，负 log 概率接近 2000，仍应有有限损失而不是把尾概率直接舍为 0。",
+          "source_sections": [
+            "核心公式",
+            "数据协议、代码映射与结果边界"
+          ],
+          "added": "2026-11-06"
+        }
+      ]
+    },
+    "recommendation:ured": {
+      "questions": [
+        {
+          "id": "discarded-score-is-not-click-label",
+          "level": "basics",
+          "question": "URED 为何回收高分未展示候选，而不是向排序器随机注入冷内容？",
+          "answer": "先使用排序器已计算的相关性信号，再按用户近期未见类目找发现机会。它没有把未展示当点击正例，也不以随意扩大曝光替代质量筛选。",
+          "example": "示意：一个评分较高的摄影视频上次因列表容量没展示；候选池可保留它，不能假定用户点击过它。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-06"
+        },
+        {
+          "id": "recency-dedup-before-novelty",
+          "level": "mechanism",
+          "question": "同一商品出现两次，高分旧记录和低分新记录如何取舍？",
+          "answer": "先按会话分数保留候选；进入用户聚合后，按时间去重并截断，再做类目发现过滤。旧的更高分不是替换新记录的理由。",
+          "example": "示意：同一个商品三天前 0.9、昨天 0.7，只要两条均进入会话池，聚合保留昨天这条；类别判断也使用这条记录。",
+          "source_sections": [
+            "核心公式",
+            "数据协议、代码映射与结果边界"
+          ],
+          "added": "2026-11-06"
+        },
+        {
+          "id": "discovery-not-global-coldness",
+          "level": "comparison",
+          "question": "近期未见类目、从未曝光的商品和全站冷商品是不是一回事？",
+          "answer": "不是。类目发现是用户在 d 天内的曝光历史；已曝光商品另有去重；全站流行度不是这两个过滤条件。随机冷注入不是 URED 的对照等价物。",
+          "example": "示意：一个全站热门摄影视频对某用户的未见摄影类目仍有发现价值，但如果该商品已向该用户曝光，商品去重仍可排除。",
+          "source_sections": [
+            "核心公式",
+            "论文离线与线上效果"
+          ],
+          "added": "2026-11-06"
+        },
+        {
+          "id": "no-future-exposure-join",
+          "level": "implementation",
+          "question": "为什么离线回放必须在截点前分别截断候选与曝光流？",
+          "answer": "未来评分会给历史请求注入当时不可得的物品，未来曝光则会错误地屏蔽当时尚未见过的类目。两条流都采用同一 as_of，且时刻等于 as_of 的事件也不读。",
+          "example": "示意：中午构建召回池，下午首次看了摄影类。下午的曝光不能把中午候选删掉；次日重建时才允许读取它。",
+          "source_sections": [
+            "核心公式",
+            "数据协议、代码映射与结果边界"
+          ],
+          "added": "2026-11-06"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "page": "docs/foundation-models/2611.05690-pipnn-ii/README.md",
+  "paper_url": "https://arxiv.org/abs/2611.05690",
+  "arxiv_id": "2611.05690",
+  "figure": "Figure 2",
+  "original_caption": "See Figure 2 in the fixed source: u8 panel transpose, signed query broadcast, and corrected VNNI scoring with top-K.",
+  "source_url": "https://arxiv.org/pdf/2611.05690v1#page=5",
+  "extraction": "PyMuPDF raster crop of the original PDF vector artwork, page 5, clip [324,309,554,499] pt, 3x, no redrawing",
+  "asset": "docs/foundation-models/2611.05690-pipnn-ii/assets/paper-figure-01.png",
+  "width": 690,
+  "height": 570,
+  "score": 0,
+  "error": "",
+  "visually_inspected": true,
+  "sha256": "42343a85d9c2f0fb22279e2831e7656531a7f3f8668465312485ceab268e6f51",
+  "source_sha256": "12e76330088466e7129c8fdb21b30efbd3f6cffadf727f540967b7c7ddabccbd",
+  "license": "CC BY 4.0"
+}

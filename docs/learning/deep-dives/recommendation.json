@@ -5,7 +5,7 @@
     "retrieval-matching": {
       "title": "召回覆盖从哪里来：用户表示、正例组织与负例难度",
       "thesis": "候选生成先决定后续排序能看见什么。YouTube DNN说明单用户向量如何进入近邻检索，Airbnb EBR把监督放回搜索—浏览—预订旅程，MIMA让同请求多正例分配给互补兴趣，MDCNS改变负例的难度与多视角监督。这四种改动分别作用于表示、标签、兴趣分工和梯度，不能用召回数变大统一解释。",
-      "updated": "2026-11-04",
+      "updated": "2026-11-06",
       "axes": [
         "召回接口：单向量还是多兴趣通道",
         "正例来自下一行为、旅程还是同请求集合",
@@ -62,6 +62,15 @@
             "核心公式",
             "代码映射"
           ]
+        },
+        {
+          "paper": "recommendation:ured",
+          "sections": [
+            "核心公式",
+            "数据协议、代码映射与结果边界"
+          ],
+          "position": "从既有排序日志回收高分未展示项，按时间建用户池，再按曝光类目筛选。",
+          "tradeoff": "只重用已经被打过分的候选，不创造语义索引里的新命中；依赖历史新鲜度和曝光记录。"
         }
       ],
       "analysis": [
@@ -90,6 +99,14 @@
             "recommendation:wesearch",
             "recommendation:mima"
           ]
+        },
+        {
+          "papers": [
+            "recommendation:ured",
+            "recommendation:wesearch"
+          ],
+          "title": "日志再利用不是新的匹配表征",
+          "body": "WeSearch 先用簇收缩检索空间，再以 OPQ 和特征打分；URED 反过来依赖既有打分，把当时没展示的高分项积累成独立通道。比较应固定召回与展示配额，另检查去重、索引新鲜度和重复曝光。"
         }
       ],
       "questions": [
@@ -123,6 +140,16 @@
             "recommendation:mima",
             "recommendation:mdcns"
           ]
+        },
+        {
+          "id": "candidate-pool-history-versus-clusters",
+          "papers": [
+            "recommendation:ured",
+            "recommendation:wesearch"
+          ],
+          "question": "URED 能找回从未进入任何历史排序候选池的文档吗？",
+          "answer": "不能，它的输入来自历史排序器。WeSearch 的检索索引可以在其可用快照中为文档产生首次候选；两个入口不互相替代。",
+          "example": "示意：刚上线的商品可进更新后的索引；在任何请求给它打分之前，它不会从 URED 日志池凭空出现。"
         }
       ],
       "reviewed_papers": [
@@ -162,7 +189,8 @@
         "recommendation:transretrieval",
         "recommendation:youtube-dnn",
         "recommendation:zorro",
-        "recommendation:wesearch"
+        "recommendation:wesearch",
+        "recommendation:ured"
       ],
       "updates": [
         {
@@ -254,6 +282,18 @@
           "source_revisions": {
             "recommendation:wesearch": "b9df98a4ba9bcd275dd5979b9457fb2370b15e4b9b01d2de83309c585075b933"
           }
+        },
+        {
+          "date": "2026-11-06",
+          "papers": [
+            "recommendation:ured",
+            "recommendation:wesearch"
+          ],
+          "source_revisions": {
+            "recommendation:ured": "37575cd0a3b06eace005d10aebe7b066b7b50f986d16f918c901280043847d1f",
+            "recommendation:wesearch": "b9df98a4ba9bcd275dd5979b9457fb2370b15e4b9b01d2de83309c585075b933"
+          },
+          "summary": "加入 URED，区分候选的日志回收与 WeSearch 的语义索引召回，记录时间截断和曝光去重边界。"
         }
       ]
     },
@@ -1629,7 +1669,7 @@
     "slates-business-value": {
       "title": "从列表边际价值到出价控制：策略权重与约束",
       "thesis": "CDM把相关性与去冗余的教师选择蒸馏给学生，SORT-Gen直接估计前缀条件下的列表边际价值，PRL-PUTS扫描多目标权重策略，Primal-Dual Decoding则在解码中根据约束松弛量更新乘子。它们分别改变列表上下文、效用模型、策略选择和约束控制，不能把多样性更高或某一目标更好当成全面胜出。 RLBP把相同的多目标治理问题带到日级PID参数选择，但其BU/CPC奖励和控制动作不能当成列表逐项效用。",
-      "updated": "2026-11-04",
+      "updated": "2026-11-06",
       "axes": [
         "价值属于单物品、已选前缀还是整套策略",
         "训练期蒸馏与推理期搜索的分工",
@@ -1696,6 +1736,15 @@
             "核心公式",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "recommendation:ice",
+          "sections": [
+            "核心公式",
+            "数据协议、代码映射与结果边界"
+          ],
+          "position": "用达到概率与条件点击给固定生成器的候选列表算联合效用，另加列表点击分布监督。",
+          "tradeoff": "深度先验适合顺序浏览，不适用于任意非前缀曝光界面；目标分布匹配不等于新策略。"
         }
       ],
       "analysis": [
@@ -1732,6 +1781,14 @@
             "recommendation:onetrans-gsr",
             "recommendation:cdm"
           ]
+        },
+        {
+          "papers": [
+            "recommendation:ice",
+            "recommendation:onetrans-gsr"
+          ],
+          "title": "区分评估器行为模型与生成策略",
+          "body": "ICE 固定生成器，在曝光先于点击的假设下改变候选序列的估值。OneTrans-GSR 改变候选序列如何生成和如何以规则、奖励训练。前者的离线对照应固定候选集合，后者不能把训练奖励分数等同真实线上收入。"
         }
       ],
       "questions": [
@@ -1786,6 +1843,16 @@
             "recommendation:onetrans-gsr",
             "recommendation:cdm"
           ]
+        },
+        {
+          "id": "fixed-evaluator-versus-slate-policy",
+          "papers": [
+            "recommendation:ice",
+            "recommendation:onetrans-gsr"
+          ],
+          "question": "ICE 和 OneTrans-GSR 都影响最终整页，为什么不能把两者都叫生成策略改进？",
+          "answer": "ICE 排同一组生成列表，改变的是评估信号；OneTrans-GSR 直接改变生成分布。对照时先对齐哪个候选池和哪个策略能变化。",
+          "example": "示意：固定候选 A/B 两页，改评估器只可能切换 A 或 B；新生成策略可以提出原来没有的 C。"
         }
       ],
       "reviewed_papers": [
@@ -1826,7 +1893,8 @@
         "recommendation:swag-bid",
         "recommendation:taiji",
         "recommendation:uame",
-        "recommendation:youtube-freshness"
+        "recommendation:youtube-freshness",
+        "recommendation:ice"
       ],
       "updates": [
         {
@@ -1932,6 +2000,18 @@
             "recommendation:onetrans-gsr": "4274257426dd3ae9815f43b7d08943474347ace3c76bd64730523517d332b06c",
             "recommendation:cdm": "884477285fff2fd44b4116d22b7b1acd5fc3c26e4b0581f580dfc31a066df185"
           }
+        },
+        {
+          "date": "2026-11-06",
+          "papers": [
+            "recommendation:ice",
+            "recommendation:onetrans-gsr"
+          ],
+          "source_revisions": {
+            "recommendation:ice": "ed61ccc8196cffb228bdf9e354fc86a91a26ad594a1f36ae95445fdeab74e846",
+            "recommendation:onetrans-gsr": "4274257426dd3ae9815f43b7d08943474347ace3c76bd64730523517d332b06c"
+          },
+          "summary": "加入 ICE，区分固定生成器下的曝光条件估值与 OneTrans-GSR 生成策略；L1 公式检查不与线上提升混算。"
         }
       ]
     },
