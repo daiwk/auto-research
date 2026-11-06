@@ -1,0 +1,17 @@
+{
+  "paper_id": "2611.04958v1",
+  "figure": "2",
+  "source_page": "https://arxiv.org/html/2611.04958v1#S2.F2",
+  "source_url": "https://arxiv.org/html/2611.04958v1/selective_disruption_redrawn.svg",
+  "image": "paper-figure-01.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "56a8e7a584e258067123a9c87cbeb4b3dcd1a3d09186ee9e62b1348b301001cf",
+  "original_asset": "source-figure-02.svg",
+  "original_sha256": "6b7778f728885130f093a5955e3ecc4e9066dba9e76312604caf72cf1b5ef49b",
+  "width": 1362,
+  "height": 515,
+  "license": "arXiv.org perpetual non-exclusive license; figure copyright retained by the authors",
+  "transformation": "rasterized the official author SVG at 3x with PyMuPDF; no crop or redesign; original SVG retained",
+  "visual_review": "2026-11-04目视核对作者Figure2：左侧student prefix distribution，右侧相同T(x)+intact reference c的teacher supervision；公式、两panel边框与末行说明完整可读，未重画科学内容",
+  "checked_on": "2026-11-04"
+}

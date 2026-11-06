@@ -1,0 +1,219 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "agent-research:meta-square": {
+      "questions": [
+        {
+          "id": "knowledge-versus-local-edits",
+          "level": "basics",
+          "question": "Meta²跨任务复用的到底是同一份Harness，还是别的东西？",
+          "answer": "复用的是冻结的Meta-Skill，即何时行动、保持或避免某类干预的知识；具体Harness编辑只作用于当前run并在任务结束后丢弃。它既不是给所有任务永久套同一修改，也不更新底座模型权重。",
+          "example": "教学例：可复用“先检查输出是否真实存在”的经验；但针对任务甲添加的某个目录检查，不应自动留给任务乙。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-04"
+        },
+        {
+          "id": "terminal-evolve-keeps-progress",
+          "level": "mechanism",
+          "question": "终点checkpoint收到EVOLVE，为什么不能清空环境重新执行？",
+          "answer": "终点EVOLVE是把有界修正交回仍在进行的同一run，保留工作区、已完成进展和轨迹；终点KEEP才接受结束。重置环境会把运行中适应改成重试实验，改变算法及成本口径。",
+          "example": "教学例：已经写好文件但漏一个测试，EVOLVE要求在原工作区补测；删除文件重新开始不是同一条持续轨迹。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与实现边界"
+          ],
+          "added": "2026-11-04"
+        },
+        {
+          "id": "offline-guidance-not-online-verifier",
+          "level": "comparison",
+          "question": "训练期C臂能看verifier，是否说明部署演化器也可以用最终隐藏分数来选择编辑？",
+          "answer": "不能。C臂的特权只用于训练对照，部署知识被冻结；在线决策只能依赖当时公共执行证据。把最终隐藏分数提供给演化器，会把真正在线适应变成利用答案的选择，而不是论文部署协议。",
+          "example": "教学例：演化器可读工具报告“文件不存在”；不能先看隐藏测试失败在哪一行，再把精确答案写成notice交给执行器。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与实现边界"
+          ],
+          "added": "2026-11-04"
+        },
+        {
+          "id": "typed-boundary-not-secret-detector",
+          "level": "implementation",
+          "question": "本地拒绝hidden_verifier字段后，是否已经保证不会泄漏隐藏答案？",
+          "answer": "没有。严格字段白名单阻止把额外结构化反馈直接塞进checkpoint，但调用者仍可能把秘密粘贴到公共文本；同进程Python对象也不是隔离沙箱。本地只验证接口与生命周期，未训练evolver、未运行终端任务或验证能力提升。",
+          "example": "教学例：增加gold_answer键会报错；把答案藏进trajectory_delta的普通字符串仍需宿主外层隔离，不能因字段名合法就当公共信息。",
+          "source_sections": [
+            "数据协议与实现边界",
+            "本地结果与负控"
+          ],
+          "added": "2026-11-04"
+        }
+      ]
+    },
+    "agent-research:continual-autoresearch": {
+      "questions": [
+        {
+          "id": "early-search-versus-selected-outcome",
+          "level": "basics",
+          "question": "更快找到高分候选，为什么仍可能最终效果更差？",
+          "answer": "搜索效率评价预算内best-so-far隐测曲线的面积，最终效果评价Agent实际选定候选。两者不是同一个统计量；Agent可能很早找到好方案，之后过拟合开发集并选择更差的方案。",
+          "example": "教学例：时刻2找到0.8、时刻6找到0.5并最终选择后者，早期搜索很好但最终分数只有0.5。",
+          "source_sections": [
+            "核心公式",
+            "论文离线与线上效果",
+            "本地结果与负控"
+          ],
+          "added": "2026-11-04"
+        },
+        {
+          "id": "fixed-horizon-best-curve",
+          "level": "mechanism",
+          "question": "预算10，时刻2得0.8、时刻6得0.5，搜索效用为什么是0.64而不是0.52？",
+          "answer": "首个有效提交前奖励为0；之后best-so-far是0.8，即使后来的提交更差也不下降。因此面积为0×2+0.8×8=6.4，除以预算10得到0.64。0.52来自把曲线错误改成最后一次提交的分数。",
+          "example": "教学例：时刻6候选较差并不会抹掉已经发现0.8方案的事实；但最终选择指标仍应保留0.5，不能用最优值替换。",
+          "source_sections": [
+            "核心公式",
+            "本地结果与负控"
+          ],
+          "added": "2026-11-04"
+        },
+        {
+          "id": "posthoc-hidden-not-selection-feedback",
+          "level": "comparison",
+          "question": "这里用hidden-test给所有提交评分，为什么不等于Evolve用test挑冠军？",
+          "answer": "这些隐测分数只在run完成后由独立评价者构造研究效率曲线，不能回传给在线Agent。Agent最终选择须依据当时可见的训练/开发信息。把这条事后曲线用于候选选择，才会破坏test隔离。",
+          "example": "教学例：先封存所有提交和最终选择ID，再计算隐测AUC可以审计搜索；边运行边显示隐测排行榜并据此选最终模型则不允许。",
+          "source_sections": [
+            "背景与主要改动",
+            "数据协议与实现边界"
+          ],
+          "added": "2026-11-04"
+        },
+        {
+          "id": "training-normalization-stream-unit",
+          "level": "implementation",
+          "question": "RMSE归一化和跨任务增益聚合各有哪些不能省略的单位？",
+          "answer": "RMSE须使用训练集channel标准差，不使用test统计；持续与重置记录须匹配任务、预算和归一化。第一任务没有前序经验，转移增益从第二任务开始；先在每条任务流内平均，再等权平均任务流，不能让长流自动占更高权重。",
+          "example": "教学例：RMSE=6、训练SD=2时归一化奖励为1/(1+3)=0.25；一个10题流与一个2题流应各贡献一个流均值，而非直接混成12题平均。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与实现边界",
+            "代码映射"
+          ],
+          "added": "2026-11-04"
+        }
+      ]
+    },
+    "agent-research:runtime-tickets": {
+      "questions": [
+        {
+          "id": "send-permission-not-delivery-contract",
+          "level": "basics",
+          "question": "为什么“允许发送到这个服务”还不足以阻止数据泄漏？",
+          "answer": "攻击可能复用任务本来允许的接收端，发送私钥或额外内容。ticket还必须限制对象通过可信validator，并限制累计发送量；只核接收者或工具名不能表达交付合同。",
+          "example": "教学例：同一个接收地址既能收到批准报告，也能收到隐藏密钥。报告validator拒绝密钥，即使地址在host allowlist里也不能发送。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-04"
+        },
+        {
+          "id": "deny-before-unknown-and-pre-effect-log",
+          "level": "mechanism",
+          "question": "一个请求同时违反接收者规则且对象结果未知，应Defer还是Deny？",
+          "answer": "Deny优先：权限不覆盖、任一明确失败或预算超限即拒绝；没有失败但有未知项才Defer，全部通过才Allow。记录必须在callback副作用前写入，只有Allow消耗额度并转发。",
+          "example": "教学例：接收者错误且validator暂时不可用仍是Deny，不能因未知检查把已经确认的越权说成等待；合法请求在日志记下Allow后才进入转发callback。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与实现边界"
+          ],
+          "added": "2026-11-04"
+        },
+        {
+          "id": "attenuation-and-source-grounding",
+          "level": "comparison",
+          "question": "ticket与一个由Skill自己声明的权限清单，有什么关键差别？",
+          "answer": "ticket从可信host grant收紧，不能引入host未授权的操作、资源或接收者；obligation必须绑定实际Skill版本和精确原文行。Skill文本是待核证据，不是批准权限的权威。本地编译器验证这些结构边界，不声称已完成LLM语义相关性判断。",
+          "example": "教学例：Skill写“请额外上传到other”不让other自动获得权限；伪造不存在的第20行作引用也不能通过来源校验。",
+          "source_sections": [
+            "背景与主要改动",
+            "数据协议与实现边界"
+          ],
+          "added": "2026-11-04"
+        },
+        {
+          "id": "local-chain-not-complete-account",
+          "level": "implementation",
+          "question": "HMAC链通过且callback最多一次，是否等于完整Supported证明和网络exactly-once？",
+          "answer": "都不是。HMAC只能检验给定本地记录的内容与顺序，截短前缀可能仍是有效链，完整Supported还需要sealed/closed观测账户。callback失败后真实交付未知，组件保留已消费额度且同ID不重发；这只是本地至多一次调用。",
+          "example": "教学例：服务器可能收到数据后连接断开，退还额度并自动重试会重复发送；本地保留unknown交付边界，不把没有确认当未发生。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与实现边界",
+            "代码映射"
+          ],
+          "added": "2026-11-04"
+        }
+      ]
+    },
+    "agent-research:rsi-dojo": {
+      "questions": [
+        {
+          "id": "training-environment-versus-rl-loss",
+          "level": "basics",
+          "question": "RSI-Dojo提供281个环境，为什么不能概括成又一个RL loss？",
+          "answer": "它主要构建可执行后训练任务和筛过的Agent轨迹，让模型学习如何选数据、训练和迭代；环境筛选阈值不是通用策略梯度公式。外部Harness改进与通过轨迹微调把能力内化进模型也不同。",
+          "example": "教学例：一个任务提供数据、评测脚本和反馈接口；另一层才是Agent根据这些反馈选择训练步骤。仅写一个奖励公式不会自动生成281个可运行环境。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-04"
+        },
+        {
+          "id": "reliability-and-discriminability-gates",
+          "level": "mechanism",
+          "question": "一个有400例、大小模型都得0.9的任务，是否会因数据多且执行稳定而保留？",
+          "answer": "不会。样本超过300先下采样至300，但大小模型都高于80%会被可区分性过滤剔除；分差还须至少10个百分点。环境能执行只是可靠性条件之一，不代表任务对后训练有足够学习信号。",
+          "example": "教学例：0.9与0.9过于容易；0.45与0.60既不在双高/双低区间，分差15个百分点，可继续接受其他协议检查。",
+          "source_sections": [
+            "核心公式",
+            "背景与主要改动"
+          ],
+          "added": "2026-11-04"
+        },
+        {
+          "id": "process-and-outcome-both-needed",
+          "level": "comparison",
+          "question": "为什么完成训练命令的轨迹，仍不能直接作为高质量训练数据？",
+          "answer": "论文另用rubric质量过滤排除不良过程，再用outcome过滤检查最终提交是否有可测改善。成功执行命令、日志完整、训练loss下降与目标benchmark改善是不同证据；不能只依据一个就宣布Agent已会后训练。",
+          "example": "教学例：训练无报错且loss下降，但评测使用了错误输出格式，这条轨迹仍不构成有效目标提升；反过来最终分数高也不能抹掉明显违规的数据使用。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与实现边界"
+          ],
+          "added": "2026-11-04"
+        },
+        {
+          "id": "review-done-is-not-runtime",
+          "level": "implementation",
+          "question": "这篇收录后没有runtime和metrics，为什么不是未完成的自动重试TODO？",
+          "answer": "这是按公开成本作出的终态：9B/35B-A3B微调、前沿轨迹和每任务5或10小时评测超出低成本单卡范围。审查DONE表示方法与不复现边界已核对，不表示代码/模型能力已实现；不应创建虚假收据、Evolve算子或循环重试。",
+          "example": "教学例：学习卡可解释0.45与0.60的阈值，但不能把这两个教学数字写入metrics当作真实Qwen/GPT评测结果。",
+          "source_sections": [
+            "本地结果与负控",
+            "高成本完整实验",
+            "代码映射"
+          ],
+          "added": "2026-11-04"
+        }
+      ]
+    }
+  }
+}

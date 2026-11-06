@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-04-new-bulletin-components",
+  "checked_on": "2026-11-05",
+  "priority_organizations": ["Google", "Meta"],
+  "selected_verified_priority_papers": [],
+  "official_directory_coverage": {
+    "Google": {"attempted_pages": 30, "retrieved_pages": 0, "delta_known": false, "new_papers": null},
+    "Meta": {"attempted_pages": 6, "retrieved_pages": 0, "delta_known": false, "new_papers": null},
+    "Google DeepMind": {"attempted_pages": 9, "retrieved_pages": 9, "delta_known": false, "all_identity_reviews_complete": false}
+  },
+  "supplementary_queries": [
+    {
+      "source": "https://api.github.com/orgs/google-research/repos?sort=updated&per_page=100",
+      "bounded_filter": "returned first 100 repositories sorted by update; retain created_at >= 2026-11-02T00:00:00Z",
+      "checked_on": "2026-11-05",
+      "status": "retrieved",
+      "matching_repositories": [],
+      "proves_no_new_papers": false
+    },
+    {
+      "source": "https://api.github.com/orgs/facebookresearch/repos?sort=updated&per_page=100",
+      "bounded_filter": "returned first 100 repositories sorted by update; retain created_at >= 2026-11-02T00:00:00Z",
+      "checked_on": "2026-11-05",
+      "status": "retrieved",
+      "matching_repositories": [],
+      "proves_no_new_papers": false
+    }
+  ],
+  "decisions": [
+    {"key": "meta-square", "decision": "method name is not organization evidence; no Meta company affiliation claimed"},
+    {"title": "ERA MCP update", "decision": "November blog/software update of an older May paper; not counted as a newly published paper"}
+  ],
+  "all_sources_exhaustive": false,
+  "limitations": [
+    "Directory timeouts mean unknown deltas, not zero qualifying papers.",
+    "Bounded official repository and primary-source searches supplement but do not replace missing institution directory coverage.",
+    "Selected method/resource reviews do not claim every appendix, reference or all bulletin identities reviewed."
+  ]
+}

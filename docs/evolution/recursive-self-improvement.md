@@ -28,6 +28,12 @@ flowchart LR
 
 以下按“已实现的局部机制”和“待复核候选”区分，不把外部论文直接标为本地复现。
 
+本次更新：2026-11-05。以下三篇均于 2026-11-04 公告，各自 v1 日期仍以论文详情为准。Meta² 是任务内编辑与跨任务指导的边界对照，Continual AutoResearch 是持续经验的评测协议；纳入专题不意味着三者都已实现完整 RSI。
+
+- [Meta²](../agent-research/2611.05139-meta-square/README.md)：冻结离线 Meta-Skill，在同一环境与轨迹的 checkpoint 上作有界 KEEP/EVOLVE，具体编辑只在当前任务生效，跨任务保留演化指导而非最终 harness。本地仅实现 CPU 状态生命周期与反馈隔离合同，没有 LLM 演化器或 Meta-Skill 学习；完整多模型/API 实验高成本不复现（审查 DONE）。Meta² 不是 Meta 公司论文。
+- [Continual AutoResearch](../agent-research/2611.05108-continual-autoresearch/README.md)：配对持续、重置会话和工作区，分别衡量首解、预算内 best-so-far 曲线与实际最终选择，避免把更快找到好候选写成最终效果提升。本地仅实现关闭运行后的 CPU 离线评分与配对协议，不执行自主研究，也不向被评 Agent 提供隐藏评分；完整多任务、多模型研究矩阵高成本不复现（审查 DONE）。
+- [RSI-Dojo](../agent-research/2611.03698-rsi-dojo/README.md)：筛选可执行训练环境与过程、结果均合格的轨迹，微调自动后训练 Agent，把研究过程内化进模型权重。9B/35B-A3B 模型及每任务 5 至 10 小时的完整矩阵高成本不复现（审查 DONE）；本地仅资料收录，无运行时、训练结果或能力指标，不用环境注册或阈值过滤器冒充已完成训练。
+
 - [DiscernMem](../agent-research/2610.36652-discernmem/README.md)：配对重放区分范围与内容问题，修复同时守住父记忆和无记忆基线，新版本重置旧效果证据；本地仅CPU测量/版本合同，不运行LLM修复或真实记忆环境。
 - [RuHarness](../agent-research/2610.36826-ruharness/README.md)：让rubric与harness协同进化，以六格联合后验的保守utility分位选准则，再通过独立validation决定更新；本地只实现统计frontier与门槛，没有完整自进化Agent。
 - [Google Sleep](../foundation-models/2606.03979-sleep-lti/README.md)：离线巩固将快记忆迁移到扩展慢模块；本地只实现LTI奖励，不生成梦境、不训练LoRA，也不把奖励核说成已实现递归学习。

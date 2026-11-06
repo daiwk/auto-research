@@ -1,0 +1,65 @@
+{
+  "domain": "recommendation",
+  "key": "reusegr",
+  "title": "ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse",
+  "paper_url": "https://arxiv.org/abs/2611.04259v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.04259v1",
+  "reviewed_version": "v1",
+  "detail_path": "recommendation-components/2611.04259-reusegr/README.md",
+  "topic": [
+    "生成式召回",
+    "离线前缀复用与在线个性化"
+  ],
+  "browse_company": "Alibaba",
+  "browse_topic": [
+    "生成、排序与冷启动",
+    "工程与推理效率"
+  ],
+  "first_author": "Xujing Wang",
+  "first_author_affiliation": "Xidian University",
+  "published": "2026-11-03",
+  "published_at": "2026-11-03T03:51:38Z",
+  "announced_on": "2026-11-04",
+  "code": null,
+  "code_status": "固定v1正文与arXiv链接未发现作者发布的ReuseGR源码；本文为西安电子科技大学与Alibaba AIDC合作",
+  "code_license": "作者源码未发现；论文CC BY 4.0；本地按公式独立实现",
+  "upstream_revision": null,
+  "adapter": null,
+  "priority": "P0",
+  "intake_class": "newly_announced_first_collection",
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "local_operator": "auto_research.reproductions.reusegr_components.label_reuse_depth",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.reproductions.reusegr_components import diagnostic; print(diagnostic(42))'",
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "online_ab": [
+    {
+      "product": "industrial search advertising",
+      "metric": "CTR",
+      "lift_percent": 0.93,
+      "traffic": "14-day user-level randomized production A/B, 10% traffic per arm, 0.5B E2E control; other retrieval/ranking/bidding fixed",
+      "source_url": "https://arxiv.org/html/2611.04259v1",
+      "source_location": "Section5.7 and AppendixD online statistics; RPM+1.05%, orders/request+0.78%, CVR-0.21%; complete-system paper results, not local evidence"
+    }
+  ],
+  "cost_assessment": {
+    "source_url": "https://arxiv.org/html/2611.04259v1",
+    "source_location": "Section5.1/5.7 and AppendixA/C",
+    "available_resource": "one NVIDIA A100 or A30, or local Mac",
+    "model_scale": "Qwen2.5-7B-Instruct planner and 0.5B-Instruct scorer/E2E fallback; LoRA64, PathKD then OPD/GRPO branch policy",
+    "data_scale": "about2M private query-item rows and3.38M catalog items; 947519 Fit rows, eight epochs, 14-day production A/B",
+    "estimated_cost_basis": "private corpus/serving unavailable and repeated model training/benchmark matrix exceeds bounded component budget; paper uses oneA100 for latency measurement, not proof that complete training is cheap",
+    "decision": "完整实验成本过高，不复现（审查 DONE）；仅CPU整行LOO深度标签、Wilson准则、缓存路由与复合分数，不训练任何模型"
+  },
+  "summary": "7B离线模型按query规划SID前缀，0.5B在当前用户历史下补全后缀；ReuseCut以历史覆盖选择复用深度，BudgetCut再学习集合相关的分支准入。本地只核深度标签/冷miss与准备好depth0的区别及分数接口，不把固定规则冒充学习的BudgetCut。"
+}

@@ -7,7 +7,7 @@ hide:
 
 # 长上下文不是一条轴：位置、读取与状态压缩
 
-[基础模型](../index.md) · 更新 2026-10-30 · 34 篇主题资料 / 8 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-04 · 36 篇主题资料 / 10 篇重点对照
 
 先问历史以什么形式存在，再问当前 token 怎样读它。RoPE 改变相对位置关系，Mamba 把历史写入递归状态，NSA 在多条读取路径间分工，OpenAttention 为未精读部分保留代理，TTR 则为当前输入求一个压缩表示。这些方法不能只按“支持多长”排成一列。 MERLIN在多个压缩状态之外保留routing key矩统计，改变段间读取权重，而不替换每段内部的递归写入。
 
@@ -33,6 +33,8 @@ hide:
 | [Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training](../../../foundation-models/2610.36794-select-ttt/README.md) · [原始来源](https://arxiv.org/abs/2610.36794v1)<br>章节：背景与主要改动、核心公式 | 对query token的低CE位置top-k聚合，T×softmax分配并clip写入倍率。 | 必须传入真实冻结head/RMSNorm与NTP对齐特征；不含LLM或分布式内核。 |
 | [Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories](../../../foundation-models/2606.03979-sleep-lti/README.md) · [原始来源](https://arxiv.org/abs/2606.03979v2)<br>章节：背景与主要改动、核心公式 | 把外部语义二元奖励与阈值化token编辑相似度混合。 | 只做LTI奖励，不实现CMS、梦境、知识播种或LoRA，完整Sleep高成本不复现。 |
 | [Multi-State Linear Attention with Generalized Second-Order Routing](../../../foundation-models/2610.37645-merlin/README.md) · [原始来源](https://arxiv.org/abs/2610.37645v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 保存每段routing key均值与原始二阶矩，恢复query对齐方差；两路分别softmax再按门控混合外部state readouts。 | 增加分段状态和矩存储，不精确重建逐token softmax；当前未完成段需外部递归处理，完整中期训练不复现。 |
+| [Coarse Semantic Blocks for Efficient Training-Free Sparse Attention](../../../foundation-models/2611.04313-semantic-block-sparse-attention/README.md) · [原始来源](https://arxiv.org/abs/2611.04313)<br>章节：背景与主要改动、核心公式、成本判断与复现边界 | 按逐prompt、逐KV head的球面key聚类形成非连续语义块；各GQA query head独立softmax后求和，惩罚可见块大小，整块选择后对原始QKV做注意力。 | 保留原始KV而非把centroid当value；整块预算可超额。全prompt拟合centroid使因果支持不等于严格流式因果不变性。本地仅L1索引与注意力参考，不含论文融合kernel或完整长文能力实验。 |
+| [Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training](../../../foundation-models/2611.04327-anchor-kv/README.md) · [原始来源](https://arxiv.org/abs/2611.04327)<br>章节：背景与主要改动、核心公式、成本判断与复现边界 | 一组层共享recurrent KV state，以各reader的identity初始化线性read-map调整坐标基，再由输入相关sigmoid gate与局部SWA输出融合。 | 共享内容不代表共享坐标；完整训练仍需真实LaCT/Muon内层writer，且interior TTT只在部署时移除。本地接外部状态，只验证跨层读映射、gate和状态版本，不能称完整TTT或检索能力复现。 |
 
 </div>
 
@@ -61,6 +63,12 @@ Select-TTT根据当前query的token概率质量调整上下文chunk写入fast we
 Mamba的选择性递推决定历史如何进入单个状态；MERLIN假设已有多个分段状态及其readout，再决定当前query该偏向哪个段。相同key均值可以掩盖一段内少数强匹配项，原始二阶矩使query能恢复对齐方差；但这只是聚合线索，不能把丢在段内压缩中的信息精确找回。Eq9还要求均值与方差各自归一化再混合，先混logits后softmax是另一个算法。等长段和因果可见性也都是接口前提。
 
 对照来源：[merlin](../../../foundation-models/2610.37645-merlin/README.md) · [mamba](../../../reproductions/2312.00752-mamba/README.md)
+
+### 保留原始历史与共享压缩状态，是两条不同读取路线
+
+NSA用概览、选中块和滑窗保留不同细节路径；CSB不重新训练模型，而是把原始KV按语义重分块后整块读取。Anchor则让多层共享已经压缩的recurrent state，利用各层read-map协调坐标基，再门控融合局部输出。CSB的centroid负责选择，不代替被读value；Anchor的共享状态仍依赖真实writer，外部注入一个矩阵不等于完成TTT。另须分开因果支持与索引构建：CSB虽然mask未来位置，整prompt聚类仍可能让未来key改变早期路由，不能据此声称严格流式因果语言模型。两项本地L1组件都不提供完整模型能力、端到端加速或Evolve晋级证据。
+
+对照来源：[native-sparse-attention](../../../reproductions/2502.11089-native-sparse-attention/README.md) · [semantic-block-sparse-attention](../../../foundation-models/2611.04313-semantic-block-sparse-attention/README.md) · [anchor-kv](../../../foundation-models/2611.04327-anchor-kv/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -116,9 +124,23 @@ Mamba的选择性递推决定历史如何进入单个状态；MERLIN假设已有
 
     对照来源：[merlin](../../../foundation-models/2610.37645-merlin/README.md) · [mamba](../../../reproductions/2312.00752-mamba/README.md)
 
+### CSB只选历史位置、Anchor只共享一份state，为什么两者都不能由一个causal mask就证明完整长上下文能力？ {#cross-nov04b-routing-versus-shared-state}
+
+??? note "展开答案与例子"
+
+    **答案：** CSB对原始QKV的支持集屏蔽未来，但其全prompt聚类可能让未来key影响centroid与早期选择；mask没有消除建索引的信息依赖。Anchor的read-map和gate只决定怎样读外部共享state，记忆内容是否正确还取决于真实TTT writer和训练。本地分别验证选择/注意力以及共享读出的L1合同，既不证明严格流式因果不变性，也不证明长距离检索能力。
+
+    **教学例子：** 教学例：在末尾加一批新key后重做聚类，早期选块可能变化；给Anchor手工填入一份矩阵后reader输出正确，也不能说明模型曾学会把订单号写进去。
+
+    对照来源：[semantic-block-sparse-attention](../../../foundation-models/2611.04313-semantic-block-sparse-attention/README.md) · [anchor-kv](../../../foundation-models/2611.04327-anchor-kv/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-04** · 增加CSB与Anchor，比较原始KV的语义选块与共享recurrent state的坐标变换读出；明确全prompt聚类的非流式因果边界、外部writer不等于完整TTT，以及两项仅L1组件、完整高成本实验不复现。
+
+涉及：[semantic-block-sparse-attention](../../../foundation-models/2611.04313-semantic-block-sparse-attention/README.md) · [anchor-kv](../../../foundation-models/2611.04327-anchor-kv/README.md)
 
 **2026-10-30** · 精读MERLIN Eq7-9，将raw二阶矩、对齐方差和两softmax门控聚合与Mamba递归写入分开；注明因果已完成段、外部当前段以及非精确attention边界。
 
@@ -132,7 +154,7 @@ Mamba的选择性递推决定历史如何进入单个状态；MERLIN假设已有
 
 覆盖 31 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 34 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 36 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -170,6 +192,8 @@ Mamba的选择性递推决定历史如何进入单个状态；MERLIN假设已有
 - [Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training](../../../foundation-models/2610.36794-select-ttt/README.md)
 - [Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories](../../../foundation-models/2606.03979-sleep-lti/README.md)
 - [Multi-State Linear Attention with Generalized Second-Order Routing](../../../foundation-models/2610.37645-merlin/README.md)
+- [Coarse Semantic Blocks for Efficient Training-Free Sparse Attention](../../../foundation-models/2611.04313-semantic-block-sparse-attention/README.md)
+- [Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training](../../../foundation-models/2611.04327-anchor-kv/README.md)
 
 </details>
 

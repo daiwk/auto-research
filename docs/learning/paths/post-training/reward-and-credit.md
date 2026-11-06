@@ -7,7 +7,7 @@ hide:
 
 # 奖励与信用：正确结果该奖励哪些步骤
 
-[LLM 后训练](index.md) / 148 个问题 · 37 篇论文
+[LLM 后训练](index.md) / 152 个问题 · 38 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">148 个问题 · 37 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">152 个问题 · 38 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:dars-density" data-paper-title="Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling LLM 后训练 National University of Singapore 2026-11-03 期望奖励最大化容易持续强化已密集采样的结果。DARS 在同一条件输入的 rollout 组内估计结果表示密度，以替换原奖励，再执行常规 GRPO 组优势标准化；不引入 density 网络或替换 policy objective。结果表示、任务奖励与条件分组不可互相替代。依据固定 v1 §3、§5.3。 相对现有单卡资源成本过高，不复现（审查 DONE）。density_scaled_advantages 接收 [...,G,D] outcome 与 [...,G] 非负 reward，逐组计算完整 Gaussian KDE、缩放和标准化。遵循 §3.1 的非负奖励域，负 reward 显式拒绝，不把有符号扩展冒充奖励比例采样。结果表示与 reward 均 stop-gradient，返回优势供外部原有 GRPO 目标使用，不在本组件里重定义 PPO loss。  奖励与信用分配 组内结果密度奖励缩放 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 DARS 为什么在结果表示空间修正奖励，而不只增加动作熵？ 动作随机不代表终局结果覆盖多种模式。不同改写可能都生成相似图像；DARS按同一prompt下结果表示的局部密度降低拥挤区域的相对奖励，干预的是终局覆盖，不是简单要求每步动作更随机。 教学例：10种不同措辞都产生同一夕阳构图，prompt词汇多样但图像模式仍塌缩。按图像embedding的density处理可以识别这种拥挤。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<span id="paper-post-training-dars-density-18c61412" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-7bc30bb50cef9df3">DARS 为什么在结果表示空间修正奖励，而不只增加动作熵？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Adars-density">Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>动作随机不代表终局结果覆盖多种模式。不同改写可能都生成相似图像；DARS按同一prompt下结果表示的局部密度降低拥挤区域的相对奖励，干预的是终局覆盖，不是简单要求每步动作更随机。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：10种不同措辞都产生同一夕阳构图，prompt词汇多样但图像模式仍塌缩。按图像embedding的density处理可以识别这种拥挤。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04792">原论文</a> · <a href="../../../../post-training/2611.04792-dars/">实现解读</a> · <a href="#qa-7bc30bb50cef9df3">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:dars-density" data-paper-title="Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling LLM 后训练 National University of Singapore 2026-11-03 期望奖励最大化容易持续强化已密集采样的结果。DARS 在同一条件输入的 rollout 组内估计结果表示密度，以替换原奖励，再执行常规 GRPO 组优势标准化；不引入 density 网络或替换 policy objective。结果表示、任务奖励与条件分组不可互相替代。依据固定 v1 §3、§5.3。 相对现有单卡资源成本过高，不复现（审查 DONE）。density_scaled_advantages 接收 [...,G,D] outcome 与 [...,G] 非负 reward，逐组计算完整 Gaussian KDE、缩放和标准化。遵循 §3.1 的非负奖励域，负 reward 显式拒绝，不把有符号扩展冒充奖励比例采样。结果表示与 reward 均 stop-gradient，返回优势供外部原有 GRPO 目标使用，不在本组件里重定义 PPO loss。  奖励与信用分配 组内结果密度奖励缩放 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 Gaussian KDE 为什么必须保留 self 项，窄 bandwidth 时重复点又怎样？ 公式对组内所有j求和，包含自己贡献1，保证density至少1。窄带宽只会消除不同位置间的贡献；重复点仍互相贡献1，所以density趋向该位置的重复数。去掉self或一律设rho=1都会改变奖励。 教学例：位置(0,0,100)、h=.001时density是(2,2,1)，奖励全1缩放后为(.5,.5,1)。窄带宽没有把两个重合点变成互相不可见。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-4ac0f25bbc00d4e8">Gaussian KDE 为什么必须保留 self 项，窄 bandwidth 时重复点又怎样？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Adars-density">Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>公式对组内所有j求和，包含自己贡献1，保证density至少1。窄带宽只会消除不同位置间的贡献；重复点仍互相贡献1，所以density趋向该位置的重复数。去掉self或一律设rho=1都会改变奖励。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：位置(0,0,100)、h=.001时density是(2,2,1)，奖励全1缩放后为(.5,.5,1)。窄带宽没有把两个重合点变成互相不可见。</p>
+<p class="ar-learning-sources">依据：核心公式、检查与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04792">原论文</a> · <a href="../../../../post-training/2611.04792-dars/">实现解读</a> · <a href="#qa-4ac0f25bbc00d4e8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:dars-density" data-paper-title="Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling LLM 后训练 National University of Singapore 2026-11-03 期望奖励最大化容易持续强化已密集采样的结果。DARS 在同一条件输入的 rollout 组内估计结果表示密度，以替换原奖励，再执行常规 GRPO 组优势标准化；不引入 density 网络或替换 policy objective。结果表示、任务奖励与条件分组不可互相替代。依据固定 v1 §3、§5.3。 相对现有单卡资源成本过高，不复现（审查 DONE）。density_scaled_advantages 接收 [...,G,D] outcome 与 [...,G] 非负 reward，逐组计算完整 Gaussian KDE、缩放和标准化。遵循 §3.1 的非负奖励域，负 reward 显式拒绝，不把有符号扩展冒充奖励比例采样。结果表示与 reward 均 stop-gradient，返回优势供外部原有 GRPO 目标使用，不在本组件里重定义 PPO loss。  奖励与信用分配 组内结果密度奖励缩放 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 大 bandwidth 什么时候退化到 GRPO，又为什么仍要写明标准差约定？ 当所有density趋向相同G时，共同奖励缩放会在同一标准差约定下消去，优势恢复普通组标准化。总体与样本标准差会带来不同优势尺度；原文没有明确约定，本地必须显式声明，而不是把数值差异说成算法收益。 教学例：G=3时，sample std比population std大sqrt(3/2)，优势相应乘sqrt(2/3)；这只是约定差异，不代表更少塌缩。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-82b02e5f4fdd79fe">大 bandwidth 什么时候退化到 GRPO，又为什么仍要写明标准差约定？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Adars-density">Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>当所有density趋向相同G时，共同奖励缩放会在同一标准差约定下消去，优势恢复普通组标准化。总体与样本标准差会带来不同优势尺度；原文没有明确约定，本地必须显式声明，而不是把数值差异说成算法收益。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：G=3时，sample std比population std大sqrt(3/2)，优势相应乘sqrt(2/3)；这只是约定差异，不代表更少塌缩。</p>
+<p class="ar-learning-sources">依据：核心公式、检查与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04792">原论文</a> · <a href="../../../../post-training/2611.04792-dars/">实现解读</a> · <a href="#qa-82b02e5f4fdd79fe">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:dars-density" data-paper-title="Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling LLM 后训练 National University of Singapore 2026-11-03 期望奖励最大化容易持续强化已密集采样的结果。DARS 在同一条件输入的 rollout 组内估计结果表示密度，以替换原奖励，再执行常规 GRPO 组优势标准化；不引入 density 网络或替换 policy objective。结果表示、任务奖励与条件分组不可互相替代。依据固定 v1 §3、§5.3。 相对现有单卡资源成本过高，不复现（审查 DONE）。density_scaled_advantages 接收 [...,G,D] outcome 与 [...,G] 非负 reward，逐组计算完整 Gaussian KDE、缩放和标准化。遵循 §3.1 的非负奖励域，负 reward 显式拒绝，不把有符号扩展冒充奖励比例采样。结果表示与 reward 均 stop-gradient，返回优势供外部原有 GRPO 目标使用，不在本组件里重定义 PPO loss。  奖励与信用分配 组内结果密度奖励缩放 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 为何 density 不能跨 prompt 混算，outcome/reward 又需要 stop-gradient？ DARS估计同条件rollout组内的结果拥挤度，跨prompt混合会把不同条件的常见结果互相压制。该模块只加工policy-gradient的奖励信号，不通过冻结图像encoder或reward反传；常数组零方差须显式返回零优势或报错，不暗加epsilon掩盖。 教学例：猫prompt和汽车prompt各有一张相似背景图，不应因为背景接近就互相降低reward。冻结feature即使传入requires_grad=True，也不能从优势计算收到梯度。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-d7e97293505334a0">为何 density 不能跨 prompt 混算，outcome/reward 又需要 stop-gradient？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Adars-density">Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>DARS估计同条件rollout组内的结果拥挤度，跨prompt混合会把不同条件的常见结果互相压制。该模块只加工policy-gradient的奖励信号，不通过冻结图像encoder或reward反传；常数组零方差须显式返回零优势或报错，不暗加epsilon掩盖。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：猫prompt和汽车prompt各有一张相似背景图，不应因为背景接近就互相降低reward。冻结feature即使传入requires_grad=True，也不能从优势计算收到梯度。</p>
+<p class="ar-learning-sources">依据：实现与运行、检查与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04792">原论文</a> · <a href="../../../../post-training/2611.04792-dars/">实现解读</a> · <a href="#qa-d7e97293505334a0">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:concur" data-paper-title="CONCUR: Concordant Auxiliary Rewards for Multi-Task, Multi-Reward Reinforcement Learning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="CONCUR: Concordant Auxiliary Rewards for Multi-Task, Multi-Reward Reinforcement Learning LLM 后训练 Carnegie Mellon University 2026-10-27 多奖励RL常让主奖励决定辅助奖励是否生效，但逐分量标准化会破坏原先优先级：辅助分量可能反转主奖励的排序；所有响应都已正确时，微小长度差异也可能独自决定更新。CONCUR不重写奖励或调低全局权重，而是在每个prompt组内把门控辅助优势投影到与主奖励相容的最近分数。CONCUR-T始终合并主奖励到顶的辅助分数；CONCUR-A仅在累计一致性达到固定条件时放开这项约束。未门控的奖励保持原样，因此不能宣称所有多奖励组合都绝不反转排序。 完整32GPU、多模型多任务RL实验成本过高，不复现（审查 DONE）；输入是外部奖励矩阵及声明的主分量、门控列和权重；不是模型生成的答案。concur_batch先汇总整batch信任证据，再对任何组做投影，避免顺序改变同一batch的策略。Eq2未说明白化标准差的实现口径，因此调用者必须明确传batch_std_correction=0/1，不暗称其中一种是作者代码默认。  策略优化 多目标奖励与优势校准 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 原始奖励已经gate了辅助分量，为什么标准化后仍可能违背主奖励优先级？ gate只限制失败响应的原始辅助分数；每个奖励单独居中和缩放后，辅助差异可能被放大并反转主奖励排序。到顶组的主奖励又是常数，标准化为零，辅助就可能单独决定更新。CONCUR因此约束标准化后的分量，而不是只改原始gate。 教学例：两条都正确的响应只差极少长度奖励，主优势为零而长度优势可被缩放到单位方差；这不是模型真的学会更多正确答案的证据。 2026-10-30">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
 <span id="paper-post-training-concur-c984323b" class="ar-learning-paper-anchor"></span>

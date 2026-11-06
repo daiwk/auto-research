@@ -1,0 +1,15 @@
+{
+  "paper_id": "2611.05266v1",
+  "figure": "2",
+  "source_page": "https://arxiv.org/html/2611.05266v1#S4.F2",
+  "source_url": "https://arxiv.org/html/2611.05266v1/imgs/fig_method2.png",
+  "image": "paper-figure-01.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "50d6ef3bdef999877b163b6145c9301f0f4ef4448896a34214998fd569e2ad74",
+  "width": 2418,
+  "height": 534,
+  "license": "arXiv.org perpetual non-exclusive license; figure copyright retained by the authors",
+  "transformation": "none",
+  "visual_review": "2026-11-04目视核对原PNG：左侧失败a1与插入hint的对照，右侧反馈条件与逐token着色清晰，完整边框未截断；作者原PNG标题emoji已有替代字形，本地原样保留未修图",
+  "checked_on": "2026-11-04"
+}

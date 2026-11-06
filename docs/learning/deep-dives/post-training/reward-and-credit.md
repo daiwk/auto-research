@@ -7,7 +7,7 @@ hide:
 
 # 奖励从哪里来，信用才该分到哪里
 
-[LLM 后训练](../index.md) · 更新 2026-10-30 · 37 篇主题资料 / 7 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-05 · 38 篇主题资料 / 8 篇重点对照
 
 过程标签、最终结果、模型自置信与回溯归因是不同证据。逐步PRM、MRTPO、TACO和MART-GRPO分别做标签获取、奖励定位、正信用降权和失败后缀过滤；INTUITOR则改用内在分布信号，不能把它当外部正确性验证器。 CONCUR另处理奖励维度之间的优先级，把门控辅助优势投影到主奖励保序锥；这不是沿时间轴分配token信用。
 
@@ -32,6 +32,7 @@ hide:
 | [When to Stop Penalizing Actions? Martingale GRPO for VLA Reinforcement Learning](../../../post-training/2610.32431-mart-grpo/README.md) · [原始来源](https://arxiv.org/abs/2610.32431v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 事后事件VLM定位最后未恢复错误，过滤失败边界之后的信用，保留原组优势和原分母。 | 回溯边界不自动满足理想stopping-time条件；完整机器人/VLM训练成本过高未复现，A100证据仅验收L1组件。 |
 | [INTUITOR](../../../post-training/2505.19590-intuitor/README.md) · [原始来源](https://arxiv.org/abs/2505.19590)<br>章节：背景与主要改动、核心公式、复现边界 | 以逐token全词表KL(U∥policy)的长度平均作为self-certainty内在奖励。 | 不需外部verifier但置信不保证正确；本地仍是相反KL方向的候选诊断，尚未实现定义性奖励。 |
 | [CONCUR: Concordant Auxiliary Rewards for Multi-Task, Multi-Reward Reinforcement Learning](../../../post-training/2610.36437-concur/README.md) · [原始来源](https://arxiv.org/abs/2610.36437v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 组内先标准化，再把门控辅助分数作最近保序投影；到顶约束按T/A策略处理，最后整batch白化。 | 主奖励以下的并列不强行相等，投影后不重新标准化；未门控分量仍可能反转排序。完整32GPU训练不复现，本地仅优势估计器。 |
+| [Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling](../../../post-training/2611.04792-dars/README.md) · [原始来源](https://arxiv.org/abs/2611.04792)<br>章节：背景与主要改动、核心公式、检查与负控 | 同prompt组内对结果表示计算含self的Gaussian KDE，以非负reward除以density后再标准化，原GRPO目标不变。 | 终局结果拥挤度不是token置信或奖励优先级；重复点在窄带宽仍计多次，原reward常数不代表缩放后常数。std约定和零方差策略显式，L1不证明已学到奖励比例分布。 |
 
 </div>
 
@@ -54,6 +55,12 @@ TACO只衰减正优势，避免正确整句污染局部低质量token；MART-GRP
 TACO在同一响应的正优势内部，按token风险降低局部信用，负优势不变。CONCUR则比较同一prompt组中不同响应的主奖励与辅助奖励，修正辅助标准化分数的排序和到顶差异；它不定位哪一个token造成错误。把两者都写成“奖励乘一个小系数”会丢掉CONCUR的最近投影与TACO的正负分流。辅助到顶并列也不是终止梯度训练，而是让该辅助在此组不再单独排序。
 
 对照来源：[concur](../../../post-training/2610.36437-concur/README.md) · [taco](../../../post-training/2607.07976-taco/README.md)
+
+### 结果密度是组内新坐标，不是token风险或主奖励优先级
+
+TACO按局部tail risk降低正token信用，负信用保留；CONCUR按主奖励顺序投影组内辅助优势。DARS改的是另一层：相同prompt下结果表示的拥挤度，先用含self的Gaussian密度缩放非负终局reward，再计算组优势。原reward都相同也可能因density不同产生不同缩放值；只有缩放后reward为常数时才出现零方差。重复点在窄带宽仍有重复计数，不能一律当density趋1。embedding、bandwidth、std约定决定该坐标，合成KDE检查不是策略分布覆盖或图像质量证据。
+
+对照来源：[dars-density](../../../post-training/2611.04792-dars/README.md) · [taco](../../../post-training/2607.07976-taco/README.md) · [concur](../../../post-training/2610.36437-concur/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -99,9 +106,23 @@ TACO在同一响应的正优势内部，按token风险降低局部信用，负�
 
     对照来源：[concur](../../../post-training/2610.36437-concur/README.md) · [taco](../../../post-training/2607.07976-taco/README.md)
 
+### 原reward全为1时，DARS一定和不改reward的组标准化一样给零优势吗？ {#cross-outcome-density-not-token-or-priority}
+
+??? note "展开答案与例子"
+
+    **答案：** 不一定。密度不同会把相同reward缩放成不同值，再标准化就可能有非零相对信号；零方差判断必须看缩放后reward。TACO根据token风险调正信用，CONCUR依据主奖励约束辅助排序，都没有仅由原reward相等就等价于DARS的理由。三种方法读取的证据和作用坐标不同。
+
+    **教学例子：** 教学例：同组结果y=(0,0,100)、极窄带宽、r=(1,1,1)，含self密度约(2,2,1)，缩放后为(0.5,0.5,1)并非常数；若三个结果全重合才得到共同密度和常数缩放值。
+
+    对照来源：[dars-density](../../../post-training/2611.04792-dars/README.md) · [taco](../../../post-training/2607.07976-taco/README.md) · [concur](../../../post-training/2610.36437-concur/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-05** · 补入DARS，按终局结果密度、token正信用和主奖励保序三轴对照TACO/CONCUR；明确含self与重复点、缩放后零方差、非负reward和L1机制证据边界。
+
+涉及：[dars-density](../../../post-training/2611.04792-dars/README.md) · [taco](../../../post-training/2607.07976-taco/README.md) · [concur](../../../post-training/2610.36437-concur/README.md)
 
 **2026-10-30** · 精读CONCUR的辅助优势保序投影、到顶并列和整batch信任更新，与TACO的token正信用校准分轴比较；记录L1估计器而非32GPU训练能力。
 
@@ -111,10 +132,11 @@ TACO在同一响应的正优势内部，按token风险降低局部信用，负�
 
 覆盖 36 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 37 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 38 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
+- [Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling](../../../post-training/2611.04792-dars/README.md)
 - [When to Stop Penalizing Actions? Martingale GRPO for VLA Reinforcement Learning](../../../post-training/2610.32431-mart-grpo/README.md)
 - [MGE-PO: Entropy-Aware Credit Assignment for Mathematical Reasoning](../../../post-training/2610.23245-mge-po/README.md)
 - [Multi-Reward Hacking: From Aggregation-Induced Drift to Trust-Anchored Defense](../../../post-training/2610.21404-tag-reward-gating/README.md)

@@ -4,26 +4,40 @@
 
 [English home](../index.md) · [中文研究库](../../research-library.md)
 
-The catalog lists 1061 entries from the shared research manifest. English write-ups available: 1061.
+The catalog lists 1075 entries from the shared research manifest. English write-ups available: 1075.
 
 ## Browse by domain
 
-- [Search, ads, recommendation, and LLM applications](recommendation.md): 324 catalog entries, 324 English write-ups
-- [Foundation models](foundation-models.md): 204 catalog entries, 204 English write-ups
+- [Search, ads, recommendation, and LLM applications](recommendation.md): 327 catalog entries, 327 English write-ups
+- [Foundation models](foundation-models.md): 207 catalog entries, 207 English write-ups
 - [Structured decisions / System One](system-one.md): 6 catalog entries, 6 English write-ups
 - [Multimodal models](multimodal-models.md): 17 catalog entries, 17 English write-ups
-- [LLM post-training](post-training.md): 244 catalog entries, 244 English write-ups
-- [Agents](agent-research.md): 266 catalog entries, 266 English write-ups
+- [LLM post-training](post-training.md): 248 catalog entries, 248 English write-ups
+- [Agents](agent-research.md): 270 catalog entries, 270 English write-ups
 
 ## Read in English
 
+- [Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning](../../post-training/2611.05266-targeted-guidance/README-en.md)
+- [Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation?](../../post-training/2611.04958-shuffled-opsd/README-en.md)
+- [SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search](../../recommendation-components/2611.04662-spade-local-search/README-en.md)
+- [ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse](../../recommendation-components/2611.04259-reusegr/README-en.md)
+- [OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer](../../recommendation-components/2611.04720-onetrans-gsr/README-en.md)
+- [Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents](../../agent-research/2611.05139-meta-square/README-en.md)
+- [From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?](../../agent-research/2611.05108-continual-autoresearch/README-en.md)
+- [Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling](../../post-training/2611.04792-dars/README-en.md)
+- [Coarse Semantic Blocks for Efficient Training-Free Sparse Attention](../../foundation-models/2611.04313-semantic-block-sparse-attention/README-en.md)
+- [Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training](../../foundation-models/2611.04327-anchor-kv/README-en.md)
 - [Strategist: Evolving Reasoning with Agents](../../agent-research/2611.03618-strategist/README-en.md)
 - [SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding](../../post-training/2611.02846-specopd/README-en.md)
+- [RuntimeTickets: Source-Grounded Security Obligations for Agent Skills](../../agent-research/2611.03772-runtime-tickets/README-en.md)
 - [RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs](../../post-training/2611.02455-rlid/README-en.md)
+- [P²-MOPD: Accelerating Multi-Teacher On-Policy Distillation via Parameter Priors](../../post-training/2611.03953-p2-mopd/README-en.md)
+- [Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention](../../foundation-models/2611.03768-multi-layer-indexer/README-en.md)
 - [XLA from the Trenches: Correctness on TPU Workloads at Scale](../../foundation-models/2611.00624-xla-trenches/README-en.md)
 - [WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search](../../recommendation-components/2611.00530-wesearch/README-en.md)
 - [ProLand: A New Infeasible Manifold Optimization Method for LoRA Fine-Tuning](../../foundation-models/2611.00236-proland/README-en.md)
 - [GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport](../../foundation-models/2611.00319-gavagai/README-en.md)
+- [Training LLM Agents to Automate LLM Post-Training with RSI-Dojo](../../agent-research/2611.03698-rsi-dojo/README-en.md)
 - [AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers](../../agent-research/2610.39234-agentheal/README-en.md)
 - [Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?](../../agent-research/2610.37276-evalalloc/README-en.md)
 - [When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement](../../agent-research/2610.36826-ruharness/README-en.md)

@@ -7,7 +7,7 @@ hide:
 
 # 推理压缩先找瓶颈：权重、KV 内容与缓存层级
 
-[基础模型](../index.md) · 更新 2026-10-30 · 32 篇主题资料 / 9 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-04 · 33 篇主题资料 / 10 篇重点对照
 
 AWQ 减权重位宽，GQA 减 KV 头，DropKV 与 TwinKV 改保留内容，KVMEM 管可执行历史视图，Remote KV Tiers 解决跨层级加载。它们可以组合，但不能用一个“压缩率”解释质量、可恢复性和端到端速度。 FoldBias另解决压缩缓存的接口障碍：把静态bias折进同维key，但未来query漂移仍会引入误差。
 
@@ -34,6 +34,7 @@ AWQ 减权重位宽，GQA 减 KV 头，DropKV 与 TwinKV 改保留内容，KVMEM
 | [ResCom: Activation Residual Compensation for Large Language Model Quantization](../../../foundation-models/2610.35955-rescom/README.md) · [原始来源](https://arxiv.org/abs/2610.35955v1)<br>章节：背景与主要改动、核心公式 | 以中心化残差/输出误差统计白化，再做截断SVD和截距恢复。 | 校准只适用于固定宿主，未实现量化器或原生低比特内核。 |
 | [Hilbert Operator for Progressive Encoding (HOPE): A Mathematical Framework for Deconstructing Learned Representations in Deep Networks](../../../foundation-models/2607.21366-hope-hilbert/README.md) · [原始来源](https://arxiv.org/abs/2607.21366v1)<br>章节：背景与主要改动、核心公式 | 以biased Gaussian-ReLU核和Hilbert代理计算剪枝率，支持小Dense层均值补偿与单步恢复。 | 假设激活的Gaussian代理，不实现MERGE/EVICT/完整HOPE或DEFT；与Sleep的Hope架构不是同一方法。 |
 | [Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels](../../../foundation-models/2610.36520-fold-bias/README.md) · [原始来源](https://arxiv.org/abs/2610.36520v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 从上下文query拟合均值投影为1的共享方向，以K+√dβu折叠静态bias；实际bf16舍入后再最小二乘refit V。 | 不像GQA减少KV头，也不负责AM选key/NNLS；不对任意未来query等价，值更换或舍入后不能直接套同值未舍入误差界。 |
+| [Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention](../../../foundation-models/2611.03768-multi-layer-indexer/README.md) · [原始来源](https://arxiv.org/abs/2611.03768)<br>章节：背景与主要改动、核心公式、成本判断与复现边界 | 让当前层消费较早full layer为同一token计算的新selection，将索引器放到侧stream，与主stream的attention、投影和FFN重叠；首次消费时join并保留tensor生命周期。 | 改变依赖与调度，不压缩KV，也不是复用上一token的过期selection。完整路径需8张H200、TP8大模型与SGLang内核，本库仅review，未实现runtime或生成吞吐metrics。 |
 
 </div>
 
@@ -62,6 +63,12 @@ ResCom与HOPE压缩的对象不同：前者在固定量化宿主外增加读取a
 GQA通过共享KV head改变每个token的存储结构；FoldBias保持head维度和query路径，处理的是已有压缩结果多出的静态logit bias。它将bias变成β(q·u)，只在投影接近1的query上近似原偏置，所以兼容标准kernel不意味着任意未来query等价。values须按舍入后的keys拟合，否则拟合与实际内核读入值不一致。AM的key选择、NNLS与engine安装仍是独立环节，本地小矩阵通过不提供吞吐或完整cache质量证据。
 
 对照来源：[fold-bias](../../../foundation-models/2610.36520-fold-bias/README.md) · [gqa](../../../reproductions/2305.13245-gqa/README.md)
+
+### 数据量没变，也可以重排关键依赖
+
+GQA减少每个位置的KV heads，KVMEM决定历史block何时进入执行视图；MLI不以减少KV字节为目标，而是把selection的生产与消费分到不同full layers，让同一token的索引工作和主计算重叠。回退步数按保留索引器的full layers计，不是简单减去物理层号；开头没有前驱的层仍用标准schedule。并发执行还必须在首次消费者等待事件、持有输入和输出直到join，否则逻辑依赖图正确也可能出现读未完成或内存复用。它不是跨token缓存旧selection，单CPU依赖模拟或普通CUDA同步前向也不能证明论文overlap；本库仅收录review，完整高成本实验不复现，无本地运行或吞吐证据。
+
+对照来源：[gqa](../../../reproductions/2305.13245-gqa/README.md) · [kvmem](../../../reproductions/2609.04852-kvmem/README.md) · [multi-layer-indexer](../../../foundation-models/2611.03768-multi-layer-indexer/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -117,9 +124,23 @@ GQA通过共享KV head改变每个token的存储结构；FoldBias保持head维�
 
     对照来源：[fold-bias](../../../foundation-models/2610.36520-fold-bias/README.md) · [gqa](../../../reproductions/2305.13245-gqa/README.md)
 
+### MLI读较早层的selection，为什么不等于KVMEM取回旧block，也不等于复用上一生成token的选择？ {#cross-nov04b-overlap-not-kv-compression}
+
+??? note "展开答案与例子"
+
+    **答案：** MLI移动的是同一token内selection的消费层，选择仍由该token的索引器新计算，跨full layer产生可重叠窗口；KVMEM决定历史KV block如何检索并物化到有限执行视图。旧token的selection可能已不适合当前query，不能用跨token复用替代MLI。是否真正重叠还需事件等待、张量生命周期和真实服务内核，本库对此仅review，不用CPU模拟宣称已实现。
+
+    **教学例子：** 教学例：让当前层读较早full layer刚为当前token算出的top-k，是依赖调度；直接拿上一个生成token留下的top-k，则改变了选择的新鲜度。两种复用看起来相似，并不代表是同一个算法。
+
+    对照来源：[multi-layer-indexer](../../../foundation-models/2611.03768-multi-layer-indexer/README.md) · [kvmem](../../../reproductions/2609.04852-kvmem/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-04** · 收录MLI并与GQA、KVMEM对照：它重排同token跨full layer的selection依赖，不压缩KV、不复用旧token选择。注明事件和张量生命周期条件；完整8H200实验成本过高不复现，本库仅review、无runtime或吞吐指标。
+
+涉及：[multi-layer-indexer](../../../foundation-models/2611.03768-multi-layer-indexer/README.md)
 
 **2026-10-30** · 精读FoldBias的约束方向、rank-one位移、bf16先于value refit与同值误差界；相对GQA明确接口兼容与压缩结构的不同，保留未来query漂移风险。
 
@@ -133,7 +154,7 @@ GQA通过共享KV head改变每个token的存储结构；FoldBias保持head维�
 
 覆盖 29 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 32 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 33 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -169,6 +190,7 @@ GQA通过共享KV head改变每个token的存储结构；FoldBias保持head维�
 - [ResCom: Activation Residual Compensation for Large Language Model Quantization](../../../foundation-models/2610.35955-rescom/README.md)
 - [Hilbert Operator for Progressive Encoding (HOPE): A Mathematical Framework for Deconstructing Learned Representations in Deep Networks](../../../foundation-models/2607.21366-hope-hilbert/README.md)
 - [Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels](../../../foundation-models/2610.36520-fold-bias/README.md)
+- [Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention](../../../foundation-models/2611.03768-multi-layer-indexer/README.md)
 
 </details>
 

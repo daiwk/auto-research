@@ -7,7 +7,7 @@ hide:
 
 # 生成式召回与推理推荐
 
-[搜广推](index.md) / 248 个问题 · 62 篇论文
+[搜广推](index.md) / 256 个问题 · 64 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,115 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">248 个问题 · 62 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">256 个问题 · 64 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:reusegr" data-paper-title="ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse 搜广推与 LLM 应用 Xidian University 2026-11-03 相同query由不同用户重复搜索时，完全在线的生成器反复预测相似的粗粒度SID前缀。ReuseGR将query级7B规划留在离线，把当前用户历史交给0.5B在线后缀补全。前缀深度是可调的覆盖—成本边界，不是越深越好。Path KD先训练后缀评分器，随后冻结评分器，用OPD和GRPO学习BudgetCut：某个分支的作用依赖已经选入的其他分支，不能用静态top-score假装实现。 完整实验成本过高，不复现（审查 DONE）；未训练生成器或分支策略，未接入执行型Evolve。L1 CPU机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；未训练生成器或分支策略，未接入执行型Evolve。ClickRow/label_reuse_depth对应Eq.5–6的Fit侧整行LOO与逐级准则；cache_route保留准备好的深度0与冷miss的不同端点；composite_score对应Eq.10。这里只接受外部显式行和模型logp。真实训练数据、历史时间截断和线上缓存更新由调用者提供，测试标签不可用于拟合深度或补全候选。  生成式召回 离线前缀复用与在线个性化 搜广推 生成式召回与推理推荐 ReuseGR共享的是最终推荐结果吗，为什么还能个性化？ 共享的是只依赖query的SID前缀子树，不是所有用户都复用同一最终列表。在线0.5B仍读取当前请求之前的用户历史，完成前缀之后的SID；深度越大省的解码越多，但不可达目标也可能更多。 教学例：同搜跑鞋的两人共享运动类前缀，一人历史偏马拉松、另一人偏徒步，在线后缀仍能选不同商品；若缓存完整SID，选择空间就更窄。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<span id="paper-recommendation-reusegr-000b2370" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-a31ad593c92e8ffb">ReuseGR共享的是最终推荐结果吗，为什么还能个性化？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Areusegr">ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Xidian University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>共享的是只依赖query的SID前缀子树，不是所有用户都复用同一最终列表。在线0.5B仍读取当前请求之前的用户历史，完成前缀之后的SID；深度越大省的解码越多，但不可达目标也可能更多。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同搜跑鞋的两人共享运动类前缀，一人历史偏马拉松、另一人偏徒步，在线后缀仍能选不同商品；若缓存完整SID，选择空间就更窄。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04259v1">原论文</a> · <a href="../../../../recommendation-components/2611.04259-reusegr/">实现解读</a> · <a href="#qa-a31ad593c92e8ffb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:reusegr" data-paper-title="ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse 搜广推与 LLM 应用 Xidian University 2026-11-03 相同query由不同用户重复搜索时，完全在线的生成器反复预测相似的粗粒度SID前缀。ReuseGR将query级7B规划留在离线，把当前用户历史交给0.5B在线后缀补全。前缀深度是可调的覆盖—成本边界，不是越深越好。Path KD先训练后缀评分器，随后冻结评分器，用OPD和GRPO学习BudgetCut：某个分支的作用依赖已经选入的其他分支，不能用静态top-score假装实现。 完整实验成本过高，不复现（审查 DONE）；未训练生成器或分支策略，未接入执行型Evolve。L1 CPU机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；未训练生成器或分支策略，未接入执行型Evolve。ClickRow/label_reuse_depth对应Eq.5–6的Fit侧整行LOO与逐级准则；cache_route保留准备好的深度0与冷miss的不同端点；composite_score对应Eq.10。这里只接受外部显式行和模型logp。真实训练数据、历史时间截断和线上缓存更新由调用者提供，测试标签不可用于拟合深度或补全候选。  生成式召回 离线前缀复用与在线个性化 搜广推 生成式召回与推理推荐 ReuseCut为何必须整行LOO，点击质量排序和行平均覆盖又有何区别？ 每个聚合行可代表同一item多次点击，留下这一行的部分点击会让其目标前缀泄漏进自己的参考集。参考top-N按其他行的点击质量排序，命中覆盖再逐行等权。两步故意使用不同权重，不能都改成按点击加权。 教学例：A行同SID点100次，B行另一SID点1次；留出A时应减100而非1。若只减1，参考集仍偏向A，错误夸大可共享深度。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-bd2a2bc8f37577f8">ReuseCut为何必须整行LOO，点击质量排序和行平均覆盖又有何区别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Areusegr">ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Xidian University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>每个聚合行可代表同一item多次点击，留下这一行的部分点击会让其目标前缀泄漏进自己的参考集。参考top-N按其他行的点击质量排序，命中覆盖再逐行等权。两步故意使用不同权重，不能都改成按点击加权。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：A行同SID点100次，B行另一SID点1次；留出A时应减100而非1。若只减1，参考集仍偏向A，错误夸大可共享深度。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04259v1">原论文</a> · <a href="../../../../recommendation-components/2611.04259-reusegr/">实现解读</a> · <a href="#qa-bd2a2bc8f37577f8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:reusegr" data-paper-title="ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse 搜广推与 LLM 应用 Xidian University 2026-11-03 相同query由不同用户重复搜索时，完全在线的生成器反复预测相似的粗粒度SID前缀。ReuseGR将query级7B规划留在离线，把当前用户历史交给0.5B在线后缀补全。前缀深度是可调的覆盖—成本边界，不是越深越好。Path KD先训练后缀评分器，随后冻结评分器，用OPD和GRPO学习BudgetCut：某个分支的作用依赖已经选入的其他分支，不能用静态top-score假装实现。 完整实验成本过高，不复现（审查 DONE）；未训练生成器或分支策略，未接入执行型Evolve。L1 CPU机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；未训练生成器或分支策略，未接入执行型Evolve。ClickRow/label_reuse_depth对应Eq.5–6的Fit侧整行LOO与逐级准则；cache_route保留准备好的深度0与冷miss的不同端点；composite_score对应Eq.10。这里只接受外部显式行和模型logp。真实训练数据、历史时间截断和线上缓存更新由调用者提供，测试标签不可用于拟合深度或补全候选。  生成式召回 离线前缀复用与在线个性化 搜广推 生成式召回与推理推荐 准备好的深度0和真正冷缓存miss为何不能用一个fallback实现？ 前者是经过准备的query选择不缓存SID token，从空根使用Path-KD scorer；后者缺少准备，直接走独立0.5B E2E端点，正深度miss才可异步排队补规划。两者虽然都没存prefix，模型和请求生命周期不同。 教学例：一个热门query因覆盖不足被判depth0，与从未见过的新query都无prefix，但不能因此把热门query切换到另一个未经同训练的E2E scorer。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-cefb458cd505804c">准备好的深度0和真正冷缓存miss为何不能用一个fallback实现？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Areusegr">ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Xidian University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>前者是经过准备的query选择不缓存SID token，从空根使用Path-KD scorer；后者缺少准备，直接走独立0.5B E2E端点，正深度miss才可异步排队补规划。两者虽然都没存prefix，模型和请求生命周期不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个热门query因覆盖不足被判depth0，与从未见过的新query都无prefix，但不能因此把热门query切换到另一个未经同训练的E2E scorer。</p>
+<p class="ar-learning-sources">依据：核心公式、背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04259v1">原论文</a> · <a href="../../../../recommendation-components/2611.04259-reusegr/">实现解读</a> · <a href="#qa-cefb458cd505804c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:reusegr" data-paper-title="ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse 搜广推与 LLM 应用 Xidian University 2026-11-03 相同query由不同用户重复搜索时，完全在线的生成器反复预测相似的粗粒度SID前缀。ReuseGR将query级7B规划留在离线，把当前用户历史交给0.5B在线后缀补全。前缀深度是可调的覆盖—成本边界，不是越深越好。Path KD先训练后缀评分器，随后冻结评分器，用OPD和GRPO学习BudgetCut：某个分支的作用依赖已经选入的其他分支，不能用静态top-score假装实现。 完整实验成本过高，不复现（审查 DONE）；未训练生成器或分支策略，未接入执行型Evolve。L1 CPU机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；未训练生成器或分支策略，未接入执行型Evolve。ClickRow/label_reuse_depth对应Eq.5–6的Fit侧整行LOO与逐级准则；cache_route保留准备好的深度0与冷miss的不同端点；composite_score对应Eq.10。这里只接受外部显式行和模型logp。真实训练数据、历史时间截断和线上缓存更新由调用者提供，测试标签不可用于拟合深度或补全候选。  生成式召回 离线前缀复用与在线个性化 搜广推 生成式召回与推理推荐 深度标签和缓存路由测试通过，能说BudgetCut学会召回更好吗？ 不能。BudgetCut需要在当前已选集合下计算边际Recall teacher，先OPD再GRPO学习分支策略；本地只实现标签、路由和分数公式，没有模型或真实候选质量实验。论文完整A/B的CTR和RPM不能转记成组件收益，也不能隐去CVR负向结果。 教学例：多选一个高分分支可能把原来top100里的目标挤掉，所以它的边际Recall可以为负；只按静态分数top32选枝并不等于学习了BudgetCut。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-cde975d1420aceb6">深度标签和缓存路由测试通过，能说BudgetCut学会召回更好吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Areusegr">ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Xidian University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。BudgetCut需要在当前已选集合下计算边际Recall teacher，先OPD再GRPO学习分支策略；本地只实现标签、路由和分数公式，没有模型或真实候选质量实验。论文完整A/B的CTR和RPM不能转记成组件收益，也不能隐去CVR负向结果。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：多选一个高分分支可能把原来top100里的目标挤掉，所以它的边际Recall可以为负；只按静态分数top32选枝并不等于学习了BudgetCut。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、结果、负控与边界、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04259v1">原论文</a> · <a href="../../../../recommendation-components/2611.04259-reusegr/">实现解读</a> · <a href="#qa-cde975d1420aceb6">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:spade-local-search" data-paper-title="SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search 搜广推与 LLM 应用 Meituan 2026-11-03 本地生活首页要在用户输入前生成可执行、匹配当前位置/时间且互不重复的搜索意图。SPADE同时改变四层：OA-BPE用业务价值重加权合并；STAR以多尺度位置/时间表示和软门控注入上下文；MARS-DPO对齐生产曝光点击偏好；SDBS在解码阶段按父beam排序加有界奖励。本地只实现OA-BPE局部算子与SDBS扩展步骤，不能把其他两层略去后称完整SPADE。 完整实验成本过高，不复现（审查 DONE）；L1 CPU分词/解码算子，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不是本地搜索模型或线上效果复现，未接入执行型Evolve。oa_pair_scores/merge_pair对应加权pair统计与局部合并；sigmoid_bonus/sdbs_step对应Eq.17与Algorithm1一步。调用者负责模型readout、结束符、长度预算及完整tokenization；本地不根据评测结果选择业务权重或奖励参数。  本地搜索 业务对齐分词与多样性解码 搜广推 生成式召回与推理推荐 OA-BPE为何能在模型训练前改变长尾query的生成先验？ 普通BPE按出现次数合并，稀有但高价值query可能被拆成更多token。OA-BPE用业务权重放大其pair计数，使部分高价值query更早合并，从而减少要连续预测的token；这只是结构先验，不保证真实转化率提高。 教学例：常见便宜词pair出现2次得分2，稀有服务pair出现1次但权重3得分3，后者可先合并；示例权重不是实测CTR。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<span id="paper-recommendation-spade-local-search-8cdb909e" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-6a72346fd3bdcfda">OA-BPE为何能在模型训练前改变长尾query的生成先验？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aspade-local-search">SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Meituan</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>普通BPE按出现次数合并，稀有但高价值query可能被拆成更多token。OA-BPE用业务权重放大其pair计数，使部分高价值query更早合并，从而减少要连续预测的token；这只是结构先验，不保证真实转化率提高。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：常见便宜词pair出现2次得分2，稀有服务pair出现1次但权重3得分3，后者可先合并；示例权重不是实测CTR。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04662v1">原论文</a> · <a href="../../../../recommendation-components/2611.04662-spade-local-search/">实现解读</a> · <a href="#qa-6a72346fd3bdcfda">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:spade-local-search" data-paper-title="SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search 搜广推与 LLM 应用 Meituan 2026-11-03 本地生活首页要在用户输入前生成可执行、匹配当前位置/时间且互不重复的搜索意图。SPADE同时改变四层：OA-BPE用业务价值重加权合并；STAR以多尺度位置/时间表示和软门控注入上下文；MARS-DPO对齐生产曝光点击偏好；SDBS在解码阶段按父beam排序加有界奖励。本地只实现OA-BPE局部算子与SDBS扩展步骤，不能把其他两层略去后称完整SPADE。 完整实验成本过高，不复现（审查 DONE）；L1 CPU分词/解码算子，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不是本地搜索模型或线上效果复现，未接入执行型Evolve。oa_pair_scores/merge_pair对应加权pair统计与局部合并；sigmoid_bonus/sdbs_step对应Eq.17与Algorithm1一步。调用者负责模型readout、结束符、长度预算及完整tokenization；本地不根据评测结果选择业务权重或奖励参数。  本地搜索 业务对齐分词与多样性解码 搜广推 生成式召回与推理推荐 SDBS的sigmoid奖励用的是父beam名次还是两候选的语义距离？ 用本步父beam按累计分数排好的序号，给该父beam的各候选延展加同一phi(b)。它不计算候选两两词重合或embedding距离；之后合并扩展并重新裁成top-B，奖励进入累计分数。 教学例：父A排名0、父B排名1，即使都延展出同一个词x，B的延展仍得到phi(1)，A只得到phi(0)=0；不能把这解释为语义距离奖励。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-24099fa05ce96c09">SDBS的sigmoid奖励用的是父beam名次还是两候选的语义距离？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aspade-local-search">SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Meituan</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>用本步父beam按累计分数排好的序号，给该父beam的各候选延展加同一phi(b)。它不计算候选两两词重合或embedding距离；之后合并扩展并重新裁成top-B，奖励进入累计分数。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：父A排名0、父B排名1，即使都延展出同一个词x，B的延展仍得到phi(1)，A只得到phi(0)=0；不能把这解释为语义距离奖励。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04662v1">原论文</a> · <a href="../../../../recommendation-components/2611.04662-spade-local-search/">实现解读</a> · <a href="#qa-24099fa05ce96c09">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:spade-local-search" data-paper-title="SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search 搜广推与 LLM 应用 Meituan 2026-11-03 本地生活首页要在用户输入前生成可执行、匹配当前位置/时间且互不重复的搜索意图。SPADE同时改变四层：OA-BPE用业务价值重加权合并；STAR以多尺度位置/时间表示和软门控注入上下文；MARS-DPO对齐生产曝光点击偏好；SDBS在解码阶段按父beam排序加有界奖励。本地只实现OA-BPE局部算子与SDBS扩展步骤，不能把其他两层略去后称完整SPADE。 完整实验成本过高，不复现（审查 DONE）；L1 CPU分词/解码算子，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不是本地搜索模型或线上效果复现，未接入执行型Evolve。oa_pair_scores/merge_pair对应加权pair统计与局部合并；sigmoid_bonus/sdbs_step对应Eq.17与Algorithm1一步。调用者负责模型readout、结束符、长度预算及完整tokenization；本地不根据评测结果选择业务权重或奖励参数。  本地搜索 业务对齐分词与多样性解码 搜广推 生成式召回与推理推荐 SDBS不给top-parent奖励，是否意味着最终top1必然与普通beam一致？ 不是。零奖励只说它的分数不被直接修改，其他beam加奖励后仍能超过它。论文给出的逐步充分条件是领先间隔大于最大奖励；跨步累计也需单独考虑，不能把受条件限制的直觉写成任意参数保证。 教学例：A延展原分-.10、B为-.11；如果B的奖励为.09，它的新分-.02会反超A，即使A的奖励严格是0。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-6b9ba39e315420ba">SDBS不给top-parent奖励，是否意味着最终top1必然与普通beam一致？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aspade-local-search">SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Meituan</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。零奖励只说它的分数不被直接修改，其他beam加奖励后仍能超过它。论文给出的逐步充分条件是领先间隔大于最大奖励；跨步累计也需单独考虑，不能把受条件限制的直觉写成任意参数保证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：A延展原分-.10、B为-.11；如果B的奖励为.09，它的新分-.02会反超A，即使A的奖励严格是0。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04662v1">原论文</a> · <a href="../../../../recommendation-components/2611.04662-spade-local-search/">实现解读</a> · <a href="#qa-6b9ba39e315420ba">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:spade-local-search" data-paper-title="SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search 搜广推与 LLM 应用 Meituan 2026-11-03 本地生活首页要在用户输入前生成可执行、匹配当前位置/时间且互不重复的搜索意图。SPADE同时改变四层：OA-BPE用业务价值重加权合并；STAR以多尺度位置/时间表示和软门控注入上下文；MARS-DPO对齐生产曝光点击偏好；SDBS在解码阶段按父beam排序加有界奖励。本地只实现OA-BPE局部算子与SDBS扩展步骤，不能把其他两层略去后称完整SPADE。 完整实验成本过高，不复现（审查 DONE）；L1 CPU分词/解码算子，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不是本地搜索模型或线上效果复现，未接入执行型Evolve。oa_pair_scores/merge_pair对应加权pair统计与局部合并；sigmoid_bonus/sdbs_step对应Eq.17与Algorithm1一步。调用者负责模型readout、结束符、长度预算及完整tokenization；本地不根据评测结果选择业务权重或奖励参数。  本地搜索 业务对齐分词与多样性解码 搜广推 生成式召回与推理推荐 OA-BPE计数和真正合并时都应允许重叠pair吗？ 不能混为一谈。相邻pair统计在a,a,a中能数到两个(a,a)，执行一次pair合并则按非重叠扫描得到aa,a；本地只提供这两个原语，不是完整byte tokenizer。STAR、MARS-DPO和生成器训练仍未复现。 教学例：把a,a,a同时替换两个重叠pair会消费中间a两次，得到不合法结果；测试须同时覆盖统计为2与合并只替换一次。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-6c439ec81e22a215">OA-BPE计数和真正合并时都应允许重叠pair吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aspade-local-search">SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Meituan</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能混为一谈。相邻pair统计在a,a,a中能数到两个(a,a)，执行一次pair合并则按非重叠扫描得到aa,a；本地只提供这两个原语，不是完整byte tokenizer。STAR、MARS-DPO和生成器训练仍未复现。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把a,a,a同时替换两个重叠pair会消费中间a两次，得到不合法结果；测试须同时覆盖统计为2与合并只替换一次。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04662v1">原论文</a> · <a href="../../../../recommendation-components/2611.04662-spade-local-search/">实现解读</a> · <a href="#qa-6c439ec81e22a215">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:pailitao-mmsearch2" data-paper-title="PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search 搜广推与 LLM 应用 Taobao &amp; Tmall Group of Alibaba 2026-10-27 用户上传图片并要求“同款换属性”或“找搭配”，检索关系与计算预算都不固定。PailitaoMMSearch2.0把原图、自由文本和可选上下文直接送入VLM，生成商品SID列表，不依赖一个先判意图再切多专家的路由器。数据工具按冷启动、质量校准和真实流量反馈组合；模型依次做商品知识CPT、混合推理预算SFT与意图均衡RL。Sample–Beam把推理部分采样和SID候选束生成分开，让训练的候选集合更接近线上多结果服务，而不是普通单响应GRPO换个名字。 资料收录，完整实验成本过高，不复现（审查 DONE）。未执行训练或推理，不产生metrics/GPU凭证。资料收录，完整实验成本过高，不复现（审查 DONE）。没有本地可执行模型、训练、benchmark或GPU结果，不注册adapter/Evolve。未执行训练或推理，不产生metrics/GPU凭证。论文涉及0.8B/2B/4B多模型、多预算、大规模多模态生产数据、CPT/SFT/RL与多场景线上实验；部分依赖私有数据，作者未给可据以重跑的完整GPU小时预算。相对单卡A100/A30或Mac，成本过高，不复现（审查 DONE）；不下载大资源、不运行试验、不自动重试。  多模态生成式搜索 Sample–Beam rollouts 搜广推 生成式召回与推理推荐 PailitaoMMSearch2.0是改写查询再检索，还是直接生成商品候选？ 模型消费原图和自由文本，直接生成可映射为商品的三层SID集合，解码就是候选生成。部分生产场景最终还会与既有链路结果混排，不能把端到端检索理解成所有线上模块都消失了。 教学例：用户上传衬衣照片要求找搭配裤子，生成的是候选商品ID，而不是只生成一句供别的搜索器使用的新查询。 2026-10-29">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
 <span id="paper-recommendation-pailitao-mmsearch2-204499bd" class="ar-learning-paper-anchor"></span>

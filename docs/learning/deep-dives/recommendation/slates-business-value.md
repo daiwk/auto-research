@@ -7,7 +7,7 @@ hide:
 
 # 从列表边际价值到出价控制：策略权重与约束
 
-[搜广推](../index.md) · 更新 2026-10-30 · 37 篇主题资料 / 5 篇重点对照
+[搜广推](../index.md) · 更新 2026-11-04 · 38 篇主题资料 / 6 篇重点对照
 
 CDM把相关性与去冗余的教师选择蒸馏给学生，SORT-Gen直接估计前缀条件下的列表边际价值，PRL-PUTS扫描多目标权重策略，Primal-Dual Decoding则在解码中根据约束松弛量更新乘子。它们分别改变列表上下文、效用模型、策略选择和约束控制，不能把多样性更高或某一目标更好当成全面胜出。 RLBP把相同的多目标治理问题带到日级PID参数选择，但其BU/CPC奖励和控制动作不能当成列表逐项效用。
 
@@ -30,6 +30,7 @@ CDM把相关性与去冗余的教师选择蒸馏给学生，SORT-Gen直接估计
 | [A Production-Ready RL Framework for Personalized Utility Tuning with Pareto Sweeping in Pinterest Recommender Systems](../../../reproductions/2605.16344-prl-puts/README.md) · [原始来源](https://arxiv.org/abs/2605.16344)<br>章节：背景与主要改动、核心公式、复现边界 | 双头Q分别估计Repin和P2P utility，对不同权重策略作Pareto sweeping，再在线选择可治理策略。 | Pareto不劣只表示没有另一候选同时不差且至少一项更好，并不保证两项都超过原策略；策略权重选择与列表内逐项边际估计不同。 |
 | [Stochastic Primal-Dual Decoding for Multiobjective Generative Recommender Systems](../../../reproductions/2607.19357-primal-dual-decoding/README.md) · [原始来源](https://arxiv.org/abs/2607.19357)<br>章节：背景与主要改动、核心公式、复现边界 | 不重训生成器，在逐位置选择中加入辅助贡献，并用剩余约束松弛量以镜像下降更新乘子。 | 乘子可随已选前缀改变压力，但软惩罚不是硬可行性证明；若剩余候选无法满足约束，权重再大也不能制造可行解。本地只验证代理机制。 |
 | [Reinforcement Learning for Controller Parameters in the Auto-Bidding System at Pinterest](../../../recommendation-components/2610.33248-pinterest-rlbp/README.md) · [原始来源](https://arxiv.org/abs/2610.33248v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 日级选择九种P/I倍率且D固定，生产gamma0回归BU/CPC相对lift，推理用Qbu−betaQcpc再topK softmax，服务保留PID。 | 不同于PRL-PUTS的Repin/P2P策略扫描；CPC改善的reward仍是负值，多步max/min是扩展，生产beta幅度与数值预处理外置。 |
+| [OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer](../../../recommendation-components/2611.04720-onetrans-gsr/README.md) · [原始来源](https://arxiv.org/abs/2611.04720v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 以单个自回归policy统一重排与混排，RM仅离线训练使用；解码保留硬mask/有限偏置，RM和规则奖励分别标准化后组合。 | 几何奖励与集成惩罚是代理目标，不保证每个真实业务指标改善；局部规则不保证全局可行，本地仅CPU约束/算术参考，未训练整页模型。 |
 
 </div>
 
@@ -52,6 +53,12 @@ PRL-PUTS用Pareto扫描保留值得权衡的策略，Primal-Dual Decoding用动�
 PRL-PUTS分别估计Repin/P2P效用，再扫描权重策略；RLBP的两个头则预测日级BU和CPC相对生产基线的变化，选择的是PID系数而非推荐物品。因为CPC越低越好，负lift不能先翻成正奖励再在融合时再次取负。部署gamma=0也意味着并未用跨日bootstrap学长期Q；生命周期取舍由外部beta表达。两头各自max/min的多步扩展不保证融合后就是组合目标的最优Q，七天A/B与两月非均衡holdout也应分开解释。
 
 对照来源：[pinterest-rlbp](../../../recommendation-components/2610.33248-pinterest-rlbp/README.md) · [prl-puts](../../../reproductions/2605.16344-prl-puts/README.md)
+
+### 从边际价值教师到统一整页策略，仍须分开硬约束与代理奖励
+
+CDM用可控MMR教师产生列表边际监督，OneTrans-GSR则由整页RM指导一个直接生成混合内容序列的policy。后者的几何多目标reward先组内minmax再正值floor，规则reward还要独立标准化；它不是在若干业务分数上随意乘权。硬mask阻止非法动作，有限惩罚允许取舍，局部配额又可能冲突。RM代理得分、最终选择规则与真实A/B应分别记录，不把CPU算术或未曝光页的RM预测写成用户收益。
+
+对照来源：[onetrans-gsr](../../../recommendation-components/2611.04720-onetrans-gsr/README.md) · [cdm](../../../reproductions/2406.09021-cdm/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -97,9 +104,23 @@ PRL-PUTS分别估计Repin/P2P效用，再扫描权重策略；RLBP的两个头�
 
     对照来源：[pinterest-rlbp](../../../recommendation-components/2610.33248-pinterest-rlbp/README.md) · [prl-puts](../../../reproductions/2605.16344-prl-puts/README.md)
 
+### OneTrans-GSR的几何均值reward能保证所有目标都不下降吗？ {#cross-geometric-floor-not-business-guarantee}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。正值floor和几何聚合改变代理目标的取舍，不证明Pareto改善；组内常数目标也只贡献相同因子。真正用户效果需要独立生产A/B，局部mask通过也不能证明所有剩余位置有共同可行解。
+
+    **教学例子：** 教学例：click与GMV代理都归一后乘起来，仍可能偏好在真实数据上被RM高估的页；CPU公式得分变高不是多下订单。
+
+    对照来源：[onetrans-gsr](../../../recommendation-components/2611.04720-onetrans-gsr/README.md) · [cdm](../../../reproductions/2406.09021-cdm/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-04** · 补入OneTrans-GSR，区分单policy整页生成、RM离线代理、几何多目标奖励与独立标准化；相对CDM保留教师/策略差异，并明确局部约束和线上证据不可互相代替。
+
+涉及：[onetrans-gsr](../../../recommendation-components/2611.04720-onetrans-gsr/README.md) · [cdm](../../../reproductions/2406.09021-cdm/README.md)
 
 **2026-10-30** · 精读RLBP日级九动作、部署gamma0、负CPC lift、Q融合与外部预处理；相对PRL-PUTS双目标策略扫描区分状态/动作/回报，扩宽专题标题但保留稳定id和原阅读路径。
 
@@ -109,7 +130,7 @@ PRL-PUTS分别估计Repin/P2P效用，再扫描权重策略；RLBP的两个头�
 
 覆盖 36 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 37 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 38 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -150,6 +171,7 @@ PRL-PUTS分别估计Repin/P2P效用，再扫描权重策略；RLBP的两个头�
 - [Uncertainty as Remedy: Mitigating Satisfaction Label Bias in Short Video Multi-Objective Ensemble Ranking](../../../reproductions/2607.17092-uame/README.md)
 - [Breaking the Loop: An Empirical Comparison of Strategies for Novelty and Freshness in YouTube Music](../../../reproductions/2607.23749-youtube-freshness/README.md)
 - [Reinforcement Learning for Controller Parameters in the Auto-Bidding System at Pinterest](../../../recommendation-components/2610.33248-pinterest-rlbp/README.md)
+- [OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer](../../../recommendation-components/2611.04720-onetrans-gsr/README.md)
 
 </details>
 

@@ -46,6 +46,7 @@
 - 2026-09 · [MIMA](../2609.12842-mima/README.md)：将同请求物品组成多正例集合，以排他匹配监督互补兴趣，并用 activation routing 校准多通道分数。
 
 ## Alibaba
+- [ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse](../../recommendation-components/2611.04259-reusegr/README.md)：7B离线模型按query规划SID前缀，0.5B在当前用户历史下补全后缀；ReuseCut以历史覆盖选择复用深度，BudgetCut再学习集合相关的分支准入。本地只核深度标签/冷miss与准备好depth0的区别及分数接口，不把固定规则冒充学习的BudgetCut。
 - [KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation](../../recommendation-components/2610.36973-kl-mopd/README.md)：先在冻结初始学生的生成前缀上按位置估计到两位教师的反向KL，以其比例固定教师权重。当前学生在自己的前缀上最小化加权反向KL；本地仅实现校准和可微损失，不运行推荐器或继承线上收入增益。
 - [PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search](../../recommendation-components/2610.36958-pailitao-mmsearch2/README.md)：以原图和自由文本直接生成商品SID集合，用组合数据工具、商品知识CPT、混合推理预算SFT和意图均衡RL扩展统一多模态搜索。Sample–Beam分离推理采样与SID束生成以对齐多结果服务；完整实验高成本不复现。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [Progressive Learning from Content to Relevance to Personalization for CTR Prediction](../../recommendation-components/2610.29138-finesid/README.md)：把多尺度视觉和字段化文本离散token送入有序融合/HiFormer，先用教师软相关性训练整个共享预测器，再保留完整状态迁移到个性化CTR微调。正文有淘宝七天量化线上A/B；64H20与私有大数据成本过高，仅收录方法和证据，不提供伪替代运行。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
@@ -184,6 +185,7 @@
 - 2024-03 · [LSVCR](../2403.13574-lsvcr/README.md)：用 LoRA 学习 LLM 偏好，通过 SSC/VCC 双序列目标对齐评论语义和用户行为。
 
 ## Meituan
+- [SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search](../../recommendation-components/2611.04662-spade-local-search/README.md)：OA-BPE用业务价值加权token-pair计数，STAR以软门控编码时空位置，MARS-DPO对齐生产偏好，SDBS按父beam排序给予有界sigmoid奖励。本地只实现分词/解码算子；首beam自身零奖励不意味着任意参数下top1永不被其他beam超过。
 - [Hierarchical GTV Estimation: Bridging the Gap between Container-Level Ranking and Item-Level Conversion](../../recommendation-components/2610.32420-hge/README.md)：先以商品自注意力编码竞争，再注入用户/门店/上下文；将门店GTV拆为转化概率乘条件商品购买概率、数量和价格之和，再用有符号残差与按样本门控融合通用回归。本地是Eqs2--11可微L1组件，不含DIN/DCN、论文完整Dice塔或生产训练，不能声称复现+1.42%线上收益。
 - 2026-07 · [CORE](../2607.24417-core-relevance/README.md)：把三级电商相关性拆成两道条件边界，以 step-GRPO 提供细粒度 credit，再将 PostCoT LLM 蒸馏到在线双头模型。
 - 2026-07 · [NONTP](../2607.12277-nontp/README.md)：在 NTP 上加入未来状态对比学习和跨域 hidden-state pooling，扩大生成式推荐的训练监督覆盖。
@@ -485,3 +487,6 @@
 ## Google Research
 - [Online Advertising with Spatial Interactions](../../recommendation-components/2602.12481-spatial-ads/README.md)：实现分组伪圆盘真实LP松弛、x/3独立采样和原式二次稀释，核验组互斥及中心不被覆盖。不包含全广告匹配约化、支付或PTAS，不冒称18近似端到端复现；理论论文没有完整训练实验，不伪造高成本理由。
 - [Statistical Learning from Attribution Sets](../../recommendation-components/2602.06276-attribution-sets/README.md)：逐式实现归因集合风险估计、位置先验平方加权与固定分母ERM；有限样本常数函数校验发现v1印刷式不一致并保留反例，未宣称无偏性或推荐效果已验证。完整约7800次训练网格成本过高，不复现（审查DONE）。
+
+## ByteDance
+- [OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer](../../recommendation-components/2611.04720-onetrans-gsr/README.md)：统一自回归policy生成商品/视频/直播/广告的整页序列；离线RM集成、正值几何多目标奖励与SeparateStandardization指导后训练，在线保留硬mask和软业务偏置。本地仅核局部约束/去重和奖励公式，既不声称局部规则保证全局可行，也不把RM代理分数当真实GMV。

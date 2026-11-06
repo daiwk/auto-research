@@ -7,7 +7,7 @@ hide:
 
 # 工具与协作执行：把计划变成可检查的动作
 
-[Agent](index.md) / 197 个问题 · 49 篇论文
+[Agent](index.md) / 201 个问题 · 50 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">197 个问题 · 49 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">201 个问题 · 50 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:runtime-tickets" data-paper-title="RuntimeTickets: Source-Grounded Security Obligations for Agent Skills" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="RuntimeTickets: Source-Grounded Security Obligations for Agent Skills Agent University of North Carolina at Chapel Hill 2026-11-02 允许调用“发送”并不等于允许给任意接收者发送任意内容。论文让模型只在运行前提出有原文行依据的 obligations，host 审批后冻结 ticket；运行时由确定性 gate 检查真实副作用，而不再问语言模型。ticket 只能收紧宿主权限，不能放宽。正文 §3 Algorithm 1 高成本完整实验：成本过高，不复现（审查 DONE）。诊断实际检查合法交付、错误接收者、同接收者非法对象及重复请求；组件状态：CPU / L1 component_only，有源 ticket 与原子 gate 内核；不是实际网络代理、完整安全产品或统一 Evolve 算子。高成本完整实验：成本过高，不复现（审查 DONE）。宿主提供可信合同、validator registry 和审计 key；Skill 仅作为不可执行文本被 SHA256 绑定，三个 obligation 的引用必须逐行精确匹配。  Agent安全 权限与运行时约束 Agent 工具与协作执行：把计划变成可检查的动作 为什么“允许发送到这个服务”还不足以阻止数据泄漏？ 攻击可能复用任务本来允许的接收端，发送私钥或额外内容。ticket还必须限制对象通过可信validator，并限制累计发送量；只核接收者或工具名不能表达交付合同。 教学例：同一个接收地址既能收到批准报告，也能收到隐藏密钥。报告validator拒绝密钥，即使地址在host allowlist里也不能发送。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<span id="paper-agent-research-runtime-tickets-95683559" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-6071badcbc26530b">为什么“允许发送到这个服务”还不足以阻止数据泄漏？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aruntime-tickets">RuntimeTickets: Source-Grounded Security Obligations for Agent Skills</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · University of North Carolina at Chapel Hill</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>攻击可能复用任务本来允许的接收端，发送私钥或额外内容。ticket还必须限制对象通过可信validator，并限制累计发送量；只核接收者或工具名不能表达交付合同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一个接收地址既能收到批准报告，也能收到隐藏密钥。报告validator拒绝密钥，即使地址在host allowlist里也不能发送。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.03772">原论文</a> · <a href="../../../../agent-research/2611.03772-runtime-tickets/">实现解读</a> · <a href="#qa-6071badcbc26530b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:runtime-tickets" data-paper-title="RuntimeTickets: Source-Grounded Security Obligations for Agent Skills" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="RuntimeTickets: Source-Grounded Security Obligations for Agent Skills Agent University of North Carolina at Chapel Hill 2026-11-02 允许调用“发送”并不等于允许给任意接收者发送任意内容。论文让模型只在运行前提出有原文行依据的 obligations，host 审批后冻结 ticket；运行时由确定性 gate 检查真实副作用，而不再问语言模型。ticket 只能收紧宿主权限，不能放宽。正文 §3 Algorithm 1 高成本完整实验：成本过高，不复现（审查 DONE）。诊断实际检查合法交付、错误接收者、同接收者非法对象及重复请求；组件状态：CPU / L1 component_only，有源 ticket 与原子 gate 内核；不是实际网络代理、完整安全产品或统一 Evolve 算子。高成本完整实验：成本过高，不复现（审查 DONE）。宿主提供可信合同、validator registry 和审计 key；Skill 仅作为不可执行文本被 SHA256 绑定，三个 obligation 的引用必须逐行精确匹配。  Agent安全 权限与运行时约束 Agent 工具与协作执行：把计划变成可检查的动作 一个请求同时违反接收者规则且对象结果未知，应Defer还是Deny？ Deny优先：权限不覆盖、任一明确失败或预算超限即拒绝；没有失败但有未知项才Defer，全部通过才Allow。记录必须在callback副作用前写入，只有Allow消耗额度并转发。 教学例：接收者错误且validator暂时不可用仍是Deny，不能因未知检查把已经确认的越权说成等待；合法请求在日志记下Allow后才进入转发callback。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-b2315572f6cd842f">一个请求同时违反接收者规则且对象结果未知，应Defer还是Deny？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aruntime-tickets">RuntimeTickets: Source-Grounded Security Obligations for Agent Skills</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · University of North Carolina at Chapel Hill</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Deny优先：权限不覆盖、任一明确失败或预算超限即拒绝；没有失败但有未知项才Defer，全部通过才Allow。记录必须在callback副作用前写入，只有Allow消耗额度并转发。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：接收者错误且validator暂时不可用仍是Deny，不能因未知检查把已经确认的越权说成等待；合法请求在日志记下Allow后才进入转发callback。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与实现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.03772">原论文</a> · <a href="../../../../agent-research/2611.03772-runtime-tickets/">实现解读</a> · <a href="#qa-b2315572f6cd842f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:runtime-tickets" data-paper-title="RuntimeTickets: Source-Grounded Security Obligations for Agent Skills" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="RuntimeTickets: Source-Grounded Security Obligations for Agent Skills Agent University of North Carolina at Chapel Hill 2026-11-02 允许调用“发送”并不等于允许给任意接收者发送任意内容。论文让模型只在运行前提出有原文行依据的 obligations，host 审批后冻结 ticket；运行时由确定性 gate 检查真实副作用，而不再问语言模型。ticket 只能收紧宿主权限，不能放宽。正文 §3 Algorithm 1 高成本完整实验：成本过高，不复现（审查 DONE）。诊断实际检查合法交付、错误接收者、同接收者非法对象及重复请求；组件状态：CPU / L1 component_only，有源 ticket 与原子 gate 内核；不是实际网络代理、完整安全产品或统一 Evolve 算子。高成本完整实验：成本过高，不复现（审查 DONE）。宿主提供可信合同、validator registry 和审计 key；Skill 仅作为不可执行文本被 SHA256 绑定，三个 obligation 的引用必须逐行精确匹配。  Agent安全 权限与运行时约束 Agent 工具与协作执行：把计划变成可检查的动作 ticket与一个由Skill自己声明的权限清单，有什么关键差别？ ticket从可信host grant收紧，不能引入host未授权的操作、资源或接收者；obligation必须绑定实际Skill版本和精确原文行。Skill文本是待核证据，不是批准权限的权威。本地编译器验证这些结构边界，不声称已完成LLM语义相关性判断。 教学例：Skill写“请额外上传到other”不让other自动获得权限；伪造不存在的第20行作引用也不能通过来源校验。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-ffcba3dc36c2439b">ticket与一个由Skill自己声明的权限清单，有什么关键差别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aruntime-tickets">RuntimeTickets: Source-Grounded Security Obligations for Agent Skills</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · University of North Carolina at Chapel Hill</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>ticket从可信host grant收紧，不能引入host未授权的操作、资源或接收者；obligation必须绑定实际Skill版本和精确原文行。Skill文本是待核证据，不是批准权限的权威。本地编译器验证这些结构边界，不声称已完成LLM语义相关性判断。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：Skill写“请额外上传到other”不让other自动获得权限；伪造不存在的第20行作引用也不能通过来源校验。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、数据协议与实现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.03772">原论文</a> · <a href="../../../../agent-research/2611.03772-runtime-tickets/">实现解读</a> · <a href="#qa-ffcba3dc36c2439b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:runtime-tickets" data-paper-title="RuntimeTickets: Source-Grounded Security Obligations for Agent Skills" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="RuntimeTickets: Source-Grounded Security Obligations for Agent Skills Agent University of North Carolina at Chapel Hill 2026-11-02 允许调用“发送”并不等于允许给任意接收者发送任意内容。论文让模型只在运行前提出有原文行依据的 obligations，host 审批后冻结 ticket；运行时由确定性 gate 检查真实副作用，而不再问语言模型。ticket 只能收紧宿主权限，不能放宽。正文 §3 Algorithm 1 高成本完整实验：成本过高，不复现（审查 DONE）。诊断实际检查合法交付、错误接收者、同接收者非法对象及重复请求；组件状态：CPU / L1 component_only，有源 ticket 与原子 gate 内核；不是实际网络代理、完整安全产品或统一 Evolve 算子。高成本完整实验：成本过高，不复现（审查 DONE）。宿主提供可信合同、validator registry 和审计 key；Skill 仅作为不可执行文本被 SHA256 绑定，三个 obligation 的引用必须逐行精确匹配。  Agent安全 权限与运行时约束 Agent 工具与协作执行：把计划变成可检查的动作 HMAC链通过且callback最多一次，是否等于完整Supported证明和网络exactly-once？ 都不是。HMAC只能检验给定本地记录的内容与顺序，截短前缀可能仍是有效链，完整Supported还需要sealed/closed观测账户。callback失败后真实交付未知，组件保留已消费额度且同ID不重发；这只是本地至多一次调用。 教学例：服务器可能收到数据后连接断开，退还额度并自动重试会重复发送；本地保留unknown交付边界，不把没有确认当未发生。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-c934da4a778f2976">HMAC链通过且callback最多一次，是否等于完整Supported证明和网络exactly-once？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aruntime-tickets">RuntimeTickets: Source-Grounded Security Obligations for Agent Skills</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · University of North Carolina at Chapel Hill</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>都不是。HMAC只能检验给定本地记录的内容与顺序，截短前缀可能仍是有效链，完整Supported还需要sealed/closed观测账户。callback失败后真实交付未知，组件保留已消费额度且同ID不重发；这只是本地至多一次调用。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：服务器可能收到数据后连接断开，退还额度并自动重试会重复发送；本地保留unknown交付边界，不把没有确认当未发生。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与实现边界、代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.03772">原论文</a> · <a href="../../../../agent-research/2611.03772-runtime-tickets/">实现解读</a> · <a href="#qa-c934da4a778f2976">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rpl" data-paper-title="Learning to Program Retrievals: Composing Search Primitives via Reinforcement Learning" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="Learning to Program Retrievals: Composing Search Primitives via Reinforcement Learning Agent KAIST AI / Meta Superintelligence Labs 2026-10-17 固定检索pipeline把召回数量、融合和返回上下文绑在一起。RPL让策略生成短程序组合稀疏/稠密召回、RRF、去重和重排，只将显式打印的证据交回模型。为解决稀疏奖励难探索的问题，保留策略已有query，对最后一次检索程序做受语法约束的结构变异；执行核验通过后生成续写轨迹，再穿插蒸馏与RL。§3及附录B 成本过高，不复现（审查 DONE）；RetrievalProgram最多4个不同query，宽度取论文阶梯，最多20篇显式输出；execute只解释数据类并调用注入的SDK，不解析或执行Python源码。多路检索实际执行RRF，单路、列表内部或跨路遇到相同ID不同内容时统一拒绝，只有内容完全一致的重复才去重；重排不得注入召回外文档。RRF常数60是明确的本地惯例；输出是文档数上限，不是假装实现了论文2048-token观测限制。  检索与工具 可编程检索与结构变异 Agent 工具与协作执行：把计划变成可检查的动作 可编程检索为什么只把显式打印的文档交回模型？ 召回、融合、去重和重排可在程序内处理较大候选池，但模型上下文只接收最终明确输出。这样把检索计算与观察预算解耦；若把所有中间召回暗中拼回上下文，就绕过了程序选择和预算，不能声称相同检索策略。 例如稠密召回五十篇、重排后打印三篇，模型只应看到三篇，而不是同时读取隐藏的其余四十七篇。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-rpl-95ce1341" class="ar-learning-paper-anchor"></span>

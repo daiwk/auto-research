@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "recommendation:reusegr": {
+      "questions": [
+        {"id":"reuse-context-not-answer-list","level":"basics","question":"ReuseGR共享的是最终推荐结果吗，为什么还能个性化？","answer":"共享的是只依赖query的SID前缀子树，不是所有用户都复用同一最终列表。在线0.5B仍读取当前请求之前的用户历史，完成前缀之后的SID；深度越大省的解码越多，但不可达目标也可能更多。","example":"教学例：同搜跑鞋的两人共享运动类前缀，一人历史偏马拉松、另一人偏徒步，在线后缀仍能选不同商品；若缓存完整SID，选择空间就更窄。","source_sections":["背景与主要改动","核心公式"],"added":"2026-11-04"},
+        {"id":"whole-row-loo-two-weightings","level":"mechanism","question":"ReuseCut为何必须整行LOO，点击质量排序和行平均覆盖又有何区别？","answer":"每个聚合行可代表同一item多次点击，留下这一行的部分点击会让其目标前缀泄漏进自己的参考集。参考top-N按其他行的点击质量排序，命中覆盖再逐行等权。两步故意使用不同权重，不能都改成按点击加权。","example":"教学例：A行同SID点100次，B行另一SID点1次；留出A时应减100而非1。若只减1，参考集仍偏向A，错误夸大可共享深度。","source_sections":["核心公式","数据协议与代码映射"],"added":"2026-11-04"},
+        {"id":"prepared-zero-not-cold-miss","level":"comparison","question":"准备好的深度0和真正冷缓存miss为何不能用一个fallback实现？","answer":"前者是经过准备的query选择不缓存SID token，从空根使用Path-KD scorer；后者缺少准备，直接走独立0.5B E2E端点，正深度miss才可异步排队补规划。两者虽然都没存prefix，模型和请求生命周期不同。","example":"教学例：一个热门query因覆盖不足被判depth0，与从未见过的新query都无prefix，但不能因此把热门query切换到另一个未经同训练的E2E scorer。","source_sections":["核心公式","背景与主要改动"],"added":"2026-11-04"},
+        {"id":"component-not-learned-budgetcut","level":"implementation","question":"深度标签和缓存路由测试通过，能说BudgetCut学会召回更好吗？","answer":"不能。BudgetCut需要在当前已选集合下计算边际Recall teacher，先OPD再GRPO学习分支策略；本地只实现标签、路由和分数公式，没有模型或真实候选质量实验。论文完整A/B的CTR和RPM不能转记成组件收益，也不能隐去CVR负向结果。","example":"教学例：多选一个高分分支可能把原来top100里的目标挤掉，所以它的边际Recall可以为负；只按静态分数top32选枝并不等于学习了BudgetCut。","source_sections":["背景与主要改动","结果、负控与边界","论文离线与线上效果"],"added":"2026-11-04"}
+      ]
+    },
+    "recommendation:spade-local-search": {
+      "questions": [
+        {"id":"business-token-length-prior","level":"basics","question":"OA-BPE为何能在模型训练前改变长尾query的生成先验？","answer":"普通BPE按出现次数合并，稀有但高价值query可能被拆成更多token。OA-BPE用业务权重放大其pair计数，使部分高价值query更早合并，从而减少要连续预测的token；这只是结构先验，不保证真实转化率提高。","example":"教学例：常见便宜词pair出现2次得分2，稀有服务pair出现1次但权重3得分3，后者可先合并；示例权重不是实测CTR。","source_sections":["背景与主要改动","核心公式"],"added":"2026-11-04"},
+        {"id":"parent-rank-not-pairwise-semantics","level":"mechanism","question":"SDBS的sigmoid奖励用的是父beam名次还是两候选的语义距离？","answer":"用本步父beam按累计分数排好的序号，给该父beam的各候选延展加同一phi(b)。它不计算候选两两词重合或embedding距离；之后合并扩展并重新裁成top-B，奖励进入累计分数。","example":"教学例：父A排名0、父B排名1，即使都延展出同一个词x，B的延展仍得到phi(1)，A只得到phi(0)=0；不能把这解释为语义距离奖励。","source_sections":["核心公式","结果、负控与边界"],"added":"2026-11-04"},
+        {"id":"zero-bonus-not-top-one-guarantee","level":"comparison","question":"SDBS不给top-parent奖励，是否意味着最终top1必然与普通beam一致？","answer":"不是。零奖励只说它的分数不被直接修改，其他beam加奖励后仍能超过它。论文给出的逐步充分条件是领先间隔大于最大奖励；跨步累计也需单独考虑，不能把受条件限制的直觉写成任意参数保证。","example":"教学例：A延展原分-.10、B为-.11；如果B的奖励为.09，它的新分-.02会反超A，即使A的奖励严格是0。","source_sections":["核心公式","结果、负控与边界"],"added":"2026-11-04"},
+        {"id":"counts-and-merges-have-different-overlap","level":"implementation","question":"OA-BPE计数和真正合并时都应允许重叠pair吗？","answer":"不能混为一谈。相邻pair统计在a,a,a中能数到两个(a,a)，执行一次pair合并则按非重叠扫描得到aa,a；本地只提供这两个原语，不是完整byte tokenizer。STAR、MARS-DPO和生成器训练仍未复现。","example":"教学例：把a,a,a同时替换两个重叠pair会消费中间a两次，得到不合法结果；测试须同时覆盖统计为2与合并只替换一次。","source_sections":["核心公式","数据协议与代码映射","高成本完整实验"],"added":"2026-11-04"}
+      ]
+    },
+    "recommendation:onetrans-gsr": {
+      "questions": [
+        {"id":"learned-slate-keeps-rules","level":"basics","question":"OneTrans-GSR用统一policy生成整页，为何不是取消所有业务规则？","answer":"它替换的是多generator加evaluator的整页搜索结构。强制要求仍以硬mask执行，有限配额偏置和多样性/广告偏置仍作用于logit，软业务偏好另外影响训练reward。学习policy和保留规则并不冲突。","example":"教学例：policy可以统一决定商品和视频的顺序，但已展示item仍不能再次选择；禁止重复的mask不应由模型是否记住规则来决定。","source_sections":["背景与主要改动","核心公式"],"added":"2026-11-04"},
+        {"id":"separate-standardization-and-floor","level":"mechanism","question":"为何先分别标准化RM奖励与规则奖励，而不是先相加再标准化？","answer":"两种信号尺度和组内方差不同，先混合会让高方差的一项主导；SeparateStandardization先各自中心化/按人口方差归一化，再以lambda组合。跨RM目标的几何聚合又是更前面的独立步骤，需要先minmax和正值floor。","example":"教学例：RM整组恒定、规则分为0/1/2时，RM优势应全0，最终只保留lambda乘规则优势；不能因为RM原值100就制造巨大的共同学习信号。","source_sections":["核心公式","数据协议与代码映射"],"added":"2026-11-04"},
+        {"id":"local-constraint-not-global-feasibility","level":"comparison","question":"每条局部配额规则都通过，就能保证剩下所有位置一定能填满吗？","answer":"不能。不同tag或内容类型的配额可能互相冲突；论文明确局部检查不是全局可行性证明。软规则只是有限惩罚，mandatory才硬mask；全mask时必须报告不可行，不能静默放宽规则后还声称严格约束。","example":"教学例：最后一个位置同时被两条规则要求必须是互斥的两种内容，即使较早每条局部检查各自通过，最终仍可能没有合法候选。","source_sections":["核心公式","结果、负控与边界"],"added":"2026-11-04"},
+        {"id":"rm-proxy-versus-production-outcome","level":"implementation","question":"CPU几何奖励与约束测试通过，为什么不能据此宣称复现GMV/u提升？","answer":"输入RM分数和logits由外部提供，本地没有训练policy、RM或观察真实用户。RM代理相对增益与账户随机A/B的GMV/u不是同一指标；未曝光的反事实slate没有真实label，不能用合成反馈补成能力证据。","example":"教学例：给某页手工输入更高RM分，几何公式算出更高reward只说明算术正确，不表示真实用户会多下单，更不能转记为论文+2.63%的线上提升。","source_sections":["论文离线与线上效果","数据协议与代码映射","结果、负控与边界"],"added":"2026-11-04"}
+      ]
+    }
+  }
+}

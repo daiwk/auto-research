@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:semantic-block-sparse-attention/semantic-blocks": {
+      "source_sha256": "26b23b2a2a075fc5484ca757e5e5756ee129a9a1451ab0183300fd3daa1dc36f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Coarse Semantic Blocks not simply group consecutive tokens?",
+        "answer": "It clusters normalized keys, allowing distant positions to share a block. Neighboring positions share a window but need not express similar information. A centroid score retrieves several related positions at once. Large blocks can also include irrelevant tokens, so cheaper routing does not guarantee unchanged retrieval quality.",
+        "example": "Teaching example: Early and late passages both discuss temperature, so their keys may share a block while intervening person-related tokens belong elsewhere. This explains indexing, not a RULER result."
+      }
+    },
+    "qa/foundation-models:semantic-block-sparse-attention/gqa-order": {
+      "source_sha256": "57557efc6e9a596b5d0ad8971787eda77fa882a2d66a4c13ea55777c0d67fb7b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why apply centroid softmax in each query head before GQA summation and the size penalty?",
+        "answer": "Each head first produces its own block-preference distribution. Summing within the GQA group combines preferences, then dividing by visible block size penalizes expensive blocks. Summing logits before softmax changes the nonlinear order and can let one head's strong negative score cancel another head's support.",
+        "example": "Teaching example: Two heads strongly favor A and B respectively. Summing their distributions preserves both preferences; averaging logits first can create an uninformative tie. If A has eight visible tokens and B two, their size penalties must also differ."
+      }
+    },
+    "qa/foundation-models:semantic-block-sparse-attention/routing-versus-attention": {
+      "source_sha256": "7d719577746c01d835d10c7aed482696b8b11342f78abc45dd1bc34f918a4dd0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not use centroids or normalized keys directly for attention after routing?",
+        "answer": "Normalized spherical vectors only select support. Final attention still uses original QKV and scaled dot products. Replacing member values with centroids discards token content, while normalizing attention keys changes magnitude sensitivity. The full-budget dense limit checks this boundary.",
+        "example": "Teaching example: Two parallel keys have norms one and ten, so routing may cluster them together. Original attention can still prefer the norm-ten token. Normalizing both for attention erases that distinction."
+      }
+    },
+    "qa/foundation-models:semantic-block-sparse-attention/budget-and-causality": {
+      "source_sha256": "9aedfebf04671d5f6e51ad8da2b7467819861e7fb586fea135e69df27afd6fe8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can K=1 retrieve three history tokens, and what does the causal mask actually establish?",
+        "answer": "Selection accumulates whole blocks until reaching or exceeding K, allowing last-block overshoot. Truncating a block changes the method. The mask only prevents attention from reading future positions; fitting centroids on the entire prompt can still depend on future keys. Unindexed generated tokens must stay in the unconditional region.",
+        "example": "Teaching example: If the highest-scoring block has three history tokens, K=1 still retrieves all three plus the current token. Changing future keys and refitting can change an early selection, so zero future support does not establish absence of every future influence."
+      }
+    },
+    "qa/foundation-models:anchor-kv/basis-mismatch": {
+      "source_sha256": "373713827989b1f77fa48c751891553f92052ae203a2445ad05dc85f6c09444e",
+      "reviewed": true,
+      "fields": {
+        "question": "If Anchor finds cross-layer state redundancy, why not let every layer read the same matrix directly?",
+        "answer": "Related content does not imply identical coordinate bases. Each reader needs a learned linear map to express shared information in its own basis; the writer retains its basis. Copying a state without a map confuses shared content with compatible coordinates.",
+        "example": "Teaching example: One layer writes a direction as (1,0), while another layer's basis represents it as (0,1). Shared content is unchanged, but a reader rotation is needed to recover the intended direction."
+      }
+    },
+    "qa/foundation-models:anchor-kv/learned-gate": {
+      "source_sha256": "a978f4ee40d28a8ea17c9e7389c137894c525a1e7b20c042bb9bdb0f2f4b9c0f",
+      "reviewed": true,
+      "fields": {
+        "question": "What problem does the input-dependent gate solve in Anchor's shared readout?",
+        "answer": "The gate controls how much long-range readout each head adds to local output. It can suppress noisy memory on short-window tasks and admit memory when distant information matters. It is a trainable sigmoid projection, not a fixed one-half coefficient or an arbitrary reranker after concatenation.",
+        "example": "Teaching example: With local output two and memory ten, a near-zero gate gives approximately two; gate .2 gives four. This is an additive-gating calculation, not task accuracy."
+      }
+    },
+    "qa/foundation-models:anchor-kv/train-deploy-state": {
+      "source_sha256": "5695eb257282cf350e432ffd301c3bba5b5d3ed2a44db8464b49d7456214b0a1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Anchor's deployment state reduction not justify removing interior branches at the start of training?",
+        "answer": "The paper retains interior TTT in both training stages to stabilize gradients and removes it only for deployment. Inference memory savings do not show that training without those branches converges or that all layer states were identical. The local read-map component does not certify the full recipe.",
+        "example": "Teaching example: Training retains several gradient entry points and deployment keeps shared ones, like removing scaffolding after construction. The completed building's lack of scaffolding does not show construction never needed it."
+      }
+    },
+    "qa/foundation-models:anchor-kv/external-writer": {
+      "source_sha256": "4f57f448bf6526da40177472e13c4929728ddf6e19eccecfb3f8d015fed887e9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does the local external-writer interface not establish an implemented LaCT/Muon TTT update?",
+        "answer": "It only accepts externally computed state, validates the designated writer and increasing revision, and lets readers learn maps and gates. LaCT's inner objective, momentum/Muon and model installation remain outside scope. An arbitrary SGD step or fixed matrix cannot stand in for complete Anchor acceptance.",
+        "example": "Teaching example: Writing an observed KV matrix at revision one checks shared reading. A reader attempting revision two must be rejected. Correct interface behavior still does not establish useful TTT training in a 7B model."
+      }
+    },
+    "qa/foundation-models:multi-layer-indexer/dependency-removal": {
+      "source_sha256": "bb561fcee6e046bff42777756843f89e954897a85c8b94402868372fed29cd91",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can Multi-layer Indexer overlap indexing and attention when ordinary DSA is sequential?",
+        "answer": "Ordinary DSA attention waits for its own layer's selection. MLI instead consumes an available earlier full-layer selection, allowing the current indexer to work for a later consumer. It changes dependencies and consumption layers rather than making indexing arithmetic disappear.",
+        "example": "Teaching example: While layer two attends layer one's selection, its indexer can produce the selection for layer three. Merely launching another stream cannot remove a dependency if attention still waits for its own selection."
+      }
+    },
+    "qa/foundation-models:multi-layer-indexer/lag-versus-retention": {
+      "source_sha256": "8514e1d7b52998aa4c89af6e452c6a5f15f40f29ee64ecfb2534c031cd3f7516",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are retention and lag depth separate parameters?",
+        "answer": "Retention decides which layers retain indexers. Lag counts predecessor full layers within that retained set. Initial full layers lacking predecessors still follow the standard schedule. Counting physical layers instead of full layers selects the wrong support under sparse retention.",
+        "example": "Teaching example: If full layers are 0, 4 and 8, lag one makes layer eight consume layer four's selection, not layer seven's. Layer zero has no predecessor and must compute its own selection before consuming it."
+      }
+    },
+    "qa/foundation-models:multi-layer-indexer/not-token-cache": {
+      "source_sha256": "904159e5f700b54b3d3ef1b4136b578ab33490ce7648a6aeb01ee76a46ad6a64",
+      "reviewed": true,
+      "fields": {
+        "question": "Does combining MLI with IndexCache reuse the previous generated token's index?",
+        "answer": "No. Reuse is across layers of the same current token. Retained full indexers still produce fresh current-token selections. Reusing a previous token adds temporal staleness and is not the reviewed cross-layer schedule.",
+        "example": "Teaching example: At generated token 100, layer four's new selection for layer eight still comes from token 100's hidden state. Substituting token 99's cache changes the algorithm."
+      }
+    },
+    "qa/foundation-models:multi-layer-indexer/lifetime-and-cost": {
+      "source_sha256": "fb1843ebb434753348912b8cc261cb05d70ccd610ed38508d81141445a5faa79",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do a dependency diagram and constant timing on A100 not establish production MLI throughput?",
+        "answer": "Execution must join events at first consumption and retain input/output references against allocator reuse. It also needs real SGLang buffers, CUDA graphs and models. The original eight-H200 TP8 long-context setup exceeds a single-card budget, so this batch catalogs it without runtime or fabricated metrics.",
+        "example": "Teaching example: Releasing hidden-state references while a side stream still reads them can let the main stream reuse that memory even when diagram arrows are correct. Fixed sleeps neither detect this risk nor measure model throughput."
+      }
+    }
+  }
+}

@@ -86,6 +86,26 @@
             "核心公式",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "foundation-models:semantic-block-sparse-attention",
+          "position": "按逐prompt、逐KV head的球面key聚类形成非连续语义块；各GQA query head独立softmax后求和，惩罚可见块大小，整块选择后对原始QKV做注意力。",
+          "tradeoff": "保留原始KV而非把centroid当value；整块预算可超额。全prompt拟合centroid使因果支持不等于严格流式因果不变性。本地仅L1索引与注意力参考，不含论文融合kernel或完整长文能力实验。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "成本判断与复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:anchor-kv",
+          "position": "一组层共享recurrent KV state，以各reader的identity初始化线性read-map调整坐标基，再由输入相关sigmoid gate与局部SWA输出融合。",
+          "tradeoff": "共享内容不代表共享坐标；完整训练仍需真实LaCT/Muon内层writer，且interior TTT只在部署时移除。本地接外部状态，只验证跨层读映射、gate和状态版本，不能称完整TTT或检索能力复现。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "成本判断与复现边界"
+          ]
         }
       ],
       "analysis": [
@@ -121,6 +141,15 @@
           "papers": [
             "foundation-models:merlin",
             "foundation-models:mamba"
+          ]
+        },
+        {
+          "title": "保留原始历史与共享压缩状态，是两条不同读取路线",
+          "body": "NSA用概览、选中块和滑窗保留不同细节路径；CSB不重新训练模型，而是把原始KV按语义重分块后整块读取。Anchor则让多层共享已经压缩的recurrent state，利用各层read-map协调坐标基，再门控融合局部输出。CSB的centroid负责选择，不代替被读value；Anchor的共享状态仍依赖真实writer，外部注入一个矩阵不等于完成TTT。另须分开因果支持与索引构建：CSB虽然mask未来位置，整prompt聚类仍可能让未来key改变早期路由，不能据此声称严格流式因果语言模型。两项本地L1组件都不提供完整模型能力、端到端加速或Evolve晋级证据。",
+          "papers": [
+            "foundation-models:native-sparse-attention",
+            "foundation-models:semantic-block-sparse-attention",
+            "foundation-models:anchor-kv"
           ]
         }
       ],
@@ -176,9 +205,19 @@
             "foundation-models:merlin",
             "foundation-models:mamba"
           ]
+        },
+        {
+          "id": "nov04b-routing-versus-shared-state",
+          "question": "CSB只选历史位置、Anchor只共享一份state，为什么两者都不能由一个causal mask就证明完整长上下文能力？",
+          "answer": "CSB对原始QKV的支持集屏蔽未来，但其全prompt聚类可能让未来key影响centroid与早期选择；mask没有消除建索引的信息依赖。Anchor的read-map和gate只决定怎样读外部共享state，记忆内容是否正确还取决于真实TTT writer和训练。本地分别验证选择/注意力以及共享读出的L1合同，既不证明严格流式因果不变性，也不证明长距离检索能力。",
+          "example": "教学例：在末尾加一批新key后重做聚类，早期选块可能变化；给Anchor手工填入一份矩阵后reader输出正确，也不能说明模型曾学会把订单号写进去。",
+          "papers": [
+            "foundation-models:semantic-block-sparse-attention",
+            "foundation-models:anchor-kv"
+          ]
         }
       ],
-      "updated": "2026-10-30",
+      "updated": "2026-11-04",
       "reviewed_papers": [
         "foundation-models:alibi",
         "foundation-models:autonomy-heads",
@@ -213,7 +252,9 @@
         "foundation-models:ttr-compressor",
         "foundation-models:select-ttt",
         "foundation-models:sleep-lti",
-        "foundation-models:merlin"
+        "foundation-models:merlin",
+        "foundation-models:semantic-block-sparse-attention",
+        "foundation-models:anchor-kv"
       ],
       "updates": [
         {
@@ -308,6 +349,18 @@
           "source_revisions": {
             "foundation-models:merlin": "5549f39008d450d4a2446631403f0b94d55ea76f976bcc61197cb3c9f1fa0f01",
             "foundation-models:mamba": "cc8e64d103688cf6f1eb766728f173a4c9af31eca88def398193334b5ab90220"
+          }
+        },
+        {
+          "date": "2026-11-04",
+          "summary": "增加CSB与Anchor，比较原始KV的语义选块与共享recurrent state的坐标变换读出；明确全prompt聚类的非流式因果边界、外部writer不等于完整TTT，以及两项仅L1组件、完整高成本实验不复现。",
+          "papers": [
+            "foundation-models:semantic-block-sparse-attention",
+            "foundation-models:anchor-kv"
+          ],
+          "source_revisions": {
+            "foundation-models:semantic-block-sparse-attention": "3b0bb31da00667fd680fb94208f1f9ba87fbec43ce3433a20e56eb3756cd9ff5",
+            "foundation-models:anchor-kv": "5a703a2971010298f912f7228fdf5b41e8fb5603169bd8890a9fb2163f949422"
           }
         }
       ]
@@ -881,6 +934,16 @@
             "核心公式",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "foundation-models:multi-layer-indexer",
+          "position": "让当前层消费较早full layer为同一token计算的新selection，将索引器放到侧stream，与主stream的attention、投影和FFN重叠；首次消费时join并保留tensor生命周期。",
+          "tradeoff": "改变依赖与调度，不压缩KV，也不是复用上一token的过期selection。完整路径需8张H200、TP8大模型与SGLang内核，本库仅review，未实现runtime或生成吞吐metrics。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "成本判断与复现边界"
+          ]
         }
       ],
       "analysis": [
@@ -918,6 +981,15 @@
           "papers": [
             "foundation-models:fold-bias",
             "foundation-models:gqa"
+          ]
+        },
+        {
+          "title": "数据量没变，也可以重排关键依赖",
+          "body": "GQA减少每个位置的KV heads，KVMEM决定历史block何时进入执行视图；MLI不以减少KV字节为目标，而是把selection的生产与消费分到不同full layers，让同一token的索引工作和主计算重叠。回退步数按保留索引器的full layers计，不是简单减去物理层号；开头没有前驱的层仍用标准schedule。并发执行还必须在首次消费者等待事件、持有输入和输出直到join，否则逻辑依赖图正确也可能出现读未完成或内存复用。它不是跨token缓存旧selection，单CPU依赖模拟或普通CUDA同步前向也不能证明论文overlap；本库仅收录review，完整高成本实验不复现，无本地运行或吞吐证据。",
+          "papers": [
+            "foundation-models:gqa",
+            "foundation-models:kvmem",
+            "foundation-models:multi-layer-indexer"
           ]
         }
       ],
@@ -973,9 +1045,19 @@
             "foundation-models:fold-bias",
             "foundation-models:gqa"
           ]
+        },
+        {
+          "id": "nov04b-overlap-not-kv-compression",
+          "question": "MLI读较早层的selection，为什么不等于KVMEM取回旧block，也不等于复用上一生成token的选择？",
+          "answer": "MLI移动的是同一token内selection的消费层，选择仍由该token的索引器新计算，跨full layer产生可重叠窗口；KVMEM决定历史KV block如何检索并物化到有限执行视图。旧token的selection可能已不适合当前query，不能用跨token复用替代MLI。是否真正重叠还需事件等待、张量生命周期和真实服务内核，本库对此仅review，不用CPU模拟宣称已实现。",
+          "example": "教学例：让当前层读较早full layer刚为当前token算出的top-k，是依赖调度；直接拿上一个生成token留下的top-k，则改变了选择的新鲜度。两种复用看起来相似，并不代表是同一个算法。",
+          "papers": [
+            "foundation-models:multi-layer-indexer",
+            "foundation-models:kvmem"
+          ]
         }
       ],
-      "updated": "2026-10-30",
+      "updated": "2026-11-04",
       "reviewed_papers": [
         "foundation-models:agentkv",
         "foundation-models:awq",
@@ -1008,7 +1090,8 @@
         "foundation-models:vfold",
         "foundation-models:rescom",
         "foundation-models:hope-hilbert",
-        "foundation-models:fold-bias"
+        "foundation-models:fold-bias",
+        "foundation-models:multi-layer-indexer"
       ],
       "updates": [
         {
@@ -1099,6 +1182,16 @@
           "source_revisions": {
             "foundation-models:fold-bias": "75acdc4bf86ed173dedadd355d09154087144327470a3a11a1856938b88ee9ce",
             "foundation-models:gqa": "ffa7f3cc8df0e83ee807e94334765885f2595cf939dfda1012e18d8eecb56658"
+          }
+        },
+        {
+          "date": "2026-11-04",
+          "summary": "收录MLI并与GQA、KVMEM对照：它重排同token跨full layer的selection依赖，不压缩KV、不复用旧token选择。注明事件和张量生命周期条件；完整8H200实验成本过高不复现，本库仅review、无runtime或吞吐指标。",
+          "papers": [
+            "foundation-models:multi-layer-indexer"
+          ],
+          "source_revisions": {
+            "foundation-models:multi-layer-indexer": "5d25ba2c96e5fc8f810acb4399730ebd925836ddd3c27228b0b3ed20cadd0a94"
           }
         }
       ]

@@ -1,0 +1,65 @@
+{
+  "domain": "recommendation",
+  "key": "onetrans-gsr",
+  "title": "OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer",
+  "paper_url": "https://arxiv.org/abs/2611.04720v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.04720v1",
+  "reviewed_version": "v1",
+  "detail_path": "recommendation-components/2611.04720-onetrans-gsr/README.md",
+  "topic": [
+    "重排与混排",
+    "生成式整页策略与多目标后训练"
+  ],
+  "browse_company": "ByteDance",
+  "browse_topic": [
+    "多阶段排序与混排",
+    "训练目标与决策优化"
+  ],
+  "first_author": "Feng Cheng",
+  "first_author_affiliation": "ByteDance",
+  "published": "2026-11-03",
+  "published_at": "2026-11-03T11:42:02Z",
+  "announced_on": "2026-11-04",
+  "code": null,
+  "code_status": "固定v1和arXiv链接未发现OneTrans-GSR原作者实现；原OneTrans或第三方重写不自动代表本文开源",
+  "code_license": "作者源码未发现；论文arXiv非独占许可；本地按公式独立实现",
+  "upstream_revision": null,
+  "adapter": null,
+  "priority": "P0",
+  "intake_class": "newly_announced_first_collection",
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "local_operator": "auto_research.reproductions.onetrans_gsr_components.business_logits",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.reproductions.onetrans_gsr_components import diagnostic; print(diagnostic(42))'",
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "online_ab": [
+    {
+      "product": "ByteDance e-commerce reranking and mix-ranking",
+      "metric": "GMV/u",
+      "lift_percent": 2.63,
+      "traffic": "one-week account-randomized production A/B, equal eligible traffic per arm, deployed Generator-Evaluator control, upstream retrieval/fine ranking and rule set fixed; repurchase measured after14days",
+      "source_url": "https://arxiv.org/html/2611.04720v1",
+      "source_location": "Section6.7/Table11; AdvertiserValue+2.06%, repurchase+2.03%, p<0.05; stage latency-13%; full-system, not local components"
+    }
+  ],
+  "cost_assessment": {
+    "source_url": "https://arxiv.org/html/2611.04720v1",
+    "source_location": "Sections5/6.1/6.7",
+    "available_resource": "one NVIDIA A100 or A30, or local Mac",
+    "model_scale": "3-member two-layer dim512 reward ensemble,4-layer dim256 policy,32slates/request and1024-request global batch",
+    "data_scale": "three months of private production logs, multimodal/candidate/user features and long-term outcomes; logged slates only carry observed feedback",
+    "estimated_cost_basis": "private production data and large repeated slate rollout/RM/online matrix unavailable under single-device budget; no complete measuredGPU-hour claim",
+    "decision": "完整实验成本过高，不复现（审查 DONE）；仅CPU约束调整与奖励算术参考，不训练policy/RM、不运行生产A/B、不自动重试"
+  },
+  "summary": "统一自回归policy生成商品/视频/直播/广告的整页序列；离线RM集成、正值几何多目标奖励与SeparateStandardization指导后训练，在线保留硬mask和软业务偏置。本地仅核局部约束/去重和奖励公式，既不声称局部规则保证全局可行，也不把RM代理分数当真实GMV。"
+}

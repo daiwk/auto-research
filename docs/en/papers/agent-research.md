@@ -8,7 +8,11 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents](<https://arxiv.org/abs/2611.05139>) | 2026-11-03 | [English](../../agent-research/2611.05139-meta-square/README-en.md) · [Chinese](../../agent-research/2611.05139-meta-square/README.md) |
+| [From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?](<https://arxiv.org/abs/2611.05108>) | 2026-11-03 | [English](../../agent-research/2611.05108-continual-autoresearch/README-en.md) · [Chinese](../../agent-research/2611.05108-continual-autoresearch/README.md) |
 | [Strategist: Evolving Reasoning with Agents](<https://arxiv.org/abs/2611.03618>) | 2026-11-02 | [English](../../agent-research/2611.03618-strategist/README-en.md) · [Chinese](../../agent-research/2611.03618-strategist/README.md) |
+| [RuntimeTickets: Source-Grounded Security Obligations for Agent Skills](<https://arxiv.org/abs/2611.03772>) | 2026-11-02 | [English](../../agent-research/2611.03772-runtime-tickets/README-en.md) · [Chinese](../../agent-research/2611.03772-runtime-tickets/README.md) |
+| [Training LLM Agents to Automate LLM Post-Training with RSI-Dojo](<https://arxiv.org/abs/2611.03698>) | 2026-10-29 | [English](../../agent-research/2611.03698-rsi-dojo/README-en.md) · [Chinese](../../agent-research/2611.03698-rsi-dojo/README.md) |
 | [AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers](<https://arxiv.org/abs/2610.39234>) | 2026-10-29 | [English](../../agent-research/2610.39234-agentheal/README-en.md) · [Chinese](../../agent-research/2610.39234-agentheal/README.md) |
 | [Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?](<https://arxiv.org/abs/2610.37276v1>) | 2026-10-27 | [English](../../agent-research/2610.37276-evalalloc/README-en.md) · [Chinese](../../agent-research/2610.37276-evalalloc/README.md) |
 | [When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement](<https://arxiv.org/abs/2610.36826v1>) | 2026-10-27 | [English](../../agent-research/2610.36826-ruharness/README-en.md) · [Chinese](../../agent-research/2610.36826-ruharness/README.md) |

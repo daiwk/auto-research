@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-04-new-bulletin-components",
+  "checked_on": "2026-11-05",
+  "local": {
+    "removed_generated_site": true,
+    "generated_site_allocated_kib": 853872,
+    "removed_execution_archive_and_duplicate_raw_results": true,
+    "archive_and_duplicate_raw_allocated_kib": 272,
+    "removed_one_use_learning_patch_emitter": true,
+    "removed_redundant_integration_handoff_notes": true
+  },
+  "remote": {
+    "removed_only_this_batch_temporary_source_and_execution_directory": true,
+    "allocated_kib": 644
+  },
+  "preserved": [
+    "source changes and active worktree",
+    "committed-intended raw CPU/CUDA results, metrics and frozen-source proof",
+    "six sanitized GPU receipts",
+    "original paper figures and provenance",
+    "source capture receipts and public HTML reference cache",
+    "reusable public dataset and checkpoint caches"
+  ],
+  "checkpoint_or_dataset_downloads": 0,
+  "existing_unrelated_caches_removed": false
+}

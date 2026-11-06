@@ -7,7 +7,7 @@ hide:
 
 # 从会调用到能交付：工具接口、可靠性与协作合同
 
-[Agent](../index.md) · 更新 2026-10-29 · 49 篇主题资料 / 6 篇重点对照
+[Agent](../index.md) · 更新 2026-11-05 · 50 篇主题资料 / 7 篇重点对照
 
 Toolformer 学何时调用，SWE-agent 设计动作接口，RATED 处理相关工具的运行可靠性；AutoGen 定义消息程序，MetaGPT 约束角色交付物，World of SWEcraft 再用隐藏下游检验群体产出。每层都可能失败，调用格式正确不是端到端完成的替身。
 
@@ -31,6 +31,7 @@ Toolformer 学何时调用，SWE-agent 设计动作接口，RATED 处理相关�
 | [MetaGPT](../../../agent-research/2308.00352-metagpt/README.md) · [原始来源](https://arxiv.org/abs/2308.00352)<br>章节：背景与主要改动、核心公式、复现边界 | 把软件SOP写入角色流程，每步生产结构化中间物供下游消费和验证。 | 结构化交付限制自由聊天，但上游错误仍可能被后续继承；本地有真实编辑测试，仍不代表完整LLM团队。 |
 | [RATED: Reliability-Aware AI Agent Tool Retrieval via Execution Dynamics](../../../reproductions/2610.13889-rated/README.md) · [原始来源](https://arxiv.org/abs/2610.13889)<br>章节：背景与主要改动、核心公式、结果、验证与边界 | 冻结语义双encoder取Top-K，再由metadata与逐工具discounted LinUCB利用真实执行反馈重排。 | 只知道选中工具的反馈，不能给未调用项虚构回报；本地encoder短训实际执行，但授权binding失败，未证明原生态能力。 |
 | [World of SWECraft: Agent Collaboration at Scale via Simulated Software Worlds](../../../agent-research/2610.24061-world-of-swecraft/README.md) · [原始来源](https://arxiv.org/abs/2610.24061v1)<br>章节：背景与主要改动、核心公式、本地复现与成本判断 | 持久会话、issue/PR和包依赖组成软件世界，隐藏下游安装冻结版本检验集体产物。 | 本地微基准通过不足以证明下游收益，指令计数也不是墙钟；完整55K会话环境高成本，本地未运行。 |
+| [RuntimeTickets: Source-Grounded Security Obligations for Agent Skills](../../../agent-research/2611.03772-runtime-tickets/README.md) · [原始来源](https://arxiv.org/abs/2611.03772)<br>章节：核心公式、数据协议与实现边界、高成本完整实验 | 从宿主授权收紧得到有源冻结ticket，在发送前核对接收者、对象和累计额度，先判Deny，再判Defer，最后才Allow。 | 依赖可信宿主validator和真实副作用边界；本地仅原子CPU gate与记录链，不实现完整代理、观测账户或安全能力。 |
 
 </div>
 
@@ -53,6 +54,12 @@ AutoGen 让谁回复、何时继续和停止成为可编程协议；MetaGPT 进�
 Meta官方retrieval-programs现已可核验，更新RPL旧条目的开源状态；主体CC-BY-NC4，vendored检索/训练组件保留各自许可。代码公开不等于本地typed grammar突然覆盖任意Python、跨轮状态、神经检索或RL；本轮未复制源码或改变原L1证据。
 
 对照来源：[toolformer](../../../agent-research/2302.04761-toolformer/README.md) · [rpl](../../../agent-research/2610.24854-rpl/README.md)
+
+### 被允许的工具也必须受交付对象和额度约束
+
+只按工具名或接收端授权会遗漏复用合法端点的数据外泄。RuntimeTickets让宿主冻结来源可追溯的recipient/object/amount约束，再由模型无关gate逐副作用检查。它仍依赖完整可信网络边界和观察覆盖；本地HMAC前缀可校验但不能证明完整账户已sealed/closed，也不能因为callback至多一次而宣称网络exactly-once。
+
+对照来源：[runtime-tickets](../../../agent-research/2611.03772-runtime-tickets/README.md) · [toolformer](../../../agent-research/2302.04761-toolformer/README.md) · [swe-agent](../../../agent-research/2405.15793-swe-agent/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -102,6 +109,10 @@ Meta官方retrieval-programs现已可核验，更新RPL旧条目的开源状态�
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
 
+**2026-11-05** · 补入RuntimeTickets，将工具权限与具体交付合同分开：相同合法接收端仍可能承载非法对象或超额发送。逐副作用前的失败、未知、允许分支，先留记录再执行，以及不确定回调后的不重发，是与工具是否可调用不同的运行时合同；CPU负控不等于真实网络安全验收。完整实验高成本不复现，审查DONE。
+
+涉及：[runtime-tickets](../../../agent-research/2611.03772-runtime-tickets/README.md)
+
 **2026-10-29** · Meta官方retrieval-programs现已可核验，更新RPL旧条目的开源状态；主体CC-BY-NC4，vendored检索/训练组件保留各自许可。代码公开不等于本地typed grammar突然覆盖任意Python、跨轮状态、神经检索或RL；本轮未复制源码或改变原L1证据。
 
 涉及：[rpl](../../../agent-research/2610.24854-rpl/README.md)
@@ -110,10 +121,11 @@ Meta官方retrieval-programs现已可核验，更新RPL旧条目的开源状态�
 
 覆盖 49 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 49 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 50 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
+- [RuntimeTickets: Source-Grounded Security Obligations for Agent Skills](../../../agent-research/2611.03772-runtime-tickets/README.md)
 - [Learning to Program Retrievals: Composing Search Primitives via Reinforcement Learning](../../../agent-research/2610.24854-rpl/README.md)
 - [World of SWECraft: Agent Collaboration at Scale via Simulated Software Worlds](../../../agent-research/2610.24061-world-of-swecraft/README.md)
 - [TRACER: Trajectory-Aware Tool Retrieval for LLM Agents](../../../agent-research/2610.21267-tracer/README.md)

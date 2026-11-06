@@ -10,6 +10,9 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 注意力与长上下文 | [Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training](2611.04327-anchor-kv/README.md) | University of Arizona，2026-11-03 | 未发现官方代码 | `anchor-kv`：仅低成本组件，完整实验不复现 |
+| 注意力与长上下文 | [Coarse Semantic Blocks for Efficient Training-Free Sparse Attention](2611.04313-semantic-block-sparse-attention/README.md) | Preferred Networks，2026-11-03 | [原作者入口](https://github.com/pfnet-research/semantic-block-sparse-attention/)；固定v1明确链接原作者仓库；本轮独立实现小张量参考，不运行上游vLLM大模型服务 | `semantic-block-sparse-attention`：仅低成本组件，完整实验不复现 |
+| 推理与系统效率 | [Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention](2611.03768-multi-layer-indexer/README.md) | Writer AI Research, Writer Inc.，2026-11-02 | [原作者入口](https://github.com/ArjunKrishnak/dsa-multi-layer-indexer)；固定v1明确链接作者实现；本轮未安装或运行上游多卡SGLang部署 | 计划键 `multi-layer-indexer`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 推理与系统效率 | [XLA from the Trenches: Correctness on TPU Workloads at Scale](2611.00624-xla-trenches/README.md) | Google，2026-10-31 | [原作者入口](https://github.com/openxla/xla/blob/main/docs/hlo_isolation.md)；原文明确macro-graph isolator已上游到OpenXLA，公开HLO isolation文档及evaluator；完整内部agent harness、TPU工具层、生产图集与微融合硬件调试路径未公开，不等于本文整套作者实现已开源 | 计划键 `xla-trenches`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 多模态基础模型 | [GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport](2611.00319-gavagai/README.md) | St Thomas’ College of Engineering and Technology，2026-10-30 | 未发现官方代码 | `gavagai`：仅低成本组件，完整实验不复现 |
 | 预训练与数据 | [ProLand: A New Infeasible Manifold Optimization Method for LoRA Fine-Tuning](2611.00236-proland/README.md) | Shanghai Jiao Tong University，2026-10-30 | 未发现官方代码 | `proland`：仅低成本组件，完整实验不复现 |

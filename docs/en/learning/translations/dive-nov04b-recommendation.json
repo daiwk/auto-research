@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/recommendation/generative-retrieval-reasoning/comparison/recommendation:reusegr": {
+      "source_sha256": "9d28872f555bfc6f93dcdae6cbc2f4ac3dcfdd2a0e8309e40aaafedd78821d97",
+      "reviewed": true,
+      "fields": {
+        "position": "Share query-only SID prefixes planned by 7B and complete them with a 0.5B model under current history; ReuseCut chooses depth through sequential coverage criteria.",
+        "tradeoff": "Retains more personalization than caching final results, but deeper reuse restricts reachability. Prepared depth zero and cold misses use different models; a label kernel is not learned BudgetCut."
+      }
+    },
+    "dive/recommendation/generative-retrieval-reasoning/comparison/recommendation:spade-local-search": {
+      "source_sha256": "454ff98038af2be86ebd58efaba6017519c04030c764fcd38c382688a5275c35",
+      "reviewed": true,
+      "fields": {
+        "position": "Business-weight BPE merges and apply a bounded parent-rank sigmoid bonus when pruning free-text query generations.",
+        "tradeoff": "Differs from fixed-SID subtree constraints and LCP penalties. Rank bonuses measure no pairwise semantic distance and do not unconditionally preserve final top-1. STAR, MARS-DPO and the full query model are not implemented locally."
+      }
+    },
+    "dive/recommendation/generative-retrieval-reasoning/analysis/4": {
+      "source_sha256": "8e47dfbdd0418c98e6bc64291dc77cb735b0f0324abb8badb62158476734d6e1",
+      "reviewed": true,
+      "fields": {
+        "title": "Shared computation, output objects and candidate diversification are separate decisions",
+        "body": "TIGER turns items into semantic-code paths. ReuseGR retains SID hierarchy but shares query-prefix planning across users while current history still affects suffixes. SPADE instead generates executable free-text queries: OA-BPE changes tokenization priors, then parent-rank bonuses affect search survival; this is not PinGER common-SID-prefix penalization. Fix candidate budgets and output objects before comparing history-input, offline-planning and online-decoding costs. Reachable prefix coverage is not complete retrieval improvement."
+      }
+    },
+    "dive/recommendation/generative-retrieval-reasoning/question/reuse-prior-rank-and-semantic-distance": {
+      "source_sha256": "b27ef9ac62f928367fe482505a9b9fb1f5a4299a18be8b49256a37c2bcdb98d8",
+      "reviewed": true,
+      "fields": {
+        "question": "Can ReuseGR, PinGER and SPADE be reduced to one prefix/diversity score?",
+        "answer": "Not without preserving their distinctions. ReuseGR controls reuse depth and reachable subtrees; PinGER penalizes repeated common-SID-prefix subtrees; SPADE rewards parent rank while producing free-text queries. They act on different objects and stages. Align serving budgets before separately evaluating reachability, redundancy and final quality.",
+        "example": "Teaching example: Caching two prefix levels saves computation but need not diversify candidates. Rewarding a lower-ranked free-text query does not calculate its semantic distance from already selected queries."
+      }
+    },
+    "dive/recommendation/generative-retrieval-reasoning/update/2026-11-04/3": {
+      "source_sha256": "ccfb1e09192a22153250e2e4f4370094b25d571ca069c06740de2501b47fe39c",
+      "reviewed": true,
+      "fields": {
+        "summary": "Adds ReuseGR and SPADE, distinguishing query-prefix reuse, user-history conditioning, business-tokenization priors and parent-rank bonuses against TIGER/PinGER. Output objects and budgets remain explicit; CPU operators and full-system A/B are different evidence tiers."
+      }
+    },
+    "dive/recommendation/slates-business-value/comparison/recommendation:onetrans-gsr": {
+      "source_sha256": "c7ae743566509cc83ec77d12bfc433f095ab48d87a78195281d29929bdaea472",
+      "reviewed": true,
+      "fields": {
+        "position": "One autoregressive policy unifies reranking and mix-ranking, with RMs used only offline; decoding retains hard masks and finite adjustments, while RM and rule rewards are standardized separately.",
+        "tradeoff": "Geometric rewards and ensemble penalties are proxies, not guarantees for every business metric. Local rules do not guarantee global feasibility. Local delivery is CPU constraint/arithmetic reference code, not trained slate models."
+      }
+    },
+    "dive/recommendation/slates-business-value/analysis/3": {
+      "source_sha256": "7030639b2ad42530eeec0663e535e8143bb978c559366abef063bdcf09ce9c6c",
+      "reviewed": true,
+      "fields": {
+        "title": "A unified slate policy still separates hard constraints from proxy rewards",
+        "body": "CDM distills marginal slate supervision from a controlled MMR teacher. OneTrans-GSR instead uses slate RMs to guide one policy that directly generates mixed-content sequences. Its geometric objective first applies group min-max normalization and a positive floor, while rule rewards require separate standardization; it is not arbitrary multiplication of business scores. Hard masks prevent forbidden actions, finite penalties permit trade-offs, and local quotas may conflict. Record RM proxy scores, final selection and real A/B separately rather than relabel CPU arithmetic or predictions on unexposed slates as user gains."
+      }
+    },
+    "dive/recommendation/slates-business-value/question/geometric-floor-not-business-guarantee": {
+      "source_sha256": "14ed56bebe6edbabe757034a4c8af54ad3ebc9c7cd5f214e2c5bb285fbc81211",
+      "reviewed": true,
+      "fields": {
+        "question": "Does OneTrans-GSR geometric reward guarantee that no objective deteriorates?",
+        "answer": "No. Flooring and geometric aggregation change proxy trade-offs, not prove Pareto improvement; a constant objective contributes the same group factor. Actual user effects require independent production A/B, and passing local masks does not prove a jointly feasible completion.",
+        "example": "Teaching example: Multiplying normalized click and GMV proxies can still favor a slate overestimated by the RM. A higher CPU formula score is not additional orders."
+      }
+    },
+    "dive/recommendation/slates-business-value/update/2026-11-04/2": {
+      "source_sha256": "1fd79a0f0de077f62a10fb8c4e7619c3acf8a1b8fdb1ec5b9890a3d223885409",
+      "reviewed": true,
+      "fields": {
+        "summary": "Adds OneTrans-GSR, separating single-policy slate generation, offline RM proxies, geometric objectives and independent standardization. The comparison with CDM keeps teacher/policy differences explicit; local constraints and online evidence are not substitutes."
+      }
+    }
+  }
+}

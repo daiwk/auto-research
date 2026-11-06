@@ -350,6 +350,10 @@
 
 - 2026-07-23 · [Parameter-free Adaptive Sparse Attention via Compression-Based Content Selection](../../reproductions/2607.21752-gzip-sparse-attention/README.md)（`gzip-sparse-attention`）：固定 BigBird/Longformer mask 不理解内容，learned mask 又需要额外参数、梯度估计或专用 kernel。论文把字节序列切成固定 block，用 gzip 压缩率作为无需训练的信息密度信号：高于样本均值的 literal blocks 互相建立长程连接，所有 block 保留局部窗口，不设置固定 global token。
 
+## Preferred Networks
+
+- 2026-11-03 · [Coarse Semantic Blocks for Efficient Training-Free Sparse Attention](../../foundation-models/2611.04313-semantic-block-sparse-attention/README.md)（`semantic-block-sparse-attention`）：位置相邻的 token 未必语义相关。本文用归一化 key 的球面聚类建立不连续位置的语义块；每个 query 选择少量块，再对其中**原始** KV 做注意力。大块降低路由开销，但选择粒度更粗。免训练指不更新预训练模型权重，不等于没有逐 prompt 建索引成本。依据固定 v1 §3、Appendix B。
+
 ## Princeton University
 
 - 2026-10-27 · [Multi-State Linear Attention with Generalized Second-Order Routing](../../foundation-models/2610.37645-merlin/README.md)（`merlin`）：多状态线性注意力把上下文切成段，每段保留一个压缩状态。查询先读取多个状态，再加权汇总。只用位置或每段 key 均值做路由，会忽略同段 key 与查询对齐程度的分布：两个均值相同的段，可能只有一个含特别匹配的 key。
@@ -494,6 +498,10 @@
 
 - 2026-10-15 · [DropKV: Decoupling Residual-Output Perturbation for Near-Optimal KV-Cache Eviction](../../foundation-models/2610.22130-drop-kv/README.md)（`drop-kv`）：只按 attention 权重淘汰 KV 会忽略 value 内容。DropKV 将组合驱逐近似为逐 token 输出扰动，跨观察窗口累加、池化，并保护近期 token。§3 与 Algorithm 1 定义评分；§4 的近似保证有条件，不能解释成任意输入上的全局最优。
 
+## University of Arizona
+
+- 2026-11-03 · [Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training](../../foundation-models/2611.04327-anchor-kv/README.md)（`anchor-kv`）：不同层可能存储相近信息，却使用不同坐标基。Anchor 让一组层共享一个 recurrent state，以各层可学习 read-map 变换读出，再由输入相关 gate 与局部 SWA 合并。训练时保留 interior TTT 分支，部署时才删除，不能把部署结构直接当作训练配方。依据固定 v1 §3.2、§4.1、Appendix C。
+
 ## University of California, Berkeley
 
 - 2026-10-08 · [Rounding in Preconditioner Space: Redesigning 4-bit AdamW Optimizer-State Quantization](../../foundation-models/2610.12444-adamw4bit/README.md)（`adamw4bit`）：AdamW 的量化误差会进入后续矩递推。ZIP-SR 在预条件器空间随机舍入第二矩；ZE-EDEN 排除零码点并校准块尺度。两者使用 NF4 第一矩，训练末尾 10% 对 LM head 第一矩随机舍入。[原文](https://arxiv.org/html/2610.12444v1)
@@ -602,6 +610,10 @@
 ## Westlake University
 
 - 2026-10-08 · [SparseDecoding: Decoding-Aware Pruning for Accurate and Efficient LLM Inference](../../foundation-models/2610.12327-sparse-decoding/README.md)（`sparse-decoding`）：固定文本的 teacher-forcing 激活不等于模型自回归生成时的激活。该方法让稠密模型先从任务问题生成回答，只保存逐 token 解码激活、排除 prefill，再用这些统计量执行剪枝。校准协议与剪枝后端分离：原文主要使用 SparseGPT，也报告 Wanda 消融。
+
+## Writer AI Research, Writer Inc.
+
+- 2026-11-02 · [Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention](../../foundation-models/2611.03768-multi-layer-indexer/README.md)（`multi-layer-indexer`）：DSA 层通常先扫描索引缓存、取 top-k，再执行稀疏 attention。MLI 让当前层读较早 full layer 的选择，当前索引器于是可在另一 CUDA stream 与主计算重叠。它可与 IndexCache 组合，但不是跨生成 token 复用过期选择。依据固定 v1 §3、§4、Appendix A。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ## Wuhan University
 

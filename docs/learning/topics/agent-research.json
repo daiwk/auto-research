@@ -134,6 +134,7 @@
       ],
       "reading_order": "先读 Toolformer，理解调用何时有用；再读 CRITIC，观察工具证据怎样进入修订；最后读 SWE-agent，把单次调用扩展为有状态的仓库操作与测试循环。",
       "papers": [
+        "agent-research:runtime-tickets",
         "agent-research:rpl",
         "agent-research:world-of-swecraft",
         "agent-research:tracer",
@@ -203,6 +204,9 @@
       ],
       "reading_order": "先读 Reflexion，看语言经验如何跨尝试保存；再读 Self-Refine，对比单次反馈修订；最后读 AgentX，理解候选开发、评估与运行流程更新的完整边界，并对照本地仅实现的部分。",
       "papers": [
+        "agent-research:meta-square",
+        "agent-research:continual-autoresearch",
+        "agent-research:rsi-dojo",
         "agent-research:strategist",
         "agent-research:rsi-opt",
         "agent-research:image-rsi",

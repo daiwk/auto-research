@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-04-new-bulletin-components",
+  "scope": "fixed low-cost L1 components only; complete paper experiments are not reproduced",
+  "available_resource": "one NVIDIA A100 or A30, or local Mac; no multi-device training assumed",
+  "component_keys": ["anchor-kv","continual-autoresearch","dars","meta-square","onetrans-gsr","p2-mopd","reusegr","runtime-tickets","semantic-block-sparse-attention","shuffled-opsd","spade-local-search","targeted-guidance"],
+  "reference_only_keys": ["multi-layer-indexer","rsi-dojo"],
+  "seeds": [42,43,44],
+  "model_scale": "small seeded tensors, short synthetic streams and CPU arithmetic/state contracts; no pretrained model",
+  "data_scale": "bounded synthetic diagnostic inputs; no downloaded benchmark, hidden test suite or production data",
+  "download_budget": "zero checkpoint/data downloads; transfer only scoped public source and portable source proof",
+  "expected_cost": "minutes rather than hours, based on bounded tensor/state sizes and prior comparable component runs; estimate, not a measured complete training time",
+  "maximum_run_seconds": 300,
+  "automatic_retry": false,
+  "full_experiments_executed": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_decision": "Costs are assessed individually in each selected catalog record; full model/data/production matrices are too costly and not reproduced (review DONE)."
+}

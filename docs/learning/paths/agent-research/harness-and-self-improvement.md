@@ -7,7 +7,7 @@ hide:
 
 # 运行流程与自进化：改的是哪一层
 
-[Agent](index.md) / 188 个问题 · 47 篇论文
+[Agent](index.md) / 200 个问题 · 50 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,115 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">188 个问题 · 47 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">200 个问题 · 50 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:continual-autoresearch" data-paper-title="From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks? Agent RBC Borealis / ELLIS Institute Tübingen / Max Planck Institute for Intelligent Systems 2026-11-03 持续会话可能复用代码和经验，更快找到有效方案，但未必提高最终留出效果。论文在相同任务流、模型、数据和逐任务时间预算下比较 stateful 与 reset Agent；保留首个有效提交、所有提交及最终选择，完成后才由私有测试评价。第一任务没有历史可转移，不能计入跨任务增益。正文 §3 高成本完整实验：成本过高，不复现（审查 DONE）。组件状态：CPU / L1 component_only，运行后离线 scorer 与匹配协议；没有运行自主研究 Agent，也未接入统一 Evolve。高成本完整实验：成本过高，不复现（审查 DONE）。只接收 ClosedRun(closed=True)，每个候选保留唯一 ID、单调完成时刻、valid 标记和外部私有测试分数。无效候选不能附隐藏分数，最终选择须为确实有效的提交；预算外候选和未结束记录被拒绝。scorer 不向 actor 提供接口，不运行训练，也无法防止调用者把离线分数另行泄露。  Harness 与自我改进 RSI 跨任务研究评测 Agent 运行流程与自进化：改的是哪一层 更快找到高分候选，为什么仍可能最终效果更差？ 搜索效率评价预算内best-so-far隐测曲线的面积，最终效果评价Agent实际选定候选。两者不是同一个统计量；Agent可能很早找到好方案，之后过拟合开发集并选择更差的方案。 教学例：时刻2找到0.8、时刻6找到0.5并最终选择后者，早期搜索很好但最终分数只有0.5。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-continual-autoresearch-b46d9b72" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-fd179fb3ce5a3b09">更快找到高分候选，为什么仍可能最终效果更差？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acontinual-autoresearch">From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · RBC Borealis / ELLIS Institute Tübingen / Max Planck Institute for Intelligent Systems</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>搜索效率评价预算内best-so-far隐测曲线的面积，最终效果评价Agent实际选定候选。两者不是同一个统计量；Agent可能很早找到好方案，之后过拟合开发集并选择更差的方案。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：时刻2找到0.8、时刻6找到0.5并最终选择后者，早期搜索很好但最终分数只有0.5。</p>
+<p class="ar-learning-sources">依据：核心公式、论文离线与线上效果、本地结果与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05108">原论文</a> · <a href="../../../../agent-research/2611.05108-continual-autoresearch/">实现解读</a> · <a href="#qa-fd179fb3ce5a3b09">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:continual-autoresearch" data-paper-title="From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks? Agent RBC Borealis / ELLIS Institute Tübingen / Max Planck Institute for Intelligent Systems 2026-11-03 持续会话可能复用代码和经验，更快找到有效方案，但未必提高最终留出效果。论文在相同任务流、模型、数据和逐任务时间预算下比较 stateful 与 reset Agent；保留首个有效提交、所有提交及最终选择，完成后才由私有测试评价。第一任务没有历史可转移，不能计入跨任务增益。正文 §3 高成本完整实验：成本过高，不复现（审查 DONE）。组件状态：CPU / L1 component_only，运行后离线 scorer 与匹配协议；没有运行自主研究 Agent，也未接入统一 Evolve。高成本完整实验：成本过高，不复现（审查 DONE）。只接收 ClosedRun(closed=True)，每个候选保留唯一 ID、单调完成时刻、valid 标记和外部私有测试分数。无效候选不能附隐藏分数，最终选择须为确实有效的提交；预算外候选和未结束记录被拒绝。scorer 不向 actor 提供接口，不运行训练，也无法防止调用者把离线分数另行泄露。  Harness 与自我改进 RSI 跨任务研究评测 Agent 运行流程与自进化：改的是哪一层 预算10，时刻2得0.8、时刻6得0.5，搜索效用为什么是0.64而不是0.52？ 首个有效提交前奖励为0；之后best-so-far是0.8，即使后来的提交更差也不下降。因此面积为0×2+0.8×8=6.4，除以预算10得到0.64。0.52来自把曲线错误改成最后一次提交的分数。 教学例：时刻6候选较差并不会抹掉已经发现0.8方案的事实；但最终选择指标仍应保留0.5，不能用最优值替换。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-edf7ce7185fdb064">预算10，时刻2得0.8、时刻6得0.5，搜索效用为什么是0.64而不是0.52？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acontinual-autoresearch">From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · RBC Borealis / ELLIS Institute Tübingen / Max Planck Institute for Intelligent Systems</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>首个有效提交前奖励为0；之后best-so-far是0.8，即使后来的提交更差也不下降。因此面积为0×2+0.8×8=6.4，除以预算10得到0.64。0.52来自把曲线错误改成最后一次提交的分数。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：时刻6候选较差并不会抹掉已经发现0.8方案的事实；但最终选择指标仍应保留0.5，不能用最优值替换。</p>
+<p class="ar-learning-sources">依据：核心公式、本地结果与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05108">原论文</a> · <a href="../../../../agent-research/2611.05108-continual-autoresearch/">实现解读</a> · <a href="#qa-edf7ce7185fdb064">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:continual-autoresearch" data-paper-title="From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks? Agent RBC Borealis / ELLIS Institute Tübingen / Max Planck Institute for Intelligent Systems 2026-11-03 持续会话可能复用代码和经验，更快找到有效方案，但未必提高最终留出效果。论文在相同任务流、模型、数据和逐任务时间预算下比较 stateful 与 reset Agent；保留首个有效提交、所有提交及最终选择，完成后才由私有测试评价。第一任务没有历史可转移，不能计入跨任务增益。正文 §3 高成本完整实验：成本过高，不复现（审查 DONE）。组件状态：CPU / L1 component_only，运行后离线 scorer 与匹配协议；没有运行自主研究 Agent，也未接入统一 Evolve。高成本完整实验：成本过高，不复现（审查 DONE）。只接收 ClosedRun(closed=True)，每个候选保留唯一 ID、单调完成时刻、valid 标记和外部私有测试分数。无效候选不能附隐藏分数，最终选择须为确实有效的提交；预算外候选和未结束记录被拒绝。scorer 不向 actor 提供接口，不运行训练，也无法防止调用者把离线分数另行泄露。  Harness 与自我改进 RSI 跨任务研究评测 Agent 运行流程与自进化：改的是哪一层 这里用hidden-test给所有提交评分，为什么不等于Evolve用test挑冠军？ 这些隐测分数只在run完成后由独立评价者构造研究效率曲线，不能回传给在线Agent。Agent最终选择须依据当时可见的训练/开发信息。把这条事后曲线用于候选选择，才会破坏test隔离。 教学例：先封存所有提交和最终选择ID，再计算隐测AUC可以审计搜索；边运行边显示隐测排行榜并据此选最终模型则不允许。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-ff246a891358f53c">这里用hidden-test给所有提交评分，为什么不等于Evolve用test挑冠军？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acontinual-autoresearch">From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · RBC Borealis / ELLIS Institute Tübingen / Max Planck Institute for Intelligent Systems</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>这些隐测分数只在run完成后由独立评价者构造研究效率曲线，不能回传给在线Agent。Agent最终选择须依据当时可见的训练/开发信息。把这条事后曲线用于候选选择，才会破坏test隔离。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：先封存所有提交和最终选择ID，再计算隐测AUC可以审计搜索；边运行边显示隐测排行榜并据此选最终模型则不允许。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、数据协议与实现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05108">原论文</a> · <a href="../../../../agent-research/2611.05108-continual-autoresearch/">实现解读</a> · <a href="#qa-ff246a891358f53c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:continual-autoresearch" data-paper-title="From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks? Agent RBC Borealis / ELLIS Institute Tübingen / Max Planck Institute for Intelligent Systems 2026-11-03 持续会话可能复用代码和经验，更快找到有效方案，但未必提高最终留出效果。论文在相同任务流、模型、数据和逐任务时间预算下比较 stateful 与 reset Agent；保留首个有效提交、所有提交及最终选择，完成后才由私有测试评价。第一任务没有历史可转移，不能计入跨任务增益。正文 §3 高成本完整实验：成本过高，不复现（审查 DONE）。组件状态：CPU / L1 component_only，运行后离线 scorer 与匹配协议；没有运行自主研究 Agent，也未接入统一 Evolve。高成本完整实验：成本过高，不复现（审查 DONE）。只接收 ClosedRun(closed=True)，每个候选保留唯一 ID、单调完成时刻、valid 标记和外部私有测试分数。无效候选不能附隐藏分数，最终选择须为确实有效的提交；预算外候选和未结束记录被拒绝。scorer 不向 actor 提供接口，不运行训练，也无法防止调用者把离线分数另行泄露。  Harness 与自我改进 RSI 跨任务研究评测 Agent 运行流程与自进化：改的是哪一层 RMSE归一化和跨任务增益聚合各有哪些不能省略的单位？ RMSE须使用训练集channel标准差，不使用test统计；持续与重置记录须匹配任务、预算和归一化。第一任务没有前序经验，转移增益从第二任务开始；先在每条任务流内平均，再等权平均任务流，不能让长流自动占更高权重。 教学例：RMSE=6、训练SD=2时归一化奖励为1/(1+3)=0.25；一个10题流与一个2题流应各贡献一个流均值，而非直接混成12题平均。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-d45736e20cd7c929">RMSE归一化和跨任务增益聚合各有哪些不能省略的单位？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acontinual-autoresearch">From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · RBC Borealis / ELLIS Institute Tübingen / Max Planck Institute for Intelligent Systems</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>RMSE须使用训练集channel标准差，不使用test统计；持续与重置记录须匹配任务、预算和归一化。第一任务没有前序经验，转移增益从第二任务开始；先在每条任务流内平均，再等权平均任务流，不能让长流自动占更高权重。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：RMSE=6、训练SD=2时归一化奖励为1/(1+3)=0.25；一个10题流与一个2题流应各贡献一个流均值，而非直接混成12题平均。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与实现边界、代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05108">原论文</a> · <a href="../../../../agent-research/2611.05108-continual-autoresearch/">实现解读</a> · <a href="#qa-d45736e20cd7c929">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:meta-square" data-paper-title="Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents Agent University of Maryland 2026-11-03 一个共享 Harness 不一定适合所有新任务，而毫无经验的在线修改又可能扰乱仍在推进的执行。Meta² 离线对照无演化器、普通演化器和获得训练期 verifier 信息的演化器，用反思、聚合和更新构建可复用 Meta-Skill。部署时冻结这份知识，在 checkpoint 选择 KEEP 或 EVOLVE，编辑只影响当前任务余下轨迹，不重置环境。正文 §3、附录 B 高成本完整实验：成本过高，不复现（审查 DONE）。组件状态：CPU / L1 component_only。这里只实现部署状态与反馈接口，不训练 Meta-Skill、不调用 Agent，也不是统一 Evolve 的能力算子。高成本完整实验：成本过高，不复现（审查 DONE）。MetaSkill 保存外部已审文本和训练任务 ID；DeploymentRun 拒绝训练/部署任务重叠，按严格字段白名单接收公共 checkpoint。Checkpoint 不包含 verifier、gold 或 hidden score 字段；  Harness 与自我改进 RSI 运行中Harness演化 Agent 运行流程与自进化：改的是哪一层 Meta²跨任务复用的到底是同一份Harness，还是别的东西？ 复用的是冻结的Meta-Skill，即何时行动、保持或避免某类干预的知识；具体Harness编辑只作用于当前run并在任务结束后丢弃。它既不是给所有任务永久套同一修改，也不更新底座模型权重。 教学例：可复用“先检查输出是否真实存在”的经验；但针对任务甲添加的某个目录检查，不应自动留给任务乙。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-meta-square-8d4a0b3d" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-9355d198677a370a">Meta²跨任务复用的到底是同一份Harness，还是别的东西？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ameta-square">Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · University of Maryland</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>复用的是冻结的Meta-Skill，即何时行动、保持或避免某类干预的知识；具体Harness编辑只作用于当前run并在任务结束后丢弃。它既不是给所有任务永久套同一修改，也不更新底座模型权重。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：可复用“先检查输出是否真实存在”的经验；但针对任务甲添加的某个目录检查，不应自动留给任务乙。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05139">原论文</a> · <a href="../../../../agent-research/2611.05139-meta-square/">实现解读</a> · <a href="#qa-9355d198677a370a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:meta-square" data-paper-title="Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents Agent University of Maryland 2026-11-03 一个共享 Harness 不一定适合所有新任务，而毫无经验的在线修改又可能扰乱仍在推进的执行。Meta² 离线对照无演化器、普通演化器和获得训练期 verifier 信息的演化器，用反思、聚合和更新构建可复用 Meta-Skill。部署时冻结这份知识，在 checkpoint 选择 KEEP 或 EVOLVE，编辑只影响当前任务余下轨迹，不重置环境。正文 §3、附录 B 高成本完整实验：成本过高，不复现（审查 DONE）。组件状态：CPU / L1 component_only。这里只实现部署状态与反馈接口，不训练 Meta-Skill、不调用 Agent，也不是统一 Evolve 的能力算子。高成本完整实验：成本过高，不复现（审查 DONE）。MetaSkill 保存外部已审文本和训练任务 ID；DeploymentRun 拒绝训练/部署任务重叠，按严格字段白名单接收公共 checkpoint。Checkpoint 不包含 verifier、gold 或 hidden score 字段；  Harness 与自我改进 RSI 运行中Harness演化 Agent 运行流程与自进化：改的是哪一层 终点checkpoint收到EVOLVE，为什么不能清空环境重新执行？ 终点EVOLVE是把有界修正交回仍在进行的同一run，保留工作区、已完成进展和轨迹；终点KEEP才接受结束。重置环境会把运行中适应改成重试实验，改变算法及成本口径。 教学例：已经写好文件但漏一个测试，EVOLVE要求在原工作区补测；删除文件重新开始不是同一条持续轨迹。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-99d98da99e636b61">终点checkpoint收到EVOLVE，为什么不能清空环境重新执行？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ameta-square">Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · University of Maryland</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>终点EVOLVE是把有界修正交回仍在进行的同一run，保留工作区、已完成进展和轨迹；终点KEEP才接受结束。重置环境会把运行中适应改成重试实验，改变算法及成本口径。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：已经写好文件但漏一个测试，EVOLVE要求在原工作区补测；删除文件重新开始不是同一条持续轨迹。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与实现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05139">原论文</a> · <a href="../../../../agent-research/2611.05139-meta-square/">实现解读</a> · <a href="#qa-99d98da99e636b61">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:meta-square" data-paper-title="Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents Agent University of Maryland 2026-11-03 一个共享 Harness 不一定适合所有新任务，而毫无经验的在线修改又可能扰乱仍在推进的执行。Meta² 离线对照无演化器、普通演化器和获得训练期 verifier 信息的演化器，用反思、聚合和更新构建可复用 Meta-Skill。部署时冻结这份知识，在 checkpoint 选择 KEEP 或 EVOLVE，编辑只影响当前任务余下轨迹，不重置环境。正文 §3、附录 B 高成本完整实验：成本过高，不复现（审查 DONE）。组件状态：CPU / L1 component_only。这里只实现部署状态与反馈接口，不训练 Meta-Skill、不调用 Agent，也不是统一 Evolve 的能力算子。高成本完整实验：成本过高，不复现（审查 DONE）。MetaSkill 保存外部已审文本和训练任务 ID；DeploymentRun 拒绝训练/部署任务重叠，按严格字段白名单接收公共 checkpoint。Checkpoint 不包含 verifier、gold 或 hidden score 字段；  Harness 与自我改进 RSI 运行中Harness演化 Agent 运行流程与自进化：改的是哪一层 训练期C臂能看verifier，是否说明部署演化器也可以用最终隐藏分数来选择编辑？ 不能。C臂的特权只用于训练对照，部署知识被冻结；在线决策只能依赖当时公共执行证据。把最终隐藏分数提供给演化器，会把真正在线适应变成利用答案的选择，而不是论文部署协议。 教学例：演化器可读工具报告“文件不存在”；不能先看隐藏测试失败在哪一行，再把精确答案写成notice交给执行器。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-cf3d7749f59b35ec">训练期C臂能看verifier，是否说明部署演化器也可以用最终隐藏分数来选择编辑？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ameta-square">Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · University of Maryland</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。C臂的特权只用于训练对照，部署知识被冻结；在线决策只能依赖当时公共执行证据。把最终隐藏分数提供给演化器，会把真正在线适应变成利用答案的选择，而不是论文部署协议。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：演化器可读工具报告“文件不存在”；不能先看隐藏测试失败在哪一行，再把精确答案写成notice交给执行器。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与实现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05139">原论文</a> · <a href="../../../../agent-research/2611.05139-meta-square/">实现解读</a> · <a href="#qa-cf3d7749f59b35ec">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:meta-square" data-paper-title="Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents Agent University of Maryland 2026-11-03 一个共享 Harness 不一定适合所有新任务，而毫无经验的在线修改又可能扰乱仍在推进的执行。Meta² 离线对照无演化器、普通演化器和获得训练期 verifier 信息的演化器，用反思、聚合和更新构建可复用 Meta-Skill。部署时冻结这份知识，在 checkpoint 选择 KEEP 或 EVOLVE，编辑只影响当前任务余下轨迹，不重置环境。正文 §3、附录 B 高成本完整实验：成本过高，不复现（审查 DONE）。组件状态：CPU / L1 component_only。这里只实现部署状态与反馈接口，不训练 Meta-Skill、不调用 Agent，也不是统一 Evolve 的能力算子。高成本完整实验：成本过高，不复现（审查 DONE）。MetaSkill 保存外部已审文本和训练任务 ID；DeploymentRun 拒绝训练/部署任务重叠，按严格字段白名单接收公共 checkpoint。Checkpoint 不包含 verifier、gold 或 hidden score 字段；  Harness 与自我改进 RSI 运行中Harness演化 Agent 运行流程与自进化：改的是哪一层 本地拒绝hidden_verifier字段后，是否已经保证不会泄漏隐藏答案？ 没有。严格字段白名单阻止把额外结构化反馈直接塞进checkpoint，但调用者仍可能把秘密粘贴到公共文本；同进程Python对象也不是隔离沙箱。本地只验证接口与生命周期，未训练evolver、未运行终端任务或验证能力提升。 教学例：增加gold_answer键会报错；把答案藏进trajectory_delta的普通字符串仍需宿主外层隔离，不能因字段名合法就当公共信息。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-100b7822cdadf600">本地拒绝hidden_verifier字段后，是否已经保证不会泄漏隐藏答案？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ameta-square">Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · University of Maryland</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>没有。严格字段白名单阻止把额外结构化反馈直接塞进checkpoint，但调用者仍可能把秘密粘贴到公共文本；同进程Python对象也不是隔离沙箱。本地只验证接口与生命周期，未训练evolver、未运行终端任务或验证能力提升。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：增加gold_answer键会报错；把答案藏进trajectory_delta的普通字符串仍需宿主外层隔离，不能因字段名合法就当公共信息。</p>
+<p class="ar-learning-sources">依据：数据协议与实现边界、本地结果与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05139">原论文</a> · <a href="../../../../agent-research/2611.05139-meta-square/">实现解读</a> · <a href="#qa-100b7822cdadf600">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:strategist" data-paper-title="Strategist: Evolving Reasoning with Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Strategist: Evolving Reasoning with Agents Agent Princeton University 2026-11-02 模型权重不是 Agent 的全部：单步回答、投票、分解、审查、多模型路由等推理程序也决定效果和成本。论文不训练执行模型，而让一个 meta-agent 在小开发集上提出并实测这些程序，将它们表示为统一 execute(llm, task) -&gt; str 的 Python blueprint。一个 blueprint 可调用此前已存在的 blueprint，构成无环组合图；与任务提示配对才形成具体策略。 高成本完整实验：成本过高，不复现（审查 DONE）。组件状态：component_only，CPU / L1 控制与数值诊断。组件状态：component_only，CPU / L1 控制与数值诊断。没有运行 LLM 设计器、执行器或真实搜索，不是推理能力比较，也未接入统一 Evolve。高成本完整实验：成本过高，不复现（审查 DONE）。也可使用 Python 接口：  Harness 与自我改进 RSI 推理策略组合与跨任务积累 Agent 运行流程与自进化：改的是哪一层 Strategist积累的是模型参数、当前答案，还是另一种跨任务资产？ 它冻结执行模型，把推理程序表示成有统一execute接口的Python blueprint，并在实测后连同测量卡和训练轨迹经验进入跨任务库。具体任务提示与结构分开；后续任务可组合或复用旧结构，不等于模型经过梯度训练，也不只是当前答案修订。 教学例：一次发现“先做三个候选再独立审查”的流程，可在下一领域换提示继续测试；保存某道题的最终数字并不是可复用blueprint机制。 2026-11-04">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-strategist-e4eab6e6" class="ar-learning-paper-anchor"></span>
@@ -80,6 +186,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>教学例：合成0.7准确率、成本10和8的两臂能检验成本比0.8与回退规则，却没有任何模型真正回答过题目，更没有证明跨任务搜索有效。</p>
 <p class="ar-learning-sources">依据：数据协议与实现边界、本地结果与负控、代码映射；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.03618">原论文</a> · <a href="../../../../agent-research/2611.03618-strategist/">实现解读</a> · <a href="#qa-cc71f470d55ad83b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rsi-dojo" data-paper-title="Training LLM Agents to Automate LLM Post-Training with RSI-Dojo" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Training LLM Agents to Automate LLM Post-Training with RSI-Dojo Agent The Chinese University of Hong Kong 2026-10-29 优化外部 Harness 与让模型内化“如何做后训练”不是同一问题。RSI-Craft 从论文/InspectAI 找任务，实际安装并检验评测，标准化环境，再过滤执行不稳定或无法区分模型的任务。RSI-Dojo 得到 281 个训练环境，通过额外 Harness 指导采集前沿模型轨迹，并经过程质量和最终效果过滤后微调 Agent。正文 §3 成本过高，不复现（审查 DONE）。未运行完整实验，未产生本地模型结果。收录状态：deferred_high_cost / review_only。成本过高，不复现（审查 DONE）。本条没有 runtime、Adapter、metrics、模型下载或 GPU 收据，也没有宣称 281 个训练环境已在本库接入。仅记录来源、方法、成本与原图。不将公开论文阈值写成一个空环境来宣称 Agent 学会训练，也不伪造任务数据、轨迹、模型权重或留出分数。RSI 汇总应链接本条，但不能作为可执行 Evolve operator。  Harness 与自我改进 RSI 自动后训练环境 Agent 运行流程与自进化：改的是哪一层 RSI-Dojo提供281个环境，为什么不能概括成又一个RL loss？ 它主要构建可执行后训练任务和筛过的Agent轨迹，让模型学习如何选数据、训练和迭代；环境筛选阈值不是通用策略梯度公式。外部Harness改进与通过轨迹微调把能力内化进模型也不同。 教学例：一个任务提供数据、评测脚本和反馈接口；另一层才是Agent根据这些反馈选择训练步骤。仅写一个奖励公式不会自动生成281个可运行环境。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-rsi-dojo-4ed293dc" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-c9546dd302e0dd35">RSI-Dojo提供281个环境，为什么不能概括成又一个RL loss？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Arsi-dojo">Training LLM Agents to Automate LLM Post-Training with RSI-Dojo</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · The Chinese University of Hong Kong</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它主要构建可执行后训练任务和筛过的Agent轨迹，让模型学习如何选数据、训练和迭代；环境筛选阈值不是通用策略梯度公式。外部Harness改进与通过轨迹微调把能力内化进模型也不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个任务提供数据、评测脚本和反馈接口；另一层才是Agent根据这些反馈选择训练步骤。仅写一个奖励公式不会自动生成281个可运行环境。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.03698">原论文</a> · <a href="../../../../agent-research/2611.03698-rsi-dojo/">实现解读</a> · <a href="#qa-c9546dd302e0dd35">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rsi-dojo" data-paper-title="Training LLM Agents to Automate LLM Post-Training with RSI-Dojo" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Training LLM Agents to Automate LLM Post-Training with RSI-Dojo Agent The Chinese University of Hong Kong 2026-10-29 优化外部 Harness 与让模型内化“如何做后训练”不是同一问题。RSI-Craft 从论文/InspectAI 找任务，实际安装并检验评测，标准化环境，再过滤执行不稳定或无法区分模型的任务。RSI-Dojo 得到 281 个训练环境，通过额外 Harness 指导采集前沿模型轨迹，并经过程质量和最终效果过滤后微调 Agent。正文 §3 成本过高，不复现（审查 DONE）。未运行完整实验，未产生本地模型结果。收录状态：deferred_high_cost / review_only。成本过高，不复现（审查 DONE）。本条没有 runtime、Adapter、metrics、模型下载或 GPU 收据，也没有宣称 281 个训练环境已在本库接入。仅记录来源、方法、成本与原图。不将公开论文阈值写成一个空环境来宣称 Agent 学会训练，也不伪造任务数据、轨迹、模型权重或留出分数。RSI 汇总应链接本条，但不能作为可执行 Evolve operator。  Harness 与自我改进 RSI 自动后训练环境 Agent 运行流程与自进化：改的是哪一层 一个有400例、大小模型都得0.9的任务，是否会因数据多且执行稳定而保留？ 不会。样本超过300先下采样至300，但大小模型都高于80%会被可区分性过滤剔除；分差还须至少10个百分点。环境能执行只是可靠性条件之一，不代表任务对后训练有足够学习信号。 教学例：0.9与0.9过于容易；0.45与0.60既不在双高/双低区间，分差15个百分点，可继续接受其他协议检查。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-c4a6d366c38d66a2">一个有400例、大小模型都得0.9的任务，是否会因数据多且执行稳定而保留？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Arsi-dojo">Training LLM Agents to Automate LLM Post-Training with RSI-Dojo</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · The Chinese University of Hong Kong</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不会。样本超过300先下采样至300，但大小模型都高于80%会被可区分性过滤剔除；分差还须至少10个百分点。环境能执行只是可靠性条件之一，不代表任务对后训练有足够学习信号。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：0.9与0.9过于容易；0.45与0.60既不在双高/双低区间，分差15个百分点，可继续接受其他协议检查。</p>
+<p class="ar-learning-sources">依据：核心公式、背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.03698">原论文</a> · <a href="../../../../agent-research/2611.03698-rsi-dojo/">实现解读</a> · <a href="#qa-c4a6d366c38d66a2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rsi-dojo" data-paper-title="Training LLM Agents to Automate LLM Post-Training with RSI-Dojo" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Training LLM Agents to Automate LLM Post-Training with RSI-Dojo Agent The Chinese University of Hong Kong 2026-10-29 优化外部 Harness 与让模型内化“如何做后训练”不是同一问题。RSI-Craft 从论文/InspectAI 找任务，实际安装并检验评测，标准化环境，再过滤执行不稳定或无法区分模型的任务。RSI-Dojo 得到 281 个训练环境，通过额外 Harness 指导采集前沿模型轨迹，并经过程质量和最终效果过滤后微调 Agent。正文 §3 成本过高，不复现（审查 DONE）。未运行完整实验，未产生本地模型结果。收录状态：deferred_high_cost / review_only。成本过高，不复现（审查 DONE）。本条没有 runtime、Adapter、metrics、模型下载或 GPU 收据，也没有宣称 281 个训练环境已在本库接入。仅记录来源、方法、成本与原图。不将公开论文阈值写成一个空环境来宣称 Agent 学会训练，也不伪造任务数据、轨迹、模型权重或留出分数。RSI 汇总应链接本条，但不能作为可执行 Evolve operator。  Harness 与自我改进 RSI 自动后训练环境 Agent 运行流程与自进化：改的是哪一层 为什么完成训练命令的轨迹，仍不能直接作为高质量训练数据？ 论文另用rubric质量过滤排除不良过程，再用outcome过滤检查最终提交是否有可测改善。成功执行命令、日志完整、训练loss下降与目标benchmark改善是不同证据；不能只依据一个就宣布Agent已会后训练。 教学例：训练无报错且loss下降，但评测使用了错误输出格式，这条轨迹仍不构成有效目标提升；反过来最终分数高也不能抹掉明显违规的数据使用。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-79871381bf7eeb7f">为什么完成训练命令的轨迹，仍不能直接作为高质量训练数据？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Arsi-dojo">Training LLM Agents to Automate LLM Post-Training with RSI-Dojo</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · The Chinese University of Hong Kong</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>论文另用rubric质量过滤排除不良过程，再用outcome过滤检查最终提交是否有可测改善。成功执行命令、日志完整、训练loss下降与目标benchmark改善是不同证据；不能只依据一个就宣布Agent已会后训练。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：训练无报错且loss下降，但评测使用了错误输出格式，这条轨迹仍不构成有效目标提升；反过来最终分数高也不能抹掉明显违规的数据使用。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与实现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.03698">原论文</a> · <a href="../../../../agent-research/2611.03698-rsi-dojo/">实现解读</a> · <a href="#qa-79871381bf7eeb7f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:rsi-dojo" data-paper-title="Training LLM Agents to Automate LLM Post-Training with RSI-Dojo" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Training LLM Agents to Automate LLM Post-Training with RSI-Dojo Agent The Chinese University of Hong Kong 2026-10-29 优化外部 Harness 与让模型内化“如何做后训练”不是同一问题。RSI-Craft 从论文/InspectAI 找任务，实际安装并检验评测，标准化环境，再过滤执行不稳定或无法区分模型的任务。RSI-Dojo 得到 281 个训练环境，通过额外 Harness 指导采集前沿模型轨迹，并经过程质量和最终效果过滤后微调 Agent。正文 §3 成本过高，不复现（审查 DONE）。未运行完整实验，未产生本地模型结果。收录状态：deferred_high_cost / review_only。成本过高，不复现（审查 DONE）。本条没有 runtime、Adapter、metrics、模型下载或 GPU 收据，也没有宣称 281 个训练环境已在本库接入。仅记录来源、方法、成本与原图。不将公开论文阈值写成一个空环境来宣称 Agent 学会训练，也不伪造任务数据、轨迹、模型权重或留出分数。RSI 汇总应链接本条，但不能作为可执行 Evolve operator。  Harness 与自我改进 RSI 自动后训练环境 Agent 运行流程与自进化：改的是哪一层 这篇收录后没有runtime和metrics，为什么不是未完成的自动重试TODO？ 这是按公开成本作出的终态：9B/35B-A3B微调、前沿轨迹和每任务5或10小时评测超出低成本单卡范围。审查DONE表示方法与不复现边界已核对，不表示代码/模型能力已实现；不应创建虚假收据、Evolve算子或循环重试。 教学例：学习卡可解释0.45与0.60的阈值，但不能把这两个教学数字写入metrics当作真实Qwen/GPT评测结果。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-e6598fc7206b6d3e">这篇收录后没有runtime和metrics，为什么不是未完成的自动重试TODO？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Arsi-dojo">Training LLM Agents to Automate LLM Post-Training with RSI-Dojo</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · The Chinese University of Hong Kong</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>这是按公开成本作出的终态：9B/35B-A3B微调、前沿轨迹和每任务5或10小时评测超出低成本单卡范围。审查DONE表示方法与不复现边界已核对，不表示代码/模型能力已实现；不应创建虚假收据、Evolve算子或循环重试。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：学习卡可解释0.45与0.60的阈值，但不能把这两个教学数字写入metrics当作真实Qwen/GPT评测结果。</p>
+<p class="ar-learning-sources">依据：本地结果与负控、高成本完整实验、代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.03698">原论文</a> · <a href="../../../../agent-research/2611.03698-rsi-dojo/">实现解读</a> · <a href="#qa-e6598fc7206b6d3e">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:evalalloc" data-paper-title="Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution? Agent The University of Hong Kong 2026-10-27 搜索过程需要便宜但可比较的反馈，最后选冠军则需要更精确的实测确认。EvalAlloc先完整评测少量warmup候选，选出共享信息项并拟合响应模型；搜索时固定item参照，只推断新候选参数，再把真实观测与未观测预测补全。最终以公共随机prefix逐轮确认，复用搜索缓存而不是重新全跑。 完整LLM搜索/多基准实验成本过高，不复现（审查 DONE）；API只有SEARCH item索引和稀疏真实观测，没有DEV/TEST答案或完整隐藏成绩矩阵。FrozenItemModel复制并只读保存外部item参数/prior，MAP只改新candidate参数；来自外部的拟合数据与cross-fit provenance仍须调用者核验，布尔/身份声明不能替代真实训练证据。  自进化与工作流 预算分配与可靠选择 Agent 运行流程与自进化：改的是哪一层 搜索反馈便宜就够了，为什么最后仍要做额外确认？ 搜索时只需足够可比的低成本反馈来指导提案；最后选冠军需要区分接近的候选。EvalAlloc因此把预算分成共享信息项的稀疏搜索和复用缓存的配对确认，最终完整prefix靠真实观测决定，而不是一直相信模型补全。 教学例：两个候选预测分只差0.01时，可以先据便宜反馈继续探索，但最终选哪个不应只看这个不确定的差值。 2026-10-30">

@@ -20,12 +20,12 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="tools-and-collaboration/">工具与协作执行：把计划变成可检查的动作</a></h2>
 <p>模型已经有计划，怎样选择工具、解释返回值，并让多个角色共享可靠的执行状态？</p>
-<p class="ar-learning-topic-meta">197 个问题 · 49 篇论文</p>
+<p class="ar-learning-topic-meta">201 个问题 · 50 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="harness-and-self-improvement/">运行流程与自进化：改的是哪一层</a></h2>
 <p>失败之后，是改一次提示、积累经验，还是改变整个任务执行流程？</p>
-<p class="ar-learning-topic-meta">188 个问题 · 47 篇论文</p>
+<p class="ar-learning-topic-meta">200 个问题 · 50 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="agent-policy-learning/">交互策略学习：把轨迹反馈变成更新</a></h2>

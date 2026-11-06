@@ -278,6 +278,12 @@
 - [PailitaoMMSearch2.0 Technical Report: Scaling Generative Retrieval to Unified End-to-End Multimodal Search](../../recommendation-components/2610.36958-pailitao-mmsearch2/README.md)：以原图和自由文本直接生成商品SID集合，用组合数据工具、商品知识CPT、混合推理预算SFT和意图均衡RL扩展统一多模态搜索。Sample–Beam分离推理采样与SID束生成以对齐多结果服务；完整实验高成本不复现。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [PinGER: Token-Efficient Generative Retrieval with Semantic IDs](../../recommendation-components/2610.33435-pinger/README.md)：用训练专用SID与历史dense的非对称mask保留多级监督而压缩服务输入，再按共同前缀深度分配beam并用所有前缀DPO加NTP锚校准排序偏好。本地仅实现可核对的数值机制，不实现生产模型/稀疏kernel或复现线上收益。
 
+### 工程与推理效率
+- [ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse](../../recommendation-components/2611.04259-reusegr/README.md)：7B离线模型按query规划SID前缀，0.5B在当前用户历史下补全后缀；ReuseCut以历史覆盖选择复用深度，BudgetCut再学习集合相关的分支准入。本地只核深度标签/冷miss与准备好depth0的区别及分数接口，不把固定规则冒充学习的BudgetCut。
+
+### 训练目标与决策优化
+- [SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search](../../recommendation-components/2611.04662-spade-local-search/README.md)：OA-BPE用业务价值加权token-pair计数，STAR以软门控编码时空位置，MARS-DPO对齐生产偏好，SDBS按父beam排序给予有界sigmoid奖励。本地只实现分词/解码算子；首beam自身零奖励不意味着任意参数下top1永不被其他beam超过。
+
 ## 训练目标与决策优化
 
 ### 采样、蒸馏与强化学习
@@ -384,6 +390,9 @@
 
 ### 大模型能力与推荐融合
 - [WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search](../../recommendation-components/2611.00530-wesearch/README.md)：先检索粗粒度簇并合并其中的原子文档，再用OPQ查表粗排和特征FFN精排，避免固定SID的早期路径错误；固定簇与码本支持新文档滚动挂载。本地仅验证候选空间、量化距离恒等式与新旧快照隔离，不代表训练/生产质量复现。
+
+### 训练目标与决策优化
+- [OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer](../../recommendation-components/2611.04720-onetrans-gsr/README.md)：统一自回归policy生成商品/视频/直播/广告的整页序列；离线RM集成、正值几何多目标奖励与SeparateStandardization指导后训练，在线保留硬mask和软业务偏置。本地仅核局部约束/去重和奖励公式，既不声称局部规则保证全局可行，也不把RM代理分数当真实GMV。
 
 ## 内容理解、审核与风险控制
 

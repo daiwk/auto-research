@@ -7,7 +7,7 @@ hide:
 
 # 教师与纠错：额外信息何时能帮到学生
 
-[LLM 后训练](index.md) / 188 个问题 · 47 篇论文
+[LLM 后训练](index.md) / 196 个问题 · 49 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,115 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">188 个问题 · 47 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">196 个问题 · 49 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:targeted-guidance" data-paper-title="Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning LLM 后训练 Cursor Research / UC Berkeley 2026-11-03 标量RL奖励只能强化已有可探索行为，难以告诉Agent“怎样修正一种此前几乎不会的工具格式/沟通风格”。本文把每个criterion的文本反馈放在出错的Agent turn之前，同一策略在反馈条件下成为stop-gradient教师；学生仍在自己的实际历史上学习。关键不是全轨迹无差别OPSD，而是失败轮次门控的最小定向信号 + 对应criterion的普通RL奖励，避免蒸馏持续挤压多样性并干扰主要代码任务。 完整30B Agent RL：成本过高，不复现（审查 DONE）。L1 门控损失组件，diagnostic only。完整30B Agent RL：成本过高，不复现（审查 DONE）。未实现代码Agent、文本反馈judge或真实rollout；evolve_integrated=false。token_failure_mask 将外部给定的failed-turn表映射到token，-1为非turn；不生成判定、不读gold。  Agentic RL 定向反馈与蒸馏 LLM 后训练 教师与纠错：额外信息何时能帮到学生 Targeted Guidance需要比学生更大的外部教师吗？ 定义的教师是与学生相同权重、但在失败轮次前多看到文本反馈的策略，并停止教师分支梯度。反馈先要经独立检查确实改善目标criterion。相同参数不等于相同条件分布，本地loss接口不负责伪造反馈的有效性。 教学例：学生漏写工具参数，反馈条件分支额外看到“请提供返回行数参数”；它可为同一前缀提供不同token分布，但不等于部署时学生能看到未来错误或gold。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<span id="paper-post-training-targeted-guidance-8f74e1a3" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-ac8c3bab0fb173c1">Targeted Guidance需要比学生更大的外部教师吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Atargeted-guidance">Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Cursor Research / UC Berkeley</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>定义的教师是与学生相同权重、但在失败轮次前多看到文本反馈的策略，并停止教师分支梯度。反馈先要经独立检查确实改善目标criterion。相同参数不等于相同条件分布，本地loss接口不负责伪造反馈的有效性。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：学生漏写工具参数，反馈条件分支额外看到“请提供返回行数参数”；它可为同一前缀提供不同token分布，但不等于部署时学生能看到未来错误或gold。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05266v1">原论文</a> · <a href="../../../../post-training/2611.05266-targeted-guidance/">实现解读</a> · <a href="#qa-ac8c3bab0fb173c1">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:targeted-guidance" data-paper-title="Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning LLM 后训练 Cursor Research / UC Berkeley 2026-11-03 标量RL奖励只能强化已有可探索行为，难以告诉Agent“怎样修正一种此前几乎不会的工具格式/沟通风格”。本文把每个criterion的文本反馈放在出错的Agent turn之前，同一策略在反馈条件下成为stop-gradient教师；学生仍在自己的实际历史上学习。关键不是全轨迹无差别OPSD，而是失败轮次门控的最小定向信号 + 对应criterion的普通RL奖励，避免蒸馏持续挤压多样性并干扰主要代码任务。 完整30B Agent RL：成本过高，不复现（审查 DONE）。L1 门控损失组件，diagnostic only。完整30B Agent RL：成本过高，不复现（审查 DONE）。未实现代码Agent、文本反馈judge或真实rollout；evolve_integrated=false。token_failure_mask 将外部给定的failed-turn表映射到token，-1为非turn；不生成判定、不读gold。  Agentic RL 定向反馈与蒸馏 LLM 后训练 教师与纠错：额外信息何时能帮到学生 只有一轮失败时，为什么KL分母还要包含整条rollout的响应token？ 门控决定哪些token得到辅助蒸馏梯度，整条响应token归一则控制一条rollout的总体压力。只除失败token会把一个很小错误放大成完整平均蒸馏力度。非失败turn的辅助梯度应为零，但它们的有效token仍贡献分母。 教学例：100个响应token中1个失败token的KL是2，论文口径贡献为2/100；若误除失败token数，变成2，放大100倍。padding不应进入这100个。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-bec61c4d24dd2dfc">只有一轮失败时，为什么KL分母还要包含整条rollout的响应token？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Atargeted-guidance">Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Cursor Research / UC Berkeley</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>门控决定哪些token得到辅助蒸馏梯度，整条响应token归一则控制一条rollout的总体压力。只除失败token会把一个很小错误放大成完整平均蒸馏力度。非失败turn的辅助梯度应为零，但它们的有效token仍贡献分母。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：100个响应token中1个失败token的KL是2，论文口径贡献为2/100；若误除失败token数，变成2，放大100倍。padding不应进入这100个。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05266v1">原论文</a> · <a href="../../../../post-training/2611.05266-targeted-guidance/">实现解读</a> · <a href="#qa-bec61c4d24dd2dfc">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:targeted-guidance" data-paper-title="Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning LLM 后训练 Cursor Research / UC Berkeley 2026-11-03 标量RL奖励只能强化已有可探索行为，难以告诉Agent“怎样修正一种此前几乎不会的工具格式/沟通风格”。本文把每个criterion的文本反馈放在出错的Agent turn之前，同一策略在反馈条件下成为stop-gradient教师；学生仍在自己的实际历史上学习。关键不是全轨迹无差别OPSD，而是失败轮次门控的最小定向信号 + 对应criterion的普通RL奖励，避免蒸馏持续挤压多样性并干扰主要代码任务。 完整30B Agent RL：成本过高，不复现（审查 DONE）。L1 门控损失组件，diagnostic only。完整30B Agent RL：成本过高，不复现（审查 DONE）。未实现代码Agent、文本反馈judge或真实rollout；evolve_integrated=false。token_failure_mask 将外部给定的failed-turn表映射到token，-1为非turn；不生成判定、不读gold。  Agentic RL 定向反馈与蒸馏 LLM 后训练 教师与纠错：额外信息何时能帮到学生 为什么不能用整条轨迹的普通OPSD，替代失败turn的reverse KL加RL？ 全文方法把辅助信号限制在失败处，完整词表方向是student到冻结teacher，并保留criterion的普通RL奖励。全轨迹蒸馏会对已经满足标准的行为继续施压，改变多样性和主要任务；forward KL或采样token估计也不是这里的数值目标。所有criterion满足后辅助项应消失。 教学例：前一轮工具格式正确、后一轮错误时，只给后一轮辅助梯度；修正后两轮都正确，应退回原GRPO目标，而不是继续模仿反馈教师的所有文风。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-c3a392e71e57d0bc">为什么不能用整条轨迹的普通OPSD，替代失败turn的reverse KL加RL？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Atargeted-guidance">Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Cursor Research / UC Berkeley</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>全文方法把辅助信号限制在失败处，完整词表方向是student到冻结teacher，并保留criterion的普通RL奖励。全轨迹蒸馏会对已经满足标准的行为继续施压，改变多样性和主要任务；forward KL或采样token估计也不是这里的数值目标。所有criterion满足后辅助项应消失。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：前一轮工具格式正确、后一轮错误时，只给后一轮辅助梯度；修正后两轮都正确，应退回原GRPO目标，而不是继续模仿反馈教师的所有文风。</p>
+<p class="ar-learning-sources">依据：核心公式、论文离线与线上效果、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05266v1">原论文</a> · <a href="../../../../post-training/2611.05266-targeted-guidance/">实现解读</a> · <a href="#qa-c3a392e71e57d0bc">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:targeted-guidance" data-paper-title="Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning LLM 后训练 Cursor Research / UC Berkeley 2026-11-03 标量RL奖励只能强化已有可探索行为，难以告诉Agent“怎样修正一种此前几乎不会的工具格式/沟通风格”。本文把每个criterion的文本反馈放在出错的Agent turn之前，同一策略在反馈条件下成为stop-gradient教师；学生仍在自己的实际历史上学习。关键不是全轨迹无差别OPSD，而是失败轮次门控的最小定向信号 + 对应criterion的普通RL奖励，避免蒸馏持续挤压多样性并干扰主要代码任务。 完整30B Agent RL：成本过高，不复现（审查 DONE）。L1 门控损失组件，diagnostic only。完整30B Agent RL：成本过高，不复现（审查 DONE）。未实现代码Agent、文本反馈judge或真实rollout；evolve_integrated=false。token_failure_mask 将外部给定的failed-turn表映射到token，-1为非turn；不生成判定、不读gold。  Agentic RL 定向反馈与蒸馏 LLM 后训练 教师与纠错：额外信息何时能帮到学生 有了failed-turn mask和loss，是否就实现了论文的代码Agent训练？ 没有。真实学生采样、criterion judge、反馈插入和有效性筛选、同前缀teacher评分、外部GRPO优势及工具环境仍由调用方提供。组件只核验门控和梯度；把gold或固定正确动作交给被评Agent会破坏评测，不会因成功率为1而变成能力证据。 教学例：用小随机logits核对非失败token梯度为0是合法L1测试；把隐藏测试答案写进学生历史来“纠错”，再宣称代码pass rate提高则是泄漏。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-d3a228c8c816cff2">有了failed-turn mask和loss，是否就实现了论文的代码Agent训练？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Atargeted-guidance">Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Cursor Research / UC Berkeley</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>没有。真实学生采样、criterion judge、反馈插入和有效性筛选、同前缀teacher评分、外部GRPO优势及工具环境仍由调用方提供。组件只核验门控和梯度；把gold或固定正确动作交给被评Agent会破坏评测，不会因成功率为1而变成能力证据。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：用小随机logits核对非失败token梯度为0是合法L1测试；把隐藏测试答案写进学生历史来“纠错”，再宣称代码pass rate提高则是泄漏。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05266v1">原论文</a> · <a href="../../../../post-training/2611.05266-targeted-guidance/">实现解读</a> · <a href="#qa-d3a228c8c816cff2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:p2-mopd" data-paper-title="P²-MOPD: Accelerating Multi-Teacher On-Policy Distillation via Parameter Priors" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="P²-MOPD: Accelerating Multi-Teacher On-Policy Distillation via Parameter Priors LLM 后训练 Australian Institute for Machine Learning, Adelaide University / StepFun 2026-11-02 多教师 OPD 用各领域专家监督学生自己的轨迹，但一个已合并的学生可能长期学不到某个专家的方向。P²-MOPD 不只改合并初始点，而是把每个 projection 写成“自由学生权重 + 可学习系数乘固定专家任务向量”。自由权重可离开任务向量张成空间；系数梯度则显式沿教师方向走。它不增加推理模型容量，导出时系数已折入普通权重。 完整多教师 LLM 蒸馏：成本过高，不复现（审查 DONE）。L1 参数更新组件，diagnostic only。完整多教师 LLM 蒸馏：成本过高，不复现（审查 DONE）。本地不提供模型、领域教师或 rollout，不把合成目标下降当作能力恢复；evolve_integrated=false。PriorModule 从调用方提供的 base、task vectors 和系数构造物化权重，对方向做 detached clone；ParameterPriorOptimizer 提供 module-granularity 系数、同梯度双通道、独立全局裁剪、零衰减 AdamW/Adam、整步非有限保护和系数折叠。  On-policy distillation 多教师融合与参数先验 LLM 后训练 教师与纠错：额外信息何时能帮到学生 P²-MOPD保留专家参数，是否意味着推理时还要同时运行多个专家？ 不是。任务向量是训练时的优化方向，前向仍使用物化后的单一学生权重。系数增量被折入普通权重，导出不需教师或系数元数据。专家评分与参数先验是两条训练作用，不能混成推理期的多模型投票。 教学例：W=B+0.3τ1+0.2τ2先合成一个矩阵，输入只乘W；不是分别算三个输出再投票。本地实现矩阵更新，不加载这些专家模型。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<span id="paper-post-training-p2-mopd-d6e4dada" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-9423e2b362f37cef">P²-MOPD保留专家参数，是否意味着推理时还要同时运行多个专家？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ap2-mopd">P²-MOPD: Accelerating Multi-Teacher On-Policy Distillation via Parameter Priors</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Australian Institute for Machine Learning, Adelaide University / StepFun</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。任务向量是训练时的优化方向，前向仍使用物化后的单一学生权重。系数增量被折入普通权重，导出不需教师或系数元数据。专家评分与参数先验是两条训练作用，不能混成推理期的多模型投票。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：W=B+0.3τ1+0.2τ2先合成一个矩阵，输入只乘W；不是分别算三个输出再投票。本地实现矩阵更新，不加载这些专家模型。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.03953v1">原论文</a> · <a href="../../../../post-training/2611.03953-p2-mopd/">实现解读</a> · <a href="#qa-9423e2b362f37cef">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:p2-mopd" data-paper-title="P²-MOPD: Accelerating Multi-Teacher On-Policy Distillation via Parameter Priors" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="P²-MOPD: Accelerating Multi-Teacher On-Policy Distillation via Parameter Priors LLM 后训练 Australian Institute for Machine Learning, Adelaide University / StepFun 2026-11-02 多教师 OPD 用各领域专家监督学生自己的轨迹，但一个已合并的学生可能长期学不到某个专家的方向。P²-MOPD 不只改合并初始点，而是把每个 projection 写成“自由学生权重 + 可学习系数乘固定专家任务向量”。自由权重可离开任务向量张成空间；系数梯度则显式沿教师方向走。它不增加推理模型容量，导出时系数已折入普通权重。 完整多教师 LLM 蒸馏：成本过高，不复现（审查 DONE）。L1 参数更新组件，diagnostic only。完整多教师 LLM 蒸馏：成本过高，不复现（审查 DONE）。本地不提供模型、领域教师或 rollout，不把合成目标下降当作能力恢复；evolve_integrated=false。PriorModule 从调用方提供的 base、task vectors 和系数构造物化权重，对方向做 detached clone；ParameterPriorOptimizer 提供 module-granularity 系数、同梯度双通道、独立全局裁剪、零衰减 AdamW/Adam、整步非有限保护和系数折叠。  On-policy distillation 多教师融合与参数先验 LLM 后训练 教师与纠错：额外信息何时能帮到学生 为什么不能先裁剪学生梯度，再计算P²-MOPD系数梯度？ 论文把同一个更新前梯度分给两个独立通道。系数梯度是未裁剪G与固定任务向量的内积；随后权重和系数分别受各自全局范数预算约束。先裁剪G会让权重预算提前缩放系数通道，改变两个通道的相对更新与Adam状态。 教学例：G=[3,4]、τ=[2,0]时系数梯度为6。若先把G范数裁到0.01，内积变为0.012，已经不是论文规定的原始系数梯度。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-a971b984d3dad311">为什么不能先裁剪学生梯度，再计算P²-MOPD系数梯度？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ap2-mopd">P²-MOPD: Accelerating Multi-Teacher On-Policy Distillation via Parameter Priors</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Australian Institute for Machine Learning, Adelaide University / StepFun</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>论文把同一个更新前梯度分给两个独立通道。系数梯度是未裁剪G与固定任务向量的内积；随后权重和系数分别受各自全局范数预算约束。先裁剪G会让权重预算提前缩放系数通道，改变两个通道的相对更新与Adam状态。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：G=[3,4]、τ=[2,0]时系数梯度为6。若先把G范数裁到0.01，内积变为0.012，已经不是论文规定的原始系数梯度。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.03953v1">原论文</a> · <a href="../../../../post-training/2611.03953-p2-mopd/">实现解读</a> · <a href="#qa-a971b984d3dad311">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:p2-mopd" data-paper-title="P²-MOPD: Accelerating Multi-Teacher On-Policy Distillation via Parameter Priors" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="P²-MOPD: Accelerating Multi-Teacher On-Policy Distillation via Parameter Priors LLM 后训练 Australian Institute for Machine Learning, Adelaide University / StepFun 2026-11-02 多教师 OPD 用各领域专家监督学生自己的轨迹，但一个已合并的学生可能长期学不到某个专家的方向。P²-MOPD 不只改合并初始点，而是把每个 projection 写成“自由学生权重 + 可学习系数乘固定专家任务向量”。自由权重可离开任务向量张成空间；系数梯度则显式沿教师方向走。它不增加推理模型容量，导出时系数已折入普通权重。 完整多教师 LLM 蒸馏：成本过高，不复现（审查 DONE）。L1 参数更新组件，diagnostic only。完整多教师 LLM 蒸馏：成本过高，不复现（审查 DONE）。本地不提供模型、领域教师或 rollout，不把合成目标下降当作能力恢复；evolve_integrated=false。PriorModule 从调用方提供的 base、task vectors 和系数构造物化权重，对方向做 detached clone；ParameterPriorOptimizer 提供 module-granularity 系数、同梯度双通道、独立全局裁剪、零衰减 AdamW/Adam、整步非有限保护和系数折叠。  On-policy distillation 多教师融合与参数先验 LLM 后训练 教师与纠错：额外信息何时能帮到学生 P²-MOPD与只学习task arithmetic合并系数，表达能力和优化路径有何不同？ 只学习系数的合并被限制在固定任务向量的仿射空间；P²-MOPD还保留完整自由学生权重，模型类与普通学生相同，能离开该空间。它改变优化几何和沿专家方向的可达性，并非靠更多推理参数获得能力。 教学例：唯一任务方向是[1,0]时，纯系数更新不能改变第二坐标；自由学生权重仍能沿[0,1]更新。小张量检查这种自由度，不证明四领域实际恢复。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-d3366298f665c46d">P²-MOPD与只学习task arithmetic合并系数，表达能力和优化路径有何不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ap2-mopd">P²-MOPD: Accelerating Multi-Teacher On-Policy Distillation via Parameter Priors</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Australian Institute for Machine Learning, Adelaide University / StepFun</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>只学习系数的合并被限制在固定任务向量的仿射空间；P²-MOPD还保留完整自由学生权重，模型类与普通学生相同，能离开该空间。它改变优化几何和沿专家方向的可达性，并非靠更多推理参数获得能力。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：唯一任务方向是[1,0]时，纯系数更新不能改变第二坐标；自由学生权重仍能沿[0,1]更新。小张量检查这种自由度，不证明四领域实际恢复。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.03953v1">原论文</a> · <a href="../../../../post-training/2611.03953-p2-mopd/">实现解读</a> · <a href="#qa-d3366298f665c46d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:p2-mopd" data-paper-title="P²-MOPD: Accelerating Multi-Teacher On-Policy Distillation via Parameter Priors" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="P²-MOPD: Accelerating Multi-Teacher On-Policy Distillation via Parameter Priors LLM 后训练 Australian Institute for Machine Learning, Adelaide University / StepFun 2026-11-02 多教师 OPD 用各领域专家监督学生自己的轨迹，但一个已合并的学生可能长期学不到某个专家的方向。P²-MOPD 不只改合并初始点，而是把每个 projection 写成“自由学生权重 + 可学习系数乘固定专家任务向量”。自由权重可离开任务向量张成空间；系数梯度则显式沿教师方向走。它不增加推理模型容量，导出时系数已折入普通权重。 完整多教师 LLM 蒸馏：成本过高，不复现（审查 DONE）。L1 参数更新组件，diagnostic only。完整多教师 LLM 蒸馏：成本过高，不复现（审查 DONE）。本地不提供模型、领域教师或 rollout，不把合成目标下降当作能力恢复；evolve_integrated=false。PriorModule 从调用方提供的 base、task vectors 和系数构造物化权重，对方向做 detached clone；ParameterPriorOptimizer 提供 module-granularity 系数、同梯度双通道、独立全局裁剪、零衰减 AdamW/Adam、整步非有限保护和系数折叠。  On-policy distillation 多教师融合与参数先验 LLM 后训练 教师与纠错：额外信息何时能帮到学生 物化W的实现，哪些细节会破坏与显式B加系数的多步等价？ 非零weight decay会分别收缩W与B，产生额外任务向量收缩，破坏等价；两个通道还必须保持独立optimizer state和同一更新前梯度。非有限梯度/范数要跳过整步，不能一个通道已经更新后再发现另一个失败。 教学例：B=1、ατ=1、W=2时，相同decay系数对W和B的收缩量相差一倍。先更新W再因α梯度NaN停止，也会留下半步状态。 2026-11-04">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-26cfaf0d6779523e">物化W的实现，哪些细节会破坏与显式B加系数的多步等价？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ap2-mopd">P²-MOPD: Accelerating Multi-Teacher On-Policy Distillation via Parameter Priors</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-04 · Australian Institute for Machine Learning, Adelaide University / StepFun</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>非零weight decay会分别收缩W与B，产生额外任务向量收缩，破坏等价；两个通道还必须保持独立optimizer state和同一更新前梯度。非有限梯度/范数要跳过整步，不能一个通道已经更新后再发现另一个失败。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：B=1、ατ=1、W=2时，相同decay系数对W和B的收缩量相差一倍。先更新W再因α梯度NaN停止，也会留下半步状态。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.03953v1">原论文</a> · <a href="../../../../post-training/2611.03953-p2-mopd/">实现解读</a> · <a href="#qa-26cfaf0d6779523e">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:aopd" data-paper-title="When to Follow the Teacher: Advantage-Based On-Policy Distillation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="When to Follow the Teacher: Advantage-Based On-Policy Distillation LLM 后训练 University of Pennsylvania 2026-10-22 普通 OPD 在学生实际访问的状态上模仿教师，但教师偏好的动作不一定能被当前学生继续完成。AOPD 用该动作对学生最终奖励的优势加权教师监督，通过学生原有 rollout、终局奖励及教师重要性比率估计，不额外生成反事实续写。 完整实验：成本过高，不复现（审查 DONE），不进入自动重试队列。oracle 仅存在测试代码，不进入损失或诊断策略。本地状态：L1 精确损失组件，diagnostic only。实现论文 Eq. 3.6 / 3.8 与 Algorithm 1 的 leave-one-out baseline，不是完整 LLM 训练器或能力复现。完整实验：成本过高，不复现（审查 DONE），不进入自动重试队列。leave_one_out_advantages 按 prompt group 独立计算 baseline；  On-policy distillation 优势加权蒸馏与无额外rollout估计 后训练算法组件 LLM 后训练 教师与纠错：额外信息何时能帮到学生 AOPD为什么问教师动作对学生是否可完成？ 教师偏好的下一步不一定是当前学生能继续完成的路线，学生相对终局优势用于选择适合其能力的指导。估计复用学生已有rollout，不额外生成反事实续写。 例如教师给很高阶证明起点，学生后面完全接不住，未必是最佳当前监督。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
 <span id="paper-post-training-aopd-187dc1ba" class="ar-learning-paper-anchor"></span>

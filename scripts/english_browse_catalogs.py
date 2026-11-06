@@ -71,6 +71,26 @@ def _label_map(raw: str) -> dict[str, str]:
 
 
 _LABELS = _label_map("""
+工程与推理效率 = Engineering and inference efficiency
+本地搜索 = Local search
+业务对齐分词与多样性解码 = Business-aligned tokenization and diverse decoding
+重排与混排 = Reranking and mix-ranking
+生成式整页策略与多目标后训练 = Generative slate policies and multi-objective post-training
+离线前缀复用与在线个性化 = Offline prefix reuse and online personalization
+运行中Harness演化 = In-run harness evolution
+自动后训练环境 = Automated post-training environments
+权限与运行时约束 = Permissions and runtime constraints
+跨任务研究评测 = Cross-task research evaluation
+免训练语义块稀疏注意力 = Training-free semantic-block sparse attention
+稀疏注意力双流调度 = Dual-stream scheduling for sparse attention
+教师上下文与输入变换 = Teacher context and input transforms
+定向反馈与蒸馏 = Targeted feedback and distillation
+多教师融合与参数先验 = Multi-teacher fusion and parameter priors
+组内结果密度奖励缩放 = Within-group outcome-density reward scaling
+跨层共享状态与测试时训练 = Cross-layer shared state and test-time training
+稀疏注意力选择与服务重叠 = Sparse-attention selection and serving overlap
+奖励与信用分配 = Rewards and credit assignment
+Agent安全 = Agent safety
 决策级信用分配 = Decision-level credit assignment
 召回 = Candidate retrieval
 推测解码与接受长度 = Speculative decoding and acceptance length

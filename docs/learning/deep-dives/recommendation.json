@@ -911,7 +911,7 @@
     "generative-retrieval-reasoning": {
       "title": "生成一个物品，先后跨过码本、模型分布与合法目录三道关",
       "thesis": "TIGER把物品变成层次码并学习下一码序列，COBRA在稀疏码后补回条件稠密向量，PLUM把已有LLM通过继续预训练接到行为/SID空间。STATIC不改表示而改变合法解码的执行方式，Reward Guided Decoding则在既有支持上倾斜业务偏好。先定位改变的是哪一关，再判断它能否找回漏掉的物品。 PinGER再把历史输入与SID监督拆开，并将前缀多样化选择、分层DPO和合法目录分别治理。",
-      "updated": "2026-10-30",
+      "updated": "2026-11-04",
       "axes": [
         "物品表示：离散码、稀疏—稠密级联与LLM继续预训练",
         "学习分布与推理搜索分别改变什么",
@@ -987,6 +987,26 @@
             "核心公式",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "recommendation:reusegr",
+          "position": "按query共享7B规划的SID前缀，0.5B读取当前用户历史补全；ReuseCut以逐级覆盖准则选择复用深度。",
+          "tradeoff": "比缓存完整结果保留更多个性化空间，但深缓存会限制可达目标；准备好depth0与冷miss使用不同模型，低成本标签核不等于学习BudgetCut。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "paper": "recommendation:spade-local-search",
+          "position": "用业务价值重加权BPE合并，再以父beam名次的有界sigmoid奖励控制自由文本query生成的裁剪。",
+          "tradeoff": "与固定SID子树的约束和LCP惩罚不同；名次奖励不测两候选语义距离，也不无条件保留最终top1。本地不含STAR/MARS-DPO或完整query模型。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -1023,6 +1043,16 @@
             "recommendation:pinger",
             "recommendation:tiger",
             "recommendation:static-constraint-decoding"
+          ]
+        },
+        {
+          "title": "共享哪部分计算、输出什么对象，与怎样拉开候选并非同一问题",
+          "body": "TIGER用语义码把物品变成可生成路径，ReuseGR沿用SID分层却将query前缀规划跨用户共享，当前历史仍影响后缀。SPADE生成的是可执行自由文本query，OA-BPE先改变切词先验，再用父beam名次奖励调节搜索存活；它不执行PinGER的共同SID前缀惩罚。比较时先固定候选预算和输出对象，再分别记录历史输入成本、离线规划成本与在线解码成本，不能把前缀可达覆盖当作完整召回提升。",
+          "papers": [
+            "recommendation:reusegr",
+            "recommendation:spade-local-search",
+            "recommendation:tiger",
+            "recommendation:pinger"
           ]
         }
       ],
@@ -1077,6 +1107,17 @@
             "recommendation:tiger",
             "recommendation:static-constraint-decoding"
           ]
+        },
+        {
+          "id": "reuse-prior-rank-and-semantic-distance",
+          "question": "ReuseGR、PinGER和SPADE都谈prefix或多样性，能把三者的控制量合成一个分数吗？",
+          "answer": "不能不加区分地合并。ReuseGR控制共享到哪一层及可达子树，PinGER用共同SID前缀惩罚重复子树，SPADE按父beam名次加奖励且输出自由query。它们作用于不同对象和阶段，应先对齐服务预算，再分别测可达性、去冗余和最终质量。",
+          "example": "教学例：缓存两层prefix节省计算，并不自动让候选更分散；给排名靠后的自由query加奖励，也没有计算它与已选query的语义距离。",
+          "papers": [
+            "recommendation:reusegr",
+            "recommendation:spade-local-search",
+            "recommendation:pinger"
+          ]
         }
       ],
       "reviewed_papers": [
@@ -1109,6 +1150,8 @@
         "recommendation:onerec",
         "recommendation:onerec-v2",
         "recommendation:oxygenrec-v2",
+        "recommendation:pailitao-mmsearch2",
+        "recommendation:pinger",
         "recommendation:pinrec",
         "recommendation:plum",
         "recommendation:promise",
@@ -1118,6 +1161,7 @@
         "recommendation:rag-qac",
         "recommendation:rclrec",
         "recommendation:recgpt-v3",
+        "recommendation:reusegr",
         "recommendation:reward-guided-decoding",
         "recommendation:rgalign-rec",
         "recommendation:rolegen",
@@ -1127,6 +1171,7 @@
         "recommendation:sigma",
         "recommendation:snaplgr",
         "recommendation:sona",
+        "recommendation:spade-local-search",
         "recommendation:spar-prefix-balance",
         "recommendation:static-constraint-decoding",
         "recommendation:tagr",
@@ -1139,9 +1184,7 @@
         "recommendation:unisgr-v2",
         "recommendation:univa",
         "recommendation:wegr",
-        "recommendation:xrec",
-        "recommendation:pailitao-mmsearch2",
-        "recommendation:pinger"
+        "recommendation:xrec"
       ],
       "updates": [
         {
@@ -1294,6 +1337,22 @@
             "recommendation:pinger": "419faa2749922aada03375d430278072c04fe17082af0d6a975dc36832be8571",
             "recommendation:tiger": "8baf748cca80fb5364e9dd7280b98de93249f38e0f8f6930149c1c64afee63d5",
             "recommendation:static-constraint-decoding": "8012c5264811bd13cf9092c6cfefaf8a1e896c207922e2715a879af06aa992bc"
+          }
+        },
+        {
+          "date": "2026-11-04",
+          "summary": "补入ReuseGR与SPADE，区分query前缀复用、用户历史条件、业务分词先验和父beam名次奖励；对照TIGER/PinGER保留不同输出对象与候选预算边界，不把CPU算子或完整A/B混成同层证据。",
+          "papers": [
+            "recommendation:reusegr",
+            "recommendation:spade-local-search",
+            "recommendation:tiger",
+            "recommendation:pinger"
+          ],
+          "source_revisions": {
+            "recommendation:reusegr": "bd9583c50e55417953377e4962bed389e2047c8125a396e119bb0ee90c62fb98",
+            "recommendation:spade-local-search": "6d9880f3ed5f725da8a2dc5693515675ad57ea5bfdd5fc84cd2efdc7330ebec4",
+            "recommendation:tiger": "8baf748cca80fb5364e9dd7280b98de93249f38e0f8f6930149c1c64afee63d5",
+            "recommendation:pinger": "419faa2749922aada03375d430278072c04fe17082af0d6a975dc36832be8571"
           }
         }
       ]
@@ -1570,7 +1629,7 @@
     "slates-business-value": {
       "title": "从列表边际价值到出价控制：策略权重与约束",
       "thesis": "CDM把相关性与去冗余的教师选择蒸馏给学生，SORT-Gen直接估计前缀条件下的列表边际价值，PRL-PUTS扫描多目标权重策略，Primal-Dual Decoding则在解码中根据约束松弛量更新乘子。它们分别改变列表上下文、效用模型、策略选择和约束控制，不能把多样性更高或某一目标更好当成全面胜出。 RLBP把相同的多目标治理问题带到日级PID参数选择，但其BU/CPC奖励和控制动作不能当成列表逐项效用。",
-      "updated": "2026-10-30",
+      "updated": "2026-11-04",
       "axes": [
         "价值属于单物品、已选前缀还是整套策略",
         "训练期蒸馏与推理期搜索的分工",
@@ -1627,6 +1686,16 @@
             "核心公式",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "recommendation:onetrans-gsr",
+          "position": "以单个自回归policy统一重排与混排，RM仅离线训练使用；解码保留硬mask/有限偏置，RM和规则奖励分别标准化后组合。",
+          "tradeoff": "几何奖励与集成惩罚是代理目标，不保证每个真实业务指标改善；局部规则不保证全局可行，本地仅CPU约束/算术参考，未训练整页模型。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -1654,6 +1723,14 @@
           "papers": [
             "recommendation:pinterest-rlbp",
             "recommendation:prl-puts"
+          ]
+        },
+        {
+          "title": "从边际价值教师到统一整页策略，仍须分开硬约束与代理奖励",
+          "body": "CDM用可控MMR教师产生列表边际监督，OneTrans-GSR则由整页RM指导一个直接生成混合内容序列的policy。后者的几何多目标reward先组内minmax再正值floor，规则reward还要独立标准化；它不是在若干业务分数上随意乘权。硬mask阻止非法动作，有限惩罚允许取舍，局部配额又可能冲突。RM代理得分、最终选择规则与真实A/B应分别记录，不把CPU算术或未曝光页的RM预测写成用户收益。",
+          "papers": [
+            "recommendation:onetrans-gsr",
+            "recommendation:cdm"
           ]
         }
       ],
@@ -1699,6 +1776,16 @@
             "recommendation:pinterest-rlbp",
             "recommendation:prl-puts"
           ]
+        },
+        {
+          "id": "geometric-floor-not-business-guarantee",
+          "question": "OneTrans-GSR的几何均值reward能保证所有目标都不下降吗？",
+          "answer": "不能。正值floor和几何聚合改变代理目标的取舍，不证明Pareto改善；组内常数目标也只贡献相同因子。真正用户效果需要独立生产A/B，局部mask通过也不能证明所有剩余位置有共同可行解。",
+          "example": "教学例：click与GMV代理都归一后乘起来，仍可能偏好在真实数据上被RM高估的页；CPU公式得分变高不是多下订单。",
+          "papers": [
+            "recommendation:onetrans-gsr",
+            "recommendation:cdm"
+          ]
         }
       ],
       "reviewed_papers": [
@@ -1724,8 +1811,10 @@
         "recommendation:maps-creative",
         "recommendation:metastrategy",
         "recommendation:ogr",
+        "recommendation:onetrans-gsr",
         "recommendation:piano",
         "recommendation:pindco",
+        "recommendation:pinterest-rlbp",
         "recommendation:primal-dual-decoding",
         "recommendation:prl-puts",
         "recommendation:psg",
@@ -1737,8 +1826,7 @@
         "recommendation:swag-bid",
         "recommendation:taiji",
         "recommendation:uame",
-        "recommendation:youtube-freshness",
-        "recommendation:pinterest-rlbp"
+        "recommendation:youtube-freshness"
       ],
       "updates": [
         {
@@ -1831,6 +1919,18 @@
           "source_revisions": {
             "recommendation:pinterest-rlbp": "c60700a5cf962af1a65600d1eba677ee9cc17bb81bafcce4ccead6deb4436a62",
             "recommendation:prl-puts": "66c54c2b0cfb4be2a7d8a46183d8f3700173366ee91ea6e27404daad8d368a61"
+          }
+        },
+        {
+          "date": "2026-11-04",
+          "summary": "补入OneTrans-GSR，区分单policy整页生成、RM离线代理、几何多目标奖励与独立标准化；相对CDM保留教师/策略差异，并明确局部约束和线上证据不可互相代替。",
+          "papers": [
+            "recommendation:onetrans-gsr",
+            "recommendation:cdm"
+          ],
+          "source_revisions": {
+            "recommendation:onetrans-gsr": "4274257426dd3ae9815f43b7d08943474347ace3c76bd64730523517d332b06c",
+            "recommendation:cdm": "884477285fff2fd44b4116d22b7b1acd5fc3c26e4b0581f580dfc31a066df185"
           }
         }
       ]
