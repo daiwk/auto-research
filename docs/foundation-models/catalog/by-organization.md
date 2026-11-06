@@ -129,6 +129,7 @@
 
 ## Google Research
 
+- 2026-11-05 · [GINGER: Spicing Up Graph-Based Vector Search](../../foundation-models/2611.08306-ginger/README.md)（`ginger`）：近邻图搜索在导航时随机读取大量候选，只需低位宽排序；最后的少量候选才需要高精度重排。若同时存粗码和完整浮点向量，会重复存储。GINGER 用 **Nested TurboQuant（NTQ）** 让高精度码保留同一个 4-bit 导航前缀：先读取粗码和粗尺度，最后才为入围向量读细码和细尺度。
 - 2026-10-19 · [DeepSEA: A Multilingual Evaluation Benchmark for Southeast Asia](../../foundation-models/2610.26155-deepsea/README.md)（`deepsea`）：现有多语言评测对东南亚低资源语言覆盖不足。DeepSEA 通过专业翻译与质量审核扩展五类公开任务，支持按语言资源层级比较推理、问答和生成表现；研究同时分析英语中转、错误类型及 tokenizer 效率。它是 benchmark，而非改变语言模型参数的训练算法。
 - 2026-06-02 · [Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories](../../foundation-models/2606.03979-sleep-lti/README.md)（`sleep-lti`）：上下文结束会丢失短期知识，直接更新基础权重又可能覆盖旧知识。Sleep在活跃学习之外增加离线巩固：多频率记忆模块间先计算未来基础更新但不应用，再扩展低秩专家、用更新前教师巩固到拟更新学生，最后应用更新并清理发送层专家。
 - 2026-04-30 · [Optimized Deferral for Imbalanced Settings](../../foundation-models/2604.27723-mild/README.md)（`mild`）：少数覆盖的专用专家容易被多数专家淹没。论文通过对不同专家设置不同margin约束来平衡学习。保留训练奖励而非以argmin成本生成单一硬标签；这是[v1 §5.3 mild目标、§4.2 margin建议](https://arxiv.org/html/2604.27723v1#S5.SS3)的低成本实现。

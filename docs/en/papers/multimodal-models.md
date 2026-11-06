@@ -8,6 +8,7 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling](<https://arxiv.org/abs/2611.01143>) | 2026-10-31 | [English](../../multimodal-models/2611.01143-gslm2/README-en.md) · [Chinese](../../multimodal-models/2611.01143-gslm2/README.md) |
 | [UniAction: Unified Action Conditioning for World Models](<https://arxiv.org/abs/2610.32977v1>) | 2026-10-23 | [English](../../multimodal-models/2610.32977-uniaction/README-en.md) · [Chinese](../../multimodal-models/2610.32977-uniaction/README.md) |
 | [FlexGlue: Sparse-to-Dense Feature Matching and Visual Disambiguation](<https://arxiv.org/abs/2610.32976v1>) | 2026-10-23 | [English](../../multimodal-models/2610.32976-flexglue/README-en.md) · [Chinese](../../multimodal-models/2610.32976-flexglue/README.md) |
 | [Agentic World Action Models](<https://arxiv.org/abs/2610.30136v1>) | 2026-10-21 | [English](../../multimodal-models/2610.30136-aw0/README-en.md) · [Chinese](../../multimodal-models/2610.30136-aw0/README.md) |

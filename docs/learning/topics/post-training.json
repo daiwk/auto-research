@@ -141,6 +141,7 @@
       ],
       "reading_order": "先读Process Supervision，区分逐步标签与终局标签；再读Math-Shepherd，看如何用续写构造步骤信号；最后读TACO，理解为什么正确回答内部也可能存在不该被强化的token。",
       "papers": [
+        "post-training:emoreward",
         "post-training:dars-density",
         "post-training:mart-grpo",
         "post-training:mge-po",

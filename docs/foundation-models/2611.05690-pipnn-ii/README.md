@@ -9,7 +9,7 @@
 | 论文 | [Turbocharging PiPNN for Proximity and k-NN Graph Building](https://arxiv.org/abs/2611.05690v1)；[固定 v1 正文](https://arxiv.org/html/2611.05690v1) |
 | 公司 / 作者机构 | 一作 **Tobias Rubel**，University of Maryland, College Park。Guy Blelloch、Laxman Dhulipala 分别同时署名 CMU/UMD 与 Google Research；Lars Gottesbüren、Jakub Łącki、Vahab Mirrokni 署名 Google Research。Google 合作，不是一作单位。 |
 | 原始发布日期 | **2026-11-03 22:20:36 UTC**，arXiv v1；见 2026-11-05 [cs.DB 公告](https://arxiv.org/list/cs.DB/recent?show=2000)。 |
-| 原作者代码 | 截至 2026-11-06，固定 v1 未给出本版 PiPNN II/GPiPNN 的可核实公开源码；引用的基线或旧版 PiPNN 不能代替本版。 |
+| 原作者代码 | **尚未发布可核验源码。** [GINGER v1 §1](https://arxiv.org/html/2611.08306v1#S1) 将 [google/ginger](https://github.com/google/ginger) 指为 PiPNN II 官方实现；2026-11-07 核对[固定文件树](https://api.github.com/repos/google/ginger/git/trees/ce77e5faa3b0451b84908acf399e610f5349446b?recursive=1)，只有说明、许可证和贡献指南，未发布可执行 CPU 实现，也不能据此推断 GPiPNN 已公开。 |
 | 本地 Adapter / key | `pipnn-ii`；`adapter: null`，仅 L1 组件，不接入 Evolve。 |
 | 本地代码 | `src/auto_research/foundation_models/pipnn_ii.py` |
 

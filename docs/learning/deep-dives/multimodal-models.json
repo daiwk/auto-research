@@ -5,7 +5,7 @@
     "alignment-interfaces": {
       "title": "多模态对齐到底对齐什么：向量、视觉接口还是证据依赖",
       "thesis": "CLIP与EmbeddingGemma 2产出可比较向量，BLIP-2与LLaVA连接视觉到条件生成，CV-OPD训练证据依赖，UMRM给回答评分。它们的输出合同和监督对象不同，不是同一条从小到大的能力排行榜。",
-      "updated": "2026-10-29",
+      "updated": "2026-11-07",
       "reviewed_papers": [
         "foundation-models:blip2",
         "foundation-models:clip",
@@ -13,6 +13,7 @@
         "multimodal-models:cv-opd",
         "multimodal-models:embedding-gemma2",
         "multimodal-models:flexglue",
+        "multimodal-models:gslm2",
         "foundation-models:gas",
         "foundation-models:lamp",
         "foundation-models:llava",
@@ -96,6 +97,16 @@
             "数据协议与verifier边界",
             "本地结果与验证状态"
           ]
+        },
+        {
+          "paper": "multimodal-models:gslm2",
+          "position": "SpidR 2.0 从多个编码层取得离散语音流；联合保留变化帧，时序主干读取对齐元组，判别采用等权逐流的转移对数概率。",
+          "tradeoff": "多流比各自去重保留更多时间位置；转移评分不代表生成头、跨模态检索或翻译质量。本地只核验帧对齐及数值聚合，没有编码器、语音、模型或基准运行。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -124,6 +135,15 @@
           "papers": [
             "foundation-models:clip",
             "multimodal-models:embedding-gemma2"
+          ]
+        },
+        {
+          "title": "语音向量、语音单元与翻译候选不是同一个输出接口",
+          "body": "EmbeddingGemma 2 将不同模态映到可比较的固定维向量，MRL 截短的是向量宽度；GSLM2 从同一语音中提取多个时间对齐的离散流，联合去重改变的是序列长度，单流转移头在共享历史条件下给口语候选打分。NaijaS2ST 的目标则是跨语言语音生成，需要翻译参考与 ASR-COMET 协议。向量近邻、同语种成对判别和跨语言生成不能用一个准确率替代；当前 GSLM2 本地切片只验证给定单元和概率的变换，不宣称真实语音能力。",
+          "papers": [
+            "multimodal-models:embedding-gemma2",
+            "multimodal-models:gslm2",
+            "multimodal-models:naijas2st"
           ]
         }
       ],
@@ -167,6 +187,17 @@
           "papers": [
             "foundation-models:clip",
             "multimodal-models:embedding-gemma2"
+          ]
+        },
+        {
+          "id": "nov07-speech-stream-versus-embedding",
+          "question": "如果想判断一段口语续写是否比另一段合理，能否用统一音频向量相似度代替 GSLM2 的转移分数？",
+          "answer": "不能视为等价。EmbeddingGemma 2 的固定向量适合比较对象相似性，GSLM2 的分数由顺序条件概率给出，区分本流首项和变化位置并等权聚合。即便两个续写与原段主题相似，它们的语法或音位转移也可能不同。翻译还需要 NaijaS2ST 那样的独立跨语言协议。",
+          "example": "教学例：两个结尾都提到杯子，向量可能接近；只有一个的动词搭配符合前文。需要分别比较序列分数与检索相似度，不把后者填作 sBLIMP 正确率。",
+          "papers": [
+            "multimodal-models:embedding-gemma2",
+            "multimodal-models:gslm2",
+            "multimodal-models:naijas2st"
           ]
         }
       ],
@@ -227,6 +258,16 @@
           ],
           "source_revisions": {
             "multimodal-models:embedding-gemma2": "eff70bf2012d4fee3d5343c5e47707ce0d4d953155dc354b5ed71b48acc890f1"
+          }
+        },
+        {
+          "date": "2026-11-07",
+          "summary": "补收 Meta GSLM2，与 EmbeddingGemma 2、NaijaS2ST 区分统一向量、对齐离散流和跨语言生成；核验变化并集、逐流等权与高成本复现边界。",
+          "papers": [
+            "multimodal-models:gslm2"
+          ],
+          "source_revisions": {
+            "multimodal-models:gslm2": "5ab8ce37c3b3aadad488495535e4ecda1ab9dc939871212b55de7ae8d11e870a"
           }
         }
       ]

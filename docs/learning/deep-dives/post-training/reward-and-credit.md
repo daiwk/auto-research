@@ -7,7 +7,7 @@ hide:
 
 # 奖励从哪里来，信用才该分到哪里
 
-[LLM 后训练](../index.md) · 更新 2026-11-05 · 38 篇主题资料 / 8 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-07 · 39 篇主题资料 / 9 篇重点对照
 
 过程标签、最终结果、模型自置信与回溯归因是不同证据。逐步PRM、MRTPO、TACO和MART-GRPO分别做标签获取、奖励定位、正信用降权和失败后缀过滤；INTUITOR则改用内在分布信号，不能把它当外部正确性验证器。 CONCUR另处理奖励维度之间的优先级，把门控辅助优势投影到主奖励保序锥；这不是沿时间轴分配token信用。
 
@@ -33,6 +33,7 @@ hide:
 | [INTUITOR](../../../post-training/2505.19590-intuitor/README.md) · [原始来源](https://arxiv.org/abs/2505.19590)<br>章节：背景与主要改动、核心公式、复现边界 | 以逐token全词表KL(U∥policy)的长度平均作为self-certainty内在奖励。 | 不需外部verifier但置信不保证正确；本地仍是相反KL方向的候选诊断，尚未实现定义性奖励。 |
 | [CONCUR: Concordant Auxiliary Rewards for Multi-Task, Multi-Reward Reinforcement Learning](../../../post-training/2610.36437-concur/README.md) · [原始来源](https://arxiv.org/abs/2610.36437v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 组内先标准化，再把门控辅助分数作最近保序投影；到顶约束按T/A策略处理，最后整batch白化。 | 主奖励以下的并列不强行相等，投影后不重新标准化；未门控分量仍可能反转排序。完整32GPU训练不复现，本地仅优势估计器。 |
 | [Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling](../../../post-training/2611.04792-dars/README.md) · [原始来源](https://arxiv.org/abs/2611.04792)<br>章节：背景与主要改动、核心公式、检查与负控 | 同prompt组内对结果表示计算含self的Gaussian KDE，以非负reward除以density后再标准化，原GRPO目标不变。 | 终局结果拥挤度不是token置信或奖励优先级；重复点在窄带宽仍计多次，原reward常数不代表缩放后常数。std约定和零方差策略显式，L1不证明已学到奖励比例分布。 |
+| [EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL](../../../post-training/2611.06518-emoreward/README.md) · [原始来源](https://arxiv.org/abs/2611.06518)<br>章节：背景与主要改动、核心公式、诊断与边界 | 先用当前视频的有效证据门控决定哪些评分能进入融合，再用完成轮的原始分数与结果相关性倾斜各通道权重。训练轮之间拟合一次，下一轮只读。 | 需要已完成的参考轮，相关性依赖 VideoAlign 代理结果，不等同于独立情绪偏好。CPU 只验收分配，未运行视觉评分器或完整生成训练。 |
 
 </div>
 
@@ -61,6 +62,12 @@ TACO在同一响应的正优势内部，按token风险降低局部信用，负�
 TACO按局部tail risk降低正token信用，负信用保留；CONCUR按主奖励顺序投影组内辅助优势。DARS改的是另一层：相同prompt下结果表示的拥挤度，先用含self的Gaussian密度缩放非负终局reward，再计算组优势。原reward都相同也可能因density不同产生不同缩放值；只有缩放后reward为常数时才出现零方差。重复点在窄带宽仍有重复计数，不能一律当density趋1。embedding、bandwidth、std约定决定该坐标，合成KDE检查不是策略分布覆盖或图像质量证据。
 
 对照来源：[dars-density](../../../post-training/2611.04792-dars/README.md) · [taco](../../../post-training/2607.07976-taco/README.md) · [concur](../../../post-training/2610.36437-concur/README.md)
+
+### 先合成视频奖励，还是把奖励分给生成 token？
+
+EmoReward 在评分通道维度校准一个视频标量，靠本次有效性与前一完成轮的代理相关性；TVRL 则沿生成 token 维度，使用冻结 VLM 的输入梯度把现有组优势重新分配。前者只改标量并不定位哪些 token 导致效果，后者的梯度归因也不会估计面部或运动评分器跨轮是否可靠。比较时分别冻结评分器集合与信用分配方式。
+
+对照来源：[emoreward](../../../post-training/2611.06518-emoreward/README.md) · [tvrl](../../../post-training/2610.01973-tvrl/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -116,9 +123,23 @@ TACO按局部tail risk降低正token信用，负信用保留；CONCUR按主奖�
 
     对照来源：[dars-density](../../../post-training/2611.04792-dars/README.md) · [taco](../../../post-training/2607.07976-taco/README.md) · [concur](../../../post-training/2610.36437-concur/README.md)
 
+### 两段视频最终情绪标量相同，EmoReward 和 TVRL 是否一定给生成 token 相同信用？ {#cross-emoreward-vs-tvrl-credit-axis}
+
+??? note "展开答案与例子"
+
+    **答案：** 不一定。EmoReward 的输出是视频级标量，不能单独决定 token 信用；TVRL 会把既有组优势按冻结 VLM 的输入梯度分配。相同标量的两段视频仍可能有不同的 token 敏感度。如果同组优势本身为零，归因不能凭空产生非零信用。
+
+    **教学例子：** 教学例：假设两段视频在一个非零优势的组内都为正优势，一段更依赖前景人物动作 token，另一段依赖后半段转场；TVRL 的敏感度可不同，EmoReward 不输出这样的分配。
+
+    对照来源：[emoreward](../../../post-training/2611.06518-emoreward/README.md) · [tvrl](../../../post-training/2610.01973-tvrl/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-07** · 补入 11 月 5 日公告窗口的 EmoReward，对照 TVRL 的 token 信用，区分通道相关、当前有效性与组内 token 敏感度；仅 CPU L1，未运行生成器或完整训练。
+
+涉及：[emoreward](../../../post-training/2611.06518-emoreward/README.md) · [tvrl](../../../post-training/2610.01973-tvrl/README.md)
 
 **2026-11-05** · 补入DARS，按终局结果密度、token正信用和主奖励保序三轴对照TACO/CONCUR；明确含self与重复点、缩放后零方差、非负reward和L1机制证据边界。
 
@@ -132,10 +153,11 @@ TACO按局部tail risk降低正token信用，负信用保留；CONCUR按主奖�
 
 覆盖 36 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 38 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 39 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
+- [EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL](../../../post-training/2611.06518-emoreward/README.md)
 - [Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling](../../../post-training/2611.04792-dars/README.md)
 - [When to Stop Penalizing Actions? Martingale GRPO for VLA Reinforcement Learning](../../../post-training/2610.32431-mart-grpo/README.md)
 - [MGE-PO: Entropy-Aware Credit Assignment for Mathematical Reasoning](../../../post-training/2610.23245-mge-po/README.md)

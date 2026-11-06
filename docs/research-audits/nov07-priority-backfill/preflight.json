@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-07-priority-backfill",
+  "component_keys": ["ginger", "gslm2", "emoreward"],
+  "seeds": [42, 43, 44],
+  "device": "cpu",
+  "maximum_run_seconds": 120,
+  "data_and_checkpoint_downloads": 0,
+  "pretrained_model_or_api_calls": 0,
+  "full_experiments_executed": false,
+  "automatic_retry": false,
+  "scope": {
+    "ginger": "Bounded scalar nested quantization and score arithmetic; no graph builds, public vector corpus or SIMD throughput run.",
+    "gslm2": "Discrete tuple and stream-transition evaluation arithmetic; no encoder, speech data, checkpoints, speech generation or benchmark run.",
+    "emoreward": "Score/gate and completed-run reliability arithmetic; no reward providers, media, image/video models or RL rollouts."
+  },
+  "resource_decisions": {
+    "ginger": "Paper §6: 14 datasets, up to one billion vectors; 2.3 TB RAM multi-NUMA machine, not a local Mac or single A100/A30 reproduction.",
+    "gslm2": "Paper §3 and appendices: up to 6M speech hours and 6.5B parameters; no encoder or model pretraining within this budget.",
+    "emoreward": "Paper §4 and Appendix E: multiple HunyuanVideo 1.5 RL arms, a reference run and video reward providers, plus SD 3.5 and FLUX transfer. No full generator/reward run within the single-device budget; no elapsed-time estimate measured."
+  }
+}
