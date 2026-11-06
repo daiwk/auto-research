@@ -8,8 +8,10 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation](<https://arxiv.org/abs/2611.07959>) | 2026-11-05 | [English](../../post-training/2611.07959-cord/README-en.md) · [Chinese](../../post-training/2611.07959-cord/README.md) |
 | [Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning](<https://arxiv.org/abs/2611.05266v1>) | 2026-11-03 | [English](../../post-training/2611.05266-targeted-guidance/README-en.md) · [Chinese](../../post-training/2611.05266-targeted-guidance/README.md) |
 | [Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation?](<https://arxiv.org/abs/2611.04958v1>) | 2026-11-03 | [English](../../post-training/2611.04958-shuffled-opsd/README-en.md) · [Chinese](../../post-training/2611.04958-shuffled-opsd/README.md) |
+| [RAGCompass: Generalizable Retriever Routing via Reranking](<https://arxiv.org/abs/2611.05596v1>) | 2026-11-03 | [English](../../post-training/2611.05596-ragcompass/README-en.md) · [Chinese](../../post-training/2611.05596-ragcompass/README.md) |
 | [Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling](<https://arxiv.org/abs/2611.04792>) | 2026-11-03 | [English](../../post-training/2611.04792-dars/README-en.md) · [Chinese](../../post-training/2611.04792-dars/README.md) |
 | [SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding](<https://arxiv.org/abs/2611.02846v1>) | 2026-11-02 | [English](../../post-training/2611.02846-specopd/README-en.md) · [Chinese](../../post-training/2611.02846-specopd/README.md) |
 | [RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs](<https://arxiv.org/abs/2611.02455v1>) | 2026-11-02 | [English](../../post-training/2611.02455-rlid/README-en.md) · [Chinese](../../post-training/2611.02455-rlid/README.md) |

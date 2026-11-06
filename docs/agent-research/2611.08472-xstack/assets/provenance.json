@@ -1,0 +1,17 @@
+{
+  "page": "docs/agent-research/2611.08472-xstack/README.md",
+  "paper_url": "https://arxiv.org/abs/2611.08472",
+  "arxiv_id": "2611.08472",
+  "figure": "Figure 2",
+  "original_caption": "See original figure and caption in the attributed source",
+  "source_url": "https://arxiv.org/html/2611.08472v1/fig1_pipeline.png",
+  "extraction": "author-supplied-original-png-visually-reviewed",
+  "asset": "docs/agent-research/2611.08472-xstack/assets/paper-figure-01.png",
+  "width": 947,
+  "height": 318,
+  "score": 0,
+  "error": "",
+  "visually_inspected": true,
+  "sha256": "395cd9db03eb91e3034afa1cc332e67bcdbf90a9942eb93b620dcea15ca7b833",
+  "license": "CC BY 4.0"
+}

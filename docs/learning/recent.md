@@ -68,9 +68,433 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">4309 个问题 · 1075 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">4341 个问题 · 1083 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:ice" data-paper-title="Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking 搜广推与 LLM 应用 Alibaba Taobao &amp; Tmall Group 2026-11-05 重排器把整个列表交给用户，不代表用户看到了每个位置。ICE 将展示后的行为分解成「是否到达并曝光」与「曝光后是否点击」，让深度分布约束到达概率，再用曝光概率抑制点击分支的上下文噪声。点击分布的列表级监督建模位置间的竞争；原有生成器保持不变，由评估器为候选序列算期望价值。 完整实验成本过高，不复现（审查 DONE）。本地交付：L1 张量机制组件。只验证浏览深度、停止梯度门控和点击分布损失；不训练生产评估器。完整实验成本过高，不复现（审查 DONE）。输入为合成深度 logits、点击 logits、达到前缀和二值点击。实现 Eq. 8–13 的尾和、门控、损失与联合效用算术，不实现生成器、共享 embedding 或训练后的点击网络。用 log-tail/log-head 计算曝光 BCE，避免极端 logits 先饱和为 0/1；拒绝未到达位置上的点击、非前缀曝光及零深度输入，因为论文深度支持不含零。  重排与混排 曝光感知与序列评估 搜广推 列表与业务控制：重排、出价和长期价值 如何从深度分布得到单调曝光，点击分支为何不反传这条门控？ 第 k 位曝光是所有 T≥k 的尾和，越往后累加的集合越小。点击分支把这个值当置信度使用，停止梯度避免经门控直接改写曝光分支。 示意：三种深度概率为 0.2、0.3、0.5，则曝光为 1、0.8、0.5。改变点击损失时，门控本身不向这三个深度 logits 回传。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/slates-business-value/">搜广推 / 列表与业务控制：重排、出价和长期价值</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-f727dd1da760a199">如何从深度分布得到单调曝光，点击分支为何不反传这条门控？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Aice">Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Alibaba Taobao &amp; Tmall Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>第 k 位曝光是所有 T≥k 的尾和，越往后累加的集合越小。点击分支把这个值当置信度使用，停止梯度避免经门控直接改写曝光分支。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>三种深度概率为 0.2、0.3、0.5，则曝光为 1、0.8、0.5。改变点击损失时，门控本身不向这三个深度 logits 回传。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议、代码映射与结果边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07591">原论文</a> · <a href="../../recommendation-components/2611.07591-ice/">实现解读</a> · <a href="#qa-f727dd1da760a199">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:ice" data-paper-title="Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking 搜广推与 LLM 应用 Alibaba Taobao &amp; Tmall Group 2026-11-05 重排器把整个列表交给用户，不代表用户看到了每个位置。ICE 将展示后的行为分解成「是否到达并曝光」与「曝光后是否点击」，让深度分布约束到达概率，再用曝光概率抑制点击分支的上下文噪声。点击分布的列表级监督建模位置间的竞争；原有生成器保持不变，由评估器为候选序列算期望价值。 完整实验成本过高，不复现（审查 DONE）。本地交付：L1 张量机制组件。只验证浏览深度、停止梯度门控和点击分布损失；不训练生产评估器。完整实验成本过高，不复现（审查 DONE）。输入为合成深度 logits、点击 logits、达到前缀和二值点击。实现 Eq. 8–13 的尾和、门控、损失与联合效用算术，不实现生成器、共享 embedding 或训练后的点击网络。用 log-tail/log-head 计算曝光 BCE，避免极端 logits 先饱和为 0/1；拒绝未到达位置上的点击、非前缀曝光及零深度输入，因为论文深度支持不含零。  重排与混排 曝光感知与序列评估 搜广推 列表与业务控制：重排、出价和长期价值 列表已经展示，为什么不能把条件 CTR 当成展示后点击概率？ 条件 CTR 的分母只含实际曝光，未到达的位置根本没有点击机会。ICE 把达到概率乘上条件 CTR，再求列表效用。 示意：两个位置条件 CTR 都是 0.4，达到概率分别为 1 和 0.25，则展示后点击概率分别是 0.4 和 0.1。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/slates-business-value/">搜广推 / 列表与业务控制：重排、出价和长期价值</a></p>
+<span id="paper-recommendation-ice-9a64b4f8" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-093ad981dfb8e93e">列表已经展示，为什么不能把条件 CTR 当成展示后点击概率？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Aice">Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Alibaba Taobao &amp; Tmall Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>条件 CTR 的分母只含实际曝光，未到达的位置根本没有点击机会。ICE 把达到概率乘上条件 CTR，再求列表效用。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两个位置条件 CTR 都是 0.4，达到概率分别为 1 和 0.25，则展示后点击概率分别是 0.4 和 0.1。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07591">原论文</a> · <a href="../../recommendation-components/2611.07591-ice/">实现解读</a> · <a href="#qa-093ad981dfb8e93e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:ice" data-paper-title="Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking 搜广推与 LLM 应用 Alibaba Taobao &amp; Tmall Group 2026-11-05 重排器把整个列表交给用户，不代表用户看到了每个位置。ICE 将展示后的行为分解成「是否到达并曝光」与「曝光后是否点击」，让深度分布约束到达概率，再用曝光概率抑制点击分支的上下文噪声。点击分布的列表级监督建模位置间的竞争；原有生成器保持不变，由评估器为候选序列算期望价值。 完整实验成本过高，不复现（审查 DONE）。本地交付：L1 张量机制组件。只验证浏览深度、停止梯度门控和点击分布损失；不训练生产评估器。完整实验成本过高，不复现（审查 DONE）。输入为合成深度 logits、点击 logits、达到前缀和二值点击。实现 Eq. 8–13 的尾和、门控、损失与联合效用算术，不实现生成器、共享 embedding 或训练后的点击网络。用 log-tail/log-head 计算曝光 BCE，避免极端 logits 先饱和为 0/1；拒绝未到达位置上的点击、非前缀曝光及零深度输入，因为论文深度支持不含零。  重排与混排 曝光感知与序列评估 搜广推 列表与业务控制：重排、出价和长期价值 浏览深度只有 1 到 L 时，如何处理首位未曝光、以及几乎为零的尾和？ 首位未曝光不在此模型支持内，明确拒绝而不伪造标签。合法尾部用 logcumsumexp 计算曝光和未曝光的 log 概率，避免先算接近 0 的概率再取 log。 示意：两位置深度 logits 为 1000 和 -1000，若实际到达位置 2，负 log 概率接近 2000，仍应有有限损失而不是把尾概率直接舍为 0。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/slates-business-value/">搜广推 / 列表与业务控制：重排、出价和长期价值</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-424ab97878afc913">浏览深度只有 1 到 L 时，如何处理首位未曝光、以及几乎为零的尾和？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Aice">Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Alibaba Taobao &amp; Tmall Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>首位未曝光不在此模型支持内，明确拒绝而不伪造标签。合法尾部用 logcumsumexp 计算曝光和未曝光的 log 概率，避免先算接近 0 的概率再取 log。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两位置深度 logits 为 1000 和 -1000，若实际到达位置 2，负 log 概率接近 2000，仍应有有限损失而不是把尾概率直接舍为 0。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议、代码映射与结果边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07591">原论文</a> · <a href="../../recommendation-components/2611.07591-ice/">实现解读</a> · <a href="#qa-424ab97878afc913">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:ice" data-paper-title="Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking 搜广推与 LLM 应用 Alibaba Taobao &amp; Tmall Group 2026-11-05 重排器把整个列表交给用户，不代表用户看到了每个位置。ICE 将展示后的行为分解成「是否到达并曝光」与「曝光后是否点击」，让深度分布约束到达概率，再用曝光概率抑制点击分支的上下文噪声。点击分布的列表级监督建模位置间的竞争；原有生成器保持不变，由评估器为候选序列算期望价值。 完整实验成本过高，不复现（审查 DONE）。本地交付：L1 张量机制组件。只验证浏览深度、停止梯度门控和点击分布损失；不训练生产评估器。完整实验成本过高，不复现（审查 DONE）。输入为合成深度 logits、点击 logits、达到前缀和二值点击。实现 Eq. 8–13 的尾和、门控、损失与联合效用算术，不实现生成器、共享 embedding 或训练后的点击网络。用 log-tail/log-head 计算曝光 BCE，避免极端 logits 先饱和为 0/1；拒绝未到达位置上的点击、非前缀曝光及零深度输入，因为论文深度支持不含零。  重排与混排 曝光感知与序列评估 搜广推 列表与业务控制：重排、出价和长期价值 列表 KL 和逐位置条件点击 BCE 为什么不是重复监督？ BCE 在已曝光位置分别校准绝对点击率；KL 通过归一化分布比较相对点击分配。零点击列表的 KL 目标均匀，并不要求每个位置的条件 CTR 等于 1/L。 示意：所有位置 logit 同时加 1，softmax 不变，条件点击 sigmoid 变大；所以两项 loss 对共同偏移的反应不同。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/slates-business-value/">搜广推 / 列表与业务控制：重排、出价和长期价值</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-a523fd1ee353df23">列表 KL 和逐位置条件点击 BCE 为什么不是重复监督？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Aice">Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Alibaba Taobao &amp; Tmall Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>BCE 在已曝光位置分别校准绝对点击率；KL 通过归一化分布比较相对点击分配。零点击列表的 KL 目标均匀，并不要求每个位置的条件 CTR 等于 1/L。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>所有位置 logit 同时加 1，softmax 不变，条件点击 sigmoid 变大；所以两项 loss 对共同偏移的反应不同。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议、代码映射与结果边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07591">原论文</a> · <a href="../../recommendation-components/2611.07591-ice/">实现解读</a> · <a href="#qa-a523fd1ee353df23">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:cord-rollout" data-paper-title="CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation LLM 后训练 Tsinghua University 2026-11-05 普通 OPD 的教师只给学生已经访问的前缀评分，难以覆盖学生很少走到的教师路径。CoRD 不改每状态的反向 KL 监督，改变的是产生前缀的采样分布。学生先提出 token，再以最大耦合向教师倾斜的目标分布修正提议；同前缀、同词表，两侧概率都必须可用。这里借用了投机解码的拒绝规则，但目的不是增加服务吞吐。 单张 A100/A30 或 Mac 不适合完整矩阵，成本过高，不复现（审查 DONE）。maximal_coupling 接收已经归一化、同词表的同前缀概率，使用 log 空间几何插值，返回目标、接受概率、正残差及 TV；Coupling.draw 用调用方传入的随机源返回提议和发出 token。不加载模型，不生成 LLM 轨迹，不执行反向 KL 训练。只在支持集交集上有质量；若交集为空则拒绝，不能偷偷换成均匀分布或普通教师重抽。  On-policy distillation 最大耦合轨迹采样 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 保留同一个接受率，拒绝后改为直接从教师重抽，为什么不是等价实现？ 拒绝规则只决定需要移动多少质量，重抽方向决定它落到哪里。无条件教师分布仍可能给学生已高估的 token 正质量；只有归一化正残差恰好填平目标缺口。 教学例：pS=(0.6,0.4)，α=1 时 qα=pT=(0.3,0.7)。先保留第一 token 的 0.3；拒绝的 0.3 若直接从教师重抽，又给第一 token 加 0.09，边缘 0.39 错于目标 0.30。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/student-trajectory-distillation/">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-87246a2fde67cf8a">保留同一个接受率，拒绝后改为直接从教师重抽，为什么不是等价实现？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Acord-rollout">CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>拒绝规则只决定需要移动多少质量，重抽方向决定它落到哪里。无条件教师分布仍可能给学生已高估的 token 正质量；只有归一化正残差恰好填平目标缺口。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：pS=(0.6,0.4)，α=1 时 qα=pT=(0.3,0.7)。先保留第一 token 的 0.3；拒绝的 0.3 若直接从教师重抽，又给第一 token 加 0.09，边缘 0.39 错于目标 0.30。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07959">原论文</a> · <a href="../../post-training/2611.07959-cord/">实现解读</a> · <a href="#qa-87246a2fde67cf8a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:cord-rollout" data-paper-title="CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation LLM 后训练 Tsinghua University 2026-11-05 普通 OPD 的教师只给学生已经访问的前缀评分，难以覆盖学生很少走到的教师路径。CoRD 不改每状态的反向 KL 监督，改变的是产生前缀的采样分布。学生先提出 token，再以最大耦合向教师倾斜的目标分布修正提议；同前缀、同词表，两侧概率都必须可用。这里借用了投机解码的拒绝规则，但目的不是增加服务吞吐。 单张 A100/A30 或 Mac 不适合完整矩阵，成本过高，不复现（审查 DONE）。maximal_coupling 接收已经归一化、同词表的同前缀概率，使用 log 空间几何插值，返回目标、接受概率、正残差及 TV；Coupling.draw 用调用方传入的随机源返回提议和发出 token。不加载模型，不生成 LLM 轨迹，不执行反向 KL 训练。只在支持集交集上有质量；若交集为空则拒绝，不能偷偷换成均匀分布或普通教师重抽。  On-policy distillation 最大耦合轨迹采样 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 CoRD 的 qα 替换了普通 OPD 的蒸馏教师吗？ 没有。qα 是发出下一个 token 的边缘，决定后续会访问哪些前缀；在已访问前缀上，原文仍用学生 pS 到冻结教师 pT 的全词表反向 KL。 教学例：学生少走的一条解法开头，经耦合采样变得更常见；到达新前缀后，评分仍来自教师 pT，而不是 pS 与 pT 的插值。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/student-trajectory-distillation/">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<span id="paper-post-training-cord-rollout-3394bf47" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-fec0222292273a22">CoRD 的 qα 替换了普通 OPD 的蒸馏教师吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Acord-rollout">CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>没有。qα 是发出下一个 token 的边缘，决定后续会访问哪些前缀；在已访问前缀上，原文仍用学生 pS 到冻结教师 pT 的全词表反向 KL。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：学生少走的一条解法开头，经耦合采样变得更常见；到达新前缀后，评分仍来自教师 pT，而不是 pS 与 pT 的插值。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07959">原论文</a> · <a href="../../post-training/2611.07959-cord/">实现解读</a> · <a href="#qa-fec0222292273a22">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:cord-rollout" data-paper-title="CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation LLM 后训练 Tsinghua University 2026-11-05 普通 OPD 的教师只给学生已经访问的前缀评分，难以覆盖学生很少走到的教师路径。CoRD 不改每状态的反向 KL 监督，改变的是产生前缀的采样分布。学生先提出 token，再以最大耦合向教师倾斜的目标分布修正提议；同前缀、同词表，两侧概率都必须可用。这里借用了投机解码的拒绝规则，但目的不是增加服务吞吐。 单张 A100/A30 或 Mac 不适合完整矩阵，成本过高，不复现（审查 DONE）。maximal_coupling 接收已经归一化、同词表的同前缀概率，使用 log 空间几何插值，返回目标、接受概率、正残差及 TV；Coupling.draw 用调用方传入的随机源返回提议和发出 token。不加载模型，不生成 LLM 轨迹，不执行反向 KL 训练。只在支持集交集上有质量；若交集为空则拒绝，不能偷偷换成均匀分布或普通教师重抽。  On-policy distillation 最大耦合轨迹采样 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 为什么正残差重抽能恰好得到目标边缘，而且替换率是总变差？ 学生在每个 token 上被保留的无条件质量是 min(pS,qα)，它是两侧可以共享的最大对角质量。剩余接受不到的目标质量正是 (qα−pS)+；补上它得到 qα，总替换率为 TV。 教学例：pS=(0.6,0.4)，qα=(0.3,0.7)。第一 token 保留一半提议，第二 token 全保留；拒绝质量 0.3 全补到第二 token，发出比例为 (0.3,0.7)。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/student-trajectory-distillation/">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-de2373cdc673c8d7">为什么正残差重抽能恰好得到目标边缘，而且替换率是总变差？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Acord-rollout">CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>学生在每个 token 上被保留的无条件质量是 min(pS,qα)，它是两侧可以共享的最大对角质量。剩余接受不到的目标质量正是 (qα−pS)+；补上它得到 qα，总替换率为 TV。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：pS=(0.6,0.4)，qα=(0.3,0.7)。第一 token 保留一半提议，第二 token 全保留；拒绝质量 0.3 全补到第二 token，发出比例为 (0.3,0.7)。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07959">原论文</a> · <a href="../../post-training/2611.07959-cord/">实现解读</a> · <a href="#qa-de2373cdc673c8d7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:cord-rollout" data-paper-title="CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation LLM 后训练 Tsinghua University 2026-11-05 普通 OPD 的教师只给学生已经访问的前缀评分，难以覆盖学生很少走到的教师路径。CoRD 不改每状态的反向 KL 监督，改变的是产生前缀的采样分布。学生先提出 token，再以最大耦合向教师倾斜的目标分布修正提议；同前缀、同词表，两侧概率都必须可用。这里借用了投机解码的拒绝规则，但目的不是增加服务吞吐。 单张 A100/A30 或 Mac 不适合完整矩阵，成本过高，不复现（审查 DONE）。maximal_coupling 接收已经归一化、同词表的同前缀概率，使用 log 空间几何插值，返回目标、接受概率、正残差及 TV；Coupling.draw 用调用方传入的随机源返回提议和发出 token。不加载模型，不生成 LLM 轨迹，不执行反向 KL 训练。只在支持集交集上有质量；若交集为空则拒绝，不能偷偷换成均匀分布或普通教师重抽。  On-policy distillation 最大耦合轨迹采样 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 几何插值遇到零概率，为什么要把端点与中间 α 分开实现？ 中间 α 只对两侧同时为正的 token 归一化；空交集没有合法目标。端点直接返回各自原分布，避免对 log(0) 乘零。α=0 不需要额外接受抽样，能保留本地学生采样的随机数序列。 教学例：pS=(1,0)，pT=(0,1) 时 α=0.5 应拒绝，而 α=0 恒发第一 token，α=1 恒发第二 token，均有明确定义。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/student-trajectory-distillation/">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-f355805458845719">几何插值遇到零概率，为什么要把端点与中间 α 分开实现？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Acord-rollout">CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>中间 α 只对两侧同时为正的 token 归一化；空交集没有合法目标。端点直接返回各自原分布，避免对 log(0) 乘零。α=0 不需要额外接受抽样，能保留本地学生采样的随机数序列。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：pS=(1,0)，pT=(0,1) 时 α=0.5 应拒绝，而 α=0 恒发第一 token，α=1 恒发第二 token，均有明确定义。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07959">原论文</a> · <a href="../../post-training/2611.07959-cord/">实现解读</a> · <a href="#qa-f355805458845719">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:convpe" data-paper-title="ConvPE: Convolutional Position Embedding Improves Transformers" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="ConvPE: Convolutional Position Embedding Improves Transformers 基础模型 Nanjing University 2026-11-05 RoPE 旋转 query/key；ConvPE 改的是 softmax 前的加性分数。它先把当前层隐状态投影到少量通道，再从当前及最近若干隐状态学习各相对距离的偏置。每个查询只得到窗口内偏置；窗口外偏置为零，不是把远处 key 屏蔽。因果和 padding mask 仍由注意力层负责。论文还讨论分组、低秩与二维变体，此处仅实现 §3.1 的默认无分组、无分解一维公式。 依据论文配置判断，完整训练/TileLang 对比超出单张 A100/A30 或 Mac 的本轮低成本预算，成本过高，不复现（审查 DONE）。ConvPEBias.compact_bias 输入浮点 [batch, query, model_dim]，输出 [batch, query, bias_head, lag]。其 forward 将这些偏置映射到稠密参考分数矩阵，不计算 QK、mask 或 softmax。解码块须传入绝对 query_start 与前置的 min(query_start, W-1) 个原始隐状态，而不是已经投影的 KV；跨序列不复用这些状态。  注意力与长上下文 卷积位置偏置 基础模型 长上下文：注意力、递归状态与记忆 解码块为什么要带入此前的隐状态，不能每块重新左补零？ 因果卷积依赖当前位置前的 W−1 个投影输入。真正序列起点才补零；在中间切块需给出相同层的原始隐状态及绝对偏移，保证输出与全序列计算切片一致。 教学例：W=3，从位置 4 开始解码，需要位置 2、3 的原始隐状态；把这两个 tap 当作零一般会改变位置 4 的偏置，即使 KV 缓存本身正确。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/context-and-state/">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-f3a8236e5f08063f">解码块为什么要带入此前的隐状态，不能每块重新左补零？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Aconvpe">ConvPE: Convolutional Position Embedding Improves Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Nanjing University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>因果卷积依赖当前位置前的 W−1 个投影输入。真正序列起点才补零；在中间切块需给出相同层的原始隐状态及绝对偏移，保证输出与全序列计算切片一致。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：W=3，从位置 4 开始解码，需要位置 2、3 的原始隐状态；把这两个 tap 当作零一般会改变位置 4 的偏置，即使 KV 缓存本身正确。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07749">原论文</a> · <a href="../../foundation-models/2611.07749-convpe/">实现解读</a> · <a href="#qa-f3a8236e5f08063f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:convpe" data-paper-title="ConvPE: Convolutional Position Embedding Improves Transformers" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="ConvPE: Convolutional Position Embedding Improves Transformers 基础模型 Nanjing University 2026-11-05 RoPE 旋转 query/key；ConvPE 改的是 softmax 前的加性分数。它先把当前层隐状态投影到少量通道，再从当前及最近若干隐状态学习各相对距离的偏置。每个查询只得到窗口内偏置；窗口外偏置为零，不是把远处 key 屏蔽。因果和 padding mask 仍由注意力层负责。论文还讨论分组、低秩与二维变体，此处仅实现 §3.1 的默认无分组、无分解一维公式。 依据论文配置判断，完整训练/TileLang 对比超出单张 A100/A30 或 Mac 的本轮低成本预算，成本过高，不复现（审查 DONE）。ConvPEBias.compact_bias 输入浮点 [batch, query, model_dim]，输出 [batch, query, bias_head, lag]。其 forward 将这些偏置映射到稠密参考分数矩阵，不计算 QK、mask 或 softmax。解码块须传入绝对 query_start 与前置的 min(query_start, W-1) 个原始隐状态，而不是已经投影的 KV；跨序列不复用这些状态。  注意力与长上下文 卷积位置偏置 基础模型 长上下文：注意力、递归状态与记忆 ConvPE 与 RoPE 改变注意力的哪一部分？远处 key 的注意力权重一定不变吗？ RoPE 通过旋转 Q/K 改变点积，ConvPE 则叠加内容相关的局部分数偏置。窗口外原始 logit 不变，不等于归一化后的权重不变；局部 logit 变化也会改变 softmax 分母。 教学例：历史远近两个可见 key 的原始分数都为 0。只给近 key 加 2，远 key 的分数仍是 0，但权重从 0.5 降为约 0.119。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/context-and-state/">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-6f7c1a5d0d6e0fed">ConvPE 与 RoPE 改变注意力的哪一部分？远处 key 的注意力权重一定不变吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Aconvpe">ConvPE: Convolutional Position Embedding Improves Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Nanjing University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>RoPE 通过旋转 Q/K 改变点积，ConvPE 则叠加内容相关的局部分数偏置。窗口外原始 logit 不变，不等于归一化后的权重不变；局部 logit 变化也会改变 softmax 分母。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：历史远近两个可见 key 的原始分数都为 0。只给近 key 加 2，远 key 的分数仍是 0，但权重从 0.5 降为约 0.119。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07749">原论文</a> · <a href="../../foundation-models/2611.07749-convpe/">实现解读</a> · <a href="#qa-6f7c1a5d0d6e0fed">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:convpe" data-paper-title="ConvPE: Convolutional Position Embedding Improves Transformers" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="ConvPE: Convolutional Position Embedding Improves Transformers 基础模型 Nanjing University 2026-11-05 RoPE 旋转 query/key；ConvPE 改的是 softmax 前的加性分数。它先把当前层隐状态投影到少量通道，再从当前及最近若干隐状态学习各相对距离的偏置。每个查询只得到窗口内偏置；窗口外偏置为零，不是把远处 key 屏蔽。因果和 padding mask 仍由注意力层负责。论文还讨论分组、低秩与二维变体，此处仅实现 §3.1 的默认无分组、无分解一维公式。 依据论文配置判断，完整训练/TileLang 对比超出单张 A100/A30 或 Mac 的本轮低成本预算，成本过高，不复现（审查 DONE）。ConvPEBias.compact_bias 输入浮点 [batch, query, model_dim]，输出 [batch, query, bias_head, lag]。其 forward 将这些偏置映射到稠密参考分数矩阵，不计算 QK、mask 或 softmax。解码块须传入绝对 query_start 与前置的 min(query_start, W-1) 个原始隐状态，而不是已经投影的 KV；跨序列不复用这些状态。  注意力与长上下文 卷积位置偏置 基础模型 长上下文：注意力、递归状态与记忆 同一个查询的卷积输出，怎样映射到具体注意力头与 key？ 把卷积的 H_bW 个输出重排为偏置头和滞后距离。对头 h 和 key t，取头 h mod H_b、距离 s−t 的格子；距离越界时加零，不能按相邻头分组或使用 t−s。 教学例：H=4、H_b=2、W=3，查询 5 对 key 3 读取距离 2。头 0 和 2 读偏置头 0，头 1 和 3 读偏置头 1。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/context-and-state/">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-f9b27b0187e38e82">同一个查询的卷积输出，怎样映射到具体注意力头与 key？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Aconvpe">ConvPE: Convolutional Position Embedding Improves Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Nanjing University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>把卷积的 H_bW 个输出重排为偏置头和滞后距离。对头 h 和 key t，取头 h mod H_b、距离 s−t 的格子；距离越界时加零，不能按相邻头分组或使用 t−s。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：H=4、H_b=2、W=3，查询 5 对 key 3 读取距离 2。头 0 和 2 读偏置头 0，头 1 和 3 读偏置头 1。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07749">原论文</a> · <a href="../../foundation-models/2611.07749-convpe/">实现解读</a> · <a href="#qa-f9b27b0187e38e82">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:convpe" data-paper-title="ConvPE: Convolutional Position Embedding Improves Transformers" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="ConvPE: Convolutional Position Embedding Improves Transformers 基础模型 Nanjing University 2026-11-05 RoPE 旋转 query/key；ConvPE 改的是 softmax 前的加性分数。它先把当前层隐状态投影到少量通道，再从当前及最近若干隐状态学习各相对距离的偏置。每个查询只得到窗口内偏置；窗口外偏置为零，不是把远处 key 屏蔽。因果和 padding mask 仍由注意力层负责。论文还讨论分组、低秩与二维变体，此处仅实现 §3.1 的默认无分组、无分解一维公式。 依据论文配置判断，完整训练/TileLang 对比超出单张 A100/A30 或 Mac 的本轮低成本预算，成本过高，不复现（审查 DONE）。ConvPEBias.compact_bias 输入浮点 [batch, query, model_dim]，输出 [batch, query, bias_head, lag]。其 forward 将这些偏置映射到稠密参考分数矩阵，不计算 QK、mask 或 softmax。解码块须传入绝对 query_start 与前置的 min(query_start, W-1) 个原始隐状态，而不是已经投影的 KV；跨序列不复用这些状态。  注意力与长上下文 卷积位置偏置 基础模型 长上下文：注意力、递归状态与记忆 ConvPE 在窗口外的偏置为零，是否意味着注意力只能看最近 W 个 key？ 不是。ConvPE 只改 softmax 之前的加性分数。窗口外的历史 key 仍可按原始 QK 分数参与注意力，未来位置是否可见则由独立的因果 mask 决定。 教学例：W=3，query 位于 5 时，key 0 的距离是 5，偏置为零但仍可读；key 7 也没有该偏置，却因因果 mask 不可读。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/context-and-state/">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-convpe-a877fbf3" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-133f35f7b515da6d">ConvPE 在窗口外的偏置为零，是否意味着注意力只能看最近 W 个 key？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Aconvpe">ConvPE: Convolutional Position Embedding Improves Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Nanjing University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。ConvPE 只改 softmax 之前的加性分数。窗口外的历史 key 仍可按原始 QK 分数参与注意力，未来位置是否可见则由独立的因果 mask 决定。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：W=3，query 位于 5 时，key 0 的距离是 5，偏置为零但仍可读；key 7 也没有该偏置，却因因果 mask 不可读。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07749">原论文</a> · <a href="../../foundation-models/2611.07749-convpe/">实现解读</a> · <a href="#qa-133f35f7b515da6d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:xstack" data-paper-title="XStack: A Benchmark for ML Repo Migration" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="XStack: A Benchmark for ML Repo Migration Agent Princeton University 2026-11-05 局部张量变换正确不等于能迁移完整实验。XStack 固定 20 个真实 PyTorch 仓库的源提交，要求 Agent 在 TPU 上移植到 JAX，交付环境安装、训练/评测和 PyTorch 权重导出三个入口。评估方在新机器全规模重跑；14 个领域包括语言模型、推荐、视觉和强化学习。原文 Appendix H 的代码规模比较也说明，达标路径不一定覆盖源库每一项功能。 仅资料收录：成本过高，不复现（审查 DONE）。仅资料收录：成本过高，不复现（审查 DONE）。不执行迁移、不下载任务数据、不生成本地指标或 GPU 收据。Appendix H 报告主实验 22,802 TPU 芯片小时（v4/v5p/v6e），其中评分重跑 16,158 芯片小时；另有 Agent 与裁判调用。Appendix F 仅 Opus 5 的 20 个单元按作者口径已为 1,844 美元。单 A100/A30 或 Mac 不能提供主实验的 TPU 环境与全矩阵预算。成本过高，不复现（审查 DONE）。本地没有运行 GPU 初步实验、生成替代分数或启动自动队列。  评测与可靠性 跨框架迁移评测 Agent 评测与可靠性：如何知道真的做对了 XStack 的迁移通过为什么不能只看程序能启动？ 必须在干净 TPU 上跑完整源配方并达标，裁判还要核对结果确属该次运行且未作弊，权重必须能回载到原 PyTorch 模型。启动只是其中很弱的前置条件。 教学例：JAX 脚本正常退出，但运行了缩小数据集的教程任务，不是全规模迁移通过。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/evaluation-and-reliability/">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<span id="paper-agent-research-xstack-ca2bf617" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-4225806da786eb79">XStack 的迁移通过为什么不能只看程序能启动？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Axstack">XStack: A Benchmark for ML Repo Migration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Princeton University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>必须在干净 TPU 上跑完整源配方并达标，裁判还要核对结果确属该次运行且未作弊，权重必须能回载到原 PyTorch 模型。启动只是其中很弱的前置条件。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：JAX 脚本正常退出，但运行了缩小数据集的教程任务，不是全规模迁移通过。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、评估协议；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08472">原论文</a> · <a href="../../agent-research/2611.08472-xstack/">实现解读</a> · <a href="#qa-4225806da786eb79">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:xstack" data-paper-title="XStack: A Benchmark for ML Repo Migration" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="XStack: A Benchmark for ML Repo Migration Agent Princeton University 2026-11-05 局部张量变换正确不等于能迁移完整实验。XStack 固定 20 个真实 PyTorch 仓库的源提交，要求 Agent 在 TPU 上移植到 JAX，交付环境安装、训练/评测和 PyTorch 权重导出三个入口。评估方在新机器全规模重跑；14 个领域包括语言模型、推荐、视觉和强化学习。原文 Appendix H 的代码规模比较也说明，达标路径不一定覆盖源库每一项功能。 仅资料收录：成本过高，不复现（审查 DONE）。仅资料收录：成本过高，不复现（审查 DONE）。不执行迁移、不下载任务数据、不生成本地指标或 GPU 收据。Appendix H 报告主实验 22,802 TPU 芯片小时（v4/v5p/v6e），其中评分重跑 16,158 芯片小时；另有 Agent 与裁判调用。Appendix F 仅 Opus 5 的 20 个单元按作者口径已为 1,844 美元。单 A100/A30 或 Mac 不能提供主实验的 TPU 环境与全矩阵预算。成本过高，不复现（审查 DONE）。本地没有运行 GPU 初步实验、生成替代分数或启动自动队列。  评测与可靠性 跨框架迁移评测 Agent 评测与可靠性：如何知道真的做对了 复现时公开的 criteria.json 能否放进 Agent 工作区便于调试？ 不能作为被评估 Agent 的输入。应固定源提交并隔离目标、评分程序和历史结果；宿主在干净环境独立重跑并记录产物来源。否则命中目标无法区分迁移成功与读取答案。 教学例：测试可以读取 rubric 并判分，迁移 Agent 只能看到源仓库和规定配方；两者不能共享测试目标文件。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/evaluation-and-reliability/">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-d82e68a32667e4a0">复现时公开的 criteria.json 能否放进 Agent 工作区便于调试？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Axstack">XStack: A Benchmark for ML Repo Migration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Princeton University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能作为被评估 Agent 的输入。应固定源提交并隔离目标、评分程序和历史结果；宿主在干净环境独立重跑并记录产物来源。否则命中目标无法区分迁移成功与读取答案。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：测试可以读取 rubric 并判分，迁移 Agent 只能看到源仓库和规定配方；两者不能共享测试目标文件。</p>
+<p class="ar-learning-sources">依据：评估协议、复现与验证边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08472">原论文</a> · <a href="../../agent-research/2611.08472-xstack/">实现解读</a> · <a href="#qa-d82e68a32667e4a0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:xstack" data-paper-title="XStack: A Benchmark for ML Repo Migration" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="XStack: A Benchmark for ML Repo Migration Agent Princeton University 2026-11-05 局部张量变换正确不等于能迁移完整实验。XStack 固定 20 个真实 PyTorch 仓库的源提交，要求 Agent 在 TPU 上移植到 JAX，交付环境安装、训练/评测和 PyTorch 权重导出三个入口。评估方在新机器全规模重跑；14 个领域包括语言模型、推荐、视觉和强化学习。原文 Appendix H 的代码规模比较也说明，达标路径不一定覆盖源库每一项功能。 仅资料收录：成本过高，不复现（审查 DONE）。仅资料收录：成本过高，不复现（审查 DONE）。不执行迁移、不下载任务数据、不生成本地指标或 GPU 收据。Appendix H 报告主实验 22,802 TPU 芯片小时（v4/v5p/v6e），其中评分重跑 16,158 芯片小时；另有 Agent 与裁判调用。Appendix F 仅 Opus 5 的 20 个单元按作者口径已为 1,844 美元。单 A100/A30 或 Mac 不能提供主实验的 TPU 环境与全矩阵预算。成本过高，不复现（审查 DONE）。本地没有运行 GPU 初步实验、生成替代分数或启动自动队列。  评测与可靠性 跨框架迁移评测 Agent 评测与可靠性：如何知道真的做对了 Appendix G 在单 A100 的初步实验能否替代主 TPU 矩阵？ 不能。初步实验覆盖 12 个较小仓库，以前向、梯度和 checkpoint 等对齐检查为主；主矩阵比较 20 个仓库、7 个 Agent 在真实 TPU 的全规模复现，两种通过率不是同一指标。 教学例：小任务的前向 logits 一致，不能推出大训练任务在新 TPU 上收敛到公布目标。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/evaluation-and-reliability/">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-7ba79056ba7de908">Appendix G 在单 A100 的初步实验能否替代主 TPU 矩阵？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Axstack">XStack: A Benchmark for ML Repo Migration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Princeton University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。初步实验覆盖 12 个较小仓库，以前向、梯度和 checkpoint 等对齐检查为主；主矩阵比较 20 个仓库、7 个 Agent 在真实 TPU 的全规模复现，两种通过率不是同一指标。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：小任务的前向 logits 一致，不能推出大训练任务在新 TPU 上收敛到公布目标。</p>
+<p class="ar-learning-sources">依据：论文离线与线上效果、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08472">原论文</a> · <a href="../../agent-research/2611.08472-xstack/">实现解读</a> · <a href="#qa-7ba79056ba7de908">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:xstack" data-paper-title="XStack: A Benchmark for ML Repo Migration" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="XStack: A Benchmark for ML Repo Migration Agent Princeton University 2026-11-05 局部张量变换正确不等于能迁移完整实验。XStack 固定 20 个真实 PyTorch 仓库的源提交，要求 Agent 在 TPU 上移植到 JAX，交付环境安装、训练/评测和 PyTorch 权重导出三个入口。评估方在新机器全规模重跑；14 个领域包括语言模型、推荐、视觉和强化学习。原文 Appendix H 的代码规模比较也说明，达标路径不一定覆盖源库每一项功能。 仅资料收录：成本过高，不复现（审查 DONE）。仅资料收录：成本过高，不复现（审查 DONE）。不执行迁移、不下载任务数据、不生成本地指标或 GPU 收据。Appendix H 报告主实验 22,802 TPU 芯片小时（v4/v5p/v6e），其中评分重跑 16,158 芯片小时；另有 Agent 与裁判调用。Appendix F 仅 Opus 5 的 20 个单元按作者口径已为 1,844 美元。单 A100/A30 或 Mac 不能提供主实验的 TPU 环境与全矩阵预算。成本过高，不复现（审查 DONE）。本地没有运行 GPU 初步实验、生成替代分数或启动自动队列。  评测与可靠性 跨框架迁移评测 Agent 评测与可靠性：如何知道真的做对了 第二阶段提供主实验配方，为何不等同于泄漏答案？ 配方让执行者知道该跑哪个实验，不公开数值目标；仅允许调整入口脚本，其余迁移冻结。若入口脚本重写冻结文件，也破坏了这个对照。 教学例：阶段一误跑音频分类的另一数据集，阶段二可把入口切到指定配方，不能借机改模型源码或硬编码目标。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/evaluation-and-reliability/">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-1ea6aaba33adfae7">第二阶段提供主实验配方，为何不等同于泄漏答案？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Axstack">XStack: A Benchmark for ML Repo Migration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Princeton University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>配方让执行者知道该跑哪个实验，不公开数值目标；仅允许调整入口脚本，其余迁移冻结。若入口脚本重写冻结文件，也破坏了这个对照。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：阶段一误跑音频分类的另一数据集，阶段二可把入口切到指定配方，不能借机改模型源码或硬编码目标。</p>
+<p class="ar-learning-sources">依据：评估协议；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08472">原论文</a> · <a href="../../agent-research/2611.08472-xstack/">实现解读</a> · <a href="#qa-1ea6aaba33adfae7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:envopt" data-paper-title="EnvOpt: Automated Optimization for Agent Environments" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="EnvOpt: Automated Optimization for Agent Environments Agent University of California, Berkeley / University of Chicago / Bespoke Labs 2026-11-05 长期稳定的工作环境可以承载多类查询。EnvOpt 固定目标模型与 Harness，让研究 Agent 改变同一信息的可访问表示，例如用 SQLite 目录索引散落的表定义，或为既有接口写索引手册。优化对象是环境目录，不是底座权重，也不是每个任务重写一份工作流程。研究 Agent 在不相交的训练分片上读取目标 Agent 轨迹，训练不提供 verifier；验证阶段才独立度量候选环境，测试任务不参与选择。 完整实验成本过高，不复现（审查 DONE）。实现边界：CPU / L1，离线回放论文 Algorithm 1 的接受与回滚规则。没有运行 Agent、API 或真实工作区，没有验证成本收益，也没有接入 Evolve。完整实验成本过高，不复现（审查 DONE）。select_training_environment 仅接收已记录的候选成本与代理判断，没有验证分数、真实答案或测试接口。外层 replay_environment_evolution 检查训练 ID 分片互斥且与验证 ID 不重叠、候选 Harness 标识一致、验证聚合绑定训练选定环境，并在首次回归时回放停止及回滚。  Harness 与自我改进 环境表示演进 Agent 运行流程与自进化：改的是哪一层 一项改动在训练代理判断下更省，为什么还能在外层被回滚？ 训练内层只看相同分片上的严格成本降低和代理保真；留出验证独立比较上一轮聚合成本及准确率，成本升或准确率降超容差就停止并保留上一轮。 教学例：索引使训练成本从 10 降到 7，但验证准确率从 0.875 降到 0.625，容差 0.125；仍应回滚。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-4867e6c97481d81a">一项改动在训练代理判断下更省，为什么还能在外层被回滚？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Aenvopt">EnvOpt: Automated Optimization for Agent Environments</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of California, Berkeley / University of Chicago / Bespoke Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>训练内层只看相同分片上的严格成本降低和代理保真；留出验证独立比较上一轮聚合成本及准确率，成本升或准确率降超容差就停止并保留上一轮。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：索引使训练成本从 10 降到 7，但验证准确率从 0.875 降到 0.625，容差 0.125；仍应回滚。</p>
+<p class="ar-learning-sources">依据：核心公式、本地结果与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07372">原论文</a> · <a href="../../agent-research/2611.07372-envopt/">实现解读</a> · <a href="#qa-4867e6c97481d81a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:envopt" data-paper-title="EnvOpt: Automated Optimization for Agent Environments" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="EnvOpt: Automated Optimization for Agent Environments Agent University of California, Berkeley / University of Chicago / Bespoke Labs 2026-11-05 长期稳定的工作环境可以承载多类查询。EnvOpt 固定目标模型与 Harness，让研究 Agent 改变同一信息的可访问表示，例如用 SQLite 目录索引散落的表定义，或为既有接口写索引手册。优化对象是环境目录，不是底座权重，也不是每个任务重写一份工作流程。研究 Agent 在不相交的训练分片上读取目标 Agent 轨迹，训练不提供 verifier；验证阶段才独立度量候选环境，测试任务不参与选择。 完整实验成本过高，不复现（审查 DONE）。实现边界：CPU / L1，离线回放论文 Algorithm 1 的接受与回滚规则。没有运行 Agent、API 或真实工作区，没有验证成本收益，也没有接入 Evolve。完整实验成本过高，不复现（审查 DONE）。select_training_environment 仅接收已记录的候选成本与代理判断，没有验证分数、真实答案或测试接口。外层 replay_environment_evolution 检查训练 ID 分片互斥且与验证 ID 不重叠、候选 Harness 标识一致、验证聚合绑定训练选定环境，并在首次回归时回放停止及回滚。  Harness 与自我改进 环境表示演进 Agent 运行流程与自进化：改的是哪一层 本地离线回放怎样阻止把验证答案当成训练策略输入？ 内层函数的输入只有候选成本、代理布尔判断、环境及 Harness 标识。宿主验证聚合只用于外层停止，且训练与验证 ID 不重叠。接口不是真实沙箱，不能认证调用方提供的记录。 教学例：验证聚合绑定索引版本 A，却声称训练选中 B，会报错；训练 ID 与验证 ID 相同也会拒绝。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-70468eddb0c7a884">本地离线回放怎样阻止把验证答案当成训练策略输入？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Aenvopt">EnvOpt: Automated Optimization for Agent Environments</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of California, Berkeley / University of Chicago / Bespoke Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>内层函数的输入只有候选成本、代理布尔判断、环境及 Harness 标识。宿主验证聚合只用于外层停止，且训练与验证 ID 不重叠。接口不是真实沙箱，不能认证调用方提供的记录。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：验证聚合绑定索引版本 A，却声称训练选中 B，会报错；训练 ID 与验证 ID 相同也会拒绝。</p>
+<p class="ar-learning-sources">依据：数据协议与实现边界、本地结果与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07372">原论文</a> · <a href="../../agent-research/2611.07372-envopt/">实现解读</a> · <a href="#qa-70468eddb0c7a884">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:envopt" data-paper-title="EnvOpt: Automated Optimization for Agent Environments" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="EnvOpt: Automated Optimization for Agent Environments Agent University of California, Berkeley / University of Chicago / Bespoke Labs 2026-11-05 长期稳定的工作环境可以承载多类查询。EnvOpt 固定目标模型与 Harness，让研究 Agent 改变同一信息的可访问表示，例如用 SQLite 目录索引散落的表定义，或为既有接口写索引手册。优化对象是环境目录，不是底座权重，也不是每个任务重写一份工作流程。研究 Agent 在不相交的训练分片上读取目标 Agent 轨迹，训练不提供 verifier；验证阶段才独立度量候选环境，测试任务不参与选择。 完整实验成本过高，不复现（审查 DONE）。实现边界：CPU / L1，离线回放论文 Algorithm 1 的接受与回滚规则。没有运行 Agent、API 或真实工作区，没有验证成本收益，也没有接入 Evolve。完整实验成本过高，不复现（审查 DONE）。select_training_environment 仅接收已记录的候选成本与代理判断，没有验证分数、真实答案或测试接口。外层 replay_environment_evolution 检查训练 ID 分片互斥且与验证 ID 不重叠、候选 Harness 标识一致、验证聚合绑定训练选定环境，并在首次回归时回放停止及回滚。  Harness 与自我改进 环境表示演进 Agent 运行流程与自进化：改的是哪一层 EnvOpt 固定信息 I 后究竟在优化什么？ 它优化信息的表示和访问路径，固定目标 Agent 的模型和 Harness。把同一批散落定义组织为可查询索引，改变每个任务探索所需成本，并不改变问题或答案。 教学例：表定义仍在原有文件里，但 SQLite 目录记录每张表对应的路径；Agent 无须遍历所有文件。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-envopt-86d4756e" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-982f53c2f1665a72">EnvOpt 固定信息 I 后究竟在优化什么？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Aenvopt">EnvOpt: Automated Optimization for Agent Environments</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of California, Berkeley / University of Chicago / Bespoke Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它优化信息的表示和访问路径，固定目标 Agent 的模型和 Harness。把同一批散落定义组织为可查询索引，改变每个任务探索所需成本，并不改变问题或答案。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：表定义仍在原有文件里，但 SQLite 目录记录每张表对应的路径；Agent 无须遍历所有文件。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07372">原论文</a> · <a href="../../agent-research/2611.07372-envopt/">实现解读</a> · <a href="#qa-982f53c2f1665a72">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:envopt" data-paper-title="EnvOpt: Automated Optimization for Agent Environments" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="EnvOpt: Automated Optimization for Agent Environments Agent University of California, Berkeley / University of Chicago / Bespoke Labs 2026-11-05 长期稳定的工作环境可以承载多类查询。EnvOpt 固定目标模型与 Harness，让研究 Agent 改变同一信息的可访问表示，例如用 SQLite 目录索引散落的表定义，或为既有接口写索引手册。优化对象是环境目录，不是底座权重，也不是每个任务重写一份工作流程。研究 Agent 在不相交的训练分片上读取目标 Agent 轨迹，训练不提供 verifier；验证阶段才独立度量候选环境，测试任务不参与选择。 完整实验成本过高，不复现（审查 DONE）。实现边界：CPU / L1，离线回放论文 Algorithm 1 的接受与回滚规则。没有运行 Agent、API 或真实工作区，没有验证成本收益，也没有接入 Evolve。完整实验成本过高，不复现（审查 DONE）。select_training_environment 仅接收已记录的候选成本与代理判断，没有验证分数、真实答案或测试接口。外层 replay_environment_evolution 检查训练 ID 分片互斥且与验证 ID 不重叠、候选 Harness 标识一致、验证聚合绑定训练选定环境，并在首次回归时回放停止及回滚。  Harness 与自我改进 环境表示演进 Agent 运行流程与自进化：改的是哪一层 EnvOpt 和 Meta-Harness 是同一类搜索吗？ 两者都想改进任务完成成本或成功率，但 EnvOpt 迁移的是可复用的环境表示，固定模型和 Harness；Meta-Harness 搜索控制 Agent 运行的流程。可以叠加，不能把两种干预的效应混报。 教学例：预建目录索引改变可访问的数据组织；改变何时重试工具调用属于 Harness 控制。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-508bf6ac9e672c77">EnvOpt 和 Meta-Harness 是同一类搜索吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Aenvopt">EnvOpt: Automated Optimization for Agent Environments</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of California, Berkeley / University of Chicago / Bespoke Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>两者都想改进任务完成成本或成功率，但 EnvOpt 迁移的是可复用的环境表示，固定模型和 Harness；Meta-Harness 搜索控制 Agent 运行的流程。可以叠加，不能把两种干预的效应混报。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：预建目录索引改变可访问的数据组织；改变何时重试工具调用属于 Harness 控制。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07372">原论文</a> · <a href="../../agent-research/2611.07372-envopt/">实现解读</a> · <a href="#qa-508bf6ac9e672c77">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:ured" data-paper-title="From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation 搜广推与 LLM 应用 Alibaba Taobao &amp; Tmall Group 2026-11-04 为了增加内容发现，直接给冷候选提权可能放大排序器已有的误差。URED 复用已经被排序器打高分、但当次没有展示的候选；先累积，再按用户近期曝光类目过滤，最后作为额外召回通道送回原排序链，不改原排序器参数。 完整生产实验成本过高，不复现（审查 DONE）；三种子诊断验证 30 天/1 天的候选保留、未来记录隔离和配额顺序；本地交付：L1 CPU 候选处理。完整生产实验成本过高，不复现（审查 DONE）；不把离线样例的候选数量当线上提升。mine_ured 接收带用户、时间和类目的排序器评分日志，以及独立的观察曝光历史。本地窗口为左闭右开；截止时刻和未来的记录不参与筛选。分数只用于会话 top-k 和同一时刻的确定性排序，不用最高历史分替换按时间选最新记录。观察到的已曝光商品排除仅覆盖调用者提供的历史。  召回 高分未曝光候选回收 搜广推 候选生成与搜索匹配 同一商品出现两次，高分旧记录和低分新记录如何取舍？ 先按会话分数保留候选；进入用户聚合后，按时间去重并截断，再做类目发现过滤。旧的更高分不是替换新记录的理由。 示意：同一个商品三天前 0.9、昨天 0.7，只要两条均进入会话池，聚合保留昨天这条；类别判断也使用这条记录。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/retrieval-matching/">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-20b09933b691f494">同一商品出现两次，高分旧记录和低分新记录如何取舍？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Aured">From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Alibaba Taobao &amp; Tmall Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>先按会话分数保留候选；进入用户聚合后，按时间去重并截断，再做类目发现过滤。旧的更高分不是替换新记录的理由。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同一个商品三天前 0.9、昨天 0.7，只要两条均进入会话池，聚合保留昨天这条；类别判断也使用这条记录。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议、代码映射与结果边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05997">原论文</a> · <a href="../../recommendation-components/2611.05997-ured/">实现解读</a> · <a href="#qa-20b09933b691f494">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:ured" data-paper-title="From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation 搜广推与 LLM 应用 Alibaba Taobao &amp; Tmall Group 2026-11-04 为了增加内容发现，直接给冷候选提权可能放大排序器已有的误差。URED 复用已经被排序器打高分、但当次没有展示的候选；先累积，再按用户近期曝光类目过滤，最后作为额外召回通道送回原排序链，不改原排序器参数。 完整生产实验成本过高，不复现（审查 DONE）；三种子诊断验证 30 天/1 天的候选保留、未来记录隔离和配额顺序；本地交付：L1 CPU 候选处理。完整生产实验成本过高，不复现（审查 DONE）；不把离线样例的候选数量当线上提升。mine_ured 接收带用户、时间和类目的排序器评分日志，以及独立的观察曝光历史。本地窗口为左闭右开；截止时刻和未来的记录不参与筛选。分数只用于会话 top-k 和同一时刻的确定性排序，不用最高历史分替换按时间选最新记录。观察到的已曝光商品排除仅覆盖调用者提供的历史。  召回 高分未曝光候选回收 搜广推 候选生成与搜索匹配 为什么离线回放必须在截点前分别截断候选与曝光流？ 未来评分会给历史请求注入当时不可得的物品，未来曝光则会错误地屏蔽当时尚未见过的类目。两条流都采用同一 as_of，且时刻等于 as_of 的事件也不读。 示意：中午构建召回池，下午首次看了摄影类。下午的曝光不能把中午候选删掉；次日重建时才允许读取它。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/retrieval-matching/">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-e07143a9205bf707">为什么离线回放必须在截点前分别截断候选与曝光流？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Aured">From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Alibaba Taobao &amp; Tmall Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>未来评分会给历史请求注入当时不可得的物品，未来曝光则会错误地屏蔽当时尚未见过的类目。两条流都采用同一 as_of，且时刻等于 as_of 的事件也不读。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>中午构建召回池，下午首次看了摄影类。下午的曝光不能把中午候选删掉；次日重建时才允许读取它。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议、代码映射与结果边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05997">原论文</a> · <a href="../../recommendation-components/2611.05997-ured/">实现解读</a> · <a href="#qa-e07143a9205bf707">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:ured" data-paper-title="From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation 搜广推与 LLM 应用 Alibaba Taobao &amp; Tmall Group 2026-11-04 为了增加内容发现，直接给冷候选提权可能放大排序器已有的误差。URED 复用已经被排序器打高分、但当次没有展示的候选；先累积，再按用户近期曝光类目过滤，最后作为额外召回通道送回原排序链，不改原排序器参数。 完整生产实验成本过高，不复现（审查 DONE）；三种子诊断验证 30 天/1 天的候选保留、未来记录隔离和配额顺序；本地交付：L1 CPU 候选处理。完整生产实验成本过高，不复现（审查 DONE）；不把离线样例的候选数量当线上提升。mine_ured 接收带用户、时间和类目的排序器评分日志，以及独立的观察曝光历史。本地窗口为左闭右开；截止时刻和未来的记录不参与筛选。分数只用于会话 top-k 和同一时刻的确定性排序，不用最高历史分替换按时间选最新记录。观察到的已曝光商品排除仅覆盖调用者提供的历史。  召回 高分未曝光候选回收 搜广推 候选生成与搜索匹配 近期未见类目、从未曝光的商品和全站冷商品是不是一回事？ 不是。类目发现是用户在 d 天内的曝光历史；已曝光商品另有去重；全站流行度不是这两个过滤条件。随机冷注入不是 URED 的对照等价物。 示意：一个全站热门摄影视频对某用户的未见摄影类目仍有发现价值，但如果该商品已向该用户曝光，商品去重仍可排除。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/retrieval-matching/">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-a1a8f7041b7ddcbe">近期未见类目、从未曝光的商品和全站冷商品是不是一回事？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Aured">From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Alibaba Taobao &amp; Tmall Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。类目发现是用户在 d 天内的曝光历史；已曝光商品另有去重；全站流行度不是这两个过滤条件。随机冷注入不是 URED 的对照等价物。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一个全站热门摄影视频对某用户的未见摄影类目仍有发现价值，但如果该商品已向该用户曝光，商品去重仍可排除。</p>
+<p class="ar-learning-sources">依据：核心公式、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05997">原论文</a> · <a href="../../recommendation-components/2611.05997-ured/">实现解读</a> · <a href="#qa-a1a8f7041b7ddcbe">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:ured" data-paper-title="From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation 搜广推与 LLM 应用 Alibaba Taobao &amp; Tmall Group 2026-11-04 为了增加内容发现，直接给冷候选提权可能放大排序器已有的误差。URED 复用已经被排序器打高分、但当次没有展示的候选；先累积，再按用户近期曝光类目过滤，最后作为额外召回通道送回原排序链，不改原排序器参数。 完整生产实验成本过高，不复现（审查 DONE）；三种子诊断验证 30 天/1 天的候选保留、未来记录隔离和配额顺序；本地交付：L1 CPU 候选处理。完整生产实验成本过高，不复现（审查 DONE）；不把离线样例的候选数量当线上提升。mine_ured 接收带用户、时间和类目的排序器评分日志，以及独立的观察曝光历史。本地窗口为左闭右开；截止时刻和未来的记录不参与筛选。分数只用于会话 top-k 和同一时刻的确定性排序，不用最高历史分替换按时间选最新记录。观察到的已曝光商品排除仅覆盖调用者提供的历史。  召回 高分未曝光候选回收 搜广推 候选生成与搜索匹配 URED 为何回收高分未展示候选，而不是向排序器随机注入冷内容？ 先使用排序器已计算的相关性信号，再按用户近期未见类目找发现机会。它没有把未展示当点击正例，也不以随意扩大曝光替代质量筛选。 示意：一个评分较高的摄影视频上次因列表容量没展示；候选池可保留它，不能假定用户点击过它。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/recommendation/retrieval-matching/">搜广推 / 候选生成与搜索匹配</a></p>
+<span id="paper-recommendation-ured-eafbeee5" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-40e885cc7aec4fae">URED 为何回收高分未展示候选，而不是向排序器随机注入冷内容？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=recommendation%3Aured">From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Alibaba Taobao &amp; Tmall Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>先使用排序器已计算的相关性信号，再按用户近期未见类目找发现机会。它没有把未展示当点击正例，也不以随意扩大曝光替代质量筛选。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一个评分较高的摄影视频上次因列表容量没展示；候选池可保留它，不能假定用户点击过它。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05997">原论文</a> · <a href="../../recommendation-components/2611.05997-ured/">实现解读</a> · <a href="#qa-40e885cc7aec4fae">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ragcompass" data-paper-title="RAGCompass: Generalizable Retriever Routing via Reranking" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="RAGCompass: Generalizable Retriever Routing via Reranking LLM 后训练 University of Virginia 2026-11-03 固定候选池的 query-only 分类器可能不能给从未见过的检索器打分。RAGCompass 把各检索器返回的整组证据作为候选，复用同一个 Qwen3-Reranker-0.6B 独立读每组 passage，不依赖检索器身份或各自不可比的置信度。先用答案效用微调 backbone 的 yes logit，后在冻结 backbone 表示上训练跨候选的两层比较头。目标是选出一组证据供 reader 回答，不是融合所有 passage。 完整实验成本过高，不复现（审查 DONE）。未训练 reranker 或 reader；L1 候选集蒸馏目标，diagnostic only。未训练 reranker 或 reader；完整实验成本过高，不复现（审查 DONE）。distillation_objective 从外部给定的同序 logits、离线 F1 向量和正温度计算稳定的候选集 KL 与解析梯度。eligible_query 单独实现离线 gap 条件；select_retriever 仅接收分数，不接收 gold、F1 或候选身份。没有从 gold 反推实际预测，也没有实现 passage 编码与比较头训练。  知识蒸馏 检索器路由 LLM 后训练 教师与纠错：额外信息何时能帮到学生 为什么 RAGCompass 的 KL 在同一 query 的候选轴上计算？ 每个效用来自固定 reader 使用一组证据后的答案 F1；softmax 把同一 query 的效用变为训练目标分布。损失是 KL(目标∥预测)，对分数的梯度为 p−u。跨 query 混合归一化会改变每条请求独立选证据的目标。 教学例：给定 p=(0.5,0.5)、u=(0.8,0.2)，梯度为 (−0.3,0.3)，梯度下降提高第一个候选相对分数。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/teacher-and-context/">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-d8ba1f51584631d9">为什么 RAGCompass 的 KL 在同一 query 的候选轴上计算？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Aragcompass">RAGCompass: Generalizable Retriever Routing via Reranking</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of Virginia</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>每个效用来自固定 reader 使用一组证据后的答案 F1；softmax 把同一 query 的效用变为训练目标分布。损失是 KL(目标∥预测)，对分数的梯度为 p−u。跨 query 混合归一化会改变每条请求独立选证据的目标。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：给定 p=(0.5,0.5)、u=(0.8,0.2)，梯度为 (−0.3,0.3)，梯度下降提高第一个候选相对分数。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05596v1">原论文</a> · <a href="../../post-training/2611.05596-ragcompass/">实现解读</a> · <a href="#qa-d8ba1f51584631d9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ragcompass" data-paper-title="RAGCompass: Generalizable Retriever Routing via Reranking" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="RAGCompass: Generalizable Retriever Routing via Reranking LLM 后训练 University of Virginia 2026-11-03 固定候选池的 query-only 分类器可能不能给从未见过的检索器打分。RAGCompass 把各检索器返回的整组证据作为候选，复用同一个 Qwen3-Reranker-0.6B 独立读每组 passage，不依赖检索器身份或各自不可比的置信度。先用答案效用微调 backbone 的 yes logit，后在冻结 backbone 表示上训练跨候选的两层比较头。目标是选出一组证据供 reader 回答，不是融合所有 passage。 完整实验成本过高，不复现（审查 DONE）。未训练 reranker 或 reader；L1 候选集蒸馏目标，diagnostic only。未训练 reranker 或 reader；完整实验成本过高，不复现（审查 DONE）。distillation_objective 从外部给定的同序 logits、离线 F1 向量和正温度计算稳定的候选集 KL 与解析梯度。eligible_query 单独实现离线 gap 条件；select_retriever 仅接收分数，不接收 gold、F1 或候选身份。没有从 gold 反推实际预测，也没有实现 passage 编码与比较头训练。  知识蒸馏 检索器路由 LLM 后训练 教师与纠错：额外信息何时能帮到学生 答案效用监督与 passage 相关度监督有何区别？ 单段相关并不意味着整组证据足以支持正确回答。RAGCompass 用固定 reader 从整组证据回答后的 F1 监督路由，能反映证据互补与 reader 能力，但也使目标依赖所用 reader 和 gold 定义。 教学例：一个候选只有人物资料中的相关段落；另一个候选还补足事件日期。问事件发生时间时，第二组更可能带来高答案 F1。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/teacher-and-context/">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-f30740ae3afcdd60">答案效用监督与 passage 相关度监督有何区别？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Aragcompass">RAGCompass: Generalizable Retriever Routing via Reranking</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of Virginia</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>单段相关并不意味着整组证据足以支持正确回答。RAGCompass 用固定 reader 从整组证据回答后的 F1 监督路由，能反映证据互补与 reader 能力，但也使目标依赖所用 reader 和 gold 定义。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个候选只有人物资料中的相关段落；另一个候选还补足事件日期。问事件发生时间时，第二组更可能带来高答案 F1。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05596v1">原论文</a> · <a href="../../post-training/2611.05596-ragcompass/">实现解读</a> · <a href="#qa-f30740ae3afcdd60">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ragcompass" data-paper-title="RAGCompass: Generalizable Retriever Routing via Reranking" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="RAGCompass: Generalizable Retriever Routing via Reranking LLM 后训练 University of Virginia 2026-11-03 固定候选池的 query-only 分类器可能不能给从未见过的检索器打分。RAGCompass 把各检索器返回的整组证据作为候选，复用同一个 Qwen3-Reranker-0.6B 独立读每组 passage，不依赖检索器身份或各自不可比的置信度。先用答案效用微调 backbone 的 yes logit，后在冻结 backbone 表示上训练跨候选的两层比较头。目标是选出一组证据供 reader 回答，不是融合所有 passage。 完整实验成本过高，不复现（审查 DONE）。未训练 reranker 或 reader；L1 候选集蒸馏目标，diagnostic only。未训练 reranker 或 reader；完整实验成本过高，不复现（审查 DONE）。distillation_objective 从外部给定的同序 logits、离线 F1 向量和正温度计算稳定的候选集 KL 与解析梯度。eligible_query 单独实现离线 gap 条件；select_retriever 仅接收分数，不接收 gold、F1 或候选身份。没有从 gold 反推实际预测，也没有实现 passage 编码与比较头训练。  知识蒸馏 检索器路由 LLM 后训练 教师与纠错：额外信息何时能帮到学生 为什么 0.05 的效用差筛选不能放到推理路径里？ 效用差需要参考答案计算 F1，因此只属于离线筛选，不是路由特征。推理接口只收候选分数并取最大值。目标/梯度测试、无标签签名和真实分布迁移评测是不同证据。 教学例：训练中两个候选 F1 为 0.52、0.50，可因差值 0.02 排除；服务请求没有 gold，仍应从模型实际分数中选一个候选。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/teacher-and-context/">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-cfff2f4eb43da12f">为什么 0.05 的效用差筛选不能放到推理路径里？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Aragcompass">RAGCompass: Generalizable Retriever Routing via Reranking</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of Virginia</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>效用差需要参考答案计算 F1，因此只属于离线筛选，不是路由特征。推理接口只收候选分数并取最大值。目标/梯度测试、无标签签名和真实分布迁移评测是不同证据。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：训练中两个候选 F1 为 0.52、0.50，可因差值 0.02 排除；服务请求没有 gold，仍应从模型实际分数中选一个候选。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05596v1">原论文</a> · <a href="../../post-training/2611.05596-ragcompass/">实现解读</a> · <a href="#qa-cfff2f4eb43da12f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ragcompass" data-paper-title="RAGCompass: Generalizable Retriever Routing via Reranking" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="RAGCompass: Generalizable Retriever Routing via Reranking LLM 后训练 University of Virginia 2026-11-03 固定候选池的 query-only 分类器可能不能给从未见过的检索器打分。RAGCompass 把各检索器返回的整组证据作为候选，复用同一个 Qwen3-Reranker-0.6B 独立读每组 passage，不依赖检索器身份或各自不可比的置信度。先用答案效用微调 backbone 的 yes logit，后在冻结 backbone 表示上训练跨候选的两层比较头。目标是选出一组证据供 reader 回答，不是融合所有 passage。 完整实验成本过高，不复现（审查 DONE）。未训练 reranker 或 reader；L1 候选集蒸馏目标，diagnostic only。未训练 reranker 或 reader；完整实验成本过高，不复现（审查 DONE）。distillation_objective 从外部给定的同序 logits、离线 F1 向量和正温度计算稳定的候选集 KL 与解析梯度。eligible_query 单独实现离线 gap 条件；select_retriever 仅接收分数，不接收 gold、F1 或候选身份。没有从 gold 反推实际预测，也没有实现 passage 编码与比较头训练。  知识蒸馏 检索器路由 LLM 后训练 教师与纠错：额外信息何时能帮到学生 RAGCompass 为什么给一组证据打分，而不是直接预测检索器名字？ 它用同一个重排器读取每个检索器返回的证据组，候选不由固定检索器 ID 定义。新增检索器只要返回同样形式的证据就能被打分，但这个接口属性不保证跨检索器指标提高。 教学例：新向量检索器返回五段证据，可以与旧 BM25 的五段竞争；固定的 BM25/旧向量二分类头没有新检索器这一类。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/teacher-and-context/">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<span id="paper-post-training-ragcompass-a7b92c9e" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-236494f1a7102ca0">RAGCompass 为什么给一组证据打分，而不是直接预测检索器名字？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Aragcompass">RAGCompass: Generalizable Retriever Routing via Reranking</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of Virginia</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它用同一个重排器读取每个检索器返回的证据组，候选不由固定检索器 ID 定义。新增检索器只要返回同样形式的证据就能被打分，但这个接口属性不保证跨检索器指标提高。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：新向量检索器返回五段证据，可以与旧 BM25 的五段竞争；固定的 BM25/旧向量二分类头没有新检索器这一类。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05596v1">原论文</a> · <a href="../../post-training/2611.05596-ragcompass/">实现解读</a> · <a href="#qa-236494f1a7102ca0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:pipnn-ii" data-paper-title="Turbocharging PiPNN for Proximity and k-NN Graph Building" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Turbocharging PiPNN for Proximity and k-NN Graph Building 基础模型 University of Maryland, College Park 2026-11-03 PiPNN 先用递归分区把可能相近的点送入同一叶，再在叶内批量打分，避免逐点搜索正在构建的图。PiPNN II 用量化减少内存流量，把打分和 top-K 合并，避免先写再读完整距离矩阵。直接 k-NN 图保留叶内见到的近邻，和需要可导航边并执行剪枝的 ANNS 索引不是同一产物。论文另有 GPiPNN：平坦分段路由、分段 top-K、排序聚合及复用已见边的剪枝；这些未在本地实现。 完整 CPU/GPU 实验成本过高，不复现（审查 DONE）。L1 机制诊断，非性能复现。L1 机制诊断，非性能复现。这里只实现已解码字节的打分与 top-K；完整 CPU/GPU 实验成本过高，不复现（审查 DONE）。corrected_dot 检查 i8 范围与维数并执行偏置修正。fused_quantized_topk 接收一个查询与流式 (row, scale) 序列，按行修正、缩放、保留 K 个最优候选；同分保留较早位置。参考实现使用 Python 整数累加和浮点缩放，未声称与硬件 i32/fp32 舍入逐位一致。没有引入量化器、索引或外部数据。  推理与系统效率 量化近邻图构建 基础模型 推理压缩：权重、KV 缓存与服务带宽 CPU 流式 top-K 应用哪些负控？通过后能不能声称复现 H100 性能？ 用直接有符号点积加全量排序作独立参考，测试非零查询和、不同尺度、同分顺序及只遍历一次的迭代器。它验证分数与排序语义，未验证量化器、SIMD/TMA 核、分区或整图速度。 教学例：两个候选缩放后同分时，参考保留较早输入；若重复遍历流会触发测试失败。即使测试通过，也没有测量 Hopper kernel。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/compression-and-cache/">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-f3665f8c57c55373">CPU 流式 top-K 应用哪些负控？通过后能不能声称复现 H100 性能？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Apipnn-ii">Turbocharging PiPNN for Proximity and k-NN Graph Building</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of Maryland, College Park</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>用直接有符号点积加全量排序作独立参考，测试非零查询和、不同尺度、同分顺序及只遍历一次的迭代器。它验证分数与排序语义，未验证量化器、SIMD/TMA 核、分区或整图速度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个候选缩放后同分时，参考保留较早输入；若重复遍历流会触发测试失败。即使测试通过，也没有测量 Hopper kernel。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05690v1">原论文</a> · <a href="../../foundation-models/2611.05690-pipnn-ii/">实现解读</a> · <a href="#qa-f3665f8c57c55373">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:pipnn-ii" data-paper-title="Turbocharging PiPNN for Proximity and k-NN Graph Building" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Turbocharging PiPNN for Proximity and k-NN Graph Building 基础模型 University of Maryland, College Park 2026-11-03 PiPNN 先用递归分区把可能相近的点送入同一叶，再在叶内批量打分，避免逐点搜索正在构建的图。PiPNN II 用量化减少内存流量，把打分和 top-K 合并，避免先写再读完整距离矩阵。直接 k-NN 图保留叶内见到的近邻，和需要可导航边并执行剪枝的 ANNS 索引不是同一产物。论文另有 GPiPNN：平坦分段路由、分段 top-K、排序聚合及复用已见边的剪枝；这些未在本地实现。 完整 CPU/GPU 实验成本过高，不复现（审查 DONE）。L1 机制诊断，非性能复现。L1 机制诊断，非性能复现。这里只实现已解码字节的打分与 top-K；完整 CPU/GPU 实验成本过高，不复现（审查 DONE）。corrected_dot 检查 i8 范围与维数并执行偏置修正。fused_quantized_topk 接收一个查询与流式 (row, scale) 序列，按行修正、缩放、保留 K 个最优候选；同分保留较早位置。参考实现使用 Python 整数累加和浮点缩放，未声称与硬件 i32/fp32 舍入逐位一致。没有引入量化器、索引或外部数据。  推理与系统效率 量化近邻图构建 基础模型 推理压缩：权重、KV 缓存与服务带宽 为什么不能先按整数点积取 top-K，再乘数据库行的量化尺度？ 尺度随候选变化，乘法会改变候选间顺序。负点积路径必须先为每条候选应用数据库行与查询尺度，再按较小距离取 K；仅查询尺度正且固定，不改变同一查询的顺序。 教学例：点积 20、10 分别乘行尺度 0.1、1，量化恢复的相似度为 2、10。先选较大整数会挑错候选。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/compression-and-cache/">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-ac52feeffbe422a1">为什么不能先按整数点积取 top-K，再乘数据库行的量化尺度？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Apipnn-ii">Turbocharging PiPNN for Proximity and k-NN Graph Building</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of Maryland, College Park</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>尺度随候选变化，乘法会改变候选间顺序。负点积路径必须先为每条候选应用数据库行与查询尺度，再按较小距离取 K；仅查询尺度正且固定，不改变同一查询的顺序。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：点积 20、10 分别乘行尺度 0.1、1，量化恢复的相似度为 2、10。先选较大整数会挑错候选。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05690v1">原论文</a> · <a href="../../foundation-models/2611.05690-pipnn-ii/">实现解读</a> · <a href="#qa-ac52feeffbe422a1">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:pipnn-ii" data-paper-title="Turbocharging PiPNN for Proximity and k-NN Graph Building" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Turbocharging PiPNN for Proximity and k-NN Graph Building 基础模型 University of Maryland, College Park 2026-11-03 PiPNN 先用递归分区把可能相近的点送入同一叶，再在叶内批量打分，避免逐点搜索正在构建的图。PiPNN II 用量化减少内存流量，把打分和 top-K 合并，避免先写再读完整距离矩阵。直接 k-NN 图保留叶内见到的近邻，和需要可导航边并执行剪枝的 ANNS 索引不是同一产物。论文另有 GPiPNN：平坦分段路由、分段 top-K、排序聚合及复用已见边的剪枝；这些未在本地实现。 完整 CPU/GPU 实验成本过高，不复现（审查 DONE）。L1 机制诊断，非性能复现。L1 机制诊断，非性能复现。这里只实现已解码字节的打分与 top-K；完整 CPU/GPU 实验成本过高，不复现（审查 DONE）。corrected_dot 检查 i8 范围与维数并执行偏置修正。fused_quantized_topk 接收一个查询与流式 (row, scale) 序列，按行修正、缩放、保留 K 个最优候选；同分保留较早位置。参考实现使用 Python 整数累加和浮点缩放，未声称与硬件 i32/fp32 舍入逐位一致。没有引入量化器、索引或外部数据。  推理与系统效率 量化近邻图构建 基础模型 推理压缩：权重、KV 缓存与服务带宽 PiPNN II 为什么把量化打分和 top-K 放到一起？ 量化减少读取候选向量的字节数；每个候选分数算出后直接与当前第 K 名比较，可以不先写出全距离矩阵。融合与量化是不同改动：前者减少中间分数的读写，后者减少输入向量的读写。 教学例：某叶有 100 个候选而只需前 3 个。逐行打分时保留 3 个入选项即可，不必存完 100 个分数再排序。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/compression-and-cache/">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<span id="paper-foundation-models-pipnn-ii-e5dbbc9f" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-f1c1756d337068da">PiPNN II 为什么把量化打分和 top-K 放到一起？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Apipnn-ii">Turbocharging PiPNN for Proximity and k-NN Graph Building</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of Maryland, College Park</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>量化减少读取候选向量的字节数；每个候选分数算出后直接与当前第 K 名比较，可以不先写出全距离矩阵。融合与量化是不同改动：前者减少中间分数的读写，后者减少输入向量的读写。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：某叶有 100 个候选而只需前 3 个。逐行打分时保留 3 个入选项即可，不必存完 100 个分数再排序。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05690v1">原论文</a> · <a href="../../foundation-models/2611.05690-pipnn-ii/">实现解读</a> · <a href="#qa-f1c1756d337068da">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:pipnn-ii" data-paper-title="Turbocharging PiPNN for Proximity and k-NN Graph Building" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Turbocharging PiPNN for Proximity and k-NN Graph Building 基础模型 University of Maryland, College Park 2026-11-03 PiPNN 先用递归分区把可能相近的点送入同一叶，再在叶内批量打分，避免逐点搜索正在构建的图。PiPNN II 用量化减少内存流量，把打分和 top-K 合并，避免先写再读完整距离矩阵。直接 k-NN 图保留叶内见到的近邻，和需要可导航边并执行剪枝的 ANNS 索引不是同一产物。论文另有 GPiPNN：平坦分段路由、分段 top-K、排序聚合及复用已见边的剪枝；这些未在本地实现。 完整 CPU/GPU 实验成本过高，不复现（审查 DONE）。L1 机制诊断，非性能复现。L1 机制诊断，非性能复现。这里只实现已解码字节的打分与 top-K；完整 CPU/GPU 实验成本过高，不复现（审查 DONE）。corrected_dot 检查 i8 范围与维数并执行偏置修正。fused_quantized_topk 接收一个查询与流式 (row, scale) 序列，按行修正、缩放、保留 K 个最优候选；同分保留较早位置。参考实现使用 Python 整数累加和浮点缩放，未声称与硬件 i32/fp32 舍入逐位一致。没有引入量化器、索引或外部数据。  推理与系统效率 量化近邻图构建 基础模型 推理压缩：权重、KV 缓存与服务带宽 为什么将数据库字节转换成无符号后，必须减去 128 倍查询字节和？ 硬件取数据库字节 a=原值+128 与有符号查询 b 相乘。展开后每项多出 128b，求和得到同一查询复用的修正量。查询和为零时错误恰好消失，测试不能只选这一类查询。 原图一条 lane：偏置点积 883、查询字节和 5，修正为 883−128×5=243；直接把 883 当点积是错的。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/compression-and-cache/">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-dc57958e13deb5d5">为什么将数据库字节转换成无符号后，必须减去 128 倍查询字节和？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Apipnn-ii">Turbocharging PiPNN for Proximity and k-NN Graph Building</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of Maryland, College Park</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>硬件取数据库字节 a=原值+128 与有符号查询 b 相乘。展开后每项多出 128b，求和得到同一查询复用的修正量。查询和为零时错误恰好消失，测试不能只选这一类查询。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>原图一条 lane：偏置点积 883、查询字节和 5，修正为 883−128×5=243；直接把 883 当点积是错的。</p>
+<p class="ar-learning-sources">依据：原论文关键图、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05690v1">原论文</a> · <a href="../../foundation-models/2611.05690-pipnn-ii/">实现解读</a> · <a href="#qa-dc57958e13deb5d5">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:spade-local-search" data-paper-title="SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search 搜广推与 LLM 应用 Meituan 2026-11-03 本地生活首页要在用户输入前生成可执行、匹配当前位置/时间且互不重复的搜索意图。SPADE同时改变四层：OA-BPE用业务价值重加权合并；STAR以多尺度位置/时间表示和软门控注入上下文；MARS-DPO对齐生产曝光点击偏好；SDBS在解码阶段按父beam排序加有界奖励。本地只实现OA-BPE局部算子与SDBS扩展步骤，不能把其他两层略去后称完整SPADE。 完整实验成本过高，不复现（审查 DONE）；L1 CPU分词/解码算子，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不是本地搜索模型或线上效果复现，未接入执行型Evolve。oa_pair_scores/merge_pair对应加权pair统计与局部合并；sigmoid_bonus/sdbs_step对应Eq.17与Algorithm1一步。调用者负责模型readout、结束符、长度预算及完整tokenization；本地不根据评测结果选择业务权重或奖励参数。  本地搜索 业务对齐分词与多样性解码 搜广推 生成式召回与推理推荐 SDBS不给top-parent奖励，是否意味着最终top1必然与普通beam一致？ 不是。零奖励只说它的分数不被直接修改，其他beam加奖励后仍能超过它。论文给出的逐步充分条件是领先间隔大于最大奖励；跨步累计也需单独考虑，不能把受条件限制的直觉写成任意参数保证。 教学例：A延展原分-.10、B为-.11；如果B的奖励为.09，它的新分-.02会反超A，即使A的奖励严格是0。 2026-11-04">
 <p class="ar-learning-card__domain"><a href="../paths/recommendation/generative-retrieval-reasoning/">搜广推 / 生成式召回与推理推荐</a></p>
 <p class="ar-learning-level">方法对比</p>

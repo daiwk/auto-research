@@ -469,6 +469,7 @@
 
 ## Princeton University
 
+- 2026-11-05 · 一作：Linrong Cai · [XStack: A Benchmark for ML Repo Migration](../2611.08472-xstack/README.md)（`xstack`）：局部张量变换正确不等于能迁移完整实验。XStack 固定 20 个真实 PyTorch 仓库的源提交，要求 Agent 在 TPU 上移植到 JAX，交付环境安装、训练/评测和 PyTorch 权重导出三个入口。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-11-02 · 一作：Taiming Lu · [Strategist: Evolving Reasoning with Agents](../2611.03618-strategist/README.md)（`strategist`）：模型权重不是 Agent 的全部：单步回答、投票、分解、审查、多模型路由等推理程序也决定效果和成本。论文不训练执行模型，而让一个 meta-agent 在小开发集上提出并实测这些程序，将它们表示为统一 `execute(llm, task) -> str` 的 Python blueprint。
 - 2024-05-06 · 一作：John Yang · [SWE-agent](../2405.15793-swe-agent/README.md)（`swe-agent`）：通用 shell 对 LLM 而言动作空间过宽、输出冗长。SWE-agent 用专门 ACI 约束仓库搜索、文件查看、精确编辑和测试，让模型能围绕 issue 定位故障并验证 patch。
 - 2023-05-17 · 一作：Shunyu Yao · [Tree of Thoughts](../2305.10601-tree-of-thoughts/README.md)（`tree-of-thoughts`）：自回归生成和单条 CoT 很难撤销早期错误。ToT 将中间推理视为可独立评价的 thought，在树上生成多个候选，使用语言模型 value 函数选择 BFS/DFS frontier，并允许 lookahead 和 backtracking。
@@ -640,6 +641,10 @@
 
 - 2026-03-04 · 一作：Haoyu Liu · [Dual-Modality Multi-Stage Adversarial Safety Training: Robustifying Multimodal Web Agents Against Cross-Modal Attacks](../2603.04364-dmast/README.md)（`dmast`）：DMAST 让防守 Agent 与攻击者共享同一 VLM 参数，以不同角色提示交互；先教师模仿，再用不改变目标动作的 oracle reasoning 做 SFT，最后进行共享策略自博弈 RL。改动不只是普通 GRPO：受攻击组中两个角色的原始终局奖励共同决定均值与方差，而成功样本的长度惩罚只进入优势分子。
 - 2023-10-12 · 一作：Charles Packer · [MemGPT](../2310.08560-memgpt/README.md)（`memgpt`）：有限 context window 使长文档和多轮会话不断遗忘。MemGPT 借鉴操作系统虚拟内存，把常驻核心信息、当前工作上下文和外部归档分层管理；模型通过函数调用移动数据，并以 interrupt/heartbeat 控制继续推理和与用户交互。
+
+## University of California, Berkeley / University of Chicago / Bespoke Labs
+
+- 2026-11-05 · 一作：Mingxuan Li · [EnvOpt: Automated Optimization for Agent Environments](../2611.07372-envopt/README.md)（`envopt`）：长期稳定的工作环境可以承载多类查询。EnvOpt 固定目标模型与 Harness，让研究 Agent 改变同一信息的可访问表示，例如用 SQLite 目录索引散落的表定义，或为既有接口写索引手册。
 
 ## University of California, Santa Barbara
 

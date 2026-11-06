@@ -137106,6 +137106,687 @@
           "component_evidence": "docs/post-training/2611.05266-targeted-guidance/metrics/component-cuda-seeds42-44.json"
         }
       ]
+    },
+    {
+      "schema_version": 1,
+      "batch": "2026-11-06-priority-components",
+      "selected_scope_complete": true,
+      "delivery_status": "bounded_scope_complete",
+      "all_sources_exhaustive": false,
+      "review_watermark_advanced": false,
+      "review_watermark": {
+        "before": "2026-10-15",
+        "after": "2026-10-15"
+      },
+      "counts": {
+        "new_route_category_entries": 1373,
+        "new_route_replacement_entries": 602,
+        "recent_route_category_entries_2026-11-06": 771,
+        "recent_route_category_entries_2026-11-05": 771,
+        "recent_route_unique_identities_2026-11-05": 565,
+        "recent_route_unique_identities_2026-11-06": 564,
+        "unique_recent_route_identities": 1128,
+        "unique_captured_identities_including_replacements": 1512,
+        "captured_identities_outside_this_fixed_review": 1504,
+        "selected_papers": 8,
+        "component_implementations": 7,
+        "cuda_validated_components": 2,
+        "cpu_only_components": 5,
+        "reference_only_high_cost_review_done": 1,
+        "selected_first_publications_after_previous_capture": 5,
+        "full_capability_reproductions": 0
+      },
+      "date": "2026-11-06",
+      "source_artifact": "research-audits/nov06-priority-components/README.md",
+      "candidates": [
+        {
+          "domain": "foundation-models",
+          "key": "convpe",
+          "title": "ConvPE: Convolutional Position Embedding Improves Transformers",
+          "paper_url": "https://arxiv.org/abs/2611.07749",
+          "detail_path": "foundation-models/2611.07749-convpe/README.md",
+          "published": "2026-11-05",
+          "published_at": "2026-11-05T09:55:15Z",
+          "first_author": "Zehao Wang",
+          "first_author_affiliation": "Nanjing University",
+          "priority": "P1",
+          "cost_assessment": {
+            "source": "固定v1 Sections 4.1-4.3、4.6-4.7：https://arxiv.org/html/2611.07749v1",
+            "available_resource": "单张 NVIDIA A100 或 A30，或本地 Mac",
+            "model_scale": "12层约124.84M/128.13M参数的RoPE/ConvPE对照；另含tiny和base配置与2D视觉对照",
+            "data_scale": "每主预训练臂3B FineWeb-Edu tokens，长上下文额外150M tokens，WikiText超参扫描",
+            "paper_configuration": "18种超参配置；从头预训练、8K延长训练、下游/视觉任务和TileLang算子比较",
+            "estimated_cost_basis": "根据训练tokens、多个完整训练臂及评估规模判断高成本；不是本地GPU耗时测量",
+            "decision": "成本过高，不复现（审查 DONE）；仅小张量Eq. (2)-(4)机制，未下载模型或数据、未跑完整训练或吞吐对比"
+          },
+          "implementation_status": "component_only",
+          "id": "2611.07749",
+          "doc": "foundation-models/2611.07749-convpe/README.md",
+          "catalog_key": "convpe",
+          "catalog_detail": "foundation-models/2611.07749-convpe/README.md",
+          "track": "foundation-model",
+          "intake_class": "observed_first_version_announcement_overlap",
+          "announced_on": "2026-11-06",
+          "observed_announcement_days": [
+            "2026-11-06"
+          ],
+          "status": "implemented",
+          "resolution": "bounded_l1_component_accepted",
+          "component_implemented": true,
+          "component_accepted": true,
+          "review_done": true,
+          "first_publication_after_previous_capture": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "full_experiment_review_done": true,
+          "requires_gpu_validation": true,
+          "gpu_validation_passed": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "full_text_review": {
+            "scope": "defining method, cost, author affiliation/code and original figure; not every appendix claim",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_kind": "reviewed-fixed-primary-paper",
+              "source_url": "https://arxiv.org/html/2611.07749v1"
+            },
+            {
+              "source_kind": "arxiv-announcement-list",
+              "source_url": "https://arxiv.org/list/cs.LG/new?show=2000",
+              "category": "cs.LG",
+              "route": "new",
+              "entry_kind": "new",
+              "announced_on": "2026-11-06",
+              "listed_arxiv_id": "2611.07749v1"
+            },
+            {
+              "source_kind": "arxiv-announcement-list",
+              "source_url": "https://arxiv.org/list/cs.LG/recent?show=2000",
+              "category": "cs.LG",
+              "route": "recent",
+              "entry_kind": "recent-list",
+              "announced_on": "2026-11-06",
+              "listed_arxiv_id": "2611.07749v1"
+            }
+          ],
+          "component_evidence": "docs/foundation-models/2611.07749-convpe/metrics/component-cuda-seeds42-44.json",
+          "gpu_validation_artifact": "docs/gpu-validations/convpe-a100-20261106.json"
+        },
+        {
+          "domain": "post-training",
+          "key": "cord-rollout",
+          "title": "CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation",
+          "paper_url": "https://arxiv.org/abs/2611.07959",
+          "detail_path": "post-training/2611.07959-cord/README.md",
+          "published": "2026-11-05",
+          "published_at": "2026-11-05T12:55:51Z",
+          "first_author": "Guhan Chen",
+          "first_author_affiliation": "Tsinghua University",
+          "priority": "P1",
+          "cost_assessment": {
+            "source": "固定v1 Appendix A Table 5 与 Compute：https://arxiv.org/html/2611.07959v1",
+            "available_resource": "单张 NVIDIA A100 或 A30，或本地 Mac",
+            "model_scale": "六种0.6B至4B Qwen3/Qwen3.5学生、8B/9B教师，另有14B教师分析",
+            "data_scale": "约5000条MATH训练题；80步每步256 prompts；五个评测集共1919题每模型每题16次采样",
+            "paper_configuration": "Qwen3每臂16设备约2小时，Qwen3.5每臂8设备5至19小时；表1十二配置训练约670 accelerator-hours，不含评测",
+            "estimated_cost_basis": "依据原文报告的多设备训练成本和评测规模判断高成本；未本地计时",
+            "decision": "成本过高，不复现（审查 DONE）；只做CPU最大耦合分类采样机制，不下载模型/数据或执行LM训练"
+          },
+          "implementation_status": "component_only",
+          "id": "2611.07959",
+          "doc": "post-training/2611.07959-cord/README.md",
+          "catalog_key": "cord-rollout",
+          "catalog_detail": "post-training/2611.07959-cord/README.md",
+          "track": "post-training",
+          "intake_class": "observed_first_version_announcement_overlap",
+          "announced_on": "2026-11-06",
+          "observed_announcement_days": [
+            "2026-11-06"
+          ],
+          "status": "implemented",
+          "resolution": "bounded_l1_component_accepted",
+          "component_implemented": true,
+          "component_accepted": true,
+          "review_done": true,
+          "first_publication_after_previous_capture": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "full_experiment_review_done": true,
+          "requires_gpu_validation": false,
+          "gpu_validation_passed": false,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "full_text_review": {
+            "scope": "defining method, cost, author affiliation/code and original figure; not every appendix claim",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_kind": "reviewed-fixed-primary-paper",
+              "source_url": "https://arxiv.org/html/2611.07959v1"
+            },
+            {
+              "source_kind": "arxiv-announcement-list",
+              "source_url": "https://arxiv.org/list/cs.CL/new?show=2000",
+              "category": "cs.CL",
+              "route": "new",
+              "entry_kind": "cross-list",
+              "announced_on": "2026-11-06",
+              "listed_arxiv_id": "2611.07959v1"
+            },
+            {
+              "source_kind": "arxiv-announcement-list",
+              "source_url": "https://arxiv.org/list/cs.CL/recent?show=2000",
+              "category": "cs.CL",
+              "route": "recent",
+              "entry_kind": "recent-list",
+              "announced_on": "2026-11-06",
+              "listed_arxiv_id": "2611.07959v1"
+            },
+            {
+              "source_kind": "arxiv-announcement-list",
+              "source_url": "https://arxiv.org/list/cs.LG/new?show=2000",
+              "category": "cs.LG",
+              "route": "new",
+              "entry_kind": "new",
+              "announced_on": "2026-11-06",
+              "listed_arxiv_id": "2611.07959v1"
+            },
+            {
+              "source_kind": "arxiv-announcement-list",
+              "source_url": "https://arxiv.org/list/cs.LG/recent?show=2000",
+              "category": "cs.LG",
+              "route": "recent",
+              "entry_kind": "recent-list",
+              "announced_on": "2026-11-06",
+              "listed_arxiv_id": "2611.07959v1"
+            }
+          ],
+          "component_evidence": "docs/post-training/2611.07959-cord/metrics/component-cpu-seeds42-44.json"
+        },
+        {
+          "domain": "agent-research",
+          "key": "envopt",
+          "title": "EnvOpt: Automated Optimization for Agent Environments",
+          "paper_url": "https://arxiv.org/abs/2611.07372",
+          "detail_path": "agent-research/2611.07372-envopt/README.md",
+          "published": "2026-11-05",
+          "published_at": "2026-11-05T03:16:52Z",
+          "first_author": "Mingxuan Li",
+          "first_author_affiliation": "University of California, Berkeley / University of Chicago / Bespoke Labs",
+          "priority": "P1",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/pdf/2611.07372v1",
+            "source_location": "Sections 2–4, Algorithm 1 and Table 3",
+            "available_resource": "one NVIDIA A100 or A30, or local Mac",
+            "model_scale": "frontier research and target agents; AutomationBench uses Claude Opus 4.8 and Haiku 4.5",
+            "data_scale": "five settings; AutomationBench uses 200 test tasks and 96 validation tasks from 600 public tasks",
+            "estimated_cost_basis": "Reported Table 3 per-setting optimization cost including target runs: USD 33.08–339.44 and 3.7–25.4 hours. Not locally measured; full comparisons also require real environments and held-out evaluation.",
+            "decision": "真实 API、多场景环境和小时级优化成本过高，不复现（审查 DONE）；只执行离线 CPU 决策回放。"
+          },
+          "implementation_status": "component_only",
+          "id": "2611.07372",
+          "doc": "agent-research/2611.07372-envopt/README.md",
+          "catalog_key": "envopt",
+          "catalog_detail": "agent-research/2611.07372-envopt/README.md",
+          "track": "agent",
+          "intake_class": "observed_first_version_announcement_overlap",
+          "announced_on": "2026-11-06",
+          "observed_announcement_days": [
+            "2026-11-06"
+          ],
+          "status": "implemented",
+          "resolution": "bounded_l1_component_accepted",
+          "component_implemented": true,
+          "component_accepted": true,
+          "review_done": true,
+          "first_publication_after_previous_capture": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "full_experiment_review_done": true,
+          "requires_gpu_validation": false,
+          "gpu_validation_passed": false,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "full_text_review": {
+            "scope": "defining method, cost, author affiliation/code and original figure; not every appendix claim",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_kind": "reviewed-fixed-primary-paper",
+              "source_url": "https://arxiv.org/pdf/2611.07372v1"
+            },
+            {
+              "source_kind": "arxiv-announcement-list",
+              "source_url": "https://arxiv.org/list/cs.AI/new?show=2000",
+              "category": "cs.AI",
+              "route": "new",
+              "entry_kind": "new",
+              "announced_on": "2026-11-06",
+              "listed_arxiv_id": "2611.07372v1"
+            },
+            {
+              "source_kind": "arxiv-announcement-list",
+              "source_url": "https://arxiv.org/list/cs.AI/recent?show=2000",
+              "category": "cs.AI",
+              "route": "recent",
+              "entry_kind": "recent-list",
+              "announced_on": "2026-11-06",
+              "listed_arxiv_id": "2611.07372v1"
+            },
+            {
+              "source_kind": "arxiv-announcement-list",
+              "source_url": "https://arxiv.org/list/cs.CL/new?show=2000",
+              "category": "cs.CL",
+              "route": "new",
+              "entry_kind": "cross-list",
+              "announced_on": "2026-11-06",
+              "listed_arxiv_id": "2611.07372v1"
+            },
+            {
+              "source_kind": "arxiv-announcement-list",
+              "source_url": "https://arxiv.org/list/cs.CL/recent?show=2000",
+              "category": "cs.CL",
+              "route": "recent",
+              "entry_kind": "recent-list",
+              "announced_on": "2026-11-06",
+              "listed_arxiv_id": "2611.07372v1"
+            }
+          ],
+          "component_evidence": "docs/agent-research/2611.07372-envopt/metrics/component-cpu-seeds42-44.json"
+        },
+        {
+          "domain": "recommendation",
+          "key": "ice",
+          "title": "Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking",
+          "paper_url": "https://arxiv.org/abs/2611.07591",
+          "detail_path": "recommendation-components/2611.07591-ice/README.md",
+          "published": "2026-11-05",
+          "published_at": "2026-11-05T07:41:22Z",
+          "first_author": "Jiayi Zhang",
+          "first_author_affiliation": "Alibaba Taobao & Tmall Group",
+          "priority": "P0",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2611.07591v1",
+            "source_location": "§§3.3–5.5, Tables 1 and 2",
+            "available_resource": "one NVIDIA A100 or A30, or local Mac",
+            "model_scale": "six evaluator backbones and a fixed production candidate generator; repeated offline comparisons",
+            "data_scale": "48.38M users, 141.79M private slates; seven days of Taobao logs and 14-day production A/B",
+            "estimated_cost_basis": "published data scale, private inputs and production control; no local estimate of training GPU-hours",
+            "decision": "完整私有数据、生产评估与线上对照成本过高，不复现（审查 DONE）；只运行独立低成本组件。"
+          },
+          "implementation_status": "component_only",
+          "id": "2611.07591",
+          "doc": "recommendation-components/2611.07591-ice/README.md",
+          "catalog_key": "ice",
+          "catalog_detail": "recommendation-components/2611.07591-ice/README.md",
+          "track": "recommendation",
+          "intake_class": "observed_first_version_announcement_overlap",
+          "announced_on": "2026-11-06",
+          "observed_announcement_days": [
+            "2026-11-06"
+          ],
+          "status": "implemented",
+          "resolution": "bounded_l1_component_accepted",
+          "component_implemented": true,
+          "component_accepted": true,
+          "review_done": true,
+          "first_publication_after_previous_capture": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "full_experiment_review_done": true,
+          "requires_gpu_validation": true,
+          "gpu_validation_passed": true,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "full_text_review": {
+            "scope": "defining method, cost, author affiliation/code and original figure; not every appendix claim",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_kind": "reviewed-fixed-primary-paper",
+              "source_url": "https://arxiv.org/html/2611.07591v1"
+            },
+            {
+              "source_kind": "arxiv-announcement-list",
+              "source_url": "https://arxiv.org/list/cs.IR/new?show=2000",
+              "category": "cs.IR",
+              "route": "new",
+              "entry_kind": "new",
+              "announced_on": "2026-11-06",
+              "listed_arxiv_id": "2611.07591v1"
+            },
+            {
+              "source_kind": "arxiv-announcement-list",
+              "source_url": "https://arxiv.org/list/cs.IR/recent?show=2000",
+              "category": "cs.IR",
+              "route": "recent",
+              "entry_kind": "recent-list",
+              "announced_on": "2026-11-06",
+              "listed_arxiv_id": "2611.07591v1"
+            }
+          ],
+          "component_evidence": "docs/recommendation-components/2611.07591-ice/metrics/component-cuda-seeds42-44.json",
+          "gpu_validation_artifact": "docs/gpu-validations/ice-a100-20261106.json"
+        },
+        {
+          "domain": "foundation-models",
+          "key": "pipnn-ii",
+          "title": "Turbocharging PiPNN for Proximity and k-NN Graph Building",
+          "paper_url": "https://arxiv.org/abs/2611.05690v1",
+          "detail_path": "foundation-models/2611.05690-pipnn-ii/README.md",
+          "published": "2026-11-03",
+          "published_at": "2026-11-03T22:20:36Z",
+          "first_author": "Tobias Rubel",
+          "first_author_affiliation": "University of Maryland, College Park",
+          "priority": "P0",
+          "cost_assessment": {
+            "source": "固定 v1 Sections 4/6, Appendix F；https://arxiv.org/html/2611.05690v1",
+            "available_resource": "本地 Mac 或单张 A100/A30",
+            "model_scale": "无需生成模型；原实验为完整 TurboQuant/RSQ8、PiPNN II 和 GPiPNN 图构建及检索矩阵",
+            "data_scale": "12 个数据集，CPU 最大 10 亿点，GPU 最大 1 亿点",
+            "paper_configuration": "CPU 192/288 vCPU 和 1.5/2.2 TB DRAM；GPU 单 H100 80GB Hopper SM90a 生产核",
+            "estimated_cost_basis": "数据体量、工作站内存、指令集和 SM90a 条件明显超预算；未下载向量集、移植 GPU 核或测量全图构建耗时",
+            "decision": "成本过高，不复现（审查 DONE）；仅 CPU 已解码 byte 的精确偏移修正、缩放和有界流式 top-K，非 AVX-512/Hopper 性能复现"
+          },
+          "implementation_status": "component_only",
+          "id": "2611.05690",
+          "doc": "foundation-models/2611.05690-pipnn-ii/README.md",
+          "catalog_key": "pipnn-ii",
+          "catalog_detail": "foundation-models/2611.05690-pipnn-ii/README.md",
+          "track": "foundation-model",
+          "intake_class": "observed_first_version_announcement_overlap",
+          "announced_on": "2026-11-05",
+          "observed_announcement_days": [
+            "2026-11-05"
+          ],
+          "status": "implemented",
+          "resolution": "bounded_l1_component_accepted",
+          "component_implemented": true,
+          "component_accepted": true,
+          "review_done": true,
+          "first_publication_after_previous_capture": false,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "full_experiment_review_done": true,
+          "requires_gpu_validation": false,
+          "gpu_validation_passed": false,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "full_text_review": {
+            "scope": "defining method, cost, author affiliation/code and original figure; not every appendix claim",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_kind": "reviewed-fixed-primary-paper",
+              "source_url": "https://arxiv.org/html/2611.05690v1"
+            },
+            {
+              "source_kind": "arxiv-announcement-list",
+              "source_url": "https://arxiv.org/list/cs.IR/recent?show=2000",
+              "category": "cs.IR",
+              "route": "recent",
+              "entry_kind": "recent-list",
+              "announced_on": "2026-11-05",
+              "listed_arxiv_id": "2611.05690v1"
+            }
+          ],
+          "component_evidence": "docs/foundation-models/2611.05690-pipnn-ii/metrics/component-cpu-seeds42-44.json"
+        },
+        {
+          "domain": "post-training",
+          "key": "ragcompass",
+          "title": "RAGCompass: Generalizable Retriever Routing via Reranking",
+          "paper_url": "https://arxiv.org/abs/2611.05596v1",
+          "detail_path": "post-training/2611.05596-ragcompass/README.md",
+          "published": "2026-11-03",
+          "published_at": "2026-11-03T20:36:24Z",
+          "first_author": "Valentin Six",
+          "first_author_affiliation": "University of Virginia",
+          "priority": "P0",
+          "cost_assessment": {
+            "source": "固定 v1 Sections 3–5 与作者仓库 Data layout；https://arxiv.org/html/2611.05596v1",
+            "available_resource": "本地 Mac 或单张 A100/A30",
+            "model_scale": "共享 Qwen3-Reranker-0.6B 与比较头，完整监督链还要运行 Llama-3.1-8B-Instruct reader",
+            "data_scale": "4 个 QA 数据集、5 类 retriever 每次 5 篇 passage、训练/验证/测试及多个泛化配置；作者仓库支持缓存结果",
+            "paper_configuration": "两阶段训练与多基线、跨语料/检索器/reader 的三种子对照；重建原始结果需要检索索引与 reader 推理",
+            "estimated_cost_basis": "完整多语料多检索器与训练矩阵超出低成本预算；未下载模型、检索数据或索引，也未估测实际 GPU 小时",
+            "decision": "成本过高，不复现（审查 DONE）；仅 CPU 候选集 KL、解析梯度、离线筛选与无标签 argmax"
+          },
+          "implementation_status": "component_only",
+          "id": "2611.05596",
+          "doc": "post-training/2611.05596-ragcompass/README.md",
+          "catalog_key": "ragcompass",
+          "catalog_detail": "post-training/2611.05596-ragcompass/README.md",
+          "track": "post-training",
+          "intake_class": "observed_first_version_announcement_overlap",
+          "announced_on": "2026-11-05",
+          "observed_announcement_days": [
+            "2026-11-05"
+          ],
+          "status": "implemented",
+          "resolution": "bounded_l1_component_accepted",
+          "component_implemented": true,
+          "component_accepted": true,
+          "review_done": true,
+          "first_publication_after_previous_capture": false,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "full_experiment_review_done": true,
+          "requires_gpu_validation": false,
+          "gpu_validation_passed": false,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "full_text_review": {
+            "scope": "defining method, cost, author affiliation/code and original figure; not every appendix claim",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_kind": "reviewed-fixed-primary-paper",
+              "source_url": "https://arxiv.org/html/2611.05596v1"
+            },
+            {
+              "source_kind": "arxiv-announcement-list",
+              "source_url": "https://arxiv.org/list/cs.CL/recent?show=2000",
+              "category": "cs.CL",
+              "route": "recent",
+              "entry_kind": "recent-list",
+              "announced_on": "2026-11-05",
+              "listed_arxiv_id": "2611.05596v1"
+            },
+            {
+              "source_kind": "arxiv-announcement-list",
+              "source_url": "https://arxiv.org/list/cs.IR/recent?show=2000",
+              "category": "cs.IR",
+              "route": "recent",
+              "entry_kind": "recent-list",
+              "announced_on": "2026-11-05",
+              "listed_arxiv_id": "2611.05596v1"
+            }
+          ],
+          "component_evidence": "docs/post-training/2611.05596-ragcompass/metrics/component-cpu-seeds42-44.json"
+        },
+        {
+          "domain": "recommendation",
+          "key": "ured",
+          "title": "From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation",
+          "paper_url": "https://arxiv.org/abs/2611.05997",
+          "detail_path": "recommendation-components/2611.05997-ured/README.md",
+          "published": "2026-11-04",
+          "published_at": "2026-11-04T05:45:30Z",
+          "first_author": "Ge Fan",
+          "first_author_affiliation": "Alibaba Taobao & Tmall Group",
+          "priority": "P0",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2611.05997v1",
+            "source_location": "§§3–5, Tables 1–3",
+            "available_resource": "one NVIDIA A100 or A30, or local Mac",
+            "model_scale": "existing production ranker, no retraining; HDFS/Hive/Redis recall pipeline and production comparison",
+            "data_scale": "private 30-day candidate and exposure logs; tens of millions of daily users and billions of requests per day",
+            "estimated_cost_basis": "reported idle distributed batch parallelism up to 1000 cores, private traffic/data and online control; not a local timing estimate",
+            "decision": "完整私有数据、生产评估与线上对照成本过高，不复现（审查 DONE）；只运行独立低成本组件。"
+          },
+          "implementation_status": "component_only",
+          "id": "2611.05997",
+          "doc": "recommendation-components/2611.05997-ured/README.md",
+          "catalog_key": "ured",
+          "catalog_detail": "recommendation-components/2611.05997-ured/README.md",
+          "track": "recommendation",
+          "intake_class": "observed_first_version_announcement_overlap",
+          "announced_on": "2026-11-05",
+          "observed_announcement_days": [
+            "2026-11-05"
+          ],
+          "status": "implemented",
+          "resolution": "bounded_l1_component_accepted",
+          "component_implemented": true,
+          "component_accepted": true,
+          "review_done": true,
+          "first_publication_after_previous_capture": false,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "full_experiment_review_done": true,
+          "requires_gpu_validation": false,
+          "gpu_validation_passed": false,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "full_text_review": {
+            "scope": "defining method, cost, author affiliation/code and original figure; not every appendix claim",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_kind": "reviewed-fixed-primary-paper",
+              "source_url": "https://arxiv.org/html/2611.05997v1"
+            },
+            {
+              "source_kind": "arxiv-announcement-list",
+              "source_url": "https://arxiv.org/list/cs.AI/recent?show=2000",
+              "category": "cs.AI",
+              "route": "recent",
+              "entry_kind": "recent-list",
+              "announced_on": "2026-11-05",
+              "listed_arxiv_id": "2611.05997v1"
+            },
+            {
+              "source_kind": "arxiv-announcement-list",
+              "source_url": "https://arxiv.org/list/cs.IR/recent?show=2000",
+              "category": "cs.IR",
+              "route": "recent",
+              "entry_kind": "recent-list",
+              "announced_on": "2026-11-05",
+              "listed_arxiv_id": "2611.05997v1"
+            }
+          ],
+          "component_evidence": "docs/recommendation-components/2611.05997-ured/metrics/component-cpu-seeds42-44.json"
+        },
+        {
+          "domain": "agent-research",
+          "key": "xstack",
+          "title": "XStack: A Benchmark for ML Repo Migration",
+          "paper_url": "https://arxiv.org/abs/2611.08472",
+          "detail_path": "agent-research/2611.08472-xstack/README.md",
+          "published": "2026-11-05",
+          "published_at": "2026-11-05T18:55:54Z",
+          "first_author": "Linrong Cai",
+          "first_author_affiliation": "Princeton University",
+          "priority": "P1",
+          "cost_assessment": {
+            "source_url": "https://arxiv.org/html/2611.08472v1",
+            "source_location": "Section 2 and Appendices F–H",
+            "available_resource": "one NVIDIA A100 or A30, or local Mac; no TPU allocation for this batch",
+            "model_scale": "seven coding agents with correctness and anti-cheating model judges",
+            "data_scale": "20 PyTorch repositories from 14 domains, 140 agent-repository cells and full-scale retraining",
+            "estimated_cost_basis": "Published main campaign measured 22,802 TPU chip-hours across v4/v5p/v6e, including 16,158 for grading. The Opus 5 cells alone were USD 1,844 at the authors' list-price accounting. Not locally measured.",
+            "decision": "主矩阵需真实 TPU、全规模训练与裁判 API，成本过高，不复现（审查 DONE）；不以 GPU 初步实验替代。"
+          },
+          "implementation_status": "deferred_high_cost",
+          "id": "2611.08472",
+          "doc": "agent-research/2611.08472-xstack/README.md",
+          "catalog_key": "xstack",
+          "catalog_detail": "agent-research/2611.08472-xstack/README.md",
+          "track": "agent",
+          "intake_class": "observed_first_version_announcement_overlap",
+          "announced_on": "2026-11-06",
+          "observed_announcement_days": [
+            "2026-11-06"
+          ],
+          "status": "deferred",
+          "resolution": "not_reproduced_high_cost",
+          "component_implemented": false,
+          "component_accepted": false,
+          "review_done": true,
+          "first_publication_after_previous_capture": true,
+          "full_experiment_status": "not_reproduced_high_cost",
+          "full_experiment_review_done": true,
+          "requires_gpu_validation": false,
+          "gpu_validation_passed": false,
+          "automatic_retry": false,
+          "automatic_implementation_queue": false,
+          "promotion_eligible": false,
+          "evolve_integrated": false,
+          "full_text_review": {
+            "scope": "defining method, cost, author affiliation/code and original figure; not every appendix claim",
+            "full_article_read": false
+          },
+          "source_provenance": [
+            {
+              "source_kind": "reviewed-fixed-primary-paper",
+              "source_url": "https://arxiv.org/html/2611.08472v1"
+            },
+            {
+              "source_kind": "arxiv-announcement-list",
+              "source_url": "https://arxiv.org/list/cs.AI/new?show=2000",
+              "category": "cs.AI",
+              "route": "new",
+              "entry_kind": "cross-list",
+              "announced_on": "2026-11-06",
+              "listed_arxiv_id": "2611.08472v1"
+            },
+            {
+              "source_kind": "arxiv-announcement-list",
+              "source_url": "https://arxiv.org/list/cs.AI/recent?show=2000",
+              "category": "cs.AI",
+              "route": "recent",
+              "entry_kind": "recent-list",
+              "announced_on": "2026-11-06",
+              "listed_arxiv_id": "2611.08472v1"
+            },
+            {
+              "source_kind": "arxiv-announcement-list",
+              "source_url": "https://arxiv.org/list/cs.LG/new?show=2000",
+              "category": "cs.LG",
+              "route": "new",
+              "entry_kind": "new",
+              "announced_on": "2026-11-06",
+              "listed_arxiv_id": "2611.08472v1"
+            },
+            {
+              "source_kind": "arxiv-announcement-list",
+              "source_url": "https://arxiv.org/list/cs.LG/recent?show=2000",
+              "category": "cs.LG",
+              "route": "recent",
+              "entry_kind": "recent-list",
+              "announced_on": "2026-11-06",
+              "listed_arxiv_id": "2611.08472v1"
+            }
+          ],
+          "reason": "真实 TPU 140 单元主矩阵使用 22,802 芯片小时，另需 Agent 与裁判 API；当前单 A100/A30 或 Mac 不具备该环境，成本过高，不复现（审查 DONE）。"
+        }
+      ]
     }
   ]
 }

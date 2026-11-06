@@ -71,6 +71,14 @@ def _label_map(raw: str) -> dict[str, str]:
 
 
 _LABELS = _label_map("""
+曝光感知与序列评估 = Impression-aware slate evaluation
+高分未曝光候选回收 = Recycling high-scored unshown candidates
+卷积位置偏置 = Convolutional positional bias
+量化近邻图构建 = Quantized nearest-neighbor graph construction
+最大耦合轨迹采样 = Maximal-coupling rollout sampling
+检索器路由 = Retriever routing
+环境表示演进 = Environment representation evolution
+跨框架迁移评测 = Cross-framework migration evaluation
 工程与推理效率 = Engineering and inference efficiency
 本地搜索 = Local search
 业务对齐分词与多样性解码 = Business-aligned tokenization and diverse decoding

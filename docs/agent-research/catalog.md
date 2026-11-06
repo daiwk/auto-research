@@ -10,6 +10,8 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| Harness 与自我改进 | [EnvOpt: Automated Optimization for Agent Environments](2611.07372-envopt/README.md) | University of California, Berkeley / University of Chicago / Bespoke Labs，2026-11-05 | [原作者入口](https://github.com/itea1001/EnvOpt)；作者仓库公开 AutomationBench 环境产物，不等同于完整五组训练实现。 | `envopt`：仅低成本组件，完整实验不复现 |
+| 评测与可靠性 | [XStack: A Benchmark for ML Repo Migration](2611.08472-xstack/README.md) | Princeton University，2026-11-05 | [原作者入口](https://github.com/zlab-princeton/XStack)；作者仓库公开任务、Harness、裁判与数据入口；本地未运行。 | 计划键 `xstack`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | Harness 与自我改进 | [From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?](2611.05108-continual-autoresearch/README.md) | RBC Borealis / ELLIS Institute Tübingen / Max Planck Institute for Intelligent Systems，2026-11-03 | 未发现官方代码 | `continual-autoresearch`：仅低成本组件，完整实验不复现 |
 | Harness 与自我改进 | [Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents](2611.05139-meta-square/README.md) | University of Maryland，2026-11-03 | 未发现官方代码 | `meta-square`：仅低成本组件，完整实验不复现 |
 | Agent安全 | [RuntimeTickets: Source-Grounded Security Obligations for Agent Skills](2611.03772-runtime-tickets/README.md) | University of North Carolina at Chapel Hill，2026-11-02 | 未发现官方代码 | `runtime-tickets`：仅低成本组件，完整实验不复现 |

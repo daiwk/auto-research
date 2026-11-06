@@ -7,7 +7,7 @@ hide:
 
 # 轨迹蒸馏：学生、提案与前缀分布
 
-[LLM 后训练](index.md) / 172 个问题 · 43 篇论文
+[LLM 后训练](index.md) / 176 个问题 · 44 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">172 个问题 · 43 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">176 个问题 · 44 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:cord-rollout" data-paper-title="CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation LLM 后训练 Tsinghua University 2026-11-05 普通 OPD 的教师只给学生已经访问的前缀评分，难以覆盖学生很少走到的教师路径。CoRD 不改每状态的反向 KL 监督，改变的是产生前缀的采样分布。学生先提出 token，再以最大耦合向教师倾斜的目标分布修正提议；同前缀、同词表，两侧概率都必须可用。这里借用了投机解码的拒绝规则，但目的不是增加服务吞吐。 单张 A100/A30 或 Mac 不适合完整矩阵，成本过高，不复现（审查 DONE）。maximal_coupling 接收已经归一化、同词表的同前缀概率，使用 log 空间几何插值，返回目标、接受概率、正残差及 TV；Coupling.draw 用调用方传入的随机源返回提议和发出 token。不加载模型，不生成 LLM 轨迹，不执行反向 KL 训练。只在支持集交集上有质量；若交集为空则拒绝，不能偷偷换成均匀分布或普通教师重抽。  On-policy distillation 最大耦合轨迹采样 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 CoRD 的 qα 替换了普通 OPD 的蒸馏教师吗？ 没有。qα 是发出下一个 token 的边缘，决定后续会访问哪些前缀；在已访问前缀上，原文仍用学生 pS 到冻结教师 pT 的全词表反向 KL。 教学例：学生少走的一条解法开头，经耦合采样变得更常见；到达新前缀后，评分仍来自教师 pT，而不是 pS 与 pT 的插值。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<span id="paper-post-training-cord-rollout-3394bf47" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-fec0222292273a22">CoRD 的 qα 替换了普通 OPD 的蒸馏教师吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Acord-rollout">CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>没有。qα 是发出下一个 token 的边缘，决定后续会访问哪些前缀；在已访问前缀上，原文仍用学生 pS 到冻结教师 pT 的全词表反向 KL。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：学生少走的一条解法开头，经耦合采样变得更常见；到达新前缀后，评分仍来自教师 pT，而不是 pS 与 pT 的插值。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07959">原论文</a> · <a href="../../../../post-training/2611.07959-cord/">实现解读</a> · <a href="#qa-fec0222292273a22">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:cord-rollout" data-paper-title="CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation LLM 后训练 Tsinghua University 2026-11-05 普通 OPD 的教师只给学生已经访问的前缀评分，难以覆盖学生很少走到的教师路径。CoRD 不改每状态的反向 KL 监督，改变的是产生前缀的采样分布。学生先提出 token，再以最大耦合向教师倾斜的目标分布修正提议；同前缀、同词表，两侧概率都必须可用。这里借用了投机解码的拒绝规则，但目的不是增加服务吞吐。 单张 A100/A30 或 Mac 不适合完整矩阵，成本过高，不复现（审查 DONE）。maximal_coupling 接收已经归一化、同词表的同前缀概率，使用 log 空间几何插值，返回目标、接受概率、正残差及 TV；Coupling.draw 用调用方传入的随机源返回提议和发出 token。不加载模型，不生成 LLM 轨迹，不执行反向 KL 训练。只在支持集交集上有质量；若交集为空则拒绝，不能偷偷换成均匀分布或普通教师重抽。  On-policy distillation 最大耦合轨迹采样 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 为什么正残差重抽能恰好得到目标边缘，而且替换率是总变差？ 学生在每个 token 上被保留的无条件质量是 min(pS,qα)，它是两侧可以共享的最大对角质量。剩余接受不到的目标质量正是 (qα−pS)+；补上它得到 qα，总替换率为 TV。 教学例：pS=(0.6,0.4)，qα=(0.3,0.7)。第一 token 保留一半提议，第二 token 全保留；拒绝质量 0.3 全补到第二 token，发出比例为 (0.3,0.7)。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-de2373cdc673c8d7">为什么正残差重抽能恰好得到目标边缘，而且替换率是总变差？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Acord-rollout">CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>学生在每个 token 上被保留的无条件质量是 min(pS,qα)，它是两侧可以共享的最大对角质量。剩余接受不到的目标质量正是 (qα−pS)+；补上它得到 qα，总替换率为 TV。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：pS=(0.6,0.4)，qα=(0.3,0.7)。第一 token 保留一半提议，第二 token 全保留；拒绝质量 0.3 全补到第二 token，发出比例为 (0.3,0.7)。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07959">原论文</a> · <a href="../../../../post-training/2611.07959-cord/">实现解读</a> · <a href="#qa-de2373cdc673c8d7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:cord-rollout" data-paper-title="CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation LLM 后训练 Tsinghua University 2026-11-05 普通 OPD 的教师只给学生已经访问的前缀评分，难以覆盖学生很少走到的教师路径。CoRD 不改每状态的反向 KL 监督，改变的是产生前缀的采样分布。学生先提出 token，再以最大耦合向教师倾斜的目标分布修正提议；同前缀、同词表，两侧概率都必须可用。这里借用了投机解码的拒绝规则，但目的不是增加服务吞吐。 单张 A100/A30 或 Mac 不适合完整矩阵，成本过高，不复现（审查 DONE）。maximal_coupling 接收已经归一化、同词表的同前缀概率，使用 log 空间几何插值，返回目标、接受概率、正残差及 TV；Coupling.draw 用调用方传入的随机源返回提议和发出 token。不加载模型，不生成 LLM 轨迹，不执行反向 KL 训练。只在支持集交集上有质量；若交集为空则拒绝，不能偷偷换成均匀分布或普通教师重抽。  On-policy distillation 最大耦合轨迹采样 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 保留同一个接受率，拒绝后改为直接从教师重抽，为什么不是等价实现？ 拒绝规则只决定需要移动多少质量，重抽方向决定它落到哪里。无条件教师分布仍可能给学生已高估的 token 正质量；只有归一化正残差恰好填平目标缺口。 教学例：pS=(0.6,0.4)，α=1 时 qα=pT=(0.3,0.7)。先保留第一 token 的 0.3；拒绝的 0.3 若直接从教师重抽，又给第一 token 加 0.09，边缘 0.39 错于目标 0.30。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-87246a2fde67cf8a">保留同一个接受率，拒绝后改为直接从教师重抽，为什么不是等价实现？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Acord-rollout">CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>拒绝规则只决定需要移动多少质量，重抽方向决定它落到哪里。无条件教师分布仍可能给学生已高估的 token 正质量；只有归一化正残差恰好填平目标缺口。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：pS=(0.6,0.4)，α=1 时 qα=pT=(0.3,0.7)。先保留第一 token 的 0.3；拒绝的 0.3 若直接从教师重抽，又给第一 token 加 0.09，边缘 0.39 错于目标 0.30。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07959">原论文</a> · <a href="../../../../post-training/2611.07959-cord/">实现解读</a> · <a href="#qa-87246a2fde67cf8a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:cord-rollout" data-paper-title="CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation LLM 后训练 Tsinghua University 2026-11-05 普通 OPD 的教师只给学生已经访问的前缀评分，难以覆盖学生很少走到的教师路径。CoRD 不改每状态的反向 KL 监督，改变的是产生前缀的采样分布。学生先提出 token，再以最大耦合向教师倾斜的目标分布修正提议；同前缀、同词表，两侧概率都必须可用。这里借用了投机解码的拒绝规则，但目的不是增加服务吞吐。 单张 A100/A30 或 Mac 不适合完整矩阵，成本过高，不复现（审查 DONE）。maximal_coupling 接收已经归一化、同词表的同前缀概率，使用 log 空间几何插值，返回目标、接受概率、正残差及 TV；Coupling.draw 用调用方传入的随机源返回提议和发出 token。不加载模型，不生成 LLM 轨迹，不执行反向 KL 训练。只在支持集交集上有质量；若交集为空则拒绝，不能偷偷换成均匀分布或普通教师重抽。  On-policy distillation 最大耦合轨迹采样 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 几何插值遇到零概率，为什么要把端点与中间 α 分开实现？ 中间 α 只对两侧同时为正的 token 归一化；空交集没有合法目标。端点直接返回各自原分布，避免对 log(0) 乘零。α=0 不需要额外接受抽样，能保留本地学生采样的随机数序列。 教学例：pS=(1,0)，pT=(0,1) 时 α=0.5 应拒绝，而 α=0 恒发第一 token，α=1 恒发第二 token，均有明确定义。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-f355805458845719">几何插值遇到零概率，为什么要把端点与中间 α 分开实现？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Acord-rollout">CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>中间 α 只对两侧同时为正的 token 归一化；空交集没有合法目标。端点直接返回各自原分布，避免对 log(0) 乘零。α=0 不需要额外接受抽样，能保留本地学生采样的随机数序列。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：pS=(1,0)，pT=(0,1) 时 α=0.5 应拒绝，而 α=0 恒发第一 token，α=1 恒发第二 token，均有明确定义。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07959">原论文</a> · <a href="../../../../post-training/2611.07959-cord/">实现解读</a> · <a href="#qa-f355805458845719">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:shuffled-opsd" data-paper-title="Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation?" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation? LLM 后训练 Duke University 2026-11-03 OPSD 中学生根据问题采样，冻结初始教师在同一生成前缀上评分，但额外看到 worked example。本文区分“双方共享的问题”和“只有教师看到的示例”：用另一个问题的完整示例作教师上下文，打乱共享问题的 whitespace 词块，却保留教师示例的顺序。该变换同时改变学生采样和教师评分的条件，不是在生成后打乱轨迹，也不是只把教师输入打乱。 完整多模型训练与长推理评测：成本过高，不复现（审查 DONE）。L1 条件构造与损失组件，diagnostic only。完整多模型训练与长推理评测：成本过高，不复现（审查 DONE）。本地没有运行 LLM rollout 或数学 benchmark；evolve_integrated=false。prepare_shared_inputs 保留原始 worked example，仅给 teacher 字段，返回共享问题视图和固定配对索引；不生成 chat template，也不替调用方接入 checkpoint。  On-policy distillation 教师上下文与输入变换 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 Shuffled OPSD打乱的是学生生成轨迹，还是学生和教师的输入？ 打乱双方共享的问题输入，并在这个相同变换条件上采学生轨迹和算教师分布；生成出来的续写从不被打乱。只有教师看到的其他题worked example保持完整，评测又回到原始完整问题且不给教师上下文。 教学例：把“red box contains five coins”置换为“coins red five contains box”，双方看到同一新顺序；学生之后生成的推导仍保持原采样顺序。 2026-11-04">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
 <span id="paper-post-training-shuffled-opsd-320b8d1d" class="ar-learning-paper-anchor"></span>

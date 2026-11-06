@@ -7,7 +7,7 @@ hide:
 
 # 评测与可靠性：如何知道真的做对了
 
-[Agent](index.md) / 176 个问题 · 44 篇论文
+[Agent](index.md) / 180 个问题 · 45 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">176 个问题 · 44 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">180 个问题 · 45 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:xstack" data-paper-title="XStack: A Benchmark for ML Repo Migration" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="XStack: A Benchmark for ML Repo Migration Agent Princeton University 2026-11-05 局部张量变换正确不等于能迁移完整实验。XStack 固定 20 个真实 PyTorch 仓库的源提交，要求 Agent 在 TPU 上移植到 JAX，交付环境安装、训练/评测和 PyTorch 权重导出三个入口。评估方在新机器全规模重跑；14 个领域包括语言模型、推荐、视觉和强化学习。原文 Appendix H 的代码规模比较也说明，达标路径不一定覆盖源库每一项功能。 仅资料收录：成本过高，不复现（审查 DONE）。仅资料收录：成本过高，不复现（审查 DONE）。不执行迁移、不下载任务数据、不生成本地指标或 GPU 收据。Appendix H 报告主实验 22,802 TPU 芯片小时（v4/v5p/v6e），其中评分重跑 16,158 芯片小时；另有 Agent 与裁判调用。Appendix F 仅 Opus 5 的 20 个单元按作者口径已为 1,844 美元。单 A100/A30 或 Mac 不能提供主实验的 TPU 环境与全矩阵预算。成本过高，不复现（审查 DONE）。本地没有运行 GPU 初步实验、生成替代分数或启动自动队列。  评测与可靠性 跨框架迁移评测 Agent 评测与可靠性：如何知道真的做对了 XStack 的迁移通过为什么不能只看程序能启动？ 必须在干净 TPU 上跑完整源配方并达标，裁判还要核对结果确属该次运行且未作弊，权重必须能回载到原 PyTorch 模型。启动只是其中很弱的前置条件。 教学例：JAX 脚本正常退出，但运行了缩小数据集的教程任务，不是全规模迁移通过。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<span id="paper-agent-research-xstack-ca2bf617" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-4225806da786eb79">XStack 的迁移通过为什么不能只看程序能启动？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Axstack">XStack: A Benchmark for ML Repo Migration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Princeton University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>必须在干净 TPU 上跑完整源配方并达标，裁判还要核对结果确属该次运行且未作弊，权重必须能回载到原 PyTorch 模型。启动只是其中很弱的前置条件。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：JAX 脚本正常退出，但运行了缩小数据集的教程任务，不是全规模迁移通过。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、评估协议；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08472">原论文</a> · <a href="../../../../agent-research/2611.08472-xstack/">实现解读</a> · <a href="#qa-4225806da786eb79">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:xstack" data-paper-title="XStack: A Benchmark for ML Repo Migration" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="XStack: A Benchmark for ML Repo Migration Agent Princeton University 2026-11-05 局部张量变换正确不等于能迁移完整实验。XStack 固定 20 个真实 PyTorch 仓库的源提交，要求 Agent 在 TPU 上移植到 JAX，交付环境安装、训练/评测和 PyTorch 权重导出三个入口。评估方在新机器全规模重跑；14 个领域包括语言模型、推荐、视觉和强化学习。原文 Appendix H 的代码规模比较也说明，达标路径不一定覆盖源库每一项功能。 仅资料收录：成本过高，不复现（审查 DONE）。仅资料收录：成本过高，不复现（审查 DONE）。不执行迁移、不下载任务数据、不生成本地指标或 GPU 收据。Appendix H 报告主实验 22,802 TPU 芯片小时（v4/v5p/v6e），其中评分重跑 16,158 芯片小时；另有 Agent 与裁判调用。Appendix F 仅 Opus 5 的 20 个单元按作者口径已为 1,844 美元。单 A100/A30 或 Mac 不能提供主实验的 TPU 环境与全矩阵预算。成本过高，不复现（审查 DONE）。本地没有运行 GPU 初步实验、生成替代分数或启动自动队列。  评测与可靠性 跨框架迁移评测 Agent 评测与可靠性：如何知道真的做对了 第二阶段提供主实验配方，为何不等同于泄漏答案？ 配方让执行者知道该跑哪个实验，不公开数值目标；仅允许调整入口脚本，其余迁移冻结。若入口脚本重写冻结文件，也破坏了这个对照。 教学例：阶段一误跑音频分类的另一数据集，阶段二可把入口切到指定配方，不能借机改模型源码或硬编码目标。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-1ea6aaba33adfae7">第二阶段提供主实验配方，为何不等同于泄漏答案？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Axstack">XStack: A Benchmark for ML Repo Migration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Princeton University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>配方让执行者知道该跑哪个实验，不公开数值目标；仅允许调整入口脚本，其余迁移冻结。若入口脚本重写冻结文件，也破坏了这个对照。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：阶段一误跑音频分类的另一数据集，阶段二可把入口切到指定配方，不能借机改模型源码或硬编码目标。</p>
+<p class="ar-learning-sources">依据：评估协议；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08472">原论文</a> · <a href="../../../../agent-research/2611.08472-xstack/">实现解读</a> · <a href="#qa-1ea6aaba33adfae7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:xstack" data-paper-title="XStack: A Benchmark for ML Repo Migration" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="XStack: A Benchmark for ML Repo Migration Agent Princeton University 2026-11-05 局部张量变换正确不等于能迁移完整实验。XStack 固定 20 个真实 PyTorch 仓库的源提交，要求 Agent 在 TPU 上移植到 JAX，交付环境安装、训练/评测和 PyTorch 权重导出三个入口。评估方在新机器全规模重跑；14 个领域包括语言模型、推荐、视觉和强化学习。原文 Appendix H 的代码规模比较也说明，达标路径不一定覆盖源库每一项功能。 仅资料收录：成本过高，不复现（审查 DONE）。仅资料收录：成本过高，不复现（审查 DONE）。不执行迁移、不下载任务数据、不生成本地指标或 GPU 收据。Appendix H 报告主实验 22,802 TPU 芯片小时（v4/v5p/v6e），其中评分重跑 16,158 芯片小时；另有 Agent 与裁判调用。Appendix F 仅 Opus 5 的 20 个单元按作者口径已为 1,844 美元。单 A100/A30 或 Mac 不能提供主实验的 TPU 环境与全矩阵预算。成本过高，不复现（审查 DONE）。本地没有运行 GPU 初步实验、生成替代分数或启动自动队列。  评测与可靠性 跨框架迁移评测 Agent 评测与可靠性：如何知道真的做对了 Appendix G 在单 A100 的初步实验能否替代主 TPU 矩阵？ 不能。初步实验覆盖 12 个较小仓库，以前向、梯度和 checkpoint 等对齐检查为主；主矩阵比较 20 个仓库、7 个 Agent 在真实 TPU 的全规模复现，两种通过率不是同一指标。 教学例：小任务的前向 logits 一致，不能推出大训练任务在新 TPU 上收敛到公布目标。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-7ba79056ba7de908">Appendix G 在单 A100 的初步实验能否替代主 TPU 矩阵？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Axstack">XStack: A Benchmark for ML Repo Migration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Princeton University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。初步实验覆盖 12 个较小仓库，以前向、梯度和 checkpoint 等对齐检查为主；主矩阵比较 20 个仓库、7 个 Agent 在真实 TPU 的全规模复现，两种通过率不是同一指标。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：小任务的前向 logits 一致，不能推出大训练任务在新 TPU 上收敛到公布目标。</p>
+<p class="ar-learning-sources">依据：论文离线与线上效果、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08472">原论文</a> · <a href="../../../../agent-research/2611.08472-xstack/">实现解读</a> · <a href="#qa-7ba79056ba7de908">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:xstack" data-paper-title="XStack: A Benchmark for ML Repo Migration" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="XStack: A Benchmark for ML Repo Migration Agent Princeton University 2026-11-05 局部张量变换正确不等于能迁移完整实验。XStack 固定 20 个真实 PyTorch 仓库的源提交，要求 Agent 在 TPU 上移植到 JAX，交付环境安装、训练/评测和 PyTorch 权重导出三个入口。评估方在新机器全规模重跑；14 个领域包括语言模型、推荐、视觉和强化学习。原文 Appendix H 的代码规模比较也说明，达标路径不一定覆盖源库每一项功能。 仅资料收录：成本过高，不复现（审查 DONE）。仅资料收录：成本过高，不复现（审查 DONE）。不执行迁移、不下载任务数据、不生成本地指标或 GPU 收据。Appendix H 报告主实验 22,802 TPU 芯片小时（v4/v5p/v6e），其中评分重跑 16,158 芯片小时；另有 Agent 与裁判调用。Appendix F 仅 Opus 5 的 20 个单元按作者口径已为 1,844 美元。单 A100/A30 或 Mac 不能提供主实验的 TPU 环境与全矩阵预算。成本过高，不复现（审查 DONE）。本地没有运行 GPU 初步实验、生成替代分数或启动自动队列。  评测与可靠性 跨框架迁移评测 Agent 评测与可靠性：如何知道真的做对了 复现时公开的 criteria.json 能否放进 Agent 工作区便于调试？ 不能作为被评估 Agent 的输入。应固定源提交并隔离目标、评分程序和历史结果；宿主在干净环境独立重跑并记录产物来源。否则命中目标无法区分迁移成功与读取答案。 教学例：测试可以读取 rubric 并判分，迁移 Agent 只能看到源仓库和规定配方；两者不能共享测试目标文件。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-d82e68a32667e4a0">复现时公开的 criteria.json 能否放进 Agent 工作区便于调试？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Axstack">XStack: A Benchmark for ML Repo Migration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Princeton University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能作为被评估 Agent 的输入。应固定源提交并隔离目标、评分程序和历史结果；宿主在干净环境独立重跑并记录产物来源。否则命中目标无法区分迁移成功与读取答案。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：测试可以读取 rubric 并判分，迁移 Agent 只能看到源仓库和规定配方；两者不能共享测试目标文件。</p>
+<p class="ar-learning-sources">依据：评估协议、复现与验证边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08472">原论文</a> · <a href="../../../../agent-research/2611.08472-xstack/">实现解读</a> · <a href="#qa-d82e68a32667e4a0">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agentheal" data-paper-title="AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers Agent University of Science and Technology of China 2026-10-29 网页可能已删除、改版、需要登录、限流或不允许抓取。简单重试不是恢复；找到标题相似页面也不一定完成原目标。AgentHeal 将能力定义成：识别持续性障碍，找合法替代资源，保留原目标及版本关系；没有合法恢复路径时诚实弃答并诊断障碍，若只有用户能解锁则请求具体协助，而不是突破访问政策。它区分同一 work 同一 version 的精确副本、同 work 不同 version 的其他版本，以及仅表面相似的 look-alike。 高成本完整实验：成本过高，不复现（审查 DONE）。诊断 TS 为 0.5、违规率为 0.25，4 个 episode、平均 1.75 步。组件状态：component_only，CPU / L1 离线评测核。没有浏览器、web actor、语义 judge 或真实任务能力比较。高成本完整实验：成本过高，不复现（审查 DONE）。只使用标准库，不下载官方数据/模型、不访问网页、不发 API、不使用 CUDA。AuditCase 中的 work/version、合法可达性、障碍和求助条件是评价侧标注；  统一评测与可靠性 Web Agent 访问障碍与目标保真恢复 Agent 评测与可靠性：如何知道真的做对了 网页被登录墙挡住后，为什么找到标题相近的页面还不能算AgentHeal恢复成功？ 替代资源可能是不同作品或不可核对来源的look-alike，也可能是同作品的旧版本。AgentHeal保留原目标：有同版本副本时应优先使用；只有其他版本时要声明差异；根本无合法替代时要弃答并解释障碍，必要时向用户求助，而不是把相似主题当作等价。 教学例：用户要论文v2的某指标，搜索到同名v1不能悄悄当v2；如果v2有机构仓库副本就应使用它，否则仅有v1时明确版本差异。 2026-11-04">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <span id="paper-agent-research-agentheal-7e583bfa" class="ar-learning-paper-anchor"></span>

@@ -253,7 +253,8 @@
         "agent-research:reflexion",
         "agent-research:ruharness",
         "agent-research:crop",
-        "agent-research:evalalloc"
+        "agent-research:evalalloc",
+        "agent-research:envopt"
       ]
     },
     {
@@ -389,7 +390,8 @@
         "agent-research:coreflect",
         "agent-research:sopbench-protocol",
         "agent-research:gaia",
-        "agent-research:autoformbench"
+        "agent-research:autoformbench",
+        "agent-research:xstack"
       ]
     }
   ]

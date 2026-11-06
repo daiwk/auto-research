@@ -7,7 +7,7 @@ hide:
 
 # 自改进先标对象：答案、经验、接口与系统版本
 
-[Agent](../index.md) · 更新 2026-11-05 · 50 篇主题资料 / 13 篇重点对照
+[Agent](../index.md) · 更新 2026-11-06 · 51 篇主题资料 / 14 篇重点对照
 
 Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。
 
@@ -38,6 +38,7 @@ Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens �
 | [Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents](../../../agent-research/2611.05139-meta-square/README.md) · [原始来源](https://arxiv.org/abs/2611.05139)<br>章节：核心公式、数据协议与实现边界、高成本完整实验 | 冻结离线Meta-Skill，在同环境、同轨迹checkpoint上有界KEEP/EVOLVE；具体编辑任务结束即弃。 | 可复用的是演化指导，不是所有任务共享的最终Harness；本地没有LLM演化器或知识学习。 |
 | [From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?](../../../agent-research/2611.05108-continual-autoresearch/README.md) · [原始来源](https://arxiv.org/abs/2611.05108)<br>章节：核心公式、数据协议与实现边界、高成本完整实验 | 相同任务流与预算配对持续、重置运行，运行后分别计算首解、最优曲线和实际最终选择。 | 效率优势可与最终效果下降并存；本地仅离线评分合同，无自主研究或记忆收益验证。 |
 | [Training LLM Agents to Automate LLM Post-Training with RSI-Dojo](../../../agent-research/2611.03698-rsi-dojo/README.md) · [原始来源](https://arxiv.org/abs/2611.03698)<br>章节：核心公式、数据协议与实现边界、高成本完整实验 | 构建可执行训练环境，筛选过程与结果均合格的轨迹，微调自动后训练Agent。 | 9B/35B-A3B与每任务5至10小时全矩阵高成本不复现；只收录，不声明运行时或权重能力。 |
+| [EnvOpt: Automated Optimization for Agent Environments](../../../agent-research/2611.07372-envopt/README.md) · [原始来源](https://arxiv.org/abs/2611.07372)<br>章节：背景与主要改动、核心公式、数据协议与实现边界 | 固定模型与 Harness，把可复用的信息表示作为跨任务资产；无训练 verifier 的成本/代理筛选之后，用独立验证决定是否保留。 | 更便宜的代理轨迹可错判，验证回归即回滚；本地仅回放选择规则，不生成环境或运行 Agent。 |
 
 </div>
 
@@ -78,6 +79,12 @@ Strategist把可执行推理结构、测量卡与训练轨迹经验组成跨任�
 Strategist将可执行推理程序与测量经验放入跨任务库；Meta²则把跨任务保留对象限制为冻结的演化知识，避免把某个任务修复永久带到另一任务。Continual AutoResearch进一步要求把首解、搜索曲线与最终选择分别评估：更快找到0.8候选但最终选择0.5，不能写成最终提升。RSI-Dojo改变的又是模型权重学习阶段，不能把阈值过滤器或未执行环境注册视为训练完成。比较前应先固定跨任务可见状态、编辑的生效范围以及验证反馈何时可见。
 
 对照来源：[strategist](../../../agent-research/2611.03618-strategist/README.md) · [meta-square](../../../agent-research/2611.05139-meta-square/README.md) · [continual-autoresearch](../../../agent-research/2611.05108-continual-autoresearch/README.md) · [rsi-dojo](../../../agent-research/2611.03698-rsi-dojo/README.md)
+
+### 跨任务保留环境、演化指导与会话经验是三种干预
+
+EnvOpt 保留能服务不同查询的环境表示，内层成本下降且代理保真才接受，验证回归即停止并回滚；Meta² 保留冻结 Meta-Skill，具体 Harness 编辑只作用于当前 run；Continual AutoResearch 固定任务流比较会话/工作区状态，独立测量搜索速度与最终选择。应分别记录变更产物的生效范围、外层验证可见性和跨任务继承对象，不能因搜索轨迹更省就推断模型能力提高。
+
+对照来源：[envopt](../../../agent-research/2611.07372-envopt/README.md) · [meta-square](../../../agent-research/2611.05139-meta-square/README.md) · [continual-autoresearch](../../../agent-research/2611.05108-continual-autoresearch/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -153,9 +160,23 @@ Strategist将可执行推理程序与测量经验放入跨任务库；Meta²则�
 
     对照来源：[strategist](../../../agent-research/2611.03618-strategist/README.md) · [reflexion](../../../agent-research/2303.11366-reflexion/README.md) · [evalalloc](../../../agent-research/2610.37276-evalalloc/README.md)
 
+### 预建跨任务文件索引和某次任务失败时追加一个工具提醒，能用同一张训练收益表吗？ {#cross-environment-index-versus-in-run-edit}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能直接合并。EnvOpt 的索引改变任务共享的环境表示，要在未用于该轮提出改动的验证任务上看成本和效果；Meta² 的提醒是当前 run 的有界 Harness 编辑，跨任务保留的是指导如何演进的知识，不是同一个提醒。
+
+    **教学例子：** 教学例：搜索任务都可复用同一目录索引；只针对一次缺失权限发出的恢复提醒不应永久植入其他任务。
+
+    对照来源：[envopt](../../../agent-research/2611.07372-envopt/README.md) · [meta-square](../../../agent-research/2611.05139-meta-square/README.md) · [continual-autoresearch](../../../agent-research/2611.05108-continual-autoresearch/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-06** · 补入 EnvOpt，明确模型/Harness 固定时可演进的第三层环境表示；与 Meta² 的单次运行编辑和 Continual AutoResearch 的会话经验测量分开。留出验证回滚不等于暴露训练金标；本地 CPU 离线核不是完整自主环境优化。
+
+涉及：[envopt](../../../agent-research/2611.07372-envopt/README.md) · [meta-square](../../../agent-research/2611.05139-meta-square/README.md) · [continual-autoresearch](../../../agent-research/2611.05108-continual-autoresearch/README.md)
 
 **2026-11-05** · 把三种常被混叫RSI的对象拆开：Meta²冻结跨任务指导，只修改当前run；Continual AutoResearch度量会话、工作区经验是否更早产生好候选，而不保证最终选得更好；RSI-Dojo用训练环境和筛选轨迹把后训练过程内化进模型，完整实验高成本不复现。Meta²与Continual AutoResearch仅实现CPU合同组件，RSI-Dojo只收录；三者均不是模型能力提升证据，完整实验高成本不复现、审查DONE。
 
@@ -177,7 +198,7 @@ Strategist将可执行推理程序与测量经验放入跨任务库；Meta²则�
 
 覆盖 43 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 50 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 51 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -231,6 +252,7 @@ Strategist将可执行推理程序与测量经验放入跨任务库；Meta²则�
 - [When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement](../../../agent-research/2610.36826-ruharness/README.md)
 - [CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization](../../../agent-research/2604.14214-crop/README.md)
 - [Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?](../../../agent-research/2610.37276-evalalloc/README.md)
+- [EnvOpt: Automated Optimization for Agent Environments](../../../agent-research/2611.07372-envopt/README.md)
 
 </details>
 

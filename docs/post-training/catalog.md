@@ -10,7 +10,9 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| On-policy distillation | [CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation](2611.07959-cord/README.md) | Tsinghua University，2026-11-05 | 未发现官方代码 | `cord-rollout`：仅低成本组件，完整实验不复现 |
 | 奖励与信用分配 | [Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling](2611.04792-dars/README.md) | National University of Singapore，2026-11-03 | 未发现官方代码 | `dars-density`：仅低成本组件，完整实验不复现 |
+| 知识蒸馏 | [RAGCompass: Generalizable Retriever Routing via Reranking](2611.05596-ragcompass/README.md) | University of Virginia，2026-11-03 | [原作者入口](https://github.com/Graph-COM/RAGCompass/tree/60c329175c4a7d1fc5ea9a4a3d88d69279aee7e6)；作者固定 v1 链接公开 MIT 仓库；本轮核实固定 commit 并独立实现分布目标，未执行仓库、未下载数据或权重。 | `ragcompass`：仅低成本组件，完整实验不复现 |
 | On-policy distillation | [Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation?](2611.04958-shuffled-opsd/README.md) | Duke University，2026-11-03 | 未发现官方代码 | `shuffled-opsd`：仅低成本组件，完整实验不复现 |
 | Agentic RL | [Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning](2611.05266-targeted-guidance/README.md) | Cursor Research / UC Berkeley，2026-11-03 | 未发现官方代码 | `targeted-guidance`：仅低成本组件，完整实验不复现 |
 | On-policy distillation | [P²-MOPD: Accelerating Multi-Teacher On-Policy Distillation via Parameter Priors](2611.03953-p2-mopd/README.md) | Australian Institute for Machine Learning, Adelaide University / StepFun，2026-11-02 | 未发现官方代码 | `p2-mopd`：仅低成本组件，完整实验不复现 |

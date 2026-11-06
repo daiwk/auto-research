@@ -8,6 +8,8 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [ConvPE: Convolutional Position Embedding Improves Transformers](<https://arxiv.org/abs/2611.07749>) | 2026-11-05 | [English](../../foundation-models/2611.07749-convpe/README-en.md) · [Chinese](../../foundation-models/2611.07749-convpe/README.md) |
+| [Turbocharging PiPNN for Proximity and k-NN Graph Building](<https://arxiv.org/abs/2611.05690v1>) | 2026-11-03 | [English](../../foundation-models/2611.05690-pipnn-ii/README-en.md) · [Chinese](../../foundation-models/2611.05690-pipnn-ii/README.md) |
 | [Coarse Semantic Blocks for Efficient Training-Free Sparse Attention](<https://arxiv.org/abs/2611.04313>) | 2026-11-03 | [English](../../foundation-models/2611.04313-semantic-block-sparse-attention/README-en.md) · [Chinese](../../foundation-models/2611.04313-semantic-block-sparse-attention/README.md) |
 | [Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training](<https://arxiv.org/abs/2611.04327>) | 2026-11-03 | [English](../../foundation-models/2611.04327-anchor-kv/README-en.md) · [Chinese](../../foundation-models/2611.04327-anchor-kv/README.md) |
 | [Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention](<https://arxiv.org/abs/2611.03768>) | 2026-11-02 | [English](../../foundation-models/2611.03768-multi-layer-indexer/README-en.md) · [Chinese](../../foundation-models/2611.03768-multi-layer-indexer/README.md) |

@@ -7,7 +7,7 @@ hide:
 
 # 推理压缩：权重、KV 缓存与服务带宽
 
-[基础模型](index.md) / 132 个问题 · 33 篇论文
+[基础模型](index.md) / 136 个问题 · 34 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">132 个问题 · 33 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">136 个问题 · 34 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:pipnn-ii" data-paper-title="Turbocharging PiPNN for Proximity and k-NN Graph Building" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Turbocharging PiPNN for Proximity and k-NN Graph Building 基础模型 University of Maryland, College Park 2026-11-03 PiPNN 先用递归分区把可能相近的点送入同一叶，再在叶内批量打分，避免逐点搜索正在构建的图。PiPNN II 用量化减少内存流量，把打分和 top-K 合并，避免先写再读完整距离矩阵。直接 k-NN 图保留叶内见到的近邻，和需要可导航边并执行剪枝的 ANNS 索引不是同一产物。论文另有 GPiPNN：平坦分段路由、分段 top-K、排序聚合及复用已见边的剪枝；这些未在本地实现。 完整 CPU/GPU 实验成本过高，不复现（审查 DONE）。L1 机制诊断，非性能复现。L1 机制诊断，非性能复现。这里只实现已解码字节的打分与 top-K；完整 CPU/GPU 实验成本过高，不复现（审查 DONE）。corrected_dot 检查 i8 范围与维数并执行偏置修正。fused_quantized_topk 接收一个查询与流式 (row, scale) 序列，按行修正、缩放、保留 K 个最优候选；同分保留较早位置。参考实现使用 Python 整数累加和浮点缩放，未声称与硬件 i32/fp32 舍入逐位一致。没有引入量化器、索引或外部数据。  推理与系统效率 量化近邻图构建 基础模型 推理压缩：权重、KV 缓存与服务带宽 PiPNN II 为什么把量化打分和 top-K 放到一起？ 量化减少读取候选向量的字节数；每个候选分数算出后直接与当前第 K 名比较，可以不先写出全距离矩阵。融合与量化是不同改动：前者减少中间分数的读写，后者减少输入向量的读写。 教学例：某叶有 100 个候选而只需前 3 个。逐行打分时保留 3 个入选项即可，不必存完 100 个分数再排序。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<span id="paper-foundation-models-pipnn-ii-e5dbbc9f" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-f1c1756d337068da">PiPNN II 为什么把量化打分和 top-K 放到一起？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Apipnn-ii">Turbocharging PiPNN for Proximity and k-NN Graph Building</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of Maryland, College Park</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>量化减少读取候选向量的字节数；每个候选分数算出后直接与当前第 K 名比较，可以不先写出全距离矩阵。融合与量化是不同改动：前者减少中间分数的读写，后者减少输入向量的读写。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：某叶有 100 个候选而只需前 3 个。逐行打分时保留 3 个入选项即可，不必存完 100 个分数再排序。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05690v1">原论文</a> · <a href="../../../../foundation-models/2611.05690-pipnn-ii/">实现解读</a> · <a href="#qa-f1c1756d337068da">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:pipnn-ii" data-paper-title="Turbocharging PiPNN for Proximity and k-NN Graph Building" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Turbocharging PiPNN for Proximity and k-NN Graph Building 基础模型 University of Maryland, College Park 2026-11-03 PiPNN 先用递归分区把可能相近的点送入同一叶，再在叶内批量打分，避免逐点搜索正在构建的图。PiPNN II 用量化减少内存流量，把打分和 top-K 合并，避免先写再读完整距离矩阵。直接 k-NN 图保留叶内见到的近邻，和需要可导航边并执行剪枝的 ANNS 索引不是同一产物。论文另有 GPiPNN：平坦分段路由、分段 top-K、排序聚合及复用已见边的剪枝；这些未在本地实现。 完整 CPU/GPU 实验成本过高，不复现（审查 DONE）。L1 机制诊断，非性能复现。L1 机制诊断，非性能复现。这里只实现已解码字节的打分与 top-K；完整 CPU/GPU 实验成本过高，不复现（审查 DONE）。corrected_dot 检查 i8 范围与维数并执行偏置修正。fused_quantized_topk 接收一个查询与流式 (row, scale) 序列，按行修正、缩放、保留 K 个最优候选；同分保留较早位置。参考实现使用 Python 整数累加和浮点缩放，未声称与硬件 i32/fp32 舍入逐位一致。没有引入量化器、索引或外部数据。  推理与系统效率 量化近邻图构建 基础模型 推理压缩：权重、KV 缓存与服务带宽 为什么将数据库字节转换成无符号后，必须减去 128 倍查询字节和？ 硬件取数据库字节 a=原值+128 与有符号查询 b 相乘。展开后每项多出 128b，求和得到同一查询复用的修正量。查询和为零时错误恰好消失，测试不能只选这一类查询。 原图一条 lane：偏置点积 883、查询字节和 5，修正为 883−128×5=243；直接把 883 当点积是错的。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-dc57958e13deb5d5">为什么将数据库字节转换成无符号后，必须减去 128 倍查询字节和？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Apipnn-ii">Turbocharging PiPNN for Proximity and k-NN Graph Building</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of Maryland, College Park</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>硬件取数据库字节 a=原值+128 与有符号查询 b 相乘。展开后每项多出 128b，求和得到同一查询复用的修正量。查询和为零时错误恰好消失，测试不能只选这一类查询。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>原图一条 lane：偏置点积 883、查询字节和 5，修正为 883−128×5=243；直接把 883 当点积是错的。</p>
+<p class="ar-learning-sources">依据：原论文关键图、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05690v1">原论文</a> · <a href="../../../../foundation-models/2611.05690-pipnn-ii/">实现解读</a> · <a href="#qa-dc57958e13deb5d5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:pipnn-ii" data-paper-title="Turbocharging PiPNN for Proximity and k-NN Graph Building" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Turbocharging PiPNN for Proximity and k-NN Graph Building 基础模型 University of Maryland, College Park 2026-11-03 PiPNN 先用递归分区把可能相近的点送入同一叶，再在叶内批量打分，避免逐点搜索正在构建的图。PiPNN II 用量化减少内存流量，把打分和 top-K 合并，避免先写再读完整距离矩阵。直接 k-NN 图保留叶内见到的近邻，和需要可导航边并执行剪枝的 ANNS 索引不是同一产物。论文另有 GPiPNN：平坦分段路由、分段 top-K、排序聚合及复用已见边的剪枝；这些未在本地实现。 完整 CPU/GPU 实验成本过高，不复现（审查 DONE）。L1 机制诊断，非性能复现。L1 机制诊断，非性能复现。这里只实现已解码字节的打分与 top-K；完整 CPU/GPU 实验成本过高，不复现（审查 DONE）。corrected_dot 检查 i8 范围与维数并执行偏置修正。fused_quantized_topk 接收一个查询与流式 (row, scale) 序列，按行修正、缩放、保留 K 个最优候选；同分保留较早位置。参考实现使用 Python 整数累加和浮点缩放，未声称与硬件 i32/fp32 舍入逐位一致。没有引入量化器、索引或外部数据。  推理与系统效率 量化近邻图构建 基础模型 推理压缩：权重、KV 缓存与服务带宽 为什么不能先按整数点积取 top-K，再乘数据库行的量化尺度？ 尺度随候选变化，乘法会改变候选间顺序。负点积路径必须先为每条候选应用数据库行与查询尺度，再按较小距离取 K；仅查询尺度正且固定，不改变同一查询的顺序。 教学例：点积 20、10 分别乘行尺度 0.1、1，量化恢复的相似度为 2、10。先选较大整数会挑错候选。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-ac52feeffbe422a1">为什么不能先按整数点积取 top-K，再乘数据库行的量化尺度？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Apipnn-ii">Turbocharging PiPNN for Proximity and k-NN Graph Building</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of Maryland, College Park</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>尺度随候选变化，乘法会改变候选间顺序。负点积路径必须先为每条候选应用数据库行与查询尺度，再按较小距离取 K；仅查询尺度正且固定，不改变同一查询的顺序。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：点积 20、10 分别乘行尺度 0.1、1，量化恢复的相似度为 2、10。先选较大整数会挑错候选。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05690v1">原论文</a> · <a href="../../../../foundation-models/2611.05690-pipnn-ii/">实现解读</a> · <a href="#qa-ac52feeffbe422a1">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:pipnn-ii" data-paper-title="Turbocharging PiPNN for Proximity and k-NN Graph Building" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Turbocharging PiPNN for Proximity and k-NN Graph Building 基础模型 University of Maryland, College Park 2026-11-03 PiPNN 先用递归分区把可能相近的点送入同一叶，再在叶内批量打分，避免逐点搜索正在构建的图。PiPNN II 用量化减少内存流量，把打分和 top-K 合并，避免先写再读完整距离矩阵。直接 k-NN 图保留叶内见到的近邻，和需要可导航边并执行剪枝的 ANNS 索引不是同一产物。论文另有 GPiPNN：平坦分段路由、分段 top-K、排序聚合及复用已见边的剪枝；这些未在本地实现。 完整 CPU/GPU 实验成本过高，不复现（审查 DONE）。L1 机制诊断，非性能复现。L1 机制诊断，非性能复现。这里只实现已解码字节的打分与 top-K；完整 CPU/GPU 实验成本过高，不复现（审查 DONE）。corrected_dot 检查 i8 范围与维数并执行偏置修正。fused_quantized_topk 接收一个查询与流式 (row, scale) 序列，按行修正、缩放、保留 K 个最优候选；同分保留较早位置。参考实现使用 Python 整数累加和浮点缩放，未声称与硬件 i32/fp32 舍入逐位一致。没有引入量化器、索引或外部数据。  推理与系统效率 量化近邻图构建 基础模型 推理压缩：权重、KV 缓存与服务带宽 CPU 流式 top-K 应用哪些负控？通过后能不能声称复现 H100 性能？ 用直接有符号点积加全量排序作独立参考，测试非零查询和、不同尺度、同分顺序及只遍历一次的迭代器。它验证分数与排序语义，未验证量化器、SIMD/TMA 核、分区或整图速度。 教学例：两个候选缩放后同分时，参考保留较早输入；若重复遍历流会触发测试失败。即使测试通过，也没有测量 Hopper kernel。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-f3665f8c57c55373">CPU 流式 top-K 应用哪些负控？通过后能不能声称复现 H100 性能？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Apipnn-ii">Turbocharging PiPNN for Proximity and k-NN Graph Building</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of Maryland, College Park</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>用直接有符号点积加全量排序作独立参考，测试非零查询和、不同尺度、同分顺序及只遍历一次的迭代器。它验证分数与排序语义，未验证量化器、SIMD/TMA 核、分区或整图速度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个候选缩放后同分时，参考保留较早输入；若重复遍历流会触发测试失败。即使测试通过，也没有测量 Hopper kernel。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05690v1">原论文</a> · <a href="../../../../foundation-models/2611.05690-pipnn-ii/">实现解读</a> · <a href="#qa-f3665f8c57c55373">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:multi-layer-indexer" data-paper-title="Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention 基础模型 Writer AI Research, Writer Inc. 2026-11-02 DSA 层通常先扫描索引缓存、取 top-k，再执行稀疏 attention。MLI 让当前层读较早 full layer 的选择，当前索引器于是可在另一 CUDA stream 与主计算重叠。它可与 IndexCache 组合，但不是跨生成 token 复用过期选择。依据固定 v1 §3、§4、Appendix A。 成本过高，不复现（审查 DONE）。已核查 selection routing、双 stream 生命周期、IndexCache 组合、实验资源和作者代码。没有本地调度器、稀疏 kernel、SGLang 安装、代理计时器或假 metrics；不会把常数延迟模拟器宣称为生产路径。  推理与系统效率 稀疏注意力双流调度 基础模型 推理压缩：权重、KV 缓存与服务带宽 Multi-layer Indexer 为什么能让 indexer 与 attention 重叠，而普通 DSA 要串行？ 普通DSA的attention必须等本层selection完成。MLI改为消费较早full层已经产生的selection，当前索引器便可为后续消费者并行工作。改变的是依赖与消费层，不是把索引器运算凭空省掉。 教学例：第2层attention使用第1层selection时，第2层indexer可同时计算第3层将用的selection；若attention仍等自己的selection，另开stream也不能消除依赖。 2026-11-04">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-multi-layer-indexer-a806ea48" class="ar-learning-paper-anchor"></span>

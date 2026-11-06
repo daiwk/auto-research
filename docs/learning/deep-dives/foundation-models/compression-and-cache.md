@@ -7,7 +7,7 @@ hide:
 
 # 推理压缩先找瓶颈：权重、KV 内容与缓存层级
 
-[基础模型](../index.md) · 更新 2026-11-04 · 33 篇主题资料 / 10 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-06 · 34 篇主题资料 / 11 篇重点对照
 
 AWQ 减权重位宽，GQA 减 KV 头，DropKV 与 TwinKV 改保留内容，KVMEM 管可执行历史视图，Remote KV Tiers 解决跨层级加载。它们可以组合，但不能用一个“压缩率”解释质量、可恢复性和端到端速度。 FoldBias另解决压缩缓存的接口障碍：把静态bias折进同维key，但未来query漂移仍会引入误差。
 
@@ -35,6 +35,7 @@ AWQ 减权重位宽，GQA 减 KV 头，DropKV 与 TwinKV 改保留内容，KVMEM
 | [Hilbert Operator for Progressive Encoding (HOPE): A Mathematical Framework for Deconstructing Learned Representations in Deep Networks](../../../foundation-models/2607.21366-hope-hilbert/README.md) · [原始来源](https://arxiv.org/abs/2607.21366v1)<br>章节：背景与主要改动、核心公式 | 以biased Gaussian-ReLU核和Hilbert代理计算剪枝率，支持小Dense层均值补偿与单步恢复。 | 假设激活的Gaussian代理，不实现MERGE/EVICT/完整HOPE或DEFT；与Sleep的Hope架构不是同一方法。 |
 | [Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels](../../../foundation-models/2610.36520-fold-bias/README.md) · [原始来源](https://arxiv.org/abs/2610.36520v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 从上下文query拟合均值投影为1的共享方向，以K+√dβu折叠静态bias；实际bf16舍入后再最小二乘refit V。 | 不像GQA减少KV头，也不负责AM选key/NNLS；不对任意未来query等价，值更换或舍入后不能直接套同值未舍入误差界。 |
 | [Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention](../../../foundation-models/2611.03768-multi-layer-indexer/README.md) · [原始来源](https://arxiv.org/abs/2611.03768)<br>章节：背景与主要改动、核心公式、成本判断与复现边界 | 让当前层消费较早full layer为同一token计算的新selection，将索引器放到侧stream，与主stream的attention、投影和FFN重叠；首次消费时join并保留tensor生命周期。 | 改变依赖与调度，不压缩KV，也不是复用上一token的过期selection。完整路径需8张H200、TP8大模型与SGLang内核，本库仅review，未实现runtime或生成吞吐metrics。 |
+| [Turbocharging PiPNN for Proximity and k-NN Graph Building](../../../foundation-models/2611.05690-pipnn-ii/README.md) · [原始来源](https://arxiv.org/abs/2611.05690v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 在近邻图构建的叶内，对已解码的量化候选做有符号点积修正，应用各行尺度后直接更新 top-K，避免物化完整候选分数矩阵。 | 缩小的是图构建的输入表示和中间分数流量，不是 LM 权重、KV 或跨层依赖；本地只做 CPU 分数和排序参考，未实现编码、分区、剪枝或生产 SIMD/Hopper 核。 |
 
 </div>
 
@@ -69,6 +70,12 @@ GQA通过共享KV head改变每个token的存储结构；FoldBias保持head维�
 GQA减少每个位置的KV heads，KVMEM决定历史block何时进入执行视图；MLI不以减少KV字节为目标，而是把selection的生产与消费分到不同full layers，让同一token的索引工作和主计算重叠。回退步数按保留索引器的full layers计，不是简单减去物理层号；开头没有前驱的层仍用标准schedule。并发执行还必须在首次消费者等待事件、持有输入和输出直到join，否则逻辑依赖图正确也可能出现读未完成或内存复用。它不是跨token缓存旧selection，单CPU依赖模拟或普通CUDA同步前向也不能证明论文overlap；本库仅收录review，完整高成本实验不复现，无本地运行或吞吐证据。
 
 对照来源：[gqa](../../../reproductions/2305.13245-gqa/README.md) · [kvmem](../../../reproductions/2609.04852-kvmem/README.md) · [multi-layer-indexer](../../../foundation-models/2611.03768-multi-layer-indexer/README.md)
+
+### 减少输入字节、减少中间写回与重叠调度不可混算
+
+AWQ 通过激活感知缩放保护模型权重的低比特表示；PiPNN II 量化的是外部近邻图的数据点，且在每条候选缩放之后直接维护最优 K，去掉完整距离矩阵写回。MLI 则重排同 token 跨层 selection 的关键依赖，未以字节压缩为目标。分别按权重误差、图构建 recall/时间与真实服务流重叠验收；小矩阵和全排序一致只支持 PiPNN 的局部打分语义，不能推出大图召回或 kernel 性能。
+
+对照来源：[awq](../../../reproductions/2306.00978-awq/README.md) · [pipnn-ii](../../../foundation-models/2611.05690-pipnn-ii/README.md) · [multi-layer-indexer](../../../foundation-models/2611.03768-multi-layer-indexer/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -134,9 +141,23 @@ GQA减少每个位置的KV heads，KVMEM决定历史block何时进入执行视�
 
     对照来源：[multi-layer-indexer](../../../foundation-models/2611.03768-multi-layer-indexer/README.md) · [kvmem](../../../reproductions/2609.04852-kvmem/README.md)
 
+### PiPNN II 和 MLI 都把步骤靠得更近，为什么不能用同一种“省中间张量”来解释？ {#cross-nov06-score-fusion-versus-scheduling}
+
+??? note "展开答案与例子"
+
+    **答案：** PiPNN II 在同一条候选上执行打分和 top-K 更新，避免先物化所有距离，且必须先应用各行尺度。MLI 仍要计算新 selection；让较后 full layer 消费此前结果，从而能并行做同 token 的索引和主计算。一个改变物化，另一个改变依赖和重叠，不能用一次 CPU 全排序比对证明 GPU 重叠。
+
+    **教学例子：** 教学例：100 行只留 3 个距离，检验的是没有全表写回且结果相同；两条 CUDA stream 能否同时推进，需另测事件和首次消费者。
+
+    对照来源：[pipnn-ii](../../../foundation-models/2611.05690-pipnn-ii/README.md) · [multi-layer-indexer](../../../foundation-models/2611.03768-multi-layer-indexer/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-06** · 增加 PiPNN II，与 AWQ、MLI 比较输入位宽、中间分数写回与关键路径；注明候选缩放后排序及本地 CPU 语义参考不代表完整图构建性能。
+
+涉及：[pipnn-ii](../../../foundation-models/2611.05690-pipnn-ii/README.md)
 
 **2026-11-04** · 收录MLI并与GQA、KVMEM对照：它重排同token跨full layer的selection依赖，不压缩KV、不复用旧token选择。注明事件和张量生命周期条件；完整8H200实验成本过高不复现，本库仅review、无runtime或吞吐指标。
 
@@ -154,7 +175,7 @@ GQA减少每个位置的KV heads，KVMEM决定历史block何时进入执行视�
 
 覆盖 29 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 33 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 34 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -191,6 +212,7 @@ GQA减少每个位置的KV heads，KVMEM决定历史block何时进入执行视�
 - [Hilbert Operator for Progressive Encoding (HOPE): A Mathematical Framework for Deconstructing Learned Representations in Deep Networks](../../../foundation-models/2607.21366-hope-hilbert/README.md)
 - [Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels](../../../foundation-models/2610.36520-fold-bias/README.md)
 - [Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention](../../../foundation-models/2611.03768-multi-layer-indexer/README.md)
+- [Turbocharging PiPNN for Proximity and k-NN Graph Building](../../../foundation-models/2611.05690-pipnn-ii/README.md)
 
 </details>
 

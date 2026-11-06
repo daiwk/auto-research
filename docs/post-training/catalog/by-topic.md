@@ -41,6 +41,7 @@
 
 ### on-policy / context 蒸馏
 
+- [CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation](../2611.07959-cord/README.md)（`cord-rollout`）：普通 OPD 的教师只给学生已经访问的前缀评分，难以覆盖学生很少走到的教师路径。CoRD 不改每状态的反向 KL 监督，改变的是产生前缀的采样分布。
 - [Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation?](../2611.04958-shuffled-opsd/README.md)（`shuffled-opsd`）：OPSD 中学生根据问题采样，冻结初始教师在同一生成前缀上评分，但额外看到 worked example。本文区分“双方共享的问题”和“只有教师看到的示例”：用另一个问题的完整示例作教师上下文，打乱共享问题的 whitespace 词块，却保留教师示例的顺序。
 - [P²-MOPD: Accelerating Multi-Teacher On-Policy Distillation via Parameter Priors](../2611.03953-p2-mopd/README.md)（`p2-mopd`）：多教师 OPD 用各领域专家监督学生自己的轨迹，但一个已合并的学生可能长期学不到某个专家的方向。P²-MOPD 不只改合并初始点，而是把每个 projection 写成“自由学生权重 + 可学习系数乘固定专家任务向量”。
 - [SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding](../2611.02846-specopd/README.md)（`specopd`）：普通 OPD 要逐轮 draft-and-verify 才能继续收集上下文。SpecOPD 在已有 reference 的多个 anchor 上重新采当前 draft 的私有续写，合并成共享 trunk 的 proposal tree，再并行给教师打分。
@@ -118,6 +119,7 @@
 
 ### 教师锚点与 SFT-RL 混合
 
+- [RAGCompass: Generalizable Retriever Routing via Reranking](../2611.05596-ragcompass/README.md)（`ragcompass`）：固定候选池的 query-only 分类器可能不能给从未见过的检索器打分。RAGCompass 把各检索器返回的整组证据作为候选，复用同一个 Qwen3-Reranker-0.6B 独立读每组 passage，不依赖检索器身份或各自不可比的置信度。
 - [CSD: Common-Support Distillation for Cross-Tokenizer Knowledge Transfer](../2610.28895-csd/README.md)（`csd`）：师生词表大小、token ID 与分词边界不一致，不能直接逐坐标 KL。CSD 先按原文字符区间对齐 chunk，再通过 **解码文本等价** 构造共同事件。
 - [EliteReplay: Preserving Diverse Solutions in RL Post-Training via Quality-Diversity Search](../2610.22290-elite-replay/README.md)（`elite-replay`）：单纯提高正确率的 RL 可能压缩正确解法的覆盖范围。EliteReplay 先用冻结基模和 MAP-Elites 收集不同正确策略，训练时持续回放固定档案。
 - [Training-Free On-Policy Distillation](../2610.22236-tf-opd/README.md)（`tf-opd`）：共同初始化的专家模型，其线性层融合可以写成匹配各教师输出的最小二乘。关键不是任意协方差，而是每个教师在**自己生成的、经过终止和循环筛选的答案**上实际遇到的输入二阶矩；统计按 token 数归一，不能让长答案自然压倒其他领域。

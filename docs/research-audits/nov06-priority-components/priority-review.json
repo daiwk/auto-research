@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-11-06",
+  "all_sources_exhaustive": false,
+  "official_directories": [
+    {
+      "organization": "Google Research",
+      "source_url": "https://research.google/pubs/",
+      "status": "bounded_first_page_retrieved",
+      "new_paper_delta_known": false,
+      "new_paper_delta": null
+    },
+    {
+      "organization": "Google DeepMind",
+      "source_url": "https://deepmind.google/research/publications/",
+      "status": "bounded_first_page_retrieved",
+      "latest_visible_entry": "EmbeddingGemma 2 (October 27)",
+      "new_paper_delta_known": false,
+      "new_paper_delta": null
+    },
+    {
+      "organization": "Meta",
+      "source_url": "https://ai.meta.com/research/publications/",
+      "alternate_url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=1",
+      "status": "canonical_unavailable_alternate_directory_not_current_window_evidence",
+      "new_paper_delta_known": false,
+      "new_paper_delta": null
+    }
+  ],
+  "official_repository_search": {
+    "scope": "GitHub Search API, created >= 2026-11-04, fork:false; repository creation is not paper publication",
+    "incomplete_results": false,
+    "new_repositories_by_organization": {"google-research": 0, "google-deepmind": 2, "facebookresearch": 1},
+    "observations": [
+      {"source_url": "https://github.com/google-deepmind/alphaevolve", "decision": "software repository, companion paper link not verified; not a new paper based on repository date"},
+      {"source_url": "https://github.com/google-deepmind/pluralistic_agents", "decision": "public software/data, companion title Scaling Public Input on AI Policy with Pluralistic Agents has no independently verified manuscript or DOI in this check; open lead"},
+      {"source_url": "https://github.com/facebookresearch/sgl-muse-mega", "decision": "GB300 SGLang plugin for the earlier Muse Spark Open release, not a distinct paper"}
+    ]
+  },
+  "official_release_disambiguation": [
+    {"source_url": "https://research.google/blog/agile-deliberation-how-ai-helps-humans-define-the-gray-areas/", "prior_source": "https://research.google/conferences-and-events/google-at-cvpr-2026/", "decision": "November 4 blog discusses a paper already listed at June CVPR 2026; not a new first publication"},
+    {"source_url": "https://deepmind.google/models/model-cards/gemini-omni-1-2-flash/", "decision": "November 5 official model card, not a separate paper with a new disclosed reproducible mechanism"},
+    {"source_url": "https://research.google/blog/detecting-signs-of-hypertension-using-wearable-sensors/", "decision": "wearable hypertension study outside the selected recommendation, foundation-model, post-training and agent scope"}
+  ],
+  "verified_priority_papers": [
+    {"id": "2611.05690", "key": "pipnn-ii", "priority_organization": "Google Research", "affiliation_role": "verified coauthor affiliation, not first-author affiliation", "source_url": "https://arxiv.org/html/2611.05690v1", "announced_on": "2026-11-05"},
+    {"id": "2611.05596", "key": "ragcompass", "priority_organization": "Meta", "affiliation_role": "verified coauthor affiliation, not first-author affiliation", "source_url": "https://arxiv.org/html/2611.05596v1", "announced_on": "2026-11-05"}
+  ],
+  "other_reviewed_leads": [
+    {"id": "2611.07425", "source_url": "https://arxiv.org/html/2611.07425v1", "status": "production_control_not_verified_for_revenue_comparison", "decision": "Section 4.4 identifies GR4AD for QPS. Section 4.5 reports revenue lift and traffic, but does not identify the revenue experiment's control. Do not substitute the throughput comparator as the business control."},
+    {"id": "2611.03272", "source_url": "https://arxiv.org/abs/2611.03272v1", "status": "older_lead_outside_fixed_announcement_window", "decision": "HERO v1 predates this November 5–6 intake; not counted as new or dispositioned in this cohort."},
+    {"id": "2611.08156", "source_url": "https://arxiv.org/abs/2611.08156v1", "status": "outside_fixed_delivery", "decision": "The paper uses a Meta encoder, which does not make its authors Meta-affiliated. The linked author repository was empty at review; not represented as released source or an implementation."}
+  ]
+}

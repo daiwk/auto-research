@@ -87,6 +87,10 @@
 
 ## 注意力与长上下文
 
+### 卷积位置偏置
+
+- [ConvPE: Convolutional Position Embedding Improves Transformers](../../foundation-models/2611.07749-convpe/README.md)（`convpe`）：RoPE 旋转 query/key；ConvPE 改的是 softmax 前的加性分数。它先把当前层隐状态投影到少量通道，再从当前及最近若干隐状态学习各相对距离的偏置。每个查询只得到窗口内偏置；**窗口外偏置为零，不是把远处 key 屏蔽**。因果和 padding mask 仍由注意力层负责。论文还讨论分组、低秩与二维变体，此处仅实现 §3.1 的默认无分组、无分解一维公式。
+
 ### 跨层共享状态与测试时训练
 
 - [Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training](../../foundation-models/2611.04327-anchor-kv/README.md)（`anchor-kv`）：不同层可能存储相近信息，却使用不同坐标基。Anchor 让一组层共享一个 recurrent state，以各层可学习 read-map 变换读出，再由输入相关 gate 与局部 SWA 合并。训练时保留 interior TTT 分支，部署时才删除，不能把部署结构直接当作训练配方。依据固定 v1 §3.2、§4.1、Appendix C。
@@ -342,6 +346,10 @@
 - [BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models](../../reproductions/2301.12597-blip2/README.md)（`blip2`）：BLIP-2 冻结已有视觉 encoder 和 LLM，只训练轻量 Q-Former。固定数量的可学习 query 通过 cross-attention 从视觉 token 提取与语言最相关的信息；第一阶段做图文表征学习，第二阶段将 query 输出投影成冻结 LLM 的 soft visual prompt。
 
 ## 推理与系统效率
+
+### 量化近邻图构建
+
+- [Turbocharging PiPNN for Proximity and k-NN Graph Building](../../foundation-models/2611.05690-pipnn-ii/README.md)（`pipnn-ii`）：PiPNN 先用递归分区把可能相近的点送入同一叶，再在叶内批量打分，避免逐点搜索正在构建的图。PiPNN II 用量化减少内存流量，把打分和 top-K 合并，避免先写再读完整距离矩阵。直接 k-NN 图保留叶内见到的近邻，和需要可导航边并执行剪枝的 ANNS 索引不是同一产物。论文另有 GPiPNN：平坦分段路由、分段 top-K、排序聚合及复用已见边的剪枝；这些未在本地实现。
 
 ### 稀疏注意力选择与服务重叠
 

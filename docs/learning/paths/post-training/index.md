@@ -25,12 +25,12 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="student-trajectory-distillation/">轨迹蒸馏：学生、提案与前缀分布</a></h2>
 <p>学生总在自己的错误前缀上继续生成，为什么只模仿教师完整答案可能教不到那里？</p>
-<p class="ar-learning-topic-meta">172 个问题 · 43 篇论文</p>
+<p class="ar-learning-topic-meta">176 个问题 · 44 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="teacher-and-context/">教师与纠错：额外信息何时能帮到学生</a></h2>
 <p>教师看到了答案、图像证据或专长提示，怎样把帮助传给没有这些信息的学生？</p>
-<p class="ar-learning-topic-meta">196 个问题 · 49 篇论文</p>
+<p class="ar-learning-topic-meta">200 个问题 · 50 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="data-and-budget/">数据与预算：下一份算力花在哪里</a></h2>

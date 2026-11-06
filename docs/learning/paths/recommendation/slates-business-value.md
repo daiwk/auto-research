@@ -7,7 +7,7 @@ hide:
 
 # 列表与业务控制：重排、出价和长期价值
 
-[搜广推](index.md) / 152 个问题 · 38 篇论文
+[搜广推](index.md) / 156 个问题 · 39 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">152 个问题 · 38 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">156 个问题 · 39 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:ice" data-paper-title="Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking 搜广推与 LLM 应用 Alibaba Taobao &amp; Tmall Group 2026-11-05 重排器把整个列表交给用户，不代表用户看到了每个位置。ICE 将展示后的行为分解成「是否到达并曝光」与「曝光后是否点击」，让深度分布约束到达概率，再用曝光概率抑制点击分支的上下文噪声。点击分布的列表级监督建模位置间的竞争；原有生成器保持不变，由评估器为候选序列算期望价值。 完整实验成本过高，不复现（审查 DONE）。本地交付：L1 张量机制组件。只验证浏览深度、停止梯度门控和点击分布损失；不训练生产评估器。完整实验成本过高，不复现（审查 DONE）。输入为合成深度 logits、点击 logits、达到前缀和二值点击。实现 Eq. 8–13 的尾和、门控、损失与联合效用算术，不实现生成器、共享 embedding 或训练后的点击网络。用 log-tail/log-head 计算曝光 BCE，避免极端 logits 先饱和为 0/1；拒绝未到达位置上的点击、非前缀曝光及零深度输入，因为论文深度支持不含零。  重排与混排 曝光感知与序列评估 搜广推 列表与业务控制：重排、出价和长期价值 列表已经展示，为什么不能把条件 CTR 当成展示后点击概率？ 条件 CTR 的分母只含实际曝光，未到达的位置根本没有点击机会。ICE 把达到概率乘上条件 CTR，再求列表效用。 示意：两个位置条件 CTR 都是 0.4，达到概率分别为 1 和 0.25，则展示后点击概率分别是 0.4 和 0.1。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 列表与业务控制：重排、出价和长期价值</a></p>
+<span id="paper-recommendation-ice-9a64b4f8" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-093ad981dfb8e93e">列表已经展示，为什么不能把条件 CTR 当成展示后点击概率？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aice">Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Alibaba Taobao &amp; Tmall Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>条件 CTR 的分母只含实际曝光，未到达的位置根本没有点击机会。ICE 把达到概率乘上条件 CTR，再求列表效用。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两个位置条件 CTR 都是 0.4，达到概率分别为 1 和 0.25，则展示后点击概率分别是 0.4 和 0.1。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07591">原论文</a> · <a href="../../../../recommendation-components/2611.07591-ice/">实现解读</a> · <a href="#qa-093ad981dfb8e93e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:ice" data-paper-title="Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking 搜广推与 LLM 应用 Alibaba Taobao &amp; Tmall Group 2026-11-05 重排器把整个列表交给用户，不代表用户看到了每个位置。ICE 将展示后的行为分解成「是否到达并曝光」与「曝光后是否点击」，让深度分布约束到达概率，再用曝光概率抑制点击分支的上下文噪声。点击分布的列表级监督建模位置间的竞争；原有生成器保持不变，由评估器为候选序列算期望价值。 完整实验成本过高，不复现（审查 DONE）。本地交付：L1 张量机制组件。只验证浏览深度、停止梯度门控和点击分布损失；不训练生产评估器。完整实验成本过高，不复现（审查 DONE）。输入为合成深度 logits、点击 logits、达到前缀和二值点击。实现 Eq. 8–13 的尾和、门控、损失与联合效用算术，不实现生成器、共享 embedding 或训练后的点击网络。用 log-tail/log-head 计算曝光 BCE，避免极端 logits 先饱和为 0/1；拒绝未到达位置上的点击、非前缀曝光及零深度输入，因为论文深度支持不含零。  重排与混排 曝光感知与序列评估 搜广推 列表与业务控制：重排、出价和长期价值 如何从深度分布得到单调曝光，点击分支为何不反传这条门控？ 第 k 位曝光是所有 T≥k 的尾和，越往后累加的集合越小。点击分支把这个值当置信度使用，停止梯度避免经门控直接改写曝光分支。 示意：三种深度概率为 0.2、0.3、0.5，则曝光为 1、0.8、0.5。改变点击损失时，门控本身不向这三个深度 logits 回传。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 列表与业务控制：重排、出价和长期价值</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-f727dd1da760a199">如何从深度分布得到单调曝光，点击分支为何不反传这条门控？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aice">Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Alibaba Taobao &amp; Tmall Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>第 k 位曝光是所有 T≥k 的尾和，越往后累加的集合越小。点击分支把这个值当置信度使用，停止梯度避免经门控直接改写曝光分支。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>三种深度概率为 0.2、0.3、0.5，则曝光为 1、0.8、0.5。改变点击损失时，门控本身不向这三个深度 logits 回传。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议、代码映射与结果边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07591">原论文</a> · <a href="../../../../recommendation-components/2611.07591-ice/">实现解读</a> · <a href="#qa-f727dd1da760a199">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:ice" data-paper-title="Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking 搜广推与 LLM 应用 Alibaba Taobao &amp; Tmall Group 2026-11-05 重排器把整个列表交给用户，不代表用户看到了每个位置。ICE 将展示后的行为分解成「是否到达并曝光」与「曝光后是否点击」，让深度分布约束到达概率，再用曝光概率抑制点击分支的上下文噪声。点击分布的列表级监督建模位置间的竞争；原有生成器保持不变，由评估器为候选序列算期望价值。 完整实验成本过高，不复现（审查 DONE）。本地交付：L1 张量机制组件。只验证浏览深度、停止梯度门控和点击分布损失；不训练生产评估器。完整实验成本过高，不复现（审查 DONE）。输入为合成深度 logits、点击 logits、达到前缀和二值点击。实现 Eq. 8–13 的尾和、门控、损失与联合效用算术，不实现生成器、共享 embedding 或训练后的点击网络。用 log-tail/log-head 计算曝光 BCE，避免极端 logits 先饱和为 0/1；拒绝未到达位置上的点击、非前缀曝光及零深度输入，因为论文深度支持不含零。  重排与混排 曝光感知与序列评估 搜广推 列表与业务控制：重排、出价和长期价值 列表 KL 和逐位置条件点击 BCE 为什么不是重复监督？ BCE 在已曝光位置分别校准绝对点击率；KL 通过归一化分布比较相对点击分配。零点击列表的 KL 目标均匀，并不要求每个位置的条件 CTR 等于 1/L。 示意：所有位置 logit 同时加 1，softmax 不变，条件点击 sigmoid 变大；所以两项 loss 对共同偏移的反应不同。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 列表与业务控制：重排、出价和长期价值</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-a523fd1ee353df23">列表 KL 和逐位置条件点击 BCE 为什么不是重复监督？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aice">Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Alibaba Taobao &amp; Tmall Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>BCE 在已曝光位置分别校准绝对点击率；KL 通过归一化分布比较相对点击分配。零点击列表的 KL 目标均匀，并不要求每个位置的条件 CTR 等于 1/L。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>所有位置 logit 同时加 1，softmax 不变，条件点击 sigmoid 变大；所以两项 loss 对共同偏移的反应不同。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议、代码映射与结果边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07591">原论文</a> · <a href="../../../../recommendation-components/2611.07591-ice/">实现解读</a> · <a href="#qa-a523fd1ee353df23">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:ice" data-paper-title="Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking 搜广推与 LLM 应用 Alibaba Taobao &amp; Tmall Group 2026-11-05 重排器把整个列表交给用户，不代表用户看到了每个位置。ICE 将展示后的行为分解成「是否到达并曝光」与「曝光后是否点击」，让深度分布约束到达概率，再用曝光概率抑制点击分支的上下文噪声。点击分布的列表级监督建模位置间的竞争；原有生成器保持不变，由评估器为候选序列算期望价值。 完整实验成本过高，不复现（审查 DONE）。本地交付：L1 张量机制组件。只验证浏览深度、停止梯度门控和点击分布损失；不训练生产评估器。完整实验成本过高，不复现（审查 DONE）。输入为合成深度 logits、点击 logits、达到前缀和二值点击。实现 Eq. 8–13 的尾和、门控、损失与联合效用算术，不实现生成器、共享 embedding 或训练后的点击网络。用 log-tail/log-head 计算曝光 BCE，避免极端 logits 先饱和为 0/1；拒绝未到达位置上的点击、非前缀曝光及零深度输入，因为论文深度支持不含零。  重排与混排 曝光感知与序列评估 搜广推 列表与业务控制：重排、出价和长期价值 浏览深度只有 1 到 L 时，如何处理首位未曝光、以及几乎为零的尾和？ 首位未曝光不在此模型支持内，明确拒绝而不伪造标签。合法尾部用 logcumsumexp 计算曝光和未曝光的 log 概率，避免先算接近 0 的概率再取 log。 示意：两位置深度 logits 为 1000 和 -1000，若实际到达位置 2，负 log 概率接近 2000，仍应有有限损失而不是把尾概率直接舍为 0。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 列表与业务控制：重排、出价和长期价值</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-424ab97878afc913">浏览深度只有 1 到 L 时，如何处理首位未曝光、以及几乎为零的尾和？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aice">Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Alibaba Taobao &amp; Tmall Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>首位未曝光不在此模型支持内，明确拒绝而不伪造标签。合法尾部用 logcumsumexp 计算曝光和未曝光的 log 概率，避免先算接近 0 的概率再取 log。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两位置深度 logits 为 1000 和 -1000，若实际到达位置 2，负 log 概率接近 2000，仍应有有限损失而不是把尾概率直接舍为 0。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议、代码映射与结果边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07591">原论文</a> · <a href="../../../../recommendation-components/2611.07591-ice/">实现解读</a> · <a href="#qa-424ab97878afc913">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:onetrans-gsr" data-paper-title="OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/slates-business-value" data-search="OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer 搜广推与 LLM 应用 ByteDance 2026-11-03 传统Generator–Evaluator系统先用多种规则生成候选整页，再由小模型选择。OneTrans-GSR以一个自回归policy从统一候选池顺序选择商品、短视频、直播与广告，重排/混排一起处理。较大的整页RM仅用于离线训练；在线按累计序列logp选择生成页，不按RM给所有页重新打分。硬约束仍在解码保留，软业务偏好进入奖励，不是“全部规则都取消”。 完整实验成本过高，不复现（审查 DONE）；未训练OneTrans策略、RM或执行线上A/B，未接入执行型Evolve。L1 CPU约束/奖励算术参考，diagnostic only。完整实验成本过高，不复现（审查 DONE）；未训练OneTrans策略、RM或执行线上A/B，未接入执行型Evolve。business_logits接收外部logits、当前prefix、显式规则与未来tag可用数量上界；实现局部quota、去重、相似度和广告偏置。geometric_reward/separate_advantages对应Eq.11/13–15的float64 CPU数学参考；  重排与混排 生成式整页策略与多目标后训练 搜广推 列表与业务控制：重排、出价和长期价值 OneTrans-GSR用统一policy生成整页，为何不是取消所有业务规则？ 它替换的是多generator加evaluator的整页搜索结构。强制要求仍以硬mask执行，有限配额偏置和多样性/广告偏置仍作用于logit，软业务偏好另外影响训练reward。学习policy和保留规则并不冲突。 教学例：policy可以统一决定商品和视频的顺序，但已展示item仍不能再次选择；禁止重复的mask不应由模型是否记住规则来决定。 2026-11-04">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 列表与业务控制：重排、出价和长期价值</a></p>
 <span id="paper-recommendation-onetrans-gsr-bccf9567" class="ar-learning-paper-anchor"></span>

@@ -308,6 +308,7 @@
 
 ## Nanjing University
 
+- 2026-11-05 · [ConvPE: Convolutional Position Embedding Improves Transformers](../../foundation-models/2611.07749-convpe/README.md)（`convpe`）：RoPE 旋转 query/key；ConvPE 改的是 softmax 前的加性分数。它先把当前层隐状态投影到少量通道，再从当前及最近若干隐状态学习各相对距离的偏置。每个查询只得到窗口内偏置；**窗口外偏置为零，不是把远处 key 屏蔽**。因果和 padding mask 仍由注意力层负责。论文还讨论分组、低秩与二维变体，此处仅实现 §3.1 的默认无分组、无分解一维公式。
 - 2026-10-14 · [Memory-Efficient Subspace Optimization with Residual Correction: From Momentum SGD to Muon](../../reproductions/2610.19844-smrc-pmrc/README.md)（`smrc-pmrc`）：低秩优化器只存投影后的动量，能减少持久状态；但梯度主奇异方向可能被噪声占据，直接丢掉子空间外分量会遗漏有效下降方向。本文让低秩动量负责投影内更新，原始梯度的正交残差负责其余方向，不额外保存一个全尺寸残差状态。
 
 ## Nanyang Technological University
@@ -546,6 +547,10 @@
 ## University of Maryland
 
 - 2026-07-16 · [Looped Latent Attention: Cross-Loop KV Compression for Looped Transformers](../../reproductions/2607.15456-looped-latent-attention/README.md)（`looped-latent-attention`）：Looped Transformer 重复使用同一组权重，但不同 loop 的 KV cache 仍重复占内存。LLA 学习跨 loop 共享的低秩 K/V latent，服务时按 loop 重建专用 K/V，从 recurrence 冗余中换取近无损压缩。
+
+## University of Maryland, College Park
+
+- 2026-11-03 · [Turbocharging PiPNN for Proximity and k-NN Graph Building](../../foundation-models/2611.05690-pipnn-ii/README.md)（`pipnn-ii`）：PiPNN 先用递归分区把可能相近的点送入同一叶，再在叶内批量打分，避免逐点搜索正在构建的图。PiPNN II 用量化减少内存流量，把打分和 top-K 合并，避免先写再读完整距离矩阵。直接 k-NN 图保留叶内见到的近邻，和需要可导航边并执行剪枝的 ANNS 索引不是同一产物。论文另有 GPiPNN：平坦分段路由、分段 top-K、排序聚合及复用已见边的剪枝；这些未在本地实现。
 
 ## University of Michigan, Ann Arbor
 

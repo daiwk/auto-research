@@ -55,7 +55,8 @@
         "foundation-models:sleep-lti",
         "foundation-models:merlin",
         "foundation-models:semantic-block-sparse-attention",
-        "foundation-models:anchor-kv"
+        "foundation-models:anchor-kv",
+        "foundation-models:convpe"
       ]
     },
     {
@@ -201,7 +202,8 @@
         "foundation-models:rescom",
         "foundation-models:hope-hilbert",
         "foundation-models:fold-bias",
-        "foundation-models:multi-layer-indexer"
+        "foundation-models:multi-layer-indexer",
+        "foundation-models:pipnn-ii"
       ]
     },
     {

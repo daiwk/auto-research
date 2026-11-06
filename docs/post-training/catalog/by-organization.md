@@ -517,6 +517,7 @@
 
 ## Tsinghua University
 
+- 2026-11-05 · 一作：Guhan Chen · [CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation](../2611.07959-cord/README.md)（`cord-rollout`）：普通 OPD 的教师只给学生已经访问的前缀评分，难以覆盖学生很少走到的教师路径。CoRD 不改每状态的反向 KL 监督，改变的是产生前缀的采样分布。
 - 2026-10-16 · 一作：Heming Zou · [Tree-Aware Posterior Distillation for Long-Horizon Agentic Reinforcement Learning](../2610.23181-treeopsd/README.md)（`treeopsd`）：长轨迹仅有终局奖励时，同一轨迹的好坏动作容易一起获奖或受罚；同一批轨迹又会经历多次更新，旧信用不能告诉优化器何时停止。TreeOPSD 将续写分支整理成共享前缀树，把叶奖励按行为策略似然向上回传，再把每个 turn 的信用映射为一个冻结且有界的 Bernoulli 教师。
 - 2026-10-15 · 一作：Yuechen Luo · [OPRD: On-Policy Reminder Distillation for Long-Horizon Coding Agents](../2610.21496-oprd-reminder/README.md)（`oprd-reminder`）：编码 Agent 的最终通过/失败不能指出哪一轮忽略了已有约束。OPRD 在学生自己生成的无提醒轨迹上训练：成功轨迹自模仿；失败轨迹由教师读取训练专用提醒，重新评分**同一学生前缀**，不是教师另生成一条答案。
 - 2026-07-11 · 一作：Zhicheng Cai · [RIPO](../2607.10169-ripo/README.md)（`ripo`）：固定 PPO ratio 区间在低概率区域过于保守、在高概率区域又可能过大。RIPO 以 Fisher–Rao 几何定义策略距离，并按旧策略概率设置等距 clip 半径，使不同概率区域获得更均衡的局部 KL 预算。
@@ -642,6 +643,7 @@
 
 ## University of Virginia
 
+- 2026-11-03 · 一作：Valentin Six · [RAGCompass: Generalizable Retriever Routing via Reranking](../2611.05596-ragcompass/README.md)（`ragcompass`）：固定候选池的 query-only 分类器可能不能给从未见过的检索器打分。RAGCompass 把各检索器返回的整组证据作为候选，复用同一个 Qwen3-Reranker-0.6B 独立读每组 passage，不依赖检索器身份或各自不可比的置信度。
 - 2026-09-10 · 一作：Rongcan Pei · [Negative Self-Distillation: Learning to Reason by Avoiding Flaws](../2609.11699-nsd/README.md)（`nsd`）：让学生远离自身生成的错误推理分布，并用动态 gate 只更新推理关键位置，避免把普通语言 token 一并遗忘。
 
 ## University of Washington
