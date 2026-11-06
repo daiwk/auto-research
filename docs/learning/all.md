@@ -69,7 +69,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">4341 个问题 · 1083 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">4353 个问题 · 1086 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:envopt" data-paper-title="EnvOpt: Automated Optimization for Agent Environments" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="EnvOpt: Automated Optimization for Agent Environments Agent University of California, Berkeley / University of Chicago / Bespoke Labs 2026-11-05 长期稳定的工作环境可以承载多类查询。EnvOpt 固定目标模型与 Harness，让研究 Agent 改变同一信息的可访问表示，例如用 SQLite 目录索引散落的表定义，或为既有接口写索引手册。优化对象是环境目录，不是底座权重，也不是每个任务重写一份工作流程。研究 Agent 在不相交的训练分片上读取目标 Agent 轨迹，训练不提供 verifier；验证阶段才独立度量候选环境，测试任务不参与选择。 完整实验成本过高，不复现（审查 DONE）。实现边界：CPU / L1，离线回放论文 Algorithm 1 的接受与回滚规则。没有运行 Agent、API 或真实工作区，没有验证成本收益，也没有接入 Evolve。完整实验成本过高，不复现（审查 DONE）。select_training_environment 仅接收已记录的候选成本与代理判断，没有验证分数、真实答案或测试接口。外层 replay_environment_evolution 检查训练 ID 分片互斥且与验证 ID 不重叠、候选 Harness 标识一致、验证聚合绑定训练选定环境，并在首次回归时回放停止及回滚。  Harness 与自我改进 环境表示演进 Agent 运行流程与自进化：改的是哪一层 EnvOpt 固定信息 I 后究竟在优化什么？ 它优化信息的表示和访问路径，固定目标 Agent 的模型和 Harness。把同一批散落定义组织为可查询索引，改变每个任务探索所需成本，并不改变问题或答案。 教学例：表定义仍在原有文件里，但 SQLite 目录记录每张表对应的路径；Agent 无须遍历所有文件。 2026-11-06">
@@ -231,6 +231,59 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07749">原论文</a> · <a href="../../foundation-models/2611.07749-convpe/">实现解读</a> · <a href="#qa-f3a8236e5f08063f">问题链接</a></p>
 </details>
 </article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ginger" data-paper-title="GINGER: Spicing Up Graph-Based Vector Search" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="GINGER: Spicing Up Graph-Based Vector Search 基础模型 Google Research 2026-11-05 近邻图搜索在导航时随机读取大量候选，只需低位宽排序；最后的少量候选才需要高精度重排。若同时存粗码和完整浮点向量，会重复存储。GINGER 用 Nested TurboQuant（NTQ） 让高精度码保留同一个 4-bit 导航前缀：先读取粗码和粗尺度，最后才为入围向量读细码和细尺度。完整库另外用 PiPNN 构建近邻图、重排顶点使邻居 ID 更集中、以 AdaptiveGap 压缩邻接表，并提供 PCA 投影与候选预筛以节省搜索开销。NTQ 降低向量表示的读带宽； 作者的大规模图检索实验成本过高，不复现（审查 DONE）。L1 机制诊断，不是端到端检索复现。L1 机制诊断，不是端到端检索复现。本地只验证 Nested TurboQuant 的码本、拆流、缩放与浮点打分；作者的大规模图检索实验成本过高，不复现（审查 DONE）。build_codebook 用标准正态的解析区间矩拟合正半轴码本，支持 4-bit 加 1–4 个细化位。encode 接收调用方已用共同正交变换旋转的 Rx，本地执行归一化、编码与两种尺度；decode_navigation 只接收粗字节和粗尺度，decode_refined 才读细位流。inner_product 在同一旋转空间对完整精度查询评分。  推理与系统效率 向量检索量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 NTQ 已经存了完整细码，为什么导航不用把它一起读出来？ 4-bit 导航码就是完整码的粗前缀，但粗码和细位分别存放。导航只读符号位、粗区间和粗尺度；重排才读取入围向量的细位与细尺度。这样同一向量既不需要两份独立表示，也不会让导航承担细码带宽。 本地 31 维例子，粗码占 16 字节，4+2-bit 的额外细码占 8 字节（不含尺度）；未入围的候选不用读后 8 字节。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/compression-and-cache/">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<span id="paper-foundation-models-ginger-bbdbc663" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-a6109a7d7410b27f">NTQ 已经存了完整细码，为什么导航不用把它一起读出来？</h2>
+<p class="ar-learning-paper"><a href="./?paper=foundation-models%3Aginger">GINGER: Spicing Up Graph-Based Vector Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>4-bit 导航码就是完整码的粗前缀，但粗码和细位分别存放。导航只读符号位、粗区间和粗尺度；重排才读取入围向量的细位与细尺度。这样同一向量既不需要两份独立表示，也不会让导航承担细码带宽。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>本地 31 维例子，粗码占 16 字节，4+2-bit 的额外细码占 8 字节（不含尺度）；未入围的候选不用读后 8 字节。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08306v1">原论文</a> · <a href="../../foundation-models/2611.08306-ginger/">实现解读</a> · <a href="#qa-a6109a7d7410b27f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ginger" data-paper-title="GINGER: Spicing Up Graph-Based Vector Search" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="GINGER: Spicing Up Graph-Based Vector Search 基础模型 Google Research 2026-11-05 近邻图搜索在导航时随机读取大量候选，只需低位宽排序；最后的少量候选才需要高精度重排。若同时存粗码和完整浮点向量，会重复存储。GINGER 用 Nested TurboQuant（NTQ） 让高精度码保留同一个 4-bit 导航前缀：先读取粗码和粗尺度，最后才为入围向量读细码和细尺度。完整库另外用 PiPNN 构建近邻图、重排顶点使邻居 ID 更集中、以 AdaptiveGap 压缩邻接表，并提供 PCA 投影与候选预筛以节省搜索开销。NTQ 降低向量表示的读带宽； 作者的大规模图检索实验成本过高，不复现（审查 DONE）。L1 机制诊断，不是端到端检索复现。L1 机制诊断，不是端到端检索复现。本地只验证 Nested TurboQuant 的码本、拆流、缩放与浮点打分；作者的大规模图检索实验成本过高，不复现（审查 DONE）。build_codebook 用标准正态的解析区间矩拟合正半轴码本，支持 4-bit 加 1–4 个细化位。encode 接收调用方已用共同正交变换旋转的 Rx，本地执行归一化、编码与两种尺度；decode_navigation 只接收粗字节和粗尺度，decode_refined 才读细位流。inner_product 在同一旋转空间对完整精度查询评分。  推理与系统效率 向量检索量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 为什么不能先全局拟合 6-bit 码本，再直接把前 4 位当作导航码？ 一般的 6-bit Lloyd–Max 不保留 4-bit 的分割点。NTQ 固定所有粗边界，再在每个区间内按条件高斯分布单独拟合质心；编码时先选 u，随后只在第 u 个码本里选 v。这样不同细位宽都能复用同一粗码。 教学例：若某粗区间是 [0.4, 0.8)，其最外两条细分边界仍是 0.4 和 0.8。相邻区间的质心即便更近，也不能改变已经选定的粗码。数值不是论文实际阈值。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/compression-and-cache/">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-6c89dabe9f28f183">为什么不能先全局拟合 6-bit 码本，再直接把前 4 位当作导航码？</h2>
+<p class="ar-learning-paper"><a href="./?paper=foundation-models%3Aginger">GINGER: Spicing Up Graph-Based Vector Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>一般的 6-bit Lloyd–Max 不保留 4-bit 的分割点。NTQ 固定所有粗边界，再在每个区间内按条件高斯分布单独拟合质心；编码时先选 u，随后只在第 u 个码本里选 v。这样不同细位宽都能复用同一粗码。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：若某粗区间是 [0.4, 0.8)，其最外两条细分边界仍是 0.4 和 0.8。相邻区间的质心即便更近，也不能改变已经选定的粗码。数值不是论文实际阈值。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08306v1">原论文</a> · <a href="../../foundation-models/2611.08306-ginger/">实现解读</a> · <a href="#qa-6c89dabe9f28f183">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ginger" data-paper-title="GINGER: Spicing Up Graph-Based Vector Search" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="GINGER: Spicing Up Graph-Based Vector Search 基础模型 Google Research 2026-11-05 近邻图搜索在导航时随机读取大量候选，只需低位宽排序；最后的少量候选才需要高精度重排。若同时存粗码和完整浮点向量，会重复存储。GINGER 用 Nested TurboQuant（NTQ） 让高精度码保留同一个 4-bit 导航前缀：先读取粗码和粗尺度，最后才为入围向量读细码和细尺度。完整库另外用 PiPNN 构建近邻图、重排顶点使邻居 ID 更集中、以 AdaptiveGap 压缩邻接表，并提供 PCA 投影与候选预筛以节省搜索开销。NTQ 降低向量表示的读带宽； 作者的大规模图检索实验成本过高，不复现（审查 DONE）。L1 机制诊断，不是端到端检索复现。L1 机制诊断，不是端到端检索复现。本地只验证 Nested TurboQuant 的码本、拆流、缩放与浮点打分；作者的大规模图检索实验成本过高，不复现（审查 DONE）。build_codebook 用标准正态的解析区间矩拟合正半轴码本，支持 4-bit 加 1–4 个细化位。encode 接收调用方已用共同正交变换旋转的 Rx，本地执行归一化、编码与两种尺度；decode_navigation 只接收粗字节和粗尺度，decode_refined 才读细位流。inner_product 在同一旋转空间对完整精度查询评分。  推理与系统效率 向量检索量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 GINGER 与 PiPNN II 都提到低比特，解决的是同一个瓶颈吗？ 不完全相同。PiPNN II 在近邻图构建时合并打分与 top-K，避免物化候选分数矩阵；GINGER 的 NTQ 在已有图上搜索时降低向量读取带宽，入围后才补读细码。它们可以在同一个系统里使用，但不共享同一项局部验收指标。 图构建侧检查量化点积按每行尺度修正后再入堆；检索侧检查改变细位宽时粗字节不变，并在同召回下单独测检索 QPS。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/compression-and-cache/">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-a402b719de839e6f">GINGER 与 PiPNN II 都提到低比特，解决的是同一个瓶颈吗？</h2>
+<p class="ar-learning-paper"><a href="./?paper=foundation-models%3Aginger">GINGER: Spicing Up Graph-Based Vector Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不完全相同。PiPNN II 在近邻图构建时合并打分与 top-K，避免物化候选分数矩阵；GINGER 的 NTQ 在已有图上搜索时降低向量读取带宽，入围后才补读细码。它们可以在同一个系统里使用，但不共享同一项局部验收指标。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>图构建侧检查量化点积按每行尺度修正后再入堆；检索侧检查改变细位宽时粗字节不变，并在同召回下单独测检索 QPS。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08306v1">原论文</a> · <a href="../../foundation-models/2611.08306-ginger/">实现解读</a> · <a href="#qa-a402b719de839e6f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ginger" data-paper-title="GINGER: Spicing Up Graph-Based Vector Search" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="GINGER: Spicing Up Graph-Based Vector Search 基础模型 Google Research 2026-11-05 近邻图搜索在导航时随机读取大量候选，只需低位宽排序；最后的少量候选才需要高精度重排。若同时存粗码和完整浮点向量，会重复存储。GINGER 用 Nested TurboQuant（NTQ） 让高精度码保留同一个 4-bit 导航前缀：先读取粗码和粗尺度，最后才为入围向量读细码和细尺度。完整库另外用 PiPNN 构建近邻图、重排顶点使邻居 ID 更集中、以 AdaptiveGap 压缩邻接表，并提供 PCA 投影与候选预筛以节省搜索开销。NTQ 降低向量表示的读带宽； 作者的大规模图检索实验成本过高，不复现（审查 DONE）。L1 机制诊断，不是端到端检索复现。L1 机制诊断，不是端到端检索复现。本地只验证 Nested TurboQuant 的码本、拆流、缩放与浮点打分；作者的大规模图检索实验成本过高，不复现（审查 DONE）。build_codebook 用标准正态的解析区间矩拟合正半轴码本，支持 4-bit 加 1–4 个细化位。encode 接收调用方已用共同正交变换旋转的 Rx，本地执行归一化、编码与两种尺度；decode_navigation 只接收粗字节和粗尺度，decode_refined 才读细位流。inner_product 在同一旋转空间对完整精度查询评分。  推理与系统效率 向量检索量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 本地验证 NTQ 时应该读哪些输出，哪些结论不能写？ 用已在同一旋转空间的非零向量编码，检查粗码流独立、细质心不跨区间、正确应用两种尺度；再用独立手算对比内积。CPU 合成 MSE 只验证量化机制，不证明十亿级索引召回、SIMD 性能或线上增益。 种子 42–44 的 4+2-bit 经验 MSE 均低于 4-bit；但本地没有图遍历、查询日志或硬件计时，不能把这个差值写成 QPS 提升。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/compression-and-cache/">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-89e3aeef7e332cbf">本地验证 NTQ 时应该读哪些输出，哪些结论不能写？</h2>
+<p class="ar-learning-paper"><a href="./?paper=foundation-models%3Aginger">GINGER: Spicing Up Graph-Based Vector Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>用已在同一旋转空间的非零向量编码，检查粗码流独立、细质心不跨区间、正确应用两种尺度；再用独立手算对比内积。CPU 合成 MSE 只验证量化机制，不证明十亿级索引召回、SIMD 性能或线上增益。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>种子 42–44 的 4+2-bit 经验 MSE 均低于 4-bit；但本地没有图遍历、查询日志或硬件计时，不能把这个差值写成 QPS 提升。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08306v1">原论文</a> · <a href="../../foundation-models/2611.08306-ginger/">实现解读</a> · <a href="#qa-89e3aeef7e332cbf">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:cord-rollout" data-paper-title="CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation LLM 后训练 Tsinghua University 2026-11-05 普通 OPD 的教师只给学生已经访问的前缀评分，难以覆盖学生很少走到的教师路径。CoRD 不改每状态的反向 KL 监督，改变的是产生前缀的采样分布。学生先提出 token，再以最大耦合向教师倾斜的目标分布修正提议；同前缀、同词表，两侧概率都必须可用。这里借用了投机解码的拒绝规则，但目的不是增加服务吞吐。 单张 A100/A30 或 Mac 不适合完整矩阵，成本过高，不复现（审查 DONE）。maximal_coupling 接收已经归一化、同词表的同前缀概率，使用 log 空间几何插值，返回目标、接受概率、正残差及 TV；Coupling.draw 用调用方传入的随机源返回提议和发出 token。不加载模型，不生成 LLM 轨迹，不执行反向 KL 训练。只在支持集交集上有质量；若交集为空则拒绝，不能偷偷换成均匀分布或普通教师重抽。  On-policy distillation 最大耦合轨迹采样 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 CoRD 的 qα 替换了普通 OPD 的蒸馏教师吗？ 没有。qα 是发出下一个 token 的边缘，决定后续会访问哪些前缀；在已访问前缀上，原文仍用学生 pS 到冻结教师 pT 的全词表反向 KL。 教学例：学生少走的一条解法开头，经耦合采样变得更常见；到达新前缀后，评分仍来自教师 pT，而不是 pS 与 pT 的插值。 2026-11-06">
 <p class="ar-learning-card__domain"><a href="../paths/post-training/student-trajectory-distillation/">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
 <span id="paper-post-training-cord-rollout-3394bf47" class="ar-learning-paper-anchor"></span>
@@ -335,6 +388,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>两位置深度 logits 为 1000 和 -1000，若实际到达位置 2，负 log 概率接近 2000，仍应有有限损失而不是把尾概率直接舍为 0。</p>
 <p class="ar-learning-sources">依据：核心公式、数据协议、代码映射与结果边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07591">原论文</a> · <a href="../../recommendation-components/2611.07591-ice/">实现解读</a> · <a href="#qa-424ab97878afc913">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:emoreward" data-paper-title="EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL LLM 后训练 The Hong Kong University of Science and Technology 2026-11-04 固定融合权重假设每段视频的情绪证据同样可信。例如，没有可用人脸时，给面部动作通道的默认中性分数不是观测证据。EmoReward 让 Plan 根据提示构建评估条件，Act 得到分数和可用性，再用 Reflect 的样本门控与 RewardMemory 的跨轮经验乘子做融合。温度、上限和最小支持数作用在奖励分配上，不是生成器参数。 单张 A100/A30 或本地 Mac 的预算不适合：成本过高，不复现（审查 DONE）。build_reward_memory 从调用者提供的参考轮原始分数、情境和结果按 Eq. (9)–(10) 一次性构造不可变表。为保持边界清楚，情境键（论文按唤醒度和人脸分支活跃度分组）和已经包含有效掩码的 Eq. (7) 门控均为外部输入。fuse_reward 只查固定表，按 Eq. (8) 筛活跃通道，算 Eq. (4) 标量，不接受当前结果作为拟合输入；缺失通道不能被历史乘子重新激活。没有实现 Plan、感知打分器或视频 GRPO。  Reward modeling 多模态奖励门控与跨轮校准 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 上轮人脸通道与代理结果高度正相关，这轮视频没有可用人脸时是否仍应给它奖励权重？ 不应给。历史乘子调节已可用通道的相对权重，当前门控负责可用性。门控为零时，无论乘子多大，通道有效权重仍为零。 教学例：人脸通道基权重 0.4，历史乘子 2，当前门控 0，有效质量仍为 0；中性默认分数不是观测。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/reward-and-credit/">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<span id="paper-post-training-emoreward-0937a172" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-ff355c3308b0e3ed">上轮人脸通道与代理结果高度正相关，这轮视频没有可用人脸时是否仍应给它奖励权重？</h2>
+<p class="ar-learning-paper"><a href="./?paper=post-training%3Aemoreward">EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · The Hong Kong University of Science and Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不应给。历史乘子调节已可用通道的相对权重，当前门控负责可用性。门控为零时，无论乘子多大，通道有效权重仍为零。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：人脸通道基权重 0.4，历史乘子 2，当前门控 0，有效质量仍为 0；中性默认分数不是观测。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.06518">原论文</a> · <a href="../../post-training/2611.06518-emoreward/">实现解读</a> · <a href="#qa-ff355c3308b0e3ed">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:emoreward" data-paper-title="EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL LLM 后训练 The Hong Kong University of Science and Technology 2026-11-04 固定融合权重假设每段视频的情绪证据同样可信。例如，没有可用人脸时，给面部动作通道的默认中性分数不是观测证据。EmoReward 让 Plan 根据提示构建评估条件，Act 得到分数和可用性，再用 Reflect 的样本门控与 RewardMemory 的跨轮经验乘子做融合。温度、上限和最小支持数作用在奖励分配上，不是生成器参数。 单张 A100/A30 或本地 Mac 的预算不适合：成本过高，不复现（审查 DONE）。build_reward_memory 从调用者提供的参考轮原始分数、情境和结果按 Eq. (9)–(10) 一次性构造不可变表。为保持边界清楚，情境键（论文按唤醒度和人脸分支活跃度分组）和已经包含有效掩码的 Eq. (7) 门控均为外部输入。fuse_reward 只查固定表，按 Eq. (8) 筛活跃通道，算 Eq. (4) 标量，不接受当前结果作为拟合输入；缺失通道不能被历史乘子重新激活。没有实现 Plan、感知打分器或视频 GRPO。  Reward modeling 多模态奖励门控与跨轮校准 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 RewardMemory 为什么比较原始分数相关性，还要先减去通道平均相关再裁剪？ 估计基于原始分数，而不是已乘门控的贡献，避免把过去的门控策略当成通道可靠性。减均值表达相对可靠性，裁剪限制 log 乘子。常数通道相关性为零，不必然降权；在正裁剪上限下，平均相关大于零时它的未归一乘子才小于 1。 教学例：相关性 0.8 和 0 的均值是 0.4；温度 0.5、上限 1 时，两个未归一乘子分别是 exp(0.8) 和 exp(-0.8)。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/reward-and-credit/">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-8b1fee98de66e2f2">RewardMemory 为什么比较原始分数相关性，还要先减去通道平均相关再裁剪？</h2>
+<p class="ar-learning-paper"><a href="./?paper=post-training%3Aemoreward">EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · The Hong Kong University of Science and Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>估计基于原始分数，而不是已乘门控的贡献，避免把过去的门控策略当成通道可靠性。减均值表达相对可靠性，裁剪限制 log 乘子。常数通道相关性为零，不必然降权；在正裁剪上限下，平均相关大于零时它的未归一乘子才小于 1。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：相关性 0.8 和 0 的均值是 0.4；温度 0.5、上限 1 时，两个未归一乘子分别是 exp(0.8) 和 exp(-0.8)。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.06518">原论文</a> · <a href="../../post-training/2611.06518-emoreward/">实现解读</a> · <a href="#qa-8b1fee98de66e2f2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:emoreward" data-paper-title="EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL LLM 后训练 The Hong Kong University of Science and Technology 2026-11-04 固定融合权重假设每段视频的情绪证据同样可信。例如，没有可用人脸时，给面部动作通道的默认中性分数不是观测证据。EmoReward 让 Plan 根据提示构建评估条件，Act 得到分数和可用性，再用 Reflect 的样本门控与 RewardMemory 的跨轮经验乘子做融合。温度、上限和最小支持数作用在奖励分配上，不是生成器参数。 单张 A100/A30 或本地 Mac 的预算不适合：成本过高，不复现（审查 DONE）。build_reward_memory 从调用者提供的参考轮原始分数、情境和结果按 Eq. (9)–(10) 一次性构造不可变表。为保持边界清楚，情境键（论文按唤醒度和人脸分支活跃度分组）和已经包含有效掩码的 Eq. (7) 门控均为外部输入。fuse_reward 只查固定表，按 Eq. (8) 筛活跃通道，算 Eq. (4) 标量，不接受当前结果作为拟合输入；缺失通道不能被历史乘子重新激活。没有实现 Plan、感知打分器或视频 GRPO。  Reward modeling 多模态奖励门控与跨轮校准 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 EmoReward 与 TVRL 都用于视频强化学习，它们改动的是同一个训练量吗？ 不是。EmoReward 改变每段视频的情绪奖励融合并给出标量；TVRL 从一个已有组优势出发，按冻结 VLM 对生成 token 的敏感度重新分配信用。两者不能互相替代。 教学例：EmoReward 可以舍弃缺失人脸的评分，TVRL 可以让同一条轨迹中影响较大的 token 获得更多现有优势；这两项改变作用在不同维度。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/reward-and-credit/">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-e0032c24f08544d9">EmoReward 与 TVRL 都用于视频强化学习，它们改动的是同一个训练量吗？</h2>
+<p class="ar-learning-paper"><a href="./?paper=post-training%3Aemoreward">EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · The Hong Kong University of Science and Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。EmoReward 改变每段视频的情绪奖励融合并给出标量；TVRL 从一个已有组优势出发，按冻结 VLM 对生成 token 的敏感度重新分配信用。两者不能互相替代。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：EmoReward 可以舍弃缺失人脸的评分，TVRL 可以让同一条轨迹中影响较大的 token 获得更多现有优势；这两项改变作用在不同维度。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、诊断与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.06518">原论文</a> · <a href="../../post-training/2611.06518-emoreward/">实现解读</a> · <a href="#qa-e0032c24f08544d9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:emoreward" data-paper-title="EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL LLM 后训练 The Hong Kong University of Science and Technology 2026-11-04 固定融合权重假设每段视频的情绪证据同样可信。例如，没有可用人脸时，给面部动作通道的默认中性分数不是观测证据。EmoReward 让 Plan 根据提示构建评估条件，Act 得到分数和可用性，再用 Reflect 的样本门控与 RewardMemory 的跨轮经验乘子做融合。温度、上限和最小支持数作用在奖励分配上，不是生成器参数。 单张 A100/A30 或本地 Mac 的预算不适合：成本过高，不复现（审查 DONE）。build_reward_memory 从调用者提供的参考轮原始分数、情境和结果按 Eq. (9)–(10) 一次性构造不可变表。为保持边界清楚，情境键（论文按唤醒度和人脸分支活跃度分组）和已经包含有效掩码的 Eq. (7) 门控均为外部输入。fuse_reward 只查固定表，按 Eq. (8) 筛活跃通道，算 Eq. (4) 标量，不接受当前结果作为拟合输入；缺失通道不能被历史乘子重新激活。没有实现 Plan、感知打分器或视频 GRPO。  Reward modeling 多模态奖励门控与跨轮校准 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 Eq. (8) 为什么不能先全量归一再执行活跃阈值？运行时能否用当前结果更新表？ 活跃阈值针对乘积 w⁰gm，不是归一后的权重；等于阈值也排除。归一化只能在筛出的通道上做。当前结果不能重拟合冻结表，下一轮只读；历史统计只能在独立的已完成参考轮之后构造。 教学例：有效质量 (0.25, 1, 0)、阈值 0.25，只保留第二项。若所有门控为零，情绪项为零，通用视频奖励项仍可存在。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/reward-and-credit/">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-3b23dc7568601157">Eq. (8) 为什么不能先全量归一再执行活跃阈值？运行时能否用当前结果更新表？</h2>
+<p class="ar-learning-paper"><a href="./?paper=post-training%3Aemoreward">EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · The Hong Kong University of Science and Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>活跃阈值针对乘积 w⁰gm，不是归一后的权重；等于阈值也排除。归一化只能在筛出的通道上做。当前结果不能重拟合冻结表，下一轮只读；历史统计只能在独立的已完成参考轮之后构造。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：有效质量 (0.25, 1, 0)、阈值 0.25，只保留第二项。若所有门控为零，情绪项为零，通用视频奖励项仍可存在。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.06518">原论文</a> · <a href="../../post-training/2611.06518-emoreward/">实现解读</a> · <a href="#qa-3b23dc7568601157">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:ured" data-paper-title="From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation 搜广推与 LLM 应用 Alibaba Taobao &amp; Tmall Group 2026-11-04 为了增加内容发现，直接给冷候选提权可能放大排序器已有的误差。URED 复用已经被排序器打高分、但当次没有展示的候选；先累积，再按用户近期曝光类目过滤，最后作为额外召回通道送回原排序链，不改原排序器参数。 完整生产实验成本过高，不复现（审查 DONE）；三种子诊断验证 30 天/1 天的候选保留、未来记录隔离和配额顺序；本地交付：L1 CPU 候选处理。完整生产实验成本过高，不复现（审查 DONE）；不把离线样例的候选数量当线上提升。mine_ured 接收带用户、时间和类目的排序器评分日志，以及独立的观察曝光历史。本地窗口为左闭右开；截止时刻和未来的记录不参与筛选。分数只用于会话 top-k 和同一时刻的确定性排序，不用最高历史分替换按时间选最新记录。观察到的已曝光商品排除仅覆盖调用者提供的历史。  召回 高分未曝光候选回收 搜广推 候选生成与搜索匹配 URED 为何回收高分未展示候选，而不是向排序器随机注入冷内容？ 先使用排序器已计算的相关性信号，再按用户近期未见类目找发现机会。它没有把未展示当点击正例，也不以随意扩大曝光替代质量筛选。 示意：一个评分较高的摄影视频上次因列表容量没展示；候选池可保留它，不能假定用户点击过它。 2026-11-06">
@@ -1395,6 +1501,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>教学例：在CUDA上正确执行两次cast，不能证明某TPU lowering没有跳过cast；两者最终数值相同也没有覆盖原始TPU生成代码。</p>
 <p class="ar-learning-sources">依据：已核查与未实现、资源与复现边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.00624">原论文</a> · <a href="../../foundation-models/2611.00624-xla-trenches/">实现解读</a> · <a href="#qa-c830109380a835e9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:gslm2" data-paper-title="GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling 多模态大模型 Meta Superintelligence Labs 2026-10-31 单流口语语言模型通常只量化一个编码器层，可能漏掉其他层的音位和语义信息。GSLM2 的 SpidR 2.0 用可微预测头训练多层语音单元。语言侧先对齐各层在相同音频帧上的单元，再保留任一流变化的位置；各流 embedding 的平均输入共享时序 Transformer。单流输出头只使用过去的多流历史，对本流下个单元打分；生成头另外按顺序生成同一时间位置的多个流，后生成的流可依赖本位置先生成的流。原文训练结合单流损失、转移级自蒸馏与多流生成损失，三项均不在本地切片中。 完整实验成本过高，不复现（审查 DONE）。L1 机制诊断。L1 机制诊断。本地只处理外部给定的离散单元与目标对数概率，不运行语音模型；完整实验成本过高，不复现（审查 DONE）。cross_stream_deduplicate 接收时间×流的离散 ID，返回零基保留帧下标和多流元组。transition_log_score 接收已对齐的元组与每个流头对其实际单元的有限非正对数概率，返回逐流均值、计数和等权总分。输入概率须来自外部共享历史条件；函数不计算模型 logits，不接收成对样本的正确标签，也不包含语音编码、解码或基准运行。  语音多模态 多流语音单元与打分 多模态 跨模态对齐：表征、连接器与监督 GSLM2 为什么不能先对每个语音流各自去重，再按列拼接？ 每流发生变化的原音频帧不一定相同。各自去重后，第 k 项可能来自不同时间；GSLM2 保留变化帧并集，在每个保留时刻读取所有流的值，从而让后续共享时序主干看到真实对齐的元组。 教学例：A=[1,1,2]、B=[4,5,5]，正确保留 (1,4)、(1,5)、(2,5)。各自去重再拼接会造出 (2,5) 在第二格，丢掉真实的 (1,5)。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="../paths/multimodal-models/alignment-interfaces/">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-multimodal-models-gslm2-6098f74c" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-91f98a46762c2366">GSLM2 为什么不能先对每个语音流各自去重，再按列拼接？</h2>
+<p class="ar-learning-paper"><a href="./?paper=multimodal-models%3Agslm2">GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · Meta Superintelligence Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>每流发生变化的原音频帧不一定相同。各自去重后，第 k 项可能来自不同时间；GSLM2 保留变化帧并集，在每个保留时刻读取所有流的值，从而让后续共享时序主干看到真实对齐的元组。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：A=[1,1,2]、B=[4,5,5]，正确保留 (1,4)、(1,5)、(2,5)。各自去重再拼接会造出 (2,5) 在第二格，丢掉真实的 (1,5)。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.01143">原论文</a> · <a href="../../multimodal-models/2611.01143-gslm2/">实现解读</a> · <a href="#qa-91f98a46762c2366">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:gslm2" data-paper-title="GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling" data-learning-pending="false" data-level="mechanism" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling 多模态大模型 Meta Superintelligence Labs 2026-10-31 单流口语语言模型通常只量化一个编码器层，可能漏掉其他层的音位和语义信息。GSLM2 的 SpidR 2.0 用可微预测头训练多层语音单元。语言侧先对齐各层在相同音频帧上的单元，再保留任一流变化的位置；各流 embedding 的平均输入共享时序 Transformer。单流输出头只使用过去的多流历史，对本流下个单元打分；生成头另外按顺序生成同一时间位置的多个流，后生成的流可依赖本位置先生成的流。原文训练结合单流损失、转移级自蒸馏与多流生成损失，三项均不在本地切片中。 完整实验成本过高，不复现（审查 DONE）。L1 机制诊断。L1 机制诊断。本地只处理外部给定的离散单元与目标对数概率，不运行语音模型；完整实验成本过高，不复现（审查 DONE）。cross_stream_deduplicate 接收时间×流的离散 ID，返回零基保留帧下标和多流元组。transition_log_score 接收已对齐的元组与每个流头对其实际单元的有限非正对数概率，返回逐流均值、计数和等权总分。输入概率须来自外部共享历史条件；函数不计算模型 logits，不接收成对样本的正确标签，也不包含语音编码、解码或基准运行。  语音多模态 多流语音单元与打分 多模态 跨模态对齐：表征、连接器与监督 成对判别的转移分数为何先逐流平均，再对流取平均？ 不同流的变化频率不同。先按各自的转移数归一（包括第一单元），再给每流相同权重，避免高频流按转移个数主导总分。重复值保留为条件输入，但不参与其所在流的转移均值。 教学例：两流的有效 log probability 为 [−4]、[−1,−2,−3,−4]。逐流均值 −4、−2.5 得 −3.25；合并五个事件会变成 −2.8。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="../paths/multimodal-models/alignment-interfaces/">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-a7659a67c5a28786">成对判别的转移分数为何先逐流平均，再对流取平均？</h2>
+<p class="ar-learning-paper"><a href="./?paper=multimodal-models%3Agslm2">GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · Meta Superintelligence Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同流的变化频率不同。先按各自的转移数归一（包括第一单元），再给每流相同权重，避免高频流按转移个数主导总分。重复值保留为条件输入，但不参与其所在流的转移均值。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两流的有效 log probability 为 [−4]、[−1,−2,−3,−4]。逐流均值 −4、−2.5 得 −3.25；合并五个事件会变成 −2.8。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.01143">原论文</a> · <a href="../../multimodal-models/2611.01143-gslm2/">实现解读</a> · <a href="#qa-a7659a67c5a28786">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:gslm2" data-paper-title="GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling" data-learning-pending="false" data-level="comparison" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling 多模态大模型 Meta Superintelligence Labs 2026-10-31 单流口语语言模型通常只量化一个编码器层，可能漏掉其他层的音位和语义信息。GSLM2 的 SpidR 2.0 用可微预测头训练多层语音单元。语言侧先对齐各层在相同音频帧上的单元，再保留任一流变化的位置；各流 embedding 的平均输入共享时序 Transformer。单流输出头只使用过去的多流历史，对本流下个单元打分；生成头另外按顺序生成同一时间位置的多个流，后生成的流可依赖本位置先生成的流。原文训练结合单流损失、转移级自蒸馏与多流生成损失，三项均不在本地切片中。 完整实验成本过高，不复现（审查 DONE）。L1 机制诊断。L1 机制诊断。本地只处理外部给定的离散单元与目标对数概率，不运行语音模型；完整实验成本过高，不复现（审查 DONE）。cross_stream_deduplicate 接收时间×流的离散 ID，返回零基保留帧下标和多流元组。transition_log_score 接收已对齐的元组与每个流头对其实际单元的有限非正对数概率，返回逐流均值、计数和等权总分。输入概率须来自外部共享历史条件；函数不计算模型 logits，不接收成对样本的正确标签，也不包含语音编码、解码或基准运行。  语音多模态 多流语音单元与打分 多模态 跨模态对齐：表征、连接器与监督 为什么单流转移头的判别分数不能当作多流生成头的联合似然？ 单流转移头仅依赖过去的多流元组，只对本流首项和变化项打分。生成头在同一位置内按顺序条件化，预测所有保留位置，包括本流重复项。上下文依赖和被计分的事件都不同；两个头的成对准确率也不是语音续写质量。 教学例：第二个流在当前位置生成时可以先读第一个流刚生成的单元；单流打分头在预测第二个流时只读前面时间位置，不会读本位置的第一个流。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="../paths/multimodal-models/alignment-interfaces/">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-542025fa89124915">为什么单流转移头的判别分数不能当作多流生成头的联合似然？</h2>
+<p class="ar-learning-paper"><a href="./?paper=multimodal-models%3Agslm2">GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · Meta Superintelligence Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>单流转移头仅依赖过去的多流元组，只对本流首项和变化项打分。生成头在同一位置内按顺序条件化，预测所有保留位置，包括本流重复项。上下文依赖和被计分的事件都不同；两个头的成对准确率也不是语音续写质量。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：第二个流在当前位置生成时可以先读第一个流刚生成的单元；单流打分头在预测第二个流时只读前面时间位置，不会读本位置的第一个流。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.01143">原论文</a> · <a href="../../multimodal-models/2611.01143-gslm2/">实现解读</a> · <a href="#qa-542025fa89124915">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:gslm2" data-paper-title="GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling" data-learning-pending="false" data-level="implementation" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling 多模态大模型 Meta Superintelligence Labs 2026-10-31 单流口语语言模型通常只量化一个编码器层，可能漏掉其他层的音位和语义信息。GSLM2 的 SpidR 2.0 用可微预测头训练多层语音单元。语言侧先对齐各层在相同音频帧上的单元，再保留任一流变化的位置；各流 embedding 的平均输入共享时序 Transformer。单流输出头只使用过去的多流历史，对本流下个单元打分；生成头另外按顺序生成同一时间位置的多个流，后生成的流可依赖本位置先生成的流。原文训练结合单流损失、转移级自蒸馏与多流生成损失，三项均不在本地切片中。 完整实验成本过高，不复现（审查 DONE）。L1 机制诊断。L1 机制诊断。本地只处理外部给定的离散单元与目标对数概率，不运行语音模型；完整实验成本过高，不复现（审查 DONE）。cross_stream_deduplicate 接收时间×流的离散 ID，返回零基保留帧下标和多流元组。transition_log_score 接收已对齐的元组与每个流头对其实际单元的有限非正对数概率，返回逐流均值、计数和等权总分。输入概率须来自外部共享历史条件；函数不计算模型 logits，不接收成对样本的正确标签，也不包含语音编码、解码或基准运行。  语音多模态 多流语音单元与打分 多模态 跨模态对齐：表征、连接器与监督 在本地该怎样验证“保留重复作上下文”没有被错写成“给重复计分”？ 给预先对齐的保留元组和各头对实际单元的外部对数概率。固定元组，仅扰动某流在未变化位置的分数，逐流均值和总分应不变；改该流首项或变化项的分数则应变化。另用直接构造的变化并集核对原始帧索引，不能拿这个单元测试冒充语音 benchmark。 教学例：元组 (2,5)→(2,6) 保留第二帧；把第二帧第一流分数从 −100 改为 −1 不改变总分，但改变第二流该帧的分数应影响结果。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="../paths/multimodal-models/alignment-interfaces/">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-96450e58e318a5ef">在本地该怎样验证“保留重复作上下文”没有被错写成“给重复计分”？</h2>
+<p class="ar-learning-paper"><a href="./?paper=multimodal-models%3Agslm2">GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · Meta Superintelligence Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>给预先对齐的保留元组和各头对实际单元的外部对数概率。固定元组，仅扰动某流在未变化位置的分数，逐流均值和总分应不变；改该流首项或变化项的分数则应变化。另用直接构造的变化并集核对原始帧索引，不能拿这个单元测试冒充语音 benchmark。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：元组 (2,5)→(2,6) 保留第二帧；把第二帧第一流分数从 −100 改为 −1 不改变总分，但改变第二流该帧的分数应影响结果。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.01143">原论文</a> · <a href="../../multimodal-models/2611.01143-gslm2/">实现解读</a> · <a href="#qa-96450e58e318a5ef">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:wesearch" data-paper-title="WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search 搜广推与 LLM 应用 Tencent 2026-10-31 多主题文档很难绑定唯一SID路径，早期前缀失误又会永久丢掉相关文档。WeSearch只用簇收缩候选空间，不让簇承担完整语义标识；在并集内对原子文档先粗后精匹配。OPQ旋转和码本参与相关性学习，不能以固定随机量化器代替论文训练。滚动挂载复用已有参数，模型和全量索引刷新则需版本整体切换。 完整模型与生产实验成本过高，不复现（审查 DONE）；L1 CPU索引/数值组件，diagnostic only。完整模型与生产实验成本过高，不复现（审查 DONE）；未接入执行型Evolve。只用固定种子42/43/44生成小矩阵，验证ADC与显式重构距离相等、候选并集、粗排顺序、输入非法码拒绝及快照隔离。不是公开检索benchmark，不含训练/验证/测试候选调参，更不是推荐质量比较。平局以稳定簇序/文档ID决定，属于本地可复现约定。  召回 聚类候选空间与量化检索 搜广推 候选生成与搜索匹配 WeSearch选择簇和生成完整SID路径有什么根本区别？ 簇只限定候选空间，选中多个簇后合并其原子文档，再单独做文档匹配；它不要求簇路径完整描述文档语义。固定SID逐前缀生成则可能在早期错误处永久剪掉相关文档。簇候选仍可能漏召回，不是消除了所有误差。 教学例：一篇同时谈摄影和旅行的文章很难只有一条语义路径；先取摄影和旅行两个候选簇，再比较具体文章，和强制先选唯一顶层前缀不同。 2026-11-04">

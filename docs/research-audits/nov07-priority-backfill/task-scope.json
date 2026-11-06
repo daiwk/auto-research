@@ -1,0 +1,230 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-07-priority-backfill",
+  "all_sources_exhaustive": false,
+  "review_watermark_advanced": false,
+  "review_watermark": {
+    "before": "2026-10-15",
+    "after": "2026-10-15"
+  },
+  "date": "2026-11-07",
+  "selected_scope_complete": true,
+  "delivery_status": "bounded_scope_complete",
+  "counts": {
+    "selected_papers": 3,
+    "component_implementations": 3,
+    "cuda_validated_components": 0,
+    "first_publications_after_previous_capture": 0,
+    "full_capability_reproductions": 0
+  },
+  "papers": [
+    {
+      "domain": "foundation-models",
+      "key": "ginger",
+      "title": "GINGER: Spicing Up Graph-Based Vector Search",
+      "paper_url": "https://arxiv.org/abs/2611.08306v1",
+      "detail_path": "foundation-models/2611.08306-ginger/README.md",
+      "published": "2026-11-05",
+      "published_at": "2026-11-05T17:09:45Z",
+      "first_author": "Daniel Salwasser",
+      "first_author_affiliation": "Google Research",
+      "priority": "P0",
+      "cost_assessment": {
+        "source": "固定 v1 Sections 3–6、Figure 5 与 Table 1；https://arxiv.org/html/2611.08306v1",
+        "available_resource": "本地 Mac 或单张 A100/A30",
+        "model_scale": "不依赖生成模型；完整原文需要 Highway SIMD、图搜索、图压缩、建图与七个对照库",
+        "data_scale": "14 个公开近邻检索数据集，最大十亿向量，维度最高 4096；十亿点 Deep 的 GINGER 索引约 288 GB",
+        "paper_configuration": "双路 72 核 Xeon、2.3 TB 内存、6 NUMA 节点，按召回和配置比较 QPS、内存与索引时间",
+        "estimated_cost_basis": "完整数据矩阵及 CPU 内存与带宽超预算；未下载数据、编译生产 C++ 或测量全量耗时。独立 CPU 诊断每 seed 仅 192×31 合成向量",
+        "decision": "成本过高，不复现（审查 DONE）；仅验证解析高斯码本、固定区间细化、拆分码流与浮点内积"
+      },
+      "implementation_status": "component_only",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "review_done": true,
+      "id": "2611.08306",
+      "doc": "foundation-models/2611.08306-ginger/README.md",
+      "catalog_key": "ginger",
+      "catalog_detail": "foundation-models/2611.08306-ginger/README.md",
+      "track": "foundation-model",
+      "intake_class": "priority_overlap_backfill",
+      "announced_on": "2026-11-06",
+      "first_publication_after_previous_capture": false,
+      "status": "implemented",
+      "resolution": "bounded_l1_component_accepted",
+      "component_implemented": true,
+      "component_accepted": true,
+      "component_evidence": "docs/foundation-models/2611.08306-ginger/metrics/component-cpu-seeds42-44.json",
+      "source_provenance": [
+        {
+          "source_kind": "reviewed-fixed-primary-paper",
+          "source_url": "https://arxiv.org/html/2611.08306v1"
+        },
+        {
+          "source_kind": "official-arxiv-announcement",
+          "source_url": "https://arxiv.org/list/cs.IR/new?show=2000",
+          "announced_on": "2026-11-06",
+          "retrieved_at": "2026-11-06T09:29:26.344518+00:00"
+        },
+        {
+          "source_kind": "official-arxiv-announcement",
+          "source_url": "https://arxiv.org/list/cs.IR/recent?show=2000",
+          "announced_on": "2026-11-06",
+          "retrieved_at": "2026-11-06T09:29:26.344589+00:00"
+        },
+        {
+          "source_kind": "institution-directory-or-author-code",
+          "source_url": "https://github.com/google/ginger"
+        }
+      ]
+    },
+    {
+      "domain": "multimodal-models",
+      "key": "gslm2",
+      "title": "GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling",
+      "paper_url": "https://arxiv.org/abs/2611.01143",
+      "detail_path": "multimodal-models/2611.01143-gslm2/README.md",
+      "published": "2026-10-31",
+      "published_at": "2026-10-31T17:31:45Z",
+      "first_author": "Yosuke Higuchi",
+      "first_author_affiliation": "Meta Superintelligence Labs",
+      "priority": "P0",
+      "cost_assessment": {
+        "source": "固定 v1 §2.2、Appendices B.3/C.1.6；https://arxiv.org/html/2611.01143v1",
+        "available_resource": "单张 NVIDIA A100/A30 或本地 Mac",
+        "model_scale": "GSLM2 90M–6.5B，另含 SpidR 2.0 编码器、时长预测器与 vocoder",
+        "data_scale": "作者扩展到 600 万小时；另有多语与自然会话等评测",
+        "paper_configuration": "最小 90M/600 小时为 32 张 H200，最大 6.5B/600 万小时为 112 张 H200、75 万步；单个语音编码器为 16 张 H200、约18小时。",
+        "estimated_cost_basis": "根据原文 Appendix B.3 Table 9 与编码器配置判断，不是本地完整耗时测量。",
+        "decision": "成本过高，不复现（审查 DONE）；只做小离散输入上的CPU跨流去重与转移对数概率平均。"
+      },
+      "implementation_status": "component_only",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "review_done": true,
+      "id": "2611.01143",
+      "doc": "multimodal-models/2611.01143-gslm2/README.md",
+      "catalog_key": "gslm2",
+      "catalog_detail": "multimodal-models/2611.01143-gslm2/README.md",
+      "track": "multimodal",
+      "intake_class": "priority_overlap_backfill",
+      "announced_on": "2026-11-03",
+      "first_publication_after_previous_capture": false,
+      "status": "implemented",
+      "resolution": "bounded_l1_component_accepted",
+      "component_implemented": true,
+      "component_accepted": true,
+      "component_evidence": "docs/multimodal-models/2611.01143-gslm2/metrics/component-cpu-seeds42-44.json",
+      "source_provenance": [
+        {
+          "source_kind": "reviewed-fixed-primary-paper",
+          "source_url": "https://arxiv.org/html/2611.01143v1"
+        },
+        {
+          "source_kind": "official-arxiv-announcement",
+          "source_url": "https://arxiv.org/list/cs.CL/recent?show=2000",
+          "announced_on": "2026-11-03",
+          "retrieved_at": "2026-11-06T21:17:53.873668+00:00"
+        },
+        {
+          "source_kind": "official-arxiv-announcement",
+          "source_url": "https://arxiv.org/list/cs.SD/recent?show=2000",
+          "announced_on": "2026-11-03",
+          "retrieved_at": "2026-11-06T21:17:55.582114+00:00"
+        },
+        {
+          "source_kind": "official-arxiv-announcement",
+          "source_url": "https://arxiv.org/list/eess.AS/recent?show=2000",
+          "announced_on": "2026-11-03",
+          "retrieved_at": "2026-11-06T21:17:55.857255+00:00"
+        },
+        {
+          "source_kind": "institution-directory-or-author-code",
+          "source_url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=1"
+        },
+        {
+          "source_kind": "institution-directory-or-author-code",
+          "source_url": "https://github.com/facebookresearch/gslm2"
+        }
+      ]
+    },
+    {
+      "domain": "post-training",
+      "key": "emoreward",
+      "title": "EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL",
+      "paper_url": "https://arxiv.org/abs/2611.06518",
+      "detail_path": "post-training/2611.06518-emoreward/README.md",
+      "published": "2026-11-04",
+      "published_at": "2026-11-04T13:43:09Z",
+      "first_author": "Mingzhe Zheng",
+      "first_author_affiliation": "The Hong Kong University of Science and Technology",
+      "priority": "P1",
+      "cost_assessment": {
+        "source": "固定 v1 §4、附录 H/J；原仓 README Hardware Recommendation：https://github.com/Tencent-Hunyuan/EmoReward#hardware-recommendation",
+        "available_resource": "单张 NVIDIA A100 或 A30，或本地 Mac",
+        "model_scale": "HunyuanVideo 1.5 生成器、多路视觉/情绪打分器；另有 SD 3.5 与 FLUX 迁移对照",
+        "data_scale": "302 条留出视频提示；附录 H 的 1504 个训练候选组共 6016 段视频；附录 J 另对 84 个检查点各用 256 条 DrawBench 提示",
+        "paper_configuration": "三种视频 RL 优化器，训练批量 2、每组 4 个候选；原仓推荐 4 节点共 32 张 80 GB GPU",
+        "estimated_cost_basis": "依据作者硬件建议、生成与多路评分开销及完整对照规模判断；不是本地 GPU 耗时。",
+        "decision": "成本过高，不复现（审查 DONE）；仅 CPU 奖励分配核，不运行上游生成、评分器或 RL。"
+      },
+      "implementation_status": "component_only",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "review_done": true,
+      "id": "2611.06518",
+      "doc": "post-training/2611.06518-emoreward/README.md",
+      "catalog_key": "emoreward",
+      "catalog_detail": "post-training/2611.06518-emoreward/README.md",
+      "track": "post-training",
+      "intake_class": "priority_overlap_backfill",
+      "announced_on": "2026-11-05",
+      "first_publication_after_previous_capture": false,
+      "status": "implemented",
+      "resolution": "bounded_l1_component_accepted",
+      "component_implemented": true,
+      "component_accepted": true,
+      "component_evidence": "docs/post-training/2611.06518-emoreward/metrics/component-cpu-seeds42-44.json",
+      "source_provenance": [
+        {
+          "source_kind": "reviewed-fixed-primary-paper",
+          "source_url": "https://arxiv.org/html/2611.06518v1"
+        },
+        {
+          "source_kind": "official-arxiv-announcement",
+          "source_url": "https://arxiv.org/list/cs.AI/recent?show=2000",
+          "announced_on": "2026-11-05",
+          "retrieved_at": "2026-11-06T09:29:26.344068+00:00"
+        },
+        {
+          "source_kind": "official-arxiv-announcement",
+          "source_url": "https://arxiv.org/list/cs.CV/recent?show=2000",
+          "announced_on": "2026-11-05",
+          "retrieved_at": "2026-11-06T09:29:26.344450+00:00"
+        },
+        {
+          "source_kind": "institution-directory-or-author-code",
+          "source_url": "https://github.com/Tencent-Hunyuan/EmoReward"
+        }
+      ]
+    }
+  ]
+}

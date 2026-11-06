@@ -347,6 +347,10 @@
 
 ## 推理与系统效率
 
+### 量化近邻图检索
+
+- [GINGER: Spicing Up Graph-Based Vector Search](../../foundation-models/2611.08306-ginger/README.md)（`ginger`）：近邻图搜索在导航时随机读取大量候选，只需低位宽排序；最后的少量候选才需要高精度重排。若同时存粗码和完整浮点向量，会重复存储。GINGER 用 **Nested TurboQuant（NTQ）** 让高精度码保留同一个 4-bit 导航前缀：先读取粗码和粗尺度，最后才为入围向量读细码和细尺度。
+
 ### 量化近邻图构建
 
 - [Turbocharging PiPNN for Proximity and k-NN Graph Building](../../foundation-models/2611.05690-pipnn-ii/README.md)（`pipnn-ii`）：PiPNN 先用递归分区把可能相近的点送入同一叶，再在叶内批量打分，避免逐点搜索正在构建的图。PiPNN II 用量化减少内存流量，把打分和 top-K 合并，避免先写再读完整距离矩阵。直接 k-NN 图保留叶内见到的近邻，和需要可导航边并执行剪枝的 ANNS 索引不是同一产物。论文另有 GPiPNN：平坦分段路由、分段 top-K、排序聚合及复用已见边的剪枝；这些未在本地实现。

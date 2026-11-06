@@ -1,6 +1,6 @@
 # PiPNN II: quantized scoring and streaming top-K for graph construction
 
-<!-- source-sha256: 0c715897eb0d407f9d08517959bb7a22c0835c6600695734106269145b84d721 -->
+<!-- source-sha256: 72447c8db8bae20185d4f912d20440bfe798e5a0043bd675fc27005282d8f22b -->
 
 [简体中文](README.md)
 
@@ -13,7 +13,7 @@
 | Paper | [Turbocharging PiPNN for Proximity and k-NN Graph Building](https://arxiv.org/abs/2611.05690v1); [fixed v1 full text](https://arxiv.org/html/2611.05690v1) |
 | Company / author institutions | First author **Tobias Rubel**, University of Maryland, College Park. Guy Blelloch and Laxman Dhulipala list CMU and UMD respectively alongside Google Research; Lars Gottesbüren, Jakub Łącki, and Vahab Mirrokni list Google Research. Google is a collaborator, not the first author's affiliation. |
 | First publication | **2026-11-03 22:20:36 UTC**, arXiv v1; see the November 5 [cs.DB announcement](https://arxiv.org/list/cs.DB/recent?show=2000). |
-| Original author code | As of November 6, 2026, fixed v1 did not link verifiable public source code for PiPNN II or GPiPNN. Cited baselines and the earlier PiPNN are not releases of this version. |
+| Original author code | **Verifiable source has not been released.** [GINGER v1 §1](https://arxiv.org/html/2611.08306v1#S1) identifies [google/ginger](https://github.com/google/ginger) as the official PiPNN II implementation. The [pinned tree](https://api.github.com/repos/google/ginger/git/trees/ce77e5faa3b0451b84908acf399e610f5349446b?recursive=1), checked November 7, 2026, contains only documentation, a license, and a contributor guide. It does not provide executable CPU code and does not establish a GPiPNN release. |
 | Local adapter / key | `pipnn-ii`; `adapter: null`, L1 component only, not integrated into Evolve. |
 | Local code | `src/auto_research/foundation_models/pipnn_ii.py` |
 

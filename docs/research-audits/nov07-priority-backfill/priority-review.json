@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-11-07",
+  "timezone": "Asia/Shanghai",
+  "all_sources_exhaustive": false,
+  "reference": "PR #244 at 6b292fc5e6cc098faedd8d319349163645ec9ae5",
+  "official_institution_checks": [
+    {
+      "organization": "Google Research",
+      "url": "https://research.google/pubs/",
+      "status": "first_page_retrieved_not_exhaustive",
+      "compared_directory_delta": null,
+      "admitted": ["2611.08306"],
+      "evidence": "GINGER appeared in the Nov 6 cs.IR bulletin. The fixed arXiv author block lists Google Research on all ten authors. The paper covers query-time search and compression, distinct from the PiPNN II build paper. Its linked official repository is a placeholder at the checked revision; a repository link does not prove source code was released."
+    },
+    {
+      "organization": "Google DeepMind",
+      "url": "https://deepmind.google/research/",
+      "status": "bounded_recent_entries",
+      "compared_directory_delta": null
+    },
+    {
+      "organization": "Meta",
+      "url": "https://ai.meta.com/research/publications/",
+      "status": "canonical_unavailable",
+      "compared_directory_delta": null
+    },
+    {
+      "organization": "Meta",
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=1",
+      "status": "alternate_first_page_retrieved_not_exhaustive",
+      "compared_directory_delta": null,
+      "admitted": ["2611.01143"],
+      "evidence": "GSLM2 appeared as a November 4 directory entry. The fixed arXiv v1 is October 31 UTC, with November 3 announcements; the directory timestamp is not the first-publication date."
+    }
+  ],
+  "official_repository_search": {
+    "source": "https://api.github.com/search/repositories",
+    "query_template": "org:{organization} created:>=2026-11-06T09:29:00Z fork:false",
+    "complete_results_for_query": true,
+    "public_repository_counts": {
+      "google-research": 0,
+      "google-deepmind": 0,
+      "facebookresearch": 0
+    },
+    "limitation": "Only repository creation is checked; public release of an older repository, updates to code, and new papers without new repositories are not counted."
+  },
+  "screened_non_admissions": [
+    {
+      "title": "CAP-Mix: Item Representations Matter",
+      "url": "https://arxiv.org/html/2611.05799v1",
+      "id": "2611.05799",
+      "disposition": "industrial_evidence_gate_not_met",
+      "evidence": "Meta work; v1 Sections 4.1–4.4 and Appendix G evaluate public interaction datasets, offline HR/NDCG and inference throughput. No production A/B or explicit full-traffic validation found. Not rerouted into another domain to bypass admission."
+    },
+    {
+      "title": "BRIDGE",
+      "url": "https://arxiv.org/html/2611.07425v1",
+      "id": "2611.07425",
+      "disposition": "retained_prior_lead",
+      "evidence": "No additional evidence in this check to bind the production-control comparator to the reported business uplift. The previous review decision remains unchanged."
+    },
+    {
+      "title": "Bringing Specialized Models to Muse and Meta AI",
+      "url": "https://research.meta.ai/blog/specialized-models-for-muse-and-metaai",
+      "published": "2026-11-06",
+      "disposition": "product_announcement_not_paper",
+      "evidence": "Real new release, but the published comparison does not expose a reproducible training mechanism, data, or an independently executable evaluator."
+    },
+    {
+      "title": "Agentic cheminformatics with Google Antigravity",
+      "url": "https://deepmind.google/blog/agentic-cheminformatics-with-google-antigravity/",
+      "published": "2026-11-03",
+      "disposition": "product_workflow_not_new_paper",
+      "evidence": "A workflow walkthrough using existing chemistry tools; not a new general agent method paper."
+    },
+    {
+      "title": "BioBasicsBench",
+      "url": "https://openai.com/index/measuring-how-ai-agents-handle-wet-lab-science/",
+      "published": "2026-11-06",
+      "disposition": "evaluation_lead_without_public_replay_inputs",
+      "evidence": "Official report describes evaluation design and results. No task/rubric corpus or author runner was located in this check; synthetic scoring would not replay the benchmark."
+    }
+  ]
+}

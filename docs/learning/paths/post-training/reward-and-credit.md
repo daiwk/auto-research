@@ -7,7 +7,7 @@ hide:
 
 # 奖励与信用：正确结果该奖励哪些步骤
 
-[LLM 后训练](index.md) / 152 个问题 · 38 篇论文
+[LLM 后训练](index.md) / 156 个问题 · 39 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">152 个问题 · 38 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">156 个问题 · 39 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:emoreward" data-paper-title="EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL LLM 后训练 The Hong Kong University of Science and Technology 2026-11-04 固定融合权重假设每段视频的情绪证据同样可信。例如，没有可用人脸时，给面部动作通道的默认中性分数不是观测证据。EmoReward 让 Plan 根据提示构建评估条件，Act 得到分数和可用性，再用 Reflect 的样本门控与 RewardMemory 的跨轮经验乘子做融合。温度、上限和最小支持数作用在奖励分配上，不是生成器参数。 单张 A100/A30 或本地 Mac 的预算不适合：成本过高，不复现（审查 DONE）。build_reward_memory 从调用者提供的参考轮原始分数、情境和结果按 Eq. (9)–(10) 一次性构造不可变表。为保持边界清楚，情境键（论文按唤醒度和人脸分支活跃度分组）和已经包含有效掩码的 Eq. (7) 门控均为外部输入。fuse_reward 只查固定表，按 Eq. (8) 筛活跃通道，算 Eq. (4) 标量，不接受当前结果作为拟合输入；缺失通道不能被历史乘子重新激活。没有实现 Plan、感知打分器或视频 GRPO。  Reward modeling 多模态奖励门控与跨轮校准 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 上轮人脸通道与代理结果高度正相关，这轮视频没有可用人脸时是否仍应给它奖励权重？ 不应给。历史乘子调节已可用通道的相对权重，当前门控负责可用性。门控为零时，无论乘子多大，通道有效权重仍为零。 教学例：人脸通道基权重 0.4，历史乘子 2，当前门控 0，有效质量仍为 0；中性默认分数不是观测。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<span id="paper-post-training-emoreward-0937a172" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-ff355c3308b0e3ed">上轮人脸通道与代理结果高度正相关，这轮视频没有可用人脸时是否仍应给它奖励权重？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aemoreward">EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · The Hong Kong University of Science and Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不应给。历史乘子调节已可用通道的相对权重，当前门控负责可用性。门控为零时，无论乘子多大，通道有效权重仍为零。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：人脸通道基权重 0.4，历史乘子 2，当前门控 0，有效质量仍为 0；中性默认分数不是观测。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.06518">原论文</a> · <a href="../../../../post-training/2611.06518-emoreward/">实现解读</a> · <a href="#qa-ff355c3308b0e3ed">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:emoreward" data-paper-title="EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL LLM 后训练 The Hong Kong University of Science and Technology 2026-11-04 固定融合权重假设每段视频的情绪证据同样可信。例如，没有可用人脸时，给面部动作通道的默认中性分数不是观测证据。EmoReward 让 Plan 根据提示构建评估条件，Act 得到分数和可用性，再用 Reflect 的样本门控与 RewardMemory 的跨轮经验乘子做融合。温度、上限和最小支持数作用在奖励分配上，不是生成器参数。 单张 A100/A30 或本地 Mac 的预算不适合：成本过高，不复现（审查 DONE）。build_reward_memory 从调用者提供的参考轮原始分数、情境和结果按 Eq. (9)–(10) 一次性构造不可变表。为保持边界清楚，情境键（论文按唤醒度和人脸分支活跃度分组）和已经包含有效掩码的 Eq. (7) 门控均为外部输入。fuse_reward 只查固定表，按 Eq. (8) 筛活跃通道，算 Eq. (4) 标量，不接受当前结果作为拟合输入；缺失通道不能被历史乘子重新激活。没有实现 Plan、感知打分器或视频 GRPO。  Reward modeling 多模态奖励门控与跨轮校准 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 RewardMemory 为什么比较原始分数相关性，还要先减去通道平均相关再裁剪？ 估计基于原始分数，而不是已乘门控的贡献，避免把过去的门控策略当成通道可靠性。减均值表达相对可靠性，裁剪限制 log 乘子。常数通道相关性为零，不必然降权；在正裁剪上限下，平均相关大于零时它的未归一乘子才小于 1。 教学例：相关性 0.8 和 0 的均值是 0.4；温度 0.5、上限 1 时，两个未归一乘子分别是 exp(0.8) 和 exp(-0.8)。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-8b1fee98de66e2f2">RewardMemory 为什么比较原始分数相关性，还要先减去通道平均相关再裁剪？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aemoreward">EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · The Hong Kong University of Science and Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>估计基于原始分数，而不是已乘门控的贡献，避免把过去的门控策略当成通道可靠性。减均值表达相对可靠性，裁剪限制 log 乘子。常数通道相关性为零，不必然降权；在正裁剪上限下，平均相关大于零时它的未归一乘子才小于 1。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：相关性 0.8 和 0 的均值是 0.4；温度 0.5、上限 1 时，两个未归一乘子分别是 exp(0.8) 和 exp(-0.8)。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.06518">原论文</a> · <a href="../../../../post-training/2611.06518-emoreward/">实现解读</a> · <a href="#qa-8b1fee98de66e2f2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:emoreward" data-paper-title="EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL LLM 后训练 The Hong Kong University of Science and Technology 2026-11-04 固定融合权重假设每段视频的情绪证据同样可信。例如，没有可用人脸时，给面部动作通道的默认中性分数不是观测证据。EmoReward 让 Plan 根据提示构建评估条件，Act 得到分数和可用性，再用 Reflect 的样本门控与 RewardMemory 的跨轮经验乘子做融合。温度、上限和最小支持数作用在奖励分配上，不是生成器参数。 单张 A100/A30 或本地 Mac 的预算不适合：成本过高，不复现（审查 DONE）。build_reward_memory 从调用者提供的参考轮原始分数、情境和结果按 Eq. (9)–(10) 一次性构造不可变表。为保持边界清楚，情境键（论文按唤醒度和人脸分支活跃度分组）和已经包含有效掩码的 Eq. (7) 门控均为外部输入。fuse_reward 只查固定表，按 Eq. (8) 筛活跃通道，算 Eq. (4) 标量，不接受当前结果作为拟合输入；缺失通道不能被历史乘子重新激活。没有实现 Plan、感知打分器或视频 GRPO。  Reward modeling 多模态奖励门控与跨轮校准 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 EmoReward 与 TVRL 都用于视频强化学习，它们改动的是同一个训练量吗？ 不是。EmoReward 改变每段视频的情绪奖励融合并给出标量；TVRL 从一个已有组优势出发，按冻结 VLM 对生成 token 的敏感度重新分配信用。两者不能互相替代。 教学例：EmoReward 可以舍弃缺失人脸的评分，TVRL 可以让同一条轨迹中影响较大的 token 获得更多现有优势；这两项改变作用在不同维度。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-e0032c24f08544d9">EmoReward 与 TVRL 都用于视频强化学习，它们改动的是同一个训练量吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aemoreward">EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · The Hong Kong University of Science and Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。EmoReward 改变每段视频的情绪奖励融合并给出标量；TVRL 从一个已有组优势出发，按冻结 VLM 对生成 token 的敏感度重新分配信用。两者不能互相替代。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：EmoReward 可以舍弃缺失人脸的评分，TVRL 可以让同一条轨迹中影响较大的 token 获得更多现有优势；这两项改变作用在不同维度。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、诊断与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.06518">原论文</a> · <a href="../../../../post-training/2611.06518-emoreward/">实现解读</a> · <a href="#qa-e0032c24f08544d9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:emoreward" data-paper-title="EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL LLM 后训练 The Hong Kong University of Science and Technology 2026-11-04 固定融合权重假设每段视频的情绪证据同样可信。例如，没有可用人脸时，给面部动作通道的默认中性分数不是观测证据。EmoReward 让 Plan 根据提示构建评估条件，Act 得到分数和可用性，再用 Reflect 的样本门控与 RewardMemory 的跨轮经验乘子做融合。温度、上限和最小支持数作用在奖励分配上，不是生成器参数。 单张 A100/A30 或本地 Mac 的预算不适合：成本过高，不复现（审查 DONE）。build_reward_memory 从调用者提供的参考轮原始分数、情境和结果按 Eq. (9)–(10) 一次性构造不可变表。为保持边界清楚，情境键（论文按唤醒度和人脸分支活跃度分组）和已经包含有效掩码的 Eq. (7) 门控均为外部输入。fuse_reward 只查固定表，按 Eq. (8) 筛活跃通道，算 Eq. (4) 标量，不接受当前结果作为拟合输入；缺失通道不能被历史乘子重新激活。没有实现 Plan、感知打分器或视频 GRPO。  Reward modeling 多模态奖励门控与跨轮校准 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 Eq. (8) 为什么不能先全量归一再执行活跃阈值？运行时能否用当前结果更新表？ 活跃阈值针对乘积 w⁰gm，不是归一后的权重；等于阈值也排除。归一化只能在筛出的通道上做。当前结果不能重拟合冻结表，下一轮只读；历史统计只能在独立的已完成参考轮之后构造。 教学例：有效质量 (0.25, 1, 0)、阈值 0.25，只保留第二项。若所有门控为零，情绪项为零，通用视频奖励项仍可存在。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-3b23dc7568601157">Eq. (8) 为什么不能先全量归一再执行活跃阈值？运行时能否用当前结果更新表？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aemoreward">EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · The Hong Kong University of Science and Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>活跃阈值针对乘积 w⁰gm，不是归一后的权重；等于阈值也排除。归一化只能在筛出的通道上做。当前结果不能重拟合冻结表，下一轮只读；历史统计只能在独立的已完成参考轮之后构造。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：有效质量 (0.25, 1, 0)、阈值 0.25，只保留第二项。若所有门控为零，情绪项为零，通用视频奖励项仍可存在。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.06518">原论文</a> · <a href="../../../../post-training/2611.06518-emoreward/">实现解读</a> · <a href="#qa-3b23dc7568601157">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:dars-density" data-paper-title="Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling LLM 后训练 National University of Singapore 2026-11-03 期望奖励最大化容易持续强化已密集采样的结果。DARS 在同一条件输入的 rollout 组内估计结果表示密度，以替换原奖励，再执行常规 GRPO 组优势标准化；不引入 density 网络或替换 policy objective。结果表示、任务奖励与条件分组不可互相替代。依据固定 v1 §3、§5.3。 相对现有单卡资源成本过高，不复现（审查 DONE）。density_scaled_advantages 接收 [...,G,D] outcome 与 [...,G] 非负 reward，逐组计算完整 Gaussian KDE、缩放和标准化。遵循 §3.1 的非负奖励域，负 reward 显式拒绝，不把有符号扩展冒充奖励比例采样。结果表示与 reward 均 stop-gradient，返回优势供外部原有 GRPO 目标使用，不在本组件里重定义 PPO loss。  奖励与信用分配 组内结果密度奖励缩放 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 DARS 为什么在结果表示空间修正奖励，而不只增加动作熵？ 动作随机不代表终局结果覆盖多种模式。不同改写可能都生成相似图像；DARS按同一prompt下结果表示的局部密度降低拥挤区域的相对奖励，干预的是终局覆盖，不是简单要求每步动作更随机。 教学例：10种不同措辞都产生同一夕阳构图，prompt词汇多样但图像模式仍塌缩。按图像embedding的density处理可以识别这种拥挤。 2026-11-04">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
 <span id="paper-post-training-dars-density-18c61412" class="ar-learning-paper-anchor"></span>

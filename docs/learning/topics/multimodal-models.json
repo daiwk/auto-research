@@ -26,6 +26,7 @@
         "multimodal-models:cv-opd",
         "multimodal-models:embedding-gemma2",
         "multimodal-models:flexglue",
+        "multimodal-models:gslm2",
         "foundation-models:gas",
         "foundation-models:lamp",
         "foundation-models:llava",

@@ -7,7 +7,7 @@ hide:
 
 # 推理压缩先找瓶颈：权重、KV 内容与缓存层级
 
-[基础模型](../index.md) · 更新 2026-11-06 · 34 篇主题资料 / 11 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-07 · 35 篇主题资料 / 12 篇重点对照
 
 AWQ 减权重位宽，GQA 减 KV 头，DropKV 与 TwinKV 改保留内容，KVMEM 管可执行历史视图，Remote KV Tiers 解决跨层级加载。它们可以组合，但不能用一个“压缩率”解释质量、可恢复性和端到端速度。 FoldBias另解决压缩缓存的接口障碍：把静态bias折进同维key，但未来query漂移仍会引入误差。
 
@@ -36,6 +36,7 @@ AWQ 减权重位宽，GQA 减 KV 头，DropKV 与 TwinKV 改保留内容，KVMEM
 | [Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels](../../../foundation-models/2610.36520-fold-bias/README.md) · [原始来源](https://arxiv.org/abs/2610.36520v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 从上下文query拟合均值投影为1的共享方向，以K+√dβu折叠静态bias；实际bf16舍入后再最小二乘refit V。 | 不像GQA减少KV头，也不负责AM选key/NNLS；不对任意未来query等价，值更换或舍入后不能直接套同值未舍入误差界。 |
 | [Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention](../../../foundation-models/2611.03768-multi-layer-indexer/README.md) · [原始来源](https://arxiv.org/abs/2611.03768)<br>章节：背景与主要改动、核心公式、成本判断与复现边界 | 让当前层消费较早full layer为同一token计算的新selection，将索引器放到侧stream，与主stream的attention、投影和FFN重叠；首次消费时join并保留tensor生命周期。 | 改变依赖与调度，不压缩KV，也不是复用上一token的过期selection。完整路径需8张H200、TP8大模型与SGLang内核，本库仅review，未实现runtime或生成吞吐metrics。 |
 | [Turbocharging PiPNN for Proximity and k-NN Graph Building](../../../foundation-models/2611.05690-pipnn-ii/README.md) · [原始来源](https://arxiv.org/abs/2611.05690v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 在近邻图构建的叶内，对已解码的量化候选做有符号点积修正，应用各行尺度后直接更新 top-K，避免物化完整候选分数矩阵。 | 缩小的是图构建的输入表示和中间分数流量，不是 LM 权重、KV 或跨层依赖；本地只做 CPU 分数和排序参考，未实现编码、分区、剪枝或生产 SIMD/Hopper 核。 |
+| [GINGER: Spicing Up Graph-Based Vector Search](../../../foundation-models/2611.08306-ginger/README.md) · [原始来源](https://arxiv.org/abs/2611.08306v1)<br>章节：核心公式、数据协议与代码映射 | 在同一已旋转向量的固定 4-bit 高斯粗码上做分区 Lloyd–Max 细化，导航只读粗码及其尺度，重排才加载细码。 | 细位宽独立于导航前缀，换取更准的重排；仍需保留两套尺度，并为入围项读取细位。本地只验证量化与内积，不覆盖图或 SIMD。 |
 
 </div>
 
@@ -76,6 +77,12 @@ GQA减少每个位置的KV heads，KVMEM决定历史block何时进入执行视�
 AWQ 通过激活感知缩放保护模型权重的低比特表示；PiPNN II 量化的是外部近邻图的数据点，且在每条候选缩放之后直接维护最优 K，去掉完整距离矩阵写回。MLI 则重排同 token 跨层 selection 的关键依赖，未以字节压缩为目标。分别按权重误差、图构建 recall/时间与真实服务流重叠验收；小矩阵和全排序一致只支持 PiPNN 的局部打分语义，不能推出大图召回或 kernel 性能。
 
 对照来源：[awq](../../../reproductions/2306.00978-awq/README.md) · [pipnn-ii](../../../foundation-models/2611.05690-pipnn-ii/README.md) · [multi-layer-indexer](../../../foundation-models/2611.03768-multi-layer-indexer/README.md)
+
+### 分清压缩对象、写回和随机读取
+
+AWQ 改模型权重：由校准激活决定等价缩放，再做低比特重建。PiPNN II 在建图时把量化分数与 top-K 融合，避免写出候选分数矩阵。GINGER 在已有图上做检索，省的是扫描候选时对向量的读带宽。三者分别用权重输出误差、构建时间与图召回、固定召回的查询吞吐验收；合成 NTQ 误差不代替后两类系统数据。
+
+对照来源：[ginger](../../../foundation-models/2611.08306-ginger/README.md) · [pipnn-ii](../../../foundation-models/2611.05690-pipnn-ii/README.md) · [awq](../../../reproductions/2306.00978-awq/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -151,9 +158,23 @@ AWQ 通过激活感知缩放保护模型权重的低比特表示；PiPNN II 量�
 
     对照来源：[pipnn-ii](../../../foundation-models/2611.05690-pipnn-ii/README.md) · [multi-layer-indexer](../../../foundation-models/2611.03768-multi-layer-indexer/README.md)
 
+### 如果 NTQ 每个候选少读几字节，能直接推出 PiPNN II 建图会更快或 GINGER 的生产 QPS 会提高吗？ {#cross-ginger-versus-pipnn-evidence}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。PiPNN II 的融合打分在构建路径，NTQ 拆流在检索路径；实际查询还受图邻接、重排候选数和硬件缓存影响，必须在固定召回下计时。局部字节数不包括尺度和图索引，更不是系统内存。
+
+    **教学例子：** 31 维 CPU 例子里，导航读 16 个粗码字节，只有入围项多读 8 个细码字节。它不能说明完整图的总读取量或构建耗时。
+
+    对照来源：[ginger](../../../foundation-models/2611.08306-ginger/README.md) · [pipnn-ii](../../../foundation-models/2611.05690-pipnn-ii/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-07** · 加入 GINGER 嵌套 TurboQuant，与 AWQ 和 PiPNN II 对照权重压缩、建图写回和查询读取；核对 GINGER 指向的 PiPNN II 官方仓库仍是占位，未更改此前本地证据。
+
+涉及：[ginger](../../../foundation-models/2611.08306-ginger/README.md) · [pipnn-ii](../../../foundation-models/2611.05690-pipnn-ii/README.md) · [awq](../../../reproductions/2306.00978-awq/README.md)
 
 **2026-11-06** · 增加 PiPNN II，与 AWQ、MLI 比较输入位宽、中间分数写回与关键路径；注明候选缩放后排序及本地 CPU 语义参考不代表完整图构建性能。
 
@@ -175,7 +196,7 @@ AWQ 通过激活感知缩放保护模型权重的低比特表示；PiPNN II 量�
 
 覆盖 29 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 34 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 35 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -213,6 +234,7 @@ AWQ 通过激活感知缩放保护模型权重的低比特表示；PiPNN II 量�
 - [Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels](../../../foundation-models/2610.36520-fold-bias/README.md)
 - [Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention](../../../foundation-models/2611.03768-multi-layer-indexer/README.md)
 - [Turbocharging PiPNN for Proximity and k-NN Graph Building](../../../foundation-models/2611.05690-pipnn-ii/README.md)
+- [GINGER: Spicing Up Graph-Based Vector Search](../../../foundation-models/2611.08306-ginger/README.md)
 
 </details>
 

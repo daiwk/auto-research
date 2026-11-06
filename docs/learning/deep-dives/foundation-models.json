@@ -994,6 +994,15 @@
             "核心公式",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "foundation-models:ginger",
+          "position": "在同一已旋转向量的固定 4-bit 高斯粗码上做分区 Lloyd–Max 细化，导航只读粗码及其尺度，重排才加载细码。",
+          "tradeoff": "细位宽独立于导航前缀，换取更准的重排；仍需保留两套尺度，并为入围项读取细位。本地只验证量化与内积，不覆盖图或 SIMD。",
+          "sections": [
+            "核心公式",
+            "数据协议与代码映射"
+          ]
         }
       ],
       "analysis": [
@@ -1049,6 +1058,15 @@
             "foundation-models:awq",
             "foundation-models:pipnn-ii",
             "foundation-models:multi-layer-indexer"
+          ]
+        },
+        {
+          "title": "分清压缩对象、写回和随机读取",
+          "body": "AWQ 改模型权重：由校准激活决定等价缩放，再做低比特重建。PiPNN II 在建图时把量化分数与 top-K 融合，避免写出候选分数矩阵。GINGER 在已有图上做检索，省的是扫描候选时对向量的读带宽。三者分别用权重输出误差、构建时间与图召回、固定召回的查询吞吐验收；合成 NTQ 误差不代替后两类系统数据。",
+          "papers": [
+            "foundation-models:ginger",
+            "foundation-models:pipnn-ii",
+            "foundation-models:awq"
           ]
         }
       ],
@@ -1124,9 +1142,19 @@
             "foundation-models:pipnn-ii",
             "foundation-models:multi-layer-indexer"
           ]
+        },
+        {
+          "id": "ginger-versus-pipnn-evidence",
+          "question": "如果 NTQ 每个候选少读几字节，能直接推出 PiPNN II 建图会更快或 GINGER 的生产 QPS 会提高吗？",
+          "answer": "不能。PiPNN II 的融合打分在构建路径，NTQ 拆流在检索路径；实际查询还受图邻接、重排候选数和硬件缓存影响，必须在固定召回下计时。局部字节数不包括尺度和图索引，更不是系统内存。",
+          "example": "31 维 CPU 例子里，导航读 16 个粗码字节，只有入围项多读 8 个细码字节。它不能说明完整图的总读取量或构建耗时。",
+          "papers": [
+            "foundation-models:ginger",
+            "foundation-models:pipnn-ii"
+          ]
         }
       ],
-      "updated": "2026-11-06",
+      "updated": "2026-11-07",
       "reviewed_papers": [
         "foundation-models:agentkv",
         "foundation-models:awq",
@@ -1161,7 +1189,8 @@
         "foundation-models:hope-hilbert",
         "foundation-models:fold-bias",
         "foundation-models:multi-layer-indexer",
-        "foundation-models:pipnn-ii"
+        "foundation-models:pipnn-ii",
+        "foundation-models:ginger"
       ],
       "updates": [
         {
@@ -1272,6 +1301,20 @@
           ],
           "source_revisions": {
             "foundation-models:pipnn-ii": "0c715897eb0d407f9d08517959bb7a22c0835c6600695734106269145b84d721"
+          }
+        },
+        {
+          "date": "2026-11-07",
+          "summary": "加入 GINGER 嵌套 TurboQuant，与 AWQ 和 PiPNN II 对照权重压缩、建图写回和查询读取；核对 GINGER 指向的 PiPNN II 官方仓库仍是占位，未更改此前本地证据。",
+          "papers": [
+            "foundation-models:ginger",
+            "foundation-models:pipnn-ii",
+            "foundation-models:awq"
+          ],
+          "source_revisions": {
+            "foundation-models:ginger": "3154fe69c58ad591db91f62f71fa0ae3a4e72a4a1c9271a02cbd50fe9e8a46d3",
+            "foundation-models:pipnn-ii": "72447c8db8bae20185d4f912d20440bfe798e5a0043bd675fc27005282d8f22b",
+            "foundation-models:awq": "70f5ef31bcba296079d2bce8e6321adfd8e208f6a58c042b6d691afb8adfc0ee"
           }
         }
       ]

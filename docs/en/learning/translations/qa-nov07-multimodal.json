@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/multimodal-models:gslm2/union-of-changes": {
+      "source_sha256": "41aac5aadbec4003dee748d8339873301163ab6c3685ab50b11367f0bf12abbc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not deduplicate each GSLM2 speech stream independently and then concatenate the columns?",
+        "answer": "Different streams can change on different audio frames. After independent deduplication, entry k can refer to different times. GSLM2 retains the union of change frames and reads all streams at each retained time, preserving real alignment for the shared temporal backbone.",
+        "example": "Example: A = [1,1,2] and B = [4,5,5] retain (1,4), (1,5), (2,5). Independent deduplication and zipping would place (2,5) second and lose the actual middle tuple (1,5)."
+      }
+    },
+    "qa/multimodal-models:gslm2/per-stream-macro": {
+      "source_sha256": "f737c409763a324337c103deeb6290d0acc82fedb7ea4cf0c748d6e94694869c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does paired transition scoring average within streams before averaging across streams?",
+        "answer": "Streams change at different rates. Normalizing by each stream's count, including its first unit, and then weighting streams equally prevents a fast-changing stream from dominating by event count. Persistent units remain in the conditioning input but not in their stream's transition average.",
+        "example": "Example: Valid log probabilities are [−4] and [−1,−2,−3,−4]. The stream means −4 and −2.5 give −3.25. Pooling five events gives −2.8 instead."
+      }
+    },
+    "qa/multimodal-models:gslm2/scoring-versus-generation": {
+      "source_sha256": "4698ad7064278b1000120bbc2265692340b77f9f6903b2f614c9b268accffbd4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why isn't the stream-specific transition score a joint likelihood from the multi-stream generation head?",
+        "answer": "A transition head sees previous multi-stream tuples and scores only the first unit and changes in its own stream. The generation head conditions sequentially within a time step and predicts every retained position, including a stream's repeats. Both conditioning and scored events differ, and paired accuracy is not continuation quality.",
+        "example": "Example: The second stream in a generated tuple can read the first stream's newly generated unit at that step. A stream-specific scoring head for the second stream sees previous time steps, not the first stream at the current step."
+      }
+    },
+    "qa/multimodal-models:gslm2/keep-context-mask-score": {
+      "source_sha256": "b4bb0b56665ce92fae067e09bce92b630df2ce593b61ab2c09506386d8a8f3b4",
+      "reviewed": true,
+      "fields": {
+        "question": "How do you test that retaining repeated units as context does not accidentally score them?",
+        "answer": "Supply aligned retained tuples and externally computed target log probabilities. With tuples fixed, perturb scores only at unchanged positions in one stream; its mean and the final score must stay fixed. Changing its first or transition score must affect the result. Independently check the retained raw frame indices; this unit test is not a speech benchmark.",
+        "example": "Example: Keep the second tuple in (2,5) → (2,6). Changing its first-stream score from −100 to −1 cannot change the aggregate, whereas changing its second-stream score should."
+      }
+    }
+  }
+}
