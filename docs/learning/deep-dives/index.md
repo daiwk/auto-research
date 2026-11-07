@@ -11,7 +11,7 @@ hide:
 
 每个子主题维护一张卡片。新论文进入后，更新对应卡片的比较或结论，并记录这次变化；不必再从头读整批论文。
 
-31 张精读卡片 · 1083 篇主题资料 · 按主题折叠
+31 张精读卡片 · 1086 篇主题资料 · 按主题折叠
 
 <details class="ar-deep-shelf"><summary>搜广推 · 7 张</summary>
 <div class="ar-deep-grid">
@@ -72,7 +72,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/compression-and-cache/">推理压缩先找瓶颈：权重、KV 内容与缓存层级</a></h2>
 <p>AWQ 减权重位宽，GQA 减 KV 头，DropKV 与 TwinKV 改保留内容，KVMEM 管可执行历史视图，Remote KV Tiers 解决跨层级加载。它们可以组合，但不能用一个“压缩率”解释质量、可恢复性和端到端速度。 FoldBias另解决压缩缓存的接口障碍：把静态bias折进同维key，但未来query漂移仍会引入误差。</p>
-<p class="ar-learning-topic-meta">11 篇重点对照 · 7 个跨论文问答 · 2026-11-06</p>
+<p class="ar-learning-topic-meta">12 篇重点对照 · 8 个跨论文问答 · 2026-11-07</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/generation-paths/">少做串行步骤：验证草稿与学习迭代不是同一条路</a></h2>
@@ -110,7 +110,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="multimodal-models/alignment-interfaces/">多模态对齐到底对齐什么：向量、视觉接口还是证据依赖</a></h2>
 <p>CLIP与EmbeddingGemma 2产出可比较向量，BLIP-2与LLaVA连接视觉到条件生成，CV-OPD训练证据依赖，UMRM给回答评分。它们的输出合同和监督对象不同，不是同一条从小到大的能力排行榜。</p>
-<p class="ar-learning-topic-meta">6 篇重点对照 · 4 个跨论文问答 · 2026-10-29</p>
+<p class="ar-learning-topic-meta">7 篇重点对照 · 5 个跨论文问答 · 2026-11-07</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="multimodal-models/visual-evidence-budget/">少看、晚看还是再看：把视觉预算放到正确阶段</a></h2>
@@ -139,7 +139,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="post-training/reward-and-credit/">奖励从哪里来，信用才该分到哪里</a></h2>
 <p>过程标签、最终结果、模型自置信与回溯归因是不同证据。逐步PRM、MRTPO、TACO和MART-GRPO分别做标签获取、奖励定位、正信用降权和失败后缀过滤；INTUITOR则改用内在分布信号，不能把它当外部正确性验证器。 CONCUR另处理奖励维度之间的优先级，把门控辅助优势投影到主奖励保序锥；这不是沿时间轴分配token信用。</p>
-<p class="ar-learning-topic-meta">8 篇重点对照 · 5 个跨论文问答 · 2026-11-05</p>
+<p class="ar-learning-topic-meta">9 篇重点对照 · 6 个跨论文问答 · 2026-11-07</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="post-training/student-trajectory-distillation/">轨迹蒸馏：采样者、提案与散度方向分开看</a></h2>

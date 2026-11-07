@@ -20,7 +20,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="reward-and-credit/">奖励与信用：正确结果该奖励哪些步骤</a></h2>
 <p>一个最终分数，怎样转成不会奖励错误步骤的训练信号？</p>
-<p class="ar-learning-topic-meta">152 个问题 · 38 篇论文</p>
+<p class="ar-learning-topic-meta">156 个问题 · 39 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="student-trajectory-distillation/">轨迹蒸馏：学生、提案与前缀分布</a></h2>

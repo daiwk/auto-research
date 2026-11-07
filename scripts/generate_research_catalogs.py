@@ -838,6 +838,7 @@ def foundation_rows() -> list[dict[str, str]]:
         )
     extra = manifest_domain_rows("foundation-models", {
         "convpe": ("注意力与长上下文", "卷积位置偏置"),
+        "ginger": ("推理与系统效率", "量化近邻图检索"),
         "pipnn-ii": ("推理与系统效率", "量化近邻图构建"),
         "semantic-block-sparse-attention": ("注意力与长上下文", "稀疏、门控与动态注意力"),
         "anchor-kv": ("注意力与长上下文", "跨层共享状态与测试时训练"),
@@ -1056,6 +1057,7 @@ def multimodal_rows() -> list[dict[str, str]]:
     for row in rows:
         row["index_href"] = f"../reproductions/{row['link']}"
     rows.extend(manifest_domain_rows("multimodal-models", {
+        "gslm2": ("多模态基础模型", "多流语音单元与打分"),
         "flexglue": ("多模态基础模型", "图像匹配与稀疏对应"),
         "uniaction": ("视觉世界模型与时序推理", "统一动作表示与条件注意力"),
         "cue2narrate-drl": ("多模态奖励与后训练", "音频描述与对比排序"),

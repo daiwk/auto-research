@@ -7,7 +7,7 @@ hide:
 
 # 推理压缩：权重、KV 缓存与服务带宽
 
-[基础模型](index.md) / 136 个问题 · 34 篇论文
+[基础模型](index.md) / 140 个问题 · 35 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">136 个问题 · 34 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">140 个问题 · 35 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ginger" data-paper-title="GINGER: Spicing Up Graph-Based Vector Search" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="GINGER: Spicing Up Graph-Based Vector Search 基础模型 Google Research 2026-11-05 近邻图搜索在导航时随机读取大量候选，只需低位宽排序；最后的少量候选才需要高精度重排。若同时存粗码和完整浮点向量，会重复存储。GINGER 用 Nested TurboQuant（NTQ） 让高精度码保留同一个 4-bit 导航前缀：先读取粗码和粗尺度，最后才为入围向量读细码和细尺度。完整库另外用 PiPNN 构建近邻图、重排顶点使邻居 ID 更集中、以 AdaptiveGap 压缩邻接表，并提供 PCA 投影与候选预筛以节省搜索开销。NTQ 降低向量表示的读带宽； 作者的大规模图检索实验成本过高，不复现（审查 DONE）。L1 机制诊断，不是端到端检索复现。L1 机制诊断，不是端到端检索复现。本地只验证 Nested TurboQuant 的码本、拆流、缩放与浮点打分；作者的大规模图检索实验成本过高，不复现（审查 DONE）。build_codebook 用标准正态的解析区间矩拟合正半轴码本，支持 4-bit 加 1–4 个细化位。encode 接收调用方已用共同正交变换旋转的 Rx，本地执行归一化、编码与两种尺度；decode_navigation 只接收粗字节和粗尺度，decode_refined 才读细位流。inner_product 在同一旋转空间对完整精度查询评分。  推理与系统效率 向量检索量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 NTQ 已经存了完整细码，为什么导航不用把它一起读出来？ 4-bit 导航码就是完整码的粗前缀，但粗码和细位分别存放。导航只读符号位、粗区间和粗尺度；重排才读取入围向量的细位与细尺度。这样同一向量既不需要两份独立表示，也不会让导航承担细码带宽。 本地 31 维例子，粗码占 16 字节，4+2-bit 的额外细码占 8 字节（不含尺度）；未入围的候选不用读后 8 字节。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<span id="paper-foundation-models-ginger-bbdbc663" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-a6109a7d7410b27f">NTQ 已经存了完整细码，为什么导航不用把它一起读出来？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aginger">GINGER: Spicing Up Graph-Based Vector Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>4-bit 导航码就是完整码的粗前缀，但粗码和细位分别存放。导航只读符号位、粗区间和粗尺度；重排才读取入围向量的细位与细尺度。这样同一向量既不需要两份独立表示，也不会让导航承担细码带宽。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>本地 31 维例子，粗码占 16 字节，4+2-bit 的额外细码占 8 字节（不含尺度）；未入围的候选不用读后 8 字节。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08306v1">原论文</a> · <a href="../../../../foundation-models/2611.08306-ginger/">实现解读</a> · <a href="#qa-a6109a7d7410b27f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ginger" data-paper-title="GINGER: Spicing Up Graph-Based Vector Search" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="GINGER: Spicing Up Graph-Based Vector Search 基础模型 Google Research 2026-11-05 近邻图搜索在导航时随机读取大量候选，只需低位宽排序；最后的少量候选才需要高精度重排。若同时存粗码和完整浮点向量，会重复存储。GINGER 用 Nested TurboQuant（NTQ） 让高精度码保留同一个 4-bit 导航前缀：先读取粗码和粗尺度，最后才为入围向量读细码和细尺度。完整库另外用 PiPNN 构建近邻图、重排顶点使邻居 ID 更集中、以 AdaptiveGap 压缩邻接表，并提供 PCA 投影与候选预筛以节省搜索开销。NTQ 降低向量表示的读带宽； 作者的大规模图检索实验成本过高，不复现（审查 DONE）。L1 机制诊断，不是端到端检索复现。L1 机制诊断，不是端到端检索复现。本地只验证 Nested TurboQuant 的码本、拆流、缩放与浮点打分；作者的大规模图检索实验成本过高，不复现（审查 DONE）。build_codebook 用标准正态的解析区间矩拟合正半轴码本，支持 4-bit 加 1–4 个细化位。encode 接收调用方已用共同正交变换旋转的 Rx，本地执行归一化、编码与两种尺度；decode_navigation 只接收粗字节和粗尺度，decode_refined 才读细位流。inner_product 在同一旋转空间对完整精度查询评分。  推理与系统效率 向量检索量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 为什么不能先全局拟合 6-bit 码本，再直接把前 4 位当作导航码？ 一般的 6-bit Lloyd–Max 不保留 4-bit 的分割点。NTQ 固定所有粗边界，再在每个区间内按条件高斯分布单独拟合质心；编码时先选 u，随后只在第 u 个码本里选 v。这样不同细位宽都能复用同一粗码。 教学例：若某粗区间是 [0.4, 0.8)，其最外两条细分边界仍是 0.4 和 0.8。相邻区间的质心即便更近，也不能改变已经选定的粗码。数值不是论文实际阈值。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-6c89dabe9f28f183">为什么不能先全局拟合 6-bit 码本，再直接把前 4 位当作导航码？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aginger">GINGER: Spicing Up Graph-Based Vector Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>一般的 6-bit Lloyd–Max 不保留 4-bit 的分割点。NTQ 固定所有粗边界，再在每个区间内按条件高斯分布单独拟合质心；编码时先选 u，随后只在第 u 个码本里选 v。这样不同细位宽都能复用同一粗码。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：若某粗区间是 [0.4, 0.8)，其最外两条细分边界仍是 0.4 和 0.8。相邻区间的质心即便更近，也不能改变已经选定的粗码。数值不是论文实际阈值。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08306v1">原论文</a> · <a href="../../../../foundation-models/2611.08306-ginger/">实现解读</a> · <a href="#qa-6c89dabe9f28f183">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ginger" data-paper-title="GINGER: Spicing Up Graph-Based Vector Search" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="GINGER: Spicing Up Graph-Based Vector Search 基础模型 Google Research 2026-11-05 近邻图搜索在导航时随机读取大量候选，只需低位宽排序；最后的少量候选才需要高精度重排。若同时存粗码和完整浮点向量，会重复存储。GINGER 用 Nested TurboQuant（NTQ） 让高精度码保留同一个 4-bit 导航前缀：先读取粗码和粗尺度，最后才为入围向量读细码和细尺度。完整库另外用 PiPNN 构建近邻图、重排顶点使邻居 ID 更集中、以 AdaptiveGap 压缩邻接表，并提供 PCA 投影与候选预筛以节省搜索开销。NTQ 降低向量表示的读带宽； 作者的大规模图检索实验成本过高，不复现（审查 DONE）。L1 机制诊断，不是端到端检索复现。L1 机制诊断，不是端到端检索复现。本地只验证 Nested TurboQuant 的码本、拆流、缩放与浮点打分；作者的大规模图检索实验成本过高，不复现（审查 DONE）。build_codebook 用标准正态的解析区间矩拟合正半轴码本，支持 4-bit 加 1–4 个细化位。encode 接收调用方已用共同正交变换旋转的 Rx，本地执行归一化、编码与两种尺度；decode_navigation 只接收粗字节和粗尺度，decode_refined 才读细位流。inner_product 在同一旋转空间对完整精度查询评分。  推理与系统效率 向量检索量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 GINGER 与 PiPNN II 都提到低比特，解决的是同一个瓶颈吗？ 不完全相同。PiPNN II 在近邻图构建时合并打分与 top-K，避免物化候选分数矩阵；GINGER 的 NTQ 在已有图上搜索时降低向量读取带宽，入围后才补读细码。它们可以在同一个系统里使用，但不共享同一项局部验收指标。 图构建侧检查量化点积按每行尺度修正后再入堆；检索侧检查改变细位宽时粗字节不变，并在同召回下单独测检索 QPS。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-a402b719de839e6f">GINGER 与 PiPNN II 都提到低比特，解决的是同一个瓶颈吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aginger">GINGER: Spicing Up Graph-Based Vector Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不完全相同。PiPNN II 在近邻图构建时合并打分与 top-K，避免物化候选分数矩阵；GINGER 的 NTQ 在已有图上搜索时降低向量读取带宽，入围后才补读细码。它们可以在同一个系统里使用，但不共享同一项局部验收指标。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>图构建侧检查量化点积按每行尺度修正后再入堆；检索侧检查改变细位宽时粗字节不变，并在同召回下单独测检索 QPS。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08306v1">原论文</a> · <a href="../../../../foundation-models/2611.08306-ginger/">实现解读</a> · <a href="#qa-a402b719de839e6f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ginger" data-paper-title="GINGER: Spicing Up Graph-Based Vector Search" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="GINGER: Spicing Up Graph-Based Vector Search 基础模型 Google Research 2026-11-05 近邻图搜索在导航时随机读取大量候选，只需低位宽排序；最后的少量候选才需要高精度重排。若同时存粗码和完整浮点向量，会重复存储。GINGER 用 Nested TurboQuant（NTQ） 让高精度码保留同一个 4-bit 导航前缀：先读取粗码和粗尺度，最后才为入围向量读细码和细尺度。完整库另外用 PiPNN 构建近邻图、重排顶点使邻居 ID 更集中、以 AdaptiveGap 压缩邻接表，并提供 PCA 投影与候选预筛以节省搜索开销。NTQ 降低向量表示的读带宽； 作者的大规模图检索实验成本过高，不复现（审查 DONE）。L1 机制诊断，不是端到端检索复现。L1 机制诊断，不是端到端检索复现。本地只验证 Nested TurboQuant 的码本、拆流、缩放与浮点打分；作者的大规模图检索实验成本过高，不复现（审查 DONE）。build_codebook 用标准正态的解析区间矩拟合正半轴码本，支持 4-bit 加 1–4 个细化位。encode 接收调用方已用共同正交变换旋转的 Rx，本地执行归一化、编码与两种尺度；decode_navigation 只接收粗字节和粗尺度，decode_refined 才读细位流。inner_product 在同一旋转空间对完整精度查询评分。  推理与系统效率 向量检索量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 本地验证 NTQ 时应该读哪些输出，哪些结论不能写？ 用已在同一旋转空间的非零向量编码，检查粗码流独立、细质心不跨区间、正确应用两种尺度；再用独立手算对比内积。CPU 合成 MSE 只验证量化机制，不证明十亿级索引召回、SIMD 性能或线上增益。 种子 42–44 的 4+2-bit 经验 MSE 均低于 4-bit；但本地没有图遍历、查询日志或硬件计时，不能把这个差值写成 QPS 提升。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-89e3aeef7e332cbf">本地验证 NTQ 时应该读哪些输出，哪些结论不能写？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aginger">GINGER: Spicing Up Graph-Based Vector Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>用已在同一旋转空间的非零向量编码，检查粗码流独立、细质心不跨区间、正确应用两种尺度；再用独立手算对比内积。CPU 合成 MSE 只验证量化机制，不证明十亿级索引召回、SIMD 性能或线上增益。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>种子 42–44 的 4+2-bit 经验 MSE 均低于 4-bit；但本地没有图遍历、查询日志或硬件计时，不能把这个差值写成 QPS 提升。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08306v1">原论文</a> · <a href="../../../../foundation-models/2611.08306-ginger/">实现解读</a> · <a href="#qa-89e3aeef7e332cbf">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:pipnn-ii" data-paper-title="Turbocharging PiPNN for Proximity and k-NN Graph Building" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Turbocharging PiPNN for Proximity and k-NN Graph Building 基础模型 University of Maryland, College Park 2026-11-03 PiPNN 先用递归分区把可能相近的点送入同一叶，再在叶内批量打分，避免逐点搜索正在构建的图。PiPNN II 用量化减少内存流量，把打分和 top-K 合并，避免先写再读完整距离矩阵。直接 k-NN 图保留叶内见到的近邻，和需要可导航边并执行剪枝的 ANNS 索引不是同一产物。论文另有 GPiPNN：平坦分段路由、分段 top-K、排序聚合及复用已见边的剪枝；这些未在本地实现。 完整 CPU/GPU 实验成本过高，不复现（审查 DONE）。L1 机制诊断，非性能复现。L1 机制诊断，非性能复现。这里只实现已解码字节的打分与 top-K；完整 CPU/GPU 实验成本过高，不复现（审查 DONE）。corrected_dot 检查 i8 范围与维数并执行偏置修正。fused_quantized_topk 接收一个查询与流式 (row, scale) 序列，按行修正、缩放、保留 K 个最优候选；同分保留较早位置。参考实现使用 Python 整数累加和浮点缩放，未声称与硬件 i32/fp32 舍入逐位一致。没有引入量化器、索引或外部数据。  推理与系统效率 量化近邻图构建 基础模型 推理压缩：权重、KV 缓存与服务带宽 PiPNN II 为什么把量化打分和 top-K 放到一起？ 量化减少读取候选向量的字节数；每个候选分数算出后直接与当前第 K 名比较，可以不先写出全距离矩阵。融合与量化是不同改动：前者减少中间分数的读写，后者减少输入向量的读写。 教学例：某叶有 100 个候选而只需前 3 个。逐行打分时保留 3 个入选项即可，不必存完 100 个分数再排序。 2026-11-06">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-pipnn-ii-e5dbbc9f" class="ar-learning-paper-anchor"></span>

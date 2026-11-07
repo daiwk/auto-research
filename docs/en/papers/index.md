@@ -4,25 +4,27 @@
 
 [English home](../index.md) · [中文研究库](../../research-library.md)
 
-The catalog lists 1083 entries from the shared research manifest. English write-ups available: 1083.
+The catalog lists 1086 entries from the shared research manifest. English write-ups available: 1086.
 
 ## Browse by domain
 
 - [Search, ads, recommendation, and LLM applications](recommendation.md): 329 catalog entries, 329 English write-ups
-- [Foundation models](foundation-models.md): 209 catalog entries, 209 English write-ups
+- [Foundation models](foundation-models.md): 210 catalog entries, 210 English write-ups
 - [Structured decisions / System One](system-one.md): 6 catalog entries, 6 English write-ups
-- [Multimodal models](multimodal-models.md): 17 catalog entries, 17 English write-ups
-- [LLM post-training](post-training.md): 250 catalog entries, 250 English write-ups
+- [Multimodal models](multimodal-models.md): 18 catalog entries, 18 English write-ups
+- [LLM post-training](post-training.md): 251 catalog entries, 251 English write-ups
 - [Agents](agent-research.md): 272 catalog entries, 272 English write-ups
 
 ## Read in English
 
 - [XStack: A Benchmark for ML Repo Migration](../../agent-research/2611.08472-xstack/README-en.md)
+- [GINGER: Spicing Up Graph-Based Vector Search](../../foundation-models/2611.08306-ginger/README-en.md)
 - [EnvOpt: Automated Optimization for Agent Environments](../../agent-research/2611.07372-envopt/README-en.md)
 - [ConvPE: Convolutional Position Embedding Improves Transformers](../../foundation-models/2611.07749-convpe/README-en.md)
 - [CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation](../../post-training/2611.07959-cord/README-en.md)
 - [Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking](../../recommendation-components/2611.07591-ice/README-en.md)
 - [From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation](../../recommendation-components/2611.05997-ured/README-en.md)
+- [EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL](../../post-training/2611.06518-emoreward/README-en.md)
 - [Turbocharging PiPNN for Proximity and k-NN Graph Building](../../foundation-models/2611.05690-pipnn-ii/README-en.md)
 - [Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning](../../post-training/2611.05266-targeted-guidance/README-en.md)
 - [Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation?](../../post-training/2611.04958-shuffled-opsd/README-en.md)
@@ -43,6 +45,7 @@ The catalog lists 1083 entries from the shared research manifest. English write-
 - [Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention](../../foundation-models/2611.03768-multi-layer-indexer/README-en.md)
 - [XLA from the Trenches: Correctness on TPU Workloads at Scale](../../foundation-models/2611.00624-xla-trenches/README-en.md)
 - [WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search](../../recommendation-components/2611.00530-wesearch/README-en.md)
+- [GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling](../../multimodal-models/2611.01143-gslm2/README-en.md)
 - [ProLand: A New Infeasible Manifold Optimization Method for LoRA Fine-Tuning](../../foundation-models/2611.00236-proland/README-en.md)
 - [GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport](../../foundation-models/2611.00319-gavagai/README-en.md)
 - [Training LLM Agents to Automate LLM Post-Training with RSI-Dojo](../../agent-research/2611.03698-rsi-dojo/README-en.md)
