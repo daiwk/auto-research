@@ -4,6 +4,7 @@
 
 ## 2026
 
+- 2026-11 · [Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards](../2611.09448-rcea/README.md)（`rcea`）：训练日志里的平均 token 熵变小，既可能是模型更少走错误路径，也可能是它不再尝试原来会做的其它正确解法。RCEA 将两类信号分开：轨迹层按验证器成败、过程有效性和有效解法模式拆分；前缀层用全词表的 log 概率与 logit 增量的协方差解释局部熵方向。
 - 2026-11 · [CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation](../2611.07959-cord/README.md)（`cord-rollout`）：普通 OPD 的教师只给学生已经访问的前缀评分，难以覆盖学生很少走到的教师路径。CoRD 不改每状态的反向 KL 监督，改变的是产生前缀的采样分布。
 - 2026-11 · [EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL](../2611.06518-emoreward/README.md)（`emoreward`）：固定融合权重假设每段视频的情绪证据同样可信。例如，没有可用人脸时，给面部动作通道的默认中性分数不是观测证据。
 - 2026-11 · [Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling](../2611.04792-dars/README.md)（`dars-density`）：期望奖励最大化容易持续强化已密集采样的结果。DARS 在同一条件输入的 rollout 组内估计结果表示密度，以 $r/\rho$ 替换原奖励，再执行常规 GRPO 组优势标准化；不引入 density 网络或替换 policy objective。

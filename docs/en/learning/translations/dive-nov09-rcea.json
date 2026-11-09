@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/post-training/policy-optimization/comparison/post-training:rcea": {
+      "source_sha256": "eb04a88f13325d2a553b6604458203cec360fb33d4d6e044c7ea18cdf18c033e",
+      "reviewed": true,
+      "fields": {
+        "position": "Keep the optimization objective unchanged. Partition trajectory entropy by verifier outcome, validity, and solution mode, then use same-prefix covariance to explain the direction of local changes.",
+        "tradeoff": "The exact decomposition needs deterministic partitions. Local covariance does not identify strategy modes or causal attribution. The CPU implementation covers the numerical kernel, not the multi-objective RLVR matrix."
+      }
+    },
+    "dive/post-training/policy-optimization/update/2026-11-09/2": {
+      "source_sha256": "f26841c47361aa1f131fafb6ef0237b8ffb950d400593e74f86d3373c3572191",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added RCEA to separate policy optimization from entropy diagnostics. Falling global entropy does not establish that valid strategies contracted. The local component verifies only the trajectory chain rule and first-order local approximation."
+      }
+    }
+  }
+}

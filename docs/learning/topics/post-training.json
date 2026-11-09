@@ -66,6 +66,7 @@
       ],
       "reading_order": "先读GRPO，区分采样、优势、ratio和参考KL；再读DAPO，观察零方差组与训练稳定性的处理；最后读TIS，把实际采样引擎和训练引擎的概率口径纳入检查。",
       "papers": [
+        "post-training:rcea",
         "post-training:rlid",
         "post-training:moer",
         "post-training:cord",

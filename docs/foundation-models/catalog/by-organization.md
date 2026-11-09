@@ -86,6 +86,7 @@
 
 ## FAIR at Meta
 
+- 2026-11-06 · [e-means: outperforming k-means (in one-tenth the epochs)](../../foundation-models/2611.09501-e-means/README.md)（`e-means`）：Lloyd 每扫完一轮数据才更新质心。e-means 每批更新各簇的 EMA 计数与向量和，让同一轮中的后续批次立即使用新质心。每五批检查低计数簇，借活跃簇分裂复苏；末轮按过程中产生的分配取均值，不额外做一轮全量分配。原文另拟合批大小与峰值步长的缩放律，在大规模场景比较精确、低精度与 IVF 分配。
 - 2026-10-14 · [ESC: Escaping 2D Diffusion Ambiguity with Geometric Constraints for Consistent Novel View Synthesis](../../foundation-models/2610.23732-esc/README.md)（`esc`）：单幅图像经扩散模型生成新视角时，2D视觉质量或相机姿态对齐不保证3D几何一致。ESC 联合生成 RGB 与逆深度，用 Plücker ray maps 条件化 Qwen MM-DiT，并以双向深度重投影约束 PCC 识别“物体消失”与“凭空出现”。推理时按 PCC 在多次随机生成中选优。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ## FAIR, Meta

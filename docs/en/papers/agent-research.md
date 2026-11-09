@@ -8,6 +8,8 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [ENGRAM: From Agent Experience to Weights through Verified Consolidation](<https://arxiv.org/abs/2611.09472>) | 2026-11-06 | [English](../../agent-research/2611.09472-engram-consolidation/README-en.md) · [Chinese](../../agent-research/2611.09472-engram-consolidation/README.md) |
+| [Discovering formally verified quantum programs with AI](<https://arxiv.org/abs/2611.09822v1>) | 2026-11-06 | [English](../../agent-research/2611.09822-verified-quantum-wiki/README-en.md) · [Chinese](../../agent-research/2611.09822-verified-quantum-wiki/README.md) |
 | [XStack: A Benchmark for ML Repo Migration](<https://arxiv.org/abs/2611.08472>) | 2026-11-05 | [English](../../agent-research/2611.08472-xstack/README-en.md) · [Chinese](../../agent-research/2611.08472-xstack/README.md) |
 | [EnvOpt: Automated Optimization for Agent Environments](<https://arxiv.org/abs/2611.07372>) | 2026-11-05 | [English](../../agent-research/2611.07372-envopt/README-en.md) · [Chinese](../../agent-research/2611.07372-envopt/README.md) |
 | [Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents](<https://arxiv.org/abs/2611.05139>) | 2026-11-03 | [English](../../agent-research/2611.05139-meta-square/README-en.md) · [Chinese](../../agent-research/2611.05139-meta-square/README.md) |

@@ -7,7 +7,7 @@ hide:
 
 # 推理压缩先找瓶颈：权重、KV 内容与缓存层级
 
-[基础模型](../index.md) · 更新 2026-11-07 · 35 篇主题资料 / 12 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-09 · 36 篇主题资料 / 13 篇重点对照
 
 AWQ 减权重位宽，GQA 减 KV 头，DropKV 与 TwinKV 改保留内容，KVMEM 管可执行历史视图，Remote KV Tiers 解决跨层级加载。它们可以组合，但不能用一个“压缩率”解释质量、可恢复性和端到端速度。 FoldBias另解决压缩缓存的接口障碍：把静态bias折进同维key，但未来query漂移仍会引入误差。
 
@@ -37,6 +37,7 @@ AWQ 减权重位宽，GQA 减 KV 头，DropKV 与 TwinKV 改保留内容，KVMEM
 | [Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention](../../../foundation-models/2611.03768-multi-layer-indexer/README.md) · [原始来源](https://arxiv.org/abs/2611.03768)<br>章节：背景与主要改动、核心公式、成本判断与复现边界 | 让当前层消费较早full layer为同一token计算的新selection，将索引器放到侧stream，与主stream的attention、投影和FFN重叠；首次消费时join并保留tensor生命周期。 | 改变依赖与调度，不压缩KV，也不是复用上一token的过期selection。完整路径需8张H200、TP8大模型与SGLang内核，本库仅review，未实现runtime或生成吞吐metrics。 |
 | [Turbocharging PiPNN for Proximity and k-NN Graph Building](../../../foundation-models/2611.05690-pipnn-ii/README.md) · [原始来源](https://arxiv.org/abs/2611.05690v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 在近邻图构建的叶内，对已解码的量化候选做有符号点积修正，应用各行尺度后直接更新 top-K，避免物化完整候选分数矩阵。 | 缩小的是图构建的输入表示和中间分数流量，不是 LM 权重、KV 或跨层依赖；本地只做 CPU 分数和排序参考，未实现编码、分区、剪枝或生产 SIMD/Hopper 核。 |
 | [GINGER: Spicing Up Graph-Based Vector Search](../../../foundation-models/2611.08306-ginger/README.md) · [原始来源](https://arxiv.org/abs/2611.08306v1)<br>章节：核心公式、数据协议与代码映射 | 在同一已旋转向量的固定 4-bit 高斯粗码上做分区 Lloyd–Max 细化，导航只读粗码及其尺度，重排才加载细码。 | 细位宽独立于导航前缀，换取更准的重排；仍需保留两套尺度，并为入围项读取细位。本地只验证量化与内积，不覆盖图或 SIMD。 |
+| [e-means: outperforming k-means (in one-tenth the epochs)](../../../foundation-models/2611.09501-e-means/README.md) · [原始来源](https://arxiv.org/abs/2611.09501v1)<br>章节：核心公式、结果、负控与边界 | 用计数与向量和的小批量 EMA 训练质心，每五批分裂活跃 donor 复苏弱簇，再用末轮历史分配均值收尾。 | 加快的是聚类优化，不是 GINGER 的候选读带宽或 PiPNN II 的构建打分；CPU 固定标签 MSE 不代表 IVF 召回或 GPU 吞吐。 |
 
 </div>
 
@@ -172,6 +173,10 @@ AWQ 改模型权重：由校准激活决定等价缩放，再做低比特重建�
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
 
+**2026-11-09** · 加入 e-means，对比质心训练、图构建与查询读带宽三个阶段。末轮固定分配均值能减小相应训练目标，不保证留出误差或检索性能都改善。
+
+涉及：[e-means](../../../foundation-models/2611.09501-e-means/README.md)
+
 **2026-11-07** · 加入 GINGER 嵌套 TurboQuant，与 AWQ 和 PiPNN II 对照权重压缩、建图写回和查询读取；核对 GINGER 指向的 PiPNN II 官方仓库仍是占位，未更改此前本地证据。
 
 涉及：[ginger](../../../foundation-models/2611.08306-ginger/README.md) · [pipnn-ii](../../../foundation-models/2611.05690-pipnn-ii/README.md) · [awq](../../../reproductions/2306.00978-awq/README.md)
@@ -196,7 +201,7 @@ AWQ 改模型权重：由校准激活决定等价缩放，再做低比特重建�
 
 覆盖 29 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 35 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 36 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -235,6 +240,7 @@ AWQ 改模型权重：由校准激活决定等价缩放，再做低比特重建�
 - [Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention](../../../foundation-models/2611.03768-multi-layer-indexer/README.md)
 - [Turbocharging PiPNN for Proximity and k-NN Graph Building](../../../foundation-models/2611.05690-pipnn-ii/README.md)
 - [GINGER: Spicing Up Graph-Based Vector Search](../../../foundation-models/2611.08306-ginger/README.md)
+- [e-means: outperforming k-means (in one-tenth the epochs)](../../../foundation-models/2611.09501-e-means/README.md)
 
 </details>
 

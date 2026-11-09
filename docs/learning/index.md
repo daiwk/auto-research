@@ -21,7 +21,7 @@ hide:
 
 <!-- learning-topics:start -->
 
-6 个主题 · 31 个子主题 · 4353 个问题 / 1086 篇论文
+6 个主题 · 31 个子主题 · 4369 个问题 / 1090 篇论文
 
 <div class="ar-learning-topics">
 <article class="ar-learning-topic-tile">
@@ -41,12 +41,12 @@ hide:
 <article class="ar-learning-topic-tile">
 <h2><a href="paths/foundation-models/">基础模型</a></h2>
 <p>理解模型怎样读取上下文、分配计算和训练预算，以及压缩、生成与能力评测的取舍。</p>
-<p class="ar-learning-topic-meta">6 个子主题 · 628 问 / 157 篇</p>
+<p class="ar-learning-topic-meta">6 个子主题 · 632 问 / 158 篇</p>
 <details><summary>展开子主题问题库</summary><ul>
 <li><a href="paths/foundation-models/context-and-state/">长上下文：注意力、递归状态与记忆</a><span>148 问<a class="ar-learning-deep-link" href="deep-dives/foundation-models/context-and-state/">精读对比</a></span></li>
 <li><a href="paths/foundation-models/conditional-compute/">按需计算：专家、弹性深宽与查表记忆</a><span>104 问<a class="ar-learning-deep-link" href="deep-dives/foundation-models/conditional-compute/">精读对比</a></span></li>
 <li><a href="paths/foundation-models/training-budget/">训练预算：数据配比、目标与优化器</a><span>120 问<a class="ar-learning-deep-link" href="deep-dives/foundation-models/training-budget/">精读对比</a></span></li>
-<li><a href="paths/foundation-models/compression-and-cache/">推理压缩：权重、KV 缓存与服务带宽</a><span>140 问<a class="ar-learning-deep-link" href="deep-dives/foundation-models/compression-and-cache/">精读对比</a></span></li>
+<li><a href="paths/foundation-models/compression-and-cache/">推理压缩：权重、KV 缓存与服务带宽</a><span>144 问<a class="ar-learning-deep-link" href="deep-dives/foundation-models/compression-and-cache/">精读对比</a></span></li>
 <li><a href="paths/foundation-models/generation-paths/">生成路径：草稿验证、并行去噪与少步迭代</a><span>60 问<a class="ar-learning-deep-link" href="deep-dives/foundation-models/generation-paths/">精读对比</a></span></li>
 <li><a href="paths/foundation-models/evaluation-and-evidence/">能力证据：评测采样、读出与可靠性</a><span>56 问<a class="ar-learning-deep-link" href="deep-dives/foundation-models/evaluation-and-evidence/">精读对比</a></span></li>
 </ul></details>
@@ -74,10 +74,10 @@ hide:
 <article class="ar-learning-topic-tile">
 <h2><a href="paths/post-training/">LLM 后训练</a></h2>
 <p>先分清反馈来自哪里，再看策略更新、步骤信用、教师监督，以及数据和算力如何分配。</p>
-<p class="ar-learning-topic-meta">6 个子主题 · 1004 问 / 251 篇</p>
+<p class="ar-learning-topic-meta">6 个子主题 · 1008 问 / 252 篇</p>
 <details><summary>展开子主题问题库</summary><ul>
 <li><a href="paths/post-training/preference-and-alignment/">偏好与对齐：先看反馈长什么样</a><span>100 问<a class="ar-learning-deep-link" href="deep-dives/post-training/preference-and-alignment/">精读对比</a></span></li>
-<li><a href="paths/post-training/policy-optimization/">策略优化：谁在采样，谁在被更新</a><span>220 问<a class="ar-learning-deep-link" href="deep-dives/post-training/policy-optimization/">精读对比</a></span></li>
+<li><a href="paths/post-training/policy-optimization/">策略优化：谁在采样，谁在被更新</a><span>224 问<a class="ar-learning-deep-link" href="deep-dives/post-training/policy-optimization/">精读对比</a></span></li>
 <li><a href="paths/post-training/reward-and-credit/">奖励与信用：正确结果该奖励哪些步骤</a><span>156 问<a class="ar-learning-deep-link" href="deep-dives/post-training/reward-and-credit/">精读对比</a></span></li>
 <li><a href="paths/post-training/student-trajectory-distillation/">轨迹蒸馏：学生、提案与前缀分布</a><span>176 问<a class="ar-learning-deep-link" href="deep-dives/post-training/student-trajectory-distillation/">精读对比</a></span></li>
 <li><a href="paths/post-training/teacher-and-context/">教师与纠错：额外信息何时能帮到学生</a><span>200 问<a class="ar-learning-deep-link" href="deep-dives/post-training/teacher-and-context/">精读对比</a></span></li>
@@ -87,12 +87,12 @@ hide:
 <article class="ar-learning-topic-tile">
 <h2><a href="paths/agent-research/">Agent</a></h2>
 <p>从下一步行动到完整执行流程：依次学习规划、记忆、工具协作、自进化、训练与独立评测。</p>
-<p class="ar-learning-topic-meta">6 个子主题 · 1089 问 / 272 篇</p>
+<p class="ar-learning-topic-meta">6 个子主题 · 1097 问 / 274 篇</p>
 <details><summary>展开子主题问题库</summary><ul>
 <li><a href="paths/agent-research/planning-and-search/">规划与搜索：下一步该做什么</a><span>64 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/planning-and-search/">精读对比</a></span></li>
-<li><a href="paths/agent-research/memory-and-skills/">记忆与技能：让经验可取回、可失效</a><span>228 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/memory-and-skills/">精读对比</a></span></li>
+<li><a href="paths/agent-research/memory-and-skills/">记忆与技能：让经验可取回、可失效</a><span>232 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/memory-and-skills/">精读对比</a></span></li>
 <li><a href="paths/agent-research/tools-and-collaboration/">工具与协作执行：把计划变成可检查的动作</a><span>201 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/tools-and-collaboration/">精读对比</a></span></li>
-<li><a href="paths/agent-research/harness-and-self-improvement/">运行流程与自进化：改的是哪一层</a><span>204 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/harness-and-self-improvement/">精读对比</a></span></li>
+<li><a href="paths/agent-research/harness-and-self-improvement/">运行流程与自进化：改的是哪一层</a><span>208 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/harness-and-self-improvement/">精读对比</a></span></li>
 <li><a href="paths/agent-research/agent-policy-learning/">交互策略学习：把轨迹反馈变成更新</a><span>212 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/agent-policy-learning/">精读对比</a></span></li>
 <li><a href="paths/agent-research/evaluation-and-reliability/">评测与可靠性：如何知道真的做对了</a><span>180 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/evaluation-and-reliability/">精读对比</a></span></li>
 </ul></details>
@@ -108,14 +108,14 @@ hide:
 <!-- learning-recent:start -->
 
 <div class="ar-learning-recent"><ul>
-<li><a href="all/#qa-a6109a7d7410b27f">NTQ 已经存了完整细码，为什么导航不用把它一起读出来？</a><span>2026-11-07 · ginger</span></li>
-<li><a href="all/#qa-89e3aeef7e332cbf">本地验证 NTQ 时应该读哪些输出，哪些结论不能写？</a><span>2026-11-07 · ginger</span></li>
-<li><a href="all/#qa-a402b719de839e6f">GINGER 与 PiPNN II 都提到低比特，解决的是同一个瓶颈吗？</a><span>2026-11-07 · ginger</span></li>
-<li><a href="all/#qa-6c89dabe9f28f183">为什么不能先全局拟合 6-bit 码本，再直接把前 4 位当作导航码？</a><span>2026-11-07 · ginger</span></li>
-<li><a href="all/#qa-3b23dc7568601157">Eq. (8) 为什么不能先全量归一再执行活跃阈值？运行时能否用当前结果更新表？</a><span>2026-11-07 · emoreward</span></li>
-<li><a href="all/#qa-e0032c24f08544d9">EmoReward 与 TVRL 都用于视频强化学习，它们改动的是同一个训练量吗？</a><span>2026-11-07 · emoreward</span></li>
-<li><a href="all/#qa-ff355c3308b0e3ed">上轮人脸通道与代理结果高度正相关，这轮视频没有可用人脸时是否仍应给它奖励权重？</a><span>2026-11-07 · emoreward</span></li>
-<li><a href="all/#qa-8b1fee98de66e2f2">RewardMemory 为什么比较原始分数相关性，还要先减去通道平均相关再裁剪？</a><span>2026-11-07 · emoreward</span></li>
+<li><a href="all/#qa-00b0d44ac6c7a232">为什么有效成功轨迹概率为零时，有效模式数不该报成 1？</a><span>2026-11-09 · rcea</span></li>
+<li><a href="all/#qa-b6a13213bc039f6b">轨迹熵的分解和平均 token 熵按结果分组，为什么不是同一条公式？</a><span>2026-11-09 · rcea</span></li>
+<li><a href="all/#qa-d6fcbecfc95c0ed0">RLVR 训练后总熵下降，是否说明模型的正确解法也变少了？</a><span>2026-11-09 · rcea</span></li>
+<li><a href="all/#qa-ae66013b52ab3feb">给一个前缀的每个 logit 增加相同常数，局部协方差和实际熵会如何变化？</a><span>2026-11-09 · rcea</span></li>
+<li><a href="all/#qa-44d3dc20ade161da">复苏弱簇时，为什么从活跃簇分裂而不是随机重采本批数据？</a><span>2026-11-09 · e-means</span></li>
+<li><a href="all/#qa-ee3eb64f07bedf5d">CPU 上的精确 L2 聚类检查能代替论文 GPU 实验吗？</a><span>2026-11-09 · e-means</span></li>
+<li><a href="all/#qa-1abaa4827e475046">为什么 e-means 不能对每批质心简单做 EMA？</a><span>2026-11-09 · e-means</span></li>
+<li><a href="all/#qa-ad2650e6f1d14041">末轮均值降低固定标签 MSE，为什么还不能断言 e-means 总是比 Lloyd 好？</a><span>2026-11-09 · e-means</span></li>
 </ul></div>
 
 <!-- learning-recent:end -->

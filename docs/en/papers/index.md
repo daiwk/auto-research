@@ -4,19 +4,23 @@
 
 [English home](../index.md) · [中文研究库](../../research-library.md)
 
-The catalog lists 1086 entries from the shared research manifest. English write-ups available: 1086.
+The catalog lists 1090 entries from the shared research manifest. English write-ups available: 1090.
 
 ## Browse by domain
 
 - [Search, ads, recommendation, and LLM applications](recommendation.md): 329 catalog entries, 329 English write-ups
-- [Foundation models](foundation-models.md): 210 catalog entries, 210 English write-ups
+- [Foundation models](foundation-models.md): 211 catalog entries, 211 English write-ups
 - [Structured decisions / System One](system-one.md): 6 catalog entries, 6 English write-ups
 - [Multimodal models](multimodal-models.md): 18 catalog entries, 18 English write-ups
-- [LLM post-training](post-training.md): 251 catalog entries, 251 English write-ups
-- [Agents](agent-research.md): 272 catalog entries, 272 English write-ups
+- [LLM post-training](post-training.md): 252 catalog entries, 252 English write-ups
+- [Agents](agent-research.md): 274 catalog entries, 274 English write-ups
 
 ## Read in English
 
+- [e-means: outperforming k-means (in one-tenth the epochs)](../../foundation-models/2611.09501-e-means/README-en.md)
+- [Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards](../../post-training/2611.09448-rcea/README-en.md)
+- [ENGRAM: From Agent Experience to Weights through Verified Consolidation](../../agent-research/2611.09472-engram-consolidation/README-en.md)
+- [Discovering formally verified quantum programs with AI](../../agent-research/2611.09822-verified-quantum-wiki/README-en.md)
 - [XStack: A Benchmark for ML Repo Migration](../../agent-research/2611.08472-xstack/README-en.md)
 - [GINGER: Spicing Up Graph-Based Vector Search](../../foundation-models/2611.08306-ginger/README-en.md)
 - [EnvOpt: Automated Optimization for Agent Environments](../../agent-research/2611.07372-envopt/README-en.md)

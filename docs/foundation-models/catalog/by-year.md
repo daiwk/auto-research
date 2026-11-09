@@ -4,6 +4,7 @@
 
 ## 2026
 
+- 2026-11 · [e-means: outperforming k-means (in one-tenth the epochs)](../../foundation-models/2611.09501-e-means/README.md)（`e-means`）：Lloyd 每扫完一轮数据才更新质心。e-means 每批更新各簇的 EMA 计数与向量和，让同一轮中的后续批次立即使用新质心。每五批检查低计数簇，借活跃簇分裂复苏；末轮按过程中产生的分配取均值，不额外做一轮全量分配。原文另拟合批大小与峰值步长的缩放律，在大规模场景比较精确、低精度与 IVF 分配。
 - 2026-11 · [ConvPE: Convolutional Position Embedding Improves Transformers](../../foundation-models/2611.07749-convpe/README.md)（`convpe`）：RoPE 旋转 query/key；ConvPE 改的是 softmax 前的加性分数。它先把当前层隐状态投影到少量通道，再从当前及最近若干隐状态学习各相对距离的偏置。每个查询只得到窗口内偏置；**窗口外偏置为零，不是把远处 key 屏蔽**。因果和 padding mask 仍由注意力层负责。论文还讨论分组、低秩与二维变体，此处仅实现 §3.1 的默认无分组、无分解一维公式。
 - 2026-11 · [GINGER: Spicing Up Graph-Based Vector Search](../../foundation-models/2611.08306-ginger/README.md)（`ginger`）：近邻图搜索在导航时随机读取大量候选，只需低位宽排序；最后的少量候选才需要高精度重排。若同时存粗码和完整浮点向量，会重复存储。GINGER 用 **Nested TurboQuant（NTQ）** 让高精度码保留同一个 4-bit 导航前缀：先读取粗码和粗尺度，最后才为入围向量读细码和细尺度。
 - 2026-11 · [Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training](../../foundation-models/2611.04327-anchor-kv/README.md)（`anchor-kv`）：不同层可能存储相近信息，却使用不同坐标基。Anchor 让一组层共享一个 recurrent state，以各层可学习 read-map 变换读出，再由输入相关 gate 与局部 SWA 合并。训练时保留 interior TTT 分支，部署时才删除，不能把部署结构直接当作训练配方。依据固定 v1 §3.2、§4.1、Appendix C。

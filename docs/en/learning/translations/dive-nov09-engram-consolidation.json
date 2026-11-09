@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/agent-research/memory-and-skills/comparison/agent-research:engram-consolidation": {
+      "source_sha256": "9f250b4c6eeceb312590dccd6f39d4d0447e161fb06f1772c2d61fad0166c9f2",
+      "reviewed": true,
+      "fields": {
+        "position": "Admit a skill before training through student mastery or successful teacher demonstrations. After training, pair the retrieval-free candidate with Base+ETG on the same probes.",
+        "tradeoff": "Only a verified release can archive eligible records; hybrid activation keeps retrieval. Local probes do not replace full rollouts. The CPU component executes the two gates without training."
+      }
+    },
+    "dive/agent-research/memory-and-skills/analysis/4": {
+      "source_sha256": "83dfd723f92e40ca1aaf43eb6beb8becb1025972dcf2a1daaa6c259fd76229a7",
+      "reviewed": true,
+      "fields": {
+        "title": "Omitting a record from the current window does not prove the weights can replace it",
+        "body": "MemPrice chooses which representations to read under a budget and utility estimate. After an external training update, ENGRAM compares a retrieval-free candidate with Base+ETG on the same probes to decide which training records may leave retrieval. The first saves window space without showing that the weights have learned the skill; the second tests local behavior without establishing end-to-end capability or total storage savings."
+      }
+    },
+    "dive/agent-research/memory-and-skills/question/engram-approval-versus-window-budget": {
+      "source_sha256": "6408011c926b372054410bb732570760945064c2cf154bc3e8ef356d1e558b79",
+      "reviewed": true,
+      "fields": {
+        "question": "If MemPrice omits a record this round, can that signal directly approve ENGRAM memory release?",
+        "answer": "No. MemPrice allocates representations under a budget. ENGRAM also needs current training participation, reserved probes, and a retrieval-free candidate that clears both thresholds. An archived record is not deleted from physical storage.",
+        "example": "Teaching example: Two correct answers out of four require retention at a strict 50% floor, even when Base+ETG got only one correct."
+      }
+    },
+    "dive/agent-research/memory-and-skills/update/2026-11-09/3": {
+      "source_sha256": "da6100179c9f037bd36b605db8ab2661388b9641a19b0bc262953a8bd74f67c2",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added ENGRAM and separated admission, candidate activation, and verified memory release. Saving window space, shrinking retrieval, and reducing storage are different objectives. The full training experiment was not reproduced."
+      }
+    }
+  }
+}

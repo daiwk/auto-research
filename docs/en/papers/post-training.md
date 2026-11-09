@@ -8,6 +8,7 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards](<https://arxiv.org/abs/2611.09448>) | 2026-11-06 | [English](../../post-training/2611.09448-rcea/README-en.md) · [Chinese](../../post-training/2611.09448-rcea/README.md) |
 | [CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation](<https://arxiv.org/abs/2611.07959>) | 2026-11-05 | [English](../../post-training/2611.07959-cord/README-en.md) · [Chinese](../../post-training/2611.07959-cord/README.md) |
 | [EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL](<https://arxiv.org/abs/2611.06518>) | 2026-11-04 | [English](../../post-training/2611.06518-emoreward/README-en.md) · [Chinese](../../post-training/2611.06518-emoreward/README.md) |
 | [Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning](<https://arxiv.org/abs/2611.05266v1>) | 2026-11-03 | [English](../../post-training/2611.05266-targeted-guidance/README-en.md) · [Chinese](../../post-training/2611.05266-targeted-guidance/README.md) |

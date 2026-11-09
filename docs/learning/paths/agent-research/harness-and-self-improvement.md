@@ -7,7 +7,7 @@ hide:
 
 # 运行流程与自进化：改的是哪一层
 
-[Agent](index.md) / 204 个问题 · 51 篇论文
+[Agent](index.md) / 208 个问题 · 52 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">204 个问题 · 51 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">208 个问题 · 52 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:verified-quantum-wiki" data-paper-title="Discovering formally verified quantum programs with AI" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Discovering formally verified quantum programs with AI Agent Google DeepMind 2026-11-06 量子程序的复杂度可能远超经典模拟能力，靠若干数值样例无法证明一般正确性。研究者先在量子 Hoare 逻辑（QHL）库中冻结正确性与资源规范，异构 LLM 团队搜索程序和 Lean 证明。论文不固定团队内部模型、框架或分工；共享的是规范、外部验证与协作协议（§1.1–1.2、附录 A–C）。团队本地通过 Lean 不等于可接纳成果。 完整实验成本过高，不复现（审查 DONE）；component_only / L1 机制诊断：本地只执行收到可信外部验证结果后的 wiki 合并规则，不运行 Lean、量子程序或 LLM。component_only / L1 机制诊断：本地只执行收到可信外部验证结果后的 wiki 合并规则，不运行 Lean、量子程序或 LLM。完整实验成本过高，不复现（审查 DONE）；作者尚未公开本篇量子 Lean 库、题目规范和已验证解。Solution 显式携带冻结规范摘要、候选 artifact 摘要、成本口径、精确成本及代码大小。  Harness 与自我改进 形式验证 跨团队共享 wiki Agent 运行流程与自进化：改的是哪一层 团队说自己的 Lean 文件编译通过，为什么还不能直接写入共享 wiki？ 团队可修改自己的工作区，可能连定理、依赖定义或允许公理一起改掉。本篇将提交放到独立干净沙箱，用 Comparator 对照冻结规范，确认证明没有偷换问题且资源定理等于申报成本，再决定是否合并。 教学例：原题要求所有输入满足性质，团队把定理改成只对零输入成立。文件可能编译，但 target_theorems_match 应为 false，不能因成本下降 90% 就接纳。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-verified-quantum-wiki-13281631" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-9c80b7b87afe0152">团队说自己的 Lean 文件编译通过，为什么还不能直接写入共享 wiki？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Averified-quantum-wiki">Discovering formally verified quantum programs with AI</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>团队可修改自己的工作区，可能连定理、依赖定义或允许公理一起改掉。本篇将提交放到独立干净沙箱，用 Comparator 对照冻结规范，确认证明没有偷换问题且资源定理等于申报成本，再决定是否合并。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：原题要求所有输入满足性质，团队把定理改成只对零输入成立。文件可能编译，但 target_theorems_match 应为 false，不能因成本下降 90% 就接纳。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09822v1">原论文</a> · <a href="../../../../agent-research/2611.09822-verified-quantum-wiki/">实现解读</a> · <a href="#qa-9c80b7b87afe0152">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:verified-quantum-wiki" data-paper-title="Discovering formally verified quantum programs with AI" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Discovering formally verified quantum programs with AI Agent Google DeepMind 2026-11-06 量子程序的复杂度可能远超经典模拟能力，靠若干数值样例无法证明一般正确性。研究者先在量子 Hoare 逻辑（QHL）库中冻结正确性与资源规范，异构 LLM 团队搜索程序和 Lean 证明。论文不固定团队内部模型、框架或分工；共享的是规范、外部验证与协作协议（§1.1–1.2、附录 A–C）。团队本地通过 Lean 不等于可接纳成果。 完整实验成本过高，不复现（审查 DONE）；component_only / L1 机制诊断：本地只执行收到可信外部验证结果后的 wiki 合并规则，不运行 Lean、量子程序或 LLM。component_only / L1 机制诊断：本地只执行收到可信外部验证结果后的 wiki 合并规则，不运行 Lean、量子程序或 LLM。完整实验成本过高，不复现（审查 DONE）；作者尚未公开本篇量子 Lean 库、题目规范和已验证解。Solution 显式携带冻结规范摘要、候选 artifact 摘要、成本口径、精确成本及代码大小。  Harness 与自我改进 形式验证 跨团队共享 wiki Agent 运行流程与自进化：改的是哪一层 默认 5% 成本门槛与 20% 代码缩短是 AND 还是 OR？ 通过外部重验证是共同前提；之后两个分支是 OR：成本至少下降 5%，或者代码至少缩短 20% 且成本严格下降。第二个分支不能只缩短代码而维持原成本。两项还必须比较同一冻结规范与成本口径。 教学例：从成本 100、长度 100 出发，(95,120) 可经第一分支接纳，(99,80) 可经第二分支接纳，(100,1) 仍拒绝。代码长度的单位由调用方固定，论文未指定字节或行。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-4c13a877a713728e">默认 5% 成本门槛与 20% 代码缩短是 AND 还是 OR？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Averified-quantum-wiki">Discovering formally verified quantum programs with AI</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>通过外部重验证是共同前提；之后两个分支是 OR：成本至少下降 5%，或者代码至少缩短 20% 且成本严格下降。第二个分支不能只缩短代码而维持原成本。两项还必须比较同一冻结规范与成本口径。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：从成本 100、长度 100 出发，(95,120) 可经第一分支接纳，(99,80) 可经第二分支接纳，(100,1) 仍拒绝。代码长度的单位由调用方固定，论文未指定字节或行。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09822v1">原论文</a> · <a href="../../../../agent-research/2611.09822-verified-quantum-wiki/">实现解读</a> · <a href="#qa-4c13a877a713728e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:verified-quantum-wiki" data-paper-title="Discovering formally verified quantum programs with AI" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Discovering formally verified quantum programs with AI Agent Google DeepMind 2026-11-06 量子程序的复杂度可能远超经典模拟能力，靠若干数值样例无法证明一般正确性。研究者先在量子 Hoare 逻辑（QHL）库中冻结正确性与资源规范，异构 LLM 团队搜索程序和 Lean 证明。论文不固定团队内部模型、框架或分工；共享的是规范、外部验证与协作协议（§1.1–1.2、附录 A–C）。团队本地通过 Lean 不等于可接纳成果。 完整实验成本过高，不复现（审查 DONE）；component_only / L1 机制诊断：本地只执行收到可信外部验证结果后的 wiki 合并规则，不运行 Lean、量子程序或 LLM。component_only / L1 机制诊断：本地只执行收到可信外部验证结果后的 wiki 合并规则，不运行 Lean、量子程序或 LLM。完整实验成本过高，不复现（审查 DONE）；作者尚未公开本篇量子 Lean 库、题目规范和已验证解。Solution 显式携带冻结规范摘要、候选 artifact 摘要、成本口径、精确成本及代码大小。  Harness 与自我改进 形式验证 跨团队共享 wiki Agent 运行流程与自进化：改的是哪一层 这套 wiki 接纳规则与按开发集准确率选择推理策略有什么根本区别？ 开发集策略选择比较有限样本的经验效果，需要测试隔离及不确定性分析；本篇对冻结形式规格证明正确性和成本后，再筛选足够大的改善。证明可以超出可模拟样本，但不能证明物理建模假设正确，也不能把事后协作归因变成因果实验。 教学例：一个策略在 95/100 道开发题答对不能证明所有输入正确；一个 QHL 定理证明全体满足前置条件的状态正确，却可能沿用遗漏某类门成本的规格。两者需要不同的外部审查。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-06cbf962e8b93e19">这套 wiki 接纳规则与按开发集准确率选择推理策略有什么根本区别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Averified-quantum-wiki">Discovering formally verified quantum programs with AI</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>开发集策略选择比较有限样本的经验效果，需要测试隔离及不确定性分析；本篇对冻结形式规格证明正确性和成本后，再筛选足够大的改善。证明可以超出可模拟样本，但不能证明物理建模假设正确，也不能把事后协作归因变成因果实验。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个策略在 95/100 道开发题答对不能证明所有输入正确；一个 QHL 定理证明全体满足前置条件的状态正确，却可能沿用遗漏某类门成本的规格。两者需要不同的外部审查。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09822v1">原论文</a> · <a href="../../../../agent-research/2611.09822-verified-quantum-wiki/">实现解读</a> · <a href="#qa-06cbf962e8b93e19">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:verified-quantum-wiki" data-paper-title="Discovering formally verified quantum programs with AI" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Discovering formally verified quantum programs with AI Agent Google DeepMind 2026-11-06 量子程序的复杂度可能远超经典模拟能力，靠若干数值样例无法证明一般正确性。研究者先在量子 Hoare 逻辑（QHL）库中冻结正确性与资源规范，异构 LLM 团队搜索程序和 Lean 证明。论文不固定团队内部模型、框架或分工；共享的是规范、外部验证与协作协议（§1.1–1.2、附录 A–C）。团队本地通过 Lean 不等于可接纳成果。 完整实验成本过高，不复现（审查 DONE）；component_only / L1 机制诊断：本地只执行收到可信外部验证结果后的 wiki 合并规则，不运行 Lean、量子程序或 LLM。component_only / L1 机制诊断：本地只执行收到可信外部验证结果后的 wiki 合并规则，不运行 Lean、量子程序或 LLM。完整实验成本过高，不复现（审查 DONE）；作者尚未公开本篇量子 Lean 库、题目规范和已验证解。Solution 显式携带冻结规范摘要、候选 artifact 摘要、成本口径、精确成本及代码大小。  Harness 与自我改进 形式验证 跨团队共享 wiki Agent 运行流程与自进化：改的是哪一层 本地构造 ExternalComparatorResult 并通过 admission，可以说量子程序已正式验证吗？ 不可以。它是可信外部验证器的接口，既不运行 Lean 也不鉴别凭据真实性。真实宿主先完成独立验证并认证来源，才可填入结果。CPU 夹具只测试绑定一致性、失败拒绝和阈值；实际 Lean 证明数为零。 教学例：复制旧证明凭据给新 artifact，即便所有 flags 为 true，也因摘要不匹配拒绝；若恶意调用方同时伪造摘要和 flags，本组件无法识别，必须由外部可信边界防止。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-b183d20e4f323234">本地构造 ExternalComparatorResult 并通过 admission，可以说量子程序已正式验证吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Averified-quantum-wiki">Discovering formally verified quantum programs with AI</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不可以。它是可信外部验证器的接口，既不运行 Lean 也不鉴别凭据真实性。真实宿主先完成独立验证并认证来源，才可填入结果。CPU 夹具只测试绑定一致性、失败拒绝和阈值；实际 Lean 证明数为零。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：复制旧证明凭据给新 artifact，即便所有 flags 为 true，也因摘要不匹配拒绝；若恶意调用方同时伪造摘要和 flags，本组件无法识别，必须由外部可信边界防止。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09822v1">原论文</a> · <a href="../../../../agent-research/2611.09822-verified-quantum-wiki/">实现解读</a> · <a href="#qa-b183d20e4f323234">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:envopt" data-paper-title="EnvOpt: Automated Optimization for Agent Environments" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="EnvOpt: Automated Optimization for Agent Environments Agent University of California, Berkeley / University of Chicago / Bespoke Labs 2026-11-05 长期稳定的工作环境可以承载多类查询。EnvOpt 固定目标模型与 Harness，让研究 Agent 改变同一信息的可访问表示，例如用 SQLite 目录索引散落的表定义，或为既有接口写索引手册。优化对象是环境目录，不是底座权重，也不是每个任务重写一份工作流程。研究 Agent 在不相交的训练分片上读取目标 Agent 轨迹，训练不提供 verifier；验证阶段才独立度量候选环境，测试任务不参与选择。 完整实验成本过高，不复现（审查 DONE）。实现边界：CPU / L1，离线回放论文 Algorithm 1 的接受与回滚规则。没有运行 Agent、API 或真实工作区，没有验证成本收益，也没有接入 Evolve。完整实验成本过高，不复现（审查 DONE）。select_training_environment 仅接收已记录的候选成本与代理判断，没有验证分数、真实答案或测试接口。外层 replay_environment_evolution 检查训练 ID 分片互斥且与验证 ID 不重叠、候选 Harness 标识一致、验证聚合绑定训练选定环境，并在首次回归时回放停止及回滚。  Harness 与自我改进 环境表示演进 Agent 运行流程与自进化：改的是哪一层 EnvOpt 固定信息 I 后究竟在优化什么？ 它优化信息的表示和访问路径，固定目标 Agent 的模型和 Harness。把同一批散落定义组织为可查询索引，改变每个任务探索所需成本，并不改变问题或答案。 教学例：表定义仍在原有文件里，但 SQLite 目录记录每张表对应的路径；Agent 无须遍历所有文件。 2026-11-06">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-envopt-86d4756e" class="ar-learning-paper-anchor"></span>

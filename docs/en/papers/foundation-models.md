@@ -8,6 +8,7 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [e-means: outperforming k-means (in one-tenth the epochs)](<https://arxiv.org/abs/2611.09501v1>) | 2026-11-06 | [English](../../foundation-models/2611.09501-e-means/README-en.md) · [Chinese](../../foundation-models/2611.09501-e-means/README.md) |
 | [GINGER: Spicing Up Graph-Based Vector Search](<https://arxiv.org/abs/2611.08306v1>) | 2026-11-05 | [English](../../foundation-models/2611.08306-ginger/README-en.md) · [Chinese](../../foundation-models/2611.08306-ginger/README.md) |
 | [ConvPE: Convolutional Position Embedding Improves Transformers](<https://arxiv.org/abs/2611.07749>) | 2026-11-05 | [English](../../foundation-models/2611.07749-convpe/README-en.md) · [Chinese](../../foundation-models/2611.07749-convpe/README.md) |
 | [Turbocharging PiPNN for Proximity and k-NN Graph Building](<https://arxiv.org/abs/2611.05690v1>) | 2026-11-03 | [English](../../foundation-models/2611.05690-pipnn-ii/README-en.md) · [Chinese](../../foundation-models/2611.05690-pipnn-ii/README.md) |

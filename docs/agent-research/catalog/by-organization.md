@@ -211,6 +211,7 @@
 
 ## Google DeepMind
 
+- 2026-11-06 · 一作：Sergey Shirobokov · [Discovering formally verified quantum programs with AI](../2611.09822-verified-quantum-wiki/README.md)（`verified-quantum-wiki`）：量子程序的复杂度可能远超经典模拟能力，靠若干数值样例无法证明一般正确性。研究者先在量子 Hoare 逻辑（QHL）库中冻结正确性与资源规范，异构 LLM 团队搜索程序和 Lean 证明。
 - 2026-10-15 · 一作：Maxence Faldor · [A team of Gemini 4 Argon agents beats Minecraft](../2610.22319-gemini-minecraft/README.md)（`gemini-minecraft`）：四个执行 Agent 通过编写 JavaScript 程序操纵 Mineflayer 角色；Observer 汇总世界状态，聊天和笔记传递进度。研究重点是长期协作、程序化工具与持久状态，而不是新训练目标。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-08-07 · 一作：Valentin Liévin · [ResidencyRL: Reinforcement Learning in Simulated Clinical Environments](../2608.07418-residency-rl/README.md)（`residency-rl`）：静态知识题不能覆盖主动询问、工具调用及长程决策。论文通过场景生成、带信息不对称的模拟环境、按维度隔离的裁判和GRPO组成完整训练链路；隐藏参考信息只属于环境/裁判，不能直接暴露给被评估策略。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
@@ -695,6 +696,7 @@
 
 ## University of New South Wales
 
+- 2026-11-06 · 一作：Ruiyi Yang · [ENGRAM: From Agent Experience to Weights through Verified Consolidation](../2611.09472-engram-consolidation/README.md)（`engram-consolidation`）：检索过往轨迹能支持 Agent 执行，但检索库不会因为模型微调而自然缩小。ENGRAM 把两个问题拆开：有没有值得学的经验，以及这次更新的权重能否替代外部检索。
 - 2026-07-31 · 一作：Zian Zhai · [HyperAgent: Planning and Acting over Tool-Schema Hypergraphs for Tool-Use LLM Agents](../2608.02650-hyperagent/README.md)（`hyperagent`）：把工具建模为 input-schema→output-schema 超边，先构造 Task DAG，再按状态缺口扩展 producer tool support graph。
 
 ## University of North Carolina at Chapel Hill

@@ -78,6 +78,7 @@
 
 ### Harness 与自我改进
 
+- [Discovering formally verified quantum programs with AI](../2611.09822-verified-quantum-wiki/README.md)（`verified-quantum-wiki`）：量子程序的复杂度可能远超经典模拟能力，靠若干数值样例无法证明一般正确性。研究者先在量子 Hoare 逻辑（QHL）库中冻结正确性与资源规范，异构 LLM 团队搜索程序和 Lean 证明。
 - [EnvOpt: Automated Optimization for Agent Environments](../2611.07372-envopt/README.md)（`envopt`）：长期稳定的工作环境可以承载多类查询。EnvOpt 固定目标模型与 Harness，让研究 Agent 改变同一信息的可访问表示，例如用 SQLite 目录索引散落的表定义，或为既有接口写索引手册。
 - [From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?](../2611.05108-continual-autoresearch/README.md)（`continual-autoresearch`）：持续会话可能复用代码和经验，更快找到有效方案，但未必提高最终留出效果。论文在相同任务流、模型、数据和逐任务时间预算下比较 stateful 与 reset Agent；保留首个有效提交、所有提交及最终选择，完成后才由私有测试评价。
 - [Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents](../2611.05139-meta-square/README.md)（`meta-square`）：一个共享 Harness 不一定适合所有新任务，而毫无经验的在线修改又可能扰乱仍在推进的执行。Meta² 离线对照无演化器、普通演化器和获得**训练期** verifier 信息的演化器，用反思、聚合和更新构建可复用 Meta-Skill。
@@ -125,6 +126,10 @@
 ### Harness 自进化
 
 - [Ecdysis: Efficient and Effective Training of Runtime Harnesses for LLM Agents](../2609.11677-ecdysis/README.md)（`ecdysis`）：聚合跨任务重复失败以区分模型偶发错误和 harness 系统缺陷，再由 FDCR 多角色诊断形成修复规格。
+
+### 长期记忆与技能
+
+- [ENGRAM: From Agent Experience to Weights through Verified Consolidation](../2611.09472-engram-consolidation/README.md)（`engram-consolidation`）：检索过往轨迹能支持 Agent 执行，但检索库不会因为模型微调而自然缩小。ENGRAM 把两个问题拆开：有没有值得学的经验，以及这次更新的权重能否替代外部检索。
 
 ### 程序进化
 

@@ -204,7 +204,8 @@
         "foundation-models:fold-bias",
         "foundation-models:multi-layer-indexer",
         "foundation-models:pipnn-ii",
-        "foundation-models:ginger"
+        "foundation-models:ginger",
+        "foundation-models:e-means"
       ]
     },
     {

@@ -7,7 +7,7 @@ hide:
 
 # 自改进先标对象：答案、经验、接口与系统版本
 
-[Agent](../index.md) · 更新 2026-11-06 · 51 篇主题资料 / 14 篇重点对照
+[Agent](../index.md) · 更新 2026-11-09 · 52 篇主题资料 / 15 篇重点对照
 
 Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。
 
@@ -35,6 +35,7 @@ Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens �
 | [CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization](../../../agent-research/2604.14214-crop/README.md) · [原始来源](https://arxiv.org/abs/2604.14214v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 固定目标权重，拼接任务与超阈值长度文本批评，外部元优化器重写系统提示；按准确率减CoT归一化token成本选已测提示。 | 不同于Self-Refine修当前答案；本地validation选优是明确防泄漏加强。确定性callback诊断不代表真实LLM无损缩短或完整evolve。 |
 | [Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?](../../../agent-research/2610.37276-evalalloc/README.md) · [原始来源](https://arxiv.org/abs/2610.37276v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 用SEARCH观测的信息度选共享core与无放回item，固定外部item参照仅推断新候选参数；最终公共prefix补缓存并作配对校正。 | 预测不能覆盖已测cell，评测cell减少不等于token费用等比下降；warmup MIRT、cross-fit refit和完整successive halving未实现。 |
 | [Strategist: Evolving Reasoning with Agents](../../../agent-research/2611.03618-strategist/README.md) · [原始来源](https://arxiv.org/abs/2611.03618)<br>章节：背景与主要改动、核心公式、数据协议与实现边界、高成本完整实验 | 冻结执行模型，把可执行推理blueprint组成跨任务无环库，检索相关与邻域素材，按开发集实际准确率与分层token成本选策略。 | 库保留未获胜结构供后续任务复用，但最终候选仍须validation和hidden双过门槛；本地只实现AST/DAG、外部检索分数核和配对选择，不是meta-agent搜索。 |
+| [Discovering formally verified quantum programs with AI](../../../agent-research/2611.09822-verified-quantum-wiki/README.md) · [原始来源](https://arxiv.org/abs/2611.09822v1)<br>章节：核心公式、数据协议与代码映射、结果、负控与边界 | 由独立验证器核对冻结规范，再按成本改善或代码缩短门槛将候选写入共享知识库。 | 形式证明依赖所写规格，并不是留出任务的能力比较。本地只消费外部核验结果执行合入门槛，不验证 Lean。 |
 | [Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents](../../../agent-research/2611.05139-meta-square/README.md) · [原始来源](https://arxiv.org/abs/2611.05139)<br>章节：核心公式、数据协议与实现边界、高成本完整实验 | 冻结离线Meta-Skill，在同环境、同轨迹checkpoint上有界KEEP/EVOLVE；具体编辑任务结束即弃。 | 可复用的是演化指导，不是所有任务共享的最终Harness；本地没有LLM演化器或知识学习。 |
 | [From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?](../../../agent-research/2611.05108-continual-autoresearch/README.md) · [原始来源](https://arxiv.org/abs/2611.05108)<br>章节：核心公式、数据协议与实现边界、高成本完整实验 | 相同任务流与预算配对持续、重置运行，运行后分别计算首解、最优曲线和实际最终选择。 | 效率优势可与最终效果下降并存；本地仅离线评分合同，无自主研究或记忆收益验证。 |
 | [Training LLM Agents to Automate LLM Post-Training with RSI-Dojo](../../../agent-research/2611.03698-rsi-dojo/README.md) · [原始来源](https://arxiv.org/abs/2611.03698)<br>章节：核心公式、数据协议与实现边界、高成本完整实验 | 构建可执行训练环境，筛选过程与结果均合格的轨迹，微调自动后训练Agent。 | 9B/35B-A3B与每任务5至10小时全矩阵高成本不复现；只收录，不声明运行时或权重能力。 |
@@ -174,6 +175,10 @@ EnvOpt 保留能服务不同查询的环境表示，内层成本下降且代理�
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
 
+**2026-11-09** · 加入 Verified Quantum Wiki，区分 Strategist 的开发集选择与冻结规范下的独立证明后合入。证明保证的是规范所声明的性质；本地只检查外部结果的绑定及合入阈值。
+
+涉及：[verified-quantum-wiki](../../../agent-research/2611.09822-verified-quantum-wiki/README.md)
+
 **2026-11-06** · 补入 EnvOpt，明确模型/Harness 固定时可演进的第三层环境表示；与 Meta² 的单次运行编辑和 Continual AutoResearch 的会话经验测量分开。留出验证回滚不等于暴露训练金标；本地 CPU 离线核不是完整自主环境优化。
 
 涉及：[envopt](../../../agent-research/2611.07372-envopt/README.md) · [meta-square](../../../agent-research/2611.05139-meta-square/README.md) · [continual-autoresearch](../../../agent-research/2611.05108-continual-autoresearch/README.md)
@@ -198,10 +203,11 @@ EnvOpt 保留能服务不同查询的环境表示，内层成本下降且代理�
 
 覆盖 43 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 51 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 52 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
+- [Discovering formally verified quantum programs with AI](../../../agent-research/2611.09822-verified-quantum-wiki/README.md)
 - [Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents](../../../agent-research/2611.05139-meta-square/README.md)
 - [From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?](../../../agent-research/2611.05108-continual-autoresearch/README.md)
 - [Training LLM Agents to Automate LLM Post-Training with RSI-Dojo](../../../agent-research/2611.03698-rsi-dojo/README.md)

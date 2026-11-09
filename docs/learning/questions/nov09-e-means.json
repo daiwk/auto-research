@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "foundation-models:e-means": {
+      "questions": [
+        {
+          "id": "ema-counts-and-sums",
+          "level": "basics",
+          "question": "为什么 e-means 不能对每批质心简单做 EMA？",
+          "answer": "一批里落入同一簇的点数会变。分别累积点数与向量和再相除，会按该簇的实际观测质量加权；对每批均值做 EMA 会把很少点的批次当成同等可靠。",
+          "example": "教学例：一批有 9 个值 0，另一批只有一个值 10。若先忽略时间衰减，点数加权均值是 1，而等权平均两个批次的均值是 5。",
+          "source_sections": ["核心公式"],
+          "added": "2026-11-09"
+        },
+        {
+          "id": "weak-slot-split",
+          "level": "mechanism",
+          "question": "复苏弱簇时，为什么从活跃簇分裂而不是随机重采本批数据？",
+          "answer": "按 EMA 质量抽 donor，使有较多点的簇更有机会得到新的表示容量；反向乘性扰动让两个子中心邻近但可分，供后续分配。原 donor 质量被平分，弱槽旧状态被覆盖。",
+          "example": "教学例：质量为 8、中心为 (2, 4) 的 donor 被拆成两个质量 4 的子簇，两个中心沿交替坐标向相反方向轻微偏移。",
+          "source_sections": ["核心公式", "数据协议与代码映射"],
+          "added": "2026-11-09"
+        },
+        {
+          "id": "closing-mean-limits",
+          "level": "comparison",
+          "question": "末轮均值降低固定标签 MSE，为什么还不能断言 e-means 总是比 Lloyd 好？",
+          "answer": "均值只对同一组训练点和同一套历史标签最优。重新分配、初始化、留出分布与比较算法都可能改变误差；论文也把优化训练和优化测试的收尾方案分开。",
+          "example": "本地 seed 42 固定标签误差降低，但留出 MSE 为 e-means 1.87753、Lloyd 1.84352，方向相反。",
+          "source_sections": ["核心公式", "结果、负控与边界"],
+          "added": "2026-11-09"
+        },
+        {
+          "id": "l2-versus-system-throughput",
+          "level": "implementation",
+          "question": "CPU 上的精确 L2 聚类检查能代替论文 GPU 实验吗？",
+          "answer": "不能。小数据检查可以独立复核足够统计、复苏及末轮均值，但不运行论文的大规模低精度和 IVF 分配，也没有计时或近邻检索负载。要验证系统速度应在匹配误差的真实数据和硬件上测墙钟。",
+          "example": "本地每组 256 个训练向量和 64 个留出向量；论文 DINO10B 有一百亿向量和约 1678 万中心。",
+          "source_sections": ["数据协议与代码映射", "高成本完整实验"],
+          "added": "2026-11-09"
+        }
+      ]
+    }
+  }
+}

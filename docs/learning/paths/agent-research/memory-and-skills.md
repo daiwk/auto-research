@@ -7,7 +7,7 @@ hide:
 
 # 记忆与技能：让经验可取回、可失效
 
-[Agent](index.md) / 228 个问题 · 57 篇论文
+[Agent](index.md) / 232 个问题 · 58 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">228 个问题 · 57 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">232 个问题 · 58 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:engram-consolidation" data-paper-title="ENGRAM: From Agent Experience to Weights through Verified Consolidation" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="ENGRAM: From Agent Experience to Weights through Verified Consolidation Agent University of New South Wales 2026-11-06 检索过往轨迹能支持 Agent 执行，但检索库不会因为模型微调而自然缩小。ENGRAM 把两个问题拆开：有没有值得学的经验，以及这次更新的权重能否替代外部检索。学生尝试和教师示范进入经验图（ETG），学生熟练度独立更新；验证通过后才按技能批准候选并处理已参与训练的记录。 考虑交互采集和多轮验证，单张 A100/A30 或本地 Mac 不按论文规模跑：成本过高，不复现（审查 DONE）。consolidate 接收外部训练与加载结果、当前有效训练记录 ID、预释放经验记录和开发探针。它按源 episode 阻断训练／开发／回放与最终测试的交叉：开发探针来源可出现在预释放经验元数据中，但不能出现在本轮训练或历史 replay。调用方需先完成 QA 问题级去重；这里只校验 episode 标识。actor 只收到公开输入和指定臂上下文，目标仅传给独立评分器；检索回调只收到预释放经验的公开字段，调用方须保证这些字段不夹带未授权标签。原始状态不改写；  长期记忆与技能 可验证经验固化与记忆释放 Agent 记忆与技能：让经验可取回、可失效 学生从未完成一个技能，为什么仍可能通过 ENGRAM 的训练准入？通过后能马上移走记录吗？ 足够的成功教师示范可独立通过准入。准入只决定是否尝试学习；没有当前有效训练贡献或没有留出的验证探针都不能释放记忆。 教学例：熟练度为 0，同一个教师 episode 中两条有效成功记录满足 d_min=2，但若两条都留作开发探针，本轮没有训练贡献。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<span id="paper-agent-research-engram-consolidation-28eba53e" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-3bfe7db63e259653">学生从未完成一个技能，为什么仍可能通过 ENGRAM 的训练准入？通过后能马上移走记录吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aengram-consolidation">ENGRAM: From Agent Experience to Weights through Verified Consolidation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · University of New South Wales</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>足够的成功教师示范可独立通过准入。准入只决定是否尝试学习；没有当前有效训练贡献或没有留出的验证探针都不能释放记忆。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：熟练度为 0，同一个教师 episode 中两条有效成功记录满足 d_min=2，但若两条都留作开发探针，本轮没有训练贡献。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09472">原论文</a> · <a href="../../../../agent-research/2611.09472-engram-consolidation/">实现解读</a> · <a href="#qa-3bfe7db63e259653">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:engram-consolidation" data-paper-title="ENGRAM: From Agent Experience to Weights through Verified Consolidation" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="ENGRAM: From Agent Experience to Weights through Verified Consolidation Agent University of New South Wales 2026-11-06 检索过往轨迹能支持 Agent 执行，但检索库不会因为模型微调而自然缩小。ENGRAM 把两个问题拆开：有没有值得学的经验，以及这次更新的权重能否替代外部检索。学生尝试和教师示范进入经验图（ETG），学生熟练度独立更新；验证通过后才按技能批准候选并处理已参与训练的记录。 考虑交互采集和多轮验证，单张 A100/A30 或本地 Mac 不按论文规模跑：成本过高，不复现（审查 DONE）。consolidate 接收外部训练与加载结果、当前有效训练记录 ID、预释放经验记录和开发探针。它按源 episode 阻断训练／开发／回放与最终测试的交叉：开发探针来源可出现在预释放经验元数据中，但不能出现在本轮训练或历史 replay。调用方需先完成 QA 问题级去重；这里只校验 episode 标识。actor 只收到公开输入和指定臂上下文，目标仅传给独立评分器；检索回调只收到预释放经验的公开字段，调用方须保证这些字段不夹带未授权标签。原始状态不改写；  长期记忆与技能 可验证经验固化与记忆释放 Agent 记忆与技能：让经验可取回、可失效 为什么既要设相对分差，又要设严格的绝对下限？ 相对分差防止权重替换检索后退步超过容忍量。绝对下限阻止两个都很差时靠微小改善过关。相对分差等于阈值可过，候选分等于绝对下限不可过。 教学例：四题中候选答对两题，参考答对一题，δ=0.25、α=0.5。相对门通过，但候选恰等于下限，所以不释放。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-4c100ec81c202a20">为什么既要设相对分差，又要设严格的绝对下限？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aengram-consolidation">ENGRAM: From Agent Experience to Weights through Verified Consolidation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · University of New South Wales</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>相对分差防止权重替换检索后退步超过容忍量。绝对下限阻止两个都很差时靠微小改善过关。相对分差等于阈值可过，候选分等于绝对下限不可过。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：四题中候选答对两题，参考答对一题，δ=0.25、α=0.5。相对门通过，但候选恰等于下限，所以不释放。</p>
+<p class="ar-learning-sources">依据：核心公式、原文效果与负结果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09472">原论文</a> · <a href="../../../../agent-research/2611.09472-engram-consolidation/">实现解读</a> · <a href="#qa-4c100ec81c202a20">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:engram-consolidation" data-paper-title="ENGRAM: From Agent Experience to Weights through Verified Consolidation" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="ENGRAM: From Agent Experience to Weights through Verified Consolidation Agent University of New South Wales 2026-11-06 检索过往轨迹能支持 Agent 执行，但检索库不会因为模型微调而自然缩小。ENGRAM 把两个问题拆开：有没有值得学的经验，以及这次更新的权重能否替代外部检索。学生尝试和教师示范进入经验图（ETG），学生熟练度独立更新；验证通过后才按技能批准候选并处理已参与训练的记录。 考虑交互采集和多轮验证，单张 A100/A30 或本地 Mac 不按论文规模跑：成本过高，不复现（审查 DONE）。consolidate 接收外部训练与加载结果、当前有效训练记录 ID、预释放经验记录和开发探针。它按源 episode 阻断训练／开发／回放与最终测试的交叉：开发探针来源可出现在预释放经验元数据中，但不能出现在本轮训练或历史 replay。调用方需先完成 QA 问题级去重；这里只校验 episode 标识。actor 只收到公开输入和指定臂上下文，目标仅传给独立评分器；检索回调只收到预释放经验的公开字段，调用方须保证这些字段不夹带未授权标签。原始状态不改写；  长期记忆与技能 可验证经验固化与记忆释放 Agent 记忆与技能：让经验可取回、可失效 MemPrice 不选某条记忆的原文，是否等同于 ENGRAM 释放该技能的记忆？ 不等同。MemPrice 在当前窗口选择记忆表示或不放入，依据是效用与预算。ENGRAM 用有检索的基础模型做参考，要求更新后的权重在独立探针上达标才允许从检索库归档。 教学例：窗口很短可以只放关键词，但不说明模型离开检索仍能正确完成任务；归档通过也不会自动删除存储里的原始记录。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-d9a50f0bc981a580">MemPrice 不选某条记忆的原文，是否等同于 ENGRAM 释放该技能的记忆？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aengram-consolidation">ENGRAM: From Agent Experience to Weights through Verified Consolidation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · University of New South Wales</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不等同。MemPrice 在当前窗口选择记忆表示或不放入，依据是效用与预算。ENGRAM 用有检索的基础模型做参考，要求更新后的权重在独立探针上达标才允许从检索库归档。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：窗口很短可以只放关键词，但不说明模型离开检索仍能正确完成任务；归档通过也不会自动删除存储里的原始记录。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、原文效果与负结果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09472">原论文</a> · <a href="../../../../agent-research/2611.09472-engram-consolidation/">实现解读</a> · <a href="#qa-d9a50f0bc981a580">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:engram-consolidation" data-paper-title="ENGRAM: From Agent Experience to Weights through Verified Consolidation" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="ENGRAM: From Agent Experience to Weights through Verified Consolidation Agent University of New South Wales 2026-11-06 检索过往轨迹能支持 Agent 执行，但检索库不会因为模型微调而自然缩小。ENGRAM 把两个问题拆开：有没有值得学的经验，以及这次更新的权重能否替代外部检索。学生尝试和教师示范进入经验图（ETG），学生熟练度独立更新；验证通过后才按技能批准候选并处理已参与训练的记录。 考虑交互采集和多轮验证，单张 A100/A30 或本地 Mac 不按论文规模跑：成本过高，不复现（审查 DONE）。consolidate 接收外部训练与加载结果、当前有效训练记录 ID、预释放经验记录和开发探针。它按源 episode 阻断训练／开发／回放与最终测试的交叉：开发探针来源可出现在预释放经验元数据中，但不能出现在本轮训练或历史 replay。调用方需先完成 QA 问题级去重；这里只校验 episode 标识。actor 只收到公开输入和指定臂上下文，目标仅传给独立评分器；检索回调只收到预释放经验的公开字段，调用方须保证这些字段不夹带未授权标签。原始状态不改写；  长期记忆与技能 可验证经验固化与记忆释放 Agent 记忆与技能：让经验可取回、可失效 同一源 episode 的两个片段分别属于不同技能，能否一个训练、另一个作为开发探针？ 不能。按 episode 隔离，而不是按技能标签隔离；留作探针的 episode 也不能出现在 replay。策略回调不收探针目标，独立评分器拿到它。原论文预释放参考检索库与训练分区不是同一个概念。 教学例：同一次购物的导航与结账片段不能横跨训练和开发；关闭 episodic 检索也不应抹去结账页这一当前环境观察。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-d04b1bd3531ede40">同一源 episode 的两个片段分别属于不同技能，能否一个训练、另一个作为开发探针？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aengram-consolidation">ENGRAM: From Agent Experience to Weights through Verified Consolidation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · University of New South Wales</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。按 episode 隔离，而不是按技能标签隔离；留作探针的 episode 也不能出现在 replay。策略回调不收探针目标，独立评分器拿到它。原论文预释放参考检索库与训练分区不是同一个概念。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一次购物的导航与结账片段不能横跨训练和开发；关闭 episodic 检索也不应抹去结账页这一当前环境观察。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09472">原论文</a> · <a href="../../../../agent-research/2611.09472-engram-consolidation/">实现解读</a> · <a href="#qa-d04b1bd3531ede40">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:discernmem" data-paper-title="Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems Agent East China Normal University 2026-10-27 团队失败不代表注入的每条记忆都有错。DiscernMem把“规则内容有缺陷”和“好规则用错场景”分开：以相同任务、seed和配置运行完整团队，仅向原拥有者注入一条记忆，再与所有角色都无记忆的执行比较。仅当负效应发生在适用范围内，而且配对轨迹支持具体缺陷时，才触发改写；已有avoid条件优先约束使用，不靠改写覆盖掉范围错误。修复不是只把眼前任务做对。候选需要同时通过触发任务、过去有用任务和相关任务上的保留性检查；新body生成新版本，父版本的正效果不能冒充新版本可靠性。 完整实验：成本过高，不复现（审查 DONE），不自动重试。图中的检索、LLM语义诊断和团队执行不在本地组件范围内。本地状态：L1 数值与版本规则组件，diagnostic only，不是多 Agent 记忆能力复现。完整实验：成本过高，不复现（审查 DONE），不自动重试。输入是外部真实测量得分与显式任务/版本/角色/seed/配置，不是预造的Agent答案。paired_effect拒绝不一致的配对元数据；repair_gate拒绝空集、重复任务或缺触发任务，逐条比较父记忆和无记忆基线。revised_version保留identity/owner，拒绝source任务参与验证，并清空父版本效果。  Agent记忆 配对重放与非退化修复 Agent 记忆与技能：让经验可取回、可失效 一次团队失败，为什么不能直接把用过的记忆全部改写？ 失败可能来自别的角色、工具或不适用的场景。DiscernMem用相同任务、seed和配置的单记忆重放与无记忆重放衡量孤立注入效果；再区分规则内容确有缺陷，还是好规则超出使用范围。负效果本身仍不足以证明内容有错。 教学例：‘先修复源码再跑测试’可能适用于代码bug，但测试环境故障时继续改源码反而有害。应补avoid范围，而不是删除一条本来有用的源码修复经验。 2026-10-29">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-discernmem-43739873" class="ar-learning-paper-anchor"></span>

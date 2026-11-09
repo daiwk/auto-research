@@ -152,6 +152,7 @@
 
 ### RLVR
 
+- [Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards](../2611.09448-rcea/README.md)（`rcea`）：训练日志里的平均 token 熵变小，既可能是模型更少走错误路径，也可能是它不再尝试原来会做的其它正确解法。RCEA 将两类信号分开：轨迹层按验证器成败、过程有效性和有效解法模式拆分；前缀层用全词表的 log 概率与 logit 增量的协方差解释局部熵方向。
 - [MGE-PO: Entropy-Aware Credit Assignment for Mathematical Reasoning](../2610.23245-mge-po/README.md)（`mge-po`）：GRPO会给同题、同正确性的回答相同 advantage，忽略生成的不确定性。MGE-PO 用生成时缓存的 token 熵区分回答，在成功／失败与高熵／低熵四象限上调整信用；再用在线题目熵统计安排课程，并以熵加权参考KL约束优化。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [Preserving Reasoning Diversity in Reinforcement Learning with Verifiable Rewards via Adaptive Replay](../2610.24236-tar-adaptive-replay/README.md)（`tar-adaptive-replay`）：有限on-policy采样可能逐步压低同样正确但较少出现的推理模式；仅在当前rollout上重加权，难以恢复已经采不到的模式。TAR先从基础策略大量生成，过滤正确回答，再保留分散的原型轨迹。
 - [GRPODropout: Less is More for Online Reinforcement Learning Rollouts](../2610.11854-grpo-dropout/README.md)（`grpo-dropout`）：从同一 prompt 的 GRPO 响应组中筛除部分高概率、正优势响应，并用旧策略概率重新中心化保留响应的优势。不是随机 dropout，也不改变生成预算。
