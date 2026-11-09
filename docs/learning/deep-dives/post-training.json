@@ -219,8 +219,9 @@
     "policy-optimization": {
       "title": "同一个GRPO名字之外：优势尺度、裁剪单位与训推失配",
       "thesis": "GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比被裁剪、样本到底由哪个分布生成。Dr. GRPO、DAPO、GSPO与TIS/IcePop分别改动这些环节，不能把所有ratio都叫同一种off-policy校正。",
-      "updated": "2026-11-04",
+      "updated": "2026-11-09",
       "reviewed_papers": [
+        "post-training:rcea",
         "post-training:rlid",
         "post-training:moer",
         "post-training:cord",
@@ -353,6 +354,12 @@
             "核心公式",
             "复现边界"
           ]
+        },
+        {
+          "paper": "post-training:rcea",
+          "position": "不改更新目标，先按验证结果、过程有效性和解法模式拆开轨迹熵，再用同前缀协方差解释局部变化方向。",
+          "tradeoff": "精确分解需要确定性分区；局部协方差不是策略模式或因果归因。CPU 只覆盖数值核，未跑多目标 RLVR 矩阵。",
+          "sections": ["核心公式", "原文结果与限制", "诊断与边界"]
         }
       ],
       "analysis": [
@@ -554,6 +561,14 @@
           ],
           "source_revisions": {
             "post-training:rlid": "5dba42f70fe5f7e2322cb6137471b81ced364774d7a28938655ab19dad7fd83f"
+          }
+        },
+        {
+          "date": "2026-11-09",
+          "summary": "加入 RCEA，把策略优化目标与熵诊断分开。全局熵变小不能证明正确策略模式变少，本地只验证轨迹链式分解与局部一阶近似。",
+          "papers": ["post-training:rcea"],
+          "source_revisions": {
+            "post-training:rcea": "00b50a563e4c7c1037873e188e9a0a80c1d211069880328ce84177e56ac5ac6c"
           }
         }
       ]

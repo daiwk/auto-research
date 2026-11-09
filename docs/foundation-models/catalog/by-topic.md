@@ -347,6 +347,10 @@
 
 ## 推理与系统效率
 
+### 向量索引与聚类训练
+
+- [e-means: outperforming k-means (in one-tenth the epochs)](../../foundation-models/2611.09501-e-means/README.md)（`e-means`）：Lloyd 每扫完一轮数据才更新质心。e-means 每批更新各簇的 EMA 计数与向量和，让同一轮中的后续批次立即使用新质心。每五批检查低计数簇，借活跃簇分裂复苏；末轮按过程中产生的分配取均值，不额外做一轮全量分配。原文另拟合批大小与峰值步长的缩放律，在大规模场景比较精确、低精度与 IVF 分配。
+
 ### 量化近邻图检索
 
 - [GINGER: Spicing Up Graph-Based Vector Search](../../foundation-models/2611.08306-ginger/README.md)（`ginger`）：近邻图搜索在导航时随机读取大量候选，只需低位宽排序；最后的少量候选才需要高精度重排。若同时存粗码和完整浮点向量，会重复存储。GINGER 用 **Nested TurboQuant（NTQ）** 让高精度码保留同一个 4-bit 导航前缀：先读取粗码和粗尺度，最后才为入围向量读细码和细尺度。

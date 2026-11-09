@@ -275,6 +275,12 @@
             "核心公式",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "agent-research:engram-consolidation",
+          "position": "训练前以学生熟练度或成功教师示范准入；训练后按技能用配对探针决定候选无检索能否替代 Base+ETG。",
+          "tradeoff": "验证通过才能归档合格记录，混合启用仍保留检索。局部探针不等于完整 rollout；本地只执行 CPU 双关口，不做训练。",
+          "sections": ["背景与主要改动", "核心公式", "诊断与边界"]
         }
       ],
       "analysis": [
@@ -311,6 +317,11 @@
             "agent-research:emma",
             "agent-research:discernmem"
           ]
+        },
+        {
+          "title": "窗口里不放某条记忆，不等于权重可以取代它",
+          "body": "MemPrice 按预算和效用在多种表示之间选择，决定此刻读什么；ENGRAM 在外部训练后做候选无检索与 Base+ETG 的同题配对，决定哪些已用于训练的记录可以退出检索。前者节省窗口成本但不证明权重已经掌握技能；后者检验局部行为，但不等于端到端能力或总存储下降。",
+          "papers": ["agent-research:memprice", "agent-research:engram-consolidation"]
         }
       ],
       "questions": [
@@ -363,9 +374,16 @@
             "agent-research:emma",
             "agent-research:discernmem"
           ]
+        },
+        {
+          "id": "engram-approval-versus-window-budget",
+          "question": "MemPrice 决定本轮不加载某条记录，能用这个信号直接批准 ENGRAM 释放记忆吗？",
+          "answer": "不能。MemPrice 解决给定预算下的表示分配。ENGRAM 的释放还要有本轮训练参与、留出探针和通过双门槛的无检索候选；已归档的记录不从物理存储删除。",
+          "example": "教学例：四个探针只有两题正确，即使比 Base+ETG 多答对一题，在严格下限为 50% 时仍须保留记忆。",
+          "papers": ["agent-research:memprice", "agent-research:engram-consolidation"]
         }
       ],
-      "updated": "2026-10-30",
+      "updated": "2026-11-09",
       "reviewed_papers": [
         "agent-research:cache-engineering",
         "agent-research:tokenworth",
@@ -423,7 +441,8 @@
         "agent-research:voyager",
         "agent-research:generative-agents",
         "agent-research:discernmem",
-        "agent-research:emma"
+        "agent-research:emma",
+        "agent-research:engram-consolidation"
       ],
       "updates": [
         {
@@ -564,6 +583,14 @@
           "source_revisions": {
             "agent-research:emma": "93bec7aad432843c6c05e6463327d32b730280ae4f119987333b5ad654aec829",
             "agent-research:discernmem": "a5c82d9184ebece8d16e3b6d66033b0b11aafc776b4c3fec3b1fab7290a0c588"
+          }
+        },
+        {
+          "date": "2026-11-09",
+          "summary": "加入 ENGRAM：拆解训练准入、候选启用、可验证记忆释放三个决定；区分窗口省预算、减少可检索记录与存储缩减。完整训练不复现。",
+          "papers": ["agent-research:engram-consolidation"],
+          "source_revisions": {
+            "agent-research:engram-consolidation": "dbb38df7a3e835423a49658a9102ec1105a56827e3f27f9ce69146a80a2a5178"
           }
         }
       ]
@@ -1013,6 +1040,12 @@
           ]
         },
         {
+          "paper": "agent-research:verified-quantum-wiki",
+          "position": "由独立验证器核对冻结规范，再按成本改善或代码缩短门槛将候选写入共享知识库。",
+          "tradeoff": "形式证明依赖所写规格，并不是留出任务的能力比较。本地只消费外部核验结果执行合入门槛，不验证 Lean。",
+          "sections": ["核心公式", "数据协议与代码映射", "结果、负控与边界"]
+        },
+        {
           "paper": "agent-research:meta-square",
           "position": "冻结离线Meta-Skill，在同环境、同轨迹checkpoint上有界KEEP/EVOLVE；具体编辑任务结束即弃。",
           "tradeoff": "可复用的是演化指导，不是所有任务共享的最终Harness；本地没有LLM演化器或知识学习。",
@@ -1188,8 +1221,9 @@
           ]
         }
       ],
-      "updated": "2026-11-06",
+      "updated": "2026-11-09",
       "reviewed_papers": [
+        "agent-research:verified-quantum-wiki",
         "agent-research:rsi-opt",
         "agent-research:image-rsi",
         "agent-research:harnessmm",
@@ -1399,6 +1433,14 @@
             "agent-research:envopt": "d8b536710de4a590c4026908eebe5e3abefc24ea1b7d190f1d094378aa84bdee",
             "agent-research:meta-square": "ee8dd7f6bba65ffcdccb9d6c70b2d140e7e387ac25e59c52691d68a3a50f7be6",
             "agent-research:continual-autoresearch": "861e021ad2fda7fa07f2687dc06150994f6fc9a1e56acbdbb2a258fe7acaa364"
+          }
+        },
+        {
+          "date": "2026-11-09",
+          "summary": "加入 Verified Quantum Wiki，区分 Strategist 的开发集选择与冻结规范下的独立证明后合入。证明保证的是规范所声明的性质；本地只检查外部结果的绑定及合入阈值。",
+          "papers": ["agent-research:verified-quantum-wiki"],
+          "source_revisions": {
+            "agent-research:verified-quantum-wiki": "788c73d94a73c790596907351bdf51659bb1ed4a24764bf4a2315cef699d6086"
           }
         }
       ]

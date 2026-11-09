@@ -7,7 +7,7 @@ hide:
 
 # 推理压缩：权重、KV 缓存与服务带宽
 
-[基础模型](index.md) / 140 个问题 · 35 篇论文
+[基础模型](index.md) / 144 个问题 · 36 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">140 个问题 · 35 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">144 个问题 · 36 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:e-means" data-paper-title="e-means: outperforming k-means (in one-tenth the epochs)" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="e-means: outperforming k-means (in one-tenth the epochs) 基础模型 FAIR at Meta 2026-11-06 Lloyd 每扫完一轮数据才更新质心。e-means 每批更新各簇的 EMA 计数与向量和，让同一轮中的后续批次立即使用新质心。每五批检查低计数簇，借活跃簇分裂复苏；末轮按过程中产生的分配取均值，不额外做一轮全量分配。原文另拟合批大小与峰值步长的缩放律，在大规模场景比较精确、低精度与 IVF 分配。 成本过高，不复现（审查 DONE）。L1 机制诊断。L1 机制诊断。本地执行稠密 CPU 聚类，不是 DINO10B、近邻检索或 GPU 加速复现。fit 使用 NumPy float64 精确平方 L2 分配、确定性同分处理、每轮重新洗牌、余弦步长 EMA、低质量簇复苏、末轮均值。仅接受批大小整除行数的有界输入。若弱簇多于可用的不重复活跃 donor，余下弱簇延到下一次检查；若零计数（例如首步步长为 1）或末轮无分配，保留该簇最近有效中心。这里用固定的小样本步长，不把原文拟合范围外的缩放律当作最佳值。  推理与系统效率 向量索引与聚类训练 基础模型 推理压缩：权重、KV 缓存与服务带宽 为什么 e-means 不能对每批质心简单做 EMA？ 一批里落入同一簇的点数会变。分别累积点数与向量和再相除，会按该簇的实际观测质量加权；对每批均值做 EMA 会把很少点的批次当成同等可靠。 教学例：一批有 9 个值 0，另一批只有一个值 10。若先忽略时间衰减，点数加权均值是 1，而等权平均两个批次的均值是 5。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<span id="paper-foundation-models-e-means-85035e10" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-1abaa4827e475046">为什么 e-means 不能对每批质心简单做 EMA？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ae-means">e-means: outperforming k-means (in one-tenth the epochs)</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · FAIR at Meta</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>一批里落入同一簇的点数会变。分别累积点数与向量和再相除，会按该簇的实际观测质量加权；对每批均值做 EMA 会把很少点的批次当成同等可靠。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一批有 9 个值 0，另一批只有一个值 10。若先忽略时间衰减，点数加权均值是 1，而等权平均两个批次的均值是 5。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09501v1">原论文</a> · <a href="../../../../foundation-models/2611.09501-e-means/">实现解读</a> · <a href="#qa-1abaa4827e475046">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:e-means" data-paper-title="e-means: outperforming k-means (in one-tenth the epochs)" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="e-means: outperforming k-means (in one-tenth the epochs) 基础模型 FAIR at Meta 2026-11-06 Lloyd 每扫完一轮数据才更新质心。e-means 每批更新各簇的 EMA 计数与向量和，让同一轮中的后续批次立即使用新质心。每五批检查低计数簇，借活跃簇分裂复苏；末轮按过程中产生的分配取均值，不额外做一轮全量分配。原文另拟合批大小与峰值步长的缩放律，在大规模场景比较精确、低精度与 IVF 分配。 成本过高，不复现（审查 DONE）。L1 机制诊断。L1 机制诊断。本地执行稠密 CPU 聚类，不是 DINO10B、近邻检索或 GPU 加速复现。fit 使用 NumPy float64 精确平方 L2 分配、确定性同分处理、每轮重新洗牌、余弦步长 EMA、低质量簇复苏、末轮均值。仅接受批大小整除行数的有界输入。若弱簇多于可用的不重复活跃 donor，余下弱簇延到下一次检查；若零计数（例如首步步长为 1）或末轮无分配，保留该簇最近有效中心。这里用固定的小样本步长，不把原文拟合范围外的缩放律当作最佳值。  推理与系统效率 向量索引与聚类训练 基础模型 推理压缩：权重、KV 缓存与服务带宽 复苏弱簇时，为什么从活跃簇分裂而不是随机重采本批数据？ 按 EMA 质量抽 donor，使有较多点的簇更有机会得到新的表示容量；反向乘性扰动让两个子中心邻近但可分，供后续分配。原 donor 质量被平分，弱槽旧状态被覆盖。 教学例：质量为 8、中心为 (2, 4) 的 donor 被拆成两个质量 4 的子簇，两个中心沿交替坐标向相反方向轻微偏移。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-44d3dc20ade161da">复苏弱簇时，为什么从活跃簇分裂而不是随机重采本批数据？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ae-means">e-means: outperforming k-means (in one-tenth the epochs)</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · FAIR at Meta</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>按 EMA 质量抽 donor，使有较多点的簇更有机会得到新的表示容量；反向乘性扰动让两个子中心邻近但可分，供后续分配。原 donor 质量被平分，弱槽旧状态被覆盖。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：质量为 8、中心为 (2, 4) 的 donor 被拆成两个质量 4 的子簇，两个中心沿交替坐标向相反方向轻微偏移。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09501v1">原论文</a> · <a href="../../../../foundation-models/2611.09501-e-means/">实现解读</a> · <a href="#qa-44d3dc20ade161da">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:e-means" data-paper-title="e-means: outperforming k-means (in one-tenth the epochs)" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="e-means: outperforming k-means (in one-tenth the epochs) 基础模型 FAIR at Meta 2026-11-06 Lloyd 每扫完一轮数据才更新质心。e-means 每批更新各簇的 EMA 计数与向量和，让同一轮中的后续批次立即使用新质心。每五批检查低计数簇，借活跃簇分裂复苏；末轮按过程中产生的分配取均值，不额外做一轮全量分配。原文另拟合批大小与峰值步长的缩放律，在大规模场景比较精确、低精度与 IVF 分配。 成本过高，不复现（审查 DONE）。L1 机制诊断。L1 机制诊断。本地执行稠密 CPU 聚类，不是 DINO10B、近邻检索或 GPU 加速复现。fit 使用 NumPy float64 精确平方 L2 分配、确定性同分处理、每轮重新洗牌、余弦步长 EMA、低质量簇复苏、末轮均值。仅接受批大小整除行数的有界输入。若弱簇多于可用的不重复活跃 donor，余下弱簇延到下一次检查；若零计数（例如首步步长为 1）或末轮无分配，保留该簇最近有效中心。这里用固定的小样本步长，不把原文拟合范围外的缩放律当作最佳值。  推理与系统效率 向量索引与聚类训练 基础模型 推理压缩：权重、KV 缓存与服务带宽 末轮均值降低固定标签 MSE，为什么还不能断言 e-means 总是比 Lloyd 好？ 均值只对同一组训练点和同一套历史标签最优。重新分配、初始化、留出分布与比较算法都可能改变误差；论文也把优化训练和优化测试的收尾方案分开。 本地 seed 42 固定标签误差降低，但留出 MSE 为 e-means 1.87753、Lloyd 1.84352，方向相反。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-ad2650e6f1d14041">末轮均值降低固定标签 MSE，为什么还不能断言 e-means 总是比 Lloyd 好？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ae-means">e-means: outperforming k-means (in one-tenth the epochs)</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · FAIR at Meta</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>均值只对同一组训练点和同一套历史标签最优。重新分配、初始化、留出分布与比较算法都可能改变误差；论文也把优化训练和优化测试的收尾方案分开。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>本地 seed 42 固定标签误差降低，但留出 MSE 为 e-means 1.87753、Lloyd 1.84352，方向相反。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09501v1">原论文</a> · <a href="../../../../foundation-models/2611.09501-e-means/">实现解读</a> · <a href="#qa-ad2650e6f1d14041">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:e-means" data-paper-title="e-means: outperforming k-means (in one-tenth the epochs)" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="e-means: outperforming k-means (in one-tenth the epochs) 基础模型 FAIR at Meta 2026-11-06 Lloyd 每扫完一轮数据才更新质心。e-means 每批更新各簇的 EMA 计数与向量和，让同一轮中的后续批次立即使用新质心。每五批检查低计数簇，借活跃簇分裂复苏；末轮按过程中产生的分配取均值，不额外做一轮全量分配。原文另拟合批大小与峰值步长的缩放律，在大规模场景比较精确、低精度与 IVF 分配。 成本过高，不复现（审查 DONE）。L1 机制诊断。L1 机制诊断。本地执行稠密 CPU 聚类，不是 DINO10B、近邻检索或 GPU 加速复现。fit 使用 NumPy float64 精确平方 L2 分配、确定性同分处理、每轮重新洗牌、余弦步长 EMA、低质量簇复苏、末轮均值。仅接受批大小整除行数的有界输入。若弱簇多于可用的不重复活跃 donor，余下弱簇延到下一次检查；若零计数（例如首步步长为 1）或末轮无分配，保留该簇最近有效中心。这里用固定的小样本步长，不把原文拟合范围外的缩放律当作最佳值。  推理与系统效率 向量索引与聚类训练 基础模型 推理压缩：权重、KV 缓存与服务带宽 CPU 上的精确 L2 聚类检查能代替论文 GPU 实验吗？ 不能。小数据检查可以独立复核足够统计、复苏及末轮均值，但不运行论文的大规模低精度和 IVF 分配，也没有计时或近邻检索负载。要验证系统速度应在匹配误差的真实数据和硬件上测墙钟。 本地每组 256 个训练向量和 64 个留出向量；论文 DINO10B 有一百亿向量和约 1678 万中心。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-ee3eb64f07bedf5d">CPU 上的精确 L2 聚类检查能代替论文 GPU 实验吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ae-means">e-means: outperforming k-means (in one-tenth the epochs)</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · FAIR at Meta</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。小数据检查可以独立复核足够统计、复苏及末轮均值，但不运行论文的大规模低精度和 IVF 分配，也没有计时或近邻检索负载。要验证系统速度应在匹配误差的真实数据和硬件上测墙钟。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>本地每组 256 个训练向量和 64 个留出向量；论文 DINO10B 有一百亿向量和约 1678 万中心。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09501v1">原论文</a> · <a href="../../../../foundation-models/2611.09501-e-means/">实现解读</a> · <a href="#qa-ee3eb64f07bedf5d">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ginger" data-paper-title="GINGER: Spicing Up Graph-Based Vector Search" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="GINGER: Spicing Up Graph-Based Vector Search 基础模型 Google Research 2026-11-05 近邻图搜索在导航时随机读取大量候选，只需低位宽排序；最后的少量候选才需要高精度重排。若同时存粗码和完整浮点向量，会重复存储。GINGER 用 Nested TurboQuant（NTQ） 让高精度码保留同一个 4-bit 导航前缀：先读取粗码和粗尺度，最后才为入围向量读细码和细尺度。完整库另外用 PiPNN 构建近邻图、重排顶点使邻居 ID 更集中、以 AdaptiveGap 压缩邻接表，并提供 PCA 投影与候选预筛以节省搜索开销。NTQ 降低向量表示的读带宽； 作者的大规模图检索实验成本过高，不复现（审查 DONE）。L1 机制诊断，不是端到端检索复现。L1 机制诊断，不是端到端检索复现。本地只验证 Nested TurboQuant 的码本、拆流、缩放与浮点打分；作者的大规模图检索实验成本过高，不复现（审查 DONE）。build_codebook 用标准正态的解析区间矩拟合正半轴码本，支持 4-bit 加 1–4 个细化位。encode 接收调用方已用共同正交变换旋转的 Rx，本地执行归一化、编码与两种尺度；decode_navigation 只接收粗字节和粗尺度，decode_refined 才读细位流。inner_product 在同一旋转空间对完整精度查询评分。  推理与系统效率 向量检索量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 NTQ 已经存了完整细码，为什么导航不用把它一起读出来？ 4-bit 导航码就是完整码的粗前缀，但粗码和细位分别存放。导航只读符号位、粗区间和粗尺度；重排才读取入围向量的细位与细尺度。这样同一向量既不需要两份独立表示，也不会让导航承担细码带宽。 本地 31 维例子，粗码占 16 字节，4+2-bit 的额外细码占 8 字节（不含尺度）；未入围的候选不用读后 8 字节。 2026-11-07">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-ginger-bbdbc663" class="ar-learning-paper-anchor"></span>

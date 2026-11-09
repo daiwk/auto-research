@@ -113,7 +113,8 @@
         "agent-research:voyager",
         "agent-research:generative-agents",
         "agent-research:discernmem",
-        "agent-research:emma"
+        "agent-research:emma",
+        "agent-research:engram-consolidation"
       ]
     },
     {
@@ -204,6 +205,7 @@
       ],
       "reading_order": "先读 Reflexion，看语言经验如何跨尝试保存；再读 Self-Refine，对比单次反馈修订；最后读 AgentX，理解候选开发、评估与运行流程更新的完整边界，并对照本地仅实现的部分。",
       "papers": [
+        "agent-research:verified-quantum-wiki",
         "agent-research:meta-square",
         "agent-research:continual-autoresearch",
         "agent-research:rsi-dojo",

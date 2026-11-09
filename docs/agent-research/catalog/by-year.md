@@ -4,6 +4,8 @@
 
 ## 2026
 
+- 2026-11 · [Discovering formally verified quantum programs with AI](../2611.09822-verified-quantum-wiki/README.md)（`verified-quantum-wiki`）：量子程序的复杂度可能远超经典模拟能力，靠若干数值样例无法证明一般正确性。研究者先在量子 Hoare 逻辑（QHL）库中冻结正确性与资源规范，异构 LLM 团队搜索程序和 Lean 证明。
+- 2026-11 · [ENGRAM: From Agent Experience to Weights through Verified Consolidation](../2611.09472-engram-consolidation/README.md)（`engram-consolidation`）：检索过往轨迹能支持 Agent 执行，但检索库不会因为模型微调而自然缩小。ENGRAM 把两个问题拆开：有没有值得学的经验，以及这次更新的权重能否替代外部检索。
 - 2026-11 · [EnvOpt: Automated Optimization for Agent Environments](../2611.07372-envopt/README.md)（`envopt`）：长期稳定的工作环境可以承载多类查询。EnvOpt 固定目标模型与 Harness，让研究 Agent 改变同一信息的可访问表示，例如用 SQLite 目录索引散落的表定义，或为既有接口写索引手册。
 - 2026-11 · [XStack: A Benchmark for ML Repo Migration](../2611.08472-xstack/README.md)（`xstack`）：局部张量变换正确不等于能迁移完整实验。XStack 固定 20 个真实 PyTorch 仓库的源提交，要求 Agent 在 TPU 上移植到 JAX，交付环境安装、训练/评测和 PyTorch 权重导出三个入口。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-11 · [From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?](../2611.05108-continual-autoresearch/README.md)（`continual-autoresearch`）：持续会话可能复用代码和经验，更快找到有效方案，但未必提高最终留出效果。论文在相同任务流、模型、数据和逐任务时间预算下比较 stateful 与 reset Agent；保留首个有效提交、所有提交及最终选择，完成后才由私有测试评价。

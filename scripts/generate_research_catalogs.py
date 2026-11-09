@@ -839,6 +839,7 @@ def foundation_rows() -> list[dict[str, str]]:
     extra = manifest_domain_rows("foundation-models", {
         "convpe": ("注意力与长上下文", "卷积位置偏置"),
         "ginger": ("推理与系统效率", "量化近邻图检索"),
+        "e-means": ("推理与系统效率", "向量索引与聚类训练"),
         "pipnn-ii": ("推理与系统效率", "量化近邻图构建"),
         "semantic-block-sparse-attention": ("注意力与长上下文", "稀疏、门控与动态注意力"),
         "anchor-kv": ("注意力与长上下文", "跨层共享状态与测试时训练"),

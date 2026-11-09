@@ -7,7 +7,7 @@ hide:
 
 # 同一个GRPO名字之外：优势尺度、裁剪单位与训推失配
 
-[LLM 后训练](../index.md) · 更新 2026-11-04 · 55 篇主题资料 / 7 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-09 · 56 篇主题资料 / 8 篇重点对照
 
 GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比被裁剪、样本到底由哪个分布生成。Dr. GRPO、DAPO、GSPO与TIS/IcePop分别改动这些环节，不能把所有ratio都叫同一种off-policy校正。
 
@@ -32,6 +32,7 @@ GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比�
 | [GSPO](../../../post-training/2507.18071-gspo/README.md) · [原始来源](https://arxiv.org/abs/2507.18071)<br>章节：背景与主要改动、核心公式、复现边界 | 先对响应内log-ratio取平均再指数化，整条response共享sequence clip。 | 改变异常token如何影响整条轨迹，不等于重新定义奖励；本地没有真实token轨迹或MoE路由。 |
 | [TIS](../../../post-training/web-2025-tis/README.md) · [原始来源](https://fengyao.notion.site/off-policy-rl)<br>章节：背景与主要改动、核心公式、复现边界 | 用训练侧与rollout引擎概率比校正训推差异，只对过大权重单侧截断。 | 小ratio仍保留，重尾被限制；它不替代old-policy陈旧校正。本地用确定性引擎扰动验证梯度路径。 |
 | [IcePop](../../../post-training/2510.18855-icepop/README.md) · [原始来源](https://arxiv.org/abs/2510.18855)<br>章节：背景与主要改动、核心公式、复现边界 | 对训推ratio使用双侧有效区间，区间内保留原ratio，区间外策略梯度为零。 | 会丢弃严重失配token，而不是把所有ratio夹回边界；本地未运行真实MoE集群。 |
+| [Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards](../../../post-training/2611.09448-rcea/README.md) · [原始来源](https://arxiv.org/abs/2611.09448)<br>章节：核心公式、原文结果与限制、诊断与边界 | 不改更新目标，先按验证结果、过程有效性和解法模式拆开轨迹熵，再用同前缀协方差解释局部变化方向。 | 精确分解需要确定性分区；局部协方差不是策略模式或因果归因。CPU 只覆盖数值核，未跑多目标 RLVR 矩阵。 |
 
 </div>
 
@@ -103,6 +104,10 @@ GRPO/GSPO主要调整既有文本策略的优势或ratio单位，RLiD先把被�
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
 
+**2026-11-09** · 加入 RCEA，把策略优化目标与熵诊断分开。全局熵变小不能证明正确策略模式变少，本地只验证轨迹链式分解与局部一阶近似。
+
+涉及：[rcea](../../../post-training/2611.09448-rcea/README.md)
+
 **2026-11-04** · 精读RLiD，增加文本概率事件与可执行动作事件这一比较轴，明确同策略方差边缘化不等于不同LDM优越性，并补充标签边际KL与逐行entropy的区别；仅L1组件，完整训练成本过高不复现。
 
 涉及：[rlid](../../../post-training/2611.02455-rlid/README.md)
@@ -111,10 +116,11 @@ GRPO/GSPO主要调整既有文本策略的优势或ratio单位，RLiD先把被�
 
 覆盖 54 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 55 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 56 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
+- [Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards](../../../post-training/2611.09448-rcea/README.md)
 - [RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs](../../../post-training/2611.02455-rlid/README.md)
 - [MOER: Mix-Policy Optimization under Expert Prefix Guidance with Selective Rollback](../../../post-training/2610.30873-moer/README.md)
 - [CORD: Conflict-Aware Optimization for Joint RL and Distillation in Agents](../../../post-training/2610.29965-cord/README.md)

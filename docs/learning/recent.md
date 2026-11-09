@@ -68,9 +68,221 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">4353 个问题 · 1086 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">4369 个问题 · 1090 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:rcea" data-paper-title="Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards LLM 后训练 Southwest University 2026-11-06 训练日志里的平均 token 熵变小，既可能是模型更少走错误路径，也可能是它不再尝试原来会做的其它正确解法。RCEA 将两类信号分开：轨迹层按验证器成败、过程有效性和有效解法模式拆分；前缀层用全词表的 log 概率与 logit 增量的协方差解释局部熵方向。它是诊断框架，不是一种新的 RL 损失。 对当前单卡与本地预算，成本过高，不复现（审查 DONE），不自动重试。entropy_allocation 接收单题枚举的不同轨迹及归一概率、外部确定性标签，实现 Eq. (7)–(8)。local_entropy_change 输入同前缀两次词表 logit 的差值，返回 Eq. (10) 的近似与真正的有限差。未实现论文的固定探针采样估计、过程判分、语义标注和训练。零质量分支贡献为零，不伪造条件模式数。  RLVR 熵诊断与解法多样性 LLM 后训练 策略优化：谁在采样，谁在被更新 为什么有效成功轨迹概率为零时，有效模式数不该报成 1？ exp(0)=1 表示一个占满条件分布的模式。没有有效成功轨迹时，这个条件分布不存在；只有其加权熵贡献能按零处理。 所有概率都在失败轨迹上时，模式熵项权重为零，但把模式数报为 1 会误导为至少有一个正确策略。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/policy-optimization/">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-00b0d44ac6c7a232">为什么有效成功轨迹概率为零时，有效模式数不该报成 1？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Arcea">Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · Southwest University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>exp(0)=1 表示一个占满条件分布的模式。没有有效成功轨迹时，这个条件分布不存在；只有其加权熵贡献能按零处理。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>所有概率都在失败轨迹上时，模式熵项权重为零，但把模式数报为 1 会误导为至少有一个正确策略。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09448">原论文</a> · <a href="../../post-training/2611.09448-rcea/">实现解读</a> · <a href="#qa-00b0d44ac6c7a232">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:rcea" data-paper-title="Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards LLM 后训练 Southwest University 2026-11-06 训练日志里的平均 token 熵变小，既可能是模型更少走错误路径，也可能是它不再尝试原来会做的其它正确解法。RCEA 将两类信号分开：轨迹层按验证器成败、过程有效性和有效解法模式拆分；前缀层用全词表的 log 概率与 logit 增量的协方差解释局部熵方向。它是诊断框架，不是一种新的 RL 损失。 对当前单卡与本地预算，成本过高，不复现（审查 DONE），不自动重试。entropy_allocation 接收单题枚举的不同轨迹及归一概率、外部确定性标签，实现 Eq. (7)–(8)。local_entropy_change 输入同前缀两次词表 logit 的差值，返回 Eq. (10) 的近似与真正的有限差。未实现论文的固定探针采样估计、过程判分、语义标注和训练。零质量分支贡献为零，不伪造条件模式数。  RLVR 熵诊断与解法多样性 LLM 后训练 策略优化：谁在采样，谁在被更新 轨迹熵的分解和平均 token 熵按结果分组，为什么不是同一条公式？ 轨迹熵是完整路径分布的 Shannon 熵，用链式法则包含验证结果熵；平均 token 熵是沿路径得到的局部统计量，用全期望公式只做分组加权。 若一半轨迹成功、一半失败，验证结果贡献 log(2) 纳特；不能把这一项额外加进已经按成败加权的平均 token 熵。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/policy-optimization/">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-b6a13213bc039f6b">轨迹熵的分解和平均 token 熵按结果分组，为什么不是同一条公式？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Arcea">Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · Southwest University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>轨迹熵是完整路径分布的 Shannon 熵，用链式法则包含验证结果熵；平均 token 熵是沿路径得到的局部统计量，用全期望公式只做分组加权。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>若一半轨迹成功、一半失败，验证结果贡献 log(2) 纳特；不能把这一项额外加进已经按成败加权的平均 token 熵。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09448">原论文</a> · <a href="../../post-training/2611.09448-rcea/">实现解读</a> · <a href="#qa-b6a13213bc039f6b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:rcea" data-paper-title="Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards LLM 后训练 Southwest University 2026-11-06 训练日志里的平均 token 熵变小，既可能是模型更少走错误路径，也可能是它不再尝试原来会做的其它正确解法。RCEA 将两类信号分开：轨迹层按验证器成败、过程有效性和有效解法模式拆分；前缀层用全词表的 log 概率与 logit 增量的协方差解释局部熵方向。它是诊断框架，不是一种新的 RL 损失。 对当前单卡与本地预算，成本过高，不复现（审查 DONE），不自动重试。entropy_allocation 接收单题枚举的不同轨迹及归一概率、外部确定性标签，实现 Eq. (7)–(8)。local_entropy_change 输入同前缀两次词表 logit 的差值，返回 Eq. (10) 的近似与真正的有限差。未实现论文的固定探针采样估计、过程判分、语义标注和训练。零质量分支贡献为零，不伪造条件模式数。  RLVR 熵诊断与解法多样性 LLM 后训练 策略优化：谁在采样，谁在被更新 RLVR 训练后总熵下降，是否说明模型的正确解法也变少了？ 不一定。错误路径被压低、验证结果更确定、同一正确策略的表达变少，以及不同有效解法的概率变集中，都可能降低熵。要检查有效解法的条件分布。 两种有效解法仍各占有效轨迹的一半时，即便所有错误路径的概率都下降，有效模式数仍是 2。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/policy-optimization/">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<span id="paper-post-training-rcea-1c14ab08" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-d6fcbecfc95c0ed0">RLVR 训练后总熵下降，是否说明模型的正确解法也变少了？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Arcea">Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · Southwest University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不一定。错误路径被压低、验证结果更确定、同一正确策略的表达变少，以及不同有效解法的概率变集中，都可能降低熵。要检查有效解法的条件分布。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两种有效解法仍各占有效轨迹的一半时，即便所有错误路径的概率都下降，有效模式数仍是 2。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09448">原论文</a> · <a href="../../post-training/2611.09448-rcea/">实现解读</a> · <a href="#qa-d6fcbecfc95c0ed0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:rcea" data-paper-title="Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards LLM 后训练 Southwest University 2026-11-06 训练日志里的平均 token 熵变小，既可能是模型更少走错误路径，也可能是它不再尝试原来会做的其它正确解法。RCEA 将两类信号分开：轨迹层按验证器成败、过程有效性和有效解法模式拆分；前缀层用全词表的 log 概率与 logit 增量的协方差解释局部熵方向。它是诊断框架，不是一种新的 RL 损失。 对当前单卡与本地预算，成本过高，不复现（审查 DONE），不自动重试。entropy_allocation 接收单题枚举的不同轨迹及归一概率、外部确定性标签，实现 Eq. (7)–(8)。local_entropy_change 输入同前缀两次词表 logit 的差值，返回 Eq. (10) 的近似与真正的有限差。未实现论文的固定探针采样估计、过程判分、语义标注和训练。零质量分支贡献为零，不伪造条件模式数。  RLVR 熵诊断与解法多样性 LLM 后训练 策略优化：谁在采样，谁在被更新 给一个前缀的每个 logit 增加相同常数，局部协方差和实际熵会如何变化？ 与常数的协方差为零，softmax 也对共同平移不变。两者都应给零变化；这适合作为局部诊断的负控。 对 logits (2, 0, -2) 使用增量 (1, 1, 1)，预测和有限差均为 0；不要把 logit 绝对值变化误认为熵变化。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="../paths/post-training/policy-optimization/">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-ae66013b52ab3feb">给一个前缀的每个 logit 增加相同常数，局部协方差和实际熵会如何变化？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=post-training%3Arcea">Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · Southwest University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>与常数的协方差为零，softmax 也对共同平移不变。两者都应给零变化；这适合作为局部诊断的负控。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>对 logits (2, 0, -2) 使用增量 (1, 1, 1)，预测和有限差均为 0；不要把 logit 绝对值变化误认为熵变化。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09448">原论文</a> · <a href="../../post-training/2611.09448-rcea/">实现解读</a> · <a href="#qa-ae66013b52ab3feb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:e-means" data-paper-title="e-means: outperforming k-means (in one-tenth the epochs)" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="e-means: outperforming k-means (in one-tenth the epochs) 基础模型 FAIR at Meta 2026-11-06 Lloyd 每扫完一轮数据才更新质心。e-means 每批更新各簇的 EMA 计数与向量和，让同一轮中的后续批次立即使用新质心。每五批检查低计数簇，借活跃簇分裂复苏；末轮按过程中产生的分配取均值，不额外做一轮全量分配。原文另拟合批大小与峰值步长的缩放律，在大规模场景比较精确、低精度与 IVF 分配。 成本过高，不复现（审查 DONE）。L1 机制诊断。L1 机制诊断。本地执行稠密 CPU 聚类，不是 DINO10B、近邻检索或 GPU 加速复现。fit 使用 NumPy float64 精确平方 L2 分配、确定性同分处理、每轮重新洗牌、余弦步长 EMA、低质量簇复苏、末轮均值。仅接受批大小整除行数的有界输入。若弱簇多于可用的不重复活跃 donor，余下弱簇延到下一次检查；若零计数（例如首步步长为 1）或末轮无分配，保留该簇最近有效中心。这里用固定的小样本步长，不把原文拟合范围外的缩放律当作最佳值。  推理与系统效率 向量索引与聚类训练 基础模型 推理压缩：权重、KV 缓存与服务带宽 复苏弱簇时，为什么从活跃簇分裂而不是随机重采本批数据？ 按 EMA 质量抽 donor，使有较多点的簇更有机会得到新的表示容量；反向乘性扰动让两个子中心邻近但可分，供后续分配。原 donor 质量被平分，弱槽旧状态被覆盖。 教学例：质量为 8、中心为 (2, 4) 的 donor 被拆成两个质量 4 的子簇，两个中心沿交替坐标向相反方向轻微偏移。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/compression-and-cache/">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-44d3dc20ade161da">复苏弱簇时，为什么从活跃簇分裂而不是随机重采本批数据？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Ae-means">e-means: outperforming k-means (in one-tenth the epochs)</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · FAIR at Meta</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>按 EMA 质量抽 donor，使有较多点的簇更有机会得到新的表示容量；反向乘性扰动让两个子中心邻近但可分，供后续分配。原 donor 质量被平分，弱槽旧状态被覆盖。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：质量为 8、中心为 (2, 4) 的 donor 被拆成两个质量 4 的子簇，两个中心沿交替坐标向相反方向轻微偏移。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09501v1">原论文</a> · <a href="../../foundation-models/2611.09501-e-means/">实现解读</a> · <a href="#qa-44d3dc20ade161da">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:e-means" data-paper-title="e-means: outperforming k-means (in one-tenth the epochs)" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="e-means: outperforming k-means (in one-tenth the epochs) 基础模型 FAIR at Meta 2026-11-06 Lloyd 每扫完一轮数据才更新质心。e-means 每批更新各簇的 EMA 计数与向量和，让同一轮中的后续批次立即使用新质心。每五批检查低计数簇，借活跃簇分裂复苏；末轮按过程中产生的分配取均值，不额外做一轮全量分配。原文另拟合批大小与峰值步长的缩放律，在大规模场景比较精确、低精度与 IVF 分配。 成本过高，不复现（审查 DONE）。L1 机制诊断。L1 机制诊断。本地执行稠密 CPU 聚类，不是 DINO10B、近邻检索或 GPU 加速复现。fit 使用 NumPy float64 精确平方 L2 分配、确定性同分处理、每轮重新洗牌、余弦步长 EMA、低质量簇复苏、末轮均值。仅接受批大小整除行数的有界输入。若弱簇多于可用的不重复活跃 donor，余下弱簇延到下一次检查；若零计数（例如首步步长为 1）或末轮无分配，保留该簇最近有效中心。这里用固定的小样本步长，不把原文拟合范围外的缩放律当作最佳值。  推理与系统效率 向量索引与聚类训练 基础模型 推理压缩：权重、KV 缓存与服务带宽 CPU 上的精确 L2 聚类检查能代替论文 GPU 实验吗？ 不能。小数据检查可以独立复核足够统计、复苏及末轮均值，但不运行论文的大规模低精度和 IVF 分配，也没有计时或近邻检索负载。要验证系统速度应在匹配误差的真实数据和硬件上测墙钟。 本地每组 256 个训练向量和 64 个留出向量；论文 DINO10B 有一百亿向量和约 1678 万中心。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/compression-and-cache/">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-ee3eb64f07bedf5d">CPU 上的精确 L2 聚类检查能代替论文 GPU 实验吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Ae-means">e-means: outperforming k-means (in one-tenth the epochs)</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · FAIR at Meta</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。小数据检查可以独立复核足够统计、复苏及末轮均值，但不运行论文的大规模低精度和 IVF 分配，也没有计时或近邻检索负载。要验证系统速度应在匹配误差的真实数据和硬件上测墙钟。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>本地每组 256 个训练向量和 64 个留出向量；论文 DINO10B 有一百亿向量和约 1678 万中心。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09501v1">原论文</a> · <a href="../../foundation-models/2611.09501-e-means/">实现解读</a> · <a href="#qa-ee3eb64f07bedf5d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:e-means" data-paper-title="e-means: outperforming k-means (in one-tenth the epochs)" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="e-means: outperforming k-means (in one-tenth the epochs) 基础模型 FAIR at Meta 2026-11-06 Lloyd 每扫完一轮数据才更新质心。e-means 每批更新各簇的 EMA 计数与向量和，让同一轮中的后续批次立即使用新质心。每五批检查低计数簇，借活跃簇分裂复苏；末轮按过程中产生的分配取均值，不额外做一轮全量分配。原文另拟合批大小与峰值步长的缩放律，在大规模场景比较精确、低精度与 IVF 分配。 成本过高，不复现（审查 DONE）。L1 机制诊断。L1 机制诊断。本地执行稠密 CPU 聚类，不是 DINO10B、近邻检索或 GPU 加速复现。fit 使用 NumPy float64 精确平方 L2 分配、确定性同分处理、每轮重新洗牌、余弦步长 EMA、低质量簇复苏、末轮均值。仅接受批大小整除行数的有界输入。若弱簇多于可用的不重复活跃 donor，余下弱簇延到下一次检查；若零计数（例如首步步长为 1）或末轮无分配，保留该簇最近有效中心。这里用固定的小样本步长，不把原文拟合范围外的缩放律当作最佳值。  推理与系统效率 向量索引与聚类训练 基础模型 推理压缩：权重、KV 缓存与服务带宽 为什么 e-means 不能对每批质心简单做 EMA？ 一批里落入同一簇的点数会变。分别累积点数与向量和再相除，会按该簇的实际观测质量加权；对每批均值做 EMA 会把很少点的批次当成同等可靠。 教学例：一批有 9 个值 0，另一批只有一个值 10。若先忽略时间衰减，点数加权均值是 1，而等权平均两个批次的均值是 5。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/compression-and-cache/">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<span id="paper-foundation-models-e-means-85035e10" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-1abaa4827e475046">为什么 e-means 不能对每批质心简单做 EMA？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Ae-means">e-means: outperforming k-means (in one-tenth the epochs)</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · FAIR at Meta</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>一批里落入同一簇的点数会变。分别累积点数与向量和再相除，会按该簇的实际观测质量加权；对每批均值做 EMA 会把很少点的批次当成同等可靠。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一批有 9 个值 0，另一批只有一个值 10。若先忽略时间衰减，点数加权均值是 1，而等权平均两个批次的均值是 5。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09501v1">原论文</a> · <a href="../../foundation-models/2611.09501-e-means/">实现解读</a> · <a href="#qa-1abaa4827e475046">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:e-means" data-paper-title="e-means: outperforming k-means (in one-tenth the epochs)" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="e-means: outperforming k-means (in one-tenth the epochs) 基础模型 FAIR at Meta 2026-11-06 Lloyd 每扫完一轮数据才更新质心。e-means 每批更新各簇的 EMA 计数与向量和，让同一轮中的后续批次立即使用新质心。每五批检查低计数簇，借活跃簇分裂复苏；末轮按过程中产生的分配取均值，不额外做一轮全量分配。原文另拟合批大小与峰值步长的缩放律，在大规模场景比较精确、低精度与 IVF 分配。 成本过高，不复现（审查 DONE）。L1 机制诊断。L1 机制诊断。本地执行稠密 CPU 聚类，不是 DINO10B、近邻检索或 GPU 加速复现。fit 使用 NumPy float64 精确平方 L2 分配、确定性同分处理、每轮重新洗牌、余弦步长 EMA、低质量簇复苏、末轮均值。仅接受批大小整除行数的有界输入。若弱簇多于可用的不重复活跃 donor，余下弱簇延到下一次检查；若零计数（例如首步步长为 1）或末轮无分配，保留该簇最近有效中心。这里用固定的小样本步长，不把原文拟合范围外的缩放律当作最佳值。  推理与系统效率 向量索引与聚类训练 基础模型 推理压缩：权重、KV 缓存与服务带宽 末轮均值降低固定标签 MSE，为什么还不能断言 e-means 总是比 Lloyd 好？ 均值只对同一组训练点和同一套历史标签最优。重新分配、初始化、留出分布与比较算法都可能改变误差；论文也把优化训练和优化测试的收尾方案分开。 本地 seed 42 固定标签误差降低，但留出 MSE 为 e-means 1.87753、Lloyd 1.84352，方向相反。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="../paths/foundation-models/compression-and-cache/">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-ad2650e6f1d14041">末轮均值降低固定标签 MSE，为什么还不能断言 e-means 总是比 Lloyd 好？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=foundation-models%3Ae-means">e-means: outperforming k-means (in one-tenth the epochs)</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · FAIR at Meta</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>均值只对同一组训练点和同一套历史标签最优。重新分配、初始化、留出分布与比较算法都可能改变误差；论文也把优化训练和优化测试的收尾方案分开。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>本地 seed 42 固定标签误差降低，但留出 MSE 为 e-means 1.87753、Lloyd 1.84352，方向相反。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09501v1">原论文</a> · <a href="../../foundation-models/2611.09501-e-means/">实现解读</a> · <a href="#qa-ad2650e6f1d14041">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:verified-quantum-wiki" data-paper-title="Discovering formally verified quantum programs with AI" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Discovering formally verified quantum programs with AI Agent Google DeepMind 2026-11-06 量子程序的复杂度可能远超经典模拟能力，靠若干数值样例无法证明一般正确性。研究者先在量子 Hoare 逻辑（QHL）库中冻结正确性与资源规范，异构 LLM 团队搜索程序和 Lean 证明。论文不固定团队内部模型、框架或分工；共享的是规范、外部验证与协作协议（§1.1–1.2、附录 A–C）。团队本地通过 Lean 不等于可接纳成果。 完整实验成本过高，不复现（审查 DONE）；component_only / L1 机制诊断：本地只执行收到可信外部验证结果后的 wiki 合并规则，不运行 Lean、量子程序或 LLM。component_only / L1 机制诊断：本地只执行收到可信外部验证结果后的 wiki 合并规则，不运行 Lean、量子程序或 LLM。完整实验成本过高，不复现（审查 DONE）；作者尚未公开本篇量子 Lean 库、题目规范和已验证解。Solution 显式携带冻结规范摘要、候选 artifact 摘要、成本口径、精确成本及代码大小。  Harness 与自我改进 形式验证 跨团队共享 wiki Agent 运行流程与自进化：改的是哪一层 本地构造 ExternalComparatorResult 并通过 admission，可以说量子程序已正式验证吗？ 不可以。它是可信外部验证器的接口，既不运行 Lean 也不鉴别凭据真实性。真实宿主先完成独立验证并认证来源，才可填入结果。CPU 夹具只测试绑定一致性、失败拒绝和阈值；实际 Lean 证明数为零。 教学例：复制旧证明凭据给新 artifact，即便所有 flags 为 true，也因摘要不匹配拒绝；若恶意调用方同时伪造摘要和 flags，本组件无法识别，必须由外部可信边界防止。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-b183d20e4f323234">本地构造 ExternalComparatorResult 并通过 admission，可以说量子程序已正式验证吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Averified-quantum-wiki">Discovering formally verified quantum programs with AI</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不可以。它是可信外部验证器的接口，既不运行 Lean 也不鉴别凭据真实性。真实宿主先完成独立验证并认证来源，才可填入结果。CPU 夹具只测试绑定一致性、失败拒绝和阈值；实际 Lean 证明数为零。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：复制旧证明凭据给新 artifact，即便所有 flags 为 true，也因摘要不匹配拒绝；若恶意调用方同时伪造摘要和 flags，本组件无法识别，必须由外部可信边界防止。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09822v1">原论文</a> · <a href="../../agent-research/2611.09822-verified-quantum-wiki/">实现解读</a> · <a href="#qa-b183d20e4f323234">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:verified-quantum-wiki" data-paper-title="Discovering formally verified quantum programs with AI" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Discovering formally verified quantum programs with AI Agent Google DeepMind 2026-11-06 量子程序的复杂度可能远超经典模拟能力，靠若干数值样例无法证明一般正确性。研究者先在量子 Hoare 逻辑（QHL）库中冻结正确性与资源规范，异构 LLM 团队搜索程序和 Lean 证明。论文不固定团队内部模型、框架或分工；共享的是规范、外部验证与协作协议（§1.1–1.2、附录 A–C）。团队本地通过 Lean 不等于可接纳成果。 完整实验成本过高，不复现（审查 DONE）；component_only / L1 机制诊断：本地只执行收到可信外部验证结果后的 wiki 合并规则，不运行 Lean、量子程序或 LLM。component_only / L1 机制诊断：本地只执行收到可信外部验证结果后的 wiki 合并规则，不运行 Lean、量子程序或 LLM。完整实验成本过高，不复现（审查 DONE）；作者尚未公开本篇量子 Lean 库、题目规范和已验证解。Solution 显式携带冻结规范摘要、候选 artifact 摘要、成本口径、精确成本及代码大小。  Harness 与自我改进 形式验证 跨团队共享 wiki Agent 运行流程与自进化：改的是哪一层 默认 5% 成本门槛与 20% 代码缩短是 AND 还是 OR？ 通过外部重验证是共同前提；之后两个分支是 OR：成本至少下降 5%，或者代码至少缩短 20% 且成本严格下降。第二个分支不能只缩短代码而维持原成本。两项还必须比较同一冻结规范与成本口径。 教学例：从成本 100、长度 100 出发，(95,120) 可经第一分支接纳，(99,80) 可经第二分支接纳，(100,1) 仍拒绝。代码长度的单位由调用方固定，论文未指定字节或行。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-4c13a877a713728e">默认 5% 成本门槛与 20% 代码缩短是 AND 还是 OR？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Averified-quantum-wiki">Discovering formally verified quantum programs with AI</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>通过外部重验证是共同前提；之后两个分支是 OR：成本至少下降 5%，或者代码至少缩短 20% 且成本严格下降。第二个分支不能只缩短代码而维持原成本。两项还必须比较同一冻结规范与成本口径。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：从成本 100、长度 100 出发，(95,120) 可经第一分支接纳，(99,80) 可经第二分支接纳，(100,1) 仍拒绝。代码长度的单位由调用方固定，论文未指定字节或行。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09822v1">原论文</a> · <a href="../../agent-research/2611.09822-verified-quantum-wiki/">实现解读</a> · <a href="#qa-4c13a877a713728e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:verified-quantum-wiki" data-paper-title="Discovering formally verified quantum programs with AI" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Discovering formally verified quantum programs with AI Agent Google DeepMind 2026-11-06 量子程序的复杂度可能远超经典模拟能力，靠若干数值样例无法证明一般正确性。研究者先在量子 Hoare 逻辑（QHL）库中冻结正确性与资源规范，异构 LLM 团队搜索程序和 Lean 证明。论文不固定团队内部模型、框架或分工；共享的是规范、外部验证与协作协议（§1.1–1.2、附录 A–C）。团队本地通过 Lean 不等于可接纳成果。 完整实验成本过高，不复现（审查 DONE）；component_only / L1 机制诊断：本地只执行收到可信外部验证结果后的 wiki 合并规则，不运行 Lean、量子程序或 LLM。component_only / L1 机制诊断：本地只执行收到可信外部验证结果后的 wiki 合并规则，不运行 Lean、量子程序或 LLM。完整实验成本过高，不复现（审查 DONE）；作者尚未公开本篇量子 Lean 库、题目规范和已验证解。Solution 显式携带冻结规范摘要、候选 artifact 摘要、成本口径、精确成本及代码大小。  Harness 与自我改进 形式验证 跨团队共享 wiki Agent 运行流程与自进化：改的是哪一层 这套 wiki 接纳规则与按开发集准确率选择推理策略有什么根本区别？ 开发集策略选择比较有限样本的经验效果，需要测试隔离及不确定性分析；本篇对冻结形式规格证明正确性和成本后，再筛选足够大的改善。证明可以超出可模拟样本，但不能证明物理建模假设正确，也不能把事后协作归因变成因果实验。 教学例：一个策略在 95/100 道开发题答对不能证明所有输入正确；一个 QHL 定理证明全体满足前置条件的状态正确，却可能沿用遗漏某类门成本的规格。两者需要不同的外部审查。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-06cbf962e8b93e19">这套 wiki 接纳规则与按开发集准确率选择推理策略有什么根本区别？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Averified-quantum-wiki">Discovering formally verified quantum programs with AI</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>开发集策略选择比较有限样本的经验效果，需要测试隔离及不确定性分析；本篇对冻结形式规格证明正确性和成本后，再筛选足够大的改善。证明可以超出可模拟样本，但不能证明物理建模假设正确，也不能把事后协作归因变成因果实验。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个策略在 95/100 道开发题答对不能证明所有输入正确；一个 QHL 定理证明全体满足前置条件的状态正确，却可能沿用遗漏某类门成本的规格。两者需要不同的外部审查。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09822v1">原论文</a> · <a href="../../agent-research/2611.09822-verified-quantum-wiki/">实现解读</a> · <a href="#qa-06cbf962e8b93e19">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:verified-quantum-wiki" data-paper-title="Discovering formally verified quantum programs with AI" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Discovering formally verified quantum programs with AI Agent Google DeepMind 2026-11-06 量子程序的复杂度可能远超经典模拟能力，靠若干数值样例无法证明一般正确性。研究者先在量子 Hoare 逻辑（QHL）库中冻结正确性与资源规范，异构 LLM 团队搜索程序和 Lean 证明。论文不固定团队内部模型、框架或分工；共享的是规范、外部验证与协作协议（§1.1–1.2、附录 A–C）。团队本地通过 Lean 不等于可接纳成果。 完整实验成本过高，不复现（审查 DONE）；component_only / L1 机制诊断：本地只执行收到可信外部验证结果后的 wiki 合并规则，不运行 Lean、量子程序或 LLM。component_only / L1 机制诊断：本地只执行收到可信外部验证结果后的 wiki 合并规则，不运行 Lean、量子程序或 LLM。完整实验成本过高，不复现（审查 DONE）；作者尚未公开本篇量子 Lean 库、题目规范和已验证解。Solution 显式携带冻结规范摘要、候选 artifact 摘要、成本口径、精确成本及代码大小。  Harness 与自我改进 形式验证 跨团队共享 wiki Agent 运行流程与自进化：改的是哪一层 团队说自己的 Lean 文件编译通过，为什么还不能直接写入共享 wiki？ 团队可修改自己的工作区，可能连定理、依赖定义或允许公理一起改掉。本篇将提交放到独立干净沙箱，用 Comparator 对照冻结规范，确认证明没有偷换问题且资源定理等于申报成本，再决定是否合并。 教学例：原题要求所有输入满足性质，团队把定理改成只对零输入成立。文件可能编译，但 target_theorems_match 应为 false，不能因成本下降 90% 就接纳。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/harness-and-self-improvement/">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-verified-quantum-wiki-13281631" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-9c80b7b87afe0152">团队说自己的 Lean 文件编译通过，为什么还不能直接写入共享 wiki？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Averified-quantum-wiki">Discovering formally verified quantum programs with AI</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>团队可修改自己的工作区，可能连定理、依赖定义或允许公理一起改掉。本篇将提交放到独立干净沙箱，用 Comparator 对照冻结规范，确认证明没有偷换问题且资源定理等于申报成本，再决定是否合并。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：原题要求所有输入满足性质，团队把定理改成只对零输入成立。文件可能编译，但 target_theorems_match 应为 false，不能因成本下降 90% 就接纳。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09822v1">原论文</a> · <a href="../../agent-research/2611.09822-verified-quantum-wiki/">实现解读</a> · <a href="#qa-9c80b7b87afe0152">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:engram-consolidation" data-paper-title="ENGRAM: From Agent Experience to Weights through Verified Consolidation" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="ENGRAM: From Agent Experience to Weights through Verified Consolidation Agent University of New South Wales 2026-11-06 检索过往轨迹能支持 Agent 执行，但检索库不会因为模型微调而自然缩小。ENGRAM 把两个问题拆开：有没有值得学的经验，以及这次更新的权重能否替代外部检索。学生尝试和教师示范进入经验图（ETG），学生熟练度独立更新；验证通过后才按技能批准候选并处理已参与训练的记录。 考虑交互采集和多轮验证，单张 A100/A30 或本地 Mac 不按论文规模跑：成本过高，不复现（审查 DONE）。consolidate 接收外部训练与加载结果、当前有效训练记录 ID、预释放经验记录和开发探针。它按源 episode 阻断训练／开发／回放与最终测试的交叉：开发探针来源可出现在预释放经验元数据中，但不能出现在本轮训练或历史 replay。调用方需先完成 QA 问题级去重；这里只校验 episode 标识。actor 只收到公开输入和指定臂上下文，目标仅传给独立评分器；检索回调只收到预释放经验的公开字段，调用方须保证这些字段不夹带未授权标签。原始状态不改写；  长期记忆与技能 可验证经验固化与记忆释放 Agent 记忆与技能：让经验可取回、可失效 MemPrice 不选某条记忆的原文，是否等同于 ENGRAM 释放该技能的记忆？ 不等同。MemPrice 在当前窗口选择记忆表示或不放入，依据是效用与预算。ENGRAM 用有检索的基础模型做参考，要求更新后的权重在独立探针上达标才允许从检索库归档。 教学例：窗口很短可以只放关键词，但不说明模型离开检索仍能正确完成任务；归档通过也不会自动删除存储里的原始记录。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/memory-and-skills/">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-d9a50f0bc981a580">MemPrice 不选某条记忆的原文，是否等同于 ENGRAM 释放该技能的记忆？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Aengram-consolidation">ENGRAM: From Agent Experience to Weights through Verified Consolidation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · University of New South Wales</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不等同。MemPrice 在当前窗口选择记忆表示或不放入，依据是效用与预算。ENGRAM 用有检索的基础模型做参考，要求更新后的权重在独立探针上达标才允许从检索库归档。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：窗口很短可以只放关键词，但不说明模型离开检索仍能正确完成任务；归档通过也不会自动删除存储里的原始记录。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、原文效果与负结果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09472">原论文</a> · <a href="../../agent-research/2611.09472-engram-consolidation/">实现解读</a> · <a href="#qa-d9a50f0bc981a580">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:engram-consolidation" data-paper-title="ENGRAM: From Agent Experience to Weights through Verified Consolidation" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="ENGRAM: From Agent Experience to Weights through Verified Consolidation Agent University of New South Wales 2026-11-06 检索过往轨迹能支持 Agent 执行，但检索库不会因为模型微调而自然缩小。ENGRAM 把两个问题拆开：有没有值得学的经验，以及这次更新的权重能否替代外部检索。学生尝试和教师示范进入经验图（ETG），学生熟练度独立更新；验证通过后才按技能批准候选并处理已参与训练的记录。 考虑交互采集和多轮验证，单张 A100/A30 或本地 Mac 不按论文规模跑：成本过高，不复现（审查 DONE）。consolidate 接收外部训练与加载结果、当前有效训练记录 ID、预释放经验记录和开发探针。它按源 episode 阻断训练／开发／回放与最终测试的交叉：开发探针来源可出现在预释放经验元数据中，但不能出现在本轮训练或历史 replay。调用方需先完成 QA 问题级去重；这里只校验 episode 标识。actor 只收到公开输入和指定臂上下文，目标仅传给独立评分器；检索回调只收到预释放经验的公开字段，调用方须保证这些字段不夹带未授权标签。原始状态不改写；  长期记忆与技能 可验证经验固化与记忆释放 Agent 记忆与技能：让经验可取回、可失效 同一源 episode 的两个片段分别属于不同技能，能否一个训练、另一个作为开发探针？ 不能。按 episode 隔离，而不是按技能标签隔离；留作探针的 episode 也不能出现在 replay。策略回调不收探针目标，独立评分器拿到它。原论文预释放参考检索库与训练分区不是同一个概念。 教学例：同一次购物的导航与结账片段不能横跨训练和开发；关闭 episodic 检索也不应抹去结账页这一当前环境观察。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/memory-and-skills/">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-d04b1bd3531ede40">同一源 episode 的两个片段分别属于不同技能，能否一个训练、另一个作为开发探针？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Aengram-consolidation">ENGRAM: From Agent Experience to Weights through Verified Consolidation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · University of New South Wales</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。按 episode 隔离，而不是按技能标签隔离；留作探针的 episode 也不能出现在 replay。策略回调不收探针目标，独立评分器拿到它。原论文预释放参考检索库与训练分区不是同一个概念。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一次购物的导航与结账片段不能横跨训练和开发；关闭 episodic 检索也不应抹去结账页这一当前环境观察。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09472">原论文</a> · <a href="../../agent-research/2611.09472-engram-consolidation/">实现解读</a> · <a href="#qa-d04b1bd3531ede40">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:engram-consolidation" data-paper-title="ENGRAM: From Agent Experience to Weights through Verified Consolidation" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="ENGRAM: From Agent Experience to Weights through Verified Consolidation Agent University of New South Wales 2026-11-06 检索过往轨迹能支持 Agent 执行，但检索库不会因为模型微调而自然缩小。ENGRAM 把两个问题拆开：有没有值得学的经验，以及这次更新的权重能否替代外部检索。学生尝试和教师示范进入经验图（ETG），学生熟练度独立更新；验证通过后才按技能批准候选并处理已参与训练的记录。 考虑交互采集和多轮验证，单张 A100/A30 或本地 Mac 不按论文规模跑：成本过高，不复现（审查 DONE）。consolidate 接收外部训练与加载结果、当前有效训练记录 ID、预释放经验记录和开发探针。它按源 episode 阻断训练／开发／回放与最终测试的交叉：开发探针来源可出现在预释放经验元数据中，但不能出现在本轮训练或历史 replay。调用方需先完成 QA 问题级去重；这里只校验 episode 标识。actor 只收到公开输入和指定臂上下文，目标仅传给独立评分器；检索回调只收到预释放经验的公开字段，调用方须保证这些字段不夹带未授权标签。原始状态不改写；  长期记忆与技能 可验证经验固化与记忆释放 Agent 记忆与技能：让经验可取回、可失效 为什么既要设相对分差，又要设严格的绝对下限？ 相对分差防止权重替换检索后退步超过容忍量。绝对下限阻止两个都很差时靠微小改善过关。相对分差等于阈值可过，候选分等于绝对下限不可过。 教学例：四题中候选答对两题，参考答对一题，δ=0.25、α=0.5。相对门通过，但候选恰等于下限，所以不释放。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/memory-and-skills/">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-4c100ec81c202a20">为什么既要设相对分差，又要设严格的绝对下限？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Aengram-consolidation">ENGRAM: From Agent Experience to Weights through Verified Consolidation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · University of New South Wales</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>相对分差防止权重替换检索后退步超过容忍量。绝对下限阻止两个都很差时靠微小改善过关。相对分差等于阈值可过，候选分等于绝对下限不可过。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：四题中候选答对两题，参考答对一题，δ=0.25、α=0.5。相对门通过，但候选恰等于下限，所以不释放。</p>
+<p class="ar-learning-sources">依据：核心公式、原文效果与负结果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09472">原论文</a> · <a href="../../agent-research/2611.09472-engram-consolidation/">实现解读</a> · <a href="#qa-4c100ec81c202a20">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:engram-consolidation" data-paper-title="ENGRAM: From Agent Experience to Weights through Verified Consolidation" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="ENGRAM: From Agent Experience to Weights through Verified Consolidation Agent University of New South Wales 2026-11-06 检索过往轨迹能支持 Agent 执行，但检索库不会因为模型微调而自然缩小。ENGRAM 把两个问题拆开：有没有值得学的经验，以及这次更新的权重能否替代外部检索。学生尝试和教师示范进入经验图（ETG），学生熟练度独立更新；验证通过后才按技能批准候选并处理已参与训练的记录。 考虑交互采集和多轮验证，单张 A100/A30 或本地 Mac 不按论文规模跑：成本过高，不复现（审查 DONE）。consolidate 接收外部训练与加载结果、当前有效训练记录 ID、预释放经验记录和开发探针。它按源 episode 阻断训练／开发／回放与最终测试的交叉：开发探针来源可出现在预释放经验元数据中，但不能出现在本轮训练或历史 replay。调用方需先完成 QA 问题级去重；这里只校验 episode 标识。actor 只收到公开输入和指定臂上下文，目标仅传给独立评分器；检索回调只收到预释放经验的公开字段，调用方须保证这些字段不夹带未授权标签。原始状态不改写；  长期记忆与技能 可验证经验固化与记忆释放 Agent 记忆与技能：让经验可取回、可失效 学生从未完成一个技能，为什么仍可能通过 ENGRAM 的训练准入？通过后能马上移走记录吗？ 足够的成功教师示范可独立通过准入。准入只决定是否尝试学习；没有当前有效训练贡献或没有留出的验证探针都不能释放记忆。 教学例：熟练度为 0，同一个教师 episode 中两条有效成功记录满足 d_min=2，但若两条都留作开发探针，本轮没有训练贡献。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="../paths/agent-research/memory-and-skills/">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<span id="paper-agent-research-engram-consolidation-28eba53e" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-3bfe7db63e259653">学生从未完成一个技能，为什么仍可能通过 ENGRAM 的训练准入？通过后能马上移走记录吗？</h2>
+<p class="ar-learning-paper"><a href="../all/?paper=agent-research%3Aengram-consolidation">ENGRAM: From Agent Experience to Weights through Verified Consolidation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · University of New South Wales</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>足够的成功教师示范可独立通过准入。准入只决定是否尝试学习；没有当前有效训练贡献或没有留出的验证探针都不能释放记忆。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：熟练度为 0，同一个教师 episode 中两条有效成功记录满足 d_min=2，但若两条都留作开发探针，本轮没有训练贡献。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09472">原论文</a> · <a href="../../agent-research/2611.09472-engram-consolidation/">实现解读</a> · <a href="#qa-3bfe7db63e259653">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ginger" data-paper-title="GINGER: Spicing Up Graph-Based Vector Search" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="GINGER: Spicing Up Graph-Based Vector Search 基础模型 Google Research 2026-11-05 近邻图搜索在导航时随机读取大量候选，只需低位宽排序；最后的少量候选才需要高精度重排。若同时存粗码和完整浮点向量，会重复存储。GINGER 用 Nested TurboQuant（NTQ） 让高精度码保留同一个 4-bit 导航前缀：先读取粗码和粗尺度，最后才为入围向量读细码和细尺度。完整库另外用 PiPNN 构建近邻图、重排顶点使邻居 ID 更集中、以 AdaptiveGap 压缩邻接表，并提供 PCA 投影与候选预筛以节省搜索开销。NTQ 降低向量表示的读带宽； 作者的大规模图检索实验成本过高，不复现（审查 DONE）。L1 机制诊断，不是端到端检索复现。L1 机制诊断，不是端到端检索复现。本地只验证 Nested TurboQuant 的码本、拆流、缩放与浮点打分；作者的大规模图检索实验成本过高，不复现（审查 DONE）。build_codebook 用标准正态的解析区间矩拟合正半轴码本，支持 4-bit 加 1–4 个细化位。encode 接收调用方已用共同正交变换旋转的 Rx，本地执行归一化、编码与两种尺度；decode_navigation 只接收粗字节和粗尺度，decode_refined 才读细位流。inner_product 在同一旋转空间对完整精度查询评分。  推理与系统效率 向量检索量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 NTQ 已经存了完整细码，为什么导航不用把它一起读出来？ 4-bit 导航码就是完整码的粗前缀，但粗码和细位分别存放。导航只读符号位、粗区间和粗尺度；重排才读取入围向量的细位与细尺度。这样同一向量既不需要两份独立表示，也不会让导航承担细码带宽。 本地 31 维例子，粗码占 16 字节，4+2-bit 的额外细码占 8 字节（不含尺度）；未入围的候选不用读后 8 字节。 2026-11-07">
 <p class="ar-learning-card__domain"><a href="../paths/foundation-models/compression-and-cache/">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-ginger-bbdbc663" class="ar-learning-paper-anchor"></span>

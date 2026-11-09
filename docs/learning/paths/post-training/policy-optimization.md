@@ -7,7 +7,7 @@ hide:
 
 # 策略优化：谁在采样，谁在被更新
 
-[LLM 后训练](index.md) / 220 个问题 · 55 篇论文
+[LLM 后训练](index.md) / 224 个问题 · 56 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">220 个问题 · 55 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">224 个问题 · 56 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:rcea" data-paper-title="Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards LLM 后训练 Southwest University 2026-11-06 训练日志里的平均 token 熵变小，既可能是模型更少走错误路径，也可能是它不再尝试原来会做的其它正确解法。RCEA 将两类信号分开：轨迹层按验证器成败、过程有效性和有效解法模式拆分；前缀层用全词表的 log 概率与 logit 增量的协方差解释局部熵方向。它是诊断框架，不是一种新的 RL 损失。 对当前单卡与本地预算，成本过高，不复现（审查 DONE），不自动重试。entropy_allocation 接收单题枚举的不同轨迹及归一概率、外部确定性标签，实现 Eq. (7)–(8)。local_entropy_change 输入同前缀两次词表 logit 的差值，返回 Eq. (10) 的近似与真正的有限差。未实现论文的固定探针采样估计、过程判分、语义标注和训练。零质量分支贡献为零，不伪造条件模式数。  RLVR 熵诊断与解法多样性 LLM 后训练 策略优化：谁在采样，谁在被更新 RLVR 训练后总熵下降，是否说明模型的正确解法也变少了？ 不一定。错误路径被压低、验证结果更确定、同一正确策略的表达变少，以及不同有效解法的概率变集中，都可能降低熵。要检查有效解法的条件分布。 两种有效解法仍各占有效轨迹的一半时，即便所有错误路径的概率都下降，有效模式数仍是 2。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<span id="paper-post-training-rcea-1c14ab08" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-d6fcbecfc95c0ed0">RLVR 训练后总熵下降，是否说明模型的正确解法也变少了？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Arcea">Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · Southwest University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不一定。错误路径被压低、验证结果更确定、同一正确策略的表达变少，以及不同有效解法的概率变集中，都可能降低熵。要检查有效解法的条件分布。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两种有效解法仍各占有效轨迹的一半时，即便所有错误路径的概率都下降，有效模式数仍是 2。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09448">原论文</a> · <a href="../../../../post-training/2611.09448-rcea/">实现解读</a> · <a href="#qa-d6fcbecfc95c0ed0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:rcea" data-paper-title="Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards LLM 后训练 Southwest University 2026-11-06 训练日志里的平均 token 熵变小，既可能是模型更少走错误路径，也可能是它不再尝试原来会做的其它正确解法。RCEA 将两类信号分开：轨迹层按验证器成败、过程有效性和有效解法模式拆分；前缀层用全词表的 log 概率与 logit 增量的协方差解释局部熵方向。它是诊断框架，不是一种新的 RL 损失。 对当前单卡与本地预算，成本过高，不复现（审查 DONE），不自动重试。entropy_allocation 接收单题枚举的不同轨迹及归一概率、外部确定性标签，实现 Eq. (7)–(8)。local_entropy_change 输入同前缀两次词表 logit 的差值，返回 Eq. (10) 的近似与真正的有限差。未实现论文的固定探针采样估计、过程判分、语义标注和训练。零质量分支贡献为零，不伪造条件模式数。  RLVR 熵诊断与解法多样性 LLM 后训练 策略优化：谁在采样，谁在被更新 为什么有效成功轨迹概率为零时，有效模式数不该报成 1？ exp(0)=1 表示一个占满条件分布的模式。没有有效成功轨迹时，这个条件分布不存在；只有其加权熵贡献能按零处理。 所有概率都在失败轨迹上时，模式熵项权重为零，但把模式数报为 1 会误导为至少有一个正确策略。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-00b0d44ac6c7a232">为什么有效成功轨迹概率为零时，有效模式数不该报成 1？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Arcea">Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · Southwest University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>exp(0)=1 表示一个占满条件分布的模式。没有有效成功轨迹时，这个条件分布不存在；只有其加权熵贡献能按零处理。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>所有概率都在失败轨迹上时，模式熵项权重为零，但把模式数报为 1 会误导为至少有一个正确策略。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09448">原论文</a> · <a href="../../../../post-training/2611.09448-rcea/">实现解读</a> · <a href="#qa-00b0d44ac6c7a232">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:rcea" data-paper-title="Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards LLM 后训练 Southwest University 2026-11-06 训练日志里的平均 token 熵变小，既可能是模型更少走错误路径，也可能是它不再尝试原来会做的其它正确解法。RCEA 将两类信号分开：轨迹层按验证器成败、过程有效性和有效解法模式拆分；前缀层用全词表的 log 概率与 logit 增量的协方差解释局部熵方向。它是诊断框架，不是一种新的 RL 损失。 对当前单卡与本地预算，成本过高，不复现（审查 DONE），不自动重试。entropy_allocation 接收单题枚举的不同轨迹及归一概率、外部确定性标签，实现 Eq. (7)–(8)。local_entropy_change 输入同前缀两次词表 logit 的差值，返回 Eq. (10) 的近似与真正的有限差。未实现论文的固定探针采样估计、过程判分、语义标注和训练。零质量分支贡献为零，不伪造条件模式数。  RLVR 熵诊断与解法多样性 LLM 后训练 策略优化：谁在采样，谁在被更新 轨迹熵的分解和平均 token 熵按结果分组，为什么不是同一条公式？ 轨迹熵是完整路径分布的 Shannon 熵，用链式法则包含验证结果熵；平均 token 熵是沿路径得到的局部统计量，用全期望公式只做分组加权。 若一半轨迹成功、一半失败，验证结果贡献 log(2) 纳特；不能把这一项额外加进已经按成败加权的平均 token 熵。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-b6a13213bc039f6b">轨迹熵的分解和平均 token 熵按结果分组，为什么不是同一条公式？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Arcea">Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · Southwest University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>轨迹熵是完整路径分布的 Shannon 熵，用链式法则包含验证结果熵；平均 token 熵是沿路径得到的局部统计量，用全期望公式只做分组加权。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>若一半轨迹成功、一半失败，验证结果贡献 log(2) 纳特；不能把这一项额外加进已经按成败加权的平均 token 熵。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09448">原论文</a> · <a href="../../../../post-training/2611.09448-rcea/">实现解读</a> · <a href="#qa-b6a13213bc039f6b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:rcea" data-paper-title="Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards LLM 后训练 Southwest University 2026-11-06 训练日志里的平均 token 熵变小，既可能是模型更少走错误路径，也可能是它不再尝试原来会做的其它正确解法。RCEA 将两类信号分开：轨迹层按验证器成败、过程有效性和有效解法模式拆分；前缀层用全词表的 log 概率与 logit 增量的协方差解释局部熵方向。它是诊断框架，不是一种新的 RL 损失。 对当前单卡与本地预算，成本过高，不复现（审查 DONE），不自动重试。entropy_allocation 接收单题枚举的不同轨迹及归一概率、外部确定性标签，实现 Eq. (7)–(8)。local_entropy_change 输入同前缀两次词表 logit 的差值，返回 Eq. (10) 的近似与真正的有限差。未实现论文的固定探针采样估计、过程判分、语义标注和训练。零质量分支贡献为零，不伪造条件模式数。  RLVR 熵诊断与解法多样性 LLM 后训练 策略优化：谁在采样，谁在被更新 给一个前缀的每个 logit 增加相同常数，局部协方差和实际熵会如何变化？ 与常数的协方差为零，softmax 也对共同平移不变。两者都应给零变化；这适合作为局部诊断的负控。 对 logits (2, 0, -2) 使用增量 (1, 1, 1)，预测和有限差均为 0；不要把 logit 绝对值变化误认为熵变化。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-ae66013b52ab3feb">给一个前缀的每个 logit 增加相同常数，局部协方差和实际熵会如何变化？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Arcea">Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · Southwest University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>与常数的协方差为零，softmax 也对共同平移不变。两者都应给零变化；这适合作为局部诊断的负控。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>对 logits (2, 0, -2) 使用增量 (1, 1, 1)，预测和有限差均为 0；不要把 logit 绝对值变化误认为熵变化。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09448">原论文</a> · <a href="../../../../post-training/2611.09448-rcea/">实现解读</a> · <a href="#qa-ae66013b52ab3feb">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:rlid" data-paper-title="RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="RLiD: Reinforcement Learning in the Decision Plane for Language Agents and LLMs LLM 后训练 University of Illinois Urbana-Champaign 2026-11-02 文本策略会把一次动作的优势赋给推理、格式和命令 token。RLiD 将观测、过去反馈形成的记忆和合法菜单编译成输入，单次前向仅在标签之间选动作，再做决策级 RL。菜单、afterstate 和记忆本身会改变问题，比较必须对齐接口。它不消除跨时间信用估计，也不证明无推理 token 总优于有推理 token。 完整多环境训练、蒸馏与能力评测：成本过高，不复现（审查 DONE）。诊断不输出 answer accuracy/plan success，不比较两个真实策略，不晋级 evolve。L1 决策概率 / PPO / 方差恒等式组件，diagnostic only。完整多环境训练、蒸馏与能力评测：成本过高，不复现（审查 DONE）。evolve_integrated=false，不把小数组恒等式当作 Agent 成功率。menu_log_probabilities 接收对齐的单标签 logits、合法菜单 mask 和外部冻结校准。  策略优化 决策级信用分配 LLM 后训练 策略优化：谁在采样，谁在被更新 RLiD的一个动作，和让LLM写一句动作命令有什么根本差别？ RLiD在已编译的合法单token菜单标签上归一化概率，一次前向直接选可执行动作，不生成或解析自由文本。收益依赖菜单和观测接口；它没有自动保留长推理文本带来的额外计算，也不能声称所有任务更强。 教学例：菜单只有open、take两个动作时，选标签B直接映射take；自由文本可能写成没有可执行命令的解释。合法输出来自接口合同，不是100%任务成功。 2026-11-04">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
 <span id="paper-post-training-rlid-6c4a96d3" class="ar-learning-paper-anchor"></span>

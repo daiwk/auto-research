@@ -25,7 +25,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="compression-and-cache/">推理压缩：权重、KV 缓存与服务带宽</a></h2>
 <p>显存或时延不够时，真正占资源的是模型权重、历史状态，还是服务搬运？</p>
-<p class="ar-learning-topic-meta">140 个问题 · 35 篇论文</p>
+<p class="ar-learning-topic-meta">144 个问题 · 36 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="generation-paths/">生成路径：草稿验证、并行去噪与少步迭代</a></h2>

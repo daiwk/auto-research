@@ -1003,6 +1003,12 @@
             "核心公式",
             "数据协议与代码映射"
           ]
+        },
+        {
+          "paper": "foundation-models:e-means",
+          "position": "用计数与向量和的小批量 EMA 训练质心，每五批分裂活跃 donor 复苏弱簇，再用末轮历史分配均值收尾。",
+          "tradeoff": "加快的是聚类优化，不是 GINGER 的候选读带宽或 PiPNN II 的构建打分；CPU 固定标签 MSE 不代表 IVF 召回或 GPU 吞吐。",
+          "sections": ["核心公式", "结果、负控与边界"]
         }
       ],
       "analysis": [
@@ -1154,9 +1160,10 @@
           ]
         }
       ],
-      "updated": "2026-11-07",
+      "updated": "2026-11-09",
       "reviewed_papers": [
         "foundation-models:agentkv",
+        "foundation-models:e-means",
         "foundation-models:awq",
         "foundation-models:bakron",
         "foundation-models:beaconkv",
@@ -1315,6 +1322,14 @@
             "foundation-models:ginger": "3154fe69c58ad591db91f62f71fa0ae3a4e72a4a1c9271a02cbd50fe9e8a46d3",
             "foundation-models:pipnn-ii": "72447c8db8bae20185d4f912d20440bfe798e5a0043bd675fc27005282d8f22b",
             "foundation-models:awq": "70f5ef31bcba296079d2bce8e6321adfd8e208f6a58c042b6d691afb8adfc0ee"
+          }
+        },
+        {
+          "date": "2026-11-09",
+          "summary": "加入 e-means，对比质心训练、图构建与查询读带宽三个阶段。末轮固定分配均值能减小相应训练目标，不保证留出误差或检索性能都改善。",
+          "papers": ["foundation-models:e-means"],
+          "source_revisions": {
+            "foundation-models:e-means": "7c8f826171ba2a89e83fec48c10f3f73e5bfa9b84a1e46ead32d7f0d82b94478"
           }
         }
       ]

@@ -1,0 +1,20 @@
+{
+  "page": "docs/agent-research/2611.09472-engram-consolidation/README.md",
+  "paper_url": "https://arxiv.org/abs/2611.09472",
+  "arxiv_id": "2611.09472",
+  "figure": "Figure 2",
+  "original_caption": "The Engram consolidation cycle.",
+  "source_url": "https://arxiv.org/html/2611.09472v1/2.png",
+  "source_page": "https://arxiv.org/html/2611.09472v1#S4.F2",
+  "extraction": "arxiv-fixed-v1-original-png",
+  "asset": "docs/agent-research/2611.09472-engram-consolidation/assets/paper-figure-01.png",
+  "width": 1440,
+  "height": 517,
+  "score": 0,
+  "error": "",
+  "visually_inspected": true,
+  "sha256": "dab9e9f7b97be56bfffa2d6960c3ee2331dea6f39c1d394e233dfeec146a06b6",
+  "license": "CC BY 4.0",
+  "checked_on": "2026-11-09",
+  "transformation": "original author PNG, byte-for-byte and uncropped"
+}

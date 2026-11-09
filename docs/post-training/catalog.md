@@ -10,6 +10,7 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| RLVR | [Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards](2611.09448-rcea/README.md) | Southwest University，2026-11-06 | 未发现官方代码 | `rcea`：仅低成本组件，完整实验不复现 |
 | On-policy distillation | [CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation](2611.07959-cord/README.md) | Tsinghua University，2026-11-05 | 未发现官方代码 | `cord-rollout`：仅低成本组件，完整实验不复现 |
 | Reward modeling | [EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL](2611.06518-emoreward/README.md) | The Hong Kong University of Science and Technology，2026-11-04 | [原作者入口](https://github.com/Tencent-Hunyuan/EmoReward)；原作者公开完整项目仓库；本地独立实现固定 v1 的 Eq. 8–10，不复用上游代码。 | `emoreward`：仅低成本组件，完整实验不复现 |
 | 奖励与信用分配 | [Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling](2611.04792-dars/README.md) | National University of Singapore，2026-11-03 | 未发现官方代码 | `dars-density`：仅低成本组件，完整实验不复现 |

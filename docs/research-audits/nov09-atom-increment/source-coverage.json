@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-09-atom-increment",
+  "checked_on": "2026-11-09",
+  "timezone": "Asia/Shanghai",
+  "baseline_bulletin": "2026-11-06",
+  "baseline_artifact": "research-audits/nov06-priority-components/source-coverage.json",
+  "baseline_highest_nonreplacement_id": "2611.08487",
+  "new_identity_filter": "Remove arXiv version suffix, then require ID > 2611.08487; deduplicate across routes.",
+  "unique_atom_ids_above_baseline": 217,
+  "all_sources_exhaustive": false,
+  "full_bulletin_full_text_review_complete": false,
+  "new_announcement_date_verified": false,
+  "review_watermark_advanced": false,
+  "review_watermark": {"before": "2026-10-15", "after": "2026-10-15"},
+  "official_atom_receipts": [
+    {
+      "category": "cs.AI",
+      "url": "https://export.arxiv.org/api/query?search_query=cat:cs.AI&start=0&max_results=100&sortBy=submittedDate&sortOrder=descending",
+      "http_status": 200,
+      "response_date": "2026-11-09T04:28:03Z",
+      "entries": 100,
+      "ids_above_baseline": 100,
+      "lowest_id_above_baseline": "2611.09240",
+      "highest_id_above_baseline": "2611.09892",
+      "body_sha256": "9a7578bf45969bcb34ac491760f478ebba6f367d6a96263a9a30763537bdd5dd"
+    },
+    {
+      "category": "cs.LG",
+      "url": "https://export.arxiv.org/api/query?search_query=cat:cs.LG&start=0&max_results=100&sortBy=submittedDate&sortOrder=descending",
+      "http_status": 200,
+      "response_date": "2026-11-09T04:28:24Z",
+      "entries": 100,
+      "ids_above_baseline": 100,
+      "lowest_id_above_baseline": "2611.09197",
+      "highest_id_above_baseline": "2611.09892",
+      "body_sha256": "4ccca2d6fca0add67dd87c410865324a464f28990699404d14838356bd26a523"
+    },
+    {
+      "category": "cs.CL",
+      "url": "https://export.arxiv.org/api/query?search_query=cat:cs.CL&start=0&max_results=100&sortBy=submittedDate&sortOrder=descending",
+      "http_status": 200,
+      "response_date": "2026-11-09T04:28:25Z",
+      "entries": 100,
+      "ids_above_baseline": 70,
+      "lowest_id_above_baseline": "2611.08639",
+      "highest_id_above_baseline": "2611.09868",
+      "body_sha256": "a9a2cbd35f835ae97afc0c7b7b3d34c780aaebbded8941db2edcf3b19960edf3"
+    }
+  ],
+  "institution_routes": [
+    "https://research.google/pubs/",
+    "https://deepmind.google/research/publications/",
+    "https://research.meta.ai/",
+    "https://github.com/facebookresearch/faiss/pull/5812"
+  ],
+  "full_text_screened_not_admitted": [
+    {
+      "id": "2611.08706",
+      "source": "https://arxiv.org/html/2611.08706v1",
+      "reason": "§4.1 Table 1 is held-out out-of-time evaluation against a production risk-score baseline, not a live test of the new policy."
+    },
+    {
+      "id": "2611.08714",
+      "source": "https://arxiv.org/html/2611.08714v1",
+      "reason": "The fixed evaluation protocol explicitly says no live A/B was conducted; testing against historical labels is not production evidence."
+    },
+    {
+      "id": "2611.08790",
+      "source": "https://arxiv.org/html/2611.08790v1",
+      "reason": "Generative recommendation steerability on game data; no controlled production experiment or full-traffic rollout verified."
+    },
+    {
+      "id": "2611.09891",
+      "source": "https://arxiv.org/html/2611.09891v1",
+      "reason": "Keep as an evaluation lead, not a capability implementation: §2.2.1 constructs caches using gold feedback, and disjoint training/evaluation tasks for the §3.4 SFT were not verified."
+    }
+  ],
+  "limits": [
+    "Official new and monthly listings exposed older snapshots. A date-bounded bulk Atom query and attempted cs.IR route returned HTTP 429; cs.CV also returned 429 on the 100-result route.",
+    "Successful first pages, exact fixed-v1 review, and targeted institutional review do not establish full coverage of a bulletin or first-public availability for every candidate.",
+    "The number 217 counts distinct candidate identities in returned Atom pages above the baseline, not qualified papers or 217 completed full-text reviews."
+  ]
+}
