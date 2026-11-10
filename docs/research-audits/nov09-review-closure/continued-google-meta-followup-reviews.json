@@ -1,0 +1,453 @@
+{
+  "schema_version": 1,
+  "window": {
+    "start": "2026-10-16",
+    "end": "2026-11-09",
+    "timezone": "Asia/Shanghai"
+  },
+  "scope": "从第一轮确认的原文作者名单及早期已核原文扩展第二跳，回查所有仍待审首发身份的作者共现；不把共现、同名或模型品牌当机构归属。此文件是针对命中条目的固定原文复核，不替代覆盖证明。",
+  "all_sources_exhaustive": false,
+  "source_priority_roster_strings": 77,
+  "reviews": [
+    {
+      "id": "2610.22293",
+      "title": "Towards Continual Learning: Mitigating Forgetting With Subspace Tuning",
+      "published": "2026-10-15T17:44:43Z",
+      "revision": 1,
+      "source_sha256": "1ccb18e094293681483418b5361dc510566369ab72318e4e7b9ad42c13d7d471",
+      "track": "post-training",
+      "priority": "P0",
+      "organization": "UC Berkeley / Mila / Google and collaborators",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "source_url": "https://arxiv.org/html/2610.22293v1",
+      "locations": [
+        "author block",
+        "§2–3",
+        "Appendix B.13–B.14"
+      ],
+      "reason": "SST 将优化器更新投影到冻结或定期刷新的非主奇异子空间，在同训练条件比较学习与通用能力保留；Google 是论文所列联合作者单位。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.22293v1",
+        "basis": "author block; §2–3; Appendix B.13–B.14",
+        "scale": "Qwen3-8B 的全参数 BF16 训练，原文每步测量用 8 张 L40S；四领域多方法及 252 矩阵投影/刷新开销。",
+        "available_resource": "单张 A100/A30 或本地 Mac；本轮未启动 GPU、真实环境或付费 API。",
+        "cost_type": "published_configuration_not_local_measurement"
+      },
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true
+    },
+    {
+      "id": "2610.24515",
+      "title": "ProbePO: Sparse Probes, Redistributed Credit for Critic-Free LLM Reinforcement Learning",
+      "published": "2026-10-17T07:19:05Z",
+      "revision": 1,
+      "source_sha256": "7a4e2c119b071e27904bfdf2d4486c4b1eef40bba4ef60073a6da31c37334208",
+      "track": "post-training",
+      "priority": "P0",
+      "organization": "Meta / UIUC / Independent Researcher",
+      "verified_priority_organizations": [
+        "Meta"
+      ],
+      "source_url": "https://arxiv.org/html/2610.24515v1",
+      "locations": [
+        "author block",
+        "§3",
+        "§5",
+        "Appendix D/G"
+      ],
+      "reason": "ProbePO 用预算约束的少量中间 probe 估计贡献，重分配已有轨迹的组优势而不把 probe 轨迹混作训练数据。固定作者栏确认 Meta 联合作者。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.24515v1",
+        "basis": "author block; §3; §5; Appendix D/G",
+        "scale": "7B 对照使用 8 张 H200；Qwen3-4B 的受控 probe 消融使用 8 张 B200，固定数据、冻结评估器和同一 rollout 目标。",
+        "available_resource": "单张 A100/A30 或本地 Mac；本轮未启动 GPU、真实环境或付费 API。",
+        "cost_type": "published_configuration_not_local_measurement"
+      },
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true
+    },
+    {
+      "id": "2610.25880",
+      "title": "Asynchronous On-Policy Self-Distillation",
+      "published": "2026-10-19T06:38:04Z",
+      "revision": 1,
+      "source_sha256": "1eef55f17d147e1fc33d88bee4e0a2311f82762c3a180512b4d1f47a21fbcdc4",
+      "track": "post-training",
+      "priority": "P1",
+      "organization": "University of Pittsburgh / University of Iowa / University of Pennsylvania / Florida State University",
+      "verified_priority_organizations": [],
+      "source_url": "https://arxiv.org/html/2610.25880v1",
+      "locations": [
+        "author block",
+        "§4.1–4.3",
+        "§5.1/5.6"
+      ],
+      "reason": "AsyncOPSD 解耦采样与 learner，后者在同轨迹重算学生与有特权上下文的教师分布；按策略年龄过滤、按教师熵加权。该篇 Xidong Wu 列匹兹堡大学，不沿用其他论文 Google 标签。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.25880v1",
+        "basis": "author block; §4.1–4.3; §5.1/5.6",
+        "scale": "Qwen3 1.7B/4B/8B 每次 8 张 A100，异步四采样四训练，同步在八卡上交替；吞吐报告 3 次重复。",
+        "available_resource": "单张 A100/A30 或本地 Mac；本轮未启动 GPU、真实环境或付费 API。",
+        "cost_type": "published_configuration_not_local_measurement"
+      },
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true
+    },
+    {
+      "id": "2610.28388",
+      "title": "Self-Credit: Credit Assignment for Long-Horizon Agentic RL via Intra-group Rescaling",
+      "published": "2026-10-20T15:38:21Z",
+      "revision": 1,
+      "source_sha256": "b4df840c3ea074490aa980f7db34fc5289e7d8f931f51a12b889035e340fcd98",
+      "track": "post-training",
+      "priority": "P0",
+      "organization": "Meta / Duke University / New York University",
+      "verified_priority_organizations": [
+        "Meta"
+      ],
+      "source_url": "https://arxiv.org/html/2610.28388v1",
+      "locations": [
+        "author block",
+        "§3.1–3.4",
+        "§4.1",
+        "Appendix C.1"
+      ],
+      "reason": "Self-Credit 把代理压缩摘要中的回合引用与跨轨迹动作匹配结合，在组内重标定信用再重加权优势。Meta 主导；评价独立留出题。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.28388v1",
+        "basis": "author block; §3.1–3.4; §4.1; Appendix C.1",
+        "scale": "Qwen3-8B/32B、Gemma4-E4B；Appendix C.1 每次报告 8×8 B200、每步 256 轨迹、响应上限 32,768 tokens 与最多 100 助手回合。",
+        "available_resource": "单张 A100/A30 或本地 Mac；本轮未启动 GPU、真实环境或付费 API。",
+        "cost_type": "published_configuration_not_local_measurement"
+      },
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true
+    },
+    {
+      "id": "2610.28948",
+      "title": "COWBOY: A Scalable Sim-to-Real Framework for Learning Contextual Whole-Body Manipulation",
+      "published": "2026-10-20T21:59:10Z",
+      "revision": 1,
+      "source_sha256": "fe78aecbfc6aa27a7207ab9eec42c8e1ae3135c5aaaf130e97b990aee570ee61",
+      "track": "foundation-model",
+      "priority": "P1",
+      "organization": "Carnegie Mellon University",
+      "verified_priority_organizations": [],
+      "source_url": "https://arxiv.org/html/2610.28948v1",
+      "locations": [
+        "author block",
+        "§3.3",
+        "§4–5",
+        "Appendix E.5"
+      ],
+      "reason": "COWBOY 以全身控制器与局部专家在全场景里教单一策略，实现由仿真到实机移动操作；不把共同作者过去身份带到本论文。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.28948v1",
+        "basis": "author block; §3.3; §4–5; Appendix E.5",
+        "scale": "250 物体、8,192 仿真环境、真实移动操作；附录 E.5 报告 8 张 A6000 约 60 小时的一组训练。",
+        "available_resource": "单张 A100/A30 或本地 Mac；本轮未启动 GPU、真实环境或付费 API。",
+        "cost_type": "published_configuration_not_local_measurement"
+      },
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true
+    },
+    {
+      "id": "2610.33511",
+      "title": "Towards a Learnable Retriever for Textual Graph Question Answering",
+      "published": "2026-10-24T07:40:13Z",
+      "revision": 1,
+      "source_sha256": "a985b2b85de32466636afaa246eabd45a87423869068780c5ee1d891aecd228a",
+      "track": "agent",
+      "priority": "P1",
+      "organization": null,
+      "verified_priority_organizations": [],
+      "source_url": "https://arxiv.org/html/2610.33511v1",
+      "locations": [
+        "author block",
+        "§3",
+        "§4.1",
+        "Appendix B"
+      ],
+      "reason": "GraphQA 使用弱标注加权节点选择让检索器可学习，再用检索图上下文训练生成器；gold 节点只用于训练。固定 HTML 未列机构，不从作者重名推断 Meta。附录明确单次用一张 A100，不能把八卡主机配置当成每次八卡。",
+      "decision": "accepted",
+      "resolution": "accepted_core_not_implemented_this_run",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented"
+    },
+    {
+      "id": "2610.33512",
+      "title": "Eat Your Precision: Precision Objective Mitigates Reward Hacking in Rubric-based RL",
+      "published": "2026-10-24T07:43:06Z",
+      "revision": 1,
+      "source_sha256": "6859b1c5fbda2b57cbdd5ea8f247b05b27adff10f3772ef02c8cf83c50a8172c",
+      "track": "post-training",
+      "priority": "P1",
+      "organization": "KAIST / Carnegie Mellon University",
+      "verified_priority_organizations": [],
+      "source_url": "https://arxiv.org/html/2610.33512v1",
+      "locations": [
+        "author block",
+        "§3",
+        "§4.1",
+        "Appendix B"
+      ],
+      "reason": "Fork 在 rubric recall 之外引入对额外或错误内容的精确率奖励，避免只靠冗长覆盖得分。该篇 Seungone Kim 列 CMU。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.33512v1",
+        "basis": "author block; §3; §4.1; Appendix B",
+        "scale": "训练每次 8 张 H100、3 epoch、每提示 16 rollout，并用裁判筛选流程和多个偏好评估。",
+        "available_resource": "单张 A100/A30 或本地 Mac；本轮未启动 GPU、真实环境或付费 API。",
+        "cost_type": "published_configuration_not_local_measurement"
+      },
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true
+    },
+    {
+      "id": "2610.33880",
+      "title": "DIGEST: Discovery-Guided LLM Tuning for Symbolic Regression",
+      "published": "2026-10-24T19:47:03Z",
+      "revision": 1,
+      "source_sha256": "2e6fd6e2ad4c5903ace14a4579a21d964b45dadccc94681fcaa93abf0a2c1919",
+      "track": "agent",
+      "priority": "P0",
+      "organization": "UIUC / Meta",
+      "verified_priority_organizations": [
+        "Meta"
+      ],
+      "source_url": "https://arxiv.org/html/2610.33880v1",
+      "locations": [
+        "author block",
+        "§3",
+        "§4.1",
+        "Appendix A"
+      ],
+      "reason": "DIGEST 用单个小型 LLM decoder block 做符号树策略，按搜索发现的表达式更新提议模型；可核查边界是固定合成方程上的搜索与反馈闭环，不等于完整 SRBench。Meta 联合作者由论文列出。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.33880v1",
+        "basis": "author block; §3; §4.1; Appendix A",
+        "scale": "完整矩阵包括 34 个已知式、各 25 种子以及 122 个黑盒数据集；每个已知式/种子的搜索预算上限 200 万表达式评估。虽用单 A40，原矩阵远大于有界组件验证；预算上限不当成实际消耗。",
+        "available_resource": "单张 A100/A30 或本地 Mac；本轮未启动 GPU、真实环境或付费 API。",
+        "cost_type": "published_configuration_not_local_measurement"
+      },
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true
+    },
+    {
+      "id": "2610.36247",
+      "title": "Freeze, Don't Clone: Fine-Tuning with Expressive Policies Without Retaining Offline Data",
+      "published": "2026-10-26T20:28:50Z",
+      "revision": 1,
+      "source_sha256": "30c15f141d0eb2265acd1390c435024c2cee3e6d43b5186d0d0930f5a53acdb6",
+      "track": "agent",
+      "priority": "P1",
+      "organization": "Mila / McGill / Université de Montréal",
+      "verified_priority_organizations": [],
+      "source_url": "https://arxiv.org/html/2610.36247v1",
+      "locations": [
+        "author block",
+        "§2–4",
+        "Appendix B.2"
+      ],
+      "reason": "保留离线预训练的表达型策略作为候选先验，在线更新 critic 决策而非继续从已丢失的离线样本克隆；诊断覆盖 critic 与 actor 侧退化。该篇作者栏没有 Google。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.36247v1",
+        "basis": "author block; §2–4; Appendix B.2",
+        "scale": "附录报告 H100 运行（每卡复用六并行），四算法跨任务的数百个在线训练运行，12 小时调度预算不视为每次运行实耗。",
+        "available_resource": "单张 A100/A30 或本地 Mac；本轮未启动 GPU、真实环境或付费 API。",
+        "cost_type": "published_configuration_not_local_measurement"
+      },
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true
+    },
+    {
+      "id": "2610.39175",
+      "title": "PRISM: Personalized Item Representations in User History",
+      "published": "2026-10-29T02:05:57Z",
+      "revision": 1,
+      "source_sha256": "85c169394ccc908cd06fadf130ecc987f81ac2b969561b2f1d9ba2f3986361e0",
+      "track": "recommendation",
+      "priority": "P0",
+      "organization": "Meta MRS / Facebook Discovery",
+      "verified_priority_organizations": [
+        "Meta"
+      ],
+      "source_url": "https://arxiv.org/html/2610.39175v1",
+      "locations": [
+        "author block",
+        "§3.1–3.4",
+        "§4.1–4.3"
+      ],
+      "reason": "PRISM 从上游 ranker 的用户/用户-物品与同请求混合状态联合压缩出可复用历史嵌入。正文的 14 天 online training 是训练/导出；约 300–500 亿样本后在下一天留出生产数据测 NE（组合 -0.15%），未报告真实流量 A/B 或全量部署，不通过工业门槛。",
+      "decision": "rejected",
+      "resolution": "industrial_no_live_evidence",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "production_gate_passed": false
+    },
+    {
+      "id": "2611.02041",
+      "title": "ECGJev: Question-Conditioned Option Scoring for 12-Lead ECG Interpretation",
+      "published": "2026-11-01T16:39:02Z",
+      "revision": 1,
+      "source_sha256": "3a10b18d432f0333f1f48d610c5800127f45cd653ee7c79268da6a9893ca6319",
+      "track": "foundation-model",
+      "priority": "P1",
+      "organization": "Chinese University of Hong Kong / University of Dundee / Northeastern University / Peking University",
+      "verified_priority_organizations": [],
+      "source_url": "https://arxiv.org/html/2611.02041v1",
+      "locations": [
+        "author address",
+        "§2.2–2.3",
+        "§3.1"
+      ],
+      "reason": "ECGJev 把冻结波形/谱特征经问题条件查询桥压缩成少量 token，再用 0.8B decision decoder 的选项边际和标签置换评估可区分性。可做非临床固定张量的条件桥与选项映射验证，不把四数据集结果当临床效用。",
+      "decision": "accepted",
+      "resolution": "accepted_core_not_implemented_this_run",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented"
+    },
+    {
+      "id": "2611.05731",
+      "title": "Prospective Memory for Proactive LLM Agents",
+      "published": "2026-11-03T23:03:06Z",
+      "revision": 1,
+      "source_sha256": "3fe9b50197b54b74d4e1df3c1c690819e8819bf129bebf5a954a8885b9cd953f",
+      "track": "agent",
+      "priority": "P1",
+      "organization": "UIUC / UIC / Stony Brook University / Brookhaven National Laboratory",
+      "verified_priority_organizations": [],
+      "source_url": "https://arxiv.org/html/2611.05731v1",
+      "locations": [
+        "author block",
+        "§3",
+        "§4.1",
+        "Appendix A"
+      ],
+      "reason": "Pro-Memory 把尚未发生的意图保存在可匹配触发条件的状态，并将漏触发与误触发分开；PM-Bench 有固定事件流，可做受限意图状态/评价协议。并非跨三家闭源配置的完整复现。",
+      "decision": "accepted",
+      "resolution": "accepted_core_not_implemented_this_run",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented"
+    },
+    {
+      "id": "2611.07783",
+      "title": "PBPO: Prefix-Block Policy Optimization for Diffusion Language Models",
+      "published": "2026-11-05T10:20:41Z",
+      "revision": 1,
+      "source_sha256": "43f5be41b97835b365aee58049694aab628be4b5b7901923254f136b5b45c4cc",
+      "track": "post-training",
+      "priority": "P0",
+      "organization": "Meta / University of Illinois Urbana-Champaign",
+      "verified_priority_organizations": [
+        "Meta"
+      ],
+      "source_url": "https://arxiv.org/html/2611.07783v1",
+      "locations": [
+        "author block",
+        "§3.1–3.4",
+        "§4.1",
+        "Appendix A.2"
+      ],
+      "reason": "PBPO 用干净的完成前缀与正在去噪的活动 block 界定优化状态，按 token 近似重要性并控制每更新遮蔽；一作及多数作者在本文列 Meta。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2611.07783v1",
+        "basis": "author block; §3.1–3.4; §4.1; Appendix A.2",
+        "scale": "LLaDA-8B-Instruct 与 LLaDA-1.5；每次训练 8 张 H200、每提示 6 rollout、128 去噪步，五任务包含最多 2,900 个训练步。",
+        "available_resource": "单张 A100/A30 或本地 Mac；本轮未启动 GPU、真实环境或付费 API。",
+        "cost_type": "published_configuration_not_local_measurement"
+      },
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true
+    }
+  ]
+}

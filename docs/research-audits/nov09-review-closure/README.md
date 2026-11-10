@@ -24,9 +24,9 @@
 [其它重点方法](additional-primary-reviews.json)涵盖 FP4 解码、RSI 和 OPD。正文证据只覆盖列出的段落，
 不宣称整篇通读。高成本且已有依据的完整实验记为 **不复现（审查 DONE）**，不重试、不进实现队列。
 
-## 11 月 10 日续审
+## 11 月 10 日第一轮续审
 
-在同一批次补录 **70** 个原始来源决定；总计 **119** 个，**73** 个为高成本完整实验不复现。
+该轮补录 **70** 个原始来源决定；当时总计 **119** 个，**73** 个为高成本完整实验不复现。
 这次补录包括早于窗口首次发布的论文和日终尾段；不能直接从原快照窗口内待审数中减去 70。
 
 - [优先与工业补审](supplemental-priority-reviews.json)：按原文核对 Google、Meta 的作者归属，
@@ -44,13 +44,35 @@
   [RecoGEM 的生产延迟对照](https://arxiv.org/html/2611.12296v1#S5.SS6)和
   [AgentOPSD 改写版](https://arxiv.org/html/2611.12587v1)对库内原实验的复用。
 
+## 标题与摘要复筛
+
+本轮新增 **142** 个原始来源决定，其中 **68** 项高成本完整实验不复现。
+同一账本累计 **261** 条决定，其中 **141** 条高成本已结案。
+
+[窗口内分流](continued-in-window-routing.json)将 22,220 条捕获观测归并为 4,941 个固定版本身份；
+[晚索引与尾段分流](continued-late-tail-triage.json)另覆盖 334 个身份。
+规范化标题、摘要没有给出可合并的跨 ID 精确重复。摘要中的机构名可能是引用、模型或基准名称，
+只用于排序，不能证明作者归属；分流不等于原文审查。另有 [46 条窗口内](continued-in-window-scope.json)
+和 **80 条**晚索引或尾段候选经明确主题与摘要核对排除出本轮范围，不写入全局论文终态。
+
+- **Google/Meta**：[第一轮](continued-google-meta-reviews.json)、[第二轮](continued-google-meta-followup-reviews.json)
+  和[第三轮](continued-google-meta-third-pass-reviews.json)结合已核对作者及官方来源反查固定原文，
+  共作 51 条决定，其中 15 条确认有 Google/Meta 研究参与。
+  [Google Accelerated Dataflow](https://arxiv.org/html/2610.22731v2) 的作者栏为 Google，原文是多工作者推理压测；
+  [Meta PRISM](https://arxiv.org/html/2610.39175v1) 有线上训练，但效果在留出生产日志上验证，不能算生产 A/B。
+- **工业证据**：[首批](continued-industrial-reviews.json)与[次批](continued-industrial-secondary-reviews.json)
+  共核对 58 条固定版本。确认 [腾讯 TGR-EvoDAG](https://arxiv.org/html/2610.32326v1) 正文有 14 天、5% 的生产 A/B。
+  把测得生产影响与线上日志、离线回放、仿真和排行榜分别记录。
+- **方法与评测**：[重点方法](continued-method-primary-reviews.json)、[机构与生产信号](continued-signal-primary-reviews.json)
+  和[晚索引/尾段原文](continued-late-tail-primary-reviews.json)单列结论。原文成本足以确认的完整实验标注不复现并结案；
+  可低成本验证的核心组件只记录审查接受，本轮未实现或运行。
+
 ## 哪些还没闭环
 
-以[去重登记和召回回执](review-inventory.json)的 `counts` 和 `pending_bucket_counts` 为准。
-这份登记保留待审 arXiv ID、观测版本、命中的轨道、上海日期及第一轮分流结果。
-在冻结捕获（上海时间 11 月 9 日 18:23）中，仍有 **4,941** 个窗口内身份和 **221** 个晚索引条目待核。
+以[去重登记和召回回执](review-inventory.json)的 `counts` 和 `pending_in_window_counts_by_title_abstract_route` 为准。
+登记保留待审 arXiv ID、版本、命中轨道和上海日期，并把原快照、晚索引与尾段待审分开统计。
+仍有 **4,773** 个窗口内身份、**169** 个晚索引条目、**65** 个日终补查条目未决。
 `pending_revisions` 已清空的是原先识别到的修订清单，不保证后来索引的修订也已审。
-尾段另有 **113** 个新候选未作终态决定。晚索引与之后的来源更正仍以覆盖说明为限。
 `manual-review`、工业/优先原文队列、低信号候选与宽查询碰撞都是**待审状态**，不是自动拒收。
 晚索引重叠项与已有论文的版本变化单独列出。只有确实尝试过仍无法确认的来源才记例外，
 不拿它替代尚未审查的候选，也不把仅目录命中当作作者归属。

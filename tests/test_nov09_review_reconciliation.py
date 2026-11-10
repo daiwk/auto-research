@@ -5,7 +5,8 @@ from hashlib import sha256
 import pytest
 
 from scripts.build_nov09_review_inventory import (
-    AUDIT, BATCH, END, HIGH_COST, MODES, ROOT, RUNS, TRACKS, closed_query, date_scope_rows, ledger_row, local_day, read,
+    AUDIT, BATCH, END, HIGH_COST, MODES, ROOT, RUNS, TRACKS, closed_query, date_scope_rows, ledger_row, local_day,
+    read, verify_overlap_scope_text,
 )
 
 
@@ -70,15 +71,20 @@ def test_scope_only_exclusions_never_enter_the_substantive_ledger():
     date_scope = read(AUDIT / "late-index-scope.json")
     abstract_scope = read(AUDIT / "abstract-scope-screen.json")
     date_excluded = set(date_scope["terminal_ids"])
-    abstract_excluded = {row["id"] for row in abstract_scope["records"]}
+    additional_scope = read(AUDIT / "continued-in-window-scope.json")
+    abstract_excluded = {row["id"] for artifact in (abstract_scope, additional_scope) for row in artifact["records"]}
+    overlap_scope = read(AUDIT / "continued-late-tail-triage.json")
+    late_excluded = {r["id"] for r in overlap_scope["records"] if r["lane"] == "late_index"
+                     and r["disposition"] == "exclude_from_window_scope"}
     terminal = set(value["primary_reviewed_ids"])
     pending = {row[0] for rows in value["pending_identities_by_local_first_publication"].values() for row in rows}
     assert len(date_excluded) == value["counts"]["late_index_date_scope_only_excluded"]
     assert len(abstract_excluded) == value["counts"]["metadata_scope_only_excluded"]
-    assert not (date_excluded | abstract_excluded).intersection(terminal | pending)
+    assert len(late_excluded) == value["counts"]["late_index_metadata_scope_only_excluded"]
+    assert not (date_excluded | abstract_excluded | late_excluded).intersection(terminal | pending)
     assert abstract_scope["terminal_window_scope_only"] and not abstract_scope["fulltext_or_cost_inferred"]
     assert abstract_scope["input_inventory_sha256"] == date_scope["input_inventory_sha256"]
-    assert set(date_scope["pending_ids"]) == set(value["pending_late_index_scope_triage"]) | (
+    assert set(date_scope["pending_ids"]) == set(value["pending_late_index_scope_triage"]) | late_excluded | (
         set(date_scope["pending_ids"]) & terminal
     )
     matched = {row["id"]: row | {"rank": (row["revision"],)} for row in date_scope["records"]}
@@ -109,14 +115,48 @@ def test_end_of_day_tail_preserves_pending_new_submissions():
     receipt = read(AUDIT / tail["receipt"])
     ids = {r["id"] for r in receipt["records"]}
     decided, pending = map(set, (tail["primary_reviewed_ids"], tail["pending_ids"]))
+    exclusions = set(tail["metadata_scope_only_excluded_ids"])
     assert len(ids) == len(receipt["records"]) == tail["unique_identities"]
     assert len(pending) == report["counts"]["post_capture_tail_review_pending"]
     assert decided and decided <= set(report["primary_reviewed_ids"])
-    assert not decided & pending and decided | pending == ids
+    assert len(exclusions) == report["counts"]["post_capture_tail_metadata_scope_only_excluded"]
+    assert not decided & pending and not exclusions & (decided | pending)
+    assert decided | pending | exclusions == ids
     assert not pending & set(report["primary_reviewed_ids"])
     original = {row[0] for group in report["pending_identities_by_local_first_publication"].values() for row in group}
     assert not ids & original
     assert all(local_day(r["first_submission_utc"]) == END for r in receipt["records"])
+
+
+def test_routing_covers_initial_pool_without_manufacturing_any_final_decision():
+    report = read(AUDIT / "review-inventory.json")
+    route = read(AUDIT / report["in_window_title_abstract_routing"])
+    followup_scope = read(AUDIT / "continued-in-window-scope.json")
+    assert route["input_inventory_sha256"] == followup_scope["input_inventory_sha256"]
+    assert not route["eligibility_or_cost_inferred"] and route["terminal_decisions_created"] == 0
+    assert route["count"] == len(route["records"]) == sum(route["counts_by_route"].values())
+    assert route["capture_observations_at_routed_revision"] == route["count"] + route["repeat_observations_collapsed"]
+    assert route["repeat_observations_collapsed"] > 0
+    ids = {row["id"] for row in route["records"]}
+    assert len(ids) == len(route["records"])
+    pending = {row[0] for group in report["pending_identities_by_local_first_publication"].values() for row in group}
+    scope = {row["id"] for row in followup_scope["records"]}
+    terminal = set(report["primary_reviewed_ids"])
+    assert ids == pending | scope | (ids & terminal)
+    assert sum(report["pending_in_window_counts_by_title_abstract_route"].values()) == len(pending)
+    for row in route["records"]:
+        assert row["capture"] in route["source_receipts"] and row["abstract_normalized_sha256"]
+        assert "decision" not in row and "review_done" not in row
+
+
+def test_overlap_scope_cannot_reuse_different_abstract():
+    source = {"title": "Example", "abstract": "A measurement study", "published": "2026-10-01",
+              "updated": "2026-11-07"}
+    record = source | {"id": "2610.00123", "abstract_witness": "measurement", "metadata_sha256":
+                       sha256(b"example\0a measurement study").hexdigest()}
+    verify_overlap_scope_text(record, source)
+    with pytest.raises(ValueError, match="matching title and abstract"):
+        verify_overlap_scope_text(record, source | {"abstract": "A different measurement study"})
 
 
 def test_bilingual_review_preserves_coverage_boundary():

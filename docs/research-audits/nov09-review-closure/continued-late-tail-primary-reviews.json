@@ -1,0 +1,507 @@
+{
+  "schema_version": 1,
+  "scope": "late-index and post-capture tail: selected original-source complete-experiment cost dispositions",
+  "reviews": [
+    {
+      "id": "2610.04906",
+      "revision": 4,
+      "published": "2026-10-04T03:36:14Z",
+      "updated": "2026-10-21T07:46:07Z",
+      "title": "Scaling Verifiable Environments for Long-horizon Work Agents",
+      "track": "agent",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.04906v4",
+      "locations": [
+        "§2 WorkForge",
+        "§3 Experiments",
+        "Appendix C.2"
+      ],
+      "reason": "用真实工作资源实例化可验证工作区，任务和核验表锚定同一工作区证据；执行得到带评分的长程轨迹再作 SFT。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.04906v4",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "40 个领域共 16,700 个环境；Qwen3.5-35B-A3B 的原文训练使用 64 张 H20 96GB，27B 实验使用 128 张 GPU，最大序列 262,144。",
+        "cost_type": "训练硬件与长程工作环境生成",
+        "available_resource": "one A100 or A30, or a local Mac"
+      }
+    },
+    {
+      "id": "2610.05195",
+      "revision": 3,
+      "published": "2026-10-04T13:08:13Z",
+      "updated": "2026-10-21T01:27:11Z",
+      "title": "Long-MDR: Long-Context Reinforcement Learning for Multimodal Deep-Research Agents",
+      "track": "post-training",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.05195v3",
+      "locations": [
+        "§3 Method",
+        "§4 Training configuration",
+        "Rollouts and stage transitions"
+      ],
+      "reason": "用逐阶段增加工具轮次的在线 RL 训练图文深研 Agent，在结果奖励外结合教师 OPD 和行为约束；不同轮次预算的评估不可混报。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.05195v3",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "Qwen3.5-9B 先使用约 27,000 条示范、约 300M 全序列 token；在线阶段使用 16 张 GPU 与另行服务的 27B 裁判/教师，每 rollout 步 512 条，最多 75 工具轮次和 128K 上下文。",
+        "cost_type": "多卡在线 RL、检索和教师服务",
+        "available_resource": "one A100 or A30, or a local Mac"
+      }
+    },
+    {
+      "id": "2610.21902",
+      "revision": 1,
+      "published": "2026-10-15T13:54:57Z",
+      "updated": "2026-10-15T13:54:57Z",
+      "title": "Seeing is Believing: Benchmarking and Mitigating the Interference of Language Priors on Visual Perception in MLLMs",
+      "track": "foundation-model",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.21902v1",
+      "locations": [
+        "§4 MAPS",
+        "§5.1",
+        "Appendix C"
+      ],
+      "reason": "ViSiP-Bench 分离图像证据与文本先验；MAPS 探测模型特有先验并用少见但真实的句子构造 LoRA 监督数据。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.21902v1",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "原文所有训练法在 4 张 A100 80GB 上验证，Qwen3-VL-8B-Instruct LoRA 两个 epoch，并以相同配置迁移验证另外六个模型。",
+        "cost_type": "多卡训练和跨模型评估",
+        "available_resource": "one A100 or A30, or a local Mac"
+      }
+    },
+    {
+      "id": "2610.22019",
+      "revision": 1,
+      "published": "2026-10-15T14:58:21Z",
+      "updated": "2026-10-15T14:58:21Z",
+      "title": "Priming Base Models for Agentic Post-Training: An Open Midtraining Recipe",
+      "track": "post-training",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.22019v1",
+      "locations": [
+        "§2 Midtraining Data",
+        "§4.3–4.5",
+        "Tables 1, 3, 6"
+      ],
+      "reason": "NVIDIA 将自然软件工程数据、工具轨迹和预训练回放混合，在预训练和 Agent 后训练之间加长上下文中训；对照保持完整 SFT 一致。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.22019v1",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "Nemotron 3.5 Lightning 中训至 500B token；Super 至 280B，另有 100B token 的完整 SFT；原文上下文长度 256K。",
+        "cost_type": "大规模中训与同预算后训练",
+        "available_resource": "one A100 or A30, or a local Mac"
+      }
+    },
+    {
+      "id": "2610.33005",
+      "revision": 2,
+      "published": "2026-10-07T13:19:02Z",
+      "updated": "2026-10-29T04:59:38Z",
+      "title": "OpenEBFM: Energy-based Foundation Models Are Scalable Architecture",
+      "track": "foundation-model",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.33005v2",
+      "locations": [
+        "§2 Energy-based Foundation Models",
+        "§4.2",
+        "§6 Limitations"
+      ],
+      "reason": "能量头迭代下调潜变量能量，生成头以调整后的表示预测 token；比较不同数据量、深度和计算规模下的预训练。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.33005v2",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "最大 1.03B 参数配置，现有训练路径需每卡持有完整骨干以支持二阶微分，原文以 H200 单卡显存为规模限制并使用 DDP；三个大型语料进行十亿 token 级规模对照。",
+        "cost_type": "二阶梯度、分布式训练及语料规模",
+        "available_resource": "one A100 or A30, or a local Mac"
+      }
+    },
+    {
+      "id": "2611.12232",
+      "revision": 1,
+      "published": "2026-11-09T11:25:13Z",
+      "updated": "2026-11-09T11:25:13Z",
+      "title": "ECOS: Environment-Calibrated On-Policy Self-Distillation for Language Agents",
+      "track": "post-training",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2611.12232v1",
+      "locations": [
+        "§3.2–3.5",
+        "§4.1",
+        "Appendix B.2 Table B.2"
+      ],
+      "reason": "用相似观察下执行命令的环境优势调节教师命令监督，同步为反思和技能生成分配奖励。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2611.12232v1",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "Qwen2.5 3B 与 7B；两套环境；先标注并监督训练，再做 150 次在线更新、每次 16 组各 8 条轨迹；原文训练与评估均在 8 张 A800 的服务器进行。",
+        "cost_type": "多卡在线强化学习与环境轨迹",
+        "available_resource": "one A100 or A30, or a local Mac"
+      }
+    },
+    {
+      "id": "2611.12286",
+      "revision": 1,
+      "published": "2026-11-09T12:12:37Z",
+      "updated": "2026-11-09T12:12:37Z",
+      "title": "VLA-MOPD: On-Policy Distillation for Multi-Task VLA Policy Consolidation",
+      "track": "post-training",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2611.12286v1",
+      "locations": [
+        "§4.2–4.3",
+        "§5.1",
+        "§5.4",
+        "Appendix 3"
+      ],
+      "reason": "在学生访问的中间 flow 动作状态上用任务路由专家提供一步转移匹配，并用参考策略均值匹配保持旧任务。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2611.12286v1",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "完整实验包括 π0.5 的多个 PPO/SFT 教师，四个 LIBERO 套件各 500 个评估 episode、RoboTwin 双臂实验，以及 Piper 真机三个任务两轮各采集 50 条轨迹/任务，无法用单卡纯模拟完整重做。",
+        "cost_type": "多专家模型、模拟器及真机",
+        "available_resource": "one A100 or A30, or a local Mac"
+      }
+    },
+    {
+      "id": "2611.12426",
+      "revision": 1,
+      "published": "2026-11-09T13:51:18Z",
+      "updated": "2026-11-09T13:51:18Z",
+      "title": "dNaViT: Discrete Codes are General-Purpose Visual Representations",
+      "track": "foundation-model",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2611.12426v1",
+      "locations": [
+        "§2.2–2.5",
+        "§3.1–3.2",
+        "§4 Tables 5–7"
+      ],
+      "reason": "视觉 tokenizer 用双分支重建约束离散码同时保留语义与像素信息，再在同一码空间验证理解、生成和编辑。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2611.12426v1",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "跨阶段训练数千亿 token；语料包含内部图像集合，8B 模型参与视觉理解与生成，原文还包含 ImageNet 与多域分布迁移对照。",
+        "cost_type": "大规模多模态训练和未公开语料",
+        "available_resource": "one A100 or A30, or a local Mac"
+      }
+    },
+    {
+      "id": "2611.12552",
+      "revision": 1,
+      "published": "2026-11-09T15:20:32Z",
+      "updated": "2026-11-09T15:20:32Z",
+      "title": "SciMARS: Multi-Agent Recursive Self-Improvement for Closed-Loop Scientific Discovery",
+      "track": "agent",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2611.12552v1",
+      "locations": [
+        "§3.2–3.4",
+        "§4.2–4.3",
+        "Tables 2–4"
+      ],
+      "reason": "多 Agent 共享证据图，分别编辑角色过程、协作规则和记忆策略，探测后组合候选并选择后继 harness。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2611.12552v1",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "Autonomous Science Bench 原文每个模型队列 90 次任务尝试、含闭源 GPT-6-Astra；另在 38 道 ScienceAgentBench 和 20 道 AppWorld 题按五个方法比较，原配置需外部模型服务。",
+        "cost_type": "多 Agent 工具交互、闭源推理及任务预算",
+        "available_resource": "one A100 or A30, or a local Mac"
+      }
+    },
+    {
+      "id": "2610.21562",
+      "revision": 1,
+      "published": "2026-10-15T09:18:48Z",
+      "updated": "2026-10-15T09:18:48Z",
+      "title": "A Quantum Machine Learning Approach to Content-Based Media Recommendation",
+      "track": "recommendation",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.21562v1",
+      "locations": [
+        "§3.1 Task Definition and Dataset",
+        "§4 Experiments and Results"
+      ],
+      "reason": "用 BBC iPlayer 一周内容与行为日志离线对比标准协同推荐；在 Quantinuum H2 运行测试子集是真量子硬件评估，不是向 iPlayer 用户投放，也未提供线上 A/B 或全流量证据。",
+      "decision": "rejected",
+      "resolution": "industrial_production_evidence_not_met",
+      "fulltext_review_completed": true,
+      "production_gate_passed": false,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2610.28636",
+      "revision": 1,
+      "published": "2026-08-05T21:44:35Z",
+      "updated": "2026-08-05T21:44:35Z",
+      "title": "RESEARCHHUB: A Personalized Literature Discovery System for Biomedical Preprints",
+      "track": "recommendation",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.28636v1",
+      "locations": [
+        "§2.1 Corpus and Preprocessing",
+        "§3 Evaluation",
+        "Conclusion"
+      ],
+      "reason": "对 44,937 条 MedRxiv 预印本测离线检索、覆盖和延迟；正文将与研究人员的实际工作流验证列作后续。交互界面和低延迟不等于生产 A/B。",
+      "decision": "rejected",
+      "resolution": "industrial_production_evidence_not_met",
+      "fulltext_review_completed": true,
+      "production_gate_passed": false,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2610.28638",
+      "revision": 1,
+      "published": "2026-08-12T05:25:25Z",
+      "updated": "2026-08-12T05:25:25Z",
+      "title": "TAGR: Task-Adaptive Geo-Semantic Retrieval across Heterogeneous Urban Delivery Tasks",
+      "track": "recommendation",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.28638v1",
+      "locations": [
+        "Methodology Overview",
+        "Experiments / Datasets",
+        "Table 1",
+        "Conclusion"
+      ],
+      "reason": "LaDe-P 三个城市的需求、送达时间和下一站预测是物流运营记录离线比较；文中 online query 指请求时检索，不是搜索推荐的线上随机实验或流量证明。",
+      "decision": "rejected",
+      "resolution": "industrial_production_evidence_not_met",
+      "fulltext_review_completed": true,
+      "production_gate_passed": false,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2610.28642",
+      "revision": 1,
+      "published": "2026-08-27T10:53:10Z",
+      "updated": "2026-08-27T10:53:10Z",
+      "title": "Controllable Generative Recommendation via Guided Token Refinement",
+      "track": "recommendation",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.28642v1",
+      "locations": [
+        "§V-A Experiment Settings",
+        "Table I",
+        "§V-D"
+      ],
+      "reason": "使用 Amazon 2023 Reviews 的三个类别按时序做留一离线测试，评估准确率和多样性；未提供线上受控实验或全流量证据。",
+      "decision": "rejected",
+      "resolution": "industrial_production_evidence_not_met",
+      "fulltext_review_completed": true,
+      "production_gate_passed": false,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.12240",
+      "revision": 1,
+      "published": "2026-11-09T11:30:23Z",
+      "updated": "2026-11-09T11:30:23Z",
+      "title": "Prune, Don't Merge: Expert Compression of Mixture-of-Experts LLMs on Multilingual Production Tasks",
+      "track": "foundation-model",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2611.12240v1",
+      "locations": [
+        "§4 Evaluation Setup",
+        "§5.2",
+        "§6",
+        "Table 5"
+      ],
+      "reason": "在同一校准数据上比较 REAP 专家剪枝和 REAM 合并的保真差异，属于基础模型压缩实证。Hostinger 生产任务样本及打分规则不等于上线 A/B。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2611.12240v1",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "两个 30B-A3B 骨干、25%/50% 两档压缩与未压缩对照共十模型；内部生产对话作校准，五项生产任务各 2,000 行，覆盖 17–35 种语言，单卡与公共代理任务无法复现完整矩阵。",
+        "cost_type": "原始内部校准与多模型评估",
+        "available_resource": "one A100 or A30, or a local Mac"
+      }
+    },
+    {
+      "id": "2610.20693",
+      "revision": 2,
+      "published": "2026-10-14T17:59:53Z",
+      "updated": "2026-10-18T11:17:54Z",
+      "title": "Orbia: Do Generated Videos Form a Consistent 3D World?",
+      "track": "foundation-model",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.20693v2",
+      "locations": [
+        "§3 Benchmark",
+        "§4 Evaluation Metrics",
+        "§5 Table 2",
+        "Appendix B.3"
+      ],
+      "reason": "在注册 RGB-D 参考和可控回访轨迹下，分开评估输入保持、生成区域持久性、跨视角几何与时间稳定性。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.20693v2",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "720 个场景评估实例含 240 个一分钟延长版本，正文对照 19 个相机/动作条件世界模型和 8 个图像到视频模型；完整矩阵需原视频生成服务、不同控制接口和逐场景重建。",
+        "cost_type": "视频生成服务和多模型三维评估",
+        "available_resource": "one A100 or A30, or a local Mac"
+      }
+    },
+    {
+      "id": "2610.20731",
+      "revision": 2,
+      "published": "2026-10-14T18:00:07Z",
+      "updated": "2026-10-22T14:44:41Z",
+      "title": "WorldCast: Exploring Intelligent Visual Generation in World State Prediction",
+      "track": "foundation-model",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.20731v2",
+      "locations": [
+        "§3 Benchmark",
+        "§4.1–4.3",
+        "Table 1"
+      ],
+      "reason": "把多阶段世界状态预测统一为有序视觉关键帧，再使用逐题人工核对的评分提示和适配器对比图像及视频生成。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.20731v2",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "320 个手工案例、八类场景、十二套图像/视频生成系统，包括原文固定的闭源 GPT-Image-2.5、Nano Banana Pro、Gemini Omni 等及配套裁判；非本地单卡可替换的模型集合。",
+        "cost_type": "闭源图像和视频 API 对照",
+        "available_resource": "one A100 or A30, or a local Mac"
+      }
+    },
+    {
+      "id": "2610.21922",
+      "revision": 1,
+      "published": "2026-10-15T14:05:28Z",
+      "updated": "2026-10-15T14:05:28Z",
+      "title": "TS-WAM: Temporal Latent Actions and World-Action Coupling for Vision-Language Robot Control",
+      "track": "foundation-model",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.21922v1",
+      "locations": [
+        "§III Method",
+        "§IV Experiments",
+        "§V Limitations"
+      ],
+      "reason": "通过时间潜在动作和未来表征耦合世界模型与动作预测；原文同时评估仿真和自建机器人控制平台。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.21922v1",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "原文训练为 4 张 A100，部署推理用 RTX 4090，真机控制频率 30Hz；单卡仅可做组件检查，不能对齐完整硬件与机器人评价。",
+        "cost_type": "多卡训练及机器人真机",
+        "available_resource": "one A100 or A30, or a local Mac"
+      }
+    },
+    {
+      "id": "2610.22070",
+      "revision": 1,
+      "published": "2026-10-15T15:29:57Z",
+      "updated": "2026-10-15T15:29:57Z",
+      "title": "Memory as Weights: Internalizing Long-Term History for Streaming Videos",
+      "track": "foundation-model",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.22070v1",
+      "locations": [
+        "§3 Method",
+        "§4.1",
+        "Appendix B.2–B.3"
+      ],
+      "reason": "通过时序聚合和动态生成的轻量权重将既往流式片段写入模型；当前查询仅把近期窗口显式加入上下文。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.22070v1",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "原文 56,000 个视频生成约 381,000 条训练指令；122B 问答模型各实例 2 张 H200，397B 验证模型各实例 4 张 H200，且有多个并行 worker；之后在 4B–11B VLM 上评测。",
+        "cost_type": "多卡大模型语料生成和视频评估",
+        "available_resource": "one A100 or A30, or a local Mac"
+      }
+    }
+  ]
+}

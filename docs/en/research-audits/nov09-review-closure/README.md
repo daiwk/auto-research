@@ -1,6 +1,6 @@
 # October 16–November 9 review reconciliation (in progress)
 
-<!-- source-sha256: 5cc05a2127d63d316bff30ca8f79a0ec7f7212631982a4de526fd728deb3f821 -->
+<!-- source-sha256: f178e4737908afb9197e8f815e1f9607b2d3e70f7dd6dda5b073076e1b8b18f4 -->
 
 This batch reconciles discovery coverage and completes selected priority source reviews.
 **Individual decisions are not yet complete for the entire window.** The official
@@ -31,9 +31,9 @@ The [additional reviews](../../../research-audits/nov09-review-closure/additiona
 cover FP4 decoding, RSI, and OPD. Reviews cover the cited sections, not necessarily the entire paper.
 When the cost is supported by evidence, the full experiment is **not reproduced (review DONE)**, with no automatic retry or implementation queue.
 
-## November 10 continuation
+## November 10: first continuation
 
-The same batch gained **70** original-source dispositions, bringing its total to **119**, including **73** full experiments not reproduced due to cost.
+The first continuation added **70** original-source dispositions, bringing that snapshot to **119**, including **73** full experiments not reproduced due to cost.
 Some first releases predate the window or belong to the end-of-day supplement, so the 70 cannot all be subtracted from the frozen in-window queue.
 
 - The [priority and industrial follow-up](../../../research-audits/nov09-review-closure/supplemental-priority-reviews.json)
@@ -54,13 +54,42 @@ Some first releases predate the window or belong to the end-of-day supplement, s
   [RecoGEM's production latency comparison](https://arxiv.org/html/2611.12296v1#S5.SS6), and the reuse of a prior experiment
   in the [rewritten AgentOPSD paper](https://arxiv.org/html/2611.12587v1).
 
+## Title and abstract follow-up
+
+This pass added **142** original-source dispositions, including **68** full experiments not reproduced due to cost.
+The same ledger now has **261** dispositions, including **141** cost closures.
+
+The [in-window routing artifact](../../../research-audits/nov09-review-closure/continued-in-window-routing.json)
+reduces 22,220 captured observations to 4,941 versioned identities. The
+[late-index and end-of-day follow-up](../../../research-audits/nov09-review-closure/continued-late-tail-triage.json) covers 334 more.
+Normalized titles and abstracts did not establish exact cross-ID duplicates. Organization names in abstracts can be references,
+models, or benchmarks, so they are search leads, not proof of affiliation. Routing does not substitute for original-source review.
+An additional [46 in-window](../../../research-audits/nov09-review-closure/continued-in-window-scope.json) and **80** overlap records
+were excluded based on their explicit subject and abstract, for this window only.
+
+- **Google and Meta:** The [first](../../../research-audits/nov09-review-closure/continued-google-meta-reviews.json),
+  [second](../../../research-audits/nov09-review-closure/continued-google-meta-followup-reviews.json), and
+  [third](../../../research-audits/nov09-review-closure/continued-google-meta-third-pass-reviews.json) passes checked author leads against
+  pinned originals: 51 dispositions, 15 with verified research participation by Google or Meta.
+  [Accelerated Dataflow](https://arxiv.org/html/2610.22731v2) has Google authors
+  and multi-worker load tests. [Meta PRISM](https://arxiv.org/html/2610.39175v1) uses online training, but evaluates effect on
+  held-out production logs, not in a live A/B test.
+- **Industrial evidence:** The [first](../../../research-audits/nov09-review-closure/continued-industrial-reviews.json) and
+  [second](../../../research-audits/nov09-review-closure/continued-industrial-secondary-reviews.json) passes checked 58 pinned papers.
+  [Tencent TGR-EvoDAG](https://arxiv.org/html/2610.32326v1) reports a 14-day A/B test on 5% of production traffic.
+  Production impact, live logs, offline replay, simulations, and leaderboards are recorded separately.
+- **Methods and evaluation:** See [selected methods](../../../research-audits/nov09-review-closure/continued-method-primary-reviews.json),
+  [institution and production signals](../../../research-audits/nov09-review-closure/continued-signal-primary-reviews.json), and
+  [late-index and end-of-day originals](../../../research-audits/nov09-review-closure/continued-late-tail-primary-reviews.json).
+  Original experiments with evidenced prohibitive costs are not reproduced and their reviews are complete.
+  Affordable core components accepted for consideration were not implemented or run in this review.
+
 ## What remains open
 
-See `counts` and `pending_bucket_counts` in the [deduplicated inventory and receipts](../../../research-audits/nov09-review-closure/review-inventory.json).
-The inventory preserves pending arXiv IDs, observed versions, tracks, Shanghai dates, and first-pass buckets.
-In the frozen capture (November 9, 18:23 Shanghai time), **4,941** in-window identities and **221** late-index records still need review.
+See `counts` and `pending_in_window_counts_by_title_abstract_route` in the [deduplicated inventory and receipts](../../../research-audits/nov09-review-closure/review-inventory.json).
+The inventory preserves pending arXiv IDs, versions, tracks, and Shanghai dates, and counts the frozen window, late-index overlap, and end-of-day supplement separately.
+**4,773** in-window identities, **169** late-index records, and **65** end-of-day records remain undecided.
 An empty `pending_revisions` list closes the previously identified revisions, not revisions indexed later.
-The end-of-day supplement adds **113** candidates without final decisions. Late indexing and later source corrections are subject to the stated coverage limits.
 Manual, industrial, priority, low-signal, and broad-query hits in this inventory are **pending**, not automatic rejections.
 Late-index overlap and revisions of known papers are tracked separately. Source exceptions require real retrieval attempts
 and do not replace unread candidates. Directory matches are not proof of authorship.

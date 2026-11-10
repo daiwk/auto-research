@@ -8,6 +8,7 @@ from hashlib import sha256
 import json
 from pathlib import Path
 import re
+import unicodedata
 from xml.etree import ElementTree
 from zoneinfo import ZoneInfo
 
@@ -30,6 +31,10 @@ PRIMARY_FILES = (
     "revision-primary-reviews.json", "supplemental-priority-reviews.json", "late-index-primary-reviews.json",
     "continued-primary-reviews.json", "tail-industrial-primary-reviews.json",
     "tail-method-primary-reviews.json", "tail-lateindex-primary-reviews.json",
+    "continued-google-meta-reviews.json", "continued-google-meta-followup-reviews.json",
+    "continued-industrial-reviews.json", "continued-late-tail-primary-reviews.json",
+    "continued-method-primary-reviews.json", "continued-industrial-secondary-reviews.json",
+    "continued-signal-primary-reviews.json", "continued-google-meta-third-pass-reviews.json",
 )
 
 
@@ -226,7 +231,60 @@ def metadata_scope_rows(artifact: dict, observed: dict[str, dict], priorities: d
     return result
 
 
-def tail_inventory(source_dir: Path, reviewed: dict[str, dict], observed: dict[str, dict], *, as_of: str) -> dict:
+def review_scope_text(value: str) -> str:
+    return " ".join(unicodedata.normalize("NFKC", value).casefold().split())
+
+
+def continued_overlap_scope(source_dir: Path, receipt_hashes: dict[str, str]) -> dict[str, dict]:
+    """Accept only individually verified scope decisions pinned to captured metadata."""
+    artifact = read(AUDIT / "continued-late-tail-triage.json")
+    if (artifact["terminal_window_scope_only"] is not True or artifact["fulltext_or_cost_inferred"] is not False
+            or artifact["source_receipts"] != receipt_hashes):
+        raise ValueError("overlap scope artifact does not match the frozen captures")
+    exclusions = {}
+    payloads = {}
+    seen = set()
+    for record in artifact["records"]:
+        identity = record["id"]
+        if identity in seen or record["lane"] not in {"late_index", "end_of_day_tail"}:
+            raise ValueError(f"{identity}: duplicate or invalid overlap scope record")
+        seen.add(identity)
+        if record["disposition"] != "exclude_from_window_scope":
+            continue
+        path = record["source_file"]
+        if (not record["window_scope_review_done"] or record["fulltext_review_completed"]
+                or record["institutional_priority_signals"] or not record["reason"] or not record["abstract_witness"]
+                or receipt_hashes.get(path) != record["source_sha256"]):
+            raise ValueError(f"{identity}: invalid overlap scope decision")
+        if record["lane"] == "late_index":
+            if path not in payloads:
+                payload = read(source_dir / path)
+                payloads[path] = {canonical_arxiv_id(r["arxiv_id"]): r for r in
+                                  payload.get("candidates", payload.get("papers", []))}
+            source = payloads[path][identity]
+            revision = source.get("revision")
+            if revision is None:
+                revision = int(source["arxiv_id"].split("v")[-1]) if "v" in source["arxiv_id"] else 1
+            if revision != record["revision"]:
+                raise ValueError(f"{identity}: scope decision uses a different captured revision")
+            verify_overlap_scope_text(record, source)
+        elif path != "nov09-tail-all-categories.atom":
+            raise ValueError(f"{identity}: invalid tail source")
+        exclusions[identity] = record
+    return exclusions
+
+
+def verify_overlap_scope_text(record: dict, source: dict) -> None:
+    title, abstract = map(review_scope_text, (source["title"], source["abstract"]))
+    fingerprint = sha256(f"{title}\0{abstract}".encode()).hexdigest()
+    if (record["metadata_sha256"] != fingerprint or review_scope_text(record["title"]) != title
+            or source["published"] != record["published"] or source["updated"] != record["updated"]
+            or review_scope_text(record["abstract_witness"]) not in abstract):
+        raise ValueError(f"{record['id']}: scope decision lacks matching title and abstract evidence")
+
+
+def tail_inventory(source_dir: Path, reviewed: dict[str, dict], observed: dict[str, dict],
+                   overlap_scope: dict[str, dict], *, as_of: str) -> dict:
     """Reconcile the supplemental Atom submission tail independently of the frozen captures."""
     artifact_path = AUDIT / "nov09-tail-source-receipt.json"
     artifact = read(artifact_path)
@@ -246,6 +304,7 @@ def tail_inventory(source_dir: Path, reviewed: dict[str, dict], observed: dict[s
             or int(feed.findtext("o:startIndex", namespaces=ns)) != 0):
         raise ValueError("tail Atom must contain the complete reported page")
     observed_tail = {}
+    scope_excluded = []
     for entry in entries:
         published = entry.findtext("a:published", namespaces=ns)
         if not start < datetime.fromisoformat(published.replace("Z", "+00:00")) < end:
@@ -256,6 +315,13 @@ def tail_inventory(source_dir: Path, reviewed: dict[str, dict], observed: dict[s
         if match is None or match[1] in observed_tail or match[1] in observed:
             raise ValueError(f"invalid, duplicate, or overlapping tail identity: {identifier}")
         observed_tail[match[1]] = (published, int(match[2]), title)
+        if (record := overlap_scope.get(match[1])) is not None:
+            if record["lane"] != "end_of_day_tail" or record["revision"] != int(match[2]):
+                raise ValueError(f"{identifier}: stale tail scope decision")
+            verify_overlap_scope_text(record, {"published": published, "title": title,
+                                               "updated": entry.findtext("a:updated", namespaces=ns),
+                                               "abstract": entry.findtext("a:summary", namespaces=ns)})
+            scope_excluded.append(match[1])
     declared_tail = {
         row["id"]: (row["first_submission_utc"], row["revision"], row["title"]) for row in artifact["records"]
     }
@@ -269,7 +335,8 @@ def tail_inventory(source_dir: Path, reviewed: dict[str, dict], observed: dict[s
             decided.append(identity)
     return {
         "receipt": artifact_path.name, "unique_identities": len(observed_tail),
-        "primary_reviewed_ids": sorted(decided), "pending_ids": sorted(set(observed_tail) - set(decided)),
+        "primary_reviewed_ids": sorted(decided), "metadata_scope_only_excluded_ids": sorted(scope_excluded),
+        "pending_ids": sorted(set(observed_tail) - set(decided) - set(scope_excluded)),
     }
 
 
@@ -378,6 +445,23 @@ def inventory(source_dir: Path, reviewed: dict[str, dict], *, as_of: str) -> dic
         raise ValueError("date-scope captures do not match their pinned sources")
     date_excluded = date_scope_rows(late_scope, rows, as_of=as_of)
     metadata_excluded = metadata_scope_rows(read(AUDIT / "abstract-scope-screen.json"), rows, priorities, capture_hashes)
+    new_scope = metadata_scope_rows(read(AUDIT / "continued-in-window-scope.json"), rows, priorities, capture_hashes)
+    if new_scope & (metadata_excluded | reviewed.keys()):
+        raise ValueError("in-window scope exclusions overlap an existing decision")
+    metadata_excluded |= new_scope
+    overlap_hashes = capture_hashes | {f"llm-{r['month']}-replacement.json": r["source_sha256"] for r in replacements}
+    overlap_hashes["nov09-tail-all-categories.atom"] = read(
+        AUDIT / "nov09-tail-source-receipt.json",
+    )["source_response"]["source_sha256"]
+    overlap_scope = continued_overlap_scope(source_dir, overlap_hashes)
+    late_metadata_excluded = {identity for identity, r in overlap_scope.items() if r["lane"] == "late_index"}
+    if overlap_scope.keys() & (date_excluded | reviewed.keys()):
+        raise ValueError("overlap scope exclusions overlap an existing decision")
+    for identity in late_metadata_excluded:
+        record, observed = overlap_scope[identity], rows[identity]
+        if (priorities[identity] or record["revision"] != observed["rank"][0]
+                or record["published"] != observed["published"] or local_day(record["published"]) >= START):
+            raise ValueError(f"{identity}: stale or protected late metadata scope decision")
     counts = Counter()
     pending: dict[str, list] = defaultdict(list)
     pending_buckets: Counter = Counter()
@@ -394,7 +478,7 @@ def inventory(source_dir: Path, reviewed: dict[str, dict], *, as_of: str) -> dic
             if is_newer_known_revision and row.get("updated") and START <= local_day(row["updated"]) <= END:
                 revision_rows.append([identity, latest_reviewed_version, version])
             if (PRIMARY_ID.fullmatch(identity) and identity not in statuses
-                    and not decision_covers_version and identity not in date_excluded):
+                    and not decision_covers_version and identity not in date_excluded | late_metadata_excluded):
                 overlap_ids.append(identity)
             continue
         if decision_covers_version:
@@ -424,7 +508,17 @@ def inventory(source_dir: Path, reviewed: dict[str, dict], *, as_of: str) -> dic
             if priorities[identity]:
                 priority_rows.append({"id": identity, "title": row["title"], "signals": sorted(priorities[identity])})
 
-    tail = tail_inventory(source_dir, reviewed, rows, as_of=as_of)
+    tail = tail_inventory(source_dir, reviewed, rows, overlap_scope, as_of=as_of)
+    routes_path = AUDIT / "continued-in-window-routing.json"
+    route_artifact = read(routes_path)
+    if (route_artifact["source_receipts"] != capture_hashes or route_artifact["terminal_decisions_created"] != 0
+            or route_artifact["eligibility_or_cost_inferred"] is not False):
+        raise ValueError("invalid title/abstract routing artifact")
+    routes = {(r["id"], r["revision"]): r["route"] for r in route_artifact["records"]}
+    if len(routes) != route_artifact["count"]:
+        raise ValueError("duplicate title/abstract routes")
+    remaining_routes = Counter(routes[identity, revision] for group in pending.values()
+                               for identity, revision, _, _ in group)
     return {
         "schema_version": 1, "requested_window": {"start": START.isoformat(), "end": END.isoformat()},
         "as_of": as_of, "all_sources_exhaustive": False, "arxiv_recall_matrix_covered": True,
@@ -433,8 +527,10 @@ def inventory(source_dir: Path, reviewed: dict[str, dict], *, as_of: str) -> dic
             "raw_unique_identities": len(rows), "in_window_identities": sum(counts.values()),
             "late_index_or_missing_date_scope_triage_pending": len(overlap_ids),
             "late_index_date_scope_only_excluded": len(date_excluded),
+            "late_index_metadata_scope_only_excluded": len(late_metadata_excluded),
             "post_capture_tail_identities": tail["unique_identities"],
             "post_capture_tail_review_pending": len(tail["pending_ids"]),
+            "post_capture_tail_metadata_scope_only_excluded": len(tail["metadata_scope_only_excluded_ids"]),
             **dict(sorted(counts.items())),
         },
         "capture_receipts": receipts, "query_replacements": replacements,
@@ -448,7 +544,11 @@ def inventory(source_dir: Path, reviewed: dict[str, dict], *, as_of: str) -> dic
         "post_capture_tail": tail,
         "scope_only_evidence": {
             "late_index": "late-index-scope.json", "in_window_metadata": "abstract-scope-screen.json",
+            "continued_in_window_metadata": "continued-in-window-scope.json",
+            "continued_overlap_metadata": "continued-late-tail-triage.json",
         },
+        "in_window_title_abstract_routing": routes_path.name,
+        "pending_in_window_counts_by_title_abstract_route": dict(sorted(remaining_routes.items())),
     }
 
 
