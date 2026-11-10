@@ -5,7 +5,7 @@ from hashlib import sha256
 import pytest
 
 from scripts.build_nov09_review_inventory import (
-    AUDIT, BATCH, END, HIGH_COST, MODES, ROOT, RUNS, TRACKS, closed_query, ledger_row, local_day, read,
+    AUDIT, BATCH, END, HIGH_COST, MODES, ROOT, RUNS, TRACKS, closed_query, date_scope_rows, ledger_row, local_day, read,
 )
 
 
@@ -63,6 +63,60 @@ def test_high_cost_decision_must_have_original_evidence_and_cannot_accept():
         ledger_row(paper | {"decision": "accepted"}, "review.json")
     with pytest.raises(ValueError, match="nonterminal"):
         ledger_row(paper | {"review_done": False}, "review.json")
+
+
+def test_scope_only_exclusions_never_enter_the_substantive_ledger():
+    value = read(AUDIT / "review-inventory.json")
+    date_scope = read(AUDIT / "late-index-scope.json")
+    abstract_scope = read(AUDIT / "abstract-scope-screen.json")
+    date_excluded = set(date_scope["terminal_ids"])
+    abstract_excluded = {row["id"] for row in abstract_scope["records"]}
+    terminal = set(value["primary_reviewed_ids"])
+    pending = {row[0] for rows in value["pending_identities_by_local_first_publication"].values() for row in rows}
+    assert len(date_excluded) == value["counts"]["late_index_date_scope_only_excluded"]
+    assert len(abstract_excluded) == value["counts"]["metadata_scope_only_excluded"]
+    assert not (date_excluded | abstract_excluded).intersection(terminal | pending)
+    assert abstract_scope["terminal_window_scope_only"] and not abstract_scope["fulltext_or_cost_inferred"]
+    assert abstract_scope["input_inventory_sha256"] == date_scope["input_inventory_sha256"]
+    assert set(date_scope["pending_ids"]) == set(value["pending_late_index_scope_triage"]) | (
+        set(date_scope["pending_ids"]) & terminal
+    )
+    matched = {row["id"]: row | {"rank": (row["revision"],)} for row in date_scope["records"]}
+    assert date_scope_rows(date_scope, matched, as_of=value["as_of"]) == date_excluded
+    identity = next(iter(date_excluded))
+    matched[identity]["updated"] = "2026-11-01T12:00:00Z"
+    with pytest.raises(ValueError, match="invalid or stale"):
+        date_scope_rows(date_scope, matched, as_of=value["as_of"])
+
+
+def test_reviewed_revisions_are_persisted_as_observed_metadata_not_implementation():
+    value = read(AUDIT / "review-inventory.json")
+    assert not value["pending_revisions"]
+    reviews = read(AUDIT / "revision-primary-reviews.json")["reviews"]
+    versions = {row["arxiv_id"]: row for row in read(ROOT / "docs/paper-discovery-versions.json")["papers"]}
+    assert len(reviews) == 17
+    for review in reviews:
+        row = versions[review["id"]]
+        assert row["revision"] == review["revision"] > review["previous_reviewed_revision"]
+        assert row["metadata_sha256"] == review["metadata_sha256"]
+        assert row["source_evidence"] == [{"url": review["source_url"], "sha256": review["source_sha256"]}]
+        assert row["implementation_acceptance"] == "not_upgraded_by_review"
+
+
+def test_end_of_day_tail_preserves_pending_new_submissions():
+    report = read(AUDIT / "review-inventory.json")
+    tail = report["post_capture_tail"]
+    receipt = read(AUDIT / tail["receipt"])
+    ids = {r["id"] for r in receipt["records"]}
+    decided, pending = map(set, (tail["primary_reviewed_ids"], tail["pending_ids"]))
+    assert len(ids) == len(receipt["records"]) == tail["unique_identities"]
+    assert len(pending) == report["counts"]["post_capture_tail_review_pending"]
+    assert decided and decided <= set(report["primary_reviewed_ids"])
+    assert not decided & pending and decided | pending == ids
+    assert not pending & set(report["primary_reviewed_ids"])
+    original = {row[0] for group in report["pending_identities_by_local_first_publication"].values() for row in group}
+    assert not ids & original
+    assert all(local_day(r["first_submission_utc"]) == END for r in receipt["records"])
 
 
 def test_bilingual_review_preserves_coverage_boundary():

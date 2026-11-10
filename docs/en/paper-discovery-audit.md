@@ -1,12 +1,12 @@
 # Paper discovery and coverage audit
 
-<!-- source-sha256: 64c8831df27b65ed2338cde9d48a87187f9aa8267bd6ae3cd8808a40fde04c23 -->
+<!-- source-sha256: d407c640a18fd246444a90aed7316cfa7cc0074f31534c44e690c5fca1057bb8 -->
 
 [简体中文](../paper-discovery-audit.md)
 
 The latest completed window in this snapshot is [2026-10-13 to 2026-10-15](research-audits/oct15-review-closure/README.md). First releases, historical discoveries, and revisions are counted separately. High-cost candidates are explicitly not reproduced and their reviews are complete. See the [unified status](../paper-discovery-watermark.json) for the current date, coverage, cutoff, and exceptions.
 
-The [October 16–November 9 reconciliation](research-audits/nov09-review-closure/README.md) records four tracks and two recall modes, replaces a capped query, and adds priority source decisions. Individual reviews and version checks remain open; **the watermark has not advanced**.
+The [October 16–November 9 reconciliation](research-audits/nov09-review-closure/README.md) records four tracks and two recall modes, replaces a capped query, and adds priority source decisions. All 17 previously flagged revisions were checked. In-window and late-index candidates and the remainder of November 9 after the capture cutoff remain open; **the watermark has not advanced**.
 
 The latest bounded implementation batch is [2026-10-26](research-audits/oct26-components/README.md). Eight low-cost L1 components passed same-source CPU and real A100 checks with three seeds. Eight high-cost papers were documented without reproduction and are review DONE. Google and Meta were checked first. New announcements, recent source backfill, and historical catalog backfill are counted separately. This is distinct from closing an entire review window: announcement entries are not new papers, and the batch does not move the watermark automatically. The [roadmap](research-roadmap.md) retains previous batches.
 

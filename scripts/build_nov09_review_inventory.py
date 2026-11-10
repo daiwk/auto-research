@@ -8,6 +8,7 @@ from hashlib import sha256
 import json
 from pathlib import Path
 import re
+from xml.etree import ElementTree
 from zoneinfo import ZoneInfo
 
 from auto_research.discovery import repository_paper_statuses, repository_paper_versions
@@ -24,6 +25,12 @@ SHANGHAI = ZoneInfo("Asia/Shanghai")
 PRIMARY_ID = re.compile(r"26(?:10|11)\.\d{5}")
 BATCH = "2026-11-09-bounded-review-reconciliation"
 HIGH_COST = "not_reproduced_high_cost"
+PRIMARY_FILES = (
+    "priority-primary-reviews.json", "industrial-primary-reviews.json", "additional-primary-reviews.json",
+    "revision-primary-reviews.json", "supplemental-priority-reviews.json", "late-index-primary-reviews.json",
+    "continued-primary-reviews.json", "tail-industrial-primary-reviews.json",
+    "tail-method-primary-reviews.json", "tail-lateindex-primary-reviews.json",
+)
 
 
 def read(path: Path) -> dict:
@@ -125,6 +132,147 @@ def record_selected_reviews(report: dict, reviewed: dict[str, dict]) -> None:
     path.write_text(json.dumps(ledger, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
 
 
+def record_reviewed_versions(report: dict, reviewed: dict[str, dict], *, reviewed_at: date) -> None:
+    """Prevent already verified revisions from reappearing in the scanner."""
+    path = ROOT / "docs/paper-discovery-versions.json"
+    payload = read(path)
+    indices = {row["arxiv_id"]: i for i, row in enumerate(payload["papers"])}
+    captures = {
+        f"{r['run_id']}/{r['artifact_name']}/{r['file']}" for r in report["capture_receipts"]
+    }
+    for identity, review in reviewed.items():
+        if Path(review["review_artifact"]).name != "revision-primary-reviews.json":
+            continue
+        previous_revision = review["previous_reviewed_revision"]
+        idx = indices[identity]
+        before = payload["papers"][idx]
+        if (review["revision"] <= previous_revision
+                or before["revision"] not in {previous_revision, review["revision"]}
+                or not START <= local_day(review["updated"]) <= END
+                or review["metadata_capture"] not in captures
+                or any(not re.fullmatch(r"[0-9a-f]{64}", review[field])
+                       for field in ("metadata_sha256", "source_sha256"))):
+            raise ValueError(f"{identity}: invalid reviewed version baseline")
+        after = {
+            "arxiv_id": identity, "revision": review["revision"], "reviewed_at": reviewed_at.isoformat(),
+            "metadata_sha256": review["metadata_sha256"],
+            "review_scope": "bounded_original_revision_evidence",
+            "algorithm_acceptance_inferred": False, "review_artifact": review["review_artifact"],
+            "implementation_acceptance": "not_upgraded_by_review",
+            "source_evidence": [{"url": review["source_url"], "sha256": review["source_sha256"]}],
+        }
+        if before["revision"] == after["revision"] and before != after:
+            raise ValueError(f"{identity}: refusing to overwrite a different version review")
+        payload["papers"][idx] = after
+    payload["reviewed_at"] = reviewed_at.isoformat()
+    payload["coverage"] = (
+        f"Only {len(payload['papers'])} explicitly observed/reviewed version baselines. "
+        "October15 additions distinguish bounded method/cost/correction, historical metadata triage and "
+        "attempted-source exceptions. The November continuation updates 17 of those baselines with pinned "
+        "original revision evidence. None implies whole-article or implementation acceptance. "
+        "Missing versions are never assumed v1."
+    )
+    path.write_text(json.dumps(payload, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
+
+
+def date_scope_rows(artifact: dict, observed: dict[str, dict], *, as_of: str) -> set[str]:
+    """Close a window boundary, never the paper's substantive review."""
+    if artifact["capture_as_of"] != as_of or artifact["requested_window"] != {
+        "start": START.isoformat(), "end": END.isoformat(),
+    }:
+        raise ValueError("date-scope receipt has a different window")
+    cutoff = datetime.fromisoformat(artifact["prior_review_as_of"])
+    selected = set(artifact["terminal_ids"])
+    result = set()
+    for record in artifact["records"]:
+        identity = record["id"]
+        if identity not in selected:
+            continue
+        row = observed[identity]
+        dates = tuple(record[key] for key in ("published", "updated"))
+        if (identity in result or record["disposition"] != "pre_window_v1_no_post_cutoff_signal"
+                or record["window_scope_review_done"] is not True or record["substantive_review_done"] is not False
+                or record["signals"] or record["revision"] != row["rank"][0]
+                or dates != (row["published"], row["updated"])
+                or any(datetime.fromisoformat(value.replace("Z", "+00:00")) > cutoff for value in dates)):
+            raise ValueError(f"{identity}: invalid or stale date-scope decision")
+        result.add(identity)
+    if result != selected:
+        raise ValueError("date-scope records do not cover their declared terminal IDs")
+    return result
+
+
+def metadata_scope_rows(artifact: dict, observed: dict[str, dict], priorities: dict[str, set],
+                        receipt_hashes: dict[str, str]) -> set[str]:
+    if artifact["terminal_window_scope_only"] is not True or artifact["fulltext_or_cost_inferred"] is not False:
+        raise ValueError("scope-only evidence cannot claim full-text review or cost")
+    if artifact["source_receipts"] != receipt_hashes:
+        raise ValueError("scope-only metadata captures do not match the recall receipts")
+    result = set()
+    for record in artifact["records"]:
+        identity = record["id"]
+        row = observed[identity]
+        if (identity in result or priorities[identity] or record["decision"] != "out_of_scope"
+                or record["review_done"] is not True or record["fulltext_review_completed"] is not False
+                or record["automatic_retry"] is not False or record["automatic_implementation_queue"] is not False
+                or not all(record.get(key) for key in ("metadata_sha256", "title_witness", "abstract_witness", "reason"))
+                or record["capture"] not in receipt_hashes
+                or record["revision"] != row["rank"][0]
+                or any(record[key] != row.get(key) for key in ("published", "metadata_sha256", "title"))
+                or record["title_witness"].casefold() not in row["title"].casefold()
+                or record["abstract_witness"].casefold() not in row["abstract"].casefold()):
+            raise ValueError(f"{identity}: invalid or stale scope-only metadata")
+        result.add(identity)
+    return result
+
+
+def tail_inventory(source_dir: Path, reviewed: dict[str, dict], observed: dict[str, dict], *, as_of: str) -> dict:
+    """Reconcile the supplemental Atom submission tail independently of the frozen captures."""
+    artifact_path = AUDIT / "nov09-tail-source-receipt.json"
+    artifact = read(artifact_path)
+    response = artifact["source_response"]
+    raw = (source_dir / "nov09-tail-all-categories.atom").read_bytes()
+    if sha256(raw).hexdigest() != response["source_sha256"]:
+        raise ValueError("tail Atom does not match its source receipt")
+    start = datetime.fromisoformat(as_of)
+    end = datetime.combine(END + timedelta(days=1), datetime.min.time(), tzinfo=SHANGHAI)
+    if artifact["requested_tail_shanghai"] != {"after_exclusive": as_of, "before_exclusive": end.isoformat()}:
+        raise ValueError("tail bounds do not match the frozen capture")
+    feed = ElementTree.fromstring(raw)
+    ns = {"a": "http://www.w3.org/2005/Atom", "o": "http://a9.com/-/spec/opensearch/1.1/"}
+    entries = feed.findall("a:entry", ns)
+    if (len(entries) != response["rows_received"] or len(entries) != response["total_results"]
+            or int(feed.findtext("o:totalResults", namespaces=ns)) != len(entries)
+            or int(feed.findtext("o:startIndex", namespaces=ns)) != 0):
+        raise ValueError("tail Atom must contain the complete reported page")
+    observed_tail = {}
+    for entry in entries:
+        published = entry.findtext("a:published", namespaces=ns)
+        if not start < datetime.fromisoformat(published.replace("Z", "+00:00")) < end:
+            continue
+        identifier = entry.findtext("a:id", namespaces=ns).rsplit("/", 1)[-1]
+        match = re.fullmatch(r"(2611\.\d{5})v(\d+)", identifier)
+        title = " ".join(entry.findtext("a:title", namespaces=ns).split())
+        if match is None or match[1] in observed_tail or match[1] in observed:
+            raise ValueError(f"invalid, duplicate, or overlapping tail identity: {identifier}")
+        observed_tail[match[1]] = (published, int(match[2]), title)
+    declared_tail = {
+        row["id"]: (row["first_submission_utc"], row["revision"], row["title"]) for row in artifact["records"]
+    }
+    if (declared_tail != observed_tail or len(declared_tail) != artifact["exact_tail_unique_ids"]
+            or len(declared_tail) != len(artifact["records"])):
+        raise ValueError("tail inventory differs from the exact-date Atom rows")
+    decided = []
+    for identity, (published, revision, _) in observed_tail.items():
+        review = reviewed.get(identity)
+        if review and review["published"] == published and review["revision"] == revision:
+            decided.append(identity)
+    return {
+        "receipt": artifact_path.name, "unique_identities": len(observed_tail),
+        "primary_reviewed_ids": sorted(decided), "pending_ids": sorted(set(observed_tail) - set(decided)),
+    }
+
+
 def inventory(source_dir: Path, reviewed: dict[str, dict], *, as_of: str) -> dict:
     if local_day(as_of) != END:
         raise ValueError("expected an explicit November 9 local intraday cutoff")
@@ -213,6 +361,23 @@ def inventory(source_dir: Path, reviewed: dict[str, dict], *, as_of: str) -> dic
     if not all(required_days <= submission_days[t] and {"2610", "2611"} <= late_months[t] for t in TRACKS):
         raise ValueError("recall lanes do not cover the requested dates and months")
 
+    capture_hashes = {
+        f"{r['run_id']}/{r['artifact_name']}/{r['file']}": r["artifact_sha256"] for r in receipts
+    }
+    late_scope = read(AUDIT / "late-index-scope.json")
+    prior_register = docs / "research-audits/oct15-review-closure/paper-register.json"
+    if (sha256(prior_register.read_bytes()).hexdigest() != late_scope["prior_register_sha256"]
+            or read(prior_register)["review_as_of"] != late_scope["prior_review_as_of"]):
+        raise ValueError("late-index scope uses the wrong prior review cutoff")
+    if any(
+        source["sha256"] != (
+            capture_hashes[f"{source['run_id']}/{source['artifact_name']}/{source['file']}"]
+            if "run_id" in source else sha256((source_dir / source["file"]).read_bytes()).hexdigest()
+        ) for source in late_scope["sources"]
+    ):
+        raise ValueError("date-scope captures do not match their pinned sources")
+    date_excluded = date_scope_rows(late_scope, rows, as_of=as_of)
+    metadata_excluded = metadata_scope_rows(read(AUDIT / "abstract-scope-screen.json"), rows, priorities, capture_hashes)
     counts = Counter()
     pending: dict[str, list] = defaultdict(list)
     pending_buckets: Counter = Counter()
@@ -228,7 +393,8 @@ def inventory(source_dir: Path, reviewed: dict[str, dict], *, as_of: str) -> dic
         if not published or not START <= local_day(published) <= END:
             if is_newer_known_revision and row.get("updated") and START <= local_day(row["updated"]) <= END:
                 revision_rows.append([identity, latest_reviewed_version, version])
-            if PRIMARY_ID.fullmatch(identity) and identity not in statuses and identity not in reviewed:
+            if (PRIMARY_ID.fullmatch(identity) and identity not in statuses
+                    and not decision_covers_version and identity not in date_excluded):
                 overlap_ids.append(identity)
             continue
         if decision_covers_version:
@@ -238,6 +404,8 @@ def inventory(source_dir: Path, reviewed: dict[str, dict], *, as_of: str) -> dic
             revision_rows.append([identity, latest_reviewed_version, version])
         elif identity in statuses:
             counts["existing_disposition"] += 1
+        elif identity in metadata_excluded:
+            counts["metadata_scope_only_excluded"] += 1
         else:
             counts["pending_identity_review"] += 1
             day = local_day(published).isoformat()
@@ -256,13 +424,17 @@ def inventory(source_dir: Path, reviewed: dict[str, dict], *, as_of: str) -> dic
             if priorities[identity]:
                 priority_rows.append({"id": identity, "title": row["title"], "signals": sorted(priorities[identity])})
 
+    tail = tail_inventory(source_dir, reviewed, rows, as_of=as_of)
     return {
         "schema_version": 1, "requested_window": {"start": START.isoformat(), "end": END.isoformat()},
         "as_of": as_of, "all_sources_exhaustive": False, "arxiv_recall_matrix_covered": True,
-        "candidate_review_complete": not (pending or revision_rows or overlap_ids),
+        "candidate_review_complete": not (pending or revision_rows or overlap_ids or tail["pending_ids"]),
         "review_watermark_advanced": False, "counts": {
             "raw_unique_identities": len(rows), "in_window_identities": sum(counts.values()),
             "late_index_or_missing_date_scope_triage_pending": len(overlap_ids),
+            "late_index_date_scope_only_excluded": len(date_excluded),
+            "post_capture_tail_identities": tail["unique_identities"],
+            "post_capture_tail_review_pending": len(tail["pending_ids"]),
             **dict(sorted(counts.items())),
         },
         "capture_receipts": receipts, "query_replacements": replacements,
@@ -273,6 +445,10 @@ def inventory(source_dir: Path, reviewed: dict[str, dict], *, as_of: str) -> dic
         "pending_revision_columns": ["arxiv_id", "known_revision", "observed_revision"],
         "pending_revisions": revision_rows, "pending_priority_signals": priority_rows,
         "pending_late_index_scope_triage": overlap_ids,
+        "post_capture_tail": tail,
+        "scope_only_evidence": {
+            "late_index": "late-index-scope.json", "in_window_metadata": "abstract-scope-screen.json",
+        },
     }
 
 
@@ -282,9 +458,10 @@ def main() -> None:
     parser.add_argument("--as-of", required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--record-selected-reviews", action="store_true")
+    parser.add_argument("--record-reviewed-versions-on", type=date.fromisoformat)
     args = parser.parse_args()
     reviewed = {}
-    for filename in ("priority-primary-reviews.json", "industrial-primary-reviews.json", "additional-primary-reviews.json"):
+    for filename in PRIMARY_FILES:
         path = AUDIT / filename
         if path.is_file():
             for row in read(path)["reviews"]:
@@ -295,6 +472,8 @@ def main() -> None:
     args.output.write_text(json.dumps(report, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
     if args.record_selected_reviews:
         record_selected_reviews(report, reviewed)
+    if args.record_reviewed_versions_on:
+        record_reviewed_versions(report, reviewed, reviewed_at=args.record_reviewed_versions_on)
     print(json.dumps(report["counts"], ensure_ascii=False))
 
 
