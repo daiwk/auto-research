@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "window": {
+    "start": "2026-10-16",
+    "end": "2026-11-09",
+    "timezone": "Asia/Shanghai"
+  },
+  "scope": "Additional protected Google original-source lead, kept separate from title/abstract exclusions.",
+  "all_sources_exhaustive": false,
+  "reviews": [
+    {
+      "id": "2610.41437",
+      "title": "A prospective randomized study of patient-centered AI for clinical visit preparation",
+      "published": "2026-10-30T08:39:59Z",
+      "updated": "2026-10-30T08:39:59Z",
+      "revision": 1,
+      "metadata_sha256": "e257dde9a2ffe87539e040f5a775b38bea38204356b61e77db2edd2cf2a509b7",
+      "source_sha256": "71081176b0852de8f4dfa44eca5229e704d591a6b9a5fe188a4a7341c2225cb7",
+      "source_url": "https://arxiv.org/html/2610.41437v1",
+      "track": "agent",
+      "priority": "P0",
+      "organization": "Google Research",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "locations": [
+        "fixed author block",
+        "§2.1–2.5",
+        "§3.1–3.3",
+        "§4.2"
+      ],
+      "source_review_scope": "byline, randomized in-app study design, intervention mechanism, denominators, statistical limits and reproduction feasibility; not a full-article reading claim",
+      "reason": "已确认 Google Research 作者，而非仅提及 Gemini。Google Health 应用中用同一 Gemini 2.5 Flash 比较最小提示与五步结构化就诊准备工作流，按 1:2:2 随机分组。正文有真实前瞻随机干预证据；并非搜广推 CTR 实验。802 名分析参与者贡献 866 段对话，盲评 n=272 的完整准备率为 67.2% 对 50.6%；不能把该 +16.6 百分点误写成相对提升。14 日随访实际就诊者仅 59 人，差异不显著，不能推断临床结局改善。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "production_evidence_verified": true,
+      "production_evidence_kind": "prospective randomized consenting in-app human study, not a recommendation CTR A/B",
+      "production_gate_passed": true,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.41437v1",
+        "basis": "原文 §2–3 的临床试验、同意/伦理审批和人类评审配置；不是本地运行测量",
+        "scale": "Google Health 应用内 2025-11-19 至 2026-05-15 前瞻试验，5,960 人同意/随机化，802 人进入修改意向分析，866 段对话，3 名独立临床医师盲评；非公开健康对话及受试者后续问卷。",
+        "available_resource": "one A100 or A30, or local Mac; no clinical study, human data collection or model experiment was started",
+        "cost_type": "长周期受试者招募、伦理审批、非公开敏感数据与临床人工评审；无法由本地 GPU 组件测试复现完整随机试验"
+      },
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true
+    }
+  ]
+}

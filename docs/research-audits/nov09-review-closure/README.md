@@ -47,7 +47,7 @@
 ## 标题与摘要复筛
 
 本轮新增 **142** 个原始来源决定，其中 **68** 项高成本完整实验不复现。
-同一账本累计 **261** 条决定，其中 **141** 条高成本已结案。
+该次快照累计 **261** 条决定，其中 **141** 条高成本已结案；后续增量见下节。
 
 [窗口内分流](continued-in-window-routing.json)将 22,220 条捕获观测归并为 4,941 个固定版本身份；
 [晚索引与尾段分流](continued-late-tail-triage.json)另覆盖 334 个身份。
@@ -67,15 +67,46 @@
   和[晚索引/尾段原文](continued-late-tail-primary-reviews.json)单列结论。原文成本足以确认的完整实验标注不复现并结案；
   可低成本验证的核心组件只记录审查接受，本轮未实现或运行。
 
+## 11 月 11 日：按获批口径批量结案
+
+用户批准：标题和摘要明确表明是单一应用报告、重复评测或观点总结，且没有新的可独立复现算法或公开基准时，
+可按**本窗口不收录**结案。[选择口径](batch-terminal-policy.json)不允许因为低优先级、缺代码或缺摘要 A/B 关键词排除新方法，
+也不允许把摘要判断记成全文审查或高成本。
+
+本次从原 **5,007** 条未决中完成 **648** 条：**286** 条必要原文段落审查，以及 **362** 条逐篇标题/摘要终态。
+同一账本现累计 **547** 条原文决定，其中 **231** 条高成本完整实验不复现，均无自动重试或实现任务。
+本次原文决定有 **143** 条接受有界核心/协议但未实现，**90** 条完整实验因原始资源配置不复现，
+其余为专用资源不可用、领域外、应用报告不选或未通过工业线上门槛。没有训练、实验或 GPU 运行。
+
+- **优先来源**：[重点原文](batch-terminal-priority-reviews.json)及[第二批](batch-terminal-priority-followup-reviews.json)
+  核对作者归属与方法/实验配置。新确认 [Google 临床访前准备随机试验](batch-terminal-google-clinical-review.json)、
+  [Google Urania](batch-terminal-google-urania-review.json)和[含 Google 合作者的 SPELUNKA](https://arxiv.org/html/2610.23979v2)。
+  临床随机试验不是搜广推 CTR A/B；Urania 的私有对话分布分析不是新的图像生成模型。
+- **生产证据**：[七项生产线索](batch-terminal-production-reviews.json)及[另一项生产经验报告](batch-terminal-production-b-review.json)
+  分开记录随机 A/B、上线观测、轨迹回放和既有生产系统基线。
+  DoorDash 的 feature-flag A/B 用途不是本次清理算法的随机实验；Volvo 的新配置在访谈时尚未向测试员发布。
+- **重叠与尾段**：[晚索引第一批](batch-terminal-overlap-primary-reviews.json)、[第二批](batch-terminal-late-secondary-reviews.json)
+  完成剩余 **169** 条；[日终尾段](batch-terminal-tail-primary-reviews.json)完成剩余 **65** 条。
+  固定 HTML 不可用时补读官方固定版本 PDF，未把下载失败直接当作“高成本”。
+- **摘要终态与纠错**：[A 组](batch-terminal-scope-a.json)保留 **177** 条，[B 组](batch-terminal-scope-b.json)保留 **185** 条，
+  逐项有版本、捕获哈希、标题/摘要证据和理由。这些窗口级记录不进入全局实质审查账本。
+  独立复核撤回 **27** 条过度排除：[3 条已读原文重新判定](batch-terminal-insurance-review.json)，
+  [24 条恢复待审](batch-terminal-corrections-b-reviews.json)。不能把领域用途或负结果直接等同于“没有独立算法”。
+
+官方目录仍只声明实际核对范围：DeepMind 首页计数变化尚未对应到两个确定的论文身份，
+Google 年份过滤页及 Meta 入口的当前访问限制已在优先来源回执记录；不据此宣称全站穷尽。
+
 ## 哪些还没闭环
 
 以[去重登记和召回回执](review-inventory.json)的 `counts` 和 `pending_in_window_counts_by_title_abstract_route` 为准。
 登记保留待审 arXiv ID、版本、命中轨道和上海日期，并把原快照、晚索引与尾段待审分开统计。
-仍有 **4,773** 个窗口内身份、**169** 个晚索引条目、**65** 个日终补查条目未决。
+仍有 **4,359** 个窗口内身份未决；本轮已识别的晚索引与日终尾段待审均为 **0**。
 `pending_revisions` 已清空的是原先识别到的修订清单，不保证后来索引的修订也已审。
 `manual-review`、工业/优先原文队列、低信号候选与宽查询碰撞都是**待审状态**，不是自动拒收。
 晚索引重叠项与已有论文的版本变化单独列出。只有确实尝试过仍无法确认的来源才记例外，
 不拿它替代尚未审查的候选，也不把仅目录命中当作作者归属。
 
 本 PR 的账本只写入真正已有决定的身份，不批量把未读候选记为延期、成本过高或已审。
-完成剩余候选和例外对账后，再用现有审计推进统一水位。
+剩余中有大量明确的新算法或新基准，不能套用“无新算法的报告类不收录”批量关闭。
+本轮尚未获准把所有非优先 P2 改为“未选中即结案”，因此没有采用这种扩大口径。
+完成剩余候选和例外对账后，再用现有审计推进统一水位；**本次仍未推进至 11 月 9 日**。

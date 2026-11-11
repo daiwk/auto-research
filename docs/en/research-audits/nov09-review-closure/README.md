@@ -1,6 +1,6 @@
 # October 16–November 9 review reconciliation (in progress)
 
-<!-- source-sha256: f178e4737908afb9197e8f815e1f9607b2d3e70f7dd6dda5b073076e1b8b18f4 -->
+<!-- source-sha256: 68b6aa69c276a42b3106bcb8c614d7270f272460592299ad301888a00da058b2 -->
 
 This batch reconciles discovery coverage and completes selected priority source reviews.
 **Individual decisions are not yet complete for the entire window.** The official
@@ -57,7 +57,7 @@ Some first releases predate the window or belong to the end-of-day supplement, s
 ## Title and abstract follow-up
 
 This pass added **142** original-source dispositions, including **68** full experiments not reproduced due to cost.
-The same ledger now has **261** dispositions, including **141** cost closures.
+That snapshot had **261** dispositions, including **141** cost closures; the next section records the subsequent increment.
 
 The [in-window routing artifact](../../../research-audits/nov09-review-closure/continued-in-window-routing.json)
 reduces 22,220 captured observations to 4,941 versioned identities. The
@@ -84,15 +84,58 @@ were excluded based on their explicit subject and abstract, for this window only
   Original experiments with evidenced prohibitive costs are not reproduced and their reviews are complete.
   Affordable core components accepted for consideration were not implemented or run in this review.
 
+## November 11: batch dispositions under the approved selection rule
+
+The user approved a **not selected for this window** disposition when the title and abstract explicitly establish
+an application report, repeated evaluation, or perspective without a new independently reproducible algorithm or public benchmark.
+The [selection policy](../../../research-audits/nov09-review-closure/batch-terminal-policy.json) does not authorize rejecting a new method
+because of low priority, missing code, or absent A/B wording in its abstract. Abstract screening is not full-text or cost review.
+
+This increment resolved **648** of the original **5,007** pending identities: **286** reviews of necessary original-source sections
+and **362** individually evidenced title/abstract dispositions. The same ledger now contains **547** original-source decisions,
+including **231** full experiments not reproduced due to cost, with no automatic retry or implementation assignment.
+Of the new original-source decisions, **143** accept bounded cores or protocols without implementing them, and **90** decline
+the original full experiment based on its resource configuration. The remainder concern unavailable specialist resources,
+out-of-scope subjects, unselected application reports, or an unmet industrial live-evidence gate. No training, experiments, or GPU runs occurred.
+
+- **Priority sources:** The [first](../../../research-audits/nov09-review-closure/batch-terminal-priority-reviews.json) and
+  [second](../../../research-audits/nov09-review-closure/batch-terminal-priority-followup-reviews.json) sets verify affiliations and method/experiment configurations.
+  Newly verified sources include [Google's randomized pre-visit clinical trial](../../../research-audits/nov09-review-closure/batch-terminal-google-clinical-review.json),
+  [Google Urania](../../../research-audits/nov09-review-closure/batch-terminal-google-urania-review.json), and
+  [SPELUNKA with a Google coauthor](https://arxiv.org/html/2610.23979v2).
+  The clinical trial is not a recommender CTR A/B test; Urania's private-conversation distribution analysis is not a new image-generation model.
+- **Production evidence:** [Seven deployment leads](../../../research-audits/nov09-review-closure/batch-terminal-production-reviews.json)
+  and [another production experience report](../../../research-audits/nov09-review-closure/batch-terminal-production-b-review.json)
+  distinguish randomized A/B, post-launch observation, trace replay, and incumbent production baselines.
+  DoorDash's use of feature flags for A/B testing does not establish a randomized experiment for the cleanup method.
+  Volvo's new configuration had not been released to testers at interview time.
+- **Overlap and tail:** The [first](../../../research-audits/nov09-review-closure/batch-terminal-overlap-primary-reviews.json) and
+  [second late-index sets](../../../research-audits/nov09-review-closure/batch-terminal-late-secondary-reviews.json) resolve the remaining **169** records;
+  the [end-of-day set](../../../research-audits/nov09-review-closure/batch-terminal-tail-primary-reviews.json) resolves the remaining **65**.
+  Official fixed-version PDFs were read when HTML was unavailable. Failed downloads were not relabeled high cost.
+- **Metadata decisions and corrections:** [Group A](../../../research-audits/nov09-review-closure/batch-terminal-scope-a.json) retains **177** dispositions,
+  and [group B](../../../research-audits/nov09-review-closure/batch-terminal-scope-b.json) retains **185**.
+  Each preserves the version, capture hash, title/abstract witnesses, and individual reason. These window-only records do not enter the substantive global ledger.
+  Independent checks withdrew **27** overbroad exclusions: [three received original-source decisions](../../../research-audits/nov09-review-closure/batch-terminal-insurance-review.json),
+  and [24 returned to pending](../../../research-audits/nov09-review-closure/batch-terminal-corrections-b-reviews.json).
+  A specialist application or negative result alone does not establish the absence of an independent algorithm.
+
+Official directories retain bounded coverage claims. A changed DeepMind homepage count has not been mapped to two specific paper identities;
+current access limitations for Google's year-filtered page and Meta's entry point are recorded in the priority-source receipt.
+None establishes whole-site exhaustion.
+
 ## What remains open
 
 See `counts` and `pending_in_window_counts_by_title_abstract_route` in the [deduplicated inventory and receipts](../../../research-audits/nov09-review-closure/review-inventory.json).
 The inventory preserves pending arXiv IDs, versions, tracks, and Shanghai dates, and counts the frozen window, late-index overlap, and end-of-day supplement separately.
-**4,773** in-window identities, **169** late-index records, and **65** end-of-day records remain undecided.
+**4,359** in-window identities remain undecided. Both the identified late-index and end-of-day pending queues are now **zero**.
 An empty `pending_revisions` list closes the previously identified revisions, not revisions indexed later.
 Manual, industrial, priority, low-signal, and broad-query hits in this inventory are **pending**, not automatic rejections.
 Late-index overlap and revisions of known papers are tracked separately. Source exceptions require real retrieval attempts
 and do not replace unread candidates. Directory matches are not proof of authorship.
 
 Only completed dispositions enter the ledger. Unread candidates are not marked deferred, too costly, or reviewed.
+Many remaining records explicitly propose new algorithms or benchmarks; they cannot be closed under the rule for reports without new methods.
+No authorization has been received to close every non-priority P2 merely as unselected, so that broader policy has not been applied.
 The watermark can advance only after the remaining dispositions and exception reconciliation pass the existing audit.
+**This increment has not advanced the watermark to November 9.**

@@ -5,8 +5,8 @@ from hashlib import sha256
 import pytest
 
 from scripts.build_nov09_review_inventory import (
-    AUDIT, BATCH, END, HIGH_COST, MODES, ROOT, RUNS, TRACKS, closed_query, date_scope_rows, ledger_row, local_day,
-    read, verify_overlap_scope_text,
+    AUDIT, BATCH, CONTINUED_SCOPE_FILES, END, HIGH_COST, MODES, ROOT, RUNS, TRACKS, closed_query, date_scope_rows,
+    ledger_row, local_day, metadata_scope_rows, read, verify_overlap_scope_text,
 )
 
 
@@ -71,8 +71,9 @@ def test_scope_only_exclusions_never_enter_the_substantive_ledger():
     date_scope = read(AUDIT / "late-index-scope.json")
     abstract_scope = read(AUDIT / "abstract-scope-screen.json")
     date_excluded = set(date_scope["terminal_ids"])
-    additional_scope = read(AUDIT / "continued-in-window-scope.json")
-    abstract_excluded = {row["id"] for artifact in (abstract_scope, additional_scope) for row in artifact["records"]}
+    scopes = [abstract_scope, *(read(AUDIT / name) for name in CONTINUED_SCOPE_FILES if (AUDIT / name).is_file())]
+    abstract_excluded = {row["id"] for artifact in scopes for row in artifact["records"]}
+    assert sum(len(artifact["records"]) for artifact in scopes) == len(abstract_excluded)
     overlap_scope = read(AUDIT / "continued-late-tail-triage.json")
     late_excluded = {r["id"] for r in overlap_scope["records"] if r["lane"] == "late_index"
                      and r["disposition"] == "exclude_from_window_scope"}
@@ -140,7 +141,8 @@ def test_routing_covers_initial_pool_without_manufacturing_any_final_decision():
     ids = {row["id"] for row in route["records"]}
     assert len(ids) == len(route["records"])
     pending = {row[0] for group in report["pending_identities_by_local_first_publication"].values() for row in group}
-    scope = {row["id"] for row in followup_scope["records"]}
+    scope = {row["id"] for name in CONTINUED_SCOPE_FILES if (AUDIT / name).is_file()
+             for row in read(AUDIT / name)["records"]}
     terminal = set(report["primary_reviewed_ids"])
     assert ids == pending | scope | (ids & terminal)
     assert sum(report["pending_in_window_counts_by_title_abstract_route"].values()) == len(pending)
@@ -157,6 +159,55 @@ def test_overlap_scope_cannot_reuse_different_abstract():
     verify_overlap_scope_text(record, source)
     with pytest.raises(ValueError, match="matching title and abstract"):
         verify_overlap_scope_text(record, source | {"abstract": "A different measurement study"})
+
+
+def test_approved_window_selection_is_metadata_only_and_cannot_close_priority(monkeypatch):
+    artifact = read(AUDIT / "batch-terminal-scope-b.json")
+    record = next(row for row in artifact["records"] if row["decision"] == "not_selected_this_window")
+    identity = record["id"]
+    source = {key: record[key] for key in ("title", "published", "metadata_sha256")}
+    source |= {"rank": (record["revision"],), "abstract": record["abstract_witness"]}
+    scoped = artifact | {"records": [record]}
+    assert metadata_scope_rows(scoped, {identity: source}, {identity: set()}, artifact["source_receipts"]) == {identity}
+    with pytest.raises(ValueError, match="scope-only metadata"):
+        metadata_scope_rows(scoped, {identity: source}, {identity: {"Google"}}, artifact["source_receipts"])
+    with pytest.raises(ValueError, match="scope-only metadata"):
+        metadata_scope_rows(scoped | {"records": [record | {"fulltext_review_completed": True}]},
+                            {identity: source}, {identity: set()}, artifact["source_receipts"])
+    policy = read(AUDIT / "batch-terminal-policy.json")
+    monkeypatch.setattr("scripts.build_nov09_review_inventory.read", lambda _: policy | {
+        "authorization": policy["authorization"] | {"answer": "not authorized"},
+    })
+    with pytest.raises(ValueError, match="scoped authorization"):
+        metadata_scope_rows(scoped, {identity: source}, {identity: set()}, artifact["source_receipts"])
+
+
+def test_novel_methods_retracted_from_metadata_exclusion_are_not_lost():
+    scope_ids = {row["id"] for name in CONTINUED_SCOPE_FILES if (AUDIT / name).is_file()
+                 for row in read(AUDIT / name)["records"]}
+    # Counterfactual/conformal calibration, intent-constrained RL, and memory
+    # diagnostics are not mere application reports just because of their domain.
+    assert not scope_ids & {"2610.34459", "2610.24910", "2610.26433"}
+    report = read(AUDIT / "review-inventory.json")
+    pending = {row[0] for group in report["pending_identities_by_local_first_publication"].values() for row in group}
+    assert {"2610.34459", "2610.24910", "2610.26433"} <= pending | set(report["primary_reviewed_ids"])
+
+
+def test_risk_review_restores_ambiguous_mechanisms_instead_of_marking_them_done():
+    audit = read(AUDIT / "batch-terminal-corrections-b-reviews.json")
+    scoped_path = AUDIT / "batch-terminal-scope-b.json"
+    assert sha256(scoped_path.read_bytes()).hexdigest() == audit["corrected_scope_artifact_sha256"]
+    scoped = {row["id"] for row in read(scoped_path)["records"]}
+    withdrawn = [row for row in audit["retraction_audits"]
+                 if row["audit_action"] == "withdraw_terminal_restore_pending"]
+    assert len(withdrawn) == audit["withdrawn_count"] == 24
+    assert audit["reviews"] == []
+    report = read(AUDIT / "review-inventory.json")
+    pending = {row[0] for group in report["pending_identities_by_local_first_publication"].values() for row in group}
+    for row in withdrawn:
+        assert row["id"] not in scoped and row["id"] in pending
+        assert row["abstract_witness"] and row["reason"]
+        assert not row["fulltext_review_completed"] and not row["new_acceptance_or_high_cost_claim"]
 
 
 def test_bilingual_review_preserves_coverage_boundary():

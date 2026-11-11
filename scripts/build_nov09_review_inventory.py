@@ -35,6 +35,14 @@ PRIMARY_FILES = (
     "continued-industrial-reviews.json", "continued-late-tail-primary-reviews.json",
     "continued-method-primary-reviews.json", "continued-industrial-secondary-reviews.json",
     "continued-signal-primary-reviews.json", "continued-google-meta-third-pass-reviews.json",
+    "batch-terminal-priority-reviews.json", "batch-terminal-priority-followup-reviews.json",
+    "batch-terminal-google-clinical-review.json", "batch-terminal-google-urania-review.json",
+    "batch-terminal-production-reviews.json", "batch-terminal-production-b-review.json",
+    "batch-terminal-insurance-review.json", "batch-terminal-late-secondary-reviews.json",
+    "batch-terminal-overlap-primary-reviews.json", "batch-terminal-tail-primary-reviews.json",
+)
+CONTINUED_SCOPE_FILES = (
+    "continued-in-window-scope.json", "batch-terminal-scope-a.json", "batch-terminal-scope-b.json",
 )
 
 
@@ -217,7 +225,8 @@ def metadata_scope_rows(artifact: dict, observed: dict[str, dict], priorities: d
     for record in artifact["records"]:
         identity = record["id"]
         row = observed[identity]
-        if (identity in result or priorities[identity] or record["decision"] != "out_of_scope"
+        if (identity in result or priorities[identity]
+                or record["decision"] not in {"out_of_scope", "not_selected_this_window"}
                 or record["review_done"] is not True or record["fulltext_review_completed"] is not False
                 or record["automatic_retry"] is not False or record["automatic_implementation_queue"] is not False
                 or not all(record.get(key) for key in ("metadata_sha256", "title_witness", "abstract_witness", "reason"))
@@ -227,6 +236,12 @@ def metadata_scope_rows(artifact: dict, observed: dict[str, dict], priorities: d
                 or record["title_witness"].casefold() not in row["title"].casefold()
                 or record["abstract_witness"].casefold() not in row["abstract"].casefold()):
             raise ValueError(f"{identity}: invalid or stale scope-only metadata")
+        if record["decision"] == "not_selected_this_window":
+            policy = read(AUDIT / "batch-terminal-policy.json")
+            if (policy["terminal_selection_decision"] != record["decision"]
+                    or policy["authorization"]["answer"] != "允许按此标准结案"
+                    or policy["window"] != {"start": START.isoformat(), "end": END.isoformat()}):
+                raise ValueError(f"{identity}: window selection lacks its scoped authorization")
         result.add(identity)
     return result
 
@@ -445,10 +460,13 @@ def inventory(source_dir: Path, reviewed: dict[str, dict], *, as_of: str) -> dic
         raise ValueError("date-scope captures do not match their pinned sources")
     date_excluded = date_scope_rows(late_scope, rows, as_of=as_of)
     metadata_excluded = metadata_scope_rows(read(AUDIT / "abstract-scope-screen.json"), rows, priorities, capture_hashes)
-    new_scope = metadata_scope_rows(read(AUDIT / "continued-in-window-scope.json"), rows, priorities, capture_hashes)
-    if new_scope & (metadata_excluded | reviewed.keys()):
-        raise ValueError("in-window scope exclusions overlap an existing decision")
-    metadata_excluded |= new_scope
+    for filename in CONTINUED_SCOPE_FILES:
+        if not (AUDIT / filename).exists():
+            continue
+        new_scope = metadata_scope_rows(read(AUDIT / filename), rows, priorities, capture_hashes)
+        if new_scope & (metadata_excluded | reviewed.keys()):
+            raise ValueError(f"{filename}: in-window scope exclusions overlap an existing decision")
+        metadata_excluded |= new_scope
     overlap_hashes = capture_hashes | {f"llm-{r['month']}-replacement.json": r["source_sha256"] for r in replacements}
     overlap_hashes["nov09-tail-all-categories.atom"] = read(
         AUDIT / "nov09-tail-source-receipt.json",
@@ -546,6 +564,8 @@ def inventory(source_dir: Path, reviewed: dict[str, dict], *, as_of: str) -> dic
             "late_index": "late-index-scope.json", "in_window_metadata": "abstract-scope-screen.json",
             "continued_in_window_metadata": "continued-in-window-scope.json",
             "continued_overlap_metadata": "continued-late-tail-triage.json",
+            "batch_terminal_metadata": [f for f in CONTINUED_SCOPE_FILES if f.startswith("batch-terminal-")
+                                        and (AUDIT / f).exists()],
         },
         "in_window_title_abstract_routing": routes_path.name,
         "pending_in_window_counts_by_title_abstract_route": dict(sorted(remaining_routes.items())),
