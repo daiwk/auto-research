@@ -1,6 +1,15 @@
 # Unified roadmap and TODOs
 
-<!-- source-sha256: 7cd41510cbc9c36cbaeb05c6dc77084afc79ba5aadb6d2d348d0bb47874f046b -->
+## November 9 selection-review closeout (policy confirmed November 11)
+
+The [window closeout and exact register](research-audits/nov09-review-closure/README.md) advance the review watermark to **November 9**.
+The user permits title/abstract-screened P2 candidates to close as outside this window's focus; **not every algorithm has been verified or implemented**.
+Google/Meta, possible production A/B, and conflicting metadata retain the original-source gate. Evidenced high-cost full experiments are not reproduced; no training is launched.
+Selection dispositions, substantive method/cost decisions, and implementation evidence remain independent, and new revisions or priority evidence can reopen selection.
+The next scan overlaps from **November 8** through its new cutoff, prioritizing Google/Meta and applying the cost gate to suitable new papers.
+The batch descriptions below retain their historical snapshots; older watermark text does not override the [current unified state](../paper-discovery-watermark.json).
+
+<!-- source-sha256: 4e81de7192d9e1dcac87711704f132488ecd0602439bfa7e96d820936fde9d60 -->
 
 [简体中文](../research-roadmap.md)
 
@@ -46,7 +55,7 @@
 Meta's Baseline and Incremental/RPL and Google collaboration OO-Harness take priority. Four CUDA components completed real A100 verification with three seeds.
 All full experiments are explicitly not reproduced (review DONE), with no automatic training TODO. This does not close the entire October 16–21 window; see the next section for the common watermark.
 
-## Reviewed through 2026-10-15: Coverage and archived exceptions
+## Historical snapshot: reviewed through 2026-10-15
 
 The [unified status](../paper-discovery-watermark.json) defines the current review watermark and exceptions.
 [Review closeout](research-audits/oct15-review-closure/README.md) records four tracks, two channels, Google/Meta/DeepMind sources, cost dispositions, and exceptions.

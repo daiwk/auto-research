@@ -43,8 +43,10 @@ def audit(strict: bool = False, pending_artifacts: tuple[Path, ...] = ()) -> lis
             artifact = json.loads(artifact_path.read_text(encoding="utf-8"))
             pending = [
                 item["arxiv_id"] for item in artifact.get("candidates", [])
-                if item.get("repository_status") == "new"
-                and item.get("arxiv_id") not in reviewed_ids
+                if item.get("selection_reopened") is True or (
+                    item.get("repository_status") == "new"
+                    and item.get("arxiv_id") not in reviewed_ids
+                )
             ]
             if pending:
                 errors.append(f"{artifact_path}: unreviewed P0/P1 candidates: {pending}")

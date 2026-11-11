@@ -10759,6 +10759,16 @@
         "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
       }
     ],
+    "src/auto_research/discovery.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_window_selection_records",
+        "line": 176,
+        "qualified_name": "_window_selection_records",
+        "expression": "policy.get('authorization', {}).get('answer')",
+        "fingerprint": "b426d20e11dcd7345085728d538e763b14855254476a2abb25216c051acc84ff"
+      }
+    ],
     "src/auto_research/discovery_announcements.py": [
       {
         "kind": "state_update_not_execution_evidence",
@@ -10767,6 +10777,16 @@
         "qualified_name": "_BulletinParser.handle_endtag",
         "expression": "self.total_expected += total",
         "fingerprint": "01c8a621240982a0610bfe92cae9da82ab7c17431bdeaca3294a3a414808a659"
+      }
+    ],
+    "src/auto_research/discovery_watermark.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "audit_review_watermark",
+        "line": 103,
+        "qualified_name": "audit_review_watermark",
+        "expression": "selection_policy.get('authorization', {}).get('answer')",
+        "fingerprint": "9f04c1d06fce780adf8e5ca7a935b4e8f3e286a5223aefae31b8c8d527adacbc"
       }
     ],
     "src/auto_research/evolution/composable.py": [

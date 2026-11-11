@@ -1,4 +1,5 @@
 import json
+from hashlib import sha256
 
 import pytest
 
@@ -163,6 +164,82 @@ def test_accepted_candidate_still_requires_full_text(tmp_path):
     register["papers"][0]["reviews"][0]["fulltext_review_completed"] = False
     _write(tmp_path, "register.json", register)
     assert any("full text" in e for e in audit_review_watermark(tmp_path))
+
+
+def _p2_selection_fixture(root):
+    state = _fixture(root)
+    semantics = "selection-screening-with-protected-primary-review"
+    state.update(review_semantics=semantics, selection_review_complete=True, method_review_complete=False,
+                 selection_policy="p2-policy.json")
+    policy = {"authorization": {"answer": "允许 P2 选题级结案"}, "window": state["window"],
+              "always_protected_identities": {}}
+    _write(root, "p2-policy.json", policy)
+    row = {"id": "2610.00001", "revision": 1, "priority": "P2", "selection_review_done": True,
+           "method_review_completed": False, "fulltext_review_completed": False,
+           "originality_not_rejected": True, "high_cost": False, "implementation": False,
+           "automatic_implementation_queue": False, "metadata_sha256": "a" * 64,
+           "title_witness": "A new method", "abstract_witness": "Proposes an algorithm"}
+    _write(root, "p2-selection-screen.json", {"records": [row], "protected_records": [],
+           "policy_sha256": sha256((root / "docs/p2-policy.json").read_bytes()).hexdigest()})
+    paper = row | {"status": "not_selected_p2", "protected_priority_signal": False,
+                   "protected_production_signal": False, "reason": "Not selected for this bounded research focus; novelty unassessed."}
+    _write(root, "register.json", {"candidate_review_complete": True, "review_semantics": semantics,
+           "selection_review_complete": True, "method_review_complete": False, "papers": [paper]})
+    _write(root, "paper-discovery-watermark.json", state)
+
+
+def test_user_authorized_p2_selection_closes_screening_not_method_verification(tmp_path):
+    _p2_selection_fixture(tmp_path)
+    assert audit_review_watermark(tmp_path) == []
+
+
+@pytest.mark.parametrize("mutation,expected", [
+    ("no_authorization", "authorization"), ("method_verified", "method verification"),
+    ("protected", "priority/production"), ("wrong_priority", "inflated"),
+    ("cost", "cost"), ("metadata", "pinned metadata"), ("implementation", "implementation"),
+    ("stale_policy", "stale policy"),
+    ("nonwaivable", "nonwaivable"), ("paper_implemented", "implementation"),
+    ("official_priority", "priority source lacks original"),
+])
+def test_p2_selection_cannot_erase_priority_or_inflate_evidence(tmp_path, mutation, expected):
+    _p2_selection_fixture(tmp_path)
+    state = json.loads((tmp_path / "docs/paper-discovery-watermark.json").read_text())
+    register = json.loads((tmp_path / "docs/register.json").read_text())
+    screen = json.loads((tmp_path / "docs/p2-selection-screen.json").read_text())
+    if mutation == "no_authorization":
+        policy = json.loads((tmp_path / "docs/p2-policy.json").read_text())
+        policy["authorization"]["answer"] = "not approved"
+        _write(tmp_path, "p2-policy.json", policy)
+    elif mutation == "method_verified":
+        state["method_review_complete"] = True
+    elif mutation == "protected":
+        screen["protected_records"] = [{"id": "2610.00001"}]
+    elif mutation == "wrong_priority":
+        register["papers"][0]["priority"] = "P0"
+    elif mutation == "cost":
+        screen["records"][0]["high_cost"] = True
+    elif mutation == "metadata":
+        register["papers"][0]["metadata_sha256"] = "b" * 64
+    elif mutation == "implementation":
+        screen["records"][0]["implementation"] = True
+    elif mutation == "nonwaivable":
+        screen["records"][0]["positive_signal_matches"] = {"official_source_domain": "research.google"}
+    elif mutation == "paper_implemented":
+        register["papers"][0]["implementation_status"] = "implemented"
+    elif mutation == "official_priority":
+        official = json.loads((tmp_path / "docs/Google.json").read_text())
+        official["records"][0].update(review_status="reviewed", arxiv_ids=["2610.00001"])
+        _write(tmp_path, "Google.json", official)
+        archive = json.loads((tmp_path / "docs/exceptions.json").read_text())
+        archive["entries"] = [r for r in archive["entries"] if r["organization"] != "Google"]
+        archive["record_count"] = len(archive["entries"])
+        _write(tmp_path, "exceptions.json", archive)
+    else:
+        screen["policy_sha256"] = "0" * 64
+    _write(tmp_path, "paper-discovery-watermark.json", state)
+    _write(tmp_path, "register.json", register)
+    _write(tmp_path, "p2-selection-screen.json", screen)
+    assert any(expected in error for error in audit_review_watermark(tmp_path))
 
 
 def _candidate_source_exception(root):

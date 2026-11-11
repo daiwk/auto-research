@@ -1,5 +1,14 @@
 # 统一后续路线图与 TODO
 
+## 2026-11-09 选题审查闭环（11 月 11 日确认口径）
+
+[本窗口闭环与精确清单](research-audits/nov09-review-closure/README.md)将审查水位推进至 **11 月 9 日**。
+用户允许 P2 标题摘要筛查后按“本窗口未纳入重点”结案；**不表示每篇算法都已核验或实现**。
+Google/Meta、疑似生产 A/B 和冲突元数据仍保留原文门槛；高成本完整实验有据标注不复现，不训练。
+选题终态、实质性方法/成本决定和实现证据独立保存，新版本或独立优先证据可重开。
+下一轮从 **11 月 8 日**重叠至新的截止时间，优先 Google/Meta，再按成本门槛处理新增合适论文。
+以下批次描述均保留当时快照，旧水位文字不覆盖[当前统一状态](paper-discovery-watermark.json)。
+
 ## 2026-11-04 新公告与双语学习资料
 
 [本轮8篇固定范围](research-audits/nov04-components/README.md)：Google XLA/TPU仅高成本资料收录，Meta合作Strategist与WeSearch优先交付；另有ProLand、GAVAGAI、SpecOPD、RLiD、AgentHeal，共7个低成本L1组件。4项CUDA在真实A100三seed核验，3项纯CPU；完整高成本实验不复现（审查DONE），不提升为模型能力或Evolve证据。32条新问答、7个专题深读和英文版同批更新。实际最新公告为11月3日；7篇相对前轮快照新首发、1篇近期补漏，未审线索单列，统一审查水位不变。
@@ -42,7 +51,7 @@
 Meta的Baseline and Incremental/RPL、Google合作OO-Harness优先；四个CUDA组件已在真实A100完成三seed验证。
 完整实验全部明确不复现、审查DONE，不追加自动训练TODO；这不等于10月16–21全窗口已审结，统一审查水位仍见下节。
 
-## 审查截至 2026-10-15：覆盖范围与归档例外
+## 历史快照：审查截至 2026-10-15
 
 当前审查水位与例外以[统一状态](paper-discovery-watermark.json)为准；
 [本轮审查闭环](research-audits/oct15-review-closure/README.md)记录四轨两通道、Google/Meta/DeepMind来源、成本终态与例外。

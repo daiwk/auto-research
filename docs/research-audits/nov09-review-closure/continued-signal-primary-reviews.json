@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "scope": "Exact-title or abstract institution and production signals, checked against fixed author and experiment sections.",
+  "reviews": [
+    {
+      "id": "2610.22731",
+      "revision": 2,
+      "published": "2026-10-15T23:04:55Z",
+      "title": "Accelerated Dataflow: scaling inference in streaming data analytics with efficiency",
+      "track": "foundation-model",
+      "priority": "P0",
+      "source_url": "https://arxiv.org/html/2610.22731v2",
+      "locations": [
+        "Author affiliations",
+        "§4",
+        "§5.1.1–5.1.3",
+        "Table 2"
+      ],
+      "reason": "作者栏明确为 Google。用异构工作池和前缀批处理共同控制流式 LLM 推理扩缩容；受控流量压测不等同于产品 A/B。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.22731v2",
+        "basis": "verified_original_experiment_configuration",
+        "scale": "Dataflow Pub/Sub→BigQuery 与 Flink，T4 工作者配置上限 100，纯 GPU 对照峰值实际分配 25 张；以 2 小时周期并放大到十倍流量压测。",
+        "available_resource": "one A100 or A30, or a local Mac",
+        "cost_type": "托管流处理和多 GPU 自动伸缩"
+      }
+    },
+    {
+      "id": "2610.31898",
+      "revision": 1,
+      "published": "2026-10-22T20:52:22Z",
+      "title": "StateBridge: Phase- and Track-Grounded Reasoning for Synthetic-to-Real Traffic Video Captioning and VQA",
+      "track": "foundation-model",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.31898v1",
+      "locations": [
+        "§4",
+        "§5.1–5.4",
+        "Tables 1–3"
+      ],
+      "reason": "把交通事件阶段与目标轨迹作为视觉推理证据，融合一致事实；真实交通视频是榜单推理输入，不是线上用户 A/B。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.31898v1",
+        "basis": "verified_original_experiment_configuration",
+        "scale": "14,198 条合成监督样本，多个 Qwen3-VL-8B rank-64 LoRA 每次三轮，另有 9B/8B 模型变体；官方隐藏评测提交含 19,624 个 VQA 条目。",
+        "available_resource": "one A100 or A30, or a local Mac",
+        "cost_type": "多视频适配器训练与榜单评测"
+      }
+    },
+    {
+      "id": "2610.33108",
+      "revision": 1,
+      "published": "2026-10-22T19:01:06Z",
+      "title": "ToolContractGate: Versioned Trusted Contracts for Drift-Safe Agent Tool Invocation",
+      "track": "agent",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.33108v1",
+      "locations": [
+        "§III",
+        "§V",
+        "§VI-A",
+        "§VII"
+      ],
+      "reason": "核对工具请求是否符合已绑定的版本、权限、参数和审计契约。原文有 45 个合成契约判定样例和固定代码；可做防御性离线校验，不宣称生产验证或测试真实系统。",
+      "decision": "accepted",
+      "resolution": "accepted_core_not_implemented_this_run",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2610.34422",
+      "revision": 2,
+      "published": "2026-10-25T16:21:56Z",
+      "title": "From GPU to TPU with Coding Agents: What Works, What Fails, and What It Costs?",
+      "track": "agent",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.34422v2",
+      "locations": [
+        "Author affiliations",
+        "§III–IV",
+        "Fig. 2"
+      ],
+      "reason": "逐级检查迁移能否运行、实际用到目标设备、是否保持数值和训练目的；仅训练跑通不是一致性证据。作者为高校，Google Cloud 是使用的 TPU 服务。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.34422v2",
+        "basis": "verified_original_experiment_configuration",
+        "scale": "148 个项目组成集合、其中 10 个用 Claude Code 迁移；需原 GPU 和 TPU v5e 单/四芯片对照，LoRA+ 例含每配置 36,816 步。",
+        "available_resource": "one A100 or A30, or a local Mac",
+        "cost_type": "异构硬件和闭源 Agent 对照"
+      }
+    },
+    {
+      "id": "2610.35468",
+      "revision": 1,
+      "published": "2026-10-26T14:01:10Z",
+      "title": "Multi-Horizon Future Discovery for Physics-Informed Exploration",
+      "track": "agent",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.35468v1",
+      "locations": [
+        "Author affiliations",
+        "§3.2",
+        "§4.1–4.2",
+        "Appendix C.1"
+      ],
+      "reason": "用多时间跨度的同一 episode 对比潜变量给探索奖励，再以有界 Hamiltonian 变化调节。DeepMind 只用于说明 Control Suite，不是作者归属。可单独检验奖励算子，不宣称复现全部 SAC/PPO 曲线。",
+      "decision": "accepted",
+      "resolution": "accepted_core_not_implemented_this_run",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2610.36355",
+      "revision": 1,
+      "published": "2026-10-26T22:19:37Z",
+      "title": "WAKMan: Workload Aware KVCache Manager",
+      "track": "foundation-model",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.36355v1",
+      "locations": [
+        "Author affiliations",
+        "§2",
+        "§3.1–3.2",
+        "Table 1"
+      ],
+      "reason": "在 CPU 上用过去窗口的 block hash 分别回放 LRU 和 S3FIFO，并在下一窗口选择命中率更高的一种。原文只跑合成负载，不把文字所说的实时切换当生产证据。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.36355v1",
+        "basis": "verified_original_experiment_configuration",
+        "scale": "原文 Gemma-4-26B-A4B BF16 在四张 96 GB RTX PRO 6000 上做 vLLM 张量并行；回放 20 种混合负载，每个 trace 一小时。",
+        "available_resource": "one A100 or A30, or a local Mac",
+        "cost_type": "多卡推理和服务回放"
+      }
+    },
+    {
+      "id": "2610.42100",
+      "revision": 1,
+      "published": "2026-10-30T17:43:04Z",
+      "title": "Towards Understanding the Impact of Plasticity Loss on Reinforcement Learning in Stochastic Environments",
+      "track": "agent",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.42100v1",
+      "locations": [
+        "Author affiliations",
+        "§4",
+        "§5.1–5.5",
+        "Appendix A"
+      ],
+      "reason": "以当前 critic 预测加逐样本偏移构造探针目标，跨时间比较相近初始误差的可塑性；DMC 上观察重置与噪声的影响。DeepMind 是基准，不是作者；可做小型诊断，不算复现 DMC 训练。",
+      "decision": "accepted",
+      "resolution": "accepted_core_not_implemented_this_run",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.09625",
+      "revision": 1,
+      "published": "2026-11-06T15:45:54Z",
+      "title": "Encoding Memory in World Models with Test-Time Model-Based Reinforcement Learning",
+      "track": "agent",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2611.09625v1",
+      "locations": [
+        "Author affiliations",
+        "§3.1",
+        "§4",
+        "Appendix A.4, Table 12"
+      ],
+      "reason": "测试时以当前 episode 的梯度更新把观察写入世界模型权重，区分参数内记忆与上下文记忆。DeepMind Control 是测试基准，作者为维尔茨堡大学。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2611.09625v1",
+        "basis": "verified_original_experiment_configuration",
+        "scale": "Memory Maze 多模型每任务 1 亿到 4 亿环境步；R2I 需要两张 L40、每任务 28 天，另有多种基线和 Atari/DMC。",
+        "available_resource": "one A100 or A30, or a local Mac",
+        "cost_type": "长程多任务强化学习"
+      }
+    }
+  ]
+}

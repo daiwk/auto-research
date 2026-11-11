@@ -1,0 +1,2206 @@
+{
+  "schema_version": 1,
+  "window": {
+    "start": "2026-10-16",
+    "end": "2026-11-09",
+    "timezone": "Asia/Shanghai"
+  },
+  "input_inventory_commit": "aedf2d24",
+  "scope": "Priority-protection checks of all 4,359 pending records using frozen raw title/abstract, exact author recall and raw priority flags, not route labels alone. Bounded lexical clarifications do not establish absence of unknown affiliations.",
+  "raw_pending_count": 4359,
+  "raw_priority_flagged_pending": 0,
+  "raw_company_or_strong_deployment_text_matches": 125,
+  "earlier_rough_estimate_corrected": "125 is the exact raw-regex union; the earlier approximate 142 was not a census.",
+  "author_recall": {
+    "confirmed_priority_papers_initial": 17,
+    "all_coauthor_names_initial": 164,
+    "pending_author_overlap_ids": [
+      "2610.27202",
+      "2610.29049",
+      "2610.29203",
+      "2610.33956",
+      "2610.36469",
+      "2610.37290",
+      "2610.40578",
+      "2611.00586"
+    ],
+    "warning": "Coauthorship is recall only, not affiliation.",
+    "additional_exact_meta_names": 14,
+    "additional_exact_meta_name_hits": [
+      "2611.01647",
+      "2611.04515"
+    ],
+    "newest_meta_names": 8,
+    "newest_meta_name_hits": [
+      "2611.09291"
+    ],
+    "current_confirmed_google_addition": "2610.40578"
+  },
+  "counts": {
+    "metadata_clarifications": 113,
+    "hard_protected": 49,
+    "original_reviews_this_artifact_owner": 14
+  },
+  "protected_records": [
+    {
+      "id": "2610.23530",
+      "owner": "root-additional-production",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-additional-production-reviews.json"
+    },
+    {
+      "id": "2610.25298",
+      "owner": "root-additional-production",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-additional-production-reviews.json"
+    },
+    {
+      "id": "2610.26168",
+      "owner": "priority-primary",
+      "reason": "bounded original reviewed separately; consume p2-priority-primary-reviews.json",
+      "primary_review_artifact": "p2-priority-primary-reviews.json"
+    },
+    {
+      "id": "2610.27202",
+      "owner": "priority-primary",
+      "reason": "bounded original reviewed separately; consume p2-priority-primary-reviews.json",
+      "primary_review_artifact": "p2-priority-primary-reviews.json"
+    },
+    {
+      "id": "2610.27850",
+      "owner": "scope-a-industrial",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-industrial-primary-reviews.json"
+    },
+    {
+      "id": "2610.28624",
+      "owner": "root-additional-production",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-additional-production-reviews.json"
+    },
+    {
+      "id": "2610.29049",
+      "owner": "priority-primary",
+      "reason": "bounded original reviewed separately; consume p2-priority-primary-reviews.json",
+      "primary_review_artifact": "p2-priority-primary-reviews.json"
+    },
+    {
+      "id": "2610.29203",
+      "owner": "priority-primary",
+      "reason": "bounded original reviewed separately; consume p2-priority-primary-reviews.json",
+      "primary_review_artifact": "p2-priority-primary-reviews.json"
+    },
+    {
+      "id": "2610.29228",
+      "owner": "scope-a-industrial",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-industrial-primary-reviews.json"
+    },
+    {
+      "id": "2610.29338",
+      "owner": "root-additional-production",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-additional-production-reviews.json"
+    },
+    {
+      "id": "2610.29777",
+      "owner": "root-additional-production",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-additional-production-reviews.json"
+    },
+    {
+      "id": "2610.30769",
+      "owner": "scope-a-industrial",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-industrial-primary-reviews.json"
+    },
+    {
+      "id": "2610.32151",
+      "owner": "root-additional-production",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-additional-production-reviews.json"
+    },
+    {
+      "id": "2610.32380",
+      "owner": "priority-primary",
+      "reason": "bounded original reviewed separately; consume p2-priority-primary-reviews.json",
+      "primary_review_artifact": "p2-priority-primary-reviews.json"
+    },
+    {
+      "id": "2610.33956",
+      "owner": "priority-primary",
+      "reason": "bounded original reviewed separately; consume p2-priority-primary-reviews.json",
+      "primary_review_artifact": "p2-priority-primary-reviews.json"
+    },
+    {
+      "id": "2610.34402",
+      "owner": "scope-a-industrial",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-industrial-primary-reviews.json"
+    },
+    {
+      "id": "2610.34871",
+      "owner": "root-additional-production",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-additional-production-reviews.json"
+    },
+    {
+      "id": "2610.35765",
+      "owner": "scope-a-industrial",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-industrial-primary-reviews.json"
+    },
+    {
+      "id": "2610.36287",
+      "owner": "scope-a-industrial",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-industrial-primary-reviews.json"
+    },
+    {
+      "id": "2610.36329",
+      "owner": "root-additional-production",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-additional-production-reviews.json"
+    },
+    {
+      "id": "2610.36383",
+      "owner": "root-additional-production",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-additional-production-reviews.json"
+    },
+    {
+      "id": "2610.36469",
+      "owner": "priority-primary",
+      "reason": "bounded original reviewed separately; consume p2-priority-primary-reviews.json",
+      "primary_review_artifact": "p2-priority-primary-reviews.json"
+    },
+    {
+      "id": "2610.36561",
+      "owner": "priority-primary",
+      "reason": "bounded original reviewed separately; consume p2-priority-primary-reviews.json",
+      "primary_review_artifact": "p2-priority-primary-reviews.json"
+    },
+    {
+      "id": "2610.37281",
+      "owner": "scope-a-industrial",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-industrial-primary-reviews.json"
+    },
+    {
+      "id": "2610.37290",
+      "owner": "priority-primary",
+      "reason": "bounded original reviewed separately; consume p2-priority-primary-reviews.json",
+      "primary_review_artifact": "p2-priority-primary-reviews.json"
+    },
+    {
+      "id": "2610.40182",
+      "owner": "scope-a-industrial",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-industrial-primary-reviews.json"
+    },
+    {
+      "id": "2610.40578",
+      "owner": "priority-primary",
+      "reason": "bounded original reviewed separately; consume p2-priority-primary-reviews.json",
+      "primary_review_artifact": "p2-priority-primary-reviews.json"
+    },
+    {
+      "id": "2610.41674",
+      "owner": "scope-a-industrial",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-industrial-primary-reviews.json"
+    },
+    {
+      "id": "2610.41911",
+      "owner": "scope-a-industrial",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-industrial-primary-reviews.json"
+    },
+    {
+      "id": "2611.00384",
+      "owner": "priority-primary",
+      "reason": "bounded original reviewed separately; consume p2-priority-primary-reviews.json",
+      "primary_review_artifact": "p2-priority-primary-reviews.json"
+    },
+    {
+      "id": "2611.00586",
+      "owner": "priority-primary",
+      "reason": "bounded original reviewed separately; consume p2-priority-primary-reviews.json",
+      "primary_review_artifact": "p2-priority-primary-reviews.json"
+    },
+    {
+      "id": "2611.01647",
+      "owner": "scope-a-industrial",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-industrial-primary-reviews.json"
+    },
+    {
+      "id": "2611.01695",
+      "owner": "scope-a-industrial",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-industrial-primary-reviews.json"
+    },
+    {
+      "id": "2611.01786",
+      "owner": "scope-a-industrial",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-industrial-primary-reviews.json"
+    },
+    {
+      "id": "2611.01836",
+      "owner": "priority-primary",
+      "reason": "bounded original reviewed separately; consume p2-priority-primary-reviews.json",
+      "primary_review_artifact": "p2-priority-primary-reviews.json"
+    },
+    {
+      "id": "2611.02019",
+      "owner": "scope-a-industrial",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-industrial-primary-reviews.json"
+    },
+    {
+      "id": "2611.02040",
+      "owner": "scope-a-industrial",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-industrial-primary-reviews.json"
+    },
+    {
+      "id": "2611.03113",
+      "owner": "scope-a-industrial",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-industrial-primary-reviews.json"
+    },
+    {
+      "id": "2611.04459",
+      "owner": "scope-a-industrial",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-industrial-primary-reviews.json"
+    },
+    {
+      "id": "2611.04483",
+      "owner": "root-additional-production",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-additional-production-reviews.json"
+    },
+    {
+      "id": "2611.04515",
+      "owner": "scope-a-industrial",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-industrial-primary-reviews.json"
+    },
+    {
+      "id": "2611.04772",
+      "owner": "root-additional-production",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-additional-production-reviews.json"
+    },
+    {
+      "id": "2611.04867",
+      "owner": "root-additional-production",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-additional-production-reviews.json"
+    },
+    {
+      "id": "2611.06123",
+      "owner": "scope-a-industrial",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-industrial-primary-reviews.json"
+    },
+    {
+      "id": "2611.06610",
+      "owner": "scope-a-industrial",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-industrial-primary-reviews.json"
+    },
+    {
+      "id": "2611.07851",
+      "owner": "scope-a-industrial",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-industrial-primary-reviews.json"
+    },
+    {
+      "id": "2611.08092",
+      "owner": "priority-primary",
+      "reason": "bounded original reviewed separately; consume p2-priority-primary-reviews.json",
+      "primary_review_artifact": "p2-priority-primary-reviews.json"
+    },
+    {
+      "id": "2611.08572",
+      "owner": "scope-a-industrial",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-industrial-primary-reviews.json"
+    },
+    {
+      "id": "2611.09291",
+      "owner": "root-additional-production",
+      "reason": "retained exact protected identity; only separate original-source decision may close it",
+      "primary_review_artifact": "p2-additional-production-reviews.json"
+    }
+  ],
+  "clarifications": [
+    {
+      "id": "2610.22529",
+      "revision": 1,
+      "metadata_sha256": "1e540810028b785eecda557c1ac0d9ae9dffa0660cd627cddbf0b195b02fc8fa",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Pearl-Chat: Engineering a native Luganda language model from first principles in JAX and Flax NNX",
+      "abstract_witness": "(nnx.split and nnx.merge), deterministic resumable data streaming via Google Grain, and SPMD tensor parallelism using jax.sharding.Mesh. We introduce a byte-level byte-pair encoding (BPE) subword tokenizer trained from scratch on curated Luganda corpora ($V = 8,192$), achievi",
+      "reason": "Google 修饰 Grain/JAX 软件生态，不是作者栏归属。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.22538",
+      "revision": 1,
+      "metadata_sha256": "21791dc6bde00ecb9ad17f42302dcef3e8bad66a85c04a1cc2b93f04b2e0c5ed",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "Are Large Reasoning Models Good Everyday Reasoners? A Comparison with Non-Reasoning Models on Logical Reasoning Tasks",
+      "abstract_witness": "rmance on mathematical and scientific benchmarks and are increasingly deployed in real-world applications. However, their ability to perform \\textit{everyday logical reasoning}, which often departs from textbook formal logic, remains underexplored. In this work, we systematically ",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.22684",
+      "revision": 1,
+      "metadata_sha256": "899d1d96ac3d7f3f62dbc3db2ebd91f56dd7172d3c192b0d6f03644cbfb5748c",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "AlphaBet: Reinforcement Learning for LLM Event Forecasting Agents",
+      "abstract_witness": "Forecasting an unresolved event requires finding relevant evidence and deciding how strongly it supports each outcome. Yet outcome-based train",
+      "reason": "AlphaBet 是本文预测 Agent 方法名，不是 Alphabet 公司。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.22951",
+      "revision": 1,
+      "metadata_sha256": "f1bffc2f39bb58d9fc8aec1d029f188bf90cecd016de3c4ac67cb82f599b8411",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "MambaAct: Efficient Mamba Action Experts for Flow-Matching Vision-Language-Action Models",
+      "abstract_witness": "flow-matching denoising latency by $64.8\\%$ on LIBERO and $58.8\\%$ in real-world deployment, while improving mean LIBERO success by $1.08$ percentage points across three independent fine-tuning seeds and maintaining gains on LIBERO-Plus and real-world benchmarks. Our code and model weights ",
+      "reason": "real-world deployment 是 VLA 机器人实机延迟/成功率实验，不是在线商业 A/B。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.23062",
+      "revision": 1,
+      "metadata_sha256": "0625f4d2966256e9fde42047f52a137456dbc624583e9a8836853d19e7fd1cf9",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "ParetoChat: An LLM-Based Interface for Interactive Multi-Objective Optimization",
+      "abstract_witness": "Multi-objective optimization models are often deployed in settings where decision makers (DMs) must balance some conflicting criteria. In practice, however, stakeholders must translate their qualitative preferences between different criteria into numerical ",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.23144",
+      "revision": 2,
+      "metadata_sha256": "3298da84f7b04e8501a8186a4d9e07c872bf2a47b6ae2b220c8ff83a9ced4cae",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "From GAN-Based Models to GPT-5: A Taxonomy-Guided Study of Human Performance in Detecting Deepfake Face Images",
+      "abstract_witness": "oth general-purpose and model-specific training materials. Through an online experiment ($n = 524$), we examined human performance in detecting deepfake face images and evaluated training efficacy across five representative generative models: three GAN-based, one diffusion-based, and on",
+      "reason": "online experiment 是524名人类的深伪识别受试实验，不是新模型生产流量 A/B。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.23446",
+      "revision": 1,
+      "metadata_sha256": "d1c1befc8beb60565a07e2f58c60386f5c426fcdbbeff52a578928de20a095b6",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "\"You\" Is Not Toxic: How LLM Labelers Rewrite the Web's Conversation Laws",
+      "abstract_witness": "toxicity rises in longer and deeper threads, was measured mostly with Google's Perspective API, which is shutting down; large language models (LLMs) will make the next measurements. We find that LLM labelers mistake second-person address for toxicity, and that this one bias m",
+      "reason": "Google's Perspective API 是被比较的毒性标注服务。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.23599",
+      "revision": 1,
+      "metadata_sha256": "d24bba378177ad2edede4baef14a94fe4e2e1380c1a5ac04a80a0c57bbea2449",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "From Trajectories to Differentiated Skills: Cognitive Differentiation for Self-Improving Agents",
+      "abstract_witness": " skill through four functionally distinct yet coordinated components: Meta, Experience, Tool, and Script. CDSE extracts evidence-grounded semantic gradients from successful and failed trajectories, consolidates them by functional role, and applies component-specific updates",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.24024",
+      "revision": 1,
+      "metadata_sha256": "eff94402f33baac1969e989e9b8a686820e79b752b7e43a0e19cf9f3ef7cf1b0",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Unified Multiparadigm Fusion Intelligence for Rare Disease Diagnosis",
+      "abstract_witness": " patient retrieval, and LLM-based heuristic inference via statistical meta-aggregation and knowledge-enhanced agentic reflection. Evaluated on 2,528 strictly isolated clinical cases, FusionRare achieves state-of-the-art RD prioritization, attaining a macro-averaged Recall @",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.24729",
+      "revision": 1,
+      "metadata_sha256": "81ce69f83ef24ac69922357c99330b2745d7256a57d61e848a3795099dfadfd7",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "fxBench: Evaluating and Understanding Formula Suggestions in Spreadsheets",
+      "abstract_witness": "re now available in popular spreadsheet software (Microsoft Excel and Google Sheets). Such suggestions pose interesting challenges: the right context must be collected and represented for a machine learning model, which must then be able to write a correct formula, in a way t",
+      "reason": "Google Sheets 是现有电子表格产品。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.25282",
+      "revision": 1,
+      "metadata_sha256": "a3b2b0b88c801c6b9fa734b9c922563b19dfcd9178aeaba1861da5b7424e470f",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "MEMORA: A Memory-Enhanced Multimodal Committee Reranking Agent for Reasoning-Intensive Retrieval",
+      "abstract_witness": "structured matrix, and synthesizes judgments via a memory-conditioned meta-verdict model; (2) an Episodic Memory Module that tracks factor outcomes across queries and dynamically adjusts priorities at inference time; and (3) a Reasoning-Aware Dense Retriever fine-tuned with",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.25323",
+      "revision": 1,
+      "metadata_sha256": "be01bf9306f6f8016351464143a9e6e7cebe9b24c9ca77df5f448541a4d7a4d8",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Where and Why Search-Augmented LLMs Fail When Reasoning over Rapidly Evolving Knowledge",
+      "abstract_witness": "c stages of retrieval and reasoning. We apply it to TREKBENCH-WILD, a meta-benchmark of real-world questions that require complex reasoning over rapidly evolving knowledge. Surprisingly, the main bottleneck is post-retrieval reasoning rather than retrieval: frontier models ",
+      "reason": "meta-benchmark 指综合评测组织方式。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.26951",
+      "revision": 1,
+      "metadata_sha256": "03c90856634f3814c4299eae13e08800ebaebc63506ca608427e418633ba6064",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "The Bottleneck Is Retrieval, Not Reading: Diagnosing Evidence-Based Generation with RAG for Long Context Question Answering",
+      "abstract_witness": "equired chunks for multi-fact queries, and chunking destroys document meta-information needed to resolve identity-bearing queries. EBG also exposes grounding failures invisible to answer-only evaluation, including incomplete citations in two-needle settings and a widening g",
+      "reason": "meta-information 指文档元信息。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.25359",
+      "revision": 1,
+      "metadata_sha256": "9debd3c558a7c7f56c9e1959027956c3a3a26196747aa9e07138a8096c085ad4",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "CD-OPD: Contextual Digest for On-Policy Distillation",
+      "abstract_witness": "textual Digest before student continuation. We further develop online meta-reweighting, which compares Digest segment gradients with a task gradient from independent student responses to improve student-only performance, favoring updates predicted to reduce task loss. Acros",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.25447",
+      "revision": 1,
+      "metadata_sha256": "31087a959461add3c5e9c6f09b08f52a771d1549722f197aa05ca4f38b9c86b7",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "Enhanced Masked Diffusion Unlearning",
+      "abstract_witness": "ly unmasking tokens with bidirectional context. As these models reach real-world deployment, machine unlearning becomes essential. This process aims to remove the influence of a designated \"forget set\" without retraining from scratch, so that sensitive, copyrighted, or restricted content ca",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.25599",
+      "revision": 1,
+      "metadata_sha256": "66e086861f357695605958f9746de9abd7270b2ef365c673ae6f3d2cab4bea74",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "Text Dominance in Paralinguistic Conflict: Tracing Suppression Through Audio LLM Circuits",
+      "abstract_witness": "Audio LLMs deployed in settings such as crisis hotlines and customer support are only useful beyond speech-to-text pipelines if they use acoustic cues rather than the transcript alone. We test whether they prioritise trans",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.25858",
+      "revision": 1,
+      "metadata_sha256": "e877d4929e6458f90a01786df8d4ce29cdb06370797e130c9f9c5ccc9fcea12c",
+      "cleared_protection_rules": [
+        "text_organization_mention",
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "Are Self-Evolving Agents Continual Learners?",
+      "abstract_witness": "Large language model agents are often deployed in environments where new knowledge, tools, and workflows keep arriving. Such an agent is therefore expected to adapt continually, learning new tasks as they arrive without forgetting earlier ones. This",
+      "reason": "Meta-Harness 是被比较的 Agent 方法；该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.25924",
+      "revision": 1,
+      "metadata_sha256": "78c2840757738506cbae04bc3f698e61374f3d46f96c2e1d4f8a29305e29a941",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "UtilityBench: Measuring Language Model Utility When Errors Have Different Costs",
+      "abstract_witness": "As language models are increasingly deployed in real-world scenarios with important outcomes, the impact of their mistakes often extends far beyond what correctness can capture. In domains like medicine, a single error can lead to serious conseque",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.25950",
+      "revision": 1,
+      "metadata_sha256": "e0c832719e9b8241d27ea55cee7b5a4d605b0b2591df07a1eda4da180918f4ca",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "AdaExploreBench: Benchmarking LLM Agents for Proactive Exploration and Test-time Adaptation in Evolving Environments",
+      "abstract_witness": "Large Language Model (LLM) agents are increasingly deployed in unfamiliar and evolving environments, requiring them to proactively explore, understand, and adapt to environmental dynamics. However, existing benchmarks rarely test whether agents can proactively d",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.25991",
+      "revision": 1,
+      "metadata_sha256": "1ee8db29fae934bb1eff0961e3fb3bce7d09a9ca34f70823744703044ef5be9f",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Map-Distribution Mixture-of-Experts for Multi-Agent Pathfinding",
+      "abstract_witness": "focusing primarily on individual policy design, this study explores a meta-level Mixture-of-Experts (MoE) approach to learning-based MAPF. Specifically, given a collection of compact yet high-performing experts specialised for different map distributions, our architecture l",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.26088",
+      "revision": 1,
+      "metadata_sha256": "1a8e108a7c63a7782b1ab3abc1677ac4be68c013e746a0ad9c1b3657ef573c65",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "LeakBench: Auditing Reward Hacking through Prediction-Time Leakage in Clinical Modeling Agents",
+      "abstract_witness": "ration select a fatal leaking feature. In fully logged September 2026 A/B runs, DeepSeek Flash and GPT-6-astra each leak in 10/10 unconstrained runs and 0/10 runs with an explicit admission-time constraint. This contrast is version-sensitive: a blinded Claude/Fable-5.1 cha",
+      "reason": "A/B runs 是受控临床建模 Agent 的泄漏测试运行，不是实际临床或商业流量分组。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.28676",
+      "revision": 1,
+      "metadata_sha256": "ab37f888e5b80b77a927feaa4a95ec68d323990e0bc8a5140d06a8416c68b0ee",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "VHDLBench: Benchmarking and Fine-Tuning Large Language Models for VHDL-Based Chip Design",
+      "abstract_witness": "ng the highest performance gains. Generated designs were successfully deployed on real hardware, confirming not only syntactic but operational viability. This work demonstrates that LLMs, when tailored with domain-specific data and lightweight fine-tuning can contribute meaningful",
+      "reason": "deployed on real hardware 指生成VHDL在硬件运行。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.27155",
+      "revision": 1,
+      "metadata_sha256": "91c9c927c14840e51f3b02f7f2dc70624ccbdb9b1824c54c4e3cfe1ffffbc7ed",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "A Hybrid TFT-NBEATS Framework for Robust Multi-Horizon Photovoltaic Power Forecasting",
+      "abstract_witness": "gh attention visualization and trendseasonality decomposition, and is deployed on a cloud-based platform for real-time forecasting. These results demonstrate that the proposed framework is robust, interpretable, and suitable for practical renewable energy applications.",
+      "reason": "cloud real-time 指光伏功率专用预测服务，非LLM/Agent或搜广推线上模型证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.27383",
+      "revision": 1,
+      "metadata_sha256": "678b7571af737dc1dee35c9395d65e60214cf6122b28ea832eae94c9bc7d3ee9",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "AgenticVulHunter: Bringing Local Agentic Vulnerability Hunting to Your Terminal",
+      "abstract_witness": "Finding vulnerabilities early, before they can affect the production system, is important for reducing the risk of any software attacks. However, detecting vulnerabilities during secure code review is still difficult because the vulnerable code logic may depend on lines foun",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.27702",
+      "revision": 1,
+      "metadata_sha256": "119f52734c956113b98547ba052797815ef9655c05a0366c1aba3b348df7886a",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Beyond Calibration: Temporal LLM Confidence Assessment Across Languages and Local Settings",
+      "abstract_witness": "emain reliable beyond English-centric settings. Inspired by classical meta-memory theory, we distinguish anticipatory pre-solve confidence (Feeling-of-Knowing, FOK) from retrospective post-solve confidence (Judgement-of-Learning, JOL). We evaluate these signals across two f",
+      "reason": "meta-memory 指元记忆理论。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.27993",
+      "revision": 1,
+      "metadata_sha256": "1d7d3c931d70769f52a7dddd795b63912d16e852a2f3a9b0aa7bca337b369c68",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Building Telecom Language Models with RSOD: Domain Data, Specialist Post-Training, Memory-Conscious Distillation, and Networking Evaluation",
+      "abstract_witness": "y route-conditioned evaluation over 2,850 held-out questions, the raw Meta-Llama-3.1-8B-Instruct model scores 12.8661/25 micro (13.0172/25 macro), the combined routed six-teacher system scores 21.7641/25 micro, and the consolidated RSOD student, released as Llama-CalixCLM v",
+      "reason": "Meta-Llama 是基线/教师模型名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.28511",
+      "revision": 1,
+      "metadata_sha256": "accc272288f3d2738d2877e41212de4788d198ba7285cf8731e2e9b500d957bd",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "SenseAlign: Understanding Vision and Touch through Language at Test Time",
+      "abstract_witness": "hrough a shared language space to recognize objects and materials. In real-world deployment, changes in lighting, contact quality or sensor hardware can shift visual or tactile inputs and degrade recognition performance. When both modalities contribute to a prediction, an unreliable modalit",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.28767",
+      "revision": 1,
+      "metadata_sha256": "2fb26dc149c9a20ac580fbba711936cb15e1631e1bce1acb2af90e6199578ee5",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "SkillEval: Learning Interpretable Ability Profiles of LLMs via Cognitive Diagnosis Models",
+      "abstract_witness": "he framework integrates advances from two areas: (1) it leverages the meta-cognitive capabilities of LLMs to automatically discover interpretable skills from questions, and (2) it applies cognitive diagnosis models (CDMs) from psychometrics to estimate per-skill abilities o",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.28779",
+      "revision": 1,
+      "metadata_sha256": "223ae9b20cb5153282b1c7b7f81272dd1e411a266ddb9e6c88b200463c9cd16f",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Second Thoughts: Exploring and Planning through Comparative Imagination in World Models",
+      "abstract_witness": "ata collection, while evaluation uses the learned actor alone. Across Meta-World, Adroit, and DM-Control, SDI achieves a higher observed task-average score than every compared baseline in each suite and matches or exceeds the strongest baseline's performance on 15 of 18 tas",
+      "reason": "Meta-World 是机器人基准。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.28882",
+      "revision": 1,
+      "metadata_sha256": "a262898f1e392af446ae0a0b425c5b53cb6c48cbb380f5a8ff73fbab5fdaf76b",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "inr2action: Encoding Robot Episodes as Neural Implicit Representations for Recall and Action",
+      "abstract_witness": "ral implicit representation is fitted to episode video from a shared, meta-learned initialization; the resulting weight delta constitutes the memory. Crucially, this delta remains a fixed size regardless of whether the episode spans a hundred or a hundred thousand frames. A",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.28966",
+      "revision": 1,
+      "metadata_sha256": "a5df22d69d3dcd08a14bec42e6e2ba45863e82d9524194f9ac97f269d3b2839e",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "Black-Box Red-Teaming of Multi-Agent Systems via Reinforcement Learning",
+      "abstract_witness": "Large language model (LLM) agents are increasingly deployed in multi-agent systems (MAS) to accomplish complex tasks. Prior black-box red-teaming attacks mainly focus on single agents, but we find that these methods are far less effective in MAS, where multiple ",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.29092",
+      "revision": 1,
+      "metadata_sha256": "9029e15c4f46baf3475768580fc85c01865b6db6ab783335cc86f9a817945bf3",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "Same Answer, Different Reasons: Trace-Level Divergence in Multilingual Large Language Models",
+      "abstract_witness": "Multilingual large language models are increasingly deployed in settings where visible reasoning traces support verification, education, and safety auditing, yet standard evaluations typically measure only final-answer agreement or holistic response similarity. A",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.29196",
+      "revision": 2,
+      "metadata_sha256": "f7b189a609c7be94277e18724a9e258c7f212a6001f5b8d29995f1bc774c5526",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "A Unified Evaluation Framework of Physical Adversarial Robustness in the Edge VLM Era",
+      "abstract_witness": "ocabulary detection capabilities. As a result, VLMs are rapidly being deployed at the edge in safety-critical real-world systems. However, the physical adversarial robustness of edge VLMs has not been systematically studied, and the fundamental differences in output with modern ob",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.29271",
+      "revision": 2,
+      "metadata_sha256": "576f868a3f1ccf1090cf38d8dfcfcc85fe6eab9eb91e93e60f16e00f24def8d0",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "ARCANA: A Benchmark for Abstraction and Analogical Reasoning",
+      "abstract_witness": "oblem for contemporary LLMs. All the materials are available at sites.google.com/view/arcanacogtest. The complete codebase, including benchmark, and ConceptSIR, is publicly available at https://github.com/density-11/arcana-test. All ARCANA data and task instances can be acces",
+      "reason": "sites.google.com 是项目页面托管域，不证明 Google 署名。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.29289",
+      "revision": 1,
+      "metadata_sha256": "824d1e263ed801c5fd9f72ef4c8b478f2d4660dc383a18bfad033f99e0e11231",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Approximate Solomonoff Induction: On the Robustness of Learned Universal Predictors",
+      "abstract_witness": "et al. (ICML 2024) offer a conceptual explanation through the lens of meta-learning: if sequence-generating environments $ν$ are drawn from a prior $w_ν$, minimizing population log-loss recovers the corresponding Bayesian mixture predictor $ξ=\\sum_νw_νν$. In the idealized l",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.29319",
+      "revision": 1,
+      "metadata_sha256": "df618a3cb6fc527c5ba2cd260d57a43408d246ce86595e3dd799e9bd4bea6325",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "OSynth: A Longitudinal, Context-Sensitive Evaluation of Meeting Understanding",
+      "abstract_witness": "Meeting notetakers are increasingly deployed in settings where longitudinal context is available including calendar metadata, prior meetings, emails, slides, and speaker enrollments; however, meeting corpora remain limited in terms of size, domain",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.29374",
+      "revision": 1,
+      "metadata_sha256": "9c5b0e51b79b765bbdb1feab6e8ce03a7d9729b0347676c914d8b6a21d519573",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "AOV-GS: Active Open-Vocabulary Semantic Mapping with 3D Gaussian Splatting",
+      "abstract_witness": "Robots deployed in human-centered environments need maps that support both geometric navigation and open-vocabulary semantic queries beyond a fixed label set. A key challenge is enriching such maps with semantic inform",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.29537",
+      "revision": 1,
+      "metadata_sha256": "e41e043a1aef0baa5cf531c57cd52eca3fdafcd08a8aa092844a850bd752bc6b",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "Melange: A Synthetic Visual Bias Benchmark for Multi-modal Large Language Models",
+      "abstract_witness": "ined than those of standard LLMs, creating possible social harms when deployed in real-world settings. Prior efforts to extend bias analyses from LLMs into the multi-modal space either cover only a few bias categories or do not ensure that the groups being compared are clearly add",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.29607",
+      "revision": 1,
+      "metadata_sha256": "b989ca35cc4c592f907163f04ca59b3e99c506a396685117948124eb52a8b412",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "No Frames, Just Frequencies: Bandwidth-Efficient Deployment-Time Adaptation for Smart Glasses",
+      "abstract_witness": "Deep neural networks deployed on smart glasses must adapt to changes in the distribution of incoming data while adhering to strict privacy and device constraints. We present No Frames, Just Frequencies, a bandwidth-efficient source-",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.29922",
+      "revision": 1,
+      "metadata_sha256": "b6c4d2405557c62f3c04a17f2ddf69b57049bcf7031af3d76efd1adf6a576dda",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "Unintended Side Effects of Value Training in LLMs",
+      "abstract_witness": "As LLMs are increasingly deployed in value-sensitive contexts, aligning them with human values has emerged as a post-training objective in NLP, aimed at instilling additional values and guiding model behaviour. However, current evaluati",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.29992",
+      "revision": 1,
+      "metadata_sha256": "67a2f8b5aa00e5bac7bfad0179bb67b21ac4f7deb0281acc70bc74168b46eee8",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "SCDM: Scalable Causal Discovery in Nonlinear Temporal Systems with Meta-Learning",
+      "abstract_witness": "Causal discovery from nonlinear multivariate time series is challenging in high-dimensional systems, where the number of candidate directed relations grows quadratically with the number of v",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.30017",
+      "revision": 1,
+      "metadata_sha256": "83ab878656a852dbc782a9dab2fd9d7a34c1fe7c1124c816703b58ef504044a2",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "GuideEvolve: Self-Evolving Agent Framework with Expert Guidance and 3Ts Mechanisms",
+      "abstract_witness": "e to 15.1 and 13.4 across tasks), and provides improved stability for production deployment.",
+      "reason": "production deployment 是结论中的稳定性目标，并未在该摘要报告生产试验。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.30022",
+      "revision": 1,
+      "metadata_sha256": "3640e9a69dce6b89a8687c5971780389ab70d6d8d0893f297678dc8748231d55",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Stationarity Constraints Improve Both Energies and Densities of Machine-Learned Exchange-Correlation Functionals",
+      "abstract_witness": "uring training. Trained on 6 energies and 11 CCSD densities, a neural meta-GGA surpasses SCAN in both atomization energies and densities of unseen molecules.",
+      "reason": "meta-GGA 是交换关联泛函术语。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.30026",
+      "revision": 1,
+      "metadata_sha256": "8db022d5af8395912d1f247dfdf8c70b1f1b37c068008ed3ae3b835ecaf25b72",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "What the Author Wrote, What the Agent Reads: Silent Cue Loss in Enterprise Document Ingestion",
+      "abstract_witness": "urn a Word file or PDF into tokens - and that layer is where an agent deployed in the wild silently loses information. We show that one layer is lost by every mainstream converter - the meaning an author encodes in how text looks - and that the loss makes agents confidently wrong ",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.30097",
+      "revision": 1,
+      "metadata_sha256": "e1e7efe6b715d0cb2b6d7033ec75a391ac64f53deb3131a9b2c701441ca0f7a3",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "AtomicRL: Atomic Reinforcement Learning for Long-Horizon Robotic Manipulation",
+      "abstract_witness": "op a Real2Sim2Real pipeline that bridges online RL in simulation with real-world deployment, facilitating practical transfer to physical robots. On LIBERO-LONG, AtomicRL achieves absolute performance gains of 3.6% and 4.0% over PPO across two VLA architectures. On CALVIN ABC-D, it improves ",
+      "reason": "Real2Sim2Real deployment 指机器人仿真到实机转移。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.30218",
+      "revision": 2,
+      "metadata_sha256": "03184e871a63249e663a95a8d70bfb812476754fedb3efbea09eb822238d385d",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "JANUS: Agentic Cross-Language Fuzzing Harness Generation for Android Native Libraries",
+      "abstract_witness": "e native libraries. Evaluation on 44 popular real-world apps (such as Google and YouTube Music, covering 21,386 JNI methods total) shows that JANUS produces over 5.9 times as many valid harnesses (6,094) as state-of-the-art automatic harnessing tools. On pre-installed apps fr",
+      "reason": "Google/YouTube Music 是被测 Android 应用。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.30690",
+      "revision": 1,
+      "metadata_sha256": "a48ede9f23cab66d2e75fccda0d1f3426abcc5b794504e7e62f612294eb80cb6",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "From Clinical Judgment to Checkable Rules: Clinician-Led Guardrails for Mental-Health Chatbots",
+      "abstract_witness": "Large language models (LLMs) deployed in mental-health contexts can be evaluated for safety failures, but the resulting judgments are often difficult to inspect or explain. Common approaches to improving safety rely on prompt engineering, L",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.30814",
+      "revision": 1,
+      "metadata_sha256": "414381bbce5a83d76804ff0b56198043d8c036db194d35922641f70026a460bf",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "DRILL: Training World Models to Improve Policies, Not Predict Pixels",
+      "abstract_witness": "up-relative GRPO advantage, and model confidence. DRILL-IMG is a full meta-gradient method that differentiates through the inner update using truncated Hessian-vector products. We show that DRILL-VWI recovers the local one-step component of the DRILL-IMG meta-gradient under",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.31062",
+      "revision": 1,
+      "metadata_sha256": "f1aaa6dc949adbd5de6a540f64d8f8bc9fdb49dcdf7c17e390b946a1738a5706",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "SCOPE: Compiling Natural-Language Policies into Neurosymbolic Predicate Programs",
+      "abstract_witness": " to other models without further optimization. This allows them to be deployed in production on inexpensive models, where they reach accuracy comparable to frontier reasoning models. Unlike these monolithic models, SCOPE produces substantially more stable predictions, and each ver",
+      "reason": "deployed in production 是谓词执行可迁移的适用性陈述；摘要没有报告在线业务分组试验。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.31097",
+      "revision": 2,
+      "metadata_sha256": "c4aec1ab7d594cd45f5dcbc705e2b95a1d40469a63fbe451353384c4181493ba",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Co-Recursive Semantic Self-Extension: A Mathematical Foundation for Open-Ended Intelligence",
+      "abstract_witness": "xtensions. Finite trace-guided generation remains fallible, requiring meta-level selection and polycontextural exploration. Using Kolmogorov complexity, we show that no architecture with a fixed state description, transition mechanism, and initial condition can generate his",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.31165",
+      "revision": 1,
+      "metadata_sha256": "819fb5638fce7d33ae1726fb921ce1c06b2a166b13f7544657f2300b7064bfdd",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "Network topology shapes consensus and vulnerability in LLM populations",
+      "abstract_witness": "As large language models (LLMs) are deployed in interacting populations, their collective behaviour depends not only on the models but also on who interacts with whom. Studies of convention formation in LLM populations have mainly tested well-mixe",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.31329",
+      "revision": 2,
+      "metadata_sha256": "7340eb118379e5298df922c104b840e5a5cf4543da5f71ab987373513162b685",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "WeVisOne-VL: Unified Visual Perception from Objects to Pixels",
+      "abstract_witness": "oad visual understanding toward truly reliable perception systems for real-world deployment.",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.31415",
+      "revision": 1,
+      "metadata_sha256": "d57b6c53cfbe3df1f0da86ff449b1f2308d94876c9200a4dea64f97adb832401",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "SyRA-CS: Synthetic-to-Real Adaptation for Code-Switched ASR with Meta-Learning",
+      "abstract_witness": "Code-switched (CS) automatic speech recognition (ASR) remains difficult because real CS speech is scarce and synthetic speech does not fully match it. We investigate whether synthetic CS spe",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.31436",
+      "revision": 1,
+      "metadata_sha256": "fd7c0eb7e35663b3b57473b89c3f5e1e52f38243d5ecc50a4edcd4c34fb78f6b",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Conservative Meta-Agent Search: Architecture Adaptation under Non-Stationarity",
+      "abstract_witness": "Automated agentic-system design is typically evaluated on static task suites with immediate scalar rewards. Deployed systems face persiste",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.33103",
+      "revision": 1,
+      "metadata_sha256": "2143acf9d0712cf1d3ba1e20cb5ba520852308f4e4de4ad160abc478907fc16a",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Prospect Theory in Large Language Models: A Meta-Analysis of Loss Aversion, Diminishing Sensitivity, and Probability Weighting",
+      "abstract_witness": "Prospect theory splits risky choice into three parts: loss aversion, measured by the relative weight of losses to gains, ",
+      "reason": "Meta-Analysis 指元分析研究类型。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.08516",
+      "revision": 1,
+      "metadata_sha256": "6322ccdf3b8ab86280bc91caf49d4a13e1768cfeda44ddf6d0f88c958786b61c",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Aegis OS: A Transactional Multi-Tenant Operating System Runtime for Eliminating Authorization Fatigue in Autonomous Coding Agents",
+      "abstract_witness": "Autonomous coding agents such as Google Antigravity (agy), Anthropic Claude Code (claude), and OpenAI Codex CLI (codex) execute multi-step software engineering workflows on workstations and cloud hosts. Existing agent environments face a S",
+      "reason": "Google Antigravity 是被研究的编码 Agent 产品。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.31656",
+      "revision": 1,
+      "metadata_sha256": "3485d9bcc879b1198c5764d296aa3133b031ab70d99048c35e3035a435eb8fdd",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "METTA: Memory-Enhanced Test-Time Adaptation for Meta-Reinforcement Learning",
+      "abstract_witness": "Meta-reinforcement learning aims to train agents that adapt quickly to unseen tasks from limited interaction, but this requires representing task evidence over long interaction",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.31985",
+      "revision": 1,
+      "metadata_sha256": "d69ec92f9849dcf037458fad600edd29ef876aa94cd52519e78cdf03d0d1fd9c",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "The Helpful Agent Problem: When Emergent Cooperation Among LLM Agents Bypasses Intended Workflows",
+      "abstract_witness": "LLM agents are increasingly deployed in collaborative settings where they pursue separate tasks while sharing resources and operating under review or oversight processes. Such settings create safety risks not only when agents are malicious",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.31991",
+      "revision": 1,
+      "metadata_sha256": "d0cada9dba4fd69a9ec90c4273b1f28e0678d17680414ab29660c191234f681e",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "REDAR: Reinforcement-Driven Adaptive Regularisation for Class Incremental Learning",
+      "abstract_witness": "entirely on pseudo-CIL tasks constructed from the initial phase, then deployed on the incremental sequence without further adaptation. Experiments on CIFAR-100 and Tiny-ImageNet demonstrate that REDAR reduces forgetting and improves forward transfer over fixed and heuristic baseli",
+      "reason": "deployed on 指CIFAR/Tiny-ImageNet持续学习序列中的策略应用。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.33592",
+      "revision": 1,
+      "metadata_sha256": "e16838ecff569f105a0f92550de5d17b604c81fe84c947b4e5690f0d418a2c61",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Auditing evaluation artifacts and data leakage in large language model systems for rare disease diagnosis",
+      "abstract_witness": "sis, yet their real-world clinical utility remains unproven. A recent meta-analysis flagged augmented LLM diagnostic evaluations as having a high risk of bias due to suspected data leakage; however, the precise impact of these vulnerabilities on model inference has yet to b",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.33826",
+      "revision": 2,
+      "metadata_sha256": "f512915f125344aa1f10abf5a5d135c7b872b0b646313f435cb4e9979fc2406b",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Reactive Optimizers",
+      "abstract_witness": "schedules for individual parameter groups, without optimizer-specific meta-training or memory transferred from other runs. We evaluate this approach, OPAL, on language modeling and image generation when a recipe has not been tuned for the target setting. Across the evaluate",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.33941",
+      "revision": 2,
+      "metadata_sha256": "28d99bfb10c4663d3235eb2492fe7a76624590c97e9a691747918f4efa8aadd1",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "TurboWAM: Learning What Matters for Fast World Action Models",
+      "abstract_witness": "g, yet their high inference latency remains a critical bottleneck for real-world deployment. Recent approaches have sought to improve inference efficiency by eliminating test-time future-frame imagination or accelerating action prediction. However, aggregating representations from all video",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.35987",
+      "revision": 1,
+      "metadata_sha256": "5abb477ff8487866a60af4ca5f290838eca72b10c337b70176ec4d0f5effdc7f",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "PROBE: Frontier Coding Agents Find Different Bugs Than Maintainers Fix",
+      "abstract_witness": "are-engineering problem. Even though coding agents are already widely deployed in this domain, their capabilities remain understudied. In particular, the challenging task of finding all bugs that human maintainers would repair across an entire repository has not been studied yet. ",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.35715",
+      "revision": 2,
+      "metadata_sha256": "04e3f9050dcaa790dce7f19450236f0b39fd92d65744f0f092e0f85a64844286",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Quantitative Generalization Bounds for Multi-Layer Transformers: A Few Long Strings can Beat Many Short Ones",
+      "abstract_witness": "zes of the involved models, as well as the quantization space and the alphabet size that supply the sequences. Finally, we illustrate how the requirements in the sample count and training length trade off. In particular, we find that increasing training length can be exponentia",
+      "reason": "alphabet 指序列符号表大小。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.35736",
+      "revision": 1,
+      "metadata_sha256": "5a398ec02bdf8bed51b53702f19773c28608e389ff1a60ba5cde0ca04ee94e85",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Preference-Guided Cooperation in Multi-Objective Multi-Agent Reinforcement Learning",
+      "abstract_witness": "uate each agent's contribution across the team objectives. We propose Meta-Gradient Informed Multi-Objective Multi-Agent Reinforcement Learning (MIRL), with static (MIRL-S) and dynamic (MIRL-D) variants. By incorporating meta-gradient information, MIRL enables agents to lea",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.36013",
+      "revision": 1,
+      "metadata_sha256": "fb8511c76b65cbb2f98e11e4847318db9b5d4ea57b5bbf299aa42e83695c843a",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "OmniBrain-0: A Unified Agentic Model for Embodied Intelligence",
+      "abstract_witness": "c-Guided Recursive Self-Improvement (RSI), a data flywheel in which a Meta-Agent turns execution evidence into refined rubrics, step-level reminders, and verified trajectories for domain-expert updates before their reconsolidation into OmniBrain-0 through MOPD. We evaluate ",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.36340",
+      "revision": 1,
+      "metadata_sha256": "ef4d9e4eb13c702b4297b5d96ed4c1dc8e8803ebddabc8fa5c85a99ef988f240",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "CrowdCC: Jointly Benchmarking Corruption Robustness and Deployment Quantization in Crowd Counting",
+      "abstract_witness": "Crowd-counting models deployed on edge devices face two shifts: inputs are degraded along the capture and transmission pipeline, while models are quantized to satisfy resource constraints. Yet corruption robustness and deployment qua",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.36507",
+      "revision": 1,
+      "metadata_sha256": "bd21a1addead52b94784a1652808a01a9b56ec068a00c5820262087b758fe7d7",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "GRAFT: Geometry-Aware Residual Adaptation for Foundation Trackers",
+      "abstract_witness": "rs, gaps, and platforms in simulation. We further validate it through real-world deployment on a Unitree G1, where the adapted SONIC tracker traverses terrain with onboard depth and unmodified references.",
+      "reason": "real-world deployment 指Unitree G1楼梯/地形实机试验。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.36598",
+      "revision": 1,
+      "metadata_sha256": "52803ff10f3e65a83c59b1f69601b1b966b9bddb7f94a826a921f3bb50ff30dc",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "OpenJaws: An Open Hardware UMI Framework with Stereo Localization for Generalist Manipulation",
+      "abstract_witness": "onstrate that policies trained on data collected with OpenJaws can be deployed on a real robot across multiple tasks. Hardware, software, and data are released under a commercially permissive license. Code, data, and videos are available at https://open-jaws.github.io/",
+      "reason": "deployed on a real robot 指示教数据训练后的机器人任务试验。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.36929",
+      "revision": 1,
+      "metadata_sha256": "1e33f4d5d5d84671213cecae7e45271b5735363bfcd0d54817798608db2f996f",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "DocXEval: A Systematic Evaluation of Explainability in Multimodal Document Understanding",
+      "abstract_witness": "e most faithful and interpretable method overall. Through a dedicated meta-evaluation, we observe moderate to strong agreement among several faithfulness and complexity metrics while identifying certain ones that produce unreliable results. Finally, through multiple dataset",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.36994",
+      "revision": 1,
+      "metadata_sha256": "edadb05fdeef28d1e4432c06ca80e962772449c8575ec886df23864650e9dcb8",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "CaLLM: Continual Adaptation of LLMs via Non-Parametric Adapter Routing",
+      "abstract_witness": "M, a framework that resolves these tensions by combining metric-based meta-learning with modular parameter isolation via lightweight adapters. First, CaLLM projects each input batch into a task-agnostic embedding space to find its nearest prototype. It then routes the batch",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.37001",
+      "revision": 1,
+      "metadata_sha256": "6b52ab5d8b5e823ca8b8643edfae2bbab1025db577d16059cb9c9d3d480c0ae7",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Meta Models: Models that Model Learning",
+      "abstract_witness": "Every neural-network training run produces not only a model, but also evidence about how models learn. Can these accumulated experiments enable us to predict and co",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.37393",
+      "revision": 1,
+      "metadata_sha256": "0bbb2b8b37e124f599b9883ff3c7bf45f9b4a9ea79892024968bf2ca8a453d20",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "Learning Quality-Controllable Robot Policies with Iterative Hindsight Relabeling",
+      "abstract_witness": "ation often relies on a binary success signal for task completion. In real-world deployment, however, desired execution behaviors are also defined by quality attributes such as execution speed and motion smoothness, which need to be dynamically controlled according to task requirements. To ",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.37451",
+      "revision": 1,
+      "metadata_sha256": "d09a8d687327136ad3bc1342a9146d1d9c77c63fadf354bb52e4f577c149063e",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Interpretable Meta-Policies for Neural Decision Making",
+      "abstract_witness": "Deep Reinforcement Learning remains difficult to interpret and align due to the black-box nature of neural networks. While (neuro-)symbolic approaches improve tran",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.37470",
+      "revision": 1,
+      "metadata_sha256": "fff9693da28698c5d123f7f6c1e37114cadc1c34af7b5926f0b3e52306e45099",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "Autonomous fixed-wing interception using reinforcement learning",
+      "abstract_witness": "cement learning and proximal policy optimization. The policy was then deployed on a fixed-wing platform and tested in real interception scenarios. As a baseline, two classical guidance controllers were also developed and tested in simulation. The policy is able to intercept target",
+      "reason": "deployed on a fixed-wing platform 指控制策略实飞，不是生产推荐/语言Agent业务A/B。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.38532",
+      "revision": 1,
+      "metadata_sha256": "721aeb3551f81ebcf210b3e3a6ebd13cc7f12e0040656630fb07e591e2ba86c8",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "From Leniency to Suspicion: How an Open Post-Training Recipe Changes Whom LLM Fact-Checkers Believe",
+      "abstract_witness": "t only with the open Tülu-3 recipe (OLMo-2 32B, Tülu-3 70B), not with Meta's, Alibaba's or Mistral's; the effect is under one percentage point but statistically reliable, exceeding training drift and replicating on independent claim sets; 2) in OLMo-2 32B, the model does no",
+      "reason": "Meta's recipe 指比较对象的既有后训练模型配方。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.38796",
+      "revision": 1,
+      "metadata_sha256": "345fddc8e0b9c122024af154e1d8b72ddc6407d039ee618358550e4f123c46fc",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "Routed Continual Learning",
+      "abstract_witness": "Agents deployed at scale repeatedly encounter related problems, and it is natural to let them learn from each other's experience rather than starting over each time. Unfortunately, there is no single way to retain that",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.40364",
+      "revision": 1,
+      "metadata_sha256": "bc9b42e436cce0238d08109bb6725bbf5ebc1162ca2a2b563593fe2b8ce7cb79",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Is It the Curriculum or Just the Easy Start? Benchmarking Unsupervised Environment Design on Quadrupeds",
+      "abstract_witness": "MJX: the closed-chain W01-TEK and the open-chain Unitree Go1 and Go2, Google Barkour vB and Boston Dynamics Spot. Levels are vectors of eight interpretable terrain parameters, and all curricula drive the same PPO student at matched environment-step budgets. The evaluation rep",
+      "reason": "Google Barkour 是机器人平台/基准。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.41039",
+      "revision": 1,
+      "metadata_sha256": "4730c6572cb33c320258a988ab109012b36ea746e435ae5de0c92eb4179674dd",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "Characterizing Recoverable Expert-Utilization Signatures in Fine-Tuned Mixture-of-Experts LLMs",
+      "abstract_witness": "As Mixture-of-Experts (MoE) large language models are increasingly deployed in distributed environments, from federated learning to edge-cloud systems, their architecture harbors an underexplored landscape of security vulnerabilities. Moving beyond textual analysis, we uncover ",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.41149",
+      "revision": 1,
+      "metadata_sha256": "eb811adea0c15343d7305bb5020f6b720c2a7e3c05553ce27fc7fa3968efa740",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "Counterfactual Pairwise Augmentation Improves Small Pointwise LLM Judges",
+      "abstract_witness": "dge is fine-tuned jointly on both pointwise and pairwise datasets and deployed in pointwise mode only. A second-order analysis shows when this should outperform the prevailing strategy of merging separately trained pointwise and pairwise experts: merging moves every parameter dire",
+      "reason": "deployed in pointwise mode 指judge推理模式，不是用户流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.41574",
+      "revision": 1,
+      "metadata_sha256": "0f321ad2debb74f05b16a4d48fd876493ff46d89c5ad8b60b5913031666e64c0",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "BYOD: Build Your Own DLM - Efficient Autoregressive-to-Diffusion Language Model Conversion",
+      "abstract_witness": "ersion needs at most 102.4M tokens, processed in 3.1-4.0 hours on one Google Colab GPU. All four models generate from fully masked sequences, use bidirectional context in a controlled attention test, and retain substantial parent-model knowledge. BYOD-Gemma is the strongest B",
+      "reason": "Google Colab 是计算平台。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.41865",
+      "revision": 1,
+      "metadata_sha256": "61c40480bd784331754f3228dbb120251b404bdecae021ee877239654f3673ea",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Learning to Interact and Direct: Co-Evolving Video Director Agents",
+      "abstract_witness": "ecT), a framework comprises a director agent, a simulated user, and a meta engineer. Simulated user assigns creative tasks to probe the director's weaknesses, while the meta engineer uses the task traces to revise the director's interaction and production strategy. Although",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2610.41998",
+      "revision": 1,
+      "metadata_sha256": "b2861568447d3c8b623886be705b80bda2edae79c3934cc773ce604a7c59a422",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "SecPO: Principled Adversarial Training for Prompt Injection Security",
+      "abstract_witness": " to manipulate the agent's operation. The existing best-defended LLM, Meta-SecAlign, is trained with the DPO loss but still suffers from attack success rates (ASRs) approaching 100% under adaptive prompt injections. One reason is that DPO anchors the model around the undefe",
+      "reason": "Meta-SecAlign 是安全训练基线。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.00316",
+      "revision": 1,
+      "metadata_sha256": "90bc9905d9368f67ed25b799fc4add5eddeda5851c605435ace74545f2c74d52",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "Cyber-physical attack detection approaches in the wide-area measurement system",
+      "abstract_witness": " a precise GPS-based timestamp. So far, there are more than 2500 PMUs deployed in the North American power grid, where each of which generates between 30 and 60 samples/s, roughly 1.5 TB/month of streamed data. Thus, processing such large PMU streams requires expensive computation",
+      "reason": "deployed PMUs 指电网传感器背景，不是本文LLM/Agent生产实验。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.00383",
+      "revision": 1,
+      "metadata_sha256": "bf0614b91c977df2fb147edf4efad68e87e1c940f209b0361ff6daf7a0304bb5",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "LF-VideoQA: Evaluating Long-Video Understanding with Long-Form Theory-of-Mind Questions",
+      "abstract_witness": "nplays with scene events and each character's first-order beliefs and meta-beliefs, then generating (question, answer, rubric) triples through LLM-based question generation and verification; human studies validate their quality. We evaluate four families of state-of-the-art",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.00515",
+      "revision": 1,
+      "metadata_sha256": "bd2439e250bbb1d83060e17b3e83ea3e454e7ae645ef86925a96a907ae2c8464",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "AStockArena: Beyond Returns, Can We Entrust Real Capital to the Decisions of Financial Agents?",
+      "abstract_witness": " execution traceability (O), evidence sufficiency (RK), and financial meta-awareness (B), combining record verification with consensus expert annotation. Of 1,070 trading points, 72.99% exhibit at least one audit gap; model-level rates range from52.2% to 91.2%, with evidenc",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.00580",
+      "revision": 1,
+      "metadata_sha256": "2ba216c40c4054ea3aeff1b125a4f3509ae7e8730a88f6257dff17e018e51c15",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Evolving Scientific Intelligence: From Fragmented Evidence to Distributed Experimental Loops",
+      "abstract_witness": "nodes. Their feedback revises hypotheses and evaluators, while slower meta-control reassesses research objectives and decision criteria to guard against self-reinforcing errors and misguided optimization. We call for an Information Manhattan Project to build the infrastruct",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.01301",
+      "revision": 2,
+      "metadata_sha256": "a97c3bae974549e86cbe75ea0533a67342ed68f46877b8d482e76365a37a5aec",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "CuriousTogether: Implications of Curiosity and Cultural Grounding in Multi-Agent LLM Interactions",
+      "abstract_witness": "Large Language Models (LLMs) are increasingly deployed in multi-agent settings, exhibiting emergent collective behaviors, yet the role of curiosity as a driver of such dynamics remains understudied. We introduce CuriousTogether, a framework evaluating curio",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.01564",
+      "revision": 1,
+      "metadata_sha256": "808c9bd53df26863604cf3eda9810d88abca6f62ea51f3ea2c5a76f0a1499f4a",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Meta-memorization and memorization scaling laws in transformers",
+      "abstract_witness": "Larger transformers can memorize more data, with a capacity (in bits) that scales roughly linearly with the number of parameters. Counterint",
+      "reason": "Meta-memorization 指记忆缩放概念。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.01747",
+      "revision": 1,
+      "metadata_sha256": "ffa4a310d5759f91557049c62ff519d3f3aa79134776dc3c24337c4f3e2b2470",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Evolving Memory, Learning to Meta-Control: Test-Time Adaptation for Experience-augmented LLM Agents",
+      "abstract_witness": "Self-evolving agents accumulate experience from task streams, but existing frameworks typically rely on fixed pipelines to retrieve a",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.02037",
+      "revision": 1,
+      "metadata_sha256": "44411a505fd0f023742f711a58abe92cea8da6f9385918b51a0bcef79b38261c",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "Scalar Smoothness Is One Point on a Besov Spectrum",
+      "abstract_witness": "ith the size, direction, and location of perturbations encountered in real-world deployment. To measure smoothness under these perturbations, we introduce a finite-difference roughness spectrum that profiles model responses across these conditions. Our roughness spectrum generalizes scalar ",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.02104",
+      "revision": 1,
+      "metadata_sha256": "07db65aa1b205de2a0b9f5f104e187d1b18aacaf66073ea7d9ffac08bdc6f0b2",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Consolidating Reasoning with Test-Time Training",
+      "abstract_witness": "es a new solution by conditioning on the consolidated information. We meta-learn how to consolidate using bi-level optimization at training time, where an inner loop encodes reasoning trajectories into a lightweight LoRA adapter, and an outer loop learns meta-parameters for",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.02153",
+      "revision": 1,
+      "metadata_sha256": "789c03a529dcb7c60fc31e1aae517c2e5fa58e1fa9a18c339d9707f1170029dc",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "Multi-Agent Collusion and the J-Space",
+      "abstract_witness": "LLM agents are increasingly deployed in Multi-Agent Systems (MAS), and they introduce the risk of coordination among agents that might escape human oversight. The J-space has been used to uncover deception in single LLMs, but its use for u",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.03219",
+      "revision": 1,
+      "metadata_sha256": "a66f03576d673c1dac2ecca7e0a2ddbb3efff8b610fc625775a48d4d2934c93c",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Can Coding Agents Sustain Continual Evolution without Forgetting?",
+      "abstract_witness": "n previously seen datasets. For example, with DeepSeek-V4-Flash-0731, Meta-Harness improves its performance on SWE-Bench to 94.0% after evolution. However, after further evolution on FeatureBench, its performance on SWE-Bench drops to 32.0% by the fifth round, corresponding",
+      "reason": "Meta-Harness 是连续进化基线。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.04010",
+      "revision": 1,
+      "metadata_sha256": "4e5ffe5858951c21eb9fff588559d2da2e6e34638693113f87556bc5740e68c2",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Decision Transformer with Task-Aware Representations for Offline Meta-Reinforcement Learning",
+      "abstract_witness": "To enable effective generalization in offline meta-RL, it is essential to accurately infer the underlying task through latent task representations, which provide a compact and ",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.04031",
+      "revision": 1,
+      "metadata_sha256": "41554496b636149a946b4cacebc8bb533aa6a7892003e0a789ed3c888e624508",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Language Model Augmented Decision Transformer for Multi-Task Offline Reinforcement Learning",
+      "abstract_witness": "nd fine-tuned on a mixture of real and augmented data. Experiments on Meta-World and MuJoCo multi-task benchmarks demonstrate that LaMA-DT consistently outperforms competitive baselines, particularly in low-data regimes, showing that language-guided data augmentation substa",
+      "reason": "Meta-World 是机器人基准。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.04079",
+      "revision": 1,
+      "metadata_sha256": "ee0ce828f0f29c63eb1633cdd04f638ea3b7612a9f3618975d6754171fccf11a",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "AlgoPilot: Cross-Paradigm Reasoning in Language Models via Strategy Selection and Guidance",
+      "abstract_witness": "ng their potential to improve other LLMs. Project page: https://sites.google.com/view/algopilot.",
+      "reason": "sites.google.com 是项目页面托管域。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.05080",
+      "revision": 1,
+      "metadata_sha256": "9b471ea7ff139ab1f8c5b4ff74c62dd0d107aee1d928359f761f43a7ae48436c",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "CRONOS: Benchmarking Non-Episodic Reinforcement Learning for Robotic Manipulation",
+      "abstract_witness": "pisodic training with frequent scene resets, which is impractical for real-world deployment due to the need for substantial human intervention. While prior work has studied non-episodic RL in relatively small policies trained from scratch, its behavior when fine-tuning modern large-scale pr",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.05103",
+      "revision": 1,
+      "metadata_sha256": "42453bb3cbb72507bf0f77c61b76d7e2f7acab12422b69a756b7fda529051c74",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Molecular Prior Networks",
+      "abstract_witness": " variant of our architecture, which amounts to kernel regression in a meta-learned feature space, shows that the predictive performance of the transformer model is only partially explained by simple molecular similarity.",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.05320",
+      "revision": 1,
+      "metadata_sha256": "12f2872b3ef7036fbef5baf1da3ea4846750830ff29c89c75cbc33f8bac96b19",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "PyRUA-DataFarm: LLM Agent as a Cost-Efficient Teleoperator for Real-Ready Robot Data",
+      "abstract_witness": "th the robot's actions, on which a policy can be trained directly and deployed on the real robot. Independent judges certify the expert and every rendered episode before admission. On five real-robot tasks, policies trained only on farm data match policies trained on as many teleo",
+      "reason": "deployed on real robot 指五项机器人迁移任务，不是业务流量A/B。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.05512",
+      "revision": 1,
+      "metadata_sha256": "0b096235a0d5b6612d3e4538d79b78ed679e3049067ff05bf024a08a56b58613",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "SlackBench: Benchmarking Agents on Collaborative Projects Grounded in Real Code Repositories",
+      "abstract_witness": "s, and corresponding code changes grounded in GitHub repositories and Google Docs. It contains 140 queries spanning heterogeneous-source agentic search, abstention on unanswerable or false-premise questions, goal-directed summarization, and circumstance inference over long co",
+      "reason": "Google Docs 是基准输入来源。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.06048",
+      "revision": 1,
+      "metadata_sha256": "ea89d2e6ee4671334600de31c685735fa9c1381b99a4c727b7cc9aaa042a5e56",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "SVGFaith: A Two-Layer Meta-Evaluation of Faithfulness Metrics for Text-to-SVG Generation",
+      "abstract_witness": "Text-to-SVG systems are commonly evaluated by applying raster-image metrics to rasterised outputs, yet whether these scores capture fine-",
+      "reason": "Meta-Evaluation 指指标的元评估。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.06254",
+      "revision": 1,
+      "metadata_sha256": "27846827e367eb95e6458481e50cb7d184985d2a3b6fb5895daa319aad7642df",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "HarnessFlow: MCTS-Guided Harness Optimization for LLM Agents",
+      "abstract_witness": "e an average score of 69.48%, outperforming the initial harnesses and Meta-Harness by 10.89 and 3.95 percentage points, respectively, while incurring lower average per-task execution costs than hand-engineered baselines. These results suggest that structured harness search ",
+      "reason": "Meta-Harness 是优化比较基线。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.07025",
+      "revision": 1,
+      "metadata_sha256": "de838b3cb31780917741b99eaf729ab479d0d241bf446a5c5ba42eae892dce16",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "LowRAM: Low-Rank Keys and Amortised Values for Composable KV Cache Compression at Test-Time",
+      "abstract_witness": " near-lossless value compression. The predictor can be initialised by meta-learning for substantially reduced prefill overhead, or fitted from scratch in settings that allow a one-off cost, such as multi-query inference. We pair value amortisation with cross-layer low-rank ",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.07755",
+      "revision": 1,
+      "metadata_sha256": "203eb828af04c378c123e49e8fa19d9c2379d3f6d3dcf1696ace55d5752defbf",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Automated Video-to-QA Pipeline: End-to-End Question Generation and Verification Using Large Language Models",
+      "abstract_witness": "anguage Models (LLMs), transcripts are segmented and summarized using Facebook's BART. A key innovation of this work is a Self-Verification and Fine-Tuning Loop. We utilize meta-llama/Llama-3.1-8BInstruct to generate candidate QA pairs from transcript chunks, which are then fed",
+      "reason": "Facebook BART/Meta Llama 是使用的已有模型。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.08335",
+      "revision": 2,
+      "metadata_sha256": "83764dd215ffc31ce6c2cf0e7da228dae1fba0ad22fca6873aa3a715a5feba46",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Discovering Update Rules for Opponent Shaping in General-Sum Games",
+      "abstract_witness": "t. In single-agent reinforcement learning, update rules discovered by meta-learning have achieved state-of-the-art results (e.g. DiscoRL). These rules are separate from the policy they train and read only the agent's own experience. We hereby extend this framework to genera",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.08428",
+      "revision": 1,
+      "metadata_sha256": "45230636758177e0fecbbe3d06eaa6263bf2f160cc792f9c04763a96ef41478a",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "The Power of Meta Access in the Software of the Future --- Demonstrated on LLM Chat UIs and Chat AI",
+      "abstract_witness": "Chat remains the default surface for many large language model (LLM) tasks, even as agentic tools such as OpenCode ex",
+      "reason": "Meta Access 指可修改软件自身的接口能力。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.08654",
+      "revision": 1,
+      "metadata_sha256": "3424dc80d3fd5eab4894561f2141bd13659fb154ff5abb996bf61d0c664d95d9",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "CS-Pi: Constraint-Satisfying Flow Policy Sampling",
+      "abstract_witness": "A flow-matching policy deployed in the field must often satisfy a constraint that was absent from its demonstrations, such as avoiding an obstacle it has never seen. Retraining for every new constraint is impractical, so the constrain",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.08795",
+      "revision": 1,
+      "metadata_sha256": "ba5e8ec515d3e85cb4b1a98b171fb637e9c7272925089501d763f60ed5fcc435",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "MotionDecipher: LLM-Assisted Clinical Interpretation of Human Motion Signals for Efficient Gait Analysis",
+      "abstract_witness": "fic tokens for time- and frequency-informed gait interpretation; 2) a Meta Feature Selector that transforms tokens into Structured Representations; and 3) a Hybrid Context Constructor to determine the optimal demonstration-based prompt for In-Context Learning. We evaluated ",
+      "reason": "匹配的 meta 是元学习、元控制、元评估或方法组件修饰语，不是 Meta 公司名称。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.08834",
+      "revision": 1,
+      "metadata_sha256": "00dfdfa8e4a3734c0be93fc19543b1881a5eb228342bc7a35eca0aa6148d9ffe",
+      "cleared_protection_rules": [
+        "text_production_mention",
+        "deployment_signal"
+      ],
+      "title_witness": "Notwithstanding Anything to the Contrary, Ignore All Instructions: Measuring Prompt Injection Guards on Legal Contract Review Attacks",
+      "abstract_witness": "Specialized prompt injection guards are deployed in front of document analysis systems, but no false positive rate has been published for any of them on legal contracts. We measure eleven open-weights guards on two corpora of legal contracts and find ",
+      "reason": "该摘要的部署措辞陈述背景、预期应用或技术/实验运行条件，并未在此匹配处给出生产用户A/B或全流量上线证据。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.09195",
+      "revision": 1,
+      "metadata_sha256": "6c8aa0928765147f44f2e8ac9dd02f94023d515d0fb2059b323c40d8fc5c134f",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "InstantHMR : Real-Time Human Mesh Recovery on Your Phone",
+      "abstract_witness": "ed protocol aligned with the closest MHR-based competitors, including Meta's official MHR-to-SMPL conversion, and report their reproduction results. Additionally, we measure latency across eight different targets, ranging from desktop TensorRT to two phone NPUs. Code and mo",
+      "reason": "Meta MHR 转换是复用的参考实现。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.09670",
+      "revision": 1,
+      "metadata_sha256": "7d639af1a7c5e1c1542da7a066066d094281e69242def65baa2197c7f4267d3b",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Goodhart in the Planner: Sampling-Based Control Exploits Rewards Learned from Human Preferences",
+      "abstract_witness": "bjective. On HalfCheetah and Hopper with crowd-sourced labels, and on Meta-World drawer-open and plate-slide with synthetic labels and blind labels from the two authors, harder MPPI search cuts true return by up to 76%: with human labels the drawer opens in 0 of 20 runs aga",
+      "reason": "Meta-World 是评测环境。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    },
+    {
+      "id": "2611.09818",
+      "revision": 1,
+      "metadata_sha256": "48edc14ff8f3e4eab2685adc48e6a4e9b2e01e98497528313d640d862c4250ab",
+      "cleared_protection_rules": [
+        "text_organization_mention"
+      ],
+      "title_witness": "Generative Latent Priors for Interpreting and Steering Protein Language Models",
+      "abstract_witness": "uality scales smoothly with depth and compute. As a lens, single GLP \"meta-neurons\" are the strongest probes of discrete Swiss-Prot concepts at both hosts, beating InterPLM's released SAE features, and lead on continuous properties at 8M though not at 650M; falsification te",
+      "reason": "meta-neurons 指潜变量解释单元。这里只澄清原始标题摘要的文本假阳性，不声称已核本篇完整作者单位、方法、成本或所有正文部署证据。",
+      "fulltext_review_completed": false,
+      "priority_attribution_verified": false,
+      "method_verified": false,
+      "implementation": false,
+      "source_review_scope": "raw frozen title/abstract semantics only"
+    }
+  ],
+  "limitations": [
+    "No full byline census of all4,359 papers; raw metadata may omit affiliations and exact-name recall misses spelling variants.",
+    "Broad customer/industrial/deployment text outside this125-record exact regex union is handled separately by the frozen P2 screen reviewer, not silently cleared here.",
+    "Never clears official-source, author-roster, policy-hard or industrial-route protection.",
+    "No experiments, GPU runs, code implementation, new whole-web scan or global watermark update."
+  ]
+}

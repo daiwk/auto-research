@@ -1,0 +1,541 @@
+{
+  "schema_version": 1,
+  "archived_on": "2026-11-11",
+  "blocking": false,
+  "retry_policy": "on-new-evidence-only",
+  "record_count": 15,
+  "entries": [
+    {
+      "url": "https://research.google/pubs/beyond-the-emulator-bridging-the-sim-to-real-gap-in-mobile-agent-benchmarking/",
+      "title": "Beyond the Emulator: Bridging the Sim-to-Real Gap in Mobile Agent Benchmarking",
+      "organization": "Google",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "source_exceptions",
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "captured_disposition": "archive_source_exception",
+      "inherited_reference": "https://openreview.net/forum?id=0rA1AvKI8I",
+      "review_status": "explicit_exception",
+      "exception_type": "document_unavailable",
+      "reason": "Google 条目链接 OpenReview 0rA1AvKI8I，但论坛、PDF 和 API 路径遇验证拦截或 HTTP 403。无法确认首公开日或论文正文；官方条目可用于记录研究方向，不能据此排期。",
+      "attempts": [
+        "Google Research detail retrieved with OpenReview identifier",
+        "https://openreview.net/forum?id=0rA1AvKI8I",
+        "https://openreview.net/pdf?id=0rA1AvKI8I",
+        "https://api2.openreview.net/notes?id=0rA1AvKI8I",
+        "https://api.openreview.net/notes?id=0rA1AvKI8I"
+      ],
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "OpenReview 恢复可读，或作者发布有日期的同版原稿。",
+      "corroborating_evidence": [
+        {
+          "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+          "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+          "reference_section": "ci_priority_official_review.records",
+          "review_status": "explicit_exception",
+          "reason": "Google lists the paper, but the linked OpenReview forum, PDF and API could not establish an accessible, dated manuscript. See source exceptions."
+        }
+      ],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/claim-gated-source-risk-auditing-for-generative-search-2/",
+      "title": "Claim-Gated Source-Risk Auditing for Generative Search",
+      "organization": "Google",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "ci_priority_official_review.records",
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "captured_disposition": "pre_window_research_line_no_production_evidence",
+      "inherited_reference": "https://arxiv.org/html/2609.29145v2",
+      "review_status": "explicit_exception",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "The title, author identities/email aliases and method tie the official variant to this September v1/October 9 v2 research line. The abstract variants report different conformance workloads, so do not identify the exact version or date of the -2 variant. Neither reports production A/B or full rollout. Research-line continuity is not exact-version/date identity.",
+      "attempts": [
+        {
+          "kind": "frozen_official_source_review",
+          "url": "https://research.google/pubs/claim-gated-source-risk-auditing-for-generative-search-2/",
+          "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+          "result": "Retain unresolved identity/date/access rather than promote a title match"
+        }
+      ],
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "A dated accessible official manuscript or unambiguous publisher/arXiv identity becomes available; reopen only that record.",
+      "related_research_line_ids": [
+        "2609.29145"
+      ],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/co-redteam-orchestrated-security-discovery-and-exploitation-with-llm-agents/",
+      "title": "Co-RedTeam: Orchestrated Security Discovery and Exploitation with LLM Agents",
+      "organization": "Google",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "ci_priority_official_review.records",
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "captured_disposition": "title_match_terminal_ledger",
+      "inherited_reference": "20261021-google-meta-review-and-two-components",
+      "review_status": "explicit_exception",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "Normalized title matches terminal ledger; not newly read in this check. 题名对应只作召回；本次未从官方页确认版本/身份，归档不阻塞而不伪造 known。",
+      "attempts": [
+        {
+          "kind": "frozen_official_source_review",
+          "url": "https://research.google/pubs/co-redteam-orchestrated-security-discovery-and-exploitation-with-llm-agents/",
+          "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+          "result": "Retain unresolved identity/date/access rather than promote a title match"
+        }
+      ],
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "A dated accessible official manuscript or unambiguous publisher/arXiv identity becomes available; reopen only that record.",
+      "possible_arxiv_ids": [
+        "2602.02164"
+      ],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/crop-token-efficient-reasoning-in-large-language-models-via-regularized-prompt-optimization/",
+      "title": "CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization",
+      "organization": "Google",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "ci_priority_official_review.records",
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "captured_disposition": "title_match_catalog_identity",
+      "inherited_reference": "agent-research/2604.14214-crop/README.md",
+      "review_status": "explicit_exception",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "Normalized title matches canonical catalog; not newly read in this check. 题名对应只作召回；本次未从官方页确认版本/身份，归档不阻塞而不伪造 known。",
+      "attempts": [
+        {
+          "kind": "frozen_official_source_review",
+          "url": "https://research.google/pubs/crop-token-efficient-reasoning-in-large-language-models-via-regularized-prompt-optimization/",
+          "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+          "result": "Retain unresolved identity/date/access rather than promote a title match"
+        }
+      ],
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "A dated accessible official manuscript or unambiguous publisher/arXiv identity becomes available; reopen only that record.",
+      "possible_arxiv_ids": [
+        "2604.14214"
+      ],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/depth-cot-tradeoffs-in-transformers-a-look-at-path-following/",
+      "title": "Depth-CoT Tradeoffs in Transformers: A Look at Path Following",
+      "organization": "Google",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "source_exceptions",
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "captured_disposition": "archive_source_exception",
+      "inherited_reference": "https://research.google/pubs/depth-cot-tradeoffs-in-transformers-a-look-at-path-following/",
+      "review_status": "explicit_exception",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "Google 详情只列 2027 年，未提供原稿，精确题名检索未找到可证实首公开的同篇全文。理论与最多五层 Transformer 的路径跟随是目录摘要，尚不能作全文证据。",
+      "attempts": [
+        "Google Research detail retrieved; displayed year 2027",
+        "Exact-title search found no verified manuscript"
+      ],
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "作者发布带日期的同篇原稿、正式论文链接或 DOI。",
+      "corroborating_evidence": [
+        {
+          "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+          "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+          "reference_section": "ci_priority_official_review.records",
+          "review_status": "explicit_exception",
+          "reason": "Directory only reports year 2027; no dated, readable manuscript found. See source exceptions."
+        }
+      ],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/fabscore-fine-grained-evaluation-of-fabrications-in-automated-ai-research/",
+      "title": "FabScore: Fine-Grained Evaluation of Fabrications in Automated AI Research",
+      "organization": "Google",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+      "reference_sha256": "b76c355f12c861b513190c3f8ad9e1c64f4b5e63e39431562465ec262f47dde3",
+      "reference_section": "ci_priority_official_review.records",
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "captured_disposition": "inherits_official_review",
+      "inherited_reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+      "status": "archived",
+      "review_status": "explicit_exception",
+      "sha256": "18c2e57954598dd936aff6d0ed5d9e13805da9e8a310e7f28f83bd60eb89d040",
+      "exception_type": "date_or_identity_unresolved",
+      "reopen_when": "A dated accessible official manuscript or unambiguous publisher/arXiv identity becomes available; reopen only that record.",
+      "reason": "FabScore 通过结果抽取、静态分析、执行和判决审计科研 Agent；OpenReview 论坛/PDF 验证挑战及 ICML 页面错误导致日期未核实。",
+      "attempts": [
+        {
+          "kind": "official_detail",
+          "url": "https://research.google/pubs/fabscore-fine-grained-evaluation-of-fabrications-in-automated-ai-research/",
+          "result": "cached_official_detail_read"
+        },
+        {
+          "kind": "local_title_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "本次审查本地缓存：*review*.json"
+          ],
+          "result": []
+        },
+        {
+          "kind": "frozen_register_and_worktree_manifest_match",
+          "sources": [
+            "docs/research-manifest.json",
+            "docs/research-audits/oct07-review-closure/paper-register.json"
+          ],
+          "result": []
+        },
+        {
+          "kind": "official_download",
+          "url": "https://research.google/pubs/fabscore-fine-grained-evaluation-of-fabrications-in-automated-ai-research/",
+          "result": "no_download_link_in_cached_detail"
+        },
+        {
+          "kind": "primary_web_identity_search",
+          "query": "FabScore: Fine-Grained Evaluation of Fabrications in Automated AI Research",
+          "result": "官方/arXiv/出版方交叉核对；未采用第三方爬取时间为首次日期"
+        },
+        {
+          "kind": "openreview_forum",
+          "url": "https://openreview.net/forum?id=6gYWcYQcWM",
+          "result": "browser_verification_challenge"
+        },
+        {
+          "kind": "openreview_pdf",
+          "url": "https://openreview.net/attachment?id=6gYWcYQcWM&name=pdf",
+          "result": "browser_verification_challenge"
+        },
+        {
+          "kind": "icml_poster",
+          "url": "https://icml.cc/virtual/2026/73595",
+          "result": "internal_error"
+        }
+      ],
+      "blocking": false,
+      "resolution": "archive_nonblocking"
+    },
+    {
+      "url": "https://research.google/pubs/google-earth-ai-geospatial-reasoning-agent-capabilities-and-a-systematic-evaluation/",
+      "title": "Google Earth AI Geospatial Reasoning Agent: Capabilities and a Systematic Evaluation",
+      "organization": "Google",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "ci_priority_official_review.records",
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "captured_disposition": "title_match_terminal_ledger",
+      "inherited_reference": "2026-10-15-review-closure-agent",
+      "review_status": "explicit_exception",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "Normalized title matches terminal ledger; not newly read in this check. 题名对应只作召回；本次未从官方页确认版本/身份，归档不阻塞而不伪造 known。",
+      "attempts": [
+        {
+          "kind": "frozen_official_source_review",
+          "url": "https://research.google/pubs/google-earth-ai-geospatial-reasoning-agent-capabilities-and-a-systematic-evaluation/",
+          "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+          "result": "Retain unresolved identity/date/access rather than promote a title match"
+        }
+      ],
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "A dated accessible official manuscript or unambiguous publisher/arXiv identity becomes available; reopen only that record.",
+      "possible_arxiv_ids": [
+        "2610.15750"
+      ],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/groupdpo-memory-efficient-group-wise-direct-preference-optimization/",
+      "title": "GroupDPO: Memory-Efficient Group-Wise Direct Preference Optimization",
+      "organization": "Google",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "ci_priority_official_review.records",
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "captured_disposition": "title_match_catalog_identity",
+      "inherited_reference": "post-training/2604.15602-group-dpo/README.md",
+      "review_status": "explicit_exception",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "Normalized title matches canonical catalog; not newly read in this check. 题名对应只作召回；本次未从官方页确认版本/身份，归档不阻塞而不伪造 known。",
+      "attempts": [
+        {
+          "kind": "frozen_official_source_review",
+          "url": "https://research.google/pubs/groupdpo-memory-efficient-group-wise-direct-preference-optimization/",
+          "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+          "result": "Retain unresolved identity/date/access rather than promote a title match"
+        }
+      ],
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "A dated accessible official manuscript or unambiguous publisher/arXiv identity becomes available; reopen only that record.",
+      "possible_arxiv_ids": [
+        "2604.15602"
+      ],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/prompts-performance-optimization-via-multi-agent-planning-for-llm-training-and-serving/",
+      "title": "PROMPTS: Performance Optimization via Multi-Agent Planning for LLM Training and Serving",
+      "organization": "Google",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "ci_priority_official_review.records",
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "captured_disposition": "title_match_catalog_identity",
+      "inherited_reference": "agent-research/mlsys2026-prompts/README.md",
+      "review_status": "explicit_exception",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "Normalized title matches canonical catalog; not newly read in this check. 题名对应只作召回；本次未从官方页确认版本/身份，归档不阻塞而不伪造 known。",
+      "attempts": [
+        {
+          "kind": "frozen_official_source_review",
+          "url": "https://research.google/pubs/prompts-performance-optimization-via-multi-agent-planning-for-llm-training-and-serving/",
+          "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+          "result": "Retain unresolved identity/date/access rather than promote a title match"
+        }
+      ],
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "A dated accessible official manuscript or unambiguous publisher/arXiv identity becomes available; reopen only that record.",
+      "possible_arxiv_ids": [],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/scientist-one-verifiable-autonomous-research-via-chain-of-evidence/",
+      "title": "Scientist-One: Verifiable Autonomous Research via Chain-of-Evidence",
+      "organization": "Google",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "ci_priority_official_review.records",
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "captured_disposition": "title_match_terminal_ledger",
+      "inherited_reference": "20261021-google-meta-review-and-two-components",
+      "review_status": "explicit_exception",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "Normalized title matches terminal ledger; not newly read in this check. 题名对应只作召回；本次未从官方页确认版本/身份，归档不阻塞而不伪造 known。",
+      "attempts": [
+        {
+          "kind": "frozen_official_source_review",
+          "url": "https://research.google/pubs/scientist-one-verifiable-autonomous-research-via-chain-of-evidence/",
+          "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+          "result": "Retain unresolved identity/date/access rather than promote a title match"
+        }
+      ],
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "A dated accessible official manuscript or unambiguous publisher/arXiv identity becomes available; reopen only that record.",
+      "possible_arxiv_ids": [
+        "2605.26340"
+      ],
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/stakes-adaptive-verification-and-origin-traced-rollback-in-autonomous-agent-workflows/",
+      "title": "Stakes-Adaptive Verification and Origin-Traced Rollback in Autonomous Agent Workflows",
+      "organization": "Google",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "ci_priority_official_review.records",
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "captured_disposition": "inherits_prior_source_exception",
+      "inherited_reference": "docs/research-audits/oct23-priority-components/README.md",
+      "review_status": "explicit_exception",
+      "exception_type": "document_unavailable",
+      "reason": "TDC 12058 was recorded as public October 8, before this window. Prior source exception retained; not counted as full-text reviewed.",
+      "attempts": [
+        {
+          "kind": "frozen_official_source_review",
+          "url": "https://research.google/pubs/stakes-adaptive-verification-and-origin-traced-rollback-in-autonomous-agent-workflows/",
+          "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+          "result": "Retain unresolved identity/date/access rather than promote a title match"
+        }
+      ],
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "A dated accessible official manuscript or unambiguous publisher/arXiv identity becomes available; reopen only that record.",
+      "status": "archived"
+    },
+    {
+      "url": "https://research.google/pubs/vip-mingle-a-corpus-for-videoconference-and-in-person-multimodal-interaction-in-group-language-engagement/",
+      "title": "VIP-MINGLE: A Corpus for Videoconference and In-Person Multimodal Interaction in Group Language Engagement",
+      "organization": "Google",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "ci_priority_official_review.records",
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "captured_disposition": "title_match_terminal_ledger",
+      "inherited_reference": "20261021-google-meta-review-and-two-components",
+      "review_status": "explicit_exception",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "Normalized title matches terminal ledger; not newly read in this check. 题名对应只作召回；本次未从官方页确认版本/身份，归档不阻塞而不伪造 known。",
+      "attempts": [
+        {
+          "kind": "frozen_official_source_review",
+          "url": "https://research.google/pubs/vip-mingle-a-corpus-for-videoconference-and-in-person-multimodal-interaction-in-group-language-engagement/",
+          "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+          "result": "Retain unresolved identity/date/access rather than promote a title match"
+        }
+      ],
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "A dated accessible official manuscript or unambiguous publisher/arXiv identity becomes available; reopen only that record.",
+      "possible_arxiv_ids": [
+        "2607.13614"
+      ],
+      "status": "archived"
+    },
+    {
+      "url": "https://github.com/google-deepmind/pluralistic_agents",
+      "title": "Scaling Public Input on AI Policy with Pluralistic Agents",
+      "organization": "Google DeepMind",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "source_exceptions",
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "review_status": "explicit_exception",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "作者仓已公开源码与数据，但精确题名检索及官方仓未找到可核验论文全文、DOI 或独立首公开日；GitHub 创建时间只证明仓库记录。",
+      "attempts": [
+        "read Google DeepMind public repository and README",
+        "search exact title and arXiv",
+        "GitHub API repository metadata created 2026-11-04T21:13:33Z"
+      ],
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "作者发布可核验论文全文或 DOI。",
+      "status": "archived"
+    },
+    {
+      "organization": "Meta",
+      "url": "https://ai.meta.com/research/publications/",
+      "title": "Bounded official-directory coverage exception",
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "review_status": "explicit_exception",
+      "exception_type": "document_unavailable",
+      "reason": "主publication入口浏览器和curl均返回内容不可用文本；HTTP200并不等于成功取得目录。继承旧替代目录前6页/144URL回执，不冒称Meta全站。",
+      "attempts": [
+        {
+          "kind": "official_current_publications",
+          "url": "https://ai.meta.com/research/publications/",
+          "http_status": 200,
+          "body_sha256": "de23e0c264ff944ee66adb95a36d8b8613ad646ba1147b3f87d843d0d73f88a0",
+          "bytes": 45,
+          "retrieved_at": "2026-11-11T05:09:19.732646+00:00",
+          "response_text": "Sorry, this content isn't available right now",
+          "content_status": "unavailable_despite_http200",
+          "result": "Sorry, this content isn't available right now"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "入口恢复可读且能确认分页/日期时重新检查差集，或作者提供可核验固定原稿。",
+      "status": "archived"
+    },
+    {
+      "organization": "Meta",
+      "url": "https://research.meta.ai/",
+      "title": "Bounded official-directory coverage exception",
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "review_status": "explicit_exception",
+      "exception_type": "pagination_unproven",
+      "reason": "当前新研究主页可读但为精选新闻/产品动态，没有提供完整论文分页。本次只复核可见窗口内Nov9/Nov6/Oct28新闻，不将其推成整个Meta论文发布清单。",
+      "attempts": [
+        {
+          "kind": "official_current_research_home",
+          "url": "https://research.meta.ai/",
+          "http_status": 200,
+          "body_sha256": "2c257e69a4b6044866718bc9e68ae5ca05de68a362b0b8ce7950d24a07581008",
+          "bytes": 338011,
+          "retrieved_at": "2026-11-11T05:09:20.250258+00:00",
+          "result": "HTTP200 curated news landing page"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "官方恢复完整论文目录或提供可核验日期范围的导出时，定向复核未覆盖部分。",
+      "status": "archived"
+    }
+  ],
+  "previous_archive": "../oct15-review-closure/exception-archive.json",
+  "note": "Current bounded source exceptions only; earlier evidence is retained, not relabeled or deleted."
+}

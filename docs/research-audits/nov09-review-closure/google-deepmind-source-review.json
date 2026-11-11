@@ -1,0 +1,286 @@
+{
+  "organization": "Google DeepMind",
+  "scope": "Finite exact-URL official-source review, not a whole-site census.",
+  "expected_records": 4,
+  "pages": [
+    {
+      "organization": "Google DeepMind",
+      "page": 1,
+      "url": "https://deepmind.google/research/publications/",
+      "status": "retrieved",
+      "retrieved_at": "2026-11-09T10:10:40.346414+00:00",
+      "count": 30,
+      "sha256": "2487b2cb9baeb7deb5ebeddebd5765e45d113ffc59b9ab40c1d7c0d23f383654",
+      "inheritance": "Original 2026-11-09 directory receipt, not a new full-text check",
+      "receipt_reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "receipt_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "observations": [
+        {
+          "url": "https://deepmind.google/research/publications/",
+          "http_status": 200,
+          "body_sha256": "30d4dcbb7ed594f587f9d6411f2c48214d313926343c91e15848780355e72911",
+          "bytes": 142847,
+          "retrieved_at": "2026-11-11T05:09:17.919350+00:00",
+          "observed_records": 268,
+          "observed_pages": 9,
+          "visible_in_window": [
+            "https://deepmind.google/research/publications/279443/"
+          ],
+          "status": "retrieved",
+          "observation_scope": "current landing page only",
+          "count": 30,
+          "limitation": "Selected bibliography;268reported versus266prior. Only current firstpage read; two-count delta not identified as two new papers."
+        },
+        {
+          "kind": "exact_url_comparison_of_current_first_page",
+          "url": "https://deepmind.google/research/publications/",
+          "http_status": 200,
+          "body_sha256": "30d4dcbb7ed594f587f9d6411f2c48214d313926343c91e15848780355e72911",
+          "retrieved_at": "2026-11-11T05:09:17.919350+00:00",
+          "bytes": 142847,
+          "visible_paper_urls": 30,
+          "baseline_reference": "docs/research-audits/oct29-components/official-source-inventory.json",
+          "baseline_sha256": "96d0be6810f3d571d86d2fa1a1de95c6e4b151c971ad2c65e87e96674e039316",
+          "baseline_unique_paper_urls": 266,
+          "overlap_with_baseline": 28,
+          "added_visible_urls": [
+            "https://deepmind.google/research/publications/279443/",
+            "https://deepmind.google/research/publications/250558/"
+          ],
+          "added_visible_dispositions": [
+            "known EmbeddingGemma2, Oct27",
+            "historical Reasoning or Rationalization?, June10"
+          ],
+          "reported_total": 268,
+          "interpretation": "The observed two first-page URL differences are identified; count alone never implied two unknown new-window manuscripts. Pages2–9 remain bounded inherited receipts rather than a fresh recrawl."
+        }
+      ]
+    },
+    {
+      "organization": "Google DeepMind",
+      "page": 2,
+      "url": "https://deepmind.google/research/publications/page/2/",
+      "status": "retrieved",
+      "retrieved_at": "2026-11-09T10:10:40.374280+00:00",
+      "count": 30,
+      "sha256": "dc907c9d13cdf9a984b924a6edb50ef8e826665bd55b3554264acbffbe65045d",
+      "inheritance": "Original 2026-11-09 directory receipt, not a new full-text check",
+      "receipt_reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "receipt_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a"
+    },
+    {
+      "organization": "Google DeepMind",
+      "page": 3,
+      "url": "https://deepmind.google/research/publications/page/3/",
+      "status": "retrieved",
+      "retrieved_at": "2026-11-09T10:10:41.542463+00:00",
+      "count": 30,
+      "sha256": "626ce5964a69a32b0b748e684ec5924b8442fb209cb5f393f8730610f336afcc",
+      "inheritance": "Original 2026-11-09 directory receipt, not a new full-text check",
+      "receipt_reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "receipt_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a"
+    },
+    {
+      "organization": "Google DeepMind",
+      "page": 4,
+      "url": "https://deepmind.google/research/publications/page/4/",
+      "status": "retrieved",
+      "retrieved_at": "2026-11-09T10:10:41.270068+00:00",
+      "count": 30,
+      "sha256": "9f10fae2511b0e6a30a2930cb79147f366ee40a49729d4f655641a8addf955b7",
+      "inheritance": "Original 2026-11-09 directory receipt, not a new full-text check",
+      "receipt_reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "receipt_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a"
+    },
+    {
+      "organization": "Google DeepMind",
+      "page": 5,
+      "url": "https://deepmind.google/research/publications/page/5/",
+      "status": "retrieved",
+      "retrieved_at": "2026-11-09T10:10:41.533660+00:00",
+      "count": 30,
+      "sha256": "fa505f77df43097ca371c55ed8a3a488a04cdd4bb49c770b8f6b33d10740458a",
+      "inheritance": "Original 2026-11-09 directory receipt, not a new full-text check",
+      "receipt_reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "receipt_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a"
+    },
+    {
+      "organization": "Google DeepMind",
+      "page": 6,
+      "url": "https://deepmind.google/research/publications/page/6/",
+      "status": "retrieved",
+      "retrieved_at": "2026-11-09T10:10:41.524831+00:00",
+      "count": 30,
+      "sha256": "634b243846d85c591e0ef9a4f959ecabb0272c451de9c755c61655e1c0933e4d",
+      "inheritance": "Original 2026-11-09 directory receipt, not a new full-text check",
+      "receipt_reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "receipt_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a"
+    },
+    {
+      "organization": "Google DeepMind",
+      "page": 7,
+      "url": "https://deepmind.google/research/publications/page/7/",
+      "status": "retrieved",
+      "retrieved_at": "2026-11-09T10:10:42.071186+00:00",
+      "count": 30,
+      "sha256": "5102da9cfbbc40bc7ed2e0369889ec7d845b9bb285746903256526c158537fee",
+      "inheritance": "Original 2026-11-09 directory receipt, not a new full-text check",
+      "receipt_reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "receipt_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a"
+    },
+    {
+      "organization": "Google DeepMind",
+      "page": 8,
+      "url": "https://deepmind.google/research/publications/page/8/",
+      "status": "retrieved",
+      "retrieved_at": "2026-11-09T10:10:42.030648+00:00",
+      "count": 30,
+      "sha256": "ecac669159195b36771d612cac0b29204e7a4325afe365fe0d9ded1631010c98",
+      "inheritance": "Original 2026-11-09 directory receipt, not a new full-text check",
+      "receipt_reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "receipt_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a"
+    },
+    {
+      "organization": "Google DeepMind",
+      "page": 9,
+      "url": "https://deepmind.google/research/publications/page/9/",
+      "status": "retrieved",
+      "retrieved_at": "2026-11-09T10:10:43.511011+00:00",
+      "count": 27,
+      "sha256": "aceeee1eca76a5b9aea3d1253d2c20aab61fce094ddf82f98804787e6d68cf9a",
+      "inheritance": "Original 2026-11-09 directory receipt, not a new full-text check",
+      "receipt_reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "receipt_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a"
+    }
+  ],
+  "records": [
+    {
+      "url": "https://deepmind.google/blog/agentic-cheminformatics-with-google-antigravity/",
+      "title": "Agentic cheminformatics with Google Antigravity",
+      "organization": "Google DeepMind",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "other_official_observations",
+      "arxiv_ids": [],
+      "date_evidence": [
+        {
+          "url": "https://deepmind.google/blog/agentic-cheminformatics-with-google-antigravity/",
+          "date": "2026-11-03",
+          "kind": "official page date"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "review_status": "out_of_scope",
+      "reason": "工具工作流介绍，不等同于新的论文实验。"
+    },
+    {
+      "url": "https://deepmind.google/research/publications/279443/",
+      "title": "EmbeddingGemma 2: Unified and Efficient Multimodal Representations",
+      "organization": "Google DeepMind",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-manifest.json",
+      "reference_sha256": "1c5153870636ca5917e6292a2b553c9850de6fd742619f2d4da4c138c8b83edf",
+      "reference_section": "official_directory.visible_dated_records",
+      "arxiv_ids": [
+        "2610.37364"
+      ],
+      "date_evidence": [
+        {
+          "url": "https://deepmind.google/research/publications/279443/",
+          "date": "2026-10-27",
+          "kind": "directory display"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "body_sha256": "0e9e26deaa7e3ffd3f9dd39916586db5cd6eda2b8eb180e11db5bc4ad7fddb91",
+      "retrieved_at": "2026-11-09T10:12:22.978130+00:00",
+      "primary_source_url": "https://arxiv.org/abs/2610.37364",
+      "reason": "Known catalog identity 2610.37364/embeddinggemma2; inherited prior official link check; directory day is not first publication.",
+      "captured_disposition": "prior_catalogued",
+      "review_status": "known",
+      "inherited_reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "corroborating_evidence": [
+        {
+          "reference": "docs/research-manifest.json",
+          "reference_sha256": "1c5153870636ca5917e6292a2b553c9850de6fd742619f2d4da4c138c8b83edf",
+          "reference_section": "official_directory.added_detail_checks",
+          "review_status": "known",
+          "reason": "EmbeddingGemma 2 已入库。"
+        }
+      ]
+    },
+    {
+      "url": "https://github.com/google-deepmind/pluralistic_agents",
+      "title": "Scaling Public Input on AI Policy with Pluralistic Agents",
+      "organization": "Google DeepMind",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "source_exceptions",
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "review_status": "explicit_exception",
+      "exception_type": "date_or_identity_unresolved",
+      "reason": "作者仓已公开源码与数据，但精确题名检索及官方仓未找到可核验论文全文、DOI 或独立首公开日；GitHub 创建时间只证明仓库记录。",
+      "attempts": [
+        "read Google DeepMind public repository and README",
+        "search exact title and arXiv",
+        "GitHub API repository metadata created 2026-11-04T21:13:33Z"
+      ],
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "作者发布可核验论文全文或 DOI。"
+    },
+    {
+      "organization": "Google DeepMind",
+      "url": "https://deepmind.google/research/publications/250558/",
+      "title": "Reasoning or Rationalization? Moral Robustness as a Frontier for Non-Verifiable Reasoning in LLMs",
+      "review_status": "historical",
+      "reason": "实际当前首页30条与旧Oct29全9页266URL比较，准确新增URL仅此条和已知EmbeddingGemma2；本条官方detail明确June10,2026，View publication和Download均指向arXiv2606.12731，早于本次10/16窗口。这里不推断全网最早首发、不声称方法/实现已经核验。",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "method_review_completed": false,
+      "inherited_not_new_fulltext_review": false,
+      "arxiv_ids": [
+        "2606.12731"
+      ],
+      "primary_source_url": "https://arxiv.org/abs/2606.12731",
+      "date_evidence": [
+        {
+          "url": "https://deepmind.google/research/publications/250558/",
+          "date": "2026-06-10",
+          "kind": "official detail date; establishes publication before the requested window, not a claim of globally earliest date"
+        }
+      ],
+      "body_sha256": "a6fb3cddab3fb15af88f597fc4089ce081e06b069da8233bd015f88e5cef2cc2",
+      "retrieved_at": "2026-11-11T05:40:16.616937+00:00",
+      "attempts": [
+        {
+          "url": "https://deepmind.google/research/publications/250558/",
+          "result": "retrieved; explicit June10,2026 and exact arXiv2606.12731 links",
+          "http_status": 200,
+          "body_sha256": "a6fb3cddab3fb15af88f597fc4089ce081e06b069da8233bd015f88e5cef2cc2",
+          "bytes": 135851
+        }
+      ],
+      "source_review_scope": "official exact detail identity/date and outgoing primary links only"
+    }
+  ],
+  "directory_exceptions": [],
+  "expected_pages": 9,
+  "all_sources_exhaustive": false,
+  "record_scope": "Finite exact-URL source records. Current first-page30 URLs were compared to the exact inherited Oct29 nine-page266-URL set; its two differences are known/historical, not an unresolved count-derived candidate claim. Pages2–9 were not recrawled this pass.",
+  "window": {
+    "start": "2026-10-16",
+    "end": "2026-11-09"
+  }
+}
