@@ -121,7 +121,8 @@
         "post-training:rloo",
         "post-training:grpo",
         "post-training:remax",
-        "post-training:ppo-rlhf"
+        "post-training:ppo-rlhf",
+        "post-training:excursion-td"
       ]
     },
     {
@@ -180,7 +181,9 @@
         "post-training:intuitor",
         "post-training:math-shepherd",
         "post-training:process-supervision",
-        "post-training:concur"
+        "post-training:concur",
+        "post-training:maxim",
+        "post-training:mcpo"
       ]
     },
     {
@@ -244,7 +247,8 @@
         "post-training:gkd",
         "post-training:minillm",
         "post-training:mpopd",
-        "post-training:cord-rollout"
+        "post-training:cord-rollout",
+        "post-training:drd-mopd"
       ]
     },
     {

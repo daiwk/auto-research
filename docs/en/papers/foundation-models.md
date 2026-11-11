@@ -8,6 +8,9 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding](<https://arxiv.org/abs/2611.13545v1>) | 2026-11-10 | [English](../../foundation-models/2611.13545-stochastic-rounding/README-en.md) · [Chinese](../../foundation-models/2611.13545-stochastic-rounding/README.md) |
+| [Blurring the Block Boundaries: Overlapping Block Denoising for Efficient Diffusion Language Models](<https://arxiv.org/abs/2611.14387v1>) | 2026-11-10 | [English](../../foundation-models/2611.14387-b3/README-en.md) · [Chinese](../../foundation-models/2611.14387-b3/README.md) |
+| [ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation](<https://arxiv.org/abs/2611.12956v1>) | 2026-11-07 | [English](../../foundation-models/2611.12956-adindex/README-en.md) · [Chinese](../../foundation-models/2611.12956-adindex/README.md) |
 | [e-means: outperforming k-means (in one-tenth the epochs)](<https://arxiv.org/abs/2611.09501v1>) | 2026-11-06 | [English](../../foundation-models/2611.09501-e-means/README-en.md) · [Chinese](../../foundation-models/2611.09501-e-means/README.md) |
 | [GINGER: Spicing Up Graph-Based Vector Search](<https://arxiv.org/abs/2611.08306v1>) | 2026-11-05 | [English](../../foundation-models/2611.08306-ginger/README-en.md) · [Chinese](../../foundation-models/2611.08306-ginger/README.md) |
 | [ConvPE: Convolutional Position Embedding Improves Transformers](<https://arxiv.org/abs/2611.07749>) | 2026-11-05 | [English](../../foundation-models/2611.07749-convpe/README-en.md) · [Chinese](../../foundation-models/2611.07749-convpe/README.md) |

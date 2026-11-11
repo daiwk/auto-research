@@ -1,0 +1,568 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-11-priority-components",
+  "checked_on": "2026-11-11",
+  "scope_kind": "bounded-component-intake",
+  "all_sources_exhaustive": false,
+  "full_window_review_complete": false,
+  "new_announcement_date_verified_for_all": false,
+  "review_watermark_advanced": false,
+  "review_watermark": {
+    "before": "2026-11-09",
+    "after": "2026-11-09"
+  },
+  "watermark_artifact": "paper-discovery-watermark.json",
+  "watermark_sha256": "632e9c534cf58011312950707623b3c3e6eb77d8ed9648c700f91c3fa12b4492",
+  "date_policy": "Use exact original published_at converted to Asia/Shanghai against November 9. Discovery, announcement and identifier month are not first-publication dates. AlphaProof Code has official day precision only and no fabricated arXiv identity.",
+  "ci_capture_receipts": [
+    {
+      "artifact": ".cache/nov11-components/ci/agent-paper-candidates/paper-candidates-agent.json",
+      "sha256": "50d9ac4619c21d0ebeeca81e893bc2615710f26fe2fbfadf2e745c50b21687d2",
+      "track": "agent",
+      "recall_mode": "submission-window",
+      "requested_window": {
+        "start": "2026-10-28",
+        "end": "2026-11-11"
+      },
+      "effective_window": {
+        "start": "2026-10-27",
+        "end": "2026-11-11"
+      },
+      "candidate_count": 1458,
+      "coverage_complete": true,
+      "transport_complete": true,
+      "query_count": 11,
+      "capped_queries": 0,
+      "failed_queries": 0,
+      "incomplete_queries": [],
+      "all_returned_candidates_method_reviewed": false
+    },
+    {
+      "artifact": ".cache/nov11-components/ci/agent-paper-candidates/paper-late-index-agent.json",
+      "sha256": "0823e648c27c187ce6c7f0c5271bac6139a8079122d63561460e1b5ae8168b0c",
+      "track": "agent",
+      "recall_mode": "late-index",
+      "requested_window": {
+        "start": "2026-10-28",
+        "end": "2026-11-11"
+      },
+      "effective_window": {
+        "start": "2026-10-27",
+        "end": "2026-11-11"
+      },
+      "candidate_count": 3485,
+      "coverage_complete": true,
+      "transport_complete": true,
+      "query_count": 11,
+      "capped_queries": 0,
+      "failed_queries": 0,
+      "incomplete_queries": [],
+      "all_returned_candidates_method_reviewed": false
+    },
+    {
+      "artifact": ".cache/nov11-components/ci/foundation-model-paper-candidates/paper-candidates-foundation-model.json",
+      "sha256": "374128ab8dbffb2458ec4e198cecbdf039c0b89e27091bd5cf187510c0a29890",
+      "track": "foundation-model",
+      "recall_mode": "submission-window",
+      "requested_window": {
+        "start": "2026-10-28",
+        "end": "2026-11-11"
+      },
+      "effective_window": {
+        "start": "2026-10-27",
+        "end": "2026-11-11"
+      },
+      "candidate_count": 2144,
+      "coverage_complete": true,
+      "transport_complete": true,
+      "query_count": 12,
+      "capped_queries": 0,
+      "failed_queries": 0,
+      "incomplete_queries": [],
+      "all_returned_candidates_method_reviewed": false
+    },
+    {
+      "artifact": ".cache/nov11-components/ci/foundation-model-paper-candidates/paper-late-index-foundation-model.json",
+      "sha256": "cd64065a8498c772bbd84b9fe4d503366a99b6aca36aa1edc204425068e98902",
+      "track": "foundation-model",
+      "recall_mode": "late-index",
+      "requested_window": {
+        "start": "2026-10-28",
+        "end": "2026-11-11"
+      },
+      "effective_window": {
+        "start": "2026-10-27",
+        "end": "2026-11-11"
+      },
+      "candidate_count": 5324,
+      "coverage_complete": false,
+      "transport_complete": true,
+      "query_count": 12,
+      "capped_queries": 1,
+      "failed_queries": 0,
+      "incomplete_queries": [
+        {
+          "query": "LLM",
+          "categories": [
+            "cs.CL",
+            "cs.LG"
+          ],
+          "date_from": "None",
+          "date_to": "None",
+          "identifier_months": [
+            "2610",
+            "2611"
+          ],
+          "maximum_results": 2000,
+          "next_offset": 2000,
+          "state": "capped",
+          "coverage_complete": false,
+          "transport_complete": true,
+          "error": null
+        }
+      ],
+      "all_returned_candidates_method_reviewed": false
+    },
+    {
+      "artifact": ".cache/nov11-components/ci/post-training-paper-candidates/paper-candidates-post-training.json",
+      "sha256": "1de21c4592fd6e657a507e6fca33d31436d4f31ab93160e7ec810a7170fc31c7",
+      "track": "post-training",
+      "recall_mode": "submission-window",
+      "requested_window": {
+        "start": "2026-10-28",
+        "end": "2026-11-11"
+      },
+      "effective_window": {
+        "start": "2026-10-27",
+        "end": "2026-11-11"
+      },
+      "candidate_count": 919,
+      "coverage_complete": true,
+      "transport_complete": true,
+      "query_count": 11,
+      "capped_queries": 0,
+      "failed_queries": 0,
+      "incomplete_queries": [],
+      "all_returned_candidates_method_reviewed": false
+    },
+    {
+      "artifact": ".cache/nov11-components/ci/post-training-paper-candidates/paper-late-index-post-training.json",
+      "sha256": "d07a21eca315bfd580a9102ed10f6028aaf458445448aebfc0dd150f03961094",
+      "track": "post-training",
+      "recall_mode": "late-index",
+      "requested_window": {
+        "start": "2026-10-28",
+        "end": "2026-11-11"
+      },
+      "effective_window": {
+        "start": "2026-10-27",
+        "end": "2026-11-11"
+      },
+      "candidate_count": 1951,
+      "coverage_complete": true,
+      "transport_complete": true,
+      "query_count": 11,
+      "capped_queries": 0,
+      "failed_queries": 0,
+      "incomplete_queries": [],
+      "all_returned_candidates_method_reviewed": false
+    },
+    {
+      "artifact": ".cache/nov11-components/ci/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "sha256": "374d752a80382a78bf3fe630ceec698cd229c866ad0f437d48446f1132c32aa2",
+      "track": "recommendation",
+      "recall_mode": "submission-window",
+      "requested_window": {
+        "start": "2026-10-28",
+        "end": "2026-11-11"
+      },
+      "effective_window": {
+        "start": "2026-10-27",
+        "end": "2026-11-11"
+      },
+      "candidate_count": 564,
+      "coverage_complete": true,
+      "transport_complete": true,
+      "query_count": 24,
+      "capped_queries": 0,
+      "failed_queries": 0,
+      "incomplete_queries": [],
+      "all_returned_candidates_method_reviewed": false
+    },
+    {
+      "artifact": ".cache/nov11-components/ci/recommendation-paper-candidates/paper-late-index-recommendation.json",
+      "sha256": "4e00dc5afc036438fe461e9198e530b25baf0e022f515ebbaa76d1ad6cd52e2b",
+      "track": "recommendation",
+      "recall_mode": "late-index",
+      "requested_window": {
+        "start": "2026-10-28",
+        "end": "2026-11-11"
+      },
+      "effective_window": {
+        "start": "2026-10-27",
+        "end": "2026-11-11"
+      },
+      "candidate_count": 715,
+      "coverage_complete": true,
+      "transport_complete": true,
+      "query_count": 24,
+      "capped_queries": 0,
+      "failed_queries": 0,
+      "incomplete_queries": [],
+      "all_returned_candidates_method_reviewed": false
+    }
+  ],
+  "ci_transport_complete": true,
+  "ci_recall_coverage_complete": false,
+  "capped_queries": 1,
+  "review_artifacts": [
+    {
+      "path": "priority-review.json",
+      "sha256": "d17cb3a606300068c478a793a19cd8c96c84bee5ca623150ee88942d39343081"
+    },
+    {
+      "path": "post-training-review.json",
+      "sha256": "089a3777eba968787589726a0eb50cb995f79456f5b23715451c16c17f6acce8"
+    },
+    {
+      "path": "agent-review.json",
+      "sha256": "cc4778d4d7e254b9292ee58c72b7a677cd6a86ed8fda7ab53e1d746d98aeb7cc"
+    }
+  ],
+  "official_coverage": [
+    {
+      "organization": "Google",
+      "actual_pages": [
+        "https://research.google/pubs/?category=2026&sort=-publication__year",
+        "https://research.google/pubs/?category=2026&sort=-publication__year&page=31"
+      ],
+      "current_visible_counts": {
+        "first": 15,
+        "last": 12
+      },
+      "exact_diff_against_prior_last9": 3,
+      "disposition_of_delta": "FM-ChangeNetJulyhistoricalapplication;twoOSS/governance reportsoutsidealgorithmfocus",
+      "limitations": "Onlyfirstandlastpagescheckednow;prior30pagecapturesremaininheriteddatedevidence;462vs450isnot12newpapers."
+    },
+    {
+      "organization": "Google DeepMind",
+      "actual_pages": [
+        "https://deepmind.google/research/publications/",
+        "https://deepmind.google/blog/introducing-alphaproof-code/"
+      ],
+      "observation": "publicationlandinghashunchangedversuspriorboundedreview;newAlphaProofCodefoundviaofficialNov10blog/project,notinferredfromdirectorytotal",
+      "limitations": "SelectedpublicationlistnotwholeDeepMindoutput"
+    },
+    {
+      "organization": "Meta",
+      "actual_pages": [
+        "https://research.meta.ai/",
+        "https://ai.meta.com/research/publications/"
+      ],
+      "observation": "researchhomeidenticalpriorcapturelatestNov9MuseEmber;publicationHTTP200returns45-byteSorrycontentunavailable",
+      "limitations": "Curatedhomepageisnotpublicationcensus;blockedprimarydirectoryretainedasactualsourceaccesslimitation;nomodel-name-basedaffiliation"
+    }
+  ],
+  "official_source_receipts": [
+    {
+      "capture": ".cache/nov11-components/priority/alphaproof-blog.html",
+      "sha256": "29c2f431d1f6afe2125bf34319f05f87e4c802dd3548782522c618aefd1c1cc8",
+      "bytes": 30066,
+      "retrieved_at": "2026-11-11T09:47:46.584840+00:00",
+      "url": "https://deepmind.google/blog/introducing-alphaproof-code/",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/alphaproof-project.html",
+      "sha256": "3436b07ab2d661dff5217f6f2074d3ea9c459815fd072f62e53892d83c8fd061",
+      "bytes": 1985046,
+      "retrieved_at": "2026-11-11T09:48:37.057153+00:00",
+      "url": "https://google-deepmind.github.io/code-verification",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/alphaproof-readme.md",
+      "sha256": "eaf6b742fa399084521b416c57bca7558e7911d92cd44adf2edfe529f89c4acd",
+      "bytes": 6488,
+      "retrieved_at": "2026-11-11T10:11:40.865506+00:00",
+      "url": "https://raw.githubusercontent.com/google-deepmind/code-verification/808b4b7ffef198e6a91f71ed776d641a1c236882/README.md",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/alphaproof.pdf",
+      "sha256": "cf813b7192ed247d33003e09cfa612fcda695502eb03768cd96c849afe1cb0a4",
+      "bytes": 888318,
+      "retrieved_at": "2026-11-11T09:47:46.547366+00:00",
+      "url": "https://deepmind.google/documents/36/Formal_Verification_of_Signal_4.pdf",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/deepmind-publications.html",
+      "sha256": "30d4dcbb7ed594f587f9d6411f2c48214d313926343c91e15848780355e72911",
+      "bytes": 142847,
+      "retrieved_at": "2026-11-11T09:49:47.200696+00:00",
+      "url": "https://deepmind.google/research/publications/",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/fm-changenet-detail.html",
+      "sha256": "247764b7bf3f28194daa258155dbd96940b097d57376cb5fa3352f4dfe9af686",
+      "bytes": 146012,
+      "retrieved_at": "2026-11-11T09:50:08.083902+00:00",
+      "url": "https://research.google/pubs/fm-changenet-flow-matching-network-for-change-detection/",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/google2026-first.html",
+      "sha256": "ef5539979f6a228874951c54feb49c3e709eb01fb726c6d5c771c4e1581771c1",
+      "bytes": 323474,
+      "retrieved_at": "2026-11-11T09:49:48.507898+00:00",
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/google2026-last.html",
+      "sha256": "cda859c424b89e9f6f5f00a4ef0c601ac3077464f64056aec2933c6bf4bf13bf",
+      "bytes": 290904,
+      "retrieved_at": "2026-11-11T09:49:46.398644+00:00",
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=31",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/lisa-abs.html",
+      "sha256": "2fc529c92359cbd98afa6dfc105bf44d0cd8449ec4eca145ac0eab2de6368301",
+      "bytes": 45420,
+      "retrieved_at": "2026-11-11T09:47:44.911669+00:00",
+      "url": "https://arxiv.org/abs/2605.14454",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/lisa.html",
+      "sha256": "239de7f9abb1981f7d67ca54837a34262e7a9e60dd6f5fe80afa4a6f670b4308",
+      "bytes": 352992,
+      "retrieved_at": "2026-11-11T09:47:44.214891+00:00",
+      "url": "https://arxiv.org/html/2605.14454v1",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/lisa.pdf",
+      "sha256": "48882b8114e8e4c5bb801c69d21eb63b5c882875a409a97a8c3ee88d53737248",
+      "bytes": 1880037,
+      "retrieved_at": "2026-11-11T09:53:44.391186+00:00",
+      "url": "https://arxiv.org/pdf/2605.14454v1",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/meta-home.html",
+      "sha256": "16be5410a1ce7a8d177ad1470ba7f1d1566ee008b43dc237a864aee225e01de4",
+      "bytes": 338011,
+      "retrieved_at": "2026-11-11T09:49:46.194455+00:00",
+      "url": "https://research.meta.ai/",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/meta-publications.html",
+      "sha256": "de23e0c264ff944ee66adb95a36d8b8613ad646ba1147b3f87d843d0d73f88a0",
+      "bytes": 45,
+      "retrieved_at": "2026-11-11T09:49:45.258980+00:00",
+      "url": "https://ai.meta.com/research/publications/",
+      "transport_status": "HTTP200",
+      "content_status": "unavailable_despite_http200"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/reprobridge-abs.html",
+      "sha256": "f6b73afb8c57b4a2afaf19a814b4d6d564c447d9ec3803bd8a8c79648461fd41",
+      "bytes": 41602,
+      "retrieved_at": "2026-11-11T09:47:46.214307+00:00",
+      "url": "https://arxiv.org/abs/2611.08452",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/reprobridge-project.html",
+      "sha256": "e3f9211b5dbd08175b83923eb2a6637a7df35ba63737bdebf0213319decdd45b",
+      "bytes": 248017,
+      "retrieved_at": "2026-11-11T09:47:46.120189+00:00",
+      "url": "https://wyyyb.github.io/reprobridge_website/",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/reprobridge.html",
+      "sha256": "9fe82d65e120f565a1df3d2017b6e615ccd53a6cc42aa12c6f783d40ca05d582",
+      "bytes": 560995,
+      "retrieved_at": "2026-11-11T09:47:45.139627+00:00",
+      "url": "https://arxiv.org/html/2611.08452v1",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/scaling-ab-abs.html",
+      "sha256": "1ec4e52f62697652ca52af86e2effa6533234f20aa1b1f6a894a94a120e27262",
+      "bytes": 42289,
+      "retrieved_at": "2026-11-11T10:03:52.061525+00:00",
+      "url": "https://arxiv.org/abs/2611.13539",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/scaling-ab.html",
+      "sha256": "cbc2106934750a9003435e951d36b6dd11c981c631191627ba0231bcb2f12964",
+      "bytes": 327705,
+      "retrieved_at": "2026-11-11T10:03:50.483599+00:00",
+      "url": "https://arxiv.org/html/2611.13539v1",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    }
+  ],
+  "supplemental_keyword_search": [
+    {
+      "path": ".cache/nov11-components/post-training/arxiv-window.atom",
+      "source": "official arXiv Atom API",
+      "window": "submittedDate 2026-11-07T16:00Z through2026-11-11T16:00Z",
+      "keyword_scope": "on-policy/post-training/reinforcement-learning/reward search",
+      "reported_total": 111,
+      "returned_entries": 100,
+      "exhaustive": false,
+      "note": "First100 keyword-query records only; root integrates official current CI lanes and late-index records separately. MaxIM was found here rather than in this batch's post-training CI lane."
+    }
+  ],
+  "bounded_unreviewed_leads": [
+    {
+      "arxiv_id": "2611.13680",
+      "title": "Bootstrapped On-Policy Distillation",
+      "status": "not_assigned_in_this_five_component_batch",
+      "read_scope": "preliminary method headings only",
+      "terminal_method_review": false
+    },
+    {
+      "arxiv_id": "2611.14467",
+      "title": "A Theory of Policy Optimization in Post-Training: Coverage Collapse and Reference Resets",
+      "status": "not_assigned_in_this_five_component_batch",
+      "read_scope": "preliminary metadata only; no author verification",
+      "terminal_method_review": false
+    },
+    {
+      "arxiv_id": "2611.13135",
+      "title": "Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation",
+      "status": "not_assigned_in_this_five_component_batch",
+      "read_scope": "preliminary configuration; not accepted as full reviewed implementation",
+      "terminal_method_review": false
+    }
+  ],
+  "other_recorded_dispositions": {
+    "priority": [
+      {
+        "id": "2611.13539",
+        "revision": 1,
+        "title": "Exploiting Feature-invariant Scaling Laws for Efficient A/B Experimentation in Recommendation Systems",
+        "first_release_utc": "2026-11-10T04:02:31Z",
+        "source": {
+          "capture": ".cache/nov11-components/priority/scaling-ab.html",
+          "sha256": "cbc2106934750a9003435e951d36b6dd11c981c631191627ba0231bcb2f12964",
+          "bytes": 327705,
+          "retrieved_at": "2026-11-11T10:03:50.483599+00:00",
+          "url": "https://arxiv.org/html/2611.13539v1",
+          "transport_status": "HTTP200",
+          "content_status": "retrieved"
+        },
+        "verified_organizations": [
+          "Meta",
+          "National University of Singapore"
+        ],
+        "affiliation_evidence": "authorblock:ZhiliangChenMeta+NUS;SammyNammari/JiahaoSu/XiaoqiangLuoMeta",
+        "source_review_scope": "§5.2–5.3,§8.1,§8.3,§9.1,§10.2",
+        "decision": "rejected_online_evidence_not_established",
+        "reason": "正文A/B是候选架构/特征/优化器的离线实验对照：Criteo4.2B训练/178M末日validation、MovieLens20M、Llama/Qwen。未建立真实生产随机流量、量化线上收益和生产对照证据；标题A/B和online data动机不能替代门槛。按既有工业标准本轮不收录，不改到foundation/评测接口绕门槛，不创建经典例外。",
+        "method_note": "log-linear OLS;Student-t for fitted full-scale mean usesσsqrt[x*(X'X)^−1x*],without+1;beneficialifPr(Lfeature<.99Lbaseline)>.9. Statistical kernel remains only a future user-approved opportunity,not this batch.",
+        "cost_note": "原完整配置Wukong/LLM8×A100、HSTU100epochs和40+特征变化；这里只陈述原文成本，不用成本理由包装成接受/实现。",
+        "accepted": false,
+        "implemented": false,
+        "automatic_implementation_queue": false
+      },
+      {
+        "key": "e-means",
+        "id": "2611.09501",
+        "decision": "known_catalogued_duplicate",
+        "reason": "现manifest/ledger与Nov9register均已catalogued；11/9–11/11新闻热度不构成新首发或新实现任务。"
+      },
+      {
+        "key": "gslm2",
+        "decision": "known_catalogued_duplicate",
+        "reason": "manifest已有gslm2，root核实已有收录，不重新计为新增。"
+      },
+      {
+        "key": "fm-changenet",
+        "id": "2607.04750",
+        "decision": "historical_specialized_application_not_selected_this_batch",
+        "official_url": "https://research.google/pubs/fm-changenet-flow-matching-network-for-change-detection/",
+        "primary_url": "https://arxiv.org/abs/2607.04750",
+        "first_release_utc": "2026-07-06T07:42:58Z",
+        "reason": "本轮官方第31页URL新增，Download直接对应首作和作者相同的七月遥感变化检测稿；arXiv元数据已核，不按ID月份或目录发现日期猜首发。当前只做身份/日期/摘要选题，不声称方法/成本/机构原文核验。"
+      },
+      {
+        "title": "Case study: How much does it cost to maintain a copy of an open source software package (at Google)?",
+        "decision": "out_of_scope",
+        "reason": "新目录链接为OSS维护成本经验研究，无独立模型/Agent新算法或公开能力基准。"
+      },
+      {
+        "title": "Mentorship, Interrupted: How AI Disrupts the GSoC Pipeline and Why Mentors Matter More",
+        "decision": "out_of_scope",
+        "reason": "新目录链接为15位mentor/组织管理者的定性访谈和治理框架，无独立模型训练/Agent算法或能力benchmark。"
+      }
+    ],
+    "agent": [
+      {
+        "id": "2611.13426",
+        "revision": 1,
+        "title": "BioMem: Agentic Memory for Biomedical LLM Agents",
+        "published": "2026-11-10T01:09:11Z",
+        "first_author": "Mingchen Li",
+        "first_author_affiliation": "University of Massachusetts Amherst / VA Bedford Healthcare",
+        "metadata_sha256": "9334f2bac4a5b1f767c7c7139a8223155e7281fcbf0adbbbfe129d2a10553ef3",
+        "source_url": "https://arxiv.org/html/2611.13426v1",
+        "source_sha256": "fbdcfea8f5dba2ad0921c09b77073aa69b69992a4cf5c58d58f6abaf7bf7c2d0",
+        "source_cache": ".cache/nov11-components/agent/2611.13426v1.html",
+        "reviewed_sections": [
+          "2.3 Performance Evaluation of HMRU",
+          "4.1 Datasets",
+          "4.4 Hybrid Memory Retrieval and Utilization"
+        ],
+        "code_url": null,
+        "code_status": "No author code repository linked in the fixed paper or found by exact-title search.",
+        "algorithm": "HMRU unions existing dense and BM25 retrieval, reranks with a cross-encoder and builds task-conditioned evidence prompts. Its distinctive contribution is controlled biomedical retrieval/fidelity/use analysis rather than a new standalone retrieval primitive.",
+        "priority": "P2",
+        "decision": "not_selected_this_window",
+        "originality_not_rejected": true,
+        "reason": "Do not duplicate the repository's existing hybrid-retrieval score hooks merely to add another generic component. This selection does not reject the paper's empirical biomedical contribution or claim a completed implementation.",
+        "cost_assessment": {
+          "decision": "not_reproduced_high_cost",
+          "basis": "Four 8B-30B open models, five memory configurations and six biomedical tasks plus long conversations, with multiple sensitivity grids; MIMIC resources require access authorization. Exact full runtime is undisclosed. Do not launch model probes or acquire clinical data to resolve that uncertainty.",
+          "measured_locally": false
+        },
+        "automatic_implementation_queue": false
+      }
+    ]
+  },
+  "limitations": [
+    "Fixed seventeen-paper delivery, not a window-wide or historical method audit.",
+    "The foundation late-index LLM query is capped at 2000; transport success does not prove recall exhaustion.",
+    "The supplemental post-training Atom search returned the first 100 of 111 keyword results only.",
+    "Google first/last pages and selected details were checked; count 462 versus 450 is not twelve new papers.",
+    "Meta publication directory returned an unavailable-content response. An unchanged curated home page is not a census.",
+    "Unreviewed leads are neither accepted implementation work nor high-cost DONE decisions.",
+    "Sixteen L1 synthetic mechanism checks and four real A100 checks are not full-paper capability or Evolve evidence."
+  ]
+}

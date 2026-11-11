@@ -1,0 +1,41 @@
+{
+  "domain": "agent-research",
+  "key": "wikitrace",
+  "title": "Don't Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents",
+  "paper_url": "https://arxiv.org/abs/2611.14320",
+  "reviewed_version": "2611.14320v1",
+  "detail_path": "agent-research/2611.14320-wikitrace/README.md",
+  "topic": [
+    "主动 / 长期记忆",
+    "证据链接与记忆可靠性"
+  ],
+  "first_author": "Yukyeong Lee",
+  "first_author_affiliation": "KAIST",
+  "published": "2026-11-10",
+  "published_at": "2026-11-10T16:46:59Z",
+  "code": "https://github.com/yukyeongleee/wikitrace",
+  "code_status": "作者公开实现已核实，Apache-2.0；本地独立实现语料与链接协议。",
+  "adapter": null,
+  "priority": "P1",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.agent_research.wikitrace.EvidenceLinkedCorpus",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.agent_research.wikitrace import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.14320v1#S4.SS1",
+    "available_resource": "单张 A100/A30 或本地 Mac",
+    "basis": "五benchmark/八suite、多方法、三trial的高reasoning DeepSeek-V4-Flash终端Agent与记忆构建，单episode可达200环境步；完整多臂长rollout成本过高，不复现。"
+  },
+  "fidelity_note": "只读训练轨迹/编译解释/洞见三层链接与原始hash校验；没有LLM编译、测试任务actor或能力对照。",
+  "summary": "WikiTrace保留洞见到轨迹解释和原始执行的路径，让Agent在信息缺失、冲突或失败经验下回查证据。本地只实现不可变链接语料与精确下钻协议；完整Agent实验不复现。",
+  "gpu_validation_passed": false
+}

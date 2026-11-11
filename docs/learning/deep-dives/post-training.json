@@ -219,7 +219,7 @@
     "policy-optimization": {
       "title": "同一个GRPO名字之外：优势尺度、裁剪单位与训推失配",
       "thesis": "GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比被裁剪、样本到底由哪个分布生成。Dr. GRPO、DAPO、GSPO与TIS/IcePop分别改动这些环节，不能把所有ratio都叫同一种off-policy校正。",
-      "updated": "2026-11-09",
+      "updated": "2026-11-11",
       "reviewed_papers": [
         "post-training:rcea",
         "post-training:rlid",
@@ -276,7 +276,8 @@
         "post-training:rloo",
         "post-training:grpo",
         "post-training:remax",
-        "post-training:ppo-rlhf"
+        "post-training:ppo-rlhf",
+        "post-training:excursion-td"
       ],
       "axes": [
         "优势尺度：组均值、组标准差、长度归一化",
@@ -359,7 +360,21 @@
           "paper": "post-training:rcea",
           "position": "不改更新目标，先按验证结果、过程有效性和解法模式拆开轨迹熵，再用同前缀协方差解释局部变化方向。",
           "tradeoff": "精确分解需要确定性分区；局部协方差不是策略模式或因果归因。CPU 只覆盖数值核，未跑多目标 RLVR 矩阵。",
-          "sections": ["核心公式", "原文结果与限制", "诊断与边界"]
+          "sections": [
+            "核心公式",
+            "原文结果与限制",
+            "诊断与边界"
+          ]
+        },
+        {
+          "paper": "post-training:excursion-td",
+          "position": "对目标策略持续若干步后永久回到行为策略的 excursion 时长作混合，以递归权重构造 Ex-TD/Ex-Retrace；本地计算5状态3动作精确算子和实际轨迹target。",
+          "tradeoff": "beta在目标偏差、方差与收缩间取舍，不是TIS的训推引擎ratio截断；中间beta不保证目标固定点无偏。完整七任务MPO每run约12小时不复现。",
+          "sections": [
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -388,6 +403,14 @@
             "post-training:rlid",
             "post-training:grpo",
             "post-training:gspo"
+          ]
+        },
+        {
+          "title": "先确认离策略发生在哪一层，再选择校正",
+          "body": "TIS比较同一权重在training与rollout引擎产生的概率，处理数值实现失配；Ex-Retrace比较目标策略与行为策略，按整段excursion持续时间构造多步值target。两者都出现重要性比，不表示可交换：逐token训推ratio不能直接替代状态动作价值target里的持续时长前缀，后者也不消除LM训练引擎的数值差异。",
+          "papers": [
+            "post-training:excursion-td",
+            "post-training:tis"
           ]
         }
       ],
@@ -433,6 +456,16 @@
             "post-training:tis",
             "post-training:icepop",
             "post-training:gspo"
+          ]
+        },
+        {
+          "id": "engine-ratio-versus-excursion",
+          "question": "TIS的单侧ratio截断能否直接替代Ex-Retrace？",
+          "answer": "不能。TIS校正training/rollout引擎概率失配；Ex-Retrace定义目标/行为策略之间多步价值target，并对先目标后行为的时长混合。必须先对齐分子、分母、条件变量和更新对象。",
+          "example": "教学例：两个引擎给同一token .2与.1时TIS比为2；Ex-Retrace里的比则比较给定状态下目标与行为动作概率，还需要gamma、lambda、beta和后续Q值。",
+          "papers": [
+            "post-training:excursion-td",
+            "post-training:tis"
           ]
         }
       ],
@@ -566,9 +599,21 @@
         {
           "date": "2026-11-09",
           "summary": "加入 RCEA，把策略优化目标与熵诊断分开。全局熵变小不能证明正确策略模式变少，本地只验证轨迹链式分解与局部一阶近似。",
-          "papers": ["post-training:rcea"],
+          "papers": [
+            "post-training:rcea"
+          ],
           "source_revisions": {
             "post-training:rcea": "00b50a563e4c7c1037873e188e9a0a80c1d211069880328ce84177e56ac5ac6c"
+          }
+        },
+        {
+          "date": "2026-11-11",
+          "summary": "加入 Google DeepMind 相关 Excursion TD，区分持续时长混合与逐动作混合，也区分目标/行为校正与 TIS 训推引擎校正；实现可负担的表格型核心，完整约12小时/run的控制实验不复现。",
+          "papers": [
+            "post-training:excursion-td"
+          ],
+          "source_revisions": {
+            "post-training:excursion-td": "d9729625dcd35d32cbe7741eb613ea93410b7194802985892b414c597ebdff83"
           }
         }
       ]
@@ -576,7 +621,7 @@
     "reward-and-credit": {
       "title": "奖励从哪里来，信用才该分到哪里",
       "thesis": "过程标签、最终结果、模型自置信与回溯归因是不同证据。逐步PRM、MRTPO、TACO和MART-GRPO分别做标签获取、奖励定位、正信用降权和失败后缀过滤；INTUITOR则改用内在分布信号，不能把它当外部正确性验证器。 CONCUR另处理奖励维度之间的优先级，把门控辅助优势投影到主奖励保序锥；这不是沿时间轴分配token信用。",
-      "updated": "2026-11-07",
+      "updated": "2026-11-11",
       "reviewed_papers": [
         "post-training:emoreward",
         "post-training:dars-density",
@@ -616,7 +661,9 @@
         "post-training:intuitor",
         "post-training:math-shepherd",
         "post-training:process-supervision",
-        "post-training:concur"
+        "post-training:concur",
+        "post-training:maxim",
+        "post-training:mcpo"
       ],
       "axes": [
         "证据来源：人工步骤、正确续写比例、verifier、内在分布",
@@ -709,7 +756,31 @@
           "paper": "post-training:emoreward",
           "position": "先用当前视频的有效证据门控决定哪些评分能进入融合，再用完成轮的原始分数与结果相关性倾斜各通道权重。训练轮之间拟合一次，下一轮只读。",
           "tradeoff": "需要已完成的参考轮，相关性依赖 VideoAlign 代理结果，不等同于独立情绪偏好。CPU 只验收分配，未运行视觉评分器或完整生成训练。",
-          "sections": ["背景与主要改动", "核心公式", "诊断与边界"]
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "诊断与边界"
+          ]
+        },
+        {
+          "paper": "post-training:maxim",
+          "position": "以冻结critic的conditional/null teacher-forced log-ratio分别测摘要的目标信息与前向历史支持，再经中心化sigmoid、1-gamma尺度与退火构成跨turn return。",
+          "tradeoff": "生成奖励信号而非重分配已有token信用；特权目标只能用于奖励端，不得给被评估摘要器读。近似critic与非线性shaping不是事实或最优策略保证；本地不训练Gemini。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "paper": "post-training:mcpo",
+          "position": "用温度后old-policy top1-top2 margin构造截断线性不确定度，按优势符号指数加权，再按响应内有效token均值归一，保持平均序列优势。",
+          "tradeoff": "负优势时不确定token少受罚，非band-pass、非额外verifier。原文更长生成与缺length-matched对照限制因果解释；Qwen三数据种子的p=.083不应写成显著胜出。",
+          "sections": [
+            "核心公式",
+            "原文结果与限制",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -751,7 +822,18 @@
         {
           "title": "先合成视频奖励，还是把奖励分给生成 token？",
           "body": "EmoReward 在评分通道维度校准一个视频标量，靠本次有效性与前一完成轮的代理相关性；TVRL 则沿生成 token 维度，使用冻结 VLM 的输入梯度把现有组优势重新分配。前者只改标量并不定位哪些 token 导致效果，后者的梯度归因也不会估计面部或运动评分器跨轮是否可靠。比较时分别冻结评分器集合与信用分配方式。",
-          "papers": ["post-training:emoreward", "post-training:tvrl"]
+          "papers": [
+            "post-training:emoreward",
+            "post-training:tvrl"
+          ]
+        },
+        {
+          "title": "奖励有用不等于token该怎么分，信用守恒也不等于奖励正确",
+          "body": "MaxIM先定义任务信息与事实一致性怎样成为可用奖励；MCPO接受已有序列优势，只改变局部token的相对权重。MCPO的响应均值守恒不能修复一个错误critic，MaxIM的critic也不会自动给出正确token归因。比较时应分别检查奖励端有没有特权泄漏、token端是old policy还是current policy，以及生成长度是否改变实际预算。",
+          "papers": [
+            "post-training:maxim",
+            "post-training:mcpo"
+          ]
         }
       ],
       "questions": [
@@ -812,7 +894,20 @@
           "question": "两段视频最终情绪标量相同，EmoReward 和 TVRL 是否一定给生成 token 相同信用？",
           "answer": "不一定。EmoReward 的输出是视频级标量，不能单独决定 token 信用；TVRL 会把既有组优势按冻结 VLM 的输入梯度分配。相同标量的两段视频仍可能有不同的 token 敏感度。如果同组优势本身为零，归因不能凭空产生非零信用。",
           "example": "教学例：假设两段视频在一个非零优势的组内都为正优势，一段更依赖前景人物动作 token，另一段依赖后半段转场；TVRL 的敏感度可不同，EmoReward 不输出这样的分配。",
-          "papers": ["post-training:emoreward", "post-training:tvrl"]
+          "papers": [
+            "post-training:emoreward",
+            "post-training:tvrl"
+          ]
+        },
+        {
+          "id": "reward-versus-token-redistribution",
+          "question": "把MCPO套在MaxIM奖励上，就能保证更真实的记忆吗？",
+          "answer": "不能。两者可以作用在不同环节，但信息奖励近似、token信用启发式和推理输入隔离要分别验证。响应内平均优势守恒只是一条算术合同，不证明critic正确、摘要无幻觉或任务提升。",
+          "example": "教学例：如果critic错误奖励了虚构预算，MCPO仍可把这个正优势按margin分给token；均值完全守恒，却依然强化错误方向。",
+          "papers": [
+            "post-training:maxim",
+            "post-training:mcpo"
+          ]
         }
       ],
       "updates": [
@@ -925,10 +1020,25 @@
         {
           "date": "2026-11-07",
           "summary": "补入 11 月 5 日公告窗口的 EmoReward，对照 TVRL 的 token 信用，区分通道相关、当前有效性与组内 token 敏感度；仅 CPU L1，未运行生成器或完整训练。",
-          "papers": ["post-training:emoreward", "post-training:tvrl"],
+          "papers": [
+            "post-training:emoreward",
+            "post-training:tvrl"
+          ],
           "source_revisions": {
             "post-training:emoreward": "a5bbb06fcc7e2f8a66759b189b1ecab1b97642dbd525aba797820a4419b75694",
             "post-training:tvrl": "ce075a35eeddf757c5bd3590b394c1320c2dbbf9363328de5b7f41402b00aac6"
+          }
+        },
+        {
+          "date": "2026-11-11",
+          "summary": "加入 Google MaxIM 与 PayPal MCPO，区分奖励产生、前向grounding和token信用重分配；保留MCPO负优势方向、均值守恒及长度/显著性限制。仅L1 CPU核，完整Gemini/长rollout实验按成本不复现。",
+          "papers": [
+            "post-training:maxim",
+            "post-training:mcpo"
+          ],
+          "source_revisions": {
+            "post-training:maxim": "c7a3a721c843a1384f1e8f052af34a4124e1eeee4f7635bb2d9bc397c43f96e3",
+            "post-training:mcpo": "a3752eb5409a5c93d3c76fc3a8ba6445a76d1977d3797dd1c13d42e128a3164c"
           }
         }
       ]
@@ -936,7 +1046,7 @@
     "student-trajectory-distillation": {
       "title": "轨迹蒸馏：采样者、提案与散度方向分开看",
       "thesis": "“on-policy”描述监督发生在哪些状态，FKL/RKL/JSD描述在这些状态怎样比较分布。GKD和MiniLLM建立这两个轴，DrOPD、AP-OPD再调整纠错位置或强度，Semi-OPD与学习信号诊断则提醒：离线复用和残余损失各有不同含义。 MPOPD再把采样者变成可学习proposal：几何混合是提案target，学生仍向教师做RKL，二者不能混成同一个蒸馏分布。",
-      "updated": "2026-11-06",
+      "updated": "2026-11-11",
       "reviewed_papers": [
         "post-training:shuffled-opsd",
         "post-training:specopd",
@@ -981,7 +1091,8 @@
         "post-training:gkd",
         "post-training:minillm",
         "post-training:mpopd",
-        "post-training:cord-rollout"
+        "post-training:cord-rollout",
+        "post-training:drd-mopd"
       ],
       "axes": [
         "状态来源：教师示范、当前学生、初始学生固定轨迹",
@@ -1088,6 +1199,16 @@
             "核心公式",
             "数据协议与代码映射"
           ]
+        },
+        {
+          "paper": "post-training:drd-mopd",
+          "position": "冻结base加全部全参数delta形成唯一学生，域标签只路由更新；Own/Other/Alternate/SingleComponent使用独立AdamW状态，所有域先在同一W计算梯度。",
+          "tradeoff": "参数更新路由不同于DrOPD的token散度门，也不等于推理MoE；未选delta不能执行动量/计数/weight decay。作者未发布本篇训练实现与checkpoint，本地不实现教师或OPD rollout。",
+          "sections": [
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -1141,6 +1262,14 @@
           "papers": [
             "post-training:cord-rollout",
             "post-training:mpopd"
+          ]
+        },
+        {
+          "title": "都叫routing，token监督门与参数更新路由不在同一坐标系",
+          "body": "Divergence-Routed OPD用师生分歧决定哪些token位置增加FKL，改变监督分布；DRD-MOPD保留一个全delta合成学生，用域标签决定哪些参数增量接受loss梯度。后者的Other不能默认除以K-1，SingleComponent也不意味着前向只激活一个delta。两者组合需另定义共享loss与优化器合同，现有两个独立组件并不自动形成多教师Evolve算子。",
+          "papers": [
+            "post-training:drd-mopd",
+            "post-training:divergence-routed-opd"
           ]
         }
       ],
@@ -1217,6 +1346,16 @@
           "papers": [
             "post-training:cord-rollout",
             "post-training:mpopd"
+          ]
+        },
+        {
+          "id": "two-routing-coordinates",
+          "question": "DRD-MOPD和Divergence-Routed OPD可以共用一个routing布尔开关吗？",
+          "answer": "不可以。前者路由域梯度到参数增量，后者按token分歧路由额外FKL监督。二者的输入、被选对象、归一化和优化器状态不同；合并必须显式定义组合，不能只共用名字。",
+          "example": "教学例：一个高JS数学token可在DrOPD获额外监督；DRD的Other却会把这个域loss更新到其他delta，且这些delta一直参与前向。",
+          "papers": [
+            "post-training:drd-mopd",
+            "post-training:divergence-routed-opd"
           ]
         }
       ],
@@ -1355,6 +1494,16 @@
           "source_revisions": {
             "post-training:cord-rollout": "a67422453982ead1fe3cd4cf66ceb7a1b8b975644412150e78370f0694873be6",
             "post-training:mpopd": "d0449fdb3b1d63ecef157d1fa8bb1b7f2e2ddd6ce25378481dd8cba142ad90e2"
+          }
+        },
+        {
+          "date": "2026-11-11",
+          "summary": "加入 DRD-MOPD，区分token监督路由、域到参数更新路由与推理激活路由；本地保真实现同快照梯度与selected-only AdamW，不把上游Open-MOPD或局部参数检查当完整蒸馏结果。",
+          "papers": [
+            "post-training:drd-mopd"
+          ],
+          "source_revisions": {
+            "post-training:drd-mopd": "3fb54a6a2d9501802204e106c8b89d010713c1da560da1cd77bcb54977862a05"
           }
         }
       ]

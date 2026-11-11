@@ -14,7 +14,7 @@ P2 不选不否定新算法/基准的原创性，也不把未读方法改成高�
 当前来源覆盖、截至时间、非阻塞例外与 **11 月 8 日**起的重叠扫描计划以统一状态为准。
 [10 月 15 日闭环](research-audits/oct15-review-closure/README.md)保留为历史快照，不覆写原证据。
 
-最新有界选题实现见[2026-10-26批次](research-audits/oct26-components/README.md)：8个低成本L1组件均已做CPU/真实A100同源三种子验收，另有8篇高成本资料明确不复现、审查DONE。Google/Meta优先核对；新公告、近期源码补漏和历史目录补漏分别统计。它与全窗口审查收口分开，不把公告条目数当新论文数，不自行推进水位。此前批次仍保留在[路线记录](research-roadmap.md)。
+最新有界选题实现见[2026-11-11 批次](research-audits/nov11-components/README.md)：17 篇固定交付中，16 个 L1 组件完成 CPU 三 seed 诊断，4 个 CUDA 路径另经真实 A100 三 seed 验证；AlphaProof Code 仅机制与成本审查。全部完整高成本实验明确不复现、审查 DONE。按实际首发日期相对上海 11 月 9 日水位区分 13 篇后续首发与 4 篇补漏，不把发现日或编号月份当首发。Meta 的 2611.13539 因正文未建立真实量化生产 A/B 而独立拒绝，不计入 17 篇。来源捕获仍有触顶查询和 Meta 目录访问限制，因此不声称全窗口闭环，水位不变。此前批次仍保留在[路线记录](research-roadmap.md)。
 
 后续发现并修复了历史筛选缺口，见 [Harness² 与 Google/Meta 补漏](research-audits/harness2-priority-repair/README.md)。
 **日期在当前窗口外、发现账本中出现过，不等于完成方法/成本审查。** 冻结记录保留，但

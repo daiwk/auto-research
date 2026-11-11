@@ -275,7 +275,7 @@
     "visual-evidence-budget": {
       "title": "少看、晚看还是再看：把视觉预算放到正确阶段",
       "thesis": "视觉预算不只有token数。StackTok选择已编码证据，PACE提前分配输入分辨率，ViMoD保留可恢复细节，Frames-on-Demand按需取帧，AdaLoop多算已有视觉状态，OmniKVQuant减少每份cache的位宽。必须同时追踪信息是否还在、哪段成本已支付。",
-      "updated": "2026-10-27",
+      "updated": "2026-11-11",
       "reviewed_papers": [
         "foundation-models:adaloop-vision",
         "foundation-models:frames-on-demand",
@@ -292,7 +292,8 @@
         "foundation-models:veto",
         "foundation-models:video-encoder-selection",
         "multimodal-models:videomm",
-        "multimodal-models:vimod"
+        "multimodal-models:vimod",
+        "multimodal-models:steprefine"
       ],
       "axes": [
         "介入阶段：输入编码前、编码后、生成中、cache存储",
@@ -359,6 +360,16 @@
             "背景与主要改动",
             "复现边界"
           ]
+        },
+        {
+          "paper": "multimodal-models:steprefine",
+          "position": "相对已完成历史变化窗口检测mask平均熵尖峰，在mask位置用概率加权embedding额外refine，以新到旧KL稳定度停止，并把k次额外前向计入t-1-k索引。",
+          "tradeoff": "改变的是扩散token语义计算而非多取新图像或重跑视觉encoder；不同于视觉AdaLoop的循环状态。CPU公式不含MDLM、图像或remasking闭环，不证明幻觉benchmark改善。",
+          "sections": [
+            "核心公式",
+            "数据协议与代码映射",
+            "结果与复现边界"
+          ]
         }
       ],
       "analysis": [
@@ -378,6 +389,14 @@
           "papers": [
             "multimodal-models:vimod",
             "foundation-models:omnikvquant",
+            "foundation-models:adaloop-vision"
+          ]
+        },
+        {
+          "title": "同样是多算一次，token软化与视觉循环不能按次数等同",
+          "body": "StepRefine在多模态扩散的mask token输入上保留概率加权语义，以新||旧KL决定停止并从总NFE扣预算。视觉AdaLoop则按问题调制冻结视觉块、循环更新视觉状态，额外计算主要在视觉侧。两者都不因多次计算就获得新的原始图像证据；比较前先追踪计算阶段、状态、停止信号和完整生成成本，不能把公式误差当幻觉减少。",
+          "papers": [
+            "multimodal-models:steprefine",
             "foundation-models:adaloop-vision"
           ]
         }
@@ -413,6 +432,16 @@
             "foundation-models:adaloop-vision",
             "foundation-models:frames-on-demand",
             "multimodal-models:vimod"
+          ]
+        },
+        {
+          "id": "soft-token-versus-visual-loop",
+          "question": "StepRefine和视觉AdaLoop都多算几次，为什么不能只比循环次数？",
+          "answer": "计算对象、每次成本和预算记账不同。StepRefine重算软token语义并扣减固定去噪预算；AdaLoop循环视觉状态并通过问题条件调制。应核对真实backbone与端到端预算，而不是把两次循环视为等算力。",
+          "example": "教学例：StepRefine在t=16额外2次应下移到13；AdaLoop的2次视觉块循环不对应这个去噪索引，也不会自动获得新图像。",
+          "papers": [
+            "multimodal-models:steprefine",
+            "foundation-models:adaloop-vision"
           ]
         }
       ],
@@ -456,13 +485,25 @@
             "multimodal-models:videomm": "c1c3018e8f2d1f1d21c50ea64c5e820aef137e52937dca5fe3b21218fe3af5d1",
             "multimodal-models:vimod": "bc6d1c67e26524c64b7aaf5b12d3e6ab643bfb82ff2d38571d61c914fefc1309"
           }
+        },
+        {
+          "date": "2026-11-11",
+          "summary": "加入StepRefine，将熵尖峰软token refinement与视觉AdaLoop循环区分；保留新||旧KL、历史窗口隔离及t-1-k预算。L1 CPU公式检查不替代真实MDLM/幻觉评测，完整多模型矩阵不复现。",
+          "papers": [
+            "multimodal-models:steprefine",
+            "foundation-models:adaloop-vision"
+          ],
+          "source_revisions": {
+            "multimodal-models:steprefine": "80543e75766c9cefbe3a05b8ad997abccbf84c25b7055c735f10e77791d13c42",
+            "foundation-models:adaloop-vision": "89ae8f64704875e311d05167d9f04a1cbcb5b18fac681839f595d6b1100df3ec"
+          }
         }
       ]
     },
     "world-state-actions": {
       "title": "会预测下一幕，还不等于会行动或保持同一个世界",
       "thesis": "世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。 SWIM从离线动作可预测性学习状态坐标的相对权重，训练期校准latent距离，部署时不向规划器增加真实状态。",
-      "updated": "2026-10-30",
+      "updated": "2026-11-11",
       "reviewed_papers": [
         "foundation-models:alps",
         "multimodal-models:aw0",
@@ -487,7 +528,8 @@
         "foundation-models:vjepa-policy",
         "multimodal-models:woven",
         "foundation-models:gui-jepa",
-        "foundation-models:swim"
+        "foundation-models:swim",
+        "multimodal-models:rs-jepa"
       ],
       "axes": [
         "学习对象：未来latent、动作分布、视觉转移、持久几何",
@@ -575,6 +617,16 @@
             "核心公式",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "multimodal-models:rs-jepa",
+          "position": "利用Vision Mamba扫描次序形成无像素编辑视图，以直通加反梯度hard half-split增加隐藏预测难度，并让四个排除twin的传感器邻域分布对齐detached共识。",
+          "tradeoff": "同主干stop-gradient target不是EMA教师；跨传感器检索表征不等于动作条件未来预测或策略。局部扫描/梯度/邻域核不含Vim、完整CVA/predictor或遥感检索成绩，四V100完整实验不复现。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -610,6 +662,14 @@
           "papers": [
             "foundation-models:swim",
             "foundation-models:gui-jepa"
+          ]
+        },
+        {
+          "title": "JEPA表征对齐与world-action闭环，需要不同的监督与验收",
+          "body": "RS-JEPA把配准传感器图像与不同扫描视图变成更一致的检索表征，hard划分与邻域损失针对当前场景关系；没有因其名字带JEPA就实现动作条件状态转移。V-JEPA Policy冻结预训练encoder，再训练future-latent predictor与action expert，动作输出及环境成功另需验收。遥感F1@5、latent预测误差和机器人成功率不能汇成一条分数。",
+          "papers": [
+            "multimodal-models:rs-jepa",
+            "foundation-models:vjepa-policy"
           ]
         }
       ],
@@ -663,6 +723,16 @@
           "papers": [
             "foundation-models:swim",
             "foundation-models:gui-jepa"
+          ]
+        },
+        {
+          "id": "retrieval-jepa-not-action-policy",
+          "question": "RS-JEPA的跨传感器邻域一致，是否证明已经能规划动作？",
+          "answer": "不能。它约束配准图像的检索表示及其他场景的相似性关系，没有定义动作条件动力学和策略输出。V-JEPA Policy另有future predictor与flow-matching action expert；表示核通过也不能代替环境任务验收。",
+          "example": "教学例：两个传感器都把同一类农田排为相似邻居，只说明表征关系一致；它没有给出机器人移动一步后会看到什么或应该输出哪个动作。",
+          "papers": [
+            "multimodal-models:rs-jepa",
+            "foundation-models:vjepa-policy"
           ]
         }
       ],
@@ -739,6 +809,18 @@
           "source_revisions": {
             "foundation-models:swim": "b1450b4ec070178de84e51ec3ca4999c68dc5726901f7f1abf85d8c14260f3b6",
             "foundation-models:gui-jepa": "5de10a527ec5abe710f7881beaf0ef48dfe68bb3cad8dab33703d8aa8574e02d"
+          }
+        },
+        {
+          "date": "2026-11-11",
+          "summary": "加入RS-JEPA，区分扫描视图/对抗划分/邻域一致性与V-JEPA Policy的未来动作闭环；明确同主干stop-gradient而非momentum target。仅L1 tensor机制，完整Vim/CVA/predictor和多数据集检索实验不复现。",
+          "papers": [
+            "multimodal-models:rs-jepa",
+            "foundation-models:vjepa-policy"
+          ],
+          "source_revisions": {
+            "multimodal-models:rs-jepa": "d702dffacafd0a6312ea20282bdd76d09aac77dba416c6a2cfa7f3d527ed482b",
+            "foundation-models:vjepa-policy": "bd556faa4f657cac639e6662804d80e39267f07b903ea87423fe32239a6e1905"
           }
         }
       ]

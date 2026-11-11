@@ -1,5 +1,9 @@
 # 统一后续路线图与 TODO
 
+## 2026-11-11 固定 17 篇交付
+
+[本轮逐项范围与真实证据](research-audits/nov11-components/README.md)：16 个低成本 L1 组件完成 CPU 三 seed 诊断，其中 DRD-MOPD、随机舍入、RS-JEPA、ADIndex 四项在真实 A100 三 seed 验证；AlphaProof Code 仅高成本机制/来源资料。Google 合作论文优先，Meta 的 2611.13539 因未建立正文量化生产 A/B 单独拒绝，不迁移主题绕过门槛。所有完整高成本实验不复现（审查 DONE）、不自动重试；四层问答、专题精读和校对英文版同批更新。按上海时区水位分为 13 篇后续首发、4 篇历史/重叠补漏，不是 17 篇当天新文。来源捕获的 foundation late-index `LLM` 查询仍触顶，补充 Atom 非穷尽且 Meta 目录不可用；后续需补覆盖与窗口级选题审查，统一审查水位保留 11 月 9 日。
+
 ## 2026-11-09 选题审查闭环（11 月 11 日确认口径）
 
 [本窗口闭环与精确清单](research-audits/nov09-review-closure/README.md)将审查水位推进至 **11 月 9 日**。

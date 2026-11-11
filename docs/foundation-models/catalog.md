@@ -10,6 +10,9 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 推理与系统效率 | [Blurring the Block Boundaries: Overlapping Block Denoising for Efficient Diffusion Language Models](2611.14387-b3/README.md) | Technion / Amazon Web Services，2026-11-10 | 未发现官方代码 | `b3`：仅低成本组件，完整实验不复现 |
+| 训练与数值系统 | [Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding](2611.13545-stochastic-rounding/README.md) | NVIDIA，2026-11-10 | 未发现官方代码 | `stochastic-rounding`：仅低成本组件，完整实验不复现 |
+| 注意力与长上下文 | [ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation](2611.12956-adindex/README.md) | Nanjing University / Alibaba Group，2026-11-07 | 未发现官方代码 | `adindex`：仅低成本组件，完整实验不复现 |
 | 推理与系统效率 | [e-means: outperforming k-means (in one-tenth the epochs)](2611.09501-e-means/README.md) | FAIR at Meta，2026-11-06 | [原作者入口](https://github.com/facebookresearch/faiss/tree/main/contrib/e_means)；原文链接 Meta Faiss contrib/e_means，固定 revision 可见原作者参考源码；本地独立实现论文算法，不依赖 Faiss。 | `e-means`：仅低成本组件，完整实验不复现 |
 | 注意力与长上下文 | [ConvPE: Convolutional Position Embedding Improves Transformers](2611.07749-convpe/README.md) | Nanjing University，2026-11-05 | [原作者入口](https://github.com/wzhagi/convpe)；固定v1链接原作者公开仓库；核实有实现源码，未找到明确代码许可证。本地按公式独立实现。 | `convpe`：仅低成本组件，完整实验不复现 |
 | 推理与系统效率 | [GINGER: Spicing Up Graph-Based Vector Search](2611.08306-ginger/README.md) | Google Research，2026-11-05 | [原作者入口](https://github.com/google/ginger)；固定 v1 指向官方仓库并称 GINGER 是 PiPNN II 官方实现；2026-11-07 核对固定 HEAD 仅有说明、许可证和贡献指南，README 声明源码与构建定义尚未发布。仓库许可证为 Apache-2.0，不代表本版方法源码已公开。 | `ginger`：仅低成本组件，完整实验不复现 |

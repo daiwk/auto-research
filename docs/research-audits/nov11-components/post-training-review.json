@@ -1,0 +1,265 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-11",
+  "scope": "Bounded post-training original-source review; five independent low-cost components, not an exhaustive scan or full paper reproduction.",
+  "search_receipts": [
+    {
+      "path": ".cache/nov11-components/post-training/arxiv-window.atom",
+      "source": "official arXiv Atom API",
+      "window": "submittedDate 2026-11-07T16:00Z through2026-11-11T16:00Z",
+      "keyword_scope": "on-policy/post-training/reinforcement-learning/reward search",
+      "reported_total": 111,
+      "returned_entries": 100,
+      "exhaustive": false,
+      "note": "First100 keyword-query records only; root integrates official current CI lanes and late-index records separately. MaxIM was found here rather than in this batch's post-training CI lane."
+    }
+  ],
+  "deduplication": "The five exact arXiv IDs were absent from repository manifest/discovery ledger/Nov9 register at initial inspection; this statement is not a continuing duplicate check after integration.",
+  "records": [
+    {
+      "arxiv_id": "2611.12825",
+      "reviewed_version": "v1",
+      "title": "MaxIM: Maximally Informative Incremental Summarization via Reinforcement Learning",
+      "first_author": "Jihwan Jeong",
+      "first_author_affiliation": "Google Research",
+      "published_at": "2026-11-09T18:25:42Z",
+      "original_url": "https://arxiv.org/html/2611.12825v1",
+      "metadata_source": "official arXiv Atom submission timestamp; do not substitute announcement/review date",
+      "source_receipt": {
+        "cache_path": ".cache/nov11-components/post-training/2611.12825v1.html",
+        "sha256": "f9e9837afa56cb0698e9b78a1fa8f592cd5a6c6e7cf9cc44099ae61bdbeb92b2",
+        "content_type": "text/html",
+        "read_scope": "author block, defining method and equations, experiment configuration and stated limitations; not every bibliography entry"
+      },
+      "decision": "accepted_component_only",
+      "implementation_status": "component_only",
+      "key": "post-training:maxim",
+      "local_operator": "auto_research.post_training.maxim.normalized_pmi",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "requires_gpu_validation": false,
+      "gpu_validation_status": "not_required_cpu_only",
+      "code_status": "截至2026-11-11，固定v1正文未给出已核实的MaxIM作者实现仓库；本地据式4–7独立实现奖励算术，不包含critic或摘要策略。",
+      "witnesses": [
+        "§4.3 equations4–5: shared critic, conditional/null teacher-forced log ratios; §4.4 equations6–7 centered sigmoid,1-gamma and cosine schedule",
+        "Appendix D.4: Gemini2.5Flash,GoogleCloudTPU,arXiv1000/WildChat800RLsteps,500dialogueseeds"
+      ],
+      "cost_assessment": {
+        "source": "固定v1 §4.3–4.4、Appendix D.4；https://arxiv.org/html/2611.12825v1",
+        "model_scale": "Gemini 2.5 Flash用于可训练策略、统一critic及行动/用户模拟；非可下载公开checkpoint。",
+        "data_scale": "arXiv与WildChat合成监督和在线交互；评测500个对话种子、最多15轮，GPT-4.1 judge及10000次bootstrap。",
+        "paper_configuration": "所有SFT、RL和serving在Google Cloud TPU；arXiv RL 1000步、WildChat 800步；多奖励与claim-grounding消融。",
+        "estimated_cost_basis": "闭源可训练模型、TPU与多角色长程交互不属于单卡短时复现；不把作者系统换成小模型后冒充完整复现。"
+      }
+    },
+    {
+      "arxiv_id": "2611.13275",
+      "reviewed_version": "v1",
+      "title": "Off-policy Learning with Excursion Policies",
+      "first_author": "Jiamin He",
+      "first_author_affiliation": "University of Alberta / Amii（研究在Google DeepMind期间完成）",
+      "published_at": "2026-11-09T21:41:23Z",
+      "original_url": "https://arxiv.org/html/2611.13275v1",
+      "metadata_source": "official arXiv Atom submission timestamp; do not substitute announcement/review date",
+      "source_receipt": {
+        "cache_path": ".cache/nov11-components/post-training/2611.13275v1.html",
+        "sha256": "5cbaa797acf0843ca5ccac0febd8efa9d9cf575ae3b94b62b73c1c60bc0746fc",
+        "content_type": "text/html",
+        "read_scope": "author block, defining method and equations, experiment configuration and stated limitations; not every bibliography entry"
+      },
+      "decision": "accepted_component_only",
+      "implementation_status": "component_only",
+      "key": "post-training:excursion-td",
+      "local_operator": "auto_research.post_training.excursion_td.ex_retrace_targets",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "requires_gpu_validation": false,
+      "gpu_validation_status": "not_required_cpu_only",
+      "code_status": "截至2026-11-11，固定v1正文未给出已核实作者代码仓库；本地独立实现式11及附录D的表格型算子。",
+      "witnesses": [
+        "§4.1 equation11 excursion-duration recurrence;Appendix D.1–D.2 equations28–31 truncated Ex-Retrace",
+        "Appendix E.1 five states/three actions/Dirichlet(1)/gamma.9 CPU;E.2 sevenMPOtasks singleA100 typical12hours"
+      ],
+      "cost_assessment": {
+        "source": "固定v1 §4.1–4.2、Appendix D.1–D.2、E.1–E.2；https://arxiv.org/html/2611.13275v1",
+        "model_scale": "表格型实验无checkpoint；完整连续控制为MPO actor/critic，三层网络。",
+        "data_scale": "完整7个dm_control任务（dog四任务、humanoid三任务），replay 200万、轨迹20、minibatch256。",
+        "paper_configuration": "作者称每个连续控制实验用1张NVIDIA A100，典型约12小时；还需多beta/lambda/随机种子比较。E.1 CPU小实验少于1GB、数分钟可做。",
+        "estimated_cost_basis": "本地执行低成本5状态3动作数值小基准；完整7任务多配置矩阵需多次约12小时运行，不复现。"
+      }
+    },
+    {
+      "arxiv_id": "2611.13249",
+      "reviewed_version": "v1",
+      "title": "DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation",
+      "first_author": "Lin Yao",
+      "first_author_affiliation": "Shanghai Jiao Tong University / Zhongguancun Academy",
+      "published_at": "2026-11-09T21:21:41Z",
+      "original_url": "https://arxiv.org/html/2611.13249v1",
+      "metadata_source": "official arXiv Atom submission timestamp; do not substitute announcement/review date",
+      "source_receipt": {
+        "cache_path": ".cache/nov11-components/post-training/2611.13249v1.html",
+        "sha256": "3154e1bbfbc7b7d54d50abe1b6f285cc1a3a7bea3c51c29ec9558cf2440cd40e",
+        "content_type": "text/html",
+        "read_scope": "author block, defining method and equations, experiment configuration and stated limitations; not every bibliography entry"
+      },
+      "decision": "accepted_component_only",
+      "implementation_status": "component_only",
+      "key": "post-training:drd-mopd",
+      "local_operator": "auto_research.post_training.drd_mopd.DeltaAdamW",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "requires_gpu_validation": true,
+      "gpu_validation_status": "passed_real_nvidia_l1",
+      "code_status": "原文Appendix C明确source bundle不含训练实现或checkpoint。引用的BytedTsinghua-SIA/Open-MOPD（4809a96cf85a869106ff0ff3f37d0a51e12010ae）仅为上游，不是DRD-MOPD作者开源；未找到本篇独立可验证仓库。",
+      "witnesses": [
+        "§3.1–3.4 all-delta composedforward,domain update routing,independent per-component Adam states and selected-only update",
+        "Appendix C explicitly excludes trainingimplementation/checkpoints fromsourcebundle;3Bbase,3fullparamincrements,2teachers,200rollouts,max16384tokens"
+      ],
+      "cost_assessment": {
+        "source": "固定v1 §3.1–3.4、Appendix A/C；https://arxiv.org/html/2611.13249v1",
+        "model_scale": "SmolLM3-3B基座、3个全参数增量及2个冻结教师；独立优化器状态和checkpoint负担。",
+        "data_scale": "Math/Code/IF三域，79380训练prompt、1536验证prompt，最多16384生成token。",
+        "paper_configuration": "FSDP1，200 rollout步，24×N_GPU prompt/步；原文未明确GPU总数或墙钟，不能估成已测耗时。",
+        "estimated_cost_basis": "多份3B全参数/独立Adam状态、长rollout与分布式配置超出低成本验证；完整成本量级为来源配置判断，非实际本地耗时。"
+      },
+      "gpu_validation_artifact": "docs/gpu-validations/drd-mopd-a100-20261111.json",
+      "gpu_validation_source_commit": "ef3521b7a3bdef545a584bc356ada87c68938a99",
+      "gpu_validation_seeds": [
+        42,
+        43,
+        44
+      ]
+    },
+    {
+      "arxiv_id": "2611.13545",
+      "reviewed_version": "v1",
+      "title": "Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding",
+      "first_author": "Mahdi Nazemi",
+      "first_author_affiliation": "NVIDIA",
+      "published_at": "2026-11-10T04:07:19Z",
+      "original_url": "https://arxiv.org/html/2611.13545v1",
+      "metadata_source": "official arXiv Atom submission timestamp; do not substitute announcement/review date",
+      "source_receipt": {
+        "cache_path": ".cache/nov11-components/post-training/2611.13545v1.html",
+        "sha256": "96107ac616ae986bec664037f5b1a20c6a06187fa90b10dc1e69e2e1459233a7",
+        "content_type": "text/html",
+        "read_scope": "author block, defining method and equations, experiment configuration and stated limitations; not every bibliography entry"
+      },
+      "decision": "accepted_component_only",
+      "implementation_status": "component_only",
+      "key": "foundation-models:stochastic-rounding",
+      "local_operator": "auto_research.foundation_models.stochastic_rounding.stochastic_cast",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "requires_gpu_validation": true,
+      "gpu_validation_status": "passed_real_nvidia_l1",
+      "code_status": "截至2026-11-11，固定v1未给出已核实作者实现仓库；正文所引trainer-generator mismatch Hugging Face Space是相关工作，非本篇开源。",
+      "witnesses": [
+        "§2 distance-based stochastic rounding preserves conditionalexpectation;FP32master versusBF16grid update sticking",
+        "§3.1 controlledruns64H100;others64B200;512prompts×8completions,max8192tokens"
+      ],
+      "cost_assessment": {
+        "source": "固定v1 §2、§3.1及实验表；https://arxiv.org/html/2611.13545v1",
+        "model_scale": "DeepSeek-R1-Distill-Qwen 1.5B/14B、Qwen3-30B-A3B与Qwen3-1.7B。",
+        "data_scale": "每iteration 512 prompt×8=4096 completions；最大8192个新token；多精度/舍入/模型对照。",
+        "paper_configuration": "DrGRPO/verl；受控parity运行64张H100，其他实验64张B200。",
+        "estimated_cost_basis": "64卡多模型长rollout矩阵明显超出单张A100/A30；仅执行65536标量的小量化核，不下载checkpoint、不做训练试跑。"
+      },
+      "gpu_validation_artifact": "docs/gpu-validations/stochastic-rounding-a100-20261111.json",
+      "gpu_validation_source_commit": "ef3521b7a3bdef545a584bc356ada87c68938a99",
+      "gpu_validation_seeds": [
+        42,
+        43,
+        44
+      ]
+    },
+    {
+      "arxiv_id": "2611.14015",
+      "reviewed_version": "v1",
+      "title": "Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards",
+      "first_author": "Chi Liu",
+      "first_author_affiliation": "PayPal.AI",
+      "published_at": "2026-11-10T12:51:43Z",
+      "original_url": "https://arxiv.org/html/2611.14015v1",
+      "metadata_source": "official arXiv Atom submission timestamp; do not substitute announcement/review date",
+      "source_receipt": {
+        "cache_path": ".cache/nov11-components/post-training/2611.14015v1.html",
+        "sha256": "4d7feea70b5c7b44168fa877f89216518425b682ec4b0fb66119c69d9168fe8d",
+        "content_type": "text/html",
+        "read_scope": "author block, defining method and equations, experiment configuration and stated limitations; not every bibliography entry"
+      },
+      "decision": "accepted_component_only",
+      "implementation_status": "component_only",
+      "key": "post-training:mcpo",
+      "local_operator": "auto_research.post_training.mcpo.token_credit",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "requires_gpu_validation": false,
+      "gpu_validation_status": "not_required_cpu_only",
+      "code_status": "论文称有supplementary code及固定上游trainer，但截至2026-11-11，固定HTML未发现独立可验证作者代码URL；Math-Verify与所引训练仓库不算本篇开源。",
+      "witnesses": [
+        "§2 equations2–3 clippedlinear uncertainty from1-margin,advantage-sign exponential,withinresponse mean normalization",
+        "§3 MiniCPMfive data seeds,Qwenthree data seeds;Qwenp=.083;length1.2–4.6x;one80GBGPUperrun,longrollouts and32sampleevaluation"
+      ],
+      "cost_assessment": {
+        "source": "固定v1 §2式2–3、§3与limitations；https://arxiv.org/html/2611.14015v1",
+        "model_scale": "MiniCPM5-2B-Base、Qwen3-4B-Base；LoRA rank32/alpha64/all-linear。",
+        "data_scale": "每数据种子2048个DAPO-Math-17k问题；100 rollout、200 optimizer steps，最多10240生成token；评测297题×32 samples×最高16384token。",
+        "paper_configuration": "每run一张80GB GPU；MiniCPM 5个数据种子、Qwen 3个数据种子及对照。作者未给总墙钟。",
+        "estimated_cost_basis": "单卡可容纳不等于低成本；多臂多数据种子及长生成评测超出短时预算，不以缩短生成冒充原实验。"
+      }
+    }
+  ],
+  "unselected_additional_leads": [
+    {
+      "arxiv_id": "2611.13680",
+      "title": "Bootstrapped On-Policy Distillation",
+      "status": "not_assigned_in_this_five_component_batch",
+      "read_scope": "preliminary method headings only",
+      "terminal_method_review": false
+    },
+    {
+      "arxiv_id": "2611.14467",
+      "title": "A Theory of Policy Optimization in Post-Training: Coverage Collapse and Reference Resets",
+      "status": "not_assigned_in_this_five_component_batch",
+      "read_scope": "preliminary metadata only; no author verification",
+      "terminal_method_review": false
+    },
+    {
+      "arxiv_id": "2611.13135",
+      "title": "Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation",
+      "status": "not_assigned_in_this_five_component_batch",
+      "read_scope": "preliminary configuration; not accepted as full reviewed implementation",
+      "terminal_method_review": false
+    }
+  ],
+  "integrity": {
+    "large_checkpoint_downloads": false,
+    "training_probes": false,
+    "api_calls": false,
+    "formal_capability_claims": false,
+    "shared_runner_edits": false,
+    "global_manifest_or_ledger_edits": false
+  }
+}

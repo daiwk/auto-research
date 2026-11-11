@@ -15,17 +15,17 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="memory-and-skills/">记忆与技能：让经验可取回、可失效</a></h2>
 <p>上下文放不下时，应该保存什么，何时取回，旧经验又如何避免误导新任务？</p>
-<p class="ar-learning-topic-meta">232 个问题 · 58 篇论文</p>
+<p class="ar-learning-topic-meta">240 个问题 · 60 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="tools-and-collaboration/">工具与协作执行：把计划变成可检查的动作</a></h2>
 <p>模型已经有计划，怎样选择工具、解释返回值，并让多个角色共享可靠的执行状态？</p>
-<p class="ar-learning-topic-meta">201 个问题 · 50 篇论文</p>
+<p class="ar-learning-topic-meta">205 个问题 · 51 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="harness-and-self-improvement/">运行流程与自进化：改的是哪一层</a></h2>
 <p>失败之后，是改一次提示、积累经验，还是改变整个任务执行流程？</p>
-<p class="ar-learning-topic-meta">208 个问题 · 52 篇论文</p>
+<p class="ar-learning-topic-meta">216 个问题 · 54 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="agent-policy-learning/">交互策略学习：把轨迹反馈变成更新</a></h2>
@@ -35,7 +35,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="evaluation-and-reliability/">评测与可靠性：如何知道真的做对了</a></h2>
 <p>怎样区分模型成功、环境碰巧放行、评分器偏差和不安全的越权？</p>
-<p class="ar-learning-topic-meta">180 个问题 · 45 篇论文</p>
+<p class="ar-learning-topic-meta">192 个问题 · 48 篇论文</p>
 </article>
 </div>
 

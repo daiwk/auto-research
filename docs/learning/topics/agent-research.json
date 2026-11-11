@@ -114,7 +114,9 @@
         "agent-research:generative-agents",
         "agent-research:discernmem",
         "agent-research:emma",
-        "agent-research:engram-consolidation"
+        "agent-research:engram-consolidation",
+        "agent-research:lisa",
+        "agent-research:wikitrace"
       ]
     },
     {
@@ -184,7 +186,8 @@
         "agent-research:pal",
         "agent-research:mrkl",
         "agent-research:saycan",
-        "agent-research:webgpt"
+        "agent-research:webgpt",
+        "agent-research:retrace"
       ]
     },
     {
@@ -256,7 +259,9 @@
         "agent-research:ruharness",
         "agent-research:crop",
         "agent-research:evalalloc",
-        "agent-research:envopt"
+        "agent-research:envopt",
+        "agent-research:fgse",
+        "agent-research:pase"
       ]
     },
     {
@@ -393,7 +398,10 @@
         "agent-research:sopbench-protocol",
         "agent-research:gaia",
         "agent-research:autoformbench",
-        "agent-research:xstack"
+        "agent-research:xstack",
+        "agent-research:reprobridge",
+        "agent-research:are-bench",
+        "agent-research:alphaproof-code"
       ]
     }
   ]

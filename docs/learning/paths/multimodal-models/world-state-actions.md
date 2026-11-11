@@ -7,7 +7,7 @@ hide:
 
 # 视觉世界建模：状态、生成与动作条件
 
-[多模态](index.md) / 96 个问题 · 24 篇论文
+[多模态](index.md) / 100 个问题 · 25 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">96 个问题 · 24 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">100 个问题 · 25 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:rs-jepa" data-paper-title="RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval 多模态大模型 Prince Mohammad Bin Fahd University 2026-11-10 顺序敏感的 Vision Mamba 对相同图像 patch 的不同读取次序产生不同表征，RS-JEPA 据此构造无像素编辑的视图。学习到的 hard half-split 让隐藏特征预测更困难；邻域共识不只拉近配准 twin，还约束两个传感器对其他场景的相似性分布。训练 target 使用同一主干的 stop-gradient，不是另一个 momentum encoder。 完整多数据集比较成本过高，不复现（审查 DONE）；本地交付扫描排列、反梯度划分和邻域损失三个独立 tensor 组件，不含替身 Vim、完整模型或图像检索成绩。CUDA 路径必须由提交的 A100/A30 回执验收。scan_path() 返回精确排列；adversarial_partition() 实际执行 hard 分组、直通权重及反梯度；neighbourhood_consensus() 执行 Eq.8–9，拒绝单样本、零向量、非有限值和跨设备输入。采用合成小 tensor，不下载图像、checkpoint 或代理 backbone，不声称完整 JEPA 已训练。  JEPA 表征学习 扫描路径与跨传感器邻域对齐 多模态 视觉世界建模：状态、生成与动作条件 RS-JEPA 为什么只改 patch 读取次序，也能构成不同自监督视图？ Vision Mamba的状态递推依赖之前读过的token，所以同一组像素在不同路径下产生不同上下文表征。位置嵌入先加入，排序后编码再恢复；改变的是扫描动态，不是像素内容或隐含的标签增强。 教学例：2×3网格的行序是0,1,2,3,4,5，列序是0,3,1,4,2,5；第二个patch看到的前缀已经不同。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
+<span id="paper-multimodal-models-rs-jepa-fcdebfcf" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-8a826054d2e3770a">RS-JEPA 为什么只改 patch 读取次序，也能构成不同自监督视图？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Ars-jepa">RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Prince Mohammad Bin Fahd University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Vision Mamba的状态递推依赖之前读过的token，所以同一组像素在不同路径下产生不同上下文表征。位置嵌入先加入，排序后编码再恢复；改变的是扫描动态，不是像素内容或隐含的标签增强。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：2×3网格的行序是0,1,2,3,4,5，列序是0,3,1,4,2,5；第二个patch看到的前缀已经不同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14496">原论文</a> · <a href="../../../../multimodal-models/2611.14496-rs-jepa/">实现解读</a> · <a href="#qa-8a826054d2e3770a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:rs-jepa" data-paper-title="RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval" data-learning-pending="false" data-level="mechanism" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval 多模态大模型 Prince Mohammad Bin Fahd University 2026-11-10 顺序敏感的 Vision Mamba 对相同图像 patch 的不同读取次序产生不同表征，RS-JEPA 据此构造无像素编辑的视图。学习到的 hard half-split 让隐藏特征预测更困难；邻域共识不只拉近配准 twin，还约束两个传感器对其他场景的相似性分布。训练 target 使用同一主干的 stop-gradient，不是另一个 momentum encoder。 完整多数据集比较成本过高，不复现（审查 DONE）；本地交付扫描排列、反梯度划分和邻域损失三个独立 tensor 组件，不含替身 Vim、完整模型或图像检索成绩。CUDA 路径必须由提交的 A100/A30 回执验收。scan_path() 返回精确排列；adversarial_partition() 实际执行 hard 分组、直通权重及反梯度；neighbourhood_consensus() 执行 Eq.8–9，拒绝单样本、零向量、非有限值和跨设备输入。采用合成小 tensor，不下载图像、checkpoint 或代理 backbone，不声称完整 JEPA 已训练。  JEPA 表征学习 扫描路径与跨传感器邻域对齐 多模态 视觉世界建模：状态、生成与动作条件 RS-JEPA 既然前向仍是原 token，scorer 怎么能学到更难的划分？ Hard top-half决定成员，但直通权重前向抵消为1、反向仍保留sigmoid路径。梯度反转让scorer朝增大预测困难的方向更新；单纯top-k切片会切断这条学习信号。 教学例：相同前向token可有非零scorer梯度；测试应同时核对输出完全不变和梯度恰好取反，而不只检查shape。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-58ea66e7be7965f0">RS-JEPA 既然前向仍是原 token，scorer 怎么能学到更难的划分？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Ars-jepa">RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Prince Mohammad Bin Fahd University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Hard top-half决定成员，但直通权重前向抵消为1、反向仍保留sigmoid路径。梯度反转让scorer朝增大预测困难的方向更新；单纯top-k切片会切断这条学习信号。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：相同前向token可有非零scorer梯度；测试应同时核对输出完全不变和梯度恰好取反，而不只检查shape。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14496">原论文</a> · <a href="../../../../multimodal-models/2611.14496-rs-jepa/">实现解读</a> · <a href="#qa-58ea66e7be7965f0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:rs-jepa" data-paper-title="RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval" data-learning-pending="false" data-level="comparison" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval 多模态大模型 Prince Mohammad Bin Fahd University 2026-11-10 顺序敏感的 Vision Mamba 对相同图像 patch 的不同读取次序产生不同表征，RS-JEPA 据此构造无像素编辑的视图。学习到的 hard half-split 让隐藏特征预测更困难；邻域共识不只拉近配准 twin，还约束两个传感器对其他场景的相似性分布。训练 target 使用同一主干的 stop-gradient，不是另一个 momentum encoder。 完整多数据集比较成本过高，不复现（审查 DONE）；本地交付扫描排列、反梯度划分和邻域损失三个独立 tensor 组件，不含替身 Vim、完整模型或图像检索成绩。CUDA 路径必须由提交的 A100/A30 回执验收。scan_path() 返回精确排列；adversarial_partition() 实际执行 hard 分组、直通权重及反梯度；neighbourhood_consensus() 执行 Eq.8–9，拒绝单样本、零向量、非有限值和跨设备输入。采用合成小 tensor，不下载图像、checkpoint 或代理 backbone，不声称完整 JEPA 已训练。  JEPA 表征学习 扫描路径与跨传感器邻域对齐 多模态 视觉世界建模：状态、生成与动作条件 RS-JEPA 的邻域共识与只对齐配准 twin 的对比学习有何不同？ Twin对齐约束同一场景跨传感器接近，却不保证各传感器对其他场景的排序几何一致。共识比较四种邻域分布，并在每一种里排除同pair索引；该项补充而不替代原InfoNCE防坍缩目标。 教学例：两传感器都把同一桥梁配对拉近，但一个把河流当最近邻，另一个把城市当最近邻；共识针对这个差异。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-eb1672b725d557bc">RS-JEPA 的邻域共识与只对齐配准 twin 的对比学习有何不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Ars-jepa">RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Prince Mohammad Bin Fahd University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Twin对齐约束同一场景跨传感器接近，却不保证各传感器对其他场景的排序几何一致。共识比较四种邻域分布，并在每一种里排除同pair索引；该项补充而不替代原InfoNCE防坍缩目标。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两传感器都把同一桥梁配对拉近，但一个把河流当最近邻，另一个把城市当最近邻；共识针对这个差异。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14496">原论文</a> · <a href="../../../../multimodal-models/2611.14496-rs-jepa/">实现解读</a> · <a href="#qa-eb1672b725d557bc">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:rs-jepa" data-paper-title="RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval" data-learning-pending="false" data-level="implementation" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval 多模态大模型 Prince Mohammad Bin Fahd University 2026-11-10 顺序敏感的 Vision Mamba 对相同图像 patch 的不同读取次序产生不同表征，RS-JEPA 据此构造无像素编辑的视图。学习到的 hard half-split 让隐藏特征预测更困难；邻域共识不只拉近配准 twin，还约束两个传感器对其他场景的相似性分布。训练 target 使用同一主干的 stop-gradient，不是另一个 momentum encoder。 完整多数据集比较成本过高，不复现（审查 DONE）；本地交付扫描排列、反梯度划分和邻域损失三个独立 tensor 组件，不含替身 Vim、完整模型或图像检索成绩。CUDA 路径必须由提交的 A100/A30 回执验收。scan_path() 返回精确排列；adversarial_partition() 实际执行 hard 分组、直通权重及反梯度；neighbourhood_consensus() 执行 Eq.8–9，拒绝单样本、零向量、非有限值和跨设备输入。采用合成小 tensor，不下载图像、checkpoint 或代理 backbone，不声称完整 JEPA 已训练。  JEPA 表征学习 扫描路径与跨传感器邻域对齐 多模态 视觉世界建模：状态、生成与动作条件 RS-JEPA 的损失值对上了，为什么还要单独核对 stop-gradient 和真实 CUDA？ 将consensus target忘记detach不会改变前向数值，却改变梯度；把device写成cuda也不说明运算在GPU上。独立循环须比对值和梯度，实际CUDA诊断检查tensor设备并运行反传，仍不等于训练完整Vim或复现图像检索。 教学例：batch只有两样本时每行仅一个非twin邻居，四个分布都为1，KL应为0；更大batch再检查梯度与传感器交换不变性。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-ef96d26f392f61c2">RS-JEPA 的损失值对上了，为什么还要单独核对 stop-gradient 和真实 CUDA？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Ars-jepa">RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Prince Mohammad Bin Fahd University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>将consensus target忘记detach不会改变前向数值，却改变梯度；把device写成cuda也不说明运算在GPU上。独立循环须比对值和梯度，实际CUDA诊断检查tensor设备并运行反传，仍不等于训练完整Vim或复现图像检索。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：batch只有两样本时每行仅一个非twin邻居，四个分布都为1，KL应为0；更大batch再检查梯度与传感器交换不变性。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14496">原论文</a> · <a href="../../../../multimodal-models/2611.14496-rs-jepa/">实现解读</a> · <a href="#qa-ef96d26f392f61c2">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gui-jepa" data-paper-title="GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents 基础模型 Shanghai Jiao Tong University / Nanyang Technological University 2026-10-27 多数 GUI Agent 依靠 7B 级视觉语言模型逐 token 生成动作。GUI-JEPA 则从 accessibility tree 枚举可执行动作，用冻结 JEPA 编码器只编码一次画面；动作类型、坐标与 ROI 特征条件化残差 predictor，为每个候选生成 latent，再一次批量打分选 argmax，不解码动作文本。关键不是把“画面 latent 离目标越近”当动作价值。预测器通过真实候选上的 listwise 决策损失训练，结构头的候选视觉信息必须经过条件化 latent； 完整实验：成本过高，不复现（审查 DONE）；本地状态：L1 latent predictor / structural-head 组件、diagnostic only，不是 GUI Agent 或 AndroidControl 接入。完整实验：成本过高，不复现（审查 DONE）；不作为 evolve 能力证据。实现真实三层 Transformer residual predictor、候选 ROI / 全屏池化、cosine 结构头、动作类型 bias、外部 text score 相加、有效候选 mask 和 weighted listwise loss。  JEPA与世界模型 候选条件决策与GUI 多模态 视觉世界建模：状态、生成与动作条件 GUI-JEPA为什么不需要逐token生成动作？ 它先从可访问性树枚举候选，再让每个候选条件化画面latent，一次批量打分选动作。动作空间来自观测侧枚举，不是语言模型自由生成。因此速度取决于候选数，也依赖像素型Agent不一定拥有的a11y输入，不能直接比较所有GUI系统。 教学例子：页面已有三种可执行按钮动作，系统分别算三个分数后选最高者；这不同于先生成JSON文本，再解析其中坐标。 2026-10-29">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <span id="paper-foundation-models-gui-jepa-f231a89e" class="ar-learning-paper-anchor"></span>

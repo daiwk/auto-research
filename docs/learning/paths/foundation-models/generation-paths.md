@@ -7,7 +7,7 @@ hide:
 
 # 生成路径：草稿验证、并行去噪与少步迭代
 
-[基础模型](index.md) / 60 个问题 · 15 篇论文
+[基础模型](index.md) / 64 个问题 · 16 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">60 个问题 · 15 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">64 个问题 · 16 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:b3" data-paper-title="Blurring the Block Boundaries: Overlapping Block Denoising for Efficient Diffusion Language Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/generation-paths" data-search="Blurring the Block Boundaries: Overlapping Block Denoising for Efficient Diffusion Language Models 基础模型 Technion / Amazon Web Services 2026-11-10 逐块扩散必须等一个块的最后几个困难 token 收敛，才开始下一个块。B3 在当前块足够稳定时提前生成未来块，两块共享前向。块因果掩码阻止当前块读取未来块，因此当前块预测不被未来草稿污染；未来块必须能 self-edit，以修正旧块尚未收敛时形成的猜测。 成本过高，不复现（审查 DONE），不下载这些权重或启动试跑。L1 CPU 机制组件：只执行 spawn gate 和块因果掩码的数值检查，没有扩散模型、文本答案或吞吐复现。SpawnGate 接受调用者真实提供的熵、接受标志和 EOS 状态；它不产生或猜测模型预测。block_causal_mask 仅构造两块可见关系。合成输入检查一拍滞后、活动未来块排除、EOS 保护、跨块阈值，以及真实 softmax 注意力下当前块输出与单独前向相同。  推理与系统效率 扩散语言模型解码 基础模型 生成路径：草稿验证、并行去噪与少步迭代 B3 两个块共享前向，为什么未来草稿不能影响当前块？ 块因果掩码禁止当前块读取未来块的key/value；未来块可以读取当前块，但方向不能反过来。这样重叠计算不改变当前块的注意力输入，未来块仍需self-edit修正尚未稳定前缀带来的猜测。 教学例：两个4token块组成8token矩阵，前4行后4列必须为不可见；后4行可读取前4列。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 生成路径：草稿验证、并行去噪与少步迭代</a></p>
+<span id="paper-foundation-models-b3-cde2b2be" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-d407deba409efb2a">B3 两个块共享前向，为什么未来草稿不能影响当前块？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ab3">Blurring the Block Boundaries: Overlapping Block Denoising for Efficient Diffusion Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Technion / Amazon Web Services</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>块因果掩码禁止当前块读取未来块的key/value；未来块可以读取当前块，但方向不能反过来。这样重叠计算不改变当前块的注意力输入，未来块仍需self-edit修正尚未稳定前缀带来的猜测。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个4token块组成8token矩阵，前4行后4列必须为不可见；后4行可读取前4列。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14387v1">原论文</a> · <a href="../../../../foundation-models/2611.14387-b3/">实现解读</a> · <a href="#qa-d407deba409efb2a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:b3" data-paper-title="Blurring the Block Boundaries: Overlapping Block Denoising for Efficient Diffusion Language Models" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/generation-paths" data-search="Blurring the Block Boundaries: Overlapping Block Denoising for Efficient Diffusion Language Models 基础模型 Technion / Amazon Web Services 2026-11-10 逐块扩散必须等一个块的最后几个困难 token 收敛，才开始下一个块。B3 在当前块足够稳定时提前生成未来块，两块共享前向。块因果掩码阻止当前块读取未来块，因此当前块预测不被未来草稿污染；未来块必须能 self-edit，以修正旧块尚未收敛时形成的猜测。 成本过高，不复现（审查 DONE），不下载这些权重或启动试跑。L1 CPU 机制组件：只执行 spawn gate 和块因果掩码的数值检查，没有扩散模型、文本答案或吞吐复现。SpawnGate 接受调用者真实提供的熵、接受标志和 EOS 状态；它不产生或猜测模型预测。block_causal_mask 仅构造两块可见关系。合成输入检查一拍滞后、活动未来块排除、EOS 保护、跨块阈值，以及真实 softmax 注意力下当前块输出与单独前向相同。  推理与系统效率 扩散语言模型解码 基础模型 生成路径：草稿验证、并行去噪与少步迭代 B3 阈值候选为什么用上一拍、且严格排除前沿 token？ 它利用前沿推进之前那一拍的熵估计前沿左侧已解决区域的难度。包含前沿自身或改用当前拍会改变自校准样本。只有前沿推进、没有活动未来块、存在上一拍时才收集候选。 教学例：新前沿为位置2，候选取上一拍位置0和1的最大熵，不取位置2，也不取当前拍刚下降的熵。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 生成路径：草稿验证、并行去噪与少步迭代</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-f3ca0ee1b71a557b">B3 阈值候选为什么用上一拍、且严格排除前沿 token？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ab3">Blurring the Block Boundaries: Overlapping Block Denoising for Efficient Diffusion Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Technion / Amazon Web Services</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它利用前沿推进之前那一拍的熵估计前沿左侧已解决区域的难度。包含前沿自身或改用当前拍会改变自校准样本。只有前沿推进、没有活动未来块、存在上一拍时才收集候选。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：新前沿为位置2，候选取上一拍位置0和1的最大熵，不取位置2，也不取当前拍刚下降的熵。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14387v1">原论文</a> · <a href="../../../../foundation-models/2611.14387-b3/">实现解读</a> · <a href="#qa-f3ca0ee1b71a557b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:b3" data-paper-title="Blurring the Block Boundaries: Overlapping Block Denoising for Efficient Diffusion Language Models" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/generation-paths" data-search="Blurring the Block Boundaries: Overlapping Block Denoising for Efficient Diffusion Language Models 基础模型 Technion / Amazon Web Services 2026-11-10 逐块扩散必须等一个块的最后几个困难 token 收敛，才开始下一个块。B3 在当前块足够稳定时提前生成未来块，两块共享前向。块因果掩码阻止当前块读取未来块，因此当前块预测不被未来草稿污染；未来块必须能 self-edit，以修正旧块尚未收敛时形成的猜测。 成本过高，不复现（审查 DONE），不下载这些权重或启动试跑。L1 CPU 机制组件：只执行 spawn gate 和块因果掩码的数值检查，没有扩散模型、文本答案或吞吐复现。SpawnGate 接受调用者真实提供的熵、接受标志和 EOS 状态；它不产生或猜测模型预测。block_causal_mask 仅构造两块可见关系。合成输入检查一拍滞后、活动未来块排除、EOS 保护、跨块阈值，以及真实 softmax 注意力下当前块输出与单独前向相同。  推理与系统效率 扩散语言模型解码 基础模型 生成路径：草稿验证、并行去噪与少步迭代 当前熵很低，是否无论什么状态都应该再开一个未来块？ 不应。低熵还需已有候选均值阈值、没有活动未来块且没有预测EOS。未来块活动时既不再spawn，也不收集阈值候选；候选跨块保留，但上一拍熵不能错用上一个块的位置。 教学例：未来块已经活动，即使当前最大熵=.01，也不能继续嵌套开启第三块；预测EOS时也应压制spawn。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 生成路径：草稿验证、并行去噪与少步迭代</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-e425de57d5146b0d">当前熵很低，是否无论什么状态都应该再开一个未来块？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ab3">Blurring the Block Boundaries: Overlapping Block Denoising for Efficient Diffusion Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Technion / Amazon Web Services</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不应。低熵还需已有候选均值阈值、没有活动未来块且没有预测EOS。未来块活动时既不再spawn，也不收集阈值候选；候选跨块保留，但上一拍熵不能错用上一个块的位置。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：未来块已经活动，即使当前最大熵=.01，也不能继续嵌套开启第三块；预测EOS时也应压制spawn。</p>
+<p class="ar-learning-sources">依据：核心公式、结果与复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14387v1">原论文</a> · <a href="../../../../foundation-models/2611.14387-b3/">实现解读</a> · <a href="#qa-e425de57d5146b0d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:b3" data-paper-title="Blurring the Block Boundaries: Overlapping Block Denoising for Efficient Diffusion Language Models" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/generation-paths" data-search="Blurring the Block Boundaries: Overlapping Block Denoising for Efficient Diffusion Language Models 基础模型 Technion / Amazon Web Services 2026-11-10 逐块扩散必须等一个块的最后几个困难 token 收敛，才开始下一个块。B3 在当前块足够稳定时提前生成未来块，两块共享前向。块因果掩码阻止当前块读取未来块，因此当前块预测不被未来草稿污染；未来块必须能 self-edit，以修正旧块尚未收敛时形成的猜测。 成本过高，不复现（审查 DONE），不下载这些权重或启动试跑。L1 CPU 机制组件：只执行 spawn gate 和块因果掩码的数值检查，没有扩散模型、文本答案或吞吐复现。SpawnGate 接受调用者真实提供的熵、接受标志和 EOS 状态；它不产生或猜测模型预测。block_causal_mask 仅构造两块可见关系。合成输入检查一拍滞后、活动未来块排除、EOS 保护、跨块阈值，以及真实 softmax 注意力下当前块输出与单独前向相同。  推理与系统效率 扩散语言模型解码 基础模型 生成路径：草稿验证、并行去噪与少步迭代 本地 B3 的 attention 恒等式和门控通过，是否代表完成扩散生成？ 没有。本地仅接收调用方给定熵、接受标志和EOS状态，执行spawn gate与两块掩码；没有原生sampler、噪声日程、KV cache或self-editing模型，合成输入也不是预测出的文本。 教学例：随机Q/K/V下当前块输出与独立前向相同，只证明可见性控制；不能测得作者10个benchmark上的TPS或质量变化。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 生成路径：草稿验证、并行去噪与少步迭代</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-6eb0dee181596236">本地 B3 的 attention 恒等式和门控通过，是否代表完成扩散生成？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ab3">Blurring the Block Boundaries: Overlapping Block Denoising for Efficient Diffusion Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Technion / Amazon Web Services</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>没有。本地仅接收调用方给定熵、接受标志和EOS状态，执行spawn gate与两块掩码；没有原生sampler、噪声日程、KV cache或self-editing模型，合成输入也不是预测出的文本。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：随机Q/K/V下当前块输出与独立前向相同，只证明可见性控制；不能测得作者10个benchmark上的TPS或质量变化。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果与复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14387v1">原论文</a> · <a href="../../../../foundation-models/2611.14387-b3/">实现解读</a> · <a href="#qa-6eb0dee181596236">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:langdit" data-paper-title="Designing Transformers for Continuous Diffusion Language Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/generation-paths" data-search="Designing Transformers for Continuous Diffusion Language Models 基础模型 Dots Studio, Xiaohongshu 2026-10-15 连续扩散语言模型要从带高斯噪声的 token 嵌入恢复离散分布。原文§3把架构改动分为三个位置：backbone 的 RMS/QK 归一与噪声条件容量；词表 likelihood shortcut 的显式码本梯度路由和有界校准；训练期 bootstrap self-conditioning 的置信度衰减。LangFlow 的表示、交叉熵和采样器保持不变；Plaid 适配只迁移兼容子集，不能把两套梯度规则混为一谈。 成本过高，不复现（审查 DONE）。修复后已重新在 A100 覆盖四种极值及梯度检查，诊断记录与GPU回执绑定最终执行源码。无公开大数据/模型下载。revision synthetic-packed-options-and-noisy-tokens@oct17-supplement-foundation-v1，seeds42/43/44。实际微型 denoiser 为2层、16维、2 heads、19词，保留球面码本、RMS/QK归一、RoPE、噪声条件残差门、未绑定词表head、零初始化输入融合和校准。  扩散语言模型 噪声条件与自条件 基础模型 生成路径：草稿验证、并行去噪与少步迭代 LangDiT 为什么在连续 noisy embedding 之外增加 likelihood shortcut？ 它用码本与带噪状态的关系补充词表后验，并配合噪声条件backbone和有界校准。离散恢复不只依赖一个普通输出head，梯度路由与训练自条件也需对应具体分支。 示意：噪声较低时，当前状态接近哪些词的码本向量，可作为恢复token的一条额外线索。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 生成路径：草稿验证、并行去噪与少步迭代</a></p>
 <span id="paper-foundation-models-langdit-ba73a77f" class="ar-learning-paper-anchor"></span>

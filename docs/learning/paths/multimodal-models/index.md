@@ -15,12 +15,12 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="visual-evidence-budget/">视觉证据预算：选 Token、选帧与按需回看</a></h2>
 <p>视觉输入太长时，哪些细节可以暂时不读，哪些必须保留恢复入口？</p>
-<p class="ar-learning-topic-meta">64 个问题 · 16 篇论文</p>
+<p class="ar-learning-topic-meta">68 个问题 · 17 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="world-state-actions/">视觉世界建模：状态、生成与动作条件</a></h2>
 <p>模型是在识别画面，还是能判断动作将怎样改变状态？</p>
-<p class="ar-learning-topic-meta">96 个问题 · 24 篇论文</p>
+<p class="ar-learning-topic-meta">100 个问题 · 25 篇论文</p>
 </article>
 </div>
 

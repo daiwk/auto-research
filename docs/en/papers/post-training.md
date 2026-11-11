@@ -8,6 +8,10 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards](<https://arxiv.org/abs/2611.14015v1>) | 2026-11-10 | [English](../../post-training/2611.14015-mcpo/README-en.md) · [Chinese](../../post-training/2611.14015-mcpo/README.md) |
+| [Off-policy Learning with Excursion Policies](<https://arxiv.org/abs/2611.13275v1>) | 2026-11-09 | [English](../../post-training/2611.13275-excursion-td/README-en.md) · [Chinese](../../post-training/2611.13275-excursion-td/README.md) |
+| [MaxIM: Maximally Informative Incremental Summarization via Reinforcement Learning](<https://arxiv.org/abs/2611.12825v1>) | 2026-11-09 | [English](../../post-training/2611.12825-maxim/README-en.md) · [Chinese](../../post-training/2611.12825-maxim/README.md) |
+| [DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation](<https://arxiv.org/abs/2611.13249v1>) | 2026-11-09 | [English](../../post-training/2611.13249-drd-mopd/README-en.md) · [Chinese](../../post-training/2611.13249-drd-mopd/README.md) |
 | [Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards](<https://arxiv.org/abs/2611.09448>) | 2026-11-06 | [English](../../post-training/2611.09448-rcea/README-en.md) · [Chinese](../../post-training/2611.09448-rcea/README.md) |
 | [CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation](<https://arxiv.org/abs/2611.07959>) | 2026-11-05 | [English](../../post-training/2611.07959-cord/README-en.md) · [Chinese](../../post-training/2611.07959-cord/README.md) |
 | [EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL](<https://arxiv.org/abs/2611.06518>) | 2026-11-04 | [English](../../post-training/2611.06518-emoreward/README-en.md) · [Chinese](../../post-training/2611.06518-emoreward/README.md) |
