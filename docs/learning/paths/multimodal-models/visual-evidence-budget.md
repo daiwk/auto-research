@@ -7,7 +7,7 @@ hide:
 
 # 视觉证据预算：选 Token、选帧与按需回看
 
-[多模态](index.md) / 64 个问题 · 16 篇论文
+[多模态](index.md) / 68 个问题 · 17 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">64 个问题 · 16 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">68 个问题 · 17 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:muse-glimmer-30b" data-paper-title="Muse Glimmer 30B: An On-Device Agentic Model" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="Muse Glimmer 30B: An On-Device Agentic Model 基础模型 Meta Superintelligence Labs 2026-10-17 模型瞄准有32GB专用内存的端侧Agent：语言骨干用稠密Transformer而非MoE，在相同内存预算下用缩放实验选架构；约1.8B冻结视觉编码器支持图文交错输入。52层采用三层2048窗口局部注意力接一层全局注意力，32Q/2KV的GQA，局部层使用RoPE，全局层不再施加RoPE。训练从Muse Spark logits蒸馏起步，预训练末段切CE处理top-k截断偏差，之后权重平均和两阶段mid-training，再SFT、学生前缀上的OPD与多目标RL。 成本过高，不复现（审查 DONE）；Google/Meta优先资料。成本过高，不复现（审查 DONE）；“单卡可装下”不等于本项目低成本可完成训练和完整评测。BF16权重约55.7GB，量化LM目标低于20GB仍需KV、视觉编码器和drafter空间；长Agent轨迹与多模型对照远非一次前向。完整过程依赖前沿教师、多阶段大规模蒸馏、128K上下文与多域Agent环境，成本过高，不复现（审查 DONE）。本轮只取论文与仓库元数据，不下载权重、不开长推理或训练，不提供本地能力分数、GPU回执或Evolve整合声明。  网络架构 端侧多模态Agent模型 多模态 视觉证据预算：选 Token、选帧与按需回看 Muse Glimmer 为什么同时强调模型权重内存和 KV、视觉、drafter 空间？ 端侧可用内存要容纳整个推理过程，而不只是语言权重。长 Agent 上下文会增加 KV cache，图像编码器与投机头也有占用，因此量化语言模型后小于某个体积不等于系统已适合 32GB 设备；必须按实际输入与部署配置联合核算。 例如语言权重低于二十 GB，仍可能因长轨迹 KV 和视觉前向的临时张量超过设备剩余空间。 2026-10-27">
@@ -292,6 +292,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>例如第一轮刚得到一个残差，没有前一锚点可计算斜率；硬套除以时间差的公式会制造无定义或错误的外推。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、代码映射与边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2610.22369">原论文</a> · <a href="../../../../foundation-models/2610.22369-softcache/">实现解读</a> · <a href="#qa-809bbd8b8fe862a3">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:steprefine" data-paper-title="Rethinking in Spikes: Mitigating Hallucinations in MDLMs with Step-Aware Decoding" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="Rethinking in Spikes: Mitigating Hallucinations in MDLMs with Step-Aware Decoding 多模态大模型 Monash University 2026-10-14 多模态扩散解码的 mask 平均熵总体下降，但局部可能突然上升。StepRefine 只在这些步骤从硬 token 切换到概率加权 embedding，让多种候选语义继续参与上下文计算，再根据连续分布的稳定程度决定何时返回离散解码。它不是给所有步骤都加固定次数前向。 成本过高，不复现（审查 DONE）；L1 CPU 公式组件：不包含多模态扩散模型；不能据此声称降低真实图像问答幻觉。spike 接收已完成的历史变化窗口，不偷偷读取未来去噪步骤；mask_entropy 只平均有效 mask 位置；soft_embeddings 保持非 mask 位置不变；refinement_kl 和 next_denoising_index 分别实现停止式与预算式。窗口预热、真实模型前向、视觉输入、token 提交与 remasking 留给调用者；图中的模型闭环未在本地实现。  多模态推理与对齐 扩散解码与幻觉控制 多模态 视觉证据预算：选 Token、选帧与按需回看 StepRefine 为什么只在熵尖峰触发，而不每一步固定多跑几次？ 方法把额外计算留给mask平均熵相对历史变化异常上升的步骤，保留多种token语义后再看是否稳定。触发门槛必须只用已经完成的历史窗口，不能看之后的去噪变化来挑步骤。 教学例：历史变化为-.1、-.2、-.15，当前突然+.5时触发；若恰好等于历史均值加标准差，严格大于条件不成立。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
+<span id="paper-multimodal-models-steprefine-c3710fb1" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-cc1ecddf81085c75">StepRefine 为什么只在熵尖峰触发，而不每一步固定多跑几次？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Asteprefine">Rethinking in Spikes: Mitigating Hallucinations in MDLMs with Step-Aware Decoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Monash University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>方法把额外计算留给mask平均熵相对历史变化异常上升的步骤，保留多种token语义后再看是否稳定。触发门槛必须只用已经完成的历史窗口，不能看之后的去噪变化来挑步骤。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：历史变化为-.1、-.2、-.15，当前突然+.5时触发；若恰好等于历史均值加标准差，严格大于条件不成立。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.12901v1">原论文</a> · <a href="../../../../multimodal-models/2611.12901-steprefine/">实现解读</a> · <a href="#qa-cc1ecddf81085c75">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:steprefine" data-paper-title="Rethinking in Spikes: Mitigating Hallucinations in MDLMs with Step-Aware Decoding" data-learning-pending="false" data-level="mechanism" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="Rethinking in Spikes: Mitigating Hallucinations in MDLMs with Step-Aware Decoding 多模态大模型 Monash University 2026-10-14 多模态扩散解码的 mask 平均熵总体下降，但局部可能突然上升。StepRefine 只在这些步骤从硬 token 切换到概率加权 embedding，让多种候选语义继续参与上下文计算，再根据连续分布的稳定程度决定何时返回离散解码。它不是给所有步骤都加固定次数前向。 成本过高，不复现（审查 DONE）；L1 CPU 公式组件：不包含多模态扩散模型；不能据此声称降低真实图像问答幻觉。spike 接收已完成的历史变化窗口，不偷偷读取未来去噪步骤；mask_entropy 只平均有效 mask 位置；soft_embeddings 保持非 mask 位置不变；refinement_kl 和 next_denoising_index 分别实现停止式与预算式。窗口预热、真实模型前向、视觉输入、token 提交与 remasking 留给调用者；图中的模型闭环未在本地实现。  多模态推理与对齐 扩散解码与幻觉控制 多模态 视觉证据预算：选 Token、选帧与按需回看 StepRefine 停止 refinement 时的 KL 方向是什么？ 对有效mask位置计算新分布到旧分布的KL，再在位置上平均；方向是KL(p_new||p_old)，不是反过来。若新分布给旧分布零概率处正质量，KL应为无穷，不能用任意平滑偷偷改为稳定。 教学例：新分布(.5,.5)、旧分布(1,0)时新到旧KL无穷；反向却有限，两者会作出不同停止判断。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-239fb7ba607c5ca0">StepRefine 停止 refinement 时的 KL 方向是什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Asteprefine">Rethinking in Spikes: Mitigating Hallucinations in MDLMs with Step-Aware Decoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Monash University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>对有效mask位置计算新分布到旧分布的KL，再在位置上平均；方向是KL(p_new||p_old)，不是反过来。若新分布给旧分布零概率处正质量，KL应为无穷，不能用任意平滑偷偷改为稳定。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：新分布(.5,.5)、旧分布(1,0)时新到旧KL无穷；反向却有限，两者会作出不同停止判断。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.12901v1">原论文</a> · <a href="../../../../multimodal-models/2611.12901-steprefine/">实现解读</a> · <a href="#qa-239fb7ba607c5ca0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:steprefine" data-paper-title="Rethinking in Spikes: Mitigating Hallucinations in MDLMs with Step-Aware Decoding" data-learning-pending="false" data-level="comparison" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="Rethinking in Spikes: Mitigating Hallucinations in MDLMs with Step-Aware Decoding 多模态大模型 Monash University 2026-10-14 多模态扩散解码的 mask 平均熵总体下降，但局部可能突然上升。StepRefine 只在这些步骤从硬 token 切换到概率加权 embedding，让多种候选语义继续参与上下文计算，再根据连续分布的稳定程度决定何时返回离散解码。它不是给所有步骤都加固定次数前向。 成本过高，不复现（审查 DONE）；L1 CPU 公式组件：不包含多模态扩散模型；不能据此声称降低真实图像问答幻觉。spike 接收已完成的历史变化窗口，不偷偷读取未来去噪步骤；mask_entropy 只平均有效 mask 位置；soft_embeddings 保持非 mask 位置不变；refinement_kl 和 next_denoising_index 分别实现停止式与预算式。窗口预热、真实模型前向、视觉输入、token 提交与 remasking 留给调用者；图中的模型闭环未在本地实现。  多模态推理与对齐 扩散解码与幻觉控制 多模态 视觉证据预算：选 Token、选帧与按需回看 增加 k 次 refinement 后，为什么下一索引不是普通的 t-1？ 原文比较固定总前向预算。普通去噪本身消耗一次，额外refinement再消耗k次，所以下一索引是t-1-k。只用t-1会额外赠送计算，不能称为同预算比较。 教学例：当前t=16，多跑k=2次后下一索引为13；若仍用15，相当于没有扣除两次额外前向。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-6ce89058a64feb23">增加 k 次 refinement 后，为什么下一索引不是普通的 t-1？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Asteprefine">Rethinking in Spikes: Mitigating Hallucinations in MDLMs with Step-Aware Decoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Monash University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>原文比较固定总前向预算。普通去噪本身消耗一次，额外refinement再消耗k次，所以下一索引是t-1-k。只用t-1会额外赠送计算，不能称为同预算比较。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：当前t=16，多跑k=2次后下一索引为13；若仍用15，相当于没有扣除两次额外前向。</p>
+<p class="ar-learning-sources">依据：核心公式、结果与复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.12901v1">原论文</a> · <a href="../../../../multimodal-models/2611.12901-steprefine/">实现解读</a> · <a href="#qa-6ce89058a64feb23">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:steprefine" data-paper-title="Rethinking in Spikes: Mitigating Hallucinations in MDLMs with Step-Aware Decoding" data-learning-pending="false" data-level="implementation" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="Rethinking in Spikes: Mitigating Hallucinations in MDLMs with Step-Aware Decoding 多模态大模型 Monash University 2026-10-14 多模态扩散解码的 mask 平均熵总体下降，但局部可能突然上升。StepRefine 只在这些步骤从硬 token 切换到概率加权 embedding，让多种候选语义继续参与上下文计算，再根据连续分布的稳定程度决定何时返回离散解码。它不是给所有步骤都加固定次数前向。 成本过高，不复现（审查 DONE）；L1 CPU 公式组件：不包含多模态扩散模型；不能据此声称降低真实图像问答幻觉。spike 接收已完成的历史变化窗口，不偷偷读取未来去噪步骤；mask_entropy 只平均有效 mask 位置；soft_embeddings 保持非 mask 位置不变；refinement_kl 和 next_denoising_index 分别实现停止式与预算式。窗口预热、真实模型前向、视觉输入、token 提交与 remasking 留给调用者；图中的模型闭环未在本地实现。  多模态推理与对齐 扩散解码与幻觉控制 多模态 视觉证据预算：选 Token、选帧与按需回看 本地 soft_embeddings 算出来，是否已经复现多模态扩散模型降低幻觉？ 没有。函数只在mask位置用概率乘embedding表并保持非mask不变；没有图像、真实模型前向、token提交或remasking闭环。合成概率与KL检查是L1公式证据，不是POPE/MMHalu成绩。 教学例：本地随机9词表、5维embedding可精确验证p@E，但没有看任何图像，不能判断图片中是否存在某物体。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-81a4475dc5c869d3">本地 soft_embeddings 算出来，是否已经复现多模态扩散模型降低幻觉？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Asteprefine">Rethinking in Spikes: Mitigating Hallucinations in MDLMs with Step-Aware Decoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Monash University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>没有。函数只在mask位置用概率乘embedding表并保持非mask不变；没有图像、真实模型前向、token提交或remasking闭环。合成概率与KL检查是L1公式证据，不是POPE/MMHalu成绩。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：本地随机9词表、5维embedding可精确验证p@E，但没有看任何图像，不能判断图片中是否存在某物体。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果与复现边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.12901v1">原论文</a> · <a href="../../../../multimodal-models/2611.12901-steprefine/">实现解读</a> · <a href="#qa-81a4475dc5c869d3">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:vcola" data-paper-title="V-CoLA: Vision Token Compression with Linear Attention" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="V-CoLA: Vision Token Compression with Linear Attention 多模态大模型 Alibaba Cloud Computing / Alibaba Group 2026-10-08 传统视觉 Token 筛选依赖 softmax attention 或特征相似度，不能直接迁移到包含 Gated DeltaNet 的混合 VLM。V-CoLA 用线性注意力最终状态的可回读程度衡量长期保留，再用更新前后状态对短窗口 query 的响应变化衡量独特性；按累计重要性划分连续块并加权合并，深层再退出视觉 Token。方法见官方正文第 3 节。原论文架构图为Figure 5，比较原始混合模型与压缩后的前向路径；图像及版权属于原作者。 本地定位：L1 核心机制诊断，非论文完整 benchmark 复现。本地定位：L1 核心机制诊断，非论文完整 benchmark 复现。原始 Qwen3.5-9B checkpoint 的视觉编码器和全部语言层已在真实 A100 执行；重要性不是随机分数、像素相似度或隐藏答案。仅 4 张公开训练留出图片，不代表完整 VLM 质量结论。本地对照口径：同一个冻结原始 Qwen3.5-9B，比较 dense、第一层保留 50% / 25% 且第 24 层后退出视觉的三条真实前向。固定公共 CIFAR-10 官方训练集尾部留出图像；不读取官方 test，不训练、不择优调参。  多模态推理效率 视觉 Token 压缩 多模态 视觉证据预算：选 Token、选帧与按需回看 混合线性注意力 VLM 为什么也需要专门的视觉压缩方法？ 大量视觉 token 会占用语言层的计算与状态，但线性注意力保存信息的方式不同于普通 softmax 矩阵。V-CoLA 研究从真实状态递推判断哪些视觉信息值得保留，再合并或在深层退出。压缩改变后续可读证据，不能仅以 token 变少证明答案质量或真实推理成本改善。 教学例：一张高分辨率图有许多相似背景块，可尝试压缩；仍要保留问题涉及的细小标志，不能直接套另一类模型的注意力排名。 2026-10-27">

@@ -30,6 +30,8 @@
 
 ### 统一评测与可靠性
 
+- [AlphaProof Code: Verifying Signal's Security at the Machine-Code Level](../alphaproof-code/README.md)（`alphaproof-code`）：人类与规格编写/审阅 Agent 先定义并批准要证明的安全性质，证明团队再处理实际 Rust 代码经标准编译器生成的 AArch64 程序。Lean 内核检查证明，gatekeeper 还要防止团队偷偷弱化规格或其依赖。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [ReproBridge: Building Reproducibility into ML Research Artifacts](../2611.08452-reprobridge/README.md)（`reprobridge`）：论文和代码之间常缺环境、启动方式、统计单位及修复理由。ReproBridge 将已恢复的执行知识保存为四件套：代码、环境、launcher、复现指南；构建、独立复现和事后审计使用不同上下文。
 - [AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers](../2610.39234-agentheal/README.md)（`agentheal`）：网页可能已删除、改版、需要登录、限流或不允许抓取。简单重试不是恢复；找到标题相似页面也不一定完成原目标。
 
 ### 研究自动化
@@ -40,6 +42,10 @@
 ### 自动研究
 
 - [AIRS-Bench: a Suite of Tasks for Frontier AI Research Science Agents](../2602.06855-airs-bench/README.md)（`airs-bench`）：以问题、数据集、指标和人工SOTA定义20个任务。Agent自行提出方法、实现训练、分析实验并修订，不提供基线解法；协议区分Agent、搜索scaffold与运行harness，比较顺序MLGym和树搜索AIRA-dojo。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
+### 真实任务与可靠性评测
+
+- [ARE-bench: Benchmarking Agents' Research Ability in Real-World Researcher Sessions and Workspaces](../2611.14364-are-bench/README.md)（`are-bench`）：从干净目录完成独立任务，不等于能接手正在进行的研究。ARE-bench 在真实会话切点恢复完整未清理 workspace，保留之前仍有效的要求。
 
 ### 多Agent协作
 
@@ -130,6 +136,7 @@
 ### 长期记忆与技能
 
 - [ENGRAM: From Agent Experience to Weights through Verified Consolidation](../2611.09472-engram-consolidation/README.md)（`engram-consolidation`）：检索过往轨迹能支持 Agent 执行，但检索库不会因为模型微调而自然缩小。ENGRAM 把两个问题拆开：有没有值得学的经验，以及这次更新的权重能否替代外部检索。
+- [LiSA: Lifelong Safety Adaptation via Conservative Policy Induction](../2605.14454-lisa/README.md)（`lisa`）：固定安全模型不容易适应组织、用户与情境边界。LiSA 从稀疏且可能有噪声的失败反馈维护两类记忆：可复用的广义策略，以及相似情境中允许/拒绝冲突形成的局部提示。
 
 ### 程序进化
 
@@ -139,6 +146,11 @@
 ### GUI Agent
 
 - [Reflect, Revise, Reuse: Training-Free Skill Evolution for GUI Agents](../2609.17653-evoskill-gui/README.md)（`evoskill-gui`）：把 GUI 技能拆成可编辑组件，执行失败后由信息隔离 critic 反思，并只修改责任组件，验证后的技能可跨任务复用。
+
+### 自进化与技能优化
+
+- [Program-Aided Patchable Skill Evolution](../2611.14019-pase/README.md)（`pase`）：纯自然语言技能把策略和具体程序操作混在一起，局部修复常要求重写整份说明。PASE 让技能保留描述性知识，同时关联可独立编辑的程序；从成败轨迹提出 patch 后，以独立 validation 判断是否保留。
+- [When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents](../2611.14326-fgse/README.md)（`fgse`）：一次经验修复能帮助当前任务，却可能在边界任务有害，或破坏旧技能。FGSE 将更新表示为带前提、行为、预期效果和 verifier 的假设，先在临时状态上跑迁移、定向证伪和归档回归探针，再 commit/refine/reject。
 
 ### 评测与可验证Agent
 
@@ -216,6 +228,10 @@
 
 - [RedEvoAgent: Automatic Red-Teaming Agent with Experience-Driven Skill Evolution](../2608.27439-redevoagent/README.md)（`redevoagent`）：RedEvoAgent 不直接检索冗长攻击轨迹，而把跨案例经验蒸馏成可读技能；只归因真正决定成败的工具，并且新技能必须在留出验证集上优于 incumbent 才能晋级。
 
+### 工具调用与执行
+
+- [ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows](../2611.14492-retrace/README.md)（`retrace`）：相同 SOP 反复执行时，每步再让 LLM 规划成本高。ReTrace 从 Agent 的推理解释、工具调用及参数来源恢复“何时执行哪步”，聚合为带证据的条件规则，再合成为可执行工作流。
+
 ### Agent安全
 
 - [RuntimeTickets: Source-Grounded Security Obligations for Agent Skills](../2611.03772-runtime-tickets/README.md)（`runtime-tickets`）：允许调用“发送”并不等于允许给任意接收者发送任意内容。论文让模型只在运行前提出有原文行依据的 obligations，host 审批后冻结 ticket；运行时由确定性 gate 检查真实副作用，而不再问语言模型。
@@ -271,6 +287,10 @@
 ### Agent 验证
 
 - [VeriHarness: Scaling Agentic Verification for Long-Horizon Tasks](../2610.00972-veriharness/README.md)（`veriharness`）：同一基础模型得到 workspace、证据工具和可复用验证技能；disagreement resolver 查证冲突 claim，consensus challenger 主动质疑共同 claim 和遗漏要求。
+
+### 主动 / 长期记忆
+
+- [Don't Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents](../2611.14320-wikitrace/README.md)（`wikitrace`）：从一次成功或失败轨迹提炼出的洞见不一定正确，也可能被误用到不适用的任务。WikiTrace 不只保存一句经验，而是把洞见链接到该次执行的解释及未改写的原轨迹。
 
 ### 评测与可靠性
 

@@ -7,7 +7,7 @@ hide:
 
 # 少看、晚看还是再看：把视觉预算放到正确阶段
 
-[多模态](../index.md) · 更新 2026-10-27 · 16 篇主题资料 / 6 篇重点对照
+[多模态](../index.md) · 更新 2026-11-11 · 17 篇主题资料 / 7 篇重点对照
 
 视觉预算不只有token数。StackTok选择已编码证据，PACE提前分配输入分辨率，ViMoD保留可恢复细节，Frames-on-Demand按需取帧，AdaLoop多算已有视觉状态，OmniKVQuant减少每份cache的位宽。必须同时追踪信息是否还在、哪段成本已支付。
 
@@ -31,6 +31,7 @@ hide:
 | [Caption-once, Frames-on-Demand: Visual-Need Routing for Budget-Aware Agentic Long Video Understanding](../../../foundation-models/2609.11899-frames-on-demand/README.md) · [原始来源](https://arxiv.org/abs/2609.11899)<br>章节：背景与主要改动、复现边界 | 先建立一次caption memory，仅在文字证据不足时用固定预算回看相关视频帧。 | 文字索引可能遗漏细节，门控错误会漏看；本地确定性caption/query gate未运行长视频VLM或学得路由器。 |
 | [AdaLoop: Thinking with the Vision Encoder](../../../foundation-models/2610.21323-adaloop-vision/README.md) · [原始来源](https://arxiv.org/abs/2610.21323)<br>章节：背景与主要改动、核心公式、结果与独立对照 | 以问题向量调制共享冻结视觉块，循环更新视觉状态，将额外计算投入视觉侧。 | 循环增加处理机会而非新增原始证据；完整多臂训练成本过高未复现，当前随机token梯度诊断。 |
 | [OmniKVQuant: KV Cache Quantization for Omni-LLMs](../../../foundation-models/2609.11582-omnikvquant/README.md) · [原始来源](https://arxiv.org/abs/2609.11582)<br>章节：背景与主要改动、复现边界 | key按短时间窗设量化范围，value按模态独立旋转，降低KV表示位宽。 | 压缩cache数值与减少cache条目不同；本地2-bit NumPy reference无真实GPU kernel加速证据。 |
+| [Rethinking in Spikes: Mitigating Hallucinations in MDLMs with Step-Aware Decoding](../../../multimodal-models/2611.12901-steprefine/README.md) · [原始来源](https://arxiv.org/abs/2611.12901v1)<br>章节：核心公式、数据协议与代码映射、结果与复现边界 | 相对已完成历史变化窗口检测mask平均熵尖峰，在mask位置用概率加权embedding额外refine，以新到旧KL稳定度停止，并把k次额外前向计入t-1-k索引。 | 改变的是扩散token语义计算而非多取新图像或重跑视觉encoder；不同于视觉AdaLoop的循环状态。CPU公式不含MDLM、图像或remasking闭环，不证明幻觉benchmark改善。 |
 
 </div>
 
@@ -47,6 +48,12 @@ PACE在编码前缩放可能已改变可见细节，StackTok从编码结果中�
 ViMoD较小的活动细节集不自动意味着原始Fine KV已从存储中消失；OmniKVQuant处理的是每份KV的数值位宽与误差。AdaLoop再从另一轴增加视觉循环，以计算换更有问题针对性的表示。若只报token减少率，会同时漏掉存储、回读和循环开销，无法判断实际设备预算是否满足。
 
 对照来源：[vimod](../../../multimodal-models/2610.12060-vimod/README.md) · [omnikvquant](../../../foundation-models/2609.11582-omnikvquant/README.md) · [adaloop-vision](../../../foundation-models/2610.21323-adaloop-vision/README.md)
+
+### 同样是多算一次，token软化与视觉循环不能按次数等同
+
+StepRefine在多模态扩散的mask token输入上保留概率加权语义，以新||旧KL决定停止并从总NFE扣预算。视觉AdaLoop则按问题调制冻结视觉块、循环更新视觉状态，额外计算主要在视觉侧。两者都不因多次计算就获得新的原始图像证据；比较前先追踪计算阶段、状态、停止信号和完整生成成本，不能把公式误差当幻觉减少。
+
+对照来源：[steprefine](../../../multimodal-models/2611.12901-steprefine/README.md) · [adaloop-vision](../../../foundation-models/2610.21323-adaloop-vision/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -82,15 +89,29 @@ ViMoD较小的活动细节集不自动意味着原始Fine KV已从存储中消�
 
     对照来源：[adaloop-vision](../../../foundation-models/2610.21323-adaloop-vision/README.md) · [frames-on-demand](../../../foundation-models/2609.11899-frames-on-demand/README.md) · [vimod](../../../multimodal-models/2610.12060-vimod/README.md)
 
+### StepRefine和视觉AdaLoop都多算几次，为什么不能只比循环次数？ {#cross-soft-token-versus-visual-loop}
+
+??? note "展开答案与例子"
+
+    **答案：** 计算对象、每次成本和预算记账不同。StepRefine重算软token语义并扣减固定去噪预算；AdaLoop循环视觉状态并通过问题条件调制。应核对真实backbone与端到端预算，而不是把两次循环视为等算力。
+
+    **教学例子：** 教学例：StepRefine在t=16额外2次应下移到13；AdaLoop的2次视觉块循环不对应这个去噪索引，也不会自动获得新图像。
+
+    对照来源：[steprefine](../../../multimodal-models/2611.12901-steprefine/README.md) · [adaloop-vision](../../../foundation-models/2610.21323-adaloop-vision/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-11** · 加入StepRefine，将熵尖峰软token refinement与视觉AdaLoop循环区分；保留新||旧KL、历史窗口隔离及t-1-k预算。L1 CPU公式检查不替代真实MDLM/幻觉评测，完整多模型矩阵不复现。
+
+涉及：[steprefine](../../../multimodal-models/2611.12901-steprefine/README.md) · [adaloop-vision](../../../foundation-models/2610.21323-adaloop-vision/README.md)
 
 **2026-10-27** · 首版：比较StackTok选择、PACE输入预算、ViMoD可恢复KV、按需帧读取、视觉循环与KV量化；已阅16篇摘要，精读6篇。
 
 覆盖 16 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 16 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 17 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -110,6 +131,7 @@ ViMoD较小的活动细节集不自动意味着原始Fine KV已从存储中消�
 - [Video Encoders Built on Image Representations](../../../foundation-models/2610.06616-video-encoder-selection/README.md)
 - [VideoMM: Adaptive Macro-Micro Inference for Efficient Video MLLMs](../../../multimodal-models/2609.16722-videomm/README.md)
 - [Look Back, Think Ahead: Visual Memory on Demand for Efficient Multimodal Reasoning](../../../multimodal-models/2610.12060-vimod/README.md)
+- [Rethinking in Spikes: Mitigating Hallucinations in MDLMs with Step-Aware Decoding](../../../multimodal-models/2611.12901-steprefine/README.md)
 
 </details>
 

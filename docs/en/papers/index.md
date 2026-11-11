@@ -4,24 +4,39 @@
 
 [English home](../index.md) · [中文研究库](../../research-library.md)
 
-The catalog lists 1090 entries from the shared research manifest. English write-ups available: 1090.
+The catalog lists 1107 entries from the shared research manifest. English write-ups available: 1107.
 
 ## Browse by domain
 
 - [Search, ads, recommendation, and LLM applications](recommendation.md): 329 catalog entries, 329 English write-ups
-- [Foundation models](foundation-models.md): 211 catalog entries, 211 English write-ups
+- [Foundation models](foundation-models.md): 214 catalog entries, 214 English write-ups
 - [Structured decisions / System One](system-one.md): 6 catalog entries, 6 English write-ups
-- [Multimodal models](multimodal-models.md): 18 catalog entries, 18 English write-ups
-- [LLM post-training](post-training.md): 252 catalog entries, 252 English write-ups
-- [Agents](agent-research.md): 274 catalog entries, 274 English write-ups
+- [Multimodal models](multimodal-models.md): 20 catalog entries, 20 English write-ups
+- [LLM post-training](post-training.md): 256 catalog entries, 256 English write-ups
+- [Agents](agent-research.md): 282 catalog entries, 282 English write-ups
 
 ## Read in English
 
+- [When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents](../../agent-research/2611.14326-fgse/README-en.md)
+- [ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows](../../agent-research/2611.14492-retrace/README-en.md)
+- [RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval](../../multimodal-models/2611.14496-rs-jepa/README-en.md)
+- [Program-Aided Patchable Skill Evolution](../../agent-research/2611.14019-pase/README-en.md)
+- [Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards](../../post-training/2611.14015-mcpo/README-en.md)
+- [Don't Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents](../../agent-research/2611.14320-wikitrace/README-en.md)
+- [Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding](../../foundation-models/2611.13545-stochastic-rounding/README-en.md)
+- [Blurring the Block Boundaries: Overlapping Block Denoising for Efficient Diffusion Language Models](../../foundation-models/2611.14387-b3/README-en.md)
+- [AlphaProof Code: Verifying Signal's Security at the Machine-Code Level](../../agent-research/alphaproof-code/README-en.md)
+- [ARE-bench: Benchmarking Agents' Research Ability in Real-World Researcher Sessions and Workspaces](../../agent-research/2611.14364-are-bench/README-en.md)
+- [Off-policy Learning with Excursion Policies](../../post-training/2611.13275-excursion-td/README-en.md)
+- [MaxIM: Maximally Informative Incremental Summarization via Reinforcement Learning](../../post-training/2611.12825-maxim/README-en.md)
+- [DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation](../../post-training/2611.13249-drd-mopd/README-en.md)
+- [ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation](../../foundation-models/2611.12956-adindex/README-en.md)
 - [e-means: outperforming k-means (in one-tenth the epochs)](../../foundation-models/2611.09501-e-means/README-en.md)
 - [Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards](../../post-training/2611.09448-rcea/README-en.md)
 - [ENGRAM: From Agent Experience to Weights through Verified Consolidation](../../agent-research/2611.09472-engram-consolidation/README-en.md)
 - [Discovering formally verified quantum programs with AI](../../agent-research/2611.09822-verified-quantum-wiki/README-en.md)
 - [XStack: A Benchmark for ML Repo Migration](../../agent-research/2611.08472-xstack/README-en.md)
+- [ReproBridge: Building Reproducibility into ML Research Artifacts](../../agent-research/2611.08452-reprobridge/README-en.md)
 - [GINGER: Spicing Up Graph-Based Vector Search](../../foundation-models/2611.08306-ginger/README-en.md)
 - [EnvOpt: Automated Optimization for Agent Environments](../../agent-research/2611.07372-envopt/README-en.md)
 - [ConvPE: Convolutional Position Embedding Improves Transformers](../../foundation-models/2611.07749-convpe/README-en.md)
@@ -210,6 +225,7 @@ The catalog lists 1090 entries from the shared research manifest. English write-
 - [Time-JEPA: Grounding Video World Models with Physical Time Series](../../foundation-models/2610.23982-time-jepa/README-en.md)
 - [The World Won't Wait: Evaluating and Teaching Agents Under a Live Clock](../../agent-research/2610.20665-torsi/README-en.md)
 - [Selective Reasoning for Typed Decision Models: When to Start, Read, and Stop](../../system-one/2610.19644-selective-reasoning/README-en.md)
+- [Rethinking in Spikes: Mitigating Hallucinations in MDLMs with Step-Aware Decoding](../../multimodal-models/2611.12901-steprefine/README-en.md)
 - [Recursive Formation and First-Class Reuse of Compositional Capabilities](../../agent-research/2610.19414-formcraft/README-en.md)
 - [PN-Mix: Pair-Norm Guided Mixed-Precision Key Cache Quantization for Efficient Long-Output LLM Inference](../../reproductions/2610.19605-pn-mix/README-en.md)
 - [Open-world AI: a Tale of Three Requirements](../../foundation-models/2610.20782-memory-mosaics-plus/README-en.md)
@@ -796,6 +812,7 @@ The catalog lists 1090 entries from the shared research manifest. English write-
 - [DADF: A Distribution-Aware Debiasing Framework for Watch-Time Regression in Recommender Systems](../../reproductions/2605.17863-dadf/README-en.md)
 - [Policy-Grounded Dynamic Facet Suggestions for Job Search](../../reproductions/2605.16479-policy-facet/README-en.md)
 - [Customizing an LLM for Enterprise Software Engineering](../../foundation-models/2605.16517-gemini-for-google/README-en.md)
+- [LiSA: Lifelong Safety Adaptation via Conservative Policy Induction](../../agent-research/2605.14454-lisa/README-en.md)
 - [Efficient Generative Retrieval for E-commerce Search with Semantic Cluster IDs and Expert-Guided RL](../../reproductions/2605.14434-cq-sid/README-en.md)
 - [ConSPO](../../post-training/2605.12969-conspo/README-en.md)
 - [Missing Old Logits](../../post-training/2605.12070-missing-old-logits/README-en.md)

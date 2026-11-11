@@ -7,7 +7,7 @@ hide:
 
 # 工具与协作执行：把计划变成可检查的动作
 
-[Agent](index.md) / 201 个问题 · 50 篇论文
+[Agent](index.md) / 205 个问题 · 51 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">201 个问题 · 50 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">205 个问题 · 51 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:retrace" data-paper-title="ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows Agent Columbia University / Amazon internship 2026-11-10 相同 SOP 反复执行时，每步再让 LLM 规划成本高。ReTrace 从 Agent 的推理解释、工具调用及参数来源恢复“何时执行哪步”，聚合为带证据的条件规则，再合成为可执行工作流。无运行时 Planner 不等于所有工具都不能使用模型，也不等于工具序列可以不看新观察而照抄。 成本过高，不复现（审查 DONE）。本地交付纯 CPU typed decision-list IR，不生成模型推理、调用生产工具或伪装成完整编译系统。Binding 限定 input、已有 observation 和 constant；Guard 只支持 eq/ne/exists，按类型比较，不把整数 1 当布尔 true。Rule 必须保留支持引用；DecisionList.next_call() 检查完成条件并返回第一个匹配的 typed call，不执行任意 Python 或真实工具。缺观察、缺参数、错类型和无适用规则均显式报错，不猜未来结果。  工具调用与执行 轨迹到工作流与可审计条件 Agent 工具与协作执行：把计划变成可检查的动作 ReTrace 的 planner-free 是否意味着整个系统不能有任何模型调用？ 不是。它限制的是运行时由代码决定下一步，不再每步调用LLM规划。一个固定工具内部仍可使用模型，例如文档分类；本地IR只发出typed call，连这些工具也不执行。 教学例：guard选择“分类发票”节点后，节点可以调用分类模型；下一节点仍由代码和返回状态选择。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<span id="paper-agent-research-retrace-4241a794" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-38a1fb8c38cf06c9">ReTrace 的 planner-free 是否意味着整个系统不能有任何模型调用？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aretrace">ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Columbia University / Amazon internship</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。它限制的是运行时由代码决定下一步，不再每步调用LLM规划。一个固定工具内部仍可使用模型，例如文档分类；本地IR只发出typed call，连这些工具也不执行。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：guard选择“分类发票”节点后，节点可以调用分类模型；下一节点仍由代码和返回状态选择。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14492">原论文</a> · <a href="../../../../agent-research/2611.14492-retrace/">实现解读</a> · <a href="#qa-38a1fb8c38cf06c9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:retrace" data-paper-title="ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows Agent Columbia University / Amazon internship 2026-11-10 相同 SOP 反复执行时，每步再让 LLM 规划成本高。ReTrace 从 Agent 的推理解释、工具调用及参数来源恢复“何时执行哪步”，聚合为带证据的条件规则，再合成为可执行工作流。无运行时 Planner 不等于所有工具都不能使用模型，也不等于工具序列可以不看新观察而照抄。 成本过高，不复现（审查 DONE）。本地交付纯 CPU typed decision-list IR，不生成模型推理、调用生产工具或伪装成完整编译系统。Binding 限定 input、已有 observation 和 constant；Guard 只支持 eq/ne/exists，按类型比较，不把整数 1 当布尔 true。Rule 必须保留支持引用；DecisionList.next_call() 检查完成条件并返回第一个匹配的 typed call，不执行任意 Python 或真实工具。缺观察、缺参数、错类型和无适用规则均显式报错，不猜未来结果。  工具调用与执行 轨迹到工作流与可审计条件 Agent 工具与协作执行：把计划变成可检查的动作 为何 ReTrace 的 guard 不能读取它即将调用工具的返回值？ 条件必须在动作发生前可判定，否则工作流偷看未来信息。参数也要绑定到任务输入、已出现的工具结果或常量；缺失观察必须显式失败，不能把未知补成看似合理的值。 教学例：只有调用查询订单后才能知道是否已发货，不能先用该未知结果决定要不要查询订单。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-4a436de21ccb70a1">为何 ReTrace 的 guard 不能读取它即将调用工具的返回值？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aretrace">ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Columbia University / Amazon internship</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>条件必须在动作发生前可判定，否则工作流偷看未来信息。参数也要绑定到任务输入、已出现的工具结果或常量；缺失观察必须显式失败，不能把未知补成看似合理的值。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：只有调用查询订单后才能知道是否已发货，不能先用该未知结果决定要不要查询订单。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14492">原论文</a> · <a href="../../../../agent-research/2611.14492-retrace/">实现解读</a> · <a href="#qa-4a436de21ccb70a1">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:retrace" data-paper-title="ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows Agent Columbia University / Amazon internship 2026-11-10 相同 SOP 反复执行时，每步再让 LLM 规划成本高。ReTrace 从 Agent 的推理解释、工具调用及参数来源恢复“何时执行哪步”，聚合为带证据的条件规则，再合成为可执行工作流。无运行时 Planner 不等于所有工具都不能使用模型，也不等于工具序列可以不看新观察而照抄。 成本过高，不复现（审查 DONE）。本地交付纯 CPU typed decision-list IR，不生成模型推理、调用生产工具或伪装成完整编译系统。Binding 限定 input、已有 observation 和 constant；Guard 只支持 eq/ne/exists，按类型比较，不把整数 1 当布尔 true。Rule 必须保留支持引用；DecisionList.next_call() 检查完成条件并返回第一个匹配的 typed call，不执行任意 Python 或真实工具。缺观察、缺参数、错类型和无适用规则均显式报错，不猜未来结果。  工具调用与执行 轨迹到工作流与可审计条件 Agent 工具与协作执行：把计划变成可检查的动作 ReTrace 的规则编译与 Toolformer 的 API-call 过滤为什么不是同一种工具学习？ Toolformer 通过带返回值的后续token loss筛选有用调用，并继续语言模型训练；ReTrace 从SOP和推理轨迹恢复分支条件，形成代码控制的工作流。前者改变模型如何生成调用，后者改变步骤选择所在的位置。 教学例：训练模型学会必要时查询汇率，与把“目标币种不同就查汇率”写成带证据guard，是不同交付物。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-f4650369503d2ebd">ReTrace 的规则编译与 Toolformer 的 API-call 过滤为什么不是同一种工具学习？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aretrace">ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Columbia University / Amazon internship</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Toolformer 通过带返回值的后续token loss筛选有用调用，并继续语言模型训练；ReTrace 从SOP和推理轨迹恢复分支条件，形成代码控制的工作流。前者改变模型如何生成调用，后者改变步骤选择所在的位置。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：训练模型学会必要时查询汇率，与把“目标币种不同就查汇率”写成带证据guard，是不同交付物。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14492">原论文</a> · <a href="../../../../agent-research/2611.14492-retrace/">实现解读</a> · <a href="#qa-f4650369503d2ebd">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:retrace" data-paper-title="ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows Agent Columbia University / Amazon internship 2026-11-10 相同 SOP 反复执行时，每步再让 LLM 规划成本高。ReTrace 从 Agent 的推理解释、工具调用及参数来源恢复“何时执行哪步”，聚合为带证据的条件规则，再合成为可执行工作流。无运行时 Planner 不等于所有工具都不能使用模型，也不等于工具序列可以不看新观察而照抄。 成本过高，不复现（审查 DONE）。本地交付纯 CPU typed decision-list IR，不生成模型推理、调用生产工具或伪装成完整编译系统。Binding 限定 input、已有 observation 和 constant；Guard 只支持 eq/ne/exists，按类型比较，不把整数 1 当布尔 true。Rule 必须保留支持引用；DecisionList.next_call() 检查完成条件并返回第一个匹配的 typed call，不执行任意 Python 或真实工具。缺观察、缺参数、错类型和无适用规则均显式报错，不猜未来结果。  工具调用与执行 轨迹到工作流与可审计条件 Agent 工具与协作执行：把计划变成可检查的动作 本地 ReTrace 为什么保留 unwitnessed 分支，却不能说它已在真实环境验证？ 有些分支来自SOP或推理提到的备选行动，而没有任何已执行轨迹覆盖。保留标记避免静默丢失规则，但支持引用不等于实测成功；本地只检查分派、参数类型和信息来源，没有执行真实工具。 教学例：SOP提到“无网络时转人工”，训练轨迹从未离线；规则可以保留，但不能填入离线处理成功率。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-52c873cdc3b398ba">本地 ReTrace 为什么保留 unwitnessed 分支，却不能说它已在真实环境验证？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aretrace">ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Columbia University / Amazon internship</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>有些分支来自SOP或推理提到的备选行动，而没有任何已执行轨迹覆盖。保留标记避免静默丢失规则，但支持引用不等于实测成功；本地只检查分派、参数类型和信息来源，没有执行真实工具。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：SOP提到“无网络时转人工”，训练轨迹从未离线；规则可以保留，但不能填入离线处理成功率。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14492">原论文</a> · <a href="../../../../agent-research/2611.14492-retrace/">实现解读</a> · <a href="#qa-52c873cdc3b398ba">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:runtime-tickets" data-paper-title="RuntimeTickets: Source-Grounded Security Obligations for Agent Skills" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="RuntimeTickets: Source-Grounded Security Obligations for Agent Skills Agent University of North Carolina at Chapel Hill 2026-11-02 允许调用“发送”并不等于允许给任意接收者发送任意内容。论文让模型只在运行前提出有原文行依据的 obligations，host 审批后冻结 ticket；运行时由确定性 gate 检查真实副作用，而不再问语言模型。ticket 只能收紧宿主权限，不能放宽。正文 §3 Algorithm 1 高成本完整实验：成本过高，不复现（审查 DONE）。诊断实际检查合法交付、错误接收者、同接收者非法对象及重复请求；组件状态：CPU / L1 component_only，有源 ticket 与原子 gate 内核；不是实际网络代理、完整安全产品或统一 Evolve 算子。高成本完整实验：成本过高，不复现（审查 DONE）。宿主提供可信合同、validator registry 和审计 key；Skill 仅作为不可执行文本被 SHA256 绑定，三个 obligation 的引用必须逐行精确匹配。  Agent安全 权限与运行时约束 Agent 工具与协作执行：把计划变成可检查的动作 为什么“允许发送到这个服务”还不足以阻止数据泄漏？ 攻击可能复用任务本来允许的接收端，发送私钥或额外内容。ticket还必须限制对象通过可信validator，并限制累计发送量；只核接收者或工具名不能表达交付合同。 教学例：同一个接收地址既能收到批准报告，也能收到隐藏密钥。报告validator拒绝密钥，即使地址在host allowlist里也不能发送。 2026-11-04">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-runtime-tickets-95683559" class="ar-learning-paper-anchor"></span>

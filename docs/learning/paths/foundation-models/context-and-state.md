@@ -7,7 +7,7 @@ hide:
 
 # 长上下文：注意力、递归状态与记忆
 
-[基础模型](index.md) / 148 个问题 · 37 篇论文
+[基础模型](index.md) / 152 个问题 · 38 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">148 个问题 · 37 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">152 个问题 · 38 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:adindex" data-paper-title="ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation 基础模型 Nanjing University / Alibaba Group 2026-11-07 DSA 为每个 query 独立扫描整个因果前缀来选 Top-K。ADIndex 发现相邻 query 的候选有层相关的重叠：先校准各层组大小与候选库容量，再训练一个较少 head 的组索引器。组内先共享一次全前缀扫描，随后原 DSA 仍逐 query 精排，并补入 anchor 后新可见的 token；不是把所有 query 的最终索引强行设为相同。 成本过高，不复现（审查 DONE）。诊断只在 4 个 query、32 个历史 key 上执行 64 步学生优化，检查训练 KL、冻结梯度、因果索引、新可见 token 和回退分支。L1 机制组件：小张量组索引器与候选精排，不是 DeepSeek/GLM 长文能力、SGLang serving 或加速比复现。GroupIndexer 接受外部提供的归一化 query latent、hidden 与严格 anchor 可见的 keys；本地冻结这些输入。teacher_distribution、forward_kl、refine_indices 与 union_capacity 对应教师、蒸馏、精排和容量统计。  注意力与长上下文 稀疏索引与共享候选库 基础模型 长上下文：注意力、递归状态与记忆 ADIndex 共享候选库，是不是让组内所有 query 用相同最终 Top-K？ 不是。组索引器只共享 anchor 可见历史上的候选库；每个 query 还会补入 anchor 后自己新可见的 token，再用原 DSA 分数独立精排。共享的是昂贵全前缀扫描，不是最终注意力位置。 教学例：anchor=31、query=34，共享库可能都是0到31里的位置，但32、33、34必须补进候选，最终Top-K仍可与query=32不同。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-adindex-a6c2f650" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-e1a6656e0afe7986">ADIndex 共享候选库，是不是让组内所有 query 用相同最终 Top-K？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aadindex">ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Nanjing University / Alibaba Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。组索引器只共享 anchor 可见历史上的候选库；每个 query 还会补入 anchor 后自己新可见的 token，再用原 DSA 分数独立精排。共享的是昂贵全前缀扫描，不是最终注意力位置。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：anchor=31、query=34，共享库可能都是0到31里的位置，但32、33、34必须补进候选，最终Top-K仍可与query=32不同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.12956v1">原论文</a> · <a href="../../../../foundation-models/2611.12956-adindex/">实现解读</a> · <a href="#qa-e1a6656e0afe7986">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:adindex" data-paper-title="ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation 基础模型 Nanjing University / Alibaba Group 2026-11-07 DSA 为每个 query 独立扫描整个因果前缀来选 Top-K。ADIndex 发现相邻 query 的候选有层相关的重叠：先校准各层组大小与候选库容量，再训练一个较少 head 的组索引器。组内先共享一次全前缀扫描，随后原 DSA 仍逐 query 精排，并补入 anchor 后新可见的 token；不是把所有 query 的最终索引强行设为相同。 成本过高，不复现（审查 DONE）。诊断只在 4 个 query、32 个历史 key 上执行 64 步学生优化，检查训练 KL、冻结梯度、因果索引、新可见 token 和回退分支。L1 机制组件：小张量组索引器与候选精排，不是 DeepSeek/GLM 长文能力、SGLang serving 或加速比复现。GroupIndexer 接受外部提供的归一化 query latent、hidden 与严格 anchor 可见的 keys；本地冻结这些输入。teacher_distribution、forward_kl、refine_indices 与 union_capacity 对应教师、蒸馏、精排和容量统计。  注意力与长上下文 稀疏索引与共享候选库 基础模型 长上下文：注意力、递归状态与记忆 为什么 ADIndex 教师不能先对原始分数取 max，再做一次 softmax？ 论文先逐query标准化分数、按温度3做softmax，再逐token取跨query最大值，最后在Top-P支持归一。先max会混合不同query的偏移和尺度，并改变教师质量；这些运算不交换。 教学例：某query全部原始分数加100，不应改变它的逐query标准化概率；若先跨query取原始max，它却可能垄断教师候选。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-76f7fe0bca500e68">为什么 ADIndex 教师不能先对原始分数取 max，再做一次 softmax？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aadindex">ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Nanjing University / Alibaba Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>论文先逐query标准化分数、按温度3做softmax，再逐token取跨query最大值，最后在Top-P支持归一。先max会混合不同query的偏移和尺度，并改变教师质量；这些运算不交换。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：某query全部原始分数加100，不应改变它的逐query标准化概率；若先跨query取原始max，它却可能垄断教师候选。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.12956v1">原论文</a> · <a href="../../../../foundation-models/2611.12956-adindex/">实现解读</a> · <a href="#qa-76f7fe0bca500e68">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:adindex" data-paper-title="ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation 基础模型 Nanjing University / Alibaba Group 2026-11-07 DSA 为每个 query 独立扫描整个因果前缀来选 Top-K。ADIndex 发现相邻 query 的候选有层相关的重叠：先校准各层组大小与候选库容量，再训练一个较少 head 的组索引器。组内先共享一次全前缀扫描，随后原 DSA 仍逐 query 精排，并补入 anchor 后新可见的 token；不是把所有 query 的最终索引强行设为相同。 成本过高，不复现（审查 DONE）。诊断只在 4 个 query、32 个历史 key 上执行 64 步学生优化，检查训练 KL、冻结梯度、因果索引、新可见 token 和回退分支。L1 机制组件：小张量组索引器与候选精排，不是 DeepSeek/GLM 长文能力、SGLang serving 或加速比复现。GroupIndexer 接受外部提供的归一化 query latent、hidden 与严格 anchor 可见的 keys；本地冻结这些输入。teacher_distribution、forward_kl、refine_indices 与 union_capacity 对应教师、蒸馏、精排和容量统计。  注意力与长上下文 稀疏索引与共享候选库 基础模型 长上下文：注意力、递归状态与记忆 共享库为什么必须只看 anchor 历史，却又要给后续 query 补新 token？ 组库在anchor处构造，读取之后的key会泄漏未来；但后续query本来有权读取新出现的因果token，若不补回会不必要地丢失近期信息。因此共享库与每query可见区间要分开。 教学例：给anchor31的组索引器传入key34属于越界未来；到query34精排时加入32到34却是合法因果上下文。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-b506edaef4703085">共享库为什么必须只看 anchor 历史，却又要给后续 query 补新 token？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aadindex">ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Nanjing University / Alibaba Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>组库在anchor处构造，读取之后的key会泄漏未来；但后续query本来有权读取新出现的因果token，若不补回会不必要地丢失近期信息。因此共享库与每query可见区间要分开。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：给anchor31的组索引器传入key34属于越界未来；到query34精排时加入32到34却是合法因果上下文。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.12956v1">原论文</a> · <a href="../../../../foundation-models/2611.12956-adindex/">实现解读</a> · <a href="#qa-b506edaef4703085">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:adindex" data-paper-title="ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation 基础模型 Nanjing University / Alibaba Group 2026-11-07 DSA 为每个 query 独立扫描整个因果前缀来选 Top-K。ADIndex 发现相邻 query 的候选有层相关的重叠：先校准各层组大小与候选库容量，再训练一个较少 head 的组索引器。组内先共享一次全前缀扫描，随后原 DSA 仍逐 query 精排，并补入 anchor 后新可见的 token；不是把所有 query 的最终索引强行设为相同。 成本过高，不复现（审查 DONE）。诊断只在 4 个 query、32 个历史 key 上执行 64 步学生优化，检查训练 KL、冻结梯度、因果索引、新可见 token 和回退分支。L1 机制组件：小张量组索引器与候选精排，不是 DeepSeek/GLM 长文能力、SGLang serving 或加速比复现。GroupIndexer 接受外部提供的归一化 query latent、hidden 与严格 anchor 可见的 keys；本地冻结这些输入。teacher_distribution、forward_kl、refine_indices 与 union_capacity 对应教师、蒸馏、精排和容量统计。  注意力与长上下文 稀疏索引与共享候选库 基础模型 长上下文：注意力、递归状态与记忆 本地训练 KL 降低，能确认论文 6.22× kernel 加速了吗？ 不能。小张量只验证教师、组索引器优化、冻结输入、候选因果与回退分支，没有backbone、融合kernel或SGLang负载。速度应在匹配硬件、长度和质量条件下另测。 本地是4个query、32个历史key、64步优化；原文长达256K索引与B300 serving，加速比不能从小KL训练外推。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-14cd9ef74390351d">本地训练 KL 降低，能确认论文 6.22× kernel 加速了吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aadindex">ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Nanjing University / Alibaba Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。小张量只验证教师、组索引器优化、冻结输入、候选因果与回退分支，没有backbone、融合kernel或SGLang负载。速度应在匹配硬件、长度和质量条件下另测。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>本地是4个query、32个历史key、64步优化；原文长达256K索引与B300 serving，加速比不能从小KL训练外推。</p>
+<p class="ar-learning-sources">依据：结果与复现边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.12956v1">原论文</a> · <a href="../../../../foundation-models/2611.12956-adindex/">实现解读</a> · <a href="#qa-14cd9ef74390351d">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:convpe" data-paper-title="ConvPE: Convolutional Position Embedding Improves Transformers" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="ConvPE: Convolutional Position Embedding Improves Transformers 基础模型 Nanjing University 2026-11-05 RoPE 旋转 query/key；ConvPE 改的是 softmax 前的加性分数。它先把当前层隐状态投影到少量通道，再从当前及最近若干隐状态学习各相对距离的偏置。每个查询只得到窗口内偏置；窗口外偏置为零，不是把远处 key 屏蔽。因果和 padding mask 仍由注意力层负责。论文还讨论分组、低秩与二维变体，此处仅实现 §3.1 的默认无分组、无分解一维公式。 依据论文配置判断，完整训练/TileLang 对比超出单张 A100/A30 或 Mac 的本轮低成本预算，成本过高，不复现（审查 DONE）。ConvPEBias.compact_bias 输入浮点 [batch, query, model_dim]，输出 [batch, query, bias_head, lag]。其 forward 将这些偏置映射到稠密参考分数矩阵，不计算 QK、mask 或 softmax。解码块须传入绝对 query_start 与前置的 min(query_start, W-1) 个原始隐状态，而不是已经投影的 KV；跨序列不复用这些状态。  注意力与长上下文 卷积位置偏置 基础模型 长上下文：注意力、递归状态与记忆 ConvPE 在窗口外的偏置为零，是否意味着注意力只能看最近 W 个 key？ 不是。ConvPE 只改 softmax 之前的加性分数。窗口外的历史 key 仍可按原始 QK 分数参与注意力，未来位置是否可见则由独立的因果 mask 决定。 教学例：W=3，query 位于 5 时，key 0 的距离是 5，偏置为零但仍可读；key 7 也没有该偏置，却因因果 mask 不可读。 2026-11-06">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
 <span id="paper-foundation-models-convpe-a877fbf3" class="ar-learning-paper-anchor"></span>

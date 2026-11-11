@@ -7,7 +7,7 @@ hide:
 
 # 经验进入长期系统前，要解决存取、价值与准入
 
-[Agent](../index.md) · 更新 2026-11-09 · 58 篇主题资料 / 9 篇重点对照
+[Agent](../index.md) · 更新 2026-11-11 · 60 篇主题资料 / 11 篇重点对照
 
 MemGPT 管信息放在哪里，MemPrice 管有限窗口里保留何种精度，CMP 管效用如何识别；Voyager 把成功程序变技能，VaG 管技能进入库的风险，SkillRise 用后续任务检验整理价值。存得下、相关、合法和能帮助未来，是四个不同问题。 EMMA再把结构化记忆分配给controller、agent与skill，按失败scope限制单次编辑及下一次实际使用义务。
 
@@ -34,6 +34,8 @@ MemGPT 管信息放在哪里，MemPrice 管有限窗口里保留何种精度，C
 | [Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems](../../../agent-research/2610.36652-discernmem/README.md) · [原始来源](https://arxiv.org/abs/2610.36652v1)<br>章节：背景与主要改动、核心公式 | 配对效果、范围优先归因、双参照修复门槛及版本证据清空。 | scope/defect/replay分数外部提供，不用规则冒充LLM诊断与修复。 |
 | [EMMA: Structured Episodic Memory for Multi-Agent Workflow Synthesis](../../../agent-research/2610.35966-emma/README.md) · [原始来源](https://arxiv.org/abs/2610.35966v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 按controller/agent/skill组织持久记忆，依据失败scope只改责任条目；临时execution slip不写长期经验，overflow先拆未完成步骤。 | 单编辑守卫不证明语义正确，安全判断仍外置；接受编辑后须下一次实际使用，不能以最终未重跑编辑冒充改进。完整多环境系统未复现。 |
 | [ENGRAM: From Agent Experience to Weights through Verified Consolidation](../../../agent-research/2611.09472-engram-consolidation/README.md) · [原始来源](https://arxiv.org/abs/2611.09472)<br>章节：背景与主要改动、核心公式、诊断与边界 | 训练前以学生熟练度或成功教师示范准入；训练后按技能用配对探针决定候选无检索能否替代 Base+ETG。 | 验证通过才能归档合格记录，混合启用仍保留检索。局部探针不等于完整 rollout；本地只执行 CPU 双关口，不做训练。 |
+| [Don&#x27;t Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents](../../../agent-research/2611.14320-wikitrace/README.md) · [原始来源](https://arxiv.org/abs/2611.14320)<br>章节：背景与主要改动、核心公式、数据协议与代码映射 | 冻结训练轨迹、模型解释和洞见的三层证据链接；测试Agent先看全部洞见，再按需回查原始运行。 | 来源可回查不等于解释已验证或Agent会正确使用；本地只有只读语料、hash与导航，没有编译LLM或任务能力对照。 |
+| [LiSA: Lifelong Safety Adaptation via Conservative Policy Induction](../../../agent-research/2605.14454-lisa/README.md) · [原始来源](https://arxiv.org/abs/2605.14454)<br>章节：核心公式、数据协议与代码映射、本地结果与负控 | 以Beta后验下界门控广义策略，并用按领域的混合标签局部提示保留边界；跨日平均链接重聚类和同原句运行时统计继承均显式执行。 | 置信度度量反馈条件下的可复用可靠性，不是因果收益或token效用；本地策略草稿与embedding来自外层，未运行LLM归纳和guardrail。 |
 
 </div>
 
@@ -68,6 +70,18 @@ DiscernMem用孤立注入与无记忆配对重放区分作用范围和内容缺�
 MemPrice 按预算和效用在多种表示之间选择，决定此刻读什么；ENGRAM 在外部训练后做候选无检索与 Base+ETG 的同题配对，决定哪些已用于训练的记录可以退出检索。前者节省窗口成本但不证明权重已经掌握技能；后者检验局部行为，但不等于端到端能力或总存储下降。
 
 对照来源：[memprice](../../../agent-research/2610.24955-memprice/README.md) · [engram-consolidation](../../../agent-research/2611.09472-engram-consolidation/README.md)
+
+### 先找到相关记录，与检查一句经验的来源是两件事
+
+MemFit保留原turn并用摘要索引和混合检索缩小候选；WikiTrace保留洞见到解释及原执行的链接，让模型可检查一条经验为何成立。排序正确不能修复错误解释，源完整也不保证模型会下钻。二者本地都是独立组件：前者未调用embedding/cross-encoder，后者未调用编译LLM或测试Actor，不能由接口测试推断长期问答收益。
+
+对照来源：[wikitrace](../../../agent-research/2611.14320-wikitrace/README.md) · [memfit](../../../agent-research/2610.00872-memfit/README.md)
+
+### 记忆值不值得放入，与证据够不够支撑，是两根轴
+
+MemPrice在有限token下联合分配保真等级，以效用与长期压力定价；LiSA在语义检索后问广义规则是否有足够支持，弱规则可能不展示而局部矛盾提示仍保留。低token成本不保证可靠，可靠也不保证预算内最优。两者分别需要外部效用/压缩或策略/embedding，不能把合成输入下的精确求解说成任务能力提升。
+
+对照来源：[lisa](../../../agent-research/2605.14454-lisa/README.md) · [memprice](../../../agent-research/2610.24955-memprice/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -133,9 +147,37 @@ MemPrice 按预算和效用在多种表示之间选择，决定此刻读什么�
 
     对照来源：[memprice](../../../agent-research/2610.24955-memprice/README.md) · [engram-consolidation](../../../agent-research/2611.09472-engram-consolidation/README.md)
 
+### 最相关的经验已排第一，为什么WikiTrace仍需要原轨迹，MemFit的检索测试又能说明什么？ {#cross-source-link-versus-memory-ranking}
+
+??? note "展开答案与例子"
+
+    **答案：** 相关性只决定先看到谁，不证明经验正确或适用。WikiTrace的来源层可让模型检查被摘要遗漏的观察；MemFit本地融合hook只验证给定分数如何组合，并未测模型算出的语义分或下钻行为。应分别验来源保真、排序与实际使用。
+
+    **教学例子：** 教学例：记忆说“任务结束”，原轨迹还有后续提交动作。排第一没有解决遗漏；正确链接也尚未证明模型会发现它。
+
+    对照来源：[wikitrace](../../../agent-research/2611.14320-wikitrace/README.md) · [memfit](../../../agent-research/2610.00872-memfit/README.md)
+
+### 一个只有一次支持的规则很短，MemPrice能放进预算，LiSA为什么仍可能不展示？ {#cross-cross-memory-confidence-versus-capacity}
+
+??? note "展开答案与例子"
+
+    **答案：** 容量选择和证据可靠性不是同一约束。MemPrice的候选成本/效用允许某表示入选，不证明规则正确；LiSA的Beta(2,1)5%分位数约0.22361，低于0.55。若它是已发现的局部边界提示，又不适用广义策略同一门控。
+
+    **教学例子：** 教学例：10token规则被分配器保留，但只成功过一次；全局安全建议应暂缓，公开/私密两个情境的局部冲突提示可以另行呈现。
+
+    对照来源：[lisa](../../../agent-research/2605.14454-lisa/README.md) · [memprice](../../../agent-research/2610.24955-memprice/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-11** · 补入证据量感知的广义策略门控和不门控局部冲突通道，区分记忆容量/效用与反馈可靠性；完整API评测高成本不复现。
+
+涉及：[lisa](../../../agent-research/2605.14454-lisa/README.md)
+
+**2026-11-11** · 加入WikiTrace，区分相关性排序与经验来源核查；训练语料冻结、解释不等于事实、源轨迹不可改写。CPU链接/只读诊断不代表编译或任务求解能力，完整多臂rollout不复现。
+
+涉及：[wikitrace](../../../agent-research/2611.14320-wikitrace/README.md) · [memfit](../../../agent-research/2610.00872-memfit/README.md)
 
 **2026-11-09** · 加入 ENGRAM：拆解训练准入、候选启用、可验证记忆释放三个决定；区分窗口省预算、减少可检索记录与存储缩减。完整训练不复现。
 
@@ -153,7 +195,7 @@ MemPrice 按预算和效用在多种表示之间选择，决定此刻读什么�
 
 覆盖 55 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 58 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 60 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -215,6 +257,8 @@ MemPrice 按预算和效用在多种表示之间选择，决定此刻读什么�
 - [Remembering Is Not Enough: Refining Memories and Learning When to Use Them in Multi-Agent Systems](../../../agent-research/2610.36652-discernmem/README.md)
 - [EMMA: Structured Episodic Memory for Multi-Agent Workflow Synthesis](../../../agent-research/2610.35966-emma/README.md)
 - [ENGRAM: From Agent Experience to Weights through Verified Consolidation](../../../agent-research/2611.09472-engram-consolidation/README.md)
+- [LiSA: Lifelong Safety Adaptation via Conservative Policy Induction](../../../agent-research/2605.14454-lisa/README.md)
+- [Don&#x27;t Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents](../../../agent-research/2611.14320-wikitrace/README.md)
 
 </details>
 

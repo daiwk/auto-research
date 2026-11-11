@@ -41,6 +41,7 @@
 
 ### on-policy / context 蒸馏
 
+- [DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation](../2611.13249-drd-mopd/README.md)（`drd-mopd`）：多个教师可能提供冲突的领域更新，直接优化一个学生无法区分冲突来自哪一份参数方向。DRD-MOPD 保留冻结基座与多个全参数增量，以域标签选择**哪些增量接受梯度**，而不是在推理时选择哪个教师或专家。
 - [CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation](../2611.07959-cord/README.md)（`cord-rollout`）：普通 OPD 的教师只给学生已经访问的前缀评分，难以覆盖学生很少走到的教师路径。CoRD 不改每状态的反向 KL 监督，改变的是产生前缀的采样分布。
 - [Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation?](../2611.04958-shuffled-opsd/README.md)（`shuffled-opsd`）：OPSD 中学生根据问题采样，冻结初始教师在同一生成前缀上评分，但额外看到 worked example。本文区分“双方共享的问题”和“只有教师看到的示例”：用另一个问题的完整示例作教师上下文，打乱共享问题的 whitespace 词块，却保留教师示例的顺序。
 - [P²-MOPD: Accelerating Multi-Teacher On-Policy Distillation via Parameter Priors](../2611.03953-p2-mopd/README.md)（`p2-mopd`）：多教师 OPD 用各领域专家监督学生自己的轨迹，但一个已合并的学生可能长期学不到某个专家的方向。P²-MOPD 不只改合并初始点，而是把每个 projection 写成“自由学生权重 + 可学习系数乘固定专家任务向量”。
@@ -192,6 +193,8 @@
 
 ### 奖励与信用分配
 
+- [Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards](../2611.14015-mcpo/README.md)（`mcpo`）：GRPO 常把同一响应的序列优势分给所有 token，无法区分局部决策的不确定度。MCPO 复用 rollout/old policy 温度后的 top-1、top-2 概率差，不额外调用教师或 verifier，改变各 token 的信用分配。
+- [MaxIM: Maximally Informative Incremental Summarization via Reinforcement Learning](../2611.12825-maxim/README.md)（`maxim`）：长程交互不能无限保留历史，增量摘要却会不可逆地丢失信息。MaxIM 把摘要更新器与冻结的行动模型分开：摘要器只根据上一摘要、上一动作和当前观测更新有限记忆，不得直接读取任务目标。
 - [Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling](../2611.04792-dars/README.md)（`dars-density`）：期望奖励最大化容易持续强化已密集采样的结果。DARS 在同一条件输入的 rollout 组内估计结果表示密度，以 $r/\rho$ 替换原奖励，再执行常规 GRPO 组优势标准化；不引入 density 网络或替换 policy objective。
 
 ### RLHF / RLVR
@@ -213,6 +216,10 @@
 ### 外部 rollout
 
 - [Beyond On-Policy Exploration: Integrating External Policy Rollouts for Reinforcement Learning in Diffusion Language Models](../2608.01717-erils/README.md)（`erils`）：约束外部策略 rollout 长度，并对 on-policy/external 来源分别处理奖励以防联合归一化崩溃。
+
+### 策略优化与稳定性
+
+- [Off-policy Learning with Excursion Policies](../2611.13275-excursion-td/README.md)（`excursion-td`）：离策略多步 TD 面临收敛速度、偏差与方差的权衡。重要性比连乘可以恢复目标分布，却容易放大方差；逐动作混合目标/行为策略又改变了整个轨迹的含义。
 
 ### 异步 RL
 

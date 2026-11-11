@@ -7,7 +7,7 @@ hide:
 
 # 同一个GRPO名字之外：优势尺度、裁剪单位与训推失配
 
-[LLM 后训练](../index.md) · 更新 2026-11-09 · 56 篇主题资料 / 8 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-11 · 57 篇主题资料 / 9 篇重点对照
 
 GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比被裁剪、样本到底由哪个分布生成。Dr. GRPO、DAPO、GSPO与TIS/IcePop分别改动这些环节，不能把所有ratio都叫同一种off-policy校正。
 
@@ -33,6 +33,7 @@ GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比�
 | [TIS](../../../post-training/web-2025-tis/README.md) · [原始来源](https://fengyao.notion.site/off-policy-rl)<br>章节：背景与主要改动、核心公式、复现边界 | 用训练侧与rollout引擎概率比校正训推差异，只对过大权重单侧截断。 | 小ratio仍保留，重尾被限制；它不替代old-policy陈旧校正。本地用确定性引擎扰动验证梯度路径。 |
 | [IcePop](../../../post-training/2510.18855-icepop/README.md) · [原始来源](https://arxiv.org/abs/2510.18855)<br>章节：背景与主要改动、核心公式、复现边界 | 对训推ratio使用双侧有效区间，区间内保留原ratio，区间外策略梯度为零。 | 会丢弃严重失配token，而不是把所有ratio夹回边界；本地未运行真实MoE集群。 |
 | [Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards](../../../post-training/2611.09448-rcea/README.md) · [原始来源](https://arxiv.org/abs/2611.09448)<br>章节：核心公式、原文结果与限制、诊断与边界 | 不改更新目标，先按验证结果、过程有效性和解法模式拆开轨迹熵，再用同前缀协方差解释局部变化方向。 | 精确分解需要确定性分区；局部协方差不是策略模式或因果归因。CPU 只覆盖数值核，未跑多目标 RLVR 矩阵。 |
+| [Off-policy Learning with Excursion Policies](../../../post-training/2611.13275-excursion-td/README.md) · [原始来源](https://arxiv.org/abs/2611.13275v1)<br>章节：核心公式、数据协议与代码映射、结果、负控与边界 | 对目标策略持续若干步后永久回到行为策略的 excursion 时长作混合，以递归权重构造 Ex-TD/Ex-Retrace；本地计算5状态3动作精确算子和实际轨迹target。 | beta在目标偏差、方差与收缩间取舍，不是TIS的训推引擎ratio截断；中间beta不保证目标固定点无偏。完整七任务MPO每run约12小时不复现。 |
 
 </div>
 
@@ -55,6 +56,12 @@ GRPO组标准差、Dr. GRPO移除该尺度、DAPO按有效token汇总，都会�
 GRPO/GSPO主要调整既有文本策略的优势或ratio单位，RLiD先把被优化的概率事件改成编译菜单中的动作。其Rao-Blackwell解释只在同一文本策略里对同动作措辞求条件期望；不能凭这个恒等式断言另训LDM更强。菜单是否包含afterstate、记忆来自何处、标签校准及接口对齐，都需在比较前写清；PPO公式相同并不能抹去这些差别。
 
 对照来源：[rlid](../../../post-training/2611.02455-rlid/README.md) · [grpo](../../../post-training/2402.03300-grpo/README.md) · [gspo](../../../post-training/2507.18071-gspo/README.md)
+
+### 先确认离策略发生在哪一层，再选择校正
+
+TIS比较同一权重在training与rollout引擎产生的概率，处理数值实现失配；Ex-Retrace比较目标策略与行为策略，按整段excursion持续时间构造多步值target。两者都出现重要性比，不表示可交换：逐token训推ratio不能直接替代状态动作价值target里的持续时长前缀，后者也不消除LM训练引擎的数值差异。
+
+对照来源：[excursion-td](../../../post-training/2611.13275-excursion-td/README.md) · [tis](../../../post-training/web-2025-tis/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -100,9 +107,23 @@ GRPO/GSPO主要调整既有文本策略的优势或ratio单位，RLiD先把被�
 
     对照来源：[tis](../../../post-training/web-2025-tis/README.md) · [icepop](../../../post-training/2510.18855-icepop/README.md) · [gspo](../../../post-training/2507.18071-gspo/README.md)
 
+### TIS的单侧ratio截断能否直接替代Ex-Retrace？ {#cross-engine-ratio-versus-excursion}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。TIS校正training/rollout引擎概率失配；Ex-Retrace定义目标/行为策略之间多步价值target，并对先目标后行为的时长混合。必须先对齐分子、分母、条件变量和更新对象。
+
+    **教学例子：** 教学例：两个引擎给同一token .2与.1时TIS比为2；Ex-Retrace里的比则比较给定状态下目标与行为动作概率，还需要gamma、lambda、beta和后续Q值。
+
+    对照来源：[excursion-td](../../../post-training/2611.13275-excursion-td/README.md) · [tis](../../../post-training/web-2025-tis/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-11** · 加入 Google DeepMind 相关 Excursion TD，区分持续时长混合与逐动作混合，也区分目标/行为校正与 TIS 训推引擎校正；实现可负担的表格型核心，完整约12小时/run的控制实验不复现。
+
+涉及：[excursion-td](../../../post-training/2611.13275-excursion-td/README.md)
 
 **2026-11-09** · 加入 RCEA，把策略优化目标与熵诊断分开。全局熵变小不能证明正确策略模式变少，本地只验证轨迹链式分解与局部一阶近似。
 
@@ -116,7 +137,7 @@ GRPO/GSPO主要调整既有文本策略的优势或ratio单位，RLiD先把被�
 
 覆盖 54 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 56 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 57 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -176,6 +197,7 @@ GRPO/GSPO主要调整既有文本策略的优势或ratio单位，RLiD先把被�
 - [DeepSeekMath / GRPO](../../../post-training/2402.03300-grpo/README.md)
 - [ReMax](../../../post-training/2310.10505-remax/README.md)
 - [InstructGPT / PPO-RLHF](../../../post-training/2203.02155-ppo-rlhf/README.md)
+- [Off-policy Learning with Excursion Policies](../../../post-training/2611.13275-excursion-td/README.md)
 
 </details>
 

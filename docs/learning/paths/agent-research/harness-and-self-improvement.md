@@ -7,7 +7,7 @@ hide:
 
 # 运行流程与自进化：改的是哪一层
 
-[Agent](index.md) / 208 个问题 · 52 篇论文
+[Agent](index.md) / 216 个问题 · 54 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,115 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">208 个问题 · 52 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">216 个问题 · 54 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:fgse" data-paper-title="When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents Agent Nanyang Technological University 2026-11-10 一次经验修复能帮助当前任务，却可能在边界任务有害，或破坏旧技能。FGSE 将更新表示为带前提、行为、预期效果和 verifier 的假设，先在临时状态上跑迁移、定向证伪和归档回归探针，再 commit/refine/reject。风险集中于可分离子范围时允许一次前提细化；它不是“成功经验一律记住”。 完整实验成本过高，不复现（审查 DONE）。本地交付纯 CPU 经验准入门控，输入外部 verifier 的成对记录；不生成 Agent、探针或正确答案，不把门控通过率当任务成功率。Probe 保存同一探针在原状态/临时状态的有限分数及预期效果布尔值；不保存 gold answer。commitment_gate() 按 Eq.7–9 计算并返回三统计量和决定。调用者必须实际取得成对 verifier 结果；这里既没有 actor callback，也没有把预设分数冒充模型执行。  自进化与技能优化 证伪与回归保护 Agent 运行流程与自进化：改的是哪一层 FGSE 为什么不能把修好当前任务的经验立即写进长期记忆？ 当前任务增益没有覆盖迁移、边界反例和旧技能。FGSE 要在临时状态上分别测这些风险，再决定写入、一次细化或拒绝；只有原任务成功不足以支持持久化。 教学例：某工具报错时“始终重试”修好一次瞬时故障，但在付款已成功、回执丢失时可能重复扣款。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-fgse-8827308e" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-b87a05e8dde9793b">FGSE 为什么不能把修好当前任务的经验立即写进长期记忆？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Afgse">When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Nanyang Technological University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>当前任务增益没有覆盖迁移、边界反例和旧技能。FGSE 要在临时状态上分别测这些风险，再决定写入、一次细化或拒绝；只有原任务成功不足以支持持久化。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：某工具报错时“始终重试”修好一次瞬时故障，但在付款已成功、回执丢失时可能重复扣款。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14326">原论文</a> · <a href="../../../../agent-research/2611.14326-fgse/">实现解读</a> · <a href="#qa-b87a05e8dde9793b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:fgse" data-paper-title="When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents Agent Nanyang Technological University 2026-11-10 一次经验修复能帮助当前任务，却可能在边界任务有害，或破坏旧技能。FGSE 将更新表示为带前提、行为、预期效果和 verifier 的假设，先在临时状态上跑迁移、定向证伪和归档回归探针，再 commit/refine/reject。风险集中于可分离子范围时允许一次前提细化；它不是“成功经验一律记住”。 完整实验成本过高，不复现（审查 DONE）。本地交付纯 CPU 经验准入门控，输入外部 verifier 的成对记录；不生成 Agent、探针或正确答案，不把门控通过率当任务成功率。Probe 保存同一探针在原状态/临时状态的有限分数及预期效果布尔值；不保存 gold answer。commitment_gate() 按 Eq.7–9 计算并返回三统计量和决定。调用者必须实际取得成对 verifier 结果；这里既没有 actor callback，也没有把预设分数冒充模型执行。  自进化与技能优化 证伪与回归保护 Agent 运行流程与自进化：改的是哪一层 FGSE 中 verifier 分数没有下降，为什么仍可能计作证伪失败？ 证伪事件是分数下降超过容忍量，或者预期效果不成立，两者取或。一个标量分数可能未反映假设宣称的行为效果，所以不能只看 delta；回归损伤又用单独归档集合的负增益均值。 教学例：前后分数都为0.8，但“必须确认收件人后发送”的预期效果为false，仍增加证伪失败率。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-89be0aa6ad5bc1f4">FGSE 中 verifier 分数没有下降，为什么仍可能计作证伪失败？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Afgse">When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Nanyang Technological University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>证伪事件是分数下降超过容忍量，或者预期效果不成立，两者取或。一个标量分数可能未反映假设宣称的行为效果，所以不能只看 delta；回归损伤又用单独归档集合的负增益均值。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：前后分数都为0.8，但“必须确认收件人后发送”的预期效果为false，仍增加证伪失败率。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14326">原论文</a> · <a href="../../../../agent-research/2611.14326-fgse/">实现解读</a> · <a href="#qa-89be0aa6ad5bc1f4">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:fgse" data-paper-title="When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents Agent Nanyang Technological University 2026-11-10 一次经验修复能帮助当前任务，却可能在边界任务有害，或破坏旧技能。FGSE 将更新表示为带前提、行为、预期效果和 verifier 的假设，先在临时状态上跑迁移、定向证伪和归档回归探针，再 commit/refine/reject。风险集中于可分离子范围时允许一次前提细化；它不是“成功经验一律记住”。 完整实验成本过高，不复现（审查 DONE）。本地交付纯 CPU 经验准入门控，输入外部 verifier 的成对记录；不生成 Agent、探针或正确答案，不把门控通过率当任务成功率。Probe 保存同一探针在原状态/临时状态的有限分数及预期效果布尔值；不保存 gold answer。commitment_gate() 按 Eq.7–9 计算并返回三统计量和决定。调用者必须实际取得成对 verifier 结果；这里既没有 actor callback，也没有把预设分数冒充模型执行。  自进化与技能优化 证伪与回归保护 Agent 运行流程与自进化：改的是哪一层 FGSE 与 PASE 都会拒绝更新，为何不能合成同一个“验证分更高就接受”规则？ PASE 的本地合同是 held-out validation 严格改善；FGSE 将迁移收益、定向证伪失败和旧任务损伤分成三个门。平均收益为正也可能掩盖小范围危险，不能用收益门替代另外两门。 教学例：九题各进步一点、一题造成严重副作用，平均分可能变高；FGSE 仍可因证伪或回归超阈值拒绝。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-966f9b34d9384f57">FGSE 与 PASE 都会拒绝更新，为何不能合成同一个“验证分更高就接受”规则？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Afgse">When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Nanyang Technological University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>PASE 的本地合同是 held-out validation 严格改善；FGSE 将迁移收益、定向证伪失败和旧任务损伤分成三个门。平均收益为正也可能掩盖小范围危险，不能用收益门替代另外两门。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：九题各进步一点、一题造成严重副作用，平均分可能变高；FGSE 仍可因证伪或回归超阈值拒绝。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14326">原论文</a> · <a href="../../../../agent-research/2611.14326-fgse/">实现解读</a> · <a href="#qa-966f9b34d9384f57">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:fgse" data-paper-title="When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents Agent Nanyang Technological University 2026-11-10 一次经验修复能帮助当前任务，却可能在边界任务有害，或破坏旧技能。FGSE 将更新表示为带前提、行为、预期效果和 verifier 的假设，先在临时状态上跑迁移、定向证伪和归档回归探针，再 commit/refine/reject。风险集中于可分离子范围时允许一次前提细化；它不是“成功经验一律记住”。 完整实验成本过高，不复现（审查 DONE）。本地交付纯 CPU 经验准入门控，输入外部 verifier 的成对记录；不生成 Agent、探针或正确答案，不把门控通过率当任务成功率。Probe 保存同一探针在原状态/临时状态的有限分数及预期效果布尔值；不保存 gold answer。commitment_gate() 按 Eq.7–9 计算并返回三统计量和决定。调用者必须实际取得成对 verifier 结果；这里既没有 actor callback，也没有把预设分数冒充模型执行。  自进化与技能优化 证伪与回归保护 Agent 运行流程与自进化：改的是哪一层 本地 commitment_gate 通过，是否获得 FGSE 论文的泛化置信保证？ 没有。本地执行 Eq.7–9 经验统计，不实现置信界定理的独立新探针采样、有限假设集控制或前提细化。外部传入的记录也必须来自真实成对 verifier 执行，不能将人工夹具解释为 Agent 改进。 教学例：反复在同十个开发探针上调到通过，并不等于在新的边界任务上有相同失败率。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-a25426ec888d0801">本地 commitment_gate 通过，是否获得 FGSE 论文的泛化置信保证？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Afgse">When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Nanyang Technological University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>没有。本地执行 Eq.7–9 经验统计，不实现置信界定理的独立新探针采样、有限假设集控制或前提细化。外部传入的记录也必须来自真实成对 verifier 执行，不能将人工夹具解释为 Agent 改进。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：反复在同十个开发探针上调到通过，并不等于在新的边界任务上有相同失败率。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14326">原论文</a> · <a href="../../../../agent-research/2611.14326-fgse/">实现解读</a> · <a href="#qa-a25426ec888d0801">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:pase" data-paper-title="Program-Aided Patchable Skill Evolution" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Program-Aided Patchable Skill Evolution Agent Northeastern University, Shenyang, China 2026-11-10 纯自然语言技能把策略和具体程序操作混在一起，局部修复常要求重写整份说明。PASE 让技能保留描述性知识，同时关联可独立编辑的程序；从成败轨迹提出 patch 后，以独立 validation 判断是否保留。程序化不是删除高层策略，也不意味着语法通过就能完成任务。 完整长 rollout grid 成本过高，不复现（审查 DONE）；本地交付纯 CPU 补丁事务与 validation 接受合同，不包含模型 proposer、未知程序执行或表格求解 Agent。ProgramSkill 保存独立说明和程序，AST 仅检查语法，不执行源码。ProgramPatch 指定目标 ID、原程序 SHA256 和替换内容，拒绝过期或错目标。apply_validated_patch() 输入外部已经测得的 validation 分数，严格改善才返回新不可变对象，否则返回原对象。组件不创建 callback 假 actor，不读取测试答案，也不把人工分数宣称为真实任务执行。  自进化与技能优化 程序化技能与补丁事务 Agent 运行流程与自进化：改的是哪一层 PASE 为何保留自然语言技能，而不把所有知识都改写成程序？ 程序适合精确、重复的过程逻辑，但高层策略、适用范围和描述性经验未必适合完全形式化。PASE 让两种表示配对并独立编辑，减少修复一处实现时重写整份策略。 教学例：程序负责按列删除匹配行，技能说明保留“先确认表头及合并单元格”的使用条件。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-pase-9ff788f2" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-a49f6d3ef97b98cc">PASE 为何保留自然语言技能，而不把所有知识都改写成程序？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Apase">Program-Aided Patchable Skill Evolution</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Northeastern University, Shenyang, China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>程序适合精确、重复的过程逻辑，但高层策略、适用范围和描述性经验未必适合完全形式化。PASE 让两种表示配对并独立编辑，减少修复一处实现时重写整份策略。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：程序负责按列删除匹配行，技能说明保留“先确认表头及合并单元格”的使用条件。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14019">原论文</a> · <a href="../../../../agent-research/2611.14019-pase/">实现解读</a> · <a href="#qa-a49f6d3ef97b98cc">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:pase" data-paper-title="Program-Aided Patchable Skill Evolution" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Program-Aided Patchable Skill Evolution Agent Northeastern University, Shenyang, China 2026-11-10 纯自然语言技能把策略和具体程序操作混在一起，局部修复常要求重写整份说明。PASE 让技能保留描述性知识，同时关联可独立编辑的程序；从成败轨迹提出 patch 后，以独立 validation 判断是否保留。程序化不是删除高层策略，也不意味着语法通过就能完成任务。 完整长 rollout grid 成本过高，不复现（审查 DONE）；本地交付纯 CPU 补丁事务与 validation 接受合同，不包含模型 proposer、未知程序执行或表格求解 Agent。ProgramSkill 保存独立说明和程序，AST 仅检查语法，不执行源码。ProgramPatch 指定目标 ID、原程序 SHA256 和替换内容，拒绝过期或错目标。apply_validated_patch() 输入外部已经测得的 validation 分数，严格改善才返回新不可变对象，否则返回原对象。组件不创建 callback 假 actor，不读取测试答案，也不把人工分数宣称为真实任务执行。  自进化与技能优化 程序化技能与补丁事务 Agent 运行流程与自进化：改的是哪一层 本地 PASE 为何同时要求原程序 hash 匹配和 validation 严格改善？ Hash 匹配是本地事务保护，防止把旧 patch 应用到已变化的程序；strict validation 改善对应论文的接受判据。前者不验证效果，后者也不能修复错目标或过期修改；持平必须回滚。 教学例：patch针对v1的数组索引，但程序已经改成v2的字典查询；即使附带更高旧验证分，也不应盲目覆盖。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-a1fa19c7b1354496">本地 PASE 为何同时要求原程序 hash 匹配和 validation 严格改善？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Apase">Program-Aided Patchable Skill Evolution</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Northeastern University, Shenyang, China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Hash 匹配是本地事务保护，防止把旧 patch 应用到已变化的程序；strict validation 改善对应论文的接受判据。前者不验证效果，后者也不能修复错目标或过期修改；持平必须回滚。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：patch针对v1的数组索引，但程序已经改成v2的字典查询；即使附带更高旧验证分，也不应盲目覆盖。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14019">原论文</a> · <a href="../../../../agent-research/2611.14019-pase/">实现解读</a> · <a href="#qa-a1fa19c7b1354496">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:pase" data-paper-title="Program-Aided Patchable Skill Evolution" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Program-Aided Patchable Skill Evolution Agent Northeastern University, Shenyang, China 2026-11-10 纯自然语言技能把策略和具体程序操作混在一起，局部修复常要求重写整份说明。PASE 让技能保留描述性知识，同时关联可独立编辑的程序；从成败轨迹提出 patch 后，以独立 validation 判断是否保留。程序化不是删除高层策略，也不意味着语法通过就能完成任务。 完整长 rollout grid 成本过高，不复现（审查 DONE）；本地交付纯 CPU 补丁事务与 validation 接受合同，不包含模型 proposer、未知程序执行或表格求解 Agent。ProgramSkill 保存独立说明和程序，AST 仅检查语法，不执行源码。ProgramPatch 指定目标 ID、原程序 SHA256 和替换内容，拒绝过期或错目标。apply_validated_patch() 输入外部已经测得的 validation 分数，严格改善才返回新不可变对象，否则返回原对象。组件不创建 callback 假 actor，不读取测试答案，也不把人工分数宣称为真实任务执行。  自进化与技能优化 程序化技能与补丁事务 Agent 运行流程与自进化：改的是哪一层 PASE 关联了可执行程序，是否就与 ReTrace 一样没有运行时 Planner？ 不一定。PASE 的 Agent 仍可决定何时调用关联程序，程序化技能不消除推理控制；ReTrace 则把下一步选择显式编译为有序 guard。是否存在可执行代码与谁选择下一步是两条轴。 教学例：LLM每轮决定是否调用“清洗表格”函数仍是模型控制；根据已观测状态选第一个guard才是代码分派。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-03a68778c81ae633">PASE 关联了可执行程序，是否就与 ReTrace 一样没有运行时 Planner？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Apase">Program-Aided Patchable Skill Evolution</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Northeastern University, Shenyang, China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不一定。PASE 的 Agent 仍可决定何时调用关联程序，程序化技能不消除推理控制；ReTrace 则把下一步选择显式编译为有序 guard。是否存在可执行代码与谁选择下一步是两条轴。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：LLM每轮决定是否调用“清洗表格”函数仍是模型控制；根据已观测状态选第一个guard才是代码分派。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14019">原论文</a> · <a href="../../../../agent-research/2611.14019-pase/">实现解读</a> · <a href="#qa-03a68778c81ae633">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:pase" data-paper-title="Program-Aided Patchable Skill Evolution" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Program-Aided Patchable Skill Evolution Agent Northeastern University, Shenyang, China 2026-11-10 纯自然语言技能把策略和具体程序操作混在一起，局部修复常要求重写整份说明。PASE 让技能保留描述性知识，同时关联可独立编辑的程序；从成败轨迹提出 patch 后，以独立 validation 判断是否保留。程序化不是删除高层策略，也不意味着语法通过就能完成任务。 完整长 rollout grid 成本过高，不复现（审查 DONE）；本地交付纯 CPU 补丁事务与 validation 接受合同，不包含模型 proposer、未知程序执行或表格求解 Agent。ProgramSkill 保存独立说明和程序，AST 仅检查语法，不执行源码。ProgramPatch 指定目标 ID、原程序 SHA256 和替换内容，拒绝过期或错目标。apply_validated_patch() 输入外部已经测得的 validation 分数，严格改善才返回新不可变对象，否则返回原对象。组件不创建 callback 假 actor，不读取测试答案，也不把人工分数宣称为真实任务执行。  自进化与技能优化 程序化技能与补丁事务 Agent 运行流程与自进化：改的是哪一层 PASE 组件对替换程序做 AST 解析，为什么仍不把它算作任务执行或安全验收？ AST 只说明语法可解析，不说明逻辑正确、无副作用或能处理真实表格。组件不执行未知程序，validation 分由外部测量提供；源中含raise仍可语法有效，但不能由此宣称任务成功。 教学例：`raise RuntimeError()`语法正确且会立即失败；静态补丁测试应允许解析却不运行它。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-1fb6ad18bd2dd484">PASE 组件对替换程序做 AST 解析，为什么仍不把它算作任务执行或安全验收？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Apase">Program-Aided Patchable Skill Evolution</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Northeastern University, Shenyang, China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>AST 只说明语法可解析，不说明逻辑正确、无副作用或能处理真实表格。组件不执行未知程序，validation 分由外部测量提供；源中含raise仍可语法有效，但不能由此宣称任务成功。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：`raise RuntimeError()`语法正确且会立即失败；静态补丁测试应允许解析却不运行它。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14019">原论文</a> · <a href="../../../../agent-research/2611.14019-pase/">实现解读</a> · <a href="#qa-1fb6ad18bd2dd484">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:verified-quantum-wiki" data-paper-title="Discovering formally verified quantum programs with AI" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Discovering formally verified quantum programs with AI Agent Google DeepMind 2026-11-06 量子程序的复杂度可能远超经典模拟能力，靠若干数值样例无法证明一般正确性。研究者先在量子 Hoare 逻辑（QHL）库中冻结正确性与资源规范，异构 LLM 团队搜索程序和 Lean 证明。论文不固定团队内部模型、框架或分工；共享的是规范、外部验证与协作协议（§1.1–1.2、附录 A–C）。团队本地通过 Lean 不等于可接纳成果。 完整实验成本过高，不复现（审查 DONE）；component_only / L1 机制诊断：本地只执行收到可信外部验证结果后的 wiki 合并规则，不运行 Lean、量子程序或 LLM。component_only / L1 机制诊断：本地只执行收到可信外部验证结果后的 wiki 合并规则，不运行 Lean、量子程序或 LLM。完整实验成本过高，不复现（审查 DONE）；作者尚未公开本篇量子 Lean 库、题目规范和已验证解。Solution 显式携带冻结规范摘要、候选 artifact 摘要、成本口径、精确成本及代码大小。  Harness 与自我改进 形式验证 跨团队共享 wiki Agent 运行流程与自进化：改的是哪一层 团队说自己的 Lean 文件编译通过，为什么还不能直接写入共享 wiki？ 团队可修改自己的工作区，可能连定理、依赖定义或允许公理一起改掉。本篇将提交放到独立干净沙箱，用 Comparator 对照冻结规范，确认证明没有偷换问题且资源定理等于申报成本，再决定是否合并。 教学例：原题要求所有输入满足性质，团队把定理改成只对零输入成立。文件可能编译，但 target_theorems_match 应为 false，不能因成本下降 90% 就接纳。 2026-11-09">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-verified-quantum-wiki-13281631" class="ar-learning-paper-anchor"></span>

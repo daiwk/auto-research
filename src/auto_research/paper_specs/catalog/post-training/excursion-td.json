@@ -1,0 +1,53 @@
+{
+  "domain": "post-training",
+  "key": "excursion-td",
+  "title": "Off-policy Learning with Excursion Policies",
+  "paper_url": "https://arxiv.org/abs/2611.13275v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.13275v1",
+  "reviewed_version": "v1",
+  "detail_path": "post-training/2611.13275-excursion-td/README.md",
+  "topic": [
+    "策略优化与稳定性",
+    "离策略校正与excursion TD"
+  ],
+  "first_author": "Jiamin He",
+  "first_author_affiliation": "University of Alberta / Amii（研究在Google DeepMind期间完成）",
+  "published": "2026-11-09",
+  "published_at": "2026-11-09T21:41:23Z",
+  "code": null,
+  "code_status": "截至2026-11-11，固定v1正文未给出已核实作者代码仓库；本地独立实现式11及附录D的表格型算子。",
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "priority": "P0",
+  "priority_reason": "Google/DeepMind相关优先原文核对；核心可用独立低成本数值组件验证。",
+  "intake_class": "new_first_publication",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.post_training.excursion_td.ex_retrace_targets",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.excursion_td import diagnostic; print(diagnostic(42, device=\"cpu\"))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "固定v1 §4.1–4.2、Appendix D.1–D.2、E.1–E.2；https://arxiv.org/html/2611.13275v1",
+    "model_scale": "表格型实验无checkpoint；完整连续控制为MPO actor/critic，三层网络。",
+    "data_scale": "完整7个dm_control任务（dog四任务、humanoid三任务），replay 200万、轨迹20、minibatch256。",
+    "paper_configuration": "作者称每个连续控制实验用1张NVIDIA A100，典型约12小时；还需多beta/lambda/随机种子比较。E.1 CPU小实验少于1GB、数分钟可做。",
+    "estimated_cost_basis": "本地执行低成本5状态3动作数值小基准；完整7任务多配置矩阵需多次约12小时运行，不复现。",
+    "available_resource": "本地Mac或单张NVIDIA A100/A30",
+    "decision": "成本过高，不复现（审查DONE）；仅本地L1核心组件，不下载大权重/数据、不完整训练、不自动重试。"
+  },
+  "summary": "对先跟随目标策略、再永久回到行为策略的不同持续时长作混合，得到递归excursion权重与Ex-Retrace。本地在论文同形5状态3动作随机MDP计算精确仿射算子及真实轨迹target，不运行神经连续控制。",
+  "verified_priority_organizations": [
+    "Google"
+  ]
+}

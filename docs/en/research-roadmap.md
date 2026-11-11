@@ -1,5 +1,9 @@
 # Unified roadmap and TODOs
 
+## November 11: Fixed 17-Paper Delivery
+
+[Itemized scope and actual evidence](research-audits/nov11-components/README.md): 16 low-cost L1 components have three-seed CPU diagnostics. DRD-MOPD, stochastic rounding, RS-JEPA, and ADIndex also ran with three seeds on a real A100. AlphaProof Code is a high-cost mechanism/source reference only. Google collaborations are prioritized. Meta's 2611.13539 is separately rejected for lack of established quantified production A/B evidence, not moved into another topic to bypass the gate. All expensive full experiments are not reproduced (review DONE) and are not retried automatically. Four-level questions, topic deep dives, and reviewed English versions ship together. Relative to the watermark in Asia/Shanghai, the cohort contains 13 later first releases and four historical/overlap backfills, not 17 same-day new papers. The foundation late-index `LLM` query remains capped, supplemental Atom retrieval is non-exhaustive, and Meta's directory is unavailable. Coverage repair and window-wide selection review remain separate follow-up work; the unified review watermark stays November 9.
+
 ## November 9 selection-review closeout (policy confirmed November 11)
 
 The [window closeout and exact register](research-audits/nov09-review-closure/README.md) advance the review watermark to **November 9**.
@@ -9,7 +13,7 @@ Selection dispositions, substantive method/cost decisions, and implementation ev
 The next scan overlaps from **November 8** through its new cutoff, prioritizing Google/Meta and applying the cost gate to suitable new papers.
 The batch descriptions below retain their historical snapshots; older watermark text does not override the [current unified state](../paper-discovery-watermark.json).
 
-<!-- source-sha256: 4e81de7192d9e1dcac87711704f132488ecd0602439bfa7e96d820936fde9d60 -->
+<!-- source-sha256: 49e92724a338663f64c2aa06c3c877f28ab330f89c9f8c95a90a7933363e7634 -->
 
 [简体中文](../research-roadmap.md)
 

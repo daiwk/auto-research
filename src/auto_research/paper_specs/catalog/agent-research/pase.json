@@ -1,0 +1,41 @@
+{
+  "domain": "agent-research",
+  "key": "pase",
+  "title": "Program-Aided Patchable Skill Evolution",
+  "paper_url": "https://arxiv.org/abs/2611.14019",
+  "reviewed_version": "2611.14019v1",
+  "detail_path": "agent-research/2611.14019-pase/README.md",
+  "topic": [
+    "自进化与技能优化",
+    "程序化技能与补丁事务"
+  ],
+  "first_author": "Jiahao Wang",
+  "first_author_affiliation": "Northeastern University, Shenyang, China",
+  "published": "2026-11-10",
+  "published_at": "2026-11-10T12:53:12Z",
+  "code": null,
+  "code_status": "原文承诺后续GitHub发布，未给作者仓库URL；本轮未找到已发布源码。",
+  "adapter": null,
+  "priority": "P1",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.agent_research.pase.apply_validated_patch",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.agent_research.pase import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.14019v1#A1.SS3",
+    "available_resource": "单张 A100/A30 或本地 Mac",
+    "basis": "128K上下文、演化最多50步ReAct、10轮×batch8×三独立重复、多种27B/31B/API模型与四benchmark；完整多臂长rollout不复现。"
+  },
+  "fidelity_note": "精确preimage补丁、语法检查、skill/program配对与validation严格改善接受；不执行未知程序，不提供proposer/actor或表格任务能力结果。",
+  "summary": "PASE把描述性技能与可编辑程序分离，在局部程序补丁后以held-out validation决定接受或回滚。本地只实现补丁事务和准入合同，完整技能生成及多模型评测不复现。",
+  "gpu_validation_passed": false
+}

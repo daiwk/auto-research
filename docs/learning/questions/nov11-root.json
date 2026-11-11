@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "foundation-models:adindex": {
+      "questions": [
+        {
+          "id": "shared-bank-not-shared-final-index",
+          "level": "basics",
+          "question": "ADIndex 共享候选库，是不是让组内所有 query 用相同最终 Top-K？",
+          "answer": "不是。组索引器只共享 anchor 可见历史上的候选库；每个 query 还会补入 anchor 后自己新可见的 token，再用原 DSA 分数独立精排。共享的是昂贵全前缀扫描，不是最终注意力位置。",
+          "example": "教学例：anchor=31、query=34，共享库可能都是0到31里的位置，但32、33、34必须补进候选，最终Top-K仍可与query=32不同。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-11"
+        },
+        {
+          "id": "teacher-operation-order",
+          "level": "mechanism",
+          "question": "为什么 ADIndex 教师不能先对原始分数取 max，再做一次 softmax？",
+          "answer": "论文先逐query标准化分数、按温度3做softmax，再逐token取跨query最大值，最后在Top-P支持归一。先max会混合不同query的偏移和尺度，并改变教师质量；这些运算不交换。",
+          "example": "教学例：某query全部原始分数加100，不应改变它的逐query标准化概率；若先跨query取原始max，它却可能垄断教师候选。",
+          "source_sections": [
+            "核心公式"
+          ],
+          "added": "2026-11-11"
+        },
+        {
+          "id": "causal-new-token-union",
+          "level": "comparison",
+          "question": "共享库为什么必须只看 anchor 历史，却又要给后续 query 补新 token？",
+          "answer": "组库在anchor处构造，读取之后的key会泄漏未来；但后续query本来有权读取新出现的因果token，若不补回会不必要地丢失近期信息。因此共享库与每query可见区间要分开。",
+          "example": "教学例：给anchor31的组索引器传入key34属于越界未来；到query34精排时加入32到34却是合法因果上下文。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-11"
+        },
+        {
+          "id": "training-kl-not-throughput",
+          "level": "implementation",
+          "question": "本地训练 KL 降低，能确认论文 6.22× kernel 加速了吗？",
+          "answer": "不能。小张量只验证教师、组索引器优化、冻结输入、候选因果与回退分支，没有backbone、融合kernel或SGLang负载。速度应在匹配硬件、长度和质量条件下另测。",
+          "example": "本地是4个query、32个历史key、64步优化；原文长达256K索引与B300 serving，加速比不能从小KL训练外推。",
+          "source_sections": [
+            "结果与复现边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-11"
+        }
+      ]
+    },
+    "foundation-models:b3": {
+      "questions": [
+        {
+          "id": "overlap-without-backward-leak",
+          "level": "basics",
+          "question": "B3 两个块共享前向，为什么未来草稿不能影响当前块？",
+          "answer": "块因果掩码禁止当前块读取未来块的key/value；未来块可以读取当前块，但方向不能反过来。这样重叠计算不改变当前块的注意力输入，未来块仍需self-edit修正尚未稳定前缀带来的猜测。",
+          "example": "教学例：两个4token块组成8token矩阵，前4行后4列必须为不可见；后4行可读取前4列。",
+          "source_sections": [
+            "背景与主要改动",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-11"
+        },
+        {
+          "id": "lagged-exclusive-frontier",
+          "level": "mechanism",
+          "question": "B3 阈值候选为什么用上一拍、且严格排除前沿 token？",
+          "answer": "它利用前沿推进之前那一拍的熵估计前沿左侧已解决区域的难度。包含前沿自身或改用当前拍会改变自校准样本。只有前沿推进、没有活动未来块、存在上一拍时才收集候选。",
+          "example": "教学例：新前沿为位置2，候选取上一拍位置0和1的最大熵，不取位置2，也不取当前拍刚下降的熵。",
+          "source_sections": [
+            "核心公式"
+          ],
+          "added": "2026-11-11"
+        },
+        {
+          "id": "candidate-versus-spawn-state",
+          "level": "comparison",
+          "question": "当前熵很低，是否无论什么状态都应该再开一个未来块？",
+          "answer": "不应。低熵还需已有候选均值阈值、没有活动未来块且没有预测EOS。未来块活动时既不再spawn，也不收集阈值候选；候选跨块保留，但上一拍熵不能错用上一个块的位置。",
+          "example": "教学例：未来块已经活动，即使当前最大熵=.01，也不能继续嵌套开启第三块；预测EOS时也应压制spawn。",
+          "source_sections": [
+            "核心公式",
+            "结果与复现边界"
+          ],
+          "added": "2026-11-11"
+        },
+        {
+          "id": "gate-not-decoder",
+          "level": "implementation",
+          "question": "本地 B3 的 attention 恒等式和门控通过，是否代表完成扩散生成？",
+          "answer": "没有。本地仅接收调用方给定熵、接受标志和EOS状态，执行spawn gate与两块掩码；没有原生sampler、噪声日程、KV cache或self-editing模型，合成输入也不是预测出的文本。",
+          "example": "教学例：随机Q/K/V下当前块输出与独立前向相同，只证明可见性控制；不能测得作者10个benchmark上的TPS或质量变化。",
+          "source_sections": [
+            "数据协议与代码映射",
+            "结果与复现边界"
+          ],
+          "added": "2026-11-11"
+        }
+      ]
+    },
+    "multimodal-models:steprefine": {
+      "questions": [
+        {
+          "id": "entropy-trigger-not-everywhere",
+          "level": "basics",
+          "question": "StepRefine 为什么只在熵尖峰触发，而不每一步固定多跑几次？",
+          "answer": "方法把额外计算留给mask平均熵相对历史变化异常上升的步骤，保留多种token语义后再看是否稳定。触发门槛必须只用已经完成的历史窗口，不能看之后的去噪变化来挑步骤。",
+          "example": "教学例：历史变化为-.1、-.2、-.15，当前突然+.5时触发；若恰好等于历史均值加标准差，严格大于条件不成立。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-11"
+        },
+        {
+          "id": "new-to-old-kl",
+          "level": "mechanism",
+          "question": "StepRefine 停止 refinement 时的 KL 方向是什么？",
+          "answer": "对有效mask位置计算新分布到旧分布的KL，再在位置上平均；方向是KL(p_new||p_old)，不是反过来。若新分布给旧分布零概率处正质量，KL应为无穷，不能用任意平滑偷偷改为稳定。",
+          "example": "教学例：新分布(.5,.5)、旧分布(1,0)时新到旧KL无穷；反向却有限，两者会作出不同停止判断。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-11"
+        },
+        {
+          "id": "fixed-budget-charge",
+          "level": "comparison",
+          "question": "增加 k 次 refinement 后，为什么下一索引不是普通的 t-1？",
+          "answer": "原文比较固定总前向预算。普通去噪本身消耗一次，额外refinement再消耗k次，所以下一索引是t-1-k。只用t-1会额外赠送计算，不能称为同预算比较。",
+          "example": "教学例：当前t=16，多跑k=2次后下一索引为13；若仍用15，相当于没有扣除两次额外前向。",
+          "source_sections": [
+            "核心公式",
+            "结果与复现边界"
+          ],
+          "added": "2026-11-11"
+        },
+        {
+          "id": "soft-input-not-mdlm",
+          "level": "implementation",
+          "question": "本地 soft_embeddings 算出来，是否已经复现多模态扩散模型降低幻觉？",
+          "answer": "没有。函数只在mask位置用概率乘embedding表并保持非mask不变；没有图像、真实模型前向、token提交或remasking闭环。合成概率与KL检查是L1公式证据，不是POPE/MMHalu成绩。",
+          "example": "教学例：本地随机9词表、5维embedding可精确验证p@E，但没有看任何图像，不能判断图片中是否存在某物体。",
+          "source_sections": [
+            "数据协议与代码映射",
+            "结果与复现边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-11"
+        }
+      ]
+    }
+  }
+}

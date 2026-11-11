@@ -7,7 +7,7 @@ hide:
 
 # 训练预算：改数据、改更新方向，还是改比较口径
 
-[基础模型](../index.md) · 更新 2026-11-04 · 30 篇主题资料 / 8 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-11 · 31 篇主题资料 / 9 篇重点对照
 
 同一预算内训练得更好，可能来自更合适的数据、逐样本处理、更有效更新或更低状态开销。DoReMi、Mixing Laws、DataOrchestra、Muon 和 ECO 改动不同环节；Muon Paired Budget 则提醒先冻结选参规则，再分别回答等数据和等时间问题。ProLand改变LoRA乘积空间的更新几何，GAVAGAI则给captioning增加显式词区域对齐目标，二者不能仅因都改善训练就混为一类。
 
@@ -33,6 +33,7 @@ hide:
 | [ECO: Quantized Training without Full-Precision Master Weights](../../../foundation-models/2601.22101-eco-optimizer/README.md) · [原始来源](https://arxiv.org/abs/2601.22101v1)<br>章节：背景与主要改动、核心公式、本地复现与成本判断 | 直接更新低精度权重，把重量化误差注入已有动量，避免常驻 master weights。 | Adam 需逐元素有效步长，格式与舍入会影响误差；无缓冲规则不是任意情况精确等价。本地未实现或训练，完整实验高成本。 |
 | [ProLand: A New Infeasible Manifold Optimization Method for LoRA Fine-Tuning](../../../foundation-models/2611.00236-proland/README.md) · [原始来源](https://arxiv.org/abs/2611.00236)<br>章节：核心公式、检查与负控、成本判断与复现边界 | 在BA乘积空间重投影动量并求谱方向，以水平DB协调两因子，同时独立用Landing恢复B正交性。 | 不是给A/B各做Muon；小核节省状态不消除病态伪逆。本地只验精确thin-factor更新，完整多模型微调高成本不复现。 |
 | [GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport](../../../foundation-models/2611.00319-gavagai/README.md) · [原始来源](https://arxiv.org/abs/2611.00319)<br>章节：核心公式、检查与负控、成本判断与复现边界 | 以Nothing吸收非指称词，以视觉列容量上界约束区域竞争，再将固定plan成本和caption CE相加。 | 改变监督而非优化器；8次缩放不保证行边际已收敛，v1未定义Nothing hinge的额外反传。本地不声称完整防塌缩或SAYCam训练。 |
+| [Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding](../../../foundation-models/2611.13545-stochastic-rounding/README.md) · [原始来源](https://arxiv.org/abs/2611.13545v1)<br>章节：核心公式、数据协议与代码映射、结果、负控与边界 | 保留FP32主权重，以距离比例在相邻BF16/FP16值间随机选择，使量化后的条件期望等于更新值，缓解小更新被nearest舍入吞没。 | 不同于ECO通过动量补偿并移除主权重，SR本身不节省master存储；无偏不等于每步更准或必然更快。trainer/rollout仍需加载同一量化权重，L1标量核不证明64卡RL曲线。 |
 
 </div>
 
@@ -55,6 +56,12 @@ Muon 改变每步下降方向，ECO 改变持久状态与量化更新，二者�
 ProLand保持给定损失，通过乘积空间谱方向和Landing改变LoRA更新；GAVAGAI把词区域指称变量加入训练目标，并用Nothing/容量处理错误监督。前者的下降与约束恢复不能证明新增对齐目标有用，后者的小矩阵传输可行也不证明真实图像grounding提升。若未来组合，应先固定数据、骨干和预算，独立消融目标变化与更新几何；本轮二者都是L1组件，不启动高成本联合训练。
 
 对照来源：[proland](../../../foundation-models/2611.00236-proland/README.md) · [gavagai](../../../foundation-models/2611.00319-gavagai/README.md)
+
+### 低精度更新可见性与高精度状态内存，不要混成一个收益
+
+随机舍入论文保留FP32主权重，处理它的小变化在BF16 rollout中不可见的问题；ECO移除主权重，把重量化误差按有效步长注入已有动量，目标是状态内存—损失权衡。随机舍入可以是一种量化选择，却不自动实现ECO的补偿规则；ECO也不能仅凭无主权重就保证小更新在每次rollout都可见。要分开报告存储、量化偏差、同步与收敛。
+
+对照来源：[stochastic-rounding](../../../foundation-models/2611.13545-stochastic-rounding/README.md) · [eco-optimizer](../../../foundation-models/2601.22101-eco-optimizer/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -100,9 +107,23 @@ ProLand保持给定损失，通过乘积空间谱方向和Landing改变LoRA更�
 
     对照来源：[proland](../../../foundation-models/2611.00236-proland/README.md) · [gavagai](../../../foundation-models/2611.00319-gavagai/README.md)
 
+### 把nearest改成随机舍入，是否已经实现了ECO的无主权重训练？ {#cross-rounding-is-not-master-removal}
+
+??? note "展开答案与例子"
+
+    **答案：** 没有。随机舍入改变FP32值如何投到低精度格点，本地仍以FP32主值为输入；ECO还移除常驻master并补偿动量，Adam需要逐元素有效步长。二者的状态与更新合同不同。
+
+    **教学例子：** 教学例：1+1/1024以1/8概率上舍到BF16邻居，只验证量化期望；它没有说明FP32 master是否被删除，也没有进行任何动量误差补偿。
+
+    对照来源：[stochastic-rounding](../../../foundation-models/2611.13545-stochastic-rounding/README.md) · [eco-optimizer](../../../foundation-models/2601.22101-eco-optimizer/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-11** · 加入NVIDIA随机舍入，与Google ECO区分小更新的量化可见性和移除master的状态节省；保留有限范围、负数/subnormal、条件无偏与同步约束。仅L1数值核，64H100/64B200完整训练不复现。
+
+涉及：[stochastic-rounding](../../../foundation-models/2611.13545-stochastic-rounding/README.md) · [eco-optimizer](../../../foundation-models/2601.22101-eco-optimizer/README.md)
 
 **2026-11-04** · 加入ProLand与GAVAGAI，区分乘积空间更新几何和新增对齐监督；新增独立参考、有限迭代与反传边界，二者完整训练高成本不复现。
 
@@ -112,7 +133,7 @@ ProLand保持给定损失，通过乘积空间谱方向和Landing改变LoRA更�
 
 覆盖 28 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 30 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 31 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -146,6 +167,7 @@ ProLand保持给定损失，通过乘积空间谱方向和Landing改变LoRA更�
 - [T-MUON: Tensorizing Muon via t-SVD for Large Language Model Pre-training](../../../foundation-models/2610.24938-t-muon/README.md)
 - [TACO: Ternary Absolute-max Column-wise One-sparse Optimizer for LLM Fine-Tuning](../../../foundation-models/2610.02199-taco-optimizer/README.md)
 - [TESS: Scalable, Transferable Meta-network for Data Selection Requires a Different Loss (and Why the Obvious Choice is Problematic)](../../../foundation-models/2610.02092-tess/README.md)
+- [Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding](../../../foundation-models/2611.13545-stochastic-rounding/README.md)
 
 </details>
 

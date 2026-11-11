@@ -7,7 +7,7 @@ hide:
 
 # 策略优化：谁在采样，谁在被更新
 
-[LLM 后训练](index.md) / 224 个问题 · 56 篇论文
+[LLM 后训练](index.md) / 228 个问题 · 57 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">224 个问题 · 56 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">228 个问题 · 57 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:excursion-td" data-paper-title="Off-policy Learning with Excursion Policies" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Off-policy Learning with Excursion Policies LLM 后训练 University of Alberta / Amii（研究在Google DeepMind期间完成） 2026-11-09 离策略多步 TD 面临收敛速度、偏差与方差的权衡。重要性比连乘可以恢复目标分布，却容易放大方差；逐动作混合目标/行为策略又改变了整个轨迹的含义。本文先跟随目标策略一段随机持续时间，一旦 excursion 结束就永久切回行为策略，直接在持续时间上作混合。 完整实验成本过高，不复现（审查 DONE）；诊断沿用 Appendix E.1 的 5 状态、3 动作、Dirichlet(1) 随机转移与策略、折扣 .9。L1 机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。excursion_weights 实现持续时长递归；ex_retrace_targets 对真实给定轨迹计算附录 D target；expected_operator 在有限 MDP 上精确构造，使用“校正前缀、行为后缀”的转移矩阵展开。所有数据与模型均为 CPU NumPy，不依赖 checkpoint。  策略优化与稳定性 离策略校正与excursion TD LLM 后训练 策略优化：谁在采样，谁在被更新 excursion 策略为什么不等于每一步混合目标与行为策略？ excursion 先跟随目标一段时间，结束后永久回到行为策略；逐动作混合允许之后重新选择目标，生成不同轨迹分布。因此权重应混合持续时长，不能直接连乘混合 ratio。 教学例：三步 excursion 可以是目标-目标-行为；一旦切到行为就不能再变成目标-行为-目标，逐步混合却允许后者。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<span id="paper-post-training-excursion-td-873276bf" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-a01844f5fcebc3b1">excursion 策略为什么不等于每一步混合目标与行为策略？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aexcursion-td">Off-policy Learning with Excursion Policies</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · University of Alberta / Amii（研究在Google DeepMind期间完成）</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>excursion 先跟随目标一段时间，结束后永久回到行为策略；逐动作混合允许之后重新选择目标，生成不同轨迹分布。因此权重应混合持续时长，不能直接连乘混合 ratio。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：三步 excursion 可以是目标-目标-行为；一旦切到行为就不能再变成目标-行为-目标，逐步混合却允许后者。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13275v1">原论文</a> · <a href="../../../../post-training/2611.13275-excursion-td/">实现解读</a> · <a href="#qa-a01844f5fcebc3b1">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:excursion-td" data-paper-title="Off-policy Learning with Excursion Policies" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Off-policy Learning with Excursion Policies LLM 后训练 University of Alberta / Amii（研究在Google DeepMind期间完成） 2026-11-09 离策略多步 TD 面临收敛速度、偏差与方差的权衡。重要性比连乘可以恢复目标分布，却容易放大方差；逐动作混合目标/行为策略又改变了整个轨迹的含义。本文先跟随目标策略一段随机持续时间，一旦 excursion 结束就永久切回行为策略，直接在持续时间上作混合。 完整实验成本过高，不复现（审查 DONE）；诊断沿用 Appendix E.1 的 5 状态、3 动作、Dirichlet(1) 随机转移与策略、折扣 .9。L1 机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。excursion_weights 实现持续时长递归；ex_retrace_targets 对真实给定轨迹计算附录 D target；expected_operator 在有限 MDP 上精确构造，使用“校正前缀、行为后缀”的转移矩阵展开。所有数据与模型均为 CPU NumPy，不依赖 checkpoint。  策略优化与稳定性 离策略校正与excursion TD LLM 后训练 策略优化：谁在采样，谁在被更新 Ex-Retrace 的前缀为什么从 t+1 而不是初始动作 t 开始？ 目标已经条件于给定的起始状态动作对 Q(S_t,A_t)，不需要再次校正这个动作。后续动作决定 bootstrap 与轨迹分布，才进入 clipped ratio 前缀；错误加入起始 ratio 会改变目标。 教学例：仅一步 target 在 beta=0 时是奖励加 gamma 乘行为策略的下一状态 Q 平均，不应再乘当前动作的 pi/mu。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-eab67eba3923e5e5">Ex-Retrace 的前缀为什么从 t+1 而不是初始动作 t 开始？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aexcursion-td">Off-policy Learning with Excursion Policies</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · University of Alberta / Amii（研究在Google DeepMind期间完成）</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>目标已经条件于给定的起始状态动作对 Q(S_t,A_t)，不需要再次校正这个动作。后续动作决定 bootstrap 与轨迹分布，才进入 clipped ratio 前缀；错误加入起始 ratio 会改变目标。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：仅一步 target 在 beta=0 时是奖励加 gamma 乘行为策略的下一状态 Q 平均，不应再乘当前动作的 pi/mu。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13275v1">原论文</a> · <a href="../../../../post-training/2611.13275-excursion-td/">实现解读</a> · <a href="#qa-eab67eba3923e5e5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:excursion-td" data-paper-title="Off-policy Learning with Excursion Policies" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Off-policy Learning with Excursion Policies LLM 后训练 University of Alberta / Amii（研究在Google DeepMind期间完成） 2026-11-09 离策略多步 TD 面临收敛速度、偏差与方差的权衡。重要性比连乘可以恢复目标分布，却容易放大方差；逐动作混合目标/行为策略又改变了整个轨迹的含义。本文先跟随目标策略一段随机持续时间，一旦 excursion 结束就永久切回行为策略，直接在持续时间上作混合。 完整实验成本过高，不复现（审查 DONE）；诊断沿用 Appendix E.1 的 5 状态、3 动作、Dirichlet(1) 随机转移与策略、折扣 .9。L1 机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。excursion_weights 实现持续时长递归；ex_retrace_targets 对真实给定轨迹计算附录 D target；expected_operator 在有限 MDP 上精确构造，使用“校正前缀、行为后缀”的转移矩阵展开。所有数据与模型均为 CPU NumPy，不依赖 checkpoint。  策略优化与稳定性 离策略校正与excursion TD LLM 后训练 策略优化：谁在采样，谁在被更新 中间 beta 的固定点与 q_pi 不一致，是实现 bug 吗？ 不一定。持续时长混合本来就在收缩、偏差、方差之间权衡；beta=0 对应行为值，beta=1 恢复目标固定点。应先验证端点及精确算子，再把中间偏差作为指标，而不是强制抹成零。 本地 seed42、beta=.5 的目标固定点 MSE 约 .00305，被保留为真实偏差；不是把它改标签后声称无偏。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-efe446e9c8562167">中间 beta 的固定点与 q_pi 不一致，是实现 bug 吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aexcursion-td">Off-policy Learning with Excursion Policies</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · University of Alberta / Amii（研究在Google DeepMind期间完成）</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不一定。持续时长混合本来就在收缩、偏差、方差之间权衡；beta=0 对应行为值，beta=1 恢复目标固定点。应先验证端点及精确算子，再把中间偏差作为指标，而不是强制抹成零。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>本地 seed42、beta=.5 的目标固定点 MSE 约 .00305，被保留为真实偏差；不是把它改标签后声称无偏。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13275v1">原论文</a> · <a href="../../../../post-training/2611.13275-excursion-td/">实现解读</a> · <a href="#qa-efe446e9c8562167">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:excursion-td" data-paper-title="Off-policy Learning with Excursion Policies" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Off-policy Learning with Excursion Policies LLM 后训练 University of Alberta / Amii（研究在Google DeepMind期间完成） 2026-11-09 离策略多步 TD 面临收敛速度、偏差与方差的权衡。重要性比连乘可以恢复目标分布，却容易放大方差；逐动作混合目标/行为策略又改变了整个轨迹的含义。本文先跟随目标策略一段随机持续时间，一旦 excursion 结束就永久切回行为策略，直接在持续时间上作混合。 完整实验成本过高，不复现（审查 DONE）；诊断沿用 Appendix E.1 的 5 状态、3 动作、Dirichlet(1) 随机转移与策略、折扣 .9。L1 机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。excursion_weights 实现持续时长递归；ex_retrace_targets 对真实给定轨迹计算附录 D target；expected_operator 在有限 MDP 上精确构造，使用“校正前缀、行为后缀”的转移矩阵展开。所有数据与模型均为 CPU NumPy，不依赖 checkpoint。  策略优化与稳定性 离策略校正与excursion TD LLM 后训练 策略优化：谁在采样，谁在被更新 本地怎么独立检查 Ex-Retrace，而不是用同一公式自证？ 测试对两状态两动作的所有两步路径枚举概率并计算 sample target，再与有限 MDP 的矩阵展开比较。还独立检查 beta=0 的 gamma^N 收缩和行为固定点。这验证表格型机制，不验证神经控制回报。 教学例：每条路径按 P(s1|s0,a0) mu(a1|s1) P(s2|s1,a1) 加权；求和应等于仿射算子 b+MQ 的对应行。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-1f2898b1ce5d79b6">本地怎么独立检查 Ex-Retrace，而不是用同一公式自证？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aexcursion-td">Off-policy Learning with Excursion Policies</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · University of Alberta / Amii（研究在Google DeepMind期间完成）</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>测试对两状态两动作的所有两步路径枚举概率并计算 sample target，再与有限 MDP 的矩阵展开比较。还独立检查 beta=0 的 gamma^N 收缩和行为固定点。这验证表格型机制，不验证神经控制回报。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：每条路径按 P(s1|s0,a0) mu(a1|s1) P(s2|s1,a1) 加权；求和应等于仿射算子 b+MQ 的对应行。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13275v1">原论文</a> · <a href="../../../../post-training/2611.13275-excursion-td/">实现解读</a> · <a href="#qa-1f2898b1ce5d79b6">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:rcea" data-paper-title="Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards LLM 后训练 Southwest University 2026-11-06 训练日志里的平均 token 熵变小，既可能是模型更少走错误路径，也可能是它不再尝试原来会做的其它正确解法。RCEA 将两类信号分开：轨迹层按验证器成败、过程有效性和有效解法模式拆分；前缀层用全词表的 log 概率与 logit 增量的协方差解释局部熵方向。它是诊断框架，不是一种新的 RL 损失。 对当前单卡与本地预算，成本过高，不复现（审查 DONE），不自动重试。entropy_allocation 接收单题枚举的不同轨迹及归一概率、外部确定性标签，实现 Eq. (7)–(8)。local_entropy_change 输入同前缀两次词表 logit 的差值，返回 Eq. (10) 的近似与真正的有限差。未实现论文的固定探针采样估计、过程判分、语义标注和训练。零质量分支贡献为零，不伪造条件模式数。  RLVR 熵诊断与解法多样性 LLM 后训练 策略优化：谁在采样，谁在被更新 RLVR 训练后总熵下降，是否说明模型的正确解法也变少了？ 不一定。错误路径被压低、验证结果更确定、同一正确策略的表达变少，以及不同有效解法的概率变集中，都可能降低熵。要检查有效解法的条件分布。 两种有效解法仍各占有效轨迹的一半时，即便所有错误路径的概率都下降，有效模式数仍是 2。 2026-11-09">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
 <span id="paper-post-training-rcea-1c14ab08" class="ar-learning-paper-anchor"></span>

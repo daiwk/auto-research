@@ -7,7 +7,7 @@ hide:
 
 # 轨迹蒸馏：学生、提案与前缀分布
 
-[LLM 后训练](index.md) / 176 个问题 · 44 篇论文
+[LLM 后训练](index.md) / 180 个问题 · 45 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">176 个问题 · 44 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">180 个问题 · 45 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:drd-mopd" data-paper-title="DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation LLM 后训练 Shanghai Jiao Tong University / Zhongguancun Academy 2026-11-09 多个教师可能提供冲突的领域更新，直接优化一个学生无法区分冲突来自哪一份参数方向。DRD-MOPD 保留冻结基座与多个全参数增量，以域标签选择哪些增量接受梯度，而不是在推理时选择哪个教师或专家。三个域的任何输入都经过同一个合成学生。 完整实验成本过高，不复现（审查 DONE）；L1 机制组件，diagnostic only。CPU 与真实 NVIDIA A100 三种子验证已通过；完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。route_matrix 明确给出域到增量的系数。DeltaAdamW.composed 始终加上所有增量；step_losses 在同一合成权重上执行真实 autograd，然后一次性路由；step 接收调用方已经从相同快照计算的梯度。冻结基座不参加更新。每个分量保留独立 AdamW 状态，纯小张量 CPU/CUDA 都可执行。  On-policy distillation 多教师参数增量与梯度路由 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 DRD-MOPD 的 domain routing 是推理时 MoE 吗？ 不是。所有输入都使用冻结基座加所有增量的同一个合成学生。域标签只决定当前梯度更新哪些增量；前向不屏蔽未选组件。 教学例：Code 域输入也读取 Math 增量；Own 模式下只是 Code 的梯度只更新 Code 对应增量。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<span id="paper-post-training-drd-mopd-33529371" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-50c5b2178f903fa2">DRD-MOPD 的 domain routing 是推理时 MoE 吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Adrd-mopd">DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Shanghai Jiao Tong University / Zhongguancun Academy</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。所有输入都使用冻结基座加所有增量的同一个合成学生。域标签只决定当前梯度更新哪些增量；前向不屏蔽未选组件。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：Code 域输入也读取 Math 增量；Own 模式下只是 Code 的梯度只更新 Code 对应增量。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13249v1">原论文</a> · <a href="../../../../post-training/2611.13249-drd-mopd/">实现解读</a> · <a href="#qa-50c5b2178f903fa2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:drd-mopd" data-paper-title="DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation LLM 后训练 Shanghai Jiao Tong University / Zhongguancun Academy 2026-11-09 多个教师可能提供冲突的领域更新，直接优化一个学生无法区分冲突来自哪一份参数方向。DRD-MOPD 保留冻结基座与多个全参数增量，以域标签选择哪些增量接受梯度，而不是在推理时选择哪个教师或专家。三个域的任何输入都经过同一个合成学生。 完整实验成本过高，不复现（审查 DONE）；L1 机制组件，diagnostic only。CPU 与真实 NVIDIA A100 三种子验证已通过；完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。route_matrix 明确给出域到增量的系数。DeltaAdamW.composed 始终加上所有增量；step_losses 在同一合成权重上执行真实 autograd，然后一次性路由；step 接收调用方已经从相同快照计算的梯度。冻结基座不参加更新。每个分量保留独立 AdamW 状态，纯小张量 CPU/CUDA 都可执行。  On-policy distillation 多教师参数增量与梯度路由 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 未选分量给零梯度后调用 AdamW，等于保持不动吗？ 不等于。已有 momentum、step counter 和 decoupled weight decay 仍可能改变状态或参数。论文要求未选分量完全跳过更新，独立保存每个分量自己的优化器历史。 教学例：某分量已有非零一阶矩，本轮未选。若执行零梯度 AdamW，它仍可能沿旧动量移动；正确实现连计数都不增加。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-ca61101f6ea32d1a">未选分量给零梯度后调用 AdamW，等于保持不动吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Adrd-mopd">DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Shanghai Jiao Tong University / Zhongguancun Academy</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不等于。已有 momentum、step counter 和 decoupled weight decay 仍可能改变状态或参数。论文要求未选分量完全跳过更新，独立保存每个分量自己的优化器历史。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：某分量已有非零一阶矩，本轮未选。若执行零梯度 AdamW，它仍可能沿旧动量移动；正确实现连计数都不增加。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13249v1">原论文</a> · <a href="../../../../post-training/2611.13249-drd-mopd/">实现解读</a> · <a href="#qa-ca61101f6ea32d1a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:drd-mopd" data-paper-title="DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation LLM 后训练 Shanghai Jiao Tong University / Zhongguancun Academy 2026-11-09 多个教师可能提供冲突的领域更新，直接优化一个学生无法区分冲突来自哪一份参数方向。DRD-MOPD 保留冻结基座与多个全参数增量，以域标签选择哪些增量接受梯度，而不是在推理时选择哪个教师或专家。三个域的任何输入都经过同一个合成学生。 完整实验成本过高，不复现（审查 DONE）；L1 机制组件，diagnostic only。CPU 与真实 NVIDIA A100 三种子验证已通过；完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。route_matrix 明确给出域到增量的系数。DeltaAdamW.composed 始终加上所有增量；step_losses 在同一合成权重上执行真实 autograd，然后一次性路由；step 接收调用方已经从相同快照计算的梯度。冻结基座不参加更新。每个分量保留独立 AdamW 状态，纯小张量 CPU/CUDA 都可执行。  On-policy distillation 多教师参数增量与梯度路由 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 为什么不能把 Other 的梯度都除以 K-1，并声称只是等价归一化？ 原文 Other 把每个域的梯度完整复制到其他分量，不作该除法；无自适应 SGD 下合成梯度是 Own 的 K-1 倍。更改系数改变定义，且独立 Adam 状态下无法简单用整体学习率证明等价。 教学例：K=3 时，一个域同时完整更新另外两个增量；除以2会把这两条路径各减半。SingleComponent 的其他域1/(K-1)是另一个模式的定义。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-79875fc37966040c">为什么不能把 Other 的梯度都除以 K-1，并声称只是等价归一化？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Adrd-mopd">DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Shanghai Jiao Tong University / Zhongguancun Academy</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>原文 Other 把每个域的梯度完整复制到其他分量，不作该除法；无自适应 SGD 下合成梯度是 Own 的 K-1 倍。更改系数改变定义，且独立 Adam 状态下无法简单用整体学习率证明等价。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：K=3 时，一个域同时完整更新另外两个增量；除以2会把这两条路径各减半。SingleComponent 的其他域1/(K-1)是另一个模式的定义。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13249v1">原论文</a> · <a href="../../../../post-training/2611.13249-drd-mopd/">实现解读</a> · <a href="#qa-79875fc37966040c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:drd-mopd" data-paper-title="DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation LLM 后训练 Shanghai Jiao Tong University / Zhongguancun Academy 2026-11-09 多个教师可能提供冲突的领域更新，直接优化一个学生无法区分冲突来自哪一份参数方向。DRD-MOPD 保留冻结基座与多个全参数增量，以域标签选择哪些增量接受梯度，而不是在推理时选择哪个教师或专家。三个域的任何输入都经过同一个合成学生。 完整实验成本过高，不复现（审查 DONE）；L1 机制组件，diagnostic only。CPU 与真实 NVIDIA A100 三种子验证已通过；完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。route_matrix 明确给出域到增量的系数。DeltaAdamW.composed 始终加上所有增量；step_losses 在同一合成权重上执行真实 autograd，然后一次性路由；step 接收调用方已经从相同快照计算的梯度。冻结基座不参加更新。每个分量保留独立 AdamW 状态，纯小张量 CPU/CUDA 都可执行。  On-policy distillation 多教师参数增量与梯度路由 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 本地如何保证先路由再更新，而不在各域之间偷偷改变学生？ step_losses 先构造一份合成权重快照，在它上面计算所有域的真实 autograd 梯度，再统一路由及逐分量更新。测试与独立 torch AdamW 对照；这不包含多教师 loss、模型或 rollout。 教学例：两个域的 loss 回调记录到的输入权重必须完全相同；先更新第一个域再计算第二个，会失败。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-f5c22906adb89200">本地如何保证先路由再更新，而不在各域之间偷偷改变学生？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Adrd-mopd">DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Shanghai Jiao Tong University / Zhongguancun Academy</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>step_losses 先构造一份合成权重快照，在它上面计算所有域的真实 autograd 梯度，再统一路由及逐分量更新。测试与独立 torch AdamW 对照；这不包含多教师 loss、模型或 rollout。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个域的 loss 回调记录到的输入权重必须完全相同；先更新第一个域再计算第二个，会失败。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13249v1">原论文</a> · <a href="../../../../post-training/2611.13249-drd-mopd/">实现解读</a> · <a href="#qa-f5c22906adb89200">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:cord-rollout" data-paper-title="CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/student-trajectory-distillation" data-search="CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation LLM 后训练 Tsinghua University 2026-11-05 普通 OPD 的教师只给学生已经访问的前缀评分，难以覆盖学生很少走到的教师路径。CoRD 不改每状态的反向 KL 监督，改变的是产生前缀的采样分布。学生先提出 token，再以最大耦合向教师倾斜的目标分布修正提议；同前缀、同词表，两侧概率都必须可用。这里借用了投机解码的拒绝规则，但目的不是增加服务吞吐。 单张 A100/A30 或 Mac 不适合完整矩阵，成本过高，不复现（审查 DONE）。maximal_coupling 接收已经归一化、同词表的同前缀概率，使用 log 空间几何插值，返回目标、接受概率、正残差及 TV；Coupling.draw 用调用方传入的随机源返回提议和发出 token。不加载模型，不生成 LLM 轨迹，不执行反向 KL 训练。只在支持集交集上有质量；若交集为空则拒绝，不能偷偷换成均匀分布或普通教师重抽。  On-policy distillation 最大耦合轨迹采样 LLM 后训练 轨迹蒸馏：学生、提案与前缀分布 CoRD 的 qα 替换了普通 OPD 的蒸馏教师吗？ 没有。qα 是发出下一个 token 的边缘，决定后续会访问哪些前缀；在已访问前缀上，原文仍用学生 pS 到冻结教师 pT 的全词表反向 KL。 教学例：学生少走的一条解法开头，经耦合采样变得更常见；到达新前缀后，评分仍来自教师 pT，而不是 pS 与 pT 的插值。 2026-11-06">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 轨迹蒸馏：学生、提案与前缀分布</a></p>
 <span id="paper-post-training-cord-rollout-3394bf47" class="ar-learning-paper-anchor"></span>

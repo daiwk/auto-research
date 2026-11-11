@@ -56,7 +56,8 @@
         "foundation-models:merlin",
         "foundation-models:semantic-block-sparse-attention",
         "foundation-models:anchor-kv",
-        "foundation-models:convpe"
+        "foundation-models:convpe",
+        "foundation-models:adindex"
       ]
     },
     {
@@ -150,7 +151,8 @@
         "foundation-models:smrc-pmrc",
         "foundation-models:t-muon",
         "foundation-models:taco-optimizer",
-        "foundation-models:tess"
+        "foundation-models:tess",
+        "foundation-models:stochastic-rounding"
       ]
     },
     {
@@ -239,7 +241,8 @@
         "foundation-models:register-tokens-dllm",
         "foundation-models:speculative-decoding",
         "foundation-models:tadm",
-        "foundation-models:windowed-mtp"
+        "foundation-models:windowed-mtp",
+        "foundation-models:b3"
       ]
     },
     {

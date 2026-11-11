@@ -184,6 +184,7 @@
 
 ## Google Research
 
+- 2026-11-09 · 一作：Jihwan Jeong · [MaxIM: Maximally Informative Incremental Summarization via Reinforcement Learning](../2611.12825-maxim/README.md)（`maxim`）：长程交互不能无限保留历史，增量摘要却会不可逆地丢失信息。MaxIM 把摘要更新器与冻结的行动模型分开：摘要器只根据上一摘要、上一动作和当前观测更新有限记忆，不得直接读取任务目标。
 - 2026-03-17 · 一作：Lucas Bandarkar · [Large Reasoning Models Struggle to Transfer Parametric Knowledge Across Scripts](../2603.17070-cross-script-knowledge-transfer/README.md)（`cross-script-knowledge-transfer`）：Sec.4–6与Appendix A/H：观察性回归、训练专用entity提示干预和真实LoRA是定义性路径。不能把正则音译、手工插提示或小分类器当成其LLM知识检索机制。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2023-09-01 · 一作：Harrison Lee · [RLAIF](../2309.00267-rlaif/README.md)（`rlaif`）：AI labeler 对候选做顺序交换评判，去除位置偏差后训练 preference policy；本地落实双顺序标签与成对更新。
 
@@ -389,6 +390,10 @@
 
 - 2025-04-22 · 一作：Yuxin Zuo · [TTRL](../2504.16084-ttrl/README.md)（`ttrl`）：同一测试题多次采样，以多数一致答案作为伪标签并即时更新模型，不访问 gold label。
 
+## PayPal.AI
+
+- 2026-11-10 · 一作：Chi Liu · [Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards](../2611.14015-mcpo/README.md)（`mcpo`）：GRPO 常把同一响应的序列优势分给所有 token，无法区分局部决策的不确定度。MCPO 复用 rollout/old policy 温度后的 top-1、top-2 概率差，不额外调用教师或 verifier，改变各 token 的信用分配。
+
 ## Peking University
 
 - 2026-10-14 · 一作：Tiantian Peng · [Divergence-Routed On-Policy Distillation for Language Models](../2610.19572-divergence-routed-opd/README.md)（`divergence-routed-opd`）：DrOPD 在学生自己生成的轨迹上比较师生分布，以 JS 散度识别教师支持而学生严重欠覆盖的位置。它在所有位置保留 reverse-KL，并仅向高分歧位置增加 forward-KL 的纠正信号，通过候选级优势执行 PPO clipped 更新。
@@ -458,6 +463,10 @@
 - 2026-10-16 · 一作：Yushu Wang · [GR-OPD: Group-Relative Sequence Credit for On-Policy Distillation](../2610.23042-gr-opd/README.md)（`gr-opd`）：教师在每个 token 上更自信，不一定意味着整段推理更值得复制；教师与学生的推理模式不同还可能造成训练崩溃。GR-OPD 在学生轨迹上重放教师，把 log-prob 差聚合为序列分数，在同题回答之间分配相对信用；保留一部分组均值压力，以免纯中心化抹掉教师总体偏好，然后使用 clipped PPO 更新。
 - 2026-10-15 · 一作：Feiyang Chen · [Learning from Unverified Peers via Shared Residual Distillation](../2610.22080-shared-residual-distillation/README.md)（`shared-residual-distillation`）：没有标准答案或可验证 reward 时，整段错误解答也可能包含有用步骤。SRD 不投票选“正确答案”，而比较同题 peers 相对跨题 control 对 token 分布的改变，只接收多位 peer 共同支持的保守残差。
 - 2026-07-30 · 一作：Kangning Zhang · [VAD](../2607.28590-vad/README.md)（`vad`）：多模态 OPD 直接匹配 privileged-view teacher 时，教师修正同时混入视觉证据、语言先验和教师自身偏差。VAD 对同一冻结教师分别输入“相关视觉证据存在/移除”两种视图，以 centered log-probability 差构造带符号的视觉方向，再把原教师修正单侧投影到该方向，重建以学生当前分布为锚的 target；完整 privileged teacher 只保留为弱正则。
+
+## Shanghai Jiao Tong University / Zhongguancun Academy
+
+- 2026-11-09 · 一作：Lin Yao · [DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation](../2611.13249-drd-mopd/README.md)（`drd-mopd`）：多个教师可能提供冲突的领域更新，直接优化一个学生无法区分冲突来自哪一份参数方向。DRD-MOPD 保留冻结基座与多个全参数增量，以域标签选择**哪些增量接受梯度**，而不是在推理时选择哪个教师或专家。
 
 ## Southwest University
 
@@ -549,6 +558,10 @@
 ## UCLA / NVIDIA（论文注明实习）
 
 - 2026-10-08 · 一作：Siyan Zhao · [When Do We Need On-Policy Distillation? Distilling on Offline Student Rollouts Is Often Better](../2610.11291-semi-opd/README.md)（`semi-opd`）：初始学生先一次性生成响应，教师评分缓存后固定复用。每次优化仍重新计算当前学生概率和 token 优势，不能把旧优势也一起缓存。
+
+## University of Alberta / Amii（研究在Google DeepMind期间完成）
+
+- 2026-11-09 · 一作：Jiamin He · [Off-policy Learning with Excursion Policies](../2611.13275-excursion-td/README.md)（`excursion-td`）：离策略多步 TD 面临收敛速度、偏差与方差的权衡。重要性比连乘可以恢复目标分布，却容易放大方差；逐动作混合目标/行为策略又改变了整个轨迹的含义。
 
 ## University of British Columbia
 

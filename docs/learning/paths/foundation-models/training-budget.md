@@ -7,7 +7,7 @@ hide:
 
 # 训练预算：数据配比、目标与优化器
 
-[基础模型](index.md) / 120 个问题 · 30 篇论文
+[基础模型](index.md) / 124 个问题 · 31 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">120 个问题 · 30 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">124 个问题 · 31 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:stochastic-rounding" data-paper-title="Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding 基础模型 NVIDIA 2026-11-10 FP32 主权重在训练中发生小变化，转为 BF16 后却可能仍落在同一格点，导致 rollout 策略看不到更新。BF16 在一般正规数区间的格距比 FP16 大八倍，因此相似的小步长可表现出不同的有效更新速度。随机舍入按到相邻格点的距离选上下端点，在条件期望上保留主权重变化，而不是强行放大学习率。 完整实验成本过高，不复现（审查 DONE）；诊断对 65536 个值作 BF16 舍入：round-to-nearest 全部回到 1，而 SR 上舍入概率应为。L1 机制组件，diagnostic only。CPU 与真实 NVIDIA A100 三种子验证已通过；完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。adjacent_values 以真实目标格式的 torch.nextafter 构造上下邻居；stochastic_cast 从 FP32 输入按显式 generator 采样，返回 BF16/FP16。概率计算提升为 float64，覆盖目标格式 subnormal；精确值保持不变。  训练与数值系统 低精度训练与随机舍入 基础模型 训练预算：数据配比、目标与优化器 FP32 主权重明明变了，为什么 BF16 rollout 可能完全没变？ 更新可能小于 BF16 当前格点半间距，round-to-nearest 后仍是同一个值。主权重有变化不保证实际 rollout 参数有变化；应观察量化后的权重。 本地示例1+1/1024转为BF16 nearest仍是1，因为该处BF16向上间距为1/128。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<span id="paper-foundation-models-stochastic-rounding-4cc33c9f" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-b4016c8ebd4ff666">FP32 主权重明明变了，为什么 BF16 rollout 可能完全没变？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Astochastic-rounding">Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · NVIDIA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>更新可能小于 BF16 当前格点半间距，round-to-nearest 后仍是同一个值。主权重有变化不保证实际 rollout 参数有变化；应观察量化后的权重。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>本地示例1+1/1024转为BF16 nearest仍是1，因为该处BF16向上间距为1/128。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13545v1">原论文</a> · <a href="../../../../foundation-models/2611.13545-stochastic-rounding/">实现解读</a> · <a href="#qa-b4016c8ebd4ff666">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:stochastic-rounding" data-paper-title="Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding 基础模型 NVIDIA 2026-11-10 FP32 主权重在训练中发生小变化，转为 BF16 后却可能仍落在同一格点，导致 rollout 策略看不到更新。BF16 在一般正规数区间的格距比 FP16 大八倍，因此相似的小步长可表现出不同的有效更新速度。随机舍入按到相邻格点的距离选上下端点，在条件期望上保留主权重变化，而不是强行放大学习率。 完整实验成本过高，不复现（审查 DONE）；诊断对 65536 个值作 BF16 舍入：round-to-nearest 全部回到 1，而 SR 上舍入概率应为。L1 机制组件，diagnostic only。CPU 与真实 NVIDIA A100 三种子验证已通过；完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。adjacent_values 以真实目标格式的 torch.nextafter 构造上下邻居；stochastic_cast 从 FP32 输入按显式 generator 采样，返回 BF16/FP16。概率计算提升为 float64，覆盖目标格式 subnormal；精确值保持不变。  训练与数值系统 低精度训练与随机舍入 基础模型 训练预算：数据配比、目标与优化器 随机舍入的上舍入概率为什么是距离比例？ 用p=(x-lower)/(upper-lower)选择上端，其余选下端，期望正好是x。概率不是固定一半；精确可表示值应直接返回以避免0/0，负数也按数值上下端处理。 教学例：x=1+1/1024，邻居1和1+1/128，因此上舍入概率是1/8而不是1/2。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-deb9b059df4c9c8b">随机舍入的上舍入概率为什么是距离比例？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Astochastic-rounding">Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · NVIDIA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>用p=(x-lower)/(upper-lower)选择上端，其余选下端，期望正好是x。概率不是固定一半；精确可表示值应直接返回以避免0/0，负数也按数值上下端处理。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：x=1+1/1024，邻居1和1+1/128，因此上舍入概率是1/8而不是1/2。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13545v1">原论文</a> · <a href="../../../../foundation-models/2611.13545-stochastic-rounding/">实现解读</a> · <a href="#qa-deb9b059df4c9c8b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:stochastic-rounding" data-paper-title="Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding 基础模型 NVIDIA 2026-11-10 FP32 主权重在训练中发生小变化，转为 BF16 后却可能仍落在同一格点，导致 rollout 策略看不到更新。BF16 在一般正规数区间的格距比 FP16 大八倍，因此相似的小步长可表现出不同的有效更新速度。随机舍入按到相邻格点的距离选上下端点，在条件期望上保留主权重变化，而不是强行放大学习率。 完整实验成本过高，不复现（审查 DONE）；诊断对 65536 个值作 BF16 舍入：round-to-nearest 全部回到 1，而 SR 上舍入概率应为。L1 机制组件，diagnostic only。CPU 与真实 NVIDIA A100 三种子验证已通过；完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。adjacent_values 以真实目标格式的 torch.nextafter 构造上下邻居；stochastic_cast 从 FP32 输入按显式 generator 采样，返回 BF16/FP16。概率计算提升为 float64，覆盖目标格式 subnormal；精确值保持不变。  训练与数值系统 低精度训练与随机舍入 基础模型 训练预算：数据配比、目标与优化器 SR 无偏是否证明每次误差更小、训练必然更快？ 没有。无偏是条件期望性质，单个随机输出仍可能比 nearest 更远，也引入方差。实际收敛还依赖学习率、模型、同步与训推一致性，不能从标量均值直接推导。 教学例：大多数输出为1，少数跳到1+1/128；个别上跳的绝对误差更大，但足够多样本的均值可接近原FP32值。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-6fbfaf473e91e738">SR 无偏是否证明每次误差更小、训练必然更快？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Astochastic-rounding">Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · NVIDIA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>没有。无偏是条件期望性质，单个随机输出仍可能比 nearest 更远，也引入方差。实际收敛还依赖学习率、模型、同步与训推一致性，不能从标量均值直接推导。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：大多数输出为1，少数跳到1+1/128；个别上跳的绝对误差更大，但足够多样本的均值可接近原FP32值。</p>
+<p class="ar-learning-sources">依据：核心公式、原文结果与限制；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13545v1">原论文</a> · <a href="../../../../foundation-models/2611.13545-stochastic-rounding/">实现解读</a> · <a href="#qa-6fbfaf473e91e738">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:stochastic-rounding" data-paper-title="Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding 基础模型 NVIDIA 2026-11-10 FP32 主权重在训练中发生小变化，转为 BF16 后却可能仍落在同一格点，导致 rollout 策略看不到更新。BF16 在一般正规数区间的格距比 FP16 大八倍，因此相似的小步长可表现出不同的有效更新速度。随机舍入按到相邻格点的距离选上下端点，在条件期望上保留主权重变化，而不是强行放大学习率。 完整实验成本过高，不复现（审查 DONE）；诊断对 65536 个值作 BF16 舍入：round-to-nearest 全部回到 1，而 SR 上舍入概率应为。L1 机制组件，diagnostic only。CPU 与真实 NVIDIA A100 三种子验证已通过；完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。adjacent_values 以真实目标格式的 torch.nextafter 构造上下邻居；stochastic_cast 从 FP32 输入按显式 generator 采样，返回 BF16/FP16。概率计算提升为 float64，覆盖目标格式 subnormal；精确值保持不变。  训练与数值系统 低精度训练与随机舍入 基础模型 训练预算：数据配比、目标与优化器 为什么本地不对超范围值 clipping 后继续随机舍入？ clipping改变了目标值的期望，不能继续声称对原输入无偏。本地明确拒绝非有限或目标范围外输入，并测试负数、零、subnormal与最大有限值。no_grad也避免冒充STE训练器。 教学例：大于FP16最大值65504的输入被拒绝，而不是压到65504再报告量化无偏。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-4f89e0b54700c676">为什么本地不对超范围值 clipping 后继续随机舍入？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Astochastic-rounding">Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · NVIDIA</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>clipping改变了目标值的期望，不能继续声称对原输入无偏。本地明确拒绝非有限或目标范围外输入，并测试负数、零、subnormal与最大有限值。no_grad也避免冒充STE训练器。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：大于FP16最大值65504的输入被拒绝，而不是压到65504再报告量化无偏。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13545v1">原论文</a> · <a href="../../../../foundation-models/2611.13545-stochastic-rounding/">实现解读</a> · <a href="#qa-4f89e0b54700c676">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gavagai" data-paper-title="GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport 基础模型 St Thomas’ College of Engineering and Technology 2026-10-30 照护者语言中许多内容词并不指向当前可见物体。逐词对视觉区域 softmax 会强制这些词选择背景，常在画面中的手、地板便吞噬词汇。GAVAGAI 同时加入无容量限制的 Nothing 列和视觉区域的容量上界，不把每个视觉列强制填满。 完整实验成本过高，不复现（审查 DONE）；capped_transport 执行 Eq.2；ReferentialAlignment 实际构造单位归一化成本、可训练 Nothing head、停梯度计划和目标，接受固定外部成本先验。区域 proposal、内容词选择与跨场景先验统计必须由调用方提供，不用标签生成它们。  多模态基础模型 词区域对齐与容量约束传输 基础模型 训练预算：数据配比、目标与优化器 GAVAGAI 为什么同时需要 Nothing 和区域容量，而不是二选一？ Nothing允许不指称可见物体的词不被强制分给背景；区域容量防止少数常见背景吸收许多不同词。只有容量而没有Nothing仍须把质量塞进视觉区域；只有Nothing而无容量则不能限制某个背景区域的集中吸收。两条约束处理不同故障。 教学例：一句话含hungry、ball，图中有球和手。hungry可去Nothing，ball去球；手的容量还阻止许多无关词都被分到手。教学分配不是模型测量。 2026-11-04">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
 <span id="paper-foundation-models-gavagai-10f9efba" class="ar-learning-paper-anchor"></span>

@@ -116,6 +116,16 @@
             "核心公式",
             "数据协议与代码映射"
           ]
+        },
+        {
+          "paper": "foundation-models:adindex",
+          "position": "按层校准组大小与共享候选库，用逐query标准化softmax后逐token max/Top-P教师蒸馏组索引器；只扫描anchor历史，再补新可见token并保留逐query DSA精排。",
+          "tradeoff": "共享候选不等于共享最终Top-K，也不提供OpenAttention的未读尾部代理；teacher运算顺序、anchor因果边界和最大并集容量不可替换。L1训练KL降低不证明长文质量或B300 serving加速。",
+          "sections": [
+            "核心公式",
+            "数据协议与代码映射",
+            "结果与复现边界"
+          ]
         }
       ],
       "analysis": [
@@ -169,6 +179,14 @@
             "foundation-models:rope",
             "foundation-models:convpe",
             "foundation-models:semantic-block-sparse-attention"
+          ]
+        },
+        {
+          "title": "省掉全前缀扫描，还是近似未读取尾部，先分清成本对象",
+          "body": "ADIndex复用相邻query的候选扫描，再由各query精排，共享库只可使用anchor历史，后续query补入新可见token。OpenAttention则把精读之外的剩余KV转成带计数均值代理，与精确行联合softmax。前者不保证保留所有未读质量，后者的代理也不等于精确细节；不能只按读取比例把二者写成相同压缩方案。",
+          "papers": [
+            "foundation-models:adindex",
+            "foundation-models:openattention"
           ]
         }
       ],
@@ -244,9 +262,19 @@
             "foundation-models:convpe",
             "foundation-models:semantic-block-sparse-attention"
           ]
+        },
+        {
+          "id": "shared-bank-versus-tail-proxy",
+          "question": "ADIndex共享库和OpenAttention尾部代理，能用相同的漏读解释吗？",
+          "answer": "不能。ADIndex共享候选搜索后仍按query选最终Top-K，库外位置没有自动的代理质量。OpenAttention为未精读簇保留带计数代理，但其内容近似且必须移除已精读行。二者要分别核对索引覆盖和残余softmax质量。",
+          "example": "教学例：一个位置不在ADIndex候选并集就不能进入本次精排；在OpenAttention里它可能仍通过所在簇的剩余均值和计数参与，但不会保留该位置的全部细节。",
+          "papers": [
+            "foundation-models:adindex",
+            "foundation-models:openattention"
+          ]
         }
       ],
-      "updated": "2026-11-06",
+      "updated": "2026-11-11",
       "reviewed_papers": [
         "foundation-models:alibi",
         "foundation-models:autonomy-heads",
@@ -284,7 +312,8 @@
         "foundation-models:merlin",
         "foundation-models:semantic-block-sparse-attention",
         "foundation-models:anchor-kv",
-        "foundation-models:convpe"
+        "foundation-models:convpe",
+        "foundation-models:adindex"
       ],
       "updates": [
         {
@@ -401,6 +430,18 @@
           ],
           "source_revisions": {
             "foundation-models:convpe": "cd9c6146ca9fd49eaedb1f3688ebaad076489228499ea79875da1590b68dced2"
+          }
+        },
+        {
+          "date": "2026-11-11",
+          "summary": "加入ADIndex，将组内候选扫描复用与OpenAttention的尾部质量代理分开；保留标准化softmax→max→Top-P教师、anchor可见边界和新token补回。仅L1索引器与训练算术，完整长文/serving矩阵不复现。",
+          "papers": [
+            "foundation-models:adindex",
+            "foundation-models:openattention"
+          ],
+          "source_revisions": {
+            "foundation-models:adindex": "40695a1f88a78659747bd168ea114fd40ca8ff6bf280f69df9177eb61fea57f5",
+            "foundation-models:openattention": "ba91161b6e4f8689b0678bc76987ed0925d2d25ccb86f860f62466ee597cff6b"
           }
         }
       ]
@@ -694,13 +735,31 @@
           "paper": "foundation-models:proland",
           "position": "在BA乘积空间重投影动量并求谱方向，以水平DB协调两因子，同时独立用Landing恢复B正交性。",
           "tradeoff": "不是给A/B各做Muon；小核节省状态不消除病态伪逆。本地只验精确thin-factor更新，完整多模型微调高成本不复现。",
-          "sections": ["核心公式", "检查与负控", "成本判断与复现边界"]
+          "sections": [
+            "核心公式",
+            "检查与负控",
+            "成本判断与复现边界"
+          ]
         },
         {
           "paper": "foundation-models:gavagai",
           "position": "以Nothing吸收非指称词，以视觉列容量上界约束区域竞争，再将固定plan成本和caption CE相加。",
           "tradeoff": "改变监督而非优化器；8次缩放不保证行边际已收敛，v1未定义Nothing hinge的额外反传。本地不声称完整防塌缩或SAYCam训练。",
-          "sections": ["核心公式", "检查与负控", "成本判断与复现边界"]
+          "sections": [
+            "核心公式",
+            "检查与负控",
+            "成本判断与复现边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:stochastic-rounding",
+          "position": "保留FP32主权重，以距离比例在相邻BF16/FP16值间随机选择，使量化后的条件期望等于更新值，缓解小更新被nearest舍入吞没。",
+          "tradeoff": "不同于ECO通过动量补偿并移除主权重，SR本身不节省master存储；无偏不等于每步更准或必然更快。trainer/rollout仍需加载同一量化权重，L1标量核不证明64卡RL曲线。",
+          "sections": [
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -725,7 +784,18 @@
         {
           "title": "改变怎样更新，与改变要学什么，必须拆开验证",
           "body": "ProLand保持给定损失，通过乘积空间谱方向和Landing改变LoRA更新；GAVAGAI把词区域指称变量加入训练目标，并用Nothing/容量处理错误监督。前者的下降与约束恢复不能证明新增对齐目标有用，后者的小矩阵传输可行也不证明真实图像grounding提升。若未来组合，应先固定数据、骨干和预算，独立消融目标变化与更新几何；本轮二者都是L1组件，不启动高成本联合训练。",
-          "papers": ["foundation-models:proland", "foundation-models:gavagai"]
+          "papers": [
+            "foundation-models:proland",
+            "foundation-models:gavagai"
+          ]
+        },
+        {
+          "title": "低精度更新可见性与高精度状态内存，不要混成一个收益",
+          "body": "随机舍入论文保留FP32主权重，处理它的小变化在BF16 rollout中不可见的问题；ECO移除主权重，把重量化误差按有效步长注入已有动量，目标是状态内存—损失权衡。随机舍入可以是一种量化选择，却不自动实现ECO的补偿规则；ECO也不能仅凭无主权重就保证小更新在每次rollout都可见。要分开报告存储、量化偏差、同步与收敛。",
+          "papers": [
+            "foundation-models:stochastic-rounding",
+            "foundation-models:eco-optimizer"
+          ]
         }
       ],
       "questions": [
@@ -765,10 +835,23 @@
           "question": "ProLand与GAVAGAI都能对训练产生影响，为什么不能只看一次loss下降就归为同一种改进？",
           "answer": "ProLand在给定目标上改变参数更新和约束恢复；GAVAGAI直接改变目标，引入词区域分配和Nothing。两种loss甚至可能不可直接比较。需要固定任务和数据，分别检查更新等价性、传输约束、独立验证效果与总成本，不能让小矩阵下降代替能力证据。",
           "example": "教学例：把原CE加上一个可能为负的对齐成本，数值变低不等于caption质量改善；同样，ProLand让MSE下降也不代表学到了图像中的词所指。",
-          "papers": ["foundation-models:proland", "foundation-models:gavagai"]
+          "papers": [
+            "foundation-models:proland",
+            "foundation-models:gavagai"
+          ]
+        },
+        {
+          "id": "rounding-is-not-master-removal",
+          "question": "把nearest改成随机舍入，是否已经实现了ECO的无主权重训练？",
+          "answer": "没有。随机舍入改变FP32值如何投到低精度格点，本地仍以FP32主值为输入；ECO还移除常驻master并补偿动量，Adam需要逐元素有效步长。二者的状态与更新合同不同。",
+          "example": "教学例：1+1/1024以1/8概率上舍到BF16邻居，只验证量化期望；它没有说明FP32 master是否被删除，也没有进行任何动量误差补偿。",
+          "papers": [
+            "foundation-models:stochastic-rounding",
+            "foundation-models:eco-optimizer"
+          ]
         }
       ],
-      "updated": "2026-11-04",
+      "updated": "2026-11-11",
       "reviewed_papers": [
         "foundation-models:adamw4bit",
         "foundation-models:af-muon",
@@ -799,7 +882,8 @@
         "foundation-models:taco-optimizer",
         "foundation-models:tess",
         "foundation-models:proland",
-        "foundation-models:gavagai"
+        "foundation-models:gavagai",
+        "foundation-models:stochastic-rounding"
       ],
       "updates": [
         {
@@ -869,10 +953,25 @@
         {
           "date": "2026-11-04",
           "summary": "加入ProLand与GAVAGAI，区分乘积空间更新几何和新增对齐监督；新增独立参考、有限迭代与反传边界，二者完整训练高成本不复现。",
-          "papers": ["foundation-models:proland", "foundation-models:gavagai"],
+          "papers": [
+            "foundation-models:proland",
+            "foundation-models:gavagai"
+          ],
           "source_revisions": {
             "foundation-models:proland": "275d98175b4b5d888c6ccc97f04fa6557753a442a671f465e091e376a8fc3e35",
             "foundation-models:gavagai": "1a7e35bf34453c39ed0546866ee662989d49a7f9b0971987ee48dcb064213fc7"
+          }
+        },
+        {
+          "date": "2026-11-11",
+          "summary": "加入NVIDIA随机舍入，与Google ECO区分小更新的量化可见性和移除master的状态节省；保留有限范围、负数/subnormal、条件无偏与同步约束。仅L1数值核，64H100/64B200完整训练不复现。",
+          "papers": [
+            "foundation-models:stochastic-rounding",
+            "foundation-models:eco-optimizer"
+          ],
+          "source_revisions": {
+            "foundation-models:stochastic-rounding": "2d38215ff494778a4ddd9cf33755f3e69edf0422d2af49ca3b99e521070b44c3",
+            "foundation-models:eco-optimizer": "a7da5c72f5f8ac77a1928d9db59068a9e03727f8a8c2bd75d8fea56df3a36994"
           }
         }
       ]
@@ -1008,7 +1107,10 @@
           "paper": "foundation-models:e-means",
           "position": "用计数与向量和的小批量 EMA 训练质心，每五批分裂活跃 donor 复苏弱簇，再用末轮历史分配均值收尾。",
           "tradeoff": "加快的是聚类优化，不是 GINGER 的候选读带宽或 PiPNN II 的构建打分；CPU 固定标签 MSE 不代表 IVF 召回或 GPU 吞吐。",
-          "sections": ["核心公式", "结果、负控与边界"]
+          "sections": [
+            "核心公式",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -1327,7 +1429,9 @@
         {
           "date": "2026-11-09",
           "summary": "加入 e-means，对比质心训练、图构建与查询读带宽三个阶段。末轮固定分配均值能减小相应训练目标，不保证留出误差或检索性能都改善。",
-          "papers": ["foundation-models:e-means"],
+          "papers": [
+            "foundation-models:e-means"
+          ],
           "source_revisions": {
             "foundation-models:e-means": "7c8f826171ba2a89e83fec48c10f3f73e5bfa9b84a1e46ead32d7f0d82b94478"
           }
@@ -1402,6 +1506,16 @@
             "核心公式",
             "复现边界与 Evolve"
           ]
+        },
+        {
+          "paper": "foundation-models:b3",
+          "position": "在兼容self-editing的扩散解码中重叠当前/未来两块，以块因果mask保护当前输出；用上一拍前沿左侧熵的跨块候选均值控制spawn。",
+          "tradeoff": "门控不是扩散backbone，不能把AR模型直接变双向DLM；候选排除frontier、future-active阶段与EOS，并保留一拍滞后。局部注意力不变不证明整段分布不变、质量或TPS。",
+          "sections": [
+            "核心公式",
+            "数据协议与代码映射",
+            "结果与复现边界"
+          ]
         }
       ],
       "analysis": [
@@ -1421,6 +1535,14 @@
             "foundation-models:dqwen35",
             "foundation-models:pumba",
             "foundation-models:data-space-iteration"
+          ]
+        },
+        {
+          "title": "改变模型的生成条件，与安排已有解码器何时工作是两层改动",
+          "body": "dQwen3.5把混合attention/RNN骨干改成双向条件并用掩码去噪训练；B3在已有兼容扩散模型上安排两块重叠时机，不提供该模型本身。B3的块因果mask只保护当前块不读取未来草稿，不意味着未来块无需self-edit，也不是推测解码那种完整目标分布保持证明。应分别验收backbone、sampler与门控。",
+          "papers": [
+            "foundation-models:b3",
+            "foundation-models:dqwen35"
           ]
         }
       ],
@@ -1454,9 +1576,19 @@
             "foundation-models:pumba",
             "foundation-models:data-space-iteration"
           ]
+        },
+        {
+          "id": "spawn-gate-not-diffusion-backbone",
+          "question": "给普通AR模型加B3的spawn gate，是否就得到了扩散语言模型？",
+          "answer": "没有。gate仅决定兼容扩散解码器何时开启未来块；还需要双向/块条件结构、去噪与self-editing sampler。dQwen3.5的模型改造和掩码训练属于另一层，不能由门控替代。",
+          "example": "教学例：CPU门控输入低熵并返回True，只是许可状态；它既没有预测下一个token，也不能把固定因果AR权重改成可以编辑未来块的模型。",
+          "papers": [
+            "foundation-models:b3",
+            "foundation-models:dqwen35"
+          ]
         }
       ],
-      "updated": "2026-10-27",
+      "updated": "2026-11-11",
       "reviewed_papers": [
         "foundation-models:aspire",
         "foundation-models:data-space-iteration",
@@ -1472,7 +1604,8 @@
         "foundation-models:register-tokens-dllm",
         "foundation-models:speculative-decoding",
         "foundation-models:tadm",
-        "foundation-models:windowed-mtp"
+        "foundation-models:windowed-mtp",
+        "foundation-models:b3"
       ],
       "updates": [
         {
@@ -1511,6 +1644,18 @@
             "foundation-models:speculative-decoding": "fcd6e4a9f72a7f160b354d3ff3b13b82301a16a74b07f8e66c9c8c0d0dc8c9f5",
             "foundation-models:tadm": "d4fb08e4ff8c42c1499135e91921b102a157fd013258756cda768e4b78d26478",
             "foundation-models:windowed-mtp": "b840656c94bd1f6eeab2911ed89d384660a0b285516ae14c7119aa552ac698cf"
+          }
+        },
+        {
+          "date": "2026-11-11",
+          "summary": "加入B3，区分扩散backbone改造与已有解码器的重叠调度；核对前沿、一拍滞后、活动未来块及EOS保护。CPU门控不冒充DLM生成，完整16B/26B/100B吞吐矩阵不复现。",
+          "papers": [
+            "foundation-models:b3",
+            "foundation-models:dqwen35"
+          ],
+          "source_revisions": {
+            "foundation-models:b3": "313b374beb53ce52db0d1de64c082a93a9d16ef08ce2e9b9456f61b2e2017aa0",
+            "foundation-models:dqwen35": "1f25909a5a37a42548bbb72c3aa6526027be675a8796f710388ca65244c26f3f"
           }
         }
       ]
@@ -1579,7 +1724,11 @@
           "paper": "foundation-models:xla-trenches",
           "position": "在合法输入和目标TPU数值语义下做差分检查，从大图隔离到完整fusion内部VREG，避免调试拆图改变故障。",
           "tradeoff": "编译器正确性证据不是模型能力分数；内部生产图和TPU工具不可用，公开OpenXLA只是部分链路，本地review-only且无CUDA替身。",
-          "sections": ["核心机制与数值例子", "论文工程与线上证据", "资源与复现边界"]
+          "sections": [
+            "核心机制与数值例子",
+            "论文工程与线上证据",
+            "资源与复现边界"
+          ]
         }
       ],
       "analysis": [
@@ -1603,7 +1752,10 @@
         {
           "title": "参考语义也必须匹配被测执行环境",
           "body": "XLGoBench强调scorer与gold隔离，XLA案例进一步显示：即使测试题和标签合法，编译后的计算也可能因寄存器舍入或融合调度偏离原程序。差分参考既不能接受非法输入制造NaN伪警，也不能把合法TPU近似函数误报为故障。拆fusion后正确不代表原fusion正确；A100上算对也不证明TPU lowering正确。因此本轮保留TPU环境缺失，不用CPU/CUDA演示替代硬件结论。",
-          "papers": ["foundation-models:xlgobench", "foundation-models:xla-trenches"]
+          "papers": [
+            "foundation-models:xlgobench",
+            "foundation-models:xla-trenches"
+          ]
         }
       ],
       "questions": [
@@ -1642,7 +1794,10 @@
           "question": "如果XLGoBench有精确gold，为什么仍不能靠“程序跑完了”保证本次模型评测可信？",
           "answer": "精确gold只定义正确输出，不证明模型的编译执行保持原语义。XLA显示静默错编译能在不崩溃时改变数值；还需合法输入、匹配硬件的差分参考与故障隔离。把正确标签和正确执行分开检查，才能判断错误来自模型还是后端。",
           "example": "教学例：数学gold为非零量化残差，TPU fused kernel却因省略cast全输出0；即使scorer完全准确，也只能判本次输出错，不能自动归因于模型不会该题。",
-          "papers": ["foundation-models:xlgobench", "foundation-models:xla-trenches"]
+          "papers": [
+            "foundation-models:xlgobench",
+            "foundation-models:xla-trenches"
+          ]
         }
       ],
       "updated": "2026-11-04",
@@ -1700,8 +1855,12 @@
         {
           "date": "2026-11-04",
           "summary": "补入Google XLA:TPU编译器正确性研究，区分合法评分、参考硬件语义、静默错编译及工程bug计数；完整内部TPU实验高成本不复现，审查DONE。",
-          "papers": ["foundation-models:xla-trenches"],
-          "source_revisions": {"foundation-models:xla-trenches": "8d0084d662cf8f2c947333f64603556d3da43a5cf47fab26b5eb1aab086313a7"}
+          "papers": [
+            "foundation-models:xla-trenches"
+          ],
+          "source_revisions": {
+            "foundation-models:xla-trenches": "8d0084d662cf8f2c947333f64603556d3da43a5cf47fab26b5eb1aab086313a7"
+          }
         }
       ]
     }

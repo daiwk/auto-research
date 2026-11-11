@@ -7,7 +7,7 @@ hide:
 
 # 记忆与技能：让经验可取回、可失效
 
-[Agent](index.md) / 232 个问题 · 58 篇论文
+[Agent](index.md) / 240 个问题 · 60 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">232 个问题 · 58 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">240 个问题 · 60 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:wikitrace" data-paper-title="Don&#x27;t Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Don&#x27;t Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents Agent KAIST 2026-11-10 从一次成功或失败轨迹提炼出的洞见不一定正确，也可能被误用到不适用的任务。WikiTrace 不只保存一句经验，而是把洞见链接到该次执行的解释及未改写的原轨迹。模型先看全部洞见，在细节不足、洞见冲突或来源失败时，自主沿链接下钻。解释仍是模型推断，不因带有链接就自动成为已验证知识。 完整长 rollout grid 成本过高，不复现（审查 DONE）；L1 机制诊断不是记忆能力成绩，不进入 Evolve 晋级。本地交付纯 CPU 链接语料组件，不包含 LLM 编译器或求解 Agent；L1 机制诊断不是记忆能力成绩，不进入 Evolve 晋级。SourceRun 只接受训练划分的可观察动作、观察和成败；Compilation、Insight 由调用者显式提供。EvidenceLinkedCorpus 检查唯一 ID、源覆盖、每次最多三条洞见，保留矛盾洞见和失败轨迹，不伪装成自动编译或事实验证。actor_memory() 返回洞见；descend() 精确返回关联解释和原轨迹。  主动 / 长期记忆 证据链接与记忆可靠性 Agent 记忆与技能：让经验可取回、可失效 为什么加入一次成功经验，反而可能让 WikiTrace 所研究的 Agent 做错原本会做的任务？ 成败只标记整次执行，不证明提炼出的每条洞见都正确，也不界定适用条件。错误归因或跨范围使用都可能诱发 memory-induced regression；因此要保留可回查的源，而不是把成功标签当知识证明。 教学例：把“检查灯后任务结束”从一次成功轨迹中提炼出来，可能遗漏后续打开灯的动作；新任务按这句经验提前停止就会失败。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<span id="paper-agent-research-wikitrace-5d34927a" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-ea3168b47360fb68">为什么加入一次成功经验，反而可能让 WikiTrace 所研究的 Agent 做错原本会做的任务？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Awikitrace">Don&#x27;t Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · KAIST</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>成败只标记整次执行，不证明提炼出的每条洞见都正确，也不界定适用条件。错误归因或跨范围使用都可能诱发 memory-induced regression；因此要保留可回查的源，而不是把成功标签当知识证明。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把“检查灯后任务结束”从一次成功轨迹中提炼出来，可能遗漏后续打开灯的动作；新任务按这句经验提前停止就会失败。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14320">原论文</a> · <a href="../../../../agent-research/2611.14320-wikitrace/">实现解读</a> · <a href="#qa-ea3168b47360fb68">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:wikitrace" data-paper-title="Don&#x27;t Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Don&#x27;t Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents Agent KAIST 2026-11-10 从一次成功或失败轨迹提炼出的洞见不一定正确，也可能被误用到不适用的任务。WikiTrace 不只保存一句经验，而是把洞见链接到该次执行的解释及未改写的原轨迹。模型先看全部洞见，在细节不足、洞见冲突或来源失败时，自主沿链接下钻。解释仍是模型推断，不因带有链接就自动成为已验证知识。 完整长 rollout grid 成本过高，不复现（审查 DONE）；L1 机制诊断不是记忆能力成绩，不进入 Evolve 晋级。本地交付纯 CPU 链接语料组件，不包含 LLM 编译器或求解 Agent；L1 机制诊断不是记忆能力成绩，不进入 Evolve 晋级。SourceRun 只接受训练划分的可观察动作、观察和成败；Compilation、Insight 由调用者显式提供。EvidenceLinkedCorpus 检查唯一 ID、源覆盖、每次最多三条洞见，保留矛盾洞见和失败轨迹，不伪装成自动编译或事实验证。actor_memory() 返回洞见；descend() 精确返回关联解释和原轨迹。  主动 / 长期记忆 证据链接与记忆可靠性 Agent 记忆与技能：让经验可取回、可失效 WikiTrace 为什么同时链接 compilation 和原始轨迹，而不只保留解释摘要？ Compilation 提供紧凑的成败解释，原轨迹保留解释遗漏或误判时仍可检查的动作和观察。洞见直接指向两者，使 Agent 能选择证据粒度；摘要本身仍是解释，不是已经核验的因果结论。 教学例：解释说“权限不足”，原轨迹却显示读取成功而写入路径不存在；回查原始返回可以纠正归因。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-e54fa30608114521">WikiTrace 为什么同时链接 compilation 和原始轨迹，而不只保留解释摘要？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Awikitrace">Don&#x27;t Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · KAIST</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Compilation 提供紧凑的成败解释，原轨迹保留解释遗漏或误判时仍可检查的动作和观察。洞见直接指向两者，使 Agent 能选择证据粒度；摘要本身仍是解释，不是已经核验的因果结论。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：解释说“权限不足”，原轨迹却显示读取成功而写入路径不存在；回查原始返回可以纠正归因。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14320">原论文</a> · <a href="../../../../agent-research/2611.14320-wikitrace/">实现解读</a> · <a href="#qa-e54fa30608114521">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:wikitrace" data-paper-title="Don&#x27;t Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Don&#x27;t Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents Agent KAIST 2026-11-10 从一次成功或失败轨迹提炼出的洞见不一定正确，也可能被误用到不适用的任务。WikiTrace 不只保存一句经验，而是把洞见链接到该次执行的解释及未改写的原轨迹。模型先看全部洞见，在细节不足、洞见冲突或来源失败时，自主沿链接下钻。解释仍是模型推断，不因带有链接就自动成为已验证知识。 完整长 rollout grid 成本过高，不复现（审查 DONE）；L1 机制诊断不是记忆能力成绩，不进入 Evolve 晋级。本地交付纯 CPU 链接语料组件，不包含 LLM 编译器或求解 Agent；L1 机制诊断不是记忆能力成绩，不进入 Evolve 晋级。SourceRun 只接受训练划分的可观察动作、观察和成败；Compilation、Insight 由调用者显式提供。EvidenceLinkedCorpus 检查唯一 ID、源覆盖、每次最多三条洞见，保留矛盾洞见和失败轨迹，不伪装成自动编译或事实验证。actor_memory() 返回洞见；descend() 精确返回关联解释和原轨迹。  主动 / 长期记忆 证据链接与记忆可靠性 Agent 记忆与技能：让经验可取回、可失效 WikiTrace 的源链接和 MemFit 的混合检索是在解决同一个问题吗？ 不是。检索排序解决先看到哪份记录，源链接解决一句洞见从哪里来以及如何查证。提高语义分数不能修复错误来源解释；保留原轨迹也不保证 Agent 会选对或正确使用它。 教学例：最相关的一条经验仍可能错误；混合检索把它排第一后，还需要沿链接检查支撑，而不是直接执行。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-79a039fe6065416c">WikiTrace 的源链接和 MemFit 的混合检索是在解决同一个问题吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Awikitrace">Don&#x27;t Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · KAIST</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。检索排序解决先看到哪份记录，源链接解决一句洞见从哪里来以及如何查证。提高语义分数不能修复错误来源解释；保留原轨迹也不保证 Agent 会选对或正确使用它。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：最相关的一条经验仍可能错误；混合检索把它排第一后，还需要沿链接检查支撑，而不是直接执行。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14320">原论文</a> · <a href="../../../../agent-research/2611.14320-wikitrace/">实现解读</a> · <a href="#qa-79a039fe6065416c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:wikitrace" data-paper-title="Don&#x27;t Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Don&#x27;t Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents Agent KAIST 2026-11-10 从一次成功或失败轨迹提炼出的洞见不一定正确，也可能被误用到不适用的任务。WikiTrace 不只保存一句经验，而是把洞见链接到该次执行的解释及未改写的原轨迹。模型先看全部洞见，在细节不足、洞见冲突或来源失败时，自主沿链接下钻。解释仍是模型推断，不因带有链接就自动成为已验证知识。 完整长 rollout grid 成本过高，不复现（审查 DONE）；L1 机制诊断不是记忆能力成绩，不进入 Evolve 晋级。本地交付纯 CPU 链接语料组件，不包含 LLM 编译器或求解 Agent；L1 机制诊断不是记忆能力成绩，不进入 Evolve 晋级。SourceRun 只接受训练划分的可观察动作、观察和成败；Compilation、Insight 由调用者显式提供。EvidenceLinkedCorpus 检查唯一 ID、源覆盖、每次最多三条洞见，保留矛盾洞见和失败轨迹，不伪装成自动编译或事实验证。actor_memory() 返回洞见；descend() 精确返回关联解释和原轨迹。  主动 / 长期记忆 证据链接与记忆可靠性 Agent 记忆与技能：让经验可取回、可失效 本地两个 Insight 都能下钻到正确 SourceRun，能否称已复现 WikiTrace 记忆能力？ 不能。它验证唯一 ID、只读结构、源 hash 和导航。洞见与解释是显式输入，未调用编译 LLM，也未运行测试 Agent；失败洞见可被保留，但是否识别并纠正它仍未测。 教学例：放入互相矛盾的“等待”和“不要等待”，组件应保留两者及各自来源，而不是用硬编码正确答案替模型消歧。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-b55e849dfd5242e7">本地两个 Insight 都能下钻到正确 SourceRun，能否称已复现 WikiTrace 记忆能力？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Awikitrace">Don&#x27;t Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · KAIST</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。它验证唯一 ID、只读结构、源 hash 和导航。洞见与解释是显式输入，未调用编译 LLM，也未运行测试 Agent；失败洞见可被保留，但是否识别并纠正它仍未测。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：放入互相矛盾的“等待”和“不要等待”，组件应保留两者及各自来源，而不是用硬编码正确答案替模型消歧。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14320">原论文</a> · <a href="../../../../agent-research/2611.14320-wikitrace/">实现解读</a> · <a href="#qa-b55e849dfd5242e7">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:engram-consolidation" data-paper-title="ENGRAM: From Agent Experience to Weights through Verified Consolidation" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="ENGRAM: From Agent Experience to Weights through Verified Consolidation Agent University of New South Wales 2026-11-06 检索过往轨迹能支持 Agent 执行，但检索库不会因为模型微调而自然缩小。ENGRAM 把两个问题拆开：有没有值得学的经验，以及这次更新的权重能否替代外部检索。学生尝试和教师示范进入经验图（ETG），学生熟练度独立更新；验证通过后才按技能批准候选并处理已参与训练的记录。 考虑交互采集和多轮验证，单张 A100/A30 或本地 Mac 不按论文规模跑：成本过高，不复现（审查 DONE）。consolidate 接收外部训练与加载结果、当前有效训练记录 ID、预释放经验记录和开发探针。它按源 episode 阻断训练／开发／回放与最终测试的交叉：开发探针来源可出现在预释放经验元数据中，但不能出现在本轮训练或历史 replay。调用方需先完成 QA 问题级去重；这里只校验 episode 标识。actor 只收到公开输入和指定臂上下文，目标仅传给独立评分器；检索回调只收到预释放经验的公开字段，调用方须保证这些字段不夹带未授权标签。原始状态不改写；  长期记忆与技能 可验证经验固化与记忆释放 Agent 记忆与技能：让经验可取回、可失效 学生从未完成一个技能，为什么仍可能通过 ENGRAM 的训练准入？通过后能马上移走记录吗？ 足够的成功教师示范可独立通过准入。准入只决定是否尝试学习；没有当前有效训练贡献或没有留出的验证探针都不能释放记忆。 教学例：熟练度为 0，同一个教师 episode 中两条有效成功记录满足 d_min=2，但若两条都留作开发探针，本轮没有训练贡献。 2026-11-09">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-engram-consolidation-28eba53e" class="ar-learning-paper-anchor"></span>
@@ -2571,6 +2624,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>例如一个动作在同 episode 出现两次，要按逆序分别接收折扣终末信用，不能只把总奖励加一次后除访问数。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、复现边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.13591">原论文</a> · <a href="../../../../agent-research/2607.13591-memcon/">实现解读</a> · <a href="#qa-67d5abfc2cadf284">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:lisa" data-paper-title="LiSA: Lifelong Safety Adaptation via Conservative Policy Induction" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="LiSA: Lifelong Safety Adaptation via Conservative Policy Induction Agent Google Cloud AI Research / Seoul National University 2026-05-14 固定安全模型不容易适应组织、用户与情境边界。LiSA 从稀疏且可能有噪声的失败反馈维护两类记忆：可复用的广义策略，以及相似情境中允许/拒绝冲突形成的局部提示。只改变记忆，不反复微调基础模型。§3 完整实验成本过高，不复现（审查 DONE）；三 seed 归档是同一明确合成案例的机械诊断：弱广义规则被抑制，两个狭窄局部提示仍可出现，冲突分数 0.5。component_only，CPU / L1 数学与记忆更新核。没有 LLM 策略归纳、真实语义 embedding 或最终安全分类器。完整实验成本过高，不复现（审查 DONE）；五月论文的独立补漏，不计十一月新首发。beta_lower 实际计算 Beta 分位数；Memory.refresh 执行当日归纳组最多三项、无效标签的多数回退、原始策略跨日重聚类、支持/矛盾与来源汇总，以及按领域生成两种标签的局部提示。  长期记忆与技能 安全策略记忆 Agent 记忆与技能：让经验可取回、可失效 LiSA 的广义策略与局部规则为什么不能用同一门控？ 广义策略声称能够跨情境复用，必须累积足够支持后才展示；局部规则用于提示已发现的狭窄冲突边界，不声称全局可靠。对少量混合案例施加相同置信门槛，会压掉它专门要保留的边界信息。 教学例：两个相似案例分别是公开讲座可分享、私人会议不可分享。广义“信息可分享”支持不足被拦，但两条标明情境差异的局部提示仍应展示。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<span id="paper-agent-research-lisa-3df63861" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-91f559896049e486">LiSA 的广义策略与局部规则为什么不能用同一门控？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Alisa">LiSA: Lifelong Safety Adaptation via Conservative Policy Induction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Google Cloud AI Research / Seoul National University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>广义策略声称能够跨情境复用，必须累积足够支持后才展示；局部规则用于提示已发现的狭窄冲突边界，不声称全局可靠。对少量混合案例施加相同置信门槛，会压掉它专门要保留的边界信息。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个相似案例分别是公开讲座可分享、私人会议不可分享。广义“信息可分享”支持不足被拦，但两条标明情境差异的局部提示仍应展示。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.14454">原论文</a> · <a href="../../../../agent-research/2605.14454-lisa/">实现解读</a> · <a href="#qa-91f559896049e486">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:lisa" data-paper-title="LiSA: Lifelong Safety Adaptation via Conservative Policy Induction" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="LiSA: Lifelong Safety Adaptation via Conservative Policy Induction Agent Google Cloud AI Research / Seoul National University 2026-05-14 固定安全模型不容易适应组织、用户与情境边界。LiSA 从稀疏且可能有噪声的失败反馈维护两类记忆：可复用的广义策略，以及相似情境中允许/拒绝冲突形成的局部提示。只改变记忆，不反复微调基础模型。§3 完整实验成本过高，不复现（审查 DONE）；三 seed 归档是同一明确合成案例的机械诊断：弱广义规则被抑制，两个狭窄局部提示仍可出现，冲突分数 0.5。component_only，CPU / L1 数学与记忆更新核。没有 LLM 策略归纳、真实语义 embedding 或最终安全分类器。完整实验成本过高，不复现（审查 DONE）；五月论文的独立补漏，不计十一月新首发。beta_lower 实际计算 Beta 分位数；Memory.refresh 执行当日归纳组最多三项、无效标签的多数回退、原始策略跨日重聚类、支持/矛盾与来源汇总，以及按领域生成两种标签的局部提示。  长期记忆与技能 安全策略记忆 Agent 记忆与技能：让经验可取回、可失效 支持1次和5次且没有矛盾都100%正确，为何LiSA只允许后者过默认门槛？ 它用Beta(1+s,1+c)的5%分位数，而不是经验正确率。支持1次的下界约0.22361，支持5次约0.60696；只有后者超过默认0.55，体现证据量而非只看比例。 教学例：一个新规则刚好说对1次不能立刻支配未来决策；再来矛盾反馈时Beta后验下界会下降，即便规则文本完全不变。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-d7f3a48b4041b6f2">支持1次和5次且没有矛盾都100%正确，为何LiSA只允许后者过默认门槛？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Alisa">LiSA: Lifelong Safety Adaptation via Conservative Policy Induction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Google Cloud AI Research / Seoul National University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它用Beta(1+s,1+c)的5%分位数，而不是经验正确率。支持1次的下界约0.22361，支持5次约0.60696；只有后者超过默认0.55，体现证据量而非只看比例。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个新规则刚好说对1次不能立刻支配未来决策；再来矛盾反馈时Beta后验下界会下降，即便规则文本完全不变。</p>
+<p class="ar-learning-sources">依据：核心公式、本地结果与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.14454">原论文</a> · <a href="../../../../agent-research/2605.14454-lisa/">实现解读</a> · <a href="#qa-d7f3a48b4041b6f2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:lisa" data-paper-title="LiSA: Lifelong Safety Adaptation via Conservative Policy Induction" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="LiSA: Lifelong Safety Adaptation via Conservative Policy Induction Agent Google Cloud AI Research / Seoul National University 2026-05-14 固定安全模型不容易适应组织、用户与情境边界。LiSA 从稀疏且可能有噪声的失败反馈维护两类记忆：可复用的广义策略，以及相似情境中允许/拒绝冲突形成的局部提示。只改变记忆，不反复微调基础模型。§3 完整实验成本过高，不复现（审查 DONE）；三 seed 归档是同一明确合成案例的机械诊断：弱广义规则被抑制，两个狭窄局部提示仍可出现，冲突分数 0.5。component_only，CPU / L1 数学与记忆更新核。没有 LLM 策略归纳、真实语义 embedding 或最终安全分类器。完整实验成本过高，不复现（审查 DONE）；五月论文的独立补漏，不计十一月新首发。beta_lower 实际计算 Beta 分位数；Memory.refresh 执行当日归纳组最多三项、无效标签的多数回退、原始策略跨日重聚类、支持/矛盾与来源汇总，以及按领域生成两种标签的局部提示。  长期记忆与技能 安全策略记忆 Agent 记忆与技能：让经验可取回、可失效 为什么不能用相似案例的连通分量代替原文的average-linkage聚类？ 连通分量等价于允许单链接链式扩张，两个彼此不相似的端点只要经中间案例连接就会混成一簇；average linkage检查两个簇间平均距离，可能阻止这次合并，从而改变局部冲突与策略代表。 教学例：三个单位向量角度为0、30、60度。相邻余弦距离约0.134都低于0.20，但合并后的平均跨簇距离约0.317；本地按原文保留两个簇，不变成一个连通大簇。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-65e9293385232032">为什么不能用相似案例的连通分量代替原文的average-linkage聚类？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Alisa">LiSA: Lifelong Safety Adaptation via Conservative Policy Induction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Google Cloud AI Research / Seoul National University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>连通分量等价于允许单链接链式扩张，两个彼此不相似的端点只要经中间案例连接就会混成一簇；average linkage检查两个簇间平均距离，可能阻止这次合并，从而改变局部冲突与策略代表。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：三个单位向量角度为0、30、60度。相邻余弦距离约0.134都低于0.20，但合并后的平均跨簇距离约0.317；本地按原文保留两个簇，不变成一个连通大簇。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.14454">原论文</a> · <a href="../../../../agent-research/2605.14454-lisa/">实现解读</a> · <a href="#qa-65e9293385232032">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:lisa" data-paper-title="LiSA: Lifelong Safety Adaptation via Conservative Policy Induction" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="LiSA: Lifelong Safety Adaptation via Conservative Policy Induction Agent Google Cloud AI Research / Seoul National University 2026-05-14 固定安全模型不容易适应组织、用户与情境边界。LiSA 从稀疏且可能有噪声的失败反馈维护两类记忆：可复用的广义策略，以及相似情境中允许/拒绝冲突形成的局部提示。只改变记忆，不反复微调基础模型。§3 完整实验成本过高，不复现（审查 DONE）；三 seed 归档是同一明确合成案例的机械诊断：弱广义规则被抑制，两个狭窄局部提示仍可出现，冲突分数 0.5。component_only，CPU / L1 数学与记忆更新核。没有 LLM 策略归纳、真实语义 embedding 或最终安全分类器。完整实验成本过高，不复现（审查 DONE）；五月论文的独立补漏，不计十一月新首发。beta_lower 实际计算 Beta 分位数；Memory.refresh 执行当日归纳组最多三项、无效标签的多数回退、原始策略跨日重聚类、支持/矛盾与来源汇总，以及按领域生成两种标签的局部提示。  长期记忆与技能 安全策略记忆 Agent 记忆与技能：让经验可取回、可失效 本地LiSA CPU核已运行，为什么不能直接报告安全macro-F1或说论文完整复现？ 真实LLM策略归纳、语义embedding和最终固定guardrail尚未接入，合成输入只验证Beta门控、聚类与状态合同。适应只能收报告失败，held-out情境不可进入记忆，测试标签更不能作为构建记忆的答案。 教学例：用固定(1,0)向量让公开/私密两个案例相近，可以测试局部规则不被门控，却不能证明真实模型理解隐私；把held-out组传给refresh会直接报错。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-371f9a94444e2180">本地LiSA CPU核已运行，为什么不能直接报告安全macro-F1或说论文完整复现？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Alisa">LiSA: Lifelong Safety Adaptation via Conservative Policy Induction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Google Cloud AI Research / Seoul National University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>真实LLM策略归纳、语义embedding和最终固定guardrail尚未接入，合成输入只验证Beta门控、聚类与状态合同。适应只能收报告失败，held-out情境不可进入记忆，测试标签更不能作为构建记忆的答案。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：用固定(1,0)向量让公开/私密两个案例相近，可以测试局部规则不被门控，却不能证明真实模型理解隐私；把held-out组传给refresh会直接报错。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、本地结果与负控、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.14454">原论文</a> · <a href="../../../../agent-research/2605.14454-lisa/">实现解读</a> · <a href="#qa-371f9a94444e2180">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memento-skills" data-paper-title="Memento-Skills" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Memento-Skills Agent Memento Team 2026-03-19 从执行日志反思出结构化技能说明，按任务检索并写回版本化技能，而不是原样堆叠轨迹。 保真度：核心机制复现。保真度：核心机制复现。本页不把确定性 mini-suite 冒充原论文完整 benchmark。本地只验证论文特有目标、状态更新和公平预算；没有复刻原论文的大模型、多卡 RL、私有环境、真实网页或完整 benchmark，因而只报告机制验证，不声称数值复现原表。PlanBench mini-suite、120 episodes、seed 42：joint success 0.0500，average cost 0.2800；方法特有操作有非零 telemetry。  技能设计 Agent 记忆与技能：让经验可取回、可失效 多次做相似任务时，Memento-Skills 希望避免哪些重复劳动？ Agent 的一次执行会留下有效步骤、错误和环境条件，但原样保存日志会让下一次仍需从头理解。Memento-Skills 研究把这些经历整理成可检索、可更新的技能，使后续任务能复用经验。技能是否有用取决于适用条件和真实执行，保存得多或版本增加都不是能力提升证据。 教学例：第一次整理账单发现日期格式问题，下一次可调用带格式检查的技能，而不是重读整次失败日志再猜处理顺序。 2026-10-27">

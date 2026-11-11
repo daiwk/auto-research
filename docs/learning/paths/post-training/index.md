@@ -15,17 +15,17 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="policy-optimization/">策略优化：谁在采样，谁在被更新</a></h2>
 <p>在线采样、旧策略概率与当前策略更新之间，哪些量必须分开？</p>
-<p class="ar-learning-topic-meta">224 个问题 · 56 篇论文</p>
+<p class="ar-learning-topic-meta">228 个问题 · 57 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="reward-and-credit/">奖励与信用：正确结果该奖励哪些步骤</a></h2>
 <p>一个最终分数，怎样转成不会奖励错误步骤的训练信号？</p>
-<p class="ar-learning-topic-meta">156 个问题 · 39 篇论文</p>
+<p class="ar-learning-topic-meta">164 个问题 · 41 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="student-trajectory-distillation/">轨迹蒸馏：学生、提案与前缀分布</a></h2>
 <p>学生总在自己的错误前缀上继续生成，为什么只模仿教师完整答案可能教不到那里？</p>
-<p class="ar-learning-topic-meta">176 个问题 · 44 篇论文</p>
+<p class="ar-learning-topic-meta">180 个问题 · 45 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="teacher-and-context/">教师与纠错：额外信息何时能帮到学生</a></h2>

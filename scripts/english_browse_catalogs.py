@@ -71,6 +71,31 @@ def _label_map(raw: str) -> dict[str, str]:
 
 
 _LABELS = _label_map("""
+University of Alberta / Amii（研究在Google DeepMind期间完成） = University of Alberta / Amii (work conducted at Google DeepMind)
+真实任务与可靠性评测 = Real-world tasks and reliability evaluation
+历史约束与研究交付 = Historical constraints and research deliverables
+工具调用与执行 = Tool use and execution
+轨迹到工作流与可审计条件 = From trajectories to workflows and auditable conditions
+形式验证与规格保真 = Formal verification and specification fidelity
+科研复现与证据审计 = Research reproduction and evidence auditing
+自进化与技能优化 = Self-improvement and skill optimization
+证伪与回归保护 = Falsification and regression protection
+程序化技能与补丁事务 = Programmatic skills and patch transactions
+证据链接与记忆可靠性 = Evidence links and memory reliability
+安全策略记忆 = Safety-policy memory
+扩散语言模型解码 = Diffusion language model decoding
+训练与数值系统 = Training and numerical systems
+低精度训练与随机舍入 = Low-precision training and stochastic rounding
+稀疏索引与共享候选库 = Sparse indexing and shared candidate banks
+JEPA 表征学习 = JEPA representation learning
+扫描路径与跨传感器邻域对齐 = Scan paths and cross-sensor neighborhood alignment
+多模态推理与对齐 = Multimodal reasoning and alignment
+扩散解码与幻觉控制 = Diffusion decoding and hallucination control
+信息论奖励与增量记忆 = Information-theoretic rewards and incremental memory
+置信margin与token信用 = Confidence margins and token credit
+策略优化与稳定性 = Policy optimization and stability
+离策略校正与excursion TD = Off-policy correction and excursion TD
+多教师参数增量与梯度路由 = Multi-teacher parameter deltas and gradient routing
 曝光感知与序列评估 = Impression-aware slate evaluation
 高分未曝光候选回收 = Recycling high-scored unshown candidates
 卷积位置偏置 = Convolutional positional bias
