@@ -12,7 +12,7 @@ Full experiments with evidenced prohibitive cost are not reproduced and are revi
 may close as outside this window's focus after title/abstract screening. This watermark therefore means selection screening and protected
 original-source checks are complete, **not that every method has been verified**, let alone implemented.
 Nonselection does not reject an algorithm's or benchmark's originality or relabel an unread method as costly.
-Google/Meta and possible real production evidence still require originals. The [selection artifact](research-audits/nov09-review-closure/p2-selection-screen.json)
+Google/Meta and possible real production evidence still require originals. The [selection artifact](../research-audits/nov09-review-closure/p2-selection-screen.json)
 retains versions, abstract hashes, protection, and contextual clarification separately from the global method/cost ledger; it creates no automatic implementation tasks.
 
 This closeout reuses real four-track/two-mode captures, repairs the capped query, supplements November 9's end-of-day submissions,
