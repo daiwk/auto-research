@@ -61,9 +61,17 @@ Meta / NUS 的 [2611.13539：Exploiting Feature-invariant Scaling Laws for Effic
 
 ## 可复核入口
 
+普通 clone 可以核对已提交的审查记录和冻结运行证据；这不等于重新核查原始来源字节：
+
+```bash
+PYTHONPATH=src python scripts/audit_paper_coverage.py --strict
+PYTHONPATH=src python -m pytest tests/test_nov11_evidence.py
+```
+
+维护者的原始来源重查还需要本轮未提交的 `.cache/nov11-components/ci` 以及 `priority`、`post-training`、`agent`、`foundation` 原文捕获。新 clone 默认不含这些输入，不能直接执行下面的命令：
+
 ```bash
 PYTHONPATH=src python scripts/record_nov11_components.py --check
-PYTHONPATH=src python scripts/audit_paper_coverage.py --strict
 ```
 
 记录脚本在验证原始运行、冻结源码、叶子指标和 A100 回执一致后才追加账本；重复执行默认拒绝覆盖，`--check` 只读核验。完整实验不重试、不进入自动训练/实现/Evolve 队列；仅用户看过成本后明确重开。

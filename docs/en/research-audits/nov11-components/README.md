@@ -1,6 +1,6 @@
 # November 11, 2026: Priority Papers, Low-Cost Components, and Bilingual Learning Material
 
-<!-- source-sha256: 0158c3f1b705194fe5790a115ba63091d2de07d33f8790178d5dc1c0f138fefd -->
+<!-- source-sha256: b8cb8774780288f7e7db3e711ec568b19c96e8a057b8bf5bdbd616565c9e4571 -->
 
 [简体中文](../../../research-audits/nov11-components/README.md)
 
@@ -63,9 +63,17 @@ Limited leads without completed method review remain: Bootstrapped OPD (2611.136
 
 ## Rechecking the Record
 
+A normal clone can check the committed review records and frozen execution evidence. This does not revalidate the original source bytes:
+
+```bash
+PYTHONPATH=src python scripts/audit_paper_coverage.py --strict
+PYTHONPATH=src python -m pytest tests/test_nov11_evidence.py
+```
+
+The maintainer's original-source recheck additionally requires this batch's uncommitted `.cache/nov11-components/ci` captures and the `priority`, `post-training`, `agent`, and `foundation` source captures. A fresh clone does not include these inputs and cannot directly run:
+
 ```bash
 PYTHONPATH=src python scripts/record_nov11_components.py --check
-PYTHONPATH=src python scripts/audit_paper_coverage.py --strict
 ```
 
 The recording script appends only after matching raw execution, frozen source, leaf metrics, and A100 receipts. It refuses to overwrite an accepted batch; `--check` is read-only. Expensive full experiments are not retried or queued for automatic training, implementation, or Evolve. Reopening requires an explicit user request after reviewing the cost.
