@@ -10763,7 +10763,7 @@
       {
         "kind": "label_access_requires_role_review",
         "function": "_window_selection_records",
-        "line": 175,
+        "line": 176,
         "qualified_name": "_window_selection_records",
         "expression": "policy.get('authorization', {}).get('answer')",
         "fingerprint": "b426d20e11dcd7345085728d538e763b14855254476a2abb25216c051acc84ff"

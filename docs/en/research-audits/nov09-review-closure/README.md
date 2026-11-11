@@ -1,6 +1,6 @@
 # October 16–November 9 selection-review closeout
 
-<!-- source-sha256: dc21e7a2c8ba7864829cf4b8ad7d0210976894f4b62642d192e1bd6241b09ea2 -->
+<!-- source-sha256: cf0de3521b7e699bc773a449bd413bdb7d7cfa84d4a7d36c36d113941a496871 -->
 
 Under the [P2 selection policy](../../../research-audits/nov09-review-closure/p2-selection-policy.json) explicitly approved on November 11,
 this window is closed and the official [review watermark](../../../paper-discovery-watermark.json) advances to **November 9, 2026**.
@@ -159,5 +159,8 @@ in the source reviews and [non-blocking archive](../../../research-audits/nov09-
 P2 selection does not enter the global substantive rejection ledger, establish algorithm acceptance or high cost,
 provide GPU/capability evidence, or create implementation/Evolve assignments. An unchanged revision can be recognized as selection-reviewed;
 new versions, changed metadata, independent priority/production evidence, or a newly requested focus can reopen it.
+Automatic production-signal reopening requires a traceable source URL, a production-A/B/full-traffic/customer-deployment type,
+and a specific evidence excerpt; a query match or generic deployment wording is insufficient.
+Reopening requests an original-source check, not confirmation of a production effect or a passed live-evidence gate.
 The next scan overlaps from **November 8** through its new cutoff, keeping first releases, older backfills, and revisions separate.
 No web-wide no-omissions claim is made.

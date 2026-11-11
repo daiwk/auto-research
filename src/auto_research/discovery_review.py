@@ -158,10 +158,15 @@ def priority_organizations(candidate: dict) -> tuple[str, ...]:
     for field in ("organization", "first_author_affiliation"):
         organization(candidate.get(field))
     for source in candidate.get("source_provenance", ()):
+        if not isinstance(source, dict):
+            continue
         organization(source.get("organization"))
         for field in ("source_url", "url", "repository_url"):
-            parsed = urlparse(str(source.get(field, "")))
-            host = (parsed.hostname or "").lower()
+            try:
+                parsed = urlparse(str(source.get(field, "")))
+                host = (parsed.hostname or "").lower()
+            except ValueError:
+                continue
             if host in {"research.google", "deepmind.google", "research.google.com"}:
                 found.add("Google")
             if host in {"ai.meta.com", "ai.facebook.com", "research.facebook.com", "research.meta.com"}:
@@ -177,6 +182,37 @@ def priority_organizations(candidate: dict) -> tuple[str, ...]:
 
 def priority_review_signal(candidate: dict) -> bool:
     return bool(candidate.get("priority_review_required") or priority_organizations(candidate))
+
+
+def production_evidence_sources(candidate: dict) -> tuple[dict, ...]:
+    """Return traceable production leads, not confirmed deployment or A/B results.
+
+    A query name or an unstructured deployment word is not evidence. A caller
+    must preserve the source URL, explicitly identify the kind of lead, and
+    retain its source excerpt for the independent full-text review.
+    """
+    matches = []
+    for source in candidate.get("source_provenance", ()):
+        if not isinstance(source, dict):
+            continue
+        evidence = source.get("production_evidence")
+        if not isinstance(evidence, dict):
+            continue
+        kind, excerpt = evidence.get("kind"), evidence.get("excerpt")
+        url = source.get("source_url")
+        if (not isinstance(kind, str)
+                or kind not in {"production_ab", "full_traffic", "customer_deployment"}
+                or not isinstance(excerpt, str) or not excerpt.strip()
+                or not isinstance(url, str)):
+            continue
+        try:
+            parsed = urlparse(url)
+            valid_url = parsed.scheme in {"http", "https"} and bool(parsed.hostname)
+        except ValueError:
+            valid_url = False
+        if valid_url:
+            matches.append({"source_url": url, "kind": kind, "excerpt": excerpt})
+    return tuple(matches)
 
 
 INDUSTRIAL_EVIDENCE_ANCHORS = (
@@ -198,6 +234,7 @@ def classify_candidate(track: str, candidate: dict) -> dict:
     anchors = tuple(anchor for anchor in TRACK_ANCHORS[track] if anchor in text)
     industrial_evidence = tuple(anchor for anchor in INDUSTRIAL_EVIDENCE_ANCHORS if anchor in text)
     priority = priority_review_signal(candidate)
+    production = bool(production_evidence_sources(candidate))
     if candidate.get("revision_review_required"):
         bucket = "revision-fulltext-review"
         reason = "known paper revision requires independent full-text review; not a new v1"
@@ -211,15 +248,24 @@ def classify_candidate(track: str, candidate: dict) -> dict:
         bucket = "priority-fulltext-review" if priority else "historical-fulltext-review"
         reason = "historical identity/date triage is not a completed method or cost review"
     elif candidate.get("repository_status") == "selection-reviewed":
-        bucket = "priority-fulltext-review" if priority else "selection-reviewed-method-unverified"
-        reason = ("new priority evidence reopens window-only P2 selection" if priority else
-                  "window-only P2 selection complete; original method remains unverified")
+        if priority:
+            bucket = "priority-fulltext-review"
+            reason = "new priority evidence reopens window-only P2 selection"
+        elif production:
+            bucket = "production-fulltext-review"
+            reason = "traceable production lead reopens P2 selection; deployment/A/B remains unverified"
+        else:
+            bucket = "selection-reviewed-method-unverified"
+            reason = "window-only P2 selection complete; original method remains unverified"
     elif candidate.get("repository_status") != "new":
         bucket = "already-closed"
         reason = f"repository status is {candidate.get('repository_status')}"
     elif priority:
         bucket = "priority-fulltext-review"
         reason = "Google/Meta reverse-search hit; abstract is not used as the evidence gate"
+    elif production:
+        bucket = "production-fulltext-review"
+        reason = "traceable production lead requires independent full-text review; not confirmed A/B"
     elif track == "recommendation" and anchors and industrial_evidence:
         bucket = "industrial-fulltext-review"
         reason = "recommendation topic plus possible production evidence; full text must verify quantified A/B"
@@ -239,7 +285,7 @@ def classify_candidate(track: str, candidate: dict) -> dict:
         "matched_track_anchors": list(anchors),
         "matched_industrial_evidence_anchors": list(industrial_evidence),
         "full_text_review_required": bucket in {
-            "priority-fulltext-review", "industrial-fulltext-review", "manual-review",
+            "priority-fulltext-review", "industrial-fulltext-review", "production-fulltext-review", "manual-review",
             "revision-fulltext-review", "historical-fulltext-review",
         },
     }
@@ -264,6 +310,8 @@ def unresolved_candidates(artifacts: Iterable[dict]) -> list[dict]:
         if row.get("full_text_review_required") and (
             row.get("repository_status") == "new" or row.get("revision_review_required")
             or row.get("historical_review_required")
-            or (row.get("repository_status") == "selection-reviewed" and priority_review_signal(row))
+            or (row.get("repository_status") == "selection-reviewed" and (
+                priority_review_signal(row) or production_evidence_sources(row)
+            ))
         )
     ]

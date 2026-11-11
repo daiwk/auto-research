@@ -19,6 +19,7 @@ from .models import Paper
 from .papers import ArxivClient, canonical_arxiv_id, paper_recency, paper_revision
 from .discovery_review import (
     disposition_rank, disposition_status, metadata_only_disposition, priority_organizations,
+    production_evidence_sources,
     TERMINAL_EXCEPTION_RESOLUTIONS,
 )
 
@@ -339,13 +340,15 @@ def triage_candidates(
             and (baseline_revision is None or revision is None or revision >= baseline_revision)
         )
         replacement = any(source.get("entry_kind") == "replacement"
-                          for source in discovered.source_provenance)
+                          for source in discovered.source_provenance if isinstance(source, dict))
         baseline_missing = status != "new" and not baseline and replacement
         revision_review = status != "new" and (newer or changed_metadata or baseline_missing)
         priority_matches = sorted(PRIORITY_REVIEW_QUERY_NAMES.intersection(discovered.query_names))
         priority_sources = list(priority_organizations(item))
+        production_sources = list(production_evidence_sources(item))
         selection_only = status == "selection-reviewed"
         selection_priority = selection_only and bool(priority_matches or priority_sources)
+        selection_production = selection_only and bool(production_sources)
         selection_missing = selection_only and (
             baseline.get("selection_only") is not True or not baseline.get("metadata_sha256"))
         if selection_only:
@@ -354,7 +357,8 @@ def triage_candidates(
         # of this observed-version baseline. A later real cost closure must not
         # be reopened just because the older metadata baseline is unchanged.
         historical_review = status == "new" and metadata_only_disposition(baseline)
-        review_required = status == "new" or revision_review or historical_review or selection_priority
+        review_required = (status == "new" or revision_review or historical_review
+                           or selection_priority or selection_production)
         implementation_pending = status in {"implementation-pending", "accepted-unimplemented"}
         item.update(
             {
@@ -364,6 +368,7 @@ def triage_candidates(
                 **({"selection_reopen_reason": (
                     "newer-version" if newer else "metadata-changed" if changed_metadata
                     else "new-priority-evidence-after-selection" if selection_priority
+                    else "new-production-evidence-after-selection" if selection_production
                     else "selection-baseline-unavailable" if selection_missing else None)}
                    if selection_only else {}),
                 **({"method_review_completed": False, "method_verified": False,
@@ -375,6 +380,8 @@ def triage_candidates(
                 "priority_review_required": (review_required or implementation_pending) and bool(priority_matches or priority_sources),
                 "priority_query_matches": priority_matches,
                 "priority_source_matches": priority_sources,
+                "production_review_required": (review_required or implementation_pending) and bool(production_sources),
+                "production_evidence_source_matches": production_sources,
                 "revision_review_required": revision_review,
                 "historical_review_required": historical_review,
                 "accepted_unimplemented": implementation_pending,
@@ -459,7 +466,7 @@ def render_discovery_summary(payload: dict) -> str:
         "‘新候选’只表示仓库尚未审计，并不等于当天新发表；机构词命中也不等于作者单位。",
         f"已知论文待复核的版本更新 {len(revisions)} 篇，单独计数，不计入新 v1。",
         f"P2选题筛查仅在原窗口/版本/元数据上有效；本次重开 {counts.get('selection_reopened', 0)} 篇，"
-        "新版本、摘要变化或新增Google/Meta证据不会被选题终态隐藏。",
+        "新版本、摘要变化、新增Google/Meta证据或可溯源结构化生产线索不会被选题终态隐藏。",
         f"另有 {len(unresolved_dates)} 篇公告条目的原始日期待解析，不计为当天新发表或历史补漏。",
         f"已接受但未实现的机会项 {len(pending)} 篇；不是自动实现队列，不阻塞已完成的方法审查。",
         f"暂缓但未接受 {len(deferred)} 篇；‘下一批/待实现’等文字不构成实现承诺。",
