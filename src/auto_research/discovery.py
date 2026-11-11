@@ -137,6 +137,107 @@ PRIORITY_REVIEW_QUERY_NAMES: frozenset[str] = frozenset(
     {"priority-org-google", "priority-org-google-deepmind", "priority-org-meta"}
 )
 
+SELECTION_REVIEW_SEMANTICS = "selection-screening-with-protected-primary-review"
+
+
+def _window_selection_records(docs: Path) -> dict[str, dict]:
+    """Load explicitly authorized current-window selections, never ledger rejections.
+
+    Missing/invalid provenance fails open to discovery (no suppression). These rows
+    carry an exact version/fingerprint and must reopen when either changes or a
+    new institutional priority source/query is observed.
+    """
+    try:
+        state = json.loads((docs / "paper-discovery-watermark.json").read_text())
+        if (state.get("review_semantics") != SELECTION_REVIEW_SEMANTICS
+                or state.get("selection_review_complete") is not True
+                or state.get("method_review_complete") is not False):
+            return {}
+
+        def local(reference: str) -> Path:
+            result = (docs / reference).resolve()
+            if not result.is_relative_to(docs.resolve()):
+                raise ValueError("selection provenance must stay inside the docs directory")
+            return result
+
+        register = json.loads(local(state["candidate_register"]).read_text())
+        policy_path = local(state["selection_policy"])
+        policy_bytes = policy_path.read_bytes()
+        policy = json.loads(policy_bytes)
+        selection_path = local(str(Path(state["candidate_register"]).parent
+                                   / "p2-selection-screen.json"))
+        selection = json.loads(selection_path.read_text())
+        if (register.get("review_semantics") != SELECTION_REVIEW_SEMANTICS
+                or register.get("requested_window") != state.get("window")
+                or register.get("selection_review_complete") is not True
+                or register.get("method_review_complete") is not False
+                or register.get("candidate_review_complete") is not True
+                or policy.get("authorization", {}).get("answer") != "允许 P2 选题级结案"
+                or policy.get("authorization", {}).get("p2_selection_closure_allowed") is not True
+                or policy.get("terminal_selection_decision") != "not_selected_this_window_p2"
+                or policy.get("review_scope") != "title-abstract-selection"
+                or policy.get("window") != state.get("window")
+                or selection.get("window") != state.get("window")
+                or state.get("review_watermark") != state.get("window", {}).get("end")
+                or selection.get("policy_sha256") != hashlib.sha256(policy_bytes).hexdigest()
+                or selection.get("protected_records") or selection.get("protected_ids")):
+            return {}
+        rows = {r["id"]: r for r in selection["records"]}
+        selected = [r for r in register["papers"] if r.get("status") == "not_selected_p2"]
+        if (len(rows) != len(selection["records"])
+                or {r["id"] for r in selected} != set(rows)):
+            return {}
+        result = {}
+        for paper in selected:
+            identity = paper["id"]
+            row = rows[identity]
+            flags = ("method_review_completed", "fulltext_review_completed")
+            nonwaivable = {
+                "source_priority_flag", "source_priority_query", "source_priority_organization",
+                "official_source_domain", "metadata_conflict", "frozen_industrial_route",
+                "policy_protected_identity",
+            }
+            if (paper.get("review_scope") != "title-abstract-selection"
+                    or row.get("scope") != "title-abstract-selection"
+                    or paper.get("priority") != "P2" or row.get("priority") != "P2"
+                    or paper.get("selection_review_done") is not True
+                    or row.get("selection_review_done") is not True
+                    or any(paper.get(k) is not False or row.get(k) is not False for k in flags)
+                    or paper.get("originality_not_rejected") is not True
+                    or row.get("originality_not_rejected") is not True
+                    or paper.get("protected_priority_signal") is not False
+                    or paper.get("protected_production_signal") is not False
+                    or row.get("method_verified") is not False
+                    or row.get("high_cost") is not False or row.get("implementation") is not False
+                    or row.get("automatic_retry") is not False
+                    or paper.get("automatic_implementation_queue") is not False
+                    or row.get("automatic_implementation_queue") is not False
+                    or paper.get("reviews") or paper.get("cost_assessment")
+                    or paper.get("implementation_status") in {"implemented", "component_only"}
+                    or row.get("decision") != "not_selected_this_window_p2"
+                    or any(paper.get(k) != row.get(k) for k in (
+                        "revision", "metadata_sha256", "title", "published"))
+                    or not isinstance(row.get("revision"), int) or row["revision"] < 1
+                    or len(row.get("metadata_sha256", "")) != 64
+                    or nonwaivable.intersection(row.get("positive_signal_matches", {}))
+                    or identity in policy.get("always_protected_identities", {})):
+                return {}
+            result[canonical_arxiv_id(identity)] = {
+                "arxiv_id": identity, "revision": row["revision"],
+                "metadata_sha256": row["metadata_sha256"],
+                "repository_status": "selection-reviewed", "selection_only": True,
+                "catalogued": False,
+                "selection_review_done": True, "method_review_completed": False,
+                "fulltext_review_completed": False, "originality_not_rejected": True,
+                "implementation_status": "not_implemented_by_selection",
+                "automatic_implementation_queue": False,
+                "review_scope": "title-abstract-selection",
+                "selection_artifact": str(selection_path.relative_to(docs.resolve())),
+            }
+        return result
+    except (OSError, ValueError, KeyError, TypeError, AttributeError):
+        return {}
+
 
 def repository_paper_records(
     manifest_path: Path,
@@ -203,6 +304,9 @@ def repository_paper_records(
                     "automatic_implementation_queue": candidate.get("automatic_implementation_queue") is True,
                 })
                 ranks[identity] = rank
+    for identity, selection in _window_selection_records(manifest_path.parent).items():
+        if "repository_status" not in records.get(identity, {}):
+            records.setdefault(identity, {}).update(selection)
     return {identity: record for identity, record in records.items() if "repository_status" in record}
 
 
@@ -240,15 +344,34 @@ def triage_candidates(
         revision_review = status != "new" and (newer or changed_metadata or baseline_missing)
         priority_matches = sorted(PRIORITY_REVIEW_QUERY_NAMES.intersection(discovered.query_names))
         priority_sources = list(priority_organizations(item))
+        selection_only = status == "selection-reviewed"
+        selection_priority = selection_only and bool(priority_matches or priority_sources)
+        selection_missing = selection_only and (
+            baseline.get("selection_only") is not True or not baseline.get("metadata_sha256"))
+        if selection_only:
+            revision_review = revision_review or selection_missing
         # Statuses are derived from substantive ledger decisions, independently
         # of this observed-version baseline. A later real cost closure must not
         # be reopened just because the older metadata baseline is unchanged.
         historical_review = status == "new" and metadata_only_disposition(baseline)
-        review_required = status == "new" or revision_review or historical_review
+        review_required = status == "new" or revision_review or historical_review or selection_priority
         implementation_pending = status in {"implementation-pending", "accepted-unimplemented"}
         item.update(
             {
                 "repository_status": status,
+                "selection_only": selection_only,
+                "selection_reopened": selection_only and review_required,
+                **({"selection_reopen_reason": (
+                    "newer-version" if newer else "metadata-changed" if changed_metadata
+                    else "new-priority-evidence-after-selection" if selection_priority
+                    else "selection-baseline-unavailable" if selection_missing else None)}
+                   if selection_only else {}),
+                **({"method_review_completed": False, "method_verified": False,
+                    "fulltext_review_completed": False,
+                    "selection_review_done": not review_required,
+                    "originality_not_rejected": True,
+                    "evidence_status": "selection-reviewed-method-unverified"}
+                   if selection_only else {}),
                 "priority_review_required": (review_required or implementation_pending) and bool(priority_matches or priority_sources),
                 "priority_query_matches": priority_matches,
                 "priority_source_matches": priority_sources,
@@ -260,6 +383,7 @@ def triage_candidates(
                 "review_required": review_required,
                 "revision_review_reason": (
                     "newer-version" if newer else "metadata-changed" if changed_metadata
+                    else "selection-baseline-unavailable" if selection_missing
                     else "replacement-without-reviewed-baseline" if baseline_missing else None
                 ),
                 "reviewed_revision": baseline_revision,
@@ -286,6 +410,12 @@ def build_discovery_payload(
     )
     counts["revision_review"] = sum(bool(candidate.get("revision_review_required"))
                                     for candidate in candidates)
+    selected_count = sum(candidate["repository_status"] == "selection-reviewed"
+                         for candidate in candidates)
+    if selected_count:
+        counts["selection-reviewed"] = selected_count
+        counts["selection_reopened"] = sum(bool(candidate.get("selection_reopened"))
+                                           for candidate in candidates)
     return {
         "schema_version": 3,
         "track": track,
@@ -317,9 +447,10 @@ def render_discovery_summary(payload: dict) -> str:
         "",
         f"扫描窗口：{payload['window']['start']} 至 {payload['window']['end']}",
         "",
-        "| 未审候选 | 已收录（非复现完成） | 审查终态 | 已接受未实现 | 暂缓未接受 | Google / Meta 重点复核 |",
-        "| ---: | ---: | ---: | ---: | ---: | ---: |",
+        "| 未审候选 | 已收录（非复现完成） | 方法/成本审查终态 | P2选题已筛（方法未验） | 已接受未实现 | 暂缓未接受 | Google / Meta 重点复核 |",
+        "| ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
         f"| {counts['new']} | {counts.get('catalogued', 0)} | {counts['reviewed']} | "
+        f"{counts.get('selection-reviewed', 0)} | "
         f"{counts.get('accepted-unimplemented', 0)} | {counts.get('review-deferred', 0)} | "
         f"{counts['google_meta_priority_review']} |",
         "",
@@ -327,6 +458,8 @@ def render_discovery_summary(payload: dict) -> str:
         f"晚索引或历史未审候选 {len(backlog)} 篇。"
         "‘新候选’只表示仓库尚未审计，并不等于当天新发表；机构词命中也不等于作者单位。",
         f"已知论文待复核的版本更新 {len(revisions)} 篇，单独计数，不计入新 v1。",
+        f"P2选题筛查仅在原窗口/版本/元数据上有效；本次重开 {counts.get('selection_reopened', 0)} 篇，"
+        "新版本、摘要变化或新增Google/Meta证据不会被选题终态隐藏。",
         f"另有 {len(unresolved_dates)} 篇公告条目的原始日期待解析，不计为当天新发表或历史补漏。",
         f"已接受但未实现的机会项 {len(pending)} 篇；不是自动实现队列，不阻塞已完成的方法审查。",
         f"暂缓但未接受 {len(deferred)} 篇；‘下一批/待实现’等文字不构成实现承诺。",
@@ -452,6 +585,7 @@ def render_discovery_summary(payload: dict) -> str:
             "",
             f"已收录 {counts.get('catalogued', 0)} 篇，审查终态 {counts['reviewed']} 篇；"
             "收录不表示完整复现，组件、接口和完整实验边界须查看 manifest 与独立详情。",
+            f"另有P2选题已筛 {counts.get('selection-reviewed', 0)} 篇，方法未核验，不计作已复现或实质拒绝。",
             "",
         ]
     )
@@ -630,7 +764,9 @@ def paper_metadata_sha256(paper: Paper) -> str:
 
 
 def repository_paper_versions(path: Path) -> dict[str, dict]:
-    if not path.is_file():
-        return {}
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    return {canonical_arxiv_id(row["arxiv_id"]): row for row in payload.get("papers", [])}
+    payload = json.loads(path.read_text(encoding="utf-8")) if path.is_file() else {}
+    versions = {canonical_arxiv_id(row["arxiv_id"]): row for row in payload.get("papers", [])}
+    for identity, selection in _window_selection_records(path.parent).items():
+        if identity not in versions or metadata_only_disposition(versions[identity]):
+            versions[identity] = selection
+    return versions

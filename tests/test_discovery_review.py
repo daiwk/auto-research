@@ -87,3 +87,17 @@ def test_artifact_records_policy_and_counts():
     assert output["schema_version"] == 3
     assert output["classification_policy"] == "review-delivery-separated-v2"
     assert output["classification_counts"] == {"p2-deferred-review": 1, "query-collision": 1}
+
+
+def test_selection_only_status_is_not_substantive_review_and_priority_reopens_it():
+    from auto_research.discovery_review import classify_candidate, unresolved_candidates
+
+    candidate = {"arxiv_id": "2610.30000", "title": "A new model", "abstract": "A new public benchmark.",
+                 "repository_status": "selection-reviewed", "priority_review_required": False}
+    plain = classify_candidate("foundation-model", candidate)
+    assert plain["review_bucket"] == "selection-reviewed-method-unverified"
+    assert not plain["full_text_review_required"]
+    priority = classify_candidate("foundation-model", candidate | {"priority_review_required": True})
+    assert priority["review_bucket"] == "priority-fulltext-review"
+    assert priority["full_text_review_required"]
+    assert unresolved_candidates([{"candidates": [priority]}]) == [priority]

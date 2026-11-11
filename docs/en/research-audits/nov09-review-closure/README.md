@@ -1,11 +1,14 @@
-# October 16–November 9 review reconciliation (in progress)
+# October 16–November 9 selection-review closeout
 
-<!-- source-sha256: 68b6aa69c276a42b3106bcb8c614d7270f272460592299ad301888a00da058b2 -->
+<!-- source-sha256: dc21e7a2c8ba7864829cf4b8ad7d0210976894f4b62642d192e1bd6241b09ea2 -->
 
-This batch reconciles discovery coverage and completes selected priority source reviews.
-**Individual decisions are not yet complete for the entire window.** The official
-[review watermark](../../../paper-discovery-watermark.json) remains **October 15, 2026**.
-November 9 is the requested end date and the upper bound of this discovery window, not a completed watermark.
+Under the [P2 selection policy](../../../research-audits/nov09-review-closure/p2-selection-policy.json) explicitly approved on November 11,
+this window is closed and the official [review watermark](../../../paper-discovery-watermark.json) advances to **November 9, 2026**.
+It means **title/abstract selection screening plus original-source review of protected candidates** is complete,
+not that every method has been verified, implemented, or run. Google/Meta, possible real production A/B, and conflicting metadata
+cannot receive an automatic P2 waiver. The following sections retain intermediate snapshots; the
+[full register](../../../research-audits/nov09-review-closure/paper-register.json) and
+[selection artifact](../../../research-audits/nov09-review-closure/p2-selection-screen.json) contain the final partition.
 No training, GPU probes, or new implementations were performed.
 
 ## Discovery and priority evidence completed
@@ -120,22 +123,41 @@ out-of-scope subjects, unselected application reports, or an unmet industrial li
   and [24 returned to pending](../../../research-audits/nov09-review-closure/batch-terminal-corrections-b-reviews.json).
   A specialist application or negative result alone does not establish the absence of an independent algorithm.
 
-Official directories retain bounded coverage claims. A changed DeepMind homepage count has not been mapped to two specific paper identities;
-current access limitations for Google's year-filtered page and Meta's entry point are recorded in the priority-source receipt.
-None establishes whole-site exhaustion.
+Official directories retain bounded coverage claims. The nine details on Google's page 31 were subsequently checked:
+seven historical papers, one out-of-scope item, and one published on November 10 Shanghai time.
+The two exact-identity differences between DeepMind's homepage and the older list are now known or historical papers.
+Intermediate pages not recrawled are not labeled access failures, and no complete directory recrawl is claimed.
+Two genuine Meta directory limitations and individual identity/document exceptions remain in the non-blocking archive.
 
-## What remains open
+## Final closeout after P2 authorization
 
-See `counts` and `pending_in_window_counts_by_title_abstract_route` in the [deduplicated inventory and receipts](../../../research-audits/nov09-review-closure/review-inventory.json).
-The inventory preserves pending arXiv IDs, versions, tracks, and Shanghai dates, and counts the frozen window, late-index overlap, and end-of-day supplement separately.
-**4,359** in-window identities remain undecided. Both the identified late-index and end-of-day pending queues are now **zero**.
-An empty `pending_revisions` list closes the previously identified revisions, not revisions indexed later.
-Manual, industrial, priority, low-signal, and broad-query hits in this inventory are **pending**, not automatic rejections.
-Late-index overlap and revisions of known papers are tracked separately. Source exceptions require real retrieval attempts
-and do not replace unread candidates. Directory matches are not proof of authorship.
+The previous **4,359** pending identities are frozen in the [input list](../../../research-audits/nov09-review-closure/p2-selection-input.json), not deleted.
+Of these, **4,293** received P2 selection-only dispositions and **66** received necessary original-source reviews.
+The cumulative total is **613** source-review dispositions: **611** necessary original-text checks and
+**two** withdrawal-notice/abstract-scope dispositions, including **247** full experiments not reproduced due to cost.
+These counts include the historical snapshots above; they are neither newly published papers in this final pass nor 613 complete-paper readings.
+Each selection record preserves its observed version, capture and abstract hashes, topic routing, and selection reason.
+The rules are automatically replayable; **they do not claim individual human full-text reading**.
+A new algorithm or public benchmark may remain outside this window's focus without receiving a negative originality verdict.
 
-Only completed dispositions enter the ledger. Unread candidates are not marked deferred, too costly, or reviewed.
-Many remaining records explicitly propose new algorithms or benchmarks; they cannot be closed under the rule for reports without new methods.
-No authorization has been received to close every non-priority P2 merely as unselected, so that broader policy has not been applied.
-The watermark can advance only after the remaining dispositions and exception reconciliation pass the existing audit.
-**This increment has not advanced the watermark to November 9.**
+Possible affiliations, production evidence, and real-user deployment are protected first. Model brands, simulation,
+hardware execution, and future deployment motivation require individual contextual clarification before a text signal can be cleared.
+The [priority](../../../research-audits/nov09-review-closure/p2-priority-primary-reviews.json),
+[industrial](../../../research-audits/nov09-review-closure/p2-industrial-primary-reviews.json),
+[platform/workflow](../../../research-audits/nov09-review-closure/p2-additional-production-reviews.json),
+[residual industrial](../../../research-audits/nov09-review-closure/p2-residual-industrial-reviews.json), and
+[residual priority](../../../research-audits/nov09-review-closure/p2-residual-priority-reviews.json) originals record methods,
+live evidence, historical republication, and cost. Google VeriCUA, Meta AutoRefine, and Meta Yielding Fairness have verified author blocks.
+1688 SPAR's real merchant A/B and Alexa's production path and multi-GPU training configuration are recorded separately.
+
+In-window, late-index, end-of-day, and identified revision pending queues are all **zero** in the
+[inventory](../../../research-audits/nov09-review-closure/review-inventory.json).
+Eight normalized retrieval receipts preserve actual containing bounds, raw caps, and real monthly replacements.
+Exhausted transport is not exhausted method verification. Official-source scope and current access/pagination limits are retained
+in the source reviews and [non-blocking archive](../../../research-audits/nov09-review-closure/exception-archive.json) referenced by the unified state.
+
+P2 selection does not enter the global substantive rejection ledger, establish algorithm acceptance or high cost,
+provide GPU/capability evidence, or create implementation/Evolve assignments. An unchanged revision can be recognized as selection-reviewed;
+new versions, changed metadata, independent priority/production evidence, or a newly requested focus can reopen it.
+The next scan overlaps from **November 8** through its new cutoff, keeping first releases, older backfills, and revisions separate.
+No web-wide no-omissions claim is made.

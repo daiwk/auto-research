@@ -40,6 +40,9 @@ PRIMARY_FILES = (
     "batch-terminal-production-reviews.json", "batch-terminal-production-b-review.json",
     "batch-terminal-insurance-review.json", "batch-terminal-late-secondary-reviews.json",
     "batch-terminal-overlap-primary-reviews.json", "batch-terminal-tail-primary-reviews.json",
+    "p2-priority-primary-reviews.json", "p2-industrial-primary-reviews.json",
+    "p2-additional-production-reviews.json",
+    "p2-residual-industrial-reviews.json", "p2-residual-priority-reviews.json",
 )
 CONTINUED_SCOPE_FILES = (
     "continued-in-window-scope.json", "batch-terminal-scope-a.json", "batch-terminal-scope-b.json",
@@ -124,20 +127,25 @@ def record_selected_reviews(report: dict, reviewed: dict[str, dict]) -> None:
     watermark = read(ROOT / "docs/paper-discovery-watermark.json")["review_watermark"]
     existing = next((batch for batch in ledger["batches"] if batch["batch"] == BATCH), None)
     if existing:
-        if (existing["delivery_status"] != "partial_review_pending"
+        if (existing["delivery_status"] not in {"partial_review_pending", "review_complete_implementation_separate"}
                 or any(reviewed.get(row["id"]) != row for row in existing["candidates"])):
             raise ValueError("cannot overwrite reviewed decisions or a completed batch")
         ledger["batches"].remove(existing)
+    complete = report["candidate_review_complete"]
+    before = existing["review_watermark"]["before"] if existing else watermark
     ledger["batches"].append({
         "schema_version": 1, "batch": BATCH, "date": END.isoformat(),
         "window": report["requested_window"], "scope_kind": "bounded-review-reconciliation",
         "source_artifact": "research-audits/nov09-review-closure/README.md",
-        "delivery_status": "partial_review_pending", "selected_scope_complete": False,
-        "all_sources_exhaustive": False, "review_watermark_advanced": False,
-        "review_watermark": {"before": watermark, "after": watermark},
+        "delivery_status": "review_complete_implementation_separate" if complete else "partial_review_pending",
+        "selected_scope_complete": complete,
+        "all_sources_exhaustive": False, "review_watermark_advanced": complete and watermark != before,
+        "review_watermark": {"before": before, "after": watermark},
+        "review_semantics": "selection-screening-with-protected-primary-review" if complete else "partial-review",
         "counts": {
             "primary_decisions": len(reviewed),
             "high_cost_review_done": sum(row["resolution"] == HIGH_COST for row in reviewed.values()),
+            "p2_selection_only_done": report["counts"].get("p2_selection_only_closed", 0),
             "implementations": 0, "gpu_runs": 0,
         },
         "candidates": list(reviewed.values()),
@@ -243,6 +251,59 @@ def metadata_scope_rows(artifact: dict, observed: dict[str, dict], priorities: d
                     or policy["window"] != {"start": START.isoformat(), "end": END.isoformat()}):
                 raise ValueError(f"{identity}: window selection lacks its scoped authorization")
         result.add(identity)
+    return result
+
+
+def p2_selection_rows(artifact: dict, observed: dict[str, dict], priorities: dict[str, set],
+                      receipt_hashes: dict[str, str], reviewed: dict[str, dict], *, source_dir: Path) -> set[str]:
+    """Close authorized window selection, never original-method verification."""
+    if artifact["policy"] != "p2-selection-policy.json":
+        raise ValueError("P2 selection must reference its scoped policy")
+    policy_path = AUDIT / artifact["policy"]
+    policy = read(policy_path)
+    if (artifact["policy_sha256"] != sha256(policy_path.read_bytes()).hexdigest()
+            or policy["authorization"]["answer"] != "允许 P2 选题级结案"
+            or {key: policy["window"][key] for key in ("start", "end")} != {
+                "start": START.isoformat(), "end": END.isoformat()}
+            or artifact["source_receipts"] != receipt_hashes):
+        raise ValueError("P2 selection lacks its window authorization or pinned captures")
+    protected = {row["id"] for row in artifact["protected_records"]}
+    excluded = set(artifact["excluded_primary_ids"])
+    if not excluded <= reviewed.keys():
+        raise ValueError("P2 selection excludes a primary identity without a real disposition")
+    result = set()
+    captures = {}
+    for record in artifact["records"]:
+        identity = record["id"]
+        row = observed[identity]
+        capture = record["capture"]
+        if capture not in receipt_hashes:
+            raise ValueError(f"{identity}: unknown P2 capture")
+        if capture not in captures:
+            captures[capture] = {
+                (canonical_arxiv_id(item["arxiv_id"]), item["revision"], item["metadata_sha256"]): item
+                for item in read(source_dir / capture)["candidates"]
+            }
+        pinned = captures[capture].get((identity, record["revision"], record["metadata_sha256"]), {})
+        if (identity in result or identity in protected | excluded | reviewed.keys() or priorities[identity]
+                or record["decision"] != "not_selected_this_window_p2" or record["priority"] != "P2"
+                or record["selection_review_done"] is not True
+                or record["method_review_completed"] is not False
+                or record["fulltext_review_completed"] is not False
+                or record["method_verified"] is not False or record["high_cost"] is not False
+                or record["implementation"] is not False
+                or record["originality_not_rejected"] is not True
+                or record["automatic_implementation_queue"] is not False or record["automatic_retry"] is not False
+                or not all(record.get(k) for k in ("reason", "title_witness", "abstract_witness"))
+                or record["revision"] != row["rank"][0]
+                or any(record[key] != pinned.get(key) for key in ("published", "metadata_sha256", "title"))
+                or record["title_witness"].casefold() not in pinned.get("title", "").casefold()
+                or record["abstract_witness"].casefold() not in pinned.get("abstract", "").casefold()
+                or record.get("cost_assessment") or record.get("implementation_status") == "implemented"):
+            raise ValueError(f"{identity}: invalid, protected, or inflated P2 selection")
+        result.add(identity)
+    if protected & excluded or result & protected:
+        raise ValueError("P2 selection partitions overlap")
     return result
 
 
@@ -467,6 +528,11 @@ def inventory(source_dir: Path, reviewed: dict[str, dict], *, as_of: str) -> dic
         if new_scope & (metadata_excluded | reviewed.keys()):
             raise ValueError(f"{filename}: in-window scope exclusions overlap an existing decision")
         metadata_excluded |= new_scope
+    selection_path = AUDIT / "p2-selection-screen.json"
+    p2_selected = p2_selection_rows(read(selection_path), rows, priorities, capture_hashes, reviewed, source_dir=source_dir) \
+        if selection_path.is_file() else set()
+    if p2_selected & metadata_excluded:
+        raise ValueError("P2 selection overlaps an earlier metadata scope decision")
     overlap_hashes = capture_hashes | {f"llm-{r['month']}-replacement.json": r["source_sha256"] for r in replacements}
     overlap_hashes["nov09-tail-all-categories.atom"] = read(
         AUDIT / "nov09-tail-source-receipt.json",
@@ -480,7 +546,12 @@ def inventory(source_dir: Path, reviewed: dict[str, dict], *, as_of: str) -> dic
         if (priorities[identity] or record["revision"] != observed["rank"][0]
                 or record["published"] != observed["published"] or local_day(record["published"]) >= START):
             raise ValueError(f"{identity}: stale or protected late metadata scope decision")
-    counts = Counter()
+    # Zero is a meaningful terminal count, not a missing field. Keep the
+    # machine-readable queue contract stable when the last candidate closes.
+    counts = Counter({key: 0 for key in (
+        "new_primary_decisions", "newer_versions_pending", "p2_selection_only_closed",
+        "existing_disposition", "metadata_scope_only_excluded", "pending_identity_review",
+    )})
     pending: dict[str, list] = defaultdict(list)
     pending_buckets: Counter = Counter()
     overlap_ids, revision_rows, priority_rows = [], [], []
@@ -504,6 +575,8 @@ def inventory(source_dir: Path, reviewed: dict[str, dict], *, as_of: str) -> dic
         elif is_newer_known_revision:
             counts["newer_versions_pending"] += 1
             revision_rows.append([identity, latest_reviewed_version, version])
+        elif identity in p2_selected:
+            counts["p2_selection_only_closed"] += 1
         elif identity in statuses:
             counts["existing_disposition"] += 1
         elif identity in metadata_excluded:
@@ -541,7 +614,7 @@ def inventory(source_dir: Path, reviewed: dict[str, dict], *, as_of: str) -> dic
         "schema_version": 1, "requested_window": {"start": START.isoformat(), "end": END.isoformat()},
         "as_of": as_of, "all_sources_exhaustive": False, "arxiv_recall_matrix_covered": True,
         "candidate_review_complete": not (pending or revision_rows or overlap_ids or tail["pending_ids"]),
-        "review_watermark_advanced": False, "counts": {
+        "review_watermark_advanced": read(ROOT / "docs/paper-discovery-watermark.json")["review_watermark"] == END.isoformat(), "counts": {
             "raw_unique_identities": len(rows), "in_window_identities": sum(counts.values()),
             "late_index_or_missing_date_scope_triage_pending": len(overlap_ids),
             "late_index_date_scope_only_excluded": len(date_excluded),
@@ -566,6 +639,7 @@ def inventory(source_dir: Path, reviewed: dict[str, dict], *, as_of: str) -> dic
             "continued_overlap_metadata": "continued-late-tail-triage.json",
             "batch_terminal_metadata": [f for f in CONTINUED_SCOPE_FILES if f.startswith("batch-terminal-")
                                         and (AUDIT / f).exists()],
+            "p2_selection": selection_path.name if selection_path.is_file() else None,
         },
         "in_window_title_abstract_routing": routes_path.name,
         "pending_in_window_counts_by_title_abstract_route": dict(sorted(remaining_routes.items())),

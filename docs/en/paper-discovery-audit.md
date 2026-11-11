@@ -1,15 +1,25 @@
 # Paper discovery and coverage audit
 
-<!-- source-sha256: d9b031e019c5be97de77e8a03e6def29c2e9c7b0173d6a16559773413e988aa5 -->
+<!-- source-sha256: 033d8056a4d9b561fe03c98db55dc8012d8d851b52d3074b3d75b9b9d7f78522 -->
 
 [简体中文](../paper-discovery-audit.md)
 
-The latest completed window in this snapshot is [2026-10-13 to 2026-10-15](research-audits/oct15-review-closure/README.md). First releases, historical discoveries, and revisions are counted separately. High-cost candidates are explicitly not reproduced and their reviews are complete. See the [unified status](../paper-discovery-watermark.json) for the current date, coverage, cutoff, and exceptions.
+The review watermark is now **November 9, 2026**; see the [window closeout](research-audits/nov09-review-closure/README.md)
+and [unified state](../paper-discovery-watermark.json). First releases, older discoveries, and revisions remain separate.
+Full experiments with evidenced prohibitive cost are not reproduced and are review DONE.
 
-The [October 16–November 9 reconciliation](research-audits/nov09-review-closure/README.md) records four tracks and two recall modes, replaces a capped query, and checks the end of November 9. The three queues are deduplicated and routed by title and abstract. All 17 previously flagged revisions were checked; some candidates have original-source decisions or verified scope exclusions. Individual candidates remain open, so **the watermark has not advanced**.
-The November 11 continuation resolved 648 of the 5,007 pending identities: 286 original-source decisions and 362 title/abstract decisions under the approved selection rule.
-The 169 identified late-index and 65 end-of-day records are now resolved; 4,359 in-window candidates remain pending.
-Permission to decline application reports, repeated evaluations, or perspectives without a new independent algorithm or public benchmark does not authorize declining every low-priority new method.
+**On November 11 the user explicitly authorized P2 selection-level closure:** non-priority P2 candidates without suspected production A/B
+may close as outside this window's focus after title/abstract screening. This watermark therefore means selection screening and protected
+original-source checks are complete, **not that every method has been verified**, let alone implemented.
+Nonselection does not reject an algorithm's or benchmark's originality or relabel an unread method as costly.
+Google/Meta and possible real production evidence still require originals. The [selection artifact](research-audits/nov09-review-closure/p2-selection-screen.json)
+retains versions, abstract hashes, protection, and contextual clarification separately from the global method/cost ledger; it creates no automatic implementation tasks.
+
+This closeout reuses real four-track/two-mode captures, repairs the capped query, supplements November 9's end-of-day submissions,
+and checks the 17 previously flagged revisions. The former 4,359 pending identities now have an exact partition between selection dispositions
+and protected original-source decisions, with zero pending. Coverage, cutoff, non-blocking exceptions, and the next overlapping scan from
+**November 8** are specified in the unified state. The [October 15 closeout](research-audits/oct15-review-closure/README.md)
+remains an unchanged historical snapshot.
 
 The latest bounded implementation batch is [2026-10-26](research-audits/oct26-components/README.md). Eight low-cost L1 components passed same-source CPU and real A100 checks with three seeds. Eight high-cost papers were documented without reproduction and are review DONE. Google and Meta were checked first. New announcements, recent source backfill, and historical catalog backfill are counted separately. This is distinct from closing an entire review window: announcement entries are not new papers, and the batch does not move the watermark automatically. The [roadmap](research-roadmap.md) retains previous batches.
 

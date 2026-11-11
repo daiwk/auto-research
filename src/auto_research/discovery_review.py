@@ -210,6 +210,10 @@ def classify_candidate(track: str, candidate: dict) -> dict:
     elif candidate.get("historical_review_required"):
         bucket = "priority-fulltext-review" if priority else "historical-fulltext-review"
         reason = "historical identity/date triage is not a completed method or cost review"
+    elif candidate.get("repository_status") == "selection-reviewed":
+        bucket = "priority-fulltext-review" if priority else "selection-reviewed-method-unverified"
+        reason = ("new priority evidence reopens window-only P2 selection" if priority else
+                  "window-only P2 selection complete; original method remains unverified")
     elif candidate.get("repository_status") != "new":
         bucket = "already-closed"
         reason = f"repository status is {candidate.get('repository_status')}"
@@ -260,5 +264,6 @@ def unresolved_candidates(artifacts: Iterable[dict]) -> list[dict]:
         if row.get("full_text_review_required") and (
             row.get("repository_status") == "new" or row.get("revision_review_required")
             or row.get("historical_review_required")
+            or (row.get("repository_status") == "selection-reviewed" and priority_review_signal(row))
         )
     ]
