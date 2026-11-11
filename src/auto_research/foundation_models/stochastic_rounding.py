@@ -14,6 +14,17 @@ REQUIRES_GPU_VALIDATION = True
 GPU_VALIDATION_ARTIFACT = "docs/gpu-validations/stochastic-rounding-a100-20261111.json"
 
 
+def _device_identity(device: torch.device) -> tuple[str, int | None]:
+    """Resolve index-less CUDA aliases against the active device, not GPU zero.
+
+    CPU indices are aliases, while explicit CUDA indices identify distinct
+    accelerators. In particular, ``cuda`` is not necessarily ``cuda:0``.
+    """
+    if device.type == "cuda":
+        return "cuda", torch.cuda.current_device() if device.index is None else device.index
+    return device.type, None
+
+
 def adjacent_values(values: Tensor, dtype: torch.dtype) -> tuple[Tensor, Tensor]:
     """Bracket finite FP32 values by representable finite target values.
 
@@ -35,7 +46,7 @@ def adjacent_values(values: Tensor, dtype: torch.dtype) -> tuple[Tensor, Tensor]
 @torch.no_grad()
 def stochastic_cast(values: Tensor, dtype: torch.dtype, *, generator: torch.Generator) -> Tensor:
     """Round up with (x-lower)/(upper-lower); exact values stay exact."""
-    if generator.device.type != values.device.type or (values.device.type == "cuda" and generator.device.index != values.device.index):
+    if _device_identity(generator.device) != _device_identity(values.device):
         raise ValueError("generator and input must be on the same device")
     lower, upper = adjacent_values(values, dtype)
     exact = lower == upper
@@ -50,8 +61,9 @@ def diagnostic(seed: int = 42, device: str = "cpu") -> dict:
     target = torch.device(device)
     if target.type not in {"cpu", "cuda"}:
         raise ValueError("CPU or CUDA device required")
-    generator = torch.Generator(device=target).manual_seed(seed)
     values = torch.full((65536,), 1. + 1. / 1024, dtype=torch.float32, device=target)
+    # Tensor allocation resolves an index-less target to its concrete CUDA GPU.
+    generator = torch.Generator(device=values.device).manual_seed(seed)
     rounded = stochastic_cast(values, torch.bfloat16, generator=generator).float()
     lower, upper = adjacent_values(values, torch.bfloat16)
     mean_error = float((rounded.double().mean() - values[0].double()).abs())

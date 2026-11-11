@@ -48,3 +48,34 @@ def test_exact_representables_and_no_straight_through_gradient():
 def test_invalid_or_out_of_range_is_not_silently_clipped(values, dtype):
     with pytest.raises(ValueError):
         sr.adjacent_values(values, dtype)
+
+
+def test_device_alias_resolution_does_not_assume_gpu_zero(monkeypatch):
+    monkeypatch.setattr(torch.cuda, "current_device", lambda: 1)
+    assert sr._device_identity(torch.device("cuda")) == ("cuda", 1)
+    assert sr._device_identity(torch.device("cuda:1")) == ("cuda", 1)
+    assert sr._device_identity(torch.device("cuda:0")) != sr._device_identity(torch.device("cuda"))
+    assert sr._device_identity(torch.device("cpu:0")) == sr._device_identity(torch.device("cpu"))
+    assert sr._device_identity(torch.device("cpu")) != sr._device_identity(torch.device("cuda"))
+
+
+@pytest.mark.skipif(not torch.cuda.is_available(), reason="real CUDA required")
+@pytest.mark.parametrize("device", ["cuda", "cuda:0"])
+def test_real_cuda_alias_and_concrete_generator(device):
+    with torch.cuda.device(0):
+        values = torch.tensor([1.0009765625, -1.0009765625], device=device)
+        for generator_device in (torch.device("cuda"), values.device):
+            result = sr.stochastic_cast(values, torch.bfloat16,
+                                        generator=torch.Generator(device=generator_device).manual_seed(42))
+            assert result.device == values.device
+            assert torch.isfinite(result).all()
+        with pytest.raises(ValueError, match="same device"):
+            sr.stochastic_cast(values, torch.bfloat16, generator=torch.Generator().manual_seed(42))
+
+
+@pytest.mark.skipif(torch.cuda.device_count() < 2, reason="two actual CUDA devices required")
+def test_real_cuda_different_gpu_is_rejected():
+    values = torch.tensor([1.0009765625], device="cuda:0")
+    generator = torch.Generator(device="cuda:1").manual_seed(42)
+    with pytest.raises(ValueError, match="same device"):
+        sr.stochastic_cast(values, torch.bfloat16, generator=generator)
