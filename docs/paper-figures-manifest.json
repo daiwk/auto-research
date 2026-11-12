@@ -15100,5 +15100,20 @@
     "error": "",
     "width": 1215,
     "height": 702
+  },
+  {
+    "page": "docs/multimodal-models/2611.08568-sensorwm-planning/README.md",
+    "paper_url": "https://arxiv.org/abs/2611.08568",
+    "arxiv_id": "2611.08568",
+    "figure": "Figure 4",
+    "original_caption": "Figure 4 : SensorWM Generates and Prioritizes Personalized Behavioral Plans for Health Coaching. (a) Counterfactual simulation of 12-week health trajectories under alternative behavioral plans using SensorWM. (b) Feasibility-constrained optimization ranks candidate plans by projected Health Age reduction and individualized behavioral effort. (c) Ranked plans are screened for safety and behavioral feasibility before synthesis into 12-week coaching plans. (d) Representative trajectories illustrate how optimization balances achievable Health Age improvements with participant-specific historical behavioral patterns.",
+    "source_url": "https://arxiv.org/html/2611.08568v1/Figure4_new.png",
+    "extraction": "original_official_html_png",
+    "asset": "docs/multimodal-models/2611.08568-sensorwm-planning/assets/paper-figure-01.png",
+    "asset_sha256": "00396912ef89aa7de7968c8997f7d7f2345d50d2cf61214849de7a2cb70b04dc",
+    "width": 994,
+    "height": 1064,
+    "visually_reviewed": true,
+    "error": ""
   }
 ]

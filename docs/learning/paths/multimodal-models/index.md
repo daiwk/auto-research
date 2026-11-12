@@ -18,9 +18,9 @@
 <p class="ar-learning-topic-meta">72 个问题 · 18 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
-<h2><a href="world-state-actions/">视觉世界建模：状态、生成与动作条件</a></h2>
-<p>模型是在识别画面，还是能判断动作将怎样改变状态？</p>
-<p class="ar-learning-topic-meta">104 个问题 · 26 篇论文</p>
+<h2><a href="world-state-actions/">世界建模：状态、生成与动作条件</a></h2>
+<p>模型只描述观察，还是能判断动作怎样改变后续状态？</p>
+<p class="ar-learning-topic-meta">108 个问题 · 27 篇论文</p>
 </article>
 </div>
 

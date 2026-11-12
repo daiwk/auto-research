@@ -4,14 +4,14 @@
 
 [English home](../index.md) · [中文研究库](../../research-library.md)
 
-The catalog lists 1115 entries from the shared research manifest. English write-ups available: 1115.
+The catalog lists 1116 entries from the shared research manifest. English write-ups available: 1116.
 
 ## Browse by domain
 
 - [Search, ads, recommendation, and LLM applications](recommendation.md): 329 catalog entries, 329 English write-ups
 - [Foundation models](foundation-models.md): 215 catalog entries, 215 English write-ups
 - [Structured decisions / System One](system-one.md): 6 catalog entries, 6 English write-ups
-- [Multimodal models](multimodal-models.md): 22 catalog entries, 22 English write-ups
+- [Multimodal models](multimodal-models.md): 23 catalog entries, 23 English write-ups
 - [LLM post-training](post-training.md): 259 catalog entries, 259 English write-ups
 - [Agents](agent-research.md): 284 catalog entries, 284 English write-ups
 
@@ -43,6 +43,7 @@ The catalog lists 1115 entries from the shared research manifest. English write-
 - [Discovering formally verified quantum programs with AI](../../agent-research/2611.09822-verified-quantum-wiki/README-en.md)
 - [XStack: A Benchmark for ML Repo Migration](../../agent-research/2611.08472-xstack/README-en.md)
 - [ReproBridge: Building Reproducibility into ML Research Artifacts](../../agent-research/2611.08452-reprobridge/README-en.md)
+- [Personalized health coaching via coachable health age and counterfactual wearable trajectories](../../multimodal-models/2611.08568-sensorwm-planning/README-en.md)
 - [GINGER: Spicing Up Graph-Based Vector Search](../../foundation-models/2611.08306-ginger/README-en.md)
 - [EnvOpt: Automated Optimization for Agent Environments](../../agent-research/2611.07372-envopt/README-en.md)
 - [ConvPE: Convolutional Position Embedding Improves Transformers](../../foundation-models/2611.07749-convpe/README-en.md)

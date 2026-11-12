@@ -7,7 +7,7 @@ hide:
 
 # 会预测下一幕，还不等于会行动或保持同一个世界
 
-[多模态](../index.md) · 更新 2026-11-12 · 26 篇主题资料 / 10 篇重点对照
+[多模态](../index.md) · 更新 2026-11-12 · 27 篇主题资料 / 11 篇重点对照
 
 世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。 SWIM从离线动作可预测性学习状态坐标的相对权重，训练期校准latent距离，部署时不向规划器增加真实状态。
 
@@ -35,6 +35,7 @@ hide:
 | [SWIM: Learning What Matters from Behaviors for JEPA World Models](../../../foundation-models/2610.36662-swim/README.md) · [原始来源](https://arxiv.org/abs/2610.36662v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 用当前状态和门控未来位移预测固定记录动作chunk，NLL加cyclic discrimination与L1学习gate；随后以sqrt(g)加权状态距离校准latent几何。 | 离线行为监督不是规划输入；gate只识别相对权重且不可二次标准化。本地不含视觉encoder、SIGReg、环境或CEM，完整训练不复现。 |
 | [RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval](../../../multimodal-models/2611.14496-rs-jepa/README.md) · [原始来源](https://arxiv.org/abs/2611.14496)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 利用Vision Mamba扫描次序形成无像素编辑视图，以直通加反梯度hard half-split增加隐藏预测难度，并让四个排除twin的传感器邻域分布对齐detached共识。 | 同主干stop-gradient target不是EMA教师；跨传感器检索表征不等于动作条件未来预测或策略。局部扫描/梯度/邻域核不含Vim、完整CVA/predictor或遥感检索成绩，四V100完整实验不复现。 |
 | [OnlyAct: Extracting Action Representations from Foundation Models for World Models](../../../multimodal-models/2611.14420-onlyact/README.md) · [原始来源](https://arxiv.org/abs/2611.14420)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 在预训练V-JEPA2联合帧表征上，以场景交换正例及同视频非重叠hard negative适配动作几何，再冻结供世界模型使用。 | RS-JEPA用扫描视图和跨传感器邻域共识学习场景检索；OnlyAct希望保留动作、抑制场景。共享JEPA来源不代表优化目标相同。本地两者均只有独立公式/梯度L1，不提供图像检索或动作迁移能力排名。 |
+| [Personalized health coaching via coachable health age and counterfactual wearable trajectories](../../../multimodal-models/2611.08568-sensorwm-planning/README.md) · [原始来源](https://arxiv.org/abs/2611.08568)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界 | 动作条件可穿戴JEPA以状态依赖线性算子递推潜位移，再以未来status-quo对照、个体努力归一化收益排序外部候选。 | 完整论文用私有生理数据建模；本地只实现Eq55–56排序，不产生预测、不执行动作、不给医疗建议。与LeWAM实际学习策略/动力学及闭环不同，数学排序不等于世界模型控制或临床安全。 |
 
 </div>
 
@@ -75,6 +76,12 @@ RS-JEPA把配准传感器图像与不同扫描视图变成更一致的检索表�
 RS-JEPA希望不同传感器检索到同一场景，并让其邻域关系一致；OnlyAct反而把动作保持但场景改变的样本拉近，用同场景不同窗作为难负例。二者对场景身份的需求不同，不能直接拼接一个通用InfoNCE就声称兼得。OnlyAct正负构造依赖光流/相机静动假设，局部候选mask与损失的CUDA通过不能验证这些语义假设。
 
 对照来源：[onlyact](../../../multimodal-models/2611.14420-onlyact/README.md) · [rs-jepa](../../../multimodal-models/2611.14496-rs-jepa/README.md)
+
+### 有动作条件预测，不等于已经识别干预效果或完成控制
+
+LeWAM在联合表征与动作flowmatching后，用冻结动力学rollout、动作梯度优化和环境反馈闭环；其现有本地结果仍是非holdout诊断，未测到规划优势。SensorWM则从观察性可穿戴数据学习条件轨迹，并按个体行为变动尺度把预测收益转成候选比值。它明确不识别因果干预效果；离线教练偏好也不是实际健康结局。二者都需区分预测、选择、执行和效果证据，本地SensorWM排序更不能替代缺失的模型。
+
+对照来源：[sensorwm-planning](../../../multimodal-models/2611.08568-sensorwm-planning/README.md) · [lewam](../../../reproductions/2610.12818-lewam/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -150,9 +157,23 @@ RS-JEPA希望不同传感器检索到同一场景，并让其邻域关系一致�
 
     对照来源：[onlyact](../../../multimodal-models/2611.14420-onlyact/README.md) · [rs-jepa](../../../multimodal-models/2611.14496-rs-jepa/README.md)
 
+### SensorWM排序核与LeWAMplanner都返回较优候选，是否能用同一个“规划成功率”来比较？ {#cross-cross-worldmodel-ranking-versus-closed-loop-evidence}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。SensorWM局部核只对外部端点做收益/努力排序，没有模型、医疗判断或执行；LeWAMplanner从模型产生动作并进入环境闭环，现有结果也未形成holdout能力证据。成功分母、预测来源、因果语义与执行证据完全不同。
+
+    **教学例子：** 教学例：给定三个数并选最大比值，不会让机器人到达goal，也不会让用户12周后更健康；两类后果都要独立验证。
+
+    对照来源：[sensorwm-planning](../../../multimodal-models/2611.08568-sensorwm-planning/README.md) · [lewam](../../../reproductions/2610.12818-lewam/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-12** · 加入Google可穿戴世界模型案例，区分动作条件观察预测、个体努力候选排序与实际控制/因果健康收益。本地CPU三seed仅验证Eq55–56数学，完整私有JEPA与临床/API实验高成本不复现。
+
+涉及：[sensorwm-planning](../../../multimodal-models/2611.08568-sensorwm-planning/README.md) · [lewam](../../../reproductions/2610.12818-lewam/README.md)
 
 **2026-11-12** · 补入从JEPA时空先验提取动作的对比适配，明确场景检索与动作场景解耦目标差异；A100三seed只验证精确bank/冻结投影/梯度，完整视频训练不复现。
 
@@ -174,7 +195,7 @@ RS-JEPA希望不同传感器检索到同一场景，并让其邻域关系一致�
 
 覆盖 22 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 26 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 27 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -204,6 +225,7 @@ RS-JEPA希望不同传感器检索到同一场景，并让其邻域关系一致�
 - [SWIM: Learning What Matters from Behaviors for JEPA World Models](../../../foundation-models/2610.36662-swim/README.md)
 - [RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval](../../../multimodal-models/2611.14496-rs-jepa/README.md)
 - [OnlyAct: Extracting Action Representations from Foundation Models for World Models](../../../multimodal-models/2611.14420-onlyact/README.md)
+- [Personalized health coaching via coachable health age and counterfactual wearable trajectories](../../../multimodal-models/2611.08568-sensorwm-planning/README.md)
 
 </details>
 

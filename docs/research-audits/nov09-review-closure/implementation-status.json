@@ -7,8 +7,8 @@
   "review_finalized_on": "2026-11-11",
   "policy": "observed-catalog-and-evidence-not-capability-v1",
   "counts": {
-    "catalogued": 254,
-    "not_catalogued": 9549
+    "catalogued": 255,
+    "not_catalogued": 9548
   },
   "accepted_counts": {
     "not_catalogued": 175
@@ -76307,8 +76307,19 @@
       "title": "Personalized health coaching via coachable health age and counterfactual wearable trajectories",
       "review_decision": "not_selected_p2",
       "frozen_implementation_status": "not_changed_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "multimodal-models",
+          "key": "sensorwm-planning",
+          "detail_path": "multimodal-models/2611.08568-sensorwm-planning/README.md",
+          "document_exists": true,
+          "registered_executable": false,
+          "gpu_receipt": null,
+          "gpu_receipt_valid": false,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2611.08569",

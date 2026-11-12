@@ -11,7 +11,7 @@ hide:
 
 每个子主题维护一张卡片。新论文进入后，更新对应卡片的比较或结论，并记录这次变化；不必再从头读整批论文。
 
-31 张精读卡片 · 1115 篇主题资料 · 按主题折叠
+31 张精读卡片 · 1116 篇主题资料 · 按主题折叠
 
 <details class="ar-deep-shelf"><summary>搜广推 · 7 张</summary>
 <div class="ar-deep-grid">
@@ -120,7 +120,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="multimodal-models/world-state-actions/">会预测下一幕，还不等于会行动或保持同一个世界</a></h2>
 <p>世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。 SWIM从离线动作可预测性学习状态坐标的相对权重，训练期校准latent距离，部署时不向规划器增加真实状态。</p>
-<p class="ar-learning-topic-meta">10 篇重点对照 · 7 个跨论文问答 · 2026-11-12</p>
+<p class="ar-learning-topic-meta">11 篇重点对照 · 8 个跨论文问答 · 2026-11-12</p>
 </article>
 </div></details>
 

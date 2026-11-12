@@ -569,7 +569,8 @@
         "foundation-models:gui-jepa",
         "foundation-models:swim",
         "multimodal-models:rs-jepa",
-        "multimodal-models:onlyact"
+        "multimodal-models:onlyact",
+        "multimodal-models:sensorwm-planning"
       ],
       "axes": [
         "学习对象：未来latent、动作分布、视觉转移、持久几何",
@@ -677,6 +678,17 @@
             "核心公式",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "multimodal-models:sensorwm-planning",
+          "position": "动作条件可穿戴JEPA以状态依赖线性算子递推潜位移，再以未来status-quo对照、个体努力归一化收益排序外部候选。",
+          "tradeoff": "完整论文用私有生理数据建模；本地只实现Eq55–56排序，不产生预测、不执行动作、不给医疗建议。与LeWAM实际学习策略/动力学及闭环不同，数学排序不等于世界模型控制或临床安全。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -728,6 +740,14 @@
           "papers": [
             "multimodal-models:onlyact",
             "multimodal-models:rs-jepa"
+          ]
+        },
+        {
+          "title": "有动作条件预测，不等于已经识别干预效果或完成控制",
+          "body": "LeWAM在联合表征与动作flowmatching后，用冻结动力学rollout、动作梯度优化和环境反馈闭环；其现有本地结果仍是非holdout诊断，未测到规划优势。SensorWM则从观察性可穿戴数据学习条件轨迹，并按个体行为变动尺度把预测收益转成候选比值。它明确不识别因果干预效果；离线教练偏好也不是实际健康结局。二者都需区分预测、选择、执行和效果证据，本地SensorWM排序更不能替代缺失的模型。",
+          "papers": [
+            "multimodal-models:sensorwm-planning",
+            "foundation-models:lewam"
           ]
         }
       ],
@@ -801,6 +821,16 @@
           "papers": [
             "multimodal-models:onlyact",
             "multimodal-models:rs-jepa"
+          ]
+        },
+        {
+          "id": "cross-worldmodel-ranking-versus-closed-loop-evidence",
+          "question": "SensorWM排序核与LeWAMplanner都返回较优候选，是否能用同一个“规划成功率”来比较？",
+          "answer": "不能。SensorWM局部核只对外部端点做收益/努力排序，没有模型、医疗判断或执行；LeWAMplanner从模型产生动作并进入环境闭环，现有结果也未形成holdout能力证据。成功分母、预测来源、因果语义与执行证据完全不同。",
+          "example": "教学例：给定三个数并选最大比值，不会让机器人到达goal，也不会让用户12周后更健康；两类后果都要独立验证。",
+          "papers": [
+            "multimodal-models:sensorwm-planning",
+            "foundation-models:lewam"
           ]
         }
       ],
@@ -899,6 +929,18 @@
           "summary": "补入从JEPA时空先验提取动作的对比适配，明确场景检索与动作场景解耦目标差异；A100三seed只验证精确bank/冻结投影/梯度，完整视频训练不复现。",
           "source_revisions": {
             "multimodal-models:onlyact": "214fb33fd33c2b7016404e5dff6503028bd489ee0355cc899011cf4331be4726"
+          }
+        },
+        {
+          "date": "2026-11-12",
+          "papers": [
+            "multimodal-models:sensorwm-planning",
+            "foundation-models:lewam"
+          ],
+          "summary": "加入Google可穿戴世界模型案例，区分动作条件观察预测、个体努力候选排序与实际控制/因果健康收益。本地CPU三seed仅验证Eq55–56数学，完整私有JEPA与临床/API实验高成本不复现。",
+          "source_revisions": {
+            "multimodal-models:sensorwm-planning": "547ec8785646f513290c6ad65a5ed302920716e67f746cce5466396f06ec4111",
+            "foundation-models:lewam": "5e991ab90d6400d319dbccbf83e7ff06f2749baa45a5e10a79ea26b235f1ed45"
           }
         }
       ]

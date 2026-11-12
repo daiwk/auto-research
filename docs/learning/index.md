@@ -21,7 +21,7 @@ hide:
 
 <!-- learning-topics:start -->
 
-6 个主题 · 31 个子主题 · 4469 个问题 / 1115 篇论文
+6 个主题 · 31 个子主题 · 4473 个问题 / 1116 篇论文
 
 <div class="ar-learning-topics">
 <article class="ar-learning-topic-tile">
@@ -64,11 +64,11 @@ hide:
 <article class="ar-learning-topic-tile">
 <h2><a href="paths/multimodal-models/">多模态</a></h2>
 <p>围绕三件事学习：对齐不同模态、分配视觉证据预算、预测状态与动作的后果。</p>
-<p class="ar-learning-topic-meta">3 个子主题 · 261 问 / 65 篇</p>
+<p class="ar-learning-topic-meta">3 个子主题 · 265 问 / 66 篇</p>
 <details><summary>展开子主题问题库</summary><ul>
 <li><a href="paths/multimodal-models/alignment-interfaces/">跨模态对齐：表征、连接器与监督</a><span>85 问<a class="ar-learning-deep-link" href="deep-dives/multimodal-models/alignment-interfaces/">精读对比</a></span></li>
 <li><a href="paths/multimodal-models/visual-evidence-budget/">视觉证据预算：选 Token、选帧与按需回看</a><span>72 问<a class="ar-learning-deep-link" href="deep-dives/multimodal-models/visual-evidence-budget/">精读对比</a></span></li>
-<li><a href="paths/multimodal-models/world-state-actions/">视觉世界建模：状态、生成与动作条件</a><span>104 问<a class="ar-learning-deep-link" href="deep-dives/multimodal-models/world-state-actions/">精读对比</a></span></li>
+<li><a href="paths/multimodal-models/world-state-actions/">世界建模：状态、生成与动作条件</a><span>108 问<a class="ar-learning-deep-link" href="deep-dives/multimodal-models/world-state-actions/">精读对比</a></span></li>
 </ul></details>
 </article>
 <article class="ar-learning-topic-tile">

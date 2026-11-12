@@ -1,8 +1,14 @@
 # Paper discovery and coverage audit
 
-<!-- source-sha256: 7398f52ad3e5f29b358d4a2a0458b797e85acbf82e4aa9b2a85cfeb1cc535262 -->
+<!-- source-sha256: 15c68b4f64b7fd2270d887df93fef51c6c88db2831b23eeab33049ddd17732e0 -->
 
 [简体中文](../paper-discovery-audit.md)
+
+## November 12: Official-source recheck and one Google backfill
+
+[Sources and boundaries](research-audits/nov12-refresh/README.md): the eight official arXiv announcements are byte-identical to the previous captures, so no new announcement was established. An official Google source reopened primary-method review of the November 5 SensorWM paper; the old P2 selection record is not presented as a method review. Only CPU ranking arithmetic from Eqs.55–56 is delivered, with three-seed mechanism checks. The complete private world model and medical evaluations are **high cost, not reproduced, review DONE**. No new CUDA path or model-capability comparison is claimed.
+
+Priority protection now recognizes `www.research.google` and `research.meta.ai`, while lookalike-domain negatives remain. Official provenance still requires original-source review; it does not by itself prove affiliation, code release, or A/B evidence. Bilingual paper pages, the original figure, four-level Q&A, and the topic deep dive ship together. The watermark remains **November 9, 2026**, without an institution-wide or whole-window census claim.
 
 ## November 12 bounded backfill: eight mechanism kernels, unchanged watermark
 

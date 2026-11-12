@@ -4,7 +4,7 @@
 
 [English home](index.md) · [Paper catalog](papers/index.md)
 
-**1402 of 1402** Chinese site pages have a corresponding English page.
+**1404 of 1404** Chinese site pages have a corresponding English page.
 The table counts document pairs, not English catalog entries that link to Chinese text.
 
 | Source section | Pages | English counterparts | Still untranslated |
@@ -17,10 +17,10 @@ The table counts document pairs, not English catalog entries that link to Chines
 | experiments | 4 | 4 | 0 |
 | foundation-models | 144 | 144 | 0 |
 | learning | 73 | 73 | 0 |
-| multimodal-models | 28 | 28 | 0 |
+| multimodal-models | 29 | 29 | 0 |
 | paper-audits | 3 | 3 | 0 |
 | post-training | 254 | 254 | 0 |
 | recommendation-components | 23 | 23 | 0 |
 | reproductions | 430 | 430 | 0 |
-| research-audits | 62 | 62 | 0 |
+| research-audits | 63 | 63 | 0 |
 | system-one | 17 | 17 | 0 |
