@@ -1694,7 +1694,7 @@
           ],
           "summary": "补入真实接受分支的EAL训练目标，将target采样q/p训练权重与draft提案p/q推理校正区分；A100三seed仅验证损失/梯度机制，完整训练成本过高不复现。",
           "source_revisions": {
-            "foundation-models:real-loss": "e4848c9662b1b1adbf3a22a5f49bf5da92201a0da568df92d6995479812e7eeb"
+            "foundation-models:real-loss": "8f341df1e058579ddf183df4bb4ab599bf01787778fae00e9e9efd2a82bd4012"
           }
         }
       ]

@@ -1,6 +1,6 @@
 # Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation
 
-<!-- source-sha256: 65879615c38c9270fee5e4424d6437e6ab920a70a477efefd027ca246cf5f685 -->
+<!-- source-sha256: 92ff22ac54c37dbaec59f9b3dfa4fec26b54c656dae57dadb01bc6b0a4ed430b -->
 
 [简体中文](README.md)
 
@@ -32,6 +32,8 @@ Free-target OT also optimizes reference-use frequencies, so failures **independe
 [![Original Figure 1: LCS references and teacher-only hindsight](assets/paper-figure-01.png)](https://arxiv.org/pdf/2611.13135v1#page=2)
 
 Original Figure 1, PDF page 2, retaining the complete figure and caption. Copyright remains with the authors; [provenance](assets/provenance.json) records source/page/hashes. The illustrated ALFWorld interactions and outcome are the authors' example, not local agent execution.
+
+<!-- paper-figure:end -->
 
 ```mermaid
 flowchart TD

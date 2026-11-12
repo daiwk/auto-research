@@ -1,6 +1,6 @@
 # C²-Routing: joint-correctness risk gating for cropping and compression
 
-<!-- source-sha256: f4db49418d7e8e5d113f54a5e95ec531a2db6851dcff37c9a6175c4d730d53d2 -->
+<!-- source-sha256: 82f974b798414331f7a5e9a955b3687441f2bdc560dfbe5c9a34e3d64a0ba542 -->
 
 [简体中文](README.md)
 
@@ -25,11 +25,14 @@ Cropping magnifies local text or small objects; whole-image compression better p
 
 The safety gate predicts joint correctness for original and reduced inputs, not just whether reduction fails. Fallback cannot fix shared failure, and can lose a reduction-induced benefit. The risk model must distinguish those cases.
 
+<!-- paper-figure:start -->
 ### Key original figure
 
 [![Original Figure 2: shared features, routing, and safety gate](assets/paper-figure-01.png)](https://arxiv.org/pdf/2611.14469v1#page=3)
 
 The full PDF page 3 includes Figure 2 and its caption without content changes. Copyright remains with the authors. The learned heads and VLM in the figure are not local implementations.
+
+<!-- paper-figure:end -->
 
 ### Equations and flow
 

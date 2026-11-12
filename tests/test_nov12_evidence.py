@@ -81,6 +81,17 @@ def test_pure_theory_is_not_relabelled_high_cost():
         recorder.validate_execution(broken)
 
 
+@pytest.mark.parametrize("key", sorted(COMPONENTS))
+def test_all_selected_papers_have_paired_original_figure_blocks(key):
+    spec = recorder.specifications()[key]
+    for name in ("README.md", "README-en.md"):
+        text = (ROOT / "docs" / Path(spec["detail_path"]).parent / name).read_text()
+        assert text.count("<!-- paper-figure:start -->") == 1
+        assert text.count("<!-- paper-figure:end -->") == 1
+        assert text.index("<!-- paper-figure:start -->") < text.index("<!-- paper-figure:end -->")
+        assert "assets/paper-figure-01.png" in text
+
+
 def test_portable_record_check_does_not_reread_captures(monkeypatch):
     def forbidden(_receipts):
         raise AssertionError("portable --check must not reread .cache bytes")
@@ -146,6 +157,7 @@ def test_fixed_scope_and_archived_exception_are_separate():
     assert {row["key"] for row in scope["papers"]} == set(COMPONENTS)
     assert "2609.04961" not in {row["id"] for row in scope["papers"]}
     assert scope["exceptions"][0]["id"] == "2609.04961"
+    assert scope["exceptions"][0]["priority"] == "P2"
     assert scope["exceptions"][0]["accepted"] is False
     assert all(row["full_capability_reproduced"] is False for row in scope["papers"])
 

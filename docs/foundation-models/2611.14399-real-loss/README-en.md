@@ -1,6 +1,6 @@
 # REAL Loss: train a speculative drafter on actual accepted branches
 
-<!-- source-sha256: e4848c9662b1b1adbf3a22a5f49bf5da92201a0da568df92d6995479812e7eeb -->
+<!-- source-sha256: 8f341df1e058579ddf183df4bb4ab599bf01787778fae00e9e9efd2a82bd4012 -->
 
 [简体中文](README.md)
 
@@ -25,11 +25,14 @@ An accepted token determines the prefix verified next. Multiplying marginal acce
 
 REAL preserves propose-and-accept mass along trajectories sampled from a frozen target and analytically marginalizes the final step in each prefix term. It replaces the loss, not the drafter architecture or verifier. Target sampling is an estimator assumption; arbitrary draft trajectories cannot be substituted unchanged.
 
+<!-- paper-figure:start -->
 ### Key original figure
 
 [![Original Figure 2 counterexample and Algorithm 1](assets/paper-figure-01.png)](https://arxiv.org/pdf/2611.14399v1#page=4)
 
 The complete PDF page 4 is rendered without content changes. Copyright remains with the authors. Its derivation and experiments are not local model-training results.
+
+<!-- paper-figure:end -->
 
 ### Equations and flow
 

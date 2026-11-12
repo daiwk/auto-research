@@ -31,6 +31,8 @@ BOPD 先用带参考解答的冻结初始模型监督学生，构造中间模型
 
 图片来自[原论文](https://arxiv.org/pdf/2611.13680v1#page=2)第 2 页 Figure 2，版权归原作者所有；裁取保留完整架构图与原图注，来源、PDF/PNG 哈希及裁切坐标见 [provenance](assets/provenance.json)。图中的模型生成闭环不属于本地组件。
 
+<!-- paper-figure:end -->
+
 ```mermaid
 flowchart TD
     M0[初始模型M0] --> T0[冻结特权教师]

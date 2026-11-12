@@ -4,7 +4,7 @@
   "proposals":[
     {
       "paper":"foundation-models:real-loss", "target_card":"foundation-models/generation-paths",
-      "source_revisions":{"foundation-models:real-loss":"e4848c9662b1b1adbf3a22a5f49bf5da92201a0da568df92d6995479812e7eeb", "foundation-models:speculative-decoding":"fcd6e4a9f72a7f160b354d3ff3b13b82301a16a74b07f8e66c9c8c0d0dc8c9f5"},
+      "source_revisions":{"foundation-models:real-loss":"8f341df1e058579ddf183df4bb4ab599bf01787778fae00e9e9efd2a82bd4012", "foundation-models:speculative-decoding":"fcd6e4a9f72a7f160b354d3ff3b13b82301a16a74b07f8e66c9c8c0d0dc8c9f5"},
       "comparison":{"position":"从target采样轨迹以q/p构造真实接受分支质量，末步边缘化得到可微EAL训练目标；补充draft训练，不替代拒绝校正verifier。","tradeoff":"原始投机解码关注保持target分布的推理正确性，REAL关注固定验证过程下如何训练draft；本地只测小张量期望与梯度，不训练35Btarget/完整drafter。","sections":["核心公式","数据协议与代码映射","结果、负控与边界"]},
       "analysis":{"title":"推理接受比与训练路径比方向相反，但服务于同一接受质量","body":"原始Speculative Decoding从draft q提出token，以min(1,p/q)接受并从[p−q]+校正，保证输出target分布。REAL的轨迹却由target p采样，用min(1,q/p)把其质量变成min(p,q)，训练更合适的draft。两者不是替代算法；错误交换比例会分别破坏推理分布或训练目标。一个loss在某点与代理值相同，也不能证明其梯度方向正确。","papers":["foundation-models:real-loss","foundation-models:speculative-decoding"]},
       "question":{"id":"cross-speculative-training-versus-serving-ratio","question":"REAL训练用q/p，而投机解码推理用p/q，是否有一方写反了？","answer":"没有。两者采样分布不同：训练先从p采样，推理先从q提案；各自乘截断比后都形成min(p,q)质量。不能脱离采样来源复用比值，末步边缘化与拒绝残差也分别属于训练估计和推理校正。","example":"教学例：p(A)=0.4、q(A)=0.8，训练p质量0.4乘1；推理q质量0.8乘0.5，均为0.4。","papers":["foundation-models:real-loss","foundation-models:speculative-decoding"]},
@@ -13,7 +13,7 @@
     },
     {
       "paper":"multimodal-models:c2-routing", "target_card":"multimodal-models/visual-evidence-budget",
-      "source_revisions":{"multimodal-models:c2-routing":"f4db49418d7e8e5d113f54a5e95ec531a2db6851dcff37c9a6175c4d730d53d2", "foundation-models:pace-vlm":"fd2e2272771705b80eb746235aaf240f909b80d0b503331bbc2951b9f8c3edc9"},
+      "source_revisions":{"multimodal-models:c2-routing":"82f974b798414331f7a5e9a955b3687441f2bdc560dfbe5c9a34e3d64a0ba542", "foundation-models:pace-vlm":"fd2e2272771705b80eb746235aaf240f909b80d0b503331bbc2951b9f8c3edc9"},
       "comparison":{"position":"在裁剪/整图压缩之间先提议动作，再用原/缩输入联合正确性H−B与validation固定FLOPs比决定是否回退。","tradeoff":"PACE依据图像语义密度/局部细节分配budget并融合注意力选token；C²额外建模信息减少相对原图造成的正确率损益。本地没有学习风险头，不能以代数门控宣称超越PACE checkpoint结果。","sections":["背景与主要改动","核心公式","结果、负控与边界"]},
       "analysis":{"title":"信息保留策略与是否值得回退，是两层不同判断","body":"PACE的APC/DDAE问如何分配视觉预算和保留证据，C²-Routing问当前缩减相对原图是否产生可补救伤害以及节省是否值得。高缩减错误率可能来自两边共同失败，也可能被缩减收益抵消；因此不能用错误率代替H−B。实际收益还依赖外部风险预测校准与validation固定策略，公式正确并不表示已训练可靠路由。","papers":["multimodal-models:c2-routing","foundation-models:pace-vlm"]},
       "question":{"id":"cross-visual-budget-versus-fallback-risk","question":"一个缩减输入的错误率很高，为什么不能仅据此否定PACE式预算或强制C²回退？","answer":"还需比较同题原图是否也错，以及缩减是否曾改善。预算是输入证据选择，回退风险是原/缩正确性差；共同失败不会被原图修复。两类机制的真实checkpoint范围与本地L1证据也不能混排。","example":"教学例：缩减在90%题上错，但原图也在同90%错，H=B=0；回退只增加计算，不改善期望正确率。","papers":["multimodal-models:c2-routing","foundation-models:pace-vlm"]},
@@ -22,7 +22,7 @@
     },
     {
       "paper":"multimodal-models:onlyact", "target_card":"multimodal-models/world-state-actions",
-      "source_revisions":{"multimodal-models:onlyact":"0f0699b2122263fe64f05f35ab31ad4087e3f305be55afa788ac6f4887d5f77b", "multimodal-models:rs-jepa":"d702dffacafd0a6312ea20282bdd76d09aac77dba416c6a2cfa7f3d527ed482b"},
+      "source_revisions":{"multimodal-models:onlyact":"214fb33fd33c2b7016404e5dff6503028bd489ee0355cc899011cf4331be4726", "multimodal-models:rs-jepa":"d702dffacafd0a6312ea20282bdd76d09aac77dba416c6a2cfa7f3d527ed482b"},
       "comparison":{"position":"在预训练V-JEPA2联合帧表征上，以场景交换正例及同视频非重叠hard negative适配动作几何，再冻结供世界模型使用。","tradeoff":"RS-JEPA用扫描视图和跨传感器邻域共识学习场景检索；OnlyAct希望保留动作、抑制场景。共享JEPA来源不代表优化目标相同。本地两者均只有独立公式/梯度L1，不提供图像检索或动作迁移能力排名。","sections":["背景与主要改动","核心公式","结果、负控与边界"]},
       "analysis":{"title":"跨视图保持的内容，可以是场景，也可以是动作","body":"RS-JEPA希望不同传感器检索到同一场景，并让其邻域关系一致；OnlyAct反而把动作保持但场景改变的样本拉近，用同场景不同窗作为难负例。二者对场景身份的需求不同，不能直接拼接一个通用InfoNCE就声称兼得。OnlyAct正负构造依赖光流/相机静动假设，局部候选mask与损失的CUDA通过不能验证这些语义假设。","papers":["multimodal-models:onlyact","multimodal-models:rs-jepa"]},
       "question":{"id":"cross-jepa-scene-versus-action-invariance","question":"RS-JEPA与OnlyAct都做表征学习，为什么不能用同场景跨传感器正例替代OnlyAct正例？","answer":"同场景对齐保留场景身份，而OnlyAct要跨场景保留动作。替换会改变不变性目标，甚至鼓励动作编码器依赖场景捷径。InfoNCE公式相似不说明配对语义相同，真实动作迁移需要独立验证。","example":"教学例：同一桥梁的SAR和光学图适合RS-JEPA；OnlyAct需要不同房间里的相同开门动作，而不是同房间任意两个动作。","papers":["multimodal-models:onlyact","multimodal-models:rs-jepa"]},

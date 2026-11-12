@@ -1,6 +1,6 @@
 # A Theory of Policy Optimization in Post-Training: Coverage Collapse and Reference Resets
 
-<!-- source-sha256: 94e839a4180fa0d72b5fddfb1a270830329fbe5cf21addaf28600ec68b5ce967 -->
+<!-- source-sha256: d59bdb8a539849abd079aad30ab38777eea5d387e48f498c2c2fb25ccfbc9087 -->
 
 [简体中文](README.md)
 
@@ -32,6 +32,8 @@ The global complexity results have assumptions: softmax linear policies, rewards
 [![Original Figure 1: fixed references and resets](assets/paper-figure-01.png)](https://arxiv.org/pdf/2611.14467v1#page=3)
 
 Original Figure 1, PDF page 3, preserving all three panels and the caption. Copyright remains with the authors; [provenance](assets/provenance.json) records source and hashes. This is a method/theory illustration, not a local large-model training curve.
+
+<!-- paper-figure:end -->
 
 ```mermaid
 flowchart TD

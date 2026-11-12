@@ -31,6 +31,8 @@ free-target OT 的目标使用频率也自由，因此各失败 rollout **独立
 
 图片来自[原论文](https://arxiv.org/pdf/2611.13135v1#page=2)第 2 页 Figure 1，版权归原作者所有；完整保留图与原图注，来源/页码/哈希见 [provenance](assets/provenance.json)。图中的 ALFWorld 交互和成功结果是作者说明，不是本地 Agent 执行。
 
+<!-- paper-figure:end -->
+
 ```mermaid
 flowchart TD
     O[离线同任务教师rollout] --> V[reward验证成功并按完整动作去重]

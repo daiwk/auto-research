@@ -534,7 +534,7 @@
           ],
           "summary": "增加联合正确性风险与validation成本效用轴，区别如何保留视觉证据和是否值得回退；CPU仅执行策略核，未训练视觉路由，完整18数据集矩阵不复现。",
           "source_revisions": {
-            "multimodal-models:c2-routing": "f4db49418d7e8e5d113f54a5e95ec531a2db6851dcff37c9a6175c4d730d53d2"
+            "multimodal-models:c2-routing": "82f974b798414331f7a5e9a955b3687441f2bdc560dfbe5c9a34e3d64a0ba542"
           }
         }
       ]
@@ -898,7 +898,7 @@
           ],
           "summary": "补入从JEPA时空先验提取动作的对比适配，明确场景检索与动作场景解耦目标差异；A100三seed只验证精确bank/冻结投影/梯度，完整视频训练不复现。",
           "source_revisions": {
-            "multimodal-models:onlyact": "0f0699b2122263fe64f05f35ab31ad4087e3f305be55afa788ac6f4887d5f77b"
+            "multimodal-models:onlyact": "214fb33fd33c2b7016404e5dff6503028bd489ee0355cc899011cf4331be4726"
           }
         }
       ]

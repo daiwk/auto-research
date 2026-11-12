@@ -31,6 +31,8 @@
 
 图片来自[原论文](https://arxiv.org/pdf/2611.14467v1#page=3)第 3 页 Figure 1，版权归原作者所有；保留完整三联图和图注，来源与哈希见 [provenance](assets/provenance.json)。这是方法/理论示意，不是本地大模型训练曲线。
 
+<!-- paper-figure:end -->
+
 ```mermaid
 flowchart TD
     B[当前策略pi_t] --> R[重置KL reference]

@@ -652,7 +652,7 @@
           ],
           "summary": "补审coverage/reference-reset理论，分清行为old policy、KL reference和student初始化；增加Kimi偏差与Rebel中心化恒等式。仅CPU精确有限核，纯理论大型实证不适用，不宣称普适GRPO收敛。",
           "source_revisions": {
-            "post-training:apmd-reference-reset": "94e839a4180fa0d72b5fddfb1a270830329fbe5cf21addaf28600ec68b5ce967"
+            "post-training:apmd-reference-reset": "d59bdb8a539849abd079aad30ab38777eea5d387e48f498c2c2fb25ccfbc9087"
           }
         }
       ]
@@ -2018,7 +2018,7 @@
           ],
           "summary": "补审BOPD，区分持续特权视图与两阶段无参考教师迁移，保留学生/optimizer重置及逐轨迹FKL；本地A100只验收loss/handoff，完整多GPU与长生成实验不复现。",
           "source_revisions": {
-            "post-training:bopd": "79333bcc5fa03689e7a28544241abccea2e3dcca0eeab86125520afd680f6ee9"
+            "post-training:bopd": "51c807b00f02ae3ad96613edf9c3d7074cf46569aeb7e8b3ea9394c3145cea0d"
           }
         },
         {
@@ -2028,7 +2028,7 @@
           ],
           "summary": "补审LCS同任务引用选择，区分整episode失败过滤与SPOD完整action保护；保留free-target独立选择、双normalizer和teacher-only reference。仅CPU选择核，不用fixture冒充多轮Agent训练。",
           "source_revisions": {
-            "post-training:lcs-reference-opd": "65879615c38c9270fee5e4424d6437e6ab920a70a477efefd027ca246cf5f685"
+            "post-training:lcs-reference-opd": "92ff22ac54c37dbaec59f9b3dfa4fec26b54c656dae57dadb01bc6b0a4ed430b"
           }
         }
       ]

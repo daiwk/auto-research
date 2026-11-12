@@ -91,7 +91,7 @@
       }
     },
     "dive/foundation-models/generation-paths/update/2026-11-12/2": {
-      "source_sha256": "43373d4ef5ac952bf5e6eb12eec6fcd2679562440ca341c3a55ba76b7f829f61",
+      "source_sha256": "a6686a4e0e765feebeff307c535551c915e6f9157ca14241cf14ea76c2827d8f",
       "reviewed": true,
       "fields": {
         "summary": "Add accepted-branch EAL training and distinguish target-sampled q/p weights from draft-proposal p/q verification. Three-seed A100 checks cover loss/gradient mechanics only; full training remains cost-deferred."
@@ -123,7 +123,7 @@
       }
     },
     "dive/multimodal-models/visual-evidence-budget/update/2026-11-12/2": {
-      "source_sha256": "67546ed3774107fdc5083497eb24a1865ff2644c136d7caa84a6dca17ff88e0d",
+      "source_sha256": "13365fc878f6ce0d065938183b40bb72f219626563c098e165b3a0129d9cb51e",
       "reviewed": true,
       "fields": {
         "summary": "Add joint-correctness risk and validation-cost utility, separating evidence retention from fallback value. CPU work implements only the policy kernel; no visual router is trained and the full 18-dataset matrix is not reproduced."
@@ -155,7 +155,7 @@
       }
     },
     "dive/multimodal-models/world-state-actions/update/2026-11-12/4": {
-      "source_sha256": "5bc2724abb2a4c95973af725b3a5d2bbe288cfcf69c84a88e4a877d7d5636e4a",
+      "source_sha256": "3d9815fbf863098eb8e10df37569f2c9c7d2ce124c204de76a7bc1c3d84a3741",
       "reviewed": true,
       "fields": {
         "summary": "Add contrastive action extraction from JEPA temporal priors and distinguish scene retrieval from action/scene disentanglement. A100 seeds check exact bank, frozen projection and gradients only; full video training is not reproduced."
@@ -187,7 +187,7 @@
       }
     },
     "dive/post-training/teacher-and-context/update/2026-11-12/3": {
-      "source_sha256": "9fd8a7b65b85132e647f186df4f39e9493a7cc91b1c6d0fd1ffb827641de004a",
+      "source_sha256": "82783c96714d82b5e068bf0aaf45caa93871fd5214eccf4c0dab3b1081708204",
       "reviewed": true,
       "fields": {
         "summary": "Added BOPD to distinguish continued privileged views from two-stage reference-free transfer, preserving student/optimizer restoration and per-trajectory FKL. A100 evidence covers loss/handoff only; full multi-GPU, long-generation experiments are not reproduced."
@@ -219,7 +219,7 @@
       }
     },
     "dive/post-training/policy-optimization/update/2026-11-12/4": {
-      "source_sha256": "4b986e484e66abcc0897d7d883e6c9c95e409bcd118ad52e5b680ef0ab026919",
+      "source_sha256": "95031927336c8754a754d1135879e05968929f533b84e9eea1a5c2750d88e9d2",
       "reviewed": true,
       "fields": {
         "summary": "Added coverage/reference-reset theory to separate behavior old policies, KL anchors and learner initialization, with Kimi bias and Rebel centering identities. CPU finite references only; large empirical reproduction is not applicable, and universal practical-GRPO convergence is not claimed."
@@ -251,7 +251,7 @@
       }
     },
     "dive/post-training/teacher-and-context/update/2026-11-12/4": {
-      "source_sha256": "ede1c7ed97353a2b642da383093df367c386157de83c73da25edb10792cbb097",
+      "source_sha256": "202e32818d0dce7291e3a2cb2e604077be24760b4036d2aeb09d26bbcb299a7c",
       "reviewed": true,
       "fields": {
         "summary": "Added same-task LCS selection, separating episode-level failure filtering from SPOD's complete-action protection. Preserved independent free-target assignment, both normalizers and teacher-only references. The CPU selector is not substitute multi-turn agent training."

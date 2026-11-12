@@ -21,11 +21,14 @@
 
 安全门不只预测“缩减输入会不会错”，而是联合预测原图与缩减图的正确性。两者都错时回退无济于事，缩减反而改善时回退还会损失收益；风险须将这两种情况区分开。
 
+<!-- paper-figure:start -->
 ### 原论文关键图
 
 [![原文 Figure 2：共享特征、裁剪压缩选择与风险门控](assets/paper-figure-01.png)](https://arxiv.org/pdf/2611.14469v1#page=3)
 
 图片来自[原论文](https://arxiv.org/pdf/2611.14469v1#page=3)，版权归原作者所有。PDF 第 3 页完整渲染，包含 Figure 2 及原说明，未改动内容。图中的 learned head 和 VLM 未在本地实现。
+
+<!-- paper-figure:end -->
 
 ### 架构与流程
 

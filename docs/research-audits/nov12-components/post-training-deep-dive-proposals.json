@@ -58,7 +58,7 @@
         "update": "Added BOPD to distinguish continued privileged views from two-stage reference-free transfer, preserving student/optimizer restoration and per-trajectory FKL. A100 evidence covers loss/handoff only; full multi-GPU, long-generation experiments are not reproduced."
       },
       "source_revisions": {
-        "post-training:bopd": "79333bcc5fa03689e7a28544241abccea2e3dcca0eeab86125520afd680f6ee9",
+        "post-training:bopd": "51c807b00f02ae3ad96613edf9c3d7074cf46569aeb7e8b3ea9394c3145cea0d",
         "post-training:opsd": "8082928a5bc28763d2b28f8f7f640f9498cf8516f2e58f3841760950f405df74"
       }
     },
@@ -116,7 +116,7 @@
         "update": "Added coverage/reference-reset theory to separate behavior old policies, KL anchors and learner initialization, with Kimi bias and Rebel centering identities. CPU finite references only; large empirical reproduction is not applicable, and universal practical-GRPO convergence is not claimed."
       },
       "source_revisions": {
-        "post-training:apmd-reference-reset": "94e839a4180fa0d72b5fddfb1a270830329fbe5cf21addaf28600ec68b5ce967",
+        "post-training:apmd-reference-reset": "d59bdb8a539849abd079aad30ab38777eea5d387e48f498c2c2fb25ccfbc9087",
         "post-training:grpo": "43d89e0ce5fb714a0bd1158c64f9d7410596997dae717a03ba3dcdd99f21b6e2"
       }
     },
@@ -174,7 +174,7 @@
         "update": "Added same-task LCS selection, separating episode-level failure filtering from SPOD's complete-action protection. Preserved independent free-target assignment, both normalizers and teacher-only references. The CPU selector is not substitute multi-turn agent training."
       },
       "source_revisions": {
-        "post-training:lcs-reference-opd": "65879615c38c9270fee5e4424d6437e6ab920a70a477efefd027ca246cf5f685",
+        "post-training:lcs-reference-opd": "92ff22ac54c37dbaec59f9b3dfa4fec26b54c656dae57dadb01bc6b0a4ed430b",
         "post-training:spod": "fc77c99d7ef92137fe29e15080e6d79fbf955f5b51af0f0622cc6cfd786d8ff9"
       }
     }

@@ -27,7 +27,7 @@
       "cost_basis":"35B-A3B target, Domino140Ksteps, multi-loss and nine-subset serving matrix. Authors measured REAL about845ms/step; extrapolation140Ksteps roughly33h per recipe in their environment, not local A100 measurement; complete study not attempted.",
       "requires_gpu_validation":true, "gpu_validation_status":"passed_real_A100_cuda_seeds42_43_44", "gpu_validation_artifact":"docs/gpu-validations/real-loss-a100-20261112.json",
       "automatic_retry":false, "automatic_implementation_queue":false, "promotion_eligible":false, "evolve_integrated":false,
-      "readme_sha256":"e4848c9662b1b1adbf3a22a5f49bf5da92201a0da568df92d6995479812e7eeb",
+      "readme_sha256":"8f341df1e058579ddf183df4bb4ab599bf01787778fae00e9e9efd2a82bd4012",
       "figure":{"asset":"docs/foundation-models/2611.14399-real-loss/assets/paper-figure-01.png", "source_url":"https://arxiv.org/pdf/2611.14399v1#page=4", "figure":"Figure 2 and Algorithm 1", "pdf_page":4, "render":"Full page, pdftoppm scale-to1800; no crop or content edits", "visually_reviewed":true}
     },
     {
@@ -47,7 +47,7 @@
       "full_experiment_status":"not_reproduced_high_cost", "full_experiment_review_done":true, "review_done":true,
       "cost_basis":"206,996 questions,3 frozen3B/7B/8B targets with original/crop/compressed answer-label generation;18datasets,4 training/validation seeds and multi-baseline matrix. RTX3090 feasibility does not make full inference matrix short; not attempted.",
       "requires_gpu_validation":false, "gpu_validation_status":"not_required_cpu_only", "automatic_retry":false, "automatic_implementation_queue":false, "promotion_eligible":false, "evolve_integrated":false,
-      "readme_sha256":"f4db49418d7e8e5d113f54a5e95ec531a2db6851dcff37c9a6175c4d730d53d2",
+      "readme_sha256":"82f974b798414331f7a5e9a955b3687441f2bdc560dfbe5c9a34e3d64a0ba542",
       "figure":{"asset":"docs/multimodal-models/2611.14469-c2-routing/assets/paper-figure-01.png", "source_url":"https://arxiv.org/pdf/2611.14469v1#page=3", "figure":"Figure 2", "pdf_page":3, "render":"Full page, pdftoppm scale-to1800; no crop or content edits", "visually_reviewed":true}
     },
     {
@@ -68,7 +68,7 @@
       "cost_basis":"Authors measure1.5RTX4090h encoder adaptation300M/7.1MLoRA/168Kpairs/10Kupdates, about5RTX4090h per worldmodel20Ksteps/19,946clips; plus13dataset probes,baseline training,RAFT and rollouts. These are author measurements not local timing; full multi-source matrix not attempted.",
       "requires_gpu_validation":true, "gpu_validation_status":"passed_real_A100_cuda_seeds42_43_44", "gpu_validation_artifact":"docs/gpu-validations/onlyact-a100-20261112.json",
       "automatic_retry":false, "automatic_implementation_queue":false, "promotion_eligible":false, "evolve_integrated":false,
-      "readme_sha256":"0f0699b2122263fe64f05f35ab31ad4087e3f305be55afa788ac6f4887d5f77b",
+      "readme_sha256":"214fb33fd33c2b7016404e5dff6503028bd489ee0355cc899011cf4331be4726",
       "figure":{"asset":"docs/multimodal-models/2611.14420-onlyact/assets/paper-figure-01.png", "source_url":"https://arxiv.org/pdf/2611.14420v1#page=4", "figure":"Figure 2", "pdf_page":4, "render":"Full page, pdftoppm scale-to1800; no crop or content edits", "visually_reviewed":true}
     }
   ]

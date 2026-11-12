@@ -2,6 +2,8 @@
   "schema_version": 1,
   "checked_on": "2026-11-12",
   "id": "2609.04961",
+  "priority": "P2",
+  "priority_reason": "Unconfirmed experiment-version correspondence; archived source exception, not an accepted production-evidence candidate.",
   "reviewed_version": "v2",
   "paper_url": "https://arxiv.org/abs/2609.04961v2",
   "title": "SAM-D2Q: Aligning Multimodal Doc2Query with Search Demand and Conversion for E-commerce",

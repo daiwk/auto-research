@@ -21,11 +21,14 @@
 
 REAL 用冻结 target 采样的轨迹，保留每步 propose-and-accept 质量，并将每个前缀乘积的最后一步解析边缘化。它只替换 drafter 的损失，不改变原 drafter 或推理 verifier；路径估计的采样分布是算法前提，不能任意换成 draft 轨迹。
 
+<!-- paper-figure:start -->
 ### 原论文关键图
 
 [![原文 Figure 2 的梯度反转反例与 Algorithm 1](assets/paper-figure-01.png)](https://arxiv.org/pdf/2611.14399v1#page=4)
 
 图片来自[原论文](https://arxiv.org/pdf/2611.14399v1#page=4)，版权归原作者所有。PDF 第 4 页完整渲染，包含 Figure 2 与 Algorithm 1，未改动原图内容。图中的实验与推导不是本地训练结果。
+
+<!-- paper-figure:end -->
 
 ### 架构与流程
 

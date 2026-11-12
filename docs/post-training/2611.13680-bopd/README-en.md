@@ -1,6 +1,6 @@
 # Bootstrapped On-Policy Distillation
 
-<!-- source-sha256: 79333bcc5fa03689e7a28544241abccea2e3dcca0eeab86125520afd680f6ee9 -->
+<!-- source-sha256: 51c807b00f02ae3ad96613edf9c3d7074cf46569aeb7e8b3ea9394c3145cea0d -->
 
 [简体中文](README.md)
 
@@ -32,6 +32,8 @@ This is not continued Stage I training. Parameters and persistent buffers restor
 [![Original BOPD Figure 2](assets/paper-figure-01.png)](https://arxiv.org/pdf/2611.13680v1#page=2)
 
 Original Figure 2, PDF page 2, retaining the full diagram and caption. Copyright remains with the authors; [provenance](assets/provenance.json) records source, PDF/PNG hashes and crop. Its model-generation loop is not implemented locally.
+
+<!-- paper-figure:end -->
 
 ```mermaid
 flowchart TD

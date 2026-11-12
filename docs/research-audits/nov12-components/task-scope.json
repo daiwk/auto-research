@@ -43,7 +43,7 @@
     },
     {
       "path": "research-audits/nov12-components/industrial-source-exception.json",
-      "sha256": "0a58032e5ac31b4b2155d7a2f744b2e9837cb08a5ac85229f1c5c6d644d9a79e"
+      "sha256": "bc65de6eb03904677d2123425f73bf3b4ce1cd3130ae02983a93c35d42c8abef"
     },
     {
       "path": "research-audits/nov12-components/preflight.json",
@@ -71,7 +71,7 @@
     },
     {
       "path": "research-audits/nov12-components/foundation-review.json",
-      "sha256": "eadf0caf706dbf9317ea9808711552ad48080af80479aeac3be2915ebe9343a6"
+      "sha256": "c232492c34162f8026ece2c6ac433686fe3e08eb00f4d2366830a20b1632e8e0"
     }
   ],
   "papers": [
@@ -423,6 +423,8 @@
       "schema_version": 1,
       "checked_on": "2026-11-12",
       "id": "2609.04961",
+      "priority": "P2",
+      "priority_reason": "Unconfirmed experiment-version correspondence; archived source exception, not an accepted production-evidence candidate.",
       "reviewed_version": "v2",
       "paper_url": "https://arxiv.org/abs/2609.04961v2",
       "title": "SAM-D2Q: Aligning Multimodal Doc2Query with Search Demand and Conversion for E-commerce",

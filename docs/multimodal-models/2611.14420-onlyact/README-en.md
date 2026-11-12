@@ -1,6 +1,6 @@
 # OnlyAct: separate action and scene in V-JEPA 2 representations
 
-<!-- source-sha256: 0f0699b2122263fe64f05f35ab31ad4087e3f305be55afa788ac6f4887d5f77b -->
+<!-- source-sha256: 214fb33fd33c2b7016404e5dff6503028bd489ee0355cc899011cf4331be4726 -->
 
 [简体中文](README.md)
 
@@ -25,11 +25,14 @@ Reconstruction bottlenecks can discard action detail when narrow and leak appear
 
 Contrastive adaptation combines same-action, scene-swapped positives with hard negatives from disjoint windows of the same video. For static cameras, RAFT identifies moving pixels, which are jointly translated onto another scene. With camera motion, the background movement is part of the action, so positives use a different photometric augmentation shared across the two frames. Without action labels, disjoint same-video windows are not proof of different action classes.
 
+<!-- paper-figure:start -->
 ### Key original figure
 
 [![Original Figure 2: contrastive action adaptation and world model](assets/paper-figure-01.png)](https://arxiv.org/pdf/2611.14420v1#page=4)
 
 The complete PDF page 4 retains Figure 2 and its caption without changes. Copyright remains with the authors. The video world model shown on the right is not executed locally.
+
+<!-- paper-figure:end -->
 
 ### Equations and flow
 
