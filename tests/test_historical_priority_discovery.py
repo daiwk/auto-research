@@ -59,6 +59,7 @@ def test_later_real_cost_closure_stays_terminal_and_catalog_is_authoritative(tmp
     {"source_provenance": [{"source_url": "https://github.com/facebookresearch/project"}]},
     {"source_provenance": [{"source_url": "https://github.com/facebook/meta-encoder-eval"}]},
     {"source_provenance": [{"source_url": "https://github.com/google/project"}]},
+    {"source_provenance": [{"source_url": "https://github.com/Google-Health/consumer-health-research"}]},
     {"source_provenance": [{"source_url": "https://www.research.google/blog/sensor-world-model/"}]},
     {"source_provenance": [{"source_url": "https://research.meta.ai/"}]},
     {"first_author_affiliation": "Google DeepMind"},
@@ -87,6 +88,7 @@ def test_current_official_domains_reopen_old_p2_selection(url):
 @pytest.mark.parametrize("url", [
     "https://github.com.evil.invalid/google-research/harness2",
     "https://github.com/not-google-research/harness2",
+    "https://github.com/not-google-health/consumer-health-research",
     "https://research.google.evil.invalid/pubs/",
     "https://www.research.google.evil.invalid/blog/",
     "https://research.meta.ai.evil.invalid/",

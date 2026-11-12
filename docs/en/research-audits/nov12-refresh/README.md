@@ -1,7 +1,7 @@
 # November 12 official-source recheck: SensorWM backfill and priority protection
 
 [简体中文](../../../research-audits/nov12-refresh/README.md)
-<!-- source-sha256: d7bd28728b2efbfda78832c2ae7ecb5618473701457c57fba2682140649cf80d -->
+<!-- source-sha256: 34533478c54de97f1fb6c914a98058ca22771703de2e5dc7088c2b235063f326 -->
 
 No new arXiv announcement was established. The eight official `new` pages are **byte-identical** to the prior captures and still display November 11. The same announcement is not recounted, and discovery dates do not replace original publication dates. The [source delta](../../../research-audits/nov12-refresh/source-coverage.json) and [official-lead review](../../../research-audits/nov12-refresh/priority-review.json) retain evidence and coverage limits separately.
 
@@ -34,6 +34,8 @@ This checks the committed source/execution/metric chain without uncommitted web 
 New regressions first reproduced two URL variants failing to reopen old P2 selections: `www.research.google` and `research.meta.ai`. The implementation now normalizes only the exact `www.` prefix and recognizes Meta's current official domain. Lookalike domains, similar repository names, and an abstract mentioning “meta-learning” do not establish institutional priority.
 
 This is a **full-text review signal**, not proof of affiliation, eligibility, code release, deployment, or A/B evidence. The historical SensorWM snapshot lacks complete institutional provenance; these domain omissions cannot be asserted as its sole historical cause.
+
+The verified upstream link `Google-Health/consumer-health-research` also reproduced a missing repository-owner signal. Only the exact `google-health` owner now recalls Google review; lookalikes such as `not-google-health` remain excluded. This does not establish that SensorWM source code has been released there.
 
 ## Leads not counted as new papers
 

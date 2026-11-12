@@ -34,6 +34,8 @@ PYTHONPATH=src python scripts/run_sensorwm_planning.py --check
 
 这只是**待全文审查信号**，不是作者机构、选题资格、开源、上线或 A/B 的证明。旧 SensorWM 快照缺少当时完整机构来源，不能反推这两个域名遗漏就是其历史分流的唯一原因。
 
+另用本轮已核实的 `Google-Health/consumer-health-research` 上游链接重现并补齐仓库所有者识别；仅精确的 `google-health` owner 取得 Google 待审信号，`not-google-health` 等相似名称仍被排除。这不代表其中已有 SensorWM 源码。
+
 ## 未当作新论文的线索
 
 - Google CKM companion：原文方法复用既有 LSM-V2，当前核查未建立新的独立通用算法或公开基准，按本仓库方法选题范围不收录；不否定其医学研究价值。

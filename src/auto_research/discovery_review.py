@@ -175,7 +175,7 @@ def priority_organizations(candidate: dict) -> tuple[str, ...]:
                 found.add("Meta")
             if host in {"github.com", "www.github.com"}:
                 owner = parsed.path.strip("/").split("/", 1)[0].lower()
-                if owner in {"google", "google-research", "google-deepmind", "deepmind"}:
+                if owner in {"google", "google-research", "google-deepmind", "google-health", "deepmind"}:
                     found.add("Google")
                 if owner in {"facebook", "facebookresearch", "meta-llama", "meta-recsys"}:
                     found.add("Meta")
