@@ -7,7 +7,7 @@ hide:
 
 # 规划先问何时见反馈，再问要不要展开搜索
 
-[Agent](../index.md) · 更新 2026-10-27 · 16 篇主题资料 / 6 篇重点对照
+[Agent](../index.md) · 更新 2026-11-12 · 17 篇主题资料 / 7 篇重点对照
 
 ReAct 与 ReWOO 改变计划接收观察的时机，ToT 与 LATS 改变候选搜索组织，Jev Lookahead 把后继模拟交给代码，DRAGO 则检查形式计划是否忠实。它们处理不同的不确定性：步骤未知、路线选择、环境可达性与规格错误，不应以搜索次数或本地满分统一排名。
 
@@ -31,6 +31,7 @@ ReAct 与 ReWOO 改变计划接收观察的时机，ToT 与 LATS 改变候选搜
 | [LATS](../../../agent-research/2310.04406-lats/README.md) · [原始来源](https://arxiv.org/abs/2310.04406)<br>章节：背景与主要改动、核心公式、复现边界 | 用 MCTS 组织行动、rollout 与价值回传，UCT 平衡已有回报和访问不足，失败生成反思。 | 真实 rollout 增加外部约束也消耗预算；本地以完整计划为叶，未运行原文 LM value 或 WebShop。 |
 | [Code Owns the Simulation, Jev Owns the Evaluation](../../../agent-research/2610.01834-jev-lookahead/README.md) · [原始来源](https://arxiv.org/abs/2610.01834)<br>章节：背景与主要改动、核心公式、本地复现 | 逐动作克隆模拟后继，把新观察和新可用动作交给决策器比较进展。 | 依赖可信且隔离的 simulator；独立对象不保证 RNG/外部资源隔离。本地词法 provider 只是替身。 |
 | [Repairing LLM-Generated Specifications with Deterministic Diagnosis](../../../agent-research/2610.22568-drago/README.md) · [原始来源](https://arxiv.org/abs/2610.22568)<br>章节：背景与主要改动、核心公式、本地复现与边界 | 以类型、契约、可达性和题意诊断定向修复形式规格，严格降低阻塞并防止删目标退化。 | 求解器只验证给定形式化，仍可能形式上可解却题意错误；本地是正前提 STRIPS 子集，完整多模型实验高成本未复现。 |
+| [Budget-Aware Tool Use Enables Effective Agent Scaling](../../../agent-research/2511.17006-bats/README.md) · [原始来源](https://arxiv.org/abs/2511.17006)<br>章节：核心公式、数据协议与代码映射、结果、负控与边界 | 持续注入逐工具预算，并由外部SUCCESS/CONTINUE/PIVOT信号调节尝试；摘要清理历史但不补额度，任一工具耗尽结束。 | 统一token/工具账本是实际消耗而非预算上限；本地只有状态与费用核，没有语义规划、自验证、网页工具、答案judge或准确率结论。 |
 
 </div>
 
@@ -47,6 +48,12 @@ ReWOO 的变量引用说明它不是不看工具证据，而是不让 Planner �
 ToT 与 LATS 都扩展多个方向，但前者突出中间状态评价和前沿组织，后者还通过执行与访问统计回传反馈。Jev Lookahead 进一步要求代码模拟提供可观察后继，DRAGO 用符号探针检查规格。外部计算也不是万能 oracle：模拟器可能不隔离，求解器可能解了错误规格。比较搜索器时应先固定它能看到的证据及失败含义，再讨论树宽、深度和预算。
 
 对照来源：[tree-of-thoughts](../../../agent-research/2305.10601-tree-of-thoughts/README.md) · [lats](../../../agent-research/2310.04406-lats/README.md) · [jev-lookahead](../../../agent-research/2610.01834-jev-lookahead/README.md) · [drago](../../../agent-research/2610.22568-drago/README.md)
+
+### 减少重复规划与有预算的自适应换路不是同一个轴
+
+ReWOO把完整依赖计划交给Worker后再由Solver汇总，减少中间观察对Planner的反复打断；BATS让剩余额度持续参与模型决策，并通过语义自验证决定保留方向还是换路。因而开环分解与预算条件化是不同控制假设，可比较其成本记账和重启语义，但不能拿合成状态转换断言哪种真实任务更强。外部SUCCESS只表示该模块接受，不能读取gold把自检变成oracle。
+
+对照来源：[bats](../../../agent-research/2511.17006-bats/README.md) · [rewoo](../../../agent-research/2305.18323-rewoo/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -82,15 +89,29 @@ ToT 与 LATS 都扩展多个方向，但前者突出中间状态评价和前沿�
 
     对照来源：[jev-lookahead](../../../agent-research/2610.01834-jev-lookahead/README.md) · [drago](../../../agent-research/2610.22568-drago/README.md)
 
+### ReWOO省去多次Planner与BATS在矛盾后PIVOT，分别付出什么代价？ {#cross-cross-open-loop-versus-budget-conditioned-pivot}
+
+??? note "展开答案与例子"
+
+    **答案：** ReWOO的预先分解减少重复规划但要承担计划对后来证据不适配；BATS保留动态决策但要支付规划/验证开销，并在换路时保留真实已用预算。准确率与实际费用仍须完整隔离评测，不能用本地控制核决定胜者。
+
+    **教学例子：** 教学例：ReWOO执行预排三步工具依赖；BATS用掉一次搜索后换路仍只剩两次额度，不能为了展示更好答案重置为三次。
+
+    对照来源：[bats](../../../agent-research/2511.17006-bats/README.md) · [rewoo](../../../agent-research/2305.18323-rewoo/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-12** · 补充预算条件化搜索与实际费用轴，区分BATS动态换路和ReWOO开环解耦；强调任一工具耗尽、换路保留用量和外部verifier非gold能力证据。
+
+涉及：[bats](../../../agent-research/2511.17006-bats/README.md)
 
 **2026-10-27** · 首版：比较反馈时机、thought与MCTS搜索、代码后继模拟和形式规格诊断，区分规划效率与验证证据。
 
 覆盖 16 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 16 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 17 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -110,6 +131,7 @@ ToT 与 LATS 都扩展多个方向，但前者突出中间状态评价和前沿�
 - [ReWOO](../../../agent-research/2305.18323-rewoo/README.md)
 - [Tree of Thoughts](../../../agent-research/2305.10601-tree-of-thoughts/README.md)
 - [ReAct](../../../agent-research/2210.03629-react/README.md)
+- [Budget-Aware Tool Use Enables Effective Agent Scaling](../../../agent-research/2511.17006-bats/README.md)
 
 </details>
 

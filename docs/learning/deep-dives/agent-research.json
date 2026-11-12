@@ -71,6 +71,16 @@
             "核心公式",
             "本地复现与边界"
           ]
+        },
+        {
+          "paper": "agent-research:bats",
+          "position": "持续注入逐工具预算，并由外部SUCCESS/CONTINUE/PIVOT信号调节尝试；摘要清理历史但不补额度，任一工具耗尽结束。",
+          "tradeoff": "统一token/工具账本是实际消耗而非预算上限；本地只有状态与费用核，没有语义规划、自验证、网页工具、答案judge或准确率结论。",
+          "sections": [
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -90,6 +100,14 @@
             "agent-research:lats",
             "agent-research:jev-lookahead",
             "agent-research:drago"
+          ]
+        },
+        {
+          "title": "减少重复规划与有预算的自适应换路不是同一个轴",
+          "body": "ReWOO把完整依赖计划交给Worker后再由Solver汇总，减少中间观察对Planner的反复打断；BATS让剩余额度持续参与模型决策，并通过语义自验证决定保留方向还是换路。因而开环分解与预算条件化是不同控制假设，可比较其成本记账和重启语义，但不能拿合成状态转换断言哪种真实任务更强。外部SUCCESS只表示该模块接受，不能读取gold把自检变成oracle。",
+          "papers": [
+            "agent-research:bats",
+            "agent-research:rewoo"
           ]
         }
       ],
@@ -123,9 +141,19 @@
             "agent-research:jev-lookahead",
             "agent-research:drago"
           ]
+        },
+        {
+          "id": "cross-open-loop-versus-budget-conditioned-pivot",
+          "question": "ReWOO省去多次Planner与BATS在矛盾后PIVOT，分别付出什么代价？",
+          "answer": "ReWOO的预先分解减少重复规划但要承担计划对后来证据不适配；BATS保留动态决策但要支付规划/验证开销，并在换路时保留真实已用预算。准确率与实际费用仍须完整隔离评测，不能用本地控制核决定胜者。",
+          "example": "教学例：ReWOO执行预排三步工具依赖；BATS用掉一次搜索后换路仍只剩两次额度，不能为了展示更好答案重置为三次。",
+          "papers": [
+            "agent-research:bats",
+            "agent-research:rewoo"
+          ]
         }
       ],
-      "updated": "2026-10-27",
+      "updated": "2026-11-12",
       "reviewed_papers": [
         "agent-research:drago",
         "agent-research:janus",
@@ -142,7 +170,8 @@
         "agent-research:lats",
         "agent-research:rewoo",
         "agent-research:tree-of-thoughts",
-        "agent-research:react"
+        "agent-research:react",
+        "agent-research:bats"
       ],
       "updates": [
         {
@@ -183,6 +212,16 @@
             "agent-research:rewoo": "ad0b4fa6b85e9984567a3f0041aa3cc13a9d769706c4c5b5562b7e33d70784ff",
             "agent-research:tree-of-thoughts": "15d2dd3bb74da5efa3e7835189a36222a151d4c6c48d1ad25d93d5c8c8d67a0f",
             "agent-research:react": "e356d3e717cb7cf1b6f307cb79728bffd7d3d9807443aa881c22dab763ac518e"
+          }
+        },
+        {
+          "date": "2026-11-12",
+          "papers": [
+            "agent-research:bats"
+          ],
+          "summary": "补充预算条件化搜索与实际费用轴，区分BATS动态换路和ReWOO开环解耦；强调任一工具耗尽、换路保留用量和外部verifier非gold能力证据。",
+          "source_revisions": {
+            "agent-research:bats": "59608573c3c430e125e4b02f6341c7fa47bbcf5d4adcdce334a54501391606cb"
           }
         }
       ]
@@ -1251,6 +1290,16 @@
             "核心公式",
             "数据协议与代码映射"
           ]
+        },
+        {
+          "paper": "agent-research:agent-gym",
+          "position": "以独立ALF规则层修正原Agent的JSON输出；AND检测、scope互斥、三层动作合并和显式SME批准保持纠错可审计。",
+          "tradeoff": "目标匹配和collateral只描述适应案例覆盖，类型合同不证明语义正确。原Agent/模型不重训；LLM发现与自动晋升没有本地实现。",
+          "sections": [
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -1327,6 +1376,14 @@
             "agent-research:pase",
             "agent-research:fgse",
             "agent-research:verified-quantum-wiki"
+          ]
+        },
+        {
+          "title": "改输出的例外规则与改程序的技能补丁，准入证据不同",
+          "body": "PASE在skill/program配对上提出程序补丁，依held-out validation严格改善接受；Agent Gym在原Agent外层保存可逆业务例外，target/collateral检查之后仍需要专家明确批准。程序语法、规则匹配、人工授权和任务效果是四种不同判断，不应互相冒充。本地两者都是准入/事务L1核，不是自动发明规则、模型变聪明或完整RSI。",
+          "papers": [
+            "agent-research:agent-gym",
+            "agent-research:pase"
           ]
         }
       ],
@@ -1423,9 +1480,19 @@
             "agent-research:fgse",
             "agent-research:verified-quantum-wiki"
           ]
+        },
+        {
+          "id": "cross-rule-governance-versus-program-validation",
+          "question": "一条业务纠错规则经SME批准，与一个程序补丁validation提高，能相互替代吗？",
+          "answer": "不能。前者是在目标与collateral范围内授权下游例外；后者是配对程序在隔离validation上的测得效果。二者作用位置和接受依据不同，均不能靠语法/类型检查证明语义成功。",
+          "example": "教学例：紧急采购例外可获人工授权；表格公式修补则要validation严格提高。把专家批准标成benchmark提升，或用一次分数提高授权采购政策，都混淆证据。",
+          "papers": [
+            "agent-research:agent-gym",
+            "agent-research:pase"
+          ]
         }
       ],
-      "updated": "2026-11-11",
+      "updated": "2026-11-12",
       "reviewed_papers": [
         "agent-research:verified-quantum-wiki",
         "agent-research:rsi-opt",
@@ -1480,7 +1547,8 @@
         "agent-research:rsi-dojo",
         "agent-research:envopt",
         "agent-research:fgse",
-        "agent-research:pase"
+        "agent-research:pase",
+        "agent-research:agent-gym"
       ],
       "updates": [
         {
@@ -1667,6 +1735,16 @@
             "agent-research:fgse": "9caa7552e0d61e3278ab9656b244e3285659e1729284b9c838cfdda2a413a8d9",
             "agent-research:pase": "e741421c8f476b55e2800a43f637417869df821847d270cc4f2ba1c5fa5fed04",
             "agent-research:verified-quantum-wiki": "788c73d94a73c790596907351bdf51659bb1ed4a24764bf4a2315cef699d6086"
+          }
+        },
+        {
+          "date": "2026-11-12",
+          "papers": [
+            "agent-research:agent-gym"
+          ],
+          "summary": "加入下游规则治理这一演化位置：明确scope互斥、3→2→1真实状态更新与SME信任边界，并与PASE程序validation准入区分；完整API/人工系统不复现。",
+          "source_revisions": {
+            "agent-research:agent-gym": "f41a43a7de90bce7407709824b193c929bb3e7d33064e60c8187aac852974de3"
           }
         }
       ]

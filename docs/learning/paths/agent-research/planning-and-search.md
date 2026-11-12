@@ -7,7 +7,7 @@ hide:
 
 # 规划与搜索：下一步该做什么
 
-[Agent](index.md) / 64 个问题 · 16 篇论文
+[Agent](index.md) / 68 个问题 · 17 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">64 个问题 · 16 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">68 个问题 · 17 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:drago" data-paper-title="Repairing LLM-Generated Specifications with Deterministic Diagnosis" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Repairing LLM-Generated Specifications with Deterministic Diagnosis Agent University of Oxford 2026-10-15 形式规格“能运行”不等于“忠实表达了题意”。DRAGO 将 SMT-LIB2、MiniZinc 和 PDDL 的契约、求解器探针及题意对齐检查转为可定位诊断，再要求模型定向修复。候选必须保留语法/词表/输出合同，严格降低阻塞诊断，并满足防退化条件；参考形式化和最终标签只用于最后评分。方法 §3、附录 A.2 原图建议：原论文 Figure 2 为诊断/接纳消融；Figure 3 为 Planetarium 输入渲染缺陷。它们分别解释算法贡献和评测风险。 原文用 4×A100 服务30B/31B模型，跨5个 benchmark 多seed、多臂重评估，完整实验成本过高，不复现（审查 DONE）。实现 grounded STRIPS/PDDL 方向的诊断算子子集；component_only / L1 CPU。实现 grounded STRIPS/PDDL 方向的诊断算子子集；不冒充完整三形式化语言框架。CPU fixture 随机化走廊规模，实际执行无前提路径、联合目标冲突、预算耗尽、证据支持的初态修复，以及“删掉目标就算修好”的负对照。proposal 回调只拿公开 Problem 和 Diagnosis，不拿金标准。  规划与搜索 形式规格诊断与保守修复 Agent 规划与搜索：下一步该做什么 让 LLM 把自然语言题目写成形式规格时，DRAGO 要防哪类“看似成功”？ 模型可能生成能解析、能求解，却遗漏要求的规格，后续求解器只会忠实解决这个错误版本。DRAGO 关注自然语言到形式系统的转换可靠性，用可定位诊断约束修复，而不是把拿到一个解当作原题已解决；规格和求解是两个需要分开检查的环节。 例如题目要求两人都被安排，规格漏写一人后排班更容易有解，但这个“成功”恰好暴露了形式化阶段的遗漏。 2026-10-27">
@@ -663,6 +663,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>例如过滤后扩展为空，系统仍应由原查询产生结果，而不是因没有新词就把整个查询丢掉。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、复现边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.06647">原论文</a> · <a href="../../../../agent-research/2605.06647-sira/">实现解读</a> · <a href="#qa-fc6b1d788aba3b86">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:bats" data-paper-title="Budget-Aware Tool Use Enables Effective Agent Scaling" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Budget-Aware Tool Use Enables Effective Agent Scaling Agent UC Santa Barbara 2025-11-21 给 ReAct 更多工具额度不保证它改变探索策略。Budget Tracker 将每个工具已经用掉和剩余的调用次数持续放进上下文。BATS 再利用这种显式资源状态做规划、逐约束自检和多次尝试：不是固定开更多平行 Agent，而是由剩余额度决定继续当前方向还是换路。 完整实验成本过高，不复现（审查 DONE）。三 seed 诊断仅执行显式控制序列：一次搜索、两次浏览，先 PIVOT 再 SUCCESS，保留两次 attempt 的摘要与总用量。仅纯 CPU / L1：Budget Tracker、统一费用公式、显式外部 verifier 的状态转移。没有搜索 Agent、真实浏览、语义规划/验证或答案 judge。完整实验成本过高，不复现（审查 DONE）。Google 官网旧称 CATS，当前正式 v2 为 BATS；首发在 2025 年，不能计为 2026-11-12 新论文。BudgetTracker 实际扣除逐工具计数，越界/未知工具/非法计数拒绝；  规划与搜索 预算感知与测试时扩展 Agent 规划与搜索：下一步该做什么 BATS里的工具预算和统一费用为什么要分开？ 预算是事先允许的每工具调用上限；费用是实际发生的token和工具消耗。预算相同的两条路径可能缓存命中、输出长度和工具使用都不同，所以不能用预算额度替代实际费用。 教学例：两条路径都允许10次搜索，一条只搜2次且命中缓存，另一条搜10次并生成长文；两者预算相同但账本成本不同。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<span id="paper-agent-research-bats-08f1bd98" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-84b02914371a93df">BATS里的工具预算和统一费用为什么要分开？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Abats">Budget-Aware Tool Use Enables Effective Agent Scaling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · UC Santa Barbara</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>预算是事先允许的每工具调用上限；费用是实际发生的token和工具消耗。预算相同的两条路径可能缓存命中、输出长度和工具使用都不同，所以不能用预算额度替代实际费用。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两条路径都允许10次搜索，一条只搜2次且命中缓存，另一条搜10次并生成长文；两者预算相同但账本成本不同。</p>
+<p class="ar-learning-sources">依据：核心公式、背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2511.17006">原论文</a> · <a href="../../../../agent-research/2511.17006-bats/">实现解读</a> · <a href="#qa-84b02914371a93df">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:bats" data-paper-title="Budget-Aware Tool Use Enables Effective Agent Scaling" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Budget-Aware Tool Use Enables Effective Agent Scaling Agent UC Santa Barbara 2025-11-21 给 ReAct 更多工具额度不保证它改变探索策略。Budget Tracker 将每个工具已经用掉和剩余的调用次数持续放进上下文。BATS 再利用这种显式资源状态做规划、逐约束自检和多次尝试：不是固定开更多平行 Agent，而是由剩余额度决定继续当前方向还是换路。 完整实验成本过高，不复现（审查 DONE）。三 seed 诊断仅执行显式控制序列：一次搜索、两次浏览，先 PIVOT 再 SUCCESS，保留两次 attempt 的摘要与总用量。仅纯 CPU / L1：Budget Tracker、统一费用公式、显式外部 verifier 的状态转移。没有搜索 Agent、真实浏览、语义规划/验证或答案 judge。完整实验成本过高，不复现（审查 DONE）。Google 官网旧称 CATS，当前正式 v2 为 BATS；首发在 2025 年，不能计为 2026-11-12 新论文。BudgetTracker 实际扣除逐工具计数，越界/未知工具/非法计数拒绝；  规划与搜索 预算感知与测试时扩展 Agent 规划与搜索：下一步该做什么 搜索用尽但浏览还有余额时，BATS应该继续吗？PIVOT会补满预算吗？ 不会。Appendix B只在所有工具u_i&lt;b_i时进入下一轮，所以任一工具耗尽即终止。PIVOT仅保存外部摘要、清空原轨迹并换方向，已用次数必须保留；SUCCESS后有预算也继续新attempt。 教学例：search预算1、browse预算10；一次search后browse仍有10次也结束。若search预算3且只用1次再Pivot，剩余仍是2，不是3。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-9dce330b60e6d616">搜索用尽但浏览还有余额时，BATS应该继续吗？PIVOT会补满预算吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Abats">Budget-Aware Tool Use Enables Effective Agent Scaling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · UC Santa Barbara</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不会。Appendix B只在所有工具u_i&lt;b_i时进入下一轮，所以任一工具耗尽即终止。PIVOT仅保存外部摘要、清空原轨迹并换方向，已用次数必须保留；SUCCESS后有预算也继续新attempt。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：search预算1、browse预算10；一次search后browse仍有10次也结束。若search预算3且只用1次再Pivot，剩余仍是2，不是3。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2511.17006">原论文</a> · <a href="../../../../agent-research/2511.17006-bats/">实现解读</a> · <a href="#qa-9dce330b60e6d616">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:bats" data-paper-title="Budget-Aware Tool Use Enables Effective Agent Scaling" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Budget-Aware Tool Use Enables Effective Agent Scaling Agent UC Santa Barbara 2025-11-21 给 ReAct 更多工具额度不保证它改变探索策略。Budget Tracker 将每个工具已经用掉和剩余的调用次数持续放进上下文。BATS 再利用这种显式资源状态做规划、逐约束自检和多次尝试：不是固定开更多平行 Agent，而是由剩余额度决定继续当前方向还是换路。 完整实验成本过高，不复现（审查 DONE）。三 seed 诊断仅执行显式控制序列：一次搜索、两次浏览，先 PIVOT 再 SUCCESS，保留两次 attempt 的摘要与总用量。仅纯 CPU / L1：Budget Tracker、统一费用公式、显式外部 verifier 的状态转移。没有搜索 Agent、真实浏览、语义规划/验证或答案 judge。完整实验成本过高，不复现（审查 DONE）。Google 官网旧称 CATS，当前正式 v2 为 BATS；首发在 2025 年，不能计为 2026-11-12 新论文。BudgetTracker 实际扣除逐工具计数，越界/未知工具/非法计数拒绝；  规划与搜索 预算感知与测试时扩展 Agent 规划与搜索：下一步该做什么 相比ReWOO一次性计划再执行，BATS多强调了什么？ ReWOO把Planner与后续工具观察解耦以减少重复规划；BATS持续让剩余额度进入推理，并根据外部自验证继续、换路或收集候选。它们改变不同控制假设，不能仅凭本地状态测试判定谁的任务正确率更高。 教学例：一个预排三步的ReWOO计划照依赖填证据；BATS发现首方向矛盾时可摘要换路，但必须面对真实剩余预算，而不是免费重启。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-864a32859f172a86">相比ReWOO一次性计划再执行，BATS多强调了什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Abats">Budget-Aware Tool Use Enables Effective Agent Scaling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · UC Santa Barbara</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>ReWOO把Planner与后续工具观察解耦以减少重复规划；BATS持续让剩余额度进入推理，并根据外部自验证继续、换路或收集候选。它们改变不同控制假设，不能仅凭本地状态测试判定谁的任务正确率更高。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个预排三步的ReWOO计划照依赖填证据；BATS发现首方向矛盾时可摘要换路，但必须面对真实剩余预算，而不是免费重启。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2511.17006">原论文</a> · <a href="../../../../agent-research/2511.17006-bats/">实现解读</a> · <a href="#qa-864a32859f172a86">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:bats" data-paper-title="Budget-Aware Tool Use Enables Effective Agent Scaling" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Budget-Aware Tool Use Enables Effective Agent Scaling Agent UC Santa Barbara 2025-11-21 给 ReAct 更多工具额度不保证它改变探索策略。Budget Tracker 将每个工具已经用掉和剩余的调用次数持续放进上下文。BATS 再利用这种显式资源状态做规划、逐约束自检和多次尝试：不是固定开更多平行 Agent，而是由剩余额度决定继续当前方向还是换路。 完整实验成本过高，不复现（审查 DONE）。三 seed 诊断仅执行显式控制序列：一次搜索、两次浏览，先 PIVOT 再 SUCCESS，保留两次 attempt 的摘要与总用量。仅纯 CPU / L1：Budget Tracker、统一费用公式、显式外部 verifier 的状态转移。没有搜索 Agent、真实浏览、语义规划/验证或答案 judge。完整实验成本过高，不复现（审查 DONE）。Google 官网旧称 CATS，当前正式 v2 为 BATS；首发在 2025 年，不能计为 2026-11-12 新论文。BudgetTracker 实际扣除逐工具计数，越界/未知工具/非法计数拒绝；  规划与搜索 预算感知与测试时扩展 Agent 规划与搜索：下一步该做什么 本地BATS为什么不把SUCCESS计为accuracy，cache token又怎么收费？ SUCCESS只是显式外部verifier的接受信号，模块没有gold或语义judge；最终selector还必须从接受集合选。计费规定input包含cache子集，因此先从input减去cache，再分别按uncached/cache/output价格计算，不能重复收费。 教学例：100个input含40个cache、20个output，价格分别.002/.0005/.004，token费用为.22而不是.30；这仅是构造账本，不是API实测或正确率。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-47f017ba9a06accb">本地BATS为什么不把SUCCESS计为accuracy，cache token又怎么收费？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Abats">Budget-Aware Tool Use Enables Effective Agent Scaling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · UC Santa Barbara</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>SUCCESS只是显式外部verifier的接受信号，模块没有gold或语义judge；最终selector还必须从接受集合选。计费规定input包含cache子集，因此先从input减去cache，再分别按uncached/cache/output价格计算，不能重复收费。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：100个input含40个cache、20个output，价格分别.002/.0005/.004，token费用为.22而不是.30；这仅是构造账本，不是API实测或正确率。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2511.17006">原论文</a> · <a href="../../../../agent-research/2511.17006-bats/">实现解读</a> · <a href="#qa-47f017ba9a06accb">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:lats" data-paper-title="LATS" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="LATS Agent University of Illinois Urbana-Champaign 2023-10-06 ReAct 等方法通常沿单条轨迹行动，失败后缺少系统搜索。LATS 把 LM 同时作为 agent、value function 和 optimizer，嵌入 Monte Carlo Tree Search；环境执行提供外部 reward，失败轨迹生成 reflection，帮助后续搜索避开错误。 本页实现 UCT 式树搜索、完整 trajectory rollout、环境 reward、反思与回溯。保留 MCTS statistics、环境反馈、reflection 与回溯；本地树以完整计划为叶节点，未调用 LM value model、HumanEval executor 或 WebShop，搜索规模远小于论文。每个 PlanBench episode 搜索四条完整计划轨迹；环境返回 exact plan reward，失败轨迹产生 reflection/backtrack，再按累计 value 选最终路径。  Agent 搜索 Agent 规划与搜索：下一步该做什么 为什么在工具任务中生成一条看似合理的推理链，还不足以完成 LATS 要处理的问题？ 工具或环境可能返回与预想不同的结果，单一路线失败后也未必能继续。LATS 把推理和行动放进可探索的搜索树，让候选通过执行反馈接受检验，并利用失败反思尝试其他路线。目标是把语言提案与环境结果连接起来，搜索预算和判断错误仍会限制效果。 教学例：网页搜索第一条结果没有所需价格，Agent 可以回到先前搜索节点改关键词，而不是沿错误页面继续编答案。 2026-10-27">

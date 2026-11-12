@@ -178,6 +178,7 @@
 - 2026-08 · [PlanPO: Group Planning-Aware Policy Optimization for Multi-Turn Agentic LLMs](../2608.17289-planpo/README.md)（`planpo`）：在成功轨迹内同时比较 trajectory turn 数和单 turn response 长度，形成 coarse-to-fine planning advantages。
 - 2026-08 · [Grounding AI Agents in Contracts: An Empirical Evaluation of Spec-Driven Test Generation](../2608.17177-spec-driven-tests/README.md)（`spec-driven-tests`）：直接让模型编写单元测试，可能遗漏输入边界或隐含的行为约定。本文先让Agent读取修复后的源码，写出每个代码单元的描述、前置条件、后置条件与测试建议；把条件标为已测试或未测试，保存为`.spec.md`，之后才允许生成测试。
 - 2026-08 · [TRCA: Transition-wise Rubric Credit Assignment for Long-horizon LLM Agents](../2608.16156-trca/README.md)（`trca`）：无需成功 anchor，从每个状态转移的 Evidence、Execution、Invalidity rubric 构造基础和 breakthrough reward。
+- 2026-08 · [Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback](../2608.15591-agent-gym/README.md)（`agent-gym`）：业务规则变化往往比 Agent 代码发布更快。Agent Gym 不重新训练或直接改写 acting agent，而在其 JSON 产物之后加独立纠错规则层：确定性条件检测、按作用域收集、按动作层级合并，再由领域专家审核新规则。
 - 2026-08 · [HyMem: Hierarchical Context Management for Long-Horizon Agents via Information Isolation](../2608.15703-hymem/README.md)（`hymem`）：把 planning、execution 和 isolated reasoning 分层，结构化摘要在 context refresh 间保存任务进展。
 - 2026-08 · [LoongReflect: Boosting Long-Horizon Reflection in Search Agents via Global Perspective Distillation](../2608.11967-loongreflect/README.md)（`loongreflect`）：把 reflect/backtrack 视为可逆轨迹树的 memory-control actions，以 privileged teacher 快通道和 outcome GRPO 慢通道协调训练。
 - 2026-08 · [Efficient Reinforcement Learning for Long-Horizon Tool-Use Agentic Tasks](../2608.10357-sinkflex-rl/README.md)（`sinkflex-rl`）：长程工具 Agent 的 on-policy rollout 同时受环境状态、长上下文和训练显存限制。SinkFlex-RL 把 Gymnasium 双控制环境、VERL 风格数据流、无 value model 的 GRPO 与 sink-aware FlexAttention 组合，causal / sliding-window mask 下仍保留模型特有 sink scaling。
@@ -247,6 +248,7 @@
 ## 2025
 
 - 2025-12 · [SAGE](../2512.17102-sage/README.md)（`sage`）：从成功轨迹抽象技能，失败时修订或淘汰，并以任务回报学习技能检索与复用。
+- 2025-11 · [Budget-Aware Tool Use Enables Effective Agent Scaling](../2511.17006-bats/README.md)（`bats`）：给 ReAct 更多工具额度不保证它改变探索策略。Budget Tracker 将每个工具已经用掉和剩余的调用次数持续放进上下文。
 - 2025-11 · [Agent0](../2511.16043-agent0/README.md)（`agent0`）：任务生成 Agent 提议可验证工具任务，多个执行 Agent 产生候选并多数投票，课程按当前能力边界升级。
 - 2025-11 · [Agent-R1](../2511.14460-agent-r1/README.md)（`agent-r1`）：把每次 agent/environment 交互作为独立 transition，以可插拔上下文管理、环境接口与优化器支持 token 或 step 级信用。
 - 2025-10 · [LEGOMem](../2510.04851-legomem/README.md)（`legomem`）：整段成功轨迹难以迁移到新任务，单一全局记忆又混合了任务分解和工具执行。LEGOMem 把经验拆成像积木一样的 procedural units：orchestrator memory 保存任务分解与委派，agent memory 保存具体动作模板，运行时按新任务重新组合。

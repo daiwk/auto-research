@@ -1,0 +1,25 @@
+{
+  "key": "agent-gym",
+  "page": "docs/agent-research/2608.15591-agent-gym/README.md",
+  "paper_url": "https://arxiv.org/abs/2608.15591",
+  "arxiv_id": "2608.15591",
+  "source_url": "https://arxiv.org/pdf/2608.15591v3#page=7",
+  "source_sha256": "a123329bb8559c97e5e3691342a9d755dacb572593b5085eabc5c3df6cb46340",
+  "figure": "Figure 2",
+  "original_caption": "ALF Collect-Plan-Execute pipeline. Deterministic collection, tier grouping and Tier3→Tier2→Tier1 execution.",
+  "pdf_page": 7,
+  "crop_points": [
+    302,
+    82,
+    537,
+    342
+  ],
+  "extraction": "PyMuPDF 3x crop of original figure and caption; not redrawn",
+  "asset": "docs/agent-research/2608.15591-agent-gym/assets/paper-figure-01.png",
+  "asset_sha256": "64b07d866f483631541932a72a69be5f51da056c63ec97c6cb7a68bacbc7bfb8",
+  "width": 705,
+  "height": 780,
+  "visually_reviewed": true,
+  "copyright": "Original authors; educational reference with source attribution",
+  "error": ""
+}

@@ -7,8 +7,8 @@
   "review_finalized_on": "2026-11-11",
   "policy": "observed-catalog-and-evidence-not-capability-v1",
   "counts": {
-    "catalogued": 253,
-    "not_catalogued": 9550
+    "catalogued": 254,
+    "not_catalogued": 9549
   },
   "accepted_counts": {
     "not_catalogued": 175
@@ -1765,8 +1765,19 @@
       "title": "Budget-Aware Tool Use Enables Effective Agent Scaling",
       "review_decision": "outside_window_date_screen",
       "frozen_implementation_status": "not_changed_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "agent-research",
+          "key": "bats",
+          "detail_path": "agent-research/2511.17006-bats/README.md",
+          "document_exists": true,
+          "registered_executable": false,
+          "gpu_receipt": null,
+          "gpu_receipt_valid": false,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2511.17344",

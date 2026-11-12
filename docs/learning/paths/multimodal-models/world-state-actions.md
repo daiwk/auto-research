@@ -7,7 +7,7 @@ hide:
 
 # 视觉世界建模：状态、生成与动作条件
 
-[多模态](index.md) / 100 个问题 · 25 篇论文
+[多模态](index.md) / 104 个问题 · 26 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">100 个问题 · 25 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">104 个问题 · 26 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:onlyact" data-paper-title="OnlyAct: Extracting Action Representations from Foundation Models for World Models" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="OnlyAct: Extracting Action Representations from Foundation Models for World Models 多模态大模型 University of Oxford 2026-11-10 无标签 latent-action 方法常用重建瓶颈排除场景，但过窄会丢动作细节，过宽又会泄漏外观。OnlyAct 从已预训练的 V-JEPA 2 ViT-L 出发：两帧作为同一 clip 输入，tubelet 从第一层联合观察两帧，而不是先单帧编码再求差；均值池化、固定随机投影至 640 维并归一化。它用场景交换的同动作正例，以及同一视频不同时间窗的 hard negative 做对比适配。静态相机用 RAFT 光流提取移动区域，原像素共同平移并粘到另一场景； 完整矩阵明显超出本轮短预算，成本过高，不复现（审查 DONE）；真实 NVIDIA A100 的 CUDA 42/43/44 诊断也已通过，见真实 GPU 回执与三 seed 指标。L1 对比损失／输入合同组件，不是 V-JEPA 2 动作编码器或世界模型复现。本地执行全候选损失、固定投影和 hard-negative 合同，不伪造场景交换视频、光流或真实动作能力。pooled_action 只处理外部两帧联合编码 token 的池化、冻结投影和归一化，不含任何假 V-JEPA。bank_contract 定义精确候选与正例索引；contrastive_loss 执行对称 InfoNCE 并实际反传。  JEPA 表征学习 动作场景解耦与世界模型 多模态 视觉世界建模：状态、生成与动作条件 OnlyAct为什么把同一视频的另一时间窗当hard negative，而不只用其他视频？ 不同视频常能仅凭背景外观分开，模型可能不必学习动作。同视频非重叠窗保留较相似场景，使这种捷径更难；但无动作标签，所以不同窗不保证动作语义真的不同。 教学例：同一厨房里“开抽屉”和“关抽屉”比厨房与游戏画面的对比更难用场景颜色直接区分。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
+<span id="paper-multimodal-models-onlyact-72d2c481" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-b86c525ec0b5cdbb">OnlyAct为什么把同一视频的另一时间窗当hard negative，而不只用其他视频？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aonlyact">OnlyAct: Extracting Action Representations from Foundation Models for World Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · University of Oxford</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同视频常能仅凭背景外观分开，模型可能不必学习动作。同视频非重叠窗保留较相似场景，使这种捷径更难；但无动作标签，所以不同窗不保证动作语义真的不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一厨房里“开抽屉”和“关抽屉”比厨房与游戏画面的对比更难用场景颜色直接区分。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14420">原论文</a> · <a href="../../../../multimodal-models/2611.14420-onlyact/">实现解读</a> · <a href="#qa-b86c525ec0b5cdbb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:onlyact" data-paper-title="OnlyAct: Extracting Action Representations from Foundation Models for World Models" data-learning-pending="false" data-level="mechanism" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="OnlyAct: Extracting Action Representations from Foundation Models for World Models 多模态大模型 University of Oxford 2026-11-10 无标签 latent-action 方法常用重建瓶颈排除场景，但过窄会丢动作细节，过宽又会泄漏外观。OnlyAct 从已预训练的 V-JEPA 2 ViT-L 出发：两帧作为同一 clip 输入，tubelet 从第一层联合观察两帧，而不是先单帧编码再求差；均值池化、固定随机投影至 640 维并归一化。它用场景交换的同动作正例，以及同一视频不同时间窗的 hard negative 做对比适配。静态相机用 RAFT 光流提取移动区域，原像素共同平移并粘到另一场景； 完整矩阵明显超出本轮短预算，成本过高，不复现（审查 DONE）；真实 NVIDIA A100 的 CUDA 42/43/44 诊断也已通过，见真实 GPU 回执与三 seed 指标。L1 对比损失／输入合同组件，不是 V-JEPA 2 动作编码器或世界模型复现。本地执行全候选损失、固定投影和 hard-negative 合同，不伪造场景交换视频、光流或真实动作能力。pooled_action 只处理外部两帧联合编码 token 的池化、冻结投影和归一化，不含任何假 V-JEPA。bank_contract 定义精确候选与正例索引；contrastive_loss 执行对称 InfoNCE 并实际反传。  JEPA 表征学习 动作场景解耦与世界模型 多模态 视觉世界建模：状态、生成与动作条件 OnlyAct为什么不能用两个独立单帧embedding相减来替代原动作编码？ 原V-JEPA2把两帧组成一个clip，tubelet从第一层就联合观察时空变化；独立编码后相减没有同样的跨帧交互。后续池化、固定随机投影和归一化只处理该联合表征，学习发生在encoder LoRA，不是投影。 教学例：物体跨帧移动并同时改变光照；联合token可在上下文中比较运动，而两个独立全图向量差可能混合外观变化。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-3c09fc73e0d90dc7">OnlyAct为什么不能用两个独立单帧embedding相减来替代原动作编码？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aonlyact">OnlyAct: Extracting Action Representations from Foundation Models for World Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · University of Oxford</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>原V-JEPA2把两帧组成一个clip，tubelet从第一层就联合观察时空变化；独立编码后相减没有同样的跨帧交互。后续池化、固定随机投影和归一化只处理该联合表征，学习发生在encoder LoRA，不是投影。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：物体跨帧移动并同时改变光照；联合token可在上下文中比较运动，而两个独立全图向量差可能混合外观变化。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14420">原论文</a> · <a href="../../../../multimodal-models/2611.14420-onlyact/">实现解读</a> · <a href="#qa-3c09fc73e0d90dc7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:onlyact" data-paper-title="OnlyAct: Extracting Action Representations from Foundation Models for World Models" data-learning-pending="false" data-level="comparison" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="OnlyAct: Extracting Action Representations from Foundation Models for World Models 多模态大模型 University of Oxford 2026-11-10 无标签 latent-action 方法常用重建瓶颈排除场景，但过窄会丢动作细节，过宽又会泄漏外观。OnlyAct 从已预训练的 V-JEPA 2 ViT-L 出发：两帧作为同一 clip 输入，tubelet 从第一层联合观察两帧，而不是先单帧编码再求差；均值池化、固定随机投影至 640 维并归一化。它用场景交换的同动作正例，以及同一视频不同时间窗的 hard negative 做对比适配。静态相机用 RAFT 光流提取移动区域，原像素共同平移并粘到另一场景； 完整矩阵明显超出本轮短预算，成本过高，不复现（审查 DONE）；真实 NVIDIA A100 的 CUDA 42/43/44 诊断也已通过，见真实 GPU 回执与三 seed 指标。L1 对比损失／输入合同组件，不是 V-JEPA 2 动作编码器或世界模型复现。本地执行全候选损失、固定投影和 hard-negative 合同，不伪造场景交换视频、光流或真实动作能力。pooled_action 只处理外部两帧联合编码 token 的池化、冻结投影和归一化，不含任何假 V-JEPA。bank_contract 定义精确候选与正例索引；contrastive_loss 执行对称 InfoNCE 并实际反传。  JEPA 表征学习 动作场景解耦与世界模型 多模态 视觉世界建模：状态、生成与动作条件 OnlyAct与无标签动作重建瓶颈方法的区别，是否只是把编码器换大？ 不只是规模。它从预训练时空表征出发，用保动作换场景正例和同场景换时间负例重塑几何，不依靠窄瓶颈丢弃信息。瓶颈宽窄的表达力与场景泄漏折中，变成由构造与对比目标约束；真实解耦仍需下游检验。 教学例：窄码可能同时丢掉小幅动作；OnlyAct尝试用不同场景中同一移动区域互为正例保留这种变化，但合成loss下降不能证明成功。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-d5a48f9ea7fb8958">OnlyAct与无标签动作重建瓶颈方法的区别，是否只是把编码器换大？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aonlyact">OnlyAct: Extracting Action Representations from Foundation Models for World Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · University of Oxford</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不只是规模。它从预训练时空表征出发，用保动作换场景正例和同场景换时间负例重塑几何，不依靠窄瓶颈丢弃信息。瓶颈宽窄的表达力与场景泄漏折中，变成由构造与对比目标约束；真实解耦仍需下游检验。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：窄码可能同时丢掉小幅动作；OnlyAct尝试用不同场景中同一移动区域互为正例保留这种变化，但合成loss下降不能证明成功。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14420">原论文</a> · <a href="../../../../multimodal-models/2611.14420-onlyact/">实现解读</a> · <a href="#qa-d5a48f9ea7fb8958">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:onlyact" data-paper-title="OnlyAct: Extracting Action Representations from Foundation Models for World Models" data-learning-pending="false" data-level="implementation" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="OnlyAct: Extracting Action Representations from Foundation Models for World Models 多模态大模型 University of Oxford 2026-11-10 无标签 latent-action 方法常用重建瓶颈排除场景，但过窄会丢动作细节，过宽又会泄漏外观。OnlyAct 从已预训练的 V-JEPA 2 ViT-L 出发：两帧作为同一 clip 输入，tubelet 从第一层联合观察两帧，而不是先单帧编码再求差；均值池化、固定随机投影至 640 维并归一化。它用场景交换的同动作正例，以及同一视频不同时间窗的 hard negative 做对比适配。静态相机用 RAFT 光流提取移动区域，原像素共同平移并粘到另一场景； 完整矩阵明显超出本轮短预算，成本过高，不复现（审查 DONE）；真实 NVIDIA A100 的 CUDA 42/43/44 诊断也已通过，见真实 GPU 回执与三 seed 指标。L1 对比损失／输入合同组件，不是 V-JEPA 2 动作编码器或世界模型复现。本地执行全候选损失、固定投影和 hard-negative 合同，不伪造场景交换视频、光流或真实动作能力。pooled_action 只处理外部两帧联合编码 token 的池化、冻结投影和归一化，不含任何假 V-JEPA。bank_contract 定义精确候选与正例索引；contrastive_loss 执行对称 InfoNCE 并实际反传。  JEPA 表征学习 动作场景解耦与世界模型 多模态 视觉世界建模：状态、生成与动作条件 OnlyAct的microbatch为2、梯度累积8次，为什么每个query仍只有4个负例？ 候选只来自当前forward的2组anchor/positive/hard negative，共6个；排除query自身后剩1正例和4负例。累积只把多次梯度相加，未建立memory queue或跨步候选bank。 教学例：一组query不能看到下一次forward才出现的视频pair；把effective batch16直接变成48候选会改写论文目标。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-8fc1e1ae0781544d">OnlyAct的microbatch为2、梯度累积8次，为什么每个query仍只有4个负例？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aonlyact">OnlyAct: Extracting Action Representations from Foundation Models for World Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · University of Oxford</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>候选只来自当前forward的2组anchor/positive/hard negative，共6个；排除query自身后剩1正例和4负例。累积只把多次梯度相加，未建立memory queue或跨步候选bank。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一组query不能看到下一次forward才出现的视频pair；把effective batch16直接变成48候选会改写论文目标。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14420">原论文</a> · <a href="../../../../multimodal-models/2611.14420-onlyact/">实现解读</a> · <a href="#qa-8fc1e1ae0781544d">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:rs-jepa" data-paper-title="RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval 多模态大模型 Prince Mohammad Bin Fahd University 2026-11-10 顺序敏感的 Vision Mamba 对相同图像 patch 的不同读取次序产生不同表征，RS-JEPA 据此构造无像素编辑的视图。学习到的 hard half-split 让隐藏特征预测更困难；邻域共识不只拉近配准 twin，还约束两个传感器对其他场景的相似性分布。训练 target 使用同一主干的 stop-gradient，不是另一个 momentum encoder。 完整多数据集比较成本过高，不复现（审查 DONE）；本地交付扫描排列、反梯度划分和邻域损失三个独立 tensor 组件，不含替身 Vim、完整模型或图像检索成绩。CUDA 路径必须由提交的 A100/A30 回执验收。scan_path() 返回精确排列；adversarial_partition() 实际执行 hard 分组、直通权重及反梯度；neighbourhood_consensus() 执行 Eq.8–9，拒绝单样本、零向量、非有限值和跨设备输入。采用合成小 tensor，不下载图像、checkpoint 或代理 backbone，不声称完整 JEPA 已训练。  JEPA 表征学习 扫描路径与跨传感器邻域对齐 多模态 视觉世界建模：状态、生成与动作条件 RS-JEPA 为什么只改 patch 读取次序，也能构成不同自监督视图？ Vision Mamba的状态递推依赖之前读过的token，所以同一组像素在不同路径下产生不同上下文表征。位置嵌入先加入，排序后编码再恢复；改变的是扫描动态，不是像素内容或隐含的标签增强。 教学例：2×3网格的行序是0,1,2,3,4,5，列序是0,3,1,4,2,5；第二个patch看到的前缀已经不同。 2026-11-11">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉世界建模：状态、生成与动作条件</a></p>
 <span id="paper-multimodal-models-rs-jepa-fcdebfcf" class="ar-learning-paper-anchor"></span>

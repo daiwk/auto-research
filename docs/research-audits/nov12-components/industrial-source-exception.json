@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-11-12",
+  "id": "2609.04961",
+  "reviewed_version": "v2",
+  "paper_url": "https://arxiv.org/abs/2609.04961v2",
+  "title": "SAM-D2Q: Aligning Multimodal Doc2Query with Search Demand and Conversion for E-commerce",
+  "published_at": "2026-09-04T10:09:04Z",
+  "updated_at": "2026-11-10T00:53:58Z",
+  "first_author": "Hui Zhou",
+  "first_author_affiliation": "Alibaba International Digital Commerce Group",
+  "fixed_source": {
+    "url": "https://arxiv.org/html/2609.04961v2",
+    "capture": ".cache/nov12-components/priority/samd2q-v2.html",
+    "sha256": "1504fe3fd21b6386e5302688355d3b9c130c0a773f20bbd1d6148cdbae251e2a"
+  },
+  "read_scope": [
+    "author block",
+    "Sections 4.1-4.3",
+    "Sections 5.1.1-5.1.4",
+    "Section 5.3 and Table 4"
+  ],
+  "reported_production_evidence": {
+    "product": "AliExpress Search",
+    "duration_days": 21,
+    "traffic_percent": 4,
+    "randomization": "users assigned by platform experimentation system",
+    "control": "existing production stack without SAM-D2Q; all other components unchanged",
+    "relative_lift_percent": {
+      "GMV": 3.38,
+      "Pay Count": 2.27,
+      "CTR": 0.25,
+      "CVR": 0.53
+    },
+    "confidence_scope": "Pay Count and CVR only; other metrics directional",
+    "reported_experiment_dates": "2025-06-08 to 2025-06-28"
+  },
+  "protocol_conflict": {
+    "training_log_period": "August to November 2025 (Section 5.1.1)",
+    "production_test_period": "June 8 to June 28, 2025 (Section 5.3)",
+    "reason": "The fixed text does not explain how later training signals correspond to the earlier A/B model/version. Do not silently change either year or infer that the reported deployment used the same later-trained version.",
+    "interpretation": "unconfirmed version/timeline correspondence, not an allegation of fabricated experiments"
+  },
+  "status": "deferred",
+  "resolution": "archived_unconfirmed_not_blocking",
+  "review_done": true,
+  "included_in_selected_scope": false,
+  "accepted": false,
+  "implemented": false,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "blocks_watermark": false,
+  "reason": "正文披露量化生产A/B，但训练信号时间晚于所报A/B且未解释版本对应；本轮不能确认这条线上证据适用于文中训练系统。作为原文协议异常归档，不推测改年、不移入其他主题绕门槛，不自动实现。新的作者说明或修订可重开。"
+}

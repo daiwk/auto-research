@@ -4,29 +4,35 @@
 
 [English home](../index.md) · [中文研究库](../../research-library.md)
 
-The catalog lists 1107 entries from the shared research manifest. English write-ups available: 1107.
+The catalog lists 1115 entries from the shared research manifest. English write-ups available: 1115.
 
 ## Browse by domain
 
 - [Search, ads, recommendation, and LLM applications](recommendation.md): 329 catalog entries, 329 English write-ups
-- [Foundation models](foundation-models.md): 214 catalog entries, 214 English write-ups
+- [Foundation models](foundation-models.md): 215 catalog entries, 215 English write-ups
 - [Structured decisions / System One](system-one.md): 6 catalog entries, 6 English write-ups
-- [Multimodal models](multimodal-models.md): 20 catalog entries, 20 English write-ups
-- [LLM post-training](post-training.md): 256 catalog entries, 256 English write-ups
-- [Agents](agent-research.md): 282 catalog entries, 282 English write-ups
+- [Multimodal models](multimodal-models.md): 22 catalog entries, 22 English write-ups
+- [LLM post-training](post-training.md): 259 catalog entries, 259 English write-ups
+- [Agents](agent-research.md): 284 catalog entries, 284 English write-ups
 
 ## Read in English
 
 - [When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents](../../agent-research/2611.14326-fgse/README-en.md)
 - [ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows](../../agent-research/2611.14492-retrace/README-en.md)
 - [RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval](../../multimodal-models/2611.14496-rs-jepa/README-en.md)
+- [REAL Loss: Optimizing Real Expected Acceptance Length for Speculative Decoding](../../foundation-models/2611.14399-real-loss/README-en.md)
 - [Program-Aided Patchable Skill Evolution](../../agent-research/2611.14019-pase/README-en.md)
+- [OnlyAct: Extracting Action Representations from Foundation Models for World Models](../../multimodal-models/2611.14420-onlyact/README-en.md)
 - [Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards](../../post-training/2611.14015-mcpo/README-en.md)
 - [Don't Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents](../../agent-research/2611.14320-wikitrace/README-en.md)
+- [C²-Routing: Complementary Cropping and Compression for Efficient Vision-Language Inference](../../multimodal-models/2611.14469-c2-routing/README-en.md)
 - [Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding](../../foundation-models/2611.13545-stochastic-rounding/README-en.md)
+- [Bootstrapped On-Policy Distillation](../../post-training/2611.13680-bopd/README-en.md)
 - [Blurring the Block Boundaries: Overlapping Block Denoising for Efficient Diffusion Language Models](../../foundation-models/2611.14387-b3/README-en.md)
 - [AlphaProof Code: Verifying Signal's Security at the Machine-Code Level](../../agent-research/alphaproof-code/README-en.md)
 - [ARE-bench: Benchmarking Agents' Research Ability in Real-World Researcher Sessions and Workspaces](../../agent-research/2611.14364-are-bench/README-en.md)
+- [A Theory of Policy Optimization in Post-Training: Coverage Collapse and Reference Resets](../../post-training/2611.14467-apmd-reference-reset/README-en.md)
+- [Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation](../../post-training/2611.13135-lcs-reference-opd/README-en.md)
 - [Off-policy Learning with Excursion Policies](../../post-training/2611.13275-excursion-td/README-en.md)
 - [MaxIM: Maximally Informative Incremental Summarization via Reinforcement Learning](../../post-training/2611.12825-maxim/README-en.md)
 - [DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation](../../post-training/2611.13249-drd-mopd/README-en.md)
@@ -583,6 +589,7 @@ The catalog lists 1107 entries from the shared research manifest. English write-
 - [Learn What's Left, Not What's Mastered: Saturation Aware Advantage Reweighting for Multi-Reward Policy Optimization](../../post-training/2608.16072-sa-mrpo/README-en.md)
 - [Grounding AI Agents in Contracts: An Empirical Evaluation of Spec-Driven Test Generation](../../agent-research/2608.17177-spec-driven-tests/README-en.md)
 - [HyMem: Hierarchical Context Management for Long-Horizon Agents via Information Isolation](../../agent-research/2608.15703-hymem/README-en.md)
+- [Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback](../../agent-research/2608.15591-agent-gym/README-en.md)
 - [Fast A/B/n Testing: Exact Multi-Policy Comparison via Tree-Coupled Feedback Sharing](../../reproductions/2608.12831-tcab/README-en.md)
 - [DrEM: Dual-Side Robust Ensemble Ranking from Noisy User Preference Predictions in Video Recommendation](../../reproductions/2608.12778-drem/README-en.md)
 - [Rubric Dropout: A Simple Way to Mitigate Reward Hacking in Rubric-as-Reward RL](../../post-training/2608.11669-rubric-dropout/README-en.md)
@@ -951,6 +958,7 @@ The catalog lists 1107 entries from the shared research manifest. English write-
 - [RecGPT-V2 Technical Report](../../reproductions/2512.14503-recgpt-v2/README-en.md)
 - [Online IcePop](../../post-training/web-2025-online-icepop/README-en.md)
 - [Stabilizing RL with LLMs](../../post-training/2512.01374-minirl/README-en.md)
+- [Budget-Aware Tool Use Enables Effective Agent Scaling](../../agent-research/2511.17006-bats/README-en.md)
 - [Agent0](../../agent-research/2511.16043-agent0/README-en.md)
 - [Agent-R1](../../agent-research/2511.14460-agent-r1/README-en.md)
 - [DualGR: Generative Retrieval with Long and Short-Term Interests Modeling](../../reproductions/2511.12518-dualgr/README-en.md)

@@ -30,7 +30,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="generation-paths/">生成路径：草稿验证、并行去噪与少步迭代</a></h2>
 <p>如何减少逐 token 串行生成的等待，同时说清输出分布是否改变？</p>
-<p class="ar-learning-topic-meta">64 个问题 · 16 篇论文</p>
+<p class="ar-learning-topic-meta">68 个问题 · 17 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="evaluation-and-evidence/">能力证据：评测采样、读出与可靠性</a></h2>

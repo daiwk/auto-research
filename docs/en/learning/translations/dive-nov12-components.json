@@ -1,0 +1,261 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:agent-gym": {
+      "source_sha256": "170f0a63c63002a0434cbf05c6e86274f8868c12346972a95af21bbb8f3787bf",
+      "reviewed": true,
+      "fields": {
+        "position": "Correct the acting agent's JSON through a separate ALF layer: AND conditions, scope exclusion, merged three-tier actions, and explicit SME approval.",
+        "tradeoff": "Target/collateral coverage and type contracts do not establish semantic correctness. The acting agent is not retrained; LLM rule discovery and automatic promotion are not implemented locally."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/8": {
+      "source_sha256": "2d34430a1aac7f80a184b18ddad00dac8ed0b09253f7304e22aee1c0a856a406",
+      "reviewed": true,
+      "fields": {
+        "title": "Output exceptions and program patches require different admission evidence",
+        "body": "PASE proposes a program patch within a skill/program pair and accepts only strict held-out validation improvement. Agent Gym preserves reversible business exceptions outside the acting agent and still requires expert approval after target/collateral checks. Syntax, matching, authorization, and measured task performance are different judgments. Both local implementations are L1 admission/transaction kernels, not autonomous rule invention, improved model intelligence, or complete RSI."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/cross-rule-governance-versus-program-validation": {
+      "source_sha256": "50d3b83cff04a9b1152e89772bfd5b93f8a9e8cf115f12c5278a39296e2f1bd5",
+      "reviewed": true,
+      "fields": {
+        "question": "Can SME approval of a correction rule substitute for a program patch's validation improvement, or vice versa?",
+        "answer": "No. The former authorizes a downstream exception within target/collateral scope; the latter measures a paired program on isolated validation. Their locations and evidence differ, and neither is semantically established by syntax or type checks.",
+        "example": "Teaching example: an emergency-procurement exception may be authorized by a human. A spreadsheet-formula patch needs strictly improved validation. Calling approval a benchmark gain, or using a score gain to authorize policy, confuses evidence."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-12/8": {
+      "source_sha256": "93ee2299fde59336ddd6a375c5183f778ed15eaf464e84b60ae79414107a0971",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add downstream rule governance as a separate evolution location: scope exclusion, actual 3-to-2-to-1 state updates, and the SME trust boundary, contrasted with PASE validation admission. Full API/human workflows are not reproduced."
+      }
+    },
+    "dive/agent-research/planning-and-search/comparison/agent-research:bats": {
+      "source_sha256": "4d9dcf467a7e44914a5b5fa085e555eb9110c65e0aa2b7670b90b84520364025",
+      "reviewed": true,
+      "fields": {
+        "position": "Expose per-tool budgets continuously; external SUCCESS/CONTINUE/PIVOT signals control attempts. Summaries clear history without replenishing usage, and any exhausted tool stops the loop.",
+        "tradeoff": "Unified token/tool accounting measures realized cost, not allowance. The local kernel has no semantic planning, verification, web tools, final judge, or accuracy claim."
+      }
+    },
+    "dive/agent-research/planning-and-search/analysis/2": {
+      "source_sha256": "578fca50e7b08f2af28d9938b3ca7b1fe5e4ab2eae840f9bcfb49501fb4df4f8",
+      "reviewed": true,
+      "fields": {
+        "title": "Avoiding repeated planning and adapting under a budget are different axes",
+        "body": "ReWOO hands a dependency plan to workers and later aggregates evidence, reducing repeated planner interruption. BATS continually conditions model decisions on remaining resources and uses semantic self-verification to retain or change direction. Open-loop decomposition and budget conditioning are distinct assumptions. Their accounting and restart semantics can be compared without claiming which solves real tasks better from synthetic transitions. External SUCCESS means module acceptance, not access to gold or an oracle."
+      }
+    },
+    "dive/agent-research/planning-and-search/question/cross-open-loop-versus-budget-conditioned-pivot": {
+      "source_sha256": "f7a96575cbba0e8d81cd429a359eb0b878cb0022de2fa521842f9090ca9a2e0d",
+      "reviewed": true,
+      "fields": {
+        "question": "What tradeoffs differ between ReWOO avoiding repeated planning and BATS pivoting after contradictions?",
+        "answer": "ReWOO saves repeated planning but risks a decomposition that does not fit later evidence. BATS keeps dynamic decisions but pays planning/verification costs and retains actual spent budget when pivoting. Full isolated evaluation is still needed for accuracy and cost; the local state kernel cannot select a winner.",
+        "example": "Teaching example: ReWOO follows three preplanned dependencies. If BATS pivots after one of three searches, it has two left, not three restored to manufacture a better answer."
+      }
+    },
+    "dive/agent-research/planning-and-search/update/2026-11-12/1": {
+      "source_sha256": "fc856981e17c028db78716012e39c857203bdfbfb7096fb703e44bf29841c0ea",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add budget-conditioned search and realized cost as comparison axes, distinguishing BATS pivots from ReWOO's open-loop separation. Preserve any-tool termination, spent usage across pivots, and external verification without gold-based capability claims."
+      }
+    },
+    "dive/foundation-models/generation-paths/comparison/foundation-models:real-loss": {
+      "source_sha256": "6f25276fa8622a48cfc2daec8e7d6b96e0e73021cea4779eb0363396bfcbf69d",
+      "reviewed": true,
+      "fields": {
+        "position": "Use q/p on target-sampled paths to preserve accepted-branch mass, then marginalize the final step for differentiable EAL training; this supplements drafter training rather than replacing verification.",
+        "tradeoff": "Original speculative decoding preserves target-distributed inference, while REAL trains a drafter under a fixed verifier. Local work checks tensor expectations and gradients, not a 35B target or complete drafter."
+      }
+    },
+    "dive/foundation-models/generation-paths/analysis/3": {
+      "source_sha256": "c16b8f2476f3e0ff6eb69f4ce27367d5ccbf4e3f78fae4330142b87032b6e252",
+      "reviewed": true,
+      "fields": {
+        "title": "Opposite training and serving ratios produce the same accepted mass",
+        "body": "Original speculative decoding proposes from q, accepts with min(1,p/q), and corrects from the positive part of p−q to retain the target distribution. REAL samples from p and uses min(1,q/p) to produce min(p,q) mass while training the draft. These are complementary stages, not replacement algorithms. Swapping ratios breaks either inference or training. Equal scalar objective values at one point do not establish equal gradient directions."
+      }
+    },
+    "dive/foundation-models/generation-paths/question/cross-speculative-training-versus-serving-ratio": {
+      "source_sha256": "85a11687b2e93b6b12ffdf7f6e3c71d1da8bd1e8c5241a88ecf970e412e7199b",
+      "reviewed": true,
+      "fields": {
+        "question": "Are REAL's q/p training weights inconsistent with speculative serving's p/q acceptance?",
+        "answer": "No. Training samples from p and serving proposes from q; each clipped ratio converts its own sampling mass into min(p,q). Sampling provenance is essential. Final-step marginalization and residual correction belong to training estimation and inference correction respectively.",
+        "example": "Teaching example: p(A)=0.4 and q(A)=0.8. Training multiplies 0.4 by one; serving multiplies 0.8 by 0.5. Both yield 0.4."
+      }
+    },
+    "dive/foundation-models/generation-paths/update/2026-11-12/2": {
+      "source_sha256": "43373d4ef5ac952bf5e6eb12eec6fcd2679562440ca341c3a55ba76b7f829f61",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add accepted-branch EAL training and distinguish target-sampled q/p weights from draft-proposal p/q verification. Three-seed A100 checks cover loss/gradient mechanics only; full training remains cost-deferred."
+      }
+    },
+    "dive/multimodal-models/visual-evidence-budget/comparison/multimodal-models:c2-routing": {
+      "source_sha256": "de952cc526072ba8054eacee1875beb0934ec14a1537c5e5fda9e253bf55ef56",
+      "reviewed": true,
+      "fields": {
+        "position": "Propose cropping or full-image compression, then gate fallback with original/reduced joint-correctness H−B risk and validation-fixed FLOP ratios.",
+        "tradeoff": "PACE allocates budgets from image density/detail and fuses attention to retain tokens. C² additionally models the correctness change induced by reduction. The local risk head is not trained; policy arithmetic cannot outrank PACE checkpoint results."
+      }
+    },
+    "dive/multimodal-models/visual-evidence-budget/analysis/3": {
+      "source_sha256": "643b81405fc65305f8f97d15cce8eefc1bcced7fa49b43eb8b3c0830fdfca972",
+      "reviewed": true,
+      "fields": {
+        "title": "Evidence retention and the value of fallback are separate decisions",
+        "body": "PACE's APC/DDAE allocates visual budget and evidence. C² asks whether reduction causes repairable harm relative to the original and whether savings justify it. High reduced-input error can be shared failure, or offset by reduction benefits; it is not H−B. Real benefits require calibrated external risk predictions and validation-frozen policy. Correct equations do not establish a trained reliable router."
+      }
+    },
+    "dive/multimodal-models/visual-evidence-budget/question/cross-visual-budget-versus-fallback-risk": {
+      "source_sha256": "c6c8ba27ed75eb4b6fb039e8d4943662bf4b88f5d66cdfbd1d52f5b3ca8fde9a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does high reduced-input error neither invalidate a PACE-style budget nor automatically force C² fallback?",
+        "answer": "Check whether the original fails on the same questions and whether reduction sometimes helps. Budgeting selects evidence; fallback risk measures original-minus-reduced correctness. Shared failures are not repaired by originals, and checkpoint evidence cannot be ranked against local L1 arithmetic.",
+        "example": "Teaching example: both variants fail on the same 90% of questions. H=B=0, so fallback spends more without improving expected correctness."
+      }
+    },
+    "dive/multimodal-models/visual-evidence-budget/update/2026-11-12/2": {
+      "source_sha256": "67546ed3774107fdc5083497eb24a1865ff2644c136d7caa84a6dca17ff88e0d",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add joint-correctness risk and validation-cost utility, separating evidence retention from fallback value. CPU work implements only the policy kernel; no visual router is trained and the full 18-dataset matrix is not reproduced."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/comparison/multimodal-models:onlyact": {
+      "source_sha256": "25aa7412600527139967966fa7cfe6b8b780b4a35a2ca2ee648da33d34c9f752",
+      "reviewed": true,
+      "fields": {
+        "position": "Adapt pretrained V-JEPA 2 joint-frame geometry with scene-swapped positives and same-video disjoint hard negatives, then freeze it for a world model.",
+        "tradeoff": "RS-JEPA learns scene retrieval using scan views and cross-sensor neighbourhood consensus; OnlyAct preserves action while suppressing scene. Shared JEPA ancestry does not equate objectives. Local formula/gradient L1 checks support neither retrieval nor action-transfer rankings."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/analysis/5": {
+      "source_sha256": "7069aa9e024f78cf24309b7c84a42037087142d3f4358e2651e5c51b65a0c5c2",
+      "reviewed": true,
+      "fields": {
+        "title": "The invariant content across views can be scene or action",
+        "body": "RS-JEPA matches the same scene across sensors and aligns neighbourhoods. OnlyAct pulls together scene-changed action-preserving pairs while contrasting different times in the same scene. Their needs for scene identity differ; one generic InfoNCE cannot establish both. OnlyAct's pairing depends on flow and camera-motion assumptions. Passing CUDA candidate-mask and gradient checks does not validate these semantic assumptions."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/question/cross-jepa-scene-versus-action-invariance": {
+      "source_sha256": "2313ef913ed2d00853032f40c6cbbf8c62b076aee027e6ca6b7fa2a249bcfdc6",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can't same-scene cross-sensor pairs replace OnlyAct positives just because both methods learn representations?",
+        "answer": "Same-scene alignment retains scene identity, whereas OnlyAct retains action across scenes. Substitution changes invariance and can reward scene shortcuts. Similar InfoNCE equations do not imply equivalent pair semantics; action transfer needs independent evidence.",
+        "example": "Teaching example: SAR and optical images of one bridge suit RS-JEPA. OnlyAct instead needs the same door-opening action in different rooms, not arbitrary actions in one room."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/update/2026-11-12/4": {
+      "source_sha256": "5bc2724abb2a4c95973af725b3a5d2bbe288cfcf69c84a88e4a877d7d5636e4a",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add contrastive action extraction from JEPA temporal priors and distinguish scene retrieval from action/scene disentanglement. A100 seeds check exact bank, frozen projection and gradients only; full video training is not reproduced."
+      }
+    },
+    "dive/post-training/teacher-and-context/comparison/post-training:bopd": {
+      "source_sha256": "d73b4f941ba9a714fe65029d938a08e0c60ffaa36107c61ac704f5c0d30f1864",
+      "reviewed": true,
+      "fields": {
+        "position": "Construct M1 using a reference-conditioned frozen M0, then freeze M1, remove references and distill by teacher-to-student FKL into a student exactly restored from M0 with a fresh optimizer.",
+        "tradeoff": "Unlike continued privileged-view OPSD, the student and optimizer reset while the teacher retains learned parameters. Local coverage is actual FKL/handoff, not LM rollouts or unaudited source pointwise clipping. An empty author repository is not a released implementation."
+      }
+    },
+    "dive/post-training/teacher-and-context/analysis/5": {
+      "source_sha256": "a30674d734d67f0ba6a2323d7dfc57c0e209ce9a0c723b6c62a2ee2efd33ef5c",
+      "reviewed": true,
+      "fields": {
+        "title": "Constructing a reference-free teacher differs from permanently relying on a privileged view",
+        "body": "OPSD gives the teacher a verified solution while the student sees its own prefixes. BOPD first internalizes that supervision in intermediate parameters, then uses the reference-free intermediate to teach a student restored from its initial checkpoint. It is not continued Stage I student training, and privileged Stage I scores cannot become reference-free Stage II supervision by caching. Frozen weights can still predict differently on new student prefixes; stage, context and parameter provenance remain separate."
+      }
+    },
+    "dive/post-training/teacher-and-context/question/cross-bootstrap-teacher-versus-privileged-view": {
+      "source_sha256": "90b3bd29932e4fbb971c3365f03901cfc70ed830fd3000afcae02f26667bbe4f",
+      "reviewed": true,
+      "fields": {
+        "question": "Does removing the reference from an OPSD teacher and continuing the student implement BOPD?",
+        "answer": "No. Stage II uses the trained intermediate as teacher but restores the student exactly to the initial model and creates a new optimizer. Removing the reference is only one change; continuing the existing student or reverting the teacher changes the method.",
+        "example": "A weight learned from 1 to 1.2 in Stage I remains 1.2 in the Stage II teacher, while the student returns to 1 with empty optimizer state. Starting both at 1.2 is continuation, not this handoff."
+      }
+    },
+    "dive/post-training/teacher-and-context/update/2026-11-12/3": {
+      "source_sha256": "9fd8a7b65b85132e647f186df4f39e9493a7cc91b1c6d0fd1ffb827641de004a",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added BOPD to distinguish continued privileged views from two-stage reference-free transfer, preserving student/optimizer restoration and per-trajectory FKL. A100 evidence covers loss/handoff only; full multi-GPU, long-generation experiments are not reproduced."
+      }
+    },
+    "dive/post-training/policy-optimization/comparison/post-training:apmd-reference-reset": {
+      "source_sha256": "f5d9d693c21c98e420126d0abf888386221ddc307954a83c38974c01e1a72da7",
+      "reviewed": true,
+      "fields": {
+        "position": "Reset the KL reference to the latest policy and approximate its reference-times-exponential-reward mirror target. Finite kernels check exact reset paths, Kimi's squared-KL mean-baseline bias and Rebel equals twice centered-MSE.",
+        "tradeoff": "A reference reset is neither an old-policy refresh nor restoring the learner to the base. Guarantees require realizability and accurate inner solves. The theory has no large empirical protocol; cost is not invented and numerical checks are not a complete proof."
+      }
+    },
+    "dive/post-training/policy-optimization/analysis/4": {
+      "source_sha256": "947c9ec27838574f80ee0b589ba65646cbf161d8102e595272fa9320aa48b95a",
+      "reviewed": true,
+      "fields": {
+        "title": "The old policy controls sampling ratios; the KL reference sets the optimization anchor",
+        "body": "GRPO uses old-policy ratios and group advantages, alongside a separate reference KL. APMD resets that KL anchor across outer iterations, accumulating progress under strong local constraints. Refreshing the sampling old policy does not establish APMD's reference condition. Group centering also does not remove Kimi's squared-KL mean-baseline bias relative to the mirror target. Finite identities cannot replace realizability checks or sampling-error analysis for real LLMs."
+      }
+    },
+    "dive/post-training/policy-optimization/question/cross-old-policy-versus-kl-anchor-reset": {
+      "source_sha256": "03c75e187ed23ba1d37346d1c3770ac313d101e8ed11026d4ea95d65425de9d0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does periodically refreshing GRPO's old policy not establish APMD reference resets?",
+        "answer": "The old policy records behavior probabilities in a ratio denominator; the KL reference is a regularization anchor. They may update separately. APMD also requires an inner-approximation condition, so calling both old models does not make them equivalent.",
+        "example": "Refresh the old policy before each sampled batch but keep penalizing KL to the original base: that reference is still fixed. APMD instead anchors the next outer round at the latest pi_t."
+      }
+    },
+    "dive/post-training/policy-optimization/update/2026-11-12/4": {
+      "source_sha256": "4b986e484e66abcc0897d7d883e6c9c95e409bcd118ad52e5b680ef0ab026919",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added coverage/reference-reset theory to separate behavior old policies, KL anchors and learner initialization, with Kimi bias and Rebel centering identities. CPU finite references only; large empirical reproduction is not applicable, and universal practical-GRPO convergence is not claimed."
+      }
+    },
+    "dive/post-training/teacher-and-context/comparison/post-training:lcs-reference-opd": {
+      "source_sha256": "57b12156f718339e9aec714e97952311c2f5c32678698f15802adb03fd612c00",
+      "reviewed": true,
+      "fields": {
+        "position": "Select the most compatible same-task success by complete-action LCS, with reusable independent free-target assignments. Update failed episodes only and fall back to reference-free supervision, preserving distinct ALFWorld/tau3 normalizers.",
+        "tradeoff": "Unlike SPOD's conditional action protection inside successful episodes, this method skips all successful episodes. LCS requires recoverable-detour assumptions, not hidden-state equivalence. No agent/OPD trainer is included; the 4500-A100-hour matrix is not reproduced."
+      }
+    },
+    "dive/post-training/teacher-and-context/analysis/6": {
+      "source_sha256": "b02f687e500cec76600fe3518bec0c8a8bab4c1084565760cf6f2d5f6ed7520e",
+      "reviewed": true,
+      "fields": {
+        "title": "Protecting successful episodes and particular actions within them creates different update sets",
+        "body": "The LCS method excludes every successful student episode and chooses same-task corrective references for failures. SPOD can still train successful episodes, suppressing KL and adding a soft floor only where the teacher's complete-action probability is below the student's. The former also changes reference information; the latter changes action-level supervision. A generic success mask cannot replace their distinct denominators, probability conditions and gates. Training success references remain hidden from evaluated students."
+      }
+    },
+    "dive/post-training/teacher-and-context/question/cross-whole-success-versus-action-protection": {
+      "source_sha256": "2fc1470addb640b85a15a745970e4f61cefff8985d40e19df6ba9c19a0ffad65",
+      "reviewed": true,
+      "fields": {
+        "question": "Why cannot LCS failure-only updates and SPOD share one success mask?",
+        "answer": "LCS skips entire successful episodes. SPOD additionally compares complete-action teacher/student probabilities and protects only qualifying decisions, retaining distillation elsewhere. Mask granularity, reduction and retained losses differ.",
+        "example": "When the teacher supports an action more than the student in a successful episode, SPOD can continue that action's KL. The LCS method still skips the entire successful trajectory."
+      }
+    },
+    "dive/post-training/teacher-and-context/update/2026-11-12/4": {
+      "source_sha256": "ede1c7ed97353a2b642da383093df367c386157de83c73da25edb10792cbb097",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added same-task LCS selection, separating episode-level failure filtering from SPOD's complete-action protection. Preserved independent free-target assignment, both normalizers and teacher-only references. The CPU selector is not substitute multi-turn agent training."
+      }
+    }
+  }
+}

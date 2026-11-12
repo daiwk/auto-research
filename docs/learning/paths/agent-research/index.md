@@ -10,7 +10,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="planning-and-search/">规划与搜索：下一步该做什么</a></h2>
 <p>任务长、反馈晚时，怎样决定下一步行动，并撤销早先的错误选择？</p>
-<p class="ar-learning-topic-meta">64 个问题 · 16 篇论文</p>
+<p class="ar-learning-topic-meta">68 个问题 · 17 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="memory-and-skills/">记忆与技能：让经验可取回、可失效</a></h2>
@@ -25,7 +25,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="harness-and-self-improvement/">运行流程与自进化：改的是哪一层</a></h2>
 <p>失败之后，是改一次提示、积累经验，还是改变整个任务执行流程？</p>
-<p class="ar-learning-topic-meta">216 个问题 · 54 篇论文</p>
+<p class="ar-learning-topic-meta">220 个问题 · 55 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="agent-policy-learning/">交互策略学习：把轨迹反馈变成更新</a></h2>

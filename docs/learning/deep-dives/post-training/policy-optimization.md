@@ -7,7 +7,7 @@ hide:
 
 # 同一个GRPO名字之外：优势尺度、裁剪单位与训推失配
 
-[LLM 后训练](../index.md) · 更新 2026-11-11 · 57 篇主题资料 / 9 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-12 · 58 篇主题资料 / 10 篇重点对照
 
 GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比被裁剪、样本到底由哪个分布生成。Dr. GRPO、DAPO、GSPO与TIS/IcePop分别改动这些环节，不能把所有ratio都叫同一种off-policy校正。
 
@@ -34,6 +34,7 @@ GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比�
 | [IcePop](../../../post-training/2510.18855-icepop/README.md) · [原始来源](https://arxiv.org/abs/2510.18855)<br>章节：背景与主要改动、核心公式、复现边界 | 对训推ratio使用双侧有效区间，区间内保留原ratio，区间外策略梯度为零。 | 会丢弃严重失配token，而不是把所有ratio夹回边界；本地未运行真实MoE集群。 |
 | [Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards](../../../post-training/2611.09448-rcea/README.md) · [原始来源](https://arxiv.org/abs/2611.09448)<br>章节：核心公式、原文结果与限制、诊断与边界 | 不改更新目标，先按验证结果、过程有效性和解法模式拆开轨迹熵，再用同前缀协方差解释局部变化方向。 | 精确分解需要确定性分区；局部协方差不是策略模式或因果归因。CPU 只覆盖数值核，未跑多目标 RLVR 矩阵。 |
 | [Off-policy Learning with Excursion Policies](../../../post-training/2611.13275-excursion-td/README.md) · [原始来源](https://arxiv.org/abs/2611.13275v1)<br>章节：核心公式、数据协议与代码映射、结果、负控与边界 | 对目标策略持续若干步后永久回到行为策略的 excursion 时长作混合，以递归权重构造 Ex-TD/Ex-Retrace；本地计算5状态3动作精确算子和实际轨迹target。 | beta在目标偏差、方差与收缩间取舍，不是TIS的训推引擎ratio截断；中间beta不保证目标固定点无偏。完整七任务MPO每run约12小时不复现。 |
+| [A Theory of Policy Optimization in Post-Training: Coverage Collapse and Reference Resets](../../../post-training/2611.14467-apmd-reference-reset/README.md) · [原始来源](https://arxiv.org/abs/2611.14467v1)<br>章节：核心公式、结果、负控与边界、理论与实验范围 | 每轮把KL reference更新为最新策略，再近似求解reference×exp(eta×reward)的镜像目标；有限核检查精确重置路径、Kimi均值baseline的平方KL偏差与Rebel=2×centered-MSE。 | 参考重置不等于刷新PPO/GRPO old policy，也不等于把学生退回base；保证依赖策略/reward可实现性及内层精度。纯理论无大型实证方案，不编高成本或把数值检查当完整证明。 |
 
 </div>
 
@@ -62,6 +63,12 @@ GRPO/GSPO主要调整既有文本策略的优势或ratio单位，RLiD先把被�
 TIS比较同一权重在training与rollout引擎产生的概率，处理数值实现失配；Ex-Retrace比较目标策略与行为策略，按整段excursion持续时间构造多步值target。两者都出现重要性比，不表示可交换：逐token训推ratio不能直接替代状态动作价值target里的持续时长前缀，后者也不消除LM训练引擎的数值差异。
 
 对照来源：[excursion-td](../../../post-training/2611.13275-excursion-td/README.md) · [tis](../../../post-training/web-2025-tis/README.md)
+
+### old policy负责采样比，KL reference决定优化锚点，二者不能混称旧模型
+
+GRPO用old-policy ratio和组优势形成更新，同时另有reference KL；APMD讨论的是KL锚点随外层迭代重置，允许在强局部约束下累积前进。刷新采样行为的old policy不自动满足APMD的reference条件，组内去均值也不消除Kimi均值baseline相对镜像目标的平方KL偏差。这里的有限响应恒等式不能替代真实LLM的假设核验或采样误差分析。
+
+对照来源：[apmd-reference-reset](../../../post-training/2611.14467-apmd-reference-reset/README.md) · [grpo](../../../post-training/2402.03300-grpo/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -117,9 +124,23 @@ TIS比较同一权重在training与rollout引擎产生的概率，处理数值�
 
     对照来源：[excursion-td](../../../post-training/2611.13275-excursion-td/README.md) · [tis](../../../post-training/web-2025-tis/README.md)
 
+### GRPO已经周期更新old policy，为什么还不能说实现了APMD reference reset？ {#cross-cross-old-policy-versus-kl-anchor-reset}
+
+??? note "展开答案与例子"
+
+    **答案：** old policy在概率比分母中记录行为分布；KL reference是正则化锚点。两者可不同步，且APMD还要求近似解满足内层误差条件，不能因名字都叫旧模型就认为等价。
+
+    **教学例子：** 教学例：每批采样前刷新old policy，但KL始终惩罚偏离最初base，仍是固定reference；APMD下一轮锚定最新pi_t。
+
+    对照来源：[apmd-reference-reset](../../../post-training/2611.14467-apmd-reference-reset/README.md) · [grpo](../../../post-training/2402.03300-grpo/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-12** · 补审coverage/reference-reset理论，分清行为old policy、KL reference和student初始化；增加Kimi偏差与Rebel中心化恒等式。仅CPU精确有限核，纯理论大型实证不适用，不宣称普适GRPO收敛。
+
+涉及：[apmd-reference-reset](../../../post-training/2611.14467-apmd-reference-reset/README.md)
 
 **2026-11-11** · 加入 Google DeepMind 相关 Excursion TD，区分持续时长混合与逐动作混合，也区分目标/行为校正与 TIS 训推引擎校正；实现可负担的表格型核心，完整约12小时/run的控制实验不复现。
 
@@ -137,7 +158,7 @@ TIS比较同一权重在training与rollout引擎产生的概率，处理数值�
 
 覆盖 54 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 57 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 58 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -198,6 +219,7 @@ TIS比较同一权重在training与rollout引擎产生的概率，处理数值�
 - [ReMax](../../../post-training/2310.10505-remax/README.md)
 - [InstructGPT / PPO-RLHF](../../../post-training/2203.02155-ppo-rlhf/README.md)
 - [Off-policy Learning with Excursion Policies](../../../post-training/2611.13275-excursion-td/README.md)
+- [A Theory of Policy Optimization in Post-Training: Coverage Collapse and Reference Resets](../../../post-training/2611.14467-apmd-reference-reset/README.md)
 
 </details>
 

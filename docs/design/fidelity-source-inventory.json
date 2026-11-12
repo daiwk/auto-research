@@ -83,6 +83,16 @@
         "fingerprint": "f04efee27f780cc5e8578f59179d0bb7ca8c11e40c12bc04897c98bdec2dd872"
       }
     ],
+    "src/auto_research/agent_research/bats.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "apply_external_verdict",
+        "line": 145,
+        "qualified_name": "BATSState.apply_external_verdict",
+        "expression": "self.attempt += 1",
+        "fingerprint": "2efd2add81410f67645c1123cc6fa733e1776ca073a345daab856d3ee46fe2a1"
+      }
+    ],
     "src/auto_research/agent_research/capability_benchmark.py": [
       {
         "kind": "state_update_not_execution_evidence",

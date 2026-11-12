@@ -11,7 +11,7 @@ hide:
 
 每个子主题维护一张卡片。新论文进入后，更新对应卡片的比较或结论，并记录这次变化；不必再从头读整批论文。
 
-31 张精读卡片 · 1107 篇主题资料 · 按主题折叠
+31 张精读卡片 · 1115 篇主题资料 · 按主题折叠
 
 <details class="ar-deep-shelf"><summary>搜广推 · 7 张</summary>
 <div class="ar-deep-grid">
@@ -77,7 +77,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/generation-paths/">少做串行步骤：验证草稿与学习迭代不是同一条路</a></h2>
 <p>推测解码用便宜提案换昂贵验证批次，精确校正可保持原 target 分布；扩散语言和数据空间迭代则改变生成轨迹或训练目标。比较时先问谁决定最终分布，再问每步做什么、跨步保留什么，以及 NFE 或接受长度能否转成真实时间收益。</p>
-<p class="ar-learning-topic-meta">7 篇重点对照 · 4 个跨论文问答 · 2026-11-11</p>
+<p class="ar-learning-topic-meta">8 篇重点对照 · 5 个跨论文问答 · 2026-11-12</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/evaluation-and-evidence/">能力证据：准确打分、节省观测与解释预测</a></h2>
@@ -115,12 +115,12 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="multimodal-models/visual-evidence-budget/">少看、晚看还是再看：把视觉预算放到正确阶段</a></h2>
 <p>视觉预算不只有token数。StackTok选择已编码证据，PACE提前分配输入分辨率，ViMoD保留可恢复细节，Frames-on-Demand按需取帧，AdaLoop多算已有视觉状态，OmniKVQuant减少每份cache的位宽。必须同时追踪信息是否还在、哪段成本已支付。</p>
-<p class="ar-learning-topic-meta">7 篇重点对照 · 4 个跨论文问答 · 2026-11-11</p>
+<p class="ar-learning-topic-meta">8 篇重点对照 · 5 个跨论文问答 · 2026-11-12</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="multimodal-models/world-state-actions/">会预测下一幕，还不等于会行动或保持同一个世界</a></h2>
 <p>世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。 SWIM从离线动作可预测性学习状态坐标的相对权重，训练期校准latent距离，部署时不向规划器增加真实状态。</p>
-<p class="ar-learning-topic-meta">9 篇重点对照 · 6 个跨论文问答 · 2026-11-11</p>
+<p class="ar-learning-topic-meta">10 篇重点对照 · 7 个跨论文问答 · 2026-11-12</p>
 </article>
 </div></details>
 
@@ -134,7 +134,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="post-training/policy-optimization/">同一个GRPO名字之外：优势尺度、裁剪单位与训推失配</a></h2>
 <p>GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比被裁剪、样本到底由哪个分布生成。Dr. GRPO、DAPO、GSPO与TIS/IcePop分别改动这些环节，不能把所有ratio都叫同一种off-policy校正。</p>
-<p class="ar-learning-topic-meta">9 篇重点对照 · 5 个跨论文问答 · 2026-11-11</p>
+<p class="ar-learning-topic-meta">10 篇重点对照 · 6 个跨论文问答 · 2026-11-12</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="post-training/reward-and-credit/">奖励从哪里来，信用才该分到哪里</a></h2>
@@ -149,7 +149,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="post-training/teacher-and-context/">教师更强仍可能教错：信息、兼容性与成功行为保护</a></h2>
 <p>教师的价值不只取决于总分。OPSD改变训练期可见信息，MOPD与逐token路由组织多教师，CSD先统一概率事件，SPOD保护学生已成功选择，VAD筛出可归于视觉证据的修正；这些约束要在模仿之前分别成立。</p>
-<p class="ar-learning-topic-meta">9 篇重点对照 · 7 个跨论文问答 · 2026-11-06</p>
+<p class="ar-learning-topic-meta">11 篇重点对照 · 9 个跨论文问答 · 2026-11-12</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="post-training/data-and-budget/">省掉哪一份算力：选问题、少生成、分枝与有条件重放</a></h2>
@@ -163,7 +163,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="agent-research/planning-and-search/">规划先问何时见反馈，再问要不要展开搜索</a></h2>
 <p>ReAct 与 ReWOO 改变计划接收观察的时机，ToT 与 LATS 改变候选搜索组织，Jev Lookahead 把后继模拟交给代码，DRAGO 则检查形式计划是否忠实。它们处理不同的不确定性：步骤未知、路线选择、环境可达性与规格错误，不应以搜索次数或本地满分统一排名。</p>
-<p class="ar-learning-topic-meta">6 篇重点对照 · 3 个跨论文问答 · 2026-10-27</p>
+<p class="ar-learning-topic-meta">7 篇重点对照 · 4 个跨论文问答 · 2026-11-12</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="agent-research/memory-and-skills/">经验进入长期系统前，要解决存取、价值与准入</a></h2>
@@ -178,7 +178,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="agent-research/harness-and-self-improvement/">自改进先标对象：答案、经验、接口与系统版本</a></h2>
 <p>Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。</p>
-<p class="ar-learning-topic-meta">17 篇重点对照 · 9 个跨论文问答 · 2026-11-11</p>
+<p class="ar-learning-topic-meta">18 篇重点对照 · 10 个跨论文问答 · 2026-11-12</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="agent-research/agent-policy-learning/">交互学习：统一轨迹之后，信用和教师信息怎样分配</a></h2>

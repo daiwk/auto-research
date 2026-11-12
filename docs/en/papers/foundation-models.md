@@ -8,6 +8,7 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [REAL Loss: Optimizing Real Expected Acceptance Length for Speculative Decoding](<https://arxiv.org/abs/2611.14399>) | 2026-11-10 | [English](../../foundation-models/2611.14399-real-loss/README-en.md) · [Chinese](../../foundation-models/2611.14399-real-loss/README.md) |
 | [Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding](<https://arxiv.org/abs/2611.13545v1>) | 2026-11-10 | [English](../../foundation-models/2611.13545-stochastic-rounding/README-en.md) · [Chinese](../../foundation-models/2611.13545-stochastic-rounding/README.md) |
 | [Blurring the Block Boundaries: Overlapping Block Denoising for Efficient Diffusion Language Models](<https://arxiv.org/abs/2611.14387v1>) | 2026-11-10 | [English](../../foundation-models/2611.14387-b3/README-en.md) · [Chinese](../../foundation-models/2611.14387-b3/README.md) |
 | [ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation](<https://arxiv.org/abs/2611.12956v1>) | 2026-11-07 | [English](../../foundation-models/2611.12956-adindex/README-en.md) · [Chinese](../../foundation-models/2611.12956-adindex/README.md) |

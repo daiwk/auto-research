@@ -7,7 +7,7 @@ hide:
 
 # 教师与纠错：额外信息何时能帮到学生
 
-[LLM 后训练](index.md) / 200 个问题 · 50 篇论文
+[LLM 后训练](index.md) / 208 个问题 · 52 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,115 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">200 个问题 · 50 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">208 个问题 · 52 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:bopd" data-paper-title="Bootstrapped On-Policy Distillation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="Bootstrapped On-Policy Distillation LLM 后训练 The Hong Kong Polytechnic University 2026-11-10 BOPD 先用带参考解答的冻结初始模型监督学生，构造中间模型 M1；再冻结 M1，将它当作不带参考的教师，蒸馏一个从原始 M0 精确重置的新学生。两阶段都在各自学生的轨迹前缀上评分，不能把 Stage I 的旧轨迹直接当作 Stage II 的新 on-policy 数据。这与“继续训练 Stage I 学生”不同：新学生的参数、持久 buffer 和 optimizer 状态都要恢复为初始/新建状态。参考解答只进入 Stage I 教师，不能让被评估学生读取；Stage II 连教师也不再接收参考。 完整实验成本过高，不复现（审查 DONE）。L1 机制组件，diagnostic only。CPU 与真实 A100 三种子验证通过；完整实验成本过高，不复现（审查 DONE）。本轮补审上批线索，不计为 11 月 12 日首发；未接入 Evolve。forward_kl 接收同历史对齐的全词表 logits 与有效 mask，detach 教师，低精度归约提升到 FP32，逐轨迹等权。stage_two_handoff 深拷贝真实 PyTorch module：teacher 来自 intermediate、冻结并 eval；student 来自保留的 initial checkpoint；  On-policy distillation 两阶段自蒸馏与学生重置 LLM 后训练 教师与纠错：额外信息何时能帮到学生 BOPD 的 Stage II 为什么不能继续训练 Stage I 学生？ 方法把教师构造与知识转移分开。Stage I 学生变成冻结的中间教师；Stage II 学生必须精确恢复原始 M0，并创建新 optimizer。继续保留 Stage I 参数或动量会变成另一条训练路径。 教学例：Stage I 某权重从1变为1.2，Stage II 教师保留1.2，而新学生回到1；不能两者都从1.2出发。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<span id="paper-post-training-bopd-82866624" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-f665514d3bf7ec10">BOPD 的 Stage II 为什么不能继续训练 Stage I 学生？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Abopd">Bootstrapped On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · The Hong Kong Polytechnic University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>方法把教师构造与知识转移分开。Stage I 学生变成冻结的中间教师；Stage II 学生必须精确恢复原始 M0，并创建新 optimizer。继续保留 Stage I 参数或动量会变成另一条训练路径。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：Stage I 某权重从1变为1.2，Stage II 教师保留1.2，而新学生回到1；不能两者都从1.2出发。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13680v1">原论文</a> · <a href="../../../../post-training/2611.13680-bopd/">实现解读</a> · <a href="#qa-f665514d3bf7ec10">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:bopd" data-paper-title="Bootstrapped On-Policy Distillation" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="Bootstrapped On-Policy Distillation LLM 后训练 The Hong Kong Polytechnic University 2026-11-10 BOPD 先用带参考解答的冻结初始模型监督学生，构造中间模型 M1；再冻结 M1，将它当作不带参考的教师，蒸馏一个从原始 M0 精确重置的新学生。两阶段都在各自学生的轨迹前缀上评分，不能把 Stage I 的旧轨迹直接当作 Stage II 的新 on-policy 数据。这与“继续训练 Stage I 学生”不同：新学生的参数、持久 buffer 和 optimizer 状态都要恢复为初始/新建状态。参考解答只进入 Stage I 教师，不能让被评估学生读取；Stage II 连教师也不再接收参考。 完整实验成本过高，不复现（审查 DONE）。L1 机制组件，diagnostic only。CPU 与真实 A100 三种子验证通过；完整实验成本过高，不复现（审查 DONE）。本轮补审上批线索，不计为 11 月 12 日首发；未接入 Evolve。forward_kl 接收同历史对齐的全词表 logits 与有效 mask，detach 教师，低精度归约提升到 FP32，逐轨迹等权。stage_two_handoff 深拷贝真实 PyTorch module：teacher 来自 intermediate、冻结并 eval；student 来自保留的 initial checkpoint；  On-policy distillation 两阶段自蒸馏与学生重置 LLM 后训练 教师与纠错：额外信息何时能帮到学生 BOPD 的 FKL 应按所有 token 一起平均吗？ 不是。正文先对每条学生轨迹有效 token 平均，再对轨迹平均，教师到学生的KL方向也必须保留。把全部token混在一起会让长响应获得更高权重；教师分布在梯度中冻结。 教学例：两条响应长度为1和3，损失分别为2及全部为0；等轨迹平均是1，按所有token平均却是.5。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-8dcb5300d4c05f30">BOPD 的 FKL 应按所有 token 一起平均吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Abopd">Bootstrapped On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · The Hong Kong Polytechnic University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。正文先对每条学生轨迹有效 token 平均，再对轨迹平均，教师到学生的KL方向也必须保留。把全部token混在一起会让长响应获得更高权重；教师分布在梯度中冻结。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两条响应长度为1和3，损失分别为2及全部为0；等轨迹平均是1，按所有token平均却是.5。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13680v1">原论文</a> · <a href="../../../../post-training/2611.13680-bopd/">实现解读</a> · <a href="#qa-8dcb5300d4c05f30">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:bopd" data-paper-title="Bootstrapped On-Policy Distillation" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="Bootstrapped On-Policy Distillation LLM 后训练 The Hong Kong Polytechnic University 2026-11-10 BOPD 先用带参考解答的冻结初始模型监督学生，构造中间模型 M1；再冻结 M1，将它当作不带参考的教师，蒸馏一个从原始 M0 精确重置的新学生。两阶段都在各自学生的轨迹前缀上评分，不能把 Stage I 的旧轨迹直接当作 Stage II 的新 on-policy 数据。这与“继续训练 Stage I 学生”不同：新学生的参数、持久 buffer 和 optimizer 状态都要恢复为初始/新建状态。参考解答只进入 Stage I 教师，不能让被评估学生读取；Stage II 连教师也不再接收参考。 完整实验成本过高，不复现（审查 DONE）。L1 机制组件，diagnostic only。CPU 与真实 A100 三种子验证通过；完整实验成本过高，不复现（审查 DONE）。本轮补审上批线索，不计为 11 月 12 日首发；未接入 Evolve。forward_kl 接收同历史对齐的全词表 logits 与有效 mask，detach 教师，低精度归约提升到 FP32，逐轨迹等权。stage_two_handoff 深拷贝真实 PyTorch module：teacher 来自 intermediate、冻结并 eval；student 来自保留的 initial checkpoint；  On-policy distillation 两阶段自蒸馏与学生重置 LLM 后训练 教师与纠错：额外信息何时能帮到学生 BOPD 与持续的 reference-conditioned OPSD，教师条件有什么不同？ Stage I 仍用带参考的冻结初始教师，构造中间模型；Stage II 教师改为冻结的中间模型，并移除参考，师生共享可观察上下文。不是只把教师名称换掉，也不是把参考解直接提供给学生。 教学例：Stage I 教师看到题目与验证解；Stage II 两者只看到题目和新学生已生成前缀，不能重用答案条件教师的分数。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-de5f2c73ae2a0bcb">BOPD 与持续的 reference-conditioned OPSD，教师条件有什么不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Abopd">Bootstrapped On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · The Hong Kong Polytechnic University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Stage I 仍用带参考的冻结初始教师，构造中间模型；Stage II 教师改为冻结的中间模型，并移除参考，师生共享可观察上下文。不是只把教师名称换掉，也不是把参考解直接提供给学生。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：Stage I 教师看到题目与验证解；Stage II 两者只看到题目和新学生已生成前缀，不能重用答案条件教师的分数。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13680v1">原论文</a> · <a href="../../../../post-training/2611.13680-bopd/">实现解读</a> · <a href="#qa-de5f2c73ae2a0bcb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:bopd" data-paper-title="Bootstrapped On-Policy Distillation" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="Bootstrapped On-Policy Distillation LLM 后训练 The Hong Kong Polytechnic University 2026-11-10 BOPD 先用带参考解答的冻结初始模型监督学生，构造中间模型 M1；再冻结 M1，将它当作不带参考的教师，蒸馏一个从原始 M0 精确重置的新学生。两阶段都在各自学生的轨迹前缀上评分，不能把 Stage I 的旧轨迹直接当作 Stage II 的新 on-policy 数据。这与“继续训练 Stage I 学生”不同：新学生的参数、持久 buffer 和 optimizer 状态都要恢复为初始/新建状态。参考解答只进入 Stage I 教师，不能让被评估学生读取；Stage II 连教师也不再接收参考。 完整实验成本过高，不复现（审查 DONE）。L1 机制组件，diagnostic only。CPU 与真实 A100 三种子验证通过；完整实验成本过高，不复现（审查 DONE）。本轮补审上批线索，不计为 11 月 12 日首发；未接入 Evolve。forward_kl 接收同历史对齐的全词表 logits 与有效 mask，detach 教师，低精度归约提升到 FP32，逐轨迹等权。stage_two_handoff 深拷贝真实 PyTorch module：teacher 来自 intermediate、冻结并 eval；student 来自保留的 initial checkpoint；  On-policy distillation 两阶段自蒸馏与学生重置 LLM 后训练 教师与纠错：额外信息何时能帮到学生 本地 handoff 和 CUDA 检查通过，能否说完整 BOPD 训练已复现？ 不能。本地真实执行FKL、模块复制、buffer恢复、冻结teacher与新optimizer，但没有LLM rollout、参考prompt或完整两阶段训练。正文FKL也不能冒充Appendix中未核到实现的pointwise clipping。 本地小Linear模块的参数恢复误差为0，只验证阶段交接；原实验还需2到4GPU、每阶段3200学生rollout和最长38912token评测。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-3c7620c9b2b9983f">本地 handoff 和 CUDA 检查通过，能否说完整 BOPD 训练已复现？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Abopd">Bootstrapped On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · The Hong Kong Polytechnic University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。本地真实执行FKL、模块复制、buffer恢复、冻结teacher与新optimizer，但没有LLM rollout、参考prompt或完整两阶段训练。正文FKL也不能冒充Appendix中未核到实现的pointwise clipping。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>本地小Linear模块的参数恢复误差为0，只验证阶段交接；原实验还需2到4GPU、每阶段3200学生rollout和最长38912token评测。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13680v1">原论文</a> · <a href="../../../../post-training/2611.13680-bopd/">实现解读</a> · <a href="#qa-3c7620c9b2b9983f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:lcs-reference-opd" data-paper-title="Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation LLM 后训练 Georgia Institute of Technology（工作在Amazon Web Services实习期间完成） 2026-11-09 同一任务可有多条成功路线，但并非任意成功 reference 都适合纠正当前失败学生。论文仅用执行动作序列作对齐：相比最长公共前缀 LCP，LCS 在可恢复绕行之后仍保留有序一致，选择更兼容的同任务成功轨迹。reference 只给训练教师，学生始终仅看自己的历史。free-target OT 的目标使用频率也自由，因此各失败 rollout 独立选最兼容 reference；没有 balanced target marginal，不需要 Hungarian 匹配，也不能强制不同失败选择不同成功。 完整实验成本过高，不复现（审查 DONE）。L1 机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）。本轮补审上批线索，不计为 11 月 12 日首发；未接入 Evolve。lcs_length 是精确动态规划；compatibility 显式选择论文两种归一化。reference_pool 只保留外部 evaluator 验证的成功，按同任务完整解析动作序列去重，不丢弃动作重复和顺序。select_reference 独立 argmax、确定性首个 tie、成功 skip/无 reference fallback。  On-policy distillation 多轮轨迹引用与失败过滤 LLM 后训练 教师与纠错：额外信息何时能帮到学生 为什么不能给失败 rollout 随便挑一条相似的成功轨迹？ 成功只保证它完成自己的任务，不保证与当前失败路径兼容。选择必须来自同一任务实例的reward验证成功池，再按执行动作的有序LCS比较；跨任务完全相同的片段也不能越过任务边界。 教学例：两个房间任务都有“拿杯子”，但初始柜子和物品状态不同；另一个任务的相同动作不能直接充当当前reference。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<span id="paper-post-training-lcs-reference-opd-4da7031c" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-41b7715738107eb6">为什么不能给失败 rollout 随便挑一条相似的成功轨迹？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Alcs-reference-opd">Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · Georgia Institute of Technology（工作在Amazon Web Services实习期间完成）</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>成功只保证它完成自己的任务，不保证与当前失败路径兼容。选择必须来自同一任务实例的reward验证成功池，再按执行动作的有序LCS比较；跨任务完全相同的片段也不能越过任务边界。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个房间任务都有“拿杯子”，但初始柜子和物品状态不同；另一个任务的相同动作不能直接充当当前reference。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13135v1">原论文</a> · <a href="../../../../post-training/2611.13135-lcs-reference-opd/">实现解读</a> · <a href="#qa-41b7715738107eb6">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:lcs-reference-opd" data-paper-title="Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation LLM 后训练 Georgia Institute of Technology（工作在Amazon Web Services实习期间完成） 2026-11-09 同一任务可有多条成功路线，但并非任意成功 reference 都适合纠正当前失败学生。论文仅用执行动作序列作对齐：相比最长公共前缀 LCP，LCS 在可恢复绕行之后仍保留有序一致，选择更兼容的同任务成功轨迹。reference 只给训练教师，学生始终仅看自己的历史。free-target OT 的目标使用频率也自由，因此各失败 rollout 独立选最兼容 reference；没有 balanced target marginal，不需要 Hungarian 匹配，也不能强制不同失败选择不同成功。 完整实验成本过高，不复现（审查 DONE）。L1 机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）。本轮补审上批线索，不计为 11 月 12 日首发；未接入 Evolve。lcs_length 是精确动态规划；compatibility 显式选择论文两种归一化。reference_pool 只保留外部 evaluator 验证的成功，按同任务完整解析动作序列去重，不丢弃动作重复和顺序。select_reference 独立 argmax、确定性首个 tie、成功 skip/无 reference fallback。  On-policy distillation 多轮轨迹引用与失败过滤 LLM 后训练 教师与纠错：额外信息何时能帮到学生 ALFWorld 和 tau3 的 LCS normalizer 可以统一吗？ 不能无说明统一。ALFWorld按较短轨迹长度归一，tau3按失败轨迹长度归一；前者偏向衡量短轨迹覆盖，后者关注失败序列被解释多少，排序可能反转。 教学例：失败长度6，短reference长度2且匹配2，长reference长度5且匹配4。shorter归一得1和.8选短；failed归一得1/3和2/3选长。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-ed55cbdd21618b1f">ALFWorld 和 tau3 的 LCS normalizer 可以统一吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Alcs-reference-opd">Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · Georgia Institute of Technology（工作在Amazon Web Services实习期间完成）</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能无说明统一。ALFWorld按较短轨迹长度归一，tau3按失败轨迹长度归一；前者偏向衡量短轨迹覆盖，后者关注失败序列被解释多少，排序可能反转。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：失败长度6，短reference长度2且匹配2，长reference长度5且匹配4。shorter归一得1和.8选短；failed归一得1/3和2/3选长。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13135v1">原论文</a> · <a href="../../../../post-training/2611.13135-lcs-reference-opd/">实现解读</a> · <a href="#qa-ed55cbdd21618b1f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:lcs-reference-opd" data-paper-title="Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation LLM 后训练 Georgia Institute of Technology（工作在Amazon Web Services实习期间完成） 2026-11-09 同一任务可有多条成功路线，但并非任意成功 reference 都适合纠正当前失败学生。论文仅用执行动作序列作对齐：相比最长公共前缀 LCP，LCS 在可恢复绕行之后仍保留有序一致，选择更兼容的同任务成功轨迹。reference 只给训练教师，学生始终仅看自己的历史。free-target OT 的目标使用频率也自由，因此各失败 rollout 独立选最兼容 reference；没有 balanced target marginal，不需要 Hungarian 匹配，也不能强制不同失败选择不同成功。 完整实验成本过高，不复现（审查 DONE）。L1 机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）。本轮补审上批线索，不计为 11 月 12 日首发；未接入 Evolve。lcs_length 是精确动态规划；compatibility 显式选择论文两种归一化。reference_pool 只保留外部 evaluator 验证的成功，按同任务完整解析动作序列去重，不丢弃动作重复和顺序。select_reference 独立 argmax、确定性首个 tie、成功 skip/无 reference fallback。  On-policy distillation 多轮轨迹引用与失败过滤 LLM 后训练 教师与纠错：额外信息何时能帮到学生 LCS 比 LCP 留下更多匹配，就证明这些动作处于相同状态吗？ 不是。LCP在共享初始状态和相同确定性转移下有明确前缀解释；LCS跳过不匹配动作后，还需要绕行能恢复到相同状态。不可逆写库或移动物品可能使后续相同动作语义不同。 教学例：额外look不改状态，可以恢复到共同路线；额外delete-record改变了数据库，后续相同query未必面对同一状态。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-c06f477f4adc499d">LCS 比 LCP 留下更多匹配，就证明这些动作处于相同状态吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Alcs-reference-opd">Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · Georgia Institute of Technology（工作在Amazon Web Services实习期间完成）</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。LCP在共享初始状态和相同确定性转移下有明确前缀解释；LCS跳过不匹配动作后，还需要绕行能恢复到相同状态。不可逆写库或移动物品可能使后续相同动作语义不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：额外look不改状态，可以恢复到共同路线；额外delete-record改变了数据库，后续相同query未必面对同一状态。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13135v1">原论文</a> · <a href="../../../../post-training/2611.13135-lcs-reference-opd/">实现解读</a> · <a href="#qa-c06f477f4adc499d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:lcs-reference-opd" data-paper-title="Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation LLM 后训练 Georgia Institute of Technology（工作在Amazon Web Services实习期间完成） 2026-11-09 同一任务可有多条成功路线，但并非任意成功 reference 都适合纠正当前失败学生。论文仅用执行动作序列作对齐：相比最长公共前缀 LCP，LCS 在可恢复绕行之后仍保留有序一致，选择更兼容的同任务成功轨迹。reference 只给训练教师，学生始终仅看自己的历史。free-target OT 的目标使用频率也自由，因此各失败 rollout 独立选最兼容 reference；没有 balanced target marginal，不需要 Hungarian 匹配，也不能强制不同失败选择不同成功。 完整实验成本过高，不复现（审查 DONE）。L1 机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）。本轮补审上批线索，不计为 11 月 12 日首发；未接入 Evolve。lcs_length 是精确动态规划；compatibility 显式选择论文两种归一化。reference_pool 只保留外部 evaluator 验证的成功，按同任务完整解析动作序列去重，不丢弃动作重复和顺序。select_reference 独立 argmax、确定性首个 tie、成功 skip/无 reference fallback。  On-policy distillation 多轮轨迹引用与失败过滤 LLM 后训练 教师与纠错：额外信息何时能帮到学生 为什么不用一对一匹配reference，也不能按整个batch平均loss？ free-target OT不约束成功reference使用频率，多个失败可以独立选中同一最优引用。更新只针对失败，loss分母是失败数；全成功batch不执行optimizer step，而不是用零loss继续动量或衰减。 教学例：两个失败都最适合referenceA，就都选A；若3条rollout仅2条失败、loss为2和6，均值应为4，不是8/3。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-b382e90888a4b72b">为什么不用一对一匹配reference，也不能按整个batch平均loss？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Alcs-reference-opd">Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · Georgia Institute of Technology（工作在Amazon Web Services实习期间完成）</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>free-target OT不约束成功reference使用频率，多个失败可以独立选中同一最优引用。更新只针对失败，loss分母是失败数；全成功batch不执行optimizer step，而不是用零loss继续动量或衰减。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个失败都最适合referenceA，就都选A；若3条rollout仅2条失败、loss为2和6，均值应为4，不是8/3。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.13135v1">原论文</a> · <a href="../../../../post-training/2611.13135-lcs-reference-opd/">实现解读</a> · <a href="#qa-b382e90888a4b72b">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ragcompass" data-paper-title="RAGCompass: Generalizable Retriever Routing via Reranking" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/teacher-and-context" data-search="RAGCompass: Generalizable Retriever Routing via Reranking LLM 后训练 University of Virginia 2026-11-03 固定候选池的 query-only 分类器可能不能给从未见过的检索器打分。RAGCompass 把各检索器返回的整组证据作为候选，复用同一个 Qwen3-Reranker-0.6B 独立读每组 passage，不依赖检索器身份或各自不可比的置信度。先用答案效用微调 backbone 的 yes logit，后在冻结 backbone 表示上训练跨候选的两层比较头。目标是选出一组证据供 reader 回答，不是融合所有 passage。 完整实验成本过高，不复现（审查 DONE）。未训练 reranker 或 reader；L1 候选集蒸馏目标，diagnostic only。未训练 reranker 或 reader；完整实验成本过高，不复现（审查 DONE）。distillation_objective 从外部给定的同序 logits、离线 F1 向量和正温度计算稳定的候选集 KL 与解析梯度。eligible_query 单独实现离线 gap 条件；select_retriever 仅接收分数，不接收 gold、F1 或候选身份。没有从 gold 反推实际预测，也没有实现 passage 编码与比较头训练。  知识蒸馏 检索器路由 LLM 后训练 教师与纠错：额外信息何时能帮到学生 RAGCompass 为什么给一组证据打分，而不是直接预测检索器名字？ 它用同一个重排器读取每个检索器返回的证据组，候选不由固定检索器 ID 定义。新增检索器只要返回同样形式的证据就能被打分，但这个接口属性不保证跨检索器指标提高。 教学例：新向量检索器返回五段证据，可以与旧 BM25 的五段竞争；固定的 BM25/旧向量二分类头没有新检索器这一类。 2026-11-06">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 教师与纠错：额外信息何时能帮到学生</a></p>
 <span id="paper-post-training-ragcompass-a7b92c9e" class="ar-learning-paper-anchor"></span>
