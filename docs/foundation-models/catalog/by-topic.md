@@ -355,6 +355,26 @@
 - [SoftCache: Adaptive Step Size Caching for Diffusion Transformers](../../foundation-models/2610.22369-softcache/README.md)（`softcache`）：动态缓存通常只决定“刷新/重用”，仍沿固定时间网格走。SoftCache 将累计陈旧度距离阈值的 headroom 转成连续步长：缓存越可靠就走得更远。它用两次新鲜残差作时间外推，并重新排布剩余节点，使跳过的节点不会又被访问。
 - [Time-Anchored Diffusion Language Models: Latent-Space Caching for Fast Generation](../../foundation-models/2609.37924-tadm/README.md)（`tadm`）：将昂贵 anchor network 的潜表示跨多个反向扩散步缓存，只周期性刷新；小型 fusion module 根据当前状态门控修正陈旧 anchor，再交给轻量 denoiser。
 
+### 推测解码与 KV cache
+
+- [REAL Loss: Optimizing Real Expected Acceptance Length for Speculative Decoding](../../foundation-models/2611.14399-real-loss/README.md)（`real-loss`）：投机解码接受了哪个 token，会改变下一步被验证的前缀。逐步接受率相乘的 WTV 代理把目标分布中的分支比例用于后续接受率，可能丢失“接受分支权重”和“后续难易度”的协方差，甚至给出相反梯度。
+- [Compression Does Not End at Selection: Post-Selection Positional Geometry for Sparse KV Caches](../../foundation-models/2610.21126-rope-relay/README.md)（`rope-relay`）：selector 删除 token 后，K 仍携带稀疏旧坐标的旋转相位。RoPERelay 不重选内容、不重新 prefill 历史，将选中状态按原始时间排序、压紧坐标，并同步问题及生成坐标。来源为 §3、附录 A 的 Algorithm 1 和数值约定。
+- [DropKV: Decoupling Residual-Output Perturbation for Near-Optimal KV-Cache Eviction](../../foundation-models/2610.22130-drop-kv/README.md)（`drop-kv`）：只按 attention 权重淘汰 KV 会忽略 value 内容。DropKV 将组合驱逐近似为逐 token 输出扰动，跨观察窗口累加、池化，并保护近期 token。§3 与 Algorithm 1 定义评分；§4 的近似保证有条件，不能解释成任意输入上的全局最优。
+- [VFold: Symmetry-Aware Cross-Layer Value Cache Compression](../../foundation-models/2610.12338-vfold/README.md)（`vfold`）：相邻层的 Value 不一定在同一坐标系。VFold 用满秩 CCA 对齐和 Hungarian 头匹配，离线把变换折进 Value/输出投影；当前 token 先以完整 Value 参与注意力，随后才与相邻层平均共享。Key 不合并，首尾重要 token 独立保存。
+- [ASPIRE: Asynchronous Batch Self-Speculative Decoding](../../foundation-models/2609.17943-aspire/README.md)（`aspire`）：每个请求依据在线接受率与当前 batch 成本独立选择 draft 长度，并周期性用全注意力 refresh layer 校正自推测状态。
+- [ECHO: Early-layer Collaborative Hierarchical Orchestration with Bonus Logits in Speculative Decoding](../../foundation-models/2609.17241-echo/README.md)（`echo`）：用早层高频探索与末层低频权威校验组成双循环；两侧 bonus logits 协同补树，并保留精确拒绝采样校正。
+- [LoopSpec: Pipelined Self-Speculative Decoding for Looped Transformers](../../foundation-models/2609.17184-loopspec/README.md)（`loopspec`）：利用循环深度的中间预测做自推测，并以流水线残差提案隐藏验证等待。
+- [BeaconKV: Key-Value Cache Compression Guided by Beacon Queries for Efficient Large Reasoning Model Inference](../../reproductions/2609.04971-beaconkv/README.md)（`beaconkv`）：长推理中会出现重新关注早期计划的 Thought Revisiting Token，只用最近 query 预测未来注意力会丢失这些远程依赖。BeaconKV 对历史 query 聚类并维护少量代表 query，用它们为 KV 重要性投票，在固定缓存预算中兼顾近期上下文和远程重访。
+- [KVMem: Virtualizing Million-Token Agent Workspaces on a Consumer GPU](../../reproductions/2609.04852-kvmem/README.md)（`kvmem`）：长寿命 Agent 的历史会同时超过显存和模型原生窗口；摘要压缩会丢证据，文本检索又要重复 prefill。KVMEM 把已计算 KV 分页放到 GPU、主存和 NVMe，用模型自身的注意力空间索引挑选相关 block，再物化为不超过原生窗口的执行视图。
+- [Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning](../../reproductions/2609.03430-random-attention/README.md)（`random-attention`）：传统 KV 淘汰先计算 token 重要性，Random Attention 则始终保护 prompt，仅在已生成 token 中逐 head 独立随机保留固定预算；它省掉评分 pass，也避免所有 head 被同一排序规则约束。
+- [DistillCache: KL-Guided Adaptive KV-Cache Eviction for Memory-Efficient LLM Inference](../../reproductions/2608.08878-distillcache/README.md)（`distillcache`）：把 KV 淘汰视为序列决策，以逐步 KL 奖励训练轻量策略保留未来预测分布。
+- [DBLast: Dependent Block Drafting for Stochastic Speculative Decoding](../../reproductions/2608.05448-dblast/README.md)（`dblast`）：**主题：推测解码。** 并行 block drafter 常把位置条件独立化，在高熵采样时难以匹配联合分布。
+- [QEvict: Recoverable Quantized KV Eviction for Attention-Drift-Robust Long-Context Decoding](../../reproductions/2608.05326-qevict/README.md)（`qevict`）：**主题：长上下文 KV cache。** 二元保留/删除无法应对注意力漂移：今天不重要的窗口可能稍后重新活跃。
+- [Windowed-MTP: Removing the Full-Context Draft-KV Tax at Million-Token Context](../../reproductions/2607.21535-windowed-mtp/README.md)（`windowed-mtp`）：内置 MTP/NEXTN draft 通常每提出一个 token 都读取完整 KV cache；在百万 token 上，即使 target 已使用 GDN/Mamba 等便宜 verifier，draft 的全量 KV read 仍会成为瓶颈。Windowed-MTP 只改变 draft：保留最前面的 attention sink 与最近 $W$ 个 token，同时 target 继续读取完整上下文并验证所有候选。
+- [C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference](../../reproductions/2607.17715-c2kv/README.md)（`c2kv`）：以 compression tokens 和结构化 attention 学习位置无关、可拼接的压缩 KV manifold，并联合训练压缩与复用。
+- [Medusa: Simple LLM Inference Acceleration Framework with Multiple Decoding Heads](../../reproductions/2401.10774-medusa/README.md)（`medusa`）：在冻结或联合微调的 backbone 上增加多个 future-token heads，以 tree attention 同时验证候选分支，减少串行解码步数。
+- [Fast Inference from Transformers via Speculative Decoding](../../reproductions/2211.17192-speculative-decoding/README.md)（`speculative-decoding`）：小 draft model 并行提出多个 token，target model 一次验证整个块；拒绝时从校正后的残差分布采样，从而严格保持 target 分布。
+
 ### 向量索引与聚类训练
 
 - [e-means: outperforming k-means (in one-tenth the epochs)](../../foundation-models/2611.09501-e-means/README.md)（`e-means`）：Lloyd 每扫完一轮数据才更新质心。e-means 每批更新各簇的 EMA 计数与向量和，让同一轮中的后续批次立即使用新质心。每五批检查低计数簇，借活跃簇分裂复苏；末轮按过程中产生的分配取均值，不额外做一轮全量分配。原文另拟合批大小与峰值步长的缩放律，在大规模场景比较精确、低精度与 IVF 分配。
@@ -427,25 +447,6 @@
 ### 多向量检索与固定预算池化
 
 - [FLINT: Fixed-budget Late Interaction](../../foundation-models/2610.27273-flint/README.md)（`flint`）：ColBERT 对每个 token 保留向量，文档越长索引越大，长查询也需要更多次向量检索。ConstBERT 固定了文档侧预算，但查询仍逐 token。FLINT 则在共享 backbone 后，用两套不同的可学习 latent 分别读取查询和文档 token；交叉注意力、FFN 参数共享，双方输出都固定为 $V$ 个向量。它不是截取前 $V$ 个 token，也不是简单平均池化。
-
-### 推测解码与 KV cache
-
-- [Compression Does Not End at Selection: Post-Selection Positional Geometry for Sparse KV Caches](../../foundation-models/2610.21126-rope-relay/README.md)（`rope-relay`）：selector 删除 token 后，K 仍携带稀疏旧坐标的旋转相位。RoPERelay 不重选内容、不重新 prefill 历史，将选中状态按原始时间排序、压紧坐标，并同步问题及生成坐标。来源为 §3、附录 A 的 Algorithm 1 和数值约定。
-- [DropKV: Decoupling Residual-Output Perturbation for Near-Optimal KV-Cache Eviction](../../foundation-models/2610.22130-drop-kv/README.md)（`drop-kv`）：只按 attention 权重淘汰 KV 会忽略 value 内容。DropKV 将组合驱逐近似为逐 token 输出扰动，跨观察窗口累加、池化，并保护近期 token。§3 与 Algorithm 1 定义评分；§4 的近似保证有条件，不能解释成任意输入上的全局最优。
-- [VFold: Symmetry-Aware Cross-Layer Value Cache Compression](../../foundation-models/2610.12338-vfold/README.md)（`vfold`）：相邻层的 Value 不一定在同一坐标系。VFold 用满秩 CCA 对齐和 Hungarian 头匹配，离线把变换折进 Value/输出投影；当前 token 先以完整 Value 参与注意力，随后才与相邻层平均共享。Key 不合并，首尾重要 token 独立保存。
-- [ASPIRE: Asynchronous Batch Self-Speculative Decoding](../../foundation-models/2609.17943-aspire/README.md)（`aspire`）：每个请求依据在线接受率与当前 batch 成本独立选择 draft 长度，并周期性用全注意力 refresh layer 校正自推测状态。
-- [ECHO: Early-layer Collaborative Hierarchical Orchestration with Bonus Logits in Speculative Decoding](../../foundation-models/2609.17241-echo/README.md)（`echo`）：用早层高频探索与末层低频权威校验组成双循环；两侧 bonus logits 协同补树，并保留精确拒绝采样校正。
-- [LoopSpec: Pipelined Self-Speculative Decoding for Looped Transformers](../../foundation-models/2609.17184-loopspec/README.md)（`loopspec`）：利用循环深度的中间预测做自推测，并以流水线残差提案隐藏验证等待。
-- [BeaconKV: Key-Value Cache Compression Guided by Beacon Queries for Efficient Large Reasoning Model Inference](../../reproductions/2609.04971-beaconkv/README.md)（`beaconkv`）：长推理中会出现重新关注早期计划的 Thought Revisiting Token，只用最近 query 预测未来注意力会丢失这些远程依赖。BeaconKV 对历史 query 聚类并维护少量代表 query，用它们为 KV 重要性投票，在固定缓存预算中兼顾近期上下文和远程重访。
-- [KVMem: Virtualizing Million-Token Agent Workspaces on a Consumer GPU](../../reproductions/2609.04852-kvmem/README.md)（`kvmem`）：长寿命 Agent 的历史会同时超过显存和模型原生窗口；摘要压缩会丢证据，文本检索又要重复 prefill。KVMEM 把已计算 KV 分页放到 GPU、主存和 NVMe，用模型自身的注意力空间索引挑选相关 block，再物化为不超过原生窗口的执行视图。
-- [Random Attention: Rethinking KV Cache Eviction for Efficient Reasoning](../../reproductions/2609.03430-random-attention/README.md)（`random-attention`）：传统 KV 淘汰先计算 token 重要性，Random Attention 则始终保护 prompt，仅在已生成 token 中逐 head 独立随机保留固定预算；它省掉评分 pass，也避免所有 head 被同一排序规则约束。
-- [DistillCache: KL-Guided Adaptive KV-Cache Eviction for Memory-Efficient LLM Inference](../../reproductions/2608.08878-distillcache/README.md)（`distillcache`）：把 KV 淘汰视为序列决策，以逐步 KL 奖励训练轻量策略保留未来预测分布。
-- [DBLast: Dependent Block Drafting for Stochastic Speculative Decoding](../../reproductions/2608.05448-dblast/README.md)（`dblast`）：**主题：推测解码。** 并行 block drafter 常把位置条件独立化，在高熵采样时难以匹配联合分布。
-- [QEvict: Recoverable Quantized KV Eviction for Attention-Drift-Robust Long-Context Decoding](../../reproductions/2608.05326-qevict/README.md)（`qevict`）：**主题：长上下文 KV cache。** 二元保留/删除无法应对注意力漂移：今天不重要的窗口可能稍后重新活跃。
-- [Windowed-MTP: Removing the Full-Context Draft-KV Tax at Million-Token Context](../../reproductions/2607.21535-windowed-mtp/README.md)（`windowed-mtp`）：内置 MTP/NEXTN draft 通常每提出一个 token 都读取完整 KV cache；在百万 token 上，即使 target 已使用 GDN/Mamba 等便宜 verifier，draft 的全量 KV read 仍会成为瓶颈。Windowed-MTP 只改变 draft：保留最前面的 attention sink 与最近 $W$ 个 token，同时 target 继续读取完整上下文并验证所有候选。
-- [C²KV: Compressed and Composable KV Cache Reuse for Efficient LLM Inference](../../reproductions/2607.17715-c2kv/README.md)（`c2kv`）：以 compression tokens 和结构化 attention 学习位置无关、可拼接的压缩 KV manifold，并联合训练压缩与复用。
-- [Medusa: Simple LLM Inference Acceleration Framework with Multiple Decoding Heads](../../reproductions/2401.10774-medusa/README.md)（`medusa`）：在冻结或联合微调的 backbone 上增加多个 future-token heads，以 tree attention 同时验证候选分支，减少串行解码步数。
-- [Fast Inference from Transformers via Speculative Decoding](../../reproductions/2211.17192-speculative-decoding/README.md)（`speculative-decoding`）：小 draft model 并行提出多个 token，target model 一次验证整个块；拒绝时从校正后的残差分布采样，从而严格保持 target 分布。
 
 ### 结构化决策与自适应推理
 

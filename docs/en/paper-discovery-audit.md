@@ -1,8 +1,16 @@
 # Paper discovery and coverage audit
 
-<!-- source-sha256: 7905351989d50e7c6b693cdfa89254f20ea9c9df869ea59042c5d7adc2d130f5 -->
+<!-- source-sha256: 7398f52ad3e5f29b358d4a2a0458b797e85acbf82e4aa9b2a85cfeb1cc535262 -->
 
 [简体中文](../paper-discovery-audit.md)
+
+## November 12 bounded backfill: eight mechanism kernels, unchanged watermark
+
+[Fixed scope, sources, and execution evidence](research-audits/nov12-components/README.md) cover eight low-cost L1 components: six gaps in the November 11 announcement and two historical discoveries triggered by official Google sources, with **zero first publications on the delivery day**. CPU execution covers **eight components × three seeds**. BOPD, REAL Loss, and OnlyAct additionally ran as **three components × three seeds** on a real A100. Small-tensor, finite-policy, and contract diagnostics are not full-model capability comparisons or Evolve-promotion evidence.
+
+Seven full systems or experimental studies are explicitly **too costly and not reproduced (review DONE)**. The theoretical APMD paper instead uses `not_applicable_theory_only`: there is no large empirical protocol to reproduce, no invented high-cost configuration, and no claim that numerical identity checks prove every theorem. Full experiments are not retried automatically. Bilingual paper pages, original figures, four-level questions, and topic deep dives ship together.
+
+**The review watermark stays November 9, 2026**; this does not close the entire November 10–12 window. The eight source listings contain **956 deduplicated identities**, including cross-listings and replacements. This bounded source index is not a count of new qualifying papers, undelivered items, or automatic tasks. Unselected identities have not thereby received method review. The earlier closeouts and batch accounts below remain historical records.
 
 The review watermark is now **November 9, 2026**; see the [window closeout](research-audits/nov09-review-closure/README.md)
 and [unified state](../paper-discovery-watermark.json). First releases, older discoveries, and revisions remain separate.
@@ -21,7 +29,7 @@ and protected original-source decisions, with zero pending. Coverage, cutoff, no
 **November 8** are specified in the unified state. The [October 15 closeout](research-audits/oct15-review-closure/README.md)
 remains an unchanged historical snapshot.
 
-The latest bounded batch is [November 11](research-audits/nov11-components/README.md): 17 fixed deliverables, comprising 16 L1 components with three-seed CPU diagnostics, four of which also passed three-seed execution on a real A100, and the mechanism/cost-review-only AlphaProof Code reference. All expensive full experiments are explicitly not reproduced and review DONE. Actual first-publication dates, relative to the November 9 watermark in Asia/Shanghai, distinguish 13 later first releases from four backfills; discovery days and identifier months are not publication dates. Meta's 2611.13539 is separately rejected because its full text does not establish quantified production A/B evidence and is not counted among the 17. A capped query and Meta directory access limitation remain, so this is not window-wide closure and does not advance the watermark. The [roadmap](research-roadmap.md) retains previous batches.
+The previous bounded batch is [November 11](research-audits/nov11-components/README.md): 17 fixed deliverables, comprising 16 L1 components with three-seed CPU diagnostics, four of which also passed three-seed execution on a real A100, and the mechanism/cost-review-only AlphaProof Code reference. All expensive full experiments are explicitly not reproduced and review DONE. Actual first-publication dates, relative to the November 9 watermark in Asia/Shanghai, distinguish 13 later first releases from four backfills; discovery days and identifier months are not publication dates. Meta's 2611.13539 is separately rejected because its full text does not establish quantified production A/B evidence and is not counted among the 17. A capped query and Meta directory access limitation remain, so this is not window-wide closure and does not advance the watermark. The [roadmap](research-roadmap.md) retains previous batches.
 
 The [Harness² and Google/Meta backfill](research-audits/harness2-priority-repair/README.md) fixed a historical filtering gap. **An older date or a previous ledger appearance does not mean method and cost review are complete.** Frozen records are preserved, but date-screening labels such as `historical_first_publication` no longer imply reviewed deduplication. Accepted but undelivered items are separately labeled `implementation-pending`. Explicit high-cost no-reproduction and source exceptions remain terminal and are not retried automatically. This correction does not claim full historical coverage or move the review watermark by itself.
 

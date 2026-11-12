@@ -7,7 +7,7 @@ hide:
 
 # 自改进先标对象：答案、经验、接口与系统版本
 
-[Agent](../index.md) · 更新 2026-11-11 · 54 篇主题资料 / 17 篇重点对照
+[Agent](../index.md) · 更新 2026-11-12 · 55 篇主题资料 / 18 篇重点对照
 
 Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。
 
@@ -42,6 +42,7 @@ Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens �
 | [EnvOpt: Automated Optimization for Agent Environments](../../../agent-research/2611.07372-envopt/README.md) · [原始来源](https://arxiv.org/abs/2611.07372)<br>章节：背景与主要改动、核心公式、数据协议与实现边界 | 固定模型与 Harness，把可复用的信息表示作为跨任务资产；无训练 verifier 的成本/代理筛选之后，用独立验证决定是否保留。 | 更便宜的代理轨迹可错判，验证回归即回滚；本地仅回放选择规则，不生成环境或运行 Agent。 |
 | [When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents](../../../agent-research/2611.14326-fgse/README.md) · [原始来源](https://arxiv.org/abs/2611.14326)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 临时更新在迁移、定向证伪与归档回归三个探针集分别计分，收益、风险和旧任务损伤同时达标才准入。 | 经验门依赖真实成对verifier和适当探针；本地仅Eq7–9，不含自动细化、Actor或论文置信保证，完整API实验不复现。 |
 | [Program-Aided Patchable Skill Evolution](../../../agent-research/2611.14019-pase/README.md) · [原始来源](https://arxiv.org/abs/2611.14019)<br>章节：背景与主要改动、核心公式、数据协议与代码映射 | 分离描述性技能与关联程序，局部patch后只在held-out validation严格改善时保留配对更新。 | 程序语法不证明正确或安全，外部分数也不能验证陈旧patch目标；本地只做preimage事务和接受/回滚，不执行模型或生成代码。 |
+| [Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback](../../../agent-research/2608.15591-agent-gym/README.md) · [原始来源](https://arxiv.org/abs/2608.15591)<br>章节：核心公式、数据协议与代码映射、结果、负控与边界 | 以独立ALF规则层修正原Agent的JSON输出；AND检测、scope互斥、三层动作合并和显式SME批准保持纠错可审计。 | 目标匹配和collateral只描述适应案例覆盖，类型合同不证明语义正确。原Agent/模型不重训；LLM发现与自动晋升没有本地实现。 |
 
 </div>
 
@@ -94,6 +95,12 @@ EnvOpt 保留能服务不同查询的环境表示，内层成本下降且代理�
 PASE将技能程序patch交给独立validation，以严格改善决定保留；FGSE另外要求证伪失败与旧任务损伤不超阈值，避免平均收益掩盖危险子范围。Verified Quantum Wiki先依冻结规范独立证明，再比较成本/大小。三者都在准入，但可获得的保证不同：AST语法、经验探针和形式定理不能互换。当前CPU组件都不生成候选或外部核验，测试分数和synthetic receipt只用于合同负控。
 
 对照来源：[pase](../../../agent-research/2611.14019-pase/README.md) · [fgse](../../../agent-research/2611.14326-fgse/README.md) · [verified-quantum-wiki](../../../agent-research/2611.09822-verified-quantum-wiki/README.md)
+
+### 改输出的例外规则与改程序的技能补丁，准入证据不同
+
+PASE在skill/program配对上提出程序补丁，依held-out validation严格改善接受；Agent Gym在原Agent外层保存可逆业务例外，target/collateral检查之后仍需要专家明确批准。程序语法、规则匹配、人工授权和任务效果是四种不同判断，不应互相冒充。本地两者都是准入/事务L1核，不是自动发明规则、模型变聪明或完整RSI。
+
+对照来源：[agent-gym](../../../agent-research/2608.15591-agent-gym/README.md) · [pase](../../../agent-research/2611.14019-pase/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -189,9 +196,23 @@ PASE将技能程序patch交给独立validation，以严格改善决定保留；F
 
     对照来源：[pase](../../../agent-research/2611.14019-pase/README.md) · [fgse](../../../agent-research/2611.14326-fgse/README.md) · [verified-quantum-wiki](../../../agent-research/2611.09822-verified-quantum-wiki/README.md)
 
+### 一条业务纠错规则经SME批准，与一个程序补丁validation提高，能相互替代吗？ {#cross-cross-rule-governance-versus-program-validation}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。前者是在目标与collateral范围内授权下游例外；后者是配对程序在隔离validation上的测得效果。二者作用位置和接受依据不同，均不能靠语法/类型检查证明语义成功。
+
+    **教学例子：** 教学例：紧急采购例外可获人工授权；表格公式修补则要validation严格提高。把专家批准标成benchmark提升，或用一次分数提高授权采购政策，都混淆证据。
+
+    对照来源：[agent-gym](../../../agent-research/2608.15591-agent-gym/README.md) · [pase](../../../agent-research/2611.14019-pase/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-12** · 加入下游规则治理这一演化位置：明确scope互斥、3→2→1真实状态更新与SME信任边界，并与PASE程序validation准入区分；完整API/人工系统不复现。
+
+涉及：[agent-gym](../../../agent-research/2608.15591-agent-gym/README.md)
 
 **2026-11-11** · 加入FGSE和PASE，分别拆开风险约束准入与validation-only程序补丁接受，并与Verified Quantum Wiki的规范绑定独立证明比较；不将CPU经验门、语法解析或模拟凭据包装成完整自进化/证明能力。
 
@@ -225,7 +246,7 @@ PASE将技能程序patch交给独立validation，以严格改善决定保留；F
 
 覆盖 43 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 54 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 55 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -283,6 +304,7 @@ PASE将技能程序patch交给独立validation，以严格改善决定保留；F
 - [EnvOpt: Automated Optimization for Agent Environments](../../../agent-research/2611.07372-envopt/README.md)
 - [When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents](../../../agent-research/2611.14326-fgse/README.md)
 - [Program-Aided Patchable Skill Evolution](../../../agent-research/2611.14019-pase/README.md)
+- [Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback](../../../agent-research/2608.15591-agent-gym/README.md)
 
 </details>
 

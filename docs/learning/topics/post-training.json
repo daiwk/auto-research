@@ -122,7 +122,8 @@
         "post-training:grpo",
         "post-training:remax",
         "post-training:ppo-rlhf",
-        "post-training:excursion-td"
+        "post-training:excursion-td",
+        "post-training:apmd-reference-reset"
       ]
     },
     {
@@ -318,7 +319,9 @@
         "post-training:polaris-hri",
         "post-training:opcd",
         "post-training:opsd",
-        "post-training:ragcompass"
+        "post-training:ragcompass",
+        "post-training:bopd",
+        "post-training:lcs-reference-opd"
       ]
     },
     {

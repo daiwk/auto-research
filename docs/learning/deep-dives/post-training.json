@@ -219,7 +219,7 @@
     "policy-optimization": {
       "title": "同一个GRPO名字之外：优势尺度、裁剪单位与训推失配",
       "thesis": "GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比被裁剪、样本到底由哪个分布生成。Dr. GRPO、DAPO、GSPO与TIS/IcePop分别改动这些环节，不能把所有ratio都叫同一种off-policy校正。",
-      "updated": "2026-11-11",
+      "updated": "2026-11-12",
       "reviewed_papers": [
         "post-training:rcea",
         "post-training:rlid",
@@ -277,7 +277,8 @@
         "post-training:grpo",
         "post-training:remax",
         "post-training:ppo-rlhf",
-        "post-training:excursion-td"
+        "post-training:excursion-td",
+        "post-training:apmd-reference-reset"
       ],
       "axes": [
         "优势尺度：组均值、组标准差、长度归一化",
@@ -375,6 +376,16 @@
             "数据协议与代码映射",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "post-training:apmd-reference-reset",
+          "position": "每轮把KL reference更新为最新策略，再近似求解reference×exp(eta×reward)的镜像目标；有限核检查精确重置路径、Kimi均值baseline的平方KL偏差与Rebel=2×centered-MSE。",
+          "tradeoff": "参考重置不等于刷新PPO/GRPO old policy，也不等于把学生退回base；保证依赖策略/reward可实现性及内层精度。纯理论无大型实证方案，不编高成本或把数值检查当完整证明。",
+          "sections": [
+            "核心公式",
+            "结果、负控与边界",
+            "理论与实验范围"
+          ]
         }
       ],
       "analysis": [
@@ -411,6 +422,14 @@
           "papers": [
             "post-training:excursion-td",
             "post-training:tis"
+          ]
+        },
+        {
+          "title": "old policy负责采样比，KL reference决定优化锚点，二者不能混称旧模型",
+          "body": "GRPO用old-policy ratio和组优势形成更新，同时另有reference KL；APMD讨论的是KL锚点随外层迭代重置，允许在强局部约束下累积前进。刷新采样行为的old policy不自动满足APMD的reference条件，组内去均值也不消除Kimi均值baseline相对镜像目标的平方KL偏差。这里的有限响应恒等式不能替代真实LLM的假设核验或采样误差分析。",
+          "papers": [
+            "post-training:apmd-reference-reset",
+            "post-training:grpo"
           ]
         }
       ],
@@ -466,6 +485,16 @@
           "papers": [
             "post-training:excursion-td",
             "post-training:tis"
+          ]
+        },
+        {
+          "id": "cross-old-policy-versus-kl-anchor-reset",
+          "question": "GRPO已经周期更新old policy，为什么还不能说实现了APMD reference reset？",
+          "answer": "old policy在概率比分母中记录行为分布；KL reference是正则化锚点。两者可不同步，且APMD还要求近似解满足内层误差条件，不能因名字都叫旧模型就认为等价。",
+          "example": "教学例：每批采样前刷新old policy，但KL始终惩罚偏离最初base，仍是固定reference；APMD下一轮锚定最新pi_t。",
+          "papers": [
+            "post-training:apmd-reference-reset",
+            "post-training:grpo"
           ]
         }
       ],
@@ -614,6 +643,16 @@
           ],
           "source_revisions": {
             "post-training:excursion-td": "d9729625dcd35d32cbe7741eb613ea93410b7194802985892b414c597ebdff83"
+          }
+        },
+        {
+          "date": "2026-11-12",
+          "papers": [
+            "post-training:apmd-reference-reset"
+          ],
+          "summary": "补审coverage/reference-reset理论，分清行为old policy、KL reference和student初始化；增加Kimi偏差与Rebel中心化恒等式。仅CPU精确有限核，纯理论大型实证不适用，不宣称普适GRPO收敛。",
+          "source_revisions": {
+            "post-training:apmd-reference-reset": "d59bdb8a539849abd079aad30ab38777eea5d387e48f498c2c2fb25ccfbc9087"
           }
         }
       ]
@@ -1511,7 +1550,7 @@
     "teacher-and-context": {
       "title": "教师更强仍可能教错：信息、兼容性与成功行为保护",
       "thesis": "教师的价值不只取决于总分。OPSD改变训练期可见信息，MOPD与逐token路由组织多教师，CSD先统一概率事件，SPOD保护学生已成功选择，VAD筛出可归于视觉证据的修正；这些约束要在模仿之前分别成立。",
-      "updated": "2026-11-06",
+      "updated": "2026-11-12",
       "reviewed_papers": [
         "post-training:p2-mopd",
         "post-training:targeted-guidance",
@@ -1562,7 +1601,9 @@
         "post-training:polaris-hri",
         "post-training:opcd",
         "post-training:opsd",
-        "post-training:ragcompass"
+        "post-training:ragcompass",
+        "post-training:bopd",
+        "post-training:lcs-reference-opd"
       ],
       "axes": [
         "教师来源：同参数特权视图或独立领域专家",
@@ -1659,6 +1700,26 @@
             "核心公式",
             "数据协议与代码映射"
           ]
+        },
+        {
+          "paper": "post-training:bopd",
+          "position": "先由reference-conditioned冻结M0构造中间M1，再冻结M1并移除reference，向从M0精确恢复、使用新optimizer的学生做teacher→student FKL。",
+          "tradeoff": "不同于持续特权视图OPSD，reset的是学生与optimizer，教师则保留已学参数；本地仅真实FKL/handoff，不含LM rollout或原文未可审核的pointwise clipping。空作者仓库不记为已开源实现。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "paper": "post-training:lcs-reference-opd",
+          "position": "按同任务完整动作LCS选最兼容成功reference，free-target OT独立argmax且允许复用；只更新失败episode，无引用时reference-free，ALFWorld/tau3分别使用不同归一化。",
+          "tradeoff": "不同于SPOD只在成功episode内保护teacher较不支持的action，这里整条成功轨迹不更新。LCS状态解释需要可恢复绕行，不是潜状态等价；本地没有Agent/OPD trainer，4500A100小时完整矩阵不复现。",
+          "sections": [
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -1704,6 +1765,22 @@
             "post-training:ragcompass",
             "post-training:opsd",
             "post-training:targeted-guidance"
+          ]
+        },
+        {
+          "title": "先构造可无参考使用的教师，与始终依赖特权视图是不同路径",
+          "body": "OPSD让教师额外读取验证解，学生只见自身前缀；BOPD先把这种监督写入中间参数，再让无参考中间教师指导从初始checkpoint恢复的新学生。它不是把Stage I末尾学生继续训练，也不能把Stage I特权分数缓存成Stage II无参考监督。权重冻结不意味着在新学生前缀上预测恒定，必须保留阶段、上下文与参数状态三条来源。",
+          "papers": [
+            "post-training:bopd",
+            "post-training:opsd"
+          ]
+        },
+        {
+          "title": "保护成功episode与保护成功里的特定action，更新集合不一样",
+          "body": "LCS reference方法先排除全部成功学生episode，再为失败者选同任务引用并校正；SPOD仍可训练成功episode，只对teacher完整action概率低于student的decision取消KL并加软floor。前者还改变reference信息来源，后者改变action级监督。不能把二者统称success mask后混用分母、概率条件和更新门控，且训练用成功reference都不应暴露给被评估学生。",
+          "papers": [
+            "post-training:lcs-reference-opd",
+            "post-training:spod"
           ]
         }
       ],
@@ -1778,6 +1855,26 @@
           "papers": [
             "post-training:ragcompass",
             "post-training:opsd"
+          ]
+        },
+        {
+          "id": "cross-bootstrap-teacher-versus-privileged-view",
+          "question": "把OPSD的teacher去掉reference，再继续原学生，等于BOPD吗？",
+          "answer": "不等于。BOPD的Stage II教师来自Stage I学得的中间模型，而学生精确恢复初始模型并新建optimizer；去reference只是其中一条条件变化。继续原学生或换回初始teacher都改变了方法。",
+          "example": "教学例：Stage I把权重1学到1.2。Stage II teacher用1.2、student用1、optimizer空状态；两者都用1.2只是继续训练，不是该handoff。",
+          "papers": [
+            "post-training:bopd",
+            "post-training:opsd"
+          ]
+        },
+        {
+          "id": "cross-whole-success-versus-action-protection",
+          "question": "LCS failure-only和SPOD都保护成功，为什么不能复用同一个success mask？",
+          "answer": "LCS跳过整个成功episode；SPOD还比较teacher/student的完整action概率，只保护满足条件的decision，其他位置继续蒸馏。因此mask粒度、归约和保留的loss都不同。",
+          "example": "教学例：一条成功episode中teacher对某动作比student更支持，SPOD可继续该动作KL；LCS方法仍跳过整条成功轨迹。",
+          "papers": [
+            "post-training:lcs-reference-opd",
+            "post-training:spod"
           ]
         }
       ],
@@ -1912,6 +2009,26 @@
             "post-training:ragcompass": "36cbf84b0c356d709501888ddd785daefddacac12e341663c3074987b07ba430",
             "post-training:opsd": "8082928a5bc28763d2b28f8f7f640f9498cf8516f2e58f3841760950f405df74",
             "post-training:targeted-guidance": "e1a728445c450d1921e6e62940270a07d72ecd7d6f907ce00bacbee34fc82628"
+          }
+        },
+        {
+          "date": "2026-11-12",
+          "papers": [
+            "post-training:bopd"
+          ],
+          "summary": "补审BOPD，区分持续特权视图与两阶段无参考教师迁移，保留学生/optimizer重置及逐轨迹FKL；本地A100只验收loss/handoff，完整多GPU与长生成实验不复现。",
+          "source_revisions": {
+            "post-training:bopd": "51c807b00f02ae3ad96613edf9c3d7074cf46569aeb7e8b3ea9394c3145cea0d"
+          }
+        },
+        {
+          "date": "2026-11-12",
+          "papers": [
+            "post-training:lcs-reference-opd"
+          ],
+          "summary": "补审LCS同任务引用选择，区分整episode失败过滤与SPOD完整action保护；保留free-target独立选择、双normalizer和teacher-only reference。仅CPU选择核，不用fixture冒充多轮Agent训练。",
+          "source_revisions": {
+            "post-training:lcs-reference-opd": "92ff22ac54c37dbaec59f9b3dfa4fec26b54c656dae57dadb01bc6b0a4ed430b"
           }
         }
       ]

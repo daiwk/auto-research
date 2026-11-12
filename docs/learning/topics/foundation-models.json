@@ -242,7 +242,8 @@
         "foundation-models:speculative-decoding",
         "foundation-models:tadm",
         "foundation-models:windowed-mtp",
-        "foundation-models:b3"
+        "foundation-models:b3",
+        "foundation-models:real-loss"
       ]
     },
     {

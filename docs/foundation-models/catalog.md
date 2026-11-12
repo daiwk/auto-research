@@ -12,6 +12,7 @@
 |---|---|---|---|---|
 | 推理与系统效率 | [Blurring the Block Boundaries: Overlapping Block Denoising for Efficient Diffusion Language Models](2611.14387-b3/README.md) | Technion / Amazon Web Services，2026-11-10 | 未发现官方代码 | `b3`：仅低成本组件，完整实验不复现 |
 | 训练与数值系统 | [Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding](2611.13545-stochastic-rounding/README.md) | NVIDIA，2026-11-10 | 未发现官方代码 | `stochastic-rounding`：仅低成本组件，完整实验不复现 |
+| 推理与系统效率 | [REAL Loss: Optimizing Real Expected Acceptance Length for Speculative Decoding](2611.14399-real-loss/README.md) | The University of Hong Kong，2026-11-10 | [原作者入口](https://github.com/King-ty/speculators/tree/real-loss)；作者参考分支已核实；核对固定提交3dff4579c5f93f692108df8b5178c9e9200b8536的EAL代码和反例测试，未下载权重或数据。 | `real-loss`：仅低成本组件，完整实验不复现 |
 | 注意力与长上下文 | [ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation](2611.12956-adindex/README.md) | Nanjing University / Alibaba Group，2026-11-07 | 未发现官方代码 | `adindex`：仅低成本组件，完整实验不复现 |
 | 推理与系统效率 | [e-means: outperforming k-means (in one-tenth the epochs)](2611.09501-e-means/README.md) | FAIR at Meta，2026-11-06 | [原作者入口](https://github.com/facebookresearch/faiss/tree/main/contrib/e_means)；原文链接 Meta Faiss contrib/e_means，固定 revision 可见原作者参考源码；本地独立实现论文算法，不依赖 Faiss。 | `e-means`：仅低成本组件，完整实验不复现 |
 | 注意力与长上下文 | [ConvPE: Convolutional Position Embedding Improves Transformers](2611.07749-convpe/README.md) | Nanjing University，2026-11-05 | [原作者入口](https://github.com/wzhagi/convpe)；固定v1链接原作者公开仓库；核实有实现源码，未找到明确代码许可证。本地按公式独立实现。 | `convpe`：仅低成本组件，完整实验不复现 |

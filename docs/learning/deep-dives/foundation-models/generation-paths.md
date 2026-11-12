@@ -7,7 +7,7 @@ hide:
 
 # 少做串行步骤：验证草稿与学习迭代不是同一条路
 
-[基础模型](../index.md) · 更新 2026-11-11 · 16 篇主题资料 / 7 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-12 · 17 篇主题资料 / 8 篇重点对照
 
 推测解码用便宜提案换昂贵验证批次，精确校正可保持原 target 分布；扩散语言和数据空间迭代则改变生成轨迹或训练目标。比较时先问谁决定最终分布，再问每步做什么、跨步保留什么，以及 NFE 或接受长度能否转成真实时间收益。
 
@@ -32,6 +32,7 @@ hide:
 | [On Trajectory-Aware Training for Masked Diffusion Language Models](../../../foundation-models/2609.37974-pumba/README.md) · [原始来源](https://arxiv.org/abs/2609.37974)<br>章节：背景与主要改动、核心公式、复现边界 | 沿自身 progressive-unmasking 轨迹展开连续步骤，carry 在窗口内传递并接受 BPTT。 | 训练窗口与截断控制计算和信用范围；本地只验 carry 梯度，不是 LLaDA-8B 少步能力复现。 |
 | [Few-Step Generation via Data-Space Iteration](../../../foundation-models/2610.12102-data-space-iteration/README.md) · [原始来源](https://arxiv.org/abs/2610.12102)<br>章节：背景与主要改动、核心公式、复现边界与 Evolve | 固定一份噪声，在数据预测空间反复精炼；仅当前 refinement 建生成器梯度，teacher/fake 给蒸馏方向。 | 步号不是 flow time，且目标不与语言模型相同；本地缩小图像模型三seed有正有负，像素特征距离不是 Inception FID。 |
 | [Blurring the Block Boundaries: Overlapping Block Denoising for Efficient Diffusion Language Models](../../../foundation-models/2611.14387-b3/README.md) · [原始来源](https://arxiv.org/abs/2611.14387v1)<br>章节：核心公式、数据协议与代码映射、结果与复现边界 | 在兼容self-editing的扩散解码中重叠当前/未来两块，以块因果mask保护当前输出；用上一拍前沿左侧熵的跨块候选均值控制spawn。 | 门控不是扩散backbone，不能把AR模型直接变双向DLM；候选排除frontier、future-active阶段与EOS，并保留一拍滞后。局部注意力不变不证明整段分布不变、质量或TPS。 |
+| [REAL Loss: Optimizing Real Expected Acceptance Length for Speculative Decoding](../../../foundation-models/2611.14399-real-loss/README.md) · [原始来源](https://arxiv.org/abs/2611.14399)<br>章节：核心公式、数据协议与代码映射、结果、负控与边界 | 从target采样轨迹以q/p构造真实接受分支质量，末步边缘化得到可微EAL训练目标；补充draft训练，不替代拒绝校正verifier。 | 原始投机解码关注保持target分布的推理正确性，REAL关注固定验证过程下如何训练draft；本地只测小张量期望与梯度，不训练35Btarget/完整drafter。 |
 
 </div>
 
@@ -54,6 +55,12 @@ DQwen3.5 的步围绕掩码去噪，PUMBA 进一步让前一步 carry 对后续 
 dQwen3.5把混合attention/RNN骨干改成双向条件并用掩码去噪训练；B3在已有兼容扩散模型上安排两块重叠时机，不提供该模型本身。B3的块因果mask只保护当前块不读取未来草稿，不意味着未来块无需self-edit，也不是推测解码那种完整目标分布保持证明。应分别验收backbone、sampler与门控。
 
 对照来源：[b3](../../../foundation-models/2611.14387-b3/README.md) · [dqwen35](../../../foundation-models/2609.20751-dqwen35/README.md)
+
+### 推理接受比与训练路径比方向相反，但服务于同一接受质量
+
+原始Speculative Decoding从draft q提出token，以min(1,p/q)接受并从[p−q]+校正，保证输出target分布。REAL的轨迹却由target p采样，用min(1,q/p)把其质量变成min(p,q)，训练更合适的draft。两者不是替代算法；错误交换比例会分别破坏推理分布或训练目标。一个loss在某点与代理值相同，也不能证明其梯度方向正确。
+
+对照来源：[real-loss](../../../foundation-models/2611.14399-real-loss/README.md) · [speculative-decoding](../../../reproductions/2211.17192-speculative-decoding/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -99,9 +106,23 @@ dQwen3.5把混合attention/RNN骨干改成双向条件并用掩码去噪训练�
 
     对照来源：[b3](../../../foundation-models/2611.14387-b3/README.md) · [dqwen35](../../../foundation-models/2609.20751-dqwen35/README.md)
 
+### REAL训练用q/p，而投机解码推理用p/q，是否有一方写反了？ {#cross-cross-speculative-training-versus-serving-ratio}
+
+??? note "展开答案与例子"
+
+    **答案：** 没有。两者采样分布不同：训练先从p采样，推理先从q提案；各自乘截断比后都形成min(p,q)质量。不能脱离采样来源复用比值，末步边缘化与拒绝残差也分别属于训练估计和推理校正。
+
+    **教学例子：** 教学例：p(A)=0.4、q(A)=0.8，训练p质量0.4乘1；推理q质量0.8乘0.5，均为0.4。
+
+    对照来源：[real-loss](../../../foundation-models/2611.14399-real-loss/README.md) · [speculative-decoding](../../../reproductions/2211.17192-speculative-decoding/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-12** · 补入真实接受分支的EAL训练目标，将target采样q/p训练权重与draft提案p/q推理校正区分；A100三seed仅验证损失/梯度机制，完整训练成本过高不复现。
+
+涉及：[real-loss](../../../foundation-models/2611.14399-real-loss/README.md)
 
 **2026-11-11** · 加入B3，区分扩散backbone改造与已有解码器的重叠调度；核对前沿、一拍滞后、活动未来块及EOS保护。CPU门控不冒充DLM生成，完整16B/26B/100B吞吐矩阵不复现。
 
@@ -111,7 +132,7 @@ dQwen3.5把混合attention/RNN骨干改成双向条件并用掩码去噪训练�
 
 覆盖 15 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 16 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 17 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -131,6 +152,7 @@ dQwen3.5把混合attention/RNN骨干改成双向条件并用掩码去噪训练�
 - [Time-Anchored Diffusion Language Models: Latent-Space Caching for Fast Generation](../../../foundation-models/2609.37924-tadm/README.md)
 - [Windowed-MTP: Removing the Full-Context Draft-KV Tax at Million-Token Context](../../../reproductions/2607.21535-windowed-mtp/README.md)
 - [Blurring the Block Boundaries: Overlapping Block Denoising for Efficient Diffusion Language Models](../../../foundation-models/2611.14387-b3/README.md)
+- [REAL Loss: Optimizing Real Expected Acceptance Length for Speculative Decoding](../../../foundation-models/2611.14399-real-loss/README.md)
 
 </details>
 

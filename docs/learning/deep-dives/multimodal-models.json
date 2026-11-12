@@ -275,7 +275,7 @@
     "visual-evidence-budget": {
       "title": "少看、晚看还是再看：把视觉预算放到正确阶段",
       "thesis": "视觉预算不只有token数。StackTok选择已编码证据，PACE提前分配输入分辨率，ViMoD保留可恢复细节，Frames-on-Demand按需取帧，AdaLoop多算已有视觉状态，OmniKVQuant减少每份cache的位宽。必须同时追踪信息是否还在、哪段成本已支付。",
-      "updated": "2026-11-11",
+      "updated": "2026-11-12",
       "reviewed_papers": [
         "foundation-models:adaloop-vision",
         "foundation-models:frames-on-demand",
@@ -293,7 +293,8 @@
         "foundation-models:video-encoder-selection",
         "multimodal-models:videomm",
         "multimodal-models:vimod",
-        "multimodal-models:steprefine"
+        "multimodal-models:steprefine",
+        "multimodal-models:c2-routing"
       ],
       "axes": [
         "介入阶段：输入编码前、编码后、生成中、cache存储",
@@ -370,6 +371,16 @@
             "数据协议与代码映射",
             "结果与复现边界"
           ]
+        },
+        {
+          "paper": "multimodal-models:c2-routing",
+          "position": "在裁剪/整图压缩之间先提议动作，再用原/缩输入联合正确性H−B与validation固定FLOPs比决定是否回退。",
+          "tradeoff": "PACE依据图像语义密度/局部细节分配budget并融合注意力选token；C²额外建模信息减少相对原图造成的正确率损益。本地没有学习风险头，不能以代数门控宣称超越PACE checkpoint结果。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -398,6 +409,14 @@
           "papers": [
             "multimodal-models:steprefine",
             "foundation-models:adaloop-vision"
+          ]
+        },
+        {
+          "title": "信息保留策略与是否值得回退，是两层不同判断",
+          "body": "PACE的APC/DDAE问如何分配视觉预算和保留证据，C²-Routing问当前缩减相对原图是否产生可补救伤害以及节省是否值得。高缩减错误率可能来自两边共同失败，也可能被缩减收益抵消；因此不能用错误率代替H−B。实际收益还依赖外部风险预测校准与validation固定策略，公式正确并不表示已训练可靠路由。",
+          "papers": [
+            "multimodal-models:c2-routing",
+            "foundation-models:pace-vlm"
           ]
         }
       ],
@@ -442,6 +461,16 @@
           "papers": [
             "multimodal-models:steprefine",
             "foundation-models:adaloop-vision"
+          ]
+        },
+        {
+          "id": "cross-visual-budget-versus-fallback-risk",
+          "question": "一个缩减输入的错误率很高，为什么不能仅据此否定PACE式预算或强制C²回退？",
+          "answer": "还需比较同题原图是否也错，以及缩减是否曾改善。预算是输入证据选择，回退风险是原/缩正确性差；共同失败不会被原图修复。两类机制的真实checkpoint范围与本地L1证据也不能混排。",
+          "example": "教学例：缩减在90%题上错，但原图也在同90%错，H=B=0；回退只增加计算，不改善期望正确率。",
+          "papers": [
+            "multimodal-models:c2-routing",
+            "foundation-models:pace-vlm"
           ]
         }
       ],
@@ -497,13 +526,23 @@
             "multimodal-models:steprefine": "80543e75766c9cefbe3a05b8ad997abccbf84c25b7055c735f10e77791d13c42",
             "foundation-models:adaloop-vision": "89ae8f64704875e311d05167d9f04a1cbcb5b18fac681839f595d6b1100df3ec"
           }
+        },
+        {
+          "date": "2026-11-12",
+          "papers": [
+            "multimodal-models:c2-routing"
+          ],
+          "summary": "增加联合正确性风险与validation成本效用轴，区别如何保留视觉证据和是否值得回退；CPU仅执行策略核，未训练视觉路由，完整18数据集矩阵不复现。",
+          "source_revisions": {
+            "multimodal-models:c2-routing": "82f974b798414331f7a5e9a955b3687441f2bdc560dfbe5c9a34e3d64a0ba542"
+          }
         }
       ]
     },
     "world-state-actions": {
       "title": "会预测下一幕，还不等于会行动或保持同一个世界",
       "thesis": "世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。 SWIM从离线动作可预测性学习状态坐标的相对权重，训练期校准latent距离，部署时不向规划器增加真实状态。",
-      "updated": "2026-11-11",
+      "updated": "2026-11-12",
       "reviewed_papers": [
         "foundation-models:alps",
         "multimodal-models:aw0",
@@ -529,7 +568,8 @@
         "multimodal-models:woven",
         "foundation-models:gui-jepa",
         "foundation-models:swim",
-        "multimodal-models:rs-jepa"
+        "multimodal-models:rs-jepa",
+        "multimodal-models:onlyact"
       ],
       "axes": [
         "学习对象：未来latent、动作分布、视觉转移、持久几何",
@@ -627,6 +667,16 @@
             "核心公式",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "multimodal-models:onlyact",
+          "position": "在预训练V-JEPA2联合帧表征上，以场景交换正例及同视频非重叠hard negative适配动作几何，再冻结供世界模型使用。",
+          "tradeoff": "RS-JEPA用扫描视图和跨传感器邻域共识学习场景检索；OnlyAct希望保留动作、抑制场景。共享JEPA来源不代表优化目标相同。本地两者均只有独立公式/梯度L1，不提供图像检索或动作迁移能力排名。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -670,6 +720,14 @@
           "papers": [
             "multimodal-models:rs-jepa",
             "foundation-models:vjepa-policy"
+          ]
+        },
+        {
+          "title": "跨视图保持的内容，可以是场景，也可以是动作",
+          "body": "RS-JEPA希望不同传感器检索到同一场景，并让其邻域关系一致；OnlyAct反而把动作保持但场景改变的样本拉近，用同场景不同窗作为难负例。二者对场景身份的需求不同，不能直接拼接一个通用InfoNCE就声称兼得。OnlyAct正负构造依赖光流/相机静动假设，局部候选mask与损失的CUDA通过不能验证这些语义假设。",
+          "papers": [
+            "multimodal-models:onlyact",
+            "multimodal-models:rs-jepa"
           ]
         }
       ],
@@ -733,6 +791,16 @@
           "papers": [
             "multimodal-models:rs-jepa",
             "foundation-models:vjepa-policy"
+          ]
+        },
+        {
+          "id": "cross-jepa-scene-versus-action-invariance",
+          "question": "RS-JEPA与OnlyAct都做表征学习，为什么不能用同场景跨传感器正例替代OnlyAct正例？",
+          "answer": "同场景对齐保留场景身份，而OnlyAct要跨场景保留动作。替换会改变不变性目标，甚至鼓励动作编码器依赖场景捷径。InfoNCE公式相似不说明配对语义相同，真实动作迁移需要独立验证。",
+          "example": "教学例：同一桥梁的SAR和光学图适合RS-JEPA；OnlyAct需要不同房间里的相同开门动作，而不是同房间任意两个动作。",
+          "papers": [
+            "multimodal-models:onlyact",
+            "multimodal-models:rs-jepa"
           ]
         }
       ],
@@ -821,6 +889,16 @@
           "source_revisions": {
             "multimodal-models:rs-jepa": "d702dffacafd0a6312ea20282bdd76d09aac77dba416c6a2cfa7f3d527ed482b",
             "foundation-models:vjepa-policy": "bd556faa4f657cac639e6662804d80e39267f07b903ea87423fe32239a6e1905"
+          }
+        },
+        {
+          "date": "2026-11-12",
+          "papers": [
+            "multimodal-models:onlyact"
+          ],
+          "summary": "补入从JEPA时空先验提取动作的对比适配，明确场景检索与动作场景解耦目标差异；A100三seed只验证精确bank/冻结投影/梯度，完整视频训练不复现。",
+          "source_revisions": {
+            "multimodal-models:onlyact": "214fb33fd33c2b7016404e5dff6503028bd489ee0355cc899011cf4331be4726"
           }
         }
       ]

@@ -7,7 +7,7 @@ hide:
 
 # 运行流程与自进化：改的是哪一层
 
-[Agent](index.md) / 216 个问题 · 54 篇论文
+[Agent](index.md) / 220 个问题 · 55 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">216 个问题 · 54 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">220 个问题 · 55 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:fgse" data-paper-title="When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents Agent Nanyang Technological University 2026-11-10 一次经验修复能帮助当前任务，却可能在边界任务有害，或破坏旧技能。FGSE 将更新表示为带前提、行为、预期效果和 verifier 的假设，先在临时状态上跑迁移、定向证伪和归档回归探针，再 commit/refine/reject。风险集中于可分离子范围时允许一次前提细化；它不是“成功经验一律记住”。 完整实验成本过高，不复现（审查 DONE）。本地交付纯 CPU 经验准入门控，输入外部 verifier 的成对记录；不生成 Agent、探针或正确答案，不把门控通过率当任务成功率。Probe 保存同一探针在原状态/临时状态的有限分数及预期效果布尔值；不保存 gold answer。commitment_gate() 按 Eq.7–9 计算并返回三统计量和决定。调用者必须实际取得成对 verifier 结果；这里既没有 actor callback，也没有把预设分数冒充模型执行。  自进化与技能优化 证伪与回归保护 Agent 运行流程与自进化：改的是哪一层 FGSE 为什么不能把修好当前任务的经验立即写进长期记忆？ 当前任务增益没有覆盖迁移、边界反例和旧技能。FGSE 要在临时状态上分别测这些风险，再决定写入、一次细化或拒绝；只有原任务成功不足以支持持久化。 教学例：某工具报错时“始终重试”修好一次瞬时故障，但在付款已成功、回执丢失时可能重复扣款。 2026-11-11">
@@ -2412,6 +2412,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>例如 test 看到报错可按已冻结规则恢复，但不能把隐藏正确路线写入 archive 后再说即时适配成功。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、复现边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.25593">原论文</a> · <a href="../../../../agent-research/2608.25593-jit-agent/">实现解读</a> · <a href="#qa-7b9656fc577d1bd9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agent-gym" data-paper-title="Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback Agent Google Cloud 2026-08-16 业务规则变化往往比 Agent 代码发布更快。Agent Gym 不重新训练或直接改写 acting agent，而在其 JSON 产物之后加独立纠错规则层：确定性条件检测、按作用域收集、按动作层级合并，再由领域专家审核新规则。规则和原 Agent 可以独立版本化、撤销与审计。 完整系统成本过高，不复现（审查 DONE）。三 seed 诊断使用相同明确构造的规则合同：四条匹配规则中，同 scope 的低优先规则被抑制；仅纯 CPU / L1：ALF 确定性规则、真实 JSON 状态变更、三层动作合并执行与显式人工准入。没有真实发票 Agent、LLM 规则发现或语义审查。完整系统成本过高，不复现（审查 DONE）。这是 Google 官网触发的八月论文补漏，不是 11 月 12 日新首发。Condition 实际支持八个原文描述的常用操作：equals、not_equals、contains、starts_with、greater_than、less_than、in_list、is_null；  Harness与自进化 规则纠错与人工治理 Agent 运行流程与自进化：改的是哪一层 Agent Gym为什么不把每条新业务例外都变成一次模型重训？ 它把原acting agent与下游ALF规则层分开。显式条件只在匹配的案例上修正JSON，专家可以审核、关闭和回滚规则；原Agent和模型权重不必为每条例外改变。自动把规则晋升回原Agent仍是未来工作。 教学例：紧急维修低于2000的授权例外可做窄条件纠错；这不等于模型已学会所有新采购规则，也不应放宽无关案例。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-agent-gym-41ee8f46" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-5527f5b42e559e98">Agent Gym为什么不把每条新业务例外都变成一次模型重训？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aagent-gym">Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · Google Cloud</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它把原acting agent与下游ALF规则层分开。显式条件只在匹配的案例上修正JSON，专家可以审核、关闭和回滚规则；原Agent和模型权重不必为每条例外改变。自动把规则晋升回原Agent仍是未来工作。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：紧急维修低于2000的授权例外可做窄条件纠错；这不等于模型已学会所有新采购规则，也不应放宽无关案例。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.15591">原论文</a> · <a href="../../../../agent-research/2608.15591-agent-gym/">实现解读</a> · <a href="#qa-5527f5b42e559e98">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agent-gym" data-paper-title="Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback Agent Google Cloud 2026-08-16 业务规则变化往往比 Agent 代码发布更快。Agent Gym 不重新训练或直接改写 acting agent，而在其 JSON 产物之后加独立纠错规则层：确定性条件检测、按作用域收集、按动作层级合并，再由领域专家审核新规则。规则和原 Agent 可以独立版本化、撤销与审计。 完整系统成本过高，不复现（审查 DONE）。三 seed 诊断使用相同明确构造的规则合同：四条匹配规则中，同 scope 的低优先规则被抑制；仅纯 CPU / L1：ALF 确定性规则、真实 JSON 状态变更、三层动作合并执行与显式人工准入。没有真实发票 Agent、LLM 规则发现或语义审查。完整系统成本过高，不复现（审查 DONE）。这是 Google 官网触发的八月论文补漏，不是 11 月 12 日新首发。Condition 实际支持八个原文描述的常用操作：equals、not_equals、contains、starts_with、greater_than、less_than、in_list、is_null；  Harness与自进化 规则纠错与人工治理 Agent 运行流程与自进化：改的是哪一层 为什么ALF必须合并动作，并按Continuation→Patch→Edit执行？ 多条规则分别运行LLM容易互相覆盖。先合并续跑到最早阶段，再对目标字段并集做一次patch，最后保留常量编辑，既保留纠错优先关系又把两个LLM层限制为最多两次调用。同scope还只选首条优先匹配规则。 教学例：续跑把status改为continued，patch改为patched，最终常量规则改为approved；若先Edit后续跑，approved就会丢失。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-334aac28baa9e4e5">为什么ALF必须合并动作，并按Continuation→Patch→Edit执行？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aagent-gym">Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · Google Cloud</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>多条规则分别运行LLM容易互相覆盖。先合并续跑到最早阶段，再对目标字段并集做一次patch，最后保留常量编辑，既保留纠错优先关系又把两个LLM层限制为最多两次调用。同scope还只选首条优先匹配规则。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：续跑把status改为continued，patch改为patched，最终常量规则改为approved；若先Edit后续跑，approved就会丢失。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.15591">原论文</a> · <a href="../../../../agent-research/2608.15591-agent-gym/">实现解读</a> · <a href="#qa-334aac28baa9e4e5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agent-gym" data-paper-title="Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback Agent Google Cloud 2026-08-16 业务规则变化往往比 Agent 代码发布更快。Agent Gym 不重新训练或直接改写 acting agent，而在其 JSON 产物之后加独立纠错规则层：确定性条件检测、按作用域收集、按动作层级合并，再由领域专家审核新规则。规则和原 Agent 可以独立版本化、撤销与审计。 完整系统成本过高，不复现（审查 DONE）。三 seed 诊断使用相同明确构造的规则合同：四条匹配规则中，同 scope 的低优先规则被抑制；仅纯 CPU / L1：ALF 确定性规则、真实 JSON 状态变更、三层动作合并执行与显式人工准入。没有真实发票 Agent、LLM 规则发现或语义审查。完整系统成本过高，不复现（审查 DONE）。这是 Google 官网触发的八月论文补漏，不是 11 月 12 日新首发。Condition 实际支持八个原文描述的常用操作：equals、not_equals、contains、starts_with、greater_than、less_than、in_list、is_null；  Harness与自进化 规则纠错与人工治理 Agent 运行流程与自进化：改的是哪一层 Agent Gym的规则批准与PASE的程序patch接受，有什么不同？ Agent Gym核对目标与collateral后由SME显式批准下游纠错规则，运行时不直接编辑原Agent。PASE维护skill/program配对，以held-out validation严格改善决定是否接受程序替换。人工规则治理和测得的任务效果准入不能互相充当证据。 教学例：一个采购例外经专家授权可以保留；一个电子表格程序即使语法正确，也须validation分数提高才被PASE接受，不能拿专家喜欢代替分数。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-7c780d5921f4153c">Agent Gym的规则批准与PASE的程序patch接受，有什么不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aagent-gym">Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · Google Cloud</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Agent Gym核对目标与collateral后由SME显式批准下游纠错规则，运行时不直接编辑原Agent。PASE维护skill/program配对，以held-out validation严格改善决定是否接受程序替换。人工规则治理和测得的任务效果准入不能互相充当证据。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个采购例外经专家授权可以保留；一个电子表格程序即使语法正确，也须validation分数提高才被PASE接受，不能拿专家喜欢代替分数。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.15591">原论文</a> · <a href="../../../../agent-research/2608.15591-agent-gym/">实现解读</a> · <a href="#qa-7c780d5921f4153c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agent-gym" data-paper-title="Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback Agent Google Cloud 2026-08-16 业务规则变化往往比 Agent 代码发布更快。Agent Gym 不重新训练或直接改写 acting agent，而在其 JSON 产物之后加独立纠错规则层：确定性条件检测、按作用域收集、按动作层级合并，再由领域专家审核新规则。规则和原 Agent 可以独立版本化、撤销与审计。 完整系统成本过高，不复现（审查 DONE）。三 seed 诊断使用相同明确构造的规则合同：四条匹配规则中，同 scope 的低优先规则被抑制；仅纯 CPU / L1：ALF 确定性规则、真实 JSON 状态变更、三层动作合并执行与显式人工准入。没有真实发票 Agent、LLM 规则发现或语义审查。完整系统成本过高，不复现（审查 DONE）。这是 Google 官网触发的八月论文补漏，不是 11 月 12 日新首发。Condition 实际支持八个原文描述的常用操作：equals、not_equals、contains、starts_with、greater_than、less_than、in_list、is_null；  Harness与自进化 规则纠错与人工治理 Agent 运行流程与自进化：改的是哪一层 本地ALF的批准字段和callback通过，能证明是真人批准或语义正确吗？ 不能。组件要求精确规则摘要、目标匹配、外部具名批准及collateral警告确认，但不认证真人身份；callback必须返回真实修订JSON而不是success标签，仍不证明修正符合业务语义。八个条件操作也不是论文全部21个操作或完整Agent。 教学例：callback把合法字符串状态改成错误字符串仍可能过类型检查，所以返回semantic_correctness_verified=false；缺批准或改错字段类型则机械拒绝。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-e0516cad368c1716">本地ALF的批准字段和callback通过，能证明是真人批准或语义正确吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aagent-gym">Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · Google Cloud</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。组件要求精确规则摘要、目标匹配、外部具名批准及collateral警告确认，但不认证真人身份；callback必须返回真实修订JSON而不是success标签，仍不证明修正符合业务语义。八个条件操作也不是论文全部21个操作或完整Agent。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：callback把合法字符串状态改成错误字符串仍可能过类型检查，所以返回semantic_correctness_verified=false；缺批准或改错字段类型则机械拒绝。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.15591">原论文</a> · <a href="../../../../agent-research/2608.15591-agent-gym/">实现解读</a> · <a href="#qa-e0516cad368c1716">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:openloopevolve" data-paper-title="OpenLoopEvolve: A Verifiable Self-Evolution Framework for Loop Policies in Long-Horizon Complex Tasks" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="OpenLoopEvolve: A Verifiable Self-Evolution Framework for Loop Policies in Long-Horizon Complex Tasks Agent Tsinghua University 2026-08-10 把 observation/planning/memory/action/verification/recovery 等 Loop Policy 资产版本化，以 Champion–Challenger、发布监控和回滚治理进化。 复现级别：核心 Agent 机制 mini-suite。复现级别：核心 Agent 机制 mini-suite。本地实现独立规划、记忆、credit assignment 或拓扑路径，并在确定性任务上记录过程计数；不是原论文完整外部环境。确定性 mini-suite 不访问真实浏览器、AppWorld、SWE-bench 或外部工具服务；它验证机制分支、过程状态和报告契约可执行。完整环境结果需按原文资源另行复现。运行目录是 runs/agent-research/，仓库只保存指标。另见 ../../experiments/。  自进化 策略治理 Agent 运行流程与自进化：改的是哪一层 Loop Policy 为什么不仅是一段 system prompt？ 观察、规划、记忆、行动、验证与恢复等资产共同决定长程行为，版本化需覆盖这些组件及其组合。只改提示可能漏掉真正瓶颈，只有保存可执行版本、比较并监控，才可追踪进化；资产文件齐全也不等于其行为有效。 例如提示要求“失败后重试”，若工具恢复中间件仍不能辨认超时，实际循环未必具备有效恢复能力。 2026-10-27">

@@ -7,7 +7,7 @@ hide:
 
 # 少看、晚看还是再看：把视觉预算放到正确阶段
 
-[多模态](../index.md) · 更新 2026-11-11 · 17 篇主题资料 / 7 篇重点对照
+[多模态](../index.md) · 更新 2026-11-12 · 18 篇主题资料 / 8 篇重点对照
 
 视觉预算不只有token数。StackTok选择已编码证据，PACE提前分配输入分辨率，ViMoD保留可恢复细节，Frames-on-Demand按需取帧，AdaLoop多算已有视觉状态，OmniKVQuant减少每份cache的位宽。必须同时追踪信息是否还在、哪段成本已支付。
 
@@ -32,6 +32,7 @@ hide:
 | [AdaLoop: Thinking with the Vision Encoder](../../../foundation-models/2610.21323-adaloop-vision/README.md) · [原始来源](https://arxiv.org/abs/2610.21323)<br>章节：背景与主要改动、核心公式、结果与独立对照 | 以问题向量调制共享冻结视觉块，循环更新视觉状态，将额外计算投入视觉侧。 | 循环增加处理机会而非新增原始证据；完整多臂训练成本过高未复现，当前随机token梯度诊断。 |
 | [OmniKVQuant: KV Cache Quantization for Omni-LLMs](../../../foundation-models/2609.11582-omnikvquant/README.md) · [原始来源](https://arxiv.org/abs/2609.11582)<br>章节：背景与主要改动、复现边界 | key按短时间窗设量化范围，value按模态独立旋转，降低KV表示位宽。 | 压缩cache数值与减少cache条目不同；本地2-bit NumPy reference无真实GPU kernel加速证据。 |
 | [Rethinking in Spikes: Mitigating Hallucinations in MDLMs with Step-Aware Decoding](../../../multimodal-models/2611.12901-steprefine/README.md) · [原始来源](https://arxiv.org/abs/2611.12901v1)<br>章节：核心公式、数据协议与代码映射、结果与复现边界 | 相对已完成历史变化窗口检测mask平均熵尖峰，在mask位置用概率加权embedding额外refine，以新到旧KL稳定度停止，并把k次额外前向计入t-1-k索引。 | 改变的是扩散token语义计算而非多取新图像或重跑视觉encoder；不同于视觉AdaLoop的循环状态。CPU公式不含MDLM、图像或remasking闭环，不证明幻觉benchmark改善。 |
+| [C²-Routing: Complementary Cropping and Compression for Efficient Vision-Language Inference](../../../multimodal-models/2611.14469-c2-routing/README.md) · [原始来源](https://arxiv.org/abs/2611.14469)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 在裁剪/整图压缩之间先提议动作，再用原/缩输入联合正确性H−B与validation固定FLOPs比决定是否回退。 | PACE依据图像语义密度/局部细节分配budget并融合注意力选token；C²额外建模信息减少相对原图造成的正确率损益。本地没有学习风险头，不能以代数门控宣称超越PACE checkpoint结果。 |
 
 </div>
 
@@ -54,6 +55,12 @@ ViMoD较小的活动细节集不自动意味着原始Fine KV已从存储中消�
 StepRefine在多模态扩散的mask token输入上保留概率加权语义，以新||旧KL决定停止并从总NFE扣预算。视觉AdaLoop则按问题调制冻结视觉块、循环更新视觉状态，额外计算主要在视觉侧。两者都不因多次计算就获得新的原始图像证据；比较前先追踪计算阶段、状态、停止信号和完整生成成本，不能把公式误差当幻觉减少。
 
 对照来源：[steprefine](../../../multimodal-models/2611.12901-steprefine/README.md) · [adaloop-vision](../../../foundation-models/2610.21323-adaloop-vision/README.md)
+
+### 信息保留策略与是否值得回退，是两层不同判断
+
+PACE的APC/DDAE问如何分配视觉预算和保留证据，C²-Routing问当前缩减相对原图是否产生可补救伤害以及节省是否值得。高缩减错误率可能来自两边共同失败，也可能被缩减收益抵消；因此不能用错误率代替H−B。实际收益还依赖外部风险预测校准与validation固定策略，公式正确并不表示已训练可靠路由。
+
+对照来源：[c2-routing](../../../multimodal-models/2611.14469-c2-routing/README.md) · [pace-vlm](../../../reproductions/2608.27206-pace-vlm/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -99,9 +106,23 @@ StepRefine在多模态扩散的mask token输入上保留概率加权语义，以
 
     对照来源：[steprefine](../../../multimodal-models/2611.12901-steprefine/README.md) · [adaloop-vision](../../../foundation-models/2610.21323-adaloop-vision/README.md)
 
+### 一个缩减输入的错误率很高，为什么不能仅据此否定PACE式预算或强制C²回退？ {#cross-cross-visual-budget-versus-fallback-risk}
+
+??? note "展开答案与例子"
+
+    **答案：** 还需比较同题原图是否也错，以及缩减是否曾改善。预算是输入证据选择，回退风险是原/缩正确性差；共同失败不会被原图修复。两类机制的真实checkpoint范围与本地L1证据也不能混排。
+
+    **教学例子：** 教学例：缩减在90%题上错，但原图也在同90%错，H=B=0；回退只增加计算，不改善期望正确率。
+
+    对照来源：[c2-routing](../../../multimodal-models/2611.14469-c2-routing/README.md) · [pace-vlm](../../../reproductions/2608.27206-pace-vlm/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-12** · 增加联合正确性风险与validation成本效用轴，区别如何保留视觉证据和是否值得回退；CPU仅执行策略核，未训练视觉路由，完整18数据集矩阵不复现。
+
+涉及：[c2-routing](../../../multimodal-models/2611.14469-c2-routing/README.md)
 
 **2026-11-11** · 加入StepRefine，将熵尖峰软token refinement与视觉AdaLoop循环区分；保留新||旧KL、历史窗口隔离及t-1-k预算。L1 CPU公式检查不替代真实MDLM/幻觉评测，完整多模型矩阵不复现。
 
@@ -111,7 +132,7 @@ StepRefine在多模态扩散的mask token输入上保留概率加权语义，以
 
 覆盖 16 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 17 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 18 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -132,6 +153,7 @@ StepRefine在多模态扩散的mask token输入上保留概率加权语义，以
 - [VideoMM: Adaptive Macro-Micro Inference for Efficient Video MLLMs](../../../multimodal-models/2609.16722-videomm/README.md)
 - [Look Back, Think Ahead: Visual Memory on Demand for Efficient Multimodal Reasoning](../../../multimodal-models/2610.12060-vimod/README.md)
 - [Rethinking in Spikes: Mitigating Hallucinations in MDLMs with Step-Aware Decoding](../../../multimodal-models/2611.12901-steprefine/README.md)
+- [C²-Routing: Complementary Cropping and Compression for Efficient Vision-Language Inference](../../../multimodal-models/2611.14469-c2-routing/README.md)
 
 </details>
 

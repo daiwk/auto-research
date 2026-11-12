@@ -15,7 +15,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="policy-optimization/">策略优化：谁在采样，谁在被更新</a></h2>
 <p>在线采样、旧策略概率与当前策略更新之间，哪些量必须分开？</p>
-<p class="ar-learning-topic-meta">228 个问题 · 57 篇论文</p>
+<p class="ar-learning-topic-meta">232 个问题 · 58 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="reward-and-credit/">奖励与信用：正确结果该奖励哪些步骤</a></h2>
@@ -30,7 +30,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="teacher-and-context/">教师与纠错：额外信息何时能帮到学生</a></h2>
 <p>教师看到了答案、图像证据或专长提示，怎样把帮助传给没有这些信息的学生？</p>
-<p class="ar-learning-topic-meta">200 个问题 · 50 篇论文</p>
+<p class="ar-learning-topic-meta">208 个问题 · 52 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="data-and-budget/">数据与预算：下一份算力花在哪里</a></h2>

@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-12",
+  "captured_at": "2026-11-12T03:39:14Z",
+  "batch_kind": "nov11-unresolved-carryover-original-review",
+  "coverage_statement": "官方new页面实际仍为2026-11-11公告；本轮审查上批三个明确未完成线索，不声称11/12公告已更新或完成全领域扫描。",
+  "metadata_source": {
+    "url": "https://export.arxiv.org/api/query?id_list=2611.13680,2611.14467,2611.13135",
+    "cache_path": ".cache/nov12-components/post-training/exact-three.atom",
+    "date_rule": "精确v1提交时间，不以编号月份、公告或审查日期替代",
+    "sha256": "3161e8a155767bc3a47ce634baac2aba2d5d857687fa46a203ff0a641e1af73c"
+  },
+  "records": [
+    {
+      "arxiv_id": "2611.13680",
+      "title": "Bootstrapped On-Policy Distillation",
+      "reviewed_version": "v1",
+      "first_author": "Yue Wu",
+      "first_author_affiliation": "The Hong Kong Polytechnic University",
+      "published_at": "2026-11-10T07:30:34Z",
+      "original_url": "https://arxiv.org/html/2611.13680v1",
+      "decision": "accepted_component_only",
+      "key": "post-training:bopd",
+      "read_scope": "固定v1作者栏/PDF第一页、定义方法与核心公式、伪代码/实现/实验设置及成本披露；不声称逐页验证全部理论证明。",
+      "source_receipts": [
+        {
+          "url": "https://arxiv.org/html/2611.13680v1",
+          "cache_path": ".cache/nov12-components/post-training/2611.13680v1.html",
+          "sha256": "ea5736018837366aadd85a220588663e10497e88a7414715e49509b4573b9682"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2611.13680v1",
+          "cache_path": ".cache/nov12-components/post-training/2611.13680v1.pdf",
+          "sha256": "969e0ef9f3028878df1c33ca96cf97c9cf6d3294826ec6a646cd9f536dce3543"
+        }
+      ],
+      "code_status": "作者在原文提供 https://github.com/YueWu0301/BOPD ，但2026-11-12原始GitHub页面明确显示空仓库；有项目链接不等于训练源码已开源，许可与固定代码revision未核实。",
+      "local_scope": "Stage I用冻结初始模型的reference-conditioned监督构造M1；Stage II冻结M1、移除reference，并把学生及optimizer恢复为全新初始状态。本地实现真实teacher→student全词表FKL及可核验模块/优化器交接，不提供LM rollout或完整BOPD训练。",
+      "requires_gpu_validation": true,
+      "gpu_validation_status": "passed_real_nvidia_l1",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "cost_assessment": {
+        "source": "固定v1 §4.1–4.3、§5.1及Appendix A；https://arxiv.org/html/2611.13680v1",
+        "model_scale": "Qwen3-4B/8B和SmolLM3-3B；LoRA rank64/alpha128，冻结教师与在线学生。",
+        "data_scale": "每阶段3200学生rollout、100optimizer steps；训练输出上限1024，最大sequence20000；数学评测输出上限38912且每题12次。",
+        "paper_configuration": "Table4：4B配置4GPU、8B配置2GPU；DeepSpeedZeRO2、colocatedvLLM。作者未给总墙钟或所有GPU型号。",
+        "estimated_cost_basis": "多GPU两阶段训练、长上下文/评测生成和多模型/保留能力矩阵超出单卡短时预算；不是本地耗时实测。",
+        "decision": "完整实验成本过高，不复现（审查DONE）；只交付FKL与真实module handoff核，不下载大权重/数据、不完整训练、不重试。"
+      },
+      "source_cache": ".cache/nov12-components/post-training/2611.13680v1.html",
+      "source_sha256": "ea5736018837366aadd85a220588663e10497e88a7414715e49509b4573b9682",
+      "source_url": "https://arxiv.org/html/2611.13680v1",
+      "captured_at": "2026-11-12T03:39:14Z",
+      "gpu_validation_artifact": "docs/gpu-validations/bopd-a100-20261112.json",
+      "gpu_validation_source_commit": "9d46c1778c3df693907c113c803e617ae0690117",
+      "gpu_validation_seeds": [
+        42,
+        43,
+        44
+      ]
+    },
+    {
+      "arxiv_id": "2611.14467",
+      "title": "A Theory of Policy Optimization in Post-Training: Coverage Collapse and Reference Resets",
+      "reviewed_version": "v1",
+      "first_author": "Audrey Huang",
+      "first_author_affiliation": "Kempner Institute at Harvard University / UIUC",
+      "published_at": "2026-11-10T18:31:36Z",
+      "original_url": "https://arxiv.org/html/2611.14467v1",
+      "decision": "accepted_component_only",
+      "key": "post-training:apmd-reference-reset",
+      "read_scope": "固定v1作者栏/PDF第一页、定义方法与核心公式、伪代码/实现/实验设置及成本披露；不声称逐页验证全部理论证明。",
+      "source_receipts": [
+        {
+          "url": "https://arxiv.org/html/2611.14467v1",
+          "cache_path": ".cache/nov12-components/post-training/2611.14467v1.html",
+          "sha256": "3c7f8336f6354aa7e32636e44b8535c56a189b09afcfdced8eb58a5de7d9d5d9"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2611.14467v1",
+          "cache_path": ".cache/nov12-components/post-training/2611.14467v1.pdf",
+          "sha256": "4d6deb8c21663685e4987d12820b36acf7244756fcc4611a6d608577cd4d067d"
+        }
+      ],
+      "code_status": "固定v1未提供已核实作者代码仓库；HTML中的LaTeXML issue/wiki链接属于转换工具，不是作者算法实现。",
+      "local_scope": "APMD把每轮KL reference重置为最新策略，近似求解ref×exp(eta×reward)的镜像目标；本地执行有限策略精确路径及Kimi均值baseline偏差、Rebel=2×centered-MSE恒等式，不冒充采样PPO/全收敛定理证明。",
+      "requires_gpu_validation": false,
+      "gpu_validation_status": "not_required_cpu_only",
+      "full_experiment_status": "not_applicable_theory_only",
+      "full_experiment_review_done": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "cost_assessment": {
+        "source": "固定v1 §3.1、§4.1–4.3、Appendix C；https://arxiv.org/html/2611.14467v1",
+        "model_scale": "理论研究softmax线性策略与线性可实现reward；文中示意/数值图使用有限bandit，不设大模型checkpoint。",
+        "data_scale": "数学定理、有限策略精确梯度例子；没有需要本库运行的大规模LM benchmark协议。",
+        "paper_configuration": "未给大型实证训练矩阵或硬件配置；不能编造多卡需求或GPU小时。",
+        "estimated_cost_basis": "小型CPU镜像目标和损失恒等式可直接计算；完整理论结论依赖假设、内层误差界与证明，不由几组数值检查替代。",
+        "decision": "纯理论大型实证复现不适用（审查DONE）；实现独立CPU数值核，不以高成本为由延期，也不宣称本地证明全部定理。"
+      },
+      "source_cache": ".cache/nov12-components/post-training/2611.14467v1.html",
+      "source_sha256": "3c7f8336f6354aa7e32636e44b8535c56a189b09afcfdced8eb58a5de7d9d5d9",
+      "source_url": "https://arxiv.org/html/2611.14467v1",
+      "captured_at": "2026-11-12T03:39:14Z"
+    },
+    {
+      "arxiv_id": "2611.13135",
+      "title": "Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation",
+      "reviewed_version": "v1",
+      "first_author": "Mufei Li",
+      "first_author_affiliation": "Georgia Institute of Technology（工作在Amazon Web Services实习期间完成）",
+      "published_at": "2026-11-09T19:18:25Z",
+      "original_url": "https://arxiv.org/html/2611.13135v1",
+      "decision": "accepted_component_only",
+      "key": "post-training:lcs-reference-opd",
+      "read_scope": "固定v1作者栏/PDF第一页、定义方法与核心公式、伪代码/实现/实验设置及成本披露；不声称逐页验证全部理论证明。",
+      "source_receipts": [
+        {
+          "url": "https://arxiv.org/html/2611.13135v1",
+          "cache_path": ".cache/nov12-components/post-training/2611.13135v1.html",
+          "sha256": "62183154b27ea012faa874e302922176b6296c344827218d01d3a1de13ef819f"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2611.13135v1",
+          "cache_path": ".cache/nov12-components/post-training/2611.13135v1.pdf",
+          "sha256": "ed32bc44567653291b0b937d33feb03382f85740c59dbfc651ea547ded49d69a"
+        }
+      ],
+      "code_status": "固定v1未提供已核实的本篇作者代码仓库；Appendix I说明基于TCOD/Trinity-RFT/veRL等上游，不把这些依赖记作本篇开源。",
+      "local_scope": "用完整执行动作的归一化LCS选择同任务最兼容成功reference；free-target OT逐失败rollout独立argmax，不强加引用频率约束，成功学生不更新，无可用引用回退reference-free。仅选择/归约CPU核，不训练Agent或把reference交给学生。",
+      "requires_gpu_validation": false,
+      "gpu_validation_status": "not_required_cpu_only",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "cost_assessment": {
+        "source": "固定v1 §3、Appendix A/D/I/J；https://arxiv.org/html/2611.13135v1",
+        "model_scale": "多轮OPD的教师/学生模型，ALFWorld教师为GiGPO-trained Qwen2.5-7B-Instruct；每benchmark两个学生。",
+        "data_scale": "ALFWorld3553训练任务、最多30actions；tau3-airline最多200steps、context20000、生成10000token，并有多selector/迁移评测。",
+        "paper_configuration": "Appendix J：8张80GB A100（4训练/2teacher scoring/2model update）；ALFWorld约10小时、tau3-airline约1小时；全部报告运行约4500A100 GPU-hours。",
+        "estimated_cost_basis": "原文明确多卡与数千GPU小时，总实验远超单张A100/A30短时预算；仅动作序列动态规划廉价，不需checkpoint。",
+        "decision": "完整实验成本过高，不复现（审查DONE）；实现CPU reference选择与failure-only归约，不启动环境/LLM/用户模拟。"
+      },
+      "source_cache": ".cache/nov12-components/post-training/2611.13135v1.html",
+      "source_sha256": "62183154b27ea012faa874e302922176b6296c344827218d01d3a1de13ef819f",
+      "source_url": "https://arxiv.org/html/2611.13135v1",
+      "captured_at": "2026-11-12T03:39:14Z"
+    }
+  ],
+  "code_verification": [
+    {
+      "url": "https://github.com/YueWu0301/BOPD",
+      "observed_on": "2026-11-12",
+      "observation": "官方GitHub网页明确显示This repository is empty；原文宣称code available与实际公开空仓库区分。",
+      "api_attempt": {
+        "url": "https://api.github.com/repos/YueWu0301/BOPD",
+        "result": "HTTP403",
+        "receipt": ".cache/nov12-components/post-training/bopd-repository.headers"
+      },
+      "conclusion": "作者占位链接已公开，无可审核实现/revision/license；未宣称已开源算法"
+    }
+  ]
+}

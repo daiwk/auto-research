@@ -7,7 +7,7 @@ hide:
 
 # 教师更强仍可能教错：信息、兼容性与成功行为保护
 
-[LLM 后训练](../index.md) · 更新 2026-11-06 · 50 篇主题资料 / 9 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-12 · 52 篇主题资料 / 11 篇重点对照
 
 教师的价值不只取决于总分。OPSD改变训练期可见信息，MOPD与逐token路由组织多教师，CSD先统一概率事件，SPOD保护学生已成功选择，VAD筛出可归于视觉证据的修正；这些约束要在模仿之前分别成立。
 
@@ -34,6 +34,8 @@ hide:
 | [P²-MOPD: Accelerating Multi-Teacher On-Policy Distillation via Parameter Priors](../../../post-training/2611.03953-p2-mopd/README.md) · [原始来源](https://arxiv.org/abs/2611.03953v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 把冻结专家任务向量保留为可学习优化方向；自由学生权重与系数由同一更新前梯度共同推进，推理仍使用一个物化学生模型。 | 不只改变教师logit或合并初始点；未裁剪系数梯度、独立全局clip和零decay决定多步等价。完整MOPD模型/轨迹未复现，本地只验参数更新L1。 |
 | [Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning](../../../post-training/2611.05266-targeted-guidance/README.md) · [原始来源](https://arxiv.org/abs/2611.05266v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 在失败Agent turn前加入文本反馈，以同权重反馈条件教师做完整词表reverse KL，并保留criterion的普通RL奖励。 | 只在失败处蒸馏，按整条响应token数归一；全部满足后恢复原RL。组件不提供实际judge、反馈有效性筛选或Agent轨迹，不能凭loss下降声称代码能力提高。 |
 | [RAGCompass: Generalizable Retriever Routing via Reranking](../../../post-training/2611.05596-ragcompass/README.md) · [原始来源](https://arxiv.org/abs/2611.05596v1)<br>章节：核心公式、数据协议与代码映射 | RAGCompass 把每组检索证据交给同一个 reranker；将固定 reader 的离线答案 F1 软化为整组候选的监督分布，优化候选集 KL。 | 不需要检索器 ID 或相互不可比的置信度，但训练标签依赖固定 reader 与有参考答案的离线数据。推理只比较分数，不用真实 F1 或筛选 gap。 |
+| [Bootstrapped On-Policy Distillation](../../../post-training/2611.13680-bopd/README.md) · [原始来源](https://arxiv.org/abs/2611.13680v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 先由reference-conditioned冻结M0构造中间M1，再冻结M1并移除reference，向从M0精确恢复、使用新optimizer的学生做teacher→student FKL。 | 不同于持续特权视图OPSD，reset的是学生与optimizer，教师则保留已学参数；本地仅真实FKL/handoff，不含LM rollout或原文未可审核的pointwise clipping。空作者仓库不记为已开源实现。 |
+| [Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation](../../../post-training/2611.13135-lcs-reference-opd/README.md) · [原始来源](https://arxiv.org/abs/2611.13135v1)<br>章节：核心公式、数据协议与代码映射、结果、负控与边界 | 按同任务完整动作LCS选最兼容成功reference，free-target OT独立argmax且允许复用；只更新失败episode，无引用时reference-free，ALFWorld/tau3分别使用不同归一化。 | 不同于SPOD只在成功episode内保护teacher较不支持的action，这里整条成功轨迹不更新。LCS状态解释需要可恢复绕行，不是潜状态等价；本地没有Agent/OPD trainer，4500A100小时完整矩阵不复现。 |
 
 </div>
 
@@ -68,6 +70,18 @@ OPSD区分学生可见问题与teacher私有参考；Targeted Guidance把特权�
 OPSD 把验证解交给同权重教师，在学生前缀上给词表分布；Targeted Guidance 只在失败轮次插入判定反馈，再加上普通 RL 奖励。RAGCompass 的参考答案只在候选证据产生答案后计算离线 F1 标签，监督轴是整个候选集合，不是 token。三者都要防止把训练期可见的额外信息带到推理。
 
 对照来源：[ragcompass](../../../post-training/2611.05596-ragcompass/README.md) · [opsd](../../../post-training/2601.18734-opsd/README.md) · [targeted-guidance](../../../post-training/2611.05266-targeted-guidance/README.md)
+
+### 先构造可无参考使用的教师，与始终依赖特权视图是不同路径
+
+OPSD让教师额外读取验证解，学生只见自身前缀；BOPD先把这种监督写入中间参数，再让无参考中间教师指导从初始checkpoint恢复的新学生。它不是把Stage I末尾学生继续训练，也不能把Stage I特权分数缓存成Stage II无参考监督。权重冻结不意味着在新学生前缀上预测恒定，必须保留阶段、上下文与参数状态三条来源。
+
+对照来源：[bopd](../../../post-training/2611.13680-bopd/README.md) · [opsd](../../../post-training/2601.18734-opsd/README.md)
+
+### 保护成功episode与保护成功里的特定action，更新集合不一样
+
+LCS reference方法先排除全部成功学生episode，再为失败者选同任务引用并校正；SPOD仍可训练成功episode，只对teacher完整action概率低于student的decision取消KL并加软floor。前者还改变reference信息来源，后者改变action级监督。不能把二者统称success mask后混用分母、概率条件和更新门控，且训练用成功reference都不应暴露给被评估学生。
+
+对照来源：[lcs-reference-opd](../../../post-training/2611.13135-lcs-reference-opd/README.md) · [spod](../../../post-training/2610.25034-spod/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -143,9 +157,37 @@ OPSD 把验证解交给同权重教师，在学生前缀上给词表分布；Tar
 
     对照来源：[ragcompass](../../../post-training/2611.05596-ragcompass/README.md) · [opsd](../../../post-training/2601.18734-opsd/README.md)
 
+### 把OPSD的teacher去掉reference，再继续原学生，等于BOPD吗？ {#cross-cross-bootstrap-teacher-versus-privileged-view}
+
+??? note "展开答案与例子"
+
+    **答案：** 不等于。BOPD的Stage II教师来自Stage I学得的中间模型，而学生精确恢复初始模型并新建optimizer；去reference只是其中一条条件变化。继续原学生或换回初始teacher都改变了方法。
+
+    **教学例子：** 教学例：Stage I把权重1学到1.2。Stage II teacher用1.2、student用1、optimizer空状态；两者都用1.2只是继续训练，不是该handoff。
+
+    对照来源：[bopd](../../../post-training/2611.13680-bopd/README.md) · [opsd](../../../post-training/2601.18734-opsd/README.md)
+
+### LCS failure-only和SPOD都保护成功，为什么不能复用同一个success mask？ {#cross-cross-whole-success-versus-action-protection}
+
+??? note "展开答案与例子"
+
+    **答案：** LCS跳过整个成功episode；SPOD还比较teacher/student的完整action概率，只保护满足条件的decision，其他位置继续蒸馏。因此mask粒度、归约和保留的loss都不同。
+
+    **教学例子：** 教学例：一条成功episode中teacher对某动作比student更支持，SPOD可继续该动作KL；LCS方法仍跳过整条成功轨迹。
+
+    对照来源：[lcs-reference-opd](../../../post-training/2611.13135-lcs-reference-opd/README.md) · [spod](../../../post-training/2610.25034-spod/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-12** · 补审LCS同任务引用选择，区分整episode失败过滤与SPOD完整action保护；保留free-target独立选择、双normalizer和teacher-only reference。仅CPU选择核，不用fixture冒充多轮Agent训练。
+
+涉及：[lcs-reference-opd](../../../post-training/2611.13135-lcs-reference-opd/README.md)
+
+**2026-11-12** · 补审BOPD，区分持续特权视图与两阶段无参考教师迁移，保留学生/optimizer重置及逐轨迹FKL；本地A100只验收loss/handoff，完整多GPU与长生成实验不复现。
+
+涉及：[bopd](../../../post-training/2611.13680-bopd/README.md)
 
 **2026-11-06** · 加入 RAGCompass 候选证据效用蒸馏，与 OPSD 和 Targeted Guidance 对读监督轴、反馈入口及离线筛选与部署分界。
 
@@ -159,7 +201,7 @@ OPSD 把验证解交给同权重教师，在学生前缀上给词表分布；Tar
 
 覆盖 47 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 50 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 52 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -213,6 +255,8 @@ OPSD 把验证解交给同权重教师，在学生前缀上给词表分布；Tar
 - [OPCD](../../../post-training/2602.12275-opcd/README.md)
 - [OPSD](../../../post-training/2601.18734-opsd/README.md)
 - [RAGCompass: Generalizable Retriever Routing via Reranking](../../../post-training/2611.05596-ragcompass/README.md)
+- [Bootstrapped On-Policy Distillation](../../../post-training/2611.13680-bopd/README.md)
+- [Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation](../../../post-training/2611.13135-lcs-reference-opd/README.md)
 
 </details>
 

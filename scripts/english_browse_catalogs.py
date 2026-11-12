@@ -71,6 +71,17 @@ def _label_map(raw: str) -> dict[str, str]:
 
 
 _LABELS = _label_map("""
+Georgia Institute of Technology（工作在Amazon Web Services实习期间完成） = Georgia Institute of Technology (work conducted during an Amazon Web Services internship)
+Harness与自进化 = Harnesses and self-improvement
+两阶段自蒸馏与学生重置 = Two-stage self-distillation and student reset
+动作场景解耦与世界模型 = Action–scene disentanglement and world models
+参考重置与覆盖理论 = Reference resets and coverage theory
+多模态推理效率 = Multimodal inference efficiency
+多轮轨迹引用与失败过滤 = Multi-turn trajectory references and failure filtering
+投机解码与真实接受长度训练 = Speculative decoding and real acceptance-length training
+规则纠错与人工治理 = Rule correction and human governance
+输入裁剪压缩与风险路由 = Input cropping, compression, and risk-aware routing
+预算感知与测试时扩展 = Budget awareness and test-time scaling
 University of Alberta / Amii（研究在Google DeepMind期间完成） = University of Alberta / Amii (work conducted at Google DeepMind)
 真实任务与可靠性评测 = Real-world tasks and reliability evaluation
 历史约束与研究交付 = Historical constraints and research deliverables

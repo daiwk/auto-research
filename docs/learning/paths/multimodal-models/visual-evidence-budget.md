@@ -7,7 +7,7 @@ hide:
 
 # 视觉证据预算：选 Token、选帧与按需回看
 
-[多模态](index.md) / 68 个问题 · 17 篇论文
+[多模态](index.md) / 72 个问题 · 18 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">68 个问题 · 17 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">72 个问题 · 18 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:c2-routing" data-paper-title="C²-Routing: Complementary Cropping and Compression for Efficient Vision-Language Inference" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="C²-Routing: Complementary Cropping and Compression for Efficient Vision-Language Inference 多模态大模型 Leiden University 2026-11-10 小目标或局部文字适合裁剪放大，全局关系与分布式证据更需要保留整图。C²-Routing 用冻结 SmolVLM-500M 提取共享图文特征，学习裁剪或压缩选择；裁剪由 Grounding DINO-tiny 定位，压缩分支选择 256/512 视觉 token 预算。安全门不只预测“缩减输入会不会错”，而是联合预测原图与缩减图的正确性。两者都错时回退无济于事，缩减反而改善时回退还会损失收益；风险须将这两种情况区分开。 对本轮单卡短预算，成本过高，不复现（审查 DONE）；本地 42/43/44 合成概率诊断核对 (H-B) 与正确率差的代数等价、收益抵扣、共享失败不应自动触发回退、等号接受和 dataset-macro 成本比。L1 CPU 策略算子，不是已训练视觉路由器。本地实现联合正确性风险和 validation 成本效用判据，不提供 SmolVLM、Grounding DINO、风险分类器或真实 VQA 结果。reduction_risk 执行四状态风险；validation_cost_ratio 只接收标明 validation 的 FLOPs 与数据集 ID；  多模态推理效率 输入裁剪压缩与风险路由 多模态 视觉证据预算：选 Token、选帧与按需回看 C²-Routing为什么不总是裁剪得越小越好？ 裁剪能放大小目标与局部文字，却会删掉跨区域关系和背景证据；压缩保留整图布局但可能损失微小细节。应按图像和问题选择，计算少本身不保证回答正确。 教学例：读取船身编号适合局部裁剪；判断船是否位于两岸之间则需要保留更大的全景。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
+<span id="paper-multimodal-models-c2-routing-e0d30eb8" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-67e8ba289358312b">C²-Routing为什么不总是裁剪得越小越好？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Ac2-routing">C²-Routing: Complementary Cropping and Compression for Efficient Vision-Language Inference</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · Leiden University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>裁剪能放大小目标与局部文字，却会删掉跨区域关系和背景证据；压缩保留整图布局但可能损失微小细节。应按图像和问题选择，计算少本身不保证回答正确。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：读取船身编号适合局部裁剪；判断船是否位于两岸之间则需要保留更大的全景。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14469">原论文</a> · <a href="../../../../multimodal-models/2611.14469-c2-routing/">实现解读</a> · <a href="#qa-67e8ba289358312b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:c2-routing" data-paper-title="C²-Routing: Complementary Cropping and Compression for Efficient Vision-Language Inference" data-learning-pending="false" data-level="mechanism" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="C²-Routing: Complementary Cropping and Compression for Efficient Vision-Language Inference 多模态大模型 Leiden University 2026-11-10 小目标或局部文字适合裁剪放大，全局关系与分布式证据更需要保留整图。C²-Routing 用冻结 SmolVLM-500M 提取共享图文特征，学习裁剪或压缩选择；裁剪由 Grounding DINO-tiny 定位，压缩分支选择 256/512 视觉 token 预算。安全门不只预测“缩减输入会不会错”，而是联合预测原图与缩减图的正确性。两者都错时回退无济于事，缩减反而改善时回退还会损失收益；风险须将这两种情况区分开。 对本轮单卡短预算，成本过高，不复现（审查 DONE）；本地 42/43/44 合成概率诊断核对 (H-B) 与正确率差的代数等价、收益抵扣、共享失败不应自动触发回退、等号接受和 dataset-macro 成本比。L1 CPU 策略算子，不是已训练视觉路由器。本地实现联合正确性风险和 validation 成本效用判据，不提供 SmolVLM、Grounding DINO、风险分类器或真实 VQA 结果。reduction_risk 执行四状态风险；validation_cost_ratio 只接收标明 validation 的 FLOPs 与数据集 ID；  多模态推理效率 输入裁剪压缩与风险路由 多模态 视觉证据预算：选 Token、选帧与按需回看 为什么安全门的风险是P(H)−P(B)，而不是缩减图回答错误的概率？ H是原图对而缩减错，回退能修复；B是原图错而缩减对，回退反而损失。00是两者都错，回退不能修复。正确率的期望变化只由H和B之差决定。 教学例：概率(11,H,B,00)=(0.1,0,0,0.9)时缩减错误率0.9，但风险为0，不应仅因共享失败而回退。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-84ba77828982346b">为什么安全门的风险是P(H)−P(B)，而不是缩减图回答错误的概率？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Ac2-routing">C²-Routing: Complementary Cropping and Compression for Efficient Vision-Language Inference</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · Leiden University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>H是原图对而缩减错，回退能修复；B是原图错而缩减对，回退反而损失。00是两者都错，回退不能修复。正确率的期望变化只由H和B之差决定。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：概率(11,H,B,00)=(0.1,0,0,0.9)时缩减错误率0.9，但风险为0，不应仅因共享失败而回退。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14469">原论文</a> · <a href="../../../../multimodal-models/2611.14469-c2-routing/">实现解读</a> · <a href="#qa-84ba77828982346b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:c2-routing" data-paper-title="C²-Routing: Complementary Cropping and Compression for Efficient Vision-Language Inference" data-learning-pending="false" data-level="comparison" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="C²-Routing: Complementary Cropping and Compression for Efficient Vision-Language Inference 多模态大模型 Leiden University 2026-11-10 小目标或局部文字适合裁剪放大，全局关系与分布式证据更需要保留整图。C²-Routing 用冻结 SmolVLM-500M 提取共享图文特征，学习裁剪或压缩选择；裁剪由 Grounding DINO-tiny 定位，压缩分支选择 256/512 视觉 token 预算。安全门不只预测“缩减输入会不会错”，而是联合预测原图与缩减图的正确性。两者都错时回退无济于事，缩减反而改善时回退还会损失收益；风险须将这两种情况区分开。 对本轮单卡短预算，成本过高，不复现（审查 DONE）；本地 42/43/44 合成概率诊断核对 (H-B) 与正确率差的代数等价、收益抵扣、共享失败不应自动触发回退、等号接受和 dataset-macro 成本比。L1 CPU 策略算子，不是已训练视觉路由器。本地实现联合正确性风险和 validation 成本效用判据，不提供 SmolVLM、Grounding DINO、风险分类器或真实 VQA 结果。reduction_risk 执行四状态风险；validation_cost_ratio 只接收标明 validation 的 FLOPs 与数据集 ID；  多模态推理效率 输入裁剪压缩与风险路由 多模态 视觉证据预算：选 Token、选帧与按需回看 C²-Routing的安全门与简单设置视觉token上限，解决的是同一个约束吗？ 不是。Token cap只限制输入规模，不能判断被删信息是否改变正确性；风险门比较缩减和原图的预期正确率差与validation固定成本节省。论文收益也是相对已有限制的整图基线，而不是无限分辨率基线。 教学例：两张图都限制到1024token，局部文档再压到256可能丢字，全景图则可能保留足够关系；同预算不能推导同风险。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-ab446171a19f47ae">C²-Routing的安全门与简单设置视觉token上限，解决的是同一个约束吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Ac2-routing">C²-Routing: Complementary Cropping and Compression for Efficient Vision-Language Inference</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · Leiden University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。Token cap只限制输入规模，不能判断被删信息是否改变正确性；风险门比较缩减和原图的预期正确率差与validation固定成本节省。论文收益也是相对已有限制的整图基线，而不是无限分辨率基线。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两张图都限制到1024token，局部文档再压到256可能丢字，全景图则可能保留足够关系；同预算不能推导同风险。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14469">原论文</a> · <a href="../../../../multimodal-models/2611.14469-c2-routing/">实现解读</a> · <a href="#qa-ab446171a19f47ae">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:c2-routing" data-paper-title="C²-Routing: Complementary Cropping and Compression for Efficient Vision-Language Inference" data-learning-pending="false" data-level="implementation" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="C²-Routing: Complementary Cropping and Compression for Efficient Vision-Language Inference 多模态大模型 Leiden University 2026-11-10 小目标或局部文字适合裁剪放大，全局关系与分布式证据更需要保留整图。C²-Routing 用冻结 SmolVLM-500M 提取共享图文特征，学习裁剪或压缩选择；裁剪由 Grounding DINO-tiny 定位，压缩分支选择 256/512 视觉 token 预算。安全门不只预测“缩减输入会不会错”，而是联合预测原图与缩减图的正确性。两者都错时回退无济于事，缩减反而改善时回退还会损失收益；风险须将这两种情况区分开。 对本轮单卡短预算，成本过高，不复现（审查 DONE）；本地 42/43/44 合成概率诊断核对 (H-B) 与正确率差的代数等价、收益抵扣、共享失败不应自动触发回退、等号接受和 dataset-macro 成本比。L1 CPU 策略算子，不是已训练视觉路由器。本地实现联合正确性风险和 validation 成本效用判据，不提供 SmolVLM、Grounding DINO、风险分类器或真实 VQA 结果。reduction_risk 执行四状态风险；validation_cost_ratio 只接收标明 validation 的 FLOPs 与数据集 ID；  多模态推理效率 输入裁剪压缩与风险路由 多模态 视觉证据预算：选 Token、选帧与按需回看 C²-Routing的成本比为什么先在数据集内求FLOPs总和比，再对数据集平均？ 这使各数据集等权，而不是让样本多的数据集主导，也不同于逐样本比值平均。成本、校准和阈值在validation固定；推理门只读预测概率，不能读test正确答案来决定回退。 教学例：A有100张且成本比0.2，B只有1张且成本比0.8；dataset-macro为0.5，不是按101个样本加权的约0.206。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-c582dc2533400bf7">C²-Routing的成本比为什么先在数据集内求FLOPs总和比，再对数据集平均？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Ac2-routing">C²-Routing: Complementary Cropping and Compression for Efficient Vision-Language Inference</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · Leiden University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>这使各数据集等权，而不是让样本多的数据集主导，也不同于逐样本比值平均。成本、校准和阈值在validation固定；推理门只读预测概率，不能读test正确答案来决定回退。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：A有100张且成本比0.2，B只有1张且成本比0.8；dataset-macro为0.5，不是按101个样本加权的约0.206。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14469">原论文</a> · <a href="../../../../multimodal-models/2611.14469-c2-routing/">实现解读</a> · <a href="#qa-c582dc2533400bf7">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:muse-glimmer-30b" data-paper-title="Muse Glimmer 30B: An On-Device Agentic Model" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/visual-evidence-budget" data-search="Muse Glimmer 30B: An On-Device Agentic Model 基础模型 Meta Superintelligence Labs 2026-10-17 模型瞄准有32GB专用内存的端侧Agent：语言骨干用稠密Transformer而非MoE，在相同内存预算下用缩放实验选架构；约1.8B冻结视觉编码器支持图文交错输入。52层采用三层2048窗口局部注意力接一层全局注意力，32Q/2KV的GQA，局部层使用RoPE，全局层不再施加RoPE。训练从Muse Spark logits蒸馏起步，预训练末段切CE处理top-k截断偏差，之后权重平均和两阶段mid-training，再SFT、学生前缀上的OPD与多目标RL。 成本过高，不复现（审查 DONE）；Google/Meta优先资料。成本过高，不复现（审查 DONE）；“单卡可装下”不等于本项目低成本可完成训练和完整评测。BF16权重约55.7GB，量化LM目标低于20GB仍需KV、视觉编码器和drafter空间；长Agent轨迹与多模型对照远非一次前向。完整过程依赖前沿教师、多阶段大规模蒸馏、128K上下文与多域Agent环境，成本过高，不复现（审查 DONE）。本轮只取论文与仓库元数据，不下载权重、不开长推理或训练，不提供本地能力分数、GPU回执或Evolve整合声明。  网络架构 端侧多模态Agent模型 多模态 视觉证据预算：选 Token、选帧与按需回看 Muse Glimmer 为什么同时强调模型权重内存和 KV、视觉、drafter 空间？ 端侧可用内存要容纳整个推理过程，而不只是语言权重。长 Agent 上下文会增加 KV cache，图像编码器与投机头也有占用，因此量化语言模型后小于某个体积不等于系统已适合 32GB 设备；必须按实际输入与部署配置联合核算。 例如语言权重低于二十 GB，仍可能因长轨迹 KV 和视觉前向的临时张量超过设备剩余空间。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 视觉证据预算：选 Token、选帧与按需回看</a></p>
 <span id="paper-foundation-models-muse-glimmer-30b-d492f01f" class="ar-learning-paper-anchor"></span>

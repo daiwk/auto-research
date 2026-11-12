@@ -36,7 +36,8 @@
         "agent-research:lats",
         "agent-research:rewoo",
         "agent-research:tree-of-thoughts",
-        "agent-research:react"
+        "agent-research:react",
+        "agent-research:bats"
       ]
     },
     {
@@ -261,7 +262,8 @@
         "agent-research:evalalloc",
         "agent-research:envopt",
         "agent-research:fgse",
-        "agent-research:pase"
+        "agent-research:pase",
+        "agent-research:agent-gym"
       ]
     },
     {

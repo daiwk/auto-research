@@ -169,6 +169,10 @@
 - 2026-09-30 · 一作：Xinchen Du · [SHARPO: Segment-Level Credit Assignment for Agentic Reinforcement Learning](../2610.00838-sharpo/README.md)（`sharpo`）：用同组成功轨迹作为自蒸馏 teacher context，在环境交互 segment 内计算 teacher-student log-prob gap，并有界缩放 GRPO advantage。
 - 2026-09-29 · 一作：Zhiqi Li · [FlowMap-OPD: Rollout-Kernel Separation for On-Policy Distillation of Few-Step Flow-Map Generators](../2609.37851-flowmap-opd/README.md)（`flowmap-opd`）：把生成状态的 rollout 分布与 teacher/student 比较 kernel 解耦：rollout 只负责提供具有正确边缘分布的状态，优化 kernel 在这些冻结状态上比较 flow map、诱导速度或瞬时速度。
 
+## Georgia Institute of Technology（工作在Amazon Web Services实习期间完成）
+
+- 2026-11-09 · 一作：Mufei Li · [Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation](../2611.13135-lcs-reference-opd/README.md)（`lcs-reference-opd`）：同一任务可有多条成功路线，但并非任意成功 reference 都适合纠正当前失败学生。论文仅用执行动作序列作对齐：相比最长公共前缀 LCP，LCS 在可恢复绕行之后仍保留有序一致，选择更兼容的同任务成功轨迹。
+
 ## Google
 
 - 2026-10-23 · 一作：Leon Sick · [On-Policy Self-Training: Data-Free Self-Improvement in Large Language Models](../2610.32770-opst/README.md)（`opst`）：通常的 on-policy self-distillation 仍需要人工问题集。OPST 按主题自生成问题和特权解题线索，经独立重答、改写与学生难度门过滤，再由额外看到线索的 EMA 教师在学生实际生成的前缀上提供分布监督，而不是要求学生直接模仿生成器表述。
@@ -251,6 +255,10 @@
 ## KAIST AI / LG AI Research
 
 - 2026-10-09 · 一作：Woosung Koh · [Continually Post-training Small Models via Synthetic Self-distillation](../../reproductions/2610.13113-synthself/README.md)（`synthself`）：小模型self-rewrite可能失真，直接SFT又可能偏离base分布。SynthSelf用更大的同家族aligner把train demonstration贪心离线改写，通过答案拒绝采样后SFT。
+
+## Kempner Institute at Harvard University / UIUC
+
+- 2026-11-10 · 一作：Audrey Huang · [A Theory of Policy Optimization in Post-Training: Coverage Collapse and Reference Resets](../2611.14467-apmd-reference-reset/README.md)（`apmd-reference-reset`）：奖励上升不保证最优响应仍容易采到。本文给出固定 reference 下 REINFORCE 发生 coverage collapse 的构造，并用 APMD 将 KL reference 周期性重置到最新策略：每个内层子问题有较强局部约束，外层重置则允许持续前进。
 
 ## Korea University
 
@@ -500,6 +508,7 @@
 
 ## The Hong Kong Polytechnic University
 
+- 2026-11-10 · 一作：Yue Wu · [Bootstrapped On-Policy Distillation](../2611.13680-bopd/README.md)（`bopd`）：BOPD 先用带参考解答的冻结初始模型监督学生，构造中间模型 M1；再冻结 M1，将它当作**不带参考**的教师，蒸馏一个从原始 M0 精确重置的新学生。两阶段都在各自学生的轨迹前缀上评分，不能把 Stage I 的旧轨迹直接当作 Stage II 的新 on-policy 数据。
 - 2026-10-20 · 一作：Runyang You · [On-Policy Transition Distillation](../2610.28048-optd/README.md)（`optd`）：最终层分布接近教师，不一定代表模型沿深度修正预测的方式接近教师。OPTD 保留最终层 OPD，再对选定浅到深 readout 的 log 概率增量施加监督。
 
 ## The Hong Kong University of Science and Technology

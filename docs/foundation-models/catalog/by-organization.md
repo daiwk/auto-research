@@ -480,6 +480,10 @@
 
 - 2026-08-27 · [CritICL: Inference-Time Weak-to-Strong Generalization from Small Language Model Failure Modes](../../foundation-models/2608.27455-criticl/README.md)（`criticl`）：弱模型错误不是随机噪声，而会聚成可跨模型尺度迁移的失败模式。CritICL 离线归纳 CritBank；static 使用全局高频失败模式，dynamic 根据当前输入检索相关 critique，再让强模型只生成一次答案。
 
+## The University of Hong Kong
+
+- 2026-11-10 · [REAL Loss: Optimizing Real Expected Acceptance Length for Speculative Decoding](../../foundation-models/2611.14399-real-loss/README.md)（`real-loss`）：投机解码接受了哪个 token，会改变下一步被验证的前缀。逐步接受率相乘的 WTV 代理把目标分布中的分支比例用于后续接受率，可能丢失“接受分支权重”和“后续难易度”的协方差，甚至给出相反梯度。
+
 ## The University of Texas at Austin
 
 - 2026-09-29 · [Time-Anchored Diffusion Language Models: Latent-Space Caching for Fast Generation](../../foundation-models/2609.37924-tadm/README.md)（`tadm`）：将昂贵 anchor network 的潜表示跨多个反向扩散步缓存，只周期性刷新；小型 fusion module 根据当前状态门控修正陈旧 anchor，再交给轻量 denoiser。

@@ -1516,6 +1516,16 @@
             "数据协议与代码映射",
             "结果与复现边界"
           ]
+        },
+        {
+          "paper": "foundation-models:real-loss",
+          "position": "从target采样轨迹以q/p构造真实接受分支质量，末步边缘化得到可微EAL训练目标；补充draft训练，不替代拒绝校正verifier。",
+          "tradeoff": "原始投机解码关注保持target分布的推理正确性，REAL关注固定验证过程下如何训练draft；本地只测小张量期望与梯度，不训练35Btarget/完整drafter。",
+          "sections": [
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -1543,6 +1553,14 @@
           "papers": [
             "foundation-models:b3",
             "foundation-models:dqwen35"
+          ]
+        },
+        {
+          "title": "推理接受比与训练路径比方向相反，但服务于同一接受质量",
+          "body": "原始Speculative Decoding从draft q提出token，以min(1,p/q)接受并从[p−q]+校正，保证输出target分布。REAL的轨迹却由target p采样，用min(1,q/p)把其质量变成min(p,q)，训练更合适的draft。两者不是替代算法；错误交换比例会分别破坏推理分布或训练目标。一个loss在某点与代理值相同，也不能证明其梯度方向正确。",
+          "papers": [
+            "foundation-models:real-loss",
+            "foundation-models:speculative-decoding"
           ]
         }
       ],
@@ -1586,9 +1604,19 @@
             "foundation-models:b3",
             "foundation-models:dqwen35"
           ]
+        },
+        {
+          "id": "cross-speculative-training-versus-serving-ratio",
+          "question": "REAL训练用q/p，而投机解码推理用p/q，是否有一方写反了？",
+          "answer": "没有。两者采样分布不同：训练先从p采样，推理先从q提案；各自乘截断比后都形成min(p,q)质量。不能脱离采样来源复用比值，末步边缘化与拒绝残差也分别属于训练估计和推理校正。",
+          "example": "教学例：p(A)=0.4、q(A)=0.8，训练p质量0.4乘1；推理q质量0.8乘0.5，均为0.4。",
+          "papers": [
+            "foundation-models:real-loss",
+            "foundation-models:speculative-decoding"
+          ]
         }
       ],
-      "updated": "2026-11-11",
+      "updated": "2026-11-12",
       "reviewed_papers": [
         "foundation-models:aspire",
         "foundation-models:data-space-iteration",
@@ -1605,7 +1633,8 @@
         "foundation-models:speculative-decoding",
         "foundation-models:tadm",
         "foundation-models:windowed-mtp",
-        "foundation-models:b3"
+        "foundation-models:b3",
+        "foundation-models:real-loss"
       ],
       "updates": [
         {
@@ -1656,6 +1685,16 @@
           "source_revisions": {
             "foundation-models:b3": "313b374beb53ce52db0d1de64c082a93a9d16ef08ce2e9b9456f61b2e2017aa0",
             "foundation-models:dqwen35": "1f25909a5a37a42548bbb72c3aa6526027be675a8796f710388ca65244c26f3f"
+          }
+        },
+        {
+          "date": "2026-11-12",
+          "papers": [
+            "foundation-models:real-loss"
+          ],
+          "summary": "补入真实接受分支的EAL训练目标，将target采样q/p训练权重与draft提案p/q推理校正区分；A100三seed仅验证损失/梯度机制，完整训练成本过高不复现。",
+          "source_revisions": {
+            "foundation-models:real-loss": "8f341df1e058579ddf183df4bb4ab599bf01787778fae00e9e9efd2a82bd4012"
           }
         }
       ]

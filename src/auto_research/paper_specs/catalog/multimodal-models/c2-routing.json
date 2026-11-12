@@ -1,0 +1,43 @@
+{
+  "domain": "multimodal-models",
+  "key": "c2-routing",
+  "title": "C²-Routing: Complementary Cropping and Compression for Efficient Vision-Language Inference",
+  "paper_url": "https://arxiv.org/abs/2611.14469",
+  "reviewed_version": "v1",
+  "detail_path": "multimodal-models/2611.14469-c2-routing/README.md",
+  "topic": [
+    "多模态推理效率",
+    "输入裁剪压缩与风险路由"
+  ],
+  "first_author": "Guorui Lu",
+  "first_author_affiliation": "Leiden University",
+  "published": "2026-11-10",
+  "published_at": "2026-11-10T18:32:28Z",
+  "code": null,
+  "code_status": "固定v1与作者链接未找到该方法源码；所用SmolVLM/GroundingDINO不是方法开源。",
+  "adapter": null,
+  "priority": "P1",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.multimodal.c2_routing.SafetyPolicy",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.multimodal.c2_routing import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.14469v1#S4.SS1",
+    "available_resource": "单张A100/A30或Mac",
+    "basis": "206,996问题，3个3B/7B/8B VLM对原图/裁剪/多个压缩版本生成标签；18数据集、4路由训练与validation选择seed及多基线矩阵，完整高成本不复现。"
+  },
+  "fidelity_note": "仅Eq2-7四状态H-B风险、validation dataset-macro FLOP比及不可变效用门控。未训练特征/选择/分辨率/风险头或执行图像VQA；CPU专用，不伪装CUDA视觉路由。",
+  "summary": "C²-Routing利用裁剪保细节、压缩保全局的互补性，并以原图和缩减图联合正确性预测决定回退。本地实现可审计风险效用核，不宣称已训练路由或复现图像任务收益。",
+  "reviewed_arxiv_id": "2611.14469v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.14469v1"
+}

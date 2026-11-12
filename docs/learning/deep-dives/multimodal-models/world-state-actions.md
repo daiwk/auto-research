@@ -7,7 +7,7 @@ hide:
 
 # 会预测下一幕，还不等于会行动或保持同一个世界
 
-[多模态](../index.md) · 更新 2026-11-11 · 25 篇主题资料 / 9 篇重点对照
+[多模态](../index.md) · 更新 2026-11-12 · 26 篇主题资料 / 10 篇重点对照
 
 世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。 SWIM从离线动作可预测性学习状态坐标的相对权重，训练期校准latent距离，部署时不向规划器增加真实状态。
 
@@ -34,6 +34,7 @@ hide:
 | [GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents](../../../foundation-models/2610.36877-gui-jepa/README.md) · [原始来源](https://arxiv.org/abs/2610.36877v1)<br>章节：背景与主要改动、核心公式 | 候选动作条件残差predictor及ROI/global结构评分，listwise正例损失。 | 真实屏幕编码、候选生成与环境外置；没有GUI benchmark能力结果。 |
 | [SWIM: Learning What Matters from Behaviors for JEPA World Models](../../../foundation-models/2610.36662-swim/README.md) · [原始来源](https://arxiv.org/abs/2610.36662v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 用当前状态和门控未来位移预测固定记录动作chunk，NLL加cyclic discrimination与L1学习gate；随后以sqrt(g)加权状态距离校准latent几何。 | 离线行为监督不是规划输入；gate只识别相对权重且不可二次标准化。本地不含视觉encoder、SIGReg、环境或CEM，完整训练不复现。 |
 | [RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval](../../../multimodal-models/2611.14496-rs-jepa/README.md) · [原始来源](https://arxiv.org/abs/2611.14496)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 利用Vision Mamba扫描次序形成无像素编辑视图，以直通加反梯度hard half-split增加隐藏预测难度，并让四个排除twin的传感器邻域分布对齐detached共识。 | 同主干stop-gradient target不是EMA教师；跨传感器检索表征不等于动作条件未来预测或策略。局部扫描/梯度/邻域核不含Vim、完整CVA/predictor或遥感检索成绩，四V100完整实验不复现。 |
+| [OnlyAct: Extracting Action Representations from Foundation Models for World Models](../../../multimodal-models/2611.14420-onlyact/README.md) · [原始来源](https://arxiv.org/abs/2611.14420)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 在预训练V-JEPA2联合帧表征上，以场景交换正例及同视频非重叠hard negative适配动作几何，再冻结供世界模型使用。 | RS-JEPA用扫描视图和跨传感器邻域共识学习场景检索；OnlyAct希望保留动作、抑制场景。共享JEPA来源不代表优化目标相同。本地两者均只有独立公式/梯度L1，不提供图像检索或动作迁移能力排名。 |
 
 </div>
 
@@ -68,6 +69,12 @@ GUI-JEPA在候选动作条件下生成latent残差，并通过候选决策损失
 RS-JEPA把配准传感器图像与不同扫描视图变成更一致的检索表征，hard划分与邻域损失针对当前场景关系；没有因其名字带JEPA就实现动作条件状态转移。V-JEPA Policy冻结预训练encoder，再训练future-latent predictor与action expert，动作输出及环境成功另需验收。遥感F1@5、latent预测误差和机器人成功率不能汇成一条分数。
 
 对照来源：[rs-jepa](../../../multimodal-models/2611.14496-rs-jepa/README.md) · [vjepa-policy](../../../foundation-models/2609.37250-vjepa-policy/README.md)
+
+### 跨视图保持的内容，可以是场景，也可以是动作
+
+RS-JEPA希望不同传感器检索到同一场景，并让其邻域关系一致；OnlyAct反而把动作保持但场景改变的样本拉近，用同场景不同窗作为难负例。二者对场景身份的需求不同，不能直接拼接一个通用InfoNCE就声称兼得。OnlyAct正负构造依赖光流/相机静动假设，局部候选mask与损失的CUDA通过不能验证这些语义假设。
+
+对照来源：[onlyact](../../../multimodal-models/2611.14420-onlyact/README.md) · [rs-jepa](../../../multimodal-models/2611.14496-rs-jepa/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -133,9 +140,23 @@ RS-JEPA把配准传感器图像与不同扫描视图变成更一致的检索表�
 
     对照来源：[rs-jepa](../../../multimodal-models/2611.14496-rs-jepa/README.md) · [vjepa-policy](../../../foundation-models/2609.37250-vjepa-policy/README.md)
 
+### RS-JEPA与OnlyAct都做表征学习，为什么不能用同场景跨传感器正例替代OnlyAct正例？ {#cross-cross-jepa-scene-versus-action-invariance}
+
+??? note "展开答案与例子"
+
+    **答案：** 同场景对齐保留场景身份，而OnlyAct要跨场景保留动作。替换会改变不变性目标，甚至鼓励动作编码器依赖场景捷径。InfoNCE公式相似不说明配对语义相同，真实动作迁移需要独立验证。
+
+    **教学例子：** 教学例：同一桥梁的SAR和光学图适合RS-JEPA；OnlyAct需要不同房间里的相同开门动作，而不是同房间任意两个动作。
+
+    对照来源：[onlyact](../../../multimodal-models/2611.14420-onlyact/README.md) · [rs-jepa](../../../multimodal-models/2611.14496-rs-jepa/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-12** · 补入从JEPA时空先验提取动作的对比适配，明确场景检索与动作场景解耦目标差异；A100三seed只验证精确bank/冻结投影/梯度，完整视频训练不复现。
+
+涉及：[onlyact](../../../multimodal-models/2611.14420-onlyact/README.md)
 
 **2026-11-11** · 加入RS-JEPA，区分扫描视图/对抗划分/邻域一致性与V-JEPA Policy的未来动作闭环；明确同主干stop-gradient而非momentum target。仅L1 tensor机制，完整Vim/CVA/predictor和多数据集检索实验不复现。
 
@@ -153,7 +174,7 @@ RS-JEPA把配准传感器图像与不同扫描视图变成更一致的检索表�
 
 覆盖 22 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 25 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 26 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -182,6 +203,7 @@ RS-JEPA把配准传感器图像与不同扫描视图变成更一致的检索表�
 - [GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents](../../../foundation-models/2610.36877-gui-jepa/README.md)
 - [SWIM: Learning What Matters from Behaviors for JEPA World Models](../../../foundation-models/2610.36662-swim/README.md)
 - [RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval](../../../multimodal-models/2611.14496-rs-jepa/README.md)
+- [OnlyAct: Extracting Action Representations from Foundation Models for World Models](../../../multimodal-models/2611.14420-onlyact/README.md)
 
 </details>
 

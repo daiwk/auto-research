@@ -1,0 +1,339 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-12",
+  "scope": "Two Google-official-directory-triggered historical Agent backfills only; not a fresh November12 announcement cohort or exhaustive Agent/RSI review.",
+  "review_boundary": {
+    "latest_observed_arxiv_announcement": "2026-11-11",
+    "actual_new_listing_files": [
+      ".cache/nov12-components/arxiv/cs.AI-new.html",
+      ".cache/nov12-components/arxiv/cs.CL-new.html",
+      ".cache/nov12-components/arxiv/cs.LG-new.html"
+    ],
+    "selection_maximum": 3,
+    "selected": 2,
+    "third_paper_not_forced": true,
+    "watermark_advanced": false,
+    "fulltext_scope": "bylines, defining method/control flow, experimental configuration and cost sections only; not every bibliography entry"
+  },
+  "deduplication": {
+    "baseline_commit": "ba8248a2d1647d19108dde91c4a5fc75eb305297",
+    "baseline_sha256": {
+      "research-manifest.json": "2d036bb0a43de4d307169d037b5a17112f3b66b0ec3e560b9645d805933dc2c2",
+      "paper-discovery-ledger.json": "d41b282dfa9d12df16b70b858b1cbcadd07a1c3c02ace9dca558251442dca819"
+    },
+    "selected_ids_absent_from_baseline_manifest_and_ledger": true,
+    "known_duplicate": {
+      "id": "2608.26263",
+      "key": "skill-state",
+      "title": "SKILL.state: Scalable Long-Horizon Agent Skills",
+      "disposition": "already catalogued and ledgered; unchanged title visibility does not create new paper",
+      "no_new_implementation": true
+    }
+  },
+  "source_receipts": [
+    {
+      "source_cache": ".cache/nov12-components/agent/agent-gym-v3.html",
+      "sha256": "9672f77dd7f991e1fc615aa226e01745bb50602a475fb34c35943e2a161beee6",
+      "bytes": 260790,
+      "retrieved_at": "2026-11-12T03:29:17.764373+00:00",
+      "url": "https://arxiv.org/html/2608.15591v3",
+      "status": "retrieved"
+    },
+    {
+      "source_cache": ".cache/nov12-components/agent/agent-gym-v3.pdf",
+      "sha256": "a123329bb8559c97e5e3691342a9d755dacb572593b5085eabc5c3df6cb46340",
+      "bytes": 459119,
+      "retrieved_at": "2026-11-12T03:30:05.861000+00:00",
+      "url": "https://arxiv.org/pdf/2608.15591v3",
+      "status": "retrieved"
+    },
+    {
+      "source_cache": ".cache/nov12-components/agent/bats-v2.html",
+      "sha256": "7e6117c131255c98b7f43f068baaeef128571010b47068571d506db191bff030",
+      "bytes": 858886,
+      "retrieved_at": "2026-11-12T03:29:18.846548+00:00",
+      "url": "https://arxiv.org/html/2511.17006v2",
+      "status": "retrieved"
+    },
+    {
+      "source_cache": ".cache/nov12-components/agent/bats-v2.pdf",
+      "sha256": "33de6a06ad58c90e5b3c526af1b750c1fae16a38b9dd2fc3cc4f23bbdb340333",
+      "bytes": 3344558,
+      "retrieved_at": "2026-11-12T03:30:11.809988+00:00",
+      "url": "https://arxiv.org/pdf/2511.17006v2",
+      "status": "retrieved"
+    },
+    {
+      "source_cache": ".cache/nov12-components/agent/agent-gym-abs.html",
+      "sha256": "263b0edabe8f7b8bdb072aea44ecfd76b89ca4e17bcf270da5e03111abe0fb53",
+      "bytes": 43589,
+      "retrieved_at": "2026-11-12T03:29:19.128162+00:00",
+      "url": "https://arxiv.org/abs/2608.15591",
+      "status": "retrieved"
+    },
+    {
+      "source_cache": ".cache/nov12-components/agent/bats-abs.html",
+      "sha256": "99a1ebe615b8cf688f0572d20ce159cf48708bf6905a41407f3cbaaca32a1313",
+      "bytes": 43096,
+      "retrieved_at": "2026-11-12T03:29:19.391860+00:00",
+      "url": "https://arxiv.org/abs/2511.17006",
+      "status": "retrieved"
+    },
+    {
+      "source_cache": ".cache/nov12-components/agent/agent-gym-readme.md",
+      "sha256": "b3e81c198808e12abd7401f4a711eea30cac0c3a3b25ea3f26f2cc55706ecb4d",
+      "bytes": 27503,
+      "retrieved_at": "2026-11-12T03:31:05.620516+00:00",
+      "url": "https://raw.githubusercontent.com/GoogleCloudPlatform/generative-ai/8c7b207806b3d4754d6722ecf08785b1f33bf542/agents/invoice-processing/README.md",
+      "status": "retrieved"
+    },
+    {
+      "source_cache": ".cache/nov12-components/agent/bats-readme.md",
+      "sha256": "234b31e4dd599fcefd89e50da454225598f3949d3cd2b26847397843c2161b23",
+      "bytes": 11611,
+      "retrieved_at": "2026-11-12T03:31:06.909225+00:00",
+      "url": "https://raw.githubusercontent.com/google-research/budget-aware-agent/37d23f66c512734db476313cf436a506edbec9e0/README.md",
+      "status": "retrieved"
+    },
+    {
+      "source_cache": ".cache/nov12-components/agent/alf-engine-upstream.py",
+      "sha256": "2ea729b9dfa56a4bd06e8f6234f074b077291a257d8256c9efea3428f1ec85a5",
+      "bytes": 93131,
+      "retrieved_at": "2026-11-12T03:31:43.859088+00:00",
+      "url": "https://raw.githubusercontent.com/GoogleCloudPlatform/generative-ai/main/agents/invoice-processing/invoice_processing/shared_libraries/alf_engine.py",
+      "status": "retrieved"
+    },
+    {
+      "source_cache": ".cache/nov12-components/agent/agent-gym-google.html",
+      "sha256": "2574d77a387f4443e068cc88bf9f02f8b82629aaa8270e47d0fd9ab87fda6285",
+      "bytes": 146304,
+      "retrieved_at": "2026-11-12T03:49:27.973473+00:00",
+      "url": "https://research.google/pubs/agent-gym-a-framework-for-continuous-evaluation-and-evolution-of-llm-agents-through-human-in-the-loop-feedback/",
+      "status": "retrieved"
+    },
+    {
+      "source_cache": ".cache/nov12-components/agent/bats-google.html",
+      "sha256": "1e840edb5604716a5709e409b46996afac175da5ccc1dc240ba5c76dea3d4cb2",
+      "bytes": 150154,
+      "retrieved_at": "2026-11-12T03:49:26.799569+00:00",
+      "url": "https://research.google/pubs/cost-effective-agent-test-time-scaling/",
+      "status": "retrieved"
+    }
+  ],
+  "source_attempts": [
+    {
+      "url": "https://api.github.com/repos/GoogleCloudPlatform/generative-ai/contents/agents/invoice-processing",
+      "result": "HTTP403",
+      "fallback": "read public raw README and ALF engine instead; pinned README bytes independently matched fixed commit",
+      "unresolved_primary_paper": false
+    }
+  ],
+  "papers": [
+    {
+      "id": "2608.15591",
+      "key": "agent-gym",
+      "module_key": "agent-gym",
+      "domain": "agent-research",
+      "title": "Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback",
+      "priority": "P0",
+      "published_at": "2026-08-16T07:27:26Z",
+      "first_publication_date": "2026-08-16",
+      "reviewed_version": "v3",
+      "reviewed_version_published_at": "2026-11-03T23:26:41Z",
+      "first_author": "Pouya Ghiasnezhad Omran",
+      "first_author_affiliation": "Google Cloud",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "affiliation_verified_in": "original fixed PDF page1, visual and text check",
+      "affiliation_evidence": "All five authors have superscript1, affiliation1=Google Cloud.",
+      "source_url": "https://arxiv.org/html/2608.15591v3",
+      "source_cache": ".cache/nov12-components/agent/agent-gym-v3.html",
+      "source_sha256": "9672f77dd7f991e1fc615aa226e01745bb50602a475fb34c35943e2a161beee6",
+      "reviewed_sections": [
+        "§3.3–3.6",
+        "§6.1–6.5",
+        "§7",
+        "PDF page1 authors",
+        "upstream README and ALF collect/build_plan/merge logic"
+      ],
+      "full_article_read": false,
+      "decision": "accepted_component_only",
+      "implementation_status": "component_only",
+      "intake_class": "official_directory_triggered_historical_backfill",
+      "new_first_publication_on_checked_day": false,
+      "new_announcement_on_checked_day": false,
+      "code_url": "https://github.com/GoogleCloudPlatform/generative-ai/tree/8c7b207806b3d4754d6722ecf08785b1f33bf542/agents/invoice-processing",
+      "code_status": "公开GoogleCloudPlatform参考实现，固定commit 8c7b207806b3d4754d6722ecf08785b1f33bf542；仅阅读README/ALF，不克隆或执行。论文21操作，当前上游README24；本地仅八个明确操作，不混写。",
+      "local_operator": "auto_research.agent_research.agent_gym.diagnostic",
+      "local_component_source": "src/auto_research/agent_research/agent_gym.py",
+      "local_component_sha256": "54d8b71b2fbb7fdb71b6968944b1084fe7a1b9e1b0b3badcab3f3fecb0ea1e30",
+      "component_scope": "仅CPU ALF控制核、八种条件、type-preserving编辑及人工准入合同。真实语义续跑/patch来自外部callback，不实现LLM discovery/investigation、自动三轮收窄、发票Agent或规则晋升。",
+      "summary": "独立纠错层按scope收集确定性AND条件，合并续跑与patch并以3→2→1顺序改真实JSON；新规则检查target/collateral后须显式SME批准，原Agent不直接重训。",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2608.15591v3#S6",
+        "source_location": "§3.4–3.5,§6–7; fixed upstream README model/configuration",
+        "model_scale": "nine-stage acting pipeline; three-layer investigation; paid Gemini-3.5-Flash/Pro in current public reference; SME rule-learning sessions",
+        "data_scale": "single invoice domain; full end-to-end document/revision matrix and human sessions, not a published multi-domain benchmark",
+        "available_resource": "one NVIDIA A100 or A30, or local Mac",
+        "estimated_cost_basis": "Paper gives no wall-clock/token total and leaves large-scale cost quantification to future work. Paid proprietary inference and human feedback cannot be faithfully replaced by a free single-card control fixture; unresolved full-run cost is not probed.",
+        "cost_type": "published_configuration_and_unresolved_cost_not_local_measurement",
+        "decision": "完整系统成本过高，不复现（审查 DONE）；不调用API、不下载文档包、不试部署。只执行明确CPU组件。"
+      },
+      "review_done": true,
+      "full_experiment_review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "production_online_ab": {
+        "reported": false,
+        "scope": "Reference implementation/operational deployment paths only; no randomized production traffic or quantified online uplift established."
+      },
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2511.17006",
+      "key": "bats",
+      "module_key": "bats",
+      "domain": "agent-research",
+      "title": "Budget-Aware Tool Use Enables Effective Agent Scaling",
+      "priority": "P0",
+      "published_at": "2025-11-21T07:18:55Z",
+      "first_publication_date": "2025-11-21",
+      "reviewed_version": "v2",
+      "reviewed_version_published_at": "2026-08-17T07:14:22Z",
+      "first_author": "Tengxiao Liu",
+      "first_author_affiliation": "UC Santa Barbara",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "affiliation_verified_in": "original fixed PDF page1, visual and text check",
+      "affiliation_evidence": "TengxiaoLiu1=UC SantaBarbara;2=GoogleCloudAIResearch;3=GoogleDeepMind;4=NYU. First-author footnote says work done during Google Cloud AI Research internship; do not relabel his first affiliation as Google.",
+      "source_url": "https://arxiv.org/html/2511.17006v2",
+      "source_cache": ".cache/nov12-components/agent/bats-v2.html",
+      "source_sha256": "7e6117c131255c98b7f43f068baaeef128571010b47068571d506db191bff030",
+      "reviewed_sections": [
+        "§2.1–2.2",
+        "§3.1",
+        "§4.1–4.2",
+        "§5.1",
+        "AppendixA.1–2",
+        "AppendixB Algorithm1",
+        "PDF page1 byline/footnote",
+        "upstream README"
+      ],
+      "full_article_read": false,
+      "decision": "accepted_component_only",
+      "implementation_status": "component_only",
+      "intake_class": "official_directory_triggered_historical_backfill",
+      "new_first_publication_on_checked_day": false,
+      "new_announcement_on_checked_day": false,
+      "code_url": "https://github.com/google-research/budget-aware-agent/tree/37d23f66c512734db476313cf436a506edbec9e0",
+      "code_status": "公开Apache-2.0作者仓库，固定37d23f66c512734db476313cf436a506edbec9e0；只读README，不克隆/运行/下载或解密benchmark。Google官网旧摘要名CATS，固定v2和公开代码名BATS。",
+      "local_operator": "auto_research.agent_research.bats.diagnostic",
+      "local_component_source": "src/auto_research/agent_research/bats.py",
+      "local_component_sha256": "845c320fb7363675133eb83076ffc55c8c8b8146c41ad7f4aea818f1cf8eeb48",
+      "component_scope": "仅CPU预算/费用/显式外部verdict状态核，不产生计划、语义验证、摘要或答案。无gold/reference字段；外部selector必须选择已接受集合，完整搜索Agent及Evolve未接入。",
+      "summary": "持续向Agent展示每工具已用/剩余预算；用显式自验证决定CONTINUE/PIVOT/SUCCESS，换路不重置预算，任一工具耗尽即终止，并按token及工具实际消耗统一计费。",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2511.17006v2#A1",
+        "source_location": "§5,Appendix A.1–2 and B; official repository README",
+        "model_scale": "Gemini-2.5-Flash/Pro and Claude-Sonnet-4; up to64K–65,536generated tokens with self-verification and final LLM judge",
+        "data_scale": "BrowseComp1,266questions(author code also200subset), BrowseComp-ZH289, HLE-Search200; multiple tool-budget curves and supplementary tasks",
+        "available_resource": "one NVIDIA A100 or A30, or local Mac",
+        "estimated_cost_basis": "Paid multi-model search/browse and repeated verification matrix; paper tool rate USD0.001/call is a historical post-hoc average, not current pricing. No local full-run hours measured.",
+        "cost_type": "published_configuration_not_local_measurement",
+        "decision": "完整实验成本过高，不复现（审查 DONE）；不调用API、不下载/解密题目、不接触gold，仅执行CPU控制与费用核。"
+      },
+      "review_done": true,
+      "full_experiment_review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "production_online_ab": {
+        "reported": false,
+        "scope": "Public offline search/interaction benchmarks; no production A/B reported."
+      },
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    }
+  ],
+  "figure_metadata": [
+    {
+      "key": "agent-gym",
+      "page": "docs/agent-research/2608.15591-agent-gym/README.md",
+      "paper_url": "https://arxiv.org/abs/2608.15591",
+      "arxiv_id": "2608.15591",
+      "source_url": "https://arxiv.org/pdf/2608.15591v3#page=7",
+      "source_sha256": "a123329bb8559c97e5e3691342a9d755dacb572593b5085eabc5c3df6cb46340",
+      "figure": "Figure 2",
+      "original_caption": "ALF Collect-Plan-Execute pipeline. Deterministic collection, tier grouping and Tier3→Tier2→Tier1 execution.",
+      "pdf_page": 7,
+      "crop_points": [
+        302,
+        82,
+        537,
+        342
+      ],
+      "extraction": "PyMuPDF 3x crop of original figure and caption; not redrawn",
+      "asset": "docs/agent-research/2608.15591-agent-gym/assets/paper-figure-01.png",
+      "asset_sha256": "64b07d866f483631541932a72a69be5f51da056c63ec97c6cb7a68bacbc7bfb8",
+      "width": 705,
+      "height": 780,
+      "visually_reviewed": true,
+      "copyright": "Original authors; educational reference with source attribution",
+      "error": ""
+    },
+    {
+      "key": "bats",
+      "page": "docs/agent-research/2511.17006-bats/README.md",
+      "paper_url": "https://arxiv.org/abs/2511.17006",
+      "arxiv_id": "2511.17006",
+      "source_url": "https://arxiv.org/pdf/2511.17006v2#page=7",
+      "source_sha256": "33de6a06ad58c90e5b3c526af1b750c1fae16a38b9dd2fc3cc4f23bbdb340333",
+      "figure": "Figure 6",
+      "original_caption": "Overview of BATS: budget-aware planning, verification, repeated attempts and any-budget termination.",
+      "pdf_page": 7,
+      "crop_points": [
+        60,
+        395,
+        537,
+        720
+      ],
+      "extraction": "PyMuPDF 3x crop of original figure and caption; not redrawn",
+      "asset": "docs/agent-research/2511.17006-bats/assets/paper-figure-01.png",
+      "asset_sha256": "1d037089714e9345dcd33c543d4d17a52a99cb55b39bd2bca1dd5545029ece30",
+      "width": 1431,
+      "height": 975,
+      "visually_reviewed": true,
+      "copyright": "Original authors; educational reference with source attribution",
+      "error": ""
+    }
+  ],
+  "checks": {
+    "specific_tests": "tests/agent_research/test_nov12_agent.py",
+    "tests_passed": 25,
+    "ruff_passed": true,
+    "diagnostic_contract": "both components × seeds42/43/44 validate_diagnostic passed; root generates final frozen metrics",
+    "no_model_api_calls": true,
+    "no_benchmark_downloads_or_gold_access": true,
+    "no_cuda_advertised": true,
+    "source_freeze_reported_to_root": true
+  },
+  "limitations": [
+    "Google official title/summary CATS maps to original2511.17006, currentv2 and author repository BATS; the 2025 v1 date is retained.",
+    "AgentGym v3 says21 operators; current public README says24; this local component explicitly implements eight, not all21/24.",
+    "The two approvals/callback demos are deterministic control fixtures, not real human authorization, semantic correctness, actor capability, or RSI gains.",
+    "Official-directory-wide differences, Meta and industrial production review are owned by root and not claimed completed here.",
+    "No additional unreviewed title in the November11 bulletin is silently accepted, cost-closed, or queued."
+  ]
+}

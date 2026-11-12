@@ -1,0 +1,147 @@
+{
+  "schema_version": 2,
+  "method": "apmd-reference-reset",
+  "manifest_ref": "post-training:apmd-reference-reset",
+  "dataset": {
+    "id": "synthetic:nov12-apmd-reference-reset-v1",
+    "revision": "sha256:89a7feb87728af69a0aeab947818e800fdf03902d91834626aa01b7cebb66b6d",
+    "recipe": "small seeded tensors, exact finite-policy operators, and explicit control/evaluator contracts; no capability benchmark",
+    "capability_benchmark": false
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "device": "cpu",
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "closed_form_max_error": 1.6653345369377348e-16,
+        "centered_mse": 12.644292939740106,
+        "rebel_on_policy_loss": 25.288585879480213,
+        "kimi_bias_term": 5.676949994954891,
+        "exact_reward_before": 0.22237810756315865,
+        "exact_reward_after": 0.5635897586044026
+      },
+      "checks": {
+        "reset_path_matches_closed_form": true,
+        "exact_mirror_reward_nondecreasing": true,
+        "exact_mirror_optimal_response_mass_nondecreasing": true,
+        "mirror_target_zero_centered_mse": true,
+        "rebel_is_twice_centered_mse": true,
+        "kimi_mean_baseline_retains_squared_kl_bias": true,
+        "fixed_reference_target_is_not_repeated_reset": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "device": "cpu",
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "closed_form_max_error": 8.326672684688674e-17,
+        "centered_mse": 17.343464823777367,
+        "rebel_on_policy_loss": 34.68692964755474,
+        "kimi_bias_term": 9.88982210344202,
+        "exact_reward_before": 0.04923173778242996,
+        "exact_reward_after": 0.30729348803674883
+      },
+      "checks": {
+        "reset_path_matches_closed_form": true,
+        "exact_mirror_reward_nondecreasing": true,
+        "exact_mirror_optimal_response_mass_nondecreasing": true,
+        "mirror_target_zero_centered_mse": true,
+        "rebel_is_twice_centered_mse": true,
+        "kimi_mean_baseline_retains_squared_kl_bias": true,
+        "fixed_reference_target_is_not_repeated_reset": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "device": "cpu",
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "closed_form_max_error": 2.220446049250313e-16,
+        "centered_mse": 8.68966664119508,
+        "rebel_on_policy_loss": 17.37933328239016,
+        "kimi_bias_term": 6.455086347533766,
+        "exact_reward_before": 0.20240762949873894,
+        "exact_reward_after": 0.5394755723422283
+      },
+      "checks": {
+        "reset_path_matches_closed_form": true,
+        "exact_mirror_reward_nondecreasing": true,
+        "exact_mirror_optimal_response_mass_nondecreasing": true,
+        "mirror_target_zero_centered_mse": true,
+        "rebel_is_twice_centered_mse": true,
+        "kimi_mean_baseline_retains_squared_kl_bias": true,
+        "fixed_reference_target_is_not_repeated_reset": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "centered_mse": 12.89247480157085,
+    "closed_form_max_error": 1.5728159515523052e-16,
+    "exact_reward_after": 0.47011960632779326,
+    "exact_reward_before": 0.1580058249481092,
+    "kimi_bias_term": 7.3406194819768915,
+    "rebel_on_policy_loss": 25.7849496031417
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "formal_comparison": false,
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "three-seed synthetic mechanism diagnostic; not a capability comparison"
+  },
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_applicable_theory_only",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "9d46c1778c3df693907c113c803e617ae0690117",
+    "artifact_path": "docs/post-training/2611.14467-apmd-reference-reset/metrics/component-cpu-seeds42-44.json",
+    "accelerator": "CPU",
+    "executed_source_sha256": {
+      "scripts/run_nov12_components.py": "7622e7d554c13c9b9cd61931ac248ac26534751412854091d09f1248e2519eb3",
+      "scripts/run_nov04_components.py": "61d35d574d9561e4611d2647174b8a6af07fabf8c30b6909e21e253542cf4336",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "docs/research-audits/nov12-components/preflight.json": "b82e1ddb82f3b3ee6e1a461d902243cc8cd8e6fb824b95b7d29037c4bebdfc95",
+      "src/auto_research/agent_research/agent_gym.py": "54d8b71b2fbb7fdb71b6968944b1084fe7a1b9e1b0b3badcab3f3fecb0ea1e30",
+      "src/auto_research/agent_research/bats.py": "845c320fb7363675133eb83076ffc55c8c8b8146c41ad7f4aea818f1cf8eeb48",
+      "src/auto_research/post_training/bopd.py": "59124e92ca515dd15e45aad0d63b039771e46c011c9ea99acd8f23a707fe23f6",
+      "src/auto_research/post_training/apmd_reference_reset.py": "89a7feb87728af69a0aeab947818e800fdf03902d91834626aa01b7cebb66b6d",
+      "src/auto_research/post_training/lcs_reference_opd.py": "c4bdf1c1d5f1d48ea66e1555d269a6d50fcd906a8ae746f29b8c85827c393c91",
+      "src/auto_research/foundation_models/real_loss.py": "0b7a84e98aea5fe0d1f578d889d19f6dbe760c0d43fba3887e814f3d118c2afa",
+      "src/auto_research/multimodal/c2_routing.py": "d296a544abfde9829041566dbc028e34c1181c1dfee4b448c0a02a308b22a2da",
+      "src/auto_research/multimodal/onlyact.py": "ca94c19145158d8fd07e6579687c68aa0e2e7b8de02941af098c4a030999e155"
+    },
+    "dataset_fingerprint": "sha256:0312f49fd87be6b932f4c838d71f1e82b80a453215c5d31ec1f3b714051467b6",
+    "raw_runner_artifact_sha256": "81ae87a81256a236ff436a06bc6c3e68947105338eceebb785407ca505ca6d94"
+  }
+}

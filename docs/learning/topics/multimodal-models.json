@@ -76,7 +76,8 @@
         "foundation-models:video-encoder-selection",
         "multimodal-models:videomm",
         "multimodal-models:vimod",
-        "multimodal-models:steprefine"
+        "multimodal-models:steprefine",
+        "multimodal-models:c2-routing"
       ]
     },
     {
@@ -120,7 +121,8 @@
         "multimodal-models:woven",
         "foundation-models:gui-jepa",
         "foundation-models:swim",
-        "multimodal-models:rs-jepa"
+        "multimodal-models:rs-jepa",
+        "multimodal-models:onlyact"
       ]
     }
   ]

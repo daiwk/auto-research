@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:agent-gym/post-agent-correction-layer": {
+      "source_sha256": "b6a33bb2f6349d838c2a08648c433d3e39e256864a53a1efd563a153b5f2a917",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Agent Gym not retrain the model for every new business exception?",
+        "answer": "It separates the acting agent from downstream ALF rules. Explicit conditions correct JSON only for matching cases, and experts can review, disable, and roll back rules without changing model weights. Automatically promoting rules into the acting agent remains future work.",
+        "example": "Teaching example: an emergency-maintenance authorization exception below 2000 can be a narrow correction rule. It does not mean the model learned every new procurement policy or justify changing unrelated cases."
+      }
+    },
+    "qa/agent-research:agent-gym/collect-plan-execute-order": {
+      "source_sha256": "7a3d0f11d1ee9b53568a9caa5170729d362fb4cd9bd2fc74a43a0acb50449d77",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must ALF merge actions and execute Continuation, Patch, then Edit?",
+        "answer": "Separate model calls for each rule could overwrite one another. Merge continuation at the earliest stage, patch the union of declared targets once, and apply constant edits last. This preserves correction precedence and limits the two model tiers to at most two calls. Each scope also selects only its first priority-ordered matching rule.",
+        "example": "Teaching example: continuation sets status to continued, patching sets it to patched, and a final constant edit sets approved. Editing before continuation would lose approved."
+      }
+    },
+    "qa/agent-research:agent-gym/rule-approval-versus-program-validation": {
+      "source_sha256": "4506455a66b9481d9680ae2e890e2938a74f91e12a3472abca059822905f9351",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Agent Gym rule approval differ from PASE program-patch acceptance?",
+        "answer": "Agent Gym checks target and collateral matches, then obtains explicit SME approval for a downstream correction rule without editing the acting agent. PASE keeps skill/program pairs and accepts a program replacement only after strict held-out validation improvement. Human governance and measured task-performance admission are different evidence.",
+        "example": "Teaching example: an expert can authorize a procurement exception. A syntactically valid spreadsheet program still needs a better validation score under PASE; expert preference cannot replace that measurement."
+      }
+    },
+    "qa/agent-research:agent-gym/target-collateral-and-trust-boundary": {
+      "source_sha256": "d2fb502d5735e2e28a9228d3299349bb74eb392a8d61cd90caf3cd33f3590f13",
+      "reviewed": true,
+      "fields": {
+        "question": "Do local approval fields and successful callbacks prove a real human approved a semantically correct correction?",
+        "answer": "No. The component requires an exact rule digest, target match, named external approval, and acknowledgement of collateral warnings, but does not authenticate human identity. Callbacks return revised JSON rather than success labels; type checks still do not prove business meaning. Eight local condition operators are not all 21 paper operators or a full agent.",
+        "example": "Teaching example: a callback can replace a legal status string with a semantically wrong string and still pass type checking, so semantic_correctness_verified remains false. Missing approval or a wrong field type is mechanically rejected."
+      }
+    },
+    "qa/agent-research:bats/budget-versus-realized-cost": {
+      "source_sha256": "8d9f8e1a7181298f9349887bd1c12f7b9a00faa7b7ce74d577fc23be9625cd2d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does BATS separate tool budgets from unified cost?",
+        "answer": "Budget is the advance per-tool call allowance. Cost is realized token and tool consumption. Paths with the same allowance can differ in cache hits, output lengths, and actual calls, so the budget limit cannot substitute for an expense ledger.",
+        "example": "Teaching example: both paths permit ten searches. One uses two searches with cache hits; another uses ten and generates long output. Equal budgets do not imply equal cost."
+      }
+    },
+    "qa/agent-research:bats/any-tool-exhausted-and-pivot": {
+      "source_sha256": "2ea9d11ba73f424f2c5b5184a94de8a18d00242538c11e6e28d52d621cb78e39",
+      "reviewed": true,
+      "fields": {
+        "question": "Should BATS continue if search is exhausted but browsing has budget, and does PIVOT replenish it?",
+        "answer": "No. Appendix B enters another iteration only while every tool has usage below its budget. Any exhausted tool ends the loop. PIVOT saves an external summary, clears raw history, and changes direction while preserving usage. SUCCESS also starts another attempt when budget remains.",
+        "example": "Teaching example: with search budget one and browse budget ten, one search ends the loop despite ten unused browses. With search budget three, pivoting after one call leaves two, not three."
+      }
+    },
+    "qa/agent-research:bats/adaptive-budget-versus-precomputed-plan": {
+      "source_sha256": "931bfc0e200e4896276d717b6b334344e93e5485ad03bcde126f4d8e9f2325b1",
+      "reviewed": true,
+      "fields": {
+        "question": "What does BATS emphasize beyond ReWOO's plan-first execution?",
+        "answer": "ReWOO decouples its planner from intermediate tool observations to reduce repeated planning. BATS repeatedly conditions reasoning on remaining budget and externally driven self-verification decisions to continue, pivot, or collect candidates. They change different control assumptions; local state tests cannot establish which has higher task accuracy.",
+        "example": "Teaching example: a three-step ReWOO plan fills evidence along its dependencies. BATS can summarize and pivot after a contradiction, but must use the actual remaining allowance rather than restart for free."
+      }
+    },
+    "qa/agent-research:bats/external-verdict-and-cache-accounting": {
+      "source_sha256": "58e8c2699e2e832343decb2b52268c8d2f4e7c811dfadea3f58202592806df6b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is local SUCCESS not accuracy, and how are cached tokens charged?",
+        "answer": "SUCCESS is an explicit external verifier acceptance signal; the module has no gold or semantic judge. The final selector must still choose from the accepted set. Total input includes cached input, so subtract cache tokens before separately charging uncached input, cache, and output; do not charge cached input twice.",
+        "example": "Teaching example: 100 input tokens include 40 cached, with 20 output tokens. At prices .002/.0005/.004, token cost is .22, not .30. This is constructed accounting, not an API measurement or accuracy."
+      }
+    }
+  }
+}
