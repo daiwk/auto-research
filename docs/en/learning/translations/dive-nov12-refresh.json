@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/multimodal-models/world-state-actions/comparison/multimodal-models:sensorwm-planning": {
+      "source_sha256": "8419b033acd0c3532d8b643fa40ad5fd03d4b6dd575cd28a2c3449ad6b19efb6",
+      "reviewed": true,
+      "fields": {
+        "position": "An action-conditioned wearable JEPA propagates latent displacements with state-dependent linear operators; external candidates are ranked by future-status-quo benefit normalized by personalized effort.",
+        "tradeoff": "The full paper models private physiological data. Local Eq.55–56 ranks without forecasts, action execution, or medical advice. Unlike LeWAM's learned policy/dynamics and execution loop, arithmetic ranking establishes neither world-model control nor clinical safety."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/analysis/6": {
+      "source_sha256": "4b502dfea4253a782ddc17d6e4c80a6c7ad8a46bf70ec7475bfddab639f59b6d",
+      "reviewed": true,
+      "fields": {
+        "title": "Action-conditioned forecasts do not identify interventions or complete control",
+        "body": "LeWAM jointly learns representations and action flow matching, then rolls out frozen dynamics, refines actions by gradients, and receives environment feedback. Its current local evidence remains non-holdout diagnostics with no measured planning advantage. SensorWM learns conditional trajectories from observational wearables and normalizes projected gain by individual behavioral variability. It explicitly does not identify causal intervention effects, and offline coach preferences are not health outcomes. Prediction, selection, execution, and effects require different evidence; the local ranking kernel cannot replace the missing model."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/question/cross-worldmodel-ranking-versus-closed-loop-evidence": {
+      "source_sha256": "e880dd3628215eaabe890ab5062ef6aefd970017387c909401f78924ac7aeaa3",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a SensorWM ranking kernel and LeWAM planner share one planning-success ranking because both select a better candidate?",
+        "answer": "No. The SensorWM kernel only ranks external endpoints by gain over effort, without a model, medical judgment, or execution. LeWAM produces actions and executes an environment loop, yet its existing local results are not held-out capability evidence. Denominators, forecast provenance, causal meanings and execution evidence differ.",
+        "example": "Teaching example: choosing the largest of three supplied ratios neither reaches a robot goal nor improves someone's health twelve weeks later. Each outcome requires independent verification."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/update/2026-11-12/5": {
+      "source_sha256": "6cb4554e264cbb7e69bd4d4268db49280f44c0c437aa7c819aeebfe4b999c8e3",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add Google's wearable world-model case and distinguish observational action-conditioned forecasts, effort-aware selection, and executed control or causal health outcomes. CPU seeds verify Eq.55–56 arithmetic only; full private JEPA and clinical/API studies remain cost-deferred."
+      }
+    }
+  }
+}

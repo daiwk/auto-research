@@ -1,5 +1,17 @@
 # 论文发现闭环与防遗漏审计
 
+## 2026-11-13：ScientistTwo 与历史机构对账
+
+[本轮六篇历史补漏](research-audits/nov13-history-repair/README.md)包含 ScientistTwo、DS-STAR、ERA、EnvHarness 四个 CPU 控制组件，以及 MLE-STAR、AlphaEvolve 两个高成本审查终态。所有完整实验明确不复现，四个组件的三种子运行只支持 L1 机制验证，不是科研或 Agent 能力比较。
+
+新增[独立历史对账报告](research-audits/nov13-history-repair/history-reconciliation.md)：先保留官方页面的精确身份与捕获见证，再与 canonical manifest / 实质审查终态比对；即使近期差集为空、旧摘要被标 P2，Google/Meta 历史身份仍能被单独暴露。普通 P2 不自动重开，明确高成本和来源归档也不进入重试队列。Google/DeepMind/Meta 已配置页面的有界库存与近期扫描分开输出；分页/访问失败明确保留，不能把配置页数当全机构历史穷尽。水位仍为 **2026-11-09**。
+
+## 2026-11-12 再次官方复查：一项 Google 补漏
+
+[本轮来源与边界](research-audits/nov12-refresh/README.md)：八个官方 arXiv 公告与上一批逐字节相同，没有确认新公告。Google 官网触发对 11 月 5 日 SensorWM 论文的原文复核，旧 P2 选题记录不冒充方法审查；本轮仅交付 Eq.55–56 纯 CPU 排序算术，三种子机制检查通过，完整私有世界模型和医疗评测**成本过高，不复现（审查 DONE）**。没有新增 CUDA 路径或模型能力对照。
+
+同时修正 `www.research.google` 与 `research.meta.ai` 来源优先级保护，保留仿冒域名负例；官方线索仍须核对原文，不能直接证明机构、开源或 A/B。双语论文页、原图、四层问答和专题精读同批更新；审查水位仍为 **2026-11-09**，不宣称机构或窗口穷尽。
+
 ## 2026-11-12 有界补漏：八项机制核，不推进水位
 
 [本轮固定范围与来源／执行证据](research-audits/nov12-components/README.md)交付 8 个低成本 L1 组件：6 篇为 11 月 11 日同公告补漏，2 篇为 Google 官方来源触发的历史补漏，**当天新首发为 0**。CPU 执行 **8 组件×3 seed**，其中 BOPD、REAL Loss、OnlyAct 另在真实 A100 执行 **3 组件×3 seed**；小张量、有限策略与合同诊断不等于完整模型能力比较，也不提供 Evolve 晋级证据。

@@ -253,10 +253,6 @@
 
 - [ScienceBuddy: Recursive-in-Recursive Self-Improvement for Interactive Scientific Agents](../2609.17523-sciencebuddy/README.md)（`sciencebuddy`）：内层递归演化交互 harness，外层用成功轨迹更新科学 Agent 策略。
 
-### 科学研究 Agent
-
-- [ScientistOne: Towards Human-Level Autonomous Research via Chain-of-Evidence](../2605.26340-scientist-one/README.md)（`scientist-one`）：研究产物看起来完整，仍可能引用虚构、分数无法复算或方法描述与代码不同。CoE 将主张连到可核验来源；独立 I1–I4 检查分数、规则、引用和方法/代码一致性。
-
 ### 规划、推理与工具使用
 
 - [SCOPE: Selective Certification of Program Edits for Embodied Heuristic Learning](../2610.23128-scope-replay/README.md)（`scope-replay`）：修改机器人控制程序可能修好新场景却破坏旧场景。SCOPE 从开发执行证据建立失败前沿图，区分有证据支持、被反驳和未知检查，按局部修补、阶段重设或策略重生成继续搜索。
@@ -332,6 +328,11 @@
 ### 科学发现与实验闭环
 
 - [Aptamers as a sandbox for lab-in-the-loop agentic molecular discovery](../2610.24806-aptamer-lab-loop/README.md)（`aptamer-lab-loop`）：该研究把计算设计与真实实验测量放进多轮反馈闭环，让Agent利用成功和失败证据调整下一轮策略。关键不是把Agent多跑几轮，而是实物测量可以否定计算评分；论文显示一些预测代理与实际测量不一致。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [ScientistTwo: Pioneering the Human Knowledge Frontier with Autonomous AI](../2609.19644-scientist-two/README.md)（`scientist-two`）：ScientistTwo 面向给定科学问题的持续研究：先提炼已有方法局限，再生成并筛选新颖想法；在复现的子集基线上做工程迭代，只有被判为 Good 的想法才升到全量 benchmark。新一轮想法同时利用成功与失败日志，并加入尚未尝试的高新颖度种子，避免只围绕早期赢家局部搜索。
+- [ScientistOne: Towards Human-Level Autonomous Research via Chain-of-Evidence](../2605.26340-scientist-one/README.md)（`scientist-one`）：研究产物看起来完整，仍可能引用虚构、分数无法复算或方法描述与代码不同。CoE 将主张连到可核验来源；独立 I1–I4 检查分数、规则、引用和方法/代码一致性。
+- [An AI system to help scientists write expert-level empirical software (ERA)](../2509.06503-era-flat-puct/README.md)（`era-flat-puct`）：ERA 把可评分的科研任务、已有方法或新研究思路交给 LLM，生成程序后在隔离环境中运行，以任务指标持续搜索改进。关键不是让模型连续改写同一段答案，而是保存已执行代码树，用质量与探索项决定下一个应变异的程序。
+- [AlphaEvolve: A coding agent for scientific and algorithmic discovery](../2506.13131-alphaevolve/README.md)（`alphaevolve`）：AlphaEvolve 把有自动评价器的算法改进问题写成程序进化：人类给出任务、初始程序和评价函数，提示采样器提供待改程序、已有高分构造及反馈；Gemini 2.0 Flash/Pro 混合提出代码修改，再由评估节点实际执行。带多维分数的程序进入进化数据库，为下一轮保留高质量和多样化材料。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [MLE-STAR: Machine Learning Engineering Agent via Search and Targeted Refinement](../2506.15692-mle-star/README.md)（`mle-star`）：直接让 LLM 重写整份训练脚本，容易一直使用熟悉的旧模型，又在数据处理、模型选择和调参之间反复跳转。MLE-STAR 先从网络检索任务相关模型与示例代码，实际训练候选并按 validation 指标排序，再逐个尝试合并，只有改进才保留。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ### 环境模拟与前瞻决策
 
@@ -402,6 +403,10 @@
 - [MRKL](../2205.00445-mrkl/README.md)（`mrkl`）：单个 LLM 容易在精确计算、时效知识和可验证推理上失败。MRKL 把 LLM 放入系统架构，由 router 根据输入选择语言模型、知识库、计算器等专家；离散模块保证确定性能力，语言模型负责理解和自然语言接口。
 - [SayCan](../2204.01691-saycan/README.md)（`saycan`）：LLM 知道“应该做什么”，却不知道当前机器人“能不能做”。SayCan 为每个预训练技能同时计算语言相关性和 value-function affordance，选择乘积最高的技能并执行，再把动作追加到上下文继续规划。
 - [WebGPT](../2112.09332-webgpt/README.md)（`webgpt`）：长文本问答容易幻觉，且很难核查依据。WebGPT 让模型在文本浏览器里搜索、点击和滚动，回答必须收集引用；训练先做行为克隆，再用人类偏好 reward model 从多条浏览/回答轨迹中做拒绝采样。
+
+### 环境设计与任务组合
+
+- [EnvHarness: Awakening Static Worlds for Agent Learning](../2608.19880-envharness/README.md)（`envharness`）：静态环境不能针对当前策略的弱点持续提供练习。EnvHarness 不从头生成世界或替换评分器，而是在固定环境的 `reset/step/observe/evaluate` 接口外加包装层：Stage 改初始可达状态；Contract 改允许动作、转换反馈和观察；Chain 延长任务。
 
 ### 电脑操作与 reward 评测
 
@@ -498,6 +503,7 @@
 - [SWE-Prime: Fewer Trajectories, Better Performance](../2608.27449-swe-prime/README.md)（`swe-prime`）：成功轨迹仍可能冗余、危险或不可学习。SWE-Prime 先按过程、结果和代表性选轨迹，再按贡献、可学习性和风险选语义段；上下文完整保留，但只对选中段计算 SFT loss。
 - [TraceML: An Empirical Analysis of Human-Agent Planning in Machine Learning Development](../2608.26086-traceml/README.md)（`traceml`）：统一记录每个代码版本、得分、动作意图、编辑规模和效果，比较 4465 条人类轨迹与 Agent 轨迹；把人类会交替阶段、回开旧方案的规律蒸馏成 planning prior。
 - [AIRA2: Overcoming Bottlenecks in AI Research Agents](../2603.26499-aira2/README.md)（`aira2`）：以无同步屏障的 steady-state worker pool 提高实验吞吐；训练、搜索、最终选择使用固定的 80/10/10 隐藏切分，搜索只看 search score，结束后才用未参与爬山的 validation 选冠军。
+- [DS-STAR: Data Science Agent via Iterative Planning and Verification](../2509.21825-ds-star/README.md)（`ds-star`）：数据科学问题可能跨 CSV、JSON、Markdown、Excel 等多种文件。只看少量表格行容易丢失关联信息，而脚本能运行也不代表输出足以回答问题。
 
 ### 运行成本与工具暴露控制
 

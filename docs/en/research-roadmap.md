@@ -1,5 +1,9 @@
 # Unified roadmap and TODOs
 
+## November 12: Official recheck and SensorWM backfill
+
+[One Google backfill and source-priority repair](research-audits/nov12-refresh/README.md): announcement pages are unchanged, so the same papers are not recounted as new. Verified Google affiliations and methods reopen SensorWM's old P2 selection. This delivery provides only a CPU individual-effort/conditional-benefit ranking kernel, not a world model, medical advice, or clinical validation. Private large-scale training and expert/model review are closed as high cost and not reproduced, without automatic retries. Reviewed bilingual pages, the original figure, four-level questions, and the topic deep dive are included. The watermark remains **November 9, 2026**.
+
 ## November 12: Eight L1 backfills, not a new announcement batch
 
 [Fixed scope and actual execution evidence](research-audits/nov12-components/README.md): the eight low-cost L1 components comprise six gap closures from the still-current November 11 announcement and two historical discoveries triggered by official Google sources. **This cohort has zero first publications on the delivery day**; cataloging dates are not publication dates. All eight components passed three-seed CPU diagnostics. BOPD, REAL Loss, and OnlyAct also passed three-seed execution on a real A100: **8×3 CPU** and **3×3 A100** runs. These accept mechanisms, not full-model capability or Evolve promotion.
@@ -21,7 +25,7 @@ Selection dispositions, substantive method/cost decisions, and implementation ev
 The next scan overlaps from **November 8** through its new cutoff, prioritizing Google/Meta and applying the cost gate to suitable new papers.
 The batch descriptions below retain their historical snapshots; older watermark text does not override the [current unified state](../paper-discovery-watermark.json).
 
-<!-- source-sha256: d3c77792bca5b08ff14494241c0820c85d3ea764e9e42a7b6d89f5848445b160 -->
+<!-- source-sha256: 5966dda56a43d38e19cbac90cfa7e7c9dc225e58620912724e2536c6649b34ea -->
 
 [简体中文](../research-roadmap.md)
 

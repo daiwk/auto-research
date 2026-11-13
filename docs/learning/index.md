@@ -21,7 +21,7 @@ hide:
 
 <!-- learning-topics:start -->
 
-6 个主题 · 31 个子主题 · 4469 个问题 / 1115 篇论文
+6 个主题 · 31 个子主题 · 4497 个问题 / 1122 篇论文
 
 <div class="ar-learning-topics">
 <article class="ar-learning-topic-tile">
@@ -64,11 +64,11 @@ hide:
 <article class="ar-learning-topic-tile">
 <h2><a href="paths/multimodal-models/">多模态</a></h2>
 <p>围绕三件事学习：对齐不同模态、分配视觉证据预算、预测状态与动作的后果。</p>
-<p class="ar-learning-topic-meta">3 个子主题 · 261 问 / 65 篇</p>
+<p class="ar-learning-topic-meta">3 个子主题 · 265 问 / 66 篇</p>
 <details><summary>展开子主题问题库</summary><ul>
 <li><a href="paths/multimodal-models/alignment-interfaces/">跨模态对齐：表征、连接器与监督</a><span>85 问<a class="ar-learning-deep-link" href="deep-dives/multimodal-models/alignment-interfaces/">精读对比</a></span></li>
 <li><a href="paths/multimodal-models/visual-evidence-budget/">视觉证据预算：选 Token、选帧与按需回看</a><span>72 问<a class="ar-learning-deep-link" href="deep-dives/multimodal-models/visual-evidence-budget/">精读对比</a></span></li>
-<li><a href="paths/multimodal-models/world-state-actions/">视觉世界建模：状态、生成与动作条件</a><span>104 问<a class="ar-learning-deep-link" href="deep-dives/multimodal-models/world-state-actions/">精读对比</a></span></li>
+<li><a href="paths/multimodal-models/world-state-actions/">世界建模：状态、生成与动作条件</a><span>108 问<a class="ar-learning-deep-link" href="deep-dives/multimodal-models/world-state-actions/">精读对比</a></span></li>
 </ul></details>
 </article>
 <article class="ar-learning-topic-tile">
@@ -87,12 +87,12 @@ hide:
 <article class="ar-learning-topic-tile">
 <h2><a href="paths/agent-research/">Agent</a></h2>
 <p>从下一步行动到完整执行流程：依次学习规划、记忆、工具协作、自进化、训练与独立评测。</p>
-<p class="ar-learning-topic-meta">6 个子主题 · 1137 问 / 284 篇</p>
+<p class="ar-learning-topic-meta">6 个子主题 · 1161 问 / 290 篇</p>
 <details><summary>展开子主题问题库</summary><ul>
-<li><a href="paths/agent-research/planning-and-search/">规划与搜索：下一步该做什么</a><span>68 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/planning-and-search/">精读对比</a></span></li>
+<li><a href="paths/agent-research/planning-and-search/">规划与搜索：下一步该做什么</a><span>76 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/planning-and-search/">精读对比</a></span></li>
 <li><a href="paths/agent-research/memory-and-skills/">记忆与技能：让经验可取回、可失效</a><span>240 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/memory-and-skills/">精读对比</a></span></li>
 <li><a href="paths/agent-research/tools-and-collaboration/">工具与协作执行：把计划变成可检查的动作</a><span>205 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/tools-and-collaboration/">精读对比</a></span></li>
-<li><a href="paths/agent-research/harness-and-self-improvement/">运行流程与自进化：改的是哪一层</a><span>220 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/harness-and-self-improvement/">精读对比</a></span></li>
+<li><a href="paths/agent-research/harness-and-self-improvement/">运行流程与自进化：改的是哪一层</a><span>236 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/harness-and-self-improvement/">精读对比</a></span></li>
 <li><a href="paths/agent-research/agent-policy-learning/">交互策略学习：把轨迹反馈变成更新</a><span>212 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/agent-policy-learning/">精读对比</a></span></li>
 <li><a href="paths/agent-research/evaluation-and-reliability/">评测与可靠性：如何知道真的做对了</a><span>192 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/evaluation-and-reliability/">精读对比</a></span></li>
 </ul></details>
@@ -108,14 +108,14 @@ hide:
 <!-- learning-recent:start -->
 
 <div class="ar-learning-recent"><ul>
-<li><a href="all/#qa-de5f2c73ae2a0bcb">BOPD 与持续的 reference-conditioned OPSD，教师条件有什么不同？</a><span>2026-11-12 · bopd</span></li>
-<li><a href="all/#qa-3c7620c9b2b9983f">本地 handoff 和 CUDA 检查通过，能否说完整 BOPD 训练已复现？</a><span>2026-11-12 · bopd</span></li>
-<li><a href="all/#qa-f665514d3bf7ec10">BOPD 的 Stage II 为什么不能继续训练 Stage I 学生？</a><span>2026-11-12 · bopd</span></li>
-<li><a href="all/#qa-8dcb5300d4c05f30">BOPD 的 FKL 应按所有 token 一起平均吗？</a><span>2026-11-12 · bopd</span></li>
-<li><a href="all/#qa-cd09edebc1e1ddc0">APMD 的 reference reset 是把学生权重重置回 base 吗？</a><span>2026-11-12 · apmd-reference-reset</span></li>
-<li><a href="all/#qa-700dd81dfa87a255">论文分析了 PPO/GRPO 家族，是否说明现有任意 GRPO 都不会 coverage collapse？</a><span>2026-11-12 · apmd-reference-reset</span></li>
-<li><a href="all/#qa-de200f81bc2dd846">为什么镜像目标上的 centered-MSE 为0，Kimi mean-baseline loss 却可能非0？</a><span>2026-11-12 · apmd-reference-reset</span></li>
-<li><a href="all/#qa-48c818f99500d1d9">本地为什么采用有限响应精确期望，却不宣称验证采样复杂度？</a><span>2026-11-12 · apmd-reference-reset</span></li>
+<li><a href="all/#qa-14562af5fd2ad2cf">ScientistTwo的想法在子集上被判为Good，为什么还不能算一次成功科研产物？</a><span>2026-11-13 · scientist-two</span></li>
+<li><a href="all/#qa-18fba17b4de22180">Fig.4最后一轮critic要求refine，为什么本地仍返回exhausted而不是返回修改后的candidate？</a><span>2026-11-13 · scientist-two</span></li>
+<li><a href="all/#qa-e7bfa4bb4017a5b0">ScientistTwo的消融和review循环能否替代ScientistOne的证据完整性审计？</a><span>2026-11-13 · scientist-two</span></li>
+<li><a href="all/#qa-e658d51865a6c4c4">ScientistTwo为什么给Idea Evolver传入失败历史，又加入没有试过的种子？</a><span>2026-11-13 · scientist-two</span></li>
+<li><a href="all/#qa-c4cf20a5f50b7edf">EnvHarness为什么修改环境交互，却要保留基础环境的verifier？</a><span>2026-11-13 · envharness</span></li>
+<li><a href="all/#qa-38f8c845ef16aba5">Stage为什么重放普通动作，并调用notify_replay_complete？</a><span>2026-11-13 · envharness</span></li>
+<li><a href="all/#qa-950a6e15f5a7a4bb">串行Chain里A完成了，什么时候不能启动B，也不能返回成功？</a><span>2026-11-13 · envharness</span></li>
+<li><a href="all/#qa-ec0de8774f4b1f0a">EnvHarness与Harness²都叫harness，改变的是同一层吗？</a><span>2026-11-13 · envharness</span></li>
 </ul></div>
 
 <!-- learning-recent:end -->

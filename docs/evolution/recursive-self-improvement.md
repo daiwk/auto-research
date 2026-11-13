@@ -28,7 +28,18 @@ flowchart LR
 
 以下按“已实现的局部机制”和“待复核候选”区分，不把外部论文直接标为本地复现。
 
-本次更新：2026-11-05。以下三篇均于 2026-11-04 公告，各自 v1 日期仍以论文详情为准。Meta² 是任务内编辑与跨任务指导的边界对照，Continual AutoResearch 是持续经验的评测协议；纳入专题不意味着三者都已实现完整 RSI。
+### 2026-11-13：自主研究与算法发现的历史补漏
+
+这些论文首发于 2025–2026 年，不是本次新增公告；[本轮交付与来源边界](../research-audits/nov13-history-repair/README.md)将局部组件和完整系统分开：
+
+- [ScientistTwo](../agent-research/2609.19644-scientist-two/README.md)以成功和失败实验历史继续生成想法，并严格比较后继版本；[MLE-STAR](../agent-research/2506.15692-mle-star/README.md)用真实消融定位代码块做两层细化。前者本地只有有界 CPU 控制，后者仅资料和成本审查；均未实现科研能力或统一 Evolve 集成。
+- [ERA](../agent-research/2509.06503-era-flat-puct/README.md)与[AlphaEvolve](../agent-research/2506.13131-alphaevolve/README.md)针对已执行程序的任务分数搜索。ERA 本地只做平铺 PUCT 算术；AlphaEvolve 未发布原运行系统，本轮不以自创进化档案冒充复现。二者完整科研／生产矩阵高成本不复现（审查 DONE）。
+- [DS-STAR](../agent-research/2509.21825-ds-star/README.md)的追加／回溯是**任务内规划修正**，不自动等于跨任务可继承 RSI。本地只验证外部语义判据驱动的控制流，完整商业 Agent 未运行，不虚构高成本训练。
+- [EnvHarness](../agent-research/2608.19880-envharness/README.md)让环境脚手架随策略弱点变化，是学习闭环的环境侧组件；本地包装器不含 EnvRigger 或策略学习，不能把可组合 reset/step 写成已自进化。
+
+### 先前更新：2026-11-05
+
+以下三篇均于 2026-11-04 公告，各自 v1 日期仍以论文详情为准。Meta² 是任务内编辑与跨任务指导的边界对照，Continual AutoResearch 是持续经验的评测协议；纳入专题不意味着三者都已实现完整 RSI。
 
 - [Meta²](../agent-research/2611.05139-meta-square/README.md)：冻结离线 Meta-Skill，在同一环境与轨迹的 checkpoint 上作有界 KEEP/EVOLVE，具体编辑只在当前任务生效，跨任务保留演化指导而非最终 harness。本地仅实现 CPU 状态生命周期与反馈隔离合同，没有 LLM 演化器或 Meta-Skill 学习；完整多模型/API 实验高成本不复现（审查 DONE）。Meta² 不是 Meta 公司论文。
 - [Continual AutoResearch](../agent-research/2611.05108-continual-autoresearch/README.md)：配对持续、重置会话和工作区，分别衡量首解、预算内 best-so-far 曲线与实际最终选择，避免把更快找到好候选写成最终效果提升。本地仅实现关闭运行后的 CPU 离线评分与配对协议，不执行自主研究，也不向被评 Agent 提供隐藏评分；完整多任务、多模型研究矩阵高成本不复现（审查 DONE）。

@@ -37,7 +37,9 @@
         "agent-research:rewoo",
         "agent-research:tree-of-thoughts",
         "agent-research:react",
-        "agent-research:bats"
+        "agent-research:bats",
+        "agent-research:ds-star",
+        "agent-research:era-flat-puct"
       ]
     },
     {
@@ -263,7 +265,11 @@
         "agent-research:envopt",
         "agent-research:fgse",
         "agent-research:pase",
-        "agent-research:agent-gym"
+        "agent-research:agent-gym",
+        "agent-research:scientist-two",
+        "agent-research:envharness",
+        "agent-research:mle-star",
+        "agent-research:alphaevolve"
       ]
     },
     {

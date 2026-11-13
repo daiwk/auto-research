@@ -164,16 +164,18 @@ def priority_organizations(candidate: dict) -> tuple[str, ...]:
         for field in ("source_url", "url", "repository_url"):
             try:
                 parsed = urlparse(str(source.get(field, "")))
-                host = (parsed.hostname or "").lower()
+                # Official research links also use their www presentation host;
+                # normalize only that prefix, never accept arbitrary subdomains.
+                host = (parsed.hostname or "").lower().removeprefix("www.")
             except ValueError:
                 continue
             if host in {"research.google", "deepmind.google", "research.google.com"}:
                 found.add("Google")
-            if host in {"ai.meta.com", "ai.facebook.com", "research.facebook.com", "research.meta.com"}:
+            if host in {"ai.meta.com", "ai.facebook.com", "research.facebook.com", "research.meta.com", "research.meta.ai"}:
                 found.add("Meta")
             if host in {"github.com", "www.github.com"}:
                 owner = parsed.path.strip("/").split("/", 1)[0].lower()
-                if owner in {"google", "google-research", "google-deepmind", "deepmind"}:
+                if owner in {"google", "google-research", "google-deepmind", "google-health", "deepmind"}:
                     found.add("Google")
                 if owner in {"facebook", "facebookresearch", "meta-llama", "meta-recsys"}:
                     found.add("Meta")

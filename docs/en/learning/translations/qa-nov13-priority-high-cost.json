@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:mle-star/retrieval-needs-validation": {
+      "source_sha256": "4aa314a2a34e49c66806291059ee5328d88272e786ca74ef1d0a9cab8835a8e0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does retrieving a newer model not justify replacing MLE-STAR's current solution?",
+        "answer": "Retrieval supplies descriptions and examples, not reliable gains on the current task. The paper builds executable candidates, trains and ranks them on validation data, and retains a merge only if it improves the solution. Search position or a SOTA label is not a selection metric.",
+        "example": "Teaching example: model A leads elsewhere but scores 0.88 on current validation versus 0.91 for the incumbent. Recency does not make it preferable; test scores do not enter selection."
+      }
+    },
+    "qa/agent-research:mle-star/nested-block-refinement": {
+      "source_sha256": "879911930dcff9389e068baad0ac064833da279383828a700e5177c4779cbd84",
+      "reviewed": true,
+      "fields": {
+        "question": "What do MLE-STAR's inner and outer loops change, and why preserve ablation feedback?",
+        "answer": "The outer loop executes ablations to locate an influential block not already targeted. The inner loop proposes plans for that block, substitutes each into the full solution, executes validation, and keeps the best. Prior ablations and targeted-block records encourage coverage rather than unrestricted whole-pipeline rewriting.",
+        "example": "Teaching example: ablations highlight imputation. Inner trials compare executable mean and group-median variants; the next outer iteration reassesses whether encoding now matters more. These branches are illustrative, not local results."
+      }
+    },
+    "qa/agent-research:mle-star/block-ablation-versus-budget-tree": {
+      "source_sha256": "54c9d1a6578bffc0c38b9cfc5b60be6041d59bedba5815b91e014547a7deb83a",
+      "reviewed": true,
+      "fields": {
+        "question": "How do MLE-STAR and MARS differ in search units and cost handling?",
+        "answer": "MLE-STAR uses executed ablations to select a block, followed by nested local refinement and ensemble search. MARS uses budget-aware MCTS over modular repository candidates and comparative code/result reflection. An influential block is not MARS's cost-penalized reward; different competition configurations do not support direct ranking.",
+        "example": "Teaching example: two changes gain 0.01 but take one minute versus one hour. MARS's cost term can change node order; MLE-STAR's described block-improvement condition does not contain that same budget reward."
+      }
+    },
+    "qa/agent-research:mle-star/generated-artifacts-not-controller": {
+      "source_sha256": "b915f5dc0fbc6cf1841950954187231837ce147b907f7b046ebf74e214b93f0e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does a released final solution not count as an implemented MLE-STAR agent?",
+        "answer": "A final script records a research product, not the complete retrieval, ablation selection, nested decisions, recovery, and ensemble-generation process. Executing it does not recover those capabilities. The original full matrix uses eight V100s and multi-hour runs, so this contribution supplies source/cost review without a local module, capability metrics, or Evolve operator.",
+        "example": "Teaching example: a released XGBoost training script can be inspected, but its presence does not establish that the local system autonomously searched, ablated, and selected it."
+      }
+    },
+    "qa/agent-research:alphaevolve/human-objective-machine-search": {
+      "source_sha256": "1ff0e5e2f16a74a60646814811aee794d2790f2d52a015c386eabb8d2a1f99db",
+      "reviewed": true,
+      "fields": {
+        "question": "What do humans fix when AlphaEvolve separates what to achieve from how to achieve it?",
+        "answer": "Humans supply the task, starting program, and automatic evaluator. Models and evolution propose code changes and search using execution feedback. This does not establish autonomous definition of all scientific goals or sufficiency of evaluators; missing checks can still reward the wrong behavior.",
+        "example": "Teaching example: an evaluator measures sorting speed without checking that outputs are sorted. Search cannot add a correctness obligation that was never encoded."
+      }
+    },
+    "qa/agent-research:alphaevolve/cascade-and-diversity": {
+      "source_sha256": "8ded4e49742a7946212b10be0557f3f9616f2703d2e78adc8df132a7aead3de2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are evaluation cascades and evolutionary archives not both reducible to keeping the top score?",
+        "answer": "A cascade decides whether a candidate warrants more expensive testing. The database decides which measured programs and feedback become future proposal material, preserving multidimensional quality and diversity. Keeping only the single best score loses structurally different ideas; the paper does not disclose one complete archive/migration implementation.",
+        "example": "Teaching example: candidate A already fails a small correctness check and can stop early. Candidate B is correct but not fastest, yet its distinct structure may remain useful proposal context. These are evaluation admission and material retention."
+      }
+    },
+    "qa/agent-research:alphaevolve/optimization-versus-evidence-audit": {
+      "source_sha256": "46aeb1879ec233d3d4a99316450b130dff89b28d84e1958e9c3bb9f83103e20b",
+      "reviewed": true,
+      "fields": {
+        "question": "Can AlphaEvolve's automatic evaluation substitute for ScientistOne's Chain-of-Evidence audit?",
+        "answer": "No. Task evaluation supplies program-quality and search signals. ScientistOne also links paper claims to code, evaluators, citations, and method implementation. A high task score does not establish valid citations or faithful prose; a complete evidence chain does not imply an optimal algorithm.",
+        "example": "Teaching example: a matrix-multiplication construction passes its verifier, but that does not validate every novelty claim or citation in its paper. A well-grounded paper can also rediscover an existing construction."
+      }
+    },
+    "qa/agent-research:alphaevolve/verification-is-not-discovery": {
+      "source_sha256": "70625c09075b1514440c4e22f0f3c4ac43e10a1a62ffd3928accc4ce106147bf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does running the alphaevolve_results verification notebook not run AlphaEvolve?",
+        "answer": "The notebook checks published constructions without prompt sampling, Flash/Pro proposals, distributed evaluation, or the evolutionary database that discovered them. Its official README explicitly excludes runnable AlphaEvolve code. This repository adds no such modules and does not replace them with community controllers or toy archives; full experiments remain cost-deferred.",
+        "example": "Teaching example: validating a published complex 4-by-4 rank-48 tensor decomposition establishes that object's checked property, not rediscovery or a rank-48 result over every field."
+      }
+    }
+  }
+}

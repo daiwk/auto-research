@@ -50,12 +50,12 @@
       }
     },
     "theme/multimodal-models/world-state-actions": {
-      "source_sha256": "482026d6ae813449abf05a0e0a55e937b74022290d7de4265449d4555d2a84f3",
+      "source_sha256": "471ee36c9ed071c209d26fcc32708ef848fba4a738d55c6035a3ecbfb487c949",
       "reviewed": true,
       "fields": {
-        "title": "Visual world models: state, generation, and action conditioning",
-        "question": "Does the model only recognize a scene, or can it predict how an action changes the state?",
-        "takeaway": "Learning prediction or control representations requires observations, actions, and future states together. LeWAM jointly learns latent future prediction and action flow matching so representation and policy shape each other. Planning uses latent dynamics to evaluate actions. WOVEN organizes generated video transitions as supervision controlled by scene, action, and reasoning type for consequences, causes, and counterfactuals. SWIM asks which state coordinates should contribute to latent distance. Offline inverse dynamics gates only future displacement; once frozen, sqrt(g) calibrates distances between same-frame pairs. Planning does not read future states.",
+        "title": "World models: state, generation, and action conditioning",
+        "question": "Does the model only describe observations, or can it predict how an action changes subsequent states?",
+        "takeaway": "Learning prediction or control representations requires observations, actions, and future states together. LeWAM jointly learns latent future prediction and action flow matching so representation and policy shape each other. Planning uses latent dynamics to evaluate actions. WOVEN organizes generated video transitions as supervision controlled by scene, action, and reasoning type for consequences, causes, and counterfactuals. SWIM asks which state coordinates should contribute to latent distance. Offline inverse dynamics gates only future displacement; once frozen, sqrt(g) calibrates distances between same-frame pairs. Planning does not read future states. SensorWM extends these distinctions to wearable sequences: conditional forecasts, candidate ranking, and causal health benefits still require different evidence.",
         "example": "Pushing a cup left and right on the same table should lead to different outcomes. Recognizing a cup does not control a robot. Latent prediction can avoid pixel reconstruction, but test whether actions matter, whether multistep rollouts drift, and whether selected actions reach goals in closed loop.",
         "pitfall": "Realistic videos, low one-step error, or high training-set QA scores do not prove effective planning. Separate source scenes and trajectories by group and prevent counterfactuals from leaking future results. Local LeWAM is a non-held-out closed-loop diagnostic; WOVEN is a small experiment on public training data. Neither establishes the paper's full generalization or robotics claims.",
         "reading_order": "Start with LeWAM's joint latent and action objective to see how prediction feeds control. Then read WOVEN on visual transitions and controlled supervision. Distinguish representation learning, synthetic data, question answering, and closed-loop planning. Follow up with visual geometry, video memory, or embodied actions."

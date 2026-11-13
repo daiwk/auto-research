@@ -1,8 +1,20 @@
 # Paper discovery and coverage audit
 
-<!-- source-sha256: 7398f52ad3e5f29b358d4a2a0458b797e85acbf82e4aa9b2a85cfeb1cc535262 -->
+<!-- source-sha256: 9884ab3ad5725b5098b40f5d18652f0055058774c371d485aa0a6d75e710b345 -->
 
 [简体中文](../paper-discovery-audit.md)
+
+## November 13: ScientistTwo and historical institutional reconciliation
+
+[Six historical backfills](research-audits/nov13-history-repair/README.md) comprise CPU control components for ScientistTwo, DS-STAR, ERA and EnvHarness, plus review-only high-cost dispositions for MLE-STAR and AlphaEvolve. Full campaigns are explicitly not reproduced. Three-seed component execution supports L1 mechanisms only, not scientific or Agent capability comparisons.
+
+The separate [historical reconciliation report](research-audits/nov13-history-repair/history-reconciliation.md) preserves exact identities and capture witnesses before matching the canonical manifest and substantive review terminals. Google/Meta identities remain visible even when the recent delta is empty or an earlier abstract was labeled P2. Ordinary P2 records are not automatically reopened; explicit high-cost and source-archive terminals do not enter retries. Bounded inventories from configured Google/DeepMind/Meta pages are distinct from recent discovery. Pagination and access failures remain explicit; configured page budgets do not prove exhaustive institutional history. The watermark remains **November 9, 2026**.
+
+## November 12: Official-source recheck and one Google backfill
+
+[Sources and boundaries](research-audits/nov12-refresh/README.md): the eight official arXiv announcements are byte-identical to the previous captures, so no new announcement was established. An official Google source reopened primary-method review of the November 5 SensorWM paper; the old P2 selection record is not presented as a method review. Only CPU ranking arithmetic from Eqs.55–56 is delivered, with three-seed mechanism checks. The complete private world model and medical evaluations are **high cost, not reproduced, review DONE**. No new CUDA path or model-capability comparison is claimed.
+
+Priority protection now recognizes `www.research.google` and `research.meta.ai`, while lookalike-domain negatives remain. Official provenance still requires original-source review; it does not by itself prove affiliation, code release, or A/B evidence. Bilingual paper pages, the original figure, four-level Q&A, and the topic deep dive ship together. The watermark remains **November 9, 2026**, without an institution-wide or whole-window census claim.
 
 ## November 12 bounded backfill: eight mechanism kernels, unchanged watermark
 
