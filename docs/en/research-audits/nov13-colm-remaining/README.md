@@ -1,4 +1,4 @@
-<!-- source-sha256: 4c886f50855975e0f983bd52a5c78544a63480b791bdcaf8177be0afd1a4ceb0 -->
+<!-- source-sha256: f3f148b2a5ed2c7a2db65bdbb73cb067b204f96de8d8461ed187178c992d2aaf -->
 # November 13: closing 24 historical COLM leads
 
 [简体中文](../../../research-audits/nov13-colm-remaining/README.md)
@@ -47,4 +47,4 @@ The [current reconciliation](../../../research-audits/nov13-colm-remaining/histo
 
 The [preceding snapshot](../../../research-audits/nov13-history-repair/historical-source-reconciliation.json) remains unchanged and honestly shows the earlier 24 pending reviews. No new date-window scan occurred; the review watermark remains **2026-11-09**.
 
-Requested PR #250 was already merged when this work began and cannot receive additional commits. Local completion and publication target are recorded separately; no claim is made that these commits were appended to a merged PR.
+Requested PR #250 was already merged when this work began and cannot receive additional commits. The user then authorized one unified follow-up PR covering all 24 identities and linking #250. It targets the same base, `codex/nov06-priority-papers`, so existing #244 work not yet merged into main is not duplicated in this review diff. This does not authorize merging or deployment.

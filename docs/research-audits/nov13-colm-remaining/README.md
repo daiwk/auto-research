@@ -46,4 +46,4 @@ PYTHONPATH=src python scripts/validate_gpu_evidence.py
 
 上轮[28 身份快照](../nov13-history-repair/historical-source-reconciliation.json)保持原样，展示当时 24 条待核的真实状态，不重写为“早已审过”。本轮没有做新的日期窗口扫描，审查水位仍为 **2026-11-09**。
 
-用户指定的 #250 在本轮开始时已合并，无法继续追加提交。本轮本地成果与 PR 发布目标分开记录；不会声称已把新提交追加到一个已合并 PR。
+用户指定的 #250 在本轮开始时已合并，无法继续追加提交。用户随后确认将这24条全部成果放进一个关联 #250 的统一后续 PR，目标仍为 #250 原目标分支 `codex/nov06-priority-papers`，避免把未合入 main 的既有 #244 内容重复带入本轮差异。此处不执行合并或部署。

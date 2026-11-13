@@ -25,5 +25,5 @@
     "git_diff_check": "passed"
   },
   "cleanup": {"temporary_site_removed_kib": 945248, "source_transfer_bundles_removed": true, "regenerable_first_page_previews_removed": true, "round_specific_remote_temp_directory_removed": true, "original_sources_and_raw_or_superseded_evidence_preserved": true, "unrelated_user_files_removed": false},
-  "publication": {"requested_pr": 250, "observed_state": "MERGED", "new_work_pushed": false, "new_pr_created": false, "external_ci_for_new_work": "not started; publication target awaits user choice", "merge_or_deploy_performed": false}
+  "publication": {"snapshot": "local validation before publication", "requested_pr": 250, "observed_state": "MERGED", "new_work_pushed_at_validation": false, "new_pr_created_at_validation": false, "external_ci_at_validation": "not started", "followup_publication_authorized": true, "followup_base_branch": "codex/nov06-priority-papers", "followup_head_branch": "codex/nov13-colm-history-closeout", "merge_or_deploy_performed": false}
 }

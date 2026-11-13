@@ -20,5 +20,8 @@
   "full_capability_reproduced": false,
   "merge_request_requested": 250,
   "merge_request_state_observed": "MERGED",
-  "publication_target": "awaiting_user_choice_for_one_followup_PR_or_local_only"
+  "publication_target": "single_followup_PR_linked_to_250",
+  "followup_publication_authorized": true,
+  "publication_base_branch": "codex/nov06-priority-papers",
+  "publication_head_branch": "codex/nov13-colm-history-closeout"
 }
