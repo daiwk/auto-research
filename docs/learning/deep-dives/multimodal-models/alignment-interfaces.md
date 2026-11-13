@@ -7,7 +7,7 @@ hide:
 
 # 多模态对齐到底对齐什么：向量、视觉接口还是证据依赖
 
-[多模态](../index.md) · 更新 2026-11-07 · 21 篇主题资料 / 7 篇重点对照
+[多模态](../index.md) · 更新 2026-11-13 · 23 篇主题资料 / 9 篇重点对照
 
 CLIP与EmbeddingGemma 2产出可比较向量，BLIP-2与LLaVA连接视觉到条件生成，CV-OPD训练证据依赖，UMRM给回答评分。它们的输出合同和监督对象不同，不是同一条从小到大的能力排行榜。
 
@@ -32,6 +32,8 @@ CLIP与EmbeddingGemma 2产出可比较向量，BLIP-2与LLaVA连接视觉到条�
 | [CV-OPD: Contrastive Vision On-policy Distillation](../../../reproductions/2610.13264-cv-opd/README.md) · [原始来源](https://arxiv.org/abs/2610.13264)<br>章节：背景与主要改动、核心公式、本地结果与边界、2026-10-14 A100 实测 | 学生读全图，正负教师只改crop且共享学生前缀，用JSD和CDL约束正确视觉依赖。 | 负crop构造、样本门与token门都影响监督；本地有真实VLM L1更新及A100诊断，非完整视觉能力复现。 |
 | [Unsupervised Multimodal Reward Modeling](../../../reproductions/2610.12707-umrm/README.md) · [原始来源](https://arxiv.org/abs/2610.12707)<br>章节：背景与主要改动、核心公式、数据协议与verifier边界、本地结果与验证状态 | 冻结VLM中间层，只池化response并训练无bias奖励头，以caption扰动构造偏好。 | 无人工偏好不等于全流程无标签；development选层和bootstrap verifier仍使用监督，局部奖励准度不保证真实policy选择效用。 |
 | [GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling](../../../multimodal-models/2611.01143-gslm2/README.md) · [原始来源](https://arxiv.org/abs/2611.01143)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | SpidR 2.0 从多个编码层取得离散语音流；联合保留变化帧，时序主干读取对齐元组，判别采用等权逐流的转移对数概率。 | 多流比各自去重保留更多时间位置；转移评分不代表生成头、跨模态检索或翻译质量。本地只核验帧对齐及数值聚合，没有编码器、语音、模型或基准运行。 |
+| [AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs&#x27; Contextual and Cultural Knowledge and Thinking](../../../multimodal-models/2601.17645-avmeme-exam/README.md) · [原始来源](https://arxiv.org/abs/2601.17645)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界与完整实验 | 用多文化音视频选择题区分声音情境知识与文本、视频捷径；本地只实现过滤、重排、私有答案映射和分组计分。 | 文化多选正确率与MMEB-V3嵌入检索不是同一种能力；无媒体和模型时，协议测试不能给出文化理解结论。 |
+| [MMEB-V3: Measuring the Performance Gaps of Omni-Modality Embedding Models](../../../multimodal-models/2604.23321-mmeb-v3/README.md) · [原始来源](https://arxiv.org/abs/2604.23321)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界与完整实验 | 以190任务评价统一嵌入，并用独立OmniSET的12方向混合池揭示同语义表示的模态偏向。 | 相比MVEB的视频与音频预算控制，MMEB-V3覆盖更广的六类任务。Hit@1/NDCG、完整候选池和任务等权必须分别守住，纯排序核不是完整benchmark。 |
 
 </div>
 
@@ -60,6 +62,18 @@ EmbeddingGemma 2新正式论文对应已有10月6日模型，不再增加重复�
 EmbeddingGemma 2 将不同模态映到可比较的固定维向量，MRL 截短的是向量宽度；GSLM2 从同一语音中提取多个时间对齐的离散流，联合去重改变的是序列长度，单流转移头在共享历史条件下给口语候选打分。NaijaS2ST 的目标则是跨语言语音生成，需要翻译参考与 ASR-COMET 协议。向量近邻、同语种成对判别和跨语言生成不能用一个准确率替代；当前 GSLM2 本地切片只验证给定单元和概率的变换，不宣称真实语音能力。
 
 对照来源：[embedding-gemma2](../../../multimodal-models/embeddinggemma2/README.md) · [gslm2](../../../multimodal-models/2611.01143-gslm2/README.md) · [naijas2st](../../../multimodal-models/2604.16287-naijas2st/README.md)
+
+### 接口对齐不等于文化理解：先辨认被测输出与捷径
+
+AVMeme Exam要求模型把声音置于多语言、多文化情境中选择答案，并以text_cheat/visual_cheat处理非目标捷径。MMEB-V3则从外部嵌入排序评价语义相关性、输出模态及任务覆盖。两者都需要干净的评测边界，但分母、候选空间和输出不同。匿名上传字段与私有答案映射只约束协议；若问题文字、文件权限或模型预训练已泄漏，L0字段测试不能排除污染，也不能证明文化判断可靠。
+
+对照来源：[avmeme-exam](../../../multimodal-models/2601.17645-avmeme-exam/README.md) · [mmeb-v3](../../../multimodal-models/2604.23321-mmeb-v3/README.md)
+
+### 语义对齐与模态遵循是两个验收轴
+
+MMEB-V3的OmniSET把相同语义的T/I/V/A留在共享候选池，连查询本身也作为干扰项，要求语义和目标模态同时命中。若先按目标模态过滤，会删掉本来要暴露的模态坍缩。MVEB则强调视频任务、八方向检索及模型适配的帧/音频预算；协议不同，不能互换总分。两者完整矩阵都高成本，本轮MMEB-V3仅核计分，而MVEB保留资料收录，未把泛化聚合器包装成两套完整接口。
+
+对照来源：[mmeb-v3](../../../multimodal-models/2604.23321-mmeb-v3/README.md) · [mveb](../../../multimodal-models/2606.14958-mveb/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -115,9 +129,37 @@ EmbeddingGemma 2 将不同模态映到可比较的固定维向量，MRL 截短�
 
     对照来源：[embedding-gemma2](../../../multimodal-models/embeddinggemma2/README.md) · [gslm2](../../../multimodal-models/2611.01143-gslm2/README.md) · [naijas2st](../../../multimodal-models/2604.16287-naijas2st/README.md)
 
+### AVMeme的主集过滤和MMEB-V3的混合池都通过检查，能否推出统一模型的多模态能力提高？ {#cross-cross-cultural-answer-versus-retrieval-interface}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。检查通过只说明样本和候选协议满足声明；还需真实模型、固定合法数据、覆盖完整的任务指标与独立比较。文化多选与嵌入检索应分别报告，不能用协议成功或固定夹具的1作能力提升。
+
+    **教学例子：** 教学例：固定返回A的回调能通过不泄漏字段检查，但并不听音频；手写排序也可命中正确模态，却不是编码器预测。
+
+    对照来源：[avmeme-exam](../../../multimodal-models/2601.17645-avmeme-exam/README.md) · [mmeb-v3](../../../multimodal-models/2604.23321-mmeb-v3/README.md)
+
+### 为什么给OmniSET先筛音频候选，即使提高Hit@1也不是公平优化？ {#cross-cross-omniset-prefilter-hides-failure}
+
+??? note "展开答案与例子"
+
+    **答案：** 它改变了被测问题，提前替模型满足输出模态要求，隐藏模型偏向查询自身或其他模态的失败。12方向必须使用同一混合池；MVEB的输入预算控制也不能代替这个候选协议。
+
+    **教学例子：** 教学例：图像到音频时模型总把原图排第一，预筛音频后看似成功，但原始指令遵循失败已被删掉。
+
+    对照来源：[mmeb-v3](../../../multimodal-models/2604.23321-mmeb-v3/README.md) · [mveb](../../../multimodal-models/2606.14958-mveb/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-13** · 补MMEB-V3共享混合池、任务等权和显式NDCG gain，联系MVEB预算协议；只验CPU计分，不报告编码器能力。
+
+涉及：[mmeb-v3](../../../multimodal-models/2604.23321-mmeb-v3/README.md) · [mveb](../../../multimodal-models/2606.14958-mveb/README.md)
+
+**2026-11-13** · 补入Google/Meta合作的历史评测论文，区分文化问答、嵌入排序与L0协议；完整媒体/模型矩阵高成本不复现。
+
+涉及：[avmeme-exam](../../../multimodal-models/2601.17645-avmeme-exam/README.md) · [mmeb-v3](../../../multimodal-models/2604.23321-mmeb-v3/README.md)
 
 **2026-11-07** · 补收 Meta GSLM2，与 EmbeddingGemma 2、NaijaS2ST 区分统一向量、对齐离散流和跨语言生成；核验变化并集、逐流等权与高成本复现边界。
 
@@ -131,7 +173,7 @@ EmbeddingGemma 2 将不同模态映到可比较的固定维向量，MRL 截短�
 
 覆盖 20 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 21 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 23 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -156,6 +198,8 @@ EmbeddingGemma 2 将不同模态映到可比较的固定维向量，MRL 截短�
 - [SmolVLM: Redefining small and efficient multimodal models](../../../reproductions/2504.05299-smolvlm/README.md)
 - [Unsupervised Multimodal Reward Modeling](../../../reproductions/2610.12707-umrm/README.md)
 - [WeMM-Embedding: WeChat Multi-Modal Embedding Technical Report](../../../reproductions/2608.24053-wemm-embedding/README.md)
+- [AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs&#x27; Contextual and Cultural Knowledge and Thinking](../../../multimodal-models/2601.17645-avmeme-exam/README.md)
+- [MMEB-V3: Measuring the Performance Gaps of Omni-Modality Embedding Models](../../../multimodal-models/2604.23321-mmeb-v3/README.md)
 
 </details>
 

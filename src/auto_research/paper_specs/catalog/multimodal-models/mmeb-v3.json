@@ -1,0 +1,42 @@
+{
+  "title": "MMEB-V3: Measuring the Performance Gaps of Omni-Modality Embedding Models",
+  "first_author": "Haohang Huang",
+  "first_author_affiliation": "Eastern Institute of Technology, Ningbo",
+  "published_at": "2026-04-25T14:15:05Z",
+  "code": "https://github.com/TIGER-AI-Lab/VLM2Vec/tree/olm2vec",
+  "code_status": "作者公开olm2vec分支；固定提交643150de53fea9133e9d646872228feace906498核对metrics.py，未运行完整190任务矩阵。",
+  "summary": "MMEB-V3把统一嵌入评测扩展至190任务，并以OmniSET分离语义匹配和输出模态遵循。本地实现计分与混合候选池诊断合同，不提供真实编码器或完整benchmark成绩。",
+  "domain": "multimodal-models",
+  "key": "mmeb-v3",
+  "paper_url": "https://arxiv.org/abs/2604.23321",
+  "reviewed_version": "v1",
+  "reviewed_arxiv_id": "2604.23321v1",
+  "reviewed_version_url": "https://arxiv.org/html/2604.23321v1",
+  "detail_path": "multimodal-models/2604.23321-mmeb-v3/README.md",
+  "topic": [
+    "跨模态评测与检索",
+    "全模态嵌入与模态遵循"
+  ],
+  "published": "2026-04-25",
+  "adapter": null,
+  "priority": "P1",
+  "implementation_status": "evaluation_protocol_interface",
+  "local_operator": "auto_research.multimodal.mmeb_v3.score_task",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.multimodal.mmeb_v3 import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l0_interface",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "fidelity_note": "精确区分Hit@1/NDCG@5与任务等权聚合，显式选择线性/指数gain；OmniSET要求12方向同一混合池、保留query干扰项、语义与模态同时正确且不计入排行榜。输入排序外置，无编码器或官方数据物化。",
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2604.23321v1",
+    "available_resource": "单张A100/A30或Mac",
+    "basis": "190任务、多种2B–8B模型、多模态数据物化和部分百万级候选池；OmniSET还依赖视频/音频生成。只核CPU排序算术，不下载模型、媒体或调用生成API。"
+  }
+}

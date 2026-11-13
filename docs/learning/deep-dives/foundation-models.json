@@ -126,6 +126,17 @@
             "数据协议与代码映射",
             "结果与复现边界"
           ]
+        },
+        {
+          "paper": "foundation-models:ecg-rag",
+          "position": "设备端RAG既要控制文档索引磁盘占用，也要限制生成时的上下文/KV开销。ECG不是简单把检索器输出拼进prompt，而是只存一份多向量检索表示，再经投影转成同一decoder可消费的压缩上下文，避免独立检索向量和压缩向量重复存储。",
+          "tradeoff": "不是。ECG压缩文档为共享语义向量并生成；ADIndex在模型注意力内部共享候选库，再逐query精排并补新token。外部文档表示压缩与因果KV索引的可见性、精度和成本单位不同。",
+          "sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ]
         }
       ],
       "analysis": [
@@ -187,6 +198,14 @@
           "papers": [
             "foundation-models:adindex",
             "foundation-models:openattention"
+          ]
+        },
+        {
+          "title": "ECG：检索和上下文压缩共享一套表示：先区分干预对象和可用证据",
+          "body": "不是。ECG压缩文档为共享语义向量并生成；ADIndex在模型注意力内部共享候选库，再逐query精排并补新token。外部文档表示压缩与因果KV索引的可见性、精度和成本单位不同。 `SharedRepresentation` 真正让compression依赖stored E_ret；`joint_loss` 固定teacher logits/relevance，不让teacher获得梯度，保留α与温度梯度。FKL按答案token求和再按题平均；只有显式hard negatives进入margin，正例不能混入负例mask。gate的大正bias原文无确数，本地5是明确初始化约定。未带pretrained decoder、索引、特殊token注入或完整训练管道。",
+          "papers": [
+            "foundation-models:ecg-rag",
+            "foundation-models:adindex"
           ]
         }
       ],
@@ -272,9 +291,19 @@
             "foundation-models:adindex",
             "foundation-models:openattention"
           ]
+        },
+        {
+          "id": "nov13-colm-ecg-rag",
+          "question": "它与ADIndex都减少读取成本，是否是同一稀疏检索？",
+          "answer": "不是。ECG压缩文档为共享语义向量并生成；ADIndex在模型注意力内部共享候选库，再逐query精排并补新token。外部文档表示压缩与因果KV索引的可见性、精度和成本单位不同。",
+          "example": "ECG少存一套文档向量，不等于ADIndex少扫描历史key；二者的召回损失也不能同口径相加。",
+          "papers": [
+            "foundation-models:ecg-rag",
+            "foundation-models:adindex"
+          ]
         }
       ],
-      "updated": "2026-11-11",
+      "updated": "2026-11-13",
       "reviewed_papers": [
         "foundation-models:alibi",
         "foundation-models:autonomy-heads",
@@ -313,7 +342,8 @@
         "foundation-models:semantic-block-sparse-attention",
         "foundation-models:anchor-kv",
         "foundation-models:convpe",
-        "foundation-models:adindex"
+        "foundation-models:adindex",
+        "foundation-models:ecg-rag"
       ],
       "updates": [
         {
@@ -442,6 +472,18 @@
           "source_revisions": {
             "foundation-models:adindex": "40695a1f88a78659747bd168ea114fd40ca8ff6bf280f69df9177eb61fea57f5",
             "foundation-models:openattention": "ba91161b6e4f8689b0678bc76987ed0925d2d25ccb86f860f62466ee597cff6b"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "foundation-models:ecg-rag",
+            "foundation-models:adindex"
+          ],
+          "summary": "补入固定Google COLM历史来源论文及L1组件，比较核心定义与证据边界；完整实验明确不复现，不把本地诊断当模型能力或Evolve改进。",
+          "source_revisions": {
+            "foundation-models:ecg-rag": "2d522783223ba0b570c26df2de796e7731ee037643b31cc39a0543368a720c7f",
+            "foundation-models:adindex": "40695a1f88a78659747bd168ea114fd40ca8ff6bf280f69df9177eb61fea57f5"
           }
         }
       ]
@@ -760,6 +802,28 @@
             "数据协议与代码映射",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "foundation-models:lidas",
+          "position": "深层 Transformer 后半段可能对最终预测贡献很小。论文比较从浅到深逐步生长与固定深度预训练，并提出 LIDAS：以层而不是固定块的中点选择复制区域，使偶数块时的初始化区别于 MIDAS。",
+          "tradeoff": "LIDAS改变层数、初始化和优化器状态继承；随机舍入改变FP32主权重进入低精度参数时的量化分布。两者的控制变量、预算和误差来源不同，需分别验证，再做同预算组合实验。",
+          "sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ]
+        },
+        {
+          "paper": "foundation-models:continuousbench",
+          "position": "若benchmark已经被基座模型做得很好，合成数据是否真正传递新知识就难以区分。ContinuousBench定期生成或整理未见知识语料及相应QA，统一训练/evaluator设置，并与未经该语料训练的同一基座比较；关注高重复公共事实的utility，不要求DP模型记住单条私有记录。",
+          "tradeoff": "不说明。gain评估合成数据utility，ε/δ隐私来自明确DP机制和会计；不应混淆高重复事实可学与单条私有记录可记忆。本地没有DP训练/会计，也没有复现News的LLMjudge。",
+          "sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ]
         }
       ],
       "analysis": [
@@ -795,6 +859,22 @@
           "papers": [
             "foundation-models:stochastic-rounding",
             "foundation-models:eco-optimizer"
+          ]
+        },
+        {
+          "title": "LIDAS：按中间层生长 Transformer 并继承优化器状态：先区分干预对象和可用证据",
+          "body": "LIDAS改变层数、初始化和优化器状态继承；随机舍入改变FP32主权重进入低精度参数时的量化分布。两者的控制变量、预算和误差来源不同，需分别验证，再做同预算组合实验。 `grow_layers` 对实际 `nn.ModuleList` 和 AdamW 状态执行变换，保留列表外的embedding/head；不自动改任意模型的配置或位置索引。拒绝跨层绑权重，避免悄悄破坏权重共享语义。`prop1_schedule` 保留总预算；整数化使用明确的最大余数约定。负控覆盖AMSGrad所有状态不alias、scheduler不重启、复制层确有梯度和参数变化。",
+          "papers": [
+            "foundation-models:lidas",
+            "foundation-models:stochastic-rounding"
+          ]
+        },
+        {
+          "title": "ContinuousBench：衡量合成文本带来的新能力而非旧题记忆：先区分干预对象和可用证据",
+          "body": "不说明。gain评估合成数据utility，ε/δ隐私来自明确DP机制和会计；不应混淆高重复事实可学与单条私有记录可记忆。本地没有DP训练/会计，也没有复现News的LLMjudge。 `score_geminon` 独立实现固定作者代码的清洗/匹配语义；`capability_gain`要求两臂题目ID、问题、gold与release revision完全一致，基线必须显式给出；`select_validation_checkpoint`拒绝test行。不得把contains与exact混为一谈：Flying and Normal可覆盖Normal and Flying的两类型，但不是相同字符串。无模型调用、HF大下载、DP-SGD或News自动judge。",
+          "papers": [
+            "foundation-models:continuousbench",
+            "foundation-models:data-orchestra"
           ]
         }
       ],
@@ -849,9 +929,29 @@
             "foundation-models:stochastic-rounding",
             "foundation-models:eco-optimizer"
           ]
+        },
+        {
+          "id": "nov13-colm-lidas",
+          "question": "LIDAS与随机舍入都影响训练，为什么收益不能混算？",
+          "answer": "LIDAS改变层数、初始化和优化器状态继承；随机舍入改变FP32主权重进入低精度参数时的量化分布。两者的控制变量、预算和误差来源不同，需分别验证，再做同预算组合实验。",
+          "example": "层生长保持Adam moments；SR保持量化条件期望。两项都通过L1，不等于组合模型会更快达到同精度。",
+          "papers": [
+            "foundation-models:lidas",
+            "foundation-models:stochastic-rounding"
+          ]
+        },
+        {
+          "id": "nov13-colm-continuousbench",
+          "question": "有更高capability gain就说明DP更安全吗？",
+          "answer": "不说明。gain评估合成数据utility，ε/δ隐私来自明确DP机制和会计；不应混淆高重复事实可学与单条私有记录可记忆。本地没有DP训练/会计，也没有复现News的LLMjudge。",
+          "example": "一个非DP数据生成器可有很高QA准确率，仍不满足任何声称的隐私预算。",
+          "papers": [
+            "foundation-models:continuousbench",
+            "foundation-models:data-orchestra"
+          ]
         }
       ],
-      "updated": "2026-11-11",
+      "updated": "2026-11-13",
       "reviewed_papers": [
         "foundation-models:adamw4bit",
         "foundation-models:af-muon",
@@ -883,7 +983,9 @@
         "foundation-models:tess",
         "foundation-models:proland",
         "foundation-models:gavagai",
-        "foundation-models:stochastic-rounding"
+        "foundation-models:stochastic-rounding",
+        "foundation-models:lidas",
+        "foundation-models:continuousbench"
       ],
       "updates": [
         {
@@ -972,6 +1074,30 @@
           "source_revisions": {
             "foundation-models:stochastic-rounding": "2d38215ff494778a4ddd9cf33755f3e69edf0422d2af49ca3b99e521070b44c3",
             "foundation-models:eco-optimizer": "a7da5c72f5f8ac77a1928d9db59068a9e03727f8a8c2bd75d8fea56df3a36994"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "foundation-models:lidas",
+            "foundation-models:stochastic-rounding"
+          ],
+          "summary": "补入固定Google COLM历史来源论文及L1组件，比较核心定义与证据边界；完整实验明确不复现，不把本地诊断当模型能力或Evolve改进。",
+          "source_revisions": {
+            "foundation-models:lidas": "be77977eb086e191256ceb14fe78a5c1fb64879792d39290cd55be41bf6bf27d",
+            "foundation-models:stochastic-rounding": "2d38215ff494778a4ddd9cf33755f3e69edf0422d2af49ca3b99e521070b44c3"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "foundation-models:continuousbench",
+            "foundation-models:data-orchestra"
+          ],
+          "summary": "补入固定Google COLM历史来源论文及L1组件，比较核心定义与证据边界；完整实验明确不复现，不把本地诊断当模型能力或Evolve改进。",
+          "source_revisions": {
+            "foundation-models:continuousbench": "fa56a473668f84deaab923893e1c5a9fc33a84364d304290740b05d2ee2ae759",
+            "foundation-models:data-orchestra": "b9e3c1068982f4cb1526077c71b64e6baa645c98ad36eeae7a0060badc3456fe"
           }
         }
       ]
@@ -1768,6 +1894,89 @@
             "论文工程与线上证据",
             "资源与复现边界"
           ]
+        },
+        {
+          "paper": "foundation-models:rosetta-unification",
+          "position": "同一事实以不同语言出现时，模型可能把它们存成互不相通的表征。作者在受控合成知识图谱上从零训练小型 Transformer，分别改变平行事实比例、语言频率差异和语言可提取性，发现同语言准确率接近满分并不代表跨语言迁移良好。",
+          "tradeoff": "Rosetta观察/干预预训练语言分布及表示统一度；Thinking to Recall分析推理时自生成事实及其正确性。前者的相似度不是事实真值judge，后者的oracle条件准确率也不证明跨语言表示统一。",
+          "sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ]
+        },
+        {
+          "paper": "foundation-models:thinking-to-recall",
+          "position": "推理不仅可能分解复杂任务，也可能通过额外计算和相关事实的自检索帮助单跳知识召回。论文控制同一 hybrid 模型的 reasoning ON/OFF，区分计算缓冲与 factual priming，同时发现中间事实幻觉会连带增加最终答案错误。",
+          "tradeoff": "本地实现不能；它使用事后外部标注的事实真值模拟条件期望，只是离线oracle分析。要部署还需要不看gold的可靠事实验证器，并计入调用成本和误判；这不是由汇总公式自动得到的。",
+          "sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ]
+        },
+        {
+          "paper": "foundation-models:latent-generalization",
+          "position": "模型记住 A>B 并不必然推出 B<A，记住多个关系也不保证能答出未显式训练的组合。论文把知识获取、会思考的轨迹引导、正确性RL分开，研究在一个结构训练出的推理能力能否迁移到仅做知识SFT的另一个结构。",
+          "tradeoff": "前者用受控知识获取和结构划分考察未显式答案的泛化；后者研究已有参数事实如何因计算和factual priming被读出。两者都不能把gold-conditioned teacher或事后标注暴露给最终actor。",
+          "sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ]
+        },
+        {
+          "paper": "foundation-models:llm-stochasticity",
+          "position": "以固定计数的外部已完成样本，分别检验边缘分布拟合与时间依赖；卡方/KS的p值是检验统计证据，不是某个输出事件的概率。",
+          "tradeoff": "解码约束Beam对明确top-k归一化后的路径分布累加质量，给目标近逐字事件的确定性LB与可能质量bank；它不证明随机数独立。反过来，直方图未拒绝均匀不能替代路径风险界。两者都须固定被审计的分布、协议与证据侧边界。",
+          "sections": [
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ]
+        },
+        {
+          "paper": "foundation-models:qe-length-normalization",
+          "position": "在质量受控的同文档前缀上诊断长度漂移，训练错误密度R/|h|并在推理恢复评分；本地为目标/控制协议组件。",
+          "tradeoff": "这不是对冻结QE分数做后处理；Interpolated Null Calibration从真实三次模型读出扣除可插值的null基线，不改变QE监督目标。两者均须validation选择可调项，不用测试结果反推校准。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ]
+        },
+        {
+          "paper": "foundation-models:cultural-cue",
+          "position": "对外部SAE token激活取max，以累计文化MI选维度，再按国家原型差和decoder构造残差干预。",
+          "tradeoff": "MI估计/SAE/语言模型和judge外置；国家等权不是样本等权。与DetectorScope描述mask及稀疏检测头的监督目标不同。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ]
+        },
+        {
+          "paper": "foundation-models:decoding-constrained-beam",
+          "position": "在实际top-k解码分布上累积精确路径概率，用可行性剪枝和末步全扩展给近逐字事件的确定性概率界。",
+          "tradeoff": "需要外部模型logits与目标后缀；不是来源检测或无偏完整风险估计。bank是潜在质量，不是已验证成功；无可选τ早停/KV模型。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ]
+        },
+        {
+          "paper": "foundation-models:storyscope",
+          "position": "语义叙事赋值经prompt匹配分析和真实SHAP统计选稳定跨模型核心；本地精确执行核心合取与prompt-block索引。",
+          "tradeoff": "叙事特征不是SAE随机列，分类重要性不是生成因果；外部LLM/XGBoost/SHAP阶段与未量化指纹门槛不伪造。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ]
         }
       ],
       "analysis": [
@@ -1794,6 +2003,70 @@
           "papers": [
             "foundation-models:xlgobench",
             "foundation-models:xla-trenches"
+          ]
+        },
+        {
+          "title": "Rosetta：跨语言表征统一度与知识迁移：先区分干预对象和可用证据",
+          "body": "Rosetta观察/干预预训练语言分布及表示统一度；Thinking to Recall分析推理时自生成事实及其正确性。前者的相似度不是事实真值judge，后者的oracle条件准确率也不证明跨语言表示统一。 `average_cosine` 与 `unification_score` 实现有限、非零表示的集合余弦和逐组比值，拒绝接近零的分母。诊断验证尺度不变性、平均比值及集合自相似不等于对角线常数1。外部特征没有由本地模型生成；诊断不证明跨语言准确率提高。",
+          "papers": [
+            "foundation-models:rosetta-unification",
+            "foundation-models:thinking-to-recall"
+          ]
+        },
+        {
+          "title": "Thinking to Recall：事实干净轨迹的离线条件准确率：先区分干预对象和可用证据",
+          "body": "本地实现不能；它使用事后外部标注的事实真值模拟条件期望，只是离线oracle分析。要部署还需要不看gold的可靠事实验证器，并计入调用成本和误判；这不是由汇总公式自动得到的。 `conditional_expected_accuracy` 只返回汇总统计、保留/剔除题数，绝不返回被oracle选中的轨迹、行动或训练样本；默认严格要求每题100条。`pass_at_k` 使用无偏组合数估计。负控同时覆盖共同题目mask、逐题宏平均而非微平均、空事实集合和缺失子集。诊断中的真值数组是显式教学输入，不是Agent任务成绩。",
+          "papers": [
+            "foundation-models:thinking-to-recall",
+            "foundation-models:rosetta-unification"
+          ]
+        },
+        {
+          "title": "Latent Generalization：区分已见答案与隐含答案的集合评测：先区分干预对象和可用证据",
+          "body": "前者用受控知识获取和结构划分考察未显式答案的泛化；后者研究已有参数事实如何因计算和factual priming被读出。两者都不能把gold-conditioned teacher或事后标注暴露给最终actor。 `score_completion` 要求heldout是all的子集，primary属于heldout，且gold集合非空；`exact_set_pass_at_n` 对已经完成的独立尝试计算无偏pass估计。负控显示：train recall=1可以同时heldout recall=0；heldout recall=1也能因额外误答导致exact=0。纯CPU离线评测，无模型训练、语义judge、Evolve或能力晋级。",
+          "papers": [
+            "foundation-models:latent-generalization",
+            "foundation-models:thinking-to-recall"
+          ]
+        },
+        {
+          "title": "样本检验的p值，与指定解码分布下的事件质量不是同一概率",
+          "body": "LLM Stochasticity从有限样本检查输出是否偏离目标边缘分布，并用时序统计揭示周期或依赖；检验未拒绝不等于目标分布成立，更不证明独立。解码约束Beam固定每步top-k内的归一化概率，不把距离剪枝后剩余分支重归一化，再对可行完整路径求LB并把可能的丢弃质量计入bank。这是事件质量界，不是GoF p值。两者结合时应分别报告采样协议与风险事件，不能把p=1写成100%随机或100%提取概率。本地两组件都只验数值/协议，未加载LLM执行完整审计。",
+          "papers": [
+            "foundation-models:llm-stochasticity",
+            "foundation-models:decoding-constrained-beam"
+          ]
+        },
+        {
+          "title": "训练监督的计量单位与推理分数的基线扣除，是两种校准机制",
+          "body": "QE长度归一先改变训练标签尺度，让模型预测每单位长度的错误，再恢复总评分；Interpolated Null Calibration保留已训练模型，利用query+instruction、带instruction的null与bare null三次真实观测扣除混杂分量。前者不能由冻结评分除长度替代，后者λ=0仍在减bare null，不等于无校准。两个方法共同要求明确被控制的因素和validation选择，但所需模型阶段、观测和误差来源不同；数值变换正确不证明未执行的QE重训或三pass提取已完成。",
+          "papers": [
+            "foundation-models:qe-length-normalization",
+            "foundation-models:interpolated-null-calibration"
+          ]
+        },
+        {
+          "title": "同一稀疏表征可以支持检测，也可以支持干预，但不能偷换验收对象",
+          "body": "CuE和DetectorScope都把逐token SAE激活池化，却对特征提出不同证据要求：CuE用与文化标签的互信息和国家原型组织方向，DetectorScope检验特征描述并学习稀疏检测权重。前者需要decoder对齐和真实生成评价来支持干预，后者的特征贡献只解释给定检测头的logit。把pooling相同当作方法等价，会把分类相关性误认成文化控制，或把合成方向范数误认成真实忠实度。",
+          "papers": [
+            "foundation-models:cultural-cue",
+            "foundation-models:detector-scope"
+          ]
+        },
+        {
+          "title": "可生成性、近目标概率与文本来源是不同统计问题",
+          "body": "CBS问的是给定前缀后模型以何概率生成目标邻域，DetectorScope问的是文本特征是否支持特定来源标签。公开常见句既可能容易生成，也可能由人类独立写作；来源检测分数高也不给训练样本的提取概率。CBS的已枚举路径质量可以形成严格下界，宽beam和距离预算只改变找回多少质量，不把未观察路径变成成功。原文负控和概率分布约束都是验收条件，不能只贴一个greedy命中率。",
+          "papers": [
+            "foundation-models:decoding-constrained-beam",
+            "foundation-models:detector-scope"
+          ]
+        },
+        {
+          "title": "解释的粒度与数据依赖要随特征来源一起保留",
+          "body": "StoryScope的单位是人类可问的叙事结构，DetectorScope的单位是内部稀疏激活及描述；它们都有模型误差与抽取成本，而不是解释文字越自然越可靠。StoryScope必须把共享prompt的六个故事作为相关组隔离和重采样，且跨模型spread阻止把单模型偏好混成普遍AI核心。DetectorScope的稀疏贡献解释的是分类头本身，不自动证明整篇故事采用某种叙事。两者应保留各自输入和验收，不用通用特征fixture缩短语义过程。",
+          "papers": [
+            "foundation-models:storyscope",
+            "foundation-models:detector-scope"
           ]
         }
       ],
@@ -1837,9 +2110,89 @@
             "foundation-models:xlgobench",
             "foundation-models:xla-trenches"
           ]
+        },
+        {
+          "id": "nov13-colm-rosetta-unification",
+          "question": "Rosetta与Thinking to Recall都涉及事实，干预位置有什么不同？",
+          "answer": "Rosetta观察/干预预训练语言分布及表示统一度；Thinking to Recall分析推理时自生成事实及其正确性。前者的相似度不是事实真值judge，后者的oracle条件准确率也不证明跨语言表示统一。",
+          "example": "提高两语言表示相似度，不会自动判断某条中间生日事实是否幻觉；过滤正确事实也不保证低资源语言可读出知识。",
+          "papers": [
+            "foundation-models:rosetta-unification",
+            "foundation-models:thinking-to-recall"
+          ]
+        },
+        {
+          "id": "nov13-colm-thinking-to-recall",
+          "question": "这种“优先正确事实轨迹”能像在线Agent策略一样部署吗？",
+          "answer": "本地实现不能；它使用事后外部标注的事实真值模拟条件期望，只是离线oracle分析。要部署还需要不看gold的可靠事实验证器，并计入调用成本和误判；这不是由汇总公式自动得到的。",
+          "example": "用gold确认哪条轨迹正确，再展示该轨迹给actor，会泄漏答案，不能算推理提升。",
+          "papers": [
+            "foundation-models:thinking-to-recall",
+            "foundation-models:rosetta-unification"
+          ]
+        },
+        {
+          "id": "nov13-colm-latent-generalization",
+          "question": "它与Thinking to Recall的协议分别定位什么问题？",
+          "answer": "前者用受控知识获取和结构划分考察未显式答案的泛化；后者研究已有参数事实如何因计算和factual priming被读出。两者都不能把gold-conditioned teacher或事后标注暴露给最终actor。",
+          "example": "同一事实被更容易召回，不等于模型学会了未训练关系反转；两者需要不同holdout。",
+          "papers": [
+            "foundation-models:latent-generalization",
+            "foundation-models:thinking-to-recall"
+          ]
+        },
+        {
+          "id": "nov13-colm-llm-stochasticity",
+          "question": "均匀循环序列的卡方p=1，与解码约束Beam给出的近逐字风险LB=0.1，能否当作同一类概率比较？",
+          "answer": "不能。p=1表示该边缘频率检验没有拒绝均匀，确定性循环仍可能完全可预测；它不是输出事件概率。LB=0.1则是在明确top-k解码分布和目标距离事件下，已枚举路径的质量下界。两者的对象、假设和分母不同，时序独立性也不由任一数值自动保证。",
+          "example": "0,1,2,3循环1024次可有完美均匀直方图，但下一项由前一项确定。另一个模型的top-k概率树里枚举到目标邻域质量0.1，说明该事件至少有这部分质量，不说明模型采样是否使用独立随机源。",
+          "papers": [
+            "foundation-models:llm-stochasticity",
+            "foundation-models:decoding-constrained-beam"
+          ]
+        },
+        {
+          "id": "cross-density-versus-temperature",
+          "question": "同样称“校准”，训练错误密度能否由三pass的null分数扣除替代？",
+          "answer": "不能。密度训练改变R/|h|监督，再乘回长度；null校准在已有模型读出上扣除λ插值基线。只执行后者没有训练QE密度模型，只执行前者也没有得到三次attention读出。两者的可调项只允许validation选择。",
+          "example": "教学例：s(q,I)=0.8、s(null,I)=0.3、s(bare)=0.1、λ=0.5时null校准为0.6；这不等于为长度10、错误评分−5的样本训练目标−0.5。",
+          "papers": [
+            "foundation-models:qe-length-normalization",
+            "foundation-models:interpolated-null-calibration"
+          ]
+        },
+        {
+          "id": "cross-cue-versus-detectorscope",
+          "question": "CuE 和 DetectorScope 都对SAE特征max-pool，为何不是同一方法？",
+          "answer": "池化只是共享表示操作。CuE以特征–文化MI和国家原型差构造残差干预；DetectorScope用描述验证mask和稀疏检测头作预测与特征归因。前者方向不自动构成检测器，后者头权重也不等于文化干预。",
+          "example": "教学例：一个食物特征能区分国家，却不一定区分人类与AI文本；检测头贡献大也不意味着沿该方向生成就文化忠实。",
+          "papers": [
+            "foundation-models:cultural-cue",
+            "foundation-models:detector-scope"
+          ]
+        },
+        {
+          "id": "cross-logprob-bound-versus-detector",
+          "question": "CBS概率下界能否替代DetectorScope的AI文本来源检测分数？",
+          "answer": "不能。CBS假定有目标后缀并能访问模型条件概率，衡量该前缀下近目标生成质量；DetectorScope从文本的SAE特征预测来源。一个文本容易被模型生成不等于它真的由该模型写成，两类统计也不共享标签含义。",
+          "example": "教学例：公开常见句在模型下概率很高，仍可能完全由人类撰写；高来源检测分数也不给某段训练原文的提取概率。",
+          "papers": [
+            "foundation-models:decoding-constrained-beam",
+            "foundation-models:detector-scope"
+          ]
+        },
+        {
+          "id": "cross-storyscope-versus-detectorscope",
+          "question": "StoryScope与DetectorScope的可解释性来自哪里，能互换特征吗？",
+          "answer": "StoryScope把叙事问题转成外部语义赋值，靠分类器/SHAP定位核心与指纹；DetectorScope依赖模型内部SAE特征和稀疏线性头的可加归因。两者解释单位、获取成本与错误模式不同，不能把未生成的叙事特征拿SAE随机列替代。",
+          "example": "教学例：“结尾主题是否明说”要检查全文；SAE某列的激活贡献是另一个观测，不能凭列编号宣称它语义上等于该叙事问题。",
+          "papers": [
+            "foundation-models:storyscope",
+            "foundation-models:detector-scope"
+          ]
         }
       ],
-      "updated": "2026-11-04",
+      "updated": "2026-11-13",
       "reviewed_papers": [
         "foundation-models:activation-model-scanner",
         "foundation-models:combinatorial-watermark",
@@ -1854,7 +2207,15 @@
         "foundation-models:proeval",
         "foundation-models:tcab",
         "foundation-models:xlgobench",
-        "foundation-models:xla-trenches"
+        "foundation-models:xla-trenches",
+        "foundation-models:rosetta-unification",
+        "foundation-models:thinking-to-recall",
+        "foundation-models:latent-generalization",
+        "foundation-models:llm-stochasticity",
+        "foundation-models:qe-length-normalization",
+        "foundation-models:cultural-cue",
+        "foundation-models:decoding-constrained-beam",
+        "foundation-models:storyscope"
       ],
       "updates": [
         {
@@ -1899,6 +2260,102 @@
           ],
           "source_revisions": {
             "foundation-models:xla-trenches": "8d0084d662cf8f2c947333f64603556d3da43a5cf47fab26b5eb1aab086313a7"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "foundation-models:rosetta-unification",
+            "foundation-models:thinking-to-recall"
+          ],
+          "summary": "补入固定Google COLM历史来源论文及L1组件，比较核心定义与证据边界；完整实验明确不复现，不把本地诊断当模型能力或Evolve改进。",
+          "source_revisions": {
+            "foundation-models:rosetta-unification": "fdd60506465e631510c3a1484ebc45ff621db68bc213aef4bf1903e6c584bc2a",
+            "foundation-models:thinking-to-recall": "3d42a1aece23df722b71c4b9a6a64846a01ec1c10cbc62d36b0130ce31fae90f"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "foundation-models:thinking-to-recall",
+            "foundation-models:rosetta-unification"
+          ],
+          "summary": "补入固定Google COLM历史来源论文及L1组件，比较核心定义与证据边界；完整实验明确不复现，不把本地诊断当模型能力或Evolve改进。",
+          "source_revisions": {
+            "foundation-models:thinking-to-recall": "3d42a1aece23df722b71c4b9a6a64846a01ec1c10cbc62d36b0130ce31fae90f",
+            "foundation-models:rosetta-unification": "fdd60506465e631510c3a1484ebc45ff621db68bc213aef4bf1903e6c584bc2a"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "foundation-models:latent-generalization",
+            "foundation-models:thinking-to-recall"
+          ],
+          "summary": "补入固定Google COLM历史来源论文及L1组件，比较核心定义与证据边界；完整实验明确不复现，不把本地诊断当模型能力或Evolve改进。",
+          "source_revisions": {
+            "foundation-models:latent-generalization": "6ba5d43a5e2f8cdcedae84204cf4b83171aef83d11ca84510132a134c615491b",
+            "foundation-models:thinking-to-recall": "3d42a1aece23df722b71c4b9a6a64846a01ec1c10cbc62d36b0130ce31fae90f"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "foundation-models:llm-stochasticity",
+            "foundation-models:decoding-constrained-beam"
+          ],
+          "summary": "把随机采样统计诊断与同卡解码概率界作对照：区分GoF p值、时序依赖和目标事件质量，固定各自被审计分布与边界；两个L1组件都不冒充完整LLM能力或安全审计。",
+          "source_revisions": {
+            "foundation-models:llm-stochasticity": "9c879b4c31cbbb96adda8b1bc5011027c39a1ccb1d26863d6fbc924bfddf4c6a",
+            "foundation-models:decoding-constrained-beam": "ec970f56615141cfc860ec86c9d443933ad7c9040bf6672f416bdaee23ebf69d"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "foundation-models:qe-length-normalization",
+            "foundation-models:interpolated-null-calibration"
+          ],
+          "summary": "改为同卡片的训练密度与三pass null校准比较，区分监督单位、真实观测基线、λ0口径和未运行模型边界。",
+          "source_revisions": {
+            "foundation-models:qe-length-normalization": "eeeca4b59fe3a14e52d5b627ac0ee8e658887184eb458da8ad1d76492a220bd8",
+            "foundation-models:interpolated-null-calibration": "4149f6a705209effefe8e1fa43941b8566e4eef2e6a82054e3cdf68b176387ad"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "foundation-models:cultural-cue",
+            "foundation-models:detector-scope"
+          ],
+          "summary": "补入文化MI累计质量与国家原型干预，区分SAE检测与生成控制，保留层decoder/MI外部边界与国家代理限制。",
+          "source_revisions": {
+            "foundation-models:cultural-cue": "3b76e934c2ee23cd0dcade5b6080b98718119b4a571b87b54a40a12f77f19c2f",
+            "foundation-models:detector-scope": "1cec4de6a6435be3970d4caedeef69ee5bd22fbbf384fc711cc4f313826e4f40"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "foundation-models:decoding-constrained-beam",
+            "foundation-models:detector-scope"
+          ],
+          "summary": "补入top-k约束概率界、Hamming/带状Levenshtein及bank，区分可生成性与来源检测，不把穷举教学分布称真实泄漏结论。",
+          "source_revisions": {
+            "foundation-models:decoding-constrained-beam": "ec970f56615141cfc860ec86c9d443933ad7c9040bf6672f416bdaee23ebf69d",
+            "foundation-models:detector-scope": "1cec4de6a6435be3970d4caedeef69ee5bd22fbbf384fc711cc4f313826e4f40"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "foundation-models:storyscope",
+            "foundation-models:detector-scope"
+          ],
+          "summary": "补入叙事语义与prompt组级证据，精确核心阈值不等同指纹判据；与SAE检测解释粒度分开。",
+          "source_revisions": {
+            "foundation-models:storyscope": "82619b14e93eca3b1b07d3de3740c86dfd97c3064552beb26e3f8722077623e6",
+            "foundation-models:detector-scope": "1cec4de6a6435be3970d4caedeef69ee5bd22fbbf384fc711cc4f313826e4f40"
           }
         }
       ]

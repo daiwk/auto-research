@@ -1,0 +1,47 @@
+{
+  "domain": "agent-research",
+  "key": "clarification-sgp",
+  "title": "Learning Steerable Clarification Policies with Collaborative Self-play",
+  "paper_url": "https://arxiv.org/abs/2512.04068",
+  "reviewed_version": "v1",
+  "reviewed_arxiv_id": "2512.04068v1",
+  "reviewed_version_url": "https://arxiv.org/html/2512.04068v1",
+  "detail_path": "agent-research/2512.04068-clarification-sgp/README.md",
+  "topic": [
+    "选择与澄清"
+  ],
+  "published": "2025-12-03",
+  "published_at": "2025-12-03T18:49:54Z",
+  "first_author": "Jonathan Berant",
+  "first_author_affiliation": "Google Research",
+  "verified_priority_organizations": [
+    "Google Research",
+    "Google DeepMind",
+    "Meta"
+  ],
+  "code": null,
+  "code_status": "固定v1与本次有界官方作者入口检索未找到可核实专属源码；明确不把引用库或第三方复刻当作作者系统代码。",
+  "adapter": null,
+  "priority": "P0",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.agent_research.clarification_sgp.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.agent_research.clarification_sgp import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "review_done": true,
+  "full_experiment_review_done": true,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2512.04068v1",
+    "available_resource": "单张A100/A30或Mac",
+    "basis": "Gemma2-9B双模型、192训练rollout/query、64测试rollout/query、3轮ReST和两benchmark；完整多轮生成/训练高成本不复现。"
+  },
+  "fidelity_note": "以成本惩罚reward控制澄清、直接回答或多答案；先按解释均衡均值选动作序列，再逐解释选最高reward轨迹。本地只实现离线选择，不运行模型或ReST训练。",
+  "summary": "以成本惩罚reward控制澄清、直接回答或多答案；先按解释均衡均值选动作序列，再逐解释选最高reward轨迹。本地只实现离线选择，不运行模型或ReST训练。"
+}

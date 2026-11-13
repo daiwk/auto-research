@@ -4,16 +4,16 @@
 
 [English home](../index.md) · [中文研究库](../../research-library.md)
 
-The catalog lists 1122 entries from the shared research manifest. English write-ups available: 1122.
+The catalog lists 1145 entries from the shared research manifest. English write-ups available: 1145.
 
 ## Browse by domain
 
 - [Search, ads, recommendation, and LLM applications](recommendation.md): 329 catalog entries, 329 English write-ups
-- [Foundation models](foundation-models.md): 215 catalog entries, 215 English write-ups
+- [Foundation models](foundation-models.md): 226 catalog entries, 226 English write-ups
 - [Structured decisions / System One](system-one.md): 6 catalog entries, 6 English write-ups
-- [Multimodal models](multimodal-models.md): 23 catalog entries, 23 English write-ups
-- [LLM post-training](post-training.md): 259 catalog entries, 259 English write-ups
-- [Agents](agent-research.md): 290 catalog entries, 290 English write-ups
+- [Multimodal models](multimodal-models.md): 25 catalog entries, 25 English write-ups
+- [LLM post-training](post-training.md): 263 catalog entries, 263 English write-ups
+- [Agents](agent-research.md): 296 catalog entries, 296 English write-ups
 
 ## Read in English
 
@@ -546,6 +546,7 @@ The catalog lists 1122 entries from the shared research manifest. English write-
 - [PACE: A Unified Condense-and-Extract Paradigm for Fast VLM Inference](../../reproductions/2608.27206-pace-vlm/README-en.md)
 - [Disentangling Optimization Scale from Preference Scale in DPO](../../post-training/2608.27032-normalized-dpo/README-en.md)
 - [DeepRepro: State-Aware Subplanning for Paper-to-Code Reproduction in Evolving Repositories](../../agent-research/2608.26557-deeprepro/README-en.md)
+- [Decoupling Planning and Control for Instructable Agents](../../agent-research/2608.26788-instruct-to-act/README-en.md)
 - [CritICL: Inference-Time Weak-to-Strong Generalization from Small Language Model Failure Modes](../../foundation-models/2608.27455-criticl/README-en.md)
 - [Consolidating RLVR Capabilities Across Domains: A Deep Dive into Fusion Paradigms](../../post-training/2608.27409-rlvr-fusion/README-en.md)
 - [Boosting LLM Exploration via Weak-Model Guidance in RLVR](../../post-training/2608.27420-weak-guide-rlvr/README-en.md)
@@ -772,6 +773,7 @@ The catalog lists 1122 entries from the shared research manifest. English write-
 - [TurnOPD](../../agent-research/2607.05804-turn-opd/README-en.md)
 - [Turning Off-Policy Tokens On-Policy: A Plug-in Approach for Improving LLM Alignment](../../reproductions/2607.04728-sis/README-en.md)
 - [Prompt Generation Technical Report](../../reproductions/2607.11326-prompt-generation/README-en.md)
+- [Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs](../../post-training/2606.32032-rlmf/README-en.md)
 - [GenPage: Towards End-to-End Generative Homepage Construction at Netflix](../../reproductions/2606.31031-genpage/README-en.md)
 - [Editing Everything Everywhere All at Once](../../multimodal-models/2606.31278-mice/README-en.md)
 - [POEM: Partial-Order Enhanced Real-Time Sequential Modeling for Recommendation](../../reproductions/2606.29946-poem/README-en.md)
@@ -800,6 +802,7 @@ The catalog lists 1122 entries from the shared research manifest. English write-
 - [Taiji: Pareto Optimal Policy Optimization with Semantics-IDs Trade-off for Industrial LLM-Enhanced Recommendation](../../reproductions/2606.03866-taiji/README-en.md)
 - [POLARIS: Guiding Small Models to Write Long Stories](../../post-training/2606.04095-polaris-hri/README-en.md)
 - [Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories](../../foundation-models/2606.03979-sleep-lti/README-en.md)
+- [ContinuousBench: Can Differentially Private Synthetic Text Improve Capabilities?](../../foundation-models/2606.01849-continuousbench/README-en.md)
 - [XLGoBench: Detecting cross-lingual skill gaps with algorithmic tasks](../../foundation-models/2605.30788-xlgobench/README-en.md)
 - [Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems](../../reproductions/2606.00282-scalr/README-en.md)
 - [Formalizing Mathematics at Scale](../../agent-research/2605.29955-autoformbot/README-en.md)
@@ -842,8 +845,11 @@ The catalog lists 1122 entries from the shared research manifest. English write-
 - [Optimized Deferral for Imbalanced Settings](../../foundation-models/2604.27723-mild/README-en.md)
 - [Mind the Gap: Structure-Aware Consistency in Preference Learning](../../post-training/2604.27733-sa-dpo/README-en.md)
 - [From Local Indices to Global Identifiers: Generative Reranking via Global Action Space](../../reproductions/2604.25291-glorank/README-en.md)
+- [Co-Director: Agentic Generative Video Storytelling](../../agent-research/2604.24842-co-director/README-en.md)
 - [Beyond Static Collision Handling: Adaptive Semantic ID Learning for Multimodal Recommendation at Industrial Scale](../../reproductions/2604.23522-adasid/README-en.md)
 - [ProEval: Proactive Failure Discovery and Efficient Performance Estimation for Generative AI Evaluation](../../foundation-models/2604.23099-proeval/README-en.md)
+- [MMEB-V3: Measuring the Performance Gaps of Omni-Modality Embedding Models](../../multimodal-models/2604.23321-mmeb-v3/README-en.md)
+- [Behavioral Canaries: Auditing Private Retrieved Context Usage in RL Fine-Tuning](../../post-training/2604.22191-behavioral-canaries/README-en.md)
 - [CS3: Efficient Online Capability Synergy for Two-Tower Recommendation](../../reproductions/2604.19269-cs3/README-en.md)
 - [AgenticRecTune: Multi-Agent with Self-Evolving Skillhub for Recommendation System Optimization](../../reproductions/2604.26969-agentic-rec-tune/README-en.md)
 - [StepPO](../../agent-research/2604.18401-steppo/README-en.md)
@@ -852,7 +858,9 @@ The catalog lists 1122 entries from the shared research manifest. English write-
 - [FUSE: Ensembling Verifiers with Zero Labeled Data](../../foundation-models/2604.18547-fuse-verifiers/README-en.md)
 - [NaijaS2ST: A Multi-Accent Benchmark for Speech-to-Speech Translation in Low-Resource Nigerian Languages](../../multimodal-models/2604.16287-naijas2st/README-en.md)
 - [GroupDPO: Memory-Efficient Group-Wise Direct Preference Optimization](../../post-training/2604.15602-group-dpo/README-en.md)
+- [PolicyBank: Evolving Policy Understanding for LLM Agents](../../agent-research/2604.15505-policybank/README-en.md)
 - [GenRec: A Preference-Oriented Generative Framework for Large-Scale Recommendation](../../reproductions/2604.14878-genrec/README-en.md)
+- [A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation](../../foundation-models/2604.14403-ecg-rag/README-en.md)
 - [UniRec: Bridging the Expressive Gap between Generative and Discriminative Recommendation via Chain-of-Attribute](../../reproductions/2604.12234-unirec-coa/README-en.md)
 - [Lightning OPD](../../post-training/2604.13010-lightning-opd/README-en.md)
 - [Efficient Retrieval Scaling with Hierarchical Indexing for Large Scale Recommendation](../../reproductions/2604.12965-hill-index/README-en.md)
@@ -860,16 +868,22 @@ The catalog lists 1122 entries from the shared research manifest. English write-
 - [SID-Coord: Coordinating Semantic IDs for ID-based Ranking in Short-Video Search](../../reproductions/2604.10471-sid-coord/README-en.md)
 - [SEARL](../../agent-research/2604.07791-searl/README-en.md)
 - [LogAct: Enabling Agentic Reliability via Shared Logs](../../agent-research/2604.07988-logact/README-en.md)
+- [The Illusion of Stochasticity in LLMs](../../foundation-models/2604.06543-llm-stochasticity/README-en.md)
 - [Dual-Rerank: Fusing Sequential Dependencies and Utility for Generative Reranking](../../reproductions/2604.07420-dual-rerank/README-en.md)
 - [CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization](../../agent-research/2604.14214-crop/README-en.md)
 - [TFRBench: A Reasoning Benchmark for Evaluating Forecasting Systems](../../agent-research/2604.05364-tfrbench/README-en.md)
 - [PaperOrchestra: A Multi-Agent Framework for Automated AI Research Paper Writing](../../agent-research/2604.05018-paperorchestra/README-en.md)
+- [StoryScope: Investigating idiosyncrasies in AI fiction](../../foundation-models/2604.03136-storyscope/README-en.md)
 - [MBGR: Multi-Business Generative Recommendation](../../reproductions/2604.02684-mbgr/README-en.md)
+- [Analysis of Optimality of Large Language Models on Planning Problems](../../agent-research/2604.02910-planning-optimality/README-en.md)
+- [Improving Latent Generalization Using Test-time Compute](../../foundation-models/2604.01430-latent-generalization/README-en.md)
 - [Reasoning-Driven Synthetic Data Generation and Evaluation](../../agent-research/2603.29791-simula/README-en.md)
 - [RCLRec: Reverse Curriculum Learning for Modeling Sparse Conversions in Generative Recommendation](../../reproductions/2603.28124-rclrec/README-en.md)
 - [Switch Attention: Towards Dynamic and Fine-grained Hybrid Transformers](../../reproductions/2603.26380-switch-attention/README-en.md)
 - [AIRA2: Overcoming Bottlenecks in AI Research Agents](../../agent-research/2603.26499-aira2/README-en.md)
+- [Estimating near-verbatim extraction risk in language models with decoding-constrained beam search](../../foundation-models/2603.24917-decoding-constrained-beam/README-en.md)
 - [UniScale: Synergistic Entire Space Data and Model Scaling for Search Ranking](../../reproductions/2603.24226-uniscale/README-en.md)
+- [Steering LLMs for Culturally Localized Generation](../../foundation-models/2603.23301-cultural-cue/README-en.md)
 - [GateSID: Adaptive Gating for Semantic-Collaborative Alignment in Cold-Start Recommendation](../../reproductions/2603.22916-gatesid/README-en.md)
 - [TagLLM: A Fine-Grained Tag Generation Approach for Note Recommendation](../../reproductions/2603.21481-tagllm/README-en.md)
 - [SaFRO: Satisfaction-Aware Fusion via Dual-Relative Policy Optimization for Short-Video Search](../../reproductions/2603.19585-safro/README-en.md)
@@ -880,6 +894,7 @@ The catalog lists 1122 entries from the shared research manifest. English write-
 - [Deploying Semantic ID-based Generative Retrieval for Large-Scale Podcast Discovery at Spotify](../../reproductions/2603.17540-glide/README-en.md)
 - [Large Reasoning Models Struggle to Transfer Parametric Knowledge Across Scripts](../../post-training/2603.17070-cross-script-knowledge-transfer/README-en.md)
 - [POLCA: Stochastic Generative Optimization with LLM](../../agent-research/2603.14769-polca/README-en.md)
+- [Thinking to Recall: How Reasoning Unlocks Parametric Knowledge in LLMs](../../foundation-models/2603.09906-thinking-to-recall/README-en.md)
 - [Efficient, Property-Aligned Fan-Out Retrieval via RL-Compiled Diffusion](../../foundation-models/2603.06397-r4t/README-en.md)
 - [SORT: A Systematically Optimized Ranking Transformer for Industrial-scale Recommenders](../../reproductions/2603.03988-sort-ranking/README-en.md)
 - [Not All Candidates are Created Equal: Heterogeneity-Aware Pre-ranking](../../reproductions/2603.03770-hap/README-en.md)
@@ -892,8 +907,10 @@ The catalog lists 1122 entries from the shared research manifest. English write-
 - [Beyond the Flat Sequence: Hierarchical and Preference-Aware Generative Recommendations](../../reproductions/2603.00980-hpgr/README-en.md)
 - [Zero-shot Cross-domain Knowledge Distillation: A Case study on YouTube Music](../../reproductions/2603.28994-cross-domain-kd/README-en.md)
 - [Stop Treating Collisions Equally: Qualification-Aware Semantic ID Learning for Recommendation at Industrial Scale](../../reproductions/2603.00632-quasid/README-en.md)
+- [MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games](../../agent-research/2602.24188-mt-pingeval/README-en.md)
 - [Learning to Reflect and Correct: Towards Better Decoding Trajectories for Large-Scale Generative Recommendation](../../reproductions/2602.23639-grc/README-en.md)
 - [Vectorizing the Trie: Efficient Constrained Decoding for LLM-based Generative Retrieval on Accelerators](../../recommendation-components/2602.22647-static-constraint-decoding/README-en.md)
+- [MAPLE: Metadata Augmented Private Language Evolution](../../post-training/2603.19258-maple-icl/README-en.md)
 - [U-Mem](../../agent-research/2602.22406-u-mem/README-en.md)
 - [Prompt-Level Distillation: A Non-Parametric Alternative to Model Fine-Tuning for Efficient Reasoning](../../post-training/2602.21103-prompt-level-distillation/README-en.md)
 - [HiSAC: Hierarchical Sparse Activation Compression for Ultra-long Sequence Modeling in Recommenders](../../reproductions/2602.21009-hisac/README-en.md)
@@ -902,6 +919,7 @@ The catalog lists 1122 entries from the shared research manifest. English write-
 - [A Theoretical Framework for Modular Learning of Robust Generative Models](../../foundation-models/2602.17554-modular-robust-generative/README-en.md)
 - [A Long-term Value Prediction Framework In Video Ranking](../../reproductions/2602.17058-ltv-video-ranking/README-en.md)
 - [Rethinking ANN-based Retrieval: Multifaceted Learnable Index for Large-scale Recommendation System](../../reproductions/2602.16124-mfli/README-en.md)
+- [Learning to Learn from Language Feedback with Social Meta-Learning](../../post-training/2602.16488-social-meta-learning/README-en.md)
 - [Learning Personalized Agents from Human Feedback](../../agent-research/2602.16173-pahf/README-en.md)
 - [ConvApparel: A Benchmark Dataset and Validation Framework for User Simulators in Conversational Recommenders](../../agent-research/2602.16938-convapparel/README-en.md)
 - [Climber-Pilot: A Non-Myopic Generative Recommendation Model Towards Better Instruction-Following](../../reproductions/2602.13581-climber-pilot/README-en.md)
@@ -946,6 +964,7 @@ The catalog lists 1122 entries from the shared research manifest. English write-
 - [S2GR: Stepwise Semantic-Guided Reasoning in Latent Space for Generative Recommendation](../../reproductions/2601.18664-s2gr/README-en.md)
 - [OPSD](../../post-training/2601.18734-opsd/README-en.md)
 - [Unleashing the Potential of Sparse Attention on Long-term Behaviors for CTR Prediction](../../reproductions/2601.17836-sparsectr/README-en.md)
+- [AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs' Contextual and Cultural Knowledge and Thinking](../../multimodal-models/2601.17645-avmeme-exam/README-en.md)
 - [LifeAgentBench: Benchmarking LLMs for Long-Horizon, Cross-Dimensional Lifestyle Health Reasoning](../../agent-research/2601.13880-lifeagentbench/README-en.md)
 - [Hierarchical Contextual Uplift Bandits for Catalog Personalization](../../reproductions/2601.14333-hcub/README-en.md)
 - [Balancing Classification and Calibration Performance in Decision-Making LLMs via Calibration Aware Reinforcement Learning](../../post-training/2601.13284-calibration-aware-rl/README-en.md)
@@ -960,11 +979,14 @@ The catalog lists 1122 entries from the shared research manifest. English write-
 - [SAGE](../../agent-research/2512.17102-sage/README-en.md)
 - [RecGPT-V2 Technical Report](../../reproductions/2512.14503-recgpt-v2/README-en.md)
 - [Online IcePop](../../post-training/web-2025-online-icepop/README-en.md)
+- [Do Depth-Grown Models Overcome the Curse of Depth? An In-Depth Analysis](../../foundation-models/2512.08819-lidas/README-en.md)
+- [Learning Steerable Clarification Policies with Collaborative Self-play](../../agent-research/2512.04068-clarification-sgp/README-en.md)
 - [Stabilizing RL with LLMs](../../post-training/2512.01374-minirl/README-en.md)
 - [Budget-Aware Tool Use Enables Effective Agent Scaling](../../agent-research/2511.17006-bats/README-en.md)
 - [Agent0](../../agent-research/2511.16043-agent0/README-en.md)
 - [Agent-R1](../../agent-research/2511.14460-agent-r1/README-en.md)
 - [DualGR: Generative Retrieval with Long and Short-Term Interests Modeling](../../reproductions/2511.12518-dualgr/README-en.md)
+- [Penalizing Length: Uncovering Systematic Bias in Quality Estimation Metrics](../../foundation-models/2510.22028-qe-length-normalization/README-en.md)
 - [IcePop](../../post-training/2510.18855-icepop/README-en.md)
 - [From Reasoning LLMs to BERT: A Two-Stage Distillation Framework for Search Relevance](../../reproductions/2510.11056-crsd/README-en.md)
 - [Watch and Learn: Learning to Use Computers from Online Videos](../../agent-research/2510.04673-watch-and-learn/README-en.md)
@@ -980,6 +1002,7 @@ The catalog lists 1122 entries from the shared research manifest. English write-
 - [MPFormer: Adaptive Framework for Industrial Multi-Task Personalized Sequential Retriever](../../reproductions/2508.20400-mpformer/README-en.md)
 - [MUA-RL](../../agent-research/2508.18669-mua-rl/README-en.md)
 - [CHORD](../../post-training/2508.11408-chord/README-en.md)
+- [Beyond the Rosetta Stone: Unification Forces in Generalization Dynamics](../../foundation-models/2508.11017-rosetta-unification/README-en.md)
 - [GPPO](../../post-training/2508.07629-gppo/README-en.md)
 - [GLiClass: Generalist Lightweight Model for Sequence Classification Tasks](../../foundation-models/2508.07662-gliclass/README-en.md)
 - [ToolGrad: Efficient Tool-Use Dataset Generation with Textual Gradients](../../agent-research/2508.04086-toolgrad/README-en.md)

@@ -7,7 +7,7 @@ hide:
 
 # 记忆与技能：让经验可取回、可失效
 
-[Agent](index.md) / 240 个问题 · 60 篇论文
+[Agent](index.md) / 244 个问题 · 61 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">240 个问题 · 60 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">244 个问题 · 61 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:wikitrace" data-paper-title="Don&#x27;t Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Don&#x27;t Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents Agent KAIST 2026-11-10 从一次成功或失败轨迹提炼出的洞见不一定正确，也可能被误用到不适用的任务。WikiTrace 不只保存一句经验，而是把洞见链接到该次执行的解释及未改写的原轨迹。模型先看全部洞见，在细节不足、洞见冲突或来源失败时，自主沿链接下钻。解释仍是模型推断，不因带有链接就自动成为已验证知识。 完整长 rollout grid 成本过高，不复现（审查 DONE）；L1 机制诊断不是记忆能力成绩，不进入 Evolve 晋级。本地交付纯 CPU 链接语料组件，不包含 LLM 编译器或求解 Agent；L1 机制诊断不是记忆能力成绩，不进入 Evolve 晋级。SourceRun 只接受训练划分的可观察动作、观察和成败；Compilation、Insight 由调用者显式提供。EvidenceLinkedCorpus 检查唯一 ID、源覆盖、每次最多三条洞见，保留矛盾洞见和失败轨迹，不伪装成自动编译或事实验证。actor_memory() 返回洞见；descend() 精确返回关联解释和原轨迹。  主动 / 长期记忆 证据链接与记忆可靠性 Agent 记忆与技能：让经验可取回、可失效 为什么加入一次成功经验，反而可能让 WikiTrace 所研究的 Agent 做错原本会做的任务？ 成败只标记整次执行，不证明提炼出的每条洞见都正确，也不界定适用条件。错误归因或跨范围使用都可能诱发 memory-induced regression；因此要保留可回查的源，而不是把成功标签当知识证明。 教学例：把“检查灯后任务结束”从一次成功轨迹中提炼出来，可能遗漏后续打开灯的动作；新任务按这句经验提前停止就会失败。 2026-11-11">
@@ -2677,6 +2677,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>教学例：用固定(1,0)向量让公开/私密两个案例相近，可以测试局部规则不被门控，却不能证明真实模型理解隐私；把held-out组传给refresh会直接报错。</p>
 <p class="ar-learning-sources">依据：数据协议与代码映射、本地结果与负控、高成本完整实验；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.14454">原论文</a> · <a href="../../../../agent-research/2605.14454-lisa/">实现解读</a> · <a href="#qa-371f9a94444e2180">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:policybank" data-paper-title="PolicyBank: Evolving Policy Understanding for LLM Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="PolicyBank: Evolving Policy Understanding for LLM Agents Agent Google Cloud 2026-04-16 Agent 可能严格遵守含糊的书面规则，却仍违反真实业务要求。PolicyBank 区分执行失败与 specification–requirement gap，不把“按原规则做了”当成授权正确；目标是部署前根据可信开发反馈修正理解。每条 tool-capability 记忆拆成 TRIGGER、PRECONDITIONS、ELIGIBILITY、ACTION 和 KEY INSIGHT。Actor 在对话中主动请求能力标题，再选 ID 取得完整条目； 完整实验成本过高，不复现（审查 DONE）；component_only／L0接口诊断，不是完整模型或Agent能力复现。component_only／L0接口诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下结构化记忆合同可执行，核心语义PolicyAgent未实现。未实现自然语言PolicyAgent、真实工具、用户模拟、动态授权执行器、τ-Bench bridge或正式能力评测。恶意／错误反馈可能导致policy drift；本地类型检查不能证明反馈真实性。不得用于未经审核修改真实生产权限。Capability 显式保存所有 schema 字段；  策略记忆与授权修正 Agent 记忆与技能：让经验可取回、可失效 PolicyBank里的TypeII失败为什么不等于agent没遵守规则？ TypeII是遵守书面spec却违反真实requirement，问题在规则解释或缺口。重复原spec可能强化错误，需可信开发反馈指出差异。 教学例：书面规则误把补偿与改签绑定，agent拒绝不改签用户补偿，可能忠实但错误。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<span id="paper-agent-research-policybank-24aeb7ff" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-1295c994b32061bc">PolicyBank里的TypeII失败为什么不等于agent没遵守规则？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Apolicybank">PolicyBank: Evolving Policy Understanding for LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Cloud</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>TypeII是遵守书面spec却违反真实requirement，问题在规则解释或缺口。重复原spec可能强化错误，需可信开发反馈指出差异。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：书面规则误把补偿与改签绑定，agent拒绝不改签用户补偿，可能忠实但错误。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.15505">原论文</a> · <a href="../../../../agent-research/2604.15505-policybank/">实现解读</a> · <a href="#qa-1295c994b32061bc">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:policybank" data-paper-title="PolicyBank: Evolving Policy Understanding for LLM Agents" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="PolicyBank: Evolving Policy Understanding for LLM Agents Agent Google Cloud 2026-04-16 Agent 可能严格遵守含糊的书面规则，却仍违反真实业务要求。PolicyBank 区分执行失败与 specification–requirement gap，不把“按原规则做了”当成授权正确；目标是部署前根据可信开发反馈修正理解。每条 tool-capability 记忆拆成 TRIGGER、PRECONDITIONS、ELIGIBILITY、ACTION 和 KEY INSIGHT。Actor 在对话中主动请求能力标题，再选 ID 取得完整条目； 完整实验成本过高，不复现（审查 DONE）；component_only／L0接口诊断，不是完整模型或Agent能力复现。component_only／L0接口诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下结构化记忆合同可执行，核心语义PolicyAgent未实现。未实现自然语言PolicyAgent、真实工具、用户模拟、动态授权执行器、τ-Bench bridge或正式能力评测。恶意／错误反馈可能导致policy drift；本地类型检查不能证明反馈真实性。不得用于未经审核修改真实生产权限。Capability 显式保存所有 schema 字段；  策略记忆与授权修正 Agent 记忆与技能：让经验可取回、可失效 为什么一项tool要拆成多个capability条目？ 同一工具在不同能力或边界下的授权条件不同。条目按trigger/preconditions/eligibility/action/keyinsight拆解，标题选择后取全文，而不是把所有规则一次塞prompt。 教学例：cancel工具的保险取消与特殊豁免可共享API，但资格条件不能混成一条模糊规则。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-829de77827d871d4">为什么一项tool要拆成多个capability条目？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Apolicybank">PolicyBank: Evolving Policy Understanding for LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Cloud</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>同一工具在不同能力或边界下的授权条件不同。条目按trigger/preconditions/eligibility/action/keyinsight拆解，标题选择后取全文，而不是把所有规则一次塞prompt。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：cancel工具的保险取消与特殊豁免可共享API，但资格条件不能混成一条模糊规则。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.15505">原论文</a> · <a href="../../../../agent-research/2604.15505-policybank/">实现解读</a> · <a href="#qa-829de77827d871d4">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:policybank" data-paper-title="PolicyBank: Evolving Policy Understanding for LLM Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="PolicyBank: Evolving Policy Understanding for LLM Agents Agent Google Cloud 2026-04-16 Agent 可能严格遵守含糊的书面规则，却仍违反真实业务要求。PolicyBank 区分执行失败与 specification–requirement gap，不把“按原规则做了”当成授权正确；目标是部署前根据可信开发反馈修正理解。每条 tool-capability 记忆拆成 TRIGGER、PRECONDITIONS、ELIGIBILITY、ACTION 和 KEY INSIGHT。Actor 在对话中主动请求能力标题，再选 ID 取得完整条目； 完整实验成本过高，不复现（审查 DONE）；component_only／L0接口诊断，不是完整模型或Agent能力复现。component_only／L0接口诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下结构化记忆合同可执行，核心语义PolicyAgent未实现。未实现自然语言PolicyAgent、真实工具、用户模拟、动态授权执行器、τ-Bench bridge或正式能力评测。恶意／错误反馈可能导致policy drift；本地类型检查不能证明反馈真实性。不得用于未经审核修改真实生产权限。Capability 显式保存所有 schema 字段；  策略记忆与授权修正 Agent 记忆与技能：让经验可取回、可失效 成功轨迹记忆能否替代PolicyBank的授权解释更新？ 不一定。轨迹告诉agent过去怎么做，可能反复执行有缺口的spec。PolicyBank关注开发反馈中的授权逻辑差异；本地结构化存储仍不具备语义修复能力。 教学例：十次成功改签案例也无法证明不改签时应否补偿，需要明确边界反馈。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-d9b6dec723da1d25">成功轨迹记忆能否替代PolicyBank的授权解释更新？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Apolicybank">PolicyBank: Evolving Policy Understanding for LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Cloud</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不一定。轨迹告诉agent过去怎么做，可能反复执行有缺口的spec。PolicyBank关注开发反馈中的授权逻辑差异；本地结构化存储仍不具备语义修复能力。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：十次成功改签案例也无法证明不改签时应否补偿，需要明确边界反馈。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.15505">原论文</a> · <a href="../../../../agent-research/2604.15505-policybank/">实现解读</a> · <a href="#qa-d9b6dec723da1d25">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:policybank" data-paper-title="PolicyBank: Evolving Policy Understanding for LLM Agents" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="PolicyBank: Evolving Policy Understanding for LLM Agents Agent Google Cloud 2026-04-16 Agent 可能严格遵守含糊的书面规则，却仍违反真实业务要求。PolicyBank 区分执行失败与 specification–requirement gap，不把“按原规则做了”当成授权正确；目标是部署前根据可信开发反馈修正理解。每条 tool-capability 记忆拆成 TRIGGER、PRECONDITIONS、ELIGIBILITY、ACTION 和 KEY INSIGHT。Actor 在对话中主动请求能力标题，再选 ID 取得完整条目； 完整实验成本过高，不复现（审查 DONE）；component_only／L0接口诊断，不是完整模型或Agent能力复现。component_only／L0接口诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下结构化记忆合同可执行，核心语义PolicyAgent未实现。未实现自然语言PolicyAgent、真实工具、用户模拟、动态授权执行器、τ-Bench bridge或正式能力评测。恶意／错误反馈可能导致policy drift；本地类型检查不能证明反馈真实性。不得用于未经审核修改真实生产权限。Capability 显式保存所有 schema 字段；  策略记忆与授权修正 Agent 记忆与技能：让经验可取回、可失效 apply_after_task写入修正规则，是否说明组件验证了新规则正确？ 没有。组件只执行外部明确Add/Revise/Omit、保持ID和feedback来源，不判断自然语言permit/deny，也不能防恶意反馈。真实权限变更仍需审核。 教学例：攻击者给出错误退款资格，类型正确的字符串也可能导致policy drift。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-af4e5aadc6e41bbd">apply_after_task写入修正规则，是否说明组件验证了新规则正确？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Apolicybank">PolicyBank: Evolving Policy Understanding for LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Cloud</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>没有。组件只执行外部明确Add/Revise/Omit、保持ID和feedback来源，不判断自然语言permit/deny，也不能防恶意反馈。真实权限变更仍需审核。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：攻击者给出错误退款资格，类型正确的字符串也可能导致policy drift。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.15505">原论文</a> · <a href="../../../../agent-research/2604.15505-policybank/">实现解读</a> · <a href="#qa-af4e5aadc6e41bbd">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:memento-skills" data-paper-title="Memento-Skills" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Memento-Skills Agent Memento Team 2026-03-19 从执行日志反思出结构化技能说明，按任务检索并写回版本化技能，而不是原样堆叠轨迹。 保真度：核心机制复现。保真度：核心机制复现。本页不把确定性 mini-suite 冒充原论文完整 benchmark。本地只验证论文特有目标、状态更新和公平预算；没有复刻原论文的大模型、多卡 RL、私有环境、真实网页或完整 benchmark，因而只报告机制验证，不声称数值复现原表。PlanBench mini-suite、120 episodes、seed 42：joint success 0.0500，average cost 0.2800；方法特有操作有非零 telemetry。  技能设计 Agent 记忆与技能：让经验可取回、可失效 多次做相似任务时，Memento-Skills 希望避免哪些重复劳动？ Agent 的一次执行会留下有效步骤、错误和环境条件，但原样保存日志会让下一次仍需从头理解。Memento-Skills 研究把这些经历整理成可检索、可更新的技能，使后续任务能复用经验。技能是否有用取决于适用条件和真实执行，保存得多或版本增加都不是能力提升证据。 教学例：第一次整理账单发现日期格式问题，下一次可调用带格式检查的技能，而不是重读整次失败日志再猜处理顺序。 2026-10-27">

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-13",
+  "figures": [
+    {
+      "file": "paper-figure-01.png",
+      "paper_id": "2604.02910",
+      "version": "v1",
+      "figure": 1,
+      "page_number": null,
+      "paper_url": "https://arxiv.org/abs/2604.02910v1",
+      "source_url": "https://arxiv.org/html/2604.02910v1/images/harvest_h05-08_w009_s09_bw.png",
+      "source_kind": "fixed_v1_html_original_image",
+      "pdf_sha256": null,
+      "image_sha256": "8fb70ad406720d904adcafc5a77d6cc64a6412f10db02709db6ce20073bc4d64",
+      "render_scale": null,
+      "crop_pdf_points": null,
+      "caption_included": false,
+      "scientific_content_modified": false,
+      "visual_review_done": true,
+      "attribution": "Copyright belongs to the original authors; original-paper illustration is not a local component result.",
+      "license": "See original fixed arXiv source; no new license granted."
+    }
+  ]
+}

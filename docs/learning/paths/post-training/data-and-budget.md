@@ -7,7 +7,7 @@ hide:
 
 # 数据与预算：下一份算力花在哪里
 
-[LLM 后训练](index.md) / 152 个问题 · 38 篇论文
+[LLM 后训练](index.md) / 156 个问题 · 39 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">152 个问题 · 38 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">156 个问题 · 39 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:ask-to-distill" data-paper-title="Ask to Distill: Learning to Synthesize Data for On-Policy Distillation" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="Ask to Distill: Learning to Synthesize Data for On-Policy Distillation LLM 后训练 University of Illinois Urbana-Champaign 2026-10-20 问题决定学生会走到哪些前缀，因而决定教师能提供什么监督。A2D 冻结评分用的师生，训练独立的问题合成器；奖励同时要求“有差异”和“教师偏好的候选仍落在学生可达支持集”，然后筛选问题库，再从原始学生初始化执行 OPD。不是给每道问题做一次学生微调来估价。 完整实验成本过高，不复现（审查 DONE）。三 seed 仍只是机制诊断。仅实现 L1 奖励与更新公式组件，不是完整合成数据系统或能力复现。diagnostic_only=true；不可晋级、未接入 Evolve。完整实验成本过高，不复现（审查 DONE）。本页属于 10 月 21 日同一公告的补审，不是上一批之后的新首发。无下载、无预训练模型调用。随机生成的 logits、显式 mask 和外部 cluster share 只检查公式，不生成自然语言问题。CPU/CUDA 都运行同一算子；CUDA 不可用报错，不回退。输出不可覆盖，最多三个 seed；三 seed 仍只是机制诊断。  On-policy distillation 蒸馏数据合成与筛选 LLM 后训练 数据与预算：下一份算力花在哪里 A2D为什么训练问题合成器而非先直接训练学生？ 问题决定学生访问哪些前缀，也决定教师能提供什么帮助。先冻结评分师生、优化提问分布，再筛库并从原学生开始蒸馏，分开课程学习与学生更新。 例如先寻找学生有差距又能学的练习题，而非边改题边偷偷累计学生收益。 2026-10-27">
@@ -1776,6 +1776,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>例如一个音译函数能运行，不意味着论文的参数知识检索机制已接入。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.17070v1">原论文</a> · <a href="../../../../post-training/2603.17070-cross-script-knowledge-transfer/">实现解读</a> · <a href="#qa-0480a7b8e8e475bc">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:maple-icl" data-paper-title="MAPLE: Metadata Augmented Private Language Evolution" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="MAPLE: Metadata Augmented Private Language Evolution LLM 后训练 National Taiwan University 2026-02-26 Private Evolution 的初始合成文本若偏离目标领域，后续多轮演化难以纠正。MAPLE 先从私有文本抽取固定 schema 的分类 metadata，用 AIM 生成 DP 表格 metadata，再结合非私有已捐赠的 metadata–text 示例初始化文本，最后继续 AugPE。局部可独立执行的步骤是：对每条 synthetic metadata，按分类 Hamming 距离从 50 条 donated 示例选最近 10 条。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有私有metadata抽取、AIM、隐私预算组合、embedding、AugPE、Qwen生成或下游训练。不得把本组件输出称DP合成数据；它只是依赖外部DP与捐赠前提的确定性ICL选择。Donation 要求显式示例 ID、metadata、原文本和外部 consent_ref；select_examples 实际按 Hamming 取 k 项。  隐私保护数据构建 LLM 后训练 数据与预算：下一份算力花在哪里 MAPLE为什么不能直接把私有metadata和原文本当few-shot示例？ 那会绕开隐私保护，把私有记录交给生成模型。原方法先用AIM私有化metadata，示例来自已捐赠或公开非私有数据；本地不证明这两个前提。 教学例：把患者原病历标成consent_ref字符串并不会自动获得合法同意或DP保证。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
+<span id="paper-post-training-maple-icl-8f3e7c76" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-fd52e25ff45f6482">MAPLE为什么不能直接把私有metadata和原文本当few-shot示例？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Amaple-icl">MAPLE: Metadata Augmented Private Language Evolution</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · National Taiwan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>那会绕开隐私保护，把私有记录交给生成模型。原方法先用AIM私有化metadata，示例来自已捐赠或公开非私有数据；本地不证明这两个前提。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把患者原病历标成consent_ref字符串并不会自动获得合法同意或DP保证。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.19258">原论文</a> · <a href="../../../../post-training/2603.19258-maple-icl/">实现解读</a> · <a href="#qa-fd52e25ff45f6482">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:maple-icl" data-paper-title="MAPLE: Metadata Augmented Private Language Evolution" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="MAPLE: Metadata Augmented Private Language Evolution LLM 后训练 National Taiwan University 2026-02-26 Private Evolution 的初始合成文本若偏离目标领域，后续多轮演化难以纠正。MAPLE 先从私有文本抽取固定 schema 的分类 metadata，用 AIM 生成 DP 表格 metadata，再结合非私有已捐赠的 metadata–text 示例初始化文本，最后继续 AugPE。局部可独立执行的步骤是：对每条 synthetic metadata，按分类 Hamming 距离从 50 条 donated 示例选最近 10 条。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有私有metadata抽取、AIM、隐私预算组合、embedding、AugPE、Qwen生成或下游训练。不得把本组件输出称DP合成数据；它只是依赖外部DP与捐赠前提的确定性ICL选择。Donation 要求显式示例 ID、metadata、原文本和外部 consent_ref；select_examples 实际按 Hamming 取 k 项。  隐私保护数据构建 LLM 后训练 数据与预算：下一份算力花在哪里 word-count桶是数字，为什么仍按Hamming而非欧氏距离？ schema把它们当离散类别，每个不等字段贡献1，与数值差大小无关。统一除以字段数不会改变top-k；本地返回计数并稳定处理并列。 教学例：目标100，示例50与1000都在该字段上不相等，均贡献1，不应给1000更大惩罚。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-2ba3232b0d38d269">word-count桶是数字，为什么仍按Hamming而非欧氏距离？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Amaple-icl">MAPLE: Metadata Augmented Private Language Evolution</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · National Taiwan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>schema把它们当离散类别，每个不等字段贡献1，与数值差大小无关。统一除以字段数不会改变top-k；本地返回计数并稳定处理并列。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：目标100，示例50与1000都在该字段上不相等，均贡献1，不应给1000更大惩罚。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.19258">原论文</a> · <a href="../../../../post-training/2603.19258-maple-icl/">实现解读</a> · <a href="#qa-2ba3232b0d38d269">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:maple-icl" data-paper-title="MAPLE: Metadata Augmented Private Language Evolution" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="MAPLE: Metadata Augmented Private Language Evolution LLM 后训练 National Taiwan University 2026-02-26 Private Evolution 的初始合成文本若偏离目标领域，后续多轮演化难以纠正。MAPLE 先从私有文本抽取固定 schema 的分类 metadata，用 AIM 生成 DP 表格 metadata，再结合非私有已捐赠的 metadata–text 示例初始化文本，最后继续 AugPE。局部可独立执行的步骤是：对每条 synthetic metadata，按分类 Hamming 距离从 50 条 donated 示例选最近 10 条。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有私有metadata抽取、AIM、隐私预算组合、embedding、AugPE、Qwen生成或下游训练。不得把本组件输出称DP合成数据；它只是依赖外部DP与捐赠前提的确定性ICL选择。Donation 要求显式示例 ID、metadata、原文本和外部 consent_ref；select_examples 实际按 Hamming 取 k 项。  隐私保护数据构建 LLM 后训练 数据与预算：下一份算力花在哪里 MAPLE的ICL选择器比随机示例更贴近metadata，是否已复现完整隐私合成？ 没有。它只是初始化的一步；AIM的DP生成、预算组合、文本模型和AugPE仍缺失。原文也发现初始化单独不等于完整MAPLE，不能用近邻正确性替隐私效用结果。 教学例：选对10条公开示例不会自动让之后未经DP处理的私有投票安全。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-7192380046474a2c">MAPLE的ICL选择器比随机示例更贴近metadata，是否已复现完整隐私合成？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Amaple-icl">MAPLE: Metadata Augmented Private Language Evolution</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · National Taiwan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>没有。它只是初始化的一步；AIM的DP生成、预算组合、文本模型和AugPE仍缺失。原文也发现初始化单独不等于完整MAPLE，不能用近邻正确性替隐私效用结果。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：选对10条公开示例不会自动让之后未经DP处理的私有投票安全。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.19258">原论文</a> · <a href="../../../../post-training/2603.19258-maple-icl/">实现解读</a> · <a href="#qa-7192380046474a2c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:maple-icl" data-paper-title="MAPLE: Metadata Augmented Private Language Evolution" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="MAPLE: Metadata Augmented Private Language Evolution LLM 后训练 National Taiwan University 2026-02-26 Private Evolution 的初始合成文本若偏离目标领域，后续多轮演化难以纠正。MAPLE 先从私有文本抽取固定 schema 的分类 metadata，用 AIM 生成 DP 表格 metadata，再结合非私有已捐赠的 metadata–text 示例初始化文本，最后继续 AugPE。局部可独立执行的步骤是：对每条 synthetic metadata，按分类 Hamming 距离从 50 条 donated 示例选最近 10 条。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有私有metadata抽取、AIM、隐私预算组合、embedding、AugPE、Qwen生成或下游训练。不得把本组件输出称DP合成数据；它只是依赖外部DP与捐赠前提的确定性ICL选择。Donation 要求显式示例 ID、metadata、原文本和外部 consent_ref；select_examples 实际按 Hamming 取 k 项。  隐私保护数据构建 LLM 后训练 数据与预算：下一份算力花在哪里 为什么缺一个schema字段不能默认填Other后继续排序？ 默认填值会改变分类距离并掩盖上游抽取问题。组件要求字段齐全和值在公开域内；并列用输入顺序是局部约定，不宣称原作指定。 教学例：缺研究领域字段时填Other可能把错误示例推到前面，应该让调用方补齐来源。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 数据与预算：下一份算力花在哪里</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-4405c68a675b9f5c">为什么缺一个schema字段不能默认填Other后继续排序？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Amaple-icl">MAPLE: Metadata Augmented Private Language Evolution</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · National Taiwan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>默认填值会改变分类距离并掩盖上游抽取问题。组件要求字段齐全和值在公开域内；并列用输入顺序是局部约定，不宣称原作指定。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：缺研究领域字段时填Other可能把错误示例推到前面，应该让调用方补齐来源。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.19258">原论文</a> · <a href="../../../../post-training/2603.19258-maple-icl/">实现解读</a> · <a href="#qa-4405c68a675b9f5c">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:prompt-level-distillation" data-paper-title="Prompt-Level Distillation: A Non-Parametric Alternative to Model Fine-Tuning for Efficient Reasoning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/data-and-budget" data-search="Prompt-Level Distillation: A Non-Parametric Alternative to Model Fine-Tuning for Efficient Reasoning LLM 后训练 Google 2026-02-24 PLD 不微调学生参数，而把教师推理抽象为可审查的系统指令：先用带标签训练样本提取微规则，经语义向量 DBSCAN 去掉噪声、合成规则，再根据训练错误修订冲突。学生最终使用整理后的规则，不读取每个测试样本的答案。图按原文 Figure 1 重绘。原始流程图。 成本过高，不复现（审查 DONE）。历史高优先补漏资料；成本过高，不复现（审查 DONE）。没有本地能力结果或可执行 Evolve 算子。§4.1 使用 Gemini 3 Flash thinking 提取、Gemini 3 Pro thinking 合成和修复、Gemini Embedding 聚类，学生含 Gemma-3 4B / Gemini 2 Flash。多阶段闭源调用与完整多任务评测成本无法廉价固定，成本过高，不复现（审查 DONE），不下载模型探成本。  Context distillation 提示级非参数蒸馏 LLM 后训练 数据与预算：下一份算力花在哪里 PLD不微调参数，知识最终存在哪里？ 存于教师抽象、聚类和修订得到的可读系统规则，学生推理时读取冻结指令。规则是学习产物，参数不变不表示没有训练数据依赖。 例如把常见日期处理经验编成几条指令，部署时作为学生系统提示。 2026-10-27">

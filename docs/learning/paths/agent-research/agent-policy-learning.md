@@ -7,7 +7,7 @@ hide:
 
 # 交互策略学习：把轨迹反馈变成更新
 
-[Agent](index.md) / 212 个问题 · 53 篇论文
+[Agent](index.md) / 216 个问题 · 54 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">212 个问题 · 53 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">216 个问题 · 54 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:frontier-opd" data-paper-title="Frontier-OPD: Discovering the Edge of Agent Capability and Teaching Agents to Go Beyond" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Frontier-OPD: Discovering the Edge of Agent Capability and Teaching Agents to Go Beyond Agent Tsinghua University 2026-10-23 同一个环境观测可能经不同历史反复到达，直接按访问次数或 token 数平均会让循环轨迹主导教师介入判断。Frontier-OPD 先在轨迹内、再在轨迹间聚合有符号师生分歧，对不同状态选原历史代表；教师桥与学生续跑须通过同长窗口比较后才接纳，状态共享不能替代真实历史或任务成功评测。排名只寻找值得试验的节点。教师最多接管回合，再让学生继续回合。新窗口必须和原历史从同一位置开始的回合窗口比较；只有成功重放、非终止交接、完整有效续跑且师生 agreement 不下降，桥的教师响应才加入训练。 成本过高，不复现（审查 DONE）。本地排名和接纳诊断不复现上述分数。本轮已在CPU及真实NVIDIA A100上执行同一冻结版本、42/43/44三个种子：独立机制指标、脱敏GPU凭证。仅验收下述L1组件，不宣称完整模型能力。  Agentic OPD / rollout budgeting 学习前沿与教师桥 Agent 交互策略学习：把轨迹反馈变成更新 Frontier-OPD 为什么只在部分状态请教师接管，而不让教师生成所有训练轨迹？ 强教师的完整交互昂贵，而且直接模仿其顺利轨迹未必覆盖学生会卡住的位置。Frontier-OPD 从学生自己到达的状态寻找值得尝试教学的前沿，让教师短暂搭桥后交回学生；节省预算的同时还需验证这段教学是否真的适合学生续跑。 例如学生反复卡在找钥匙后的开门步骤，可针对该位置试一小段教师帮助，而不是每道题都由教师从头完成。 2026-10-27">
@@ -769,6 +769,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>例如导出 JSONL 通过字段检查只说明可审计输入，若未训练并独立评测模型，就不能报告 ACE 带来任务成功率提升。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、复现边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.27260">原论文</a> · <a href="../../../../agent-research/2608.27260-ace-data/">实现解读</a> · <a href="#qa-4855db385496d579">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:instruct-to-act" data-paper-title="Decoupling Planning and Control for Instructable Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Decoupling Planning and Control for Instructable Agents Agent UC Berkeley 2026-08-27 VLM 擅长低频高层规划，但不擅长陌生环境的低延迟动作；world-model controller 能高频动作，却缺开放任务指导。Instruct-to-Act 用稀疏文本指令连接二者，并用自身rollout后标注指令，而非专家示范。从replay选择互不重叠区间，为区间各步绑定同一外部VLM指令embedding，只在末步标complete。BC训练已标注动作，stop目标训练指令完成，模型／value／actor原损失仍须保留。局部loss不是拿BC替掉Dreamer或伪造语言encoder。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有RSSM、Dreamer actor/value/model losses、MiniLM指令编码、GPT4o标注、异步VLM线程、Minecraft/其他环境bridge或策略学习。无法由固定tensorloss推断低延迟规划或机器人安全；本地不接Evolve。  语言指令与世界模型控制 Agent 交互策略学习：把轨迹反馈变成更新 Instruct-to-Act为什么不让VLM每一步直接输出低层动作？ 高层VLM推理慢，controller能快速根据观察动作。稀疏语言指导与高频worldmodel控制解耦，但controller仍需环境特定训练。 教学例：VLM说先砍树，controller连续执行移动和挥动，不能因一条文字指令就假装会所有动作。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<span id="paper-agent-research-instruct-to-act-ae615c2d" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-b012aaecb4f08176">Instruct-to-Act为什么不让VLM每一步直接输出低层动作？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ainstruct-to-act">Decoupling Planning and Control for Instructable Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · UC Berkeley</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>高层VLM推理慢，controller能快速根据观察动作。稀疏语言指导与高频worldmodel控制解耦，但controller仍需环境特定训练。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：VLM说先砍树，controller连续执行移动和挥动，不能因一条文字指令就假装会所有动作。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.26788">原论文</a> · <a href="../../../../agent-research/2608.26788-instruct-to-act/">实现解读</a> · <a href="#qa-b012aaecb4f08176">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:instruct-to-act" data-paper-title="Decoupling Planning and Control for Instructable Agents" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Decoupling Planning and Control for Instructable Agents Agent UC Berkeley 2026-08-27 VLM 擅长低频高层规划，但不擅长陌生环境的低延迟动作；world-model controller 能高频动作，却缺开放任务指导。Instruct-to-Act 用稀疏文本指令连接二者，并用自身rollout后标注指令，而非专家示范。从replay选择互不重叠区间，为区间各步绑定同一外部VLM指令embedding，只在末步标complete。BC训练已标注动作，stop目标训练指令完成，模型／value／actor原损失仍须保留。局部loss不是拿BC替掉Dreamer或伪造语言encoder。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有RSSM、Dreamer actor/value/model losses、MiniLM指令编码、GPT4o标注、异步VLM线程、Minecraft/其他环境bridge或策略学习。无法由固定tensorloss推断低延迟规划或机器人安全；本地不接Evolve。  语言指令与世界模型控制 Agent 交互策略学习：把轨迹反馈变成更新 一段后标指令为什么只有末步complete=true？ 整个区间的动作共同实现同一指令，前面步骤仍在执行；末端才代表完成。每步都标true会让stophead学到立即结束。 教学例：移动三步到门口，不能第一步就标到达；末步完成标签与episode结束也不相同。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-d4ca750f1447c592">一段后标指令为什么只有末步complete=true？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ainstruct-to-act">Decoupling Planning and Control for Instructable Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · UC Berkeley</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>整个区间的动作共同实现同一指令，前面步骤仍在执行；末端才代表完成。每步都标true会让stophead学到立即结束。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：移动三步到门口，不能第一步就标到达；末步完成标签与episode结束也不相同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.26788">原论文</a> · <a href="../../../../agent-research/2608.26788-instruct-to-act/">实现解读</a> · <a href="#qa-d4ca750f1447c592">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:instruct-to-act" data-paper-title="Decoupling Planning and Control for Instructable Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Decoupling Planning and Control for Instructable Agents Agent UC Berkeley 2026-08-27 VLM 擅长低频高层规划，但不擅长陌生环境的低延迟动作；world-model controller 能高频动作，却缺开放任务指导。Instruct-to-Act 用稀疏文本指令连接二者，并用自身rollout后标注指令，而非专家示范。从replay选择互不重叠区间，为区间各步绑定同一外部VLM指令embedding，只在末步标complete。BC训练已标注动作，stop目标训练指令完成，模型／value／actor原损失仍须保留。局部loss不是拿BC替掉Dreamer或伪造语言encoder。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有RSSM、Dreamer actor/value/model losses、MiniLM指令编码、GPT4o标注、异步VLM线程、Minecraft/其他环境bridge或策略学习。无法由固定tensorloss推断低延迟规划或机器人安全；本地不接Evolve。  语言指令与世界模型控制 Agent 交互策略学习：把轨迹反馈变成更新 算出BC和stoploss是否已复现语言worldmodelcontroller？ 没有。原目标还包括RSSM模型、actor、value训练及真实rollout，指令embedding和标注器也不可缺。本地仅真实执行两项辅助目标，不替代缺失网络。 教学例：一组logits梯度正确，不等于模型在Minecraft能挖出钻石。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-e89212435012fabf">算出BC和stoploss是否已复现语言worldmodelcontroller？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ainstruct-to-act">Decoupling Planning and Control for Instructable Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · UC Berkeley</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>没有。原目标还包括RSSM模型、actor、value训练及真实rollout，指令embedding和标注器也不可缺。本地仅真实执行两项辅助目标，不替代缺失网络。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一组logits梯度正确，不等于模型在Minecraft能挖出钻石。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.26788">原论文</a> · <a href="../../../../agent-research/2608.26788-instruct-to-act/">实现解读</a> · <a href="#qa-e89212435012fabf">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:instruct-to-act" data-paper-title="Decoupling Planning and Control for Instructable Agents" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="Decoupling Planning and Control for Instructable Agents Agent UC Berkeley 2026-08-27 VLM 擅长低频高层规划，但不擅长陌生环境的低延迟动作；world-model controller 能高频动作，却缺开放任务指导。Instruct-to-Act 用稀疏文本指令连接二者，并用自身rollout后标注指令，而非专家示范。从replay选择互不重叠区间，为区间各步绑定同一外部VLM指令embedding，只在末步标complete。BC训练已标注动作，stop目标训练指令完成，模型／value／actor原损失仍须保留。局部loss不是拿BC替掉Dreamer或伪造语言encoder。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有RSSM、Dreamer actor/value/model losses、MiniLM指令编码、GPT4o标注、异步VLM线程、Minecraft/其他环境bridge或策略学习。无法由固定tensorloss推断低延迟规划或机器人安全；本地不接Evolve。  语言指令与世界模型控制 Agent 交互策略学习：把轨迹反馈变成更新 未标注动作和padding在两个loss中怎么区别？ 未标注valid动作不算BC，但complete=false所以是stop负例；padding在两项都排除。把未标注步也从stop删掉会改变论文目标。 教学例：有效自主动作应学到不停止，补齐batch的空位则不能产生任何训练梯度。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 交互策略学习：把轨迹反馈变成更新</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-216a83e433c093a6">未标注动作和padding在两个loss中怎么区别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ainstruct-to-act">Decoupling Planning and Control for Instructable Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · UC Berkeley</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>未标注valid动作不算BC，但complete=false所以是stop负例；padding在两项都排除。把未标注步也从stop删掉会改变论文目标。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：有效自主动作应学到不停止，补齐batch的空位则不能产生任何训练梯度。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.26788">原论文</a> · <a href="../../../../agent-research/2608.26788-instruct-to-act/">实现解读</a> · <a href="#qa-216a83e433c093a6">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ahead" data-paper-title="AHEAD: Agentic Hints for Effective Agent Development" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/agent-policy-learning" data-search="AHEAD: Agentic Hints for Effective Agent Development Agent AWS AI Labs / Purdue University 2026-08-25 轨迹级 GRPO 给所有步骤同一 advantage；统一 privileged information 又浪费在普通步骤上。AHEAD 先分析失败轨迹定位关键错误：所有步骤的 teacher 都看到环境反馈，只有错误步骤额外看到 LLM corrective hint；teacher/student log-prob gap 被有界地注入 GRPO advantage。 复现级别：核心机制 mini-suite。复现级别：核心机制 mini-suite。普通步骤只用环境反馈，错误步骤再追加 corrective hint，并生成稠密信用。mini-suite 使用确定性错误位置验证 step-aware PI 分流；未运行 LLM analyzer、Qwen、真实 GRPO 或三个原始 benchmark。PlanBench-mini 120 episodes：24 个 error-step hint、360 个 dense-credit 更新，joint success 1.0000，平均成本 0.6160。  环境反馈提示训练 Agent 交互策略学习：把轨迹反馈变成更新 AHEAD 为什么不满足于给长程 Agent 整条轨迹同一个成功或失败反馈？ 轨迹中可能只有少数关键错误决定终局，其他步骤则合理或只是受错误连累，统一信用难以说明应改哪里。AHEAD 研究用针对性的教师信号调整这些步骤的学习重点。更细信号也依赖错误定位可靠性，训练教师的额外信息不能被当成部署 Agent 已知答案。 教学例：多步检索只有第三次查询偏离目标，后续失败不应让所有正确取证步骤承担相同责任；需要识别真正关键的偏差。 2026-10-27">

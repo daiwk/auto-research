@@ -7,7 +7,7 @@ hide:
 
 # 交互学习：统一轨迹之后，信用和教师信息怎样分配
 
-[Agent](../index.md) · 更新 2026-10-27 · 53 篇主题资料 / 6 篇重点对照
+[Agent](../index.md) · 更新 2026-11-13 · 54 篇主题资料 / 7 篇重点对照
 
 Agent Lightning先把执行整理成可训练transition；GiGPO、AdaStep和DepGPO分别利用重复状态、回报方差与命令依赖分配信用；Frontier-OPD和ASTEROID则改变教师数据怎样进入学生学习。记录成轨迹只是入口，训练目标和可见信息才定义算法。
 
@@ -31,6 +31,7 @@ Agent Lightning先把执行整理成可训练transition；GiGPO、AdaStep和DepG
 | [Credit Where It Matters: Dependency-Aware Policy Optimization for Terminal Agents](../../../agent-research/2610.03634-depgpo/README.md) · [原始来源](https://arxiv.org/abs/2610.03634)<br>章节：背景与主要改动、公式与关键区别、复现边界与下一步 | 从verifier资源向命令读写依赖反追，给直接/间接写入和支持读取分信用，并保持token加权优势均值。 | 依赖真实tracer和verifier资源清理，不从shell文本猜依赖；本地手工命令诊断非Terminal-Bench训练。 |
 | [Frontier-OPD: Discovering the Edge of Agent Capability and Teaching Agents to Go Beyond](../../../agent-research/2610.32802-frontier-opd/README.md) · [原始来源](https://arxiv.org/abs/2610.32802v1)<br>章节：背景与主要改动、核心公式、本地复现 | 轨迹平衡聚合有符号师生分歧来挑介入状态，短教师桥加学生续跑经等长agreement门后仅桥响应入训练。 | 排名不是接纳、agreement不是成功率，验证续跑不进入训练池；本地A100只验L1数值协议，完整训练高成本。 |
 | [Asymmetric On-Policy Distillation Learns In-Context Exploration](../../../agent-research/2610.30105-asteroid/README.md) · [原始来源](https://arxiv.org/abs/2610.30105v1)<br>章节：背景与主要改动、核心公式、保留的定义机制与缩小边界 | 学生先收探索历史，再在同隐藏任务收专家完整成功轨迹，训练学生据自身历史预测专家动作。 | BAMDP跨episode与一般POMDP takeover不可混用；本地是单步三门、真实小模型训练诊断，非多步机器人能力。 |
+| [Decoupling Planning and Control for Instructable Agents](../../../agent-research/2608.26788-instruct-to-act/README.md) · [原始来源](https://arxiv.org/abs/2608.26788)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界 | 用自身rollout后标指令区间，BC监督已标动作、stop监督完成端点；保留Dreamer其他目标。 | AgentLightning解耦执行与RL训练transition，Instruct-to-Act解耦规划与高频控制。两种解耦不是同一接口，标签正确也不能补缺失RSSM和环境学习。 |
 
 </div>
 
@@ -47,6 +48,12 @@ GiGPO通过同锚状态中的动作回报比较补充全局优势；AdaStep进�
 Frontier-OPD在学生访问状态中选择短介入，接纳需比较实际桥长加续跑的同长窗口，且只把教师桥响应加入训练。ASTEROID在学生探索历史之后提供同隐藏任务的完整成功episode，使训练覆盖专家顺利开局之外的上下文。两者都利用教师，却采不同单位和目标；部署侧仍只能用公开观察与自身历史，不能为了方便重放把隐藏任务、gold或未来结果加进actor。
 
 对照来源：[frontier-opd](../../../agent-research/2610.32802-frontier-opd/README.md) · [asteroid](../../../agent-research/2610.30105-asteroid/README.md)
+
+### 轨迹变成训练数据时，目标边界比统一接口更重要
+
+AgentLightning把异构执行记录变成可归因transition；Instruct-to-Act用同一episode内非重叠区间绑定语言，在末步标指令完成。未标注有效步不贡献BC却仍是stop负例，padding两者排除。完整controller还需RSSM、actor/value与真实rollout，单独两项loss不得宣传为通用指令执行器。
+
+对照来源：[instruct-to-act](../../../agent-research/2608.26788-instruct-to-act/README.md) · [agent-lightning](../../../agent-research/2508.03680-agent-lightning/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -82,15 +89,29 @@ Frontier-OPD在学生访问状态中选择短介入，接纳需比较实际桥�
 
     对照来源：[agent-lightning](../../../agent-research/2508.03680-agent-lightning/README.md) · [gigpo](../../../agent-research/2505.10978-gigpo/README.md) · [frontier-opd](../../../agent-research/2610.32802-frontier-opd/README.md)
 
+### 算出BC和stoploss是否已复现语言worldmodelcontroller？ {#cross-cross-colm-instruct-to-act}
+
+??? note "展开答案与例子"
+
+    **答案：** 没有。原目标还包括RSSM模型、actor、value训练及真实rollout，指令embedding和标注器也不可缺。本地仅真实执行两项辅助目标，不替代缺失网络。
+
+    **教学例子：** 教学例：一组logits梯度正确，不等于模型在Minecraft能挖出钻石。
+
+    对照来源：[instruct-to-act](../../../agent-research/2608.26788-instruct-to-act/README.md) · [agent-lightning](../../../agent-research/2508.03680-agent-lightning/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-13** · 补入instruct-to-act历史遗漏，用自身rollout后标指令区间，BC监督已标动作、stop监督完成端点；保留Dreamer其他目标。 AgentLightning解耦执行与RL训练transition，Instruct-to-Act解耦规划与高频控制。两种解耦不是同一接口，标签正确也不能补缺失RSSM和环境学习。
+
+涉及：[instruct-to-act](../../../agent-research/2608.26788-instruct-to-act/README.md) · [agent-lightning](../../../agent-research/2508.03680-agent-lightning/README.md)
 
 **2026-10-27** · 首版：比较transition接入、状态组信用、方差可靠性、命令依赖与两种教师数据机制，明确训练和部署信息边界。
 
 覆盖 53 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 53 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 54 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -147,6 +168,7 @@ Frontier-OPD在学生访问状态中选择短介入，接纳需比较实际桥�
 - [DeepResearcher](../../../agent-research/2504.03160-deepresearcher/README.md)
 - [Search-R1](../../../agent-research/2503.09516-search-r1/README.md)
 - [LOOP](../../../agent-research/2502.01600-loop/README.md)
+- [Decoupling Planning and Control for Instructable Agents](../../../agent-research/2608.26788-instruct-to-act/README.md)
 
 </details>
 

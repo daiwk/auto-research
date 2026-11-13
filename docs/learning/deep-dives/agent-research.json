@@ -103,6 +103,28 @@
             "数据协议与代码映射",
             "高成本完整实验与边界"
           ]
+        },
+        {
+          "paper": "agent-research:planning-optimality",
+          "position": "只判断计划能否达到目标，会忽略大量无必要动作。论文把LLM规划评测从validity扩展到optimality，在Blocksworld和抽象P*任务中构造具有已知最优长度的课程，分析推理模型随着难度增长的计划冗余。",
+          "tradeoff": "LATS分配搜索与rollout预算来寻找行动轨迹；本组件不生成LLM计划，只验证外部计划及计算受限课程gap。搜索分高不能代替真实前置条件验证，合法性分也不能替代最优性。",
+          "sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ]
+        },
+        {
+          "paper": "agent-research:clarification-sgp",
+          "position": "把猜测、澄清、多答案作为受数值成本条件化的动作，按解释均衡reward选序列后再选训练轨迹。",
+          "tradeoff": "ReAct据观察继续行动；SGP还问多一次沟通的收益是否抵成本。低成本时多问不等于高成本下也最优，本地选择器不具备对话语义能力。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ]
         }
       ],
       "analysis": [
@@ -146,6 +168,22 @@
           "papers": [
             "agent-research:era-flat-puct",
             "agent-research:lats"
+          ]
+        },
+        {
+          "title": "Planning Optimality：合法计划不等于最短计划：先区分干预对象和可用证据",
+          "body": "LATS分配搜索与rollout预算来寻找行动轨迹；本组件不生成LLM计划，只验证外部计划及计算受限课程gap。搜索分高不能代替真实前置条件验证，合法性分也不能替代最优性。 `transition` 不接收gold计划；`score_plan` 只由独立evaluator调用。小于等于6块时另用独立BFS穷举四操作图，不调用公式，校验多种排列的最短距离。负控包括无法pickup非桌面块、同塔多个目标拒绝、合法但多绕两步的计划gap=1。不是LLM planner、VAL兼容实现或Agent能力成绩。",
+          "papers": [
+            "agent-research:planning-optimality",
+            "agent-research:lats"
+          ]
+        },
+        {
+          "title": "澄清的价值必须连同沟通成本与解释分布一起定义",
+          "body": "ReAct让推理与工具观察交替，而SGP在存在私有意图的协作中显式训练行动形式。它先对解释均衡再选序列，避免只对好猜解释最优；数值成本还要与F1单位一致。两者都依赖真实模型产生有效观察或问题，本地满分控制检查不能相互排能力。",
+          "papers": [
+            "agent-research:clarification-sgp",
+            "agent-research:react"
           ]
         }
       ],
@@ -209,6 +247,26 @@
             "agent-research:era-flat-puct",
             "agent-research:lats"
           ]
+        },
+        {
+          "id": "nov13-colm-planning-optimality",
+          "question": "与LATS树搜索相比，这个组件解决了哪一层问题？",
+          "answer": "LATS分配搜索与rollout预算来寻找行动轨迹；本组件不生成LLM计划，只验证外部计划及计算受限课程gap。搜索分高不能代替真实前置条件验证，合法性分也不能替代最优性。",
+          "example": "LATS找到一个能完成任务的四步计划，而独立BFS发现两步解时，valid仍为真但gap=1。",
+          "papers": [
+            "agent-research:planning-optimality",
+            "agent-research:lats"
+          ]
+        },
+        {
+          "id": "cross-colm-clarification-sgp",
+          "question": "ReAct执行更多推理与工具轮次，就等于SGP中更优的沟通策略吗？",
+          "answer": "不等于。ReAct根据观察继续行动；SGP还把准确性收益与澄清、篇幅的数值成本比较。只有在相同成本与解释分布下评价reward，轮次数才有可比意义。",
+          "example": "教学例：多问一句虽提高正确率，却可能在高提问成本的语音任务中降低reward。",
+          "papers": [
+            "agent-research:clarification-sgp",
+            "agent-research:react"
+          ]
         }
       ],
       "updated": "2026-11-13",
@@ -231,7 +289,9 @@
         "agent-research:react",
         "agent-research:bats",
         "agent-research:ds-star",
-        "agent-research:era-flat-puct"
+        "agent-research:era-flat-puct",
+        "agent-research:planning-optimality",
+        "agent-research:clarification-sgp"
       ],
       "updates": [
         {
@@ -306,6 +366,30 @@
           "source_revisions": {
             "agent-research:era-flat-puct": "6c2ea882fd2d0189a3f932a02a12113bd35aacaaa0f97d59e80501116b5f6ef3",
             "agent-research:lats": "8ae228f18aa0e2c89a457475688d251bb0c2899ee86fcd2b3e0a4e4d44411c4c"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "agent-research:planning-optimality",
+            "agent-research:lats"
+          ],
+          "summary": "补入固定Google COLM历史来源论文及L1组件，比较核心定义与证据边界；完整实验明确不复现，不把本地诊断当模型能力或Evolve改进。",
+          "source_revisions": {
+            "agent-research:planning-optimality": "70f95350719817ea8743bf83e2b0bc31a2cd69a14073951b224018ab81d546c5",
+            "agent-research:lats": "8ae228f18aa0e2c89a457475688d251bb0c2899ee86fcd2b3e0a4e4d44411c4c"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "agent-research:clarification-sgp",
+            "agent-research:react"
+          ],
+          "summary": "补入clarification-sgp历史遗漏，把猜测、澄清、多答案作为受数值成本条件化的动作，按解释均衡reward选序列后再选训练轨迹。 ReAct据观察继续行动；SGP还问多一次沟通的收益是否抵成本。低成本时多问不等于高成本下也最优，本地选择器不具备对话语义能力。",
+          "source_revisions": {
+            "agent-research:clarification-sgp": "bcfc3426ac9f82a6fe1cb0a77ffa9fb5c23038102618b455d222f8c46adc72f3",
+            "agent-research:react": "e356d3e717cb7cf1b6f307cb79728bffd7d3d9807443aa881c22dab763ac518e"
           }
         }
       ]
@@ -428,6 +512,17 @@
             "数据协议与代码映射",
             "本地结果与负控"
           ]
+        },
+        {
+          "paper": "agent-research:policybank",
+          "position": "按工具能力存半结构化授权解释，header→ID选择→全文检索，再据外部开发反馈Add/Revise/Omit。",
+          "tradeoff": "MemGPT解决有限上下文的分层容量与换入换出，PolicyBank解决spec与requirement差异。容量足够不代表规则正确；本地PolicyBank只有L0合同，语义修复仍缺失。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ]
         }
       ],
       "analysis": [
@@ -487,6 +582,14 @@
           "papers": [
             "agent-research:lisa",
             "agent-research:memprice"
+          ]
+        },
+        {
+          "title": "记忆记得更多，与记忆中的授权规则可信，是两种问题",
+          "body": "MemGPT分层归档使长期信息可取回；PolicyBank则允许修正先前解释而不是反复遵守有缺口的规则。标题选择降低注入量，但相关ID选择仍需真实actor。外部PolicyAgent给出修正不应被库当成授权真理，本地只有typed变更和provenance；恶意反馈、真实权限审核与正式验证都在边界外。",
+          "papers": [
+            "agent-research:policybank",
+            "agent-research:memgpt"
           ]
         }
       ],
@@ -570,9 +673,19 @@
             "agent-research:lisa",
             "agent-research:memprice"
           ]
+        },
+        {
+          "id": "cross-colm-policybank",
+          "question": "成功轨迹记忆能否替代PolicyBank的授权解释更新？",
+          "answer": "不一定。轨迹告诉agent过去怎么做，可能反复执行有缺口的spec。PolicyBank关注开发反馈中的授权逻辑差异；本地结构化存储仍不具备语义修复能力。",
+          "example": "教学例：十次成功改签案例也无法证明不改签时应否补偿，需要明确边界反馈。",
+          "papers": [
+            "agent-research:policybank",
+            "agent-research:memgpt"
+          ]
         }
       ],
-      "updated": "2026-11-11",
+      "updated": "2026-11-13",
       "reviewed_papers": [
         "agent-research:cache-engineering",
         "agent-research:tokenworth",
@@ -633,7 +746,8 @@
         "agent-research:emma",
         "agent-research:engram-consolidation",
         "agent-research:wikitrace",
-        "agent-research:lisa"
+        "agent-research:lisa",
+        "agent-research:policybank"
       ],
       "updates": [
         {
@@ -806,6 +920,18 @@
           "summary": "补入证据量感知的广义策略门控和不门控局部冲突通道，区分记忆容量/效用与反馈可靠性；完整API评测高成本不复现。",
           "source_revisions": {
             "agent-research:lisa": "40ed2f47946b3f33598f1a1b5cc6298d5436f2f1f04866613f8d41ad149534a0"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "agent-research:policybank",
+            "agent-research:memgpt"
+          ],
+          "summary": "补入policybank历史遗漏，按工具能力存半结构化授权解释，header→ID选择→全文检索，再据外部开发反馈Add/Revise/Omit。 MemGPT解决有限上下文的分层容量与换入换出，PolicyBank解决spec与requirement差异。容量足够不代表规则正确；本地PolicyBank只有L0合同，语义修复仍缺失。",
+          "source_revisions": {
+            "agent-research:policybank": "c7edc9f6e99adaecc9c6877b41b8ebfb00812bf3eb4595c83a0cf55cd47c6c65",
+            "agent-research:memgpt": "468b0f83c09cf59f74f1961de490d034f5f454baae55fa2a36fcb391aa4407f3"
           }
         }
       ]
@@ -1427,6 +1553,17 @@
             "论文离线与线上效果",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "agent-research:co-director",
+          "position": "分别更新策略/叙事/美学轴的战略reward，用推荐冷启动和UCB选方向，独立质量分选择已有视频。",
+          "tradeoff": "CoDirector用UCB乐观探索尚不确定的创意方向；RuHarness按联合后验效用的低分位保守选择rubric frontier，再让独立validation决定harness是否晋级。探索奖励和准入证据不能互换，也都不把judge关联分当因果效应。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ]
         }
       ],
       "analysis": [
@@ -1543,6 +1680,14 @@
           "papers": [
             "agent-research:alphaevolve",
             "agent-research:scientist-one"
+          ]
+        },
+        {
+          "title": "乐观探索不等于保守准入：两种不确定性用途",
+          "body": "CoDirector在3/3/4个创意轴上用战略reward均值加UCB探索项分配下一次尝试，官方warmstart只推荐先试未观察arm，不虚构计数。RuHarness从六格联合Dirichlet后验抽2000次，取效用0.2分位保守选择active rubric，候选harness仍须独立validation严格增益超过0.05才晋级。前者的不确定性鼓励探索，后者抑制小样本虚高；不能用UCB高分替代验证改善。CoDirector最终成片还按独立质量分而非战略分之和选取。本地只核两类数值机制，没有视频生成、语义judge或完整自进化能力证据。",
+          "papers": [
+            "agent-research:co-director",
+            "agent-research:ruharness"
           ]
         }
       ],
@@ -1689,6 +1834,16 @@
             "agent-research:alphaevolve",
             "agent-research:scientist-one"
           ]
+        },
+        {
+          "id": "cross-colm-co-director",
+          "question": "CoDirector的UCB高分与RuHarness的后验低分位，为什么不能作为同一种晋级证据？",
+          "answer": "UCB故意给未充分探索的方向加乐观奖励，服务于下一次尝试；RuHarness用联合后验效用低分位抑制不确定的rubric点估计，并另外要求独立validation严格提升。两者调度对象和风险偏好不同，分轴judge评分也不能识别因果贡献。",
+          "example": "教学例：只试一次的新创意可因探索项很高而被再次选择，但一个只解释单次失败的rubric不应据此直接晋级；harness候选还必须跨过validation门槛。这不是实测效果。",
+          "papers": [
+            "agent-research:co-director",
+            "agent-research:ruharness"
+          ]
         }
       ],
       "updated": "2026-11-13",
@@ -1751,7 +1906,8 @@
         "agent-research:scientist-two",
         "agent-research:envharness",
         "agent-research:mle-star",
-        "agent-research:alphaevolve"
+        "agent-research:alphaevolve",
+        "agent-research:co-director"
       ],
       "updates": [
         {
@@ -1997,6 +2153,18 @@
             "agent-research:alphaevolve": "26aa215ad685d1a70d49041d3417204d5ba1049d98234341e9607f73abd8ac09",
             "agent-research:scientist-one": "ea68cf997c23ac6af079225a8601259adee74beece77fac8e7cfa8fa29105e82"
           }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "agent-research:co-director",
+            "agent-research:ruharness"
+          ],
+          "summary": "补入CoDirector分轴UCB和独立质量选优，与RuHarness联合后验低分位及validation准入比较：明确乐观探索和保守接受的不同不确定性用途；两者本地机制检查均不是完整生成或自进化能力。",
+          "source_revisions": {
+            "agent-research:co-director": "58ad99ff56809bf5026bbab820d90e9777cdbdc92d9c55f7e90eda1fc40a4216",
+            "agent-research:ruharness": "01c81c72f03453d7ecff3e3ab7e10ad03b9b84925a5fd8def1a87d678df02a37"
+          }
         }
       ]
     },
@@ -2069,6 +2237,17 @@
             "核心公式",
             "保留的定义机制与缩小边界"
           ]
+        },
+        {
+          "paper": "agent-research:instruct-to-act",
+          "position": "用自身rollout后标指令区间，BC监督已标动作、stop监督完成端点；保留Dreamer其他目标。",
+          "tradeoff": "AgentLightning解耦执行与RL训练transition，Instruct-to-Act解耦规划与高频控制。两种解耦不是同一接口，标签正确也不能补缺失RSSM和环境学习。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ]
         }
       ],
       "analysis": [
@@ -2088,6 +2267,14 @@
           "papers": [
             "agent-research:frontier-opd",
             "agent-research:asteroid"
+          ]
+        },
+        {
+          "title": "轨迹变成训练数据时，目标边界比统一接口更重要",
+          "body": "AgentLightning把异构执行记录变成可归因transition；Instruct-to-Act用同一episode内非重叠区间绑定语言，在末步标指令完成。未标注有效步不贡献BC却仍是stop负例，padding两者排除。完整controller还需RSSM、actor/value与真实rollout，单独两项loss不得宣传为通用指令执行器。",
+          "papers": [
+            "agent-research:instruct-to-act",
+            "agent-research:agent-lightning"
           ]
         }
       ],
@@ -2123,9 +2310,19 @@
             "agent-research:gigpo",
             "agent-research:frontier-opd"
           ]
+        },
+        {
+          "id": "cross-colm-instruct-to-act",
+          "question": "算出BC和stoploss是否已复现语言worldmodelcontroller？",
+          "answer": "没有。原目标还包括RSSM模型、actor、value训练及真实rollout，指令embedding和标注器也不可缺。本地仅真实执行两项辅助目标，不替代缺失网络。",
+          "example": "教学例：一组logits梯度正确，不等于模型在Minecraft能挖出钻石。",
+          "papers": [
+            "agent-research:instruct-to-act",
+            "agent-research:agent-lightning"
+          ]
         }
       ],
-      "updated": "2026-10-27",
+      "updated": "2026-11-13",
       "reviewed_papers": [
         "agent-research:frontier-opd",
         "agent-research:asteroid",
@@ -2179,7 +2376,8 @@
         "agent-research:ragen",
         "agent-research:deepresearcher",
         "agent-research:search-r1",
-        "agent-research:loop"
+        "agent-research:loop",
+        "agent-research:instruct-to-act"
       ],
       "updates": [
         {
@@ -2294,6 +2492,18 @@
             "agent-research:deepresearcher": "304ce8915140f3bc11fec646f4063c317393f70372ff0a916ff7140bf51b4da8",
             "agent-research:search-r1": "94da20d367467c02698dda006661b6b4ec5e81ee3fe8241936b268c8930b5f3b",
             "agent-research:loop": "fb686b27ba4596f2d8ec4a0c39a0700f75e3db48f4ecec24a9101e1649a259b9"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "agent-research:instruct-to-act",
+            "agent-research:agent-lightning"
+          ],
+          "summary": "补入instruct-to-act历史遗漏，用自身rollout后标指令区间，BC监督已标动作、stop监督完成端点；保留Dreamer其他目标。 AgentLightning解耦执行与RL训练transition，Instruct-to-Act解耦规划与高频控制。两种解耦不是同一接口，标签正确也不能补缺失RSSM和环境学习。",
+          "source_revisions": {
+            "agent-research:instruct-to-act": "82fd13e09ebc60a9ddef4b2986e7700afd4c1642d702a5ad847451245dd75ab7",
+            "agent-research:agent-lightning": "88baa5a31b38f5ab1099242151d513f0dafe5340c3852e144e001321ae05fc66"
           }
         }
       ]
@@ -2416,6 +2626,17 @@
             "来源核验",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "agent-research:mt-pingeval",
+          "position": "用各方私有视图与固定token总预算区分交互收益、额外输出和多次猜测机会；Name-game按完整记录判定。",
+          "tradeoff": "UserProxyBench审计模拟用户是否提前泄露，MT-PingEval测受控信息博弈中的协作。任务成功不替代信息边界合规，更多轮次也不自动代表协作更好。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ]
         }
       ],
       "analysis": [
@@ -2476,6 +2697,14 @@
           "papers": [
             "agent-research:alphaproof-code",
             "agent-research:reprobridge"
+          ]
+        },
+        {
+          "title": "私有信息测评先检查谁知道什么，再看谁答对",
+          "body": "UserProxyBench把用户合同保真与任务reward分开，并审计请求前披露。MT-PingEval用分离数据库或图像建立不对称信息，再固定每玩家token检验轮次。Name-game要比较完整记录而非同名，且应对照无放回随机猜。协议实现没有actor，只有真实模型和tokenizer接入后才能评价协作。",
+          "papers": [
+            "agent-research:mt-pingeval",
+            "agent-research:user-proxy-bench"
           ]
         }
       ],
@@ -2561,9 +2790,19 @@
             "agent-research:alphaproof-code",
             "agent-research:reprobridge"
           ]
+        },
+        {
+          "id": "cross-colm-mt-pingeval",
+          "question": "Name-game随轮数提高成功率，就一定是更好的协作吗？",
+          "answer": "不一定。更多轮次也给随机无放回猜记录更多机会，原文专门比较该基线。还需固定token预算和检查传递的信息，不能只看成功曲线。",
+          "example": "教学例：25行里每轮猜一行，允许16轮天然比2轮更容易撞对。",
+          "papers": [
+            "agent-research:mt-pingeval",
+            "agent-research:user-proxy-bench"
+          ]
         }
       ],
-      "updated": "2026-11-11",
+      "updated": "2026-11-13",
       "reviewed_papers": [
         "agent-research:physical-engineering-exam",
         "agent-research:scope-replay",
@@ -2612,7 +2851,8 @@
         "agent-research:xstack",
         "agent-research:are-bench",
         "agent-research:reprobridge",
-        "agent-research:alphaproof-code"
+        "agent-research:alphaproof-code",
+        "agent-research:mt-pingeval"
       ],
       "updates": [
         {
@@ -2765,6 +3005,18 @@
           "summary": "增加形式规格保真与传递依赖门控维度；明确高成本reference无本地证明能力，不用regex或玩具定理替代官方验证。",
           "source_revisions": {
             "agent-research:alphaproof-code": "59b4b3240a997fe7783fb61d85fd46e7a9ffd50ba00486231218ab4f4d50ff4e"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "agent-research:mt-pingeval",
+            "agent-research:user-proxy-bench"
+          ],
+          "summary": "补入mt-pingeval历史遗漏，用各方私有视图与固定token总预算区分交互收益、额外输出和多次猜测机会；Name-game按完整记录判定。 UserProxyBench审计模拟用户是否提前泄露，MT-PingEval测受控信息博弈中的协作。任务成功不替代信息边界合规，更多轮次也不自动代表协作更好。",
+          "source_revisions": {
+            "agent-research:mt-pingeval": "8d76f5844fbe873df528ef274e4e03c16a46520b1c7a5d4223780f5ef151cfe9",
+            "agent-research:user-proxy-bench": "d415873cbb379260c87b230a4bb250b67bed3f628ff32b671bb68e71b2ceb4b3"
           }
         }
       ]

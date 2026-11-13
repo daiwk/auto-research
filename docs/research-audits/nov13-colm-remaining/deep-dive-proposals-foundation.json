@@ -1,0 +1,486 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-13",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "foundation-models:rosetta-unification",
+      "target_card": "foundation-models/evaluation-and-evidence",
+      "source_revisions": {
+        "foundation-models:rosetta-unification": "fdd60506465e631510c3a1484ebc45ff621db68bc213aef4bf1903e6c584bc2a",
+        "foundation-models:thinking-to-recall": "3d42a1aece23df722b71c4b9a6a64846a01ec1c10cbc62d36b0130ce31fae90f"
+      },
+      "comparison": {
+        "position": "同一事实以不同语言出现时，模型可能把它们存成互不相通的表征。作者在受控合成知识图谱上从零训练小型 Transformer，分别改变平行事实比例、语言频率差异和语言可提取性，发现同语言准确率接近满分并不代表跨语言迁移良好。",
+        "tradeoff": "Rosetta观察/干预预训练语言分布及表示统一度；Thinking to Recall分析推理时自生成事实及其正确性。前者的相似度不是事实真值judge，后者的oracle条件准确率也不证明跨语言表示统一。",
+        "sections": [
+          "背景与主要改动",
+          "核心机制与公式",
+          "原文结果与限制",
+          "本地复现"
+        ]
+      },
+      "analysis": {
+        "title": "Rosetta：跨语言表征统一度与知识迁移：先区分干预对象和可用证据",
+        "body": "Rosetta观察/干预预训练语言分布及表示统一度；Thinking to Recall分析推理时自生成事实及其正确性。前者的相似度不是事实真值judge，后者的oracle条件准确率也不证明跨语言表示统一。 `average_cosine` 与 `unification_score` 实现有限、非零表示的集合余弦和逐组比值，拒绝接近零的分母。诊断验证尺度不变性、平均比值及集合自相似不等于对角线常数1。外部特征没有由本地模型生成；诊断不证明跨语言准确率提高。",
+        "papers": [
+          "foundation-models:rosetta-unification",
+          "foundation-models:thinking-to-recall"
+        ]
+      },
+      "question": {
+        "id": "nov13-colm-rosetta-unification",
+        "question": "Rosetta与Thinking to Recall都涉及事实，干预位置有什么不同？",
+        "answer": "Rosetta观察/干预预训练语言分布及表示统一度；Thinking to Recall分析推理时自生成事实及其正确性。前者的相似度不是事实真值judge，后者的oracle条件准确率也不证明跨语言表示统一。",
+        "example": "提高两语言表示相似度，不会自动判断某条中间生日事实是否幻觉；过滤正确事实也不保证低资源语言可读出知识。",
+        "papers": [
+          "foundation-models:rosetta-unification",
+          "foundation-models:thinking-to-recall"
+        ]
+      },
+      "update": {
+        "date": "2026-11-13",
+        "papers": [
+          "foundation-models:rosetta-unification",
+          "foundation-models:thinking-to-recall"
+        ],
+        "summary": "补入固定Google COLM历史来源论文及L1组件，比较核心定义与证据边界；完整实验明确不复现，不把本地诊断当模型能力或Evolve改进。"
+      },
+      "english": {
+        "comparison": {
+          "position": "The same fact can occupy separate language-specific representations. Controlled small-Transformer experiments vary parallel-fact coverage, language imbalance and language extractability, showing that near-perfect same-language recall does not establish cross-language transfer.",
+          "tradeoff": "Rosetta studies pretraining language distributions and representation unification; Thinking to Recall analyzes generated reasoning facts and their correctness. Similarity is not a truth judge, and oracle-conditioned accuracy does not establish multilingual unification."
+        },
+        "analysis": {
+          "title": "Rosetta: representation unification and cross-language transfer: intervention and evidence are different axes",
+          "body": "Rosetta studies pretraining language distributions and representation unification; Thinking to Recall analyzes generated reasoning facts and their correctness. Similarity is not a truth judge, and oracle-conditioned accuracy does not establish multilingual unification. The two functions implement finite nonzero set-cosine arithmetic and per-group ratios, rejecting unstable denominators. Negative controls check scale invariance and mean-of-ratios behavior. Representations are external inputs, so these checks provide no evidence of improved multilingual capability."
+        },
+        "question": {
+          "question": "How does Rosetta differ from Thinking to Recall?",
+          "answer": "Rosetta studies pretraining language distributions and representation unification; Thinking to Recall analyzes generated reasoning facts and their correctness. Similarity is not a truth judge, and oracle-conditioned accuracy does not establish multilingual unification.",
+          "example": "More similar language representations do not verify a generated birthday; verified reasoning facts do not ensure low-resource-language access."
+        },
+        "update": "Added a fixed Google COLM historical-source paper and its L1 component, comparing definitions and evidence boundaries. Full experiments are explicitly not reproduced; diagnostics are not capability or Evolve-improvement evidence."
+      }
+    },
+    {
+      "paper": "foundation-models:lidas",
+      "target_card": "foundation-models/training-budget",
+      "source_revisions": {
+        "foundation-models:lidas": "be77977eb086e191256ceb14fe78a5c1fb64879792d39290cd55be41bf6bf27d",
+        "foundation-models:stochastic-rounding": "2d38215ff494778a4ddd9cf33755f3e69edf0422d2af49ca3b99e521070b44c3"
+      },
+      "comparison": {
+        "position": "深层 Transformer 后半段可能对最终预测贡献很小。论文比较从浅到深逐步生长与固定深度预训练，并提出 LIDAS：以层而不是固定块的中点选择复制区域，使偶数块时的初始化区别于 MIDAS。",
+        "tradeoff": "LIDAS改变层数、初始化和优化器状态继承；随机舍入改变FP32主权重进入低精度参数时的量化分布。两者的控制变量、预算和误差来源不同，需分别验证，再做同预算组合实验。",
+        "sections": [
+          "背景与主要改动",
+          "核心机制与公式",
+          "原文结果与限制",
+          "本地复现"
+        ]
+      },
+      "analysis": {
+        "title": "LIDAS：按中间层生长 Transformer 并继承优化器状态：先区分干预对象和可用证据",
+        "body": "LIDAS改变层数、初始化和优化器状态继承；随机舍入改变FP32主权重进入低精度参数时的量化分布。两者的控制变量、预算和误差来源不同，需分别验证，再做同预算组合实验。 `grow_layers` 对实际 `nn.ModuleList` 和 AdamW 状态执行变换，保留列表外的embedding/head；不自动改任意模型的配置或位置索引。拒绝跨层绑权重，避免悄悄破坏权重共享语义。`prop1_schedule` 保留总预算；整数化使用明确的最大余数约定。负控覆盖AMSGrad所有状态不alias、scheduler不重启、复制层确有梯度和参数变化。",
+        "papers": [
+          "foundation-models:lidas",
+          "foundation-models:stochastic-rounding"
+        ]
+      },
+      "question": {
+        "id": "nov13-colm-lidas",
+        "question": "LIDAS与随机舍入都影响训练，为什么收益不能混算？",
+        "answer": "LIDAS改变层数、初始化和优化器状态继承；随机舍入改变FP32主权重进入低精度参数时的量化分布。两者的控制变量、预算和误差来源不同，需分别验证，再做同预算组合实验。",
+        "example": "层生长保持Adam moments；SR保持量化条件期望。两项都通过L1，不等于组合模型会更快达到同精度。",
+        "papers": [
+          "foundation-models:lidas",
+          "foundation-models:stochastic-rounding"
+        ]
+      },
+      "update": {
+        "date": "2026-11-13",
+        "papers": [
+          "foundation-models:lidas",
+          "foundation-models:stochastic-rounding"
+        ],
+        "summary": "补入固定Google COLM历史来源论文及L1组件，比较核心定义与证据边界；完整实验明确不复现，不把本地诊断当模型能力或Evolve改进。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Later Transformer layers may contribute little to predictions. The paper compares gradual depth growth with fixed-depth training and proposes LIDAS, whose layer-centered copy region differs from block-centered MIDAS when the block count is even.",
+          "tradeoff": "LIDAS changes depth, initialization and state inheritance; stochastic rounding changes how FP32 updates become low-precision parameters. Their budgets and error sources differ and need separate controls before a matched-budget combination."
+        },
+        "analysis": {
+          "title": "LIDAS: middle-layer growth with optimizer-state inheritance: intervention and evidence are different axes",
+          "body": "LIDAS changes depth, initialization and state inheritance; stochastic rounding changes how FP32 updates become low-precision parameters. Their budgets and error sources differ and need separate controls before a matched-budget combination. `grow_layers` transforms an actual ModuleList and AdamW state while leaving external embeddings/heads untouched; model-specific depth configuration and position indexing remain the caller's responsibility. Tied layers are rejected. PROP-1 conserves the total budget using an explicit largest-remainder convention. Controls test AMSGrad state independence, scheduler continuity and real copied-layer updates."
+        },
+        "question": {
+          "question": "Why should LIDAS and stochastic-rounding gains be kept separate?",
+          "answer": "LIDAS changes depth, initialization and state inheritance; stochastic rounding changes how FP32 updates become low-precision parameters. Their budgets and error sources differ and need separate controls before a matched-budget combination.",
+          "example": "Inherited Adam moments and unbiased quantization are distinct L1 properties, not proof of faster combined convergence."
+        },
+        "update": "Added a fixed Google COLM historical-source paper and its L1 component, comparing definitions and evidence boundaries. Full experiments are explicitly not reproduced; diagnostics are not capability or Evolve-improvement evidence."
+      }
+    },
+    {
+      "paper": "foundation-models:thinking-to-recall",
+      "target_card": "foundation-models/evaluation-and-evidence",
+      "source_revisions": {
+        "foundation-models:thinking-to-recall": "3d42a1aece23df722b71c4b9a6a64846a01ec1c10cbc62d36b0130ce31fae90f",
+        "foundation-models:rosetta-unification": "fdd60506465e631510c3a1484ebc45ff621db68bc213aef4bf1903e6c584bc2a"
+      },
+      "comparison": {
+        "position": "推理不仅可能分解复杂任务，也可能通过额外计算和相关事实的自检索帮助单跳知识召回。论文控制同一 hybrid 模型的 reasoning ON/OFF，区分计算缓冲与 factual priming，同时发现中间事实幻觉会连带增加最终答案错误。",
+        "tradeoff": "本地实现不能；它使用事后外部标注的事实真值模拟条件期望，只是离线oracle分析。要部署还需要不看gold的可靠事实验证器，并计入调用成本和误判；这不是由汇总公式自动得到的。",
+        "sections": [
+          "背景与主要改动",
+          "核心机制与公式",
+          "原文结果与限制",
+          "本地复现"
+        ]
+      },
+      "analysis": {
+        "title": "Thinking to Recall：事实干净轨迹的离线条件准确率：先区分干预对象和可用证据",
+        "body": "本地实现不能；它使用事后外部标注的事实真值模拟条件期望，只是离线oracle分析。要部署还需要不看gold的可靠事实验证器，并计入调用成本和误判；这不是由汇总公式自动得到的。 `conditional_expected_accuracy` 只返回汇总统计、保留/剔除题数，绝不返回被oracle选中的轨迹、行动或训练样本；默认严格要求每题100条。`pass_at_k` 使用无偏组合数估计。负控同时覆盖共同题目mask、逐题宏平均而非微平均、空事实集合和缺失子集。诊断中的真值数组是显式教学输入，不是Agent任务成绩。",
+        "papers": [
+          "foundation-models:thinking-to-recall",
+          "foundation-models:rosetta-unification"
+        ]
+      },
+      "question": {
+        "id": "nov13-colm-thinking-to-recall",
+        "question": "这种“优先正确事实轨迹”能像在线Agent策略一样部署吗？",
+        "answer": "本地实现不能；它使用事后外部标注的事实真值模拟条件期望，只是离线oracle分析。要部署还需要不看gold的可靠事实验证器，并计入调用成本和误判；这不是由汇总公式自动得到的。",
+        "example": "用gold确认哪条轨迹正确，再展示该轨迹给actor，会泄漏答案，不能算推理提升。",
+        "papers": [
+          "foundation-models:thinking-to-recall",
+          "foundation-models:rosetta-unification"
+        ]
+      },
+      "update": {
+        "date": "2026-11-13",
+        "papers": [
+          "foundation-models:thinking-to-recall",
+          "foundation-models:rosetta-unification"
+        ],
+        "summary": "补入固定Google COLM历史来源论文及L1组件，比较核心定义与证据边界；完整实验明确不复现，不把本地诊断当模型能力或Evolve改进。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Reasoning may help single-hop recall through extra computation and self-generated factual priming, not just task decomposition. Controlled reasoning ON/OFF comparisons distinguish these effects and associate hallucinated intermediate facts with answer errors.",
+          "tradeoff": "Not by this component. It uses post-hoc truth annotations to estimate offline conditional expectations. Deployment needs an oracle-free verifier with measured errors and costs."
+        },
+        "analysis": {
+          "title": "Thinking to Recall: offline conditional accuracy of factual traces: intervention and evidence are different axes",
+          "body": "Not by this component. It uses post-hoc truth annotations to estimate offline conditional expectations. Deployment needs an oracle-free verifier with measured errors and costs. The interface returns aggregate rates and retention counts only—not selected traces, actions or training examples—and defaults to exactly 100 samples per question. `pass_at_k` uses the combinatorial unbiased estimator. Controls cover the common question mask, macro rather than micro averaging, empty facts and missing subsets. Synthetic truth arrays are explicit evaluator fixtures, not agent scores."
+        },
+        "question": {
+          "question": "Can the clean-fact condition be deployed as an agent policy?",
+          "answer": "Not by this component. It uses post-hoc truth annotations to estimate offline conditional expectations. Deployment needs an oracle-free verifier with measured errors and costs.",
+          "example": "Choosing a trace by gold correctness and feeding it to an actor leaks the answer rather than improving reasoning."
+        },
+        "update": "Added a fixed Google COLM historical-source paper and its L1 component, comparing definitions and evidence boundaries. Full experiments are explicitly not reproduced; diagnostics are not capability or Evolve-improvement evidence."
+      }
+    },
+    {
+      "paper": "foundation-models:latent-generalization",
+      "target_card": "foundation-models/evaluation-and-evidence",
+      "source_revisions": {
+        "foundation-models:latent-generalization": "6ba5d43a5e2f8cdcedae84204cf4b83171aef83d11ca84510132a134c615491b",
+        "foundation-models:thinking-to-recall": "3d42a1aece23df722b71c4b9a6a64846a01ec1c10cbc62d36b0130ce31fae90f"
+      },
+      "comparison": {
+        "position": "模型记住 A>B 并不必然推出 B<A，记住多个关系也不保证能答出未显式训练的组合。论文把知识获取、会思考的轨迹引导、正确性RL分开，研究在一个结构训练出的推理能力能否迁移到仅做知识SFT的另一个结构。",
+        "tradeoff": "前者用受控知识获取和结构划分考察未显式答案的泛化；后者研究已有参数事实如何因计算和factual priming被读出。两者都不能把gold-conditioned teacher或事后标注暴露给最终actor。",
+        "sections": [
+          "背景与主要改动",
+          "核心机制与公式",
+          "原文结果与限制",
+          "本地复现"
+        ]
+      },
+      "analysis": {
+        "title": "Latent Generalization：区分已见答案与隐含答案的集合评测：先区分干预对象和可用证据",
+        "body": "前者用受控知识获取和结构划分考察未显式答案的泛化；后者研究已有参数事实如何因计算和factual priming被读出。两者都不能把gold-conditioned teacher或事后标注暴露给最终actor。 `score_completion` 要求heldout是all的子集，primary属于heldout，且gold集合非空；`exact_set_pass_at_n` 对已经完成的独立尝试计算无偏pass估计。负控显示：train recall=1可以同时heldout recall=0；heldout recall=1也能因额外误答导致exact=0。纯CPU离线评测，无模型训练、语义judge、Evolve或能力晋级。",
+        "papers": [
+          "foundation-models:latent-generalization",
+          "foundation-models:thinking-to-recall"
+        ]
+      },
+      "question": {
+        "id": "nov13-colm-latent-generalization",
+        "question": "它与Thinking to Recall的协议分别定位什么问题？",
+        "answer": "前者用受控知识获取和结构划分考察未显式答案的泛化；后者研究已有参数事实如何因计算和factual priming被读出。两者都不能把gold-conditioned teacher或事后标注暴露给最终actor。",
+        "example": "同一事实被更容易召回，不等于模型学会了未训练关系反转；两者需要不同holdout。",
+        "papers": [
+          "foundation-models:latent-generalization",
+          "foundation-models:thinking-to-recall"
+        ]
+      },
+      "update": {
+        "date": "2026-11-13",
+        "papers": [
+          "foundation-models:latent-generalization",
+          "foundation-models:thinking-to-recall"
+        ],
+        "summary": "补入固定Google COLM历史来源论文及L1组件，比较核心定义与证据边界；完整实验明确不复现，不把本地诊断当模型能力或Evolve改进。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Knowing A>B does not guarantee answering B<A or unseen relational combinations. The paper separates knowledge acquisition, reasoning-trace bootstrapping and correctness RL to test whether reasoning trained on one structure transfers to another exposed only through knowledge SFT.",
+          "tradeoff": "Latent generalization uses controlled acquisition/structure splits to test implicit completions; Thinking to Recall studies access to existing factual knowledge. Neither permits gold-conditioned teachers or post-hoc truth labels to leak to the deployed actor."
+        },
+        "analysis": {
+          "title": "Latent generalization: separating exposed and held-out answer-set recall: intervention and evidence are different axes",
+          "body": "Latent generalization uses controlled acquisition/structure splits to test implicit completions; Thinking to Recall studies access to existing factual knowledge. Neither permits gold-conditioned teachers or post-hoc truth labels to leak to the deployed actor. Input checks require a nonempty held-out subset and a held-out primary. Exact-set pass@N is estimated from completed independent attempts. Negative controls show that perfect exposed recall can coexist with zero held-out recall, and perfect held-out recall can still fail exact matching through false additions. This is CPU offline evaluation, without model training, semantic judging or Evolve promotion."
+        },
+        "question": {
+          "question": "What differs from Thinking to Recall?",
+          "answer": "Latent generalization uses controlled acquisition/structure splits to test implicit completions; Thinking to Recall studies access to existing factual knowledge. Neither permits gold-conditioned teachers or post-hoc truth labels to leak to the deployed actor.",
+          "example": "Better recall of one fact does not establish generalization to an unseen reversal relation."
+        },
+        "update": "Added a fixed Google COLM historical-source paper and its L1 component, comparing definitions and evidence boundaries. Full experiments are explicitly not reproduced; diagnostics are not capability or Evolve-improvement evidence."
+      }
+    },
+    {
+      "paper": "agent-research:planning-optimality",
+      "target_card": "agent-research/planning-and-search",
+      "source_revisions": {
+        "agent-research:planning-optimality": "70f95350719817ea8743bf83e2b0bc31a2cd69a14073951b224018ab81d546c5",
+        "agent-research:lats": "8ae228f18aa0e2c89a457475688d251bb0c2899ee86fcd2b3e0a4e4d44411c4c"
+      },
+      "comparison": {
+        "position": "只判断计划能否达到目标，会忽略大量无必要动作。论文把LLM规划评测从validity扩展到optimality，在Blocksworld和抽象P*任务中构造具有已知最优长度的课程，分析推理模型随着难度增长的计划冗余。",
+        "tradeoff": "LATS分配搜索与rollout预算来寻找行动轨迹；本组件不生成LLM计划，只验证外部计划及计算受限课程gap。搜索分高不能代替真实前置条件验证，合法性分也不能替代最优性。",
+        "sections": [
+          "背景与主要改动",
+          "核心机制与公式",
+          "原文结果与限制",
+          "本地复现"
+        ]
+      },
+      "analysis": {
+        "title": "Planning Optimality：合法计划不等于最短计划：先区分干预对象和可用证据",
+        "body": "LATS分配搜索与rollout预算来寻找行动轨迹；本组件不生成LLM计划，只验证外部计划及计算受限课程gap。搜索分高不能代替真实前置条件验证，合法性分也不能替代最优性。 `transition` 不接收gold计划；`score_plan` 只由独立evaluator调用。小于等于6块时另用独立BFS穷举四操作图，不调用公式，校验多种排列的最短距离。负控包括无法pickup非桌面块、同塔多个目标拒绝、合法但多绕两步的计划gap=1。不是LLM planner、VAL兼容实现或Agent能力成绩。",
+        "papers": [
+          "agent-research:planning-optimality",
+          "agent-research:lats"
+        ]
+      },
+      "question": {
+        "id": "nov13-colm-planning-optimality",
+        "question": "与LATS树搜索相比，这个组件解决了哪一层问题？",
+        "answer": "LATS分配搜索与rollout预算来寻找行动轨迹；本组件不生成LLM计划，只验证外部计划及计算受限课程gap。搜索分高不能代替真实前置条件验证，合法性分也不能替代最优性。",
+        "example": "LATS找到一个能完成任务的四步计划，而独立BFS发现两步解时，valid仍为真但gap=1。",
+        "papers": [
+          "agent-research:planning-optimality",
+          "agent-research:lats"
+        ]
+      },
+      "update": {
+        "date": "2026-11-13",
+        "papers": [
+          "agent-research:planning-optimality",
+          "agent-research:lats"
+        ],
+        "summary": "补入固定Google COLM历史来源论文及L1组件，比较核心定义与证据边界；完整实验明确不复现，不把本地诊断当模型能力或Evolve改进。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Checking goal reachability alone ignores unnecessary actions. The paper extends LLM planning evaluation from validity to optimality using Blocksworld and abstract P* curricula with known optimum lengths.",
+          "tradeoff": "LATS allocates search/rollout effort to find trajectories; this component only validates external plans and restricted-curriculum gaps. Search scores do not replace precondition verification, and validity does not establish optimality."
+        },
+        "analysis": {
+          "title": "Planning optimality: valid plans are not necessarily shortest: intervention and evidence are different axes",
+          "body": "LATS allocates search/rollout effort to find trajectories; this component only validates external plans and restricted-curriculum gaps. Search scores do not replace precondition verification, and validity does not establish optimality. `transition` receives no gold plan; scoring belongs to an independent evaluator. A separate bounded BFS explores the four-operator state graph for at most six blocks without calling the formula. Controls reject illegal pickups and multi-target source towers, and detect a valid detour with gap one. This is not an LLM planner, VAL replacement or agent capability result."
+        },
+        "question": {
+          "question": "How does this differ from LATS search?",
+          "answer": "LATS allocates search/rollout effort to find trajectories; this component only validates external plans and restricted-curriculum gaps. Search scores do not replace precondition verification, and validity does not establish optimality.",
+          "example": "A four-step valid result against a two-step BFS optimum has gap one."
+        },
+        "update": "Added a fixed Google COLM historical-source paper and its L1 component, comparing definitions and evidence boundaries. Full experiments are explicitly not reproduced; diagnostics are not capability or Evolve-improvement evidence."
+      }
+    },
+    {
+      "paper": "foundation-models:llm-stochasticity",
+      "target_card": "foundation-models/evaluation-and-evidence",
+      "source_revisions": {
+        "foundation-models:llm-stochasticity": "9c879b4c31cbbb96adda8b1bc5011027c39a1ccb1d26863d6fbc924bfddf4c6a",
+        "foundation-models:decoding-constrained-beam": "ec970f56615141cfc860ec86c9d443933ad7c9040bf6672f416bdaee23ebf69d"
+      },
+      "comparison": {
+        "position": "以固定计数的外部已完成样本，分别检验边缘分布拟合与时间依赖；卡方/KS的p值是检验统计证据，不是某个输出事件的概率。",
+        "tradeoff": "解码约束Beam对明确top-k归一化后的路径分布累加质量，给目标近逐字事件的确定性LB与可能质量bank；它不证明随机数独立。反过来，直方图未拒绝均匀不能替代路径风险界。两者都须固定被审计的分布、协议与证据侧边界。",
+        "sections": [
+          "核心机制与公式",
+          "原文结果与限制",
+          "本地复现"
+        ]
+      },
+      "analysis": {
+        "title": "样本检验的p值，与指定解码分布下的事件质量不是同一概率",
+        "body": "LLM Stochasticity从有限样本检查输出是否偏离目标边缘分布，并用时序统计揭示周期或依赖；检验未拒绝不等于目标分布成立，更不证明独立。解码约束Beam固定每步top-k内的归一化概率，不把距离剪枝后剩余分支重归一化，再对可行完整路径求LB并把可能的丢弃质量计入bank。这是事件质量界，不是GoF p值。两者结合时应分别报告采样协议与风险事件，不能把p=1写成100%随机或100%提取概率。本地两组件都只验数值/协议，未加载LLM执行完整审计。",
+        "papers": [
+          "foundation-models:llm-stochasticity",
+          "foundation-models:decoding-constrained-beam"
+        ]
+      },
+      "question": {
+        "id": "nov13-colm-llm-stochasticity",
+        "question": "均匀循环序列的卡方p=1，与解码约束Beam给出的近逐字风险LB=0.1，能否当作同一类概率比较？",
+        "answer": "不能。p=1表示该边缘频率检验没有拒绝均匀，确定性循环仍可能完全可预测；它不是输出事件概率。LB=0.1则是在明确top-k解码分布和目标距离事件下，已枚举路径的质量下界。两者的对象、假设和分母不同，时序独立性也不由任一数值自动保证。",
+        "example": "0,1,2,3循环1024次可有完美均匀直方图，但下一项由前一项确定。另一个模型的top-k概率树里枚举到目标邻域质量0.1，说明该事件至少有这部分质量，不说明模型采样是否使用独立随机源。",
+        "papers": [
+          "foundation-models:llm-stochasticity",
+          "foundation-models:decoding-constrained-beam"
+        ]
+      },
+      "update": {
+        "date": "2026-11-13",
+        "papers": [
+          "foundation-models:llm-stochasticity",
+          "foundation-models:decoding-constrained-beam"
+        ],
+        "summary": "把随机采样统计诊断与同卡解码概率界作对照：区分GoF p值、时序依赖和目标事件质量，固定各自被审计分布与边界；两个L1组件都不冒充完整LLM能力或安全审计。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Tests a fixed number of completed external samples for marginal fit and temporal dependence. Chi-square/KS p-values are test evidence, not probabilities of output events.",
+          "tradeoff": "Decoding-constrained beam search sums path mass under an explicitly top-k-renormalized distribution, providing a deterministic lower bound and a possible-mass bank for a near-verbatim event; it does not establish independent randomness. Conversely, a non-rejected histogram cannot replace a path-risk bound. Both require fixed distributions, protocols and evaluator boundaries."
+        },
+        "analysis": {
+          "title": "A goodness-of-fit p-value is not event mass under a decoding distribution",
+          "body": "LLM Stochasticity checks finite samples against target marginals and uses temporal statistics to expose cycles or dependence. Non-rejection establishes neither the null distribution nor independence. Decoding-constrained beam search fixes per-step top-k normalization, never renormalizes survivors after distance pruning, and sums feasible complete-path mass into a lower bound while retaining possible pruned mass in a bank. This is an event-mass bound, not a goodness-of-fit p-value. A combined evaluation must report sampling protocols and risk events separately: p=1 is neither 100% randomness nor 100% extraction probability. Both local components validate numerical/protocol properties without loading an LLM for a complete audit."
+        },
+        "question": {
+          "question": "Can a uniform cycle's chi-square p-value of one be compared directly with a decoding-constrained extraction-risk lower bound of 0.1?",
+          "answer": "No. The p-value reflects non-rejection of a marginal-frequency test; a deterministic cycle can still be fully predictable. It is not an output-event probability. The lower bound is enumerated path mass for a specified top-k decoding distribution and target-distance event. Objects, assumptions and denominators differ, and neither value establishes temporal independence.",
+          "example": "A repeating 0,1,2,3 sequence can have a perfect 1,024-sample histogram while its next symbol is determined by the previous one. A separate model's probability tree may assign at least 0.1 mass to an enumerated target neighborhood, without establishing whether sampling uses an independent random source."
+        },
+        "update": "Compared sampling diagnostics with same-card decoding-probability bounds: goodness-of-fit p-values, temporal dependence and target-event mass remain distinct. Both are L1 components, not full LLM capability or security-audit evidence."
+      }
+    },
+    {
+      "paper": "foundation-models:ecg-rag",
+      "target_card": "foundation-models/context-and-state",
+      "source_revisions": {
+        "foundation-models:ecg-rag": "2d522783223ba0b570c26df2de796e7731ee037643b31cc39a0543368a720c7f",
+        "foundation-models:adindex": "40695a1f88a78659747bd168ea114fd40ca8ff6bf280f69df9177eb61fea57f5"
+      },
+      "comparison": {
+        "position": "设备端RAG既要控制文档索引磁盘占用，也要限制生成时的上下文/KV开销。ECG不是简单把检索器输出拼进prompt，而是只存一份多向量检索表示，再经投影转成同一decoder可消费的压缩上下文，避免独立检索向量和压缩向量重复存储。",
+        "tradeoff": "不是。ECG压缩文档为共享语义向量并生成；ADIndex在模型注意力内部共享候选库，再逐query精排并补新token。外部文档表示压缩与因果KV索引的可见性、精度和成本单位不同。",
+        "sections": [
+          "背景与主要改动",
+          "核心机制与公式",
+          "原文结果与限制",
+          "本地复现"
+        ]
+      },
+      "analysis": {
+        "title": "ECG：检索和上下文压缩共享一套表示：先区分干预对象和可用证据",
+        "body": "不是。ECG压缩文档为共享语义向量并生成；ADIndex在模型注意力内部共享候选库，再逐query精排并补新token。外部文档表示压缩与因果KV索引的可见性、精度和成本单位不同。 `SharedRepresentation` 真正让compression依赖stored E_ret；`joint_loss` 固定teacher logits/relevance，不让teacher获得梯度，保留α与温度梯度。FKL按答案token求和再按题平均；只有显式hard negatives进入margin，正例不能混入负例mask。gate的大正bias原文无确数，本地5是明确初始化约定。未带pretrained decoder、索引、特殊token注入或完整训练管道。",
+        "papers": [
+          "foundation-models:ecg-rag",
+          "foundation-models:adindex"
+        ]
+      },
+      "question": {
+        "id": "nov13-colm-ecg-rag",
+        "question": "它与ADIndex都减少读取成本，是否是同一稀疏检索？",
+        "answer": "不是。ECG压缩文档为共享语义向量并生成；ADIndex在模型注意力内部共享候选库，再逐query精排并补新token。外部文档表示压缩与因果KV索引的可见性、精度和成本单位不同。",
+        "example": "ECG少存一套文档向量，不等于ADIndex少扫描历史key；二者的召回损失也不能同口径相加。",
+        "papers": [
+          "foundation-models:ecg-rag",
+          "foundation-models:adindex"
+        ]
+      },
+      "update": {
+        "date": "2026-11-13",
+        "papers": [
+          "foundation-models:ecg-rag",
+          "foundation-models:adindex"
+        ],
+        "summary": "补入固定Google COLM历史来源论文及L1组件，比较核心定义与证据边界；完整实验明确不复现，不把本地诊断当模型能力或Evolve改进。"
+      },
+      "english": {
+        "comparison": {
+          "position": "On-device RAG must limit both index storage and generation context/KV costs. ECG stores one multi-vector retrieval representation and projects it into compressed context for the same decoder, avoiding separate retrieval and compression representations.",
+          "tradeoff": "No. ECG compresses external documents into shared semantic vectors. ADIndex shares attention candidate banks, then refines per query and adds newly visible tokens. Their support, fidelity and cost units differ."
+        },
+        "analysis": {
+          "title": "ECG: shared representations for retrieval and context compression: intervention and evidence are different axes",
+          "body": "No. ECG compresses external documents into shared semantic vectors. ADIndex shares attention candidate banks, then refines per query and adds newly visible tokens. Their support, fidelity and cost units differ. Compression genuinely consumes stored E_ret. Teacher distributions/relevance are detached while alpha and temperature remain differentiable. FKL sums answer-token KLs before batch averaging; margin uses declared hard negatives only. The paper specifies a large positive gate bias but no exact value: five is an explicit local convention. There is no pretrained decoder, index, special-token integration or full training pipeline."
+        },
+        "question": {
+          "question": "Is ECG equivalent to ADIndex sparse retrieval?",
+          "answer": "No. ECG compresses external documents into shared semantic vectors. ADIndex shares attention candidate banks, then refines per query and adds newly visible tokens. Their support, fidelity and cost units differ.",
+          "example": "Eliminating duplicate document vectors is not the same as avoiding scans of historical attention keys."
+        },
+        "update": "Added a fixed Google COLM historical-source paper and its L1 component, comparing definitions and evidence boundaries. Full experiments are explicitly not reproduced; diagnostics are not capability or Evolve-improvement evidence."
+      }
+    },
+    {
+      "paper": "foundation-models:continuousbench",
+      "target_card": "foundation-models/training-budget",
+      "source_revisions": {
+        "foundation-models:continuousbench": "fa56a473668f84deaab923893e1c5a9fc33a84364d304290740b05d2ee2ae759",
+        "foundation-models:data-orchestra": "b9e3c1068982f4cb1526077c71b64e6baa645c98ad36eeae7a0060badc3456fe"
+      },
+      "comparison": {
+        "position": "若benchmark已经被基座模型做得很好，合成数据是否真正传递新知识就难以区分。ContinuousBench定期生成或整理未见知识语料及相应QA，统一训练/evaluator设置，并与未经该语料训练的同一基座比较；关注高重复公共事实的utility，不要求DP模型记住单条私有记录。",
+        "tradeoff": "不说明。gain评估合成数据utility，ε/δ隐私来自明确DP机制和会计；不应混淆高重复事实可学与单条私有记录可记忆。本地没有DP训练/会计，也没有复现News的LLMjudge。",
+        "sections": [
+          "背景与主要改动",
+          "核心机制与公式",
+          "原文结果与限制",
+          "本地复现"
+        ]
+      },
+      "analysis": {
+        "title": "ContinuousBench：衡量合成文本带来的新能力而非旧题记忆：先区分干预对象和可用证据",
+        "body": "不说明。gain评估合成数据utility，ε/δ隐私来自明确DP机制和会计；不应混淆高重复事实可学与单条私有记录可记忆。本地没有DP训练/会计，也没有复现News的LLMjudge。 `score_geminon` 独立实现固定作者代码的清洗/匹配语义；`capability_gain`要求两臂题目ID、问题、gold与release revision完全一致，基线必须显式给出；`select_validation_checkpoint`拒绝test行。不得把contains与exact混为一谈：Flying and Normal可覆盖Normal and Flying的两类型，但不是相同字符串。无模型调用、HF大下载、DP-SGD或News自动judge。",
+        "papers": [
+          "foundation-models:continuousbench",
+          "foundation-models:data-orchestra"
+        ]
+      },
+      "question": {
+        "id": "nov13-colm-continuousbench",
+        "question": "有更高capability gain就说明DP更安全吗？",
+        "answer": "不说明。gain评估合成数据utility，ε/δ隐私来自明确DP机制和会计；不应混淆高重复事实可学与单条私有记录可记忆。本地没有DP训练/会计，也没有复现News的LLMjudge。",
+        "example": "一个非DP数据生成器可有很高QA准确率，仍不满足任何声称的隐私预算。",
+        "papers": [
+          "foundation-models:continuousbench",
+          "foundation-models:data-orchestra"
+        ]
+      },
+      "update": {
+        "date": "2026-11-13",
+        "papers": [
+          "foundation-models:continuousbench",
+          "foundation-models:data-orchestra"
+        ],
+        "summary": "补入固定Google COLM历史来源论文及L1组件，比较核心定义与证据边界；完整实验明确不复现，不把本地诊断当模型能力或Evolve改进。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Saturated benchmarks cannot reveal whether synthetic text transfers new knowledge. ContinuousBench periodically releases fresh corpora and derived QA, standardizes evaluator training and compares against the same unchanged base model. Utility centers on repeated facts rather than memorizing singleton private records.",
+          "tradeoff": "No. Gain measures utility; epsilon/delta require a specified DP mechanism and accountant. Repeated-fact learning is not permission to memorize singleton records. Local code includes neither DP training/accounting nor the News judge."
+        },
+        "analysis": {
+          "title": "ContinuousBench: measuring new capability from synthetic text: intervention and evidence are different axes",
+          "body": "No. Gain measures utility; epsilon/delta require a specified DP mechanism and accountant. Repeated-fact learning is not permission to memorize singleton records. Local code includes neither DP training/accounting nor the News judge. The component independently implements the pinned cleaner/matcher semantics. Paired gains require identical IDs, questions, references and release revisions, with an explicit base arm. Test rows cannot select checkpoints. 'Flying and Normal' may contain both required types but is not the exact string 'Normal and Flying'. No model calls, large downloads, DP-SGD or automatic News judge are included."
+        },
+        "question": {
+          "question": "Does higher capability gain establish stronger DP privacy?",
+          "answer": "No. Gain measures utility; epsilon/delta require a specified DP mechanism and accountant. Repeated-fact learning is not permission to memorize singleton records. Local code includes neither DP training/accounting nor the News judge.",
+          "example": "A non-DP generator may score highly while satisfying no claimed privacy budget."
+        },
+        "update": "Added a fixed Google COLM historical-source paper and its L1 component, comparing definitions and evidence boundaries. Full experiments are explicitly not reproduced; diagnostics are not capability or Evolve-improvement evidence."
+      }
+    }
+  ]
+}

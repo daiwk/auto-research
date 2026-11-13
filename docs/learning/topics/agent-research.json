@@ -39,7 +39,9 @@
         "agent-research:react",
         "agent-research:bats",
         "agent-research:ds-star",
-        "agent-research:era-flat-puct"
+        "agent-research:era-flat-puct",
+        "agent-research:planning-optimality",
+        "agent-research:clarification-sgp"
       ]
     },
     {
@@ -119,7 +121,8 @@
         "agent-research:emma",
         "agent-research:engram-consolidation",
         "agent-research:lisa",
-        "agent-research:wikitrace"
+        "agent-research:wikitrace",
+        "agent-research:policybank"
       ]
     },
     {
@@ -269,7 +272,8 @@
         "agent-research:scientist-two",
         "agent-research:envharness",
         "agent-research:mle-star",
-        "agent-research:alphaevolve"
+        "agent-research:alphaevolve",
+        "agent-research:co-director"
       ]
     },
     {
@@ -342,7 +346,8 @@
         "agent-research:ragen",
         "agent-research:deepresearcher",
         "agent-research:search-r1",
-        "agent-research:loop"
+        "agent-research:loop",
+        "agent-research:instruct-to-act"
       ]
     },
     {
@@ -409,7 +414,8 @@
         "agent-research:xstack",
         "agent-research:reprobridge",
         "agent-research:are-bench",
-        "agent-research:alphaproof-code"
+        "agent-research:alphaproof-code",
+        "agent-research:mt-pingeval"
       ]
     }
   ]

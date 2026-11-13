@@ -7,7 +7,7 @@ hide:
 
 # 长上下文：注意力、递归状态与记忆
 
-[基础模型](index.md) / 152 个问题 · 38 篇论文
+[基础模型](index.md) / 156 个问题 · 39 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">152 个问题 · 38 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">156 个问题 · 39 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:adindex" data-paper-title="ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation 基础模型 Nanjing University / Alibaba Group 2026-11-07 DSA 为每个 query 独立扫描整个因果前缀来选 Top-K。ADIndex 发现相邻 query 的候选有层相关的重叠：先校准各层组大小与候选库容量，再训练一个较少 head 的组索引器。组内先共享一次全前缀扫描，随后原 DSA 仍逐 query 精排，并补入 anchor 后新可见的 token；不是把所有 query 的最终索引强行设为相同。 成本过高，不复现（审查 DONE）。诊断只在 4 个 query、32 个历史 key 上执行 64 步学生优化，检查训练 KL、冻结梯度、因果索引、新可见 token 和回退分支。L1 机制组件：小张量组索引器与候选精排，不是 DeepSeek/GLM 长文能力、SGLang serving 或加速比复现。GroupIndexer 接受外部提供的归一化 query latent、hidden 与严格 anchor 可见的 keys；本地冻结这些输入。teacher_distribution、forward_kl、refine_indices 与 union_capacity 对应教师、蒸馏、精排和容量统计。  注意力与长上下文 稀疏索引与共享候选库 基础模型 长上下文：注意力、递归状态与记忆 ADIndex 共享候选库，是不是让组内所有 query 用相同最终 Top-K？ 不是。组索引器只共享 anchor 可见历史上的候选库；每个 query 还会补入 anchor 后自己新可见的 token，再用原 DSA 分数独立精排。共享的是昂贵全前缀扫描，不是最终注意力位置。 教学例：anchor=31、query=34，共享库可能都是0到31里的位置，但32、33、34必须补进候选，最终Top-K仍可与query=32不同。 2026-11-11">
@@ -1617,6 +1617,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>教学例：两段整数token得到0.9奖励，只说明该输入满足奖励公式，不说明任何语言模型权重发生了变化。</p>
 <p class="ar-learning-sources">依据：本地复现与边界、高成本完整实验；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.03979v2">原论文</a> · <a href="../../../../foundation-models/2606.03979-sleep-lti/">实现解读</a> · <a href="#qa-da8dd16e738119ab">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ecg-rag" data-paper-title="A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation 基础模型 University of Massachusetts Amherst 2026-04-15 设备端RAG既要控制文档索引磁盘占用，也要限制生成时的上下文/KV开销。ECG不是简单把检索器输出拼进prompt，而是只存一份多向量检索表示，再经投影转成同一decoder可消费的压缩上下文，避免独立检索向量和压缩向量重复存储。 完整实验成本过高，不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU及真实NVIDIA A100-SXM4-80GB的42/43/44三种子L1检查已通过；只运行小张量算子，没有完整训练。未接入Evolve，不可据本地fixture成绩晋级。SharedRepresentation 真正让compression依赖stored E_ret；joint_loss 固定teacher logits/relevance，不让teacher获得梯度，保留α与温度梯度。  检索增强与记忆 统一检索与上下文压缩 基础模型 长上下文：注意力、递归状态与记忆 ECG为什么不分别存检索向量和压缩向量？ 它让同一份E_ret既支持多向量检索，又经compression投影变成decoder上下文，减少重复索引存储。仅共用模型权重但仍存两套独立向量，不是这一表示统一设计。 检索命中的E_ret从磁盘读入后可直接进入compression，而非再加载另一套文档缓存。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-ecg-rag-313aa17c" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-4c0dae522269b505">ECG为什么不分别存检索向量和压缩向量？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aecg-rag">A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · University of Massachusetts Amherst</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它让同一份E_ret既支持多向量检索，又经compression投影变成decoder上下文，减少重复索引存储。仅共用模型权重但仍存两套独立向量，不是这一表示统一设计。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>检索命中的E_ret从磁盘读入后可直接进入compression，而非再加载另一套文档缓存。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.14403v1">原论文</a> · <a href="../../../../foundation-models/2604.14403-ecg-rag/">实现解读</a> · <a href="#qa-4c0dae522269b505">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ecg-rag" data-paper-title="A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation 基础模型 University of Massachusetts Amherst 2026-04-15 设备端RAG既要控制文档索引磁盘占用，也要限制生成时的上下文/KV开销。ECG不是简单把检索器输出拼进prompt，而是只存一份多向量检索表示，再经投影转成同一decoder可消费的压缩上下文，避免独立检索向量和压缩向量重复存储。 完整实验成本过高，不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU及真实NVIDIA A100-SXM4-80GB的42/43/44三种子L1检查已通过；只运行小张量算子，没有完整训练。未接入Evolve，不可据本地fixture成绩晋级。SharedRepresentation 真正让compression依赖stored E_ret；joint_loss 固定teacher logits/relevance，不让teacher获得梯度，保留α与温度梯度。  检索增强与记忆 统一检索与上下文压缩 基础模型 长上下文：注意力、递归状态与记忆 联合loss中的teacher方向、缩放和α分别有什么用？ 生成是teacher||student前向KL；E_ret除sqrt(d)用于点积，compression前乘回；margin用ΔS-αΔT以适配teacher分数尺度。teacher须detach，而α和正温度必须保留梯度。 若把teacher logits也训练，目标本身会追随student变化；若固定α=1则不再有论文强调的可学习scale。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-193a8244f3627f75">联合loss中的teacher方向、缩放和α分别有什么用？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aecg-rag">A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · University of Massachusetts Amherst</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>生成是teacher||student前向KL；E_ret除sqrt(d)用于点积，compression前乘回；margin用ΔS-αΔT以适配teacher分数尺度。teacher须detach，而α和正温度必须保留梯度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>若把teacher logits也训练，目标本身会追随student变化；若固定α=1则不再有论文强调的可学习scale。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.14403v1">原论文</a> · <a href="../../../../foundation-models/2604.14403-ecg-rag/">实现解读</a> · <a href="#qa-193a8244f3627f75">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ecg-rag" data-paper-title="A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation 基础模型 University of Massachusetts Amherst 2026-04-15 设备端RAG既要控制文档索引磁盘占用，也要限制生成时的上下文/KV开销。ECG不是简单把检索器输出拼进prompt，而是只存一份多向量检索表示，再经投影转成同一decoder可消费的压缩上下文，避免独立检索向量和压缩向量重复存储。 完整实验成本过高，不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU及真实NVIDIA A100-SXM4-80GB的42/43/44三种子L1检查已通过；只运行小张量算子，没有完整训练。未接入Evolve，不可据本地fixture成绩晋级。SharedRepresentation 真正让compression依赖stored E_ret；joint_loss 固定teacher logits/relevance，不让teacher获得梯度，保留α与温度梯度。  检索增强与记忆 统一检索与上下文压缩 基础模型 长上下文：注意力、递归状态与记忆 它与ADIndex都减少读取成本，是否是同一稀疏检索？ 不是。ECG压缩文档为共享语义向量并生成；ADIndex在模型注意力内部共享候选库，再逐query精排并补新token。外部文档表示压缩与因果KV索引的可见性、精度和成本单位不同。 ECG少存一套文档向量，不等于ADIndex少扫描历史key；二者的召回损失也不能同口径相加。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-834c48da62a20584">它与ADIndex都减少读取成本，是否是同一稀疏检索？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aecg-rag">A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · University of Massachusetts Amherst</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。ECG压缩文档为共享语义向量并生成；ADIndex在模型注意力内部共享候选库，再逐query精排并补新token。外部文档表示压缩与因果KV索引的可见性、精度和成本单位不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>ECG少存一套文档向量，不等于ADIndex少扫描历史key；二者的召回损失也不能同口径相加。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.14403v1">原论文</a> · <a href="../../../../foundation-models/2604.14403-ecg-rag/">实现解读</a> · <a href="#qa-834c48da62a20584">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ecg-rag" data-paper-title="A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation 基础模型 University of Massachusetts Amherst 2026-04-15 设备端RAG既要控制文档索引磁盘占用，也要限制生成时的上下文/KV开销。ECG不是简单把检索器输出拼进prompt，而是只存一份多向量检索表示，再经投影转成同一decoder可消费的压缩上下文，避免独立检索向量和压缩向量重复存储。 完整实验成本过高，不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU及真实NVIDIA A100-SXM4-80GB的42/43/44三种子L1检查已通过；只运行小张量算子，没有完整训练。未接入Evolve，不可据本地fixture成绩晋级。SharedRepresentation 真正让compression依赖stored E_ret；joint_loss 固定teacher logits/relevance，不让teacher获得梯度，保留α与温度梯度。  检索增强与记忆 统一检索与上下文压缩 基础模型 长上下文：注意力、递归状态与记忆 小张量联合loss能反传，为什么还不能说复现了端侧RAG？ 还缺pretrained decoder、特殊embedding token训练、语料索引、检索、上下文注入和真实问答/系统评测。L1仅验共享表示依赖、梯度和loss定义；原文8H100训练与百万passage评测明确不复现。 projection梯度非零不能推出NQ exact match、手机延迟或1/10上下文的作者成绩。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-e117caceb28c0563">小张量联合loss能反传，为什么还不能说复现了端侧RAG？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aecg-rag">A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · University of Massachusetts Amherst</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>还缺pretrained decoder、特殊embedding token训练、语料索引、检索、上下文注入和真实问答/系统评测。L1仅验共享表示依赖、梯度和loss定义；原文8H100训练与百万passage评测明确不复现。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>projection梯度非零不能推出NQ exact match、手机延迟或1/10上下文的作者成绩。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.14403v1">原论文</a> · <a href="../../../../foundation-models/2604.14403-ecg-rag/">实现解读</a> · <a href="#qa-e117caceb28c0563">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:switch-attention" data-paper-title="Switch Attention: Towards Dynamic and Fine-grained Hybrid Transformers" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Switch Attention: Towards Dynamic and Fine-grained Hybrid Transformers 基础模型 Peking University / Huawei Technologies 2026-03-27 静态 hybrid attention 对所有 token 使用固定模式。Switch Attention 学习细粒度 router，只让需要全局信息的 token 走 full attention。 Fidelity: 核心机制复现。实现逐 token 动态选择 full/local attention 的可学习 router。本地使用可微 soft router，未复刻论文 STE 硬路由、32K continual pretraining 和 branch-selective fused kernel。本地对照口径：基线是 full-attention tiny Transformer；实验组动态混合 full 与 16-token local attention；30-step perplexity 相对 +0.19%（近似持平但略差）。  llm-architecture efficient-attention long-context 基础模型 长上下文：注意力、递归状态与记忆 Switch Attention 的 local 与 full 两条路径，分别能读到哪些历史？ local只看限定窗口内的可见位置，full可读完整因果历史。二者首先是证据范围与读取成本的差别；router根据token决定路径，不是让full路径访问未来token。 示意：回答刚出现的局部词组可能只需近邻，关联很久以前的信息才可能需要更广历史。 2026-10-27">

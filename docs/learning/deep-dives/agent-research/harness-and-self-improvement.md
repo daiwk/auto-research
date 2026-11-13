@@ -7,7 +7,7 @@ hide:
 
 # 自改进先标对象：答案、经验、接口与系统版本
 
-[Agent](../index.md) · 更新 2026-11-13 · 59 篇主题资料 / 22 篇重点对照
+[Agent](../index.md) · 更新 2026-11-13 · 60 篇主题资料 / 23 篇重点对照
 
 Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。
 
@@ -47,6 +47,7 @@ Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens �
 | [EnvHarness: Awakening Static Worlds for Agent Learning](../../../agent-research/2608.19880-envharness/README.md) · [原始来源](https://arxiv.org/abs/2608.19880)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界 | 在固定环境的标准接口外组合初态重放、动作/转换/观察hook和串行任务，保留各基础环境的成功判据。 | 它改环境而非模型外工具/记忆；可reset、可信verifier和新rollout验收是前提。本地只有CPU包装器，无EnvRigger、模型学习、真实bridge或安全sandbox。 |
 | [MLE-STAR: Machine Learning Engineering Agent via Search and Targeted Refinement](../../../agent-research/2506.15692-mle-star/README.md) · [原始来源](https://arxiv.org/abs/2506.15692v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 检索模型并实际验证合并，再以消融定位高影响代码块，内层改写/验证、外层重新定位，集成另行搜索。 | 搜索材料与块级训练反馈必须真实执行；不同于MARS按成本奖励调度仓库候选。八V100及小时级完整矩阵不复现，本地无控制器或能力指标。 |
 | [AlphaEvolve: A coding agent for scientific and algorithmic discovery](../../../agent-research/2506.13131-alphaevolve/README.md) · [原始来源](https://arxiv.org/abs/2506.13131v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果、高成本完整实验 | 固定人类评价合同，混合LLM提案、级联执行评价与多维进化档案，异步探索程序空间。 | 指标优化仍受评价器充分性约束，不等于ScientistOne的主张/引用/方法完整性审计。官方只开放构造验证资料，完整搜索/生产矩阵高成本不复现，本地没有算子。 |
+| [Co-Director: Agentic Generative Video Storytelling](../../../agent-research/2604.24842-co-director/README.md) · [原始来源](https://arxiv.org/abs/2604.24842)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界 | 分别更新策略/叙事/美学轴的战略reward，用推荐冷启动和UCB选方向，独立质量分选择已有视频。 | CoDirector用UCB乐观探索尚不确定的创意方向；RuHarness按联合后验效用的低分位保守选择rubric frontier，再让独立validation决定harness是否晋级。探索奖励和准入证据不能互换，也都不把judge关联分当因果效应。 |
 
 </div>
 
@@ -129,6 +130,12 @@ MLE-STAR用执行消融选择代码块，在相对固定的局部空间内反复
 AlphaEvolve需要一个能实际评价候选程序的目标，靠程序库和模型提案产生改进；ScientistOne继续追问论文数字是否复算、引文是否存在并支持主张、方法文字是否对应代码。构造通过指定检查只支持那项性质，不能把生成的论文全部自动判真；证据链可靠也不能保证搜索有创新。官方结果notebook可验证已给出的对象，但不恢复原发现过程，本库因此只收录有据成本审查。
 
 对照来源：[alphaevolve](../../../agent-research/2506.13131-alphaevolve/README.md) · [scientist-one](../../../agent-research/2605.26340-scientist-one/README.md)
+
+### 乐观探索不等于保守准入：两种不确定性用途
+
+CoDirector在3/3/4个创意轴上用战略reward均值加UCB探索项分配下一次尝试，官方warmstart只推荐先试未观察arm，不虚构计数。RuHarness从六格联合Dirichlet后验抽2000次，取效用0.2分位保守选择active rubric，候选harness仍须独立validation严格增益超过0.05才晋级。前者的不确定性鼓励探索，后者抑制小样本虚高；不能用UCB高分替代验证改善。CoDirector最终成片还按独立质量分而非战略分之和选取。本地只核两类数值机制，没有视频生成、语义judge或完整自进化能力证据。
+
+对照来源：[co-director](../../../agent-research/2604.24842-co-director/README.md) · [ruharness](../../../agent-research/2610.36826-ruharness/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -274,9 +281,23 @@ AlphaEvolve需要一个能实际评价候选程序的目标，靠程序库和模
 
     对照来源：[alphaevolve](../../../agent-research/2506.13131-alphaevolve/README.md) · [scientist-one](../../../agent-research/2605.26340-scientist-one/README.md)
 
+### CoDirector的UCB高分与RuHarness的后验低分位，为什么不能作为同一种晋级证据？ {#cross-cross-colm-co-director}
+
+??? note "展开答案与例子"
+
+    **答案：** UCB故意给未充分探索的方向加乐观奖励，服务于下一次尝试；RuHarness用联合后验效用低分位抑制不确定的rubric点估计，并另外要求独立validation严格提升。两者调度对象和风险偏好不同，分轴judge评分也不能识别因果贡献。
+
+    **教学例子：** 教学例：只试一次的新创意可因探索项很高而被再次选择，但一个只解释单次失败的rubric不应据此直接晋级；harness候选还必须跨过validation门槛。这不是实测效果。
+
+    对照来源：[co-director](../../../agent-research/2604.24842-co-director/README.md) · [ruharness](../../../agent-research/2610.36826-ruharness/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-13** · 补入CoDirector分轴UCB和独立质量选优，与RuHarness联合后验低分位及validation准入比较：明确乐观探索和保守接受的不同不确定性用途；两者本地机制检查均不是完整生成或自进化能力。
+
+涉及：[co-director](../../../agent-research/2604.24842-co-director/README.md) · [ruharness](../../../agent-research/2610.36826-ruharness/README.md)
 
 **2026-11-13** · 补入经典程序进化与评价级联，区分搜索结果、构造验证与研究主张完整性；记录官方未发布运行系统、完整实验高成本不复现和零本地执行能力。
 
@@ -330,7 +351,7 @@ AlphaEvolve需要一个能实际评价候选程序的目标，靠程序库和模
 
 覆盖 43 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 59 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 60 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -393,6 +414,7 @@ AlphaEvolve需要一个能实际评价候选程序的目标，靠程序库和模
 - [EnvHarness: Awakening Static Worlds for Agent Learning](../../../agent-research/2608.19880-envharness/README.md)
 - [MLE-STAR: Machine Learning Engineering Agent via Search and Targeted Refinement](../../../agent-research/2506.15692-mle-star/README.md)
 - [AlphaEvolve: A coding agent for scientific and algorithmic discovery](../../../agent-research/2506.13131-alphaevolve/README.md)
+- [Co-Director: Agentic Generative Video Storytelling](../../../agent-research/2604.24842-co-director/README.md)
 
 </details>
 

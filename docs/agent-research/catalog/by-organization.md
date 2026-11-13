@@ -195,6 +195,7 @@
 
 - 2026-09-11 · 一作：Nilesh Jaiswal · [Beyond Vector Similarity: Hierarchical Context-Aware Graph RAG vs Standard RAG in Enterprise Code Migration](../2609.12464-hcrg/README.md)（`hcrg`）：HCRG 用 AST 提取 INHERITS/CALLS/IMPORTS，缓存全局架构骨架，按父依赖先后迁移，三跳取回结构上下文。原文对照是 800 字符/150 overlap/top-5 向量 RAG。
 - 2026-08-16 · 一作：Pouya Ghiasnezhad Omran · [Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback](../2608.15591-agent-gym/README.md)（`agent-gym`）：业务规则变化往往比 Agent 代码发布更快。Agent Gym 不重新训练或直接改写 acting agent，而在其 JSON 产物之后加独立纠错规则层：确定性条件检测、按作用域收集、按动作层级合并，再由领域专家审核新规则。
+- 2026-04-16 · 一作：Jihye Choi · [PolicyBank: Evolving Policy Understanding for LLM Agents](../2604.15505-policybank/README.md)（`policybank`）：Agent 可能严格遵守含糊的书面规则，却仍违反真实业务要求。PolicyBank 区分执行失败与 specification–requirement gap，不把“按原规则做了”当成授权正确；目标是部署前根据可信开发反馈修正理解。
 
 ## Google Cloud / KAIST
 
@@ -234,12 +235,19 @@
 - 2026-11-06 · 一作：Sergey Shirobokov · [Discovering formally verified quantum programs with AI](../2611.09822-verified-quantum-wiki/README.md)（`verified-quantum-wiki`）：量子程序的复杂度可能远超经典模拟能力，靠若干数值样例无法证明一般正确性。研究者先在量子 Hoare 逻辑（QHL）库中冻结正确性与资源规范，异构 LLM 团队搜索程序和 Lean 证明。
 - 2026-10-15 · 一作：Maxence Faldor · [A team of Gemini 4 Argon agents beats Minecraft](../2610.22319-gemini-minecraft/README.md)（`gemini-minecraft`）：四个执行 Agent 通过编写 JavaScript 程序操纵 Mineflayer 角色；Observer 汇总世界状态，聊天和笔记传递进度。研究重点是长期协作、程序化工具与持久状态，而不是新训练目标。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-08-07 · 一作：Valentin Liévin · [ResidencyRL: Reinforcement Learning in Simulated Clinical Environments](../2608.07418-residency-rl/README.md)（`residency-rl`）：静态知识题不能覆盖主动询问、工具调用及长程决策。论文通过场景生成、带信息不对称的模拟环境、按维度隔离的裁判和GRPO组成完整训练链路；隐藏参考信息只属于环境/裁判，不能直接暴露给被评估策略。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- 2026-04-03 · 一作：Bernd Bohnet · [Analysis of Optimality of Large Language Models on Planning Problems](../2604.02910-planning-optimality/README.md)（`planning-optimality`）：只判断计划能否达到目标，会忽略大量无必要动作。论文把LLM规划评测从validity扩展到optimality，在Blocksworld和抽象P*任务中构造具有已知最优长度的课程，分析推理模型随着难度增长的计划冗余。
+- 2026-02-27 · 一作：Jacob Eisenstein · [MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games](../2602.24188-mt-pingeval/README.md)（`mt-pingeval`）：MT-PingEval 用协作游戏检查模型是否真正从交互中获益，而非比较多轮时顺便增加总 token。每名玩家只看到自己的信息，通过对话解决共同任务；原 suite 包含棋局、COVR、图片选择与 Name-game。
 - 2025-09-08 · 一作：Eser Aygün · [An AI system to help scientists write expert-level empirical software (ERA)](../2509.06503-era-flat-puct/README.md)（`era-flat-puct`）：ERA 把可评分的科研任务、已有方法或新研究思路交给 LLM，生成程序后在隔离环境中运行，以任务指标持续搜索改进。关键不是让模型连续改写同一段答案，而是保存已执行代码树，用质量与探索项决定下一个应变异的程序。
 - 2025-06-16 · 一作：Alexander Novikov · [AlphaEvolve: A coding agent for scientific and algorithmic discovery](../2506.13131-alphaevolve/README.md)（`alphaevolve`）：AlphaEvolve 把有自动评价器的算法改进问题写成程序进化：人类给出任务、初始程序和评价函数，提示采样器提供待改程序、已有高分构造及反馈；Gemini 2.0 Flash/Pro 混合提出代码修改，再由评估节点实际执行。带多维分数的程序进入进化数据库，为下一轮保留高质量和多样化材料。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
+## Google Inc.
+
+- 2026-04-27 · 一作：Yale Song · [Co-Director: Agentic Generative Video Storytelling](../2604.24842-co-director/README.md)（`co-director`）：Co-Director 将生成式视频拆为全局创意方向与局部多模态修正。创意方向有策略 3 类、叙事 3 类、美学 4 类；一次完整视频产生三个战略效果分，各自更新所属轴，而最终视频用独立质量分选择。
 
 ## Google Research
 
 - 2026-10-17 · 一作：Zachary Cutts · [Aptamers as a sandbox for lab-in-the-loop agentic molecular discovery](../2610.24806-aptamer-lab-loop/README.md)（`aptamer-lab-loop`）：该研究把计算设计与真实实验测量放进多轮反馈闭环，让Agent利用成功和失败证据调整下一轮策略。关键不是把Agent多跑几轮，而是实物测量可以否定计算评分；论文显示一些预测代理与实际测量不一致。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- 2025-12-03 · 一作：Jonathan Berant · [Learning Steerable Clarification Policies with Collaborative Self-play](../2512.04068-clarification-sgp/README.md)（`clarification-sgp`）：同一条含糊问题可以直接猜、列出多种解释，或先提问。最优方式依赖用户能接受的轮次与篇幅成本。
 
 ## Google Research / Hebrew University of Jerusalem / University of Cambridge
 
@@ -655,6 +663,7 @@
 ## UC Berkeley
 
 - 2026-10-08 · 一作：Hyunin Lee · [Recursive Self-Improvement through Multi-Agent Self-Supervision](../2610.12176-mass/README.md)（`mass`）：同一模型执行、提出工作流并成对评价。固定权重下搜索后，独立采集轨迹，以 Bradley–Terry 排名选择前 K−1 条训练、第 K 条验证；仅移除编排者初始工作流提示，保留工作者分工。
+- 2026-08-27 · 一作：Zineng Tang · [Decoupling Planning and Control for Instructable Agents](../2608.26788-instruct-to-act/README.md)（`instruct-to-act`）：VLM 擅长低频高层规划，但不擅长陌生环境的低延迟动作；world-model controller 能高频动作，却缺开放任务指导。Instruct-to-Act 用稀疏文本指令连接二者，并用自身rollout后标注指令，而非专家示范。
 
 ## UC Santa Barbara
 

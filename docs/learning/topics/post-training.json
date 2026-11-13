@@ -184,7 +184,8 @@
         "post-training:process-supervision",
         "post-training:concur",
         "post-training:maxim",
-        "post-training:mcpo"
+        "post-training:mcpo",
+        "post-training:rlmf"
       ]
     },
     {
@@ -321,7 +322,9 @@
         "post-training:opsd",
         "post-training:ragcompass",
         "post-training:bopd",
-        "post-training:lcs-reference-opd"
+        "post-training:lcs-reference-opd",
+        "post-training:social-meta-learning",
+        "post-training:behavioral-canaries"
       ]
     },
     {
@@ -379,7 +382,8 @@
         "post-training:chord",
         "post-training:spiral",
         "post-training:absolute-zero",
-        "post-training:raft"
+        "post-training:raft",
+        "post-training:maple-icl"
       ]
     }
   ]

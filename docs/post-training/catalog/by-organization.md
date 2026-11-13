@@ -176,12 +176,14 @@
 ## Google
 
 - 2026-10-23 · 一作：Leon Sick · [On-Policy Self-Training: Data-Free Self-Improvement in Large Language Models](../2610.32770-opst/README.md)（`opst`）：通常的 on-policy self-distillation 仍需要人工问题集。OPST 按主题自生成问题和特权解题线索，经独立重答、改写与学生难度门过滤，再由额外看到线索的 EMA 教师在学生实际生成的前缀上提供分布监督，而不是要求学生直接模仿生成器表述。
+- 2026-04-24 · 一作：Chaoran Chen · [Behavioral Canaries: Auditing Private Retrieved Context Usage in RL Fine-Tuning](../2604.22191-behavioral-canaries/README.md)（`behavioral-canaries`）：RL 更新可能留下风格偏好而不是逐字记忆，因此只测训练句复现不一定能判断检索文档是否被用于后训练。本文把文档 trigger 与弱风格 canary 的偏好反馈相关联，再以未参与训练的成对文档测量目标风格概率是否放大。
 - 2026-02-24 · 一作：Sanket Badhe · [Prompt-Level Distillation: A Non-Parametric Alternative to Model Fine-Tuning for Efficient Reasoning](../2602.21103-prompt-level-distillation/README.md)（`prompt-level-distillation`）：PLD 不微调学生参数，而把教师推理抽象为可审查的系统指令：先用带标签训练样本提取微规则，经语义向量 DBSCAN 去掉噪声、合成规则，再根据训练错误修订冲突。学生最终使用整理后的规则，不读取每个测试样本的答案。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2025-09-30 · 一作：Zhuohang Li · [Judging with Confidence: Calibrating Autoraters to Preference Distributions](../2510.00263-probabilistic-autorater/README.md)（`probabilistic-autorater`）：Sec.3 Eq.1–2 piecewise奖励和实验用epsilon=.001可精确实现。解析成功必须在[0,1]；失败Brier=0、Log=log(epsilon)。
 - 2025-09-30 · 一作：Wenda Xu · [When LLMs Benchmark Themselves: Deconstructing Self-Bias in Automated Evaluation](../2509.26600-benchmark-self-bias/README.md)（`benchmark-self-bias`）：Sec.2 Eq.1使用[segment,target,benchmark-role]的逐segment排名，先按segment平均，再diag−leave-self-out peers。原始分数方向必须明确，MetricX-QE越低越好。
 
 ## Google DeepMind
 
+- 2026-02-18 · 一作：Jonathan Cook · [Learning to Learn from Language Feedback with Social Meta-Learning](../2602.16488-social-meta-learning/README.md)（`social-meta-learning`）：SML 把静态题目改成 teacher–student 多轮互动。Teacher 持有额外知识或验证结果，student 只看公开对话，逐步提问或修正答案。
 - 2023-10-18 · 一作：Mohammad Gheshlaghi Azar · [IPO](../2310.12036-ipo/README.md)（`ipo`）：论文指出 RLHF 与 DPO 都依赖将成对偏好转成标量 reward 的假设，并提出直接在偏好概率上优化的 $\Psi$PO 框架。取恒等映射得到 IPO：拟合一个有限的目标间隔，而不是像 logistic loss 一样在训练集可分时持续放大 chosen/rejected 间隔。
 - 2023-06-23 · 一作：Rishabh Agarwal · [GKD](../2306.13649-gkd/README.md)（`gkd`）：固定教师轨迹会让学生训练时看到的前缀与推理时自身生成的前缀不一致。GKD 让学生生成当前策略轨迹，再让教师在这些学生实际访问的状态给出完整分布；同时用 `student data fraction` 在固定数据和 on-policy 数据之间插值，并允许 forward KL、reverse KL 或广义 JSD。
 - 2023-05-17 · 一作：Yao Zhao · [SLiC-HF](../2305.10425-slic-hf/README.md)（`slic-hf`）：PPO-RLHF 需要策略、reward 和 value 等多套模型。SLiC-HF 直接要求偏好回答的序列 log-likelihood 高于拒绝回答，并用监督目标限制策略漂移；也能消费为其他模型采集的 off-policy 偏好数据。
@@ -357,6 +359,10 @@
 - 2026-09-29 · 一作：Yuhao Wang · [From Dissonance to Orchestration: Teacher Intervention in On-Policy Distillation](../2609.37510-maestro/README.md)（`maestro-opd`）：MAESTRO 用教师 top-k 覆盖度和 Bhattacharyya 相似度构造逐 token Policy Disagreement Score，并对靠近响应起点的位置加权；教师只在高分歧位置介入，减少整段 teacher rollout 的固定开销。
 - 2026-09-08 · 一作：Jiacheng Xu · [Entropy-Regularized Rank-Masked Policy Optimization for Test-Time Reinforcement Learning in Code Generation](../2609.09135-probe-erpo/README.md)（`probe-erpo`）：论文用不依赖最终答案的 probe consistency ratio（PCR）估计当前题目的可信度：高一致样本可强化，低一致样本对排名靠后的候选施加负向约束，同时用熵项控制探索。
 - 2026-08-27 · 一作：Ziyue Wang · [Video-OPSD: Exploiting Privileged Visual Evidence for On-Policy Self-Distillation in Video Large Language Models](../2608.27065-video-opsd/README.md)（`video-opsd`）：学生读取完整视频，训练期自教师只读取人工标注的证据帧；再按 token 对证据的依赖度加权蒸馏。论文称效果接近 GRPO，而训练时间减少约 60%。
+
+## National Taiwan University
+
+- 2026-02-26 · 一作：Eli Chien · [MAPLE: Metadata Augmented Private Language Evolution](../2603.19258-maple-icl/README.md)（`maple-icl`）：Private Evolution 的初始合成文本若偏离目标领域，后续多轮演化难以纠正。MAPLE 先从私有文本抽取固定 schema 的分类 metadata，用 AIM 生成 DP 表格 metadata，再结合非私有已捐赠的 metadata–text 示例初始化文本，最后继续 AugPE。
 
 ## National University of Defense Technology
 
@@ -717,6 +723,10 @@
 ## Xiaomi
 
 - 2026-06-29 · 一作：Wenhan Ma · [MOPD](../2606.30406-mopd/README.md)（`mopd`）：多能力联合 RL 会产生域间耦合，参数合并和离策略微调又容易丢能力。MOPD 先独立训练各域 RL teacher，再只在 student 自己的 rollout 上组合教师密集信号，使各域可并行演进。
+
+## Yale University
+
+- 2026-06-30 · 一作：Gabrielle Kaili-May Liu · [Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs](../2606.32032-rlmf/README.md)（`rlmf`）：回答正确性、表达的置信度，以及模型能否评价自身置信表达，是三个不同量。本文先使数值置信接近由采样一致性估计的内在置信，再借元认知自评质量调节 RL 排序；另用训练题自评的高低两端选样，最后由外部改写器把数值映射成自然语言不确定性。
 
 ## Yonsei University
 

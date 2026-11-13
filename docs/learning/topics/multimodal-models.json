@@ -40,7 +40,9 @@
         "foundation-models:siglip2",
         "foundation-models:smolvlm",
         "multimodal-models:umrm",
-        "foundation-models:wemm-embedding"
+        "foundation-models:wemm-embedding",
+        "multimodal-models:avmeme-exam",
+        "multimodal-models:mmeb-v3"
       ]
     },
     {

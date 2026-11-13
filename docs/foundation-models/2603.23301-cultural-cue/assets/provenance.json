@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "paper_id": "2603.23301v1",
+  "figure": "Figure 1",
+  "source_url": "https://arxiv.org/pdf/2603.23301v1#page=2",
+  "source_kind": "original_pdf_crop",
+  "source_html_sha256": "7927d8ff31f505893564baeecc0f88c5f3fa678e374169eb38558587fef9d9b9",
+  "source_pdf_sha256": "bf36697cbdbbfb75e3d8db5ae755e16aa41e5d2f41120a43fc302b0767e0cd43",
+  "pdf_page": 2,
+  "crop_pdf_points": [
+    62,
+    86,
+    535,
+    336
+  ],
+  "asset": "paper-figure-01.png",
+  "asset_sha256": "df602ba9407dddf24ca83a381a9d8af8f150395efdd38838e70313a7eafee112",
+  "caption": "SAE feature extraction, MI selection, cultural prototypes and steering.",
+  "copyright": "Original authors",
+  "reviewed_on": "2026-11-13",
+  "rendered_and_visually_reviewed": true,
+  "local_result": false
+}

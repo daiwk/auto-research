@@ -9619,6 +9619,16 @@
         "fingerprint": "b267b9ec66be8d23cb37d14555f017f0e4c439a7dc4f5244fcde7a5f37fd95f2"
       }
     ],
+    "src/auto_research/agent_research/mt_pingeval.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "submit",
+        "line": 79,
+        "qualified_name": "IsotokenBudget.submit",
+        "expression": "self.turns += 1",
+        "fingerprint": "94e585b921a6d009f48997fbff9b0677525ef6a6e92a73cae28081fd60aea047"
+      }
+    ],
     "src/auto_research/agent_research/oct10_backend.py": [
       {
         "kind": "state_update_not_execution_evidence",

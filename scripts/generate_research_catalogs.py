@@ -61,6 +61,10 @@ INVALID_AFFILIATION_MARKERS = (
 # every generated page. Unknown future labels remain visible under “其他”.
 TOPIC_HIERARCHY = {
     "post-training": {
+        "多轮反馈与社会元学习": ("蒸馏与训练闭环", "交互反馈与元学习"),
+        "隐私保护数据构建": ("奖励、信用与课程", "隐私保护合成与数据选择"),
+        "教师与上下文": ("偏好建模与监督", "训练使用审计与隐私"),
+        "奖励与信用分配": ("奖励、信用与课程", "元认知反馈与不确定性"),
         "策略优化": ("在线强化学习与稳定性", "步骤奖励与信用分配"),
         "知识蒸馏": ("蒸馏与训练闭环", "教师锚点与 SFT-RL 混合"),
         "自置信轨迹过滤": ("奖励、信用与课程", "课程与能力边界"),
@@ -170,6 +174,12 @@ TOPIC_HIERARCHY = {
         "Flow map": ("蒸馏与训练闭环", "生成模型蒸馏"),
     },
     "agent-research": {
+        "规划与推理": ("规划、搜索与反思", "计划验证与最优性"),
+        "选择与澄清": ("规划、搜索与反思", "信息澄清与交互决策"),
+        "多智能体协作评测": ("规划、搜索与反思", "多 Agent 协作与通信"),
+        "策略记忆与授权修正": ("记忆、技能与持续学习", "安全策略记忆"),
+        "生成式视频 Agent": ("工具调用与环境执行", "创意媒体生成与工具编排"),
+        "语言指令与世界模型控制": ("Agentic RL 与后训练", "语言指令与具身控制"),
         "Agent自我进化": ("规划、搜索与反思", "Harness 与自我改进"),
         "自进化与工作流": ("规划、搜索与反思", "Harness 与自我改进"),
         "工具与环境交互": ("工具调用与环境执行", "电脑操作与 reward 评测"),
@@ -322,6 +332,17 @@ POST_TRAINING_REPRODUCTION_KEYS = {
     "sis",
 }
 FOUNDATION_TOPIC_HIERARCHY = {
+    "rosetta-unification": ("预训练与数据", "跨语言知识迁移与表征统一"),
+    "lidas": ("网络架构", "深度生长与层复制"),
+    "thinking-to-recall": ("推理与系统效率", "参数知识召回与潜在泛化"),
+    "latent-generalization": ("推理与系统效率", "参数知识召回与潜在泛化"),
+    "llm-stochasticity": ("推理与系统效率", "随机性与统计可靠性评测"),
+    "ecg-rag": ("网络架构", "检索与生成共享表征"),
+    "continuousbench": ("预训练与数据", "合成数据与隐私评测"),
+    "qe-length-normalization": ("推理与系统效率", "翻译指标与长度偏差"),
+    "cultural-cue": ("推理与系统效率", "可解释文化表征与干预"),
+    "decoding-constrained-beam": ("推理与系统效率", "近逐字提取风险"),
+    "storyscope": ("推理与系统效率", "可解释生成文本检测"),
     "prism-1": ("推理与系统效率", "结构化决策与自适应推理"),
     "langdit": ("网络架构", "扩散与生成式模型"),
     "muon-paired-budget": ("预训练与数据", "优化器与训练稳定性"),
@@ -956,6 +977,9 @@ def foundation_rows() -> list[dict[str, str]]:
         **{key: FOUNDATION_TOPIC_HIERARCHY[key] for key in (
             "prism-1", "langdit", "muon-paired-budget",
             "drop-kv", "mirror-moe", "bit-sparse", "lct", "roleq", "hardware-diversity",
+            "rosetta-unification", "lidas", "thinking-to-recall", "latent-generalization",
+            "llm-stochasticity", "ecg-rag", "continuousbench", "qe-length-normalization",
+            "cultural-cue", "decoding-constrained-beam", "storyscope",
         )},
         "selective-reasoning": ("推理与系统效率", "结构化决策与自适应推理"),
         "jepa-prediction-planning": FOUNDATION_TOPIC_HIERARCHY["jepa-prediction-planning"],
@@ -1065,6 +1089,8 @@ def multimodal_rows() -> list[dict[str, str]]:
     for row in rows:
         row["index_href"] = f"../reproductions/{row['link']}"
     rows.extend(manifest_domain_rows("multimodal-models", {
+        "avmeme-exam": ("多模态基础模型", "音视频文化理解评测"),
+        "mmeb-v3": ("多模态检索", "全模态嵌入与模态遵循"),
         "gslm2": ("多模态基础模型", "多流语音单元与打分"),
         "flexglue": ("多模态基础模型", "图像匹配与稀疏对应"),
         "uniaction": ("视觉世界模型与时序推理", "统一动作表示与条件注意力"),

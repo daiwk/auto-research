@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "paper_id": "2606.32032v1",
+  "figure": "Figure 1",
+  "source_url": "https://arxiv.org/html/2606.32032v1/fig1_fixed.png",
+  "source_kind": "original_html_asset",
+  "source_html_sha256": "fc9c31d315252cd21dc90b43a47af8d022e3752b6a7f57014bf5ab10881810a9",
+  "asset": "paper-figure-01.png",
+  "asset_sha256": "b41615dc7d5ec3f77f56b1e188eed4d8a723fb61621d2026ca300238432e5e22",
+  "caption": "Metacognitive feedback, selective advantage scaling and external rewriting.",
+  "copyright": "Original authors",
+  "reviewed_on": "2026-11-13",
+  "rendered_and_visually_reviewed": true,
+  "local_result": false
+}

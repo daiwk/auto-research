@@ -7,7 +7,7 @@ hide:
 
 # 奖励与信用：正确结果该奖励哪些步骤
 
-[LLM 后训练](index.md) / 164 个问题 · 41 篇论文
+[LLM 后训练](index.md) / 168 个问题 · 42 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">164 个问题 · 41 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">168 个问题 · 42 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:mcpo" data-paper-title="Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards LLM 后训练 PayPal.AI 2026-11-10 GRPO 常把同一响应的序列优势分给所有 token，无法区分局部决策的不确定度。MCPO 复用 rollout/old policy 温度后的 top-1、top-2 概率差，不额外调用教师或 verifier，改变各 token 的信用分配。指数加权与响应内归一化沿用所引 token weighting 规则，论文新增的是以 probability margin 作为信号，不能把整套加权公式都说成全新提出。 完整实验成本过高，不复现（审查 DONE）；L1 机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。token_credit 接收已经冻结、按 rollout 温度计算的有序 top-2 概率、序列优势和有效 token mask。校验概率合法、每响应非空；padding 不进入权重均值。为数值稳定，从每响应 log-weight 减去最大值，不改变归一结果。函数只做 NumPy CPU 算术，CUDA 请求明确拒绝。  奖励与信用分配 置信margin与token信用 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 MCPO 的 uncertainty 直接用 entropy 或 band-pass 吗？ 都不是。它用温度后 old-policy top1减top2的margin，再对1-margin做截断线性变换。最高不确定度保留为1，不像band-pass丢掉极端区域。 教学例：margin=.95给h=0，margin=.2给h=1；只知道entropy通常不能还原这两个top概率差。 2026-11-11">
@@ -1988,6 +1988,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>例如人工给风险标签能验证分支，但没有证明模型自动识别不合理token。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.07976">原论文</a> · <a href="../../../../post-training/2607.07976-taco/">实现解读</a> · <a href="#qa-5ae3e76c30e78f7d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:rlmf" data-paper-title="Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs LLM 后训练 Yale University 2026-06-30 回答正确性、表达的置信度，以及模型能否评价自身置信表达，是三个不同量。本文先使数值置信接近由采样一致性估计的内在置信，再借元认知自评质量调节 RL 排序；另用训练题自评的高低两端选样，最后由外部改写器把数值映射成自然语言不确定性。本地只保留可精确隔离的 Eq2–4 和训练尾部选样。内在置信不是提供一份正确答案就能替代，模型自评也不是本地随手给的标签。诊断中的数值均为教学输入，不宣称测出了真实不确定性。 完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。本地交付是 L1 数值/协议组件，不是完整论文能力复现。完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。faithful_calibration、metacognitive_feedback、advantages 是可微框架中的张量核（FC门槛本身离散）；select_training_tails 是训练选样。CPU/CUDA 支持以真实算子验收为准。没有采样一致性估计、LLM自评、完整GRPO损失/optimizer、SFT或自然语言改写器。  奖励与信用分配 元认知反馈与不确定性 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 回答正确、置信表达忠实、会自评，这三者为什么不能只用accuracy衡量？ 正确性是任务结果；faithful calibration比较表达置信与采样估计的内在置信；元认知反馈比较模型自评FC和实际FC。准确答案也可能表达不忠实，善于自评也不保证答案正确。 教学例：模型内在估计0.6却说“100%确定”，即使这次答对也不忠实；自评承认表达有问题又是第三项观测。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<span id="paper-post-training-rlmf-a7aec240" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-d56af1ca96ab0e38">回答正确、置信表达忠实、会自评，这三者为什么不能只用accuracy衡量？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Arlmf">Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Yale University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>正确性是任务结果；faithful calibration比较表达置信与采样估计的内在置信；元认知反馈比较模型自评FC和实际FC。准确答案也可能表达不忠实，善于自评也不保证答案正确。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：模型内在估计0.6却说“100%确定”，即使这次答对也不忠实；自评承认表达有问题又是第三项观测。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.32032v1">原论文</a> · <a href="../../../../post-training/2606.32032-rlmf/">实现解读</a> · <a href="#qa-d56af1ca96ab0e38">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:rlmf" data-paper-title="Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs LLM 后训练 Yale University 2026-06-30 回答正确性、表达的置信度，以及模型能否评价自身置信表达，是三个不同量。本文先使数值置信接近由采样一致性估计的内在置信，再借元认知自评质量调节 RL 排序；另用训练题自评的高低两端选样，最后由外部改写器把数值映射成自然语言不确定性。本地只保留可精确隔离的 Eq2–4 和训练尾部选样。内在置信不是提供一份正确答案就能替代，模型自评也不是本地随手给的标签。诊断中的数值均为教学输入，不宣称测出了真实不确定性。 完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。本地交付是 L1 数值/协议组件，不是完整论文能力复现。完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。faithful_calibration、metacognitive_feedback、advantages 是可微框架中的张量核（FC门槛本身离散）；select_training_tails 是训练选样。CPU/CUDA 支持以真实算子验收为准。没有采样一致性估计、LLM自评、完整GRPO损失/optimizer、SFT或自然语言改写器。  奖励与信用分配 元认知反馈与不确定性 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 Eq4能否写成总优势乘(1+Z)，或者加一个Z奖励？ 不能。只把高于组均值的faithfulness分量乘k+Z；other奖励保持仅中心化，低于或等于均值的faithfulness分量也不放大。它不std归一，放大后均值可以非零，不能再次减均值。 教学例：f=[0,1,2]，o=[1,0,−1]，Z全1、k1，输出优势为[0,0,1]；全优势乘2会得到[0,0,0]，改变了方法。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-e520112e963f8e18">Eq4能否写成总优势乘(1+Z)，或者加一个Z奖励？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Arlmf">Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Yale University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。只把高于组均值的faithfulness分量乘k+Z；other奖励保持仅中心化，低于或等于均值的faithfulness分量也不放大。它不std归一，放大后均值可以非零，不能再次减均值。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：f=[0,1,2]，o=[1,0,−1]，Z全1、k1，输出优势为[0,0,1]；全优势乘2会得到[0,0,0]，改变了方法。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.32032v1">原论文</a> · <a href="../../../../post-training/2606.32032-rlmf/">实现解读</a> · <a href="#qa-e520112e963f8e18">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:rlmf" data-paper-title="Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs LLM 后训练 Yale University 2026-06-30 回答正确性、表达的置信度，以及模型能否评价自身置信表达，是三个不同量。本文先使数值置信接近由采样一致性估计的内在置信，再借元认知自评质量调节 RL 排序；另用训练题自评的高低两端选样，最后由外部改写器把数值映射成自然语言不确定性。本地只保留可精确隔离的 Eq2–4 和训练尾部选样。内在置信不是提供一份正确答案就能替代，模型自评也不是本地随手给的标签。诊断中的数值均为教学输入，不宣称测出了真实不确定性。 完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。本地交付是 L1 数值/协议组件，不是完整论文能力复现。完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。faithful_calibration、metacognitive_feedback、advantages 是可微框架中的张量核（FC门槛本身离散）；select_training_tails 是训练选样。CPU/CUDA 支持以真实算子验收为准。没有采样一致性估计、LLM自评、完整GRPO损失/optimizer、SFT或自然语言改写器。  奖励与信用分配 元认知反馈与不确定性 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 RLMF不做组std归一，与Dr.GRPO有什么相同和不同？ 二者都保留中心化奖励的原始尺度，但RLMF把主faithfulness和其他约束拆开，只对前者正偏差按自评质量放大。去std归一只是共享一项设计，不能因此把Dr.GRPO目标直接叫RLMF。 教学例：即使两个方法原始reward相同，Z不同会改变RLMF对高faithfulness completion的信用；Dr.GRPO没有这项元认知因子。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-1ddd316d9e41a1f5">RLMF不做组std归一，与Dr.GRPO有什么相同和不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Arlmf">Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Yale University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>二者都保留中心化奖励的原始尺度，但RLMF把主faithfulness和其他约束拆开，只对前者正偏差按自评质量放大。去std归一只是共享一项设计，不能因此把Dr.GRPO目标直接叫RLMF。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：即使两个方法原始reward相同，Z不同会改变RLMF对高faithfulness completion的信用；Dr.GRPO没有这项元认知因子。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.32032v1">原论文</a> · <a href="../../../../post-training/2606.32032-rlmf/">实现解读</a> · <a href="#qa-1ddd316d9e41a1f5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:rlmf" data-paper-title="Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs LLM 后训练 Yale University 2026-06-30 回答正确性、表达的置信度，以及模型能否评价自身置信表达，是三个不同量。本文先使数值置信接近由采样一致性估计的内在置信，再借元认知自评质量调节 RL 排序；另用训练题自评的高低两端选样，最后由外部改写器把数值映射成自然语言不确定性。本地只保留可精确隔离的 Eq2–4 和训练尾部选样。内在置信不是提供一份正确答案就能替代，模型自评也不是本地随手给的标签。诊断中的数值均为教学输入，不宣称测出了真实不确定性。 完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。本地交付是 L1 数值/协议组件，不是完整论文能力复现。完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。faithful_calibration、metacognitive_feedback、advantages 是可微框架中的张量核（FC门槛本身离散）；select_training_tails 是训练选样。CPU/CUDA 支持以真实算子验收为准。没有采样一致性估计、LLM自评、完整GRPO损失/optimizer、SFT或自然语言改写器。  奖励与信用分配 元认知反馈与不确定性 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 选两端数据和挑checkpoint时，哪些信息不能从test获取？ 两端选样只允许训练候选的自评，且等量取高低端；超参和checkpoint只能由validation选择。原文AppendixB.1按in-domain test FC挑RL checkpoint，本地明确不沿用并记录协议偏离；不能把test改名后继续调。 教学例：训练自评10、40、70、90选两个时取10和90；即使测试题自评更极端也不加入训练。每100步看test挑最好一次仍是泄漏。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-16725cd02c6b21a5">选两端数据和挑checkpoint时，哪些信息不能从test获取？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Arlmf">Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Yale University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>两端选样只允许训练候选的自评，且等量取高低端；超参和checkpoint只能由validation选择。原文AppendixB.1按in-domain test FC挑RL checkpoint，本地明确不沿用并记录协议偏离；不能把test改名后继续调。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：训练自评10、40、70、90选两个时取10和90；即使测试题自评更极端也不加入训练。每100步看test挑最好一次仍是泄漏。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.32032v1">原论文</a> · <a href="../../../../post-training/2606.32032-rlmf/">实现解读</a> · <a href="#qa-16725cd02c6b21a5">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:intuitor" data-paper-title="INTUITOR" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="INTUITOR LLM 后训练 University of California, Berkeley 2025-05-26 以每个生成前缀下的全词表 next-token 分布计算，再沿回答长度平均，作为 intrinsic self-certainty reward。方向是均匀分布到策略分布，并非策略的负熵；高置信度也不等于答案一定正确。 它既没有原文的逐 token 全词表计算，也使用了相反方向的 KL，因此仅为候选奖励更新诊断，尚未复现 Intuitor 的定义性 self-certainty。本地为候选分布机制诊断。本地为候选分布机制诊断。当前算子没有实现原文逐 token、全词表的 self-certainty；现有 mini-suite 不能作为该定义性奖励或原论文推理能力的验证。当前 p0_20260808.py 的 intuitor 分支以采样候选的 log p + log N 作为奖励，诊断量 intrinsic_kl_to_uniform 则是。  自置信奖励 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 INTUITOR不使用外部verifier时，奖励从哪里来？ 从每个生成前缀的完整下一词分布计算自确定性，再沿回答平均。它是内部学习信号而非正确标签，高置信仍可能稳定地错，需要独立任务评估。 例如模型分布很尖但算术结论错，内部奖高不代表验算通过。 2026-10-27">
