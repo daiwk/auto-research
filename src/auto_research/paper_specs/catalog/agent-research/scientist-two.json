@@ -1,0 +1,29 @@
+{
+  "domain":"agent-research", "key":"scientist-two",
+  "title":"ScientistTwo: Pioneering the Human Knowledge Frontier with Autonomous AI",
+  "paper_url":"https://arxiv.org/abs/2609.19644", "reviewed_version":"v1",
+  "reviewed_arxiv_id":"2609.19644v1", "reviewed_version_url":"https://arxiv.org/html/2609.19644v1",
+  "detail_path":"agent-research/2609.19644-scientist-two/README.md",
+  "topic":["科学研究 Agent", "有界评审与证据驱动研究控制"],
+  "first_author":"Jaehyun Nam", "first_author_affiliation":"Google Cloud AI Research",
+  "verified_priority_organizations":["Google Cloud AI Research"],
+  "published":"2026-09-17", "published_at":"2026-09-17T03:37:42Z",
+  "code":null,
+  "code_status":"固定v1和官方项目页提供生成论文画廊，但未核到ScientistTwo完整框架源码入口；生成论文/solver产物、第三方复刻或复用PaperOrchestra/ScholarPeer均不能算作者系统已开源。",
+  "adapter":null, "priority":"P0", "implementation_status":"component_only",
+  "local_operator":"auto_research.agent_research.scientist_two.run_stage",
+  "local_command":"PYTHONPATH=src python -c 'from auto_research.agent_research.scientist_two import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier":"l1_mechanism", "diagnostic_only":true,
+  "promotion_eligible":false, "evolve_integrated":false,
+  "requires_gpu_validation":false, "gpu_validation_passed":false,
+  "review_done":true, "full_experiment_review_done":true,
+  "full_experiment_status":"not_reproduced_high_cost",
+  "automatic_retry":false, "automatic_implementation_queue":false,
+  "cost_assessment":{
+    "source":"https://arxiv.org/html/2609.19644v1#S4.SS3",
+    "available_resource":"单张A100/A30或Mac",
+    "basis":"完整107科研任务。作者在33个NeurIPS问题上的成本分析：单任务2–3天，平均USD3765含token与VM；不是本地测量。Gemini3.6Flash/ClaudeCodeOpus4.8、迭代多benchmark实验/消融/反驳/审稿矩阵明显高成本，不试跑、不下载checkpoint、不调用API。"
+  },
+  "fidelity_note":"仅执行Fig4有界stage、subset Good升阶门、成功/失败历史与未试seed混合、严格改善更新及review/rebuttal预算。所有模型/实验/novelty/语义比较均外部callback，fixed truth-table是L1控制诊断，非完整科研Agent或Evolve。",
+  "summary":"ScientistTwo把子集到全量实验、成功失败历史驱动的想法进化、消融及模拟评审串成研究闭环。本地只实现精确定义的CPU控制合同，不用固定结果冒充代码实验或语义评审；完整多日研究不复现。"
+}

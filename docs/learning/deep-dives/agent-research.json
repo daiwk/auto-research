@@ -81,6 +81,28 @@
             "数据协议与代码映射",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "agent-research:ds-star",
+          "position": "以计划、代码和实际输出为条件显式检查语义充分性；不足时在追加与删除错误后缀之间路由，再生成一步。",
+          "tradeoff": "比只追加步骤更能撤销错误依赖，但核心verifier/router依赖外部语义模型。本地仅验证回溯、数据流和预算，末轮未经验证的新稿不得计成功；商业完整评测未运行。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "agent-research:era-flat-puct",
+          "position": "将所有已执行程序平铺竞争，用任务分数的归一化排名、整树均匀先验和祖先访问计数决定下一次代码变异。",
+          "tradeoff": "不回传后代 rollout 均值，也不按根到叶递归选择；与 LATS 的行动轨迹、环境反馈及价值回传不是同一价值语义。外部执行、评分和数据隔离未在 CPU 算术核中实现，不能把节点数或夹具满分当成科研能力。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验与边界"
+          ]
         }
       ],
       "analysis": [
@@ -108,6 +130,22 @@
           "papers": [
             "agent-research:bats",
             "agent-research:rewoo"
+          ]
+        },
+        {
+          "title": "观察反馈不等于充分性证明，回溯也不等于状态重算",
+          "body": "ReAct交替推理、工具动作与观察，适应新信息。DS-STAR额外把query、累计计划、代码与输出交给verifier判断是否足够，再决定追加还是删除错误后缀。删除计划后，原方法仍把上一输出给planner、上一代码给coder，它们是纠错上下文，不是已重算的前缀状态。完整执行和语义验证必须外置补齐；本地L1不得与ReAct已有隔离能力结果混排。",
+          "papers": [
+            "agent-research:ds-star",
+            "agent-research:react"
+          ]
+        },
+        {
+          "title": "程序质量排名与轨迹回报均值不能混为一种树价值",
+          "body": "ERA 的节点是已执行程序，整树任意节点都可直接扩张；任务分数只转成相对排名供 PUCT 选择，访问更新不把子孙分数平均回传给祖先，最终仍按原始任务分数选优。LATS 以 MCTS 组织行动与 rollout，环境回报、价值统计及失败反思共同影响后续搜索。两者都需要外部反馈，却在搜索单元、单次成本和可见证据上不同。仓库 ERA 仅验证有限候选的选择算术，LATS 以完整计划为叶且未运行原文 LM value 或 WebShop；不应从这些局部结果宣布同预算科研能力胜负。公平比较必须先固定执行器、validation/test 隔离、失败费用和总预算。",
+          "papers": [
+            "agent-research:era-flat-puct",
+            "agent-research:lats"
           ]
         }
       ],
@@ -151,9 +189,29 @@
             "agent-research:bats",
             "agent-research:rewoo"
           ]
+        },
+        {
+          "id": "cross-plan-truncation-versus-execution-replay",
+          "question": "DS-STAR删掉错误步骤后，能否把上一输出当成正确前缀的执行结果？",
+          "answer": "不能。上一输出是整份旧代码的结果，可能依赖错误后缀。原方法把它作为纠错信息继续条件化；控制核不声称已经回滚文件状态或重算数据。必须由真实coder/executor和独立verifier处理。",
+          "example": "教学例：错误join后的聚合值不会因删除计划文字自动消失，外部代码必须重新生成并执行。",
+          "papers": [
+            "agent-research:ds-star",
+            "agent-research:react"
+          ]
+        },
+        {
+          "id": "cross-flat-program-rank-versus-rollout-value",
+          "question": "给 ERA 和 LATS 都限制一百次扩张，就能公平比较哪一个更会探索吗？",
+          "answer": "不能。一项 ERA 扩张需要生成并执行新程序以获得任务分数；一项 LATS rollout 可能执行多步交互并更新价值及反思。计数单位不等于成本单位，整树排名也不等于轨迹回报均值。应先统一任务和可见证据，记录模型调用、执行费用及失败成本，再隔离验证选择与测试；本地机制核尚不能提供这类能力比较。",
+          "example": "教学例：一个程序评估训练模型两小时，另一个轨迹只执行四次廉价工具；都算一次扩张会掩盖预算差异。探索项选中的低访问候选，也不能未经独立评测就取代最高原始 validation 分数的候选。",
+          "papers": [
+            "agent-research:era-flat-puct",
+            "agent-research:lats"
+          ]
         }
       ],
-      "updated": "2026-11-12",
+      "updated": "2026-11-13",
       "reviewed_papers": [
         "agent-research:drago",
         "agent-research:janus",
@@ -171,7 +229,9 @@
         "agent-research:rewoo",
         "agent-research:tree-of-thoughts",
         "agent-research:react",
-        "agent-research:bats"
+        "agent-research:bats",
+        "agent-research:ds-star",
+        "agent-research:era-flat-puct"
       ],
       "updates": [
         {
@@ -222,6 +282,30 @@
           "summary": "补充预算条件化搜索与实际费用轴，区分BATS动态换路和ReWOO开环解耦；强调任一工具耗尽、换路保留用量和外部verifier非gold能力证据。",
           "source_revisions": {
             "agent-research:bats": "59608573c3c430e125e4b02f6341c7fa47bbcf5d4adcdce334a54501391606cb"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "agent-research:ds-star",
+            "agent-research:react"
+          ],
+          "summary": "补入Google/KAIST DS-STAR历史漏项，区分语义充分性、计划回溯与真实执行状态；CPU三seed只验控制，完整商业Agent评测未复现，不能夸大为大训练。",
+          "source_revisions": {
+            "agent-research:ds-star": "7c8778b5eb3689a3f743d83c3ccae61401c0a2da8496347df0e860128994adcb",
+            "agent-research:react": "e356d3e717cb7cf1b6f307cb79728bffd7d3d9807443aa881c22dab763ac518e"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "agent-research:era-flat-puct",
+            "agent-research:lats"
+          ],
+          "summary": "补入 Google ERA 历史锚点，区分全树程序排名 PUCT 与 LATS 轨迹 rollout/价值回传；保留 v1 访问初始化及最终原始分数选优。CPU 组件仅为机制证据，完整多任务科研搜索高成本不复现。",
+          "source_revisions": {
+            "agent-research:era-flat-puct": "6c2ea882fd2d0189a3f932a02a12113bd35aacaaa0f97d59e80501116b5f6ef3",
+            "agent-research:lats": "8ae228f18aa0e2c89a457475688d251bb0c2899ee86fcd2b3e0a4e4d44411c4c"
           }
         }
       ]
@@ -1300,6 +1384,49 @@
             "数据协议与代码映射",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "agent-research:scientist-two",
+          "position": "把科研工作拆成可拒绝、可修改、有预算的阶段；子集筛选后独立全量验证，并用成功及失败历史继续探索。",
+          "tradeoff": "控制层安排实验与评审，不证明外部语义判断或实验产物真实。ScientistOne的证据完整性审计与ScientistTwo的研究扩展控制互补；本地两者都不等于完整自主科学家。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "agent-research:envharness",
+          "position": "在固定环境的标准接口外组合初态重放、动作/转换/观察hook和串行任务，保留各基础环境的成功判据。",
+          "tradeoff": "它改环境而非模型外工具/记忆；可reset、可信verifier和新rollout验收是前提。本地只有CPU包装器，无EnvRigger、模型学习、真实bridge或安全sandbox。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "agent-research:mle-star",
+          "position": "检索模型并实际验证合并，再以消融定位高影响代码块，内层改写/验证、外层重新定位，集成另行搜索。",
+          "tradeoff": "搜索材料与块级训练反馈必须真实执行；不同于MARS按成本奖励调度仓库候选。八V100及小时级完整矩阵不复现，本地无控制器或能力指标。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "高成本完整实验"
+          ]
+        },
+        {
+          "paper": "agent-research:alphaevolve",
+          "position": "固定人类评价合同，混合LLM提案、级联执行评价与多维进化档案，异步探索程序空间。",
+          "tradeoff": "指标优化仍受评价器充分性约束，不等于ScientistOne的主张/引用/方法完整性审计。官方只开放构造验证资料，完整搜索/生产矩阵高成本不复现，本地没有算子。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -1384,6 +1511,38 @@
           "papers": [
             "agent-research:agent-gym",
             "agent-research:pase"
+          ]
+        },
+        {
+          "title": "有界研究扩展与证据完整性必须分开验收",
+          "body": "ScientistTwo用子集到全量的升阶门、成功/失败历史、未试种子探索、严格改善接纳和review预算组织研究。ScientistOne的CoE则针对分数复算、引文、规则及方法代码一致性，现有局部核也明确把语义判断外置。即使阶段全部accept、评审评分很高，外部日志仍可能错误或不真实；反过来，证据可复算也不能证明科研想法新颖或优越。局部状态测试只证明预算和数据流，不是107任务能力复现。",
+          "papers": [
+            "agent-research:scientist-two",
+            "agent-research:scientist-one"
+          ]
+        },
+        {
+          "title": "改Agent的执行层与改环境的练习层不能混为一个消融",
+          "body": "Harness²在同模型同环境下比较工具、提示、记忆和脚本变更，再积累如何改进的证据；EnvHarness则让环境对特定弱点提供更好的练习，但保留基础目标判据。若两边同时改变，很难把能力收益归因到任一层。串行Chain的A∧B只是原判据组合，不证明任务语义兼容；Contract阻止捷径也不证明策略学到可迁移技能。完整EnvRigger要用freshrollout验收并回到未包装任务评测，本地未完成这条能力链。",
+          "papers": [
+            "agent-research:envharness",
+            "agent-research:harness2"
+          ]
+        },
+        {
+          "title": "寻找值得改的部件，与决定把预算花在哪个分支，是不同控制问题",
+          "body": "MLE-STAR用执行消融选择代码块，在相对固定的局部空间内反复提出计划；MARS则通过预算感知MCTS安排模块化候选，并把新旧代码与运行差异变成跨分支经验。局部影响与性能/时间折中可以互补，却不是同一个分数；高耗时竞赛上的原文结果也不能拿来给本地空控制器背书。两者收录都应明确生成脚本、完整编排器与已运行能力三种不同资产。",
+          "papers": [
+            "agent-research:mle-star",
+            "agent-research:mars-research"
+          ]
+        },
+        {
+          "title": "发现更好的对象，与证明对它的研究主张有证据，是不同验收层",
+          "body": "AlphaEvolve需要一个能实际评价候选程序的目标，靠程序库和模型提案产生改进；ScientistOne继续追问论文数字是否复算、引文是否存在并支持主张、方法文字是否对应代码。构造通过指定检查只支持那项性质，不能把生成的论文全部自动判真；证据链可靠也不能保证搜索有创新。官方结果notebook可验证已给出的对象，但不恢复原发现过程，本库因此只收录有据成本审查。",
+          "papers": [
+            "agent-research:alphaevolve",
+            "agent-research:scientist-one"
           ]
         }
       ],
@@ -1490,9 +1649,49 @@
             "agent-research:agent-gym",
             "agent-research:pase"
           ]
+        },
+        {
+          "id": "cross-scientist-control-versus-evidence-integrity",
+          "question": "ScientistTwo完成严格改善比较与两轮review后，能否跳过ScientistOne式证据审计？",
+          "answer": "不能。严格比较与review本身由外部模型或人作出，控制核只保证何时调用、何时更新和何时停止。独立分数复算、数据隔离、日志来源与方法代码一致性仍需核查；高分不是来源真实性证明。",
+          "example": "教学例：外部比较器根据复制来的高分返回true，控制核会忠实更新best，但只有执行与来源审计才能发现这个高分不属于当前代码。",
+          "papers": [
+            "agent-research:scientist-two",
+            "agent-research:scientist-one"
+          ]
+        },
+        {
+          "id": "cross-environment-and-agent-harness-attribution",
+          "question": "同时替换Agent harness和环境Contract，再见到成功率上涨，能归因到EnvHarness吗？",
+          "answer": "不能。需固定策略、任务划分和Agent执行层，再比较原环境与包装环境产生的训练/技能，并在未包装评测环境验收。固定toy包装器检查不覆盖学习与迁移，更不是两套系统已集成。",
+          "example": "教学例：同时增加测试工具并禁止直接提交，失败减少可能来自任一改动；没有分开对照就无法识别机制贡献。",
+          "papers": [
+            "agent-research:envharness",
+            "agent-research:harness2"
+          ]
+        },
+        {
+          "id": "cross-block-targeting-versus-budget-allocation",
+          "question": "一处修改影响很大但训练昂贵，MLE-STAR的消融定位与MARS的预算奖励会作同一个决定吗？",
+          "answer": "不一定。消融回答哪个部件值得深入，预算奖励还按性能与执行时间取舍候选。前者不自动包含MARS的时间惩罚，后者也不自动实现MLE-STAR的块内计划搜索；应分别固定真实validation和运行成本再组合。",
+          "example": "教学例：缺失值处理每次提高0.01却需一小时，另一路提高0.008只要一分钟。影响排序与预算内的探索价值可以不同，不能只看一列精度。",
+          "papers": [
+            "agent-research:mle-star",
+            "agent-research:mars-research"
+          ]
+        },
+        {
+          "id": "cross-discovery-score-versus-claim-grounding",
+          "question": "一个已发表矩阵构造通过验证，为何仍不能说本地AlphaEvolve和科研完整性都已验证？",
+          "answer": "构造检查没有执行提案、进化档案和分布式搜索，所以不验证发现能力；它也不检查论文所有数值、引用或方法描述，所以不替代CoE审计。每项证据只支持它实际检查的对象。",
+          "example": "教学例：rank-48复数构造通过验证，却不能支持“任意域rank-48”或“本地重新发现”两个更强主张；后两者需要各自额外证据。",
+          "papers": [
+            "agent-research:alphaevolve",
+            "agent-research:scientist-one"
+          ]
         }
       ],
-      "updated": "2026-11-12",
+      "updated": "2026-11-13",
       "reviewed_papers": [
         "agent-research:verified-quantum-wiki",
         "agent-research:rsi-opt",
@@ -1548,7 +1747,11 @@
         "agent-research:envopt",
         "agent-research:fgse",
         "agent-research:pase",
-        "agent-research:agent-gym"
+        "agent-research:agent-gym",
+        "agent-research:scientist-two",
+        "agent-research:envharness",
+        "agent-research:mle-star",
+        "agent-research:alphaevolve"
       ],
       "updates": [
         {
@@ -1745,6 +1948,54 @@
           "summary": "加入下游规则治理这一演化位置：明确scope互斥、3→2→1真实状态更新与SME信任边界，并与PASE程序validation准入区分；完整API/人工系统不复现。",
           "source_revisions": {
             "agent-research:agent-gym": "f41a43a7de90bce7407709824b193c929bb3e7d33064e60c8187aac852974de3"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "agent-research:scientist-two",
+            "agent-research:scientist-one"
+          ],
+          "summary": "补入Google ScientistTwo历史漏项，区分科研扩展控制与证据完整性；局部CPU合同不生成科学结果，完整多日商业Agent实验高成本不复现。",
+          "source_revisions": {
+            "agent-research:scientist-two": "7dc069b4eafe45c0c793e19deeb6ce40815fa4bf2685a52ba3e0f54e8f642073",
+            "agent-research:scientist-one": "ea68cf997c23ac6af079225a8601259adee74beece77fac8e7cfa8fa29105e82"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "agent-research:envharness",
+            "agent-research:harness2"
+          ],
+          "summary": "补入EnvHarness环境侧可组合控制，区分Agent执行层和环境练习层；CPU三seed仅验Stage/Contract/serialChain合同，完整商业rollout和8H100训练不复现。",
+          "source_revisions": {
+            "agent-research:envharness": "e357850c5f1831857a5407e97b0f548405fa5caa71fe3cf6cd1c39215e6ace1e",
+            "agent-research:harness2": "c738a9266c1647b8f5cc0e50a0055d1aecf1fcf783ee78de3405c2e84850f48a"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "agent-research:mle-star",
+            "agent-research:mars-research"
+          ],
+          "summary": "补入检索初始化与消融定向细化，区分块级搜索与成本感知树调度；核对2025精确v1日期、生成产物与控制器源码边界，完整实验高成本不复现。",
+          "source_revisions": {
+            "agent-research:mle-star": "0e19c6eefc25b30757aba285ba8a67cc663f771b9a9300611b0066d15ed854fe",
+            "agent-research:mars-research": "8ed47dabbc4068ab9a3b3f8312b6ac6696469e147d2f8787ddb4a2879ec7a05a"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "agent-research:alphaevolve",
+            "agent-research:scientist-one"
+          ],
+          "summary": "补入经典程序进化与评价级联，区分搜索结果、构造验证与研究主张完整性；记录官方未发布运行系统、完整实验高成本不复现和零本地执行能力。",
+          "source_revisions": {
+            "agent-research:alphaevolve": "26aa215ad685d1a70d49041d3417204d5ba1049d98234341e9607f73abd8ac09",
+            "agent-research:scientist-one": "ea68cf997c23ac6af079225a8601259adee74beece77fac8e7cfa8fa29105e82"
           }
         }
       ]

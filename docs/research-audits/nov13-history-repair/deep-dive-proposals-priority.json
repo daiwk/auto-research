@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-13",
+  "integration_owner": "root",
+  "scope": "Authored proposals only; no shared topic/deep-dive bank edited.",
+  "proposals": [
+    {
+      "paper": "agent-research:mle-star",
+      "target_card": "agent-research/harness-and-self-improvement",
+      "source_revisions": {
+        "agent-research:mle-star": "0e19c6eefc25b30757aba285ba8a67cc663f771b9a9300611b0066d15ed854fe",
+        "agent-research:mars-research": "8ed47dabbc4068ab9a3b3f8312b6ac6696469e147d2f8787ddb4a2879ec7a05a"
+      },
+      "comparison": {
+        "position": "检索模型并实际验证合并，再以消融定位高影响代码块，内层改写/验证、外层重新定位，集成另行搜索。",
+        "tradeoff": "搜索材料与块级训练反馈必须真实执行；不同于MARS按成本奖励调度仓库候选。八V100及小时级完整矩阵不复现，本地无控制器或能力指标。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "高成本完整实验"
+        ]
+      },
+      "analysis": {
+        "title": "寻找值得改的部件，与决定把预算花在哪个分支，是不同控制问题",
+        "body": "MLE-STAR用执行消融选择代码块，在相对固定的局部空间内反复提出计划；MARS则通过预算感知MCTS安排模块化候选，并把新旧代码与运行差异变成跨分支经验。局部影响与性能/时间折中可以互补，却不是同一个分数；高耗时竞赛上的原文结果也不能拿来给本地空控制器背书。两者收录都应明确生成脚本、完整编排器与已运行能力三种不同资产。",
+        "papers": [
+          "agent-research:mle-star",
+          "agent-research:mars-research"
+        ]
+      },
+      "question": {
+        "id": "cross-block-targeting-versus-budget-allocation",
+        "question": "一处修改影响很大但训练昂贵，MLE-STAR的消融定位与MARS的预算奖励会作同一个决定吗？",
+        "answer": "不一定。消融回答哪个部件值得深入，预算奖励还按性能与执行时间取舍候选。前者不自动包含MARS的时间惩罚，后者也不自动实现MLE-STAR的块内计划搜索；应分别固定真实validation和运行成本再组合。",
+        "example": "教学例：缺失值处理每次提高0.01却需一小时，另一路提高0.008只要一分钟。影响排序与预算内的探索价值可以不同，不能只看一列精度。",
+        "papers": [
+          "agent-research:mle-star",
+          "agent-research:mars-research"
+        ]
+      },
+      "update": {
+        "date": "2026-11-13",
+        "papers": [
+          "agent-research:mle-star",
+          "agent-research:mars-research"
+        ],
+        "summary": "补入检索初始化与消融定向细化，区分块级搜索与成本感知树调度；核对2025精确v1日期、生成产物与控制器源码边界，完整实验高成本不复现。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Retrieve models, validate beneficial merges, then target influential blocks with ablations and nested plan/evaluation loops; search ensembles separately.",
+          "tradeoff": "Real training and ablations are required. This is not MARS's cost-aware repository scheduling. The eight-V100, multi-hour full matrix is deferred; no local controller or capability metrics are supplied."
+        },
+        "analysis": {
+          "title": "Targeting an influential component differs from allocating budget across branches",
+          "body": "MLE-STAR uses executed ablations to focus local plans on a block. MARS schedules modular candidates with budget-aware MCTS and converts code/result differences into transferable lessons. Local impact and performance/time tradeoffs can complement each other but are not one score. Neither paper's competition results validate an empty local controller. Generated scripts, orchestration source, and executed capability are distinct assets."
+        },
+        "question": {
+          "question": "Would MLE-STAR's ablation targeting and MARS's budget reward always choose the same expensive but influential change?",
+          "answer": "No. Ablation asks where refinement matters; a budget reward also trades performance against execution time. Neither automatically implements the other's search rule. A combination must separately fix validation and measured cost.",
+          "example": "Teaching example: a preprocessing change gains 0.01 in one hour, while another branch gains 0.008 in one minute. Influence and budget-limited exploration value can differ."
+        },
+        "update": "Add retrieval initialization and ablation-targeted refinement; distinguish local block search from cost-aware tree scheduling. Pin the exact2025v1 date and separate generated artifacts from controller source; full experiments are cost-deferred."
+      }
+    },
+    {
+      "paper": "agent-research:alphaevolve",
+      "target_card": "agent-research/harness-and-self-improvement",
+      "source_revisions": {
+        "agent-research:alphaevolve": "26aa215ad685d1a70d49041d3417204d5ba1049d98234341e9607f73abd8ac09",
+        "agent-research:scientist-one": "ea68cf997c23ac6af079225a8601259adee74beece77fac8e7cfa8fa29105e82"
+      },
+      "comparison": {
+        "position": "固定人类评价合同，混合LLM提案、级联执行评价与多维进化档案，异步探索程序空间。",
+        "tradeoff": "指标优化仍受评价器充分性约束，不等于ScientistOne的主张/引用/方法完整性审计。官方只开放构造验证资料，完整搜索/生产矩阵高成本不复现，本地没有算子。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "论文离线与线上效果",
+          "高成本完整实验"
+        ]
+      },
+      "analysis": {
+        "title": "发现更好的对象，与证明对它的研究主张有证据，是不同验收层",
+        "body": "AlphaEvolve需要一个能实际评价候选程序的目标，靠程序库和模型提案产生改进；ScientistOne继续追问论文数字是否复算、引文是否存在并支持主张、方法文字是否对应代码。构造通过指定检查只支持那项性质，不能把生成的论文全部自动判真；证据链可靠也不能保证搜索有创新。官方结果notebook可验证已给出的对象，但不恢复原发现过程，本库因此只收录有据成本审查。",
+        "papers": [
+          "agent-research:alphaevolve",
+          "agent-research:scientist-one"
+        ]
+      },
+      "question": {
+        "id": "cross-discovery-score-versus-claim-grounding",
+        "question": "一个已发表矩阵构造通过验证，为何仍不能说本地AlphaEvolve和科研完整性都已验证？",
+        "answer": "构造检查没有执行提案、进化档案和分布式搜索，所以不验证发现能力；它也不检查论文所有数值、引用或方法描述，所以不替代CoE审计。每项证据只支持它实际检查的对象。",
+        "example": "教学例：rank-48复数构造通过验证，却不能支持“任意域rank-48”或“本地重新发现”两个更强主张；后两者需要各自额外证据。",
+        "papers": [
+          "agent-research:alphaevolve",
+          "agent-research:scientist-one"
+        ]
+      },
+      "update": {
+        "date": "2026-11-13",
+        "papers": [
+          "agent-research:alphaevolve",
+          "agent-research:scientist-one"
+        ],
+        "summary": "补入经典程序进化与评价级联，区分搜索结果、构造验证与研究主张完整性；记录官方未发布运行系统、完整实验高成本不复现和零本地执行能力。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Fix a human evaluation contract and explore programs using mixed-model proposals, executed cascades, multidimensional archives, and asynchronous workers.",
+          "tradeoff": "Optimization depends on evaluator sufficiency and does not provide ScientistOne's claim/citation/method audit. Official artifacts verify constructions, not the controller; full search/production matrices are deferred with no local operator."
+        },
+        "analysis": {
+          "title": "Discovering a better object differs from grounding research claims about it",
+          "body": "AlphaEvolve searches using task-specific executable feedback. ScientistOne additionally checks numerical recomputation, citation support, and method/code alignment. A construction verifier establishes only its checked property, not every claim in a generated paper; a reliable evidence chain also does not guarantee novelty. Official result notebooks cannot recover the original discovery process, so the local contribution remains a cost-reviewed reference."
+        },
+        "question": {
+          "question": "Why does verifying a published matrix construction establish neither local AlphaEvolve discovery nor complete research integrity?",
+          "answer": "It does not execute proposals, archives, or distributed search, and it does not audit all numbers, citations, or prose/code alignment. Evidence supports only the object and property actually checked.",
+          "example": "Teaching example: a valid complex rank-48 construction does not establish rank48 over every field or local rediscovery. Each stronger claim needs separate evidence."
+        },
+        "update": "Add classical program evolution and cascaded evaluation; distinguish search results, construction verification, and claim grounding. The full runtime is not released or locally executed, and full experiments are cost-deferred."
+      }
+    }
+  ],
+  "figure_metadata": [
+    {
+      "page": "docs/agent-research/2506.15692-mle-star/README.md",
+      "asset": "docs/agent-research/2506.15692-mle-star/assets/paper-figure-01.png",
+      "source_url": "https://arxiv.org/pdf/2506.15692v1#page=4",
+      "source_pdf_sha256": "e75ac96750c805012553358cc21ebbde570f05a26d902f461597a13221229aea",
+      "pdf_page": 4,
+      "figure": "Figure 2",
+      "crop_pdf_points": [
+        60,
+        84,
+        535,
+        402
+      ],
+      "asset_sha256": "e4598f4654841de3ea47d023d10fe726a6ba13362dd806db078e2e628be318af",
+      "caption": "检索初始化、消融定位代码块与内外两层细化；原图不是本地执行结果。",
+      "copyright": "Original authors",
+      "rendered_and_visually_reviewed": true
+    },
+    {
+      "page": "docs/agent-research/2506.13131-alphaevolve/README.md",
+      "asset": "docs/agent-research/2506.13131-alphaevolve/assets/paper-figure-01.png",
+      "source_url": "https://arxiv.org/pdf/2506.13131v1#page=3",
+      "source_pdf_sha256": "f092c8cbd65da89951ee6496374da9a54963f9035758c25ac6e4625f506df9ad",
+      "pdf_page": 3,
+      "figure": "Figure 1",
+      "crop_pdf_points": [
+        292,
+        400,
+        538,
+        618
+      ],
+      "asset_sha256": "8b8ef8069605a52398b6c807559292293464f280dab813e6398cfee96229efd5",
+      "caption": "人类固定目标，程序库、提示采样器、LLM与评估器形成闭环；不是本地能力结果。",
+      "copyright": "Original authors",
+      "rendered_and_visually_reviewed": true
+    }
+  ]
+}

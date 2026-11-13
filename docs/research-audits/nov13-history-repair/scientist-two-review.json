@@ -1,0 +1,30 @@
+{
+  "schema_version":1,
+  "reviewed_on":"2026-11-13",
+  "paper":"agent-research:scientist-two",
+  "arxiv_id":"2609.19644",
+  "reviewed_version":"v1",
+  "title":"ScientistTwo: Pioneering the Human Knowledge Frontier with Autonomous AI",
+  "published":"2026-09-17T03:37:42Z",
+  "first_author":"Jaehyun Nam",
+  "first_author_affiliation":"Google Cloud AI Research",
+  "priority":"P0",
+  "historical_repair":true,
+  "sources":[
+    {"url":"https://arxiv.org/abs/2609.19644v1","source_cache":".cache/nov13-history-repair/scientist-two/abs.html","sha256":"5f6ad48691c8c03cb168f71c15b8ab41555bc760437875959f787af1c22b9281","purpose":"Canonical title, original publication timestamp and author identity."},
+    {"url":"https://arxiv.org/html/2609.19644v1","source_cache":".cache/nov13-history-repair/scientist-two/paper.html","sha256":"23f93180ac10e5b4e1cbdf9f1e532aa80c33351b7968345752ec7c6d12925aa3","sections":["3","4.1","4.3","Appendix A.2"],"purpose":"Full method, literal Fig.4 control flow, author results, cost subgroup and implementation settings."},
+    {"url":"https://scientist-two.github.io/","source_cache":".cache/nov13-history-repair/scientist-two/project.html","sha256":"f55c65aed3401748a604fa8446344fbca49de479d5d0606883a18e609fb04727","purpose":"Official project and generated-paper gallery; not proof of framework source release."}
+  ],
+  "upstream_code":{"released":false,"verified_repository":null,"scope":"Fixed v1 and the inspected official project entry do not link a verifiable complete ScientistTwo framework release. Public generated papers/solver artifacts, third-party replicas and reused PaperOrchestra/ScholarPeer components are not counted as its framework source. This is a bounded entry-point check, not an exhaustive claim about every possible repository."},
+  "decision":"component_only",
+  "implementation_status":"component_only",
+  "evaluation_tier":"l1_mechanism",
+  "diagnostic_only":true,
+  "local_components":["Literal bounded Fig.4 accept/refine/reject stage","Subset Good to independent full-experiment escalation","History-driven external proposals plus externally novelty-ranked untried seeds","Full-Good success and search-budget decisions","Externally certified strict-improvement replacement","Explicitly bounded external review/rebuttal scheduling"],
+  "external_responsibilities":["LLM generation and semantic criticism","Idea novelty and result comparison","Scientific code execution and data splits","Ablation design and supplementary experiments","Writing, review and evidence integrity"],
+  "fidelity_notes":["The final Fig.4 refinement may execute, but the unreviewed result is not accepted.","Subset Good never becomes full Good automatically; full Bad/Engineer outcomes remain intact.","Good/Bad history is preserved; no fixed scalar stands in for a semantic critic.","Review-call accounting is explicitly local and is not presented as the complete meta-review workflow.","No gold, model, scientific result, API call, CUDA path or Evolve integration is supplied."],
+  "full_experiment":{"status":"not_reproduced_high_cost_done","review_done":true,"automatic_retry":false,"automatic_implementation_queue":false,"basis":"The paper evaluates 107 problems. Section 4.3 analyzes a 33-problem NeurIPS-derived subgroup and reports about 2–3 days per problem (about 2.5 mean) and USD 3765 mean including tokens and VMs. These are author-environment measurements, not local timings and not a direct total for all 107 tasks. Multi-agent commercial calls, full scientific experiments and writing are out of budget; no probe or checkpoint/PDF-bundle download was attempted."},
+  "validation":{"requires_gpu_validation":false,"module_sha256":"228d0204bd939e5a571b9c9ec9d6a45cfb41d7e2314af8afcf4df3017f04fbbf","unit_tests":26,"unit_test_status":"passed","cpu_three_seed_status":"passed_l1_control_only","seeds":[42,43,44],"frozen_commit":"363d639261e1fc2e25c522ec0c5ac2c95edba446","metric_artifact":"docs/agent-research/2609.19644-scientist-two/metrics/component-cpu-seeds42-44.json","capability_measured":false},
+  "figure":{"path":"docs/agent-research/2609.19644-scientist-two/assets/paper-figure-01.png","source_url":"https://arxiv.org/html/2609.19644v1/scientisttwo_overview.png","section_url":"https://arxiv.org/html/2609.19644v1#S1.F3","figure":"Figure 3","pdf_page":null,"render":"Original official HTML PNG bytes; no PDF renderer, crop or redraw.","sha256":"135716fccf3cb097158963836fd068f4dd217b151e83d9b9aa66f6ca47c11760","visually_inspected":true},
+  "readme_sha256":"7dc069b4eafe45c0c793e19deeb6ce40815fa4bf2685a52ba3e0f54e8f642073"
+}

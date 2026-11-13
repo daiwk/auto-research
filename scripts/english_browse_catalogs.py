@@ -71,6 +71,9 @@ def _label_map(raw: str) -> dict[str, str]:
 
 
 _LABELS = _label_map("""
+数据科学 Agent = Data science agents
+环境与Agent共同进化 = Joint evolution of environments and agents
+环境设计与任务组合 = Environment design and task composition
 可穿戴世界模型与外部候选排序 = Wearable world models and external-candidate ranking
 Georgia Institute of Technology（工作在Amazon Web Services实习期间完成） = Georgia Institute of Technology (work conducted during an Amazon Web Services internship)
 Harness与自进化 = Harnesses and self-improvement

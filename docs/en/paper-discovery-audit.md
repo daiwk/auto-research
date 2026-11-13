@@ -1,8 +1,14 @@
 # Paper discovery and coverage audit
 
-<!-- source-sha256: 15c68b4f64b7fd2270d887df93fef51c6c88db2831b23eeab33049ddd17732e0 -->
+<!-- source-sha256: 9884ab3ad5725b5098b40f5d18652f0055058774c371d485aa0a6d75e710b345 -->
 
 [简体中文](../paper-discovery-audit.md)
+
+## November 13: ScientistTwo and historical institutional reconciliation
+
+[Six historical backfills](research-audits/nov13-history-repair/README.md) comprise CPU control components for ScientistTwo, DS-STAR, ERA and EnvHarness, plus review-only high-cost dispositions for MLE-STAR and AlphaEvolve. Full campaigns are explicitly not reproduced. Three-seed component execution supports L1 mechanisms only, not scientific or Agent capability comparisons.
+
+The separate [historical reconciliation report](research-audits/nov13-history-repair/history-reconciliation.md) preserves exact identities and capture witnesses before matching the canonical manifest and substantive review terminals. Google/Meta identities remain visible even when the recent delta is empty or an earlier abstract was labeled P2. Ordinary P2 records are not automatically reopened; explicit high-cost and source-archive terminals do not enter retries. Bounded inventories from configured Google/DeepMind/Meta pages are distinct from recent discovery. Pagination and access failures remain explicit; configured page budgets do not prove exhaustive institutional history. The watermark remains **November 9, 2026**.
 
 ## November 12: Official-source recheck and one Google backfill
 

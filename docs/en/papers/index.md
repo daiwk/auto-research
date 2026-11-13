@@ -4,7 +4,7 @@
 
 [English home](../index.md) · [中文研究库](../../research-library.md)
 
-The catalog lists 1116 entries from the shared research manifest. English write-ups available: 1116.
+The catalog lists 1122 entries from the shared research manifest. English write-ups available: 1122.
 
 ## Browse by domain
 
@@ -13,7 +13,7 @@ The catalog lists 1116 entries from the shared research manifest. English write-
 - [Structured decisions / System One](system-one.md): 6 catalog entries, 6 English write-ups
 - [Multimodal models](multimodal-models.md): 23 catalog entries, 23 English write-ups
 - [LLM post-training](post-training.md): 259 catalog entries, 259 English write-ups
-- [Agents](agent-research.md): 284 catalog entries, 284 English write-ups
+- [Agents](agent-research.md): 290 catalog entries, 290 English write-ups
 
 ## Read in English
 
@@ -445,6 +445,7 @@ The catalog lists 1116 entries from the shared research manifest. English write-
 - [Explainable Recommendations at Scale: LLM Rationales for YouTube Music Artist Discovery](../../reproductions/2609.23877-music-rationales/README-en.md)
 - [Verify, Don't Trust: Agentic Model Development for Video Discovery Retrieval at Scale](../../reproductions/2609.21257-evopilot/README-en.md)
 - [dQwen3.5: Adapting Hybrid Language Models into Bidirectional Diffusion Language Models](../../foundation-models/2609.20751-dqwen35/README-en.md)
+- [ScientistTwo: Pioneering the Human Knowledge Frontier with Autonomous AI](../../agent-research/2609.19644-scientist-two/README-en.md)
 - [RetireOPD: Self-Retiring On-Policy Distillation for Agentic Reinforcement Learning](../../post-training/2609.20784-retire-opd/README-en.md)
 - [On-Demand Attention: Efficient Long-Context Decoding with Learned Recall](../../foundation-models/2609.20734-oda/README-en.md)
 - [An Empirical Study of Harness Design for Coding Agents](../../agent-research/2609.20804-harness-design-study/README-en.md)
@@ -579,6 +580,7 @@ The catalog lists 1116 entries from the shared research manifest. English write-
 - [From a Static Multi-Level Small Semantic Codebook to a Dynamic Single-Level Large Semantic Codebook for Generative Recommendation](../../reproductions/2608.21012-dynamic-codebook/README-en.md)
 - [AUSO: Action-Level Unified Skill Optimization from Internalization to Utilization](../../agent-research/2608.21292-auso/README-en.md)
 - [SAPO: Single-Rollout Autoregressive Policy Optimization for Agentic Reinforcement Learning](../../agent-research/2608.19842-sapo/README-en.md)
+- [EnvHarness: Awakening Static Worlds for Agent Learning](../../agent-research/2608.19880-envharness/README-en.md)
 - [SPADE: Self-Play in Adaptive Synthetic Executable Environments](../../agent-research/2608.19197-spade/README-en.md)
 - [RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training](../../agent-research/2608.18682-rtpo/README-en.md)
 - [OneModel: A Unified Foundation for Platform-Scale Multi-Scenario Ranking](../../reproductions/2608.18606-onemodel/README-en.md)
@@ -970,8 +972,10 @@ The catalog lists 1116 entries from the shared research manifest. English write-
 - [Detecting Post-generation Edits to Watermarked LLM Outputs via Combinatorial Watermarking](../../foundation-models/2510.01637-combinatorial-watermark/README-en.md)
 - [When LLMs Benchmark Themselves: Deconstructing Self-Bias in Automated Evaluation](../../post-training/2509.26600-benchmark-self-bias/README-en.md)
 - [Judging with Confidence: Calibrating Autoraters to Preference Distributions](../../post-training/2510.00263-probabilistic-autorater/README-en.md)
+- [DS-STAR: Data Science Agent via Iterative Planning and Verification](../../agent-research/2509.21825-ds-star/README-en.md)
 - [IntSR: An Integrated Generative Framework for Search and Recommendation](../../reproductions/2509.21179-intsr/README-en.md)
 - [OnePiece: Bringing Context Engineering and Reasoning to Industrial Cascade Ranking](../../reproductions/2509.18091-onepiece/README-en.md)
+- [An AI system to help scientists write expert-level empirical software (ERA)](../../agent-research/2509.06503-era-flat-puct/README-en.md)
 - [Deep Reinforcement Learning for Ranking Utility Tuning in the Ad Recommender System at Pinterest](../../reproductions/2509.05292-drl-put/README-en.md)
 - [MPFormer: Adaptive Framework for Industrial Multi-Task Personalized Sequential Retriever](../../reproductions/2508.20400-mpformer/README-en.md)
 - [MUA-RL](../../agent-research/2508.18669-mua-rl/README-en.md)
@@ -991,8 +995,10 @@ The catalog lists 1116 entries from the shared research manifest. English write-
 - [Scaling Recommender Transformers to One Billion Parameters](../../reproductions/2507.15994-argus/README-en.md)
 - [SPIRAL](../../post-training/2506.24119-spiral/README-en.md)
 - [CISPO / MiniMax-M1](../../post-training/2506.13585-cispo/README-en.md)
+- [AlphaEvolve: A coding agent for scientific and algorithmic discovery](../../agent-research/2506.13131-alphaevolve/README-en.md)
 - [Macro Graph of Experts for Billion-Scale Multi-Task Recommendation](../../reproductions/2506.10520-mgoe/README-en.md)
 - [RADAR: Recall Augmentation through Deferred Asynchronous Retrieval](../../reproductions/2506.07261-radar/README-en.md)
+- [MLE-STAR: Machine Learning Engineering Agent via Search and Targeted Refinement](../../agent-research/2506.15692-mle-star/README-en.md)
 - [SCAR: Shapley Credit Assignment for More Efficient RLHF](../../post-training/2505.20417-scar-shapley-credit/README-en.md)
 - [INTUITOR](../../post-training/2505.19590-intuitor/README-en.md)
 - [WebAgent-R1](../../agent-research/2505.16421-webagent-r1/README-en.md)

@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-13",
+  "integration_owner": "root",
+  "scope": "Authored ERA/LATS comparison only; shared topic and deep-dive banks are not modified.",
+  "proposals": [
+    {
+      "paper": "agent-research:era-flat-puct",
+      "target_card": "agent-research/planning-and-search",
+      "source_revisions": {
+        "agent-research:era-flat-puct": "6c2ea882fd2d0189a3f932a02a12113bd35aacaaa0f97d59e80501116b5f6ef3",
+        "agent-research:lats": "8ae228f18aa0e2c89a457475688d251bb0c2899ee86fcd2b3e0a4e4d44411c4c"
+      },
+      "comparison": {
+        "position": "将所有已执行程序平铺竞争，用任务分数的归一化排名、整树均匀先验和祖先访问计数决定下一次代码变异。",
+        "tradeoff": "不回传后代 rollout 均值，也不按根到叶递归选择；与 LATS 的行动轨迹、环境反馈及价值回传不是同一价值语义。外部执行、评分和数据隔离未在 CPU 算术核中实现，不能把节点数或夹具满分当成科研能力。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射",
+          "高成本完整实验与边界"
+        ]
+      },
+      "analysis": {
+        "title": "程序质量排名与轨迹回报均值不能混为一种树价值",
+        "body": "ERA 的节点是已执行程序，整树任意节点都可直接扩张；任务分数只转成相对排名供 PUCT 选择，访问更新不把子孙分数平均回传给祖先，最终仍按原始任务分数选优。LATS 以 MCTS 组织行动与 rollout，环境回报、价值统计及失败反思共同影响后续搜索。两者都需要外部反馈，却在搜索单元、单次成本和可见证据上不同。仓库 ERA 仅验证有限候选的选择算术，LATS 以完整计划为叶且未运行原文 LM value 或 WebShop；不应从这些局部结果宣布同预算科研能力胜负。公平比较必须先固定执行器、validation/test 隔离、失败费用和总预算。",
+        "papers": [
+          "agent-research:era-flat-puct",
+          "agent-research:lats"
+        ]
+      },
+      "question": {
+        "id": "cross-flat-program-rank-versus-rollout-value",
+        "question": "给 ERA 和 LATS 都限制一百次扩张，就能公平比较哪一个更会探索吗？",
+        "answer": "不能。一项 ERA 扩张需要生成并执行新程序以获得任务分数；一项 LATS rollout 可能执行多步交互并更新价值及反思。计数单位不等于成本单位，整树排名也不等于轨迹回报均值。应先统一任务和可见证据，记录模型调用、执行费用及失败成本，再隔离验证选择与测试；本地机制核尚不能提供这类能力比较。",
+        "example": "教学例：一个程序评估训练模型两小时，另一个轨迹只执行四次廉价工具；都算一次扩张会掩盖预算差异。探索项选中的低访问候选，也不能未经独立评测就取代最高原始 validation 分数的候选。",
+        "papers": [
+          "agent-research:era-flat-puct",
+          "agent-research:lats"
+        ]
+      },
+      "update": {
+        "date": "2026-11-13",
+        "papers": [
+          "agent-research:era-flat-puct",
+          "agent-research:lats"
+        ],
+        "summary": "补入 Google ERA 历史锚点，区分全树程序排名 PUCT 与 LATS 轨迹 rollout/价值回传；保留 v1 访问初始化及最终原始分数选优。CPU 组件仅为机制证据，完整多任务科研搜索高成本不复现。"
+      },
+      "english": {
+        "comparison": {
+          "position": "All executed programs compete directly, using normalized task-score ranks, a whole-tree uniform prior, and ancestor visit counts to choose the next code mutation.",
+          "tradeoff": "Descendant rollout means are not backed up, and selection does not recursively descend from the root. This differs from LATS action trajectories, environment feedback, and value backup. External execution, scoring, and split isolation are absent from the CPU arithmetic kernel; node counts or perfect fixtures do not establish scientific capability."
+        },
+        "analysis": {
+          "title": "Program-quality ranks and trajectory-return means are different tree values",
+          "body": "An ERA node is an executed program, and any node can be expanded directly. Task scores become relative ranks for PUCT selection; visit updates do not average descendant scores into ancestor values, and final selection still uses raw task score. LATS organizes actions and rollouts with MCTS, combining environment returns, value statistics, and failure reflections. Both need external feedback, but their search units, per-evaluation costs, and available evidence differ. Local ERA verifies finite-candidate selection arithmetic; local LATS uses complete-plan leaves and does not run the original LM value model or WebShop. These partial results cannot establish equal-budget scientific superiority. Fair comparison first fixes executors, validation/test isolation, failure costs, and the total budget."
+        },
+        "question": {
+          "question": "Does limiting ERA and LATS to one hundred expansions make their exploration quality fairly comparable?",
+          "answer": "No. An ERA expansion generates and executes a new program to obtain a task score. A LATS rollout may perform several interactions and update values and reflections. A count is not a cost unit, and whole-tree ranking is not a trajectory-return mean. First align tasks and visible evidence, record model calls, execution and failure costs, and separate validation-based selection from testing. The local mechanism kernels do not supply that capability comparison.",
+          "example": "Teaching example: one program evaluation trains a model for two hours while another trajectory makes four inexpensive tool calls. Counting each as one expansion hides the budget difference. An exploration bonus also cannot, without new evaluation, replace the candidate with the highest raw validation score."
+        },
+        "update": "Add the historical Google ERA anchor, distinguishing whole-tree program-rank PUCT from LATS trajectory rollouts and value backup. Preserve v1 visit initialization and final selection by raw task score. The CPU component supplies mechanism evidence only; the full multi-task scientific search campaign is not reproduced because of cost."
+      }
+    }
+  ]
+}

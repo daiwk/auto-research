@@ -7,7 +7,7 @@ hide:
 
 # 规划与搜索：下一步该做什么
 
-[Agent](index.md) / 68 个问题 · 17 篇论文
+[Agent](index.md) / 76 个问题 · 19 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">68 个问题 · 17 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">76 个问题 · 19 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:drago" data-paper-title="Repairing LLM-Generated Specifications with Deterministic Diagnosis" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Repairing LLM-Generated Specifications with Deterministic Diagnosis Agent University of Oxford 2026-10-15 形式规格“能运行”不等于“忠实表达了题意”。DRAGO 将 SMT-LIB2、MiniZinc 和 PDDL 的契约、求解器探针及题意对齐检查转为可定位诊断，再要求模型定向修复。候选必须保留语法/词表/输出合同，严格降低阻塞诊断，并满足防退化条件；参考形式化和最终标签只用于最后评分。方法 §3、附录 A.2 原图建议：原论文 Figure 2 为诊断/接纳消融；Figure 3 为 Planetarium 输入渲染缺陷。它们分别解释算法贡献和评测风险。 原文用 4×A100 服务30B/31B模型，跨5个 benchmark 多seed、多臂重评估，完整实验成本过高，不复现（审查 DONE）。实现 grounded STRIPS/PDDL 方向的诊断算子子集；component_only / L1 CPU。实现 grounded STRIPS/PDDL 方向的诊断算子子集；不冒充完整三形式化语言框架。CPU fixture 随机化走廊规模，实际执行无前提路径、联合目标冲突、预算耗尽、证据支持的初态修复，以及“删掉目标就算修好”的负对照。proposal 回调只拿公开 Problem 和 Diagnosis，不拿金标准。  规划与搜索 形式规格诊断与保守修复 Agent 规划与搜索：下一步该做什么 让 LLM 把自然语言题目写成形式规格时，DRAGO 要防哪类“看似成功”？ 模型可能生成能解析、能求解，却遗漏要求的规格，后续求解器只会忠实解决这个错误版本。DRAGO 关注自然语言到形式系统的转换可靠性，用可定位诊断约束修复，而不是把拿到一个解当作原题已解决；规格和求解是两个需要分开检查的环节。 例如题目要求两人都被安排，规格漏写一人后排班更容易有解，但这个“成功”恰好暴露了形式化阶段的遗漏。 2026-10-27">
@@ -716,6 +716,112 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>教学例：100个input含40个cache、20个output，价格分别.002/.0005/.004，token费用为.22而不是.30；这仅是构造账本，不是API实测或正确率。</p>
 <p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2511.17006">原论文</a> · <a href="../../../../agent-research/2511.17006-bats/">实现解读</a> · <a href="#qa-47f017ba9a06accb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ds-star" data-paper-title="DS-STAR: Data Science Agent via Iterative Planning and Verification" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="DS-STAR: Data Science Agent via Iterative Planning and Verification Agent Google Cloud / KAIST 2025-09-26 数据科学问题可能跨 CSV、JSON、Markdown、Excel 等多种文件。只看少量表格行容易丢失关联信息，而脚本能运行也不代表输出足以回答问题。DS-STAR 先生成并执行文件分析脚本，形成描述，再从一个简单步骤开始，逐步规划、实现、执行和判断充分性。Verifier 同时看 query、累计计划、代码和实际输出。若不足，router 区分“正确但还没做完”与“已有步骤错误”：前者追加；后者删掉错误步骤及其后缀，再采样新步骤。不是把新说明附在错误链条末尾。 本轮只交付无 API 的控制组件，完整三 benchmark 的商业模型、数据文件与代码执行评测不复现（依赖／范围限制，审查 DONE）。L1 CPU 控制核，不是完整数据科学 Agent。Planner、coder/executor、语义 verifier 和 router 均由外部提供；本地不读文件、不执行生成代码、不接触 gold，也不把固定回调通过当成答题能力。不提供文件分析器、embedding 检索、LLM planner/verifier/router、代码生成或 Python 执行器、调试、finalizer、沙箱及 benchmark bridge；不宣称完整 Agent 或 Evolve 集成。  数据科学 Agent 验证驱动规划与回溯 Agent 规划与搜索：下一步该做什么 DS-STAR为什么在脚本成功执行后还要单独调用verifier？ 脚本不报错只说明执行路径跑通，输出可能没覆盖query或计划本身缺步骤。原文verifier同时看累计计划、query、代码和输出，做语义充分性判断；本地外置这个能力，不能用执行成功自动返回sufficient。 教学例：脚本正确求了全表平均值，但用户问两个地区分组比较；程序正常退出，答案仍不足。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<span id="paper-agent-research-ds-star-6c329779" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-1c5abbbc18dad77b">DS-STAR为什么在脚本成功执行后还要单独调用verifier？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ads-star">DS-STAR: Data Science Agent via Iterative Planning and Verification</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Cloud / KAIST</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>脚本不报错只说明执行路径跑通，输出可能没覆盖query或计划本身缺步骤。原文verifier同时看累计计划、query、代码和输出，做语义充分性判断；本地外置这个能力，不能用执行成功自动返回sufficient。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：脚本正确求了全表平均值，但用户问两个地区分组比较；程序正常退出，答案仍不足。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2509.21825">原论文</a> · <a href="../../../../agent-research/2509.21825-ds-star/">实现解读</a> · <a href="#qa-1c5abbbc18dad77b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ds-star" data-paper-title="DS-STAR: Data Science Agent via Iterative Planning and Verification" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="DS-STAR: Data Science Agent via Iterative Planning and Verification Agent Google Cloud / KAIST 2025-09-26 数据科学问题可能跨 CSV、JSON、Markdown、Excel 等多种文件。只看少量表格行容易丢失关联信息，而脚本能运行也不代表输出足以回答问题。DS-STAR 先生成并执行文件分析脚本，形成描述，再从一个简单步骤开始，逐步规划、实现、执行和判断充分性。Verifier 同时看 query、累计计划、代码和实际输出。若不足，router 区分“正确但还没做完”与“已有步骤错误”：前者追加；后者删掉错误步骤及其后缀，再采样新步骤。不是把新说明附在错误链条末尾。 本轮只交付无 API 的控制组件，完整三 benchmark 的商业模型、数据文件与代码执行评测不复现（依赖／范围限制，审查 DONE）。L1 CPU 控制核，不是完整数据科学 Agent。Planner、coder/executor、语义 verifier 和 router 均由外部提供；本地不读文件、不执行生成代码、不接触 gold，也不把固定回调通过当成答题能力。不提供文件分析器、embedding 检索、LLM planner/verifier/router、代码生成或 Python 执行器、调试、finalizer、沙箱及 benchmark bridge；不宣称完整 Agent 或 Evolve 集成。  数据科学 Agent 验证驱动规划与回溯 Agent 规划与搜索：下一步该做什么 router说某一步错了，DS-STAR为什么连后面的步骤一起删掉？ 后续步骤可能依赖错误的中间数据，保留它们会累积错误。控制核删除指定位置及其后缀，再让planner生成一步；planner仍看上次输出作为修正上下文，不把该输出误称保留前缀重新执行的结果。 教学例：第二步用错join键，第三步对错误合并表求和；不能只改第二步的文字却保留第三步结果。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-10033eff5fa32e04">router说某一步错了，DS-STAR为什么连后面的步骤一起删掉？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ads-star">DS-STAR: Data Science Agent via Iterative Planning and Verification</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Cloud / KAIST</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>后续步骤可能依赖错误的中间数据，保留它们会累积错误。控制核删除指定位置及其后缀，再让planner生成一步；planner仍看上次输出作为修正上下文，不把该输出误称保留前缀重新执行的结果。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：第二步用错join键，第三步对错误合并表求和；不能只改第二步的文字却保留第三步结果。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2509.21825">原论文</a> · <a href="../../../../agent-research/2509.21825-ds-star/">实现解读</a> · <a href="#qa-10033eff5fa32e04">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ds-star" data-paper-title="DS-STAR: Data Science Agent via Iterative Planning and Verification" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="DS-STAR: Data Science Agent via Iterative Planning and Verification Agent Google Cloud / KAIST 2025-09-26 数据科学问题可能跨 CSV、JSON、Markdown、Excel 等多种文件。只看少量表格行容易丢失关联信息，而脚本能运行也不代表输出足以回答问题。DS-STAR 先生成并执行文件分析脚本，形成描述，再从一个简单步骤开始，逐步规划、实现、执行和判断充分性。Verifier 同时看 query、累计计划、代码和实际输出。若不足，router 区分“正确但还没做完”与“已有步骤错误”：前者追加；后者删掉错误步骤及其后缀，再采样新步骤。不是把新说明附在错误链条末尾。 本轮只交付无 API 的控制组件，完整三 benchmark 的商业模型、数据文件与代码执行评测不复现（依赖／范围限制，审查 DONE）。L1 CPU 控制核，不是完整数据科学 Agent。Planner、coder/executor、语义 verifier 和 router 均由外部提供；本地不读文件、不执行生成代码、不接触 gold，也不把固定回调通过当成答题能力。不提供文件分析器、embedding 检索、LLM planner/verifier/router、代码生成或 Python 执行器、调试、finalizer、沙箱及 benchmark bridge；不宣称完整 Agent 或 Evolve 集成。  数据科学 Agent 验证驱动规划与回溯 Agent 规划与搜索：下一步该做什么 DS-STAR与ReAct都读取执行观察，二者控制重点有什么不同？ ReAct交替生成推理、动作和观察，更新下一步行为。DS-STAR显式检查累计计划、代码、输出是否足以回答query，再路由追加或删除错误后缀。读取观察相同不代表充分性判据相同；本地callback合同也不能与ReAct隔离能力分数混排。 教学例：观察到空表后，ReAct可选择再查文件；DS-STAR还需外部判据决定已有计划是缺步骤还是错误过滤，并据此回溯。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-907acebec5b2caa1">DS-STAR与ReAct都读取执行观察，二者控制重点有什么不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ads-star">DS-STAR: Data Science Agent via Iterative Planning and Verification</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Cloud / KAIST</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>ReAct交替生成推理、动作和观察，更新下一步行为。DS-STAR显式检查累计计划、代码、输出是否足以回答query，再路由追加或删除错误后缀。读取观察相同不代表充分性判据相同；本地callback合同也不能与ReAct隔离能力分数混排。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：观察到空表后，ReAct可选择再查文件；DS-STAR还需外部判据决定已有计划是缺步骤还是错误过滤，并据此回溯。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2509.21825">原论文</a> · <a href="../../../../agent-research/2509.21825-ds-star/">实现解读</a> · <a href="#qa-907acebec5b2caa1">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:ds-star" data-paper-title="DS-STAR: Data Science Agent via Iterative Planning and Verification" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="DS-STAR: Data Science Agent via Iterative Planning and Verification Agent Google Cloud / KAIST 2025-09-26 数据科学问题可能跨 CSV、JSON、Markdown、Excel 等多种文件。只看少量表格行容易丢失关联信息，而脚本能运行也不代表输出足以回答问题。DS-STAR 先生成并执行文件分析脚本，形成描述，再从一个简单步骤开始，逐步规划、实现、执行和判断充分性。Verifier 同时看 query、累计计划、代码和实际输出。若不足，router 区分“正确但还没做完”与“已有步骤错误”：前者追加；后者删掉错误步骤及其后缀，再采样新步骤。不是把新说明附在错误链条末尾。 本轮只交付无 API 的控制组件，完整三 benchmark 的商业模型、数据文件与代码执行评测不复现（依赖／范围限制，审查 DONE）。L1 CPU 控制核，不是完整数据科学 Agent。Planner、coder/executor、语义 verifier 和 router 均由外部提供；本地不读文件、不执行生成代码、不接触 gold，也不把固定回调通过当成答题能力。不提供文件分析器、embedding 检索、LLM planner/verifier/router、代码生成或 Python 执行器、调试、finalizer、沙箱及 benchmark bridge；不宣称完整 Agent 或 Evolve 集成。  数据科学 Agent 验证驱动规划与回溯 Agent 规划与搜索：下一步该做什么 为什么M次verifier预算可能执行M+1份代码，末稿仍不能算成功？ Algorithm1先执行初始计划，每次insufficient都会路由、再规划并执行，包括最后一轮。本地忠实保留末稿，但没有多余verifier确认，返回exhausted_unverified；不能用预算到期、引用非空或代码成功退出冒充sufficient。 教学例：预算一次，初始稿不充分后生成第二稿。第二稿虽然存在却没被判充分，因此不能记录为任务成功。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-4e39768f08ae1b2c">为什么M次verifier预算可能执行M+1份代码，末稿仍不能算成功？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ads-star">DS-STAR: Data Science Agent via Iterative Planning and Verification</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Cloud / KAIST</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Algorithm1先执行初始计划，每次insufficient都会路由、再规划并执行，包括最后一轮。本地忠实保留末稿，但没有多余verifier确认，返回exhausted_unverified；不能用预算到期、引用非空或代码成功退出冒充sufficient。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：预算一次，初始稿不充分后生成第二稿。第二稿虽然存在却没被判充分，因此不能记录为任务成功。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2509.21825">原论文</a> · <a href="../../../../agent-research/2509.21825-ds-star/">实现解读</a> · <a href="#qa-4e39768f08ae1b2c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:era-flat-puct" data-paper-title="An AI system to help scientists write expert-level empirical software (ERA)" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="An AI system to help scientists write expert-level empirical software (ERA) Agent Google DeepMind 2025-09-08 ERA 把可评分的科研任务、已有方法或新研究思路交给 LLM，生成程序后在隔离环境中运行，以任务指标持续搜索改进。关键不是让模型连续改写同一段答案，而是保存已执行代码树，用质量与探索项决定下一个应变异的程序。原文跨单细胞整合、预测、遥感和数值任务评测，不能用一个小算术例替代这些科研结果。与递归沿根节点选择子树的常见 MCTS 不同，ERA 的所有已执行节点同时竞争；选中深层节点可直接产生新程序。节点保存外部任务分数，不把后代 rollout 均值回传为价值。 按单张 A100/A30 或本地 Mac 的资源与费用约束，完整矩阵标记成本过高，不复现（审查 DONE），不试训、不下载大资源、不调用付费 API、不自动重试。原文 Methods 报告单细胞实验每次搜索 500 节点、约 7 小时；COVID 每次 2,000 节点，GIFT-Eval 涉及 92 个数据集分别搜索及另一个 1,000 节点以上的统一模型搜索。它们还调用外部 LLM、运行生成代码并反复评测。上述时间是作者环境中的报告，不是本地测量或当前 API 报价。三种子执行产物见 metrics/component-cpu-seeds42-44.json；统一 runner 核验冻结源码、原始结果和指标。  科学研究 Agent 平铺树搜索与代码优化 Agent 规划与搜索：下一步该做什么 ERA 搜索树里的一个节点是什么，为什么不能把语言模型写出的一个想法直接当作高质量节点？ 节点对应已经生成并执行、具有外部任务分数的程序候选，而不只是未经验证的文字想法。ERA 用执行后的质量决定后续变异方向；本地 Candidate 只保存身份、外部证据引用和 validation 分数，既不执行代码也不验证引用真实，因此类型合法不等于实验成立。 教学例：模型声称“加入新归一化能降低误差”，这只是研究思路；只有代码被隔离执行并按固定验证集评分后，才能把它作为相应的已评分候选。手填 0.95 不会替代这一步。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<span id="paper-agent-research-era-flat-puct-383c27d7" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-0599647aeebb6076">ERA 搜索树里的一个节点是什么，为什么不能把语言模型写出的一个想法直接当作高质量节点？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aera-flat-puct">An AI system to help scientists write expert-level empirical software (ERA)</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>节点对应已经生成并执行、具有外部任务分数的程序候选，而不只是未经验证的文字想法。ERA 用执行后的质量决定后续变异方向；本地 Candidate 只保存身份、外部证据引用和 validation 分数，既不执行代码也不验证引用真实，因此类型合法不等于实验成立。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：模型声称“加入新归一化能降低误差”，这只是研究思路；只有代码被隔离执行并按固定验证集评分后，才能把它作为相应的已评分候选。手填 0.95 不会替代这一步。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2509.06503">原论文</a> · <a href="../../../../agent-research/2509.06503-era-flat-puct/">实现解读</a> · <a href="#qa-0599647aeebb6076">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:era-flat-puct" data-paper-title="An AI system to help scientists write expert-level empirical software (ERA)" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="An AI system to help scientists write expert-level empirical software (ERA) Agent Google DeepMind 2025-09-08 ERA 把可评分的科研任务、已有方法或新研究思路交给 LLM，生成程序后在隔离环境中运行，以任务指标持续搜索改进。关键不是让模型连续改写同一段答案，而是保存已执行代码树，用质量与探索项决定下一个应变异的程序。原文跨单细胞整合、预测、遥感和数值任务评测，不能用一个小算术例替代这些科研结果。与递归沿根节点选择子树的常见 MCTS 不同，ERA 的所有已执行节点同时竞争；选中深层节点可直接产生新程序。节点保存外部任务分数，不把后代 rollout 均值回传为价值。 按单张 A100/A30 或本地 Mac 的资源与费用约束，完整矩阵标记成本过高，不复现（审查 DONE），不试训、不下载大资源、不调用付费 API、不自动重试。原文 Methods 报告单细胞实验每次搜索 500 节点、约 7 小时；COVID 每次 2,000 节点，GIFT-Eval 涉及 92 个数据集分别搜索及另一个 1,000 节点以上的统一模型搜索。它们还调用外部 LLM、运行生成代码并反复评测。上述时间是作者环境中的报告，不是本地测量或当前 API 报价。三种子执行产物见 metrics/component-cpu-seeds42-44.json；统一 runner 核验冻结源码、原始结果和指标。  科学研究 Agent 平铺树搜索与代码优化 Agent 规划与搜索：下一步该做什么 ERA v1 的一次扩张如何改变访问次数？PUCT 中的总访问量为什么不等于节点数？ 根和新子节点的访问次数都从 1 开始。加入一个子节点后，仅给它的所有祖先各加 1，不把新节点分数改成后代 rollout 均值。PUCT 使用所有节点访问次数的总和、整树均匀先验 1/n 和归一化升序任务排名；单节点时排名分数按原文设为 1。 教学例：先从 root 扩张 A，再从 A 扩张 B，访问次数是 root=3、A=2、B=1，因此 N_total=6 而不是 3。三个节点仍各自保存自己的外部任务分数，不能把 B 的高分回写成 root 的平均价值。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-9107fef5e5aa001c">ERA v1 的一次扩张如何改变访问次数？PUCT 中的总访问量为什么不等于节点数？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aera-flat-puct">An AI system to help scientists write expert-level empirical software (ERA)</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>根和新子节点的访问次数都从 1 开始。加入一个子节点后，仅给它的所有祖先各加 1，不把新节点分数改成后代 rollout 均值。PUCT 使用所有节点访问次数的总和、整树均匀先验 1/n 和归一化升序任务排名；单节点时排名分数按原文设为 1。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：先从 root 扩张 A，再从 A 扩张 B，访问次数是 root=3、A=2、B=1，因此 N_total=6 而不是 3。三个节点仍各自保存自己的外部任务分数，不能把 B 的高分回写成 root 的平均价值。</p>
+<p class="ar-learning-sources">依据：核心公式、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2509.06503">原论文</a> · <a href="../../../../agent-research/2509.06503-era-flat-puct/">实现解读</a> · <a href="#qa-9107fef5e5aa001c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:era-flat-puct" data-paper-title="An AI system to help scientists write expert-level empirical software (ERA)" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="An AI system to help scientists write expert-level empirical software (ERA) Agent Google DeepMind 2025-09-08 ERA 把可评分的科研任务、已有方法或新研究思路交给 LLM，生成程序后在隔离环境中运行，以任务指标持续搜索改进。关键不是让模型连续改写同一段答案，而是保存已执行代码树，用质量与探索项决定下一个应变异的程序。原文跨单细胞整合、预测、遥感和数值任务评测，不能用一个小算术例替代这些科研结果。与递归沿根节点选择子树的常见 MCTS 不同，ERA 的所有已执行节点同时竞争；选中深层节点可直接产生新程序。节点保存外部任务分数，不把后代 rollout 均值回传为价值。 按单张 A100/A30 或本地 Mac 的资源与费用约束，完整矩阵标记成本过高，不复现（审查 DONE），不试训、不下载大资源、不调用付费 API、不自动重试。原文 Methods 报告单细胞实验每次搜索 500 节点、约 7 小时；COVID 每次 2,000 节点，GIFT-Eval 涉及 92 个数据集分别搜索及另一个 1,000 节点以上的统一模型搜索。它们还调用外部 LLM、运行生成代码并反复评测。上述时间是作者环境中的报告，不是本地测量或当前 API 报价。三种子执行产物见 metrics/component-cpu-seeds42-44.json；统一 runner 核验冻结源码、原始结果和指标。  科学研究 Agent 平铺树搜索与代码优化 Agent 规划与搜索：下一步该做什么 ERA 的 flat PUCT 与 LATS 的 UCT 都有探索项，为什么不能把两者当成同一种树搜索直接比较节点数？ ERA 让整树中所有已执行程序直接竞争扩张，价值项是各程序任务分数的相对排名。LATS 用 MCTS 组织行动、完整轨迹 rollout、环境反馈、价值回传与失败反思，UCT 中的 Q 与访问统计有不同含义。搜索单元、反馈成本和价值来源不同；仓库的 LATS 还以完整计划为叶，未执行原论文的 LM value 或 WebShop，不能据本地小任务指标推出科研能力胜负。 教学例：ERA 可以直接再变异一个深层的高分程序；LATS 的一次 rollout 则可能执行多步工具轨迹才得到回报。各记作“一次节点扩展”，并不代表相同模型调用、执行时间或可用证据。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-a85bfe0d7259c1b8">ERA 的 flat PUCT 与 LATS 的 UCT 都有探索项，为什么不能把两者当成同一种树搜索直接比较节点数？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aera-flat-puct">An AI system to help scientists write expert-level empirical software (ERA)</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>ERA 让整树中所有已执行程序直接竞争扩张，价值项是各程序任务分数的相对排名。LATS 用 MCTS 组织行动、完整轨迹 rollout、环境反馈、价值回传与失败反思，UCT 中的 Q 与访问统计有不同含义。搜索单元、反馈成本和价值来源不同；仓库的 LATS 还以完整计划为叶，未执行原论文的 LM value 或 WebShop，不能据本地小任务指标推出科研能力胜负。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：ERA 可以直接再变异一个深层的高分程序；LATS 的一次 rollout 则可能执行多步工具轨迹才得到回报。各记作“一次节点扩展”，并不代表相同模型调用、执行时间或可用证据。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、本地复现、高成本完整实验与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2509.06503">原论文</a> · <a href="../../../../agent-research/2509.06503-era-flat-puct/">实现解读</a> · <a href="#qa-a85bfe0d7259c1b8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:era-flat-puct" data-paper-title="An AI system to help scientists write expert-level empirical software (ERA)" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="An AI system to help scientists write expert-level empirical software (ERA) Agent Google DeepMind 2025-09-08 ERA 把可评分的科研任务、已有方法或新研究思路交给 LLM，生成程序后在隔离环境中运行，以任务指标持续搜索改进。关键不是让模型连续改写同一段答案，而是保存已执行代码树，用质量与探索项决定下一个应变异的程序。原文跨单细胞整合、预测、遥感和数值任务评测，不能用一个小算术例替代这些科研结果。与递归沿根节点选择子树的常见 MCTS 不同，ERA 的所有已执行节点同时竞争；选中深层节点可直接产生新程序。节点保存外部任务分数，不把后代 rollout 均值回传为价值。 按单张 A100/A30 或本地 Mac 的资源与费用约束，完整矩阵标记成本过高，不复现（审查 DONE），不试训、不下载大资源、不调用付费 API、不自动重试。原文 Methods 报告单细胞实验每次搜索 500 节点、约 7 小时；COVID 每次 2,000 节点，GIFT-Eval 涉及 92 个数据集分别搜索及另一个 1,000 节点以上的统一模型搜索。它们还调用外部 LLM、运行生成代码并反复评测。上述时间是作者环境中的报告，不是本地测量或当前 API 报价。三种子执行产物见 metrics/component-cpu-seeds42-44.json；统一 runner 核验冻结源码、原始结果和指标。  科学研究 Agent 平铺树搜索与代码优化 Agent 规划与搜索：下一步该做什么 实现 ERA 时，为什么不能用当前 PUCT 最高的节点作为最终结果，误差类指标又应怎样接入？ 探索项用于决定下一次值得评估谁，不是已经取得的任务质量；v1 最后按原始 TaskScore 选 best。接口要求最大化方向的 validation 分数，误差越低越好的指标须由调用方明确转换方向，例如传入负 MSE。验证／测试隔离、实际执行和证据真实性仍由外部保证，三种子算术诊断不能补齐这些条件。 教学例：A 的验证分数为 0.90，B 为 0.89；B 因访问少而得到更高探索分数，可以优先扩张，但当前 best 仍是 A。若原指标是 MSE=0.10 和 0.11，应传入 -0.10 和 -0.11，而不是误把更大的误差排为最好。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-4d3d94942cba1636">实现 ERA 时，为什么不能用当前 PUCT 最高的节点作为最终结果，误差类指标又应怎样接入？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aera-flat-puct">An AI system to help scientists write expert-level empirical software (ERA)</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>探索项用于决定下一次值得评估谁，不是已经取得的任务质量；v1 最后按原始 TaskScore 选 best。接口要求最大化方向的 validation 分数，误差越低越好的指标须由调用方明确转换方向，例如传入负 MSE。验证／测试隔离、实际执行和证据真实性仍由外部保证，三种子算术诊断不能补齐这些条件。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：A 的验证分数为 0.90，B 为 0.89；B 因访问少而得到更高探索分数，可以优先扩张，但当前 best 仍是 A。若原指标是 MSE=0.10 和 0.11，应传入 -0.10 和 -0.11，而不是误把更大的误差排为最好。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2509.06503">原论文</a> · <a href="../../../../agent-research/2509.06503-era-flat-puct/">实现解读</a> · <a href="#qa-4d3d94942cba1636">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:lats" data-paper-title="LATS" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="LATS Agent University of Illinois Urbana-Champaign 2023-10-06 ReAct 等方法通常沿单条轨迹行动，失败后缺少系统搜索。LATS 把 LM 同时作为 agent、value function 和 optimizer，嵌入 Monte Carlo Tree Search；环境执行提供外部 reward，失败轨迹生成 reflection，帮助后续搜索避开错误。 本页实现 UCT 式树搜索、完整 trajectory rollout、环境 reward、反思与回溯。保留 MCTS statistics、环境反馈、reflection 与回溯；本地树以完整计划为叶节点，未调用 LM value model、HumanEval executor 或 WebShop，搜索规模远小于论文。每个 PlanBench episode 搜索四条完整计划轨迹；环境返回 exact plan reward，失败轨迹产生 reflection/backtrack，再按累计 value 选最终路径。  Agent 搜索 Agent 规划与搜索：下一步该做什么 为什么在工具任务中生成一条看似合理的推理链，还不足以完成 LATS 要处理的问题？ 工具或环境可能返回与预想不同的结果，单一路线失败后也未必能继续。LATS 把推理和行动放进可探索的搜索树，让候选通过执行反馈接受检验，并利用失败反思尝试其他路线。目标是把语言提案与环境结果连接起来，搜索预算和判断错误仍会限制效果。 教学例：网页搜索第一条结果没有所需价格，Agent 可以回到先前搜索节点改关键词，而不是沿错误页面继续编答案。 2026-10-27">

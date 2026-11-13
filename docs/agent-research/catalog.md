@@ -133,6 +133,7 @@
 | 规划 | [SAGE: Symbolic Action-Gating and Editing for LLM Task Planners](2609.34268-sage/README.md) | 原文首页未列机构，2026-09-28 | [已开源](https://github.com/mtbui2010/sage) | `sage-planner` |
 | 研究自动化 | [Advancing Model Research in AgentX: Long-Horizon Autonomy for Industrial Recommender Systems](2609.30001-agentx-model/README.md) | Kuaishou，2026-09-24 | 未发现官方代码 | `agentx-model-replay` |
 | 编程 Agent | [An Empirical Study of Harness Design for Coding Agents](2609.20804-harness-design-study/README.md) | University of Massachusetts Amherst，2026-09-17 | 未发现官方代码 | `harness-design-study` |
+| 科学研究 Agent | [ScientistTwo: Pioneering the Human Knowledge Frontier with Autonomous AI](2609.19644-scientist-two/README.md) | Google Cloud AI Research，2026-09-17 | 未发现官方代码 | `scientist-two`：仅低成本组件，完整实验不复现 |
 | 多 Agent | [CERA-MoA: Co-Evolving Router and Agents for Mixture-of-Agents](2609.18779-cera-moa/README.md) | IIIS, Tsinghua University，2026-09-16 | 未发现官方代码 | `cera-moa` |
 | 轨迹精炼 | [Dependency-Aware Trajectory Refinement for Efficient Multi-Turn Agent Fine-Tuning](2609.18417-dependency-refinement/README.md) | ShanghaiTech University，2026-09-16 | [已开源](https://github.com/Alibaba-NLP/VLLM-KB) | `dependency-refinement` |
 | 长期记忆 | [Interactive Memory Learning for Long-Term Conversations](2609.17088-interactive-memory/README.md) | Harbin Institute of Technology, Shenzhen / Pengcheng Laboratory，2026-09-15 | 未发现官方代码 | `interactive-memory` |
@@ -178,6 +179,7 @@
 | 高斯 guidance Agent RL | [Agent-G²: Gaussian Guidance for Agentic Reinforcement Learning](2608.23318-agent-g2/README.md) | Baidu，2026-08-24 | [已开源](https://github.com/ZJU-REAL/Agent-G2) | `agent-g2` |
 | Harness 自动优化 | [AutoSaddler: Automatic Harness Optimization with Durable Updates from Agent Execution Traces](2608.23041-autosaddler/README.md) | Microsoft / POSTECH，2026-08-24 | 未发现官方代码 | `autosaddler` |
 | 动作级技能优化 | [AUSO: Action-Level Unified Skill Optimization from Internalization to Utilization](2608.21292-auso/README.md) | University of Science and Technology of China，2026-08-21 | [已开源](https://github.com/JordanSancholhz/Action-Skill) | `auso` |
+| 环境与Agent共同进化 | [EnvHarness: Awakening Static Worlds for Agent Learning](2608.19880-envharness/README.md) | Washington University in St. Louis，2026-08-20 | [原作者入口](https://github.com/google-research/envharness)；原文提供GoogleResearch官方仓库，当前README及实现入口已公开；一作署名WashingtonUniversity，脚注GoogleCloudAIResearch实习期间完成，Google合作优先信号独立保留。 | `envharness`：仅低成本组件，完整实验不复现 |
 | Agentic RL | [SAPO: Single-Rollout Autoregressive Policy Optimization for Agentic Reinforcement Learning](2608.19842-sapo/README.md) | Xiamen University，2026-08-20 | 未发现官方代码 | `sapo` |
 | Agentic RL | [RTPO: Reverse-Turn Policy Optimization for Stabilizing Agentic RL Training](2608.18682-rtpo/README.md) | Adelaide University，2026-08-19 | 未发现官方代码 | `rtpo` |
 | Agentic RL | [SPADE: Self-Play in Adaptive Synthetic Executable Environments](2608.19197-spade/README.md) | University of Washington，2026-08-19 | [已开源](https://github.com/spade-rl/spade) | `spade` |
@@ -256,10 +258,14 @@
 | Agentic RL 基础设施 | [Agent-R1](2511.14460-agent-r1/README.md) | University of Science and Technology of China，2025-11-18 | [已开源](https://github.com/AgentR1/Agent-R1) | `agent-r1` |
 | 过程记忆 | [LEGOMem](2510.04851-legomem/README.md) | Microsoft Research，2025-10-06 | 未发现官方代码 | `legomem` |
 | 工具与环境交互 | [Watch and Learn: Learning to Use Computers from Online Videos](2510.04673-watch-and-learn/README.md) | The Ohio State University，2025-10-06 | 未发现官方代码 | 计划键 `watch-and-learn`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
+| 数据科学 Agent | [DS-STAR: Data Science Agent via Iterative Planning and Verification](2509.21825-ds-star/README.md) | Google Cloud / KAIST，2025-09-26 | [原作者入口](https://github.com/google-research/ds-star)；作者官方仓库已发布；本次核对HEAD6c05b01e30f01489af12708e99eda932e44d10ba，README含新版题名及DS-STAR+，本地组件仍按固定v1的§3.2/Algorithm1实现，不声称复现新版扩展。 | `ds-star`：仅低成本组件，完整实验不复现 |
+| 科学研究 Agent | [An AI system to help scientists write expert-level empirical software (ERA)](2509.06503-era-flat-puct/README.md) | Google DeepMind，2025-09-08 | [原作者入口](https://github.com/google-research/era)；作者Apache-2.0仓库现含FUTS示例及生成代码，区别v1首发产物与后续框架发布；当前示例单节点rank/root visits约定与固定v1不同，本地不混称相同实现 | `era-flat-puct`：仅低成本组件，完整实验不复现 |
 | 多轮用户 Agent RL | [MUA-RL](2508.18669-mua-rl/README.md) | Meituan，2025-08-26 | [已开源](https://github.com/zzwkk/MUA-RL) | `mua-rl` |
 | 工具学习 | [ToolGrad: Efficient Tool-Use Dataset Generation with Textual Gradients](2508.04086-toolgrad/README.md) | Google，2025-08-06 | [已开源](https://github.com/zhongyi-zhou/toolgrad) | `toolgrad` |
 | Agent RL | [Agent Lightning](2508.03680-agent-lightning/README.md) | Microsoft Research，2025-08-05 | [已开源](https://github.com/microsoft/agent-lightning) | `agent-lightning` |
 | 工具记忆 | [MemTool](2507.21428-memtool/README.md) | PricewaterhouseCoopers Commercial Technology and Innovation Office，2025-07-29 | 未发现官方代码 | `memtool` |
+| 科学研究 Agent | [AlphaEvolve: A coding agent for scientific and algorithmic discovery](2506.13131-alphaevolve/README.md) | Google DeepMind，2025-06-16 | [原作者入口](https://github.com/google-deepmind/alphaevolve_results)；官方结果仓库仅公开数学构造及正确性验证notebook，README明确不含运行AlphaEvolve的源码；社区OpenEvolve不等于作者系统 | 计划键 `alphaevolve`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
+| 科学研究 Agent | [MLE-STAR: Machine Learning Engineering Agent via Search and Targeted Refinement](2506.15692-mle-star/README.md) | Google Cloud / KAIST，2025-05-27 | [原作者入口](https://github.com/jaehyun513/MLE-STAR)；作者仓库发布example_final_solutions和example_intermediate_outputs，不是完整控制器源码证明；Google官方ADK示例链接存在，但当前raw README路径404，未独立核实完整编排实现 | 计划键 `mle-star`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 网页 Agent RL | [WebAgent-R1](2505.16421-webagent-r1/README.md) | University of Virginia，2025-05-22 | [已开源](https://github.com/weizhepei/WebAgent-R1) | `webagent-r1` |
 | Agent group credit | [GiGPO](2505.10978-gigpo/README.md) | Nanyang Technological University，2025-05-16 | 未发现官方代码 | `gigpo` |
 | 多轮 Agent RL | [RAGEN](2504.20073-ragen/README.md) | Northwestern，2025-04-24 | [已开源](https://github.com/RAGEN-AI/RAGEN) | `ragen` |
