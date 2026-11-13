@@ -26,6 +26,8 @@ COMPONENTS = {
     "era-flat-puct": ("era_flat_puct", "2509.06503-era-flat-puct"),
     "envharness": ("envharness", "2608.19880-envharness"),
 }
+FULL_STATUS = {key: ("not_reproduced_commercial_dependencies" if key == "ds-star"
+                    else "not_reproduced_high_cost") for key in COMPONENTS}
 MODULES = {key: f"src/auto_research/agent_research/{module}.py"
            for key, (module, _) in COMPONENTS.items()}
 SOURCES = ["scripts/run_nov13_history_components.py", "scripts/oct18_frozen_sources.py",
@@ -101,7 +103,7 @@ def metric(key, raw, frozen):
             "evaluation_protocol": {"tier": "l1_mechanism", "seeds": SEEDS, "formal_comparison": False,
                                     "claim_policy": "Control arithmetic and typed callback contracts only, not Agent or scientific capability"},
             "automatic_retry": False, "automatic_implementation_queue": False,
-            "full_experiment_status": "not_reproduced_high_cost", "full_experiment_review_done": True,
+            "full_experiment_status": FULL_STATUS[key], "full_experiment_review_done": True,
             "provenance": {"commit": frozen["commit"], "accelerator": "CPU",
                            "artifact_path": metric_path(key).relative_to(ROOT).as_posix(),
                            "executed_source_sha256": frozen["source_sha256"],
