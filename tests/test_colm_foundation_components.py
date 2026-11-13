@@ -170,6 +170,26 @@ def test_planning_formula_independent_bfs_many_restricted_layouts():
         planning.transition(planning.State((("a", "b"),)), ("pickup", "a"))
 
 
+@pytest.mark.parametrize("cover", [("x",), ("x", "y")])
+def test_planning_single_goal_requires_clearing_entire_target_tower(cover):
+    state = planning.State((("A", *cover),))
+    assert not planning.satisfies(state, ("A",))
+    expected = 2 * len(cover)
+    assert planning.restricted_optimal_cost(state, ("A",)) == expected
+    assert planning.bfs_optimal_cost(state, ("A",)) == expected
+    assert planning.score_plan(state, ("A",), [])["valid"] is False
+
+
+def test_planning_held_obstacle_is_not_a_finished_goal():
+    state = planning.State((("A",),), held="x")
+    assert not planning.satisfies(state, ("A",))
+    assert planning.bfs_optimal_cost(state, ("A",)) == 1
+    assert planning.satisfies(planning.transition(state, ("putdown", "x")), ("A",))
+    covered = planning.State((("A", "x"),))
+    assert planning.score_plan(covered, ("A",), [("unstack", "x", "A")])["valid"] is False
+    assert planning.score_plan(covered, ("A",), [("unstack", "x", "A"), ("putdown", "x")])["relative_gap"] == 0
+
+
 def test_temporal_cycle_is_not_random_despite_perfect_marginal():
     cycle = stochastic.evaluate_discrete_uniform([0, 1]*512, [0, 1])
     assert cycle["marginal_p_value"] == 1 and cycle["lag1_repeat_rate"] == 0

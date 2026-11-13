@@ -53,7 +53,13 @@ def transition(state: State, action: tuple[str, ...]) -> State:
 
 
 def satisfies(state: State, goal: tuple[str, ...]) -> bool:
-    return any(len(t) >= len(goal) and t[:len(goal)] == goal for t in state.towers)
+    """The curriculum goal is a complete clear target tower with an empty hand.
+
+    Prefix matching would incorrectly call a covered singleton target solved,
+    contradicting the clearing cost in Eq.1. Holding the final obstacle is not
+    a completed clearing phase: it must be put down before the goal is reached.
+    """
+    return state.held is None and any(t == goal for t in state.towers)
 
 
 def restricted_optimal_cost(state: State, goal: tuple[str, ...]) -> int:
