@@ -7,7 +7,7 @@ hide:
 
 # 规划与搜索：下一步该做什么
 
-[Agent](index.md) / 76 个问题 · 19 篇论文
+[Agent](index.md) / 84 个问题 · 21 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">76 个问题 · 19 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">84 个问题 · 21 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:drago" data-paper-title="Repairing LLM-Generated Specifications with Deterministic Diagnosis" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Repairing LLM-Generated Specifications with Deterministic Diagnosis Agent University of Oxford 2026-10-15 形式规格“能运行”不等于“忠实表达了题意”。DRAGO 将 SMT-LIB2、MiniZinc 和 PDDL 的契约、求解器探针及题意对齐检查转为可定位诊断，再要求模型定向修复。候选必须保留语法/词表/输出合同，严格降低阻塞诊断，并满足防退化条件；参考形式化和最终标签只用于最后评分。方法 §3、附录 A.2 原图建议：原论文 Figure 2 为诊断/接纳消融；Figure 3 为 Planetarium 输入渲染缺陷。它们分别解释算法贡献和评测风险。 原文用 4×A100 服务30B/31B模型，跨5个 benchmark 多seed、多臂重评估，完整实验成本过高，不复现（审查 DONE）。实现 grounded STRIPS/PDDL 方向的诊断算子子集；component_only / L1 CPU。实现 grounded STRIPS/PDDL 方向的诊断算子子集；不冒充完整三形式化语言框架。CPU fixture 随机化走廊规模，实际执行无前提路径、联合目标冲突、预算耗尽、证据支持的初态修复，以及“删掉目标就算修好”的负对照。proposal 回调只拿公开 Problem 和 Diagnosis，不拿金标准。  规划与搜索 形式规格诊断与保守修复 Agent 规划与搜索：下一步该做什么 让 LLM 把自然语言题目写成形式规格时，DRAGO 要防哪类“看似成功”？ 模型可能生成能解析、能求解，却遗漏要求的规格，后续求解器只会忠实解决这个错误版本。DRAGO 关注自然语言到形式系统的转换可靠性，用可定位诊断约束修复，而不是把拿到一个解当作原题已解决；规格和求解是两个需要分开检查的环节。 例如题目要求两人都被安排，规格漏写一人后排班更容易有解，但这个“成功”恰好暴露了形式化阶段的遗漏。 2026-10-27">
@@ -663,6 +663,112 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>例如过滤后扩展为空，系统仍应由原查询产生结果，而不是因没有新词就把整个查询丢掉。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、复现边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.06647">原论文</a> · <a href="../../../../agent-research/2605.06647-sira/">实现解读</a> · <a href="#qa-fc6b1d788aba3b86">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:planning-optimality" data-paper-title="Analysis of Optimality of Large Language Models on Planning Problems" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Analysis of Optimality of Large Language Models on Planning Problems Agent Google DeepMind 2026-04-03 只判断计划能否达到目标，会忽略大量无必要动作。论文把LLM规划评测从validity扩展到optimality，在Blocksworld和抽象P任务中构造具有已知最优长度的课程，分析推理模型随着难度增长的计划冗余。 完整实验成本过高，不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU组件专测已通过；没有CUDA路径，不需要GPU验收。未接入Evolve，不可据本地fixture成绩晋级。transition 不接收gold计划；score_plan 只由独立evaluator调用。小于等于6块时另用独立BFS穷举四操作图，不调用公式，校验多种排列的最短距离。负控包括无法pickup非桌面块、同塔多个目标拒绝、合法但多绕两步的计划gap=1。  规划与推理 计划验证与最优性 Agent 规划与搜索：下一步该做什么 合法计划为何不一定是好计划？ 动作都可执行且达到目标只保证validity，仍可能有可避免的搬运。optimality比较合法计划长度与独立确定的最短长度，二者必须分别报告。 先把目标块放桌上再拿起堆到目标塔，可能合法但比直接stack多两步。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<span id="paper-agent-research-planning-optimality-dc6e9659" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-d00ff6f66eb2e242">合法计划为何不一定是好计划？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aplanning-optimality">Analysis of Optimality of Large Language Models on Planning Problems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>动作都可执行且达到目标只保证validity，仍可能有可避免的搬运。optimality比较合法计划长度与独立确定的最短长度，二者必须分别报告。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>先把目标块放桌上再拿起堆到目标塔，可能合法但比直接stack多两步。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.02910v1">原论文</a> · <a href="../../../../agent-research/2604.02910-planning-optimality/">实现解读</a> · <a href="#qa-d00ff6f66eb2e242">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:planning-optimality" data-paper-title="Analysis of Optimality of Large Language Models on Planning Problems" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Analysis of Optimality of Large Language Models on Planning Problems Agent Google DeepMind 2026-04-03 只判断计划能否达到目标，会忽略大量无必要动作。论文把LLM规划评测从validity扩展到optimality，在Blocksworld和抽象P任务中构造具有已知最优长度的课程，分析推理模型随着难度增长的计划冗余。 完整实验成本过高，不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU组件专测已通过；没有CUDA路径，不需要GPU验收。未接入Evolve，不可据本地fixture成绩晋级。transition 不接收gold计划；score_plan 只由独立evaluator调用。小于等于6块时另用独立BFS穷举四操作图，不调用公式，校验多种排列的最短距离。负控包括无法pickup非桌面块、同塔多个目标拒绝、合法但多绕两步的计划gap=1。  规划与推理 计划验证与最优性 Agent 规划与搜索：下一步该做什么 最优长度闭式公式有哪些不能省略的前提？ 初始空手、目标链底块在桌面、每座初始塔最多一个目标块。每个遮挡块需两动作清除，每个非底目标需两动作搬到链上；同塔多个目标的interleaved任务不能套此式。 同一塔里既有目标A又有目标B时，接口应拒绝该公式，即便某个特例数值巧合正确。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-d96aa3caf2bcbbb1">最优长度闭式公式有哪些不能省略的前提？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aplanning-optimality">Analysis of Optimality of Large Language Models on Planning Problems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>初始空手、目标链底块在桌面、每座初始塔最多一个目标块。每个遮挡块需两动作清除，每个非底目标需两动作搬到链上；同塔多个目标的interleaved任务不能套此式。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同一塔里既有目标A又有目标B时，接口应拒绝该公式，即便某个特例数值巧合正确。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.02910v1">原论文</a> · <a href="../../../../agent-research/2604.02910-planning-optimality/">实现解读</a> · <a href="#qa-d96aa3caf2bcbbb1">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:planning-optimality" data-paper-title="Analysis of Optimality of Large Language Models on Planning Problems" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Analysis of Optimality of Large Language Models on Planning Problems Agent Google DeepMind 2026-04-03 只判断计划能否达到目标，会忽略大量无必要动作。论文把LLM规划评测从validity扩展到optimality，在Blocksworld和抽象P任务中构造具有已知最优长度的课程，分析推理模型随着难度增长的计划冗余。 完整实验成本过高，不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU组件专测已通过；没有CUDA路径，不需要GPU验收。未接入Evolve，不可据本地fixture成绩晋级。transition 不接收gold计划；score_plan 只由独立evaluator调用。小于等于6块时另用独立BFS穷举四操作图，不调用公式，校验多种排列的最短距离。负控包括无法pickup非桌面块、同塔多个目标拒绝、合法但多绕两步的计划gap=1。  规划与推理 计划验证与最优性 Agent 规划与搜索：下一步该做什么 与LATS树搜索相比，这个组件解决了哪一层问题？ LATS分配搜索与rollout预算来寻找行动轨迹；本组件不生成LLM计划，只验证外部计划及计算受限课程gap。搜索分高不能代替真实前置条件验证，合法性分也不能替代最优性。 LATS找到一个能完成任务的四步计划，而独立BFS发现两步解时，valid仍为真但gap=1。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-497ba7d298c50237">与LATS树搜索相比，这个组件解决了哪一层问题？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aplanning-optimality">Analysis of Optimality of Large Language Models on Planning Problems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>LATS分配搜索与rollout预算来寻找行动轨迹；本组件不生成LLM计划，只验证外部计划及计算受限课程gap。搜索分高不能代替真实前置条件验证，合法性分也不能替代最优性。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>LATS找到一个能完成任务的四步计划，而独立BFS发现两步解时，valid仍为真但gap=1。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.02910v1">原论文</a> · <a href="../../../../agent-research/2604.02910-planning-optimality/">实现解读</a> · <a href="#qa-497ba7d298c50237">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:planning-optimality" data-paper-title="Analysis of Optimality of Large Language Models on Planning Problems" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Analysis of Optimality of Large Language Models on Planning Problems Agent Google DeepMind 2026-04-03 只判断计划能否达到目标，会忽略大量无必要动作。论文把LLM规划评测从validity扩展到optimality，在Blocksworld和抽象P任务中构造具有已知最优长度的课程，分析推理模型随着难度增长的计划冗余。 完整实验成本过高，不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU组件专测已通过；没有CUDA路径，不需要GPU验收。未接入Evolve，不可据本地fixture成绩晋级。transition 不接收gold计划；score_plan 只由独立evaluator调用。小于等于6块时另用独立BFS穷举四操作图，不调用公式，校验多种排列的最短距离。负控包括无法pickup非桌面块、同塔多个目标拒绝、合法但多绕两步的计划gap=1。  规划与推理 计划验证与最优性 Agent 规划与搜索：下一步该做什么 为什么要用独立BFS校验公式，而不是在测试里再写一遍公式？ 重复同一公式只能验证程序自洽，无法发现推导前提遗漏。小n BFS只通过四操作状态转移穷举最短路径，不调用公式；非法计划不输出数值gap。 测试遍历4块的多种塔排列；若公式遗漏清除底目标上的遮挡块，BFS会给出不同最短长度。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-7f951b3eb4e7b61c">为什么要用独立BFS校验公式，而不是在测试里再写一遍公式？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aplanning-optimality">Analysis of Optimality of Large Language Models on Planning Problems</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>重复同一公式只能验证程序自洽，无法发现推导前提遗漏。小n BFS只通过四操作状态转移穷举最短路径，不调用公式；非法计划不输出数值gap。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>测试遍历4块的多种塔排列；若公式遗漏清除底目标上的遮挡块，BFS会给出不同最短长度。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.02910v1">原论文</a> · <a href="../../../../agent-research/2604.02910-planning-optimality/">实现解读</a> · <a href="#qa-7f951b3eb4e7b61c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:clarification-sgp" data-paper-title="Learning Steerable Clarification Policies with Collaborative Self-play" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Learning Steerable Clarification Policies with Collaborative Self-play Agent Google Research 2025-12-03 同一条含糊问题可以直接猜、列出多种解释，或先提问。最优方式依赖用户能接受的轮次与篇幅成本。论文让 assistant 明确看到成本 α、β，与仅 user 知道真实解释的模拟用户自博弈；环境在对话结束后评分。训练不是选一次幸运高分。先过滤低 F1 与 user 忽视 assistant 的轨迹，对每种动作序列按各解释的平均 reward 再平均，选最优序列；然后每个解释选该序列下最高 reward 的轨迹，只训练 assistant turns。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有实现 user/assistant、token-F1 evaluator、ReST 微调、开发集 checkpoint 选择或正式对话基准。环境离线评分可使用参考答案，但不允许传入被评测 assistant；本地没有 actor 回调。完整实验高成本不复现，CPU选择器不等于完整算法有效性证明。  选择与澄清 Agent 规划与搜索：下一步该做什么 SGP为什么不始终澄清或始终回答？ 提问与长答案都会消耗用户成本；模型需在预计准确性收益和α、β成本之间取舍。不同场景的最优行为不同，不是澄清越多越可靠。 教学例：小屏语音场景中列十种解释可能比问一句更烦，但高提问成本下可直接回答最可能意图。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<span id="paper-agent-research-clarification-sgp-61bc2ab1" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-1181d57d418b6011">SGP为什么不始终澄清或始终回答？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aclarification-sgp">Learning Steerable Clarification Policies with Collaborative Self-play</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>提问与长答案都会消耗用户成本；模型需在预计准确性收益和α、β成本之间取舍。不同场景的最优行为不同，不是澄清越多越可靠。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：小屏语音场景中列十种解释可能比问一句更烦，但高提问成本下可直接回答最可能意图。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2512.04068">原论文</a> · <a href="../../../../agent-research/2512.04068-clarification-sgp/">实现解读</a> · <a href="#qa-1181d57d418b6011">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:clarification-sgp" data-paper-title="Learning Steerable Clarification Policies with Collaborative Self-play" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Learning Steerable Clarification Policies with Collaborative Self-play Agent Google Research 2025-12-03 同一条含糊问题可以直接猜、列出多种解释，或先提问。最优方式依赖用户能接受的轮次与篇幅成本。论文让 assistant 明确看到成本 α、β，与仅 user 知道真实解释的模拟用户自博弈；环境在对话结束后评分。训练不是选一次幸运高分。先过滤低 F1 与 user 忽视 assistant 的轨迹，对每种动作序列按各解释的平均 reward 再平均，选最优序列；然后每个解释选该序列下最高 reward 的轨迹，只训练 assistant turns。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有实现 user/assistant、token-F1 evaluator、ReST 微调、开发集 checkpoint 选择或正式对话基准。环境离线评分可使用参考答案，但不允许传入被评测 assistant；本地没有 actor 回调。完整实验高成本不复现，CPU选择器不等于完整算法有效性证明。  选择与澄清 Agent 规划与搜索：下一步该做什么 为什么先选解释均衡的动作序列，再选最高reward轨迹？ 直接选幸运高分会偏向某个易猜解释。先在各解释内求均值，再均匀平均，选序列后每解释取最佳兼容轨迹，才保留跨解释监督。 教学例：直接猜在常见解释100分、另一解释0分；澄清两种均80分，不能因100这个最大值选猜。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-4c007e37df82cd0e">为什么先选解释均衡的动作序列，再选最高reward轨迹？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aclarification-sgp">Learning Steerable Clarification Policies with Collaborative Self-play</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>直接选幸运高分会偏向某个易猜解释。先在各解释内求均值，再均匀平均，选序列后每解释取最佳兼容轨迹，才保留跨解释监督。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：直接猜在常见解释100分、另一解释0分；澄清两种均80分，不能因100这个最大值选猜。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2512.04068">原论文</a> · <a href="../../../../agent-research/2512.04068-clarification-sgp/">实现解读</a> · <a href="#qa-4c007e37df82cd0e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:clarification-sgp" data-paper-title="Learning Steerable Clarification Policies with Collaborative Self-play" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Learning Steerable Clarification Policies with Collaborative Self-play Agent Google Research 2025-12-03 同一条含糊问题可以直接猜、列出多种解释，或先提问。最优方式依赖用户能接受的轮次与篇幅成本。论文让 assistant 明确看到成本 α、β，与仅 user 知道真实解释的模拟用户自博弈；环境在对话结束后评分。训练不是选一次幸运高分。先过滤低 F1 与 user 忽视 assistant 的轨迹，对每种动作序列按各解释的平均 reward 再平均，选最优序列；然后每个解释选该序列下最高 reward 的轨迹，只训练 assistant turns。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有实现 user/assistant、token-F1 evaluator、ReST 微调、开发集 checkpoint 选择或正式对话基准。环境离线评分可使用参考答案，但不允许传入被评测 assistant；本地没有 actor 回调。完整实验高成本不复现，CPU选择器不等于完整算法有效性证明。  选择与澄清 Agent 规划与搜索：下一步该做什么 SGP与Social Meta-Learning都用对话，优化重点相同吗？ 不同。SGP显式以数值成本控制猜、澄清、多答案的选择；SML训练从teacher反馈中继续求解，Qpriming另教提问。成功过滤或多轮形式相同不表示目标相同。 教学例：知道什么时候值得付费问一句，与问完后能否根据纠错解出题，是两个能力。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-f6238748a1546108">SGP与Social Meta-Learning都用对话，优化重点相同吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aclarification-sgp">Learning Steerable Clarification Policies with Collaborative Self-play</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同。SGP显式以数值成本控制猜、澄清、多答案的选择；SML训练从teacher反馈中继续求解，Qpriming另教提问。成功过滤或多轮形式相同不表示目标相同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：知道什么时候值得付费问一句，与问完后能否根据纠错解出题，是两个能力。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2512.04068">原论文</a> · <a href="../../../../agent-research/2512.04068-clarification-sgp/">实现解读</a> · <a href="#qa-f6238748a1546108">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:clarification-sgp" data-paper-title="Learning Steerable Clarification Policies with Collaborative Self-play" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Learning Steerable Clarification Policies with Collaborative Self-play Agent Google Research 2025-12-03 同一条含糊问题可以直接猜、列出多种解释，或先提问。最优方式依赖用户能接受的轮次与篇幅成本。论文让 assistant 明确看到成本 α、β，与仅 user 知道真实解释的模拟用户自博弈；环境在对话结束后评分。训练不是选一次幸运高分。先过滤低 F1 与 user 忽视 assistant 的轨迹，对每种动作序列按各解释的平均 reward 再平均，选最优序列；然后每个解释选该序列下最高 reward 的轨迹，只训练 assistant turns。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有实现 user/assistant、token-F1 evaluator、ReST 微调、开发集 checkpoint 选择或正式对话基准。环境离线评分可使用参考答案，但不允许传入被评测 assistant；本地没有 actor 回调。完整实验高成本不复现，CPU选择器不等于完整算法有效性证明。  选择与澄清 Agent 规划与搜索：下一步该做什么 过滤阈值0.1和提问成本2能直接从同一F1值里减吗？ 不能混单位。本地过滤用0–1 F1；reward先转100×F1分再减α、β。若全用归一化reward，成本也要除100，否则会改变策略而非仅换单位。 教学例：F1提升0.1等于10分，问一次成本2分仍划算；把0.1减2会错判。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-757a2d006441496a">过滤阈值0.1和提问成本2能直接从同一F1值里减吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aclarification-sgp">Learning Steerable Clarification Policies with Collaborative Self-play</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能混单位。本地过滤用0–1 F1；reward先转100×F1分再减α、β。若全用归一化reward，成本也要除100，否则会改变策略而非仅换单位。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：F1提升0.1等于10分，问一次成本2分仍划算；把0.1减2会错判。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2512.04068">原论文</a> · <a href="../../../../agent-research/2512.04068-clarification-sgp/">实现解读</a> · <a href="#qa-757a2d006441496a">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:bats" data-paper-title="Budget-Aware Tool Use Enables Effective Agent Scaling" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Budget-Aware Tool Use Enables Effective Agent Scaling Agent UC Santa Barbara 2025-11-21 给 ReAct 更多工具额度不保证它改变探索策略。Budget Tracker 将每个工具已经用掉和剩余的调用次数持续放进上下文。BATS 再利用这种显式资源状态做规划、逐约束自检和多次尝试：不是固定开更多平行 Agent，而是由剩余额度决定继续当前方向还是换路。 完整实验成本过高，不复现（审查 DONE）。三 seed 诊断仅执行显式控制序列：一次搜索、两次浏览，先 PIVOT 再 SUCCESS，保留两次 attempt 的摘要与总用量。仅纯 CPU / L1：Budget Tracker、统一费用公式、显式外部 verifier 的状态转移。没有搜索 Agent、真实浏览、语义规划/验证或答案 judge。完整实验成本过高，不复现（审查 DONE）。Google 官网旧称 CATS，当前正式 v2 为 BATS；首发在 2025 年，不能计为 2026-11-12 新论文。BudgetTracker 实际扣除逐工具计数，越界/未知工具/非法计数拒绝；  规划与搜索 预算感知与测试时扩展 Agent 规划与搜索：下一步该做什么 BATS里的工具预算和统一费用为什么要分开？ 预算是事先允许的每工具调用上限；费用是实际发生的token和工具消耗。预算相同的两条路径可能缓存命中、输出长度和工具使用都不同，所以不能用预算额度替代实际费用。 教学例：两条路径都允许10次搜索，一条只搜2次且命中缓存，另一条搜10次并生成长文；两者预算相同但账本成本不同。 2026-11-12">

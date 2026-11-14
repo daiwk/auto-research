@@ -57,7 +57,8 @@
         "foundation-models:semantic-block-sparse-attention",
         "foundation-models:anchor-kv",
         "foundation-models:convpe",
-        "foundation-models:adindex"
+        "foundation-models:adindex",
+        "foundation-models:ecg-rag"
       ]
     },
     {
@@ -152,7 +153,9 @@
         "foundation-models:t-muon",
         "foundation-models:taco-optimizer",
         "foundation-models:tess",
-        "foundation-models:stochastic-rounding"
+        "foundation-models:stochastic-rounding",
+        "foundation-models:lidas",
+        "foundation-models:continuousbench"
       ]
     },
     {
@@ -276,7 +279,15 @@
         "foundation-models:mechanistic-etm",
         "foundation-models:proeval",
         "foundation-models:tcab",
-        "foundation-models:xlgobench"
+        "foundation-models:xlgobench",
+        "foundation-models:rosetta-unification",
+        "foundation-models:thinking-to-recall",
+        "foundation-models:latent-generalization",
+        "foundation-models:llm-stochasticity",
+        "foundation-models:qe-length-normalization",
+        "foundation-models:cultural-cue",
+        "foundation-models:decoding-constrained-beam",
+        "foundation-models:storyscope"
       ]
     }
   ]

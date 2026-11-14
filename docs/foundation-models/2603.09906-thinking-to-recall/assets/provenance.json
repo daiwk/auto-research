@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-13",
+  "figures": [
+    {
+      "file": "paper-figure-01.png",
+      "paper_id": "2603.09906",
+      "version": "v1",
+      "figure": 7,
+      "page_number": null,
+      "paper_url": "https://arxiv.org/abs/2603.09906v1",
+      "source_url": "https://arxiv.org/html/2603.09906v1/figs/hallucinations_within_question_v2.png",
+      "source_kind": "fixed_v1_html_original_image",
+      "pdf_sha256": null,
+      "image_sha256": "383debc0694c778e5011685b16405cfef58c4d197586cdc5a2b7ad58f38a9b02",
+      "render_scale": null,
+      "crop_pdf_points": null,
+      "caption_included": false,
+      "scientific_content_modified": false,
+      "visual_review_done": true,
+      "attribution": "Copyright belongs to the original authors; original-paper illustration is not a local component result.",
+      "license": "See original fixed arXiv source; no new license granted."
+    }
+  ]
+}

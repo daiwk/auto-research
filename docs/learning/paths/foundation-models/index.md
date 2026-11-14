@@ -10,7 +10,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="context-and-state/">长上下文：注意力、递归状态与记忆</a></h2>
 <p>上下文变长时，模型保留的是可寻址的历史 token，还是压缩后的递归状态？</p>
-<p class="ar-learning-topic-meta">152 个问题 · 38 篇论文</p>
+<p class="ar-learning-topic-meta">156 个问题 · 39 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="conditional-compute/">按需计算：专家、弹性深宽与查表记忆</a></h2>
@@ -20,7 +20,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="training-budget/">训练预算：数据配比、目标与优化器</a></h2>
 <p>有限训练预算应该先改数据、更新方向，还是模型规模？</p>
-<p class="ar-learning-topic-meta">124 个问题 · 31 篇论文</p>
+<p class="ar-learning-topic-meta">132 个问题 · 33 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="compression-and-cache/">推理压缩：权重、KV 缓存与服务带宽</a></h2>
@@ -35,7 +35,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="evaluation-and-evidence/">能力证据：评测采样、读出与可靠性</a></h2>
 <p>怎样确认高分来自目标能力，而非语言、输入顺序、读出方式或统计偏差？</p>
-<p class="ar-learning-topic-meta">56 个问题 · 14 篇论文</p>
+<p class="ar-learning-topic-meta">88 个问题 · 22 篇论文</p>
 </article>
 </div>
 

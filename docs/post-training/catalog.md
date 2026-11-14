@@ -208,6 +208,7 @@
 | 几何信任域 | [RIPO](2607.10169-ripo/README.md) | Tsinghua University，2026-07-11 | 未发现官方代码 | `ripo` |
 | Token 信用校准 | [TACO](2607.07976-taco/README.md) | Johns Hopkins University，2026-07-08 | [已开源](https://github.com/xiuyilou/TACO) | `taco` |
 | post-training | [Turning Off-Policy Tokens On-Policy: A Plug-in Approach for Improving LLM Alignment](../reproductions/2607.04728-sis/README.md) | Renmin University of China，2026-07-06 | 未发现官方代码 | `sis` |
+| 奖励与信用分配 | [Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs](2606.32032-rlmf/README.md) | Yale University，2026-06-30 | [原作者入口](https://github.com/yale-nlp/RLMF)；作者公开MIT仓库与README已核；本地仅固定v1 Eq2–4/选样核心，不声称复制上游完整trainer。 | `rlmf`：仅低成本组件，完整实验不复现 |
 | 多教师能力整合 | [MOPD](2606.30406-mopd/README.md) | Xiaomi，2026-06-29 | 未发现官方代码 | `mopd` |
 | 能力边界课程 | [CoBA-RL](2606.22317-coba-rl/README.md) | Zhejiang University，2026-06-21 | 未发现官方代码 | `coba-rl` |
 | Entropy 稳定 | [STARE](2606.19236-stare/README.md) | Tsinghua University，2026-06-17 | [已开源](https://github.com/hp-luo/STARE) | `stare` |
@@ -219,10 +220,13 @@
 | 训练流程与资源分配 | [Beyond GRPO and On-Policy Distillation: An Empirical Sparse-to-Dense Reward Principle for Language-Model Post-Training](2605.12483-sparse-to-dense-reward-principle/README.md) | LinkedIn，2026-05-12 | [原作者入口](https://github.com/HJSang/OPSD_OnPolicyDistillation)；v5正文直接链接HJSang/OPSD_OnPolicyDistillation，固定SHA已核验；根树只有README/scripts/src，未见根LICENSE，GitHub license=null。不能把该OPD子实现等同四阶段完整流程，本地不复制源码。 | 计划键 `sparse-to-dense-reward-principle`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 异步 off-policy | [Missing Old Logits](2605.12070-missing-old-logits/README.md) | Tianjin University，2026-05-12 | 未发现官方代码 | `missing-old-logits` |
 | 直接偏好优化 | [Mind the Gap: Structure-Aware Consistency in Preference Learning](2604.27733-sa-dpo/README.md) | Google Research / Courant Institute of Mathematical Sciences，2026-04-30 | 未发现官方代码 | 计划键 `sa-dpo`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
+| 教师与上下文 | [Behavioral Canaries: Auditing Private Retrieved Context Usage in RL Fine-Tuning](2604.22191-behavioral-canaries/README.md) | Google，2026-04-24 | 未发现官方代码 | `behavioral-canaries`：仅低成本组件，完整实验不复现 |
 | 偏好优化 | [GroupDPO: Memory-Efficient Group-Wise Direct Preference Optimization](2604.15602-group-dpo/README.md) | Carnegie Mellon University，2026-04-17 | 未发现官方代码 | `group-dpo`：仅低成本组件，完整实验不复现 |
 | On-policy distillation | [Lightning OPD](2604.13010-lightning-opd/README.md) | MIT HAN Lab，2026-04-14 | [已开源](https://github.com/jet-ai-projects/Lightning-OPD) | `lightning-opd` |
 | 多语言后训练 | [Large Reasoning Models Struggle to Transfer Parametric Knowledge Across Scripts](2603.17070-cross-script-knowledge-transfer/README.md) | Google Research，2026-03-17 | 未发现官方代码 | 计划键 `cross-script-knowledge-transfer`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
+| 隐私保护数据构建 | [MAPLE: Metadata Augmented Private Language Evolution](2603.19258-maple-icl/README.md) | National Taiwan University，2026-02-26 | [原作者入口](https://github.com/elichien-google/MAPLE)；作者/官方项目链接的仓库已核验公开；本地仅实现固定v1所列子组件，未运行上游完整系统。 | `maple-icl`：仅低成本组件，完整实验不复现 |
 | Context distillation | [Prompt-Level Distillation: A Non-Parametric Alternative to Model Fine-Tuning for Efficient Reasoning](2602.21103-prompt-level-distillation/README.md) | Google，2026-02-24 | 未发现官方代码 | 计划键 `prompt-level-distillation`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
+| 多轮反馈与社会元学习 | [Learning to Learn from Language Feedback with Social Meta-Learning](2602.16488-social-meta-learning/README.md) | Google DeepMind，2026-02-18 | 未发现官方代码 | `social-meta-learning`：仅低成本组件，完整实验不复现 |
 | Context distillation | [OPCD](2602.12275-opcd/README.md) | Microsoft Research，2026-02-12 | [已开源](https://github.com/microsoft/LMOps/tree/main/opcd) | `opcd` |
 | 长度无偏 RL | [LUSPO](2602.05261-luspo/README.md) | Meituan，2026-02-05 | 未发现官方代码 | `luspo` |
 | On-policy self-distillation | [OPSD](2601.18734-opsd/README.md) | University of California, Los Angeles，2026-01-26 | [已开源](https://github.com/siyan-zhao/OPSD) | `opsd` |

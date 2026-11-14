@@ -1,0 +1,57 @@
+{
+  "domain": "post-training",
+  "key": "rlmf",
+  "title": "Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs",
+  "paper_url": "https://arxiv.org/abs/2606.32032v1",
+  "reviewed_version_url": "https://arxiv.org/html/2606.32032v1",
+  "reviewed_version": "v1",
+  "reviewed_arxiv_id": "2606.32032v1",
+  "detail_path": "post-training/2606.32032-rlmf/README.md",
+  "topic": [
+    "奖励与信用分配",
+    "元认知反馈与不确定性"
+  ],
+  "first_author": "Gabrielle Kaili-May Liu",
+  "first_author_affiliation": "Yale University",
+  "verified_priority_organizations": [
+    "Google Research"
+  ],
+  "published": "2026-06-30",
+  "published_at": "2026-06-30T17:56:01Z",
+  "code": "https://github.com/yale-nlp/RLMF",
+  "code_status": "作者公开MIT仓库与README已核；本地仅固定v1 Eq2–4/选样核心，不声称复制上游完整trainer。",
+  "code_license": "MIT",
+  "adapter": null,
+  "priority": "P0",
+  "priority_reason": "Google/DeepMind原文署名；Google COLM官方独立历史库存触发补漏，非本轮新首发。",
+  "intake_class": "historical_inventory_omission",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.post_training.rlmf.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.rlmf import diagnostic; print(diagnostic(42, \"cpu\"))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_passed": true,
+  "gpu_validation_artifact": "docs/gpu-validations/rlmf-a100-20261113.json",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2606.32032v1",
+    "reviewed_sections": [
+      "§3.1–3.4",
+      "§4–5",
+      "Appendix B.1"
+    ],
+    "available_resource": "单张NVIDIA A100/A30或本地Mac",
+    "basis": "Qwen3 1.7/4/8B与Llama3.1-8B；LoRA64，4训练GPU+2生成/judgeGPU，32completions/prompt，1500步和多模型/多任务/学习率矩阵。原文每100步按in-domain test挑checkpoint；本地不沿用泄漏，只允许train选样、validation选择，test隔离。完整高成本不复现。",
+    "decision": "成本过高，不复现（审查DONE）；仅交付独立低成本L1组件，不下载大资源、不试训、不自动重试。"
+  },
+  "fidelity_note": "严格<τ的句级FC、Z=1−(Fpred−Fgold)^2、仅高于组均值faithfulness项的k+Z放大、不std归一；训练数据上下尾平衡选样。无内在置信估计/LLM自评/GRPO/改写模型。",
+  "summary": "严格<τ的句级FC、Z=1−(Fpred−Fgold)^2、仅高于组均值faithfulness项的k+Z放大、不std归一；训练数据上下尾平衡选样。无内在置信估计/LLM自评/GRPO/改写模型。"
+}

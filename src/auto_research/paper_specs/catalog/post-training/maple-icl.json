@@ -1,0 +1,46 @@
+{
+  "domain": "post-training",
+  "key": "maple-icl",
+  "title": "MAPLE: Metadata Augmented Private Language Evolution",
+  "paper_url": "https://arxiv.org/abs/2603.19258",
+  "reviewed_version": "v1",
+  "reviewed_arxiv_id": "2603.19258v1",
+  "reviewed_version_url": "https://arxiv.org/html/2603.19258v1",
+  "detail_path": "post-training/2603.19258-maple-icl/README.md",
+  "topic": [
+    "隐私保护数据构建"
+  ],
+  "published": "2026-02-26",
+  "published_at": "2026-02-26T14:18:36Z",
+  "first_author": "Eli Chien",
+  "first_author_affiliation": "National Taiwan University",
+  "verified_priority_organizations": [
+    "Google Research",
+    "Meta"
+  ],
+  "code": "https://github.com/elichien-google/MAPLE",
+  "code_status": "作者/官方项目链接的仓库已核验公开；本地仅实现固定v1所列子组件，未运行上游完整系统。",
+  "adapter": null,
+  "priority": "P0",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.post_training.maple_icl.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.maple_icl import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "review_done": true,
+  "full_experiment_review_done": true,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2603.19258v1",
+    "available_resource": "单张A100/A30或Mac",
+    "basis": "上游建议至少2×A10040GB；Qwen2.5-7B、AIM、2k/5k长文本合成、AugPE、多隐私预算和下游训练；完整实验高成本不复现。"
+  },
+  "fidelity_note": "先用DP表格metadata约束初始化，再用与metadata最接近的已捐赠示例做ICL，继续PrivateEvolution。本地只实现分类Hamming近邻示例选择，不产生DP数据或隐私保证。",
+  "summary": "先用DP表格metadata约束初始化，再用与metadata最接近的已捐赠示例做ICL，继续PrivateEvolution。本地只实现分类Hamming近邻示例选择，不产生DP数据或隐私保证。"
+}

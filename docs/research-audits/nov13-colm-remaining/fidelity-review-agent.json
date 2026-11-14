@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "review_date": "2026-11-13",
+  "reviewer": "independent-agent-cross-review",
+  "scope": "Read-only comparison of eight sibling implementations and their dedicated tests against the defining fixed-version paper sections; no training, model/API inference, benchmark capability evaluation, or GPU validation was performed by this review.",
+  "result": "no_blocking_findings_in_reviewed_scope",
+  "implementation_changes_by_reviewer": false,
+  "source_snapshots": {
+    "src/auto_research/foundation_models/qe_length_normalization.py": "daffd9781f4d1796b02c8af52a3f086e0a9913b9b2f9d752b7f1936261c8fe9a",
+    "src/auto_research/foundation_models/cultural_cue.py": "3988b6983c0d6c5e8060e0762da9eec488f6556118a95d038e806a324ce04e31",
+    "src/auto_research/foundation_models/decoding_constrained_beam.py": "55ece33c1534d320ad3c78826a7871eb6cbdbb419cd72c192ef08861db0e4519",
+    "src/auto_research/foundation_models/storyscope.py": "d7ecf53e834b2f9061f34a17f814f59de2c174f8d4ea8cb910f345170212a6f1",
+    "src/auto_research/post_training/behavioral_canaries.py": "76cf87e2424bae656117d5fa35cf1bdfc3a4fc6fecd1d7ad61620c2889d69174",
+    "src/auto_research/post_training/rlmf.py": "5c99b3e291e1b2f712d8ec76c632f83c2814cbd0e460ca102f2a89b6763f3b03",
+    "src/auto_research/multimodal/avmeme_exam.py": "557d9e6dbff97a9ef1befacc864cc95fe69d83308c15ac2dd4c3f17103a24a89",
+    "src/auto_research/multimodal/mmeb_v3.py": "c33d34bd6a224ee8897352547dc483786a63a64879b1916b1395e8d0af3b29ca"
+  },
+  "paper_checks": [
+    {
+      "paper": "2510.22028v1",
+      "source_url": "https://arxiv.org/html/2510.22028v1#S4.SS2",
+      "source_cache": ".cache/nov13-colm-remaining/evaluation/2510.22028v1.html",
+      "sections": ["3.2", "4.2"],
+      "checked": "Density targets divide error ratings by the caller's consistently defined length, then inference restores that length. Controlled five-prefix groups and the 500-token group rejection do not silently mix independently sampled documents or incomparable units. No trained QE model is claimed."
+    },
+    {
+      "paper": "2603.23301v1",
+      "source_url": "https://arxiv.org/html/2603.23301v1#S2.SS3",
+      "source_cache": ".cache/nov13-colm-remaining/evaluation/2603.23301v1.html",
+      "sections": ["2.2", "2.3", "2.5", "Appendix B", "Appendix C"],
+      "checked": "Valid-token max pooling, cumulative MI-mass feature selection, within-country means followed by an equally weighted non-target-country mean, decoder projection, and additive steering agree with the defining main-text equations. The operator consumes external SAE/MI inputs and does not claim to estimate MI, load an SAE, or demonstrate cultural steering in a language model."
+    },
+    {
+      "paper": "2603.24917v1",
+      "source_url": "https://arxiv.org/html/2603.24917v1#S4.SS2",
+      "source_cache": ".cache/nov13-colm-remaining/evaluation/2603.24917v1.html",
+      "sections": ["4.2", "4.3", "Appendix E"],
+      "checked": "Top-k renormalization, Hamming and banded Levenshtein viability, final B-times-k rather than B candidates, and banking only viable paths removed by intermediate across-beam pruning preserve the lower/upper-bound contract. EOS-ended paths before fixed suffix length cannot contribute. Tests compare tiny distributions against exhaustive enumeration. The logits callback receives the continuation prefix, not the target suffix."
+    },
+    {
+      "paper": "2604.03136v1",
+      "source_url": "https://arxiv.org/html/2604.03136v1#A4",
+      "source_cache": ".cache/nov13-colm-remaining/evaluation/2604.03136v1.html",
+      "sections": ["2.2", "Appendix D"],
+      "checked": "Bootstrap sampling preserves prompt blocks rather than treating their stories as independent. The core-feature mask is a conjunction of strict importance, median stability, null significance, stability/top-quartile frequencies, absolute human-AI gap and maximum five-model AI spread. It consumes externally measured features and SHAP statistics, not fabricated semantic annotations."
+    },
+    {
+      "paper": "2604.22191v1",
+      "source_url": "https://arxiv.org/html/2604.22191v1#S3.SS4",
+      "source_cache": ".cache/nov13-colm-remaining/evaluation/2604.22191v1.html",
+      "sections": ["3.3", "3.4 equation 1", "Appendix C.3"],
+      "checked": "The scoring kernel sums autoregressive target-token log probabilities rather than averaging tokens, then averages paired triggered-minus-clean sequence differences. Masked positions have zero gradient; document-level partitions are disjoint. A positive statistic is not represented as proof of misuse or a complete canary-trained policy."
+    },
+    {
+      "paper": "2606.32032v1",
+      "source_url": "https://arxiv.org/html/2606.32032v1#S3.SS2",
+      "source_cache": ".cache/nov13-colm-remaining/evaluation/2606.32032v1.html",
+      "sections": ["3.1", "3.2 equations 2-4", "3.3"],
+      "checked": "Faithfulness uses the strict absolute-error threshold, metacognitive feedback is one minus squared prediction error, and only the positive centered faithfulness term receives the k-plus-feedback multiplier. Other rewards are separately centered, without GRPO standard-deviation normalization. High/low-tail selection is restricted to a declared training split; intrinsic confidence and self-judgment remain external measurements."
+    },
+    {
+      "paper": "2601.17645v1",
+      "source_url": "https://arxiv.org/pdf/2601.17645v1",
+      "source_cache": ".cache/nov13-colm-remaining/benchmarks/avmeme-v1.pdf",
+      "pdf_pages": [4, 6],
+      "checked": "Meme-main filters declared text-cheat items; visual-cheat inputs omit video but retain audio. Randomized choices keep the answer map inside the evaluator. Actor requests expose no gold solution, original source path, transcript or item metadata. The 16-kHz mono and 360p/1-fps settings are interface requests only; media is not decoded or claimed processed. The intentionally strict local letter parser and micro/per-axis reporting are not presented as a new official leaderboard result."
+    },
+    {
+      "paper": "2604.23321v1",
+      "source_url": "https://arxiv.org/pdf/2604.23321v1",
+      "source_cache": ".cache/nov13-colm-remaining/benchmarks/mmeb-v3-v1.pdf",
+      "pdf_pages": [4, 5, 6, 7, 15, 16],
+      "checked": "Category-specific Hit@1 versus NDCG@5 dispatch and exact task-set macro aggregation are explicit. NDCG gain convention is caller-selected rather than silently guessing the official implementation's gain. OmniSET keeps a shared mixed four-modality pool, retains the input instance as a distractor, excludes same-modality directions, and distinguishes semantic hits from semantic-plus-target-modality hits. It remains a diagnostic interface outside leaderboard evaluation; no encoder or dataset execution is claimed."
+    }
+  ],
+  "nonblocking_source_ambiguities": [
+    {
+      "paper": "2603.23301v1",
+      "location": "Main text 2.3 versus Appendix C",
+      "observation": "Appendix C describes rho=0.1 once as top 10 percent of features, while the defining section 2.3 explicitly specifies a cumulative fraction of total MI mass and adaptation to the MI distribution.",
+      "resolution": "The implementation follows the explicit cumulative-MI main-text algorithm, not a fixed feature-count percentile. This is an upstream wording ambiguity, not evidence of a local algorithm substitution."
+    }
+  ],
+  "verification": [
+    {
+      "command": "PYTHONPATH=src:scripts ../../.venv/bin/python -m pytest tests/test_nov13_colm_evaluation.py tests/test_avmeme_exam.py tests/test_mmeb_v3.py tests/test_nov13_colm_agent_components.py -q",
+      "exit_code": 0,
+      "tests_passed": 112,
+      "scope": "CPU unit and small numeric fixture tests only; CUDA paths are separately gated by the parent-run real-accelerator receipts."
+    },
+    {
+      "command": "../../.venv/bin/python -m ruff check src/auto_research/foundation_models/qe_length_normalization.py src/auto_research/foundation_models/cultural_cue.py src/auto_research/foundation_models/decoding_constrained_beam.py src/auto_research/foundation_models/storyscope.py src/auto_research/post_training/behavioral_canaries.py src/auto_research/post_training/rlmf.py src/auto_research/multimodal/avmeme_exam.py src/auto_research/multimodal/mmeb_v3.py tests/test_nov13_colm_evaluation.py tests/test_avmeme_exam.py tests/test_mmeb_v3.py",
+      "exit_code": 0,
+      "result": "All checks passed"
+    }
+  ],
+  "limits": [
+    "This is a bounded source/code/test fidelity review, not a security audit or proof of absence of all defects.",
+    "No model, SAE, semantic annotator, confidence estimator, canary policy, media processor, official full dataset, or full agent was executed in this review.",
+    "Test fixtures and externally supplied numerical inputs do not establish task capability, clinical or deployment safety, privacy guarantees, or Evolve integration.",
+    "Real CUDA acceptance and canonical frozen-source/metric receipts are owned by the integrated batch runner, not inferred from these CPU checks."
+  ]
+}

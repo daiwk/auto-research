@@ -1,0 +1,58 @@
+{
+  "domain": "foundation-models",
+  "key": "decoding-constrained-beam",
+  "title": "Estimating near-verbatim extraction risk in language models with decoding-constrained beam search",
+  "paper_url": "https://arxiv.org/abs/2603.24917v1",
+  "reviewed_version_url": "https://arxiv.org/html/2603.24917v1",
+  "reviewed_version": "v1",
+  "reviewed_arxiv_id": "2603.24917v1",
+  "detail_path": "foundation-models/2603.24917-decoding-constrained-beam/README.md",
+  "topic": [
+    "评测与研究证据",
+    "近逐字提取风险"
+  ],
+  "first_author": "A. Feder Cooper",
+  "first_author_affiliation": "AVERI / Stanford University",
+  "verified_priority_organizations": [
+    "Google DeepMind"
+  ],
+  "published": "2026-03-26",
+  "published_at": "2026-03-26T01:15:16Z",
+  "code": "https://github.com/pasta41/probabilistic-extraction-toolkit",
+  "code_status": "原文提供作者仓库URL；本轮GitHub仓库API及main/master README均返回Not Found，无法确认当前公开代码可用，保留访问例外，不写成已验证开源实现。",
+  "code_license": null,
+  "adapter": null,
+  "priority": "P0",
+  "priority_reason": "Google/DeepMind原文署名；Google COLM官方独立历史库存触发补漏，非本轮新首发。",
+  "intake_class": "historical_inventory_omission",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.foundation_models.decoding_constrained_beam.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.foundation_models.decoding_constrained_beam import diagnostic; print(diagnostic(42, \"cpu\"))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2603.24917v1",
+    "reviewed_sections": [
+      "§4.1–4.3",
+      "§5",
+      "Appendix C.3",
+      "Appendix D–E",
+      "Appendix F.2/F.7"
+    ],
+    "available_resource": "单张NVIDIA A100/A30或本地Mac",
+    "basis": "OLMo2 7/13/32B、Llama2 7/13/70B和Pythia等；上万训练序列/独立负控，T=50、B=20、k=40。原文指出beam增加KV缓存与逐步前向，完整模型/数据/参数矩阵超本轮单卡短预算，不运行。",
+    "decision": "成本过高，不复现（审查DONE）；仅交付独立低成本L1组件，不下载大资源、不试训、不自动重试。"
+  },
+  "fidelity_note": "外部next-logits上的top-k重归一、精确路径logp、Hamming/带状Levenshtein可行性剪枝、末步保留B×k、概率质量下界/剪枝bank上界；无大模型/KV cache，无可选τ提前结束。",
+  "summary": "外部next-logits上的top-k重归一、精确路径logp、Hamming/带状Levenshtein可行性剪枝、末步保留B×k、概率质量下界/剪枝bank上界；无大模型/KV cache，无可选τ提前结束。"
+}

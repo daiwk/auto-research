@@ -21,7 +21,7 @@ hide:
 
 <!-- learning-topics:start -->
 
-6 个主题 · 31 个子主题 · 4497 个问题 / 1122 篇论文
+6 个主题 · 31 个子主题 · 4589 个问题 / 1145 篇论文
 
 <div class="ar-learning-topics">
 <article class="ar-learning-topic-tile">
@@ -41,14 +41,14 @@ hide:
 <article class="ar-learning-topic-tile">
 <h2><a href="paths/foundation-models/">基础模型</a></h2>
 <p>理解模型怎样读取上下文、分配计算和训练预算，以及压缩、生成与能力评测的取舍。</p>
-<p class="ar-learning-topic-meta">6 个子主题 · 648 问 / 162 篇</p>
+<p class="ar-learning-topic-meta">6 个子主题 · 692 问 / 173 篇</p>
 <details><summary>展开子主题问题库</summary><ul>
-<li><a href="paths/foundation-models/context-and-state/">长上下文：注意力、递归状态与记忆</a><span>152 问<a class="ar-learning-deep-link" href="deep-dives/foundation-models/context-and-state/">精读对比</a></span></li>
+<li><a href="paths/foundation-models/context-and-state/">长上下文：注意力、递归状态与记忆</a><span>156 问<a class="ar-learning-deep-link" href="deep-dives/foundation-models/context-and-state/">精读对比</a></span></li>
 <li><a href="paths/foundation-models/conditional-compute/">按需计算：专家、弹性深宽与查表记忆</a><span>104 问<a class="ar-learning-deep-link" href="deep-dives/foundation-models/conditional-compute/">精读对比</a></span></li>
-<li><a href="paths/foundation-models/training-budget/">训练预算：数据配比、目标与优化器</a><span>124 问<a class="ar-learning-deep-link" href="deep-dives/foundation-models/training-budget/">精读对比</a></span></li>
+<li><a href="paths/foundation-models/training-budget/">训练预算：数据配比、目标与优化器</a><span>132 问<a class="ar-learning-deep-link" href="deep-dives/foundation-models/training-budget/">精读对比</a></span></li>
 <li><a href="paths/foundation-models/compression-and-cache/">推理压缩：权重、KV 缓存与服务带宽</a><span>144 问<a class="ar-learning-deep-link" href="deep-dives/foundation-models/compression-and-cache/">精读对比</a></span></li>
 <li><a href="paths/foundation-models/generation-paths/">生成路径：草稿验证、并行去噪与少步迭代</a><span>68 问<a class="ar-learning-deep-link" href="deep-dives/foundation-models/generation-paths/">精读对比</a></span></li>
-<li><a href="paths/foundation-models/evaluation-and-evidence/">能力证据：评测采样、读出与可靠性</a><span>56 问<a class="ar-learning-deep-link" href="deep-dives/foundation-models/evaluation-and-evidence/">精读对比</a></span></li>
+<li><a href="paths/foundation-models/evaluation-and-evidence/">能力证据：评测采样、读出与可靠性</a><span>88 问<a class="ar-learning-deep-link" href="deep-dives/foundation-models/evaluation-and-evidence/">精读对比</a></span></li>
 </ul></details>
 </article>
 <article class="ar-learning-topic-tile">
@@ -64,9 +64,9 @@ hide:
 <article class="ar-learning-topic-tile">
 <h2><a href="paths/multimodal-models/">多模态</a></h2>
 <p>围绕三件事学习：对齐不同模态、分配视觉证据预算、预测状态与动作的后果。</p>
-<p class="ar-learning-topic-meta">3 个子主题 · 265 问 / 66 篇</p>
+<p class="ar-learning-topic-meta">3 个子主题 · 273 问 / 68 篇</p>
 <details><summary>展开子主题问题库</summary><ul>
-<li><a href="paths/multimodal-models/alignment-interfaces/">跨模态对齐：表征、连接器与监督</a><span>85 问<a class="ar-learning-deep-link" href="deep-dives/multimodal-models/alignment-interfaces/">精读对比</a></span></li>
+<li><a href="paths/multimodal-models/alignment-interfaces/">跨模态对齐：表征、连接器与监督</a><span>93 问<a class="ar-learning-deep-link" href="deep-dives/multimodal-models/alignment-interfaces/">精读对比</a></span></li>
 <li><a href="paths/multimodal-models/visual-evidence-budget/">视觉证据预算：选 Token、选帧与按需回看</a><span>72 问<a class="ar-learning-deep-link" href="deep-dives/multimodal-models/visual-evidence-budget/">精读对比</a></span></li>
 <li><a href="paths/multimodal-models/world-state-actions/">世界建模：状态、生成与动作条件</a><span>108 问<a class="ar-learning-deep-link" href="deep-dives/multimodal-models/world-state-actions/">精读对比</a></span></li>
 </ul></details>
@@ -74,27 +74,27 @@ hide:
 <article class="ar-learning-topic-tile">
 <h2><a href="paths/post-training/">LLM 后训练</a></h2>
 <p>先分清反馈来自哪里，再看策略更新、步骤信用、教师监督，以及数据和算力如何分配。</p>
-<p class="ar-learning-topic-meta">6 个子主题 · 1036 问 / 259 篇</p>
+<p class="ar-learning-topic-meta">6 个子主题 · 1052 问 / 263 篇</p>
 <details><summary>展开子主题问题库</summary><ul>
 <li><a href="paths/post-training/preference-and-alignment/">偏好与对齐：先看反馈长什么样</a><span>100 问<a class="ar-learning-deep-link" href="deep-dives/post-training/preference-and-alignment/">精读对比</a></span></li>
 <li><a href="paths/post-training/policy-optimization/">策略优化：谁在采样，谁在被更新</a><span>232 问<a class="ar-learning-deep-link" href="deep-dives/post-training/policy-optimization/">精读对比</a></span></li>
-<li><a href="paths/post-training/reward-and-credit/">奖励与信用：正确结果该奖励哪些步骤</a><span>164 问<a class="ar-learning-deep-link" href="deep-dives/post-training/reward-and-credit/">精读对比</a></span></li>
+<li><a href="paths/post-training/reward-and-credit/">奖励与信用：正确结果该奖励哪些步骤</a><span>168 问<a class="ar-learning-deep-link" href="deep-dives/post-training/reward-and-credit/">精读对比</a></span></li>
 <li><a href="paths/post-training/student-trajectory-distillation/">轨迹蒸馏：学生、提案与前缀分布</a><span>180 问<a class="ar-learning-deep-link" href="deep-dives/post-training/student-trajectory-distillation/">精读对比</a></span></li>
-<li><a href="paths/post-training/teacher-and-context/">教师与纠错：额外信息何时能帮到学生</a><span>208 问<a class="ar-learning-deep-link" href="deep-dives/post-training/teacher-and-context/">精读对比</a></span></li>
-<li><a href="paths/post-training/data-and-budget/">数据与预算：下一份算力花在哪里</a><span>152 问<a class="ar-learning-deep-link" href="deep-dives/post-training/data-and-budget/">精读对比</a></span></li>
+<li><a href="paths/post-training/teacher-and-context/">教师与纠错：额外信息何时能帮到学生</a><span>216 问<a class="ar-learning-deep-link" href="deep-dives/post-training/teacher-and-context/">精读对比</a></span></li>
+<li><a href="paths/post-training/data-and-budget/">数据与预算：下一份算力花在哪里</a><span>156 问<a class="ar-learning-deep-link" href="deep-dives/post-training/data-and-budget/">精读对比</a></span></li>
 </ul></details>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="paths/agent-research/">Agent</a></h2>
 <p>从下一步行动到完整执行流程：依次学习规划、记忆、工具协作、自进化、训练与独立评测。</p>
-<p class="ar-learning-topic-meta">6 个子主题 · 1161 问 / 290 篇</p>
+<p class="ar-learning-topic-meta">6 个子主题 · 1185 问 / 296 篇</p>
 <details><summary>展开子主题问题库</summary><ul>
-<li><a href="paths/agent-research/planning-and-search/">规划与搜索：下一步该做什么</a><span>76 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/planning-and-search/">精读对比</a></span></li>
-<li><a href="paths/agent-research/memory-and-skills/">记忆与技能：让经验可取回、可失效</a><span>240 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/memory-and-skills/">精读对比</a></span></li>
+<li><a href="paths/agent-research/planning-and-search/">规划与搜索：下一步该做什么</a><span>84 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/planning-and-search/">精读对比</a></span></li>
+<li><a href="paths/agent-research/memory-and-skills/">记忆与技能：让经验可取回、可失效</a><span>244 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/memory-and-skills/">精读对比</a></span></li>
 <li><a href="paths/agent-research/tools-and-collaboration/">工具与协作执行：把计划变成可检查的动作</a><span>205 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/tools-and-collaboration/">精读对比</a></span></li>
-<li><a href="paths/agent-research/harness-and-self-improvement/">运行流程与自进化：改的是哪一层</a><span>236 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/harness-and-self-improvement/">精读对比</a></span></li>
-<li><a href="paths/agent-research/agent-policy-learning/">交互策略学习：把轨迹反馈变成更新</a><span>212 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/agent-policy-learning/">精读对比</a></span></li>
-<li><a href="paths/agent-research/evaluation-and-reliability/">评测与可靠性：如何知道真的做对了</a><span>192 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/evaluation-and-reliability/">精读对比</a></span></li>
+<li><a href="paths/agent-research/harness-and-self-improvement/">运行流程与自进化：改的是哪一层</a><span>240 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/harness-and-self-improvement/">精读对比</a></span></li>
+<li><a href="paths/agent-research/agent-policy-learning/">交互策略学习：把轨迹反馈变成更新</a><span>216 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/agent-policy-learning/">精读对比</a></span></li>
+<li><a href="paths/agent-research/evaluation-and-reliability/">评测与可靠性：如何知道真的做对了</a><span>196 问<a class="ar-learning-deep-link" href="deep-dives/agent-research/evaluation-and-reliability/">精读对比</a></span></li>
 </ul></details>
 </article>
 </div>
@@ -112,10 +112,10 @@ hide:
 <li><a href="all/#qa-18fba17b4de22180">Fig.4最后一轮critic要求refine，为什么本地仍返回exhausted而不是返回修改后的candidate？</a><span>2026-11-13 · scientist-two</span></li>
 <li><a href="all/#qa-e7bfa4bb4017a5b0">ScientistTwo的消融和review循环能否替代ScientistOne的证据完整性审计？</a><span>2026-11-13 · scientist-two</span></li>
 <li><a href="all/#qa-e658d51865a6c4c4">ScientistTwo为什么给Idea Evolver传入失败历史，又加入没有试过的种子？</a><span>2026-11-13 · scientist-two</span></li>
-<li><a href="all/#qa-c4cf20a5f50b7edf">EnvHarness为什么修改环境交互，却要保留基础环境的verifier？</a><span>2026-11-13 · envharness</span></li>
-<li><a href="all/#qa-38f8c845ef16aba5">Stage为什么重放普通动作，并调用notify_replay_complete？</a><span>2026-11-13 · envharness</span></li>
-<li><a href="all/#qa-950a6e15f5a7a4bb">串行Chain里A完成了，什么时候不能启动B，也不能返回成功？</a><span>2026-11-13 · envharness</span></li>
-<li><a href="all/#qa-ec0de8774f4b1f0a">EnvHarness与Harness²都叫harness，改变的是同一层吗？</a><span>2026-11-13 · envharness</span></li>
+<li><a href="all/#qa-216a83e433c093a6">未标注动作和padding在两个loss中怎么区别？</a><span>2026-11-13 · instruct-to-act</span></li>
+<li><a href="all/#qa-b012aaecb4f08176">Instruct-to-Act为什么不让VLM每一步直接输出低层动作？</a><span>2026-11-13 · instruct-to-act</span></li>
+<li><a href="all/#qa-d4ca750f1447c592">一段后标指令为什么只有末步complete=true？</a><span>2026-11-13 · instruct-to-act</span></li>
+<li><a href="all/#qa-e89212435012fabf">算出BC和stoploss是否已复现语言worldmodelcontroller？</a><span>2026-11-13 · instruct-to-act</span></li>
 </ul></div>
 
 <!-- learning-recent:end -->

@@ -1,0 +1,741 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/foundation-models/evaluation-and-evidence/comparison/foundation-models:rosetta-unification": {
+      "source_sha256": "25a59f49dc056722472f3e449f945c7d9425b466c587fb0296dd17111deaeabf",
+      "reviewed": true,
+      "fields": {
+        "position": "The same fact can occupy separate language-specific representations. Controlled small-Transformer experiments vary parallel-fact coverage, language imbalance and language extractability, showing that near-perfect same-language recall does not establish cross-language transfer.",
+        "tradeoff": "Rosetta studies pretraining language distributions and representation unification; Thinking to Recall analyzes generated reasoning facts and their correctness. Similarity is not a truth judge, and oracle-conditioned accuracy does not establish multilingual unification."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/analysis/3": {
+      "source_sha256": "f5f0c3ab9daa82958c624ecb17902cbda8d36aa14073bd4c7c0c523cf72e4ea0",
+      "reviewed": true,
+      "fields": {
+        "title": "Rosetta: representation unification and cross-language transfer: intervention and evidence are different axes",
+        "body": "Rosetta studies pretraining language distributions and representation unification; Thinking to Recall analyzes generated reasoning facts and their correctness. Similarity is not a truth judge, and oracle-conditioned accuracy does not establish multilingual unification. The two functions implement finite nonzero set-cosine arithmetic and per-group ratios, rejecting unstable denominators. Negative controls check scale invariance and mean-of-ratios behavior. Representations are external inputs, so these checks provide no evidence of improved multilingual capability."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/question/nov13-colm-rosetta-unification": {
+      "source_sha256": "3c73c796189c7ea1fece667047ee22cd232d06905a6013aff224ea124ae2a27a",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Rosetta differ from Thinking to Recall?",
+        "answer": "Rosetta studies pretraining language distributions and representation unification; Thinking to Recall analyzes generated reasoning facts and their correctness. Similarity is not a truth judge, and oracle-conditioned accuracy does not establish multilingual unification.",
+        "example": "More similar language representations do not verify a generated birthday; verified reasoning facts do not ensure low-resource-language access."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/update/2026-11-13/2": {
+      "source_sha256": "ad7cbd4e0d9b4e356908156884af389c9b3b73e73d0f8b094dab21108b3a6020",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added a fixed Google COLM historical-source paper and its L1 component, comparing definitions and evidence boundaries. Full experiments are explicitly not reproduced; diagnostics are not capability or Evolve-improvement evidence."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/comparison/foundation-models:thinking-to-recall": {
+      "source_sha256": "83cbe2b2c85beda6f30a174bb67ec8a43d56fecd1e366f9c9f203305b022374a",
+      "reviewed": true,
+      "fields": {
+        "position": "Reasoning may help single-hop recall through extra computation and self-generated factual priming, not just task decomposition. Controlled reasoning ON/OFF comparisons distinguish these effects and associate hallucinated intermediate facts with answer errors.",
+        "tradeoff": "Not by this component. It uses post-hoc truth annotations to estimate offline conditional expectations. Deployment needs an oracle-free verifier with measured errors and costs."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/analysis/4": {
+      "source_sha256": "084c48ad1176745f7a886ee6890afbdf129c07e6cf0f35edcecd83d7c53c0919",
+      "reviewed": true,
+      "fields": {
+        "title": "Thinking to Recall: offline conditional accuracy of factual traces: intervention and evidence are different axes",
+        "body": "Not by this component. It uses post-hoc truth annotations to estimate offline conditional expectations. Deployment needs an oracle-free verifier with measured errors and costs. The interface returns aggregate rates and retention counts only—not selected traces, actions or training examples—and defaults to exactly 100 samples per question. `pass_at_k` uses the combinatorial unbiased estimator. Controls cover the common question mask, macro rather than micro averaging, empty facts and missing subsets. Synthetic truth arrays are explicit evaluator fixtures, not agent scores."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/question/nov13-colm-thinking-to-recall": {
+      "source_sha256": "e6a07bd053330ae7828f0c45e70fab4005c2f1e545ff9a6997ab91e4b1725904",
+      "reviewed": true,
+      "fields": {
+        "question": "Can the clean-fact condition be deployed as an agent policy?",
+        "answer": "Not by this component. It uses post-hoc truth annotations to estimate offline conditional expectations. Deployment needs an oracle-free verifier with measured errors and costs.",
+        "example": "Choosing a trace by gold correctness and feeding it to an actor leaks the answer rather than improving reasoning."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/update/2026-11-13/3": {
+      "source_sha256": "6ab0050aabf7e0d06520888088766f897f45da680127d10f9feb33f9371eb666",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added a fixed Google COLM historical-source paper and its L1 component, comparing definitions and evidence boundaries. Full experiments are explicitly not reproduced; diagnostics are not capability or Evolve-improvement evidence."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/comparison/foundation-models:latent-generalization": {
+      "source_sha256": "af4a083cd05915c0c5f01b1859ed3d18e0048162878dff97d539152a7016c412",
+      "reviewed": true,
+      "fields": {
+        "position": "Knowing A>B does not guarantee answering B<A or unseen relational combinations. The paper separates knowledge acquisition, reasoning-trace bootstrapping and correctness RL to test whether reasoning trained on one structure transfers to another exposed only through knowledge SFT.",
+        "tradeoff": "Latent generalization uses controlled acquisition/structure splits to test implicit completions; Thinking to Recall studies access to existing factual knowledge. Neither permits gold-conditioned teachers or post-hoc truth labels to leak to the deployed actor."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/analysis/5": {
+      "source_sha256": "1467831529d1f738b418805e537fe1caad9fed286b7c1cf26dfe65b62097da4f",
+      "reviewed": true,
+      "fields": {
+        "title": "Latent generalization: separating exposed and held-out answer-set recall: intervention and evidence are different axes",
+        "body": "Latent generalization uses controlled acquisition/structure splits to test implicit completions; Thinking to Recall studies access to existing factual knowledge. Neither permits gold-conditioned teachers or post-hoc truth labels to leak to the deployed actor. Input checks require a nonempty held-out subset and a held-out primary. Exact-set pass@N is estimated from completed independent attempts. Negative controls show that perfect exposed recall can coexist with zero held-out recall, and perfect held-out recall can still fail exact matching through false additions. This is CPU offline evaluation, without model training, semantic judging or Evolve promotion."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/question/nov13-colm-latent-generalization": {
+      "source_sha256": "c0d2c5e2ed350f3cc2ddcdcea5a95f23db63b783eacdf04c6969e024ab366f01",
+      "reviewed": true,
+      "fields": {
+        "question": "What differs from Thinking to Recall?",
+        "answer": "Latent generalization uses controlled acquisition/structure splits to test implicit completions; Thinking to Recall studies access to existing factual knowledge. Neither permits gold-conditioned teachers or post-hoc truth labels to leak to the deployed actor.",
+        "example": "Better recall of one fact does not establish generalization to an unseen reversal relation."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/update/2026-11-13/4": {
+      "source_sha256": "869c9304bf17eb3c1398b85fe59d9dee210cc54fc811fd0462e35379e302f93a",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added a fixed Google COLM historical-source paper and its L1 component, comparing definitions and evidence boundaries. Full experiments are explicitly not reproduced; diagnostics are not capability or Evolve-improvement evidence."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/comparison/foundation-models:llm-stochasticity": {
+      "source_sha256": "a28a92ad046c09fb2b6a6ca6dc0dde2a9f222705e99371c311f75ae4ea64bc84",
+      "reviewed": true,
+      "fields": {
+        "position": "Tests a fixed number of completed external samples for marginal fit and temporal dependence. Chi-square/KS p-values are test evidence, not probabilities of output events.",
+        "tradeoff": "Decoding-constrained beam search sums path mass under an explicitly top-k-renormalized distribution, providing a deterministic lower bound and a possible-mass bank for a near-verbatim event; it does not establish independent randomness. Conversely, a non-rejected histogram cannot replace a path-risk bound. Both require fixed distributions, protocols and evaluator boundaries."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/analysis/6": {
+      "source_sha256": "f52a5477a53f31896ef37db4875b317b1a1f81e7c3d4e525f05eba6c75167300",
+      "reviewed": true,
+      "fields": {
+        "title": "A goodness-of-fit p-value is not event mass under a decoding distribution",
+        "body": "LLM Stochasticity checks finite samples against target marginals and uses temporal statistics to expose cycles or dependence. Non-rejection establishes neither the null distribution nor independence. Decoding-constrained beam search fixes per-step top-k normalization, never renormalizes survivors after distance pruning, and sums feasible complete-path mass into a lower bound while retaining possible pruned mass in a bank. This is an event-mass bound, not a goodness-of-fit p-value. A combined evaluation must report sampling protocols and risk events separately: p=1 is neither 100% randomness nor 100% extraction probability. Both local components validate numerical/protocol properties without loading an LLM for a complete audit."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/question/nov13-colm-llm-stochasticity": {
+      "source_sha256": "a4709e75d7ab89888fab295bb46e65310e3769baa7e66beaca668f2708de104f",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a uniform cycle's chi-square p-value of one be compared directly with a decoding-constrained extraction-risk lower bound of 0.1?",
+        "answer": "No. The p-value reflects non-rejection of a marginal-frequency test; a deterministic cycle can still be fully predictable. It is not an output-event probability. The lower bound is enumerated path mass for a specified top-k decoding distribution and target-distance event. Objects, assumptions and denominators differ, and neither value establishes temporal independence.",
+        "example": "A repeating 0,1,2,3 sequence can have a perfect 1,024-sample histogram while its next symbol is determined by the previous one. A separate model's probability tree may assign at least 0.1 mass to an enumerated target neighborhood, without establishing whether sampling uses an independent random source."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/update/2026-11-13/5": {
+      "source_sha256": "e664f6a9bbf7bb59d4cf7582d31ca8a03ef07087d9c811385419468b17f79e1f",
+      "reviewed": true,
+      "fields": {
+        "summary": "Compared sampling diagnostics with same-card decoding-probability bounds: goodness-of-fit p-values, temporal dependence and target-event mass remain distinct. Both are L1 components, not full LLM capability or security-audit evidence."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/comparison/foundation-models:qe-length-normalization": {
+      "source_sha256": "2ffa1c7f1e684fa3b91191df8d0ff47c3f2864359ec384c6bb46cbf51948c1ae",
+      "reviewed": true,
+      "fields": {
+        "position": "Diagnose matched-prefix length drift, train R/|h| error density, and restore ratings at inference; the local contribution is the target/control protocol.",
+        "tradeoff": "This is not post-hoc division of frozen QE scores. Interpolated Null Calibration subtracts an interpolated baseline from three real model readouts without changing QE supervision. Tunable choices belong on validation."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/analysis/7": {
+      "source_sha256": "e9049d3c734f405661b284f25ab8f71a048c1e7984a881874219d5c45b56f9fd",
+      "reviewed": true,
+      "fields": {
+        "title": "Changing supervision units differs from subtracting an inference baseline",
+        "body": "QE normalization changes training labels so the model predicts error per unit length before restoring ratings. Interpolated Null Calibration retains a trained model and subtracts a nuisance baseline using query-plus-instruction, instruction-inclusive null and bare-null readouts. Frozen-score division cannot replace the former; lambda0 in the latter still subtracts bare null. Both require explicit controlled factors and validation selection, but model stages, observations and error sources differ. Correct arithmetic establishes neither unexecuted QE retraining nor missing model readouts."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/question/cross-density-versus-temperature": {
+      "source_sha256": "c98193c34a9c2e7eb21f04ec5b71047b393fc30183d4e6b638591d783f88feca",
+      "reviewed": true,
+      "fields": {
+        "question": "Can three-pass null-score subtraction replace error-density training merely because both are called calibration?",
+        "answer": "No. Density training changes supervision to R/|h| and restores the length scale later. Null calibration subtracts an interpolated baseline from existing readouts. Neither executes the other's model stage, and tunable choices must use validation.",
+        "example": "Teaching example: scores0.8,0.3,0.1 with lambda0.5 yield calibrated score0.6. This is not the density target−0.5 for rating−5 and length10."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/update/2026-11-13/6": {
+      "source_sha256": "3834a6994b6f8be31cdd6b1562c114d093f493b4f139cfa2d74e36c706853604",
+      "reviewed": true,
+      "fields": {
+        "summary": "Compare density supervision with three-pass null calibration within the same topic; distinguish target units, observed baselines, lambda0 semantics and unexecuted model stages."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/comparison/foundation-models:cultural-cue": {
+      "source_sha256": "cfea758191ce7308d5267f0bca5cac1236cb8b08c6154e876c8527b29a4a4663",
+      "reviewed": true,
+      "fields": {
+        "position": "Pool external SAE activations, select cumulative cultural MI, and map country-prototype differences through the matching decoder.",
+        "tradeoff": "MI, SAEs, LM generation and judges remain external. Equal country weighting differs from example weighting, and the objective differs from DetectorScope's sparse detection head."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/analysis/8": {
+      "source_sha256": "880a3545921db6c3ed5fa7209ef30d4081695b72d24192bed1c3673d8c5b2f9e",
+      "reviewed": true,
+      "fields": {
+        "title": "A sparse representation can support detection or intervention without making their evidence interchangeable",
+        "body": "Both methods pool SAE activations but require different evidence. CuE builds directions from cultural information and prototypes; DetectorScope validates feature descriptions and fits a sparse detector. A real intervention needs decoder alignment and generation evaluation, whereas detector contributions explain its logit. Shared pooling cannot turn correlation into cultural control or a synthetic direction norm into faithfulness."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/question/cross-cue-versus-detectorscope": {
+      "source_sha256": "c2da1f8f8fd58168942b79d633de4666fb002bbadbe3d59f8cbcb7140938a413",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are CuE and DetectorScope different despite both max-pooling SAE features?",
+        "answer": "Pooling is only a shared representation step. CuE selects feature-country information and constructs residual interventions from prototype differences. DetectorScope uses description-validation masks and a sparse detection head with attributions. A steering direction is not a detector and a head weight is not a cultural intervention.",
+        "example": "Teaching example: a food feature may distinguish countries without distinguishing human from AI text. A large detection contribution does not establish culturally faithful generation when steering it."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/update/2026-11-13/7": {
+      "source_sha256": "7d0c11b8ecb208baad4b3ba39ae7e92ab93caf2b1f0b403b52b77209c8b4c753",
+      "reviewed": true,
+      "fields": {
+        "summary": "Pool external SAE activations, select cumulative cultural MI, and map country-prototype differences through the matching decoder. MI, SAEs, LM generation and judges remain external. Equal country weighting differs from example weighting, and the objective differs from DetectorScope's sparse detection head."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/comparison/foundation-models:decoding-constrained-beam": {
+      "source_sha256": "114c783a47e3f2ede053b8fbf500af98ef75afbe94d956daa4051ce1f106d73d",
+      "reviewed": true,
+      "fields": {
+        "position": "Accumulate exact path probability under top-k decoding and bound a near-target event using viability pruning and unpruned final expansions.",
+        "tradeoff": "External logits and a target suffix are required. This is neither authorship classification nor an unbiased full-risk estimate; banked mass is potential, not found success."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/analysis/9": {
+      "source_sha256": "b5114ad7258e48423fa0434ceb36fe545e9bb3ec881199ea0d0e8622f2220964",
+      "reviewed": true,
+      "fields": {
+        "title": "Generatability, near-target probability and text authorship are different statistical questions",
+        "body": "CBS bounds generation of a target neighborhood from a prefix; DetectorScope predicts source from text features. A common sentence can be highly generatable and independently human-written, while a detector score gives no extraction probability. Enumerated mass supplies a lower bound, and beam/distance settings alter recovered mass without turning unseen paths into successes. Distributional assumptions and negative controls cannot be replaced by a greedy hit rate."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/question/cross-logprob-bound-versus-detector": {
+      "source_sha256": "fec7a9f6dadf963ce1dab18fa4c1048ead81e4720b67e61a40f3700da243a63c",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a CBS probability lower bound replace a DetectorScope AI-authorship score?",
+        "answer": "No. CBS uses a target suffix and model conditionals to bound near-target generation mass. DetectorScope predicts source from SAE text features. High generatability is not proof of authorship, and the statistics have different targets and labels.",
+        "example": "Teaching example: a common public sentence may have high model probability while being human-written. An authorship score likewise does not establish extraction probability for a training passage."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/update/2026-11-13/8": {
+      "source_sha256": "a0c2591cea526605a8481774faa66a76b9359fd6ca52c9e025b7ab4f330fdb7a",
+      "reviewed": true,
+      "fields": {
+        "summary": "Accumulate exact path probability under top-k decoding and bound a near-target event using viability pruning and unpruned final expansions. External logits and a target suffix are required. This is neither authorship classification nor an unbiased full-risk estimate; banked mass is potential, not found success."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/comparison/foundation-models:storyscope": {
+      "source_sha256": "125661b3edc0e67b6d971801c8aa45a048ec7d167e3ae01f6d62edd1e4dbc74d",
+      "reviewed": true,
+      "fields": {
+        "position": "Use prompt-matched semantic assignments and real SHAP statistics to select stable cross-model cores; locally implement the exact conjunction and prompt-block indices.",
+        "tradeoff": "Narrative assignments are not random SAE columns, and classifier importance is not generative causality. LLM/XGBoost/SHAP stages and unspecified fingerprint thresholds are not fabricated."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/analysis/10": {
+      "source_sha256": "add66448010a81cdf2600e60d272b578f75405a8622854ee10d10ee654f9d991",
+      "reviewed": true,
+      "fields": {
+        "title": "Explanation granularity and dependence structure follow the source of features",
+        "body": "StoryScope interprets narrative structures, whereas DetectorScope interprets internal sparse activations and descriptions. Both retain extraction costs and model errors. StoryScope must group six stories sharing a prompt and limit cross-model spread before calling a signal a general AI core. Sparse detector contributions explain a head, not an entire story's semantic construction. Each method needs its own inputs and evidence rather than a generic feature fixture."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/question/cross-storyscope-versus-detectorscope": {
+      "source_sha256": "9bf56fce72b5cdb1ec4adc29f2291bb66e294326fe95ee2415e22869f7e82021",
+      "reviewed": true,
+      "fields": {
+        "question": "Where do StoryScope and DetectorScope obtain interpretability, and are their features interchangeable?",
+        "answer": "StoryScope uses externally assigned semantic narrative questions with classifier/SHAP analysis. DetectorScope uses internal SAE features and an additive sparse head. Their explanation units, costs and errors differ; random SAE columns cannot replace uncomputed narrative assignments.",
+        "example": "Teaching example: deciding whether an ending states its theme requires semantic reading. The contribution of a numbered SAE column is a separate observation."
+      }
+    },
+    "dive/foundation-models/evaluation-and-evidence/update/2026-11-13/9": {
+      "source_sha256": "ab6a9bde74a517e1a371ffa851bd704f6b4b3edfe8d5dba7d0f31883f30dd6b8",
+      "reviewed": true,
+      "fields": {
+        "summary": "Use prompt-matched semantic assignments and real SHAP statistics to select stable cross-model cores; locally implement the exact conjunction and prompt-block indices. Narrative assignments are not random SAE columns, and classifier importance is not generative causality. LLM/XGBoost/SHAP stages and unspecified fingerprint thresholds are not fabricated."
+      }
+    },
+    "dive/foundation-models/training-budget/comparison/foundation-models:lidas": {
+      "source_sha256": "b19ea7564fd312e15d12781131a0f65a65c24abbafd22d8d562ab77f4d0db8a4",
+      "reviewed": true,
+      "fields": {
+        "position": "Later Transformer layers may contribute little to predictions. The paper compares gradual depth growth with fixed-depth training and proposes LIDAS, whose layer-centered copy region differs from block-centered MIDAS when the block count is even.",
+        "tradeoff": "LIDAS changes depth, initialization and state inheritance; stochastic rounding changes how FP32 updates become low-precision parameters. Their budgets and error sources differ and need separate controls before a matched-budget combination."
+      }
+    },
+    "dive/foundation-models/training-budget/analysis/4": {
+      "source_sha256": "01f9eb5832994855f4d46797191c64570d67d23b6866879d9a55e199a8246a46",
+      "reviewed": true,
+      "fields": {
+        "title": "LIDAS: middle-layer growth with optimizer-state inheritance: intervention and evidence are different axes",
+        "body": "LIDAS changes depth, initialization and state inheritance; stochastic rounding changes how FP32 updates become low-precision parameters. Their budgets and error sources differ and need separate controls before a matched-budget combination. `grow_layers` transforms an actual ModuleList and AdamW state while leaving external embeddings/heads untouched; model-specific depth configuration and position indexing remain the caller's responsibility. Tied layers are rejected. PROP-1 conserves the total budget using an explicit largest-remainder convention. Controls test AMSGrad state independence, scheduler continuity and real copied-layer updates."
+      }
+    },
+    "dive/foundation-models/training-budget/question/nov13-colm-lidas": {
+      "source_sha256": "3a4abd628349dcfe1416030520a9b982771151ea605a9a1ec0fdb97f63172122",
+      "reviewed": true,
+      "fields": {
+        "question": "Why should LIDAS and stochastic-rounding gains be kept separate?",
+        "answer": "LIDAS changes depth, initialization and state inheritance; stochastic rounding changes how FP32 updates become low-precision parameters. Their budgets and error sources differ and need separate controls before a matched-budget combination.",
+        "example": "Inherited Adam moments and unbiased quantization are distinct L1 properties, not proof of faster combined convergence."
+      }
+    },
+    "dive/foundation-models/training-budget/update/2026-11-13/3": {
+      "source_sha256": "9cdbe85816c0b86f4bf8b7822ee0eb7345bc7c3fe600a4dad974782d65cedce7",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added a fixed Google COLM historical-source paper and its L1 component, comparing definitions and evidence boundaries. Full experiments are explicitly not reproduced; diagnostics are not capability or Evolve-improvement evidence."
+      }
+    },
+    "dive/foundation-models/training-budget/comparison/foundation-models:continuousbench": {
+      "source_sha256": "b350782843a58ce0184357b4bb96d5ef2d08927c7f358e7d8aec112cb317500f",
+      "reviewed": true,
+      "fields": {
+        "position": "Saturated benchmarks cannot reveal whether synthetic text transfers new knowledge. ContinuousBench periodically releases fresh corpora and derived QA, standardizes evaluator training and compares against the same unchanged base model. Utility centers on repeated facts rather than memorizing singleton private records.",
+        "tradeoff": "No. Gain measures utility; epsilon/delta require a specified DP mechanism and accountant. Repeated-fact learning is not permission to memorize singleton records. Local code includes neither DP training/accounting nor the News judge."
+      }
+    },
+    "dive/foundation-models/training-budget/analysis/5": {
+      "source_sha256": "369f0c8672e9e4b4d435355d5fb30f1ff1c4de51f9b51ab09255a5c505a4ee2d",
+      "reviewed": true,
+      "fields": {
+        "title": "ContinuousBench: measuring new capability from synthetic text: intervention and evidence are different axes",
+        "body": "No. Gain measures utility; epsilon/delta require a specified DP mechanism and accountant. Repeated-fact learning is not permission to memorize singleton records. Local code includes neither DP training/accounting nor the News judge. The component independently implements the pinned cleaner/matcher semantics. Paired gains require identical IDs, questions, references and release revisions, with an explicit base arm. Test rows cannot select checkpoints. 'Flying and Normal' may contain both required types but is not the exact string 'Normal and Flying'. No model calls, large downloads, DP-SGD or automatic News judge are included."
+      }
+    },
+    "dive/foundation-models/training-budget/question/nov13-colm-continuousbench": {
+      "source_sha256": "dc9d64234fe7205355fac07b07f31d0854a8970f58b66e71c51f1d92d777dedf",
+      "reviewed": true,
+      "fields": {
+        "question": "Does higher capability gain establish stronger DP privacy?",
+        "answer": "No. Gain measures utility; epsilon/delta require a specified DP mechanism and accountant. Repeated-fact learning is not permission to memorize singleton records. Local code includes neither DP training/accounting nor the News judge.",
+        "example": "A non-DP generator may score highly while satisfying no claimed privacy budget."
+      }
+    },
+    "dive/foundation-models/training-budget/update/2026-11-13/4": {
+      "source_sha256": "6bf806c5d786581e2093953768272145402784e251e0d3db2a77342069c21b85",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added a fixed Google COLM historical-source paper and its L1 component, comparing definitions and evidence boundaries. Full experiments are explicitly not reproduced; diagnostics are not capability or Evolve-improvement evidence."
+      }
+    },
+    "dive/agent-research/planning-and-search/comparison/agent-research:planning-optimality": {
+      "source_sha256": "a16b24c56e0e9547641881ac14909dde9144b6c450b61a08a394b3fecc96ec81",
+      "reviewed": true,
+      "fields": {
+        "position": "Checking goal reachability alone ignores unnecessary actions. The paper extends LLM planning evaluation from validity to optimality using Blocksworld and abstract P* curricula with known optimum lengths.",
+        "tradeoff": "LATS allocates search/rollout effort to find trajectories; this component only validates external plans and restricted-curriculum gaps. Search scores do not replace precondition verification, and validity does not establish optimality."
+      }
+    },
+    "dive/agent-research/planning-and-search/analysis/5": {
+      "source_sha256": "2d310b063a44df98706c35633a1a7b8b362110ee682378c9d12ec1f69ac50b74",
+      "reviewed": true,
+      "fields": {
+        "title": "Planning optimality: valid plans are not necessarily shortest: intervention and evidence are different axes",
+        "body": "LATS allocates search/rollout effort to find trajectories; this component only validates external plans and restricted-curriculum gaps. Search scores do not replace precondition verification, and validity does not establish optimality. `transition` receives no gold plan; scoring belongs to an independent evaluator. A separate bounded BFS explores the four-operator state graph for at most six blocks without calling the formula. Controls reject illegal pickups and multi-target source towers, and detect a valid detour with gap one. This is not an LLM planner, VAL replacement or agent capability result."
+      }
+    },
+    "dive/agent-research/planning-and-search/question/nov13-colm-planning-optimality": {
+      "source_sha256": "3945e931359685c129f31bed23dac5c4907048a315aef85a1e8e86f6d2c98c5d",
+      "reviewed": true,
+      "fields": {
+        "question": "How does this differ from LATS search?",
+        "answer": "LATS allocates search/rollout effort to find trajectories; this component only validates external plans and restricted-curriculum gaps. Search scores do not replace precondition verification, and validity does not establish optimality.",
+        "example": "A four-step valid result against a two-step BFS optimum has gap one."
+      }
+    },
+    "dive/agent-research/planning-and-search/update/2026-11-13/4": {
+      "source_sha256": "9b5d4f6f36e8dd147d53abed8e144a94c9d59f45717040a7a0abd74972b19fe3",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added a fixed Google COLM historical-source paper and its L1 component, comparing definitions and evidence boundaries. Full experiments are explicitly not reproduced; diagnostics are not capability or Evolve-improvement evidence."
+      }
+    },
+    "dive/agent-research/planning-and-search/comparison/agent-research:clarification-sgp": {
+      "source_sha256": "8c3e8922bc2f88dfcc9ea6d86d79f08a06c8e3dc8f1972a830299c006f2a2e88",
+      "reviewed": true,
+      "fields": {
+        "position": "Cost-condition guessing, clarification and multi-answer actions; choose sequences by interpretation-balanced rewards, then training rollouts.",
+        "tradeoff": "ReAct adapts actions to observations; SGP also prices extra communication. More questions at low cost need not be optimal at high cost. The local selector has no dialogue semantics."
+      }
+    },
+    "dive/agent-research/planning-and-search/analysis/6": {
+      "source_sha256": "e9295e9cdb9cf9f3c0acbb84c0d6e2cce897506bcfbc0711e4ec5c67f4ec96d5",
+      "reviewed": true,
+      "fields": {
+        "title": "Clarification value depends on both communication costs and intent distributions",
+        "body": "ReAct alternates reasoning and tool observations. SGP trains action forms in collaboration with private intent, balancing interpretations before sequence selection and keeping F1/cost units consistent. Both need real models to produce useful observations or questions; local control checks cannot rank their capabilities."
+      }
+    },
+    "dive/agent-research/planning-and-search/question/cross-colm-clarification-sgp": {
+      "source_sha256": "e9256de4cf3748a338826d5914959dec048f09d3ecda37c2e991fa3cbe21718c",
+      "reviewed": true,
+      "fields": {
+        "question": "Do more ReAct reasoning/tool turns imply a better SGP communication policy?",
+        "answer": "No. ReAct continues acting from observations; SGP also trades accuracy gains against numerical question/verbosity costs. Turn counts become comparable only under matching costs and intent distributions.",
+        "example": "Teaching example: an extra question can improve accuracy yet lower reward for a high-question-cost voice task."
+      }
+    },
+    "dive/agent-research/planning-and-search/update/2026-11-13/5": {
+      "source_sha256": "0927690e5a95f7d9b34056b27e7ea8c3a0464d53f35c2e7dc1a08672e0742b7c",
+      "reviewed": true,
+      "fields": {
+        "summary": "Repair the historical clarification-sgp omission. Cost-condition guessing, clarification and multi-answer actions; choose sequences by interpretation-balanced rewards, then training rollouts. ReAct adapts actions to observations; SGP also prices extra communication. More questions at low cost need not be optimal at high cost. The local selector has no dialogue semantics."
+      }
+    },
+    "dive/foundation-models/context-and-state/comparison/foundation-models:ecg-rag": {
+      "source_sha256": "0e2e5761b850872d0fa90a4a372bf3a9ab5269fc4144dbd04d266136229f60a2",
+      "reviewed": true,
+      "fields": {
+        "position": "On-device RAG must limit both index storage and generation context/KV costs. ECG stores one multi-vector retrieval representation and projects it into compressed context for the same decoder, avoiding separate retrieval and compression representations.",
+        "tradeoff": "No. ECG compresses external documents into shared semantic vectors. ADIndex shares attention candidate banks, then refines per query and adds newly visible tokens. Their support, fidelity and cost units differ."
+      }
+    },
+    "dive/foundation-models/context-and-state/analysis/7": {
+      "source_sha256": "a7fa33d75b361087cfcaa978966afab85e01fcca7d3be6759acf209caae026ec",
+      "reviewed": true,
+      "fields": {
+        "title": "ECG: shared representations for retrieval and context compression: intervention and evidence are different axes",
+        "body": "No. ECG compresses external documents into shared semantic vectors. ADIndex shares attention candidate banks, then refines per query and adds newly visible tokens. Their support, fidelity and cost units differ. Compression genuinely consumes stored E_ret. Teacher distributions/relevance are detached while alpha and temperature remain differentiable. FKL sums answer-token KLs before batch averaging; margin uses declared hard negatives only. The paper specifies a large positive gate bias but no exact value: five is an explicit local convention. There is no pretrained decoder, index, special-token integration or full training pipeline."
+      }
+    },
+    "dive/foundation-models/context-and-state/question/nov13-colm-ecg-rag": {
+      "source_sha256": "4a68931676dbcadbaaf02b677aee990a6915a1fb678a24a2e5b3e8911aed0c4e",
+      "reviewed": true,
+      "fields": {
+        "question": "Is ECG equivalent to ADIndex sparse retrieval?",
+        "answer": "No. ECG compresses external documents into shared semantic vectors. ADIndex shares attention candidate banks, then refines per query and adds newly visible tokens. Their support, fidelity and cost units differ.",
+        "example": "Eliminating duplicate document vectors is not the same as avoiding scans of historical attention keys."
+      }
+    },
+    "dive/foundation-models/context-and-state/update/2026-11-13/6": {
+      "source_sha256": "c31cd12a0dc98d8c7d7ca8bea7fd420fd594cf13170ad1f5181420b1e09bbdc8",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added a fixed Google COLM historical-source paper and its L1 component, comparing definitions and evidence boundaries. Full experiments are explicitly not reproduced; diagnostics are not capability or Evolve-improvement evidence."
+      }
+    },
+    "dive/post-training/teacher-and-context/comparison/post-training:social-meta-learning": {
+      "source_sha256": "00ee7bedcdb27238a25856781a522e9068bc92ff013e115578ea6f80f6c38ca6",
+      "reviewed": true,
+      "fields": {
+        "position": "Train feedback use from public dialogue through successful student-only SFT or online RL, with separate Q-priming.",
+        "tradeoff": "OPSD supervises student prefixes with privileged teacher distributions; SML transfers information through dialogue. Neither permits privileged knowledge in evaluated students. Only SML's offline objective is local."
+      }
+    },
+    "dive/post-training/teacher-and-context/analysis/7": {
+      "source_sha256": "5da30bb4aa2e4f898e22689e413fbb9f29b1e74e1c6b17ca98564f2fa3b5ad5a",
+      "reviewed": true,
+      "fields": {
+        "title": "Privileged distributions and language feedback imply different learning and leakage boundaries",
+        "body": "OPSD's teacher sees verified answers and supplies dense distributions on student prefixes. SML exposes public teacher replies to the student and optimizes later interaction through an outer loop. Private knowledge used to synthesize training questions does not authorize test-time gold. Correct gradient masks without dialogue/backbones do not establish learned enquiry."
+      }
+    },
+    "dive/post-training/teacher-and-context/question/cross-colm-social-meta-learning": {
+      "source_sha256": "d943d94a82c7b1c5ad2dda9e9a1013597d2ac520fa40aac7f5076afded9043a2",
+      "reviewed": true,
+      "fields": {
+        "question": "Because OPSD and SML teachers have privileged knowledge, may evaluated students receive it directly?",
+        "answer": "No. OPSD uses privileged teacher distributions on student prefixes during training; SML exposes public teacher replies. Both must preserve student observation boundaries: teacher answers do not authorize student test-time gold.",
+        "example": "Teaching example: using solutions to synthesize training guidance differs from placing hidden solutions in evaluation requests."
+      }
+    },
+    "dive/post-training/teacher-and-context/update/2026-11-13/5": {
+      "source_sha256": "02286a1b75d6a3cae95f0d00850ac8386bd32f6c95ffce8a26fc19e0fcd422fc",
+      "reviewed": true,
+      "fields": {
+        "summary": "Repair the historical social-meta-learning omission. Train feedback use from public dialogue through successful student-only SFT or online RL, with separate Q-priming. OPSD supervises student prefixes with privileged teacher distributions; SML transfers information through dialogue. Neither permits privileged knowledge in evaluated students. Only SML's offline objective is local."
+      }
+    },
+    "dive/post-training/teacher-and-context/comparison/post-training:behavioral-canaries": {
+      "source_sha256": "4908cd40f0b8e57c0914c090ccb07a103be16dd0267ef1fbc7015831b0248712",
+      "reviewed": true,
+      "fields": {
+        "position": "Measure held-out clean/trigger sequence-logprob shifts and aggregate over independently trained policies.",
+        "tradeoff": "RAGCompass uses answer F1 only as offline routing-distillation supervision; runtime scoring sees no gold. Canary targets belong to audit measurements, not actor answers, and usefulness or one stylistic shift does not establish misuse."
+      }
+    },
+    "dive/post-training/teacher-and-context/analysis/8": {
+      "source_sha256": "9e6a98a4ab3f90e1073c337de3b4badead4c187867e825ca0a2552815d9546e0",
+      "reviewed": true,
+      "fields": {
+        "title": "Evidence useful for answering is not evidence of its use in post-training",
+        "body": "RAGCompass turns answer utility from retrieved evidence groups into a candidate target distribution and trains a router that selects using scores only at inference. Behavioral Canaries instead hold the query/prefix fixed and vary a document trigger to probe a trained policy's target-pattern probabilities. Utility, permission and detectable influence are different objects: rights depend on actual terms, and a weak behavioral signal is not proof about one document. Both require explicit separation of offline labels from runtime/audit interfaces and preservation of independent-policy units."
+      }
+    },
+    "dive/post-training/teacher-and-context/question/cross-behavior-audit-versus-rm-memorization": {
+      "source_sha256": "b64706ac1aa0233e0af90552fa9170cdbdc53230821c19408e6c159ff9c229e2",
+      "reviewed": true,
+      "fields": {
+        "question": "Does more useful retrieval evidence in RAGCompass establish permission for RL training, or show that the documents were used for training?",
+        "answer": "No. Offline F1 measures answer utility; runtime routing does not read gold. Permission depends on actual terms and training influence requires separate audit evidence. A clean/trigger canary difference also does not prove misuse of one document.",
+        "example": "Teaching example: evidence-group F1 values0.8 and0.5 supply routing supervision, not usage rights. A canary logprob difference0.1 measures conditional influence, not better routing or a verdict that a file was trained on."
+      }
+    },
+    "dive/post-training/teacher-and-context/update/2026-11-13/6": {
+      "source_sha256": "ab85a692933243595fa70919115dd58e8e9e93806078c7198f479f89f3f719e7",
+      "reviewed": true,
+      "fields": {
+        "summary": "Compare same-topic RAGCompass offline utility supervision with conditional behavioral auditing; retain offline-gold isolation, permission boundaries and limits of individual-document conclusions."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/comparison/agent-research:mt-pingeval": {
+      "source_sha256": "923c913859799cc3e8eb272c5851cc046c045eeba8d0be3c5570572916a140c6",
+      "reviewed": true,
+      "fields": {
+        "position": "Use private views and fixed total tokens to distinguish interaction gains from extra output or guessing opportunities; Name-game scores full records.",
+        "tradeoff": "UserProxyBench audits premature user disclosure; MT-PingEval tests collaboration in controlled information games. Task success does not establish compliant information boundaries, nor do more turns establish better cooperation."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/analysis/7": {
+      "source_sha256": "b3808572180eb314311a01fd9d81db1df73c55f30b85c8492da6b0b2c5f49318",
+      "reviewed": true,
+      "fields": {
+        "title": "Private-information evaluation begins with who knows what, not who answered correctly",
+        "body": "UserProxyBench separates user-contract fidelity from task reward and audits disclosure before requests. MT-PingEval establishes asymmetric tables/images and holds each player's tokens fixed. Name-game needs complete-record matching and a without-replacement random-guess baseline. Protocol code alone supplies no actor capability."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/question/cross-colm-mt-pingeval": {
+      "source_sha256": "3854b9528cbdc119e4c654aa942586ab58146eb0e25c97392d95d24ca4ff2fb2",
+      "reviewed": true,
+      "fields": {
+        "question": "Does higher Name-game success with more turns necessarily mean better collaboration?",
+        "answer": "No. More turns also permit more random guesses without replacement, a baseline examined in the paper. Hold tokens fixed and inspect information exchange rather than success alone.",
+        "example": "Teaching example: guessing one of25 rows per turn is naturally likelier to succeed in16 turns than two."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/update/2026-11-13/6": {
+      "source_sha256": "924e4fab7fb5aacaced2a73381612f7054dee5f87a8a77543c2aa75b2711a3fe",
+      "reviewed": true,
+      "fields": {
+        "summary": "Repair the historical mt-pingeval omission. Use private views and fixed total tokens to distinguish interaction gains from extra output or guessing opportunities; Name-game scores full records. UserProxyBench audits premature user disclosure; MT-PingEval tests collaboration in controlled information games. Task success does not establish compliant information boundaries, nor do more turns establish better cooperation."
+      }
+    },
+    "dive/post-training/data-and-budget/comparison/post-training:maple-icl": {
+      "source_sha256": "b2a36e09c9d9e72065dddda5b6a8bdbc1411d3254ba0968495821a0657ce8748",
+      "reviewed": true,
+      "fields": {
+        "position": "Condition initialization on DP metadata and select non-private donated prompt examples by categorical Hamming distance; only selection is local.",
+        "tradeoff": "LESSER selects training data through model-gradient features; MAPLE selects prompt examples through schema similarity. Different units/objectives cannot justify gradient-value or privacy claims."
+      }
+    },
+    "dive/post-training/data-and-budget/analysis/2": {
+      "source_sha256": "de41c3de85cb17f7437d7d98b232b937e34ed26e6f85fd4ba59645e17e9dd56b",
+      "reviewed": true,
+      "fields": {
+        "title": "Selection similarity must be interpreted for its own layer and purpose",
+        "body": "LESSER's output-layer gradient features approximate relevance to target tasks. MAPLE's Hamming distance only compares categorical schema fields for donated initialization examples, including numeric bins treated as categories. Privacy comes from external AIM/PE accounting, not the selector; neither privacy nor generated-text quality follows from correct sorting."
+      }
+    },
+    "dive/post-training/data-and-budget/question/cross-colm-maple-icl": {
+      "source_sha256": "8d0c9873b101e5538a1e671201a917179636da0b3b65b2273de3ef489df6025e",
+      "reviewed": true,
+      "fields": {
+        "question": "Does metadata-nearest ICL selection reproduce private synthesis?",
+        "answer": "No. It is one initialization step; AIM, privacy accounting, the generator and AugPE are absent. The paper also finds initialization alone does not match full MAPLE.",
+        "example": "Teaching example: choosing ten suitable public examples does not make later unprotected private voting safe."
+      }
+    },
+    "dive/post-training/data-and-budget/update/2026-11-13/1": {
+      "source_sha256": "c55daef62cbd8213f6ac29bf4b8824130b319c22994bd6f6c7c681bfccdcfd8f",
+      "reviewed": true,
+      "fields": {
+        "summary": "Repair the historical maple-icl omission. Condition initialization on DP metadata and select non-private donated prompt examples by categorical Hamming distance; only selection is local. LESSER selects training data through model-gradient features; MAPLE selects prompt examples through schema similarity. Different units/objectives cannot justify gradient-value or privacy claims."
+      }
+    },
+    "dive/agent-research/memory-and-skills/comparison/agent-research:policybank": {
+      "source_sha256": "c325e8c890c809896e47f772eefaf0716ce86325eb7abeff8f098ffca7ae0efd",
+      "reviewed": true,
+      "fields": {
+        "position": "Store semi-structured authorization interpretations by tool capability, retrieve headers then selected full entries, and apply explicit feedback-authored Add/Revise/Omit.",
+        "tradeoff": "MemGPT manages capacity/page-in/page-out; PolicyBank targets specification–requirement gaps. More capacity does not imply correct rules. Local PolicyBank remains L0 without semantic repair."
+      }
+    },
+    "dive/agent-research/memory-and-skills/analysis/7": {
+      "source_sha256": "2632a46b3a20114b277f75638cbcfbd8a1cf95d805b4033bc7601f63472c9c47",
+      "reviewed": true,
+      "fields": {
+        "title": "Remembering more and trusting authorization rules are separate problems",
+        "body": "MemGPT makes long-term information retrievable through tiers. PolicyBank revises interpretations instead of repeatedly following flawed rules. Header selection reduces context but needs a real actor. Typed changes and provenance do not make an external PolicyAgent's update true; malicious feedback, permission review and formal validation remain external."
+      }
+    },
+    "dive/agent-research/memory-and-skills/question/cross-colm-policybank": {
+      "source_sha256": "986d74733630c4e65f3ef660c02a7f11db92f05ad4d06373412f8efbbfa1d8a5",
+      "reviewed": true,
+      "fields": {
+        "question": "Can successful workflow memory replace PolicyBank's authorization updates?",
+        "answer": "Not necessarily. Past trajectories may repeatedly follow a flawed spec. PolicyBank targets authorization deltas in developer feedback; local storage still lacks semantic repair.",
+        "example": "Teaching example: ten successful rebookings do not settle compensation without rebooking."
+      }
+    },
+    "dive/agent-research/memory-and-skills/update/2026-11-13/6": {
+      "source_sha256": "e0f056e1efb95902ad61f980bdd42f422728c1933017eb193e962057fb093700",
+      "reviewed": true,
+      "fields": {
+        "summary": "Repair the historical policybank omission. Store semi-structured authorization interpretations by tool capability, retrieve headers then selected full entries, and apply explicit feedback-authored Add/Revise/Omit. MemGPT manages capacity/page-in/page-out; PolicyBank targets specification–requirement gaps. More capacity does not imply correct rules. Local PolicyBank remains L0 without semantic repair."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:co-director": {
+      "source_sha256": "989a9bcf8297b645ed06dd1e35c6aa0c58e1364f13fec174c8873b6523079b5e",
+      "reviewed": true,
+      "fields": {
+        "position": "Update strategy/narrative/aesthetic strategic rewards separately, choose directions by recommendation-first cold start/UCB and select existing videos by quality.",
+        "tradeoff": "Co-Director uses optimistic UCB exploration of uncertain creative directions. RuHarness conservatively selects a rubric frontier using a lower posterior utility quantile, then requires independent validation for harness promotion. Exploration rewards are not acceptance evidence, and judge associations do not identify causal effects."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/13": {
+      "source_sha256": "1942912bff75016f4dac68b5ffe5c4c59222dbfa1f00f4c342a242835812872f",
+      "reviewed": true,
+      "fields": {
+        "title": "Optimistic exploration is not conservative acceptance",
+        "body": "Co-Director allocates the next attempt over three, three and four creative choices using mean strategic rewards plus a UCB exploration bonus. Official warm starts recommend unobserved arms without invented counts. RuHarness instead takes the 0.2 utility quantile from 2,000 joint six-cell Dirichlet posterior draws to conservatively select active rubrics. A candidate harness must still improve independent validation by strictly more than 0.05. Uncertainty encourages exploration in the former but discounts poorly supported estimates in the latter; a high UCB score cannot replace validated improvement. Co-Director also selects the final video by separate quality, not summed strategic rewards. Local numeric mechanisms provide no video-generation, semantic-judge or complete self-improvement capability evidence."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/cross-colm-co-director": {
+      "source_sha256": "8a42760e9560e71ddd5af4a35e6d85a6816d2e8751e2015fe5180c59a83b509c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are Co-Director's high UCB score and RuHarness's lower posterior quantile not interchangeable promotion evidence?",
+        "answer": "UCB intentionally rewards underexplored directions optimistically to select another attempt. RuHarness discounts uncertain rubric estimates through joint posterior utility quantiles and separately requires strict independent validation improvement. Their scheduling objects and risk preferences differ; factored judge ratings also do not establish causal contributions.",
+        "example": "Teaching example: a creative arm tried once can receive another attempt because its exploration bonus is high, but a rubric associated with one failed task should not be promoted on that basis. The harness candidate still has to pass validation. This is not a measured result."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-13/13": {
+      "source_sha256": "58478bb75b9f06603148349382068d77475daab2f4ffea92399f87eefd803fda",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add Co-Director's factored UCB and separate quality selection, comparing them with RuHarness's lower joint-posterior utility quantile and validation gate. Distinguish optimistic exploration from conservative acceptance; local mechanism checks for either method do not establish complete generation or self-improvement capability."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/comparison/agent-research:instruct-to-act": {
+      "source_sha256": "24e93824542e2c5b85fd018c0c00098f4d495e069efdc94f15093a2cfcdc614c",
+      "reviewed": true,
+      "fields": {
+        "position": "Label own-rollout intervals post hoc, train BC on annotated actions and stop on completion endpoints, retaining other Dreamer objectives.",
+        "tradeoff": "Agent Lightning separates execution from RL transitions; Instruct-to-Act separates planning from high-frequency control. These are different interfaces, and labels do not replace missing RSSM/environment learning."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/analysis/2": {
+      "source_sha256": "11b9ceb726d10ef8ed302190cea0dde8f6a771ed2d22cbbb1ea442010317aa3e",
+      "reviewed": true,
+      "fields": {
+        "title": "When trajectories become training data, objective boundaries matter more than shared interfaces",
+        "body": "Agent Lightning turns heterogeneous execution into attributable transitions. Instruct-to-Act binds language to non-overlapping intervals within one episode and marks instruction completion at the end. Unannotated valid steps have no BC but remain stop negatives; padding affects neither. RSSM, actor/value training and real rollouts remain necessary."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/question/cross-colm-instruct-to-act": {
+      "source_sha256": "74914f8dcc09e4e5491e200c4502752d1a22d280671f91177a32b3d2fd8907c7",
+      "reviewed": true,
+      "fields": {
+        "question": "Do correct BC and stop losses reproduce the language world-model controller?",
+        "answer": "No. RSSM model/actor/value learning, real rollouts, instruction embeddings and annotation are still required. Local code executes two auxiliary objectives without replacing missing networks.",
+        "example": "Teaching example: correct gradients do not establish diamond collection in Minecraft."
+      }
+    },
+    "dive/agent-research/agent-policy-learning/update/2026-11-13/1": {
+      "source_sha256": "cda52b255d3d2ba40bf331aa1634259d5a4f472cb25fcf9b2a43456b36d79b4d",
+      "reviewed": true,
+      "fields": {
+        "summary": "Repair the historical instruct-to-act omission. Label own-rollout intervals post hoc, train BC on annotated actions and stop on completion endpoints, retaining other Dreamer objectives. Agent Lightning separates execution from RL transitions; Instruct-to-Act separates planning from high-frequency control. These are different interfaces, and labels do not replace missing RSSM/environment learning."
+      }
+    },
+    "dive/post-training/reward-and-credit/comparison/post-training:rlmf": {
+      "source_sha256": "634ab159f79ae13137c5d58661d85644ac43ac9e91220a4a0b429e750b0f87e0",
+      "reviewed": true,
+      "fields": {
+        "position": "Use completion-level FC self-judgment quality to boost only positive group-centered faithfulness components, leaving centered other rewards unchanged.",
+        "tradeoff": "Residual Advantage uses same-vocabulary teacher–student differences for local token credit, then response-centers and adds verifier advantages. Z is not a probability residual; RLMF neither recenters afterward nor executes RA/Co-RA teacher updates."
+      }
+    },
+    "dive/post-training/reward-and-credit/analysis/6": {
+      "source_sha256": "b07753fadc43ad3eb5a5bf8fbcc2b4a5ab1e8db665373cca42d7a9f73cfe1d2b",
+      "reviewed": true,
+      "fields": {
+        "title": "Completion self-judgment credit differs from token-level teacher–student residuals",
+        "body": "RLMF separates faithfulness and other constraints, boosting only positive faithfulness deviations according to self-judgment accuracy; the group mean may become nonzero. Residual Advantage uses full-vocabulary teacher–student differences, a student-expectation baseline and response-position centering before adding verifier credit. Co-RA updates its teacher on a fixed scored batch and uses it next round. Adding Z as reward, conflating token residuals with completion advantages or recentering RLMF changes these methods. Their evidence and update units remain separate; an RA checkpoint smoke does not train RLMF."
+      }
+    },
+    "dive/post-training/reward-and-credit/question/cross-rlmf-versus-dr-grpo": {
+      "source_sha256": "0289a641c795e111ae3712e5b323454690754dbeb9f8945f37ec04db5a6fc6bb",
+      "reviewed": true,
+      "fields": {
+        "question": "Can RLMF's metacognitive Z and Residual Advantage's teacher–student residual be directly added as the same token reward?",
+        "answer": "No. Z measures completion FC self-judgment error and scales positive group-relative faithfulness only. RA uses tokenwise full-vocabulary q−p, subtracts a student-expectation baseline, response-centers, then adds verifier credit. A combination needs a new explicit definition and validation.",
+        "example": "Teaching example: RLMF with f=[0,1,2], o=[1,0,−1], Z1 yields[0,0,1], mean1/3. A response's centered RA residuals[0.2,−0.2] have mean0. Forcing both to zero mean changes RLMF."
+      }
+    },
+    "dive/post-training/reward-and-credit/update/2026-11-13/5": {
+      "source_sha256": "b2cfb5e01da77e07e81004f18415392fd7bd103bbd7631b647ec8ae3fb31295a",
+      "reviewed": true,
+      "fields": {
+        "summary": "Compare same-topic RA token probability residuals with RLMF completion self-judgment credit, preserving centering, teacher-update order and distinct L1/checkpoint-smoke evidence."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/comparison/multimodal-models:avmeme-exam": {
+      "source_sha256": "6fa1a716a20c445a9ba65d9204c8269e0a00bdfcd5252b0e2b80cea1843a1015",
+      "reviewed": true,
+      "fields": {
+        "position": "Multicultural audiovisual multiple-choice questions separate contextual audio knowledge from text/video shortcuts. Local code implements filtering, shuffling, private answer mapping and grouped scoring only.",
+        "tradeoff": "Cultural multiple-choice accuracy and MMEB-V3 embedding retrieval measure different capabilities. Without media and models, protocol tests establish no cultural understanding."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/analysis/4": {
+      "source_sha256": "cd99683666d26c871ca38763bd20659fa4c07aadc23b1a5790f2fb8ab34daa15",
+      "reviewed": true,
+      "fields": {
+        "title": "Interface alignment is not cultural understanding: identify outputs and shortcuts first",
+        "body": "AVMeme Exam asks models to interpret audio in multilingual, multicultural contexts and handles non-target shortcuts through text_cheat and visual_cheat. MMEB-V3 instead evaluates external embedding rankings for semantic relevance, requested modality and task coverage. Both require clean evaluation boundaries, but denominators, candidate spaces and outputs differ. Anonymous upload fields and private answer mappings constrain the protocol only. If question text, file permissions or pretraining leak answers, L0 field checks neither rule out contamination nor establish reliable cultural judgment."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/question/cross-cultural-answer-versus-retrieval-interface": {
+      "source_sha256": "ea9e545126568a890406235ce8034218c9790e56d304a091d6ccbc59355595bd",
+      "reviewed": true,
+      "fields": {
+        "question": "If AVMeme's main-split filtering and MMEB-V3's mixed-pool checks pass, does multimodal capability improve?",
+        "answer": "No. Passing checks establishes declared sample and candidate protocols only. Real models, fixed authorized data, complete task metrics and independent comparisons remain necessary. Cultural answering and embedding retrieval must be reported separately; protocol success or a fixture score of one is not capability improvement.",
+        "example": "Teaching example: an always-A callback can pass answer-field isolation without hearing audio. A handwritten ranking can retrieve the right modality without being an encoder prediction."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/update/2026-11-13/3": {
+      "source_sha256": "5a9c15c7351b84314c9742430c329d3e5b9b5ebb0161085180ae32d1e1d80575",
+      "reviewed": true,
+      "fields": {
+        "summary": "Backfill historical Google/Meta-coauthored evaluations, distinguishing cultural answering, embedding ranking and L0 protocols. Full media/model matrices are not reproduced because of cost."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/comparison/multimodal-models:mmeb-v3": {
+      "source_sha256": "eaa33188dfa57c6937f68070ee8c4f11c36bc61bbc2db61f221b86741aec673b",
+      "reviewed": true,
+      "fields": {
+        "position": "A 190-task embedding evaluation is complemented by separate twelve-direction OmniSET diagnostics exposing modality bias among equivalent semantics.",
+        "tradeoff": "MMEB-V3 spans six categories, while MVEB emphasizes video/audio budgets. Hit@1 versus NDCG, full pools and equal task weights must remain explicit. A ranking kernel is not a complete benchmark."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/analysis/5": {
+      "source_sha256": "cf6a6ecbaf6924363b9136c5f5ca137d2746d0ff6bdb10ff97c55e3aa39fe741",
+      "reviewed": true,
+      "fields": {
+        "title": "Semantic alignment and modality adherence are separate acceptance axes",
+        "body": "OmniSET retains semantically equivalent T/I/V/A candidates in one shared pool, including the query itself as a distractor. Correctness requires both semantics and target modality. Target-modality prefiltering removes the collapse it is meant to expose. MVEB emphasizes video tasks, eight retrieval directions and model-specific frame/audio budgets; aggregates are not interchangeable. Both complete matrices are expensive. This round verifies MMEB-V3 scoring only, while MVEB remains review-only rather than disguising a generic aggregator as two complete integrations."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/question/cross-omniset-prefilter-hides-failure": {
+      "source_sha256": "a809f4e3cb01166a3873eaed94080ed2904c76b133f91f69c7647a3e77560c2f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is audio-prefiltering OmniSET unfair even if Hit@1 improves?",
+        "answer": "It changes the task by satisfying output modality on the model's behalf and hides preference for the query itself or another modality. All twelve directions must share the mixed pool. MVEB input-budget controls do not replace this candidate protocol.",
+        "example": "Teaching example: an image-to-audio model always ranks the original image first. Audio filtering makes it appear successful by removing its original instruction-following failure."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/update/2026-11-13/4": {
+      "source_sha256": "f7a6989206a0c26b37c28272bb5551915e2df9b021b504a931a44b6ef0c20327",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add MMEB-V3 shared-pool scoring, equal task weights and explicit NDCG gain, compared with MVEB's budget protocol. Only CPU scoring is verified, not encoder capability."
+      }
+    }
+  }
+}

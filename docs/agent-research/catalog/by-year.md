@@ -152,6 +152,7 @@
 - 2026-09 · [SiLR: Structure-Preserving Admission and Process Reward for LLM Tool Agents](../2609.04629-silr/README.md)（`silr`）：系统已经违规时，安全门不能简单拒绝所有仍不安全的动作，而要允许逐步恢复。SiLR 先 shadow-execute 提案，再比较每个受约束分支的严重度；只有在乘积序上不恶化的动作可进入真实环境，同一结构信号还能作为 GRPO 过程奖励。
 - 2026-09 · [What Does Multi-Harness RL Learn? Credit Assignment and Portability in Coding Agents](../2609.04518-multi-harness-rl/README.md)（`multi-harness-rl`）：多 Harness RL 同时改变了执行环境多样性和 GRPO 的分组边界，难以判断增益来源。论文冻结相同 task-harness 轨迹，只比较组内和跨 harness advantage，并用训练中未见的最小 harness 审计能力是否真正迁移。
 - 2026-08 · [Imagine Before Acting: Prospective Skill Identification for LLM Agents](../../reproductions/2609.01642-skilldreamer/README.md)（`skilldreamer`）：任务描述主要说目标，技能文档主要写程序性知识。直接相似度容易优先找到背景相近、但不能解决当前能力缺口的技能；检索到了也未必会在执行时调用。
+- 2026-08 · [Decoupling Planning and Control for Instructable Agents](../2608.26788-instruct-to-act/README.md)（`instruct-to-act`）：VLM 擅长低频高层规划，但不擅长陌生环境的低延迟动作；world-model controller 能高频动作，却缺开放任务指导。Instruct-to-Act 用稀疏文本指令连接二者，并用自身rollout后标注指令，而非专家示范。
 - 2026-08 · [DeepRepro: State-Aware Subplanning for Paper-to-Code Reproduction in Evolving Repositories](../2608.26557-deeprepro/README.md)（`deeprepro`）：一次性全局计划会在文件、依赖和接口持续变化时失效。DeepRepro 在每个阶段读取当前 repository state 和执行反馈，重写细粒度 subplan，再由 repository-aware orchestration 推进实现。
 - 2026-08 · [RedEvoAgent: Automatic Red-Teaming Agent with Experience-Driven Skill Evolution](../2608.27439-redevoagent/README.md)（`redevoagent`）：RedEvoAgent 不直接检索冗长攻击轨迹，而把跨案例经验蒸馏成可读技能；只归因真正决定成败的工具，并且新技能必须在留出验证集上优于 incumbent 才能晋级。
 - 2026-08 · [SPT: Skills as Pre-Training Data for Agentic Language Models](../2608.26563-spt/README.md)（`spt`）：Agent 轨迹昂贵且只描述一次执行；skill package 则显式编码可复用工作流。SPT 在 post-training 前对 SkillCorpus 做 causal LM mid-training，并把被引用文件插到主说明的首次引用附近。
@@ -223,18 +224,22 @@
 - 2026-05 · [PROMPTS: Performance Optimization via Multi-Agent Planning for LLM Training and Serving](../mlsys2026-prompts/README.md)（`prompts`）：Coordinator、Analyzer 和 Proposal Agent 联合读取 profiler 与知识库，诊断瓶颈并输出可解释的 sharding 候选。
 - 2026-05 · [LiSA: Lifelong Safety Adaptation via Conservative Policy Induction](../2605.14454-lisa/README.md)（`lisa`）：固定安全模型不容易适应组织、用户与情境边界。LiSA 从稀疏且可能有噪声的失败反馈维护两类记忆：可复用的广义策略，以及相似情境中允许/拒绝冲突形成的局部提示。
 - 2026-05 · [Superintelligent Retrieval Agent: The Next Frontier of Agentic Retrieval](../2605.06647-sira/README.md)（`sira`）：冻结 LLM 先生成相关证据可能使用、但原查询缺失的词汇，再用倒排索引中的文档频率过滤不存在或过于常见的词；原查询与验证后的扩展只执行一次加权 BM25。
+- 2026-04 · [Co-Director: Agentic Generative Video Storytelling](../2604.24842-co-director/README.md)（`co-director`）：Co-Director 将生成式视频拆为全局创意方向与局部多模态修正。创意方向有策略 3 类、叙事 3 类、美学 4 类；一次完整视频产生三个战略效果分，各自更新所属轴，而最终视频用独立质量分选择。
 - 2026-04 · [StepPO](../2604.18401-steppo/README.md)（`steppo`）：Agent 的自然决策单位是“观察—动作”的 environment step，token-level MDP 会让动作粒度和信用粒度错位。StepPO 将交互重写为 step-level MDP，在 step boundary 估值和做 GAE，并把 step 内 token ratio 聚合后再裁剪。
+- 2026-04 · [PolicyBank: Evolving Policy Understanding for LLM Agents](../2604.15505-policybank/README.md)（`policybank`）：Agent 可能严格遵守含糊的书面规则，却仍违反真实业务要求。PolicyBank 区分执行失败与 specification–requirement gap，不把“按原规则做了”当成授权正确；目标是部署前根据可信开发反馈修正理解。
 - 2026-04 · [LogAct: Enabling Agentic Reliability via Shared Logs](../2604.07988-logact/README.md)（`logact`）：LogAct 将 Agent 拆成 Driver、Voter、Decider 和 Executor，用持久共享日志记录意图、独立投票、commit/abort和执行结果，只有达到批准条件的已提交动作才能执行。它将安全审查与动作执行解耦，并保留崩溃后的不确定状态；外部副作用恢复仍需要明确的幂等或事务契约，不能只凭对话记录盲目重放。
 - 2026-04 · [SEARL](../2604.07791-searl/README.md)（`searl`）：把工具和成功转移维护为图记忆；新 rollout 同时更新 policy 与图边权，形成经验池—检索—改进闭环。
 - 2026-04 · [CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization](../2604.14214-crop/README.md)（`crop`）：自动提示优化通常根据答错原因不断添加指令，可能使推理越来越长。CROP固定目标模型的权重，在离线优化阶段加入第二条文本反馈：任务评估器指出准确性问题；长度评估器在输出token数超过阈值时，建议逐步删掉叙述性冗余、保留必要计算。
 - 2026-04 · [TFRBench: A Reasoning Benchmark for Evaluating Forecasting Systems](../2604.05364-tfrbench/README.md)（`tfrbench`）：预测值接近真值不保证推理有根据，流畅推理也可能导致错误预测。论文联合 Search、Reason、Forecast、Verify、Summary 构建数值与推理同时合格的参考轨迹。
 - 2026-04 · [PaperOrchestra: A Multi-Agent Framework for Automated AI Research Paper Writing](../2604.05018-paperorchestra/README.md)（`paperorchestra`）：PaperOrchestra 用 Outline、Plotting、Literature Review、Section Writing、Content Refinement 五个 Agent，把零散想法和实验日志转成含文献与图表的 LaTeX 稿件。大纲之后图示与文献检索并行，引用经过实体和时间截止核验，最终根据多维评价接受或回退修订；系统不负责替作者发明或执行新实验。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- 2026-04 · [Analysis of Optimality of Large Language Models on Planning Problems](../2604.02910-planning-optimality/README.md)（`planning-optimality`）：只判断计划能否达到目标，会忽略大量无必要动作。论文把LLM规划评测从validity扩展到optimality，在Blocksworld和抽象P*任务中构造具有已知最优长度的课程，分析推理模型随着难度增长的计划冗余。
 - 2026-03 · [Reasoning-Driven Synthetic Data Generation and Evaluation](../2603.29791-simula/README.md)（`simula`）：单纯扩写种子容易遗漏概念或坍缩到相似样本。Simula 先按因素建立分类树，再控制全局节点组合与局部场景；独立批判过滤样本，并通过批内相对评分校准复杂度。
 - 2026-03 · [AIRA2: Overcoming Bottlenecks in AI Research Agents](../2603.26499-aira2/README.md)（`aira2`）：以无同步屏障的 steady-state worker pool 提高实验吞吐；训练、搜索、最终选择使用固定的 80/10/10 隐藏切分，搜索只看 search score，结束后才用未参与爬山的 validation 选冠军。
 - 2026-03 · [HyperAgents](../2603.19461-hyperagents/README.md)（`hyperagents`）：把任务 Agent 与修改它的 meta Agent 放入同一可编辑程序，并在开放档案中积累变体；父代概率同时奖励当前性能与较少后代的探索价值，使改进机制本身也可继续被改进。
 - 2026-03 · [Memento-Skills](../2603.18743-memento-skills/README.md)（`memento-skills`）：从执行日志反思出结构化技能说明，按任务检索并写回版本化技能，而不是原样堆叠轨迹。
 - 2026-03 · [POLCA: Stochastic Generative Optimization with LLM](../2603.14769-polca/README.md)（`polca`）：随机 minibatch、程序与评估器都会产生噪声。POLCA 不仅保留一次最高分，而是持续更新候选评价历史；Summarizer 形成全局经验，Proposer 利用当前反馈提出参数，语义 epsilon-net 限制冗余候选。
 - 2026-03 · [Dual-Modality Multi-Stage Adversarial Safety Training: Robustifying Multimodal Web Agents Against Cross-Modal Attacks](../2603.04364-dmast/README.md)（`dmast`）：DMAST 让防守 Agent 与攻击者共享同一 VLM 参数，以不同角色提示交互；先教师模仿，再用不改变目标动作的 oracle reasoning 做 SFT，最后进行共享策略自博弈 RL。改动不只是普通 GRPO：受攻击组中两个角色的原始终局奖励共同决定均值与方差，而成功样本的长度惩罚只进入优势分子。
+- 2026-02 · [MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games](../2602.24188-mt-pingeval/README.md)（`mt-pingeval`）：MT-PingEval 用协作游戏检查模型是否真正从交互中获益，而非比较多轮时顺便增加总 token。每名玩家只看到自己的信息，通过对话解决共同任务；原 suite 包含棋局、COVR、图片选择与 Name-game。
 - 2026-02 · [U-Mem](../2602.22406-u-mem/README.md)（`u-mem`）：传统 Agent 记忆通常被动写入和检索，缺少“当前知识不够时主动去哪里找”的决策。U-Mem 将获取过程建模为成本递增的级联：先尝试 self/teacher，再做工具研究，最后请求 expert；检索结合语义相似度与 Thompson sampling，并在写回前验证和整理记忆。
 - 2026-02 · [ConvApparel: A Benchmark Dataset and Validation Framework for User Simulators in Conversational Recommenders](../2602.16938-convapparel/README.md)（`convapparel`）：模拟用户能完成购物目标，不等于像真人。论文将验证拆成三条互补证据：PLSA 比较行为分布；HLS 检查训练过的真假对话判别器能否识别模拟；反事实验证把仅在一种推荐策略下训练的模拟器放到另一策略下。
 - 2026-02 · [Learning Personalized Agents from Human Feedback](../2602.16173-pahf/README.md)（`pahf`）：Agent 在行动前从显式用户记忆检索偏好，未知或低置信时主动澄清；行动后无论当前记忆是否自信，都接收纠正并覆盖过期偏好，从而处理新用户、上下文差异和偏好漂移。
@@ -250,6 +255,7 @@
 ## 2025
 
 - 2025-12 · [SAGE](../2512.17102-sage/README.md)（`sage`）：从成功轨迹抽象技能，失败时修订或淘汰，并以任务回报学习技能检索与复用。
+- 2025-12 · [Learning Steerable Clarification Policies with Collaborative Self-play](../2512.04068-clarification-sgp/README.md)（`clarification-sgp`）：同一条含糊问题可以直接猜、列出多种解释，或先提问。最优方式依赖用户能接受的轮次与篇幅成本。
 - 2025-11 · [Budget-Aware Tool Use Enables Effective Agent Scaling](../2511.17006-bats/README.md)（`bats`）：给 ReAct 更多工具额度不保证它改变探索策略。Budget Tracker 将每个工具已经用掉和剩余的调用次数持续放进上下文。
 - 2025-11 · [Agent0](../2511.16043-agent0/README.md)（`agent0`）：任务生成 Agent 提议可验证工具任务，多个执行 Agent 产生候选并多数投票，课程按当前能力边界升级。
 - 2025-11 · [Agent-R1](../2511.14460-agent-r1/README.md)（`agent-r1`）：把每次 agent/environment 交互作为独立 transition，以可插拔上下文管理、环境接口与优化器支持 token 或 step 级信用。

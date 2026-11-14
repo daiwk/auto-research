@@ -1,0 +1,45 @@
+{
+  "domain": "agent-research",
+  "key": "co-director",
+  "title": "Co-Director: Agentic Generative Video Storytelling",
+  "paper_url": "https://arxiv.org/abs/2604.24842",
+  "reviewed_version": "v1",
+  "reviewed_arxiv_id": "2604.24842v1",
+  "reviewed_version_url": "https://arxiv.org/html/2604.24842v1",
+  "detail_path": "agent-research/2604.24842-co-director/README.md",
+  "topic": [
+    "生成式视频 Agent"
+  ],
+  "published": "2026-04-27",
+  "published_at": "2026-04-27T18:00:00Z",
+  "first_author": "Yale Song",
+  "first_author_affiliation": "Google Inc.",
+  "verified_priority_organizations": [
+    "Google"
+  ],
+  "code": "https://github.com/GoogleCloudPlatform/genmedia-izumi-agent/tree/main/demos/backend/ads_codirector",
+  "code_status": "作者/官方项目链接的仓库已核验公开；本地仅实现固定v1所列子组件，未运行上游完整系统。",
+  "adapter": null,
+  "priority": "P0",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.agent_research.co_director.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.agent_research.co_director import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "review_done": true,
+  "full_experiment_review_done": true,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2604.24842v1",
+    "available_resource": "单张A100/A30或Mac",
+    "basis": "400场景、每场4次完整video pipeline、3次localretry、Gemini3Pro/NanoBananaPro/Veo3.1/TTS/Lyria2；完整商业视频生成高成本不复现。"
+  },
+  "fidelity_note": "以创意策略/叙事/美学三轴factored bandit优化全局方向，配合多模态局部修正。本地只实现推荐冷启动、UCB及分轴reward算术，不生成或评价视频。",
+  "summary": "以创意策略/叙事/美学三轴factored bandit优化全局方向，配合多模态局部修正。本地只实现推荐冷启动、UCB及分轴reward算术，不生成或评价视频。"
+}

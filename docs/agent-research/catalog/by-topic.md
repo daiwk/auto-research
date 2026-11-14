@@ -334,6 +334,10 @@
 - [AlphaEvolve: A coding agent for scientific and algorithmic discovery](../2506.13131-alphaevolve/README.md)（`alphaevolve`）：AlphaEvolve 把有自动评价器的算法改进问题写成程序进化：人类给出任务、初始程序和评价函数，提示采样器提供待改程序、已有高分构造及反馈；Gemini 2.0 Flash/Pro 混合提出代码修改，再由评估节点实际执行。带多维分数的程序进入进化数据库，为下一轮保留高质量和多样化材料。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [MLE-STAR: Machine Learning Engineering Agent via Search and Targeted Refinement](../2506.15692-mle-star/README.md)（`mle-star`）：直接让 LLM 重写整份训练脚本，容易一直使用熟悉的旧模型，又在数据处理、模型选择和调参之间反复跳转。MLE-STAR 先从网络检索任务相关模型与示例代码，实际训练候选并按 validation 指标排序，再逐个尝试合并，只有改进才保留。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
+### 信息澄清与交互决策
+
+- [Learning Steerable Clarification Policies with Collaborative Self-play](../2512.04068-clarification-sgp/README.md)（`clarification-sgp`）：同一条含糊问题可以直接猜、列出多种解释，或先提问。最优方式依赖用户能接受的轮次与篇幅成本。
+
 ### 环境模拟与前瞻决策
 
 - [Janus: Enhancing Long-Horizon Autonomous Research with Co-Evolving World Models](../../reproductions/2610.13194-janus/README.md)（`janus`）：在研究图中先生成未执行提案，再预测价值提升、信息增益和探索收益；稀疏 pairwise tournament 拟合软 Bradley–Terry 分数。执行选中实验后，从成功/失败抽象 intra/cross-task 技能并更新预测、探索、协调协议。
@@ -350,6 +354,14 @@
 ### 元推理与预算控制
 
 - [Thinking Before Thinking: Scaling Agentic Inference Through Meta-Reasoning](../2609.38147-meta-reasoning/README.md)（`meta-reasoning`）：把对象级工作交给 worker，把控制本身拆成 Assess、Propose、Evaluate 和 Dispatch；控制器只携带紧凑状态，通过持久 artifact memory 复用既有工作，并在统一调用预算内决定继续、分叉或停止。
+
+### 多 Agent 协作与通信
+
+- [MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games](../2602.24188-mt-pingeval/README.md)（`mt-pingeval`）：MT-PingEval 用协作游戏检查模型是否真正从交互中获益，而非比较多轮时顺便增加总 token。每名玩家只看到自己的信息，通过对话解决共同任务；原 suite 包含棋局、COVR、图片选择与 Name-game。
+
+### 计划验证与最优性
+
+- [Analysis of Optimality of Large Language Models on Planning Problems](../2604.02910-planning-optimality/README.md)（`planning-optimality`）：只判断计划能否达到目标，会忽略大量无必要动作。论文把LLM规划评测从validity扩展到optimality，在Blocksworld和抽象P*任务中构造具有已知最优长度的课程，分析推理模型随着难度增长的计划冗余。
 
 ### 交替推理与任务分解
 
@@ -394,6 +406,10 @@
 ### 形式化数学与独立验证
 
 - [AutoformBench: A Lean Formalization Benchmark for Advanced Mathematics](../autoformbench/README.md)（`autoformbench`）：AutoformBench 不只要求补一个孤立证明，而是让 Agent 在固定 Lean/Mathlib 上构造支撑高级数学命题的定义、辅助引理和证明。341 个任务来自 24 个数学来源，共有 1,155 个需要完成的证明义务；一个任务只有全部义务均通过可信验证才算成功。
+
+### 创意媒体生成与工具编排
+
+- [Co-Director: Agentic Generative Video Storytelling](../2604.24842-co-director/README.md)（`co-director`）：Co-Director 将生成式视频拆为全局创意方向与局部多模态修正。创意方向有策略 3 类、叙事 3 类、美学 4 类；一次完整视频产生三个战略效果分，各自更新所属轴，而最终视频用独立质量分选择。
 
 ### 专家路由与具身 / 浏览环境
 
@@ -483,6 +499,10 @@
 - [Search-R1](../2503.09516-search-r1/README.md)（`search-r1`）：普通 RAG 一次检索后再回答，无法让策略根据中间证据继续调整查询。Search-R1 把搜索引擎视为环境：模型可在 reasoning 中多次输出搜索动作，环境返回文档后继续推理。
 - [LOOP](../2502.01600-loop/README.md)（`loop`）：长程数字 Agent 的 rollout 昂贵，而传统 PPO 还要维护 value model。LOOP 把 PPO trust region 与 leave-one-out baseline 结合：无需 critic，可对同一批轨迹进行多次更新；逐 token importance ratio 只裁剪漂移 token，不丢弃整条长轨迹。
 
+### 语言指令与具身控制
+
+- [Decoupling Planning and Control for Instructable Agents](../2608.26788-instruct-to-act/README.md)（`instruct-to-act`）：VLM 擅长低频高层规划，但不擅长陌生环境的低延迟动作；world-model controller 能高频动作，却缺开放任务指导。Instruct-to-Act 用稀疏文本指令连接二者，并用自身rollout后标注指令，而非专家示范。
+
 ## 多 Agent 与软件工程
 
 ### 角色协作与软件开发
@@ -565,6 +585,10 @@
 - [MemSkill](../2602.02474-memskill/README.md)（`memskill`）：controller 从历史 episode 选择记忆，designer 将重复成功模式编译为技能，并随新反馈升级技能版本。
 - [SAGE](../2512.17102-sage/README.md)（`sage`）：从成功轨迹抽象技能，失败时修订或淘汰，并以任务回报学习技能检索与复用。
 - [Voyager](../2305.16291-voyager/README.md)（`voyager`）：开放世界 Agent 需要持续选择有新颖性的任务、把成功行为积累为技能，并根据环境报错修复程序。Voyager 用 GPT-4 自动生成 curriculum，以代码作为动作空间；成功程序按描述索引进 skill library，新任务检索并组合已有技能。
+
+### 安全策略记忆
+
+- [PolicyBank: Evolving Policy Understanding for LLM Agents](../2604.15505-policybank/README.md)（`policybank`）：Agent 可能严格遵守含糊的书面规则，却仍违反真实业务要求。PolicyBank 区分执行失败与 specification–requirement gap，不把“按原规则做了”当成授权正确；目标是部署前根据可信开发反馈修正理解。
 
 ### 技能获取、检索与调用
 

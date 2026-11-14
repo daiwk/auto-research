@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "multimodal-models:avmeme-exam": {
+      "questions": [
+        {
+          "id": "main-split-removes-text-shortcuts",
+          "level": "basics",
+          "question": "为什么AVMeme Exam不能只在meme-full上比较模型？",
+          "answer": "完整集中有题目可能不听声音也能猜对。作者用三个纯文本模型识别text_cheat，再形成846条主集；完整集1032条与主集回答不同问题，必须注明分母，不能混报。",
+          "example": "教学例：题目文本已写出流行语出处，纯文本猜对不代表识别了音轨。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界与完整实验"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "shuffle-private-key-and-mask-video",
+          "level": "mechanism",
+          "question": "重排选项与visual_cheat屏蔽分别防什么？",
+          "answer": "重排减弱固定位置偏好，同时必须更新评测端正确字母；visual_cheat屏蔽直接揭露答案的视频。二者不生成正确答案，也不等同消除所有数据污染。",
+          "example": "教学例：正确选项从B移到A后仍按B评分会制造错误；视频字幕写出答案时音视频模式也应移除视频。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界与完整实验"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "cultural-mcq-versus-embedding-retrieval",
+          "level": "comparison",
+          "question": "AVMeme Exam和MMEB-V3都涉及多模态，能直接比较总分吗？",
+          "answer": "不能。前者是文化情境多选正确率，后者是嵌入检索Hit@1/NDCG与任务聚合。不同输出、候选空间、分母和模型接口不能混为同一个多模态能力分数。",
+          "example": "教学例：音频梗选对一个文化用法，与在全模态候选池找对音频文档不是同一任务。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界与完整实验"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "typed-request-is-not-sandbox",
+          "level": "implementation",
+          "question": "ActorRequest不含答案，是否就能保证没有泄漏？",
+          "answer": "不能。它只限制正常回调的数据字段，调用方仍可能通过文件权限、闭包或问题文本泄漏答案。需独立进程/权限审计；本地固定A夹具只验证协议，不报告模型能力。",
+          "example": "教学例：把ScoringKey留在被测进程可读的全局变量中，字段再干净也不隔离。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界与完整实验"
+          ],
+          "added": "2026-11-13"
+        }
+      ]
+    },
+    "multimodal-models:mmeb-v3": {
+      "questions": [
+        {
+          "id": "six-categories-not-one-metric",
+          "level": "basics",
+          "question": "MMEB-V3为什么不能所有任务都套Hit@1？",
+          "answer": "音频、图像、视频、Agent使用Hit@1；文本和视觉文档用NDCG@5以保留排序及分级相关性。类别内按任务等权，不是把全部查询混成一个分母。",
+          "example": "教学例：一项一万查询的任务不能自动获得一项一百查询任务的百倍权重。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界与完整实验"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "omniset-shared-pool-self-distractor",
+          "level": "mechanism",
+          "question": "OmniSET为什么保留查询本身，还不能先筛目标模态？",
+          "answer": "目标是同时验证语义和所请求的输出模态。查询本身是同语义错误模态干扰项，12方向共享混合池；预筛目标模态会隐藏模型忽略模态指令的失败。",
+          "example": "教学例：图像查音频时把同一图像排第一，语义正确但模态错，应记0。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界与完整实验"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "mmeb-versus-mveb-budget-and-purpose",
+          "level": "comparison",
+          "question": "MMEB-V3与MVEB都做嵌入评测，侧重点有什么区别？",
+          "answer": "MMEB-V3覆盖六类并以OmniSET诊断模态遵循；MVEB深入视频分类、聚类和八方向检索，并约束帧/音频预算。任务、候选和输入预算不同，不能把一方总分或局部核当另一方结果。",
+          "example": "教学例：固定64帧上限的视频实验与混合TIVA候选池诊断控制的变量不同。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界与完整实验"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "explicit-gain-and-exact-task-coverage",
+          "level": "implementation",
+          "question": "本地为何要求显式gain和完整任务清单？",
+          "answer": "固定上游同时输出线性及指数NDCG，擅选会悄悄改变分数；任务缺失也会抬高或降低平均值。API强制gain和预期任务精确匹配，仍不证明外部排序来自真实模型。",
+          "example": "教学例：删掉一个困难任务后报告其余均值，不能叫完整类别成绩；fixture排序即使得1也不是模型实测。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界与完整实验"
+          ],
+          "added": "2026-11-13"
+        }
+      ]
+    }
+  }
+}

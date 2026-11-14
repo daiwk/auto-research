@@ -77,9 +77,17 @@
 - [Convolution for Large Language Models](../../reproductions/2607.18413-conv-llm/README.md)（`conv-llm`）：自注意力擅长全局依赖，却没有显式的短程归纳偏置。论文固定 Qwen3 主干，系统比较 17 个卷积插入位置，最终选择在 Q/K/V 线性投影后、attention 聚合前加入 `kernel=3` 的逐通道一维卷积；残差旁路保留原投影，不加归一化或激活，额外参数低于 `0.01%`。
 - [Byte Latent Transformer: Patches Scale Better Than Tokens](../../reproductions/2412.09871-blt/README.md)（`blt`）：直接处理 byte，并依据 next-byte entropy 动态形成 patch；全局 Transformer 在 patch 级计算，局部编码器/解码器恢复 byte。
 
+### 检索与生成共享表征
+
+- [A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation](../../foundation-models/2604.14403-ecg-rag/README.md)（`ecg-rag`）：设备端RAG既要控制文档索引磁盘占用，也要限制生成时的上下文/KV开销。ECG不是简单把检索器输出拼进prompt，而是只存一份多向量检索表示，再经投影转成同一decoder可消费的压缩上下文，避免独立检索向量和压缩向量重复存储。
+
 ### 生成专家与鲁棒门控
 
 - [A Theoretical Framework for Modular Learning of Robust Generative Models](../../foundation-models/2602.17554-modular-robust-generative/README.md)（`modular-robust-generative`）：以冻结生成专家为基础，优化面对最差数据域的输入相关 gate。核心不是专家均值：逐输入 softmax **不保证整个生成分布积分为一**，必须额外约束全局质量。另将非因果教师采样轨迹蒸馏到只读前缀的因果 router。[§5.2、§6、§7.3](https://arxiv.org/html/2602.17554v1#S5.SS2) 给出实施过程。
+
+### 深度生长与层复制
+
+- [Do Depth-Grown Models Overcome the Curse of Depth? An In-Depth Analysis](../../foundation-models/2512.08819-lidas/README.md)（`lidas`）：深层 Transformer 后半段可能对最终预测贡献很小。论文比较从浅到深逐步生长与固定深度预训练，并提出 LIDAS：以层而不是固定块的中点选择复制区域，使偶数块时的初始化区别于 MIDAS。
 
 ### 机制解释与主题模型
 
@@ -232,6 +240,10 @@
 
 - [Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories](../../foundation-models/2606.03979-sleep-lti/README.md)（`sleep-lti`）：上下文结束会丢失短期知识，直接更新基础权重又可能覆盖旧知识。Sleep在活跃学习之外增加离线巩固：多频率记忆模块间先计算未来基础更新但不应用，再扩展低秩专家、用更新前教师巩固到拟更新学生，最后应用更新并清理发送层专家。
 
+### 合成数据与隐私评测
+
+- [ContinuousBench: Can Differentially Private Synthetic Text Improve Capabilities?](../../foundation-models/2606.01849-continuousbench/README.md)（`continuousbench`）：若benchmark已经被基座模型做得很好，合成数据是否真正传递新知识就难以区分。ContinuousBench定期生成或整理未见知识语料及相应QA，统一训练/evaluator设置，并与未经该语料训练的同一基座比较；关注高重复公共事实的utility，不要求DP模型记住单条私有记录。
+
 ### 企业数据与领域适配
 
 - [Customizing an LLM for Enterprise Software Engineering](../../foundation-models/2605.16517-gemini-for-google/README.md)（`gemini-for-google`）：从企业开发历史中提取高价值代码与交互信号，经过去重、质量过滤和污染控制形成中训练数据；用通用数据回放抑制灾难性遗忘，再做面向内部工具的后训练和部署评测。
@@ -239,6 +251,10 @@
 ### 预训练与后训练协同
 
 - [Theoretical Perspectives on Data Quality and Synergistic Effects in Pre- and Post-Training Reasoning Models](../../foundation-models/2603.01293-data-quality-lsa/README.md)（`data-quality-lsa`）：以 in-context 线性回归的权重预测分析预训练与后训练数据协方差。SFT 使用教师中间状态，OS 仅监督最终预测；原文明确 OS 是 outcome-supervised regression，**不是包含采样、优势估计和 policy gradient 的完整 RL**。[§3、§4](https://arxiv.org/html/2603.01293v1#S3) 给出线性注意力结构及闭式解。
+
+### 跨语言知识迁移与表征统一
+
+- [Beyond the Rosetta Stone: Unification Forces in Generalization Dynamics](../../foundation-models/2508.11017-rosetta-unification/README.md)（`rosetta-unification`）：同一事实以不同语言出现时，模型可能把它们存成互不相通的表征。作者在受控合成知识图谱上从零训练小型 Transformer，分别改变平行事实比例、语言频率差异和语言可提取性，发现同语言准确率接近满分并不代表跨语言迁移良好。
 
 ### 优化器与训练效率
 
@@ -516,9 +532,34 @@
 
 - [FUSE: Ensembling Verifiers with Zero Labeled Data](../../foundation-models/2604.18547-fuse-verifiers/README.md)（`fuse-verifiers`）：多个验证器并不独立，直接平均可能让相关错误相互放大。FUSE 只读取候选分数矩阵，通过二、三阶矩估计查询条件下的验证器质量，选择能缓解相关性的分数变换，再构造正确后验并优化集成器；真实正确标签只用于独立评估。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
+### 随机性与统计可靠性评测
+
+- [The Illusion of Stochasticity in LLMs](../../foundation-models/2604.06543-llm-stochasticity/README.md)（`llm-stochasticity`）：要求LLM“随机选一个数”不等价于访问可靠随机源。论文比较不同模型、离散/连续目标分布、逐次和批量提示，发现明显类别偏好、历史排斥和周期性；看起来均匀的直方图也可能来自确定性序列。
+
+### 可解释生成文本检测
+
+- [StoryScope: Investigating idiosyncrasies in AI fiction](../../foundation-models/2604.03136-storyscope/README.md)（`storyscope`）：作者身份检测常抓词汇或句长，却无法解释故事怎样组织主题、角色、时间和冲突。StoryScope 先把平行故事改为结构化叙事模板，在同一写作 prompt 的人类/五个模型之间比较，再归纳特征、去重、批量赋值。随后用分类器与 bootstrap SHAP 区分跨模型的人类–AI核心和特定模型指纹。
+
+### 参数知识召回与潜在泛化
+
+- [Improving Latent Generalization Using Test-time Compute](../../foundation-models/2604.01430-latent-generalization/README.md)（`latent-generalization`）：模型记住 A>B 并不必然推出 B<A，记住多个关系也不保证能答出未显式训练的组合。论文把知识获取、会思考的轨迹引导、正确性RL分开，研究在一个结构训练出的推理能力能否迁移到仅做知识SFT的另一个结构。
+- [Thinking to Recall: How Reasoning Unlocks Parametric Knowledge in LLMs](../../foundation-models/2603.09906-thinking-to-recall/README.md)（`thinking-to-recall`）：推理不仅可能分解复杂任务，也可能通过额外计算和相关事实的自检索帮助单跳知识召回。论文控制同一 hybrid 模型的 reasoning ON/OFF，区分计算缓冲与 factual priming，同时发现中间事实幻觉会连带增加最终答案错误。
+
+### 近逐字提取风险
+
+- [Estimating near-verbatim extraction risk in language models with decoding-constrained beam search](../../foundation-models/2603.24917-decoding-constrained-beam/README.md)（`decoding-constrained-beam`）：只检查 greedy 是否生成训练原文，会漏掉许多单条概率不大、合计概率却很高的近逐字变体。普通 beam 的模型 softmax 分数也不等于实际 top-k 解码分布下的概率。本文把解码约束纳入每一步归一化，枚举部分高概率路径，对与目标后缀接近的路径求和得到确定性下界。
+
+### 可解释文化表征与干预
+
+- [Steering LLMs for Culturally Localized Generation](../../foundation-models/2603.23301-cultural-cue/README.md)（`cultural-cue`）：文化定位失败可能是知识缺失，也可能是已有知识不易被提示词唤起。CuE 从预训练 SAE 的稀疏特征中寻找与国家标签相关的维度，建立可解释文化原型，再沿目标文化相对其他文化的差向量干预残差流。国家只是论文采用的文化代理，不能把国家均值当成每个个体的价值观。
+
 ### 生成式检索与结构化决策
 
 - [Efficient, Property-Aligned Fan-Out Retrieval via RL-Compiled Diffusion](../../foundation-models/2603.06397-r4t/README.md)（`r4t`）：先以集合级复合奖励产生对齐目标，再把目标编译到单次扩散式 fan-out 检索器。
+
+### 翻译指标与长度偏差
+
+- [Penalizing Length: Uncovering Systematic Bias in Quality Estimation Metrics](../../foundation-models/2510.22028-qe-length-normalization/README.md)（`qe-length-normalization`）：同样没有翻译错误，较长译文却被质量估计器判得更差，会把 reranking 和基于评分的训练导向短答案。本文不把长度和真实质量相关性混在一起：对同一文档的连续金标准段落构造一至五段的前缀，尽量固定领域和质量，再观察评分漂移。
 
 ### 生成水印与编辑检测
 

@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "adapter_key": "behavioral-canaries",
+  "validated_at": "2026-11-13",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB",
+    "count": 1
+  },
+  "command": [
+    "timeout",
+    "180",
+    "python3",
+    "scripts/run_nov13_colm_components.py",
+    "--device",
+    "cuda",
+    "--source-commit",
+    "1b7fe8699efd48e6421b01f6df756d6e4086eb52",
+    "--output",
+    "raw-cuda.json"
+  ],
+  "dataset": {
+    "id": "synthetic:colm-behavioral-canaries-component-v1",
+    "revision": "sha256:76cf87e2424bae656117d5fa35cf1bdfc3a4fc6fecd1d7ad61620c2889d69174",
+    "recipe": "Seeded tensors or explicit evaluator/control examples; no pretrained output, public dataset or model capability score",
+    "capability_benchmark": false
+  },
+  "checkpoint": {
+    "public_id": "none-seeded-component-initialization",
+    "revision": "1b7fe8699efd48e6421b01f6df756d6e4086eb52",
+    "pretrained": false
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "result": "passed",
+  "metrics": {
+    "pretrained_model_calls": 0.0,
+    "synthetic_amplification": 2.9481709241526057,
+    "trained_policies": 0.0,
+    "zero_control_amplification": 0.0
+  },
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "provenance": {
+    "commit": "1b7fe8699efd48e6421b01f6df756d6e4086eb52",
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "artifact_path": "docs/gpu-validations/behavioral-canaries-a100-20261113.json",
+    "executed_source_sha256": {
+      "scripts/run_nov13_colm_components.py": "a7a7420b47bdd9a34321846e535f4382a42d42ca03c94fe7772facca9b97892c",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "docs/research-audits/nov13-colm-remaining/preflight.json": "36667fa334aea3fb9141416ef12677c47cf93711e36e47993ee0543b4e885848",
+      "src/auto_research/foundation_models/rosetta_unification.py": "b27190f76ff2bd482f473486a6be4b8aa0d69564f9cd9311d7d4133cdd6cef60",
+      "src/auto_research/foundation_models/lidas.py": "ef7a496201c9f8f59af5d5bb0efc2ff728cdbe38821fdf80b62a4d5c47c67b64",
+      "src/auto_research/foundation_models/thinking_to_recall.py": "8f7ff5a0324c18b612fb25d4232aac998d37ef9d8957b8b60c4217ad1bc36c4e",
+      "src/auto_research/foundation_models/latent_generalization.py": "7fd61edabf36dbc420e270eb1092d4d71a9b34dce7bb68be25ab7729d7d9f04a",
+      "src/auto_research/agent_research/planning_optimality.py": "07cd3ab4c9e2db0e1c1564c0410e044341601cbc17d358d9227e4fa80a371189",
+      "src/auto_research/foundation_models/llm_stochasticity.py": "0445584730e405cb0c3b00be027cb099239a4c9c89ef5bc7f0f105e2ceff425f",
+      "src/auto_research/foundation_models/ecg_rag.py": "21e27bf9553af2dafaed1b240c55ff5be9eff9afdaf3d7f1fbe4a4b9e0a5daaa",
+      "src/auto_research/foundation_models/continuousbench.py": "d6ebbad425df69292e03387e4cdd9e738cbec5e9f056d4e832180fdb00b81180",
+      "src/auto_research/agent_research/clarification_sgp.py": "2c52e8f6f123de952112b878daf1e4fa76919b99ae1d5d0761e4878acf4d6ce4",
+      "src/auto_research/post_training/social_meta_learning.py": "d4b4f2ba9be58b83f39ecc1054219b347387ecdf50c2e100c32c0b6d07cb8b96",
+      "src/auto_research/agent_research/mt_pingeval.py": "631a31c0573327c9a71899314b147b9f7d1ece0e546bbac8a64889723d7bd2da",
+      "src/auto_research/post_training/maple_icl.py": "883f7bc6be631768bea138d53608002ce3023243ccecd2a327f61ced291cfeed",
+      "src/auto_research/agent_research/policybank.py": "ba641735f3645965ca82cdcc9653dbc384329c35c9292ef10dcb2baa8e4c343b",
+      "src/auto_research/agent_research/co_director.py": "2022749148497a432bbfc250dd455c5696bc19151ed778731c39bcbc967b0810",
+      "src/auto_research/agent_research/instruct_to_act.py": "e4e048a95e592f5c28ac108b32a5087a2a03af1c47304d69379109791753b83d",
+      "src/auto_research/foundation_models/qe_length_normalization.py": "daffd9781f4d1796b02c8af52a3f086e0a9913b9b2f9d752b7f1936261c8fe9a",
+      "src/auto_research/foundation_models/cultural_cue.py": "3988b6983c0d6c5e8060e0762da9eec488f6556118a95d038e806a324ce04e31",
+      "src/auto_research/foundation_models/decoding_constrained_beam.py": "55ece33c1534d320ad3c78826a7871eb6cbdbb419cd72c192ef08861db0e4519",
+      "src/auto_research/foundation_models/storyscope.py": "d7ecf53e834b2f9061f34a17f814f59de2c174f8d4ea8cb910f345170212a6f1",
+      "src/auto_research/post_training/behavioral_canaries.py": "76cf87e2424bae656117d5fa35cf1bdfc3a4fc6fecd1d7ad61620c2889d69174",
+      "src/auto_research/post_training/rlmf.py": "5c99b3e291e1b2f712d8ec76c632f83c2814cbd0e460ca102f2a89b6763f3b03",
+      "src/auto_research/multimodal/avmeme_exam.py": "557d9e6dbff97a9ef1befacc864cc95fe69d83308c15ac2dd4c3f17103a24a89",
+      "src/auto_research/multimodal/mmeb_v3.py": "c33d34bd6a224ee8897352547dc483786a63a64879b1916b1395e8d0af3b29ca"
+    },
+    "dataset_fingerprint": "sha256:bdf048f0d0573b0544e4437a75b3ec55bcf7898c80e95f38490ad62c218ae064",
+    "raw_runner_artifact_sha256": "e8fce700fa334909d6ccf9c3592f15551f0077ca1b2bb32798dc8e54a30db2fc",
+    "metric_artifact_path": "docs/post-training/2604.22191-behavioral-canaries/metrics/component-cuda-seeds42-44.json"
+  }
+}

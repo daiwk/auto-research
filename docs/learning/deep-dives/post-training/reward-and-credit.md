@@ -7,7 +7,7 @@ hide:
 
 # 奖励从哪里来，信用才该分到哪里
 
-[LLM 后训练](../index.md) · 更新 2026-11-11 · 41 篇主题资料 / 11 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-13 · 42 篇主题资料 / 12 篇重点对照
 
 过程标签、最终结果、模型自置信与回溯归因是不同证据。逐步PRM、MRTPO、TACO和MART-GRPO分别做标签获取、奖励定位、正信用降权和失败后缀过滤；INTUITOR则改用内在分布信号，不能把它当外部正确性验证器。 CONCUR另处理奖励维度之间的优先级，把门控辅助优势投影到主奖励保序锥；这不是沿时间轴分配token信用。
 
@@ -36,6 +36,7 @@ hide:
 | [EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL](../../../post-training/2611.06518-emoreward/README.md) · [原始来源](https://arxiv.org/abs/2611.06518)<br>章节：背景与主要改动、核心公式、诊断与边界 | 先用当前视频的有效证据门控决定哪些评分能进入融合，再用完成轮的原始分数与结果相关性倾斜各通道权重。训练轮之间拟合一次，下一轮只读。 | 需要已完成的参考轮，相关性依赖 VideoAlign 代理结果，不等同于独立情绪偏好。CPU 只验收分配，未运行视觉评分器或完整生成训练。 |
 | [MaxIM: Maximally Informative Incremental Summarization via Reinforcement Learning](../../../post-training/2611.12825-maxim/README.md) · [原始来源](https://arxiv.org/abs/2611.12825v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 以冻结critic的conditional/null teacher-forced log-ratio分别测摘要的目标信息与前向历史支持，再经中心化sigmoid、1-gamma尺度与退火构成跨turn return。 | 生成奖励信号而非重分配已有token信用；特权目标只能用于奖励端，不得给被评估摘要器读。近似critic与非线性shaping不是事实或最优策略保证；本地不训练Gemini。 |
 | [Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards](../../../post-training/2611.14015-mcpo/README.md) · [原始来源](https://arxiv.org/abs/2611.14015v1)<br>章节：核心公式、原文结果与限制、结果、负控与边界 | 用温度后old-policy top1-top2 margin构造截断线性不确定度，按优势符号指数加权，再按响应内有效token均值归一，保持平均序列优势。 | 负优势时不确定token少受罚，非band-pass、非额外verifier。原文更长生成与缺length-matched对照限制因果解释；Qwen三数据种子的p=.083不应写成显著胜出。 |
+| [Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs](../../../post-training/2606.32032-rlmf/README.md) · [原始来源](https://arxiv.org/abs/2606.32032v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射 | 按模型自评FC的质量，仅放大高于组均值的completion级faithfulness项；其他奖励中心化项不变。 | Residual Advantage从同词表师生概率差产生token局部优势，再按响应中心化并加验证器优势。元认知Z不是师生概率残差；RLMF不再居中，也没有执行RA/Co-RA教师更新。 |
 
 </div>
 
@@ -76,6 +77,12 @@ EmoReward 在评分通道维度校准一个视频标量，靠本次有效性与�
 MaxIM先定义任务信息与事实一致性怎样成为可用奖励；MCPO接受已有序列优势，只改变局部token的相对权重。MCPO的响应均值守恒不能修复一个错误critic，MaxIM的critic也不会自动给出正确token归因。比较时应分别检查奖励端有没有特权泄漏、token端是old policy还是current policy，以及生成长度是否改变实际预算。
 
 对照来源：[maxim](../../../post-training/2611.12825-maxim/README.md) · [mcpo](../../../post-training/2611.14015-mcpo/README.md)
+
+### completion级自评信用与token级师生残差不能合并成一个“额外奖励”
+
+RLMF先将忠实度与其他约束分开中心化，再用自评与实际FC的一致性提高正忠实度分量；放大后组均值可以不为零。Residual Advantage读取同词表教师/学生分布，以学生期望作为局部残差基线，之后在响应位置中心化并叠加验证器优势；Co-RA又在固定已评分批次上更新教师、下一轮才使用。把Z加成奖励、给token残差直接乘整个RLMF优势，或把RLMF最后再中心化，都不是原公式。两种组件来源、信用单位、更新顺序和验收证据应分别保存；RA的短checkpoint烟测也不替本轮RLMF完成训练。
+
+对照来源：[rlmf](../../../post-training/2606.32032-rlmf/README.md) · [residual-advantage](../../../post-training/2610.11519-residual-advantage/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -151,9 +158,23 @@ MaxIM先定义任务信息与事实一致性怎样成为可用奖励；MCPO接�
 
     对照来源：[maxim](../../../post-training/2611.12825-maxim/README.md) · [mcpo](../../../post-training/2611.14015-mcpo/README.md)
 
+### RLMF的元认知Z和Residual Advantage的师生残差能否作为同一种token奖励直接相加？ {#cross-cross-rlmf-versus-dr-grpo}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。Z来自completion自评FC误差，只调正faithfulness组偏差；RA读取逐token全词表q−p、减学生期望后再按响应中心化，最后加验证器优势。它们的单位和中心化不同，组合需另行定义并验证，不能冒称原方法。
+
+    **教学例子：** 教学例：RLMF对f=[0,1,2]和o=[1,0,−1]、Z=1得到[0,0,1]，均值1/3；RA的一个响应残差[0.2,−0.2]均值为0。把两者都强制归零会改掉前者。
+
+    对照来源：[rlmf](../../../post-training/2606.32032-rlmf/README.md) · [residual-advantage](../../../post-training/2610.11519-residual-advantage/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-13** · 改为同卡片RA的token师生残差与RLMF的completion自评信用比较，保留各自中心化、教师更新时序和L1/短训练证据边界。
+
+涉及：[rlmf](../../../post-training/2606.32032-rlmf/README.md) · [residual-advantage](../../../post-training/2610.11519-residual-advantage/README.md)
 
 **2026-11-11** · 加入 Google MaxIM 与 PayPal MCPO，区分奖励产生、前向grounding和token信用重分配；保留MCPO负优势方向、均值守恒及长度/显著性限制。仅L1 CPU核，完整Gemini/长rollout实验按成本不复现。
 
@@ -175,7 +196,7 @@ MaxIM先定义任务信息与事实一致性怎样成为可用奖励；MCPO接�
 
 覆盖 36 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 41 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 42 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -220,6 +241,7 @@ MaxIM先定义任务信息与事实一致性怎样成为可用奖励；MCPO接�
 - [CONCUR: Concordant Auxiliary Rewards for Multi-Task, Multi-Reward Reinforcement Learning](../../../post-training/2610.36437-concur/README.md)
 - [MaxIM: Maximally Informative Incremental Summarization via Reinforcement Learning](../../../post-training/2611.12825-maxim/README.md)
 - [Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards](../../../post-training/2611.14015-mcpo/README.md)
+- [Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs](../../../post-training/2606.32032-rlmf/README.md)
 
 </details>
 

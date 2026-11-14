@@ -26,7 +26,9 @@
 | 生成辅助监督与理解增强 | [Generation as Auxiliary Supervision: Enhancing Visual Understanding at Zero Inference Overhead via Decoupled Embedding Prediction](../reproductions/2608.12209-gas/README.md) | ByteDance，2026-08-12 | `gas` |
 | 多实例编辑与注意力隔离 | [Editing Everything Everywhere All at Once](../multimodal-models/2606.31278-mice/README.md) | University of Modena and Reggio Emilia，2026-06-30 | `mice` |
 | 视频嵌入统一评测 | [MVEB: Massive Video Embedding Benchmark](../multimodal-models/2606.14958-mveb/README.md) | Harvard University，2026-06-12 | 未复现（高成本资料） |
+| 全模态嵌入与模态遵循 | [MMEB-V3: Measuring the Performance Gaps of Omni-Modality Embedding Models](../multimodal-models/2604.23321-mmeb-v3/README.md) | Eastern Institute of Technology, Ningbo，2026-04-25 | `mmeb-v3` |
 | 低资源语音翻译评测 | [NaijaS2ST: A Multi-Accent Benchmark for Speech-to-Speech Translation in Low-Resource Nigerian Languages](../multimodal-models/2604.16287-naijas2st/README.md) | Mila - Quebec AI Institute，2026-04-17 | 未复现（高成本资料） |
+| 音视频文化理解评测 | [AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs' Contextual and Cultural Knowledge and Thinking](../multimodal-models/2601.17645-avmeme-exam/README.md) | Columbia University，2026-01-25 | `avmeme-exam` |
 | 高效视觉 token 压缩 | [SmolVLM: Redefining small and efficient multimodal models](../reproductions/2504.05299-smolvlm/README.md) | Hugging Face，2025-04-07 | `smolvlm` |
 | 对比预训练与自蒸馏 | [SigLIP 2: Multilingual Vision-Language Encoders with Improved Semantic Understanding, Localization, and Dense Features](../reproductions/2502.14786-siglip2/README.md) | Google DeepMind，2025-02-20 | `siglip2` |
 | 视觉 token 与跨模态检索 | [Visual Instruction Tuning](../reproductions/2304.08485-llava/README.md) | University of Wisconsin-Madison，2023-04-17 | `llava` |

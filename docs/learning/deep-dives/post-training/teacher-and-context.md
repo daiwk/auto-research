@@ -7,7 +7,7 @@ hide:
 
 # 教师更强仍可能教错：信息、兼容性与成功行为保护
 
-[LLM 后训练](../index.md) · 更新 2026-11-12 · 52 篇主题资料 / 11 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-13 · 54 篇主题资料 / 13 篇重点对照
 
 教师的价值不只取决于总分。OPSD改变训练期可见信息，MOPD与逐token路由组织多教师，CSD先统一概率事件，SPOD保护学生已成功选择，VAD筛出可归于视觉证据的修正；这些约束要在模仿之前分别成立。
 
@@ -36,6 +36,8 @@ hide:
 | [RAGCompass: Generalizable Retriever Routing via Reranking](../../../post-training/2611.05596-ragcompass/README.md) · [原始来源](https://arxiv.org/abs/2611.05596v1)<br>章节：核心公式、数据协议与代码映射 | RAGCompass 把每组检索证据交给同一个 reranker；将固定 reader 的离线答案 F1 软化为整组候选的监督分布，优化候选集 KL。 | 不需要检索器 ID 或相互不可比的置信度，但训练标签依赖固定 reader 与有参考答案的离线数据。推理只比较分数，不用真实 F1 或筛选 gap。 |
 | [Bootstrapped On-Policy Distillation](../../../post-training/2611.13680-bopd/README.md) · [原始来源](https://arxiv.org/abs/2611.13680v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 先由reference-conditioned冻结M0构造中间M1，再冻结M1并移除reference，向从M0精确恢复、使用新optimizer的学生做teacher→student FKL。 | 不同于持续特权视图OPSD，reset的是学生与optimizer，教师则保留已学参数；本地仅真实FKL/handoff，不含LM rollout或原文未可审核的pointwise clipping。空作者仓库不记为已开源实现。 |
 | [Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation](../../../post-training/2611.13135-lcs-reference-opd/README.md) · [原始来源](https://arxiv.org/abs/2611.13135v1)<br>章节：核心公式、数据协议与代码映射、结果、负控与边界 | 按同任务完整动作LCS选最兼容成功reference，free-target OT独立argmax且允许复用；只更新失败episode，无引用时reference-free，ALFWorld/tau3分别使用不同归一化。 | 不同于SPOD只在成功episode内保护teacher较不支持的action，这里整条成功轨迹不更新。LCS状态解释需要可恢复绕行，不是潜状态等价；本地没有Agent/OPD trainer，4500A100小时完整矩阵不复现。 |
+| [Learning to Learn from Language Feedback with Social Meta-Learning](../../../post-training/2602.16488-social-meta-learning/README.md) · [原始来源](https://arxiv.org/abs/2602.16488)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界 | 把teacher反馈放进公开多轮历史，以成功轨迹student-only SFT或在线RL训练反馈利用，并另用Qpriming教提问。 | OPSD用特权教师分布监督学生前缀，SML让教师通过对话转移信息；两者的额外知识都不能泄漏给评测student。本地只实现SML离线目标。 |
+| [Behavioral Canaries: Auditing Private Retrieved Context Usage in RL Fine-Tuning](../../../post-training/2604.22191-behavioral-canaries/README.md) · [原始来源](https://arxiv.org/abs/2604.22191v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射 | 用held-out clean/trigger文档对的canary序列logprob差测条件行为影响，再按独立训练策略统计。 | RAGCompass的答案F1只作离线路由蒸馏监督，运行时scorer不读gold；Canaries的配对目标属于审计测量，不能据此给actor答案，也不把有用证据或单次风格变化判作违规。 |
 
 </div>
 
@@ -82,6 +84,18 @@ OPSD让教师额外读取验证解，学生只见自身前缀；BOPD先把这种
 LCS reference方法先排除全部成功学生episode，再为失败者选同任务引用并校正；SPOD仍可训练成功episode，只对teacher完整action概率低于student的decision取消KL并加软floor。前者还改变reference信息来源，后者改变action级监督。不能把二者统称success mask后混用分母、概率条件和更新门控，且训练用成功reference都不应暴露给被评估学生。
 
 对照来源：[lcs-reference-opd](../../../post-training/2611.13135-lcs-reference-opd/README.md) · [spod](../../../post-training/2610.25034-spod/README.md)
+
+### 特权知识经分布蒸馏还是经语言反馈，会改变训练与泄漏边界
+
+OPSD的教师额外看验证答案，并在学生到达的前缀提供稠密分布。SML的student看teacher公开回复，外层才优化未来的互动方式；Qpriming合成训练问题时可用私有知识，不代表测试可读gold。成功student token屏蔽只是训练算子正确性，缺失完整对话与backbone时不能声称已学会问问题。
+
+对照来源：[social-meta-learning](../../../post-training/2602.16488-social-meta-learning/README.md) · [opsd](../../../post-training/2601.18734-opsd/README.md)
+
+### 检索证据有助回答，与证据是否进入后训练，是不同问题
+
+RAGCompass从各检索器证据组带来的答案效用构造候选分布，训练可泛化的路由scorer；真实推理只用其分数选组，不能继续看参考答案。Behavioral Canaries则控制文档trigger、问题和答案前缀，观察已训练策略的目标风格概率变化，回答的是训练条件影响而非路由优劣。效用、数据使用权限和可测影响不能互相替代：许可取决于真实约定，弱行为信号也不是某份文档违规的证明。两者都必须保存离线标签与运行/审计接口的界线，并防止把重复题目当独立策略。
+
+对照来源：[behavioral-canaries](../../../post-training/2604.22191-behavioral-canaries/README.md) · [ragcompass](../../../post-training/2611.05596-ragcompass/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -177,9 +191,37 @@ LCS reference方法先排除全部成功学生episode，再为失败者选同任
 
     对照来源：[lcs-reference-opd](../../../post-training/2611.13135-lcs-reference-opd/README.md) · [spod](../../../post-training/2610.25034-spod/README.md)
 
+### OPSD和SML都让teacher有额外知识，就能把这些知识直接交给被评student吗？ {#cross-cross-colm-social-meta-learning}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。OPSD训练时以特权教师分布监督学生前缀；SML通过公开teacher回复提供反馈。两者都必须保留student观测边界，训练教师持有答案不意味着测试student可读gold。
+
+    **教学例子：** 教学例：用答案生成训练提示，与在测试请求里放隐藏解题字段，是不同的数据流。
+
+    对照来源：[social-meta-learning](../../../post-training/2602.16488-social-meta-learning/README.md) · [opsd](../../../post-training/2601.18734-opsd/README.md)
+
+### RAGCompass找到更有用的检索证据，能否说明这些文档被允许用于RL训练，或已经被用于训练？ {#cross-cross-behavior-audit-versus-rm-memorization}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。它的离线F1监督衡量回答效用，运行时路由不读gold；使用权限来自真实约定，训练影响还需要独立审计。Behavioral Canaries测同策略的clean/trigger条件差，也不凭一项变化证明单文档违规。
+
+    **教学例子：** 教学例：两组证据答案F1为0.8和0.5可形成路由监督，却不给文档使用许可；另一项canary logprob差0.1是条件影响观测，不是“该路由更好”或“该文件已被训练”的判决。
+
+    对照来源：[behavioral-canaries](../../../post-training/2604.22191-behavioral-canaries/README.md) · [ragcompass](../../../post-training/2611.05596-ragcompass/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-13** · 改为同卡片RAGCompass的离线效用监督与条件行为审计对照，明确gold只用于离线目标、文档许可与单文档证明边界。
+
+涉及：[behavioral-canaries](../../../post-training/2604.22191-behavioral-canaries/README.md) · [ragcompass](../../../post-training/2611.05596-ragcompass/README.md)
+
+**2026-11-13** · 补入social-meta-learning历史遗漏，把teacher反馈放进公开多轮历史，以成功轨迹student-only SFT或在线RL训练反馈利用，并另用Qpriming教提问。 OPSD用特权教师分布监督学生前缀，SML让教师通过对话转移信息；两者的额外知识都不能泄漏给评测student。本地只实现SML离线目标。
+
+涉及：[social-meta-learning](../../../post-training/2602.16488-social-meta-learning/README.md) · [opsd](../../../post-training/2601.18734-opsd/README.md)
 
 **2026-11-12** · 补审LCS同任务引用选择，区分整episode失败过滤与SPOD完整action保护；保留free-target独立选择、双normalizer和teacher-only reference。仅CPU选择核，不用fixture冒充多轮Agent训练。
 
@@ -201,7 +243,7 @@ LCS reference方法先排除全部成功学生episode，再为失败者选同任
 
 覆盖 47 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 52 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 54 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -257,6 +299,8 @@ LCS reference方法先排除全部成功学生episode，再为失败者选同任
 - [RAGCompass: Generalizable Retriever Routing via Reranking](../../../post-training/2611.05596-ragcompass/README.md)
 - [Bootstrapped On-Policy Distillation](../../../post-training/2611.13680-bopd/README.md)
 - [Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation](../../../post-training/2611.13135-lcs-reference-opd/README.md)
+- [Learning to Learn from Language Feedback with Social Meta-Learning](../../../post-training/2602.16488-social-meta-learning/README.md)
+- [Behavioral Canaries: Auditing Private Retrieved Context Usage in RL Fine-Tuning](../../../post-training/2604.22191-behavioral-canaries/README.md)
 
 </details>
 

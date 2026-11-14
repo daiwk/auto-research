@@ -20,7 +20,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="reward-and-credit/">奖励与信用：正确结果该奖励哪些步骤</a></h2>
 <p>一个最终分数，怎样转成不会奖励错误步骤的训练信号？</p>
-<p class="ar-learning-topic-meta">164 个问题 · 41 篇论文</p>
+<p class="ar-learning-topic-meta">168 个问题 · 42 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="student-trajectory-distillation/">轨迹蒸馏：学生、提案与前缀分布</a></h2>
@@ -30,12 +30,12 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="teacher-and-context/">教师与纠错：额外信息何时能帮到学生</a></h2>
 <p>教师看到了答案、图像证据或专长提示，怎样把帮助传给没有这些信息的学生？</p>
-<p class="ar-learning-topic-meta">208 个问题 · 52 篇论文</p>
+<p class="ar-learning-topic-meta">216 个问题 · 54 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="data-and-budget/">数据与预算：下一份算力花在哪里</a></h2>
 <p>预算有限时，应该多生成问题、多做rollout，还是把监督集中在更有价值的位置？</p>
-<p class="ar-learning-topic-meta">152 个问题 · 38 篇论文</p>
+<p class="ar-learning-topic-meta">156 个问题 · 39 篇论文</p>
 </article>
 </div>
 

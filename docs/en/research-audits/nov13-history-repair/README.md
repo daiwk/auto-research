@@ -1,7 +1,9 @@
-<!-- source-sha256: 1486e89f0263bdf21cf70edd97654696405e1f2155a6d4b0f7bad534b7633cbf -->
+<!-- source-sha256: 6f5c6728d449745be32d946f3f41eda1ed574b801d6ee4047973be864e557f48 -->
 # November 13: ScientistTwo and Google/Meta historical backfills
 
 [简体中文](../../../research-audits/nov13-history-repair/README.md)
+
+> Follow-up: this page preserves the original six-paper delivery and 24-pending snapshot. The [subsequent fixed-scope review](../nov13-colm-remaining/README.md) closes all 24 through 23 bounded components/interfaces and one substantive scope exclusion. Pending/unselected descriptions below refer to that earlier snapshot, not the current backlog.
 
 This batch delivers **six historical backfills: four low-cost CPU control components and two review-only references**. None is a November 13 first publication. No full model or scientific campaign ran. Five have original-source scale evidence and are explicitly **not reproduced due to high cost; review DONE**. DS-STAR's development cost per task is not high; its complete commercial-model evaluation has a separate dependency disposition rather than invented large-training costs.
 

@@ -7,7 +7,7 @@ hide:
 
 # 评测与可靠性：如何知道真的做对了
 
-[Agent](index.md) / 192 个问题 · 48 篇论文
+[Agent](index.md) / 196 个问题 · 49 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">192 个问题 · 48 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">196 个问题 · 49 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:alphaproof-code" data-paper-title="AlphaProof Code: Verifying Signal&#x27;s Security at the Machine-Code Level" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="AlphaProof Code: Verifying Signal&#x27;s Security at the Machine-Code Level Agent Google DeepMind 2026-11-10 人类与规格编写/审阅 Agent 先定义并批准要证明的安全性质，证明团队再处理实际 Rust 代码经标准编译器生成的 AArch64 程序。Lean 内核检查证明，gatekeeper 还要防止团队偷偷弱化规格或其依赖。原文涉及 PQXDH 握手和 Triple Ratchet 的符号/计算安全保证，而不是“所有 Signal 场景都无漏洞”。PDF §2、§4–5 deferred_high_cost，仅论文/代码来源与成本审查，成本过高，不复现（审查 DONE）。deferred_high_cost，仅论文/代码来源与成本审查，成本过高，不复现（审查 DONE）。没有本地形式证明器、Agent 或可执行算子，不生成伪指标。本轮只读了报告署名、§2.4、§7 与官方项目/固定 README，核对一手出处和成本。没有克隆整个大型证明仓库，没有安装 Lean/Rust 工具链，没有跑 lake build 或 comparator。也没有用 schema、哈希或 regex 模拟形式证明。无本地实验指标，不要求 GPU 回执，不接入 Evolve。  统一评测与可靠性 形式验证与规格保真 Agent 评测与可靠性：如何知道真的做对了 AlphaProof Code 为什么把规格列为可信，而把AI写出的证明列为不可信？ 证明中的逻辑错误可由Lean内核拒绝，因此不必相信生成证明的模型；但内核只检查给定命题，不能判断命题是否充分表达真实安全目标。人类仍要审查规格、依赖、机器语义和密码学假设。 教学例：证明“程序会返回某个整数”可能完全正确，却没有证明“攻击者无法恢复密钥”。证明正确与目标足够强是两件事。 2026-11-11">
@@ -2200,6 +2200,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>例如常量历史无差分尺度，不能人为造一个分母再声称正常误差可比。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.05364">原论文</a> · <a href="../../../../agent-research/2604.05364-tfrbench/">实现解读</a> · <a href="#qa-52b59b4d02f11ef2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:mt-pingeval" data-paper-title="MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games Agent Google DeepMind 2026-02-27 MT-PingEval 用协作游戏检查模型是否真正从交互中获益，而非比较多轮时顺便增加总 token。每名玩家只看到自己的信息，通过对话解决共同任务；原 suite 包含棋局、COVR、图片选择与 Name-game。Name-game 给双方各一张五字段人物表，只有一条完整记录共同出现。仅同名不够。论文固定每玩家总预算、改变总交替轮次，限制每次输出 token 数，检验交互扩展。它不保证真实模型随轮次增加会变好，原文恰发现多任务持平或下降。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有 Chess/COVR/MD3/Tangram 环境、图像模型、tokenizer、对话策略、公开数据下载或跨模型 runner。仅可在自有真实模型接入并隔离私有视图后做能力评测；当前不能参与能力排名或 Evolve 晋级。  多智能体协作评测 Agent 评测与可靠性：如何知道真的做对了 Name-game为什么不能只把一方的表给模型就评价最终答案？ 共同记录由两张私有表的交集决定，任何一方单独看表都通常无法确定。评测应隔离双方视图并让通信成为信息来源，而不是预先给双方合并表。 教学例：Alice有两个Isabella，只有Bob知道哪条公司和过敏字段完全匹配。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<span id="paper-agent-research-mt-pingeval-e97973d8" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-afc4ccd87079fdc6">Name-game为什么不能只把一方的表给模型就评价最终答案？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amt-pingeval">MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>共同记录由两张私有表的交集决定，任何一方单独看表都通常无法确定。评测应隔离双方视图并让通信成为信息来源，而不是预先给双方合并表。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：Alice有两个Isabella，只有Bob知道哪条公司和过敏字段完全匹配。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.24188">原论文</a> · <a href="../../../../agent-research/2602.24188-mt-pingeval/">实现解读</a> · <a href="#qa-afc4ccd87079fdc6">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:mt-pingeval" data-paper-title="MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games Agent Google DeepMind 2026-02-27 MT-PingEval 用协作游戏检查模型是否真正从交互中获益，而非比较多轮时顺便增加总 token。每名玩家只看到自己的信息，通过对话解决共同任务；原 suite 包含棋局、COVR、图片选择与 Name-game。Name-game 给双方各一张五字段人物表，只有一条完整记录共同出现。仅同名不够。论文固定每玩家总预算、改变总交替轮次，限制每次输出 token 数，检验交互扩展。它不保证真实模型随轮次增加会变好，原文恰发现多任务持平或下降。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有 Chess/COVR/MD3/Tangram 环境、图像模型、tokenizer、对话策略、公开数据下载或跨模型 runner。仅可在自有真实模型接入并隔离私有视图后做能力评测；当前不能参与能力排名或 Evolve 晋级。  多智能体协作评测 Agent 评测与可靠性：如何知道真的做对了 每玩家128token、总16个交替turn时，每次为什么是16而非8token？ 总对话预算是256token，分到16个交替turn是16；每玩家各发8次，恰128。若用128除16，就把每玩家的轮数和总轮数混了。 教学例：Alice8次×16，Bob8次×16；两者不能共享一个额外重置预算。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-1eb5f56f0945573f">每玩家128token、总16个交替turn时，每次为什么是16而非8token？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amt-pingeval">MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>总对话预算是256token，分到16个交替turn是16；每玩家各发8次，恰128。若用128除16，就把每玩家的轮数和总轮数混了。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：Alice8次×16，Bob8次×16；两者不能共享一个额外重置预算。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.24188">原论文</a> · <a href="../../../../agent-research/2602.24188-mt-pingeval/">实现解读</a> · <a href="#qa-1eb5f56f0945573f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:mt-pingeval" data-paper-title="MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games Agent Google DeepMind 2026-02-27 MT-PingEval 用协作游戏检查模型是否真正从交互中获益，而非比较多轮时顺便增加总 token。每名玩家只看到自己的信息，通过对话解决共同任务；原 suite 包含棋局、COVR、图片选择与 Name-game。Name-game 给双方各一张五字段人物表，只有一条完整记录共同出现。仅同名不够。论文固定每玩家总预算、改变总交替轮次，限制每次输出 token 数，检验交互扩展。它不保证真实模型随轮次增加会变好，原文恰发现多任务持平或下降。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有 Chess/COVR/MD3/Tangram 环境、图像模型、tokenizer、对话策略、公开数据下载或跨模型 runner。仅可在自有真实模型接入并隔离私有视图后做能力评测；当前不能参与能力排名或 Evolve 晋级。  多智能体协作评测 Agent 评测与可靠性：如何知道真的做对了 Name-game随轮数提高成功率，就一定是更好的协作吗？ 不一定。更多轮次也给随机无放回猜记录更多机会，原文专门比较该基线。还需固定token预算和检查传递的信息，不能只看成功曲线。 教学例：25行里每轮猜一行，允许16轮天然比2轮更容易撞对。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-3ada3e95a8b0b5c2">Name-game随轮数提高成功率，就一定是更好的协作吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amt-pingeval">MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不一定。更多轮次也给随机无放回猜记录更多机会，原文专门比较该基线。还需固定token预算和检查传递的信息，不能只看成功曲线。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：25行里每轮猜一行，允许16轮天然比2轮更容易撞对。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.24188">原论文</a> · <a href="../../../../agent-research/2602.24188-mt-pingeval/">实现解读</a> · <a href="#qa-3ada3e95a8b0b5c2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:mt-pingeval" data-paper-title="MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games Agent Google DeepMind 2026-02-27 MT-PingEval 用协作游戏检查模型是否真正从交互中获益，而非比较多轮时顺便增加总 token。每名玩家只看到自己的信息，通过对话解决共同任务；原 suite 包含棋局、COVR、图片选择与 Name-game。Name-game 给双方各一张五字段人物表，只有一条完整记录共同出现。仅同名不够。论文固定每玩家总预算、改变总交替轮次，限制每次输出 token 数，检验交互扩展。它不保证真实模型随轮次增加会变好，原文恰发现多任务持平或下降。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有 Chess/COVR/MD3/Tangram 环境、图像模型、tokenizer、对话策略、公开数据下载或跨模型 runner。仅可在自有真实模型接入并隔离私有视图后做能力评测；当前不能参与能力排名或 Evolve 晋级。  多智能体协作评测 Agent 评测与可靠性：如何知道真的做对了 为什么只能把PrivateView给actor，不能把NameGame对象也给它？ NameGame持有两张表和共同记录，是evaluator状态；把它交给actor会泄漏私有对方信息。PrivateView仅含本方记录，scorer在外层调用。 教学例：actor闭包若可访问game._common，1.0成功率只是读答案，不是对话。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-bbb71bbe7162beaa">为什么只能把PrivateView给actor，不能把NameGame对象也给它？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amt-pingeval">MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>NameGame持有两张表和共同记录，是evaluator状态；把它交给actor会泄漏私有对方信息。PrivateView仅含本方记录，scorer在外层调用。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：actor闭包若可访问game._common，1.0成功率只是读答案，不是对话。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.24188">原论文</a> · <a href="../../../../agent-research/2602.24188-mt-pingeval/">实现解读</a> · <a href="#qa-bbb71bbe7162beaa">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:convapparel" data-paper-title="ConvApparel: A Benchmark Dataset and Validation Framework for User Simulators in Conversational Recommenders" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="ConvApparel: A Benchmark Dataset and Validation Framework for User Simulators in Conversational Recommenders Agent Google 2026-02-18 模拟用户能完成购物目标，不等于像真人。论文将验证拆成三条互补证据：PLSA 比较行为分布；HLS 检查训练过的真假对话判别器能否识别模拟；反事实验证把仅在一种推荐策略下训练的模拟器放到另一策略下。PLSA 的全称是 Population-Level Statistical Alignment，不是同名主题模型。原文 §4 完整实验成本过高，不复现（审查 DONE）。本地为 CPU evaluation_protocol_interface，不是完整模拟器复现。公开固定刺激只检验 L0 接口；完整实验成本过高，不复现（审查 DONE）。也可传 --input conversations.json 代替 --fixture-demo：JSON 顶层为 train 与 heldout 数组，每行有 session_id、participant_id、policy、user_turns、布尔 is_human、可选 annotations。  Agent 评测 用户模拟器与分布对齐 Agent 评测与可靠性：如何知道真的做对了 ConvApparel的PLSA是在训练同名主题模型吗？ 不是。此处PLSA全称为Population-Level Statistical Alignment，检查模拟人群与真人的行为分布是否接近；本地统计核使用KS距离与带并列处理的MWU。它比较群体分布，不会逐条证明每段模拟对话都是真实的人类行为。 教学例子：比较真人与模拟者的对话轮数分布，是群体行为对齐检查，并非从购物文本学习若干隐含主题。 2026-10-27">

@@ -1,0 +1,56 @@
+{
+  "domain": "foundation-models",
+  "key": "qe-length-normalization",
+  "title": "Penalizing Length: Uncovering Systematic Bias in Quality Estimation Metrics",
+  "paper_url": "https://arxiv.org/abs/2510.22028v1",
+  "reviewed_version_url": "https://arxiv.org/html/2510.22028v1",
+  "reviewed_version": "v1",
+  "reviewed_arxiv_id": "2510.22028v1",
+  "detail_path": "foundation-models/2510.22028-qe-length-normalization/README.md",
+  "topic": [
+    "评测与研究证据",
+    "翻译指标与长度偏差"
+  ],
+  "first_author": "Yilin Zhang",
+  "first_author_affiliation": "Carnegie Mellon University / Google",
+  "verified_priority_organizations": [
+    "Google"
+  ],
+  "published": "2025-10-24",
+  "published_at": "2025-10-24T21:22:06Z",
+  "code": null,
+  "code_status": "固定v1称录用后发布实验脚本；截至2026-11-13的原文及有限作者/标题核查未确认本篇公开仓库，不把MetricX/WMT依赖算本篇源码。",
+  "code_license": null,
+  "adapter": null,
+  "priority": "P0",
+  "priority_reason": "Google/DeepMind原文署名；Google COLM官方独立历史库存触发补漏，非本轮新首发。",
+  "intake_class": "historical_inventory_omission",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.foundation_models.qe_length_normalization.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.foundation_models.qe_length_normalization import diagnostic; print(diagnostic(42, \"cpu\"))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2510.22028v1",
+    "reviewed_sections": [
+      "§3.1–3.2",
+      "§4.1–4.2",
+      "§7.2"
+    ],
+    "available_resource": "单张NVIDIA A100/A30或本地Mac",
+    "basis": "WMT24++十个语言方向、MetricX/CometKiwi/Gemini-2.0 AutoMQM/Gemini-2.5-Pro评测及MetricX QE重新训练。原文未给总GPU/墙钟，完整多臂评测/训练涉及商业模型且成本无法廉价确认；按单A100/A30/Mac预算不启动，不试训。",
+    "decision": "成本过高，不复现（审查DONE）；仅交付独立低成本L1组件，不下载大资源、不试训、不自动重试。"
+  },
+  "fidelity_note": "训练目标R/|h|与推理乘回|h|、同文档前五连续段前缀构造/整组500token门槛、相对首前缀的组内分差；不拟合MetricX、不做后处理去偏伪称。",
+  "summary": "训练目标R/|h|与推理乘回|h|、同文档前五连续段前缀构造/整组500token门槛、相对首前缀的组内分差；不拟合MetricX、不做后处理去偏伪称。"
+}

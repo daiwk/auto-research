@@ -7,7 +7,7 @@ hide:
 
 # 运行流程与自进化：改的是哪一层
 
-[Agent](index.md) / 236 个问题 · 59 篇论文
+[Agent](index.md) / 240 个问题 · 60 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">236 个问题 · 59 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">240 个问题 · 60 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:fgse" data-paper-title="When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents Agent Nanyang Technological University 2026-11-10 一次经验修复能帮助当前任务，却可能在边界任务有害，或破坏旧技能。FGSE 将更新表示为带前提、行为、预期效果和 verifier 的假设，先在临时状态上跑迁移、定向证伪和归档回归探针，再 commit/refine/reject。风险集中于可分离子范围时允许一次前提细化；它不是“成功经验一律记住”。 完整实验成本过高，不复现（审查 DONE）。本地交付纯 CPU 经验准入门控，输入外部 verifier 的成对记录；不生成 Agent、探针或正确答案，不把门控通过率当任务成功率。Probe 保存同一探针在原状态/临时状态的有限分数及预期效果布尔值；不保存 gold answer。commitment_gate() 按 Eq.7–9 计算并返回三统计量和决定。调用者必须实际取得成对 verifier 结果；这里既没有 actor callback，也没有把预设分数冒充模型执行。  自进化与技能优化 证伪与回归保护 Agent 运行流程与自进化：改的是哪一层 FGSE 为什么不能把修好当前任务的经验立即写进长期记忆？ 当前任务增益没有覆盖迁移、边界反例和旧技能。FGSE 要在临时状态上分别测这些风险，再决定写入、一次细化或拒绝；只有原任务成功不足以支持持久化。 教学例：某工具报错时“始终重试”修好一次瞬时故障，但在付款已成功、回执丢失时可能重复扣款。 2026-11-11">
@@ -2730,6 +2730,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>例如一篇没有任何数字的稿件不能因分母为零得到 CPR=1，两个审查者意见相反也不能默认多数通过。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、结果与边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.26340">原论文</a> · <a href="../../../../agent-research/2605.26340-scientist-one/">实现解读</a> · <a href="#qa-79ed0d4a52806e10">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:co-director" data-paper-title="Co-Director: Agentic Generative Video Storytelling" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Co-Director: Agentic Generative Video Storytelling Agent Google Inc. 2026-04-27 Co-Director 将生成式视频拆为全局创意方向与局部多模态修正。创意方向有策略 3 类、叙事 3 类、美学 4 类；一次完整视频产生三个战略效果分，各自更新所属轴，而最终视频用独立质量分选择。原文写 UCB1 和 LLM 初始化期望值；所链接官方实现的 warm start 具体是优先选择 LLM 推荐的未试 arm。源码没有为推荐凭空增加观察次数。本地按该可核实接口执行，不捏造数值先验、MLLM打分或视频。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有orchestrator、LLM推荐器、storyline/keyframe self-refinement、Gemini/NanoBanana/Veo/TTS/Lyria接口、GenAd-Bench或视频judge。外部MLLM分数需独立验证，不用随机分替代真实视觉评价；本地未接Evolve。  生成式视频 Agent Agent 运行流程与自进化：改的是哪一层 Co-Director为什么是10个分轴参数而不是36个独立组合arm？ 创意策略3、叙事3、美学4分别维护统计，每次视频更新三个选中arm。联合组合虽有36种，但没有把一次视频虚增成36次评价。 教学例：一个视频提供策略分80、叙事分50、美学分70，分别写回3个维度。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-co-director-00a4e5db" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-bb169768cd05e9ad">Co-Director为什么是10个分轴参数而不是36个独立组合arm？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aco-director">Co-Director: Agentic Generative Video Storytelling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Inc.</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>创意策略3、叙事3、美学4分别维护统计，每次视频更新三个选中arm。联合组合虽有36种，但没有把一次视频虚增成36次评价。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个视频提供策略分80、叙事分50、美学分70，分别写回3个维度。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.24842">原论文</a> · <a href="../../../../agent-research/2604.24842-co-director/">实现解读</a> · <a href="#qa-bb169768cd05e9ad">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:co-director" data-paper-title="Co-Director: Agentic Generative Video Storytelling" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Co-Director: Agentic Generative Video Storytelling Agent Google Inc. 2026-04-27 Co-Director 将生成式视频拆为全局创意方向与局部多模态修正。创意方向有策略 3 类、叙事 3 类、美学 4 类；一次完整视频产生三个战略效果分，各自更新所属轴，而最终视频用独立质量分选择。原文写 UCB1 和 LLM 初始化期望值；所链接官方实现的 warm start 具体是优先选择 LLM 推荐的未试 arm。源码没有为推荐凭空增加观察次数。本地按该可核实接口执行，不捏造数值先验、MLLM打分或视频。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有orchestrator、LLM推荐器、storyline/keyframe self-refinement、Gemini/NanoBanana/Veo/TTS/Lyria接口、GenAd-Bench或视频judge。外部MLLM分数需独立验证，不用随机分替代真实视觉评价；本地未接Evolve。  生成式视频 Agent Agent 运行流程与自进化：改的是哪一层 为什么best_video不能直接选三轴战略分之和最高者？ 论文把战略有效性用于bandit更新，视频总体质量用于最终产物选择。高战略分仍可能有扩散伪影或时序问题，两个信号不能偷换。 教学例：视频A战略分低但清晰完整，B战略分高却人物漂移；已有质量judge可能选A。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-7714cf986d42e3b1">为什么best_video不能直接选三轴战略分之和最高者？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aco-director">Co-Director: Agentic Generative Video Storytelling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Inc.</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>论文把战略有效性用于bandit更新，视频总体质量用于最终产物选择。高战略分仍可能有扩散伪影或时序问题，两个信号不能偷换。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：视频A战略分低但清晰完整，B战略分高却人物漂移；已有质量judge可能选A。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.24842">原论文</a> · <a href="../../../../agent-research/2604.24842-co-director/">实现解读</a> · <a href="#qa-7714cf986d42e3b1">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:co-director" data-paper-title="Co-Director: Agentic Generative Video Storytelling" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Co-Director: Agentic Generative Video Storytelling Agent Google Inc. 2026-04-27 Co-Director 将生成式视频拆为全局创意方向与局部多模态修正。创意方向有策略 3 类、叙事 3 类、美学 4 类；一次完整视频产生三个战略效果分，各自更新所属轴，而最终视频用独立质量分选择。原文写 UCB1 和 LLM 初始化期望值；所链接官方实现的 warm start 具体是优先选择 LLM 推荐的未试 arm。源码没有为推荐凭空增加观察次数。本地按该可核实接口执行，不捏造数值先验、MLLM打分或视频。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有orchestrator、LLM推荐器、storyline/keyframe self-refinement、Gemini/NanoBanana/Veo/TTS/Lyria接口、GenAd-Bench或视频judge。外部MLLM分数需独立验证，不用随机分替代真实视觉评价；本地未接Evolve。  生成式视频 Agent Agent 运行流程与自进化：改的是哪一层 分轴reward更新是否证明找到了每个创意因素的因果贡献？ 不证明。MLLM给的是相关观察性评分，维度也可能交互。UCB组织探索利用，不是随机化因果实验或creditassignment识别。 教学例：换灯光同时改变角色表现，judge美学分变化不能独立归因灯光。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-708b8d2bec9834c1">分轴reward更新是否证明找到了每个创意因素的因果贡献？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aco-director">Co-Director: Agentic Generative Video Storytelling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Inc.</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不证明。MLLM给的是相关观察性评分，维度也可能交互。UCB组织探索利用，不是随机化因果实验或creditassignment识别。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：换灯光同时改变角色表现，judge美学分变化不能独立归因灯光。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.24842">原论文</a> · <a href="../../../../agent-research/2604.24842-co-director/">实现解读</a> · <a href="#qa-708b8d2bec9834c1">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:co-director" data-paper-title="Co-Director: Agentic Generative Video Storytelling" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Co-Director: Agentic Generative Video Storytelling Agent Google Inc. 2026-04-27 Co-Director 将生成式视频拆为全局创意方向与局部多模态修正。创意方向有策略 3 类、叙事 3 类、美学 4 类；一次完整视频产生三个战略效果分，各自更新所属轴，而最终视频用独立质量分选择。原文写 UCB1 和 LLM 初始化期望值；所链接官方实现的 warm start 具体是优先选择 LLM 推荐的未试 arm。源码没有为推荐凭空增加观察次数。本地按该可核实接口执行，不捏造数值先验、MLLM打分或视频。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有orchestrator、LLM推荐器、storyline/keyframe self-refinement、Gemini/NanoBanana/Veo/TTS/Lyria接口、GenAd-Bench或视频judge。外部MLLM分数需独立验证，不用随机分替代真实视觉评价；本地未接Evolve。  生成式视频 Agent Agent 运行流程与自进化：改的是哪一层 官方warmstart推荐arm，能否直接给它添十次虚构高分？ 不能。所核源码优先选择推荐的未试arm，没有为推荐伪造观察次数。本地依同接口，真实reward回来才更新count；并列规则是局部约定。 教学例：推荐电影感美学只决定先试它，不能写入十次90分评价。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-681c184699efc24c">官方warmstart推荐arm，能否直接给它添十次虚构高分？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aco-director">Co-Director: Agentic Generative Video Storytelling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Inc.</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。所核源码优先选择推荐的未试arm，没有为推荐伪造观察次数。本地依同接口，真实reward回来才更新count；并列规则是局部约定。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：推荐电影感美学只决定先试它，不能写入十次90分评价。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.24842">原论文</a> · <a href="../../../../agent-research/2604.24842-co-director/">实现解读</a> · <a href="#qa-681c184699efc24c">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:crop" data-paper-title="CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization Agent Google 2026-04-08 自动提示优化通常根据答错原因不断添加指令，可能使推理越来越长。CROP固定目标模型的权重，在离线优化阶段加入第二条文本反馈：任务评估器指出准确性问题；长度评估器在输出token数超过阈值时，建议逐步删掉叙述性冗余、保留必要计算。元优化器接收两条反馈，更新系统提示，最终推理仍只需要目标模型的一次前向生成。它既不是把答案硬截断，也不是向GRPO loss直接加长度reward，更不是对提示文本求数值梯度。“文本梯度”是外部评估模型生成的自然语言批评； 完整实验：成本过高，不复现（审查 DONE），不自动重试。诊断用确定性回调替身，不是LLM能力：检查12-token回复触发长度批评、4-token回复在阈值4时不触发；本地状态：L1 外部回调控制组件，diagnostic only，不是已验证的 LLM 提示优化能力或权重后训练。完整实验：成本过高，不复现（审查 DONE），不自动重试。optimize_prompt接受有限的外部预分批训练样本及五类回调：generate、task_evaluator、brevity_evaluator、optimizer、validate。它实际执行阈值分流、文本拼接、循环更新和最佳提示选择，不实现或默认调用任何LLM/API。  Agent自我进化 提示优化与推理成本 Agent 运行流程与自进化：改的是哪一层 CROP优化的是模型参数、单次答案，还是系统提示？ 它固定目标模型权重，离线迭代系统提示。目标模型先生成，任务批评器和长度批评器分别指出准确性与冗余问题，元优化器据此重写提示；部署时使用选好的提示进行一次生成。它不是对答案硬截断，也不是RL权重后训练。 教学示意：把“逐项解释每一步”逐轮改成“保留合并算式，删掉重复叙述”，属于提示优化；把回复超过50tokens直接截掉，不是CROP。 2026-10-30">

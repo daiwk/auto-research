@@ -660,7 +660,7 @@
     "reward-and-credit": {
       "title": "奖励从哪里来，信用才该分到哪里",
       "thesis": "过程标签、最终结果、模型自置信与回溯归因是不同证据。逐步PRM、MRTPO、TACO和MART-GRPO分别做标签获取、奖励定位、正信用降权和失败后缀过滤；INTUITOR则改用内在分布信号，不能把它当外部正确性验证器。 CONCUR另处理奖励维度之间的优先级，把门控辅助优势投影到主奖励保序锥；这不是沿时间轴分配token信用。",
-      "updated": "2026-11-11",
+      "updated": "2026-11-13",
       "reviewed_papers": [
         "post-training:emoreward",
         "post-training:dars-density",
@@ -702,7 +702,8 @@
         "post-training:process-supervision",
         "post-training:concur",
         "post-training:maxim",
-        "post-training:mcpo"
+        "post-training:mcpo",
+        "post-training:rlmf"
       ],
       "axes": [
         "证据来源：人工步骤、正确续写比例、verifier、内在分布",
@@ -820,6 +821,16 @@
             "原文结果与限制",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "post-training:rlmf",
+          "position": "按模型自评FC的质量，仅放大高于组均值的completion级faithfulness项；其他奖励中心化项不变。",
+          "tradeoff": "Residual Advantage从同词表师生概率差产生token局部优势，再按响应中心化并加验证器优势。元认知Z不是师生概率残差；RLMF不再居中，也没有执行RA/Co-RA教师更新。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ]
         }
       ],
       "analysis": [
@@ -872,6 +883,14 @@
           "papers": [
             "post-training:maxim",
             "post-training:mcpo"
+          ]
+        },
+        {
+          "title": "completion级自评信用与token级师生残差不能合并成一个“额外奖励”",
+          "body": "RLMF先将忠实度与其他约束分开中心化，再用自评与实际FC的一致性提高正忠实度分量；放大后组均值可以不为零。Residual Advantage读取同词表教师/学生分布，以学生期望作为局部残差基线，之后在响应位置中心化并叠加验证器优势；Co-RA又在固定已评分批次上更新教师、下一轮才使用。把Z加成奖励、给token残差直接乘整个RLMF优势，或把RLMF最后再中心化，都不是原公式。两种组件来源、信用单位、更新顺序和验收证据应分别保存；RA的短checkpoint烟测也不替本轮RLMF完成训练。",
+          "papers": [
+            "post-training:rlmf",
+            "post-training:residual-advantage"
           ]
         }
       ],
@@ -946,6 +965,16 @@
           "papers": [
             "post-training:maxim",
             "post-training:mcpo"
+          ]
+        },
+        {
+          "id": "cross-rlmf-versus-dr-grpo",
+          "question": "RLMF的元认知Z和Residual Advantage的师生残差能否作为同一种token奖励直接相加？",
+          "answer": "不能。Z来自completion自评FC误差，只调正faithfulness组偏差；RA读取逐token全词表q−p、减学生期望后再按响应中心化，最后加验证器优势。它们的单位和中心化不同，组合需另行定义并验证，不能冒称原方法。",
+          "example": "教学例：RLMF对f=[0,1,2]和o=[1,0,−1]、Z=1得到[0,0,1]，均值1/3；RA的一个响应残差[0.2,−0.2]均值为0。把两者都强制归零会改掉前者。",
+          "papers": [
+            "post-training:rlmf",
+            "post-training:residual-advantage"
           ]
         }
       ],
@@ -1078,6 +1107,18 @@
           "source_revisions": {
             "post-training:maxim": "c7a3a721c843a1384f1e8f052af34a4124e1eeee4f7635bb2d9bc397c43f96e3",
             "post-training:mcpo": "a3752eb5409a5c93d3c76fc3a8ba6445a76d1977d3797dd1c13d42e128a3164c"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "post-training:rlmf",
+            "post-training:residual-advantage"
+          ],
+          "summary": "改为同卡片RA的token师生残差与RLMF的completion自评信用比较，保留各自中心化、教师更新时序和L1/短训练证据边界。",
+          "source_revisions": {
+            "post-training:rlmf": "8b22b0d384f1b00b76032a6dd9d69eb9ab094fa13b5b9f5f0b03f5c382f3dc74",
+            "post-training:residual-advantage": "ea00ca575be197a7e08c8234a95fd64b6fd0c850bc5976b08e76c97ccb990bae"
           }
         }
       ]
@@ -1550,7 +1591,7 @@
     "teacher-and-context": {
       "title": "教师更强仍可能教错：信息、兼容性与成功行为保护",
       "thesis": "教师的价值不只取决于总分。OPSD改变训练期可见信息，MOPD与逐token路由组织多教师，CSD先统一概率事件，SPOD保护学生已成功选择，VAD筛出可归于视觉证据的修正；这些约束要在模仿之前分别成立。",
-      "updated": "2026-11-12",
+      "updated": "2026-11-13",
       "reviewed_papers": [
         "post-training:p2-mopd",
         "post-training:targeted-guidance",
@@ -1603,7 +1644,9 @@
         "post-training:opsd",
         "post-training:ragcompass",
         "post-training:bopd",
-        "post-training:lcs-reference-opd"
+        "post-training:lcs-reference-opd",
+        "post-training:social-meta-learning",
+        "post-training:behavioral-canaries"
       ],
       "axes": [
         "教师来源：同参数特权视图或独立领域专家",
@@ -1720,6 +1763,27 @@
             "数据协议与代码映射",
             "结果、负控与边界"
           ]
+        },
+        {
+          "paper": "post-training:social-meta-learning",
+          "position": "把teacher反馈放进公开多轮历史，以成功轨迹student-only SFT或在线RL训练反馈利用，并另用Qpriming教提问。",
+          "tradeoff": "OPSD用特权教师分布监督学生前缀，SML让教师通过对话转移信息；两者的额外知识都不能泄漏给评测student。本地只实现SML离线目标。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ]
+        },
+        {
+          "paper": "post-training:behavioral-canaries",
+          "position": "用held-out clean/trigger文档对的canary序列logprob差测条件行为影响，再按独立训练策略统计。",
+          "tradeoff": "RAGCompass的答案F1只作离线路由蒸馏监督，运行时scorer不读gold；Canaries的配对目标属于审计测量，不能据此给actor答案，也不把有用证据或单次风格变化判作违规。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ]
         }
       ],
       "analysis": [
@@ -1781,6 +1845,22 @@
           "papers": [
             "post-training:lcs-reference-opd",
             "post-training:spod"
+          ]
+        },
+        {
+          "title": "特权知识经分布蒸馏还是经语言反馈，会改变训练与泄漏边界",
+          "body": "OPSD的教师额外看验证答案，并在学生到达的前缀提供稠密分布。SML的student看teacher公开回复，外层才优化未来的互动方式；Qpriming合成训练问题时可用私有知识，不代表测试可读gold。成功student token屏蔽只是训练算子正确性，缺失完整对话与backbone时不能声称已学会问问题。",
+          "papers": [
+            "post-training:social-meta-learning",
+            "post-training:opsd"
+          ]
+        },
+        {
+          "title": "检索证据有助回答，与证据是否进入后训练，是不同问题",
+          "body": "RAGCompass从各检索器证据组带来的答案效用构造候选分布，训练可泛化的路由scorer；真实推理只用其分数选组，不能继续看参考答案。Behavioral Canaries则控制文档trigger、问题和答案前缀，观察已训练策略的目标风格概率变化，回答的是训练条件影响而非路由优劣。效用、数据使用权限和可测影响不能互相替代：许可取决于真实约定，弱行为信号也不是某份文档违规的证明。两者都必须保存离线标签与运行/审计接口的界线，并防止把重复题目当独立策略。",
+          "papers": [
+            "post-training:behavioral-canaries",
+            "post-training:ragcompass"
           ]
         }
       ],
@@ -1875,6 +1955,26 @@
           "papers": [
             "post-training:lcs-reference-opd",
             "post-training:spod"
+          ]
+        },
+        {
+          "id": "cross-colm-social-meta-learning",
+          "question": "OPSD和SML都让teacher有额外知识，就能把这些知识直接交给被评student吗？",
+          "answer": "不能。OPSD训练时以特权教师分布监督学生前缀；SML通过公开teacher回复提供反馈。两者都必须保留student观测边界，训练教师持有答案不意味着测试student可读gold。",
+          "example": "教学例：用答案生成训练提示，与在测试请求里放隐藏解题字段，是不同的数据流。",
+          "papers": [
+            "post-training:social-meta-learning",
+            "post-training:opsd"
+          ]
+        },
+        {
+          "id": "cross-behavior-audit-versus-rm-memorization",
+          "question": "RAGCompass找到更有用的检索证据，能否说明这些文档被允许用于RL训练，或已经被用于训练？",
+          "answer": "不能。它的离线F1监督衡量回答效用，运行时路由不读gold；使用权限来自真实约定，训练影响还需要独立审计。Behavioral Canaries测同策略的clean/trigger条件差，也不凭一项变化证明单文档违规。",
+          "example": "教学例：两组证据答案F1为0.8和0.5可形成路由监督，却不给文档使用许可；另一项canary logprob差0.1是条件影响观测，不是“该路由更好”或“该文件已被训练”的判决。",
+          "papers": [
+            "post-training:behavioral-canaries",
+            "post-training:ragcompass"
           ]
         }
       ],
@@ -2030,13 +2130,37 @@
           "source_revisions": {
             "post-training:lcs-reference-opd": "92ff22ac54c37dbaec59f9b3dfa4fec26b54c656dae57dadb01bc6b0a4ed430b"
           }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "post-training:social-meta-learning",
+            "post-training:opsd"
+          ],
+          "summary": "补入social-meta-learning历史遗漏，把teacher反馈放进公开多轮历史，以成功轨迹student-only SFT或在线RL训练反馈利用，并另用Qpriming教提问。 OPSD用特权教师分布监督学生前缀，SML让教师通过对话转移信息；两者的额外知识都不能泄漏给评测student。本地只实现SML离线目标。",
+          "source_revisions": {
+            "post-training:social-meta-learning": "9101cef8e8f0469b3619e4e6635307dce6b7a4a948c2feaffdd15a46eb92f143",
+            "post-training:opsd": "8082928a5bc28763d2b28f8f7f640f9498cf8516f2e58f3841760950f405df74"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "post-training:behavioral-canaries",
+            "post-training:ragcompass"
+          ],
+          "summary": "改为同卡片RAGCompass的离线效用监督与条件行为审计对照，明确gold只用于离线目标、文档许可与单文档证明边界。",
+          "source_revisions": {
+            "post-training:behavioral-canaries": "1ed80d36470c224e7684a4da3a0cf834b3c66fadf4bf5166f63c16fb4c09a263",
+            "post-training:ragcompass": "36cbf84b0c356d709501888ddd785daefddacac12e341663c3074987b07ba430"
+          }
         }
       ]
     },
     "data-and-budget": {
       "title": "省掉哪一份算力：选问题、少生成、分枝与有条件重放",
       "thesis": "数据与预算方法改变的是训练链路的不同位置。课程重估当前难度，LESSER降低筛选特征成本，STOPD随机少生成并校正，BranchOPD增加关键分枝，Lightning缓存教师，TAR召回被压制的正确模式；少调用一次教师不等于整个训练更便宜。",
-      "updated": "2026-10-27",
+      "updated": "2026-11-13",
       "reviewed_papers": [
         "post-training:ask-to-distill",
         "post-training:tar-adaptive-replay",
@@ -2075,7 +2199,8 @@
         "post-training:chord",
         "post-training:spiral",
         "post-training:absolute-zero",
-        "post-training:raft"
+        "post-training:raft",
+        "post-training:maple-icl"
       ],
       "axes": [
         "选择对象：问题、token位置、后缀、历史轨迹",
@@ -2143,6 +2268,17 @@
             "核心公式",
             "结果、代码映射与边界"
           ]
+        },
+        {
+          "paper": "post-training:maple-icl",
+          "position": "用DP metadata条件化初始化，并按分类Hamming选非私有已捐赠示例；局部仅实现后一个选择步骤。",
+          "tradeoff": "LESSER按模型梯度特征选训练数据，MAPLE按schema相似性选提示示例，选择单元与目标不同；近邻排序既不保证目标梯度价值，也不建立隐私。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ]
         }
       ],
       "analysis": [
@@ -2162,6 +2298,14 @@
             "post-training:branch-opd",
             "post-training:lightning-opd",
             "post-training:tar-adaptive-replay"
+          ]
+        },
+        {
+          "title": "选样相似度必须绑定它的用途，不能跨层解释",
+          "body": "LESSER用固定模型输出层梯度特征近似目标任务相关性；MAPLE的Hamming只量化schema分类是否相同，用于初始化提示的捐赠示例。数值word-count桶也按类别比较，稳定tie是局部约定。MAPLE完整隐私来自外部AIM与PE预算，选择器本身不保护任意私有记录，也不生成高质量文本。",
+          "papers": [
+            "post-training:maple-icl",
+            "post-training:lesser"
           ]
         }
       ],
@@ -2194,6 +2338,16 @@
           "papers": [
             "post-training:lightning-opd",
             "post-training:tar-adaptive-replay"
+          ]
+        },
+        {
+          "id": "cross-colm-maple-icl",
+          "question": "MAPLE的ICL选择器比随机示例更贴近metadata，是否已复现完整隐私合成？",
+          "answer": "没有。它只是初始化的一步；AIM的DP生成、预算组合、文本模型和AugPE仍缺失。原文也发现初始化单独不等于完整MAPLE，不能用近邻正确性替隐私效用结果。",
+          "example": "教学例：选对10条公开示例不会自动让之后未经DP处理的私有投票安全。",
+          "papers": [
+            "post-training:maple-icl",
+            "post-training:lesser"
           ]
         }
       ],
@@ -2280,6 +2434,18 @@
             "post-training:spiral": "8baab85992a6054dee1f726e88a270042e15fdcd9e61d73623929d91a5d43e26",
             "post-training:absolute-zero": "eaf9bee225a8a93e05d984a86555af3bfde8a4b629b8a52938ed08ecb5d623bd",
             "post-training:raft": "d83285c5ba1fa2d5b98dda75d2767524b1e73d0f4bde1a663ad2fec7bb2ef01d"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "post-training:maple-icl",
+            "post-training:lesser"
+          ],
+          "summary": "补入maple-icl历史遗漏，用DP metadata条件化初始化，并按分类Hamming选非私有已捐赠示例；局部仅实现后一个选择步骤。 LESSER按模型梯度特征选训练数据，MAPLE按schema相似性选提示示例，选择单元与目标不同；近邻排序既不保证目标梯度价值，也不建立隐私。",
+          "source_revisions": {
+            "post-training:maple-icl": "2762218a95bffd8819414d30cb486e7bcb699856a579f3309db608d99bb3524b",
+            "post-training:lesser": "efd0a45a81ae7b58f504fed90763d336a2d67227271808055de87e951c19e804"
           }
         }
       ]

@@ -7,7 +7,7 @@ hide:
 
 # 评测追问四件事：完成了、稳健吗、靠什么、花多少
 
-[Agent](../index.md) · 更新 2026-11-11 · 48 篇主题资料 / 11 篇重点对照
+[Agent](../index.md) · 更新 2026-11-13 · 49 篇主题资料 / 12 篇重点对照
 
 GAIA测最终任务回答，AgentPerturb检查单目标输入扰动，User Proxy Bench检查用户模拟是否偷省信息获取；AlphaDiana完整记录失败与重试，HDA拆解harness涨分来源，选择性评测则约束自动裁判的错误区域。高分只有在这些协议讲清后才有可解释性。
 
@@ -36,6 +36,7 @@ GAIA测最终任务回答，AgentPerturb检查单目标输入扰动，User Proxy
 | [ARE-bench: Benchmarking Agents&#x27; Research Ability in Real-World Researcher Sessions and Workspaces](../../../agent-research/2611.14364-are-bench/README.md) · [原始来源](https://arxiv.org/abs/2611.14364)<br>章节：背景与主要改动、核心公式、数据协议与代码映射 | 在真实会话切点保留仍有效要求与未清理workspace，actor/evaluator分离，以全条目ISR和逐任务macro CSR判断交付。 | 评分依赖可验证rubric与完整任务分母；本地只实现输入隔离和scorer，无官方75任务包、Actor或judge，不将手工例子算benchmark成绩。 |
 | [ReproBridge: Building Reproducibility into ML Research Artifacts](../../../agent-research/2611.08452-reprobridge/README.md) · [原始来源](https://arxiv.org/abs/2611.08452)<br>章节：核心公式、数据协议与代码映射、高成本完整实验 | 将复现的执行知识保存为代码、环境、launcher和指南；评价侧把五次参考的双侧数值兼容与独立执行完整性审计分开。 | 公开任务不含私有参考/成功阈值；本地只有数学与文件证据合同，没有LLM Reproducer或语义Auditor，完整8×H100/多模型任务矩阵高成本不复现。 |
 | [AlphaProof Code: Verifying Signal&#x27;s Security at the Machine-Code Level](../../../agent-research/alphaproof-code/README.md) · [原始来源](https://deepmind.google/documents/36/Formal_Verification_of_Signal_4.pdf)<br>章节：核心验证条件、来源核验、高成本完整实验 | 由人类批准规格，再用Lean内核、隔离规格副本及comparator检查顶层定理、所有传递定义和标准公理；证明生成Agent不自行宣布完成。 | 内核证明以可信规格、机器语义和密码学假设为前提，不等于真实意图充分；650万行证明及数小时工具链构建高成本，仅收录不复现。 |
+| [MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games](../../../agent-research/2602.24188-mt-pingeval/README.md) · [原始来源](https://arxiv.org/abs/2602.24188)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界 | 用各方私有视图与固定token总预算区分交互收益、额外输出和多次猜测机会；Name-game按完整记录判定。 | UserProxyBench审计模拟用户是否提前泄露，MT-PingEval测受控信息博弈中的协作。任务成功不替代信息边界合规，更多轮次也不自动代表协作更好。 |
 
 </div>
 
@@ -82,6 +83,12 @@ AgentHeal关心失败恢复后是否仍引用合法同版本来源并遵守政�
 AlphaProof Code把获批规格及依赖隔离，阻止模型把secure偷改成恒真再交付合法Lean证明。ReproBridge则预先固定实验与报告统计，阻止得到目标分数后再替换测量。两者都保留人类规格/评价设计责任，但形式证明的逻辑正确性不能替代实验执行完整性，反过来数值复现也不证明程序安全。
 
 对照来源：[alphaproof-code](../../../agent-research/alphaproof-code/README.md) · [reprobridge](../../../agent-research/2611.08452-reprobridge/README.md)
+
+### 私有信息测评先检查谁知道什么，再看谁答对
+
+UserProxyBench把用户合同保真与任务reward分开，并审计请求前披露。MT-PingEval用分离数据库或图像建立不对称信息，再固定每玩家token检验轮次。Name-game要比较完整记录而非同名，且应对照无放回随机猜。协议实现没有actor，只有真实模型和tokenizer接入后才能评价协作。
+
+对照来源：[mt-pingeval](../../../agent-research/2602.24188-mt-pingeval/README.md) · [user-proxy-bench](../../../agent-research/2609.38043-userproxybench/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -167,9 +174,23 @@ AlphaProof Code把获批规格及依赖隔离，阻止模型把secure偷改成�
 
     对照来源：[alphaproof-code](../../../agent-research/alphaproof-code/README.md) · [reprobridge](../../../agent-research/2611.08452-reprobridge/README.md)
 
+### Name-game随轮数提高成功率，就一定是更好的协作吗？ {#cross-cross-colm-mt-pingeval}
+
+??? note "展开答案与例子"
+
+    **答案：** 不一定。更多轮次也给随机无放回猜记录更多机会，原文专门比较该基线。还需固定token预算和检查传递的信息，不能只看成功曲线。
+
+    **教学例子：** 教学例：25行里每轮猜一行，允许16轮天然比2轮更容易撞对。
+
+    对照来源：[mt-pingeval](../../../agent-research/2602.24188-mt-pingeval/README.md) · [user-proxy-bench](../../../agent-research/2609.38043-userproxybench/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-13** · 补入mt-pingeval历史遗漏，用各方私有视图与固定token总预算区分交互收益、额外输出和多次猜测机会；Name-game按完整记录判定。 UserProxyBench审计模拟用户是否提前泄露，MT-PingEval测受控信息博弈中的协作。任务成功不替代信息边界合规，更多轮次也不自动代表协作更好。
+
+涉及：[mt-pingeval](../../../agent-research/2602.24188-mt-pingeval/README.md) · [user-proxy-bench](../../../agent-research/2609.38043-userproxybench/README.md)
 
 **2026-11-11** · 增加形式规格保真与传递依赖门控维度；明确高成本reference无本地证明能力，不用regex或玩具定理替代官方验证。
 
@@ -195,7 +216,7 @@ AlphaProof Code把获批规格及依赖隔离，阻止模型把secure偷改成�
 
 覆盖 43 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 48 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 49 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -247,6 +268,7 @@ AlphaProof Code把获批规格及依赖隔离，阻止模型把secure偷改成�
 - [ReproBridge: Building Reproducibility into ML Research Artifacts](../../../agent-research/2611.08452-reprobridge/README.md)
 - [ARE-bench: Benchmarking Agents&#x27; Research Ability in Real-World Researcher Sessions and Workspaces](../../../agent-research/2611.14364-are-bench/README.md)
 - [AlphaProof Code: Verifying Signal&#x27;s Security at the Machine-Code Level](../../../agent-research/alphaproof-code/README.md)
+- [MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games](../../../agent-research/2602.24188-mt-pingeval/README.md)
 
 </details>
 

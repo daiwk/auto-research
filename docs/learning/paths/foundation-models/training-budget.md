@@ -7,7 +7,7 @@ hide:
 
 # 训练预算：数据配比、目标与优化器
 
-[基础模型](index.md) / 124 个问题 · 31 篇论文
+[基础模型](index.md) / 132 个问题 · 33 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">124 个问题 · 31 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">132 个问题 · 33 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:stochastic-rounding" data-paper-title="Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding 基础模型 NVIDIA 2026-11-10 FP32 主权重在训练中发生小变化，转为 BF16 后却可能仍落在同一格点，导致 rollout 策略看不到更新。BF16 在一般正规数区间的格距比 FP16 大八倍，因此相似的小步长可表现出不同的有效更新速度。随机舍入按到相邻格点的距离选上下端点，在条件期望上保留主权重变化，而不是强行放大学习率。 完整实验成本过高，不复现（审查 DONE）；诊断对 65536 个值作 BF16 舍入：round-to-nearest 全部回到 1，而 SR 上舍入概率应为。L1 机制组件，diagnostic only。CPU 与真实 NVIDIA A100 三种子验证已通过；完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。adjacent_values 以真实目标格式的 torch.nextafter 构造上下邻居；stochastic_cast 从 FP32 输入按显式 generator 采样，返回 BF16/FP16。概率计算提升为 float64，覆盖目标格式 subnormal；精确值保持不变。  训练与数值系统 低精度训练与随机舍入 基础模型 训练预算：数据配比、目标与优化器 FP32 主权重明明变了，为什么 BF16 rollout 可能完全没变？ 更新可能小于 BF16 当前格点半间距，round-to-nearest 后仍是同一个值。主权重有变化不保证实际 rollout 参数有变化；应观察量化后的权重。 本地示例1+1/1024转为BF16 nearest仍是1，因为该处BF16向上间距为1/128。 2026-11-11">
@@ -1248,6 +1248,59 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.16669">原论文</a> · <a href="../../../../reproductions/2607.16669-open-language-model/">实现解读</a> · <a href="#qa-0d6ef84afdcc27b9">问题链接</a></p>
 </details>
 </article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:continuousbench" data-paper-title="ContinuousBench: Can Differentially Private Synthetic Text Improve Capabilities?" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="ContinuousBench: Can Differentially Private Synthetic Text Improve Capabilities? 基础模型 Columbia University 2026-06-01 若benchmark已经被基座模型做得很好，合成数据是否真正传递新知识就难以区分。ContinuousBench定期生成或整理未见知识语料及相应QA，统一训练/evaluator设置，并与未经该语料训练的同一基座比较；关注高重复公共事实的utility，不要求DP模型记住单条私有记录。 完整实验成本过高，不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU组件专测已通过；没有CUDA路径，不需要GPU验收。未接入Evolve，不可据本地fixture成绩晋级。score_geminon 独立实现固定作者代码的清洗/匹配语义；capability_gain要求两臂题目ID、问题、gold与release revision完全一致，基线必须显式给出；select_validation_checkpoint拒绝test行。  预训练与数据 合成数据与隐私评测 基础模型 训练预算：数据配比、目标与优化器 ContinuousBench为什么要持续更新知识语料？ 旧benchmark可能已被基座掌握，难区分合成文本是否传递新能力。新release把语料和QA一起固定，并与同一未适配基座对照，避免把原有知识算作合成数据收益。 若base原已答对95%，新方法到96%与base原只会5%后到60%不是相同学习证据。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<span id="paper-foundation-models-continuousbench-2d997c08" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-af8fde7125676b7a">ContinuousBench为什么要持续更新知识语料？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Acontinuousbench">ContinuousBench: Can Differentially Private Synthetic Text Improve Capabilities?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Columbia University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>旧benchmark可能已被基座掌握，难区分合成文本是否传递新能力。新release把语料和QA一起固定，并与同一未适配基座对照，避免把原有知识算作合成数据收益。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>若base原已答对95%，新方法到96%与base原只会5%后到60%不是相同学习证据。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.01849v1">原论文</a> · <a href="../../../../foundation-models/2606.01849-continuousbench/">实现解读</a> · <a href="#qa-af8fde7125676b7a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:continuousbench" data-paper-title="ContinuousBench: Can Differentially Private Synthetic Text Improve Capabilities?" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="ContinuousBench: Can Differentially Private Synthetic Text Improve Capabilities? 基础模型 Columbia University 2026-06-01 若benchmark已经被基座模型做得很好，合成数据是否真正传递新知识就难以区分。ContinuousBench定期生成或整理未见知识语料及相应QA，统一训练/evaluator设置，并与未经该语料训练的同一基座比较；关注高重复公共事实的utility，不要求DP模型记住单条私有记录。 完整实验成本过高，不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU组件专测已通过；没有CUDA路径，不需要GPU验收。未接入Evolve，不可据本地fixture成绩晋级。score_geminon 独立实现固定作者代码的清洗/匹配语义；capability_gain要求两臂题目ID、问题、gold与release revision完全一致，基线必须显式给出；select_validation_checkpoint拒绝test行。  预训练与数据 合成数据与隐私评测 基础模型 训练预算：数据配比、目标与优化器 checkpoint用contains选，最终exact报告，为什么要分开？ contains是validation选择指标；exact是heldout配对结果，两者定义不同且不能用test选checkpoint。类型反序可能覆盖全部词却不等于canonical字符串；作者代码与论文清洗描述差异也须固定版本。 Flying and Normal可contains匹配Normal and Flying，但exact为假；不能悄悄切换parser提高结果。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-f229050254ed1562">checkpoint用contains选，最终exact报告，为什么要分开？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Acontinuousbench">ContinuousBench: Can Differentially Private Synthetic Text Improve Capabilities?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Columbia University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>contains是validation选择指标；exact是heldout配对结果，两者定义不同且不能用test选checkpoint。类型反序可能覆盖全部词却不等于canonical字符串；作者代码与论文清洗描述差异也须固定版本。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>Flying and Normal可contains匹配Normal and Flying，但exact为假；不能悄悄切换parser提高结果。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.01849v1">原论文</a> · <a href="../../../../foundation-models/2606.01849-continuousbench/">实现解读</a> · <a href="#qa-f229050254ed1562">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:continuousbench" data-paper-title="ContinuousBench: Can Differentially Private Synthetic Text Improve Capabilities?" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="ContinuousBench: Can Differentially Private Synthetic Text Improve Capabilities? 基础模型 Columbia University 2026-06-01 若benchmark已经被基座模型做得很好，合成数据是否真正传递新知识就难以区分。ContinuousBench定期生成或整理未见知识语料及相应QA，统一训练/evaluator设置，并与未经该语料训练的同一基座比较；关注高重复公共事实的utility，不要求DP模型记住单条私有记录。 完整实验成本过高，不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU组件专测已通过；没有CUDA路径，不需要GPU验收。未接入Evolve，不可据本地fixture成绩晋级。score_geminon 独立实现固定作者代码的清洗/匹配语义；capability_gain要求两臂题目ID、问题、gold与release revision完全一致，基线必须显式给出；select_validation_checkpoint拒绝test行。  预训练与数据 合成数据与隐私评测 基础模型 训练预算：数据配比、目标与优化器 有更高capability gain就说明DP更安全吗？ 不说明。gain评估合成数据utility，ε/δ隐私来自明确DP机制和会计；不应混淆高重复事实可学与单条私有记录可记忆。本地没有DP训练/会计，也没有复现News的LLMjudge。 一个非DP数据生成器可有很高QA准确率，仍不满足任何声称的隐私预算。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-41aec0829df94382">有更高capability gain就说明DP更安全吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Acontinuousbench">ContinuousBench: Can Differentially Private Synthetic Text Improve Capabilities?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Columbia University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不说明。gain评估合成数据utility，ε/δ隐私来自明确DP机制和会计；不应混淆高重复事实可学与单条私有记录可记忆。本地没有DP训练/会计，也没有复现News的LLMjudge。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一个非DP数据生成器可有很高QA准确率，仍不满足任何声称的隐私预算。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.01849v1">原论文</a> · <a href="../../../../foundation-models/2606.01849-continuousbench/">实现解读</a> · <a href="#qa-41aec0829df94382">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:continuousbench" data-paper-title="ContinuousBench: Can Differentially Private Synthetic Text Improve Capabilities?" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="ContinuousBench: Can Differentially Private Synthetic Text Improve Capabilities? 基础模型 Columbia University 2026-06-01 若benchmark已经被基座模型做得很好，合成数据是否真正传递新知识就难以区分。ContinuousBench定期生成或整理未见知识语料及相应QA，统一训练/evaluator设置，并与未经该语料训练的同一基座比较；关注高重复公共事实的utility，不要求DP模型记住单条私有记录。 完整实验成本过高，不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU组件专测已通过；没有CUDA路径，不需要GPU验收。未接入Evolve，不可据本地fixture成绩晋级。score_geminon 独立实现固定作者代码的清洗/匹配语义；capability_gain要求两臂题目ID、问题、gold与release revision完全一致，基线必须显式给出；select_validation_checkpoint拒绝test行。  预训练与数据 合成数据与隐私评测 基础模型 训练预算：数据配比、目标与优化器 两臂为什么必须绑定相同release、题目ID和gold？ 不同release或题目集会让难度变化伪装成学习收益。接口逐ID校验问题、参考答案及revision，并显式要求base预测，不把基线默认为0。 adapted用新版简单题、base用旧版难题，即使各自准确率都真实，也不能相减成capability gain。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-19a812bd862354d8">两臂为什么必须绑定相同release、题目ID和gold？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Acontinuousbench">ContinuousBench: Can Differentially Private Synthetic Text Improve Capabilities?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Columbia University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同release或题目集会让难度变化伪装成学习收益。接口逐ID校验问题、参考答案及revision，并显式要求base预测，不把基线默认为0。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>adapted用新版简单题、base用旧版难题，即使各自准确率都真实，也不能相减成capability gain。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.01849v1">原论文</a> · <a href="../../../../foundation-models/2606.01849-continuousbench/">实现解读</a> · <a href="#qa-19a812bd862354d8">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gemini-for-google" data-paper-title="Customizing an LLM for Enterprise Software Engineering" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Customizing an LLM for Enterprise Software Engineering 基础模型 Google 2026-05-15 从企业开发历史中提取高价值代码与交互信号，经过去重、质量过滤和污染控制形成中训练数据；用通用数据回放抑制灾难性遗忘，再做面向内部工具的后训练和部署评测。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。只执行中训练 replay 目标与不变量；没有 Google 私有万亿 token 数据、Gemini 权重或内部开发环境，不把原文 A/B 当作本地成绩。只执行中训练 replay 目标与不变量；没有 Google 私有万亿 token 数据、Gemini 权重或内部开发环境，不把原文 A/B 当作本地成绩。本地对照口径：基线为机制关闭或默认状态，实验组为开启对应核心算子；相对百分比不适用。本批指标只验证不变量、梯度或状态转换，不表示论文规模效果。  企业 LLM 数据治理 中训练与后训练 基础模型 训练预算：数据配比、目标与优化器 企业软件工程适配，为什么不是把内部代码直接全部继续训练？ 文档强调从开发历史提取高价值代码与交互信号，再做去重、质量过滤和污染控制，之后中训练与内部工具后训练。数据选择与评测环境同样是方法链路的一部分。 示意：重复生成文件与高价值修复历史，不应未经筛选就按同样权重混在一起。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
 <span id="paper-foundation-models-gemini-for-google-0c2d88a0" class="ar-learning-paper-anchor"></span>
@@ -1511,6 +1564,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>同一POI出现三次访问，原型候选集合中仍只保留一个该POI。</p>
 <p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.21149">原论文</a> · <a href="../../../../foundation-models/2601.21149-me-pois/">实现解读</a> · <a href="#qa-7e4f3a1b6f155b38">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:lidas" data-paper-title="Do Depth-Grown Models Overcome the Curse of Depth? An In-Depth Analysis" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Do Depth-Grown Models Overcome the Curse of Depth? An In-Depth Analysis 基础模型 Technical University of Munich 2025-12-09 深层 Transformer 后半段可能对最终预测贡献很小。论文比较从浅到深逐步生长与固定深度预训练，并提出 LIDAS：以层而不是固定块的中点选择复制区域，使偶数块时的初始化区别于 MIDAS。 完整实验成本过高，不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU及真实NVIDIA A100-SXM4-80GB的42/43/44三种子L1检查已通过；只运行小张量算子，没有完整训练。未接入Evolve，不可据本地fixture成绩晋级。grow_layers 对实际 nn.ModuleList 和 AdamW 状态执行变换，保留列表外的embedding/head；不自动改任意模型的配置或位置索引。拒绝跨层绑权重，避免悄悄破坏权重共享语义。  网络架构 深度生长与残差结构 基础模型 训练预算：数据配比、目标与优化器 LIDAS与随机追加四层有什么根本区别？ 它从当前网络中间区域复制已训练层，继承参数与优化器状态，而不是加入未训练随机层。目标是改变深度增长过程，不能从一次复制直接推断推理更强。 8层网络复制2–5层后继续优化，与末尾追加4个随机Linear不是同一变换。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<span id="paper-foundation-models-lidas-cde59274" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-7da1bcf07c28622e">LIDAS与随机追加四层有什么根本区别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Alidas">Do Depth-Grown Models Overcome the Curse of Depth? An In-Depth Analysis</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Technical University of Munich</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它从当前网络中间区域复制已训练层，继承参数与优化器状态，而不是加入未训练随机层。目标是改变深度增长过程，不能从一次复制直接推断推理更强。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>8层网络复制2–5层后继续优化，与末尾追加4个随机Linear不是同一变换。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2512.08819v1">原论文</a> · <a href="../../../../foundation-models/2512.08819-lidas/">实现解读</a> · <a href="#qa-7da1bcf07c28622e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:lidas" data-paper-title="Do Depth-Grown Models Overcome the Curse of Depth? An In-Depth Analysis" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Do Depth-Grown Models Overcome the Curse of Depth? An In-Depth Analysis 基础模型 Technical University of Munich 2025-12-09 深层 Transformer 后半段可能对最终预测贡献很小。论文比较从浅到深逐步生长与固定深度预训练，并提出 LIDAS：以层而不是固定块的中点选择复制区域，使偶数块时的初始化区别于 MIDAS。 完整实验成本过高，不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU及真实NVIDIA A100-SXM4-80GB的42/43/44三种子L1检查已通过；只运行小张量算子，没有完整训练。未接入Evolve，不可据本地fixture成绩晋级。grow_layers 对实际 nn.ModuleList 和 AdamW 状态执行变换，保留列表外的embedding/head；不自动改任意模型的配置或位置索引。拒绝跨层绑权重，避免悄悄破坏权重共享语义。  网络架构 深度生长与残差结构 基础模型 训练预算：数据配比、目标与优化器 block size=4、原来8层时，LIDAS的实际层顺序是什么？ 从0计数为0,1,2,3,4,5,2′,3′,4′,5′,6,7。中间连续四层在边界6重复；以原文Figure2与奇数块时等于MIDAS的约束为准，不把正文闭区间排版歧义实现成五层。 12层时复制4–7层到其后，这时恰与MIDAS一致。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-8b5b7f140e0bc293">block size=4、原来8层时，LIDAS的实际层顺序是什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Alidas">Do Depth-Grown Models Overcome the Curse of Depth? An In-Depth Analysis</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Technical University of Munich</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>从0计数为0,1,2,3,4,5,2′,3′,4′,5′,6,7。中间连续四层在边界6重复；以原文Figure2与奇数块时等于MIDAS的约束为准，不把正文闭区间排版歧义实现成五层。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>12层时复制4–7层到其后，这时恰与MIDAS一致。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2512.08819v1">原论文</a> · <a href="../../../../foundation-models/2512.08819-lidas/">实现解读</a> · <a href="#qa-8b5b7f140e0bc293">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:lidas" data-paper-title="Do Depth-Grown Models Overcome the Curse of Depth? An In-Depth Analysis" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Do Depth-Grown Models Overcome the Curse of Depth? An In-Depth Analysis 基础模型 Technical University of Munich 2025-12-09 深层 Transformer 后半段可能对最终预测贡献很小。论文比较从浅到深逐步生长与固定深度预训练，并提出 LIDAS：以层而不是固定块的中点选择复制区域，使偶数块时的初始化区别于 MIDAS。 完整实验成本过高，不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU及真实NVIDIA A100-SXM4-80GB的42/43/44三种子L1检查已通过；只运行小张量算子，没有完整训练。未接入Evolve，不可据本地fixture成绩晋级。grow_layers 对实际 nn.ModuleList 和 AdamW 状态执行变换，保留列表外的embedding/head；不自动改任意模型的配置或位置索引。拒绝跨层绑权重，避免悄悄破坏权重共享语义。  网络架构 深度生长与残差结构 基础模型 训练预算：数据配比、目标与优化器 LIDAS与随机舍入都影响训练，为什么收益不能混算？ LIDAS改变层数、初始化和优化器状态继承；随机舍入改变FP32主权重进入低精度参数时的量化分布。两者的控制变量、预算和误差来源不同，需分别验证，再做同预算组合实验。 层生长保持Adam moments；SR保持量化条件期望。两项都通过L1，不等于组合模型会更快达到同精度。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-afc4313178549636">LIDAS与随机舍入都影响训练，为什么收益不能混算？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Alidas">Do Depth-Grown Models Overcome the Curse of Depth? An In-Depth Analysis</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Technical University of Munich</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>LIDAS改变层数、初始化和优化器状态继承；随机舍入改变FP32主权重进入低精度参数时的量化分布。两者的控制变量、预算和误差来源不同，需分别验证，再做同预算组合实验。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>层生长保持Adam moments；SR保持量化条件期望。两项都通过L1，不等于组合模型会更快达到同精度。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2512.08819v1">原论文</a> · <a href="../../../../foundation-models/2512.08819-lidas/">实现解读</a> · <a href="#qa-afc4313178549636">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:lidas" data-paper-title="Do Depth-Grown Models Overcome the Curse of Depth? An In-Depth Analysis" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Do Depth-Grown Models Overcome the Curse of Depth? An In-Depth Analysis 基础模型 Technical University of Munich 2025-12-09 深层 Transformer 后半段可能对最终预测贡献很小。论文比较从浅到深逐步生长与固定深度预训练，并提出 LIDAS：以层而不是固定块的中点选择复制区域，使偶数块时的初始化区别于 MIDAS。 完整实验成本过高，不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU及真实NVIDIA A100-SXM4-80GB的42/43/44三种子L1检查已通过；只运行小张量算子，没有完整训练。未接入Evolve，不可据本地fixture成绩晋级。grow_layers 对实际 nn.ModuleList 和 AdamW 状态执行变换，保留列表外的embedding/head；不自动改任意模型的配置或位置索引。拒绝跨层绑权重，避免悄悄破坏权重共享语义。  网络架构 深度生长与残差结构 基础模型 训练预算：数据配比、目标与优化器 复制参数值相同但Adam状态共享或清零，会怎样？ 共享状态会让两层相互污染，清零则改变论文初始化；参数、exp_avg、exp_avg_sq、AMSGrad状态和step应独立复制。全局LR scheduler继续原step，不因生长重启。模型特定层编号/配置仍须调用方正确更新。 改变复制层exp_avg不应改变源层；下一步真实梯度应能使两份参数分别更新。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-08dd6600f27602ef">复制参数值相同但Adam状态共享或清零，会怎样？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Alidas">Do Depth-Grown Models Overcome the Curse of Depth? An In-Depth Analysis</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Technical University of Munich</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>共享状态会让两层相互污染，清零则改变论文初始化；参数、exp_avg、exp_avg_sq、AMSGrad状态和step应独立复制。全局LR scheduler继续原step，不因生长重启。模型特定层编号/配置仍须调用方正确更新。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>改变复制层exp_avg不应改变源层；下一步真实梯度应能使两份参数分别更新。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2512.08819v1">原论文</a> · <a href="../../../../foundation-models/2512.08819-lidas/">实现解读</a> · <a href="#qa-08dd6600f27602ef">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:muon" data-paper-title="Muon is Scalable for LLM Training" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Muon is Scalable for LLM Training 基础模型 Moonshot AI / UCLA 2025-02-24 AdamW 把矩阵参数当作独立标量更新，Muon 则把隐藏层梯度视为矩阵，通过 momentum 与 Newton–Schulz 近似极分解得到正交化更新方向。论文为大规模训练补上 weight decay 和按参数形状缩放；非隐藏矩阵参数继续使用 AdamW。 Fidelity: 核心机制复现。隐藏层二维矩阵使用 Muon，embedding、norm、bias 与输出参数保留 AdamW。未复刻分布式 optimizer state、通信优化、3B/16B MoE 和 5.7T-token compute frontier；本地结论只说明算法路径正确运行，不支持 2× 效率在小模型复现。本地对照口径：基线和实验组结构、参数量、数据与 30-step 预算完全相同，只把 AdamW 换为 Muon；WikiText-2 LM loss 5.7471→5.8016，相对 +0.95%（更差），PPL 相对 +5.61%。  llm-training optimizer training-efficiency 基础模型 训练预算：数据配比、目标与优化器 Muon 为什么把隐藏矩阵的更新方向看成一个矩阵几何问题？ 隐藏权重各坐标共同构成线性映射，Muon用动量矩阵的近似polar方向组织更新，而非只逐坐标调尺度。它关注更新方向的谱结构，并配合形状缩放及weight decay。 示意：矩阵中一个相关方向很强时，处理整张矩阵与给每个元素独立调步长不同。 2026-10-27">

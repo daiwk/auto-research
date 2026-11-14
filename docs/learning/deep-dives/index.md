@@ -11,7 +11,7 @@ hide:
 
 每个子主题维护一张卡片。新论文进入后，更新对应卡片的比较或结论，并记录这次变化；不必再从头读整批论文。
 
-31 张精读卡片 · 1122 篇主题资料 · 按主题折叠
+31 张精读卡片 · 1145 篇主题资料 · 按主题折叠
 
 <details class="ar-deep-shelf"><summary>搜广推 · 7 张</summary>
 <div class="ar-deep-grid">
@@ -57,7 +57,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/context-and-state/">长上下文不是一条轴：位置、读取与状态压缩</a></h2>
 <p>先问历史以什么形式存在，再问当前 token 怎样读它。RoPE 改变相对位置关系，Mamba 把历史写入递归状态，NSA 在多条读取路径间分工，OpenAttention 为未精读部分保留代理，TTR 则为当前输入求一个压缩表示。这些方法不能只按“支持多长”排成一列。 MERLIN在多个压缩状态之外保留routing key矩统计，改变段间读取权重，而不替换每段内部的递归写入。</p>
-<p class="ar-learning-topic-meta">12 篇重点对照 · 8 个跨论文问答 · 2026-11-11</p>
+<p class="ar-learning-topic-meta">13 篇重点对照 · 9 个跨论文问答 · 2026-11-13</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/conditional-compute/">按需算力：选择专家、跳过计算，还是查回旧知识</a></h2>
@@ -67,7 +67,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/training-budget/">训练预算：改数据、改更新方向，还是改比较口径</a></h2>
 <p>同一预算内训练得更好，可能来自更合适的数据、逐样本处理、更有效更新或更低状态开销。DoReMi、Mixing Laws、DataOrchestra、Muon 和 ECO 改动不同环节；Muon Paired Budget 则提醒先冻结选参规则，再分别回答等数据和等时间问题。ProLand改变LoRA乘积空间的更新几何，GAVAGAI则给captioning增加显式词区域对齐目标，二者不能仅因都改善训练就混为一类。</p>
-<p class="ar-learning-topic-meta">9 篇重点对照 · 5 个跨论文问答 · 2026-11-11</p>
+<p class="ar-learning-topic-meta">11 篇重点对照 · 7 个跨论文问答 · 2026-11-13</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/compression-and-cache/">推理压缩先找瓶颈：权重、KV 内容与缓存层级</a></h2>
@@ -82,7 +82,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/evaluation-and-evidence/">能力证据：准确打分、节省观测与解释预测</a></h2>
 <p>先区分“正确答案怎样定义”“下一题测谁”“多个裁判怎样融合”和“预测怎样解释”。XLGoBench、ProEval、FUSE、TCAB 与 DetectorScope 分别改变这些环节；观测更少或解释可加，不等于被测能力本身更强。XLA from the Trenches还提醒：评分之前，编译后程序本身就可能静默偏离原始数值语义，不能把编译成功当作执行正确。</p>
-<p class="ar-learning-topic-meta">6 篇重点对照 · 4 个跨论文问答 · 2026-11-04</p>
+<p class="ar-learning-topic-meta">14 篇重点对照 · 12 个跨论文问答 · 2026-11-13</p>
 </article>
 </div></details>
 
@@ -110,7 +110,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="multimodal-models/alignment-interfaces/">多模态对齐到底对齐什么：向量、视觉接口还是证据依赖</a></h2>
 <p>CLIP与EmbeddingGemma 2产出可比较向量，BLIP-2与LLaVA连接视觉到条件生成，CV-OPD训练证据依赖，UMRM给回答评分。它们的输出合同和监督对象不同，不是同一条从小到大的能力排行榜。</p>
-<p class="ar-learning-topic-meta">7 篇重点对照 · 5 个跨论文问答 · 2026-11-07</p>
+<p class="ar-learning-topic-meta">9 篇重点对照 · 7 个跨论文问答 · 2026-11-13</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="multimodal-models/visual-evidence-budget/">少看、晚看还是再看：把视觉预算放到正确阶段</a></h2>
@@ -139,7 +139,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="post-training/reward-and-credit/">奖励从哪里来，信用才该分到哪里</a></h2>
 <p>过程标签、最终结果、模型自置信与回溯归因是不同证据。逐步PRM、MRTPO、TACO和MART-GRPO分别做标签获取、奖励定位、正信用降权和失败后缀过滤；INTUITOR则改用内在分布信号，不能把它当外部正确性验证器。 CONCUR另处理奖励维度之间的优先级，把门控辅助优势投影到主奖励保序锥；这不是沿时间轴分配token信用。</p>
-<p class="ar-learning-topic-meta">11 篇重点对照 · 7 个跨论文问答 · 2026-11-11</p>
+<p class="ar-learning-topic-meta">12 篇重点对照 · 8 个跨论文问答 · 2026-11-13</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="post-training/student-trajectory-distillation/">轨迹蒸馏：采样者、提案与散度方向分开看</a></h2>
@@ -149,12 +149,12 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="post-training/teacher-and-context/">教师更强仍可能教错：信息、兼容性与成功行为保护</a></h2>
 <p>教师的价值不只取决于总分。OPSD改变训练期可见信息，MOPD与逐token路由组织多教师，CSD先统一概率事件，SPOD保护学生已成功选择，VAD筛出可归于视觉证据的修正；这些约束要在模仿之前分别成立。</p>
-<p class="ar-learning-topic-meta">11 篇重点对照 · 9 个跨论文问答 · 2026-11-12</p>
+<p class="ar-learning-topic-meta">13 篇重点对照 · 11 个跨论文问答 · 2026-11-13</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="post-training/data-and-budget/">省掉哪一份算力：选问题、少生成、分枝与有条件重放</a></h2>
 <p>数据与预算方法改变的是训练链路的不同位置。课程重估当前难度，LESSER降低筛选特征成本，STOPD随机少生成并校正，BranchOPD增加关键分枝，Lightning缓存教师，TAR召回被压制的正确模式；少调用一次教师不等于整个训练更便宜。</p>
-<p class="ar-learning-topic-meta">6 篇重点对照 · 3 个跨论文问答 · 2026-10-27</p>
+<p class="ar-learning-topic-meta">7 篇重点对照 · 4 个跨论文问答 · 2026-11-13</p>
 </article>
 </div></details>
 
@@ -163,12 +163,12 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="agent-research/planning-and-search/">规划先问何时见反馈，再问要不要展开搜索</a></h2>
 <p>ReAct 与 ReWOO 改变计划接收观察的时机，ToT 与 LATS 改变候选搜索组织，Jev Lookahead 把后继模拟交给代码，DRAGO 则检查形式计划是否忠实。它们处理不同的不确定性：步骤未知、路线选择、环境可达性与规格错误，不应以搜索次数或本地满分统一排名。</p>
-<p class="ar-learning-topic-meta">9 篇重点对照 · 6 个跨论文问答 · 2026-11-13</p>
+<p class="ar-learning-topic-meta">11 篇重点对照 · 8 个跨论文问答 · 2026-11-13</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="agent-research/memory-and-skills/">经验进入长期系统前，要解决存取、价值与准入</a></h2>
 <p>MemGPT 管信息放在哪里，MemPrice 管有限窗口里保留何种精度，CMP 管效用如何识别；Voyager 把成功程序变技能，VaG 管技能进入库的风险，SkillRise 用后续任务检验整理价值。存得下、相关、合法和能帮助未来，是四个不同问题。 EMMA再把结构化记忆分配给controller、agent与skill，按失败scope限制单次编辑及下一次实际使用义务。</p>
-<p class="ar-learning-topic-meta">11 篇重点对照 · 8 个跨论文问答 · 2026-11-11</p>
+<p class="ar-learning-topic-meta">12 篇重点对照 · 9 个跨论文问答 · 2026-11-13</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="agent-research/tools-and-collaboration/">从会调用到能交付：工具接口、可靠性与协作合同</a></h2>
@@ -178,17 +178,17 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="agent-research/harness-and-self-improvement/">自改进先标对象：答案、经验、接口与系统版本</a></h2>
 <p>Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。</p>
-<p class="ar-learning-topic-meta">22 篇重点对照 · 14 个跨论文问答 · 2026-11-13</p>
+<p class="ar-learning-topic-meta">23 篇重点对照 · 15 个跨论文问答 · 2026-11-13</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="agent-research/agent-policy-learning/">交互学习：统一轨迹之后，信用和教师信息怎样分配</a></h2>
 <p>Agent Lightning先把执行整理成可训练transition；GiGPO、AdaStep和DepGPO分别利用重复状态、回报方差与命令依赖分配信用；Frontier-OPD和ASTEROID则改变教师数据怎样进入学生学习。记录成轨迹只是入口，训练目标和可见信息才定义算法。</p>
-<p class="ar-learning-topic-meta">6 篇重点对照 · 3 个跨论文问答 · 2026-10-27</p>
+<p class="ar-learning-topic-meta">7 篇重点对照 · 4 个跨论文问答 · 2026-11-13</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="agent-research/evaluation-and-reliability/">评测追问四件事：完成了、稳健吗、靠什么、花多少</a></h2>
 <p>GAIA测最终任务回答，AgentPerturb检查单目标输入扰动，User Proxy Bench检查用户模拟是否偷省信息获取；AlphaDiana完整记录失败与重试，HDA拆解harness涨分来源，选择性评测则约束自动裁判的错误区域。高分只有在这些协议讲清后才有可解释性。</p>
-<p class="ar-learning-topic-meta">11 篇重点对照 · 8 个跨论文问答 · 2026-11-11</p>
+<p class="ar-learning-topic-meta">12 篇重点对照 · 9 个跨论文问答 · 2026-11-13</p>
 </article>
 </div></details>
 
