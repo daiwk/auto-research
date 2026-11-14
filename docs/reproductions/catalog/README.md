@@ -10,6 +10,8 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 重排与混排 | [Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking](../../recommendation-components/2611.07591-ice/README.md) | Alibaba Taobao & Tmall Group，2026-11-05 | 未发现官方代码 | `ice`：仅低成本组件，完整实验不复现 |
+| 召回 | [From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation](../../recommendation-components/2611.05997-ured/README.md) | Alibaba Taobao & Tmall Group，2026-11-04 | 未发现官方代码 | `ured`：仅低成本组件，完整实验不复现 |
 | 重排与混排 | [OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer](../../recommendation-components/2611.04720-onetrans-gsr/README.md) | ByteDance，2026-11-03 | 未发现官方代码 | `onetrans-gsr`：仅低成本组件，完整实验不复现 |
 | 生成式召回 | [ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse](../../recommendation-components/2611.04259-reusegr/README.md) | Xidian University，2026-11-03 | 未发现官方代码 | `reusegr`：仅低成本组件，完整实验不复现 |
 | 本地搜索 | [SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search](../../recommendation-components/2611.04662-spade-local-search/README.md) | Meituan，2026-11-03 | 未发现官方代码 | `spade-local-search`：仅低成本组件，完整实验不复现 |

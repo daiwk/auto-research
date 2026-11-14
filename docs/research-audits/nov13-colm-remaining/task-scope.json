@@ -1,0 +1,1993 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-13-colm-historical-review",
+  "date": "2026-11-13",
+  "scope_kind": "fixed-24-identity-historical-review",
+  "source_inventory": "research-audits/nov13-history-repair/historical-source-reconciliation.json",
+  "source_page": "https://research.google/conferences-and-events/google-at-colm-2026/",
+  "scope_definition": "Exactly the 24 needs-review identities in the committed earlier COLM snapshot; not a new-date scan, institution-wide census, or automatic acceptance of every paper",
+  "requested_delivery": "Review every identity; implement qualifying affordable components, explicitly close expensive full campaigns as not reproduced, validate advertised CUDA paths on one A100/A30, and deliver reviewed bilingual write-ups, original figures and learning content for every newly catalogued paper",
+  "review_watermark_advanced": false,
+  "publication_dates_rewritten_as_discovery_date": false,
+  "automatic_implementation_queue": false,
+  "review_assignments": {
+    "foundation": [
+      "2508.11017",
+      "2512.08819",
+      "2603.09906",
+      "2604.01430",
+      "2604.02910",
+      "2604.06543",
+      "2604.14403",
+      "2606.01849"
+    ],
+    "agent": [
+      "2512.04068",
+      "2601.16355",
+      "2602.16488",
+      "2602.24188",
+      "2603.19258",
+      "2604.15505",
+      "2604.24842",
+      "2608.26788"
+    ],
+    "evaluation": [
+      "2510.22028",
+      "2601.17645",
+      "2603.23301",
+      "2603.24917",
+      "2604.03136",
+      "2604.22191",
+      "2604.23321",
+      "2606.32032"
+    ]
+  },
+  "full_capability_reproduced": false,
+  "merge_request_requested": 250,
+  "merge_request_state_observed": "MERGED",
+  "publication_target": "single_followup_PR_linked_to_250",
+  "followup_publication_authorized": true,
+  "publication_base_branch": "codex/nov06-priority-papers",
+  "publication_head_branch": "codex/nov13-colm-history-closeout",
+  "selected_scope_complete": true,
+  "delivery_status": "fixed_scope_complete",
+  "review_watermark": {
+    "before": "2026-11-09",
+    "after": "2026-11-09"
+  },
+  "full_window_review_complete": false,
+  "all_sources_exhaustive": false,
+  "counts": {
+    "reviewed_identities": 24,
+    "catalogued_papers": 23,
+    "sourceful_exclusions": 1,
+    "low_cost_components": 23,
+    "l0_interfaces": 3,
+    "l1_mechanisms": 20,
+    "cpu_validated_components": 23,
+    "cuda_validated_components": 7,
+    "reviewed_bilingual_paper_pages": 23,
+    "authored_four_level_questions": 92,
+    "full_capability_reproductions": 0,
+    "new_first_publications": 0
+  },
+  "coverage_limits": [
+    "Exactly the earlier 24 needs-review identities, not a new-paper or institution-exhaustive scan",
+    "Original 28-ID capture and other unavailable-source exceptions remain separately auditable",
+    "High-cost or private-dependency full campaigns are explicitly not reproduced; local diagnostics are not capability evidence"
+  ],
+  "papers": [
+    {
+      "domain": "foundation-models",
+      "key": "rosetta-unification",
+      "title": "Beyond the Rosetta Stone: Unification Forces in Generalization Dynamics",
+      "paper_url": "https://arxiv.org/abs/2508.11017v1",
+      "reviewed_version_url": "https://arxiv.org/html/2508.11017v1",
+      "reviewed_version": "v1",
+      "detail_path": "foundation-models/2508.11017-rosetta-unification/README.md",
+      "topic": [
+        "预训练与知识表示",
+        "跨语言知识迁移"
+      ],
+      "first_author": "Carter Blum",
+      "first_author_affiliation": "Google DeepMind",
+      "published": "2025-08-14",
+      "published_at": "2025-08-14T18:44:13Z",
+      "code": null,
+      "code_status": "截至2026-11-13，固定v1未找到已核实的本篇作者代码仓库；基础模型与依赖仓库不算本篇开源。",
+      "code_license": null,
+      "upstream_revision": null,
+      "adapter": null,
+      "priority": "P1",
+      "priority_reason": "Google COLM官方历史源召回，固定原文方法审查；低成本定义核/评测协议，不是近期新首发。",
+      "intake_class": "historical_priority_backfill",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.foundation_models.rosetta_unification.diagnostic",
+      "local_command": "PYTHONPATH=src python -c 'from auto_research.foundation_models.rosetta_unification import diagnostic; print(diagnostic(42))'",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2508.11017v1",
+        "sections": "§2.1, §4–6 and Appendix B.3",
+        "paper_configuration": "110 controlled ~2M-parameter Transformer runs plus Gemma 2B/4B representation and translation analyses; full experiment matrix not reproduced.",
+        "component_boundary": "CPU unification similarity-block arithmetic only; no training/model selection on test.",
+        "available_resource": "Local CPU/Mac or one NVIDIA A100/A30",
+        "decision": "成本过高，完整实验不复现；审查DONE。"
+      },
+      "summary": "同一事实以不同语言出现时，模型可能把它们存成互不相通的表征。作者在受控合成知识图谱上从零训练小型 Transformer，分别改变平行事实比例、语言频率差异和语言可提取性，发现同语言准确率接近满分并不代表跨语言迁移良好。 `average_cosine` 与 `unification_score` 实现有限、非零表示的集合余弦和逐组比值，拒绝接近零的分母。诊断验证尺度不变性、平均比值及集合自相似不等于对角线常数1。外部特征没有由本地模型生成；诊断不证明跨语言准确率提高。",
+      "id": "2508.11017",
+      "new_first_publication": false,
+      "review_scope": "named-full-text-sections",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "source_provenance": [
+        {
+          "organization": "Google",
+          "source_url": "https://arxiv.org/html/2508.11017v1"
+        }
+      ],
+      "full_text_review": {
+        "scope": "full-text",
+        "version": "v1",
+        "source_url": "https://arxiv.org/html/2508.11017v1",
+        "source_locations": [
+          "§2.1, §4–6 and Appendix B.3"
+        ],
+        "source_sha256": "bc7ab368f2d306f486f54c094f6a1ed363388de2d5396e8209da354880d930e1",
+        "read_scope": "Byline, defining method, evaluation and cost sections; not a claim that every appendix result was re-executed"
+      },
+      "status": "implemented",
+      "resolution": "bounded_component_accepted",
+      "reason": "CPU unification similarity-block arithmetic only; no training/model selection on test.",
+      "component_implemented": true,
+      "doc": "foundation-models/2508.11017-rosetta-unification/README.md",
+      "track": "foundation",
+      "full_capability_reproduced": false,
+      "component_evidence": "docs/foundation-models/2508.11017-rosetta-unification/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "domain": "foundation-models",
+      "key": "qe-length-normalization",
+      "title": "Penalizing Length: Uncovering Systematic Bias in Quality Estimation Metrics",
+      "paper_url": "https://arxiv.org/abs/2510.22028v1",
+      "reviewed_version_url": "https://arxiv.org/html/2510.22028v1",
+      "reviewed_version": "v1",
+      "reviewed_arxiv_id": "2510.22028v1",
+      "detail_path": "foundation-models/2510.22028-qe-length-normalization/README.md",
+      "topic": [
+        "评测与研究证据",
+        "翻译指标与长度偏差"
+      ],
+      "first_author": "Yilin Zhang",
+      "first_author_affiliation": "Carnegie Mellon University / Google",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "published": "2025-10-24",
+      "published_at": "2025-10-24T21:22:06Z",
+      "code": null,
+      "code_status": "固定v1称录用后发布实验脚本；截至2026-11-13的原文及有限作者/标题核查未确认本篇公开仓库，不把MetricX/WMT依赖算本篇源码。",
+      "code_license": null,
+      "adapter": null,
+      "priority": "P0",
+      "priority_reason": "Google/DeepMind原文署名；Google COLM官方独立历史库存触发补漏，非本轮新首发。",
+      "intake_class": "historical_priority_backfill",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.foundation_models.qe_length_normalization.diagnostic",
+      "local_command": "PYTHONPATH=src python -c 'from auto_research.foundation_models.qe_length_normalization import diagnostic; print(diagnostic(42, \"cpu\"))'",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2510.22028v1",
+        "reviewed_sections": [
+          "§3.1–3.2",
+          "§4.1–4.2",
+          "§7.2"
+        ],
+        "available_resource": "单张NVIDIA A100/A30或本地Mac",
+        "basis": "WMT24++十个语言方向、MetricX/CometKiwi/Gemini-2.0 AutoMQM/Gemini-2.5-Pro评测及MetricX QE重新训练。原文未给总GPU/墙钟，完整多臂评测/训练涉及商业模型且成本无法廉价确认；按单A100/A30/Mac预算不启动，不试训。",
+        "decision": "成本过高，不复现（审查DONE）；仅交付独立低成本L1组件，不下载大资源、不试训、不自动重试。"
+      },
+      "fidelity_note": "训练目标R/|h|与推理乘回|h|、同文档前五连续段前缀构造/整组500token门槛、相对首前缀的组内分差；不拟合MetricX、不做后处理去偏伪称。",
+      "summary": "训练目标R/|h|与推理乘回|h|、同文档前五连续段前缀构造/整组500token门槛、相对首前缀的组内分差；不拟合MetricX、不做后处理去偏伪称。",
+      "id": "2510.22028",
+      "new_first_publication": false,
+      "review_scope": "named-full-text-sections",
+      "source_provenance": [
+        {
+          "organization": "Google",
+          "source_url": "https://arxiv.org/html/2510.22028v1"
+        }
+      ],
+      "full_text_review": {
+        "scope": "full-text",
+        "version": "v1",
+        "source_url": "https://arxiv.org/html/2510.22028v1",
+        "source_locations": [
+          "§3.1–3.2",
+          "§4.1–4.2",
+          "§7.2"
+        ],
+        "source_sha256": "7b4b83deaa00c283c1e7af5b76ef9727ee56a6073fb70a5f53e24e7fa549f859",
+        "read_scope": "Byline, defining method, evaluation and cost sections; not a claim that every appendix result was re-executed"
+      },
+      "status": "implemented",
+      "resolution": "bounded_component_accepted",
+      "reason": "训练目标R/|h|与推理乘回|h|、同文档前五连续段前缀构造/整组500token门槛、相对首前缀的组内分差；不拟合MetricX、不做后处理去偏伪称。",
+      "component_implemented": true,
+      "doc": "foundation-models/2510.22028-qe-length-normalization/README.md",
+      "track": "foundation",
+      "full_capability_reproduced": false,
+      "component_evidence": "docs/foundation-models/2510.22028-qe-length-normalization/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "domain": "agent-research",
+      "key": "clarification-sgp",
+      "title": "Learning Steerable Clarification Policies with Collaborative Self-play",
+      "paper_url": "https://arxiv.org/abs/2512.04068",
+      "reviewed_version": "v1",
+      "reviewed_arxiv_id": "2512.04068v1",
+      "reviewed_version_url": "https://arxiv.org/html/2512.04068v1",
+      "detail_path": "agent-research/2512.04068-clarification-sgp/README.md",
+      "topic": [
+        "选择与澄清"
+      ],
+      "published": "2025-12-03",
+      "published_at": "2025-12-03T18:49:54Z",
+      "first_author": "Jonathan Berant",
+      "first_author_affiliation": "Google Research",
+      "verified_priority_organizations": [
+        "Google Research",
+        "Google DeepMind",
+        "Meta"
+      ],
+      "code": null,
+      "code_status": "固定v1与本次有界官方作者入口检索未找到可核实专属源码；明确不把引用库或第三方复刻当作作者系统代码。",
+      "adapter": null,
+      "priority": "P0",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.agent_research.clarification_sgp.diagnostic",
+      "local_command": "PYTHONPATH=src python -c 'from auto_research.agent_research.clarification_sgp import diagnostic; print(diagnostic(42))'",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "review_done": true,
+      "full_experiment_review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2512.04068v1",
+        "available_resource": "单张A100/A30或Mac",
+        "basis": "Gemma2-9B双模型、192训练rollout/query、64测试rollout/query、3轮ReST和两benchmark；完整多轮生成/训练高成本不复现。"
+      },
+      "fidelity_note": "以成本惩罚reward控制澄清、直接回答或多答案；先按解释均衡均值选动作序列，再逐解释选最高reward轨迹。本地只实现离线选择，不运行模型或ReST训练。",
+      "summary": "以成本惩罚reward控制澄清、直接回答或多答案；先按解释均衡均值选动作序列，再逐解释选最高reward轨迹。本地只实现离线选择，不运行模型或ReST训练。",
+      "id": "2512.04068",
+      "new_first_publication": false,
+      "intake_class": "historical_priority_backfill",
+      "review_scope": "named-full-text-sections",
+      "source_provenance": [
+        {
+          "organization": "Google Research",
+          "source_url": "https://arxiv.org/html/2512.04068v1"
+        },
+        {
+          "organization": "Google DeepMind",
+          "source_url": "https://arxiv.org/html/2512.04068v1"
+        },
+        {
+          "organization": "Meta",
+          "source_url": "https://arxiv.org/html/2512.04068v1"
+        }
+      ],
+      "full_text_review": {
+        "scope": "full-text",
+        "version": "v1",
+        "source_url": "https://arxiv.org/html/2512.04068v1",
+        "source_locations": [
+          "3.1",
+          "3.2 Algorithm1/Eq2–4",
+          "4.2"
+        ],
+        "source_sha256": "0968c37ab9e18a2d897de9f48adad33d526a3e6ce09a5b65c4fc7de2d5fcfd5a",
+        "read_scope": "Byline, defining method, evaluation and cost sections; not a claim that every appendix result was re-executed"
+      },
+      "status": "implemented",
+      "resolution": "bounded_component_accepted",
+      "reason": "以成本惩罚reward控制澄清、直接回答或多答案；先按解释均衡均值选动作序列，再逐解释选最高reward轨迹。本地只实现离线选择，不运行模型或ReST训练。",
+      "component_implemented": true,
+      "doc": "agent-research/2512.04068-clarification-sgp/README.md",
+      "track": "agent",
+      "full_capability_reproduced": false,
+      "component_evidence": "docs/agent-research/2512.04068-clarification-sgp/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "domain": "foundation-models",
+      "key": "lidas",
+      "title": "Do Depth-Grown Models Overcome the Curse of Depth? An In-Depth Analysis",
+      "paper_url": "https://arxiv.org/abs/2512.08819v1",
+      "reviewed_version_url": "https://arxiv.org/html/2512.08819v1",
+      "reviewed_version": "v1",
+      "detail_path": "foundation-models/2512.08819-lidas/README.md",
+      "topic": [
+        "网络架构",
+        "深度生长与残差结构"
+      ],
+      "first_author": "Ferdinand Kapl",
+      "first_author_affiliation": "Technical University of Munich",
+      "published": "2025-12-09",
+      "published_at": "2025-12-09T17:12:04Z",
+      "code": null,
+      "code_status": "截至2026-11-13，固定v1未找到已核实的本篇作者代码仓库；基础模型与依赖仓库不算本篇开源。",
+      "code_license": null,
+      "upstream_revision": null,
+      "adapter": null,
+      "priority": "P1",
+      "priority_reason": "Google COLM官方历史源召回，固定原文方法审查；低成本定义核/评测协议，不是近期新首发。",
+      "intake_class": "historical_priority_backfill",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.foundation_models.lidas.diagnostic",
+      "local_command": "PYTHONPATH=src python -c 'from auto_research.foundation_models.lidas import diagnostic; print(diagnostic(42))'",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": true,
+      "gpu_validation_passed": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2512.08819v1",
+        "sections": "§3.1–3.2, Figure 2, Appendices A/E",
+        "paper_configuration": "360M baseline uses 64 A100-40GB for 1.5 days; 1.7B baseline 128 A100-40GB for 4.5 days; full pretraining not reproduced.",
+        "component_boundary": "Real Torch layer/optimizer-state growth and one subsequent gradient step; CPU/CUDA L1, Real NVIDIA A100-SXM4-80GB seeds42/43/44 L1 operator checks passed; receipt bound to frozen commit084bf0b1409d4bd5593c8704e37eced5f4f52bde, no full training.",
+        "available_resource": "Local CPU/Mac or one NVIDIA A100/A30",
+        "decision": "成本过高，完整实验不复现；审查DONE。"
+      },
+      "summary": "深层 Transformer 后半段可能对最终预测贡献很小。论文比较从浅到深逐步生长与固定深度预训练，并提出 LIDAS：以层而不是固定块的中点选择复制区域，使偶数块时的初始化区别于 MIDAS。 `grow_layers` 对实际 `nn.ModuleList` 和 AdamW 状态执行变换，保留列表外的embedding/head；不自动改任意模型的配置或位置索引。拒绝跨层绑权重，避免悄悄破坏权重共享语义。`prop1_schedule` 保留总预算；整数化使用明确的最大余数约定。负控覆盖AMSGrad所有状态不alias、scheduler不重启、复制层确有梯度和参数变化。",
+      "gpu_validation_artifact": "docs/gpu-validations/lidas-a100-20261113.json",
+      "fidelity_note": "Real Torch layer/optimizer-state growth and one subsequent gradient step; CPU/CUDA L1, Real NVIDIA A100-SXM4-80GB seeds42/43/44 L1 operator checks passed; receipt bound to frozen commit084bf0b1409d4bd5593c8704e37eced5f4f52bde, no full training.",
+      "id": "2512.08819",
+      "new_first_publication": false,
+      "review_scope": "named-full-text-sections",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "source_provenance": [
+        {
+          "organization": "Google",
+          "source_url": "https://arxiv.org/html/2512.08819v1"
+        }
+      ],
+      "full_text_review": {
+        "scope": "full-text",
+        "version": "v1",
+        "source_url": "https://arxiv.org/html/2512.08819v1",
+        "source_locations": [
+          "§3.1–3.2, Figure 2, Appendices A/E"
+        ],
+        "source_sha256": "313e1f024171faa59c7aea755f7599a7cbffb62c2414cc37c22ef7799db3d6e6",
+        "read_scope": "Byline, defining method, evaluation and cost sections; not a claim that every appendix result was re-executed"
+      },
+      "status": "implemented",
+      "resolution": "bounded_component_accepted",
+      "reason": "Real Torch layer/optimizer-state growth and one subsequent gradient step; CPU/CUDA L1, Real NVIDIA A100-SXM4-80GB seeds42/43/44 L1 operator checks passed; receipt bound to frozen commit084bf0b1409d4bd5593c8704e37eced5f4f52bde, no full training.",
+      "component_implemented": true,
+      "doc": "foundation-models/2512.08819-lidas/README.md",
+      "track": "foundation",
+      "full_capability_reproduced": false,
+      "component_evidence": "docs/foundation-models/2512.08819-lidas/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "id": "2601.16355",
+      "title": "Identity, Cooperation and Framing Effects within Groups of Real and Simulated Humans",
+      "new_first_publication": false,
+      "intake_class": "historical_priority_backfill",
+      "review_scope": "named-full-text-sections",
+      "verified_priority_organizations": [
+        "Google DeepMind"
+      ],
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "source_provenance": [
+        {
+          "organization": "Google DeepMind",
+          "source_url": "https://arxiv.org/html/2601.16355v1"
+        }
+      ],
+      "full_text_review": {
+        "scope": "full-text",
+        "version": "v1",
+        "source_url": "https://arxiv.org/html/2601.16355v1",
+        "source_locations": [
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "AppendixE",
+          "AppendixF"
+        ],
+        "source_sha256": "e8a023c9be66a69ac6561269bbd413f0398a64116c6ed239179e2a88a32a16ea",
+        "read_scope": "Byline, defining method, evaluation and cost sections; not a claim that every appendix result was re-executed"
+      },
+      "status": "rejected",
+      "resolution": "out_of_scope_application_study",
+      "review_decision": "out_of_scope",
+      "reason": "The original contribution is an empirical social-behavior simulation study of U.S. partisan Dictator/Trust games and framing/date/participant effects. Narrative deep binding and demographic matching reuse the cited anthology method; temporal prompt grounding and an LLM consistency critic are study controls, not a new independently specified general agent algorithm. No new released public benchmark/framework was verified; AppendixF promises future code/prompts/backstories. Preserve this scientific study as a sourceful exclusion, not a high-cost reproduction falsely advertised as accepted. This does not deny its empirical contribution.",
+      "priority": "P2",
+      "priority_reason": "Sourceful scope exclusion; no implementation queue",
+      "track": "agent",
+      "component_implemented": false,
+      "full_capability_reproduced": false
+    },
+    {
+      "title": "AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs' Contextual and Cultural Knowledge and Thinking",
+      "first_author": "Xilin Jiang",
+      "first_author_affiliation": "Columbia University",
+      "published_at": "2026-01-25T01:40:15Z",
+      "code": "https://avmemeexam.github.io/public/",
+      "code_status": "官方项目、受访问条件约束的数据与加载说明公开；完整模型评测框架源码未确认发布。",
+      "summary": "AVMeme Exam用多语言、多文化短音视频多选题评估声音的情境、幽默和应用知识，并过滤文本捷径、屏蔽答案泄漏视频。本地只实现独立可核的协议与计分，不将夹具准确率冒充模型能力。",
+      "domain": "multimodal-models",
+      "key": "avmeme-exam",
+      "paper_url": "https://arxiv.org/abs/2601.17645",
+      "reviewed_version": "v1",
+      "reviewed_arxiv_id": "2601.17645v1",
+      "reviewed_version_url": "https://arxiv.org/html/2601.17645v1",
+      "detail_path": "multimodal-models/2601.17645-avmeme-exam/README.md",
+      "topic": [
+        "跨模态评测与检索",
+        "文化理解"
+      ],
+      "published": "2026-01-25",
+      "adapter": null,
+      "priority": "P1",
+      "implementation_status": "evaluation_protocol_interface",
+      "local_operator": "auto_research.multimodal.avmeme_exam.evaluate",
+      "local_command": "PYTHONPATH=src python -c 'from auto_research.multimodal.avmeme_exam import diagnostic; print(diagnostic(42))'",
+      "evaluation_tier": "l0_interface",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "fidelity_note": "实现选项重排、私有答案映射、主集文本捷径过滤、视频捷径屏蔽及三轴分组计分。严格字母解析为明示本地约定；不处理媒体、不生成捷径标签或模型回答，不猜测七题型宏平均。",
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2601.17645v1",
+        "available_resource": "单张A100/A30或Mac",
+        "basis": "19个多模态模型、人工标注及多后端推理完整矩阵；官方媒体受访问条件约束，未下载或调用模型。原文未披露可直接套用的单卡总时长，不编造卡时。"
+      },
+      "id": "2601.17645",
+      "new_first_publication": false,
+      "intake_class": "historical_priority_backfill",
+      "review_scope": "named-full-text-sections",
+      "verified_priority_organizations": [
+        "Google",
+        "Meta"
+      ],
+      "source_provenance": [
+        {
+          "organization": "Google",
+          "source_url": "https://arxiv.org/html/2601.17645v1"
+        },
+        {
+          "organization": "Meta",
+          "source_url": "https://arxiv.org/html/2601.17645v1"
+        }
+      ],
+      "full_text_review": {
+        "scope": "full-text",
+        "version": "v1",
+        "source_url": "https://arxiv.org/html/2601.17645v1",
+        "source_locations": [
+          "§2.1–2.4",
+          "§3",
+          "fixed PDF first-page byline"
+        ],
+        "source_sha256": "8059d806ef6ffee43d467bef89be6f2ce26340de545393e4a3c6645ea575bfc2",
+        "read_scope": "Byline, defining method, evaluation and cost sections; not a claim that every appendix result was re-executed"
+      },
+      "status": "implemented",
+      "resolution": "bounded_component_accepted",
+      "reason": "实现选项重排、私有答案映射、主集文本捷径过滤、视频捷径屏蔽及三轴分组计分。严格字母解析为明示本地约定；不处理媒体、不生成捷径标签或模型回答，不猜测七题型宏平均。",
+      "component_implemented": true,
+      "doc": "multimodal-models/2601.17645-avmeme-exam/README.md",
+      "track": "multimodal",
+      "full_capability_reproduced": false,
+      "component_evidence": "docs/multimodal-models/2601.17645-avmeme-exam/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "domain": "post-training",
+      "key": "social-meta-learning",
+      "title": "Learning to Learn from Language Feedback with Social Meta-Learning",
+      "paper_url": "https://arxiv.org/abs/2602.16488",
+      "reviewed_version": "v1",
+      "reviewed_arxiv_id": "2602.16488v1",
+      "reviewed_version_url": "https://arxiv.org/html/2602.16488v1",
+      "detail_path": "post-training/2602.16488-social-meta-learning/README.md",
+      "topic": [
+        "多轮反馈与社会元学习"
+      ],
+      "published": "2026-02-18",
+      "published_at": "2026-02-18T14:22:13Z",
+      "first_author": "Jonathan Cook",
+      "first_author_affiliation": "Google DeepMind",
+      "verified_priority_organizations": [
+        "Google DeepMind"
+      ],
+      "code": null,
+      "code_status": "固定v1与本次有界官方作者入口检索未找到可核实专属源码；明确不把引用库或第三方复刻当作作者系统代码。",
+      "adapter": null,
+      "priority": "P0",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.post_training.social_meta_learning.diagnostic",
+      "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.social_meta_learning import diagnostic; print(diagnostic(42))'",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": true,
+      "gpu_validation_passed": true,
+      "review_done": true,
+      "full_experiment_review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2602.16488v1",
+        "available_resource": "单张A100/A30或Mac",
+        "basis": "Gemma3-12B-IT/Qwen3-8B、2000训练问题/domain、g8 GRPO、teacher多轮、3seed，完整模型训练与跨域benchmark高成本不复现。"
+      },
+      "fidelity_note": "通过与持有私有信息的teacher交互训练student；本地实现成功对话student-only可微SFT与Q-priming概率，不伪造teacher或在线GRPO。",
+      "summary": "通过与持有私有信息的teacher交互训练student；本地实现成功对话student-only可微SFT与Q-priming概率，不伪造teacher或在线GRPO。",
+      "gpu_validation_artifact": "docs/gpu-validations/social-meta-learning-a100-20261113.json",
+      "id": "2602.16488",
+      "new_first_publication": false,
+      "intake_class": "historical_priority_backfill",
+      "review_scope": "named-full-text-sections",
+      "source_provenance": [
+        {
+          "organization": "Google DeepMind",
+          "source_url": "https://arxiv.org/html/2602.16488v1"
+        }
+      ],
+      "full_text_review": {
+        "scope": "full-text",
+        "version": "v1",
+        "source_url": "https://arxiv.org/html/2602.16488v1",
+        "source_locations": [
+          "2",
+          "4.1–4.4",
+          "5.1",
+          "5.4"
+        ],
+        "source_sha256": "80ddd54483bebef53f389ca14275318be0f22bfab1dcc0cd7c42233e582a2946",
+        "read_scope": "Byline, defining method, evaluation and cost sections; not a claim that every appendix result was re-executed"
+      },
+      "status": "implemented",
+      "resolution": "bounded_component_accepted",
+      "reason": "通过与持有私有信息的teacher交互训练student；本地实现成功对话student-only可微SFT与Q-priming概率，不伪造teacher或在线GRPO。",
+      "component_implemented": true,
+      "doc": "post-training/2602.16488-social-meta-learning/README.md",
+      "track": "post-training",
+      "full_capability_reproduced": false,
+      "component_evidence": "docs/post-training/2602.16488-social-meta-learning/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "domain": "agent-research",
+      "key": "mt-pingeval",
+      "title": "MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games",
+      "paper_url": "https://arxiv.org/abs/2602.24188",
+      "reviewed_version": "v1",
+      "reviewed_arxiv_id": "2602.24188v1",
+      "reviewed_version_url": "https://arxiv.org/html/2602.24188v1",
+      "detail_path": "agent-research/2602.24188-mt-pingeval/README.md",
+      "topic": [
+        "多智能体协作评测"
+      ],
+      "published": "2026-02-27",
+      "published_at": "2026-02-27T17:13:20Z",
+      "first_author": "Jacob Eisenstein",
+      "first_author_affiliation": "Google DeepMind",
+      "verified_priority_organizations": [
+        "Google DeepMind",
+        "Google Research"
+      ],
+      "code": null,
+      "code_status": "固定v1与本次有界官方作者入口检索未找到可核实专属源码；明确不把引用库或第三方复刻当作作者系统代码。",
+      "adapter": null,
+      "priority": "P0",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.agent_research.mt_pingeval.diagnostic",
+      "local_command": "PYTHONPATH=src python -c 'from auto_research.agent_research.mt_pingeval import diagnostic; print(diagnostic(42))'",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "review_done": true,
+      "full_experiment_review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2602.24188v1",
+        "available_resource": "单张A100/A30或Mac",
+        "basis": "5游戏×1000样本×5模型/思考变体×4轮次预算，包含商业LLM和图像任务；完整能力矩阵高成本不复现。"
+      },
+      "fidelity_note": "以私有信息游戏和isotoken预算检查模型能否利用交互。本地只提供Name-game隔离视图/scorer及轮次token合同，不声称完整公开数据集接入。",
+      "summary": "以私有信息游戏和isotoken预算检查模型能否利用交互。本地只提供Name-game隔离视图/scorer及轮次token合同，不声称完整公开数据集接入。",
+      "id": "2602.24188",
+      "new_first_publication": false,
+      "intake_class": "historical_priority_backfill",
+      "review_scope": "named-full-text-sections",
+      "source_provenance": [
+        {
+          "organization": "Google DeepMind",
+          "source_url": "https://arxiv.org/html/2602.24188v1"
+        },
+        {
+          "organization": "Google Research",
+          "source_url": "https://arxiv.org/html/2602.24188v1"
+        }
+      ],
+      "full_text_review": {
+        "scope": "full-text",
+        "version": "v1",
+        "source_url": "https://arxiv.org/html/2602.24188v1",
+        "source_locations": [
+          "2",
+          "3.4",
+          "4",
+          "4.4"
+        ],
+        "source_sha256": "9e25373c3b1767dc3e17fb473339c0101dd96cfb3a93bf04aec64158ec6f3b2f",
+        "read_scope": "Byline, defining method, evaluation and cost sections; not a claim that every appendix result was re-executed"
+      },
+      "status": "implemented",
+      "resolution": "bounded_component_accepted",
+      "reason": "以私有信息游戏和isotoken预算检查模型能否利用交互。本地只提供Name-game隔离视图/scorer及轮次token合同，不声称完整公开数据集接入。",
+      "component_implemented": true,
+      "doc": "agent-research/2602.24188-mt-pingeval/README.md",
+      "track": "agent",
+      "full_capability_reproduced": false,
+      "component_evidence": "docs/agent-research/2602.24188-mt-pingeval/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "domain": "foundation-models",
+      "key": "thinking-to-recall",
+      "title": "Thinking to Recall: How Reasoning Unlocks Parametric Knowledge in LLMs",
+      "paper_url": "https://arxiv.org/abs/2603.09906v1",
+      "reviewed_version_url": "https://arxiv.org/html/2603.09906v1",
+      "reviewed_version": "v1",
+      "detail_path": "foundation-models/2603.09906-thinking-to-recall/README.md",
+      "topic": [
+        "知识与推理",
+        "参数知识召回"
+      ],
+      "first_author": "Zorik Gekhman",
+      "first_author_affiliation": "Google Research",
+      "published": "2026-03-10",
+      "published_at": "2026-03-10T16:59:20Z",
+      "code": null,
+      "code_status": "截至2026-11-13，固定v1未找到已核实的本篇作者代码仓库；基础模型与依赖仓库不算本篇开源。",
+      "code_license": null,
+      "upstream_revision": null,
+      "adapter": null,
+      "priority": "P1",
+      "priority_reason": "Google COLM官方历史源召回，固定原文方法审查；低成本定义核/评测协议，不是近期新首发。",
+      "intake_class": "historical_priority_backfill",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.foundation_models.thinking_to_recall.diagnostic",
+      "local_command": "PYTHONPATH=src python -c 'from auto_research.foundation_models.thinking_to_recall import diagnostic; print(diagnostic(42))'",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2603.09906v1",
+        "sections": "§2, §5.4, Appendices A.2–A.4",
+        "paper_configuration": "Gemini 2.5 Flash/Pro and Qwen3-32B, 100 samples per question, ~2000 questions plus factual extraction/search judging; full study not reproduced.",
+        "component_boundary": "CPU evaluation only on externally annotated completed traces; gold correctness never exposed to an actor; not an executable oracle selector.",
+        "available_resource": "Local CPU/Mac or one NVIDIA A100/A30",
+        "decision": "成本过高，完整实验不复现；审查DONE。"
+      },
+      "summary": "推理不仅可能分解复杂任务，也可能通过额外计算和相关事实的自检索帮助单跳知识召回。论文控制同一 hybrid 模型的 reasoning ON/OFF，区分计算缓冲与 factual priming，同时发现中间事实幻觉会连带增加最终答案错误。 `conditional_expected_accuracy` 只返回汇总统计、保留/剔除题数，绝不返回被oracle选中的轨迹、行动或训练样本；默认严格要求每题100条。`pass_at_k` 使用无偏组合数估计。负控同时覆盖共同题目mask、逐题宏平均而非微平均、空事实集合和缺失子集。诊断中的真值数组是显式教学输入，不是Agent任务成绩。",
+      "id": "2603.09906",
+      "new_first_publication": false,
+      "review_scope": "named-full-text-sections",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "source_provenance": [
+        {
+          "organization": "Google",
+          "source_url": "https://arxiv.org/html/2603.09906v1"
+        }
+      ],
+      "full_text_review": {
+        "scope": "full-text",
+        "version": "v1",
+        "source_url": "https://arxiv.org/html/2603.09906v1",
+        "source_locations": [
+          "§2, §5.4, Appendices A.2–A.4"
+        ],
+        "source_sha256": "cfb37e6024fab5101e0fcf95a8b8f42c4d16a261a172d33bc424ca49c553ca46",
+        "read_scope": "Byline, defining method, evaluation and cost sections; not a claim that every appendix result was re-executed"
+      },
+      "status": "implemented",
+      "resolution": "bounded_component_accepted",
+      "reason": "CPU evaluation only on externally annotated completed traces; gold correctness never exposed to an actor; not an executable oracle selector.",
+      "component_implemented": true,
+      "doc": "foundation-models/2603.09906-thinking-to-recall/README.md",
+      "track": "foundation",
+      "full_capability_reproduced": false,
+      "component_evidence": "docs/foundation-models/2603.09906-thinking-to-recall/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "domain": "post-training",
+      "key": "maple-icl",
+      "title": "MAPLE: Metadata Augmented Private Language Evolution",
+      "paper_url": "https://arxiv.org/abs/2603.19258",
+      "reviewed_version": "v1",
+      "reviewed_arxiv_id": "2603.19258v1",
+      "reviewed_version_url": "https://arxiv.org/html/2603.19258v1",
+      "detail_path": "post-training/2603.19258-maple-icl/README.md",
+      "topic": [
+        "隐私保护数据构建"
+      ],
+      "published": "2026-02-26",
+      "published_at": "2026-02-26T14:18:36Z",
+      "first_author": "Eli Chien",
+      "first_author_affiliation": "National Taiwan University",
+      "verified_priority_organizations": [
+        "Google Research",
+        "Meta"
+      ],
+      "code": "https://github.com/elichien-google/MAPLE",
+      "code_status": "作者/官方项目链接的仓库已核验公开；本地仅实现固定v1所列子组件，未运行上游完整系统。",
+      "adapter": null,
+      "priority": "P0",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.post_training.maple_icl.diagnostic",
+      "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.maple_icl import diagnostic; print(diagnostic(42))'",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "review_done": true,
+      "full_experiment_review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2603.19258v1",
+        "available_resource": "单张A100/A30或Mac",
+        "basis": "上游建议至少2×A10040GB；Qwen2.5-7B、AIM、2k/5k长文本合成、AugPE、多隐私预算和下游训练；完整实验高成本不复现。"
+      },
+      "fidelity_note": "先用DP表格metadata约束初始化，再用与metadata最接近的已捐赠示例做ICL，继续PrivateEvolution。本地只实现分类Hamming近邻示例选择，不产生DP数据或隐私保证。",
+      "summary": "先用DP表格metadata约束初始化，再用与metadata最接近的已捐赠示例做ICL，继续PrivateEvolution。本地只实现分类Hamming近邻示例选择，不产生DP数据或隐私保证。",
+      "id": "2603.19258",
+      "new_first_publication": false,
+      "intake_class": "historical_priority_backfill",
+      "review_scope": "named-full-text-sections",
+      "source_provenance": [
+        {
+          "organization": "Google Research",
+          "source_url": "https://arxiv.org/html/2603.19258v1"
+        },
+        {
+          "organization": "Meta",
+          "source_url": "https://arxiv.org/html/2603.19258v1"
+        }
+      ],
+      "full_text_review": {
+        "scope": "full-text",
+        "version": "v1",
+        "source_url": "https://arxiv.org/html/2603.19258v1",
+        "source_locations": [
+          "3",
+          "5",
+          "AppendixA.1",
+          "AppendixB"
+        ],
+        "source_sha256": "448bfd1a7b875141f1ef7a69c93a251a884f8fc2fb9524145900b4ab839d65a2",
+        "read_scope": "Byline, defining method, evaluation and cost sections; not a claim that every appendix result was re-executed"
+      },
+      "status": "implemented",
+      "resolution": "bounded_component_accepted",
+      "reason": "先用DP表格metadata约束初始化，再用与metadata最接近的已捐赠示例做ICL，继续PrivateEvolution。本地只实现分类Hamming近邻示例选择，不产生DP数据或隐私保证。",
+      "component_implemented": true,
+      "doc": "post-training/2603.19258-maple-icl/README.md",
+      "track": "post-training",
+      "full_capability_reproduced": false,
+      "component_evidence": "docs/post-training/2603.19258-maple-icl/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "domain": "foundation-models",
+      "key": "cultural-cue",
+      "title": "Steering LLMs for Culturally Localized Generation",
+      "paper_url": "https://arxiv.org/abs/2603.23301v1",
+      "reviewed_version_url": "https://arxiv.org/html/2603.23301v1",
+      "reviewed_version": "v1",
+      "reviewed_arxiv_id": "2603.23301v1",
+      "detail_path": "foundation-models/2603.23301-cultural-cue/README.md",
+      "topic": [
+        "评测与研究证据",
+        "可解释文化表征与干预"
+      ],
+      "first_author": "Simran Khanuja",
+      "first_author_affiliation": "Carnegie Mellon University",
+      "verified_priority_organizations": [
+        "Google DeepMind"
+      ],
+      "published": "2026-03-24",
+      "published_at": "2026-03-24T15:04:01Z",
+      "code": null,
+      "code_status": "固定v1及有限作者入口未找到本篇独立公开实现；Gemma Scope/Llama Scope是SAE依赖，不等于CuE源码。",
+      "code_license": null,
+      "adapter": null,
+      "priority": "P0",
+      "priority_reason": "Google/DeepMind原文署名；Google COLM官方独立历史库存触发补漏，非本轮新首发。",
+      "intake_class": "historical_priority_backfill",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.foundation_models.cultural_cue.diagnostic",
+      "local_command": "PYTHONPATH=src python -c 'from auto_research.foundation_models.cultural_cue import diagnostic; print(diagnostic(42, \"cpu\"))'",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": true,
+      "gpu_validation_passed": true,
+      "gpu_validation_artifact": "docs/gpu-validations/cultural-cue-a100-20261113.json",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2603.23301v1",
+        "reviewed_sections": [
+          "§2.2–2.5",
+          "§3",
+          "Appendix C"
+        ],
+        "available_resource": "单张NVIDIA A100/A30或本地Mac",
+        "basis": "六组Gemma2-2B/9B与Llama3.1-8B、16K–131K/128K SAE、多文化四α/四种提示条件与双judge。原文单A10080GB；较大SAE全层超过该卡显存，原文改每四层加载。完整矩阵高成本不复现，不下载大权重或API评测。",
+        "decision": "成本过高，不复现（审查DONE）；仅交付独立低成本L1组件，不下载大资源、不试训、不自动重试。"
+      },
+      "fidelity_note": "对真实外部SAE激活有效token max-pool、外部MI的累计质量选特征、国家均值原型/其他国家等权基线、decoder方向与残差加法；不伪造MI估计器、SAE/LM或文化judge。",
+      "summary": "对真实外部SAE激活有效token max-pool、外部MI的累计质量选特征、国家均值原型/其他国家等权基线、decoder方向与残差加法；不伪造MI估计器、SAE/LM或文化judge。",
+      "id": "2603.23301",
+      "new_first_publication": false,
+      "review_scope": "named-full-text-sections",
+      "source_provenance": [
+        {
+          "organization": "Google DeepMind",
+          "source_url": "https://arxiv.org/html/2603.23301v1"
+        }
+      ],
+      "full_text_review": {
+        "scope": "full-text",
+        "version": "v1",
+        "source_url": "https://arxiv.org/html/2603.23301v1",
+        "source_locations": [
+          "§2.2–2.5",
+          "§3",
+          "Appendix C"
+        ],
+        "source_sha256": "7927d8ff31f505893564baeecc0f88c5f3fa678e374169eb38558587fef9d9b9",
+        "read_scope": "Byline, defining method, evaluation and cost sections; not a claim that every appendix result was re-executed"
+      },
+      "status": "implemented",
+      "resolution": "bounded_component_accepted",
+      "reason": "对真实外部SAE激活有效token max-pool、外部MI的累计质量选特征、国家均值原型/其他国家等权基线、decoder方向与残差加法；不伪造MI估计器、SAE/LM或文化judge。",
+      "component_implemented": true,
+      "doc": "foundation-models/2603.23301-cultural-cue/README.md",
+      "track": "foundation",
+      "full_capability_reproduced": false,
+      "component_evidence": "docs/foundation-models/2603.23301-cultural-cue/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "domain": "foundation-models",
+      "key": "decoding-constrained-beam",
+      "title": "Estimating near-verbatim extraction risk in language models with decoding-constrained beam search",
+      "paper_url": "https://arxiv.org/abs/2603.24917v1",
+      "reviewed_version_url": "https://arxiv.org/html/2603.24917v1",
+      "reviewed_version": "v1",
+      "reviewed_arxiv_id": "2603.24917v1",
+      "detail_path": "foundation-models/2603.24917-decoding-constrained-beam/README.md",
+      "topic": [
+        "评测与研究证据",
+        "近逐字提取风险"
+      ],
+      "first_author": "A. Feder Cooper",
+      "first_author_affiliation": "AVERI / Stanford University",
+      "verified_priority_organizations": [
+        "Google DeepMind"
+      ],
+      "published": "2026-03-26",
+      "published_at": "2026-03-26T01:15:16Z",
+      "code": "https://github.com/pasta41/probabilistic-extraction-toolkit",
+      "code_status": "原文提供作者仓库URL；本轮GitHub仓库API及main/master README均返回Not Found，无法确认当前公开代码可用，保留访问例外，不写成已验证开源实现。",
+      "code_license": null,
+      "adapter": null,
+      "priority": "P0",
+      "priority_reason": "Google/DeepMind原文署名；Google COLM官方独立历史库存触发补漏，非本轮新首发。",
+      "intake_class": "historical_priority_backfill",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.foundation_models.decoding_constrained_beam.diagnostic",
+      "local_command": "PYTHONPATH=src python -c 'from auto_research.foundation_models.decoding_constrained_beam import diagnostic; print(diagnostic(42, \"cpu\"))'",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2603.24917v1",
+        "reviewed_sections": [
+          "§4.1–4.3",
+          "§5",
+          "Appendix C.3",
+          "Appendix D–E",
+          "Appendix F.2/F.7"
+        ],
+        "available_resource": "单张NVIDIA A100/A30或本地Mac",
+        "basis": "OLMo2 7/13/32B、Llama2 7/13/70B和Pythia等；上万训练序列/独立负控，T=50、B=20、k=40。原文指出beam增加KV缓存与逐步前向，完整模型/数据/参数矩阵超本轮单卡短预算，不运行。",
+        "decision": "成本过高，不复现（审查DONE）；仅交付独立低成本L1组件，不下载大资源、不试训、不自动重试。"
+      },
+      "fidelity_note": "外部next-logits上的top-k重归一、精确路径logp、Hamming/带状Levenshtein可行性剪枝、末步保留B×k、概率质量下界/剪枝bank上界；无大模型/KV cache，无可选τ提前结束。",
+      "summary": "外部next-logits上的top-k重归一、精确路径logp、Hamming/带状Levenshtein可行性剪枝、末步保留B×k、概率质量下界/剪枝bank上界；无大模型/KV cache，无可选τ提前结束。",
+      "id": "2603.24917",
+      "new_first_publication": false,
+      "review_scope": "named-full-text-sections",
+      "source_provenance": [
+        {
+          "organization": "Google DeepMind",
+          "source_url": "https://arxiv.org/html/2603.24917v1"
+        }
+      ],
+      "full_text_review": {
+        "scope": "full-text",
+        "version": "v1",
+        "source_url": "https://arxiv.org/html/2603.24917v1",
+        "source_locations": [
+          "§4.1–4.3",
+          "§5",
+          "Appendix C.3",
+          "Appendix D–E",
+          "Appendix F.2/F.7"
+        ],
+        "source_sha256": "dc6e2f52be8cea0711c10209079392d63e4f784fa3d9b45523577e97d3a5598a",
+        "read_scope": "Byline, defining method, evaluation and cost sections; not a claim that every appendix result was re-executed"
+      },
+      "status": "implemented",
+      "resolution": "bounded_component_accepted",
+      "reason": "外部next-logits上的top-k重归一、精确路径logp、Hamming/带状Levenshtein可行性剪枝、末步保留B×k、概率质量下界/剪枝bank上界；无大模型/KV cache，无可选τ提前结束。",
+      "component_implemented": true,
+      "doc": "foundation-models/2603.24917-decoding-constrained-beam/README.md",
+      "track": "foundation",
+      "full_capability_reproduced": false,
+      "component_evidence": "docs/foundation-models/2603.24917-decoding-constrained-beam/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "domain": "foundation-models",
+      "key": "latent-generalization",
+      "title": "Improving Latent Generalization Using Test-time Compute",
+      "paper_url": "https://arxiv.org/abs/2604.01430v1",
+      "reviewed_version_url": "https://arxiv.org/html/2604.01430v1",
+      "reviewed_version": "v1",
+      "detail_path": "foundation-models/2604.01430-latent-generalization/README.md",
+      "topic": [
+        "知识与推理",
+        "潜在知识与泛化"
+      ],
+      "first_author": "Arslan Chaudhry",
+      "first_author_affiliation": "Google DeepMind",
+      "published": "2026-04-01",
+      "published_at": "2026-04-01T22:10:21Z",
+      "code": null,
+      "code_status": "截至2026-11-13，固定v1未找到已核实的本篇作者代码仓库；基础模型与依赖仓库不算本篇开源。",
+      "code_license": null,
+      "upstream_revision": null,
+      "adapter": null,
+      "priority": "P1",
+      "priority_reason": "Google COLM官方历史源召回，固定原文方法审查；低成本定义核/评测协议，不是近期新首发。",
+      "intake_class": "historical_priority_backfill",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.foundation_models.latent_generalization.diagnostic",
+      "local_command": "PYTHONPATH=src python -c 'from auto_research.foundation_models.latent_generalization import diagnostic; print(diagnostic(42))'",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "full_experiment_status": "not_reproduced_private_dependency",
+      "full_experiment_review_done": true,
+      "review_resolution": "not_reproduced_private_dependency",
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2604.01430v1",
+        "sections": "§2–3.3 and Appendix B.3",
+        "paper_configuration": "Private Gemini 2.5 Flash fine-tuning plus teacher traces and RL; not a fully specified public training recipe; full experiment not reproduced (commercial/private dependency).",
+        "component_boundary": "CPU paper-specific set-completion metric interface only; no generic guard relabeled as the algorithm and no invented Gemini trainer.",
+        "available_resource": "Local CPU/Mac or one NVIDIA A100/A30",
+        "decision": "私有/商业训练依赖，完整实验不复现；审查DONE。"
+      },
+      "summary": "模型记住 A>B 并不必然推出 B<A，记住多个关系也不保证能答出未显式训练的组合。论文把知识获取、会思考的轨迹引导、正确性RL分开，研究在一个结构训练出的推理能力能否迁移到仅做知识SFT的另一个结构。 `score_completion` 要求heldout是all的子集，primary属于heldout，且gold集合非空；`exact_set_pass_at_n` 对已经完成的独立尝试计算无偏pass估计。负控显示：train recall=1可以同时heldout recall=0；heldout recall=1也能因额外误答导致exact=0。纯CPU离线评测，无模型训练、语义judge、Evolve或能力晋级。",
+      "id": "2604.01430",
+      "new_first_publication": false,
+      "review_scope": "named-full-text-sections",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "source_provenance": [
+        {
+          "organization": "Google",
+          "source_url": "https://arxiv.org/html/2604.01430v1"
+        }
+      ],
+      "full_text_review": {
+        "scope": "full-text",
+        "version": "v1",
+        "source_url": "https://arxiv.org/html/2604.01430v1",
+        "source_locations": [
+          "§2–3.3 and Appendix B.3"
+        ],
+        "source_sha256": "4c30994ed489d9582dc2e593df6e7d7b3a592623843d2e7798fa3b6fa7502930",
+        "read_scope": "Byline, defining method, evaluation and cost sections; not a claim that every appendix result was re-executed"
+      },
+      "status": "implemented",
+      "resolution": "bounded_component_accepted",
+      "reason": "CPU paper-specific set-completion metric interface only; no generic guard relabeled as the algorithm and no invented Gemini trainer.",
+      "component_implemented": true,
+      "doc": "foundation-models/2604.01430-latent-generalization/README.md",
+      "track": "foundation",
+      "full_capability_reproduced": false,
+      "component_evidence": "docs/foundation-models/2604.01430-latent-generalization/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "domain": "agent-research",
+      "key": "planning-optimality",
+      "title": "Analysis of Optimality of Large Language Models on Planning Problems",
+      "paper_url": "https://arxiv.org/abs/2604.02910v1",
+      "reviewed_version_url": "https://arxiv.org/html/2604.02910v1",
+      "reviewed_version": "v1",
+      "detail_path": "agent-research/2604.02910-planning-optimality/README.md",
+      "topic": [
+        "规划与推理",
+        "计划验证与最优性"
+      ],
+      "first_author": "Bernd Bohnet",
+      "first_author_affiliation": "Google DeepMind",
+      "published": "2026-04-03",
+      "published_at": "2026-04-03T09:27:16Z",
+      "code": null,
+      "code_status": "截至2026-11-13，固定v1未找到已核实的本篇作者代码仓库；基础模型与依赖仓库不算本篇开源。",
+      "code_license": null,
+      "upstream_revision": null,
+      "adapter": null,
+      "priority": "P1",
+      "priority_reason": "Google COLM官方历史源召回，固定原文方法审查；低成本定义核/评测协议，不是近期新首发。",
+      "intake_class": "historical_priority_backfill",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.agent_research.planning_optimality.diagnostic",
+      "local_command": "PYTHONPATH=src python -c 'from auto_research.agent_research.planning_optimality import diagnostic; print(diagnostic(42))'",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2604.02910v1",
+        "sections": "§3–4.1 and Appendix A",
+        "paper_configuration": "Gemini 3 Pro planning across large curricula (tower heights up to 1000 and hundreds of goal blocks); full model/API evaluation not reproduced.",
+        "component_boundary": "CPU simulator, restricted-formula guards, independent BFS small-instance negative controls; no LLM planner or gold plan fed to actor.",
+        "available_resource": "Local CPU/Mac or one NVIDIA A100/A30",
+        "decision": "成本过高，完整实验不复现；审查DONE。"
+      },
+      "summary": "只判断计划能否达到目标，会忽略大量无必要动作。论文把LLM规划评测从validity扩展到optimality，在Blocksworld和抽象P*任务中构造具有已知最优长度的课程，分析推理模型随着难度增长的计划冗余。 `transition` 不接收gold计划；`score_plan` 只由独立evaluator调用。小于等于6块时另用独立BFS穷举四操作图，不调用公式，校验多种排列的最短距离。负控包括无法pickup非桌面块、同塔多个目标拒绝、合法但多绕两步的计划gap=1。不是LLM planner、VAL兼容实现或Agent能力成绩。",
+      "id": "2604.02910",
+      "new_first_publication": false,
+      "review_scope": "named-full-text-sections",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "source_provenance": [
+        {
+          "organization": "Google",
+          "source_url": "https://arxiv.org/html/2604.02910v1"
+        }
+      ],
+      "full_text_review": {
+        "scope": "full-text",
+        "version": "v1",
+        "source_url": "https://arxiv.org/html/2604.02910v1",
+        "source_locations": [
+          "§3–4.1 and Appendix A"
+        ],
+        "source_sha256": "095ee5f6de515a2f5ff6959e0d14ada7e8379a2b3334f78318d893c6d98019ab",
+        "read_scope": "Byline, defining method, evaluation and cost sections; not a claim that every appendix result was re-executed"
+      },
+      "status": "implemented",
+      "resolution": "bounded_component_accepted",
+      "reason": "CPU simulator, restricted-formula guards, independent BFS small-instance negative controls; no LLM planner or gold plan fed to actor.",
+      "component_implemented": true,
+      "doc": "agent-research/2604.02910-planning-optimality/README.md",
+      "track": "agent",
+      "full_capability_reproduced": false,
+      "component_evidence": "docs/agent-research/2604.02910-planning-optimality/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "domain": "foundation-models",
+      "key": "storyscope",
+      "title": "StoryScope: Investigating idiosyncrasies in AI fiction",
+      "paper_url": "https://arxiv.org/abs/2604.03136v1",
+      "reviewed_version_url": "https://arxiv.org/html/2604.03136v1",
+      "reviewed_version": "v1",
+      "reviewed_arxiv_id": "2604.03136v1",
+      "detail_path": "foundation-models/2604.03136-storyscope/README.md",
+      "topic": [
+        "评测与研究证据",
+        "可解释生成文本检测"
+      ],
+      "first_author": "Jenna Russell",
+      "first_author_affiliation": "University of Maryland, College Park",
+      "verified_priority_organizations": [
+        "Google DeepMind"
+      ],
+      "published": "2026-04-03",
+      "published_at": "2026-04-03T15:56:38Z",
+      "code": "https://github.com/jenna-russell/storyscope",
+      "code_status": "作者公开MIT仓库/README与数据入口已核；当前README作者/数据量有修订，算法和成本只按固定v1，不将新版当v1。",
+      "code_license": "MIT",
+      "adapter": null,
+      "priority": "P0",
+      "priority_reason": "Google/DeepMind原文署名；Google COLM官方独立历史库存触发补漏，非本轮新首发。",
+      "intake_class": "historical_priority_backfill",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.foundation_models.storyscope.diagnostic",
+      "local_command": "PYTHONPATH=src python -c 'from auto_research.foundation_models.storyscope import diagnostic; print(diagnostic(42, \"cpu\"))'",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2604.03136v1",
+        "reviewed_sections": [
+          "§2.1–2.2",
+          "§3–5",
+          "Appendix B–D",
+          "Appendix H"
+        ],
+        "available_resource": "单张NVIDIA A100/A30或本地Mac",
+        "basis": "61,608篇约5000词故事、10,272个prompt、GPT5.1结构化/特征发现、Gemini3Flash给304特征赋值、F2LLM4B去重、50次bootstrap分类器及基线矩阵。完整API/大语料流程高成本不复现，官方公开缓存不等于本地已跑。",
+        "decision": "成本过高，不复现（审查DONE）；仅交付独立低成本L1组件，不下载大资源、不试训、不自动重试。"
+      },
+      "fidelity_note": "按prompt整组bootstrap索引与AppendixD核心特征严格合取门控/方向：重要性分位、稳定性、null95/p值、top25、human-AI gap及跨AI模型spread；真实LLM特征、XGBoost/SHAP统计外置，不猜fingerprint阈值。",
+      "summary": "按prompt整组bootstrap索引与AppendixD核心特征严格合取门控/方向：重要性分位、稳定性、null95/p值、top25、human-AI gap及跨AI模型spread；真实LLM特征、XGBoost/SHAP统计外置，不猜fingerprint阈值。",
+      "id": "2604.03136",
+      "new_first_publication": false,
+      "review_scope": "named-full-text-sections",
+      "source_provenance": [
+        {
+          "organization": "Google DeepMind",
+          "source_url": "https://arxiv.org/html/2604.03136v1"
+        }
+      ],
+      "full_text_review": {
+        "scope": "full-text",
+        "version": "v1",
+        "source_url": "https://arxiv.org/html/2604.03136v1",
+        "source_locations": [
+          "§2.1–2.2",
+          "§3–5",
+          "Appendix B–D",
+          "Appendix H"
+        ],
+        "source_sha256": "5425656a5459fb6fb9079e3d1674e6c7a399d26cb28a269427c26ab87f43ddcc",
+        "read_scope": "Byline, defining method, evaluation and cost sections; not a claim that every appendix result was re-executed"
+      },
+      "status": "implemented",
+      "resolution": "bounded_component_accepted",
+      "reason": "按prompt整组bootstrap索引与AppendixD核心特征严格合取门控/方向：重要性分位、稳定性、null95/p值、top25、human-AI gap及跨AI模型spread；真实LLM特征、XGBoost/SHAP统计外置，不猜fingerprint阈值。",
+      "component_implemented": true,
+      "doc": "foundation-models/2604.03136-storyscope/README.md",
+      "track": "foundation",
+      "full_capability_reproduced": false,
+      "component_evidence": "docs/foundation-models/2604.03136-storyscope/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "domain": "foundation-models",
+      "key": "llm-stochasticity",
+      "title": "The Illusion of Stochasticity in LLMs",
+      "paper_url": "https://arxiv.org/abs/2604.06543v1",
+      "reviewed_version_url": "https://arxiv.org/html/2604.06543v1",
+      "reviewed_version": "v1",
+      "detail_path": "foundation-models/2604.06543-llm-stochasticity/README.md",
+      "topic": [
+        "评测与可靠性",
+        "随机性与统计诊断"
+      ],
+      "first_author": "Xiangming Gu",
+      "first_author_affiliation": "National University of Singapore",
+      "published": "2026-04-08",
+      "published_at": "2026-04-08T00:44:14Z",
+      "code": null,
+      "code_status": "截至2026-11-13，固定v1未找到已核实的本篇作者代码仓库；基础模型与依赖仓库不算本篇开源。",
+      "code_license": null,
+      "upstream_revision": null,
+      "adapter": null,
+      "priority": "P1",
+      "priority_reason": "Google COLM官方历史源召回，固定原文方法审查；低成本定义核/评测协议，不是近期新首发。",
+      "intake_class": "historical_priority_backfill",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.foundation_models.llm_stochasticity.diagnostic",
+      "local_command": "PYTHONPATH=src python -c 'from auto_research.foundation_models.llm_stochasticity import diagnostic; print(diagnostic(42))'",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2604.06543v1",
+        "sections": "§3–6",
+        "paper_configuration": "1024 samples per distribution/prompt/model with sequential long histories across Qwen up to 32B and Gemini; full model sweep not reproduced.",
+        "component_boundary": "CPU statistical evaluator only; does not claim an LLM sampler or use PRNG to fake model outputs.",
+        "available_resource": "Local CPU/Mac or one NVIDIA A100/A30",
+        "decision": "成本过高，完整实验不复现；审查DONE。"
+      },
+      "summary": "要求LLM“随机选一个数”不等价于访问可靠随机源。论文比较不同模型、离散/连续目标分布、逐次和批量提示，发现明显类别偏好、历史排斥和周期性；看起来均匀的直方图也可能来自确定性序列。 `evaluate_discrete_uniform` 拒绝错误样本数、重复标签、布尔/非整数、support之外的值；`evaluate_continuous` 拒绝NaN和均匀分布越界。反例序列0,1,2,3不断循环：直方图卡方为0，却从无相邻重复且转移高度集中，说明边缘分布检验不足。依赖可选research-components中的SciPy，纯CPU。",
+      "id": "2604.06543",
+      "new_first_publication": false,
+      "review_scope": "named-full-text-sections",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "source_provenance": [
+        {
+          "organization": "Google",
+          "source_url": "https://arxiv.org/html/2604.06543v1"
+        }
+      ],
+      "full_text_review": {
+        "scope": "full-text",
+        "version": "v1",
+        "source_url": "https://arxiv.org/html/2604.06543v1",
+        "source_locations": [
+          "§3–6"
+        ],
+        "source_sha256": "ab1750e4cec172c4217ffa78225c6ca97ae28f0ec10a8450f0d52fea22639822",
+        "read_scope": "Byline, defining method, evaluation and cost sections; not a claim that every appendix result was re-executed"
+      },
+      "status": "implemented",
+      "resolution": "bounded_component_accepted",
+      "reason": "CPU statistical evaluator only; does not claim an LLM sampler or use PRNG to fake model outputs.",
+      "component_implemented": true,
+      "doc": "foundation-models/2604.06543-llm-stochasticity/README.md",
+      "track": "foundation",
+      "full_capability_reproduced": false,
+      "component_evidence": "docs/foundation-models/2604.06543-llm-stochasticity/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "domain": "foundation-models",
+      "key": "ecg-rag",
+      "title": "A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation",
+      "paper_url": "https://arxiv.org/abs/2604.14403v1",
+      "reviewed_version_url": "https://arxiv.org/pdf/2604.14403v1",
+      "reviewed_version": "v1",
+      "detail_path": "foundation-models/2604.14403-ecg-rag/README.md",
+      "topic": [
+        "检索增强与记忆",
+        "统一检索与上下文压缩"
+      ],
+      "first_author": "Julian Killingback",
+      "first_author_affiliation": "University of Massachusetts Amherst",
+      "published": "2026-04-15",
+      "published_at": "2026-04-15T20:34:10Z",
+      "code": null,
+      "code_status": "截至2026-11-13，固定v1未找到已核实的本篇作者代码仓库；基础模型与依赖仓库不算本篇开源。",
+      "code_license": null,
+      "upstream_revision": null,
+      "adapter": null,
+      "priority": "P1",
+      "priority_reason": "Google COLM官方历史源召回，固定原文方法审查；低成本定义核/评测协议，不是近期新首发。",
+      "intake_class": "historical_priority_backfill",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.foundation_models.ecg_rag.diagnostic",
+      "local_command": "PYTHONPATH=src python -c 'from auto_research.foundation_models.ecg_rag import diagnostic; print(diagnostic(42))'",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": true,
+      "gpu_validation_passed": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source": "https://arxiv.org/pdf/2604.14403v1",
+        "sections": "§3–4, Appendices A.1/B.1/B.5.1",
+        "paper_configuration": "8 NVIDIA H100 training; 135M/1B models, Wikipedia pretraining and ~110k NQ/TriviaQA questions, pooled 840k/2.1M passage evaluation; full study not reproduced.",
+        "component_boundary": "Real differentiable Torch projection and joint-loss kernel CPU/CUDA, without pretrained decoder, index or generated answers; Real NVIDIA A100-SXM4-80GB seeds42/43/44 L1 operator checks passed; receipt bound to frozen commit084bf0b1409d4bd5593c8704e37eced5f4f52bde, no full training.",
+        "available_resource": "Local CPU/Mac or one NVIDIA A100/A30",
+        "decision": "成本过高，完整实验不复现；审查DONE。"
+      },
+      "summary": "设备端RAG既要控制文档索引磁盘占用，也要限制生成时的上下文/KV开销。ECG不是简单把检索器输出拼进prompt，而是只存一份多向量检索表示，再经投影转成同一decoder可消费的压缩上下文，避免独立检索向量和压缩向量重复存储。 `SharedRepresentation` 真正让compression依赖stored E_ret；`joint_loss` 固定teacher logits/relevance，不让teacher获得梯度，保留α与温度梯度。FKL按答案token求和再按题平均；只有显式hard negatives进入margin，正例不能混入负例mask。gate的大正bias原文无确数，本地5是明确初始化约定。未带pretrained decoder、索引、特殊token注入或完整训练管道。",
+      "gpu_validation_artifact": "docs/gpu-validations/ecg-rag-a100-20261113.json",
+      "fidelity_note": "Real differentiable Torch projection and joint-loss kernel CPU/CUDA, without pretrained decoder, index or generated answers; Real NVIDIA A100-SXM4-80GB seeds42/43/44 L1 operator checks passed; receipt bound to frozen commit084bf0b1409d4bd5593c8704e37eced5f4f52bde, no full training.",
+      "id": "2604.14403",
+      "new_first_publication": false,
+      "review_scope": "named-full-text-sections",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "source_provenance": [
+        {
+          "organization": "Google",
+          "source_url": "https://arxiv.org/pdf/2604.14403v1"
+        }
+      ],
+      "full_text_review": {
+        "scope": "full-text",
+        "version": "v1",
+        "source_url": "https://arxiv.org/pdf/2604.14403v1",
+        "source_locations": [
+          "§3–4, Appendices A.1/B.1/B.5.1"
+        ],
+        "source_sha256": "fca1d475f9c1bfcd1bc975b3c23a1a69f27c53574ebf91993cc839f17de8c986",
+        "read_scope": "Byline, defining method, evaluation and cost sections; not a claim that every appendix result was re-executed"
+      },
+      "status": "implemented",
+      "resolution": "bounded_component_accepted",
+      "reason": "Real differentiable Torch projection and joint-loss kernel CPU/CUDA, without pretrained decoder, index or generated answers; Real NVIDIA A100-SXM4-80GB seeds42/43/44 L1 operator checks passed; receipt bound to frozen commit084bf0b1409d4bd5593c8704e37eced5f4f52bde, no full training.",
+      "component_implemented": true,
+      "doc": "foundation-models/2604.14403-ecg-rag/README.md",
+      "track": "foundation",
+      "full_capability_reproduced": false,
+      "component_evidence": "docs/foundation-models/2604.14403-ecg-rag/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "domain": "agent-research",
+      "key": "policybank",
+      "title": "PolicyBank: Evolving Policy Understanding for LLM Agents",
+      "paper_url": "https://arxiv.org/abs/2604.15505",
+      "reviewed_version": "v1",
+      "reviewed_arxiv_id": "2604.15505v1",
+      "reviewed_version_url": "https://arxiv.org/html/2604.15505v1",
+      "detail_path": "agent-research/2604.15505-policybank/README.md",
+      "topic": [
+        "策略记忆与授权修正"
+      ],
+      "published": "2026-04-16",
+      "published_at": "2026-04-16T20:29:30Z",
+      "first_author": "Jihye Choi",
+      "first_author_affiliation": "Google Cloud",
+      "verified_priority_organizations": [
+        "Google Cloud"
+      ],
+      "code": null,
+      "code_status": "固定v1与本次有界官方作者入口检索未找到可核实专属源码；明确不把引用库或第三方复刻当作作者系统代码。",
+      "adapter": null,
+      "priority": "P0",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.agent_research.policybank.diagnostic",
+      "local_command": "PYTHONPATH=src python -c 'from auto_research.agent_research.policybank import diagnostic; print(diagnostic(42))'",
+      "evaluation_tier": "l0_interface",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "review_done": true,
+      "full_experiment_review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2604.15505v1",
+        "available_resource": "单张A100/A30或Mac",
+        "basis": "扩展tau-bench两领域、5种任务序、pass1–4、Gemini3Pro/ClaudeOpus4.5和商业PolicyAgent/UserSimulator；完整流式能力矩阵高成本不复现。"
+      },
+      "fidelity_note": "以工具能力级结构化条目维护授权解释，按对话主动检索，并据开发反馈Add/Revise/Omit。本地实现内存合同，不自动解释反馈或修改真实授权。",
+      "summary": "以工具能力级结构化条目维护授权解释，按对话主动检索，并据开发反馈Add/Revise/Omit。本地实现内存合同，不自动解释反馈或修改真实授权。",
+      "id": "2604.15505",
+      "new_first_publication": false,
+      "intake_class": "historical_priority_backfill",
+      "review_scope": "named-full-text-sections",
+      "source_provenance": [
+        {
+          "organization": "Google Cloud",
+          "source_url": "https://arxiv.org/html/2604.15505v1"
+        }
+      ],
+      "full_text_review": {
+        "scope": "full-text",
+        "version": "v1",
+        "source_url": "https://arxiv.org/html/2604.15505v1",
+        "source_locations": [
+          "3",
+          "4",
+          "5",
+          "6.1",
+          "AppendixB"
+        ],
+        "source_sha256": "40b6e9c402ed8eed855a89ff6aac4416f2bb1ac6e0bbe92e8d95a2547262d498",
+        "read_scope": "Byline, defining method, evaluation and cost sections; not a claim that every appendix result was re-executed"
+      },
+      "status": "implemented",
+      "resolution": "bounded_component_accepted",
+      "reason": "以工具能力级结构化条目维护授权解释，按对话主动检索，并据开发反馈Add/Revise/Omit。本地实现内存合同，不自动解释反馈或修改真实授权。",
+      "component_implemented": true,
+      "doc": "agent-research/2604.15505-policybank/README.md",
+      "track": "agent",
+      "full_capability_reproduced": false,
+      "component_evidence": "docs/agent-research/2604.15505-policybank/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "domain": "post-training",
+      "key": "behavioral-canaries",
+      "title": "Behavioral Canaries: Auditing Private Retrieved Context Usage in RL Fine-Tuning",
+      "paper_url": "https://arxiv.org/abs/2604.22191v1",
+      "reviewed_version_url": "https://arxiv.org/html/2604.22191v1",
+      "reviewed_version": "v1",
+      "reviewed_arxiv_id": "2604.22191v1",
+      "detail_path": "post-training/2604.22191-behavioral-canaries/README.md",
+      "topic": [
+        "教师与上下文",
+        "训练使用审计与隐私"
+      ],
+      "first_author": "Chaoran Chen",
+      "first_author_affiliation": "Google",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "published": "2026-04-24",
+      "published_at": "2026-04-24T03:38:52Z",
+      "code": null,
+      "code_status": "固定v1与有限标题/作者入口未确认本篇公开仓库；PPO/GRPO库与相似canary项目不当作作者开源。",
+      "code_license": null,
+      "adapter": null,
+      "priority": "P0",
+      "priority_reason": "Google/DeepMind原文署名；Google COLM官方独立历史库存触发补漏，非本轮新首发。",
+      "intake_class": "historical_priority_backfill",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.post_training.behavioral_canaries.diagnostic",
+      "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.behavioral_canaries import diagnostic; print(diagnostic(42, \"cpu\"))'",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": true,
+      "gpu_validation_passed": true,
+      "gpu_validation_artifact": "docs/gpu-validations/behavioral-canaries-a100-20261113.json",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2604.22191v1",
+        "reviewed_sections": [
+          "§3.1–3.5",
+          "§4",
+          "Appendix A.1–A.3",
+          "Appendix C.3",
+          "Appendix D–E"
+        ],
+        "available_resource": "单张NVIDIA A100/A30或本地Mac",
+        "basis": "RepliQA/QMSUM、Gemma2B/Qwen1.5B、独立文档分区/种子/注入率/模式/训练regime，RM二元反馈训练后PPO/GRPO。原文单A10040GB，未给完整矩阵总墙钟；重复独立RM/策略训练成本不确定且超短时验收，本轮完整不复现。",
+        "decision": "成本过高，不复现（审查DONE）；仅交付独立低成本L1组件，不下载大资源、不试训、不自动重试。"
+      },
+      "fidelity_note": "自回归canary序列logp求和、heldout触发/干净成对差及policy-level均值/AUROC、RM/RL/Eval文档身份隔离。无注入诱导/奖励校准训练、无RM/PPO/GRPO、不能证明单文档违规。",
+      "summary": "自回归canary序列logp求和、heldout触发/干净成对差及policy-level均值/AUROC、RM/RL/Eval文档身份隔离。无注入诱导/奖励校准训练、无RM/PPO/GRPO、不能证明单文档违规。",
+      "id": "2604.22191",
+      "new_first_publication": false,
+      "review_scope": "named-full-text-sections",
+      "source_provenance": [
+        {
+          "organization": "Google",
+          "source_url": "https://arxiv.org/html/2604.22191v1"
+        }
+      ],
+      "full_text_review": {
+        "scope": "full-text",
+        "version": "v1",
+        "source_url": "https://arxiv.org/html/2604.22191v1",
+        "source_locations": [
+          "§3.1–3.5",
+          "§4",
+          "Appendix A.1–A.3",
+          "Appendix C.3",
+          "Appendix D–E"
+        ],
+        "source_sha256": "264c5373dacb62ca767168684e4f38150536e69887efd81fefbb95754f194ec5",
+        "read_scope": "Byline, defining method, evaluation and cost sections; not a claim that every appendix result was re-executed"
+      },
+      "status": "implemented",
+      "resolution": "bounded_component_accepted",
+      "reason": "自回归canary序列logp求和、heldout触发/干净成对差及policy-level均值/AUROC、RM/RL/Eval文档身份隔离。无注入诱导/奖励校准训练、无RM/PPO/GRPO、不能证明单文档违规。",
+      "component_implemented": true,
+      "doc": "post-training/2604.22191-behavioral-canaries/README.md",
+      "track": "post-training",
+      "full_capability_reproduced": false,
+      "component_evidence": "docs/post-training/2604.22191-behavioral-canaries/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "title": "MMEB-V3: Measuring the Performance Gaps of Omni-Modality Embedding Models",
+      "first_author": "Haohang Huang",
+      "first_author_affiliation": "Eastern Institute of Technology, Ningbo",
+      "published_at": "2026-04-25T14:15:05Z",
+      "code": "https://github.com/TIGER-AI-Lab/VLM2Vec/tree/olm2vec",
+      "code_status": "作者公开olm2vec分支；固定提交643150de53fea9133e9d646872228feace906498核对metrics.py，未运行完整190任务矩阵。",
+      "summary": "MMEB-V3把统一嵌入评测扩展至190任务，并以OmniSET分离语义匹配和输出模态遵循。本地实现计分与混合候选池诊断合同，不提供真实编码器或完整benchmark成绩。",
+      "domain": "multimodal-models",
+      "key": "mmeb-v3",
+      "paper_url": "https://arxiv.org/abs/2604.23321",
+      "reviewed_version": "v1",
+      "reviewed_arxiv_id": "2604.23321v1",
+      "reviewed_version_url": "https://arxiv.org/html/2604.23321v1",
+      "detail_path": "multimodal-models/2604.23321-mmeb-v3/README.md",
+      "topic": [
+        "跨模态评测与检索",
+        "全模态嵌入与模态遵循"
+      ],
+      "published": "2026-04-25",
+      "adapter": null,
+      "priority": "P1",
+      "implementation_status": "evaluation_protocol_interface",
+      "local_operator": "auto_research.multimodal.mmeb_v3.score_task",
+      "local_command": "PYTHONPATH=src python -c 'from auto_research.multimodal.mmeb_v3 import diagnostic; print(diagnostic(42))'",
+      "evaluation_tier": "l0_interface",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "fidelity_note": "精确区分Hit@1/NDCG@5与任务等权聚合，显式选择线性/指数gain；OmniSET要求12方向同一混合池、保留query干扰项、语义与模态同时正确且不计入排行榜。输入排序外置，无编码器或官方数据物化。",
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2604.23321v1",
+        "available_resource": "单张A100/A30或Mac",
+        "basis": "190任务、多种2B–8B模型、多模态数据物化和部分百万级候选池；OmniSET还依赖视频/音频生成。只核CPU排序算术，不下载模型、媒体或调用生成API。"
+      },
+      "id": "2604.23321",
+      "new_first_publication": false,
+      "intake_class": "historical_priority_backfill",
+      "review_scope": "named-full-text-sections",
+      "verified_priority_organizations": [
+        "Google AI Research"
+      ],
+      "source_provenance": [
+        {
+          "organization": "Google AI Research",
+          "source_url": "https://arxiv.org/html/2604.23321v1"
+        }
+      ],
+      "full_text_review": {
+        "scope": "full-text",
+        "version": "v1",
+        "source_url": "https://arxiv.org/html/2604.23321v1",
+        "source_locations": [
+          "§3.1–3.2",
+          "§4.1",
+          "Appendix task tables",
+          "fixed PDF first-page byline"
+        ],
+        "source_sha256": "17c6d7030ec6d4d9206716e5e3aac0a1e5efd2556978ec0bb5bfcad86a6c6e3f",
+        "read_scope": "Byline, defining method, evaluation and cost sections; not a claim that every appendix result was re-executed"
+      },
+      "status": "implemented",
+      "resolution": "bounded_component_accepted",
+      "reason": "精确区分Hit@1/NDCG@5与任务等权聚合，显式选择线性/指数gain；OmniSET要求12方向同一混合池、保留query干扰项、语义与模态同时正确且不计入排行榜。输入排序外置，无编码器或官方数据物化。",
+      "component_implemented": true,
+      "doc": "multimodal-models/2604.23321-mmeb-v3/README.md",
+      "track": "multimodal",
+      "full_capability_reproduced": false,
+      "component_evidence": "docs/multimodal-models/2604.23321-mmeb-v3/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "domain": "agent-research",
+      "key": "co-director",
+      "title": "Co-Director: Agentic Generative Video Storytelling",
+      "paper_url": "https://arxiv.org/abs/2604.24842",
+      "reviewed_version": "v1",
+      "reviewed_arxiv_id": "2604.24842v1",
+      "reviewed_version_url": "https://arxiv.org/html/2604.24842v1",
+      "detail_path": "agent-research/2604.24842-co-director/README.md",
+      "topic": [
+        "生成式视频 Agent"
+      ],
+      "published": "2026-04-27",
+      "published_at": "2026-04-27T18:00:00Z",
+      "first_author": "Yale Song",
+      "first_author_affiliation": "Google Inc.",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "code": "https://github.com/GoogleCloudPlatform/genmedia-izumi-agent/tree/main/demos/backend/ads_codirector",
+      "code_status": "作者/官方项目链接的仓库已核验公开；本地仅实现固定v1所列子组件，未运行上游完整系统。",
+      "adapter": null,
+      "priority": "P0",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.agent_research.co_director.diagnostic",
+      "local_command": "PYTHONPATH=src python -c 'from auto_research.agent_research.co_director import diagnostic; print(diagnostic(42))'",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "review_done": true,
+      "full_experiment_review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2604.24842v1",
+        "available_resource": "单张A100/A30或Mac",
+        "basis": "400场景、每场4次完整video pipeline、3次localretry、Gemini3Pro/NanoBananaPro/Veo3.1/TTS/Lyria2；完整商业视频生成高成本不复现。"
+      },
+      "fidelity_note": "以创意策略/叙事/美学三轴factored bandit优化全局方向，配合多模态局部修正。本地只实现推荐冷启动、UCB及分轴reward算术，不生成或评价视频。",
+      "summary": "以创意策略/叙事/美学三轴factored bandit优化全局方向，配合多模态局部修正。本地只实现推荐冷启动、UCB及分轴reward算术，不生成或评价视频。",
+      "id": "2604.24842",
+      "new_first_publication": false,
+      "intake_class": "historical_priority_backfill",
+      "review_scope": "named-full-text-sections",
+      "source_provenance": [
+        {
+          "organization": "Google",
+          "source_url": "https://arxiv.org/html/2604.24842v1"
+        }
+      ],
+      "full_text_review": {
+        "scope": "full-text",
+        "version": "v1",
+        "source_url": "https://arxiv.org/html/2604.24842v1",
+        "source_locations": [
+          "3.1–3.3",
+          "5",
+          "AppendixF",
+          "AppendixH"
+        ],
+        "source_sha256": "f60f83deb595f2ea1897f7f76ab05ae24a71c471c6b0f546507d552055d436a8",
+        "read_scope": "Byline, defining method, evaluation and cost sections; not a claim that every appendix result was re-executed"
+      },
+      "status": "implemented",
+      "resolution": "bounded_component_accepted",
+      "reason": "以创意策略/叙事/美学三轴factored bandit优化全局方向，配合多模态局部修正。本地只实现推荐冷启动、UCB及分轴reward算术，不生成或评价视频。",
+      "component_implemented": true,
+      "doc": "agent-research/2604.24842-co-director/README.md",
+      "track": "agent",
+      "full_capability_reproduced": false,
+      "component_evidence": "docs/agent-research/2604.24842-co-director/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "domain": "foundation-models",
+      "key": "continuousbench",
+      "title": "ContinuousBench: Can Differentially Private Synthetic Text Improve Capabilities?",
+      "paper_url": "https://arxiv.org/abs/2606.01849v1",
+      "reviewed_version_url": "https://arxiv.org/html/2606.01849v1",
+      "reviewed_version": "v1",
+      "detail_path": "foundation-models/2606.01849-continuousbench/README.md",
+      "topic": [
+        "预训练与数据",
+        "合成数据与隐私评测"
+      ],
+      "first_author": "Peihan Liu",
+      "first_author_affiliation": "Columbia University",
+      "published": "2026-06-01",
+      "published_at": "2026-06-01T08:00:01Z",
+      "code": "https://github.com/plau666/ContinuousBenchEval",
+      "code_status": "[作者评测仓库](https://github.com/plau666/ContinuousBenchEval)；[curation仓库](https://github.com/plau666/ContinuousBenchCuration)。固定评测tree `0f8a521cfef8c3f500ece717b626ad7c9124dee4`；公开仓库未发现LICENSE，不能据此推定代码许可。",
+      "code_license": null,
+      "upstream_revision": "0f8a521cfef8c3f500ece717b626ad7c9124dee4",
+      "adapter": null,
+      "priority": "P1",
+      "priority_reason": "Google COLM官方历史源召回，固定原文方法审查；低成本定义核/评测协议，不是近期新首发。",
+      "intake_class": "historical_priority_backfill",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.foundation_models.continuousbench.diagnostic",
+      "local_command": "PYTHONPATH=src python -c 'from auto_research.foundation_models.continuousbench import diagnostic; print(diagnostic(42))'",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2606.01849v1",
+        "sections": "§3.1–3.2, Appendices C.1–C.3 and author evaluation repository",
+        "paper_configuration": "1B/4B models, rank128 LoRA/full evaluation 10000 steps, DP generation 3000 steps with batch512 and sweeps; full synthesis/privacy/training matrix not reproduced.",
+        "component_boundary": "CPU fixed-release Geminon parser and exact-match/capability-gain protocol; News judge remains external, no privacy accountant/proof claim.",
+        "available_resource": "Local CPU/Mac or one NVIDIA A100/A30",
+        "decision": "成本过高，完整实验不复现；审查DONE。"
+      },
+      "summary": "若benchmark已经被基座模型做得很好，合成数据是否真正传递新知识就难以区分。ContinuousBench定期生成或整理未见知识语料及相应QA，统一训练/evaluator设置，并与未经该语料训练的同一基座比较；关注高重复公共事实的utility，不要求DP模型记住单条私有记录。 `score_geminon` 独立实现固定作者代码的清洗/匹配语义；`capability_gain`要求两臂题目ID、问题、gold与release revision完全一致，基线必须显式给出；`select_validation_checkpoint`拒绝test行。不得把contains与exact混为一谈：Flying and Normal可覆盖Normal and Flying的两类型，但不是相同字符串。无模型调用、HF大下载、DP-SGD或News自动judge。",
+      "id": "2606.01849",
+      "new_first_publication": false,
+      "review_scope": "named-full-text-sections",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "source_provenance": [
+        {
+          "organization": "Google",
+          "source_url": "https://arxiv.org/html/2606.01849v1"
+        }
+      ],
+      "full_text_review": {
+        "scope": "full-text",
+        "version": "v1",
+        "source_url": "https://arxiv.org/html/2606.01849v1",
+        "source_locations": [
+          "§3.1–3.2, Appendices C.1–C.3 and author evaluation repository"
+        ],
+        "source_sha256": "e9c3b104d5c36d4c7c1c11168694947d48532942eb992e9f881865971aa51439",
+        "read_scope": "Byline, defining method, evaluation and cost sections; not a claim that every appendix result was re-executed"
+      },
+      "status": "implemented",
+      "resolution": "bounded_component_accepted",
+      "reason": "CPU fixed-release Geminon parser and exact-match/capability-gain protocol; News judge remains external, no privacy accountant/proof claim.",
+      "component_implemented": true,
+      "doc": "foundation-models/2606.01849-continuousbench/README.md",
+      "track": "foundation",
+      "full_capability_reproduced": false,
+      "component_evidence": "docs/foundation-models/2606.01849-continuousbench/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "domain": "post-training",
+      "key": "rlmf",
+      "title": "Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs",
+      "paper_url": "https://arxiv.org/abs/2606.32032v1",
+      "reviewed_version_url": "https://arxiv.org/html/2606.32032v1",
+      "reviewed_version": "v1",
+      "reviewed_arxiv_id": "2606.32032v1",
+      "detail_path": "post-training/2606.32032-rlmf/README.md",
+      "topic": [
+        "奖励与信用分配",
+        "元认知反馈与不确定性"
+      ],
+      "first_author": "Gabrielle Kaili-May Liu",
+      "first_author_affiliation": "Yale University",
+      "verified_priority_organizations": [
+        "Google Research"
+      ],
+      "published": "2026-06-30",
+      "published_at": "2026-06-30T17:56:01Z",
+      "code": "https://github.com/yale-nlp/RLMF",
+      "code_status": "作者公开MIT仓库与README已核；本地仅固定v1 Eq2–4/选样核心，不声称复制上游完整trainer。",
+      "code_license": "MIT",
+      "adapter": null,
+      "priority": "P0",
+      "priority_reason": "Google/DeepMind原文署名；Google COLM官方独立历史库存触发补漏，非本轮新首发。",
+      "intake_class": "historical_priority_backfill",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.post_training.rlmf.diagnostic",
+      "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.rlmf import diagnostic; print(diagnostic(42, \"cpu\"))'",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": true,
+      "gpu_validation_passed": true,
+      "gpu_validation_artifact": "docs/gpu-validations/rlmf-a100-20261113.json",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2606.32032v1",
+        "reviewed_sections": [
+          "§3.1–3.4",
+          "§4–5",
+          "Appendix B.1"
+        ],
+        "available_resource": "单张NVIDIA A100/A30或本地Mac",
+        "basis": "Qwen3 1.7/4/8B与Llama3.1-8B；LoRA64，4训练GPU+2生成/judgeGPU，32completions/prompt，1500步和多模型/多任务/学习率矩阵。原文每100步按in-domain test挑checkpoint；本地不沿用泄漏，只允许train选样、validation选择，test隔离。完整高成本不复现。",
+        "decision": "成本过高，不复现（审查DONE）；仅交付独立低成本L1组件，不下载大资源、不试训、不自动重试。"
+      },
+      "fidelity_note": "严格<τ的句级FC、Z=1−(Fpred−Fgold)^2、仅高于组均值faithfulness项的k+Z放大、不std归一；训练数据上下尾平衡选样。无内在置信估计/LLM自评/GRPO/改写模型。",
+      "summary": "严格<τ的句级FC、Z=1−(Fpred−Fgold)^2、仅高于组均值faithfulness项的k+Z放大、不std归一；训练数据上下尾平衡选样。无内在置信估计/LLM自评/GRPO/改写模型。",
+      "id": "2606.32032",
+      "new_first_publication": false,
+      "review_scope": "named-full-text-sections",
+      "source_provenance": [
+        {
+          "organization": "Google Research",
+          "source_url": "https://arxiv.org/html/2606.32032v1"
+        }
+      ],
+      "full_text_review": {
+        "scope": "full-text",
+        "version": "v1",
+        "source_url": "https://arxiv.org/html/2606.32032v1",
+        "source_locations": [
+          "§3.1–3.4",
+          "§4–5",
+          "Appendix B.1"
+        ],
+        "source_sha256": "fc9c31d315252cd21dc90b43a47af8d022e3752b6a7f57014bf5ab10881810a9",
+        "read_scope": "Byline, defining method, evaluation and cost sections; not a claim that every appendix result was re-executed"
+      },
+      "status": "implemented",
+      "resolution": "bounded_component_accepted",
+      "reason": "严格<τ的句级FC、Z=1−(Fpred−Fgold)^2、仅高于组均值faithfulness项的k+Z放大、不std归一；训练数据上下尾平衡选样。无内在置信估计/LLM自评/GRPO/改写模型。",
+      "component_implemented": true,
+      "doc": "post-training/2606.32032-rlmf/README.md",
+      "track": "post-training",
+      "full_capability_reproduced": false,
+      "component_evidence": "docs/post-training/2606.32032-rlmf/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "domain": "agent-research",
+      "key": "instruct-to-act",
+      "title": "Decoupling Planning and Control for Instructable Agents",
+      "paper_url": "https://arxiv.org/abs/2608.26788",
+      "reviewed_version": "v1",
+      "reviewed_arxiv_id": "2608.26788v1",
+      "reviewed_version_url": "https://arxiv.org/html/2608.26788v1",
+      "detail_path": "agent-research/2608.26788-instruct-to-act/README.md",
+      "topic": [
+        "语言指令与世界模型控制"
+      ],
+      "published": "2026-08-27",
+      "published_at": "2026-08-27T08:17:58Z",
+      "first_author": "Zineng Tang",
+      "first_author_affiliation": "UC Berkeley",
+      "verified_priority_organizations": [
+        "Google DeepMind"
+      ],
+      "code": "https://github.com/zinengtang/instruct-to-act-code",
+      "code_status": "作者/官方项目链接的仓库已核验公开；本地仅实现固定v1所列子组件，未运行上游完整系统。",
+      "adapter": null,
+      "priority": "P0",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.agent_research.instruct_to_act.diagnostic",
+      "local_command": "PYTHONPATH=src python -c 'from auto_research.agent_research.instruct_to_act import diagnostic; print(diagnostic(42))'",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": true,
+      "gpu_validation_passed": true,
+      "review_done": true,
+      "full_experiment_review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2608.26788v1",
+        "available_resource": "单张A100/A30或Mac",
+        "basis": "800M每环境controller、7环境、4×RTXA6000、平均23h/最高36h每环境，GPT4o标注增17%GPUh；完整训练高成本不复现。"
+      },
+      "fidelity_note": "把高频world-model控制与稀疏VLM规划解耦，给自身轨迹后标指令训练BC/stop目标。本地实现区间完成标签和真实可微loss，无RSSM/策略/环境控制。",
+      "summary": "把高频world-model控制与稀疏VLM规划解耦，给自身轨迹后标指令训练BC/stop目标。本地实现区间完成标签和真实可微loss，无RSSM/策略/环境控制。",
+      "gpu_validation_artifact": "docs/gpu-validations/instruct-to-act-a100-20261113.json",
+      "id": "2608.26788",
+      "new_first_publication": false,
+      "intake_class": "historical_priority_backfill",
+      "review_scope": "named-full-text-sections",
+      "source_provenance": [
+        {
+          "organization": "Google DeepMind",
+          "source_url": "https://arxiv.org/html/2608.26788v1"
+        }
+      ],
+      "full_text_review": {
+        "scope": "full-text",
+        "version": "v1",
+        "source_url": "https://arxiv.org/html/2608.26788v1",
+        "source_locations": [
+          "3.2–3.4",
+          "4.1",
+          "AppendixA.4",
+          "AppendixD.1"
+        ],
+        "source_sha256": "e63f0494206615692c65a6e128ea740d3fdb181d00b1b04faa27633fbb436303",
+        "read_scope": "Byline, defining method, evaluation and cost sections; not a claim that every appendix result was re-executed"
+      },
+      "status": "implemented",
+      "resolution": "bounded_component_accepted",
+      "reason": "把高频world-model控制与稀疏VLM规划解耦，给自身轨迹后标指令训练BC/stop目标。本地实现区间完成标签和真实可微loss，无RSSM/策略/环境控制。",
+      "component_implemented": true,
+      "doc": "agent-research/2608.26788-instruct-to-act/README.md",
+      "track": "agent",
+      "full_capability_reproduced": false,
+      "component_evidence": "docs/agent-research/2608.26788-instruct-to-act/metrics/component-cpu-seeds42-44.json"
+    }
+  ]
+}

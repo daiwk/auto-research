@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:verified-quantum-wiki": {
+      "source_sha256": "0229ac491eb4ed14d6d276ec0982fc722110b5bdf19a606bc5d7a5573b33c900",
+      "reviewed": true,
+      "fields": {
+        "position": "An independent verifier checks the frozen specification before a candidate can enter the shared knowledge base under the cost-improvement or code-size thresholds.",
+        "tradeoff": "Formal proofs depend on the specification and are not a comparison on held-out tasks. The local code consumes external results and enforces the admission thresholds; it does not verify Lean."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-09/6": {
+      "source_sha256": "83340500525a2e1883949e099178bc56ab0e888e3ff00e65ac0cb2040792c4d7",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added Verified Quantum Wiki to distinguish Strategist's development-set selection from admission after independent proof against a frozen specification. The proof covers the stated properties. The local component only checks that external evidence matches the candidate and applies admission thresholds."
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-13",
+  "figures": [
+    {
+      "file": "paper-figure-01.png",
+      "paper_id": "2604.01430",
+      "version": "v1",
+      "figure": 1,
+      "page_number": null,
+      "paper_url": "https://arxiv.org/abs/2604.01430v1",
+      "source_url": "https://arxiv.org/html/2604.01430v1/train_vs_test_latent_learning_comparison.png",
+      "source_kind": "fixed_v1_html_original_image",
+      "pdf_sha256": null,
+      "image_sha256": "d6dd0729600d39b69f7278600497dd72518e8423e742c331c278c7d56c761208",
+      "render_scale": null,
+      "crop_pdf_points": null,
+      "caption_included": false,
+      "scientific_content_modified": false,
+      "visual_review_done": true,
+      "attribution": "Copyright belongs to the original authors; original-paper illustration is not a local component result.",
+      "license": "See original fixed arXiv source; no new license granted."
+    }
+  ]
+}

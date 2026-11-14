@@ -7,7 +7,7 @@ hide:
 
 # 教师更强仍可能教错：信息、兼容性与成功行为保护
 
-[LLM 后训练](../index.md) · 更新 2026-11-05 · 49 篇主题资料 / 8 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-13 · 54 篇主题资料 / 13 篇重点对照
 
 教师的价值不只取决于总分。OPSD改变训练期可见信息，MOPD与逐token路由组织多教师，CSD先统一概率事件，SPOD保护学生已成功选择，VAD筛出可归于视觉证据的修正；这些约束要在模仿之前分别成立。
 
@@ -33,6 +33,11 @@ hide:
 | [VAD](../../../post-training/2607.28590-vad/README.md) · [原始来源](https://arxiv.org/abs/2607.28590)<br>章节：背景与主要改动、核心公式、复现边界 | 对比同一教师证据存在/移除视图，将原修正单侧投影到视觉方向后重建学生锚定目标。 | 操作性对比不证明所有修正皆真视觉因果；本地过程证据轴替代真实crop，未运行原视觉模型。 |
 | [P²-MOPD: Accelerating Multi-Teacher On-Policy Distillation via Parameter Priors](../../../post-training/2611.03953-p2-mopd/README.md) · [原始来源](https://arxiv.org/abs/2611.03953v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 把冻结专家任务向量保留为可学习优化方向；自由学生权重与系数由同一更新前梯度共同推进，推理仍使用一个物化学生模型。 | 不只改变教师logit或合并初始点；未裁剪系数梯度、独立全局clip和零decay决定多步等价。完整MOPD模型/轨迹未复现，本地只验参数更新L1。 |
 | [Stabilizing On-Policy Targeted Guidance in Agentic Reinforcement Learning](../../../post-training/2611.05266-targeted-guidance/README.md) · [原始来源](https://arxiv.org/abs/2611.05266v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 在失败Agent turn前加入文本反馈，以同权重反馈条件教师做完整词表reverse KL，并保留criterion的普通RL奖励。 | 只在失败处蒸馏，按整条响应token数归一；全部满足后恢复原RL。组件不提供实际judge、反馈有效性筛选或Agent轨迹，不能凭loss下降声称代码能力提高。 |
+| [RAGCompass: Generalizable Retriever Routing via Reranking](../../../post-training/2611.05596-ragcompass/README.md) · [原始来源](https://arxiv.org/abs/2611.05596v1)<br>章节：核心公式、数据协议与代码映射 | RAGCompass 把每组检索证据交给同一个 reranker；将固定 reader 的离线答案 F1 软化为整组候选的监督分布，优化候选集 KL。 | 不需要检索器 ID 或相互不可比的置信度，但训练标签依赖固定 reader 与有参考答案的离线数据。推理只比较分数，不用真实 F1 或筛选 gap。 |
+| [Bootstrapped On-Policy Distillation](../../../post-training/2611.13680-bopd/README.md) · [原始来源](https://arxiv.org/abs/2611.13680v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 先由reference-conditioned冻结M0构造中间M1，再冻结M1并移除reference，向从M0精确恢复、使用新optimizer的学生做teacher→student FKL。 | 不同于持续特权视图OPSD，reset的是学生与optimizer，教师则保留已学参数；本地仅真实FKL/handoff，不含LM rollout或原文未可审核的pointwise clipping。空作者仓库不记为已开源实现。 |
+| [Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation](../../../post-training/2611.13135-lcs-reference-opd/README.md) · [原始来源](https://arxiv.org/abs/2611.13135v1)<br>章节：核心公式、数据协议与代码映射、结果、负控与边界 | 按同任务完整动作LCS选最兼容成功reference，free-target OT独立argmax且允许复用；只更新失败episode，无引用时reference-free，ALFWorld/tau3分别使用不同归一化。 | 不同于SPOD只在成功episode内保护teacher较不支持的action，这里整条成功轨迹不更新。LCS状态解释需要可恢复绕行，不是潜状态等价；本地没有Agent/OPD trainer，4500A100小时完整矩阵不复现。 |
+| [Learning to Learn from Language Feedback with Social Meta-Learning](../../../post-training/2602.16488-social-meta-learning/README.md) · [原始来源](https://arxiv.org/abs/2602.16488)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界 | 把teacher反馈放进公开多轮历史，以成功轨迹student-only SFT或在线RL训练反馈利用，并另用Qpriming教提问。 | OPSD用特权教师分布监督学生前缀，SML让教师通过对话转移信息；两者的额外知识都不能泄漏给评测student。本地只实现SML离线目标。 |
+| [Behavioral Canaries: Auditing Private Retrieved Context Usage in RL Fine-Tuning](../../../post-training/2604.22191-behavioral-canaries/README.md) · [原始来源](https://arxiv.org/abs/2604.22191v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射 | 用held-out clean/trigger文档对的canary序列logprob差测条件行为影响，再按独立训练策略统计。 | RAGCompass的答案F1只作离线路由蒸馏监督，运行时scorer不读gold；Canaries的配对目标属于审计测量，不能据此给actor答案，也不把有用证据或单次风格变化判作违规。 |
 
 </div>
 
@@ -61,6 +66,36 @@ MOPD组织领域教师在学生轨迹上的监督；P²-MOPD进一步把专家ba
 OPSD区分学生可见问题与teacher私有参考；Targeted Guidance把特权信息换成失败turn前的文本反馈，并只在这些轮次施加辅助reverse KL，同时保留普通criterion RL。稀疏门控选择梯度位置，整条response-token归一控制每条rollout的总体尺度，两者不能混成删token后重算均值。无失败时严格退化原RL是数值合同，不代表反馈已经通过有效性筛选或代码任务真的提升。
 
 对照来源：[targeted-guidance](../../../post-training/2611.05266-targeted-guidance/README.md) · [opsd](../../../post-training/2601.18734-opsd/README.md)
+
+### 额外信息进入教师条件，还是只定义训练标签？
+
+OPSD 把验证解交给同权重教师，在学生前缀上给词表分布；Targeted Guidance 只在失败轮次插入判定反馈，再加上普通 RL 奖励。RAGCompass 的参考答案只在候选证据产生答案后计算离线 F1 标签，监督轴是整个候选集合，不是 token。三者都要防止把训练期可见的额外信息带到推理。
+
+对照来源：[ragcompass](../../../post-training/2611.05596-ragcompass/README.md) · [opsd](../../../post-training/2601.18734-opsd/README.md) · [targeted-guidance](../../../post-training/2611.05266-targeted-guidance/README.md)
+
+### 先构造可无参考使用的教师，与始终依赖特权视图是不同路径
+
+OPSD让教师额外读取验证解，学生只见自身前缀；BOPD先把这种监督写入中间参数，再让无参考中间教师指导从初始checkpoint恢复的新学生。它不是把Stage I末尾学生继续训练，也不能把Stage I特权分数缓存成Stage II无参考监督。权重冻结不意味着在新学生前缀上预测恒定，必须保留阶段、上下文与参数状态三条来源。
+
+对照来源：[bopd](../../../post-training/2611.13680-bopd/README.md) · [opsd](../../../post-training/2601.18734-opsd/README.md)
+
+### 保护成功episode与保护成功里的特定action，更新集合不一样
+
+LCS reference方法先排除全部成功学生episode，再为失败者选同任务引用并校正；SPOD仍可训练成功episode，只对teacher完整action概率低于student的decision取消KL并加软floor。前者还改变reference信息来源，后者改变action级监督。不能把二者统称success mask后混用分母、概率条件和更新门控，且训练用成功reference都不应暴露给被评估学生。
+
+对照来源：[lcs-reference-opd](../../../post-training/2611.13135-lcs-reference-opd/README.md) · [spod](../../../post-training/2610.25034-spod/README.md)
+
+### 特权知识经分布蒸馏还是经语言反馈，会改变训练与泄漏边界
+
+OPSD的教师额外看验证答案，并在学生到达的前缀提供稠密分布。SML的student看teacher公开回复，外层才优化未来的互动方式；Qpriming合成训练问题时可用私有知识，不代表测试可读gold。成功student token屏蔽只是训练算子正确性，缺失完整对话与backbone时不能声称已学会问问题。
+
+对照来源：[social-meta-learning](../../../post-training/2602.16488-social-meta-learning/README.md) · [opsd](../../../post-training/2601.18734-opsd/README.md)
+
+### 检索证据有助回答，与证据是否进入后训练，是不同问题
+
+RAGCompass从各检索器证据组带来的答案效用构造候选分布，训练可泛化的路由scorer；真实推理只用其分数选组，不能继续看参考答案。Behavioral Canaries则控制文档trigger、问题和答案前缀，观察已训练策略的目标风格概率变化，回答的是训练条件影响而非路由优劣。效用、数据使用权限和可测影响不能互相替代：许可取决于真实约定，弱行为信号也不是某份文档违规的证明。两者都必须保存离线标签与运行/审计接口的界线，并防止把重复题目当独立策略。
+
+对照来源：[behavioral-canaries](../../../post-training/2604.22191-behavioral-canaries/README.md) · [ragcompass](../../../post-training/2611.05596-ragcompass/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -126,9 +161,79 @@ OPSD区分学生可见问题与teacher私有参考；Targeted Guidance把特权�
 
     对照来源：[targeted-guidance](../../../post-training/2611.05266-targeted-guidance/README.md) · [opsd](../../../post-training/2601.18734-opsd/README.md)
 
+### 两个检索候选的离线 F1 很接近，能否在 RAGCompass 推理时沿用 0.05 门槛？它和 OPSD 的特权信息有什么不同？ {#cross-ragcompass-offline-gap}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。门槛只用于筛选有参考答案的离线样本；推理用 reranker 或比较头的得分。OPSD 的特权解进入教师输入，改变词表预测；RAGCompass 的参考答案只定义候选标签，不输入候选 scorer。
+
+    **教学例子：** 离线 F1 是 0.50 和 0.48 时，该样本不满足筛选门槛。部署时如果两个 scorer 分数是 0.2 和 0.7，仍选第二个；不能查真值 F1 重新筛选。
+
+    对照来源：[ragcompass](../../../post-training/2611.05596-ragcompass/README.md) · [opsd](../../../post-training/2601.18734-opsd/README.md)
+
+### 把OPSD的teacher去掉reference，再继续原学生，等于BOPD吗？ {#cross-cross-bootstrap-teacher-versus-privileged-view}
+
+??? note "展开答案与例子"
+
+    **答案：** 不等于。BOPD的Stage II教师来自Stage I学得的中间模型，而学生精确恢复初始模型并新建optimizer；去reference只是其中一条条件变化。继续原学生或换回初始teacher都改变了方法。
+
+    **教学例子：** 教学例：Stage I把权重1学到1.2。Stage II teacher用1.2、student用1、optimizer空状态；两者都用1.2只是继续训练，不是该handoff。
+
+    对照来源：[bopd](../../../post-training/2611.13680-bopd/README.md) · [opsd](../../../post-training/2601.18734-opsd/README.md)
+
+### LCS failure-only和SPOD都保护成功，为什么不能复用同一个success mask？ {#cross-cross-whole-success-versus-action-protection}
+
+??? note "展开答案与例子"
+
+    **答案：** LCS跳过整个成功episode；SPOD还比较teacher/student的完整action概率，只保护满足条件的decision，其他位置继续蒸馏。因此mask粒度、归约和保留的loss都不同。
+
+    **教学例子：** 教学例：一条成功episode中teacher对某动作比student更支持，SPOD可继续该动作KL；LCS方法仍跳过整条成功轨迹。
+
+    对照来源：[lcs-reference-opd](../../../post-training/2611.13135-lcs-reference-opd/README.md) · [spod](../../../post-training/2610.25034-spod/README.md)
+
+### OPSD和SML都让teacher有额外知识，就能把这些知识直接交给被评student吗？ {#cross-cross-colm-social-meta-learning}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。OPSD训练时以特权教师分布监督学生前缀；SML通过公开teacher回复提供反馈。两者都必须保留student观测边界，训练教师持有答案不意味着测试student可读gold。
+
+    **教学例子：** 教学例：用答案生成训练提示，与在测试请求里放隐藏解题字段，是不同的数据流。
+
+    对照来源：[social-meta-learning](../../../post-training/2602.16488-social-meta-learning/README.md) · [opsd](../../../post-training/2601.18734-opsd/README.md)
+
+### RAGCompass找到更有用的检索证据，能否说明这些文档被允许用于RL训练，或已经被用于训练？ {#cross-cross-behavior-audit-versus-rm-memorization}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。它的离线F1监督衡量回答效用，运行时路由不读gold；使用权限来自真实约定，训练影响还需要独立审计。Behavioral Canaries测同策略的clean/trigger条件差，也不凭一项变化证明单文档违规。
+
+    **教学例子：** 教学例：两组证据答案F1为0.8和0.5可形成路由监督，却不给文档使用许可；另一项canary logprob差0.1是条件影响观测，不是“该路由更好”或“该文件已被训练”的判决。
+
+    对照来源：[behavioral-canaries](../../../post-training/2604.22191-behavioral-canaries/README.md) · [ragcompass](../../../post-training/2611.05596-ragcompass/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-13** · 改为同卡片RAGCompass的离线效用监督与条件行为审计对照，明确gold只用于离线目标、文档许可与单文档证明边界。
+
+涉及：[behavioral-canaries](../../../post-training/2604.22191-behavioral-canaries/README.md) · [ragcompass](../../../post-training/2611.05596-ragcompass/README.md)
+
+**2026-11-13** · 补入social-meta-learning历史遗漏，把teacher反馈放进公开多轮历史，以成功轨迹student-only SFT或在线RL训练反馈利用，并另用Qpriming教提问。 OPSD用特权教师分布监督学生前缀，SML让教师通过对话转移信息；两者的额外知识都不能泄漏给评测student。本地只实现SML离线目标。
+
+涉及：[social-meta-learning](../../../post-training/2602.16488-social-meta-learning/README.md) · [opsd](../../../post-training/2601.18734-opsd/README.md)
+
+**2026-11-12** · 补审LCS同任务引用选择，区分整episode失败过滤与SPOD完整action保护；保留free-target独立选择、双normalizer和teacher-only reference。仅CPU选择核，不用fixture冒充多轮Agent训练。
+
+涉及：[lcs-reference-opd](../../../post-training/2611.13135-lcs-reference-opd/README.md)
+
+**2026-11-12** · 补审BOPD，区分持续特权视图与两阶段无参考教师迁移，保留学生/optimizer重置及逐轨迹FKL；本地A100只验收loss/handoff，完整多GPU与长生成实验不复现。
+
+涉及：[bopd](../../../post-training/2611.13680-bopd/README.md)
+
+**2026-11-06** · 加入 RAGCompass 候选证据效用蒸馏，与 OPSD 和 Targeted Guidance 对读监督轴、反馈入口及离线筛选与部署分界。
+
+涉及：[ragcompass](../../../post-training/2611.05596-ragcompass/README.md) · [opsd](../../../post-training/2601.18734-opsd/README.md) · [targeted-guidance](../../../post-training/2611.05266-targeted-guidance/README.md)
 
 **2026-11-05** · 补入P²-MOPD参数先验双通道和Targeted Guidance失败turn反馈；对照MOPD教师监督与OPSD特权上下文，保留独立更新方向、原分母及完整实验高成本未复现边界。
 
@@ -138,7 +243,7 @@ OPSD区分学生可见问题与teacher私有参考；Targeted Guidance把特权�
 
 覆盖 47 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 49 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 54 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -191,6 +296,11 @@ OPSD区分学生可见问题与teacher私有参考；Targeted Guidance把特权�
 - [POLARIS: Guiding Small Models to Write Long Stories](../../../post-training/2606.04095-polaris-hri/README.md)
 - [OPCD](../../../post-training/2602.12275-opcd/README.md)
 - [OPSD](../../../post-training/2601.18734-opsd/README.md)
+- [RAGCompass: Generalizable Retriever Routing via Reranking](../../../post-training/2611.05596-ragcompass/README.md)
+- [Bootstrapped On-Policy Distillation](../../../post-training/2611.13680-bopd/README.md)
+- [Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation](../../../post-training/2611.13135-lcs-reference-opd/README.md)
+- [Learning to Learn from Language Feedback with Social Meta-Learning](../../../post-training/2602.16488-social-meta-learning/README.md)
+- [Behavioral Canaries: Auditing Private Retrieved Context Usage in RL Fine-Tuning](../../../post-training/2604.22191-behavioral-canaries/README.md)
 
 </details>
 

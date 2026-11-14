@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "agent-research:mle-star": {
+      "questions": [
+        {
+          "id": "retrieval-needs-validation",
+          "level": "basics",
+          "question": "MLE-STAR检索到新模型以后，为什么不能直接拿它替换当前方案？",
+          "answer": "网络检索只提供模型描述和示例，不提供当前任务上的可靠收益。原文先生成可执行候选、用训练/验证划分实际评估并排序，再逐个合并；合并不改进就丢弃，不能凭搜索排名或论文SOTA标签选模型。",
+          "example": "教学例：检索模型A在别的数据上领先，但当前validation为0.88，已有方案为0.91。它不因发布时间更新就自动取代已有模型；test分数不参与这个选择。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "nested-block-refinement",
+          "level": "mechanism",
+          "question": "MLE-STAR的内层和外层循环分别改变什么，为什么要保留消融反馈？",
+          "answer": "外层执行消融定位影响较大、尚未重点细化的代码块；内层针对该块提出多个计划，替换后执行完整验证并保留最好方案。此前消融和已改块记录用于避免一直只改同一部分；不等于每轮任意重写整个训练流水线。",
+          "example": "教学例：消融提示缺失值处理最敏感，内层比较均值、分组中位数等可执行改法；结束后外层再判断是否该细化特征编码。示例分支不是本地实验。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "block-ablation-versus-budget-tree",
+          "level": "comparison",
+          "question": "同属自动研究，MLE-STAR与MARS的搜索单位和成本处理有何不同？",
+          "answer": "MLE-STAR重点用真实消融选择代码块，再在该块上做嵌套细化和集成；MARS重点用预算感知MCTS调度模块化仓库候选，并比较代码/结果差异来复用经验。前者的高影响块不等于后者的成本惩罚奖励，不能据不同竞赛配置直接排名。",
+          "example": "教学例：两个改法都提高0.01，但训练分别1分钟和1小时；MARS的成本项可以改变节点排序，MLE-STAR所描述的块内验证改进条件本身没有同一个预算奖励公式。",
+          "source_sections": [
+            "核心公式",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "generated-artifacts-not-controller",
+          "level": "implementation",
+          "question": "作者公开了final solution，为什么本库仍不把它标成已实现的MLE-STAR Agent？",
+          "answer": "最终脚本只保存一次研究的产物，不包含检索、消融定位、内外层决策、失败恢复和集成搜索的完整生成过程。运行脚本也不能恢复这些能力。原文完整矩阵需八V100及多小时，因此本次只做资料/成本审查，没有本地模块、能力指标或Evolve算子。",
+          "example": "教学例：仓库有一个训练XGBoost的最终脚本，可以审查它做了什么；不能由此声称本地系统会自行搜索、消融并选择这个脚本。",
+          "source_sections": [
+            "来源核验",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-13"
+        }
+      ]
+    },
+    "agent-research:alphaevolve": {
+      "questions": [
+        {
+          "id": "human-objective-machine-search",
+          "level": "basics",
+          "question": "AlphaEvolve里人类定义“什么”、系统探索“如何做”，具体固定了什么？",
+          "answer": "人类提供任务、初始程序和自动评价函数；模型与进化流程提出程序修改，并据执行反馈寻找更好的候选。系统并未因此获得自行定义所有科学目标或证明评价器充分性的能力，评价合同的缺漏仍可使高分偏离真实需求。",
+          "example": "教学例：评价器只测排序速度而不检查结果是否排序，错误输出也可能很快。AlphaEvolve式搜索不能替人补上从未写进评价器的正确性要求。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "cascade-and-diversity",
+          "level": "mechanism",
+          "question": "评价级联和进化档案为什么是两件事，不能都简化成保留最高分？",
+          "answer": "级联决定一个候选是否值得继续付出更贵的测试成本；进化数据库决定哪些已测程序/反馈成为后续提案材料，并兼顾多维质量与多样性。只留单一最高分会丢失可用于重组的不同结构，论文也没有公开唯一的完整档案与迁移实现供直接照搬。",
+          "example": "教学例：候选A小测试已经算错，可提前停止；候选B正确但不是当前最快，仍可能因不同结构成为后续提示素材。前者是评价准入，后者是材料保留。",
+          "source_sections": [
+            "核心公式"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "optimization-versus-evidence-audit",
+          "level": "comparison",
+          "question": "AlphaEvolve的自动评价与ScientistOne的Chain-of-Evidence审计能互相替代吗？",
+          "answer": "不能。AlphaEvolve的任务评价给程序质量和搜索方向；ScientistOne还追踪论文claim到代码、评价器、引文与方法实现的一致性。高任务分数不证明论文引用真实或描述忠实，证据链完整也不意味着发现了最优算法。",
+          "example": "教学例：一个矩阵乘法构造通过数值/精确验证，不自动证明围绕它写的所有创新声称和引文；反过来，有可追踪来源的文章也可能只复现已有构造。",
+          "source_sections": [
+            "核心公式",
+            "论文离线与线上效果"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "verification-is-not-discovery",
+          "level": "implementation",
+          "question": "运行alphaevolve_results里的数学验证notebook，为什么不能算运行了AlphaEvolve？",
+          "answer": "它检查已经公布的构造，未执行产生构造的提示采样、Flash/Pro提案、分布式评价和进化数据库。官方README明确不含AlphaEvolve运行代码；本库也没有这些模块，不用社区控制器或玩具档案冒充原系统，完整高成本实验不复现。",
+          "example": "教学例：验证现成4×4复数rank-48张量分解，说明那个对象满足检查；不说明系统重新发现了它，更不能把结论改成任意域rank-48。",
+          "source_sections": [
+            "论文离线与线上效果",
+            "来源核验",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-13"
+        }
+      ]
+    }
+  }
+}

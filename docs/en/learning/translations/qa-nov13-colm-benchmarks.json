@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/multimodal-models:avmeme-exam/main-split-removes-text-shortcuts": {
+      "reviewed": true,
+      "fields": {
+        "question": "Why is comparing only on meme-full insufficient?",
+        "answer": "Some full-set questions can be answered without hearing the clip. Three text-only models identify text_cheat examples, producing the 846-example main split from 1,032 full examples. The splits answer different questions and require explicit denominators.",
+        "example": "Teaching example: a question names a catchphrase's origin; text-only guessing does not establish audio understanding."
+      },
+      "source_sha256": "4f24677b1eba57d968d4d1fd8a4aefe30ad94138978a544dfb432fd178efce4a"
+    },
+    "qa/multimodal-models:avmeme-exam/shuffle-private-key-and-mask-video": {
+      "reviewed": true,
+      "fields": {
+        "question": "What do option shuffling and visual_cheat masking prevent?",
+        "answer": "Shuffling reduces fixed-position bias and requires updating the private correct letter. visual_cheat masking removes videos that directly reveal the solution. Neither creates answers nor eliminates all contamination.",
+        "example": "Teaching example: scoring the old B after the solution moved to A is wrong; a video subtitle revealing the answer requires video removal even in audiovisual mode."
+      },
+      "source_sha256": "399bf320c2009a08a96701f22723ab2950feb752274a9660f9f30ebc9b334f9a"
+    },
+    "qa/multimodal-models:avmeme-exam/cultural-mcq-versus-embedding-retrieval": {
+      "reviewed": true,
+      "fields": {
+        "question": "Can AVMeme Exam and MMEB-V3 aggregate scores be compared directly?",
+        "answer": "No. The former scores culturally situated multiple-choice answers; the latter evaluates embedding retrieval with Hit@1/NDCG and task aggregation. Outputs, candidate spaces, denominators and model interfaces differ.",
+        "example": "Teaching example: choosing a meme's cultural use is not retrieving the correct audio document from an omni-modal pool."
+      },
+      "source_sha256": "97a13d96627ab518e9adc225949b8d5fe4c9cbcc595e661fc20efec7561c0a76"
+    },
+    "qa/multimodal-models:avmeme-exam/typed-request-is-not-sandbox": {
+      "reviewed": true,
+      "fields": {
+        "question": "Does an answer-free ActorRequest guarantee no leakage?",
+        "answer": "No. It limits normal callback fields, but filesystem permissions, closures or question text can still leak answers. Independent process and permission audits are necessary. The fixed-A fixture tests protocol only, not capability.",
+        "example": "Teaching example: a ScoringKey in a globally readable variable defeats isolation despite clean request fields."
+      },
+      "source_sha256": "73da6b6ee752cf88a843139c900e6b8a8e6c5c1f5f18f8b2b06f193a2bddc793"
+    },
+    "qa/multimodal-models:mmeb-v3/six-categories-not-one-metric": {
+      "reviewed": true,
+      "fields": {
+        "question": "Why not use Hit@1 for every MMEB-V3 task?",
+        "answer": "Audio, image, video and agent tasks use Hit@1; text and visual documents use NDCG@5 to retain ranking and graded relevance. Category aggregation weights tasks equally rather than pooling all queries.",
+        "example": "Teaching example: a task with 10,000 queries does not automatically receive 100 times the weight of one with 100 queries."
+      },
+      "source_sha256": "5225433d262ad4b2a39d5fd20238a208f4c6da93a5925b66e9a076ba6676f690"
+    },
+    "qa/multimodal-models:mmeb-v3/omniset-shared-pool-self-distractor": {
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain the query itself and avoid target-modality prefiltering in OmniSET?",
+        "answer": "The diagnostic tests both semantics and requested output modality. The query is a same-semantic, wrong-modality distractor, and twelve directions share one mixed pool. Prefiltering would hide modality-instruction failures.",
+        "example": "Teaching example: placing the original image first for image-to-audio retrieval has correct semantics but wrong modality and must score zero."
+      },
+      "source_sha256": "182a15d49e199fb317fafbed60d20f6c6edd1fc25a0bc8b4cf114419891d9b86"
+    },
+    "qa/multimodal-models:mmeb-v3/mmeb-versus-mveb-budget-and-purpose": {
+      "reviewed": true,
+      "fields": {
+        "question": "How do MMEB-V3 and MVEB differ despite both evaluating embeddings?",
+        "answer": "MMEB-V3 covers six categories and diagnoses modality adherence with OmniSET. MVEB focuses on video classification, clustering and eight retrieval directions with frame/audio budgets. Tasks, pools and budgets differ; neither aggregate nor local kernel substitutes for the other.",
+        "example": "Teaching example: a capped-64-frame video experiment controls different variables from a mixed TIVA-pool diagnostic."
+      },
+      "source_sha256": "deb5bc837d3c91caff99a72fa1d94a44bc7a67e6bab30963d7cec2bccce47e1c"
+    },
+    "qa/multimodal-models:mmeb-v3/explicit-gain-and-exact-task-coverage": {
+      "reviewed": true,
+      "fields": {
+        "question": "Why require explicit NDCG gain and exact task coverage?",
+        "answer": "The fixed upstream emits linear and exponential NDCG, so silently choosing one changes scores. Missing tasks also alter averages. The API enforces the gain and exact expected tasks, but cannot prove external rankings came from a real model.",
+        "example": "Teaching example: omitting a difficult task invalidates a complete-category claim; a perfect fixture ranking is not model evidence."
+      },
+      "source_sha256": "cc074aa38852c5d2a1ff123d2b74853df935e9ba6f39e508cfb2010e8a8da76a"
+    }
+  }
+}

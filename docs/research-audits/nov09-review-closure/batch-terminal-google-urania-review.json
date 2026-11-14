@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "window": {
+    "start": "2026-10-16",
+    "end": "2026-11-09",
+    "timezone": "Asia/Shanghai"
+  },
+  "all_sources_exhaustive": false,
+  "reviews": [
+    {
+      "id": "2611.08749",
+      "title": "How are viral trends different from educational and commercial uses of LLM image generation and editing? A privacy-preserving descriptive analysis",
+      "published": "2026-11-05T21:56:29Z",
+      "updated": "2026-11-05T21:56:29Z",
+      "revision": 1,
+      "metadata_sha256": "63753879bce4f8f337393e94193aad7c20f4bd97ff64273c60abc249341a8d53",
+      "source_sha256": "54fe4cb28bca4a4aa8afc2e5b5047d5b08137fa452bb6263bda380b543e650f2",
+      "source_url": "https://arxiv.org/html/2611.08749v1",
+      "track": "foundation-model",
+      "priority": "P0",
+      "organization": "Google Behavioral Economics / Google Research / Google DeepMind / Google Marketing / Google Learning / Google Privacy, Security, & Safety / Google Gemini Data Science",
+      "verified_priority_organizations": [
+        "Google",
+        "Google DeepMind"
+      ],
+      "locations": [
+        "fixed author affiliations",
+        "§3.1–3.4",
+        "§3.5–3.9",
+        "§4.1"
+      ],
+      "source_review_scope": "fixed byline, Urania method provenance, sample, privacy accounting and observational limits; not a full-article reading claim",
+      "reason": "确认 Google/DeepMind 实际作者。论文复用已有 Urania 的差分隐私聚类与聚合问答，描述 Nano Banana 真实使用，不是新的图像生成训练算法，也不是图像质量基准或线上 A/B。分析单位为对话，隐私预算 ε≤0.04、δ=0；以五大用途和 21 个特征聚合，不能从提示文本使用频率推断生成图像质量或因果产品提升。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "production_evidence_verified": true,
+      "production_evidence_kind": "observational differentially-private usage analysis, not controlled A/B",
+      "production_gate_passed": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2611.08749v1",
+        "basis": "原文 §3 的非公开生产对话样本与完整 DP 聚合配置；未进行本地成本测量",
+        "scale": "2026 Q1 90 天中抽样约 2.1M 对话、超过 5.2M 提示；五类共 831 个保留簇、21 个聚合特征，底层个体提示/图像不可供本地完整再分析。",
+        "available_resource": "one A100 or A30, or local Mac; no private data access or experiment was attempted",
+        "cost_type": "百万级非公开生产交互与受隐私会计约束的聚合分析；不能用公开小样本伪复现整体分布"
+      },
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true
+    }
+  ]
+}

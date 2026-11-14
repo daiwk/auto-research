@@ -169,21 +169,28 @@
 - 2026-09-30 · 一作：Xinchen Du · [SHARPO: Segment-Level Credit Assignment for Agentic Reinforcement Learning](../2610.00838-sharpo/README.md)（`sharpo`）：用同组成功轨迹作为自蒸馏 teacher context，在环境交互 segment 内计算 teacher-student log-prob gap，并有界缩放 GRPO advantage。
 - 2026-09-29 · 一作：Zhiqi Li · [FlowMap-OPD: Rollout-Kernel Separation for On-Policy Distillation of Few-Step Flow-Map Generators](../2609.37851-flowmap-opd/README.md)（`flowmap-opd`）：把生成状态的 rollout 分布与 teacher/student 比较 kernel 解耦：rollout 只负责提供具有正确边缘分布的状态，优化 kernel 在这些冻结状态上比较 flow map、诱导速度或瞬时速度。
 
+## Georgia Institute of Technology（工作在Amazon Web Services实习期间完成）
+
+- 2026-11-09 · 一作：Mufei Li · [Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation](../2611.13135-lcs-reference-opd/README.md)（`lcs-reference-opd`）：同一任务可有多条成功路线，但并非任意成功 reference 都适合纠正当前失败学生。论文仅用执行动作序列作对齐：相比最长公共前缀 LCP，LCS 在可恢复绕行之后仍保留有序一致，选择更兼容的同任务成功轨迹。
+
 ## Google
 
 - 2026-10-23 · 一作：Leon Sick · [On-Policy Self-Training: Data-Free Self-Improvement in Large Language Models](../2610.32770-opst/README.md)（`opst`）：通常的 on-policy self-distillation 仍需要人工问题集。OPST 按主题自生成问题和特权解题线索，经独立重答、改写与学生难度门过滤，再由额外看到线索的 EMA 教师在学生实际生成的前缀上提供分布监督，而不是要求学生直接模仿生成器表述。
+- 2026-04-24 · 一作：Chaoran Chen · [Behavioral Canaries: Auditing Private Retrieved Context Usage in RL Fine-Tuning](../2604.22191-behavioral-canaries/README.md)（`behavioral-canaries`）：RL 更新可能留下风格偏好而不是逐字记忆，因此只测训练句复现不一定能判断检索文档是否被用于后训练。本文把文档 trigger 与弱风格 canary 的偏好反馈相关联，再以未参与训练的成对文档测量目标风格概率是否放大。
 - 2026-02-24 · 一作：Sanket Badhe · [Prompt-Level Distillation: A Non-Parametric Alternative to Model Fine-Tuning for Efficient Reasoning](../2602.21103-prompt-level-distillation/README.md)（`prompt-level-distillation`）：PLD 不微调学生参数，而把教师推理抽象为可审查的系统指令：先用带标签训练样本提取微规则，经语义向量 DBSCAN 去掉噪声、合成规则，再根据训练错误修订冲突。学生最终使用整理后的规则，不读取每个测试样本的答案。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2025-09-30 · 一作：Zhuohang Li · [Judging with Confidence: Calibrating Autoraters to Preference Distributions](../2510.00263-probabilistic-autorater/README.md)（`probabilistic-autorater`）：Sec.3 Eq.1–2 piecewise奖励和实验用epsilon=.001可精确实现。解析成功必须在[0,1]；失败Brier=0、Log=log(epsilon)。
 - 2025-09-30 · 一作：Wenda Xu · [When LLMs Benchmark Themselves: Deconstructing Self-Bias in Automated Evaluation](../2509.26600-benchmark-self-bias/README.md)（`benchmark-self-bias`）：Sec.2 Eq.1使用[segment,target,benchmark-role]的逐segment排名，先按segment平均，再diag−leave-self-out peers。原始分数方向必须明确，MetricX-QE越低越好。
 
 ## Google DeepMind
 
+- 2026-02-18 · 一作：Jonathan Cook · [Learning to Learn from Language Feedback with Social Meta-Learning](../2602.16488-social-meta-learning/README.md)（`social-meta-learning`）：SML 把静态题目改成 teacher–student 多轮互动。Teacher 持有额外知识或验证结果，student 只看公开对话，逐步提问或修正答案。
 - 2023-10-18 · 一作：Mohammad Gheshlaghi Azar · [IPO](../2310.12036-ipo/README.md)（`ipo`）：论文指出 RLHF 与 DPO 都依赖将成对偏好转成标量 reward 的假设，并提出直接在偏好概率上优化的 $\Psi$PO 框架。取恒等映射得到 IPO：拟合一个有限的目标间隔，而不是像 logistic loss 一样在训练集可分时持续放大 chosen/rejected 间隔。
 - 2023-06-23 · 一作：Rishabh Agarwal · [GKD](../2306.13649-gkd/README.md)（`gkd`）：固定教师轨迹会让学生训练时看到的前缀与推理时自身生成的前缀不一致。GKD 让学生生成当前策略轨迹，再让教师在这些学生实际访问的状态给出完整分布；同时用 `student data fraction` 在固定数据和 on-policy 数据之间插值，并允许 forward KL、reverse KL 或广义 JSD。
 - 2023-05-17 · 一作：Yao Zhao · [SLiC-HF](../2305.10425-slic-hf/README.md)（`slic-hf`）：PPO-RLHF 需要策略、reward 和 value 等多套模型。SLiC-HF 直接要求偏好回答的序列 log-likelihood 高于拒绝回答，并用监督目标限制策略漂移；也能消费为其他模型采集的 off-policy 偏好数据。
 
 ## Google Research
 
+- 2026-11-09 · 一作：Jihwan Jeong · [MaxIM: Maximally Informative Incremental Summarization via Reinforcement Learning](../2611.12825-maxim/README.md)（`maxim`）：长程交互不能无限保留历史，增量摘要却会不可逆地丢失信息。MaxIM 把摘要更新器与冻结的行动模型分开：摘要器只根据上一摘要、上一动作和当前观测更新有限记忆，不得直接读取任务目标。
 - 2026-03-17 · 一作：Lucas Bandarkar · [Large Reasoning Models Struggle to Transfer Parametric Knowledge Across Scripts](../2603.17070-cross-script-knowledge-transfer/README.md)（`cross-script-knowledge-transfer`）：Sec.4–6与Appendix A/H：观察性回归、训练专用entity提示干预和真实LoRA是定义性路径。不能把正则音译、手工插提示或小分类器当成其LLM知识检索机制。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2023-09-01 · 一作：Harrison Lee · [RLAIF](../2309.00267-rlaif/README.md)（`rlaif`）：AI labeler 对候选做顺序交换评判，去除位置偏差后训练 preference policy；本地落实双顺序标签与成对更新。
 
@@ -250,6 +257,10 @@
 ## KAIST AI / LG AI Research
 
 - 2026-10-09 · 一作：Woosung Koh · [Continually Post-training Small Models via Synthetic Self-distillation](../../reproductions/2610.13113-synthself/README.md)（`synthself`）：小模型self-rewrite可能失真，直接SFT又可能偏离base分布。SynthSelf用更大的同家族aligner把train demonstration贪心离线改写，通过答案拒绝采样后SFT。
+
+## Kempner Institute at Harvard University / UIUC
+
+- 2026-11-10 · 一作：Audrey Huang · [A Theory of Policy Optimization in Post-Training: Coverage Collapse and Reference Resets](../2611.14467-apmd-reference-reset/README.md)（`apmd-reference-reset`）：奖励上升不保证最优响应仍容易采到。本文给出固定 reference 下 REINFORCE 发生 coverage collapse 的构造，并用 APMD 将 KL reference 周期性重置到最新策略：每个内层子问题有较强局部约束，外层重置则允许持续前进。
 
 ## Korea University
 
@@ -349,6 +360,10 @@
 - 2026-09-08 · 一作：Jiacheng Xu · [Entropy-Regularized Rank-Masked Policy Optimization for Test-Time Reinforcement Learning in Code Generation](../2609.09135-probe-erpo/README.md)（`probe-erpo`）：论文用不依赖最终答案的 probe consistency ratio（PCR）估计当前题目的可信度：高一致样本可强化，低一致样本对排名靠后的候选施加负向约束，同时用熵项控制探索。
 - 2026-08-27 · 一作：Ziyue Wang · [Video-OPSD: Exploiting Privileged Visual Evidence for On-Policy Self-Distillation in Video Large Language Models](../2608.27065-video-opsd/README.md)（`video-opsd`）：学生读取完整视频，训练期自教师只读取人工标注的证据帧；再按 token 对证据的依赖度加权蒸馏。论文称效果接近 GRPO，而训练时间减少约 60%。
 
+## National Taiwan University
+
+- 2026-02-26 · 一作：Eli Chien · [MAPLE: Metadata Augmented Private Language Evolution](../2603.19258-maple-icl/README.md)（`maple-icl`）：Private Evolution 的初始合成文本若偏离目标领域，后续多轮演化难以纠正。MAPLE 先从私有文本抽取固定 schema 的分类 metadata，用 AIM 生成 DP 表格 metadata，再结合非私有已捐赠的 metadata–text 示例初始化文本，最后继续 AugPE。
+
 ## National University of Defense Technology
 
 - 2026-09-15 · 一作：Qixiu Li · [TIAO: Token Importance-Aware Policy Optimization for Text Summarization](../2609.16748-tiao/README.md)（`tiao`）：通过遮蔽源文档前后的 token 概率变化估计依赖性，同时重塑轨迹优势并聚焦重要 token 更新。
@@ -388,6 +403,10 @@
 ## PRIME-RL author team
 
 - 2025-04-22 · 一作：Yuxin Zuo · [TTRL](../2504.16084-ttrl/README.md)（`ttrl`）：同一测试题多次采样，以多数一致答案作为伪标签并即时更新模型，不访问 gold label。
+
+## PayPal.AI
+
+- 2026-11-10 · 一作：Chi Liu · [Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards](../2611.14015-mcpo/README.md)（`mcpo`）：GRPO 常把同一响应的序列优势分给所有 token，无法区分局部决策的不确定度。MCPO 复用 rollout/old policy 温度后的 top-1、top-2 概率差，不额外调用教师或 verifier，改变各 token 的信用分配。
 
 ## Peking University
 
@@ -459,6 +478,14 @@
 - 2026-10-15 · 一作：Feiyang Chen · [Learning from Unverified Peers via Shared Residual Distillation](../2610.22080-shared-residual-distillation/README.md)（`shared-residual-distillation`）：没有标准答案或可验证 reward 时，整段错误解答也可能包含有用步骤。SRD 不投票选“正确答案”，而比较同题 peers 相对跨题 control 对 token 分布的改变，只接收多位 peer 共同支持的保守残差。
 - 2026-07-30 · 一作：Kangning Zhang · [VAD](../2607.28590-vad/README.md)（`vad`）：多模态 OPD 直接匹配 privileged-view teacher 时，教师修正同时混入视觉证据、语言先验和教师自身偏差。VAD 对同一冻结教师分别输入“相关视觉证据存在/移除”两种视图，以 centered log-probability 差构造带符号的视觉方向，再把原教师修正单侧投影到该方向，重建以学生当前分布为锚的 target；完整 privileged teacher 只保留为弱正则。
 
+## Shanghai Jiao Tong University / Zhongguancun Academy
+
+- 2026-11-09 · 一作：Lin Yao · [DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation](../2611.13249-drd-mopd/README.md)（`drd-mopd`）：多个教师可能提供冲突的领域更新，直接优化一个学生无法区分冲突来自哪一份参数方向。DRD-MOPD 保留冻结基座与多个全参数增量，以域标签选择**哪些增量接受梯度**，而不是在推理时选择哪个教师或专家。
+
+## Southwest University
+
+- 2026-11-06 · 一作：Song Yu · [Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards](../2611.09448-rcea/README.md)（`rcea`）：训练日志里的平均 token 熵变小，既可能是模型更少走错误路径，也可能是它不再尝试原来会做的其它正确解法。RCEA 将两类信号分开：轨迹层按验证器成败、过程有效性和有效解法模式拆分；前缀层用全词表的 log 概率与 logit 增量的协方差解释局部熵方向。
+
 ## Stanford University
 
 - 2026-05-18 · 一作：Muhammad Umer · [GPRL](../2605.18721-gprl/README.md)（`gprl`）：单一标量 reward 容易掩盖 helpfulness、格式、推理和简洁度之间的冲突。GPRL 先在每个偏好维度内部计算 group-relative advantage，再根据上下文聚合；漂移控制器检测某个维度是否主导训练并调整权重。
@@ -487,7 +514,12 @@
 
 ## The Hong Kong Polytechnic University
 
+- 2026-11-10 · 一作：Yue Wu · [Bootstrapped On-Policy Distillation](../2611.13680-bopd/README.md)（`bopd`）：BOPD 先用带参考解答的冻结初始模型监督学生，构造中间模型 M1；再冻结 M1，将它当作**不带参考**的教师，蒸馏一个从原始 M0 精确重置的新学生。两阶段都在各自学生的轨迹前缀上评分，不能把 Stage I 的旧轨迹直接当作 Stage II 的新 on-policy 数据。
 - 2026-10-20 · 一作：Runyang You · [On-Policy Transition Distillation](../2610.28048-optd/README.md)（`optd`）：最终层分布接近教师，不一定代表模型沿深度修正预测的方式接近教师。OPTD 保留最终层 OPD，再对选定浅到深 readout 的 log 概率增量施加监督。
+
+## The Hong Kong University of Science and Technology
+
+- 2026-11-04 · 一作：Mingzhe Zheng · [EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL](../2611.06518-emoreward/README.md)（`emoreward`）：固定融合权重假设每段视频的情绪证据同样可信。例如，没有可用人脸时，给面部动作通道的默认中性分数不是观测证据。
 
 ## The Ohio State University
 
@@ -517,6 +549,7 @@
 
 ## Tsinghua University
 
+- 2026-11-05 · 一作：Guhan Chen · [CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation](../2611.07959-cord/README.md)（`cord-rollout`）：普通 OPD 的教师只给学生已经访问的前缀评分，难以覆盖学生很少走到的教师路径。CoRD 不改每状态的反向 KL 监督，改变的是产生前缀的采样分布。
 - 2026-10-16 · 一作：Heming Zou · [Tree-Aware Posterior Distillation for Long-Horizon Agentic Reinforcement Learning](../2610.23181-treeopsd/README.md)（`treeopsd`）：长轨迹仅有终局奖励时，同一轨迹的好坏动作容易一起获奖或受罚；同一批轨迹又会经历多次更新，旧信用不能告诉优化器何时停止。TreeOPSD 将续写分支整理成共享前缀树，把叶奖励按行为策略似然向上回传，再把每个 turn 的信用映射为一个冻结且有界的 Bernoulli 教师。
 - 2026-10-15 · 一作：Yuechen Luo · [OPRD: On-Policy Reminder Distillation for Long-Horizon Coding Agents](../2610.21496-oprd-reminder/README.md)（`oprd-reminder`）：编码 Agent 的最终通过/失败不能指出哪一轮忽略了已有约束。OPRD 在学生自己生成的无提醒轨迹上训练：成功轨迹自模仿；失败轨迹由教师读取训练专用提醒，重新评分**同一学生前缀**，不是教师另生成一条答案。
 - 2026-07-11 · 一作：Zhicheng Cai · [RIPO](../2607.10169-ripo/README.md)（`ripo`）：固定 PPO ratio 区间在低概率区域过于保守、在高概率区域又可能过大。RIPO 以 Fisher–Rao 几何定义策略距离，并按旧策略概率设置等距 clip 半径，使不同概率区域获得更均衡的局部 KL 预算。
@@ -540,6 +573,10 @@
 ## UCLA / NVIDIA（论文注明实习）
 
 - 2026-10-08 · 一作：Siyan Zhao · [When Do We Need On-Policy Distillation? Distilling on Offline Student Rollouts Is Often Better](../2610.11291-semi-opd/README.md)（`semi-opd`）：初始学生先一次性生成响应，教师评分缓存后固定复用。每次优化仍重新计算当前学生概率和 token 优势，不能把旧优势也一起缓存。
+
+## University of Alberta / Amii（研究在Google DeepMind期间完成）
+
+- 2026-11-09 · 一作：Jiamin He · [Off-policy Learning with Excursion Policies](../2611.13275-excursion-td/README.md)（`excursion-td`）：离策略多步 TD 面临收敛速度、偏差与方差的权衡。重要性比连乘可以恢复目标分布，却容易放大方差；逐动作混合目标/行为策略又改变了整个轨迹的含义。
 
 ## University of British Columbia
 
@@ -642,6 +679,7 @@
 
 ## University of Virginia
 
+- 2026-11-03 · 一作：Valentin Six · [RAGCompass: Generalizable Retriever Routing via Reranking](../2611.05596-ragcompass/README.md)（`ragcompass`）：固定候选池的 query-only 分类器可能不能给从未见过的检索器打分。RAGCompass 把各检索器返回的整组证据作为候选，复用同一个 Qwen3-Reranker-0.6B 独立读每组 passage，不依赖检索器身份或各自不可比的置信度。
 - 2026-09-10 · 一作：Rongcan Pei · [Negative Self-Distillation: Learning to Reason by Avoiding Flaws](../2609.11699-nsd/README.md)（`nsd`）：让学生远离自身生成的错误推理分布，并用动态 gate 只更新推理关键位置，避免把普通语言 token 一并遗忘。
 
 ## University of Washington
@@ -685,6 +723,10 @@
 ## Xiaomi
 
 - 2026-06-29 · 一作：Wenhan Ma · [MOPD](../2606.30406-mopd/README.md)（`mopd`）：多能力联合 RL 会产生域间耦合，参数合并和离策略微调又容易丢能力。MOPD 先独立训练各域 RL teacher，再只在 student 自己的 rollout 上组合教师密集信号，使各域可并行演进。
+
+## Yale University
+
+- 2026-06-30 · 一作：Gabrielle Kaili-May Liu · [Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs](../2606.32032-rlmf/README.md)（`rlmf`）：回答正确性、表达的置信度，以及模型能否评价自身置信表达，是三个不同量。本文先使数值置信接近由采样一致性估计的内在置信，再借元认知自评质量调节 RL 排序；另用训练题自评的高低两端选样，最后由外部改写器把数值映射成自然语言不确定性。
 
 ## Yonsei University
 

@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:rcea/lower-entropy-ambiguous": {
+      "source_sha256": "f9e0dfce2138cffb66d68014bf03214513eb061fed59c59baca5e721f51d647d",
+      "reviewed": true,
+      "fields": {
+        "question": "If total entropy falls after RLVR, does the model necessarily have fewer correct strategies?",
+        "answer": "No. Less probability on errors, more predictable verifier outcomes, fewer realizations of the same strategy, and concentration across distinct valid strategies can all reduce entropy. Inspect the conditional distribution of valid strategies.",
+        "example": "If two valid strategies still share valid-trajectory probability equally, the effective mode count stays at 2 even when all failed trajectories lose probability."
+      }
+    },
+    "qa/post-training:rcea/zero-valid-support": {
+      "source_sha256": "b1789dfc79973005dc1d63c18768ae980ab70f56ecbe3ef8ef42946bbbb5eb85",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not report one effective mode when valid successes have zero probability?",
+        "answer": "An effective count of exp(0) = 1 means one mode holds all conditional probability. With no valid successes, that conditional distribution does not exist. Only its weighted entropy contribution is zero.",
+        "example": "When all probability belongs to failed trajectories, the mode term has zero weight. A reported count of 1 would falsely imply at least one valid strategy."
+      }
+    },
+    "qa/post-training:rcea/trajectory-versus-token": {
+      "source_sha256": "f6e6b234c284a5e5c9102595ea9c24da3a360c2c0ea029578d4265985fde3f8a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do trajectory entropy and outcome-conditioned mean token entropy use different formulas?",
+        "answer": "Trajectory entropy is Shannon entropy of complete paths. Its chain rule contains outcome entropy. Mean token entropy is a local statistic averaged along paths, so total expectation just weights the conditional means.",
+        "example": "When half the trajectories succeed, outcome entropy contributes log(2) nats to the trajectory decomposition. Do not add it again to the outcome-weighted token average."
+      }
+    },
+    "qa/post-training:rcea/constant-logit-shift": {
+      "source_sha256": "a7dedd316bc54169124af572eaec4cbcc9acaff81fdaef87c8e263e1667b1894",
+      "reviewed": true,
+      "fields": {
+        "question": "What happens to local covariance and actual entropy if every logit at one prefix receives the same increment?",
+        "answer": "Covariance with a constant is zero, and a common shift leaves softmax unchanged. Both should give zero change, making this a useful negative control.",
+        "example": "For logits (2, 0, -2) and increments (1, 1, 1), the prediction and finite difference are both 0. Absolute logit change is not entropy change."
+      }
+    }
+  }
+}

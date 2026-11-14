@@ -76,6 +76,7 @@ jobs:
           path: |
             paper-candidates-${{ matrix.track }}.json
             paper-candidates-${{ matrix.track }}.md
+            paper-candidates-${{ matrix.track }}-historical-review.json
             paper-official-review-${{ matrix.track }}.json
             paper-late-index-${{ matrix.track }}.json
             paper-late-index-${{ matrix.track }}.md

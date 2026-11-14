@@ -7,7 +7,7 @@ hide:
 
 # 评测与可靠性：如何知道真的做对了
 
-[Agent](index.md) / 176 个问题 · 44 篇论文
+[Agent](index.md) / 196 个问题 · 49 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,221 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">176 个问题 · 44 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">196 个问题 · 49 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:alphaproof-code" data-paper-title="AlphaProof Code: Verifying Signal&#x27;s Security at the Machine-Code Level" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="AlphaProof Code: Verifying Signal&#x27;s Security at the Machine-Code Level Agent Google DeepMind 2026-11-10 人类与规格编写/审阅 Agent 先定义并批准要证明的安全性质，证明团队再处理实际 Rust 代码经标准编译器生成的 AArch64 程序。Lean 内核检查证明，gatekeeper 还要防止团队偷偷弱化规格或其依赖。原文涉及 PQXDH 握手和 Triple Ratchet 的符号/计算安全保证，而不是“所有 Signal 场景都无漏洞”。PDF §2、§4–5 deferred_high_cost，仅论文/代码来源与成本审查，成本过高，不复现（审查 DONE）。deferred_high_cost，仅论文/代码来源与成本审查，成本过高，不复现（审查 DONE）。没有本地形式证明器、Agent 或可执行算子，不生成伪指标。本轮只读了报告署名、§2.4、§7 与官方项目/固定 README，核对一手出处和成本。没有克隆整个大型证明仓库，没有安装 Lean/Rust 工具链，没有跑 lake build 或 comparator。也没有用 schema、哈希或 regex 模拟形式证明。无本地实验指标，不要求 GPU 回执，不接入 Evolve。  统一评测与可靠性 形式验证与规格保真 Agent 评测与可靠性：如何知道真的做对了 AlphaProof Code 为什么把规格列为可信，而把AI写出的证明列为不可信？ 证明中的逻辑错误可由Lean内核拒绝，因此不必相信生成证明的模型；但内核只检查给定命题，不能判断命题是否充分表达真实安全目标。人类仍要审查规格、依赖、机器语义和密码学假设。 教学例：证明“程序会返回某个整数”可能完全正确，却没有证明“攻击者无法恢复密钥”。证明正确与目标足够强是两件事。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<span id="paper-agent-research-alphaproof-code-5f282556" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-ac7379dfd108d8b2">AlphaProof Code 为什么把规格列为可信，而把AI写出的证明列为不可信？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aalphaproof-code">AlphaProof Code: Verifying Signal&#x27;s Security at the Machine-Code Level</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>证明中的逻辑错误可由Lean内核拒绝，因此不必相信生成证明的模型；但内核只检查给定命题，不能判断命题是否充分表达真实安全目标。人类仍要审查规格、依赖、机器语义和密码学假设。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：证明“程序会返回某个整数”可能完全正确，却没有证明“攻击者无法恢复密钥”。证明正确与目标足够强是两件事。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心验证条件；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://deepmind.google/documents/36/Formal_Verification_of_Signal_4.pdf">原论文</a> · <a href="../../../../agent-research/alphaproof-code/">实现解读</a> · <a href="#qa-ac7379dfd108d8b2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:alphaproof-code" data-paper-title="AlphaProof Code: Verifying Signal&#x27;s Security at the Machine-Code Level" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="AlphaProof Code: Verifying Signal&#x27;s Security at the Machine-Code Level Agent Google DeepMind 2026-11-10 人类与规格编写/审阅 Agent 先定义并批准要证明的安全性质，证明团队再处理实际 Rust 代码经标准编译器生成的 AArch64 程序。Lean 内核检查证明，gatekeeper 还要防止团队偷偷弱化规格或其依赖。原文涉及 PQXDH 握手和 Triple Ratchet 的符号/计算安全保证，而不是“所有 Signal 场景都无漏洞”。PDF §2、§4–5 deferred_high_cost，仅论文/代码来源与成本审查，成本过高，不复现（审查 DONE）。deferred_high_cost，仅论文/代码来源与成本审查，成本过高，不复现（审查 DONE）。没有本地形式证明器、Agent 或可执行算子，不生成伪指标。本轮只读了报告署名、§2.4、§7 与官方项目/固定 README，核对一手出处和成本。没有克隆整个大型证明仓库，没有安装 Lean/Rust 工具链，没有跑 lake build 或 comparator。也没有用 schema、哈希或 regex 模拟形式证明。无本地实验指标，不要求 GPU 回执，不接入 Evolve。  统一评测与可靠性 形式验证与规格保真 Agent 评测与可靠性：如何知道真的做对了 为什么gatekeeper只比较顶层定理文字仍不够？ 模型可以保持定理名字和表面陈述不变，却把其依赖的谓词或定义改弱。原文因此固定Agent不可写的获批规格副本，并检查定理及全部传递定义、公理和内核重放；规格修订须批准。 教学例：顶层仍写“secure(program)”，但secure被改为恒真。Lean可能接受新证明，只有与隔离获批依赖的比较才能发现目标被偷换。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-91fbd1b1465cb536">为什么gatekeeper只比较顶层定理文字仍不够？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aalphaproof-code">AlphaProof Code: Verifying Signal&#x27;s Security at the Machine-Code Level</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>模型可以保持定理名字和表面陈述不变，却把其依赖的谓词或定义改弱。原文因此固定Agent不可写的获批规格副本，并检查定理及全部传递定义、公理和内核重放；规格修订须批准。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：顶层仍写“secure(program)”，但secure被改为恒真。Lean可能接受新证明，只有与隔离获批依赖的比较才能发现目标被偷换。</p>
+<p class="ar-learning-sources">依据：核心验证条件；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://deepmind.google/documents/36/Formal_Verification_of_Signal_4.pdf">原论文</a> · <a href="../../../../agent-research/alphaproof-code/">实现解读</a> · <a href="#qa-91fbd1b1465cb536">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:alphaproof-code" data-paper-title="AlphaProof Code: Verifying Signal&#x27;s Security at the Machine-Code Level" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="AlphaProof Code: Verifying Signal&#x27;s Security at the Machine-Code Level Agent Google DeepMind 2026-11-10 人类与规格编写/审阅 Agent 先定义并批准要证明的安全性质，证明团队再处理实际 Rust 代码经标准编译器生成的 AArch64 程序。Lean 内核检查证明，gatekeeper 还要防止团队偷偷弱化规格或其依赖。原文涉及 PQXDH 握手和 Triple Ratchet 的符号/计算安全保证，而不是“所有 Signal 场景都无漏洞”。PDF §2、§4–5 deferred_high_cost，仅论文/代码来源与成本审查，成本过高，不复现（审查 DONE）。deferred_high_cost，仅论文/代码来源与成本审查，成本过高，不复现（审查 DONE）。没有本地形式证明器、Agent 或可执行算子，不生成伪指标。本轮只读了报告署名、§2.4、§7 与官方项目/固定 README，核对一手出处和成本。没有克隆整个大型证明仓库，没有安装 Lean/Rust 工具链，没有跑 lake build 或 comparator。也没有用 schema、哈希或 regex 模拟形式证明。无本地实验指标，不要求 GPU 回执，不接入 Evolve。  统一评测与可靠性 形式验证与规格保真 Agent 评测与可靠性：如何知道真的做对了 AlphaProof Code 的形式证明与ReproBridge的数值兼容/执行审计，能互相替代吗？ 不能。形式验证证明给定规格下的逻辑性质，仍依赖规格与机器模型；ReproBridge检查是否执行了目标实验、测量是否兼容及证据是否有实质违规。分数接近不能证明程序安全，内核证明也不证明跑过指定机器学习实验。 教学例：一个模型的MSE恰好等于论文目标，无法证明加密实现的前向保密；反过来，某个Lean定理成立也不说明实验脚本真的训练了五个seed。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-8d133e2bfbf67ac4">AlphaProof Code 的形式证明与ReproBridge的数值兼容/执行审计，能互相替代吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aalphaproof-code">AlphaProof Code: Verifying Signal&#x27;s Security at the Machine-Code Level</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。形式验证证明给定规格下的逻辑性质，仍依赖规格与机器模型；ReproBridge检查是否执行了目标实验、测量是否兼容及证据是否有实质违规。分数接近不能证明程序安全，内核证明也不证明跑过指定机器学习实验。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个模型的MSE恰好等于论文目标，无法证明加密实现的前向保密；反过来，某个Lean定理成立也不说明实验脚本真的训练了五个seed。</p>
+<p class="ar-learning-sources">依据：核心验证条件、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://deepmind.google/documents/36/Formal_Verification_of_Signal_4.pdf">原论文</a> · <a href="../../../../agent-research/alphaproof-code/">实现解读</a> · <a href="#qa-8d133e2bfbf67ac4">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:alphaproof-code" data-paper-title="AlphaProof Code: Verifying Signal&#x27;s Security at the Machine-Code Level" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="AlphaProof Code: Verifying Signal&#x27;s Security at the Machine-Code Level Agent Google DeepMind 2026-11-10 人类与规格编写/审阅 Agent 先定义并批准要证明的安全性质，证明团队再处理实际 Rust 代码经标准编译器生成的 AArch64 程序。Lean 内核检查证明，gatekeeper 还要防止团队偷偷弱化规格或其依赖。原文涉及 PQXDH 握手和 Triple Ratchet 的符号/计算安全保证，而不是“所有 Signal 场景都无漏洞”。PDF §2、§4–5 deferred_high_cost，仅论文/代码来源与成本审查，成本过高，不复现（审查 DONE）。deferred_high_cost，仅论文/代码来源与成本审查，成本过高，不复现（审查 DONE）。没有本地形式证明器、Agent 或可执行算子，不生成伪指标。本轮只读了报告署名、§2.4、§7 与官方项目/固定 README，核对一手出处和成本。没有克隆整个大型证明仓库，没有安装 Lean/Rust 工具链，没有跑 lake build 或 comparator。也没有用 schema、哈希或 regex 模拟形式证明。无本地实验指标，不要求 GPU 回执，不接入 Evolve。  统一评测与可靠性 形式验证与规格保真 Agent 评测与可靠性：如何知道真的做对了 为什么本库不以“文件中没有sorry”或几行玩具定理宣称低成本复现？ 这不执行论文定义的形式语义、获批规格依赖比较和新内核重放，无法证实Signal实现的目标性质。官方全构建与comparator有数小时、内存和Linux工具链门槛，因此本轮只做有据高成本审查，不制造可执行能力或伪指标。 教学例：“theorem result : True := by trivial”可以是合法Lean证明，却不涉及Signal的握手、ratchet或机器代码。对它做字符串检查不能算安全验收。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-fce41d77011a7172">为什么本库不以“文件中没有sorry”或几行玩具定理宣称低成本复现？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aalphaproof-code">AlphaProof Code: Verifying Signal&#x27;s Security at the Machine-Code Level</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>这不执行论文定义的形式语义、获批规格依赖比较和新内核重放，无法证实Signal实现的目标性质。官方全构建与comparator有数小时、内存和Linux工具链门槛，因此本轮只做有据高成本审查，不制造可执行能力或伪指标。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：“theorem result : True := by trivial”可以是合法Lean证明，却不涉及Signal的握手、ratchet或机器代码。对它做字符串检查不能算安全验收。</p>
+<p class="ar-learning-sources">依据：来源核验、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://deepmind.google/documents/36/Formal_Verification_of_Signal_4.pdf">原论文</a> · <a href="../../../../agent-research/alphaproof-code/">实现解读</a> · <a href="#qa-fce41d77011a7172">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:are-bench" data-paper-title="ARE-bench: Benchmarking Agents&#x27; Research Ability in Real-World Researcher Sessions and Workspaces" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="ARE-bench: Benchmarking Agents&#x27; Research Ability in Real-World Researcher Sessions and Workspaces Agent Fudan University / Shanghai Artificial Intelligence Laboratory 2026-11-10 从干净目录完成独立任务，不等于能接手正在进行的研究。ARE-bench 在真实会话切点恢复完整未清理 workspace，保留之前仍有效的要求。Actor 只看 Background、Requirements、Environment 和工作区；历史来源与私有评分 rubric 留在 evaluator。任务必须有可验证 checklist，空表不是满分。 完整长任务/API矩阵成本过高，不复现（审查 DONE）。本地仅交付纯 CPU 输入隔离与 scorer 协议，未接入官方 75 个任务，未运行研究 Agent，不把手工 checklist 当官方 benchmark。TaskInput.actor_payload() 仅含公开任务上下文和工作区引用，无 rubric/gold answer 字段。ChecklistVerdict 是 evaluator 侧的独立输入，严格核对预期 ID 与完整布尔判定；score() 计算 Eq.6–7。组件不生成 judge 结论、不读取私人会话或本地工作区文件，也不清理任务历史。  真实任务与可靠性评测 历史约束与研究交付 Agent 评测与可靠性：如何知道真的做对了 ARE-bench 为什么保留过期草稿和失败尝试，而不是给 Agent 清理后的目录？ 接手真实研究需要判断哪些历史决定和材料仍有效。清理目录会移除这种区分任务，可能把交付评估变成从零完成独立问题；保留历史不是允许忽略明确要求。 教学例：目录同时有v4旧图表和v5当前结果，Agent需要依据会话判断引用哪份，而不是随便取更新日期最大的文件。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<span id="paper-agent-research-are-bench-a9f6df92" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-58b50013b5cb1fe7">ARE-bench 为什么保留过期草稿和失败尝试，而不是给 Agent 清理后的目录？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aare-bench">ARE-bench: Benchmarking Agents&#x27; Research Ability in Real-World Researcher Sessions and Workspaces</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Fudan University / Shanghai Artificial Intelligence Laboratory</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>接手真实研究需要判断哪些历史决定和材料仍有效。清理目录会移除这种区分任务，可能把交付评估变成从零完成独立问题；保留历史不是允许忽略明确要求。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：目录同时有v4旧图表和v5当前结果，Agent需要依据会话判断引用哪份，而不是随便取更新日期最大的文件。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14364">原论文</a> · <a href="../../../../agent-research/2611.14364-are-bench/">实现解读</a> · <a href="#qa-58b50013b5cb1fe7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:are-bench" data-paper-title="ARE-bench: Benchmarking Agents&#x27; Research Ability in Real-World Researcher Sessions and Workspaces" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="ARE-bench: Benchmarking Agents&#x27; Research Ability in Real-World Researcher Sessions and Workspaces Agent Fudan University / Shanghai Artificial Intelligence Laboratory 2026-11-10 从干净目录完成独立任务，不等于能接手正在进行的研究。ARE-bench 在真实会话切点恢复完整未清理 workspace，保留之前仍有效的要求。Actor 只看 Background、Requirements、Environment 和工作区；历史来源与私有评分 rubric 留在 evaluator。任务必须有可验证 checklist，空表不是满分。 完整长任务/API矩阵成本过高，不复现（审查 DONE）。本地仅交付纯 CPU 输入隔离与 scorer 协议，未接入官方 75 个任务，未运行研究 Agent，不把手工 checklist 当官方 benchmark。TaskInput.actor_payload() 仅含公开任务上下文和工作区引用，无 rubric/gold answer 字段。ChecklistVerdict 是 evaluator 侧的独立输入，严格核对预期 ID 与完整布尔判定；score() 计算 Eq.6–7。组件不生成 judge 结论、不读取私人会话或本地工作区文件，也不清理任务历史。  真实任务与可靠性评测 历史约束与研究交付 Agent 评测与可靠性：如何知道真的做对了 ARE-bench 为何同时报告严格 ISR 和逐任务 macro CSR？ ISR要求一个任务全部条目通过，衡量完整交付；CSR先计算各任务条目通过比例再平均，诊断部分完成。不能将所有条目池化，否则checklist较长任务获得额外权重。 教学例：任务A通过1/3，B通过1/1，macro CSR=(1/3+1)/2=2/3，pooled是2/4=1/2，ISR则为1/2。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-1e4a6f398c125b58">ARE-bench 为何同时报告严格 ISR 和逐任务 macro CSR？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aare-bench">ARE-bench: Benchmarking Agents&#x27; Research Ability in Real-World Researcher Sessions and Workspaces</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Fudan University / Shanghai Artificial Intelligence Laboratory</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>ISR要求一个任务全部条目通过，衡量完整交付；CSR先计算各任务条目通过比例再平均，诊断部分完成。不能将所有条目池化，否则checklist较长任务获得额外权重。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：任务A通过1/3，B通过1/1，macro CSR=(1/3+1)/2=2/3，pooled是2/4=1/2，ISR则为1/2。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14364">原论文</a> · <a href="../../../../agent-research/2611.14364-are-bench/">实现解读</a> · <a href="#qa-1e4a6f398c125b58">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:are-bench" data-paper-title="ARE-bench: Benchmarking Agents&#x27; Research Ability in Real-World Researcher Sessions and Workspaces" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="ARE-bench: Benchmarking Agents&#x27; Research Ability in Real-World Researcher Sessions and Workspaces Agent Fudan University / Shanghai Artificial Intelligence Laboratory 2026-11-10 从干净目录完成独立任务，不等于能接手正在进行的研究。ARE-bench 在真实会话切点恢复完整未清理 workspace，保留之前仍有效的要求。Actor 只看 Background、Requirements、Environment 和工作区；历史来源与私有评分 rubric 留在 evaluator。任务必须有可验证 checklist，空表不是满分。 完整长任务/API矩阵成本过高，不复现（审查 DONE）。本地仅交付纯 CPU 输入隔离与 scorer 协议，未接入官方 75 个任务，未运行研究 Agent，不把手工 checklist 当官方 benchmark。TaskInput.actor_payload() 仅含公开任务上下文和工作区引用，无 rubric/gold answer 字段。ChecklistVerdict 是 evaluator 侧的独立输入，严格核对预期 ID 与完整布尔判定；score() 计算 Eq.6–7。组件不生成 judge 结论、不读取私人会话或本地工作区文件，也不清理任务历史。  真实任务与可靠性评测 历史约束与研究交付 Agent 评测与可靠性：如何知道真的做对了 ARE-bench 和 XStack 都检查研究交付，为什么不能共用一个通过率比较Agent？ ARE-bench关注真实会话中仍有效的历史要求与workspace状态；XStack关注跨框架迁移后独立全规模重训、反作弊和权重回载。任务分母、可见信息和成功条件不同，不能把评分接口或CPU诊断与对方完整实验成绩并排排名。 教学例：修复脚本并保留原loss定义可通过某研究交接条目，但还不能证明JAX迁移在TPU上达到原实验目标。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-d6631bab631d27ed">ARE-bench 和 XStack 都检查研究交付，为什么不能共用一个通过率比较Agent？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aare-bench">ARE-bench: Benchmarking Agents&#x27; Research Ability in Real-World Researcher Sessions and Workspaces</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Fudan University / Shanghai Artificial Intelligence Laboratory</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>ARE-bench关注真实会话中仍有效的历史要求与workspace状态；XStack关注跨框架迁移后独立全规模重训、反作弊和权重回载。任务分母、可见信息和成功条件不同，不能把评分接口或CPU诊断与对方完整实验成绩并排排名。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：修复脚本并保留原loss定义可通过某研究交接条目，但还不能证明JAX迁移在TPU上达到原实验目标。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14364">原论文</a> · <a href="../../../../agent-research/2611.14364-are-bench/">实现解读</a> · <a href="#qa-d6631bab631d27ed">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:are-bench" data-paper-title="ARE-bench: Benchmarking Agents&#x27; Research Ability in Real-World Researcher Sessions and Workspaces" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="ARE-bench: Benchmarking Agents&#x27; Research Ability in Real-World Researcher Sessions and Workspaces Agent Fudan University / Shanghai Artificial Intelligence Laboratory 2026-11-10 从干净目录完成独立任务，不等于能接手正在进行的研究。ARE-bench 在真实会话切点恢复完整未清理 workspace，保留之前仍有效的要求。Actor 只看 Background、Requirements、Environment 和工作区；历史来源与私有评分 rubric 留在 evaluator。任务必须有可验证 checklist，空表不是满分。 完整长任务/API矩阵成本过高，不复现（审查 DONE）。本地仅交付纯 CPU 输入隔离与 scorer 协议，未接入官方 75 个任务，未运行研究 Agent，不把手工 checklist 当官方 benchmark。TaskInput.actor_payload() 仅含公开任务上下文和工作区引用，无 rubric/gold answer 字段。ChecklistVerdict 是 evaluator 侧的独立输入，严格核对预期 ID 与完整布尔判定；score() 计算 Eq.6–7。组件不生成 judge 结论、不读取私人会话或本地工作区文件，也不清理任务历史。  真实任务与可靠性评测 历史约束与研究交付 Agent 评测与可靠性：如何知道真的做对了 ARE-bench 本地接口为什么把 rubric 留在 evaluator，并拒绝空 checklist？ Actor只能根据公开任务和材料解决问题，私有判据不能作为gold提示泄漏。空checklist没有有效分母，若将all([])当true会伪造满分；本地还拒绝缺失/重复项和非布尔结果。 教学例：未能加载任何评分条目时应报构建错误，不应返回ISR=1；TaskInput也不能附带预期答案文件。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-063e9912ea6d0ad2">ARE-bench 本地接口为什么把 rubric 留在 evaluator，并拒绝空 checklist？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aare-bench">ARE-bench: Benchmarking Agents&#x27; Research Ability in Real-World Researcher Sessions and Workspaces</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Fudan University / Shanghai Artificial Intelligence Laboratory</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Actor只能根据公开任务和材料解决问题，私有判据不能作为gold提示泄漏。空checklist没有有效分母，若将all([])当true会伪造满分；本地还拒绝缺失/重复项和非布尔结果。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：未能加载任何评分条目时应报构建错误，不应返回ISR=1；TaskInput也不能附带预期答案文件。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14364">原论文</a> · <a href="../../../../agent-research/2611.14364-are-bench/">实现解读</a> · <a href="#qa-063e9912ea6d0ad2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:reprobridge" data-paper-title="ReproBridge: Building Reproducibility into ML Research Artifacts" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="ReproBridge: Building Reproducibility into ML Research Artifacts Agent University of Waterloo / Google 2026-11-05 论文和代码之间常缺环境、启动方式、统计单位及修复理由。ReproBridge 将已恢复的执行知识保存为四件套：代码、环境、launcher、复现指南；构建、独立复现和事后审计使用不同上下文。分数接近目标并不证明做了同一实验，重复运行也不能消除系统性的程序偏差。§2–3 完整实验成本过高，不复现（审查 DONE）。component_only，CPU / L1 评价侧机制；没有 LLM Reproducer 或语义 Auditor。完整实验成本过高，不复现（审查 DONE）。这是 11 月发现的补漏，不是 11 月 11 日首发。ActorTask 只有公开实验说明，不含参考值、兼容阈值或成功答案；Reference 仅由独立评价者持有。Artifact 检查四种不同文件的 SHA256。read_measurement 检查固定代码身份、脚本/环境/结果文件字节、输出修改时间与执行区间，并从显式 JSON 位置读取有限标量。  统一评测与可靠性 科研复现与证据审计 Agent 评测与可靠性：如何知道真的做对了 ReproBridge 为什么不能把参考分数和成功阈值交给被评价的复现 Agent？ 独立复现应由论文与代码恢复实验，而不是照评价侧参考值调结果。私有五次参考观测和双侧兼容区间属于评价者；本地ActorTask只包含公开实验说明，不能据隐藏目标选择运行。 教学例：公开任务写MSE的五seed均值；评价侧知道参考均值1与兼容区间约[0.952,1.048]。若把区间交给actor并让其反复选seed，便不再是独立测量。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<span id="paper-agent-research-reprobridge-d491560a" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-a3a59347473d03ce">ReproBridge 为什么不能把参考分数和成功阈值交给被评价的复现 Agent？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Areprobridge">ReproBridge: Building Reproducibility into ML Research Artifacts</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · University of Waterloo / Google</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>独立复现应由论文与代码恢复实验，而不是照评价侧参考值调结果。私有五次参考观测和双侧兼容区间属于评价者；本地ActorTask只包含公开实验说明，不能据隐藏目标选择运行。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：公开任务写MSE的五seed均值；评价侧知道参考均值1与兼容区间约[0.952,1.048]。若把区间交给actor并让其反复选seed，便不再是独立测量。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08452">原论文</a> · <a href="../../../../agent-research/2611.08452-reprobridge/">实现解读</a> · <a href="#qa-a3a59347473d03ce">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:reprobridge" data-paper-title="ReproBridge: Building Reproducibility into ML Research Artifacts" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="ReproBridge: Building Reproducibility into ML Research Artifacts Agent University of Waterloo / Google 2026-11-05 论文和代码之间常缺环境、启动方式、统计单位及修复理由。ReproBridge 将已恢复的执行知识保存为四件套：代码、环境、launcher、复现指南；构建、独立复现和事后审计使用不同上下文。分数接近目标并不证明做了同一实验，重复运行也不能消除系统性的程序偏差。§2–3 完整实验成本过高，不复现（审查 DONE）。component_only，CPU / L1 评价侧机制；没有 LLM Reproducer 或语义 Auditor。完整实验成本过高，不复现（审查 DONE）。这是 11 月发现的补漏，不是 11 月 11 日首发。ActorTask 只有公开实验说明，不含参考值、兼容阈值或成功答案；Reference 仅由独立评价者持有。Artifact 检查四种不同文件的 SHA256。read_measurement 检查固定代码身份、脚本/环境/结果文件字节、输出修改时间与执行区间，并从显式 JSON 位置读取有限标量。  统一评测与可靠性 科研复现与证据审计 Agent 评测与可靠性：如何知道真的做对了 公式里的sqrt(1+1/5)为什么不能改成sqrt(1/5)？ 前者同时容纳参考中心估计的不确定性和一个新独立观测的噪声；后者只对应参考均值的不确定性，会错误缩窄新测量的兼容范围。原文还保留绝对均值1%的数值容忍下限。 教学例：五次参考标准差s，95%半径是t(0.975,4)乘s乘sqrt(1.2)，不是乘sqrt(0.2)。五个参考都为100时仍有[99,101]下限区间。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-aa441c206931fb96">公式里的sqrt(1+1/5)为什么不能改成sqrt(1/5)？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Areprobridge">ReproBridge: Building Reproducibility into ML Research Artifacts</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · University of Waterloo / Google</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>前者同时容纳参考中心估计的不确定性和一个新独立观测的噪声；后者只对应参考均值的不确定性，会错误缩窄新测量的兼容范围。原文还保留绝对均值1%的数值容忍下限。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：五次参考标准差s，95%半径是t(0.975,4)乘s乘sqrt(1.2)，不是乘sqrt(0.2)。五个参考都为100时仍有[99,101]下限区间。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08452">原论文</a> · <a href="../../../../agent-research/2611.08452-reprobridge/">实现解读</a> · <a href="#qa-aa441c206931fb96">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:reprobridge" data-paper-title="ReproBridge: Building Reproducibility into ML Research Artifacts" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="ReproBridge: Building Reproducibility into ML Research Artifacts Agent University of Waterloo / Google 2026-11-05 论文和代码之间常缺环境、启动方式、统计单位及修复理由。ReproBridge 将已恢复的执行知识保存为四件套：代码、环境、launcher、复现指南；构建、独立复现和事后审计使用不同上下文。分数接近目标并不证明做了同一实验，重复运行也不能消除系统性的程序偏差。§2–3 完整实验成本过高，不复现（审查 DONE）。component_only，CPU / L1 评价侧机制；没有 LLM Reproducer 或语义 Auditor。完整实验成本过高，不复现（审查 DONE）。这是 11 月发现的补漏，不是 11 月 11 日首发。ActorTask 只有公开实验说明，不含参考值、兼容阈值或成功答案；Reference 仅由独立评价者持有。Artifact 检查四种不同文件的 SHA256。read_measurement 检查固定代码身份、脚本/环境/结果文件字节、输出修改时间与执行区间，并从显式 JSON 位置读取有限标量。  统一评测与可靠性 科研复现与证据审计 Agent 评测与可靠性：如何知道真的做对了 相比只看结果是否接近目标，独立审计多约束了什么？ 相近分数可能来自复制、替换测量工具、改公式输入、看结果后挑选或算错统计量。违规须有局部证据、实质影响且反驳失败；数值不符本身不等于造假，尚有争议的发现也不能自动否决。 教学例：结果刚好为1，但证据证明脚本只复制旧JSON，则应否决；若审计者仅怀疑用了错误统计量却找不到支持证据，发现保留未定而非判造假。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-65f9f9bb9d6febb3">相比只看结果是否接近目标，独立审计多约束了什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Areprobridge">ReproBridge: Building Reproducibility into ML Research Artifacts</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · University of Waterloo / Google</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>相近分数可能来自复制、替换测量工具、改公式输入、看结果后挑选或算错统计量。违规须有局部证据、实质影响且反驳失败；数值不符本身不等于造假，尚有争议的发现也不能自动否决。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：结果刚好为1，但证据证明脚本只复制旧JSON，则应否决；若审计者仅怀疑用了错误统计量却找不到支持证据，发现保留未定而非判造假。</p>
+<p class="ar-learning-sources">依据：核心公式、本地结果与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08452">原论文</a> · <a href="../../../../agent-research/2611.08452-reprobridge/">实现解读</a> · <a href="#qa-65f9f9bb9d6febb3">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:reprobridge" data-paper-title="ReproBridge: Building Reproducibility into ML Research Artifacts" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="ReproBridge: Building Reproducibility into ML Research Artifacts Agent University of Waterloo / Google 2026-11-05 论文和代码之间常缺环境、启动方式、统计单位及修复理由。ReproBridge 将已恢复的执行知识保存为四件套：代码、环境、launcher、复现指南；构建、独立复现和事后审计使用不同上下文。分数接近目标并不证明做了同一实验，重复运行也不能消除系统性的程序偏差。§2–3 完整实验成本过高，不复现（审查 DONE）。component_only，CPU / L1 评价侧机制；没有 LLM Reproducer 或语义 Auditor。完整实验成本过高，不复现（审查 DONE）。这是 11 月发现的补漏，不是 11 月 11 日首发。ActorTask 只有公开实验说明，不含参考值、兼容阈值或成功答案；Reference 仅由独立评价者持有。Artifact 检查四种不同文件的 SHA256。read_measurement 检查固定代码身份、脚本/环境/结果文件字节、输出修改时间与执行区间，并从显式 JSON 位置读取有限标量。  统一评测与可靠性 科研复现与证据审计 Agent 评测与可靠性：如何知道真的做对了 本地脚本/结果哈希和时间检查通过，是否就实现了论文的语义Auditor？ 不是。它们只能机械核对固定字节、声明顺序与标量出处，不能证明执行器实际运行脚本或解释脚本语义，也不能信任执行器自行控制的时钟。语义违规和反驳证据仍由独立外层提供。 教学例：合法范围内新建JSON再计算真实SHA256可以通过字节检查，却仍可能没有训练模型；因此模块显式返回semantic_auditor_executed=false。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-9aa091eb88d41471">本地脚本/结果哈希和时间检查通过，是否就实现了论文的语义Auditor？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Areprobridge">ReproBridge: Building Reproducibility into ML Research Artifacts</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · University of Waterloo / Google</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。它们只能机械核对固定字节、声明顺序与标量出处，不能证明执行器实际运行脚本或解释脚本语义，也不能信任执行器自行控制的时钟。语义违规和反驳证据仍由独立外层提供。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：合法范围内新建JSON再计算真实SHA256可以通过字节检查，却仍可能没有训练模型；因此模块显式返回semantic_auditor_executed=false。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08452">原论文</a> · <a href="../../../../agent-research/2611.08452-reprobridge/">实现解读</a> · <a href="#qa-9aa091eb88d41471">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:xstack" data-paper-title="XStack: A Benchmark for ML Repo Migration" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="XStack: A Benchmark for ML Repo Migration Agent Princeton University 2026-11-05 局部张量变换正确不等于能迁移完整实验。XStack 固定 20 个真实 PyTorch 仓库的源提交，要求 Agent 在 TPU 上移植到 JAX，交付环境安装、训练/评测和 PyTorch 权重导出三个入口。评估方在新机器全规模重跑；14 个领域包括语言模型、推荐、视觉和强化学习。原文 Appendix H 的代码规模比较也说明，达标路径不一定覆盖源库每一项功能。 仅资料收录：成本过高，不复现（审查 DONE）。仅资料收录：成本过高，不复现（审查 DONE）。不执行迁移、不下载任务数据、不生成本地指标或 GPU 收据。Appendix H 报告主实验 22,802 TPU 芯片小时（v4/v5p/v6e），其中评分重跑 16,158 芯片小时；另有 Agent 与裁判调用。Appendix F 仅 Opus 5 的 20 个单元按作者口径已为 1,844 美元。单 A100/A30 或 Mac 不能提供主实验的 TPU 环境与全矩阵预算。成本过高，不复现（审查 DONE）。本地没有运行 GPU 初步实验、生成替代分数或启动自动队列。  评测与可靠性 跨框架迁移评测 Agent 评测与可靠性：如何知道真的做对了 XStack 的迁移通过为什么不能只看程序能启动？ 必须在干净 TPU 上跑完整源配方并达标，裁判还要核对结果确属该次运行且未作弊，权重必须能回载到原 PyTorch 模型。启动只是其中很弱的前置条件。 教学例：JAX 脚本正常退出，但运行了缩小数据集的教程任务，不是全规模迁移通过。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<span id="paper-agent-research-xstack-ca2bf617" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-4225806da786eb79">XStack 的迁移通过为什么不能只看程序能启动？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Axstack">XStack: A Benchmark for ML Repo Migration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Princeton University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>必须在干净 TPU 上跑完整源配方并达标，裁判还要核对结果确属该次运行且未作弊，权重必须能回载到原 PyTorch 模型。启动只是其中很弱的前置条件。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：JAX 脚本正常退出，但运行了缩小数据集的教程任务，不是全规模迁移通过。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、评估协议；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08472">原论文</a> · <a href="../../../../agent-research/2611.08472-xstack/">实现解读</a> · <a href="#qa-4225806da786eb79">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:xstack" data-paper-title="XStack: A Benchmark for ML Repo Migration" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="XStack: A Benchmark for ML Repo Migration Agent Princeton University 2026-11-05 局部张量变换正确不等于能迁移完整实验。XStack 固定 20 个真实 PyTorch 仓库的源提交，要求 Agent 在 TPU 上移植到 JAX，交付环境安装、训练/评测和 PyTorch 权重导出三个入口。评估方在新机器全规模重跑；14 个领域包括语言模型、推荐、视觉和强化学习。原文 Appendix H 的代码规模比较也说明，达标路径不一定覆盖源库每一项功能。 仅资料收录：成本过高，不复现（审查 DONE）。仅资料收录：成本过高，不复现（审查 DONE）。不执行迁移、不下载任务数据、不生成本地指标或 GPU 收据。Appendix H 报告主实验 22,802 TPU 芯片小时（v4/v5p/v6e），其中评分重跑 16,158 芯片小时；另有 Agent 与裁判调用。Appendix F 仅 Opus 5 的 20 个单元按作者口径已为 1,844 美元。单 A100/A30 或 Mac 不能提供主实验的 TPU 环境与全矩阵预算。成本过高，不复现（审查 DONE）。本地没有运行 GPU 初步实验、生成替代分数或启动自动队列。  评测与可靠性 跨框架迁移评测 Agent 评测与可靠性：如何知道真的做对了 第二阶段提供主实验配方，为何不等同于泄漏答案？ 配方让执行者知道该跑哪个实验，不公开数值目标；仅允许调整入口脚本，其余迁移冻结。若入口脚本重写冻结文件，也破坏了这个对照。 教学例：阶段一误跑音频分类的另一数据集，阶段二可把入口切到指定配方，不能借机改模型源码或硬编码目标。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-1ea6aaba33adfae7">第二阶段提供主实验配方，为何不等同于泄漏答案？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Axstack">XStack: A Benchmark for ML Repo Migration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Princeton University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>配方让执行者知道该跑哪个实验，不公开数值目标；仅允许调整入口脚本，其余迁移冻结。若入口脚本重写冻结文件，也破坏了这个对照。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：阶段一误跑音频分类的另一数据集，阶段二可把入口切到指定配方，不能借机改模型源码或硬编码目标。</p>
+<p class="ar-learning-sources">依据：评估协议；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08472">原论文</a> · <a href="../../../../agent-research/2611.08472-xstack/">实现解读</a> · <a href="#qa-1ea6aaba33adfae7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:xstack" data-paper-title="XStack: A Benchmark for ML Repo Migration" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="XStack: A Benchmark for ML Repo Migration Agent Princeton University 2026-11-05 局部张量变换正确不等于能迁移完整实验。XStack 固定 20 个真实 PyTorch 仓库的源提交，要求 Agent 在 TPU 上移植到 JAX，交付环境安装、训练/评测和 PyTorch 权重导出三个入口。评估方在新机器全规模重跑；14 个领域包括语言模型、推荐、视觉和强化学习。原文 Appendix H 的代码规模比较也说明，达标路径不一定覆盖源库每一项功能。 仅资料收录：成本过高，不复现（审查 DONE）。仅资料收录：成本过高，不复现（审查 DONE）。不执行迁移、不下载任务数据、不生成本地指标或 GPU 收据。Appendix H 报告主实验 22,802 TPU 芯片小时（v4/v5p/v6e），其中评分重跑 16,158 芯片小时；另有 Agent 与裁判调用。Appendix F 仅 Opus 5 的 20 个单元按作者口径已为 1,844 美元。单 A100/A30 或 Mac 不能提供主实验的 TPU 环境与全矩阵预算。成本过高，不复现（审查 DONE）。本地没有运行 GPU 初步实验、生成替代分数或启动自动队列。  评测与可靠性 跨框架迁移评测 Agent 评测与可靠性：如何知道真的做对了 Appendix G 在单 A100 的初步实验能否替代主 TPU 矩阵？ 不能。初步实验覆盖 12 个较小仓库，以前向、梯度和 checkpoint 等对齐检查为主；主矩阵比较 20 个仓库、7 个 Agent 在真实 TPU 的全规模复现，两种通过率不是同一指标。 教学例：小任务的前向 logits 一致，不能推出大训练任务在新 TPU 上收敛到公布目标。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-7ba79056ba7de908">Appendix G 在单 A100 的初步实验能否替代主 TPU 矩阵？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Axstack">XStack: A Benchmark for ML Repo Migration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Princeton University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。初步实验覆盖 12 个较小仓库，以前向、梯度和 checkpoint 等对齐检查为主；主矩阵比较 20 个仓库、7 个 Agent 在真实 TPU 的全规模复现，两种通过率不是同一指标。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：小任务的前向 logits 一致，不能推出大训练任务在新 TPU 上收敛到公布目标。</p>
+<p class="ar-learning-sources">依据：论文离线与线上效果、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08472">原论文</a> · <a href="../../../../agent-research/2611.08472-xstack/">实现解读</a> · <a href="#qa-7ba79056ba7de908">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:xstack" data-paper-title="XStack: A Benchmark for ML Repo Migration" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="XStack: A Benchmark for ML Repo Migration Agent Princeton University 2026-11-05 局部张量变换正确不等于能迁移完整实验。XStack 固定 20 个真实 PyTorch 仓库的源提交，要求 Agent 在 TPU 上移植到 JAX，交付环境安装、训练/评测和 PyTorch 权重导出三个入口。评估方在新机器全规模重跑；14 个领域包括语言模型、推荐、视觉和强化学习。原文 Appendix H 的代码规模比较也说明，达标路径不一定覆盖源库每一项功能。 仅资料收录：成本过高，不复现（审查 DONE）。仅资料收录：成本过高，不复现（审查 DONE）。不执行迁移、不下载任务数据、不生成本地指标或 GPU 收据。Appendix H 报告主实验 22,802 TPU 芯片小时（v4/v5p/v6e），其中评分重跑 16,158 芯片小时；另有 Agent 与裁判调用。Appendix F 仅 Opus 5 的 20 个单元按作者口径已为 1,844 美元。单 A100/A30 或 Mac 不能提供主实验的 TPU 环境与全矩阵预算。成本过高，不复现（审查 DONE）。本地没有运行 GPU 初步实验、生成替代分数或启动自动队列。  评测与可靠性 跨框架迁移评测 Agent 评测与可靠性：如何知道真的做对了 复现时公开的 criteria.json 能否放进 Agent 工作区便于调试？ 不能作为被评估 Agent 的输入。应固定源提交并隔离目标、评分程序和历史结果；宿主在干净环境独立重跑并记录产物来源。否则命中目标无法区分迁移成功与读取答案。 教学例：测试可以读取 rubric 并判分，迁移 Agent 只能看到源仓库和规定配方；两者不能共享测试目标文件。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-d82e68a32667e4a0">复现时公开的 criteria.json 能否放进 Agent 工作区便于调试？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Axstack">XStack: A Benchmark for ML Repo Migration</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Princeton University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能作为被评估 Agent 的输入。应固定源提交并隔离目标、评分程序和历史结果；宿主在干净环境独立重跑并记录产物来源。否则命中目标无法区分迁移成功与读取答案。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：测试可以读取 rubric 并判分，迁移 Agent 只能看到源仓库和规定配方；两者不能共享测试目标文件。</p>
+<p class="ar-learning-sources">依据：评估协议、复现与验证边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08472">原论文</a> · <a href="../../../../agent-research/2611.08472-xstack/">实现解读</a> · <a href="#qa-d82e68a32667e4a0">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agentheal" data-paper-title="AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers Agent University of Science and Technology of China 2026-10-29 网页可能已删除、改版、需要登录、限流或不允许抓取。简单重试不是恢复；找到标题相似页面也不一定完成原目标。AgentHeal 将能力定义成：识别持续性障碍，找合法替代资源，保留原目标及版本关系；没有合法恢复路径时诚实弃答并诊断障碍，若只有用户能解锁则请求具体协助，而不是突破访问政策。它区分同一 work 同一 version 的精确副本、同 work 不同 version 的其他版本，以及仅表面相似的 look-alike。 高成本完整实验：成本过高，不复现（审查 DONE）。诊断 TS 为 0.5、违规率为 0.25，4 个 episode、平均 1.75 步。组件状态：component_only，CPU / L1 离线评测核。没有浏览器、web actor、语义 judge 或真实任务能力比较。高成本完整实验：成本过高，不复现（审查 DONE）。只使用标准库，不下载官方数据/模型、不访问网页、不发 API、不使用 CUDA。AuditCase 中的 work/version、合法可达性、障碍和求助条件是评价侧标注；  统一评测与可靠性 Web Agent 访问障碍与目标保真恢复 Agent 评测与可靠性：如何知道真的做对了 网页被登录墙挡住后，为什么找到标题相近的页面还不能算AgentHeal恢复成功？ 替代资源可能是不同作品或不可核对来源的look-alike，也可能是同作品的旧版本。AgentHeal保留原目标：有同版本副本时应优先使用；只有其他版本时要声明差异；根本无合法替代时要弃答并解释障碍，必要时向用户求助，而不是把相似主题当作等价。 教学例：用户要论文v2的某指标，搜索到同名v1不能悄悄当v2；如果v2有机构仓库副本就应使用它，否则仅有v1时明确版本差异。 2026-11-04">
 <p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
 <span id="paper-agent-research-agentheal-7e583bfa" class="ar-learning-paper-anchor"></span>
@@ -1988,6 +2200,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>例如常量历史无差分尺度，不能人为造一个分母再声称正常误差可比。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.05364">原论文</a> · <a href="../../../../agent-research/2604.05364-tfrbench/">实现解读</a> · <a href="#qa-52b59b4d02f11ef2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:mt-pingeval" data-paper-title="MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games Agent Google DeepMind 2026-02-27 MT-PingEval 用协作游戏检查模型是否真正从交互中获益，而非比较多轮时顺便增加总 token。每名玩家只看到自己的信息，通过对话解决共同任务；原 suite 包含棋局、COVR、图片选择与 Name-game。Name-game 给双方各一张五字段人物表，只有一条完整记录共同出现。仅同名不够。论文固定每玩家总预算、改变总交替轮次，限制每次输出 token 数，检验交互扩展。它不保证真实模型随轮次增加会变好，原文恰发现多任务持平或下降。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有 Chess/COVR/MD3/Tangram 环境、图像模型、tokenizer、对话策略、公开数据下载或跨模型 runner。仅可在自有真实模型接入并隔离私有视图后做能力评测；当前不能参与能力排名或 Evolve 晋级。  多智能体协作评测 Agent 评测与可靠性：如何知道真的做对了 Name-game为什么不能只把一方的表给模型就评价最终答案？ 共同记录由两张私有表的交集决定，任何一方单独看表都通常无法确定。评测应隔离双方视图并让通信成为信息来源，而不是预先给双方合并表。 教学例：Alice有两个Isabella，只有Bob知道哪条公司和过敏字段完全匹配。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<span id="paper-agent-research-mt-pingeval-e97973d8" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-afc4ccd87079fdc6">Name-game为什么不能只把一方的表给模型就评价最终答案？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amt-pingeval">MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>共同记录由两张私有表的交集决定，任何一方单独看表都通常无法确定。评测应隔离双方视图并让通信成为信息来源，而不是预先给双方合并表。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：Alice有两个Isabella，只有Bob知道哪条公司和过敏字段完全匹配。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.24188">原论文</a> · <a href="../../../../agent-research/2602.24188-mt-pingeval/">实现解读</a> · <a href="#qa-afc4ccd87079fdc6">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:mt-pingeval" data-paper-title="MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games Agent Google DeepMind 2026-02-27 MT-PingEval 用协作游戏检查模型是否真正从交互中获益，而非比较多轮时顺便增加总 token。每名玩家只看到自己的信息，通过对话解决共同任务；原 suite 包含棋局、COVR、图片选择与 Name-game。Name-game 给双方各一张五字段人物表，只有一条完整记录共同出现。仅同名不够。论文固定每玩家总预算、改变总交替轮次，限制每次输出 token 数，检验交互扩展。它不保证真实模型随轮次增加会变好，原文恰发现多任务持平或下降。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有 Chess/COVR/MD3/Tangram 环境、图像模型、tokenizer、对话策略、公开数据下载或跨模型 runner。仅可在自有真实模型接入并隔离私有视图后做能力评测；当前不能参与能力排名或 Evolve 晋级。  多智能体协作评测 Agent 评测与可靠性：如何知道真的做对了 每玩家128token、总16个交替turn时，每次为什么是16而非8token？ 总对话预算是256token，分到16个交替turn是16；每玩家各发8次，恰128。若用128除16，就把每玩家的轮数和总轮数混了。 教学例：Alice8次×16，Bob8次×16；两者不能共享一个额外重置预算。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-1eb5f56f0945573f">每玩家128token、总16个交替turn时，每次为什么是16而非8token？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amt-pingeval">MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>总对话预算是256token，分到16个交替turn是16；每玩家各发8次，恰128。若用128除16，就把每玩家的轮数和总轮数混了。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：Alice8次×16，Bob8次×16；两者不能共享一个额外重置预算。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.24188">原论文</a> · <a href="../../../../agent-research/2602.24188-mt-pingeval/">实现解读</a> · <a href="#qa-1eb5f56f0945573f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:mt-pingeval" data-paper-title="MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games Agent Google DeepMind 2026-02-27 MT-PingEval 用协作游戏检查模型是否真正从交互中获益，而非比较多轮时顺便增加总 token。每名玩家只看到自己的信息，通过对话解决共同任务；原 suite 包含棋局、COVR、图片选择与 Name-game。Name-game 给双方各一张五字段人物表，只有一条完整记录共同出现。仅同名不够。论文固定每玩家总预算、改变总交替轮次，限制每次输出 token 数，检验交互扩展。它不保证真实模型随轮次增加会变好，原文恰发现多任务持平或下降。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有 Chess/COVR/MD3/Tangram 环境、图像模型、tokenizer、对话策略、公开数据下载或跨模型 runner。仅可在自有真实模型接入并隔离私有视图后做能力评测；当前不能参与能力排名或 Evolve 晋级。  多智能体协作评测 Agent 评测与可靠性：如何知道真的做对了 Name-game随轮数提高成功率，就一定是更好的协作吗？ 不一定。更多轮次也给随机无放回猜记录更多机会，原文专门比较该基线。还需固定token预算和检查传递的信息，不能只看成功曲线。 教学例：25行里每轮猜一行，允许16轮天然比2轮更容易撞对。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-3ada3e95a8b0b5c2">Name-game随轮数提高成功率，就一定是更好的协作吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amt-pingeval">MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不一定。更多轮次也给随机无放回猜记录更多机会，原文专门比较该基线。还需固定token预算和检查传递的信息，不能只看成功曲线。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：25行里每轮猜一行，允许16轮天然比2轮更容易撞对。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.24188">原论文</a> · <a href="../../../../agent-research/2602.24188-mt-pingeval/">实现解读</a> · <a href="#qa-3ada3e95a8b0b5c2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:mt-pingeval" data-paper-title="MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games Agent Google DeepMind 2026-02-27 MT-PingEval 用协作游戏检查模型是否真正从交互中获益，而非比较多轮时顺便增加总 token。每名玩家只看到自己的信息，通过对话解决共同任务；原 suite 包含棋局、COVR、图片选择与 Name-game。Name-game 给双方各一张五字段人物表，只有一条完整记录共同出现。仅同名不够。论文固定每玩家总预算、改变总交替轮次，限制每次输出 token 数，检验交互扩展。它不保证真实模型随轮次增加会变好，原文恰发现多任务持平或下降。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有 Chess/COVR/MD3/Tangram 环境、图像模型、tokenizer、对话策略、公开数据下载或跨模型 runner。仅可在自有真实模型接入并隔离私有视图后做能力评测；当前不能参与能力排名或 Evolve 晋级。  多智能体协作评测 Agent 评测与可靠性：如何知道真的做对了 为什么只能把PrivateView给actor，不能把NameGame对象也给它？ NameGame持有两张表和共同记录，是evaluator状态；把它交给actor会泄漏私有对方信息。PrivateView仅含本方记录，scorer在外层调用。 教学例：actor闭包若可访问game._common，1.0成功率只是读答案，不是对话。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 评测与可靠性：如何知道真的做对了</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-bbb71bbe7162beaa">为什么只能把PrivateView给actor，不能把NameGame对象也给它？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amt-pingeval">MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>NameGame持有两张表和共同记录，是evaluator状态；把它交给actor会泄漏私有对方信息。PrivateView仅含本方记录，scorer在外层调用。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：actor闭包若可访问game._common，1.0成功率只是读答案，不是对话。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.24188">原论文</a> · <a href="../../../../agent-research/2602.24188-mt-pingeval/">实现解读</a> · <a href="#qa-bbb71bbe7162beaa">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:convapparel" data-paper-title="ConvApparel: A Benchmark Dataset and Validation Framework for User Simulators in Conversational Recommenders" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/evaluation-and-reliability" data-search="ConvApparel: A Benchmark Dataset and Validation Framework for User Simulators in Conversational Recommenders Agent Google 2026-02-18 模拟用户能完成购物目标，不等于像真人。论文将验证拆成三条互补证据：PLSA 比较行为分布；HLS 检查训练过的真假对话判别器能否识别模拟；反事实验证把仅在一种推荐策略下训练的模拟器放到另一策略下。PLSA 的全称是 Population-Level Statistical Alignment，不是同名主题模型。原文 §4 完整实验成本过高，不复现（审查 DONE）。本地为 CPU evaluation_protocol_interface，不是完整模拟器复现。公开固定刺激只检验 L0 接口；完整实验成本过高，不复现（审查 DONE）。也可传 --input conversations.json 代替 --fixture-demo：JSON 顶层为 train 与 heldout 数组，每行有 session_id、participant_id、policy、user_turns、布尔 is_human、可选 annotations。  Agent 评测 用户模拟器与分布对齐 Agent 评测与可靠性：如何知道真的做对了 ConvApparel的PLSA是在训练同名主题模型吗？ 不是。此处PLSA全称为Population-Level Statistical Alignment，检查模拟人群与真人的行为分布是否接近；本地统计核使用KS距离与带并列处理的MWU。它比较群体分布，不会逐条证明每段模拟对话都是真实的人类行为。 教学例子：比较真人与模拟者的对话轮数分布，是群体行为对齐检查，并非从购物文本学习若干隐含主题。 2026-10-27">

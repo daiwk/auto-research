@@ -4,6 +4,7 @@
 
 ## 2026
 
+- 2026-10 · [GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling](../../multimodal-models/2611.01143-gslm2/README.md)（`gslm2`）：单流口语语言模型通常只量化一个编码器层，可能漏掉其他层的音位和语义信息。GSLM2 的 SpidR 2.0 用可微预测头训练多层语音单元。语言侧先对齐各层在相同音频帧上的单元，再保留任一流变化的位置；各流 embedding 的平均输入共享时序 Transformer。单流输出头只使用过去的多流历史，对本流下个单元打分；生成头另外按顺序生成同一时间位置的多个流，后生成的流可依赖本位置先生成的流。原文训练结合单流损失、转移级自蒸馏与多流生成损失，三项均不在本地切片中。
 - 2026-10 · [FlexGlue: Sparse-to-Dense Feature Matching and Visual Disambiguation](../../multimodal-models/2610.32976-flexglue/README.md)（`flexglue`）：稀疏matcher受两图keypoint重复检测能力限制，dense matcher则昂贵，而且两者常只在共视正样本训练，面对对称建筑等doppelganger会给出高置信假匹配。FlexGlue在stride8全图token网格上先做self/cross attention，再只对给定query插值读取特征并寻找另一图的坐标。局部3×3窗口读取避免全局期望在多个候选间平均；轻量MLP对两个方向的offset bins取期望做局部细化。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-10 · [UniAction: Unified Action Conditioning for World Models](../../multimodal-models/2610.32977-uniaction/README.md)（`uniaction`）：异质动作以不同粒度编码，token较多的动作在同一softmax中会仅因数量而占据更大attention mass。UniAction以共享semantic codebook编码元素身份，将(t,y,x)送入既有视频模型的native positional mechanism，再对action部分统一加一个基数bias，保持action内部相对logits不变，同时移除总mass对Na的线性依赖。
 - 2026-10 · [Agentic World Action Models](../../multimodal-models/2610.30136-aw0/README.md)（`aw0`）：世界动作模型能预测未来视觉和控制轨迹，但通常缺少可组合的技能结构；代码型机器人 Agent 能重用程序，却未必把计划与物理动态预测统一起来。AW-0 在 Mixture-of-Transformers 中组合三个专家：代码专家产生参数化程序片段，视频专家预测未来场景，动作专家产生连续控制。程序既能约束预测，也可在可选执行模式中调用技能库。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
@@ -20,7 +21,9 @@
 - 2026-08 · [Generation as Auxiliary Supervision: Enhancing Visual Understanding at Zero Inference Overhead via Decoupled Embedding Prediction](../../reproductions/2608.12209-gas/README.md)（`gas`）：常规 MLLM 只用文本 next-token loss，视觉结构只能被语言间接监督；统一理解/生成模型又会把生成参数和开销留到部署阶段。GAS 把生成改成纯训练期辅助任务：理解分支与生成分支共享较低层视觉路径，上层 Transformer 参数解耦；生成分支在与 LLM 输入相同的连续视觉空间自回归预测目标图像 embedding。
 - 2026-06 · [Editing Everything Everywhere All at Once](../../multimodal-models/2606.31278-mice/README.md)（`mice`）：多区域同时编辑容易把一处指令的属性传到另一处。MICE 在联合注意力中隔离不同文字组，并用实例掩码的平滑空间偏置控制视觉交互，以兼顾局部绑定与周围区域融合。方法不训练新的编辑模型。
 - 2026-06 · [MVEB: Massive Video Embedding Benchmark](../../multimodal-models/2606.14958-mveb/README.md)（`mveb`）：固定v1 Section3：MVEB23任务从184任务池缩减；var-length fps2/cap64frames，固定帧模型遵循其训练配置，音频按model采样率/长度；无per-task finetune。分类8shot frozen logistic probe，retrieval cosine/nDCG10，VCQA候选池accuracy，视频/音频版本配对且只跑模型支持modality。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- 2026-04 · [MMEB-V3: Measuring the Performance Gaps of Omni-Modality Embedding Models](../../multimodal-models/2604.23321-mmeb-v3/README.md)（`mmeb-v3`）：单一图文检索成绩不足以判断统一嵌入模型是否适合音频、文档、Agent 工具检索或跨模态混合候选。MMEB-V3 将评测扩展为六类、16 个元任务、190 个任务，其中新增 111 个任务：11 个音频、53 个文本和 47 个 Agent 任务。它不仅比较语义匹配，还检查请求的输出模态是否被遵循。
 - 2026-04 · [NaijaS2ST: A Multi-Accent Benchmark for Speech-to-Speech Translation in Low-Resource Nigerian Languages](../../multimodal-models/2604.16287-naijas2st/README.md)（`naijas2st`）：核固定v3 Sections3–4及AppendixC：284说话人、约6K平行句、质控后约269h；5shot来自DEV，方向分开；Seamless不支持的Hausa映射Arabic、Naijá映射French仅为fine-tuned extension。S2TT SSA-COMET/ChrF++，S2ST先OmnilingualASR转写再SSA-COMET，不能用文本exactmatch替代。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- 2026-01 · [AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs' Contextual and Cultural Knowledge and Thinking](../../multimodal-models/2601.17645-avmeme-exam/README.md)（`avmeme-exam`）：常见语音基准偏向转写与声学事件，难以判断模型是否理解声音在特定社区中的隐喻、幽默和使用场景。AVMeme Exam 收集多语言、多文化短音视频，以选择题同时考察音频、语言、情境、情绪、流行原因、应用方式和世界知识。完整集 `meme-full` 有 1,032 条，移除文本捷径后的主集 `meme-main` 有 846 条。
 
 ## 2025
 

@@ -7,7 +7,7 @@ hide:
 
 # 运行流程与自进化：改的是哪一层
 
-[Agent](index.md) / 200 个问题 · 50 篇论文
+[Agent](index.md) / 240 个问题 · 60 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,221 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">200 个问题 · 50 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">240 个问题 · 60 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:fgse" data-paper-title="When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents Agent Nanyang Technological University 2026-11-10 一次经验修复能帮助当前任务，却可能在边界任务有害，或破坏旧技能。FGSE 将更新表示为带前提、行为、预期效果和 verifier 的假设，先在临时状态上跑迁移、定向证伪和归档回归探针，再 commit/refine/reject。风险集中于可分离子范围时允许一次前提细化；它不是“成功经验一律记住”。 完整实验成本过高，不复现（审查 DONE）。本地交付纯 CPU 经验准入门控，输入外部 verifier 的成对记录；不生成 Agent、探针或正确答案，不把门控通过率当任务成功率。Probe 保存同一探针在原状态/临时状态的有限分数及预期效果布尔值；不保存 gold answer。commitment_gate() 按 Eq.7–9 计算并返回三统计量和决定。调用者必须实际取得成对 verifier 结果；这里既没有 actor callback，也没有把预设分数冒充模型执行。  自进化与技能优化 证伪与回归保护 Agent 运行流程与自进化：改的是哪一层 FGSE 为什么不能把修好当前任务的经验立即写进长期记忆？ 当前任务增益没有覆盖迁移、边界反例和旧技能。FGSE 要在临时状态上分别测这些风险，再决定写入、一次细化或拒绝；只有原任务成功不足以支持持久化。 教学例：某工具报错时“始终重试”修好一次瞬时故障，但在付款已成功、回执丢失时可能重复扣款。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-fgse-8827308e" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-b87a05e8dde9793b">FGSE 为什么不能把修好当前任务的经验立即写进长期记忆？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Afgse">When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Nanyang Technological University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>当前任务增益没有覆盖迁移、边界反例和旧技能。FGSE 要在临时状态上分别测这些风险，再决定写入、一次细化或拒绝；只有原任务成功不足以支持持久化。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：某工具报错时“始终重试”修好一次瞬时故障，但在付款已成功、回执丢失时可能重复扣款。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14326">原论文</a> · <a href="../../../../agent-research/2611.14326-fgse/">实现解读</a> · <a href="#qa-b87a05e8dde9793b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:fgse" data-paper-title="When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents Agent Nanyang Technological University 2026-11-10 一次经验修复能帮助当前任务，却可能在边界任务有害，或破坏旧技能。FGSE 将更新表示为带前提、行为、预期效果和 verifier 的假设，先在临时状态上跑迁移、定向证伪和归档回归探针，再 commit/refine/reject。风险集中于可分离子范围时允许一次前提细化；它不是“成功经验一律记住”。 完整实验成本过高，不复现（审查 DONE）。本地交付纯 CPU 经验准入门控，输入外部 verifier 的成对记录；不生成 Agent、探针或正确答案，不把门控通过率当任务成功率。Probe 保存同一探针在原状态/临时状态的有限分数及预期效果布尔值；不保存 gold answer。commitment_gate() 按 Eq.7–9 计算并返回三统计量和决定。调用者必须实际取得成对 verifier 结果；这里既没有 actor callback，也没有把预设分数冒充模型执行。  自进化与技能优化 证伪与回归保护 Agent 运行流程与自进化：改的是哪一层 FGSE 中 verifier 分数没有下降，为什么仍可能计作证伪失败？ 证伪事件是分数下降超过容忍量，或者预期效果不成立，两者取或。一个标量分数可能未反映假设宣称的行为效果，所以不能只看 delta；回归损伤又用单独归档集合的负增益均值。 教学例：前后分数都为0.8，但“必须确认收件人后发送”的预期效果为false，仍增加证伪失败率。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-89be0aa6ad5bc1f4">FGSE 中 verifier 分数没有下降，为什么仍可能计作证伪失败？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Afgse">When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Nanyang Technological University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>证伪事件是分数下降超过容忍量，或者预期效果不成立，两者取或。一个标量分数可能未反映假设宣称的行为效果，所以不能只看 delta；回归损伤又用单独归档集合的负增益均值。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：前后分数都为0.8，但“必须确认收件人后发送”的预期效果为false，仍增加证伪失败率。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14326">原论文</a> · <a href="../../../../agent-research/2611.14326-fgse/">实现解读</a> · <a href="#qa-89be0aa6ad5bc1f4">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:fgse" data-paper-title="When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents Agent Nanyang Technological University 2026-11-10 一次经验修复能帮助当前任务，却可能在边界任务有害，或破坏旧技能。FGSE 将更新表示为带前提、行为、预期效果和 verifier 的假设，先在临时状态上跑迁移、定向证伪和归档回归探针，再 commit/refine/reject。风险集中于可分离子范围时允许一次前提细化；它不是“成功经验一律记住”。 完整实验成本过高，不复现（审查 DONE）。本地交付纯 CPU 经验准入门控，输入外部 verifier 的成对记录；不生成 Agent、探针或正确答案，不把门控通过率当任务成功率。Probe 保存同一探针在原状态/临时状态的有限分数及预期效果布尔值；不保存 gold answer。commitment_gate() 按 Eq.7–9 计算并返回三统计量和决定。调用者必须实际取得成对 verifier 结果；这里既没有 actor callback，也没有把预设分数冒充模型执行。  自进化与技能优化 证伪与回归保护 Agent 运行流程与自进化：改的是哪一层 FGSE 与 PASE 都会拒绝更新，为何不能合成同一个“验证分更高就接受”规则？ PASE 的本地合同是 held-out validation 严格改善；FGSE 将迁移收益、定向证伪失败和旧任务损伤分成三个门。平均收益为正也可能掩盖小范围危险，不能用收益门替代另外两门。 教学例：九题各进步一点、一题造成严重副作用，平均分可能变高；FGSE 仍可因证伪或回归超阈值拒绝。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-966f9b34d9384f57">FGSE 与 PASE 都会拒绝更新，为何不能合成同一个“验证分更高就接受”规则？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Afgse">When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Nanyang Technological University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>PASE 的本地合同是 held-out validation 严格改善；FGSE 将迁移收益、定向证伪失败和旧任务损伤分成三个门。平均收益为正也可能掩盖小范围危险，不能用收益门替代另外两门。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：九题各进步一点、一题造成严重副作用，平均分可能变高；FGSE 仍可因证伪或回归超阈值拒绝。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14326">原论文</a> · <a href="../../../../agent-research/2611.14326-fgse/">实现解读</a> · <a href="#qa-966f9b34d9384f57">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:fgse" data-paper-title="When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents Agent Nanyang Technological University 2026-11-10 一次经验修复能帮助当前任务，却可能在边界任务有害，或破坏旧技能。FGSE 将更新表示为带前提、行为、预期效果和 verifier 的假设，先在临时状态上跑迁移、定向证伪和归档回归探针，再 commit/refine/reject。风险集中于可分离子范围时允许一次前提细化；它不是“成功经验一律记住”。 完整实验成本过高，不复现（审查 DONE）。本地交付纯 CPU 经验准入门控，输入外部 verifier 的成对记录；不生成 Agent、探针或正确答案，不把门控通过率当任务成功率。Probe 保存同一探针在原状态/临时状态的有限分数及预期效果布尔值；不保存 gold answer。commitment_gate() 按 Eq.7–9 计算并返回三统计量和决定。调用者必须实际取得成对 verifier 结果；这里既没有 actor callback，也没有把预设分数冒充模型执行。  自进化与技能优化 证伪与回归保护 Agent 运行流程与自进化：改的是哪一层 本地 commitment_gate 通过，是否获得 FGSE 论文的泛化置信保证？ 没有。本地执行 Eq.7–9 经验统计，不实现置信界定理的独立新探针采样、有限假设集控制或前提细化。外部传入的记录也必须来自真实成对 verifier 执行，不能将人工夹具解释为 Agent 改进。 教学例：反复在同十个开发探针上调到通过，并不等于在新的边界任务上有相同失败率。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-a25426ec888d0801">本地 commitment_gate 通过，是否获得 FGSE 论文的泛化置信保证？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Afgse">When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Nanyang Technological University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>没有。本地执行 Eq.7–9 经验统计，不实现置信界定理的独立新探针采样、有限假设集控制或前提细化。外部传入的记录也必须来自真实成对 verifier 执行，不能将人工夹具解释为 Agent 改进。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：反复在同十个开发探针上调到通过，并不等于在新的边界任务上有相同失败率。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14326">原论文</a> · <a href="../../../../agent-research/2611.14326-fgse/">实现解读</a> · <a href="#qa-a25426ec888d0801">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:pase" data-paper-title="Program-Aided Patchable Skill Evolution" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Program-Aided Patchable Skill Evolution Agent Northeastern University, Shenyang, China 2026-11-10 纯自然语言技能把策略和具体程序操作混在一起，局部修复常要求重写整份说明。PASE 让技能保留描述性知识，同时关联可独立编辑的程序；从成败轨迹提出 patch 后，以独立 validation 判断是否保留。程序化不是删除高层策略，也不意味着语法通过就能完成任务。 完整长 rollout grid 成本过高，不复现（审查 DONE）；本地交付纯 CPU 补丁事务与 validation 接受合同，不包含模型 proposer、未知程序执行或表格求解 Agent。ProgramSkill 保存独立说明和程序，AST 仅检查语法，不执行源码。ProgramPatch 指定目标 ID、原程序 SHA256 和替换内容，拒绝过期或错目标。apply_validated_patch() 输入外部已经测得的 validation 分数，严格改善才返回新不可变对象，否则返回原对象。组件不创建 callback 假 actor，不读取测试答案，也不把人工分数宣称为真实任务执行。  自进化与技能优化 程序化技能与补丁事务 Agent 运行流程与自进化：改的是哪一层 PASE 为何保留自然语言技能，而不把所有知识都改写成程序？ 程序适合精确、重复的过程逻辑，但高层策略、适用范围和描述性经验未必适合完全形式化。PASE 让两种表示配对并独立编辑，减少修复一处实现时重写整份策略。 教学例：程序负责按列删除匹配行，技能说明保留“先确认表头及合并单元格”的使用条件。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-pase-9ff788f2" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-a49f6d3ef97b98cc">PASE 为何保留自然语言技能，而不把所有知识都改写成程序？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Apase">Program-Aided Patchable Skill Evolution</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Northeastern University, Shenyang, China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>程序适合精确、重复的过程逻辑，但高层策略、适用范围和描述性经验未必适合完全形式化。PASE 让两种表示配对并独立编辑，减少修复一处实现时重写整份策略。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：程序负责按列删除匹配行，技能说明保留“先确认表头及合并单元格”的使用条件。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14019">原论文</a> · <a href="../../../../agent-research/2611.14019-pase/">实现解读</a> · <a href="#qa-a49f6d3ef97b98cc">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:pase" data-paper-title="Program-Aided Patchable Skill Evolution" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Program-Aided Patchable Skill Evolution Agent Northeastern University, Shenyang, China 2026-11-10 纯自然语言技能把策略和具体程序操作混在一起，局部修复常要求重写整份说明。PASE 让技能保留描述性知识，同时关联可独立编辑的程序；从成败轨迹提出 patch 后，以独立 validation 判断是否保留。程序化不是删除高层策略，也不意味着语法通过就能完成任务。 完整长 rollout grid 成本过高，不复现（审查 DONE）；本地交付纯 CPU 补丁事务与 validation 接受合同，不包含模型 proposer、未知程序执行或表格求解 Agent。ProgramSkill 保存独立说明和程序，AST 仅检查语法，不执行源码。ProgramPatch 指定目标 ID、原程序 SHA256 和替换内容，拒绝过期或错目标。apply_validated_patch() 输入外部已经测得的 validation 分数，严格改善才返回新不可变对象，否则返回原对象。组件不创建 callback 假 actor，不读取测试答案，也不把人工分数宣称为真实任务执行。  自进化与技能优化 程序化技能与补丁事务 Agent 运行流程与自进化：改的是哪一层 本地 PASE 为何同时要求原程序 hash 匹配和 validation 严格改善？ Hash 匹配是本地事务保护，防止把旧 patch 应用到已变化的程序；strict validation 改善对应论文的接受判据。前者不验证效果，后者也不能修复错目标或过期修改；持平必须回滚。 教学例：patch针对v1的数组索引，但程序已经改成v2的字典查询；即使附带更高旧验证分，也不应盲目覆盖。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-a1fa19c7b1354496">本地 PASE 为何同时要求原程序 hash 匹配和 validation 严格改善？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Apase">Program-Aided Patchable Skill Evolution</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Northeastern University, Shenyang, China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Hash 匹配是本地事务保护，防止把旧 patch 应用到已变化的程序；strict validation 改善对应论文的接受判据。前者不验证效果，后者也不能修复错目标或过期修改；持平必须回滚。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：patch针对v1的数组索引，但程序已经改成v2的字典查询；即使附带更高旧验证分，也不应盲目覆盖。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14019">原论文</a> · <a href="../../../../agent-research/2611.14019-pase/">实现解读</a> · <a href="#qa-a1fa19c7b1354496">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:pase" data-paper-title="Program-Aided Patchable Skill Evolution" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Program-Aided Patchable Skill Evolution Agent Northeastern University, Shenyang, China 2026-11-10 纯自然语言技能把策略和具体程序操作混在一起，局部修复常要求重写整份说明。PASE 让技能保留描述性知识，同时关联可独立编辑的程序；从成败轨迹提出 patch 后，以独立 validation 判断是否保留。程序化不是删除高层策略，也不意味着语法通过就能完成任务。 完整长 rollout grid 成本过高，不复现（审查 DONE）；本地交付纯 CPU 补丁事务与 validation 接受合同，不包含模型 proposer、未知程序执行或表格求解 Agent。ProgramSkill 保存独立说明和程序，AST 仅检查语法，不执行源码。ProgramPatch 指定目标 ID、原程序 SHA256 和替换内容，拒绝过期或错目标。apply_validated_patch() 输入外部已经测得的 validation 分数，严格改善才返回新不可变对象，否则返回原对象。组件不创建 callback 假 actor，不读取测试答案，也不把人工分数宣称为真实任务执行。  自进化与技能优化 程序化技能与补丁事务 Agent 运行流程与自进化：改的是哪一层 PASE 关联了可执行程序，是否就与 ReTrace 一样没有运行时 Planner？ 不一定。PASE 的 Agent 仍可决定何时调用关联程序，程序化技能不消除推理控制；ReTrace 则把下一步选择显式编译为有序 guard。是否存在可执行代码与谁选择下一步是两条轴。 教学例：LLM每轮决定是否调用“清洗表格”函数仍是模型控制；根据已观测状态选第一个guard才是代码分派。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-03a68778c81ae633">PASE 关联了可执行程序，是否就与 ReTrace 一样没有运行时 Planner？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Apase">Program-Aided Patchable Skill Evolution</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Northeastern University, Shenyang, China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不一定。PASE 的 Agent 仍可决定何时调用关联程序，程序化技能不消除推理控制；ReTrace 则把下一步选择显式编译为有序 guard。是否存在可执行代码与谁选择下一步是两条轴。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：LLM每轮决定是否调用“清洗表格”函数仍是模型控制；根据已观测状态选第一个guard才是代码分派。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14019">原论文</a> · <a href="../../../../agent-research/2611.14019-pase/">实现解读</a> · <a href="#qa-03a68778c81ae633">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:pase" data-paper-title="Program-Aided Patchable Skill Evolution" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Program-Aided Patchable Skill Evolution Agent Northeastern University, Shenyang, China 2026-11-10 纯自然语言技能把策略和具体程序操作混在一起，局部修复常要求重写整份说明。PASE 让技能保留描述性知识，同时关联可独立编辑的程序；从成败轨迹提出 patch 后，以独立 validation 判断是否保留。程序化不是删除高层策略，也不意味着语法通过就能完成任务。 完整长 rollout grid 成本过高，不复现（审查 DONE）；本地交付纯 CPU 补丁事务与 validation 接受合同，不包含模型 proposer、未知程序执行或表格求解 Agent。ProgramSkill 保存独立说明和程序，AST 仅检查语法，不执行源码。ProgramPatch 指定目标 ID、原程序 SHA256 和替换内容，拒绝过期或错目标。apply_validated_patch() 输入外部已经测得的 validation 分数，严格改善才返回新不可变对象，否则返回原对象。组件不创建 callback 假 actor，不读取测试答案，也不把人工分数宣称为真实任务执行。  自进化与技能优化 程序化技能与补丁事务 Agent 运行流程与自进化：改的是哪一层 PASE 组件对替换程序做 AST 解析，为什么仍不把它算作任务执行或安全验收？ AST 只说明语法可解析，不说明逻辑正确、无副作用或能处理真实表格。组件不执行未知程序，validation 分由外部测量提供；源中含raise仍可语法有效，但不能由此宣称任务成功。 教学例：`raise RuntimeError()`语法正确且会立即失败；静态补丁测试应允许解析却不运行它。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-1fb6ad18bd2dd484">PASE 组件对替换程序做 AST 解析，为什么仍不把它算作任务执行或安全验收？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Apase">Program-Aided Patchable Skill Evolution</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Northeastern University, Shenyang, China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>AST 只说明语法可解析，不说明逻辑正确、无副作用或能处理真实表格。组件不执行未知程序，validation 分由外部测量提供；源中含raise仍可语法有效，但不能由此宣称任务成功。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：`raise RuntimeError()`语法正确且会立即失败；静态补丁测试应允许解析却不运行它。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14019">原论文</a> · <a href="../../../../agent-research/2611.14019-pase/">实现解读</a> · <a href="#qa-1fb6ad18bd2dd484">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:verified-quantum-wiki" data-paper-title="Discovering formally verified quantum programs with AI" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Discovering formally verified quantum programs with AI Agent Google DeepMind 2026-11-06 量子程序的复杂度可能远超经典模拟能力，靠若干数值样例无法证明一般正确性。研究者先在量子 Hoare 逻辑（QHL）库中冻结正确性与资源规范，异构 LLM 团队搜索程序和 Lean 证明。论文不固定团队内部模型、框架或分工；共享的是规范、外部验证与协作协议（§1.1–1.2、附录 A–C）。团队本地通过 Lean 不等于可接纳成果。 完整实验成本过高，不复现（审查 DONE）；component_only / L1 机制诊断：本地只执行收到可信外部验证结果后的 wiki 合并规则，不运行 Lean、量子程序或 LLM。component_only / L1 机制诊断：本地只执行收到可信外部验证结果后的 wiki 合并规则，不运行 Lean、量子程序或 LLM。完整实验成本过高，不复现（审查 DONE）；作者尚未公开本篇量子 Lean 库、题目规范和已验证解。Solution 显式携带冻结规范摘要、候选 artifact 摘要、成本口径、精确成本及代码大小。  Harness 与自我改进 形式验证 跨团队共享 wiki Agent 运行流程与自进化：改的是哪一层 团队说自己的 Lean 文件编译通过，为什么还不能直接写入共享 wiki？ 团队可修改自己的工作区，可能连定理、依赖定义或允许公理一起改掉。本篇将提交放到独立干净沙箱，用 Comparator 对照冻结规范，确认证明没有偷换问题且资源定理等于申报成本，再决定是否合并。 教学例：原题要求所有输入满足性质，团队把定理改成只对零输入成立。文件可能编译，但 target_theorems_match 应为 false，不能因成本下降 90% 就接纳。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-verified-quantum-wiki-13281631" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-9c80b7b87afe0152">团队说自己的 Lean 文件编译通过，为什么还不能直接写入共享 wiki？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Averified-quantum-wiki">Discovering formally verified quantum programs with AI</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>团队可修改自己的工作区，可能连定理、依赖定义或允许公理一起改掉。本篇将提交放到独立干净沙箱，用 Comparator 对照冻结规范，确认证明没有偷换问题且资源定理等于申报成本，再决定是否合并。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：原题要求所有输入满足性质，团队把定理改成只对零输入成立。文件可能编译，但 target_theorems_match 应为 false，不能因成本下降 90% 就接纳。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09822v1">原论文</a> · <a href="../../../../agent-research/2611.09822-verified-quantum-wiki/">实现解读</a> · <a href="#qa-9c80b7b87afe0152">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:verified-quantum-wiki" data-paper-title="Discovering formally verified quantum programs with AI" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Discovering formally verified quantum programs with AI Agent Google DeepMind 2026-11-06 量子程序的复杂度可能远超经典模拟能力，靠若干数值样例无法证明一般正确性。研究者先在量子 Hoare 逻辑（QHL）库中冻结正确性与资源规范，异构 LLM 团队搜索程序和 Lean 证明。论文不固定团队内部模型、框架或分工；共享的是规范、外部验证与协作协议（§1.1–1.2、附录 A–C）。团队本地通过 Lean 不等于可接纳成果。 完整实验成本过高，不复现（审查 DONE）；component_only / L1 机制诊断：本地只执行收到可信外部验证结果后的 wiki 合并规则，不运行 Lean、量子程序或 LLM。component_only / L1 机制诊断：本地只执行收到可信外部验证结果后的 wiki 合并规则，不运行 Lean、量子程序或 LLM。完整实验成本过高，不复现（审查 DONE）；作者尚未公开本篇量子 Lean 库、题目规范和已验证解。Solution 显式携带冻结规范摘要、候选 artifact 摘要、成本口径、精确成本及代码大小。  Harness 与自我改进 形式验证 跨团队共享 wiki Agent 运行流程与自进化：改的是哪一层 默认 5% 成本门槛与 20% 代码缩短是 AND 还是 OR？ 通过外部重验证是共同前提；之后两个分支是 OR：成本至少下降 5%，或者代码至少缩短 20% 且成本严格下降。第二个分支不能只缩短代码而维持原成本。两项还必须比较同一冻结规范与成本口径。 教学例：从成本 100、长度 100 出发，(95,120) 可经第一分支接纳，(99,80) 可经第二分支接纳，(100,1) 仍拒绝。代码长度的单位由调用方固定，论文未指定字节或行。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-4c13a877a713728e">默认 5% 成本门槛与 20% 代码缩短是 AND 还是 OR？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Averified-quantum-wiki">Discovering formally verified quantum programs with AI</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>通过外部重验证是共同前提；之后两个分支是 OR：成本至少下降 5%，或者代码至少缩短 20% 且成本严格下降。第二个分支不能只缩短代码而维持原成本。两项还必须比较同一冻结规范与成本口径。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：从成本 100、长度 100 出发，(95,120) 可经第一分支接纳，(99,80) 可经第二分支接纳，(100,1) 仍拒绝。代码长度的单位由调用方固定，论文未指定字节或行。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09822v1">原论文</a> · <a href="../../../../agent-research/2611.09822-verified-quantum-wiki/">实现解读</a> · <a href="#qa-4c13a877a713728e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:verified-quantum-wiki" data-paper-title="Discovering formally verified quantum programs with AI" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Discovering formally verified quantum programs with AI Agent Google DeepMind 2026-11-06 量子程序的复杂度可能远超经典模拟能力，靠若干数值样例无法证明一般正确性。研究者先在量子 Hoare 逻辑（QHL）库中冻结正确性与资源规范，异构 LLM 团队搜索程序和 Lean 证明。论文不固定团队内部模型、框架或分工；共享的是规范、外部验证与协作协议（§1.1–1.2、附录 A–C）。团队本地通过 Lean 不等于可接纳成果。 完整实验成本过高，不复现（审查 DONE）；component_only / L1 机制诊断：本地只执行收到可信外部验证结果后的 wiki 合并规则，不运行 Lean、量子程序或 LLM。component_only / L1 机制诊断：本地只执行收到可信外部验证结果后的 wiki 合并规则，不运行 Lean、量子程序或 LLM。完整实验成本过高，不复现（审查 DONE）；作者尚未公开本篇量子 Lean 库、题目规范和已验证解。Solution 显式携带冻结规范摘要、候选 artifact 摘要、成本口径、精确成本及代码大小。  Harness 与自我改进 形式验证 跨团队共享 wiki Agent 运行流程与自进化：改的是哪一层 这套 wiki 接纳规则与按开发集准确率选择推理策略有什么根本区别？ 开发集策略选择比较有限样本的经验效果，需要测试隔离及不确定性分析；本篇对冻结形式规格证明正确性和成本后，再筛选足够大的改善。证明可以超出可模拟样本，但不能证明物理建模假设正确，也不能把事后协作归因变成因果实验。 教学例：一个策略在 95/100 道开发题答对不能证明所有输入正确；一个 QHL 定理证明全体满足前置条件的状态正确，却可能沿用遗漏某类门成本的规格。两者需要不同的外部审查。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-06cbf962e8b93e19">这套 wiki 接纳规则与按开发集准确率选择推理策略有什么根本区别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Averified-quantum-wiki">Discovering formally verified quantum programs with AI</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>开发集策略选择比较有限样本的经验效果，需要测试隔离及不确定性分析；本篇对冻结形式规格证明正确性和成本后，再筛选足够大的改善。证明可以超出可模拟样本，但不能证明物理建模假设正确，也不能把事后协作归因变成因果实验。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个策略在 95/100 道开发题答对不能证明所有输入正确；一个 QHL 定理证明全体满足前置条件的状态正确，却可能沿用遗漏某类门成本的规格。两者需要不同的外部审查。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09822v1">原论文</a> · <a href="../../../../agent-research/2611.09822-verified-quantum-wiki/">实现解读</a> · <a href="#qa-06cbf962e8b93e19">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:verified-quantum-wiki" data-paper-title="Discovering formally verified quantum programs with AI" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Discovering formally verified quantum programs with AI Agent Google DeepMind 2026-11-06 量子程序的复杂度可能远超经典模拟能力，靠若干数值样例无法证明一般正确性。研究者先在量子 Hoare 逻辑（QHL）库中冻结正确性与资源规范，异构 LLM 团队搜索程序和 Lean 证明。论文不固定团队内部模型、框架或分工；共享的是规范、外部验证与协作协议（§1.1–1.2、附录 A–C）。团队本地通过 Lean 不等于可接纳成果。 完整实验成本过高，不复现（审查 DONE）；component_only / L1 机制诊断：本地只执行收到可信外部验证结果后的 wiki 合并规则，不运行 Lean、量子程序或 LLM。component_only / L1 机制诊断：本地只执行收到可信外部验证结果后的 wiki 合并规则，不运行 Lean、量子程序或 LLM。完整实验成本过高，不复现（审查 DONE）；作者尚未公开本篇量子 Lean 库、题目规范和已验证解。Solution 显式携带冻结规范摘要、候选 artifact 摘要、成本口径、精确成本及代码大小。  Harness 与自我改进 形式验证 跨团队共享 wiki Agent 运行流程与自进化：改的是哪一层 本地构造 ExternalComparatorResult 并通过 admission，可以说量子程序已正式验证吗？ 不可以。它是可信外部验证器的接口，既不运行 Lean 也不鉴别凭据真实性。真实宿主先完成独立验证并认证来源，才可填入结果。CPU 夹具只测试绑定一致性、失败拒绝和阈值；实际 Lean 证明数为零。 教学例：复制旧证明凭据给新 artifact，即便所有 flags 为 true，也因摘要不匹配拒绝；若恶意调用方同时伪造摘要和 flags，本组件无法识别，必须由外部可信边界防止。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-b183d20e4f323234">本地构造 ExternalComparatorResult 并通过 admission，可以说量子程序已正式验证吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Averified-quantum-wiki">Discovering formally verified quantum programs with AI</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不可以。它是可信外部验证器的接口，既不运行 Lean 也不鉴别凭据真实性。真实宿主先完成独立验证并认证来源，才可填入结果。CPU 夹具只测试绑定一致性、失败拒绝和阈值；实际 Lean 证明数为零。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：复制旧证明凭据给新 artifact，即便所有 flags 为 true，也因摘要不匹配拒绝；若恶意调用方同时伪造摘要和 flags，本组件无法识别，必须由外部可信边界防止。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09822v1">原论文</a> · <a href="../../../../agent-research/2611.09822-verified-quantum-wiki/">实现解读</a> · <a href="#qa-b183d20e4f323234">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:envopt" data-paper-title="EnvOpt: Automated Optimization for Agent Environments" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="EnvOpt: Automated Optimization for Agent Environments Agent University of California, Berkeley / University of Chicago / Bespoke Labs 2026-11-05 长期稳定的工作环境可以承载多类查询。EnvOpt 固定目标模型与 Harness，让研究 Agent 改变同一信息的可访问表示，例如用 SQLite 目录索引散落的表定义，或为既有接口写索引手册。优化对象是环境目录，不是底座权重，也不是每个任务重写一份工作流程。研究 Agent 在不相交的训练分片上读取目标 Agent 轨迹，训练不提供 verifier；验证阶段才独立度量候选环境，测试任务不参与选择。 完整实验成本过高，不复现（审查 DONE）。实现边界：CPU / L1，离线回放论文 Algorithm 1 的接受与回滚规则。没有运行 Agent、API 或真实工作区，没有验证成本收益，也没有接入 Evolve。完整实验成本过高，不复现（审查 DONE）。select_training_environment 仅接收已记录的候选成本与代理判断，没有验证分数、真实答案或测试接口。外层 replay_environment_evolution 检查训练 ID 分片互斥且与验证 ID 不重叠、候选 Harness 标识一致、验证聚合绑定训练选定环境，并在首次回归时回放停止及回滚。  Harness 与自我改进 环境表示演进 Agent 运行流程与自进化：改的是哪一层 EnvOpt 固定信息 I 后究竟在优化什么？ 它优化信息的表示和访问路径，固定目标 Agent 的模型和 Harness。把同一批散落定义组织为可查询索引，改变每个任务探索所需成本，并不改变问题或答案。 教学例：表定义仍在原有文件里，但 SQLite 目录记录每张表对应的路径；Agent 无须遍历所有文件。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-envopt-86d4756e" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-982f53c2f1665a72">EnvOpt 固定信息 I 后究竟在优化什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aenvopt">EnvOpt: Automated Optimization for Agent Environments</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of California, Berkeley / University of Chicago / Bespoke Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它优化信息的表示和访问路径，固定目标 Agent 的模型和 Harness。把同一批散落定义组织为可查询索引，改变每个任务探索所需成本，并不改变问题或答案。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：表定义仍在原有文件里，但 SQLite 目录记录每张表对应的路径；Agent 无须遍历所有文件。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07372">原论文</a> · <a href="../../../../agent-research/2611.07372-envopt/">实现解读</a> · <a href="#qa-982f53c2f1665a72">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:envopt" data-paper-title="EnvOpt: Automated Optimization for Agent Environments" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="EnvOpt: Automated Optimization for Agent Environments Agent University of California, Berkeley / University of Chicago / Bespoke Labs 2026-11-05 长期稳定的工作环境可以承载多类查询。EnvOpt 固定目标模型与 Harness，让研究 Agent 改变同一信息的可访问表示，例如用 SQLite 目录索引散落的表定义，或为既有接口写索引手册。优化对象是环境目录，不是底座权重，也不是每个任务重写一份工作流程。研究 Agent 在不相交的训练分片上读取目标 Agent 轨迹，训练不提供 verifier；验证阶段才独立度量候选环境，测试任务不参与选择。 完整实验成本过高，不复现（审查 DONE）。实现边界：CPU / L1，离线回放论文 Algorithm 1 的接受与回滚规则。没有运行 Agent、API 或真实工作区，没有验证成本收益，也没有接入 Evolve。完整实验成本过高，不复现（审查 DONE）。select_training_environment 仅接收已记录的候选成本与代理判断，没有验证分数、真实答案或测试接口。外层 replay_environment_evolution 检查训练 ID 分片互斥且与验证 ID 不重叠、候选 Harness 标识一致、验证聚合绑定训练选定环境，并在首次回归时回放停止及回滚。  Harness 与自我改进 环境表示演进 Agent 运行流程与自进化：改的是哪一层 一项改动在训练代理判断下更省，为什么还能在外层被回滚？ 训练内层只看相同分片上的严格成本降低和代理保真；留出验证独立比较上一轮聚合成本及准确率，成本升或准确率降超容差就停止并保留上一轮。 教学例：索引使训练成本从 10 降到 7，但验证准确率从 0.875 降到 0.625，容差 0.125；仍应回滚。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-4867e6c97481d81a">一项改动在训练代理判断下更省，为什么还能在外层被回滚？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aenvopt">EnvOpt: Automated Optimization for Agent Environments</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of California, Berkeley / University of Chicago / Bespoke Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>训练内层只看相同分片上的严格成本降低和代理保真；留出验证独立比较上一轮聚合成本及准确率，成本升或准确率降超容差就停止并保留上一轮。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：索引使训练成本从 10 降到 7，但验证准确率从 0.875 降到 0.625，容差 0.125；仍应回滚。</p>
+<p class="ar-learning-sources">依据：核心公式、本地结果与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07372">原论文</a> · <a href="../../../../agent-research/2611.07372-envopt/">实现解读</a> · <a href="#qa-4867e6c97481d81a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:envopt" data-paper-title="EnvOpt: Automated Optimization for Agent Environments" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="EnvOpt: Automated Optimization for Agent Environments Agent University of California, Berkeley / University of Chicago / Bespoke Labs 2026-11-05 长期稳定的工作环境可以承载多类查询。EnvOpt 固定目标模型与 Harness，让研究 Agent 改变同一信息的可访问表示，例如用 SQLite 目录索引散落的表定义，或为既有接口写索引手册。优化对象是环境目录，不是底座权重，也不是每个任务重写一份工作流程。研究 Agent 在不相交的训练分片上读取目标 Agent 轨迹，训练不提供 verifier；验证阶段才独立度量候选环境，测试任务不参与选择。 完整实验成本过高，不复现（审查 DONE）。实现边界：CPU / L1，离线回放论文 Algorithm 1 的接受与回滚规则。没有运行 Agent、API 或真实工作区，没有验证成本收益，也没有接入 Evolve。完整实验成本过高，不复现（审查 DONE）。select_training_environment 仅接收已记录的候选成本与代理判断，没有验证分数、真实答案或测试接口。外层 replay_environment_evolution 检查训练 ID 分片互斥且与验证 ID 不重叠、候选 Harness 标识一致、验证聚合绑定训练选定环境，并在首次回归时回放停止及回滚。  Harness 与自我改进 环境表示演进 Agent 运行流程与自进化：改的是哪一层 EnvOpt 和 Meta-Harness 是同一类搜索吗？ 两者都想改进任务完成成本或成功率，但 EnvOpt 迁移的是可复用的环境表示，固定模型和 Harness；Meta-Harness 搜索控制 Agent 运行的流程。可以叠加，不能把两种干预的效应混报。 教学例：预建目录索引改变可访问的数据组织；改变何时重试工具调用属于 Harness 控制。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-508bf6ac9e672c77">EnvOpt 和 Meta-Harness 是同一类搜索吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aenvopt">EnvOpt: Automated Optimization for Agent Environments</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of California, Berkeley / University of Chicago / Bespoke Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>两者都想改进任务完成成本或成功率，但 EnvOpt 迁移的是可复用的环境表示，固定模型和 Harness；Meta-Harness 搜索控制 Agent 运行的流程。可以叠加，不能把两种干预的效应混报。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：预建目录索引改变可访问的数据组织；改变何时重试工具调用属于 Harness 控制。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07372">原论文</a> · <a href="../../../../agent-research/2611.07372-envopt/">实现解读</a> · <a href="#qa-508bf6ac9e672c77">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:envopt" data-paper-title="EnvOpt: Automated Optimization for Agent Environments" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="EnvOpt: Automated Optimization for Agent Environments Agent University of California, Berkeley / University of Chicago / Bespoke Labs 2026-11-05 长期稳定的工作环境可以承载多类查询。EnvOpt 固定目标模型与 Harness，让研究 Agent 改变同一信息的可访问表示，例如用 SQLite 目录索引散落的表定义，或为既有接口写索引手册。优化对象是环境目录，不是底座权重，也不是每个任务重写一份工作流程。研究 Agent 在不相交的训练分片上读取目标 Agent 轨迹，训练不提供 verifier；验证阶段才独立度量候选环境，测试任务不参与选择。 完整实验成本过高，不复现（审查 DONE）。实现边界：CPU / L1，离线回放论文 Algorithm 1 的接受与回滚规则。没有运行 Agent、API 或真实工作区，没有验证成本收益，也没有接入 Evolve。完整实验成本过高，不复现（审查 DONE）。select_training_environment 仅接收已记录的候选成本与代理判断，没有验证分数、真实答案或测试接口。外层 replay_environment_evolution 检查训练 ID 分片互斥且与验证 ID 不重叠、候选 Harness 标识一致、验证聚合绑定训练选定环境，并在首次回归时回放停止及回滚。  Harness 与自我改进 环境表示演进 Agent 运行流程与自进化：改的是哪一层 本地离线回放怎样阻止把验证答案当成训练策略输入？ 内层函数的输入只有候选成本、代理布尔判断、环境及 Harness 标识。宿主验证聚合只用于外层停止，且训练与验证 ID 不重叠。接口不是真实沙箱，不能认证调用方提供的记录。 教学例：验证聚合绑定索引版本 A，却声称训练选中 B，会报错；训练 ID 与验证 ID 相同也会拒绝。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-70468eddb0c7a884">本地离线回放怎样阻止把验证答案当成训练策略输入？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aenvopt">EnvOpt: Automated Optimization for Agent Environments</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of California, Berkeley / University of Chicago / Bespoke Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>内层函数的输入只有候选成本、代理布尔判断、环境及 Harness 标识。宿主验证聚合只用于外层停止，且训练与验证 ID 不重叠。接口不是真实沙箱，不能认证调用方提供的记录。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：验证聚合绑定索引版本 A，却声称训练选中 B，会报错；训练 ID 与验证 ID 相同也会拒绝。</p>
+<p class="ar-learning-sources">依据：数据协议与实现边界、本地结果与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07372">原论文</a> · <a href="../../../../agent-research/2611.07372-envopt/">实现解读</a> · <a href="#qa-70468eddb0c7a884">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:continual-autoresearch" data-paper-title="From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks? Agent RBC Borealis / ELLIS Institute Tübingen / Max Planck Institute for Intelligent Systems 2026-11-03 持续会话可能复用代码和经验，更快找到有效方案，但未必提高最终留出效果。论文在相同任务流、模型、数据和逐任务时间预算下比较 stateful 与 reset Agent；保留首个有效提交、所有提交及最终选择，完成后才由私有测试评价。第一任务没有历史可转移，不能计入跨任务增益。正文 §3 高成本完整实验：成本过高，不复现（审查 DONE）。组件状态：CPU / L1 component_only，运行后离线 scorer 与匹配协议；没有运行自主研究 Agent，也未接入统一 Evolve。高成本完整实验：成本过高，不复现（审查 DONE）。只接收 ClosedRun(closed=True)，每个候选保留唯一 ID、单调完成时刻、valid 标记和外部私有测试分数。无效候选不能附隐藏分数，最终选择须为确实有效的提交；预算外候选和未结束记录被拒绝。scorer 不向 actor 提供接口，不运行训练，也无法防止调用者把离线分数另行泄露。  Harness 与自我改进 RSI 跨任务研究评测 Agent 运行流程与自进化：改的是哪一层 更快找到高分候选，为什么仍可能最终效果更差？ 搜索效率评价预算内best-so-far隐测曲线的面积，最终效果评价Agent实际选定候选。两者不是同一个统计量；Agent可能很早找到好方案，之后过拟合开发集并选择更差的方案。 教学例：时刻2找到0.8、时刻6找到0.5并最终选择后者，早期搜索很好但最终分数只有0.5。 2026-11-04">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-continual-autoresearch-b46d9b72" class="ar-learning-paper-anchor"></span>
@@ -1831,6 +2043,59 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.30001">原论文</a> · <a href="../../../../agent-research/2609.30001-agentx-model/">实现解读</a> · <a href="#qa-9e537d66be10432b">问题链接</a></p>
 </details>
 </article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:scientist-two" data-paper-title="ScientistTwo: Pioneering the Human Knowledge Frontier with Autonomous AI" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="ScientistTwo: Pioneering the Human Knowledge Frontier with Autonomous AI Agent Google Cloud AI Research 2026-09-17 ScientistTwo 面向给定科学问题的持续研究：先提炼已有方法局限，再生成并筛选新颖想法；在复现的子集基线上做工程迭代，只有被判为 Good 的想法才升到全量 benchmark。新一轮想法同时利用成功与失败日志，并加入尚未尝试的高新颖度种子，避免只围绕早期赢家局部搜索。通过全量验证后，系统还执行消融、严格结果比较、论文写作、补充实验式 rebuttal 和 meta-review。结构变简单或审稿意见被回应，并不自动证明方法更好； 固定回调只验证状态与预算，完整研究实验成本过高，不复现（审查 DONE）。诊断用明示的固定回调真值表，seed 只扰动种子输入顺序。L1 CPU 控制合同，不是完整自主科学家。本地不运行 LLM、编写或执行科研代码、判断新颖性、评价方法有效性或生成论文；所有这些行为都是外部接口。固定回调只验证状态与预算，完整研究实验成本过高，不复现（审查 DONE）。这是 CPU 控制语义，不是可执行的科研 Agent、语义 critic、novelty checker 或实验平台。未实现自动文献检索、代码修复、结果多指标比较、消融设计、LLM 写作、真实 rebuttal 实验或完整 meta-review；  科学研究 Agent 有界评审与证据驱动研究控制 Agent 运行流程与自进化：改的是哪一层 ScientistTwo的想法在子集上被判为Good，为什么还不能算一次成功科研产物？ 子集用于低成本筛选，相对复现的子集基线判断是否值得升阶。全量benchmark有独立实验与critic，仍可失败或需要工程修改；本地升阶门保留这些判定，不把subset Good自动复制成full Good。 教学例：一个方法在短序列子集更快，但全量长序列显存溢出；它可以获准全量验证，却不能凭子集结果被写成全benchmark成功。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-scientist-two-021c7e34" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-14562af5fd2ad2cf">ScientistTwo的想法在子集上被判为Good，为什么还不能算一次成功科研产物？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ascientist-two">ScientistTwo: Pioneering the Human Knowledge Frontier with Autonomous AI</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Cloud AI Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>子集用于低成本筛选，相对复现的子集基线判断是否值得升阶。全量benchmark有独立实验与critic，仍可失败或需要工程修改；本地升阶门保留这些判定，不把subset Good自动复制成full Good。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个方法在短序列子集更快，但全量长序列显存溢出；它可以获准全量验证，却不能凭子集结果被写成全benchmark成功。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.19644">原论文</a> · <a href="../../../../agent-research/2609.19644-scientist-two/">实现解读</a> · <a href="#qa-14562af5fd2ad2cf">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:scientist-two" data-paper-title="ScientistTwo: Pioneering the Human Knowledge Frontier with Autonomous AI" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="ScientistTwo: Pioneering the Human Knowledge Frontier with Autonomous AI Agent Google Cloud AI Research 2026-09-17 ScientistTwo 面向给定科学问题的持续研究：先提炼已有方法局限，再生成并筛选新颖想法；在复现的子集基线上做工程迭代，只有被判为 Good 的想法才升到全量 benchmark。新一轮想法同时利用成功与失败日志，并加入尚未尝试的高新颖度种子，避免只围绕早期赢家局部搜索。通过全量验证后，系统还执行消融、严格结果比较、论文写作、补充实验式 rebuttal 和 meta-review。结构变简单或审稿意见被回应，并不自动证明方法更好； 固定回调只验证状态与预算，完整研究实验成本过高，不复现（审查 DONE）。诊断用明示的固定回调真值表，seed 只扰动种子输入顺序。L1 CPU 控制合同，不是完整自主科学家。本地不运行 LLM、编写或执行科研代码、判断新颖性、评价方法有效性或生成论文；所有这些行为都是外部接口。固定回调只验证状态与预算，完整研究实验成本过高，不复现（审查 DONE）。这是 CPU 控制语义，不是可执行的科研 Agent、语义 critic、novelty checker 或实验平台。未实现自动文献检索、代码修复、结果多指标比较、消融设计、LLM 写作、真实 rebuttal 实验或完整 meta-review；  科学研究 Agent 有界评审与证据驱动研究控制 Agent 运行流程与自进化：改的是哪一层 ScientistTwo为什么给Idea Evolver传入失败历史，又加入没有试过的种子？ 失败日志能定位无效假设和工程边界，删掉它们会使进化反复犯同类错误。只围绕成功种子又容易局部最优，所以每轮把历史驱动提案和按外部novelty排序的未试seed合并；本地不替代语义novelty判断。 教学例：早期想法都依赖慢检索，失败日志说明瓶颈在I/O；新提案可以针对缓存，同时仍测试一个完全不同的无检索种子，而不是只改变旧方案参数。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-e658d51865a6c4c4">ScientistTwo为什么给Idea Evolver传入失败历史，又加入没有试过的种子？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ascientist-two">ScientistTwo: Pioneering the Human Knowledge Frontier with Autonomous AI</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Cloud AI Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>失败日志能定位无效假设和工程边界，删掉它们会使进化反复犯同类错误。只围绕成功种子又容易局部最优，所以每轮把历史驱动提案和按外部novelty排序的未试seed合并；本地不替代语义novelty判断。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：早期想法都依赖慢检索，失败日志说明瓶颈在I/O；新提案可以针对缓存，同时仍测试一个完全不同的无检索种子，而不是只改变旧方案参数。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.19644">原论文</a> · <a href="../../../../agent-research/2609.19644-scientist-two/">实现解读</a> · <a href="#qa-e658d51865a6c4c4">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:scientist-two" data-paper-title="ScientistTwo: Pioneering the Human Knowledge Frontier with Autonomous AI" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="ScientistTwo: Pioneering the Human Knowledge Frontier with Autonomous AI Agent Google Cloud AI Research 2026-09-17 ScientistTwo 面向给定科学问题的持续研究：先提炼已有方法局限，再生成并筛选新颖想法；在复现的子集基线上做工程迭代，只有被判为 Good 的想法才升到全量 benchmark。新一轮想法同时利用成功与失败日志，并加入尚未尝试的高新颖度种子，避免只围绕早期赢家局部搜索。通过全量验证后，系统还执行消融、严格结果比较、论文写作、补充实验式 rebuttal 和 meta-review。结构变简单或审稿意见被回应，并不自动证明方法更好； 固定回调只验证状态与预算，完整研究实验成本过高，不复现（审查 DONE）。诊断用明示的固定回调真值表，seed 只扰动种子输入顺序。L1 CPU 控制合同，不是完整自主科学家。本地不运行 LLM、编写或执行科研代码、判断新颖性、评价方法有效性或生成论文；所有这些行为都是外部接口。固定回调只验证状态与预算，完整研究实验成本过高，不复现（审查 DONE）。这是 CPU 控制语义，不是可执行的科研 Agent、语义 critic、novelty checker 或实验平台。未实现自动文献检索、代码修复、结果多指标比较、消融设计、LLM 写作、真实 rebuttal 实验或完整 meta-review；  科学研究 Agent 有界评审与证据驱动研究控制 Agent 运行流程与自进化：改的是哪一层 ScientistTwo的消融和review循环能否替代ScientistOne的证据完整性审计？ 不能。前者安排怎样补实验、改方法和写论文；后者核对分数复算、规则、引文与方法代码一致性。一个外部review给高分或strict comparator返回true，仍可能建立在不真实的日志或错误语义上；控制通过不是证据正确。 教学例：rebuttal把抄来的分数写进更漂亮的表格并获高评审分，仍未通过独立执行和来源核验；多一次写作循环不会使该分数真实。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-e7bfa4bb4017a5b0">ScientistTwo的消融和review循环能否替代ScientistOne的证据完整性审计？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ascientist-two">ScientistTwo: Pioneering the Human Knowledge Frontier with Autonomous AI</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Cloud AI Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。前者安排怎样补实验、改方法和写论文；后者核对分数复算、规则、引文与方法代码一致性。一个外部review给高分或strict comparator返回true，仍可能建立在不真实的日志或错误语义上；控制通过不是证据正确。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：rebuttal把抄来的分数写进更漂亮的表格并获高评审分，仍未通过独立执行和来源核验；多一次写作循环不会使该分数真实。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.19644">原论文</a> · <a href="../../../../agent-research/2609.19644-scientist-two/">实现解读</a> · <a href="#qa-e7bfa4bb4017a5b0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:scientist-two" data-paper-title="ScientistTwo: Pioneering the Human Knowledge Frontier with Autonomous AI" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="ScientistTwo: Pioneering the Human Knowledge Frontier with Autonomous AI Agent Google Cloud AI Research 2026-09-17 ScientistTwo 面向给定科学问题的持续研究：先提炼已有方法局限，再生成并筛选新颖想法；在复现的子集基线上做工程迭代，只有被判为 Good 的想法才升到全量 benchmark。新一轮想法同时利用成功与失败日志，并加入尚未尝试的高新颖度种子，避免只围绕早期赢家局部搜索。通过全量验证后，系统还执行消融、严格结果比较、论文写作、补充实验式 rebuttal 和 meta-review。结构变简单或审稿意见被回应，并不自动证明方法更好； 固定回调只验证状态与预算，完整研究实验成本过高，不复现（审查 DONE）。诊断用明示的固定回调真值表，seed 只扰动种子输入顺序。L1 CPU 控制合同，不是完整自主科学家。本地不运行 LLM、编写或执行科研代码、判断新颖性、评价方法有效性或生成论文；所有这些行为都是外部接口。固定回调只验证状态与预算，完整研究实验成本过高，不复现（审查 DONE）。这是 CPU 控制语义，不是可执行的科研 Agent、语义 critic、novelty checker 或实验平台。未实现自动文献检索、代码修复、结果多指标比较、消融设计、LLM 写作、真实 rebuttal 实验或完整 meta-review；  科学研究 Agent 有界评审与证据驱动研究控制 Agent 运行流程与自进化：改的是哪一层 Fig.4最后一轮critic要求refine，为什么本地仍返回exhausted而不是返回修改后的candidate？ 原文伪代码只有accept分支能返回成功；最后refine虽被调用，但没有剩余critic槽确认其有效。返回修改产物为成功会绕过判据。review_rebuttal还明确在无复审槽时不再生成未复审稿，两个函数的计费单位及约定都写清楚。 教学例：只允许一次critic，旧代码被要求修复后得到新代码；新代码还没被评价，不能因refine函数返回了对象就假定bug修好。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-18fba17b4de22180">Fig.4最后一轮critic要求refine，为什么本地仍返回exhausted而不是返回修改后的candidate？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Ascientist-two">ScientistTwo: Pioneering the Human Knowledge Frontier with Autonomous AI</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Cloud AI Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>原文伪代码只有accept分支能返回成功；最后refine虽被调用，但没有剩余critic槽确认其有效。返回修改产物为成功会绕过判据。review_rebuttal还明确在无复审槽时不再生成未复审稿，两个函数的计费单位及约定都写清楚。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：只允许一次critic，旧代码被要求修复后得到新代码；新代码还没被评价，不能因refine函数返回了对象就假定bug修好。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.19644">原论文</a> · <a href="../../../../agent-research/2609.19644-scientist-two/">实现解读</a> · <a href="#qa-18fba17b4de22180">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:sciencebuddy" data-paper-title="ScienceBuddy: Recursive-in-Recursive Self-Improvement for Interactive Scientific Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="ScienceBuddy: Recursive-in-Recursive Self-Improvement for Interactive Scientific Agents Agent Gen-Verse research collaboration 2026-09-15 内层递归演化交互 harness，外层用成功轨迹更新科学 Agent 策略。本地 reference kernel 保留决定性门控、权重或状态转换，并输出可审计中间量，以便与相邻方法在统一预算下比较。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行双层状态更新；没有连接真实实验室环境。本地执行双层状态更新；没有连接真实实验室环境。三种子结果见 metrics/mechanism-seeds42-44.json。统一 receipt 标记 diagnostic_only=true，不会被公开看板当成完整能力提升。  科学 Agent 递归自进化 Agent 运行流程与自进化：改的是哪一层 ScienceBuddy 为什么把科学任务中的工具交互和策略学习放在同一持续过程里？ 科学任务常需要提出动作、使用工具、解释观察并调整后续方案，固定一次提示难以覆盖不断出现的反馈。ScienceBuddy 研究工作流程与策略如何在这种交互中共同改进。两个层面的变化要分别追踪，模拟状态更新不能替代真实科学环境或模型训练证据。 教学例：检索发现原假设缺少证据后，流程可改为先核查来源；策略是否真正学会这种判断，还需要后续实际任务验证。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-sciencebuddy-cd9b47fe" class="ar-learning-paper-anchor"></span>
@@ -2202,6 +2467,112 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.25593">原论文</a> · <a href="../../../../agent-research/2608.25593-jit-agent/">实现解读</a> · <a href="#qa-7b9656fc577d1bd9">问题链接</a></p>
 </details>
 </article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:envharness" data-paper-title="EnvHarness: Awakening Static Worlds for Agent Learning" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="EnvHarness: Awakening Static Worlds for Agent Learning Agent Washington University in St. Louis 2026-08-20 静态环境不能针对当前策略的弱点持续提供练习。EnvHarness 不从头生成世界或替换评分器，而是在固定环境的 reset/step/observe/evaluate 接口外加包装层：Stage 改初始可达状态；Contract 改允许动作、转换反馈和观察；Chain 延长任务。原成功判据仍由基础环境判断，串行链组合各自成功。EnvRigger 先观察策略轨迹，再 Diagnose、Write、Validate，针对失败提供脚手架，针对全成功任务增加难度。 完整商业模型、五 benchmark、环境设计、技能评测及 RL 矩阵成本过高，不复现（审查 DONE）。未实现 EnvRigger 的轨迹诊断／组件生成／fresh-rollout 验收、技能提取、策略、RL、桥接真实 Docker／浏览器／游戏环境、上游持久化与源码编译隔离。L1 CPU 环境控制组件，不是 EnvRigger 或 Agent 学习系统。本地只做 Stage／Contract／串行 Chain 的接口语义；外部环境与 verifier 必须真实且可信，toy transition 真值表不表示 Agent 成功率。  环境与Agent共同进化 可组合环境接口 Agent 运行流程与自进化：改的是哪一层 EnvHarness为什么修改环境交互，却要保留基础环境的verifier？ 目标是提供有针对性的练习，而不是让新生成的世界随意定义成功。Stage/Contract仍由基础环境判断任务是否完成；串行Chain合取两个原判据。保留接口委托不自动证明外部verifier可靠，仍需审计。 教学例：把杯子藏进抽屉增加寻找难度，不能把‘看到抽屉’改成‘成功放好杯子’的评分条件。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-envharness-276371bd" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-c4cf20a5f50b7edf">EnvHarness为什么修改环境交互，却要保留基础环境的verifier？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aenvharness">EnvHarness: Awakening Static Worlds for Agent Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Washington University in St. Louis</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>目标是提供有针对性的练习，而不是让新生成的世界随意定义成功。Stage/Contract仍由基础环境判断任务是否完成；串行Chain合取两个原判据。保留接口委托不自动证明外部verifier可靠，仍需审计。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把杯子藏进抽屉增加寻找难度，不能把‘看到抽屉’改成‘成功放好杯子’的评分条件。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.19880">原论文</a> · <a href="../../../../agent-research/2608.19880-envharness/">实现解读</a> · <a href="#qa-c4cf20a5f50b7edf">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:envharness" data-paper-title="EnvHarness: Awakening Static Worlds for Agent Learning" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="EnvHarness: Awakening Static Worlds for Agent Learning Agent Washington University in St. Louis 2026-08-20 静态环境不能针对当前策略的弱点持续提供练习。EnvHarness 不从头生成世界或替换评分器，而是在固定环境的 reset/step/observe/evaluate 接口外加包装层：Stage 改初始可达状态；Contract 改允许动作、转换反馈和观察；Chain 延长任务。原成功判据仍由基础环境判断，串行链组合各自成功。EnvRigger 先观察策略轨迹，再 Diagnose、Write、Validate，针对失败提供脚手架，针对全成功任务增加难度。 完整商业模型、五 benchmark、环境设计、技能评测及 RL 矩阵成本过高，不复现（审查 DONE）。未实现 EnvRigger 的轨迹诊断／组件生成／fresh-rollout 验收、技能提取、策略、RL、桥接真实 Docker／浏览器／游戏环境、上游持久化与源码编译隔离。L1 CPU 环境控制组件，不是 EnvRigger 或 Agent 学习系统。本地只做 Stage／Contract／串行 Chain 的接口语义；外部环境与 verifier 必须真实且可信，toy transition 真值表不表示 Agent 成功率。  环境与Agent共同进化 可组合环境接口 Agent 运行流程与自进化：改的是哪一层 Stage为什么重放普通动作，并调用notify_replay_complete？ 动作重放使初始状态来自环境可达路径而非私有字段注入；随后通知环境恢复episode计数，避免准备阶段占用策略预算。可复现仍依赖seeded reset与底层确定性；本地拒绝准备重放已经完成任务的情况。 教学例：先拿杯子放进抽屉再关门作为初态，但这些准备动作不应减少后续策略的可用步数。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-38f8c845ef16aba5">Stage为什么重放普通动作，并调用notify_replay_complete？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aenvharness">EnvHarness: Awakening Static Worlds for Agent Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Washington University in St. Louis</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>动作重放使初始状态来自环境可达路径而非私有字段注入；随后通知环境恢复episode计数，避免准备阶段占用策略预算。可复现仍依赖seeded reset与底层确定性；本地拒绝准备重放已经完成任务的情况。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：先拿杯子放进抽屉再关门作为初态，但这些准备动作不应减少后续策略的可用步数。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.19880">原论文</a> · <a href="../../../../agent-research/2608.19880-envharness/">实现解读</a> · <a href="#qa-38f8c845ef16aba5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:envharness" data-paper-title="EnvHarness: Awakening Static Worlds for Agent Learning" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="EnvHarness: Awakening Static Worlds for Agent Learning Agent Washington University in St. Louis 2026-08-20 静态环境不能针对当前策略的弱点持续提供练习。EnvHarness 不从头生成世界或替换评分器，而是在固定环境的 reset/step/observe/evaluate 接口外加包装层：Stage 改初始可达状态；Contract 改允许动作、转换反馈和观察；Chain 延长任务。原成功判据仍由基础环境判断，串行链组合各自成功。EnvRigger 先观察策略轨迹，再 Diagnose、Write、Validate，针对失败提供脚手架，针对全成功任务增加难度。 完整商业模型、五 benchmark、环境设计、技能评测及 RL 矩阵成本过高，不复现（审查 DONE）。未实现 EnvRigger 的轨迹诊断／组件生成／fresh-rollout 验收、技能提取、策略、RL、桥接真实 Docker／浏览器／游戏环境、上游持久化与源码编译隔离。L1 CPU 环境控制组件，不是 EnvRigger 或 Agent 学习系统。本地只做 Stage／Contract／串行 Chain 的接口语义；外部环境与 verifier 必须真实且可信，toy transition 真值表不表示 Agent 成功率。  环境与Agent共同进化 可组合环境接口 Agent 运行流程与自进化：改的是哪一层 EnvHarness与Harness²都叫harness，改变的是同一层吗？ 不是。Harness²修改固定模型外的工具、记忆、提示与脚本，并根据执行对照积累改进经验；EnvHarness包装固定环境的初态、动作/观察和任务长度。两者可以概念上互补，但本地并未集成二者，也不能把环境toy检查当成agent能力改进。 教学例：给agent加测试工具是agent harness；禁止环境中的直接提交捷径是environment harness，影响变量和归因不同。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-ec0de8774f4b1f0a">EnvHarness与Harness²都叫harness，改变的是同一层吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aenvharness">EnvHarness: Awakening Static Worlds for Agent Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Washington University in St. Louis</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。Harness²修改固定模型外的工具、记忆、提示与脚本，并根据执行对照积累改进经验；EnvHarness包装固定环境的初态、动作/观察和任务长度。两者可以概念上互补，但本地并未集成二者，也不能把环境toy检查当成agent能力改进。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：给agent加测试工具是agent harness；禁止环境中的直接提交捷径是environment harness，影响变量和归因不同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.19880">原论文</a> · <a href="../../../../agent-research/2608.19880-envharness/">实现解读</a> · <a href="#qa-ec0de8774f4b1f0a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:envharness" data-paper-title="EnvHarness: Awakening Static Worlds for Agent Learning" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="EnvHarness: Awakening Static Worlds for Agent Learning Agent Washington University in St. Louis 2026-08-20 静态环境不能针对当前策略的弱点持续提供练习。EnvHarness 不从头生成世界或替换评分器，而是在固定环境的 reset/step/observe/evaluate 接口外加包装层：Stage 改初始可达状态；Contract 改允许动作、转换反馈和观察；Chain 延长任务。原成功判据仍由基础环境判断，串行链组合各自成功。EnvRigger 先观察策略轨迹，再 Diagnose、Write、Validate，针对失败提供脚手架，针对全成功任务增加难度。 完整商业模型、五 benchmark、环境设计、技能评测及 RL 矩阵成本过高，不复现（审查 DONE）。未实现 EnvRigger 的轨迹诊断／组件生成／fresh-rollout 验收、技能提取、策略、RL、桥接真实 Docker／浏览器／游戏环境、上游持久化与源码编译隔离。L1 CPU 环境控制组件，不是 EnvRigger 或 Agent 学习系统。本地只做 Stage／Contract／串行 Chain 的接口语义；外部环境与 verifier 必须真实且可信，toy transition 真值表不表示 Agent 成功率。  环境与Agent共同进化 可组合环境接口 Agent 运行流程与自进化：改的是哪一层 串行Chain里A完成了，什么时候不能启动B，也不能返回成功？ A的原verifier失败或共享步预算已耗尽时，不启动B；B未执行或未成功，合取就不成立。B只在成功交接时lazy reset，每段原verifier在边界缓存，evaluate不反复运行昂贵scorer。 教学例：总预算两步，A正好两步成功，B还未开始；不能把A成功记成组合任务成功，也不能偷偷给B新预算。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-950a6e15f5a7a4bb">串行Chain里A完成了，什么时候不能启动B，也不能返回成功？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aenvharness">EnvHarness: Awakening Static Worlds for Agent Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Washington University in St. Louis</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>A的原verifier失败或共享步预算已耗尽时，不启动B；B未执行或未成功，合取就不成立。B只在成功交接时lazy reset，每段原verifier在边界缓存，evaluate不反复运行昂贵scorer。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：总预算两步，A正好两步成功，B还未开始；不能把A成功记成组合任务成功，也不能偷偷给B新预算。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果与负控；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.19880">原论文</a> · <a href="../../../../agent-research/2608.19880-envharness/">实现解读</a> · <a href="#qa-950a6e15f5a7a4bb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agent-gym" data-paper-title="Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback Agent Google Cloud 2026-08-16 业务规则变化往往比 Agent 代码发布更快。Agent Gym 不重新训练或直接改写 acting agent，而在其 JSON 产物之后加独立纠错规则层：确定性条件检测、按作用域收集、按动作层级合并，再由领域专家审核新规则。规则和原 Agent 可以独立版本化、撤销与审计。 完整系统成本过高，不复现（审查 DONE）。三 seed 诊断使用相同明确构造的规则合同：四条匹配规则中，同 scope 的低优先规则被抑制；仅纯 CPU / L1：ALF 确定性规则、真实 JSON 状态变更、三层动作合并执行与显式人工准入。没有真实发票 Agent、LLM 规则发现或语义审查。完整系统成本过高，不复现（审查 DONE）。这是 Google 官网触发的八月论文补漏，不是 11 月 12 日新首发。Condition 实际支持八个原文描述的常用操作：equals、not_equals、contains、starts_with、greater_than、less_than、in_list、is_null；  Harness与自进化 规则纠错与人工治理 Agent 运行流程与自进化：改的是哪一层 Agent Gym为什么不把每条新业务例外都变成一次模型重训？ 它把原acting agent与下游ALF规则层分开。显式条件只在匹配的案例上修正JSON，专家可以审核、关闭和回滚规则；原Agent和模型权重不必为每条例外改变。自动把规则晋升回原Agent仍是未来工作。 教学例：紧急维修低于2000的授权例外可做窄条件纠错；这不等于模型已学会所有新采购规则，也不应放宽无关案例。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-agent-gym-41ee8f46" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-5527f5b42e559e98">Agent Gym为什么不把每条新业务例外都变成一次模型重训？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aagent-gym">Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · Google Cloud</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它把原acting agent与下游ALF规则层分开。显式条件只在匹配的案例上修正JSON，专家可以审核、关闭和回滚规则；原Agent和模型权重不必为每条例外改变。自动把规则晋升回原Agent仍是未来工作。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：紧急维修低于2000的授权例外可做窄条件纠错；这不等于模型已学会所有新采购规则，也不应放宽无关案例。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.15591">原论文</a> · <a href="../../../../agent-research/2608.15591-agent-gym/">实现解读</a> · <a href="#qa-5527f5b42e559e98">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agent-gym" data-paper-title="Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback Agent Google Cloud 2026-08-16 业务规则变化往往比 Agent 代码发布更快。Agent Gym 不重新训练或直接改写 acting agent，而在其 JSON 产物之后加独立纠错规则层：确定性条件检测、按作用域收集、按动作层级合并，再由领域专家审核新规则。规则和原 Agent 可以独立版本化、撤销与审计。 完整系统成本过高，不复现（审查 DONE）。三 seed 诊断使用相同明确构造的规则合同：四条匹配规则中，同 scope 的低优先规则被抑制；仅纯 CPU / L1：ALF 确定性规则、真实 JSON 状态变更、三层动作合并执行与显式人工准入。没有真实发票 Agent、LLM 规则发现或语义审查。完整系统成本过高，不复现（审查 DONE）。这是 Google 官网触发的八月论文补漏，不是 11 月 12 日新首发。Condition 实际支持八个原文描述的常用操作：equals、not_equals、contains、starts_with、greater_than、less_than、in_list、is_null；  Harness与自进化 规则纠错与人工治理 Agent 运行流程与自进化：改的是哪一层 为什么ALF必须合并动作，并按Continuation→Patch→Edit执行？ 多条规则分别运行LLM容易互相覆盖。先合并续跑到最早阶段，再对目标字段并集做一次patch，最后保留常量编辑，既保留纠错优先关系又把两个LLM层限制为最多两次调用。同scope还只选首条优先匹配规则。 教学例：续跑把status改为continued，patch改为patched，最终常量规则改为approved；若先Edit后续跑，approved就会丢失。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-334aac28baa9e4e5">为什么ALF必须合并动作，并按Continuation→Patch→Edit执行？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aagent-gym">Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · Google Cloud</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>多条规则分别运行LLM容易互相覆盖。先合并续跑到最早阶段，再对目标字段并集做一次patch，最后保留常量编辑，既保留纠错优先关系又把两个LLM层限制为最多两次调用。同scope还只选首条优先匹配规则。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：续跑把status改为continued，patch改为patched，最终常量规则改为approved；若先Edit后续跑，approved就会丢失。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.15591">原论文</a> · <a href="../../../../agent-research/2608.15591-agent-gym/">实现解读</a> · <a href="#qa-334aac28baa9e4e5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agent-gym" data-paper-title="Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback Agent Google Cloud 2026-08-16 业务规则变化往往比 Agent 代码发布更快。Agent Gym 不重新训练或直接改写 acting agent，而在其 JSON 产物之后加独立纠错规则层：确定性条件检测、按作用域收集、按动作层级合并，再由领域专家审核新规则。规则和原 Agent 可以独立版本化、撤销与审计。 完整系统成本过高，不复现（审查 DONE）。三 seed 诊断使用相同明确构造的规则合同：四条匹配规则中，同 scope 的低优先规则被抑制；仅纯 CPU / L1：ALF 确定性规则、真实 JSON 状态变更、三层动作合并执行与显式人工准入。没有真实发票 Agent、LLM 规则发现或语义审查。完整系统成本过高，不复现（审查 DONE）。这是 Google 官网触发的八月论文补漏，不是 11 月 12 日新首发。Condition 实际支持八个原文描述的常用操作：equals、not_equals、contains、starts_with、greater_than、less_than、in_list、is_null；  Harness与自进化 规则纠错与人工治理 Agent 运行流程与自进化：改的是哪一层 Agent Gym的规则批准与PASE的程序patch接受，有什么不同？ Agent Gym核对目标与collateral后由SME显式批准下游纠错规则，运行时不直接编辑原Agent。PASE维护skill/program配对，以held-out validation严格改善决定是否接受程序替换。人工规则治理和测得的任务效果准入不能互相充当证据。 教学例：一个采购例外经专家授权可以保留；一个电子表格程序即使语法正确，也须validation分数提高才被PASE接受，不能拿专家喜欢代替分数。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-7c780d5921f4153c">Agent Gym的规则批准与PASE的程序patch接受，有什么不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aagent-gym">Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · Google Cloud</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Agent Gym核对目标与collateral后由SME显式批准下游纠错规则，运行时不直接编辑原Agent。PASE维护skill/program配对，以held-out validation严格改善决定是否接受程序替换。人工规则治理和测得的任务效果准入不能互相充当证据。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个采购例外经专家授权可以保留；一个电子表格程序即使语法正确，也须validation分数提高才被PASE接受，不能拿专家喜欢代替分数。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.15591">原论文</a> · <a href="../../../../agent-research/2608.15591-agent-gym/">实现解读</a> · <a href="#qa-7c780d5921f4153c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:agent-gym" data-paper-title="Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback Agent Google Cloud 2026-08-16 业务规则变化往往比 Agent 代码发布更快。Agent Gym 不重新训练或直接改写 acting agent，而在其 JSON 产物之后加独立纠错规则层：确定性条件检测、按作用域收集、按动作层级合并，再由领域专家审核新规则。规则和原 Agent 可以独立版本化、撤销与审计。 完整系统成本过高，不复现（审查 DONE）。三 seed 诊断使用相同明确构造的规则合同：四条匹配规则中，同 scope 的低优先规则被抑制；仅纯 CPU / L1：ALF 确定性规则、真实 JSON 状态变更、三层动作合并执行与显式人工准入。没有真实发票 Agent、LLM 规则发现或语义审查。完整系统成本过高，不复现（审查 DONE）。这是 Google 官网触发的八月论文补漏，不是 11 月 12 日新首发。Condition 实际支持八个原文描述的常用操作：equals、not_equals、contains、starts_with、greater_than、less_than、in_list、is_null；  Harness与自进化 规则纠错与人工治理 Agent 运行流程与自进化：改的是哪一层 本地ALF的批准字段和callback通过，能证明是真人批准或语义正确吗？ 不能。组件要求精确规则摘要、目标匹配、外部具名批准及collateral警告确认，但不认证真人身份；callback必须返回真实修订JSON而不是success标签，仍不证明修正符合业务语义。八个条件操作也不是论文全部21个操作或完整Agent。 教学例：callback把合法字符串状态改成错误字符串仍可能过类型检查，所以返回semantic_correctness_verified=false；缺批准或改错字段类型则机械拒绝。 2026-11-12">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-e0516cad368c1716">本地ALF的批准字段和callback通过，能证明是真人批准或语义正确吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aagent-gym">Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-12 · Google Cloud</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。组件要求精确规则摘要、目标匹配、外部具名批准及collateral警告确认，但不认证真人身份；callback必须返回真实修订JSON而不是success标签，仍不证明修正符合业务语义。八个条件操作也不是论文全部21个操作或完整Agent。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：callback把合法字符串状态改成错误字符串仍可能过类型检查，所以返回semantic_correctness_verified=false；缺批准或改错字段类型则机械拒绝。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.15591">原论文</a> · <a href="../../../../agent-research/2608.15591-agent-gym/">实现解读</a> · <a href="#qa-e0516cad368c1716">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:openloopevolve" data-paper-title="OpenLoopEvolve: A Verifiable Self-Evolution Framework for Loop Policies in Long-Horizon Complex Tasks" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="OpenLoopEvolve: A Verifiable Self-Evolution Framework for Loop Policies in Long-Horizon Complex Tasks Agent Tsinghua University 2026-08-10 把 observation/planning/memory/action/verification/recovery 等 Loop Policy 资产版本化，以 Champion–Challenger、发布监控和回滚治理进化。 复现级别：核心 Agent 机制 mini-suite。复现级别：核心 Agent 机制 mini-suite。本地实现独立规划、记忆、credit assignment 或拓扑路径，并在确定性任务上记录过程计数；不是原论文完整外部环境。确定性 mini-suite 不访问真实浏览器、AppWorld、SWE-bench 或外部工具服务；它验证机制分支、过程状态和报告契约可执行。完整环境结果需按原文资源另行复现。运行目录是 runs/agent-research/，仓库只保存指标。另见 ../../experiments/。  自进化 策略治理 Agent 运行流程与自进化：改的是哪一层 Loop Policy 为什么不仅是一段 system prompt？ 观察、规划、记忆、行动、验证与恢复等资产共同决定长程行为，版本化需覆盖这些组件及其组合。只改提示可能漏掉真正瓶颈，只有保存可执行版本、比较并监控，才可追踪进化；资产文件齐全也不等于其行为有效。 例如提示要求“失败后重试”，若工具恢复中间件仍不能辨认超时，实际循环未必具备有效恢复能力。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-openloopevolve-709aab65" class="ar-learning-paper-anchor"></span>
@@ -2359,6 +2730,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>例如一篇没有任何数字的稿件不能因分母为零得到 CPR=1，两个审查者意见相反也不能默认多数通过。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、结果与边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2605.26340">原论文</a> · <a href="../../../../agent-research/2605.26340-scientist-one/">实现解读</a> · <a href="#qa-79ed0d4a52806e10">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:co-director" data-paper-title="Co-Director: Agentic Generative Video Storytelling" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Co-Director: Agentic Generative Video Storytelling Agent Google Inc. 2026-04-27 Co-Director 将生成式视频拆为全局创意方向与局部多模态修正。创意方向有策略 3 类、叙事 3 类、美学 4 类；一次完整视频产生三个战略效果分，各自更新所属轴，而最终视频用独立质量分选择。原文写 UCB1 和 LLM 初始化期望值；所链接官方实现的 warm start 具体是优先选择 LLM 推荐的未试 arm。源码没有为推荐凭空增加观察次数。本地按该可核实接口执行，不捏造数值先验、MLLM打分或视频。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有orchestrator、LLM推荐器、storyline/keyframe self-refinement、Gemini/NanoBanana/Veo/TTS/Lyria接口、GenAd-Bench或视频judge。外部MLLM分数需独立验证，不用随机分替代真实视觉评价；本地未接Evolve。  生成式视频 Agent Agent 运行流程与自进化：改的是哪一层 Co-Director为什么是10个分轴参数而不是36个独立组合arm？ 创意策略3、叙事3、美学4分别维护统计，每次视频更新三个选中arm。联合组合虽有36种，但没有把一次视频虚增成36次评价。 教学例：一个视频提供策略分80、叙事分50、美学分70，分别写回3个维度。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-co-director-00a4e5db" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-bb169768cd05e9ad">Co-Director为什么是10个分轴参数而不是36个独立组合arm？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aco-director">Co-Director: Agentic Generative Video Storytelling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Inc.</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>创意策略3、叙事3、美学4分别维护统计，每次视频更新三个选中arm。联合组合虽有36种，但没有把一次视频虚增成36次评价。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个视频提供策略分80、叙事分50、美学分70，分别写回3个维度。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.24842">原论文</a> · <a href="../../../../agent-research/2604.24842-co-director/">实现解读</a> · <a href="#qa-bb169768cd05e9ad">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:co-director" data-paper-title="Co-Director: Agentic Generative Video Storytelling" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Co-Director: Agentic Generative Video Storytelling Agent Google Inc. 2026-04-27 Co-Director 将生成式视频拆为全局创意方向与局部多模态修正。创意方向有策略 3 类、叙事 3 类、美学 4 类；一次完整视频产生三个战略效果分，各自更新所属轴，而最终视频用独立质量分选择。原文写 UCB1 和 LLM 初始化期望值；所链接官方实现的 warm start 具体是优先选择 LLM 推荐的未试 arm。源码没有为推荐凭空增加观察次数。本地按该可核实接口执行，不捏造数值先验、MLLM打分或视频。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有orchestrator、LLM推荐器、storyline/keyframe self-refinement、Gemini/NanoBanana/Veo/TTS/Lyria接口、GenAd-Bench或视频judge。外部MLLM分数需独立验证，不用随机分替代真实视觉评价；本地未接Evolve。  生成式视频 Agent Agent 运行流程与自进化：改的是哪一层 为什么best_video不能直接选三轴战略分之和最高者？ 论文把战略有效性用于bandit更新，视频总体质量用于最终产物选择。高战略分仍可能有扩散伪影或时序问题，两个信号不能偷换。 教学例：视频A战略分低但清晰完整，B战略分高却人物漂移；已有质量judge可能选A。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-7714cf986d42e3b1">为什么best_video不能直接选三轴战略分之和最高者？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aco-director">Co-Director: Agentic Generative Video Storytelling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Inc.</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>论文把战略有效性用于bandit更新，视频总体质量用于最终产物选择。高战略分仍可能有扩散伪影或时序问题，两个信号不能偷换。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：视频A战略分低但清晰完整，B战略分高却人物漂移；已有质量judge可能选A。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.24842">原论文</a> · <a href="../../../../agent-research/2604.24842-co-director/">实现解读</a> · <a href="#qa-7714cf986d42e3b1">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:co-director" data-paper-title="Co-Director: Agentic Generative Video Storytelling" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Co-Director: Agentic Generative Video Storytelling Agent Google Inc. 2026-04-27 Co-Director 将生成式视频拆为全局创意方向与局部多模态修正。创意方向有策略 3 类、叙事 3 类、美学 4 类；一次完整视频产生三个战略效果分，各自更新所属轴，而最终视频用独立质量分选择。原文写 UCB1 和 LLM 初始化期望值；所链接官方实现的 warm start 具体是优先选择 LLM 推荐的未试 arm。源码没有为推荐凭空增加观察次数。本地按该可核实接口执行，不捏造数值先验、MLLM打分或视频。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有orchestrator、LLM推荐器、storyline/keyframe self-refinement、Gemini/NanoBanana/Veo/TTS/Lyria接口、GenAd-Bench或视频judge。外部MLLM分数需独立验证，不用随机分替代真实视觉评价；本地未接Evolve。  生成式视频 Agent Agent 运行流程与自进化：改的是哪一层 分轴reward更新是否证明找到了每个创意因素的因果贡献？ 不证明。MLLM给的是相关观察性评分，维度也可能交互。UCB组织探索利用，不是随机化因果实验或creditassignment识别。 教学例：换灯光同时改变角色表现，judge美学分变化不能独立归因灯光。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-708b8d2bec9834c1">分轴reward更新是否证明找到了每个创意因素的因果贡献？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aco-director">Co-Director: Agentic Generative Video Storytelling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Inc.</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不证明。MLLM给的是相关观察性评分，维度也可能交互。UCB组织探索利用，不是随机化因果实验或creditassignment识别。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：换灯光同时改变角色表现，judge美学分变化不能独立归因灯光。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.24842">原论文</a> · <a href="../../../../agent-research/2604.24842-co-director/">实现解读</a> · <a href="#qa-708b8d2bec9834c1">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:co-director" data-paper-title="Co-Director: Agentic Generative Video Storytelling" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Co-Director: Agentic Generative Video Storytelling Agent Google Inc. 2026-04-27 Co-Director 将生成式视频拆为全局创意方向与局部多模态修正。创意方向有策略 3 类、叙事 3 类、美学 4 类；一次完整视频产生三个战略效果分，各自更新所属轴，而最终视频用独立质量分选择。原文写 UCB1 和 LLM 初始化期望值；所链接官方实现的 warm start 具体是优先选择 LLM 推荐的未试 arm。源码没有为推荐凭空增加观察次数。本地按该可核实接口执行，不捏造数值先验、MLLM打分或视频。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是完整模型或Agent能力复现。component_only／L1机制诊断，不是完整模型或Agent能力复现。完整实验成本过高，不复现（审查 DONE）；仅以下精确定义子组件可执行。没有orchestrator、LLM推荐器、storyline/keyframe self-refinement、Gemini/NanoBanana/Veo/TTS/Lyria接口、GenAd-Bench或视频judge。外部MLLM分数需独立验证，不用随机分替代真实视觉评价；本地未接Evolve。  生成式视频 Agent Agent 运行流程与自进化：改的是哪一层 官方warmstart推荐arm，能否直接给它添十次虚构高分？ 不能。所核源码优先选择推荐的未试arm，没有为推荐伪造观察次数。本地依同接口，真实reward回来才更新count；并列规则是局部约定。 教学例：推荐电影感美学只决定先试它，不能写入十次90分评价。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-681c184699efc24c">官方warmstart推荐arm，能否直接给它添十次虚构高分？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aco-director">Co-Director: Agentic Generative Video Storytelling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Inc.</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。所核源码优先选择推荐的未试arm，没有为推荐伪造观察次数。本地依同接口，真实reward回来才更新count；并列规则是局部约定。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：推荐电影感美学只决定先试它，不能写入十次90分评价。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.24842">原论文</a> · <a href="../../../../agent-research/2604.24842-co-director/">实现解读</a> · <a href="#qa-681c184699efc24c">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:crop" data-paper-title="CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization Agent Google 2026-04-08 自动提示优化通常根据答错原因不断添加指令，可能使推理越来越长。CROP固定目标模型的权重，在离线优化阶段加入第二条文本反馈：任务评估器指出准确性问题；长度评估器在输出token数超过阈值时，建议逐步删掉叙述性冗余、保留必要计算。元优化器接收两条反馈，更新系统提示，最终推理仍只需要目标模型的一次前向生成。它既不是把答案硬截断，也不是向GRPO loss直接加长度reward，更不是对提示文本求数值梯度。“文本梯度”是外部评估模型生成的自然语言批评； 完整实验：成本过高，不复现（审查 DONE），不自动重试。诊断用确定性回调替身，不是LLM能力：检查12-token回复触发长度批评、4-token回复在阈值4时不触发；本地状态：L1 外部回调控制组件，diagnostic only，不是已验证的 LLM 提示优化能力或权重后训练。完整实验：成本过高，不复现（审查 DONE），不自动重试。optimize_prompt接受有限的外部预分批训练样本及五类回调：generate、task_evaluator、brevity_evaluator、optimizer、validate。它实际执行阈值分流、文本拼接、循环更新和最佳提示选择，不实现或默认调用任何LLM/API。  Agent自我进化 提示优化与推理成本 Agent 运行流程与自进化：改的是哪一层 CROP优化的是模型参数、单次答案，还是系统提示？ 它固定目标模型权重，离线迭代系统提示。目标模型先生成，任务批评器和长度批评器分别指出准确性与冗余问题，元优化器据此重写提示；部署时使用选好的提示进行一次生成。它不是对答案硬截断，也不是RL权重后训练。 教学示意：把“逐项解释每一步”逐轮改成“保留合并算式，删掉重复叙述”，属于提示优化；把回复超过50tokens直接截掉，不是CROP。 2026-10-30">
@@ -2571,6 +2995,112 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>例如所有候选 AUC 都相同，不应产生 NaN 或任选一个极高分；统一中值只让时间等其他条件继续起作用。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现与成本判断；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2602.02660v1">原论文</a> · <a href="../../../../agent-research/2602.02660-mars-research/">实现解读</a> · <a href="#qa-6074a7a5727628e7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:alphaevolve" data-paper-title="AlphaEvolve: A coding agent for scientific and algorithmic discovery" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="AlphaEvolve: A coding agent for scientific and algorithmic discovery Agent Google DeepMind 2025-06-16 AlphaEvolve 把有自动评价器的算法改进问题写成程序进化：人类给出任务、初始程序和评价函数，提示采样器提供待改程序、已有高分构造及反馈；Gemini 2.0 Flash/Pro 混合提出代码修改，再由评估节点实际执行。带多维分数的程序进入进化数据库，为下一轮保留高质量和多样化材料。整个控制器、提案节点与评估池异步运行，以整体吞吐而非单次响应速度为目标。§2.1–2.6 成本过高，不复现（审查 DONE）。经典算法发现 / RSI 相关研究补漏；deferred_high_cost。成本过高，不复现（审查 DONE）。仅资料与成本审查，没有本地 AlphaEvolve 控制器、数学发现结果或 Evolve 集成。已阅读固定 v1 的任务、提案、评价、进化与分布式流程，核对原图和官方结果仓库。上游 notebook 是结果及验证材料，不是控制器源码；OpenEvolve 等独立实现也不等于 Google 原版。没有下载模型、克隆大仓库、运行 notebook 或调用付费 LLM。  科学研究 Agent 程序进化与算法发现 Agent 运行流程与自进化：改的是哪一层 AlphaEvolve里人类定义“什么”、系统探索“如何做”，具体固定了什么？ 人类提供任务、初始程序和自动评价函数；模型与进化流程提出程序修改，并据执行反馈寻找更好的候选。系统并未因此获得自行定义所有科学目标或证明评价器充分性的能力，评价合同的缺漏仍可使高分偏离真实需求。 教学例：评价器只测排序速度而不检查结果是否排序，错误输出也可能很快。AlphaEvolve式搜索不能替人补上从未写进评价器的正确性要求。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-alphaevolve-e126e3f8" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-426ca8fb709f456b">AlphaEvolve里人类定义“什么”、系统探索“如何做”，具体固定了什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aalphaevolve">AlphaEvolve: A coding agent for scientific and algorithmic discovery</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>人类提供任务、初始程序和自动评价函数；模型与进化流程提出程序修改，并据执行反馈寻找更好的候选。系统并未因此获得自行定义所有科学目标或证明评价器充分性的能力，评价合同的缺漏仍可使高分偏离真实需求。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：评价器只测排序速度而不检查结果是否排序，错误输出也可能很快。AlphaEvolve式搜索不能替人补上从未写进评价器的正确性要求。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2506.13131v1">原论文</a> · <a href="../../../../agent-research/2506.13131-alphaevolve/">实现解读</a> · <a href="#qa-426ca8fb709f456b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:alphaevolve" data-paper-title="AlphaEvolve: A coding agent for scientific and algorithmic discovery" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="AlphaEvolve: A coding agent for scientific and algorithmic discovery Agent Google DeepMind 2025-06-16 AlphaEvolve 把有自动评价器的算法改进问题写成程序进化：人类给出任务、初始程序和评价函数，提示采样器提供待改程序、已有高分构造及反馈；Gemini 2.0 Flash/Pro 混合提出代码修改，再由评估节点实际执行。带多维分数的程序进入进化数据库，为下一轮保留高质量和多样化材料。整个控制器、提案节点与评估池异步运行，以整体吞吐而非单次响应速度为目标。§2.1–2.6 成本过高，不复现（审查 DONE）。经典算法发现 / RSI 相关研究补漏；deferred_high_cost。成本过高，不复现（审查 DONE）。仅资料与成本审查，没有本地 AlphaEvolve 控制器、数学发现结果或 Evolve 集成。已阅读固定 v1 的任务、提案、评价、进化与分布式流程，核对原图和官方结果仓库。上游 notebook 是结果及验证材料，不是控制器源码；OpenEvolve 等独立实现也不等于 Google 原版。没有下载模型、克隆大仓库、运行 notebook 或调用付费 LLM。  科学研究 Agent 程序进化与算法发现 Agent 运行流程与自进化：改的是哪一层 评价级联和进化档案为什么是两件事，不能都简化成保留最高分？ 级联决定一个候选是否值得继续付出更贵的测试成本；进化数据库决定哪些已测程序/反馈成为后续提案材料，并兼顾多维质量与多样性。只留单一最高分会丢失可用于重组的不同结构，论文也没有公开唯一的完整档案与迁移实现供直接照搬。 教学例：候选A小测试已经算错，可提前停止；候选B正确但不是当前最快，仍可能因不同结构成为后续提示素材。前者是评价准入，后者是材料保留。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-ac7e3798ac5eaf49">评价级联和进化档案为什么是两件事，不能都简化成保留最高分？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aalphaevolve">AlphaEvolve: A coding agent for scientific and algorithmic discovery</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>级联决定一个候选是否值得继续付出更贵的测试成本；进化数据库决定哪些已测程序/反馈成为后续提案材料，并兼顾多维质量与多样性。只留单一最高分会丢失可用于重组的不同结构，论文也没有公开唯一的完整档案与迁移实现供直接照搬。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：候选A小测试已经算错，可提前停止；候选B正确但不是当前最快，仍可能因不同结构成为后续提示素材。前者是评价准入，后者是材料保留。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2506.13131v1">原论文</a> · <a href="../../../../agent-research/2506.13131-alphaevolve/">实现解读</a> · <a href="#qa-ac7e3798ac5eaf49">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:alphaevolve" data-paper-title="AlphaEvolve: A coding agent for scientific and algorithmic discovery" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="AlphaEvolve: A coding agent for scientific and algorithmic discovery Agent Google DeepMind 2025-06-16 AlphaEvolve 把有自动评价器的算法改进问题写成程序进化：人类给出任务、初始程序和评价函数，提示采样器提供待改程序、已有高分构造及反馈；Gemini 2.0 Flash/Pro 混合提出代码修改，再由评估节点实际执行。带多维分数的程序进入进化数据库，为下一轮保留高质量和多样化材料。整个控制器、提案节点与评估池异步运行，以整体吞吐而非单次响应速度为目标。§2.1–2.6 成本过高，不复现（审查 DONE）。经典算法发现 / RSI 相关研究补漏；deferred_high_cost。成本过高，不复现（审查 DONE）。仅资料与成本审查，没有本地 AlphaEvolve 控制器、数学发现结果或 Evolve 集成。已阅读固定 v1 的任务、提案、评价、进化与分布式流程，核对原图和官方结果仓库。上游 notebook 是结果及验证材料，不是控制器源码；OpenEvolve 等独立实现也不等于 Google 原版。没有下载模型、克隆大仓库、运行 notebook 或调用付费 LLM。  科学研究 Agent 程序进化与算法发现 Agent 运行流程与自进化：改的是哪一层 AlphaEvolve的自动评价与ScientistOne的Chain-of-Evidence审计能互相替代吗？ 不能。AlphaEvolve的任务评价给程序质量和搜索方向；ScientistOne还追踪论文claim到代码、评价器、引文与方法实现的一致性。高任务分数不证明论文引用真实或描述忠实，证据链完整也不意味着发现了最优算法。 教学例：一个矩阵乘法构造通过数值/精确验证，不自动证明围绕它写的所有创新声称和引文；反过来，有可追踪来源的文章也可能只复现已有构造。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-353dfd68233b59db">AlphaEvolve的自动评价与ScientistOne的Chain-of-Evidence审计能互相替代吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aalphaevolve">AlphaEvolve: A coding agent for scientific and algorithmic discovery</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。AlphaEvolve的任务评价给程序质量和搜索方向；ScientistOne还追踪论文claim到代码、评价器、引文与方法实现的一致性。高任务分数不证明论文引用真实或描述忠实，证据链完整也不意味着发现了最优算法。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个矩阵乘法构造通过数值/精确验证，不自动证明围绕它写的所有创新声称和引文；反过来，有可追踪来源的文章也可能只复现已有构造。</p>
+<p class="ar-learning-sources">依据：核心公式、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2506.13131v1">原论文</a> · <a href="../../../../agent-research/2506.13131-alphaevolve/">实现解读</a> · <a href="#qa-353dfd68233b59db">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:alphaevolve" data-paper-title="AlphaEvolve: A coding agent for scientific and algorithmic discovery" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="AlphaEvolve: A coding agent for scientific and algorithmic discovery Agent Google DeepMind 2025-06-16 AlphaEvolve 把有自动评价器的算法改进问题写成程序进化：人类给出任务、初始程序和评价函数，提示采样器提供待改程序、已有高分构造及反馈；Gemini 2.0 Flash/Pro 混合提出代码修改，再由评估节点实际执行。带多维分数的程序进入进化数据库，为下一轮保留高质量和多样化材料。整个控制器、提案节点与评估池异步运行，以整体吞吐而非单次响应速度为目标。§2.1–2.6 成本过高，不复现（审查 DONE）。经典算法发现 / RSI 相关研究补漏；deferred_high_cost。成本过高，不复现（审查 DONE）。仅资料与成本审查，没有本地 AlphaEvolve 控制器、数学发现结果或 Evolve 集成。已阅读固定 v1 的任务、提案、评价、进化与分布式流程，核对原图和官方结果仓库。上游 notebook 是结果及验证材料，不是控制器源码；OpenEvolve 等独立实现也不等于 Google 原版。没有下载模型、克隆大仓库、运行 notebook 或调用付费 LLM。  科学研究 Agent 程序进化与算法发现 Agent 运行流程与自进化：改的是哪一层 运行alphaevolve_results里的数学验证notebook，为什么不能算运行了AlphaEvolve？ 它检查已经公布的构造，未执行产生构造的提示采样、Flash/Pro提案、分布式评价和进化数据库。官方README明确不含AlphaEvolve运行代码；本库也没有这些模块，不用社区控制器或玩具档案冒充原系统，完整高成本实验不复现。 教学例：验证现成4×4复数rank-48张量分解，说明那个对象满足检查；不说明系统重新发现了它，更不能把结论改成任意域rank-48。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-49c20bb4ec771751">运行alphaevolve_results里的数学验证notebook，为什么不能算运行了AlphaEvolve？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aalphaevolve">AlphaEvolve: A coding agent for scientific and algorithmic discovery</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它检查已经公布的构造，未执行产生构造的提示采样、Flash/Pro提案、分布式评价和进化数据库。官方README明确不含AlphaEvolve运行代码；本库也没有这些模块，不用社区控制器或玩具档案冒充原系统，完整高成本实验不复现。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：验证现成4×4复数rank-48张量分解，说明那个对象满足检查；不说明系统重新发现了它，更不能把结论改成任意域rank-48。</p>
+<p class="ar-learning-sources">依据：论文离线与线上效果、来源核验、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2506.13131v1">原论文</a> · <a href="../../../../agent-research/2506.13131-alphaevolve/">实现解读</a> · <a href="#qa-49c20bb4ec771751">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:mle-star" data-paper-title="MLE-STAR: Machine Learning Engineering Agent via Search and Targeted Refinement" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="MLE-STAR: Machine Learning Engineering Agent via Search and Targeted Refinement Agent Google Cloud / KAIST 2025-05-27 直接让 LLM 重写整份训练脚本，容易一直使用熟悉的旧模型，又在数据处理、模型选择和调参之间反复跳转。MLE-STAR 先从网络检索任务相关模型与示例代码，实际训练候选并按 validation 指标排序，再逐个尝试合并，只有改进才保留。随后执行消融，找出影响最大且尚未重点细化的代码块；对这个块做多轮计划、改写和训练评估，再把最佳替换写回完整方案。外层循环重新定位下一块，另有独立的集成策略搜索与数据泄漏/数据使用检查。§3.1–3.4 成本过高，不复现（审查 DONE）。未下载 Kaggle 数据、未调用外部 LLM、未执行这些脚本。经典自主机器学习研究补漏；deferred_high_cost。成本过高，不复现（审查 DONE）。本页没有本地 Agent、训练结果、可执行算子或 Evolve 接入。本轮阅读 v1 的方法、算法和资源配置，核对 PDF 首页机构与提交历史，并保留原图。作者仓库的 example_final_solutions、example_intermediate_outputs 是生成产物；目录存在不证明发布了完整编排、搜索或审计控制器。未下载 Kaggle 数据、未调用外部 LLM、未执行这些脚本。  科学研究 Agent 自动机器学习与定向代码细化 Agent 运行流程与自进化：改的是哪一层 MLE-STAR检索到新模型以后，为什么不能直接拿它替换当前方案？ 网络检索只提供模型描述和示例，不提供当前任务上的可靠收益。原文先生成可执行候选、用训练/验证划分实际评估并排序，再逐个合并；合并不改进就丢弃，不能凭搜索排名或论文SOTA标签选模型。 教学例：检索模型A在别的数据上领先，但当前validation为0.88，已有方案为0.91。它不因发布时间更新就自动取代已有模型；test分数不参与这个选择。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-mle-star-1d1044e5" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-a95ed40a35c9a9f5">MLE-STAR检索到新模型以后，为什么不能直接拿它替换当前方案？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amle-star">MLE-STAR: Machine Learning Engineering Agent via Search and Targeted Refinement</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Cloud / KAIST</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>网络检索只提供模型描述和示例，不提供当前任务上的可靠收益。原文先生成可执行候选、用训练/验证划分实际评估并排序，再逐个合并；合并不改进就丢弃，不能凭搜索排名或论文SOTA标签选模型。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：检索模型A在别的数据上领先，但当前validation为0.88，已有方案为0.91。它不因发布时间更新就自动取代已有模型；test分数不参与这个选择。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2506.15692v1">原论文</a> · <a href="../../../../agent-research/2506.15692-mle-star/">实现解读</a> · <a href="#qa-a95ed40a35c9a9f5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:mle-star" data-paper-title="MLE-STAR: Machine Learning Engineering Agent via Search and Targeted Refinement" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="MLE-STAR: Machine Learning Engineering Agent via Search and Targeted Refinement Agent Google Cloud / KAIST 2025-05-27 直接让 LLM 重写整份训练脚本，容易一直使用熟悉的旧模型，又在数据处理、模型选择和调参之间反复跳转。MLE-STAR 先从网络检索任务相关模型与示例代码，实际训练候选并按 validation 指标排序，再逐个尝试合并，只有改进才保留。随后执行消融，找出影响最大且尚未重点细化的代码块；对这个块做多轮计划、改写和训练评估，再把最佳替换写回完整方案。外层循环重新定位下一块，另有独立的集成策略搜索与数据泄漏/数据使用检查。§3.1–3.4 成本过高，不复现（审查 DONE）。未下载 Kaggle 数据、未调用外部 LLM、未执行这些脚本。经典自主机器学习研究补漏；deferred_high_cost。成本过高，不复现（审查 DONE）。本页没有本地 Agent、训练结果、可执行算子或 Evolve 接入。本轮阅读 v1 的方法、算法和资源配置，核对 PDF 首页机构与提交历史，并保留原图。作者仓库的 example_final_solutions、example_intermediate_outputs 是生成产物；目录存在不证明发布了完整编排、搜索或审计控制器。未下载 Kaggle 数据、未调用外部 LLM、未执行这些脚本。  科学研究 Agent 自动机器学习与定向代码细化 Agent 运行流程与自进化：改的是哪一层 MLE-STAR的内层和外层循环分别改变什么，为什么要保留消融反馈？ 外层执行消融定位影响较大、尚未重点细化的代码块；内层针对该块提出多个计划，替换后执行完整验证并保留最好方案。此前消融和已改块记录用于避免一直只改同一部分；不等于每轮任意重写整个训练流水线。 教学例：消融提示缺失值处理最敏感，内层比较均值、分组中位数等可执行改法；结束后外层再判断是否该细化特征编码。示例分支不是本地实验。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-9573e7c1a6a5f5d3">MLE-STAR的内层和外层循环分别改变什么，为什么要保留消融反馈？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amle-star">MLE-STAR: Machine Learning Engineering Agent via Search and Targeted Refinement</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Cloud / KAIST</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>外层执行消融定位影响较大、尚未重点细化的代码块；内层针对该块提出多个计划，替换后执行完整验证并保留最好方案。此前消融和已改块记录用于避免一直只改同一部分；不等于每轮任意重写整个训练流水线。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：消融提示缺失值处理最敏感，内层比较均值、分组中位数等可执行改法；结束后外层再判断是否该细化特征编码。示例分支不是本地实验。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2506.15692v1">原论文</a> · <a href="../../../../agent-research/2506.15692-mle-star/">实现解读</a> · <a href="#qa-9573e7c1a6a5f5d3">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:mle-star" data-paper-title="MLE-STAR: Machine Learning Engineering Agent via Search and Targeted Refinement" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="MLE-STAR: Machine Learning Engineering Agent via Search and Targeted Refinement Agent Google Cloud / KAIST 2025-05-27 直接让 LLM 重写整份训练脚本，容易一直使用熟悉的旧模型，又在数据处理、模型选择和调参之间反复跳转。MLE-STAR 先从网络检索任务相关模型与示例代码，实际训练候选并按 validation 指标排序，再逐个尝试合并，只有改进才保留。随后执行消融，找出影响最大且尚未重点细化的代码块；对这个块做多轮计划、改写和训练评估，再把最佳替换写回完整方案。外层循环重新定位下一块，另有独立的集成策略搜索与数据泄漏/数据使用检查。§3.1–3.4 成本过高，不复现（审查 DONE）。未下载 Kaggle 数据、未调用外部 LLM、未执行这些脚本。经典自主机器学习研究补漏；deferred_high_cost。成本过高，不复现（审查 DONE）。本页没有本地 Agent、训练结果、可执行算子或 Evolve 接入。本轮阅读 v1 的方法、算法和资源配置，核对 PDF 首页机构与提交历史，并保留原图。作者仓库的 example_final_solutions、example_intermediate_outputs 是生成产物；目录存在不证明发布了完整编排、搜索或审计控制器。未下载 Kaggle 数据、未调用外部 LLM、未执行这些脚本。  科学研究 Agent 自动机器学习与定向代码细化 Agent 运行流程与自进化：改的是哪一层 同属自动研究，MLE-STAR与MARS的搜索单位和成本处理有何不同？ MLE-STAR重点用真实消融选择代码块，再在该块上做嵌套细化和集成；MARS重点用预算感知MCTS调度模块化仓库候选，并比较代码/结果差异来复用经验。前者的高影响块不等于后者的成本惩罚奖励，不能据不同竞赛配置直接排名。 教学例：两个改法都提高0.01，但训练分别1分钟和1小时；MARS的成本项可以改变节点排序，MLE-STAR所描述的块内验证改进条件本身没有同一个预算奖励公式。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-184f24759f796d81">同属自动研究，MLE-STAR与MARS的搜索单位和成本处理有何不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amle-star">MLE-STAR: Machine Learning Engineering Agent via Search and Targeted Refinement</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Cloud / KAIST</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>MLE-STAR重点用真实消融选择代码块，再在该块上做嵌套细化和集成；MARS重点用预算感知MCTS调度模块化仓库候选，并比较代码/结果差异来复用经验。前者的高影响块不等于后者的成本惩罚奖励，不能据不同竞赛配置直接排名。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个改法都提高0.01，但训练分别1分钟和1小时；MARS的成本项可以改变节点排序，MLE-STAR所描述的块内验证改进条件本身没有同一个预算奖励公式。</p>
+<p class="ar-learning-sources">依据：核心公式、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2506.15692v1">原论文</a> · <a href="../../../../agent-research/2506.15692-mle-star/">实现解读</a> · <a href="#qa-184f24759f796d81">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:mle-star" data-paper-title="MLE-STAR: Machine Learning Engineering Agent via Search and Targeted Refinement" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="MLE-STAR: Machine Learning Engineering Agent via Search and Targeted Refinement Agent Google Cloud / KAIST 2025-05-27 直接让 LLM 重写整份训练脚本，容易一直使用熟悉的旧模型，又在数据处理、模型选择和调参之间反复跳转。MLE-STAR 先从网络检索任务相关模型与示例代码，实际训练候选并按 validation 指标排序，再逐个尝试合并，只有改进才保留。随后执行消融，找出影响最大且尚未重点细化的代码块；对这个块做多轮计划、改写和训练评估，再把最佳替换写回完整方案。外层循环重新定位下一块，另有独立的集成策略搜索与数据泄漏/数据使用检查。§3.1–3.4 成本过高，不复现（审查 DONE）。未下载 Kaggle 数据、未调用外部 LLM、未执行这些脚本。经典自主机器学习研究补漏；deferred_high_cost。成本过高，不复现（审查 DONE）。本页没有本地 Agent、训练结果、可执行算子或 Evolve 接入。本轮阅读 v1 的方法、算法和资源配置，核对 PDF 首页机构与提交历史，并保留原图。作者仓库的 example_final_solutions、example_intermediate_outputs 是生成产物；目录存在不证明发布了完整编排、搜索或审计控制器。未下载 Kaggle 数据、未调用外部 LLM、未执行这些脚本。  科学研究 Agent 自动机器学习与定向代码细化 Agent 运行流程与自进化：改的是哪一层 作者公开了final solution，为什么本库仍不把它标成已实现的MLE-STAR Agent？ 最终脚本只保存一次研究的产物，不包含检索、消融定位、内外层决策、失败恢复和集成搜索的完整生成过程。运行脚本也不能恢复这些能力。原文完整矩阵需八V100及多小时，因此本次只做资料/成本审查，没有本地模块、能力指标或Evolve算子。 教学例：仓库有一个训练XGBoost的最终脚本，可以审查它做了什么；不能由此声称本地系统会自行搜索、消融并选择这个脚本。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-82ef0316f381bc46">作者公开了final solution，为什么本库仍不把它标成已实现的MLE-STAR Agent？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amle-star">MLE-STAR: Machine Learning Engineering Agent via Search and Targeted Refinement</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Cloud / KAIST</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>最终脚本只保存一次研究的产物，不包含检索、消融定位、内外层决策、失败恢复和集成搜索的完整生成过程。运行脚本也不能恢复这些能力。原文完整矩阵需八V100及多小时，因此本次只做资料/成本审查，没有本地模块、能力指标或Evolve算子。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：仓库有一个训练XGBoost的最终脚本，可以审查它做了什么；不能由此声称本地系统会自行搜索、消融并选择这个脚本。</p>
+<p class="ar-learning-sources">依据：来源核验、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2506.15692v1">原论文</a> · <a href="../../../../agent-research/2506.15692-mle-star/">实现解读</a> · <a href="#qa-82ef0316f381bc46">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:self-refine" data-paper-title="Self-Refine" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Self-Refine Agent Carnegie Mellon University 2023-03-30 一次生成很难同时满足所有约束。Self-Refine 让同一个 LLM 先生成初稿，再针对任务维度给出可执行反馈，最后据此改写；若反馈判断已满足要求则停止，不需要额外训练数据、人工反馈或外部 reward model。 Self-Refine 在不更新参数的情况下循环执行“生成—自反馈—改写”，把推理时计算用于发现并修正当前答案的问题。实现显式初稿、约束反馈、修订和停止链路；mini-suite 用确定性 critic 验证状态迁移，没有调用论文中的通用 LLM，也不能用 1.0 成功率替代七项原始 benchmark 结果。PlanBench mini 固定 120 episodes：joint success 1.0000、平均成本 2.0000，执行 120 次反馈和 120 次 refinement，共记录 240 个 reasoning steps。  自我迭代 Agent 运行流程与自进化：改的是哪一层 Self-Refine 为什么把一次输出看成还能按具体要求改进的草稿？ 开放生成常同时要求正确、完整、清晰或符合风格，一次回答可能只满足其中部分。Self-Refine 让模型先生成，再明确检查不足并修订，不依赖额外参数训练。循环需要有可执行反馈，模型也可能误判或越改越差，因此改了多轮不等于质量已经提高。 教学例：初稿解释正确却缺少例子，反馈指出这一缺口后再补写；若反馈只有“再好一点”，下一轮未必知道该改哪里。 2026-10-27">

@@ -1,0 +1,132 @@
+{
+  "schema_version": 2,
+  "method": "ds-star",
+  "manifest_ref": "agent-research:ds-star",
+  "dataset": {
+    "id": "synthetic:ds-star-control-contracts-v1",
+    "kind": "explicit_control_truth_tables",
+    "revision": "sha256:055b48769b8e98c8b9820df9cb236f5e5856e8d9f40a8e362357c9cf15bd30a0",
+    "public_capability_benchmark": false,
+    "source": "Explicit fixture callback outputs; no real model, research or environment capability"
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "backtrack_removes_error_and_suffix": true,
+        "add_keeps_existing_prefix": true,
+        "first_step_can_be_replaced": true,
+        "last_output_preserved_for_planner": true,
+        "explicit_verifier_stops_before_router": true,
+        "coder_receives_previous_code_reference": true,
+        "budget_end_not_capability_success": true
+      },
+      "metrics": {
+        "control_checks": 7,
+        "verified_rounds": 2,
+        "routing_calls": 1,
+        "budgeted_unverified_executions": 1
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "backtrack_removes_error_and_suffix": true,
+        "add_keeps_existing_prefix": true,
+        "first_step_can_be_replaced": true,
+        "last_output_preserved_for_planner": true,
+        "explicit_verifier_stops_before_router": true,
+        "coder_receives_previous_code_reference": true,
+        "budget_end_not_capability_success": true
+      },
+      "metrics": {
+        "control_checks": 7,
+        "verified_rounds": 2,
+        "routing_calls": 1,
+        "budgeted_unverified_executions": 1
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "backtrack_removes_error_and_suffix": true,
+        "add_keeps_existing_prefix": true,
+        "first_step_can_be_replaced": true,
+        "last_output_preserved_for_planner": true,
+        "explicit_verifier_stops_before_router": true,
+        "coder_receives_previous_code_reference": true,
+        "budget_end_not_capability_success": true
+      },
+      "metrics": {
+        "control_checks": 7,
+        "verified_rounds": 2,
+        "routing_calls": 1,
+        "budgeted_unverified_executions": 1
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "budgeted_unverified_executions": 1.0,
+    "control_checks": 7.0,
+    "routing_calls": 1.0,
+    "verified_rounds": 2.0
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Control arithmetic and typed callback contracts only, not Agent or scientific capability"
+  },
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "full_experiment_status": "not_reproduced_commercial_dependencies",
+  "full_experiment_review_done": true,
+  "provenance": {
+    "commit": "363d639261e1fc2e25c522ec0c5ac2c95edba446",
+    "accelerator": "CPU",
+    "artifact_path": "docs/agent-research/2509.21825-ds-star/metrics/component-cpu-seeds42-44.json",
+    "executed_source_sha256": {
+      "scripts/run_nov13_history_components.py": "6cc254add9f9fc9bbfb246bfbdcc0f401ace4bb1abde2b9e7d0616b488c6a49c",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "docs/research-audits/nov13-history-repair/preflight.json": "c8fe1313974dd10070e4f65c124e0ce67ac15697f20f988c02cf45b1f677c9ea",
+      "src/auto_research/agent_research/scientist_two.py": "228d0204bd939e5a571b9c9ec9d6a45cfb41d7e2314af8afcf4df3017f04fbbf",
+      "src/auto_research/agent_research/ds_star.py": "055b48769b8e98c8b9820df9cb236f5e5856e8d9f40a8e362357c9cf15bd30a0",
+      "src/auto_research/agent_research/era_flat_puct.py": "9edaba9390efc3c9e7358c2e0fe44a8a17b8add5f98015c2027fa867fcdd51d3",
+      "src/auto_research/agent_research/envharness.py": "3ee917770c3d6039acca6dc62f57428ff1832a63dc75b0f3bb5bd43eb993cc0b"
+    },
+    "dataset_fingerprint": "sha256:e9605a15894a2ad2a8f8bfc5f696d79c0717e49fe6ab8a5833a5cf21c0c2960c",
+    "raw_runner_artifact_sha256": "b28b662985332ae72c8ac632b4c2b939ce12838ca398a4ca03c296b21acb0cf6"
+  }
+}

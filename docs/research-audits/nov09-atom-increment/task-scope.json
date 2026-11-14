@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-09-atom-increment",
+  "date": "2026-11-09",
+  "all_sources_exhaustive": false,
+  "review_watermark_advanced": false,
+  "review_watermark": {
+    "before": "2026-10-15",
+    "after": "2026-10-15"
+  },
+  "selected_scope_complete": true,
+  "delivery_status": "bounded_scope_complete",
+  "counts": {
+    "selected_papers": 4,
+    "component_implementations": 4,
+    "cuda_validated_components": 0,
+    "full_capability_reproductions": 0,
+    "submitted_after_baseline_capture": 4
+  },
+  "source_coverage_sha256": "510432f386870dad739671d08499d69eb46505a70180da68ffed408542dbe6d2",
+  "source_artifact": "research-audits/nov09-atom-increment/README.md",
+  "papers": [
+    {
+      "domain": "agent-research",
+      "key": "verified-quantum-wiki",
+      "title": "Discovering formally verified quantum programs with AI",
+      "paper_url": "https://arxiv.org/abs/2611.09822v1",
+      "detail_path": "agent-research/2611.09822-verified-quantum-wiki/README.md",
+      "published": "2026-11-06",
+      "published_at": "2026-11-06T18:08:06Z",
+      "first_author": "Sergey Shirobokov",
+      "first_author_affiliation": "Google DeepMind",
+      "priority": "P0",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2611.09822v1",
+        "source_location": "Sections 1.1–1.2, 2.6, Code availability, Appendices B–D",
+        "available_resource": "local Mac or one NVIDIA A100/A30",
+        "model_scale": "heterogeneous multi-team LLM search and proof construction; model identities and aggregate token/API budget not fully specified",
+        "data_scale": "five quantum problems, shared QHL Lean library, fixed specifications and verified solutions not yet released",
+        "estimated_cost_basis": "multi-application repeated agent/proof search cannot be established as affordable within the bounded single-device budget; no defensible hour/dollar estimate and no costly probe launched",
+        "decision": "完整实验成本过高，不复现（审查 DONE）；只实现零模型调用 CPU admission 边界，公开材料缺失单独记录，不用夹具替代 Lean 验证"
+      },
+      "implementation_status": "component_only",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "review_done": true,
+      "id": "2611.09822",
+      "doc": "agent-research/2611.09822-verified-quantum-wiki/README.md",
+      "catalog_key": "verified-quantum-wiki",
+      "catalog_detail": "agent-research/2611.09822-verified-quantum-wiki/README.md",
+      "track": "agent-research",
+      "intake_class": "official_atom_increment",
+      "submitted_after_baseline_capture": true,
+      "status": "implemented",
+      "resolution": "bounded_l1_component_accepted",
+      "component_implemented": true,
+      "component_accepted": true,
+      "component_evidence": "docs/agent-research/2611.09822-verified-quantum-wiki/metrics/component-cpu-seeds42-44.json",
+      "source_provenance": [
+        {
+          "source_kind": "reviewed-fixed-primary-paper",
+          "source_url": "https://arxiv.org/html/2611.09822v1"
+        },
+        {
+          "source_kind": "official-arxiv-atom",
+          "source_url": "https://export.arxiv.org/api/query?search_query=cat:cs.AI&start=0&max_results=100&sortBy=submittedDate&sortOrder=descending",
+          "retrieved_on": "2026-11-09",
+          "listed_arxiv_id": "2611.09822v1"
+        }
+      ]
+    },
+    {
+      "domain": "foundation-models",
+      "key": "e-means",
+      "title": "e-means: outperforming k-means (in one-tenth the epochs)",
+      "paper_url": "https://arxiv.org/abs/2611.09501v1",
+      "detail_path": "foundation-models/2611.09501-e-means/README.md",
+      "published": "2026-11-06",
+      "published_at": "2026-11-06T14:22:43Z",
+      "first_author": "Swann Bessa",
+      "first_author_affiliation": "FAIR at Meta",
+      "priority": "P0",
+      "cost_assessment": {
+        "source": "固定 v1 §3–4，Table 3–5，Appendix H/I/M；https://arxiv.org/html/2611.09501v1",
+        "available_resource": "本地 Mac 或单张 A100/A30",
+        "model_scale": "不需要语言模型 checkpoint；原文包含精确/IVF 分配、CuTe 降精度算子和分布式聚类。",
+        "data_scale": "DINO10B 最高一百亿个 1024 维向量，约 1678 万聚类中心；完整向量输入即便按每分量 1 字节也约 10.24 TB。",
+        "paper_configuration": "CPU 64 物理核心，GPU H100 80GB，1B 部分结果用 8 GPU；完整 DINO10B IVF 22.8 GPU-hours（论文 Table 3）。",
+        "estimated_cost_basis": "多数据集、75k 缩放律拟合运行及 H100 吞吐矩阵不属于短时单卡验证；本地仅 256×12 训练与 64×12 独立留出样本，不下载数据。",
+        "decision": "成本过高，不复现（审查 DONE）；仅保留 Algorithm 1 稠密 CPU 核心。"
+      },
+      "implementation_status": "component_only",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "review_done": true,
+      "id": "2611.09501",
+      "doc": "foundation-models/2611.09501-e-means/README.md",
+      "catalog_key": "e-means",
+      "catalog_detail": "foundation-models/2611.09501-e-means/README.md",
+      "track": "foundation-model",
+      "intake_class": "official_atom_increment",
+      "submitted_after_baseline_capture": true,
+      "status": "implemented",
+      "resolution": "bounded_l1_component_accepted",
+      "component_implemented": true,
+      "component_accepted": true,
+      "component_evidence": "docs/foundation-models/2611.09501-e-means/metrics/component-cpu-seeds42-44.json",
+      "source_provenance": [
+        {
+          "source_kind": "reviewed-fixed-primary-paper",
+          "source_url": "https://arxiv.org/html/2611.09501v1"
+        },
+        {
+          "source_kind": "official-arxiv-atom",
+          "source_url": "https://export.arxiv.org/api/query?search_query=cat:cs.AI&start=0&max_results=100&sortBy=submittedDate&sortOrder=descending",
+          "retrieved_on": "2026-11-09",
+          "listed_arxiv_id": "2611.09501v1"
+        }
+      ]
+    },
+    {
+      "domain": "agent-research",
+      "key": "engram-consolidation",
+      "title": "ENGRAM: From Agent Experience to Weights through Verified Consolidation",
+      "paper_url": "https://arxiv.org/abs/2611.09472",
+      "detail_path": "agent-research/2611.09472-engram-consolidation/README.md",
+      "published": "2026-11-06",
+      "published_at": "2026-11-06T13:51:02Z",
+      "first_author": "Ruiyi Yang",
+      "first_author_affiliation": "University of New South Wales",
+      "priority": "P1",
+      "cost_assessment": {
+        "source": "固定 v1 §5、附录 C/F，Table 7–8。",
+        "available_resource": "单张 NVIDIA A100 或 A30，或本地 Mac",
+        "model_scale": "Qwen3-8B 和 Llama 3.1-8B-Instruct，两种骨干的 4-bit LoRA。",
+        "data_scale": "六套交互与问答评测，另有多轮技能采集、配对探针和多对照。",
+        "paper_configuration": "ALFWorld 每种骨干 5004 次优化器更新，WebShop 2149 次，最多 16384 训练 token。",
+        "estimated_cost_basis": "依据论文公开训练规模、环境交互与对照矩阵；未估算 GPU 实跑时间。",
+        "decision": "成本过高，不复现（审查 DONE）；仅 CPU 双关口、配对验证和记录归档，不下载权重或执行模型训练。"
+      },
+      "implementation_status": "component_only",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "review_done": true,
+      "id": "2611.09472",
+      "doc": "agent-research/2611.09472-engram-consolidation/README.md",
+      "catalog_key": "engram-consolidation",
+      "catalog_detail": "agent-research/2611.09472-engram-consolidation/README.md",
+      "track": "agent-research",
+      "intake_class": "official_atom_increment",
+      "submitted_after_baseline_capture": true,
+      "status": "implemented",
+      "resolution": "bounded_l1_component_accepted",
+      "component_implemented": true,
+      "component_accepted": true,
+      "component_evidence": "docs/agent-research/2611.09472-engram-consolidation/metrics/component-cpu-seeds42-44.json",
+      "source_provenance": [
+        {
+          "source_kind": "reviewed-fixed-primary-paper",
+          "source_url": "https://arxiv.org/html/2611.09472v1"
+        },
+        {
+          "source_kind": "official-arxiv-atom",
+          "source_url": "https://export.arxiv.org/api/query?search_query=cat:cs.AI&start=0&max_results=100&sortBy=submittedDate&sortOrder=descending",
+          "retrieved_on": "2026-11-09",
+          "listed_arxiv_id": "2611.09472v1"
+        }
+      ]
+    },
+    {
+      "domain": "post-training",
+      "key": "rcea",
+      "title": "Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards",
+      "paper_url": "https://arxiv.org/abs/2611.09448",
+      "detail_path": "post-training/2611.09448-rcea/README.md",
+      "published": "2026-11-06",
+      "published_at": "2026-11-06T13:22:42Z",
+      "first_author": "Song Yu",
+      "first_author_affiliation": "Southwest University",
+      "priority": "P1",
+      "cost_assessment": {
+        "source": "固定 v1 §4.1、技术附录 A.2 与 A.3",
+        "available_resource": "单张 NVIDIA A100/A30 或本地 Mac",
+        "model_scale": "Qwen2.5-3B 与 Qwen2.5-7B 的 LoRA RLVR",
+        "data_scale": "8,000 条训练题，每题 8 次在线采样；200 题固定探针每题每检查点 64 次采样，另有公开数学评测",
+        "paper_configuration": "两种尺度各六种优化目标，固定探针覆盖起点与四个训练里程碑；另做过程有效性和语义模式审查",
+        "estimated_cost_basis": "按原文模型、候选生成和完整对照矩阵评估，非实测 GPU 时间",
+        "decision": "成本过高，不复现（审查 DONE）；只运行有限支持上的 CPU 数值机制检查。"
+      },
+      "implementation_status": "component_only",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "review_done": true,
+      "id": "2611.09448",
+      "doc": "post-training/2611.09448-rcea/README.md",
+      "catalog_key": "rcea",
+      "catalog_detail": "post-training/2611.09448-rcea/README.md",
+      "track": "post-training",
+      "intake_class": "official_atom_increment",
+      "submitted_after_baseline_capture": true,
+      "status": "implemented",
+      "resolution": "bounded_l1_component_accepted",
+      "component_implemented": true,
+      "component_accepted": true,
+      "component_evidence": "docs/post-training/2611.09448-rcea/metrics/component-cpu-seeds42-44.json",
+      "source_provenance": [
+        {
+          "source_kind": "reviewed-fixed-primary-paper",
+          "source_url": "https://arxiv.org/html/2611.09448v1"
+        },
+        {
+          "source_kind": "official-arxiv-atom",
+          "source_url": "https://export.arxiv.org/api/query?search_query=cat:cs.AI&start=0&max_results=100&sortBy=submittedDate&sortOrder=descending",
+          "retrieved_on": "2026-11-09",
+          "listed_arxiv_id": "2611.09448v1"
+        }
+      ]
+    }
+  ]
+}

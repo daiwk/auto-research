@@ -28,6 +28,17 @@
 - [Math-Shepherd](../2312.08935-math-shepherd/README.md)（`math-shepherd`）：从中间步骤采样多条 continuation，以最终答案正确率构造自动 step label，再训练 verifier 和重排器。
 - [Let's Verify Step by Step](../2305.20050-process-supervision/README.md)（`process-supervision`）：逐步奖励模型判断每个推理步骤，并优先标注不确定步骤；本地与 outcome-only 奖励使用同一候选和预算。
 
+### 元认知反馈与不确定性
+
+- [Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards](../2611.14015-mcpo/README.md)（`mcpo`）：GRPO 常把同一响应的序列优势分给所有 token，无法区分局部决策的不确定度。MCPO 复用 rollout/old policy 温度后的 top-1、top-2 概率差，不额外调用教师或 verifier，改变各 token 的信用分配。
+- [MaxIM: Maximally Informative Incremental Summarization via Reinforcement Learning](../2611.12825-maxim/README.md)（`maxim`）：长程交互不能无限保留历史，增量摘要却会不可逆地丢失信息。MaxIM 把摘要更新器与冻结的行动模型分开：摘要器只根据上一摘要、上一动作和当前观测更新有限记忆，不得直接读取任务目标。
+- [Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling](../2611.04792-dars/README.md)（`dars-density`）：期望奖励最大化容易持续强化已密集采样的结果。DARS 在同一条件输入的 rollout 组内估计结果表示密度，以 $r/\rho$ 替换原奖励，再执行常规 GRPO 组优势标准化；不引入 density 网络或替换 policy objective。
+- [Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs](../2606.32032-rlmf/README.md)（`rlmf`）：回答正确性、表达的置信度，以及模型能否评价自身置信表达，是三个不同量。本文先使数值置信接近由采样一致性估计的内在置信，再借元认知自评质量调节 RL 排序；另用训练题自评的高低两端选样，最后由外部改写器把数值映射成自然语言不确定性。
+
+### 隐私保护合成与数据选择
+
+- [MAPLE: Metadata Augmented Private Language Evolution](../2603.19258-maple-icl/README.md)（`maple-icl`）：Private Evolution 的初始合成文本若偏离目标领域，后续多轮演化难以纠正。MAPLE 先从私有文本抽取固定 schema 的分类 metadata，用 AIM 生成 DP 表格 metadata，再结合非私有已捐赠的 metadata–text 示例初始化文本，最后继续 AugPE。
+
 ### 奖励构造与排序信号
 
 - [When Pairwise Preferences Cycle: A Reliability-Anchored Preference Walk for Video GRPO](../2610.20089-rap-walk/README.md)（`rap-walk`）：RAP-Walk 不把成对视频偏好压成相互独立的胜率，而保留对手身份、循环关系和边清晰度。它在从输者到赢家的可靠随机游走中计算平稳偏好信用，经最低熵校准后修正原始胜率优势，最后仍交给同一 GRPO 更新。
@@ -41,6 +52,10 @@
 
 ### on-policy / context 蒸馏
 
+- [Bootstrapped On-Policy Distillation](../2611.13680-bopd/README.md)（`bopd`）：BOPD 先用带参考解答的冻结初始模型监督学生，构造中间模型 M1；再冻结 M1，将它当作**不带参考**的教师，蒸馏一个从原始 M0 精确重置的新学生。两阶段都在各自学生的轨迹前缀上评分，不能把 Stage I 的旧轨迹直接当作 Stage II 的新 on-policy 数据。
+- [DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation](../2611.13249-drd-mopd/README.md)（`drd-mopd`）：多个教师可能提供冲突的领域更新，直接优化一个学生无法区分冲突来自哪一份参数方向。DRD-MOPD 保留冻结基座与多个全参数增量，以域标签选择**哪些增量接受梯度**，而不是在推理时选择哪个教师或专家。
+- [Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation](../2611.13135-lcs-reference-opd/README.md)（`lcs-reference-opd`）：同一任务可有多条成功路线，但并非任意成功 reference 都适合纠正当前失败学生。论文仅用执行动作序列作对齐：相比最长公共前缀 LCP，LCS 在可恢复绕行之后仍保留有序一致，选择更兼容的同任务成功轨迹。
+- [CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation](../2611.07959-cord/README.md)（`cord-rollout`）：普通 OPD 的教师只给学生已经访问的前缀评分，难以覆盖学生很少走到的教师路径。CoRD 不改每状态的反向 KL 监督，改变的是产生前缀的采样分布。
 - [Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation?](../2611.04958-shuffled-opsd/README.md)（`shuffled-opsd`）：OPSD 中学生根据问题采样，冻结初始教师在同一生成前缀上评分，但额外看到 worked example。本文区分“双方共享的问题”和“只有教师看到的示例”：用另一个问题的完整示例作教师上下文，打乱共享问题的 whitespace 词块，却保留教师示例的顺序。
 - [P²-MOPD: Accelerating Multi-Teacher On-Policy Distillation via Parameter Priors](../2611.03953-p2-mopd/README.md)（`p2-mopd`）：多教师 OPD 用各领域专家监督学生自己的轨迹，但一个已合并的学生可能长期学不到某个专家的方向。P²-MOPD 不只改合并初始点，而是把每个 projection 写成“自由学生权重 + 可学习系数乘固定专家任务向量”。
 - [SpecOPD: Branch-Parallel On-Policy Distillation for Speculative Decoding](../2611.02846-specopd/README.md)（`specopd`）：普通 OPD 要逐轮 draft-and-verify 才能继续收集上下文。SpecOPD 在已有 reference 的多个 anchor 上重新采当前 draft 的私有续写，合并成共享 trunk 的 proposal tree，再并行给教师打分。
@@ -118,6 +133,7 @@
 
 ### 教师锚点与 SFT-RL 混合
 
+- [RAGCompass: Generalizable Retriever Routing via Reranking](../2611.05596-ragcompass/README.md)（`ragcompass`）：固定候选池的 query-only 分类器可能不能给从未见过的检索器打分。RAGCompass 把各检索器返回的整组证据作为候选，复用同一个 Qwen3-Reranker-0.6B 独立读每组 passage，不依赖检索器身份或各自不可比的置信度。
 - [CSD: Common-Support Distillation for Cross-Tokenizer Knowledge Transfer](../2610.28895-csd/README.md)（`csd`）：师生词表大小、token ID 与分词边界不一致，不能直接逐坐标 KL。CSD 先按原文字符区间对齐 chunk，再通过 **解码文本等价** 构造共同事件。
 - [EliteReplay: Preserving Diverse Solutions in RL Post-Training via Quality-Diversity Search](../2610.22290-elite-replay/README.md)（`elite-replay`）：单纯提高正确率的 RL 可能压缩正确解法的覆盖范围。EliteReplay 先用冻结基模和 MAP-Elites 收集不同正确策略，训练时持续回放固定档案。
 - [Training-Free On-Policy Distillation](../2610.22236-tf-opd/README.md)（`tf-opd`）：共同初始化的专家模型，其线性层融合可以写成匹配各教师输出的最小二乘。关键不是任意协方差，而是每个教师在**自己生成的、经过终止和循环筛选的答案**上实际遇到的输入二阶矩；统计按 token 数归一，不能让长答案自然压倒其他领域。
@@ -134,7 +150,16 @@
 - [MOPD](../2606.30406-mopd/README.md)（`mopd`）：多能力联合 RL 会产生域间耦合，参数合并和离策略微调又容易丢能力。MOPD 先独立训练各域 RL teacher，再只在 student 自己的 rollout 上组合教师密集信号，使各域可并行演进。
 - [CHORD](../2508.11408-chord/README.md)（`chord`）：将 SFT 与 RL 串成两个独立阶段会造成 expert data 的过拟合或过早遗忘。CHORD 把专家 SFT 作为 on-policy RL 中动态退火的辅助目标，并以 token 级不确定性权重平滑从模仿过渡到探索。
 
+### 交互反馈与元学习
+
+- [Learning to Learn from Language Feedback with Social Meta-Learning](../2602.16488-social-meta-learning/README.md)（`social-meta-learning`）：SML 把静态题目改成 teacher–student 多轮互动。Teacher 持有额外知识或验证结果，student 只看公开对话，逐步提问或修正答案。
+
 ## 其他
+
+### 策略优化与稳定性
+
+- [A Theory of Policy Optimization in Post-Training: Coverage Collapse and Reference Resets](../2611.14467-apmd-reference-reset/README.md)（`apmd-reference-reset`）：奖励上升不保证最优响应仍容易采到。本文给出固定 reference 下 REINFORCE 发生 coverage collapse 的构造，并用 APMD 将 KL reference 周期性重置到最新策略：每个内层子问题有较强局部约束，外层重置则允许持续前进。
+- [Off-policy Learning with Excursion Policies](../2611.13275-excursion-td/README.md)（`excursion-td`）：离策略多步 TD 面临收敛速度、偏差与方差的权衡。重要性比连乘可以恢复目标分布，却容易放大方差；逐动作混合目标/行为策略又改变了整个轨迹的含义。
 
 ### LLM评估与校准
 
@@ -150,6 +175,7 @@
 
 ### RLVR
 
+- [Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards](../2611.09448-rcea/README.md)（`rcea`）：训练日志里的平均 token 熵变小，既可能是模型更少走错误路径，也可能是它不再尝试原来会做的其它正确解法。RCEA 将两类信号分开：轨迹层按验证器成败、过程有效性和有效解法模式拆分；前缀层用全词表的 log 概率与 logit 增量的协方差解释局部熵方向。
 - [MGE-PO: Entropy-Aware Credit Assignment for Mathematical Reasoning](../2610.23245-mge-po/README.md)（`mge-po`）：GRPO会给同题、同正确性的回答相同 advantage，忽略生成的不确定性。MGE-PO 用生成时缓存的 token 熵区分回答，在成功／失败与高熵／低熵四象限上调整信用；再用在线题目熵统计安排课程，并以熵加权参考KL约束优化。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - [Preserving Reasoning Diversity in Reinforcement Learning with Verifiable Rewards via Adaptive Replay](../2610.24236-tar-adaptive-replay/README.md)（`tar-adaptive-replay`）：有限on-policy采样可能逐步压低同样正确但较少出现的推理模式；仅在当前rollout上重加权，难以恢复已经采不到的模式。TAR先从基础策略大量生成，过滤正确回答，再保留分散的原型轨迹。
 - [GRPODropout: Less is More for Online Reinforcement Learning Rollouts](../2610.11854-grpo-dropout/README.md)（`grpo-dropout`）：从同一 prompt 的 GRPO 响应组中筛除部分高概率、正优势响应，并用旧策略概率重新中心化保留响应的优势。不是随机 dropout，也不改变生成预算。
@@ -187,10 +213,6 @@
 
 - [Large Reasoning Models Struggle to Transfer Parametric Knowledge Across Scripts](../2603.17070-cross-script-knowledge-transfer/README.md)（`cross-script-knowledge-transfer`）：Sec.4–6与Appendix A/H：观察性回归、训练专用entity提示干预和真实LoRA是定义性路径。不能把正则音译、手工插提示或小分类器当成其LLM知识检索机制。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
-### 奖励与信用分配
-
-- [Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling](../2611.04792-dars/README.md)（`dars-density`）：期望奖励最大化容易持续强化已密集采样的结果。DARS 在同一条件输入的 rollout 组内估计结果表示密度，以 $r/\rho$ 替换原奖励，再执行常规 GRPO 组优势标准化；不引入 density 网络或替换 policy objective。
-
 ### RLHF / RLVR
 
 - [Each Reward to Its Relevant Tokens: Reward-Specific Token-Level Credit Assignment for Multi-Reward RL](../2610.21439-mrtpo/README.md)（`mrtpo`）：GDPO 虽然分别归一化多种奖励，但仍把每种奖励均摊到整条响应。SQL 可执行性、格式、执行结果可能只分别依赖少数 token。
@@ -202,6 +224,10 @@
 
 - [Co-Evolving LLM Evaluators and Policies via DynamicRubric](../../reproductions/2607.20083-dynamic-rubric/README.md)（`dynamic-rubric`）：固定 judge 或固定 rubric 会在策略模型进步后失去区分力。DynamicRubric 根据当前 prompt 和一组候选回答动态生成评估维度与权重，用 discriminability 目标寻找能区分当代 hard negatives 的标准，用 anchor 目标限制评估器漂移，再让 evaluator 和 policy 多轮协同进化。
 - [Turning Off-Policy Tokens On-Policy: A Plug-in Approach for Improving LLM Alignment](../../reproductions/2607.04728-sis/README.md)（`sis`）：异步 rollout、样本复用和 stale policy 会让 LLM 强化学习变成 off-policy 更新。标准 importance sampling（IS）在长序列上连乘后方差很大，直接 clipping 又会丢失有效梯度。
+
+### Reward modeling
+
+- [EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL](../2611.06518-emoreward/README.md)（`emoreward`）：固定融合权重假设每段视频的情绪证据同样可信。例如，没有可用人脸时，给面部动作通道的默认中性分数不是观测证据。
 
 ### 外部 rollout
 
@@ -342,6 +368,40 @@
 
 - [Video-OPSD: Exploiting Privileged Visual Evidence for On-Policy Self-Distillation in Video Large Language Models](../2608.27065-video-opsd/README.md)（`video-opsd`）：学生读取完整视频，训练期自教师只读取人工标注的证据帧；再按 token 对证据的依赖度加权蒸馏。论文称效果接近 GRPO，而训练时间减少约 60%。
 
+## 偏好建模与监督
+
+### 训练使用审计与隐私
+
+- [Behavioral Canaries: Auditing Private Retrieved Context Usage in RL Fine-Tuning](../2604.22191-behavioral-canaries/README.md)（`behavioral-canaries`）：RL 更新可能留下风格偏好而不是逐字记忆，因此只测训练句复现不一定能判断检索文档是否被用于后训练。本文把文档 trigger 与弱风格 canary 的偏好反馈相关联，再以未参与训练的成对文档测量目标风格概率是否放大。
+
+### 成对、单样本与排序偏好
+
+- [CleanRM: Reward Modeling from Noisy Feedback with a Few Clean Feedback for RLHF](../2610.21138-clean-rm/README.md)（`clean-rm`）：不同偏好样本的标注噪声不一定相同。CleanRM 用少量干净反馈校准两个方向的样本级噪声率；以语义与恢复偏好的**联合分布**作最优传输，而不是只匹配偏好直方图。
+- [Mind the Gap: Structure-Aware Consistency in Preference Learning](../2604.27733-sa-dpo/README.md)（`sa-dpo`）：对语义几乎相同的回答强求固定偏好间隔，会制造难以满足的约束。SA-DPO 将间隔改为回答距离的函数，保留相对参考策略的隐式奖励差；同时研究 margin、模型容量与 surrogate 尾部的一致性关系，而非单纯调整 DPO 的学习率。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- [SimPO](../2405.14734-simpo/README.md)（`simpo`）：DPO 训练需要常驻 reference model，而且 sequence 概率天然偏向短响应。SimPO 用平均 token log-probability 作为隐式 reward，去掉 reference model，并在 Bradley–Terry 目标中加入固定 margin。
+- [ORPO](../2403.07691-orpo/README.md)（`orpo`）：常见对齐流程先 SFT、再用 reference-relative 偏好目标训练。ORPO 把 chosen response 的 NLL 与 chosen/rejected 的 odds-ratio penalty 合成一个目标；概率接近 0 或 1 时，odds 会提供比普通概率差更敏感的对比信号。
+- [KTO](../2402.01306-kto/README.md)（`kto`）：DPO 需要成对偏好，而生产反馈常只有点赞、点踩或是否接受。KTO 将单样本反馈映射为 desirable / undesirable utility，并用 policy 与 reference 的 KL 期望作为“参照点”；两类样本可独立采集，也允许类别不平衡。
+- [IPO](../2310.12036-ipo/README.md)（`ipo`）：论文指出 RLHF 与 DPO 都依赖将成对偏好转成标量 reward 的假设，并提出直接在偏好概率上优化的 $\Psi$PO 框架。取恒等映射得到 IPO：拟合一个有限的目标间隔，而不是像 logistic loss 一样在训练集可分时持续放大 chosen/rejected 间隔。
+- [DPO](../2305.18290-dpo/README.md)（`dpo`）：传统 RLHF 先拟合 reward model，再用 PPO 优化策略，链路复杂且不稳定。DPO 从 KL-regularized RLHF 的最优策略形式出发，把隐式 reward 写成 policy 与 reference log-ratio，最终只需在偏好对上做二分类。
+- [SLiC-HF](../2305.10425-slic-hf/README.md)（`slic-hf`）：PPO-RLHF 需要策略、reward 和 value 等多套模型。SLiC-HF 直接要求偏好回答的序列 log-likelihood 高于拒绝回答，并用监督目标限制策略漂移；也能消费为其他模型采集的 off-policy 偏好数据。
+- [RRHF](../2304.05302-rrhf/README.md)（`rrhf`）：PPO-RLHF 需要 policy、old policy、reward 和 value 等多模型协同，训练和调参复杂。RRHF 从多个模型或人工答案中采样响应，以 reward 给出完整排序，让模型自身的平均 log-likelihood 顺序与 reward 顺序一致，并对最高质量响应继续做 SFT。
+
+### 安全对齐与可控监督
+
+- [SteerLM](../2310.05344-steerlm/README.md)（`steerlm`）：传统 RLHF 把多维偏好压成一个 reward，用户推理时也不能改变目标。SteerLM 先用 attribute prediction model 为回答标注 helpfulness、quality 等属性，再把属性和值拼入条件做普通 SFT，推理时由用户指定目标属性。
+- [RLAIF](../2309.00267-rlaif/README.md)（`rlaif`）：AI labeler 对候选做顺序交换评判，去除位置偏差后训练 preference policy；本地落实双顺序标签与成对更新。
+- [Constitutional AI](../2212.08073-constitutional-ai/README.md)（`constitutional-ai`）：人工逐条标注有害回答成本高，而且价值规范不透明。论文把人类监督压缩成一组自然语言原则：第一阶段让模型依据原则批评并重写自己的回答，再对修订回答做 SFT；第二阶段让 AI 比较回答、训练 preference model，并以该奖励执行 RLAIF。
+
+### 模型融合与推理效率
+
+- [GRIP: Granular Reward-Guided Parameter Interpolation for Efficient Reasoning](../2608.25583-grip/README.md)（`grip`）：在 thinking 与 instruct 权重间，不使用单一全局系数，而由细粒度 reward 学习分层/参数插值，使模型保留推理准确率同时缩短输出。
+
+### 选优微调与自博弈
+
+- [Self-Rewarding LM](../2401.10020-self-rewarding/README.md)（`self-rewarding`）：每轮由当前模型生成候选并以 LLM-as-a-Judge 打分，形成新的偏好对继续 DPO，构成自举闭环。
+- [SPIN](../2401.01335-spin/README.md)（`spin`）：额外偏好标注昂贵。SPIN 从 SFT 模型出发，用上一轮模型为训练 prompt 生成回答，把人类示范视作正例、自生成回答视作负例，通过自博弈判别目标得到下一轮模型，循环提升而不引入新的人工偏好数据。
+- [RAFT](../2304.06767-raft/README.md)（`raft`）：PPO 的在线更新不稳定，而在固定 SFT 数据上训练又无法持续利用变好的策略。RAFT 每轮从当前模型生成多个响应，用 reward model 排序并丢弃低质量样本，只对选中的高质量响应执行普通 maximum-likelihood fine-tuning，然后用新策略进入下一轮。
+
 ## 在线强化学习与稳定性
 
 ### 信任域、clip 与梯度稳定
@@ -407,36 +467,6 @@
 - [GPRL](../2605.18721-gprl/README.md)（`gprl`）：单一标量 reward 容易掩盖 helpfulness、格式、推理和简洁度之间的冲突。GPRL 先在每个偏好维度内部计算 group-relative advantage，再根据上下文聚合；漂移控制器检测某个维度是否主导训练并调整权重。
 - [TTRL](../2504.16084-ttrl/README.md)（`ttrl`）：同一测试题多次采样，以多数一致答案作为伪标签并即时更新模型，不访问 gold label。
 - [REINFORCE++](../2501.03262-reinforce-plus/README.md)（`reinforce-plus`）：GRPO/RLOO 的 prompt-local 标准差会让不同难度组被随机方差重新加权。REINFORCE++ 保留组内中心化，但使用跨 batch 的全局优势尺度归一化，从而在不引入 critic 的前提下降低方差与局部偏置。
-
-## 偏好建模与监督
-
-### 成对、单样本与排序偏好
-
-- [CleanRM: Reward Modeling from Noisy Feedback with a Few Clean Feedback for RLHF](../2610.21138-clean-rm/README.md)（`clean-rm`）：不同偏好样本的标注噪声不一定相同。CleanRM 用少量干净反馈校准两个方向的样本级噪声率；以语义与恢复偏好的**联合分布**作最优传输，而不是只匹配偏好直方图。
-- [Mind the Gap: Structure-Aware Consistency in Preference Learning](../2604.27733-sa-dpo/README.md)（`sa-dpo`）：对语义几乎相同的回答强求固定偏好间隔，会制造难以满足的约束。SA-DPO 将间隔改为回答距离的函数，保留相对参考策略的隐式奖励差；同时研究 margin、模型容量与 surrogate 尾部的一致性关系，而非单纯调整 DPO 的学习率。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
-- [SimPO](../2405.14734-simpo/README.md)（`simpo`）：DPO 训练需要常驻 reference model，而且 sequence 概率天然偏向短响应。SimPO 用平均 token log-probability 作为隐式 reward，去掉 reference model，并在 Bradley–Terry 目标中加入固定 margin。
-- [ORPO](../2403.07691-orpo/README.md)（`orpo`）：常见对齐流程先 SFT、再用 reference-relative 偏好目标训练。ORPO 把 chosen response 的 NLL 与 chosen/rejected 的 odds-ratio penalty 合成一个目标；概率接近 0 或 1 时，odds 会提供比普通概率差更敏感的对比信号。
-- [KTO](../2402.01306-kto/README.md)（`kto`）：DPO 需要成对偏好，而生产反馈常只有点赞、点踩或是否接受。KTO 将单样本反馈映射为 desirable / undesirable utility，并用 policy 与 reference 的 KL 期望作为“参照点”；两类样本可独立采集，也允许类别不平衡。
-- [IPO](../2310.12036-ipo/README.md)（`ipo`）：论文指出 RLHF 与 DPO 都依赖将成对偏好转成标量 reward 的假设，并提出直接在偏好概率上优化的 $\Psi$PO 框架。取恒等映射得到 IPO：拟合一个有限的目标间隔，而不是像 logistic loss 一样在训练集可分时持续放大 chosen/rejected 间隔。
-- [DPO](../2305.18290-dpo/README.md)（`dpo`）：传统 RLHF 先拟合 reward model，再用 PPO 优化策略，链路复杂且不稳定。DPO 从 KL-regularized RLHF 的最优策略形式出发，把隐式 reward 写成 policy 与 reference log-ratio，最终只需在偏好对上做二分类。
-- [SLiC-HF](../2305.10425-slic-hf/README.md)（`slic-hf`）：PPO-RLHF 需要策略、reward 和 value 等多套模型。SLiC-HF 直接要求偏好回答的序列 log-likelihood 高于拒绝回答，并用监督目标限制策略漂移；也能消费为其他模型采集的 off-policy 偏好数据。
-- [RRHF](../2304.05302-rrhf/README.md)（`rrhf`）：PPO-RLHF 需要 policy、old policy、reward 和 value 等多模型协同，训练和调参复杂。RRHF 从多个模型或人工答案中采样响应，以 reward 给出完整排序，让模型自身的平均 log-likelihood 顺序与 reward 顺序一致，并对最高质量响应继续做 SFT。
-
-### 安全对齐与可控监督
-
-- [SteerLM](../2310.05344-steerlm/README.md)（`steerlm`）：传统 RLHF 把多维偏好压成一个 reward，用户推理时也不能改变目标。SteerLM 先用 attribute prediction model 为回答标注 helpfulness、quality 等属性，再把属性和值拼入条件做普通 SFT，推理时由用户指定目标属性。
-- [RLAIF](../2309.00267-rlaif/README.md)（`rlaif`）：AI labeler 对候选做顺序交换评判，去除位置偏差后训练 preference policy；本地落实双顺序标签与成对更新。
-- [Constitutional AI](../2212.08073-constitutional-ai/README.md)（`constitutional-ai`）：人工逐条标注有害回答成本高，而且价值规范不透明。论文把人类监督压缩成一组自然语言原则：第一阶段让模型依据原则批评并重写自己的回答，再对修订回答做 SFT；第二阶段让 AI 比较回答、训练 preference model，并以该奖励执行 RLAIF。
-
-### 模型融合与推理效率
-
-- [GRIP: Granular Reward-Guided Parameter Interpolation for Efficient Reasoning](../2608.25583-grip/README.md)（`grip`）：在 thinking 与 instruct 权重间，不使用单一全局系数，而由细粒度 reward 学习分层/参数插值，使模型保留推理准确率同时缩短输出。
-
-### 选优微调与自博弈
-
-- [Self-Rewarding LM](../2401.10020-self-rewarding/README.md)（`self-rewarding`）：每轮由当前模型生成候选并以 LLM-as-a-Judge 打分，形成新的偏好对继续 DPO，构成自举闭环。
-- [SPIN](../2401.01335-spin/README.md)（`spin`）：额外偏好标注昂贵。SPIN 从 SFT 模型出发，用上一轮模型为训练 prompt 生成回答，把人类示范视作正例、自生成回答视作负例，通过自博弈判别目标得到下一轮模型，循环提升而不引入新的人工偏好数据。
-- [RAFT](../2304.06767-raft/README.md)（`raft`）：PPO 的在线更新不稳定，而在固定 SFT 数据上训练又无法持续利用变好的策略。RAFT 每轮从当前模型生成多个响应，用 reward model 排序并丢弃低质量样本，只对选中的高质量响应执行普通 maximum-likelihood fine-tuning，然后用新策略进入下一轮。
 
 ## 训推一致性与高效 rollout
 

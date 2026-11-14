@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:pipnn-ii/quantized-stream": {
+      "source_sha256": "d6b733143393140b67f5be2701c2dfd8fdac76ab1ff30229c9889951747baf7a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does PiPNN II fuse quantized scoring with top-K?",
+        "answer": "Quantization reduces the bytes read for candidate vectors. Fused scoring immediately compares each new score with the current Kth entry, avoiding a full distance matrix. Fusion reduces traffic for intermediate scores; quantization reduces traffic for input vectors.",
+        "example": "Example: A leaf has 100 candidates but needs only the best three. A streaming scorer retains three entries instead of storing and sorting all 100 scores."
+      }
+    },
+    "qa/foundation-models:pipnn-ii/bias-correction": {
+      "source_sha256": "3ecceb2c6f495352b7dcf93e70695961c5a8384e1ff99ebf1e1c35ad518868f8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why subtract 128 times the sum of the query bytes after converting database bytes to unsigned?",
+        "answer": "The instruction multiplies a database byte a = original + 128 by a signed query byte b. This introduces an extra 128b per term; the sum is a correction shared by candidates for the same query. With a zero-sum query the bug disappears, so such queries alone are insufficient tests.",
+        "example": "One lane in the original figure has biased dot product 883 and query-byte sum 5. The signed dot product is 883 − 128 × 5 = 243, not 883."
+      }
+    },
+    "qa/foundation-models:pipnn-ii/scale-before-topk": {
+      "source_sha256": "2028af00017587399fa0c478154b1aa07a01a6c30cd0d958faa2abd8709803f2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not select top-K by integer dot product and apply database scales afterwards?",
+        "answer": "The scale varies by candidate, so applying it can reverse the order. The negative-dot-product path first applies the database and query scales to each candidate, then keeps the smallest K distances. The positive query scale alone is fixed within a query and does not reorder its candidates.",
+        "example": "Example: Integer dot products 20 and 10 with row scales 0.1 and 1 become similarities 2 and 10. Selecting by integer dot product picks the wrong winner."
+      }
+    },
+    "qa/foundation-models:pipnn-ii/validate-heap-not-kernel": {
+      "source_sha256": "01edea2e6fe573551cc1256a79dfc353d3d87b0a921fdca0436198f2f6f9394b",
+      "reviewed": true,
+      "fields": {
+        "question": "What negative controls should a CPU streaming top-K use, and does passing them reproduce H100 performance?",
+        "answer": "Use direct signed dots and a full sort as independent references. Test nonzero query sums, unequal scales, tie order, and a single-use iterator. These checks verify scores and ordering, not the quantizer, SIMD/TMA kernels, partitioning, or full-graph speed.",
+        "example": "Example: With two equal scaled scores, the reference keeps the earlier candidate; attempting to traverse the stream twice should fail the test. Passing this still measures no Hopper kernel."
+      }
+    },
+    "qa/post-training:ragcompass/evidence-not-id": {
+      "source_sha256": "e595bd80d4b31b7f43305cbb24a188ce0a09c65c8061cf3d28b2ec8a201bf03c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does RAGCompass score an evidence bundle instead of predicting a retriever's name?",
+        "answer": "One shared reranker reads each retriever's evidence bundle; candidates are not tied to fixed IDs. A new retriever can be scored if it returns the same kind of evidence, but that interface property alone guarantees no transfer gain.",
+        "example": "Example: Five passages from a new vector retriever can compete with five from an existing BM25 retriever. A binary head trained on BM25 and an older vector retriever has no class for the new one."
+      }
+    },
+    "qa/post-training:ragcompass/utility-kl-axis": {
+      "source_sha256": "f689eca78957c4bbd46b4ed06823e44cedf549f5bf03e57e63d241f3469c8697",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does RAGCompass compute KL along the candidate axis of one query?",
+        "answer": "Each utility is the fixed reader's answer F1 for one evidence bundle. Softmax turns utilities for the same query into a training target. For KL(target || prediction), the score gradient is p − u. Normalizing across queries would change the objective of choosing evidence separately for each request.",
+        "example": "Example: With p = (0.5, 0.5) and u = (0.8, 0.2), the gradient is (−0.3, 0.3), so gradient descent raises the first candidate's relative score."
+      }
+    },
+    "qa/post-training:ragcompass/reader-versus-passage": {
+      "source_sha256": "1278221779a94dc1618fc142b69c715f58733e98cf4573339ab6cc94f001858b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does answer-utility supervision differ from passage relevance supervision?",
+        "answer": "An individually relevant passage need not make the complete evidence set sufficient. RAGCompass supervises routing with answer F1 from a fixed reader using the whole bundle. This reflects complementary evidence and reader behavior, but it also ties the target to the chosen reader and reference labels.",
+        "example": "Example: One bundle supplies a relevant biography passage; another also supplies the event date. When the question asks when the event happened, the second bundle is more likely to yield high answer F1."
+      }
+    },
+    "qa/post-training:ragcompass/no-gold-route": {
+      "source_sha256": "1b7104d43802e26ca53447debce2a8feef8fd168e1d6aa381ca99dd7b7de4803",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does the 0.05 utility-gap filter stay out of inference?",
+        "answer": "The utility gap requires reference answers to compute F1 and is therefore an offline filter, not a routing feature. Inference receives candidate scores only and selects the largest. Objective and gradient tests, a label-free API, and real distribution-shift evaluations are distinct evidence.",
+        "example": "Example: Offline training can discard candidates with F1 0.52 and 0.50 because their gap is 0.02. A live request has no gold answer and must still choose using the actual model scores."
+      }
+    }
+  }
+}

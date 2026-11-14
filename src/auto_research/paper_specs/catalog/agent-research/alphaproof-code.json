@@ -1,0 +1,43 @@
+{
+  "domain": "agent-research",
+  "key": "alphaproof-code",
+  "title": "AlphaProof Code: Verifying Signal's Security at the Machine-Code Level",
+  "paper_url": "https://deepmind.google/documents/36/Formal_Verification_of_Signal_4.pdf",
+  "detail_path": "agent-research/alphaproof-code/README.md",
+  "topic": [
+    "统一评测与可靠性",
+    "形式验证与规格保真"
+  ],
+  "first_author": "Swarat Chaudhuri",
+  "first_author_affiliation": "Google DeepMind",
+  "published": "2026-11-10",
+  "publication_date_precision": "day",
+  "publication_date_basis": "official report first page and official November10 announcement; no arXiv identity or exact UTC timestamp asserted",
+  "reviewed_version": "official November10 technical report; PDF sha256 in priority-review.json",
+  "code": "https://github.com/google-deepmind/code-verification",
+  "code_status": "Google DeepMind公开证明/规格/检查仓库；固定808b4b7ffef198e6a91f71ed776d641a1c236882。主代码Apache-2.0，第三方Signal材料保留AGPL-3.0-only等独立许可；未克隆/构建，不宣称完整Agent harness已接入",
+  "priority": "P0",
+  "adapter": null,
+  "implementation_status": "deferred_high_cost",
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "summary": "人类批准Lean安全规格，多Agent证明编译后的Signal AArch64实现；以隔离规格副本和comparator检查定理及全部传递定义、标准公理和新内核重放，防止证明通过但规格被弱化。",
+  "fidelity_note": "仅官方技术报告/开源来源与成本审查；无本地复现、形式验证器、可执行local_operator、能力指标或Evolve集成。不用schema/regex/玩具定理冒充Signal证明。",
+  "deferral_reason": "官方固定README称全proof构建数小时、约15–34GiB峰值内存，需Lean/Rust/LLVM/Zig/Mathlib与跨编译链，comparator仅Linux Landlock支持；原项目约650万证明行、团队5人4周。完整实验成本过高，不复现（审查 DONE）。",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "cost_assessment": {
+    "source_url": "https://github.com/google-deepmind/code-verification/blob/808b4b7ffef198e6a91f71ed776d641a1c236882/README.md",
+    "source_location": "Building and Verifying; technical report §7",
+    "scale": "about6.5million proof lines; several-hour CPU builds at15–34GiB peak RAM; five-person/four-week original development",
+    "available_resource": "one NVIDIA A100 or A30, or local Mac",
+    "cost_type": "published_configuration_not_local_measurement",
+    "decision": "成本过高，不复现（审查 DONE）；不克隆大仓库、不安装大型工具链、不试构建"
+  }
+}

@@ -1,0 +1,1378 @@
+{
+  "schema_version": 1,
+  "scope": "bounded supplemental official arXiv retrieval, not substantive review or source exhaustiveness",
+  "requested_tail_shanghai": {
+    "after_exclusive": "2026-11-09T18:23:24+08:00",
+    "before_exclusive": "2026-11-10T00:00:00+08:00"
+  },
+  "time_filter_utc": {
+    "after_exclusive": "2026-11-09T10:23:24Z",
+    "before_exclusive": "2026-11-09T16:00:00Z",
+    "basis": "Atom entry published is original submission; announcement listing dates are not used for this time filter."
+  },
+  "query": {
+    "endpoint": "https://export.arxiv.org/api/query",
+    "search_query": "(cat:cs.AI OR cat:cs.CL OR cat:cs.CV OR cat:cs.IR OR cat:cs.LG OR cat:cs.RO OR cat:cs.SE OR cat:stat.ML) AND submittedDate:[202611091023 TO 202611091600]",
+    "start": 0,
+    "max_results": 500,
+    "sortBy": "submittedDate",
+    "sortOrder": "ascending",
+    "categories": [
+      "cs.AI",
+      "cs.CL",
+      "cs.CV",
+      "cs.IR",
+      "cs.LG",
+      "cs.RO",
+      "cs.SE",
+      "stat.ML"
+    ]
+  },
+  "source_response": {
+    "feed_updated_utc": "2026-11-10T12:20:56Z",
+    "source_sha256": "335f3bed5726dbd015a5d5c4cf7db2efb5f5eaf8e2cc9ab6d419054967be60a6",
+    "total_results": 123,
+    "start_index": 0,
+    "items_per_page": 500,
+    "rows_received": 123,
+    "rows_excluded_by_exact_cutoff": [
+      {
+        "id": "2611.12169",
+        "first_submission_utc": "2026-11-09T10:23:17Z",
+        "reason": "minute_search_overlap_before_exclusive_start"
+      }
+    ]
+  },
+  "exact_tail_unique_ids": 122,
+  "not_in_earlier_ci_captures": 122,
+  "primary_category_counts": {
+    "cs.AI": 16,
+    "cs.AR": 1,
+    "cs.CE": 2,
+    "cs.CL": 15,
+    "cs.CR": 2,
+    "cs.CV": 19,
+    "cs.CY": 2,
+    "cs.DC": 2,
+    "cs.HC": 2,
+    "cs.IR": 1,
+    "cs.LG": 26,
+    "cs.MA": 2,
+    "cs.NE": 2,
+    "cs.RO": 16,
+    "cs.SD": 3,
+    "cs.SE": 4,
+    "eess.SY": 1,
+    "math.OC": 1,
+    "math.ST": 1,
+    "q-bio.TO": 1,
+    "stat.ME": 1,
+    "stat.ML": 2
+  },
+  "limitations": [
+    "The API snapshot is limited to records indexed when queried. A later announcement or index correction may reveal another November 9 submission.",
+    "No inference about institutional affiliation, scope, full text, production A/B, reproducibility or cost. Candidate-level and institution-source review is separate.",
+    "Official announcements are date-based; a November 10 listing may include pre-cutoff and next-day Shanghai submissions. No watermark advance is authorized by retrieval alone."
+  ],
+  "nonterminal_primary_checks": [
+    {
+      "id": "2611.12232",
+      "title": "ECOS: Environment-Calibrated On-Policy Self-Distillation for Language Agents",
+      "source_url": "https://arxiv.org/html/2611.12232v1",
+      "locations": ["§§3.2–3.5", "§4.1", "Appendix B"],
+      "observation": "以环境命令优势校准策略内自蒸馏并给反思/技能打分。原文使用 3B、7B 骨干，在 ALFWorld、WebShop 采集轨迹并由 GPT-6.1 sol 提供离线标注，之后进行 150 次在线更新。没有可直接引用的 GPU 总量或墙钟预算；命令优势调制可以与整套训练分开评估。",
+      "review_done": false
+    },
+    {
+      "id": "2611.12552",
+      "title": "SciMARS: Multi-Agent Recursive Self-Improvement for Closed-Loop Scientific Discovery",
+      "source_url": "https://arxiv.org/html/2611.12552v1",
+      "upstream_url": "https://github.com/WeiminWu2000/SciMARS",
+      "locations": ["§§3.2–3.7", "§§4.1–4.3"],
+      "observation": "用共享证据图分别修订角色、协作及记忆策略。完整 Autonomous Science Bench 比较依赖 GPT-6-Astra 和 GLM-5.3 两个模型组，每组 90 次尝试；另有 ScienceAgentBench 和 AppWorld。精确复刻依赖多轮外部调用；需另核对公开代码与可低成本隔离的组件，未把候选关闭。",
+      "review_done": false
+    }
+  ],
+  "records": [
+    {
+      "id": "2611.12175",
+      "first_submission_utc": "2026-11-09T10:28:44Z",
+      "revision": 1,
+      "primary_category": "cs.RO",
+      "matched_categories": [
+        "cs.AI",
+        "cs.RO"
+      ],
+      "title": "GeoMind: A Benchmark for Spatial Understanding in Robotic Manipulation"
+    },
+    {
+      "id": "2611.12177",
+      "first_submission_utc": "2026-11-09T10:29:19Z",
+      "revision": 1,
+      "primary_category": "cs.RO",
+      "matched_categories": [
+        "cs.AI",
+        "cs.RO"
+      ],
+      "title": "Embodied First Exam"
+    },
+    {
+      "id": "2611.12178",
+      "first_submission_utc": "2026-11-09T10:30:14Z",
+      "revision": 1,
+      "primary_category": "cs.LG",
+      "matched_categories": [
+        "cs.LG"
+      ],
+      "title": "Replication of Thermal Comfort Cohort Models: No Support for Improved Thermal Preference Prediction"
+    },
+    {
+      "id": "2611.12180",
+      "first_submission_utc": "2026-11-09T10:30:44Z",
+      "revision": 1,
+      "primary_category": "cs.IR",
+      "matched_categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.IR"
+      ],
+      "title": "TS-GEAR: Taobao Shangou GEnerative Ad Retrieval"
+    },
+    {
+      "id": "2611.12184",
+      "first_submission_utc": "2026-11-09T10:36:38Z",
+      "revision": 1,
+      "primary_category": "cs.CL",
+      "matched_categories": [
+        "cs.CL"
+      ],
+      "title": "Blind Variation, Selective Retention: Improving Creative Idea Generation in AI Scientists"
+    },
+    {
+      "id": "2611.12186",
+      "first_submission_utc": "2026-11-09T10:40:42Z",
+      "revision": 1,
+      "primary_category": "cs.LG",
+      "matched_categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "title": "NearFormer: Linear-Size Sparse Attention via Randomized Near Neighbors"
+    },
+    {
+      "id": "2611.12187",
+      "first_submission_utc": "2026-11-09T10:42:00Z",
+      "revision": 1,
+      "primary_category": "cs.LG",
+      "matched_categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "title": "Harnessing Vision-Language Models for Federated Unsupervised Visual Recognition"
+    },
+    {
+      "id": "2611.12196",
+      "first_submission_utc": "2026-11-09T10:51:10Z",
+      "revision": 1,
+      "primary_category": "cs.CL",
+      "matched_categories": [
+        "cs.CL"
+      ],
+      "title": "The Deception Archive as a repository of standardized datasets for large-scale verbal deception detection research"
+    },
+    {
+      "id": "2611.12197",
+      "first_submission_utc": "2026-11-09T10:52:55Z",
+      "revision": 1,
+      "primary_category": "cs.CL",
+      "matched_categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "title": "TrajLift: Lifting Memory Recall Trajectories with Latency-Modulated Heat Diffusion"
+    },
+    {
+      "id": "2611.12200",
+      "first_submission_utc": "2026-11-09T10:59:19Z",
+      "revision": 1,
+      "primary_category": "cs.AI",
+      "matched_categories": [
+        "cs.AI"
+      ],
+      "title": "Learning to Act with World Models by Valuing What Comes Next"
+    },
+    {
+      "id": "2611.12202",
+      "first_submission_utc": "2026-11-09T10:59:54Z",
+      "revision": 1,
+      "primary_category": "cs.HC",
+      "matched_categories": [
+        "cs.RO"
+      ],
+      "title": "Co-Creating Neurorehabilitation Technology Alongside Lived Experience Experts: A Participatory Design Workshop"
+    },
+    {
+      "id": "2611.12205",
+      "first_submission_utc": "2026-11-09T11:02:13Z",
+      "revision": 1,
+      "primary_category": "cs.RO",
+      "matched_categories": [
+        "cs.AI",
+        "cs.RO"
+      ],
+      "title": "Graph-Based RL for Sequential Rendezvous Planning with Multiple Patrolling USVs"
+    },
+    {
+      "id": "2611.12206",
+      "first_submission_utc": "2026-11-09T11:02:51Z",
+      "revision": 1,
+      "primary_category": "cs.LG",
+      "matched_categories": [
+        "cs.CL",
+        "cs.LG"
+      ],
+      "title": "A Geometric Invariant of Attention Predicts Head Specialization from Weights Alone"
+    },
+    {
+      "id": "2611.12219",
+      "first_submission_utc": "2026-11-09T11:12:48Z",
+      "revision": 1,
+      "primary_category": "cs.LG",
+      "matched_categories": [
+        "cs.LG"
+      ],
+      "title": "An Empirical Evaluation of Quantum Kernel Stability in Network Intrusion Detection"
+    },
+    {
+      "id": "2611.12222",
+      "first_submission_utc": "2026-11-09T11:16:03Z",
+      "revision": 1,
+      "primary_category": "cs.AI",
+      "matched_categories": [
+        "cs.AI"
+      ],
+      "title": "PARIS: A multi-agent LLM framework for end-to-end, PRISMA-guided systematic literature reviews with pre-synthesis corpus quality assessment"
+    },
+    {
+      "id": "2611.12225",
+      "first_submission_utc": "2026-11-09T11:18:25Z",
+      "revision": 1,
+      "primary_category": "cs.SE",
+      "matched_categories": [
+        "cs.CL",
+        "cs.LG",
+        "cs.SE"
+      ],
+      "title": "A Cost That Practice Accuracy Hides: Worked Solutions in Self-Generated Training Data and the Compositional Use of New Rules"
+    },
+    {
+      "id": "2611.12226",
+      "first_submission_utc": "2026-11-09T11:19:57Z",
+      "revision": 1,
+      "primary_category": "cs.RO",
+      "matched_categories": [
+        "cs.RO"
+      ],
+      "title": "A Game-Theoretic MPC Planner for Cooperative and Adversarial Drone Coordination"
+    },
+    {
+      "id": "2611.12232",
+      "first_submission_utc": "2026-11-09T11:25:13Z",
+      "revision": 1,
+      "primary_category": "cs.AI",
+      "matched_categories": [
+        "cs.AI"
+      ],
+      "title": "ECOS: Environment-Calibrated On-Policy Self-Distillation for Language Agents"
+    },
+    {
+      "id": "2611.12240",
+      "first_submission_utc": "2026-11-09T11:30:23Z",
+      "revision": 1,
+      "primary_category": "cs.CL",
+      "matched_categories": [
+        "cs.CL",
+        "cs.LG"
+      ],
+      "title": "Prune, Don't Merge: Expert Compression of Mixture-of-Experts LLMs on Multilingual Production Tasks"
+    },
+    {
+      "id": "2611.12242",
+      "first_submission_utc": "2026-11-09T11:30:46Z",
+      "revision": 1,
+      "primary_category": "cs.LG",
+      "matched_categories": [
+        "cs.AI",
+        "cs.CV",
+        "cs.LG"
+      ],
+      "title": "Controlling Temporal Pseudo-Label Marginals for Stable Online Test-Time Adaptation"
+    },
+    {
+      "id": "2611.12243",
+      "first_submission_utc": "2026-11-09T11:31:34Z",
+      "revision": 1,
+      "primary_category": "cs.CV",
+      "matched_categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "title": "CADMA: Capacity-Aware Coverage Decomposition for Generative Model Assessment"
+    },
+    {
+      "id": "2611.12248",
+      "first_submission_utc": "2026-11-09T11:36:50Z",
+      "revision": 1,
+      "primary_category": "cs.LG",
+      "matched_categories": [
+        "cs.LG",
+        "stat.ML"
+      ],
+      "title": "A method to automatically discover symbolic local learning rules"
+    },
+    {
+      "id": "2611.12251",
+      "first_submission_utc": "2026-11-09T11:41:49Z",
+      "revision": 1,
+      "primary_category": "cs.LG",
+      "matched_categories": [
+        "cs.AI",
+        "cs.LG",
+        "cs.RO"
+      ],
+      "title": "RAIL: Representation-Aligned Imitation Learning for Student-Compatible Teacher Policies"
+    },
+    {
+      "id": "2611.12259",
+      "first_submission_utc": "2026-11-09T11:49:04Z",
+      "revision": 1,
+      "primary_category": "cs.CV",
+      "matched_categories": [
+        "cs.CV"
+      ],
+      "title": "A forensic evaluation framework for egocentric foundation models: an EFM3D case study for crime scene reconstruction"
+    },
+    {
+      "id": "2611.12261",
+      "first_submission_utc": "2026-11-09T11:49:58Z",
+      "revision": 1,
+      "primary_category": "cs.RO",
+      "matched_categories": [
+        "cs.LG",
+        "cs.RO"
+      ],
+      "title": "Hierarchical Multi-Channel Tip-Over Prediction via Isolated Temporal Models for Planetary Rover Safety"
+    },
+    {
+      "id": "2611.12268",
+      "first_submission_utc": "2026-11-09T11:56:50Z",
+      "revision": 1,
+      "primary_category": "cs.LG",
+      "matched_categories": [
+        "cs.LG",
+        "stat.ML"
+      ],
+      "title": "Odds-Structured Distributional Regression for Interpretable Time-to-Event Prediction"
+    },
+    {
+      "id": "2611.12269",
+      "first_submission_utc": "2026-11-09T11:57:33Z",
+      "revision": 1,
+      "primary_category": "cs.MA",
+      "matched_categories": [
+        "cs.CL"
+      ],
+      "title": "Agent4Crypto: A Dual-Reflective and Market-Feedback-Aligned LLM-Based Multi-Agent System for Cryptocurrency Trading"
+    },
+    {
+      "id": "2611.12285",
+      "first_submission_utc": "2026-11-09T12:12:18Z",
+      "revision": 1,
+      "primary_category": "cs.LG",
+      "matched_categories": [
+        "cs.LG"
+      ],
+      "title": "Learning Evidence-Grounded Reasoning for Context-Aware Time Series Forecasting"
+    },
+    {
+      "id": "2611.12286",
+      "first_submission_utc": "2026-11-09T12:12:37Z",
+      "revision": 1,
+      "primary_category": "cs.RO",
+      "matched_categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "title": "VLA-MOPD: On-Policy Distillation for Multi-Task VLA Policy Consolidation"
+    },
+    {
+      "id": "2611.12288",
+      "first_submission_utc": "2026-11-09T12:14:37Z",
+      "revision": 1,
+      "primary_category": "cs.SE",
+      "matched_categories": [
+        "cs.SE"
+      ],
+      "title": "ForgeSystem: An Architecture for Demand-Specific Artefact Production with AI Agents"
+    },
+    {
+      "id": "2611.12291",
+      "first_submission_utc": "2026-11-09T12:15:49Z",
+      "revision": 1,
+      "primary_category": "cs.AI",
+      "matched_categories": [
+        "cs.AI"
+      ],
+      "title": "Representational Alignment between Deep Neural Networks and Human Brain in Speech Processing under Audiovisual Noise"
+    },
+    {
+      "id": "2611.12293",
+      "first_submission_utc": "2026-11-09T12:17:59Z",
+      "revision": 1,
+      "primary_category": "cs.AI",
+      "matched_categories": [
+        "cs.AI"
+      ],
+      "title": "Depth as a Candidate Source: Portfolio Allocation for Recurrent Test-Time Scaling in Large Language Models"
+    },
+    {
+      "id": "2611.12295",
+      "first_submission_utc": "2026-11-09T12:19:15Z",
+      "revision": 1,
+      "primary_category": "cs.RO",
+      "matched_categories": [
+        "cs.AI",
+        "cs.RO"
+      ],
+      "title": "Be My Eye: Learning to See Beyond a Robot's Own Perspective"
+    },
+    {
+      "id": "2611.12296",
+      "first_submission_utc": "2026-11-09T12:20:07Z",
+      "revision": 1,
+      "primary_category": "cs.DC",
+      "matched_categories": [
+        "cs.AI",
+        "cs.IR"
+      ],
+      "title": "RecoGEM: A Serving System for Production-Scale Generative Recommendation"
+    },
+    {
+      "id": "2611.12299",
+      "first_submission_utc": "2026-11-09T12:23:28Z",
+      "revision": 1,
+      "primary_category": "cs.CE",
+      "matched_categories": [
+        "cs.LG"
+      ],
+      "title": "Physics-Informed Sinusoidal Representation Networks for Damage Identification in Ultrasonic Guided Wave Structural Health Monitoring"
+    },
+    {
+      "id": "2611.12300",
+      "first_submission_utc": "2026-11-09T12:23:29Z",
+      "revision": 1,
+      "primary_category": "cs.AI",
+      "matched_categories": [
+        "cs.AI"
+      ],
+      "title": "Reconfigurable Action Theories: A Formal Foundation for Dynamically Composable Agent Harnesses"
+    },
+    {
+      "id": "2611.12305",
+      "first_submission_utc": "2026-11-09T12:27:19Z",
+      "revision": 1,
+      "primary_category": "cs.CV",
+      "matched_categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.CV"
+      ],
+      "title": "HumanSightBench: A Benchmark for Human Visual Perception in MLLMs"
+    },
+    {
+      "id": "2611.12306",
+      "first_submission_utc": "2026-11-09T12:27:35Z",
+      "revision": 1,
+      "primary_category": "cs.RO",
+      "matched_categories": [
+        "cs.RO"
+      ],
+      "title": "ExoStack: A Modular and Reconfigurable Software Framework for Wearable Robotics Using ROS 2"
+    },
+    {
+      "id": "2611.12307",
+      "first_submission_utc": "2026-11-09T12:27:36Z",
+      "revision": 1,
+      "primary_category": "cs.AI",
+      "matched_categories": [
+        "cs.AI"
+      ],
+      "title": "PACE-ECG: Patient-Aware Contrastive ECG Pretraining; Leveraging Longitudinal Structure for Transferable Representations"
+    },
+    {
+      "id": "2611.12310",
+      "first_submission_utc": "2026-11-09T12:32:59Z",
+      "revision": 1,
+      "primary_category": "cs.LG",
+      "matched_categories": [
+        "cs.LG"
+      ],
+      "title": "The Optimal Rate Constant of Heavy-Ball Momentum on Smooth Strongly Convex Functions"
+    },
+    {
+      "id": "2611.12311",
+      "first_submission_utc": "2026-11-09T12:33:26Z",
+      "revision": 1,
+      "primary_category": "cs.CL",
+      "matched_categories": [
+        "cs.CL"
+      ],
+      "title": "MNN-Pocket-0.3B Technical Report"
+    },
+    {
+      "id": "2611.12313",
+      "first_submission_utc": "2026-11-09T12:36:10Z",
+      "revision": 1,
+      "primary_category": "cs.CY",
+      "matched_categories": [
+        "cs.IR"
+      ],
+      "title": "Hidden Distances: How Likert-Scale Spacing Shapes Algorithmic Voting Advice"
+    },
+    {
+      "id": "2611.12314",
+      "first_submission_utc": "2026-11-09T12:39:59Z",
+      "revision": 1,
+      "primary_category": "cs.LG",
+      "matched_categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "title": "A Modular Perspective for Modeling MARL Systems"
+    },
+    {
+      "id": "2611.12317",
+      "first_submission_utc": "2026-11-09T12:40:38Z",
+      "revision": 1,
+      "primary_category": "cs.NE",
+      "matched_categories": [
+        "cs.RO"
+      ],
+      "title": "Maximizing Detection Probability in UAV Search Missions using Random-Key Optimizers"
+    },
+    {
+      "id": "2611.12319",
+      "first_submission_utc": "2026-11-09T12:41:30Z",
+      "revision": 1,
+      "primary_category": "cs.DC",
+      "matched_categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "title": "Mitigating SM-Level Load Imbalance in 3D Gaussian Splatting on GPUs"
+    },
+    {
+      "id": "2611.12324",
+      "first_submission_utc": "2026-11-09T12:45:40Z",
+      "revision": 1,
+      "primary_category": "cs.LG",
+      "matched_categories": [
+        "cs.AI",
+        "cs.CV",
+        "cs.LG"
+      ],
+      "title": "How Many Exposures Does a World Model Need? Learning Unseen Game Mechanics at Test Time"
+    },
+    {
+      "id": "2611.12326",
+      "first_submission_utc": "2026-11-09T12:46:27Z",
+      "revision": 1,
+      "primary_category": "eess.SY",
+      "matched_categories": [
+        "cs.LG"
+      ],
+      "title": "Tensor Network Kernel Machines for Nonlinear System Identification"
+    },
+    {
+      "id": "2611.12332",
+      "first_submission_utc": "2026-11-09T12:51:18Z",
+      "revision": 1,
+      "primary_category": "cs.CY",
+      "matched_categories": [
+        "cs.AI"
+      ],
+      "title": "Do Machine Learning Models Predict?"
+    },
+    {
+      "id": "2611.12333",
+      "first_submission_utc": "2026-11-09T12:52:58Z",
+      "revision": 1,
+      "primary_category": "cs.AI",
+      "matched_categories": [
+        "cs.AI"
+      ],
+      "title": "AMSchem: Automated Schematic Visualization of AMS Circuits via Verifiable Agentic Generation"
+    },
+    {
+      "id": "2611.12334",
+      "first_submission_utc": "2026-11-09T12:54:27Z",
+      "revision": 1,
+      "primary_category": "cs.AI",
+      "matched_categories": [
+        "cs.AI",
+        "cs.CV",
+        "cs.LG",
+        "cs.RO"
+      ],
+      "title": "Rethinking Radar 3D Perception: Representation Learning from Raw Spectra"
+    },
+    {
+      "id": "2611.12338",
+      "first_submission_utc": "2026-11-09T12:55:52Z",
+      "revision": 1,
+      "primary_category": "cs.SE",
+      "matched_categories": [
+        "cs.SE"
+      ],
+      "title": "From Formal Methods to Fuzzing and Back"
+    },
+    {
+      "id": "2611.12339",
+      "first_submission_utc": "2026-11-09T12:57:07Z",
+      "revision": 1,
+      "primary_category": "cs.LG",
+      "matched_categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "title": "Evidence or Marginal? What Moment-Vector Propagation Computes in Polynomial Density Neurons"
+    },
+    {
+      "id": "2611.12345",
+      "first_submission_utc": "2026-11-09T13:01:10Z",
+      "revision": 1,
+      "primary_category": "cs.CV",
+      "matched_categories": [
+        "cs.CV"
+      ],
+      "title": "TMT: Adapting CLIP to Infrared Imagery via Text-Derived Modality Knowledge Transfer"
+    },
+    {
+      "id": "2611.12346",
+      "first_submission_utc": "2026-11-09T13:01:21Z",
+      "revision": 1,
+      "primary_category": "cs.CV",
+      "matched_categories": [
+        "cs.CV"
+      ],
+      "title": "ReVMap: Vectorized Global Mapping via Connectivity-Aware Local Map Fusion"
+    },
+    {
+      "id": "2611.12351",
+      "first_submission_utc": "2026-11-09T13:04:20Z",
+      "revision": 1,
+      "primary_category": "cs.RO",
+      "matched_categories": [
+        "cs.AI",
+        "cs.RO"
+      ],
+      "title": "UniOMA: Unified Optimal-Transport Multi-Modal Structural Alignment for Robot Perception"
+    },
+    {
+      "id": "2611.12353",
+      "first_submission_utc": "2026-11-09T13:05:16Z",
+      "revision": 1,
+      "primary_category": "cs.CV",
+      "matched_categories": [
+        "cs.CV"
+      ],
+      "title": "QCC-WM: Linking Macro-State Dynamics and Visual Generation via Quotient Causal Construction"
+    },
+    {
+      "id": "2611.12356",
+      "first_submission_utc": "2026-11-09T13:06:52Z",
+      "revision": 1,
+      "primary_category": "cs.AI",
+      "matched_categories": [
+        "cs.AI"
+      ],
+      "title": "DForkTree: Accelerating Speculative Decoding with Fork-Aware Block Diffusion Draft Trees"
+    },
+    {
+      "id": "2611.12364",
+      "first_submission_utc": "2026-11-09T13:11:07Z",
+      "revision": 1,
+      "primary_category": "cs.CV",
+      "matched_categories": [
+        "cs.CV"
+      ],
+      "title": "TRIAD: Multimodal Retrieval across Abstraction, Constraints, and State"
+    },
+    {
+      "id": "2611.12374",
+      "first_submission_utc": "2026-11-09T13:17:46Z",
+      "revision": 1,
+      "primary_category": "cs.AI",
+      "matched_categories": [
+        "cs.AI"
+      ],
+      "title": "TANSAR: Editable and Attributable Correlation Matrix Memories under Correlated Keys, with Rule-Constrained Multi-Hop Knowledge Editing"
+    },
+    {
+      "id": "2611.12375",
+      "first_submission_utc": "2026-11-09T13:19:25Z",
+      "revision": 1,
+      "primary_category": "cs.SD",
+      "matched_categories": [
+        "cs.LG"
+      ],
+      "title": "AudioCodex: Streaming Autoencoders for Live Audio"
+    },
+    {
+      "id": "2611.12377",
+      "first_submission_utc": "2026-11-09T13:19:45Z",
+      "revision": 1,
+      "primary_category": "cs.AI",
+      "matched_categories": [
+        "cs.AI"
+      ],
+      "title": "Detecting Shadow AI: Unsanctioned LLM Agents on Enterprise Endpoints: A Taxonomy, an Open Detector and a Controlled Evaluation"
+    },
+    {
+      "id": "2611.12378",
+      "first_submission_utc": "2026-11-09T13:19:50Z",
+      "revision": 1,
+      "primary_category": "cs.RO",
+      "matched_categories": [
+        "cs.RO"
+      ],
+      "title": "Safety-Constrained Intelligent Control of a 2-DOF Robotic Manipulator Using Control Barrier Functions"
+    },
+    {
+      "id": "2611.12379",
+      "first_submission_utc": "2026-11-09T13:20:25Z",
+      "revision": 1,
+      "primary_category": "cs.AI",
+      "matched_categories": [
+        "cs.AI"
+      ],
+      "title": "Reconstructing hourly traffic on every street of a capital from a sparse counting network: a graph neural network applied to Paris"
+    },
+    {
+      "id": "2611.12382",
+      "first_submission_utc": "2026-11-09T13:20:38Z",
+      "revision": 1,
+      "primary_category": "cs.RO",
+      "matched_categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "title": "AutoVLA-D: Learn a Trajectory-Geometric Condition from Reasoning for Autonomous Driving VLA"
+    },
+    {
+      "id": "2611.12383",
+      "first_submission_utc": "2026-11-09T13:20:49Z",
+      "revision": 1,
+      "primary_category": "cs.RO",
+      "matched_categories": [
+        "cs.RO"
+      ],
+      "title": "PCTac: Mechanochromic Photonic-Crystal Tactile Sensor for Dexterous Manipulation"
+    },
+    {
+      "id": "2611.12385",
+      "first_submission_utc": "2026-11-09T13:24:09Z",
+      "revision": 1,
+      "primary_category": "q-bio.TO",
+      "matched_categories": [
+        "cs.AI"
+      ],
+      "title": "Clinical predictions using artificial intelligence in neurosurgery and its subspecialties: a systematic review and meta-analysis"
+    },
+    {
+      "id": "2611.12386",
+      "first_submission_utc": "2026-11-09T13:27:13Z",
+      "revision": 1,
+      "primary_category": "cs.CR",
+      "matched_categories": [
+        "cs.AI"
+      ],
+      "title": "Say Shibboleth: Fingerprinting the LLMs and Harnesses Behind Agentic Attacks"
+    },
+    {
+      "id": "2611.12392",
+      "first_submission_utc": "2026-11-09T13:29:45Z",
+      "revision": 1,
+      "primary_category": "cs.CL",
+      "matched_categories": [
+        "cs.CL"
+      ],
+      "title": "More Than Just Style: Benchmarking Personality Influence in Large Language Models"
+    },
+    {
+      "id": "2611.12393",
+      "first_submission_utc": "2026-11-09T13:30:18Z",
+      "revision": 1,
+      "primary_category": "cs.AI",
+      "matched_categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "title": "AutoBuddy: Evaluating Proactive, Always-On Agents on Task Discovery and Execution in a Simulated Workplace"
+    },
+    {
+      "id": "2611.12405",
+      "first_submission_utc": "2026-11-09T13:38:37Z",
+      "revision": 1,
+      "primary_category": "cs.CV",
+      "matched_categories": [
+        "cs.CV"
+      ],
+      "title": "PTC-IoU: CPU-Friendly Detection Quality Estimation for Edge Video Analytics"
+    },
+    {
+      "id": "2611.12407",
+      "first_submission_utc": "2026-11-09T13:40:09Z",
+      "revision": 1,
+      "primary_category": "cs.CL",
+      "matched_categories": [
+        "cs.CL"
+      ],
+      "title": "BDBBQ: A Human-AI Collaborative Benchmark for Bengali Social Bias in LLMs"
+    },
+    {
+      "id": "2611.12409",
+      "first_submission_utc": "2026-11-09T13:43:11Z",
+      "revision": 1,
+      "primary_category": "cs.RO",
+      "matched_categories": [
+        "cs.AI",
+        "cs.RO"
+      ],
+      "title": "Bridging Task Planning and Execution for Language-Conditioned Bimanual Manipulation"
+    },
+    {
+      "id": "2611.12411",
+      "first_submission_utc": "2026-11-09T13:43:37Z",
+      "revision": 1,
+      "primary_category": "cs.CV",
+      "matched_categories": [
+        "cs.CV"
+      ],
+      "title": "PhysOPSD: Code as Privilege for Physically Plausible Video Generation"
+    },
+    {
+      "id": "2611.12412",
+      "first_submission_utc": "2026-11-09T13:43:52Z",
+      "revision": 1,
+      "primary_category": "cs.MA",
+      "matched_categories": [
+        "cs.CL",
+        "cs.SE"
+      ],
+      "title": "Unprompted coordination through shared memory in LLM agents: a locked two-implementation replication and extension"
+    },
+    {
+      "id": "2611.12419",
+      "first_submission_utc": "2026-11-09T13:48:20Z",
+      "revision": 1,
+      "primary_category": "cs.LG",
+      "matched_categories": [
+        "cs.LG",
+        "stat.ML"
+      ],
+      "title": "Optimal Rates for Adaptive Private $k$-PCA"
+    },
+    {
+      "id": "2611.12420",
+      "first_submission_utc": "2026-11-09T13:49:01Z",
+      "revision": 1,
+      "primary_category": "cs.CL",
+      "matched_categories": [
+        "cs.CL"
+      ],
+      "title": "Path-Level Structural and Semantic Alignment for Hierarchical Multi-Label Text Classification"
+    },
+    {
+      "id": "2611.12422",
+      "first_submission_utc": "2026-11-09T13:49:15Z",
+      "revision": 1,
+      "primary_category": "cs.LG",
+      "matched_categories": [
+        "cs.LG",
+        "stat.ML"
+      ],
+      "title": "Two-Phase Rapid Simulation-Based Inference with Differentiable Simulators"
+    },
+    {
+      "id": "2611.12424",
+      "first_submission_utc": "2026-11-09T13:49:33Z",
+      "revision": 1,
+      "primary_category": "cs.CE",
+      "matched_categories": [
+        "cs.AI"
+      ],
+      "title": "Physics-informed neural networks in the small-data regime: A controlled comparison with classical PDE surrogates"
+    },
+    {
+      "id": "2611.12426",
+      "first_submission_utc": "2026-11-09T13:51:18Z",
+      "revision": 1,
+      "primary_category": "cs.CV",
+      "matched_categories": [
+        "cs.AI",
+        "cs.CV"
+      ],
+      "title": "dNaViT: Discrete Codes are General-Purpose Visual Representations"
+    },
+    {
+      "id": "2611.12427",
+      "first_submission_utc": "2026-11-09T13:52:07Z",
+      "revision": 1,
+      "primary_category": "cs.LG",
+      "matched_categories": [
+        "cs.LG"
+      ],
+      "title": "UCB-min: Combining Bandits Under Variance Heterogeneity (Extended Version)"
+    },
+    {
+      "id": "2611.12429",
+      "first_submission_utc": "2026-11-09T13:54:46Z",
+      "revision": 1,
+      "primary_category": "cs.CL",
+      "matched_categories": [
+        "cs.CL"
+      ],
+      "title": "Can Frontier Auto Researchers Reconstruct Human Research Decisions in AI?"
+    },
+    {
+      "id": "2611.12435",
+      "first_submission_utc": "2026-11-09T13:58:23Z",
+      "revision": 1,
+      "primary_category": "cs.AR",
+      "matched_categories": [
+        "cs.AI"
+      ],
+      "title": "To SIMD or Not to SIMD: Comparing RVV vs. CGRA SoCs for Non-Linear Functions in AI"
+    },
+    {
+      "id": "2611.12436",
+      "first_submission_utc": "2026-11-09T13:59:16Z",
+      "revision": 1,
+      "primary_category": "cs.LG",
+      "matched_categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "title": "Patching Up Circuit Learning via Parameter Sharing"
+    },
+    {
+      "id": "2611.12437",
+      "first_submission_utc": "2026-11-09T13:59:29Z",
+      "revision": 1,
+      "primary_category": "cs.CV",
+      "matched_categories": [
+        "cs.CV"
+      ],
+      "title": "Occupancy Modelling of Biased Landslide Inventories: When Does Separating Occurrence from Recording Improve on Neutralisation?"
+    },
+    {
+      "id": "2611.12440",
+      "first_submission_utc": "2026-11-09T14:01:31Z",
+      "revision": 1,
+      "primary_category": "cs.SE",
+      "matched_categories": [
+        "cs.SE"
+      ],
+      "title": "Exploring public-private data sharing practices through the lens of Open Data Ecosystems: A multiple case study on municipal and regional freight logistics"
+    },
+    {
+      "id": "2611.12443",
+      "first_submission_utc": "2026-11-09T14:02:42Z",
+      "revision": 1,
+      "primary_category": "cs.CV",
+      "matched_categories": [
+        "cs.CV"
+      ],
+      "title": "MoSTE: Mixture of Spatio-Temporal Experts for Deepfake Detection in Videos"
+    },
+    {
+      "id": "2611.12445",
+      "first_submission_utc": "2026-11-09T14:02:44Z",
+      "revision": 1,
+      "primary_category": "cs.CV",
+      "matched_categories": [
+        "cs.CV"
+      ],
+      "title": "LongSCOP: Semantically Consistent Long Video Outpainting"
+    },
+    {
+      "id": "2611.12446",
+      "first_submission_utc": "2026-11-09T14:03:25Z",
+      "revision": 1,
+      "primary_category": "cs.NE",
+      "matched_categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "title": "Pricing Symbolic Rules by What GNNs Leave Unlearned"
+    },
+    {
+      "id": "2611.12452",
+      "first_submission_utc": "2026-11-09T14:07:07Z",
+      "revision": 1,
+      "primary_category": "cs.RO",
+      "matched_categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "title": "V3DSAM: Semantic-Geometric Loop Verification and Geometry-Anchored Persistent Instance Mapping for Feed-Forward Dense SLAM"
+    },
+    {
+      "id": "2611.12458",
+      "first_submission_utc": "2026-11-09T14:10:22Z",
+      "revision": 1,
+      "primary_category": "stat.ML",
+      "matched_categories": [
+        "cs.LG",
+        "stat.ML"
+      ],
+      "title": "Causal discovery from Bayesian symbolic regression"
+    },
+    {
+      "id": "2611.12464",
+      "first_submission_utc": "2026-11-09T14:13:32Z",
+      "revision": 1,
+      "primary_category": "cs.CL",
+      "matched_categories": [
+        "cs.AI",
+        "cs.CL",
+        "cs.LG"
+      ],
+      "title": "Phrase-Level Speculative Decoding on a Frozen Target"
+    },
+    {
+      "id": "2611.12466",
+      "first_submission_utc": "2026-11-09T14:15:18Z",
+      "revision": 1,
+      "primary_category": "stat.ML",
+      "matched_categories": [
+        "cs.LG",
+        "stat.ML"
+      ],
+      "title": "Prediction with Foundation Models under Deployment Budgets"
+    },
+    {
+      "id": "2611.12475",
+      "first_submission_utc": "2026-11-09T14:22:21Z",
+      "revision": 1,
+      "primary_category": "cs.LG",
+      "matched_categories": [
+        "cs.LG"
+      ],
+      "title": "Learning to Select Sparse Linear Solvers with Convolutional Neural Networks"
+    },
+    {
+      "id": "2611.12477",
+      "first_submission_utc": "2026-11-09T14:22:47Z",
+      "revision": 1,
+      "primary_category": "cs.CV",
+      "matched_categories": [
+        "cs.CV"
+      ],
+      "title": "Perturb, Aggregate then Reconstruct: Consensus Aggregation and Fourier-Attended Multi-Decoders for Reconstruction-based Multi-View Anomaly Detection"
+    },
+    {
+      "id": "2611.12478",
+      "first_submission_utc": "2026-11-09T14:23:38Z",
+      "revision": 1,
+      "primary_category": "cs.AI",
+      "matched_categories": [
+        "cs.AI"
+      ],
+      "title": "AuDiR: Diagnosing Audio Reasoning with Rule and Percept Interventions"
+    },
+    {
+      "id": "2611.12487",
+      "first_submission_utc": "2026-11-09T14:36:20Z",
+      "revision": 1,
+      "primary_category": "cs.CL",
+      "matched_categories": [
+        "cs.CL"
+      ],
+      "title": "Detecting AI-Authored Text in Authentic Student Writing: Evidence from PISA 2025"
+    },
+    {
+      "id": "2611.12491",
+      "first_submission_utc": "2026-11-09T14:40:10Z",
+      "revision": 1,
+      "primary_category": "cs.LG",
+      "matched_categories": [
+        "cs.LG",
+        "stat.ML"
+      ],
+      "title": "Out-of-the-Box Tabular Foundation Models for Bayesian Optimization in Materials Discovery"
+    },
+    {
+      "id": "2611.12501",
+      "first_submission_utc": "2026-11-09T14:43:42Z",
+      "revision": 1,
+      "primary_category": "cs.CL",
+      "matched_categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "title": "Text Grouping Changes Completion-Time Comparisons in Long-Form Simultaneous Speech Translation"
+    },
+    {
+      "id": "2611.12508",
+      "first_submission_utc": "2026-11-09T14:48:33Z",
+      "revision": 1,
+      "primary_category": "cs.CV",
+      "matched_categories": [
+        "cs.AI",
+        "cs.CV"
+      ],
+      "title": "MARS: Multiscale Appearance-Residual Streams for Video Forgery Detection"
+    },
+    {
+      "id": "2611.12509",
+      "first_submission_utc": "2026-11-09T14:49:03Z",
+      "revision": 1,
+      "primary_category": "cs.LG",
+      "matched_categories": [
+        "cs.LG"
+      ],
+      "title": "UniHam: A Large-Scale SOC-Complete Dataset and Benchmark for Hamiltonian Learning in Materials"
+    },
+    {
+      "id": "2611.12521",
+      "first_submission_utc": "2026-11-09T14:58:53Z",
+      "revision": 1,
+      "primary_category": "cs.LG",
+      "matched_categories": [
+        "cs.CL",
+        "cs.LG"
+      ],
+      "title": "Can the Confidence and Decisions of System 1 Models Be Trusted? An Explainability and Perturbation Audit of Jev-Style Decision Models"
+    },
+    {
+      "id": "2611.12524",
+      "first_submission_utc": "2026-11-09T14:59:34Z",
+      "revision": 1,
+      "primary_category": "cs.CV",
+      "matched_categories": [
+        "cs.CV"
+      ],
+      "title": "EditJudge-Bench: Auditing VLM Image-Edit Judges with Synthetic Ground Truth"
+    },
+    {
+      "id": "2611.12526",
+      "first_submission_utc": "2026-11-09T15:01:51Z",
+      "revision": 1,
+      "primary_category": "cs.RO",
+      "matched_categories": [
+        "cs.RO"
+      ],
+      "title": "Galilean Robots, Aristotelian Sensors: Joint Spatiotemporal Trajectory Estimation and Extrinsic Calibration"
+    },
+    {
+      "id": "2611.12527",
+      "first_submission_utc": "2026-11-09T15:02:29Z",
+      "revision": 1,
+      "primary_category": "cs.SD",
+      "matched_categories": [
+        "cs.AI"
+      ],
+      "title": "WaveGen: Truly End-to-End Waveform Generation via Internal Spectral Trajectory Learning"
+    },
+    {
+      "id": "2611.12529",
+      "first_submission_utc": "2026-11-09T15:03:45Z",
+      "revision": 1,
+      "primary_category": "cs.HC",
+      "matched_categories": [
+        "cs.AI"
+      ],
+      "title": "Perceived Agency During Agent-Avatar Control Transitions in Virtual Reality"
+    },
+    {
+      "id": "2611.12530",
+      "first_submission_utc": "2026-11-09T15:05:11Z",
+      "revision": 1,
+      "primary_category": "cs.LG",
+      "matched_categories": [
+        "cs.LG"
+      ],
+      "title": "K-prop: Deep Online Learning by Backpropagating Temporal Kernels"
+    },
+    {
+      "id": "2611.12544",
+      "first_submission_utc": "2026-11-09T15:13:59Z",
+      "revision": 1,
+      "primary_category": "math.OC",
+      "matched_categories": [
+        "cs.LG"
+      ],
+      "title": "Learning inexact alternating minimization for convex problems with quadratic coupling"
+    },
+    {
+      "id": "2611.12550",
+      "first_submission_utc": "2026-11-09T15:20:15Z",
+      "revision": 1,
+      "primary_category": "math.ST",
+      "matched_categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "title": "A Strict Upper Bound for Three-Point Weighted Selection in Planar Vector-Valued Regression"
+    },
+    {
+      "id": "2611.12552",
+      "first_submission_utc": "2026-11-09T15:20:32Z",
+      "revision": 1,
+      "primary_category": "cs.AI",
+      "matched_categories": [
+        "cs.AI"
+      ],
+      "title": "SciMARS: Multi-Agent Recursive Self-Improvement for Closed-Loop Scientific Discovery"
+    },
+    {
+      "id": "2611.12557",
+      "first_submission_utc": "2026-11-09T15:23:53Z",
+      "revision": 1,
+      "primary_category": "cs.CV",
+      "matched_categories": [
+        "cs.AI",
+        "cs.CV"
+      ],
+      "title": "WanderBench: Can World Models Explore Dynamic Worlds from Video?"
+    },
+    {
+      "id": "2611.12564",
+      "first_submission_utc": "2026-11-09T15:28:27Z",
+      "revision": 1,
+      "primary_category": "cs.CV",
+      "matched_categories": [
+        "cs.CV"
+      ],
+      "title": "GHiML: VLM-Guided Hierarchical Multi-Label Learning with Applications to Benthic Imagery"
+    },
+    {
+      "id": "2611.12567",
+      "first_submission_utc": "2026-11-09T15:29:47Z",
+      "revision": 1,
+      "primary_category": "cs.LG",
+      "matched_categories": [
+        "cs.LG",
+        "cs.RO"
+      ],
+      "title": "LawKAN: Group-Law Layers for Composition -- When Imposing a Known Law Pays Off"
+    },
+    {
+      "id": "2611.12568",
+      "first_submission_utc": "2026-11-09T15:30:06Z",
+      "revision": 1,
+      "primary_category": "cs.RO",
+      "matched_categories": [
+        "cs.RO"
+      ],
+      "title": "Modeling and Estimation of a Towed Marine System"
+    },
+    {
+      "id": "2611.12574",
+      "first_submission_utc": "2026-11-09T15:33:50Z",
+      "revision": 1,
+      "primary_category": "cs.CV",
+      "matched_categories": [
+        "cs.CL",
+        "cs.CV",
+        "cs.LG"
+      ],
+      "title": "Evaluating Cross-Signal Coherence in Mammography Vision-Language Models"
+    },
+    {
+      "id": "2611.12575",
+      "first_submission_utc": "2026-11-09T15:34:51Z",
+      "revision": 1,
+      "primary_category": "cs.LG",
+      "matched_categories": [
+        "cs.LG"
+      ],
+      "title": "From Likelihood Convergence to Parameter Convergence in POMDPs"
+    },
+    {
+      "id": "2611.12587",
+      "first_submission_utc": "2026-11-09T15:40:43Z",
+      "revision": 1,
+      "primary_category": "cs.CL",
+      "matched_categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "title": "AgentOPSD: Turn-Level Credit Assignment via Recursive Belief Revision"
+    },
+    {
+      "id": "2611.12591",
+      "first_submission_utc": "2026-11-09T15:41:49Z",
+      "revision": 1,
+      "primary_category": "cs.LG",
+      "matched_categories": [
+        "cs.LG"
+      ],
+      "title": "TRACE: Adaptive Trust-Region Bayesian Optimization for Open-Ended Molecular Design"
+    },
+    {
+      "id": "2611.12592",
+      "first_submission_utc": "2026-11-09T15:42:42Z",
+      "revision": 1,
+      "primary_category": "cs.CL",
+      "matched_categories": [
+        "cs.CL"
+      ],
+      "title": "Fairness in Explainable AI Narratives: Decomposing Social Disparities in LLM-Generated Explanations"
+    },
+    {
+      "id": "2611.12597",
+      "first_submission_utc": "2026-11-09T15:45:46Z",
+      "revision": 1,
+      "primary_category": "cs.CL",
+      "matched_categories": [
+        "cs.AI",
+        "cs.CL"
+      ],
+      "title": "Unmasking Four Knapsack Problems in the Traveling Thief Benchmark"
+    },
+    {
+      "id": "2611.12603",
+      "first_submission_utc": "2026-11-09T15:48:02Z",
+      "revision": 1,
+      "primary_category": "cs.SD",
+      "matched_categories": [
+        "cs.CV"
+      ],
+      "title": "Direct Conditioning of Audio Diffusion Transformers on fMRI Reveals Cortical Contributions to Sound Reconstruction"
+    },
+    {
+      "id": "2611.12604",
+      "first_submission_utc": "2026-11-09T15:48:07Z",
+      "revision": 1,
+      "primary_category": "cs.CR",
+      "matched_categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "title": "Double Blind Evals: Resolving the Dual Confidentiality Dilemma in AI Safety Auditing"
+    },
+    {
+      "id": "2611.12612",
+      "first_submission_utc": "2026-11-09T15:55:07Z",
+      "revision": 1,
+      "primary_category": "stat.ME",
+      "matched_categories": [
+        "stat.ML"
+      ],
+      "title": "Graph-Guided Bayesian Factor Analysis: A Fast Integrated EFA-CFA Approach for High-Dimensional Data"
+    }
+  ]
+}

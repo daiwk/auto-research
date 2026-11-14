@@ -1,0 +1,325 @@
+{
+  "schema_version": 1,
+  "scope": "Targeted original-source decisions in the captured November 9 review window; no training or implementation.",
+  "reviews": [
+    {
+      "id": "2610.22686",
+      "revision": 2,
+      "title": "Multimodal Filesystem Memory for Long-Horizon Embodied Agents",
+      "track": "agent",
+      "published": "2026-10-15T21:56:00Z",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.22686v2",
+      "source_sha256": "ae1966e66a74f28a8bf9fe59abfb872e13b9c4281f53db269abfc5473e227004",
+      "locations": [
+        "§3",
+        "§4.1",
+        "Appendix E.4"
+      ],
+      "reason": "用文件系统保留多模态观察、可重用过程和关联索引；检索细节时按需恢复观察，而非仅保留文字摘要。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.22686v2",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "96 次 Minecraft 实验、1,125 个 KiCad episode，三种子；Dragon 个别配置每轮最长约 14 小时。主对照使用 GPT-5.6-Sol、Claude Opus 5、GPT-6-Astra。",
+        "available_resource": "one A100 or A30, or a local Mac",
+        "cost_type": "环境交互和闭源模型推理"
+      }
+    },
+    {
+      "id": "2610.23223",
+      "revision": 1,
+      "title": "Process Reward Modeling with Reliability- and Conservatism-Aware Bayesian Belief",
+      "track": "post-training",
+      "published": "2026-10-16T09:54:16Z",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.23223v1",
+      "source_sha256": "564dee9d0d2fe2e64564ff11b28c305826f55db5f193b37fad65e9cdc80505d9",
+      "locations": [
+        "§3",
+        "§5.1",
+        "Appendix C.1"
+      ],
+      "reason": "用贝叶斯信念表达过程步骤正确率的不确定性，融合可靠性与保守估计用于挑选推理轨迹。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.23223v1",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "一次完整微调约需 4 张 H100、20 小时；每前缀使用 16 条蒙特卡洛续写，使用 Qwen2.5-32B-Instruct 判定。",
+        "available_resource": "one A100 or A30, or a local Mac",
+        "cost_type": "多卡微调及采样评判"
+      }
+    },
+    {
+      "id": "2610.23574",
+      "revision": 1,
+      "title": "Darwin-Claw: Environment-Adaptive Experience Consolidation for Recursively Self-Evolving Agents",
+      "track": "agent",
+      "published": "2026-10-16T14:57:21Z",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.23574v1",
+      "source_sha256": "86cabfa4d4ef3fb16162c3cd18da6f129eb8a4ef4ace76e32d183114a4c69dad",
+      "locations": [
+        "§2",
+        "§3.1",
+        "§3.3"
+      ],
+      "reason": "把新经验放入有时限的候选区，用环境反馈推广可复用经验并退役有害条目。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.23574v1",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "包含 60 个 WildClawBench 长程任务，以及对 Qwen3.5-35B-A3B 多轮数据筛选和监督微调的 RSIBench-Data 实验；完整闭环并非单次规则评测。",
+        "available_resource": "one A100 or A30, or a local Mac",
+        "cost_type": "长程评测与 35B 多轮微调"
+      }
+    },
+    {
+      "id": "2610.24499",
+      "revision": 1,
+      "title": "TideKV: Delayed KV Eviction via Layer-Wise Chunked Prefill for Memory-Efficient Long-Context LLM Inference",
+      "track": "foundation-model",
+      "published": "2026-10-17T06:44:27Z",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.24499v1",
+      "source_sha256": "60f4dedf496bad8196d96b5a63fd1ec3f15410edbee2f9ed29f009103350cd88",
+      "locations": [
+        "§4",
+        "§6.1",
+        "Table 11"
+      ],
+      "reason": "按层逐块预填充，延迟到层末再压缩 KV，让选取保留全上下文可见性；单 A100 可验证子集，但不能复现完整的跨设备性能矩阵。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.24499v1",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "两种 BF16 模型（8B/7B）在 A100 PCIe 40GB、RTX 4090、Jetson AGX Orin 上与匹配的 FlashAttention-2 基线比较，RULER 最高 128K。",
+        "available_resource": "one A100 or A30, or a local Mac",
+        "cost_type": "跨设备性能矩阵"
+      }
+    },
+    {
+      "id": "2610.27379",
+      "revision": 1,
+      "title": "DSTILL: Trajectory Consistency Distillation for Accelerated One-Step Drafting in Block Diffusion Speculative Decoding",
+      "track": "foundation-model",
+      "published": "2026-10-19T23:05:16Z",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/pdf/2610.27379v1",
+      "source_sha256": "20acfa8f7eeceff54f3debcd07af28ad95c842af4c835ec86746ae819d465fa6",
+      "locations": [
+        "§3",
+        "§4.3",
+        "Table 4",
+        "Appendix D"
+      ],
+      "reason": "训练单步 block-diffusion drafter 对齐多步教师的去噪轨迹和学生访问状态，以缓解并行 token 提议的因子分解误差。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/pdf/2610.27379v1",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "消融在 8 张 H100 上运行；原文目标模型包括 GPT-OSS-120B、Nemotron-3.5-30B-A3B；六个评测任务。",
+        "available_resource": "one A100 or A30, or a local Mac",
+        "cost_type": "多卡蒸馏及大模型解码"
+      }
+    },
+    {
+      "id": "2610.27890",
+      "revision": 1,
+      "title": "EndoWorld-JEPA: Motion-Guided Global–Local Latent World Modeling for Endoscopic Video Representation Learning",
+      "track": "foundation-model",
+      "published": "2026-10-20T09:11:49Z",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.27890v1",
+      "source_sha256": "13410b355b058b618713d7f6cefd677f06310f0a7f71bf4bc40be73554d4bee0",
+      "locations": [
+        "§3",
+        "§4.1"
+      ],
+      "reason": "根据内镜相邻帧运动引导全局和局部潜变量预测；它是 JEPA 预训练方法，不能按医学检索碰撞丢弃。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.27890v1",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "剔除与验证分区重叠片段后，原始自监督预训练仍含 587 条视频、644 万帧，并另有下游验证。",
+        "available_resource": "one A100 or A30, or a local Mac",
+        "cost_type": "完整视频预训练语料及评估"
+      }
+    },
+    {
+      "id": "2610.29491",
+      "revision": 1,
+      "title": "RubricOpt: Self-Revision of Semantic Rubrics for Preference Optimization",
+      "track": "post-training",
+      "published": "2026-10-21T09:46:37Z",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.29491v1",
+      "source_sha256": "d92110d78849542e994fcce44275786fb348527a634f3733c9a06af19c3ba812",
+      "locations": [
+        "§3",
+        "§4.1",
+        "§4.3"
+      ],
+      "reason": "用需求和供给画像选择训练评分项，再用证据门控决定是否改写偏好对；推理阶段不调用 rubric。混合修订的反馈与部分评测交叠，不能视为完全独立验证。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.29491v1",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "HelpSteer3/Tulu3 上的原文正式实验包括 Qwen3 4B、8B 和 Mistral 7B 的 rank-64 LoRA、反馈改写与多任务对照。",
+        "available_resource": "one A100 or A30, or a local Mac",
+        "cost_type": "多模型训练及评分改写"
+      }
+    },
+    {
+      "id": "2610.33539",
+      "revision": 1,
+      "title": "CoEvolve: Counterfactual-Guided Co-Evolution of Memory and Collaboration in Multi-Agent Systems",
+      "track": "agent",
+      "published": "2026-10-24T08:35:39Z",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.33539v1",
+      "source_sha256": "cfd8930f56b04f31cb7eb2891dadd08d576e434674ef3e3d65ac1fbd740e63bd",
+      "locations": [
+        "§3",
+        "§4.1",
+        "Appendix E.1"
+      ],
+      "reason": "在相同局部上下文比较实际和反事实协作轨迹，让记忆和协作规则一起迭代，而非只从成功轨迹累积规则。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.33539v1",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "主实验用 Qwen3-235B-A22B-Instruct-2507，三个迭代轮次各用 50 个训练任务；ALFWorld 134 个未见任务和 WebShop 500 个正式测试任务。",
+        "available_resource": "one A100 or A30, or a local Mac",
+        "cost_type": "235B 多代理模型及环境轨迹"
+      }
+    },
+    {
+      "id": "2610.36554",
+      "revision": 2,
+      "title": "PRISM-BENCH",
+      "track": "foundation-model",
+      "published": "2026-10-27T03:02:39Z",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.36554v2",
+      "source_sha256": "89d9c178d375aae71384b4cfd3e3bca09b53777326eb033dc3224d5a5f26b2a8",
+      "locations": [
+        "§3",
+        "§4",
+        "§5.4–5.5"
+      ],
+      "reason": "评估视觉推理的视觉依据、推理与人类轨迹一致性及生成成本。作者报告默认过程评估器的区分能力弱，不能把分数当金标准。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.36554v2",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "1,000 个人工策划问题覆盖 25 个系统，计费指标只能用于 20 个可数生成 token 的开权重模型；闭源系统的内部推理 token 不可比。",
+        "available_resource": "one A100 or A30, or a local Mac",
+        "cost_type": "多模型图文推理及 API 评估矩阵"
+      }
+    },
+    {
+      "id": "2611.06543",
+      "revision": 2,
+      "title": "Using Experience Twice: Dynamic Process Rubrics for Privileged Token-Level Credit Assignment",
+      "track": "post-training",
+      "published": "2026-11-04T14:11:53Z",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2611.06543v2",
+      "source_sha256": "453de2c4fe0fd9ecedcd6d4afe91bfefad581e17bc6aa5ab04e7b9a45ed20aea",
+      "locations": [
+        "§3",
+        "§4.1",
+        "Table 1"
+      ],
+      "reason": "从经历中生成多个评分规则组，选取最贴合环境回报的规则，再用特权上下文对比 log 概率差修正 GRPO token 优势。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2611.06543v2",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "Qwen3-1.7B/4B 在 ALFWorld 与 WebShop 的完整全参数训练，每次 4 张 A100 80GB，300 步，每次更新 8 个任务各 8 条 rollout。",
+        "available_resource": "one A100 or A30, or a local Mac",
+        "cost_type": "多卡强化学习"
+      }
+    },
+    {
+      "id": "2611.07593",
+      "revision": 1,
+      "title": "TACT-KV",
+      "track": "foundation-model",
+      "published": "2026-11-05T07:43:29Z",
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2611.07593v1",
+      "source_sha256": "69de35cea9d9529b6c58e90d4f35fba3190e5e4603ada7e2835328680f46295e",
+      "locations": [
+        "§2",
+        "§3.5–3.6",
+        "Table 6"
+      ],
+      "reason": "将体素网格 KV 做三轴余弦变换，用反向注水在频带间分配位数；融合解码路径直接从量化表示反变换。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2611.07593v1",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "原文吞吐实验依赖单张 96 GiB RTX PRO 6000 和融合 FlashAttention 内核，评估另含四种通用 VLM 的 Video-MME；单 A100 不能对齐指定显存与硬件性能。",
+        "available_resource": "one A100 or A30, or a local Mac",
+        "cost_type": "目标硬件上的融合内核及显存性能"
+      }
+    }
+  ]
+}

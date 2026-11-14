@@ -115,6 +115,10 @@
 
 - 2026-08-27 · 一作：Junjie Zhang · [RedEvoAgent: Automatic Red-Teaming Agent with Experience-Driven Skill Evolution](../2608.27439-redevoagent/README.md)（`redevoagent`）：RedEvoAgent 不直接检索冗长攻击轨迹，而把跨案例经验蒸馏成可读技能；只归因真正决定成败的工具，并且新技能必须在留出验证集上优于 incumbent 才能晋级。
 
+## Columbia University / Amazon internship
+
+- 2026-11-10 · 一作：Kaiyuan Hou · [ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows](../2611.14492-retrace/README.md)（`retrace`）：相同 SOP 反复执行时，每步再让 LLM 规划成本高。ReTrace 从 Agent 的推理解释、工具调用及参数来源恢复“何时执行哪步”，聚合为带证据的条件规则，再合成为可执行工作流。
+
 ## Cornell University
 
 - 2026-07-30 · 一作：MaoXun Huang · [MANTA: Multi-Agent Network Topology Adaptation for Self-Evolving Multi-Agent Systems](../2607.28527-manta/README.md)（`manta`）：根据任务先验初始化通信拓扑，运行中监控协作 trace，并有界调整角色、边、顺序、可见性和验证路径。
@@ -165,6 +169,10 @@
 - 2026-09-08 · 一作：Hongbang Yuan · [Environments as Scaffold: Enriching Feedback to Bootstrap Self-Evolving Agents in Long-Horizon Tasks](../2609.08404-feedback-scaffold/README.md)（`feedback-scaffold`）：论文指出统一反馈不适合整个探索过程：早期能力不足时使用 action guidance 降低搜索难度，后期则改为 observation enrichment，让 Agent 自己选择动作，避免长期依赖示范。
 - 2026-08-27 · 一作：Jinghan Xu · [Verify Smarter, Evolve Further: Efficient Harness Evolution through Behavior-Aware Verification](../2608.27311-harnesslens/README.md)（`harnesslens`）：固定验证集浪费 rollout 且会用平均分掩盖局部回退。HarnessLens 从执行轨迹提出修改，只在受影响行为对应的任务上成对验证，并要求证据能归因到候选修改。
 
+## Fudan University / Shanghai Artificial Intelligence Laboratory
+
+- 2026-11-10 · 一作：Jiahang Lin · [ARE-bench: Benchmarking Agents' Research Ability in Real-World Researcher Sessions and Workspaces](../2611.14364-are-bench/README.md)（`are-bench`）：从干净目录完成独立任务，不等于能接手正在进行的研究。ARE-bench 在真实会话切点恢复完整未清理 workspace，保留之前仍有效的要求。
+
 ## Gen-Verse research collaboration
 
 - 2026-09-15 · 一作：Shuhan Xue · [ScienceBuddy: Recursive-in-Recursive Self-Improvement for Interactive Scientific Agents](../2609.17523-sciencebuddy/README.md)（`sciencebuddy`）：内层递归演化交互 harness，外层用成功轨迹更新科学 Agent 策略。
@@ -186,11 +194,19 @@
 ## Google Cloud
 
 - 2026-09-11 · 一作：Nilesh Jaiswal · [Beyond Vector Similarity: Hierarchical Context-Aware Graph RAG vs Standard RAG in Enterprise Code Migration](../2609.12464-hcrg/README.md)（`hcrg`）：HCRG 用 AST 提取 INHERITS/CALLS/IMPORTS，缓存全局架构骨架，按父依赖先后迁移，三跳取回结构上下文。原文对照是 800 字符/150 overlap/top-5 向量 RAG。
+- 2026-08-16 · 一作：Pouya Ghiasnezhad Omran · [Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback](../2608.15591-agent-gym/README.md)（`agent-gym`）：业务规则变化往往比 Agent 代码发布更快。Agent Gym 不重新训练或直接改写 acting agent，而在其 JSON 产物之后加独立纠错规则层：确定性条件检测、按作用域收集、按动作层级合并，再由领域专家审核新规则。
+- 2026-04-16 · 一作：Jihye Choi · [PolicyBank: Evolving Policy Understanding for LLM Agents](../2604.15505-policybank/README.md)（`policybank`）：Agent 可能严格遵守含糊的书面规则，却仍违反真实业务要求。PolicyBank 区分执行失败与 specification–requirement gap，不把“按原规则做了”当成授权正确；目标是部署前根据可信开发反馈修正理解。
+
+## Google Cloud / KAIST
+
+- 2025-09-26 · 一作：Jaehyun Nam · [DS-STAR: Data Science Agent via Iterative Planning and Verification](../2509.21825-ds-star/README.md)（`ds-star`）：数据科学问题可能跨 CSV、JSON、Markdown、Excel 等多种文件。只看少量表格行容易丢失关联信息，而脚本能运行也不代表输出足以回答问题。
+- 2025-05-27 · 一作：Jaehyun Nam · [MLE-STAR: Machine Learning Engineering Agent via Search and Targeted Refinement](../2506.15692-mle-star/README.md)（`mle-star`）：直接让 LLM 重写整份训练脚本，容易一直使用熟悉的旧模型，又在数据处理、模型选择和调参之间反复跳转。MLE-STAR 先从网络检索任务相关模型与示例代码，实际训练候选并按 validation 指标排序，再逐个尝试合并，只有改进才保留。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
 ## Google Cloud AI Research
 
 - 2026-10-21 · 一作：Rujun Han · [PLE: Physical-Engineering's Last Exam](../2610.30537-physical-engineering-exam/README.md)（`physical-engineering-exam`）：PLE把专业工程工作组织为85项长时任务，覆盖结构、土木、电气及机械；输入是多格式项目文件，输出是可审查的工程产物。任务由专家编写，或经Creator–Solver迭代后由专家复核；裁判与参考解不向solver暴露。
 - 2026-10-01 · 一作：Caiqi Zhang · [VeriHarness: Scaling Agentic Verification for Long-Horizon Tasks](../2610.00972-veriharness/README.md)（`veriharness`）：同一基础模型得到 workspace、证据工具和可复用验证技能；disagreement resolver 查证冲突 claim，consensus challenger 主动质疑共同 claim 和遗漏要求。
+- 2026-09-17 · 一作：Jaehyun Nam · [ScientistTwo: Pioneering the Human Knowledge Frontier with Autonomous AI](../2609.19644-scientist-two/README.md)（`scientist-two`）：ScientistTwo 面向给定科学问题的持续研究：先提炼已有方法局限，再生成并筛选新颖想法；在复现的子集基线上做工程迭代，只有被判为 Good 的想法才升到全量 benchmark。新一轮想法同时利用成功与失败日志，并加入尚未尝试的高新颖度种子，避免只围绕早期赢家局部搜索。
 - 2026-07-30 · 一作：Yijia Xiao · [FinanceHarness: Autonomous Financial Deep Research Framework](../2607.27853-finance-harness-protocol/README.md)（`finance-harness-protocol`）：FinanceHarness 围绕时点限定的搜索环境组织金融工具、分层加载技能与报告证据；FinanceGym 再把评分分为截止日前可检索的证据和只能在截止日后核实的预测。Agent 只能看到问题与截止日，thesis、评分 rubric、未来证据留在提交后的评测器。
 - 2026-05-25 · 一作：Rui Meng · [ScientistOne: Towards Human-Level Autonomous Research via Chain-of-Evidence](../2605.26340-scientist-one/README.md)（`scientist-one`）：研究产物看起来完整，仍可能引用虚构、分数无法复算或方法描述与代码不同。CoE 将主张连到可核验来源；独立 I1–I4 检查分数、规则、引用和方法/代码一致性。
 - 2026-04-06 · 一作：Yiwen Song · [PaperOrchestra: A Multi-Agent Framework for Automated AI Research Paper Writing](../2604.05018-paperorchestra/README.md)（`paperorchestra`）：PaperOrchestra 用 Outline、Plotting、Literature Review、Section Writing、Content Refinement 五个 Agent，把零散想法和实验日志转成含文献与图表的 LaTeX 稿件。大纲之后图示与文献检索并行，引用经过实体和时间截止核验，最终根据多维评价接受或回退修订；系统不负责替作者发明或执行新实验。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
@@ -200,6 +216,10 @@
 ## Google Cloud AI Research / Carnegie Mellon University
 
 - 2026-10-10 · 一作：Weichen Yu · [Harmony Harness: Multi-Objective Self-Evolution of Agent Harnesses](../2610.15150-harmony-harness/README.md)（`harmony-harness`）：单目标演化可能通过放松检查提高功能分数，同时损害安全。Harmony Harness 将功能与安全保持为两个独立目标：每个偏好向量维护一个框架，候选只替换邻域中更差的框架。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
+## Google Cloud AI Research / Seoul National University
+
+- 2026-05-14 · 一作：Minbeom Kim · [LiSA: Lifelong Safety Adaptation via Conservative Policy Induction](../2605.14454-lisa/README.md)（`lisa`）：固定安全模型不容易适应组织、用户与情境边界。LiSA 从稀疏且可能有噪声的失败反馈维护两类记忆：可复用的广义策略，以及相似情境中允许/拒绝冲突形成的局部提示。
 
 ## Google Cloud AI Research / University of Kentucky
 
@@ -211,12 +231,23 @@
 
 ## Google DeepMind
 
+- 2026-11-10 · 一作：Swarat Chaudhuri · [AlphaProof Code: Verifying Signal's Security at the Machine-Code Level](../alphaproof-code/README.md)（`alphaproof-code`）：人类与规格编写/审阅 Agent 先定义并批准要证明的安全性质，证明团队再处理实际 Rust 代码经标准编译器生成的 AArch64 程序。Lean 内核检查证明，gatekeeper 还要防止团队偷偷弱化规格或其依赖。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- 2026-11-06 · 一作：Sergey Shirobokov · [Discovering formally verified quantum programs with AI](../2611.09822-verified-quantum-wiki/README.md)（`verified-quantum-wiki`）：量子程序的复杂度可能远超经典模拟能力，靠若干数值样例无法证明一般正确性。研究者先在量子 Hoare 逻辑（QHL）库中冻结正确性与资源规范，异构 LLM 团队搜索程序和 Lean 证明。
 - 2026-10-15 · 一作：Maxence Faldor · [A team of Gemini 4 Argon agents beats Minecraft](../2610.22319-gemini-minecraft/README.md)（`gemini-minecraft`）：四个执行 Agent 通过编写 JavaScript 程序操纵 Mineflayer 角色；Observer 汇总世界状态，聊天和笔记传递进度。研究重点是长期协作、程序化工具与持久状态，而不是新训练目标。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-08-07 · 一作：Valentin Liévin · [ResidencyRL: Reinforcement Learning in Simulated Clinical Environments](../2608.07418-residency-rl/README.md)（`residency-rl`）：静态知识题不能覆盖主动询问、工具调用及长程决策。论文通过场景生成、带信息不对称的模拟环境、按维度隔离的裁判和GRPO组成完整训练链路；隐藏参考信息只属于环境/裁判，不能直接暴露给被评估策略。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- 2026-04-03 · 一作：Bernd Bohnet · [Analysis of Optimality of Large Language Models on Planning Problems](../2604.02910-planning-optimality/README.md)（`planning-optimality`）：只判断计划能否达到目标，会忽略大量无必要动作。论文把LLM规划评测从validity扩展到optimality，在Blocksworld和抽象P*任务中构造具有已知最优长度的课程，分析推理模型随着难度增长的计划冗余。
+- 2026-02-27 · 一作：Jacob Eisenstein · [MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games](../2602.24188-mt-pingeval/README.md)（`mt-pingeval`）：MT-PingEval 用协作游戏检查模型是否真正从交互中获益，而非比较多轮时顺便增加总 token。每名玩家只看到自己的信息，通过对话解决共同任务；原 suite 包含棋局、COVR、图片选择与 Name-game。
+- 2025-09-08 · 一作：Eser Aygün · [An AI system to help scientists write expert-level empirical software (ERA)](../2509.06503-era-flat-puct/README.md)（`era-flat-puct`）：ERA 把可评分的科研任务、已有方法或新研究思路交给 LLM，生成程序后在隔离环境中运行，以任务指标持续搜索改进。关键不是让模型连续改写同一段答案，而是保存已执行代码树，用质量与探索项决定下一个应变异的程序。
+- 2025-06-16 · 一作：Alexander Novikov · [AlphaEvolve: A coding agent for scientific and algorithmic discovery](../2506.13131-alphaevolve/README.md)（`alphaevolve`）：AlphaEvolve 把有自动评价器的算法改进问题写成程序进化：人类给出任务、初始程序和评价函数，提示采样器提供待改程序、已有高分构造及反馈；Gemini 2.0 Flash/Pro 混合提出代码修改，再由评估节点实际执行。带多维分数的程序进入进化数据库，为下一轮保留高质量和多样化材料。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
+## Google Inc.
+
+- 2026-04-27 · 一作：Yale Song · [Co-Director: Agentic Generative Video Storytelling](../2604.24842-co-director/README.md)（`co-director`）：Co-Director 将生成式视频拆为全局创意方向与局部多模态修正。创意方向有策略 3 类、叙事 3 类、美学 4 类；一次完整视频产生三个战略效果分，各自更新所属轴，而最终视频用独立质量分选择。
 
 ## Google Research
 
 - 2026-10-17 · 一作：Zachary Cutts · [Aptamers as a sandbox for lab-in-the-loop agentic molecular discovery](../2610.24806-aptamer-lab-loop/README.md)（`aptamer-lab-loop`）：该研究把计算设计与真实实验测量放进多轮反馈闭环，让Agent利用成功和失败证据调整下一轮策略。关键不是把Agent多跑几轮，而是实物测量可以否定计算评分；论文显示一些预测代理与实际测量不一致。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- 2025-12-03 · 一作：Jonathan Berant · [Learning Steerable Clarification Policies with Collaborative Self-play](../2512.04068-clarification-sgp/README.md)（`clarification-sgp`）：同一条含糊问题可以直接猜、列出多种解释，或先提问。最优方式依赖用户能接受的轮次与篇幅成本。
 
 ## Google Research / Hebrew University of Jerusalem / University of Cambridge
 
@@ -303,6 +334,10 @@
 ## Johns Hopkins University
 
 - 2026-09-28 · 一作：Alvin Zhang · [Harness Learning Enables Generalizable Test-Time Adaptation](../2609.35738-harness-learning/README.md)（`harness-learning`）：论文把测试时适配的对象从模型参数转为可执行 harness：proposer 根据真实执行反馈修改验证、解释器、检索或重试组件；底层任务模型保持冻结，多轮执行后保留更有效的脚手架。
+
+## KAIST
+
+- 2026-11-10 · 一作：Yukyeong Lee · [Don't Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents](../2611.14320-wikitrace/README.md)（`wikitrace`）：从一次成功或失败轨迹提炼出的洞见不一定正确，也可能被误用到不适用的任务。WikiTrace 不只保存一句经验，而是把洞见链接到该次执行的解释及未改写的原轨迹。
 
 ## KAIST AI / Meta Superintelligence Labs
 
@@ -408,6 +443,7 @@
 
 ## Nanyang Technological University
 
+- 2026-11-10 · 一作：Runxuan Tang · [When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents](../2611.14326-fgse/README.md)（`fgse`）：一次经验修复能帮助当前任务，却可能在边界任务有害，或破坏旧技能。FGSE 将更新表示为带前提、行为、预期效果和 verifier 的假设，先在临时状态上跑迁移、定向证伪和归档回归探针，再 commit/refine/reject。
 - 2026-02-02 · 一作：Haozhen Zhang · [MemSkill](../2602.02474-memskill/README.md)（`memskill`）：controller 从历史 episode 选择记忆，designer 将重复成功模式编译为技能，并随新反馈升级技能版本。
 - 2025-05-16 · 一作：Lang Feng · [GiGPO](../2505.10978-gigpo/README.md)（`gigpo`）：多轮 Agent 的最终奖励稀疏，整条轨迹的 group relative advantage 无法判断哪个 environment step 做对了。GiGPO 先在完整轨迹组上计算 macro advantage，再按跨轨迹重复到达的 anchor state 建立 step group，计算 micro relative advantage。
 
@@ -432,6 +468,10 @@
 
 - 2026-10-09 · 一作：Zijun Wang · [Test-Time Memory Construction](../../reproductions/2610.13348-t2mem/README.md)（`t2mem`）：离线只提取事件级轻量 metadata 并保留原会话链接。推理时依据查询、已有 memory 与最新 observation 构造 memory cache，再自主选择 SearchMeta、ReadRaw 或 Answer；memory 与信息需求交错演化。
 - 2023-03-20 · 一作：Noah Shinn · [Reflexion](../2303.11366-reflexion/README.md)（`reflexion`）：传统 RL 要大量采样与参数更新。Reflexion 把稀疏标量/二值反馈“放大”为可执行的自然语言经验，写入长期 episodic memory；Actor 在下一 trial 读取反思，Evaluator 继续判定成功与否。
+
+## Northeastern University, Shenyang, China
+
+- 2026-11-10 · 一作：Jiahao Wang · [Program-Aided Patchable Skill Evolution](../2611.14019-pase/README.md)（`pase`）：纯自然语言技能把策略和具体程序操作混在一起，局部修复常要求重写整份说明。PASE 让技能保留描述性知识，同时关联可独立编辑的程序；从成败轨迹提出 patch 后，以独立 validation 判断是否保留。
 
 ## Northwestern
 
@@ -469,6 +509,7 @@
 
 ## Princeton University
 
+- 2026-11-05 · 一作：Linrong Cai · [XStack: A Benchmark for ML Repo Migration](../2611.08472-xstack/README.md)（`xstack`）：局部张量变换正确不等于能迁移完整实验。XStack 固定 20 个真实 PyTorch 仓库的源提交，要求 Agent 在 TPU 上移植到 JAX，交付环境安装、训练/评测和 PyTorch 权重导出三个入口。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-11-02 · 一作：Taiming Lu · [Strategist: Evolving Reasoning with Agents](../2611.03618-strategist/README.md)（`strategist`）：模型权重不是 Agent 的全部：单步回答、投票、分解、审查、多模型路由等推理程序也决定效果和成本。论文不训练执行模型，而让一个 meta-agent 在小开发集上提出并实测这些程序，将它们表示为统一 `execute(llm, task) -> str` 的 Python blueprint。
 - 2024-05-06 · 一作：John Yang · [SWE-agent](../2405.15793-swe-agent/README.md)（`swe-agent`）：通用 shell 对 LLM 而言动作空间过宽、输出冗长。SWE-agent 用专门 ACI 约束仓库搜索、文件查看、精确编辑和测试，让模型能围绕 issue 定位故障并验证 patch。
 - 2023-05-17 · 一作：Shunyu Yao · [Tree of Thoughts](../2305.10601-tree-of-thoughts/README.md)（`tree-of-thoughts`）：自回归生成和单条 CoT 很难撤销早期错误。ToT 将中间推理视为可独立评价的 thought，在树上生成多个候选，使用语言模型 value 函数选择 BFS/DFS frontier，并允许 lookahead 和 backtracking。
@@ -622,6 +663,11 @@
 ## UC Berkeley
 
 - 2026-10-08 · 一作：Hyunin Lee · [Recursive Self-Improvement through Multi-Agent Self-Supervision](../2610.12176-mass/README.md)（`mass`）：同一模型执行、提出工作流并成对评价。固定权重下搜索后，独立采集轨迹，以 Bradley–Terry 排名选择前 K−1 条训练、第 K 条验证；仅移除编排者初始工作流提示，保留工作者分工。
+- 2026-08-27 · 一作：Zineng Tang · [Decoupling Planning and Control for Instructable Agents](../2608.26788-instruct-to-act/README.md)（`instruct-to-act`）：VLM 擅长低频高层规划，但不擅长陌生环境的低延迟动作；world-model controller 能高频动作，却缺开放任务指导。Instruct-to-Act 用稀疏文本指令连接二者，并用自身rollout后标注指令，而非专家示范。
+
+## UC Santa Barbara
+
+- 2025-11-21 · 一作：Tengxiao Liu · [Budget-Aware Tool Use Enables Effective Agent Scaling](../2511.17006-bats/README.md)（`bats`）：给 ReAct 更多工具额度不保证它改变探索策略。Budget Tracker 将每个工具已经用掉和剩余的调用次数持续放进上下文。
 
 ## University College London
 
@@ -640,6 +686,10 @@
 
 - 2026-03-04 · 一作：Haoyu Liu · [Dual-Modality Multi-Stage Adversarial Safety Training: Robustifying Multimodal Web Agents Against Cross-Modal Attacks](../2603.04364-dmast/README.md)（`dmast`）：DMAST 让防守 Agent 与攻击者共享同一 VLM 参数，以不同角色提示交互；先教师模仿，再用不改变目标动作的 oracle reasoning 做 SFT，最后进行共享策略自博弈 RL。改动不只是普通 GRPO：受攻击组中两个角色的原始终局奖励共同决定均值与方差，而成功样本的长度惩罚只进入优势分子。
 - 2023-10-12 · 一作：Charles Packer · [MemGPT](../2310.08560-memgpt/README.md)（`memgpt`）：有限 context window 使长文档和多轮会话不断遗忘。MemGPT 借鉴操作系统虚拟内存，把常驻核心信息、当前工作上下文和外部归档分层管理；模型通过函数调用移动数据，并以 interrupt/heartbeat 控制继续推理和与用户交互。
+
+## University of California, Berkeley / University of Chicago / Bespoke Labs
+
+- 2026-11-05 · 一作：Mingxuan Li · [EnvOpt: Automated Optimization for Agent Environments](../2611.07372-envopt/README.md)（`envopt`）：长期稳定的工作环境可以承载多类查询。EnvOpt 固定目标模型与 Harness，让研究 Agent 改变同一信息的可访问表示，例如用 SQLite 目录索引散落的表定义，或为既有接口写索引手册。
 
 ## University of California, Santa Barbara
 
@@ -690,6 +740,7 @@
 
 ## University of New South Wales
 
+- 2026-11-06 · 一作：Ruiyi Yang · [ENGRAM: From Agent Experience to Weights through Verified Consolidation](../2611.09472-engram-consolidation/README.md)（`engram-consolidation`）：检索过往轨迹能支持 Agent 执行，但检索库不会因为模型微调而自然缩小。ENGRAM 把两个问题拆开：有没有值得学的经验，以及这次更新的权重能否替代外部检索。
 - 2026-07-31 · 一作：Zian Zhai · [HyperAgent: Planning and Acting over Tool-Schema Hypergraphs for Tool-Use LLM Agents](../2608.02650-hyperagent/README.md)（`hyperagent`）：把工具建模为 input-schema→output-schema 超边，先构造 Task DAG，再按状态缺口扩展 producer tool support graph。
 
 ## University of North Carolina at Chapel Hill
@@ -741,6 +792,10 @@
 
 - 2026-09-29 · 一作：Rulin Shao · [Context Language Models](../2609.37725-context-lm/README.md)（`context-lm`）：把上下文视为模型可直接编辑的文件，使保留、删除和重组信息成为模型行为，而不是外部 harness 的固定策略；多 Agent 各自维护 context file，服务端从第一个不匹配 token 起重新 prefill。
 
+## University of Waterloo / Google
+
+- 2026-11-05 · 一作：Yubo Wang · [ReproBridge: Building Reproducibility into ML Research Artifacts](../2611.08452-reprobridge/README.md)（`reprobridge`）：论文和代码之间常缺环境、启动方式、统计单位及修复理由。ReproBridge 将已恢复的执行知识保存为四件套：代码、环境、launcher、复现指南；构建、独立复现和事后审计使用不同上下文。
+
 ## University of Wisconsin-Madison
 
 - 2026-03-16 · 一作：Xuanfei Ren · [POLCA: Stochastic Generative Optimization with LLM](../2603.14769-polca/README.md)（`polca`）：随机 minibatch、程序与评估器都会产生噪声。POLCA 不仅保留一次最高分，而是持续更新候选评价历史；Summarizer 形成全局经验，Proposer 利用当前反馈提出参数，语义 epsilon-net 限制冗余候选。
@@ -752,6 +807,10 @@
 ## Vanderbilt University
 
 - 2026-08-07 · 一作：Jiahao Zhang · [Coupling Planning with Episodic Memory in LLM Agents for Software Issue Resolution](../2608.06811-pmcoder/README.md)（`pmcoder`）：用层级 phase planner 条件化 episodic retrieval，再用记忆轨迹统计检测 stuck 并重规划，以真实执行 verdict 验证。
+
+## Washington University in St. Louis
+
+- 2026-08-20 · 一作：Chengsong Huang · [EnvHarness: Awakening Static Worlds for Agent Learning](../2608.19880-envharness/README.md)（`envharness`）：静态环境不能针对当前策略的弱点持续提供练习。EnvHarness 不从头生成世界或替换评分器，而是在固定环境的 `reset/step/observe/evaluate` 接口外加包装层：Stage 改初始可达状态；Contract 改允许动作、转换反馈和观察；Chain 延长任务。
 
 ## William & Mary
 

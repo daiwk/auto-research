@@ -1,12 +1,47 @@
 # Paper discovery and coverage audit
 
-<!-- source-sha256: 01d8e377afd304a03dc21c1670607eca8a3d126ca74b595f6db931fa09800197 -->
+<!-- source-sha256: 9884ab3ad5725b5098b40f5d18652f0055058774c371d485aa0a6d75e710b345 -->
 
 [简体中文](../paper-discovery-audit.md)
 
-The latest completed window in this snapshot is [2026-10-13 to 2026-10-15](research-audits/oct15-review-closure/README.md). First releases, historical discoveries, and revisions are counted separately. High-cost candidates are explicitly not reproduced and their reviews are complete. See the [unified status](../paper-discovery-watermark.json) for the current date, coverage, cutoff, and exceptions.
+## November 13: ScientistTwo and historical institutional reconciliation
 
-The latest bounded implementation batch is [2026-10-26](research-audits/oct26-components/README.md). Eight low-cost L1 components passed same-source CPU and real A100 checks with three seeds. Eight high-cost papers were documented without reproduction and are review DONE. Google and Meta were checked first. New announcements, recent source backfill, and historical catalog backfill are counted separately. This is distinct from closing an entire review window: announcement entries are not new papers, and the batch does not move the watermark automatically. The [roadmap](research-roadmap.md) retains previous batches.
+[Six historical backfills](research-audits/nov13-history-repair/README.md) comprise CPU control components for ScientistTwo, DS-STAR, ERA and EnvHarness, plus review-only high-cost dispositions for MLE-STAR and AlphaEvolve. Full campaigns are explicitly not reproduced. Three-seed component execution supports L1 mechanisms only, not scientific or Agent capability comparisons.
+
+The separate [historical reconciliation report](research-audits/nov13-history-repair/history-reconciliation.md) preserves exact identities and capture witnesses before matching the canonical manifest and substantive review terminals. Google/Meta identities remain visible even when the recent delta is empty or an earlier abstract was labeled P2. Ordinary P2 records are not automatically reopened; explicit high-cost and source-archive terminals do not enter retries. Bounded inventories from configured Google/DeepMind/Meta pages are distinct from recent discovery. Pagination and access failures remain explicit; configured page budgets do not prove exhaustive institutional history. The watermark remains **November 9, 2026**.
+
+## November 12: Official-source recheck and one Google backfill
+
+[Sources and boundaries](research-audits/nov12-refresh/README.md): the eight official arXiv announcements are byte-identical to the previous captures, so no new announcement was established. An official Google source reopened primary-method review of the November 5 SensorWM paper; the old P2 selection record is not presented as a method review. Only CPU ranking arithmetic from Eqs.55–56 is delivered, with three-seed mechanism checks. The complete private world model and medical evaluations are **high cost, not reproduced, review DONE**. No new CUDA path or model-capability comparison is claimed.
+
+Priority protection now recognizes `www.research.google` and `research.meta.ai`, while lookalike-domain negatives remain. Official provenance still requires original-source review; it does not by itself prove affiliation, code release, or A/B evidence. Bilingual paper pages, the original figure, four-level Q&A, and the topic deep dive ship together. The watermark remains **November 9, 2026**, without an institution-wide or whole-window census claim.
+
+## November 12 bounded backfill: eight mechanism kernels, unchanged watermark
+
+[Fixed scope, sources, and execution evidence](research-audits/nov12-components/README.md) cover eight low-cost L1 components: six gaps in the November 11 announcement and two historical discoveries triggered by official Google sources, with **zero first publications on the delivery day**. CPU execution covers **eight components × three seeds**. BOPD, REAL Loss, and OnlyAct additionally ran as **three components × three seeds** on a real A100. Small-tensor, finite-policy, and contract diagnostics are not full-model capability comparisons or Evolve-promotion evidence.
+
+Seven full systems or experimental studies are explicitly **too costly and not reproduced (review DONE)**. The theoretical APMD paper instead uses `not_applicable_theory_only`: there is no large empirical protocol to reproduce, no invented high-cost configuration, and no claim that numerical identity checks prove every theorem. Full experiments are not retried automatically. Bilingual paper pages, original figures, four-level questions, and topic deep dives ship together.
+
+**The review watermark stays November 9, 2026**; this does not close the entire November 10–12 window. The eight source listings contain **956 deduplicated identities**, including cross-listings and replacements. This bounded source index is not a count of new qualifying papers, undelivered items, or automatic tasks. Unselected identities have not thereby received method review. The earlier closeouts and batch accounts below remain historical records.
+
+The review watermark is now **November 9, 2026**; see the [window closeout](research-audits/nov09-review-closure/README.md)
+and [unified state](../paper-discovery-watermark.json). First releases, older discoveries, and revisions remain separate.
+Full experiments with evidenced prohibitive cost are not reproduced and are review DONE.
+
+**On November 11 the user explicitly authorized P2 selection-level closure:** non-priority P2 candidates without suspected production A/B
+may close as outside this window's focus after title/abstract screening. This watermark therefore means selection screening and protected
+original-source checks are complete, **not that every method has been verified**, let alone implemented.
+Nonselection does not reject an algorithm's or benchmark's originality or relabel an unread method as costly.
+Google/Meta and possible real production evidence still require originals. The [selection artifact](../research-audits/nov09-review-closure/p2-selection-screen.json)
+retains versions, abstract hashes, protection, and contextual clarification separately from the global method/cost ledger; it creates no automatic implementation tasks.
+
+This closeout reuses real four-track/two-mode captures, repairs the capped query, supplements November 9's end-of-day submissions,
+and checks the 17 previously flagged revisions. The former 4,359 pending identities now have an exact partition between selection dispositions
+and protected original-source decisions, with zero pending. Coverage, cutoff, non-blocking exceptions, and the next overlapping scan from
+**November 8** are specified in the unified state. The [October 15 closeout](research-audits/oct15-review-closure/README.md)
+remains an unchanged historical snapshot.
+
+The previous bounded batch is [November 11](research-audits/nov11-components/README.md): 17 fixed deliverables, comprising 16 L1 components with three-seed CPU diagnostics, four of which also passed three-seed execution on a real A100, and the mechanism/cost-review-only AlphaProof Code reference. All expensive full experiments are explicitly not reproduced and review DONE. Actual first-publication dates, relative to the November 9 watermark in Asia/Shanghai, distinguish 13 later first releases from four backfills; discovery days and identifier months are not publication dates. Meta's 2611.13539 is separately rejected because its full text does not establish quantified production A/B evidence and is not counted among the 17. A capped query and Meta directory access limitation remain, so this is not window-wide closure and does not advance the watermark. The [roadmap](research-roadmap.md) retains previous batches.
 
 The [Harness² and Google/Meta backfill](research-audits/harness2-priority-repair/README.md) fixed a historical filtering gap. **An older date or a previous ledger appearance does not mean method and cost review are complete.** Frozen records are preserved, but date-screening labels such as `historical_first_publication` no longer imply reviewed deduplication. Accepted but undelivered items are separately labeled `implementation-pending`. Explicit high-cost no-reproduction and source exceptions remain terminal and are not retried automatically. This correction does not claim full historical coverage or move the review watermark by itself.
 

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "agent-research:era-flat-puct": {
+      "questions": [
+        {
+          "id": "evaluated-programs-not-unexecuted-thoughts",
+          "level": "basics",
+          "question": "ERA 搜索树里的一个节点是什么，为什么不能把语言模型写出的一个想法直接当作高质量节点？",
+          "answer": "节点对应已经生成并执行、具有外部任务分数的程序候选，而不只是未经验证的文字想法。ERA 用执行后的质量决定后续变异方向；本地 Candidate 只保存身份、外部证据引用和 validation 分数，既不执行代码也不验证引用真实，因此类型合法不等于实验成立。",
+          "example": "教学例：模型声称“加入新归一化能降低误差”，这只是研究思路；只有代码被隔离执行并按固定验证集评分后，才能把它作为相应的已评分候选。手填 0.95 不会替代这一步。",
+          "source_sections": ["背景与主要改动", "数据协议与代码映射"],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "flat-prior-rank-and-ancestor-visits",
+          "level": "mechanism",
+          "question": "ERA v1 的一次扩张如何改变访问次数？PUCT 中的总访问量为什么不等于节点数？",
+          "answer": "根和新子节点的访问次数都从 1 开始。加入一个子节点后，仅给它的所有祖先各加 1，不把新节点分数改成后代 rollout 均值。PUCT 使用所有节点访问次数的总和、整树均匀先验 1/n 和归一化升序任务排名；单节点时排名分数按原文设为 1。",
+          "example": "教学例：先从 root 扩张 A，再从 A 扩张 B，访问次数是 root=3、A=2、B=1，因此 N_total=6 而不是 3。三个节点仍各自保存自己的外部任务分数，不能把 B 的高分回写成 root 的平均价值。",
+          "source_sections": ["核心公式", "本地复现"],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "flat-puct-versus-lats-rollout-search",
+          "level": "comparison",
+          "question": "ERA 的 flat PUCT 与 LATS 的 UCT 都有探索项，为什么不能把两者当成同一种树搜索直接比较节点数？",
+          "answer": "ERA 让整树中所有已执行程序直接竞争扩张，价值项是各程序任务分数的相对排名。LATS 用 MCTS 组织行动、完整轨迹 rollout、环境反馈、价值回传与失败反思，UCT 中的 Q 与访问统计有不同含义。搜索单元、反馈成本和价值来源不同；仓库的 LATS 还以完整计划为叶，未执行原论文的 LM value 或 WebShop，不能据本地小任务指标推出科研能力胜负。",
+          "example": "教学例：ERA 可以直接再变异一个深层的高分程序；LATS 的一次 rollout 则可能执行多步工具轨迹才得到回报。各记作“一次节点扩展”，并不代表相同模型调用、执行时间或可用证据。",
+          "source_sections": ["背景与主要改动", "核心公式", "本地复现", "高成本完整实验与边界"],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "final-task-score-not-exploration-bonus",
+          "level": "implementation",
+          "question": "实现 ERA 时，为什么不能用当前 PUCT 最高的节点作为最终结果，误差类指标又应怎样接入？",
+          "answer": "探索项用于决定下一次值得评估谁，不是已经取得的任务质量；v1 最后按原始 TaskScore 选 best。接口要求最大化方向的 validation 分数，误差越低越好的指标须由调用方明确转换方向，例如传入负 MSE。验证／测试隔离、实际执行和证据真实性仍由外部保证，三种子算术诊断不能补齐这些条件。",
+          "example": "教学例：A 的验证分数为 0.90，B 为 0.89；B 因访问少而得到更高探索分数，可以优先扩张，但当前 best 仍是 A。若原指标是 MSE=0.10 和 0.11，应传入 -0.10 和 -0.11，而不是误把更大的误差排为最好。",
+          "source_sections": ["核心公式", "数据协议与代码映射", "本地复现"],
+          "added": "2026-11-13"
+        }
+      ]
+    }
+  }
+}

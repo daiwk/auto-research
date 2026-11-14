@@ -36,7 +36,12 @@
         "agent-research:lats",
         "agent-research:rewoo",
         "agent-research:tree-of-thoughts",
-        "agent-research:react"
+        "agent-research:react",
+        "agent-research:bats",
+        "agent-research:ds-star",
+        "agent-research:era-flat-puct",
+        "agent-research:planning-optimality",
+        "agent-research:clarification-sgp"
       ]
     },
     {
@@ -113,7 +118,11 @@
         "agent-research:voyager",
         "agent-research:generative-agents",
         "agent-research:discernmem",
-        "agent-research:emma"
+        "agent-research:emma",
+        "agent-research:engram-consolidation",
+        "agent-research:lisa",
+        "agent-research:wikitrace",
+        "agent-research:policybank"
       ]
     },
     {
@@ -183,7 +192,8 @@
         "agent-research:pal",
         "agent-research:mrkl",
         "agent-research:saycan",
-        "agent-research:webgpt"
+        "agent-research:webgpt",
+        "agent-research:retrace"
       ]
     },
     {
@@ -204,6 +214,7 @@
       ],
       "reading_order": "先读 Reflexion，看语言经验如何跨尝试保存；再读 Self-Refine，对比单次反馈修订；最后读 AgentX，理解候选开发、评估与运行流程更新的完整边界，并对照本地仅实现的部分。",
       "papers": [
+        "agent-research:verified-quantum-wiki",
         "agent-research:meta-square",
         "agent-research:continual-autoresearch",
         "agent-research:rsi-dojo",
@@ -253,7 +264,16 @@
         "agent-research:reflexion",
         "agent-research:ruharness",
         "agent-research:crop",
-        "agent-research:evalalloc"
+        "agent-research:evalalloc",
+        "agent-research:envopt",
+        "agent-research:fgse",
+        "agent-research:pase",
+        "agent-research:agent-gym",
+        "agent-research:scientist-two",
+        "agent-research:envharness",
+        "agent-research:mle-star",
+        "agent-research:alphaevolve",
+        "agent-research:co-director"
       ]
     },
     {
@@ -326,7 +346,8 @@
         "agent-research:ragen",
         "agent-research:deepresearcher",
         "agent-research:search-r1",
-        "agent-research:loop"
+        "agent-research:loop",
+        "agent-research:instruct-to-act"
       ]
     },
     {
@@ -389,7 +410,12 @@
         "agent-research:coreflect",
         "agent-research:sopbench-protocol",
         "agent-research:gaia",
-        "agent-research:autoformbench"
+        "agent-research:autoformbench",
+        "agent-research:xstack",
+        "agent-research:reprobridge",
+        "agent-research:are-bench",
+        "agent-research:alphaproof-code",
+        "agent-research:mt-pingeval"
       ]
     }
   ]

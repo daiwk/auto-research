@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "foundation-models:qe-length-normalization": {
+      "questions": [
+        {
+          "id": "quality-controlled-prefixes",
+          "level": "basics",
+          "question": "QE 长度偏差为何不能靠比较任意长句和短句证明？",
+          "answer": "长短句可能本来就有不同错误率、领域和难度。论文对同文档连续金标准段落做一至五段前缀，保持假设无错质量与领域，再看指标是否系统漂移。它仍依赖后编辑金标准近似无错的前提。",
+          "example": "教学例：同一篇新闻的前三个正确段落拼起来后评分下降，不同于拿一段简单广告与一篇难译法律长文比较。",
+          "source_sections": [
+            "背景与主要改动"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "training-density-not-frozen-score",
+          "level": "mechanism",
+          "question": "把现成 MetricX 输出除以长度，就复现了训练归一化吗？",
+          "answer": "没有。原文把训练标签变为R/|h|，训练预测密度的模型，再把预测密度乘回同口径长度。冻结模型的后处理没有改变训练分布；本地只执行目标变换与恢复，不声称模型已去偏。",
+          "example": "教学例：同为错误评分−5，10与20个计量单位的训练目标为−0.5与−0.25；乘回后都为−5，但这些数值不证明一个冻结模型真的学会密度。",
+          "source_sections": [
+            "核心公式"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "density-versus-temperature",
+          "level": "comparison",
+          "question": "错误密度训练与验证集温度校准解决同一个问题吗？",
+          "answer": "不是。前者改变监督目标对长度的尺度关系；温度校准改变已有分类概率的锐度，通常不改变预测类别。二者都须明确数据和计量，但不能因为都叫校准就用温度替代MetricX重训。",
+          "example": "教学例：将二类logit除以2能降低置信度，却不会使翻译错误评分自动按译文长度学习。",
+          "source_sections": [
+            "核心公式"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "tokenize-concatenated-prefixes",
+          "level": "implementation",
+          "question": "为什么整组500-token门槛不能用独立段落的token数求和？",
+          "answer": "分词依赖边界，串接后的token数不一定等于各段独立计数之和。接口要求五个实际前缀计数；第五超过500则丢弃整组，否则长度组不再是同一控制文档。长度单位也必须在密度训练与恢复时一致。",
+          "example": "教学例：五段分别计100并不保证串接后恰好500；实测第五前缀501时五条都拒绝，不只删最长一条。",
+          "source_sections": [
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-13"
+        }
+      ]
+    },
+    "foundation-models:cultural-cue": {
+      "questions": [
+        {
+          "id": "elicitation-versus-missing-knowledge",
+          "level": "basics",
+          "question": "CuE 为什么关注隐藏文化特征，而不只再加一句国家提示？",
+          "answer": "它要区分缺少知识和已有知识没有被唤起，使用SAE特征构造白盒干预。显式提示与特征干预可以互补，但国家原型只是论文的群体代理，不能代表每个个体。",
+          "example": "教学例：模型知道某地区的小众菜名，却在无地点食谱中总给常见菜；沿已验证文化特征方向干预是在测试知识唤起，不证明社会文化安全。",
+          "source_sections": [
+            "背景与主要改动"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "cumulative-information-not-count",
+          "level": "mechanism",
+          "question": "rho=0.1 是否就是保留10%的SAE特征？",
+          "answer": "不是。§2.3保留按MI降序的最短集合，使累计MI达到总MI的10%。信息高度集中时只需很少维度；按特征个数截10%会改变核心算法。",
+          "example": "教学例：四个特征MI为0.97、0.01、0.01、0.01，rho=0.5只选第一个，而不是四舍五入选一半维度。",
+          "source_sections": [
+            "核心公式"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "cue-versus-detectorscope",
+          "level": "comparison",
+          "question": "CuE 和 DetectorScope 都对SAE特征max-pool，为何不是同一方法？",
+          "answer": "池化只是共享表示操作。CuE以特征–文化MI和国家原型差构造残差干预；DetectorScope用描述验证mask和稀疏检测头作预测与特征归因。前者方向不自动构成检测器，后者头权重也不等于文化干预。",
+          "example": "教学例：一个食物特征能区分国家，却不一定区分人类与AI文本；检测头贡献大也不意味着沿该方向生成就文化忠实。",
+          "source_sections": [
+            "核心公式"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "country-average-not-example-average",
+          "level": "implementation",
+          "question": "其他国家的基线为什么要先各自求均值再等权平均？",
+          "answer": "公式比较目标原型与其他国家原型的平均，国家样本数不是权重。直接把其他所有断言混在一起，会让数据多的国家支配方向。decoder还必须与该层所选特征一一对齐。",
+          "example": "教学例：B国两条值2，C国一条值0，其他国家基线为(2+0)/2=1，不是(2+2+0)/3。目标A值4时差为3而非8/3。",
+          "source_sections": [
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-13"
+        }
+      ]
+    },
+    "foundation-models:decoding-constrained-beam": {
+      "questions": [
+        {
+          "id": "risk-mass-not-greedy-hit",
+          "level": "basics",
+          "question": "greedy没有逐字命中，为什么不等于近逐字提取风险为零？",
+          "answer": "greedy只看一条最高局部路径。许多接近原文的变体各自概率不大，但总概率可能显著；CBS只枚举其中一部分，因此求和是确定性下界，不是无偏完整风险估计。",
+          "example": "教学例：两个不同标点变体概率各0.08，greedy走向第三条不匹配路径，也不能抹掉这0.16的已知近逐字质量。",
+          "source_sections": [
+            "背景与主要改动"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "topk-distribution-and-final-width",
+          "level": "mechanism",
+          "question": "为何必须top-k内部归一化且最后不能再剪到B？",
+          "answer": "要度量的是实际top-k解码分布，不是完整softmax。每条路径概率都须按该分布累乘；末步再剪B会丢掉已付前向成本得到的有效质量，原算法保留最多B×k。剪枝后也不对剩余路径重归一化。",
+          "example": "教学例：原模型三token概率0.5、0.3、0.2，top2变成0.625、0.375；B=1的最后一步仍应保留这两条扩展，而非只留0.625。",
+          "source_sections": [
+            "核心公式"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "logprob-bound-versus-detector",
+          "level": "comparison",
+          "question": "CBS概率下界能否替代DetectorScope的AI文本来源检测分数？",
+          "answer": "不能。CBS假定有目标后缀并能访问模型条件概率，衡量该前缀下近目标生成质量；DetectorScope从文本的SAE特征预测来源。一个文本容易被模型生成不等于它真的由该模型写成，两类统计也不共享标签含义。",
+          "example": "教学例：公开常见句在模型下概率很高，仍可能完全由人类撰写；高来源检测分数也不给某段训练原文的提取概率。",
+          "source_sections": [
+            "核心公式"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "final-levenshtein-cell",
+          "level": "implementation",
+          "question": "Levenshtein的行最小值没超epsilon，为何到最后还要查D[T,T]？",
+          "answer": "行最小值只说明当前串能与目标某个前缀低成本对齐，是中间剪枝的必要条件；完成后必须与整个目标比较。把存活直接当成功会误计尚未覆盖目标末尾的路径。bank也只是被剪前缀的潜在质量，不是成功质量。",
+          "example": "教学例：目标abc，某部分路径与a很接近，不说明完整输出和abc距离达标。专测以穷举分布检查LB≤p≤LB+bank，宽beam才恢复完整质量。",
+          "source_sections": [
+            "核心公式"
+          ],
+          "added": "2026-11-13"
+        }
+      ]
+    },
+    "foundation-models:storyscope": {
+      "questions": [
+        {
+          "id": "narrative-not-surface",
+          "level": "basics",
+          "question": "StoryScope 的叙事特征与数几个AI常用词有何区别？",
+          "answer": "它描述主题显露、角色能动性、时间组织等跨句故事结构，通过平行prompt比较与LLM归纳/赋值获得。几词计数没有执行这些语义阶段，本地也不把便宜关键词替代成叙事模型。",
+          "example": "教学例：两篇故事都不用相同词汇，但都在结尾明说教训；“是否明确主题”是结构线索，不是某个单词是否出现。",
+          "source_sections": [
+            "背景与主要改动"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "stable-core-conjunction",
+          "level": "mechanism",
+          "question": "为什么最高SHAP特征也可能不是跨模型核心？",
+          "answer": "核心还要求稳定性、null显著性、top25频率、人类–AI均值差及五个AI模型之间较小spread。一个只对某模型很强的特征可能是指纹，不应因SHAP大就叫核心；本地逐项合取而非加权打分。",
+          "example": "教学例：某特征五模型均值为0.8、0.8、0.8、0.8、0，spread0.8超过0.35，即使重要性最大也被核心门槛拒绝。",
+          "source_sections": [
+            "核心公式"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "storyscope-versus-detectorscope",
+          "level": "comparison",
+          "question": "StoryScope与DetectorScope的可解释性来自哪里，能互换特征吗？",
+          "answer": "StoryScope把叙事问题转成外部语义赋值，靠分类器/SHAP定位核心与指纹；DetectorScope依赖模型内部SAE特征和稀疏线性头的可加归因。两者解释单位、获取成本与错误模式不同，不能把未生成的叙事特征拿SAE随机列替代。",
+          "example": "教学例：“结尾主题是否明说”要检查全文；SAE某列的激活贡献是另一个观测，不能凭列编号宣称它语义上等于该叙事问题。",
+          "source_sections": [
+            "背景与主要改动"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "prompt-block-bootstrap",
+          "level": "implementation",
+          "question": "同一prompt的六种来源为什么必须一起bootstrap？",
+          "answer": "这些故事共享写作条件，不是独立同分布的任意六行。先按prompt隔离train/validation/test，再按prompt重采样并展开全部来源，可保留匹配结构。逐故事抽样或跨split同prompt会夸大独立证据。",
+          "example": "教学例：抽中promptA两次，就把A的人类与五AI故事各出现两次；不能只抽人类A而漏掉五个AI版本来造更稳定SHAP。",
+          "source_sections": [
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-13"
+        }
+      ]
+    },
+    "post-training:behavioral-canaries": {
+      "questions": [
+        {
+          "id": "behavior-not-verbatim-memory",
+          "level": "basics",
+          "question": "为什么用弱风格canary而不是等模型复述私有文档？",
+          "answer": "RL可能改变条件风格偏好而不保留事实逐字记忆。文档trigger和反馈偏好相关后，heldout触发文档上canary序列概率的小变化可成为分布影响证据；它不是对某一文档的确定违规证明。",
+          "example": "教学例：训练反馈在trigger下轻微偏好带特定标点的答案，后续同类未见文档的标点logprob变化可以测，但不能直接断言某段正文被记住。",
+          "source_sections": [
+            "背景与主要改动"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "sequence-sum-and-pairing",
+          "level": "mechanism",
+          "question": "审计分数为何必须用相同前缀的序列logprob差，不能换成token均值？",
+          "answer": "原统计是完整canary自回归概率的log，等于逐token logprob之和。两边保持q、答案前缀和目标一致，只比较文档trigger；按token平均会改变长度权重，自由生成频次又是不同估计过程。",
+          "example": "教学例：二token各概率0.5，序列logp为log0.25，不是log0.5。clean与trigger对应同一个二token目标才能相减。",
+          "source_sections": [
+            "核心公式"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "behavior-audit-versus-rm-memorization",
+          "level": "comparison",
+          "question": "Behavioral Canaries与RM反事实记忆CM都做差，为什么不可混为一类审计？",
+          "answer": "CM比较同用户偏好对在包含/排除该用户训练的多个RM里的表现；Behavioral Canaries比较同一策略对clean/trigger文档的风格概率，再在独立训练策略间检验。一个是训练包含关系的反事实差，一个是条件行为影响，隔离单位和结论不同。",
+          "example": "教学例：某偏好对CM高不说明RL策略受特定trigger风格诱导；某风格概率变化也不自动给出该偏好对的TM/TG。",
+          "source_sections": [
+            "核心公式"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "document-and-policy-units",
+          "level": "implementation",
+          "question": "随机切分问答行并把每题当独立策略，为什么会让审计失真？",
+          "answer": "同一文档的问答可以泄漏到RM/RL/Eval，违反文档级独立。每个训练策略的多条题目只产生一个平均放大分数，不能把它们当很多独立策略来算高置信AUROC。接口验证ID分区，但不证明ID真实。",
+          "example": "教学例：100题全来自同一文档、同一策略，不等于100个独立训练实验。该文档若出现在RM和Eval，即使行号不同也应拒绝。",
+          "source_sections": [
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-13"
+        }
+      ]
+    },
+    "post-training:rlmf": {
+      "questions": [
+        {
+          "id": "three-uncertainty-quantities",
+          "level": "basics",
+          "question": "回答正确、置信表达忠实、会自评，这三者为什么不能只用accuracy衡量？",
+          "answer": "正确性是任务结果；faithful calibration比较表达置信与采样估计的内在置信；元认知反馈比较模型自评FC和实际FC。准确答案也可能表达不忠实，善于自评也不保证答案正确。",
+          "example": "教学例：模型内在估计0.6却说“100%确定”，即使这次答对也不忠实；自评承认表达有问题又是第三项观测。",
+          "source_sections": [
+            "背景与主要改动"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "selective-component-boost",
+          "level": "mechanism",
+          "question": "Eq4能否写成总优势乘(1+Z)，或者加一个Z奖励？",
+          "answer": "不能。只把高于组均值的faithfulness分量乘k+Z；other奖励保持仅中心化，低于或等于均值的faithfulness分量也不放大。它不std归一，放大后均值可以非零，不能再次减均值。",
+          "example": "教学例：f=[0,1,2]，o=[1,0,−1]，Z全1、k1，输出优势为[0,0,1]；全优势乘2会得到[0,0,0]，改变了方法。",
+          "source_sections": [
+            "核心公式"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "rlmf-versus-dr-grpo",
+          "level": "comparison",
+          "question": "RLMF不做组std归一，与Dr.GRPO有什么相同和不同？",
+          "answer": "二者都保留中心化奖励的原始尺度，但RLMF把主faithfulness和其他约束拆开，只对前者正偏差按自评质量放大。去std归一只是共享一项设计，不能因此把Dr.GRPO目标直接叫RLMF。",
+          "example": "教学例：即使两个方法原始reward相同，Z不同会改变RLMF对高faithfulness completion的信用；Dr.GRPO没有这项元认知因子。",
+          "source_sections": [
+            "核心公式"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "train-tails-and-validation-checkpoint",
+          "level": "implementation",
+          "question": "选两端数据和挑checkpoint时，哪些信息不能从test获取？",
+          "answer": "两端选样只允许训练候选的自评，且等量取高低端；超参和checkpoint只能由validation选择。原文AppendixB.1按in-domain test FC挑RL checkpoint，本地明确不沿用并记录协议偏离；不能把test改名后继续调。",
+          "example": "教学例：训练自评10、40、70、90选两个时取10和90；即使测试题自评更极端也不加入训练。每100步看test挑最好一次仍是泄漏。",
+          "source_sections": [
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-13"
+        }
+      ]
+    }
+  }
+}

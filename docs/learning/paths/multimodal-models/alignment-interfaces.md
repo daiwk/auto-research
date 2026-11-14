@@ -7,7 +7,7 @@ hide:
 
 # 跨模态对齐：表征、连接器与监督
 
-[多模态](index.md) / 81 个问题 · 20 篇论文
+[多模态](index.md) / 93 个问题 · 23 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">81 个问题 · 20 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">93 个问题 · 23 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:gslm2" data-paper-title="GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling 多模态大模型 Meta Superintelligence Labs 2026-10-31 单流口语语言模型通常只量化一个编码器层，可能漏掉其他层的音位和语义信息。GSLM2 的 SpidR 2.0 用可微预测头训练多层语音单元。语言侧先对齐各层在相同音频帧上的单元，再保留任一流变化的位置；各流 embedding 的平均输入共享时序 Transformer。单流输出头只使用过去的多流历史，对本流下个单元打分；生成头另外按顺序生成同一时间位置的多个流，后生成的流可依赖本位置先生成的流。原文训练结合单流损失、转移级自蒸馏与多流生成损失，三项均不在本地切片中。 完整实验成本过高，不复现（审查 DONE）。L1 机制诊断。L1 机制诊断。本地只处理外部给定的离散单元与目标对数概率，不运行语音模型；完整实验成本过高，不复现（审查 DONE）。cross_stream_deduplicate 接收时间×流的离散 ID，返回零基保留帧下标和多流元组。transition_log_score 接收已对齐的元组与每个流头对其实际单元的有限非正对数概率，返回逐流均值、计数和等权总分。输入概率须来自外部共享历史条件；函数不计算模型 logits，不接收成对样本的正确标签，也不包含语音编码、解码或基准运行。  语音多模态 多流语音单元与打分 多模态 跨模态对齐：表征、连接器与监督 GSLM2 为什么不能先对每个语音流各自去重，再按列拼接？ 每流发生变化的原音频帧不一定相同。各自去重后，第 k 项可能来自不同时间；GSLM2 保留变化帧并集，在每个保留时刻读取所有流的值，从而让后续共享时序主干看到真实对齐的元组。 教学例：A=[1,1,2]、B=[4,5,5]，正确保留 (1,4)、(1,5)、(2,5)。各自去重再拼接会造出 (2,5) 在第二格，丢掉真实的 (1,5)。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-multimodal-models-gslm2-6098f74c" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-91f98a46762c2366">GSLM2 为什么不能先对每个语音流各自去重，再按列拼接？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Agslm2">GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · Meta Superintelligence Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>每流发生变化的原音频帧不一定相同。各自去重后，第 k 项可能来自不同时间；GSLM2 保留变化帧并集，在每个保留时刻读取所有流的值，从而让后续共享时序主干看到真实对齐的元组。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：A=[1,1,2]、B=[4,5,5]，正确保留 (1,4)、(1,5)、(2,5)。各自去重再拼接会造出 (2,5) 在第二格，丢掉真实的 (1,5)。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.01143">原论文</a> · <a href="../../../../multimodal-models/2611.01143-gslm2/">实现解读</a> · <a href="#qa-91f98a46762c2366">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:gslm2" data-paper-title="GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling" data-learning-pending="false" data-level="mechanism" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling 多模态大模型 Meta Superintelligence Labs 2026-10-31 单流口语语言模型通常只量化一个编码器层，可能漏掉其他层的音位和语义信息。GSLM2 的 SpidR 2.0 用可微预测头训练多层语音单元。语言侧先对齐各层在相同音频帧上的单元，再保留任一流变化的位置；各流 embedding 的平均输入共享时序 Transformer。单流输出头只使用过去的多流历史，对本流下个单元打分；生成头另外按顺序生成同一时间位置的多个流，后生成的流可依赖本位置先生成的流。原文训练结合单流损失、转移级自蒸馏与多流生成损失，三项均不在本地切片中。 完整实验成本过高，不复现（审查 DONE）。L1 机制诊断。L1 机制诊断。本地只处理外部给定的离散单元与目标对数概率，不运行语音模型；完整实验成本过高，不复现（审查 DONE）。cross_stream_deduplicate 接收时间×流的离散 ID，返回零基保留帧下标和多流元组。transition_log_score 接收已对齐的元组与每个流头对其实际单元的有限非正对数概率，返回逐流均值、计数和等权总分。输入概率须来自外部共享历史条件；函数不计算模型 logits，不接收成对样本的正确标签，也不包含语音编码、解码或基准运行。  语音多模态 多流语音单元与打分 多模态 跨模态对齐：表征、连接器与监督 成对判别的转移分数为何先逐流平均，再对流取平均？ 不同流的变化频率不同。先按各自的转移数归一（包括第一单元），再给每流相同权重，避免高频流按转移个数主导总分。重复值保留为条件输入，但不参与其所在流的转移均值。 教学例：两流的有效 log probability 为 [−4]、[−1,−2,−3,−4]。逐流均值 −4、−2.5 得 −3.25；合并五个事件会变成 −2.8。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-a7659a67c5a28786">成对判别的转移分数为何先逐流平均，再对流取平均？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Agslm2">GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · Meta Superintelligence Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同流的变化频率不同。先按各自的转移数归一（包括第一单元），再给每流相同权重，避免高频流按转移个数主导总分。重复值保留为条件输入，但不参与其所在流的转移均值。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两流的有效 log probability 为 [−4]、[−1,−2,−3,−4]。逐流均值 −4、−2.5 得 −3.25；合并五个事件会变成 −2.8。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.01143">原论文</a> · <a href="../../../../multimodal-models/2611.01143-gslm2/">实现解读</a> · <a href="#qa-a7659a67c5a28786">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:gslm2" data-paper-title="GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling" data-learning-pending="false" data-level="comparison" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling 多模态大模型 Meta Superintelligence Labs 2026-10-31 单流口语语言模型通常只量化一个编码器层，可能漏掉其他层的音位和语义信息。GSLM2 的 SpidR 2.0 用可微预测头训练多层语音单元。语言侧先对齐各层在相同音频帧上的单元，再保留任一流变化的位置；各流 embedding 的平均输入共享时序 Transformer。单流输出头只使用过去的多流历史，对本流下个单元打分；生成头另外按顺序生成同一时间位置的多个流，后生成的流可依赖本位置先生成的流。原文训练结合单流损失、转移级自蒸馏与多流生成损失，三项均不在本地切片中。 完整实验成本过高，不复现（审查 DONE）。L1 机制诊断。L1 机制诊断。本地只处理外部给定的离散单元与目标对数概率，不运行语音模型；完整实验成本过高，不复现（审查 DONE）。cross_stream_deduplicate 接收时间×流的离散 ID，返回零基保留帧下标和多流元组。transition_log_score 接收已对齐的元组与每个流头对其实际单元的有限非正对数概率，返回逐流均值、计数和等权总分。输入概率须来自外部共享历史条件；函数不计算模型 logits，不接收成对样本的正确标签，也不包含语音编码、解码或基准运行。  语音多模态 多流语音单元与打分 多模态 跨模态对齐：表征、连接器与监督 为什么单流转移头的判别分数不能当作多流生成头的联合似然？ 单流转移头仅依赖过去的多流元组，只对本流首项和变化项打分。生成头在同一位置内按顺序条件化，预测所有保留位置，包括本流重复项。上下文依赖和被计分的事件都不同；两个头的成对准确率也不是语音续写质量。 教学例：第二个流在当前位置生成时可以先读第一个流刚生成的单元；单流打分头在预测第二个流时只读前面时间位置，不会读本位置的第一个流。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-542025fa89124915">为什么单流转移头的判别分数不能当作多流生成头的联合似然？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Agslm2">GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · Meta Superintelligence Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>单流转移头仅依赖过去的多流元组，只对本流首项和变化项打分。生成头在同一位置内按顺序条件化，预测所有保留位置，包括本流重复项。上下文依赖和被计分的事件都不同；两个头的成对准确率也不是语音续写质量。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：第二个流在当前位置生成时可以先读第一个流刚生成的单元；单流打分头在预测第二个流时只读前面时间位置，不会读本位置的第一个流。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.01143">原论文</a> · <a href="../../../../multimodal-models/2611.01143-gslm2/">实现解读</a> · <a href="#qa-542025fa89124915">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:gslm2" data-paper-title="GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling" data-learning-pending="false" data-level="implementation" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling 多模态大模型 Meta Superintelligence Labs 2026-10-31 单流口语语言模型通常只量化一个编码器层，可能漏掉其他层的音位和语义信息。GSLM2 的 SpidR 2.0 用可微预测头训练多层语音单元。语言侧先对齐各层在相同音频帧上的单元，再保留任一流变化的位置；各流 embedding 的平均输入共享时序 Transformer。单流输出头只使用过去的多流历史，对本流下个单元打分；生成头另外按顺序生成同一时间位置的多个流，后生成的流可依赖本位置先生成的流。原文训练结合单流损失、转移级自蒸馏与多流生成损失，三项均不在本地切片中。 完整实验成本过高，不复现（审查 DONE）。L1 机制诊断。L1 机制诊断。本地只处理外部给定的离散单元与目标对数概率，不运行语音模型；完整实验成本过高，不复现（审查 DONE）。cross_stream_deduplicate 接收时间×流的离散 ID，返回零基保留帧下标和多流元组。transition_log_score 接收已对齐的元组与每个流头对其实际单元的有限非正对数概率，返回逐流均值、计数和等权总分。输入概率须来自外部共享历史条件；函数不计算模型 logits，不接收成对样本的正确标签，也不包含语音编码、解码或基准运行。  语音多模态 多流语音单元与打分 多模态 跨模态对齐：表征、连接器与监督 在本地该怎样验证“保留重复作上下文”没有被错写成“给重复计分”？ 给预先对齐的保留元组和各头对实际单元的外部对数概率。固定元组，仅扰动某流在未变化位置的分数，逐流均值和总分应不变；改该流首项或变化项的分数则应变化。另用直接构造的变化并集核对原始帧索引，不能拿这个单元测试冒充语音 benchmark。 教学例：元组 (2,5)→(2,6) 保留第二帧；把第二帧第一流分数从 −100 改为 −1 不改变总分，但改变第二流该帧的分数应影响结果。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-96450e58e318a5ef">在本地该怎样验证“保留重复作上下文”没有被错写成“给重复计分”？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Agslm2">GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · Meta Superintelligence Labs</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>给预先对齐的保留元组和各头对实际单元的外部对数概率。固定元组，仅扰动某流在未变化位置的分数，逐流均值和总分应不变；改该流首项或变化项的分数则应变化。另用直接构造的变化并集核对原始帧索引，不能拿这个单元测试冒充语音 benchmark。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：元组 (2,5)→(2,6) 保留第二帧；把第二帧第一流分数从 −100 改为 −1 不改变总分，但改变第二流该帧的分数应影响结果。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.01143">原论文</a> · <a href="../../../../multimodal-models/2611.01143-gslm2/">实现解读</a> · <a href="#qa-96450e58e318a5ef">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:flexglue" data-paper-title="FlexGlue: Sparse-to-Dense Feature Matching and Visual Disambiguation" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="FlexGlue: Sparse-to-Dense Feature Matching and Visual Disambiguation 多模态大模型 ETH Zurich 2026-10-23 稀疏matcher受两图keypoint重复检测能力限制，dense matcher则昂贵，而且两者常只在共视正样本训练，面对对称建筑等doppelganger会给出高置信假匹配。FlexGlue在stride8全图token网格上先做self/cross attention，再只对给定query插值读取特征并寻找另一图的坐标。局部3×3窗口读取避免全局期望在多个候选间平均；轻量MLP对两个方向的offset bins取期望做局部细化。共视分支给每个token一个sigmoid vote，并在每层监督； 成本过高，不复现（审查 DONE）。原文第7页：冻结DINOv3 ConvNeXt-B、9层512维Transformer、8数据集、512×512图像，50epochs、每epoch150K样本，在4张H200上约4 GPU-days；gradient checkpointing后4张RTX4090约1.5天，另有10epoch消歧fine-tune与多数据集/重建评测。这里保持作者的GPU-days口径，不虚构单卡总时长。本轮没有operator、local command、metrics或GPU收据，gpu_validation_passed=false。保留作者仓库作为可查来源；  多模态表征 视觉匹配与几何 多模态 跨模态对齐：表征、连接器与监督 FlexGlue 的稠密网格为什么仍能处理任意位置的匹配查询？ 模型先在 stride-8 特征网格上进行全局交互，再把指定查询插值到网格特征中，通过跨图注意力读取另一图坐标。查询不必恰好位于某个固定 cell 中心，因此可在稠密表示上支持连续位置匹配，而非只返回固定关键点集合。 例如查询落在四个网格点之间，可先插值得到其特征，再到另一张图读取对应位置，而无需把它硬移到最近格点。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
 <span id="paper-multimodal-models-flexglue-0459516f" class="ar-learning-paper-anchor"></span>
@@ -784,6 +837,59 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.14958v1">原论文</a> · <a href="../../../../multimodal-models/2606.14958-mveb/">实现解读</a> · <a href="#qa-af25b7c17d30df09">问题链接</a></p>
 </details>
 </article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:mmeb-v3" data-paper-title="MMEB-V3: Measuring the Performance Gaps of Omni-Modality Embedding Models" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="MMEB-V3: Measuring the Performance Gaps of Omni-Modality Embedding Models 多模态大模型 Eastern Institute of Technology, Ningbo 2026-04-25 单一图文检索成绩不足以判断统一嵌入模型是否适合音频、文档、Agent 工具检索或跨模态混合候选。MMEB-V3 将评测扩展为六类、16 个元任务、190 个任务，其中新增 111 个任务：11 个音频、53 个文本和 47 个 Agent 任务。它不仅比较语义匹配，还检查请求的输出模态是否被遵循。论文另设 OmniSET 诊断集：同一语义内容具有文本、图像、视频和音频版本，在同一个混合候选池上评估 12 个有向跨模态任务。原始查询实例也留在候选池作为干扰项；检索到同语义但错误模态并不算正确。 相对于单张 A100/A30 或 Mac，本轮不跑这些矩阵：成本过高，不复现（审查 DONE）；本地不生成伪嵌入，也不把 OmniSET 诊断混入排行榜。L0 排序计分与协议接口，不是全模态编码器或完整 190 任务接入。外部提供真实排序、候选全集和相关性；本地不生成伪嵌入，也不把 OmniSET 诊断混入排行榜。RankingCase 校验查询、排序、候选全集和评测端相关性；score_task 按六类协议计分；task_macro_average 检查精确任务覆盖。OmniCandidate 的语义 ID 仅用于评测，不是交给编码器的输入；  跨模态评测与检索 全模态嵌入与模态遵循 多模态 跨模态对齐：表征、连接器与监督 MMEB-V3为什么不能所有任务都套Hit@1？ 音频、图像、视频、Agent使用Hit@1；文本和视觉文档用NDCG@5以保留排序及分级相关性。类别内按任务等权，不是把全部查询混成一个分母。 教学例：一项一万查询的任务不能自动获得一项一百查询任务的百倍权重。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-multimodal-models-mmeb-v3-73f5b674" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-f5f9c4eb25482717">MMEB-V3为什么不能所有任务都套Hit@1？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Ammeb-v3">MMEB-V3: Measuring the Performance Gaps of Omni-Modality Embedding Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Eastern Institute of Technology, Ningbo</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>音频、图像、视频、Agent使用Hit@1；文本和视觉文档用NDCG@5以保留排序及分级相关性。类别内按任务等权，不是把全部查询混成一个分母。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一项一万查询的任务不能自动获得一项一百查询任务的百倍权重。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界与完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.23321">原论文</a> · <a href="../../../../multimodal-models/2604.23321-mmeb-v3/">实现解读</a> · <a href="#qa-f5f9c4eb25482717">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:mmeb-v3" data-paper-title="MMEB-V3: Measuring the Performance Gaps of Omni-Modality Embedding Models" data-learning-pending="false" data-level="mechanism" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="MMEB-V3: Measuring the Performance Gaps of Omni-Modality Embedding Models 多模态大模型 Eastern Institute of Technology, Ningbo 2026-04-25 单一图文检索成绩不足以判断统一嵌入模型是否适合音频、文档、Agent 工具检索或跨模态混合候选。MMEB-V3 将评测扩展为六类、16 个元任务、190 个任务，其中新增 111 个任务：11 个音频、53 个文本和 47 个 Agent 任务。它不仅比较语义匹配，还检查请求的输出模态是否被遵循。论文另设 OmniSET 诊断集：同一语义内容具有文本、图像、视频和音频版本，在同一个混合候选池上评估 12 个有向跨模态任务。原始查询实例也留在候选池作为干扰项；检索到同语义但错误模态并不算正确。 相对于单张 A100/A30 或 Mac，本轮不跑这些矩阵：成本过高，不复现（审查 DONE）；本地不生成伪嵌入，也不把 OmniSET 诊断混入排行榜。L0 排序计分与协议接口，不是全模态编码器或完整 190 任务接入。外部提供真实排序、候选全集和相关性；本地不生成伪嵌入，也不把 OmniSET 诊断混入排行榜。RankingCase 校验查询、排序、候选全集和评测端相关性；score_task 按六类协议计分；task_macro_average 检查精确任务覆盖。OmniCandidate 的语义 ID 仅用于评测，不是交给编码器的输入；  跨模态评测与检索 全模态嵌入与模态遵循 多模态 跨模态对齐：表征、连接器与监督 OmniSET为什么保留查询本身，还不能先筛目标模态？ 目标是同时验证语义和所请求的输出模态。查询本身是同语义错误模态干扰项，12方向共享混合池；预筛目标模态会隐藏模型忽略模态指令的失败。 教学例：图像查音频时把同一图像排第一，语义正确但模态错，应记0。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-a177fb65bacfd208">OmniSET为什么保留查询本身，还不能先筛目标模态？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Ammeb-v3">MMEB-V3: Measuring the Performance Gaps of Omni-Modality Embedding Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Eastern Institute of Technology, Ningbo</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>目标是同时验证语义和所请求的输出模态。查询本身是同语义错误模态干扰项，12方向共享混合池；预筛目标模态会隐藏模型忽略模态指令的失败。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：图像查音频时把同一图像排第一，语义正确但模态错，应记0。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界与完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.23321">原论文</a> · <a href="../../../../multimodal-models/2604.23321-mmeb-v3/">实现解读</a> · <a href="#qa-a177fb65bacfd208">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:mmeb-v3" data-paper-title="MMEB-V3: Measuring the Performance Gaps of Omni-Modality Embedding Models" data-learning-pending="false" data-level="comparison" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="MMEB-V3: Measuring the Performance Gaps of Omni-Modality Embedding Models 多模态大模型 Eastern Institute of Technology, Ningbo 2026-04-25 单一图文检索成绩不足以判断统一嵌入模型是否适合音频、文档、Agent 工具检索或跨模态混合候选。MMEB-V3 将评测扩展为六类、16 个元任务、190 个任务，其中新增 111 个任务：11 个音频、53 个文本和 47 个 Agent 任务。它不仅比较语义匹配，还检查请求的输出模态是否被遵循。论文另设 OmniSET 诊断集：同一语义内容具有文本、图像、视频和音频版本，在同一个混合候选池上评估 12 个有向跨模态任务。原始查询实例也留在候选池作为干扰项；检索到同语义但错误模态并不算正确。 相对于单张 A100/A30 或 Mac，本轮不跑这些矩阵：成本过高，不复现（审查 DONE）；本地不生成伪嵌入，也不把 OmniSET 诊断混入排行榜。L0 排序计分与协议接口，不是全模态编码器或完整 190 任务接入。外部提供真实排序、候选全集和相关性；本地不生成伪嵌入，也不把 OmniSET 诊断混入排行榜。RankingCase 校验查询、排序、候选全集和评测端相关性；score_task 按六类协议计分；task_macro_average 检查精确任务覆盖。OmniCandidate 的语义 ID 仅用于评测，不是交给编码器的输入；  跨模态评测与检索 全模态嵌入与模态遵循 多模态 跨模态对齐：表征、连接器与监督 MMEB-V3与MVEB都做嵌入评测，侧重点有什么区别？ MMEB-V3覆盖六类并以OmniSET诊断模态遵循；MVEB深入视频分类、聚类和八方向检索，并约束帧/音频预算。任务、候选和输入预算不同，不能把一方总分或局部核当另一方结果。 教学例：固定64帧上限的视频实验与混合TIVA候选池诊断控制的变量不同。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-450d46375b6c174d">MMEB-V3与MVEB都做嵌入评测，侧重点有什么区别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Ammeb-v3">MMEB-V3: Measuring the Performance Gaps of Omni-Modality Embedding Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Eastern Institute of Technology, Ningbo</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>MMEB-V3覆盖六类并以OmniSET诊断模态遵循；MVEB深入视频分类、聚类和八方向检索，并约束帧/音频预算。任务、候选和输入预算不同，不能把一方总分或局部核当另一方结果。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：固定64帧上限的视频实验与混合TIVA候选池诊断控制的变量不同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界与完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.23321">原论文</a> · <a href="../../../../multimodal-models/2604.23321-mmeb-v3/">实现解读</a> · <a href="#qa-450d46375b6c174d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:mmeb-v3" data-paper-title="MMEB-V3: Measuring the Performance Gaps of Omni-Modality Embedding Models" data-learning-pending="false" data-level="implementation" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="MMEB-V3: Measuring the Performance Gaps of Omni-Modality Embedding Models 多模态大模型 Eastern Institute of Technology, Ningbo 2026-04-25 单一图文检索成绩不足以判断统一嵌入模型是否适合音频、文档、Agent 工具检索或跨模态混合候选。MMEB-V3 将评测扩展为六类、16 个元任务、190 个任务，其中新增 111 个任务：11 个音频、53 个文本和 47 个 Agent 任务。它不仅比较语义匹配，还检查请求的输出模态是否被遵循。论文另设 OmniSET 诊断集：同一语义内容具有文本、图像、视频和音频版本，在同一个混合候选池上评估 12 个有向跨模态任务。原始查询实例也留在候选池作为干扰项；检索到同语义但错误模态并不算正确。 相对于单张 A100/A30 或 Mac，本轮不跑这些矩阵：成本过高，不复现（审查 DONE）；本地不生成伪嵌入，也不把 OmniSET 诊断混入排行榜。L0 排序计分与协议接口，不是全模态编码器或完整 190 任务接入。外部提供真实排序、候选全集和相关性；本地不生成伪嵌入，也不把 OmniSET 诊断混入排行榜。RankingCase 校验查询、排序、候选全集和评测端相关性；score_task 按六类协议计分；task_macro_average 检查精确任务覆盖。OmniCandidate 的语义 ID 仅用于评测，不是交给编码器的输入；  跨模态评测与检索 全模态嵌入与模态遵循 多模态 跨模态对齐：表征、连接器与监督 本地为何要求显式gain和完整任务清单？ 固定上游同时输出线性及指数NDCG，擅选会悄悄改变分数；任务缺失也会抬高或降低平均值。API强制gain和预期任务精确匹配，仍不证明外部排序来自真实模型。 教学例：删掉一个困难任务后报告其余均值，不能叫完整类别成绩；fixture排序即使得1也不是模型实测。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-ef339d60e0a57a32">本地为何要求显式gain和完整任务清单？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Ammeb-v3">MMEB-V3: Measuring the Performance Gaps of Omni-Modality Embedding Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Eastern Institute of Technology, Ningbo</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>固定上游同时输出线性及指数NDCG，擅选会悄悄改变分数；任务缺失也会抬高或降低平均值。API强制gain和预期任务精确匹配，仍不证明外部排序来自真实模型。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：删掉一个困难任务后报告其余均值，不能叫完整类别成绩；fixture排序即使得1也不是模型实测。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界与完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.23321">原论文</a> · <a href="../../../../multimodal-models/2604.23321-mmeb-v3/">实现解读</a> · <a href="#qa-ef339d60e0a57a32">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:naijas2st" data-paper-title="NaijaS2ST: A Multi-Accent Benchmark for Speech-to-Speech Translation in Low-Resource Nigerian Languages" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="NaijaS2ST: A Multi-Accent Benchmark for Speech-to-Speech Translation in Low-Resource Nigerian Languages 多模态大模型 Mila - Quebec AI Institute 2026-04-17 核固定v3 Sections3–4及AppendixC：284说话人、约6K平行句、质控后约269h；5shot来自DEV，方向分开；Seamless不支持的Hausa映射Arabic、Naijá映射French仅为fine-tuned extension。S2TT SSA-COMET/ChrF++，S2ST先OmnilingualASR转写再SSA-COMET，不能用文本exactmatch替代。 成本过高，不复现（审查 DONE）。每语言40余小时语音，Omnilingual-ASR1B、NLLB3.3B/TinyAya3B、Seamless2.3B mono/multi多个方向3–10epochs，另有Gemini/GPT-Audio推理、TTS和人工评审。整套明显超单卡短时预算，不下载音频/模型、不调用付费API。本轮仅核查论文身份、合作机构、方法/资源/许可证与成本，收录资料和原图。没有把通用聚合器或字段检查包装为官方benchmark接口；没有模型调用、训练或正式指标。  语音多模态 低资源语音翻译评测 多模态 跨模态对齐：表征、连接器与监督 NaijaS2ST 的多口音设置对翻译评测提出什么额外要求？ 同一语言的发音差异会影响语音理解和输出评估，所以数据覆盖多位说话人与口音，并按翻译方向分别报告。语音到文本和语音到语音也要区分，不能把一个方向或少数说话人的结果概括为所有尼日利亚语言与口音的能力。 例如英语到 Hausa 的结果不能替代 Hausa 到英语；某口音识别顺利也不能证明另一口音的语音合成同样可靠。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
 <span id="paper-multimodal-models-naijas2st-20646330" class="ar-learning-paper-anchor"></span>
@@ -835,6 +941,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>例如为 Hausa 微调使用 Arabic 标记，不代表输入真被翻译成阿拉伯语，也不构成无需训练就支持 Hausa 的证据。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、复现边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.16287v1">原论文</a> · <a href="../../../../multimodal-models/2604.16287-naijas2st/">实现解读</a> · <a href="#qa-4223dcd722be9bd5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:avmeme-exam" data-paper-title="AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs&#x27; Contextual and Cultural Knowledge and Thinking" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs&#x27; Contextual and Cultural Knowledge and Thinking 多模态大模型 Columbia University 2026-01-25 常见语音基准偏向转写与声学事件，难以判断模型是否理解声音在特定社区中的隐喻、幽默和使用场景。AVMeme Exam 收集多语言、多文化短音视频，以选择题同时考察音频、语言、情境、情绪、流行原因、应用方式和世界知识。完整集 meme-full 有 1,032 条，移除文本捷径后的主集 meme-main 有 846 条。关键并不只是新增选择题。作者用三个纯文本模型检测无需听音频即可答对的 text_cheat 样本；主集过滤这些样本。 完整 19 模型矩阵、人工复核和多后端多模态推理不在本轮单卡预算内：成本过高，不复现（审查 DONE）。诊断只记录过滤、屏蔽、非法输出等协议计数，不发布其“模型准确率”。L0 评测协议接口，不是多模态模型能力复现。本地实现选项重排、文本捷径过滤、视觉捷径屏蔽与分组计分；没有下载受访问条件约束的媒体数据，也没有调用被测模型。Item 保留评测端答案与捷径标签；prepare 返回分离的 ActorRequest 与 ScoringKey。被测回调只能收到题目、重排选项及匿名媒体格式合同，不收到身份、原始标题、来源 URL、摘要、转写、分析标签或答案。这个类型边界不是安全沙箱；  跨模态评测与检索 文化理解 多模态 跨模态对齐：表征、连接器与监督 为什么AVMeme Exam不能只在meme-full上比较模型？ 完整集中有题目可能不听声音也能猜对。作者用三个纯文本模型识别text_cheat，再形成846条主集；完整集1032条与主集回答不同问题，必须注明分母，不能混报。 教学例：题目文本已写出流行语出处，纯文本猜对不代表识别了音轨。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-multimodal-models-avmeme-exam-b0e66b09" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-d5a0d40ecc57c2b5">为什么AVMeme Exam不能只在meme-full上比较模型？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aavmeme-exam">AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs&#x27; Contextual and Cultural Knowledge and Thinking</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Columbia University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>完整集中有题目可能不听声音也能猜对。作者用三个纯文本模型识别text_cheat，再形成846条主集；完整集1032条与主集回答不同问题，必须注明分母，不能混报。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：题目文本已写出流行语出处，纯文本猜对不代表识别了音轨。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界与完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.17645">原论文</a> · <a href="../../../../multimodal-models/2601.17645-avmeme-exam/">实现解读</a> · <a href="#qa-d5a0d40ecc57c2b5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:avmeme-exam" data-paper-title="AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs&#x27; Contextual and Cultural Knowledge and Thinking" data-learning-pending="false" data-level="mechanism" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs&#x27; Contextual and Cultural Knowledge and Thinking 多模态大模型 Columbia University 2026-01-25 常见语音基准偏向转写与声学事件，难以判断模型是否理解声音在特定社区中的隐喻、幽默和使用场景。AVMeme Exam 收集多语言、多文化短音视频，以选择题同时考察音频、语言、情境、情绪、流行原因、应用方式和世界知识。完整集 meme-full 有 1,032 条，移除文本捷径后的主集 meme-main 有 846 条。关键并不只是新增选择题。作者用三个纯文本模型检测无需听音频即可答对的 text_cheat 样本；主集过滤这些样本。 完整 19 模型矩阵、人工复核和多后端多模态推理不在本轮单卡预算内：成本过高，不复现（审查 DONE）。诊断只记录过滤、屏蔽、非法输出等协议计数，不发布其“模型准确率”。L0 评测协议接口，不是多模态模型能力复现。本地实现选项重排、文本捷径过滤、视觉捷径屏蔽与分组计分；没有下载受访问条件约束的媒体数据，也没有调用被测模型。Item 保留评测端答案与捷径标签；prepare 返回分离的 ActorRequest 与 ScoringKey。被测回调只能收到题目、重排选项及匿名媒体格式合同，不收到身份、原始标题、来源 URL、摘要、转写、分析标签或答案。这个类型边界不是安全沙箱；  跨模态评测与检索 文化理解 多模态 跨模态对齐：表征、连接器与监督 重排选项与visual_cheat屏蔽分别防什么？ 重排减弱固定位置偏好，同时必须更新评测端正确字母；visual_cheat屏蔽直接揭露答案的视频。二者不生成正确答案，也不等同消除所有数据污染。 教学例：正确选项从B移到A后仍按B评分会制造错误；视频字幕写出答案时音视频模式也应移除视频。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-673875973e156d53">重排选项与visual_cheat屏蔽分别防什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aavmeme-exam">AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs&#x27; Contextual and Cultural Knowledge and Thinking</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Columbia University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>重排减弱固定位置偏好，同时必须更新评测端正确字母；visual_cheat屏蔽直接揭露答案的视频。二者不生成正确答案，也不等同消除所有数据污染。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：正确选项从B移到A后仍按B评分会制造错误；视频字幕写出答案时音视频模式也应移除视频。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界与完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.17645">原论文</a> · <a href="../../../../multimodal-models/2601.17645-avmeme-exam/">实现解读</a> · <a href="#qa-673875973e156d53">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:avmeme-exam" data-paper-title="AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs&#x27; Contextual and Cultural Knowledge and Thinking" data-learning-pending="false" data-level="comparison" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs&#x27; Contextual and Cultural Knowledge and Thinking 多模态大模型 Columbia University 2026-01-25 常见语音基准偏向转写与声学事件，难以判断模型是否理解声音在特定社区中的隐喻、幽默和使用场景。AVMeme Exam 收集多语言、多文化短音视频，以选择题同时考察音频、语言、情境、情绪、流行原因、应用方式和世界知识。完整集 meme-full 有 1,032 条，移除文本捷径后的主集 meme-main 有 846 条。关键并不只是新增选择题。作者用三个纯文本模型检测无需听音频即可答对的 text_cheat 样本；主集过滤这些样本。 完整 19 模型矩阵、人工复核和多后端多模态推理不在本轮单卡预算内：成本过高，不复现（审查 DONE）。诊断只记录过滤、屏蔽、非法输出等协议计数，不发布其“模型准确率”。L0 评测协议接口，不是多模态模型能力复现。本地实现选项重排、文本捷径过滤、视觉捷径屏蔽与分组计分；没有下载受访问条件约束的媒体数据，也没有调用被测模型。Item 保留评测端答案与捷径标签；prepare 返回分离的 ActorRequest 与 ScoringKey。被测回调只能收到题目、重排选项及匿名媒体格式合同，不收到身份、原始标题、来源 URL、摘要、转写、分析标签或答案。这个类型边界不是安全沙箱；  跨模态评测与检索 文化理解 多模态 跨模态对齐：表征、连接器与监督 AVMeme Exam和MMEB-V3都涉及多模态，能直接比较总分吗？ 不能。前者是文化情境多选正确率，后者是嵌入检索Hit@1/NDCG与任务聚合。不同输出、候选空间、分母和模型接口不能混为同一个多模态能力分数。 教学例：音频梗选对一个文化用法，与在全模态候选池找对音频文档不是同一任务。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-424e37ef3bb92741">AVMeme Exam和MMEB-V3都涉及多模态，能直接比较总分吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aavmeme-exam">AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs&#x27; Contextual and Cultural Knowledge and Thinking</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Columbia University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。前者是文化情境多选正确率，后者是嵌入检索Hit@1/NDCG与任务聚合。不同输出、候选空间、分母和模型接口不能混为同一个多模态能力分数。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：音频梗选对一个文化用法，与在全模态候选池找对音频文档不是同一任务。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界与完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.17645">原论文</a> · <a href="../../../../multimodal-models/2601.17645-avmeme-exam/">实现解读</a> · <a href="#qa-424e37ef3bb92741">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:avmeme-exam" data-paper-title="AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs&#x27; Contextual and Cultural Knowledge and Thinking" data-learning-pending="false" data-level="implementation" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs&#x27; Contextual and Cultural Knowledge and Thinking 多模态大模型 Columbia University 2026-01-25 常见语音基准偏向转写与声学事件，难以判断模型是否理解声音在特定社区中的隐喻、幽默和使用场景。AVMeme Exam 收集多语言、多文化短音视频，以选择题同时考察音频、语言、情境、情绪、流行原因、应用方式和世界知识。完整集 meme-full 有 1,032 条，移除文本捷径后的主集 meme-main 有 846 条。关键并不只是新增选择题。作者用三个纯文本模型检测无需听音频即可答对的 text_cheat 样本；主集过滤这些样本。 完整 19 模型矩阵、人工复核和多后端多模态推理不在本轮单卡预算内：成本过高，不复现（审查 DONE）。诊断只记录过滤、屏蔽、非法输出等协议计数，不发布其“模型准确率”。L0 评测协议接口，不是多模态模型能力复现。本地实现选项重排、文本捷径过滤、视觉捷径屏蔽与分组计分；没有下载受访问条件约束的媒体数据，也没有调用被测模型。Item 保留评测端答案与捷径标签；prepare 返回分离的 ActorRequest 与 ScoringKey。被测回调只能收到题目、重排选项及匿名媒体格式合同，不收到身份、原始标题、来源 URL、摘要、转写、分析标签或答案。这个类型边界不是安全沙箱；  跨模态评测与检索 文化理解 多模态 跨模态对齐：表征、连接器与监督 ActorRequest不含答案，是否就能保证没有泄漏？ 不能。它只限制正常回调的数据字段，调用方仍可能通过文件权限、闭包或问题文本泄漏答案。需独立进程/权限审计；本地固定A夹具只验证协议，不报告模型能力。 教学例：把ScoringKey留在被测进程可读的全局变量中，字段再干净也不隔离。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-2a0c055e2bb4c562">ActorRequest不含答案，是否就能保证没有泄漏？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Aavmeme-exam">AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs&#x27; Contextual and Cultural Knowledge and Thinking</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Columbia University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。它只限制正常回调的数据字段，调用方仍可能通过文件权限、闭包或问题文本泄漏答案。需独立进程/权限审计；本地固定A夹具只验证协议，不报告模型能力。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把ScoringKey留在被测进程可读的全局变量中，字段再干净也不隔离。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、复现边界与完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.17645">原论文</a> · <a href="../../../../multimodal-models/2601.17645-avmeme-exam/">实现解读</a> · <a href="#qa-2a0c055e2bb4c562">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:smolvlm" data-paper-title="SmolVLM: Redefining small and efficient multimodal models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="SmolVLM: Redefining small and efficient multimodal models 基础模型 Hugging Face 2025-04-07 SmolVLM 重新分配小模型视觉/语言侧算力，以 pixel shuffle 将相邻空间 token 搬到 channel 维，再用 MLP 映射到 LM 空间；同时研究长上下文、图像切片、学习位置 token 和数据配比，使 256M/500M/2.2B 模型在低显存下保持图像与视频能力。 保真度：核心机制复现。保真度：核心机制复现。本地执行论文中心的 pixel-shuffle 视觉 token 压缩与投影；未复刻 256M–2.2B decoder、视频和完整数据配方。使用 32×32 真实服饰图像和 2×2 space-to-depth；没有复刻高分辨率切片、视频采样、8k/16k context、学习位置 token 或 SmolLM decoder。本地对照口径：基线为线性 mean-pooling connector，实验组为 r=2 pixel shuffle + projector；  multimodal efficient-vlm visual-token-compression 多模态 跨模态对齐：表征、连接器与监督 SmolVLM的小模型设计，只是把语言模型层数削少吗？ 不是。它重新安排视觉与语言侧的计算，同时涉及视觉token压缩、图像切片、位置token、长上下文和数据配比。模型参数较少与视觉输入较便宜是不同预算轴；先识别这些组成，才能理解为什么一个局部重排算子并不代表完整小VLM配方。 教学例子：换更小语言骨干后若仍输入大量高分辨率视觉token，视觉编码与上下文成本仍在，不能只看语言参数量。 2026-10-27">

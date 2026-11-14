@@ -1,0 +1,130 @@
+{
+  "schema_version": 2,
+  "method": "wikitrace",
+  "manifest_ref": "agent-research:wikitrace",
+  "dataset": {
+    "id": "synthetic:nov11-wikitrace-v1",
+    "revision": "sha256:7e1276bfe5c56ecfab3827f3658d19883dc2d51b76a400a76973b04dd4b99213",
+    "recipe": "small seeded tensors, finite toy MDPs, and explicit evaluator/control contracts; no capability benchmark",
+    "capability_benchmark": false
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "source_runs": 1,
+        "linked_insights": 2
+      },
+      "checks": {
+        "raw_source_unchanged": true,
+        "failed_source_retained": true,
+        "exact_compilation_link": true,
+        "all_insights_retained": true,
+        "read_only_corpus": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "source_runs": 1,
+        "linked_insights": 2
+      },
+      "checks": {
+        "raw_source_unchanged": true,
+        "failed_source_retained": true,
+        "exact_compilation_link": true,
+        "all_insights_retained": true,
+        "read_only_corpus": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "source_runs": 1,
+        "linked_insights": 2
+      },
+      "checks": {
+        "raw_source_unchanged": true,
+        "failed_source_retained": true,
+        "exact_compilation_link": true,
+        "all_insights_retained": true,
+        "read_only_corpus": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "linked_insights": 2.0,
+    "source_runs": 1.0
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "formal_comparison": false,
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "three-seed synthetic mechanism diagnostic; not a capability comparison"
+  },
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "ef3521b7a3bdef545a584bc356ada87c68938a99",
+    "artifact_path": "docs/agent-research/2611.14320-wikitrace/metrics/component-cpu-seeds42-44.json",
+    "accelerator": "CPU",
+    "executed_source_sha256": {
+      "scripts/run_nov11_components.py": "19ad0a20ec5c68d9600262d6bfd5d959b83e512694a84be8e57af986afe084ff",
+      "scripts/run_nov04_components.py": "61d35d574d9561e4611d2647174b8a6af07fabf8c30b6909e21e253542cf4336",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "docs/research-audits/nov11-components/preflight.json": "4a20c5b538d152db470b42306de814917286bf2c4904d72d4a5fe6a09e1ebbd5",
+      "src/auto_research/agent_research/reprobridge.py": "10ea640e6df17c4f70b919032e4db6023fe2a231650ce688020fa32e9a3bd199",
+      "src/auto_research/agent_research/lisa.py": "18e3604588cd2d5f12530d0c762a3ed37589feaa90d022e3aaee619d1fe043c9",
+      "src/auto_research/post_training/maxim.py": "4ec15a21210aecadb537c5f651df8cfb6f91caf35cdb3f0730226ff9143aa4a4",
+      "src/auto_research/post_training/excursion_td.py": "db8984dbf61245547c444a386adee0e6a4aedad1f0af1c16c5fe7b6b8209520b",
+      "src/auto_research/post_training/drd_mopd.py": "3268998d65ab53eb13f47dc2fd201199b4fb400043a3885ce96c571a5c660402",
+      "src/auto_research/post_training/mcpo.py": "531367d9e3099d1d199e41476881066708de8b557ae0ec62b5d79ad14a0a087d",
+      "src/auto_research/foundation_models/stochastic_rounding.py": "ad0eccadaca398489bb4cda9e45c6587390d6d1ab236c5135e664f6fc195828e",
+      "src/auto_research/agent_research/wikitrace.py": "7e1276bfe5c56ecfab3827f3658d19883dc2d51b76a400a76973b04dd4b99213",
+      "src/auto_research/agent_research/fgse.py": "42004bb6b8b7e02c83ee32aaf3352beae5cd99a829b0b1a75ff897ac956e2f97",
+      "src/auto_research/agent_research/pase.py": "5d5ec4df246ed812ab999434d17bcfe64260d9afcbf3aa23cf930c6b819abdc4",
+      "src/auto_research/agent_research/retrace.py": "ae0bcdbb4d7fcbd1e36747362b0191e6b4534b4f0b9cee1edf806502af97fd0e",
+      "src/auto_research/agent_research/are_bench.py": "f804ba743668e8003ba53811aff723ef1db62fc0dc3ce85c6ec9ffc0eab42d25",
+      "src/auto_research/multimodal/rs_jepa.py": "72b673a3c524a47a0bd63ad4dc4f3018a7c8191623ba65a48bff8a43abb1c1bd",
+      "src/auto_research/foundation_models/adindex.py": "c75bd07d4553c165033fd21bfa4a38ca79bc5b44867caf95e3983ce84a602342",
+      "src/auto_research/foundation_models/b3.py": "5214490da3143b343e7cc950357157951443f745133e1301a00c7c70fae35794",
+      "src/auto_research/multimodal/steprefine.py": "3b76e31f3a0f66aa31f8d833695cb4fb37b212187ce87d43350c36d24d5707bd"
+    },
+    "dataset_fingerprint": "sha256:b547fd51470ac5cf15bee913a553d29d3ce68647580c341963c2de0303aa1f3f",
+    "raw_runner_artifact_sha256": "3ac33ae266b5da981be37ecae4197a3b17a5991a30d160887091d87907049aed"
+  }
+}

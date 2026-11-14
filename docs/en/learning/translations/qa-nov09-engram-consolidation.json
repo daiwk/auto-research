@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:engram-consolidation/admission-versus-release": {
+      "source_sha256": "add5a90434bf7333cac01cc44e670d0cc5b9d791258f56bd9a6ab8c0a8f8fcc7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a skill enter ENGRAM training if the student has never completed it? Does admission immediately allow record removal?",
+        "answer": "Enough successful teacher demonstrations can admit a skill on their own. Admission only authorizes an attempt to learn. Without a valid current training contribution and reserved verification probes, the records cannot be released.",
+        "example": "Teaching example: At zero mastery, two successful records from one teacher episode satisfy d_min=2. If both are reserved as development probes, neither contributes to the current training batch."
+      }
+    },
+    "qa/agent-research:engram-consolidation/relative-and-absolute-gates": {
+      "source_sha256": "1c245c7cf13870e29e40e3986e0f1d475417f73daf7277b70a309a29b8bcdfdd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why require both a relative margin and a strict absolute floor?",
+        "answer": "The relative margin bounds the tolerated decline when weights replace retrieval. The absolute floor prevents a small improvement from passing when both arms perform poorly. Equality at the relative margin passes; equality at the absolute floor fails.",
+        "example": "Teaching example: The candidate gets two of four probes right and the reference gets one. At a margin of 0.25 and a floor of 0.5, the relative condition passes, but the floor prevents release."
+      }
+    },
+    "qa/agent-research:engram-consolidation/store-allocation-versus-removal": {
+      "source_sha256": "dfd833da23a17005b93bfaf4910d3b43d2c3f7023f7133850d52e915709ef659",
+      "reviewed": true,
+      "fields": {
+        "question": "If MemPrice omits a memory's raw text, is that equivalent to ENGRAM releasing records for the skill?",
+        "answer": "No. MemPrice selects a representation for the current window, or omits the item, using utility and budget. ENGRAM uses a base model with retrieval as the reference and requires the updated weights to pass independent probes before records can move out of retrieval.",
+        "example": "Teaching example: A short window may fit only keywords. That does not prove the model can perform the task without retrieval. Passing the release gate also does not erase the archived originals."
+      }
+    },
+    "qa/agent-research:engram-consolidation/reserve-before-optimization": {
+      "source_sha256": "bd585d59579ed11e71c756e6e5bb67a90a6f5544daa34411c7b1b24c55aaa1f5",
+      "reviewed": true,
+      "fields": {
+        "question": "May two segments from the same source episode go into training and development separately if they have different skill labels?",
+        "answer": "No. Keep each originating episode in one split regardless of skill labels. Reserved episodes must not appear in training replay either. Only the independent grader sees the probe target. The paper's pre-release reference retrieval store is a different concept from the training split.",
+        "example": "Teaching example: Navigation and checkout steps from one shopping attempt cannot straddle training and development. Turning off episodic retrieval should not hide the current checkout page."
+      }
+    }
+  }
+}

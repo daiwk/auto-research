@@ -1,0 +1,438 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-13",
+  "integration_owner": "root",
+  "scope": "Six paper-specific proposals; shared deep-dive/topic banks are not edited.",
+  "proposals": [
+    {
+      "paper": "foundation-models:qe-length-normalization",
+      "target_card": "foundation-models/evaluation-and-evidence",
+      "source_revisions": {
+        "foundation-models:qe-length-normalization": "eeeca4b59fe3a14e52d5b627ac0ee8e658887184eb458da8ad1d76492a220bd8",
+        "foundation-models:interpolated-null-calibration": "4149f6a705209effefe8e1fa43941b8566e4eef2e6a82054e3cdf68b176387ad"
+      },
+      "comparison": {
+        "position": "在质量受控的同文档前缀上诊断长度漂移，训练错误密度R/|h|并在推理恢复评分；本地为目标/控制协议组件。",
+        "tradeoff": "这不是对冻结QE分数做后处理；Interpolated Null Calibration从真实三次模型读出扣除可插值的null基线，不改变QE监督目标。两者均须validation选择可调项，不用测试结果反推校准。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射"
+        ]
+      },
+      "analysis": {
+        "title": "训练监督的计量单位与推理分数的基线扣除，是两种校准机制",
+        "body": "QE长度归一先改变训练标签尺度，让模型预测每单位长度的错误，再恢复总评分；Interpolated Null Calibration保留已训练模型，利用query+instruction、带instruction的null与bare null三次真实观测扣除混杂分量。前者不能由冻结评分除长度替代，后者λ=0仍在减bare null，不等于无校准。两个方法共同要求明确被控制的因素和validation选择，但所需模型阶段、观测和误差来源不同；数值变换正确不证明未执行的QE重训或三pass提取已完成。",
+        "papers": [
+          "foundation-models:qe-length-normalization",
+          "foundation-models:interpolated-null-calibration"
+        ]
+      },
+      "question": {
+        "id": "cross-density-versus-temperature",
+        "question": "同样称“校准”，训练错误密度能否由三pass的null分数扣除替代？",
+        "answer": "不能。密度训练改变R/|h|监督，再乘回长度；null校准在已有模型读出上扣除λ插值基线。只执行后者没有训练QE密度模型，只执行前者也没有得到三次attention读出。两者的可调项只允许validation选择。",
+        "example": "教学例：s(q,I)=0.8、s(null,I)=0.3、s(bare)=0.1、λ=0.5时null校准为0.6；这不等于为长度10、错误评分−5的样本训练目标−0.5。",
+        "papers": [
+          "foundation-models:qe-length-normalization",
+          "foundation-models:interpolated-null-calibration"
+        ]
+      },
+      "update": {
+        "date": "2026-11-13",
+        "papers": [
+          "foundation-models:qe-length-normalization",
+          "foundation-models:interpolated-null-calibration"
+        ],
+        "summary": "改为同卡片的训练密度与三pass null校准比较，区分监督单位、真实观测基线、λ0口径和未运行模型边界。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Diagnose matched-prefix length drift, train R/|h| error density, and restore ratings at inference; the local contribution is the target/control protocol.",
+          "tradeoff": "This is not post-hoc division of frozen QE scores. Interpolated Null Calibration subtracts an interpolated baseline from three real model readouts without changing QE supervision. Tunable choices belong on validation."
+        },
+        "analysis": {
+          "title": "Changing supervision units differs from subtracting an inference baseline",
+          "body": "QE normalization changes training labels so the model predicts error per unit length before restoring ratings. Interpolated Null Calibration retains a trained model and subtracts a nuisance baseline using query-plus-instruction, instruction-inclusive null and bare-null readouts. Frozen-score division cannot replace the former; lambda0 in the latter still subtracts bare null. Both require explicit controlled factors and validation selection, but model stages, observations and error sources differ. Correct arithmetic establishes neither unexecuted QE retraining nor missing model readouts."
+        },
+        "question": {
+          "question": "Can three-pass null-score subtraction replace error-density training merely because both are called calibration?",
+          "answer": "No. Density training changes supervision to R/|h| and restores the length scale later. Null calibration subtracts an interpolated baseline from existing readouts. Neither executes the other's model stage, and tunable choices must use validation.",
+          "example": "Teaching example: scores0.8,0.3,0.1 with lambda0.5 yield calibrated score0.6. This is not the density target−0.5 for rating−5 and length10."
+        },
+        "update": "Compare density supervision with three-pass null calibration within the same topic; distinguish target units, observed baselines, lambda0 semantics and unexecuted model stages."
+      }
+    },
+    {
+      "paper": "foundation-models:cultural-cue",
+      "target_card": "foundation-models/evaluation-and-evidence",
+      "source_revisions": {
+        "foundation-models:cultural-cue": "3b76e934c2ee23cd0dcade5b6080b98718119b4a571b87b54a40a12f77f19c2f",
+        "foundation-models:detector-scope": "1cec4de6a6435be3970d4caedeef69ee5bd22fbbf384fc711cc4f313826e4f40"
+      },
+      "comparison": {
+        "position": "对外部SAE token激活取max，以累计文化MI选维度，再按国家原型差和decoder构造残差干预。",
+        "tradeoff": "MI估计/SAE/语言模型和judge外置；国家等权不是样本等权。与DetectorScope描述mask及稀疏检测头的监督目标不同。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射"
+        ]
+      },
+      "analysis": {
+        "title": "同一稀疏表征可以支持检测，也可以支持干预，但不能偷换验收对象",
+        "body": "CuE和DetectorScope都把逐token SAE激活池化，却对特征提出不同证据要求：CuE用与文化标签的互信息和国家原型组织方向，DetectorScope检验特征描述并学习稀疏检测权重。前者需要decoder对齐和真实生成评价来支持干预，后者的特征贡献只解释给定检测头的logit。把pooling相同当作方法等价，会把分类相关性误认成文化控制，或把合成方向范数误认成真实忠实度。",
+        "papers": [
+          "foundation-models:cultural-cue",
+          "foundation-models:detector-scope"
+        ]
+      },
+      "question": {
+        "id": "cross-cue-versus-detectorscope",
+        "question": "CuE 和 DetectorScope 都对SAE特征max-pool，为何不是同一方法？",
+        "answer": "池化只是共享表示操作。CuE以特征–文化MI和国家原型差构造残差干预；DetectorScope用描述验证mask和稀疏检测头作预测与特征归因。前者方向不自动构成检测器，后者头权重也不等于文化干预。",
+        "example": "教学例：一个食物特征能区分国家，却不一定区分人类与AI文本；检测头贡献大也不意味着沿该方向生成就文化忠实。",
+        "papers": [
+          "foundation-models:cultural-cue",
+          "foundation-models:detector-scope"
+        ]
+      },
+      "update": {
+        "date": "2026-11-13",
+        "papers": [
+          "foundation-models:cultural-cue",
+          "foundation-models:detector-scope"
+        ],
+        "summary": "补入文化MI累计质量与国家原型干预，区分SAE检测与生成控制，保留层decoder/MI外部边界与国家代理限制。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Pool external SAE activations, select cumulative cultural MI, and map country-prototype differences through the matching decoder.",
+          "tradeoff": "MI, SAEs, LM generation and judges remain external. Equal country weighting differs from example weighting, and the objective differs from DetectorScope's sparse detection head."
+        },
+        "analysis": {
+          "title": "A sparse representation can support detection or intervention without making their evidence interchangeable",
+          "body": "Both methods pool SAE activations but require different evidence. CuE builds directions from cultural information and prototypes; DetectorScope validates feature descriptions and fits a sparse detector. A real intervention needs decoder alignment and generation evaluation, whereas detector contributions explain its logit. Shared pooling cannot turn correlation into cultural control or a synthetic direction norm into faithfulness."
+        },
+        "question": {
+          "question": "Why are CuE and DetectorScope different despite both max-pooling SAE features?",
+          "answer": "Pooling is only a shared representation step. CuE selects feature-country information and constructs residual interventions from prototype differences. DetectorScope uses description-validation masks and a sparse detection head with attributions. A steering direction is not a detector and a head weight is not a cultural intervention.",
+          "example": "Teaching example: a food feature may distinguish countries without distinguishing human from AI text. A large detection contribution does not establish culturally faithful generation when steering it."
+        },
+        "update": "Pool external SAE activations, select cumulative cultural MI, and map country-prototype differences through the matching decoder. MI, SAEs, LM generation and judges remain external. Equal country weighting differs from example weighting, and the objective differs from DetectorScope's sparse detection head."
+      }
+    },
+    {
+      "paper": "foundation-models:decoding-constrained-beam",
+      "target_card": "foundation-models/evaluation-and-evidence",
+      "source_revisions": {
+        "foundation-models:decoding-constrained-beam": "ec970f56615141cfc860ec86c9d443933ad7c9040bf6672f416bdaee23ebf69d",
+        "foundation-models:detector-scope": "1cec4de6a6435be3970d4caedeef69ee5bd22fbbf384fc711cc4f313826e4f40"
+      },
+      "comparison": {
+        "position": "在实际top-k解码分布上累积精确路径概率，用可行性剪枝和末步全扩展给近逐字事件的确定性概率界。",
+        "tradeoff": "需要外部模型logits与目标后缀；不是来源检测或无偏完整风险估计。bank是潜在质量，不是已验证成功；无可选τ早停/KV模型。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射"
+        ]
+      },
+      "analysis": {
+        "title": "可生成性、近目标概率与文本来源是不同统计问题",
+        "body": "CBS问的是给定前缀后模型以何概率生成目标邻域，DetectorScope问的是文本特征是否支持特定来源标签。公开常见句既可能容易生成，也可能由人类独立写作；来源检测分数高也不给训练样本的提取概率。CBS的已枚举路径质量可以形成严格下界，宽beam和距离预算只改变找回多少质量，不把未观察路径变成成功。原文负控和概率分布约束都是验收条件，不能只贴一个greedy命中率。",
+        "papers": [
+          "foundation-models:decoding-constrained-beam",
+          "foundation-models:detector-scope"
+        ]
+      },
+      "question": {
+        "id": "cross-logprob-bound-versus-detector",
+        "question": "CBS概率下界能否替代DetectorScope的AI文本来源检测分数？",
+        "answer": "不能。CBS假定有目标后缀并能访问模型条件概率，衡量该前缀下近目标生成质量；DetectorScope从文本的SAE特征预测来源。一个文本容易被模型生成不等于它真的由该模型写成，两类统计也不共享标签含义。",
+        "example": "教学例：公开常见句在模型下概率很高，仍可能完全由人类撰写；高来源检测分数也不给某段训练原文的提取概率。",
+        "papers": [
+          "foundation-models:decoding-constrained-beam",
+          "foundation-models:detector-scope"
+        ]
+      },
+      "update": {
+        "date": "2026-11-13",
+        "papers": [
+          "foundation-models:decoding-constrained-beam",
+          "foundation-models:detector-scope"
+        ],
+        "summary": "补入top-k约束概率界、Hamming/带状Levenshtein及bank，区分可生成性与来源检测，不把穷举教学分布称真实泄漏结论。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Accumulate exact path probability under top-k decoding and bound a near-target event using viability pruning and unpruned final expansions.",
+          "tradeoff": "External logits and a target suffix are required. This is neither authorship classification nor an unbiased full-risk estimate; banked mass is potential, not found success."
+        },
+        "analysis": {
+          "title": "Generatability, near-target probability and text authorship are different statistical questions",
+          "body": "CBS bounds generation of a target neighborhood from a prefix; DetectorScope predicts source from text features. A common sentence can be highly generatable and independently human-written, while a detector score gives no extraction probability. Enumerated mass supplies a lower bound, and beam/distance settings alter recovered mass without turning unseen paths into successes. Distributional assumptions and negative controls cannot be replaced by a greedy hit rate."
+        },
+        "question": {
+          "question": "Can a CBS probability lower bound replace a DetectorScope AI-authorship score?",
+          "answer": "No. CBS uses a target suffix and model conditionals to bound near-target generation mass. DetectorScope predicts source from SAE text features. High generatability is not proof of authorship, and the statistics have different targets and labels.",
+          "example": "Teaching example: a common public sentence may have high model probability while being human-written. An authorship score likewise does not establish extraction probability for a training passage."
+        },
+        "update": "Accumulate exact path probability under top-k decoding and bound a near-target event using viability pruning and unpruned final expansions. External logits and a target suffix are required. This is neither authorship classification nor an unbiased full-risk estimate; banked mass is potential, not found success."
+      }
+    },
+    {
+      "paper": "foundation-models:storyscope",
+      "target_card": "foundation-models/evaluation-and-evidence",
+      "source_revisions": {
+        "foundation-models:storyscope": "82619b14e93eca3b1b07d3de3740c86dfd97c3064552beb26e3f8722077623e6",
+        "foundation-models:detector-scope": "1cec4de6a6435be3970d4caedeef69ee5bd22fbbf384fc711cc4f313826e4f40"
+      },
+      "comparison": {
+        "position": "语义叙事赋值经prompt匹配分析和真实SHAP统计选稳定跨模型核心；本地精确执行核心合取与prompt-block索引。",
+        "tradeoff": "叙事特征不是SAE随机列，分类重要性不是生成因果；外部LLM/XGBoost/SHAP阶段与未量化指纹门槛不伪造。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射"
+        ]
+      },
+      "analysis": {
+        "title": "解释的粒度与数据依赖要随特征来源一起保留",
+        "body": "StoryScope的单位是人类可问的叙事结构，DetectorScope的单位是内部稀疏激活及描述；它们都有模型误差与抽取成本，而不是解释文字越自然越可靠。StoryScope必须把共享prompt的六个故事作为相关组隔离和重采样，且跨模型spread阻止把单模型偏好混成普遍AI核心。DetectorScope的稀疏贡献解释的是分类头本身，不自动证明整篇故事采用某种叙事。两者应保留各自输入和验收，不用通用特征fixture缩短语义过程。",
+        "papers": [
+          "foundation-models:storyscope",
+          "foundation-models:detector-scope"
+        ]
+      },
+      "question": {
+        "id": "cross-storyscope-versus-detectorscope",
+        "question": "StoryScope与DetectorScope的可解释性来自哪里，能互换特征吗？",
+        "answer": "StoryScope把叙事问题转成外部语义赋值，靠分类器/SHAP定位核心与指纹；DetectorScope依赖模型内部SAE特征和稀疏线性头的可加归因。两者解释单位、获取成本与错误模式不同，不能把未生成的叙事特征拿SAE随机列替代。",
+        "example": "教学例：“结尾主题是否明说”要检查全文；SAE某列的激活贡献是另一个观测，不能凭列编号宣称它语义上等于该叙事问题。",
+        "papers": [
+          "foundation-models:storyscope",
+          "foundation-models:detector-scope"
+        ]
+      },
+      "update": {
+        "date": "2026-11-13",
+        "papers": [
+          "foundation-models:storyscope",
+          "foundation-models:detector-scope"
+        ],
+        "summary": "补入叙事语义与prompt组级证据，精确核心阈值不等同指纹判据；与SAE检测解释粒度分开。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Use prompt-matched semantic assignments and real SHAP statistics to select stable cross-model cores; locally implement the exact conjunction and prompt-block indices.",
+          "tradeoff": "Narrative assignments are not random SAE columns, and classifier importance is not generative causality. LLM/XGBoost/SHAP stages and unspecified fingerprint thresholds are not fabricated."
+        },
+        "analysis": {
+          "title": "Explanation granularity and dependence structure follow the source of features",
+          "body": "StoryScope interprets narrative structures, whereas DetectorScope interprets internal sparse activations and descriptions. Both retain extraction costs and model errors. StoryScope must group six stories sharing a prompt and limit cross-model spread before calling a signal a general AI core. Sparse detector contributions explain a head, not an entire story's semantic construction. Each method needs its own inputs and evidence rather than a generic feature fixture."
+        },
+        "question": {
+          "question": "Where do StoryScope and DetectorScope obtain interpretability, and are their features interchangeable?",
+          "answer": "StoryScope uses externally assigned semantic narrative questions with classifier/SHAP analysis. DetectorScope uses internal SAE features and an additive sparse head. Their explanation units, costs and errors differ; random SAE columns cannot replace uncomputed narrative assignments.",
+          "example": "Teaching example: deciding whether an ending states its theme requires semantic reading. The contribution of a numbered SAE column is a separate observation."
+        },
+        "update": "Use prompt-matched semantic assignments and real SHAP statistics to select stable cross-model cores; locally implement the exact conjunction and prompt-block indices. Narrative assignments are not random SAE columns, and classifier importance is not generative causality. LLM/XGBoost/SHAP stages and unspecified fingerprint thresholds are not fabricated."
+      }
+    },
+    {
+      "paper": "post-training:behavioral-canaries",
+      "target_card": "post-training/teacher-and-context",
+      "source_revisions": {
+        "post-training:behavioral-canaries": "1ed80d36470c224e7684a4da3a0cf834b3c66fadf4bf5166f63c16fb4c09a263",
+        "post-training:ragcompass": "36cbf84b0c356d709501888ddd785daefddacac12e341663c3074987b07ba430"
+      },
+      "comparison": {
+        "position": "用held-out clean/trigger文档对的canary序列logprob差测条件行为影响，再按独立训练策略统计。",
+        "tradeoff": "RAGCompass的答案F1只作离线路由蒸馏监督，运行时scorer不读gold；Canaries的配对目标属于审计测量，不能据此给actor答案，也不把有用证据或单次风格变化判作违规。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射"
+        ]
+      },
+      "analysis": {
+        "title": "检索证据有助回答，与证据是否进入后训练，是不同问题",
+        "body": "RAGCompass从各检索器证据组带来的答案效用构造候选分布，训练可泛化的路由scorer；真实推理只用其分数选组，不能继续看参考答案。Behavioral Canaries则控制文档trigger、问题和答案前缀，观察已训练策略的目标风格概率变化，回答的是训练条件影响而非路由优劣。效用、数据使用权限和可测影响不能互相替代：许可取决于真实约定，弱行为信号也不是某份文档违规的证明。两者都必须保存离线标签与运行/审计接口的界线，并防止把重复题目当独立策略。",
+        "papers": [
+          "post-training:behavioral-canaries",
+          "post-training:ragcompass"
+        ]
+      },
+      "question": {
+        "id": "cross-behavior-audit-versus-rm-memorization",
+        "question": "RAGCompass找到更有用的检索证据，能否说明这些文档被允许用于RL训练，或已经被用于训练？",
+        "answer": "不能。它的离线F1监督衡量回答效用，运行时路由不读gold；使用权限来自真实约定，训练影响还需要独立审计。Behavioral Canaries测同策略的clean/trigger条件差，也不凭一项变化证明单文档违规。",
+        "example": "教学例：两组证据答案F1为0.8和0.5可形成路由监督，却不给文档使用许可；另一项canary logprob差0.1是条件影响观测，不是“该路由更好”或“该文件已被训练”的判决。",
+        "papers": [
+          "post-training:behavioral-canaries",
+          "post-training:ragcompass"
+        ]
+      },
+      "update": {
+        "date": "2026-11-13",
+        "papers": [
+          "post-training:behavioral-canaries",
+          "post-training:ragcompass"
+        ],
+        "summary": "改为同卡片RAGCompass的离线效用监督与条件行为审计对照，明确gold只用于离线目标、文档许可与单文档证明边界。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Measure held-out clean/trigger sequence-logprob shifts and aggregate over independently trained policies.",
+          "tradeoff": "RAGCompass uses answer F1 only as offline routing-distillation supervision; runtime scoring sees no gold. Canary targets belong to audit measurements, not actor answers, and usefulness or one stylistic shift does not establish misuse."
+        },
+        "analysis": {
+          "title": "Evidence useful for answering is not evidence of its use in post-training",
+          "body": "RAGCompass turns answer utility from retrieved evidence groups into a candidate target distribution and trains a router that selects using scores only at inference. Behavioral Canaries instead hold the query/prefix fixed and vary a document trigger to probe a trained policy's target-pattern probabilities. Utility, permission and detectable influence are different objects: rights depend on actual terms, and a weak behavioral signal is not proof about one document. Both require explicit separation of offline labels from runtime/audit interfaces and preservation of independent-policy units."
+        },
+        "question": {
+          "question": "Does more useful retrieval evidence in RAGCompass establish permission for RL training, or show that the documents were used for training?",
+          "answer": "No. Offline F1 measures answer utility; runtime routing does not read gold. Permission depends on actual terms and training influence requires separate audit evidence. A clean/trigger canary difference also does not prove misuse of one document.",
+          "example": "Teaching example: evidence-group F1 values0.8 and0.5 supply routing supervision, not usage rights. A canary logprob difference0.1 measures conditional influence, not better routing or a verdict that a file was trained on."
+        },
+        "update": "Compare same-topic RAGCompass offline utility supervision with conditional behavioral auditing; retain offline-gold isolation, permission boundaries and limits of individual-document conclusions."
+      }
+    },
+    {
+      "paper": "post-training:rlmf",
+      "target_card": "post-training/reward-and-credit",
+      "source_revisions": {
+        "post-training:rlmf": "8b22b0d384f1b00b76032a6dd9d69eb9ab094fa13b5b9f5f0b03f5c382f3dc74",
+        "post-training:residual-advantage": "ea00ca575be197a7e08c8234a95fd64b6fd0c850bc5976b08e76c97ccb990bae"
+      },
+      "comparison": {
+        "position": "按模型自评FC的质量，仅放大高于组均值的completion级faithfulness项；其他奖励中心化项不变。",
+        "tradeoff": "Residual Advantage从同词表师生概率差产生token局部优势，再按响应中心化并加验证器优势。元认知Z不是师生概率残差；RLMF不再居中，也没有执行RA/Co-RA教师更新。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射"
+        ]
+      },
+      "analysis": {
+        "title": "completion级自评信用与token级师生残差不能合并成一个“额外奖励”",
+        "body": "RLMF先将忠实度与其他约束分开中心化，再用自评与实际FC的一致性提高正忠实度分量；放大后组均值可以不为零。Residual Advantage读取同词表教师/学生分布，以学生期望作为局部残差基线，之后在响应位置中心化并叠加验证器优势；Co-RA又在固定已评分批次上更新教师、下一轮才使用。把Z加成奖励、给token残差直接乘整个RLMF优势，或把RLMF最后再中心化，都不是原公式。两种组件来源、信用单位、更新顺序和验收证据应分别保存；RA的短checkpoint烟测也不替本轮RLMF完成训练。",
+        "papers": [
+          "post-training:rlmf",
+          "post-training:residual-advantage"
+        ]
+      },
+      "question": {
+        "id": "cross-rlmf-versus-dr-grpo",
+        "question": "RLMF的元认知Z和Residual Advantage的师生残差能否作为同一种token奖励直接相加？",
+        "answer": "不能。Z来自completion自评FC误差，只调正faithfulness组偏差；RA读取逐token全词表q−p、减学生期望后再按响应中心化，最后加验证器优势。它们的单位和中心化不同，组合需另行定义并验证，不能冒称原方法。",
+        "example": "教学例：RLMF对f=[0,1,2]和o=[1,0,−1]、Z=1得到[0,0,1]，均值1/3；RA的一个响应残差[0.2,−0.2]均值为0。把两者都强制归零会改掉前者。",
+        "papers": [
+          "post-training:rlmf",
+          "post-training:residual-advantage"
+        ]
+      },
+      "update": {
+        "date": "2026-11-13",
+        "papers": [
+          "post-training:rlmf",
+          "post-training:residual-advantage"
+        ],
+        "summary": "改为同卡片RA的token师生残差与RLMF的completion自评信用比较，保留各自中心化、教师更新时序和L1/短训练证据边界。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Use completion-level FC self-judgment quality to boost only positive group-centered faithfulness components, leaving centered other rewards unchanged.",
+          "tradeoff": "Residual Advantage uses same-vocabulary teacher–student differences for local token credit, then response-centers and adds verifier advantages. Z is not a probability residual; RLMF neither recenters afterward nor executes RA/Co-RA teacher updates."
+        },
+        "analysis": {
+          "title": "Completion self-judgment credit differs from token-level teacher–student residuals",
+          "body": "RLMF separates faithfulness and other constraints, boosting only positive faithfulness deviations according to self-judgment accuracy; the group mean may become nonzero. Residual Advantage uses full-vocabulary teacher–student differences, a student-expectation baseline and response-position centering before adding verifier credit. Co-RA updates its teacher on a fixed scored batch and uses it next round. Adding Z as reward, conflating token residuals with completion advantages or recentering RLMF changes these methods. Their evidence and update units remain separate; an RA checkpoint smoke does not train RLMF."
+        },
+        "question": {
+          "question": "Can RLMF's metacognitive Z and Residual Advantage's teacher–student residual be directly added as the same token reward?",
+          "answer": "No. Z measures completion FC self-judgment error and scales positive group-relative faithfulness only. RA uses tokenwise full-vocabulary q−p, subtracts a student-expectation baseline, response-centers, then adds verifier credit. A combination needs a new explicit definition and validation.",
+          "example": "Teaching example: RLMF with f=[0,1,2], o=[1,0,−1], Z1 yields[0,0,1], mean1/3. A response's centered RA residuals[0.2,−0.2] have mean0. Forcing both to zero mean changes RLMF."
+        },
+        "update": "Compare same-topic RA token probability residuals with RLMF completion self-judgment credit, preserving centering, teacher-update order and distinct L1/checkpoint-smoke evidence."
+      }
+    }
+  ],
+  "figure_metadata": [
+    {
+      "page": "docs/foundation-models/2510.22028-qe-length-normalization/README.md",
+      "asset": "docs/foundation-models/2510.22028-qe-length-normalization/assets/paper-figure-01.png",
+      "source_url": "https://arxiv.org/html/2510.22028v1/length-bias-teaser.png",
+      "source_html_sha256": "7b4b83deaa00c283c1e7af5b76ef9727ee56a6073fb70a5f53e24e7fa549f859",
+      "figure": "Figure 1",
+      "asset_sha256": "8e8c1fae46fbb02c094df1ad9b2b4c6b115d7b496b46177e3be9a9b3cf56a8a5",
+      "caption": "Matched gold-segment prefix construction and length-related QE penalty.",
+      "copyright": "Original authors",
+      "rendered_and_visually_reviewed": true
+    },
+    {
+      "page": "docs/foundation-models/2603.23301-cultural-cue/README.md",
+      "asset": "docs/foundation-models/2603.23301-cultural-cue/assets/paper-figure-01.png",
+      "source_url": "https://arxiv.org/pdf/2603.23301v1#page=2",
+      "source_html_sha256": "7927d8ff31f505893564baeecc0f88c5f3fa678e374169eb38558587fef9d9b9",
+      "source_pdf_sha256": "bf36697cbdbbfb75e3d8db5ae755e16aa41e5d2f41120a43fc302b0767e0cd43",
+      "pdf_page": 2,
+      "crop_pdf_points": [
+        62,
+        86,
+        535,
+        336
+      ],
+      "figure": "Figure 1",
+      "asset_sha256": "df602ba9407dddf24ca83a381a9d8af8f150395efdd38838e70313a7eafee112",
+      "caption": "SAE feature extraction, MI selection, cultural prototypes and steering.",
+      "copyright": "Original authors",
+      "rendered_and_visually_reviewed": true
+    },
+    {
+      "page": "docs/foundation-models/2603.24917-decoding-constrained-beam/README.md",
+      "asset": "docs/foundation-models/2603.24917-decoding-constrained-beam/assets/paper-figure-01.png",
+      "source_url": "https://arxiv.org/html/2603.24917v1/near-verbatim-fig-1.png",
+      "source_html_sha256": "dc6e2f52be8cea0711c10209079392d63e4f784fa3d9b45523577e97d3a5598a",
+      "figure": "Figure 1",
+      "asset_sha256": "59b206e0c4f1364fe55d0adb9b97c8286c8d6f0925a56f43d7c5895123425654",
+      "caption": "Distinct near-verbatim continuations with exact top-k conditional mass.",
+      "copyright": "Original authors",
+      "rendered_and_visually_reviewed": true
+    },
+    {
+      "page": "docs/foundation-models/2604.03136-storyscope/README.md",
+      "asset": "docs/foundation-models/2604.03136-storyscope/assets/paper-figure-01.png",
+      "source_url": "https://arxiv.org/html/2604.03136v1/storyscope_pipeline2.png",
+      "source_html_sha256": "5425656a5459fb6fb9079e3d1674e6c7a399d26cb28a269427c26ab87f43ddcc",
+      "figure": "Figure 1",
+      "asset_sha256": "9872d8d894f4640a92eca553d2910e1b523cab6cc0c2140d0f3061dcd620b3a7",
+      "caption": "Narrative templates, comparative feature discovery and source attribution.",
+      "copyright": "Original authors",
+      "rendered_and_visually_reviewed": true
+    },
+    {
+      "page": "docs/post-training/2604.22191-behavioral-canaries/README.md",
+      "asset": "docs/post-training/2604.22191-behavioral-canaries/assets/paper-figure-01.png",
+      "source_url": "https://arxiv.org/html/2604.22191v1/COLM_Overview.png",
+      "source_html_sha256": "264c5373dacb62ca767168684e4f38150536e69887efd81fefbb95754f194ec5",
+      "figure": "Figure 1",
+      "asset_sha256": "ee8e67336b03d62807b9acba74b46affb403d60e26799a247ed64310c4ea31d5",
+      "caption": "Canary construction, controlled RLFT regimes and held-out behavioral audit.",
+      "copyright": "Original authors",
+      "rendered_and_visually_reviewed": true
+    },
+    {
+      "page": "docs/post-training/2606.32032-rlmf/README.md",
+      "asset": "docs/post-training/2606.32032-rlmf/assets/paper-figure-01.png",
+      "source_url": "https://arxiv.org/html/2606.32032v1/fig1_fixed.png",
+      "source_html_sha256": "fc9c31d315252cd21dc90b43a47af8d022e3752b6a7f57014bf5ab10881810a9",
+      "figure": "Figure 1",
+      "asset_sha256": "b41615dc7d5ec3f77f56b1e188eed4d8a723fb61621d2026ca300238432e5e22",
+      "caption": "Metacognitive feedback, selective advantage scaling and external rewriting.",
+      "copyright": "Original authors",
+      "rendered_and_visually_reviewed": true
+    }
+  ]
+}

@@ -7,7 +7,7 @@ hide:
 
 # 省掉哪一份算力：选问题、少生成、分枝与有条件重放
 
-[LLM 后训练](../index.md) · 更新 2026-10-27 · 38 篇主题资料 / 6 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-13 · 39 篇主题资料 / 7 篇重点对照
 
 数据与预算方法改变的是训练链路的不同位置。课程重估当前难度，LESSER降低筛选特征成本，STOPD随机少生成并校正，BranchOPD增加关键分枝，Lightning缓存教师，TAR召回被压制的正确模式；少调用一次教师不等于整个训练更便宜。
 
@@ -31,6 +31,7 @@ hide:
 | [Branching On-Policy Distillation](../../../reproductions/2610.13481-branch-opd/README.md) · [原始来源](https://arxiv.org/abs/2610.13481)<br>章节：背景与主要改动、核心公式、代码映射与复现边界 | 按学生不确定性与师生分歧选fork，从同一冻结学生策略独立采多个suffix，公共前缀只计一次。 | 在关键处分配更多生成预算，并非裁短或教师强制；本地短checkpoint未实跑同预算单轨基线。 |
 | [Lightning OPD](../../../post-training/2604.13010-lightning-opd/README.md) · [原始来源](https://arxiv.org/abs/2604.13010)<br>章节：背景与主要改动、核心公式、复现边界 | 先采学生轨迹并由一致教师一次评分缓存，训练阶段只读取教师缓存。 | 将教师成本移到预填充，不等于无教师成本或轨迹持续刷新；本地候选缓存未复刻Qwen token分布训练。 |
 | [Preserving Reasoning Diversity in Reinforcement Learning with Verifiable Rewards via Adaptive Replay](../../../post-training/2610.24236-tar-adaptive-replay/README.md) · [原始来源](https://arxiv.org/abs/2610.24236v1)<br>章节：背景与主要改动、核心公式、结果、代码映射与边界 | 从base正确轨迹建分散原型bank，只重放当前策略相对base已压制的轨迹与token。 | 需计入bank生成和验证成本，且bank有限；完整实验未复现，当前随机模型L1诊断不证明语义多样性。 |
+| [MAPLE: Metadata Augmented Private Language Evolution](../../../post-training/2603.19258-maple-icl/README.md) · [原始来源](https://arxiv.org/abs/2603.19258)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界 | 用DP metadata条件化初始化，并按分类Hamming选非私有已捐赠示例；局部仅实现后一个选择步骤。 | LESSER按模型梯度特征选训练数据，MAPLE按schema相似性选提示示例，选择单元与目标不同；近邻排序既不保证目标梯度价值，也不建立隐私。 |
 
 </div>
 
@@ -47,6 +48,12 @@ hide:
 STOPD在生成前随机截断，依赖保留概率校正；BranchOPD在已选fork扩充学生后缀，公共前缀不能重复计信用；Lightning缓存教师评分，TAR缓存已验证base轨迹并按当前压制程度激活。它们省略或增加的计算不同，既不能仅数训练步，也不能只数训练期教师调用。
 
 对照来源：[stopd](../../../post-training/2610.21337-stopd/README.md) · [branch-opd](../../../reproductions/2610.13481-branch-opd/README.md) · [lightning-opd](../../../post-training/2604.13010-lightning-opd/README.md) · [tar-adaptive-replay](../../../post-training/2610.24236-tar-adaptive-replay/README.md)
+
+### 选样相似度必须绑定它的用途，不能跨层解释
+
+LESSER用固定模型输出层梯度特征近似目标任务相关性；MAPLE的Hamming只量化schema分类是否相同，用于初始化提示的捐赠示例。数值word-count桶也按类别比较，稳定tie是局部约定。MAPLE完整隐私来自外部AIM与PE预算，选择器本身不保护任意私有记录，也不生成高质量文本。
+
+对照来源：[maple-icl](../../../post-training/2603.19258-maple-icl/README.md) · [lesser](../../../post-training/2610.03702-lesser/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -82,15 +89,29 @@ STOPD在生成前随机截断，依赖保留概率校正；BranchOPD在已选for
 
     对照来源：[lightning-opd](../../../post-training/2604.13010-lightning-opd/README.md) · [tar-adaptive-replay](../../../post-training/2610.24236-tar-adaptive-replay/README.md)
 
+### MAPLE的ICL选择器比随机示例更贴近metadata，是否已复现完整隐私合成？ {#cross-cross-colm-maple-icl}
+
+??? note "展开答案与例子"
+
+    **答案：** 没有。它只是初始化的一步；AIM的DP生成、预算组合、文本模型和AugPE仍缺失。原文也发现初始化单独不等于完整MAPLE，不能用近邻正确性替隐私效用结果。
+
+    **教学例子：** 教学例：选对10条公开示例不会自动让之后未经DP处理的私有投票安全。
+
+    对照来源：[maple-icl](../../../post-training/2603.19258-maple-icl/README.md) · [lesser](../../../post-training/2610.03702-lesser/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-13** · 补入maple-icl历史遗漏，用DP metadata条件化初始化，并按分类Hamming选非私有已捐赠示例；局部仅实现后一个选择步骤。 LESSER按模型梯度特征选训练数据，MAPLE按schema相似性选提示示例，选择单元与目标不同；近邻排序既不保证目标梯度价值，也不建立隐私。
+
+涉及：[maple-icl](../../../post-training/2603.19258-maple-icl/README.md) · [lesser](../../../post-training/2610.03702-lesser/README.md)
 
 **2026-10-27** · 首版：比较课程/LESSER选样、STOPD少生成、BranchOPD分枝、Lightning教师缓存与TAR条件回放；已阅38篇摘要，精读6篇。
 
 覆盖 38 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 38 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 39 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -132,6 +153,7 @@ STOPD在生成前随机截断，依赖保留概率校正；BranchOPD在已选for
 - [SPIRAL](../../../post-training/2506.24119-spiral/README.md)
 - [Absolute Zero](../../../post-training/2505.03335-absolute-zero/README.md)
 - [RAFT](../../../post-training/2304.06767-raft/README.md)
+- [MAPLE: Metadata Augmented Private Language Evolution](../../../post-training/2603.19258-maple-icl/README.md)
 
 </details>
 

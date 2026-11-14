@@ -1,0 +1,16 @@
+{
+  "paper_id": "2611.09822v1",
+  "figure": "1",
+  "source_page": "https://arxiv.org/html/2611.09822v1#S0.F1",
+  "source_url": "https://arxiv.org/pdf/2611.09822v1",
+  "image": "paper-figure-01.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "80cae0e6740f736cb26e00e8c92b4fefcca6b476f2b4dcc0bf694d2d78ec02eb",
+  "original_sha256": "5164d64cbbfbcd6bddb16a6f8d31376be345f3b684db2534a6365ac3e0419df1",
+  "width": 865,
+  "height": 480,
+  "license": "CC BY 4.0; copyright retained by the original authors",
+  "transformation": "PDF page 2 rasterized at scale-to 1600; crop x=135,y=130,width=865,height=480 retains both panels and complete caption; no redrawing",
+  "visual_review": "Checked both workflow and application panels, arrows, labels and complete Figure 1 caption against PDF page 2.",
+  "checked_on": "2026-11-09"
+}

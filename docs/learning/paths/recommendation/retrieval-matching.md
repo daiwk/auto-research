@@ -7,7 +7,7 @@ hide:
 
 # 候选生成与搜索匹配
 
-[搜广推](index.md) / 148 个问题 · 37 篇论文
+[搜广推](index.md) / 152 个问题 · 38 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">148 个问题 · 37 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">152 个问题 · 38 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:ured" data-paper-title="From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation 搜广推与 LLM 应用 Alibaba Taobao &amp; Tmall Group 2026-11-04 为了增加内容发现，直接给冷候选提权可能放大排序器已有的误差。URED 复用已经被排序器打高分、但当次没有展示的候选；先累积，再按用户近期曝光类目过滤，最后作为额外召回通道送回原排序链，不改原排序器参数。 完整生产实验成本过高，不复现（审查 DONE）；三种子诊断验证 30 天/1 天的候选保留、未来记录隔离和配额顺序；本地交付：L1 CPU 候选处理。完整生产实验成本过高，不复现（审查 DONE）；不把离线样例的候选数量当线上提升。mine_ured 接收带用户、时间和类目的排序器评分日志，以及独立的观察曝光历史。本地窗口为左闭右开；截止时刻和未来的记录不参与筛选。分数只用于会话 top-k 和同一时刻的确定性排序，不用最高历史分替换按时间选最新记录。观察到的已曝光商品排除仅覆盖调用者提供的历史。  召回 高分未曝光候选回收 搜广推 候选生成与搜索匹配 URED 为何回收高分未展示候选，而不是向排序器随机注入冷内容？ 先使用排序器已计算的相关性信号，再按用户近期未见类目找发现机会。它没有把未展示当点击正例，也不以随意扩大曝光替代质量筛选。 示意：一个评分较高的摄影视频上次因列表容量没展示；候选池可保留它，不能假定用户点击过它。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<span id="paper-recommendation-ured-eafbeee5" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-40e885cc7aec4fae">URED 为何回收高分未展示候选，而不是向排序器随机注入冷内容？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aured">From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Alibaba Taobao &amp; Tmall Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>先使用排序器已计算的相关性信号，再按用户近期未见类目找发现机会。它没有把未展示当点击正例，也不以随意扩大曝光替代质量筛选。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一个评分较高的摄影视频上次因列表容量没展示；候选池可保留它，不能假定用户点击过它。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05997">原论文</a> · <a href="../../../../recommendation-components/2611.05997-ured/">实现解读</a> · <a href="#qa-40e885cc7aec4fae">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:ured" data-paper-title="From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation 搜广推与 LLM 应用 Alibaba Taobao &amp; Tmall Group 2026-11-04 为了增加内容发现，直接给冷候选提权可能放大排序器已有的误差。URED 复用已经被排序器打高分、但当次没有展示的候选；先累积，再按用户近期曝光类目过滤，最后作为额外召回通道送回原排序链，不改原排序器参数。 完整生产实验成本过高，不复现（审查 DONE）；三种子诊断验证 30 天/1 天的候选保留、未来记录隔离和配额顺序；本地交付：L1 CPU 候选处理。完整生产实验成本过高，不复现（审查 DONE）；不把离线样例的候选数量当线上提升。mine_ured 接收带用户、时间和类目的排序器评分日志，以及独立的观察曝光历史。本地窗口为左闭右开；截止时刻和未来的记录不参与筛选。分数只用于会话 top-k 和同一时刻的确定性排序，不用最高历史分替换按时间选最新记录。观察到的已曝光商品排除仅覆盖调用者提供的历史。  召回 高分未曝光候选回收 搜广推 候选生成与搜索匹配 同一商品出现两次，高分旧记录和低分新记录如何取舍？ 先按会话分数保留候选；进入用户聚合后，按时间去重并截断，再做类目发现过滤。旧的更高分不是替换新记录的理由。 示意：同一个商品三天前 0.9、昨天 0.7，只要两条均进入会话池，聚合保留昨天这条；类别判断也使用这条记录。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-20b09933b691f494">同一商品出现两次，高分旧记录和低分新记录如何取舍？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aured">From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Alibaba Taobao &amp; Tmall Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>先按会话分数保留候选；进入用户聚合后，按时间去重并截断，再做类目发现过滤。旧的更高分不是替换新记录的理由。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同一个商品三天前 0.9、昨天 0.7，只要两条均进入会话池，聚合保留昨天这条；类别判断也使用这条记录。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议、代码映射与结果边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05997">原论文</a> · <a href="../../../../recommendation-components/2611.05997-ured/">实现解读</a> · <a href="#qa-20b09933b691f494">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:ured" data-paper-title="From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation 搜广推与 LLM 应用 Alibaba Taobao &amp; Tmall Group 2026-11-04 为了增加内容发现，直接给冷候选提权可能放大排序器已有的误差。URED 复用已经被排序器打高分、但当次没有展示的候选；先累积，再按用户近期曝光类目过滤，最后作为额外召回通道送回原排序链，不改原排序器参数。 完整生产实验成本过高，不复现（审查 DONE）；三种子诊断验证 30 天/1 天的候选保留、未来记录隔离和配额顺序；本地交付：L1 CPU 候选处理。完整生产实验成本过高，不复现（审查 DONE）；不把离线样例的候选数量当线上提升。mine_ured 接收带用户、时间和类目的排序器评分日志，以及独立的观察曝光历史。本地窗口为左闭右开；截止时刻和未来的记录不参与筛选。分数只用于会话 top-k 和同一时刻的确定性排序，不用最高历史分替换按时间选最新记录。观察到的已曝光商品排除仅覆盖调用者提供的历史。  召回 高分未曝光候选回收 搜广推 候选生成与搜索匹配 近期未见类目、从未曝光的商品和全站冷商品是不是一回事？ 不是。类目发现是用户在 d 天内的曝光历史；已曝光商品另有去重；全站流行度不是这两个过滤条件。随机冷注入不是 URED 的对照等价物。 示意：一个全站热门摄影视频对某用户的未见摄影类目仍有发现价值，但如果该商品已向该用户曝光，商品去重仍可排除。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-a1a8f7041b7ddcbe">近期未见类目、从未曝光的商品和全站冷商品是不是一回事？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aured">From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Alibaba Taobao &amp; Tmall Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。类目发现是用户在 d 天内的曝光历史；已曝光商品另有去重；全站流行度不是这两个过滤条件。随机冷注入不是 URED 的对照等价物。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一个全站热门摄影视频对某用户的未见摄影类目仍有发现价值，但如果该商品已向该用户曝光，商品去重仍可排除。</p>
+<p class="ar-learning-sources">依据：核心公式、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05997">原论文</a> · <a href="../../../../recommendation-components/2611.05997-ured/">实现解读</a> · <a href="#qa-a1a8f7041b7ddcbe">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:ured" data-paper-title="From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation 搜广推与 LLM 应用 Alibaba Taobao &amp; Tmall Group 2026-11-04 为了增加内容发现，直接给冷候选提权可能放大排序器已有的误差。URED 复用已经被排序器打高分、但当次没有展示的候选；先累积，再按用户近期曝光类目过滤，最后作为额外召回通道送回原排序链，不改原排序器参数。 完整生产实验成本过高，不复现（审查 DONE）；三种子诊断验证 30 天/1 天的候选保留、未来记录隔离和配额顺序；本地交付：L1 CPU 候选处理。完整生产实验成本过高，不复现（审查 DONE）；不把离线样例的候选数量当线上提升。mine_ured 接收带用户、时间和类目的排序器评分日志，以及独立的观察曝光历史。本地窗口为左闭右开；截止时刻和未来的记录不参与筛选。分数只用于会话 top-k 和同一时刻的确定性排序，不用最高历史分替换按时间选最新记录。观察到的已曝光商品排除仅覆盖调用者提供的历史。  召回 高分未曝光候选回收 搜广推 候选生成与搜索匹配 为什么离线回放必须在截点前分别截断候选与曝光流？ 未来评分会给历史请求注入当时不可得的物品，未来曝光则会错误地屏蔽当时尚未见过的类目。两条流都采用同一 as_of，且时刻等于 as_of 的事件也不读。 示意：中午构建召回池，下午首次看了摄影类。下午的曝光不能把中午候选删掉；次日重建时才允许读取它。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-e07143a9205bf707">为什么离线回放必须在截点前分别截断候选与曝光流？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aured">From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Alibaba Taobao &amp; Tmall Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>未来评分会给历史请求注入当时不可得的物品，未来曝光则会错误地屏蔽当时尚未见过的类目。两条流都采用同一 as_of，且时刻等于 as_of 的事件也不读。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>中午构建召回池，下午首次看了摄影类。下午的曝光不能把中午候选删掉；次日重建时才允许读取它。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议、代码映射与结果边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05997">原论文</a> · <a href="../../../../recommendation-components/2611.05997-ured/">实现解读</a> · <a href="#qa-e07143a9205bf707">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:wesearch" data-paper-title="WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/retrieval-matching" data-search="WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search 搜广推与 LLM 应用 Tencent 2026-10-31 多主题文档很难绑定唯一SID路径，早期前缀失误又会永久丢掉相关文档。WeSearch只用簇收缩候选空间，不让簇承担完整语义标识；在并集内对原子文档先粗后精匹配。OPQ旋转和码本参与相关性学习，不能以固定随机量化器代替论文训练。滚动挂载复用已有参数，模型和全量索引刷新则需版本整体切换。 完整模型与生产实验成本过高，不复现（审查 DONE）；L1 CPU索引/数值组件，diagnostic only。完整模型与生产实验成本过高，不复现（审查 DONE）；未接入执行型Evolve。只用固定种子42/43/44生成小矩阵，验证ADC与显式重构距离相等、候选并集、粗排顺序、输入非法码拒绝及快照隔离。不是公开检索benchmark，不含训练/验证/测试候选调参，更不是推荐质量比较。平局以稳定簇序/文档ID决定，属于本地可复现约定。  召回 聚类候选空间与量化检索 搜广推 候选生成与搜索匹配 WeSearch选择簇和生成完整SID路径有什么根本区别？ 簇只限定候选空间，选中多个簇后合并其原子文档，再单独做文档匹配；它不要求簇路径完整描述文档语义。固定SID逐前缀生成则可能在早期错误处永久剪掉相关文档。簇候选仍可能漏召回，不是消除了所有误差。 教学例：一篇同时谈摄影和旅行的文章很难只有一条语义路径；先取摄影和旅行两个候选簇，再比较具体文章，和强制先选唯一顶层前缀不同。 2026-11-04">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 候选生成与搜索匹配</a></p>
 <span id="paper-recommendation-wesearch-d1861392" class="ar-learning-paper-anchor"></span>

@@ -55,7 +55,10 @@
         "foundation-models:sleep-lti",
         "foundation-models:merlin",
         "foundation-models:semantic-block-sparse-attention",
-        "foundation-models:anchor-kv"
+        "foundation-models:anchor-kv",
+        "foundation-models:convpe",
+        "foundation-models:adindex",
+        "foundation-models:ecg-rag"
       ]
     },
     {
@@ -149,7 +152,10 @@
         "foundation-models:smrc-pmrc",
         "foundation-models:t-muon",
         "foundation-models:taco-optimizer",
-        "foundation-models:tess"
+        "foundation-models:tess",
+        "foundation-models:stochastic-rounding",
+        "foundation-models:lidas",
+        "foundation-models:continuousbench"
       ]
     },
     {
@@ -201,7 +207,10 @@
         "foundation-models:rescom",
         "foundation-models:hope-hilbert",
         "foundation-models:fold-bias",
-        "foundation-models:multi-layer-indexer"
+        "foundation-models:multi-layer-indexer",
+        "foundation-models:pipnn-ii",
+        "foundation-models:ginger",
+        "foundation-models:e-means"
       ]
     },
     {
@@ -235,7 +244,9 @@
         "foundation-models:register-tokens-dllm",
         "foundation-models:speculative-decoding",
         "foundation-models:tadm",
-        "foundation-models:windowed-mtp"
+        "foundation-models:windowed-mtp",
+        "foundation-models:b3",
+        "foundation-models:real-loss"
       ]
     },
     {
@@ -268,7 +279,15 @@
         "foundation-models:mechanistic-etm",
         "foundation-models:proeval",
         "foundation-models:tcab",
-        "foundation-models:xlgobench"
+        "foundation-models:xlgobench",
+        "foundation-models:rosetta-unification",
+        "foundation-models:thinking-to-recall",
+        "foundation-models:latent-generalization",
+        "foundation-models:llm-stochasticity",
+        "foundation-models:qe-length-normalization",
+        "foundation-models:cultural-cue",
+        "foundation-models:decoding-constrained-beam",
+        "foundation-models:storyscope"
       ]
     }
   ]

@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-11-12",
+  "papers": {
+    "agent-gym": {
+      "reviewed_version_url": "https://arxiv.org/html/2608.15591v3",
+      "reviewed_sections": "§3.4.3 and §3.5, ALF engine; author block and experiments",
+      "whole_paper_verified": false,
+      "captures": [
+        {
+          "capture": ".cache/nov12-components/agent/agent-gym-v3.html",
+          "source_url": "https://arxiv.org/html/2608.15591v3",
+          "sha256": "9672f77dd7f991e1fc615aa226e01745bb50602a475fb34c35943e2a161beee6",
+          "bytes": 260790
+        },
+        {
+          "capture": ".cache/nov12-components/agent/agent-gym-v3.pdf",
+          "source_url": "https://arxiv.org/pdf/2608.15591v3",
+          "sha256": "a123329bb8559c97e5e3691342a9d755dacb572593b5085eabc5c3df6cb46340",
+          "bytes": 459119
+        }
+      ]
+    },
+    "bats": {
+      "reviewed_version_url": "https://arxiv.org/html/2511.17006v2",
+      "reviewed_sections": "§4, Eq.2, Appendix B/D; author block and experimental budgets",
+      "whole_paper_verified": false,
+      "captures": [
+        {
+          "capture": ".cache/nov12-components/agent/bats-v2.html",
+          "source_url": "https://arxiv.org/html/2511.17006v2",
+          "sha256": "7e6117c131255c98b7f43f068baaeef128571010b47068571d506db191bff030",
+          "bytes": 858886
+        },
+        {
+          "capture": ".cache/nov12-components/agent/bats-v2.pdf",
+          "source_url": "https://arxiv.org/pdf/2511.17006v2",
+          "sha256": "33de6a06ad58c90e5b3c526af1b750c1fae16a38b9dd2fc3cc4f23bbdb340333",
+          "bytes": 3344558
+        }
+      ]
+    },
+    "bopd": {
+      "reviewed_version_url": "https://arxiv.org/html/2611.13680v1",
+      "reviewed_sections": "Eqs.4/7, Algorithm1, Appendix A; author block and configuration",
+      "whole_paper_verified": false,
+      "captures": [
+        {
+          "capture": ".cache/nov12-components/post-training/2611.13680v1.html",
+          "source_url": "https://arxiv.org/html/2611.13680v1",
+          "sha256": "ea5736018837366aadd85a220588663e10497e88a7414715e49509b4573b9682",
+          "bytes": 274628
+        },
+        {
+          "capture": ".cache/nov12-components/post-training/2611.13680v1.pdf",
+          "source_url": "https://arxiv.org/pdf/2611.13680v1",
+          "sha256": "969e0ef9f3028878df1c33ca96cf97c9cf6d3294826ec6a646cd9f536dce3543",
+          "bytes": 518190
+        }
+      ]
+    },
+    "apmd-reference-reset": {
+      "reviewed_version_url": "https://arxiv.org/html/2611.14467v1",
+      "reviewed_sections": "§3.1, §4.1-4.3, Eqs.13/36/37/42/44, Appendix C; author block",
+      "whole_paper_verified": false,
+      "captures": [
+        {
+          "capture": ".cache/nov12-components/post-training/2611.14467v1.html",
+          "source_url": "https://arxiv.org/html/2611.14467v1",
+          "sha256": "3c7f8336f6354aa7e32636e44b8535c56a189b09afcfdced8eb58a5de7d9d5d9",
+          "bytes": 4819044
+        },
+        {
+          "capture": ".cache/nov12-components/post-training/2611.14467v1.pdf",
+          "source_url": "https://arxiv.org/pdf/2611.14467v1",
+          "sha256": "4d6deb8c21663685e4987d12820b36acf7244756fcc4611a6d608577cd4d067d",
+          "bytes": 3247253
+        }
+      ]
+    },
+    "lcs-reference-opd": {
+      "reviewed_version_url": "https://arxiv.org/html/2611.13135v1",
+      "reviewed_sections": "§3, Appendices A/D/I/J; author block, reference selection and cost",
+      "whole_paper_verified": false,
+      "captures": [
+        {
+          "capture": ".cache/nov12-components/post-training/2611.13135v1.html",
+          "source_url": "https://arxiv.org/html/2611.13135v1",
+          "sha256": "62183154b27ea012faa874e302922176b6296c344827218d01d3a1de13ef819f",
+          "bytes": 487369
+        },
+        {
+          "capture": ".cache/nov12-components/post-training/2611.13135v1.pdf",
+          "source_url": "https://arxiv.org/pdf/2611.13135v1",
+          "sha256": "ed32bc44567653291b0b937d33feb03382f85740c59dbfc651ea547ded49d69a",
+          "bytes": 4697199
+        }
+      ]
+    },
+    "real-loss": {
+      "reviewed_version_url": "https://arxiv.org/html/2611.14399v1",
+      "reviewed_sections": "defining EAL estimators, counterexample, Eqs.9/15/16/19; byline and experiment requirements",
+      "whole_paper_verified": false,
+      "captures": [
+        {
+          "capture": ".cache/nov12-components/foundation/real.html",
+          "source_url": "https://arxiv.org/html/2611.14399v1",
+          "sha256": "6a8d0aebeaea7c0f2c381e38fedb6667d3bde6febdaaf398615bedcefc95acd7",
+          "bytes": 519425
+        },
+        {
+          "capture": ".cache/nov12-components/foundation/real.pdf",
+          "source_url": "https://arxiv.org/pdf/2611.14399v1",
+          "sha256": "ffd6628908a84ca9cfe0d18fd64bc70efd93fe41d521e395872958c296aaea98",
+          "bytes": 658177
+        }
+      ]
+    },
+    "c2-routing": {
+      "reviewed_version_url": "https://arxiv.org/html/2611.14469v1",
+      "reviewed_sections": "joint-correctness harm/benefit, validation utility and FLOP protocol; byline and configuration",
+      "whole_paper_verified": false,
+      "captures": [
+        {
+          "capture": ".cache/nov12-components/foundation/c2-routing.html",
+          "source_url": "https://arxiv.org/html/2611.14469v1",
+          "sha256": "74f2c0a5d80f6bef6c52c1fd4eaf6698370eddf24099cb8bb860bad5d65554d8",
+          "bytes": 1307016
+        },
+        {
+          "capture": ".cache/nov12-components/foundation/c2-routing.pdf",
+          "source_url": "https://arxiv.org/pdf/2611.14469v1",
+          "sha256": "d88806c6ca2442cda4ee02ef613de96ae2e8614018b931758bc6034530159637",
+          "bytes": 1575736
+        }
+      ]
+    },
+    "onlyact": {
+      "reviewed_version_url": "https://arxiv.org/html/2611.14420v1",
+      "reviewed_sections": "scene-swapped positives, same-video negatives, full contrastive bank and fixed projection; byline and training setup",
+      "whole_paper_verified": false,
+      "captures": [
+        {
+          "capture": ".cache/nov12-components/foundation/onlyact.html",
+          "source_url": "https://arxiv.org/html/2611.14420v1",
+          "sha256": "742493642cad9dd12f59058be938a8eaf0ab2867b4ce183b2756c9cc0e2b244e",
+          "bytes": 548658
+        },
+        {
+          "capture": ".cache/nov12-components/foundation/onlyact.pdf",
+          "source_url": "https://arxiv.org/pdf/2611.14420v1",
+          "sha256": "3c850d8af27203105786b33ca4cf7df21031071b2aa1becf95523cf1414bed29",
+          "bytes": 2997868
+        }
+      ]
+    }
+  }
+}

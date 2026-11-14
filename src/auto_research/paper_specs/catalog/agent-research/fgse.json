@@ -1,0 +1,41 @@
+{
+  "domain": "agent-research",
+  "key": "fgse",
+  "title": "When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents",
+  "paper_url": "https://arxiv.org/abs/2611.14326",
+  "reviewed_version": "2611.14326v1",
+  "detail_path": "agent-research/2611.14326-fgse/README.md",
+  "topic": [
+    "自进化与技能优化",
+    "证伪与回归保护"
+  ],
+  "first_author": "Runxuan Tang",
+  "first_author_affiliation": "Nanyang Technological University",
+  "published": "2026-11-10",
+  "published_at": "2026-11-10T16:52:25Z",
+  "code": null,
+  "code_status": "固定原文未链接作者仓库，精确标题检索未找到已发布源码。",
+  "adapter": null,
+  "priority": "P1",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.agent_research.fgse.commitment_gate",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.agent_research.fgse import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.14326v1#A3.SS7",
+    "available_resource": "单张 A100/A30 或本地 Mac",
+    "basis": "Appendix C.7 Table4合计约46万LLM/70.3万verifier调用、最多32个CPU worker，各组12–39小时；完整托管API/环境实验不复现，不将CPU门控本身标成昂贵。"
+  },
+  "fidelity_note": "Eq7–9经验门控按外部verifier记录执行；不含actor、探针生成、前提自动细化或置信界定理验证。",
+  "summary": "FGSE先临时测试经验假设的迁移增益、证伪风险和旧任务损伤，三门同时通过才写入长期状态。本地实现经验统计与准入门控，不复现完整多环境自进化实验。",
+  "gpu_validation_passed": false
+}

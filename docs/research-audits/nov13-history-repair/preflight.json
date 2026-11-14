@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-13-scientisttwo-history-repair",
+  "components": ["scientist-two", "ds-star", "era-flat-puct", "envharness"],
+  "device": "cpu",
+  "seeds": [42, 43, 44],
+  "maximum_run_seconds": 10,
+  "pretrained_model_calls": 0,
+  "model_and_dataset_downloads": 0,
+  "api_calls": 0,
+  "full_experiments_executed": false,
+  "automatic_retry": false,
+  "scope": "Only typed external-callback control contracts and flat-PUCT arithmetic on explicit fixtures; no autonomous scientist, semantic evaluator, code executor, environment designer, RL or public capability benchmark. MLE-STAR and AlphaEvolve are review-only. All full campaigns are explicitly not reproduced."
+}

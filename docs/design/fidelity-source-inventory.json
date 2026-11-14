@@ -83,6 +83,16 @@
         "fingerprint": "f04efee27f780cc5e8578f59179d0bb7ca8c11e40c12bc04897c98bdec2dd872"
       }
     ],
+    "src/auto_research/agent_research/bats.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "apply_external_verdict",
+        "line": 145,
+        "qualified_name": "BATSState.apply_external_verdict",
+        "expression": "self.attempt += 1",
+        "fingerprint": "2efd2add81410f67645c1123cc6fa733e1776ca073a345daab856d3ee46fe2a1"
+      }
+    ],
     "src/auto_research/agent_research/capability_benchmark.py": [
       {
         "kind": "state_update_not_execution_evidence",
@@ -249,6 +259,154 @@
         "qualified_name": "run_code_method",
         "expression": "task.correct_patch",
         "fingerprint": "2f4fb8888cced39ab4e9cf7884dfac62ad990f85f4fcf8adc6e646588ba07710"
+      }
+    ],
+    "src/auto_research/agent_research/ds_star.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "__post_init__",
+        "line": 49,
+        "qualified_name": "PlanContext.__post_init__",
+        "expression": "self.plan",
+        "fingerprint": "33e81848ff5fd74f2aa6582e35228a665319234e93f778e34c73c24fbbfbdade"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "__post_init__",
+        "line": 62,
+        "qualified_name": "State.__post_init__",
+        "expression": "self.plan",
+        "fingerprint": "33e81848ff5fd74f2aa6582e35228a665319234e93f778e34c73c24fbbfbdade"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "__post_init__",
+        "line": 64,
+        "qualified_name": "State.__post_init__",
+        "expression": "context.plan",
+        "fingerprint": "7753d390031929facb2314360375d986616612c763d5a71369554aca93d8c32b"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "__post_init__",
+        "line": 65,
+        "qualified_name": "State.__post_init__",
+        "expression": "self.plan",
+        "fingerprint": "33e81848ff5fd74f2aa6582e35228a665319234e93f778e34c73c24fbbfbdade"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "refine_plan",
+        "line": 119,
+        "qualified_name": "refine_plan",
+        "expression": "state.plan",
+        "fingerprint": "d279d3be9c8056c3882280d9c97160dd24b23eff45e7285eb6bbe3df403a5f90"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "refine_plan",
+        "line": 121,
+        "qualified_name": "refine_plan",
+        "expression": "state.plan",
+        "fingerprint": "d279d3be9c8056c3882280d9c97160dd24b23eff45e7285eb6bbe3df403a5f90"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "refine_plan",
+        "line": 123,
+        "qualified_name": "refine_plan",
+        "expression": "state.plan",
+        "fingerprint": "d279d3be9c8056c3882280d9c97160dd24b23eff45e7285eb6bbe3df403a5f90"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "propose",
+        "line": 181,
+        "qualified_name": "propose",
+        "expression": "context.plan",
+        "fingerprint": "7753d390031929facb2314360375d986616612c763d5a71369554aca93d8c32b"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "diagnostic",
+        "line": 193,
+        "qualified_name": "diagnostic",
+        "expression": "context.plan",
+        "fingerprint": "7753d390031929facb2314360375d986616612c763d5a71369554aca93d8c32b"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "diagnostic",
+        "line": 195,
+        "qualified_name": "diagnostic",
+        "expression": "state.plan",
+        "fingerprint": "d279d3be9c8056c3882280d9c97160dd24b23eff45e7285eb6bbe3df403a5f90"
+      },
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "diagnostic",
+        "line": 203,
+        "qualified_name": "diagnostic",
+        "expression": "initial.plan",
+        "fingerprint": "c6a59ac42ba8ebf4648ad279d18e80dc72f9cc61d68863964f206cea4e953ea7"
+      }
+    ],
+    "src/auto_research/agent_research/envharness.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "step",
+        "line": 247,
+        "qualified_name": "SerialChain.step",
+        "expression": "self._steps += 1",
+        "fingerprint": "3d6c3c7d214e4574280258ab27386d8e87bb5f0d9c87858f18a5ef50c3742878"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "step",
+        "line": 256,
+        "qualified_name": "SerialChain.step",
+        "expression": "self._observation += '\\n--- Next task ---\\n' + initial.observation",
+        "fingerprint": "3a87ab8e84e831f97c53ef8c56596199d6f870d8435776fcf6cc93ee6d48477f"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "reset",
+        "line": 287,
+        "qualified_name": "Fixture.reset",
+        "expression": "self.resets += 1",
+        "fingerprint": "25dc67f76b0073484b235cb5517d93b631bd630717b5b92e24f620ca6173c513"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "step",
+        "line": 295,
+        "qualified_name": "Fixture.step",
+        "expression": "self.calls += 1",
+        "fingerprint": "f04efee27f780cc5e8578f59179d0bb7ca8c11e40c12bc04897c98bdec2dd872"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "step",
+        "line": 296,
+        "qualified_name": "Fixture.step",
+        "expression": "self.steps += 1",
+        "fingerprint": "5d6dd7f1344c0f0c968ca38ab3edca07dbbf687c5cdc3c047f54e368ed94c456"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "step",
+        "line": 297,
+        "qualified_name": "Fixture.step",
+        "expression": "self.position += action == 'advance'",
+        "fingerprint": "ec9c19cb3c1fdbce972ecfff2c41412826ac1c111acbbe731e590dc0bcc88208"
+      },
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "evaluate",
+        "line": 304,
+        "qualified_name": "Fixture.evaluate",
+        "expression": "self.evaluations += 1",
+        "fingerprint": "303defa59a42525908daad9dc939d110b01219c484be7c587464549c71999101"
       }
     ],
     "src/auto_research/agent_research/frugalevo.py": [
@@ -9461,6 +9619,16 @@
         "fingerprint": "b267b9ec66be8d23cb37d14555f017f0e4c439a7dc4f5244fcde7a5f37fd95f2"
       }
     ],
+    "src/auto_research/agent_research/mt_pingeval.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "submit",
+        "line": 79,
+        "qualified_name": "IsotokenBudget.submit",
+        "expression": "self.turns += 1",
+        "fingerprint": "94e585b921a6d009f48997fbff9b0677525ef6a6e92a73cae28081fd60aea047"
+      }
+    ],
     "src/auto_research/agent_research/oct10_backend.py": [
       {
         "kind": "state_update_not_execution_evidence",
@@ -10759,6 +10927,16 @@
         "fingerprint": "8daf2b99fd976e8181b86b2b2e0c6a6ae6ed2618d8a5bfcc379acca8cf1cc924"
       }
     ],
+    "src/auto_research/discovery.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "_window_selection_records",
+        "line": 176,
+        "qualified_name": "_window_selection_records",
+        "expression": "policy.get('authorization', {}).get('answer')",
+        "fingerprint": "b426d20e11dcd7345085728d538e763b14855254476a2abb25216c051acc84ff"
+      }
+    ],
     "src/auto_research/discovery_announcements.py": [
       {
         "kind": "state_update_not_execution_evidence",
@@ -10767,6 +10945,16 @@
         "qualified_name": "_BulletinParser.handle_endtag",
         "expression": "self.total_expected += total",
         "fingerprint": "01c8a621240982a0610bfe92cae9da82ab7c17431bdeaca3294a3a414808a659"
+      }
+    ],
+    "src/auto_research/discovery_watermark.py": [
+      {
+        "kind": "label_access_requires_role_review",
+        "function": "audit_review_watermark",
+        "line": 103,
+        "qualified_name": "audit_review_watermark",
+        "expression": "selection_policy.get('authorization', {}).get('answer')",
+        "fingerprint": "9f04c1d06fce780adf8e5ca7a935b4e8f3e286a5223aefae31b8c8d527adacbc"
       }
     ],
     "src/auto_research/evolution/composable.py": [

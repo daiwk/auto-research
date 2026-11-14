@@ -7,7 +7,7 @@ hide:
 
 # 规划先问何时见反馈，再问要不要展开搜索
 
-[Agent](../index.md) · 更新 2026-10-27 · 16 篇主题资料 / 6 篇重点对照
+[Agent](../index.md) · 更新 2026-11-13 · 21 篇主题资料 / 11 篇重点对照
 
 ReAct 与 ReWOO 改变计划接收观察的时机，ToT 与 LATS 改变候选搜索组织，Jev Lookahead 把后继模拟交给代码，DRAGO 则检查形式计划是否忠实。它们处理不同的不确定性：步骤未知、路线选择、环境可达性与规格错误，不应以搜索次数或本地满分统一排名。
 
@@ -31,6 +31,11 @@ ReAct 与 ReWOO 改变计划接收观察的时机，ToT 与 LATS 改变候选搜
 | [LATS](../../../agent-research/2310.04406-lats/README.md) · [原始来源](https://arxiv.org/abs/2310.04406)<br>章节：背景与主要改动、核心公式、复现边界 | 用 MCTS 组织行动、rollout 与价值回传，UCT 平衡已有回报和访问不足，失败生成反思。 | 真实 rollout 增加外部约束也消耗预算；本地以完整计划为叶，未运行原文 LM value 或 WebShop。 |
 | [Code Owns the Simulation, Jev Owns the Evaluation](../../../agent-research/2610.01834-jev-lookahead/README.md) · [原始来源](https://arxiv.org/abs/2610.01834)<br>章节：背景与主要改动、核心公式、本地复现 | 逐动作克隆模拟后继，把新观察和新可用动作交给决策器比较进展。 | 依赖可信且隔离的 simulator；独立对象不保证 RNG/外部资源隔离。本地词法 provider 只是替身。 |
 | [Repairing LLM-Generated Specifications with Deterministic Diagnosis](../../../agent-research/2610.22568-drago/README.md) · [原始来源](https://arxiv.org/abs/2610.22568)<br>章节：背景与主要改动、核心公式、本地复现与边界 | 以类型、契约、可达性和题意诊断定向修复形式规格，严格降低阻塞并防止删目标退化。 | 求解器只验证给定形式化，仍可能形式上可解却题意错误；本地是正前提 STRIPS 子集，完整多模型实验高成本未复现。 |
+| [Budget-Aware Tool Use Enables Effective Agent Scaling](../../../agent-research/2511.17006-bats/README.md) · [原始来源](https://arxiv.org/abs/2511.17006)<br>章节：核心公式、数据协议与代码映射、结果、负控与边界 | 持续注入逐工具预算，并由外部SUCCESS/CONTINUE/PIVOT信号调节尝试；摘要清理历史但不补额度，任一工具耗尽结束。 | 统一token/工具账本是实际消耗而非预算上限；本地只有状态与费用核，没有语义规划、自验证、网页工具、答案judge或准确率结论。 |
+| [DS-STAR: Data Science Agent via Iterative Planning and Verification](../../../agent-research/2509.21825-ds-star/README.md) · [原始来源](https://arxiv.org/abs/2509.21825)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界 | 以计划、代码和实际输出为条件显式检查语义充分性；不足时在追加与删除错误后缀之间路由，再生成一步。 | 比只追加步骤更能撤销错误依赖，但核心verifier/router依赖外部语义模型。本地仅验证回溯、数据流和预算，末轮未经验证的新稿不得计成功；商业完整评测未运行。 |
+| [An AI system to help scientists write expert-level empirical software (ERA)](../../../agent-research/2509.06503-era-flat-puct/README.md) · [原始来源](https://arxiv.org/abs/2509.06503)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验与边界 | 将所有已执行程序平铺竞争，用任务分数的归一化排名、整树均匀先验和祖先访问计数决定下一次代码变异。 | 不回传后代 rollout 均值，也不按根到叶递归选择；与 LATS 的行动轨迹、环境反馈及价值回传不是同一价值语义。外部执行、评分和数据隔离未在 CPU 算术核中实现，不能把节点数或夹具满分当成科研能力。 |
+| [Analysis of Optimality of Large Language Models on Planning Problems](../../../agent-research/2604.02910-planning-optimality/README.md) · [原始来源](https://arxiv.org/abs/2604.02910v1)<br>章节：背景与主要改动、核心机制与公式、原文结果与限制、本地复现 | 只判断计划能否达到目标，会忽略大量无必要动作。论文把LLM规划评测从validity扩展到optimality，在Blocksworld和抽象P*任务中构造具有已知最优长度的课程，分析推理模型随着难度增长的计划冗余。 | LATS分配搜索与rollout预算来寻找行动轨迹；本组件不生成LLM计划，只验证外部计划及计算受限课程gap。搜索分高不能代替真实前置条件验证，合法性分也不能替代最优性。 |
+| [Learning Steerable Clarification Policies with Collaborative Self-play](../../../agent-research/2512.04068-clarification-sgp/README.md) · [原始来源](https://arxiv.org/abs/2512.04068)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界 | 把猜测、澄清、多答案作为受数值成本条件化的动作，按解释均衡reward选序列后再选训练轨迹。 | ReAct据观察继续行动；SGP还问多一次沟通的收益是否抵成本。低成本时多问不等于高成本下也最优，本地选择器不具备对话语义能力。 |
 
 </div>
 
@@ -47,6 +52,36 @@ ReWOO 的变量引用说明它不是不看工具证据，而是不让 Planner �
 ToT 与 LATS 都扩展多个方向，但前者突出中间状态评价和前沿组织，后者还通过执行与访问统计回传反馈。Jev Lookahead 进一步要求代码模拟提供可观察后继，DRAGO 用符号探针检查规格。外部计算也不是万能 oracle：模拟器可能不隔离，求解器可能解了错误规格。比较搜索器时应先固定它能看到的证据及失败含义，再讨论树宽、深度和预算。
 
 对照来源：[tree-of-thoughts](../../../agent-research/2305.10601-tree-of-thoughts/README.md) · [lats](../../../agent-research/2310.04406-lats/README.md) · [jev-lookahead](../../../agent-research/2610.01834-jev-lookahead/README.md) · [drago](../../../agent-research/2610.22568-drago/README.md)
+
+### 减少重复规划与有预算的自适应换路不是同一个轴
+
+ReWOO把完整依赖计划交给Worker后再由Solver汇总，减少中间观察对Planner的反复打断；BATS让剩余额度持续参与模型决策，并通过语义自验证决定保留方向还是换路。因而开环分解与预算条件化是不同控制假设，可比较其成本记账和重启语义，但不能拿合成状态转换断言哪种真实任务更强。外部SUCCESS只表示该模块接受，不能读取gold把自检变成oracle。
+
+对照来源：[bats](../../../agent-research/2511.17006-bats/README.md) · [rewoo](../../../agent-research/2305.18323-rewoo/README.md)
+
+### 观察反馈不等于充分性证明，回溯也不等于状态重算
+
+ReAct交替推理、工具动作与观察，适应新信息。DS-STAR额外把query、累计计划、代码与输出交给verifier判断是否足够，再决定追加还是删除错误后缀。删除计划后，原方法仍把上一输出给planner、上一代码给coder，它们是纠错上下文，不是已重算的前缀状态。完整执行和语义验证必须外置补齐；本地L1不得与ReAct已有隔离能力结果混排。
+
+对照来源：[ds-star](../../../agent-research/2509.21825-ds-star/README.md) · [react](../../../agent-research/2210.03629-react/README.md)
+
+### 程序质量排名与轨迹回报均值不能混为一种树价值
+
+ERA 的节点是已执行程序，整树任意节点都可直接扩张；任务分数只转成相对排名供 PUCT 选择，访问更新不把子孙分数平均回传给祖先，最终仍按原始任务分数选优。LATS 以 MCTS 组织行动与 rollout，环境回报、价值统计及失败反思共同影响后续搜索。两者都需要外部反馈，却在搜索单元、单次成本和可见证据上不同。仓库 ERA 仅验证有限候选的选择算术，LATS 以完整计划为叶且未运行原文 LM value 或 WebShop；不应从这些局部结果宣布同预算科研能力胜负。公平比较必须先固定执行器、validation/test 隔离、失败费用和总预算。
+
+对照来源：[era-flat-puct](../../../agent-research/2509.06503-era-flat-puct/README.md) · [lats](../../../agent-research/2310.04406-lats/README.md)
+
+### Planning Optimality：合法计划不等于最短计划：先区分干预对象和可用证据
+
+LATS分配搜索与rollout预算来寻找行动轨迹；本组件不生成LLM计划，只验证外部计划及计算受限课程gap。搜索分高不能代替真实前置条件验证，合法性分也不能替代最优性。 `transition` 不接收gold计划；`score_plan` 只由独立evaluator调用。小于等于6块时另用独立BFS穷举四操作图，不调用公式，校验多种排列的最短距离。负控包括无法pickup非桌面块、同塔多个目标拒绝、合法但多绕两步的计划gap=1。不是LLM planner、VAL兼容实现或Agent能力成绩。
+
+对照来源：[planning-optimality](../../../agent-research/2604.02910-planning-optimality/README.md) · [lats](../../../agent-research/2310.04406-lats/README.md)
+
+### 澄清的价值必须连同沟通成本与解释分布一起定义
+
+ReAct让推理与工具观察交替，而SGP在存在私有意图的协作中显式训练行动形式。它先对解释均衡再选序列，避免只对好猜解释最优；数值成本还要与F1单位一致。两者都依赖真实模型产生有效观察或问题，本地满分控制检查不能相互排能力。
+
+对照来源：[clarification-sgp](../../../agent-research/2512.04068-clarification-sgp/README.md) · [react](../../../agent-research/2210.03629-react/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -82,15 +117,85 @@ ToT 与 LATS 都扩展多个方向，但前者突出中间状态评价和前沿�
 
     对照来源：[jev-lookahead](../../../agent-research/2610.01834-jev-lookahead/README.md) · [drago](../../../agent-research/2610.22568-drago/README.md)
 
+### ReWOO省去多次Planner与BATS在矛盾后PIVOT，分别付出什么代价？ {#cross-cross-open-loop-versus-budget-conditioned-pivot}
+
+??? note "展开答案与例子"
+
+    **答案：** ReWOO的预先分解减少重复规划但要承担计划对后来证据不适配；BATS保留动态决策但要支付规划/验证开销，并在换路时保留真实已用预算。准确率与实际费用仍须完整隔离评测，不能用本地控制核决定胜者。
+
+    **教学例子：** 教学例：ReWOO执行预排三步工具依赖；BATS用掉一次搜索后换路仍只剩两次额度，不能为了展示更好答案重置为三次。
+
+    对照来源：[bats](../../../agent-research/2511.17006-bats/README.md) · [rewoo](../../../agent-research/2305.18323-rewoo/README.md)
+
+### DS-STAR删掉错误步骤后，能否把上一输出当成正确前缀的执行结果？ {#cross-cross-plan-truncation-versus-execution-replay}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。上一输出是整份旧代码的结果，可能依赖错误后缀。原方法把它作为纠错信息继续条件化；控制核不声称已经回滚文件状态或重算数据。必须由真实coder/executor和独立verifier处理。
+
+    **教学例子：** 教学例：错误join后的聚合值不会因删除计划文字自动消失，外部代码必须重新生成并执行。
+
+    对照来源：[ds-star](../../../agent-research/2509.21825-ds-star/README.md) · [react](../../../agent-research/2210.03629-react/README.md)
+
+### 给 ERA 和 LATS 都限制一百次扩张，就能公平比较哪一个更会探索吗？ {#cross-cross-flat-program-rank-versus-rollout-value}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。一项 ERA 扩张需要生成并执行新程序以获得任务分数；一项 LATS rollout 可能执行多步交互并更新价值及反思。计数单位不等于成本单位，整树排名也不等于轨迹回报均值。应先统一任务和可见证据，记录模型调用、执行费用及失败成本，再隔离验证选择与测试；本地机制核尚不能提供这类能力比较。
+
+    **教学例子：** 教学例：一个程序评估训练模型两小时，另一个轨迹只执行四次廉价工具；都算一次扩张会掩盖预算差异。探索项选中的低访问候选，也不能未经独立评测就取代最高原始 validation 分数的候选。
+
+    对照来源：[era-flat-puct](../../../agent-research/2509.06503-era-flat-puct/README.md) · [lats](../../../agent-research/2310.04406-lats/README.md)
+
+### 与LATS树搜索相比，这个组件解决了哪一层问题？ {#cross-nov13-colm-planning-optimality}
+
+??? note "展开答案与例子"
+
+    **答案：** LATS分配搜索与rollout预算来寻找行动轨迹；本组件不生成LLM计划，只验证外部计划及计算受限课程gap。搜索分高不能代替真实前置条件验证，合法性分也不能替代最优性。
+
+    **教学例子：** LATS找到一个能完成任务的四步计划，而独立BFS发现两步解时，valid仍为真但gap=1。
+
+    对照来源：[planning-optimality](../../../agent-research/2604.02910-planning-optimality/README.md) · [lats](../../../agent-research/2310.04406-lats/README.md)
+
+### ReAct执行更多推理与工具轮次，就等于SGP中更优的沟通策略吗？ {#cross-cross-colm-clarification-sgp}
+
+??? note "展开答案与例子"
+
+    **答案：** 不等于。ReAct根据观察继续行动；SGP还把准确性收益与澄清、篇幅的数值成本比较。只有在相同成本与解释分布下评价reward，轮次数才有可比意义。
+
+    **教学例子：** 教学例：多问一句虽提高正确率，却可能在高提问成本的语音任务中降低reward。
+
+    对照来源：[clarification-sgp](../../../agent-research/2512.04068-clarification-sgp/README.md) · [react](../../../agent-research/2210.03629-react/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-13** · 补入clarification-sgp历史遗漏，把猜测、澄清、多答案作为受数值成本条件化的动作，按解释均衡reward选序列后再选训练轨迹。 ReAct据观察继续行动；SGP还问多一次沟通的收益是否抵成本。低成本时多问不等于高成本下也最优，本地选择器不具备对话语义能力。
+
+涉及：[clarification-sgp](../../../agent-research/2512.04068-clarification-sgp/README.md) · [react](../../../agent-research/2210.03629-react/README.md)
+
+**2026-11-13** · 补入固定Google COLM历史来源论文及L1组件，比较核心定义与证据边界；完整实验明确不复现，不把本地诊断当模型能力或Evolve改进。
+
+涉及：[planning-optimality](../../../agent-research/2604.02910-planning-optimality/README.md) · [lats](../../../agent-research/2310.04406-lats/README.md)
+
+**2026-11-13** · 补入 Google ERA 历史锚点，区分全树程序排名 PUCT 与 LATS 轨迹 rollout/价值回传；保留 v1 访问初始化及最终原始分数选优。CPU 组件仅为机制证据，完整多任务科研搜索高成本不复现。
+
+涉及：[era-flat-puct](../../../agent-research/2509.06503-era-flat-puct/README.md) · [lats](../../../agent-research/2310.04406-lats/README.md)
+
+**2026-11-13** · 补入Google/KAIST DS-STAR历史漏项，区分语义充分性、计划回溯与真实执行状态；CPU三seed只验控制，完整商业Agent评测未复现，不能夸大为大训练。
+
+涉及：[ds-star](../../../agent-research/2509.21825-ds-star/README.md) · [react](../../../agent-research/2210.03629-react/README.md)
+
+**2026-11-12** · 补充预算条件化搜索与实际费用轴，区分BATS动态换路和ReWOO开环解耦；强调任一工具耗尽、换路保留用量和外部verifier非gold能力证据。
+
+涉及：[bats](../../../agent-research/2511.17006-bats/README.md)
 
 **2026-10-27** · 首版：比较反馈时机、thought与MCTS搜索、代码后继模拟和形式规格诊断，区分规划效率与验证证据。
 
 覆盖 16 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 16 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 21 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -110,6 +215,11 @@ ToT 与 LATS 都扩展多个方向，但前者突出中间状态评价和前沿�
 - [ReWOO](../../../agent-research/2305.18323-rewoo/README.md)
 - [Tree of Thoughts](../../../agent-research/2305.10601-tree-of-thoughts/README.md)
 - [ReAct](../../../agent-research/2210.03629-react/README.md)
+- [Budget-Aware Tool Use Enables Effective Agent Scaling](../../../agent-research/2511.17006-bats/README.md)
+- [DS-STAR: Data Science Agent via Iterative Planning and Verification](../../../agent-research/2509.21825-ds-star/README.md)
+- [An AI system to help scientists write expert-level empirical software (ERA)](../../../agent-research/2509.06503-era-flat-puct/README.md)
+- [Analysis of Optimality of Large Language Models on Planning Problems](../../../agent-research/2604.02910-planning-optimality/README.md)
+- [Learning Steerable Clarification Policies with Collaborative Self-play](../../../agent-research/2512.04068-clarification-sgp/README.md)
 
 </details>
 

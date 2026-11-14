@@ -1,0 +1,709 @@
+{
+  "schema_version": 1,
+  "window": {
+    "start": "2026-10-16",
+    "end": "2026-11-09",
+    "timezone": "Asia/Shanghai"
+  },
+  "scope": "Eight residual strong production/workflow leads from the frozen365 protection set; original sources, not abstract-only exclusions",
+  "counts": {
+    "rejected": 6,
+    "accepted": 2
+  },
+  "all_sources_exhaustive": false,
+  "implementations": 0,
+  "gpu_runs": 0,
+  "reviews": [
+    {
+      "revision": 1,
+      "title": "Autonomous intelligence for mining productivity: a multi-agent AI approach to operational value creation",
+      "published": "2026-10-19T13:24:44Z",
+      "updated": "2026-10-19T13:24:44Z",
+      "metadata_sha256": "c79312f4c6d17f448cccb919f3827bc8a83b6e6128f6eb9884a11547af7ae3b4",
+      "capture": "39731868655/agent-paper-candidates/paper-candidates-agent.json",
+      "metadata_capture": "39731868655/agent-paper-candidates/paper-candidates-agent.json",
+      "metadata_capture_sha256": "972c47e765933ae15f422b7258719b2301e18ddd7c44408ec04fbadb060b6d52",
+      "source_url": "https://arxiv.org/pdf/2610.26369v1",
+      "source_sha256": "e9c6d43ea0640356769ba8773dbf15a18ff7bd802c6fa664abc28f5b25f00920",
+      "source_capture": "p2-residual-industrial/2610.26369v1.pdf",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/pdf/2610.26369v1",
+          "source_sha256": "e9c6d43ea0640356769ba8773dbf15a18ff7bd802c6fa664abc28f5b25f00920",
+          "source_capture": "p2-residual-industrial/2610.26369v1.pdf",
+          "source_bytes": 1005608,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "pdf",
+          "page_one_based": 1,
+          "match": "Eramet",
+          "page_text_sha256": "10fc41bbad40f4b895bb4fb2ad52678cdd7948603bf93011712a8ddf035af28c"
+        },
+        {
+          "format": "pdf",
+          "page_one_based": 12,
+          "match": "not implemented",
+          "page_text_sha256": "88a2d1ef8d2f49ccd4a0231a790add4db369df2fce8ba40f1f2b74285dddbab8"
+        },
+        {
+          "format": "pdf",
+          "page_one_based": 12,
+          "match": "No controlled",
+          "page_text_sha256": "88a2d1ef8d2f49ccd4a0231a790add4db369df2fce8ba40f1f2b74285dddbab8"
+        },
+        {
+          "format": "pdf",
+          "page_one_based": 13,
+          "match": "19.63",
+          "page_text_sha256": "03c6c261af49520f6aaaf6f16e8adc278423b729a7c030b2c7ad2eecf75d98b3"
+        }
+      ],
+      "track": "agent",
+      "priority": "P2",
+      "verified_priority_organizations": [],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, production vs offline evidence, costs and limitations; not an implementation or full-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2610.26369",
+      "organization": "Eramet / Mines Paris PSL",
+      "decision": "rejected",
+      "resolution": "not_selected_this_window_prototype_and_unevaluated_benchmark_blueprint",
+      "reason": "EI2ROC原文明确分开已实现原型、参考设计和未来工作：测试环境在Eramet真实矿场、少量dispatcher、单一模型配置；schema/auth/scope/rate/audit门禁在运行，但HSE独立规则未强制执行，benchmark harness尚未实现、场景库仍建设，明确没有受控任务/安全/运营效果评价。四条示例查询只展示开销和时延，其他行业量化收益是引文，不能当成本系统A/B。按本轮原型/方法蓝图而非交付公共评测的选题口径不选，不否定新架构；低成本编排门禁未实现，也不以工业标题贴高成本。",
+      "locations": [
+        "PDF p1 original authors",
+        "PDF pp7–12 architecture and maturity table",
+        "PDF p13 operating observations",
+        "PDF pp16–17 proposed evaluation and future calibration"
+      ],
+      "algorithm_assessment": "three-tier mining orchestration reference design; new benchmark remains a proposal, not a delivered public capability benchmark",
+      "production_evidence": {
+        "kind": "operating_site_testing_prototype_observations",
+        "online_ab": false,
+        "details": "原型12周/31活跃日合计API$19.63；4示例查询$0.28–0.42、70–130秒；无baseline/gold/human adjudication，作者明确不构成评价。"
+      },
+      "source_access_attempts": [
+        {
+          "url": "https://arxiv.org/html/2610.26369v1",
+          "outcome": "HTTP404; original HTML unavailable"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2610.26369v1",
+          "outcome": "fixed PDF downloaded; first page visually inspected and relevant sections read"
+        }
+      ]
+    },
+    {
+      "revision": 1,
+      "title": "AllPath: Layered Verification for a Deployed, Self-Revising LLM Trading Agent under Human-Gated and Autonomous Regimes",
+      "published": "2026-10-19T16:18:52Z",
+      "updated": "2026-10-19T16:18:52Z",
+      "metadata_sha256": "e302b9eec5d7390c5f10bc1feb39f4742d5f355a97aadcb1824527dc12bc6da1",
+      "capture": "39731868655/agent-paper-candidates/paper-candidates-agent.json",
+      "metadata_capture": "39731868655/agent-paper-candidates/paper-candidates-agent.json",
+      "metadata_capture_sha256": "972c47e765933ae15f422b7258719b2301e18ddd7c44408ec04fbadb060b6d52",
+      "source_url": "https://arxiv.org/html/2610.26662v1",
+      "source_sha256": "335d3ba9eb43c5570db4fc2ec700ee2436328fb98d2ca31d80451adf787883f8",
+      "source_capture": "p2-residual-industrial/2610.26662v1.html",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/html/2610.26662v1",
+          "source_sha256": "335d3ba9eb43c5570db4fc2ec700ee2436328fb98d2ca31d80451adf787883f8",
+          "source_capture": "p2-residual-industrial/2610.26662v1.html",
+          "source_bytes": 303739,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "html",
+          "location": "S3.SS6",
+          "match": "paper-trading API",
+          "paragraph_sha256": "df949bfbb626da27528f475f86cc25328b0017c9e1cbe0f0b17d3e6a252e0e24"
+        },
+        {
+          "format": "html",
+          "location": "S4.SS1",
+          "match": "byte-identical",
+          "paragraph_sha256": "958502fcf97d8f46e6f7a260c013683899d9cba76131fadfa676b6328223cab4"
+        },
+        {
+          "format": "html",
+          "location": "S6.SS5",
+          "match": "52 nightly reflection sessions",
+          "paragraph_sha256": "3ff2f3968eb957def3b980b3f79b39ef00b2664cc654844860b3ce200adeee13"
+        },
+        {
+          "format": "html",
+          "location": "S7",
+          "match": "natural experiment, not an experiment",
+          "paragraph_sha256": "311f9dc095782507d60faf86e982bdf97f617f77eee4a2839206ce1cf8fecd5d"
+        }
+      ],
+      "track": "agent",
+      "priority": "P2",
+      "verified_priority_organizations": [],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, production vs offline evidence, costs and limitations; not an implementation or full-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2610.26662",
+      "organization": "Independent Researchers (Tian Zhang / Meng Li)",
+      "decision": "rejected",
+      "resolution": "not_selected_this_window_single_case_operational_experience_report",
+      "reason": "AllPath有可审计的风险门禁、字节相同base/单调版本/冻结授权的策略修订门禁和无action tools的夜间反思；源码与每日journal公开。但原文自述是单系统、单操作者（也是作者）的7.5周paper-brokerage自然观察，顺序人审/自动两regime受市场变化混杂，不是随机AB，也不报告投资收益或证明更安全。52次反思、119次revision是运行记录而非公共Agent能力基准。本轮按单案例运营经验报告不选，保留真实有用设计事实；未交易、未运行Agent，不能把它说成高成本训练。",
+      "locations": [
+        "author block",
+        "§3.6 deployment/artifacts",
+        "§4.1–4.3 verification",
+        "§5.5 sequential comparison",
+        "§6.1/6.5",
+        "§7 limitations"
+      ],
+      "algorithm_assessment": "layered verification and self-revision system case study; no claim that the study establishes investment performance or a safer regime",
+      "production_evidence": {
+        "kind": "live_paper_account_single_operator_sequential_regimes",
+        "online_ab": false,
+        "details": "paper账户用经纪商模拟API；shadow账户只本地账本、不发订单。市场真实但资金不冒险；内部ledger非公开，journal可按日核对。"
+      },
+      "upstream_artifact": "https://github.com/dukesky/allpath-trading-agent"
+    },
+    {
+      "revision": 1,
+      "title": "Next Best Action: Causal Constrained Offline RL for Business Action Targeting",
+      "published": "2026-10-19T17:51:53Z",
+      "updated": "2026-10-19T17:51:53Z",
+      "metadata_sha256": "218123dc9fc0845a1d7e7a1412daffe8cfbc76d8abf90aa0f35f68cbf8dd8fab",
+      "capture": "39731868655/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture": "39731868655/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture_sha256": "377d4beef35de9f78684de6392f603e8ae998bd0cb36ba64aaee5280acfdef30",
+      "source_url": "https://arxiv.org/html/2610.26817v1",
+      "source_sha256": "c58306df3eb98fc754fac557c99b8817409d2718f728dfd388623fac979af933",
+      "source_capture": "p2-residual-industrial/2610.26817v1.html",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/html/2610.26817v1",
+          "source_sha256": "c58306df3eb98fc754fac557c99b8817409d2718f728dfd388623fac979af933",
+          "source_capture": "p2-residual-industrial/2610.26817v1.html",
+          "source_bytes": 171590,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "html",
+          "location": "S2.SS2",
+          "match": "strong ignorability",
+          "paragraph_sha256": "ba0e82764ddc8f3d22a71eac4a2a014e2321eee97593132466ba3763dd66cf08"
+        },
+        {
+          "format": "html",
+          "location": "S3",
+          "match": "68 weeks of proprietary historical data",
+          "paragraph_sha256": "f3563e7e2dba82b6fb923fc5f1d831e3eb81f6a82ad01007b93ad6503809a624"
+        },
+        {
+          "format": "html",
+          "location": "S4.SS2",
+          "match": "All three are obtained and evaluated offline",
+          "paragraph_sha256": "f8c192feb57278611a76e187c6a46ad06eadbf7b4e4735d8a57d4b16d5c56166"
+        },
+        {
+          "format": "html",
+          "location": "S5",
+          "match": "online A/B test",
+          "paragraph_sha256": "3e65b74e2382ca0394f9c8b08502b2b614088495649431dce8589b7bb9036310"
+        }
+      ],
+      "track": "recommendation",
+      "priority": "P2",
+      "verified_priority_organizations": [],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, production vs offline evidence, costs and limitations; not an implementation or full-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2610.26817",
+      "organization": "Lyft, Inc.",
+      "decision": "rejected",
+      "resolution": "industrial_online_evidence_not_established",
+      "reason": "Lyft NBA有独立新低成本核心：multinomial propensity模型与SNIPW因果校正转移/奖励，嵌入CMDP occupancy-measure LP，显式预算/eligibility/fairness等约束并解释shadow prices。原文研究是68周专有历史数据、52周训练+16周holdout的model-based OPE；LTV+19%/+8%为离线估计。§5明确线上A/B是可能的后续验证，不能把公司部署背景或百万活跃用户当该policy已A/B。按工业业务定向决策证据门槛不选，LP/SNIPW核心未实现，不能改归通用RL绕过门槛或武断说核心高成本。",
+      "locations": [
+        "complete Lyft byline",
+        "§2.2–2.3 SNIPW and CMDP LP",
+        "§3 temporal holdout",
+        "§4.2 policy OPE",
+        "§5 explicit future online A/B"
+      ],
+      "algorithm_assessment": "new causal-corrected constrained offline policy optimization for business targeting; cheap core not implemented",
+      "production_evidence": {
+        "kind": "proprietary_historical_data_offline_policy_evaluation",
+        "online_ab": false,
+        "details": "8RFM状态×2action；99分位权重裁剪，γ=.9。强可忽略性/positivity是假设；不能用IPW消除未观测混杂。"
+      }
+    },
+    {
+      "revision": 1,
+      "title": "Value-level data provenance in an electronic laboratory notebook used by humans and language-model agents: An experience report",
+      "published": "2026-10-20T08:41:55Z",
+      "updated": "2026-10-20T08:41:55Z",
+      "metadata_sha256": "072e4da92c54114e17978de72bbce7f41d0b96d42cea668135c1872a47242b95",
+      "capture": "39731868655/agent-paper-candidates/paper-candidates-agent.json",
+      "metadata_capture": "39731868655/agent-paper-candidates/paper-candidates-agent.json",
+      "metadata_capture_sha256": "972c47e765933ae15f422b7258719b2301e18ddd7c44408ec04fbadb060b6d52",
+      "source_url": "https://arxiv.org/pdf/2610.27859v1",
+      "source_sha256": "7cfacba626e6f7a5248095ef5f7596e5d2cbca86744eecc307ef939eade69f3d",
+      "source_capture": "p2-residual-industrial/2610.27859v1.pdf",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/pdf/2610.27859v1",
+          "source_sha256": "7cfacba626e6f7a5248095ef5f7596e5d2cbca86744eecc307ef939eade69f3d",
+          "source_capture": "p2-residual-industrial/2610.27859v1.pdf",
+          "source_bytes": 1129179,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "pdf",
+          "page_one_based": 1,
+          "match": "Experience report",
+          "page_text_sha256": "e19db244638187ab3ebfaa2199c601adcda2bcf4846e799e222c752a22b88b7c"
+        },
+        {
+          "format": "pdf",
+          "page_one_based": 4,
+          "match": "open-source software",
+          "page_text_sha256": "2abd9592acb2ac330b581b10c64772bc049a27bfe4a4a9752a8b3abaae03cfe2"
+        },
+        {
+          "format": "pdf",
+          "page_one_based": 9,
+          "match": "drift check",
+          "page_text_sha256": "daea31815644f105e22121fa745e39638bafcba2c9cf5ec4e3d4e1849974f2cd"
+        },
+        {
+          "format": "pdf",
+          "page_one_based": 12,
+          "match": "44",
+          "page_text_sha256": "53bfcf678437ebd315fd5caf5d015112561af44741305efebd02b79e4f241b36"
+        },
+        {
+          "format": "pdf",
+          "page_one_based": 16,
+          "match": "not yet been evaluated over a multi-",
+          "page_text_sha256": "cba5679e3fa5e25a4de818d1797a0efd21eaff44904d4593ad49196588465331"
+        }
+      ],
+      "track": "agent",
+      "priority": "P2",
+      "verified_priority_organizations": [],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, production vs offline evidence, costs and limitations; not an implementation or full-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2610.27859",
+      "organization": "ZJU-UIUC Institute / Zhejiang University / University of Illinois Urbana-Champaign",
+      "decision": "rejected",
+      "resolution": "not_selected_this_window_laboratory_provenance_experience_report",
+      "reason": "已核原文机构与Experience report类型。APS ELN确有七项新工程扩展：每数值绑定file/extractor版本、selection snapshot或server公式，MCP结构化写入、内容hash和只读重放漂移检查；Community desktop/MCP代码公开。生产历史审计与后建两项agent记录演示不是同一口径：后者验证46值的来源链，44值独立精确复算、2个分割依赖值仅量级一致；‘zero drift’不是新Agent能力或测量科学准确性。原文自述新扩展尚未经数月常规人/Agent使用，五平台对比是文档/源码审查非现场试验。本轮按单实验室溯源工程经验报告不选，不将FAIR数据原则当Meta机构、不把可复用便宜重放组件说成高成本。",
+      "locations": [
+        "PDF p1 author affiliations and article type",
+        "PDF p4 Community release",
+        "PDF pp8–10 provenance extensions",
+        "PDF pp11–12 validation",
+        "PDF pp15–16 validity limits"
+      ],
+      "algorithm_assessment": "new database/provenance engineering and deterministic replay safeguards, reported as a single-laboratory experience study rather than a new Agent learning algorithm",
+      "production_evidence": {
+        "kind": "production_notebook_audit_and_two_short_demonstrations",
+        "online_ab": false,
+        "details": "7个月生产记录审计覆盖约5年历史项目；新provenance扩展用两项短期演示验证，未有多月纵向新功能效果。"
+      },
+      "source_access_attempts": [
+        {
+          "url": "https://arxiv.org/html/2610.27859v1",
+          "outcome": "HTTP404; original HTML unavailable"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2610.27859v1",
+          "outcome": "fixed PDF downloaded; first page visually inspected and relevant sections read"
+        }
+      ]
+    },
+    {
+      "revision": 1,
+      "title": "Who Verifies the Tools? How Warped Formatters Mislead Agents and Their Verifiers",
+      "published": "2026-10-23T03:22:12Z",
+      "updated": "2026-10-23T03:22:12Z",
+      "metadata_sha256": "aa03a99f52149e678d025763df8281a43e7dc15ce47821826ed8d6d5da3e06fc",
+      "capture": "40832864995/agent-paper-candidates/paper-candidates-agent.json",
+      "metadata_capture": "40832864995/agent-paper-candidates/paper-candidates-agent.json",
+      "metadata_capture_sha256": "6f1cfe2706766b6d5feb40e2c79363dc367f9021596ed7ea8fbf82bf453434cf",
+      "source_url": "https://arxiv.org/html/2610.32110v1",
+      "source_sha256": "864e908af72e7d0ad26000492f07b602298a59db19a19f8c187c98643bdd28ed",
+      "source_capture": "p2-residual-industrial/2610.32110v1.html",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/html/2610.32110v1",
+          "source_sha256": "864e908af72e7d0ad26000492f07b602298a59db19a19f8c187c98643bdd28ed",
+          "source_capture": "p2-residual-industrial/2610.32110v1.html",
+          "source_bytes": 135030,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "html",
+          "location": "S1.p7.1",
+          "match": "github.com/williamcodes/who-verifies-the-tools",
+          "paragraph_sha256": "32e7aa09b1e7ebb8c315325190a613d4b64f39b55fb51f82bc9a24611ec40843"
+        },
+        {
+          "format": "html",
+          "location": "S3.p3.1",
+          "match": "32",
+          "paragraph_sha256": "f4825f3a81dd913023519036f1f275e6db714eb84e56a7cef19507c1d817e89c"
+        },
+        {
+          "format": "html",
+          "location": "S3.SS3.p1.1",
+          "match": "deterministic checker",
+          "paragraph_sha256": "05d0312bfa3f16c7d8165fa2f178ecf60f3f8e5aab97bca4a68b44f32ee9df4e"
+        },
+        {
+          "format": "html",
+          "location": "S4.SS3",
+          "match": "$74.44",
+          "paragraph_sha256": "7ee81b650dfb1b893b5a1209605b8f2f3e19969f122ce321bfecf266a87ddb06"
+        },
+        {
+          "format": "html",
+          "location": "S6",
+          "match": "unevaluated demonstration",
+          "paragraph_sha256": "597f5c5ecdf72fbdda0fb2f2a58ba184364708b42d682d7c91cb3df9013efdf2"
+        }
+      ],
+      "track": "agent",
+      "priority": "P1",
+      "verified_priority_organizations": [],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, production vs offline evidence, costs and limitations; not an implementation or full-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2610.32110",
+      "organization": "William Jeffries (author affiliation not stated; Pilsudski Institute is the production user, not a verified author affiliation)",
+      "decision": "accepted",
+      "resolution": "accepted_low_cost_tool_formatter_audit_and_public_evaluation_interface_not_implemented",
+      "reason": "这是可独立复用的公开工具语义检查/评测资源：固定同一真实tool内部结果，仅改变formatter披露scope/completeness/uncertainty/provenance；40冻结case中8调试、32holdout，确定性construction checker、claim sheets、模型输出与人工仲裁公开。保留真正生产故障和对照实验事实，但90/90 verifier翻转来自固定答案离线测试，不是用户线上AB；审计prompt演示由已知缺陷作者编写，不能叫穷尽发现。低成本checker/成对渲染协议适合接入，接受但本轮未实现/未跑分；全paper API$74.44只是原始成本，不冒充本地复现或任意高成本豁免。",
+      "locations": [
+        "original author block",
+        "§1 public artifacts",
+        "§2 actual formatter failures",
+        "§3 paired protocol and safeguards",
+        "§4.3 cost",
+        "§5–6 audit demonstration and limits"
+      ],
+      "algorithm_assessment": "public paired tool-formatter evidence protocol, deterministic construction checks and audit prompt; cheap interface/core accepted but not implemented",
+      "production_evidence": {
+        "kind": "real_rag_incidents_plus_offline_paired_formatter_experiment",
+        "online_ab": false,
+        "details": "Pilsudski档案RAG已被用户使用；文中3模型5replicates/condition、1200agent输出。固定答案verifier对照不是现网随机流量。"
+      },
+      "upstream_artifact": "https://github.com/williamcodes/who-verifies-the-tools",
+      "cost_note": "§4.3原始全部pilots+full run API$74.44；本次不发API、不运行模型、不认定所有完整矩阵便宜。"
+    },
+    {
+      "revision": 1,
+      "title": "Reimagining Enterprise RAG for Multi-Agent Systems: A Knowledge Layer That Organizes Before It Retrieves",
+      "published": "2026-10-23T16:21:56Z",
+      "updated": "2026-10-23T16:21:56Z",
+      "metadata_sha256": "13c0128dd0eb6ae88ddc8ee1797f9691758abed47759cf1d118e37dfd94780ef",
+      "capture": "40832864995/agent-paper-candidates/paper-candidates-agent.json",
+      "metadata_capture": "40832864995/agent-paper-candidates/paper-candidates-agent.json",
+      "metadata_capture_sha256": "6f1cfe2706766b6d5feb40e2c79363dc367f9021596ed7ea8fbf82bf453434cf",
+      "source_url": "https://arxiv.org/html/2610.32851v1",
+      "source_sha256": "d02f5bd603d8d5b5cb0c79c6731398e2d8bf24a0bb2824486e5def7899816f2e",
+      "source_capture": "p2-residual-industrial/2610.32851v1.html",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/html/2610.32851v1",
+          "source_sha256": "d02f5bd603d8d5b5cb0c79c6731398e2d8bf24a0bb2824486e5def7899816f2e",
+          "source_capture": "p2-residual-industrial/2610.32851v1.html",
+          "source_bytes": 98057,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        },
+        {
+          "source_url": "https://arxiv.org/pdf/2610.32851v1",
+          "source_sha256": "000a73d7405328a5464fd9ae7431ac445bb94a24cdfc8085a7cc47a980b62910",
+          "source_capture": "p2-residual-industrial/2610.32851v1.pdf",
+          "source_bytes": 657571,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "html",
+          "location": "Sx2",
+          "match": "artifact identifiers",
+          "paragraph_sha256": "486d943e837cb09e8dff96e7d9c73ac3492b7264f2539ca21a63dd2b2af4258d"
+        },
+        {
+          "format": "html",
+          "location": "Sx3",
+          "match": "100 defects",
+          "paragraph_sha256": "5eea3dd189e13b374bae6bfd9f378de0f20ae6150672c38e8c873354e7a59285"
+        },
+        {
+          "format": "html",
+          "location": "Sx3",
+          "match": "measurements are in progress",
+          "paragraph_sha256": "5eea3dd189e13b374bae6bfd9f378de0f20ae6150672c38e8c873354e7a59285"
+        },
+        {
+          "format": "html",
+          "location": "Sx5",
+          "match": "single estate",
+          "paragraph_sha256": "44add1e72e492d1cc61549d26ec4082562e31a489536648377ae82bb7f1e9d74"
+        },
+        {
+          "format": "pdf",
+          "page_one_based": 1,
+          "match": "Cognizant",
+          "page_text_sha256": "b6fcacbafe46f9a8ff701013b4efeb683962e26430682bbe356f09fe686cf53f"
+        }
+      ],
+      "track": "agent",
+      "priority": "P2",
+      "verified_priority_organizations": [],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, production vs offline evidence, costs and limitations; not an implementation or full-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2610.32851",
+      "organization": "Cognizant",
+      "decision": "rejected",
+      "resolution": "not_selected_this_window_single_estate_architecture_report",
+      "reason": "PDF作者机构为Cognizant。论文确有先组织后检索的新artifact级方案：保留producer/service/domain/version元数据，catalog+稀疏registry+导航hypergraph先限artifact ID，再做vector search和置信度不足时全库widening，并留context graph。241仓库/18服务、100+生产缺陷和35回归失败是真实开发者复核的案例观察；原文检索accuracy与widening rate仍在评估，未给独立公共基准或随机流量对照。按本轮单企业架构报告不选，不声称无新设计；低成本scoping核心未实现，不能以未测latency或private企业全文规模虚标已验证效果/高成本。",
+      "locations": [
+        "PDF p1 Cognizant byline",
+        "Design section and Figures1–3",
+        "Deployment and Evaluation",
+        "Limitations/Path Forward"
+      ],
+      "algorithm_assessment": "new artifact-provenance scoping architecture and navigation hypergraph, with limited single-estate observational evaluation; core not implemented",
+      "production_evidence": {
+        "kind": "developer_adjudicated_production_defect_case_study",
+        "online_ab": false,
+        "details": "100+ live queue缺陷、35release回归；precision/placement/widening实测尚未完成，latency按设计讨论而非报告benchmark。"
+      }
+    },
+    {
+      "revision": 1,
+      "title": "AT-AT: Automatic Tool Optimization from Agent Traces",
+      "published": "2026-10-26T01:18:17Z",
+      "updated": "2026-10-26T01:18:17Z",
+      "metadata_sha256": "cb4123b826fd97e6bd56a4fbbacd2a9a1923704a750120690c98a0129724cb2d",
+      "capture": "40832864995/foundation-model-paper-candidates/paper-candidates-foundation-model.json",
+      "metadata_capture": "40832864995/foundation-model-paper-candidates/paper-candidates-foundation-model.json",
+      "metadata_capture_sha256": "fd56f63df9da02480525ab340702251a5dd87bb8903454a67635096a6426fde6",
+      "source_url": "https://arxiv.org/html/2610.34679v1",
+      "source_sha256": "e7344d7578e4126cb8da0688bb1db6e81397c547c2224a7b221632808f1ad1d3",
+      "source_capture": "p2-residual-industrial/2610.34679v1.html",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/html/2610.34679v1",
+          "source_sha256": "e7344d7578e4126cb8da0688bb1db6e81397c547c2224a7b221632808f1ad1d3",
+          "source_capture": "p2-residual-industrial/2610.34679v1.html",
+          "source_bytes": 462077,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "html",
+          "location": "S3.SS2",
+          "match": "up to five attempts",
+          "paragraph_sha256": "2ab501ac3e141aa5834cc6bd1e4716c1ff31b47bdaae38112bc78a3f31e0f66d"
+        },
+        {
+          "format": "html",
+          "location": "S4.SS1",
+          "match": "train split only",
+          "paragraph_sha256": "f687a2437958a9d95e3d7e26edca6106475449dee212c2cfb5b5b56556fe8819"
+        },
+        {
+          "format": "html",
+          "location": "S4.SS3",
+          "match": "sandbox environment",
+          "paragraph_sha256": "8827af1d77ea3a10b19585bfede99d87bd6a521d0005a80a05f1fb12e751d36f"
+        },
+        {
+          "format": "html",
+          "location": "S4.SS3",
+          "match": "$7.684",
+          "paragraph_sha256": "8827af1d77ea3a10b19585bfede99d87bd6a521d0005a80a05f1fb12e751d36f"
+        },
+        {
+          "format": "html",
+          "location": "S4.SS3",
+          "match": "content score fell",
+          "paragraph_sha256": "8827af1d77ea3a10b19585bfede99d87bd6a521d0005a80a05f1fb12e751d36f"
+        }
+      ],
+      "track": "agent",
+      "priority": "P1",
+      "verified_priority_organizations": [],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, production vs offline evidence, costs and limitations; not an implementation or full-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2610.34679",
+      "organization": "Netflix",
+      "decision": "accepted",
+      "resolution": "accepted_low_cost_trace_driven_tool_optimizer_core_not_implemented",
+      "reason": "AT-AT是新环境侧Agent优化器，不是普通MCP部署报告：固定executor/harness，用train traces与结果让Pi coding Agent只修改允许的tool描述/实现，语法编译+文件allowlist门禁，失败最多5次修正。公开源码与τ²-verified train/test、TerminalBench/TBLite和Netflix三MCP提供验证。生产任务选自过去两周流量，但original/optimized比较在sandbox回放，非用户随机AB；仅一台MCP成功率上升，另两台content score下降，不能把效率改善夸成全面能力提升。廉价trace/edit-validation核心可接受但本轮未实现；优化API原文约$1.34/$6.935/$7.684每server，不能将完整30trial、多基准/闭源矩阵视为已跑或把便宜核心贴高成本。",
+      "locations": [
+        "complete Netflix author block",
+        "§3.2 defining method",
+        "§4.1 held-out split and paired30trial significance",
+        "§4.2 public coding benchmarks",
+        "§4.3 production MCP replay and Table4",
+        "§5 limitations/future guarantees"
+      ],
+      "algorithm_assessment": "new logged-trace-driven, agent-fixed tool optimizer with editable-file and syntax gates; core accepted but not implemented",
+      "production_evidence": {
+        "kind": "production_derived_tasks_sandbox_paired_replay",
+        "online_ab": false,
+        "details": "三MCP test10/5/11任务；pass80→80、0→0、54.5→72.7%；成本/错误降但前两content score下降。"
+      },
+      "upstream_artifact": "https://github.com/Netflix-Skunkworks/agent-tool-opt-core",
+      "cost_note": "原文Table4一轮optimizer分别$1.34/$6.935/$7.684；session cost不含judge。未运行这些API或完整benchmark矩阵。",
+      "gold_access_contract": "Optimizer receives train traces/evaluation only; keep held-out task outcomes and test data out of optimization inputs."
+    },
+    {
+      "revision": 1,
+      "title": "Governing Enterprise AI Traffic at Scale: Design and Operation of a Policy-Driven, Multi-Vendor LLM Gateway on Envoy",
+      "published": "2026-10-26T14:33:48Z",
+      "updated": "2026-10-26T14:33:48Z",
+      "metadata_sha256": "eced1d72f2056c1ce6c5cf1c40801de33f98905211a50c70c0374c1c3fc55309",
+      "capture": "40832864995/agent-paper-candidates/paper-candidates-agent.json",
+      "metadata_capture": "40832864995/agent-paper-candidates/paper-candidates-agent.json",
+      "metadata_capture_sha256": "6f1cfe2706766b6d5feb40e2c79363dc367f9021596ed7ea8fbf82bf453434cf",
+      "source_url": "https://arxiv.org/html/2610.35509v1",
+      "source_sha256": "f07d0d7c3c6c86905730e9db863b89cb45f78708be4fab9239b2e3ea58370fe5",
+      "source_capture": "p2-residual-industrial/2610.35509v1.html",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/html/2610.35509v1",
+          "source_sha256": "f07d0d7c3c6c86905730e9db863b89cb45f78708be4fab9239b2e3ea58370fe5",
+          "source_capture": "p2-residual-industrial/2610.35509v1.html",
+          "source_bytes": 488346,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "html",
+          "location": "S13.SS1",
+          "match": "synthetic upstream",
+          "paragraph_sha256": "d98c826685819073e38a496d4d5be12b63e14aa2561d607093370c9292384bdb"
+        },
+        {
+          "format": "html",
+          "location": "S13.SS1",
+          "match": "excludes response-body work",
+          "paragraph_sha256": "d98c826685819073e38a496d4d5be12b63e14aa2561d607093370c9292384bdb"
+        },
+        {
+          "format": "html",
+          "location": "S13.SS2",
+          "match": "point-in-time aggregates",
+          "paragraph_sha256": "47f2c5492b67e9ea5105ce0da892d1c5a9ed1c522c72ff8c69125801182b8d29"
+        },
+        {
+          "format": "html",
+          "location": "S15",
+          "match": "one large organization",
+          "paragraph_sha256": "e978847a99a0a47b90f91b724ed26912d77aeec5cbe5163d918449d34efeebd5"
+        }
+      ],
+      "track": "foundation-model",
+      "priority": "P2",
+      "verified_priority_organizations": [],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, production vs offline evidence, costs and limitations; not an implementation or full-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2610.35509",
+      "organization": "PayPal Inc.",
+      "decision": "rejected",
+      "resolution": "not_selected_this_window_enterprise_gateway_experience_report",
+      "reason": "Cosmos确有PayPal大规模真实生产使用，不应被generic deployment过滤：>12000开发者、约200B tokens/day、100+models和99.999%ATB是历史point-in-time数据，不是SLA承诺或新模型效果。论文贡献为Envoy外部Go控制+in-proxy RustWasm翻译/计量、OPA纯决策和versioned rollout的系统架构/经验；五分钟synthetic-upstream基准仅测request-path overhead、排除response-body工作，非线上模型AB。按本轮基础模型算法/公共能力基准重点不选这篇企业gateway工程报告，不否定系统价值；不把200B生产流量冒作必须复现的训练成本，也未实现/跑其CPU压测。",
+      "locations": [
+        "complete PayPal author block",
+        "§5 two-tier dataplane",
+        "§9.4 policy function",
+        "§13.1 synthetic CPU benchmark",
+        "§13.2 production counts",
+        "§15–16 limitations"
+      ],
+      "algorithm_assessment": "enterprise governance gateway architecture and operating lessons, not a new foundation-model algorithm or delivered public model benchmark",
+      "production_evidence": {
+        "kind": "real_production_gateway_observation_and_synthetic_load_benchmark",
+        "online_ab": false,
+        "details": "2/4实例、每实例4vCPU/8GiB，110ms synthetic upstream，约1137–2262RPS，p50约4ms/p99约10–11ms；仅request path。"
+      }
+    }
+  ]
+}

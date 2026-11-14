@@ -1,6 +1,31 @@
 # Unified roadmap and TODOs
 
-<!-- source-sha256: 7cd41510cbc9c36cbaeb05c6dc77084afc79ba5aadb6d2d348d0bb47874f046b -->
+## November 12: Official recheck and SensorWM backfill
+
+[One Google backfill and source-priority repair](research-audits/nov12-refresh/README.md): announcement pages are unchanged, so the same papers are not recounted as new. Verified Google affiliations and methods reopen SensorWM's old P2 selection. This delivery provides only a CPU individual-effort/conditional-benefit ranking kernel, not a world model, medical advice, or clinical validation. Private large-scale training and expert/model review are closed as high cost and not reproduced, without automatic retries. Reviewed bilingual pages, the original figure, four-level questions, and the topic deep dive are included. The watermark remains **November 9, 2026**.
+
+## November 12: Eight L1 backfills, not a new announcement batch
+
+[Fixed scope and actual execution evidence](research-audits/nov12-components/README.md): the eight low-cost L1 components comprise six gap closures from the still-current November 11 announcement and two historical discoveries triggered by official Google sources. **This cohort has zero first publications on the delivery day**; cataloging dates are not publication dates. All eight components passed three-seed CPU diagnostics. BOPD, REAL Loss, and OnlyAct also passed three-seed execution on a real A100: **8×3 CPU** and **3×3 A100** runs. These accept mechanisms, not full-model capability or Evolve promotion.
+
+Seven full systems or experimental studies are explicitly **too costly and not reproduced (review DONE)**, without automatic retries. APMD is a theoretical paper: its finite-policy numerical kernel is implemented, while large empirical reproduction has the separate status `not_applicable_theory_only`. It is neither a high-cost deferral nor a local proof of every theorem. Bilingual paper pages, original figures, four-level questions, and topic deep dives ship in the same batch.
+
+**The review watermark remains November 9, 2026.** This is not window-wide closure for November 10–12. The source index's **956 deduplicated identities** include cross-listings and replacements; they are not 956 new qualifying papers, undelivered items, or automatic implementation tasks. Further window review must still respect coverage limits and protected original-source checks. The November 11 and older batches below remain historical records.
+
+## November 11: Fixed 17-Paper Delivery
+
+[Itemized scope and actual evidence](research-audits/nov11-components/README.md): 16 low-cost L1 components have three-seed CPU diagnostics. DRD-MOPD, stochastic rounding, RS-JEPA, and ADIndex also ran with three seeds on a real A100. AlphaProof Code is a high-cost mechanism/source reference only. Google collaborations are prioritized. Meta's 2611.13539 is separately rejected for lack of established quantified production A/B evidence, not moved into another topic to bypass the gate. All expensive full experiments are not reproduced (review DONE) and are not retried automatically. Four-level questions, topic deep dives, and reviewed English versions ship together. Relative to the watermark in Asia/Shanghai, the cohort contains 13 later first releases and four historical/overlap backfills, not 17 same-day new papers. The foundation late-index `LLM` query remains capped, supplemental Atom retrieval is non-exhaustive, and Meta's directory is unavailable. Coverage repair and window-wide selection review remain separate follow-up work; the unified review watermark stays November 9.
+
+## November 9 selection-review closeout (policy confirmed November 11)
+
+The [window closeout and exact register](research-audits/nov09-review-closure/README.md) advance the review watermark to **November 9**.
+The user permits title/abstract-screened P2 candidates to close as outside this window's focus; **not every algorithm has been verified or implemented**.
+Google/Meta, possible production A/B, and conflicting metadata retain the original-source gate. Evidenced high-cost full experiments are not reproduced; no training is launched.
+Selection dispositions, substantive method/cost decisions, and implementation evidence remain independent, and new revisions or priority evidence can reopen selection.
+The next scan overlaps from **November 8** through its new cutoff, prioritizing Google/Meta and applying the cost gate to suitable new papers.
+The batch descriptions below retain their historical snapshots; older watermark text does not override the [current unified state](../paper-discovery-watermark.json).
+
+<!-- source-sha256: 5966dda56a43d38e19cbac90cfa7e7c9dc225e58620912724e2536c6649b34ea -->
 
 [简体中文](../research-roadmap.md)
 
@@ -46,7 +71,7 @@
 Meta's Baseline and Incremental/RPL and Google collaboration OO-Harness take priority. Four CUDA components completed real A100 verification with three seeds.
 All full experiments are explicitly not reproduced (review DONE), with no automatic training TODO. This does not close the entire October 16–21 window; see the next section for the common watermark.
 
-## Reviewed through 2026-10-15: Coverage and archived exceptions
+## Historical snapshot: reviewed through 2026-10-15
 
 The [unified status](../paper-discovery-watermark.json) defines the current review watermark and exceptions.
 [Review closeout](research-audits/oct15-review-closure/README.md) records four tracks, two channels, Google/Meta/DeepMind sources, cost dispositions, and exceptions.

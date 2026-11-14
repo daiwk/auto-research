@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "paper_id": "2603.24917v1",
+  "figure": "Figure 1",
+  "source_url": "https://arxiv.org/html/2603.24917v1/near-verbatim-fig-1.png",
+  "source_kind": "original_html_asset",
+  "source_html_sha256": "dc6e2f52be8cea0711c10209079392d63e4f784fa3d9b45523577e97d3a5598a",
+  "asset": "paper-figure-01.png",
+  "asset_sha256": "59b206e0c4f1364fe55d0adb9b97c8286c8d6f0925a56f43d7c5895123425654",
+  "caption": "Distinct near-verbatim continuations with exact top-k conditional mass.",
+  "copyright": "Original authors",
+  "reviewed_on": "2026-11-13",
+  "rendered_and_visually_reviewed": true,
+  "local_result": false
+}

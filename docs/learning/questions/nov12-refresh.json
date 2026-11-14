@@ -1,0 +1,11 @@
+{
+  "schema_version":1,
+  "papers":{
+    "multimodal-models:sensorwm-planning":{"questions":[
+      {"id":"future-versus-future-not-current-age","level":"basics","question":"SensorWM排序为什么以保持原习惯的未来CHA为锚，而不是以当前观测CHA为锚？","answer":"即使行为不变，模型也可能预测生理漂移。候选的增量收益应比较同一未来时点的status-quo与候选端点，避免把自然漂移误算成改变行为的效果。这仍是模型条件预测，不识别真实因果干预收益。","example":"教学算术例，非健康预测：当前量为10，不变行为的未来为12，候选未来为11.5；增量收益是12−11.5=0.5，而不是10−11.5=−1.5。","source_sections":["背景与主要改动","核心公式","论文离线与线上效果"],"added":"2026-11-12"},
+      {"id":"floored-user-sigma-effort","level":"mechanism","question":"为什么SensorWM的个体努力不能直接用三个动作增量相加？","answer":"动作单位和个体历史变动尺度不同。Eq.55先除以有数值下限的个体标准差，再平方求和；这同时统一尺度并惩罚大幅偏离。下限只防止近零标准差导致极端努力，不是证明行为安全的医疗阈值。","example":"教学算术例：个体sigma全为0，三个动作差分别为500、15、10，按论文floors各标准化为1，E=3；假设外部收益0.8，score=0.8/(1+3)=0.2，不是0.8/3。","source_sections":["核心公式","数据协议与代码映射"],"added":"2026-11-12"},
+      {"id":"sensorwm-ranking-versus-lewam-control","level":"comparison","question":"SensorWM候选排序与LeWAM潜空间动作规划，为什么不能统称已实现世界模型控制？","answer":"LeWAM从学习策略产生动作候选，经冻结动力学rollout和动作梯度优化接入环境闭环；SensorWM这一本地组件只对外部预测端点和外部可行性声明做比值排序，没有模型、动作搜索或执行。两个数学分数的意义不同，更不能用L1排序测试证明健康或机器人能力。","example":"教学例：把三个已给端点按收益/努力排序，不会产生缺失的12周轨迹；同样，给出一个goal距离公式也不会自动完成机器人闭环。","source_sections":["背景与主要改动","核心公式","结果、负控与边界","高成本完整实验"],"added":"2026-11-12"},
+      {"id":"external-feasibility-is-not-clinical-proof","level":"implementation","question":"本地Candidate要求feasible是布尔值，并通过三seed检查，能否说明计划临床安全？","answer":"不能。类型合同只防止缺失或模糊输入，feasible的真实性和临床依据必须由外部流程保证，模块不核验。端点也必须由真实模型及来源支持；本地固定夹具只测sigma、锚点、严格gain>0.1和排序，不生成预测、目标动作或医疗建议。","example":"教学例：外部把一条危险或无依据候选写成feasible=true，数学核无法识别；正确做法是保留其上游责任边界，而不是把返回ID当安全认证。","source_sections":["数据协议与代码映射","结果、负控与边界","高成本完整实验"],"added":"2026-11-12"}
+    ]}
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "page": "docs/post-training/2611.09448-rcea/README.md",
+  "paper_url": "https://arxiv.org/abs/2611.09448",
+  "arxiv_id": "2611.09448",
+  "figure": "Figure 2",
+  "original_caption": "See original figure and caption in the attributed source",
+  "source_url": "https://arxiv.org/html/2611.09448v1/framework.png",
+  "source_page": "https://arxiv.org/html/2611.09448v1#Sx3.F2",
+  "extraction": "arxiv-fixed-v1-original-png",
+  "asset": "docs/post-training/2611.09448-rcea/assets/paper-figure-01.png",
+  "width": 1350,
+  "height": 633,
+  "score": 0,
+  "error": "",
+  "visually_inspected": true,
+  "sha256": "914b04f845c20dbad1938844cd79265d4010f706fdcd7cb55c59bb80405b7e3d",
+  "license": "CC BY 4.0",
+  "checked_on": "2026-11-09",
+  "transformation": "original author PNG, byte-for-byte and uncropped"
+}

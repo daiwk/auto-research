@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "status": "partial_verified_version_baseline",
-  "reviewed_at": "2026-10-15",
-  "coverage": "Only 434 explicitly observed/reviewed version baselines. October15 additions distinguish bounded method/cost/correction, historical metadata triage and attempted-source exceptions; none implies whole-article or implementation acceptance. Missing versions are never assumed v1.",
+  "reviewed_at": "2026-11-10",
+  "coverage": "Only 434 explicitly observed/reviewed version baselines. October15 additions distinguish bounded method/cost/correction, historical metadata triage and attempted-source exceptions. The November continuation updates 17 of those baselines with pinned original revision evidence. None implies whole-article or implementation acceptance. Missing versions are never assumed v1.",
   "limitations": [
     "Read the per-record scope: full-text, bounded method/cost, historical metadata and source-exception dispositions are different; no baseline implies implementation or GPU acceptance.",
     "HTML author strings are not used to fabricate an Atom-compatible metadata fingerprint.",
@@ -430,17 +430,17 @@
     },
     {
       "arxiv_id": "2610.17895",
-      "revision": 2,
-      "reviewed_at": "2026-10-15",
+      "revision": 3,
+      "reviewed_at": "2026-11-10",
       "metadata_sha256": "abb31988f03961db2204da8575b73e7d47026b1a7adcc7d4d7c2bd35b90c86f8",
-      "review_scope": "bounded_cost_gate_not_algorithm_acceptance",
+      "review_scope": "bounded_original_revision_evidence",
       "algorithm_acceptance_inferred": false,
-      "review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "review_artifact": "research-audits/nov09-review-closure/revision-primary-reviews.json",
       "implementation_acceptance": "not_upgraded_by_review",
       "source_evidence": [
         {
-          "url": "https://arxiv.org/html/2610.17895v2",
-          "sha256": "3c46f051d7f48c1750f742e7a7a35622863a5a0eaa3a1cd66fa30148a4af4401"
+          "url": "https://arxiv.org/html/2610.17895v3",
+          "sha256": "3f7ef6b7f6e255ffbb8ae7014a553f39898d51ec689837b557d1e836ccadf32c"
         }
       ]
     },
@@ -462,17 +462,17 @@
     },
     {
       "arxiv_id": "2610.17856",
-      "revision": 2,
-      "reviewed_at": "2026-10-15",
+      "revision": 3,
+      "reviewed_at": "2026-11-10",
       "metadata_sha256": "c3bc5555a8bf31c7aa11eaee6bfb6abda9b95ed88dc3646dfceef85f780f9d79",
-      "review_scope": "bounded_cost_gate_not_algorithm_acceptance",
+      "review_scope": "bounded_original_revision_evidence",
       "algorithm_acceptance_inferred": false,
-      "review_artifact": "research-audits/oct15-review-closure/recommendation-reviews.json",
+      "review_artifact": "research-audits/nov09-review-closure/revision-primary-reviews.json",
       "implementation_acceptance": "not_upgraded_by_review",
       "source_evidence": [
         {
-          "url": "https://arxiv.org/html/2610.17856v2",
-          "sha256": "9bf74f67a377e670eb292a7119ee4dd52a30c9646f38a97bdb09db21efe39bf5"
+          "url": "https://arxiv.org/html/2610.17856v3",
+          "sha256": "f34508a20b676453a9f655368d90a26c17fe64ccf5cf8dde32b6c5f34ec2f052"
         }
       ]
     },
@@ -780,17 +780,17 @@
     },
     {
       "arxiv_id": "2610.11152",
-      "revision": 3,
-      "reviewed_at": "2026-10-15",
-      "metadata_sha256": "fded8ddc8afa9e5026e08591ea42b287aa8bb0b799b18dbbf57b60a3f61b6f89",
-      "review_scope": "bounded_cost_gate_not_algorithm_acceptance",
+      "revision": 4,
+      "reviewed_at": "2026-11-10",
+      "metadata_sha256": "de4df5656633b77cef8f739de921d079e2818d8c25de0242b5552bf5c71dbc37",
+      "review_scope": "bounded_original_revision_evidence",
       "algorithm_acceptance_inferred": false,
-      "review_artifact": "research-audits/oct15-review-closure/revision-reviews.json",
+      "review_artifact": "research-audits/nov09-review-closure/revision-primary-reviews.json",
       "implementation_acceptance": "not_upgraded_by_review",
       "source_evidence": [
         {
-          "url": "https://arxiv.org/html/2610.11152v3",
-          "sha256": "7fa3955b02ecc5bc76723600316900a6f7c83e93435c046825443a002161ce11"
+          "url": "https://arxiv.org/html/2610.11152v4",
+          "sha256": "83d8aab26346f8f807635f582ff8e706f7554da9334db10e860d4881601bafb6"
         }
       ]
     },
@@ -889,16 +889,17 @@
     },
     {
       "arxiv_id": "2610.07853",
-      "revision": 2,
-      "reviewed_at": "2026-10-15",
-      "metadata_sha256": "4d16b1a2393cb2fac75e962d51b92e4d3ba328833568ee591cc6413d92fa89a6",
-      "review_scope": "historical_metadata_identity_date_scope_only",
+      "revision": 3,
+      "reviewed_at": "2026-11-10",
+      "metadata_sha256": "c79e0d77ad868b66cfcbce8626c99b6a1547466d45d1bf31f0378c712fa12dbd",
+      "review_scope": "bounded_original_revision_evidence",
       "algorithm_acceptance_inferred": false,
-      "review_artifact": "research-audits/oct15-review-closure/foundation-model-reviews.json",
+      "review_artifact": "research-audits/nov09-review-closure/revision-primary-reviews.json",
       "implementation_acceptance": "not_upgraded_by_review",
       "source_evidence": [
         {
-          "url": "https://arxiv.org/abs/2610.07853v2"
+          "url": "https://arxiv.org/html/2610.07853v3",
+          "sha256": "fbf57659fe89aaa2d843c9d36ba35df2ca7b549ea9bc94c3d4f54a58797cb5c0"
         }
       ]
     },
@@ -994,17 +995,17 @@
     },
     {
       "arxiv_id": "2610.02626",
-      "revision": 3,
-      "reviewed_at": "2026-10-15",
+      "revision": 4,
+      "reviewed_at": "2026-11-10",
       "metadata_sha256": "6fbe9d2ffed014bd58d30ea6258d81f183b1828c469f8de852130b5b2edf3d85",
-      "review_scope": "bounded_cost_gate_not_algorithm_acceptance",
+      "review_scope": "bounded_original_revision_evidence",
       "algorithm_acceptance_inferred": false,
-      "review_artifact": "research-audits/oct15-review-closure/revision-reviews.json",
+      "review_artifact": "research-audits/nov09-review-closure/revision-primary-reviews.json",
       "implementation_acceptance": "not_upgraded_by_review",
       "source_evidence": [
         {
-          "url": "https://arxiv.org/html/2610.02626v3",
-          "sha256": "03c522eef9244cc0b9a16b7e1ffbb9fcdf48cd90a7565c34e0696eefb6aab77b"
+          "url": "https://arxiv.org/html/2610.02626v4",
+          "sha256": "3e4212f48de3555276b0ca852acc710a9d68e471148c30cb3bb5d7be6c8fec67"
         }
       ]
     },
@@ -2620,16 +2621,17 @@
     },
     {
       "arxiv_id": "2603.00720",
-      "revision": 2,
-      "reviewed_at": "2026-10-15",
+      "revision": 3,
+      "reviewed_at": "2026-11-10",
       "metadata_sha256": "897595ffa1558b01456b41eac21a4fa1470508b55e42759fb13ae09d37aac94a",
-      "review_scope": "historical_metadata_identity_date_scope_only",
+      "review_scope": "bounded_original_revision_evidence",
       "algorithm_acceptance_inferred": false,
-      "review_artifact": "research-audits/oct15-review-closure/foundation-model-reviews.json",
+      "review_artifact": "research-audits/nov09-review-closure/revision-primary-reviews.json",
       "implementation_acceptance": "not_upgraded_by_review",
       "source_evidence": [
         {
-          "url": "https://arxiv.org/abs/2603.00720v2"
+          "url": "https://arxiv.org/html/2603.00720v3",
+          "sha256": "355e7debfe895e444fbd5d8e1ec9bce12ddc683efa6839f14fe9904d79912feb"
         }
       ]
     },
@@ -3328,33 +3330,33 @@
     },
     {
       "arxiv_id": "2610.18820",
-      "revision": 2,
-      "reviewed_at": "2026-10-15",
+      "revision": 3,
+      "reviewed_at": "2026-11-10",
       "metadata_sha256": "f72dcc53dd07f3ad64cac5cb6e40f88ab6f025f5d897553461927e50adaab96a",
-      "review_scope": "bounded_cost_gate_not_algorithm_acceptance",
+      "review_scope": "bounded_original_revision_evidence",
       "algorithm_acceptance_inferred": false,
-      "review_artifact": "research-audits/oct15-review-closure/foundation-model-reviews.json",
+      "review_artifact": "research-audits/nov09-review-closure/revision-primary-reviews.json",
       "implementation_acceptance": "not_upgraded_by_review",
       "source_evidence": [
         {
-          "url": "https://arxiv.org/html/2610.18820v2",
-          "sha256": "cfe55336305676fd7bfdb43d30f5243e4859cc9645f1c4798eb574a57b746267"
+          "url": "https://arxiv.org/html/2610.18820v3",
+          "sha256": "1d92a738bb80f365d94336e2b1c2e18d396b40902f9860679428d3ad967a3658"
         }
       ]
     },
     {
       "arxiv_id": "2610.18818",
-      "revision": 2,
-      "reviewed_at": "2026-10-15",
+      "revision": 3,
+      "reviewed_at": "2026-11-10",
       "metadata_sha256": "5ce3aed877fa08d503e0dc676b420feaa15350363551a4161ea0e62c52e88259",
-      "review_scope": "bounded_cost_gate_not_algorithm_acceptance",
+      "review_scope": "bounded_original_revision_evidence",
       "algorithm_acceptance_inferred": false,
-      "review_artifact": "research-audits/oct15-review-closure/foundation-model-reviews.json",
+      "review_artifact": "research-audits/nov09-review-closure/revision-primary-reviews.json",
       "implementation_acceptance": "not_upgraded_by_review",
       "source_evidence": [
         {
-          "url": "https://arxiv.org/pdf/2610.18818v2",
-          "sha256": "91da6779135cbc44c282bbd6650b358839071acb5a0930eeafc87b945f13abb3"
+          "url": "https://arxiv.org/pdf/2610.18818v3",
+          "sha256": "d0830099a5c451f4ddc212dd2eea0c7f96911a4e1bcd36f8e7f1f6940d624f2c"
         }
       ]
     },
@@ -3454,31 +3456,33 @@
     },
     {
       "arxiv_id": "2610.16242",
-      "revision": 2,
-      "reviewed_at": "2026-10-15",
+      "revision": 3,
+      "reviewed_at": "2026-11-10",
       "metadata_sha256": "e3a33cf6b9d293f6869cf0e2359e953b28c8d11d3682240ff09c43fe377c7816",
-      "review_scope": "historical_metadata_identity_date_scope_only",
+      "review_scope": "bounded_original_revision_evidence",
       "algorithm_acceptance_inferred": false,
-      "review_artifact": "research-audits/oct15-review-closure/foundation-model-reviews.json",
+      "review_artifact": "research-audits/nov09-review-closure/revision-primary-reviews.json",
       "implementation_acceptance": "not_upgraded_by_review",
       "source_evidence": [
         {
-          "url": "https://arxiv.org/abs/2610.16242v2"
+          "url": "https://arxiv.org/html/2610.16242v3",
+          "sha256": "8f694b4700f626c8ad19d0d25c200d22104194175ed9c0804bba87e7b308cf18"
         }
       ]
     },
     {
       "arxiv_id": "2610.15897",
-      "revision": 2,
-      "reviewed_at": "2026-10-15",
+      "revision": 3,
+      "reviewed_at": "2026-11-10",
       "metadata_sha256": "7b39176ce315e77c728385165d7214f780e1008201dc8b977777097b97dc1aa3",
-      "review_scope": "historical_metadata_identity_date_scope_only",
+      "review_scope": "bounded_original_revision_evidence",
       "algorithm_acceptance_inferred": false,
-      "review_artifact": "research-audits/oct15-review-closure/foundation-model-reviews.json",
+      "review_artifact": "research-audits/nov09-review-closure/revision-primary-reviews.json",
       "implementation_acceptance": "not_upgraded_by_review",
       "source_evidence": [
         {
-          "url": "https://arxiv.org/abs/2610.15897v2"
+          "url": "https://arxiv.org/html/2610.15897v3",
+          "sha256": "28d0073c84e651fe6e73d0e2e55e83c64fa621a73b8c5e66c59df2973cae2a38"
         }
       ]
     },
@@ -3694,16 +3698,17 @@
     },
     {
       "arxiv_id": "2610.11146",
-      "revision": 2,
-      "reviewed_at": "2026-10-15",
-      "metadata_sha256": "d757f883178814ea4be04fce9246d4116bed42c7782222f7804055b685aa5eed",
-      "review_scope": "historical_metadata_identity_date_scope_only",
+      "revision": 3,
+      "reviewed_at": "2026-11-10",
+      "metadata_sha256": "39a440e78e68ec604e999a7f09497ec73305ff997357de20d87d8ff1f25f824e",
+      "review_scope": "bounded_original_revision_evidence",
       "algorithm_acceptance_inferred": false,
-      "review_artifact": "research-audits/oct15-review-closure/foundation-model-reviews.json",
+      "review_artifact": "research-audits/nov09-review-closure/revision-primary-reviews.json",
       "implementation_acceptance": "not_upgraded_by_review",
       "source_evidence": [
         {
-          "url": "https://arxiv.org/abs/2610.11146v2"
+          "url": "https://arxiv.org/html/2610.11146v3",
+          "sha256": "4aaa441aa1fd4ee1db50f45e94e8459fd350020d0fb05799adec72204be5293d"
         }
       ]
     },
@@ -3784,16 +3789,17 @@
     },
     {
       "arxiv_id": "2610.10270",
-      "revision": 3,
-      "reviewed_at": "2026-10-15",
+      "revision": 4,
+      "reviewed_at": "2026-11-10",
       "metadata_sha256": "986478ef15d8ed03feeed575046512f32b07fbc776a73bae13f6ffd5bbcd5931",
-      "review_scope": "historical_metadata_identity_date_scope_only",
+      "review_scope": "bounded_original_revision_evidence",
       "algorithm_acceptance_inferred": false,
-      "review_artifact": "research-audits/oct15-review-closure/foundation-model-reviews.json",
+      "review_artifact": "research-audits/nov09-review-closure/revision-primary-reviews.json",
       "implementation_acceptance": "not_upgraded_by_review",
       "source_evidence": [
         {
-          "url": "https://arxiv.org/abs/2610.10270v3"
+          "url": "https://arxiv.org/html/2610.10270v4",
+          "sha256": "e953e44f504e86b6fe3ed25075a7c8f88c502a74418155435a3a5163eff6f7ed"
         }
       ]
     },
@@ -3964,16 +3970,17 @@
     },
     {
       "arxiv_id": "2610.06814",
-      "revision": 2,
-      "reviewed_at": "2026-10-15",
+      "revision": 3,
+      "reviewed_at": "2026-11-10",
       "metadata_sha256": "b306162248764176b550d8e8798f69e8230bed4d70899592cb552dcb15d30e7b",
-      "review_scope": "historical_metadata_identity_date_scope_only",
+      "review_scope": "bounded_original_revision_evidence",
       "algorithm_acceptance_inferred": false,
-      "review_artifact": "research-audits/oct15-review-closure/foundation-model-reviews.json",
+      "review_artifact": "research-audits/nov09-review-closure/revision-primary-reviews.json",
       "implementation_acceptance": "not_upgraded_by_review",
       "source_evidence": [
         {
-          "url": "https://arxiv.org/abs/2610.06814v2"
+          "url": "https://arxiv.org/html/2610.06814v3",
+          "sha256": "bf2191973bd249bcda33a9fdfe9ce61d469a00a19af719cbf21261185d1f5987"
         }
       ]
     },
@@ -3994,16 +4001,17 @@
     },
     {
       "arxiv_id": "2610.06513",
-      "revision": 2,
-      "reviewed_at": "2026-10-15",
+      "revision": 3,
+      "reviewed_at": "2026-11-10",
       "metadata_sha256": "c73405573f45b0e39a18525411e90e4c49bc19b179c9d5887d3983ce08c8cf56",
-      "review_scope": "historical_metadata_identity_date_scope_only",
+      "review_scope": "bounded_original_revision_evidence",
       "algorithm_acceptance_inferred": false,
-      "review_artifact": "research-audits/oct15-review-closure/foundation-model-reviews.json",
+      "review_artifact": "research-audits/nov09-review-closure/revision-primary-reviews.json",
       "implementation_acceptance": "not_upgraded_by_review",
       "source_evidence": [
         {
-          "url": "https://arxiv.org/abs/2610.06513v2"
+          "url": "https://arxiv.org/html/2610.06513v3",
+          "sha256": "acdc216be8485ffd89d59fb07d918cabbc4e002efd1d0f87d5b61faa529e84d4"
         }
       ]
     },
@@ -4234,16 +4242,17 @@
     },
     {
       "arxiv_id": "2610.02022",
-      "revision": 2,
-      "reviewed_at": "2026-10-15",
+      "revision": 3,
+      "reviewed_at": "2026-11-10",
       "metadata_sha256": "e7bda77f64eb5a8ee7b7ee0aa08a88a93511244afbc4c6d5d92bfb217ccc9db1",
-      "review_scope": "historical_metadata_identity_date_scope_only",
+      "review_scope": "bounded_original_revision_evidence",
       "algorithm_acceptance_inferred": false,
-      "review_artifact": "research-audits/oct15-review-closure/foundation-model-reviews.json",
+      "review_artifact": "research-audits/nov09-review-closure/revision-primary-reviews.json",
       "implementation_acceptance": "not_upgraded_by_review",
       "source_evidence": [
         {
-          "url": "https://arxiv.org/abs/2610.02022v2"
+          "url": "https://arxiv.org/html/2610.02022v3",
+          "sha256": "16bade675f9897a8a74b2fc7a5a649552f148e8b7080a8071b522b5fdd4f960c"
         }
       ]
     },
@@ -4669,16 +4678,17 @@
     },
     {
       "arxiv_id": "2606.12306",
-      "revision": 2,
-      "reviewed_at": "2026-10-15",
+      "revision": 3,
+      "reviewed_at": "2026-11-10",
       "metadata_sha256": "8f8ea2b2154fe15eb485c49e96c207b0ba1c96027a1d43c3cff4be013d4b1a93",
-      "review_scope": "historical_metadata_identity_date_scope_only",
+      "review_scope": "bounded_original_revision_evidence",
       "algorithm_acceptance_inferred": false,
-      "review_artifact": "research-audits/oct15-review-closure/foundation-model-reviews.json",
+      "review_artifact": "research-audits/nov09-review-closure/revision-primary-reviews.json",
       "implementation_acceptance": "not_upgraded_by_review",
       "source_evidence": [
         {
-          "url": "https://arxiv.org/abs/2606.12306v2"
+          "url": "https://arxiv.org/html/2606.12306v3",
+          "sha256": "84e1beffe22841fd0aae1778f21e731c696d3dd7e7bf122f992404b53f3139a2"
         }
       ]
     },
@@ -6080,17 +6090,17 @@
     },
     {
       "arxiv_id": "2610.18515",
-      "revision": 2,
-      "reviewed_at": "2026-10-15",
+      "revision": 3,
+      "reviewed_at": "2026-11-10",
       "metadata_sha256": "e1de4583a7fc529d314ed22b804cb06bcc71708e2c5b64672fadd74873611531",
-      "review_scope": "bounded_current_method_or_reference_review",
+      "review_scope": "bounded_original_revision_evidence",
       "algorithm_acceptance_inferred": false,
-      "review_artifact": "research-audits/oct15-review-closure/agent-reviews.json",
+      "review_artifact": "research-audits/nov09-review-closure/revision-primary-reviews.json",
       "implementation_acceptance": "not_upgraded_by_review",
       "source_evidence": [
         {
-          "url": "https://arxiv.org/html/2610.18515v2",
-          "sha256": "9ff13d7a14542df86b36a1d90e53236a273c8d692b86a9668a0cb7a59264b656"
+          "url": "https://arxiv.org/html/2610.18515v3",
+          "sha256": "4c61c22ce5c5fb24baf7cfbcde7ddecd9a74bd5874b4a5b29bd9b803df564ebe"
         }
       ]
     },

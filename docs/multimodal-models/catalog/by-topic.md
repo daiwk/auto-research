@@ -10,6 +10,10 @@
 
 - 2026-04-17 · [NaijaS2ST: A Multi-Accent Benchmark for Speech-to-Speech Translation in Low-Resource Nigerian Languages](../../multimodal-models/2604.16287-naijas2st/README.md)（`naijas2st`）：核固定v3 Sections3–4及AppendixC：284说话人、约6K平行句、质控后约269h；5shot来自DEV，方向分开；Seamless不支持的Hausa映射Arabic、Naijá映射French仅为fine-tuned extension。S2TT SSA-COMET/ChrF++，S2ST先OmnilingualASR转写再SSA-COMET，不能用文本exactmatch替代。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 
+## 全模态嵌入与模态遵循
+
+- 2026-04-25 · [MMEB-V3: Measuring the Performance Gaps of Omni-Modality Embedding Models](../../multimodal-models/2604.23321-mmeb-v3/README.md)（`mmeb-v3`）：单一图文检索成绩不足以判断统一嵌入模型是否适合音频、文档、Agent 工具检索或跨模态混合候选。MMEB-V3 将评测扩展为六类、16 个元任务、190 个任务，其中新增 111 个任务：11 个音频、53 个文本和 47 个 Agent 任务。它不仅比较语义匹配，还检查请求的输出模态是否被遵循。
+
 ## 冻结中间层探针与验证器自举
 
 - 2026-10-08 · [Unsupervised Multimodal Reward Modeling](../../reproductions/2610.12707-umrm/README.md)（`umrm`）：偏好pair昂贵，reward benchmark名次也不必代表部署选择效用。作者冻结Qwen3-VL，在中间language层只均值池化response tokens，再训练无bias线性reward head；公开caption为positive，同一caption的颜色/数量/尺寸/方位单span变化、tail splice、clause shuffle及cross-image caption为negative，不需人工偏好标注。
@@ -25,6 +29,10 @@
 ## 多实例编辑与注意力隔离
 
 - 2026-06-30 · [Editing Everything Everywhere All at Once](../../multimodal-models/2606.31278-mice/README.md)（`mice`）：多区域同时编辑容易把一处指令的属性传到另一处。MICE 在联合注意力中隔离不同文字组，并用实例掩码的平滑空间偏置控制视觉交互，以兼顾局部绑定与周围区域融合。方法不训练新的编辑模型。
+
+## 多流语音单元与打分
+
+- 2026-10-31 · [GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling](../../multimodal-models/2611.01143-gslm2/README.md)（`gslm2`）：单流口语语言模型通常只量化一个编码器层，可能漏掉其他层的音位和语义信息。GSLM2 的 SpidR 2.0 用可微预测头训练多层语音单元。语言侧先对齐各层在相同音频帧上的单元，再保留任一流变化的位置；各流 embedding 的平均输入共享时序 Transformer。单流输出头只使用过去的多流历史，对本流下个单元打分；生成头另外按顺序生成同一时间位置的多个流，后生成的流可依赖本位置先生成的流。原文训练结合单流损失、转移级自蒸馏与多流生成损失，三项均不在本地切片中。
 
 ## 对比预训练与自蒸馏
 
@@ -69,6 +77,10 @@
 ## 跨模态连接器与冻结骨干
 
 - 2023-01-30 · [BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models](../../reproductions/2301.12597-blip2/README.md)（`blip2`）：BLIP-2 冻结已有视觉 encoder 和 LLM，只训练轻量 Q-Former。固定数量的可学习 query 通过 cross-attention 从视觉 token 提取与语言最相关的信息；第一阶段做图文表征学习，第二阶段将 query 输出投影成冻结 LLM 的 soft visual prompt。
+
+## 音视频文化理解评测
+
+- 2026-01-25 · [AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs' Contextual and Cultural Knowledge and Thinking](../../multimodal-models/2601.17645-avmeme-exam/README.md)（`avmeme-exam`）：常见语音基准偏向转写与声学事件，难以判断模型是否理解声音在特定社区中的隐喻、幽默和使用场景。AVMeme Exam 收集多语言、多文化短音视频，以选择题同时考察音频、语言、情境、情绪、流行原因、应用方式和世界知识。完整集 `meme-full` 有 1,032 条，移除文本捷径后的主集 `meme-main` 有 846 条。
 
 ## 音频描述与对比排序
 

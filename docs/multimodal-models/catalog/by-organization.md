@@ -18,9 +18,17 @@
 
 - 2026-10-08 · [Look Back, Think Ahead: Visual Memory on Demand for Efficient Multimodal Reasoning](../../multimodal-models/2610.12060-vimod/README.md)（`vimod`）：一次性压缩图像可能丢掉后续推理需要的细节。DART 学习可变区域大小和成员，生成始终驻留的 Coarse KV；原始 Fine KV 仍保留。TRACE 根据已生成文本的因果隐状态决定保持或替换工作集，通过 Joint-KV 恢复原始细节。
 
+## Columbia University
+
+- 2026-01-25 · [AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs' Contextual and Cultural Knowledge and Thinking](../../multimodal-models/2601.17645-avmeme-exam/README.md)（`avmeme-exam`）：常见语音基准偏向转写与声学事件，难以判断模型是否理解声音在特定社区中的隐喻、幽默和使用场景。AVMeme Exam 收集多语言、多文化短音视频，以选择题同时考察音频、语言、情境、情绪、流行原因、应用方式和世界知识。完整集 `meme-full` 有 1,032 条，移除文本捷径后的主集 `meme-main` 有 846 条。
+
 ## ETH Zurich
 
 - 2026-10-23 · [FlexGlue: Sparse-to-Dense Feature Matching and Visual Disambiguation](../../multimodal-models/2610.32976-flexglue/README.md)（`flexglue`）：稀疏matcher受两图keypoint重复检测能力限制，dense matcher则昂贵，而且两者常只在共视正样本训练，面对对称建筑等doppelganger会给出高置信假匹配。FlexGlue在stride8全图token网格上先做self/cross attention，再只对给定query插值读取特征并寻找另一图的坐标。局部3×3窗口读取避免全局期望在多个候选间平均；轻量MLP对两个方向的offset bins取期望做局部细化。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
+## Eastern Institute of Technology, Ningbo
+
+- 2026-04-25 · [MMEB-V3: Measuring the Performance Gaps of Omni-Modality Embedding Models](../../multimodal-models/2604.23321-mmeb-v3/README.md)（`mmeb-v3`）：单一图文检索成绩不足以判断统一嵌入模型是否适合音频、文档、Agent 工具检索或跨模态混合候选。MMEB-V3 将评测扩展为六类、16 个元任务、190 个任务，其中新增 111 个任务：11 个音频、53 个文本和 47 个 Agent 任务。它不仅比较语义匹配，还检查请求的输出模态是否被遵循。
 
 ## Google
 
@@ -41,6 +49,10 @@
 ## Massachusetts Institute of Technology
 
 - 2026-10-08 · [Unsupervised Multimodal Reward Modeling](../../reproductions/2610.12707-umrm/README.md)（`umrm`）：偏好pair昂贵，reward benchmark名次也不必代表部署选择效用。作者冻结Qwen3-VL，在中间language层只均值池化response tokens，再训练无bias线性reward head；公开caption为positive，同一caption的颜色/数量/尺寸/方位单span变化、tail splice、clause shuffle及cross-image caption为negative，不需人工偏好标注。
+
+## Meta Superintelligence Labs
+
+- 2026-10-31 · [GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling](../../multimodal-models/2611.01143-gslm2/README.md)（`gslm2`）：单流口语语言模型通常只量化一个编码器层，可能漏掉其他层的音位和语义信息。GSLM2 的 SpidR 2.0 用可微预测头训练多层语音单元。语言侧先对齐各层在相同音频帧上的单元，再保留任一流变化的位置；各流 embedding 的平均输入共享时序 Transformer。单流输出头只使用过去的多流历史，对本流下个单元打分；生成头另外按顺序生成同一时间位置的多个流，后生成的流可依赖本位置先生成的流。原文训练结合单流损失、转移级自蒸馏与多流生成损失，三项均不在本地切片中。
 
 ## Mila - Quebec AI Institute
 

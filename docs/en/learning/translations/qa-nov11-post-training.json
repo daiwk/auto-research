@@ -1,0 +1,185 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:maxim/critic-versus-summary": {
+      "source_sha256": "587ce546aba46e6f620fb69da817a80e2906ac4caccc6238496458a86303cded",
+      "reviewed": true,
+      "fields": {
+        "question": "Why may the critic see a target while the summarizer must not see the answer?",
+        "answer": "Privileged targets train and score the reward; they are not inputs to the evaluated summarizer. Its inputs are only the previous summary, previous action and current observation. Providing the target would violate memory causality and measure leakage.",
+        "example": "For example, a critic may use a known QA answer to assess summary utility, while the summarizer sees only article chunks, not that answer."
+      }
+    },
+    "qa/post-training:maxim/null-subtraction": {
+      "source_sha256": "8dc3a8e9f85abe8ca48c8ce9f44ed196fbf9389706b998a4a0cc478b6c863dd2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why subtract null-context log probabilities?",
+        "answer": "Raw likelihood includes intrinsic target difficulty. Subtracting the no-summary score for the same target measures information added by the summary. Consistency instead scores summary tokens with local history versus null history; the two terms require different token denominators.",
+        "example": "For example, log probabilities -1 with a summary and -3 without give PMI 2. An easy answer scoring -.2 in both conditions gives zero information gain."
+      }
+    },
+    "qa/post-training:maxim/forward-grounding": {
+      "source_sha256": "93f001940c68b860a89fc4f38bdd1e9c43e1330d1f01352872c22b53fb12fc47",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not replace forward consistency with history reconstruction?",
+        "answer": "Backward reconstruction can use true claims while ignoring appended fabrications. Forward consistency scores every new-summary token against history, so unsupported additions also count. An approximate critic can still err; this is not a factuality guarantee.",
+        "example": "For example, a summary correctly says a meeting is Monday, then invents a doubled budget. Reconstructing the meeting history may ignore that second sentence, whereas forward scoring asks whether history supports it."
+      }
+    },
+    "qa/post-training:maxim/reward-not-agent": {
+      "source_sha256": "0eab21d86780be1dcaf070c8d513256e56247bf8e1dbf8afb8eab7f5d08d8821",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local diagnostic establish a trained memory agent?",
+        "answer": "No. It checks PMI, sigmoid shaping, annealing and returns from supplied frozen scores. It has no critic, summarizer, PPO, group advantages or real interaction. L1 arithmetic and language-memory capability are different evidence.",
+        "example": "Exact null cancellation on local arrays checks reward arithmetic; the paper additionally trains Gemini on TPUs and evaluates 500 dialogue seeds."
+      }
+    },
+    "qa/post-training:excursion-td/duration-versus-action": {
+      "source_sha256": "896f6067a23a1f74fb9aaa32eb820d8c6f861bb1a16fae4ef28219f16936c0b5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is an excursion not an actionwise mixture of target and behavior?",
+        "answer": "An excursion follows the target for a duration, then permanently returns to behavior. An actionwise mixture can choose the target again later, inducing different trajectory distributions. The weights must mix durations, not multiply mixed ratios.",
+        "example": "For example, target-target-behavior is an excursion. Target-behavior-target is not, but an actionwise mixture allows it."
+      }
+    },
+    "qa/post-training:excursion-td/initial-action-ratio": {
+      "source_sha256": "029c6586d49d8d2a7ded40ac5c8b104de0d58925677b77a1e8128debc378b66f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do Ex-Retrace prefixes start at t+1 rather than the initial action?",
+        "answer": "The action-value target already conditions on the supplied initial state-action pair. Subsequent actions determine the bootstrap and trajectory distribution and enter the clipped-ratio prefix. Reweighting the initial action would change the target.",
+        "example": "For a one-step target at beta=0, the result is reward plus gamma times the behavior-weighted next-state Q average, without another initial-action ratio."
+      }
+    },
+    "qa/post-training:excursion-td/bias-is-not-bug": {
+      "source_sha256": "a1f33c879c1822fb5be78244763a08736da3b1ce1bfe1c37bae141b026004bff",
+      "reviewed": true,
+      "fields": {
+        "question": "Is a fixed point different from q_pi at intermediate beta an implementation bug?",
+        "answer": "Not necessarily. Duration mixing deliberately trades contraction, bias and variance. Beta=0 targets behavior values; beta=1 restores the target fixed point. Verify endpoints and the exact operator, then report intermediate bias rather than forcing it to zero.",
+        "example": "The seed42 beta=.5 diagnostic retains target fixed-point MSE about .00305 as actual bias, not an unbiased-performance claim."
+      }
+    },
+    "qa/post-training:excursion-td/enumeration-not-control": {
+      "source_sha256": "61e6f037f71c3d4c11d8961f0051f6a460e0d74bd5664019fb65870404511d3a",
+      "reviewed": true,
+      "fields": {
+        "question": "How is Ex-Retrace checked without merely repeating its own implementation?",
+        "answer": "The test exhaustively enumerates all two-step paths in a two-state/two-action MDP and averages sample targets, then compares against an independently expanded matrix operator. It also checks beta=0 contraction and the behavior fixed point. This verifies tabular mechanics, not neural-control returns.",
+        "example": "For each path, multiply P(s1|s0,a0), mu(a1|s1) and P(s2|s1,a1). The target average must equal the corresponding row of b+MQ."
+      }
+    },
+    "qa/post-training:drd-mopd/update-not-moe": {
+      "source_sha256": "fb33445a5b71fbcee98651115712c327a5e7dc8da397c0c661908d1639fdb603",
+      "reviewed": true,
+      "fields": {
+        "question": "Is domain routing in DRD-MOPD inference-time MoE?",
+        "answer": "No. Every input uses the same student formed from the frozen base plus all deltas. Domain labels determine which deltas receive updates, not which deltas are active in a forward pass.",
+        "example": "For example, a Code input still uses the Math delta. Own mode only restricts the Code gradient to the Code delta."
+      }
+    },
+    "qa/post-training:drd-mopd/inactive-means-frozen": {
+      "source_sha256": "84cbe6efe48bbb991fa9900a2f71a7682aff42745fd1027a0c65f98eef05b47d",
+      "reviewed": true,
+      "fields": {
+        "question": "Does calling AdamW with zero gradients freeze an unselected component?",
+        "answer": "No. Existing momentum, step counters and decoupled weight decay can still alter state or parameters. Unselected components must skip the update entirely and retain their independent optimizer history.",
+        "example": "A delta with nonzero first moment can move under zero-gradient AdamW. A correct skipped update does not even increment its counter."
+      }
+    },
+    "qa/post-training:drd-mopd/other-scale": {
+      "source_sha256": "91fac97c879af17f878c692aff6ba71fcaf09a9bc3583f343f6db0ec152a99cc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not divide every Other gradient by K-1 and call it equivalent normalization?",
+        "answer": "The paper's Other mode copies the full gradient to every other component. Its plain-SGD composite gradient is K-1 times Own's. Dividing changes the defined algorithm, and separate Adam states prevent a simple global-learning-rate equivalence argument.",
+        "example": "For K=3, one domain sends its full gradient to two deltas. Dividing each by two changes both paths. SingleComponent's 1/(K-1) coefficients belong to a different mode."
+      }
+    },
+    "qa/post-training:drd-mopd/snapshot-and-evidence": {
+      "source_sha256": "9f293e80b0c67de0c3afe8b49a4ecd8172392ea3791e6db354afda41cdad500b",
+      "reviewed": true,
+      "fields": {
+        "question": "How does the local implementation avoid changing the student between domain gradients?",
+        "answer": "step_losses builds one composed-weight snapshot, obtains every domain's real autograd gradient there, then routes and updates components. Tests compare with independent torch AdamW optimizers. This does not implement teachers, the distillation loss or rollouts.",
+        "example": "For example, two loss callbacks must observe exactly equal weights. Updating after the first loss before computing the second would fail the check."
+      }
+    },
+    "qa/foundation-models:stochastic-rounding/weight-sticking": {
+      "source_sha256": "1fb5cd26b1f17dec9c2199ba65e2912ee66134c6a8462efae19c2f63eab7bfe8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can BF16 rollout weights stay unchanged after FP32 master weights change?",
+        "answer": "An update can remain within half a BF16 grid interval, so nearest rounding returns the same value. A changed master weight does not imply a changed rollout parameter; inspect the actual quantized weights.",
+        "example": "The local value 1+1/1024 rounds to BF16 value 1 because upward spacing there is 1/128."
+      }
+    },
+    "qa/foundation-models:stochastic-rounding/distance-probability": {
+      "source_sha256": "e624acdee0ac127e780c4173f0cdd46f1bc5b982f2fb54ec7ec539e1a87f8cfb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is the upward-rounding probability a distance ratio?",
+        "answer": "Choosing the upper value with p=(x-lower)/(upper-lower), and the lower otherwise, makes the expectation exactly x. The probability is not always one half. Exact values return directly to avoid 0/0, and negative numbers use numerical neighbors.",
+        "example": "For x=1+1/1024 between 1 and 1+1/128, the upper probability is 1/8, not 1/2."
+      }
+    },
+    "qa/foundation-models:stochastic-rounding/unbiased-not-faster": {
+      "source_sha256": "aa6559a2de72cb66f215a0f5355d59a1aad851dbd4eb87b57fd0e576b780871c",
+      "reviewed": true,
+      "fields": {
+        "question": "Does unbiased SR prove smaller error every time or faster training?",
+        "answer": "No. Unbiasedness concerns conditional expectation. An individual sample may be farther than nearest rounding and adds variance. Convergence depends on learning rate, models, synchronization and trainer/rollout consistency.",
+        "example": "Most outputs may be 1, with a few jumps to 1+1/128. An upward sample has larger absolute error, while a large-sample mean can still approach the FP32 input."
+      }
+    },
+    "qa/foundation-models:stochastic-rounding/finite-boundary": {
+      "source_sha256": "f1adaf1828223b3c19658e9a69bdbe683e21d948dc335516f51c295d65e70e59",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reject out-of-range inputs instead of clipping before SR?",
+        "answer": "Clipping changes the expected target, so unbiasedness for the original input no longer holds. The component rejects nonfinite and out-of-range values and tests negatives, zero, subnormals and finite extrema. no_grad also avoids implying a straight-through training estimator.",
+        "example": "An input above FP16's maximum 65504 is rejected rather than clipped to 65504 and reported as unbiased."
+      }
+    },
+    "qa/post-training:mcpo/margin-not-entropy": {
+      "source_sha256": "0589afbc79ac2e25ef29a66f631852e148f26c424470c55106b8168ac23f868a",
+      "reviewed": true,
+      "fields": {
+        "question": "Does MCPO use entropy or a band-pass for uncertainty?",
+        "answer": "Neither. It computes the temperature-adjusted old-policy top1-minus-top2 margin and applies a clipped-linear transform to 1-margin. Maximum uncertainty remains one instead of being dropped by a band-pass.",
+        "example": "For example, margin .95 gives h=0 and margin .2 gives h=1. Entropy alone does not generally recover the top-two margin."
+      }
+    },
+    "qa/post-training:mcpo/negative-credit": {
+      "source_sha256": "5c2857c927d506d4effd4d207e00d4bb2f17d3f21abafaf869c6d8ebf4ca2b98",
+      "reviewed": true,
+      "fields": {
+        "question": "Are uncertain tokens penalized more heavily for negative advantages?",
+        "answer": "The opposite. The exponent includes sign(A), so high uncertainty gets smaller weight for negative advantages. After response normalization it receives less penalty, while confident tokens take more. Mean valid-token advantage remains unchanged.",
+        "example": "For h values 0 and 1, A=-1 and kappa=log4, the token advantages are -1.6 and -.4."
+      }
+    },
+    "qa/post-training:mcpo/compute-matched": {
+      "source_sha256": "c270f47aef8337e76b547489a8c5d29db8085cc9a5fd5b99e6b0fb1027b918de",
+      "reviewed": true,
+      "fields": {
+        "question": "Do equal 200-step budgets and higher scores establish a compute-matched MCPO improvement?",
+        "answer": "No. Generated lengths rise about 1.2–4.6 times, with no length-matched or random-credit controls. Qwen's three-data-seed p=.083 is not significant at .05, and data seeds do not cover all optimizer/sampling variation.",
+        "example": "Two methods may both update 200 times, but responses of 8000 versus 2000 tokens consume different generation budgets."
+      }
+    },
+    "qa/post-training:mcpo/old-policy-contract": {
+      "source_sha256": "4aad6c580acf292d89aab9fdb380e5f61dfa1cc607463fc14d31f3a71947a6cb",
+      "reviewed": true,
+      "fields": {
+        "question": "Can an implementation use the current model's top-two probabilities instead?",
+        "answer": "No. Credit is defined from the frozen old policy after rollout temperature scaling, aligned with the sampled decision. Current probabilities, raw logits or unmasked padding change the algorithm. The local component does not collect probabilities for the caller.",
+        "example": "The same logits have different margins at temperatures .5 and 1, changing uncertainty and credit. Padding must not enter the response weight mean."
+      }
+    }
+  }
+}

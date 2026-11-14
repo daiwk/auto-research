@@ -7,7 +7,7 @@ hide:
 
 # 自改进先标对象：答案、经验、接口与系统版本
 
-[Agent](../index.md) · 更新 2026-11-05 · 50 篇主题资料 / 13 篇重点对照
+[Agent](../index.md) · 更新 2026-11-13 · 60 篇主题资料 / 23 篇重点对照
 
 Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。
 
@@ -35,9 +35,19 @@ Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens �
 | [CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization](../../../agent-research/2604.14214-crop/README.md) · [原始来源](https://arxiv.org/abs/2604.14214v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 固定目标权重，拼接任务与超阈值长度文本批评，外部元优化器重写系统提示；按准确率减CoT归一化token成本选已测提示。 | 不同于Self-Refine修当前答案；本地validation选优是明确防泄漏加强。确定性callback诊断不代表真实LLM无损缩短或完整evolve。 |
 | [Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?](../../../agent-research/2610.37276-evalalloc/README.md) · [原始来源](https://arxiv.org/abs/2610.37276v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 用SEARCH观测的信息度选共享core与无放回item，固定外部item参照仅推断新候选参数；最终公共prefix补缓存并作配对校正。 | 预测不能覆盖已测cell，评测cell减少不等于token费用等比下降；warmup MIRT、cross-fit refit和完整successive halving未实现。 |
 | [Strategist: Evolving Reasoning with Agents](../../../agent-research/2611.03618-strategist/README.md) · [原始来源](https://arxiv.org/abs/2611.03618)<br>章节：背景与主要改动、核心公式、数据协议与实现边界、高成本完整实验 | 冻结执行模型，把可执行推理blueprint组成跨任务无环库，检索相关与邻域素材，按开发集实际准确率与分层token成本选策略。 | 库保留未获胜结构供后续任务复用，但最终候选仍须validation和hidden双过门槛；本地只实现AST/DAG、外部检索分数核和配对选择，不是meta-agent搜索。 |
+| [Discovering formally verified quantum programs with AI](../../../agent-research/2611.09822-verified-quantum-wiki/README.md) · [原始来源](https://arxiv.org/abs/2611.09822v1)<br>章节：核心公式、数据协议与代码映射、结果、负控与边界 | 由独立验证器核对冻结规范，再按成本改善或代码缩短门槛将候选写入共享知识库。 | 形式证明依赖所写规格，并不是留出任务的能力比较。本地只消费外部核验结果执行合入门槛，不验证 Lean。 |
 | [Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents](../../../agent-research/2611.05139-meta-square/README.md) · [原始来源](https://arxiv.org/abs/2611.05139)<br>章节：核心公式、数据协议与实现边界、高成本完整实验 | 冻结离线Meta-Skill，在同环境、同轨迹checkpoint上有界KEEP/EVOLVE；具体编辑任务结束即弃。 | 可复用的是演化指导，不是所有任务共享的最终Harness；本地没有LLM演化器或知识学习。 |
 | [From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?](../../../agent-research/2611.05108-continual-autoresearch/README.md) · [原始来源](https://arxiv.org/abs/2611.05108)<br>章节：核心公式、数据协议与实现边界、高成本完整实验 | 相同任务流与预算配对持续、重置运行，运行后分别计算首解、最优曲线和实际最终选择。 | 效率优势可与最终效果下降并存；本地仅离线评分合同，无自主研究或记忆收益验证。 |
 | [Training LLM Agents to Automate LLM Post-Training with RSI-Dojo](../../../agent-research/2611.03698-rsi-dojo/README.md) · [原始来源](https://arxiv.org/abs/2611.03698)<br>章节：核心公式、数据协议与实现边界、高成本完整实验 | 构建可执行训练环境，筛选过程与结果均合格的轨迹，微调自动后训练Agent。 | 9B/35B-A3B与每任务5至10小时全矩阵高成本不复现；只收录，不声明运行时或权重能力。 |
+| [EnvOpt: Automated Optimization for Agent Environments](../../../agent-research/2611.07372-envopt/README.md) · [原始来源](https://arxiv.org/abs/2611.07372)<br>章节：背景与主要改动、核心公式、数据协议与实现边界 | 固定模型与 Harness，把可复用的信息表示作为跨任务资产；无训练 verifier 的成本/代理筛选之后，用独立验证决定是否保留。 | 更便宜的代理轨迹可错判，验证回归即回滚；本地仅回放选择规则，不生成环境或运行 Agent。 |
+| [When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents](../../../agent-research/2611.14326-fgse/README.md) · [原始来源](https://arxiv.org/abs/2611.14326)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 临时更新在迁移、定向证伪与归档回归三个探针集分别计分，收益、风险和旧任务损伤同时达标才准入。 | 经验门依赖真实成对verifier和适当探针；本地仅Eq7–9，不含自动细化、Actor或论文置信保证，完整API实验不复现。 |
+| [Program-Aided Patchable Skill Evolution](../../../agent-research/2611.14019-pase/README.md) · [原始来源](https://arxiv.org/abs/2611.14019)<br>章节：背景与主要改动、核心公式、数据协议与代码映射 | 分离描述性技能与关联程序，局部patch后只在held-out validation严格改善时保留配对更新。 | 程序语法不证明正确或安全，外部分数也不能验证陈旧patch目标；本地只做preimage事务和接受/回滚，不执行模型或生成代码。 |
+| [Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback](../../../agent-research/2608.15591-agent-gym/README.md) · [原始来源](https://arxiv.org/abs/2608.15591)<br>章节：核心公式、数据协议与代码映射、结果、负控与边界 | 以独立ALF规则层修正原Agent的JSON输出；AND检测、scope互斥、三层动作合并和显式SME批准保持纠错可审计。 | 目标匹配和collateral只描述适应案例覆盖，类型合同不证明语义正确。原Agent/模型不重训；LLM发现与自动晋升没有本地实现。 |
+| [ScientistTwo: Pioneering the Human Knowledge Frontier with Autonomous AI](../../../agent-research/2609.19644-scientist-two/README.md) · [原始来源](https://arxiv.org/abs/2609.19644)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界 | 把科研工作拆成可拒绝、可修改、有预算的阶段；子集筛选后独立全量验证，并用成功及失败历史继续探索。 | 控制层安排实验与评审，不证明外部语义判断或实验产物真实。ScientistOne的证据完整性审计与ScientistTwo的研究扩展控制互补；本地两者都不等于完整自主科学家。 |
+| [EnvHarness: Awakening Static Worlds for Agent Learning](../../../agent-research/2608.19880-envharness/README.md) · [原始来源](https://arxiv.org/abs/2608.19880)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界 | 在固定环境的标准接口外组合初态重放、动作/转换/观察hook和串行任务，保留各基础环境的成功判据。 | 它改环境而非模型外工具/记忆；可reset、可信verifier和新rollout验收是前提。本地只有CPU包装器，无EnvRigger、模型学习、真实bridge或安全sandbox。 |
+| [MLE-STAR: Machine Learning Engineering Agent via Search and Targeted Refinement](../../../agent-research/2506.15692-mle-star/README.md) · [原始来源](https://arxiv.org/abs/2506.15692v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 检索模型并实际验证合并，再以消融定位高影响代码块，内层改写/验证、外层重新定位，集成另行搜索。 | 搜索材料与块级训练反馈必须真实执行；不同于MARS按成本奖励调度仓库候选。八V100及小时级完整矩阵不复现，本地无控制器或能力指标。 |
+| [AlphaEvolve: A coding agent for scientific and algorithmic discovery](../../../agent-research/2506.13131-alphaevolve/README.md) · [原始来源](https://arxiv.org/abs/2506.13131v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果、高成本完整实验 | 固定人类评价合同，混合LLM提案、级联执行评价与多维进化档案，异步探索程序空间。 | 指标优化仍受评价器充分性约束，不等于ScientistOne的主张/引用/方法完整性审计。官方只开放构造验证资料，完整搜索/生产矩阵高成本不复现，本地没有算子。 |
+| [Co-Director: Agentic Generative Video Storytelling](../../../agent-research/2604.24842-co-director/README.md) · [原始来源](https://arxiv.org/abs/2604.24842)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界 | 分别更新策略/叙事/美学轴的战略reward，用推荐冷启动和UCB选方向，独立质量分选择已有视频。 | CoDirector用UCB乐观探索尚不确定的创意方向；RuHarness按联合后验效用的低分位保守选择rubric frontier，再让独立validation决定harness是否晋级。探索奖励和准入证据不能互换，也都不把judge关联分当因果效应。 |
 
 </div>
 
@@ -78,6 +88,54 @@ Strategist把可执行推理结构、测量卡与训练轨迹经验组成跨任�
 Strategist将可执行推理程序与测量经验放入跨任务库；Meta²则把跨任务保留对象限制为冻结的演化知识，避免把某个任务修复永久带到另一任务。Continual AutoResearch进一步要求把首解、搜索曲线与最终选择分别评估：更快找到0.8候选但最终选择0.5，不能写成最终提升。RSI-Dojo改变的又是模型权重学习阶段，不能把阈值过滤器或未执行环境注册视为训练完成。比较前应先固定跨任务可见状态、编辑的生效范围以及验证反馈何时可见。
 
 对照来源：[strategist](../../../agent-research/2611.03618-strategist/README.md) · [meta-square](../../../agent-research/2611.05139-meta-square/README.md) · [continual-autoresearch](../../../agent-research/2611.05108-continual-autoresearch/README.md) · [rsi-dojo](../../../agent-research/2611.03698-rsi-dojo/README.md)
+
+### 跨任务保留环境、演化指导与会话经验是三种干预
+
+EnvOpt 保留能服务不同查询的环境表示，内层成本下降且代理保真才接受，验证回归即停止并回滚；Meta² 保留冻结 Meta-Skill，具体 Harness 编辑只作用于当前 run；Continual AutoResearch 固定任务流比较会话/工作区状态，独立测量搜索速度与最终选择。应分别记录变更产物的生效范围、外层验证可见性和跨任务继承对象，不能因搜索轨迹更省就推断模型能力提高。
+
+对照来源：[envopt](../../../agent-research/2611.07372-envopt/README.md) · [meta-square](../../../agent-research/2611.05139-meta-square/README.md) · [continual-autoresearch](../../../agent-research/2611.05108-continual-autoresearch/README.md)
+
+### 平均验证增益、边界风险与形式规范是不同准入依据
+
+PASE将技能程序patch交给独立validation，以严格改善决定保留；FGSE另外要求证伪失败与旧任务损伤不超阈值，避免平均收益掩盖危险子范围。Verified Quantum Wiki先依冻结规范独立证明，再比较成本/大小。三者都在准入，但可获得的保证不同：AST语法、经验探针和形式定理不能互换。当前CPU组件都不生成候选或外部核验，测试分数和synthetic receipt只用于合同负控。
+
+对照来源：[pase](../../../agent-research/2611.14019-pase/README.md) · [fgse](../../../agent-research/2611.14326-fgse/README.md) · [verified-quantum-wiki](../../../agent-research/2611.09822-verified-quantum-wiki/README.md)
+
+### 改输出的例外规则与改程序的技能补丁，准入证据不同
+
+PASE在skill/program配对上提出程序补丁，依held-out validation严格改善接受；Agent Gym在原Agent外层保存可逆业务例外，target/collateral检查之后仍需要专家明确批准。程序语法、规则匹配、人工授权和任务效果是四种不同判断，不应互相冒充。本地两者都是准入/事务L1核，不是自动发明规则、模型变聪明或完整RSI。
+
+对照来源：[agent-gym](../../../agent-research/2608.15591-agent-gym/README.md) · [pase](../../../agent-research/2611.14019-pase/README.md)
+
+### 有界研究扩展与证据完整性必须分开验收
+
+ScientistTwo用子集到全量的升阶门、成功/失败历史、未试种子探索、严格改善接纳和review预算组织研究。ScientistOne的CoE则针对分数复算、引文、规则及方法代码一致性，现有局部核也明确把语义判断外置。即使阶段全部accept、评审评分很高，外部日志仍可能错误或不真实；反过来，证据可复算也不能证明科研想法新颖或优越。局部状态测试只证明预算和数据流，不是107任务能力复现。
+
+对照来源：[scientist-two](../../../agent-research/2609.19644-scientist-two/README.md) · [scientist-one](../../../agent-research/2605.26340-scientist-one/README.md)
+
+### 改Agent的执行层与改环境的练习层不能混为一个消融
+
+Harness²在同模型同环境下比较工具、提示、记忆和脚本变更，再积累如何改进的证据；EnvHarness则让环境对特定弱点提供更好的练习，但保留基础目标判据。若两边同时改变，很难把能力收益归因到任一层。串行Chain的A∧B只是原判据组合，不证明任务语义兼容；Contract阻止捷径也不证明策略学到可迁移技能。完整EnvRigger要用freshrollout验收并回到未包装任务评测，本地未完成这条能力链。
+
+对照来源：[envharness](../../../agent-research/2608.19880-envharness/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+### 寻找值得改的部件，与决定把预算花在哪个分支，是不同控制问题
+
+MLE-STAR用执行消融选择代码块，在相对固定的局部空间内反复提出计划；MARS则通过预算感知MCTS安排模块化候选，并把新旧代码与运行差异变成跨分支经验。局部影响与性能/时间折中可以互补，却不是同一个分数；高耗时竞赛上的原文结果也不能拿来给本地空控制器背书。两者收录都应明确生成脚本、完整编排器与已运行能力三种不同资产。
+
+对照来源：[mle-star](../../../agent-research/2506.15692-mle-star/README.md) · [mars-research](../../../agent-research/2602.02660-mars-research/README.md)
+
+### 发现更好的对象，与证明对它的研究主张有证据，是不同验收层
+
+AlphaEvolve需要一个能实际评价候选程序的目标，靠程序库和模型提案产生改进；ScientistOne继续追问论文数字是否复算、引文是否存在并支持主张、方法文字是否对应代码。构造通过指定检查只支持那项性质，不能把生成的论文全部自动判真；证据链可靠也不能保证搜索有创新。官方结果notebook可验证已给出的对象，但不恢复原发现过程，本库因此只收录有据成本审查。
+
+对照来源：[alphaevolve](../../../agent-research/2506.13131-alphaevolve/README.md) · [scientist-one](../../../agent-research/2605.26340-scientist-one/README.md)
+
+### 乐观探索不等于保守准入：两种不确定性用途
+
+CoDirector在3/3/4个创意轴上用战略reward均值加UCB探索项分配下一次尝试，官方warmstart只推荐先试未观察arm，不虚构计数。RuHarness从六格联合Dirichlet后验抽2000次，取效用0.2分位保守选择active rubric，候选harness仍须独立validation严格增益超过0.05才晋级。前者的不确定性鼓励探索，后者抑制小样本虚高；不能用UCB高分替代验证改善。CoDirector最终成片还按独立质量分而非战略分之和选取。本地只核两类数值机制，没有视频生成、语义judge或完整自进化能力证据。
+
+对照来源：[co-director](../../../agent-research/2604.24842-co-director/README.md) · [ruharness](../../../agent-research/2610.36826-ruharness/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -153,9 +211,125 @@ Strategist将可执行推理程序与测量经验放入跨任务库；Meta²则�
 
     对照来源：[strategist](../../../agent-research/2611.03618-strategist/README.md) · [reflexion](../../../agent-research/2303.11366-reflexion/README.md) · [evalalloc](../../../agent-research/2610.37276-evalalloc/README.md)
 
+### 预建跨任务文件索引和某次任务失败时追加一个工具提醒，能用同一张训练收益表吗？ {#cross-environment-index-versus-in-run-edit}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能直接合并。EnvOpt 的索引改变任务共享的环境表示，要在未用于该轮提出改动的验证任务上看成本和效果；Meta² 的提醒是当前 run 的有界 Harness 编辑，跨任务保留的是指导如何演进的知识，不是同一个提醒。
+
+    **教学例子：** 教学例：搜索任务都可复用同一目录索引；只针对一次缺失权限发出的恢复提醒不应永久植入其他任务。
+
+    对照来源：[envopt](../../../agent-research/2611.07372-envopt/README.md) · [meta-square](../../../agent-research/2611.05139-meta-square/README.md) · [continual-autoresearch](../../../agent-research/2611.05108-continual-autoresearch/README.md)
+
+### 一个patch提高验证均分，同时破坏旧案例，它能同时通过PASE、FGSE和Verified Quantum Wiki吗？ {#cross-risk-gates-versus-validation}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能据这两个数字统一判断。PASE的明确规则看held-out validation严格改善；FGSE还看单独归档损伤和证伪风险，可能拒绝。Verified Quantum Wiki另需规范绑定的独立证明及资源改进，不接受均分代替定理。选择哪种门必须匹配可观测证据和更新范围。
+
+    **教学例子：** 教学例：九题改进掩盖一次重复付款，均分门可能通过而风险门拒绝；量子wiki则根本不以这类任务均分为准入条件。
+
+    对照来源：[pase](../../../agent-research/2611.14019-pase/README.md) · [fgse](../../../agent-research/2611.14326-fgse/README.md) · [verified-quantum-wiki](../../../agent-research/2611.09822-verified-quantum-wiki/README.md)
+
+### 一条业务纠错规则经SME批准，与一个程序补丁validation提高，能相互替代吗？ {#cross-cross-rule-governance-versus-program-validation}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。前者是在目标与collateral范围内授权下游例外；后者是配对程序在隔离validation上的测得效果。二者作用位置和接受依据不同，均不能靠语法/类型检查证明语义成功。
+
+    **教学例子：** 教学例：紧急采购例外可获人工授权；表格公式修补则要validation严格提高。把专家批准标成benchmark提升，或用一次分数提高授权采购政策，都混淆证据。
+
+    对照来源：[agent-gym](../../../agent-research/2608.15591-agent-gym/README.md) · [pase](../../../agent-research/2611.14019-pase/README.md)
+
+### ScientistTwo完成严格改善比较与两轮review后，能否跳过ScientistOne式证据审计？ {#cross-cross-scientist-control-versus-evidence-integrity}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。严格比较与review本身由外部模型或人作出，控制核只保证何时调用、何时更新和何时停止。独立分数复算、数据隔离、日志来源与方法代码一致性仍需核查；高分不是来源真实性证明。
+
+    **教学例子：** 教学例：外部比较器根据复制来的高分返回true，控制核会忠实更新best，但只有执行与来源审计才能发现这个高分不属于当前代码。
+
+    对照来源：[scientist-two](../../../agent-research/2609.19644-scientist-two/README.md) · [scientist-one](../../../agent-research/2605.26340-scientist-one/README.md)
+
+### 同时替换Agent harness和环境Contract，再见到成功率上涨，能归因到EnvHarness吗？ {#cross-cross-environment-and-agent-harness-attribution}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。需固定策略、任务划分和Agent执行层，再比较原环境与包装环境产生的训练/技能，并在未包装评测环境验收。固定toy包装器检查不覆盖学习与迁移，更不是两套系统已集成。
+
+    **教学例子：** 教学例：同时增加测试工具并禁止直接提交，失败减少可能来自任一改动；没有分开对照就无法识别机制贡献。
+
+    对照来源：[envharness](../../../agent-research/2608.19880-envharness/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+### 一处修改影响很大但训练昂贵，MLE-STAR的消融定位与MARS的预算奖励会作同一个决定吗？ {#cross-cross-block-targeting-versus-budget-allocation}
+
+??? note "展开答案与例子"
+
+    **答案：** 不一定。消融回答哪个部件值得深入，预算奖励还按性能与执行时间取舍候选。前者不自动包含MARS的时间惩罚，后者也不自动实现MLE-STAR的块内计划搜索；应分别固定真实validation和运行成本再组合。
+
+    **教学例子：** 教学例：缺失值处理每次提高0.01却需一小时，另一路提高0.008只要一分钟。影响排序与预算内的探索价值可以不同，不能只看一列精度。
+
+    对照来源：[mle-star](../../../agent-research/2506.15692-mle-star/README.md) · [mars-research](../../../agent-research/2602.02660-mars-research/README.md)
+
+### 一个已发表矩阵构造通过验证，为何仍不能说本地AlphaEvolve和科研完整性都已验证？ {#cross-cross-discovery-score-versus-claim-grounding}
+
+??? note "展开答案与例子"
+
+    **答案：** 构造检查没有执行提案、进化档案和分布式搜索，所以不验证发现能力；它也不检查论文所有数值、引用或方法描述，所以不替代CoE审计。每项证据只支持它实际检查的对象。
+
+    **教学例子：** 教学例：rank-48复数构造通过验证，却不能支持“任意域rank-48”或“本地重新发现”两个更强主张；后两者需要各自额外证据。
+
+    对照来源：[alphaevolve](../../../agent-research/2506.13131-alphaevolve/README.md) · [scientist-one](../../../agent-research/2605.26340-scientist-one/README.md)
+
+### CoDirector的UCB高分与RuHarness的后验低分位，为什么不能作为同一种晋级证据？ {#cross-cross-colm-co-director}
+
+??? note "展开答案与例子"
+
+    **答案：** UCB故意给未充分探索的方向加乐观奖励，服务于下一次尝试；RuHarness用联合后验效用低分位抑制不确定的rubric点估计，并另外要求独立validation严格提升。两者调度对象和风险偏好不同，分轴judge评分也不能识别因果贡献。
+
+    **教学例子：** 教学例：只试一次的新创意可因探索项很高而被再次选择，但一个只解释单次失败的rubric不应据此直接晋级；harness候选还必须跨过validation门槛。这不是实测效果。
+
+    对照来源：[co-director](../../../agent-research/2604.24842-co-director/README.md) · [ruharness](../../../agent-research/2610.36826-ruharness/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-13** · 补入CoDirector分轴UCB和独立质量选优，与RuHarness联合后验低分位及validation准入比较：明确乐观探索和保守接受的不同不确定性用途；两者本地机制检查均不是完整生成或自进化能力。
+
+涉及：[co-director](../../../agent-research/2604.24842-co-director/README.md) · [ruharness](../../../agent-research/2610.36826-ruharness/README.md)
+
+**2026-11-13** · 补入经典程序进化与评价级联，区分搜索结果、构造验证与研究主张完整性；记录官方未发布运行系统、完整实验高成本不复现和零本地执行能力。
+
+涉及：[alphaevolve](../../../agent-research/2506.13131-alphaevolve/README.md) · [scientist-one](../../../agent-research/2605.26340-scientist-one/README.md)
+
+**2026-11-13** · 补入检索初始化与消融定向细化，区分块级搜索与成本感知树调度；核对2025精确v1日期、生成产物与控制器源码边界，完整实验高成本不复现。
+
+涉及：[mle-star](../../../agent-research/2506.15692-mle-star/README.md) · [mars-research](../../../agent-research/2602.02660-mars-research/README.md)
+
+**2026-11-13** · 补入EnvHarness环境侧可组合控制，区分Agent执行层和环境练习层；CPU三seed仅验Stage/Contract/serialChain合同，完整商业rollout和8H100训练不复现。
+
+涉及：[envharness](../../../agent-research/2608.19880-envharness/README.md) · [harness2](../../../agent-research/2610.14224-harness2/README.md)
+
+**2026-11-13** · 补入Google ScientistTwo历史漏项，区分科研扩展控制与证据完整性；局部CPU合同不生成科学结果，完整多日商业Agent实验高成本不复现。
+
+涉及：[scientist-two](../../../agent-research/2609.19644-scientist-two/README.md) · [scientist-one](../../../agent-research/2605.26340-scientist-one/README.md)
+
+**2026-11-12** · 加入下游规则治理这一演化位置：明确scope互斥、3→2→1真实状态更新与SME信任边界，并与PASE程序validation准入区分；完整API/人工系统不复现。
+
+涉及：[agent-gym](../../../agent-research/2608.15591-agent-gym/README.md)
+
+**2026-11-11** · 加入FGSE和PASE，分别拆开风险约束准入与validation-only程序补丁接受，并与Verified Quantum Wiki的规范绑定独立证明比较；不将CPU经验门、语法解析或模拟凭据包装成完整自进化/证明能力。
+
+涉及：[fgse](../../../agent-research/2611.14326-fgse/README.md) · [pase](../../../agent-research/2611.14019-pase/README.md) · [verified-quantum-wiki](../../../agent-research/2611.09822-verified-quantum-wiki/README.md)
+
+**2026-11-09** · 加入 Verified Quantum Wiki，区分 Strategist 的开发集选择与冻结规范下的独立证明后合入。证明保证的是规范所声明的性质；本地只检查外部结果的绑定及合入阈值。
+
+涉及：[verified-quantum-wiki](../../../agent-research/2611.09822-verified-quantum-wiki/README.md)
+
+**2026-11-06** · 补入 EnvOpt，明确模型/Harness 固定时可演进的第三层环境表示；与 Meta² 的单次运行编辑和 Continual AutoResearch 的会话经验测量分开。留出验证回滚不等于暴露训练金标；本地 CPU 离线核不是完整自主环境优化。
+
+涉及：[envopt](../../../agent-research/2611.07372-envopt/README.md) · [meta-square](../../../agent-research/2611.05139-meta-square/README.md) · [continual-autoresearch](../../../agent-research/2611.05108-continual-autoresearch/README.md)
 
 **2026-11-05** · 把三种常被混叫RSI的对象拆开：Meta²冻结跨任务指导，只修改当前run；Continual AutoResearch度量会话、工作区经验是否更早产生好候选，而不保证最终选得更好；RSI-Dojo用训练环境和筛选轨迹把后训练过程内化进模型，完整实验高成本不复现。Meta²与Continual AutoResearch仅实现CPU合同组件，RSI-Dojo只收录；三者均不是模型能力提升证据，完整实验高成本不复现、审查DONE。
 
@@ -177,10 +351,11 @@ Strategist将可执行推理程序与测量经验放入跨任务库；Meta²则�
 
 覆盖 43 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 50 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 60 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
+- [Discovering formally verified quantum programs with AI](../../../agent-research/2611.09822-verified-quantum-wiki/README.md)
 - [Meta²: Precomputing Reusable Knowledge for Online Harness Evolution in Long-Horizon Agents](../../../agent-research/2611.05139-meta-square/README.md)
 - [From AutoResearch to Continual AutoResearch: Do Agents Learn Across Tasks?](../../../agent-research/2611.05108-continual-autoresearch/README.md)
 - [Training LLM Agents to Automate LLM Post-Training with RSI-Dojo](../../../agent-research/2611.03698-rsi-dojo/README.md)
@@ -231,6 +406,15 @@ Strategist将可执行推理程序与测量经验放入跨任务库；Meta²则�
 - [When the Critic Falls Behind: Co-Evolving Rubrics and Harnesses for Continual Agent Self-Improvement](../../../agent-research/2610.36826-ruharness/README.md)
 - [CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization](../../../agent-research/2604.14214-crop/README.md)
 - [Where Should the Evaluation Budget Go in LLM-Driven Agent Scaffold Evolution?](../../../agent-research/2610.37276-evalalloc/README.md)
+- [EnvOpt: Automated Optimization for Agent Environments](../../../agent-research/2611.07372-envopt/README.md)
+- [When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents](../../../agent-research/2611.14326-fgse/README.md)
+- [Program-Aided Patchable Skill Evolution](../../../agent-research/2611.14019-pase/README.md)
+- [Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback](../../../agent-research/2608.15591-agent-gym/README.md)
+- [ScientistTwo: Pioneering the Human Knowledge Frontier with Autonomous AI](../../../agent-research/2609.19644-scientist-two/README.md)
+- [EnvHarness: Awakening Static Worlds for Agent Learning](../../../agent-research/2608.19880-envharness/README.md)
+- [MLE-STAR: Machine Learning Engineering Agent via Search and Targeted Refinement](../../../agent-research/2506.15692-mle-star/README.md)
+- [AlphaEvolve: A coding agent for scientific and algorithmic discovery](../../../agent-research/2506.13131-alphaevolve/README.md)
+- [Co-Director: Agentic Generative Video Storytelling](../../../agent-research/2604.24842-co-director/README.md)
 
 </details>
 

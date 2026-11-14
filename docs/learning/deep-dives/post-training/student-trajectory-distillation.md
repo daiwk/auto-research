@@ -7,7 +7,7 @@ hide:
 
 # 轨迹蒸馏：采样者、提案与散度方向分开看
 
-[LLM 后训练](../index.md) · 更新 2026-11-05 · 43 篇主题资料 / 9 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-11 · 45 篇主题资料 / 11 篇重点对照
 
 “on-policy”描述监督发生在哪些状态，FKL/RKL/JSD描述在这些状态怎样比较分布。GKD和MiniLLM建立这两个轴，DrOPD、AP-OPD再调整纠错位置或强度，Semi-OPD与学习信号诊断则提醒：离线复用和残余损失各有不同含义。 MPOPD再把采样者变成可学习proposal：几何混合是提案target，学生仍向教师做RKL，二者不能混成同一个蒸馏分布。
 
@@ -34,6 +34,8 @@ hide:
 | [Why On-Policy Distillation Sometimes Fails: Vanishing Learning Signals](../../../post-training/2610.11247-opd-learning-signals/README.md) · [原始来源](https://arxiv.org/abs/2610.11247)<br>章节：背景与主要改动、核心公式、代码映射与复现边界 | 同时观察残余loss、截断前梯度、两折occupancy、参数位移与CKA，区分损失和可用学习信号。 | 这是相关性诊断设施，不是新优化算法；本地三步运行不复现长平台期，也不能证明失败原因。 |
 | [Proposing Better Rollouts for On-Policy Distillation](../../../post-training/2610.36477-mpopd/README.md) · [原始来源](https://arxiv.org/abs/2610.36477v2)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 用独立proposal拟合更新后师生的归一化几何混合，学生沿proposal轨迹以滞后一token的冻结单步ratio加权RKL。 | ratio不是累积乘积；每轮proposal从更新后学生重置。完整采样、LM复制和优化器编排未实现，小张量loss不能证明真实on-policy。 |
 | [Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation?](../../../post-training/2611.04958-shuffled-opsd/README.md) · [原始来源](https://arxiv.org/abs/2611.04958v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射 | 同时改变学生采样和教师评分的共享问题词序，保留固定111偏移的完整其他题示例为教师私有上下文，使用逐词表有符号上截断监督。 | 变的是共享输入与访问状态，不是重排已采轨迹；词multiset不保证token预算不变。负项与response等权归约不能被普通KL替代，完整数学评测仍用原始题。 |
+| [CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation](../../../post-training/2611.07959-cord/README.md) · [原始来源](https://arxiv.org/abs/2611.07959)<br>章节：核心公式、数据协议与代码映射 | CoRD 直接在每个共享前缀上构造几何混合 q；先从学生提议，再最大耦合地保留或替换，发出边缘恰为 q。蒸馏仍向教师做反向 KL。 | 相对 MPOPD，不用另外拟合提案，也没有冻结的滞后一 token ratio；代价是在每个采样前缀同时得到师生概率，且中间权重只保留两者支持集的交集。 |
+| [DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation](../../../post-training/2611.13249-drd-mopd/README.md) · [原始来源](https://arxiv.org/abs/2611.13249v1)<br>章节：核心公式、数据协议与代码映射、结果、负控与边界 | 冻结base加全部全参数delta形成唯一学生，域标签只路由更新；Own/Other/Alternate/SingleComponent使用独立AdamW状态，所有域先在同一W计算梯度。 | 参数更新路由不同于DrOPD的token散度门，也不等于推理MoE；未选delta不能执行动量/计数/weight decay。作者未发布本篇训练实现与checkpoint，本地不实现教师或OPD rollout。 |
 
 </div>
 
@@ -68,6 +70,18 @@ GKD/MiniLLM让teacher在学生访问状态上监督，MPOPD再训练独立propos
 GKD强调教师应在学生实际访问的前缀上监督，但不固定唯一散度。Shuffled OPSD把共享题目也作为设计变量：相同T(x)同时决定学生采样与教师评分，固定其他题参考只在teacher中出现。只打乱教师输入或生成完再打乱续写，都不是该条件结构。其signed pointwise cap保留负项，与普通KL不同；负总损失可以来自定义而非错误。状态来源、共享输入、教师私有信息和数值目标仍需分别检查，局部loss通过不能证明数学能力提升。
 
 对照来源：[shuffled-opsd](../../../post-training/2611.04958-shuffled-opsd/README.md) · [gkd](../../../post-training/2306.13649-gkd/README.md)
+
+### 同一几何目标，两条生成路线
+
+MPOPD 拟合并使用独立 proposal 生成，学生训练用冻结旧策略的滞后一 token 单步 ratio；CoRD 在同一前缀直接计算 q，并通过正残差替换把发出分布精确移到 q。两者都保留面向教师的反向 KL。做对照时要区分 proposal 近似误差、教师逐步调用预算和损失加权，不能把差异都归为几何混合。
+
+对照来源：[cord-rollout](../../../post-training/2611.07959-cord/README.md) · [mpopd](../../../post-training/2610.36477-mpopd/README.md)
+
+### 都叫routing，token监督门与参数更新路由不在同一坐标系
+
+Divergence-Routed OPD用师生分歧决定哪些token位置增加FKL，改变监督分布；DRD-MOPD保留一个全delta合成学生，用域标签决定哪些参数增量接受loss梯度。后者的Other不能默认除以K-1，SingleComponent也不意味着前向只激活一个delta。两者组合需另定义共享loss与优化器合同，现有两个独立组件并不自动形成多教师Evolve算子。
+
+对照来源：[drd-mopd](../../../post-training/2611.13249-drd-mopd/README.md) · [divergence-routed-opd](../../../post-training/2610.19572-divergence-routed-opd/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -133,9 +147,37 @@ GKD强调教师应在学生实际访问的前缀上监督，但不固定唯一�
 
     对照来源：[shuffled-opsd](../../../post-training/2611.04958-shuffled-opsd/README.md) · [gkd](../../../post-training/2306.13649-gkd/README.md)
 
+### 用 MPOPD 的拟合提案替代 CoRD 的最大耦合，还能保证精确发出 q、最少改动学生提议吗？ {#cross-cord-rollout-vs-mpopd}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。MPOPD 的 proposal 近似 q，但不是与学生提议的最大耦合。CoRD 的保留质量为 min(pS, q)，替换只填正残差，因此既得到目标边缘，替换概率也达到总变差距离。
+
+    **教学例子：** 若学生概率为 (0.8, 0.2)、q 为 (0.5, 0.5)，CoRD 仅把 0.3 的总质量从第一项移到第二项；提案即使边缘等于 q，独立抽取它仍会以 0.5 的概率和学生提议不同。
+
+    对照来源：[cord-rollout](../../../post-training/2611.07959-cord/README.md) · [mpopd](../../../post-training/2610.36477-mpopd/README.md)
+
+### DRD-MOPD和Divergence-Routed OPD可以共用一个routing布尔开关吗？ {#cross-two-routing-coordinates}
+
+??? note "展开答案与例子"
+
+    **答案：** 不可以。前者路由域梯度到参数增量，后者按token分歧路由额外FKL监督。二者的输入、被选对象、归一化和优化器状态不同；合并必须显式定义组合，不能只共用名字。
+
+    **教学例子：** 教学例：一个高JS数学token可在DrOPD获额外监督；DRD的Other却会把这个域loss更新到其他delta，且这些delta一直参与前向。
+
+    对照来源：[drd-mopd](../../../post-training/2611.13249-drd-mopd/README.md) · [divergence-routed-opd](../../../post-training/2610.19572-divergence-routed-opd/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-11** · 加入 DRD-MOPD，区分token监督路由、域到参数更新路由与推理激活路由；本地保真实现同快照梯度与selected-only AdamW，不把上游Open-MOPD或局部参数检查当完整蒸馏结果。
+
+涉及：[drd-mopd](../../../post-training/2611.13249-drd-mopd/README.md)
+
+**2026-11-06** · 加入 CoRD 轨迹采样，与 MPOPD 对读几何目标、最大耦合与独立提案；本地只验证分布机制，不运行学生训练。
+
+涉及：[cord-rollout](../../../post-training/2611.07959-cord/README.md) · [mpopd](../../../post-training/2610.36477-mpopd/README.md)
 
 **2026-11-05** · 补入Shuffled OPSD的共享题目变换，对照GKD的学生访问前缀原则；明确固定参考配对、有符号上截断及原题评测，未把输入扰动或L1梯度检查当作能力复现。
 
@@ -153,7 +195,7 @@ GKD强调教师应在学生实际访问的前缀上监督，但不固定唯一�
 
 覆盖 40 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 43 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 45 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -200,6 +242,8 @@ GKD强调教师应在学生实际访问的前缀上监督，但不固定唯一�
 - [GKD](../../../post-training/2306.13649-gkd/README.md)
 - [MiniLLM](../../../post-training/2306.08543-minillm/README.md)
 - [Proposing Better Rollouts for On-Policy Distillation](../../../post-training/2610.36477-mpopd/README.md)
+- [CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation](../../../post-training/2611.07959-cord/README.md)
+- [DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation](../../../post-training/2611.13249-drd-mopd/README.md)
 
 </details>
 

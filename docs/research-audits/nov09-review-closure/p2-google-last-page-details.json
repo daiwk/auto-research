@@ -1,0 +1,768 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-11-11",
+  "window": {
+    "start": "2026-10-16",
+    "end": "2026-11-09",
+    "timezone": "Asia/Shanghai"
+  },
+  "scope": "Only nine newly observed Google page31 details; no recrawl of previous30 pages",
+  "all_sources_exhaustive": false,
+  "counts": {
+    "historical": 7,
+    "out_of_scope": 1,
+    "after_window": 1
+  },
+  "source_exceptions": [],
+  "records": [
+    {
+      "url": "https://research.google/pubs/distributional-alignment-games-for-answer-level-fine-tuning-2/",
+      "title": "Distributional Alignment Games for Answer-Level Fine-Tuning",
+      "organization": "Google",
+      "review_status": "historical",
+      "status": "historical",
+      "reason": "Google官方Download的NYU原稿题目/三作者与arXiv2604.27166一致，原稿第一页还明确Google Research/NYU/Microsoft机构。arXiv v1已于2026-04-29T20:15:37Z公开（上海4/30），早于本窗；不是用ICML2026目录年份推定首发。只做身份/日期核查，不声称方法或实现已完成。",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "full_article_read": false,
+      "method_review_completed": false,
+      "implementation_status": "not_changed_by_review",
+      "body_sha256": "0174f4e7a41e56d48b2f33822efaeb9e3e5747802fcad1d0f4ad8ab2e1b8e030",
+      "authors_on_official_detail": [
+        "Mehryar Mohri",
+        "Jon Schneider",
+        "Yifan Wu"
+      ],
+      "arxiv_ids": [
+        "2604.27166"
+      ],
+      "date_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2604.27166",
+          "location": "Submission history [v1]",
+          "date": "2026-04-30",
+          "timezone": "Asia/Shanghai",
+          "first_submission_utc": "2026-04-29T20:15:37+00:00",
+          "body_sha256": "3e21df13cb83ed3da9e7e96a76b59bcff2c858cf8ff7a9c4ae44b243e1e315d1",
+          "meaning": "Verified public arXiv v1 by this timestamp, not directory year, revision date or a claim of globally earliest publication."
+        }
+      ],
+      "reference_section": "new bounded Google page31 exact-detail/Download/identity check",
+      "source_review_scope": "official detail, exact Download identity and first-submission metadata; PDF first page for two NYU downloads; not a whole-paper method review",
+      "automatic_retry": false,
+      "blocking": false,
+      "reopen_when": "New contradictory canonical identity/date evidence, a materially changed manuscript, or explicit user-prioritized historical method review; no automatic retry.",
+      "identity_match": {
+        "kind": "exact_official_download_or_pdf_title_and_author_identity",
+        "arxiv_title": "Distributional Alignment Games for Answer-Level Fine-Tuning"
+      },
+      "primary_source_url": "https://arxiv.org/abs/2604.27166",
+      "arxiv_authors": [
+        "Mehryar Mohri",
+        "Jon Schneider",
+        "Yifan Wu"
+      ],
+      "first_submission_utc": "2026-04-29T20:15:37+00:00",
+      "first_submission_shanghai": "2026-04-30T04:15:37+08:00",
+      "pdf_identity_witness": {
+        "page_one_based": 1,
+        "page_text_sha256": "43ddddc7089d68f07beda0a05b6c2ddd1a06be05c09c27d897659fb61b1ab92c",
+        "locations": "title, author names and Google Research / NYU affiliation block; visually inspected"
+      },
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/distributional-alignment-games-for-answer-level-fine-tuning-2/",
+          "result": "retrieved",
+          "source_capture": "google-last-page/detail-01.html",
+          "body_sha256": "0174f4e7a41e56d48b2f33822efaeb9e3e5747802fcad1d0f4ad8ab2e1b8e030",
+          "bytes": 145444
+        },
+        {
+          "url": "https://arxiv.org/abs/2604.27166",
+          "result": "retrieved",
+          "source_capture": "google-last-page/arxiv-2604.27166.html",
+          "body_sha256": "3e21df13cb83ed3da9e7e96a76b59bcff2c858cf8ff7a9c4ae44b243e1e315d1",
+          "bytes": 42227
+        },
+        {
+          "url": "http://www.cs.nyu.edu/~mohri/pub/alft.pdf",
+          "result": "retrieved",
+          "source_capture": "google-last-page/nyu-alft-http.pdf",
+          "body_sha256": "e266cb13c873e303ec1461222b2a13f7d5ac262bae85751cd531a075d64d6b09",
+          "bytes": 541087
+        }
+      ],
+      "source_receipts": [
+        {
+          "url": "https://research.google/pubs/distributional-alignment-games-for-answer-level-fine-tuning-2/",
+          "result": "retrieved",
+          "source_capture": "google-last-page/detail-01.html",
+          "body_sha256": "0174f4e7a41e56d48b2f33822efaeb9e3e5747802fcad1d0f4ad8ab2e1b8e030",
+          "bytes": 145444
+        },
+        {
+          "url": "https://arxiv.org/abs/2604.27166",
+          "result": "retrieved",
+          "source_capture": "google-last-page/arxiv-2604.27166.html",
+          "body_sha256": "3e21df13cb83ed3da9e7e96a76b59bcff2c858cf8ff7a9c4ae44b243e1e315d1",
+          "bytes": 42227
+        },
+        {
+          "url": "http://www.cs.nyu.edu/~mohri/pub/alft.pdf",
+          "result": "retrieved",
+          "source_capture": "google-last-page/nyu-alft-http.pdf",
+          "body_sha256": "e266cb13c873e303ec1461222b2a13f7d5ac262bae85751cd531a075d64d6b09",
+          "bytes": 541087
+        }
+      ]
+    },
+    {
+      "url": "https://research.google/pubs/extending-the-uxr-point-of-view-playbook-triangulating-insights-in-complex-developer-domains/",
+      "title": "Extending the UXR Point of View Playbook: Triangulating Insights in Complex Developer Domains",
+      "organization": "Google",
+      "review_status": "historical",
+      "status": "historical",
+      "reason": "Google Download直接指向arXiv2605.31104，精确题目与Sarah Kianfar署名匹配；v1为2026-05-29T10:15:54Z，早于10/16。UXR playbook的2026目录新增不是本窗新论文，未作全文算法审查。",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "full_article_read": false,
+      "method_review_completed": false,
+      "implementation_status": "not_changed_by_review",
+      "body_sha256": "fc95ab16fddae039f9f81d672ccd90e65ca81fb9c289bd780e622733d835eee1",
+      "authors_on_official_detail": [
+        "Sarah Kianfar"
+      ],
+      "arxiv_ids": [
+        "2605.31104"
+      ],
+      "date_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2605.31104",
+          "location": "Submission history [v1]",
+          "date": "2026-05-29",
+          "timezone": "Asia/Shanghai",
+          "first_submission_utc": "2026-05-29T10:15:54+00:00",
+          "body_sha256": "9626cb73d78992471965aeba5e337f42caf291587e0815e8daa031cd4dad313f",
+          "meaning": "Verified public arXiv v1 by this timestamp, not directory year, revision date or a claim of globally earliest publication."
+        }
+      ],
+      "reference_section": "new bounded Google page31 exact-detail/Download/identity check",
+      "source_review_scope": "official detail, exact Download identity and first-submission metadata; PDF first page for two NYU downloads; not a whole-paper method review",
+      "automatic_retry": false,
+      "blocking": false,
+      "reopen_when": "New contradictory canonical identity/date evidence, a materially changed manuscript, or explicit user-prioritized historical method review; no automatic retry.",
+      "identity_match": {
+        "kind": "exact_official_download_or_pdf_title_and_author_identity",
+        "arxiv_title": "Extending the UXR Point of View Playbook: Triangulating Insights in Complex Developer Domains"
+      },
+      "primary_source_url": "https://arxiv.org/abs/2605.31104",
+      "arxiv_authors": [
+        "Sarah Kianfar"
+      ],
+      "first_submission_utc": "2026-05-29T10:15:54+00:00",
+      "first_submission_shanghai": "2026-05-29T18:15:54+08:00",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/extending-the-uxr-point-of-view-playbook-triangulating-insights-in-complex-developer-domains/",
+          "result": "retrieved",
+          "source_capture": "google-last-page/detail-02.html",
+          "body_sha256": "fc95ab16fddae039f9f81d672ccd90e65ca81fb9c289bd780e622733d835eee1",
+          "bytes": 143930
+        },
+        {
+          "url": "https://arxiv.org/abs/2605.31104",
+          "result": "retrieved",
+          "source_capture": "google-last-page/arxiv-2605.31104.html",
+          "body_sha256": "9626cb73d78992471965aeba5e337f42caf291587e0815e8daa031cd4dad313f",
+          "bytes": 40324
+        }
+      ],
+      "source_receipts": [
+        {
+          "url": "https://research.google/pubs/extending-the-uxr-point-of-view-playbook-triangulating-insights-in-complex-developer-domains/",
+          "result": "retrieved",
+          "source_capture": "google-last-page/detail-02.html",
+          "body_sha256": "fc95ab16fddae039f9f81d672ccd90e65ca81fb9c289bd780e622733d835eee1",
+          "bytes": 143930
+        },
+        {
+          "url": "https://arxiv.org/abs/2605.31104",
+          "result": "retrieved",
+          "source_capture": "google-last-page/arxiv-2605.31104.html",
+          "body_sha256": "9626cb73d78992471965aeba5e337f42caf291587e0815e8daa031cd4dad313f",
+          "bytes": 40324
+        }
+      ]
+    },
+    {
+      "url": "https://research.google/pubs/csnake-detecting-self-sustaining-cascading-failure-via-causal-stitching-of-fault-propagations/",
+      "title": "CSnake: Detecting Self-Sustaining Cascading Failure via Causal Stitching of Fault Propagations",
+      "organization": "Google",
+      "review_status": "historical",
+      "status": "historical",
+      "reason": "官方Download直接给arXiv2509.26529；题目与三作者完全对应，v1于2025-09-30T17:04:31Z公开。EuroSys2026出版记录不是首次公开日期，本窗按已证实历史身份结案，而非把未读Google论文按目录年份排期。",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "full_article_read": false,
+      "method_review_completed": false,
+      "implementation_status": "not_changed_by_review",
+      "body_sha256": "dc2fcddc202adeccbf4f72f4ee4dd5a677097da0c30cb225375be36e423fe5f9",
+      "authors_on_official_detail": [
+        "Shangshu Qian",
+        "Lin Tan",
+        "Yongle Zhang"
+      ],
+      "arxiv_ids": [
+        "2509.26529"
+      ],
+      "date_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2509.26529",
+          "location": "Submission history [v1]",
+          "date": "2025-10-01",
+          "timezone": "Asia/Shanghai",
+          "first_submission_utc": "2025-09-30T17:04:31+00:00",
+          "body_sha256": "a09460fbde754c442d11dbc3da85190179cdfdf938cecdc7d1970b9cdf750055",
+          "meaning": "Verified public arXiv v1 by this timestamp, not directory year, revision date or a claim of globally earliest publication."
+        }
+      ],
+      "reference_section": "new bounded Google page31 exact-detail/Download/identity check",
+      "source_review_scope": "official detail, exact Download identity and first-submission metadata; PDF first page for two NYU downloads; not a whole-paper method review",
+      "automatic_retry": false,
+      "blocking": false,
+      "reopen_when": "New contradictory canonical identity/date evidence, a materially changed manuscript, or explicit user-prioritized historical method review; no automatic retry.",
+      "identity_match": {
+        "kind": "exact_official_download_or_pdf_title_and_author_identity",
+        "arxiv_title": "CSnake: Detecting Self-Sustaining Cascading Failure via Causal Stitching of Fault Propagations"
+      },
+      "primary_source_url": "https://arxiv.org/abs/2509.26529",
+      "arxiv_authors": [
+        "Shangshu Qian",
+        "Lin Tan",
+        "Yongle Zhang"
+      ],
+      "first_submission_utc": "2025-09-30T17:04:31+00:00",
+      "first_submission_shanghai": "2025-10-01T01:04:31+08:00",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/csnake-detecting-self-sustaining-cascading-failure-via-causal-stitching-of-fault-propagations/",
+          "result": "retrieved",
+          "source_capture": "google-last-page/detail-03.html",
+          "body_sha256": "dc2fcddc202adeccbf4f72f4ee4dd5a677097da0c30cb225375be36e423fe5f9",
+          "bytes": 144068
+        },
+        {
+          "url": "https://arxiv.org/abs/2509.26529",
+          "result": "retrieved",
+          "source_capture": "google-last-page/arxiv-2509.26529.html",
+          "body_sha256": "a09460fbde754c442d11dbc3da85190179cdfdf938cecdc7d1970b9cdf750055",
+          "bytes": 43982
+        }
+      ],
+      "source_receipts": [
+        {
+          "url": "https://research.google/pubs/csnake-detecting-self-sustaining-cascading-failure-via-causal-stitching-of-fault-propagations/",
+          "result": "retrieved",
+          "source_capture": "google-last-page/detail-03.html",
+          "body_sha256": "dc2fcddc202adeccbf4f72f4ee4dd5a677097da0c30cb225375be36e423fe5f9",
+          "bytes": 144068
+        },
+        {
+          "url": "https://arxiv.org/abs/2509.26529",
+          "result": "retrieved",
+          "source_capture": "google-last-page/arxiv-2509.26529.html",
+          "body_sha256": "a09460fbde754c442d11dbc3da85190179cdfdf938cecdc7d1970b9cdf750055",
+          "bytes": 43982
+        }
+      ]
+    },
+    {
+      "url": "https://research.google/pubs/the-business-case-for-investing-in-employee-health-to-generate-organisational-success-2/",
+      "title": "The business case for investing in employee health to generate organisational success",
+      "organization": "Google",
+      "review_status": "out_of_scope",
+      "status": "out_of_scope",
+      "reason": "已读取官方详情完整摘要：IOMSC工作组的occupational/employee health商业价值position paper，论述慢病、缺勤、组织ROI及OEH协作，并非项目的搜广推、基础模型、后训练或Agent新算法/公共评测研究。无Download，精确首发日不在页面列出，但本项凭明确题外内容结案；不将页面2026或to-appear当首发证据，也不伪造访问故障。",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "full_article_read": false,
+      "method_review_completed": false,
+      "implementation_status": "not_changed_by_review",
+      "body_sha256": "bf830dafbead00e957b6f062058ffac438f206c2bbe091e80bbfd7dc7c242ded",
+      "authors_on_official_detail": [
+        "Melvin Yifeng"
+      ],
+      "arxiv_ids": [],
+      "date_evidence": [],
+      "reference_section": "new bounded Google page31 exact-detail/Download/identity check",
+      "source_review_scope": "official detail, exact Download identity and first-submission metadata; PDF first page for two NYU downloads; not a whole-paper method review",
+      "automatic_retry": false,
+      "blocking": false,
+      "reopen_when": "New contradictory canonical identity/date evidence, a materially changed manuscript, or explicit user-prioritized historical method review; no automatic retry.",
+      "primary_source_url": "https://research.google/pubs/the-business-case-for-investing-in-employee-health-to-generate-organisational-success-2/",
+      "first_publication_date": "not established; not needed for explicit subject-scope exclusion",
+      "scope_witness": "IOMSC occupational/employee-health strategic position paper; not a research-track algorithm or benchmark",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/the-business-case-for-investing-in-employee-health-to-generate-organisational-success-2/",
+          "result": "retrieved",
+          "source_capture": "google-last-page/detail-04.html",
+          "body_sha256": "bf830dafbead00e957b6f062058ffac438f206c2bbe091e80bbfd7dc7c242ded",
+          "bytes": 142647
+        }
+      ],
+      "source_receipts": [
+        {
+          "url": "https://research.google/pubs/the-business-case-for-investing-in-employee-health-to-generate-organisational-success-2/",
+          "result": "retrieved",
+          "source_capture": "google-last-page/detail-04.html",
+          "body_sha256": "bf830dafbead00e957b6f062058ffac438f206c2bbe091e80bbfd7dc7c242ded",
+          "bytes": 142647
+        }
+      ]
+    },
+    {
+      "url": "https://research.google/pubs/rational-transductors-2/",
+      "title": "Rational Transductors",
+      "organization": "Google",
+      "review_status": "historical",
+      "status": "historical",
+      "reason": "Google Download NYU原稿的题目、Mehryar Mohri和GoogleResearch/NYU机构与arXiv2602.07599一致；已审Oct15账本同一canonical ID/题目有身份日期结案。新查arXiv历史进一步确认v1为2026-02-07T16:01:10Z，v2为10/14而非新首发。继承的是身份日期，不冒充本轮方法/实现复核。",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "full_article_read": false,
+      "method_review_completed": false,
+      "implementation_status": "not_changed_by_review",
+      "body_sha256": "4296ec8f2a8803f9d72f15c124570ce60ca2e6df92e1b7b7f62db76d3adbc061",
+      "authors_on_official_detail": [
+        "Mehryar Mohri"
+      ],
+      "arxiv_ids": [
+        "2602.07599"
+      ],
+      "date_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2602.07599",
+          "location": "Submission history [v1]",
+          "date": "2026-02-08",
+          "timezone": "Asia/Shanghai",
+          "first_submission_utc": "2026-02-07T16:01:10+00:00",
+          "body_sha256": "d77031c0b97a44d090869f155a68bb702966b636b571972f16aa831dc4cf434b",
+          "meaning": "Verified public arXiv v1 by this timestamp, not directory year, revision date or a claim of globally earliest publication."
+        }
+      ],
+      "reference_section": "new bounded Google page31 exact-detail/Download/identity check",
+      "source_review_scope": "official detail, exact Download identity and first-submission metadata; PDF first page for two NYU downloads; not a whole-paper method review",
+      "automatic_retry": false,
+      "blocking": false,
+      "reopen_when": "New contradictory canonical identity/date evidence, a materially changed manuscript, or explicit user-prioritized historical method review; no automatic retry.",
+      "identity_match": {
+        "kind": "exact_official_download_or_pdf_title_and_author_identity",
+        "arxiv_title": "Rational Transductors"
+      },
+      "primary_source_url": "https://arxiv.org/abs/2602.07599",
+      "arxiv_authors": [
+        "Mehryar Mohri"
+      ],
+      "first_submission_utc": "2026-02-07T16:01:10+00:00",
+      "first_submission_shanghai": "2026-02-08T00:01:10+08:00",
+      "pdf_identity_witness": {
+        "page_one_based": 1,
+        "page_text_sha256": "312e2b73461ed141a27272961018d40300b91d6ecd1b8e174c5064997ed8d1ae",
+        "locations": "title, author names and Google Research / NYU affiliation block; visually inspected"
+      },
+      "corroborating_evidence": [
+        {
+          "reference": "docs/research-audits/oct15-review-closure/foundation-model-reviews.json",
+          "reference_sha256": "f1820da514e08b512cf45b1a85756cfb8b60bb1a1a6f707282bc0ab44dc29352",
+          "canonical_id": "2602.07599",
+          "inherited_scope": "historical identity/date only, not method or implementation completion"
+        }
+      ],
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/rational-transductors-2/",
+          "result": "retrieved",
+          "source_capture": "google-last-page/detail-05.html",
+          "body_sha256": "4296ec8f2a8803f9d72f15c124570ce60ca2e6df92e1b7b7f62db76d3adbc061",
+          "bytes": 144152
+        },
+        {
+          "url": "https://arxiv.org/abs/2602.07599",
+          "result": "retrieved",
+          "source_capture": "google-last-page/arxiv-2602.07599.html",
+          "body_sha256": "d77031c0b97a44d090869f155a68bb702966b636b571972f16aa831dc4cf434b",
+          "bytes": 42656
+        },
+        {
+          "url": "https://cs.nyu.edu/~mohri/pub/rbt.pdf",
+          "result": "retrieved",
+          "source_capture": "google-last-page/nyu-rbt.pdf",
+          "body_sha256": "1fe2b66615309a29bf4103fbd5d1f993bdcd86f67ee5e2aba1d7b7311f48f5b9",
+          "bytes": 794108
+        }
+      ],
+      "source_receipts": [
+        {
+          "url": "https://research.google/pubs/rational-transductors-2/",
+          "result": "retrieved",
+          "source_capture": "google-last-page/detail-05.html",
+          "body_sha256": "4296ec8f2a8803f9d72f15c124570ce60ca2e6df92e1b7b7f62db76d3adbc061",
+          "bytes": 144152
+        },
+        {
+          "url": "https://arxiv.org/abs/2602.07599",
+          "result": "retrieved",
+          "source_capture": "google-last-page/arxiv-2602.07599.html",
+          "body_sha256": "d77031c0b97a44d090869f155a68bb702966b636b571972f16aa831dc4cf434b",
+          "bytes": 42656
+        },
+        {
+          "url": "https://cs.nyu.edu/~mohri/pub/rbt.pdf",
+          "result": "retrieved",
+          "source_capture": "google-last-page/nyu-rbt.pdf",
+          "body_sha256": "1fe2b66615309a29bf4103fbd5d1f993bdcd86f67ee5e2aba1d7b7311f48f5b9",
+          "bytes": 794108
+        }
+      ]
+    },
+    {
+      "url": "https://research.google/pubs/borrowed-identities-malleable-distillation-factories-and-a-unified-numerical-search/",
+      "title": " Borrowed Identities: Malleable Distillation Factories and a Unified Numerical Search",
+      "organization": "Google",
+      "review_status": "historical",
+      "status": "historical",
+      "reason": "Google Download直接指向arXiv2606.28518且题目一致；arXiv完整署名为ShraddhaSingh/CraigGidney/CodyJones，Google目录只显示后两位Google作者，不能因此误判另一论文。v1为2026-06-26T18:14:09Z，早于窗口；量子magic-state distillation不是LLM蒸馏，保留真实研究主题，不用2026目录年份冒充新首发。",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "full_article_read": false,
+      "method_review_completed": false,
+      "implementation_status": "not_changed_by_review",
+      "body_sha256": "e26c54e6a847104e3a2d74ad2a7e84b3f6caf29596d139f51f7bd87d2ad98fa7",
+      "authors_on_official_detail": [
+        "Craig Gidney",
+        "Cody Jones"
+      ],
+      "arxiv_ids": [
+        "2606.28518"
+      ],
+      "date_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2606.28518",
+          "location": "Submission history [v1]",
+          "date": "2026-06-27",
+          "timezone": "Asia/Shanghai",
+          "first_submission_utc": "2026-06-26T18:14:09+00:00",
+          "body_sha256": "7abb259302da1cc8a170b8776de58d77883d6162f4d02ab575a7c77d917ca6d3",
+          "meaning": "Verified public arXiv v1 by this timestamp, not directory year, revision date or a claim of globally earliest publication."
+        }
+      ],
+      "reference_section": "new bounded Google page31 exact-detail/Download/identity check",
+      "source_review_scope": "official detail, exact Download identity and first-submission metadata; PDF first page for two NYU downloads; not a whole-paper method review",
+      "automatic_retry": false,
+      "blocking": false,
+      "reopen_when": "New contradictory canonical identity/date evidence, a materially changed manuscript, or explicit user-prioritized historical method review; no automatic retry.",
+      "identity_match": {
+        "kind": "exact_official_download_or_pdf_title_and_author_identity",
+        "arxiv_title": "Borrowed Identities: Malleable Distillation Factories and a Unified Numerical Search"
+      },
+      "primary_source_url": "https://arxiv.org/abs/2606.28518",
+      "arxiv_authors": [
+        "Shraddha Singh",
+        "Craig Gidney",
+        "Cody Jones"
+      ],
+      "first_submission_utc": "2026-06-26T18:14:09+00:00",
+      "first_submission_shanghai": "2026-06-27T02:14:09+08:00",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/borrowed-identities-malleable-distillation-factories-and-a-unified-numerical-search/",
+          "result": "retrieved",
+          "source_capture": "google-last-page/detail-06.html",
+          "body_sha256": "e26c54e6a847104e3a2d74ad2a7e84b3f6caf29596d139f51f7bd87d2ad98fa7",
+          "bytes": 144491
+        },
+        {
+          "url": "https://arxiv.org/abs/2606.28518",
+          "result": "retrieved",
+          "source_capture": "google-last-page/arxiv-2606.28518.html",
+          "body_sha256": "7abb259302da1cc8a170b8776de58d77883d6162f4d02ab575a7c77d917ca6d3",
+          "bytes": 41821
+        }
+      ],
+      "source_receipts": [
+        {
+          "url": "https://research.google/pubs/borrowed-identities-malleable-distillation-factories-and-a-unified-numerical-search/",
+          "result": "retrieved",
+          "source_capture": "google-last-page/detail-06.html",
+          "body_sha256": "e26c54e6a847104e3a2d74ad2a7e84b3f6caf29596d139f51f7bd87d2ad98fa7",
+          "bytes": 144491
+        },
+        {
+          "url": "https://arxiv.org/abs/2606.28518",
+          "result": "retrieved",
+          "source_capture": "google-last-page/arxiv-2606.28518.html",
+          "body_sha256": "7abb259302da1cc8a170b8776de58d77883d6162f4d02ab575a7c77d917ca6d3",
+          "bytes": 41821
+        }
+      ]
+    },
+    {
+      "url": "https://research.google/pubs/agentic-knowledge-graphs-recursive-crawling-and-graph-construction-in-enterprise-documents/",
+      "title": "Agentic Knowledge Graphs: Recursive Crawling and Graph Construction in Enterprise Documents",
+      "organization": "Google",
+      "review_status": "historical",
+      "status": "historical",
+      "reason": "Google详情无Download，但精确检索定位arXiv2604.14220《Knowledge Graph RAG: Agentic Crawling and Graph Construction in Enterprise Documents》：两作者集合KoushikChakraborty/KoyelGuha相同，Google与arXiv完整摘要逐词归一后相同，故不是仅凭标题相似合并。v1为2026-04-14T05:26:50Z；这是已证实4月的同工作别名，未做新方法评测或声称已实现。",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "full_article_read": false,
+      "method_review_completed": false,
+      "implementation_status": "not_changed_by_review",
+      "body_sha256": "9b25adc25209f6310a05c7e6fe09ef5636fa2b05429e9a28a391658db9fffe1b",
+      "authors_on_official_detail": [
+        "Koyel Guha",
+        "Koushik Chakraborty"
+      ],
+      "arxiv_ids": [
+        "2604.14220"
+      ],
+      "date_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2604.14220",
+          "location": "Submission history [v1]",
+          "date": "2026-04-14",
+          "timezone": "Asia/Shanghai",
+          "first_submission_utc": "2026-04-14T05:26:50+00:00",
+          "body_sha256": "eaa38d23b9e08abd68722558313fde0ea935c85ef1c6ea5a5657df47d4f6ceff",
+          "meaning": "Verified public arXiv v1 by this timestamp, not directory year, revision date or a claim of globally earliest publication."
+        }
+      ],
+      "reference_section": "new bounded Google page31 exact-detail/Download/identity check",
+      "source_review_scope": "official detail, exact Download identity and first-submission metadata; PDF first page for two NYU downloads; not a whole-paper method review",
+      "automatic_retry": false,
+      "blocking": false,
+      "reopen_when": "New contradictory canonical identity/date evidence, a materially changed manuscript, or explicit user-prioritized historical method review; no automatic retry.",
+      "identity_match": {
+        "kind": "same_author_set_and_exact_normalized_full_abstract",
+        "official_title": "Agentic Knowledge Graphs: Recursive Crawling and Graph Construction in Enterprise Documents",
+        "arxiv_title": "Knowledge Graph RAG: Agentic Crawling and Graph Construction in Enterprise Documents",
+        "abstract_normalized_sha256": "151aa6dbc3ccfbf26172f79ebdac7147684b6944e4ecd38115234cac545b9d21"
+      },
+      "primary_source_url": "https://arxiv.org/abs/2604.14220",
+      "arxiv_authors": [
+        "Koushik Chakraborty",
+        "Koyel Guha"
+      ],
+      "first_submission_utc": "2026-04-14T05:26:50+00:00",
+      "first_submission_shanghai": "2026-04-14T13:26:50+08:00",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/agentic-knowledge-graphs-recursive-crawling-and-graph-construction-in-enterprise-documents/",
+          "result": "retrieved",
+          "source_capture": "google-last-page/detail-07.html",
+          "body_sha256": "9b25adc25209f6310a05c7e6fe09ef5636fa2b05429e9a28a391658db9fffe1b",
+          "bytes": 143597
+        },
+        {
+          "url": "https://arxiv.org/abs/2604.14220",
+          "result": "retrieved",
+          "source_capture": "google-last-page/arxiv-2604.14220.html",
+          "body_sha256": "eaa38d23b9e08abd68722558313fde0ea935c85ef1c6ea5a5657df47d4f6ceff",
+          "bytes": 40298
+        }
+      ],
+      "source_receipts": [
+        {
+          "url": "https://research.google/pubs/agentic-knowledge-graphs-recursive-crawling-and-graph-construction-in-enterprise-documents/",
+          "result": "retrieved",
+          "source_capture": "google-last-page/detail-07.html",
+          "body_sha256": "9b25adc25209f6310a05c7e6fe09ef5636fa2b05429e9a28a391658db9fffe1b",
+          "bytes": 143597
+        },
+        {
+          "url": "https://arxiv.org/abs/2604.14220",
+          "result": "retrieved",
+          "source_capture": "google-last-page/arxiv-2604.14220.html",
+          "body_sha256": "eaa38d23b9e08abd68722558313fde0ea935c85ef1c6ea5a5657df47d4f6ceff",
+          "bytes": 40298
+        }
+      ]
+    },
+    {
+      "url": "https://research.google/pubs/2d-gum-net-unsupervised-dense-elastic-image-registration-via-symmetric-correlation-and-spectral-pooling/",
+      "title": "2D Gum-Net: Unsupervised Dense Elastic Image Registration via Symmetric Correlation and Spectral Pooling",
+      "organization": "Google",
+      "review_status": "after_window",
+      "status": "after_window",
+      "reason": "Google Download直接对应arXiv2611.12805，题目匹配、作者名在Google使用缩写。v1为2026-11-09T18:11:45Z，换算Asia/Shanghai是11/10 02:11:45，严格晚于本次11/9本地日界线；不能按UTC日期11/9误算漏审。保留给后续窗口，不是题外拒绝或高成本结案。",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "full_article_read": false,
+      "method_review_completed": false,
+      "implementation_status": "not_changed_by_review",
+      "body_sha256": "e1999cd23283fe4cf241684e1eafcde2f09c9309cfa7c684fc169d793941746a",
+      "authors_on_official_detail": [
+        "Aarya Bhave",
+        "Anushka Bhave"
+      ],
+      "arxiv_ids": [
+        "2611.12805"
+      ],
+      "date_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2611.12805",
+          "location": "Submission history [v1]",
+          "date": "2026-11-10",
+          "timezone": "Asia/Shanghai",
+          "first_submission_utc": "2026-11-09T18:11:45+00:00",
+          "body_sha256": "c7d8bd7e5c2570ac4cbe9bcb19a7b2a917a7da479d7a68531f0038f82ea022a5",
+          "meaning": "Verified public arXiv v1 by this timestamp, not directory year, revision date or a claim of globally earliest publication."
+        }
+      ],
+      "reference_section": "new bounded Google page31 exact-detail/Download/identity check",
+      "source_review_scope": "official detail, exact Download identity and first-submission metadata; PDF first page for two NYU downloads; not a whole-paper method review",
+      "automatic_retry": false,
+      "blocking": false,
+      "reopen_when": "New contradictory canonical identity/date evidence, a materially changed manuscript, or explicit user-prioritized historical method review; no automatic retry.",
+      "identity_match": {
+        "kind": "exact_official_download_or_pdf_title_and_author_identity",
+        "arxiv_title": "2D Gum-Net: Unsupervised Dense Elastic Image Registration via Symmetric Correlation and Spectral Pooling"
+      },
+      "primary_source_url": "https://arxiv.org/abs/2611.12805",
+      "arxiv_authors": [
+        "Aarya Bhave",
+        "Anushka Ajay Bhave"
+      ],
+      "first_submission_utc": "2026-11-09T18:11:45+00:00",
+      "first_submission_shanghai": "2026-11-10T02:11:45+08:00",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/2d-gum-net-unsupervised-dense-elastic-image-registration-via-symmetric-correlation-and-spectral-pooling/",
+          "result": "retrieved",
+          "source_capture": "google-last-page/detail-08.html",
+          "body_sha256": "e1999cd23283fe4cf241684e1eafcde2f09c9309cfa7c684fc169d793941746a",
+          "bytes": 143615
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.12805",
+          "result": "retrieved",
+          "source_capture": "google-last-page/arxiv-2611.12805.html",
+          "body_sha256": "c7d8bd7e5c2570ac4cbe9bcb19a7b2a917a7da479d7a68531f0038f82ea022a5",
+          "bytes": 43330
+        }
+      ],
+      "source_receipts": [
+        {
+          "url": "https://research.google/pubs/2d-gum-net-unsupervised-dense-elastic-image-registration-via-symmetric-correlation-and-spectral-pooling/",
+          "result": "retrieved",
+          "source_capture": "google-last-page/detail-08.html",
+          "body_sha256": "e1999cd23283fe4cf241684e1eafcde2f09c9309cfa7c684fc169d793941746a",
+          "bytes": 143615
+        },
+        {
+          "url": "https://arxiv.org/abs/2611.12805",
+          "result": "retrieved",
+          "source_capture": "google-last-page/arxiv-2611.12805.html",
+          "body_sha256": "c7d8bd7e5c2570ac4cbe9bcb19a7b2a917a7da479d7a68531f0038f82ea022a5",
+          "bytes": 43330
+        }
+      ]
+    },
+    {
+      "url": "https://research.google/pubs/rsrcc-a-remote-sensing-regional-change-comprehension-benchmark-constructed-via-retrieval-augmented-best-of-n-ranking/",
+      "title": "RSRCC: A Remote Sensing Regional Change Comprehension Benchmark Constructed via Retrieval-Augmented Best-of-N Ranking",
+      "organization": "Google",
+      "review_status": "historical",
+      "status": "historical",
+      "reason": "Google Download直接给arXiv2604.20623，题目与五作者一致；v1为2026-04-22T14:38:41Z，v2为6/14。NeurIPS2026目录出现或出版年份不等于本窗新首发；只结案本窗口身份日期，不否定公共多模态基准的研究价值或声称其实现完成。",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "fulltext_review_completed": false,
+      "full_article_read": false,
+      "method_review_completed": false,
+      "implementation_status": "not_changed_by_review",
+      "body_sha256": "d9dbf1a1db6dbd909454a3288b1d04654dcabfcee5423f28e80c68d04cae2d87",
+      "authors_on_official_detail": [
+        "Roie Kazoom",
+        "Yotam Gigi",
+        "George Leifman",
+        "Tomer Shekel",
+        "Genady Beryozkin"
+      ],
+      "arxiv_ids": [
+        "2604.20623"
+      ],
+      "date_evidence": [
+        {
+          "url": "https://arxiv.org/abs/2604.20623",
+          "location": "Submission history [v1]",
+          "date": "2026-04-22",
+          "timezone": "Asia/Shanghai",
+          "first_submission_utc": "2026-04-22T14:38:41+00:00",
+          "body_sha256": "0b9f692f802fe2aebbbd44ff2e28880be6d9de70cd497486afb6fa66201c6c02",
+          "meaning": "Verified public arXiv v1 by this timestamp, not directory year, revision date or a claim of globally earliest publication."
+        }
+      ],
+      "reference_section": "new bounded Google page31 exact-detail/Download/identity check",
+      "source_review_scope": "official detail, exact Download identity and first-submission metadata; PDF first page for two NYU downloads; not a whole-paper method review",
+      "automatic_retry": false,
+      "blocking": false,
+      "reopen_when": "New contradictory canonical identity/date evidence, a materially changed manuscript, or explicit user-prioritized historical method review; no automatic retry.",
+      "identity_match": {
+        "kind": "exact_official_download_or_pdf_title_and_author_identity",
+        "arxiv_title": "RSRCC: A Remote Sensing Regional Change Comprehension Benchmark Constructed via Retrieval-Augmented Best-of-N Ranking"
+      },
+      "primary_source_url": "https://arxiv.org/abs/2604.20623",
+      "arxiv_authors": [
+        "Roie Kazoom",
+        "Yotam Gigi",
+        "George Leifman",
+        "Tomer Shekel",
+        "Genady Beryozkin"
+      ],
+      "first_submission_utc": "2026-04-22T14:38:41+00:00",
+      "first_submission_shanghai": "2026-04-22T22:38:41+08:00",
+      "attempts": [
+        {
+          "url": "https://research.google/pubs/rsrcc-a-remote-sensing-regional-change-comprehension-benchmark-constructed-via-retrieval-augmented-best-of-n-ranking/",
+          "result": "retrieved",
+          "source_capture": "google-last-page/detail-09.html",
+          "body_sha256": "d9dbf1a1db6dbd909454a3288b1d04654dcabfcee5423f28e80c68d04cae2d87",
+          "bytes": 144791
+        },
+        {
+          "url": "https://arxiv.org/abs/2604.20623",
+          "result": "retrieved",
+          "source_capture": "google-last-page/arxiv-2604.20623.html",
+          "body_sha256": "0b9f692f802fe2aebbbd44ff2e28880be6d9de70cd497486afb6fa66201c6c02",
+          "bytes": 43507
+        }
+      ],
+      "source_receipts": [
+        {
+          "url": "https://research.google/pubs/rsrcc-a-remote-sensing-regional-change-comprehension-benchmark-constructed-via-retrieval-augmented-best-of-n-ranking/",
+          "result": "retrieved",
+          "source_capture": "google-last-page/detail-09.html",
+          "body_sha256": "d9dbf1a1db6dbd909454a3288b1d04654dcabfcee5423f28e80c68d04cae2d87",
+          "bytes": 144791
+        },
+        {
+          "url": "https://arxiv.org/abs/2604.20623",
+          "result": "retrieved",
+          "source_capture": "google-last-page/arxiv-2604.20623.html",
+          "body_sha256": "0b9f692f802fe2aebbbd44ff2e28880be6d9de70cd497486afb6fa66201c6c02",
+          "bytes": 43507
+        }
+      ]
+    }
+  ]
+}

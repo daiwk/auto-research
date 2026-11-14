@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/foundation-models/compression-and-cache/comparison/foundation-models:e-means": {
+      "source_sha256": "00b8f761f1da495bdb6b497ad6d945aba763fba0c0568c24aa4d80b5c20e95e9",
+      "reviewed": true,
+      "fields": {
+        "position": "Trains centroids with mini-batch EMAs of counts and sums. Every five batches it splits active donors to revive weak clusters, then finishes by averaging points under recorded final-epoch assignments.",
+        "tradeoff": "It changes clustering optimization, not GINGER's candidate read bandwidth or PiPNN II's construction-time scoring. CPU fixed-label MSE does not establish IVF recall or GPU throughput."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/update/2026-11-09/6": {
+      "source_sha256": "7ebbb79978716e3a439324cc6dbf99697d5b5cc71926e0e7fa3119b6378b18ab",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added e-means to distinguish centroid training, graph construction, and query read bandwidth. Closing means can reduce the training objective under fixed assignments without guaranteeing lower held-out error or better retrieval performance."
+      }
+    }
+  }
+}

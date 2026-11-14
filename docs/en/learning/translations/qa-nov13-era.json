@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:era-flat-puct/evaluated-programs-not-unexecuted-thoughts": {
+      "source_sha256": "c3e2723609265ccbe4bdaafe7a1b3c5009e0a375508d453cfbd4536720c5e144",
+      "reviewed": true,
+      "fields": {
+        "question": "What is a node in ERA's search tree, and why is a language model's untested idea not already a high-quality node?",
+        "answer": "A node is a generated and executed program candidate with an external task score, not merely an unverified verbal idea. ERA uses measured execution quality to guide further mutation. The local Candidate stores only an identity, an external evidence reference, and a validation score; it neither executes code nor verifies the reference. Valid types do not establish a valid experiment.",
+        "example": "Teaching example: a model claims that a new normalization reduces error. That is a research idea. It becomes a scored candidate only after isolated code execution and evaluation on a fixed validation split. Manually entering 0.95 does not replace that process."
+      }
+    },
+    "qa/agent-research:era-flat-puct/flat-prior-rank-and-ancestor-visits": {
+      "source_sha256": "156a6313a4f862b0b1f24cba7145afe38175190b4294c6ee2e059d7d17ea619c",
+      "reviewed": true,
+      "fields": {
+        "question": "How does an ERA v1 expansion change visit counts, and why is total visitation not the number of nodes?",
+        "answer": "Root and new-child visits start at one. Adding a child increments each of its ancestors, without replacing node scores by descendant rollout means. PUCT uses the sum of visits over all nodes, the whole-tree uniform prior 1/n, and normalized ascending task-score ranks. The paper specifies rank score one for a singleton tree.",
+        "example": "Teaching example: expand root into A, then A into B. Visits are root=3, A=2, and B=1, so N_total=6 rather than three. Each node retains its own external task score; B's high score is not written back as root's mean value."
+      }
+    },
+    "qa/agent-research:era-flat-puct/flat-puct-versus-lats-rollout-search": {
+      "source_sha256": "99f792e737e2090b9e1dc61c974615bb66ca233b37cb059ca43f3a9248153ba7",
+      "reviewed": true,
+      "fields": {
+        "question": "ERA flat PUCT and LATS UCT both include exploration. Why are their node counts not directly comparable as the same search procedure?",
+        "answer": "ERA lets every executed program in the tree compete directly for expansion, using relative task-score rank as its quality term. LATS uses MCTS to organize actions, full-trajectory rollouts, environment feedback, value backup, and failure reflection. Its Q and visitation statistics have different meanings. Search units, feedback costs, and value sources differ. The repository's LATS also uses complete-plan leaves and does not run the original LM value model or WebShop; local mini-task metrics cannot determine scientific-capability superiority.",
+        "example": "Teaching example: ERA can directly mutate a high-scoring deep program again, whereas a LATS rollout may execute several tool actions before receiving reward. Counting either as one node expansion does not equalize model calls, execution time, or available evidence."
+      }
+    },
+    "qa/agent-research:era-flat-puct/final-task-score-not-exploration-bonus": {
+      "source_sha256": "68856d01a6b33692dad639158f388352b9da5deed155e64d96fc09ac2cb53dd9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must ERA's final result not be the node with the largest current PUCT score, and how should error metrics enter the interface?",
+        "answer": "The exploration bonus determines what deserves another evaluation; it is not achieved task quality. Version 1 selects the final best candidate by raw TaskScore. The interface requires maximization-oriented validation scores, so callers must explicitly orient lower-is-better metrics, for example by passing negative MSE. Split isolation, actual execution, and evidence integrity remain external responsibilities; three-seed arithmetic diagnostics do not establish them.",
+        "example": "Teaching example: A scores 0.90 on validation and B scores 0.89. Fewer visits can give B a larger exploration score, making it the next expansion, while A remains the current best. For MSE values 0.10 and 0.11, pass -0.10 and -0.11 rather than accidentally ranking the larger error as better."
+      }
+    }
+  }
+}

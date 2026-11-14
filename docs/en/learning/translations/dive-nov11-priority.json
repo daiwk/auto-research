@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/agent-research/evaluation-and-reliability/comparison/agent-research:reprobridge": {
+      "source_sha256": "ce20e08456902cc287e053683f1e88619d9c17106942ce5f97cdfb7c7d2d188c",
+      "reviewed": true,
+      "fields": {
+        "position": "Preserve code, environment, launchers and a guide; separate five-reference two-sided numerical compatibility from independent execution-integrity auditing.",
+        "tradeoff": "Actor tasks exclude private references and success thresholds. The local component provides mathematics and file-evidence contracts, not an LLM Reproducer or semantic Auditor; full multi-model, eight-H100 experiments are cost-deferred."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/analysis/5": {
+      "source_sha256": "285cfef85f5c391f583e4884edff59194dbc1066e4dd82a0584552b32edd999b",
+      "reviewed": true,
+      "fields": {
+        "title": "Numerical agreement, execution integrity, and goal preservation are different audits",
+        "body": "AgentHeal asks whether recovery retains legitimate same-version sources and policy compliance. ReproBridge asks whether a compatible score came from the intended experiment and reporting statistic. Neither answer similarity nor numerical agreement replaces the respective independent audit. Evaluator annotations and references remain separate from actors, and mechanical truth tables are not agent success rates."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/question/cross-reproduction-compatibility-versus-goal-preservation": {
+      "source_sha256": "68bec6782fa9aa2ed4872058032d63718c35dae0f22759560f6edcf689b0cfd2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can neither AgentHeal success nor ReproBridge compatibility be judged by an attractive final output alone?",
+        "answer": "AgentHeal additionally requires legitimate version-aware sources and compliant actions. ReproBridge additionally requires the intended measurement, reporting unit, and refutable execution audit. Attractive outputs can hide version substitution or copied scores; evaluator answers and references cannot be handed to actors.",
+        "example": "Teaching example: a correct sentence from an old paper version does not recover the requested new version. Copying a published MSE into a fresh JSON does not train a model."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/update/2026-11-11/4": {
+      "source_sha256": "985b5df6a0cde95b324af40b0bc584e12f280ca74737e043ed3bddd39da65649",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add statistical compatibility and evidence integrity for independent research reproduction: a matching number is not execution proof; existing source/policy audit boundaries remain unchanged."
+      }
+    },
+    "dive/agent-research/memory-and-skills/comparison/agent-research:lisa": {
+      "source_sha256": "3dd50c097461d1374498566b9fcdd2769f08e195b4adf3edc12edaeb6dc04152",
+      "reviewed": true,
+      "fields": {
+        "position": "Gate broad policies with a Beta posterior lower bound while preserving domain-local mixed-label cues; execute average-linkage refresh and carry runtime counts only for surviving verbatim representatives.",
+        "tradeoff": "Confidence measures feedback-conditional reuse reliability, not causal benefit or token utility. Draft policies and embeddings remain external; no LLM induction or final guardrail is run."
+      }
+    },
+    "dive/agent-research/memory-and-skills/analysis/6": {
+      "source_sha256": "cea5f0f0011bfc65b2011f59dbb39f0effd531c2518c52a9acce0f43ad3beace",
+      "reviewed": true,
+      "fields": {
+        "title": "Worth allocating memory and supported by enough evidence are separate axes",
+        "body": "MemPrice jointly assigns fidelity levels under token limits using utility and long-run pressure. LiSA asks whether retrieved broad rules have enough evidence, while retaining narrow conflict cues. Cheap memory need not be reliable; reliable memory need not be budget-optimal. Both rely on external semantic inputs, so exact synthetic-input computations are not task-capability gains."
+      }
+    },
+    "dive/agent-research/memory-and-skills/question/cross-memory-confidence-versus-capacity": {
+      "source_sha256": "f3ba7da064be7eea811235542e0cbbfd2fba22e039fd8a81955a7b6cbca63721",
+      "reviewed": true,
+      "fields": {
+        "question": "A short rule fits MemPrice's budget after one supporting observation. Why might LiSA still withhold it?",
+        "answer": "Capacity allocation and evidential reliability are distinct. A candidate's cost and utility can justify its representation without proving correctness. Beta(2,1)'s 5% quantile is about 0.22361, below 0.55. A narrow observed conflict cue instead follows the local channel's different rule.",
+        "example": "Teaching example: retain a ten-token rule in storage, but delay using it as general safety advice after only one success; separately surface public/private contextual boundary cues."
+      }
+    },
+    "dive/agent-research/memory-and-skills/update/2026-11-11/5": {
+      "source_sha256": "739644303459f6bbb503029836d9b00eeffc7200a7b72a252f9dc1009b8966c4",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add evidence-volume-aware broad-policy gating and ungated local conflict cues; distinguish capacity/utility from feedback reliability. Full API evaluation remains cost-deferred."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/comparison/agent-research:alphaproof-code": {
+      "source_sha256": "4bdaa60017e29e1b9f144dce5d246bd345a9ac518bc66ab86781469e87640a41",
+      "reviewed": true,
+      "fields": {
+        "position": "Humans approve specifications; Lean, a held-out specification and comparator check theorem statements, transitive definitions and standard axioms. Prover agents cannot declare top-level completion.",
+        "tradeoff": "Kernel results depend on trusted specifications, semantics and cryptographic assumptions, not all real intentions. Millions of proof lines and hours of toolchain builds are cost-deferred; this is a reference-only entry."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/analysis/6": {
+      "source_sha256": "4b445bb04d0ff5b7009212c91e1aca9c08970e34e8a3ae9b26c7ed7c4828ab6c",
+      "reviewed": true,
+      "fields": {
+        "title": "Machine-checkable evidence still requires fixing what must be established",
+        "body": "AlphaProof Code isolates approved specifications and dependencies so changing secure to constant True cannot silently replace the goal. ReproBridge pins experimental procedures and reporting statistics before outcomes, rather than changing measurements after seeing scores. Both retain human design responsibility; logical proof and experimental execution integrity cannot substitute for each other."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/question/cross-proof-checking-versus-execution-audit": {
+      "source_sha256": "79eb52e1afba6da2f44ae942ddd10bc458cfa5238687f5de9c1953eedb8ab6fe",
+      "reviewed": true,
+      "fields": {
+        "question": "If Lean checks proofs, why does AlphaProof need human specification review, and why cannot ReproBridge check scores alone?",
+        "answer": "A kernel proves only its supplied proposition; a weakened specification may still have a valid proof. Numerical compatibility only locates a number inside an interval; copying or wrong statistics can match too. One pins specifications and dependencies, the other procedures and evidence, rather than judging attractive outputs alone.",
+        "example": "Teaching example: defining secure as True before proving it, and copying an old result into a fresh JSON, can each pass a narrow surface check without fulfilling the original requirement."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/update/2026-11-11/5": {
+      "source_sha256": "48f3a9b0588d4bd44c3b6215863ffe24282d371d500c81c890b6febb82a1bab6",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add specification fidelity and transitive-dependency gating. This high-cost reference has no local proving capability; regexes and toy theorems do not replace upstream verification."
+      }
+    }
+  }
+}

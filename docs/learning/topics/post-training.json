@@ -66,6 +66,7 @@
       ],
       "reading_order": "先读GRPO，区分采样、优势、ratio和参考KL；再读DAPO，观察零方差组与训练稳定性的处理；最后读TIS，把实际采样引擎和训练引擎的概率口径纳入检查。",
       "papers": [
+        "post-training:rcea",
         "post-training:rlid",
         "post-training:moer",
         "post-training:cord",
@@ -120,7 +121,9 @@
         "post-training:rloo",
         "post-training:grpo",
         "post-training:remax",
-        "post-training:ppo-rlhf"
+        "post-training:ppo-rlhf",
+        "post-training:excursion-td",
+        "post-training:apmd-reference-reset"
       ]
     },
     {
@@ -141,6 +144,7 @@
       ],
       "reading_order": "先读Process Supervision，区分逐步标签与终局标签；再读Math-Shepherd，看如何用续写构造步骤信号；最后读TACO，理解为什么正确回答内部也可能存在不该被强化的token。",
       "papers": [
+        "post-training:emoreward",
         "post-training:dars-density",
         "post-training:mart-grpo",
         "post-training:mge-po",
@@ -178,7 +182,10 @@
         "post-training:intuitor",
         "post-training:math-shepherd",
         "post-training:process-supervision",
-        "post-training:concur"
+        "post-training:concur",
+        "post-training:maxim",
+        "post-training:mcpo",
+        "post-training:rlmf"
       ]
     },
     {
@@ -241,7 +248,9 @@
         "post-training:opd-lm",
         "post-training:gkd",
         "post-training:minillm",
-        "post-training:mpopd"
+        "post-training:mpopd",
+        "post-training:cord-rollout",
+        "post-training:drd-mopd"
       ]
     },
     {
@@ -310,7 +319,12 @@
         "post-training:mopd",
         "post-training:polaris-hri",
         "post-training:opcd",
-        "post-training:opsd"
+        "post-training:opsd",
+        "post-training:ragcompass",
+        "post-training:bopd",
+        "post-training:lcs-reference-opd",
+        "post-training:social-meta-learning",
+        "post-training:behavioral-canaries"
       ]
     },
     {
@@ -368,7 +382,8 @@
         "post-training:chord",
         "post-training:spiral",
         "post-training:absolute-zero",
-        "post-training:raft"
+        "post-training:raft",
+        "post-training:maple-icl"
       ]
     }
   ]

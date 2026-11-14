@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:ginger/one-prefix-two-reads": {
+      "source_sha256": "76f2b03dcbdbf0efc99ca8b888590dfb74f2f7ec41d1c5de5e4c6ae1d0eb7134",
+      "reviewed": true,
+      "fields": {
+        "question": "If NTQ stores a refined code, why does navigation not read it too?",
+        "answer": "The 4-bit navigation code is the coarse prefix of the full code, but coarse and refinement bits are stored separately. Navigation reads the sign, coarse interval, and coarse scale. Only shortlisted vectors require refinement bits and scale. This avoids two independent representations and avoids paying refinement bandwidth during navigation.",
+        "example": "In the local 31-dimensional example, coarse codes occupy 16 bytes and the 4+2-bit refinement adds eight, excluding scales. Candidates outside the shortlist do not require those extra eight bytes."
+      }
+    },
+    "qa/foundation-models:ginger/conditional-lloyd-max": {
+      "source_sha256": "c149e6b661e46a504a95d5a9b4f4887a95cf82a4c3d4254f51702ba9ae9e0228",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not fit a global 6-bit codebook and use its first four bits for navigation?",
+        "answer": "An unconstrained 6-bit Lloyd–Max fit need not preserve the 4-bit breakpoints. NTQ fixes every coarse boundary, then fits the centroids separately under the conditional Gaussian in each interval. Encoding first chooses u, then chooses v only in codebook u. Different refinement widths can therefore reuse the same coarse code.",
+        "example": "Teaching example: If a coarse interval is [0.4, 0.8), its first and last fine boundaries remain 0.4 and 0.8. Even a closer centroid from a neighboring interval cannot change the chosen coarse code. These are illustrative thresholds, not the paper's."
+      }
+    },
+    "qa/foundation-models:ginger/ginger-versus-pipnn-ii": {
+      "source_sha256": "bc87cd8fde2f87f9b9d92dc4a155eadd4937906ac6b946e095bb6aab4c49f87f",
+      "reviewed": true,
+      "fields": {
+        "question": "Both GINGER and PiPNN II use low precision. Do they address the same bottleneck?",
+        "answer": "Not quite. PiPNN II fuses scoring and top-K during proximity graph construction to avoid materializing the candidate score matrix. GINGER's NTQ reduces vector read bandwidth during search on an existing graph, fetching refinement only for shortlisted vectors. They can coexist, but their local validation metrics differ.",
+        "example": "On the construction side, verify that quantized dot products are corrected and scaled per row before heap insertion. On the search side, verify the coarse bytes do not change with refinement width, then separately measure search QPS at matched recall."
+      }
+    },
+    "qa/foundation-models:ginger/local-ntq-evidence-boundary": {
+      "source_sha256": "72a3d89558fdd79505269b1a27aefcfc5f1a1449a9da75b59995929c039479b8",
+      "reviewed": true,
+      "fields": {
+        "question": "What should a local NTQ check inspect, and what conclusions would be unsupported?",
+        "answer": "Encode nonzero vectors in the same rotated space. Check that the coarse stream is independent, fine centroids remain inside their intervals, and both scales are applied correctly. Cross-check the inner product by hand. CPU synthetic MSE verifies the quantization mechanism only; it establishes neither billion-scale index recall, SIMD performance, nor online lift.",
+        "example": "Across seeds 42–44, empirical 4+2-bit MSE is lower than 4-bit MSE. But the local reference has no graph traversal, query logs, or hardware timings, so the difference is not a QPS gain."
+      }
+    }
+  }
+}

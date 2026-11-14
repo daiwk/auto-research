@@ -5,7 +5,7 @@
     "alignment-interfaces": {
       "title": "多模态对齐到底对齐什么：向量、视觉接口还是证据依赖",
       "thesis": "CLIP与EmbeddingGemma 2产出可比较向量，BLIP-2与LLaVA连接视觉到条件生成，CV-OPD训练证据依赖，UMRM给回答评分。它们的输出合同和监督对象不同，不是同一条从小到大的能力排行榜。",
-      "updated": "2026-10-29",
+      "updated": "2026-11-13",
       "reviewed_papers": [
         "foundation-models:blip2",
         "foundation-models:clip",
@@ -13,6 +13,7 @@
         "multimodal-models:cv-opd",
         "multimodal-models:embedding-gemma2",
         "multimodal-models:flexglue",
+        "multimodal-models:gslm2",
         "foundation-models:gas",
         "foundation-models:lamp",
         "foundation-models:llava",
@@ -26,7 +27,9 @@
         "foundation-models:siglip2",
         "foundation-models:smolvlm",
         "multimodal-models:umrm",
-        "foundation-models:wemm-embedding"
+        "foundation-models:wemm-embedding",
+        "multimodal-models:avmeme-exam",
+        "multimodal-models:mmeb-v3"
       ],
       "axes": [
         "输出对象：检索向量、视觉token、生成回答、reward",
@@ -96,6 +99,38 @@
             "数据协议与verifier边界",
             "本地结果与验证状态"
           ]
+        },
+        {
+          "paper": "multimodal-models:gslm2",
+          "position": "SpidR 2.0 从多个编码层取得离散语音流；联合保留变化帧，时序主干读取对齐元组，判别采用等权逐流的转移对数概率。",
+          "tradeoff": "多流比各自去重保留更多时间位置；转移评分不代表生成头、跨模态检索或翻译质量。本地只核验帧对齐及数值聚合，没有编码器、语音、模型或基准运行。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "paper": "multimodal-models:avmeme-exam",
+          "position": "用多文化音视频选择题区分声音情境知识与文本、视频捷径；本地只实现过滤、重排、私有答案映射和分组计分。",
+          "tradeoff": "文化多选正确率与MMEB-V3嵌入检索不是同一种能力；无媒体和模型时，协议测试不能给出文化理解结论。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界与完整实验"
+          ]
+        },
+        {
+          "paper": "multimodal-models:mmeb-v3",
+          "position": "以190任务评价统一嵌入，并用独立OmniSET的12方向混合池揭示同语义表示的模态偏向。",
+          "tradeoff": "相比MVEB的视频与音频预算控制，MMEB-V3覆盖更广的六类任务。Hit@1/NDCG、完整候选池和任务等权必须分别守住，纯排序核不是完整benchmark。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界与完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -124,6 +159,31 @@
           "papers": [
             "foundation-models:clip",
             "multimodal-models:embedding-gemma2"
+          ]
+        },
+        {
+          "title": "语音向量、语音单元与翻译候选不是同一个输出接口",
+          "body": "EmbeddingGemma 2 将不同模态映到可比较的固定维向量，MRL 截短的是向量宽度；GSLM2 从同一语音中提取多个时间对齐的离散流，联合去重改变的是序列长度，单流转移头在共享历史条件下给口语候选打分。NaijaS2ST 的目标则是跨语言语音生成，需要翻译参考与 ASR-COMET 协议。向量近邻、同语种成对判别和跨语言生成不能用一个准确率替代；当前 GSLM2 本地切片只验证给定单元和概率的变换，不宣称真实语音能力。",
+          "papers": [
+            "multimodal-models:embedding-gemma2",
+            "multimodal-models:gslm2",
+            "multimodal-models:naijas2st"
+          ]
+        },
+        {
+          "title": "接口对齐不等于文化理解：先辨认被测输出与捷径",
+          "body": "AVMeme Exam要求模型把声音置于多语言、多文化情境中选择答案，并以text_cheat/visual_cheat处理非目标捷径。MMEB-V3则从外部嵌入排序评价语义相关性、输出模态及任务覆盖。两者都需要干净的评测边界，但分母、候选空间和输出不同。匿名上传字段与私有答案映射只约束协议；若问题文字、文件权限或模型预训练已泄漏，L0字段测试不能排除污染，也不能证明文化判断可靠。",
+          "papers": [
+            "multimodal-models:avmeme-exam",
+            "multimodal-models:mmeb-v3"
+          ]
+        },
+        {
+          "title": "语义对齐与模态遵循是两个验收轴",
+          "body": "MMEB-V3的OmniSET把相同语义的T/I/V/A留在共享候选池，连查询本身也作为干扰项，要求语义和目标模态同时命中。若先按目标模态过滤，会删掉本来要暴露的模态坍缩。MVEB则强调视频任务、八方向检索及模型适配的帧/音频预算；协议不同，不能互换总分。两者完整矩阵都高成本，本轮MMEB-V3仅核计分，而MVEB保留资料收录，未把泛化聚合器包装成两套完整接口。",
+          "papers": [
+            "multimodal-models:mmeb-v3",
+            "multimodal-models:mveb"
           ]
         }
       ],
@@ -167,6 +227,37 @@
           "papers": [
             "foundation-models:clip",
             "multimodal-models:embedding-gemma2"
+          ]
+        },
+        {
+          "id": "nov07-speech-stream-versus-embedding",
+          "question": "如果想判断一段口语续写是否比另一段合理，能否用统一音频向量相似度代替 GSLM2 的转移分数？",
+          "answer": "不能视为等价。EmbeddingGemma 2 的固定向量适合比较对象相似性，GSLM2 的分数由顺序条件概率给出，区分本流首项和变化位置并等权聚合。即便两个续写与原段主题相似，它们的语法或音位转移也可能不同。翻译还需要 NaijaS2ST 那样的独立跨语言协议。",
+          "example": "教学例：两个结尾都提到杯子，向量可能接近；只有一个的动词搭配符合前文。需要分别比较序列分数与检索相似度，不把后者填作 sBLIMP 正确率。",
+          "papers": [
+            "multimodal-models:embedding-gemma2",
+            "multimodal-models:gslm2",
+            "multimodal-models:naijas2st"
+          ]
+        },
+        {
+          "id": "cross-cultural-answer-versus-retrieval-interface",
+          "question": "AVMeme的主集过滤和MMEB-V3的混合池都通过检查，能否推出统一模型的多模态能力提高？",
+          "answer": "不能。检查通过只说明样本和候选协议满足声明；还需真实模型、固定合法数据、覆盖完整的任务指标与独立比较。文化多选与嵌入检索应分别报告，不能用协议成功或固定夹具的1作能力提升。",
+          "example": "教学例：固定返回A的回调能通过不泄漏字段检查，但并不听音频；手写排序也可命中正确模态，却不是编码器预测。",
+          "papers": [
+            "multimodal-models:avmeme-exam",
+            "multimodal-models:mmeb-v3"
+          ]
+        },
+        {
+          "id": "cross-omniset-prefilter-hides-failure",
+          "question": "为什么给OmniSET先筛音频候选，即使提高Hit@1也不是公平优化？",
+          "answer": "它改变了被测问题，提前替模型满足输出模态要求，隐藏模型偏向查询自身或其他模态的失败。12方向必须使用同一混合池；MVEB的输入预算控制也不能代替这个候选协议。",
+          "example": "教学例：图像到音频时模型总把原图排第一，预筛音频后看似成功，但原始指令遵循失败已被删掉。",
+          "papers": [
+            "multimodal-models:mmeb-v3",
+            "multimodal-models:mveb"
           ]
         }
       ],
@@ -228,13 +319,47 @@
           "source_revisions": {
             "multimodal-models:embedding-gemma2": "eff70bf2012d4fee3d5343c5e47707ce0d4d953155dc354b5ed71b48acc890f1"
           }
+        },
+        {
+          "date": "2026-11-07",
+          "summary": "补收 Meta GSLM2，与 EmbeddingGemma 2、NaijaS2ST 区分统一向量、对齐离散流和跨语言生成；核验变化并集、逐流等权与高成本复现边界。",
+          "papers": [
+            "multimodal-models:gslm2"
+          ],
+          "source_revisions": {
+            "multimodal-models:gslm2": "5ab8ce37c3b3aadad488495535e4ecda1ab9dc939871212b55de7ae8d11e870a"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "multimodal-models:avmeme-exam",
+            "multimodal-models:mmeb-v3"
+          ],
+          "summary": "补入Google/Meta合作的历史评测论文，区分文化问答、嵌入排序与L0协议；完整媒体/模型矩阵高成本不复现。",
+          "source_revisions": {
+            "multimodal-models:avmeme-exam": "b15117171e859acb5417e58dd8447c9895ef7a210dda4bc20422fe86201c59bc",
+            "multimodal-models:mmeb-v3": "9526ee3d295f108b3696153a2fe57c5d0c826bd5e3281d4b1989e69f5880989d"
+          }
+        },
+        {
+          "date": "2026-11-13",
+          "papers": [
+            "multimodal-models:mmeb-v3",
+            "multimodal-models:mveb"
+          ],
+          "summary": "补MMEB-V3共享混合池、任务等权和显式NDCG gain，联系MVEB预算协议；只验CPU计分，不报告编码器能力。",
+          "source_revisions": {
+            "multimodal-models:mmeb-v3": "9526ee3d295f108b3696153a2fe57c5d0c826bd5e3281d4b1989e69f5880989d",
+            "multimodal-models:mveb": "737e70ed9c7132c0719ea36d30fb85e7c3997d3b019a5ab324df65e20bfb9d46"
+          }
         }
       ]
     },
     "visual-evidence-budget": {
       "title": "少看、晚看还是再看：把视觉预算放到正确阶段",
       "thesis": "视觉预算不只有token数。StackTok选择已编码证据，PACE提前分配输入分辨率，ViMoD保留可恢复细节，Frames-on-Demand按需取帧，AdaLoop多算已有视觉状态，OmniKVQuant减少每份cache的位宽。必须同时追踪信息是否还在、哪段成本已支付。",
-      "updated": "2026-10-27",
+      "updated": "2026-11-12",
       "reviewed_papers": [
         "foundation-models:adaloop-vision",
         "foundation-models:frames-on-demand",
@@ -251,7 +376,9 @@
         "foundation-models:veto",
         "foundation-models:video-encoder-selection",
         "multimodal-models:videomm",
-        "multimodal-models:vimod"
+        "multimodal-models:vimod",
+        "multimodal-models:steprefine",
+        "multimodal-models:c2-routing"
       ],
       "axes": [
         "介入阶段：输入编码前、编码后、生成中、cache存储",
@@ -318,6 +445,26 @@
             "背景与主要改动",
             "复现边界"
           ]
+        },
+        {
+          "paper": "multimodal-models:steprefine",
+          "position": "相对已完成历史变化窗口检测mask平均熵尖峰，在mask位置用概率加权embedding额外refine，以新到旧KL稳定度停止，并把k次额外前向计入t-1-k索引。",
+          "tradeoff": "改变的是扩散token语义计算而非多取新图像或重跑视觉encoder；不同于视觉AdaLoop的循环状态。CPU公式不含MDLM、图像或remasking闭环，不证明幻觉benchmark改善。",
+          "sections": [
+            "核心公式",
+            "数据协议与代码映射",
+            "结果与复现边界"
+          ]
+        },
+        {
+          "paper": "multimodal-models:c2-routing",
+          "position": "在裁剪/整图压缩之间先提议动作，再用原/缩输入联合正确性H−B与validation固定FLOPs比决定是否回退。",
+          "tradeoff": "PACE依据图像语义密度/局部细节分配budget并融合注意力选token；C²额外建模信息减少相对原图造成的正确率损益。本地没有学习风险头，不能以代数门控宣称超越PACE checkpoint结果。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -338,6 +485,22 @@
             "multimodal-models:vimod",
             "foundation-models:omnikvquant",
             "foundation-models:adaloop-vision"
+          ]
+        },
+        {
+          "title": "同样是多算一次，token软化与视觉循环不能按次数等同",
+          "body": "StepRefine在多模态扩散的mask token输入上保留概率加权语义，以新||旧KL决定停止并从总NFE扣预算。视觉AdaLoop则按问题调制冻结视觉块、循环更新视觉状态，额外计算主要在视觉侧。两者都不因多次计算就获得新的原始图像证据；比较前先追踪计算阶段、状态、停止信号和完整生成成本，不能把公式误差当幻觉减少。",
+          "papers": [
+            "multimodal-models:steprefine",
+            "foundation-models:adaloop-vision"
+          ]
+        },
+        {
+          "title": "信息保留策略与是否值得回退，是两层不同判断",
+          "body": "PACE的APC/DDAE问如何分配视觉预算和保留证据，C²-Routing问当前缩减相对原图是否产生可补救伤害以及节省是否值得。高缩减错误率可能来自两边共同失败，也可能被缩减收益抵消；因此不能用错误率代替H−B。实际收益还依赖外部风险预测校准与validation固定策略，公式正确并不表示已训练可靠路由。",
+          "papers": [
+            "multimodal-models:c2-routing",
+            "foundation-models:pace-vlm"
           ]
         }
       ],
@@ -372,6 +535,26 @@
             "foundation-models:adaloop-vision",
             "foundation-models:frames-on-demand",
             "multimodal-models:vimod"
+          ]
+        },
+        {
+          "id": "soft-token-versus-visual-loop",
+          "question": "StepRefine和视觉AdaLoop都多算几次，为什么不能只比循环次数？",
+          "answer": "计算对象、每次成本和预算记账不同。StepRefine重算软token语义并扣减固定去噪预算；AdaLoop循环视觉状态并通过问题条件调制。应核对真实backbone与端到端预算，而不是把两次循环视为等算力。",
+          "example": "教学例：StepRefine在t=16额外2次应下移到13；AdaLoop的2次视觉块循环不对应这个去噪索引，也不会自动获得新图像。",
+          "papers": [
+            "multimodal-models:steprefine",
+            "foundation-models:adaloop-vision"
+          ]
+        },
+        {
+          "id": "cross-visual-budget-versus-fallback-risk",
+          "question": "一个缩减输入的错误率很高，为什么不能仅据此否定PACE式预算或强制C²回退？",
+          "answer": "还需比较同题原图是否也错，以及缩减是否曾改善。预算是输入证据选择，回退风险是原/缩正确性差；共同失败不会被原图修复。两类机制的真实checkpoint范围与本地L1证据也不能混排。",
+          "example": "教学例：缩减在90%题上错，但原图也在同90%错，H=B=0；回退只增加计算，不改善期望正确率。",
+          "papers": [
+            "multimodal-models:c2-routing",
+            "foundation-models:pace-vlm"
           ]
         }
       ],
@@ -415,13 +598,35 @@
             "multimodal-models:videomm": "c1c3018e8f2d1f1d21c50ea64c5e820aef137e52937dca5fe3b21218fe3af5d1",
             "multimodal-models:vimod": "bc6d1c67e26524c64b7aaf5b12d3e6ab643bfb82ff2d38571d61c914fefc1309"
           }
+        },
+        {
+          "date": "2026-11-11",
+          "summary": "加入StepRefine，将熵尖峰软token refinement与视觉AdaLoop循环区分；保留新||旧KL、历史窗口隔离及t-1-k预算。L1 CPU公式检查不替代真实MDLM/幻觉评测，完整多模型矩阵不复现。",
+          "papers": [
+            "multimodal-models:steprefine",
+            "foundation-models:adaloop-vision"
+          ],
+          "source_revisions": {
+            "multimodal-models:steprefine": "80543e75766c9cefbe3a05b8ad997abccbf84c25b7055c735f10e77791d13c42",
+            "foundation-models:adaloop-vision": "89ae8f64704875e311d05167d9f04a1cbcb5b18fac681839f595d6b1100df3ec"
+          }
+        },
+        {
+          "date": "2026-11-12",
+          "papers": [
+            "multimodal-models:c2-routing"
+          ],
+          "summary": "增加联合正确性风险与validation成本效用轴，区别如何保留视觉证据和是否值得回退；CPU仅执行策略核，未训练视觉路由，完整18数据集矩阵不复现。",
+          "source_revisions": {
+            "multimodal-models:c2-routing": "82f974b798414331f7a5e9a955b3687441f2bdc560dfbe5c9a34e3d64a0ba542"
+          }
         }
       ]
     },
     "world-state-actions": {
       "title": "会预测下一幕，还不等于会行动或保持同一个世界",
       "thesis": "世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。 SWIM从离线动作可预测性学习状态坐标的相对权重，训练期校准latent距离，部署时不向规划器增加真实状态。",
-      "updated": "2026-10-30",
+      "updated": "2026-11-12",
       "reviewed_papers": [
         "foundation-models:alps",
         "multimodal-models:aw0",
@@ -446,7 +651,10 @@
         "foundation-models:vjepa-policy",
         "multimodal-models:woven",
         "foundation-models:gui-jepa",
-        "foundation-models:swim"
+        "foundation-models:swim",
+        "multimodal-models:rs-jepa",
+        "multimodal-models:onlyact",
+        "multimodal-models:sensorwm-planning"
       ],
       "axes": [
         "学习对象：未来latent、动作分布、视觉转移、持久几何",
@@ -534,6 +742,37 @@
             "核心公式",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "multimodal-models:rs-jepa",
+          "position": "利用Vision Mamba扫描次序形成无像素编辑视图，以直通加反梯度hard half-split增加隐藏预测难度，并让四个排除twin的传感器邻域分布对齐detached共识。",
+          "tradeoff": "同主干stop-gradient target不是EMA教师；跨传感器检索表征不等于动作条件未来预测或策略。局部扫描/梯度/邻域核不含Vim、完整CVA/predictor或遥感检索成绩，四V100完整实验不复现。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "paper": "multimodal-models:onlyact",
+          "position": "在预训练V-JEPA2联合帧表征上，以场景交换正例及同视频非重叠hard negative适配动作几何，再冻结供世界模型使用。",
+          "tradeoff": "RS-JEPA用扫描视图和跨传感器邻域共识学习场景检索；OnlyAct希望保留动作、抑制场景。共享JEPA来源不代表优化目标相同。本地两者均只有独立公式/梯度L1，不提供图像检索或动作迁移能力排名。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "paper": "multimodal-models:sensorwm-planning",
+          "position": "动作条件可穿戴JEPA以状态依赖线性算子递推潜位移，再以未来status-quo对照、个体努力归一化收益排序外部候选。",
+          "tradeoff": "完整论文用私有生理数据建模；本地只实现Eq55–56排序，不产生预测、不执行动作、不给医疗建议。与LeWAM实际学习策略/动力学及闭环不同，数学排序不等于世界模型控制或临床安全。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -569,6 +808,30 @@
           "papers": [
             "foundation-models:swim",
             "foundation-models:gui-jepa"
+          ]
+        },
+        {
+          "title": "JEPA表征对齐与world-action闭环，需要不同的监督与验收",
+          "body": "RS-JEPA把配准传感器图像与不同扫描视图变成更一致的检索表征，hard划分与邻域损失针对当前场景关系；没有因其名字带JEPA就实现动作条件状态转移。V-JEPA Policy冻结预训练encoder，再训练future-latent predictor与action expert，动作输出及环境成功另需验收。遥感F1@5、latent预测误差和机器人成功率不能汇成一条分数。",
+          "papers": [
+            "multimodal-models:rs-jepa",
+            "foundation-models:vjepa-policy"
+          ]
+        },
+        {
+          "title": "跨视图保持的内容，可以是场景，也可以是动作",
+          "body": "RS-JEPA希望不同传感器检索到同一场景，并让其邻域关系一致；OnlyAct反而把动作保持但场景改变的样本拉近，用同场景不同窗作为难负例。二者对场景身份的需求不同，不能直接拼接一个通用InfoNCE就声称兼得。OnlyAct正负构造依赖光流/相机静动假设，局部候选mask与损失的CUDA通过不能验证这些语义假设。",
+          "papers": [
+            "multimodal-models:onlyact",
+            "multimodal-models:rs-jepa"
+          ]
+        },
+        {
+          "title": "有动作条件预测，不等于已经识别干预效果或完成控制",
+          "body": "LeWAM在联合表征与动作flowmatching后，用冻结动力学rollout、动作梯度优化和环境反馈闭环；其现有本地结果仍是非holdout诊断，未测到规划优势。SensorWM则从观察性可穿戴数据学习条件轨迹，并按个体行为变动尺度把预测收益转成候选比值。它明确不识别因果干预效果；离线教练偏好也不是实际健康结局。二者都需区分预测、选择、执行和效果证据，本地SensorWM排序更不能替代缺失的模型。",
+          "papers": [
+            "multimodal-models:sensorwm-planning",
+            "foundation-models:lewam"
           ]
         }
       ],
@@ -622,6 +885,36 @@
           "papers": [
             "foundation-models:swim",
             "foundation-models:gui-jepa"
+          ]
+        },
+        {
+          "id": "retrieval-jepa-not-action-policy",
+          "question": "RS-JEPA的跨传感器邻域一致，是否证明已经能规划动作？",
+          "answer": "不能。它约束配准图像的检索表示及其他场景的相似性关系，没有定义动作条件动力学和策略输出。V-JEPA Policy另有future predictor与flow-matching action expert；表示核通过也不能代替环境任务验收。",
+          "example": "教学例：两个传感器都把同一类农田排为相似邻居，只说明表征关系一致；它没有给出机器人移动一步后会看到什么或应该输出哪个动作。",
+          "papers": [
+            "multimodal-models:rs-jepa",
+            "foundation-models:vjepa-policy"
+          ]
+        },
+        {
+          "id": "cross-jepa-scene-versus-action-invariance",
+          "question": "RS-JEPA与OnlyAct都做表征学习，为什么不能用同场景跨传感器正例替代OnlyAct正例？",
+          "answer": "同场景对齐保留场景身份，而OnlyAct要跨场景保留动作。替换会改变不变性目标，甚至鼓励动作编码器依赖场景捷径。InfoNCE公式相似不说明配对语义相同，真实动作迁移需要独立验证。",
+          "example": "教学例：同一桥梁的SAR和光学图适合RS-JEPA；OnlyAct需要不同房间里的相同开门动作，而不是同房间任意两个动作。",
+          "papers": [
+            "multimodal-models:onlyact",
+            "multimodal-models:rs-jepa"
+          ]
+        },
+        {
+          "id": "cross-worldmodel-ranking-versus-closed-loop-evidence",
+          "question": "SensorWM排序核与LeWAMplanner都返回较优候选，是否能用同一个“规划成功率”来比较？",
+          "answer": "不能。SensorWM局部核只对外部端点做收益/努力排序，没有模型、医疗判断或执行；LeWAMplanner从模型产生动作并进入环境闭环，现有结果也未形成holdout能力证据。成功分母、预测来源、因果语义与执行证据完全不同。",
+          "example": "教学例：给定三个数并选最大比值，不会让机器人到达goal，也不会让用户12周后更健康；两类后果都要独立验证。",
+          "papers": [
+            "multimodal-models:sensorwm-planning",
+            "foundation-models:lewam"
           ]
         }
       ],
@@ -698,6 +991,40 @@
           "source_revisions": {
             "foundation-models:swim": "b1450b4ec070178de84e51ec3ca4999c68dc5726901f7f1abf85d8c14260f3b6",
             "foundation-models:gui-jepa": "5de10a527ec5abe710f7881beaf0ef48dfe68bb3cad8dab33703d8aa8574e02d"
+          }
+        },
+        {
+          "date": "2026-11-11",
+          "summary": "加入RS-JEPA，区分扫描视图/对抗划分/邻域一致性与V-JEPA Policy的未来动作闭环；明确同主干stop-gradient而非momentum target。仅L1 tensor机制，完整Vim/CVA/predictor和多数据集检索实验不复现。",
+          "papers": [
+            "multimodal-models:rs-jepa",
+            "foundation-models:vjepa-policy"
+          ],
+          "source_revisions": {
+            "multimodal-models:rs-jepa": "d702dffacafd0a6312ea20282bdd76d09aac77dba416c6a2cfa7f3d527ed482b",
+            "foundation-models:vjepa-policy": "bd556faa4f657cac639e6662804d80e39267f07b903ea87423fe32239a6e1905"
+          }
+        },
+        {
+          "date": "2026-11-12",
+          "papers": [
+            "multimodal-models:onlyact"
+          ],
+          "summary": "补入从JEPA时空先验提取动作的对比适配，明确场景检索与动作场景解耦目标差异；A100三seed只验证精确bank/冻结投影/梯度，完整视频训练不复现。",
+          "source_revisions": {
+            "multimodal-models:onlyact": "214fb33fd33c2b7016404e5dff6503028bd489ee0355cc899011cf4331be4726"
+          }
+        },
+        {
+          "date": "2026-11-12",
+          "papers": [
+            "multimodal-models:sensorwm-planning",
+            "foundation-models:lewam"
+          ],
+          "summary": "加入Google可穿戴世界模型案例，区分动作条件观察预测、个体努力候选排序与实际控制/因果健康收益。本地CPU三seed仅验证Eq55–56数学，完整私有JEPA与临床/API实验高成本不复现。",
+          "source_revisions": {
+            "multimodal-models:sensorwm-planning": "547ec8785646f513290c6ad65a5ed302920716e67f746cce5466396f06ec4111",
+            "foundation-models:lewam": "5e991ab90d6400d319dbccbf83e7ff06f2749baa45a5e10a79ea26b235f1ed45"
           }
         }
       ]

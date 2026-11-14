@@ -7,7 +7,7 @@ hide:
 
 # 奖励与信用：正确结果该奖励哪些步骤
 
-[LLM 后训练](index.md) / 152 个问题 · 38 篇论文
+[LLM 后训练](index.md) / 168 个问题 · 42 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,168 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">152 个问题 · 38 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">168 个问题 · 42 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:mcpo" data-paper-title="Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards LLM 后训练 PayPal.AI 2026-11-10 GRPO 常把同一响应的序列优势分给所有 token，无法区分局部决策的不确定度。MCPO 复用 rollout/old policy 温度后的 top-1、top-2 概率差，不额外调用教师或 verifier，改变各 token 的信用分配。指数加权与响应内归一化沿用所引 token weighting 规则，论文新增的是以 probability margin 作为信号，不能把整套加权公式都说成全新提出。 完整实验成本过高，不复现（审查 DONE）；L1 机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。token_credit 接收已经冻结、按 rollout 温度计算的有序 top-2 概率、序列优势和有效 token mask。校验概率合法、每响应非空；padding 不进入权重均值。为数值稳定，从每响应 log-weight 减去最大值，不改变归一结果。函数只做 NumPy CPU 算术，CUDA 请求明确拒绝。  奖励与信用分配 置信margin与token信用 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 MCPO 的 uncertainty 直接用 entropy 或 band-pass 吗？ 都不是。它用温度后 old-policy top1减top2的margin，再对1-margin做截断线性变换。最高不确定度保留为1，不像band-pass丢掉极端区域。 教学例：margin=.95给h=0，margin=.2给h=1；只知道entropy通常不能还原这两个top概率差。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<span id="paper-post-training-mcpo-ed7c444f" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-b1ae26b0c8cab39d">MCPO 的 uncertainty 直接用 entropy 或 band-pass 吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Amcpo">Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · PayPal.AI</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>都不是。它用温度后 old-policy top1减top2的margin，再对1-margin做截断线性变换。最高不确定度保留为1，不像band-pass丢掉极端区域。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：margin=.95给h=0，margin=.2给h=1；只知道entropy通常不能还原这两个top概率差。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14015v1">原论文</a> · <a href="../../../../post-training/2611.14015-mcpo/">实现解读</a> · <a href="#qa-b1ae26b0c8cab39d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:mcpo" data-paper-title="Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards LLM 后训练 PayPal.AI 2026-11-10 GRPO 常把同一响应的序列优势分给所有 token，无法区分局部决策的不确定度。MCPO 复用 rollout/old policy 温度后的 top-1、top-2 概率差，不额外调用教师或 verifier，改变各 token 的信用分配。指数加权与响应内归一化沿用所引 token weighting 规则，论文新增的是以 probability margin 作为信号，不能把整套加权公式都说成全新提出。 完整实验成本过高，不复现（审查 DONE）；L1 机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。token_credit 接收已经冻结、按 rollout 温度计算的有序 top-2 概率、序列优势和有效 token mask。校验概率合法、每响应非空；padding 不进入权重均值。为数值稳定，从每响应 log-weight 减去最大值，不改变归一结果。函数只做 NumPy CPU 算术，CUDA 请求明确拒绝。  奖励与信用分配 置信margin与token信用 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 MCPO 对负优势里的不确定 token 惩罚更重吗？ 相反。指数包含sign(A)，负优势时高不确定度权重更小，响应内归一后它少受惩罚，较确定token承担更多负信用。每条响应有效token的平均优势不变。 教学例：一个确定token h=0、一个不确定token h=1，A=-1、kappa=log4，二者token优势为-1.6和-.4。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-40576face29007ec">MCPO 对负优势里的不确定 token 惩罚更重吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Amcpo">Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · PayPal.AI</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>相反。指数包含sign(A)，负优势时高不确定度权重更小，响应内归一后它少受惩罚，较确定token承担更多负信用。每条响应有效token的平均优势不变。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个确定token h=0、一个不确定token h=1，A=-1、kappa=log4，二者token优势为-1.6和-.4。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14015v1">原论文</a> · <a href="../../../../post-training/2611.14015-mcpo/">实现解读</a> · <a href="#qa-40576face29007ec">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:mcpo" data-paper-title="Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards LLM 后训练 PayPal.AI 2026-11-10 GRPO 常把同一响应的序列优势分给所有 token，无法区分局部决策的不确定度。MCPO 复用 rollout/old policy 温度后的 top-1、top-2 概率差，不额外调用教师或 verifier，改变各 token 的信用分配。指数加权与响应内归一化沿用所引 token weighting 规则，论文新增的是以 probability margin 作为信号，不能把整套加权公式都说成全新提出。 完整实验成本过高，不复现（审查 DONE）；L1 机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。token_credit 接收已经冻结、按 rollout 温度计算的有序 top-2 概率、序列优势和有效 token mask。校验概率合法、每响应非空；padding 不进入权重均值。为数值稳定，从每响应 log-weight 减去最大值，不改变归一结果。函数只做 NumPy CPU 算术，CUDA 请求明确拒绝。  奖励与信用分配 置信margin与token信用 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 相同200步且平均分提高，是否足以证明MCPO在同算力下更好？ 不够。论文生成长度增长约1.2–4.6倍，缺length-matched和随机信用等控制。Qwen三数据种子的p=.083也不能称为显著；训练数据种子并不覆盖所有优化器/采样随机性。 教学例：两个算法都更新200次，但一个每响应生成8000token、另一个2000token，生成预算已经不同。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-4dcca11868e775aa">相同200步且平均分提高，是否足以证明MCPO在同算力下更好？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Amcpo">Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · PayPal.AI</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不够。论文生成长度增长约1.2–4.6倍，缺length-matched和随机信用等控制。Qwen三数据种子的p=.083也不能称为显著；训练数据种子并不覆盖所有优化器/采样随机性。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个算法都更新200次，但一个每响应生成8000token、另一个2000token，生成预算已经不同。</p>
+<p class="ar-learning-sources">依据：原文结果与限制、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14015v1">原论文</a> · <a href="../../../../post-training/2611.14015-mcpo/">实现解读</a> · <a href="#qa-4dcca11868e775aa">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:mcpo" data-paper-title="Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards LLM 后训练 PayPal.AI 2026-11-10 GRPO 常把同一响应的序列优势分给所有 token，无法区分局部决策的不确定度。MCPO 复用 rollout/old policy 温度后的 top-1、top-2 概率差，不额外调用教师或 verifier，改变各 token 的信用分配。指数加权与响应内归一化沿用所引 token weighting 规则，论文新增的是以 probability margin 作为信号，不能把整套加权公式都说成全新提出。 完整实验成本过高，不复现（审查 DONE）；L1 机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。token_credit 接收已经冻结、按 rollout 温度计算的有序 top-2 概率、序列优势和有效 token mask。校验概率合法、每响应非空；padding 不进入权重均值。为数值稳定，从每响应 log-weight 减去最大值，不改变归一结果。函数只做 NumPy CPU 算术，CUDA 请求明确拒绝。  奖励与信用分配 置信margin与token信用 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 实现 MCPO 时随手使用当前模型 top2 概率可以吗？ 不可以。接口要求生成轨迹时温度后的冻结 old-policy 概率，才能把信用与原采样决策对齐。当前模型、原始logits或忽略mask都会改变定义；本地没有代替调用方收集这些概率。 教学例：同一logit在temperature=.5和1下的margin不同，产生的h和信用也不同；padding不能进入响应权重均值。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-a6c364ed642cad63">实现 MCPO 时随手使用当前模型 top2 概率可以吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Amcpo">Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · PayPal.AI</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不可以。接口要求生成轨迹时温度后的冻结 old-policy 概率，才能把信用与原采样决策对齐。当前模型、原始logits或忽略mask都会改变定义；本地没有代替调用方收集这些概率。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一logit在temperature=.5和1下的margin不同，产生的h和信用也不同；padding不能进入响应权重均值。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.14015v1">原论文</a> · <a href="../../../../post-training/2611.14015-mcpo/">实现解读</a> · <a href="#qa-a6c364ed642cad63">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:maxim" data-paper-title="MaxIM: Maximally Informative Incremental Summarization via Reinforcement Learning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="MaxIM: Maximally Informative Incremental Summarization via Reinforcement Learning LLM 后训练 Google Research 2026-11-09 长程交互不能无限保留历史，增量摘要却会不可逆地丢失信息。MaxIM 把摘要更新器与冻结的行动模型分开：摘要器只根据上一摘要、上一动作和当前观测更新有限记忆，不得直接读取任务目标。训练 critic 时可以使用特权标签；这不允许被评估的摘要器或 Agent 在推理时读取答案。方法同时奖励“摘要能预测任务相关变量”和“新摘要有当前局部历史支持”。第二项必须向前逐 token 评分摘要：反过来从摘要重建历史，可能对附加的幻觉声明不敏感。 完整实验成本过高，不复现（审查 DONE）；seed 42/43/44 的小数组诊断覆盖 null 抵消、长度平均、中心零奖励、有界 shaping、任务折扣及退火为零后去掉 critic。L1 机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。normalized_pmi 接收已冻结、对齐的 conditional/null token log-prob 和 Boolean mask；本地没有生成这些分数的模型。shaping_reward 实现式 6；cosine_weight 实现调用方固定的退火；  奖励与信用分配 信息论奖励与增量记忆 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 MaxIM 的 critic 可以看任务目标，为什么摘要器仍不能看答案？ 特权目标用于训练和评分奖励，不是被评估摘要器的输入。摘要器只接收上一摘要、上一动作和当前观测；把目标直接放进去会破坏论文的记忆因果假设，测到答案泄漏。 教学例：critic 用已知问答答案判断摘要是否有用，但生成摘要的模型只能读文章片段，不能先看到该答案。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<span id="paper-post-training-maxim-e89c924a" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-584f4722d6c451c3">MaxIM 的 critic 可以看任务目标，为什么摘要器仍不能看答案？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Amaxim">MaxIM: Maximally Informative Incremental Summarization via Reinforcement Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>特权目标用于训练和评分奖励，不是被评估摘要器的输入。摘要器只接收上一摘要、上一动作和当前观测；把目标直接放进去会破坏论文的记忆因果假设，测到答案泄漏。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：critic 用已知问答答案判断摘要是否有用，但生成摘要的模型只能读文章片段，不能先看到该答案。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.12825v1">原论文</a> · <a href="../../../../post-training/2611.12825-maxim/">实现解读</a> · <a href="#qa-584f4722d6c451c3">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:maxim" data-paper-title="MaxIM: Maximally Informative Incremental Summarization via Reinforcement Learning" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="MaxIM: Maximally Informative Incremental Summarization via Reinforcement Learning LLM 后训练 Google Research 2026-11-09 长程交互不能无限保留历史，增量摘要却会不可逆地丢失信息。MaxIM 把摘要更新器与冻结的行动模型分开：摘要器只根据上一摘要、上一动作和当前观测更新有限记忆，不得直接读取任务目标。训练 critic 时可以使用特权标签；这不允许被评估的摘要器或 Agent 在推理时读取答案。方法同时奖励“摘要能预测任务相关变量”和“新摘要有当前局部历史支持”。第二项必须向前逐 token 评分摘要：反过来从摘要重建历史，可能对附加的幻觉声明不敏感。 完整实验成本过高，不复现（审查 DONE）；seed 42/43/44 的小数组诊断覆盖 null 抵消、长度平均、中心零奖励、有界 shaping、任务折扣及退火为零后去掉 critic。L1 机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。normalized_pmi 接收已冻结、对齐的 conditional/null token log-prob 和 Boolean mask；本地没有生成这些分数的模型。shaping_reward 实现式 6；cosine_weight 实现调用方固定的退火；  奖励与信用分配 信息论奖励与增量记忆 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 为什么 MaxIM 要减去 null 条件的 log probability？ 直接似然会混入目标本身的难度。对同一目标减去无摘要基线，衡量摘要增加的信息；一致性则在历史与 null 历史条件下逐 token 评分新摘要。两项的目标 token 不同，不能混在同一长度分母。 教学例：某答案在有摘要时 logp=-1，无摘要时=-3，PMI 为2；另一个容易答案两者都=-.2，其信息增益为0。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-493ebf51dc717aca">为什么 MaxIM 要减去 null 条件的 log probability？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Amaxim">MaxIM: Maximally Informative Incremental Summarization via Reinforcement Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>直接似然会混入目标本身的难度。对同一目标减去无摘要基线，衡量摘要增加的信息；一致性则在历史与 null 历史条件下逐 token 评分新摘要。两项的目标 token 不同，不能混在同一长度分母。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：某答案在有摘要时 logp=-1，无摘要时=-3，PMI 为2；另一个容易答案两者都=-.2，其信息增益为0。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.12825v1">原论文</a> · <a href="../../../../post-training/2611.12825-maxim/">实现解读</a> · <a href="#qa-493ebf51dc717aca">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:maxim" data-paper-title="MaxIM: Maximally Informative Incremental Summarization via Reinforcement Learning" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="MaxIM: Maximally Informative Incremental Summarization via Reinforcement Learning LLM 后训练 Google Research 2026-11-09 长程交互不能无限保留历史，增量摘要却会不可逆地丢失信息。MaxIM 把摘要更新器与冻结的行动模型分开：摘要器只根据上一摘要、上一动作和当前观测更新有限记忆，不得直接读取任务目标。训练 critic 时可以使用特权标签；这不允许被评估的摘要器或 Agent 在推理时读取答案。方法同时奖励“摘要能预测任务相关变量”和“新摘要有当前局部历史支持”。第二项必须向前逐 token 评分摘要：反过来从摘要重建历史，可能对附加的幻觉声明不敏感。 完整实验成本过高，不复现（审查 DONE）；seed 42/43/44 的小数组诊断覆盖 null 抵消、长度平均、中心零奖励、有界 shaping、任务折扣及退火为零后去掉 critic。L1 机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。normalized_pmi 接收已冻结、对齐的 conditional/null token log-prob 和 Boolean mask；本地没有生成这些分数的模型。shaping_reward 实现式 6；cosine_weight 实现调用方固定的退火；  奖励与信用分配 信息论奖励与增量记忆 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 为什么从摘要重建历史不能代替 MaxIM 的前向一致性？ 反向重建可能只利用真实声明而忽略附加的幻觉。前向一致性对新摘要的每个 token 询问历史是否支持，因此额外无依据内容也会进入评分；近似 critic 仍可能判断错误，并非事实保证。 教学例：摘要先正确写会议在周一，又虚构预算翻倍。重建会议历史可能不受影响，但第二句在真实历史下不应获得额外似然支持。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-017a5ecb0d2146c9">为什么从摘要重建历史不能代替 MaxIM 的前向一致性？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Amaxim">MaxIM: Maximally Informative Incremental Summarization via Reinforcement Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>反向重建可能只利用真实声明而忽略附加的幻觉。前向一致性对新摘要的每个 token 询问历史是否支持，因此额外无依据内容也会进入评分；近似 critic 仍可能判断错误，并非事实保证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：摘要先正确写会议在周一，又虚构预算翻倍。重建会议历史可能不受影响，但第二句在真实历史下不应获得额外似然支持。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.12825v1">原论文</a> · <a href="../../../../post-training/2611.12825-maxim/">实现解读</a> · <a href="#qa-017a5ecb0d2146c9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:maxim" data-paper-title="MaxIM: Maximally Informative Incremental Summarization via Reinforcement Learning" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="MaxIM: Maximally Informative Incremental Summarization via Reinforcement Learning LLM 后训练 Google Research 2026-11-09 长程交互不能无限保留历史，增量摘要却会不可逆地丢失信息。MaxIM 把摘要更新器与冻结的行动模型分开：摘要器只根据上一摘要、上一动作和当前观测更新有限记忆，不得直接读取任务目标。训练 critic 时可以使用特权标签；这不允许被评估的摘要器或 Agent 在推理时读取答案。方法同时奖励“摘要能预测任务相关变量”和“新摘要有当前局部历史支持”。第二项必须向前逐 token 评分摘要：反过来从摘要重建历史，可能对附加的幻觉声明不敏感。 完整实验成本过高，不复现（审查 DONE）；seed 42/43/44 的小数组诊断覆盖 null 抵消、长度平均、中心零奖励、有界 shaping、任务折扣及退火为零后去掉 critic。L1 机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。normalized_pmi 接收已冻结、对齐的 conditional/null token log-prob 和 Boolean mask；本地没有生成这些分数的模型。shaping_reward 实现式 6；cosine_weight 实现调用方固定的退火；  奖励与信用分配 信息论奖励与增量记忆 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 运行本地 MaxIM diagnostic 后能说已经训练出记忆 Agent 吗？ 不能。这里只验证冻结分数的 PMI、sigmoid、退火和 return，既没有 critic 或摘要模型，也没有 PPO、组优势与真实交互。L1 数值核与语言记忆能力必须分开。 本地一组数组的 null 抵消精确成立，只说明奖励算术正确；原文还需 Gemini/TPU 训练和500个对话种子评测。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-05b0f8c218701c05">运行本地 MaxIM diagnostic 后能说已经训练出记忆 Agent 吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Amaxim">MaxIM: Maximally Informative Incremental Summarization via Reinforcement Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。这里只验证冻结分数的 PMI、sigmoid、退火和 return，既没有 critic 或摘要模型，也没有 PPO、组优势与真实交互。L1 数值核与语言记忆能力必须分开。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>本地一组数组的 null 抵消精确成立，只说明奖励算术正确；原文还需 Gemini/TPU 训练和500个对话种子评测。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.12825v1">原论文</a> · <a href="../../../../post-training/2611.12825-maxim/">实现解读</a> · <a href="#qa-05b0f8c218701c05">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:emoreward" data-paper-title="EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL LLM 后训练 The Hong Kong University of Science and Technology 2026-11-04 固定融合权重假设每段视频的情绪证据同样可信。例如，没有可用人脸时，给面部动作通道的默认中性分数不是观测证据。EmoReward 让 Plan 根据提示构建评估条件，Act 得到分数和可用性，再用 Reflect 的样本门控与 RewardMemory 的跨轮经验乘子做融合。温度、上限和最小支持数作用在奖励分配上，不是生成器参数。 单张 A100/A30 或本地 Mac 的预算不适合：成本过高，不复现（审查 DONE）。build_reward_memory 从调用者提供的参考轮原始分数、情境和结果按 Eq. (9)–(10) 一次性构造不可变表。为保持边界清楚，情境键（论文按唤醒度和人脸分支活跃度分组）和已经包含有效掩码的 Eq. (7) 门控均为外部输入。fuse_reward 只查固定表，按 Eq. (8) 筛活跃通道，算 Eq. (4) 标量，不接受当前结果作为拟合输入；缺失通道不能被历史乘子重新激活。没有实现 Plan、感知打分器或视频 GRPO。  Reward modeling 多模态奖励门控与跨轮校准 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 上轮人脸通道与代理结果高度正相关，这轮视频没有可用人脸时是否仍应给它奖励权重？ 不应给。历史乘子调节已可用通道的相对权重，当前门控负责可用性。门控为零时，无论乘子多大，通道有效权重仍为零。 教学例：人脸通道基权重 0.4，历史乘子 2，当前门控 0，有效质量仍为 0；中性默认分数不是观测。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<span id="paper-post-training-emoreward-0937a172" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-ff355c3308b0e3ed">上轮人脸通道与代理结果高度正相关，这轮视频没有可用人脸时是否仍应给它奖励权重？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aemoreward">EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · The Hong Kong University of Science and Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不应给。历史乘子调节已可用通道的相对权重，当前门控负责可用性。门控为零时，无论乘子多大，通道有效权重仍为零。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：人脸通道基权重 0.4，历史乘子 2，当前门控 0，有效质量仍为 0；中性默认分数不是观测。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.06518">原论文</a> · <a href="../../../../post-training/2611.06518-emoreward/">实现解读</a> · <a href="#qa-ff355c3308b0e3ed">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:emoreward" data-paper-title="EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL LLM 后训练 The Hong Kong University of Science and Technology 2026-11-04 固定融合权重假设每段视频的情绪证据同样可信。例如，没有可用人脸时，给面部动作通道的默认中性分数不是观测证据。EmoReward 让 Plan 根据提示构建评估条件，Act 得到分数和可用性，再用 Reflect 的样本门控与 RewardMemory 的跨轮经验乘子做融合。温度、上限和最小支持数作用在奖励分配上，不是生成器参数。 单张 A100/A30 或本地 Mac 的预算不适合：成本过高，不复现（审查 DONE）。build_reward_memory 从调用者提供的参考轮原始分数、情境和结果按 Eq. (9)–(10) 一次性构造不可变表。为保持边界清楚，情境键（论文按唤醒度和人脸分支活跃度分组）和已经包含有效掩码的 Eq. (7) 门控均为外部输入。fuse_reward 只查固定表，按 Eq. (8) 筛活跃通道，算 Eq. (4) 标量，不接受当前结果作为拟合输入；缺失通道不能被历史乘子重新激活。没有实现 Plan、感知打分器或视频 GRPO。  Reward modeling 多模态奖励门控与跨轮校准 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 RewardMemory 为什么比较原始分数相关性，还要先减去通道平均相关再裁剪？ 估计基于原始分数，而不是已乘门控的贡献，避免把过去的门控策略当成通道可靠性。减均值表达相对可靠性，裁剪限制 log 乘子。常数通道相关性为零，不必然降权；在正裁剪上限下，平均相关大于零时它的未归一乘子才小于 1。 教学例：相关性 0.8 和 0 的均值是 0.4；温度 0.5、上限 1 时，两个未归一乘子分别是 exp(0.8) 和 exp(-0.8)。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-8b1fee98de66e2f2">RewardMemory 为什么比较原始分数相关性，还要先减去通道平均相关再裁剪？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aemoreward">EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · The Hong Kong University of Science and Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>估计基于原始分数，而不是已乘门控的贡献，避免把过去的门控策略当成通道可靠性。减均值表达相对可靠性，裁剪限制 log 乘子。常数通道相关性为零，不必然降权；在正裁剪上限下，平均相关大于零时它的未归一乘子才小于 1。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：相关性 0.8 和 0 的均值是 0.4；温度 0.5、上限 1 时，两个未归一乘子分别是 exp(0.8) 和 exp(-0.8)。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.06518">原论文</a> · <a href="../../../../post-training/2611.06518-emoreward/">实现解读</a> · <a href="#qa-8b1fee98de66e2f2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:emoreward" data-paper-title="EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL LLM 后训练 The Hong Kong University of Science and Technology 2026-11-04 固定融合权重假设每段视频的情绪证据同样可信。例如，没有可用人脸时，给面部动作通道的默认中性分数不是观测证据。EmoReward 让 Plan 根据提示构建评估条件，Act 得到分数和可用性，再用 Reflect 的样本门控与 RewardMemory 的跨轮经验乘子做融合。温度、上限和最小支持数作用在奖励分配上，不是生成器参数。 单张 A100/A30 或本地 Mac 的预算不适合：成本过高，不复现（审查 DONE）。build_reward_memory 从调用者提供的参考轮原始分数、情境和结果按 Eq. (9)–(10) 一次性构造不可变表。为保持边界清楚，情境键（论文按唤醒度和人脸分支活跃度分组）和已经包含有效掩码的 Eq. (7) 门控均为外部输入。fuse_reward 只查固定表，按 Eq. (8) 筛活跃通道，算 Eq. (4) 标量，不接受当前结果作为拟合输入；缺失通道不能被历史乘子重新激活。没有实现 Plan、感知打分器或视频 GRPO。  Reward modeling 多模态奖励门控与跨轮校准 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 EmoReward 与 TVRL 都用于视频强化学习，它们改动的是同一个训练量吗？ 不是。EmoReward 改变每段视频的情绪奖励融合并给出标量；TVRL 从一个已有组优势出发，按冻结 VLM 对生成 token 的敏感度重新分配信用。两者不能互相替代。 教学例：EmoReward 可以舍弃缺失人脸的评分，TVRL 可以让同一条轨迹中影响较大的 token 获得更多现有优势；这两项改变作用在不同维度。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-e0032c24f08544d9">EmoReward 与 TVRL 都用于视频强化学习，它们改动的是同一个训练量吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aemoreward">EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · The Hong Kong University of Science and Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。EmoReward 改变每段视频的情绪奖励融合并给出标量；TVRL 从一个已有组优势出发，按冻结 VLM 对生成 token 的敏感度重新分配信用。两者不能互相替代。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：EmoReward 可以舍弃缺失人脸的评分，TVRL 可以让同一条轨迹中影响较大的 token 获得更多现有优势；这两项改变作用在不同维度。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、诊断与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.06518">原论文</a> · <a href="../../../../post-training/2611.06518-emoreward/">实现解读</a> · <a href="#qa-e0032c24f08544d9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:emoreward" data-paper-title="EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL LLM 后训练 The Hong Kong University of Science and Technology 2026-11-04 固定融合权重假设每段视频的情绪证据同样可信。例如，没有可用人脸时，给面部动作通道的默认中性分数不是观测证据。EmoReward 让 Plan 根据提示构建评估条件，Act 得到分数和可用性，再用 Reflect 的样本门控与 RewardMemory 的跨轮经验乘子做融合。温度、上限和最小支持数作用在奖励分配上，不是生成器参数。 单张 A100/A30 或本地 Mac 的预算不适合：成本过高，不复现（审查 DONE）。build_reward_memory 从调用者提供的参考轮原始分数、情境和结果按 Eq. (9)–(10) 一次性构造不可变表。为保持边界清楚，情境键（论文按唤醒度和人脸分支活跃度分组）和已经包含有效掩码的 Eq. (7) 门控均为外部输入。fuse_reward 只查固定表，按 Eq. (8) 筛活跃通道，算 Eq. (4) 标量，不接受当前结果作为拟合输入；缺失通道不能被历史乘子重新激活。没有实现 Plan、感知打分器或视频 GRPO。  Reward modeling 多模态奖励门控与跨轮校准 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 Eq. (8) 为什么不能先全量归一再执行活跃阈值？运行时能否用当前结果更新表？ 活跃阈值针对乘积 w⁰gm，不是归一后的权重；等于阈值也排除。归一化只能在筛出的通道上做。当前结果不能重拟合冻结表，下一轮只读；历史统计只能在独立的已完成参考轮之后构造。 教学例：有效质量 (0.25, 1, 0)、阈值 0.25，只保留第二项。若所有门控为零，情绪项为零，通用视频奖励项仍可存在。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-3b23dc7568601157">Eq. (8) 为什么不能先全量归一再执行活跃阈值？运行时能否用当前结果更新表？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aemoreward">EmoReward: Self-Evolving Reward Calibration for Emotional Video Generation RL</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · The Hong Kong University of Science and Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>活跃阈值针对乘积 w⁰gm，不是归一后的权重；等于阈值也排除。归一化只能在筛出的通道上做。当前结果不能重拟合冻结表，下一轮只读；历史统计只能在独立的已完成参考轮之后构造。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：有效质量 (0.25, 1, 0)、阈值 0.25，只保留第二项。若所有门控为零，情绪项为零，通用视频奖励项仍可存在。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.06518">原论文</a> · <a href="../../../../post-training/2611.06518-emoreward/">实现解读</a> · <a href="#qa-3b23dc7568601157">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:dars-density" data-paper-title="Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Density-Aware Reward Scaling: A Reinforcement Learning Framework for Reward-Proportional Sampling LLM 后训练 National University of Singapore 2026-11-03 期望奖励最大化容易持续强化已密集采样的结果。DARS 在同一条件输入的 rollout 组内估计结果表示密度，以替换原奖励，再执行常规 GRPO 组优势标准化；不引入 density 网络或替换 policy objective。结果表示、任务奖励与条件分组不可互相替代。依据固定 v1 §3、§5.3。 相对现有单卡资源成本过高，不复现（审查 DONE）。density_scaled_advantages 接收 [...,G,D] outcome 与 [...,G] 非负 reward，逐组计算完整 Gaussian KDE、缩放和标准化。遵循 §3.1 的非负奖励域，负 reward 显式拒绝，不把有符号扩展冒充奖励比例采样。结果表示与 reward 均 stop-gradient，返回优势供外部原有 GRPO 目标使用，不在本组件里重定义 PPO loss。  奖励与信用分配 组内结果密度奖励缩放 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 DARS 为什么在结果表示空间修正奖励，而不只增加动作熵？ 动作随机不代表终局结果覆盖多种模式。不同改写可能都生成相似图像；DARS按同一prompt下结果表示的局部密度降低拥挤区域的相对奖励，干预的是终局覆盖，不是简单要求每步动作更随机。 教学例：10种不同措辞都产生同一夕阳构图，prompt词汇多样但图像模式仍塌缩。按图像embedding的density处理可以识别这种拥挤。 2026-11-04">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
 <span id="paper-post-training-dars-density-18c61412" class="ar-learning-paper-anchor"></span>
@@ -1829,6 +1988,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>例如人工给风险标签能验证分支，但没有证明模型自动识别不合理token。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2607.07976">原论文</a> · <a href="../../../../post-training/2607.07976-taco/">实现解读</a> · <a href="#qa-5ae3e76c30e78f7d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:rlmf" data-paper-title="Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs LLM 后训练 Yale University 2026-06-30 回答正确性、表达的置信度，以及模型能否评价自身置信表达，是三个不同量。本文先使数值置信接近由采样一致性估计的内在置信，再借元认知自评质量调节 RL 排序；另用训练题自评的高低两端选样，最后由外部改写器把数值映射成自然语言不确定性。本地只保留可精确隔离的 Eq2–4 和训练尾部选样。内在置信不是提供一份正确答案就能替代，模型自评也不是本地随手给的标签。诊断中的数值均为教学输入，不宣称测出了真实不确定性。 完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。本地交付是 L1 数值/协议组件，不是完整论文能力复现。完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。faithful_calibration、metacognitive_feedback、advantages 是可微框架中的张量核（FC门槛本身离散）；select_training_tails 是训练选样。CPU/CUDA 支持以真实算子验收为准。没有采样一致性估计、LLM自评、完整GRPO损失/optimizer、SFT或自然语言改写器。  奖励与信用分配 元认知反馈与不确定性 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 回答正确、置信表达忠实、会自评，这三者为什么不能只用accuracy衡量？ 正确性是任务结果；faithful calibration比较表达置信与采样估计的内在置信；元认知反馈比较模型自评FC和实际FC。准确答案也可能表达不忠实，善于自评也不保证答案正确。 教学例：模型内在估计0.6却说“100%确定”，即使这次答对也不忠实；自评承认表达有问题又是第三项观测。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<span id="paper-post-training-rlmf-a7aec240" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-d56af1ca96ab0e38">回答正确、置信表达忠实、会自评，这三者为什么不能只用accuracy衡量？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Arlmf">Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Yale University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>正确性是任务结果；faithful calibration比较表达置信与采样估计的内在置信；元认知反馈比较模型自评FC和实际FC。准确答案也可能表达不忠实，善于自评也不保证答案正确。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：模型内在估计0.6却说“100%确定”，即使这次答对也不忠实；自评承认表达有问题又是第三项观测。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.32032v1">原论文</a> · <a href="../../../../post-training/2606.32032-rlmf/">实现解读</a> · <a href="#qa-d56af1ca96ab0e38">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:rlmf" data-paper-title="Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs LLM 后训练 Yale University 2026-06-30 回答正确性、表达的置信度，以及模型能否评价自身置信表达，是三个不同量。本文先使数值置信接近由采样一致性估计的内在置信，再借元认知自评质量调节 RL 排序；另用训练题自评的高低两端选样，最后由外部改写器把数值映射成自然语言不确定性。本地只保留可精确隔离的 Eq2–4 和训练尾部选样。内在置信不是提供一份正确答案就能替代，模型自评也不是本地随手给的标签。诊断中的数值均为教学输入，不宣称测出了真实不确定性。 完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。本地交付是 L1 数值/协议组件，不是完整论文能力复现。完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。faithful_calibration、metacognitive_feedback、advantages 是可微框架中的张量核（FC门槛本身离散）；select_training_tails 是训练选样。CPU/CUDA 支持以真实算子验收为准。没有采样一致性估计、LLM自评、完整GRPO损失/optimizer、SFT或自然语言改写器。  奖励与信用分配 元认知反馈与不确定性 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 Eq4能否写成总优势乘(1+Z)，或者加一个Z奖励？ 不能。只把高于组均值的faithfulness分量乘k+Z；other奖励保持仅中心化，低于或等于均值的faithfulness分量也不放大。它不std归一，放大后均值可以非零，不能再次减均值。 教学例：f=[0,1,2]，o=[1,0,−1]，Z全1、k1，输出优势为[0,0,1]；全优势乘2会得到[0,0,0]，改变了方法。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-e520112e963f8e18">Eq4能否写成总优势乘(1+Z)，或者加一个Z奖励？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Arlmf">Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Yale University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。只把高于组均值的faithfulness分量乘k+Z；other奖励保持仅中心化，低于或等于均值的faithfulness分量也不放大。它不std归一，放大后均值可以非零，不能再次减均值。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：f=[0,1,2]，o=[1,0,−1]，Z全1、k1，输出优势为[0,0,1]；全优势乘2会得到[0,0,0]，改变了方法。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.32032v1">原论文</a> · <a href="../../../../post-training/2606.32032-rlmf/">实现解读</a> · <a href="#qa-e520112e963f8e18">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:rlmf" data-paper-title="Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs LLM 后训练 Yale University 2026-06-30 回答正确性、表达的置信度，以及模型能否评价自身置信表达，是三个不同量。本文先使数值置信接近由采样一致性估计的内在置信，再借元认知自评质量调节 RL 排序；另用训练题自评的高低两端选样，最后由外部改写器把数值映射成自然语言不确定性。本地只保留可精确隔离的 Eq2–4 和训练尾部选样。内在置信不是提供一份正确答案就能替代，模型自评也不是本地随手给的标签。诊断中的数值均为教学输入，不宣称测出了真实不确定性。 完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。本地交付是 L1 数值/协议组件，不是完整论文能力复现。完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。faithful_calibration、metacognitive_feedback、advantages 是可微框架中的张量核（FC门槛本身离散）；select_training_tails 是训练选样。CPU/CUDA 支持以真实算子验收为准。没有采样一致性估计、LLM自评、完整GRPO损失/optimizer、SFT或自然语言改写器。  奖励与信用分配 元认知反馈与不确定性 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 RLMF不做组std归一，与Dr.GRPO有什么相同和不同？ 二者都保留中心化奖励的原始尺度，但RLMF把主faithfulness和其他约束拆开，只对前者正偏差按自评质量放大。去std归一只是共享一项设计，不能因此把Dr.GRPO目标直接叫RLMF。 教学例：即使两个方法原始reward相同，Z不同会改变RLMF对高faithfulness completion的信用；Dr.GRPO没有这项元认知因子。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-1ddd316d9e41a1f5">RLMF不做组std归一，与Dr.GRPO有什么相同和不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Arlmf">Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Yale University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>二者都保留中心化奖励的原始尺度，但RLMF把主faithfulness和其他约束拆开，只对前者正偏差按自评质量放大。去std归一只是共享一项设计，不能因此把Dr.GRPO目标直接叫RLMF。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：即使两个方法原始reward相同，Z不同会改变RLMF对高faithfulness completion的信用；Dr.GRPO没有这项元认知因子。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.32032v1">原论文</a> · <a href="../../../../post-training/2606.32032-rlmf/">实现解读</a> · <a href="#qa-1ddd316d9e41a1f5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:rlmf" data-paper-title="Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs LLM 后训练 Yale University 2026-06-30 回答正确性、表达的置信度，以及模型能否评价自身置信表达，是三个不同量。本文先使数值置信接近由采样一致性估计的内在置信，再借元认知自评质量调节 RL 排序；另用训练题自评的高低两端选样，最后由外部改写器把数值映射成自然语言不确定性。本地只保留可精确隔离的 Eq2–4 和训练尾部选样。内在置信不是提供一份正确答案就能替代，模型自评也不是本地随手给的标签。诊断中的数值均为教学输入，不宣称测出了真实不确定性。 完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。本地交付是 L1 数值/协议组件，不是完整论文能力复现。完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。faithful_calibration、metacognitive_feedback、advantages 是可微框架中的张量核（FC门槛本身离散）；select_training_tails 是训练选样。CPU/CUDA 支持以真实算子验收为准。没有采样一致性估计、LLM自评、完整GRPO损失/optimizer、SFT或自然语言改写器。  奖励与信用分配 元认知反馈与不确定性 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 选两端数据和挑checkpoint时，哪些信息不能从test获取？ 两端选样只允许训练候选的自评，且等量取高低端；超参和checkpoint只能由validation选择。原文AppendixB.1按in-domain test FC挑RL checkpoint，本地明确不沿用并记录协议偏离；不能把test改名后继续调。 教学例：训练自评10、40、70、90选两个时取10和90；即使测试题自评更极端也不加入训练。每100步看test挑最好一次仍是泄漏。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-16725cd02c6b21a5">选两端数据和挑checkpoint时，哪些信息不能从test获取？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Arlmf">Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Yale University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>两端选样只允许训练候选的自评，且等量取高低端；超参和checkpoint只能由validation选择。原文AppendixB.1按in-domain test FC挑RL checkpoint，本地明确不沿用并记录协议偏离；不能把test改名后继续调。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：训练自评10、40、70、90选两个时取10和90；即使测试题自评更极端也不加入训练。每100步看test挑最好一次仍是泄漏。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.32032v1">原论文</a> · <a href="../../../../post-training/2606.32032-rlmf/">实现解读</a> · <a href="#qa-16725cd02c6b21a5">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:intuitor" data-paper-title="INTUITOR" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="INTUITOR LLM 后训练 University of California, Berkeley 2025-05-26 以每个生成前缀下的全词表 next-token 分布计算，再沿回答长度平均，作为 intrinsic self-certainty reward。方向是均匀分布到策略分布，并非策略的负熵；高置信度也不等于答案一定正确。 它既没有原文的逐 token 全词表计算，也使用了相反方向的 KL，因此仅为候选奖励更新诊断，尚未复现 Intuitor 的定义性 self-certainty。本地为候选分布机制诊断。本地为候选分布机制诊断。当前算子没有实现原文逐 token、全词表的 self-certainty；现有 mini-suite 不能作为该定义性奖励或原论文推理能力的验证。当前 p0_20260808.py 的 intuitor 分支以采样候选的 log p + log N 作为奖励，诊断量 intrinsic_kl_to_uniform 则是。  自置信奖励 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 INTUITOR不使用外部verifier时，奖励从哪里来？ 从每个生成前缀的完整下一词分布计算自确定性，再沿回答平均。它是内部学习信号而非正确标签，高置信仍可能稳定地错，需要独立任务评估。 例如模型分布很尖但算术结论错，内部奖高不代表验算通过。 2026-10-27">

@@ -7,7 +7,7 @@ hide:
 
 # 推理压缩：权重、KV 缓存与服务带宽
 
-[基础模型](index.md) / 132 个问题 · 33 篇论文
+[基础模型](index.md) / 144 个问题 · 36 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,168 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">132 个问题 · 33 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">144 个问题 · 36 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:e-means" data-paper-title="e-means: outperforming k-means (in one-tenth the epochs)" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="e-means: outperforming k-means (in one-tenth the epochs) 基础模型 FAIR at Meta 2026-11-06 Lloyd 每扫完一轮数据才更新质心。e-means 每批更新各簇的 EMA 计数与向量和，让同一轮中的后续批次立即使用新质心。每五批检查低计数簇，借活跃簇分裂复苏；末轮按过程中产生的分配取均值，不额外做一轮全量分配。原文另拟合批大小与峰值步长的缩放律，在大规模场景比较精确、低精度与 IVF 分配。 成本过高，不复现（审查 DONE）。L1 机制诊断。L1 机制诊断。本地执行稠密 CPU 聚类，不是 DINO10B、近邻检索或 GPU 加速复现。fit 使用 NumPy float64 精确平方 L2 分配、确定性同分处理、每轮重新洗牌、余弦步长 EMA、低质量簇复苏、末轮均值。仅接受批大小整除行数的有界输入。若弱簇多于可用的不重复活跃 donor，余下弱簇延到下一次检查；若零计数（例如首步步长为 1）或末轮无分配，保留该簇最近有效中心。这里用固定的小样本步长，不把原文拟合范围外的缩放律当作最佳值。  推理与系统效率 向量索引与聚类训练 基础模型 推理压缩：权重、KV 缓存与服务带宽 为什么 e-means 不能对每批质心简单做 EMA？ 一批里落入同一簇的点数会变。分别累积点数与向量和再相除，会按该簇的实际观测质量加权；对每批均值做 EMA 会把很少点的批次当成同等可靠。 教学例：一批有 9 个值 0，另一批只有一个值 10。若先忽略时间衰减，点数加权均值是 1，而等权平均两个批次的均值是 5。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<span id="paper-foundation-models-e-means-85035e10" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-1abaa4827e475046">为什么 e-means 不能对每批质心简单做 EMA？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ae-means">e-means: outperforming k-means (in one-tenth the epochs)</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · FAIR at Meta</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>一批里落入同一簇的点数会变。分别累积点数与向量和再相除，会按该簇的实际观测质量加权；对每批均值做 EMA 会把很少点的批次当成同等可靠。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一批有 9 个值 0，另一批只有一个值 10。若先忽略时间衰减，点数加权均值是 1，而等权平均两个批次的均值是 5。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09501v1">原论文</a> · <a href="../../../../foundation-models/2611.09501-e-means/">实现解读</a> · <a href="#qa-1abaa4827e475046">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:e-means" data-paper-title="e-means: outperforming k-means (in one-tenth the epochs)" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="e-means: outperforming k-means (in one-tenth the epochs) 基础模型 FAIR at Meta 2026-11-06 Lloyd 每扫完一轮数据才更新质心。e-means 每批更新各簇的 EMA 计数与向量和，让同一轮中的后续批次立即使用新质心。每五批检查低计数簇，借活跃簇分裂复苏；末轮按过程中产生的分配取均值，不额外做一轮全量分配。原文另拟合批大小与峰值步长的缩放律，在大规模场景比较精确、低精度与 IVF 分配。 成本过高，不复现（审查 DONE）。L1 机制诊断。L1 机制诊断。本地执行稠密 CPU 聚类，不是 DINO10B、近邻检索或 GPU 加速复现。fit 使用 NumPy float64 精确平方 L2 分配、确定性同分处理、每轮重新洗牌、余弦步长 EMA、低质量簇复苏、末轮均值。仅接受批大小整除行数的有界输入。若弱簇多于可用的不重复活跃 donor，余下弱簇延到下一次检查；若零计数（例如首步步长为 1）或末轮无分配，保留该簇最近有效中心。这里用固定的小样本步长，不把原文拟合范围外的缩放律当作最佳值。  推理与系统效率 向量索引与聚类训练 基础模型 推理压缩：权重、KV 缓存与服务带宽 复苏弱簇时，为什么从活跃簇分裂而不是随机重采本批数据？ 按 EMA 质量抽 donor，使有较多点的簇更有机会得到新的表示容量；反向乘性扰动让两个子中心邻近但可分，供后续分配。原 donor 质量被平分，弱槽旧状态被覆盖。 教学例：质量为 8、中心为 (2, 4) 的 donor 被拆成两个质量 4 的子簇，两个中心沿交替坐标向相反方向轻微偏移。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-44d3dc20ade161da">复苏弱簇时，为什么从活跃簇分裂而不是随机重采本批数据？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ae-means">e-means: outperforming k-means (in one-tenth the epochs)</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · FAIR at Meta</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>按 EMA 质量抽 donor，使有较多点的簇更有机会得到新的表示容量；反向乘性扰动让两个子中心邻近但可分，供后续分配。原 donor 质量被平分，弱槽旧状态被覆盖。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：质量为 8、中心为 (2, 4) 的 donor 被拆成两个质量 4 的子簇，两个中心沿交替坐标向相反方向轻微偏移。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09501v1">原论文</a> · <a href="../../../../foundation-models/2611.09501-e-means/">实现解读</a> · <a href="#qa-44d3dc20ade161da">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:e-means" data-paper-title="e-means: outperforming k-means (in one-tenth the epochs)" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="e-means: outperforming k-means (in one-tenth the epochs) 基础模型 FAIR at Meta 2026-11-06 Lloyd 每扫完一轮数据才更新质心。e-means 每批更新各簇的 EMA 计数与向量和，让同一轮中的后续批次立即使用新质心。每五批检查低计数簇，借活跃簇分裂复苏；末轮按过程中产生的分配取均值，不额外做一轮全量分配。原文另拟合批大小与峰值步长的缩放律，在大规模场景比较精确、低精度与 IVF 分配。 成本过高，不复现（审查 DONE）。L1 机制诊断。L1 机制诊断。本地执行稠密 CPU 聚类，不是 DINO10B、近邻检索或 GPU 加速复现。fit 使用 NumPy float64 精确平方 L2 分配、确定性同分处理、每轮重新洗牌、余弦步长 EMA、低质量簇复苏、末轮均值。仅接受批大小整除行数的有界输入。若弱簇多于可用的不重复活跃 donor，余下弱簇延到下一次检查；若零计数（例如首步步长为 1）或末轮无分配，保留该簇最近有效中心。这里用固定的小样本步长，不把原文拟合范围外的缩放律当作最佳值。  推理与系统效率 向量索引与聚类训练 基础模型 推理压缩：权重、KV 缓存与服务带宽 末轮均值降低固定标签 MSE，为什么还不能断言 e-means 总是比 Lloyd 好？ 均值只对同一组训练点和同一套历史标签最优。重新分配、初始化、留出分布与比较算法都可能改变误差；论文也把优化训练和优化测试的收尾方案分开。 本地 seed 42 固定标签误差降低，但留出 MSE 为 e-means 1.87753、Lloyd 1.84352，方向相反。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-ad2650e6f1d14041">末轮均值降低固定标签 MSE，为什么还不能断言 e-means 总是比 Lloyd 好？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ae-means">e-means: outperforming k-means (in one-tenth the epochs)</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · FAIR at Meta</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>均值只对同一组训练点和同一套历史标签最优。重新分配、初始化、留出分布与比较算法都可能改变误差；论文也把优化训练和优化测试的收尾方案分开。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>本地 seed 42 固定标签误差降低，但留出 MSE 为 e-means 1.87753、Lloyd 1.84352，方向相反。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09501v1">原论文</a> · <a href="../../../../foundation-models/2611.09501-e-means/">实现解读</a> · <a href="#qa-ad2650e6f1d14041">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:e-means" data-paper-title="e-means: outperforming k-means (in one-tenth the epochs)" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="e-means: outperforming k-means (in one-tenth the epochs) 基础模型 FAIR at Meta 2026-11-06 Lloyd 每扫完一轮数据才更新质心。e-means 每批更新各簇的 EMA 计数与向量和，让同一轮中的后续批次立即使用新质心。每五批检查低计数簇，借活跃簇分裂复苏；末轮按过程中产生的分配取均值，不额外做一轮全量分配。原文另拟合批大小与峰值步长的缩放律，在大规模场景比较精确、低精度与 IVF 分配。 成本过高，不复现（审查 DONE）。L1 机制诊断。L1 机制诊断。本地执行稠密 CPU 聚类，不是 DINO10B、近邻检索或 GPU 加速复现。fit 使用 NumPy float64 精确平方 L2 分配、确定性同分处理、每轮重新洗牌、余弦步长 EMA、低质量簇复苏、末轮均值。仅接受批大小整除行数的有界输入。若弱簇多于可用的不重复活跃 donor，余下弱簇延到下一次检查；若零计数（例如首步步长为 1）或末轮无分配，保留该簇最近有效中心。这里用固定的小样本步长，不把原文拟合范围外的缩放律当作最佳值。  推理与系统效率 向量索引与聚类训练 基础模型 推理压缩：权重、KV 缓存与服务带宽 CPU 上的精确 L2 聚类检查能代替论文 GPU 实验吗？ 不能。小数据检查可以独立复核足够统计、复苏及末轮均值，但不运行论文的大规模低精度和 IVF 分配，也没有计时或近邻检索负载。要验证系统速度应在匹配误差的真实数据和硬件上测墙钟。 本地每组 256 个训练向量和 64 个留出向量；论文 DINO10B 有一百亿向量和约 1678 万中心。 2026-11-09">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-ee3eb64f07bedf5d">CPU 上的精确 L2 聚类检查能代替论文 GPU 实验吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ae-means">e-means: outperforming k-means (in one-tenth the epochs)</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-09 · FAIR at Meta</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。小数据检查可以独立复核足够统计、复苏及末轮均值，但不运行论文的大规模低精度和 IVF 分配，也没有计时或近邻检索负载。要验证系统速度应在匹配误差的真实数据和硬件上测墙钟。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>本地每组 256 个训练向量和 64 个留出向量；论文 DINO10B 有一百亿向量和约 1678 万中心。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.09501v1">原论文</a> · <a href="../../../../foundation-models/2611.09501-e-means/">实现解读</a> · <a href="#qa-ee3eb64f07bedf5d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ginger" data-paper-title="GINGER: Spicing Up Graph-Based Vector Search" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="GINGER: Spicing Up Graph-Based Vector Search 基础模型 Google Research 2026-11-05 近邻图搜索在导航时随机读取大量候选，只需低位宽排序；最后的少量候选才需要高精度重排。若同时存粗码和完整浮点向量，会重复存储。GINGER 用 Nested TurboQuant（NTQ） 让高精度码保留同一个 4-bit 导航前缀：先读取粗码和粗尺度，最后才为入围向量读细码和细尺度。完整库另外用 PiPNN 构建近邻图、重排顶点使邻居 ID 更集中、以 AdaptiveGap 压缩邻接表，并提供 PCA 投影与候选预筛以节省搜索开销。NTQ 降低向量表示的读带宽； 作者的大规模图检索实验成本过高，不复现（审查 DONE）。L1 机制诊断，不是端到端检索复现。L1 机制诊断，不是端到端检索复现。本地只验证 Nested TurboQuant 的码本、拆流、缩放与浮点打分；作者的大规模图检索实验成本过高，不复现（审查 DONE）。build_codebook 用标准正态的解析区间矩拟合正半轴码本，支持 4-bit 加 1–4 个细化位。encode 接收调用方已用共同正交变换旋转的 Rx，本地执行归一化、编码与两种尺度；decode_navigation 只接收粗字节和粗尺度，decode_refined 才读细位流。inner_product 在同一旋转空间对完整精度查询评分。  推理与系统效率 向量检索量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 NTQ 已经存了完整细码，为什么导航不用把它一起读出来？ 4-bit 导航码就是完整码的粗前缀，但粗码和细位分别存放。导航只读符号位、粗区间和粗尺度；重排才读取入围向量的细位与细尺度。这样同一向量既不需要两份独立表示，也不会让导航承担细码带宽。 本地 31 维例子，粗码占 16 字节，4+2-bit 的额外细码占 8 字节（不含尺度）；未入围的候选不用读后 8 字节。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<span id="paper-foundation-models-ginger-bbdbc663" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-a6109a7d7410b27f">NTQ 已经存了完整细码，为什么导航不用把它一起读出来？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aginger">GINGER: Spicing Up Graph-Based Vector Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>4-bit 导航码就是完整码的粗前缀，但粗码和细位分别存放。导航只读符号位、粗区间和粗尺度；重排才读取入围向量的细位与细尺度。这样同一向量既不需要两份独立表示，也不会让导航承担细码带宽。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>本地 31 维例子，粗码占 16 字节，4+2-bit 的额外细码占 8 字节（不含尺度）；未入围的候选不用读后 8 字节。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08306v1">原论文</a> · <a href="../../../../foundation-models/2611.08306-ginger/">实现解读</a> · <a href="#qa-a6109a7d7410b27f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ginger" data-paper-title="GINGER: Spicing Up Graph-Based Vector Search" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="GINGER: Spicing Up Graph-Based Vector Search 基础模型 Google Research 2026-11-05 近邻图搜索在导航时随机读取大量候选，只需低位宽排序；最后的少量候选才需要高精度重排。若同时存粗码和完整浮点向量，会重复存储。GINGER 用 Nested TurboQuant（NTQ） 让高精度码保留同一个 4-bit 导航前缀：先读取粗码和粗尺度，最后才为入围向量读细码和细尺度。完整库另外用 PiPNN 构建近邻图、重排顶点使邻居 ID 更集中、以 AdaptiveGap 压缩邻接表，并提供 PCA 投影与候选预筛以节省搜索开销。NTQ 降低向量表示的读带宽； 作者的大规模图检索实验成本过高，不复现（审查 DONE）。L1 机制诊断，不是端到端检索复现。L1 机制诊断，不是端到端检索复现。本地只验证 Nested TurboQuant 的码本、拆流、缩放与浮点打分；作者的大规模图检索实验成本过高，不复现（审查 DONE）。build_codebook 用标准正态的解析区间矩拟合正半轴码本，支持 4-bit 加 1–4 个细化位。encode 接收调用方已用共同正交变换旋转的 Rx，本地执行归一化、编码与两种尺度；decode_navigation 只接收粗字节和粗尺度，decode_refined 才读细位流。inner_product 在同一旋转空间对完整精度查询评分。  推理与系统效率 向量检索量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 为什么不能先全局拟合 6-bit 码本，再直接把前 4 位当作导航码？ 一般的 6-bit Lloyd–Max 不保留 4-bit 的分割点。NTQ 固定所有粗边界，再在每个区间内按条件高斯分布单独拟合质心；编码时先选 u，随后只在第 u 个码本里选 v。这样不同细位宽都能复用同一粗码。 教学例：若某粗区间是 [0.4, 0.8)，其最外两条细分边界仍是 0.4 和 0.8。相邻区间的质心即便更近，也不能改变已经选定的粗码。数值不是论文实际阈值。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-6c89dabe9f28f183">为什么不能先全局拟合 6-bit 码本，再直接把前 4 位当作导航码？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aginger">GINGER: Spicing Up Graph-Based Vector Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>一般的 6-bit Lloyd–Max 不保留 4-bit 的分割点。NTQ 固定所有粗边界，再在每个区间内按条件高斯分布单独拟合质心；编码时先选 u，随后只在第 u 个码本里选 v。这样不同细位宽都能复用同一粗码。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：若某粗区间是 [0.4, 0.8)，其最外两条细分边界仍是 0.4 和 0.8。相邻区间的质心即便更近，也不能改变已经选定的粗码。数值不是论文实际阈值。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08306v1">原论文</a> · <a href="../../../../foundation-models/2611.08306-ginger/">实现解读</a> · <a href="#qa-6c89dabe9f28f183">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ginger" data-paper-title="GINGER: Spicing Up Graph-Based Vector Search" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="GINGER: Spicing Up Graph-Based Vector Search 基础模型 Google Research 2026-11-05 近邻图搜索在导航时随机读取大量候选，只需低位宽排序；最后的少量候选才需要高精度重排。若同时存粗码和完整浮点向量，会重复存储。GINGER 用 Nested TurboQuant（NTQ） 让高精度码保留同一个 4-bit 导航前缀：先读取粗码和粗尺度，最后才为入围向量读细码和细尺度。完整库另外用 PiPNN 构建近邻图、重排顶点使邻居 ID 更集中、以 AdaptiveGap 压缩邻接表，并提供 PCA 投影与候选预筛以节省搜索开销。NTQ 降低向量表示的读带宽； 作者的大规模图检索实验成本过高，不复现（审查 DONE）。L1 机制诊断，不是端到端检索复现。L1 机制诊断，不是端到端检索复现。本地只验证 Nested TurboQuant 的码本、拆流、缩放与浮点打分；作者的大规模图检索实验成本过高，不复现（审查 DONE）。build_codebook 用标准正态的解析区间矩拟合正半轴码本，支持 4-bit 加 1–4 个细化位。encode 接收调用方已用共同正交变换旋转的 Rx，本地执行归一化、编码与两种尺度；decode_navigation 只接收粗字节和粗尺度，decode_refined 才读细位流。inner_product 在同一旋转空间对完整精度查询评分。  推理与系统效率 向量检索量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 GINGER 与 PiPNN II 都提到低比特，解决的是同一个瓶颈吗？ 不完全相同。PiPNN II 在近邻图构建时合并打分与 top-K，避免物化候选分数矩阵；GINGER 的 NTQ 在已有图上搜索时降低向量读取带宽，入围后才补读细码。它们可以在同一个系统里使用，但不共享同一项局部验收指标。 图构建侧检查量化点积按每行尺度修正后再入堆；检索侧检查改变细位宽时粗字节不变，并在同召回下单独测检索 QPS。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-a402b719de839e6f">GINGER 与 PiPNN II 都提到低比特，解决的是同一个瓶颈吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aginger">GINGER: Spicing Up Graph-Based Vector Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不完全相同。PiPNN II 在近邻图构建时合并打分与 top-K，避免物化候选分数矩阵；GINGER 的 NTQ 在已有图上搜索时降低向量读取带宽，入围后才补读细码。它们可以在同一个系统里使用，但不共享同一项局部验收指标。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>图构建侧检查量化点积按每行尺度修正后再入堆；检索侧检查改变细位宽时粗字节不变，并在同召回下单独测检索 QPS。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08306v1">原论文</a> · <a href="../../../../foundation-models/2611.08306-ginger/">实现解读</a> · <a href="#qa-a402b719de839e6f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ginger" data-paper-title="GINGER: Spicing Up Graph-Based Vector Search" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="GINGER: Spicing Up Graph-Based Vector Search 基础模型 Google Research 2026-11-05 近邻图搜索在导航时随机读取大量候选，只需低位宽排序；最后的少量候选才需要高精度重排。若同时存粗码和完整浮点向量，会重复存储。GINGER 用 Nested TurboQuant（NTQ） 让高精度码保留同一个 4-bit 导航前缀：先读取粗码和粗尺度，最后才为入围向量读细码和细尺度。完整库另外用 PiPNN 构建近邻图、重排顶点使邻居 ID 更集中、以 AdaptiveGap 压缩邻接表，并提供 PCA 投影与候选预筛以节省搜索开销。NTQ 降低向量表示的读带宽； 作者的大规模图检索实验成本过高，不复现（审查 DONE）。L1 机制诊断，不是端到端检索复现。L1 机制诊断，不是端到端检索复现。本地只验证 Nested TurboQuant 的码本、拆流、缩放与浮点打分；作者的大规模图检索实验成本过高，不复现（审查 DONE）。build_codebook 用标准正态的解析区间矩拟合正半轴码本，支持 4-bit 加 1–4 个细化位。encode 接收调用方已用共同正交变换旋转的 Rx，本地执行归一化、编码与两种尺度；decode_navigation 只接收粗字节和粗尺度，decode_refined 才读细位流。inner_product 在同一旋转空间对完整精度查询评分。  推理与系统效率 向量检索量化 基础模型 推理压缩：权重、KV 缓存与服务带宽 本地验证 NTQ 时应该读哪些输出，哪些结论不能写？ 用已在同一旋转空间的非零向量编码，检查粗码流独立、细质心不跨区间、正确应用两种尺度；再用独立手算对比内积。CPU 合成 MSE 只验证量化机制，不证明十亿级索引召回、SIMD 性能或线上增益。 种子 42–44 的 4+2-bit 经验 MSE 均低于 4-bit；但本地没有图遍历、查询日志或硬件计时，不能把这个差值写成 QPS 提升。 2026-11-07">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-89e3aeef7e332cbf">本地验证 NTQ 时应该读哪些输出，哪些结论不能写？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aginger">GINGER: Spicing Up Graph-Based Vector Search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-07 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>用已在同一旋转空间的非零向量编码，检查粗码流独立、细质心不跨区间、正确应用两种尺度；再用独立手算对比内积。CPU 合成 MSE 只验证量化机制，不证明十亿级索引召回、SIMD 性能或线上增益。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>种子 42–44 的 4+2-bit 经验 MSE 均低于 4-bit；但本地没有图遍历、查询日志或硬件计时，不能把这个差值写成 QPS 提升。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.08306v1">原论文</a> · <a href="../../../../foundation-models/2611.08306-ginger/">实现解读</a> · <a href="#qa-89e3aeef7e332cbf">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:pipnn-ii" data-paper-title="Turbocharging PiPNN for Proximity and k-NN Graph Building" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Turbocharging PiPNN for Proximity and k-NN Graph Building 基础模型 University of Maryland, College Park 2026-11-03 PiPNN 先用递归分区把可能相近的点送入同一叶，再在叶内批量打分，避免逐点搜索正在构建的图。PiPNN II 用量化减少内存流量，把打分和 top-K 合并，避免先写再读完整距离矩阵。直接 k-NN 图保留叶内见到的近邻，和需要可导航边并执行剪枝的 ANNS 索引不是同一产物。论文另有 GPiPNN：平坦分段路由、分段 top-K、排序聚合及复用已见边的剪枝；这些未在本地实现。 完整 CPU/GPU 实验成本过高，不复现（审查 DONE）。L1 机制诊断，非性能复现。L1 机制诊断，非性能复现。这里只实现已解码字节的打分与 top-K；完整 CPU/GPU 实验成本过高，不复现（审查 DONE）。corrected_dot 检查 i8 范围与维数并执行偏置修正。fused_quantized_topk 接收一个查询与流式 (row, scale) 序列，按行修正、缩放、保留 K 个最优候选；同分保留较早位置。参考实现使用 Python 整数累加和浮点缩放，未声称与硬件 i32/fp32 舍入逐位一致。没有引入量化器、索引或外部数据。  推理与系统效率 量化近邻图构建 基础模型 推理压缩：权重、KV 缓存与服务带宽 PiPNN II 为什么把量化打分和 top-K 放到一起？ 量化减少读取候选向量的字节数；每个候选分数算出后直接与当前第 K 名比较，可以不先写出全距离矩阵。融合与量化是不同改动：前者减少中间分数的读写，后者减少输入向量的读写。 教学例：某叶有 100 个候选而只需前 3 个。逐行打分时保留 3 个入选项即可，不必存完 100 个分数再排序。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<span id="paper-foundation-models-pipnn-ii-e5dbbc9f" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-f1c1756d337068da">PiPNN II 为什么把量化打分和 top-K 放到一起？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Apipnn-ii">Turbocharging PiPNN for Proximity and k-NN Graph Building</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of Maryland, College Park</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>量化减少读取候选向量的字节数；每个候选分数算出后直接与当前第 K 名比较，可以不先写出全距离矩阵。融合与量化是不同改动：前者减少中间分数的读写，后者减少输入向量的读写。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：某叶有 100 个候选而只需前 3 个。逐行打分时保留 3 个入选项即可，不必存完 100 个分数再排序。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05690v1">原论文</a> · <a href="../../../../foundation-models/2611.05690-pipnn-ii/">实现解读</a> · <a href="#qa-f1c1756d337068da">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:pipnn-ii" data-paper-title="Turbocharging PiPNN for Proximity and k-NN Graph Building" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Turbocharging PiPNN for Proximity and k-NN Graph Building 基础模型 University of Maryland, College Park 2026-11-03 PiPNN 先用递归分区把可能相近的点送入同一叶，再在叶内批量打分，避免逐点搜索正在构建的图。PiPNN II 用量化减少内存流量，把打分和 top-K 合并，避免先写再读完整距离矩阵。直接 k-NN 图保留叶内见到的近邻，和需要可导航边并执行剪枝的 ANNS 索引不是同一产物。论文另有 GPiPNN：平坦分段路由、分段 top-K、排序聚合及复用已见边的剪枝；这些未在本地实现。 完整 CPU/GPU 实验成本过高，不复现（审查 DONE）。L1 机制诊断，非性能复现。L1 机制诊断，非性能复现。这里只实现已解码字节的打分与 top-K；完整 CPU/GPU 实验成本过高，不复现（审查 DONE）。corrected_dot 检查 i8 范围与维数并执行偏置修正。fused_quantized_topk 接收一个查询与流式 (row, scale) 序列，按行修正、缩放、保留 K 个最优候选；同分保留较早位置。参考实现使用 Python 整数累加和浮点缩放，未声称与硬件 i32/fp32 舍入逐位一致。没有引入量化器、索引或外部数据。  推理与系统效率 量化近邻图构建 基础模型 推理压缩：权重、KV 缓存与服务带宽 为什么将数据库字节转换成无符号后，必须减去 128 倍查询字节和？ 硬件取数据库字节 a=原值+128 与有符号查询 b 相乘。展开后每项多出 128b，求和得到同一查询复用的修正量。查询和为零时错误恰好消失，测试不能只选这一类查询。 原图一条 lane：偏置点积 883、查询字节和 5，修正为 883−128×5=243；直接把 883 当点积是错的。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-dc57958e13deb5d5">为什么将数据库字节转换成无符号后，必须减去 128 倍查询字节和？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Apipnn-ii">Turbocharging PiPNN for Proximity and k-NN Graph Building</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of Maryland, College Park</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>硬件取数据库字节 a=原值+128 与有符号查询 b 相乘。展开后每项多出 128b，求和得到同一查询复用的修正量。查询和为零时错误恰好消失，测试不能只选这一类查询。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>原图一条 lane：偏置点积 883、查询字节和 5，修正为 883−128×5=243；直接把 883 当点积是错的。</p>
+<p class="ar-learning-sources">依据：原论文关键图、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05690v1">原论文</a> · <a href="../../../../foundation-models/2611.05690-pipnn-ii/">实现解读</a> · <a href="#qa-dc57958e13deb5d5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:pipnn-ii" data-paper-title="Turbocharging PiPNN for Proximity and k-NN Graph Building" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Turbocharging PiPNN for Proximity and k-NN Graph Building 基础模型 University of Maryland, College Park 2026-11-03 PiPNN 先用递归分区把可能相近的点送入同一叶，再在叶内批量打分，避免逐点搜索正在构建的图。PiPNN II 用量化减少内存流量，把打分和 top-K 合并，避免先写再读完整距离矩阵。直接 k-NN 图保留叶内见到的近邻，和需要可导航边并执行剪枝的 ANNS 索引不是同一产物。论文另有 GPiPNN：平坦分段路由、分段 top-K、排序聚合及复用已见边的剪枝；这些未在本地实现。 完整 CPU/GPU 实验成本过高，不复现（审查 DONE）。L1 机制诊断，非性能复现。L1 机制诊断，非性能复现。这里只实现已解码字节的打分与 top-K；完整 CPU/GPU 实验成本过高，不复现（审查 DONE）。corrected_dot 检查 i8 范围与维数并执行偏置修正。fused_quantized_topk 接收一个查询与流式 (row, scale) 序列，按行修正、缩放、保留 K 个最优候选；同分保留较早位置。参考实现使用 Python 整数累加和浮点缩放，未声称与硬件 i32/fp32 舍入逐位一致。没有引入量化器、索引或外部数据。  推理与系统效率 量化近邻图构建 基础模型 推理压缩：权重、KV 缓存与服务带宽 为什么不能先按整数点积取 top-K，再乘数据库行的量化尺度？ 尺度随候选变化，乘法会改变候选间顺序。负点积路径必须先为每条候选应用数据库行与查询尺度，再按较小距离取 K；仅查询尺度正且固定，不改变同一查询的顺序。 教学例：点积 20、10 分别乘行尺度 0.1、1，量化恢复的相似度为 2、10。先选较大整数会挑错候选。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-ac52feeffbe422a1">为什么不能先按整数点积取 top-K，再乘数据库行的量化尺度？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Apipnn-ii">Turbocharging PiPNN for Proximity and k-NN Graph Building</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of Maryland, College Park</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>尺度随候选变化，乘法会改变候选间顺序。负点积路径必须先为每条候选应用数据库行与查询尺度，再按较小距离取 K；仅查询尺度正且固定，不改变同一查询的顺序。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：点积 20、10 分别乘行尺度 0.1、1，量化恢复的相似度为 2、10。先选较大整数会挑错候选。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05690v1">原论文</a> · <a href="../../../../foundation-models/2611.05690-pipnn-ii/">实现解读</a> · <a href="#qa-ac52feeffbe422a1">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:pipnn-ii" data-paper-title="Turbocharging PiPNN for Proximity and k-NN Graph Building" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Turbocharging PiPNN for Proximity and k-NN Graph Building 基础模型 University of Maryland, College Park 2026-11-03 PiPNN 先用递归分区把可能相近的点送入同一叶，再在叶内批量打分，避免逐点搜索正在构建的图。PiPNN II 用量化减少内存流量，把打分和 top-K 合并，避免先写再读完整距离矩阵。直接 k-NN 图保留叶内见到的近邻，和需要可导航边并执行剪枝的 ANNS 索引不是同一产物。论文另有 GPiPNN：平坦分段路由、分段 top-K、排序聚合及复用已见边的剪枝；这些未在本地实现。 完整 CPU/GPU 实验成本过高，不复现（审查 DONE）。L1 机制诊断，非性能复现。L1 机制诊断，非性能复现。这里只实现已解码字节的打分与 top-K；完整 CPU/GPU 实验成本过高，不复现（审查 DONE）。corrected_dot 检查 i8 范围与维数并执行偏置修正。fused_quantized_topk 接收一个查询与流式 (row, scale) 序列，按行修正、缩放、保留 K 个最优候选；同分保留较早位置。参考实现使用 Python 整数累加和浮点缩放，未声称与硬件 i32/fp32 舍入逐位一致。没有引入量化器、索引或外部数据。  推理与系统效率 量化近邻图构建 基础模型 推理压缩：权重、KV 缓存与服务带宽 CPU 流式 top-K 应用哪些负控？通过后能不能声称复现 H100 性能？ 用直接有符号点积加全量排序作独立参考，测试非零查询和、不同尺度、同分顺序及只遍历一次的迭代器。它验证分数与排序语义，未验证量化器、SIMD/TMA 核、分区或整图速度。 教学例：两个候选缩放后同分时，参考保留较早输入；若重复遍历流会触发测试失败。即使测试通过，也没有测量 Hopper kernel。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-f3665f8c57c55373">CPU 流式 top-K 应用哪些负控？通过后能不能声称复现 H100 性能？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Apipnn-ii">Turbocharging PiPNN for Proximity and k-NN Graph Building</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · University of Maryland, College Park</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>用直接有符号点积加全量排序作独立参考，测试非零查询和、不同尺度、同分顺序及只遍历一次的迭代器。它验证分数与排序语义，未验证量化器、SIMD/TMA 核、分区或整图速度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个候选缩放后同分时，参考保留较早输入；若重复遍历流会触发测试失败。即使测试通过，也没有测量 Hopper kernel。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.05690v1">原论文</a> · <a href="../../../../foundation-models/2611.05690-pipnn-ii/">实现解读</a> · <a href="#qa-f3665f8c57c55373">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:multi-layer-indexer" data-paper-title="Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Multi-layer Indexer: Overlapping Selection and Attention in DeepSeek Sparse Attention 基础模型 Writer AI Research, Writer Inc. 2026-11-02 DSA 层通常先扫描索引缓存、取 top-k，再执行稀疏 attention。MLI 让当前层读较早 full layer 的选择，当前索引器于是可在另一 CUDA stream 与主计算重叠。它可与 IndexCache 组合，但不是跨生成 token 复用过期选择。依据固定 v1 §3、§4、Appendix A。 成本过高，不复现（审查 DONE）。已核查 selection routing、双 stream 生命周期、IndexCache 组合、实验资源和作者代码。没有本地调度器、稀疏 kernel、SGLang 安装、代理计时器或假 metrics；不会把常数延迟模拟器宣称为生产路径。  推理与系统效率 稀疏注意力双流调度 基础模型 推理压缩：权重、KV 缓存与服务带宽 Multi-layer Indexer 为什么能让 indexer 与 attention 重叠，而普通 DSA 要串行？ 普通DSA的attention必须等本层selection完成。MLI改为消费较早full层已经产生的selection，当前索引器便可为后续消费者并行工作。改变的是依赖与消费层，不是把索引器运算凭空省掉。 教学例：第2层attention使用第1层selection时，第2层indexer可同时计算第3层将用的selection；若attention仍等自己的selection，另开stream也不能消除依赖。 2026-11-04">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-multi-layer-indexer-a806ea48" class="ar-learning-paper-anchor"></span>
