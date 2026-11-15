@@ -10,6 +10,10 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 预训练与数据 | [ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research](2611.17332-archspace/README.md) | Shanghai AI Laboratory，2026-11-12 | [原作者入口](https://github.com/InternLM/archspace)；作者公开架构提案/记录平台仓库；不等同本地已运行原始大规模训练或作者拟合数据。 | `archspace`：仅低成本组件，完整实验不复现 |
+| 网络架构 | [Asymmetric Multimodal Learning with Decomposed JEPAs](2611.16639-d-jepa/README.md) | 论文未列机构，2026-11-12 | [原作者入口](https://github.com/Vixel2006/D-JEPA)；固定v1明确链接作者参考实现；已读取固定commit的models.py/training.py，不执行其下载或全套训练。 | `d-jepa`：仅低成本组件，完整实验不复现 |
+| 多模态基础模型 | [Unbundling Multimodal Vision Encoding](2611.17334-unbundling-vision/README.md) | Meta FAIR，2026-11-12 | 未发现官方代码 | `unbundling-vision`：仅低成本组件，完整实验不复现 |
+| 网络架构 | [DuoJEPA: Cross-Modal Translation Between Unaligned Self-Supervised Embedding Spaces](2611.15968-duojepa/README.md) | Kentucky Center for Digital Innovation, University of Louisville，2026-11-11 | 未发现官方代码 | `duojepa`：仅低成本组件，完整实验不复现 |
 | 推理与系统效率 | [Blurring the Block Boundaries: Overlapping Block Denoising for Efficient Diffusion Language Models](2611.14387-b3/README.md) | Technion / Amazon Web Services，2026-11-10 | 未发现官方代码 | `b3`：仅低成本组件，完整实验不复现 |
 | 训练与数值系统 | [Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding](2611.13545-stochastic-rounding/README.md) | NVIDIA，2026-11-10 | 未发现官方代码 | `stochastic-rounding`：仅低成本组件，完整实验不复现 |
 | 推理与系统效率 | [REAL Loss: Optimizing Real Expected Acceptance Length for Speculative Decoding](2611.14399-real-loss/README.md) | The University of Hong Kong，2026-11-10 | [原作者入口](https://github.com/King-ty/speculators/tree/real-loss)；作者参考分支已核实；核对固定提交3dff4579c5f93f692108df8b5178c9e9200b8536的EAL代码和反例测试，未下载权重或数据。 | `real-loss`：仅低成本组件，完整实验不复现 |
@@ -213,6 +217,7 @@
 | 网络架构 | [A Theoretical Framework for Modular Learning of Robust Generative Models](2602.17554-modular-robust-generative/README.md) | Google Research，2026-02-19 | 未发现官方代码 | `modular-robust-generative`：仅低成本组件，完整实验不复现 |
 | 预训练与数据 | [ECO: Quantized Training without Full-Precision Master Weights](2601.22101-eco-optimizer/README.md) | Google Research / ISTA，2026-01-29 | 未发现官方代码 | 计划键 `eco-optimizer`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 预训练与数据 | [Mobility-Embedded POIs: Learning What A Place Is and How It Is Used from Human Movement](2601.21149-me-pois/README.md) | University of Southern California，2026-01-29 | 未发现官方代码 | `me-pois`：仅低成本组件，完整实验不复现 |
+| 预训练与数据 | [Spectral Ghost in Representation Learning: A Unified View from Component Analysis to Self-Supervised Learning](2601.20154-spectral-ghost/README.md) | Georgia Tech，2026-01-28 | 未发现官方代码 | `spectral-ghost` |
 | 网络架构 | [Conditional Memory via Scalable Lookup: A New Axis of Sparsity for Large Language Models](../reproductions/2601.07372-engram/README.md) | DeepSeek，2026-01-12 | [已开源](https://github.com/deepseek-ai/Engram) | `engram` |
 | 网络架构 | [mHC: Manifold-Constrained Hyper-Connections](../reproductions/2512.24880-mhc/README.md) | DeepSeek-AI，2025-12-31 | 未发现官方代码 | `mhc` |
 | 网络架构 | [Do Depth-Grown Models Overcome the Curse of Depth? An In-Depth Analysis](2512.08819-lidas/README.md) | Technical University of Munich，2025-12-09 | 未发现官方代码 | `lidas`：仅低成本组件，完整实验不复现 |

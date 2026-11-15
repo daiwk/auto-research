@@ -1,0 +1,20 @@
+{
+  "asset": "paper-figure-01.png",
+  "id": "2611.16409",
+  "asset_sha256": "00f373a46c48f6f0fa13945efde952e367df1e24049feabadcf2f8d825211234",
+  "source_pdf_url": "https://arxiv.org/pdf/2611.16409v1",
+  "source_pdf_sha256": "8ec3ef538f8384d94f2eeb311adf0da3a524e6669bcfac8571e10438e5637b8f",
+  "page": 5,
+  "figure": "Figure 3",
+  "crop_pdf_points": [
+    100,
+    78,
+    510,
+    308
+  ],
+  "render_scale": 2,
+  "method": "PyMuPDF PDF render, bounded crop preserving the full figure and caption.",
+  "visual_review": "已目视复核三角色采样树、candidate actor、Eq优势框及完整caption；重裁修正首稿右缘截断。",
+  "copyright": "Copyright belongs to the original authors.",
+  "reviewed_on": "2026-11-15"
+}

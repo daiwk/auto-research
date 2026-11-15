@@ -7,7 +7,7 @@ hide:
 
 # 从会调用到能交付：工具接口、可靠性与协作合同
 
-[Agent](../index.md) · 更新 2026-11-11 · 51 篇主题资料 / 8 篇重点对照
+[Agent](../index.md) · 更新 2026-11-15 · 52 篇主题资料 / 9 篇重点对照
 
 Toolformer 学何时调用，SWE-agent 设计动作接口，RATED 处理相关工具的运行可靠性；AutoGen 定义消息程序，MetaGPT 约束角色交付物，World of SWEcraft 再用隐藏下游检验群体产出。每层都可能失败，调用格式正确不是端到端完成的替身。
 
@@ -33,6 +33,7 @@ Toolformer 学何时调用，SWE-agent 设计动作接口，RATED 处理相关�
 | [World of SWECraft: Agent Collaboration at Scale via Simulated Software Worlds](../../../agent-research/2610.24061-world-of-swecraft/README.md) · [原始来源](https://arxiv.org/abs/2610.24061v1)<br>章节：背景与主要改动、核心公式、本地复现与成本判断 | 持久会话、issue/PR和包依赖组成软件世界，隐藏下游安装冻结版本检验集体产物。 | 本地微基准通过不足以证明下游收益，指令计数也不是墙钟；完整55K会话环境高成本，本地未运行。 |
 | [RuntimeTickets: Source-Grounded Security Obligations for Agent Skills](../../../agent-research/2611.03772-runtime-tickets/README.md) · [原始来源](https://arxiv.org/abs/2611.03772)<br>章节：核心公式、数据协议与实现边界、高成本完整实验 | 从宿主授权收紧得到有源冻结ticket，在发送前核对接收者、对象和累计额度，先判Deny，再判Defer，最后才Allow。 | 依赖可信宿主validator和真实副作用边界；本地仅原子CPU gate与记录链，不实现完整代理、观测账户或安全能力。 |
 | [ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows](../../../agent-research/2611.14492-retrace/README.md) · [原始来源](https://arxiv.org/abs/2611.14492)<br>章节：背景与主要改动、核心公式、数据协议与代码映射 | 从SOP和推理/工具轨迹恢复前置条件、参数来源与证据引用，编译为代码选择下一步的decision-list工作流。 | Planner-free不排除工具内部模型；本地限定typed guard子集，无LLM抽取/聚合/合成或生产工具执行，未见分支保留unwitnessed标记。 |
+| [CapLite: Prompt-Injection Defense for Small Language Model Agents without Model-Written Security Artifacts](../../../agent-research/2611.17115-caplite/README.md) · [原始来源](https://arxiv.org/abs/2611.17115v1)<br>章节：背景与主要改动、核心公式 | 可信schema推导authority，请求精确grounding限制值，读取前提交的写序列限制动作，首次失败停止剩余副作用。 | RuntimeTickets依赖有源obligation、host grant收紧和累计预算；CapLite的信任根是schema及请求。两者都要求所有真实副作用经过可信host，局部callback不是网络隔离保证。 |
 
 </div>
 
@@ -67,6 +68,12 @@ Meta官方retrieval-programs现已可核验，更新RPL旧条目的开源状态�
 Toolformer按真实返回对后续token loss的帮助筛选调用，再继续训练模型；ReTrace则从SOP/推理恢复条件并把运行时选择编译到代码。前者保留模型生成控制，后者仍允许固定工具内部调用模型。它们不能只按工具调用数量排名：本地Toolformer使用确定性utility而非GPT-J loss，本地ReTrace也仅typed IR，均没有完整原模型/生产结果。
 
 对照来源：[retrace](../../../agent-research/2611.14492-retrace/README.md) · [toolformer](../../../agent-research/2302.04761-toolformer/README.md)
+
+### 在副作用前检查，还要说明检查依据从哪里来
+
+CapLite不让小模型写安全策略，而从可信schema和请求绑定authority，附加写序列承诺。RuntimeTickets保留模型提出obligation的路径，但通过原文依据和host批准冻结权限，再检查对象与预算。它们均不能让不可信观察自封授权，也不证明绕过mediator的工具被保护；安全边界不是简单的allow布尔值。
+
+对照来源：[caplite](../../../agent-research/2611.17115-caplite/README.md) · [runtime-tickets](../../../agent-research/2611.03772-runtime-tickets/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -122,9 +129,23 @@ Toolformer按真实返回对后续token loss的帮助筛选调用，再继续训
 
     对照来源：[retrace](../../../agent-research/2611.14492-retrace/README.md) · [toolformer](../../../agent-research/2302.04761-toolformer/README.md)
 
+### 只要CapLite参数都能ground到请求，就能替代RuntimeTickets的总量限制吗？ {#cross-cross-nov15-caplite}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。grounding限定值是否被请求提及，未限制合法动作累计多少次／多少bytes。后者必须由独立grant和预算合同实现，且要防重放。
+
+    **教学例子：** 教学例：向用户指定邮箱发送一次合法，不表示可重复发送一千次。
+
+    对照来源：[caplite](../../../agent-research/2611.17115-caplite/README.md) · [runtime-tickets](../../../agent-research/2611.03772-runtime-tickets/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-15** · 可信schema推导authority，请求精确grounding限制值，读取前提交的写序列限制动作，首次失败停止剩余副作用。 RuntimeTickets依赖有源obligation、host grant收紧和累计预算；CapLite的信任根是schema及请求。两者都要求所有真实副作用经过可信host，局部callback不是网络隔离保证。
+
+涉及：[caplite](../../../agent-research/2611.17115-caplite/README.md) · [runtime-tickets](../../../agent-research/2611.03772-runtime-tickets/README.md)
 
 **2026-11-11** · 加入ReTrace，区分模型内工具学习与代码外工作流控制，明确pre-action信息、typed参数来源、unwitnessed分支和工具内部模型边界。只验证CPU IR，不声称私有生产SOP或公开benchmark完整接入。
 
@@ -142,7 +163,7 @@ Toolformer按真实返回对后续token loss的帮助筛选调用，再继续训
 
 覆盖 49 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 51 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 52 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -197,6 +218,7 @@ Toolformer按真实返回对后续token loss的帮助筛选调用，再继续训
 - [SayCan](../../../agent-research/2204.01691-saycan/README.md)
 - [WebGPT](../../../agent-research/2112.09332-webgpt/README.md)
 - [ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows](../../../agent-research/2611.14492-retrace/README.md)
+- [CapLite: Prompt-Injection Defense for Small Language Model Agents without Model-Written Security Artifacts](../../../agent-research/2611.17115-caplite/README.md)
 
 </details>
 

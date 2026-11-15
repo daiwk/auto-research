@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-15",
+  "scope": "Exactly three selected recommendation papers; not all industrial recall candidates",
+  "papers": [
+    {
+      "key": "resid",
+      "arxiv_id": "2611.16404",
+      "source_url": "https://arxiv.org/html/2611.16404v1",
+      "source_sha256": "5b120b4babeef6336ac101e1f4f3f24e77bfa7e8ab4fd1d6ea33bf951dd31e14",
+      "sections_read": [
+        "byline",
+        "Section4 Eqs1–3 and partial matching",
+        "Section5.7 production A/B",
+        "AppendixB.3 training/serving protocol"
+      ],
+      "review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "review_resolution": "bounded_component_accepted",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "key": "trigen",
+      "arxiv_id": "2611.16395",
+      "source_url": "https://arxiv.org/html/2611.16395v1",
+      "source_sha256": "28bb0c62400196b76f9fbb451f5df9bbfae9c986b8fec3768917d0e0006f71ba",
+      "sections_read": [
+        "byline",
+        "Section4 Eqs4–8",
+        "Section5.5 randomized six-market production A/B",
+        "AppendixD models and cost"
+      ],
+      "review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "review_resolution": "bounded_component_accepted",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "key": "kuairec-v2-protocol",
+      "arxiv_id": "2611.16795",
+      "source_url": "https://arxiv.org/html/2611.16795v1",
+      "source_sha256": "af2d8b23bf094155be020f1ae27e3bd03a13b02b1e88cf2cd97d63be1611faf2",
+      "sections_read": [
+        "PDFpage1 affiliation",
+        "Sections2–3.1 data and daily validation",
+        "AppendixD diversity definitions",
+        "AppendixE experimental cost"
+      ],
+      "review_done": true,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "review_resolution": "bounded_component_accepted",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    }
+  ]
+}

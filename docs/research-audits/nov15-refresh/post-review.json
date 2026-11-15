@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-15",
+  "owner": "nov15_post_review",
+  "scope": {
+    "domain": "post-training RL/OPD/agentic RL",
+    "primary_interval": [
+      "2026-11-12",
+      "2026-11-15"
+    ],
+    "overlap_interval": [
+      "2026-11-08",
+      "2026-11-11"
+    ],
+    "selection": "Three newly found exact-ID candidates reviewed in fixed v1 full text; not a claim of source exhaustion or a standalone review-watermark advance.",
+    "old_leads_are_new_first_publications": false
+  },
+  "source_policy": {
+    "primary_sources_only": true,
+    "deepxiv_used": false,
+    "models_or_datasets_downloaded": false,
+    "full_training_attempted": false,
+    "high_cost_campaigns": "not_reproduced_high_cost; review DONE; no retry"
+  },
+  "papers": [
+    {
+      "key": "lgpo",
+      "arxiv_id": "2611.15404",
+      "v1_published_at": "2026-11-11T12:31:55Z",
+      "first_author": "Shuibai Zhang",
+      "first_author_first_affiliation": "University of Wisconsin–Madison",
+      "affiliation_note": "KRAFTON internship; other authors KRAFTON; PDF first page verified",
+      "priority": "P1",
+      "reviewed_source_urls": [
+        "https://arxiv.org/abs/2611.15404v1",
+        "https://arxiv.org/html/2611.15404v1",
+        "https://arxiv.org/pdf/2611.15404v1"
+      ],
+      "source_sha256": {
+        "html": "35eb47d34075d34c822d738dcb8af95273d21fca02130fd281f3f43ec3c03e80",
+        "pdf": "61b40e94043844b03488d60f9206b41563befe74d5ccc85c875da5f549f28a4a"
+      },
+      "defining_sections": [
+        "Sec.4 current-policy response-mean likelihood gate and detached objective",
+        "Appendix D Algorithm1 token sum and all-response expectation"
+      ],
+      "fidelity_boundaries": [
+        "Gate both advantage signs at mean logp<=tau; no old-policy ratio.",
+        "External detached token advantages; no survivor renormalization.",
+        "Tiny-logit loss/gradient only; no rollout, verifier, advantage estimator or LLM."
+      ],
+      "cost_locator": "Sec.5 and Appendix D.1: one ~7.5K-example epoch on two H100s takes 2.85h LGPO / 3.37h GRPO, with broader 1.5B/3B task matrix.",
+      "authors_code": {
+        "url": null,
+        "status": "No verified method repository found in fixed paper/author entry points as of review; verl is not LGPO source."
+      },
+      "resolution": "component_only + full_experiment_not_reproduced_high_cost",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/lgpo-a100-20261115.json",
+      "gpu_validation_owned_by": "root",
+      "production_ab": "not reported"
+    },
+    {
+      "key": "safety-budget-cgrpo",
+      "arxiv_id": "2611.16628",
+      "v1_published_at": "2026-11-12T11:00:14Z",
+      "first_author": "Bo Han",
+      "first_author_first_affiliation": "Lanzhou University",
+      "affiliation_note": "Fixed PDF first page verified; no verified Google/Meta affiliation",
+      "priority": "P1",
+      "reviewed_source_urls": [
+        "https://arxiv.org/abs/2611.16628v1",
+        "https://arxiv.org/html/2611.16628v1",
+        "https://arxiv.org/pdf/2611.16628v1"
+      ],
+      "source_sha256": {
+        "html": "d0d825c8d976acb667e8d8df7096cd8364c6acc56fd0576c94629911cc84df3d",
+        "pdf": "cb46778e0680aa47ac636d5059e4911c8878662edc24df0b5cd6a2e905875fa0"
+      },
+      "defining_sections": [
+        "Sec.3.1 Eqs1–4 raw base reward, mapped penalty and projected dual",
+        "Sec.3.2 training-trajectory judge labels, piecewise-constant isotonic maps",
+        "Sec.3.3 multiplier cancellation under total-reward group std"
+      ],
+      "fidelity_boundaries": [
+        "CPU weighted PAV pools equal scores before violations.",
+        "Right-continuous lower-knot endpoint-clipped interpolation is explicit local convention.",
+        "EMA .3 current-batch weight and explicit previous state; source does not uniquely specify initialization/absent class.",
+        "Unscaled advantages only; per-objective standardized CGRPO trainer is not implemented.",
+        "No scorer, judge, VLM or real safety claim; Table4 unscaled13.3/12.7/7.1 not conflated with headline8.9→4.8."
+      ],
+      "cost_locator": "Sec.4.1/4.6–4.8 multi-model 2B LoRA policy + 4B/Jev scorer + independent large judge, 80steps/arm, multiple forms, benchmarks and seeds; total GPU-hours not disclosed.",
+      "authors_code": {
+        "url": null,
+        "status": "No verified method repository found in fixed source/author entry points as of review."
+      },
+      "resolution": "component_only + full_experiment_not_reproduced_high_cost",
+      "requires_gpu_validation": false,
+      "production_ab": "not reported"
+    },
+    {
+      "key": "bait-reward-defense",
+      "arxiv_id": "2611.16369",
+      "v1_published_at": "2026-11-12T06:34:34Z",
+      "first_author": "Tiansheng Huang",
+      "first_author_first_affiliation": "Georgia Institute of Technology",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "affiliation_note": "Fixed-v1 byline identifies Ananth Balashankar and Virat Shejwalkar at Google DeepMind.",
+      "priority": "P0",
+      "reviewed_source_urls": [
+        "https://arxiv.org/abs/2611.16369v1",
+        "https://arxiv.org/html/2611.16369v1",
+        "https://github.com/git-disl/Bait/tree/e776d200b86cff0872370f46fdb52e08bf23bcf9",
+        "https://github.com/git-disl/Bait/blob/e776d200b86cff0872370f46fdb52e08bf23bcf9/main_exp/bait/bait_func.py"
+      ],
+      "source_sha256": {
+        "html": "166985ffe0b0c9d6b35454e41a04de488db4e88136f4562ca4ba1ba325f32d2e",
+        "bait_func": "1262164183dcb9f7efe675f9dc202f3c647d098c0efe796612329a2ad67d796c",
+        "core_algos": "294e963bb218857d482a1ec3d743837a5c309683d849b488982d0765a4c481ec",
+        "ray_trainer": "761a89729f02f413fbafda9cea839a7cdaba2bfa9721737313dbe87f6a0f7e06"
+      },
+      "defining_sections": [
+        "Sec.4.2 Eqs3–5 reward gap, >=0 decision and whole-group sign flip",
+        "Eq6 vs Algorithm1 line14 advantage-std discrepancy, left unresolved"
+      ],
+      "fidelity_boundaries": [
+        "Only defensive numeric rewards and private probe mask; no probe model/text, attack, harmful content generation or training.",
+        "Reject empty probe/policy partitions; Algorithm1 no-probe branch is outside conditional kernel.",
+        "Whole-group sign inversion precedes policy-only filtering.",
+        "No advantage normalization guessed; code path's stale scapegoat import means no end-to-end runnability claim."
+      ],
+      "cost_locator": "Sec.6.1 two H200s/run, multiple1.5B–8Bpolicies,8Bjudge/20Breward,group24,50/160/200epochs,multiplearms3seeds.",
+      "authors_code": {
+        "url": "https://github.com/git-disl/Bait",
+        "revision": "e776d200b86cff0872370f46fdb52e08bf23bcf9",
+        "status": "Public release; read-only inspection. Root project-wide license not verified, nested license not generalized."
+      },
+      "resolution": "component_only + full_experiment_not_reproduced_high_cost",
+      "requires_gpu_validation": false,
+      "production_ab": "not reported"
+    }
+  ],
+  "verification": {
+    "specialized_tests": "tests/post_training/test_nov15_post_components.py",
+    "command": "PYTHONPATH=src python -m pytest tests/post_training/test_nov15_post_components.py -q",
+    "cpu_test_cases_passed": 36,
+    "ruff": "passed on three modules and specialized tests",
+    "gpu_claim": "No GPU execution claimed by this subagent; root owns actual CUDA evidence."
+  },
+  "learning": {
+    "qa": "docs/learning/questions/nov15-post.json",
+    "qa_count": 12,
+    "levels_per_paper": [
+      "basics",
+      "mechanism",
+      "comparison",
+      "implementation"
+    ],
+    "reviewed_english_overlay": "docs/en/learning/translations/qa-nov15-post.json",
+    "deep_dive_proposals": "docs/research-audits/nov15-refresh/deep-dive-proposals-post.json",
+    "deep_dive_count": 3
+  },
+  "known_overlap": {
+    "already_present_ids": [
+      "2611.05266",
+      "2611.08016"
+    ],
+    "delegated_to_other_reviewer": [
+      "2611.16409",
+      "2611.15011"
+    ],
+    "not_claimed_review_complete_for_delegated": true
+  }
+}

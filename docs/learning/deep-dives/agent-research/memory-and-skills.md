@@ -7,7 +7,7 @@ hide:
 
 # 经验进入长期系统前，要解决存取、价值与准入
 
-[Agent](../index.md) · 更新 2026-11-13 · 61 篇主题资料 / 12 篇重点对照
+[Agent](../index.md) · 更新 2026-11-15 · 62 篇主题资料 / 13 篇重点对照
 
 MemGPT 管信息放在哪里，MemPrice 管有限窗口里保留何种精度，CMP 管效用如何识别；Voyager 把成功程序变技能，VaG 管技能进入库的风险，SkillRise 用后续任务检验整理价值。存得下、相关、合法和能帮助未来，是四个不同问题。 EMMA再把结构化记忆分配给controller、agent与skill，按失败scope限制单次编辑及下一次实际使用义务。
 
@@ -37,6 +37,7 @@ MemGPT 管信息放在哪里，MemPrice 管有限窗口里保留何种精度，C
 | [Don&#x27;t Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents](../../../agent-research/2611.14320-wikitrace/README.md) · [原始来源](https://arxiv.org/abs/2611.14320)<br>章节：背景与主要改动、核心公式、数据协议与代码映射 | 冻结训练轨迹、模型解释和洞见的三层证据链接；测试Agent先看全部洞见，再按需回查原始运行。 | 来源可回查不等于解释已验证或Agent会正确使用；本地只有只读语料、hash与导航，没有编译LLM或任务能力对照。 |
 | [LiSA: Lifelong Safety Adaptation via Conservative Policy Induction](../../../agent-research/2605.14454-lisa/README.md) · [原始来源](https://arxiv.org/abs/2605.14454)<br>章节：核心公式、数据协议与代码映射、本地结果与负控 | 以Beta后验下界门控广义策略，并用按领域的混合标签局部提示保留边界；跨日平均链接重聚类和同原句运行时统计继承均显式执行。 | 置信度度量反馈条件下的可复用可靠性，不是因果收益或token效用；本地策略草稿与embedding来自外层，未运行LLM归纳和guardrail。 |
 | [PolicyBank: Evolving Policy Understanding for LLM Agents](../../../agent-research/2604.15505-policybank/README.md) · [原始来源](https://arxiv.org/abs/2604.15505)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界 | 按工具能力存半结构化授权解释，header→ID选择→全文检索，再据外部开发反馈Add/Revise/Omit。 | MemGPT解决有限上下文的分层容量与换入换出，PolicyBank解决spec与requirement差异。容量足够不代表规则正确；本地PolicyBank只有L0合同，语义修复仍缺失。 |
+| [CoReMem: Cost-Internalizing Memory for Successive Coding Tasks with Prospective Valuation](../../../agent-research/2611.17316-coremem/README.md) · [原始来源](https://arxiv.org/abs/2611.17316v1)<br>章节：背景与主要改动、核心公式 | 在继承repo的后续任务上，以同状态有／无记忆rollout估计价值，并将整体价值通过可追踪首次锚点使用门控到步骤。 | MemPrice分配上下文容量与记忆保真；CoReMem优化未来编码解决率和工作量。token占用、行为步骤和语义效用不是同一目标，局部算子不产生记忆内容。 |
 
 </div>
 
@@ -89,6 +90,12 @@ MemPrice在有限token下联合分配保真等级，以效用与长期压力定�
 MemGPT分层归档使长期信息可取回；PolicyBank则允许修正先前解释而不是反复遵守有缺口的规则。标题选择降低注入量，但相关ID选择仍需真实actor。外部PolicyAgent给出修正不应被库当成授权真理，本地只有typed变更和provenance；恶意反馈、真实权限审核与正式验证都在边界外。
 
 对照来源：[policybank](../../../agent-research/2604.15505-policybank/README.md) · [memgpt](../../../agent-research/2310.08560-memgpt/README.md)
+
+### 记忆的价格、价值和信用来自不同测量合同
+
+MemPrice的精确背包把外部估计效用与token大小在容量内折衷，压力队列调节长期保留。CoReMem则必须从相同继承repo比较未来任务，固定成功优先reward，再用锚点定位使用。二者的外部语义模块都没有由本地算子补齐：少存token不等于少做动作，锚点出现不等于因果效果。
+
+对照来源：[coremem](../../../agent-research/2611.17316-coremem/README.md) · [memprice](../../../agent-research/2610.24955-memprice/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -184,9 +191,23 @@ MemGPT分层归档使长期信息可取回；PolicyBank则允许修正先前解�
 
     对照来源：[policybank](../../../agent-research/2604.15505-policybank/README.md) · [memgpt](../../../agent-research/2310.08560-memgpt/README.md)
 
+### 降低记忆token占用是否必然提高CoReMem的前瞻价值？ {#cross-cross-nov15-coremem}
+
+??? note "展开答案与例子"
+
+    **答案：** 不必然。占用节省可能丢掉未来必要检查；CoReMem要在相同继承状态上测后续解决率和工作量。MemPrice的容量目标与这个reward不是可互换指标。
+
+    **教学例子：** 教学例：删掉一条短测试命令只省数token，却可能让下一任务多探索十步。
+
+    对照来源：[coremem](../../../agent-research/2611.17316-coremem/README.md) · [memprice](../../../agent-research/2610.24955-memprice/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-15** · 在继承repo的后续任务上，以同状态有／无记忆rollout估计价值，并将整体价值通过可追踪首次锚点使用门控到步骤。 MemPrice分配上下文容量与记忆保真；CoReMem优化未来编码解决率和工作量。token占用、行为步骤和语义效用不是同一目标，局部算子不产生记忆内容。
+
+涉及：[coremem](../../../agent-research/2611.17316-coremem/README.md) · [memprice](../../../agent-research/2610.24955-memprice/README.md)
 
 **2026-11-13** · 补入policybank历史遗漏，按工具能力存半结构化授权解释，header→ID选择→全文检索，再据外部开发反馈Add/Revise/Omit。 MemGPT解决有限上下文的分层容量与换入换出，PolicyBank解决spec与requirement差异。容量足够不代表规则正确；本地PolicyBank只有L0合同，语义修复仍缺失。
 
@@ -216,7 +237,7 @@ MemGPT分层归档使长期信息可取回；PolicyBank则允许修正先前解�
 
 覆盖 55 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 61 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 62 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -281,6 +302,7 @@ MemGPT分层归档使长期信息可取回；PolicyBank则允许修正先前解�
 - [LiSA: Lifelong Safety Adaptation via Conservative Policy Induction](../../../agent-research/2605.14454-lisa/README.md)
 - [Don&#x27;t Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents](../../../agent-research/2611.14320-wikitrace/README.md)
 - [PolicyBank: Evolving Policy Understanding for LLM Agents](../../../agent-research/2604.15505-policybank/README.md)
+- [CoReMem: Cost-Internalizing Memory for Successive Coding Tasks with Prospective Valuation](../../../agent-research/2611.17316-coremem/README.md)
 
 </details>
 

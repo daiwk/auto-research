@@ -4,19 +4,34 @@
 
 [English home](../index.md) · [中文研究库](../../research-library.md)
 
-The catalog lists 1145 entries from the shared research manifest. English write-ups available: 1145.
+The catalog lists 1163 entries from the shared research manifest. English write-ups available: 1163.
 
 ## Browse by domain
 
-- [Search, ads, recommendation, and LLM applications](recommendation.md): 329 catalog entries, 329 English write-ups
-- [Foundation models](foundation-models.md): 226 catalog entries, 226 English write-ups
+- [Search, ads, recommendation, and LLM applications](recommendation.md): 332 catalog entries, 332 English write-ups
+- [Foundation models](foundation-models.md): 231 catalog entries, 231 English write-ups
 - [Structured decisions / System One](system-one.md): 6 catalog entries, 6 English write-ups
-- [Multimodal models](multimodal-models.md): 25 catalog entries, 25 English write-ups
-- [LLM post-training](post-training.md): 263 catalog entries, 263 English write-ups
-- [Agents](agent-research.md): 296 catalog entries, 296 English write-ups
+- [Multimodal models](multimodal-models.md): 26 catalog entries, 26 English write-ups
+- [LLM post-training](post-training.md): 266 catalog entries, 266 English write-ups
+- [Agents](agent-research.md): 302 catalog entries, 302 English write-ups
 
 ## Read in English
 
+- [Unbundling Multimodal Vision Encoding](../../foundation-models/2611.17334-unbundling-vision/README-en.md)
+- [TriGen: A Generative Paradigm for Trigger-Induced Recommendation](../../recommendation-components/2611.16395-trigen/README-en.md)
+- [Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models](../../post-training/2611.16628-safety-budget-cgrpo/README-en.md)
+- [ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through item Reachability](../../recommendation-components/2611.16404-resid/README-en.md)
+- [KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation](../../recommendation-components/2611.16795-kuairec-v2-protocol/README-en.md)
+- [Experience-Handoff Reinforcement Learning for Recursive Self-Improvement](../../agent-research/2611.16409-ace-rl/README-en.md)
+- [CoReMem: Cost-Internalizing Memory for Successive Coding Tasks with Prospective Valuation](../../agent-research/2611.17316-coremem/README-en.md)
+- [CapLite: Prompt-Injection Defense for Small Language Model Agents without Model-Written Security Artifacts](../../agent-research/2611.17115-caplite/README-en.md)
+- [Bait: Mitigating Harmful Agentic Reinforcement Learning via Probing Reward Function](../../post-training/2611.16369-bait-reward-defense/README-en.md)
+- [Back to Pixels: Lifting Latent Video Diffusion into Pixel Space](../../multimodal-models/2611.17336-pixvid/README-en.md)
+- [Asymmetric Multimodal Learning with Decomposed JEPAs](../../foundation-models/2611.16639-d-jepa/README-en.md)
+- [ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research](../../foundation-models/2611.17332-archspace/README-en.md)
+- [MULTILOOP: Evolving Multi-Agent Harnesses for Complex Information-Seeking Tasks](../../agent-research/2611.15754-multiloop/README-en.md)
+- [Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs?](../../post-training/2611.15404-lgpo/README-en.md)
+- [DuoJEPA: Cross-Modal Translation Between Unaligned Self-Supervised Embedding Spaces](../../foundation-models/2611.15968-duojepa/README-en.md)
 - [When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents](../../agent-research/2611.14326-fgse/README-en.md)
 - [ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows](../../agent-research/2611.14492-retrace/README-en.md)
 - [RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval](../../multimodal-models/2611.14496-rs-jepa/README-en.md)
@@ -473,6 +488,7 @@ The catalog lists 1145 entries from the shared research manifest. English write-
 - [GrowMTP: Can RL Grow Its Own Draft Head?](../../post-training/2609.16648-growmtp/README-en.md)
 - [ECHO: Early-layer Collaborative Hierarchical Orchestration with Bonus Logits in Speculative Decoding](../../foundation-models/2609.17241-echo/README-en.md)
 - [Beyond Token-Local Imitation: Reward-Compatible Temporal Credit Assignment for On-Policy Distillation](../../post-training/2609.16937-gamma-opd/README-en.md)
+- [Stellar Colosseum: A Many-Agent Harness for Long-Horizon Research in Mathematics and Theoretical Computer Science](../../agent-research/2609.15983-stellar-colosseum/README-en.md)
 - [Register Tokens for Bounded-State Reasoning in Diffusion Language Models](../../foundation-models/2609.16372-register-tokens-dllm/README-en.md)
 - [LazFormer: Scaling Transformers for Industrial Recommendation via Transferable Generative Pre-training](../../reproductions/2609.14978-lazformer/README-en.md)
 - [Generate to Explore, Select to Exploit: Aligning LLM-based Headline Generation with Personalized Recommendation](../../reproductions/2609.15094-gese/README-en.md)
@@ -802,6 +818,7 @@ The catalog lists 1145 entries from the shared research manifest. English write-
 - [Taiji: Pareto Optimal Policy Optimization with Semantics-IDs Trade-off for Industrial LLM-Enhanced Recommendation](../../reproductions/2606.03866-taiji/README-en.md)
 - [POLARIS: Guiding Small Models to Write Long Stories](../../post-training/2606.04095-polaris-hri/README-en.md)
 - [Language Models Need Sleep: Learning to Self-Modify and Consolidate Memories](../../foundation-models/2606.03979-sleep-lti/README-en.md)
+- [LEAP: Supercharging LLMs for Formal Mathematics with Agentic Frameworks](../../agent-research/2606.03303-leap-formal-math/README-en.md)
 - [ContinuousBench: Can Differentially Private Synthetic Text Improve Capabilities?](../../foundation-models/2606.01849-continuousbench/README-en.md)
 - [XLGoBench: Detecting cross-lingual skill gaps with algorithmic tasks](../../foundation-models/2605.30788-xlgobench/README-en.md)
 - [Synthetic Data from Cross-Domain Events for Large-Scale Recommendation Systems](../../reproductions/2606.00282-scalr/README-en.md)
@@ -959,6 +976,7 @@ The catalog lists 1145 entries from the shared research manifest. English write-
 - [Mobility-Embedded POIs: Learning What A Place Is and How It Is Used from Human Movement](../../foundation-models/2601.21149-me-pois/README-en.md)
 - [ECO: Quantized Training without Full-Precision Master Weights](../../foundation-models/2601.22101-eco-optimizer/README-en.md)
 - [Towards End-to-End Alignment of User Satisfaction via Questionnaire in Video Recommendation](../../reproductions/2601.20215-easq/README-en.md)
+- [Spectral Ghost in Representation Learning: A Unified View from Component Analysis to Self-Supervised Learning](../../foundation-models/2601.20154-spectral-ghost/README-en.md)
 - [PEARL](../../agent-research/2601.20439-pearl/README-en.md)
 - [Dynamic Cogeneration of Bug Reproduction Test in Agentic Program Repair](../../agent-research/2601.19066-dynamic-brt/README-en.md)
 - [S2GR: Stepwise Semantic-Guided Reasoning in Latent Space for Generative Recommendation](../../reproductions/2601.18664-s2gr/README-en.md)

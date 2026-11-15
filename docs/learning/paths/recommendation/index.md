@@ -25,7 +25,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="generative-retrieval-reasoning/">生成式召回与推理推荐</a></h2>
 <p>把物品改写成token后，推荐究竟改变了哪一步？</p>
-<p class="ar-learning-topic-meta">256 个问题 · 64 篇论文</p>
+<p class="ar-learning-topic-meta">268 个问题 · 67 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="feedback-multitask-causality/">学习信号、多任务与反馈偏差</a></h2>

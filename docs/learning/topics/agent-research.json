@@ -41,7 +41,8 @@
         "agent-research:ds-star",
         "agent-research:era-flat-puct",
         "agent-research:planning-optimality",
-        "agent-research:clarification-sgp"
+        "agent-research:clarification-sgp",
+        "agent-research:leap-formal-math"
       ]
     },
     {
@@ -122,7 +123,8 @@
         "agent-research:engram-consolidation",
         "agent-research:lisa",
         "agent-research:wikitrace",
-        "agent-research:policybank"
+        "agent-research:policybank",
+        "agent-research:coremem"
       ]
     },
     {
@@ -193,7 +195,8 @@
         "agent-research:mrkl",
         "agent-research:saycan",
         "agent-research:webgpt",
-        "agent-research:retrace"
+        "agent-research:retrace",
+        "agent-research:caplite"
       ]
     },
     {
@@ -273,7 +276,9 @@
         "agent-research:envharness",
         "agent-research:mle-star",
         "agent-research:alphaevolve",
-        "agent-research:co-director"
+        "agent-research:co-director",
+        "agent-research:multiloop",
+        "agent-research:stellar-colosseum"
       ]
     },
     {
@@ -347,7 +352,8 @@
         "agent-research:deepresearcher",
         "agent-research:search-r1",
         "agent-research:loop",
-        "agent-research:instruct-to-act"
+        "agent-research:instruct-to-act",
+        "agent-research:ace-rl"
       ]
     },
     {

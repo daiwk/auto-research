@@ -7,7 +7,7 @@ hide:
 
 # 生成式召回与推理推荐
 
-[搜广推](index.md) / 256 个问题 · 64 篇论文
+[搜广推](index.md) / 268 个问题 · 67 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,168 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">256 个问题 · 64 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">268 个问题 · 67 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:kuairec-v2-protocol" data-paper-title="KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation 搜广推与 LLM 应用 University of Science and Technology of China 2026-11-12 静态 item pool 和一次性切分会掩盖生成式推荐的持续学习难题。KuaiRecV2提供30天交互、滚动7天创建窗口、跨日历史和多行为反馈，要求观察每天候选池变化后的适应与遗忘，而不只报最终一个分数。本文的协议价值在于明确三点：每天每用户最后一次交互是validation；FullMonth汇总按验证实例数加权而不是天数宏平均；同一请求只做一次召回，再对不同反馈子集评价，不能为“like”“click”分别生成有利列表。本地仅把这三点变为有限接口，不宣称已实现数据流水线或持续学习系统。 完整持续训练/评测成本过高，不复现（审查 DONE）。本轮未验证仓库或下载数据，未复现其表格。L0 有限协议接口，diagnostic only。没有下载 KuaiRecV2 数据、接入模型或完成 benchmark；完整持续训练/评测成本过高，不复现（审查 DONE）。以公共评测基础设施收录，不伪称工业 A/B 论文。Interaction只含user/day/timestamp/item。split接口没有模型；有限metric接口把retrieval producer与evaluator labels分开，producer并不存在，函数接收的gold只能属于评价器，不应回传给Agent或生成器。  生成式推荐与语义ID 持续学习与多任务公共评测 搜广推 生成式召回与推理推荐 KuaiRecV2每日最后交互是test吗？ §3.1明确是每用户每天的validation。FullMonth另有online leaderboard hold-out test，不能混称。每日切分也不同于每用户整个月只留最后一条。 教学例：同一用户两天各有两条交互，daily leave-one-out留下两个validation，而不是只留月末那一个。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<span id="paper-recommendation-kuairec-v2-protocol-57ce6025" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-7fef91b2da581cea">KuaiRecV2每日最后交互是test吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Akuairec-v2-protocol">KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · University of Science and Technology of China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>§3.1明确是每用户每天的validation。FullMonth另有online leaderboard hold-out test，不能混称。每日切分也不同于每用户整个月只留最后一条。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一用户两天各有两条交互，daily leave-one-out留下两个validation，而不是只留月末那一个。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.16795v1">原论文</a> · <a href="../../../../recommendation-components/2611.16795-kuairec-v2-protocol/">实现解读</a> · <a href="#qa-7fef91b2da581cea">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:kuairec-v2-protocol" data-paper-title="KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation 搜广推与 LLM 应用 University of Science and Technology of China 2026-11-12 静态 item pool 和一次性切分会掩盖生成式推荐的持续学习难题。KuaiRecV2提供30天交互、滚动7天创建窗口、跨日历史和多行为反馈，要求观察每天候选池变化后的适应与遗忘，而不只报最终一个分数。本文的协议价值在于明确三点：每天每用户最后一次交互是validation；FullMonth汇总按验证实例数加权而不是天数宏平均；同一请求只做一次召回，再对不同反馈子集评价，不能为“like”“click”分别生成有利列表。本地仅把这三点变为有限接口，不宣称已实现数据流水线或持续学习系统。 完整持续训练/评测成本过高，不复现（审查 DONE）。本轮未验证仓库或下载数据，未复现其表格。L0 有限协议接口，diagnostic only。没有下载 KuaiRecV2 数据、接入模型或完成 benchmark；完整持续训练/评测成本过高，不复现（审查 DONE）。以公共评测基础设施收录，不伪称工业 A/B 论文。Interaction只含user/day/timestamp/item。split接口没有模型；有限metric接口把retrieval producer与evaluator labels分开，producer并不存在，函数接收的gold只能属于评价器，不应回传给Agent或生成器。  生成式推荐与语义ID 持续学习与多任务公共评测 搜广推 生成式召回与推理推荐 FullMonth为什么不直接平均每天NDCG？ 每天验证实例数可能不同。单一FullMonth分数是sum(Nt*Mt)/sum(Nt)，不是天数宏平均；每日轨迹仍应保留，以观察候选池变化、适应和遗忘。 教学例：第一天1条分数1，第二天3条分数0，月分数为.25，不是.5。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-ed841a9583bda769">FullMonth为什么不直接平均每天NDCG？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Akuairec-v2-protocol">KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · University of Science and Technology of China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>每天验证实例数可能不同。单一FullMonth分数是sum(Nt*Mt)/sum(Nt)，不是天数宏平均；每日轨迹仍应保留，以观察候选池变化、适应和遗忘。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：第一天1条分数1，第二天3条分数0，月分数为.25，不是.5。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.16795v1">原论文</a> · <a href="../../../../recommendation-components/2611.16795-kuairec-v2-protocol/">实现解读</a> · <a href="#qa-ed841a9583bda769">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:kuairec-v2-protocol" data-paper-title="KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation 搜广推与 LLM 应用 University of Science and Technology of China 2026-11-12 静态 item pool 和一次性切分会掩盖生成式推荐的持续学习难题。KuaiRecV2提供30天交互、滚动7天创建窗口、跨日历史和多行为反馈，要求观察每天候选池变化后的适应与遗忘，而不只报最终一个分数。本文的协议价值在于明确三点：每天每用户最后一次交互是validation；FullMonth汇总按验证实例数加权而不是天数宏平均；同一请求只做一次召回，再对不同反馈子集评价，不能为“like”“click”分别生成有利列表。本地仅把这三点变为有限接口，不宣称已实现数据流水线或持续学习系统。 完整持续训练/评测成本过高，不复现（审查 DONE）。本轮未验证仓库或下载数据，未复现其表格。L0 有限协议接口，diagnostic only。没有下载 KuaiRecV2 数据、接入模型或完成 benchmark；完整持续训练/评测成本过高，不复现（审查 DONE）。以公共评测基础设施收录，不伪称工业 A/B 论文。Interaction只含user/day/timestamp/item。split接口没有模型；有限metric接口把retrieval producer与evaluator labels分开，producer并不存在，函数接收的gold只能属于评价器，不应回传给Agent或生成器。  生成式推荐与语义ID 持续学习与多任务公共评测 搜广推 生成式召回与推理推荐 KuaiRecV2接口与TIGER模型是同一层级的实现吗？ 不是。TIGER定义语义ID生成检索模型；KuaiRecV2定义持续学习数据和评估协议，能评价不同模型。本地KuaiRec接口没有模型或官方数据，只是L0 split/metric合同，不能与TIGER本地NDCG排名。 教学例：函数在两个请求上算对HR，不表示在约4.84亿交互上训练或运行了TIGER。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-ed1868e5b4680a2b">KuaiRecV2接口与TIGER模型是同一层级的实现吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Akuairec-v2-protocol">KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · University of Science and Technology of China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。TIGER定义语义ID生成检索模型；KuaiRecV2定义持续学习数据和评估协议，能评价不同模型。本地KuaiRec接口没有模型或官方数据，只是L0 split/metric合同，不能与TIGER本地NDCG排名。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：函数在两个请求上算对HR，不表示在约4.84亿交互上训练或运行了TIGER。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、论文离线与线上效果、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.16795v1">原论文</a> · <a href="../../../../recommendation-components/2611.16795-kuairec-v2-protocol/">实现解读</a> · <a href="#qa-ed1868e5b4680a2b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:kuairec-v2-protocol" data-paper-title="KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation 搜广推与 LLM 应用 University of Science and Technology of China 2026-11-12 静态 item pool 和一次性切分会掩盖生成式推荐的持续学习难题。KuaiRecV2提供30天交互、滚动7天创建窗口、跨日历史和多行为反馈，要求观察每天候选池变化后的适应与遗忘，而不只报最终一个分数。本文的协议价值在于明确三点：每天每用户最后一次交互是validation；FullMonth汇总按验证实例数加权而不是天数宏平均；同一请求只做一次召回，再对不同反馈子集评价，不能为“like”“click”分别生成有利列表。本地仅把这三点变为有限接口，不宣称已实现数据流水线或持续学习系统。 完整持续训练/评测成本过高，不复现（审查 DONE）。本轮未验证仓库或下载数据，未复现其表格。L0 有限协议接口，diagnostic only。没有下载 KuaiRecV2 数据、接入模型或完成 benchmark；完整持续训练/评测成本过高，不复现（审查 DONE）。以公共评测基础设施收录，不伪称工业 A/B 论文。Interaction只含user/day/timestamp/item。split接口没有模型；有限metric接口把retrieval producer与evaluator labels分开，producer并不存在，函数接收的gold只能属于评价器，不应回传给Agent或生成器。  生成式推荐与语义ID 持续学习与多任务公共评测 搜广推 生成式召回与推理推荐 single-retrieval evaluate-all允许每个behavior生成不同候选吗？ 不允许。每request一份列表，评价器根据held-out interaction的behavior划子集，并复用同一rank算HR/NDCG。label是评价器私有输入，不送给producer；多份task-specific列表被拒绝，接口形状也不替代真实泄漏审计。 教学例：click与like子集里同一request必须使用同一推荐结果，不能看到like标签后另生成更好列表。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-2641c6566d33ab14">single-retrieval evaluate-all允许每个behavior生成不同候选吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Akuairec-v2-protocol">KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · University of Science and Technology of China</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不允许。每request一份列表，评价器根据held-out interaction的behavior划子集，并复用同一rank算HR/NDCG。label是评价器私有输入，不送给producer；多份task-specific列表被拒绝，接口形状也不替代真实泄漏审计。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：click与like子集里同一request必须使用同一推荐结果，不能看到like标签后另生成更好列表。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.16795v1">原论文</a> · <a href="../../../../recommendation-components/2611.16795-kuairec-v2-protocol/">实现解读</a> · <a href="#qa-2641c6566d33ab14">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:resid" data-paper-title="ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through item Reachability" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through item Reachability 搜广推与 LLM 应用 Alibaba International Digital Commerce Group 2026-11-12 长尾物品即使有语义表示，也可能因三个连续瓶颈从未进入候选：残差量化上游误差传播、窄 beam 早期剪去低频前缀、exact SID matching 无法容忍少数 token 错误。ReSID 分别用独立子空间的长 parallel SID、流行度校准与用户语义势能引导，以及带 Hamming 容忍度的 partial matching 改善“可达性”。它不只是对最终列表加一个长尾分数。用户语义引导要在每次 beam 扩展前保留相关低频分支，而不是召回结束才补一个真实目标。 完整工业训练与线上实验成本过高，不复现（审查 DONE）。未训练物品编码器、Semantic ID 或推荐网络；L1 CPU 量化 / guided beam / partial-match 组件，diagnostic only。未训练物品编码器、Semantic ID 或推荐网络；完整工业训练与线上实验成本过高，不复现（审查 DONE）。独立 quantization 不训练 MLP/decoder/codebook。guided beam 接收目录 SID、外部相似度、full-vocab logits 回调和训练 prior 回调；没有 target 参数、推荐网络、用户向量训练或线上请求。  生成式推荐与语义ID 长尾可达性与约束解码 搜广推 生成式召回与推理推荐 ReSID为什么不只在最终列表给长尾加分？ 如果相关长尾前缀早被窄beam剪掉，最终列表重排看不到它。ReSID分别处理独立子空间量化、逐步guided beam和Hamming partial matching，改善产生候选的可达性，不把真实目标塞回结果。 教学例：beam第一层只保留热门前缀0，目标位于1分支时，最后再加长尾bonus无法恢复未生成候选。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<span id="paper-recommendation-resid-fa41665a" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-3b6354d5b97a5c1f">ReSID为什么不只在最终列表给长尾加分？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aresid">ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through item Reachability</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Alibaba International Digital Commerce Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>如果相关长尾前缀早被窄beam剪掉，最终列表重排看不到它。ReSID分别处理独立子空间量化、逐步guided beam和Hamming partial matching，改善产生候选的可达性，不把真实目标塞回结果。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：beam第一层只保留热门前缀0，目标位于1分支时，最后再加长尾bonus无法恢复未生成候选。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.16404v1">原论文</a> · <a href="../../../../recommendation-components/2611.16404-resid/">实现解读</a> · <a href="#qa-3b6354d5b97a5c1f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:resid" data-paper-title="ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through item Reachability" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through item Reachability 搜广推与 LLM 应用 Alibaba International Digital Commerce Group 2026-11-12 长尾物品即使有语义表示，也可能因三个连续瓶颈从未进入候选：残差量化上游误差传播、窄 beam 早期剪去低频前缀、exact SID matching 无法容忍少数 token 错误。ReSID 分别用独立子空间的长 parallel SID、流行度校准与用户语义势能引导，以及带 Hamming 容忍度的 partial matching 改善“可达性”。它不只是对最终列表加一个长尾分数。用户语义引导要在每次 beam 扩展前保留相关低频分支，而不是召回结束才补一个真实目标。 完整工业训练与线上实验成本过高，不复现（审查 DONE）。未训练物品编码器、Semantic ID 或推荐网络；L1 CPU 量化 / guided beam / partial-match 组件，diagnostic only。未训练物品编码器、Semantic ID 或推荐网络；完整工业训练与线上实验成本过高，不复现（审查 DONE）。独立 quantization 不训练 MLP/decoder/codebook。guided beam 接收目录 SID、外部相似度、full-vocab logits 回调和训练 prior 回调；没有 target 参数、推荐网络、用户向量训练或线上请求。  生成式推荐与语义ID 长尾可达性与约束解码 搜广推 生成式召回与推理推荐 prefix势能为什么是log-mean-exp，且先full-vocab归一再trie mask？ log-mean-exp除以prefix下物品数，避免单因分支大就加分；logits先减训练transition prior的log，再完整词表softmax。合法子词表重新归一会改变不同prefix间beam分数，不能当等价实现。 教学例：两个prefix的内容相似度都为0，不管包含1个还是10个物品，Phi都为0。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-744d2c11d11e3519">prefix势能为什么是log-mean-exp，且先full-vocab归一再trie mask？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aresid">ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through item Reachability</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Alibaba International Digital Commerce Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>log-mean-exp除以prefix下物品数，避免单因分支大就加分；logits先减训练transition prior的log，再完整词表softmax。合法子词表重新归一会改变不同prefix间beam分数，不能当等价实现。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个prefix的内容相似度都为0，不管包含1个还是10个物品，Phi都为0。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.16404v1">原论文</a> · <a href="../../../../recommendation-components/2611.16404-resid/">实现解读</a> · <a href="#qa-744d2c11d11e3519">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:resid" data-paper-title="ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through item Reachability" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through item Reachability 搜广推与 LLM 应用 Alibaba International Digital Commerce Group 2026-11-12 长尾物品即使有语义表示，也可能因三个连续瓶颈从未进入候选：残差量化上游误差传播、窄 beam 早期剪去低频前缀、exact SID matching 无法容忍少数 token 错误。ReSID 分别用独立子空间的长 parallel SID、流行度校准与用户语义势能引导，以及带 Hamming 容忍度的 partial matching 改善“可达性”。它不只是对最终列表加一个长尾分数。用户语义引导要在每次 beam 扩展前保留相关低频分支，而不是召回结束才补一个真实目标。 完整工业训练与线上实验成本过高，不复现（审查 DONE）。未训练物品编码器、Semantic ID 或推荐网络；L1 CPU 量化 / guided beam / partial-match 组件，diagnostic only。未训练物品编码器、Semantic ID 或推荐网络；完整工业训练与线上实验成本过高，不复现（审查 DONE）。独立 quantization 不训练 MLP/decoder/codebook。guided beam 接收目录 SID、外部相似度、full-vocab logits 回调和训练 prior 回调；没有 target 参数、推荐网络、用户向量训练或线上请求。  生成式推荐与语义ID 长尾可达性与约束解码 搜广推 生成式召回与推理推荐 ReSID的parallel SID与TIGER的residual SID有什么不同？ TIGER后层量化前层残差，早期变化会传到后续输入。ReSID把latent拆独立子空间，每位置自己的codebook，不把前位置误差传下去。需要真实学习各自编码器才可比较能力，本地只验证最近码字算子。 教学例：只扰动第一个子空间，应只可能改变第一个parallel token，不应改变未扰动第二子空间的token。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-0d89b03155fcce70">ReSID的parallel SID与TIGER的residual SID有什么不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aresid">ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through item Reachability</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Alibaba International Digital Commerce Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>TIGER后层量化前层残差，早期变化会传到后续输入。ReSID把latent拆独立子空间，每位置自己的codebook，不把前位置误差传下去。需要真实学习各自编码器才可比较能力，本地只验证最近码字算子。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：只扰动第一个子空间，应只可能改变第一个parallel token，不应改变未扰动第二子空间的token。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.16404v1">原论文</a> · <a href="../../../../recommendation-components/2611.16404-resid/">实现解读</a> · <a href="#qa-0d89b03155fcce70">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:resid" data-paper-title="ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through item Reachability" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through item Reachability 搜广推与 LLM 应用 Alibaba International Digital Commerce Group 2026-11-12 长尾物品即使有语义表示，也可能因三个连续瓶颈从未进入候选：残差量化上游误差传播、窄 beam 早期剪去低频前缀、exact SID matching 无法容忍少数 token 错误。ReSID 分别用独立子空间的长 parallel SID、流行度校准与用户语义势能引导，以及带 Hamming 容忍度的 partial matching 改善“可达性”。它不只是对最终列表加一个长尾分数。用户语义引导要在每次 beam 扩展前保留相关低频分支，而不是召回结束才补一个真实目标。 完整工业训练与线上实验成本过高，不复现（审查 DONE）。未训练物品编码器、Semantic ID 或推荐网络；L1 CPU 量化 / guided beam / partial-match 组件，diagnostic only。未训练物品编码器、Semantic ID 或推荐网络；完整工业训练与线上实验成本过高，不复现（审查 DONE）。独立 quantization 不训练 MLP/decoder/codebook。guided beam 接收目录 SID、外部相似度、full-vocab logits 回调和训练 prior 回调；没有 target 参数、推荐网络、用户向量训练或线上请求。  生成式推荐与语义ID 长尾可达性与约束解码 搜广推 生成式召回与推理推荐 partial matching为什么不能只按最大beam分数排序？ 原文先少mismatch，再更高beam score；一个高分但距离更远的beam不能越过精确匹配。相同SID的不同物品仍保留，最终完全并列时本地按item index；相似度和prior来自训练/内容，不是评价gold。 教学例：物品A距score=-9的beam为0，B距score=-1的beam为1；A仍先于B。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-32e1088d0fc6df3a">partial matching为什么不能只按最大beam分数排序？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Aresid">ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through item Reachability</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Alibaba International Digital Commerce Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>原文先少mismatch，再更高beam score；一个高分但距离更远的beam不能越过精确匹配。相同SID的不同物品仍保留，最终完全并列时本地按item index；相似度和prior来自训练/内容，不是评价gold。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：物品A距score=-9的beam为0，B距score=-1的beam为1；A仍先于B。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.16404v1">原论文</a> · <a href="../../../../recommendation-components/2611.16404-resid/">实现解读</a> · <a href="#qa-32e1088d0fc6df3a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:trigen" data-paper-title="TriGen: A Generative Paradigm for Trigger-Induced Recommendation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="TriGen: A Generative Paradigm for Trigger-Induced Recommendation 搜广推与 LLM 应用 Alibaba International Digital Commerce Group 2026-11-12 商品详情页上刚点击的 trigger 代表即时意图，却未必应该覆盖用户全部历史。简单把 trigger 拼接进序列会将短期 steering 与长期偏好混在一起。TriGen 在固定窗口尾部校准地重复 trigger，以 RoPE 建模相对位置；另从未被 trigger 改写的 pristine history提取 trigger-query 与 default-query 双路径，经输入相关 router 融合，再给各 SID level 独立的 PFFN 条件。 完整工业矩阵成本过高，不复现（审查 DONE）。L1 可微条件模块，diagnostic only。实现 Eq.4–8 的局部结构，不含完整 encoder/decoder 或推荐训练；完整工业矩阵成本过高，不复现（审查 DONE）。小随机历史与 trigger 张量经过真实双路径 attention、pooled router、独立 PFFN 和 backward；含明确padding mask。  生成式推荐与语义ID 触发式推荐与条件融合 搜广推 生成式召回与推理推荐 TriGen为什么还要保存未注入trigger的history？ tail-injected encoder序列已经混合即时意图与历史；双路径另从pristine history提取trigger-query条件和default-query偏好。若都读改写历史，默认分支也可能被trigger污染，失去预期分工。 教学例：保持history不变，只把trigger取负；default history-path应完全相同，trigger-path可以变化。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<span id="paper-recommendation-trigen-74c7f832" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-47b1902b72944c5d">TriGen为什么还要保存未注入trigger的history？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Atrigen">TriGen: A Generative Paradigm for Trigger-Induced Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Alibaba International Digital Commerce Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>tail-injected encoder序列已经混合即时意图与历史；双路径另从pristine history提取trigger-query条件和default-query偏好。若都读改写历史，默认分支也可能被trigger污染，失去预期分工。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：保持history不变，只把trigger取负；default history-path应完全相同，trigger-path可以变化。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.16395v1">原论文</a> · <a href="../../../../recommendation-components/2611.16395-trigen/">实现解读</a> · <a href="#qa-47b1902b72944c5d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:trigen" data-paper-title="TriGen: A Generative Paradigm for Trigger-Induced Recommendation" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="TriGen: A Generative Paradigm for Trigger-Induced Recommendation 搜广推与 LLM 应用 Alibaba International Digital Commerce Group 2026-11-12 商品详情页上刚点击的 trigger 代表即时意图，却未必应该覆盖用户全部历史。简单把 trigger 拼接进序列会将短期 steering 与长期偏好混在一起。TriGen 在固定窗口尾部校准地重复 trigger，以 RoPE 建模相对位置；另从未被 trigger 改写的 pristine history提取 trigger-query 与 default-query 双路径，经输入相关 router 融合，再给各 SID level 独立的 PFFN 条件。 完整工业矩阵成本过高，不复现（审查 DONE）。L1 可微条件模块，diagnostic only。实现 Eq.4–8 的局部结构，不含完整 encoder/decoder 或推荐训练；完整工业矩阵成本过高，不复现（审查 DONE）。小随机历史与 trigger 张量经过真实双路径 attention、pooled router、独立 PFFN 和 backward；含明确padding mask。  生成式推荐与语义ID 触发式推荐与条件融合 搜广推 生成式召回与推理推荐 trigger重复N次会让输入更长吗，router看什么？ 不会。Eq4丢最早N项并在尾部补N份，长度仍M。Eq6分别把两路径跨level均值池化，拼接后产生逐level sigmoid权重，再作convex fusion。不是直接为每个token独立配一个任意门。 教学例：M=5、N=2时保留h3,h4,h5再加两份trigger；router输入是两条全局profile。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-a5bf2f1a7ee441bb">trigger重复N次会让输入更长吗，router看什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Atrigen">TriGen: A Generative Paradigm for Trigger-Induced Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Alibaba International Digital Commerce Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不会。Eq4丢最早N项并在尾部补N份，长度仍M。Eq6分别把两路径跨level均值池化，拼接后产生逐level sigmoid权重，再作convex fusion。不是直接为每个token独立配一个任意门。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：M=5、N=2时保留h3,h4,h5再加两份trigger；router输入是两条全局profile。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.16395v1">原论文</a> · <a href="../../../../recommendation-components/2611.16395-trigen/">实现解读</a> · <a href="#qa-a5bf2f1a7ee441bb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:trigen" data-paper-title="TriGen: A Generative Paradigm for Trigger-Induced Recommendation" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="TriGen: A Generative Paradigm for Trigger-Induced Recommendation 搜广推与 LLM 应用 Alibaba International Digital Commerce Group 2026-11-12 商品详情页上刚点击的 trigger 代表即时意图，却未必应该覆盖用户全部历史。简单把 trigger 拼接进序列会将短期 steering 与长期偏好混在一起。TriGen 在固定窗口尾部校准地重复 trigger，以 RoPE 建模相对位置；另从未被 trigger 改写的 pristine history提取 trigger-query 与 default-query 双路径，经输入相关 router 融合，再给各 SID level 独立的 PFFN 条件。 完整工业矩阵成本过高，不复现（审查 DONE）。L1 可微条件模块，diagnostic only。实现 Eq.4–8 的局部结构，不含完整 encoder/decoder 或推荐训练；完整工业矩阵成本过高，不复现（审查 DONE）。小随机历史与 trigger 张量经过真实双路径 attention、pooled router、独立 PFFN 和 backward；含明确padding mask。  生成式推荐与语义ID 触发式推荐与条件融合 搜广推 生成式召回与推理推荐 在TIGER式生成器前接TriGen局部条件层，就等于复现完整推荐了吗？ 不等于。TIGER还需内容量化与自回归检索，TriGen局部层只改变trigger条件组织。还缺完整encoder/decoder、训练数据、推荐loss和实际候选评估；独立level PFFN也不保证学到有用粒度。 教学例：随机history上router随trigger变化证明输入依赖，但不能证明下一商品Recall提高。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-733f5ae838cc4015">在TIGER式生成器前接TriGen局部条件层，就等于复现完整推荐了吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Atrigen">TriGen: A Generative Paradigm for Trigger-Induced Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Alibaba International Digital Commerce Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不等于。TIGER还需内容量化与自回归检索，TriGen局部层只改变trigger条件组织。还缺完整encoder/decoder、训练数据、推荐loss和实际候选评估；独立level PFFN也不保证学到有用粒度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：随机history上router随trigger变化证明输入依赖，但不能证明下一商品Recall提高。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.16395v1">原论文</a> · <a href="../../../../recommendation-components/2611.16395-trigen/">实现解读</a> · <a href="#qa-733f5ae838cc4015">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:trigen" data-paper-title="TriGen: A Generative Paradigm for Trigger-Induced Recommendation" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="TriGen: A Generative Paradigm for Trigger-Induced Recommendation 搜广推与 LLM 应用 Alibaba International Digital Commerce Group 2026-11-12 商品详情页上刚点击的 trigger 代表即时意图，却未必应该覆盖用户全部历史。简单把 trigger 拼接进序列会将短期 steering 与长期偏好混在一起。TriGen 在固定窗口尾部校准地重复 trigger，以 RoPE 建模相对位置；另从未被 trigger 改写的 pristine history提取 trigger-query 与 default-query 双路径，经输入相关 router 融合，再给各 SID level 独立的 PFFN 条件。 完整工业矩阵成本过高，不复现（审查 DONE）。L1 可微条件模块，diagnostic only。实现 Eq.4–8 的局部结构，不含完整 encoder/decoder 或推荐训练；完整工业矩阵成本过高，不复现（审查 DONE）。小随机历史与 trigger 张量经过真实双路径 attention、pooled router、独立 PFFN 和 backward；含明确padding mask。  生成式推荐与语义ID 触发式推荐与条件融合 搜广推 生成式召回与推理推荐 Eq8的teacher forcing允许推理时把完整目标SID传进来吗？ 不允许。训练右移输入在位置l只读y_l-1；推理只能读已生成prefix。接口要求BOS加L-1个已观察prefix embedding，不能利用未来token；原文未明MLP细节，本地两层GELU也须声明为选择。 教学例：生成第一个SID token时输入是BOS加condition1，不是目标第一个token的embedding。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-31684aa5c8d476fc">Eq8的teacher forcing允许推理时把完整目标SID传进来吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Atrigen">TriGen: A Generative Paradigm for Trigger-Induced Recommendation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Alibaba International Digital Commerce Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不允许。训练右移输入在位置l只读y_l-1；推理只能读已生成prefix。接口要求BOS加L-1个已观察prefix embedding，不能利用未来token；原文未明MLP细节，本地两层GELU也须声明为选择。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：生成第一个SID token时输入是BOS加condition1，不是目标第一个token的embedding。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.16395v1">原论文</a> · <a href="../../../../recommendation-components/2611.16395-trigen/">实现解读</a> · <a href="#qa-31684aa5c8d476fc">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:reusegr" data-paper-title="ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/generative-retrieval-reasoning" data-search="ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse 搜广推与 LLM 应用 Xidian University 2026-11-03 相同query由不同用户重复搜索时，完全在线的生成器反复预测相似的粗粒度SID前缀。ReuseGR将query级7B规划留在离线，把当前用户历史交给0.5B在线后缀补全。前缀深度是可调的覆盖—成本边界，不是越深越好。Path KD先训练后缀评分器，随后冻结评分器，用OPD和GRPO学习BudgetCut：某个分支的作用依赖已经选入的其他分支，不能用静态top-score假装实现。 完整实验成本过高，不复现（审查 DONE）；未训练生成器或分支策略，未接入执行型Evolve。L1 CPU机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；未训练生成器或分支策略，未接入执行型Evolve。ClickRow/label_reuse_depth对应Eq.5–6的Fit侧整行LOO与逐级准则；cache_route保留准备好的深度0与冷miss的不同端点；composite_score对应Eq.10。这里只接受外部显式行和模型logp。真实训练数据、历史时间截断和线上缓存更新由调用者提供，测试标签不可用于拟合深度或补全候选。  生成式召回 离线前缀复用与在线个性化 搜广推 生成式召回与推理推荐 ReuseGR共享的是最终推荐结果吗，为什么还能个性化？ 共享的是只依赖query的SID前缀子树，不是所有用户都复用同一最终列表。在线0.5B仍读取当前请求之前的用户历史，完成前缀之后的SID；深度越大省的解码越多，但不可达目标也可能更多。 教学例：同搜跑鞋的两人共享运动类前缀，一人历史偏马拉松、另一人偏徒步，在线后缀仍能选不同商品；若缓存完整SID，选择空间就更窄。 2026-11-04">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 生成式召回与推理推荐</a></p>
 <span id="paper-recommendation-reusegr-000b2370" class="ar-learning-paper-anchor"></span>

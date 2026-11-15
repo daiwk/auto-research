@@ -155,7 +155,8 @@
         "foundation-models:tess",
         "foundation-models:stochastic-rounding",
         "foundation-models:lidas",
-        "foundation-models:continuousbench"
+        "foundation-models:continuousbench",
+        "foundation-models:archspace"
       ]
     },
     {

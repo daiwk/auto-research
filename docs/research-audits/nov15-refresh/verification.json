@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "verified_on": "2026-11-15",
+  "execution_source_commit": "566debb84d888fe275cc764384480c3ef80d70be",
+  "component_validation": {"cpu_components": 13, "real_a100_cuda_components": 7, "seeds": [42,43,44], "final_cpu_elapsed_seconds": 2.5133032090961933, "final_cuda_elapsed_seconds": 1.9871075004339218, "evaluation_scope": "L0 interfaces and L1 mechanisms only", "full_capability_reproductions": 0},
+  "regression": {
+    "full_suite_command": "PYTHONPATH=src:scripts python -m pytest -q",
+    "full_suite_executed": true,
+    "initial_failing_checks": ["tests/test_architecture_mrb.py::test_specs_are_source_not_inferred_from_docs", "tests/test_docs_math.py::test_math_uses_portable_dollar_delimiters", "tests/test_research_module_docs.py::test_every_paper_page_has_a_valid_original_paper_figure"],
+    "resolution": "Fresh canonical-manifest check passed after generation settled. Formula delimiters, currency units and original-figure attribution were repaired without weakening assertions; all three failures and their affected documentation modules were rerun successfully (20 tests). One subsequently added standalone-date negative-control test also passed.",
+    "current_collection_count": 7722,
+    "single_all_green_full_suite_invocation_claimed": false,
+    "remaining_known_failures": 0,
+    "initial_remote_ci": {"run": "43688582709", "result": "three existing V-CoLA integration failures under Transformers5.23; 7696 passed and18 skipped", "resolution": "Official compact grouped-value heads are normalized only at the state-replay boundary; original assertions remain. Old5.14 and new5.23 each pass18 dedicated tests. New5.23 tiny real vision/hybrid forward also passes CPU and A100 seeds42/43/44, separately from historical9B measurements."},
+    "vcola_compatibility_source_commit": "25b2211322870799e7a150f84963c86df1c44545",
+    "vcola_compatibility_gpu_receipt": "docs/gpu-validations/vcola-gva-compat-a100-20261115.json"
+  },
+  "passed_gates": ["compileall src tests scripts", "ruff check src tests scripts", "manage_paper_specs check", "manage_paper_specs validate", "reviewed bilingual coverage and exact translation source hashes", "authored four-level questions and same-topic deep-dives", "platform completion audit", "GPU evidence validator", "fidelity inventory after reviewing CapLite cursor advancement only after callback success", "minimal-install CLI contracts", "metric schema migration dry-run, zero changes", "discovery implementation reconciliation check", "project README sync", "strict MkDocs build"],
+  "scope": {"papers": 18, "four_level_questions": 72, "new_first_publications": 15, "historical_backfills": 3, "review_watermark_advanced": false, "all_sources_exhaustive": false},
+  "cleanup": {"reproducible_site_output_removed_bytes_approx": 980000000, "raw_failures_and_final_source_evidence_retained": true, "unrelated_user_files_removed": false},
+  "ci_status_policy": "Remote PR checks are separately verified at handoff; local checks do not imply a deployed website."
+}

@@ -7,7 +7,7 @@ hide:
 
 # 训练预算：数据配比、目标与优化器
 
-[基础模型](index.md) / 132 个问题 · 33 篇论文
+[基础模型](index.md) / 136 个问题 · 34 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">132 个问题 · 33 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">136 个问题 · 34 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:archspace" data-paper-title="ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research 基础模型 Shanghai AI Laboratory 2026-11-12 复用基线的最佳超参可能掩盖新架构优势；中途checkpoint的排序也可能在完整学习率衰减后反转。ArchSpace把架构提案、相同数据/tokenizer的预算梯度比较、较长训练和可审查记录连起来。比较从复用基线最优点，到IsoFLOP规模搜索，再到同时搜索LR/BS逐级加严；验证损失按11个域等权，不让大域主导。§3—4 成本过高，不复现（审查 DONE），不下载语料/权重，不试跑完整矩阵，不自动重试。L1 算术组件：只复算论文公开系数的损失曲面和预算关系，不是架构搜索平台，不自动生成或执行 Evolve 候选。CoupledLaw.base_loss/recipe/loss/budget_optimum复算公开曲面、LR/BS耦合与固定FLOP预算下的解析最优点。仅CPU标准库算术，不读取语料、训练模型、检索论文、拟合scaling law或调用Evolve。  预训练与数据 训练预算与公平架构比较 基础模型 训练预算：数据配比、目标与优化器 ArchSpace的M能直接填参数量吗？ 不能。M是训练FLOPs/token，预算C=M乘训练token数D。不同架构的每参数计算量可能不同；把参数量当M会同时破坏预算和公开拟合系数的单位。 教学例：两种结构都1B参数，但每token训练FLOPs不同，不能仅凭1B就认为处于相同IsoFLOP点。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<span id="paper-foundation-models-archspace-8aade641" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-9dc6e7ece181edb1">ArchSpace的M能直接填参数量吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aarchspace">ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Shanghai AI Laboratory</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。M是训练FLOPs/token，预算C=M乘训练token数D。不同架构的每参数计算量可能不同；把参数量当M会同时破坏预算和公开拟合系数的单位。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两种结构都1B参数，但每token训练FLOPs不同，不能仅凭1B就认为处于相同IsoFLOP点。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17332v1">原论文</a> · <a href="../../../../foundation-models/2611.17332-archspace/">实现解读</a> · <a href="#qa-9dc6e7ece181edb1">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:archspace" data-paper-title="ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research 基础模型 Shanghai AI Laboratory 2026-11-12 复用基线的最佳超参可能掩盖新架构优势；中途checkpoint的排序也可能在完整学习率衰减后反转。ArchSpace把架构提案、相同数据/tokenizer的预算梯度比较、较长训练和可审查记录连起来。比较从复用基线最优点，到IsoFLOP规模搜索，再到同时搜索LR/BS逐级加严；验证损失按11个域等权，不让大域主导。§3—4 成本过高，不复现（审查 DONE），不下载语料/权重，不试跑完整矩阵，不自动重试。L1 算术组件：只复算论文公开系数的损失曲面和预算关系，不是架构搜索平台，不自动生成或执行 Evolve 候选。CoupledLaw.base_loss/recipe/loss/budget_optimum复算公开曲面、LR/BS耦合与固定FLOP预算下的解析最优点。仅CPU标准库算术，不读取语料、训练模型、检索论文、拟合scaling law或调用Evolve。  预训练与数据 训练预算与公平架构比较 基础模型 训练预算：数据配比、目标与优化器 batch改成最优值的4倍，为什么条件最优LR要改成2倍？ 惩罚含cosh(e-b/2)，固定b后该项在e=b/2最小，因此eta=eta_star乘sqrt(B/B_star)。但另一个rho乘cosh(b)项仍有惩罚，条件最优不等于整体最优。 教学例：B=4B_star、eta=2eta_star时耦合项为零；batch偏离造成的剩余损失并没有消失。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-0bd35db9e98f3327">batch改成最优值的4倍，为什么条件最优LR要改成2倍？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aarchspace">ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Shanghai AI Laboratory</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>惩罚含cosh(e-b/2)，固定b后该项在e=b/2最小，因此eta=eta_star乘sqrt(B/B_star)。但另一个rho乘cosh(b)项仍有惩罚，条件最优不等于整体最优。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：B=4B_star、eta=2eta_star时耦合项为零；batch偏离造成的剩余损失并没有消失。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17332v1">原论文</a> · <a href="../../../../foundation-models/2611.17332-archspace/">实现解读</a> · <a href="#qa-0bd35db9e98f3327">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:archspace" data-paper-title="ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research 基础模型 Shanghai AI Laboratory 2026-11-12 复用基线的最佳超参可能掩盖新架构优势；中途checkpoint的排序也可能在完整学习率衰减后反转。ArchSpace把架构提案、相同数据/tokenizer的预算梯度比较、较长训练和可审查记录连起来。比较从复用基线最优点，到IsoFLOP规模搜索，再到同时搜索LR/BS逐级加严；验证损失按11个域等权，不让大域主导。§3—4 成本过高，不复现（审查 DONE），不下载语料/权重，不试跑完整矩阵，不自动重试。L1 算术组件：只复算论文公开系数的损失曲面和预算关系，不是架构搜索平台，不自动生成或执行 Evolve 候选。CoupledLaw.base_loss/recipe/loss/budget_optimum复算公开曲面、LR/BS耦合与固定FLOP预算下的解析最优点。仅CPU标准库算术，不读取语料、训练模型、检索论文、拟合scaling law或调用Evolve。  预训练与数据 训练预算与公平架构比较 基础模型 训练预算：数据配比、目标与优化器 ArchSpace与Data Mixing Laws都拟合损失，控制的变量有何不同？ Data Mixing Laws用多组pilot mixture拟合域配比与规模；ArchSpace固定数据/tokenizer，比较架构规模和LR/BS预算关系。两者不能交换系数或把数据改善归因于结构。 教学例：某架构同时换更优语料配比后loss下降，不能仅用ArchSpace曲线断言是架构收益。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-2ff81c1b9aa46486">ArchSpace与Data Mixing Laws都拟合损失，控制的变量有何不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aarchspace">ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Shanghai AI Laboratory</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Data Mixing Laws用多组pilot mixture拟合域配比与规模；ArchSpace固定数据/tokenizer，比较架构规模和LR/BS预算关系。两者不能交换系数或把数据改善归因于结构。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：某架构同时换更优语料配比后loss下降，不能仅用ArchSpace曲线断言是架构收益。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17332v1">原论文</a> · <a href="../../../../foundation-models/2611.17332-archspace/">实现解读</a> · <a href="#qa-2ff81c1b9aa46486">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:archspace" data-paper-title="ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research 基础模型 Shanghai AI Laboratory 2026-11-12 复用基线的最佳超参可能掩盖新架构优势；中途checkpoint的排序也可能在完整学习率衰减后反转。ArchSpace把架构提案、相同数据/tokenizer的预算梯度比较、较长训练和可审查记录连起来。比较从复用基线最优点，到IsoFLOP规模搜索，再到同时搜索LR/BS逐级加严；验证损失按11个域等权，不让大域主导。§3—4 成本过高，不复现（审查 DONE），不下载语料/权重，不试跑完整矩阵，不自动重试。L1 算术组件：只复算论文公开系数的损失曲面和预算关系，不是架构搜索平台，不自动生成或执行 Evolve 候选。CoupledLaw.base_loss/recipe/loss/budget_optimum复算公开曲面、LR/BS耦合与固定FLOP预算下的解析最优点。仅CPU标准库算术，不读取语料、训练模型、检索论文、拟合scaling law或调用Evolve。  预训练与数据 训练预算与公平架构比较 基础模型 训练预算：数据配比、目标与优化器 本地CoupledLaw能执行自动架构搜索吗？ 不能。它只代入作者公开的两组系数并解析预算最优点，没有训练候选、拟合新曲线或控制Evolve。还须验证新架构适用性、完成LR衰减及固定11域验证口径。 教学例：函数返回建议的M和D，不会创建一个对应模型，也不代表那个模型已达到预测loss。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-d09b41fe46999763">本地CoupledLaw能执行自动架构搜索吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aarchspace">ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Shanghai AI Laboratory</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。它只代入作者公开的两组系数并解析预算最优点，没有训练候选、拟合新曲线或控制Evolve。还须验证新架构适用性、完成LR衰减及固定11域验证口径。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：函数返回建议的M和D，不会创建一个对应模型，也不代表那个模型已达到预测loss。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17332v1">原论文</a> · <a href="../../../../foundation-models/2611.17332-archspace/">实现解读</a> · <a href="#qa-d09b41fe46999763">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:stochastic-rounding" data-paper-title="Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding 基础模型 NVIDIA 2026-11-10 FP32 主权重在训练中发生小变化，转为 BF16 后却可能仍落在同一格点，导致 rollout 策略看不到更新。BF16 在一般正规数区间的格距比 FP16 大八倍，因此相似的小步长可表现出不同的有效更新速度。随机舍入按到相邻格点的距离选上下端点，在条件期望上保留主权重变化，而不是强行放大学习率。 完整实验成本过高，不复现（审查 DONE）；诊断对 65536 个值作 BF16 舍入：round-to-nearest 全部回到 1，而 SR 上舍入概率应为。L1 机制组件，diagnostic only。CPU 与真实 NVIDIA A100 三种子验证已通过；完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。adjacent_values 以真实目标格式的 torch.nextafter 构造上下邻居；stochastic_cast 从 FP32 输入按显式 generator 采样，返回 BF16/FP16。概率计算提升为 float64，覆盖目标格式 subnormal；精确值保持不变。  训练与数值系统 低精度训练与随机舍入 基础模型 训练预算：数据配比、目标与优化器 FP32 主权重明明变了，为什么 BF16 rollout 可能完全没变？ 更新可能小于 BF16 当前格点半间距，round-to-nearest 后仍是同一个值。主权重有变化不保证实际 rollout 参数有变化；应观察量化后的权重。 本地示例1+1/1024转为BF16 nearest仍是1，因为该处BF16向上间距为1/128。 2026-11-11">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
 <span id="paper-foundation-models-stochastic-rounding-4cc33c9f" class="ar-learning-paper-anchor"></span>

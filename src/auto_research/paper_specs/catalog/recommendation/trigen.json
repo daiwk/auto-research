@@ -1,0 +1,67 @@
+{
+  "domain": "recommendation",
+  "reviewed_version": "v1",
+  "adapter": null,
+  "intake_class": "new_first_publication",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "gpu_validation_passed": true,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "key": "trigen",
+  "title": "TriGen: A Generative Paradigm for Trigger-Induced Recommendation",
+  "paper_url": "https://arxiv.org/abs/2611.16395v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.16395v1",
+  "detail_path": "recommendation-components/2611.16395-trigen/README.md",
+  "topic": [
+    "生成式推荐与语义ID",
+    "触发式推荐与条件融合"
+  ],
+  "browse_company": "Alibaba",
+  "browse_topic": [
+    "生成式推荐与语义ID",
+    "生成式召回与意图条件"
+  ],
+  "first_author": "Muyu Zou",
+  "first_author_affiliation": "Alibaba International Digital Commerce Group",
+  "published": "2026-11-12",
+  "published_at": "2026-11-12T07:07:10Z",
+  "code": null,
+  "code_status": "截至2026-11-15固定原文及作者入口未找到TriGen方法开源；框架/基线链接不等于作者实现。",
+  "code_license": null,
+  "upstream_revision": null,
+  "priority": "P1",
+  "priority_reason": "§5.5正文六市场量化线上A/B及全量部署，Eq4–8可独立保真检查。",
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "local_operator": "auto_research.reproductions.trigen_components.DualPathConditioner",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.reproductions.trigen_components import diagnostic; print(diagnostic(42, device=\"cpu\"))'",
+  "requires_gpu_validation": true,
+  "gpu_validation_artifact": "docs/gpu-validations/trigen-a100-20261115.json",
+  "online_ab": [
+    {
+      "product": "six-market Southeast Asia product-detail trigger feed",
+      "metric": "traffic-weighted revenue",
+      "lift_percent": 3.27,
+      "traffic": "2026-06-28至07-02,10%randomtraffic/bucket; deployedGR+triggerappendcontrol,upstream/downstreamfixed",
+      "source_url": "https://arxiv.org/html/2611.16395v1#S5.SS5",
+      "source_location": "§5.5 Figure4; weightedGMV+0.90%,revenueallcountries+1.64–8.16%,GMV4/6countries;p<0.05;10.5ms,Julyfullproduction"
+    }
+  ],
+  "cost_assessment": {
+    "source_url": "https://arxiv.org/html/2611.16395v1",
+    "source_location": "Appendix D、§5.5",
+    "model_scale": "public1.51M encoder-decoder,industrial8-levelSIDlonghistory",
+    "data_scale": "public15epochs×5seeds,多个基线/消融；privateindustrialtraining",
+    "paper_configuration": "publicsingleA100;industrial8L20,生产随机流量A/B",
+    "estimated_cost_basis": "完整工业私有训练/多臂与生产矩阵超单卡短时预算；只验独立tensor kernels",
+    "available_resource": "本地Mac或单张NVIDIA A100/A30",
+    "decision": "完整工业实验成本过高，不复现（审查DONE）；仅Eq4–8尾部注入/QKRoPE/双路径/router/PFFN及backward，不下载、不完整试训、不自动重试"
+  },
+  "summary": "固定窗口尾部重复trigger，双条件路径直接读取pristine history，分别pool后逐level路由并用独立PFFN持续调制BOS/已观察prefix。本地无完整encoder-decoder推荐训练，MLP内部两层GELU为明示选择。"
+}

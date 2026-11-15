@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-15",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "post-training:lgpo",
+      "target_card": "post-training/policy-optimization",
+      "source_revisions": {
+        "post-training:lgpo": "2d29d733b860668c8b0f2c9630dda3de928b11414fcb5f60a50dbb20ce7907a1",
+        "post-training:dr-grpo": "604e3c3df040305405bda2166f684e95d0b0263b9fcee56bca0fbe8fc5f6c2fa"
+      },
+      "comparison": {
+        "position": "按当前策略响应平均logp作单侧stop-gradient门控，幸存token优势加权求和、对全部响应平均，不计算old-policy ratio。",
+        "tradeoff": "Dr.GRPO去组std/长度归一化，LGPO改变梯度响应集合；两者不是同一归一化开关。高似然负优势也门控，小logits验证不证明LLM更稳或更快。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "结果、负控与边界",
+          "高成本完整实验"
+        ]
+      },
+      "analysis": {
+        "title": "门控对象与优势尺度是独立的设计轴",
+        "body": "Dr.GRPO保留中心化奖励但移除组std与长度偏置；LGPO不定义新的奖励估计器，而在当前策略平均logp高于门槛时去掉整条响应梯度。把幸存响应重新归一化会按接受率改变更新尺度，与去组std不是等价选择。比较或组合应分别固定采样策略、优势尺度、有效token集合和全响应分母，不能把原文两H100耗时直接外推为本地加速。",
+        "papers": [
+          "post-training:lgpo",
+          "post-training:dr-grpo"
+        ]
+      },
+      "question": {
+        "id": "cross-nov15-lgpo-normalization",
+        "question": "只保留一半响应时，LGPO应除幸存数来补回学习信号吗？",
+        "answer": "固定本地保真口径不应。论文期望的全响应分母让门控样本贡献为零；除幸存数会增加有效步长。Dr.GRPO的去std也不能为这种分母改动提供等价性证明。",
+        "example": "教学例：4条响应仅2条保留且总贡献6，应取-6/4而非-6/2。",
+        "papers": [
+          "post-training:lgpo",
+          "post-training:dr-grpo"
+        ]
+      },
+      "update": {
+        "date": "2026-11-15",
+        "papers": [
+          "post-training:lgpo",
+          "post-training:dr-grpo"
+        ],
+        "summary": "补入LGPO的当前似然门控，与Dr.GRPO的优势尺度分开；保留双符号门控、token求和和全响应分母。完整LLM训练因成本过高不复现，局部梯度不作能力或速度证据。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Gate whole responses by detached current-policy mean log probability; sum retained token advantages and average over all responses without old-policy ratios.",
+          "tradeoff": "Dr. GRPO removes group/length normalization; LGPO selects response gradients. These are different axes. Negative high-likelihood advantages are gated too, and tiny-logit checks prove neither LLM stability nor speed."
+        },
+        "analysis": {
+          "title": "Gradient membership and advantage scale are independent design axes",
+          "body": "Dr. GRPO keeps centered rewards while removing group-std and length biases. LGPO supplies no new reward estimator; it removes whole-response gradients above a current-policy mean-logp threshold. Renormalizing survivors changes step scale by acceptance rate, not by the same operation as removing std. Comparisons or combinations must fix sampling policies, advantage scales, valid tokens and the all-response denominator. The authors' two-H100 timing is not local acceleration evidence."
+        },
+        "question": {
+          "question": "Should LGPO divide by survivors to compensate when half the responses are gated?",
+          "answer": "Not under this fidelity contract. The expectation averages all responses and assigns zero to gated ones. Survivor division increases the effective step size. Dr. GRPO's removed std does not establish equivalence for this denominator change.",
+          "example": "Teaching example: four responses, two retained and total contribution six give -6/4, not -6/2."
+        },
+        "update": "Add current-likelihood LGPO gating separately from Dr. GRPO advantage scaling. Preserve both advantage signs, token sums and the all-response denominator. Full LLM training is not reproduced due to cost; local gradients are not capability or speed evidence."
+      }
+    },
+    {
+      "paper": "post-training:safety-budget-cgrpo",
+      "target_card": "post-training/policy-optimization",
+      "source_revisions": {
+        "post-training:safety-budget-cgrpo": "8d5cbc553888cba6c873ba73acab1ceb14912631efae56688d780e4300fe9abe",
+        "post-training:dr-grpo": "604e3c3df040305405bda2166f684e95d0b0263b9fcee56bca0fbe8fc5f6c2fa"
+      },
+      "comparison": {
+        "position": "保持raw base reward，把训练轨迹PAV映射只放入penalty和dual control，并用不除总std的优势保留multiplier尺度。",
+        "tradeoff": "Dr.GRPO移除std以修正训练偏置；这里同一算术还关系到约束控制是否生效。校准排序与均值level不同，CPU单调映射不是VLM安全或预算达成证据。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射",
+          "结果、负控与边界"
+        ]
+      },
+      "analysis": {
+        "title": "保留乘子不等于校准成本：控制器有两道独立门槛",
+        "body": "Dr.GRPO式未缩放优势能避免总reward组std抵消乘子，但scorer若均值偏高或偏低，dual仍会饱和或关闭。Safety as a Budget因此把训练轨迹拟合的映射仅用于penalty/control，raw base reward保留组内差别。PAV的平台、训练/测试隔离、EMA前态和插值约定都需显式声明；既不能把单调性当校准保证，也不能把另一种逐目标标准化结果写成本地unscaled效果。",
+        "papers": [
+          "post-training:safety-budget-cgrpo",
+          "post-training:dr-grpo"
+        ]
+      },
+      "question": {
+        "id": "cross-nov15-budget-std",
+        "question": "从GRPO改成Dr.GRPO式不除std，就保证安全预算是真实事件率了吗？",
+        "answer": "不能。它保留multiplier对梯度的尺度，但预算还读scorer概率均值；偏差未校准时，控制器可能在错误level稳定。还需独立标签、训练轨迹拟合、held-out评估和明确控制状态。",
+        "example": "教学例：reward尺度保留下来，但scorer始终低估有害率，lambda仍可能归零。",
+        "papers": [
+          "post-training:safety-budget-cgrpo",
+          "post-training:dr-grpo"
+        ]
+      },
+      "update": {
+        "date": "2026-11-15",
+        "papers": [
+          "post-training:safety-budget-cgrpo",
+          "post-training:dr-grpo"
+        ],
+        "summary": "加入Safety as a Budget，区分优势尺度保留与控制level校准；仅实现训练限定PAV、双通道reward和显式EMA dual，不把CPU算术包装成安全训练，完整矩阵成本过高不复现。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Keep raw base rewards, use training-trajectory PAV maps only in penalties/dual control, and retain multiplier scaling with advantages that do not divide by total-reward std.",
+          "tradeoff": "Dr. GRPO removes std to address optimization biases; here that arithmetic also determines whether constraints affect learning. Ranking and mean level differ. A monotone CPU map proves neither VLM safety nor budget satisfaction."
+        },
+        "analysis": {
+          "title": "Preserving multiplier scale and calibrating cost are separate requirements",
+          "body": "Dr. GRPO-style unscaled advantages prevent total-reward group std from canceling multipliers, but biased scorer means can still saturate or deactivate the dual. Safety as a Budget maps only penalties/control using training trajectories while raw base rewards preserve within-group differences. PAV plateaus, data separation, EMA state and interpolation need explicit contracts. Monotonicity is not calibration, and per-objective standardized results are not local unscaled outcomes."
+        },
+        "question": {
+          "question": "Does removing std in a Dr. GRPO-style update make the safety budget a true event rate?",
+          "answer": "No. It preserves gradient scaling by the multiplier, but the budget still reads scorer means. Uncorrected bias can stabilize the controller at the wrong level. Independent labels, training-only fitting, held-out evaluation and explicit state remain necessary.",
+          "example": "Teaching example: gradient scaling is preserved, but a scorer that always understates harmfulness can still drive lambda to zero."
+        },
+        "update": "Add Safety as a Budget to separate advantage scaling from control-level calibration. Only training-limited PAV, two-channel rewards and explicit EMA dual arithmetic are local, not safety training; the high-cost full matrix is not reproduced."
+      }
+    },
+    {
+      "paper": "post-training:bait-reward-defense",
+      "target_card": "post-training/reward-and-credit",
+      "source_revisions": {
+        "post-training:bait-reward-defense": "f0471f7c9153a3c97924eb7be4cab15943df6e0614ff809704877c66f8699492",
+        "post-training:tag-reward-gating": "80ae87925ddaed87f00e62a49e40d87dda1e0d9fe9b35484f0e54b281712298b"
+      },
+      "comparison": {
+        "position": "用防御私有probe与policy的平均外部reward gap判定是否翻转整组，再剔除probe，仅实现Eqs3–5。",
+        "tradeoff": "TAG用独立训练探针的reverse KL选可信anchor后门控辅助奖励；Bait探测环境reward偏好，不是同种probe。无probe语义验证时数值gap不能证明安全，优势std冲突不猜。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "结果、负控与边界",
+          "高成本完整实验"
+        ]
+      },
+      "analysis": {
+        "title": "奖励防御先明确探针来源，再决定变换什么",
+        "body": "TAG的probe是从共同基线单奖励训练的策略，用它自身采样的reverse KL选anchor；Bait的probe是防御者私有membership下的特殊回答，比较外部reward偏好后反转整组。两者都要求探针的真实来源，而不是在评测端读取gold制作完美信号。Bait本地不生成文本或攻击，只验证>=0边界与policy-only过滤；TAG的anchor为零门控也不能替代这种符号判定。",
+        "papers": [
+          "post-training:bait-reward-defense",
+          "post-training:tag-reward-gating"
+        ]
+      },
+      "question": {
+        "id": "cross-nov15-bait-tag-probe",
+        "question": "TAG选出一个可信anchor，就能直接充当Bait的private probe mask吗？",
+        "answer": "不能。TAG选的是奖励维度及训练探针策略，Bait mask区分外部同组回答的来源。两者的输入、采样过程和信任假设不同；必须分别验证，不可从数值组件互相推导真实安全。",
+        "example": "教学例：一个组有三条回答，TAG的正确性anchor分数不是哪一条由防御probe产生的membership。",
+        "papers": [
+          "post-training:bait-reward-defense",
+          "post-training:tag-reward-gating"
+        ]
+      },
+      "update": {
+        "date": "2026-11-15",
+        "papers": [
+          "post-training:bait-reward-defense",
+          "post-training:tag-reward-gating"
+        ],
+        "summary": "补入Google DeepMind相关Bait的防御性reward-gap/sign-flip，和TAG的anchor门控分清来源及变换对象。只实现Eqs3–5，不含有害probe/攻击/训练；原文优势std冲突保留，完整实验高成本不复现。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Use private-probe versus policy external-reward mean gaps to decide whole-group inversion, then remove probes; Eqs.3–5 only.",
+          "tradeoff": "TAG selects an anchor by reverse KL from separately trained probe policies, then gates auxiliary reward. Bait probes environment preferences, a different object. Numeric gaps do not prove probe semantics or safety; conflicting std conventions are not guessed."
+        },
+        "analysis": {
+          "title": "Specify probe provenance before deciding which reward object to transform",
+          "body": "TAG trains one policy per reward from a common baseline and selects an anchor with reverse KL on probe-generated samples. Bait privately marks special responses, compares environment reward preferences and flips the whole group. Both need actual probe provenance, not evaluator gold manufacturing perfect signals. Local Bait generates no text or attack: it checks the >=0 boundary and policy-only output. TAG's zero-anchor gating does not replace this sign rule."
+        },
+        "question": {
+          "question": "Can a trusted TAG anchor directly serve as Bait's private probe mask?",
+          "answer": "No. TAG selects a reward dimension through trained probe policies; Bait membership identifies response provenance within a group. Inputs, sampling and trust assumptions differ and need separate verification. Neither numeric core establishes the other's real safety.",
+          "example": "Teaching example: in a group of three responses, a TAG correctness-anchor score does not identify which response came from a defender probe."
+        },
+        "update": "Add Google DeepMind-related Bait reward-gap/sign-flip defense alongside TAG anchor gating, distinguishing probe provenance and transformed objects. Only Eqs.3–5 are implemented, with no harmful probes, attacks or training. The source std discrepancy is retained; full experiments are not reproduced due to cost."
+      }
+    }
+  ]
+}

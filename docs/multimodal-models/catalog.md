@@ -9,6 +9,7 @@
 
 | 方法族 | 论文 / 官方模型 | 机构与日期 | Adapter / 独立组件 |
 |---|---|---|---|
+| 视觉状态转移监督 | [Back to Pixels: Lifting Latent Video Diffusion into Pixel Space](../multimodal-models/2611.17336-pixvid/README.md) | Roblox，2026-11-12 | 未复现（高成本资料） |
 | 多流语音单元与打分 | [GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling](../multimodal-models/2611.01143-gslm2/README.md) | Meta Superintelligence Labs，2026-10-31 | `gslm2` |
 | 图像匹配与稀疏对应 | [FlexGlue: Sparse-to-Dense Feature Matching and Visual Disambiguation](../multimodal-models/2610.32976-flexglue/README.md) | ETH Zurich，2026-10-23 | 未复现（高成本资料） |
 | 统一动作表示与条件注意力 | [UniAction: Unified Action Conditioning for World Models](../multimodal-models/2610.32977-uniaction/README.md) | Stanford University，2026-10-23 | `uniaction` |

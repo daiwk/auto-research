@@ -7,7 +7,7 @@ hide:
 
 # 运行流程与自进化：改的是哪一层
 
-[Agent](index.md) / 240 个问题 · 60 篇论文
+[Agent](index.md) / 248 个问题 · 62 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">240 个问题 · 60 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">248 个问题 · 62 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:multiloop" data-paper-title="MULTILOOP: Evolving Multi-Agent Harnesses for Complex Information-Seeking Tasks" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="MULTILOOP: Evolving Multi-Agent Harnesses for Complex Information-Seeking Tasks Agent Tel Aviv University 2026-11-11 同样的底层模型，提示、工具、子Agent通信和终止策略不同，效果也可能不同。MULTILOOP检验自动coding agent能否从执行轨迹中诊断并修复多Agent系统：优化器读取训练分数、orchestrator／subagent全部轨迹以及既往代码改动，更新harness，重新评估后继续。正文§1明确不是提出新的优化策略，而是研究已有harness优化方法在多Agent场景的能力边界。实验证据尤其值得注意：大部分提升来自更好的提示和工具使用，而关键编排故障未消失。 完整实验成本过高，不复现（审查 DONE）。review_only：仅资料收录。完整实验成本过高，不复现（审查 DONE）。论文明确是现有优化范式在多Agent场景的实证case study，不制造通用loop组件冒充新算法。仅收录固定v1方法、成本、错误分类、原图和双语学习材料。未实现Antigravity coding optimizer、Gemini actor、DeepSearchQA bridge、网页/PDF工具或harness搜索；没有runtime、机制metrics或GPU收据。若未来正式实现，模型选择仅可使用validation，不能为了挑harness反复读取test。  Harness 与自我改进 多Agent编排诊断 Agent 运行流程与自进化：改的是哪一层 MULTILOOP是否提出了新的多Agent优化算法？ 正文明确不是新优化策略，而是将已有自动harness优化范式用于多Agent信息检索的实证研究。贡献包括真实结果和失败分类，不能用通用for-loop冒称实现新算法。 教学例：把现有代码优化器接到多Agent轨迹上值得研究，但一个空循环不等于复现其语义诊断。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-multiloop-809dc218" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-2a1729302c7511dd">MULTILOOP是否提出了新的多Agent优化算法？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amultiloop">MULTILOOP: Evolving Multi-Agent Harnesses for Complex Information-Seeking Tasks</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Tel Aviv University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>正文明确不是新优化策略，而是将已有自动harness优化范式用于多Agent信息检索的实证研究。贡献包括真实结果和失败分类，不能用通用for-loop冒称实现新算法。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把现有代码优化器接到多Agent轨迹上值得研究，但一个空循环不等于复现其语义诊断。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.15754v1">原论文</a> · <a href="../../../../agent-research/2611.15754-multiloop/">实现解读</a> · <a href="#qa-2a1729302c7511dd">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:multiloop" data-paper-title="MULTILOOP: Evolving Multi-Agent Harnesses for Complex Information-Seeking Tasks" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="MULTILOOP: Evolving Multi-Agent Harnesses for Complex Information-Seeking Tasks Agent Tel Aviv University 2026-11-11 同样的底层模型，提示、工具、子Agent通信和终止策略不同，效果也可能不同。MULTILOOP检验自动coding agent能否从执行轨迹中诊断并修复多Agent系统：优化器读取训练分数、orchestrator／subagent全部轨迹以及既往代码改动，更新harness，重新评估后继续。正文§1明确不是提出新的优化策略，而是研究已有harness优化方法在多Agent场景的能力边界。实验证据尤其值得注意：大部分提升来自更好的提示和工具使用，而关键编排故障未消失。 完整实验成本过高，不复现（审查 DONE）。review_only：仅资料收录。完整实验成本过高，不复现（审查 DONE）。论文明确是现有优化范式在多Agent场景的实证case study，不制造通用loop组件冒充新算法。仅收录固定v1方法、成本、错误分类、原图和双语学习材料。未实现Antigravity coding optimizer、Gemini actor、DeepSearchQA bridge、网页/PDF工具或harness搜索；没有runtime、机制metrics或GPU收据。若未来正式实现，模型选择仅可使用validation，不能为了挑harness反复读取test。  Harness 与自我改进 多Agent编排诊断 Agent 运行流程与自进化：改的是哪一层 优化器除了当前分数，还需要看什么？ 需要完整orchestrator／subagent轨迹、工具输入输出以及历轮代码编辑和评测历史。分数告诉它哪里没成功，细节和历史才支持定位失误并避免反复试过的改动。 教学例：分数低不能区分子任务分错、检索范围漂移或最后答案合成错。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-9efb74d1acf6f006">优化器除了当前分数，还需要看什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amultiloop">MULTILOOP: Evolving Multi-Agent Harnesses for Complex Information-Seeking Tasks</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Tel Aviv University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>需要完整orchestrator／subagent轨迹、工具输入输出以及历轮代码编辑和评测历史。分数告诉它哪里没成功，细节和历史才支持定位失误并避免反复试过的改动。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：分数低不能区分子任务分错、检索范围漂移或最后答案合成错。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.15754v1">原论文</a> · <a href="../../../../agent-research/2611.15754-multiloop/">实现解读</a> · <a href="#qa-9efb74d1acf6f006">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:multiloop" data-paper-title="MULTILOOP: Evolving Multi-Agent Harnesses for Complex Information-Seeking Tasks" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="MULTILOOP: Evolving Multi-Agent Harnesses for Complex Information-Seeking Tasks Agent Tel Aviv University 2026-11-11 同样的底层模型，提示、工具、子Agent通信和终止策略不同，效果也可能不同。MULTILOOP检验自动coding agent能否从执行轨迹中诊断并修复多Agent系统：优化器读取训练分数、orchestrator／subagent全部轨迹以及既往代码改动，更新harness，重新评估后继续。正文§1明确不是提出新的优化策略，而是研究已有harness优化方法在多Agent场景的能力边界。实验证据尤其值得注意：大部分提升来自更好的提示和工具使用，而关键编排故障未消失。 完整实验成本过高，不复现（审查 DONE）。review_only：仅资料收录。完整实验成本过高，不复现（审查 DONE）。论文明确是现有优化范式在多Agent场景的实证case study，不制造通用loop组件冒充新算法。仅收录固定v1方法、成本、错误分类、原图和双语学习材料。未实现Antigravity coding optimizer、Gemini actor、DeepSearchQA bridge、网页/PDF工具或harness搜索；没有runtime、机制metrics或GPU收据。若未来正式实现，模型选择仅可使用validation，不能为了挑harness反复读取test。  Harness 与自我改进 多Agent编排诊断 Agent 运行流程与自进化：改的是哪一层 MULTILOOP变好是否等于HarnessLens式可归因编排修复？ 不等于。MULTILOOP多数收益来自提示和工具，编排故障仍在；HarnessLens强调行为相关任务上的配对验证与归因门。总体涨分不能单独证明某种结构修复有效。 教学例：把搜索提示写清楚提高总分，也可能完全没有改善子任务分配。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-883812c474339799">MULTILOOP变好是否等于HarnessLens式可归因编排修复？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amultiloop">MULTILOOP: Evolving Multi-Agent Harnesses for Complex Information-Seeking Tasks</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Tel Aviv University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不等于。MULTILOOP多数收益来自提示和工具，编排故障仍在；HarnessLens强调行为相关任务上的配对验证与归因门。总体涨分不能单独证明某种结构修复有效。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把搜索提示写清楚提高总分，也可能完全没有改善子任务分配。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.15754v1">原论文</a> · <a href="../../../../agent-research/2611.15754-multiloop/">实现解读</a> · <a href="#qa-883812c474339799">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:multiloop" data-paper-title="MULTILOOP: Evolving Multi-Agent Harnesses for Complex Information-Seeking Tasks" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="MULTILOOP: Evolving Multi-Agent Harnesses for Complex Information-Seeking Tasks Agent Tel Aviv University 2026-11-11 同样的底层模型，提示、工具、子Agent通信和终止策略不同，效果也可能不同。MULTILOOP检验自动coding agent能否从执行轨迹中诊断并修复多Agent系统：优化器读取训练分数、orchestrator／subagent全部轨迹以及既往代码改动，更新harness，重新评估后继续。正文§1明确不是提出新的优化策略，而是研究已有harness优化方法在多Agent场景的能力边界。实验证据尤其值得注意：大部分提升来自更好的提示和工具使用，而关键编排故障未消失。 完整实验成本过高，不复现（审查 DONE）。review_only：仅资料收录。完整实验成本过高，不复现（审查 DONE）。论文明确是现有优化范式在多Agent场景的实证case study，不制造通用loop组件冒充新算法。仅收录固定v1方法、成本、错误分类、原图和双语学习材料。未实现Antigravity coding optimizer、Gemini actor、DeepSearchQA bridge、网页/PDF工具或harness搜索；没有runtime、机制metrics或GPU收据。若未来正式实现，模型选择仅可使用validation，不能为了挑harness反复读取test。  Harness 与自我改进 多Agent编排诊断 Agent 运行流程与自进化：改的是哪一层 训练只用10道题，为什么仍判完整实验高成本？ 每题涉及多个真实检索Agent及长工具轨迹；原文单轮10题也花104–213美元，890测试题双次评估花数千至上万美元。样本数不是模型调用成本。 教学例：10道每题并行几十次搜索的任务，可能比上千个CPU算术样例贵得多。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-4bff878ff793a916">训练只用10道题，为什么仍判完整实验高成本？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Amultiloop">MULTILOOP: Evolving Multi-Agent Harnesses for Complex Information-Seeking Tasks</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Tel Aviv University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>每题涉及多个真实检索Agent及长工具轨迹；原文单轮10题也花104–213美元，890测试题双次评估花数千至上万美元。样本数不是模型调用成本。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：10道每题并行几十次搜索的任务，可能比上千个CPU算术样例贵得多。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.15754v1">原论文</a> · <a href="../../../../agent-research/2611.15754-multiloop/">实现解读</a> · <a href="#qa-4bff878ff793a916">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:fgse" data-paper-title="When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents Agent Nanyang Technological University 2026-11-10 一次经验修复能帮助当前任务，却可能在边界任务有害，或破坏旧技能。FGSE 将更新表示为带前提、行为、预期效果和 verifier 的假设，先在临时状态上跑迁移、定向证伪和归档回归探针，再 commit/refine/reject。风险集中于可分离子范围时允许一次前提细化；它不是“成功经验一律记住”。 完整实验成本过高，不复现（审查 DONE）。本地交付纯 CPU 经验准入门控，输入外部 verifier 的成对记录；不生成 Agent、探针或正确答案，不把门控通过率当任务成功率。Probe 保存同一探针在原状态/临时状态的有限分数及预期效果布尔值；不保存 gold answer。commitment_gate() 按 Eq.7–9 计算并返回三统计量和决定。调用者必须实际取得成对 verifier 结果；这里既没有 actor callback，也没有把预设分数冒充模型执行。  自进化与技能优化 证伪与回归保护 Agent 运行流程与自进化：改的是哪一层 FGSE 为什么不能把修好当前任务的经验立即写进长期记忆？ 当前任务增益没有覆盖迁移、边界反例和旧技能。FGSE 要在临时状态上分别测这些风险，再决定写入、一次细化或拒绝；只有原任务成功不足以支持持久化。 教学例：某工具报错时“始终重试”修好一次瞬时故障，但在付款已成功、回执丢失时可能重复扣款。 2026-11-11">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-fgse-8827308e" class="ar-learning-paper-anchor"></span>
@@ -2147,6 +2200,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>例如计数显示内层改两次、外层更新一次，只说明控制状态发生变化，没有真实轨迹和梯度就不足以证明策略学会任务。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、复现边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.17523">原论文</a> · <a href="../../../../agent-research/2609.17523-sciencebuddy/">实现解读</a> · <a href="#qa-04bf786ad243175c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:stellar-colosseum" data-paper-title="Stellar Colosseum: A Many-Agent Harness for Long-Horizon Research in Mathematics and Theoretical Computer Science" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Stellar Colosseum: A Many-Agent Harness for Long-Horizon Research in Mathematics and Theoretical Computer Science Agent Google Research 2026-09-14 长证明失败不仅是单步推理不够好，还可能路线不成熟、子问题假设不匹配、跨节依赖循环，或把已被攻击的结论传下去。Colosseum先探索策略，经readiness gate确定路线能否支持稳定的证明结构，再分解为依赖DAG；独立节并行求解，局部失败重试，完整文档再全局核查，必要时重新探索。每阶段也不是单模型一次生成：候选和针对它的falsification记录成对进入树综合。每个综合节点独立随机抽取若干不同输入，组间可重叠而非分区；综合保留冲突和反驳，不按票数把异议平均掉。 完整语义研究实验成本过高，不复现（审查 DONE），不以通用tree／DAG组件冒充证明能力。review_only：历史Google高优先补漏，仅资料收录。完整语义研究实验成本过高，不复现（审查 DONE），不以通用tree／DAG组件冒充证明能力。仅固定v1资料、成本、原图和双语学习内容，没有语义策略器、readiness gate模型、证明grader、Long Proof运行时、Codeforces执行器或TCS-Bench接入。无runtime、能力metrics或GPU收据。  Harness 与自我改进 多Agent长程科学研究 Agent 运行流程与自进化：改的是哪一层 readiness gate通过是否表示证明已经正确？ 不是。它只表示路线足够稳定，未解决命题能明确分给证明小节。局部结果和拼接全文还要分别复核，严重策略缺陷应回到探索而不是强行续写。 教学例：知道需要证明哪条lemma不等于已证明它，更不等于它的前提可被下游直接引用。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-stellar-colosseum-8449360f" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-02048153a50d509e">readiness gate通过是否表示证明已经正确？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Astellar-colosseum">Stellar Colosseum: A Many-Agent Harness for Long-Horizon Research in Mathematics and Theoretical Computer Science</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。它只表示路线足够稳定，未解决命题能明确分给证明小节。局部结果和拼接全文还要分别复核，严重策略缺陷应回到探索而不是强行续写。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：知道需要证明哪条lemma不等于已证明它，更不等于它的前提可被下游直接引用。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.15983v1">原论文</a> · <a href="../../../../agent-research/2609.15983-stellar-colosseum/">实现解读</a> · <a href="#qa-02048153a50d509e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:stellar-colosseum" data-paper-title="Stellar Colosseum: A Many-Agent Harness for Long-Horizon Research in Mathematics and Theoretical Computer Science" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Stellar Colosseum: A Many-Agent Harness for Long-Horizon Research in Mathematics and Theoretical Computer Science Agent Google Research 2026-09-14 长证明失败不仅是单步推理不够好，还可能路线不成熟、子问题假设不匹配、跨节依赖循环，或把已被攻击的结论传下去。Colosseum先探索策略，经readiness gate确定路线能否支持稳定的证明结构，再分解为依赖DAG；独立节并行求解，局部失败重试，完整文档再全局核查，必要时重新探索。每阶段也不是单模型一次生成：候选和针对它的falsification记录成对进入树综合。每个综合节点独立随机抽取若干不同输入，组间可重叠而非分区；综合保留冲突和反驳，不按票数把异议平均掉。 完整语义研究实验成本过高，不复现（审查 DONE），不以通用tree／DAG组件冒充证明能力。review_only：历史Google高优先补漏，仅资料收录。完整语义研究实验成本过高，不复现（审查 DONE），不以通用tree／DAG组件冒充证明能力。仅固定v1资料、成本、原图和双语学习内容，没有语义策略器、readiness gate模型、证明grader、Long Proof运行时、Codeforces执行器或TCS-Bench接入。无runtime、能力metrics或GPU收据。  Harness 与自我改进 多Agent长程科学研究 Agent 运行流程与自进化：改的是哪一层 候选树综合是把样本分组后多数投票吗？ 不是。每节点组内无放回，组间独立可重叠；输入保留候选及其反驳。语义综合可修补或保留冲突，明确致命缺陷不能被多数模糊认可压掉。 教学例：一个反例足以推翻定理，即使另外五个模型说看起来没问题。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-d663e8f2a687793c">候选树综合是把样本分组后多数投票吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Astellar-colosseum">Stellar Colosseum: A Many-Agent Harness for Long-Horizon Research in Mathematics and Theoretical Computer Science</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。每节点组内无放回，组间独立可重叠；输入保留候选及其反驳。语义综合可修补或保留冲突，明确致命缺陷不能被多数模糊认可压掉。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个反例足以推翻定理，即使另外五个模型说看起来没问题。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.15983v1">原论文</a> · <a href="../../../../agent-research/2609.15983-stellar-colosseum/">实现解读</a> · <a href="#qa-d663e8f2a687793c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:stellar-colosseum" data-paper-title="Stellar Colosseum: A Many-Agent Harness for Long-Horizon Research in Mathematics and Theoretical Computer Science" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Stellar Colosseum: A Many-Agent Harness for Long-Horizon Research in Mathematics and Theoretical Computer Science Agent Google Research 2026-09-14 长证明失败不仅是单步推理不够好，还可能路线不成熟、子问题假设不匹配、跨节依赖循环，或把已被攻击的结论传下去。Colosseum先探索策略，经readiness gate确定路线能否支持稳定的证明结构，再分解为依赖DAG；独立节并行求解，局部失败重试，完整文档再全局核查，必要时重新探索。每阶段也不是单模型一次生成：候选和针对它的falsification记录成对进入树综合。每个综合节点独立随机抽取若干不同输入，组间可重叠而非分区；综合保留冲突和反驳，不按票数把异议平均掉。 完整语义研究实验成本过高，不复现（审查 DONE），不以通用tree／DAG组件冒充证明能力。review_only：历史Google高优先补漏，仅资料收录。完整语义研究实验成本过高，不复现（审查 DONE），不以通用tree／DAG组件冒充证明能力。仅固定v1资料、成本、原图和双语学习内容，没有语义策略器、readiness gate模型、证明grader、Long Proof运行时、Codeforces执行器或TCS-Bench接入。无runtime、能力metrics或GPU收据。  Harness 与自我改进 多Agent长程科学研究 Agent 运行流程与自进化：改的是哪一层 Stellar Colosseum和ScientistTwo的全局核查可以统一成success字段吗？ 不应。前者核对证明假设、跨节依赖和目标结论，后者组织子集／全量实验、消融和评审。两者都需外部语义判断，但判断对象与充分证据不同。 教学例：benchmark均分提高不能证明数学引理，证明无矛盾也不能替代真实实验对照。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-c2c32ed8b03c31e4">Stellar Colosseum和ScientistTwo的全局核查可以统一成success字段吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Astellar-colosseum">Stellar Colosseum: A Many-Agent Harness for Long-Horizon Research in Mathematics and Theoretical Computer Science</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不应。前者核对证明假设、跨节依赖和目标结论，后者组织子集／全量实验、消融和评审。两者都需外部语义判断，但判断对象与充分证据不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：benchmark均分提高不能证明数学引理，证明无矛盾也不能替代真实实验对照。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.15983v1">原论文</a> · <a href="../../../../agent-research/2609.15983-stellar-colosseum/">实现解读</a> · <a href="#qa-c2c32ed8b03c31e4">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:stellar-colosseum" data-paper-title="Stellar Colosseum: A Many-Agent Harness for Long-Horizon Research in Mathematics and Theoretical Computer Science" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="Stellar Colosseum: A Many-Agent Harness for Long-Horizon Research in Mathematics and Theoretical Computer Science Agent Google Research 2026-09-14 长证明失败不仅是单步推理不够好，还可能路线不成熟、子问题假设不匹配、跨节依赖循环，或把已被攻击的结论传下去。Colosseum先探索策略，经readiness gate确定路线能否支持稳定的证明结构，再分解为依赖DAG；独立节并行求解，局部失败重试，完整文档再全局核查，必要时重新探索。每阶段也不是单模型一次生成：候选和针对它的falsification记录成对进入树综合。每个综合节点独立随机抽取若干不同输入，组间可重叠而非分区；综合保留冲突和反驳，不按票数把异议平均掉。 完整语义研究实验成本过高，不复现（审查 DONE），不以通用tree／DAG组件冒充证明能力。review_only：历史Google高优先补漏，仅资料收录。完整语义研究实验成本过高，不复现（审查 DONE），不以通用tree／DAG组件冒充证明能力。仅固定v1资料、成本、原图和双语学习内容，没有语义策略器、readiness gate模型、证明grader、Long Proof运行时、Codeforces执行器或TCS-Bench接入。无runtime、能力metrics或GPU收据。  Harness 与自我改进 多Agent长程科学研究 Agent 运行流程与自进化：改的是哪一层 71.0%与oracle77.3%为什么必须分开，参考proof能给选择器吗？ 71.0%来自8次critique的可执行选路；77.3%只是假设知道两套候选谁正确的上界。参考proof仅供最终grader，若给actor或选择器就把oracle上界伪装成真实能力。 教学例：不知道答案时选候选，与事后看gold挑正确那条，是不同评测协议。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-92f626d83f8f2223">71.0%与oracle77.3%为什么必须分开，参考proof能给选择器吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Astellar-colosseum">Stellar Colosseum: A Many-Agent Harness for Long-Horizon Research in Mathematics and Theoretical Computer Science</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>71.0%来自8次critique的可执行选路；77.3%只是假设知道两套候选谁正确的上界。参考proof仅供最终grader，若给actor或选择器就把oracle上界伪装成真实能力。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：不知道答案时选候选，与事后看gold挑正确那条，是不同评测协议。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2609.15983v1">原论文</a> · <a href="../../../../agent-research/2609.15983-stellar-colosseum/">实现解读</a> · <a href="#qa-92f626d83f8f2223">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:cobra-skills" data-paper-title="COBRA-Skills: Contextual Bandit-Guided Evolution for Agent Skill Optimization" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="COBRA-Skills: Contextual Bandit-Guided Evolution for Agent Skill Optimization Agent The Chinese University of Hong Kong, Shenzhen 2026-09-10 把技能优化视为动态候选空间中的预算化 contextual bandit，优先评估高收益或高信息量技能，再依据执行反馈演化。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 contextual-UCB 分配和反馈接纳；没有调用外部 LLM 或六套真实环境。本地执行 contextual-UCB 分配和反馈接纳；没有调用外部 LLM 或六套真实环境。三种子指标见 metrics/mechanism-seeds42-44.json。所有候选使用相同公开 fixture、预算和 seed；本页结果只证明核心状态转换实际执行。  技能进化 Contextual bandit Agent 运行流程与自进化：改的是哪一层 技能候选持续增长时，COBRA-Skills 为什么不能给每个候选同样多的试验机会？ 评估技能会消耗任务执行预算，候选数量与质量又会随演化变化，平均分配可能浪费在明显无用或重复的条目上。COBRA-Skills 研究结合当前上下文和已见反馈安排试验，使有限预算更有针对性。选择器只能利用已获得证据，不能把未执行候选的效果当成已知。 教学例：十份相似技能已有多次失败记录，新生成的一份可能仍值得少量探索；预算不够时，全部各跑百次并不可行。 2026-10-27">

@@ -7,7 +7,7 @@ hide:
 
 # 自改进先标对象：答案、经验、接口与系统版本
 
-[Agent](../index.md) · 更新 2026-11-13 · 60 篇主题资料 / 23 篇重点对照
+[Agent](../index.md) · 更新 2026-11-15 · 62 篇主题资料 / 25 篇重点对照
 
 Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。
 
@@ -48,6 +48,8 @@ Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens �
 | [MLE-STAR: Machine Learning Engineering Agent via Search and Targeted Refinement](../../../agent-research/2506.15692-mle-star/README.md) · [原始来源](https://arxiv.org/abs/2506.15692v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 检索模型并实际验证合并，再以消融定位高影响代码块，内层改写/验证、外层重新定位，集成另行搜索。 | 搜索材料与块级训练反馈必须真实执行；不同于MARS按成本奖励调度仓库候选。八V100及小时级完整矩阵不复现，本地无控制器或能力指标。 |
 | [AlphaEvolve: A coding agent for scientific and algorithmic discovery](../../../agent-research/2506.13131-alphaevolve/README.md) · [原始来源](https://arxiv.org/abs/2506.13131v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果、高成本完整实验 | 固定人类评价合同，混合LLM提案、级联执行评价与多维进化档案，异步探索程序空间。 | 指标优化仍受评价器充分性约束，不等于ScientistOne的主张/引用/方法完整性审计。官方只开放构造验证资料，完整搜索/生产矩阵高成本不复现，本地没有算子。 |
 | [Co-Director: Agentic Generative Video Storytelling](../../../agent-research/2604.24842-co-director/README.md) · [原始来源](https://arxiv.org/abs/2604.24842)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界 | 分别更新策略/叙事/美学轴的战略reward，用推荐冷启动和UCB选方向，独立质量分选择已有视频。 | CoDirector用UCB乐观探索尚不确定的创意方向；RuHarness按联合后验效用的低分位保守选择rubric frontier，再让独立validation决定harness是否晋级。探索奖励和准入证据不能互换，也都不把judge关联分当因果效应。 |
+| [MULTILOOP: Evolving Multi-Agent Harnesses for Complex Information-Seeking Tasks](../../../agent-research/2611.15754-multiloop/README.md) · [原始来源](https://arxiv.org/abs/2611.15754v1)<br>章节：背景与主要改动、核心公式 | 把既有自动harness优化用于真实多Agent检索，记录完整历史并分析优化后仍未消除的编排失败；不提出新优化器。 | HarnessLens强调受影响行为的配对验证与归因门；MULTILOOP的整体提升多来自提示和工具。总分提高不能单独证明结构协调改善，10训练样例也不代表低API成本。 |
+| [Stellar Colosseum: A Many-Agent Harness for Long-Horizon Research in Mathematics and Theoretical Computer Science](../../../agent-research/2609.15983-stellar-colosseum/README.md) · [原始来源](https://arxiv.org/abs/2609.15983v1)<br>章节：背景与主要改动、核心公式 | 策略readiness门后分解证明依赖，带反驳的重叠树综合与全局验证指导局部修订／重新探索，结果grader与候选选择隔离。 | ScientistTwo控制子集到全量实验和review闭环；Colosseum核查数学假设与跨节论证。共同的多阶段形态不使语义judge或证据充分性可互换。 |
 
 </div>
 
@@ -136,6 +138,18 @@ AlphaEvolve需要一个能实际评价候选程序的目标，靠程序库和模
 CoDirector在3/3/4个创意轴上用战略reward均值加UCB探索项分配下一次尝试，官方warmstart只推荐先试未观察arm，不虚构计数。RuHarness从六格联合Dirichlet后验抽2000次，取效用0.2分位保守选择active rubric，候选harness仍须独立validation严格增益超过0.05才晋级。前者的不确定性鼓励探索，后者抑制小样本虚高；不能用UCB高分替代验证改善。CoDirector最终成片还按独立质量分而非战略分之和选取。本地只核两类数值机制，没有视频生成、语义judge或完整自进化能力证据。
 
 对照来源：[co-director](../../../agent-research/2604.24842-co-director/README.md) · [ruharness](../../../agent-research/2610.36826-ruharness/README.md)
+
+### 优化有收益不等于编排改动获得了因果证明
+
+MULTILOOP让编码优化器读轨迹改harness，但实证指出关键编排故障继续存在。HarnessLens将验收收窄到相关行为任务并要求配对可归因证据。两者提醒我们分清搜索发现、候选验收和机制解释；若完整模型／工具缺席，简单循环只能说明控制流，不能重建原文收益。
+
+对照来源：[multiloop](../../../agent-research/2611.15754-multiloop/README.md) · [harnesslens](../../../agent-research/2608.27311-harnesslens/README.md)
+
+### 科学研究控制器的成功取决于领域证据，而非统一success标签
+
+ScientistTwo的升阶、消融与严格比较针对可执行实验；Colosseum的readiness、局部复核和全局反驳针对长证明。未发现反例不等于证明正确，模拟评审高分也不等于会议录用。二者完整系统依赖高成本外部语义研究；本地通用tree或callback不会自动继承这种能力。
+
+对照来源：[stellar-colosseum](../../../agent-research/2609.15983-stellar-colosseum/README.md) · [scientist-two](../../../agent-research/2609.19644-scientist-two/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -291,9 +305,37 @@ CoDirector在3/3/4个创意轴上用战略reward均值加UCB探索项分配下�
 
     对照来源：[co-director](../../../agent-research/2604.24842-co-director/README.md) · [ruharness](../../../agent-research/2610.36826-ruharness/README.md)
 
+### MULTILOOP总准确率提高，能说明子Agent委派结构已被优化好吗？ {#cross-cross-nov15-multiloop}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。prompt-only和工具变化可贡献多数收益，编排故障仍持续。要把提升归因到委派结构，需保持其他条件并对相关行为做有据对照。
+
+    **教学例子：** 教学例：新增PDF读取能力提高得分，不等于解决了重复派工。
+
+    对照来源：[multiloop](../../../agent-research/2611.15754-multiloop/README.md) · [harnesslens](../../../agent-research/2608.27311-harnesslens/README.md)
+
+### 用最终参考证明挑选Colosseum候选，可以作为更强的ScientistTwo式评审吗？ {#cross-cross-nov15-stellar-colosseum}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。参考proof仅供最终benchmark grader；给选择器会把oracle best-of-two上界当真实推理能力。研究评审同样必须守住held-out信息边界。
+
+    **教学例子：** 教学例：先看标准解再挑对的论文，不能称无泄漏自主研究。
+
+    对照来源：[stellar-colosseum](../../../agent-research/2609.15983-stellar-colosseum/README.md) · [scientist-two](../../../agent-research/2609.19644-scientist-two/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-15** · 策略readiness门后分解证明依赖，带反驳的重叠树综合与全局验证指导局部修订／重新探索，结果grader与候选选择隔离。 ScientistTwo控制子集到全量实验和review闭环；Colosseum核查数学假设与跨节论证。共同的多阶段形态不使语义judge或证据充分性可互换。
+
+涉及：[stellar-colosseum](../../../agent-research/2609.15983-stellar-colosseum/README.md) · [scientist-two](../../../agent-research/2609.19644-scientist-two/README.md)
+
+**2026-11-15** · 把既有自动harness优化用于真实多Agent检索，记录完整历史并分析优化后仍未消除的编排失败；不提出新优化器。 HarnessLens强调受影响行为的配对验证与归因门；MULTILOOP的整体提升多来自提示和工具。总分提高不能单独证明结构协调改善，10训练样例也不代表低API成本。
+
+涉及：[multiloop](../../../agent-research/2611.15754-multiloop/README.md) · [harnesslens](../../../agent-research/2608.27311-harnesslens/README.md)
 
 **2026-11-13** · 补入CoDirector分轴UCB和独立质量选优，与RuHarness联合后验低分位及validation准入比较：明确乐观探索和保守接受的不同不确定性用途；两者本地机制检查均不是完整生成或自进化能力。
 
@@ -351,7 +393,7 @@ CoDirector在3/3/4个创意轴上用战略reward均值加UCB探索项分配下�
 
 覆盖 43 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 60 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 62 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -415,6 +457,8 @@ CoDirector在3/3/4个创意轴上用战略reward均值加UCB探索项分配下�
 - [MLE-STAR: Machine Learning Engineering Agent via Search and Targeted Refinement](../../../agent-research/2506.15692-mle-star/README.md)
 - [AlphaEvolve: A coding agent for scientific and algorithmic discovery](../../../agent-research/2506.13131-alphaevolve/README.md)
 - [Co-Director: Agentic Generative Video Storytelling](../../../agent-research/2604.24842-co-director/README.md)
+- [MULTILOOP: Evolving Multi-Agent Harnesses for Complex Information-Seeking Tasks](../../../agent-research/2611.15754-multiloop/README.md)
+- [Stellar Colosseum: A Many-Agent Harness for Long-Horizon Research in Mathematics and Theoretical Computer Science](../../../agent-research/2609.15983-stellar-colosseum/README.md)
 
 </details>
 

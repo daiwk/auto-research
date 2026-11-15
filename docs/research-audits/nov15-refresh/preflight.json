@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-15-paper-refresh",
+  "component_keys": [
+    "resid",
+    "trigen",
+    "kuairec-v2-protocol",
+    "unbundling-vision",
+    "archspace",
+    "d-jepa",
+    "duojepa",
+    "lgpo",
+    "safety-budget-cgrpo",
+    "bait-reward-defense",
+    "coremem",
+    "caplite",
+    "ace-rl"
+  ],
+  "cuda_keys": [
+    "ace-rl",
+    "coremem",
+    "d-jepa",
+    "duojepa",
+    "lgpo",
+    "trigen",
+    "unbundling-vision"
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "evaluation_tiers": {
+    "resid": "l1_mechanism",
+    "trigen": "l1_mechanism",
+    "kuairec-v2-protocol": "l0_interface",
+    "unbundling-vision": "l1_mechanism",
+    "archspace": "l1_mechanism",
+    "d-jepa": "l1_mechanism",
+    "duojepa": "l1_mechanism",
+    "lgpo": "l1_mechanism",
+    "safety-budget-cgrpo": "l1_mechanism",
+    "bait-reward-defense": "l1_mechanism",
+    "coremem": "l1_mechanism",
+    "caplite": "l1_mechanism",
+    "ace-rl": "l1_mechanism"
+  },
+  "maximum_run_seconds": 180,
+  "maximum_cuda_devices": 1,
+  "model_and_dataset_downloads": 0,
+  "pretrained_model_calls": 0,
+  "api_calls": 0,
+  "full_experiments_executed": false,
+  "automatic_retry": false,
+  "input_scope": "seeded small tensors, exact finite examples and external-output evaluator protocols; no model capability comparison",
+  "scope_note": "13 source-bound components; additional review-only papers have no executable metrics. Full-experiment dispositions are per-paper, not inferred from a diagnostic pass."
+}

@@ -7,7 +7,7 @@ hide:
 
 # 训练预算：改数据、改更新方向，还是改比较口径
 
-[基础模型](../index.md) · 更新 2026-11-13 · 33 篇主题资料 / 11 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-15 · 34 篇主题资料 / 12 篇重点对照
 
 同一预算内训练得更好，可能来自更合适的数据、逐样本处理、更有效更新或更低状态开销。DoReMi、Mixing Laws、DataOrchestra、Muon 和 ECO 改动不同环节；Muon Paired Budget 则提醒先冻结选参规则，再分别回答等数据和等时间问题。ProLand改变LoRA乘积空间的更新几何，GAVAGAI则给captioning增加显式词区域对齐目标，二者不能仅因都改善训练就混为一类。
 
@@ -36,6 +36,7 @@ hide:
 | [Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding](../../../foundation-models/2611.13545-stochastic-rounding/README.md) · [原始来源](https://arxiv.org/abs/2611.13545v1)<br>章节：核心公式、数据协议与代码映射、结果、负控与边界 | 保留FP32主权重，以距离比例在相邻BF16/FP16值间随机选择，使量化后的条件期望等于更新值，缓解小更新被nearest舍入吞没。 | 不同于ECO通过动量补偿并移除主权重，SR本身不节省master存储；无偏不等于每步更准或必然更快。trainer/rollout仍需加载同一量化权重，L1标量核不证明64卡RL曲线。 |
 | [Do Depth-Grown Models Overcome the Curse of Depth? An In-Depth Analysis](../../../foundation-models/2512.08819-lidas/README.md) · [原始来源](https://arxiv.org/abs/2512.08819v1)<br>章节：背景与主要改动、核心机制与公式、原文结果与限制、本地复现 | 深层 Transformer 后半段可能对最终预测贡献很小。论文比较从浅到深逐步生长与固定深度预训练，并提出 LIDAS：以层而不是固定块的中点选择复制区域，使偶数块时的初始化区别于 MIDAS。 | LIDAS改变层数、初始化和优化器状态继承；随机舍入改变FP32主权重进入低精度参数时的量化分布。两者的控制变量、预算和误差来源不同，需分别验证，再做同预算组合实验。 |
 | [ContinuousBench: Can Differentially Private Synthetic Text Improve Capabilities?](../../../foundation-models/2606.01849-continuousbench/README.md) · [原始来源](https://arxiv.org/abs/2606.01849v1)<br>章节：背景与主要改动、核心机制与公式、原文结果与限制、本地复现 | 若benchmark已经被基座模型做得很好，合成数据是否真正传递新知识就难以区分。ContinuousBench定期生成或整理未见知识语料及相应QA，统一训练/evaluator设置，并与未经该语料训练的同一基座比较；关注高重复公共事实的utility，不要求DP模型记住单条私有记录。 | 不说明。gain评估合成数据utility，ε/δ隐私来自明确DP机制和会计；不应混淆高重复事实可学与单条私有记录可记忆。本地没有DP训练/会计，也没有复现News的LLMjudge。 |
+| [ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research](../../../foundation-models/2611.17332-archspace/README.md) · [原始来源](https://arxiv.org/abs/2611.17332v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 固定数据和tokenizer，用FLOPs/token、训练token数及LR/BS耦合曲面比较架构；最终衰减checkpoint和11域等权validation是比较协议的一部分。 | Data Mixing Laws改变域比例并从pilot拟合配比；ArchSpace控制架构规模与LR/BS。两类曲面系数不能交换，公开算术复算也不等于重新拟合或执行自动架构搜索。 |
 
 </div>
 
@@ -76,6 +77,12 @@ LIDAS改变层数、初始化和优化器状态继承；随机舍入改变FP32�
 不说明。gain评估合成数据utility，ε/δ隐私来自明确DP机制和会计；不应混淆高重复事实可学与单条私有记录可记忆。本地没有DP训练/会计，也没有复现News的LLMjudge。 `score_geminon` 独立实现固定作者代码的清洗/匹配语义；`capability_gain`要求两臂题目ID、问题、gold与release revision完全一致，基线必须显式给出；`select_validation_checkpoint`拒绝test行。不得把contains与exact混为一谈：Flying and Normal可覆盖Normal and Flying的两类型，但不是相同字符串。无模型调用、HF大下载、DP-SGD或News自动judge。
 
 对照来源：[continuousbench](../../../foundation-models/2606.01849-continuousbench/README.md) · [data-orchestra](../../../reproductions/2607.24717-data-orchestra/README.md)
+
+### 拟合损失之前先固定干预变量和预算单位
+
+相同loss输出不意味着相同研究任务。Data Mixing Laws的输入有mixture simplex，ArchSpace把数据固定并用C=MD计训练FLOPs。M不是参数量，LR条件最优随batch平方根变化；未重跑新架构的pilot就不能用旧基线系数宣称收益。
+
+对照来源：[archspace](../../../foundation-models/2611.17332-archspace/README.md) · [data-mixing-laws](../../../reproductions/2403.16952-data-mixing-laws/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -151,9 +158,23 @@ LIDAS改变层数、初始化和优化器状态继承；随机舍入改变FP32�
 
     对照来源：[continuousbench](../../../foundation-models/2606.01849-continuousbench/README.md) · [data-orchestra](../../../reproductions/2607.24717-data-orchestra/README.md)
 
+### Data Mixing Laws与ArchSpace都能预测loss，为什么不能直接串起来就说完成了架构进化？ {#cross-nov15-archspace}
+
+??? note "展开答案与例子"
+
+    **答案：** 它们分别拟合数据配比与架构/超参预算关系；串接需要真实候选训练、验证各自外推范围并统一预算。仅注册或调用公开系数没有执行和评测新候选。
+
+    **教学例子：** 改变语料配比同时改变架构后，loss下降仍需要对照区分数据与结构贡献。
+
+    对照来源：[archspace](../../../foundation-models/2611.17332-archspace/README.md) · [data-mixing-laws](../../../reproductions/2403.16952-data-mixing-laws/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-15** · 补入固定版本方法、低成本组件或明确资料收录，分开原文结果、本地诊断及高成本不复现范围。
+
+涉及：[archspace](../../../foundation-models/2611.17332-archspace/README.md) · [data-mixing-laws](../../../reproductions/2403.16952-data-mixing-laws/README.md)
 
 **2026-11-13** · 补入固定Google COLM历史来源论文及L1组件，比较核心定义与证据边界；完整实验明确不复现，不把本地诊断当模型能力或Evolve改进。
 
@@ -175,7 +196,7 @@ LIDAS改变层数、初始化和优化器状态继承；随机舍入改变FP32�
 
 覆盖 28 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 33 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 34 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -212,6 +233,7 @@ LIDAS改变层数、初始化和优化器状态继承；随机舍入改变FP32�
 - [Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding](../../../foundation-models/2611.13545-stochastic-rounding/README.md)
 - [Do Depth-Grown Models Overcome the Curse of Depth? An In-Depth Analysis](../../../foundation-models/2512.08819-lidas/README.md)
 - [ContinuousBench: Can Differentially Private Synthetic Text Improve Capabilities?](../../../foundation-models/2606.01849-continuousbench/README.md)
+- [ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research](../../../foundation-models/2611.17332-archspace/README.md)
 
 </details>
 

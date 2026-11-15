@@ -1,0 +1,355 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-15",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "agent-research:leap-formal-math",
+      "target_card": "agent-research/planning-and-search",
+      "source_revisions": {
+        "agent-research:leap-formal-math": "17fe86bc34707ba86c654c88b441365dad786ad11fd9d177498f4865f20608ed",
+        "agent-research:drago": "782a0f46ed3b1c6fbd600b0c0faf2668c7744c511fbb00b4b2ec7b9442cee3a0"
+      },
+      "comparison": {
+        "position": "用持久AND–OR DAG复用已验证lemma，交替非形式blueprint、Lean sketch、compiler反馈与语义分解review；保留v1日期并固定v3核查。",
+        "tradeoff": "DRAGO核查形式规格是否忠实且不退化；LEAP还要防止合法分解无进展。形式通过、有用搜索和原任务忠实是三个不同门，均不能把参考答案传给actor。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式"
+        ]
+      },
+      "analysis": {
+        "title": "形式验证只保证你表达的陈述，不保证表达得有用或正确",
+        "body": "DRAGO的可解规格可能遗漏原任务目标，因此要求诊断和反退化。LEAP的Lean sketch即使类型正确，也可能将原命题换名作为子lemma，需要语义review指导进展。两个系统都将确定性检查与外部语义判断分开；本地STRIPS核或通用DAG都不能变成Lean证明与自然语言对齐的替代品。",
+        "papers": [
+          "agent-research:leap-formal-math",
+          "agent-research:drago"
+        ]
+      },
+      "question": {
+        "id": "cross-nov15-leap-formal-math",
+        "question": "Lean接受sketch与DRAGO规划器找到plan，是否都可直接当作原任务完成？",
+        "answer": "不能。前者可能仍依赖未证明且无简化的子lemma，后者可能求解了表达错误或弱化的规格。需要分别检查所有必要证明义务、有用进展和题意忠实度。",
+        "example": "教学例：把目标定理本身作为假设当然能推出目标，但并没有完成证明。",
+        "papers": [
+          "agent-research:leap-formal-math",
+          "agent-research:drago"
+        ]
+      },
+      "update": {
+        "date": "2026-11-15",
+        "papers": [
+          "agent-research:leap-formal-math",
+          "agent-research:drago"
+        ],
+        "summary": "补入Google LEAP历史修订v3：区分形式有效、有用分解和题意忠实，保留6月首发与11月修订口径。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Reuse verified lemmas in a persistent AND–OR DAG, alternating informal blueprints, Lean sketches, compiler feedback and semantic decomposition review; preserve v1 publication while reviewing v3.",
+          "tradeoff": "DRAGO tests specification fidelity/non-regression; LEAP must also reject formally valid but unproductive decomposition. Formal validity, useful search and task fidelity are distinct, with no reference leakage."
+        },
+        "analysis": {
+          "title": "Formal verification checks the expressed claim, not whether it is useful or intended",
+          "body": "A solvable DRAGO specification may omit the original goal, motivating diagnostics and anti-degradation. A type-correct LEAP sketch may rename its parent as a child lemma, requiring semantic review for progress. Deterministic checks and external semantics remain separate; STRIPS kernels or generic DAGs do not replace Lean proving or language fidelity."
+        },
+        "question": {
+          "question": "Do a Lean-accepted sketch and a DRAGO planner's valid plan each establish completion?",
+          "answer": "No. A sketch may retain unproved/unhelpful lemmas; a plan may solve a weakened or incorrect specification. Necessary obligations, useful progress and task fidelity require separate checks.",
+          "example": "Teaching example: assuming the target theorem trivially entails it but does not prove it."
+        },
+        "update": "Add Google LEAP's historical v3 revision, separating formal validity, useful decomposition and task fidelity while retaining June publication and November revision."
+      }
+    },
+    {
+      "paper": "agent-research:coremem",
+      "target_card": "agent-research/memory-and-skills",
+      "source_revisions": {
+        "agent-research:coremem": "928dc32cc32d12de7ca6c54a6ebb6b7568a1cd04a013a0b96f744deb9207b209",
+        "agent-research:memprice": "d4ee0743c138d1d79e69a22798bddc199b6cea29fbbbcb6d1410a067b48b8c40"
+      },
+      "comparison": {
+        "position": "在继承repo的后续任务上，以同状态有／无记忆rollout估计价值，并将整体价值通过可追踪首次锚点使用门控到步骤。",
+        "tradeoff": "MemPrice分配上下文容量与记忆保真；CoReMem优化未来编码解决率和工作量。token占用、行为步骤和语义效用不是同一目标，局部算子不产生记忆内容。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式"
+        ]
+      },
+      "analysis": {
+        "title": "记忆的价格、价值和信用来自不同测量合同",
+        "body": "MemPrice的精确背包把外部估计效用与token大小在容量内折衷，压力队列调节长期保留。CoReMem则必须从相同继承repo比较未来任务，固定成功优先reward，再用锚点定位使用。二者的外部语义模块都没有由本地算子补齐：少存token不等于少做动作，锚点出现不等于因果效果。",
+        "papers": [
+          "agent-research:coremem",
+          "agent-research:memprice"
+        ]
+      },
+      "question": {
+        "id": "cross-nov15-coremem",
+        "question": "降低记忆token占用是否必然提高CoReMem的前瞻价值？",
+        "answer": "不必然。占用节省可能丢掉未来必要检查；CoReMem要在相同继承状态上测后续解决率和工作量。MemPrice的容量目标与这个reward不是可互换指标。",
+        "example": "教学例：删掉一条短测试命令只省数token，却可能让下一任务多探索十步。",
+        "papers": [
+          "agent-research:coremem",
+          "agent-research:memprice"
+        ]
+      },
+      "update": {
+        "date": "2026-11-15",
+        "papers": [
+          "agent-research:coremem",
+          "agent-research:memprice"
+        ],
+        "summary": "在继承repo的后续任务上，以同状态有／无记忆rollout估计价值，并将整体价值通过可追踪首次锚点使用门控到步骤。 MemPrice分配上下文容量与记忆保真；CoReMem优化未来编码解决率和工作量。token占用、行为步骤和语义效用不是同一目标，局部算子不产生记忆内容。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Value memory through matched-state future-task rollouts and gate its overall value to traceable first-use steps.",
+          "tradeoff": "MemPrice allocates context capacity/fidelity; CoReMem optimizes future resolution/work. Token occupancy, action steps and semantic utility differ, and local kernels generate no memory."
+        },
+        "analysis": {
+          "title": "Memory price, value and credit require distinct measurement contracts",
+          "body": "MemPrice trades externally estimated utility against token size under a hard budget, adapting long-run retention through a pressure queue. CoReMem requires future tasks from an identical inherited repository, a success-first reward and anchor-based traceability. Neither local kernel fills in external semantic models: fewer tokens do not imply fewer actions, and an anchor is not causality."
+        },
+        "question": {
+          "question": "Must lower memory-token occupancy increase CoReMem prospective value?",
+          "answer": "No. Compression may remove a needed future check. CoReMem measures later resolution/work from identical inherited states; MemPrice capacity and this reward are not interchangeable.",
+          "example": "Teaching example: removing a short test command saves a few tokens but may add ten exploration steps."
+        },
+        "update": "Value memory through matched-state future-task rollouts and gate its overall value to traceable first-use steps. MemPrice allocates context capacity/fidelity; CoReMem optimizes future resolution/work. Token occupancy, action steps and semantic utility differ, and local kernels generate no memory."
+      }
+    },
+    {
+      "paper": "agent-research:caplite",
+      "target_card": "agent-research/tools-and-collaboration",
+      "source_revisions": {
+        "agent-research:caplite": "2c380139ce94eb86eb96b0c23440b0b3896e4450f8c9bb9f69bb7e902a9646d5",
+        "agent-research:runtime-tickets": "5b00948adf9bb0542e98df053cfe7028c1ab6925099a181503296520a390d8d4"
+      },
+      "comparison": {
+        "position": "可信schema推导authority，请求精确grounding限制值，读取前提交的写序列限制动作，首次失败停止剩余副作用。",
+        "tradeoff": "RuntimeTickets依赖有源obligation、host grant收紧和累计预算；CapLite的信任根是schema及请求。两者都要求所有真实副作用经过可信host，局部callback不是网络隔离保证。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式"
+        ]
+      },
+      "analysis": {
+        "title": "在副作用前检查，还要说明检查依据从哪里来",
+        "body": "CapLite不让小模型写安全策略，而从可信schema和请求绑定authority，附加写序列承诺。RuntimeTickets保留模型提出obligation的路径，但通过原文依据和host批准冻结权限，再检查对象与预算。它们均不能让不可信观察自封授权，也不证明绕过mediator的工具被保护；安全边界不是简单的allow布尔值。",
+        "papers": [
+          "agent-research:caplite",
+          "agent-research:runtime-tickets"
+        ]
+      },
+      "question": {
+        "id": "cross-nov15-caplite",
+        "question": "只要CapLite参数都能ground到请求，就能替代RuntimeTickets的总量限制吗？",
+        "answer": "不能。grounding限定值是否被请求提及，未限制合法动作累计多少次／多少bytes。后者必须由独立grant和预算合同实现，且要防重放。",
+        "example": "教学例：向用户指定邮箱发送一次合法，不表示可重复发送一千次。",
+        "papers": [
+          "agent-research:caplite",
+          "agent-research:runtime-tickets"
+        ]
+      },
+      "update": {
+        "date": "2026-11-15",
+        "papers": [
+          "agent-research:caplite",
+          "agent-research:runtime-tickets"
+        ],
+        "summary": "可信schema推导authority，请求精确grounding限制值，读取前提交的写序列限制动作，首次失败停止剩余副作用。 RuntimeTickets依赖有源obligation、host grant收紧和累计预算；CapLite的信任根是schema及请求。两者都要求所有真实副作用经过可信host，局部callback不是网络隔离保证。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Trusted schemas derive authority, exact request grounding limits values, pre-read commitment limits actions, and the first failure stops remaining effects.",
+          "tradeoff": "RuntimeTickets narrows host grants through sourced obligations and cumulative budgets. CapLite trusts schemas/request. Both need all effects mediated; callbacks are not network isolation."
+        },
+        "analysis": {
+          "title": "Pre-effect checks must expose the origin of their authority",
+          "body": "CapLite removes model-written security policy in favor of trusted schemas, request grounding and write commitments. RuntimeTickets allows proposed obligations but freezes source-backed host-approved tickets before checking objects and budgets. Neither permits untrusted observations to authorize effects or protects tools that bypass mediation. Security is more than an allow flag."
+        },
+        "question": {
+          "question": "Can grounded CapLite arguments replace RuntimeTickets cumulative limits?",
+          "answer": "No. Grounding says values occur in the request, not how many times or bytes legal actions may accumulate. Separate grant/budget and replay contracts are required.",
+          "example": "Teaching example: one authorized email does not authorize a thousand repeated deliveries."
+        },
+        "update": "Trusted schemas derive authority, exact request grounding limits values, pre-read commitment limits actions, and the first failure stops remaining effects. RuntimeTickets narrows host grants through sourced obligations and cumulative budgets. CapLite trusts schemas/request. Both need all effects mediated; callbacks are not network isolation."
+      }
+    },
+    {
+      "paper": "agent-research:ace-rl",
+      "target_card": "agent-research/agent-policy-learning",
+      "source_revisions": {
+        "agent-research:ace-rl": "7989ff55c2e398e5021a7eefab63a136188cc84c6139a3ab56cdbdf22c8223ed",
+        "agent-research:gigpo": "04e545cea1c7a5927b091ffd5108a2d424a1af6d1d473e9ecf5a3c0af5894075"
+      },
+      "comparison": {
+        "position": "按任务、种子、反思来源建立三角色比较组，交接物信用取自全新actor的下游表现，联合生成token-mean更新共享模型。",
+        "tradeoff": "GiGPO在轨迹与共享anchor-state层分macro/micro信用；ACE-RL比较的是生成交接物的角色来源，不是state合流。没有真实actor环境时只能验证公式和控制合同。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式"
+        ]
+      },
+      "analysis": {
+        "title": "组相对信用首先要明确组里比较的对象",
+        "body": "GiGPO把轨迹整体reward和同一anchor-state动作差异分开；ACE-RL让actor任务、reflector种子和curator反思各自成组，编辑价值来自新的执行而非文字评分。即使两者都中心化reward，来源、counterfactual和信息边界也不同。singleton过滤与token归约还会改变哪些角色被训练，不能用一个通用group-normalize替代。",
+        "papers": [
+          "agent-research:ace-rl",
+          "agent-research:gigpo"
+        ]
+      },
+      "question": {
+        "id": "cross-nov15-ace-rl",
+        "question": "把所有actor、reflector和curator按同一task合成一个GRPO组是否保留ACE-RL？",
+        "answer": "不保留。它们reward含义和比较来源不同，会把角色基线混合。原文必须保留seed／reflection provenance，最后才合并token执行一次共享策略更新。",
+        "example": "教学例：同一反思的三条编辑要互比，不能与另一个actor的任务分数直接抢基线。",
+        "papers": [
+          "agent-research:ace-rl",
+          "agent-research:gigpo"
+        ]
+      },
+      "update": {
+        "date": "2026-11-15",
+        "papers": [
+          "agent-research:ace-rl",
+          "agent-research:gigpo"
+        ],
+        "summary": "按任务、种子、反思来源建立三角色比较组，交接物信用取自全新actor的下游表现，联合生成token-mean更新共享模型。 GiGPO在轨迹与共享anchor-state层分macro/micro信用；ACE-RL比较的是生成交接物的角色来源，不是state合流。没有真实actor环境时只能验证公式和控制合同。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Build task/seed/reflection role groups, value handoffs through fresh downstream actors, and update one shared model using a joint generated-token mean.",
+          "tradeoff": "GiGPO separates trajectory macro and shared-anchor-state micro credit. ACE-RL groups handoff provenance, not convergent states. Without real actors/environments only formulas/control contracts are measured."
+        },
+        "analysis": {
+          "title": "Group-relative credit begins with what each group compares",
+          "body": "GiGPO separates whole-trajectory reward from action differences at a shared anchor state. ACE-RL groups actor tasks, reflector seeds and curator reflections, valuing edits through new execution rather than prose scoring. Shared centering does not equal shared provenance, counterfactuals or information boundaries. Singleton filters/token reductions also change training and cannot be hidden in one generic normalizer."
+        },
+        "question": {
+          "question": "Does one task-level GRPO group combining actors, reflectors and curators preserve ACE-RL?",
+          "answer": "No. Their rewards and comparison provenance differ. Preserve seed/reflection groups before concatenating generated tokens for a shared update.",
+          "example": "Teaching example: three edits from one reflection compare with each other, not directly with a separate actor's task score."
+        },
+        "update": "Build task/seed/reflection role groups, value handoffs through fresh downstream actors, and update one shared model using a joint generated-token mean. GiGPO separates trajectory macro and shared-anchor-state micro credit. ACE-RL groups handoff provenance, not convergent states. Without real actors/environments only formulas/control contracts are measured."
+      }
+    },
+    {
+      "paper": "agent-research:multiloop",
+      "target_card": "agent-research/harness-and-self-improvement",
+      "source_revisions": {
+        "agent-research:multiloop": "a50dd62ab09d63efe2792c04353bfc81da0bf90898f232bec91f254fbbb4779f",
+        "agent-research:harnesslens": "3100193b7773779338fcb465a62d16395d2644032b7ca9772a236c377751ccd2"
+      },
+      "comparison": {
+        "position": "把既有自动harness优化用于真实多Agent检索，记录完整历史并分析优化后仍未消除的编排失败；不提出新优化器。",
+        "tradeoff": "HarnessLens强调受影响行为的配对验证与归因门；MULTILOOP的整体提升多来自提示和工具。总分提高不能单独证明结构协调改善，10训练样例也不代表低API成本。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式"
+        ]
+      },
+      "analysis": {
+        "title": "优化有收益不等于编排改动获得了因果证明",
+        "body": "MULTILOOP让编码优化器读轨迹改harness，但实证指出关键编排故障继续存在。HarnessLens将验收收窄到相关行为任务并要求配对可归因证据。两者提醒我们分清搜索发现、候选验收和机制解释；若完整模型／工具缺席，简单循环只能说明控制流，不能重建原文收益。",
+        "papers": [
+          "agent-research:multiloop",
+          "agent-research:harnesslens"
+        ]
+      },
+      "question": {
+        "id": "cross-nov15-multiloop",
+        "question": "MULTILOOP总准确率提高，能说明子Agent委派结构已被优化好吗？",
+        "answer": "不能。prompt-only和工具变化可贡献多数收益，编排故障仍持续。要把提升归因到委派结构，需保持其他条件并对相关行为做有据对照。",
+        "example": "教学例：新增PDF读取能力提高得分，不等于解决了重复派工。",
+        "papers": [
+          "agent-research:multiloop",
+          "agent-research:harnesslens"
+        ]
+      },
+      "update": {
+        "date": "2026-11-15",
+        "papers": [
+          "agent-research:multiloop",
+          "agent-research:harnesslens"
+        ],
+        "summary": "把既有自动harness优化用于真实多Agent检索，记录完整历史并分析优化后仍未消除的编排失败；不提出新优化器。 HarnessLens强调受影响行为的配对验证与归因门；MULTILOOP的整体提升多来自提示和工具。总分提高不能单独证明结构协调改善，10训练样例也不代表低API成本。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Apply existing harness optimization to real multi-agent search, retain history and analyze persistent orchestration failures; no new optimizer is proposed.",
+          "tradeoff": "HarnessLens emphasizes paired behavior-relevant attribution gates. MULTILOOP gains mostly concern prompts/tools; higher aggregate accuracy does not establish coordination repair, nor do ten tasks imply cheap APIs."
+        },
+        "analysis": {
+          "title": "Optimization gains do not establish causal orchestration improvement",
+          "body": "MULTILOOP lets a coding optimizer edit harnesses from traces but finds persistent orchestration failures. HarnessLens narrows acceptance to affected behavior tasks with paired attribution evidence. Search, acceptance and mechanism explanation differ; without real models/tools a loop measures control flow, not the published gains."
+        },
+        "question": {
+          "question": "Does increased MULTILOOP accuracy show subagent delegation is repaired?",
+          "answer": "No. Prompt-only/tool changes can explain much of the gain while orchestration faults remain. Attributing gains to delegation requires relevant controlled evidence.",
+          "example": "Teaching example: adding PDF retrieval can improve scores without fixing duplicate task assignment."
+        },
+        "update": "Apply existing harness optimization to real multi-agent search, retain history and analyze persistent orchestration failures; no new optimizer is proposed. HarnessLens emphasizes paired behavior-relevant attribution gates. MULTILOOP gains mostly concern prompts/tools; higher aggregate accuracy does not establish coordination repair, nor do ten tasks imply cheap APIs."
+      }
+    },
+    {
+      "paper": "agent-research:stellar-colosseum",
+      "target_card": "agent-research/harness-and-self-improvement",
+      "source_revisions": {
+        "agent-research:stellar-colosseum": "64562b4d44dc2fccd08df5c2ca93814521d0777b5b8b3a794a4fc46ffb5be122",
+        "agent-research:scientist-two": "7dc069b4eafe45c0c793e19deeb6ce40815fa4bf2685a52ba3e0f54e8f642073"
+      },
+      "comparison": {
+        "position": "策略readiness门后分解证明依赖，带反驳的重叠树综合与全局验证指导局部修订／重新探索，结果grader与候选选择隔离。",
+        "tradeoff": "ScientistTwo控制子集到全量实验和review闭环；Colosseum核查数学假设与跨节论证。共同的多阶段形态不使语义judge或证据充分性可互换。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式"
+        ]
+      },
+      "analysis": {
+        "title": "科学研究控制器的成功取决于领域证据，而非统一success标签",
+        "body": "ScientistTwo的升阶、消融与严格比较针对可执行实验；Colosseum的readiness、局部复核和全局反驳针对长证明。未发现反例不等于证明正确，模拟评审高分也不等于会议录用。二者完整系统依赖高成本外部语义研究；本地通用tree或callback不会自动继承这种能力。",
+        "papers": [
+          "agent-research:stellar-colosseum",
+          "agent-research:scientist-two"
+        ]
+      },
+      "question": {
+        "id": "cross-nov15-stellar-colosseum",
+        "question": "用最终参考证明挑选Colosseum候选，可以作为更强的ScientistTwo式评审吗？",
+        "answer": "不能。参考proof仅供最终benchmark grader；给选择器会把oracle best-of-two上界当真实推理能力。研究评审同样必须守住held-out信息边界。",
+        "example": "教学例：先看标准解再挑对的论文，不能称无泄漏自主研究。",
+        "papers": [
+          "agent-research:stellar-colosseum",
+          "agent-research:scientist-two"
+        ]
+      },
+      "update": {
+        "date": "2026-11-15",
+        "papers": [
+          "agent-research:stellar-colosseum",
+          "agent-research:scientist-two"
+        ],
+        "summary": "策略readiness门后分解证明依赖，带反驳的重叠树综合与全局验证指导局部修订／重新探索，结果grader与候选选择隔离。 ScientistTwo控制子集到全量实验和review闭环；Colosseum核查数学假设与跨节论证。共同的多阶段形态不使语义judge或证据充分性可互换。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Gate strategy readiness before dependency-aware proof work, preserve critiques in overlapping-tree synthesis, and route global findings to repair/re-exploration while isolating grading from selection.",
+          "tradeoff": "ScientistTwo controls subset/full experiments and review loops; Colosseum reviews mathematical assumptions/dependencies. Shared stage structure does not make semantic judges or sufficient evidence interchangeable."
+        },
+        "analysis": {
+          "title": "Research controllers succeed through domain evidence, not a generic success label",
+          "body": "ScientistTwo promotes executable experiments and performs ablation/strict comparison; Colosseum uses readiness and local/global falsification for long proofs. Failure to find a counterexample is not correctness, just as simulated review is not conference acceptance. Full systems need costly external research semantics; generic trees/callbacks do not inherit these capabilities."
+        },
+        "question": {
+          "question": "Can reference-proof candidate selection count as a stronger ScientistTwo-style review?",
+          "answer": "No. References belong only to the final benchmark grader. Providing them to selection misrepresents an oracle best-of-two ceiling as reasoning ability; research review also needs held-out boundaries.",
+          "example": "Teaching example: reading the standard solution before picking a paper is not leakage-free autonomous research."
+        },
+        "update": "Gate strategy readiness before dependency-aware proof work, preserve critiques in overlapping-tree synthesis, and route global findings to repair/re-exploration while isolating grading from selection. ScientistTwo controls subset/full experiments and review loops; Colosseum reviews mathematical assumptions/dependencies. Shared stage structure does not make semantic judges or sufficient evidence interchangeable."
+      }
+    }
+  ]
+}

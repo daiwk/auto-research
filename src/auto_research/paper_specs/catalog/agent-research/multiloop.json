@@ -1,0 +1,49 @@
+{
+  "domain": "agent-research",
+  "key": "multiloop",
+  "title": "MULTILOOP: Evolving Multi-Agent Harnesses for Complex Information-Seeking Tasks",
+  "paper_url": "https://arxiv.org/abs/2611.15754v1",
+  "reviewed_version": "v1",
+  "reviewed_arxiv_id": "2611.15754v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.15754v1",
+  "detail_path": "agent-research/2611.15754-multiloop/README.md",
+  "topic": [
+    "Harness 与自我改进",
+    "多Agent编排诊断"
+  ],
+  "published": "2026-11-11",
+  "published_at": "2026-11-11T17:34:12Z",
+  "first_author": "Daniela Gottesman",
+  "first_author_affiliation": "Tel Aviv University",
+  "verified_priority_organizations": [
+    "Google Research"
+  ],
+  "code": null,
+  "code_status": "固定v1与有界作者入口搜索未找到可核实本篇专属源码；LangGraph为引用依赖，不算作者MULTILOOP发布。",
+  "adapter": null,
+  "priority": "P0",
+  "intake_class": "overlap_first_release",
+  "implementation_status": "deferred_high_cost",
+  "local_operator": null,
+  "evaluation_tier": "review_only",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "review_done": true,
+  "full_experiment_review_done": true,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.15754v1",
+    "available_resource": "单张A100或A30，或本地Mac",
+    "basis": "AppendixE：890测试题重复2次约7300–12900美元，单轮仅10训练题仍104–213美元；收费多Agent检索和代码优化完整实验高成本不复现。",
+    "decision": "成本过高，完整实验不复现（审查DONE）；不下载checkpoint或数据，不试训估价。"
+  },
+  "summary": "把现有自动harness优化范式用于多Agent信息检索：编码agent读取轨迹、分数与改动历史，迭代编辑并训练集选优；实验发现多数收益来自提示和工具，编排故障依然存在，并非提出新的优化算法。",
+  "fidelity_note": "仅方法、原始图、成本与双语学习资料收录。正文明确实证case study而非新优化算法，不制造通用loop算子冒称MULTILOOP，不创建runtime/metrics/GPU收据。",
+  "deferral_reason": "原文付费多Agent检索与890题重复测试达数千美元，完整实验成本过高，不复现（审查 DONE）。"
+}

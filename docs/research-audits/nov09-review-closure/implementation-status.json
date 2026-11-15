@@ -22068,7 +22068,7 @@
           "detail_path": "multimodal-models/2610.11251-vcola/README.md",
           "document_exists": true,
           "registered_executable": false,
-          "gpu_receipt": "docs/gpu-validations/vcola-a100-20261011.json",
+          "gpu_receipt": "docs/gpu-validations/vcola-gva-compat-a100-20261115.json",
           "gpu_receipt_valid": true,
           "capability_claim_verified": false
         }

@@ -4,6 +4,9 @@
 
 ## 2026
 
+- 2026-11 · [Bait: Mitigating Harmful Agentic Reinforcement Learning via Probing Reward Function](../2611.16369-bait-reward-defense/README.md)（`bait-reward-defense`）：当外部环境给不安全行为更高奖励时，普通 RL 会沿错误方向更新。Bait 在防御者私有标识下混入 probe 回答，用其平均 reward 与真实 policy 回答比较；探针更受奖励时反转整组奖励，再只向策略学习暴露 policy 部分。
+- 2026-11 · [Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models](../2611.16628-safety-budget-cgrpo/README.md)（`safety-budget-cgrpo`）：给 GRPO 增加安全预算并不足够：scorer 分数的均值偏差会使 dual controller 读错约束，且对已加权总奖励作组内标准化可能消掉 multiplier 的梯度尺度。本文拆成两条通道：原始概率保留 base reward 的组内排序；用独立 judge 在**训练轨迹**上拟合的单调校准映射，只服务于 penalty 与预算控制。
+- 2026-11 · [Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs?](../2611.15404-lgpo/README.md)（`lgpo`）：GRPO 的 importance ratio 同时承担采样分布校正与裁剪约束，二者未必对训练稳定性同样重要。作者发现去掉校正而保留约束时可以稳定；完全 on-policy 时比率恰为 1，ratio clipping 却无法及时限制过度确定的分布。
 - 2026-11 · [A Theory of Policy Optimization in Post-Training: Coverage Collapse and Reference Resets](../2611.14467-apmd-reference-reset/README.md)（`apmd-reference-reset`）：奖励上升不保证最优响应仍容易采到。本文给出固定 reference 下 REINFORCE 发生 coverage collapse 的构造，并用 APMD 将 KL reference 周期性重置到最新策略：每个内层子问题有较强局部约束，外层重置则允许持续前进。
 - 2026-11 · [Bootstrapped On-Policy Distillation](../2611.13680-bopd/README.md)（`bopd`）：BOPD 先用带参考解答的冻结初始模型监督学生，构造中间模型 M1；再冻结 M1，将它当作**不带参考**的教师，蒸馏一个从原始 M0 精确重置的新学生。两阶段都在各自学生的轨迹前缀上评分，不能把 Stage I 的旧轨迹直接当作 Stage II 的新 on-policy 数据。
 - 2026-11 · [Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards](../2611.14015-mcpo/README.md)（`mcpo`）：GRPO 常把同一响应的序列优势分给所有 token，无法区分局部决策的不确定度。MCPO 复用 rollout/old policy 温度后的 top-1、top-2 概率差，不额外调用教师或 verifier，改变各 token 的信用分配。

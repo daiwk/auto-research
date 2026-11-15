@@ -4,6 +4,13 @@
 
 ## 网络架构
 
+### JEPA 与几何表征
+
+- [Asymmetric Multimodal Learning with Decomposed JEPAs](../../foundation-models/2611.16639-d-jepa/README.md)（`d-jepa`）：图像和问题不一定是信息等价的两种视图。强迫两者完全对齐可能只保留共享部分，丢掉私有细节和联合推理所需信息。论文先对严格对齐解给出信息保留界，再设计共享core与私有fiber；这个界不适用于任意带辅助目标的完整模型，也不证明所有JEPA都塌缩。[§2—3](https://arxiv.org/html/2611.16639v1#S2)
+- [DuoJEPA: Cross-Modal Translation Between Unaligned Self-Supervised Embedding Spaces](../../foundation-models/2611.15968-duojepa/README.md)（`duojepa`）：每个encoder用LeJEPA保留自己的空间，额外单层translator将其输出映射到另一模态的own space。目标在对方空间计算，不直接比较两个own embedding；但两encoder仍被联合优化，不能把“没有直接对齐损失”说成“完全独立训练”。残差translator会提供接近identity的捷径，论文因此只在translator移除两条残差。[§5](https://arxiv.org/html/2611.15968v1#S5)
+- [ALPS: Visual State Encoders for World Models](../../foundation-models/2610.30120-alps/README.md)（`alps`）：世界模型以视觉 token 为状态进行预测和规划，但一个编码器通常只擅长物理状态、语言对齐或像素重建中的一部分。ALPS 尝试让同一组 patch token 同时承担三种接口：机器人状态探针能读出位置，文字指令能对应图像，而未来 token 能被解码成图像以便检查。
+- [LocaLeJEPA: Maximum Entropy Representations under Geometric Priors](../../foundation-models/2610.28458-locale-jepa/README.md)（`locale-jepa`）：LeJEPA 将整体表示推向各向同性高斯；当表示本身具有局部流形、双曲或等变几何时，单一全局分布不一定合适。LocaLeJEPA 不改写为另一种高斯损失，而是将每个 batch 的多视图平均表示分簇，在各簇内分别匹配**均匀球分布**。各簇位置不被拉向共同原点，局部形状通过重中心后的残差约束。
+
 ### JEPA 与决策表征
 
 - [GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents](../../foundation-models/2610.36877-gui-jepa/README.md)（`gui-jepa`）：多数 GUI Agent 依靠 7B 级视觉语言模型逐 token 生成动作。GUI-JEPA 则从 accessibility tree 枚举可执行动作，用冻结 JEPA 编码器只编码一次画面；动作类型、坐标与 ROI 特征条件化残差 predictor，为每个候选生成 latent，再一次批量打分选 argmax，不解码动作文本。
@@ -13,11 +20,6 @@
 ### JEPA 与关系表征
 
 - [Inside-JEPA: From Prediction to Relational Grounding in Latent World Models](../../foundation-models/2610.31194-inside-jepa/README.md)（`inside-jepa`）：普通 JEPA 能预测潜在状态，但潜变量未必对应可解释关系。本文把每个有序实体对的关系通道直接拼入动态状态，并要求逆动态头根据前后关系通道恢复动作；预测损失的未来目标仍由 EMA 编码器提供，而逆动态的未来状态必须来自**可反传的 online 编码器**。仅预测、读全部状态、只读实体和打乱动作标签的对照用于区分信号来自哪里。[原文 §3](https://arxiv.org/html/2610.31194v1#S3)
-
-### JEPA 与几何表征
-
-- [ALPS: Visual State Encoders for World Models](../../foundation-models/2610.30120-alps/README.md)（`alps`）：世界模型以视觉 token 为状态进行预测和规划，但一个编码器通常只擅长物理状态、语言对齐或像素重建中的一部分。ALPS 尝试让同一组 patch token 同时承担三种接口：机器人状态探针能读出位置，文字指令能对应图像，而未来 token 能被解码成图像以便检查。
-- [LocaLeJEPA: Maximum Entropy Representations under Geometric Priors](../../foundation-models/2610.28458-locale-jepa/README.md)（`locale-jepa`）：LeJEPA 将整体表示推向各向同性高斯；当表示本身具有局部流形、双曲或等变几何时，单一全局分布不一定合适。LocaLeJEPA 不改写为另一种高斯损失，而是将每个 batch 的多视图平均表示分簇，在各簇内分别匹配**均匀球分布**。各簇位置不被拉向共同原点，局部形状通过重中心后的残差约束。
 
 ### 循环记忆与序列混合
 
@@ -179,6 +181,10 @@
 
 ## 预训练与数据
 
+### 训练预算与扩展规律
+
+- [ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research](../../foundation-models/2611.17332-archspace/README.md)（`archspace`）：复用基线的最佳超参可能掩盖新架构优势；中途checkpoint的排序也可能在完整学习率衰减后反转。ArchSpace把架构提案、相同数据/tokenizer的预算梯度比较、较长训练和可审查记录连起来。比较从复用基线最优点，到IsoFLOP规模搜索，再到同时搜索LR/BS逐级加严；验证损失按11个域等权，不让大域主导。[§3—4](https://arxiv.org/html/2611.17332v1#S3)
+
 ### 优化器与训练稳定性
 
 - [Closing the BF16-FP16 Convergence Speed Gap in RL Post-Training with Stochastic Rounding](../../foundation-models/2611.13545-stochastic-rounding/README.md)（`stochastic-rounding`）：FP32 主权重在训练中发生小变化，转为 BF16 后却可能仍落在同一格点，导致 rollout 策略看不到更新。BF16 在一般正规数区间的格距比 FP16 大八倍，因此相似的小步长可表现出不同的有效更新速度。随机舍入按到相邻格点的距离选上下端点，在条件期望上保留主权重变化，而不是强行放大学习率。
@@ -216,6 +222,7 @@
 ### 自监督表征与正则化
 
 - [Dataset-Level Regularization for Joint-Embedding Self-Supervised Learning](../../reproductions/2610.20158-oob-regularization/README.md)（`oob-regularization`）：联合嵌入自监督学习一方面拉近同一图像的不同增强视图，另一方面用抗坍塌正则保持表示多样性。小 batch 对整个表示分布的估计可能很差；单纯增大 GPU batch 又受显存限制。
+- [Spectral Ghost in Representation Learning: A Unified View from Component Analysis to Self-Supervised Learning](../../foundation-models/2601.20154-spectral-ghost/README.md)（`spectral-ghost`）：把自监督方法仅分为contrastive/non-contrastive，无法解释表示对下游任务何时充分，也无法推断batch大小的作用。本文按**表示参数化**和**目标估计方式**组织谱分解、energy、denoising、nonlinear、latent-variable及multimodal路线，既联系已有方法，也推导新目标。它不是实证排行榜，也不是只有观点的综述。[§2—3、§9](https://arxiv.org/html/2601.20154v4#S2)
 
 ### 数据选择与质量估计
 
@@ -262,6 +269,11 @@
 
 ## 多模态基础模型
 
+### 视觉语言适配与表征
+
+- [Unbundling Multimodal Vision Encoding](../../foundation-models/2611.17334-unbundling-vision/README.md)（`unbundling-vision`）：传统视觉编码器把视觉预训练、视觉专属容量、融合前放置三个选择捆绑在一起。本文在共同数据和相同生命周期计算量下分开比较：视觉先验可以不预训练，但不能把“无需预训练编码器”误读成“无需视觉专属容量”。早期 backbone 内的视觉专属模块也能承担这些容量，不一定要在融合前独立编码。[§2—5](https://arxiv.org/html/2611.17334v1#S2)
+- [LAMP: Layerwise Adaptive Mixing of Predictors for Training-Free Few-Shot Vision-Language Adaptation](../../foundation-models/2610.22182-lamp/README.md)（`lamp`）：冻结视觉编码器的中间层包含不同粒度的信息，但维度和相似性结构不同。LAMP不将它们投影到统一特征维度，而是分别拟合支持标签相对CLIP先验的残差，再在类别分数空间混合。区域核只以support bank校准；LAMP-F适配文本原型时，同步更新残差预测，避免原型改变而支持残差仍陈旧。
+
 ### 词语与区域对齐
 
 - [GAVAGAI: Referential Alignment for Infant-Scale Vision-Language Models via Balanced Optimal Transport](../../foundation-models/2611.00319-gavagai/README.md)（`gavagai`）：照护者语言中许多内容词并不指向当前可见物体。逐词对视觉区域 softmax 会强制这些词选择背景，常在画面中的手、地板便吞噬词汇。GAVAGAI 同时加入无容量限制的 Nothing 列和视觉区域的容量上界，不把每个视觉列强制填满。
@@ -288,10 +300,6 @@
 ### 角色协作与策略蒸馏
 
 - [EgoP²C: Internalizing Plan-Perceive-Compose for Spatial Reasoning in Egocentric Video](../../foundation-models/2610.22681-ego-p2c/README.md)（`ego-p2c`）：第一视角视频空间推理既要提问、采集证据，也要保证感知回答可靠。固定外部视觉工具无法随推理策略一起改进；把规划与感知压到同一组参数中又可能引入梯度冲突。
-
-### 视觉语言适配与表征
-
-- [LAMP: Layerwise Adaptive Mixing of Predictors for Training-Free Few-Shot Vision-Language Adaptation](../../foundation-models/2610.22182-lamp/README.md)（`lamp`）：冻结视觉编码器的中间层包含不同粒度的信息，但维度和相似性结构不同。LAMP不将它们投影到统一特征维度，而是分别拟合支持标签相对CLIP先验的残差，再在类别分数空间混合。区域核只以support bank校准；LAMP-F适配文本原型时，同步更新残差预测，避免原型改变而支持残差仍陈旧。
 
 ### 空间理解与结构化视觉推理
 

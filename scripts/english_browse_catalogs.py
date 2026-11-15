@@ -71,6 +71,16 @@ def _label_map(raw: str) -> dict[str, str]:
 
 
 _LABELS = _label_map("""
+生成式推荐与语义ID = Generative recommendation and semantic IDs
+评测与持续学习 = Evaluation and continual learning
+工具与协作 = Tools and collaboration
+约束与安全预算 = Constraints and safety budgets
+持续学习与公共评测 = Continual learning and public evaluation
+生成式召回与意图条件 = Generative retrieval and intent conditioning
+生成式召回与长尾检索 = Generative retrieval and long-tail retrieval
+训练预算与扩展规律 = Training budgets and scaling laws
+记忆与技能 = Memory and skills
+Agent 策略学习 = Agent policy learning
 多模态检索 = Multimodal retrieval
 多 Agent 协作与通信 = Multi-agent collaboration and communication
 交互反馈与元学习 = Interactive feedback and meta-learning
@@ -1020,6 +1030,8 @@ def _browse_prefix(prefix: str, context: str) -> str:
 
 def _status(row: Mapping) -> str:
     kind = row.get("implementation_status")
+    if kind == "review_only_theory":
+        return "Theory review only; the paper has no empirical experiment and no local runtime or metric is claimed."
     if kind == "deferred_high_cost":
         return (
             "Not reproduced due to cost (review complete); research material only, no executable entry."

@@ -1,0 +1,88 @@
+from copy import deepcopy
+import json
+from pathlib import Path
+import sys
+import subprocess
+
+import pytest
+import torch
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+
+from curate_nov15_refresh_evidence import validate_admission
+import generate_research_catalogs as catalogs
+from run_nov15_refresh_components import AUDIT, COMPONENTS, CUDA_KEYS, load
+from auto_research.foundation_models import d_jepa
+
+
+@pytest.mark.parametrize("bad", [float("nan"), float("inf")])
+def test_djepa_rejects_nonfinite_regularizer_controls(bad):
+    x = torch.ones(3, 2)
+    with pytest.raises(ValueError):
+        d_jepa.correlation_penalty(x, x, eps=bad)
+    with pytest.raises(ValueError):
+        d_jepa.objective(x, x, x, x, invariance_loss=x.new_zeros(()), predicted_v=x, target_v=x,
+                         predicted_t=x, target_t=x, directions=torch.ones(2, 2), w_ind=bad)
+
+
+def test_fixed_batch_has_actual_cpu_and_cuda_without_capability_promotion():
+    proof = load(AUDIT / "frozen-sources.json")
+    assert len(COMPONENTS) == 13 and len(CUDA_KEYS) == 7
+    for device in ("cpu", "cuda"):
+        raw = load(AUDIT / f"raw-{device}.json")
+        validate_admission(raw, proof)
+        assert all(value is True for component in raw["components"].values()
+                   for row in component["per_seed"] for value in row["checks"].values())
+        assert json.loads(json.dumps(raw)) == raw
+
+
+@pytest.mark.parametrize("field,value", [("diagnostic_only", False), ("promotion_eligible", True),
+                                         ("formal_comparison", True), ("evolve_integrated", True),
+                                         ("pretrained_model_calls", 1), ("automatic_retry", True)])
+def test_admission_rejects_claim_laundering(field, value):
+    raw = deepcopy(load(AUDIT / "raw-cuda.json"))
+    raw[field] = value
+    with pytest.raises(ValueError):
+        validate_admission(raw, load(AUDIT / "frozen-sources.json"))
+
+
+def test_selected_scope_is_not_an_exhaustive_metadata_review():
+    scope = load(AUDIT / "task-scope.json")
+    assert scope["counts"]["catalogued_papers"] == 18
+    assert scope["counts"]["authored_four_level_questions"] == 72
+    assert scope["selected_scope_complete"] is True
+    assert scope["all_sources_exhaustive"] is scope["review_watermark_advanced"] is False
+    assert scope["counts"]["review_only_papers"] == 5
+    coverage = load(AUDIT / "source-coverage.json")
+    assert coverage["metadata_inventory_is_implementation_backlog"] is False
+    assert all(row["parse_complete"] for row in coverage["receipts"])
+
+
+def test_standalone_browse_uses_unique_canonical_date_not_readme_label(tmp_path, monkeypatch):
+    docs = tmp_path / "docs"
+    (docs / "reproductions").mkdir(parents=True)
+    detail = "recommendation-components/example/README.md"
+    page = docs / detail
+    page.parent.mkdir(parents=True)
+    page.write_text("# Component\n\n| Original publication | 2026-11-12 |\n")
+    monkeypatch.setattr(catalogs, "DOCS", docs)
+    manifest = docs / "research-manifest.json"
+    row = {"detail_path": detail, "published": "2026-11-12"}
+    manifest.write_text(json.dumps({"papers": [row]}))
+    assert catalogs._paper_date("../../" + detail) == "2026-11-12"
+    manifest.write_text(json.dumps({"papers": [row, row]}))
+    with pytest.raises(ValueError, match="unique canonical"):
+        catalogs._paper_date("../../" + detail)
+
+
+def test_existing_vcola_compatibility_has_separate_real_gpu_evidence():
+    subprocess.run([sys.executable, "scripts/curate_nov15_vcola_compat.py", "--check"],
+                   check=True, capture_output=True, text=True)
+    path = Path("docs/gpu-validations/vcola-gva-compat-a100-20261115.json")
+    receipt = load(path)
+    assert receipt["adapter_key"] == "vcola"
+    assert receipt["runtime_library"]["transformers"] == "5.23.0"
+    assert receipt["checkpoint"]["pretrained"] is False
+    assert receipt["full_checkpoint_campaign_reexecuted"] is False
+    assert receipt["historical_9b_receipt"] != str(path)
+    assert Path(receipt["historical_9b_receipt"]).is_file()

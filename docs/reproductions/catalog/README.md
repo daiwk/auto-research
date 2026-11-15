@@ -10,6 +10,9 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 生成式推荐与语义ID | [KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation](../../recommendation-components/2611.16795-kuairec-v2-protocol/README.md) | University of Science and Technology of China，2026-11-12 | [原作者入口](https://github.com/cxli2333/KuaiRecV2)；论文链接作者仓库，但2026-11-15GitHubAPI404，未核实可访问实现/数据、license/SHA，未下载或接入官方benchmark。 | `kuairec-v2-protocol`：CPU 评测接口，不执行模型 |
+| 生成式推荐与语义ID | [ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through item Reachability](../../recommendation-components/2611.16404-resid/README.md) | Alibaba International Digital Commerce Group，2026-11-12 | [原作者入口](https://github.com/Gabriel-reina/ReSID)；原作者公开Apache-2.0仓库已核；工业数据与生产服务未开放。 | `resid`：仅低成本组件，完整实验不复现 |
+| 生成式推荐与语义ID | [TriGen: A Generative Paradigm for Trigger-Induced Recommendation](../../recommendation-components/2611.16395-trigen/README.md) | Alibaba International Digital Commerce Group，2026-11-12 | 未发现官方代码 | `trigen`：仅低成本组件，完整实验不复现 |
 | 重排与混排 | [Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking](../../recommendation-components/2611.07591-ice/README.md) | Alibaba Taobao & Tmall Group，2026-11-05 | 未发现官方代码 | `ice`：仅低成本组件，完整实验不复现 |
 | 召回 | [From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation](../../recommendation-components/2611.05997-ured/README.md) | Alibaba Taobao & Tmall Group，2026-11-04 | 未发现官方代码 | `ured`：仅低成本组件，完整实验不复现 |
 | 重排与混排 | [OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer](../../recommendation-components/2611.04720-onetrans-gsr/README.md) | ByteDance，2026-11-03 | 未发现官方代码 | `onetrans-gsr`：仅低成本组件，完整实验不复现 |

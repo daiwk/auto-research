@@ -28,6 +28,12 @@
 - [Math-Shepherd](../2312.08935-math-shepherd/README.md)（`math-shepherd`）：从中间步骤采样多条 continuation，以最终答案正确率构造自动 step label，再训练 verifier 和重排器。
 - [Let's Verify Step by Step](../2305.20050-process-supervision/README.md)（`process-supervision`）：逐步奖励模型判断每个推理步骤，并优先标注不确定步骤；本地与 outcome-only 奖励使用同一候选和预算。
 
+### 奖励构造与排序信号
+
+- [Bait: Mitigating Harmful Agentic Reinforcement Learning via Probing Reward Function](../2611.16369-bait-reward-defense/README.md)（`bait-reward-defense`）：当外部环境给不安全行为更高奖励时，普通 RL 会沿错误方向更新。Bait 在防御者私有标识下混入 probe 回答，用其平均 reward 与真实 policy 回答比较；探针更受奖励时反转整组奖励，再只向策略学习暴露 policy 部分。
+- [When Pairwise Preferences Cycle: A Reliability-Anchored Preference Walk for Video GRPO](../2610.20089-rap-walk/README.md)（`rap-walk`）：RAP-Walk 不把成对视频偏好压成相互独立的胜率，而保留对手身份、循环关系和边清晰度。它在从输者到赢家的可靠随机游走中计算平稳偏好信用，经最低熵校准后修正原始胜率优势，最后仍交给同一 GRPO 更新。
+- [RRC: Unlocking Generative Reward Models in LLM Reinforcement Learning via Ranking-Based Reward Construction](../2608.06310-rrc/README.md)（`rrc`）：**主题：生成式奖励模型。** 生成式 RM 擅长相对比较，却被传统 RL 强制压成独立标量。
+
 ### 元认知反馈与不确定性
 
 - [Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards](../2611.14015-mcpo/README.md)（`mcpo`）：GRPO 常把同一响应的序列优势分给所有 token，无法区分局部决策的不确定度。MCPO 复用 rollout/old policy 温度后的 top-1、top-2 概率差，不额外调用教师或 verifier，改变各 token 的信用分配。
@@ -38,11 +44,6 @@
 ### 隐私保护合成与数据选择
 
 - [MAPLE: Metadata Augmented Private Language Evolution](../2603.19258-maple-icl/README.md)（`maple-icl`）：Private Evolution 的初始合成文本若偏离目标领域，后续多轮演化难以纠正。MAPLE 先从私有文本抽取固定 schema 的分类 metadata，用 AIM 生成 DP 表格 metadata，再结合非私有已捐赠的 metadata–text 示例初始化文本，最后继续 AugPE。
-
-### 奖励构造与排序信号
-
-- [When Pairwise Preferences Cycle: A Reliability-Anchored Preference Walk for Video GRPO](../2610.20089-rap-walk/README.md)（`rap-walk`）：RAP-Walk 不把成对视频偏好压成相互独立的胜率，而保留对手身份、循环关系和边清晰度。它在从输者到赢家的可靠随机游走中计算平稳偏好信用，经最低熵校准后修正原始胜率优势，最后仍交给同一 GRPO 更新。
-- [RRC: Unlocking Generative Reward Models in LLM Reinforcement Learning via Ranking-Based Reward Construction](../2608.06310-rrc/README.md)（`rrc`）：**主题：生成式奖励模型。** 生成式 RM 擅长相对比较，却被传统 RL 强制压成独立标量。
 
 ### 多模态与结构化 reward
 
@@ -406,6 +407,7 @@
 
 ### 信任域、clip 与梯度稳定
 
+- [Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs?](../2611.15404-lgpo/README.md)（`lgpo`）：GRPO 的 importance ratio 同时承担采样分布校正与裁剪约束，二者未必对训练稳定性同样重要。作者发现去掉校正而保留约束时可以稳定；完全 on-policy 时比率恰为 1，ratio clipping 却无法及时限制过度确定的分布。
 - [Generalized Proximal Policy Optimization: Unifying LLM RL Algorithms from the Perspective of Divergence](../../reproductions/2610.13015-gppo-framework/README.md)（`gppo-framework`）：GPPO把近端优化拆成f-divergence几何和估计拓扑。MC、atomic、binary对采样动作概率/补集的处理不同，诱导实际不同信任域。
 - [Beyond the Stability-Exploration Dilemma: Environmental Regularization for LLM Policy Optimization](../2608.23311-erpo/README.md)（`erpo`）：传统 Policy-KL 直接压回答分布，稳定训练的同时消耗探索预算。ERPO 观察到 RL 过程中模型诱导的问题分布也会漂移，于是把正则放到输入侧：用冻结 reference 的问题似然给 query 静态加权，再以 Query-KL 控制环境分布漂移，不直接对 response score function 施压。
 - [GCPO: Diagnosing and Constraining Subspace Geometry in Rollout RL for LLMs](../2608.11674-gcpo/README.md)（`gcpo`）：GRPO 等 on-policy rollout RL 会偶发进入预训练权重的主奇异子空间，论文观察到这些 spike 常先于验证性能下降。GCPO 固定预训练矩阵两侧的 top-k 奇异空间，只允许低秩更新存在于输入、输出两侧的正交补中；这是硬可行域，不是依赖系数的软 penalty。
@@ -467,6 +469,10 @@
 - [GPRL](../2605.18721-gprl/README.md)（`gprl`）：单一标量 reward 容易掩盖 helpfulness、格式、推理和简洁度之间的冲突。GPRL 先在每个偏好维度内部计算 group-relative advantage，再根据上下文聚合；漂移控制器检测某个维度是否主导训练并调整权重。
 - [TTRL](../2504.16084-ttrl/README.md)（`ttrl`）：同一测试题多次采样，以多数一致答案作为伪标签并即时更新模型，不访问 gold label。
 - [REINFORCE++](../2501.03262-reinforce-plus/README.md)（`reinforce-plus`）：GRPO/RLOO 的 prompt-local 标准差会让不同难度组被随机方差重新加权。REINFORCE++ 保留组内中心化，但使用跨 batch 的全局优势尺度归一化，从而在不引入 critic 的前提下降低方差与局部偏置。
+
+### 约束与安全预算
+
+- [Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models](../2611.16628-safety-budget-cgrpo/README.md)（`safety-budget-cgrpo`）：给 GRPO 增加安全预算并不足够：scorer 分数的均值偏差会使 dual controller 读错约束，且对已加权总奖励作组内标准化可能消掉 multiplier 的梯度尺度。本文拆成两条通道：原始概率保留 base reward 的组内排序；用独立 judge 在**训练轨迹**上拟合的单调校准映射，只服务于 penalty 与预算控制。
 
 ## 训推一致性与高效 rollout
 

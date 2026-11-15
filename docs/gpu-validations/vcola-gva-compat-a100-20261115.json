@@ -1,0 +1,81 @@
+{
+  "schema_version": 1,
+  "adapter_key": "vcola",
+  "validated_at": "2026-11-15",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB",
+    "count": 1
+  },
+  "command": [
+    "timeout",
+    "180",
+    "python3",
+    "scripts/run_nov15_vcola_compat.py",
+    "--device",
+    "cuda",
+    "--source-commit",
+    "25b2211322870799e7a150f84963c86df1c44545",
+    "--output",
+    "raw-cuda.json"
+  ],
+  "dataset": {
+    "id": "synthetic:tiny-qwen35-gva-vision-compat-v1",
+    "revision": "sha256:45e4afa67a159ad4d48a63286a9e340b70022b82ccce6b6c95d6472c8e55d44b",
+    "public_capability_benchmark": false,
+    "recipe": "seeded random pixel patches and synthetic Q/K/V, no gold task answers"
+  },
+  "checkpoint": {
+    "public_id": "none-random-tiny-Qwen3.5",
+    "revision": "25b2211322870799e7a150f84963c86df1c44545",
+    "pretrained": false,
+    "configuration": {
+      "text_hidden_size": 32,
+      "text_layers": 4,
+      "vision_hidden_size": 16,
+      "vision_layers": 1,
+      "vocabulary_size": 64,
+      "one_image_visual_tokens": 49
+    }
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "result": "passed",
+  "metrics": {
+    "compact_vs_repeated_output_max_error": 0.0,
+    "compact_vs_repeated_state_max_error": 0.0,
+    "replay_output_max_error": 3.725290298461914e-09,
+    "baseline_logits_max_error": 0.0,
+    "capture_recurrence_relative_error": 2.8015254827096214e-07,
+    "original_visual_tokens": 49.0,
+    "merged_visual_tokens": 24.0,
+    "final_sequence_tokens": 5.0,
+    "random_model_parameters": 66972.0
+  },
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_checkpoint_campaign_reexecuted": false,
+  "runtime_library": {
+    "transformers": "5.23.0"
+  },
+  "historical_9b_receipt": "docs/gpu-validations/vcola-a100-20261011.json",
+  "claim_boundary": "Compact-GVA interface and tiny real vision/hybrid forward only; not a new9B checkpoint quality measurement",
+  "provenance": {
+    "commit": "25b2211322870799e7a150f84963c86df1c44545",
+    "artifact_path": "docs/gpu-validations/vcola-gva-compat-a100-20261115.json",
+    "executed_source_sha256": {
+      "scripts/run_nov15_vcola_compat.py": "16c3be27064ef6ea5c61f17f4c96b8c5dab0c4a080f909ad0b8d74aa54bd064a",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "src/auto_research/multimodal/vcola.py": "d8da4ae85fd95238e8f37059c06e57aa438a0a2b9e6855c6dbd4511cf1f71441",
+      "src/auto_research/multimodal/vcola_checkpoint.py": "e15f014d68c13fb95fb96a44e03822f9c00a30a0ca1faa6fee2537ee3fc84e5c",
+      "tests/multimodal/test_vcola.py": "45e4afa67a159ad4d48a63286a9e340b70022b82ccce6b6c95d6472c8e55d44b"
+    },
+    "raw_artifact": "docs/research-audits/nov15-refresh/vcola-compat/raw-cuda.json",
+    "raw_artifact_sha256": "e8770fc368b195cf0a834a31fa2afc0713b38ddbab49294e23a81bbf327eb8ee"
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "post-training:lgpo": {
+      "questions": [
+        {
+          "id": "sequence-not-ratio",
+          "level": "basics",
+          "question": "LGPO不读取旧策略概率，门槛到底看什么？",
+          "answer": "看当前策略一条响应的有效token平均log probability，并在高于阈值时屏蔽整条响应。它不是序列概率乘积、old/current ratio或每token独立clip。默认tau=-.15。",
+          "example": "教学例：同样每token logp=-.2，2-token与20-token响应的门槛统计都为-.2，不能用更负的长序列总和改变选择。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "gate-both-signs",
+          "level": "mechanism",
+          "question": "为什么不能只屏蔽高似然且正优势的响应？",
+          "answer": "固定v1的gate只由似然决定，与优势正负无关；高似然负优势响应也屏蔽。gate停止梯度，幸存响应内部按外部detached token advantage乘logp求和，再对全部响应平均。",
+          "example": "教学例：两条平均logp=-.01的响应，一条A=+1一条A=-1，在tau=-.15时都没有loss梯度。",
+          "source_sections": [
+            "核心公式",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "gating-not-normalization",
+          "level": "comparison",
+          "question": "LGPO的门控能代替Dr.GRPO移除组std吗？",
+          "answer": "不能。LGPO改变哪些响应产生梯度并移除old-policy ratio；Dr.GRPO调整优势和长度归一化。两者作用在不同轴。即使可设计组合，也必须保留各自分母和优势来源，不能只改一个算法名字。",
+          "example": "教学例：改变奖励乘法尺度会改变未缩放优势，但不会自动改变同一当前策略logp下的LGPO门控。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "survivor-denominator",
+          "level": "implementation",
+          "question": "只剩一半响应时，loss改除以幸存数是否等价？",
+          "answer": "不等价。本地保留论文期望的全部响应分母，门控响应贡献为零。除以幸存数会按接受率隐式放大学习率；padding只从有效token集合去掉，不能借此改变序列分母。小logits的CUDA梯度验收也不是LLM训练效果。",
+          "example": "教学例：4条响应只有2条保留，token贡献之和为6；应取-6/4，不是-6/2。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-15"
+        }
+      ]
+    },
+    "post-training:safety-budget-cgrpo": {
+      "questions": [
+        {
+          "id": "ranking-versus-level",
+          "level": "basics",
+          "question": "安全scorer排序正确，为什么预算仍可能读错？",
+          "answer": "排序只比较相对分数，预算却将概率均值与目标率比较。单调变换可保持排序而移动均值偏差，使dual乘子过早归零或一直饱和。真实校准还依赖训练轨迹标签质量，不能由单调性推出。",
+          "example": "教学例：把所有概率平方通常保持排序，却降低均值；原本需要约束的组可能被控制器误认为已在预算内。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "map-control-only",
+          "level": "mechanism",
+          "question": "为什么PAV映射只进penalty和dual，不进base reward？",
+          "answer": "isotonic映射可能有平坦区，把本来不同的raw分数变成同值。保留原始base reward维护组内相对信号，映射只修正惩罚及约束均值的level。本地合并相同score的加权标签再作PAV，并明确阶梯插值约定。",
+          "example": "教学例：原始ph=.1与.2都映到1/3时，harmful base仍是.9与.8，不能一并改成2/3。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "scale-cancellation",
+          "level": "comparison",
+          "question": "加入安全lambda后再作标准GRPO组std，为什么控制强度可能没了？",
+          "answer": "无映射时harmful reward是1-(1+lambda)ph。均值中心化仍保留1+lambda，除总reward组std则同时除掉这个系数。本文的unscaled路径只中心化；逐目标标准化后再加权是另一变体，不能用其headline冒充本地结果。",
+          "example": "教学例：lambda从0到2让未缩放优势变成3倍，但两者各除自己的std后会相同。",
+          "source_sections": [
+            "核心公式",
+            "论文离线与线上效果"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "calibration-split",
+          "level": "implementation",
+          "question": "为什么fit_isotonic拒绝test，且dual必须传previous EMA？",
+          "answer": "校准要在训练prompt的无约束轨迹上拟合，不能利用held-out结果调预算。字符串检查仍需真实数据provenance配合。正文未唯一指定初始化/缺席类规则，显式前态避免隐藏假设；CPU数值正确不等于scorer或VLM安全。",
+          "example": "教学例：使用测试回答标签拟合一条漂亮单调曲线会污染评测；调用时写split=train并不能洗掉这种泄漏。",
+          "source_sections": [
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-15"
+        }
+      ]
+    },
+    "post-training:bait-reward-defense": {
+      "questions": [
+        {
+          "id": "reward-not-text",
+          "level": "basics",
+          "question": "Bait本地组件检测的是有害文本吗？",
+          "answer": "不是。它比较外部reward对防御私有probe与policy回答的偏好，只处理数字及membership。probe生成、语义安全判断与真实RL都不在实现中，数值gap不是harmfulness准确率。",
+          "example": "教学例：同一张reward表在不同probe标签下可得到不同gap；若标签或probe含义不可靠，公式正确仍不能保证安全。",
+          "source_sections": [
+            "背景与主要改动",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "zero-flips-group",
+          "level": "mechanism",
+          "question": "delta恰好为0，以及probe自身的reward，怎么处理？",
+          "answer": "按固定v1 Eqs.3–5，delta>=0触发整组符号翻转，包括probe。之后policy-facing输出才移除probe；不能只翻转policy项或把等号改掉。原图简写>0不覆盖正文等号。",
+          "example": "教学例：probe均值4，policy均值也4，仍翻转；原reward为2的policy项变成-2。",
+          "source_sections": [
+            "核心公式",
+            "原论文关键图"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "defense-versus-anchor",
+          "level": "comparison",
+          "question": "Bait与TAG都改变reward，可以互换吗？",
+          "answer": "不能。TAG先用独立训练探针的reverse KL选可信anchor，再门控辅助reward；Bait比较私有probe和policy的外部reward并做符号变换。两者输入、信任假设和处理对象不同，公式组件不能替代彼此的模型/探针验证。",
+          "example": "教学例：TAG的anchor为零时辅助项不给信用；Bait则可能根据非负gap把整个负/正reward组翻转。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "normalization-not-guessed",
+          "level": "implementation",
+          "question": "为什么本地没有顺手加上GRPO advantage？",
+          "answer": "原文Eq6含non-probe std，Algorithm1第14行省略std，上游sign-flip函数与可配置通用优势函数也不唯一决定训练默认值。故仅保真实现Eqs3–5，拒绝无probe/无policy的未定义分区，不猜完整训练口径。",
+          "example": "教学例：奖励[-1,-3]只中心化是[1,-1]；再除std会改变尺度。选任一种都不能自动说复现了有冲突的全文。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-15"
+        }
+      ]
+    }
+  }
+}

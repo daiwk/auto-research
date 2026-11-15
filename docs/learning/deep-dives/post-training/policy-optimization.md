@@ -7,7 +7,7 @@ hide:
 
 # 同一个GRPO名字之外：优势尺度、裁剪单位与训推失配
 
-[LLM 后训练](../index.md) · 更新 2026-11-12 · 58 篇主题资料 / 10 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-15 · 60 篇主题资料 / 12 篇重点对照
 
 GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比被裁剪、样本到底由哪个分布生成。Dr. GRPO、DAPO、GSPO与TIS/IcePop分别改动这些环节，不能把所有ratio都叫同一种off-policy校正。
 
@@ -35,6 +35,8 @@ GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比�
 | [Not All Entropy Is Equal: Reward-Conditioned Entropy Allocation in Reinforcement Learning with Verifiable Rewards](../../../post-training/2611.09448-rcea/README.md) · [原始来源](https://arxiv.org/abs/2611.09448)<br>章节：核心公式、原文结果与限制、诊断与边界 | 不改更新目标，先按验证结果、过程有效性和解法模式拆开轨迹熵，再用同前缀协方差解释局部变化方向。 | 精确分解需要确定性分区；局部协方差不是策略模式或因果归因。CPU 只覆盖数值核，未跑多目标 RLVR 矩阵。 |
 | [Off-policy Learning with Excursion Policies](../../../post-training/2611.13275-excursion-td/README.md) · [原始来源](https://arxiv.org/abs/2611.13275v1)<br>章节：核心公式、数据协议与代码映射、结果、负控与边界 | 对目标策略持续若干步后永久回到行为策略的 excursion 时长作混合，以递归权重构造 Ex-TD/Ex-Retrace；本地计算5状态3动作精确算子和实际轨迹target。 | beta在目标偏差、方差与收缩间取舍，不是TIS的训推引擎ratio截断；中间beta不保证目标固定点无偏。完整七任务MPO每run约12小时不复现。 |
 | [A Theory of Policy Optimization in Post-Training: Coverage Collapse and Reference Resets](../../../post-training/2611.14467-apmd-reference-reset/README.md) · [原始来源](https://arxiv.org/abs/2611.14467v1)<br>章节：核心公式、结果、负控与边界、理论与实验范围 | 每轮把KL reference更新为最新策略，再近似求解reference×exp(eta×reward)的镜像目标；有限核检查精确重置路径、Kimi均值baseline的平方KL偏差与Rebel=2×centered-MSE。 | 参考重置不等于刷新PPO/GRPO old policy，也不等于把学生退回base；保证依赖策略/reward可实现性及内层精度。纯理论无大型实证方案，不编高成本或把数值检查当完整证明。 |
+| [Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs?](../../../post-training/2611.15404-lgpo/README.md) · [原始来源](https://arxiv.org/abs/2611.15404v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界、高成本完整实验 | 按当前策略响应平均logp作单侧stop-gradient门控，幸存token优势加权求和、对全部响应平均，不计算old-policy ratio。 | Dr.GRPO去组std/长度归一化，LGPO改变梯度响应集合；两者不是同一归一化开关。高似然负优势也门控，小logits验证不证明LLM更稳或更快。 |
+| [Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models](../../../post-training/2611.16628-safety-budget-cgrpo/README.md) · [原始来源](https://arxiv.org/abs/2611.16628v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界 | 保持raw base reward，把训练轨迹PAV映射只放入penalty和dual control，并用不除总std的优势保留multiplier尺度。 | Dr.GRPO移除std以修正训练偏置；这里同一算术还关系到约束控制是否生效。校准排序与均值level不同，CPU单调映射不是VLM安全或预算达成证据。 |
 
 </div>
 
@@ -69,6 +71,18 @@ TIS比较同一权重在training与rollout引擎产生的概率，处理数值�
 GRPO用old-policy ratio和组优势形成更新，同时另有reference KL；APMD讨论的是KL锚点随外层迭代重置，允许在强局部约束下累积前进。刷新采样行为的old policy不自动满足APMD的reference条件，组内去均值也不消除Kimi均值baseline相对镜像目标的平方KL偏差。这里的有限响应恒等式不能替代真实LLM的假设核验或采样误差分析。
 
 对照来源：[apmd-reference-reset](../../../post-training/2611.14467-apmd-reference-reset/README.md) · [grpo](../../../post-training/2402.03300-grpo/README.md)
+
+### 门控对象与优势尺度是独立的设计轴
+
+Dr.GRPO保留中心化奖励但移除组std与长度偏置；LGPO不定义新的奖励估计器，而在当前策略平均logp高于门槛时去掉整条响应梯度。把幸存响应重新归一化会按接受率改变更新尺度，与去组std不是等价选择。比较或组合应分别固定采样策略、优势尺度、有效token集合和全响应分母，不能把原文两H100耗时直接外推为本地加速。
+
+对照来源：[lgpo](../../../post-training/2611.15404-lgpo/README.md) · [dr-grpo](../../../post-training/2503.20783-dr-grpo/README.md)
+
+### 保留乘子不等于校准成本：控制器有两道独立门槛
+
+Dr.GRPO式未缩放优势能避免总reward组std抵消乘子，但scorer若均值偏高或偏低，dual仍会饱和或关闭。Safety as a Budget因此把训练轨迹拟合的映射仅用于penalty/control，raw base reward保留组内差别。PAV的平台、训练/测试隔离、EMA前态和插值约定都需显式声明；既不能把单调性当校准保证，也不能把另一种逐目标标准化结果写成本地unscaled效果。
+
+对照来源：[safety-budget-cgrpo](../../../post-training/2611.16628-safety-budget-cgrpo/README.md) · [dr-grpo](../../../post-training/2503.20783-dr-grpo/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -134,9 +148,37 @@ GRPO用old-policy ratio和组优势形成更新，同时另有reference KL；APM
 
     对照来源：[apmd-reference-reset](../../../post-training/2611.14467-apmd-reference-reset/README.md) · [grpo](../../../post-training/2402.03300-grpo/README.md)
 
+### 只保留一半响应时，LGPO应除幸存数来补回学习信号吗？ {#cross-cross-nov15-lgpo-normalization}
+
+??? note "展开答案与例子"
+
+    **答案：** 固定本地保真口径不应。论文期望的全响应分母让门控样本贡献为零；除幸存数会增加有效步长。Dr.GRPO的去std也不能为这种分母改动提供等价性证明。
+
+    **教学例子：** 教学例：4条响应仅2条保留且总贡献6，应取-6/4而非-6/2。
+
+    对照来源：[lgpo](../../../post-training/2611.15404-lgpo/README.md) · [dr-grpo](../../../post-training/2503.20783-dr-grpo/README.md)
+
+### 从GRPO改成Dr.GRPO式不除std，就保证安全预算是真实事件率了吗？ {#cross-cross-nov15-budget-std}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。它保留multiplier对梯度的尺度，但预算还读scorer概率均值；偏差未校准时，控制器可能在错误level稳定。还需独立标签、训练轨迹拟合、held-out评估和明确控制状态。
+
+    **教学例子：** 教学例：reward尺度保留下来，但scorer始终低估有害率，lambda仍可能归零。
+
+    对照来源：[safety-budget-cgrpo](../../../post-training/2611.16628-safety-budget-cgrpo/README.md) · [dr-grpo](../../../post-training/2503.20783-dr-grpo/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-15** · 加入Safety as a Budget，区分优势尺度保留与控制level校准；仅实现训练限定PAV、双通道reward和显式EMA dual，不把CPU算术包装成安全训练，完整矩阵成本过高不复现。
+
+涉及：[safety-budget-cgrpo](../../../post-training/2611.16628-safety-budget-cgrpo/README.md) · [dr-grpo](../../../post-training/2503.20783-dr-grpo/README.md)
+
+**2026-11-15** · 补入LGPO的当前似然门控，与Dr.GRPO的优势尺度分开；保留双符号门控、token求和和全响应分母。完整LLM训练因成本过高不复现，局部梯度不作能力或速度证据。
+
+涉及：[lgpo](../../../post-training/2611.15404-lgpo/README.md) · [dr-grpo](../../../post-training/2503.20783-dr-grpo/README.md)
 
 **2026-11-12** · 补审coverage/reference-reset理论，分清行为old policy、KL reference和student初始化；增加Kimi偏差与Rebel中心化恒等式。仅CPU精确有限核，纯理论大型实证不适用，不宣称普适GRPO收敛。
 
@@ -158,7 +200,7 @@ GRPO用old-policy ratio和组优势形成更新，同时另有reference KL；APM
 
 覆盖 54 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 58 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 60 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -220,6 +262,8 @@ GRPO用old-policy ratio和组优势形成更新，同时另有reference KL；APM
 - [InstructGPT / PPO-RLHF](../../../post-training/2203.02155-ppo-rlhf/README.md)
 - [Off-policy Learning with Excursion Policies](../../../post-training/2611.13275-excursion-td/README.md)
 - [A Theory of Policy Optimization in Post-Training: Coverage Collapse and Reference Resets](../../../post-training/2611.14467-apmd-reference-reset/README.md)
+- [Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs?](../../../post-training/2611.15404-lgpo/README.md)
+- [Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models](../../../post-training/2611.16628-safety-budget-cgrpo/README.md)
 
 </details>
 

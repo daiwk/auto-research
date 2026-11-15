@@ -7,7 +7,7 @@ hide:
 
 # 多模态对齐到底对齐什么：向量、视觉接口还是证据依赖
 
-[多模态](../index.md) · 更新 2026-11-13 · 23 篇主题资料 / 9 篇重点对照
+[多模态](../index.md) · 更新 2026-11-15 · 27 篇主题资料 / 13 篇重点对照
 
 CLIP与EmbeddingGemma 2产出可比较向量，BLIP-2与LLaVA连接视觉到条件生成，CV-OPD训练证据依赖，UMRM给回答评分。它们的输出合同和监督对象不同，不是同一条从小到大的能力排行榜。
 
@@ -34,6 +34,10 @@ CLIP与EmbeddingGemma 2产出可比较向量，BLIP-2与LLaVA连接视觉到条�
 | [GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling](../../../multimodal-models/2611.01143-gslm2/README.md) · [原始来源](https://arxiv.org/abs/2611.01143)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | SpidR 2.0 从多个编码层取得离散语音流；联合保留变化帧，时序主干读取对齐元组，判别采用等权逐流的转移对数概率。 | 多流比各自去重保留更多时间位置；转移评分不代表生成头、跨模态检索或翻译质量。本地只核验帧对齐及数值聚合，没有编码器、语音、模型或基准运行。 |
 | [AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs&#x27; Contextual and Cultural Knowledge and Thinking](../../../multimodal-models/2601.17645-avmeme-exam/README.md) · [原始来源](https://arxiv.org/abs/2601.17645)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界与完整实验 | 用多文化音视频选择题区分声音情境知识与文本、视频捷径；本地只实现过滤、重排、私有答案映射和分组计分。 | 文化多选正确率与MMEB-V3嵌入检索不是同一种能力；无媒体和模型时，协议测试不能给出文化理解结论。 |
 | [MMEB-V3: Measuring the Performance Gaps of Omni-Modality Embedding Models](../../../multimodal-models/2604.23321-mmeb-v3/README.md) · [原始来源](https://arxiv.org/abs/2604.23321)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界与完整实验 | 以190任务评价统一嵌入，并用独立OmniSET的12方向混合池揭示同语义表示的模态偏向。 | 相比MVEB的视频与音频预算控制，MMEB-V3覆盖更广的六类任务。Hit@1/NDCG、完整候选池和任务等权必须分别守住，纯排序核不是完整benchmark。 |
+| [Unbundling Multimodal Vision Encoding](../../../foundation-models/2611.17334-unbundling-vision/README.md) · [原始来源](https://arxiv.org/abs/2611.17334v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 把预训练先验、专属视觉容量和pre-fusion位置分离；以零初始化vision-only QKVO/SwiGLU将容量加入早期backbone，仍使用联合图文attention。 | BLIP-2用Q-Former在冻结视觉encoder和LLM之间形成query瓶颈；Unbundling比较同数据/生命周期预算下容量的位置及训练。接口token压缩与专属容量位置不是同一干预，本地小核不能比较两者VQA或TTFT。 |
+| [Asymmetric Multimodal Learning with Decomposed JEPAs](../../../foundation-models/2611.16639-d-jepa/README.md) · [原始来源](https://arxiv.org/abs/2611.16639v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 在每模态拆共享core/私有fiber，对四子空间独立SIGReg，预测另一view的停止梯度表示，仅惩罚四组private-shared相关。 | CLIP直接把配对图文映射进同一单位空间并双向对比；D-JEPA专门处理信息不对称下共享与私有信号的分工。定理只约束严格alignment-only解，不是对CLIP完整训练的无条件否定。 |
+| [DuoJEPA: Cross-Modal Translation Between Unaligned Self-Supervised Embedding Spaces](../../../foundation-models/2611.15968-duojepa/README.md) · [原始来源](https://arxiv.org/abs/2611.15968v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 各模态保留自己的LeJEPA空间，单层skipless translator在对方own space做InfoNCE；centroid由逐view LN/单位化后聚合，两个目标侧都反传。 | CLIP直接优化共同空间的图文分数；DuoJEPA将匹配压力交给无残差翻译层，但encoder仍联合训练。没有直接own-space项不证明独立训练，也不保证任意空间都能翻译。 |
+| [Spectral Ghost in Representation Learning: A Unified View from Component Analysis to Self-Supervised Learning](../../../foundation-models/2601.20154-spectral-ghost/README.md) · [原始来源](https://arxiv.org/abs/2601.20154v4)<br>章节：背景与主要改动、核心机制与公式、论文结果与证据边界 | 以谱表示联系CLIP等SSL方法，区分无偏、固定负例surrogate和有偏plug-in，推导排除同样本项的U-statistic目标；固定v4仅理论收录。 | CLIP提供可执行图文对比模型；Spectral Ghost分析其参数化与目标估计，不能由无偏或一致性推出某任务准确率更高。v1 Google署名历史也不能替代v4机构。 |
 
 </div>
 
@@ -74,6 +78,30 @@ AVMeme Exam要求模型把声音置于多语言、多文化情境中选择答案
 MMEB-V3的OmniSET把相同语义的T/I/V/A留在共享候选池，连查询本身也作为干扰项，要求语义和目标模态同时命中。若先按目标模态过滤，会删掉本来要暴露的模态坍缩。MVEB则强调视频任务、八方向检索及模型适配的帧/音频预算；协议不同，不能互换总分。两者完整矩阵都高成本，本轮MMEB-V3仅核计分，而MVEB保留资料收录，未把泛化聚合器包装成两套完整接口。
 
 对照来源：[mmeb-v3](../../../multimodal-models/2604.23321-mmeb-v3/README.md) · [mveb](../../../multimodal-models/2606.14958-mveb/README.md)
+
+### 视觉接口的位置与专属容量是不同变量
+
+Unbundling把额外容量移进联合attention/FFN，BLIP-2先用query从视觉token提取信息再接冻结LLM。前者必须核对vision mask而非模态隔离，后者必须核对冻结边界和query瓶颈。初始函数相同是初始化性质，不是训练后能力等价；BLIP-2本地负结果也不能用来代替新论文的大模型对照。
+
+对照来源：[unbundling-vision](../../../foundation-models/2611.17334-unbundling-vision/README.md) · [blip2](../../../reproductions/2301.12597-blip2/README.md)
+
+### 共享对齐与保留私有信息不能用一个目标代替
+
+对齐是约束哪部分信息保留，不是自动保证所有任务所需信息齐全。图像细节与问题选择关系可能分别进入private；去掉private-private惩罚保留协调机会。本地四项loss和梯度测试不能测得真实synergy，CLIP已有Fashion-MNIST结果也不是两论文同数据比较。
+
+对照来源：[d-jepa](../../../foundation-models/2611.16639-d-jepa/README.md) · [clip](../../../reproductions/2103.00020-clip/README.md)
+
+### 同空间匹配和跨空间翻译提供不同几何约束
+
+比较应先问分数两边是否属于同一target space，以及哪一侧参与梯度。Duo把translated source和own target比较，CLIP直接比较own representations。skipless移除identity shortcut并配专门初始化；本地单head层不含完整LeJEPA和全设备负例，因此不能声称复现未对齐的医学检索几何。
+
+对照来源：[duojepa](../../../foundation-models/2611.15968-duojepa/README.md) · [clip](../../../reproductions/2103.00020-clip/README.md)
+
+### 估计器偏差和模态对齐几何是两条讨论轴
+
+InfoNCE中的负例数不仅影响采样方差；在错设条件下可改变surrogate最优点。另一方面，non-contrastive平方协方差若带同样本项也可有偏。应分别审查表示几何、目标定义、独立采样和优化预算，而不是给方法贴contrastive标签后推断成本/能力。本篇原文无实证矩阵，本地也不制造高成本延期实验。
+
+对照来源：[spectral-ghost](../../../foundation-models/2601.20154-spectral-ghost/README.md) · [clip](../../../reproductions/2103.00020-clip/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -149,9 +177,65 @@ MMEB-V3的OmniSET把相同语义的T/I/V/A留在共享候选池，连查询本�
 
     对照来源：[mmeb-v3](../../../multimodal-models/2604.23321-mmeb-v3/README.md) · [mveb](../../../multimodal-models/2606.14958-mveb/README.md)
 
+### Unbundling和BLIP-2都连接视觉与语言，为什么不能只按视觉token数判断谁更好？ {#cross-nov15-unbundling-vision}
+
+??? note "展开答案与例子"
+
+    **答案：** BLIP-2重点是冻结模型之间的query瓶颈；Unbundling分离专属容量、先验和位置，保留joint attention。token数、参数训练范围、生命周期预算不同，需匹配实验而非按一个数排名。
+
+    **教学例子：** 四个query减少token但可能损失细节；早期vision-only FFN增加容量却不直接减少token，两个收益并不互相替代。
+
+    对照来源：[unbundling-vision](../../../foundation-models/2611.17334-unbundling-vision/README.md) · [blip2](../../../reproductions/2301.12597-blip2/README.md)
+
+### D-JEPA是否说明CLIP对齐思路总是错误？ {#cross-nov15-d-jepa}
+
+??? note "展开答案与例子"
+
+    **答案：** 不是。它讨论信息不对称及严格对齐解，CLIP的目标和任务还包括实例区分与检索。是否损失任务信息需要匹配模型、数据和下游读出，不能由名字或单一界下结论。
+
+    **教学例子：** 同一场景的不同问题不是等信息视图；但图片与描述检索有不同监督结构，需单独比较。
+
+    对照来源：[d-jepa](../../../foundation-models/2611.16639-d-jepa/README.md) · [clip](../../../reproductions/2103.00020-clip/README.md)
+
+### DuoJEPA也用双向InfoNCE，为什么不能直接替换成CLIP loss？ {#cross-nov15-duojepa}
+
+??? note "展开答案与例子"
+
+    **答案：** CLIP比较两own vectors；Duo的每项在一个目标空间内比较translated source与own centroid。替换会直接改变空间约束、centroid构造和encoder梯度路径。
+
+    **教学例子：** 图像own向量在图像空间，翻译后的图像向量在文本空间；与文本own匹配的是后者。
+
+    对照来源：[duojepa](../../../foundation-models/2611.15968-duojepa/README.md) · [clip](../../../reproductions/2103.00020-clip/README.md)
+
+### Spectral Ghost的无偏分析能否直接证明CLIP batch越小越好？ {#cross-nov15-spectral-ghost}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。无偏性与方差、统计效率和模型错设不同；ranking NCE固定负例数的surrogate还有自己的最优点。理论目标性质不是下游性能排序。
+
+    **教学例子：** 移除同样本偏差仍可能增加有限batch方差，准确率和收敛速度须单独实验；本文没有给出该实证。
+
+    对照来源：[spectral-ghost](../../../foundation-models/2601.20154-spectral-ghost/README.md) · [clip](../../../reproductions/2103.00020-clip/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-15** · 补入固定v4理论方法及版本化机构证据，不虚构训练实验或本地指标。
+
+涉及：[spectral-ghost](../../../foundation-models/2601.20154-spectral-ghost/README.md) · [clip](../../../reproductions/2103.00020-clip/README.md)
+
+**2026-11-15** · 补入固定版本方法、低成本组件或明确资料收录，分开原文结果、本地诊断及高成本不复现范围。
+
+涉及：[duojepa](../../../foundation-models/2611.15968-duojepa/README.md) · [clip](../../../reproductions/2103.00020-clip/README.md)
+
+**2026-11-15** · 补入固定版本方法、低成本组件或明确资料收录，分开原文结果、本地诊断及高成本不复现范围。
+
+涉及：[d-jepa](../../../foundation-models/2611.16639-d-jepa/README.md) · [clip](../../../reproductions/2103.00020-clip/README.md)
+
+**2026-11-15** · 补入固定版本方法、低成本组件或明确资料收录，分开原文结果、本地诊断及高成本不复现范围。
+
+涉及：[unbundling-vision](../../../foundation-models/2611.17334-unbundling-vision/README.md) · [blip2](../../../reproductions/2301.12597-blip2/README.md)
 
 **2026-11-13** · 补MMEB-V3共享混合池、任务等权和显式NDCG gain，联系MVEB预算协议；只验CPU计分，不报告编码器能力。
 
@@ -173,7 +257,7 @@ MMEB-V3的OmniSET把相同语义的T/I/V/A留在共享候选池，连查询本�
 
 覆盖 20 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 23 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 27 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -200,6 +284,10 @@ MMEB-V3的OmniSET把相同语义的T/I/V/A留在共享候选池，连查询本�
 - [WeMM-Embedding: WeChat Multi-Modal Embedding Technical Report](../../../reproductions/2608.24053-wemm-embedding/README.md)
 - [AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs&#x27; Contextual and Cultural Knowledge and Thinking](../../../multimodal-models/2601.17645-avmeme-exam/README.md)
 - [MMEB-V3: Measuring the Performance Gaps of Omni-Modality Embedding Models](../../../multimodal-models/2604.23321-mmeb-v3/README.md)
+- [Unbundling Multimodal Vision Encoding](../../../foundation-models/2611.17334-unbundling-vision/README.md)
+- [Asymmetric Multimodal Learning with Decomposed JEPAs](../../../foundation-models/2611.16639-d-jepa/README.md)
+- [DuoJEPA: Cross-Modal Translation Between Unaligned Self-Supervised Embedding Spaces](../../../foundation-models/2611.15968-duojepa/README.md)
+- [Spectral Ghost in Representation Learning: A Unified View from Component Analysis to Self-Supervised Learning](../../../foundation-models/2601.20154-spectral-ghost/README.md)
 
 </details>
 

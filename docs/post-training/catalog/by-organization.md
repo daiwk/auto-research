@@ -166,6 +166,7 @@
 
 ## Georgia Institute of Technology
 
+- 2026-11-12 · 一作：Tiansheng Huang · [Bait: Mitigating Harmful Agentic Reinforcement Learning via Probing Reward Function](../2611.16369-bait-reward-defense/README.md)（`bait-reward-defense`）：当外部环境给不安全行为更高奖励时，普通 RL 会沿错误方向更新。Bait 在防御者私有标识下混入 probe 回答，用其平均 reward 与真实 policy 回答比较；探针更受奖励时反转整组奖励，再只向策略学习暴露 policy 部分。
 - 2026-09-30 · 一作：Xinchen Du · [SHARPO: Segment-Level Credit Assignment for Agentic Reinforcement Learning](../2610.00838-sharpo/README.md)（`sharpo`）：用同组成功轨迹作为自蒸馏 teacher context，在环境交互 segment 内计算 teacher-student log-prob gap，并有界缩放 GRPO advantage。
 - 2026-09-29 · 一作：Zhiqi Li · [FlowMap-OPD: Rollout-Kernel Separation for On-Policy Distillation of Few-Step Flow-Map Generators](../2609.37851-flowmap-opd/README.md)（`flowmap-opd`）：把生成状态的 rollout 分布与 teacher/student 比较 kernel 解耦：rollout 只负责提供具有正确边缘分布的状态，优化 kernel 在这些冻结状态上比较 flow map、诱导速度或瞬时速度。
 
@@ -266,6 +267,10 @@
 
 - 2026-10-19 · 一作：Suwan Yoon · [Correctness-Dependent Asymmetric Target Distributions for Self-Distillation Policy Optimization](../2610.25973-apsd/README.md)（`apsd`）：反馈条件自教师可能破坏正确rollout里学生已经成功的偏好，却又对错误rollout纠正不足。APSD依据正确性调整蒸馏target：正确时在学生和自教师之间插值，错误时越过自教师外推。
 - 2026-08-12 · 一作：Byungoh Ko · [Context Blindness in DPO: Mitigating Object Hallucination in MLLMs via Context-Calibrated Preference Optimization](../2608.12158-c2-dpo/README.md)（`c2-dpo`）：普通 DPO 即使输入相关图像上下文，也可能主要依赖语言先验。论文先定义 CPG，度量加入上下文后 chosen/rejected preference margin 增加多少；C²-DPO 直接扩大该增益，同时保留原偏好顺序。
+
+## Lanzhou University
+
+- 2026-11-12 · 一作：Bo Han · [Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models](../2611.16628-safety-budget-cgrpo/README.md)（`safety-budget-cgrpo`）：给 GRPO 增加安全预算并不足够：scorer 分数的均值偏差会使 dual controller 读错约束，且对已加权总奖励作组内标准化可能消掉 multiplier 的梯度尺度。本文拆成两条通道：原始概率保留 base reward 的组内排序；用独立 judge 在**训练轨迹**上拟合的单调校准映射，只服务于 penalty 与预算控制。
 
 ## LeapLab, Tsinghua University
 
@@ -687,6 +692,10 @@
 - 2026-10-08 · 一作：Ximing Lu · [MagicBeanStalk: Escaping the RLVR Zero Advantage Trap with Recursive Data Synthesis](../../reproductions/2610.12659-magicbeanstalk/README.md)（`magicbeanstalk`）：RLVR有效性取决于problem、当前policy、rollout预算。MBS从verified hard seed提炼reasoning蓝图，自顶向下分解并实测child worked examples是否提高parent正确率，再合成更难新leaf、自底向上按原依赖组合。 **成本过高，暂不复现；待验收，未注册可执行入口。**
 - 2026-09-10 · 一作：Dongfang Zhao · [LOCUS: Task-Aware Low-Rank Post-Training for Token-Efficient Language Generation](../2609.11739-locus/README.md)（`locus`）：学习任务相关低秩后训练子空间，只在紧凑方向上更新以缩短回答，同时保留任务能力。
 - 2025-04-21 · 一作：Jianhao Yan · [LUFFY](../2504.14945-luffy/README.md)（`luffy`）：把离线高质量推理与在线 rollout 放进同一 support，通过正则化 importance ratio 保留 on-policy 行为。
+
+## University of Wisconsin–Madison
+
+- 2026-11-11 · 一作：Shuibai Zhang · [Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs?](../2611.15404-lgpo/README.md)（`lgpo`）：GRPO 的 importance ratio 同时承担采样分布校正与裁剪约束，二者未必对训练稳定性同样重要。作者发现去掉校正而保留约束时可以稳定；完全 on-policy 时比率恰为 1，ratio clipping 却无法及时限制过度确定的分布。
 
 ## VNU University of Engineering and Technology / Viettel AI
 

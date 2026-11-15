@@ -219,7 +219,7 @@
     "policy-optimization": {
       "title": "同一个GRPO名字之外：优势尺度、裁剪单位与训推失配",
       "thesis": "GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比被裁剪、样本到底由哪个分布生成。Dr. GRPO、DAPO、GSPO与TIS/IcePop分别改动这些环节，不能把所有ratio都叫同一种off-policy校正。",
-      "updated": "2026-11-12",
+      "updated": "2026-11-15",
       "reviewed_papers": [
         "post-training:rcea",
         "post-training:rlid",
@@ -278,7 +278,9 @@
         "post-training:remax",
         "post-training:ppo-rlhf",
         "post-training:excursion-td",
-        "post-training:apmd-reference-reset"
+        "post-training:apmd-reference-reset",
+        "post-training:lgpo",
+        "post-training:safety-budget-cgrpo"
       ],
       "axes": [
         "优势尺度：组均值、组标准差、长度归一化",
@@ -386,6 +388,28 @@
             "结果、负控与边界",
             "理论与实验范围"
           ]
+        },
+        {
+          "paper": "post-training:lgpo",
+          "position": "按当前策略响应平均logp作单侧stop-gradient门控，幸存token优势加权求和、对全部响应平均，不计算old-policy ratio。",
+          "tradeoff": "Dr.GRPO去组std/长度归一化，LGPO改变梯度响应集合；两者不是同一归一化开关。高似然负优势也门控，小logits验证不证明LLM更稳或更快。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ]
+        },
+        {
+          "paper": "post-training:safety-budget-cgrpo",
+          "position": "保持raw base reward，把训练轨迹PAV映射只放入penalty和dual control，并用不除总std的优势保留multiplier尺度。",
+          "tradeoff": "Dr.GRPO移除std以修正训练偏置；这里同一算术还关系到约束控制是否生效。校准排序与均值level不同，CPU单调映射不是VLM安全或预算达成证据。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -430,6 +454,22 @@
           "papers": [
             "post-training:apmd-reference-reset",
             "post-training:grpo"
+          ]
+        },
+        {
+          "title": "门控对象与优势尺度是独立的设计轴",
+          "body": "Dr.GRPO保留中心化奖励但移除组std与长度偏置；LGPO不定义新的奖励估计器，而在当前策略平均logp高于门槛时去掉整条响应梯度。把幸存响应重新归一化会按接受率改变更新尺度，与去组std不是等价选择。比较或组合应分别固定采样策略、优势尺度、有效token集合和全响应分母，不能把原文两H100耗时直接外推为本地加速。",
+          "papers": [
+            "post-training:lgpo",
+            "post-training:dr-grpo"
+          ]
+        },
+        {
+          "title": "保留乘子不等于校准成本：控制器有两道独立门槛",
+          "body": "Dr.GRPO式未缩放优势能避免总reward组std抵消乘子，但scorer若均值偏高或偏低，dual仍会饱和或关闭。Safety as a Budget因此把训练轨迹拟合的映射仅用于penalty/control，raw base reward保留组内差别。PAV的平台、训练/测试隔离、EMA前态和插值约定都需显式声明；既不能把单调性当校准保证，也不能把另一种逐目标标准化结果写成本地unscaled效果。",
+          "papers": [
+            "post-training:safety-budget-cgrpo",
+            "post-training:dr-grpo"
           ]
         }
       ],
@@ -495,6 +535,26 @@
           "papers": [
             "post-training:apmd-reference-reset",
             "post-training:grpo"
+          ]
+        },
+        {
+          "id": "cross-nov15-lgpo-normalization",
+          "question": "只保留一半响应时，LGPO应除幸存数来补回学习信号吗？",
+          "answer": "固定本地保真口径不应。论文期望的全响应分母让门控样本贡献为零；除幸存数会增加有效步长。Dr.GRPO的去std也不能为这种分母改动提供等价性证明。",
+          "example": "教学例：4条响应仅2条保留且总贡献6，应取-6/4而非-6/2。",
+          "papers": [
+            "post-training:lgpo",
+            "post-training:dr-grpo"
+          ]
+        },
+        {
+          "id": "cross-nov15-budget-std",
+          "question": "从GRPO改成Dr.GRPO式不除std，就保证安全预算是真实事件率了吗？",
+          "answer": "不能。它保留multiplier对梯度的尺度，但预算还读scorer概率均值；偏差未校准时，控制器可能在错误level稳定。还需独立标签、训练轨迹拟合、held-out评估和明确控制状态。",
+          "example": "教学例：reward尺度保留下来，但scorer始终低估有害率，lambda仍可能归零。",
+          "papers": [
+            "post-training:safety-budget-cgrpo",
+            "post-training:dr-grpo"
           ]
         }
       ],
@@ -654,13 +714,37 @@
           "source_revisions": {
             "post-training:apmd-reference-reset": "d59bdb8a539849abd079aad30ab38777eea5d387e48f498c2c2fb25ccfbc9087"
           }
+        },
+        {
+          "date": "2026-11-15",
+          "papers": [
+            "post-training:lgpo",
+            "post-training:dr-grpo"
+          ],
+          "summary": "补入LGPO的当前似然门控，与Dr.GRPO的优势尺度分开；保留双符号门控、token求和和全响应分母。完整LLM训练因成本过高不复现，局部梯度不作能力或速度证据。",
+          "source_revisions": {
+            "post-training:lgpo": "2d29d733b860668c8b0f2c9630dda3de928b11414fcb5f60a50dbb20ce7907a1",
+            "post-training:dr-grpo": "604e3c3df040305405bda2166f684e95d0b0263b9fcee56bca0fbe8fc5f6c2fa"
+          }
+        },
+        {
+          "date": "2026-11-15",
+          "papers": [
+            "post-training:safety-budget-cgrpo",
+            "post-training:dr-grpo"
+          ],
+          "summary": "加入Safety as a Budget，区分优势尺度保留与控制level校准；仅实现训练限定PAV、双通道reward和显式EMA dual，不把CPU算术包装成安全训练，完整矩阵成本过高不复现。",
+          "source_revisions": {
+            "post-training:safety-budget-cgrpo": "8d5cbc553888cba6c873ba73acab1ceb14912631efae56688d780e4300fe9abe",
+            "post-training:dr-grpo": "604e3c3df040305405bda2166f684e95d0b0263b9fcee56bca0fbe8fc5f6c2fa"
+          }
         }
       ]
     },
     "reward-and-credit": {
       "title": "奖励从哪里来，信用才该分到哪里",
       "thesis": "过程标签、最终结果、模型自置信与回溯归因是不同证据。逐步PRM、MRTPO、TACO和MART-GRPO分别做标签获取、奖励定位、正信用降权和失败后缀过滤；INTUITOR则改用内在分布信号，不能把它当外部正确性验证器。 CONCUR另处理奖励维度之间的优先级，把门控辅助优势投影到主奖励保序锥；这不是沿时间轴分配token信用。",
-      "updated": "2026-11-13",
+      "updated": "2026-11-15",
       "reviewed_papers": [
         "post-training:emoreward",
         "post-training:dars-density",
@@ -703,7 +787,8 @@
         "post-training:concur",
         "post-training:maxim",
         "post-training:mcpo",
-        "post-training:rlmf"
+        "post-training:rlmf",
+        "post-training:bait-reward-defense"
       ],
       "axes": [
         "证据来源：人工步骤、正确续写比例、verifier、内在分布",
@@ -831,6 +916,17 @@
             "核心公式",
             "数据协议与代码映射"
           ]
+        },
+        {
+          "paper": "post-training:bait-reward-defense",
+          "position": "用防御私有probe与policy的平均外部reward gap判定是否翻转整组，再剔除probe，仅实现Eqs3–5。",
+          "tradeoff": "TAG用独立训练探针的reverse KL选可信anchor后门控辅助奖励；Bait探测环境reward偏好，不是同种probe。无probe语义验证时数值gap不能证明安全，优势std冲突不猜。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -891,6 +987,14 @@
           "papers": [
             "post-training:rlmf",
             "post-training:residual-advantage"
+          ]
+        },
+        {
+          "title": "奖励防御先明确探针来源，再决定变换什么",
+          "body": "TAG的probe是从共同基线单奖励训练的策略，用它自身采样的reverse KL选anchor；Bait的probe是防御者私有membership下的特殊回答，比较外部reward偏好后反转整组。两者都要求探针的真实来源，而不是在评测端读取gold制作完美信号。Bait本地不生成文本或攻击，只验证>=0边界与policy-only过滤；TAG的anchor为零门控也不能替代这种符号判定。",
+          "papers": [
+            "post-training:bait-reward-defense",
+            "post-training:tag-reward-gating"
           ]
         }
       ],
@@ -975,6 +1079,16 @@
           "papers": [
             "post-training:rlmf",
             "post-training:residual-advantage"
+          ]
+        },
+        {
+          "id": "cross-nov15-bait-tag-probe",
+          "question": "TAG选出一个可信anchor，就能直接充当Bait的private probe mask吗？",
+          "answer": "不能。TAG选的是奖励维度及训练探针策略，Bait mask区分外部同组回答的来源。两者的输入、采样过程和信任假设不同；必须分别验证，不可从数值组件互相推导真实安全。",
+          "example": "教学例：一个组有三条回答，TAG的正确性anchor分数不是哪一条由防御probe产生的membership。",
+          "papers": [
+            "post-training:bait-reward-defense",
+            "post-training:tag-reward-gating"
           ]
         }
       ],
@@ -1119,6 +1233,18 @@
           "source_revisions": {
             "post-training:rlmf": "8b22b0d384f1b00b76032a6dd9d69eb9ab094fa13b5b9f5f0b03f5c382f3dc74",
             "post-training:residual-advantage": "ea00ca575be197a7e08c8234a95fd64b6fd0c850bc5976b08e76c97ccb990bae"
+          }
+        },
+        {
+          "date": "2026-11-15",
+          "papers": [
+            "post-training:bait-reward-defense",
+            "post-training:tag-reward-gating"
+          ],
+          "summary": "补入Google DeepMind相关Bait的防御性reward-gap/sign-flip，和TAG的anchor门控分清来源及变换对象。只实现Eqs3–5，不含有害probe/攻击/训练；原文优势std冲突保留，完整实验高成本不复现。",
+          "source_revisions": {
+            "post-training:bait-reward-defense": "f0471f7c9153a3c97924eb7be4cab15943df6e0614ff809704877c66f8699492",
+            "post-training:tag-reward-gating": "80ae87925ddaed87f00e62a49e40d87dda1e0d9fe9b35484f0e54b281712298b"
           }
         }
       ]

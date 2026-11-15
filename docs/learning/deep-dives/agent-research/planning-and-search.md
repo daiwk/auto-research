@@ -7,7 +7,7 @@ hide:
 
 # 规划先问何时见反馈，再问要不要展开搜索
 
-[Agent](../index.md) · 更新 2026-11-13 · 21 篇主题资料 / 11 篇重点对照
+[Agent](../index.md) · 更新 2026-11-15 · 22 篇主题资料 / 12 篇重点对照
 
 ReAct 与 ReWOO 改变计划接收观察的时机，ToT 与 LATS 改变候选搜索组织，Jev Lookahead 把后继模拟交给代码，DRAGO 则检查形式计划是否忠实。它们处理不同的不确定性：步骤未知、路线选择、环境可达性与规格错误，不应以搜索次数或本地满分统一排名。
 
@@ -36,6 +36,7 @@ ReAct 与 ReWOO 改变计划接收观察的时机，ToT 与 LATS 改变候选搜
 | [An AI system to help scientists write expert-level empirical software (ERA)](../../../agent-research/2509.06503-era-flat-puct/README.md) · [原始来源](https://arxiv.org/abs/2509.06503)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验与边界 | 将所有已执行程序平铺竞争，用任务分数的归一化排名、整树均匀先验和祖先访问计数决定下一次代码变异。 | 不回传后代 rollout 均值，也不按根到叶递归选择；与 LATS 的行动轨迹、环境反馈及价值回传不是同一价值语义。外部执行、评分和数据隔离未在 CPU 算术核中实现，不能把节点数或夹具满分当成科研能力。 |
 | [Analysis of Optimality of Large Language Models on Planning Problems](../../../agent-research/2604.02910-planning-optimality/README.md) · [原始来源](https://arxiv.org/abs/2604.02910v1)<br>章节：背景与主要改动、核心机制与公式、原文结果与限制、本地复现 | 只判断计划能否达到目标，会忽略大量无必要动作。论文把LLM规划评测从validity扩展到optimality，在Blocksworld和抽象P*任务中构造具有已知最优长度的课程，分析推理模型随着难度增长的计划冗余。 | LATS分配搜索与rollout预算来寻找行动轨迹；本组件不生成LLM计划，只验证外部计划及计算受限课程gap。搜索分高不能代替真实前置条件验证，合法性分也不能替代最优性。 |
 | [Learning Steerable Clarification Policies with Collaborative Self-play](../../../agent-research/2512.04068-clarification-sgp/README.md) · [原始来源](https://arxiv.org/abs/2512.04068)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界 | 把猜测、澄清、多答案作为受数值成本条件化的动作，按解释均衡reward选序列后再选训练轨迹。 | ReAct据观察继续行动；SGP还问多一次沟通的收益是否抵成本。低成本时多问不等于高成本下也最优，本地选择器不具备对话语义能力。 |
+| [LEAP: Supercharging LLMs for Formal Mathematics with Agentic Frameworks](../../../agent-research/2606.03303-leap-formal-math/README.md) · [原始来源](https://arxiv.org/abs/2606.03303)<br>章节：背景与主要改动、核心公式 | 用持久AND–OR DAG复用已验证lemma，交替非形式blueprint、Lean sketch、compiler反馈与语义分解review；保留v1日期并固定v3核查。 | DRAGO核查形式规格是否忠实且不退化；LEAP还要防止合法分解无进展。形式通过、有用搜索和原任务忠实是三个不同门，均不能把参考答案传给actor。 |
 
 </div>
 
@@ -82,6 +83,12 @@ LATS分配搜索与rollout预算来寻找行动轨迹；本组件不生成LLM计
 ReAct让推理与工具观察交替，而SGP在存在私有意图的协作中显式训练行动形式。它先对解释均衡再选序列，避免只对好猜解释最优；数值成本还要与F1单位一致。两者都依赖真实模型产生有效观察或问题，本地满分控制检查不能相互排能力。
 
 对照来源：[clarification-sgp](../../../agent-research/2512.04068-clarification-sgp/README.md) · [react](../../../agent-research/2210.03629-react/README.md)
+
+### 形式验证只保证你表达的陈述，不保证表达得有用或正确
+
+DRAGO的可解规格可能遗漏原任务目标，因此要求诊断和反退化。LEAP的Lean sketch即使类型正确，也可能将原命题换名作为子lemma，需要语义review指导进展。两个系统都将确定性检查与外部语义判断分开；本地STRIPS核或通用DAG都不能变成Lean证明与自然语言对齐的替代品。
+
+对照来源：[leap-formal-math](../../../agent-research/2606.03303-leap-formal-math/README.md) · [drago](../../../agent-research/2610.22568-drago/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -167,9 +174,23 @@ ReAct让推理与工具观察交替，而SGP在存在私有意图的协作中显
 
     对照来源：[clarification-sgp](../../../agent-research/2512.04068-clarification-sgp/README.md) · [react](../../../agent-research/2210.03629-react/README.md)
 
+### Lean接受sketch与DRAGO规划器找到plan，是否都可直接当作原任务完成？ {#cross-cross-nov15-leap-formal-math}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。前者可能仍依赖未证明且无简化的子lemma，后者可能求解了表达错误或弱化的规格。需要分别检查所有必要证明义务、有用进展和题意忠实度。
+
+    **教学例子：** 教学例：把目标定理本身作为假设当然能推出目标，但并没有完成证明。
+
+    对照来源：[leap-formal-math](../../../agent-research/2606.03303-leap-formal-math/README.md) · [drago](../../../agent-research/2610.22568-drago/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-15** · 补入Google LEAP历史修订v3：区分形式有效、有用分解和题意忠实，保留6月首发与11月修订口径。
+
+涉及：[leap-formal-math](../../../agent-research/2606.03303-leap-formal-math/README.md) · [drago](../../../agent-research/2610.22568-drago/README.md)
 
 **2026-11-13** · 补入clarification-sgp历史遗漏，把猜测、澄清、多答案作为受数值成本条件化的动作，按解释均衡reward选序列后再选训练轨迹。 ReAct据观察继续行动；SGP还问多一次沟通的收益是否抵成本。低成本时多问不等于高成本下也最优，本地选择器不具备对话语义能力。
 
@@ -195,7 +216,7 @@ ReAct让推理与工具观察交替，而SGP在存在私有意图的协作中显
 
 覆盖 16 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 21 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 22 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -220,6 +241,7 @@ ReAct让推理与工具观察交替，而SGP在存在私有意图的协作中显
 - [An AI system to help scientists write expert-level empirical software (ERA)](../../../agent-research/2509.06503-era-flat-puct/README.md)
 - [Analysis of Optimality of Large Language Models on Planning Problems](../../../agent-research/2604.02910-planning-optimality/README.md)
 - [Learning Steerable Clarification Policies with Collaborative Self-play](../../../agent-research/2512.04068-clarification-sgp/README.md)
+- [LEAP: Supercharging LLMs for Formal Mathematics with Agentic Frameworks](../../../agent-research/2606.03303-leap-formal-math/README.md)
 
 </details>
 

@@ -66,6 +66,10 @@
 
 - 2021-02-26 · [Learning Transferable Visual Models From Natural Language Supervision](../../reproductions/2103.00020-clip/README.md)（`clip`）：用独立图像/文本 encoder 将配对样本映射到同一单位球面，通过双向 batch contrastive objective 学习可迁移零样本表示。
 
+## Roblox
+
+- 2026-11-12 · [Back to Pixels: Lifting Latent Video Diffusion into Pixel Space](../../multimodal-models/2611.17336-pixvid/README.md)（`pixvid`）：像素视频生成避免VAE潜空间约束，但直接从零学习大规模时空关系成本很高。PixVid保留预训练latent DiT知识，以离线像素—latent线性对齐融合进patch embedding、校准噪声时间步，再加入detailer处理高频细节。高分辨率patch初始化与新增上采样块控制token数量，不能只把VAE删掉就等同本文。[§2—3](https://arxiv.org/html/2611.17336v1#S2) **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## Salesforce Research
 
 - 2023-01-30 · [BLIP-2: Bootstrapping Language-Image Pre-training with Frozen Image Encoders and Large Language Models](../../reproductions/2301.12597-blip2/README.md)（`blip2`）：BLIP-2 冻结已有视觉 encoder 和 LLM，只训练轻量 Q-Former。固定数量的可学习 query 通过 cross-attention 从视觉 token 提取与语言最相关的信息；第一阶段做图文表征学习，第二阶段将 query 输出投影成冻结 LLM 的 soft visual prompt。

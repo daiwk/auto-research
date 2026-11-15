@@ -8,6 +8,7 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [Back to Pixels: Lifting Latent Video Diffusion into Pixel Space](<https://arxiv.org/abs/2611.17336v1>) | 2026-11-12 | [English](../../multimodal-models/2611.17336-pixvid/README-en.md) · [Chinese](../../multimodal-models/2611.17336-pixvid/README.md) |
 | [RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval](<https://arxiv.org/abs/2611.14496>) | 2026-11-10 | [English](../../multimodal-models/2611.14496-rs-jepa/README-en.md) · [Chinese](../../multimodal-models/2611.14496-rs-jepa/README.md) |
 | [OnlyAct: Extracting Action Representations from Foundation Models for World Models](<https://arxiv.org/abs/2611.14420>) | 2026-11-10 | [English](../../multimodal-models/2611.14420-onlyact/README-en.md) · [Chinese](../../multimodal-models/2611.14420-onlyact/README.md) |
 | [C²-Routing: Complementary Cropping and Compression for Efficient Vision-Language Inference](<https://arxiv.org/abs/2611.14469>) | 2026-11-10 | [English](../../multimodal-models/2611.14469-c2-routing/README-en.md) · [Chinese](../../multimodal-models/2611.14469-c2-routing/README.md) |

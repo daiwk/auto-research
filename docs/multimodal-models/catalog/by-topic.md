@@ -60,6 +60,7 @@
 
 ## 视觉状态转移监督
 
+- 2026-11-12 · [Back to Pixels: Lifting Latent Video Diffusion into Pixel Space](../../multimodal-models/2611.17336-pixvid/README.md)（`pixvid`）：像素视频生成避免VAE潜空间约束，但直接从零学习大规模时空关系成本很高。PixVid保留预训练latent DiT知识，以离线像素—latent线性对齐融合进patch embedding、校准噪声时间步，再加入detailer处理高频细节。高分辨率patch初始化与新增上采样块控制token数量，不能只把VAE删掉就等同本文。[§2—3](https://arxiv.org/html/2611.17336v1#S2) **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-10-08 · [WOVEN: Weaving Visual World Modeling into Multimodal LLMs](../../reproductions/2610.12417-woven/README.md)（`woven`）：静态识别不等于理解状态变化。WOVEN以$(s,a,s')$为共同对象，用视频生成模型rollout提供结果/中间状态，而非在prompt里预写结果。相同初始状态在不同动作下的rollout提供counterfactual候选；按scene、action、reasoning三个轴形成可控监督，用error-typed distractors区分错误机制。
 
 ## 视觉证据约束蒸馏

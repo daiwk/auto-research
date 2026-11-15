@@ -7,7 +7,7 @@ hide:
 
 # 工具与协作执行：把计划变成可检查的动作
 
-[Agent](index.md) / 205 个问题 · 51 篇论文
+[Agent](index.md) / 209 个问题 · 52 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">205 个问题 · 51 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">209 个问题 · 52 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:caplite" data-paper-title="CapLite: Prompt-Injection Defense for Small Language Model Agents without Model-Written Security Artifacts" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="CapLite: Prompt-Injection Defense for Small Language Model Agents without Model-Written Security Artifacts Agent The University of Tokyo 2026-11-12 小模型既可能被提示注入欺骗，也可能生成本就错误的权限策略。CapLite把安全决策从模型生成物中移出：可信用户请求与工具schema决定权限，Planner在看到任何工具结果前提交写调用，之后模型只能从提取出的候选ID里绑定authority值，代码在真实副作用前再次校验。读写分类使用工具名及docstring的首个动词：两者都是read verb才是只读，任一为effect verb则写，未知拒绝。写参数默认authority，但正文载荷、时间和enum／bool控制项分开； 成本过高，不复现（审查 DONE）；component_only／L1确定性机制诊断，不是完整Agent防御评测。component_only／L1确定性机制诊断，不是完整Agent防御评测。完整实验高成本不复现（审查 DONE）。本地只支持显式平面schema的受限执行核，不声称通用安全保证。ToolPolicy冻结可信schema，拒绝未知操作及不支持的嵌套object。grounding_set执行显式Unicode词ngram和标识符抽取；不是语义指代解析。Candidate保留ID／来源，bind_candidates只筛既有候选；不会生成绑定。  工具与协作 提示注入与写入权限 Agent 工具与协作执行：把计划变成可检查的动作 CapLite的写入完整性意味着邮件正文也不会被注入影响吗？ 不意味着。它约束收件人、金额、对象、目的地等authority值及预提交写序列。自由payload、时间、最终答案和读内容不在同一保证内。 教学例：收件人必须是用户指定邮箱，但正文可能仍夹带错误文本；不应因此宣称整封邮件安全。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<span id="paper-agent-research-caplite-13214169" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-3e372532c8678acf">CapLite的写入完整性意味着邮件正文也不会被注入影响吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acaplite">CapLite: Prompt-Injection Defense for Small Language Model Agents without Model-Written Security Artifacts</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · The University of Tokyo</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不意味着。它约束收件人、金额、对象、目的地等authority值及预提交写序列。自由payload、时间、最终答案和读内容不在同一保证内。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：收件人必须是用户指定邮箱，但正文可能仍夹带错误文本；不应因此宣称整封邮件安全。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17115v1">原论文</a> · <a href="../../../../agent-research/2611.17115-caplite/">实现解读</a> · <a href="#qa-3e372532c8678acf">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:caplite" data-paper-title="CapLite: Prompt-Injection Defense for Small Language Model Agents without Model-Written Security Artifacts" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="CapLite: Prompt-Injection Defense for Small Language Model Agents without Model-Written Security Artifacts Agent The University of Tokyo 2026-11-12 小模型既可能被提示注入欺骗，也可能生成本就错误的权限策略。CapLite把安全决策从模型生成物中移出：可信用户请求与工具schema决定权限，Planner在看到任何工具结果前提交写调用，之后模型只能从提取出的候选ID里绑定authority值，代码在真实副作用前再次校验。读写分类使用工具名及docstring的首个动词：两者都是read verb才是只读，任一为effect verb则写，未知拒绝。写参数默认authority，但正文载荷、时间和enum／bool控制项分开； 成本过高，不复现（审查 DONE）；component_only／L1确定性机制诊断，不是完整Agent防御评测。component_only／L1确定性机制诊断，不是完整Agent防御评测。完整实验高成本不复现（审查 DONE）。本地只支持显式平面schema的受限执行核，不声称通用安全保证。ToolPolicy冻结可信schema，拒绝未知操作及不支持的嵌套object。grounding_set执行显式Unicode词ngram和标识符抽取；不是语义指代解析。Candidate保留ID／来源，bind_candidates只筛既有候选；不会生成绑定。  工具与协作 提示注入与写入权限 Agent 工具与协作执行：把计划变成可检查的动作 参数都来自用户请求，为什么还需要预提交写序列？ grounding只限制参数值，不能阻止攻击新增或重排本来合法的写操作。预提交序列限制动作，mediator只执行其成功前缀，首次deny／ask／error就结束剩余写入。 教学例：用户提过Alice与Bob两个邮箱，也不表示恶意网页可以新增一次向Bob转账。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-1ff255a6270a6630">参数都来自用户请求，为什么还需要预提交写序列？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acaplite">CapLite: Prompt-Injection Defense for Small Language Model Agents without Model-Written Security Artifacts</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · The University of Tokyo</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>grounding只限制参数值，不能阻止攻击新增或重排本来合法的写操作。预提交序列限制动作，mediator只执行其成功前缀，首次deny／ask／error就结束剩余写入。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：用户提过Alice与Bob两个邮箱，也不表示恶意网页可以新增一次向Bob转账。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17115v1">原论文</a> · <a href="../../../../agent-research/2611.17115-caplite/">实现解读</a> · <a href="#qa-1ff255a6270a6630">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:caplite" data-paper-title="CapLite: Prompt-Injection Defense for Small Language Model Agents without Model-Written Security Artifacts" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="CapLite: Prompt-Injection Defense for Small Language Model Agents without Model-Written Security Artifacts Agent The University of Tokyo 2026-11-12 小模型既可能被提示注入欺骗，也可能生成本就错误的权限策略。CapLite把安全决策从模型生成物中移出：可信用户请求与工具schema决定权限，Planner在看到任何工具结果前提交写调用，之后模型只能从提取出的候选ID里绑定authority值，代码在真实副作用前再次校验。读写分类使用工具名及docstring的首个动词：两者都是read verb才是只读，任一为effect verb则写，未知拒绝。写参数默认authority，但正文载荷、时间和enum／bool控制项分开； 成本过高，不复现（审查 DONE）；component_only／L1确定性机制诊断，不是完整Agent防御评测。component_only／L1确定性机制诊断，不是完整Agent防御评测。完整实验高成本不复现（审查 DONE）。本地只支持显式平面schema的受限执行核，不声称通用安全保证。ToolPolicy冻结可信schema，拒绝未知操作及不支持的嵌套object。grounding_set执行显式Unicode词ngram和标识符抽取；不是语义指代解析。Candidate保留ID／来源，bind_candidates只筛既有候选；不会生成绑定。  工具与协作 提示注入与写入权限 Agent 工具与协作执行：把计划变成可检查的动作 CapLite和RuntimeTickets都在副作用前检查，信任根相同吗？ 不完全相同。CapLite从可信schema与请求精确grounding派生authority，再固定写序列；RuntimeTickets把具原文依据的obligation经host审核冻结，并检查grant收紧、对象validator和累计额度。 教学例：邮箱必须出现在请求里与累计交付不能超过100字节，是两种不同合同，不能互相替代。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-7d87ce33caf82501">CapLite和RuntimeTickets都在副作用前检查，信任根相同吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acaplite">CapLite: Prompt-Injection Defense for Small Language Model Agents without Model-Written Security Artifacts</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · The University of Tokyo</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不完全相同。CapLite从可信schema与请求精确grounding派生authority，再固定写序列；RuntimeTickets把具原文依据的obligation经host审核冻结，并检查grant收紧、对象validator和累计额度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：邮箱必须出现在请求里与累计交付不能超过100字节，是两种不同合同，不能互相替代。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17115v1">原论文</a> · <a href="../../../../agent-research/2611.17115-caplite/">实现解读</a> · <a href="#qa-7d87ce33caf82501">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:caplite" data-paper-title="CapLite: Prompt-Injection Defense for Small Language Model Agents without Model-Written Security Artifacts" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="CapLite: Prompt-Injection Defense for Small Language Model Agents without Model-Written Security Artifacts Agent The University of Tokyo 2026-11-12 小模型既可能被提示注入欺骗，也可能生成本就错误的权限策略。CapLite把安全决策从模型生成物中移出：可信用户请求与工具schema决定权限，Planner在看到任何工具结果前提交写调用，之后模型只能从提取出的候选ID里绑定authority值，代码在真实副作用前再次校验。读写分类使用工具名及docstring的首个动词：两者都是read verb才是只读，任一为effect verb则写，未知拒绝。写参数默认authority，但正文载荷、时间和enum／bool控制项分开； 成本过高，不复现（审查 DONE）；component_only／L1确定性机制诊断，不是完整Agent防御评测。component_only／L1确定性机制诊断，不是完整Agent防御评测。完整实验高成本不复现（审查 DONE）。本地只支持显式平面schema的受限执行核，不声称通用安全保证。ToolPolicy冻结可信schema，拒绝未知操作及不支持的嵌套object。grounding_set执行显式Unicode词ngram和标识符抽取；不是语义指代解析。Candidate保留ID／来源，bind_candidates只筛既有候选；不会生成绑定。  工具与协作 提示注入与写入权限 Agent 工具与协作执行：把计划变成可检查的动作 本地CapLite通过负控后，可以直接保护所有工具吗？ 不能。这里只支持平面标量／标量数组schema，未知类型拒绝。schema与确认必须可信，且所有副作用都被mediator拦截；同进程绕过、嵌套schema和真实SLM绑定均未实现。 教学例：名为get的工具若暗中写文件，词法分类不会发现；工具契约错误不能靠grounding自动修正。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-4310eca27ca83636">本地CapLite通过负控后，可以直接保护所有工具吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acaplite">CapLite: Prompt-Injection Defense for Small Language Model Agents without Model-Written Security Artifacts</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · The University of Tokyo</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。这里只支持平面标量／标量数组schema，未知类型拒绝。schema与确认必须可信，且所有副作用都被mediator拦截；同进程绕过、嵌套schema和真实SLM绑定均未实现。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：名为get的工具若暗中写文件，词法分类不会发现；工具契约错误不能靠grounding自动修正。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17115v1">原论文</a> · <a href="../../../../agent-research/2611.17115-caplite/">实现解读</a> · <a href="#qa-4310eca27ca83636">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:retrace" data-paper-title="ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/tools-and-collaboration" data-search="ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows Agent Columbia University / Amazon internship 2026-11-10 相同 SOP 反复执行时，每步再让 LLM 规划成本高。ReTrace 从 Agent 的推理解释、工具调用及参数来源恢复“何时执行哪步”，聚合为带证据的条件规则，再合成为可执行工作流。无运行时 Planner 不等于所有工具都不能使用模型，也不等于工具序列可以不看新观察而照抄。 成本过高，不复现（审查 DONE）。本地交付纯 CPU typed decision-list IR，不生成模型推理、调用生产工具或伪装成完整编译系统。Binding 限定 input、已有 observation 和 constant；Guard 只支持 eq/ne/exists，按类型比较，不把整数 1 当布尔 true。Rule 必须保留支持引用；DecisionList.next_call() 检查完成条件并返回第一个匹配的 typed call，不执行任意 Python 或真实工具。缺观察、缺参数、错类型和无适用规则均显式报错，不猜未来结果。  工具调用与执行 轨迹到工作流与可审计条件 Agent 工具与协作执行：把计划变成可检查的动作 ReTrace 的 planner-free 是否意味着整个系统不能有任何模型调用？ 不是。它限制的是运行时由代码决定下一步，不再每步调用LLM规划。一个固定工具内部仍可使用模型，例如文档分类；本地IR只发出typed call，连这些工具也不执行。 教学例：guard选择“分类发票”节点后，节点可以调用分类模型；下一节点仍由代码和返回状态选择。 2026-11-11">
 <p class="ar-learning-card__domain"><a href="./">Agent / 工具与协作执行：把计划变成可检查的动作</a></p>
 <span id="paper-agent-research-retrace-4241a794" class="ar-learning-paper-anchor"></span>

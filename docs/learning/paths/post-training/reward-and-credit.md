@@ -7,7 +7,7 @@ hide:
 
 # 奖励与信用：正确结果该奖励哪些步骤
 
-[LLM 后训练](index.md) / 168 个问题 · 42 篇论文
+[LLM 后训练](index.md) / 172 个问题 · 43 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">168 个问题 · 42 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">172 个问题 · 43 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:bait-reward-defense" data-paper-title="Bait: Mitigating Harmful Agentic Reinforcement Learning via Probing Reward Function" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Bait: Mitigating Harmful Agentic Reinforcement Learning via Probing Reward Function LLM 后训练 Georgia Institute of Technology 2026-11-12 当外部环境给不安全行为更高奖励时，普通 RL 会沿错误方向更新。Bait 在防御者私有标识下混入 probe 回答，用其平均 reward 与真实 policy 回答比较；探针更受奖励时反转整组奖励，再只向策略学习暴露 policy 部分。核心是检测 reward function 偏好，不是根据“最终回答看起来安全”给固定加分。本地只接受外部数值 reward 和 private probe mask，不实现 probe 生成模型、语义安全判断、攻击或 RL 更新。 完整实验成本过高，不复现（审查 DONE）。CPU 三种子诊断；L1 防御性 reward-gap / sign-flip 数值组件，diagnostic only。不生成有害 probe、攻击或有害文本，不训练 Agent。完整实验成本过高，不复现（审查 DONE）。transform_rewards(rewards, probe_mask)接收有限二维 numeric reward 和同形 Boolean mask，返回每组 divergence、检测结果、全部变换 reward 和剔除 probe 的 policy-only reward。probe 身份是调用方的防御私有状态，不应传给被训练 Agent。  奖励与信用分配 防御性奖励探测与符号变换 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 Bait本地组件检测的是有害文本吗？ 不是。它比较外部reward对防御私有probe与policy回答的偏好，只处理数字及membership。probe生成、语义安全判断与真实RL都不在实现中，数值gap不是harmfulness准确率。 教学例：同一张reward表在不同probe标签下可得到不同gap；若标签或probe含义不可靠，公式正确仍不能保证安全。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<span id="paper-post-training-bait-reward-defense-04045664" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-f86dcb5057739c8d">Bait本地组件检测的是有害文本吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Abait-reward-defense">Bait: Mitigating Harmful Agentic Reinforcement Learning via Probing Reward Function</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Georgia Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。它比较外部reward对防御私有probe与policy回答的偏好，只处理数字及membership。probe生成、语义安全判断与真实RL都不在实现中，数值gap不是harmfulness准确率。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一张reward表在不同probe标签下可得到不同gap；若标签或probe含义不可靠，公式正确仍不能保证安全。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.16369v1">原论文</a> · <a href="../../../../post-training/2611.16369-bait-reward-defense/">实现解读</a> · <a href="#qa-f86dcb5057739c8d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:bait-reward-defense" data-paper-title="Bait: Mitigating Harmful Agentic Reinforcement Learning via Probing Reward Function" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Bait: Mitigating Harmful Agentic Reinforcement Learning via Probing Reward Function LLM 后训练 Georgia Institute of Technology 2026-11-12 当外部环境给不安全行为更高奖励时，普通 RL 会沿错误方向更新。Bait 在防御者私有标识下混入 probe 回答，用其平均 reward 与真实 policy 回答比较；探针更受奖励时反转整组奖励，再只向策略学习暴露 policy 部分。核心是检测 reward function 偏好，不是根据“最终回答看起来安全”给固定加分。本地只接受外部数值 reward 和 private probe mask，不实现 probe 生成模型、语义安全判断、攻击或 RL 更新。 完整实验成本过高，不复现（审查 DONE）。CPU 三种子诊断；L1 防御性 reward-gap / sign-flip 数值组件，diagnostic only。不生成有害 probe、攻击或有害文本，不训练 Agent。完整实验成本过高，不复现（审查 DONE）。transform_rewards(rewards, probe_mask)接收有限二维 numeric reward 和同形 Boolean mask，返回每组 divergence、检测结果、全部变换 reward 和剔除 probe 的 policy-only reward。probe 身份是调用方的防御私有状态，不应传给被训练 Agent。  奖励与信用分配 防御性奖励探测与符号变换 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 delta恰好为0，以及probe自身的reward，怎么处理？ 按固定v1 Eqs.3–5，delta&gt;=0触发整组符号翻转，包括probe。之后policy-facing输出才移除probe；不能只翻转policy项或把等号改掉。原图简写&gt;0不覆盖正文等号。 教学例：probe均值4，policy均值也4，仍翻转；原reward为2的policy项变成-2。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-fa43bfa71109577c">delta恰好为0，以及probe自身的reward，怎么处理？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Abait-reward-defense">Bait: Mitigating Harmful Agentic Reinforcement Learning via Probing Reward Function</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Georgia Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>按固定v1 Eqs.3–5，delta&gt;=0触发整组符号翻转，包括probe。之后policy-facing输出才移除probe；不能只翻转policy项或把等号改掉。原图简写&gt;0不覆盖正文等号。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：probe均值4，policy均值也4，仍翻转；原reward为2的policy项变成-2。</p>
+<p class="ar-learning-sources">依据：核心公式、原论文关键图；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.16369v1">原论文</a> · <a href="../../../../post-training/2611.16369-bait-reward-defense/">实现解读</a> · <a href="#qa-fa43bfa71109577c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:bait-reward-defense" data-paper-title="Bait: Mitigating Harmful Agentic Reinforcement Learning via Probing Reward Function" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Bait: Mitigating Harmful Agentic Reinforcement Learning via Probing Reward Function LLM 后训练 Georgia Institute of Technology 2026-11-12 当外部环境给不安全行为更高奖励时，普通 RL 会沿错误方向更新。Bait 在防御者私有标识下混入 probe 回答，用其平均 reward 与真实 policy 回答比较；探针更受奖励时反转整组奖励，再只向策略学习暴露 policy 部分。核心是检测 reward function 偏好，不是根据“最终回答看起来安全”给固定加分。本地只接受外部数值 reward 和 private probe mask，不实现 probe 生成模型、语义安全判断、攻击或 RL 更新。 完整实验成本过高，不复现（审查 DONE）。CPU 三种子诊断；L1 防御性 reward-gap / sign-flip 数值组件，diagnostic only。不生成有害 probe、攻击或有害文本，不训练 Agent。完整实验成本过高，不复现（审查 DONE）。transform_rewards(rewards, probe_mask)接收有限二维 numeric reward 和同形 Boolean mask，返回每组 divergence、检测结果、全部变换 reward 和剔除 probe 的 policy-only reward。probe 身份是调用方的防御私有状态，不应传给被训练 Agent。  奖励与信用分配 防御性奖励探测与符号变换 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 Bait与TAG都改变reward，可以互换吗？ 不能。TAG先用独立训练探针的reverse KL选可信anchor，再门控辅助reward；Bait比较私有probe和policy的外部reward并做符号变换。两者输入、信任假设和处理对象不同，公式组件不能替代彼此的模型/探针验证。 教学例：TAG的anchor为零时辅助项不给信用；Bait则可能根据非负gap把整个负/正reward组翻转。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-a84d2a9f87d82d9d">Bait与TAG都改变reward，可以互换吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Abait-reward-defense">Bait: Mitigating Harmful Agentic Reinforcement Learning via Probing Reward Function</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Georgia Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。TAG先用独立训练探针的reverse KL选可信anchor，再门控辅助reward；Bait比较私有probe和policy的外部reward并做符号变换。两者输入、信任假设和处理对象不同，公式组件不能替代彼此的模型/探针验证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：TAG的anchor为零时辅助项不给信用；Bait则可能根据非负gap把整个负/正reward组翻转。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.16369v1">原论文</a> · <a href="../../../../post-training/2611.16369-bait-reward-defense/">实现解读</a> · <a href="#qa-a84d2a9f87d82d9d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:bait-reward-defense" data-paper-title="Bait: Mitigating Harmful Agentic Reinforcement Learning via Probing Reward Function" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Bait: Mitigating Harmful Agentic Reinforcement Learning via Probing Reward Function LLM 后训练 Georgia Institute of Technology 2026-11-12 当外部环境给不安全行为更高奖励时，普通 RL 会沿错误方向更新。Bait 在防御者私有标识下混入 probe 回答，用其平均 reward 与真实 policy 回答比较；探针更受奖励时反转整组奖励，再只向策略学习暴露 policy 部分。核心是检测 reward function 偏好，不是根据“最终回答看起来安全”给固定加分。本地只接受外部数值 reward 和 private probe mask，不实现 probe 生成模型、语义安全判断、攻击或 RL 更新。 完整实验成本过高，不复现（审查 DONE）。CPU 三种子诊断；L1 防御性 reward-gap / sign-flip 数值组件，diagnostic only。不生成有害 probe、攻击或有害文本，不训练 Agent。完整实验成本过高，不复现（审查 DONE）。transform_rewards(rewards, probe_mask)接收有限二维 numeric reward 和同形 Boolean mask，返回每组 divergence、检测结果、全部变换 reward 和剔除 probe 的 policy-only reward。probe 身份是调用方的防御私有状态，不应传给被训练 Agent。  奖励与信用分配 防御性奖励探测与符号变换 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 为什么本地没有顺手加上GRPO advantage？ 原文Eq6含non-probe std，Algorithm1第14行省略std，上游sign-flip函数与可配置通用优势函数也不唯一决定训练默认值。故仅保真实现Eqs3–5，拒绝无probe/无policy的未定义分区，不猜完整训练口径。 教学例：奖励[-1,-3]只中心化是[1,-1]；再除std会改变尺度。选任一种都不能自动说复现了有冲突的全文。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-aacc17dabf7ff958">为什么本地没有顺手加上GRPO advantage？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Abait-reward-defense">Bait: Mitigating Harmful Agentic Reinforcement Learning via Probing Reward Function</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Georgia Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>原文Eq6含non-probe std，Algorithm1第14行省略std，上游sign-flip函数与可配置通用优势函数也不唯一决定训练默认值。故仅保真实现Eqs3–5，拒绝无probe/无policy的未定义分区，不猜完整训练口径。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：奖励[-1,-3]只中心化是[1,-1]；再除std会改变尺度。选任一种都不能自动说复现了有冲突的全文。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.16369v1">原论文</a> · <a href="../../../../post-training/2611.16369-bait-reward-defense/">实现解读</a> · <a href="#qa-aacc17dabf7ff958">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:mcpo" data-paper-title="Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards LLM 后训练 PayPal.AI 2026-11-10 GRPO 常把同一响应的序列优势分给所有 token，无法区分局部决策的不确定度。MCPO 复用 rollout/old policy 温度后的 top-1、top-2 概率差，不额外调用教师或 verifier，改变各 token 的信用分配。指数加权与响应内归一化沿用所引 token weighting 规则，论文新增的是以 probability margin 作为信号，不能把整套加权公式都说成全新提出。 完整实验成本过高，不复现（审查 DONE）；L1 机制组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；未接入 Evolve。token_credit 接收已经冻结、按 rollout 温度计算的有序 top-2 概率、序列优势和有效 token mask。校验概率合法、每响应非空；padding 不进入权重均值。为数值稳定，从每响应 log-weight 减去最大值，不改变归一结果。函数只做 NumPy CPU 算术，CUDA 请求明确拒绝。  奖励与信用分配 置信margin与token信用 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 MCPO 的 uncertainty 直接用 entropy 或 band-pass 吗？ 都不是。它用温度后 old-policy top1减top2的margin，再对1-margin做截断线性变换。最高不确定度保留为1，不像band-pass丢掉极端区域。 教学例：margin=.95给h=0，margin=.2给h=1；只知道entropy通常不能还原这两个top概率差。 2026-11-11">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
 <span id="paper-post-training-mcpo-ed7c444f" class="ar-learning-paper-anchor"></span>

@@ -1,0 +1,20 @@
+{
+  "asset": "paper-figure-01.png",
+  "id": "2611.15754",
+  "asset_sha256": "3c9ec74badf1edd2da6a2569a107c56f0302dbe0cc27f279cb67eede50bbcf9e",
+  "source_url": "https://arxiv.org/html/2611.15754v1/figures/multiloop_harness_orchestrator.png",
+  "source_html_sha256": "9a7344a3eec95aceac25791074c8be78bc559235bded363ceb02cc3624c22f39",
+  "figure": "Figure 3, orchestrator panel",
+  "method": "Official HTML PNG original bytes; both figure panels retained separately.",
+  "visual_review": "两张panel均目视复核，从system/user输入到orchestrator与subagent循环及工具集，未裁剪。",
+  "additional_assets": [
+    {
+      "asset": "paper-figure-02.png",
+      "asset_sha256": "ab908d852e29ff25bf39771141e077c42a9081997d06ef8749a704138e7471a7",
+      "source_url": "https://arxiv.org/html/2611.15754v1/figures/multiloop_harness_sub_agent.png",
+      "figure": "Figure 3, subagent panel"
+    }
+  ],
+  "copyright": "Copyright belongs to the original authors.",
+  "reviewed_on": "2026-11-15"
+}

@@ -61,6 +61,9 @@ INVALID_AFFILIATION_MARKERS = (
 # every generated page. Unknown future labels remain visible under “其他”.
 TOPIC_HIERARCHY = {
     "post-training": {
+        "lgpo": ("在线强化学习与稳定性", "信任域、clip 与梯度稳定"),
+        "safety-budget-cgrpo": ("在线强化学习与稳定性", "约束与安全预算"),
+        "bait-reward-defense": ("奖励、信用与课程", "奖励构造与排序信号"),
         "多轮反馈与社会元学习": ("蒸馏与训练闭环", "交互反馈与元学习"),
         "隐私保护数据构建": ("奖励、信用与课程", "隐私保护合成与数据选择"),
         "教师与上下文": ("偏好建模与监督", "训练使用审计与隐私"),
@@ -174,6 +177,12 @@ TOPIC_HIERARCHY = {
         "Flow map": ("蒸馏与训练闭环", "生成模型蒸馏"),
     },
     "agent-research": {
+        "coremem": ("记忆、技能与持续学习", "主动 / 长期记忆"),
+        "ace-rl": ("Agentic RL 与后训练", "通用轨迹与 credit assignment"),
+        "caplite": ("工具调用与环境执行", "工具选择、反馈与程序执行"),
+        "multiloop": ("规划、搜索与反思", "Harness 与自我改进"),
+        "stellar-colosseum": ("规划、搜索与反思", "树搜索与自我改进"),
+        "leap-formal-math": ("规划、搜索与反思", "树搜索与自我改进"),
         "规划与推理": ("规划、搜索与反思", "计划验证与最优性"),
         "选择与澄清": ("规划、搜索与反思", "信息澄清与交互决策"),
         "多智能体协作评测": ("规划、搜索与反思", "多 Agent 协作与通信"),
@@ -332,6 +341,11 @@ POST_TRAINING_REPRODUCTION_KEYS = {
     "sis",
 }
 FOUNDATION_TOPIC_HIERARCHY = {
+    "unbundling-vision": ("多模态基础模型", "视觉语言适配与表征"),
+    "archspace": ("预训练与数据", "训练预算与扩展规律"),
+    "d-jepa": ("网络架构", "JEPA 与几何表征"),
+    "duojepa": ("网络架构", "JEPA 与几何表征"),
+    "spectral-ghost": ("预训练与数据", "自监督表征与正则化"),
     "rosetta-unification": ("预训练与数据", "跨语言知识迁移与表征统一"),
     "lidas": ("网络架构", "深度生长与层复制"),
     "thinking-to-recall": ("推理与系统效率", "参数知识召回与潜在泛化"),
@@ -702,7 +716,7 @@ def render_topic_hierarchy(module: str, title: str) -> str:
     )
     mapping = TOPIC_HIERARCHY[module]
     for row in read_rows(module):
-        domain, cluster = mapping.get(row["topic"], ("其他", row["topic"]))
+        domain, cluster = mapping.get(row["key"], mapping.get(row["topic"], ("其他", row["topic"])))
         hierarchy[domain][cluster].append(row)
 
     lines = [f"# {title}", "", BROWSE_INTROS["topic"], ""]
@@ -729,6 +743,15 @@ def _date_descending(rows: list[dict[str, str]]) -> list[dict[str, str]]:
 
 def _paper_date(link: str) -> str:
     page = DOCS / "reproductions" / link.removeprefix("../")
+    # Standalone components use the canonical catalog metadata, not a guessed
+    # Markdown table label. Their pages are not legacy model-adapter READMEs.
+    detail = page.resolve().relative_to(DOCS.resolve()).as_posix()
+    if detail.startswith("recommendation-components/"):
+        manifest = json.loads((DOCS / "research-manifest.json").read_text())
+        matches = [row for row in manifest["papers"] if row["detail_path"] == detail]
+        if len(matches) != 1 or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", matches[0].get("published", "")):
+            raise ValueError(f"{page} missing unique canonical first-publication date")
+        return matches[0]["published"]
     text = page.read_text(encoding="utf-8")
     match = re.search(r"^\| 首次公开日期 \| (\d{4}-\d{2}-\d{2})", text, re.MULTILINE)
     if not match:
@@ -861,6 +884,9 @@ def foundation_rows() -> list[dict[str, str]]:
             }
         )
     extra = manifest_domain_rows("foundation-models", {
+        **{key: FOUNDATION_TOPIC_HIERARCHY[key] for key in (
+            "unbundling-vision", "archspace", "d-jepa", "duojepa", "spectral-ghost",
+        )},
         "real-loss": ("推理与系统效率", "推测解码与 KV cache"),
         "adindex": ("注意力与长上下文", "稀疏、门控与动态注意力"),
         "b3": ("推理与系统效率", "扩散解码与缓存"),
@@ -1089,6 +1115,7 @@ def multimodal_rows() -> list[dict[str, str]]:
     for row in rows:
         row["index_href"] = f"../reproductions/{row['link']}"
     rows.extend(manifest_domain_rows("multimodal-models", {
+        "pixvid": ("视觉世界模型与时序推理", "视觉状态转移监督"),
         "avmeme-exam": ("多模态基础模型", "音视频文化理解评测"),
         "mmeb-v3": ("多模态检索", "全模态嵌入与模态遵循"),
         "gslm2": ("多模态基础模型", "多流语音单元与打分"),

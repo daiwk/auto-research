@@ -1,0 +1,14 @@
+{
+  "asset": "paper-figure-01.png",
+  "id": "2609.15983",
+  "asset_sha256": "ccb8ac61ad2cbfd5988764ea063f19dc89e6f6c3e93aef455c9ecef94df0893f",
+  "source_url": "https://arxiv.org/html/2609.15983v1/colosseum_architecture.svg",
+  "source_svg_sha256": "bf1e9222bf91859a10778df12408e25bed638436b57d84b9b4967b80376b8351",
+  "source_html_sha256": "b6a586c6ccad9ec2a6efb82bce2df6c79180825a1217584f392df09c3a57f982",
+  "figure": "Figure 1",
+  "render_scale": 2,
+  "method": "Official SVG opened by PyMuPDF, converted to an in-memory PDF and rasterized; no crop/redraw/content edits.",
+  "visual_review": "已目视核对完整上下两panel，研究五阶段、局部与全局返工，以及重叠树和知识目录；文字清晰。",
+  "copyright": "Copyright belongs to the original authors.",
+  "reviewed_on": "2026-11-15"
+}

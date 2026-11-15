@@ -179,6 +179,16 @@
         "fingerprint": "d4657dba7478e945c411152dc1bdc11a567efd1c7202a2a06ed170672b53b9c5"
       }
     ],
+    "src/auto_research/agent_research/caplite.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "execute_next",
+        "line": 201,
+        "qualified_name": "CommittedWrites.execute_next",
+        "expression": "self._cursor += 1",
+        "fingerprint": "e72a4ed5211f9377799a4e1c1dd7263de48400943c3bec8951b2dfc6f041880e"
+      }
+    ],
     "src/auto_research/agent_research/code_benchmark.py": [
       {
         "kind": "label_access_requires_role_review",
