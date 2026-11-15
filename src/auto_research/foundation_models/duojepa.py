@@ -41,17 +41,22 @@ class SkiplessTranslator(nn.Module):
     behind this bounded reference. Text's post-norm variant is not implemented.
     """
 
-    def __init__(self, width: int, *, alpha: float = 2, beta: float = .6, c: float = 3):
+    def __init__(self, width: int, *, alpha: float = 2, beta: float = .6, c: float = 3,
+                 device: str = "cpu"):
         super().__init__()
         if width < 2 or any(not math.isfinite(x) or x <= 0 for x in (alpha, beta, c)):
             raise ValueError("width>=2 and finite positive initialization constants required")
         self.width = width
-        self.norm1, self.norm2 = nn.LayerNorm(width), nn.LayerNorm(width)
-        self.q, self.k, self.v, self.out = (nn.Parameter(torch.empty(width, width)) for _ in range(4))
-        self.gamma1, self.gamma2 = nn.Parameter(torch.ones(width)), nn.Parameter(torch.ones(width))
-        self.mlp = nn.Sequential(nn.Linear(width, 4 * width), nn.GELU(), nn.Linear(4 * width, width))
+        self.norm1, self.norm2 = nn.LayerNorm(width, device=device), nn.LayerNorm(width, device=device)
+        self.q, self.k, self.v, self.out = (nn.Parameter(torch.empty(width, width, device=device))
+                                          for _ in range(4))
+        self.gamma1 = nn.Parameter(torch.ones(width, device=device))
+        self.gamma2 = nn.Parameter(torch.ones(width, device=device))
+        self.mlp = nn.Sequential(nn.Linear(width, 4 * width, device=device), nn.GELU(),
+                                 nn.Linear(4 * width, width, device=device))
         with torch.no_grad():
-            product = alpha * torch.randn(width, width) / math.sqrt(width) + beta * torch.eye(width)
+            product = (alpha * torch.randn(width, width, device=device) / math.sqrt(width)
+                       + beta * torch.eye(width, device=device))
             u, singular, vh = torch.linalg.svd(product)
             self.q.copy_(u * singular.sqrt())
             self.k.copy_(vh.T * singular.sqrt())
@@ -76,7 +81,7 @@ def diagnostic(seed: int, device: str = "cpu") -> dict:
     if device not in {"cpu", "cuda"} or (device == "cuda" and not torch.cuda.is_available()):
         raise ValueError("available CPU or real CUDA device required")
     torch.manual_seed(seed)
-    translator = SkiplessTranslator(12).to(device)
+    translator = SkiplessTranslator(12, device=device)
     inputs = torch.randn(6, 2, 3, 12, device=device)
     own_a = inputs[:, :, 0].detach().clone().requires_grad_(True)
     own_b = torch.randn_like(own_a, requires_grad=True)
