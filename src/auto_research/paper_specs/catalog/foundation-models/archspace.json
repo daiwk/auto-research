@@ -1,0 +1,17 @@
+{
+  "domain": "foundation-models", "key": "archspace", "title": "ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research",
+  "paper_url": "https://arxiv.org/abs/2611.17332v1", "reviewed_version_url": "https://arxiv.org/html/2611.17332v1", "reviewed_version": "v1",
+  "published": "2026-11-12", "published_at": "2026-11-12T18:59:52Z", "announced_on": "2026-11-13",
+  "detail_path": "foundation-models/2611.17332-archspace/README.md", "topic": ["预训练与数据", "训练预算与公平架构比较"],
+  "first_author": "Jie Wang", "first_author_affiliation": "Shanghai AI Laboratory", "verified_priority_organizations": [],
+  "code": "https://github.com/InternLM/archspace", "upstream_revision": "002e48df32c880898b0813e02c0439544b35cc85", "code_license": "Apache-2.0",
+  "code_status": "作者公开架构提案/记录平台仓库；不等同本地已运行原始大规模训练或作者拟合数据。",
+  "method_source_sha256": "7f5f2440a1aad7dae5351395a4791bbaf545ba4a34cfb30dabed05a142f09056",
+  "adapter": null, "priority": "P1", "intake_class": "newly_announced", "implementation_status": "component_only",
+  "local_operator": "auto_research.foundation_models.archspace.CoupledLaw",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.foundation_models.archspace import diagnostic; print(diagnostic(42, device=\"cpu\"))'",
+  "evaluation_tier": "l1_mechanism", "diagnostic_only": true, "promotion_eligible": false, "evolve_integrated": false, "requires_gpu_validation": false,
+  "full_experiment_status": "not_reproduced_high_cost", "full_experiment_review_done": true, "review_resolution": "not_reproduced_high_cost", "review_done": true, "automatic_retry": false, "automatic_implementation_queue": false,
+  "cost_assessment": {"source": "Fixed v1 Figure 2, Sections 3/4 and Appendix C; https://arxiv.org/html/2611.17332v1", "available_resource": "one A100 or A30, or local Mac", "paper_configuration": "Five FLOP budgets from 1e18 to 1e20; 4--6 model sizes per budget and LR/BS sweeps for two baselines; Phase II 1B models trained on 150B+10B tokens.", "estimated_cost_basis": "The grid and subsequent 160B-token training exceed a short single-device budget; no training was attempted.", "decision": "成本过高，不复现（审查 DONE）；仅实现公开系数的coupled scaling/cosh损失与预算最优点算术，不拟合新数据、不自动搜索架构、不接入Evolve。"},
+  "summary": "以相同数据/tokenizer和完整学习率衰减后的多域validation比较架构，用模型FLOPs/token、token数与LR/BS耦合cosh项描述训练损失。本地只复算公开Qwen3.5/OLMo3系数及预算约束，不是架构搜索系统；完整实验高成本不复现。"
+}

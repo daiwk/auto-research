@@ -11,7 +11,7 @@ hide:
 
 每个子主题维护一张卡片。新论文进入后，更新对应卡片的比较或结论，并记录这次变化；不必再从头读整批论文。
 
-31 张精读卡片 · 1145 篇主题资料 · 按主题折叠
+31 张精读卡片 · 1163 篇主题资料 · 按主题折叠
 
 <details class="ar-deep-shelf"><summary>搜广推 · 7 张</summary>
 <div class="ar-deep-grid">
@@ -33,7 +33,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="recommendation/generative-retrieval-reasoning/">生成一个物品，先后跨过码本、模型分布与合法目录三道关</a></h2>
 <p>TIGER把物品变成层次码并学习下一码序列，COBRA在稀疏码后补回条件稠密向量，PLUM把已有LLM通过继续预训练接到行为/SID空间。STATIC不改表示而改变合法解码的执行方式，Reward Guided Decoding则在既有支持上倾斜业务偏好。先定位改变的是哪一关，再判断它能否找回漏掉的物品。 PinGER再把历史输入与SID监督拆开，并将前缀多样化选择、分层DPO和合法目录分别治理。</p>
-<p class="ar-learning-topic-meta">9 篇重点对照 · 6 个跨论文问答 · 2026-11-04</p>
+<p class="ar-learning-topic-meta">12 篇重点对照 · 9 个跨论文问答 · 2026-11-15</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="recommendation/feedback-multitask-causality/">从CTR到满意度与uplift：先定义监督对象，再决定怎样共享</a></h2>
@@ -67,7 +67,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/training-budget/">训练预算：改数据、改更新方向，还是改比较口径</a></h2>
 <p>同一预算内训练得更好，可能来自更合适的数据、逐样本处理、更有效更新或更低状态开销。DoReMi、Mixing Laws、DataOrchestra、Muon 和 ECO 改动不同环节；Muon Paired Budget 则提醒先冻结选参规则，再分别回答等数据和等时间问题。ProLand改变LoRA乘积空间的更新几何，GAVAGAI则给captioning增加显式词区域对齐目标，二者不能仅因都改善训练就混为一类。</p>
-<p class="ar-learning-topic-meta">11 篇重点对照 · 7 个跨论文问答 · 2026-11-13</p>
+<p class="ar-learning-topic-meta">12 篇重点对照 · 8 个跨论文问答 · 2026-11-15</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="foundation-models/compression-and-cache/">推理压缩先找瓶颈：权重、KV 内容与缓存层级</a></h2>
@@ -110,7 +110,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="multimodal-models/alignment-interfaces/">多模态对齐到底对齐什么：向量、视觉接口还是证据依赖</a></h2>
 <p>CLIP与EmbeddingGemma 2产出可比较向量，BLIP-2与LLaVA连接视觉到条件生成，CV-OPD训练证据依赖，UMRM给回答评分。它们的输出合同和监督对象不同，不是同一条从小到大的能力排行榜。</p>
-<p class="ar-learning-topic-meta">9 篇重点对照 · 7 个跨论文问答 · 2026-11-13</p>
+<p class="ar-learning-topic-meta">13 篇重点对照 · 11 个跨论文问答 · 2026-11-15</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="multimodal-models/visual-evidence-budget/">少看、晚看还是再看：把视觉预算放到正确阶段</a></h2>
@@ -120,7 +120,7 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="multimodal-models/world-state-actions/">会预测下一幕，还不等于会行动或保持同一个世界</a></h2>
 <p>世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。 SWIM从离线动作可预测性学习状态坐标的相对权重，训练期校准latent距离，部署时不向规划器增加真实状态。</p>
-<p class="ar-learning-topic-meta">11 篇重点对照 · 8 个跨论文问答 · 2026-11-12</p>
+<p class="ar-learning-topic-meta">12 篇重点对照 · 9 个跨论文问答 · 2026-11-15</p>
 </article>
 </div></details>
 
@@ -134,12 +134,12 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="post-training/policy-optimization/">同一个GRPO名字之外：优势尺度、裁剪单位与训推失配</a></h2>
 <p>GRPO家族的差别可拆成三问：奖励怎样变成优势、哪种概率比被裁剪、样本到底由哪个分布生成。Dr. GRPO、DAPO、GSPO与TIS/IcePop分别改动这些环节，不能把所有ratio都叫同一种off-policy校正。</p>
-<p class="ar-learning-topic-meta">10 篇重点对照 · 6 个跨论文问答 · 2026-11-12</p>
+<p class="ar-learning-topic-meta">12 篇重点对照 · 8 个跨论文问答 · 2026-11-15</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="post-training/reward-and-credit/">奖励从哪里来，信用才该分到哪里</a></h2>
 <p>过程标签、最终结果、模型自置信与回溯归因是不同证据。逐步PRM、MRTPO、TACO和MART-GRPO分别做标签获取、奖励定位、正信用降权和失败后缀过滤；INTUITOR则改用内在分布信号，不能把它当外部正确性验证器。 CONCUR另处理奖励维度之间的优先级，把门控辅助优势投影到主奖励保序锥；这不是沿时间轴分配token信用。</p>
-<p class="ar-learning-topic-meta">12 篇重点对照 · 8 个跨论文问答 · 2026-11-13</p>
+<p class="ar-learning-topic-meta">13 篇重点对照 · 9 个跨论文问答 · 2026-11-15</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="post-training/student-trajectory-distillation/">轨迹蒸馏：采样者、提案与散度方向分开看</a></h2>
@@ -163,27 +163,27 @@ hide:
 <article class="ar-deep-tile">
 <h2><a href="agent-research/planning-and-search/">规划先问何时见反馈，再问要不要展开搜索</a></h2>
 <p>ReAct 与 ReWOO 改变计划接收观察的时机，ToT 与 LATS 改变候选搜索组织，Jev Lookahead 把后继模拟交给代码，DRAGO 则检查形式计划是否忠实。它们处理不同的不确定性：步骤未知、路线选择、环境可达性与规格错误，不应以搜索次数或本地满分统一排名。</p>
-<p class="ar-learning-topic-meta">11 篇重点对照 · 8 个跨论文问答 · 2026-11-13</p>
+<p class="ar-learning-topic-meta">12 篇重点对照 · 9 个跨论文问答 · 2026-11-15</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="agent-research/memory-and-skills/">经验进入长期系统前，要解决存取、价值与准入</a></h2>
 <p>MemGPT 管信息放在哪里，MemPrice 管有限窗口里保留何种精度，CMP 管效用如何识别；Voyager 把成功程序变技能，VaG 管技能进入库的风险，SkillRise 用后续任务检验整理价值。存得下、相关、合法和能帮助未来，是四个不同问题。 EMMA再把结构化记忆分配给controller、agent与skill，按失败scope限制单次编辑及下一次实际使用义务。</p>
-<p class="ar-learning-topic-meta">12 篇重点对照 · 9 个跨论文问答 · 2026-11-13</p>
+<p class="ar-learning-topic-meta">13 篇重点对照 · 10 个跨论文问答 · 2026-11-15</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="agent-research/tools-and-collaboration/">从会调用到能交付：工具接口、可靠性与协作合同</a></h2>
 <p>Toolformer 学何时调用，SWE-agent 设计动作接口，RATED 处理相关工具的运行可靠性；AutoGen 定义消息程序，MetaGPT 约束角色交付物，World of SWEcraft 再用隐藏下游检验群体产出。每层都可能失败，调用格式正确不是端到端完成的替身。</p>
-<p class="ar-learning-topic-meta">8 篇重点对照 · 5 个跨论文问答 · 2026-11-11</p>
+<p class="ar-learning-topic-meta">9 篇重点对照 · 6 个跨论文问答 · 2026-11-15</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="agent-research/harness-and-self-improvement/">自改进先标对象：答案、经验、接口与系统版本</a></h2>
 <p>Self-Refine 改当前产物，Reflexion 改下一次可读经验，HarnessLens 检查局部流程改动，Agent S4 演化接口仓库，RSIFlow 选择干预层，AgentX 把候选送到有护栏的生产闭环。多跑几轮不是共同算法，持久状态与接纳规则才决定在改什么。 CROP离线改系统提示并显式惩罚输出成本；EvalAlloc不替候选修代码，而是分配SEARCH评测预算、固定参照估计fitness并组织最终配对确认。</p>
-<p class="ar-learning-topic-meta">23 篇重点对照 · 15 个跨论文问答 · 2026-11-13</p>
+<p class="ar-learning-topic-meta">25 篇重点对照 · 17 个跨论文问答 · 2026-11-15</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="agent-research/agent-policy-learning/">交互学习：统一轨迹之后，信用和教师信息怎样分配</a></h2>
 <p>Agent Lightning先把执行整理成可训练transition；GiGPO、AdaStep和DepGPO分别利用重复状态、回报方差与命令依赖分配信用；Frontier-OPD和ASTEROID则改变教师数据怎样进入学生学习。记录成轨迹只是入口，训练目标和可见信息才定义算法。</p>
-<p class="ar-learning-topic-meta">7 篇重点对照 · 4 个跨论文问答 · 2026-11-13</p>
+<p class="ar-learning-topic-meta">8 篇重点对照 · 5 个跨论文问答 · 2026-11-15</p>
 </article>
 <article class="ar-deep-tile">
 <h2><a href="agent-research/evaluation-and-reliability/">评测追问四件事：完成了、稳健吗、靠什么、花多少</a></h2>

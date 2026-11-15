@@ -113,6 +113,10 @@
 
 - 2026-09-15 · [OPEN-1B: A Fully Auditable Training Run](../../foundation-models/2609.17380-open-1b-audit/README.md)（`open-1b-audit`）：固定 kernel reduction、数据批次与集体通信顺序，并用逐步状态哈希支持异构硬件单步重放审计。
 
+## Georgia Tech
+
+- 2026-01-28 · [Spectral Ghost in Representation Learning: A Unified View from Component Analysis to Self-Supervised Learning](../../foundation-models/2601.20154-spectral-ghost/README.md)（`spectral-ghost`）：把自监督方法仅分为contrastive/non-contrastive，无法解释表示对下游任务何时充分，也无法推断batch大小的作用。本文按**表示参数化**和**目标估计方式**组织谱分解、energy、denoising、nonlinear、latent-variable及multimodal路线，既联系已有方法，也推导新目标。它不是实证排行榜，也不是只有观点的综述。[§2—3、§9](https://arxiv.org/html/2601.20154v4#S2)
+
 ## Google
 
 - 2026-10-31 · [XLA from the Trenches: Correctness on TPU Workloads at Scale](../../foundation-models/2611.00624-xla-trenches/README.md)（`xla-trenches`）：编译器成功生成并执行程序，不保证数值正确。Google 将模板引导合成程序、生产 autotuner 的真实融合配置和 agent swarm 组合，发现静默错编译；随后从大 HLO 图定位到单个 fusion，再保留 fusion 原貌检查 VREG 中间值。它是编译正确性基础设施，不是新的推荐模型或通过 A/B 门槛的工业推荐条目。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
@@ -242,6 +246,10 @@
 - 2026-09-10 · [OmniKVQuant: KV Cache Quantization for Omni-LLMs](../../foundation-models/2609.11582-omnikvquant/README.md)（`omnikvquant`）：按短时间窗确定 key 量化范围，并按模态分别旋转 value，处理 temporal drift 与异构几何。
 - 2026-08-26 · [MLLMCLIP: Feature-Level Distillation of MLLM for Robust Vision-Language Representations](../../reproductions/2608.25575-mllmclip/README.md)（`mllmclip`）：MLLM 的丰富视觉语义难以直接迁移到轻量 CLIP。论文从 teacher 各层按 attention 自适应选 token，以 CKA 对齐 student 图像/文本特征，保留部署时的双塔效率。
 
+## Kentucky Center for Digital Innovation, University of Louisville
+
+- 2026-11-11 · [DuoJEPA: Cross-Modal Translation Between Unaligned Self-Supervised Embedding Spaces](../../foundation-models/2611.15968-duojepa/README.md)（`duojepa`）：每个encoder用LeJEPA保留自己的空间，额外单层translator将其输出映射到另一模态的own space。目标在对方空间计算，不直接比较两个own embedding；但两encoder仍被联合优化，不能把“没有直接对齐损失”说成“完全独立训练”。残差translator会提供接近identity的捷径，论文因此只在translator移除两条残差。[§5](https://arxiv.org/html/2611.15968v1#S5)
+
 ## Knowledgator
 
 - 2025-08-11 · [GLiClass: Generalist Lightweight Model for Sequence Classification Tasks](../../foundation-models/2508.07662-gliclass/README.md)（`gliclass`）：GLiClass 把文本和运行时给定的候选标签放进同一个分类接口，避免生成式 LLM 的解析不稳定，也避免 cross-encoder 对每个文本—标签对逐次推理。本仓库保留“候选内容参与打分”和“一次归一化得到全候选分布”这两个定义性机制。
@@ -278,6 +286,7 @@
 
 ## Meta FAIR
 
+- 2026-11-12 · [Unbundling Multimodal Vision Encoding](../../foundation-models/2611.17334-unbundling-vision/README.md)（`unbundling-vision`）：传统视觉编码器把视觉预训练、视觉专属容量、融合前放置三个选择捆绑在一起。本文在共同数据和相同生命周期计算量下分开比较：视觉先验可以不预训练，但不能把“无需预训练编码器”误读成“无需视觉专属容量”。早期 backbone 内的视觉专属模块也能承担这些容量，不一定要在融合前独立编码。[§2—5](https://arxiv.org/html/2611.17334v1#S2)
 - 2024-12-13 · [Byte Latent Transformer: Patches Scale Better Than Tokens](../../reproductions/2412.09871-blt/README.md)（`blt`）：直接处理 byte，并依据 next-byte entropy 动态形成 patch；全局 Transformer 在 patch 级计算，局部编码器/解码器恢复 byte。
 
 ## Meta Reality Labs Research
@@ -408,6 +417,7 @@
 
 ## Shanghai AI Laboratory
 
+- 2026-11-12 · [ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research](../../foundation-models/2611.17332-archspace/README.md)（`archspace`）：复用基线的最佳超参可能掩盖新架构优势；中途checkpoint的排序也可能在完整学习率衰减后反转。ArchSpace把架构提案、相同数据/tokenizer的预算梯度比较、较长训练和可审查记录连起来。比较从复用基线最优点，到IsoFLOP规模搜索，再到同时搜索LR/BS逐级加严；验证损失按11个域等权，不让大域主导。[§3—4](https://arxiv.org/html/2611.17332v1#S3)
 - 2026-10-08 · [Smoothing the Top-k Exposure Boundary for Sparse Mixture-of-Experts](../../foundation-models/2610.11575-elastic-expert-routing/README.md)（`elastic-expert-routing`）：固定 Top-k 会让排序边界外的专家长期缺少训练曝光。该方法训练时为每个 token、每层独立抽取邻近的专家预算，在不改变期望预算的情况下，让边界附近专家参与真实稀疏计算。部署时恢复固定 k。
 
 ## Shanghai Jiao Tong University
@@ -695,6 +705,7 @@
 
 ## 论文未列机构
 
+- 2026-11-12 · [Asymmetric Multimodal Learning with Decomposed JEPAs](../../foundation-models/2611.16639-d-jepa/README.md)（`d-jepa`）：图像和问题不一定是信息等价的两种视图。强迫两者完全对齐可能只保留共享部分，丢掉私有细节和联合推理所需信息。论文先对严格对齐解给出信息保留界，再设计共享core与私有fiber；这个界不适用于任意带辅助目标的完整模型，也不证明所有JEPA都塌缩。[§2—3](https://arxiv.org/html/2611.16639v1#S2)
 - 2026-10-14 · [One-Step Prediction Fidelity Is a Poor Proxy for Planning Performance in JEPA World Models](../../foundation-models/2610.19375-jepa-prediction-planning/README.md)（`jepa-prediction-planning`）：JEPA 在自己的潜空间预测下一观察，较小的一步 loss 不一定表示更好的长程行动。论文固定一个只在真实观察编码上拟合的物理状态解码器，分别解码真实下一表征与预测下一表征，把编码器本身的可读性和预测器新增的误差拆开。规划仍用相同 checkpoint、相同任务和配对种子单独执行，不能由预测指标推导成功率。
 - 2026-08-03 · [Role-Decoupled Attention Residuals](../../reproductions/2608.01075-rd-attnres/README.md)（`rd-attnres`）：Block AttnRes 让注意力层从全部历史 residual sources 动态读取，但 Q、K、V 共用一条深度路由。论文指出 QK 负责匹配、V 负责承载内容，两者偏好的深度未必相同；RD-AttnRes 在不改变 residual sources 和 attention 主体的情况下，只为 V 增加一个 model-width 路由向量。
 - 2026-07-28 · [Penelope: Localized Latent Recurrence for Efficient Structured Reasoning](../../reproductions/2607.25915-penelope/README.md)（`penelope`）：只在一个 decoder 边界执行共享权重的 latent recurrence，用门控状态反复精炼表示，避免整条 decoder 重跑。

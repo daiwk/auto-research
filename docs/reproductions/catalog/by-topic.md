@@ -503,3 +503,15 @@
 
 ### 召回、触发与多通道路由
 - [From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation](../../recommendation-components/2611.05997-ured/README.md)：从排序器已打分但未展示的候选中按会话保留高分项，聚合后按时间去重，再按近期曝光类目和商品去重筛选。本地仅验证时间、截断与过滤顺序。
+
+## 生成式推荐与语义ID
+
+
+### 持续学习与公共评测
+- [KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation](../../recommendation-components/2611.16795-kuairec-v2-protocol/README.md)：明确按用户逐日leave-one-out为validation，FullMonth按每日验证实例数加权，并用每请求一份召回列表评价所有行为子集。本地只有有限协议接口，无官方数据、模型或多样性benchmark结果。
+
+### 生成式召回与长尾检索
+- [ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through item Reachability](../../recommendation-components/2611.16404-resid/README.md)：用独立子空间长parallel SID避免残差链误差，完整词表log-prior校准配合prefix log-mean-exp势能引导beam，再按Hamming partial matching排序。本地只实现冻结输入上的有限CPU核，不训练推荐器。
+
+### 生成式召回与意图条件
+- [TriGen: A Generative Paradigm for Trigger-Induced Recommendation](../../recommendation-components/2611.16395-trigen/README.md)：固定窗口尾部重复trigger，双条件路径直接读取pristine history，分别pool后逐level路由并用独立PFFN持续调制BOS/已观察prefix。本地无完整encoder-decoder推荐训练，MLP内部两层GELU为明示选择。

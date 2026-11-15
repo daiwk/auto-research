@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:resid/reachability-before-rank": {
+      "source_sha256": "e3632b81fa09f4f89b8a7fa52894d9da3dab5e91a00315a7dbfaa3672e478e92",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not add a tail bonus only to the final ReSID list?",
+        "answer": "A final reranker cannot see a relevant tail prefix already pruned by a narrow beam. ReSID separately addresses independent-subspace quantization, stepwise guidance and Hamming partial matching to improve candidate reachability, without inserting gold targets.",
+        "example": "Teaching example: if layer one keeps only popular prefix zero while the target lies below one, a final tail bonus cannot recover the never-generated candidate."
+      }
+    },
+    "qa/recommendation:resid/mean-potential-and-prior": {
+      "source_sha256": "cbdf70d6ef26f270e46ab7719b1a9ae41b10718b59ffa38622226df8d46ff252",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use log-mean-exp and full-vocabulary normalization before trie masking?",
+        "answer": "Dividing by prefix catalog size prevents a larger branch alone from gaining potential. Subtract the training transition log prior from logits, then normalize over the full vocabulary. Renormalizing legal children changes cross-prefix beam scores and is not equivalent.",
+        "example": "Teaching example: prefixes containing one or ten items all at similarity zero both have potential zero."
+      }
+    },
+    "qa/recommendation:resid/parallel-not-residual": {
+      "source_sha256": "a75987e6d2b17855c3d4acf4a13a98c4a2626f09006672ef69a2ad6d93f7c9d3",
+      "reviewed": true,
+      "fields": {
+        "question": "How do ReSID parallel SIDs differ from TIGER residual SIDs?",
+        "answer": "TIGER quantizes successive residuals, so early changes propagate into later inputs. ReSID splits latent vectors into independent subspaces with separate codebooks. Capability comparisons still require learned encoders; the local code checks nearest-codeword arithmetic only.",
+        "example": "Teaching example: perturbing only the first subspace may change its token, not the untouched second subspace token."
+      }
+    },
+    "qa/recommendation:resid/mismatch-before-score": {
+      "source_sha256": "c1dd42b40d132d99849afef7a873317cd2f97227e04dd0a05e7cda4978f38928",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not rank partial matches by maximum beam score alone?",
+        "answer": "The source prioritizes fewer mismatches before higher beam score. A high-scoring distant match cannot outrank an exact one. Duplicate-SID items remain distinct; final ties use local item indices. Similarities/priors must come from training/content, not evaluation gold.",
+        "example": "Teaching example: item A is distance zero from a score -9 beam; B is distance one from a score -1 beam. A still ranks first."
+      }
+    },
+    "qa/recommendation:trigen/pristine-two-paths": {
+      "source_sha256": "be0167ced10bd1161e43b48b815e8adc46d851d5ac48e255958564758b42fd19",
+      "reviewed": true,
+      "fields": {
+        "question": "Why retain pristine history in TriGen?",
+        "answer": "The tail-injected encoder input already mixes immediate intent and history. Separate trigger-query and default-query conditions read pristine history. Reading modified history in both paths can contaminate the default preference branch and defeat that separation.",
+        "example": "Teaching example: keep history fixed and negate only the trigger. The default history path must stay identical, while the trigger path may change."
+      }
+    },
+    "qa/recommendation:trigen/fixed-window-and-pooling": {
+      "source_sha256": "325616d55a2c585ca1e98333d1b164f32aa67640f38d9867f3a0efb11eb2eaa2",
+      "reviewed": true,
+      "fields": {
+        "question": "Does repeating the trigger N times lengthen TriGen input, and what feeds its router?",
+        "answer": "No. Eq.4 drops the oldest N entries and appends N copies, keeping length M. Eq.6 mean-pools each path across levels, concatenates the two profiles and produces per-level sigmoid weights for convex fusion. It is not arbitrary tokenwise gating.",
+        "example": "Teaching example: with M=5 and N=2, keep h3,h4,h5 and append two triggers; router inputs are the two pooled path profiles."
+      }
+    },
+    "qa/recommendation:trigen/conditioning-not-tokenizer": {
+      "source_sha256": "b7a6721e7ce6622e0ad64cefede056165fcf619e54e264d6459a48cc4d5e437c",
+      "reviewed": true,
+      "fields": {
+        "question": "Does placing local TriGen conditions before a TIGER-style generator reproduce recommendation?",
+        "answer": "No. TIGER also needs content quantization and autoregressive retrieval; local TriGen layers organize trigger conditions only. Full encoders/decoders, data, recommendation loss and actual candidate evaluation are absent. Separate PFFNs do not prove useful learned granularity.",
+        "example": "Teaching example: a router changing with random triggers proves input dependence, not improved next-item recall."
+      }
+    },
+    "qa/recommendation:trigen/prefix-not-future": {
+      "source_sha256": "2bb92402688017e196f92768490fb80d83fd3ea660bab0efce30783545841d2a",
+      "reviewed": true,
+      "fields": {
+        "question": "Does Eq.8 teacher forcing authorize complete target SIDs at inference?",
+        "answer": "No. Shifted training position l reads only y_l-1; inference reads generated prefixes. The interface accepts BOS plus L-1 observed-prefix embeddings, never future tokens. The local two-layer GELU is explicitly a choice because source MLP internals are unspecified.",
+        "example": "Teaching example: the first SID prediction receives BOS plus condition one, not the target first-token embedding."
+      }
+    },
+    "qa/recommendation:kuairec-v2-protocol/daily-validation-not-test": {
+      "source_sha256": "938f8e63e1853ff8ed45d3d5f60a250a181edffb40649bcb84ead68255aefea4",
+      "reviewed": true,
+      "fields": {
+        "question": "Is each last daily KuaiRecV2 interaction a test example?",
+        "answer": "Section 3.1 calls it validation per user per day. FullMonth separately has an online-leaderboard hold-out test. Daily splitting also differs from retaining only each user's last interaction of the month.",
+        "example": "Teaching example: a user with two interactions on each of two days yields two daily-validation examples, not only the month-end one."
+      }
+    },
+    "qa/recommendation:kuairec-v2-protocol/instance-weighted-month": {
+      "source_sha256": "09db7a5a0b95a8228cecf99adedd5a089c492c272e2105af6a2cd0414b14a125",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not simply average daily NDCG for FullMonth?",
+        "answer": "Daily validation counts differ. The single FullMonth score is sum(Nt*Mt)/sum(Nt), not a macro average over days. Daily trajectories remain important for candidate changes, adaptation and forgetting.",
+        "example": "Teaching example: one instance scoring one on day one and three scoring zero on day two give .25, not .5."
+      }
+    },
+    "qa/recommendation:kuairec-v2-protocol/benchmark-versus-tiger": {
+      "source_sha256": "a837f5fdf82066f1fe283646ec672fa5195a90bac23630d148ab051378625379",
+      "reviewed": true,
+      "fields": {
+        "question": "Are the KuaiRecV2 interface and TIGER model implementations at the same level?",
+        "answer": "No. TIGER defines semantic-ID generative retrieval; KuaiRecV2 defines continual data/evaluation protocols for different models. The local interface has neither models nor official data, only L0 split/metric contracts, and cannot be ranked against TIGER NDCG.",
+        "example": "Teaching example: correct HR for two requests does not establish training or evaluating TIGER on roughly 484 million interactions."
+      }
+    },
+    "qa/recommendation:kuairec-v2-protocol/single-retrieval-private-labels": {
+      "source_sha256": "15258fc03a4640a29889fee35daec4134ef421f694b5296b065cdda83751e399",
+      "reviewed": true,
+      "fields": {
+        "question": "May single-retrieval evaluate-all generate different candidates per behavior?",
+        "answer": "No. Each request has one list. The evaluator partitions held-out interactions by behavior and reuses the same rank for HR/NDCG. Labels stay private to evaluation. Task-specific lists are rejected, but shapes do not replace actual leakage audits.",
+        "example": "Teaching example: the same request in click and like subsets must reuse its recommendations, not generate a better list after seeing the like label."
+      }
+    }
+  }
+}

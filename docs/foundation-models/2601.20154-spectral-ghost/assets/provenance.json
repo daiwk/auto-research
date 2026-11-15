@@ -1,0 +1,19 @@
+{
+  "paper_url": "https://arxiv.org/abs/2601.20154v4",
+  "source_url": "https://arxiv.org/pdf/2601.20154v4#page=45",
+  "figure": "Figure 4",
+  "source_format": "PDF rendered crop including original caption",
+  "image": "paper-figure-01.png",
+  "image_sha256": "74158266da67e18a4cab41f03c0300fa0b77609dc9d426992725ec92daec8719",
+  "source_html_sha256": "1550ad19d7782c155b7b406268c6e7d7cd452f4b5cf6eab0ba302e23651d423c",
+  "pdf_clip_points": [
+    70,
+    65,
+    545,
+    333
+  ],
+  "render_scale": 2,
+  "description": "Original scientific figure, no redraw or scientific-content edits; not a locally executed full system.",
+  "copyright": "Copyright remains with the paper's authors; arXiv perpetual non-exclusive license",
+  "visually_verified": true
+}

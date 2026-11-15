@@ -8,6 +8,9 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models](<https://arxiv.org/abs/2611.16628v1>) | 2026-11-12 | [English](../../post-training/2611.16628-safety-budget-cgrpo/README-en.md) · [Chinese](../../post-training/2611.16628-safety-budget-cgrpo/README.md) |
+| [Bait: Mitigating Harmful Agentic Reinforcement Learning via Probing Reward Function](<https://arxiv.org/abs/2611.16369v1>) | 2026-11-12 | [English](../../post-training/2611.16369-bait-reward-defense/README-en.md) · [Chinese](../../post-training/2611.16369-bait-reward-defense/README.md) |
+| [Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs?](<https://arxiv.org/abs/2611.15404v1>) | 2026-11-11 | [English](../../post-training/2611.15404-lgpo/README-en.md) · [Chinese](../../post-training/2611.15404-lgpo/README.md) |
 | [Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards](<https://arxiv.org/abs/2611.14015v1>) | 2026-11-10 | [English](../../post-training/2611.14015-mcpo/README-en.md) · [Chinese](../../post-training/2611.14015-mcpo/README.md) |
 | [Bootstrapped On-Policy Distillation](<https://arxiv.org/abs/2611.13680v1>) | 2026-11-10 | [English](../../post-training/2611.13680-bopd/README-en.md) · [Chinese](../../post-training/2611.13680-bopd/README.md) |
 | [A Theory of Policy Optimization in Post-Training: Coverage Collapse and Reference Resets](<https://arxiv.org/abs/2611.14467v1>) | 2026-11-10 | [English](../../post-training/2611.14467-apmd-reference-reset/README-en.md) · [Chinese](../../post-training/2611.14467-apmd-reference-reset/README.md) |

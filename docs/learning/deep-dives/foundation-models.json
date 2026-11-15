@@ -824,6 +824,16 @@
             "原文结果与限制",
             "本地复现"
           ]
+        },
+        {
+          "paper": "foundation-models:archspace",
+          "position": "固定数据和tokenizer，用FLOPs/token、训练token数及LR/BS耦合曲面比较架构；最终衰减checkpoint和11域等权validation是比较协议的一部分。",
+          "tradeoff": "Data Mixing Laws改变域比例并从pilot拟合配比；ArchSpace控制架构规模与LR/BS。两类曲面系数不能交换，公开算术复算也不等于重新拟合或执行自动架构搜索。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果"
+          ]
         }
       ],
       "analysis": [
@@ -875,6 +885,14 @@
           "papers": [
             "foundation-models:continuousbench",
             "foundation-models:data-orchestra"
+          ]
+        },
+        {
+          "title": "拟合损失之前先固定干预变量和预算单位",
+          "body": "相同loss输出不意味着相同研究任务。Data Mixing Laws的输入有mixture simplex，ArchSpace把数据固定并用C=MD计训练FLOPs。M不是参数量，LR条件最优随batch平方根变化；未重跑新架构的pilot就不能用旧基线系数宣称收益。",
+          "papers": [
+            "foundation-models:archspace",
+            "foundation-models:data-mixing-laws"
           ]
         }
       ],
@@ -949,9 +967,19 @@
             "foundation-models:continuousbench",
             "foundation-models:data-orchestra"
           ]
+        },
+        {
+          "id": "nov15-archspace",
+          "question": "Data Mixing Laws与ArchSpace都能预测loss，为什么不能直接串起来就说完成了架构进化？",
+          "answer": "它们分别拟合数据配比与架构/超参预算关系；串接需要真实候选训练、验证各自外推范围并统一预算。仅注册或调用公开系数没有执行和评测新候选。",
+          "example": "改变语料配比同时改变架构后，loss下降仍需要对照区分数据与结构贡献。",
+          "papers": [
+            "foundation-models:archspace",
+            "foundation-models:data-mixing-laws"
+          ]
         }
       ],
-      "updated": "2026-11-13",
+      "updated": "2026-11-15",
       "reviewed_papers": [
         "foundation-models:adamw4bit",
         "foundation-models:af-muon",
@@ -985,7 +1013,8 @@
         "foundation-models:gavagai",
         "foundation-models:stochastic-rounding",
         "foundation-models:lidas",
-        "foundation-models:continuousbench"
+        "foundation-models:continuousbench",
+        "foundation-models:archspace"
       ],
       "updates": [
         {
@@ -1098,6 +1127,18 @@
           "source_revisions": {
             "foundation-models:continuousbench": "fa56a473668f84deaab923893e1c5a9fc33a84364d304290740b05d2ee2ae759",
             "foundation-models:data-orchestra": "b9e3c1068982f4cb1526077c71b64e6baa645c98ad36eeae7a0060badc3456fe"
+          }
+        },
+        {
+          "date": "2026-11-15",
+          "papers": [
+            "foundation-models:archspace",
+            "foundation-models:data-mixing-laws"
+          ],
+          "summary": "补入固定版本方法、低成本组件或明确资料收录，分开原文结果、本地诊断及高成本不复现范围。",
+          "source_revisions": {
+            "foundation-models:archspace": "f6418801859e15fc9ebdb43c23db9b1a13c3953d38e5a84b4af5d7e62e515cc6",
+            "foundation-models:data-mixing-laws": "71c42d6af6dca0a2b11e5d2899b54695a5514a0b08de1d4fe694aa96b9fa42aa"
           }
         }
       ]

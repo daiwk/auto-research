@@ -9,6 +9,7 @@ import torch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 
 from curate_nov15_refresh_evidence import validate_admission
+import generate_research_catalogs as catalogs
 from run_nov15_refresh_components import AUDIT, COMPONENTS, CUDA_KEYS, load
 from auto_research.foundation_models import d_jepa
 
@@ -54,3 +55,20 @@ def test_selected_scope_is_not_an_exhaustive_metadata_review():
     coverage = load(AUDIT / "source-coverage.json")
     assert coverage["metadata_inventory_is_implementation_backlog"] is False
     assert all(row["parse_complete"] for row in coverage["receipts"])
+
+
+def test_standalone_browse_uses_unique_canonical_date_not_readme_label(tmp_path, monkeypatch):
+    docs = tmp_path / "docs"
+    (docs / "reproductions").mkdir(parents=True)
+    detail = "recommendation-components/example/README.md"
+    page = docs / detail
+    page.parent.mkdir(parents=True)
+    page.write_text("# Component\n\n| Original publication | 2026-11-12 |\n")
+    monkeypatch.setattr(catalogs, "DOCS", docs)
+    manifest = docs / "research-manifest.json"
+    row = {"detail_path": detail, "published": "2026-11-12"}
+    manifest.write_text(json.dumps({"papers": [row]}))
+    assert catalogs._paper_date("../../" + detail) == "2026-11-12"
+    manifest.write_text(json.dumps({"papers": [row, row]}))
+    with pytest.raises(ValueError, match="unique canonical"):
+        catalogs._paper_date("../../" + detail)

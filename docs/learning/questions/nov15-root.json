@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "recommendation:resid": {
+      "questions": [
+        {
+          "id": "reachability-before-rank",
+          "level": "basics",
+          "question": "ReSID为什么不只在最终列表给长尾加分？",
+          "answer": "如果相关长尾前缀早被窄beam剪掉，最终列表重排看不到它。ReSID分别处理独立子空间量化、逐步guided beam和Hamming partial matching，改善产生候选的可达性，不把真实目标塞回结果。",
+          "example": "教学例：beam第一层只保留热门前缀0，目标位于1分支时，最后再加长尾bonus无法恢复未生成候选。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "mean-potential-and-prior",
+          "level": "mechanism",
+          "question": "prefix势能为什么是log-mean-exp，且先full-vocab归一再trie mask？",
+          "answer": "log-mean-exp除以prefix下物品数，避免单因分支大就加分；logits先减训练transition prior的log，再完整词表softmax。合法子词表重新归一会改变不同prefix间beam分数，不能当等价实现。",
+          "example": "教学例：两个prefix的内容相似度都为0，不管包含1个还是10个物品，Phi都为0。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "parallel-not-residual",
+          "level": "comparison",
+          "question": "ReSID的parallel SID与TIGER的residual SID有什么不同？",
+          "answer": "TIGER后层量化前层残差，早期变化会传到后续输入。ReSID把latent拆独立子空间，每位置自己的codebook，不把前位置误差传下去。需要真实学习各自编码器才可比较能力，本地只验证最近码字算子。",
+          "example": "教学例：只扰动第一个子空间，应只可能改变第一个parallel token，不应改变未扰动第二子空间的token。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "mismatch-before-score",
+          "level": "implementation",
+          "question": "partial matching为什么不能只按最大beam分数排序？",
+          "answer": "原文先少mismatch，再更高beam score；一个高分但距离更远的beam不能越过精确匹配。相同SID的不同物品仍保留，最终完全并列时本地按item index；相似度和prior来自训练/内容，不是评价gold。",
+          "example": "教学例：物品A距score=-9的beam为0，B距score=-1的beam为1；A仍先于B。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        }
+      ]
+    },
+    "recommendation:trigen": {
+      "questions": [
+        {
+          "id": "pristine-two-paths",
+          "level": "basics",
+          "question": "TriGen为什么还要保存未注入trigger的history？",
+          "answer": "tail-injected encoder序列已经混合即时意图与历史；双路径另从pristine history提取trigger-query条件和default-query偏好。若都读改写历史，默认分支也可能被trigger污染，失去预期分工。",
+          "example": "教学例：保持history不变，只把trigger取负；default history-path应完全相同，trigger-path可以变化。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "fixed-window-and-pooling",
+          "level": "mechanism",
+          "question": "trigger重复N次会让输入更长吗，router看什么？",
+          "answer": "不会。Eq4丢最早N项并在尾部补N份，长度仍M。Eq6分别把两路径跨level均值池化，拼接后产生逐level sigmoid权重，再作convex fusion。不是直接为每个token独立配一个任意门。",
+          "example": "教学例：M=5、N=2时保留h3,h4,h5再加两份trigger；router输入是两条全局profile。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "conditioning-not-tokenizer",
+          "level": "comparison",
+          "question": "在TIGER式生成器前接TriGen局部条件层，就等于复现完整推荐了吗？",
+          "answer": "不等于。TIGER还需内容量化与自回归检索，TriGen局部层只改变trigger条件组织。还缺完整encoder/decoder、训练数据、推荐loss和实际候选评估；独立level PFFN也不保证学到有用粒度。",
+          "example": "教学例：随机history上router随trigger变化证明输入依赖，但不能证明下一商品Recall提高。",
+          "source_sections": [
+            "背景与主要改动",
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "prefix-not-future",
+          "level": "implementation",
+          "question": "Eq8的teacher forcing允许推理时把完整目标SID传进来吗？",
+          "answer": "不允许。训练右移输入在位置l只读y_l-1；推理只能读已生成prefix。接口要求BOS加L-1个已观察prefix embedding，不能利用未来token；原文未明MLP细节，本地两层GELU也须声明为选择。",
+          "example": "教学例：生成第一个SID token时输入是BOS加condition1，不是目标第一个token的embedding。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-15"
+        }
+      ]
+    },
+    "recommendation:kuairec-v2-protocol": {
+      "questions": [
+        {
+          "id": "daily-validation-not-test",
+          "level": "basics",
+          "question": "KuaiRecV2每日最后交互是test吗？",
+          "answer": "§3.1明确是每用户每天的validation。FullMonth另有online leaderboard hold-out test，不能混称。每日切分也不同于每用户整个月只留最后一条。",
+          "example": "教学例：同一用户两天各有两条交互，daily leave-one-out留下两个validation，而不是只留月末那一个。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "instance-weighted-month",
+          "level": "mechanism",
+          "question": "FullMonth为什么不直接平均每天NDCG？",
+          "answer": "每天验证实例数可能不同。单一FullMonth分数是sum(Nt*Mt)/sum(Nt)，不是天数宏平均；每日轨迹仍应保留，以观察候选池变化、适应和遗忘。",
+          "example": "教学例：第一天1条分数1，第二天3条分数0，月分数为.25，不是.5。",
+          "source_sections": [
+            "核心公式",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "benchmark-versus-tiger",
+          "level": "comparison",
+          "question": "KuaiRecV2接口与TIGER模型是同一层级的实现吗？",
+          "answer": "不是。TIGER定义语义ID生成检索模型；KuaiRecV2定义持续学习数据和评估协议，能评价不同模型。本地KuaiRec接口没有模型或官方数据，只是L0 split/metric合同，不能与TIGER本地NDCG排名。",
+          "example": "教学例：函数在两个请求上算对HR，不表示在约4.84亿交互上训练或运行了TIGER。",
+          "source_sections": [
+            "背景与主要改动",
+            "论文离线与线上效果",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "single-retrieval-private-labels",
+          "level": "implementation",
+          "question": "single-retrieval evaluate-all允许每个behavior生成不同候选吗？",
+          "answer": "不允许。每request一份列表，评价器根据held-out interaction的behavior划子集，并复用同一rank算HR/NDCG。label是评价器私有输入，不送给producer；多份task-specific列表被拒绝，接口形状也不替代真实泄漏审计。",
+          "example": "教学例：click与like子集里同一request必须使用同一推荐结果，不能看到like标签后另生成更好列表。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-15"
+        }
+      ]
+    }
+  }
+}

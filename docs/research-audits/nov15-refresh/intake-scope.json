@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-15-paper-refresh",
+  "reviewed_on": "2026-11-15",
+  "scope_kind": "bounded-new-bulletin-and-priority-backfill",
+  "accepted_papers": [
+    "recommendation:resid", "recommendation:trigen", "recommendation:kuairec-v2-protocol",
+    "foundation-models:unbundling-vision", "foundation-models:archspace", "foundation-models:d-jepa",
+    "foundation-models:duojepa", "foundation-models:spectral-ghost", "multimodal-models:pixvid",
+    "post-training:lgpo", "post-training:safety-budget-cgrpo", "post-training:bait-reward-defense",
+    "agent-research:coremem", "agent-research:caplite", "agent-research:ace-rl",
+    "agent-research:multiloop", "agent-research:stellar-colosseum", "agent-research:leap-formal-math"
+  ],
+  "source_receipts": "source-coverage.json",
+  "review_watermark_advanced": false,
+  "review_watermark": {"before": "2026-11-09", "after": "2026-11-09"},
+  "full_window_review_complete": false,
+  "all_sources_exhaustive": false,
+  "cost_policy": "High-cost full campaigns are not reproduced and review DONE, without model/data downloads or automatic retries. Theoretical papers with no empirical experiment are not mislabeled as expensive measured campaigns.",
+  "scope_note": "The current November13 bulletin includes new publications and replacements; official-blog-triggered old first publications remain historical backfills. Metadata inventory size is not the eligible-paper or implementation backlog count."
+}

@@ -7,7 +7,7 @@ hide:
 
 # 跨模态对齐：表征、连接器与监督
 
-[多模态](index.md) / 93 个问题 · 23 篇论文
+[多模态](index.md) / 109 个问题 · 27 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,168 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">93 个问题 · 23 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">109 个问题 · 27 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:d-jepa" data-paper-title="Asymmetric Multimodal Learning with Decomposed JEPAs" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Asymmetric Multimodal Learning with Decomposed JEPAs 基础模型 论文未列机构 2026-11-12 图像和问题不一定是信息等价的两种视图。强迫两者完全对齐可能只保留共享部分，丢掉私有细节和联合推理所需信息。论文先对严格对齐解给出信息保留界，再设计共享core与私有fiber；这个界不适用于任意带辅助目标的完整模型，也不证明所有JEPA都塌缩。§2—3 整套下载和多阶段矩阵超出短时单卡预算，成本过高，不复现（审查 DONE）；诊断里的小线性头和生成特征只是测试夹具，不是原作者backbone。L1 单context目标组件：共享/私有分解、分开SIGReg、重建stop-gradient与四组相关惩罚；不是CLEVR能力、PID估计或完整训练复现。objective接收调用方提供的四子空间、同模态invariance标量、预测/目标特征与随机方向；特征目标显式detach。correlation_penalty/independence/sigreg分别保留样本相关系数、四对选择和ECF正则。  JEPA与世界模型 多模态共享私有表征 多模态 跨模态对齐：表征、连接器与监督 D-JEPA的对齐信息界是否证明所有多模态JEPA都会丢失私有信息？ 不是。界约束严格对齐解，在其假设下只能保留两模态共享的信息；含辅助预测、私有分支或其他目标的完整模型不由该界直接刻画。必须保留定理适用范围。 教学例：图像含颜色而问题只问数量时，两者不信息等价；加入图像私有预测后不能再把完整目标称为alignment-only。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-foundation-models-d-jepa-e4299c9a" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-934affbf27996413">D-JEPA的对齐信息界是否证明所有多模态JEPA都会丢失私有信息？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ad-jepa">Asymmetric Multimodal Learning with Decomposed JEPAs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · 论文未列机构</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。界约束严格对齐解，在其假设下只能保留两模态共享的信息；含辅助预测、私有分支或其他目标的完整模型不由该界直接刻画。必须保留定理适用范围。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：图像含颜色而问题只问数量时，两者不信息等价；加入图像私有预测后不能再把完整目标称为alignment-only。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.16639v1">原论文</a> · <a href="../../../../foundation-models/2611.16639-d-jepa/">实现解读</a> · <a href="#qa-934affbf27996413">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:d-jepa" data-paper-title="Asymmetric Multimodal Learning with Decomposed JEPAs" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Asymmetric Multimodal Learning with Decomposed JEPAs 基础模型 论文未列机构 2026-11-12 图像和问题不一定是信息等价的两种视图。强迫两者完全对齐可能只保留共享部分，丢掉私有细节和联合推理所需信息。论文先对严格对齐解给出信息保留界，再设计共享core与私有fiber；这个界不适用于任意带辅助目标的完整模型，也不证明所有JEPA都塌缩。§2—3 整套下载和多阶段矩阵超出短时单卡预算，成本过高，不复现（审查 DONE）；诊断里的小线性头和生成特征只是测试夹具，不是原作者backbone。L1 单context目标组件：共享/私有分解、分开SIGReg、重建stop-gradient与四组相关惩罚；不是CLEVR能力、PID估计或完整训练复现。objective接收调用方提供的四子空间、同模态invariance标量、预测/目标特征与随机方向；特征目标显式detach。correlation_penalty/independence/sigreg分别保留样本相关系数、四对选择和ECF正则。  JEPA与世界模型 多模态共享私有表征 多模态 跨模态对齐：表征、连接器与监督 为什么独立性项包含四组u-c，却不包含u_v与u_t？ 它防止私有信息泄漏到共享core，同时允许两模态私有fiber为联合推理协调。加入private-private惩罚会改变目标，可能压制需要两边合用的信号。 教学例：视觉对象属性与问题中的关系选择分别存私有分支，两边需共同决定答案，不能默认要求它们互不相关。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-576e5d27683ef83e">为什么独立性项包含四组u-c，却不包含u_v与u_t？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ad-jepa">Asymmetric Multimodal Learning with Decomposed JEPAs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · 论文未列机构</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它防止私有信息泄漏到共享core，同时允许两模态私有fiber为联合推理协调。加入private-private惩罚会改变目标，可能压制需要两边合用的信号。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：视觉对象属性与问题中的关系选择分别存私有分支，两边需共同决定答案，不能默认要求它们互不相关。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.16639v1">原论文</a> · <a href="../../../../foundation-models/2611.16639-d-jepa/">实现解读</a> · <a href="#qa-576e5d27683ef83e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:d-jepa" data-paper-title="Asymmetric Multimodal Learning with Decomposed JEPAs" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Asymmetric Multimodal Learning with Decomposed JEPAs 基础模型 论文未列机构 2026-11-12 图像和问题不一定是信息等价的两种视图。强迫两者完全对齐可能只保留共享部分，丢掉私有细节和联合推理所需信息。论文先对严格对齐解给出信息保留界，再设计共享core与私有fiber；这个界不适用于任意带辅助目标的完整模型，也不证明所有JEPA都塌缩。§2—3 整套下载和多阶段矩阵超出短时单卡预算，成本过高，不复现（审查 DONE）；诊断里的小线性头和生成特征只是测试夹具，不是原作者backbone。L1 单context目标组件：共享/私有分解、分开SIGReg、重建stop-gradient与四组相关惩罚；不是CLEVR能力、PID估计或完整训练复现。objective接收调用方提供的四子空间、同模态invariance标量、预测/目标特征与随机方向；特征目标显式detach。correlation_penalty/independence/sigreg分别保留样本相关系数、四对选择和ECF正则。  JEPA与世界模型 多模态共享私有表征 多模态 跨模态对齐：表征、连接器与监督 把shared/private拼起来只做一次SIGReg，为什么不是同一个正则？ 联合分布检查允许私有部分扩大方差而共享部分塌缩的捷径。D-JEPA对四个子空间分别做ECF正则，再按论文权重合并，不能用一个整体方差惩罚替代。 教学例：shared全部接近零而private幅度很大时，拼接统计可能掩盖shared失效；分开检查会保留这项异常。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-039631b733a31f5d">把shared/private拼起来只做一次SIGReg，为什么不是同一个正则？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ad-jepa">Asymmetric Multimodal Learning with Decomposed JEPAs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · 论文未列机构</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>联合分布检查允许私有部分扩大方差而共享部分塌缩的捷径。D-JEPA对四个子空间分别做ECF正则，再按论文权重合并，不能用一个整体方差惩罚替代。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：shared全部接近零而private幅度很大时，拼接统计可能掩盖shared失效；分开检查会保留这项异常。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.16639v1">原论文</a> · <a href="../../../../foundation-models/2611.16639-d-jepa/">实现解读</a> · <a href="#qa-039631b733a31f5d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:d-jepa" data-paper-title="Asymmetric Multimodal Learning with Decomposed JEPAs" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Asymmetric Multimodal Learning with Decomposed JEPAs 基础模型 论文未列机构 2026-11-12 图像和问题不一定是信息等价的两种视图。强迫两者完全对齐可能只保留共享部分，丢掉私有细节和联合推理所需信息。论文先对严格对齐解给出信息保留界，再设计共享core与私有fiber；这个界不适用于任意带辅助目标的完整模型，也不证明所有JEPA都塌缩。§2—3 整套下载和多阶段矩阵超出短时单卡预算，成本过高，不复现（审查 DONE）；诊断里的小线性头和生成特征只是测试夹具，不是原作者backbone。L1 单context目标组件：共享/私有分解、分开SIGReg、重建stop-gradient与四组相关惩罚；不是CLEVR能力、PID估计或完整训练复现。objective接收调用方提供的四子空间、同模态invariance标量、预测/目标特征与随机方向；特征目标显式detach。correlation_penalty/independence/sigreg分别保留样本相关系数、四对选择和ECF正则。  JEPA与世界模型 多模态共享私有表征 多模态 跨模态对齐：表征、连接器与监督 为什么本地loss下降不能写成复现了39.61%的CLEVR结果？ 本地只对调用方提供的特征运行单context目标和小头，未执行DINO/BERT、真实view采样、容量匹配probe或PID。还明确区分论文Eq5与作者多view循环的平均系数，因此不能宣称整套数值一致。 教学例：12步随机特征优化产生的是机制loss，不含CLEVR正确答案或测试预测，也就没有CLEVR准确率。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-cc55baeaaffe28ad">为什么本地loss下降不能写成复现了39.61%的CLEVR结果？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ad-jepa">Asymmetric Multimodal Learning with Decomposed JEPAs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · 论文未列机构</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>本地只对调用方提供的特征运行单context目标和小头，未执行DINO/BERT、真实view采样、容量匹配probe或PID。还明确区分论文Eq5与作者多view循环的平均系数，因此不能宣称整套数值一致。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：12步随机特征优化产生的是机制loss，不含CLEVR正确答案或测试预测，也就没有CLEVR准确率。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.16639v1">原论文</a> · <a href="../../../../foundation-models/2611.16639-d-jepa/">实现解读</a> · <a href="#qa-cc55baeaaffe28ad">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:unbundling-vision" data-paper-title="Unbundling Multimodal Vision Encoding" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Unbundling Multimodal Vision Encoding 基础模型 Meta FAIR 2026-11-12 传统视觉编码器把视觉预训练、视觉专属容量、融合前放置三个选择捆绑在一起。本文在共同数据和相同生命周期计算量下分开比较：视觉先验可以不预训练，但不能把“无需预训练编码器”误读成“无需视觉专属容量”。早期 backbone 内的视觉专属模块也能承担这些容量，不一定要在融合前独立编码。§2—5 完整实验成本过高，不复现（审查 DONE）。诊断执行16步小张量优化；L1 机制组件：加性 vision-only QKVO/SwiGLU 与联合因果注意力，不是训练好的多模态模型。完整实验成本过高，不复现（审查 DONE）。InFusionBlock实现一层小型联合因果注意力，支持FFN-only或QKVO+FFN分支。输入是调用方提供的有限张量和布尔视觉mask；没有图像patch编码器、RoPE/GQA、多层backbone、tokenizer或训练语料。这里的RMSNorm和标准PyTorch注意力是明确的参考实现，不声称作者完整网络一致。  多模态基础模型 视觉容量与融合位置 多模态 跨模态对齐：表征、连接器与监督 Unbundling说视觉预训练不是必需，是否意味着可以移除所有视觉专属容量？ 不是。预训练先验、专属容量和放置位置是三个变量。共同数据及生命周期预算比较支持专属容量的重要性，只是它可以从独立视觉encoder移到backbone前部。 教学例：把新增vision-only FFN放进早期层仍增加了视觉容量，不属于完全encoder-free的共享模型。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-foundation-models-unbundling-vision-b740a44b" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-e72202f7f5756cfb">Unbundling说视觉预训练不是必需，是否意味着可以移除所有视觉专属容量？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aunbundling-vision">Unbundling Multimodal Vision Encoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Meta FAIR</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。预训练先验、专属容量和放置位置是三个变量。共同数据及生命周期预算比较支持专属容量的重要性，只是它可以从独立视觉encoder移到backbone前部。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把新增vision-only FFN放进早期层仍增加了视觉容量，不属于完全encoder-free的共享模型。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17334v1">原论文</a> · <a href="../../../../foundation-models/2611.17334-unbundling-vision/">实现解读</a> · <a href="#qa-e72202f7f5756cfb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:unbundling-vision" data-paper-title="Unbundling Multimodal Vision Encoding" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Unbundling Multimodal Vision Encoding 基础模型 Meta FAIR 2026-11-12 传统视觉编码器把视觉预训练、视觉专属容量、融合前放置三个选择捆绑在一起。本文在共同数据和相同生命周期计算量下分开比较：视觉先验可以不预训练，但不能把“无需预训练编码器”误读成“无需视觉专属容量”。早期 backbone 内的视觉专属模块也能承担这些容量，不一定要在融合前独立编码。§2—5 完整实验成本过高，不复现（审查 DONE）。诊断执行16步小张量优化；L1 机制组件：加性 vision-only QKVO/SwiGLU 与联合因果注意力，不是训练好的多模态模型。完整实验成本过高，不复现（审查 DONE）。InFusionBlock实现一层小型联合因果注意力，支持FFN-only或QKVO+FFN分支。输入是调用方提供的有限张量和布尔视觉mask；没有图像patch编码器、RoPE/GQA、多层backbone、tokenizer或训练语料。这里的RMSNorm和标准PyTorch注意力是明确的参考实现，不声称作者完整网络一致。  多模态基础模型 视觉容量与融合位置 多模态 跨模态对齐：表征、连接器与监督 视觉FFN为什么必须读与共享FFN相同的归一化输入？ 论文是两分支加性容量，不是让视觉FFN再处理共享FFN输出。相同输入维持模块并联定义；新增QKVO和视觉FFN输出零初始化使初始函数等于原共享路径。 教学例：F(N(h))+DeltaF(N(h))与DeltaF(F(N(h)))通常不相等，后者还改变优化起点和计算依赖。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-3ec8dee8a8fc4af9">视觉FFN为什么必须读与共享FFN相同的归一化输入？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aunbundling-vision">Unbundling Multimodal Vision Encoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Meta FAIR</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>论文是两分支加性容量，不是让视觉FFN再处理共享FFN输出。相同输入维持模块并联定义；新增QKVO和视觉FFN输出零初始化使初始函数等于原共享路径。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：F(N(h))+DeltaF(N(h))与DeltaF(F(N(h)))通常不相等，后者还改变优化起点和计算依赖。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17334v1">原论文</a> · <a href="../../../../foundation-models/2611.17334-unbundling-vision/">实现解读</a> · <a href="#qa-3ec8dee8a8fc4af9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:unbundling-vision" data-paper-title="Unbundling Multimodal Vision Encoding" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Unbundling Multimodal Vision Encoding 基础模型 Meta FAIR 2026-11-12 传统视觉编码器把视觉预训练、视觉专属容量、融合前放置三个选择捆绑在一起。本文在共同数据和相同生命周期计算量下分开比较：视觉先验可以不预训练，但不能把“无需预训练编码器”误读成“无需视觉专属容量”。早期 backbone 内的视觉专属模块也能承担这些容量，不一定要在融合前独立编码。§2—5 完整实验成本过高，不复现（审查 DONE）。诊断执行16步小张量优化；L1 机制组件：加性 vision-only QKVO/SwiGLU 与联合因果注意力，不是训练好的多模态模型。完整实验成本过高，不复现（审查 DONE）。InFusionBlock实现一层小型联合因果注意力，支持FFN-only或QKVO+FFN分支。输入是调用方提供的有限张量和布尔视觉mask；没有图像patch编码器、RoPE/GQA、多层backbone、tokenizer或训练语料。这里的RMSNorm和标准PyTorch注意力是明确的参考实现，不声称作者完整网络一致。  多模态基础模型 视觉容量与融合位置 多模态 跨模态对齐：表征、连接器与监督 vision-only投影是否等于图像和文本分成两个互不可见的attention？ 不是。mask只门控额外投影和FFN，QKV仍进入一次联合attention。文本token不执行专属分支，但可通过读取视觉token而改变输出。 教学例：文本query的额外Q为零，并不阻止它读取由视觉K/V表示的图像信息；把两模态attention隔离会改写方法。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-3744e43d89ce71f9">vision-only投影是否等于图像和文本分成两个互不可见的attention？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aunbundling-vision">Unbundling Multimodal Vision Encoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Meta FAIR</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。mask只门控额外投影和FFN，QKV仍进入一次联合attention。文本token不执行专属分支，但可通过读取视觉token而改变输出。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：文本query的额外Q为零，并不阻止它读取由视觉K/V表示的图像信息；把两模态attention隔离会改写方法。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17334v1">原论文</a> · <a href="../../../../foundation-models/2611.17334-unbundling-vision/">实现解读</a> · <a href="#qa-3744e43d89ce71f9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:unbundling-vision" data-paper-title="Unbundling Multimodal Vision Encoding" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Unbundling Multimodal Vision Encoding 基础模型 Meta FAIR 2026-11-12 传统视觉编码器把视觉预训练、视觉专属容量、融合前放置三个选择捆绑在一起。本文在共同数据和相同生命周期计算量下分开比较：视觉先验可以不预训练，但不能把“无需预训练编码器”误读成“无需视觉专属容量”。早期 backbone 内的视觉专属模块也能承担这些容量，不一定要在融合前独立编码。§2—5 完整实验成本过高，不复现（审查 DONE）。诊断执行16步小张量优化；L1 机制组件：加性 vision-only QKVO/SwiGLU 与联合因果注意力，不是训练好的多模态模型。完整实验成本过高，不复现（审查 DONE）。InFusionBlock实现一层小型联合因果注意力，支持FFN-only或QKVO+FFN分支。输入是调用方提供的有限张量和布尔视觉mask；没有图像patch编码器、RoPE/GQA、多层backbone、tokenizer或训练语料。这里的RMSNorm和标准PyTorch注意力是明确的参考实现，不声称作者完整网络一致。  多模态基础模型 视觉容量与融合位置 多模态 跨模态对齐：表征、连接器与监督 本地零初始化等价且16步MSE下降，能证明论文VQA和TTFT结论吗？ 不能。它只验证小张量分支、梯度和因果性，未加载图像编码、完整backbone或语料，也没有H200并发服务。正式能力与速度须另行同预算测量，本组件不晋级Evolve。 教学例：随机16维特征拟合常数偏移，不等于多尺度图像问答；CPU与CUDA都通过也不生成端到端延迟结论。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-fa757dad6dc24a53">本地零初始化等价且16步MSE下降，能证明论文VQA和TTFT结论吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aunbundling-vision">Unbundling Multimodal Vision Encoding</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Meta FAIR</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。它只验证小张量分支、梯度和因果性，未加载图像编码、完整backbone或语料，也没有H200并发服务。正式能力与速度须另行同预算测量，本组件不晋级Evolve。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：随机16维特征拟合常数偏移，不等于多尺度图像问答；CPU与CUDA都通过也不生成端到端延迟结论。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17334v1">原论文</a> · <a href="../../../../foundation-models/2611.17334-unbundling-vision/">实现解读</a> · <a href="#qa-fa757dad6dc24a53">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:duojepa" data-paper-title="DuoJEPA: Cross-Modal Translation Between Unaligned Self-Supervised Embedding Spaces" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="DuoJEPA: Cross-Modal Translation Between Unaligned Self-Supervised Embedding Spaces 基础模型 Kentucky Center for Digital Innovation, University of Louisville 2026-11-11 每个encoder用LeJEPA保留自己的空间，额外单层translator将其输出映射到另一模态的own space。目标在对方空间计算，不直接比较两个own embedding；但两encoder仍被联合优化，不能把“没有直接对齐损失”说成“完全独立训练”。残差translator会提供接近identity的捷径，论文因此只在translator移除两条残差。§5 成本过高，不复现（审查 DONE）；L1 机制组件：双目标空间CLS InfoNCE、无残差单head图像translator及初始化。没有完整LeJEPA、文本translator、patch项或分布式预训练。target_space_loss接收[batch,global_views,width]外部own/translated CLS，在批内保留不同样本负例、正确positive身份和双侧梯度。SkiplessTranslator只实现图像pre-norm单head路径；  JEPA与世界模型 多模态共享私有表征 多模态 跨模态对齐：表征、连接器与监督 DuoJEPA没有直接比较两个own space，是否意味着两个encoder各训各的？ 不是。跨空间translation loss同时反传到translator和目标centroid，因此两encoder联合优化。只是不要求原始own embeddings直接重合。 教学例：图像翻译向量在文本空间做InfoNCE，更新文本positive/negative centroid仍会改变文本encoder。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-foundation-models-duojepa-3c430791" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-c8310d365c15706a">DuoJEPA没有直接比较两个own space，是否意味着两个encoder各训各的？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aduojepa">DuoJEPA: Cross-Modal Translation Between Unaligned Self-Supervised Embedding Spaces</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Kentucky Center for Digital Innovation, University of Louisville</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。跨空间translation loss同时反传到translator和目标centroid，因此两encoder联合优化。只是不要求原始own embeddings直接重合。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：图像翻译向量在文本空间做InfoNCE，更新文本positive/negative centroid仍会改变文本encoder。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.15968v1">原论文</a> · <a href="../../../../foundation-models/2611.15968-duojepa/">实现解读</a> · <a href="#qa-c8310d365c15706a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:duojepa" data-paper-title="DuoJEPA: Cross-Modal Translation Between Unaligned Self-Supervised Embedding Spaces" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="DuoJEPA: Cross-Modal Translation Between Unaligned Self-Supervised Embedding Spaces 基础模型 Kentucky Center for Digital Innovation, University of Louisville 2026-11-11 每个encoder用LeJEPA保留自己的空间，额外单层translator将其输出映射到另一模态的own space。目标在对方空间计算，不直接比较两个own embedding；但两encoder仍被联合优化，不能把“没有直接对齐损失”说成“完全独立训练”。残差translator会提供接近identity的捷径，论文因此只在translator移除两条残差。§5 成本过高，不复现（审查 DONE）；L1 机制组件：双目标空间CLS InfoNCE、无残差单head图像translator及初始化。没有完整LeJEPA、文本translator、patch项或分布式预训练。target_space_loss接收[batch,global_views,width]外部own/translated CLS，在批内保留不同样本负例、正确positive身份和双侧梯度。SkiplessTranslator只实现图像pre-norm单head路径；  JEPA与世界模型 多模态共享私有表征 多模态 跨模态对齐：表征、连接器与监督 目标centroid能不能先平均原始global CLS再做一次归一化？ 论文先对每view做无参数LN和单位归一化，再求和并归一化。原始向量的尺度和均值不同，先平均会改变视图权重与positive方向，不是同一目标。 教学例：一个view原始范数是另一个的100倍，先平均会由它主导；每view单位化后两者贡献不因原始范数而相差100倍。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-1938342f7eb6f182">目标centroid能不能先平均原始global CLS再做一次归一化？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aduojepa">DuoJEPA: Cross-Modal Translation Between Unaligned Self-Supervised Embedding Spaces</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Kentucky Center for Digital Innovation, University of Louisville</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>论文先对每view做无参数LN和单位归一化，再求和并归一化。原始向量的尺度和均值不同，先平均会改变视图权重与positive方向，不是同一目标。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个view原始范数是另一个的100倍，先平均会由它主导；每view单位化后两者贡献不因原始范数而相差100倍。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.15968v1">原论文</a> · <a href="../../../../foundation-models/2611.15968-duojepa/">实现解读</a> · <a href="#qa-1938342f7eb6f182">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:duojepa" data-paper-title="DuoJEPA: Cross-Modal Translation Between Unaligned Self-Supervised Embedding Spaces" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="DuoJEPA: Cross-Modal Translation Between Unaligned Self-Supervised Embedding Spaces 基础模型 Kentucky Center for Digital Innovation, University of Louisville 2026-11-11 每个encoder用LeJEPA保留自己的空间，额外单层translator将其输出映射到另一模态的own space。目标在对方空间计算，不直接比较两个own embedding；但两encoder仍被联合优化，不能把“没有直接对齐损失”说成“完全独立训练”。残差translator会提供接近identity的捷径，论文因此只在translator移除两条残差。§5 成本过高，不复现（审查 DONE）；L1 机制组件：双目标空间CLS InfoNCE、无残差单head图像translator及初始化。没有完整LeJEPA、文本translator、patch项或分布式预训练。target_space_loss接收[batch,global_views,width]外部own/translated CLS，在批内保留不同样本负例、正确positive身份和双侧梯度。SkiplessTranslator只实现图像pre-norm单head路径；  JEPA与世界模型 多模态共享私有表征 多模态 跨模态对齐：表征、连接器与监督 普通残差Transformer把残差系数调小，就等于skipless translator吗？ 不等于。skipless移除两个identity加法，并用正交/SVD初始化维持信号；保留哪怕小的identity路径仍可让own spaces靠拢来减loss。是否保持未对齐须独立几何评估。 教学例：将最后MLP输出归零，真正skipless层输出为零；含残差层仍可能输出输入或attention残差。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-dd87bbb54a2272c6">普通残差Transformer把残差系数调小，就等于skipless translator吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aduojepa">DuoJEPA: Cross-Modal Translation Between Unaligned Self-Supervised Embedding Spaces</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Kentucky Center for Digital Innovation, University of Louisville</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不等于。skipless移除两个identity加法，并用正交/SVD初始化维持信号；保留哪怕小的identity路径仍可让own spaces靠拢来减loss。是否保持未对齐须独立几何评估。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：将最后MLP输出归零，真正skipless层输出为零；含残差层仍可能输出输入或attention残差。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.15968v1">原论文</a> · <a href="../../../../foundation-models/2611.15968-duojepa/">实现解读</a> · <a href="#qa-dd87bbb54a2272c6">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:duojepa" data-paper-title="DuoJEPA: Cross-Modal Translation Between Unaligned Self-Supervised Embedding Spaces" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="DuoJEPA: Cross-Modal Translation Between Unaligned Self-Supervised Embedding Spaces 基础模型 Kentucky Center for Digital Innovation, University of Louisville 2026-11-11 每个encoder用LeJEPA保留自己的空间，额外单层translator将其输出映射到另一模态的own space。目标在对方空间计算，不直接比较两个own embedding；但两encoder仍被联合优化，不能把“没有直接对齐损失”说成“完全独立训练”。残差translator会提供接近identity的捷径，论文因此只在translator移除两条残差。§5 成本过高，不复现（审查 DONE）；L1 机制组件：双目标空间CLS InfoNCE、无残差单head图像translator及初始化。没有完整LeJEPA、文本translator、patch项或分布式预训练。target_space_loss接收[batch,global_views,width]外部own/translated CLS，在批内保留不同样本负例、正确positive身份和双侧梯度。SkiplessTranslator只实现图像pre-norm单head路径；  JEPA与世界模型 多模态共享私有表征 多模态 跨模态对齐：表征、连接器与监督 能为了稳定训练把DuoJEPA的target centroid detach吗？ 这样会改成论文专门消融的另一条路径。主目标两侧都反传，且原文负例来自全设备batch；本地保留双侧梯度但只实现批内CLS和单head图像层，不声称完整LeJEPA或分布式训练。 教学例：target_space_loss之后own_a.grad和own_b.grad都应非零；detach后即使loss可计算，也不再通过这个机制更新目标encoder。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-243261331eab12a7">能为了稳定训练把DuoJEPA的target centroid detach吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aduojepa">DuoJEPA: Cross-Modal Translation Between Unaligned Self-Supervised Embedding Spaces</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Kentucky Center for Digital Innovation, University of Louisville</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>这样会改成论文专门消融的另一条路径。主目标两侧都反传，且原文负例来自全设备batch；本地保留双侧梯度但只实现批内CLS和单head图像层，不声称完整LeJEPA或分布式训练。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：target_space_loss之后own_a.grad和own_b.grad都应非零；detach后即使loss可计算，也不再通过这个机制更新目标encoder。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.15968v1">原论文</a> · <a href="../../../../foundation-models/2611.15968-duojepa/">实现解读</a> · <a href="#qa-243261331eab12a7">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:gslm2" data-paper-title="GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling 多模态大模型 Meta Superintelligence Labs 2026-10-31 单流口语语言模型通常只量化一个编码器层，可能漏掉其他层的音位和语义信息。GSLM2 的 SpidR 2.0 用可微预测头训练多层语音单元。语言侧先对齐各层在相同音频帧上的单元，再保留任一流变化的位置；各流 embedding 的平均输入共享时序 Transformer。单流输出头只使用过去的多流历史，对本流下个单元打分；生成头另外按顺序生成同一时间位置的多个流，后生成的流可依赖本位置先生成的流。原文训练结合单流损失、转移级自蒸馏与多流生成损失，三项均不在本地切片中。 完整实验成本过高，不复现（审查 DONE）。L1 机制诊断。L1 机制诊断。本地只处理外部给定的离散单元与目标对数概率，不运行语音模型；完整实验成本过高，不复现（审查 DONE）。cross_stream_deduplicate 接收时间×流的离散 ID，返回零基保留帧下标和多流元组。transition_log_score 接收已对齐的元组与每个流头对其实际单元的有限非正对数概率，返回逐流均值、计数和等权总分。输入概率须来自外部共享历史条件；函数不计算模型 logits，不接收成对样本的正确标签，也不包含语音编码、解码或基准运行。  语音多模态 多流语音单元与打分 多模态 跨模态对齐：表征、连接器与监督 GSLM2 为什么不能先对每个语音流各自去重，再按列拼接？ 每流发生变化的原音频帧不一定相同。各自去重后，第 k 项可能来自不同时间；GSLM2 保留变化帧并集，在每个保留时刻读取所有流的值，从而让后续共享时序主干看到真实对齐的元组。 教学例：A=[1,1,2]、B=[4,5,5]，正确保留 (1,4)、(1,5)、(2,5)。各自去重再拼接会造出 (2,5) 在第二格，丢掉真实的 (1,5)。 2026-11-07">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
 <span id="paper-multimodal-models-gslm2-6098f74c" class="ar-learning-paper-anchor"></span>
@@ -941,6 +1100,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>例如为 Hausa 微调使用 Arabic 标记，不代表输入真被翻译成阿拉伯语，也不构成无需训练就支持 Hausa 的证据。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、复现边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.16287v1">原论文</a> · <a href="../../../../multimodal-models/2604.16287-naijas2st/">实现解读</a> · <a href="#qa-4223dcd722be9bd5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:spectral-ghost" data-paper-title="Spectral Ghost in Representation Learning: A Unified View from Component Analysis to Self-Supervised Learning" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Spectral Ghost in Representation Learning: A Unified View from Component Analysis to Self-Supervised Learning 基础模型 Georgia Tech 2026-01-28 把自监督方法仅分为contrastive/non-contrastive，无法解释表示对下游任务何时充分，也无法推断batch大小的作用。本文按表示参数化和目标估计方式组织谱分解、energy、denoising、nonlinear、latent-variable及multimodal路线，既联系已有方法，也推导新目标。它不是实证排行榜，也不是只有观点的综述。§2—3、§9 理论资料收录，未实现。按固定v4审读；原文把实证消融留作未来工作，本地没有训练、指标或GPU实验，不虚构“高成本原文实验”。仅资料收录，不实现、不排队、不自动重试。后续若独立实施某一目标，应单独声明独立采样、非零/正值约束、有限秩及比较预算，再验证算术与梯度；本轮没有授权或声称完成该实验。该状态为review_only_theory / no_empirical_experiment，不是高成本完整实验延期。  JEPA与世界模型 自监督目标与谱表示理论 多模态 跨模态对齐：表征、连接器与监督 为什么Spectral Ghost保留v1 Google署名历史，却按v4 Georgia Tech聚合？ 机构证据属于具体版本。v1给Bo Dai和Dale列Google DeepMind在前，审读v4则只列Georgia Tech、Harvard与UAlberta；名字相同不能替代当前版本署名。 教学例：11月10日v4更新不是新首发；首次日期仍是1月28日，也不能从致谢Google研究员反推作者机构。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<span id="paper-foundation-models-spectral-ghost-9e1ee7a3" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-34b12b15fb5f7c23">为什么Spectral Ghost保留v1 Google署名历史，却按v4 Georgia Tech聚合？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aspectral-ghost">Spectral Ghost in Representation Learning: A Unified View from Component Analysis to Self-Supervised Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Georgia Tech</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>机构证据属于具体版本。v1给Bo Dai和Dale列Google DeepMind在前，审读v4则只列Georgia Tech、Harvard与UAlberta；名字相同不能替代当前版本署名。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：11月10日v4更新不是新首发；首次日期仍是1月28日，也不能从致谢Google研究员反推作者机构。</p>
+<p class="ar-learning-sources">依据：论文信息、背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.20154v4">原论文</a> · <a href="../../../../foundation-models/2601.20154-spectral-ghost/">实现解读</a> · <a href="#qa-34b12b15fb5f7c23">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:spectral-ghost" data-paper-title="Spectral Ghost in Representation Learning: A Unified View from Component Analysis to Self-Supervised Learning" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Spectral Ghost in Representation Learning: A Unified View from Component Analysis to Self-Supervised Learning 基础模型 Georgia Tech 2026-01-28 把自监督方法仅分为contrastive/non-contrastive，无法解释表示对下游任务何时充分，也无法推断batch大小的作用。本文按表示参数化和目标估计方式组织谱分解、energy、denoising、nonlinear、latent-variable及multimodal路线，既联系已有方法，也推导新目标。它不是实证排行榜，也不是只有观点的综述。§2—3、§9 理论资料收录，未实现。按固定v4审读；原文把实证消融留作未来工作，本地没有训练、指标或GPU实验，不虚构“高成本原文实验”。仅资料收录，不实现、不排队、不自动重试。后续若独立实施某一目标，应单独声明独立采样、非零/正值约束、有限秩及比较预算，再验证算术与梯度；本轮没有授权或声称完成该实验。该状态为review_only_theory / no_empirical_experiment，不是高成本完整实验延期。  JEPA与世界模型 自监督目标与谱表示理论 多模态 跨模态对齐：表征、连接器与监督 无偏VICReg二次项为什么排除i=j并除以B(B−1)？ 同样本项涉及四阶矩，会让plug-in平方协方差多出依赖B的偏差。独立样本对的U-statistic排除对角并按有序不同样本对计数，在论文采样假设下无偏。 教学例：B=2时只有(1,2)与(2,1)两项；把(1,1)、(2,2)也加进去再除4就变回不同的估计器。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-42ca4085fd9920b9">无偏VICReg二次项为什么排除i=j并除以B(B−1)？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aspectral-ghost">Spectral Ghost in Representation Learning: A Unified View from Component Analysis to Self-Supervised Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Georgia Tech</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>同样本项涉及四阶矩，会让plug-in平方协方差多出依赖B的偏差。独立样本对的U-statistic排除对角并按有序不同样本对计数，在论文采样假设下无偏。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：B=2时只有(1,2)与(2,1)两项；把(1,1)、(2,2)也加进去再除4就变回不同的估计器。</p>
+<p class="ar-learning-sources">依据：核心机制与公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.20154v4">原论文</a> · <a href="../../../../foundation-models/2601.20154-spectral-ghost/">实现解读</a> · <a href="#qa-42ca4085fd9920b9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:spectral-ghost" data-paper-title="Spectral Ghost in Representation Learning: A Unified View from Component Analysis to Self-Supervised Learning" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Spectral Ghost in Representation Learning: A Unified View from Component Analysis to Self-Supervised Learning 基础模型 Georgia Tech 2026-01-28 把自监督方法仅分为contrastive/non-contrastive，无法解释表示对下游任务何时充分，也无法推断batch大小的作用。本文按表示参数化和目标估计方式组织谱分解、energy、denoising、nonlinear、latent-variable及multimodal路线，既联系已有方法，也推导新目标。它不是实证排行榜，也不是只有观点的综述。§2—3、§9 理论资料收录，未实现。按固定v4审读；原文把实证消融留作未来工作，本地没有训练、指标或GPU实验，不虚构“高成本原文实验”。仅资料收录，不实现、不排队、不自动重试。后续若独立实施某一目标，应单独声明独立采样、非零/正值约束、有限秩及比较预算，再验证算术与梯度；本轮没有授权或声称完成该实验。该状态为review_only_theory / no_empirical_experiment，不是高成本完整实验延期。  JEPA与世界模型 自监督目标与谱表示理论 多模态 跨模态对齐：表征、连接器与监督 contrastive与non-contrastive标签能决定是否需要大batch吗？ 不能。要看估计目标：平方对比目标可无偏，ranking NCE对固定负例数优化一致surrogate，而非对比的协方差plug-in也可能有偏。模型错设下，负例数还可改变最优点。 教学例：给一个有偏协方差惩罚改名为non-contrastive，不会消除同样本四阶项；无偏也不保证方差小。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-c6beae28a35e431a">contrastive与non-contrastive标签能决定是否需要大batch吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aspectral-ghost">Spectral Ghost in Representation Learning: A Unified View from Component Analysis to Self-Supervised Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Georgia Tech</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。要看估计目标：平方对比目标可无偏，ranking NCE对固定负例数优化一致surrogate，而非对比的协方差plug-in也可能有偏。模型错设下，负例数还可改变最优点。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：给一个有偏协方差惩罚改名为non-contrastive，不会消除同样本四阶项；无偏也不保证方差小。</p>
+<p class="ar-learning-sources">依据：核心机制与公式、论文结果与证据边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.20154v4">原论文</a> · <a href="../../../../foundation-models/2601.20154-spectral-ghost/">实现解读</a> · <a href="#qa-c6beae28a35e431a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:spectral-ghost" data-paper-title="Spectral Ghost in Representation Learning: A Unified View from Component Analysis to Self-Supervised Learning" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="Spectral Ghost in Representation Learning: A Unified View from Component Analysis to Self-Supervised Learning 基础模型 Georgia Tech 2026-01-28 把自监督方法仅分为contrastive/non-contrastive，无法解释表示对下游任务何时充分，也无法推断batch大小的作用。本文按表示参数化和目标估计方式组织谱分解、energy、denoising、nonlinear、latent-variable及multimodal路线，既联系已有方法，也推导新目标。它不是实证排行榜，也不是只有观点的综述。§2—3、§9 理论资料收录，未实现。按固定v4审读；原文把实证消融留作未来工作，本地没有训练、指标或GPU实验，不虚构“高成本原文实验”。仅资料收录，不实现、不排队、不自动重试。后续若独立实施某一目标，应单独声明独立采样、非零/正值约束、有限秩及比较预算，再验证算术与梯度；本轮没有授权或声称完成该实验。该状态为review_only_theory / no_empirical_experiment，不是高成本完整实验延期。  JEPA与世界模型 自监督目标与谱表示理论 多模态 跨模态对齐：表征、连接器与监督 为什么本篇不写成本过高不复现，而写理论资料收录？ 固定v4没有报告需要复跑的统一实证矩阵，并明确把相关消融留作未来。不能给不存在的实验编造模型、数据或GPU成本。本轮只有理论解读，无源码、指标、GPU回执或自动任务。 教学例：公式提出一个新目标，不等于作者已训练某个8B模型；没有原文训练配置就不能伪造一张延期实验表。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 跨模态对齐：表征、连接器与监督</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-9e0c23332fa919e8">为什么本篇不写成本过高不复现，而写理论资料收录？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aspectral-ghost">Spectral Ghost in Representation Learning: A Unified View from Component Analysis to Self-Supervised Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Georgia Tech</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>固定v4没有报告需要复跑的统一实证矩阵，并明确把相关消融留作未来。不能给不存在的实验编造模型、数据或GPU成本。本轮只有理论解读，无源码、指标、GPU回执或自动任务。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：公式提出一个新目标，不等于作者已训练某个8B模型；没有原文训练配置就不能伪造一张延期实验表。</p>
+<p class="ar-learning-sources">依据：论文结果与证据边界、本地范围；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2601.20154v4">原论文</a> · <a href="../../../../foundation-models/2601.20154-spectral-ghost/">实现解读</a> · <a href="#qa-9e0c23332fa919e8">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:avmeme-exam" data-paper-title="AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs&#x27; Contextual and Cultural Knowledge and Thinking" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/alignment-interfaces" data-search="AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs&#x27; Contextual and Cultural Knowledge and Thinking 多模态大模型 Columbia University 2026-01-25 常见语音基准偏向转写与声学事件，难以判断模型是否理解声音在特定社区中的隐喻、幽默和使用场景。AVMeme Exam 收集多语言、多文化短音视频，以选择题同时考察音频、语言、情境、情绪、流行原因、应用方式和世界知识。完整集 meme-full 有 1,032 条，移除文本捷径后的主集 meme-main 有 846 条。关键并不只是新增选择题。作者用三个纯文本模型检测无需听音频即可答对的 text_cheat 样本；主集过滤这些样本。 完整 19 模型矩阵、人工复核和多后端多模态推理不在本轮单卡预算内：成本过高，不复现（审查 DONE）。诊断只记录过滤、屏蔽、非法输出等协议计数，不发布其“模型准确率”。L0 评测协议接口，不是多模态模型能力复现。本地实现选项重排、文本捷径过滤、视觉捷径屏蔽与分组计分；没有下载受访问条件约束的媒体数据，也没有调用被测模型。Item 保留评测端答案与捷径标签；prepare 返回分离的 ActorRequest 与 ScoringKey。被测回调只能收到题目、重排选项及匿名媒体格式合同，不收到身份、原始标题、来源 URL、摘要、转写、分析标签或答案。这个类型边界不是安全沙箱；  跨模态评测与检索 文化理解 多模态 跨模态对齐：表征、连接器与监督 为什么AVMeme Exam不能只在meme-full上比较模型？ 完整集中有题目可能不听声音也能猜对。作者用三个纯文本模型识别text_cheat，再形成846条主集；完整集1032条与主集回答不同问题，必须注明分母，不能混报。 教学例：题目文本已写出流行语出处，纯文本猜对不代表识别了音轨。 2026-11-13">

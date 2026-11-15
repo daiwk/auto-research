@@ -1,0 +1,53 @@
+{
+  "domain": "post-training",
+  "reviewed_version": "v1",
+  "adapter": null,
+  "intake_class": "new_first_publication",
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "key": "bait-reward-defense",
+  "title": "Bait: Mitigating Harmful Agentic Reinforcement Learning via Probing Reward Function",
+  "paper_url": "https://arxiv.org/abs/2611.16369v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.16369v1",
+  "detail_path": "post-training/2611.16369-bait-reward-defense/README.md",
+  "topic": [
+    "奖励与信用分配",
+    "防御性奖励探测与符号变换"
+  ],
+  "first_author": "Tiansheng Huang",
+  "first_author_affiliation": "Georgia Institute of Technology",
+  "published": "2026-11-12",
+  "published_at": "2026-11-12T06:34:34Z",
+  "code": "https://github.com/git-disl/Bait",
+  "code_status": "作者仓库已公开，只读核验固定SHA；不执行有害probe、攻击或上游训练系统。训练器仍有旧scapegoat路径，端到端可运行性未确认。",
+  "code_license": null,
+  "upstream_revision": "e776d200b86cff0872370f46fdb52e08bf23bcf9",
+  "priority": "P0",
+  "priority_reason": "原文合作者Ananth Balashankar和Virat Shejwalkar来自Google DeepMind，Google相关优先；可分离防御性数值组件。",
+  "verified_priority_organizations": [
+    "Google"
+  ],
+  "local_operator": "auto_research.post_training.bait_reward_defense.transform_rewards",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.bait_reward_defense import diagnostic; print(diagnostic(42))'",
+  "requires_gpu_validation": false,
+  "cost_assessment": {
+    "source": "固定v1 §4.2 Eqs.3–5、§6.1；https://arxiv.org/html/2611.16369v1",
+    "model_scale": "Qwen2.5VL3B、Qwen3VL2/4/8B、1.5B Agent；Qwen3-8B judge及GPT-OSS20B奖励依赖",
+    "data_scale": "group24、16prompts/rollout；EZPoints50epochs、WebShop200、Alfworld160，多臂3seeds",
+    "paper_configuration": "每次run两张H200；完整probe训练、Agent环境与防御/攻击矩阵",
+    "estimated_cost_basis": "两H200/次和多模型长epoch超单卡低成本预算；约20美元的单API攻击不是整篇实验成本",
+    "available_resource": "本地Mac或单张NVIDIA A100/A30",
+    "decision": "成本过高，不复现（审查DONE）；仅CPU防御reward-gap/sign-flip Eqs.3–5，不生成probe/攻击/有害文本，不下载、不训练、不自动重试"
+  },
+  "summary": "比较防御私有probe与policy回答的平均reward，差值≥0时翻转整组并剔除probe项。仅实现Eqs.3–5；Eq6与Algorithm1的std口径不一致，不猜优势或完整训练。"
+}

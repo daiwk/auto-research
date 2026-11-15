@@ -208,6 +208,7 @@
 - 2026-10-01 · 一作：Caiqi Zhang · [VeriHarness: Scaling Agentic Verification for Long-Horizon Tasks](../2610.00972-veriharness/README.md)（`veriharness`）：同一基础模型得到 workspace、证据工具和可复用验证技能；disagreement resolver 查证冲突 claim，consensus challenger 主动质疑共同 claim 和遗漏要求。
 - 2026-09-17 · 一作：Jaehyun Nam · [ScientistTwo: Pioneering the Human Knowledge Frontier with Autonomous AI](../2609.19644-scientist-two/README.md)（`scientist-two`）：ScientistTwo 面向给定科学问题的持续研究：先提炼已有方法局限，再生成并筛选新颖想法；在复现的子集基线上做工程迭代，只有被判为 Good 的想法才升到全量 benchmark。新一轮想法同时利用成功与失败日志，并加入尚未尝试的高新颖度种子，避免只围绕早期赢家局部搜索。
 - 2026-07-30 · 一作：Yijia Xiao · [FinanceHarness: Autonomous Financial Deep Research Framework](../2607.27853-finance-harness-protocol/README.md)（`finance-harness-protocol`）：FinanceHarness 围绕时点限定的搜索环境组织金融工具、分层加载技能与报告证据；FinanceGym 再把评分分为截止日前可检索的证据和只能在截止日后核实的预测。Agent 只能看到问题与截止日，thesis、评分 rubric、未来证据留在提交后的评测器。
+- 2026-06-02 · 一作：Po-Nien Kung · [LEAP: Supercharging LLMs for Formal Mathematics with Agentic Frameworks](../2606.03303-leap-formal-math/README.md)（`leap-formal-math`）：能写出看似合理的数学论证，不代表一次就能生成Lean核通过的长证明。LEAP先直接尝试非形式论证→Lean代码→编译器反馈修订，失败后提出blueprint，再把lemma依赖写进持久AND–OR DAG。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-05-25 · 一作：Rui Meng · [ScientistOne: Towards Human-Level Autonomous Research via Chain-of-Evidence](../2605.26340-scientist-one/README.md)（`scientist-one`）：研究产物看起来完整，仍可能引用虚构、分数无法复算或方法描述与代码不同。CoE 将主张连到可核验来源；独立 I1–I4 检查分数、规则、引用和方法/代码一致性。
 - 2026-04-06 · 一作：Yiwen Song · [PaperOrchestra: A Multi-Agent Framework for Automated AI Research Paper Writing](../2604.05018-paperorchestra/README.md)（`paperorchestra`）：PaperOrchestra 用 Outline、Plotting、Literature Review、Section Writing、Content Refinement 五个 Agent，把零散想法和实验日志转成含文献与图表的 LaTeX 稿件。大纲之后图示与文献检索并行，引用经过实体和时间截止核验，最终根据多维评价接受或回退修订；系统不负责替作者发明或执行新实验。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-02-08 · 一作：Minbeom Kim · [CausalArmor: Efficient Indirect Prompt Injection Guardrails via Causal Attribution](../2602.07918-causal-armor/README.md)（`causal-armor`）：在高权限动作前，分别去掉用户请求与不可信工具段，比较同一个动作的似然变化。工具段的归因高于用户时，只清洗命中段，再遮蔽首个命中点后的 assistant 内容并重新提案。
@@ -247,6 +248,7 @@
 ## Google Research
 
 - 2026-10-17 · 一作：Zachary Cutts · [Aptamers as a sandbox for lab-in-the-loop agentic molecular discovery](../2610.24806-aptamer-lab-loop/README.md)（`aptamer-lab-loop`）：该研究把计算设计与真实实验测量放进多轮反馈闭环，让Agent利用成功和失败证据调整下一轮策略。关键不是把Agent多跑几轮，而是实物测量可以否定计算评分；论文显示一些预测代理与实际测量不一致。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+- 2026-09-14 · 一作：Honghao Lin · [Stellar Colosseum: A Many-Agent Harness for Long-Horizon Research in Mathematics and Theoretical Computer Science](../2609.15983-stellar-colosseum/README.md)（`stellar-colosseum`）：长证明失败不仅是单步推理不够好，还可能路线不成熟、子问题假设不匹配、跨节依赖循环，或把已被攻击的结论传下去。Colosseum先探索策略，经readiness gate确定路线能否支持稳定的证明结构，再分解为依赖DAG；独立节并行求解，局部失败重试，完整文档再全局核查，必要时重新探索。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2025-12-03 · 一作：Jonathan Berant · [Learning Steerable Clarification Policies with Collaborative Self-play](../2512.04068-clarification-sgp/README.md)（`clarification-sgp`）：同一条含糊问题可以直接猜、列出多种解释，或先提问。最优方式依赖用户能接受的轮次与篇幅成本。
 
 ## Google Research / Hebrew University of Jerusalem / University of Cambridge
@@ -462,6 +464,7 @@
 
 ## New York University
 
+- 2026-11-12 · 一作：Doyoung Kim · [Experience-Handoff Reinforcement Learning for Recursive Self-Improvement](../2611.16409-ace-rl/README.md)（`ace-rl`）：普通结果RL把尝试压成一个分数，丢失错误日志等细粒度经验；固定ACE harness虽能写playbook，却没有训练“写什么经验”。ACE-RL固定scaffold，以一个共享模型分别扮演actor、reflector和curator，并让编辑后全新环境actor的回报评价交接物，而不是让judge主观评分反思文本。
 - 2026-09-03 · 一作：Chenqian Le · [What Does Multi-Harness RL Learn? Credit Assignment and Portability in Coding Agents](../2609.04518-multi-harness-rl/README.md)（`multi-harness-rl`）：多 Harness RL 同时改变了执行环境多样性和 GRPO 的分组边界，难以判断增益来源。论文冻结相同 task-harness 轨迹，只比较组内和跨 harness advantage，并用训练中未见的最小 harness 审计能力是否真正迁移。
 
 ## Northeastern University
@@ -593,6 +596,10 @@
 - 2026-08-27 · 一作：Dewu Zheng · [SWE-Prime: Fewer Trajectories, Better Performance](../2608.27449-swe-prime/README.md)（`swe-prime`）：成功轨迹仍可能冗余、危险或不可学习。SWE-Prime 先按过程、结果和代表性选轨迹，再按贡献、可学习性和风险选语义段；上下文完整保留，但只对选中段计算 SFT loss。
 - 2026-08-04 · 一作：Xiaolong Sun · [VerMem](../2608.03137-vermem/README.md)（`vermem`）：长期记忆、活动上下文与 episodic history 往往分开优化，轨迹奖励无法判断单次记忆操作是否正确。VerMem 用一个策略管理三类状态和七种原子操作，以 local verifier 审核状态转移、global verifier 审核证据一致性。
 
+## Tel Aviv University
+
+- 2026-11-11 · 一作：Daniela Gottesman · [MULTILOOP: Evolving Multi-Agent Harnesses for Complex Information-Seeking Tasks](../2611.15754-multiloop/README.md)（`multiloop`）：同样的底层模型，提示、工具、子Agent通信和终止策略不同，效果也可能不同。MULTILOOP检验自动coding agent能否从执行轨迹中诊断并修复多Agent系统：优化器读取训练分数、orchestrator／subagent全部轨迹以及既往代码改动，更新harness，重新评估后继续。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## Tencent
 
 - 2026-10-14 · 一作：Guoyang Xu · [What Coding Agents Leave Unsaid: Measuring Task-State Gaps Between Execution and Reports](../2610.20003-ctxgap/README.md)（`ctxgap`）：编码 Agent 的最终报告可能“听起来完整”，却不足以让用户恢复真实任务状态。CTXGAP 不用任务完成率替代信息质量，而是从执行记录抽取原子事实，生成有参考答案的探针，在**同一问题**上比较只读累积报告的观察者 $U$、读取完整执行视图的观察者 $T_{full}$，以及直接询问执行 Agent 的条件。
@@ -638,6 +645,10 @@
 ## The University of Texas at Austin
 
 - 2026-10-01 · 一作：Ahmad Yehia · [Mem++: Non-Destructive Memory for Long-Term Organizational LLM Agents](../2610.02002-mem-plus-plus/README.md)（`mem-plus-plus`）：写入时完整保留文档、日期和作者，不调用生成模型做不可逆摘要；读取时先按问题时间过滤，再融合 lexical 与 semantic ranking。
+
+## The University of Tokyo
+
+- 2026-11-12 · 一作：Zimo Xu · [CapLite: Prompt-Injection Defense for Small Language Model Agents without Model-Written Security Artifacts](../2611.17115-caplite/README.md)（`caplite`）：小模型既可能被提示注入欺骗，也可能生成本就错误的权限策略。CapLite把安全决策从模型生成物中移出：可信用户请求与工具schema决定权限，Planner在看到任何工具结果前提交写调用，之后模型只能从提取出的候选ID里绑定authority值，代码在真实副作用前再次校验。
 
 ## Tianjin University
 
@@ -824,6 +835,10 @@
 
 - 2026-08-20 · 一作：Dayang Liang · [SAPO: Single-Rollout Autoregressive Policy Optimization for Agentic Reinforcement Learning](../2608.19842-sapo/README.md)（`sapo`）：同一自回归骨干在不同因果边界输出 policy/value，结合 PPO、on-policy SARSA 和 trajectory GAE。
 - 2026-08-18 · 一作：Dayang Liang · [PlanPO: Group Planning-Aware Policy Optimization for Multi-Turn Agentic LLMs](../2608.17289-planpo/README.md)（`planpo`）：在成功轨迹内同时比较 trajectory turn 数和单 turn response 长度，形成 coarse-to-fine planning advantages。
+
+## Yale University
+
+- 2026-11-12 · 一作：Peiwen Li · [CoReMem: Cost-Internalizing Memory for Successive Coding Tasks with Prospective Valuation](../2611.17316-coremem/README.md)（`coremem`）：连续编码任务不是把独立SWE问题逐题重置：前一任务写入的代码和文本记忆都会影响下一任务。CoReMem要求在下一任务出现前写记忆，再从完全相同的继承仓库状态运行有／无记忆分支，以未来任务的解决率与工作量评价记忆，而不是评价摘要“看起来是否有用”。
 
 ## Zhejiang University
 

@@ -7,7 +7,7 @@ hide:
 
 # 会预测下一幕，还不等于会行动或保持同一个世界
 
-[多模态](../index.md) · 更新 2026-11-12 · 27 篇主题资料 / 11 篇重点对照
+[多模态](../index.md) · 更新 2026-11-15 · 28 篇主题资料 / 12 篇重点对照
 
 世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。 SWIM从离线动作可预测性学习状态坐标的相对权重，训练期校准latent距离，部署时不向规划器增加真实状态。
 
@@ -36,6 +36,7 @@ hide:
 | [RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval](../../../multimodal-models/2611.14496-rs-jepa/README.md) · [原始来源](https://arxiv.org/abs/2611.14496)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 利用Vision Mamba扫描次序形成无像素编辑视图，以直通加反梯度hard half-split增加隐藏预测难度，并让四个排除twin的传感器邻域分布对齐detached共识。 | 同主干stop-gradient target不是EMA教师；跨传感器检索表征不等于动作条件未来预测或策略。局部扫描/梯度/邻域核不含Vim、完整CVA/predictor或遥感检索成绩，四V100完整实验不复现。 |
 | [OnlyAct: Extracting Action Representations from Foundation Models for World Models](../../../multimodal-models/2611.14420-onlyact/README.md) · [原始来源](https://arxiv.org/abs/2611.14420)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 在预训练V-JEPA2联合帧表征上，以场景交换正例及同视频非重叠hard negative适配动作几何，再冻结供世界模型使用。 | RS-JEPA用扫描视图和跨传感器邻域共识学习场景检索；OnlyAct希望保留动作、抑制场景。共享JEPA来源不代表优化目标相同。本地两者均只有独立公式/梯度L1，不提供图像检索或动作迁移能力排名。 |
 | [Personalized health coaching via coachable health age and counterfactual wearable trajectories](../../../multimodal-models/2611.08568-sensorwm-planning/README.md) · [原始来源](https://arxiv.org/abs/2611.08568)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界 | 动作条件可穿戴JEPA以状态依赖线性算子递推潜位移，再以未来status-quo对照、个体努力归一化收益排序外部候选。 | 完整论文用私有生理数据建模；本地只实现Eq55–56排序，不产生预测、不执行动作、不给医疗建议。与LeWAM实际学习策略/动力学及闭环不同，数学排序不等于世界模型控制或临床安全。 |
+| [Back to Pixels: Lifting Latent Video Diffusion into Pixel Space](../../../multimodal-models/2611.17336-pixvid/README.md) · [原始来源](https://arxiv.org/abs/2611.17336v1)<br>章节：背景与主要改动、核心机制与公式、论文离线与线上效果 | 以像素-latent线性对齐、时间校准和detailer把预训练视频DiT迁移到pixel空间，处理高分辨率细节与跨帧一致性；本轮仅资料收录。 | WOVEN用动作条件rollout形成转移监督并训练MLLM回答；PixVid改变生成器的表示与计算路径。更清晰的生成不自动意味着因果/动作正确，也不是选择题准确率。 |
 
 </div>
 
@@ -82,6 +83,12 @@ RS-JEPA希望不同传感器检索到同一场景，并让其邻域关系一致�
 LeWAM在联合表征与动作flowmatching后，用冻结动力学rollout、动作梯度优化和环境反馈闭环；其现有本地结果仍是非holdout诊断，未测到规划优势。SensorWM则从观察性可穿戴数据学习条件轨迹，并按个体行为变动尺度把预测收益转成候选比值。它明确不识别因果干预效果；离线教练偏好也不是实际健康结局。二者都需区分预测、选择、执行和效果证据，本地SensorWM排序更不能替代缺失的模型。
 
 对照来源：[sensorwm-planning](../../../multimodal-models/2611.08568-sensorwm-planning/README.md) · [lewam](../../../reproductions/2610.12818-lewam/README.md)
+
+### 生成视频与学习状态转移不是同一次验收
+
+视频生成器可以作为下游转移训练的数据源，但要分开验证视觉质量、动作条件忠实度、状态一致性和学习后的推理能力。PixVid完整14B/130万clip矩阵不运行；WOVEN既有小样本SFT负结果也不用于推断PixVid的收益。两者不构成本地联合系统。
+
+对照来源：[pixvid](../../../multimodal-models/2611.17336-pixvid/README.md) · [woven](../../../reproductions/2610.12417-woven/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -167,9 +174,23 @@ LeWAM在联合表征与动作flowmatching后，用冻结动力学rollout、动�
 
     对照来源：[sensorwm-planning](../../../multimodal-models/2611.08568-sensorwm-planning/README.md) · [lewam](../../../reproductions/2610.12818-lewam/README.md)
 
+### 把WOVEN的视频生成器替换成PixVid，能直接说状态推理更强吗？ {#cross-nov15-pixvid}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。需先测生成对动作和状态的忠实度，再用冻结数据协议训练/评测下游模型；画面更清晰只覆盖一个轴。本轮没有执行这样的组合。
+
+    **教学例子：** 更清晰地生成一个错误动作结果，仍会把错误监督传给下游转移问答。
+
+    对照来源：[pixvid](../../../multimodal-models/2611.17336-pixvid/README.md) · [woven](../../../reproductions/2610.12417-woven/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-15** · 补入固定版本方法、低成本组件或明确资料收录，分开原文结果、本地诊断及高成本不复现范围。
+
+涉及：[pixvid](../../../multimodal-models/2611.17336-pixvid/README.md) · [woven](../../../reproductions/2610.12417-woven/README.md)
 
 **2026-11-12** · 加入Google可穿戴世界模型案例，区分动作条件观察预测、个体努力候选排序与实际控制/因果健康收益。本地CPU三seed仅验证Eq55–56数学，完整私有JEPA与临床/API实验高成本不复现。
 
@@ -195,7 +216,7 @@ LeWAM在联合表征与动作flowmatching后，用冻结动力学rollout、动�
 
 覆盖 22 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 27 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 28 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -226,6 +247,7 @@ LeWAM在联合表征与动作flowmatching后，用冻结动力学rollout、动�
 - [RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval](../../../multimodal-models/2611.14496-rs-jepa/README.md)
 - [OnlyAct: Extracting Action Representations from Foundation Models for World Models](../../../multimodal-models/2611.14420-onlyact/README.md)
 - [Personalized health coaching via coachable health age and counterfactual wearable trajectories](../../../multimodal-models/2611.08568-sensorwm-planning/README.md)
+- [Back to Pixels: Lifting Latent Video Diffusion into Pixel Space](../../../multimodal-models/2611.17336-pixvid/README.md)
 
 </details>
 

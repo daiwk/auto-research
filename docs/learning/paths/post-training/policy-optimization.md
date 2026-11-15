@@ -7,7 +7,7 @@ hide:
 
 # 策略优化：谁在采样，谁在被更新
 
-[LLM 后训练](index.md) / 232 个问题 · 58 篇论文
+[LLM 后训练](index.md) / 240 个问题 · 60 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,115 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">232 个问题 · 58 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">240 个问题 · 60 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:safety-budget-cgrpo" data-paper-title="Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models LLM 后训练 Lanzhou University 2026-11-12 给 GRPO 增加安全预算并不足够：scorer 分数的均值偏差会使 dual controller 读错约束，且对已加权总奖励作组内标准化可能消掉 multiplier 的梯度尺度。本文拆成两条通道：原始概率保留 base reward 的组内排序；用独立 judge 在训练轨迹上拟合的单调校准映射，只服务于 penalty 与预算控制。校准图不能直接挪进 base reward，因为 isotonic 的平坦区会抹掉原始相对分数。保持 multiplier 的一种方案是只中心化、不按总奖励标准差缩放； 完整安全训练成本过高，不复现（审查 DONE）。CPU 三种子机制诊断；L1 CPU 校准 / 奖励 / dual-state 算术组件，diagnostic only。没有 VLM、scorer、judge 或 RL trainer；完整安全训练成本过高，不复现（审查 DONE）。fit_isotonic(..., split=&quot;train&quot;)只接受训练声明，验证/测试 split 被拒绝；但源数据 provenance 仍由调用方负责，字符串不是泄漏防护的充分证明。  策略优化 安全预算与双通道控制 LLM 后训练 策略优化：谁在采样，谁在被更新 安全scorer排序正确，为什么预算仍可能读错？ 排序只比较相对分数，预算却将概率均值与目标率比较。单调变换可保持排序而移动均值偏差，使dual乘子过早归零或一直饱和。真实校准还依赖训练轨迹标签质量，不能由单调性推出。 教学例：把所有概率平方通常保持排序，却降低均值；原本需要约束的组可能被控制器误认为已在预算内。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<span id="paper-post-training-safety-budget-cgrpo-14f718cd" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-245bd6035077401a">安全scorer排序正确，为什么预算仍可能读错？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Asafety-budget-cgrpo">Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Lanzhou University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>排序只比较相对分数，预算却将概率均值与目标率比较。单调变换可保持排序而移动均值偏差，使dual乘子过早归零或一直饱和。真实校准还依赖训练轨迹标签质量，不能由单调性推出。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把所有概率平方通常保持排序，却降低均值；原本需要约束的组可能被控制器误认为已在预算内。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.16628v1">原论文</a> · <a href="../../../../post-training/2611.16628-safety-budget-cgrpo/">实现解读</a> · <a href="#qa-245bd6035077401a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:safety-budget-cgrpo" data-paper-title="Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models LLM 后训练 Lanzhou University 2026-11-12 给 GRPO 增加安全预算并不足够：scorer 分数的均值偏差会使 dual controller 读错约束，且对已加权总奖励作组内标准化可能消掉 multiplier 的梯度尺度。本文拆成两条通道：原始概率保留 base reward 的组内排序；用独立 judge 在训练轨迹上拟合的单调校准映射，只服务于 penalty 与预算控制。校准图不能直接挪进 base reward，因为 isotonic 的平坦区会抹掉原始相对分数。保持 multiplier 的一种方案是只中心化、不按总奖励标准差缩放； 完整安全训练成本过高，不复现（审查 DONE）。CPU 三种子机制诊断；L1 CPU 校准 / 奖励 / dual-state 算术组件，diagnostic only。没有 VLM、scorer、judge 或 RL trainer；完整安全训练成本过高，不复现（审查 DONE）。fit_isotonic(..., split=&quot;train&quot;)只接受训练声明，验证/测试 split 被拒绝；但源数据 provenance 仍由调用方负责，字符串不是泄漏防护的充分证明。  策略优化 安全预算与双通道控制 LLM 后训练 策略优化：谁在采样，谁在被更新 为什么PAV映射只进penalty和dual，不进base reward？ isotonic映射可能有平坦区，把本来不同的raw分数变成同值。保留原始base reward维护组内相对信号，映射只修正惩罚及约束均值的level。本地合并相同score的加权标签再作PAV，并明确阶梯插值约定。 教学例：原始ph=.1与.2都映到1/3时，harmful base仍是.9与.8，不能一并改成2/3。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-7b3af92bba441285">为什么PAV映射只进penalty和dual，不进base reward？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Asafety-budget-cgrpo">Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Lanzhou University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>isotonic映射可能有平坦区，把本来不同的raw分数变成同值。保留原始base reward维护组内相对信号，映射只修正惩罚及约束均值的level。本地合并相同score的加权标签再作PAV，并明确阶梯插值约定。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：原始ph=.1与.2都映到1/3时，harmful base仍是.9与.8，不能一并改成2/3。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.16628v1">原论文</a> · <a href="../../../../post-training/2611.16628-safety-budget-cgrpo/">实现解读</a> · <a href="#qa-7b3af92bba441285">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:safety-budget-cgrpo" data-paper-title="Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models LLM 后训练 Lanzhou University 2026-11-12 给 GRPO 增加安全预算并不足够：scorer 分数的均值偏差会使 dual controller 读错约束，且对已加权总奖励作组内标准化可能消掉 multiplier 的梯度尺度。本文拆成两条通道：原始概率保留 base reward 的组内排序；用独立 judge 在训练轨迹上拟合的单调校准映射，只服务于 penalty 与预算控制。校准图不能直接挪进 base reward，因为 isotonic 的平坦区会抹掉原始相对分数。保持 multiplier 的一种方案是只中心化、不按总奖励标准差缩放； 完整安全训练成本过高，不复现（审查 DONE）。CPU 三种子机制诊断；L1 CPU 校准 / 奖励 / dual-state 算术组件，diagnostic only。没有 VLM、scorer、judge 或 RL trainer；完整安全训练成本过高，不复现（审查 DONE）。fit_isotonic(..., split=&quot;train&quot;)只接受训练声明，验证/测试 split 被拒绝；但源数据 provenance 仍由调用方负责，字符串不是泄漏防护的充分证明。  策略优化 安全预算与双通道控制 LLM 后训练 策略优化：谁在采样，谁在被更新 加入安全lambda后再作标准GRPO组std，为什么控制强度可能没了？ 无映射时harmful reward是1-(1+lambda)ph。均值中心化仍保留1+lambda，除总reward组std则同时除掉这个系数。本文的unscaled路径只中心化；逐目标标准化后再加权是另一变体，不能用其headline冒充本地结果。 教学例：lambda从0到2让未缩放优势变成3倍，但两者各除自己的std后会相同。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-13c8ded488dc7108">加入安全lambda后再作标准GRPO组std，为什么控制强度可能没了？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Asafety-budget-cgrpo">Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Lanzhou University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>无映射时harmful reward是1-(1+lambda)ph。均值中心化仍保留1+lambda，除总reward组std则同时除掉这个系数。本文的unscaled路径只中心化；逐目标标准化后再加权是另一变体，不能用其headline冒充本地结果。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：lambda从0到2让未缩放优势变成3倍，但两者各除自己的std后会相同。</p>
+<p class="ar-learning-sources">依据：核心公式、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.16628v1">原论文</a> · <a href="../../../../post-training/2611.16628-safety-budget-cgrpo/">实现解读</a> · <a href="#qa-13c8ded488dc7108">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:safety-budget-cgrpo" data-paper-title="Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models LLM 后训练 Lanzhou University 2026-11-12 给 GRPO 增加安全预算并不足够：scorer 分数的均值偏差会使 dual controller 读错约束，且对已加权总奖励作组内标准化可能消掉 multiplier 的梯度尺度。本文拆成两条通道：原始概率保留 base reward 的组内排序；用独立 judge 在训练轨迹上拟合的单调校准映射，只服务于 penalty 与预算控制。校准图不能直接挪进 base reward，因为 isotonic 的平坦区会抹掉原始相对分数。保持 multiplier 的一种方案是只中心化、不按总奖励标准差缩放； 完整安全训练成本过高，不复现（审查 DONE）。CPU 三种子机制诊断；L1 CPU 校准 / 奖励 / dual-state 算术组件，diagnostic only。没有 VLM、scorer、judge 或 RL trainer；完整安全训练成本过高，不复现（审查 DONE）。fit_isotonic(..., split=&quot;train&quot;)只接受训练声明，验证/测试 split 被拒绝；但源数据 provenance 仍由调用方负责，字符串不是泄漏防护的充分证明。  策略优化 安全预算与双通道控制 LLM 后训练 策略优化：谁在采样，谁在被更新 为什么fit_isotonic拒绝test，且dual必须传previous EMA？ 校准要在训练prompt的无约束轨迹上拟合，不能利用held-out结果调预算。字符串检查仍需真实数据provenance配合。正文未唯一指定初始化/缺席类规则，显式前态避免隐藏假设；CPU数值正确不等于scorer或VLM安全。 教学例：使用测试回答标签拟合一条漂亮单调曲线会污染评测；调用时写split=train并不能洗掉这种泄漏。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-6eecedbb45a2c7f5">为什么fit_isotonic拒绝test，且dual必须传previous EMA？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Asafety-budget-cgrpo">Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Lanzhou University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>校准要在训练prompt的无约束轨迹上拟合，不能利用held-out结果调预算。字符串检查仍需真实数据provenance配合。正文未唯一指定初始化/缺席类规则，显式前态避免隐藏假设；CPU数值正确不等于scorer或VLM安全。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：使用测试回答标签拟合一条漂亮单调曲线会污染评测；调用时写split=train并不能洗掉这种泄漏。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.16628v1">原论文</a> · <a href="../../../../post-training/2611.16628-safety-budget-cgrpo/">实现解读</a> · <a href="#qa-6eecedbb45a2c7f5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:lgpo" data-paper-title="Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs?" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs? LLM 后训练 University of Wisconsin–Madison 2026-11-11 GRPO 的 importance ratio 同时承担采样分布校正与裁剪约束，二者未必对训练稳定性同样重要。作者发现去掉校正而保留约束时可以稳定；完全 on-policy 时比率恰为 1，ratio clipping 却无法及时限制过度确定的分布。LGPO 不计算旧策略概率，而对当前策略每条响应的平均 token log probability设置单侧门槛，屏蔽高似然响应的梯度。这不是 token 级 top-k，也不是只屏蔽正优势。高似然正、负优势响应都被屏蔽；低似然响应默认保留。 完整 LLM RL 训练成本过高，不复现（审查 DONE）；L1 精确门控损失 / 梯度组件，diagnostic only。完整 LLM RL 训练成本过高，不复现（审查 DONE）；不参与 evolve 晋级。输入为调用方实际当前策略 logp、外部 token advantage 和 Boolean response mask。代码拒绝正 logp、非有限量、空有效响应、shape/device/dtype 不一致；未提供 LM checkpoint、题库或 verifier。当前训练代码的数学边界是 loss，而不是完整 on-policy/off-policy 采样系统。  策略优化 似然门控与训练稳定性 LLM 后训练 策略优化：谁在采样，谁在被更新 LGPO不读取旧策略概率，门槛到底看什么？ 看当前策略一条响应的有效token平均log probability，并在高于阈值时屏蔽整条响应。它不是序列概率乘积、old/current ratio或每token独立clip。默认tau=-.15。 教学例：同样每token logp=-.2，2-token与20-token响应的门槛统计都为-.2，不能用更负的长序列总和改变选择。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<span id="paper-post-training-lgpo-564a0175" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-8c7a3a143c8ed45a">LGPO不读取旧策略概率，门槛到底看什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Algpo">Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · University of Wisconsin–Madison</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>看当前策略一条响应的有效token平均log probability，并在高于阈值时屏蔽整条响应。它不是序列概率乘积、old/current ratio或每token独立clip。默认tau=-.15。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同样每token logp=-.2，2-token与20-token响应的门槛统计都为-.2，不能用更负的长序列总和改变选择。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.15404v1">原论文</a> · <a href="../../../../post-training/2611.15404-lgpo/">实现解读</a> · <a href="#qa-8c7a3a143c8ed45a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:lgpo" data-paper-title="Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs?" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs? LLM 后训练 University of Wisconsin–Madison 2026-11-11 GRPO 的 importance ratio 同时承担采样分布校正与裁剪约束，二者未必对训练稳定性同样重要。作者发现去掉校正而保留约束时可以稳定；完全 on-policy 时比率恰为 1，ratio clipping 却无法及时限制过度确定的分布。LGPO 不计算旧策略概率，而对当前策略每条响应的平均 token log probability设置单侧门槛，屏蔽高似然响应的梯度。这不是 token 级 top-k，也不是只屏蔽正优势。高似然正、负优势响应都被屏蔽；低似然响应默认保留。 完整 LLM RL 训练成本过高，不复现（审查 DONE）；L1 精确门控损失 / 梯度组件，diagnostic only。完整 LLM RL 训练成本过高，不复现（审查 DONE）；不参与 evolve 晋级。输入为调用方实际当前策略 logp、外部 token advantage 和 Boolean response mask。代码拒绝正 logp、非有限量、空有效响应、shape/device/dtype 不一致；未提供 LM checkpoint、题库或 verifier。当前训练代码的数学边界是 loss，而不是完整 on-policy/off-policy 采样系统。  策略优化 似然门控与训练稳定性 LLM 后训练 策略优化：谁在采样，谁在被更新 为什么不能只屏蔽高似然且正优势的响应？ 固定v1的gate只由似然决定，与优势正负无关；高似然负优势响应也屏蔽。gate停止梯度，幸存响应内部按外部detached token advantage乘logp求和，再对全部响应平均。 教学例：两条平均logp=-.01的响应，一条A=+1一条A=-1，在tau=-.15时都没有loss梯度。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-f9535dce44f5cf27">为什么不能只屏蔽高似然且正优势的响应？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Algpo">Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · University of Wisconsin–Madison</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>固定v1的gate只由似然决定，与优势正负无关；高似然负优势响应也屏蔽。gate停止梯度，幸存响应内部按外部detached token advantage乘logp求和，再对全部响应平均。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两条平均logp=-.01的响应，一条A=+1一条A=-1，在tau=-.15时都没有loss梯度。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.15404v1">原论文</a> · <a href="../../../../post-training/2611.15404-lgpo/">实现解读</a> · <a href="#qa-f9535dce44f5cf27">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:lgpo" data-paper-title="Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs?" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs? LLM 后训练 University of Wisconsin–Madison 2026-11-11 GRPO 的 importance ratio 同时承担采样分布校正与裁剪约束，二者未必对训练稳定性同样重要。作者发现去掉校正而保留约束时可以稳定；完全 on-policy 时比率恰为 1，ratio clipping 却无法及时限制过度确定的分布。LGPO 不计算旧策略概率，而对当前策略每条响应的平均 token log probability设置单侧门槛，屏蔽高似然响应的梯度。这不是 token 级 top-k，也不是只屏蔽正优势。高似然正、负优势响应都被屏蔽；低似然响应默认保留。 完整 LLM RL 训练成本过高，不复现（审查 DONE）；L1 精确门控损失 / 梯度组件，diagnostic only。完整 LLM RL 训练成本过高，不复现（审查 DONE）；不参与 evolve 晋级。输入为调用方实际当前策略 logp、外部 token advantage 和 Boolean response mask。代码拒绝正 logp、非有限量、空有效响应、shape/device/dtype 不一致；未提供 LM checkpoint、题库或 verifier。当前训练代码的数学边界是 loss，而不是完整 on-policy/off-policy 采样系统。  策略优化 似然门控与训练稳定性 LLM 后训练 策略优化：谁在采样，谁在被更新 LGPO的门控能代替Dr.GRPO移除组std吗？ 不能。LGPO改变哪些响应产生梯度并移除old-policy ratio；Dr.GRPO调整优势和长度归一化。两者作用在不同轴。即使可设计组合，也必须保留各自分母和优势来源，不能只改一个算法名字。 教学例：改变奖励乘法尺度会改变未缩放优势，但不会自动改变同一当前策略logp下的LGPO门控。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-bd009e4f4386e1b5">LGPO的门控能代替Dr.GRPO移除组std吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Algpo">Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · University of Wisconsin–Madison</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。LGPO改变哪些响应产生梯度并移除old-policy ratio；Dr.GRPO调整优势和长度归一化。两者作用在不同轴。即使可设计组合，也必须保留各自分母和优势来源，不能只改一个算法名字。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：改变奖励乘法尺度会改变未缩放优势，但不会自动改变同一当前策略logp下的LGPO门控。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.15404v1">原论文</a> · <a href="../../../../post-training/2611.15404-lgpo/">实现解读</a> · <a href="#qa-bd009e4f4386e1b5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:lgpo" data-paper-title="Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs?" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs? LLM 后训练 University of Wisconsin–Madison 2026-11-11 GRPO 的 importance ratio 同时承担采样分布校正与裁剪约束，二者未必对训练稳定性同样重要。作者发现去掉校正而保留约束时可以稳定；完全 on-policy 时比率恰为 1，ratio clipping 却无法及时限制过度确定的分布。LGPO 不计算旧策略概率，而对当前策略每条响应的平均 token log probability设置单侧门槛，屏蔽高似然响应的梯度。这不是 token 级 top-k，也不是只屏蔽正优势。高似然正、负优势响应都被屏蔽；低似然响应默认保留。 完整 LLM RL 训练成本过高，不复现（审查 DONE）；L1 精确门控损失 / 梯度组件，diagnostic only。完整 LLM RL 训练成本过高，不复现（审查 DONE）；不参与 evolve 晋级。输入为调用方实际当前策略 logp、外部 token advantage 和 Boolean response mask。代码拒绝正 logp、非有限量、空有效响应、shape/device/dtype 不一致；未提供 LM checkpoint、题库或 verifier。当前训练代码的数学边界是 loss，而不是完整 on-policy/off-policy 采样系统。  策略优化 似然门控与训练稳定性 LLM 后训练 策略优化：谁在采样，谁在被更新 只剩一半响应时，loss改除以幸存数是否等价？ 不等价。本地保留论文期望的全部响应分母，门控响应贡献为零。除以幸存数会按接受率隐式放大学习率；padding只从有效token集合去掉，不能借此改变序列分母。小logits的CUDA梯度验收也不是LLM训练效果。 教学例：4条响应只有2条保留，token贡献之和为6；应取-6/4，不是-6/2。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-b786c5fa2c6ffcb6">只剩一半响应时，loss改除以幸存数是否等价？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Algpo">Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs?</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · University of Wisconsin–Madison</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不等价。本地保留论文期望的全部响应分母，门控响应贡献为零。除以幸存数会按接受率隐式放大学习率；padding只从有效token集合去掉，不能借此改变序列分母。小logits的CUDA梯度验收也不是LLM训练效果。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：4条响应只有2条保留，token贡献之和为6；应取-6/4，不是-6/2。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.15404v1">原论文</a> · <a href="../../../../post-training/2611.15404-lgpo/">实现解读</a> · <a href="#qa-b786c5fa2c6ffcb6">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:apmd-reference-reset" data-paper-title="A Theory of Policy Optimization in Post-Training: Coverage Collapse and Reference Resets" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/policy-optimization" data-search="A Theory of Policy Optimization in Post-Training: Coverage Collapse and Reference Resets LLM 后训练 Kempner Institute at Harvard University / UIUC 2026-11-10 奖励上升不保证最优响应仍容易采到。本文给出固定 reference 下 REINFORCE 发生 coverage collapse 的构造，并用 APMD 将 KL reference 周期性重置到最新策略：每个内层子问题有较强局部约束，外层重置则允许持续前进。它不是单纯“少加 KL”或“每步把 reference loss 设成零”。结论是受假设约束的理论：主要全局复杂度结果依赖 softmax 线性策略、同特征可实现的 reward 和足够准确的内层求解； L1 机制组件，diagnostic only。纯理论大型实证不适用（审查 DONE），不虚构高成本。本轮补审上批线索，不计为 11 月 12 日首发；未接入 Evolve。mirror_step 用 log-space 计算严格正概率的精确目标；exact_reset_path 每轮读取最新 reference。squared_losses 枚举有限响应期望，并直接计算独立响应对的平方损失；empirical_kimipo_loss 接收与训练响应分开的 baseline reward 组。只支持 NumPy CPU，显式拒绝 CUDA、非归一分布和数值下溢导致的支持丢失，不靠加 epsilon 掩盖失效。  策略优化与稳定性 参考重置与覆盖理论 LLM 后训练 策略优化：谁在采样，谁在被更新 APMD 的 reference reset 是把学生权重重置回 base 吗？ 不是。学生保留本轮学到的策略，下一轮只把KL锚点换成这份最新策略。若每轮把学生退回base，就不能累积镜像更新；这与BOPD的fresh-student重置是不同操作。 教学例：pi0经一轮变成pi1后，APMD以pi1为下一轮reference；不会把可训练学生重新改回pi0。 2026-11-12">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 策略优化：谁在采样，谁在被更新</a></p>
 <span id="paper-post-training-apmd-reference-reset-a049a54f" class="ar-learning-paper-anchor"></span>

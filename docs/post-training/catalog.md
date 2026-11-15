@@ -10,6 +10,9 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 奖励与信用分配 | [Bait: Mitigating Harmful Agentic Reinforcement Learning via Probing Reward Function](2611.16369-bait-reward-defense/README.md) | Georgia Institute of Technology，2026-11-12 | [原作者入口](https://github.com/git-disl/Bait)；作者仓库已公开，只读核验固定SHA；不执行有害probe、攻击或上游训练系统。训练器仍有旧scapegoat路径，端到端可运行性未确认。 | `bait-reward-defense`：仅低成本组件，完整实验不复现 |
+| 策略优化 | [Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models](2611.16628-safety-budget-cgrpo/README.md) | Lanzhou University，2026-11-12 | 未发现官方代码 | `safety-budget-cgrpo`：仅低成本组件，完整实验不复现 |
+| 策略优化 | [Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs?](2611.15404-lgpo/README.md) | University of Wisconsin–Madison，2026-11-11 | 未发现官方代码 | `lgpo`：仅低成本组件，完整实验不复现 |
 | 策略优化与稳定性 | [A Theory of Policy Optimization in Post-Training: Coverage Collapse and Reference Resets](2611.14467-apmd-reference-reset/README.md) | Kempner Institute at Harvard University / UIUC，2026-11-10 | 未发现官方代码 | `apmd-reference-reset`：仅低成本组件，完整实验不复现 |
 | On-policy distillation | [Bootstrapped On-Policy Distillation](2611.13680-bopd/README.md) | The Hong Kong Polytechnic University，2026-11-10 | 未发现官方代码 | `bopd`：仅低成本组件，完整实验不复现 |
 | 奖励与信用分配 | [Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards](2611.14015-mcpo/README.md) | PayPal.AI，2026-11-10 | 未发现官方代码 | `mcpo`：仅低成本组件，完整实验不复现 |

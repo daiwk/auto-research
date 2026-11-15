@@ -7,7 +7,7 @@ hide:
 
 # 生成一个物品，先后跨过码本、模型分布与合法目录三道关
 
-[搜广推](../index.md) · 更新 2026-11-04 · 64 篇主题资料 / 9 篇重点对照
+[搜广推](../index.md) · 更新 2026-11-15 · 67 篇主题资料 / 12 篇重点对照
 
 TIGER把物品变成层次码并学习下一码序列，COBRA在稀疏码后补回条件稠密向量，PLUM把已有LLM通过继续预训练接到行为/SID空间。STATIC不改表示而改变合法解码的执行方式，Reward Guided Decoding则在既有支持上倾斜业务偏好。先定位改变的是哪一关，再判断它能否找回漏掉的物品。 PinGER再把历史输入与SID监督拆开，并将前缀多样化选择、分层DPO和合法目录分别治理。
 
@@ -34,6 +34,9 @@ TIGER把物品变成层次码并学习下一码序列，COBRA在稀疏码后补�
 | [PinGER: Token-Efficient Generative Retrieval with Semantic IDs](../../../recommendation-components/2610.33435-pinger/README.md) · [原始来源](https://arxiv.org/abs/2610.33435v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 训练交错SID/dense并关闭跨商品SID读取，服务删除过去SID；按LCP深度逐beam惩罚，所有SID前缀DPO与NTP锚联合后训练。 | 不同于TIGER逐项历史SID输入，也不能把前缀多样性当STATIC合法性；多样性会牺牲离线recall，本地无完整tokenizer/服务。 |
 | [ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse](../../../recommendation-components/2611.04259-reusegr/README.md) · [原始来源](https://arxiv.org/abs/2611.04259v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 按query共享7B规划的SID前缀，0.5B读取当前用户历史补全；ReuseCut以逐级覆盖准则选择复用深度。 | 比缓存完整结果保留更多个性化空间，但深缓存会限制可达目标；准备好depth0与冷miss使用不同模型，低成本标签核不等于学习BudgetCut。 |
 | [SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search](../../../recommendation-components/2611.04662-spade-local-search/README.md) · [原始来源](https://arxiv.org/abs/2611.04662v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 用业务价值重加权BPE合并，再以父beam名次的有界sigmoid奖励控制自由文本query生成的裁剪。 | 与固定SID子树的约束和LCP惩罚不同；名次奖励不测两候选语义距离，也不无条件保留最终top1。本地不含STAR/MARS-DPO或完整query模型。 |
+| [ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through item Reachability](../../../recommendation-components/2611.16404-resid/README.md) · [原始来源](https://arxiv.org/abs/2611.16404v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界、高成本完整实验 | 独立子空间parallel SID，加训练prior校准与prefix语义势能guided beam，再按Hamming mismatch和beam score恢复候选。 | TIGER逐层量化residual并要求有效SID检索；ReSID同时改变token结构与候选可达性，不能仅用tail bonus解释。局部冻结输入核不训练量化器或生成器。 |
+| [TriGen: A Generative Paradigm for Trigger-Induced Recommendation](../../../recommendation-components/2611.16395-trigen/README.md) · [原始来源](https://arxiv.org/abs/2611.16395v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界 | 固定窗口tail注入trigger，pristine history上的trigger/default双路径经pooled router和独立level PFFN持续调制生成。 | TIGER定义内容量化和自回归ID检索；TriGen处理即时trigger与历史偏好的条件冲突。局部可微条件不含完整encoder/decoder，随机梯度不能当Recall。 |
+| [KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation](../../../recommendation-components/2611.16795-kuairec-v2-protocol/README.md) · [原始来源](https://arxiv.org/abs/2611.16795v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界 | 以逐用户/日validation、实例加权FullMonth和一次召回多行为评测定义持续学习协议；本地仅有限split/HR/NDCG接口。 | TIGER是生成检索模型，KuaiRecV2是可评不同模型的动态item-pool benchmark。官方链接API404，L0接口不代表已下载官方数据或完成能力排名。 |
 
 </div>
 
@@ -68,6 +71,24 @@ TIGER把历史商品表示成多级SID序列；PinGER保留SID逐级监督，却
 TIGER用语义码把物品变成可生成路径，ReuseGR沿用SID分层却将query前缀规划跨用户共享，当前历史仍影响后缀。SPADE生成的是可执行自由文本query，OA-BPE先改变切词先验，再用父beam名次奖励调节搜索存活；它不执行PinGER的共同SID前缀惩罚。比较时先固定候选预算和输出对象，再分别记录历史输入成本、离线规划成本与在线解码成本，不能把前缀可达覆盖当作完整召回提升。
 
 对照来源：[reusegr](../../../recommendation-components/2611.04259-reusegr/README.md) · [spade-local-search](../../../recommendation-components/2611.04662-spade-local-search/README.md) · [tiger](../../../reproductions/2305.05065-tiger/README.md) · [pinger](../../../recommendation-components/2610.33435-pinger/README.md)
+
+### 语义ID能表达物品，不等于物品能穿过窄beam
+
+TIGER把内容编码为逐层residual SID；ReSID指出早期量化和解码剪枝可让长尾目标根本到不了最终排名。独立子空间抑制残差误差传播，log-prior校准与log-mean-exp势能在prefix阶段引导，partial matching再容忍局部错码。三者改变不同环节，不能把真实gold相似度喂给搜索来制造长尾提升；本地全枚举分数相等也不证明线上10.3ms或收入提升。
+
+对照来源：[resid](../../../recommendation-components/2611.16404-resid/README.md) · [tiger](../../../reproductions/2305.05065-tiger/README.md)
+
+### 条件来自哪份历史，比给生成器多一个向量更重要
+
+TIGER按历史条件生成Semantic ID，TriGen还处理最近点击引起的意图重定向。tail-injected encoder序列可以耦合trigger与历史，而双路径必须读pristine history来保留默认偏好；router先pool路径再输出每level权重，PFFN独立参数并不允许读取未来SID。完整生成训练、mask隔离与GPU算子证据分层记录，不能用六市场线上提升替随机层背书。
+
+对照来源：[trigen](../../../recommendation-components/2611.16395-trigen/README.md) · [tiger](../../../reproductions/2305.05065-tiger/README.md)
+
+### 模型名称不统一评测时间轴，月均分也不能抹掉每日退化
+
+TIGER原文静态数据下的生成检索与KuaiRecV2的动态候选池回答不同问题。持续学习协议每天保留每用户最后一条作validation，FullMonth按实例加权，并保留每日轨迹观察适应/遗忘；同请求多任务子集必须复用单次召回。评价器gold不得回流producer。当前L0接口不实现候选池、history、官方数据或模型，不能据有限HR与TIGER真实本地NDCG比较。
+
+对照来源：[kuairec-v2-protocol](../../../recommendation-components/2611.16795-kuairec-v2-protocol/README.md) · [tiger](../../../reproductions/2305.05065-tiger/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -133,9 +154,51 @@ TIGER用语义码把物品变成可生成路径，ReuseGR沿用SID分层却将qu
 
     对照来源：[reusegr](../../../recommendation-components/2611.04259-reusegr/README.md) · [spade-local-search](../../../recommendation-components/2611.04662-spade-local-search/README.md) · [pinger](../../../recommendation-components/2610.33435-pinger/README.md)
 
+### TIGER生成的精确SID概率低，就能在最终重排里用ReSID补回来吗？ {#cross-cross-nov15-resid-reachability}
+
+??? note "展开答案与例子"
+
+    **答案：** 只有候选或足够近的SID已经存活时重排才有机会；被beam早剪掉的分支需在解码阶段处理。ReSID还改变独立量化与partial matching，不能退化成只对最终列表加分。
+
+    **教学例子：** 教学例：第一层只留下prefix0而目标在prefix1下，最终排序看不到该目标。
+
+    对照来源：[resid](../../../recommendation-components/2611.16404-resid/README.md) · [tiger](../../../reproductions/2305.05065-tiger/README.md)
+
+### 把trigger拼到TIGER历史后，让两个TriGen条件分支都读这份序列可以吗？ {#cross-cross-nov15-trigen-pristine}
+
+??? note "展开答案与例子"
+
+    **答案：** 不符合固定v1定义。注入序列用于encoder；双路径另读pristine history，使default-query路径不随trigger改变。丢掉这份原始历史会破坏分离意图与长期偏好的结构。
+
+    **教学例子：** 教学例：只改变trigger时default path应保持数值不变，而非也被重复trigger带走。
+
+    对照来源：[trigen](../../../recommendation-components/2611.16395-trigen/README.md) · [tiger](../../../reproductions/2305.05065-tiger/README.md)
+
+### KuaiRecV2有限例子的HR=1，可以与TIGER的MovieLens NDCG比较吗？ {#cross-cross-nov15-kuairec-evidence-level}
+
+??? note "展开答案与例子"
+
+    **答案：** 不可以。前者是无模型、无官方数据的L0协议例子，后者是特定数据与实际训练的指标；任务、数据、候选池、时间轴和证据层级不同。应接入真实模型/官方数据并同协议同预算对照后再谈能力。
+
+    **教学例子：** 教学例：两条手写request的rank discount算对，不等于在30天约4.84亿交互上检索。
+
+    对照来源：[kuairec-v2-protocol](../../../recommendation-components/2611.16795-kuairec-v2-protocol/README.md) · [tiger](../../../reproductions/2305.05065-tiger/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-15** · 加入KuaiRecV2公共评测协议入口，明确daily validation、按实例加权与single-retrieval evaluate-all；未核实官方仓库可访问，不伪称benchmark已接入，完整大规模评测高成本不复现。
+
+涉及：[kuairec-v2-protocol](../../../recommendation-components/2611.16795-kuairec-v2-protocol/README.md) · [tiger](../../../reproductions/2305.05065-tiger/README.md)
+
+**2026-11-15** · 加入有六市场线上A/B的TriGen，区分固定窗口尾注入、pristine双路径与位置专属PFFN，保留observed-prefix边界。局部前后向不是完整推荐训练；完整工业矩阵高成本不复现。
+
+涉及：[trigen](../../../recommendation-components/2611.16395-trigen/README.md) · [tiger](../../../reproductions/2305.05065-tiger/README.md)
+
+**2026-11-15** · 补入有量化线上A/B的ReSID，区分parallel/residual ID、prefix可达性与最终排序；CPU核不冒充推荐训练或生产性能，完整工业实验成本过高不复现。
+
+涉及：[resid](../../../recommendation-components/2611.16404-resid/README.md) · [tiger](../../../reproductions/2305.05065-tiger/README.md)
 
 **2026-11-04** · 补入ReuseGR与SPADE，区分query前缀复用、用户历史条件、业务分词先验和父beam名次奖励；对照TIGER/PinGER保留不同输出对象与候选预算边界，不把CPU算子或完整A/B混成同层证据。
 
@@ -153,7 +216,7 @@ TIGER用语义码把物品变成可生成路径，ReuseGR沿用SID分层却将qu
 
 覆盖 60 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 64 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 67 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -221,6 +284,9 @@ TIGER用语义码把物品变成可生成路径，ReuseGR沿用SID分层却将qu
 - [PinGER: Token-Efficient Generative Retrieval with Semantic IDs](../../../recommendation-components/2610.33435-pinger/README.md)
 - [ReuseGR: Offline–Online Decoupled Generative Retrieval via Adaptive Prefix Reuse](../../../recommendation-components/2611.04259-reusegr/README.md)
 - [SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search](../../../recommendation-components/2611.04662-spade-local-search/README.md)
+- [ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through item Reachability](../../../recommendation-components/2611.16404-resid/README.md)
+- [TriGen: A Generative Paradigm for Trigger-Induced Recommendation](../../../recommendation-components/2611.16395-trigen/README.md)
+- [KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation](../../../recommendation-components/2611.16795-kuairec-v2-protocol/README.md)
 
 </details>
 

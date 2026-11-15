@@ -6,9 +6,16 @@ from pathlib import Path
 import pytest
 
 from scripts.english_browse_catalogs import CATALOG_PAIRS, catalog_pages
+from scripts.english_browse_catalogs import _status
 
 
 ZH_OLD = "docs/agent-research/old/README.md"
+
+
+def test_theory_review_does_not_invent_a_high_cost_experiment():
+    text = _status({"implementation_status": "review_only_theory"})
+    assert "no empirical experiment" in text
+    assert "due to cost" not in text
 ZH_NEW = "docs/agent-research/new/README.md"
 TOPIC = "docs/agent-research/catalog/by-topic.md"
 ORG = "docs/agent-research/catalog/by-organization.md"

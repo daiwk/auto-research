@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:lgpo/sequence-not-ratio": {
+      "source_sha256": "54293f3c22c61df0442888cc21e8d9c482866f7cc8c1d4e662784e1a12ef0aa3",
+      "reviewed": true,
+      "fields": {
+        "question": "What does LGPO gate without old-policy probabilities?",
+        "answer": "It gates on the current policy's mean valid-token log probability for each response, removing the whole response above the threshold. This is neither a sequence-probability product, an old/current ratio nor independent token clipping. Default tau is -.15.",
+        "example": "Teaching example: two and twenty tokens each at logp=-.2 both have gate statistic -.2; the longer sequence's sum must not alter selection."
+      }
+    },
+    "qa/post-training:lgpo/gate-both-signs": {
+      "source_sha256": "60c09e0b3ef657b5b06dbba78fda71c8e0ad5c006a4f024a5861bc65d327a5aa",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not gate only high-likelihood positive advantages?",
+        "answer": "The fixed-v1 gate depends only on likelihood, not advantage sign, so high-likelihood negative-advantage responses are also removed. The gate is detached; retained token log probabilities are weighted by detached external advantages, summed and averaged over all responses.",
+        "example": "Teaching example: two responses at mean logp=-.01, one with A=+1 and one with A=-1, both have zero loss gradient at tau=-.15."
+      }
+    },
+    "qa/post-training:lgpo/gating-not-normalization": {
+      "source_sha256": "d75dcf40041a2473a0be3425a086f9066401a4cc23e5fedcf9a1f385ed7a3344",
+      "reviewed": true,
+      "fields": {
+        "question": "Can LGPO gating replace Dr. GRPO's removal of group std?",
+        "answer": "No. LGPO changes which responses receive gradients and removes the old-policy ratio; Dr. GRPO changes advantage/length normalization. These are different axes. A proposed combination must specify denominators and advantage provenance, not merely rename an algorithm.",
+        "example": "Teaching example: scaling rewards changes unscaled advantages but does not automatically change LGPO gates under the same current log probabilities."
+      }
+    },
+    "qa/post-training:lgpo/survivor-denominator": {
+      "source_sha256": "1d407b394fca24ea265ae4d53e620ded950643e368e1ca7ea71bdf811d1dd68e",
+      "reviewed": true,
+      "fields": {
+        "question": "Is dividing by survivors equivalent when half the responses are gated?",
+        "answer": "No. The local implementation retains the all-response denominator from the expectation and sets gated contributions to zero. Dividing by survivors implicitly rescales learning by the acceptance rate. Padding only changes valid tokens, not response count. CUDA gradients on tiny logits are not LLM performance.",
+        "example": "Teaching example: of four responses, two survive with total token contribution six. The loss is -6/4, not -6/2."
+      }
+    },
+    "qa/post-training:safety-budget-cgrpo/ranking-versus-level": {
+      "source_sha256": "a1debde081dab15cf2221d56d0c609fb84c416d4430e6d89223f066926e1faed",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a correctly ranked safety scorer still misread a budget?",
+        "answer": "Ranking compares relative scores; a budget compares the probability mean with a target rate. A monotone transform can preserve ranking while shifting mean bias, turning a multiplier off prematurely or saturating it. Real calibration still depends on training-trajectory label quality.",
+        "example": "Teaching example: squaring probabilities generally preserves order but lowers their mean, potentially making a violating group appear within budget."
+      }
+    },
+    "qa/post-training:safety-budget-cgrpo/map-control-only": {
+      "source_sha256": "2473fb92f9ea9389eb95f185197c0a2a71412a363727d42b717b84af7a91e751",
+      "reviewed": true,
+      "fields": {
+        "question": "Why map penalties and dual control but not the base reward?",
+        "answer": "An isotonic map may have plateaus that collapse distinct raw scores. Raw base rewards preserve within-group relative signals; maps adjust penalty/control levels. The local PAV pools weighted equal-score labels first and explicitly declares step interpolation.",
+        "example": "Teaching example: if ph=.1 and .2 both map to 1/3, harmful base rewards remain .9 and .8 rather than both becoming 2/3."
+      }
+    },
+    "qa/post-training:safety-budget-cgrpo/scale-cancellation": {
+      "source_sha256": "1534f3057bb2aed531fcbe1290f69b60f3c3a6c5d542bb7b9b24f01c06bd728a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can ordinary GRPO group std erase safety-multiplier strength?",
+        "answer": "Without calibration, harmful reward is 1-(1+lambda)ph. Mean centering preserves 1+lambda, but dividing by total-reward group std cancels it. This local unscaled path only centers. Standardizing objectives before weighting is a different variant, whose headline is not a local result.",
+        "example": "Teaching example: changing lambda from zero to two triples unscaled advantages, yet dividing each by its own std makes them equal."
+      }
+    },
+    "qa/post-training:safety-budget-cgrpo/calibration-split": {
+      "source_sha256": "cc815af5e097c89790242599f7ea443fce3d574d1c922dfe62ccf4170ec6e531",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reject test fitting and require previous EMA explicitly?",
+        "answer": "Calibration uses an unconstrained trajectory on training prompts, not held-out results for budget tuning. A split string still needs real provenance. Explicit previous state avoids inventing initialization or absent-class conventions. CPU arithmetic establishes neither scorer quality nor VLM safety.",
+        "example": "Teaching example: fitting an attractive monotone curve to test-response labels leaks evaluation; labeling that call split=train does not remove leakage."
+      }
+    },
+    "qa/post-training:bait-reward-defense/reward-not-text": {
+      "source_sha256": "105b02d9a7c83881e05e76fb8458916424f1eb3f4d2410d9a4d179aec4842671",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the local Bait component detect harmful text?",
+        "answer": "No. It compares external rewards for defender-private probes versus policy responses, processing numbers and membership only. Probe generation, semantic safety judgments and RL are absent. A numeric gap is not harmfulness accuracy.",
+        "example": "Teaching example: the same reward table can yield different gaps under different memberships; unreliable probes remain unreliable even with correct arithmetic."
+      }
+    },
+    "qa/post-training:bait-reward-defense/zero-flips-group": {
+      "source_sha256": "8c590bc73fa71729575e641786f0ad8ccf2e024a4b146366f0fdccd0aa030853",
+      "reviewed": true,
+      "fields": {
+        "question": "What happens at delta zero and to probe rewards?",
+        "answer": "Fixed-v1 Eqs.3–5 trigger whole-group inversion at delta>=0, including probes. Probes are removed only from the policy-facing output. Do not flip policy entries only or drop equality. The figure's >0 shorthand does not override the equations.",
+        "example": "Teaching example: equal probe and policy means of four still trigger inversion; a policy reward of two becomes minus two."
+      }
+    },
+    "qa/post-training:bait-reward-defense/defense-versus-anchor": {
+      "source_sha256": "f7ed4006b6966737cf2d17b8f2aac77c771a7a1b911f9b4b93d15743ff834034",
+      "reviewed": true,
+      "fields": {
+        "question": "Are Bait and TAG interchangeable reward modifications?",
+        "answer": "No. TAG selects a trusted anchor using reverse KL from independently trained probes, then gates auxiliary reward. Bait compares private-probe and policy external rewards and flips signs. Their inputs, trust assumptions and transformed objects differ; arithmetic cannot replace model/probe validation.",
+        "example": "Teaching example: a zero TAG anchor suppresses auxiliary credit; a nonnegative Bait gap can instead invert a whole reward group."
+      }
+    },
+    "qa/post-training:bait-reward-defense/normalization-not-guessed": {
+      "source_sha256": "373023a450b962688d70086d6b6388567cf1ed4115939086744d0d56ace5d986",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not add GRPO advantages by default?",
+        "answer": "Eq.6 includes non-probe std, Algorithm 1 line 14 omits it, and the released sign-flip function plus configurable generic advantage routine do not uniquely determine a training default. Only Eqs.3–5 are implemented; undefined empty partitions are rejected rather than guessed.",
+        "example": "Teaching example: rewards [-1,-3] center to [1,-1]; a std divisor changes scale. Choosing one does not resolve conflicting full-text conventions."
+      }
+    }
+  }
+}

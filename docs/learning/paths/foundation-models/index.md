@@ -20,7 +20,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="training-budget/">训练预算：数据配比、目标与优化器</a></h2>
 <p>有限训练预算应该先改数据、更新方向，还是模型规模？</p>
-<p class="ar-learning-topic-meta">132 个问题 · 33 篇论文</p>
+<p class="ar-learning-topic-meta">136 个问题 · 34 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="compression-and-cache/">推理压缩：权重、KV 缓存与服务带宽</a></h2>

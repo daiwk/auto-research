@@ -8,6 +8,9 @@ Paper titles link to the original publication when available. An English write-u
 
 | Paper | First publication | Project write-up |
 | --- | --- | --- |
+| [TriGen: A Generative Paradigm for Trigger-Induced Recommendation](<https://arxiv.org/abs/2611.16395v1>) | 2026-11-12 | [English](../../recommendation-components/2611.16395-trigen/README-en.md) · [Chinese](../../recommendation-components/2611.16395-trigen/README.md) |
+| [ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through item Reachability](<https://arxiv.org/abs/2611.16404v1>) | 2026-11-12 | [English](../../recommendation-components/2611.16404-resid/README-en.md) · [Chinese](../../recommendation-components/2611.16404-resid/README.md) |
+| [KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation](<https://arxiv.org/abs/2611.16795v1>) | 2026-11-12 | [English](../../recommendation-components/2611.16795-kuairec-v2-protocol/README-en.md) · [Chinese](../../recommendation-components/2611.16795-kuairec-v2-protocol/README.md) |
 | [Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking](<https://arxiv.org/abs/2611.07591>) | 2026-11-05 | [English](../../recommendation-components/2611.07591-ice/README-en.md) · [Chinese](../../recommendation-components/2611.07591-ice/README.md) |
 | [From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation](<https://arxiv.org/abs/2611.05997>) | 2026-11-04 | [English](../../recommendation-components/2611.05997-ured/README-en.md) · [Chinese](../../recommendation-components/2611.05997-ured/README.md) |
 | [SPADE: Spatiotemporal Preference Alignment and Diversity Enhancement for Local Search](<https://arxiv.org/abs/2611.04662v1>) | 2026-11-03 | [English](../../recommendation-components/2611.04662-spade-local-search/README-en.md) · [Chinese](../../recommendation-components/2611.04662-spade-local-search/README.md) |

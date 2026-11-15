@@ -7,7 +7,7 @@ hide:
 
 # 奖励从哪里来，信用才该分到哪里
 
-[LLM 后训练](../index.md) · 更新 2026-11-13 · 42 篇主题资料 / 12 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-15 · 43 篇主题资料 / 13 篇重点对照
 
 过程标签、最终结果、模型自置信与回溯归因是不同证据。逐步PRM、MRTPO、TACO和MART-GRPO分别做标签获取、奖励定位、正信用降权和失败后缀过滤；INTUITOR则改用内在分布信号，不能把它当外部正确性验证器。 CONCUR另处理奖励维度之间的优先级，把门控辅助优势投影到主奖励保序锥；这不是沿时间轴分配token信用。
 
@@ -37,6 +37,7 @@ hide:
 | [MaxIM: Maximally Informative Incremental Summarization via Reinforcement Learning](../../../post-training/2611.12825-maxim/README.md) · [原始来源](https://arxiv.org/abs/2611.12825v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 以冻结critic的conditional/null teacher-forced log-ratio分别测摘要的目标信息与前向历史支持，再经中心化sigmoid、1-gamma尺度与退火构成跨turn return。 | 生成奖励信号而非重分配已有token信用；特权目标只能用于奖励端，不得给被评估摘要器读。近似critic与非线性shaping不是事实或最优策略保证；本地不训练Gemini。 |
 | [Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards](../../../post-training/2611.14015-mcpo/README.md) · [原始来源](https://arxiv.org/abs/2611.14015v1)<br>章节：核心公式、原文结果与限制、结果、负控与边界 | 用温度后old-policy top1-top2 margin构造截断线性不确定度，按优势符号指数加权，再按响应内有效token均值归一，保持平均序列优势。 | 负优势时不确定token少受罚，非band-pass、非额外verifier。原文更长生成与缺length-matched对照限制因果解释；Qwen三数据种子的p=.083不应写成显著胜出。 |
 | [Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs](../../../post-training/2606.32032-rlmf/README.md) · [原始来源](https://arxiv.org/abs/2606.32032v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射 | 按模型自评FC的质量，仅放大高于组均值的completion级faithfulness项；其他奖励中心化项不变。 | Residual Advantage从同词表师生概率差产生token局部优势，再按响应中心化并加验证器优势。元认知Z不是师生概率残差；RLMF不再居中，也没有执行RA/Co-RA教师更新。 |
+| [Bait: Mitigating Harmful Agentic Reinforcement Learning via Probing Reward Function](../../../post-training/2611.16369-bait-reward-defense/README.md) · [原始来源](https://arxiv.org/abs/2611.16369v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界、高成本完整实验 | 用防御私有probe与policy的平均外部reward gap判定是否翻转整组，再剔除probe，仅实现Eqs3–5。 | TAG用独立训练探针的reverse KL选可信anchor后门控辅助奖励；Bait探测环境reward偏好，不是同种probe。无probe语义验证时数值gap不能证明安全，优势std冲突不猜。 |
 
 </div>
 
@@ -83,6 +84,12 @@ MaxIM先定义任务信息与事实一致性怎样成为可用奖励；MCPO接�
 RLMF先将忠实度与其他约束分开中心化，再用自评与实际FC的一致性提高正忠实度分量；放大后组均值可以不为零。Residual Advantage读取同词表教师/学生分布，以学生期望作为局部残差基线，之后在响应位置中心化并叠加验证器优势；Co-RA又在固定已评分批次上更新教师、下一轮才使用。把Z加成奖励、给token残差直接乘整个RLMF优势，或把RLMF最后再中心化，都不是原公式。两种组件来源、信用单位、更新顺序和验收证据应分别保存；RA的短checkpoint烟测也不替本轮RLMF完成训练。
 
 对照来源：[rlmf](../../../post-training/2606.32032-rlmf/README.md) · [residual-advantage](../../../post-training/2610.11519-residual-advantage/README.md)
+
+### 奖励防御先明确探针来源，再决定变换什么
+
+TAG的probe是从共同基线单奖励训练的策略，用它自身采样的reverse KL选anchor；Bait的probe是防御者私有membership下的特殊回答，比较外部reward偏好后反转整组。两者都要求探针的真实来源，而不是在评测端读取gold制作完美信号。Bait本地不生成文本或攻击，只验证>=0边界与policy-only过滤；TAG的anchor为零门控也不能替代这种符号判定。
+
+对照来源：[bait-reward-defense](../../../post-training/2611.16369-bait-reward-defense/README.md) · [tag-reward-gating](../../../post-training/2610.21404-tag-reward-gating/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -168,9 +175,23 @@ RLMF先将忠实度与其他约束分开中心化，再用自评与实际FC的�
 
     对照来源：[rlmf](../../../post-training/2606.32032-rlmf/README.md) · [residual-advantage](../../../post-training/2610.11519-residual-advantage/README.md)
 
+### TAG选出一个可信anchor，就能直接充当Bait的private probe mask吗？ {#cross-cross-nov15-bait-tag-probe}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。TAG选的是奖励维度及训练探针策略，Bait mask区分外部同组回答的来源。两者的输入、采样过程和信任假设不同；必须分别验证，不可从数值组件互相推导真实安全。
+
+    **教学例子：** 教学例：一个组有三条回答，TAG的正确性anchor分数不是哪一条由防御probe产生的membership。
+
+    对照来源：[bait-reward-defense](../../../post-training/2611.16369-bait-reward-defense/README.md) · [tag-reward-gating](../../../post-training/2610.21404-tag-reward-gating/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-15** · 补入Google DeepMind相关Bait的防御性reward-gap/sign-flip，和TAG的anchor门控分清来源及变换对象。只实现Eqs3–5，不含有害probe/攻击/训练；原文优势std冲突保留，完整实验高成本不复现。
+
+涉及：[bait-reward-defense](../../../post-training/2611.16369-bait-reward-defense/README.md) · [tag-reward-gating](../../../post-training/2610.21404-tag-reward-gating/README.md)
 
 **2026-11-13** · 改为同卡片RA的token师生残差与RLMF的completion自评信用比较，保留各自中心化、教师更新时序和L1/短训练证据边界。
 
@@ -196,7 +217,7 @@ RLMF先将忠实度与其他约束分开中心化，再用自评与实际FC的�
 
 覆盖 36 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 42 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 43 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -242,6 +263,7 @@ RLMF先将忠实度与其他约束分开中心化，再用自评与实际FC的�
 - [MaxIM: Maximally Informative Incremental Summarization via Reinforcement Learning](../../../post-training/2611.12825-maxim/README.md)
 - [Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards](../../../post-training/2611.14015-mcpo/README.md)
 - [Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs](../../../post-training/2606.32032-rlmf/README.md)
+- [Bait: Mitigating Harmful Agentic Reinforcement Learning via Probing Reward Function](../../../post-training/2611.16369-bait-reward-defense/README.md)
 
 </details>
 

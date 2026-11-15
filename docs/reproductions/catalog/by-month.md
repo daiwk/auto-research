@@ -425,6 +425,9 @@
 - [Wide & Deep](../1606.07792-wide-deep/README.md)：联合记忆型 wide 交叉和泛化型 deep tower，是工业深度推荐的经典起点。
 
 ## 2026-11
+- [KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation](../../recommendation-components/2611.16795-kuairec-v2-protocol/README.md)：明确按用户逐日leave-one-out为validation，FullMonth按每日验证实例数加权，并用每请求一份召回列表评价所有行为子集。本地只有有限协议接口，无官方数据、模型或多样性benchmark结果。
+- [ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through item Reachability](../../recommendation-components/2611.16404-resid/README.md)：用独立子空间长parallel SID避免残差链误差，完整词表log-prior校准配合prefix log-mean-exp势能引导beam，再按Hamming partial matching排序。本地只实现冻结输入上的有限CPU核，不训练推荐器。
+- [TriGen: A Generative Paradigm for Trigger-Induced Recommendation](../../recommendation-components/2611.16395-trigen/README.md)：固定窗口尾部重复trigger，双条件路径直接读取pristine history，分别pool后逐level路由并用独立PFFN持续调制BOS/已观察prefix。本地无完整encoder-decoder推荐训练，MLP内部两层GELU为明示选择。
 - [Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking](../../recommendation-components/2611.07591-ice/README.md)：将展示到点击拆成达到曝光与条件点击；浏览深度尾和约束曝光，停止梯度门控抑制未曝光上下文，列表 KL 建模点击竞争。本地只验证张量组件。
 - [From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation](../../recommendation-components/2611.05997-ured/README.md)：从排序器已打分但未展示的候选中按会话保留高分项，聚合后按时间去重，再按近期曝光类目和商品去重筛选。本地仅验证时间、截断与过滤顺序。
 - [OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer](../../recommendation-components/2611.04720-onetrans-gsr/README.md)：统一自回归policy生成商品/视频/直播/广告的整页序列；离线RM集成、正值几何多目标奖励与SeparateStandardization指导后训练，在线保留硬mask和软业务偏置。本地仅核局部约束/去重和奖励公式，既不声称局部规则保证全局可行，也不把RM代理分数当真实GMV。

@@ -42,7 +42,11 @@
         "multimodal-models:umrm",
         "foundation-models:wemm-embedding",
         "multimodal-models:avmeme-exam",
-        "multimodal-models:mmeb-v3"
+        "multimodal-models:mmeb-v3",
+        "foundation-models:unbundling-vision",
+        "foundation-models:d-jepa",
+        "foundation-models:duojepa",
+        "foundation-models:spectral-ghost"
       ]
     },
     {
@@ -125,7 +129,8 @@
         "foundation-models:swim",
         "multimodal-models:rs-jepa",
         "multimodal-models:onlyact",
-        "multimodal-models:sensorwm-planning"
+        "multimodal-models:sensorwm-planning",
+        "multimodal-models:pixvid"
       ]
     }
   ]

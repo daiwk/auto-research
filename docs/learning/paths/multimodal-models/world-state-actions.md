@@ -7,7 +7,7 @@ hide:
 
 # 世界建模：状态、生成与动作条件
 
-[多模态](index.md) / 108 个问题 · 27 篇论文
+[多模态](index.md) / 112 个问题 · 28 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">108 个问题 · 27 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">112 个问题 · 28 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:pixvid" data-paper-title="Back to Pixels: Lifting Latent Video Diffusion into Pixel Space" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Back to Pixels: Lifting Latent Video Diffusion into Pixel Space 多模态大模型 Roblox 2026-11-12 像素视频生成避免VAE潜空间约束，但直接从零学习大规模时空关系成本很高。PixVid保留预训练latent DiT知识，以离线像素—latent线性对齐融合进patch embedding、校准噪声时间步，再加入detailer处理高频细节。高分辨率patch初始化与新增上采样块控制token数量，不能只把VAE删掉就等同本文。§2—3 完整14B视频训练与评测成本过高，不复现（审查 DONE）；未实现组件、未生成视频、未运行GPU、没有指标产物；资料收录，未实现。完整14B视频训练与评测成本过高，不复现（审查 DONE）；普通flow loss或插值不是PixVid复现。本轮仅核对方法、首发时间、机构、代码发布状态与成本。未实现组件、未生成视频、未运行GPU、没有指标产物；不放入Evolve，不将原图或作者视频当本地结果。  视频生成与世界模型 像素空间视频扩散 多模态 世界建模：状态、生成与动作条件 PixVid在像素空间生成，是否意味着不使用预训练latent模型知识？ 不是。它迁移预训练latent DiT，通过离线像素-latent对齐和时间步校准保留知识，再新增detailer。像素输出空间与是否从零训练是两件事。 教学例：继承DiT权重但替换输入patch映射和输出detailer，仍属于利用latent预训练，不是随机初始化全模型。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<span id="paper-multimodal-models-pixvid-b6dfb4a6" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-4ab5af937fce1a54">PixVid在像素空间生成，是否意味着不使用预训练latent模型知识？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Apixvid">Back to Pixels: Lifting Latent Video Diffusion into Pixel Space</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Roblox</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。它迁移预训练latent DiT，通过离线像素-latent对齐和时间步校准保留知识，再新增detailer。像素输出空间与是否从零训练是两件事。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：继承DiT权重但替换输入patch映射和输出detailer，仍属于利用latent预训练，不是随机初始化全模型。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17336v1">原论文</a> · <a href="../../../../multimodal-models/2611.17336-pixvid/">实现解读</a> · <a href="#qa-4ab5af937fce1a54">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:pixvid" data-paper-title="Back to Pixels: Lifting Latent Video Diffusion into Pixel Space" data-learning-pending="false" data-level="mechanism" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Back to Pixels: Lifting Latent Video Diffusion into Pixel Space 多模态大模型 Roblox 2026-11-12 像素视频生成避免VAE潜空间约束，但直接从零学习大规模时空关系成本很高。PixVid保留预训练latent DiT知识，以离线像素—latent线性对齐融合进patch embedding、校准噪声时间步，再加入detailer处理高频细节。高分辨率patch初始化与新增上采样块控制token数量，不能只把VAE删掉就等同本文。§2—3 完整14B视频训练与评测成本过高，不复现（审查 DONE）；未实现组件、未生成视频、未运行GPU、没有指标产物；资料收录，未实现。完整14B视频训练与评测成本过高，不复现（审查 DONE）；普通flow loss或插值不是PixVid复现。本轮仅核对方法、首发时间、机构、代码发布状态与成本。未实现组件、未生成视频、未运行GPU、没有指标产物；不放入Evolve，不将原图或作者视频当本地结果。  视频生成与世界模型 像素空间视频扩散 多模态 世界建模：状态、生成与动作条件 只实现带噪声尺度权重的flow MSE，能算PixVid核心完整实现吗？ 不能。还需要像素-latent线性对齐融合、SNR时间映射、patch迁移和时空detailer及其训练约束。通用loss没有兑现这些结构和依赖。 教学例：给任意卷积网络加1/sigma平方权重，不会自动获得原DiT知识或正确跨帧缓存。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-9e3b08012c24e2cd">只实现带噪声尺度权重的flow MSE，能算PixVid核心完整实现吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Apixvid">Back to Pixels: Lifting Latent Video Diffusion into Pixel Space</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Roblox</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。还需要像素-latent线性对齐融合、SNR时间映射、patch迁移和时空detailer及其训练约束。通用loss没有兑现这些结构和依赖。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：给任意卷积网络加1/sigma平方权重，不会自动获得原DiT知识或正确跨帧缓存。</p>
+<p class="ar-learning-sources">依据：核心机制与公式、本地范围与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17336v1">原论文</a> · <a href="../../../../multimodal-models/2611.17336-pixvid/">实现解读</a> · <a href="#qa-9e3b08012c24e2cd">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:pixvid" data-paper-title="Back to Pixels: Lifting Latent Video Diffusion into Pixel Space" data-learning-pending="false" data-level="comparison" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Back to Pixels: Lifting Latent Video Diffusion into Pixel Space 多模态大模型 Roblox 2026-11-12 像素视频生成避免VAE潜空间约束，但直接从零学习大规模时空关系成本很高。PixVid保留预训练latent DiT知识，以离线像素—latent线性对齐融合进patch embedding、校准噪声时间步，再加入detailer处理高频细节。高分辨率patch初始化与新增上采样块控制token数量，不能只把VAE删掉就等同本文。§2—3 完整14B视频训练与评测成本过高，不复现（审查 DONE）；未实现组件、未生成视频、未运行GPU、没有指标产物；资料收录，未实现。完整14B视频训练与评测成本过高，不复现（审查 DONE）；普通flow loss或插值不是PixVid复现。本轮仅核对方法、首发时间、机构、代码发布状态与成本。未实现组件、未生成视频、未运行GPU、没有指标产物；不放入Evolve，不将原图或作者视频当本地结果。  视频生成与世界模型 像素空间视频扩散 多模态 世界建模：状态、生成与动作条件 PixVid与WOVEN都用视频模型，为什么不是同一任务？ PixVid研究生成器从latent到pixel的表示和计算路径；WOVEN用动作条件视频rollout形成状态转移监督，再训练多模态问答。生成质量不直接等于转移推理能力。 教学例：视频看起来更清晰，仍可能把动作结果生成错；正确回答转移选择题也不说明模型能生成高分辨率视频。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-7a16e6f0bc6bfac6">PixVid与WOVEN都用视频模型，为什么不是同一任务？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Apixvid">Back to Pixels: Lifting Latent Video Diffusion into Pixel Space</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Roblox</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>PixVid研究生成器从latent到pixel的表示和计算路径；WOVEN用动作条件视频rollout形成状态转移监督，再训练多模态问答。生成质量不直接等于转移推理能力。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：视频看起来更清晰，仍可能把动作结果生成错；正确回答转移选择题也不说明模型能生成高分辨率视频。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17336v1">原论文</a> · <a href="../../../../multimodal-models/2611.17336-pixvid/">实现解读</a> · <a href="#qa-7a16e6f0bc6bfac6">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:pixvid" data-paper-title="Back to Pixels: Lifting Latent Video Diffusion into Pixel Space" data-learning-pending="false" data-level="implementation" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Back to Pixels: Lifting Latent Video Diffusion into Pixel Space 多模态大模型 Roblox 2026-11-12 像素视频生成避免VAE潜空间约束，但直接从零学习大规模时空关系成本很高。PixVid保留预训练latent DiT知识，以离线像素—latent线性对齐融合进patch embedding、校准噪声时间步，再加入detailer处理高频细节。高分辨率patch初始化与新增上采样块控制token数量，不能只把VAE删掉就等同本文。§2—3 完整14B视频训练与评测成本过高，不复现（审查 DONE）；未实现组件、未生成视频、未运行GPU、没有指标产物；资料收录，未实现。完整14B视频训练与评测成本过高，不复现（审查 DONE）；普通flow loss或插值不是PixVid复现。本轮仅核对方法、首发时间、机构、代码发布状态与成本。未实现组件、未生成视频、未运行GPU、没有指标产物；不放入Evolve，不将原图或作者视频当本地结果。  视频生成与世界模型 像素空间视频扩散 多模态 世界建模：状态、生成与动作条件 单张A100显存可能装得下一次PixVid推理，为什么本轮仍不复现？ 成本门槛看整套训练与评测，不只看是否装得下。论文有14B、约130万clip、20k更新和多臂分辨率矩阵；本轮资料收录并审查DONE，不下载资源或试训探成本。 教学例：原文一个设置需192秒生成一clip；成百上千clip、多种子和训练还另计，不能称为快速组件验证。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-b26edbe834029176">单张A100显存可能装得下一次PixVid推理，为什么本轮仍不复现？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Apixvid">Back to Pixels: Lifting Latent Video Diffusion into Pixel Space</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Roblox</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>成本门槛看整套训练与评测，不只看是否装得下。论文有14B、约130万clip、20k更新和多臂分辨率矩阵；本轮资料收录并审查DONE，不下载资源或试训探成本。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：原文一个设置需192秒生成一clip；成百上千clip、多种子和训练还另计，不能称为快速组件验证。</p>
+<p class="ar-learning-sources">依据：论文离线与线上效果、本地范围与成本决定；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17336v1">原论文</a> · <a href="../../../../multimodal-models/2611.17336-pixvid/">实现解读</a> · <a href="#qa-b26edbe834029176">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:onlyact" data-paper-title="OnlyAct: Extracting Action Representations from Foundation Models for World Models" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="OnlyAct: Extracting Action Representations from Foundation Models for World Models 多模态大模型 University of Oxford 2026-11-10 无标签 latent-action 方法常用重建瓶颈排除场景，但过窄会丢动作细节，过宽又会泄漏外观。OnlyAct 从已预训练的 V-JEPA 2 ViT-L 出发：两帧作为同一 clip 输入，tubelet 从第一层联合观察两帧，而不是先单帧编码再求差；均值池化、固定随机投影至 640 维并归一化。它用场景交换的同动作正例，以及同一视频不同时间窗的 hard negative 做对比适配。静态相机用 RAFT 光流提取移动区域，原像素共同平移并粘到另一场景； 完整矩阵明显超出本轮短预算，成本过高，不复现（审查 DONE）；真实 NVIDIA A100 的 CUDA 42/43/44 诊断也已通过，见真实 GPU 回执与三 seed 指标。L1 对比损失／输入合同组件，不是 V-JEPA 2 动作编码器或世界模型复现。本地执行全候选损失、固定投影和 hard-negative 合同，不伪造场景交换视频、光流或真实动作能力。pooled_action 只处理外部两帧联合编码 token 的池化、冻结投影和归一化，不含任何假 V-JEPA。bank_contract 定义精确候选与正例索引；contrastive_loss 执行对称 InfoNCE 并实际反传。  JEPA 表征学习 动作场景解耦与世界模型 多模态 世界建模：状态、生成与动作条件 OnlyAct为什么把同一视频的另一时间窗当hard negative，而不只用其他视频？ 不同视频常能仅凭背景外观分开，模型可能不必学习动作。同视频非重叠窗保留较相似场景，使这种捷径更难；但无动作标签，所以不同窗不保证动作语义真的不同。 教学例：同一厨房里“开抽屉”和“关抽屉”比厨房与游戏画面的对比更难用场景颜色直接区分。 2026-11-12">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
 <span id="paper-multimodal-models-onlyact-72d2c481" class="ar-learning-paper-anchor"></span>

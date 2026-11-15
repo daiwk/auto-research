@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-15",
+  "figures": [
+    {
+      "file": "paper-figure-01.png",
+      "version": "v1",
+      "paper_url": "https://arxiv.org/abs/2611.16369v1",
+      "paper_id": "2611.16369",
+      "figure": 2,
+      "source_url": "https://arxiv.org/html/2611.16369v1/fig/bait.png",
+      "source_kind": "fixed_v1_original_png_defensive_panel_crop",
+      "original_image_sha256": "af925d0822e0bf8864191eba555ef0406bffdb734700b062fe5e8f969acc0dc9",
+      "image_sha256": "a7294337b44c41b30a757df2c2db012e42d3c4849089afd61c5acbfd3a292bf8",
+      "crop_pixels": [
+        1135,
+        682,
+        1926,
+        1206
+      ],
+      "caption_included": false,
+      "crop_note": "Only bottom-right reward/pseudo-reward panel. Omit attack and probe-text panels; no values redrawn. The figure's >0 illustration differs from equations' >=0; local code follows Eqs.3–5.",
+      "scientific_content_modified": false,
+      "visual_review_done": true,
+      "attribution": "Copyright belongs to the original authors; attributed paper figure reproduced for research explanation, not a local experimental result.",
+      "license": "See fixed arXiv source; no new license granted by this repository."
+    }
+  ]
+}

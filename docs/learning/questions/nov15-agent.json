@@ -1,0 +1,341 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "agent-research:coremem": {
+      "questions": [
+        {
+          "id": "future-inherited-state",
+          "level": "basics",
+          "question": "CoReMem为什么不能把每个任务都重置到标准repo再评记忆？",
+          "answer": "论文研究前一任务写入后继repo的连续任务；仓库和记忆一起继承。重置或塞gold patch会改变后继任务难度，也破坏有／无记忆的同状态差值。",
+          "example": "教学例：任务1改了接口名，任务2必须面对这次真实改动；不能偷偷恢复到已正确修复的repo。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "traceable-use-not-causality",
+          "level": "mechanism",
+          "question": "记忆锚点出现一次，就能证明记忆导致成功吗？",
+          "answer": "不能。门控还排除此前历史和无记忆兄弟前8步已触达的锚点，并只给首次使用。即使通过，它只表明可追踪使用；实际因果贡献仍需有效对照。",
+          "example": "教学例：模型引用memory里的测试命令，可能不用memory也会找到它；兄弟前缀用于减少这类错误归因。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "value-versus-price",
+          "level": "comparison",
+          "question": "CoReMem与MemPrice都谈记忆成本，优化的是同一个量吗？",
+          "answer": "不同。CoReMem对相同后继repo的replay估计记忆带来的成功／步骤变化并训练写记忆；MemPrice依据外部效用和token大小分配保真等级，用压力队列控制长期占用。",
+          "example": "教学例：少存100token不一定少执行一次测试；CoReMem的未来工作量与MemPrice的上下文容量不能直接等同。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "fixed-scale-reduction",
+          "level": "implementation",
+          "question": "为什么不能把CoReMem的100改成组标准差，并统一成session平均？",
+          "answer": "原文固定scale100，27B按token全局平均，9B先session内平均再平均。改成std或另一归约会改变梯度尺度和长短session权重，不只是数值稳定性修补。",
+          "example": "教学例：一条3token会话与一条1token会话，在token mean下权重3比1，session mean下为1比1。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        }
+      ]
+    },
+    "agent-research:caplite": {
+      "questions": [
+        {
+          "id": "authority-not-payload",
+          "level": "basics",
+          "question": "CapLite的写入完整性意味着邮件正文也不会被注入影响吗？",
+          "answer": "不意味着。它约束收件人、金额、对象、目的地等authority值及预提交写序列。自由payload、时间、最终答案和读内容不在同一保证内。",
+          "example": "教学例：收件人必须是用户指定邮箱，但正文可能仍夹带错误文本；不应因此宣称整封邮件安全。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "grounding-and-prefix",
+          "level": "mechanism",
+          "question": "参数都来自用户请求，为什么还需要预提交写序列？",
+          "answer": "grounding只限制参数值，不能阻止攻击新增或重排本来合法的写操作。预提交序列限制动作，mediator只执行其成功前缀，首次deny／ask／error就结束剩余写入。",
+          "example": "教学例：用户提过Alice与Bob两个邮箱，也不表示恶意网页可以新增一次向Bob转账。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "caplite-versus-runtime-tickets",
+          "level": "comparison",
+          "question": "CapLite和RuntimeTickets都在副作用前检查，信任根相同吗？",
+          "answer": "不完全相同。CapLite从可信schema与请求精确grounding派生authority，再固定写序列；RuntimeTickets把具原文依据的obligation经host审核冻结，并检查grant收紧、对象validator和累计额度。",
+          "example": "教学例：邮箱必须出现在请求里与累计交付不能超过100字节，是两种不同合同，不能互相替代。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "schema-subset-no-universal-guarantee",
+          "level": "implementation",
+          "question": "本地CapLite通过负控后，可以直接保护所有工具吗？",
+          "answer": "不能。这里只支持平面标量／标量数组schema，未知类型拒绝。schema与确认必须可信，且所有副作用都被mediator拦截；同进程绕过、嵌套schema和真实SLM绑定均未实现。",
+          "example": "教学例：名为get的工具若暗中写文件，词法分类不会发现；工具契约错误不能靠grounding自动修正。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        }
+      ]
+    },
+    "agent-research:ace-rl": {
+      "questions": [
+        {
+          "id": "fixed-scaffold-frozen-inference",
+          "level": "basics",
+          "question": "ACE-RL的RSI是在测试时不断训练模型或改harness吗？",
+          "answer": "不是。训练时共享模型学习actor、reflector和curator；推理时权重冻结，ACE scaffold固定，仅同一任务的playbook在尝试间交接。",
+          "example": "教学例：下一次尝试收到新测试经验，不代表模型权重刚做了一步梯度更新。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "downstream-value-not-text-judge",
+          "level": "mechanism",
+          "question": "reflector和curator为什么不能只按文字反思质量打分？",
+          "answer": "它们的目标是改进后续actor。curator取编辑后全新环境actor的回报，reflector取其可接受编辑的平均值；不可应用或无变化编辑不产生候选，空集合为0。",
+          "example": "教学例：反思写得流畅却使下一次执行失败，不能因文笔好就获高reward。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "ace-versus-gigpo-group",
+          "level": "comparison",
+          "question": "ACE-RL和GiGPO都分组做credit，分组单元相同吗？",
+          "answer": "不同。GiGPO组合轨迹macro优势与共享anchor-state的micro优势；ACE-RL按actor任务、reflector种子、curator反思来源分别比较，并用后续actor值奖励交接物。",
+          "example": "教学例：同一反思产生的三条编辑是一个curator组，不是三条轨迹恰好到达同一环境state。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "singleton-reset-token-mean",
+          "level": "implementation",
+          "question": "为什么不能把所有singleton丢掉，并每3步统一reset？",
+          "answer": "fractional threshold组里的singleton可能以mean0／scale1保留；MiniSWE range过滤才要求非零差。reset按每个任务的第3、6次encounter开始前，而非optimizer步；联合loss按生成token数归约。",
+          "example": "教学例：任务A已遇两次、B一次，下一optimizer step只应在A第三次到来时清空A，不能清空所有任务。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        }
+      ]
+    },
+    "agent-research:multiloop": {
+      "questions": [
+        {
+          "id": "empirical-not-new-optimizer",
+          "level": "basics",
+          "question": "MULTILOOP是否提出了新的多Agent优化算法？",
+          "answer": "正文明确不是新优化策略，而是将已有自动harness优化范式用于多Agent信息检索的实证研究。贡献包括真实结果和失败分类，不能用通用for-loop冒称实现新算法。",
+          "example": "教学例：把现有代码优化器接到多Agent轨迹上值得研究，但一个空循环不等于复现其语义诊断。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "traces-and-history",
+          "level": "mechanism",
+          "question": "优化器除了当前分数，还需要看什么？",
+          "answer": "需要完整orchestrator／subagent轨迹、工具输入输出以及历轮代码编辑和评测历史。分数告诉它哪里没成功，细节和历史才支持定位失误并避免反复试过的改动。",
+          "example": "教学例：分数低不能区分子任务分错、检索范围漂移或最后答案合成错。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "optimization-versus-attribution",
+          "level": "comparison",
+          "question": "MULTILOOP变好是否等于HarnessLens式可归因编排修复？",
+          "answer": "不等于。MULTILOOP多数收益来自提示和工具，编排故障仍在；HarnessLens强调行为相关任务上的配对验证与归因门。总体涨分不能单独证明某种结构修复有效。",
+          "example": "教学例：把搜索提示写清楚提高总分，也可能完全没有改善子任务分配。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "ten-examples-not-cheap",
+          "level": "implementation",
+          "question": "训练只用10道题，为什么仍判完整实验高成本？",
+          "answer": "每题涉及多个真实检索Agent及长工具轨迹；原文单轮10题也花104–213美元，890测试题双次评估花数千至上万美元。样本数不是模型调用成本。",
+          "example": "教学例：10道每题并行几十次搜索的任务，可能比上千个CPU算术样例贵得多。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        }
+      ]
+    },
+    "agent-research:stellar-colosseum": {
+      "questions": [
+        {
+          "id": "readiness-not-proof",
+          "level": "basics",
+          "question": "readiness gate通过是否表示证明已经正确？",
+          "answer": "不是。它只表示路线足够稳定，未解决命题能明确分给证明小节。局部结果和拼接全文还要分别复核，严重策略缺陷应回到探索而不是强行续写。",
+          "example": "教学例：知道需要证明哪条lemma不等于已证明它，更不等于它的前提可被下游直接引用。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "overlap-not-partition-vote",
+          "level": "mechanism",
+          "question": "候选树综合是把样本分组后多数投票吗？",
+          "answer": "不是。每节点组内无放回，组间独立可重叠；输入保留候选及其反驳。语义综合可修补或保留冲突，明确致命缺陷不能被多数模糊认可压掉。",
+          "example": "教学例：一个反例足以推翻定理，即使另外五个模型说看起来没问题。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "proof-versus-scientist-experiments",
+          "level": "comparison",
+          "question": "Stellar Colosseum和ScientistTwo的全局核查可以统一成success字段吗？",
+          "answer": "不应。前者核对证明假设、跨节依赖和目标结论，后者组织子集／全量实验、消融和评审。两者都需外部语义判断，但判断对象与充分证据不同。",
+          "example": "教学例：benchmark均分提高不能证明数学引理，证明无矛盾也不能替代真实实验对照。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "grader-reference-selection-separation",
+          "level": "implementation",
+          "question": "71.0%与oracle77.3%为什么必须分开，参考proof能给选择器吗？",
+          "answer": "71.0%来自8次critique的可执行选路；77.3%只是假设知道两套候选谁正确的上界。参考proof仅供最终grader，若给actor或选择器就把oracle上界伪装成真实能力。",
+          "example": "教学例：不知道答案时选候选，与事后看gold挑正确那条，是不同评测协议。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        }
+      ]
+    },
+    "agent-research:leap-formal-math": {
+      "questions": [
+        {
+          "id": "compiler-not-usefulness",
+          "level": "basics",
+          "question": "Lean编译通过是否就表示这个blueprint能有效简化证明？",
+          "answer": "不表示。编译器验证形式sketch在给定子lemma前提下成立；子lemma可能等价于原目标或更难。LEAP另用LLM reviewer筛掉无进展分解，这仍是启发式而非证明核。",
+          "example": "教学例：把待证定理改个名字作为新lemma，形式上可接起来，却没有减少任何证明工作。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "and-or-shared-lemmas",
+          "level": "mechanism",
+          "question": "LEAP为什么用AND–OR DAG而不是只维护一棵分解树？",
+          "answer": "OR记录同一目标的替代策略，AND要求某种sketch的所有必要lemma成立；DAG让不同分支共享已经验证的lemma。前瞻辅助lemma可以保存但不自动成为当前必要依赖。",
+          "example": "教学例：两条证明路线都需同一有限集引理，只证明并存储一次，不能把无关辅助lemma也当必需。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "leap-versus-drago",
+          "level": "comparison",
+          "question": "LEAP和DRAGO都引入形式工具，为什么还需要语义检查？",
+          "answer": "形式工具只对给定陈述做验证。LEAP的合法分解可能毫无进展，DRAGO的可解规格可能描述错题；有用性与题意忠实度需另检查。二者都不能因形式通过就把自然语言主张当真。",
+          "example": "教学例：Lean证明了错误翻译的弱定理，与规划器解出了少目标版本一样，形式正确却未完成原任务。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        },
+        {
+          "id": "revision-artifacts-no-agent",
+          "level": "implementation",
+          "question": "官方Lean答案已公开，能否直接说LEAP已开源且本地复现？",
+          "answer": "不能混淆。官方目录公开证明结果，不等于通用agent/harness源码；本地没有运行Lean或模型。还须保留6月v1首发，把11月v3标为修订，不能当新论文重复统计。",
+          "example": "教学例：下载标准证明作为actor输入会泄漏答案，不是实现了自动证明器。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-15"
+        }
+      ]
+    }
+  }
+}

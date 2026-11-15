@@ -7,7 +7,7 @@ hide:
 
 # 记忆与技能：让经验可取回、可失效
 
-[Agent](index.md) / 244 个问题 · 61 篇论文
+[Agent](index.md) / 248 个问题 · 62 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">244 个问题 · 61 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">248 个问题 · 62 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:coremem" data-paper-title="CoReMem: Cost-Internalizing Memory for Successive Coding Tasks with Prospective Valuation" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="CoReMem: Cost-Internalizing Memory for Successive Coding Tasks with Prospective Valuation Agent Yale University 2026-11-12 连续编码任务不是把独立SWE问题逐题重置：前一任务写入的代码和文本记忆都会影响下一任务。CoReMem要求在下一任务出现前写记忆，再从完全相同的继承仓库状态运行有／无记忆分支，以未来任务的解决率与工作量评价记忆，而不是评价摘要“看起来是否有用”。训练把自己的记忆、无记忆与错配记忆放进同一边界组。成功优先reward防止模型只少做几步却不解决问题；首次使用的repo位置或可执行检查锚点，把记忆整体的价值差只归到可追踪使用的步骤。语义锚点抽取与真实coding rollout仍由外部模型和环境完成。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是编码Agent能力复现。component_only／L1机制诊断，不是编码Agent能力复现。完整实验成本过高，不复现（审查 DONE）；本地只实现reward、来源门控及真实小tensor训练目标。ReplayOutcome只供trainer/evaluator保存外部结果。paired_step_saving拒绝不同boundary或继承状态；provenance_gates接收外部精确锚点集合，不伪造语义抽取。step_advantages执行Eq7；  记忆与技能 连续编码任务与记忆信用 Agent 记忆与技能：让经验可取回、可失效 CoReMem为什么不能把每个任务都重置到标准repo再评记忆？ 论文研究前一任务写入后继repo的连续任务；仓库和记忆一起继承。重置或塞gold patch会改变后继任务难度，也破坏有／无记忆的同状态差值。 教学例：任务1改了接口名，任务2必须面对这次真实改动；不能偷偷恢复到已正确修复的repo。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<span id="paper-agent-research-coremem-59ee9992" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-c4c1e1a06f775b1d">CoReMem为什么不能把每个任务都重置到标准repo再评记忆？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acoremem">CoReMem: Cost-Internalizing Memory for Successive Coding Tasks with Prospective Valuation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Yale University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>论文研究前一任务写入后继repo的连续任务；仓库和记忆一起继承。重置或塞gold patch会改变后继任务难度，也破坏有／无记忆的同状态差值。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：任务1改了接口名，任务2必须面对这次真实改动；不能偷偷恢复到已正确修复的repo。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17316v1">原论文</a> · <a href="../../../../agent-research/2611.17316-coremem/">实现解读</a> · <a href="#qa-c4c1e1a06f775b1d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:coremem" data-paper-title="CoReMem: Cost-Internalizing Memory for Successive Coding Tasks with Prospective Valuation" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="CoReMem: Cost-Internalizing Memory for Successive Coding Tasks with Prospective Valuation Agent Yale University 2026-11-12 连续编码任务不是把独立SWE问题逐题重置：前一任务写入的代码和文本记忆都会影响下一任务。CoReMem要求在下一任务出现前写记忆，再从完全相同的继承仓库状态运行有／无记忆分支，以未来任务的解决率与工作量评价记忆，而不是评价摘要“看起来是否有用”。训练把自己的记忆、无记忆与错配记忆放进同一边界组。成功优先reward防止模型只少做几步却不解决问题；首次使用的repo位置或可执行检查锚点，把记忆整体的价值差只归到可追踪使用的步骤。语义锚点抽取与真实coding rollout仍由外部模型和环境完成。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是编码Agent能力复现。component_only／L1机制诊断，不是编码Agent能力复现。完整实验成本过高，不复现（审查 DONE）；本地只实现reward、来源门控及真实小tensor训练目标。ReplayOutcome只供trainer/evaluator保存外部结果。paired_step_saving拒绝不同boundary或继承状态；provenance_gates接收外部精确锚点集合，不伪造语义抽取。step_advantages执行Eq7；  记忆与技能 连续编码任务与记忆信用 Agent 记忆与技能：让经验可取回、可失效 记忆锚点出现一次，就能证明记忆导致成功吗？ 不能。门控还排除此前历史和无记忆兄弟前8步已触达的锚点，并只给首次使用。即使通过，它只表明可追踪使用；实际因果贡献仍需有效对照。 教学例：模型引用memory里的测试命令，可能不用memory也会找到它；兄弟前缀用于减少这类错误归因。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-916de7a8ec947e97">记忆锚点出现一次，就能证明记忆导致成功吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acoremem">CoReMem: Cost-Internalizing Memory for Successive Coding Tasks with Prospective Valuation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Yale University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。门控还排除此前历史和无记忆兄弟前8步已触达的锚点，并只给首次使用。即使通过，它只表明可追踪使用；实际因果贡献仍需有效对照。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：模型引用memory里的测试命令，可能不用memory也会找到它；兄弟前缀用于减少这类错误归因。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17316v1">原论文</a> · <a href="../../../../agent-research/2611.17316-coremem/">实现解读</a> · <a href="#qa-916de7a8ec947e97">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:coremem" data-paper-title="CoReMem: Cost-Internalizing Memory for Successive Coding Tasks with Prospective Valuation" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="CoReMem: Cost-Internalizing Memory for Successive Coding Tasks with Prospective Valuation Agent Yale University 2026-11-12 连续编码任务不是把独立SWE问题逐题重置：前一任务写入的代码和文本记忆都会影响下一任务。CoReMem要求在下一任务出现前写记忆，再从完全相同的继承仓库状态运行有／无记忆分支，以未来任务的解决率与工作量评价记忆，而不是评价摘要“看起来是否有用”。训练把自己的记忆、无记忆与错配记忆放进同一边界组。成功优先reward防止模型只少做几步却不解决问题；首次使用的repo位置或可执行检查锚点，把记忆整体的价值差只归到可追踪使用的步骤。语义锚点抽取与真实coding rollout仍由外部模型和环境完成。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是编码Agent能力复现。component_only／L1机制诊断，不是编码Agent能力复现。完整实验成本过高，不复现（审查 DONE）；本地只实现reward、来源门控及真实小tensor训练目标。ReplayOutcome只供trainer/evaluator保存外部结果。paired_step_saving拒绝不同boundary或继承状态；provenance_gates接收外部精确锚点集合，不伪造语义抽取。step_advantages执行Eq7；  记忆与技能 连续编码任务与记忆信用 Agent 记忆与技能：让经验可取回、可失效 CoReMem与MemPrice都谈记忆成本，优化的是同一个量吗？ 不同。CoReMem对相同后继repo的replay估计记忆带来的成功／步骤变化并训练写记忆；MemPrice依据外部效用和token大小分配保真等级，用压力队列控制长期占用。 教学例：少存100token不一定少执行一次测试；CoReMem的未来工作量与MemPrice的上下文容量不能直接等同。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-ead2878f07471852">CoReMem与MemPrice都谈记忆成本，优化的是同一个量吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acoremem">CoReMem: Cost-Internalizing Memory for Successive Coding Tasks with Prospective Valuation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Yale University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同。CoReMem对相同后继repo的replay估计记忆带来的成功／步骤变化并训练写记忆；MemPrice依据外部效用和token大小分配保真等级，用压力队列控制长期占用。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：少存100token不一定少执行一次测试；CoReMem的未来工作量与MemPrice的上下文容量不能直接等同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17316v1">原论文</a> · <a href="../../../../agent-research/2611.17316-coremem/">实现解读</a> · <a href="#qa-ead2878f07471852">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:coremem" data-paper-title="CoReMem: Cost-Internalizing Memory for Successive Coding Tasks with Prospective Valuation" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="CoReMem: Cost-Internalizing Memory for Successive Coding Tasks with Prospective Valuation Agent Yale University 2026-11-12 连续编码任务不是把独立SWE问题逐题重置：前一任务写入的代码和文本记忆都会影响下一任务。CoReMem要求在下一任务出现前写记忆，再从完全相同的继承仓库状态运行有／无记忆分支，以未来任务的解决率与工作量评价记忆，而不是评价摘要“看起来是否有用”。训练把自己的记忆、无记忆与错配记忆放进同一边界组。成功优先reward防止模型只少做几步却不解决问题；首次使用的repo位置或可执行检查锚点，把记忆整体的价值差只归到可追踪使用的步骤。语义锚点抽取与真实coding rollout仍由外部模型和环境完成。 完整实验成本过高，不复现（审查 DONE）；component_only／L1机制诊断，不是编码Agent能力复现。component_only／L1机制诊断，不是编码Agent能力复现。完整实验成本过高，不复现（审查 DONE）；本地只实现reward、来源门控及真实小tensor训练目标。ReplayOutcome只供trainer/evaluator保存外部结果。paired_step_saving拒绝不同boundary或继承状态；provenance_gates接收外部精确锚点集合，不伪造语义抽取。step_advantages执行Eq7；  记忆与技能 连续编码任务与记忆信用 Agent 记忆与技能：让经验可取回、可失效 为什么不能把CoReMem的100改成组标准差，并统一成session平均？ 原文固定scale100，27B按token全局平均，9B先session内平均再平均。改成std或另一归约会改变梯度尺度和长短session权重，不只是数值稳定性修补。 教学例：一条3token会话与一条1token会话，在token mean下权重3比1，session mean下为1比1。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-7f43dd98b13ad3b7">为什么不能把CoReMem的100改成组标准差，并统一成session平均？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Acoremem">CoReMem: Cost-Internalizing Memory for Successive Coding Tasks with Prospective Valuation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Yale University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>原文固定scale100，27B按token全局平均，9B先session内平均再平均。改成std或另一归约会改变梯度尺度和长短session权重，不只是数值稳定性修补。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一条3token会话与一条1token会话，在token mean下权重3比1，session mean下为1比1。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17316v1">原论文</a> · <a href="../../../../agent-research/2611.17316-coremem/">实现解读</a> · <a href="#qa-7f43dd98b13ad3b7">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:wikitrace" data-paper-title="Don&#x27;t Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/memory-and-skills" data-search="Don&#x27;t Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents Agent KAIST 2026-11-10 从一次成功或失败轨迹提炼出的洞见不一定正确，也可能被误用到不适用的任务。WikiTrace 不只保存一句经验，而是把洞见链接到该次执行的解释及未改写的原轨迹。模型先看全部洞见，在细节不足、洞见冲突或来源失败时，自主沿链接下钻。解释仍是模型推断，不因带有链接就自动成为已验证知识。 完整长 rollout grid 成本过高，不复现（审查 DONE）；L1 机制诊断不是记忆能力成绩，不进入 Evolve 晋级。本地交付纯 CPU 链接语料组件，不包含 LLM 编译器或求解 Agent；L1 机制诊断不是记忆能力成绩，不进入 Evolve 晋级。SourceRun 只接受训练划分的可观察动作、观察和成败；Compilation、Insight 由调用者显式提供。EvidenceLinkedCorpus 检查唯一 ID、源覆盖、每次最多三条洞见，保留矛盾洞见和失败轨迹，不伪装成自动编译或事实验证。actor_memory() 返回洞见；descend() 精确返回关联解释和原轨迹。  主动 / 长期记忆 证据链接与记忆可靠性 Agent 记忆与技能：让经验可取回、可失效 为什么加入一次成功经验，反而可能让 WikiTrace 所研究的 Agent 做错原本会做的任务？ 成败只标记整次执行，不证明提炼出的每条洞见都正确，也不界定适用条件。错误归因或跨范围使用都可能诱发 memory-induced regression；因此要保留可回查的源，而不是把成功标签当知识证明。 教学例：把“检查灯后任务结束”从一次成功轨迹中提炼出来，可能遗漏后续打开灯的动作；新任务按这句经验提前停止就会失败。 2026-11-11">
 <p class="ar-learning-card__domain"><a href="./">Agent / 记忆与技能：让经验可取回、可失效</a></p>
 <span id="paper-agent-research-wikitrace-5d34927a" class="ar-learning-paper-anchor"></span>

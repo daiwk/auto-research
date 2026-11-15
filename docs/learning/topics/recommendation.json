@@ -315,7 +315,10 @@
         "recommendation:pailitao-mmsearch2",
         "recommendation:pinger",
         "recommendation:reusegr",
-        "recommendation:spade-local-search"
+        "recommendation:spade-local-search",
+        "recommendation:resid",
+        "recommendation:trigen",
+        "recommendation:kuairec-v2-protocol"
       ]
     },
     {

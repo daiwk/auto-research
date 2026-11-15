@@ -7,7 +7,7 @@ hide:
 
 # 规划与搜索：下一步该做什么
 
-[Agent](index.md) / 84 个问题 · 21 篇论文
+[Agent](index.md) / 88 个问题 · 22 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">84 个问题 · 21 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">88 个问题 · 22 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:drago" data-paper-title="Repairing LLM-Generated Specifications with Deterministic Diagnosis" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Repairing LLM-Generated Specifications with Deterministic Diagnosis Agent University of Oxford 2026-10-15 形式规格“能运行”不等于“忠实表达了题意”。DRAGO 将 SMT-LIB2、MiniZinc 和 PDDL 的契约、求解器探针及题意对齐检查转为可定位诊断，再要求模型定向修复。候选必须保留语法/词表/输出合同，严格降低阻塞诊断，并满足防退化条件；参考形式化和最终标签只用于最后评分。方法 §3、附录 A.2 原图建议：原论文 Figure 2 为诊断/接纳消融；Figure 3 为 Planetarium 输入渲染缺陷。它们分别解释算法贡献和评测风险。 原文用 4×A100 服务30B/31B模型，跨5个 benchmark 多seed、多臂重评估，完整实验成本过高，不复现（审查 DONE）。实现 grounded STRIPS/PDDL 方向的诊断算子子集；component_only / L1 CPU。实现 grounded STRIPS/PDDL 方向的诊断算子子集；不冒充完整三形式化语言框架。CPU fixture 随机化走廊规模，实际执行无前提路径、联合目标冲突、预算耗尽、证据支持的初态修复，以及“删掉目标就算修好”的负对照。proposal 回调只拿公开 Problem 和 Diagnosis，不拿金标准。  规划与搜索 形式规格诊断与保守修复 Agent 规划与搜索：下一步该做什么 让 LLM 把自然语言题目写成形式规格时，DRAGO 要防哪类“看似成功”？ 模型可能生成能解析、能求解，却遗漏要求的规格，后续求解器只会忠实解决这个错误版本。DRAGO 关注自然语言到形式系统的转换可靠性，用可定位诊断约束修复，而不是把拿到一个解当作原题已解决；规格和求解是两个需要分开检查的环节。 例如题目要求两人都被安排，规格漏写一人后排班更容易有解，但这个“成功”恰好暴露了形式化阶段的遗漏。 2026-10-27">
@@ -610,6 +610,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>例如图显示查客户可产出 customer_id，不代表 ID 已可用；必须真正查询并核对结果，不能凭 schema 直接填一个 ID。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现、复现边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2608.02650">原论文</a> · <a href="../../../../agent-research/2608.02650-hyperagent/">实现解读</a> · <a href="#qa-24ccc7bcfe4e43ea">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:leap-formal-math" data-paper-title="LEAP: Supercharging LLMs for Formal Mathematics with Agentic Frameworks" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="LEAP: Supercharging LLMs for Formal Mathematics with Agentic Frameworks Agent Google Cloud AI Research 2026-06-02 能写出看似合理的数学论证，不代表一次就能生成Lean核通过的长证明。LEAP先直接尝试非形式论证→Lean代码→编译器反馈修订，失败后提出blueprint，再把lemma依赖写进持久AND–OR DAG。OR节点是待证目标的替代策略，AND节点是一种需要所有子lemma成立的分解，已验证结果可跨分支复用。形式可编译仍不等于分解有价值。Lean sketch只允许新lemma处保留sorry，主目标正文不得sorry；依赖还必须无环。 完整实验成本过高，不复现（审查 DONE）。未运行Lean证明或模型，不把通用DAG组件包装成形式化Agent。review_only：Google高优先历史修订补漏，仅资料收录。完整实验成本过高，不复现（审查 DONE）。未运行Lean证明或模型，不把通用DAG组件包装成形式化Agent。只收录固定v3原文及原始v1日期、方法、图与学习资料。官方解答repo不是本地actor可读的输入；它包含证明答案，不能偷偷作为待证任务提示。未实现模型、LeanSearch、Lean compiler桥接、DAG证明Agent、Lean-IMO评测器或模型筛选，无runtime／能力metrics／GPU收据。  规划与推理 形式化证明与DAG记忆 Agent 规划与搜索：下一步该做什么 Lean编译通过是否就表示这个blueprint能有效简化证明？ 不表示。编译器验证形式sketch在给定子lemma前提下成立；子lemma可能等价于原目标或更难。LEAP另用LLM reviewer筛掉无进展分解，这仍是启发式而非证明核。 教学例：把待证定理改个名字作为新lemma，形式上可接起来，却没有减少任何证明工作。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<span id="paper-agent-research-leap-formal-math-d18740fc" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-4ba45981974bcbe5">Lean编译通过是否就表示这个blueprint能有效简化证明？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aleap-formal-math">LEAP: Supercharging LLMs for Formal Mathematics with Agentic Frameworks</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Google Cloud AI Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不表示。编译器验证形式sketch在给定子lemma前提下成立；子lemma可能等价于原目标或更难。LEAP另用LLM reviewer筛掉无进展分解，这仍是启发式而非证明核。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把待证定理改个名字作为新lemma，形式上可接起来，却没有减少任何证明工作。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.03303">原论文</a> · <a href="../../../../agent-research/2606.03303-leap-formal-math/">实现解读</a> · <a href="#qa-4ba45981974bcbe5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:leap-formal-math" data-paper-title="LEAP: Supercharging LLMs for Formal Mathematics with Agentic Frameworks" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="LEAP: Supercharging LLMs for Formal Mathematics with Agentic Frameworks Agent Google Cloud AI Research 2026-06-02 能写出看似合理的数学论证，不代表一次就能生成Lean核通过的长证明。LEAP先直接尝试非形式论证→Lean代码→编译器反馈修订，失败后提出blueprint，再把lemma依赖写进持久AND–OR DAG。OR节点是待证目标的替代策略，AND节点是一种需要所有子lemma成立的分解，已验证结果可跨分支复用。形式可编译仍不等于分解有价值。Lean sketch只允许新lemma处保留sorry，主目标正文不得sorry；依赖还必须无环。 完整实验成本过高，不复现（审查 DONE）。未运行Lean证明或模型，不把通用DAG组件包装成形式化Agent。review_only：Google高优先历史修订补漏，仅资料收录。完整实验成本过高，不复现（审查 DONE）。未运行Lean证明或模型，不把通用DAG组件包装成形式化Agent。只收录固定v3原文及原始v1日期、方法、图与学习资料。官方解答repo不是本地actor可读的输入；它包含证明答案，不能偷偷作为待证任务提示。未实现模型、LeanSearch、Lean compiler桥接、DAG证明Agent、Lean-IMO评测器或模型筛选，无runtime／能力metrics／GPU收据。  规划与推理 形式化证明与DAG记忆 Agent 规划与搜索：下一步该做什么 LEAP为什么用AND–OR DAG而不是只维护一棵分解树？ OR记录同一目标的替代策略，AND要求某种sketch的所有必要lemma成立；DAG让不同分支共享已经验证的lemma。前瞻辅助lemma可以保存但不自动成为当前必要依赖。 教学例：两条证明路线都需同一有限集引理，只证明并存储一次，不能把无关辅助lemma也当必需。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-6700d88bd00a3069">LEAP为什么用AND–OR DAG而不是只维护一棵分解树？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aleap-formal-math">LEAP: Supercharging LLMs for Formal Mathematics with Agentic Frameworks</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Google Cloud AI Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>OR记录同一目标的替代策略，AND要求某种sketch的所有必要lemma成立；DAG让不同分支共享已经验证的lemma。前瞻辅助lemma可以保存但不自动成为当前必要依赖。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两条证明路线都需同一有限集引理，只证明并存储一次，不能把无关辅助lemma也当必需。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.03303">原论文</a> · <a href="../../../../agent-research/2606.03303-leap-formal-math/">实现解读</a> · <a href="#qa-6700d88bd00a3069">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:leap-formal-math" data-paper-title="LEAP: Supercharging LLMs for Formal Mathematics with Agentic Frameworks" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="LEAP: Supercharging LLMs for Formal Mathematics with Agentic Frameworks Agent Google Cloud AI Research 2026-06-02 能写出看似合理的数学论证，不代表一次就能生成Lean核通过的长证明。LEAP先直接尝试非形式论证→Lean代码→编译器反馈修订，失败后提出blueprint，再把lemma依赖写进持久AND–OR DAG。OR节点是待证目标的替代策略，AND节点是一种需要所有子lemma成立的分解，已验证结果可跨分支复用。形式可编译仍不等于分解有价值。Lean sketch只允许新lemma处保留sorry，主目标正文不得sorry；依赖还必须无环。 完整实验成本过高，不复现（审查 DONE）。未运行Lean证明或模型，不把通用DAG组件包装成形式化Agent。review_only：Google高优先历史修订补漏，仅资料收录。完整实验成本过高，不复现（审查 DONE）。未运行Lean证明或模型，不把通用DAG组件包装成形式化Agent。只收录固定v3原文及原始v1日期、方法、图与学习资料。官方解答repo不是本地actor可读的输入；它包含证明答案，不能偷偷作为待证任务提示。未实现模型、LeanSearch、Lean compiler桥接、DAG证明Agent、Lean-IMO评测器或模型筛选，无runtime／能力metrics／GPU收据。  规划与推理 形式化证明与DAG记忆 Agent 规划与搜索：下一步该做什么 LEAP和DRAGO都引入形式工具，为什么还需要语义检查？ 形式工具只对给定陈述做验证。LEAP的合法分解可能毫无进展，DRAGO的可解规格可能描述错题；有用性与题意忠实度需另检查。二者都不能因形式通过就把自然语言主张当真。 教学例：Lean证明了错误翻译的弱定理，与规划器解出了少目标版本一样，形式正确却未完成原任务。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-d99bad6b378c2822">LEAP和DRAGO都引入形式工具，为什么还需要语义检查？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aleap-formal-math">LEAP: Supercharging LLMs for Formal Mathematics with Agentic Frameworks</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Google Cloud AI Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>形式工具只对给定陈述做验证。LEAP的合法分解可能毫无进展，DRAGO的可解规格可能描述错题；有用性与题意忠实度需另检查。二者都不能因形式通过就把自然语言主张当真。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：Lean证明了错误翻译的弱定理，与规划器解出了少目标版本一样，形式正确却未完成原任务。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.03303">原论文</a> · <a href="../../../../agent-research/2606.03303-leap-formal-math/">实现解读</a> · <a href="#qa-d99bad6b378c2822">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:leap-formal-math" data-paper-title="LEAP: Supercharging LLMs for Formal Mathematics with Agentic Frameworks" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="LEAP: Supercharging LLMs for Formal Mathematics with Agentic Frameworks Agent Google Cloud AI Research 2026-06-02 能写出看似合理的数学论证，不代表一次就能生成Lean核通过的长证明。LEAP先直接尝试非形式论证→Lean代码→编译器反馈修订，失败后提出blueprint，再把lemma依赖写进持久AND–OR DAG。OR节点是待证目标的替代策略，AND节点是一种需要所有子lemma成立的分解，已验证结果可跨分支复用。形式可编译仍不等于分解有价值。Lean sketch只允许新lemma处保留sorry，主目标正文不得sorry；依赖还必须无环。 完整实验成本过高，不复现（审查 DONE）。未运行Lean证明或模型，不把通用DAG组件包装成形式化Agent。review_only：Google高优先历史修订补漏，仅资料收录。完整实验成本过高，不复现（审查 DONE）。未运行Lean证明或模型，不把通用DAG组件包装成形式化Agent。只收录固定v3原文及原始v1日期、方法、图与学习资料。官方解答repo不是本地actor可读的输入；它包含证明答案，不能偷偷作为待证任务提示。未实现模型、LeanSearch、Lean compiler桥接、DAG证明Agent、Lean-IMO评测器或模型筛选，无runtime／能力metrics／GPU收据。  规划与推理 形式化证明与DAG记忆 Agent 规划与搜索：下一步该做什么 官方Lean答案已公开，能否直接说LEAP已开源且本地复现？ 不能混淆。官方目录公开证明结果，不等于通用agent/harness源码；本地没有运行Lean或模型。还须保留6月v1首发，把11月v3标为修订，不能当新论文重复统计。 教学例：下载标准证明作为actor输入会泄漏答案，不是实现了自动证明器。 2026-11-15">
+<p class="ar-learning-card__domain"><a href="./">Agent / 规划与搜索：下一步该做什么</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-a33d0403331191ba">官方Lean答案已公开，能否直接说LEAP已开源且本地复现？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aleap-formal-math">LEAP: Supercharging LLMs for Formal Mathematics with Agentic Frameworks</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-15 · Google Cloud AI Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能混淆。官方目录公开证明结果，不等于通用agent/harness源码；本地没有运行Lean或模型。还须保留6月v1首发，把11月v3标为修订，不能当新论文重复统计。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：下载标准证明作为actor输入会泄漏答案，不是实现了自动证明器。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.03303">原论文</a> · <a href="../../../../agent-research/2606.03303-leap-formal-math/">实现解读</a> · <a href="#qa-a33d0403331191ba">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:sira" data-paper-title="Superintelligent Retrieval Agent: The Next Frontier of Agentic Retrieval" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/planning-and-search" data-search="Superintelligent Retrieval Agent: The Next Frontier of Agentic Retrieval Agent Meta Superintelligence Labs / Rice University（工作完成于 Meta） 2026-05-07 冻结 LLM 先生成相关证据可能使用、但原查询缺失的词汇，再用倒排索引中的文档频率过滤不存在或过于常见的词；原查询与验证后的扩展只执行一次加权 BM25。 复现级别：L1 核心机制诊断。复现级别：L1 核心机制诊断。本地执行 DF gate 与加权单次检索组合，不调用论文 LLM、不重建 2558 万文档索引，也不把公开离线结果写成线上 A/B。本地执行 DF gate 与加权单次检索组合，不调用论文 LLM、不重建 2558 万文档索引，也不把公开离线结果写成线上 A/B。三种子诊断：metrics/mechanism-seeds42-44.json  Agent 检索 语料感知查询扩展 BM25 Agent 规划与搜索：下一步该做什么 SIRA 为什么关注“用户问法与证据用词不同”的检索困难？ 倒排检索依赖词项重合，用户可能描述一个现象，文档却使用专业术语或另一种表达，相关证据因此排不到前面。SIRA 利用冻结 LLM 补充可能的证据词汇，再以当前语料约束扩展，目标是改善查询与文档之间的词汇桥接，而非训练新的答案生成器。 例如用户问“程序越跑越占内存”，技术文档可能写 memory leak；补上该术语有机会召回原问句未命中的材料。 2026-10-27">
