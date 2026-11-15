@@ -42,3 +42,9 @@ Google/Meta 按原文署名核验，不因作者姓名熟悉就判机构。Meta 
 最终冻结前严格门发现并修正：ArchSpace 诊断缺 seed，Safety 的 NumPy 布尔类型不可 JSON 序列化，DuoJEPA 的 SVD 初始化不应先落 CPU。独立审查还补了非有限控制量和 padding NaN 的拒绝路径。历史尝试与成功但非最终源码的原始产物保留，不覆盖伪装；最终验收只使用上面最终源证明和 raw 文件。
 
 这里“通过”仅表示原始算子、负对照、梯度或接口契约正确。三种子、零失败或局部损失下降都不能证明推荐收益、Agent 成功率、世界模型能力或安全保证。完整高成本实验明确不复现，按用户规则视为审查 DONE，不再阻塞选题闭环。
+
+## 同一 PR 的 V-CoLA 依赖兼容修复
+
+远端新依赖暴露了已有 V-CoLA 的边界问题：Transformers 5.23 把 grouped-value attention 的 Q/K 连续分组扩展移进 kernel，外部轴仍为 `[batch, sequence, heads, dimension]`，不是轴布局改变。本地现在仅在捕获后、状态重放前按官方 `repeat_interleave` 规则对齐 Q/K；不改变真实 kernel 调用、原状态算法或数值门槛，已扩展的旧输入保持原样。
+
+旧 5.14 和新 5.23 的 18 项回归均通过，包括原始完整前向等价、物理缩短、并发隔离与异常恢复。另有[固定源码证明](vcola-compat/frozen-sources.json)、[CPU](vcola-compat/raw-cpu.json)和[真实 A100 三种子小模型记录](vcola-compat/raw-cuda.json)：执行随机初始化的微型 Qwen3.5 真实视觉编码器和混合层，不下载权重/数据，不把它说成重新验证 9B checkpoint 的质量。此前 9B 实验及其旧回执保留为历史测量；这次新增的是接口兼容验收，不增加论文数量或能力复现数量。

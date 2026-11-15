@@ -1,4 +1,4 @@
-<!-- source-sha256: e6b7846c065b5920e62253dd489ed24c910a07c06c2bd05bfeef284f96f0451d -->
+<!-- source-sha256: 6237826c7109f90433f2a0a75af1384760307589e5e06595ef19e5f7b5e0c506 -->
 # November 15, 2026 delivery: separate new bulletins from historical backfills
 
 [简体中文](../../../research-audits/nov15-refresh/README.md)
@@ -31,3 +31,9 @@ The [preflight](../../../research-audits/nov15-refresh/preflight.json) limits ex
 Before final freeze, strict execution caught missing seed identity, a non-JSON NumPy Boolean and DuoJEPA initialization incorrectly requiring CPU SVD. Independent review also added rejection of nonfinite controls and NaN padding. Earlier attempts and successful but nonfinal source runs are retained, not overwritten as passes. Only the final raw files and proof above establish acceptance.
 
 Passing means operator arithmetic, negative controls, gradients or interface contracts—not recommendation lift, agent success, world-model competence or security guarantees. Multiple seeds, no failed controls or declining local losses do not change that evidence tier. High-cost full experiments are explicitly not reproduced and review DONE under the user's policy.
+
+## V-CoLA dependency compatibility in the same PR
+
+Transformers5.23 moved consecutive grouped-value Q/K expansion inside its kernel. The external axes remain batch, sequence, heads and dimension. The adapter now mirrors the documented repeat-interleave rule only between capture and state replay, preserving the real kernel invocation, original algorithm, thresholds and already-expanded old inputs.
+
+All18 regression checks passed with both5.14 and5.23, including original forward parity, physical compression, concurrency isolation and failure restoration. The [source proof](../../../research-audits/nov15-refresh/vcola-compat/frozen-sources.json), [CPU run](../../../research-audits/nov15-refresh/vcola-compat/raw-cpu.json) and [real A100 three-seed run](../../../research-audits/nov15-refresh/vcola-compat/raw-cuda.json) use a tiny random Qwen3.5 with its real vision and hybrid layers. No weights/data are downloaded, and this is not a new9B checkpoint quality evaluation. Earlier9B artifacts remain historical measurements; this interface acceptance does not add a paper or capability reproduction.

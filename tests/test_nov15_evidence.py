@@ -2,6 +2,7 @@ from copy import deepcopy
 import json
 from pathlib import Path
 import sys
+import subprocess
 
 import pytest
 import torch
@@ -72,3 +73,16 @@ def test_standalone_browse_uses_unique_canonical_date_not_readme_label(tmp_path,
     manifest.write_text(json.dumps({"papers": [row, row]}))
     with pytest.raises(ValueError, match="unique canonical"):
         catalogs._paper_date("../../" + detail)
+
+
+def test_existing_vcola_compatibility_has_separate_real_gpu_evidence():
+    subprocess.run([sys.executable, "scripts/curate_nov15_vcola_compat.py", "--check"],
+                   check=True, capture_output=True, text=True)
+    path = Path("docs/gpu-validations/vcola-gva-compat-a100-20261115.json")
+    receipt = load(path)
+    assert receipt["adapter_key"] == "vcola"
+    assert receipt["runtime_library"]["transformers"] == "5.23.0"
+    assert receipt["checkpoint"]["pretrained"] is False
+    assert receipt["full_checkpoint_campaign_reexecuted"] is False
+    assert receipt["historical_9b_receipt"] != str(path)
+    assert Path(receipt["historical_9b_receipt"]).is_file()
