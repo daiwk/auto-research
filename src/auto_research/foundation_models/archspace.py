@@ -66,7 +66,6 @@ OLMO3 = CoupledLaw(1.488, 3.96e5, .576, 5.99e4, .475, .402,
 
 
 def diagnostic(seed: int, device: str = "cpu") -> dict:
-    del seed
     if device != "cpu":
         raise ValueError("ArchSpace arithmetic is CPU-only; it advertises no CUDA path")
     m, d = QWEN35.budget_optimum(1e20)
@@ -74,7 +73,7 @@ def diagnostic(seed: int, device: str = "cpu") -> dict:
     optimum = QWEN35.loss(m, d, eta, batch)
     shifted = QWEN35.loss(m, d, eta * 2, batch * 4)
     unshifted = QWEN35.loss(m, d, eta, batch * 4)
-    return {"diagnostic_only": True, "evaluation_tier": "l1_mechanism",
+    return {"seed": seed, "diagnostic_only": True, "evaluation_tier": "l1_mechanism",
             "metrics": {"model_flops_per_token": m, "training_tokens": d,
                         "predicted_base_loss": optimum, "coupled_batch_penalty": shifted - optimum},
             "checks": {"budget_conserved": math.isclose(m * d, 1e20),

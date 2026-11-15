@@ -3,6 +3,7 @@
 import numpy as np
 import pytest
 import torch
+import json
 
 from auto_research.post_training import bait_reward_defense as bait
 from auto_research.post_training import lgpo
@@ -165,8 +166,9 @@ def test_bait_nonfinite_rewards_rejected():
 def test_cpu_diagnostics(module, seed):
     payload = module.diagnostic(seed, device="cpu")
     assert payload["diagnostic_only"] and payload["evaluation_tier"] == "l1_mechanism"
-    assert all(payload["checks"].values())
+    assert all(value is True for value in payload["checks"].values())
     assert all(np.isfinite(value) for value in payload["metrics"].values())
+    assert json.loads(json.dumps(payload)) == payload
 
 
 def test_gpu_gate_is_explicit_and_only_for_torch_loss():

@@ -196,8 +196,10 @@ def diagnostic(seed: int, device: str = "cpu") -> dict:
     lam, ema = update_dual([0.1, 9.9], [0.0, 1.0], [0.0, 1.0], [0.5, 0.1])
     checks = {
         "weighted_tie_pav_solution": bool(np.allclose(fitted.y, expected)),
-        "base_raw_ranking_preserved": bool(values["base"][0, 0] > values["base"][0, 1])
-        and values["mapped_harm"][0, 0] == values["mapped_harm"][0, 1],
+        "base_raw_ranking_preserved": bool(
+            values["base"][0, 0] > values["base"][0, 1]
+            and values["mapped_harm"][0, 0] == values["mapped_harm"][0, 1]
+        ),
         "lambda_reaches_unscaled_advantage": bool(np.allclose(a2, 3 * a0)),
         "dual_projects_lower_and_upper": bool(np.array_equal(lam, [0.0, 10.0])),
         "explicit_previous_ema": bool(np.array_equal(ema, [0.0, 1.0])),
