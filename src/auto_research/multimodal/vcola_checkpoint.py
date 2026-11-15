@@ -128,6 +128,30 @@ class VisualPrefix:
     next_position: int
 
 
+def _replay_query_key_heads(query, key, value):
+    """Adapt the documented Qwen delta-kernel GVA inputs for state replay.
+
+    The public kernel axes are always [batch, sequence, heads, dimension].
+    New Transformers kernels accept H_k query/key heads and H_v value heads,
+    then repeat each Q/K head into H_v/H_k consecutive value heads internally.
+    Older model forwards already performed that expansion before the call.
+    This boundary mirrors the kernel's repeat_interleave(dim=2), without
+    changing the original call or guessing axes from sequence/head sizes.
+    """
+    if (query.ndim != 4 or key.shape != query.shape or value.ndim != 4
+            or value.shape[:2] != query.shape[:2]):
+        raise ValueError('Qwen delta kernel requires [batch,sequence,heads,dimension] Q/K/V')
+    key_heads, value_heads = key.shape[2], value.shape[2]
+    if key_heads < 1 or value_heads < 1 or value_heads % key_heads:
+        raise ValueError('Qwen grouped value heads must be a positive integer multiple of Q/K heads')
+    if any(tensor.device != value.device for tensor in (query, key)):
+        raise ValueError('Qwen delta replay Q/K/V must share one device')
+    repeats = value_heads // key_heads
+    if repeats == 1:
+        return query, key
+    return query.repeat_interleave(repeats, dim=2), key.repeat_interleave(repeats, dim=2)
+
+
 class Qwen35VCoLA:
     def __init__(self, model):
         if model.config.model_type != "qwen3_5":
@@ -169,6 +193,7 @@ class Qwen35VCoLA:
         def observe(q, k, v, kwargs, result):
             if not kwargs.get('use_qk_l2norm_in_kernel') or kwargs.get('initial_state') is not None:
                 raise ValueError("V-CoLA no-cache score capture requires normalized fresh delta state")
+            q, k = _replay_query_key_heads(q, k, v)
             scores = delta_state_scores(q, k, v, kwargs['g'], kwargs['beta'])
             relative = float((scores.recurrent_output - result[0].float()).norm()
                              / result[0].float().norm().clamp_min(1e-12))
