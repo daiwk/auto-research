@@ -37,6 +37,16 @@ def test_lgpo_padding_has_no_gate_or_gradient_effect():
     assert logp.grad.tolist() == [[-1.0, 0.0]]
 
 
+def test_lgpo_exact_threshold_equality_retained():
+    logp = torch.tensor([[-0.15]], dtype=torch.float64, requires_grad=True)
+    objective, retained = lgpo.loss(
+        logp, torch.ones_like(logp), torch.ones_like(logp, dtype=torch.bool)
+    )
+    assert retained.item() is True
+    objective.backward()
+    assert logp.grad.item() == -1.0
+
+
 def test_lgpo_gates_both_advantage_signs_and_all_gated_is_differentiable():
     logp = torch.tensor([[-0.01], [-0.01]], requires_grad=True)
     objective, retained = lgpo.loss(

@@ -22,7 +22,7 @@ def loss(
     *,
     threshold: float = -0.15,
 ) -> tuple[torch.Tensor, torch.Tensor]:
-    """Negative Eq.4 expectation: sum valid tokens, then mean over all sequences.
+    """Negative Section 4 objective: sum tokens, then mean over all sequences.
 
     The all-sequence denominator includes gated sequences, rather than silently
     changing the update scale by renormalizing the survivors. Advantages are

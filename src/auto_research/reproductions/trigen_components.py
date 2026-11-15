@@ -46,11 +46,14 @@ class DualPathConditioner(nn.Module):
 
     def forward(self, pristine_history, trigger, valid_mask=None):
         h = pristine_history
-        if h.ndim != 3 or trigger.shape != (h.shape[0], self.dim) or h.shape[2] != self.dim:
+        if (h.ndim != 3 or trigger.shape != (h.shape[0], self.dim) or h.shape[2] != self.dim
+                or trigger.device != h.device or not torch.isfinite(h).all()
+                or not torch.isfinite(trigger).all()):
             raise ValueError("invalid pristine history or trigger")
         if valid_mask is None:
             valid_mask = torch.ones(h.shape[:2], dtype=torch.bool, device=h.device)
-        if valid_mask.shape != h.shape[:2] or valid_mask.dtype != torch.bool or not valid_mask.any(1).all():
+        if (valid_mask.shape != h.shape[:2] or valid_mask.dtype != torch.bool
+                or valid_mask.device != h.device or not valid_mask.any(1).all()):
             raise ValueError("each history needs at least one visible behavior")
         keys, values = self.key(h), self.value(h)
         tq = torch.einsum("lij,bj->bli", self.trigger_queries, trigger)

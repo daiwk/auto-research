@@ -51,6 +51,24 @@ def test_independent_quantization_cannot_propagate_subspace_error():
     assert resid.parallel_quantize(changed, books).tolist() == [[1, 0]]
 
 
+@pytest.mark.parametrize("field", ["popularity_weight", "semantic_weight", "temperature"])
+@pytest.mark.parametrize("bad", [float("nan"), float("inf")])
+def test_resid_rejects_nonfinite_controls(field, bad):
+    controls = {"popularity_weight": 0, "semantic_weight": 0, "temperature": 1}
+    controls[field] = bad
+    with pytest.raises(ValueError):
+        resid.guided_beam([(0, 0)], [0], lambda _: [0, 0], lambda _: [0.5, 0.5],
+                          vocabulary_size=2, beam_size=1, **controls)
+
+
+def test_trigen_rejects_nonfinite_padding_instead_of_zero_times_nan():
+    model = trigen.DualPathConditioner(4, 3)
+    h, trigger = torch.ones(1, 4, 4), torch.ones(1, 4)
+    h[:, 0] = float("nan")
+    with pytest.raises(ValueError):
+        model(h, trigger, torch.tensor([[False, True, True, True]]))
+
+
 @pytest.mark.parametrize("n", [0, 1, 4])
 def test_trigen_tail_retains_exact_context_budget(n):
     h, t = torch.arange(8.0).reshape(1, 4, 2), torch.tensor([[90.0, 91.0]])

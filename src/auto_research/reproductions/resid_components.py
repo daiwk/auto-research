@@ -41,6 +41,7 @@ def guided_beam(catalog_sids: Sequence[Sequence[int]], similarities, logits: Cal
     sim = np.asarray(similarities, float)
     if (sids.ndim != 2 or not sids.size or sim.shape != (len(sids),)
             or vocabulary_size < 1 or beam_size < 1 or temperature <= 0
+            or not all(math.isfinite(value) for value in (temperature, popularity_weight, semantic_weight))
             or min(popularity_weight, semantic_weight) < 0 or not np.isfinite(sim).all()
             or (sids < 0).any() or (sids >= vocabulary_size).any()):
         raise ValueError("invalid catalog or guidance controls")

@@ -1,6 +1,8 @@
 """D-JEPA v1 Eq.3--8 single-context objective; no CLEVR or PID capability claim."""
 from __future__ import annotations
 
+import math
+
 import torch
 from torch import Tensor, nn
 from torch.nn import functional as F
@@ -17,7 +19,7 @@ def _matrix(x: Tensor) -> None:
 def correlation_penalty(private: Tensor, shared: Tensor, eps: float = 1e-5) -> Tensor:
     _matrix(private)
     _matrix(shared)
-    if len(private) != len(shared) or eps <= 0:
+    if len(private) != len(shared) or not math.isfinite(eps) or eps <= 0:
         raise ValueError("matching batches and positive stabilizer required")
     a = (private - private.mean(0)) / (private.std(0) + eps)
     b = (shared - shared.mean(0)) / (shared.std(0) + eps)
@@ -57,6 +59,7 @@ def objective(cv: Tensor, uv: Tensor, ct: Tensor, ut: Tensor, *, invariance_loss
     for x in (cv, uv, ct, ut):
         _matrix(x)
     if (any(x.shape != cv.shape for x in (uv, ct, ut)) or not 0 <= lambda_sig <= 1
+            or not all(math.isfinite(value) for value in (lambda_sig, w_rec, w_ind))
             or min(w_rec, w_ind) < 0 or invariance_loss.numel() != 1
             or not torch.isfinite(invariance_loss)):
         raise ValueError("matching subspaces, finite scalar invariance and valid weights required")
