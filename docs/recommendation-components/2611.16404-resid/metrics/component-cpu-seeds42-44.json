@@ -97,11 +97,11 @@
   "full_experiment_status": "not_reproduced_high_cost",
   "full_experiment_review_done": true,
   "provenance": {
-    "commit": "412f278d97778388fe7e2c8d62d94d69cba6e0e5",
+    "commit": "566debb84d888fe275cc764384480c3ef80d70be",
     "accelerator": "CPU",
     "artifact_path": "docs/recommendation-components/2611.16404-resid/metrics/component-cpu-seeds42-44.json",
     "executed_source_sha256": {
-      "scripts/run_nov15_refresh_components.py": "56da489e6c444797e15dd3c45646728338d284a15ec7098aecf7c930b9eeb0fc",
+      "scripts/run_nov15_refresh_components.py": "af3fd3b4c35a40b590707373a218b39d3127c45cc29e170799f800ab35f30c96",
       "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
       "docs/research-audits/nov15-refresh/preflight.json": "b00a6b6009bd08644faac74369290bda2bce0dbafc575e7c6c73d545e984c57e",
       "src/auto_research/reproductions/resid_components.py": "92c8947cb697f0a05d48440ee03b6eff8c77c4672c5d80653a7fef40ce8aa7b3",
@@ -119,6 +119,6 @@
       "src/auto_research/agent_research/ace_rl.py": "5ed0badd58424fdf73120fefb431a20e70db7fbcae8bdeaec18b6697e576014a"
     },
     "dataset_fingerprint": "sha256:a117b1e8d8e6ea58ba830f132a16d6eb0e3210a310a1a8403a004111fad2f900",
-    "raw_runner_artifact_sha256": "cbcd4186b1ac5c1c276d8d8b9daf7ba439c61e85bbe30729e2b546b8540d3bb0"
+    "raw_runner_artifact_sha256": "fc00793cd813fcdffb7ce5724c87dbf7e9097dcf0631d86f02fffaa52ff31ec7"
   }
 }

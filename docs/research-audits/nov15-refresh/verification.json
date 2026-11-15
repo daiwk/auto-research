@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "verified_on": "2026-11-15",
-  "execution_source_commit": "412f278d97778388fe7e2c8d62d94d69cba6e0e5",
-  "component_validation": {"cpu_components": 13, "real_a100_cuda_components": 7, "seeds": [42,43,44], "final_cpu_elapsed_seconds": 2.1155678329523653, "final_cuda_elapsed_seconds": 1.9349231459200382, "evaluation_scope": "L0 interfaces and L1 mechanisms only", "full_capability_reproductions": 0},
+  "execution_source_commit": "566debb84d888fe275cc764384480c3ef80d70be",
+  "component_validation": {"cpu_components": 13, "real_a100_cuda_components": 7, "seeds": [42,43,44], "final_cpu_elapsed_seconds": 2.5133032090961933, "final_cuda_elapsed_seconds": 1.9871075004339218, "evaluation_scope": "L0 interfaces and L1 mechanisms only", "full_capability_reproductions": 0},
   "regression": {
     "full_suite_command": "PYTHONPATH=src:scripts python -m pytest -q",
     "full_suite_executed": true,
