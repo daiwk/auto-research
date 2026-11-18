@@ -52,5 +52,5 @@
     }
   },
   "summary": "用户反馈保留的方向生成偏好cone，dual generators形成W；以偏序筛除确定被支配回答，再选择尚有规则trade-off的回答对，避免先拍定单一权重。 只收录cone+ridge confidence+非支配trade-off主动选对的完整算法；不将一个pair selector宣称完整个性化DPO。",
-  "deferral_reason": "§4明确全部实验在一台4张NVIDIA H100 80GB机器上运行；含三个7B系列、每prompt8候选、3seed、86M DeBERTa独立编码器和多个外部LLM偏好oracle，在线score/cone与DPO交替训练。原文多卡、多模型和外部查询campaign超出本轮单A100/A30短预算。 完整实验成本过高，不复现（审查DONE）；不以固定规则或公式占位冒充模型/系统实现。"
+  "deferral_reason": "§4明确全部实验在一台4张NVIDIA H100 80GB机器上运行；含三个7B系列、每prompt8候选、3seed、86M DeBERTa独立编码器和多个外部LLM偏好oracle，在线score/cone与DPO交替训练。原文多卡、多模型和外部查询campaign超出本轮单A100/A30短预算。 完整实验成本过高，不复现（审查 DONE）；不以固定规则或公式占位冒充模型/系统实现。"
 }

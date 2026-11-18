@@ -52,5 +52,5 @@
     }
   },
   "summary": "训练问题附带reference solution前半hint更易有正reward，但推理没有该hint。ASH学习可注入activation的行为方向，在无hint输入上重现部分偏移。 只收录每步先训练steering再GRPO、hint/plain独立归一化advantage及最后一步不更新model的完整顺序；不把DPO公式当实现。",
-  "deferral_reason": "§6及Table4/5明确全部实验使用2张NVIDIA A100 80GB、最大响应4096token；涵盖四个1B/1.7B/3B/4B模型，每步hint与plain双组在线生成、先steering再GRPO，以及多个竞赛/OOD与pass@8矩阵。当前单卡短时预算不覆盖原文双卡完整campaign。 完整实验成本过高，不复现（审查DONE）；不以固定规则或公式占位冒充模型/系统实现。"
+  "deferral_reason": "§6及Table4/5明确全部实验使用2张NVIDIA A100 80GB、最大响应4096token；涵盖四个1B/1.7B/3B/4B模型，每步hint与plain双组在线生成、先steering再GRPO，以及多个竞赛/OOD与pass@8矩阵。当前单卡短时预算不覆盖原文双卡完整campaign。 完整实验成本过高，不复现（审查 DONE）；不以固定规则或公式占位冒充模型/系统实现。"
 }

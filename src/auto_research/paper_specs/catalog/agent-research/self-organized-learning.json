@@ -43,5 +43,6 @@
     "decision": "完整实验成本过高，不复现（审查DONE）；仅原文审查收录，不提供影子实现。"
   },
   "summary": "本文不先指定GEPA式优化循环，而是给冻结teacher通用自改进目标、文件读写／Bash／gameplay原语与资源预算。teacher可自己造游戏、观察短生命周期player、编辑文本产物，自行决定何时探索、比较和更新。真实游戏与外部benchmark不在teacher训练访问范围。",
-  "fidelity_note": "本轮review-only，不用预写课程／固定答案脚本替代自组织行为，不启动Bash工具Agent或付费gameplay。保留官方project入口和固定v1方法、预算及允许权限，未验证作者源仓库时明确记未核实。"
+  "fidelity_note": "本轮review-only，不用预写课程／固定答案脚本替代自组织行为，不启动Bash工具Agent或付费gameplay。保留官方project入口和固定v1方法、预算及允许权限，未验证作者源仓库时明确记未核实。",
+  "deferral_reason": "Three independent teacher sessions per model,20 updates and150 gameplay budget,25K tokens per game, multi-frontier backbones and external ARC/3D navigation evaluation 完整实验成本过高，不复现（审查 DONE）；不自动重试。"
 }

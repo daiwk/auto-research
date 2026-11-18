@@ -114,7 +114,15 @@ def main():
     papers = []
     for identity in intake["accepted_papers"]:
         domain, key = identity.split(":", 1)
-        spec = load(ROOT / f"src/auto_research/paper_specs/catalog/{domain}/{key}.json")
+        spec_path = ROOT / f"src/auto_research/paper_specs/catalog/{domain}/{key}.json"
+        spec = load(spec_path)
+        if spec["implementation_status"] == "deferred_high_cost":
+            reason = spec.get("deferral_reason") or spec["cost_assessment"].get("basis", spec["summary"])
+            reason = reason.replace("审查DONE", "审查 DONE")
+            if "不复现（审查 DONE）" not in reason:
+                reason += " 完整实验成本过高，不复现（审查 DONE）；不自动重试。"
+            spec["deferral_reason"] = reason
+            dump(spec_path, spec)
         page = ROOT / "docs" / spec["detail_path"]
         en = page.with_name("README-en.md")
         fingerprint = hashlib.sha256(page.read_bytes()).hexdigest()
@@ -181,7 +189,7 @@ def main():
             spec
             | {
                 "id": figure["arxiv_id"],
-                "status": "implemented" if component else "reviewed",
+                "status": "implemented" if component else "deferred",
                 "resolution": "bounded_component_accepted"
                 if component
                 else "not_reproduced_high_cost",

@@ -43,5 +43,6 @@
     "decision": "完整实验成本过高，不复现（审查DONE）；仅原文审查收录，不提供影子实现。"
   },
   "summary": "手工给Agent正确skill测的是精选上界，不等于部署时能从库里找到它。SkillBuffBench在同一任务／模型／harness下交叉三种skill访问（无、精选、自动）与两种memory模式，单独测内容收益、发现损失和记忆交互。模型池和harness版本应固定到每次结果，不能把更新后版本混进同一格。",
-  "fidelity_note": "本轮review-only，无模型矩阵／task复刻／metrics。完整3168轮API执行及部分未公开collaborator技能不适合低成本忠实复现；保留协议与资产可用边界为审查DONE，不把私有skill目的描述冒充技能实现。"
+  "fidelity_note": "本轮review-only，无模型矩阵／task复刻／metrics。完整3168轮API执行及部分未公开collaborator技能不适合低成本忠实复现；保留协议与资产可用边界为审查DONE，不把私有skill目的描述冒充技能实现。",
+  "deferral_reason": "11 models×288=3168 agent runs; proprietary skill content and domain expert assets prevent faithful cheap reconstruction 完整实验成本过高，不复现（审查 DONE）；不自动重试。"
 }

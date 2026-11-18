@@ -52,5 +52,5 @@
     }
   },
   "summary": "rollout step常被最长尾response决定，平均load无法反映尾长。TailRoll在chunk边界迁移在途请求，并用完成siblings足够后的终止处理straggler。 只收录多engine真实在途迁移/单次re-prefill与部分输出loss mask机制；不以离线调度模拟声称系统提速。",
-  "deferral_reason": "§VI–VII在Ascend910C NPU上用Qwen3-14B/32B、多engine/KV迁移、10配置和300step真实RL；现有单卡A100/A30不具同构多engine硬件拓扑。 完整实验成本过高，不复现（审查DONE）；不以固定规则或公式占位冒充模型/系统实现。"
+  "deferral_reason": "§VI–VII在Ascend910C NPU上用Qwen3-14B/32B、多engine/KV迁移、10配置和300step真实RL；现有单卡A100/A30不具同构多engine硬件拓扑。 完整实验成本过高，不复现（审查 DONE）；不以固定规则或公式占位冒充模型/系统实现。"
 }

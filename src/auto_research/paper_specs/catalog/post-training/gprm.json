@@ -52,5 +52,5 @@
     }
   },
   "summary": "除问题和当前step，还读历史step与已预测judgment、当前候选的后续trajectory；四维分析是forward consistency、posterior verification、goal alignment、self validity。 只收录方法和成本；不以字符串parser或固定规则替代4维global PRM。",
-  "deferral_reason": "§4使用4B/14B PRM、Qwen3-235B-Instruct错误注入/分析教师与7B搜索策略，SFT后GRPO，再Best-of8/逐步续写搜索、多benchmark。 完整实验成本过高，不复现（审查DONE）；不以固定规则或公式占位冒充模型/系统实现。"
+  "deferral_reason": "§4使用4B/14B PRM、Qwen3-235B-Instruct错误注入/分析教师与7B搜索策略，SFT后GRPO，再Best-of8/逐步续写搜索、多benchmark。 完整实验成本过高，不复现（审查 DONE）；不以固定规则或公式占位冒充模型/系统实现。"
 }

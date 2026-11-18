@@ -43,5 +43,6 @@
     "decision": "完整实验成本过高，不复现（审查DONE）；仅原文审查收录，不提供影子实现。"
   },
   "summary": "复杂任务产物可能是Excel、PowerPoint或应用状态，单纯把文件转成文本会丢公式、布局与跨文件关系。本文不是新做任务的Agent，而是研究判断Agent产物的verifier：BVB包含24投资银行任务、2464个人工判定criteria，用来评测验证器的判断。",
-  "fidelity_note": "本轮review-only，不提供一个空JSON接口冒充reactive verifier，不调用付费模型，也不重建native banking环境。官方Gandalf与BVBv1.0仓库可供后续显式预算实验，但本轮没有运行或审计其全部运行权限。"
+  "fidelity_note": "本轮review-only，不提供一个空JSON接口冒充reactive verifier，不调用付费模型，也不重建native banking环境。官方Gandalf与BVBv1.0仓库可供后续显式预算实验，但本轮没有运行或审计其全部运行权限。",
+  "deferral_reason": "2464 human-judged criteria across24 banking tasks, three repeats, proprietary frontier judges, native document/tool environment and up to1740-second verifier sessions 完整实验成本过高，不复现（审查 DONE）；不自动重试。"
 }
