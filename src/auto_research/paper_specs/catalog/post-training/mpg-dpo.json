@@ -1,0 +1,56 @@
+{
+  "domain": "post-training",
+  "key": "mpg-dpo",
+  "title": "Sample-efficient Personalization of Large Language Model Alignment with Multidimensional User Preference Data",
+  "paper_url": "https://arxiv.org/abs/2611.22210v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.22210v1",
+  "reviewed_version": "v1",
+  "detail_path": "post-training/2611.22210-mpg-dpo/README.md",
+  "first_author": "Zhen-Yu Zhang",
+  "first_author_affiliation": "RIKEN Center for Advanced Intelligence Project",
+  "published": "2026-11-17",
+  "published_at": "2026-11-17T04:47:45Z",
+  "code": null,
+  "code_status": "固定v1及所核作者入口未找到可验证的本篇方法源码发布；引用的训练器、模型或库不算本篇开源。",
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "topic": [
+    "preference-and-alignment",
+    "后训练算法组件"
+  ],
+  "priority": "P1",
+  "intake_class": "new_submission_in_requested_window",
+  "implementation_status": "deferred_high_cost",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.22210v1",
+    "source_sections": [
+      "§3 Eq.2–6 and Algorithm1",
+      "§4 models and oracle settings"
+    ],
+    "basis": "§4明确全部实验在一台4张NVIDIA H100 80GB机器上运行；含三个7B系列、每prompt8候选、3seed、86M DeBERTa独立编码器和多个外部LLM偏好oracle，在线score/cone与DPO交替训练。原文多卡、多模型和外部查询campaign超出本轮单A100/A30短预算。",
+    "available_resource": "Single NVIDIA A100/A30 or local Mac",
+    "decision": "Full experiment not reproduced due to high cost; review DONE. No checkpoint/data download or paid API call.",
+    "local_budget": {
+      "checkpoint_download_bytes": 0,
+      "dataset_download_bytes": 0,
+      "paid_api_calls": 0,
+      "local_component_seconds_per_seed_cap": 30,
+      "gpu_component_seconds_per_seed_cap": 0,
+      "cap_scope": "Tiny exact operator/negative-control checks only; not a training campaign."
+    }
+  },
+  "summary": "用户反馈保留的方向生成偏好cone，dual generators形成W；以偏序筛除确定被支配回答，再选择尚有规则trade-off的回答对，避免先拍定单一权重。 只收录cone+ridge confidence+非支配trade-off主动选对的完整算法；不将一个pair selector宣称完整个性化DPO。",
+  "deferral_reason": "§4明确全部实验在一台4张NVIDIA H100 80GB机器上运行；含三个7B系列、每prompt8候选、3seed、86M DeBERTa独立编码器和多个外部LLM偏好oracle，在线score/cone与DPO交替训练。原文多卡、多模型和外部查询campaign超出本轮单A100/A30短预算。 完整实验成本过高，不复现（审查DONE）；不以固定规则或公式占位冒充模型/系统实现。"
+}

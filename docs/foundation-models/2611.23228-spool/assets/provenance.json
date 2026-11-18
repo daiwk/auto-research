@@ -1,0 +1,13 @@
+{
+  "source_url": "https://arxiv.org/html/2611.23228v1/overview-redrawn.svg",
+  "figure": "S1.F1",
+  "caption": "Figure 1: Spool maintains a sliding video window without replaying retained frames. (a) Shifting the window retains four of five frames. (b) Prefix-cache invalidation forces the retained context to be rebuilt. (c) Spool composes cached recurrent transformations and reclaims key–value slots by moving surviving tail entries into holes left by eviction.",
+  "original_sha256": "6b27def933420e714055cae17a99d05701553ca2fb109ea5676b9dee7c43b609",
+  "extraction": "Author original raster image, or original SVG rasterized without semantic editing",
+  "paper_url": "https://arxiv.org/html/2611.23228v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-18",
+  "copyright": "Copyright retained by the original authors; research commentary, not a local result.",
+  "source_html_sha256": "958b13f16ba68a7ca2e94637505a477d7cbb0210734e80e3d1d6542c80529b44",
+  "asset_sha256": "ed67222a60a96e6d775386e32da98aaef9eab215c975d3e0a8a6e84fdf04e461"
+}

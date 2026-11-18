@@ -7,7 +7,7 @@ hide:
 
 # 召回覆盖从哪里来：用户表示、正例组织与负例难度
 
-[搜广推](../index.md) · 更新 2026-11-06 · 38 篇主题资料 / 6 篇重点对照
+[搜广推](../index.md) · 更新 2026-11-18 · 40 篇主题资料 / 8 篇重点对照
 
 候选生成先决定后续排序能看见什么。YouTube DNN说明单用户向量如何进入近邻检索，Airbnb EBR把监督放回搜索—浏览—预订旅程，MIMA让同请求多正例分配给互补兴趣，MDCNS改变负例的难度与多视角监督。这四种改动分别作用于表示、标签、兴趣分工和梯度，不能用召回数变大统一解释。
 
@@ -31,6 +31,8 @@ hide:
 | [Divergence Meets Consensus: A Multi-Source Negative Sampling Framework for Sequential Recommendation](../../../reproductions/2605.19651-mdcns/README.md) · [原始来源](https://arxiv.org/abs/2605.19651)<br>章节：背景与主要改动、核心公式、本地复现 | Self、Peer、Teacher多视角在候选池上评分，以模型分歧修正难负例排序，再把Teacher整池软分布蒸馏回Self。 | 比单一高分负例提供更多监督，但难负例仍可能是假负例，分歧也不等于标签真错；需要对齐候选池、采样预算和训练成本。 |
 | [WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search](../../../recommendation-components/2611.00530-wesearch/README.md) · [原始来源](https://arxiv.org/abs/2611.00530v1)<br>章节：背景与主要改动、核心公式、代码映射 | 簇只收缩候选空间，再对原子文档做OPQ粗排和特征FFN精排；固定簇/码本还能挂载新文档，不必逐SID前缀解码。 | 簇选择仍有漏召回风险；查表精确仅说明对既有量化向量的距离恒等，不等于训练表示或生产质量更好。局部快照也不等于分布式原子刷新。 |
 | [From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation](../../../recommendation-components/2611.05997-ured/README.md) · [原始来源](https://arxiv.org/abs/2611.05997)<br>章节：核心公式、数据协议、代码映射与结果边界 | 从既有排序日志回收高分未展示项，按时间建用户池，再按曝光类目筛选。 | 只重用已经被打过分的候选，不创造语义索引里的新命中；依赖历史新鲜度和曝光记录。 |
+| [From Relevance to Utility: Rubric Alignment in Yuanbao Search](../../../recommendation-components/2611.22503-yuanbao-rubric/README.md) · [原始来源](https://arxiv.org/abs/2611.22503v1)<br>章节：背景与主要改动、核心公式、同主题对照、高成本完整实验 | 传统逐文档相关性不等于给下游推理提供有用证据。元宝先生成查询特定的加权正向标准和扣分标准，用蒸馏标签统一训练召回与四头排序，再用集合奖励训练选择器。低于组均值的轨迹并不接受负优势惩罚，而是按奖励差蒸馏组内最佳轨迹。 | WeSearch用簇和原子文档匹配收缩候选空间；元宝用rubric统一上游标签和最终集合奖励。两者不是同一种SID/召回架构，局部ADC或双分支loss都不能替代端到端搜索验证。 |
+| [IntentFlow: An Intent-Driven Real-Time Multimodal Search System with Image-Text Queries at Xiaohongshu](../../../recommendation-components/2611.20448-intentflow/README.md) · [原始来源](https://arxiv.org/abs/2611.20448v1)<br>章节：背景与主要改动、核心公式、同主题对照、高成本完整实验 | 相同图片上的找同款、找搭配和问使用信息需要不同证据，纯视觉相似性不足。IntentFlow将意图层级、可验证三档相关性、agentic数据构造、多模态检索和意图条件重排统一起来。索引固定后只在查询侧进行高层LoRA与六专家残差投影，避免全库重算。 | WeSearch用簇限制候选并原子匹配；IntentFlow先定义请求满足所需证据，再让查询编码适配固定文档空间。一个侧重候选组织，一个侧重意图监督与查询表示，均不能仅凭组件前后向推断线上收益。 |
 
 </div>
 
@@ -59,6 +61,18 @@ WeSearch在簇并集内保留原子文档，再区分粗排与特征精排；MIM
 WeSearch 先用簇收缩检索空间，再以 OPQ 和特征打分；URED 反过来依赖既有打分，把当时没展示的高分项积累成独立通道。比较应固定召回与展示配额，另检查去重、索引新鲜度和重复曝光。
 
 对照来源：[ured](../../../recommendation-components/2611.05997-ured/README.md) · [wesearch](../../../recommendation-components/2611.00530-wesearch/README.md)
+
+### 元宝搜索：Rubric 对齐检索、排序与集合选择：区别机制与能力
+
+对应§2.1、Eq4–6。正向标准允许多文档共同覆盖，负向标准由任一文档触发扣分；focal pairwise 是标签差减分数差的 hinge，不是普通 CE。两分支分别求均值；较差轨迹的权重作用于同一个最佳轨迹的 token NLL，保留 padding mask、空分支和奖励并列时零更新。参考 KL 由调用者显式提供，不擅自选择估计器。 WeSearch用簇和原子文档匹配收缩候选空间；元宝用rubric统一上游标签和最终集合奖励。两者不是同一种SID/召回架构，局部ADC或双分支loss都不能替代端到端搜索验证。
+
+对照来源：[yuanbao-rubric](../../../recommendation-components/2611.22503-yuanbao-rubric/README.md) · [wesearch](../../../recommendation-components/2611.00530-wesearch/README.md)
+
+### IntentFlow：意图条件多模态搜索与固定索引适配：区别机制与能力
+
+实现Eq16、18–21、24：同一查询门控混合两个共享瓶颈分支（原设置rank8/64），保留冻结基础投影；蒸馏两方向使用相同合法候选并detach教师；CSLS只减去文档对训练query参考库的离线密度项。零初始化up projection是本地稳定初始化约定，原文未明确此初始化，不伪称完整模型配方。 WeSearch用簇限制候选并原子匹配；IntentFlow先定义请求满足所需证据，再让查询编码适配固定文档空间。一个侧重候选组织，一个侧重意图监督与查询表示，均不能仅凭组件前后向推断线上收益。
+
+对照来源：[intentflow](../../../recommendation-components/2611.20448-intentflow/README.md) · [wesearch](../../../recommendation-components/2611.00530-wesearch/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -104,9 +118,37 @@ WeSearch 先用簇收缩检索空间，再以 OPQ 和特征打分；URED 反过�
 
     对照来源：[ured](../../../recommendation-components/2611.05997-ured/README.md) · [wesearch](../../../recommendation-components/2611.00530-wesearch/README.md)
 
+### 元宝和WeSearch改动的是同一层吗？ {#cross-cross-nov18-latest-yuanbao-rubric}
+
+??? note "展开答案与例子"
+
+    **答案：** 不是。前者统一效用监督并优化集合；后者主要改变簇内原子文档匹配。
+
+    **教学例子：** 教学例：ADC距离正确不能证明最终三个证据文档没有重复、缺漏或过期信息。
+
+    对照来源：[yuanbao-rubric](../../../recommendation-components/2611.22503-yuanbao-rubric/README.md) · [wesearch](../../../recommendation-components/2611.00530-wesearch/README.md)
+
+### 它和WeSearch的簇约束有什么区别？ {#cross-cross-nov18-latest-intentflow}
+
+??? note "展开答案与例子"
+
+    **答案：** 固定索引适配改变query如何落入已有文档空间；簇约束改变候选空间组织，两者可组合但不是相互替代。
+
+    **教学例子：** 教学例：query残差改变而doc向量逐位不变，只证明固定索引接口成立。
+
+    对照来源：[intentflow](../../../recommendation-components/2611.20448-intentflow/README.md) · [wesearch](../../../recommendation-components/2611.00530-wesearch/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-18** · 输入仅为外部融合特征和候选分数；没有用规则假装0.8B意图识别器，也未实现完整LoRA/VLM、agentic核验或NDCG权重训练链。文档输入在诊断中保持不变，不意味着语义召回已提升。 完整实验高成本不复现，未作能力或Evolve晋级证据。
+
+涉及：[intentflow](../../../recommendation-components/2611.20448-intentflow/README.md) · [wesearch](../../../recommendation-components/2611.00530-wesearch/README.md)
+
+**2026-11-18** · 没有运行 rubric 生成、DeepSeek judge、Qwen 编码器或真实搜索。诊断检查最佳轨迹有蒸馏梯度、失败轨迹没有模仿梯度、奖励不反传、padding 梯度为零；它们不是答案准确率。 完整实验高成本不复现，未作能力或Evolve晋级证据。
+
+涉及：[yuanbao-rubric](../../../recommendation-components/2611.22503-yuanbao-rubric/README.md) · [wesearch](../../../recommendation-components/2611.00530-wesearch/README.md)
 
 **2026-11-06** · 加入 URED，区分候选的日志回收与 WeSearch 的语义索引召回，记录时间截断和曝光去重边界。
 
@@ -120,7 +162,7 @@ WeSearch 先用簇收缩检索空间，再以 OPQ 和特征打分；URED 反过�
 
 覆盖 36 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 38 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 40 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -162,6 +204,8 @@ WeSearch 先用簇收缩检索空间，再以 OPQ 和特征打分；URED 反过�
 - [Deep Neural Networks for YouTube Recommendations](../../../reproductions/recsys2016-youtube-dnn-youtube-dnn/README.md)
 - [ZoRRO: A Zero-Weight Personalized Recommender System for Scalable News Recommendation](../../../reproductions/2607.10910-zorro/README.md)
 - [From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation](../../../recommendation-components/2611.05997-ured/README.md)
+- [From Relevance to Utility: Rubric Alignment in Yuanbao Search](../../../recommendation-components/2611.22503-yuanbao-rubric/README.md)
+- [IntentFlow: An Intent-Driven Real-Time Multimodal Search System with Image-Text Queries at Xiaohongshu](../../../recommendation-components/2611.20448-intentflow/README.md)
 
 </details>
 

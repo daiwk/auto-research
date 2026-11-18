@@ -1,0 +1,108 @@
+{
+  "schema_version": 2,
+  "method": "fm-mamba",
+  "manifest_ref": "foundation-models:fm-mamba",
+  "dataset": {
+    "id": "synthetic:nov18-latest-fm-mamba-mechanism-v1",
+    "kind": "explicit_mechanism_or_protocol_fixtures",
+    "revision": "sha256:163cd0caa0b08b54ce5cb866cc1ddd63c813f0b6535ed61c6e89d4971cb1bdf3",
+    "public_capability_benchmark": false,
+    "source": "Seeded synthetic operator tensors; no pretrained model or capability dataset"
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "wavefront_max_error": 0.0,
+        "projected_max_step": 1.4125015140018553
+      },
+      "checks": {
+        "wavefront_matches_serial": true,
+        "strict_frozen_position_stability": true,
+        "diagonal_predecessor_not_dropped": true,
+        "recurrence_has_gradient": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "wavefront_max_error": 0.0,
+        "projected_max_step": 1.4125015140018553
+      },
+      "checks": {
+        "wavefront_matches_serial": true,
+        "strict_frozen_position_stability": true,
+        "diagonal_predecessor_not_dropped": true,
+        "recurrence_has_gradient": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "wavefront_max_error": 0.0,
+        "projected_max_step": 1.4125015140018553
+      },
+      "checks": {
+        "wavefront_matches_serial": true,
+        "strict_frozen_position_stability": true,
+        "diagonal_predecessor_not_dropped": true,
+        "recurrence_has_gradient": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "wavefront_max_error": 0.0,
+    "projected_max_step": 1.4125015140018553
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Bounded defining-operator arithmetic and negative controls, not complete model or benchmark capability"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "66cda00810da75bb8e3daa789c8d29b5b71b851d",
+    "source_state": "uncommitted working tree with exact executed-source fingerprints",
+    "accelerator": "CPU",
+    "artifact_path": "docs/foundation-models/2611.22061-fm-mamba/metrics/component-cpu-seeds42-44.json",
+    "executed_source_sha256": {
+      "src/auto_research/foundation_models/fm_mamba.py": "163cd0caa0b08b54ce5cb866cc1ddd63c813f0b6535ed61c6e89d4971cb1bdf3"
+    }
+  }
+}

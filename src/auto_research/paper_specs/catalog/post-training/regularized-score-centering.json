@@ -1,0 +1,60 @@
+{
+  "domain": "post-training",
+  "key": "regularized-score-centering",
+  "title": "Regularized Score Centering",
+  "paper_url": "https://arxiv.org/abs/2611.21791v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.21791v1",
+  "reviewed_version": "v1",
+  "detail_path": "post-training/2611.21791-regularized-score-centering/README.md",
+  "first_author": "Hao Bai",
+  "first_author_affiliation": "University of Illinois Urbana-Champaign",
+  "published": "2026-11-16",
+  "published_at": "2026-11-16T19:12:50Z",
+  "code": "https://github.com/BiEchi/rsc",
+  "code_status": "[作者仓库](https://github.com/BiEchi/rsc)；固定SHA `2fd280c420faa875809d4bb632ad1d2367e229cc`；未找到项目级许可，不复制上游源码。仅核对发布证据，未执行上游训练。",
+  "code_license": null,
+  "upstream_revision": "2fd280c420faa875809d4bb632ad1d2367e229cc",
+  "adapter": null,
+  "topic": [
+    "policy-optimization",
+    "后训练算法组件"
+  ],
+  "priority": "P1",
+  "intake_class": "new_submission_in_requested_window",
+  "implementation_status": "component_only",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_passed": true,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.21791v1",
+    "source_sections": [
+      "PDFp1 author superscripts",
+      "§3 Eq.3–8",
+      "§5.2 and AppendixA sampling"
+    ],
+    "basis": "§5含Qwen3-32B、每题64个rollout、每token32/64/128辅助采样及6个多轮Agent环境；完整异步多任务训练不适合单卡短时验收。",
+    "available_resource": "Single NVIDIA A100/A30 or local Mac",
+    "decision": "Full experiment not reproduced due to high cost; review DONE. No checkpoint/data download or paid API call.",
+    "local_budget": {
+      "checkpoint_download_bytes": 0,
+      "dataset_download_bytes": 0,
+      "paid_api_calls": 0,
+      "local_component_seconds_per_seed_cap": 30,
+      "gpu_component_seconds_per_seed_cap": 30,
+      "cap_scope": "Tiny exact operator/negative-control checks only; not a training campaign."
+    }
+  },
+  "summary": "不是。它减去同一history下behavior分布的加权log-policy梯度期望。response advantage本来可以已中心化，但behavior下score均值仍不一定为0。 独立auxiliary actions的加权score center、detached TIS权重、独立KL cap的reverse-KL梯度估计；不是reward减均值。",
+  "evaluation_tier": "l1_mechanism",
+  "local_operator": "auto_research.post_training.regularized_score_centering.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.regularized_score_centering import diagnostic; print(diagnostic(42))'",
+  "gpu_validation_artifact": "docs/gpu-validations/regularized-score-centering-a100-20261118-latest.json"
+}

@@ -1,0 +1,12 @@
+{
+  "figure": 1,
+  "caption": "Fig. 1: COTTI workflow. CPC and RW shape the predictor; earlier validation selects calibration settings; ABA adjusts scores with fixed predictor parameters during serving.",
+  "source_url": "https://arxiv.org/pdf/2611.22597v1",
+  "source_version": "v1",
+  "source_sha256": "acf1c237cefcd60687946dc8730f04ffd1f8448c00e454a19f9879b3c18f98c1",
+  "extraction": "fixed v1 PDF page3, crop[45, 45, 305, 283]; no redraw",
+  "file": "paper-figure-01.png",
+  "asset_sha256": "d3cfb5510c4caa00e69fa7306ef404e8dcfbd503a922a45b40182426ebbfabd6",
+  "copyright": "Original paper authors; no claim of local generation",
+  "visual_review_done": true
+}

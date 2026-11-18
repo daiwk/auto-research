@@ -1,0 +1,101 @@
+{
+  "schema_version": 2,
+  "method": "spool",
+  "manifest_ref": "foundation-models:spool",
+  "dataset": {
+    "id": "synthetic:nov18-latest-spool-mechanism-v1",
+    "kind": "explicit_mechanism_or_protocol_fixtures",
+    "revision": "sha256:d1427267ab117bb5179bab10e6ee052513acc9d49473368b18ce49277c6c881b",
+    "public_capability_benchmark": false,
+    "source": "Seeded synthetic operator tensors; no pretrained model or capability dataset"
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "window_replay_max_error": 4.440892098500626e-16
+      },
+      "checks": {
+        "cyclic_window_matches_recorded_replay": true,
+        "order_is_not_commutative": true,
+        "expired_blocks_excluded": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "window_replay_max_error": 3.3306690738754696e-16
+      },
+      "checks": {
+        "cyclic_window_matches_recorded_replay": true,
+        "order_is_not_commutative": true,
+        "expired_blocks_excluded": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "window_replay_max_error": 3.3306690738754696e-16
+      },
+      "checks": {
+        "cyclic_window_matches_recorded_replay": true,
+        "order_is_not_commutative": true,
+        "expired_blocks_excluded": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "window_replay_max_error": 3.7007434154171886e-16
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Bounded defining-operator arithmetic and negative controls, not complete model or benchmark capability"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "66cda00810da75bb8e3daa789c8d29b5b71b851d",
+    "source_state": "uncommitted working tree with exact executed-source fingerprints",
+    "accelerator": "CPU",
+    "artifact_path": "docs/foundation-models/2611.23228-spool/metrics/component-cpu-seeds42-44.json",
+    "executed_source_sha256": {
+      "src/auto_research/foundation_models/spool.py": "d1427267ab117bb5179bab10e6ee052513acc9d49473368b18ce49277c6c881b"
+    }
+  }
+}

@@ -1,0 +1,846 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "foundation-models:vishead-spec": {
+      "questions": [
+        {
+          "id": "why-head-routing",
+          "level": "basics",
+          "question": "只让8个头看图像，其他头是否没有作用？",
+          "answer": "不是。8是40个物理KV heads中的图像读取预算，其余仍读取文本和块内上下文；GQA下每个KV head对应多个query heads。",
+          "example": "教学例：四个query heads共享一个KV head时，路由应共同生效，不能只打开其中一个。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "soft-acceptance-not-match",
+          "level": "mechanism",
+          "question": "confidence为什么不能监督成argmax是否相同？",
+          "answer": "原目标是1减两分布L1距离的一半，且detach。argmax相同也可能分布差很大，硬标签会改写BCE目标。",
+          "example": "教学例：p=(0.6,0.4)、q=(0.9,0.1)的argmax相同，但soft acceptance是0.7而非1。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "routing-versus-capacity",
+          "level": "comparison",
+          "question": "这与Unbundling的vision-only mask有什么区别？",
+          "answer": "VisHead-Spec限制特定头读取图像行；Unbundling门控额外QKVO/FFN容量，仍是联合attention。二者作用对象不同。",
+          "example": "教学例：一个文本query没有额外视觉投影，仍可能读取图像KV；这不是图像行被屏蔽。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "component-not-throughput",
+          "level": "implementation",
+          "question": "路由组件通过CUDA能证明16%吞吐收益吗？",
+          "answer": "不能。原文还包括训练过的drafter、目标验证、服务并发和内核；本地只验证路由、损失与梯度，不报告生成速度或接受长度。",
+          "example": "教学例：改变图像V只影响允许看图的query组，是机制负控，不是完整推理计时。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "foundation-models:spool": {
+      "questions": [
+        {
+          "id": "why-affine",
+          "level": "basics",
+          "question": "Spool为什么可以跳过保留帧的backbone重算？",
+          "answer": "固定层输入后GDN更新写成SA+B，帧内多个仿射更新仍是仿射更新，可缓存后作用到不同anchor状态。",
+          "example": "教学例：两帧更新先乘A1再乘A2，旧写入B1还要被A2传播。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "ordered-monoid",
+          "level": "mechanism",
+          "question": "有结合律是否意味着可把帧顺序排序？",
+          "answer": "不可以。仿射摘要构成非交换monoid；segment tree可改变括号而不能交换时间顺序，循环槽跨尾时也必须先旧后新。",
+          "example": "教学例：F1(S)=2S、F2(S)=S+1，交换后分别为2S+1和2S+2。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "layer-exactness-boundary",
+          "level": "comparison",
+          "question": "Spool的精确与DropKV的近似驱逐有何不同？",
+          "answer": "Spool精确重放固定记录层输入的状态变换；DropKV估计删除KV对attention输出的扰动。Spool也不保证整个多层网络重算等价。",
+          "example": "教学例：高层某帧特征已受旧帧影响，删除低层旧帧摘要不会改写那份缓存特征。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "residual-storage",
+          "level": "implementation",
+          "question": "为何存D=A-I而不是直接存A？",
+          "answer": "A接近单位矩阵时低精度可能抹掉对角微小变化，残差表示把单位部分单独保留；本地用双精度验证代数，不声称已实现作者BF16内核。",
+          "example": "教学例：1.0001可能舍入为1，但0.0001作为残差仍能表达小变化。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "foundation-models:infuseloop": {
+      "questions": [
+        {
+          "id": "trajectory-not-future-token",
+          "level": "basics",
+          "question": "为什么能读取t+1轨迹而不泄漏未来token？",
+          "answer": "轨迹编号表示预测计算的位置，源还必须来自更浅loop且上一执行周期已完成；因果条件不是单看轨迹索引大小。",
+          "example": "教学例：r=4时可读h_t的第3轮、h_(t+1)第2轮、h_(t+2)第1轮，三者执行周期相同。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "old-buffer-commit",
+          "level": "mechanism",
+          "question": "为何不能每算完一层就原位更新buffer？",
+          "answer": "这会让后续loop读取本周期的新状态，改变并行计算图。论文先从旧bank计算所有输出再整体commit。",
+          "example": "教学例：串行更新后r4可能用到刚更新的r3，而定义只允许上一周期r3。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "anchor-versus-injection",
+          "level": "comparison",
+          "question": "与Anchor跨层共享状态有什么差别？",
+          "answer": "Anchor读外部TTT记忆并结合局部attention；InfuseLoop依执行周期聚合多个轨迹的hidden states，状态语义和写入时机都不同。",
+          "example": "教学例：把一份KV矩阵广播给所有loop，没有实现所需的跨轨迹索引。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "mask-before-softmax",
+          "level": "implementation",
+          "question": "为何文档mask要在softmax前做？",
+          "answer": "先softmax再清零会让非法文档分走概率且不重新归一，改变合法源权重。无源时需显式零输出，避免全负无穷产生NaN。",
+          "example": "教学例：两个分数相同但一个跨文档，合法源应得权重1而不是0.5。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "foundation-models:echomoe": {
+      "questions": [
+        {
+          "id": "reference-difference",
+          "level": "basics",
+          "question": "EchoMoE压缩的是token的KV cache吗？",
+          "answer": "不是。主要压缩专家并行dispatch/combine的激活；跨层参考保存在各rank，以差值code代替每层全宽通信。",
+          "example": "教学例：参考z已存在时，发送C_d(x-a⊙z)而不是整条x。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "folding-not-decompression",
+          "level": "mechanism",
+          "question": "为何专家不必显式构造完整xhat？",
+          "answer": "线性重建Gz+D_dc与gate/up投影可相乘折叠；combine compressor也可折入down。SwiGLU仍在两线性映射之间，不能跨非线性任意折叠。",
+          "example": "教学例：W_g(Gz+D_dc)=[W_gG,W_gD_d][z;c]。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "moezip-not-same-compression",
+          "level": "comparison",
+          "question": "与MoEZip的routing-aware压缩能直接比压缩率吗？",
+          "answer": "不能。MoEZip选择attention KV行，EchoMoE发送低维专家激活，分母、额外参考成本和质量误差都不同。",
+          "example": "教学例：少存50%KV不等于少发50%RDMA字节。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "fold-parity-not-model-parity",
+          "level": "implementation",
+          "question": "折叠输出和梯度一致，是否证明压缩模型能力不下降？",
+          "answer": "只证明同一压缩参数下两种执行形式一致。Cd/Dd低秩近似、路由变化、蒸馏和多层误差还需完整模型实验。",
+          "example": "教学例：把Cd设为零，折叠仍可完全一致，却已丢掉当前x的差值。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "foundation-models:wm-quant": {
+      "questions": [
+        {
+          "id": "continuous-error",
+          "level": "basics",
+          "question": "世界模型量化为什么要看多步而不是单步误差？",
+          "answer": "预测latent会再次进入模型，早期误差被后续Jacobian传播，每步又注入新误差；单步最优范围未必使最终轨迹最优。",
+          "example": "教学例：状态每步放大1.1倍时，第一步的误差会影响后面所有步。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "protected-control",
+          "level": "mechanism",
+          "question": "为何不把action和state一起低比特量化？",
+          "answer": "action差异小却决定候选轨迹排序，和大幅latent共享范围可能直接被舍入抹掉。原方法把控制通路保持浮点。",
+          "example": "教学例：state量级10而两动作相差0.001时，共用3-bit范围可能让两个动作编码相同。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "ranges-not-shared",
+          "level": "comparison",
+          "question": "每步独立范围是否意味着每步一套预测模型？",
+          "answer": "不是。predictor权重、旋转和平滑共享，分开的只是少量激活范围；encoder范围也通过整个rollout联合更新。",
+          "example": "教学例：同一W用在四步，四组min/max仍可不同。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "calibration-not-planning",
+          "level": "implementation",
+          "question": "本地calibration loss下降能说明PushT成功率提升吗？",
+          "answer": "不能。本地使用小型连续递推检验范围梯度、控制保留与误差目标，没有视觉checkpoint、CEM或环境成功标签。",
+          "example": "教学例：30步优化减少latent差值，只是L1机制诊断，不生成机械臂任务成功率。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "integer-zero-point-not-low-anchor",
+          "level": "mechanism",
+          "question": "fake quant为何不能把连续low当作量化网格起点？",
+          "answer": "原文Eq1–2先算整数zero-point z=round(-low/s)，再量化round(r/s)+z并以s(q-z)还原。low+s*round((r-low)/s)是不同格点，可能把零量化成非零；STE只改变反向近似，不能更改前向整数网格。",
+          "example": "教学例：3-bit、low=-0.3、范围宽约0.693时，原式将0精确还原为0；错误low锚网格会得到约-0.0029365。",
+          "source_sections": ["核心公式", "数据协议与代码映射"],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "foundation-models:fm-mamba": {
+      "questions": [
+        {
+          "id": "three-predecessors",
+          "level": "basics",
+          "question": "二维递推为何保留左上前驱？",
+          "answer": "它是FM离散化自然产生的交叉轴项，可能在连续A0为零时仍非零；丢掉会改变状态传播。",
+          "example": "教学例：只在左上输入一个脉冲，第二行第二列仍可经对角项收到信息。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "piecewise-step-bound",
+          "level": "mechanism",
+          "question": "所有r<0是否都需要同样的步长截断？",
+          "answer": "不是。(-2,0)允许任意正步长；r<-2需要由最紧state分量给出的上界和严格余量。r=-2临界值本地拒绝，r>=0不是主参数化。",
+          "example": "教学例：r=-1可不截断，r=-3的大步长则要投影。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "wavefront-not-prefix",
+          "level": "comparison",
+          "question": "能直接用Spool的结合律把整个二维扫描并行掉吗？",
+          "answer": "不能。二维每个位置合并多条相交路径，不是单一链的仿射组合；合法并行集合是相同i+j的反对角。",
+          "example": "教学例：同一反对角的两个点互不依赖，但都可能读取上一条和上上条反对角。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "no-psd-throughput",
+          "level": "implementation",
+          "question": "逐行与wavefront输出一致，能报告论文训练提速吗？",
+          "answer": "不能。本地验证数学依赖、边界和梯度，没有视觉训练、融合扫描或PSD内核；Python循环不代表论文吞吐。",
+          "example": "教学例：4×5网格误差零是正确性证据，不是每epoch秒数。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "foundation-models:lara-plus-plus": {
+      "questions": [
+        {
+          "id": "quality-versus-speed",
+          "level": "basics",
+          "question": "恢复接近softmax的准确率，是否解决核注意力实际效率问题？",
+          "answer": "没有。原文LARA++仍有importance权重与聚类开销，甚至是较慢核化方案；质量恢复和系统提速需分别测量。",
+          "example": "教学例：cluster数量取N/8时，贪心分组不是固定cluster数下的线性成本。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "proposal-not-random",
+          "level": "mechanism",
+          "question": "确定性feature替代了什么？",
+          "answer": "用proposal分布均值直接作为特征，而非再从高斯proposal采样；它不移除proposal密度和重要性权重。",
+          "example": "教学例：两个相同输入不因新增高斯噪声得到不同features，但仍计算self-normalized weights。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "paper-code-clustering",
+          "level": "comparison",
+          "question": "论文和当前作者实现的聚类是否完全相同？",
+          "answer": "不完全。论文写query相似性与随机初始点，固定源码用归一化Q+K、确定性初始点并保留CLS。本地记录源码变体，不声称两者无差别。",
+          "example": "教学例：两个query相同但key不同的token，在joint特征里可能分到不同簇。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "constant-value-control",
+          "level": "implementation",
+          "question": "常量V保持不变的负控验证了什么？",
+          "answer": "验证两个归一化阶段没有漏分母或错误维度，并不证明一般输入近似无误或速度更快。",
+          "example": "教学例：所有value都是2时输出应为2；对任意非恒定V仍可能有近似误差。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "foundation-models:gaugerope": {
+      "questions": [
+        {
+          "id": "same-frequency-only",
+          "level": "basics",
+          "question": "为何不能随意跨RoPE频率压缩K？",
+          "answer": "不同频率随位置旋转不同，混合后一般无法用一个相同潜空间旋转表示；同频率块内混合才保留兼容作用。",
+          "example": "教学例：一个频率转90度而另一个转10度时，把两坐标相加再统一旋转通常不等价。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "rkv-not-rotated",
+          "level": "mechanism",
+          "question": "RKV分支也做RoPE是不是更精确？",
+          "answer": "会改变本文可执行近似。RKV用不依赖位置的校正以把decoder吸收到query，只有carrier显式带相对旋转。",
+          "example": "教学例：本地低秩对照重建carrier后旋转，但残余K校正保持不旋转。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "cache-versus-state-sharing",
+          "level": "comparison",
+          "question": "GaugeRoPE与Anchor都减少状态，有何不同？",
+          "answer": "前者减少每token每层的坐标维数并保留频率结构；后者跨层共用递归状态，依赖外部writer和reader映射。",
+          "example": "教学例：同样减少一半字节，不代表历史信息或读写语义相同。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "full-rank-not-compressed-lossless",
+          "level": "implementation",
+          "question": "full-rank测试误差接近零，能称压缩无损吗？",
+          "answer": "不能。满秩carrier与足量RKV只是精确性极限负控，实际低秩残余近似通常改变attention；低秩测试只比对应显式近似路径。",
+          "example": "教学例：用完整两维基可恢复原K，不代表只留一维也不会丢信息。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "foundation-models:risa": {
+      "questions": [
+        {
+          "id": "cold-is-not-deleted",
+          "level": "basics",
+          "question": "COLD页面是否已经从GPU删除？",
+          "answer": "没有。HOT/COLD都保留精确KV，COLD只是当前访问优先级较低，未来plan仍可选择。",
+          "example": "教学例：第一个query不读页面2，第二个query相关性改变后仍能选回页面2。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "addresses-not-outputs",
+          "level": "mechanism",
+          "question": "复用plan是否也复用attention概率和输出？",
+          "answer": "不是。只复用历史索引，每步用fresh query和current KV重算分数、共享归一化及value聚合。",
+          "example": "教学例：同一组地址下，把query方向反转应允许输出改变。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "reads-versus-storage",
+          "level": "comparison",
+          "question": "与DropKV的驱逐是同一预算吗？",
+          "answer": "不是。DropKV删除存储条目，RISA保留未选COLD并减少循环读取；RISA的HOT cap还不包含protected、COLD和mandatory部分。",
+          "example": "教学例：512页cap并不意味着总共只读取或保存512页。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "single-softmax",
+          "level": "implementation",
+          "question": "history与current各算softmax再平均会怎样？",
+          "answer": "会改变权重分母，不再是同一support上的attention。必须把各部分logits放在共同归一化下合并。",
+          "example": "教学例：history只有一个低分条目、current有一个高分条目时，平均会错给history固定一半权重。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "foundation-models:cascadejepa": {
+      "questions": [
+        {
+          "id": "geometry-not-semantics",
+          "level": "basics",
+          "question": "语义分类变好为什么还要看几何表征？",
+          "answer": "同类对象的高层embedding可能接近而失去局部深度/对应区别。本文分析语义进步伴随几何下降，并用空间交互缓解。",
+          "example": "教学例：两块同属汽车的patch可以语义相似，却处在不同深度位置。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "zero-before-position",
+          "level": "mechanism",
+          "question": "第一阶段full-grid如何避免偷看masked patch？",
+          "answer": "先把masked patch embedding置零，再加位置embedding，保留有位置但无原patch内容的token；第二阶段仍只编码visible patches。",
+          "example": "教学例：masked位置输出输入等于pos，不等于零，也不等于原patch+pos。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "target-gradient-difference",
+          "level": "comparison",
+          "question": "能沿用DuoJEPA的target双侧梯度吗？",
+          "answer": "不能。CascadeJEPA target是stop-gradient EMA；DuoJEPA的目标centroid在主方法里反传，照搬会改写训练机制。",
+          "example": "教学例：target参数应无grad，但每次EMA能跟随context更新。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "unidirectional-test",
+          "level": "implementation",
+          "question": "为何要测试改crop2不会改变stage1输出？",
+          "answer": "论文的cross-attention是单向stage1到stage2，不是双向融合；这个负控排除意外反向依赖，仍不证明几何收益。",
+          "example": "教学例：把crop2乘4，stage1预测应不变，但stage2可变化。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "multimodal-models:dwd": {
+      "questions": [
+        {
+          "id": "pixel-output-not-pixel-sampling",
+          "level": "basics",
+          "question": "DWD输出像素是否意味着每步都在像素空间采样？",
+          "answer": "不是。latent DiT仍按原denoising head推进，只有最后一轮pixel head直接读出最终图像/视频。",
+          "example": "教学例：中间20步仍更新latent，最后一步才把hidden token映成pixel patch。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "two-time-distributions",
+          "level": "mechanism",
+          "question": "为何两个head不共用同一个time分布？",
+          "answer": "pixel目标工作在最终小非零time区间，trajectory anchoring覆盖更广中间去噪区间；职责不同。",
+          "example": "教学例：原文常用pixel范围[0,0.1]、trajectory范围[0.04,1]，shift前定义。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "pixvid-different-path",
+          "level": "comparison",
+          "question": "和PixVid都去掉decoder，有何关键不同？",
+          "answer": "PixVid迁移输入与整个pixel生成路径，DWD保留latent denoising加最终输出head；改动范围和监督不同。",
+          "example": "教学例：删除VAE后直接换线性输出，不会自动获得PixVid的时间映射/detailer。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "no-shadow-head",
+          "level": "implementation",
+          "question": "为何本轮不只实现一个线性pixel head？",
+          "answer": "完整作用依赖预训练DiT后缀适配、感知/对抗目标、trajectory anchoring和采样。独立线性层没有足够方法证据，完整矩阵高成本故只收录。",
+          "example": "教学例：随机hidden映射到RGB的shape正确，不代表具备无decoder生成能力。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "foundation-models:beyond-bitwidth": {
+      "questions": [
+        {
+          "id": "names-not-execution",
+          "level": "basics",
+          "question": "叫INT4的模型是否就证明按INT4原生执行？",
+          "answer": "不能。要核packed weight类型、activation policy、选中的kernel及是否fallback。相同Marlin名称可服务不同格式。",
+          "example": "教学例：只打印kernel名，不足以区分INT4和INT8存储。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "nonadditive-restoration",
+          "level": "mechanism",
+          "question": "多个模块单独恢复的收益能相加吗？",
+          "answer": "不能。模块交互使效果强烈非加性，原文用恢复实验排名再预算填充，并不把它当组合效果预测。",
+          "example": "教学例：两个模块各恢复1点，不保证同时恢复2点。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "allocation-confounded",
+          "level": "comparison",
+          "question": "最终混合精度优于NVFP4是否证明allocation算法单独有效？",
+          "answer": "不证明。比较同时改变activation精度和INT8保护，原文明确未隔离allocation效应。",
+          "example": "教学例：activation从4位改16位的贡献不能归给模块排序。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "blackwell-only-evidence",
+          "level": "implementation",
+          "question": "为何不在A100上做一次就当B200验证？",
+          "answer": "硬件支持和native格式不同，本地也无作者final checkpoint可核rebuild；完整B200实验超预算，明确不复现并审查DONE。",
+          "example": "教学例：A100上FP16模拟NVFP4误差，不是Blackwell原生执行证据。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "foundation-models:latent-feedback-scaling": {
+      "questions": [
+        {
+          "id": "same-tokens-not-compute",
+          "level": "basics",
+          "question": "相同训练token数为何不够公平？",
+          "answer": "feedback每token花更多FLOPs；普通Transformer可以用这部分预算多训epoch。本文比较相同FLOPs而非只比较相同token。",
+          "example": "教学例：若feedback每token贵25%，相同token训练已多用25%计算。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "effective-data-saturation",
+          "level": "mechanism",
+          "question": "重复四遍是否等于四倍独立数据？",
+          "answer": "不是。有效数据公式让每次重复边际价值递减，R大时趋向U(1+R*)；少于一遍则用RU。",
+          "example": "教学例：看过的文档第20遍不能默认和第一遍同价值。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "archspace-laws",
+          "level": "comparison",
+          "question": "能直接把ArchSpace的loss系数填进本篇吗？",
+          "answer": "不能。两者控制变量和函数形式不同，本篇包含repeat saturation与feedback capacity factor；需要自己的拟合。",
+          "example": "教学例：即使都预测validation loss，参数N与FLOPs/token M也不是相同量。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "no-fake-refit",
+          "level": "implementation",
+          "question": "为何没有本地scaling-law拟合指标？",
+          "answer": "真实拟合需要多尺度、unique-token和LR/decay网格训练；本轮成本过高不复现，不以代入公式代替新实验。",
+          "example": "教学例：随机造几组loss再回归不能验证778M外推或节省计算的结论。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "同主题比较与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    }
+  }
+}

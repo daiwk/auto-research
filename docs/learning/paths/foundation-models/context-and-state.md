@@ -7,7 +7,7 @@ hide:
 
 # 长上下文：注意力、递归状态与记忆
 
-[基础模型](index.md) / 160 个问题 · 40 篇论文
+[基础模型](index.md) / 184 个问题 · 46 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,327 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">160 个问题 · 40 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">184 个问题 · 46 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:dealrank" data-paper-title="Deal With It: On Better Schedules for Listwise Reranking" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Deal With It: On Better Schedules for Listwise Reranking 基础模型 Mixedbread 2026-11-17 并行listwise重排要把候选分组，每组只晋级固定配额。连续切块会把初始召回前部的好文档挤进同一组，越好的retriever越可能被配额误切。DealRank按retriever名次轮流发牌，使每个前缀在各组尽量平衡，再并行排序、按配额晋级并最终合并，不依赖补救认证轮。 成本过高，不复现（审查DONE）；true_top只给quota_cuts外层诊断，不进入schedule。L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。本地ranker是确定性一致排序回调，不是模型；true_top只给quota_cuts外层诊断，不进入schedule。没有RankGPT提示、token费用或真实API延迟，机制计数不作NDCG／速度证据。作者提供mixedbread-ai/dealrank链接，但2026-11-18仓库／main commit API返回404，未核实公开源码或许可，不执行外部代码。完整多模型及27B计时矩阵高成本不复现。  检索与上下文 列表重排与调用调度 基础模型 长上下文：注意力、递归状态与记忆 更好的retriever为什么反而会被连续切块伤害？ 好文档集中在前部，一个chunk的晋级配额会切掉同组其他好文档。 教学例：前20全是好文档而每组留4，连续切块先丢16个，轮发可分摊。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-dealrank-9c3ce34d" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-6de94cd035ffb933">更好的retriever为什么反而会被连续切块伤害？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adealrank">Deal With It: On Better Schedules for Listwise Reranking</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Mixedbread</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>好文档集中在前部，一个chunk的晋级配额会切掉同组其他好文档。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：前20全是好文档而每组留4，连续切块先丢16个，轮发可分摊。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22392v1">原论文</a> · <a href="../../../../foundation-models/2611.22392-dealrank/">实现解读</a> · <a href="#qa-6de94cd035ffb933">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:dealrank" data-paper-title="Deal With It: On Better Schedules for Listwise Reranking" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Deal With It: On Better Schedules for Listwise Reranking 基础模型 Mixedbread 2026-11-17 并行listwise重排要把候选分组，每组只晋级固定配额。连续切块会把初始召回前部的好文档挤进同一组，越好的retriever越可能被配额误切。DealRank按retriever名次轮流发牌，使每个前缀在各组尽量平衡，再并行排序、按配额晋级并最终合并，不依赖补救认证轮。 成本过高，不复现（审查DONE）；true_top只给quota_cuts外层诊断，不进入schedule。L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。本地ranker是确定性一致排序回调，不是模型；true_top只给quota_cuts外层诊断，不进入schedule。没有RankGPT提示、token费用或真实API延迟，机制计数不作NDCG／速度证据。作者提供mixedbread-ai/dealrank链接，但2026-11-18仓库／main commit API返回404，未核实公开源码或许可，不执行外部代码。完整多模型及27B计时矩阵高成本不复现。  检索与上下文 列表重排与调用调度 基础模型 长上下文：注意力、递归状态与记忆 6调用2轮保证完整top10吗？ 不保证。原命题在一致ranker下保证topq，这里q=4；其他六个位置只有分布模型下的期望切损分析。 教学例：top4准确不意味着nDCG@10必然无损。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-7eac43bc30690726">6调用2轮保证完整top10吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adealrank">Deal With It: On Better Schedules for Listwise Reranking</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Mixedbread</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不保证。原命题在一致ranker下保证topq，这里q=4；其他六个位置只有分布模型下的期望切损分析。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：top4准确不意味着nDCG@10必然无损。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22392v1">原论文</a> · <a href="../../../../foundation-models/2611.22392-dealrank/">实现解读</a> · <a href="#qa-7eac43bc30690726">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:dealrank" data-paper-title="Deal With It: On Better Schedules for Listwise Reranking" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Deal With It: On Better Schedules for Listwise Reranking 基础模型 Mixedbread 2026-11-17 并行listwise重排要把候选分组，每组只晋级固定配额。连续切块会把初始召回前部的好文档挤进同一组，越好的retriever越可能被配额误切。DealRank按retriever名次轮流发牌，使每个前缀在各组尽量平衡，再并行排序、按配额晋级并最终合并，不依赖补救认证轮。 成本过高，不复现（审查DONE）；true_top只给quota_cuts外层诊断，不进入schedule。L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。本地ranker是确定性一致排序回调，不是模型；true_top只给quota_cuts外层诊断，不进入schedule。没有RankGPT提示、token费用或真实API延迟，机制计数不作NDCG／速度证据。作者提供mixedbread-ai/dealrank链接，但2026-11-18仓库／main commit API返回404，未核实公开源码或许可，不执行外部代码。完整多模型及27B计时矩阵高成本不复现。  检索与上下文 列表重排与调用调度 基础模型 长上下文：注意力、递归状态与记忆 它能代替HVMap双空间重排吗？ 不能。DealRank决定哪些候选同场比较，HVMap定义跨编码器的可比分数。 教学例：轮流发牌不能修正未对齐的embedding。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-21d483d6374f761a">它能代替HVMap双空间重排吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adealrank">Deal With It: On Better Schedules for Listwise Reranking</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Mixedbread</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。DealRank决定哪些候选同场比较，HVMap定义跨编码器的可比分数。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：轮流发牌不能修正未对齐的embedding。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22392v1">原论文</a> · <a href="../../../../foundation-models/2611.22392-dealrank/">实现解读</a> · <a href="#qa-21d483d6374f761a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:dealrank" data-paper-title="Deal With It: On Better Schedules for Listwise Reranking" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Deal With It: On Better Schedules for Listwise Reranking 基础模型 Mixedbread 2026-11-17 并行listwise重排要把候选分组，每组只晋级固定配额。连续切块会把初始召回前部的好文档挤进同一组，越好的retriever越可能被配额误切。DealRank按retriever名次轮流发牌，使每个前缀在各组尽量平衡，再并行排序、按配额晋级并最终合并，不依赖补救认证轮。 成本过高，不复现（审查DONE）；true_top只给quota_cuts外层诊断，不进入schedule。L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。本地ranker是确定性一致排序回调，不是模型；true_top只给quota_cuts外层诊断，不进入schedule。没有RankGPT提示、token费用或真实API延迟，机制计数不作NDCG／速度证据。作者提供mixedbread-ai/dealrank链接，但2026-11-18仓库／main commit API返回404，未核实公开源码或许可，不执行外部代码。完整多模型及27B计时矩阵高成本不复现。  检索与上下文 列表重排与调用调度 基础模型 长上下文：注意力、递归状态与记忆 确定性ranker回调下的通关说明什么？ 只说明实际并发、配额与排列守恒符合控制例，不能验证LLM提示或延迟。 教学例：人工排序表只供外层cuts核查，不能传给被测模型当答案。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-e54fe2df08018f58">确定性ranker回调下的通关说明什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adealrank">Deal With It: On Better Schedules for Listwise Reranking</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Mixedbread</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>只说明实际并发、配额与排列守恒符合控制例，不能验证LLM提示或延迟。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：人工排序表只供外层cuts核查，不能传给被测模型当答案。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22392v1">原论文</a> · <a href="../../../../foundation-models/2611.22392-dealrank/">实现解读</a> · <a href="#qa-e54fe2df08018f58">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:fm-mamba" data-paper-title="FM-Mamba: An Efficient Native 2D Selective State Space Model with Stability-Aware Discretization" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="FM-Mamba: An Efficient Native 2D Selective State Space Model with Stability-Aware Discretization 基础模型 Beijing Institute of Technology 2026-11-17 原生2D FM状态同时接收上、左与左上三个前驱，不通过展平扫描把二维关系退化为一条链。两个输入相关步长分别控制两个轴；a0/(a1a2)决定是否需要给步长施加上界。已核方法位置：3.1–3.3, 4.1。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行精确ZOH状态系数、严格步长投影、三个前驱的逐行/反对角参考递推及梯度；input projection/injection由调用方提供。没有完整视觉网络、PSD dispatch、CUDA graphs或融合kernel。  网络架构 二维状态空间模型 基础模型 长上下文：注意力、递归状态与记忆 二维递推为何保留左上前驱？ 它是FM离散化自然产生的交叉轴项，可能在连续A0为零时仍非零；丢掉会改变状态传播。 教学例：只在左上输入一个脉冲，第二行第二列仍可经对角项收到信息。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-fm-mamba-84147bc2" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-e1e8569f1f965abc">二维递推为何保留左上前驱？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Afm-mamba">FM-Mamba: An Efficient Native 2D Selective State Space Model with Stability-Aware Discretization</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Beijing Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它是FM离散化自然产生的交叉轴项，可能在连续A0为零时仍非零；丢掉会改变状态传播。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：只在左上输入一个脉冲，第二行第二列仍可经对角项收到信息。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22061v1">原论文</a> · <a href="../../../../foundation-models/2611.22061-fm-mamba/">实现解读</a> · <a href="#qa-e1e8569f1f965abc">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:fm-mamba" data-paper-title="FM-Mamba: An Efficient Native 2D Selective State Space Model with Stability-Aware Discretization" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="FM-Mamba: An Efficient Native 2D Selective State Space Model with Stability-Aware Discretization 基础模型 Beijing Institute of Technology 2026-11-17 原生2D FM状态同时接收上、左与左上三个前驱，不通过展平扫描把二维关系退化为一条链。两个输入相关步长分别控制两个轴；a0/(a1a2)决定是否需要给步长施加上界。已核方法位置：3.1–3.3, 4.1。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行精确ZOH状态系数、严格步长投影、三个前驱的逐行/反对角参考递推及梯度；input projection/injection由调用方提供。没有完整视觉网络、PSD dispatch、CUDA graphs或融合kernel。  网络架构 二维状态空间模型 基础模型 长上下文：注意力、递归状态与记忆 所有r&lt;0是否都需要同样的步长截断？ 不是。(-2,0)允许任意正步长；r&lt;-2需要由最紧state分量给出的上界和严格余量。r=-2临界值本地拒绝，r&gt;=0不是主参数化。 教学例：r=-1可不截断，r=-3的大步长则要投影。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-45caa6cbeb1f7e36">所有r&lt;0是否都需要同样的步长截断？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Afm-mamba">FM-Mamba: An Efficient Native 2D Selective State Space Model with Stability-Aware Discretization</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Beijing Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。(-2,0)允许任意正步长；r&lt;-2需要由最紧state分量给出的上界和严格余量。r=-2临界值本地拒绝，r&gt;=0不是主参数化。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：r=-1可不截断，r=-3的大步长则要投影。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22061v1">原论文</a> · <a href="../../../../foundation-models/2611.22061-fm-mamba/">实现解读</a> · <a href="#qa-45caa6cbeb1f7e36">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:fm-mamba" data-paper-title="FM-Mamba: An Efficient Native 2D Selective State Space Model with Stability-Aware Discretization" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="FM-Mamba: An Efficient Native 2D Selective State Space Model with Stability-Aware Discretization 基础模型 Beijing Institute of Technology 2026-11-17 原生2D FM状态同时接收上、左与左上三个前驱，不通过展平扫描把二维关系退化为一条链。两个输入相关步长分别控制两个轴；a0/(a1a2)决定是否需要给步长施加上界。已核方法位置：3.1–3.3, 4.1。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行精确ZOH状态系数、严格步长投影、三个前驱的逐行/反对角参考递推及梯度；input projection/injection由调用方提供。没有完整视觉网络、PSD dispatch、CUDA graphs或融合kernel。  网络架构 二维状态空间模型 基础模型 长上下文：注意力、递归状态与记忆 能直接用Spool的结合律把整个二维扫描并行掉吗？ 不能。二维每个位置合并多条相交路径，不是单一链的仿射组合；合法并行集合是相同i+j的反对角。 教学例：同一反对角的两个点互不依赖，但都可能读取上一条和上上条反对角。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-467a23c887b86316">能直接用Spool的结合律把整个二维扫描并行掉吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Afm-mamba">FM-Mamba: An Efficient Native 2D Selective State Space Model with Stability-Aware Discretization</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Beijing Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。二维每个位置合并多条相交路径，不是单一链的仿射组合；合法并行集合是相同i+j的反对角。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一反对角的两个点互不依赖，但都可能读取上一条和上上条反对角。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22061v1">原论文</a> · <a href="../../../../foundation-models/2611.22061-fm-mamba/">实现解读</a> · <a href="#qa-467a23c887b86316">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:fm-mamba" data-paper-title="FM-Mamba: An Efficient Native 2D Selective State Space Model with Stability-Aware Discretization" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="FM-Mamba: An Efficient Native 2D Selective State Space Model with Stability-Aware Discretization 基础模型 Beijing Institute of Technology 2026-11-17 原生2D FM状态同时接收上、左与左上三个前驱，不通过展平扫描把二维关系退化为一条链。两个输入相关步长分别控制两个轴；a0/(a1a2)决定是否需要给步长施加上界。已核方法位置：3.1–3.3, 4.1。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行精确ZOH状态系数、严格步长投影、三个前驱的逐行/反对角参考递推及梯度；input projection/injection由调用方提供。没有完整视觉网络、PSD dispatch、CUDA graphs或融合kernel。  网络架构 二维状态空间模型 基础模型 长上下文：注意力、递归状态与记忆 逐行与wavefront输出一致，能报告论文训练提速吗？ 不能。本地验证数学依赖、边界和梯度，没有视觉训练、融合扫描或PSD内核；Python循环不代表论文吞吐。 教学例：4×5网格误差零是正确性证据，不是每epoch秒数。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-5949e91983e44216">逐行与wavefront输出一致，能报告论文训练提速吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Afm-mamba">FM-Mamba: An Efficient Native 2D Selective State Space Model with Stability-Aware Discretization</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Beijing Institute of Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。本地验证数学依赖、边界和梯度，没有视觉训练、融合扫描或PSD内核；Python循环不代表论文吞吐。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：4×5网格误差零是正确性证据，不是每epoch秒数。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22061v1">原论文</a> · <a href="../../../../foundation-models/2611.22061-fm-mamba/">实现解读</a> · <a href="#qa-5949e91983e44216">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:infuseloop" data-paper-title="InfuseLoop: Cross-Trajectory Latent Injection for Scalable Parallel Looped Transformers" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="InfuseLoop: Cross-Trajectory Latent Injection for Scalable Parallel Looped Transformers 基础模型 Tsinghua University 2026-11-17 并行loop在同一执行周期同时推进多个预测轨迹。InfuseLoop让第r轮聚合上一周期已完成、但来自更浅loop的状态，而非仅传递本轨迹前一轮。未来轨迹位置不等于未来未生成token，合法性由执行周期决定。已核方法位置：3.1–3.4, 4.1, Appendix A。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行可用源索引、文档隔离、可学习query/bias/scale聚合及梯度；没有G-SWA完整backbone、token embedding融合或语言模型预训练。  网络架构 并行循环网络 基础模型 长上下文：注意力、递归状态与记忆 为什么能读取t+1轨迹而不泄漏未来token？ 轨迹编号表示预测计算的位置，源还必须来自更浅loop且上一执行周期已完成；因果条件不是单看轨迹索引大小。 教学例：r=4时可读h_t的第3轮、h_(t+1)第2轮、h_(t+2)第1轮，三者执行周期相同。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-infuseloop-696bd2ab" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-a237d0ddd4480db4">为什么能读取t+1轨迹而不泄漏未来token？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ainfuseloop">InfuseLoop: Cross-Trajectory Latent Injection for Scalable Parallel Looped Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>轨迹编号表示预测计算的位置，源还必须来自更浅loop且上一执行周期已完成；因果条件不是单看轨迹索引大小。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：r=4时可读h_t的第3轮、h_(t+1)第2轮、h_(t+2)第1轮，三者执行周期相同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22426v1">原论文</a> · <a href="../../../../foundation-models/2611.22426-infuseloop/">实现解读</a> · <a href="#qa-a237d0ddd4480db4">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:infuseloop" data-paper-title="InfuseLoop: Cross-Trajectory Latent Injection for Scalable Parallel Looped Transformers" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="InfuseLoop: Cross-Trajectory Latent Injection for Scalable Parallel Looped Transformers 基础模型 Tsinghua University 2026-11-17 并行loop在同一执行周期同时推进多个预测轨迹。InfuseLoop让第r轮聚合上一周期已完成、但来自更浅loop的状态，而非仅传递本轨迹前一轮。未来轨迹位置不等于未来未生成token，合法性由执行周期决定。已核方法位置：3.1–3.4, 4.1, Appendix A。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行可用源索引、文档隔离、可学习query/bias/scale聚合及梯度；没有G-SWA完整backbone、token embedding融合或语言模型预训练。  网络架构 并行循环网络 基础模型 长上下文：注意力、递归状态与记忆 为何不能每算完一层就原位更新buffer？ 这会让后续loop读取本周期的新状态，改变并行计算图。论文先从旧bank计算所有输出再整体commit。 教学例：串行更新后r4可能用到刚更新的r3，而定义只允许上一周期r3。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-77fc9a34606244f0">为何不能每算完一层就原位更新buffer？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ainfuseloop">InfuseLoop: Cross-Trajectory Latent Injection for Scalable Parallel Looped Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>这会让后续loop读取本周期的新状态，改变并行计算图。论文先从旧bank计算所有输出再整体commit。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：串行更新后r4可能用到刚更新的r3，而定义只允许上一周期r3。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22426v1">原论文</a> · <a href="../../../../foundation-models/2611.22426-infuseloop/">实现解读</a> · <a href="#qa-77fc9a34606244f0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:infuseloop" data-paper-title="InfuseLoop: Cross-Trajectory Latent Injection for Scalable Parallel Looped Transformers" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="InfuseLoop: Cross-Trajectory Latent Injection for Scalable Parallel Looped Transformers 基础模型 Tsinghua University 2026-11-17 并行loop在同一执行周期同时推进多个预测轨迹。InfuseLoop让第r轮聚合上一周期已完成、但来自更浅loop的状态，而非仅传递本轨迹前一轮。未来轨迹位置不等于未来未生成token，合法性由执行周期决定。已核方法位置：3.1–3.4, 4.1, Appendix A。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行可用源索引、文档隔离、可学习query/bias/scale聚合及梯度；没有G-SWA完整backbone、token embedding融合或语言模型预训练。  网络架构 并行循环网络 基础模型 长上下文：注意力、递归状态与记忆 与Anchor跨层共享状态有什么差别？ Anchor读外部TTT记忆并结合局部attention；InfuseLoop依执行周期聚合多个轨迹的hidden states，状态语义和写入时机都不同。 教学例：把一份KV矩阵广播给所有loop，没有实现所需的跨轨迹索引。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-b987f768f58c4aeb">与Anchor跨层共享状态有什么差别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ainfuseloop">InfuseLoop: Cross-Trajectory Latent Injection for Scalable Parallel Looped Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Anchor读外部TTT记忆并结合局部attention；InfuseLoop依执行周期聚合多个轨迹的hidden states，状态语义和写入时机都不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把一份KV矩阵广播给所有loop，没有实现所需的跨轨迹索引。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22426v1">原论文</a> · <a href="../../../../foundation-models/2611.22426-infuseloop/">实现解读</a> · <a href="#qa-b987f768f58c4aeb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:infuseloop" data-paper-title="InfuseLoop: Cross-Trajectory Latent Injection for Scalable Parallel Looped Transformers" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="InfuseLoop: Cross-Trajectory Latent Injection for Scalable Parallel Looped Transformers 基础模型 Tsinghua University 2026-11-17 并行loop在同一执行周期同时推进多个预测轨迹。InfuseLoop让第r轮聚合上一周期已完成、但来自更浅loop的状态，而非仅传递本轨迹前一轮。未来轨迹位置不等于未来未生成token，合法性由执行周期决定。已核方法位置：3.1–3.4, 4.1, Appendix A。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行可用源索引、文档隔离、可学习query/bias/scale聚合及梯度；没有G-SWA完整backbone、token embedding融合或语言模型预训练。  网络架构 并行循环网络 基础模型 长上下文：注意力、递归状态与记忆 为何文档mask要在softmax前做？ 先softmax再清零会让非法文档分走概率且不重新归一，改变合法源权重。无源时需显式零输出，避免全负无穷产生NaN。 教学例：两个分数相同但一个跨文档，合法源应得权重1而不是0.5。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-9ea56ba957ddf9b7">为何文档mask要在softmax前做？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ainfuseloop">InfuseLoop: Cross-Trajectory Latent Injection for Scalable Parallel Looped Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>先softmax再清零会让非法文档分走概率且不重新归一，改变合法源权重。无源时需显式零输出，避免全负无穷产生NaN。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个分数相同但一个跨文档，合法源应得权重1而不是0.5。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22426v1">原论文</a> · <a href="../../../../foundation-models/2611.22426-infuseloop/">实现解读</a> · <a href="#qa-9ea56ba957ddf9b7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:simq" data-paper-title="SIMQ: A Single Graph-based Index for Multi-Vector Query" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="SIMQ: A Single Graph-based Index for Multi-Vector Query 基础模型 Tongji University 2026-11-17 ColBERT式MaxSim需要逐query token匹配文档token。SIMQ先均匀抽样token作初始聚合点，通过临时图分配剩余token，对过大cluster递归二分，归一化均值后建立一个质心图。查询只导航到少量质心，经质心到文档映射生成候选，最后才访问候选原始token精确重排，避免全query×centroid矩阵。 完整五数据集矩阵成本过高，不复现（审查DONE）。L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。没有ColBERT编码、百万级token索引、残差压缩、完整HNSW或公平吞吐实验。重复seed不使随机向量变成语义能力评测；SIMQ+保留完整边界并列意味着rerank参数不是它的硬候选上限。完整五数据集矩阵成本过高，不复现（审查DONE）。  检索与上下文 多向量图索引 基础模型 长上下文：注意力、递归状态与记忆 同一query token命中一个文档的三个cluster，SIMQ+计几次？ 只计一次，count按不同query token覆盖，不按cluster数量。 教学例：一个token在三个cluster都找到docA，docA的count仍只加1。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-simq-c853a568" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-6cf674ac9cd059f0">同一query token命中一个文档的三个cluster，SIMQ+计几次？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asimq">SIMQ: A Single Graph-based Index for Multi-Vector Query</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Tongji University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>只计一次，count按不同query token覆盖，不按cluster数量。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个token在三个cluster都找到docA，docA的count仍只加1。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22079v1">原论文</a> · <a href="../../../../foundation-models/2611.22079-simq/">实现解读</a> · <a href="#qa-6cf674ac9cd059f0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:simq" data-paper-title="SIMQ: A Single Graph-based Index for Multi-Vector Query" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="SIMQ: A Single Graph-based Index for Multi-Vector Query 基础模型 Tongji University 2026-11-17 ColBERT式MaxSim需要逐query token匹配文档token。SIMQ先均匀抽样token作初始聚合点，通过临时图分配剩余token，对过大cluster递归二分，归一化均值后建立一个质心图。查询只导航到少量质心，经质心到文档映射生成候选，最后才访问候选原始token精确重排，避免全query×centroid矩阵。 完整五数据集矩阵成本过高，不复现（审查DONE）。L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。没有ColBERT编码、百万级token索引、残差压缩、完整HNSW或公平吞吐实验。重复seed不使随机向量变成语义能力评测；SIMQ+保留完整边界并列意味着rerank参数不是它的硬候选上限。完整五数据集矩阵成本过高，不复现（审查DONE）。  检索与上下文 多向量图索引 基础模型 长上下文：注意力、递归状态与记忆 为什么SIMQ+可能重排超过Nmin个文档？ 它取能保留至少Nmin项的最大整数count阈值，边界并列整组保留。 教学例：Nmin=4而第四到第六项同count时要保留6项。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-8fa1e180f9e12306">为什么SIMQ+可能重排超过Nmin个文档？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asimq">SIMQ: A Single Graph-based Index for Multi-Vector Query</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Tongji University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它取能保留至少Nmin项的最大整数count阈值，边界并列整组保留。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：Nmin=4而第四到第六项同count时要保留6项。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22079v1">原论文</a> · <a href="../../../../foundation-models/2611.22079-simq/">实现解读</a> · <a href="#qa-8fa1e180f9e12306">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:simq" data-paper-title="SIMQ: A Single Graph-based Index for Multi-Vector Query" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="SIMQ: A Single Graph-based Index for Multi-Vector Query 基础模型 Tongji University 2026-11-17 ColBERT式MaxSim需要逐query token匹配文档token。SIMQ先均匀抽样token作初始聚合点，通过临时图分配剩余token，对过大cluster递归二分，归一化均值后建立一个质心图。查询只导航到少量质心，经质心到文档映射生成候选，最后才访问候选原始token精确重排，避免全query×centroid矩阵。 完整五数据集矩阵成本过高，不复现（审查DONE）。L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。没有ColBERT编码、百万级token索引、残差压缩、完整HNSW或公平吞吐实验。重复seed不使随机向量变成语义能力评测；SIMQ+保留完整边界并列意味着rerank参数不是它的硬候选上限。完整五数据集矩阵成本过高，不复现（审查DONE）。  检索与上下文 多向量图索引 基础模型 长上下文：注意力、递归状态与记忆 SIMQ能代替HVMap做异构编码器对齐吗？ 不能。SIMQ在同一token空间内改变候选索引，HVMap学习跨空间映射。 教学例：不同编码器的同维向量也不能直接靠SIMQ内积变得可比。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-61c0cdbc9f8d331a">SIMQ能代替HVMap做异构编码器对齐吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asimq">SIMQ: A Single Graph-based Index for Multi-Vector Query</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Tongji University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。SIMQ在同一token空间内改变候选索引，HVMap学习跨空间映射。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：不同编码器的同维向量也不能直接靠SIMQ内积变得可比。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22079v1">原论文</a> · <a href="../../../../foundation-models/2611.22079-simq/">实现解读</a> · <a href="#qa-61c0cdbc9f8d331a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:simq" data-paper-title="SIMQ: A Single Graph-based Index for Multi-Vector Query" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="SIMQ: A Single Graph-based Index for Multi-Vector Query 基础模型 Tongji University 2026-11-17 ColBERT式MaxSim需要逐query token匹配文档token。SIMQ先均匀抽样token作初始聚合点，通过临时图分配剩余token，对过大cluster递归二分，归一化均值后建立一个质心图。查询只导航到少量质心，经质心到文档映射生成候选，最后才访问候选原始token精确重排，避免全query×centroid矩阵。 完整五数据集矩阵成本过高，不复现（审查DONE）。L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。没有ColBERT编码、百万级token索引、残差压缩、完整HNSW或公平吞吐实验。重复seed不使随机向量变成语义能力评测；SIMQ+保留完整边界并列意味着rerank参数不是它的硬候选上限。完整五数据集矩阵成本过高，不复现（审查DONE）。  检索与上下文 多向量图索引 基础模型 长上下文：注意力、递归状态与记忆 本地exact构图跑通能宣称CPU吞吐提升吗？ 不能。它是小数据后端，真实遍历和重排被执行，但没有可扩展HNSW或匹配召回的QPS测量。 教学例：12文档的正确计数不能外推百万文档延迟。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-4d2004028a21592c">本地exact构图跑通能宣称CPU吞吐提升吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asimq">SIMQ: A Single Graph-based Index for Multi-Vector Query</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Tongji University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。它是小数据后端，真实遍历和重排被执行，但没有可扩展HNSW或匹配召回的QPS测量。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：12文档的正确计数不能外推百万文档延迟。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22079v1">原论文</a> · <a href="../../../../foundation-models/2611.22079-simq/">实现解读</a> · <a href="#qa-4d2004028a21592c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gaugerope" data-paper-title="GaugeRoPE: RoPE-Compatible Executable Latent Attention" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="GaugeRoPE: RoPE-Compatible Executable Latent Attention 基础模型 National University of Defense Technology 2026-11-16 任意低秩K在潜空间通常不保留RoPE作用，需要逐历史token重建。GaugeRoPE只在相同频率块内拟合复数carrier，另用能量平衡后的joint PCA存residual K与V；query吸收decoder，聚合后才解码输出。已核方法位置：4.1–4.3, 5.1。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行相同频率Gram特征向量、joint RKV编码、GQA query吸收和latent value聚合；测试full-rank native等价及低秩显式近似等价。不加载7B、长上下文基准、量化格式或专用内核。  注意力与长上下文 潜空间KV缓存 基础模型 长上下文：注意力、递归状态与记忆 为何不能随意跨RoPE频率压缩K？ 不同频率随位置旋转不同，混合后一般无法用一个相同潜空间旋转表示；同频率块内混合才保留兼容作用。 教学例：一个频率转90度而另一个转10度时，把两坐标相加再统一旋转通常不等价。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-gaugerope-31ad23e2" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-ea5f3ce0da523dab">为何不能随意跨RoPE频率压缩K？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Agaugerope">GaugeRoPE: RoPE-Compatible Executable Latent Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · National University of Defense Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同频率随位置旋转不同，混合后一般无法用一个相同潜空间旋转表示；同频率块内混合才保留兼容作用。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个频率转90度而另一个转10度时，把两坐标相加再统一旋转通常不等价。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20524v1">原论文</a> · <a href="../../../../foundation-models/2611.20524-gaugerope/">实现解读</a> · <a href="#qa-ea5f3ce0da523dab">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gaugerope" data-paper-title="GaugeRoPE: RoPE-Compatible Executable Latent Attention" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="GaugeRoPE: RoPE-Compatible Executable Latent Attention 基础模型 National University of Defense Technology 2026-11-16 任意低秩K在潜空间通常不保留RoPE作用，需要逐历史token重建。GaugeRoPE只在相同频率块内拟合复数carrier，另用能量平衡后的joint PCA存residual K与V；query吸收decoder，聚合后才解码输出。已核方法位置：4.1–4.3, 5.1。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行相同频率Gram特征向量、joint RKV编码、GQA query吸收和latent value聚合；测试full-rank native等价及低秩显式近似等价。不加载7B、长上下文基准、量化格式或专用内核。  注意力与长上下文 潜空间KV缓存 基础模型 长上下文：注意力、递归状态与记忆 RKV分支也做RoPE是不是更精确？ 会改变本文可执行近似。RKV用不依赖位置的校正以把decoder吸收到query，只有carrier显式带相对旋转。 教学例：本地低秩对照重建carrier后旋转，但残余K校正保持不旋转。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-30963c2d1384851c">RKV分支也做RoPE是不是更精确？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Agaugerope">GaugeRoPE: RoPE-Compatible Executable Latent Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · National University of Defense Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>会改变本文可执行近似。RKV用不依赖位置的校正以把decoder吸收到query，只有carrier显式带相对旋转。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：本地低秩对照重建carrier后旋转，但残余K校正保持不旋转。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20524v1">原论文</a> · <a href="../../../../foundation-models/2611.20524-gaugerope/">实现解读</a> · <a href="#qa-30963c2d1384851c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gaugerope" data-paper-title="GaugeRoPE: RoPE-Compatible Executable Latent Attention" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="GaugeRoPE: RoPE-Compatible Executable Latent Attention 基础模型 National University of Defense Technology 2026-11-16 任意低秩K在潜空间通常不保留RoPE作用，需要逐历史token重建。GaugeRoPE只在相同频率块内拟合复数carrier，另用能量平衡后的joint PCA存residual K与V；query吸收decoder，聚合后才解码输出。已核方法位置：4.1–4.3, 5.1。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行相同频率Gram特征向量、joint RKV编码、GQA query吸收和latent value聚合；测试full-rank native等价及低秩显式近似等价。不加载7B、长上下文基准、量化格式或专用内核。  注意力与长上下文 潜空间KV缓存 基础模型 长上下文：注意力、递归状态与记忆 GaugeRoPE与Anchor都减少状态，有何不同？ 前者减少每token每层的坐标维数并保留频率结构；后者跨层共用递归状态，依赖外部writer和reader映射。 教学例：同样减少一半字节，不代表历史信息或读写语义相同。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-a940d4992c424558">GaugeRoPE与Anchor都减少状态，有何不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Agaugerope">GaugeRoPE: RoPE-Compatible Executable Latent Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · National University of Defense Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>前者减少每token每层的坐标维数并保留频率结构；后者跨层共用递归状态，依赖外部writer和reader映射。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同样减少一半字节，不代表历史信息或读写语义相同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20524v1">原论文</a> · <a href="../../../../foundation-models/2611.20524-gaugerope/">实现解读</a> · <a href="#qa-a940d4992c424558">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:gaugerope" data-paper-title="GaugeRoPE: RoPE-Compatible Executable Latent Attention" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="GaugeRoPE: RoPE-Compatible Executable Latent Attention 基础模型 National University of Defense Technology 2026-11-16 任意低秩K在潜空间通常不保留RoPE作用，需要逐历史token重建。GaugeRoPE只在相同频率块内拟合复数carrier，另用能量平衡后的joint PCA存residual K与V；query吸收decoder，聚合后才解码输出。已核方法位置：4.1–4.3, 5.1。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行相同频率Gram特征向量、joint RKV编码、GQA query吸收和latent value聚合；测试full-rank native等价及低秩显式近似等价。不加载7B、长上下文基准、量化格式或专用内核。  注意力与长上下文 潜空间KV缓存 基础模型 长上下文：注意力、递归状态与记忆 full-rank测试误差接近零，能称压缩无损吗？ 不能。满秩carrier与足量RKV只是精确性极限负控，实际低秩残余近似通常改变attention；低秩测试只比对应显式近似路径。 教学例：用完整两维基可恢复原K，不代表只留一维也不会丢信息。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-42d93e35336d9d75">full-rank测试误差接近零，能称压缩无损吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Agaugerope">GaugeRoPE: RoPE-Compatible Executable Latent Attention</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · National University of Defense Technology</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。满秩carrier与足量RKV只是精确性极限负控，实际低秩残余近似通常改变attention；低秩测试只比对应显式近似路径。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：用完整两维基可恢复原K，不代表只留一维也不会丢信息。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20524v1">原论文</a> · <a href="../../../../foundation-models/2611.20524-gaugerope/">实现解读</a> · <a href="#qa-42d93e35336d9d75">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:unigraph" data-paper-title="UniGraph: A Unified Graph-based Index for Dynamic Hybrid Dense-Sparse Vector Retrieval" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="UniGraph: A Unified Graph-based Index for Dynamic Hybrid Dense-Sparse Vector Retrieval 基础模型 Tongji University 2026-11-16 分别检索dense和sparse再合并可能过早漏掉仅在混合距离下优秀的向量。UniGraph在多个离散alpha下取近邻，按跨alpha入选频次合并成一个有界出度图；查询时不重构图，直接按自己的alpha遍历。稀疏或稠密guide给出入口，减少到目标区域的混合距离计算。 成本过高，不复现（审查DONE）；本地exact all-pairs构图和exact guide查找是有限诊断后端，不是论文C++可扩展候选构造；L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。本地exact all-pairs构图和exact guide查找是有限诊断后端，不是论文C++可扩展候选构造；没有BGE-M3编码、SINDI、百万级索引或QPS对照。安全剪枝只相对同一beam插入规则成立，不能推出全局ANN召回完备；gamma&lt;1必须显式保留风险。完整矩阵高成本不复现。  检索与上下文 动态稠密稀疏检索 基础模型 长上下文：注意力、递归状态与记忆 固定alpha图为什么可能不适合另一个查询？ alpha改变混合距离排序及邻域，单一0.5图可能漏掉偏词汇或偏语义的近邻。 教学例：同一query从alpha0.3改成0.7后，正确入口可不同。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-unigraph-7a9f5fb2" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-78e5f45ed6859b36">固定alpha图为什么可能不适合另一个查询？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aunigraph">UniGraph: A Unified Graph-based Index for Dynamic Hybrid Dense-Sparse Vector Retrieval</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Tongji University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>alpha改变混合距离排序及邻域，单一0.5图可能漏掉偏词汇或偏语义的近邻。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一query从alpha0.3改成0.7后，正确入口可不同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20758v1">原论文</a> · <a href="../../../../foundation-models/2611.20758-unigraph/">实现解读</a> · <a href="#qa-78e5f45ed6859b36">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:unigraph" data-paper-title="UniGraph: A Unified Graph-based Index for Dynamic Hybrid Dense-Sparse Vector Retrieval" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="UniGraph: A Unified Graph-based Index for Dynamic Hybrid Dense-Sparse Vector Retrieval 基础模型 Tongji University 2026-11-16 分别检索dense和sparse再合并可能过早漏掉仅在混合距离下优秀的向量。UniGraph在多个离散alpha下取近邻，按跨alpha入选频次合并成一个有界出度图；查询时不重构图，直接按自己的alpha遍历。稀疏或稠密guide给出入口，减少到目标区域的混合距离计算。 成本过高，不复现（审查DONE）；本地exact all-pairs构图和exact guide查找是有限诊断后端，不是论文C++可扩展候选构造；L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。本地exact all-pairs构图和exact guide查找是有限诊断后端，不是论文C++可扩展候选构造；没有BGE-M3编码、SINDI、百万级索引或QPS对照。安全剪枝只相对同一beam插入规则成立，不能推出全局ANN召回完备；gamma&lt;1必须显式保留风险。完整矩阵高成本不复现。  检索与上下文 动态稠密稀疏检索 基础模型 长上下文：注意力、递归状态与记忆 gamma越小剪枝越强，是否仍然安全？ 不保证。只有gamma=1直接是Cauchy–Schwarz下界，gamma&lt;1给估计加正margin，可能删掉真实有用节点。 教学例：跳过sparse内积节省计算同时可能掉召回。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-d4a965d78e9e4303">gamma越小剪枝越强，是否仍然安全？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aunigraph">UniGraph: A Unified Graph-based Index for Dynamic Hybrid Dense-Sparse Vector Retrieval</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Tongji University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不保证。只有gamma=1直接是Cauchy–Schwarz下界，gamma&lt;1给估计加正margin，可能删掉真实有用节点。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：跳过sparse内积节省计算同时可能掉召回。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20758v1">原论文</a> · <a href="../../../../foundation-models/2611.20758-unigraph/">实现解读</a> · <a href="#qa-d4a965d78e9e4303">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:unigraph" data-paper-title="UniGraph: A Unified Graph-based Index for Dynamic Hybrid Dense-Sparse Vector Retrieval" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="UniGraph: A Unified Graph-based Index for Dynamic Hybrid Dense-Sparse Vector Retrieval 基础模型 Tongji University 2026-11-16 分别检索dense和sparse再合并可能过早漏掉仅在混合距离下优秀的向量。UniGraph在多个离散alpha下取近邻，按跨alpha入选频次合并成一个有界出度图；查询时不重构图，直接按自己的alpha遍历。稀疏或稠密guide给出入口，减少到目标区域的混合距离计算。 成本过高，不复现（审查DONE）；本地exact all-pairs构图和exact guide查找是有限诊断后端，不是论文C++可扩展候选构造；L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。本地exact all-pairs构图和exact guide查找是有限诊断后端，不是论文C++可扩展候选构造；没有BGE-M3编码、SINDI、百万级索引或QPS对照。安全剪枝只相对同一beam插入规则成立，不能推出全局ANN召回完备；gamma&lt;1必须显式保留风险。完整矩阵高成本不复现。  检索与上下文 动态稠密稀疏检索 基础模型 长上下文：注意力、递归状态与记忆 UniGraph的alpha等于HVMap的native权重吗？ 不等于。前者混合dense和sparse距离，后者混合候选native与mapped空间分数。 教学例：提高alpha不等于更相信候选所属数据库。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-2bd2be94439a6133">UniGraph的alpha等于HVMap的native权重吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aunigraph">UniGraph: A Unified Graph-based Index for Dynamic Hybrid Dense-Sparse Vector Retrieval</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Tongji University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不等于。前者混合dense和sparse距离，后者混合候选native与mapped空间分数。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：提高alpha不等于更相信候选所属数据库。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20758v1">原论文</a> · <a href="../../../../foundation-models/2611.20758-unigraph/">实现解读</a> · <a href="#qa-2bd2be94439a6133">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:unigraph" data-paper-title="UniGraph: A Unified Graph-based Index for Dynamic Hybrid Dense-Sparse Vector Retrieval" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="UniGraph: A Unified Graph-based Index for Dynamic Hybrid Dense-Sparse Vector Retrieval 基础模型 Tongji University 2026-11-16 分别检索dense和sparse再合并可能过早漏掉仅在混合距离下优秀的向量。UniGraph在多个离散alpha下取近邻，按跨alpha入选频次合并成一个有界出度图；查询时不重构图，直接按自己的alpha遍历。稀疏或稠密guide给出入口，减少到目标区域的混合距离计算。 成本过高，不复现（审查DONE）；本地exact all-pairs构图和exact guide查找是有限诊断后端，不是论文C++可扩展候选构造；L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。本地exact all-pairs构图和exact guide查找是有限诊断后端，不是论文C++可扩展候选构造；没有BGE-M3编码、SINDI、百万级索引或QPS对照。安全剪枝只相对同一beam插入规则成立，不能推出全局ANN召回完备；gamma&lt;1必须显式保留风险。完整矩阵高成本不复现。  检索与上下文 动态稠密稀疏检索 基础模型 长上下文：注意力、递归状态与记忆 gamma=1与未剪枝beam一致能证明exact检索吗？ 不能。它只保证不改变同一beam算法的插入结果，图连通性、入口和有限beam仍限制全局召回。 教学例：从没访问到的真近邻不会因安全bound自动出现。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-3c8de2ef6cf089b7">gamma=1与未剪枝beam一致能证明exact检索吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aunigraph">UniGraph: A Unified Graph-based Index for Dynamic Hybrid Dense-Sparse Vector Retrieval</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Tongji University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。它只保证不改变同一beam算法的插入结果，图连通性、入口和有限beam仍限制全局召回。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：从没访问到的真近邻不会因安全bound自动出现。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20758v1">原论文</a> · <a href="../../../../foundation-models/2611.20758-unigraph/">实现解读</a> · <a href="#qa-3c8de2ef6cf089b7">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:adindex" data-paper-title="ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation 基础模型 Nanjing University / Alibaba Group 2026-11-07 DSA 为每个 query 独立扫描整个因果前缀来选 Top-K。ADIndex 发现相邻 query 的候选有层相关的重叠：先校准各层组大小与候选库容量，再训练一个较少 head 的组索引器。组内先共享一次全前缀扫描，随后原 DSA 仍逐 query 精排，并补入 anchor 后新可见的 token；不是把所有 query 的最终索引强行设为相同。 成本过高，不复现（审查 DONE）。诊断只在 4 个 query、32 个历史 key 上执行 64 步学生优化，检查训练 KL、冻结梯度、因果索引、新可见 token 和回退分支。L1 机制组件：小张量组索引器与候选精排，不是 DeepSeek/GLM 长文能力、SGLang serving 或加速比复现。GroupIndexer 接受外部提供的归一化 query latent、hidden 与严格 anchor 可见的 keys；本地冻结这些输入。teacher_distribution、forward_kl、refine_indices 与 union_capacity 对应教师、蒸馏、精排和容量统计。  注意力与长上下文 稀疏索引与共享候选库 基础模型 长上下文：注意力、递归状态与记忆 ADIndex 共享候选库，是不是让组内所有 query 用相同最终 Top-K？ 不是。组索引器只共享 anchor 可见历史上的候选库；每个 query 还会补入 anchor 后自己新可见的 token，再用原 DSA 分数独立精排。共享的是昂贵全前缀扫描，不是最终注意力位置。 教学例：anchor=31、query=34，共享库可能都是0到31里的位置，但32、33、34必须补进候选，最终Top-K仍可与query=32不同。 2026-11-11">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
 <span id="paper-foundation-models-adindex-a6c2f650" class="ar-learning-paper-anchor"></span>

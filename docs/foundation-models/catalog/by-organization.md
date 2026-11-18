@@ -31,6 +31,10 @@
 
 - 2026-09-29 · [Cross-Entropy Guided Routing in Mixture-of-Experts Large Language Models](../../foundation-models/2609.37751-ce-guided-moe/README.md)（`ce-guided-moe`）：在原生 MoE affinity 旁增加逐 expert token-error head，并用预测误差的 started-log 对路由 logit 做衰减；高预测错误的 expert 在 Top-K 前被降权，同时误差头由真实 next-token CE 监督。
 
+## Beijing Institute of Technology
+
+- 2026-11-17 · [FM-Mamba: An Efficient Native 2D Selective State Space Model with Stability-Aware Discretization](../../foundation-models/2611.22061-fm-mamba/README.md)（`fm-mamba`）：原生2D FM状态同时接收上、左与左上三个前驱，不通过展平扫描把二维关系退化为一条链。两个输入相关步长分别控制两个轴；a0/(a1a2)决定是否需要给步长施加上界。 [已核方法位置](https://arxiv.org/html/2611.22061v1#S3)：3.1–3.3, 4.1。
+
 ## Beijing University of Posts and Telecommunications
 
 - 2026-09-03 · [Lngram v2: Latent N-Gram Memory with Interpretable Discrete Representations](../../reproductions/2609.03426-lngram-v2/README.md)（`lngram-v2`）：Lngram v2 把 backbone hidden state 投影成多路二进制地址，以最近 1/2-gram 的离散组合 O(1) 查 memory table；多个 route token 经 GQA 读回主干。硬地址保证表示可解释，反事实邻接地址提供训练梯度，零 Sink 允许模型拒绝无用记忆。
@@ -57,6 +61,10 @@
 
 - 2026-06-01 · [ContinuousBench: Can Differentially Private Synthetic Text Improve Capabilities?](../../foundation-models/2606.01849-continuousbench/README.md)（`continuousbench`）：若benchmark已经被基座模型做得很好，合成数据是否真正传递新知识就难以区分。ContinuousBench定期生成或整理未见知识语料及相应QA，统一训练/evaluator设置，并与未经该语料训练的同一基座比较；关注高重复公共事实的utility，不要求DP模型记住单条私有记录。
 - 2025-07-31 · [Model Directions, Not Words: Mechanistic Topic Models Using Sparse Autoencoders](../../foundation-models/2507.23220-mechanistic-etm/README.md)（`mechanistic-etm`）：固定v3 Section4.2.2 Eqs9–13：δ~N(0,I)、θ=softmaxδ、βk=sigmoid(W_in vk+b)，W_in为冻结SAE ENCODER，不是decoder；每个feature计数~Binomial(Ntokens,[θβ]i)。variational q拓扑与MC noise显式外传，优化NLL+analytic Gaussian KL。Eqs16–19仅steering才用独立SAE DECODER列方向加权单位化，再移除已有parallel分量、注入指定strength。以不同encoder/decoder的负控防隐式绑权。
+
+## Concordia University
+
+- 2026-11-17 · [The Kernel Reality Check: Benchmarking and Distilling Efficient Attention at Scale](../../foundation-models/2611.22947-lara-plus-plus/README.md)（`lara-plus-plus`）：本文重新核查核化attention的真实效率，并用确定性proposal均值代替随机采样、相似性聚类代替连续切块改善LARA质量。与复杂度口号不同，cluster数量随序列增长时k-center成本为二次；近softmax质量不等于比FlashAttention快。 [已核方法位置](https://arxiv.org/html/2611.22947v1#S3)：7, Appendix E.1。
 
 ## Câmara dos Deputados
 
@@ -234,6 +242,10 @@
 - 2026-09-29 · [SPLASH: Switching Parallel Layouts of Attention with Seamless Handoff for LLM Serving](../../foundation-models/2609.37626-splash/README.md)（`splash`）：统一描述 attention weight 与 KV cache 的所有权，引入权重分片、请求独占 KV 的 DOP；调度器把布局切换成本按剩余步数摊销，在 TP、DP、CP、DOP 间在线切换。
 - 2026-08-07 · [Autonomy-of-Heads: Data-Free Sparse Attention from Frozen Query-Key Geometry](../../reproductions/2608.06849-autonomy-heads/README.md)（`autonomy-heads`）：直接从冻结 QK 投影的谱有效秩区分 retrieval 与 streaming heads，无需校准数据或运行时门控。
 
+## Institute of Foundation Models
+
+- 2026-11-16 · [Latent Feedback Is a Compute and Data Amplifier](../../foundation-models/2611.20404-latent-feedback-scaling/README.md)（`latent-feedback-scaling`）：latent feedback把上一token的顶层状态注入下一token输入，花更多每token计算。本文不只在相同token数比较，而让普通Transformer把相同FLOPs用于更多epoch，并同时控制unique数据和模型规模。 [已核方法位置](https://arxiv.org/html/2611.20404v1#S3)：3, 4。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## International Institute of Information Technology Hyderabad
 
 - 2026-09-28 · [MS-GLA: Multi-Scale Gated Linear Attention for Addressing Representational Bottlenecks via Multi-Temporal Resolution](../../foundation-models/2609.35664-ms-gla/README.md)（`ms-gla`）：单一时间分辨率的线性注意力容易形成表征瓶颈。MS-GLA 把 head budget 分配给多个尺度：先做无重叠 masked average pooling，再分别执行 GLA，最后以因果 hold 方式恢复到 token 分辨率，并由输入相关 softmax 路由融合。
@@ -274,6 +286,7 @@
 
 ## MIT CSAIL
 
+- 2026-11-17 · [Spool: Low-Latency Streaming Inference for Hybrid Vision-Language Models](../../foundation-models/2611.23228-spool/README.md)（`spool`）：GDN的key/value/gates只依赖已记录的层输入，因此状态更新对旧状态是仿射的。每帧缓存一个变换，以非交换的时间顺序组成segment tree；窗口到期时从prefix anchor重放保留摘要，而非重跑所有视频token。 [已核方法位置](https://arxiv.org/html/2611.23228v1#S3)：3.2–3.4, 4, 5.1, Appendix A。
 - 2026-10-20 · [RACE: RoPE-Aligned Attention Compression Based on Query-Key Activation Energies](../../foundation-models/2610.28385-race-rope-compression/README.md)（`race-rope-compression`）：把KV写成低秩形式却在注意力前还原，可能节省缓存但增加运算。RACE直接改变注意力head的宽度：Q和K共享选择，只保留完整RoPE旋转对；V通过校准激活的右奇异子空间投影；再将两种变换折叠到Q/K/V/O权重。保留原模型频率及原head维度缩放，避免把缩小维度当作新模型重新编码。
 
 ## ML Collective
@@ -306,6 +319,10 @@
 
 - 2026-10-09 · [EV-JEPA: Elastic V-JEPA for Any Device and Cross-Device Inference](../../reproductions/2610.14324-ev-jepa/README.md)（`ev-jepa`）：固定容量的视频模型难以同时适配端侧预算和跨设备协作，独立训练不同宽度也不保证中间表示兼容。EV-JEPA共享嵌套宽度参数，每步联合训练窄、宽与窄转宽三条路径，以冻结视频教师约束共同表示空间，并增加可调token压缩。 **成本过高，暂不复现；待验收，未注册可执行入口。**
 
+## Meta Recommendation Systems (MRS)
+
+- 2026-11-16 · [VisHead-Spec: Head-Routed Visual Attention for Multimodal Speculative Decoding](../../foundation-models/2611.21839-vishead-spec/README.md)（`vishead-spec`）：块状 drafter 的视觉注意力并非每层每头都同等重要。本文先在隔离校准集选择层，再选择少量 KV heads；仅目标层25/33的图像特征进入图像行，文本取1/9/17/25/33。非选中头仍看文本与块内位置，而不是被整个关闭。选择后固定路由并重新训练，不按测试样本动态选择。 [已核方法位置](https://arxiv.org/html/2611.21839v1#S3)：3.1–3.3, 4.1, B.1–B.4。
+
 ## Meta Superintelligence Labs
 
 - 2026-10-17 · [Muse Glimmer 30B: An On-Device Agentic Model](../../foundation-models/2610.24628-muse-glimmer-30b/README.md)（`muse-glimmer-30b`）：模型瞄准有32GB专用内存的端侧Agent：语言骨干用稠密Transformer而非MoE，在相同内存预算下用缩放实验选架构；约1.8B冻结视觉编码器支持图文交错输入。52层采用三层2048窗口局部注意力接一层全局注意力，32Q/2KV的GQA，局部层使用RoPE，全局层不再施加RoPE。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
@@ -318,9 +335,17 @@
 
 - 2026-10-01 · [LLM2Jev: LLMs Are Already Jev-Style Decision Models -- When and How to Fine-Tune Them](../../foundation-models/2610.02076-llm2jev/README.md)（`llm2jev`）：直接从括号数字选项的 next-token 概率形成有限类别分布；微调时使用 listwise 决策损失，并以 KL 锚定基础模型辅助输出。
 
+## Mila
+
+- 2026-11-17 · [Communicate the Change: Efficient Expert Parallelism via Activation Compression](../../foundation-models/2611.22215-echomoe/README.md)（`echomoe`）：每组MoE层先广播参考z，其余层只发送x-a⊙z的压缩code；router仍读取完整x。专家将reference gain和dispatch decoder折入gate/up权重，再将combine compressor折入down权重，避免完整重建或输出物化。 [已核方法位置](https://arxiv.org/html/2611.22215v1#S3)：4.1–4.4, 5.1, G.1。
+
 ## MiniMax
 
 - 2026-06-11 · [MiniMax Sparse Attention](../../reproductions/2606.13392-minimax-sparse-attention/README.md)（`minimax-sparse-attention`）：长上下文 dense attention 的二次复杂度成为主要瓶颈。MSA 为每个 GQA 组增加轻量 index branch，先选择少数历史 block，主分支再对命中 token 做精确 attention；训练和推理使用同一路径。
+
+## Mixedbread
+
+- 2026-11-17 · [Deal With It: On Better Schedules for Listwise Reranking](../../foundation-models/2611.22392-dealrank/README.md)（`dealrank`）：并行listwise重排要把候选分组，每组只晋级固定配额。连续切块会把初始召回前部的好文档挤进同一组，越好的retriever越可能被配额误切。DealRank按retriever名次轮流发牌，使每个前缀在各组尽量平衡，再并行排序、按配额晋级并最终合并，不依赖补救认证轮。
 
 ## Mohamed bin Zayed University of Artificial Intelligence
 
@@ -349,6 +374,7 @@
 
 ## Nanyang Technological University
 
+- 2026-11-17 · [CascadeJEPA: Enhancing 3D Geometric Representations via Spatially Coupled Cascaded Prediction](../../foundation-models/2611.22686-cascadejepa/README.md)（`cascadejepa`）：I-JEPA的高层语义改善不保证几何对应更好。CascadeJEPA对同图两个crop共享context和EMA target；第一crop把masked patch embedding置零后加位置、保留完整网格，第二crop只编码visible patches，再通过第一阶段full-grid KV引导预测。 [已核方法位置](https://arxiv.org/html/2611.22686v1#S3)：3.2.1–3.2.4, 4.1–4.2。
 - 2026-10-15 · [Gen4P: Video Generators are 4D Perceivers](../../foundation-models/2610.22371-gen4p/README.md)（`gen4p`）：视频生成预训练包含运动与几何先验。Gen4P不通过多次去噪恢复几何，而是在干净视频潜变量上运行一次DiT编码，用按需cross-attention查询输出3D轨迹、点云、深度和相机参数。连续时间查询适配不同视频长度，冻结depth-LoRA提供额外几何先验，独立4D-LoRA学习新任务。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-10-15 · [Prism-1: Position- and Rival-Independent Scoring for System One Models](../../foundation-models/2610.22066-prism-1/README.md)（`prism-1`）：JEV/System One 选择模型希望在一次前向中选出工具、意图或界面元素。普通多选提示会让答案依赖选项顺序和无关选项。§2–4 由 Luce 选择公理推导：每个选项的分数只能看共享状态、问题和该选项本身；最后对独立分数做 softmax。只在输出层加 softmax、不隔离 attention 或不重置位置，都不能保证这一性质。
 - 2026-10-01 · [TESS: Scalable, Transferable Meta-network for Data Selection Requires a Different Loss (and Why the Obvious Choice is Problematic)](../../foundation-models/2610.02092-tess/README.md)（`tess`）：先分别训练仅看训练集的模型和加入验证集指导的模型，以两者逐样本损失差构造价值伪标签；再用 pointwise value matching 训练数据 selector。避免直接选择目标的病态优化，并让小规模教师产生的选样规则迁移到更大的未见数据池。
@@ -360,6 +386,7 @@
 
 ## National University of Defense Technology
 
+- 2026-11-16 · [GaugeRoPE: RoPE-Compatible Executable Latent Attention](../../foundation-models/2611.20524-gaugerope/README.md)（`gaugerope`）：任意低秩K在潜空间通常不保留RoPE作用，需要逐历史token重建。GaugeRoPE只在相同频率块内拟合复数carrier，另用能量平衡后的joint PCA存residual K与V；query吸收decoder，聚合后才解码输出。 [已核方法位置](https://arxiv.org/html/2611.20524v1#S3)：4.1–4.3, 5.1。
 - 2026-10-15 · [Compression Does Not End at Selection: Post-Selection Positional Geometry for Sparse KV Caches](../../foundation-models/2610.21126-rope-relay/README.md)（`rope-relay`）：selector 删除 token 后，K 仍携带稀疏旧坐标的旋转相位。RoPERelay 不重选内容、不重新 prefill 历史，将选中状态按原始时间排序、压紧坐标，并同步问题及生成坐标。来源为 §3、附录 A 的 Algorithm 1 和数值约定。
 
 ## National University of Singapore
@@ -408,6 +435,7 @@
 
 ## Rice University
 
+- 2026-11-17 · [RISA: Recoverable Sparse Attention for Block-Diffusion Language Models](../../foundation-models/2611.22191-risa/README.md)（`risa`）：RISA区分长期HOT/COLD存储优先级和当前denoising block的短期read plan。未读取页面不被删除，后续query可以恢复COLD。seed根据page min/max key摘要评分，保护初始/近期HOT并加入mandatory近期/current行。 [已核方法位置](https://arxiv.org/html/2611.22191v1#S3)：4.1–4.3, 5。
 - 2026-10-20 · [Stratified Sparse Attention: Reducing the Sparse-to-Dense Gap at Extreme Sparsity](../../foundation-models/2610.28441-stratified-sparse-attention/README.md)（`stratified-sparse-attention`）：只保留 top-k 会丢掉尾部质量；均匀抽样又浪费预算。SSA先确定保留高概率项，再按残差代理分布抽样。关键不是“top-k加采样”的外形，而是**有放回抽样后去重，按每个token至少出现一次的包含概率修正**。论文的自适应 Algorithm 1 与实际优化内核的固定 heavy fraction 版本不同；本地实现前者，不冒充后者的速度。
 
 ## Salesforce AI Research
@@ -494,6 +522,10 @@
 
 - 2026-09-11 · [SAS: Simple Attention Sparsification via End-to-End Optimization of Context Ranking](../../reproductions/2609.13141-sas-attention/README.md)（`sas-attention`）：硬 Top-K 只能改变被选中的索引，语言模型损失无法沿离散索引直接训练 selector。SAS 不再蒸馏 dense attention：selector 先给历史块连续打分，训练时保留 Top-K 块的连续 gate，并把 `log(gate)` 加到注意力 logits 内。
 
+## ThakiCloud
+
+- 2026-11-16 · [Beyond Bitwidth: Deployment-Constrained Mixed-Precision Quantization for Multilingual LLM Inference on NVIDIA Blackwell](../../foundation-models/2611.21974-beyond-bitwidth/README.md)（`beyond-bitwidth`）：低比特名称不保证GPU真的按该格式执行，也不保证多语种质量。本文用固定诊断/selection/final切分，逐fused-module核对weight类型、activation policy、kernel、fallback和显存，再按服务质量约束配置保护。 [已核方法位置](https://arxiv.org/html/2611.21974v1#S3)：3.5–3.6, 4.1, abstract。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
+
 ## The Chinese University of Hong Kong
 
 - 2026-10-22 · [Rethinking Sequence Compression with Test-time Regression](../../foundation-models/2610.31574-ttr-compressor/README.md)（`ttr-compressor`）：固定池化或投影分别聚合 token，难以按当前输入的相关结构调整压缩。TTR 把一组 token 视作回归观测：由 token 方向构造 key，由保留模长的原始 token 生成可学习标量 target；每次前向精确求解 ridge 系数，直接把系数作为压缩表示。外层任务 loss 通过闭式求解训练 target 投影与正则。
@@ -531,8 +563,14 @@
 
 - 2024-01-19 · [Medusa: Simple LLM Inference Acceleration Framework with Multiple Decoding Heads](../../reproductions/2401.10774-medusa/README.md)（`medusa`）：在冻结或联合微调的 backbone 上增加多个 future-token heads，以 tree attention 同时验证候选分支，减少串行解码步数。
 
+## Tongji University
+
+- 2026-11-17 · [SIMQ: A Single Graph-based Index for Multi-Vector Query](../../foundation-models/2611.22079-simq/README.md)（`simq`）：ColBERT式MaxSim需要逐query token匹配文档token。SIMQ先均匀抽样token作初始聚合点，通过临时图分配剩余token，对过大cluster递归二分，归一化均值后建立一个质心图。查询只导航到少量质心，经质心到文档映射生成候选，最后才访问候选原始token精确重排，避免全query×centroid矩阵。
+- 2026-11-16 · [UniGraph: A Unified Graph-based Index for Dynamic Hybrid Dense-Sparse Vector Retrieval](../../foundation-models/2611.20758-unigraph/README.md)（`unigraph`）：分别检索dense和sparse再合并可能过早漏掉仅在混合距离下优秀的向量。UniGraph在多个离散alpha下取近邻，按跨alpha入选频次合并成一个有界出度图；查询时不重构图，直接按自己的alpha遍历。稀疏或稠密guide给出入口，减少到目标区域的混合距离计算。
+
 ## Tsinghua University
 
+- 2026-11-17 · [InfuseLoop: Cross-Trajectory Latent Injection for Scalable Parallel Looped Transformers](../../foundation-models/2611.22426-infuseloop/README.md)（`infuseloop`）：并行loop在同一执行周期同时推进多个预测轨迹。InfuseLoop让第r轮聚合上一周期已完成、但来自更浅loop的状态，而非仅传递本轨迹前一轮。未来轨迹位置不等于未来未生成token，合法性由执行周期决定。 [已核方法位置](https://arxiv.org/html/2611.22426v1#S3)：3.1–3.4, 4.1, Appendix A。
 - 2026-10-16 · [Persistent Planar Memory for Video World Models](../../foundation-models/2610.23795-ppmem/README.md)（`ppmem`）：长视频生成若只保存少量历史帧，跨视角回访容易遗忘场景；持续保存全部像素点云又非常大。PPMem把场景记忆压成可光栅化的平面primitive，在视频生成过程中由同一骨干联合预测，再通过持久pool向后续chunk反馈深度。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
 - 2026-10-10 · [The Company a Question Keeps: Auditing Open Jev-Style Models for Retrieval](../../system-one/2610.14631-request-audit/README.md)（`jev-request-audit`）：合法结构化输出不能保证问题彼此独立。论文分离三种干预：增加请求问题时保持证据和目标命题不变；增加证据时保持原目标、候选资格不变；增加可选候选时保持全部显示证据不变。这样可以区分问题 schema 依赖、真实上下文改变和候选归一化效应。
 - 2026-09-29 · [V-JEPA Policy: Building Effective World-Action Models on Predictive Visual Latents](../../foundation-models/2609.37250-vjepa-policy/README.md)（`vjepa-policy`）：冻结 V-JEPA 2.1 视觉编码器，在预测视觉潜空间中联合训练 instruction-conditioned future-latent predictor 和 flow-matching action expert；动作生成读取 predictor 的未来信息上下文。
@@ -609,6 +647,10 @@
 
 - 2026-04-15 · [A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation](../../foundation-models/2604.14403-ecg-rag/README.md)（`ecg-rag`）：设备端RAG既要控制文档索引磁盘占用，也要限制生成时的上下文/KV开销。ECG不是简单把检索器输出拼进prompt，而是只存一份多向量检索表示，再经投影转成同一decoder可消费的压缩上下文，避免独立检索向量和压缩向量重复存储。
 
+## University of Michigan
+
+- 2026-03-02 · [Rich Insights from Cheap Signals: Efficient Evaluations via Tensor Factorization](../../foundation-models/2603.02029-efficient-evals-tensor/README.md)（`efficient-evals-tensor`）：本文将模型、prompt和rater三者的能力张量作低rank CP分解，先用大量廉价autorater评分学共享表示，再冻结表示、只拟合人类rater向量及有序cutoff。它保留prompt异质性和rater偏好差异，不把某个自动judge分数直接当人类真值。2026-11-16是Google官方代码新仓库，不是论文首发；v1首发为2026-03-02 16:12:46 UTC。
+
 ## University of Michigan, Ann Arbor
 
 - 2026-10-21 · [Right On Q: Recovering Reasoning under Quantization via Self-Generated Trajectories](../../foundation-models/2610.29378-right-on-q/README.md)（`right-on-q`）：低比特量化会改变模型生成的前缀。只在固定的全精度参考回答上蒸馏，不能覆盖量化学生真正遇到的错误和长推理状态。OnQ 从逐 block 校准开始，让量化学生自己生成回答，再由冻结的原始全精度教师在**相同学生前缀**上提供分布监督。 **成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。**
@@ -633,6 +675,10 @@
 ## University of Science and Technology of China
 
 - 2026-10-27 · [Select-TTT: Query-Conditioned Selective Fast Weight Updates for In-Place Test-Time Training](../../foundation-models/2610.36794-select-ttt/README.md)（`select-ttt`）：In-Place TTT 把 MLP 下投影作为 fast weights，边读上下文边写入；对所有 chunk 使用相同学习率会把无关内容也等强写进去。Select-TTT 不新增检索编码器或可学习门控，而从冻结输出头读取上下文 hidden 对**用户问题 token**的预测程度，为每个 chunk 生成连续写入倍率。
+
+## University of South Carolina
+
+- 2026-11-16 · [WM-Quant: Rollout-Aware Post-Training Quantization for JEPA-Style World Models](../../foundation-models/2611.21882-wm-quant/README.md)（`wm-quant`）：JEPA世界模型把连续latent递归输入预测器，量化误差不会像离散token一样重置。WM-Quant保留前三个encoder blocks的8-bit激活、浮点action/proprioception控制通路，并联合优化encoder范围和每个rollout step独立的predictor范围。 [已核方法位置](https://arxiv.org/html/2611.21882v1#S3)：3.3–3.4, 4.1–4.2。
 
 ## University of Southern California
 

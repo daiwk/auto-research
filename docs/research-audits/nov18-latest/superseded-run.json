@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "status": "superseded_not_admitted",
+  "source_commit": "66cda00810da75bb8e3daa789c8d29b5b71b851d",
+  "original_files": ["superseded/frozen-sources-66cda008.json", "superseded/raw-cpu-66cda008.json"],
+  "reason": "Independent primary-equation review found WM-Quant's continuous-low anchored quantization grid differed from fixed v1 Eq1–2 integer zero-point. Earlier checks passed but were insufficient. This CPU run is preserved as an invalidated mechanism diagnostic, not admitted as correct reproduction or rewritten to appear correct.",
+  "repair": "Implement integer zero-point with rounding STE; add literal3/4/8bit Eq1–2, exact-zero and clipping controls; freeze new actual source and execute fresh CPU/CUDA evidence.",
+  "automatic_retry": false,
+  "cuda_run_executed_for_superseded_source": false
+}

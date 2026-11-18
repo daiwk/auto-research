@@ -35,7 +35,9 @@
         "foundation-models:duojepa",
         "foundation-models:spectral-ghost",
         "multimodal-models:multimodal-library-protocol",
-        "multimodal-models:fend-protocol"
+        "multimodal-models:fend-protocol",
+        "foundation-models:vishead-spec",
+        "foundation-models:cascadejepa"
       ],
       "axes": [
         "输出对象：检索向量、视觉token、生成回答、reward",
@@ -199,6 +201,26 @@
             "结果、负控与边界",
             "高成本完整实验"
           ]
+        },
+        {
+          "paper": "foundation-models:vishead-spec",
+          "position": "块状 drafter 的视觉注意力并非每层每头都同等重要。本文先在隔离校准集选择层，再选择少量 KV heads；仅目标层25/33的图像特征进入图像行，文本取1/9/17/25/33。非选中头仍看文本与块内位置，而不是被整个关闭。选择后固定路由并重新训练，不按测试样本动态选择。",
+          "tradeoff": "Unbundling改变视觉专属容量放置；VisHead-Spec改变drafter的直接图像读取位置。二者都不能用“删除视觉模块”概括，且路由attention可见性不同于vision-only投影的token门控。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:cascadejepa",
+          "position": "I-JEPA的高层语义改善不保证几何对应更好。CascadeJEPA对同图两个crop共享context和EMA target；第一crop把masked patch embedding置零后加位置、保留完整网格，第二crop只编码visible patches，再通过第一阶段full-grid KV引导预测。",
+          "tradeoff": "DuoJEPA在对方模态own space做可微target translation；CascadeJEPA同图两crop并使用stop-gradient EMA target。都叫JEPA不代表目标是否detach相同。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
         }
       ],
       "analysis": [
@@ -300,6 +322,22 @@
           "papers": [
             "multimodal-models:fend-protocol",
             "multimodal-models:gslm2"
+          ]
+        },
+        {
+          "title": "VisHead-Spec：少数 KV heads 读取图像，全部 heads 保留文本",
+          "body": "Unbundling改变视觉专属容量放置；VisHead-Spec改变drafter的直接图像读取位置。二者都不能用“删除视觉模块”概括，且路由attention可见性不同于vision-only投影的token门控。 GQA 的一个 KV head 映射到整组 query heads。loss 按草稿偏移 exp(-d/4) 归一化加权；confidence 的监督是分布重叠概率，不是 argmax 一致的硬标签。块内双向可见性和 anchor 前上下文由独立 visibility 输入保留。",
+          "papers": [
+            "foundation-models:vishead-spec",
+            "foundation-models:unbundling-vision"
+          ]
+        },
+        {
+          "title": "CascadeJEPA：用完整空间网格单向耦合两级预测",
+          "body": "DuoJEPA在对方模态own space做可微target translation；CascadeJEPA同图两crop并使用stop-gradient EMA target。都叫JEPA不代表目标是否detach相同。 空间耦合单向从第一阶段到第二阶段，两阶段target stop-gradient并由EMA更新。两个crop的位置坐标分别定义。full-grid不是输入未mask图像，也不是先加位置再把masked位置一起清零。",
+          "papers": [
+            "foundation-models:cascadejepa",
+            "foundation-models:duojepa"
           ]
         }
       ],
@@ -434,6 +472,26 @@
           "papers": [
             "multimodal-models:fend-protocol",
             "multimodal-models:gslm2"
+          ]
+        },
+        {
+          "id": "nov18-vishead-spec",
+          "question": "这与Unbundling的vision-only mask有什么区别？",
+          "answer": "VisHead-Spec限制特定头读取图像行；Unbundling门控额外QKVO/FFN容量，仍是联合attention。二者作用对象不同。",
+          "example": "一个文本query没有额外视觉投影，仍可能读取图像KV；这不是图像行被屏蔽。",
+          "papers": [
+            "foundation-models:vishead-spec",
+            "foundation-models:unbundling-vision"
+          ]
+        },
+        {
+          "id": "nov18-cascadejepa",
+          "question": "能沿用DuoJEPA的target双侧梯度吗？",
+          "answer": "不能。CascadeJEPA target是stop-gradient EMA；DuoJEPA的目标centroid在主方法里反传，照搬会改写训练机制。",
+          "example": "target参数应无grad，但每次EMA能跟随context更新。",
+          "papers": [
+            "foundation-models:cascadejepa",
+            "foundation-models:duojepa"
           ]
         }
       ],
@@ -600,6 +658,30 @@
           "source_revisions": {
             "multimodal-models:fend-protocol": "6ab965d73f88abc3a347317c728c010f709def3d70a3fd2069b83aa09eb3fd76",
             "multimodal-models:gslm2": "5ab8ce37c3b3aadad488495535e4ecda1ab9dc939871212b55de7ae8d11e870a"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "foundation-models:vishead-spec",
+            "foundation-models:unbundling-vision"
+          ],
+          "summary": "Unbundling改变视觉专属容量放置；VisHead-Spec改变drafter的直接图像读取位置。二者都不能用“删除视觉模块”概括，且路由attention可见性不同于vision-only投影的token门控。 本地边界与完整高成本不复现分别记录。",
+          "source_revisions": {
+            "foundation-models:vishead-spec": "1e4742c050707afde72ce396d161b5ad5e8b2a374fa26981389c0f98f33a8fe9",
+            "foundation-models:unbundling-vision": "54272bc45b34a3b748db3a9602751fa76b0ea0db090b46fbd0eabcad1208af92"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "foundation-models:cascadejepa",
+            "foundation-models:duojepa"
+          ],
+          "summary": "DuoJEPA在对方模态own space做可微target translation；CascadeJEPA同图两crop并使用stop-gradient EMA target。都叫JEPA不代表目标是否detach相同。 本地边界与完整高成本不复现分别记录。",
+          "source_revisions": {
+            "foundation-models:cascadejepa": "a15fe54dfa63a05a308f4da8c3b7c413750e9799c91ff58bdf6c02ad089b27bb",
+            "foundation-models:duojepa": "a9014f50664d09ff5dae4989e99ffb5db0b9ce66818b60edce48fc5cc68fb6e5"
           }
         }
       ]
@@ -905,7 +987,9 @@
         "multimodal-models:sensorwm-planning",
         "multimodal-models:pixvid",
         "foundation-models:stratified-retention-protocol",
-        "multimodal-models:rslivebench-uav-protocol"
+        "multimodal-models:rslivebench-uav-protocol",
+        "foundation-models:wm-quant",
+        "multimodal-models:dwd"
       ],
       "axes": [
         "学习对象：未来latent、动作分布、视觉转移、持久几何",
@@ -1054,6 +1138,26 @@
             "核心公式",
             "论文离线与线上效果"
           ]
+        },
+        {
+          "paper": "foundation-models:wm-quant",
+          "position": "JEPA世界模型把连续latent递归输入预测器，量化误差不会像离散token一样重置。WM-Quant保留前三个encoder blocks的8-bit激活、浮点action/proprioception控制通路，并联合优化encoder范围和每个rollout step独立的predictor范围。",
+          "tradeoff": "LeWAM联合训练视觉encoder、latent动力学与action flow，再对策略候选做潜空间规划；WM-Quant研究连续rollout中的量化误差与范围校准。注意新论文实验对象是LeWM/DINO-WM，不是LeWAM，未声称把WM-Quant接入了LeWAM训练或规划。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
+        },
+        {
+          "paper": "multimodal-models:dwd",
+          "position": "DWD在预训练DiT最后隐状态上并联线性pixel head，原denoising head继续驱动采样，只有最后一个非零time step才由pixel head输出图像/视频。通过分离pixel质量目标与trajectory anchoring，避免让同一输出承担冲突目标。",
+          "tradeoff": "PixVid迁移latent DiT到pixel输入/生成空间并加detailer；DWD保留latent采样，只改变最终读出。输出是像素不意味着整个采样都在pixel空间。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "同主题比较与边界"
+          ]
         }
       ],
       "analysis": [
@@ -1137,6 +1241,22 @@
           "papers": [
             "multimodal-models:rslivebench-uav-protocol",
             "multimodal-models:woven"
+          ]
+        },
+        {
+          "title": "先学习可控制的动力学，再讨论数值精度如何改变rollout",
+          "body": "实读LeWAM说明其action flow、latent MSE和SIGReg联合训练，规划只更新动作，选择用未惩罚goal cost；本地训练轨迹目标仍是非holdout诊断。WM-Quant冻结基础模型并联合校准encoder/逐步predictor范围，控制通路保留浮点，且必须遵循整数zero-point Eq1–2。两篇都依赖动作条件rollout，但训练动力学、规划搜索与PTQ校准不能互相补证；本轮小张量校准没有执行LeWAM量化或机器人成功率比较。",
+          "papers": [
+            "foundation-models:wm-quant",
+            "foundation-models:lewam"
+          ]
+        },
+        {
+          "title": "DWD：将最终像素读出与去噪目标分开",
+          "body": "PixVid迁移latent DiT到pixel输入/生成空间并加detailer；DWD保留latent采样，只改变最终读出。输出是像素不意味着整个采样都在pixel空间。 pixel与trajectory损失从不同time distributions取样，两次反传后统一optimizer step。末步不用CFG，因为该步读出像素而不推进trajectory；t=0的“当成decoder”模式在原文退化。",
+          "papers": [
+            "multimodal-models:dwd",
+            "multimodal-models:pixvid"
           ]
         }
       ],
@@ -1250,6 +1370,26 @@
           "papers": [
             "multimodal-models:rslivebench-uav-protocol",
             "multimodal-models:woven"
+          ]
+        },
+        {
+          "id": "nov18-wm-quant",
+          "question": "WM-Quant与LeWAM都用JEPA rollout，是否说明本轮已经量化验证了LeWAM？",
+          "answer": "不是。WM-Quant论文评测LeWM/DINO-WM，LeWAM是另一套联合世界—动作模型。本地仅验证量化格点、跨步范围目标与控制保留，没有接入LeWAM模型、CEM或机器人环境。",
+          "example": "教学例：LeWAM的三臂机器人结果不能替代WM-Quant的低比特规划评测；一个校准loss也不能证明LeWAM规划能力。",
+          "papers": [
+            "foundation-models:wm-quant",
+            "foundation-models:lewam"
+          ]
+        },
+        {
+          "id": "nov18-dwd",
+          "question": "和PixVid都去掉decoder，有何关键不同？",
+          "answer": "PixVid迁移输入与整个pixel生成路径，DWD保留latent denoising加最终输出head；改动范围和监督不同。",
+          "example": "删除VAE后直接换线性输出，不会自动获得PixVid的时间映射/detailer。",
+          "papers": [
+            "multimodal-models:dwd",
+            "multimodal-models:pixvid"
           ]
         }
       ],
@@ -1396,6 +1536,30 @@
           "source_revisions": {
             "multimodal-models:rslivebench-uav-protocol": "fd7ec0c903a2ca99b30f35a323af497cc2c51ae5579795ec96e8fc2440a22908",
             "multimodal-models:woven": "3c7f5518fd36be1bc8aa964050531232d66f297057e8e0ccd57f3f4376d2f575"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "foundation-models:wm-quant",
+            "foundation-models:lewam"
+          ],
+          "summary": "LeWAM联合训练视觉encoder、latent动力学与action flow，再对策略候选做潜空间规划；WM-Quant研究连续rollout中的量化误差与范围校准。注意新论文实验对象是LeWM/DINO-WM，不是LeWAM，未声称把WM-Quant接入了LeWAM训练或规划。 本次实读已有同主题代表README，按真实研究轴比较，不借比较对象改变算法或宣称跨论文效果复现。",
+          "source_revisions": {
+            "foundation-models:wm-quant": "106dd4904b7520a33153b663b7072e0ee409384c6f56d073c3fa1edaf38df61e",
+            "foundation-models:lewam": "5e991ab90d6400d319dbccbf83e7ff06f2749baa45a5e10a79ea26b235f1ed45"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "multimodal-models:dwd",
+            "multimodal-models:pixvid"
+          ],
+          "summary": "PixVid迁移latent DiT到pixel输入/生成空间并加detailer；DWD保留latent采样，只改变最终读出。输出是像素不意味着整个采样都在pixel空间。 本地边界与完整高成本不复现分别记录。",
+          "source_revisions": {
+            "multimodal-models:dwd": "1e24935b79acdb628e2bbf36d868874d47245fa4ee5abe5e23f2c3642cab41d5",
+            "multimodal-models:pixvid": "af14fd84ecf954028202fd5cf61ef0145afa848db73a106afc7f41fd4ff8a8ae"
           }
         }
       ]

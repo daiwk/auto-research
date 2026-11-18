@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-18",
+  "scope": "Versioned primary-method review before bounded execution; no model, dataset, provider or production run",
+  "available_resource": "one A100/A30 or local Mac",
+  "maximum_device_run_seconds": 180,
+  "seeds": [42, 43, 44],
+  "model_downloads": 0,
+  "dataset_downloads": 0,
+  "paid_api_calls": 0,
+  "automatic_retry": false,
+  "papers": [
+    {"id": "2611.22503", "key": "yuanbao-rubric", "decision": "bounded_component", "scope": "§2.1 set rubric utility, Eq4 focal pairwise, Eq5–6 positive GRPO and best-rollout distillation", "full_experiment_status": "not_reproduced_high_cost", "cost_basis": "610M production query/document pairs; 0.6B/4B/7B pipeline with DeepSeek-V4-Flash judge; production corpus and14-day5% traffic test are unavailable locally"},
+    {"id": "2611.22597", "key": "cotti", "decision": "bounded_component", "scope": "§III Eqs6–16: differentiable CPC gate, detached unclipped RW and bounded event ABA", "full_experiment_status": "not_reproduced_high_cost", "cost_basis": "Full pipeline reports64A100,20workers and20parameter servers plus proprietary Fliggy logs and online traffic. Missing-view/history/calibration settings are incompletely specified, not invented"},
+    {"id": "2611.20448", "key": "intentflow", "decision": "bounded_component", "scope": "§4.4.4 fixed-document-index residual projection; §4.4.3 candidate distribution distillation; Eq24 document-density correction", "full_experiment_status": "not_reproduced_high_cost", "cost_basis": "0.8B multimodal full-parameter students,2Bteacher, agentic evidence acquisition and ten-billion-entry production index; no vision model or intent classifier is replaced by rules"},
+    {"id": "2611.22079", "key": "simq", "decision": "bounded_component", "scope": "Finite normalized vectors, seeded partition/split, actual centroid graph navigation, SIMQ and SIMQ+ query and exact reranking", "full_experiment_status": "not_reproduced_high_cost", "cost_basis": "Five large-index CPU throughput/build campaigns; full PLAID baseline requires separateGPU clustering. The small exact construction backend is an explicit diagnostic deviation, not scalable HNSW performance"},
+    {"id": "2611.20758", "key": "unigraph", "decision": "bounded_component", "scope": "Finite alpha-cover neighbor construction, guided beam search and dense-first norm pruning", "full_experiment_status": "not_reproduced_high_cost", "cost_basis": "2.68M–8.84Mvector indexes,1024dense dimensions and full Recall/QPS matrix exceed short diagnostic budget; no empirical speedup claimed"},
+    {"id": "2611.22392", "key": "dealrank", "decision": "bounded_component", "scope": "Actual parallel ranker-callback schedules and quota/cut accounting; no model responses generated", "full_experiment_status": "not_reproduced_high_cost", "cost_basis": "Full six-model NDCG/latency campaign includes paid frontier calls and27Blocal inference. Deterministic consistent-ranker checks are schedule diagnostics only"},
+    {"id": "2603.02029", "key": "efficient-evals-tensor", "decision": "bounded_component", "scope": "CP capability tensor, ordinal probabilities, frozen-feature human NLL and conditional Wald arithmetic", "full_experiment_status": "not_reproduced_high_cost", "cost_basis": "New official Nov16 repository refers to March paper. Public saved-label analysis is possible but upstream full CPU notebook estimates1hour; original three-dataset30-split campaign adds hundreds of thousands of judge ratings. No recollection or full campaign run"},
+    {"id": "2611.22418", "key": "cutagent", "decision": "review_only", "full_experiment_status": "not_reproduced_high_cost", "cost_basis": "8BVLM gene planner,70Kproducts with90–120clips each, multimodal teacher calls,TTS/BGM/video production and397Bjudge; full random-traffic CTR campaign cannot be reproduced on one card. No mock gene planner or fake CTR"}
+  ]
+}

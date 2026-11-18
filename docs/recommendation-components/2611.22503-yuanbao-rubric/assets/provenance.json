@@ -1,0 +1,12 @@
+{
+  "figure": 2,
+  "caption": "Figure 2. Overall architecture of the rubric-guided agentic search framework. Offline (top) involves coarse-to-fine rubric generation with\nweighted positive and negative criteria, utility-labeler training by\nteacher distillation, rubric-aligned retrieval and multi-task ranking,\nand dual-branch selection with GRPO and best-rollout distillation (OPD). Online (bottom) involves dense retrieval of candidate documents\nwith the trained models, rubric-aligned re-ranking, set selection, and\nagent answer synthesis.",
+  "source_url": "https://arxiv.org/html/2611.22503v1/overall_framework.png",
+  "source_version": "v1",
+  "source_sha256": "db3d753f7186e84b1527c5ec34709645fa28ba21da7e2ab07415e99df39fc2bf",
+  "extraction": "original HTML image, no redraw",
+  "file": "paper-figure-01.png",
+  "asset_sha256": "c8b68de7afdc47e8d901b0ebe10e2a52cf7a17ff9829fa353b263236a682ff12",
+  "copyright": "Original paper authors; no claim of local generation",
+  "visual_review_done": true
+}

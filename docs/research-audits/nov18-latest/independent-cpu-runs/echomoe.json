@@ -1,0 +1,105 @@
+{
+  "schema_version": 2,
+  "method": "echomoe",
+  "manifest_ref": "foundation-models:echomoe",
+  "dataset": {
+    "id": "synthetic:nov18-latest-echomoe-mechanism-v1",
+    "kind": "explicit_mechanism_or_protocol_fixtures",
+    "revision": "sha256:7f1fb80ba2b99f659c9062782f50fd1b955c6b8f364128318e78ddf9a53ef4a9",
+    "public_capability_benchmark": false,
+    "source": "Seeded synthetic operator tensors; no pretrained model or capability dataset"
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "folded_max_error": 6.776263578034403e-20,
+        "analytic_traffic_bytes": 2220.0
+      },
+      "checks": {
+        "folded_output_parity": true,
+        "folded_gradient_parity": true,
+        "reference_matters": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "folded_max_error": 1.8973538018496328e-19,
+        "analytic_traffic_bytes": 2220.0
+      },
+      "checks": {
+        "folded_output_parity": true,
+        "folded_gradient_parity": true,
+        "reference_matters": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "folded_max_error": 1.0842021724855044e-19,
+        "analytic_traffic_bytes": 2220.0
+      },
+      "checks": {
+        "folded_output_parity": true,
+        "folded_gradient_parity": true,
+        "reference_matters": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "folded_max_error": 1.2197274440461925e-19,
+    "analytic_traffic_bytes": 2220.0
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Bounded defining-operator arithmetic and negative controls, not complete model or benchmark capability"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "66cda00810da75bb8e3daa789c8d29b5b71b851d",
+    "source_state": "uncommitted working tree with exact executed-source fingerprints",
+    "accelerator": "CPU",
+    "artifact_path": "docs/foundation-models/2611.22215-echomoe/metrics/component-cpu-seeds42-44.json",
+    "executed_source_sha256": {
+      "src/auto_research/foundation_models/echomoe.py": "7f1fb80ba2b99f659c9062782f50fd1b955c6b8f364128318e78ddf9a53ef4a9"
+    }
+  }
+}

@@ -1,0 +1,645 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "agent-research:detourbench": {
+      "questions": [
+        {
+          "id": "oracle-not-policy",
+          "level": "basics",
+          "question": "最短访问数为什么不等于Agent应当做到的步数？",
+          "answer": "oracle能看完整图，Agent只能看逐步揭示的信息；NDR是相对事后全信息最优的额外访问，不是每次探索都不合理。",
+          "example": "教学例：两个相似入口只有一个正确，oracle先选对不代表真实Agent能预知。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "wrong-is-undefined",
+          "level": "mechanism",
+          "question": "错误承诺后能把剩余距离记成0吗？",
+          "answer": "不能。0意味着已成功；不可逆错误没有有限可达成功距离，必须单独报告，P和NDR同样未定义。",
+          "example": "教学例：点了不可撤销错误提交不等于距离目标为零。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "contrast-not-oracle",
+          "level": "comparison",
+          "question": "它与Harness²的执行比较有什么不同？",
+          "answer": "DetourBench评价固定轨迹与可证明离线最短路；Harness²通过真实执行对照改harness，选择不依赖gold或rubric。两者评价对象和信息权限不同。",
+          "example": "教学例：匿名选产物不能证明该产物花的访问数最少。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "charge-dispatch",
+          "level": "implementation",
+          "question": "为什么重复动作仍必须收费？",
+          "answer": "成本按dispatcher实际访问，不按状态变化。否则重复或无效访问会凭空变免费，RSR和NDR都失真；batch终态之后的未执行后缀则不能收费。",
+          "example": "教学例：读、再读、提交共3次访问；提交后的未执行动作不计。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "agent-research:sciresearch-eval": {
+      "questions": [
+        {
+          "id": "fit-not-validity",
+          "level": "basics",
+          "question": "模拟器拟合好为什么仍可能答错？",
+          "answer": "模拟器可能缺辐射、侧向散热或界面阻抗，参数会补偿模型错配，残差小但区间覆盖不足。",
+          "example": "教学例：用错误一体材料模型拟合胶合板会把接缝影响吸收到导热系数。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "proper-score-not-width",
+          "level": "mechanism",
+          "question": "无限加宽区间能刷高分吗？",
+          "answer": "不能。评分越低越好，宽度直接计成本；缩得太窄漏truth又有40倍距离惩罚，迫使覆盖与信息量权衡。",
+          "example": "教学例：覆盖truth的宽区间仍比同样覆盖的窄区间分高。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "truth-versus-sufficiency",
+          "level": "comparison",
+          "question": "它与AskALCF回答盲探针的参考信息一样吗？",
+          "answer": "不一样。本篇evaluator有精确物理truth，AskALCF充分性探针只看问题和文档，不能看生成答案。参考对象和权限必须分别隔离。",
+          "example": "教学例：热物性真值可以供评分器用，但不能传给实验设计Agent。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "positive-log-values",
+          "level": "implementation",
+          "question": "为什么本地拒绝0或负区间端点？",
+          "answer": "物性评分用log10，非正值没有有限定义。不能加epsilon偷偷变成另一条评分规则，也不能把缺参数当正确。",
+          "example": "教学例：导热率区间[0,10]直接拒绝，而不是log(1e-8)替代。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "agent-research:silentguard": {
+      "questions": [
+        {
+          "id": "success-status-not-contract",
+          "level": "basics",
+          "question": "HTTP200为什么不是正确性证据？",
+          "answer": "它只表示传输／服务层成功，过滤器可能被忽略。必须核对语义不变量，且不能靠Agent看到warning后自愿遵守。",
+          "example": "教学例：price_max拼错被忽略，API仍返回所有商品总数。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "identity-no-truth-oracle",
+          "level": "mechanism",
+          "question": "计数恒等式检查是否能发现所有错误？",
+          "answer": "不能。只有破坏一致性的错误会触发；各查询都返回一致的假值仍可通过。检查是在合同前提下验证一致性，不是外部truth oracle。",
+          "example": "教学例：任何查询都报0仍满足加法恒等式。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "guard-versus-harness-learning",
+          "level": "comparison",
+          "question": "为什么不把这个当Harness²式自改进？",
+          "answer": "SilentGuard按固定不变量执行放行／隐藏，不提出或整合harness改动；Harness²需要执行对照和经验积累。两者可组合但不互相替代。",
+          "example": "教学例：重发一次API不是生成一个新的工具策略候选。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "withheld-not-zero",
+          "level": "implementation",
+          "question": "失败count删掉后为什么不能自动填0？",
+          "answer": "0是具体且可能错误的答案。原方法隐藏不可验证值并允许重新查询或弃答，不自动修复；答案门还检查count来源和查询约束数。",
+          "example": "教学例：过滤检查两次失败时字段不可见，连续两次无验证提交后必须弃答。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "agent-research:metaact": {
+      "questions": [
+        {
+          "id": "constraint-not-reminder",
+          "level": "basics",
+          "question": "可执行约束比文字教训多保证了什么？",
+          "answer": "对已经表达出来的规则，执行门可拒绝违规动作，不依赖模型服从提醒；但未覆盖的新故障仍可能发生。",
+          "example": "教学例：禁止已生效选项再次click，不等于保证整个购物任务成功。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "effective-denominator",
+          "level": "mechanism",
+          "question": "为什么eff不把所有动作放进分母？",
+          "answer": "无效重复正是要抑制的对象。只在成功和高分失败安全参考的有效动作上算误拦，才不会用大量no-op稀释伤害。",
+          "example": "教学例：拦10个无效look不能掩盖误拦唯一有效submit。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "union-not-free",
+          "level": "comparison",
+          "question": "与Harness²组合候选相比，GEAR union能直接采用吗？",
+          "answer": "不能。GEAR union是guard合取，拦截更多动作也可能误伤成功轨迹，必须重新回放；Harness²也要求实际执行组合结果，证据类型不同。",
+          "example": "教学例：两个各自安全的约束合并后仍需算eff和ok。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "two-guards-not-agent",
+          "level": "implementation",
+          "question": "本地两个primitive是否算完整MetaAct？",
+          "answer": "不算。它只检验独立guard与回放公式，缺goal extractor、其余primitive和LLM综合／环境。外部日志必须保留来源，成功标签不得进入guard。",
+          "example": "教学例：手工no_op规格通过不意味着LLM能从失败自动学出该规则。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "agent-research:elite-eval-free": {
+      "questions": [
+        {
+          "id": "eval-free-not-no-check",
+          "level": "basics",
+          "question": "Evaluation-free是不是连编译检查都不做？",
+          "answer": "不是。它排除下游任务成绩和解题轨迹，仍用确定性结构／操作有效性门。门通过不代表能力提升。",
+          "example": "教学例：能import只证明程序装载，不证明修复SWE问题。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "integrate-common-parent",
+          "level": "mechanism",
+          "question": "为什么不能把7个子代patch依次apply？",
+          "answer": "每个都是同一parent的独立探索，可能冲突或重复；integrator要按机制重实现一个一致子代，不能把顺序拼接冒充推理整合。",
+          "example": "教学例：两个子代都改同一工具schema，直接叠加会破坏兼容。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "elite-harness-evidence",
+          "level": "comparison",
+          "question": "ELITE与Harness²都无rubric，差别在哪里？",
+          "answer": "Harness²会运行任务并比较行为来组合；ELITE用实现级证据且排除下游任务结果。二者“无rubric”不意味着相同信息边界。",
+          "example": "教学例：给ELITE integrator一张候选成功率表已经改变算法。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "callback-not-reasoning",
+          "level": "implementation",
+          "question": "回调协议跑通能说LLM整合有效吗？",
+          "answer": "不能。本地只验证调用、隔离、scope和fallback，没有实现模型推理或SWE容器。外部闭包仍需可信，MappingProxy不是进程安全沙箱。",
+          "example": "教学例：固定integrator返回一个可编译文件只证明协议执行。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "agent-research:resolution-hypothesis": {
+      "questions": [
+        {
+          "id": "repeat-not-run",
+          "level": "basics",
+          "question": "同一artifact测16次能替代16次演化吗？",
+          "answer": "不能。前者估计评测噪声，后者才能看到演化run间的artifact质量变化。方法比较两种都需要。",
+          "example": "教学例：同一提示反复跑只是同一个产物，不是16个独立提案过程。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "negative-estimator",
+          "level": "mechanism",
+          "question": "tau²估计为负是不是程序bug？",
+          "answer": "不一定。样本矩估计减去行均值中的评测噪声后可为负，必须保留原估计；显示SD才截0，不能悄悄改无偏估计。",
+          "example": "教学例：两行都是[0,1]，均值相同但行内有噪声，得到−0.25。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "measurement-not-selector",
+          "level": "comparison",
+          "question": "它能取代Harness²的selector吗？",
+          "answer": "不能。它估测量波动，不判断哪条机制互补或哪个产物更符合任务。候选质量、选择能力与分辨率是不同对象。",
+          "example": "教学例：低方差的错误答案也不会因为稳定就变正确。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "balanced-provenance",
+          "level": "implementation",
+          "question": "为什么本地拒绝不平衡矩阵？",
+          "answer": "当前实现严格对应附录平衡设计的sigma²/M校正；缺测需另一套权重与方差假设，不能零填补后套公式。",
+          "example": "教学例：一个run测8次另一个只测1次时不能直接按M=8修正。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "agent-research:clam-memory": {
+      "questions": [
+        {
+          "id": "instant-after-training",
+          "level": "basics",
+          "question": "Instant表示无需训练吗？",
+          "answer": "不是。只是不在每个新会话做梯度下降；hypernetwork需预训练初始化再做多会话蒸馏训练。",
+          "example": "教学例：服务时一次forward不等于获得这个forward的训练成本为0。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "fixed-state-not-adapter-concat",
+          "level": "mechanism",
+          "question": "为什么不逐会话拼接LoRA rank？",
+          "answer": "CLAM在固定Q里递推累积，再解码固定rank8；rank拼接会随历史增长，改变容量和成本。",
+          "example": "教学例：100会话也不是rank800。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "clam-versus-coremem",
+          "level": "comparison",
+          "question": "CLAM与CoReMem都写memory，有何关键区别？",
+          "answer": "CLAM蒸馏全历史答案生成参数；CoReMem以未来任务有无记忆差值训练信用。前者不是后者的低成本替身。",
+          "example": "教学例：记住一个姓名不等于证明下一仓库任务节省步骤。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "untrained-not-reproduction",
+          "level": "implementation",
+          "question": "为什么本轮不跑一个小随机hypernetwork当复现？",
+          "answer": "论文能力依赖900K合成轨迹、8K–25K训练步、2–7B基础模型与70B生成／评判。随机模块只能测shape，不验证巩固，完整实验明确高成本不复现。",
+          "example": "教学例：零初始化adapter是no-op，输出正常不代表已记忆。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "agent-research:skillbuffbench": {
+      "questions": [
+        {
+          "id": "curated-upper-bound",
+          "level": "basics",
+          "question": "精选skill提升能证明自动发现也提升吗？",
+          "answer": "不能。精选替Agent解决了选skill问题，自动条件还要面对名称描述、干扰项和加载失败；应分三臂。",
+          "example": "教学例：人工给出XRD技能不等于Agent在100个skill中会选它。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "m0-isolation",
+          "level": "mechanism",
+          "question": "M0只删聊天记录够吗？",
+          "answer": "不够。workspace、memory namespace、history和cache都不能继承，否则重复不再交换且skill效果混入记忆。",
+          "example": "教学例：上轮生成的答案文件留在目录也算泄漏。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "evaluation-versus-improvement",
+          "level": "comparison",
+          "question": "为什么它不能直接等同Harness²实验？",
+          "answer": "这里固定配置比较skill access与memory条件，Harness²主动修改harness并积累经验。演化产物与评测条件必须分开。",
+          "example": "教学例：自动安装新skill会改变一个原定固定的benchmark格子。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "private-skills-not-cloned",
+          "level": "implementation",
+          "question": "为何只收录不直接复刻任务？",
+          "answer": "完整3168轮且部分技能正文是合作方私有，目的说明不足以等价实现。没有原资产就不能制造一个同名toy任务并声称复现完成。",
+          "example": "教学例：写一个通用生物学prompt不能替代未公开regulatory-prioritization skill。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "agent-research:gandalf-bvb": {
+      "questions": [
+        {
+          "id": "verifier-not-actor",
+          "level": "basics",
+          "question": "BVB的F1能当Agent任务成功率吗？",
+          "answer": "不能。它测verifier是否正确发现未满足rubric的criteria，actor可能已失败但judge能正确检出。",
+          "example": "教学例：表格公式错误被准确判fail，提高的是judge F1。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "native-read-only",
+          "level": "mechanism",
+          "question": "为什么judge需要原生工具又必须只读？",
+          "answer": "公式和应用状态会在扁平文本中丢失；只读固定快照保留证据但阻止judge修改被评对象。",
+          "example": "教学例：可以查看Excel公式，不能先替换错误公式再通过。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "gandalf-askalcf",
+          "level": "comparison",
+          "question": "它与AskALCF的独立探针能共用标签吗？",
+          "answer": "不能直接共用。前者判断交付物criteria，后者先问文档是否足够回答并隔离生成答案。问题、参照和权限不相同。",
+          "example": "教学例：引用页存在不证明PowerPoint里实际画了正确图。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "no-shadow-verifier",
+          "level": "implementation",
+          "question": "为何本轮不写一个schema就说接入Gandalf？",
+          "answer": "定义机制是可访问原生产物的reactive judge，schema不足以执行；真实多任务API环境成本高，明确review-only不复现。",
+          "example": "教学例：读取criteria JSON而从不看工作簿不等于验证工作簿。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "agent-research:self-organized-learning": {
+      "questions": [
+        {
+          "id": "self-organization-not-loop",
+          "level": "basics",
+          "question": "为什么固定课程脚本不能叫本文的自组织？",
+          "answer": "本文研究模型在原语和预算下自行决定学习过程；预写何时造题／更新会把待观察行为变成外部算法。",
+          "example": "教学例：每10步固定加难度不是模型自发发现课程。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "teacher-player-state",
+          "level": "mechanism",
+          "question": "teacher持久、player短生命周期的作用是什么？",
+          "answer": "teacher积累实验和文本版本，player只拿当前产物独立试跑，避免把某次player隐式历史当作产物迁移效果。",
+          "example": "教学例：新player不能继续上一局聊天而声称只靠skill文件。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "loop-versus-elite",
+          "level": "comparison",
+          "question": "它与ELITE的无评测演化是一回事吗？",
+          "answer": "不是。ELITE规定同父探索和代码整合，排除下游结果；本篇让teacher在自造游戏反馈下自主设计学习循环。干预和反馈权限不同。",
+          "example": "教学例：强行按7子代整合运行就不再是自由自组织设定。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "no-cheap-fixed-policy",
+          "level": "implementation",
+          "question": "为什么本轮不写固定策略Agent跑toy游戏？",
+          "answer": "固定策略不能表现自发构造算法，真实配置3session×150gameplay与多frontier模型成本高；所以收录方法而不编造能力分数。",
+          "example": "教学例：预写最佳移动序列通关不是player从teacher产物学习。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "domain": "post-training",
+  "key": "design-taste-admission",
+  "title": "Learning Design Taste through Verifiable Synthetic Environments and Agentic Reinforcement Learning",
+  "paper_url": "https://arxiv.org/abs/2611.20612v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.20612v1",
+  "reviewed_version": "v1",
+  "detail_path": "post-training/2611.20612-design-taste-admission/README.md",
+  "first_author": "Sujay Choubey",
+  "first_author_affiliation": "固定v1未列一作机构（不由其他作者邮箱推断）",
+  "published": "2026-11-16",
+  "published_at": "2026-11-16T06:37:24Z",
+  "code": "https://github.com/mr-siddy/Tasteful-Designs",
+  "code_status": "[作者仓库](https://github.com/mr-siddy/Tasteful-Designs)；固定SHA `a3f98e4375df17d3631df9ee9b68762980e30a71`；未找到项目级许可，不复制上游源码。仅核对发布证据，未执行上游训练。",
+  "code_license": null,
+  "upstream_revision": "a3f98e4375df17d3631df9ee9b68762980e30a71",
+  "adapter": null,
+  "topic": [
+    "reward-and-credit",
+    "后训练算法组件"
+  ],
+  "priority": "P1",
+  "intake_class": "new_submission_in_requested_window",
+  "implementation_status": "component_only",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.20612v1",
+    "source_sections": [
+      "§4 Eq.3–4",
+      "§5–8 training/evaluation"
+    ],
+    "basis": "§4–8需Qwen3.5-4B多轮repo编辑/build/Chromium渲染、独立judge ensemble、每维约385专家对和完整RL/消融；人类专家与多模型loop无法以算子单测替代。",
+    "available_resource": "Single NVIDIA A100/A30 or local Mac",
+    "decision": "Full experiment not reproduced due to high cost; review DONE. No checkpoint/data download or paid API call.",
+    "local_budget": {
+      "checkpoint_download_bytes": 0,
+      "dataset_download_bytes": 0,
+      "paid_api_calls": 0,
+      "local_component_seconds_per_seed_cap": 30,
+      "gpu_component_seconds_per_seed_cap": 0,
+      "cap_scope": "Tiny exact operator/negative-control checks only; not a training campaign."
+    }
+  },
+  "summary": "spacing等指标也可被刷分；必须同时通过expert agreement、单原则扰动/修复因果敏感性、hack trap和重复稳定性。未通过的项只作evaluation，不进reward。 expert agreement/causal sensitivity/hack resistance/stability四项admission、V0乘性hard gates与已admit分数composite reward；不造浏览器/设计judge能力。",
+  "evaluation_tier": "l0_interface",
+  "local_operator": "auto_research.post_training.design_taste_admission.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.design_taste_admission import diagnostic; print(diagnostic(42))'"
+}

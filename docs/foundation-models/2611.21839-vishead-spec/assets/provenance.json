@@ -1,0 +1,13 @@
+{
+  "source_url": "https://arxiv.org/html/2611.21839v1/figures/figure1.png",
+  "figure": "S1.F1",
+  "caption": "Figure 1: Context construction and KV-head routing. Both panels show hidden states cached at layers in the target model S = {1, 9, 17, 25, 33} during normal target computation. I and T denote image- and text-token hidden states. (a) DSpark constructs both image and text rows from all five taps and lets all 40 KV heads in its five draft layers attend to image context. (b) VisHead-Spec-8 constructs image rows from the two highest-index sampled layers, 25 and 33, while text rows still use all five. Four KV heads in each of draft layers 2 and 3 retain image access, shown first in each row, and the other heads attend to text context only. Each cell represents one KV head and its four query heads; all heads retain ordinary block attention.",
+  "original_sha256": "5920125e661fe2d4e0b4f5303316b1a2b9798b4a90558ec349f689790efce6ee",
+  "extraction": "Author original raster image, or original SVG rasterized without semantic editing",
+  "paper_url": "https://arxiv.org/html/2611.21839v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-18",
+  "copyright": "Copyright retained by the original authors; research commentary, not a local result.",
+  "source_html_sha256": "ad1e48c5333d86b82a5d01bc396a8050d684d43510d910d0463a1cc949d8f18e",
+  "asset_sha256": "307e3245b8c7758f7ced701243eb868eab263d52b547950d4890d796888ecb19"
+}

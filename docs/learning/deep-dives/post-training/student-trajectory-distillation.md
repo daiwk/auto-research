@@ -7,7 +7,7 @@ hide:
 
 # 轨迹蒸馏：采样者、提案与散度方向分开看
 
-[LLM 后训练](../index.md) · 更新 2026-11-11 · 45 篇主题资料 / 11 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-18 · 46 篇主题资料 / 12 篇重点对照
 
 “on-policy”描述监督发生在哪些状态，FKL/RKL/JSD描述在这些状态怎样比较分布。GKD和MiniLLM建立这两个轴，DrOPD、AP-OPD再调整纠错位置或强度，Semi-OPD与学习信号诊断则提醒：离线复用和残余损失各有不同含义。 MPOPD再把采样者变成可学习proposal：几何混合是提案target，学生仍向教师做RKL，二者不能混成同一个蒸馏分布。
 
@@ -36,6 +36,7 @@ hide:
 | [Shuffled OPSD: When Semantic Consistency Hurts On-Policy Self-Distillation?](../../../post-training/2611.04958-shuffled-opsd/README.md) · [原始来源](https://arxiv.org/abs/2611.04958v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射 | 同时改变学生采样和教师评分的共享问题词序，保留固定111偏移的完整其他题示例为教师私有上下文，使用逐词表有符号上截断监督。 | 变的是共享输入与访问状态，不是重排已采轨迹；词multiset不保证token预算不变。负项与response等权归约不能被普通KL替代，完整数学评测仍用原始题。 |
 | [CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation](../../../post-training/2611.07959-cord/README.md) · [原始来源](https://arxiv.org/abs/2611.07959)<br>章节：核心公式、数据协议与代码映射 | CoRD 直接在每个共享前缀上构造几何混合 q；先从学生提议，再最大耦合地保留或替换，发出边缘恰为 q。蒸馏仍向教师做反向 KL。 | 相对 MPOPD，不用另外拟合提案，也没有冻结的滞后一 token ratio；代价是在每个采样前缀同时得到师生概率，且中间权重只保留两者支持集的交集。 |
 | [DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation](../../../post-training/2611.13249-drd-mopd/README.md) · [原始来源](https://arxiv.org/abs/2611.13249v1)<br>章节：核心公式、数据协议与代码映射、结果、负控与边界 | 冻结base加全部全参数delta形成唯一学生，域标签只路由更新；Own/Other/Alternate/SingleComponent使用独立AdamW状态，所有域先在同一W计算梯度。 | 参数更新路由不同于DrOPD的token散度门，也不等于推理MoE；未选delta不能执行动量/计数/weight decay。作者未发布本篇训练实现与checkpoint，本地不实现教师或OPD rollout。 |
+| [Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption](../../../post-training/2611.22298-streaming-opd/README.md) · [原始来源](https://arxiv.org/abs/2611.22298v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 保留完整因果prefix的新片段loss mask/version记录、teacher top-k不重归一化截断clip损失、按监督权重归约。 | OPDLM把AR教师与双向扩散学生的状态/目标对齐；Streaming OPD仍沿因果prefix计分，只改变交付和消费时序。旧OPDLM候选诊断不是实际扩散decoder，当前prefix/损失核也不是异步服务性能证据。 |
 
 </div>
 
@@ -82,6 +83,12 @@ MPOPD 拟合并使用独立 proposal 生成，学生训练用冻结旧策略的�
 Divergence-Routed OPD用师生分歧决定哪些token位置增加FKL，改变监督分布；DRD-MOPD保留一个全delta合成学生，用域标签决定哪些参数增量接受loss梯度。后者的Other不能默认除以K-1，SingleComponent也不意味着前向只激活一个delta。两者组合需另定义共享loss与优化器合同，现有两个独立组件并不自动形成多教师Evolve算子。
 
 对照来源：[drd-mopd](../../../post-training/2611.13249-drd-mopd/README.md) · [divergence-routed-opd](../../../post-training/2610.19572-divergence-routed-opd/README.md)
+
+### top-k损失为什么可能为负再clip到0？
+
+实现只在teacher选的top-k上求和，保留完整词表概率不重新归一化；这不是完整KL，部分和可为负，原文用log floor和[0,C]截断。 OPDLM把AR教师与双向扩散学生的状态/目标对齐；Streaming OPD仍沿因果prefix计分，只改变交付和消费时序。旧OPDLM候选诊断不是实际扩散decoder，当前prefix/损失核也不是异步服务性能证据。 本轮边界：保留完整因果prefix的新片段loss mask/version记录、teacher top-k不重归一化截断clip损失、按监督权重归约。
+
+对照来源：[streaming-opd](../../../post-training/2611.22298-streaming-opd/README.md) · [opd-lm](../../../post-training/2606.06712-opd-lm/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -167,9 +174,23 @@ Divergence-Routed OPD用师生分歧决定哪些token位置增加FKL，改变监
 
     对照来源：[drd-mopd](../../../post-training/2611.13249-drd-mopd/README.md) · [divergence-routed-opd](../../../post-training/2610.19572-divergence-routed-opd/README.md)
 
+### Streaming OPD与OPDLM都改变蒸馏，为什么不是同一种状态/效率优化？ {#cross-nov18-streaming-opd}
+
+??? note "展开答案与例子"
+
+    **答案：** OPDLM把AR教师与双向扩散学生的状态/目标对齐；Streaming OPD仍沿因果prefix计分，只改变交付和消费时序。旧OPDLM候选诊断不是实际扩散decoder，当前prefix/损失核也不是异步服务性能证据。
+
+    **教学例子：** 教学例：一个保留因果prefix改变消费时钟，另一个需双向去噪状态；两种小组件都不直接给出系统吞吐或扩散生成能力。
+
+    对照来源：[streaming-opd](../../../post-training/2611.22298-streaming-opd/README.md) · [opd-lm](../../../post-training/2606.06712-opd-lm/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-18** · 保留完整因果prefix的新片段loss mask/version记录、teacher top-k不重归一化截断clip损失、按监督权重归约。 完整实验高成本不复现；组件诊断不等于能力比较。
+
+涉及：[streaming-opd](../../../post-training/2611.22298-streaming-opd/README.md) · [opd-lm](../../../post-training/2606.06712-opd-lm/README.md)
 
 **2026-11-11** · 加入 DRD-MOPD，区分token监督路由、域到参数更新路由与推理激活路由；本地保真实现同快照梯度与selected-only AdamW，不把上游Open-MOPD或局部参数检查当完整蒸馏结果。
 
@@ -195,7 +216,7 @@ Divergence-Routed OPD用师生分歧决定哪些token位置增加FKL，改变监
 
 覆盖 40 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 45 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 46 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -244,6 +265,7 @@ Divergence-Routed OPD用师生分歧决定哪些token位置增加FKL，改变监
 - [Proposing Better Rollouts for On-Policy Distillation](../../../post-training/2610.36477-mpopd/README.md)
 - [CoRD: Coupled Rollouts Fill the Blind Spot of On-Policy Distillation](../../../post-training/2611.07959-cord/README.md)
 - [DRD-MOPD: Domain-Routed Delta Optimization for Multi-Teacher On-Policy Distillation](../../../post-training/2611.13249-drd-mopd/README.md)
+- [Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption](../../../post-training/2611.22298-streaming-opd/README.md)
 
 </details>
 

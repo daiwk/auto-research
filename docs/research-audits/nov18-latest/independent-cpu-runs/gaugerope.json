@@ -1,0 +1,101 @@
+{
+  "schema_version": 2,
+  "method": "gaugerope",
+  "manifest_ref": "foundation-models:gaugerope",
+  "dataset": {
+    "id": "synthetic:nov18-latest-gaugerope-mechanism-v1",
+    "kind": "explicit_mechanism_or_protocol_fixtures",
+    "revision": "sha256:d2df34e846c4ca6bb4720080c1b11f03b43702f5d45026d18207b771db2387fd",
+    "public_capability_benchmark": false,
+    "source": "Seeded synthetic operator tensors; no pretrained model or capability dataset"
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "full_rank_native_attention_error": 9.43689570931383e-16
+      },
+      "checks": {
+        "full_rank_carrier_exact": true,
+        "latent_query_gradient": true,
+        "frequency_basis_shape_preserved": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "full_rank_native_attention_error": 6.591949208711867e-16
+      },
+      "checks": {
+        "full_rank_carrier_exact": true,
+        "latent_query_gradient": true,
+        "frequency_basis_shape_preserved": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "full_rank_native_attention_error": 6.661338147750939e-16
+      },
+      "checks": {
+        "full_rank_carrier_exact": true,
+        "latent_query_gradient": true,
+        "frequency_basis_shape_preserved": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "full_rank_native_attention_error": 7.563394355258879e-16
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Bounded defining-operator arithmetic and negative controls, not complete model or benchmark capability"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "66cda00810da75bb8e3daa789c8d29b5b71b851d",
+    "source_state": "uncommitted working tree with exact executed-source fingerprints",
+    "accelerator": "CPU",
+    "artifact_path": "docs/foundation-models/2611.20524-gaugerope/metrics/component-cpu-seeds42-44.json",
+    "executed_source_sha256": {
+      "src/auto_research/foundation_models/gaugerope.py": "d2df34e846c4ca6bb4720080c1b11f03b43702f5d45026d18207b771db2387fd"
+    }
+  }
+}

@@ -7,7 +7,7 @@ hide:
 
 # 世界建模：状态、生成与动作条件
 
-[多模态](index.md) / 120 个问题 · 30 篇论文
+[多模态](index.md) / 129 个问题 · 32 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,128 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">120 个问题 · 30 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">129 个问题 · 32 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:dwd" data-paper-title="Decoding Without a Decoder: Direct Pixel Prediction from Diffusion Transformers" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Decoding Without a Decoder: Direct Pixel Prediction from Diffusion Transformers 多模态大模型 Luma AI 2026-11-17 DWD在预训练DiT最后隐状态上并联线性pixel head，原denoising head继续驱动采样，只有最后一个非零time step才由pixel head输出图像/视频。通过分离pixel质量目标与trajectory anchoring，避免让同一输出承担冲突目标。已核方法位置：3.1–3.4, 4.1–4.2。 完整实验成本过高，不复现（审查 DONE）；资料收录，未实现。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。仅资料收录，无operator、训练、metrics、GPU receipt或Evolve映射。线性层加MSE不足以兑现像素质量、少数后缀blocks适配与采样路径，不用便宜影子模型充数。  多模态生成 扩散生成路径 多模态 世界建模：状态、生成与动作条件 DWD输出像素是否意味着每步都在像素空间采样？ 不是。latent DiT仍按原denoising head推进，只有最后一轮pixel head直接读出最终图像/视频。 教学例：中间20步仍更新latent，最后一步才把hidden token映成pixel patch。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<span id="paper-multimodal-models-dwd-baf72c78" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-86259de281395870">DWD输出像素是否意味着每步都在像素空间采样？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Adwd">Decoding Without a Decoder: Direct Pixel Prediction from Diffusion Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Luma AI</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。latent DiT仍按原denoising head推进，只有最后一轮pixel head直接读出最终图像/视频。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：中间20步仍更新latent，最后一步才把hidden token映成pixel patch。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22287v1">原论文</a> · <a href="../../../../multimodal-models/2611.22287-dwd/">实现解读</a> · <a href="#qa-86259de281395870">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:dwd" data-paper-title="Decoding Without a Decoder: Direct Pixel Prediction from Diffusion Transformers" data-learning-pending="false" data-level="mechanism" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Decoding Without a Decoder: Direct Pixel Prediction from Diffusion Transformers 多模态大模型 Luma AI 2026-11-17 DWD在预训练DiT最后隐状态上并联线性pixel head，原denoising head继续驱动采样，只有最后一个非零time step才由pixel head输出图像/视频。通过分离pixel质量目标与trajectory anchoring，避免让同一输出承担冲突目标。已核方法位置：3.1–3.4, 4.1–4.2。 完整实验成本过高，不复现（审查 DONE）；资料收录，未实现。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。仅资料收录，无operator、训练、metrics、GPU receipt或Evolve映射。线性层加MSE不足以兑现像素质量、少数后缀blocks适配与采样路径，不用便宜影子模型充数。  多模态生成 扩散生成路径 多模态 世界建模：状态、生成与动作条件 为何两个head不共用同一个time分布？ pixel目标工作在最终小非零time区间，trajectory anchoring覆盖更广中间去噪区间；职责不同。 教学例：原文常用pixel范围[0,0.1]、trajectory范围[0.04,1]，shift前定义。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-a99e6ac124618c8d">为何两个head不共用同一个time分布？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Adwd">Decoding Without a Decoder: Direct Pixel Prediction from Diffusion Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Luma AI</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>pixel目标工作在最终小非零time区间，trajectory anchoring覆盖更广中间去噪区间；职责不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：原文常用pixel范围[0,0.1]、trajectory范围[0.04,1]，shift前定义。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22287v1">原论文</a> · <a href="../../../../multimodal-models/2611.22287-dwd/">实现解读</a> · <a href="#qa-a99e6ac124618c8d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:dwd" data-paper-title="Decoding Without a Decoder: Direct Pixel Prediction from Diffusion Transformers" data-learning-pending="false" data-level="comparison" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Decoding Without a Decoder: Direct Pixel Prediction from Diffusion Transformers 多模态大模型 Luma AI 2026-11-17 DWD在预训练DiT最后隐状态上并联线性pixel head，原denoising head继续驱动采样，只有最后一个非零time step才由pixel head输出图像/视频。通过分离pixel质量目标与trajectory anchoring，避免让同一输出承担冲突目标。已核方法位置：3.1–3.4, 4.1–4.2。 完整实验成本过高，不复现（审查 DONE）；资料收录，未实现。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。仅资料收录，无operator、训练、metrics、GPU receipt或Evolve映射。线性层加MSE不足以兑现像素质量、少数后缀blocks适配与采样路径，不用便宜影子模型充数。  多模态生成 扩散生成路径 多模态 世界建模：状态、生成与动作条件 和PixVid都去掉decoder，有何关键不同？ PixVid迁移输入与整个pixel生成路径，DWD保留latent denoising加最终输出head；改动范围和监督不同。 教学例：删除VAE后直接换线性输出，不会自动获得PixVid的时间映射/detailer。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-7c24bb38fd70015c">和PixVid都去掉decoder，有何关键不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Adwd">Decoding Without a Decoder: Direct Pixel Prediction from Diffusion Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Luma AI</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>PixVid迁移输入与整个pixel生成路径，DWD保留latent denoising加最终输出head；改动范围和监督不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：删除VAE后直接换线性输出，不会自动获得PixVid的时间映射/detailer。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22287v1">原论文</a> · <a href="../../../../multimodal-models/2611.22287-dwd/">实现解读</a> · <a href="#qa-7c24bb38fd70015c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:dwd" data-paper-title="Decoding Without a Decoder: Direct Pixel Prediction from Diffusion Transformers" data-learning-pending="false" data-level="implementation" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Decoding Without a Decoder: Direct Pixel Prediction from Diffusion Transformers 多模态大模型 Luma AI 2026-11-17 DWD在预训练DiT最后隐状态上并联线性pixel head，原denoising head继续驱动采样，只有最后一个非零time step才由pixel head输出图像/视频。通过分离pixel质量目标与trajectory anchoring，避免让同一输出承担冲突目标。已核方法位置：3.1–3.4, 4.1–4.2。 完整实验成本过高，不复现（审查 DONE）；资料收录，未实现。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。仅资料收录，无operator、训练、metrics、GPU receipt或Evolve映射。线性层加MSE不足以兑现像素质量、少数后缀blocks适配与采样路径，不用便宜影子模型充数。  多模态生成 扩散生成路径 多模态 世界建模：状态、生成与动作条件 为何本轮不只实现一个线性pixel head？ 完整作用依赖预训练DiT后缀适配、感知/对抗目标、trajectory anchoring和采样。独立线性层没有足够方法证据，完整矩阵高成本故只收录。 教学例：随机hidden映射到RGB的shape正确，不代表具备无decoder生成能力。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-1e6dfdc48c592cb4">为何本轮不只实现一个线性pixel head？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=multimodal-models%3Adwd">Decoding Without a Decoder: Direct Pixel Prediction from Diffusion Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Luma AI</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>完整作用依赖预训练DiT后缀适配、感知/对抗目标、trajectory anchoring和采样。独立线性层没有足够方法证据，完整矩阵高成本故只收录。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：随机hidden映射到RGB的shape正确，不代表具备无decoder生成能力。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22287v1">原论文</a> · <a href="../../../../multimodal-models/2611.22287-dwd/">实现解读</a> · <a href="#qa-1e6dfdc48c592cb4">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:wm-quant" data-paper-title="WM-Quant: Rollout-Aware Post-Training Quantization for JEPA-Style World Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="WM-Quant: Rollout-Aware Post-Training Quantization for JEPA-Style World Models 基础模型 University of South Carolina 2026-11-16 JEPA世界模型把连续latent递归输入预测器，量化误差不会像离散token一样重置。WM-Quant保留前三个encoder blocks的8-bit激活、浮点action/proprioception控制通路，并联合优化encoder范围和每个rollout step独立的predictor范围。已核方法位置：3.3–3.4, 4.1–4.2。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行四个小型encoder blocks、共享线性递归预测器、浮点action通路、整数zero-point的STE范围bank和30步joint calibration；不加载LeWM/DINO-WM，不运行图像编码或CEM，不实现Orin整数GEMM。  推理与系统效率 世界模型量化 多模态 世界建模：状态、生成与动作条件 世界模型量化为什么要看多步而不是单步误差？ 预测latent会再次进入模型，早期误差被后续Jacobian传播，每步又注入新误差；单步最优范围未必使最终轨迹最优。 教学例：状态每步放大1.1倍时，第一步的误差会影响后面所有步。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<span id="paper-foundation-models-wm-quant-e55eb5ad" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-90fa9a3aebe05cfb">世界模型量化为什么要看多步而不是单步误差？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Awm-quant">WM-Quant: Rollout-Aware Post-Training Quantization for JEPA-Style World Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University of South Carolina</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>预测latent会再次进入模型，早期误差被后续Jacobian传播，每步又注入新误差；单步最优范围未必使最终轨迹最优。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：状态每步放大1.1倍时，第一步的误差会影响后面所有步。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21882v1">原论文</a> · <a href="../../../../foundation-models/2611.21882-wm-quant/">实现解读</a> · <a href="#qa-90fa9a3aebe05cfb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:wm-quant" data-paper-title="WM-Quant: Rollout-Aware Post-Training Quantization for JEPA-Style World Models" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="WM-Quant: Rollout-Aware Post-Training Quantization for JEPA-Style World Models 基础模型 University of South Carolina 2026-11-16 JEPA世界模型把连续latent递归输入预测器，量化误差不会像离散token一样重置。WM-Quant保留前三个encoder blocks的8-bit激活、浮点action/proprioception控制通路，并联合优化encoder范围和每个rollout step独立的predictor范围。已核方法位置：3.3–3.4, 4.1–4.2。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行四个小型encoder blocks、共享线性递归预测器、浮点action通路、整数zero-point的STE范围bank和30步joint calibration；不加载LeWM/DINO-WM，不运行图像编码或CEM，不实现Orin整数GEMM。  推理与系统效率 世界模型量化 多模态 世界建模：状态、生成与动作条件 为何不把action和state一起低比特量化？ action差异小却决定候选轨迹排序，和大幅latent共享范围可能直接被舍入抹掉。原方法把控制通路保持浮点。 教学例：state量级10而两动作相差0.001时，共用3-bit范围可能让两个动作编码相同。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-5d9c83ed6332d91a">为何不把action和state一起低比特量化？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Awm-quant">WM-Quant: Rollout-Aware Post-Training Quantization for JEPA-Style World Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University of South Carolina</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>action差异小却决定候选轨迹排序，和大幅latent共享范围可能直接被舍入抹掉。原方法把控制通路保持浮点。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：state量级10而两动作相差0.001时，共用3-bit范围可能让两个动作编码相同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21882v1">原论文</a> · <a href="../../../../foundation-models/2611.21882-wm-quant/">实现解读</a> · <a href="#qa-5d9c83ed6332d91a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:wm-quant" data-paper-title="WM-Quant: Rollout-Aware Post-Training Quantization for JEPA-Style World Models" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="WM-Quant: Rollout-Aware Post-Training Quantization for JEPA-Style World Models 基础模型 University of South Carolina 2026-11-16 JEPA世界模型把连续latent递归输入预测器，量化误差不会像离散token一样重置。WM-Quant保留前三个encoder blocks的8-bit激活、浮点action/proprioception控制通路，并联合优化encoder范围和每个rollout step独立的predictor范围。已核方法位置：3.3–3.4, 4.1–4.2。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行四个小型encoder blocks、共享线性递归预测器、浮点action通路、整数zero-point的STE范围bank和30步joint calibration；不加载LeWM/DINO-WM，不运行图像编码或CEM，不实现Orin整数GEMM。  推理与系统效率 世界模型量化 多模态 世界建模：状态、生成与动作条件 fake quant为何不能把连续low当作量化网格起点？ 原文Eq1–2先算整数zero-point z=round(-low/s)，再量化round(r/s)+z并以s(q-z)还原。low+s*round((r-low)/s)是不同格点，可能把零量化成非零；STE只改变反向近似，不能更改前向整数网格。 教学例：3-bit、low=-0.3、范围宽约0.693时，原式将0精确还原为0；错误low锚网格会得到约-0.0029365。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-867334ec711b3eb8">fake quant为何不能把连续low当作量化网格起点？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Awm-quant">WM-Quant: Rollout-Aware Post-Training Quantization for JEPA-Style World Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University of South Carolina</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>原文Eq1–2先算整数zero-point z=round(-low/s)，再量化round(r/s)+z并以s(q-z)还原。low+s*round((r-low)/s)是不同格点，可能把零量化成非零；STE只改变反向近似，不能更改前向整数网格。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：3-bit、low=-0.3、范围宽约0.693时，原式将0精确还原为0；错误low锚网格会得到约-0.0029365。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21882v1">原论文</a> · <a href="../../../../foundation-models/2611.21882-wm-quant/">实现解读</a> · <a href="#qa-867334ec711b3eb8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:wm-quant" data-paper-title="WM-Quant: Rollout-Aware Post-Training Quantization for JEPA-Style World Models" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="WM-Quant: Rollout-Aware Post-Training Quantization for JEPA-Style World Models 基础模型 University of South Carolina 2026-11-16 JEPA世界模型把连续latent递归输入预测器，量化误差不会像离散token一样重置。WM-Quant保留前三个encoder blocks的8-bit激活、浮点action/proprioception控制通路，并联合优化encoder范围和每个rollout step独立的predictor范围。已核方法位置：3.3–3.4, 4.1–4.2。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行四个小型encoder blocks、共享线性递归预测器、浮点action通路、整数zero-point的STE范围bank和30步joint calibration；不加载LeWM/DINO-WM，不运行图像编码或CEM，不实现Orin整数GEMM。  推理与系统效率 世界模型量化 多模态 世界建模：状态、生成与动作条件 每步独立范围是否意味着每步一套预测模型？ 不是。predictor权重、旋转和平滑共享，分开的只是少量激活范围；encoder范围也通过整个rollout联合更新。 教学例：同一W用在四步，四组min/max仍可不同。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-1a999cdb8498e3ef">每步独立范围是否意味着每步一套预测模型？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Awm-quant">WM-Quant: Rollout-Aware Post-Training Quantization for JEPA-Style World Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University of South Carolina</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。predictor权重、旋转和平滑共享，分开的只是少量激活范围；encoder范围也通过整个rollout联合更新。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一W用在四步，四组min/max仍可不同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21882v1">原论文</a> · <a href="../../../../foundation-models/2611.21882-wm-quant/">实现解读</a> · <a href="#qa-1a999cdb8498e3ef">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:wm-quant" data-paper-title="WM-Quant: Rollout-Aware Post-Training Quantization for JEPA-Style World Models" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="WM-Quant: Rollout-Aware Post-Training Quantization for JEPA-Style World Models 基础模型 University of South Carolina 2026-11-16 JEPA世界模型把连续latent递归输入预测器，量化误差不会像离散token一样重置。WM-Quant保留前三个encoder blocks的8-bit激活、浮点action/proprioception控制通路，并联合优化encoder范围和每个rollout step独立的predictor范围。已核方法位置：3.3–3.4, 4.1–4.2。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行四个小型encoder blocks、共享线性递归预测器、浮点action通路、整数zero-point的STE范围bank和30步joint calibration；不加载LeWM/DINO-WM，不运行图像编码或CEM，不实现Orin整数GEMM。  推理与系统效率 世界模型量化 多模态 世界建模：状态、生成与动作条件 本地calibration loss下降能说明PushT成功率提升吗？ 不能。本地使用小型连续递推检验范围梯度、控制保留与误差目标，没有视觉checkpoint、CEM或环境成功标签。 教学例：30步优化减少latent差值，只是L1机制诊断，不生成机械臂任务成功率。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-783768aca0759009">本地calibration loss下降能说明PushT成功率提升吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Awm-quant">WM-Quant: Rollout-Aware Post-Training Quantization for JEPA-Style World Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University of South Carolina</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。本地使用小型连续递推检验范围梯度、控制保留与误差目标，没有视觉checkpoint、CEM或环境成功标签。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：30步优化减少latent差值，只是L1机制诊断，不生成机械臂任务成功率。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21882v1">原论文</a> · <a href="../../../../foundation-models/2611.21882-wm-quant/">实现解读</a> · <a href="#qa-783768aca0759009">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="multimodal-models:pixvid" data-paper-title="Back to Pixels: Lifting Latent Video Diffusion into Pixel Space" data-learning-pending="false" data-level="basics" data-domain="multimodal-models" data-theme="multimodal-models" data-topic="multimodal-models/world-state-actions" data-search="Back to Pixels: Lifting Latent Video Diffusion into Pixel Space 多模态大模型 Roblox 2026-11-12 像素视频生成避免VAE潜空间约束，但直接从零学习大规模时空关系成本很高。PixVid保留预训练latent DiT知识，以离线像素—latent线性对齐融合进patch embedding、校准噪声时间步，再加入detailer处理高频细节。高分辨率patch初始化与新增上采样块控制token数量，不能只把VAE删掉就等同本文。§2—3 完整14B视频训练与评测成本过高，不复现（审查 DONE）；未实现组件、未生成视频、未运行GPU、没有指标产物；资料收录，未实现。完整14B视频训练与评测成本过高，不复现（审查 DONE）；普通flow loss或插值不是PixVid复现。本轮仅核对方法、首发时间、机构、代码发布状态与成本。未实现组件、未生成视频、未运行GPU、没有指标产物；不放入Evolve，不将原图或作者视频当本地结果。  视频生成与世界模型 像素空间视频扩散 多模态 世界建模：状态、生成与动作条件 PixVid在像素空间生成，是否意味着不使用预训练latent模型知识？ 不是。它迁移预训练latent DiT，通过离线像素-latent对齐和时间步校准保留知识，再新增detailer。像素输出空间与是否从零训练是两件事。 教学例：继承DiT权重但替换输入patch映射和输出detailer，仍属于利用latent预训练，不是随机初始化全模型。 2026-11-15">
 <p class="ar-learning-card__domain"><a href="./">多模态 / 世界建模：状态、生成与动作条件</a></p>
 <span id="paper-multimodal-models-pixvid-b6dfb4a6" class="ar-learning-paper-anchor"></span>

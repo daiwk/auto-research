@@ -1,0 +1,104 @@
+{
+  "schema_version": 2,
+  "method": "infuseloop",
+  "manifest_ref": "foundation-models:infuseloop",
+  "dataset": {
+    "id": "synthetic:nov18-latest-infuseloop-mechanism-v1",
+    "kind": "explicit_mechanism_or_protocol_fixtures",
+    "revision": "sha256:78ef29d122983b80d2c3654b949ef6ade7e341d4963515ad02afe053be691f3e",
+    "public_capability_benchmark": false,
+    "source": "Seeded synthetic operator tensors; no pretrained model or capability dataset"
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "output_norm": 13.509668350219727
+      },
+      "checks": {
+        "first_loop_unchanged": true,
+        "document_boundary_masked": true,
+        "last_trajectory_has_own_source": true,
+        "learned_query_receives_gradient": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "output_norm": 14.093362808227539
+      },
+      "checks": {
+        "first_loop_unchanged": true,
+        "document_boundary_masked": true,
+        "last_trajectory_has_own_source": true,
+        "learned_query_receives_gradient": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "output_norm": 13.664933204650879
+      },
+      "checks": {
+        "first_loop_unchanged": true,
+        "document_boundary_masked": true,
+        "last_trajectory_has_own_source": true,
+        "learned_query_receives_gradient": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "output_norm": 13.755988121032715
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Bounded defining-operator arithmetic and negative controls, not complete model or benchmark capability"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "66cda00810da75bb8e3daa789c8d29b5b71b851d",
+    "source_state": "uncommitted working tree with exact executed-source fingerprints",
+    "accelerator": "CPU",
+    "artifact_path": "docs/foundation-models/2611.22426-infuseloop/metrics/component-cpu-seeds42-44.json",
+    "executed_source_sha256": {
+      "src/auto_research/foundation_models/infuseloop.py": "78ef29d122983b80d2c3654b949ef6ade7e341d4963515ad02afe053be691f3e"
+    }
+  }
+}

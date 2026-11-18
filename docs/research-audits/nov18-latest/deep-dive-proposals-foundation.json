@@ -1,0 +1,774 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-18",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "foundation-models:vishead-spec",
+      "target_card": "multimodal-models/alignment-interfaces",
+      "source_revisions": {
+        "foundation-models:vishead-spec": "1e4742c050707afde72ce396d161b5ad5e8b2a374fa26981389c0f98f33a8fe9",
+        "foundation-models:unbundling-vision": "54272bc45b34a3b748db3a9602751fa76b0ea0db090b46fbd0eabcad1208af92"
+      },
+      "comparison": {
+        "position": "块状 drafter 的视觉注意力并非每层每头都同等重要。本文先在隔离校准集选择层，再选择少量 KV heads；仅目标层25/33的图像特征进入图像行，文本取1/9/17/25/33。非选中头仍看文本与块内位置，而不是被整个关闭。选择后固定路由并重新训练，不按测试样本动态选择。",
+        "tradeoff": "Unbundling改变视觉专属容量放置；VisHead-Spec改变drafter的直接图像读取位置。二者都不能用“删除视觉模块”概括，且路由attention可见性不同于vision-only投影的token门控。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "VisHead-Spec：少数 KV heads 读取图像，全部 heads 保留文本",
+        "body": "Unbundling改变视觉专属容量放置；VisHead-Spec改变drafter的直接图像读取位置。二者都不能用“删除视觉模块”概括，且路由attention可见性不同于vision-only投影的token门控。 GQA 的一个 KV head 映射到整组 query heads。loss 按草稿偏移 exp(-d/4) 归一化加权；confidence 的监督是分布重叠概率，不是 argmax 一致的硬标签。块内双向可见性和 anchor 前上下文由独立 visibility 输入保留。",
+        "papers": [
+          "foundation-models:vishead-spec",
+          "foundation-models:unbundling-vision"
+        ]
+      },
+      "question": {
+        "id": "nov18-vishead-spec",
+        "question": "这与Unbundling的vision-only mask有什么区别？",
+        "answer": "VisHead-Spec限制特定头读取图像行；Unbundling门控额外QKVO/FFN容量，仍是联合attention。二者作用对象不同。",
+        "example": "一个文本query没有额外视觉投影，仍可能读取图像KV；这不是图像行被屏蔽。",
+        "papers": [
+          "foundation-models:vishead-spec",
+          "foundation-models:unbundling-vision"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "foundation-models:vishead-spec",
+          "foundation-models:unbundling-vision"
+        ],
+        "summary": "Unbundling改变视觉专属容量放置；VisHead-Spec改变drafter的直接图像读取位置。二者都不能用“删除视觉模块”概括，且路由attention可见性不同于vision-only投影的token门控。 本地边界与完整高成本不复现分别记录。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Direct visual access is concentrated in selected drafter KV heads. Layer and head choices are calibrated offline, then fixed throughout finetuning and serving. Image rows use target layers25/33; text rows use1/9/17/25/33. Other heads still see text and within-block context rather than being disabled.",
+          "tradeoff": "Unbundling changes dedicated visual capacity placement; VisHead-Spec changes where a drafter directly reads images. Attention visibility is not the same intervention as gating vision-only projections."
+        },
+        "analysis": {
+          "title": "VisHead-Spec: sparse direct visual access, shared text context",
+          "body": "Unbundling changes dedicated visual capacity placement; VisHead-Spec changes where a drafter directly reads images. Attention visibility is not the same intervention as gating vision-only projections. Routing follows the physical KV head to its entire GQA query group. Draft-position weights are normalized exp(-d/4). Confidence predicts detached distribution-overlap acceptance, not hard argmax agreement. The supplied base visibility preserves pre-anchor context and bidirectional block access."
+        },
+        "question": {
+          "question": "How does this differ from Unbundling visual masks?",
+          "answer": "VisHead-Spec restricts image-row visibility by head. Unbundling gates additional QKVO/FFN capacity while retaining joint attention.",
+          "example": "A text query without an extra visual projection can still read image KV."
+        },
+        "update": "Unbundling changes dedicated visual capacity placement; VisHead-Spec changes where a drafter directly reads images. Attention visibility is not the same intervention as gating vision-only projections. Local boundaries and high-cost non-reproduction are recorded separately."
+      }
+    },
+    {
+      "paper": "foundation-models:spool",
+      "target_card": "foundation-models/compression-and-cache",
+      "source_revisions": {
+        "foundation-models:spool": "e1973cc17fa472fb3e50fc8b84d171d091b9814f2be479f2555760e6d4b6f092",
+        "foundation-models:drop-kv": "ae63dc1bfe00cb27d7b8d214da72e1a19f6d0eb1e68c9d17730c605428f6eef3"
+      },
+      "comparison": {
+        "position": "GDN的key/value/gates只依赖已记录的层输入，因此状态更新对旧状态是仿射的。每帧缓存一个变换，以非交换的时间顺序组成segment tree；窗口到期时从prefix anchor重放保留摘要，而非重跑所有视频token。",
+        "tradeoff": "DropKV直接挑选attention KV驱逐项，Spool处理递归共享状态的到期重建。后者的固定层输入精确性不能推导为保留视频内容的全网络精确性。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "Spool：用仿射摘要维护混合 VLM 的滑动窗口",
+        "body": "DropKV直接挑选attention KV驱逐项，Spool处理递归共享状态的到期重建。后者的固定层输入精确性不能推导为保留视频内容的全网络精确性。 摘要存D=A-I避免BF16把接近单位矩阵的小变化舍入掉；合并顺序不可交换。逐层、固定记录输入下精确，不等于整个多层网络重新处理剩余帧，因为高层缓存输入可能仍含已到期帧的影响。",
+        "papers": [
+          "foundation-models:spool",
+          "foundation-models:drop-kv"
+        ]
+      },
+      "question": {
+        "id": "nov18-spool",
+        "question": "Spool的精确与DropKV的近似驱逐有何不同？",
+        "answer": "Spool精确重放固定记录层输入的状态变换；DropKV估计删除KV对attention输出的扰动。Spool也不保证整个多层网络重算等价。",
+        "example": "高层某帧特征已受旧帧影响，删除低层旧帧摘要不会改写那份缓存特征。",
+        "papers": [
+          "foundation-models:spool",
+          "foundation-models:drop-kv"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "foundation-models:spool",
+          "foundation-models:drop-kv"
+        ],
+        "summary": "DropKV直接挑选attention KV驱逐项，Spool处理递归共享状态的到期重建。后者的固定层输入精确性不能推导为保留视频内容的全网络精确性。 本地边界与完整高成本不复现分别记录。"
+      },
+      "english": {
+        "comparison": {
+          "position": "With recorded layer inputs fixed, GDN keys, values and gates make each update affine in prior state. Per-frame transitions compose chronologically in a segment tree. Expiry rebuilds state from the prefix anchor without replaying retained tokens through the backbone.",
+          "tradeoff": "DropKV selects attention KV entries for eviction. Spool reconstructs shared recurrent state after expiry. Layerwise recorded-input exactness does not establish full-network equivalence."
+        },
+        "analysis": {
+          "title": "Spool: affine summaries for sliding recurrent windows",
+          "body": "DropKV selects attention KV entries for eviction. Spool reconstructs shared recurrent state after expiry. Layerwise recorded-input exactness does not establish full-network equivalence. Storing D=A-I protects small deviations from identity in low precision. Composition is noncommutative. Exactness holds for recorded inputs within a layer, not whole-network recomputation: higher-layer cached features can retain expired-frame influence."
+        },
+        "question": {
+          "question": "How does its exactness differ from KV eviction?",
+          "answer": "It exactly replays recorded layer transitions; DropKV estimates attention-output perturbations. Neither statement establishes full-backbone replay equivalence.",
+          "example": "A cached higher-layer feature can already encode an expired frame."
+        },
+        "update": "DropKV selects attention KV entries for eviction. Spool reconstructs shared recurrent state after expiry. Layerwise recorded-input exactness does not establish full-network equivalence. Local boundaries and high-cost non-reproduction are recorded separately."
+      }
+    },
+    {
+      "paper": "foundation-models:infuseloop",
+      "target_card": "foundation-models/context-and-state",
+      "source_revisions": {
+        "foundation-models:infuseloop": "2cd1aa9a88436942cee2079e916e08dd47334965e543ba9ae37d21e7fe6d93e8",
+        "foundation-models:anchor-kv": "5a703a2971010298f912f7228fdf5b41e8fb5603169bd8890a9fb2163f949422"
+      },
+      "comparison": {
+        "position": "并行loop在同一执行周期同时推进多个预测轨迹。InfuseLoop让第r轮聚合上一周期已完成、但来自更浅loop的状态，而非仅传递本轨迹前一轮。未来轨迹位置不等于未来未生成token，合法性由执行周期决定。",
+        "tradeoff": "Anchor跨层共享外部TTT状态并学习read-map，InfuseLoop共享的是可用计算图中的轨迹latent；不能把任意跨层平均或持久缓存叫作InfuseLoop。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "InfuseLoop：在上一执行周期聚合跨轨迹潜状态",
+        "body": "Anchor跨层共享外部TTT状态并学习read-map，InfuseLoop共享的是可用计算图中的轨迹latent；不能把任意跨层平均或持久缓存叫作InfuseLoop。 keys和values都用无参数RMS归一化，文档边界在softmax前屏蔽。所有新状态读同一旧缓冲，完成整周期后再commit；聚合替换原跨loop输入，不能重复加上旧状态。",
+        "papers": [
+          "foundation-models:infuseloop",
+          "foundation-models:anchor-kv"
+        ]
+      },
+      "question": {
+        "id": "nov18-infuseloop",
+        "question": "与Anchor跨层共享状态有什么差别？",
+        "answer": "Anchor读外部TTT记忆并结合局部attention；InfuseLoop依执行周期聚合多个轨迹的hidden states，状态语义和写入时机都不同。",
+        "example": "把一份KV矩阵广播给所有loop，没有实现所需的跨轨迹索引。",
+        "papers": [
+          "foundation-models:infuseloop",
+          "foundation-models:anchor-kv"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "foundation-models:infuseloop",
+          "foundation-models:anchor-kv"
+        ],
+        "summary": "Anchor跨层共享外部TTT状态并学习read-map，InfuseLoop共享的是可用计算图中的轨迹latent；不能把任意跨层平均或持久缓存叫作InfuseLoop。 本地边界与完整高成本不复现分别记录。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Parallel loops advance several prediction trajectories in one execution cycle. Loop r aggregates completed previous-cycle states from shallower loops rather than only its own preceding state. A later trajectory position is not an unseen future token; legality follows the execution schedule.",
+          "tradeoff": "Anchor shares an external TTT state with learned read maps. InfuseLoop aggregates trajectory latents admitted by a parallel execution graph; arbitrary cross-layer averaging is not equivalent."
+        },
+        "analysis": {
+          "title": "InfuseLoop: causal cross-trajectory latent injection",
+          "body": "Anchor shares an external TTT state with learned read maps. InfuseLoop aggregates trajectory latents admitted by a parallel execution graph; arbitrary cross-layer averaging is not equivalent. Both keys and values use parameter-free RMS normalization. Document boundaries are masked before softmax. Every new state reads the same old buffer, with commit only after the cycle. The aggregate replaces the prior cross-loop input rather than being added twice."
+        },
+        "question": {
+          "question": "How does this differ from Anchor?",
+          "answer": "Anchor reads external TTT memory alongside local attention. InfuseLoop aggregates trajectory hidden states according to cycle availability.",
+          "example": "Broadcasting one KV matrix across loops does not implement cross-trajectory indexing."
+        },
+        "update": "Anchor shares an external TTT state with learned read maps. InfuseLoop aggregates trajectory latents admitted by a parallel execution graph; arbitrary cross-layer averaging is not equivalent. Local boundaries and high-cost non-reproduction are recorded separately."
+      }
+    },
+    {
+      "paper": "foundation-models:echomoe",
+      "target_card": "foundation-models/compression-and-cache",
+      "source_revisions": {
+        "foundation-models:echomoe": "a939116286b19789b759c661c55b55fd02d367f882fe538d9d11251e867f42b9",
+        "foundation-models:moezip": "32b4eced778461faca1ffabd18350744af6e57607401cb6549fec559819415f1"
+      },
+      "comparison": {
+        "position": "每组MoE层先广播参考z，其余层只发送x-a⊙z的压缩code；router仍读取完整x。专家将reference gain和dispatch decoder折入gate/up权重，再将combine compressor折入down权重，避免完整重建或输出物化。",
+        "tradeoff": "MoEZip保护路由敏感KV token；EchoMoE压缩专家并行激活通信，两者不是同一缓存，也不能共享“压缩率”作为吞吐对照。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "EchoMoE：复用跨层参考，只通信压缩变化量",
+        "body": "MoEZip保护路由敏感KV token；EchoMoE压缩专家并行激活通信，两者不是同一缓存，也不能共享“压缩率”作为吞吐对照。 相对于压缩后模型，折叠与未折叠线性代数等价；不等于压缩模型无损于原backbone。原文还以projection-weighted重建初始化，再执行KL蒸馏和少量next-token训练。通信公式是张量/路由字节计算，不是测得RDMA流量。",
+        "papers": [
+          "foundation-models:echomoe",
+          "foundation-models:moezip"
+        ]
+      },
+      "question": {
+        "id": "nov18-echomoe",
+        "question": "与MoEZip的routing-aware压缩能直接比压缩率吗？",
+        "answer": "不能。MoEZip选择attention KV行，EchoMoE发送低维专家激活，分母、额外参考成本和质量误差都不同。",
+        "example": "少存50%KV不等于少发50%RDMA字节。",
+        "papers": [
+          "foundation-models:echomoe",
+          "foundation-models:moezip"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "foundation-models:echomoe",
+          "foundation-models:moezip"
+        ],
+        "summary": "MoEZip保护路由敏感KV token；EchoMoE压缩专家并行激活通信，两者不是同一缓存，也不能共享“压缩率”作为吞吐对照。 本地边界与完整高成本不复现分别记录。"
+      },
+      "english": {
+        "comparison": {
+          "position": "A group first broadcasts reference z. Later layers send a compressed code for x-a⊙z, while routing still reads full x. Folding absorbs reference reconstruction and dispatch decoding into gate/up weights and combine compression into down weights.",
+          "tradeoff": "MoEZip protects routing-sensitive KV entries. EchoMoE compresses expert-parallel activation communication. Their different storage/traffic targets make compression ratios incomparable as throughput evidence."
+        },
+        "analysis": {
+          "title": "EchoMoE: compressed changes around cached reference states",
+          "body": "MoEZip protects routing-sensitive KV entries. EchoMoE compresses expert-parallel activation communication. Their different storage/traffic targets make compression ratios incomparable as throughput evidence. Folding is algebraically equivalent to the compressed model, not lossless recovery of the original backbone. The paper also uses projection-weighted initialization followed by KL distillation and next-token adaptation. Analytic bytes are not measured RDMA traffic."
+        },
+        "question": {
+          "question": "Can compression ratios be compared directly with MoEZip?",
+          "answer": "No. KV row retention and expert-activation traffic have different denominators, reference overhead and quality errors.",
+          "example": "Saving50% of KV storage does not imply saving50% of RDMA bytes."
+        },
+        "update": "MoEZip protects routing-sensitive KV entries. EchoMoE compresses expert-parallel activation communication. Their different storage/traffic targets make compression ratios incomparable as throughput evidence. Local boundaries and high-cost non-reproduction are recorded separately."
+      }
+    },
+    {
+      "paper": "foundation-models:wm-quant",
+      "target_card": "multimodal-models/world-state-actions",
+      "source_revisions": {
+        "foundation-models:wm-quant": "106dd4904b7520a33153b663b7072e0ee409384c6f56d073c3fa1edaf38df61e",
+        "foundation-models:lewam": "5e991ab90d6400d319dbccbf83e7ff06f2749baa45a5e10a79ea26b235f1ed45"
+      },
+      "comparison": {
+        "position": "JEPA世界模型把连续latent递归输入预测器，量化误差不会像离散token一样重置。WM-Quant保留前三个encoder blocks的8-bit激活、浮点action/proprioception控制通路，并联合优化encoder范围和每个rollout step独立的predictor范围。",
+        "tradeoff": "LeWAM联合训练视觉encoder、latent动力学与action flow，再对策略候选做潜空间规划；WM-Quant研究连续rollout中的量化误差与范围校准。注意新论文实验对象是LeWM/DINO-WM，不是LeWAM，未声称把WM-Quant接入了LeWAM训练或规划。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "先学习可控制的动力学，再讨论数值精度如何改变rollout",
+        "body": "实读LeWAM说明其action flow、latent MSE和SIGReg联合训练，规划只更新动作，选择用未惩罚goal cost；本地训练轨迹目标仍是非holdout诊断。WM-Quant冻结基础模型并联合校准encoder/逐步predictor范围，控制通路保留浮点，且必须遵循整数zero-point Eq1–2。两篇都依赖动作条件rollout，但训练动力学、规划搜索与PTQ校准不能互相补证；本轮小张量校准没有执行LeWAM量化或机器人成功率比较。",
+        "papers": [
+          "foundation-models:wm-quant",
+          "foundation-models:lewam"
+        ]
+      },
+      "question": {
+        "id": "nov18-wm-quant",
+        "question": "WM-Quant与LeWAM都用JEPA rollout，是否说明本轮已经量化验证了LeWAM？",
+        "answer": "不是。WM-Quant论文评测LeWM/DINO-WM，LeWAM是另一套联合世界—动作模型。本地仅验证量化格点、跨步范围目标与控制保留，没有接入LeWAM模型、CEM或机器人环境。",
+        "example": "教学例：LeWAM的三臂机器人结果不能替代WM-Quant的低比特规划评测；一个校准loss也不能证明LeWAM规划能力。",
+        "papers": [
+          "foundation-models:wm-quant",
+          "foundation-models:lewam"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "foundation-models:wm-quant",
+          "foundation-models:lewam"
+        ],
+        "summary": "LeWAM联合训练视觉encoder、latent动力学与action flow，再对策略候选做潜空间规划；WM-Quant研究连续rollout中的量化误差与范围校准。注意新论文实验对象是LeWM/DINO-WM，不是LeWAM，未声称把WM-Quant接入了LeWAM训练或规划。 本次实读已有同主题代表README，按真实研究轴比较，不借比较对象改变算法或宣称跨论文效果复现。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Continuous JEPA latents repeatedly enter the predictor, so quantization errors propagate rather than resetting through discrete tokens. WM-Quant keeps the first three encoder activation blocks at8bits, control inputs in floating point, and jointly calibrates encoder and step-specific predictor ranges.",
+          "tradeoff": "LeWAM jointly trains a visual encoder, latent dynamics and action flow, then refines policy candidates in latent space. WM-Quant studies quantization error and range calibration across continuous rollouts. Its evaluated models are LeWM/DINO-WM, not LeWAM; no local LeWAM quantization integration is claimed."
+        },
+        "analysis": {
+          "title": "Learning controllable dynamics and preserving numerical rollouts are different axes",
+          "body": "The reviewed LeWAM README specifies joint action-flow, latent-MSE and SIGReg training; planning updates actions only and selects by unpenalized goal cost. Its training-trajectory goals remain non-holdout diagnostics. WM-Quant instead freezes the backbone and calibrates encoder/step-specific predictor ranges, retains floating controls and uses the integer-zero-point lattice in Equations1–2. Shared action-conditioned rollouts do not make dynamics training, planning and PTQ calibration interchangeable evidence. The tiny local calibrator does not quantize LeWAM or compare robot success."
+        },
+        "question": {
+          "question": "Do shared JEPA rollouts mean LeWAM was quantized and validated here?",
+          "answer": "No. WM-Quant evaluates LeWM/DINO-WM; LeWAM is a different joint world-action model. Local checks cover the quantization lattice, multi-step range objective and control preservation, without LeWAM integration or robot evaluation.",
+          "example": "LeWAM three-arm robot results cannot substitute for low-bit WM-Quant planning, and one calibration loss does not establish LeWAM planning capability."
+        },
+        "update": "LeWAM jointly trains a visual encoder, latent dynamics and action flow, then refines policy candidates in latent space. WM-Quant studies quantization error and range calibration across continuous rollouts. Its evaluated models are LeWM/DINO-WM, not LeWAM; no local LeWAM quantization integration is claimed. The existing same-topic representative README was read; the comparison does not change the algorithm or claim cross-paper reproduction results."
+      }
+    },
+    {
+      "paper": "foundation-models:fm-mamba",
+      "target_card": "foundation-models/context-and-state",
+      "source_revisions": {
+        "foundation-models:fm-mamba": "47a758518f743965583000652d32148858f6f69728c230c13767f4b21917faf3",
+        "foundation-models:mamba": "cc8e64d103688cf6f1eb766728f173a4c9af31eca88def398193334b5ab90220"
+      },
+      "comparison": {
+        "position": "原生2D FM状态同时接收上、左与左上三个前驱，不通过展平扫描把二维关系退化为一条链。两个输入相关步长分别控制两个轴；a0/(a1a2)决定是否需要给步长施加上界。",
+        "tradeoff": "Mamba的一维selective SSM让步长、B/C依赖当前token并配合因果卷积和门控；FM-Mamba原生二维递推同时读取上、左、左上三前驱，使用两个轴步长及ratio相关稳定约束。展平成一维Mamba不是FM-Mamba，Python参考一致也不等于融合scan或PSD提速。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "先比较状态依赖图，再比较状态空间复杂度",
+        "body": "实读Mamba README的递推是h_t=exp(Delta_t A)h_(t-1)+Delta_t B_t x_t，一条一维历史链支持selective scan；本地短预算WikiText负结果不代表原论文规模。FM-Mamba的两个轴指数交叉进入ZOH状态系数，并保留可能非零的对角前驱；同一反对角才能并行。其冻结系数逐位置稳定条件不构成任意时变场的全局证明。两者的输入依赖性相似，但拓扑、离散化和并行实现不同。",
+        "papers": [
+          "foundation-models:fm-mamba",
+          "foundation-models:mamba"
+        ]
+      },
+      "question": {
+        "id": "nov18-fm-mamba",
+        "question": "把图像展平后运行Mamba，为什么还不能叫FM-Mamba？",
+        "answer": "它改变了二维依赖图：FM-Mamba每个位置同时读取上、左、左上并使用两个轴步长和稳定投影，而展平scan只沿选定的一维顺序递推。",
+        "example": "教学例：左上脉冲可经显式对角前驱影响下一格；删去该项后即使仍称SSM，也不是同一递推。",
+        "papers": [
+          "foundation-models:fm-mamba",
+          "foundation-models:mamba"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "foundation-models:fm-mamba",
+          "foundation-models:mamba"
+        ],
+        "summary": "Mamba的一维selective SSM让步长、B/C依赖当前token并配合因果卷积和门控；FM-Mamba原生二维递推同时读取上、左、左上三前驱，使用两个轴步长及ratio相关稳定约束。展平成一维Mamba不是FM-Mamba，Python参考一致也不等于融合scan或PSD提速。 本次实读已有同主题代表README，按真实研究轴比较，不借比较对象改变算法或宣称跨论文效果复现。"
+      },
+      "english": {
+        "comparison": {
+          "position": "The native2D FM recurrence reads upper, left and diagonal predecessors instead of flattening the grid into a chain. Two input-dependent steps control the axes separately, with a0/(a1a2) determining whether bounded steps are necessary.",
+          "tradeoff": "Mamba makes one-dimensional SSM steps and B/C input dependent, with causal convolution and gating. FM-Mamba uses upper, left and diagonal predecessors, two axis steps and ratio-dependent stability constraints. Flattened Mamba is not native FM-Mamba, and Python reference parity does not establish fused-scan or PSD speedups."
+        },
+        "analysis": {
+          "title": "Compare state dependency graphs before complexity labels",
+          "body": "The Mamba README gives h_t=exp(Delta_t A)h_(t-1)+Delta_t B_t x_t on a one-dimensional chain and notes that its short-budget WikiText negative result does not represent paper scale. FM-Mamba cross-couples two axis steps in ZOH coefficients and retains the diagonal predecessor; cells on one anti-diagonal can run together. Its frozen-position stability condition is not a global theorem for arbitrary changing coefficient fields. Input dependence alone does not equalize their topology, discretization or parallel execution."
+        },
+        "question": {
+          "question": "Why is flattened-image Mamba not FM-Mamba?",
+          "answer": "It changes the dependency graph. Native FM-Mamba reads upper, left and diagonal predecessors using two axis steps and stability projection; a flattened scan follows one chosen chain.",
+          "example": "An upper-left impulse can reach the next diagonal cell through an explicit predecessor term; removing that term changes the recurrence."
+        },
+        "update": "Mamba makes one-dimensional SSM steps and B/C input dependent, with causal convolution and gating. FM-Mamba uses upper, left and diagonal predecessors, two axis steps and ratio-dependent stability constraints. Flattened Mamba is not native FM-Mamba, and Python reference parity does not establish fused-scan or PSD speedups. The existing same-topic representative README was read; the comparison does not change the algorithm or claim cross-paper reproduction results."
+      }
+    },
+    {
+      "paper": "foundation-models:lara-plus-plus",
+      "target_card": "foundation-models/training-budget",
+      "source_revisions": {
+        "foundation-models:lara-plus-plus": "8fdf31f0814b2a6d2df18592ab8aafa38710ec0dfdaf6fd1be9c166377192c65",
+        "foundation-models:lazyflash": "d8feab6aafa18c1b6952b2e3771eabc3cb4107fadc6d295fa59fbd9d1f9bb60a"
+      },
+      "comparison": {
+        "position": "本文重新核查核化attention的真实效率，并用确定性proposal均值代替随机采样、相似性聚类代替连续切块改善LARA质量。与复杂度口号不同，cluster数量随序列增长时k-center成本为二次；近softmax质量不等于比FlashAttention快。",
+        "tradeoff": "LazyFlash保持前向dense而稀疏反向；LARA++近似前向softmax并需要蒸馏适配。两者改变的计算与误差对象不同，不能都归纳成“线性attention更快”。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "LARA++：确定性proposal与相似性分组的核注意力",
+        "body": "LazyFlash保持前向dense而稀疏反向；LARA++近似前向softmax并需要蒸馏适配。两者改变的计算与误差对象不同，不能都归纳成“线性attention更快”。 本地固定作者commit的mis-opt路径。论文§7描述query-only和随机首中心，而公开源码用归一化Q+K联合特征、确定性首中心，CLS单独保留。这里明确执行源码变体，不把差异消除：proposal生成不反传，当前Q/K特征与V聚合仍可微。",
+        "papers": [
+          "foundation-models:lara-plus-plus",
+          "foundation-models:lazyflash"
+        ]
+      },
+      "question": {
+        "id": "nov18-lara-plus-plus",
+        "question": "论文和当前作者实现的聚类是否完全相同？",
+        "answer": "不完全。论文写query相似性与随机初始点，固定源码用归一化Q+K、确定性初始点并保留CLS。本地记录源码变体，不声称两者无差别。",
+        "example": "两个query相同但key不同的token，在joint特征里可能分到不同簇。",
+        "papers": [
+          "foundation-models:lara-plus-plus",
+          "foundation-models:lazyflash"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "foundation-models:lara-plus-plus",
+          "foundation-models:lazyflash"
+        ],
+        "summary": "LazyFlash保持前向dense而稀疏反向；LARA++近似前向softmax并需要蒸馏适配。两者改变的计算与误差对象不同，不能都归纳成“线性attention更快”。 本地边界与完整高成本不复现分别记录。"
+      },
+      "english": {
+        "comparison": {
+          "position": "The paper audits practical kernel-attention efficiency. Deterministic proposal means replace sampling, and similarity clusters replace contiguous chunks. When the number of clusters grows with sequence length, k-center costs are quadratic; near-softmax quality does not imply a FlashAttention speedup.",
+          "tradeoff": "LazyFlash keeps dense forward attention and sparsifies backward work. LARA++ approximates forward softmax and requires distillation. Their computation and error targets differ."
+        },
+        "analysis": {
+          "title": "LARA++: deterministic clustered proposals for kernel attention",
+          "body": "LazyFlash keeps dense forward attention and sparsifies backward work. LARA++ approximates forward softmax and requires distillation. Their computation and error targets differ. The local operator follows the pinned author mis-opt path. Section7 describes query-only clustering and a random initial center, whereas released code uses normalized joint Q+K features, deterministic initialization and a separate CLS proposal. This difference is explicit. Proposal construction is detached; Q/K features and value aggregation remain differentiable."
+        },
+        "question": {
+          "question": "Are paper and released clustering identical?",
+          "answer": "No. The paper describes query similarity and random initialization. Pinned code uses joint normalized Q+K, deterministic initialization and a separate CLS proposal.",
+          "example": "Tokens with identical queries but different keys can separate under joint features."
+        },
+        "update": "LazyFlash keeps dense forward attention and sparsifies backward work. LARA++ approximates forward softmax and requires distillation. Their computation and error targets differ. Local boundaries and high-cost non-reproduction are recorded separately."
+      }
+    },
+    {
+      "paper": "foundation-models:gaugerope",
+      "target_card": "foundation-models/context-and-state",
+      "source_revisions": {
+        "foundation-models:gaugerope": "80e414217915904b68baaf2cd6462409e4495af1670f3361b457a31f1cbaa7c9",
+        "foundation-models:anchor-kv": "5a703a2971010298f912f7228fdf5b41e8fb5603169bd8890a9fb2163f949422"
+      },
+      "comparison": {
+        "position": "任意低秩K在潜空间通常不保留RoPE作用，需要逐历史token重建。GaugeRoPE只在相同频率块内拟合复数carrier，另用能量平衡后的joint PCA存residual K与V；query吸收decoder，聚合后才解码输出。",
+        "tradeoff": "Anchor让多个层共享TTT状态并学习read-map；GaugeRoPE保留每层token历史但改变其坐标/低秩表示。跨层共享和每token潜缓存压缩不是同一个操作。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "GaugeRoPE：可执行RoPE carrier与残余KV双支缓存",
+        "body": "Anchor让多个层共享TTT状态并学习read-map；GaugeRoPE保留每层token历史但改变其坐标/低秩表示。跨层共享和每token潜缓存压缩不是同一个操作。 carrier在保留子空间中精确保持RoPE，但RKV把残余位置相关分数近似为不旋转的校正。因此整体attention一般仍是近似；不能因为carrier兼容就宣称压缩无损。PCA只用显式校准输入，不借测试答案选秩。",
+        "papers": [
+          "foundation-models:gaugerope",
+          "foundation-models:anchor-kv"
+        ]
+      },
+      "question": {
+        "id": "nov18-gaugerope",
+        "question": "GaugeRoPE与Anchor都减少状态，有何不同？",
+        "answer": "前者减少每token每层的坐标维数并保留频率结构；后者跨层共用递归状态，依赖外部writer和reader映射。",
+        "example": "同样减少一半字节，不代表历史信息或读写语义相同。",
+        "papers": [
+          "foundation-models:gaugerope",
+          "foundation-models:anchor-kv"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "foundation-models:gaugerope",
+          "foundation-models:anchor-kv"
+        ],
+        "summary": "Anchor让多个层共享TTT状态并学习read-map；GaugeRoPE保留每层token历史但改变其坐标/低秩表示。跨层共享和每token潜缓存压缩不是同一个操作。 本地边界与完整高成本不复现分别记录。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Generic low-rank keys need not preserve rotary action and may require historical native reconstruction. GaugeRoPE fits complex carriers within equal-frequency blocks and jointly encodes residual keys/values with energy-balanced PCA. Decoder maps move to queries and post-aggregation output.",
+          "tradeoff": "Anchor shares TTT state across layers with learned read maps. GaugeRoPE retains per-layer token history in low-rank compatible coordinates. Cross-layer sharing and per-token latent compression are different interventions."
+        },
+        "analysis": {
+          "title": "GaugeRoPE: executable rotary carriers plus residual KV codes",
+          "body": "Anchor shares TTT state across layers with learned read maps. GaugeRoPE retains per-layer token history in low-rank compatible coordinates. Cross-layer sharing and per-token latent compression are different interventions. The retained carrier executes RoPE exactly, but RKV replaces residual position-dependent scores with an unrotated correction. Overall attention remains approximate. PCA uses explicit calibration inputs and does not choose ranks from test answers."
+        },
+        "question": {
+          "question": "How does it differ from Anchor state sharing?",
+          "answer": "It reduces per-token, per-layer dimensions with frequency structure. Anchor shares recurrent state across layers and needs writer/read-map semantics.",
+          "example": "Equal byte savings do not imply equal information or update behavior."
+        },
+        "update": "Anchor shares TTT state across layers with learned read maps. GaugeRoPE retains per-layer token history in low-rank compatible coordinates. Cross-layer sharing and per-token latent compression are different interventions. Local boundaries and high-cost non-reproduction are recorded separately."
+      }
+    },
+    {
+      "paper": "foundation-models:risa",
+      "target_card": "foundation-models/compression-and-cache",
+      "source_revisions": {
+        "foundation-models:risa": "41f070c246962e44f9ecd1b98c225126181fa84d444467ac666cb4ccb25334f4",
+        "foundation-models:drop-kv": "ae63dc1bfe00cb27d7b8d214da72e1a19f6d0eb1e68c9d17730c605428f6eef3"
+      },
+      "comparison": {
+        "position": "RISA区分长期HOT/COLD存储优先级和当前denoising block的短期read plan。未读取页面不被删除，后续query可以恢复COLD。seed根据page min/max key摘要评分，保护初始/近期HOT并加入mandatory近期/current行。",
+        "tradeoff": "DropKV实际驱逐KV以缩减存储；RISA主要限制每步读取但保留COLD以便恢复。读得少与存得少是不同预算，不能互换显存/延迟结论。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "RISA：保留可恢复KV存储，只缓存稀疏读取地址",
+        "body": "DropKV实际驱逐KV以缩减存储；RISA主要限制每步读取但保留COLD以便恢复。读得少与存得少是不同预算，不能互换显存/延迟结论。 max在两个完整dot之后进行，不是QUEST的逐坐标上界。后续步只重用地址，用新query/current KV重新计算同一个softmax；不能把history和current分别归一化后平均。精确存储不等于dense-equivalent解码。",
+        "papers": [
+          "foundation-models:risa",
+          "foundation-models:drop-kv"
+        ]
+      },
+      "question": {
+        "id": "nov18-risa",
+        "question": "与DropKV的驱逐是同一预算吗？",
+        "answer": "不是。DropKV删除存储条目，RISA保留未选COLD并减少循环读取；RISA的HOT cap还不包含protected、COLD和mandatory部分。",
+        "example": "512页cap并不意味着总共只读取或保存512页。",
+        "papers": [
+          "foundation-models:risa",
+          "foundation-models:drop-kv"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "foundation-models:risa",
+          "foundation-models:drop-kv"
+        ],
+        "summary": "DropKV实际驱逐KV以缩减存储；RISA主要限制每步读取但保留COLD以便恢复。读得少与存得少是不同预算，不能互换显存/延迟结论。 本地边界与完整高成本不复现分别记录。"
+      },
+      "english": {
+        "comparison": {
+          "position": "RISA separates persistent HOT/COLD storage priority from a temporary denoising-block read plan. Unread pages remain stored and can be recovered later. Seed queries score page extrema while protecting initial/recent HOT pages and mandatory recent/current rows.",
+          "tradeoff": "DropKV evicts KV to reduce storage. RISA limits recurring reads while retaining COLD for recovery. Read and storage budgets cannot be exchanged as memory/latency conclusions."
+        },
+        "analysis": {
+          "title": "RISA: recoverable storage and reusable sparse addresses",
+          "body": "DropKV evicts KV to reduce storage. RISA limits recurring reads while retaining COLD for recovery. Read and storage budgets cannot be exchanged as memory/latency conclusions. The maximum is taken after two complete dot products, not the coordinate-wise QUEST bound. Later steps reuse addresses, not attention outputs, and recompute one softmax with current queries/KV. Exact storage does not imply dense-equivalent decoding."
+        },
+        "question": {
+          "question": "Is its budget identical to DropKV eviction?",
+          "answer": "No. RISA retains unselected COLD pages. Its eligible-HOT cap excludes protected, recovered-COLD and mandatory rows.",
+          "example": "A512-page eligible cap does not bound total reads or total storage to512pages."
+        },
+        "update": "DropKV evicts KV to reduce storage. RISA limits recurring reads while retaining COLD for recovery. Read and storage budgets cannot be exchanged as memory/latency conclusions. Local boundaries and high-cost non-reproduction are recorded separately."
+      }
+    },
+    {
+      "paper": "foundation-models:cascadejepa",
+      "target_card": "multimodal-models/alignment-interfaces",
+      "source_revisions": {
+        "foundation-models:cascadejepa": "a15fe54dfa63a05a308f4da8c3b7c413750e9799c91ff58bdf6c02ad089b27bb",
+        "foundation-models:duojepa": "a9014f50664d09ff5dae4989e99ffb5db0b9ce66818b60edce48fc5cc68fb6e5"
+      },
+      "comparison": {
+        "position": "I-JEPA的高层语义改善不保证几何对应更好。CascadeJEPA对同图两个crop共享context和EMA target；第一crop把masked patch embedding置零后加位置、保留完整网格，第二crop只编码visible patches，再通过第一阶段full-grid KV引导预测。",
+        "tradeoff": "DuoJEPA在对方模态own space做可微target translation；CascadeJEPA同图两crop并使用stop-gradient EMA target。都叫JEPA不代表目标是否detach相同。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "CascadeJEPA：用完整空间网格单向耦合两级预测",
+        "body": "DuoJEPA在对方模态own space做可微target translation；CascadeJEPA同图两crop并使用stop-gradient EMA target。都叫JEPA不代表目标是否detach相同。 空间耦合单向从第一阶段到第二阶段，两阶段target stop-gradient并由EMA更新。两个crop的位置坐标分别定义。full-grid不是输入未mask图像，也不是先加位置再把masked位置一起清零。",
+        "papers": [
+          "foundation-models:cascadejepa",
+          "foundation-models:duojepa"
+        ]
+      },
+      "question": {
+        "id": "nov18-cascadejepa",
+        "question": "能沿用DuoJEPA的target双侧梯度吗？",
+        "answer": "不能。CascadeJEPA target是stop-gradient EMA；DuoJEPA的目标centroid在主方法里反传，照搬会改写训练机制。",
+        "example": "target参数应无grad，但每次EMA能跟随context更新。",
+        "papers": [
+          "foundation-models:cascadejepa",
+          "foundation-models:duojepa"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "foundation-models:cascadejepa",
+          "foundation-models:duojepa"
+        ],
+        "summary": "DuoJEPA在对方模态own space做可微target translation；CascadeJEPA同图两crop并使用stop-gradient EMA target。都叫JEPA不代表目标是否detach相同。 本地边界与完整高成本不复现分别记录。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Better high-level semantics in I-JEPA need not improve geometric correspondence. Two crops share context and EMA target encoders. Stage1zeros masked patch embeddings before adding positions, retaining a full grid; stage2encodes visible patches and predicts with stage1full-grid KV.",
+          "tradeoff": "DuoJEPA translates into the other modality space with differentiable targets. CascadeJEPA uses two image crops and stopped EMA targets. Their target-gradient contracts differ despite the JEPA name."
+        },
+        "analysis": {
+          "title": "CascadeJEPA: full-grid spatial context for two-stage prediction",
+          "body": "DuoJEPA translates into the other modality space with differentiable targets. CascadeJEPA uses two image crops and stopped EMA targets. Their target-gradient contracts differ despite the JEPA name. Spatial coupling is unidirectional from stage1to stage2. Targets are stop-gradient and updated by EMA; each crop has independent position coordinates. Full-grid encoding does not expose unmasked target pixels or erase positional information."
+        },
+        "question": {
+          "question": "Can DuoJEPA target gradients be reused unchanged?",
+          "answer": "No. CascadeJEPA uses stopped EMA targets; DuoJEPA differentiates its target centroids. Copying that behavior changes the method.",
+          "example": "Target parameters should have no gradient but move through EMA."
+        },
+        "update": "DuoJEPA translates into the other modality space with differentiable targets. CascadeJEPA uses two image crops and stopped EMA targets. Their target-gradient contracts differ despite the JEPA name. Local boundaries and high-cost non-reproduction are recorded separately."
+      }
+    },
+    {
+      "paper": "multimodal-models:dwd",
+      "target_card": "multimodal-models/world-state-actions",
+      "source_revisions": {
+        "multimodal-models:dwd": "1e24935b79acdb628e2bbf36d868874d47245fa4ee5abe5e23f2c3642cab41d5",
+        "multimodal-models:pixvid": "af14fd84ecf954028202fd5cf61ef0145afa848db73a106afc7f41fd4ff8a8ae"
+      },
+      "comparison": {
+        "position": "DWD在预训练DiT最后隐状态上并联线性pixel head，原denoising head继续驱动采样，只有最后一个非零time step才由pixel head输出图像/视频。通过分离pixel质量目标与trajectory anchoring，避免让同一输出承担冲突目标。",
+        "tradeoff": "PixVid迁移latent DiT到pixel输入/生成空间并加detailer；DWD保留latent采样，只改变最终读出。输出是像素不意味着整个采样都在pixel空间。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "DWD：将最终像素读出与去噪目标分开",
+        "body": "PixVid迁移latent DiT到pixel输入/生成空间并加detailer；DWD保留latent采样，只改变最终读出。输出是像素不意味着整个采样都在pixel空间。 pixel与trajectory损失从不同time distributions取样，两次反传后统一optimizer step。末步不用CFG，因为该步读出像素而不推进trajectory；t=0的“当成decoder”模式在原文退化。",
+        "papers": [
+          "multimodal-models:dwd",
+          "multimodal-models:pixvid"
+        ]
+      },
+      "question": {
+        "id": "nov18-dwd",
+        "question": "和PixVid都去掉decoder，有何关键不同？",
+        "answer": "PixVid迁移输入与整个pixel生成路径，DWD保留latent denoising加最终输出head；改动范围和监督不同。",
+        "example": "删除VAE后直接换线性输出，不会自动获得PixVid的时间映射/detailer。",
+        "papers": [
+          "multimodal-models:dwd",
+          "multimodal-models:pixvid"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "multimodal-models:dwd",
+          "multimodal-models:pixvid"
+        ],
+        "summary": "PixVid迁移latent DiT到pixel输入/生成空间并加detailer；DWD保留latent采样，只改变最终读出。输出是像素不意味着整个采样都在pixel空间。 本地边界与完整高成本不复现分别记录。"
+      },
+      "english": {
+        "comparison": {
+          "position": "DWD adds a parallel linear pixel head to final DiT features. The original denoising head drives sampling; the pixel head runs only at the last nonzero timestep. Separate pixel-quality and trajectory-anchoring objectives avoid forcing both roles through one output.",
+          "tradeoff": "PixVid transfers a latent DiT to pixel-space inputs/generation with a detailer. DWD retains latent sampling and changes final readout. Pixel output does not mean pixel-space sampling."
+        },
+        "analysis": {
+          "title": "DWD: separate final pixel readout from denoising",
+          "body": "PixVid transfers a latent DiT to pixel-space inputs/generation with a detailer. DWD retains latent sampling and changes final readout. Pixel output does not mean pixel-space sampling. Pixel and trajectory terms sample different timestep distributions, accumulating gradients before one optimizer step. Final pixel readout omits CFG because it no longer advances the trajectory. Treating t0as a conventional decoder degrades quality in the paper."
+        },
+        "question": {
+          "question": "How does this differ from PixVid?",
+          "answer": "PixVid transfers inputs and the pixel generation path. DWD keeps latent denoising and adds a final output head.",
+          "example": "Removing a VAE and adding a linear layer does not supply PixVid timestep mapping or its detailer."
+        },
+        "update": "PixVid transfers a latent DiT to pixel-space inputs/generation with a detailer. DWD retains latent sampling and changes final readout. Pixel output does not mean pixel-space sampling. Local boundaries and high-cost non-reproduction are recorded separately."
+      }
+    },
+    {
+      "paper": "foundation-models:beyond-bitwidth",
+      "target_card": "foundation-models/compression-and-cache",
+      "source_revisions": {
+        "foundation-models:beyond-bitwidth": "e4df76b4fddea7a84a9445f4c7be51963c453fabd12d351f0cd4291b11caeebb",
+        "foundation-models:awq": "70f5ef31bcba296079d2bce8e6321adfd8e208f6a58c042b6d691afb8adfc0ee"
+      },
+      "comparison": {
+        "position": "低比特名称不保证GPU真的按该格式执行，也不保证多语种质量。本文用固定诊断/selection/final切分，逐fused-module核对weight类型、activation policy、kernel、fallback和显存，再按服务质量约束配置保护。",
+        "tradeoff": "AWQ用calibration activation搜索等价通道缩放后统一做低比特weight-only量化；Beyond Bitwidth研究B200原生format、mixed precision分配及质量/显存/延迟门槛。保护重要通道与给模块分配不同格式不是同一算法，AWQ的小型输出MSE不能充当Blackwell执行证据。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "保护量化敏感内容，不等于验证部署格式",
+        "body": "实读AWQ的核心是XW=(XS^-1)(SW)，用激活统计搜索缩放以减少量化输出误差；本地未用TinyChat CUDA kernel，MSE不代表端到端吞吐。Beyond Bitwidth按fused module核weight type、activation policy、kernel及fallback，在独立final集合验证服务约束；单模块BF16恢复效应不可相加，最终activation精度与INT8保护共同改变，不能把全部收益归于allocation。原生NVFP4/B200路径也不能由A100上的模拟误差替代。",
+        "papers": [
+          "foundation-models:beyond-bitwidth",
+          "foundation-models:awq"
+        ]
+      },
+      "question": {
+        "id": "nov18-beyond-bitwidth",
+        "question": "AWQ输出误差更小，是否已经满足Beyond Bitwidth的部署门槛？",
+        "answer": "没有。AWQ等价缩放的局部MSE只检验量化近似，部署门槛还要求真实packed格式、activation policy、无fallback、显存/延迟与独立服务质量评测。",
+        "example": "教学例：一层W4输出MSE降低，不说明整个8B模型在B200按目标格式执行，也不说明韩语保留率过门槛。",
+        "papers": [
+          "foundation-models:beyond-bitwidth",
+          "foundation-models:awq"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "foundation-models:beyond-bitwidth",
+          "foundation-models:awq"
+        ],
+        "summary": "AWQ用calibration activation搜索等价通道缩放后统一做低比特weight-only量化；Beyond Bitwidth研究B200原生format、mixed precision分配及质量/显存/延迟门槛。保护重要通道与给模块分配不同格式不是同一算法，AWQ的小型输出MSE不能充当Blackwell执行证据。 本次实读已有同主题代表README，按真实研究轴比较，不借比较对象改变算法或宣称跨论文效果复现。"
+      },
+      "english": {
+        "comparison": {
+          "position": "A low-bit label establishes neither native execution nor multilingual quality. Separate diagnostic, selection and final sets are frozen. Every fused module is checked for stored weight type, activation policy, kernel, fallback and memory before service-quality gating.",
+          "tradeoff": "AWQ searches activation-aware equivalent channel scales before uniform low-bit weight-only quantization. Beyond Bitwidth studies native B200 formats, mixed-precision allocation and quality/memory/latency gates. Important-channel protection is not module-level format allocation, and a small AWQ output-MSE check is not Blackwell execution evidence."
+        },
+        "analysis": {
+          "title": "Protecting quantization-sensitive content is not verifying deployment execution",
+          "body": "The reviewed AWQ README uses XW=(XS^-1)(SW) and activation-driven scaling to reduce quantized output error. Its local implementation omits TinyChat kernels, so MSE is not end-to-end throughput. Beyond Bitwidth checks fused-module weight types, activation policies, kernels and fallbacks, then validates service gates on an independent final set. Restoration gains are nonadditive, and activation precision changes jointly with INT8 protection; allocation alone is not isolated. A100 numerical simulation cannot verify native B200 NVFP4 execution."
+        },
+        "question": {
+          "question": "Does lower AWQ output error satisfy Beyond Bitwidth deployment gates?",
+          "answer": "No. Local MSE checks quantization approximation; deployment also requires native packed formats, activation policy, no fallback, memory/latency and independently evaluated service quality.",
+          "example": "Lower W4 layer-output MSE does not establish native B200 execution or Korean quality retention for an8B model."
+        },
+        "update": "AWQ searches activation-aware equivalent channel scales before uniform low-bit weight-only quantization. Beyond Bitwidth studies native B200 formats, mixed-precision allocation and quality/memory/latency gates. Important-channel protection is not module-level format allocation, and a small AWQ output-MSE check is not Blackwell execution evidence. The existing same-topic representative README was read; the comparison does not change the algorithm or claim cross-paper reproduction results."
+      }
+    },
+    {
+      "paper": "foundation-models:latent-feedback-scaling",
+      "target_card": "foundation-models/training-budget",
+      "source_revisions": {
+        "foundation-models:latent-feedback-scaling": "3915bae6e2e1430176f83ab1893730466e686e758828fa01a27ff37ab5853113",
+        "foundation-models:archspace": "f6418801859e15fc9ebdb43c23db9b1a13c3953d38e5a84b4af5d7e62e515cc6"
+      },
+      "comparison": {
+        "position": "latent feedback把上一token的顶层状态注入下一token输入，花更多每token计算。本文不只在相同token数比较，而让普通Transformer把相同FLOPs用于更多epoch，并同时控制unique数据和模型规模。",
+        "tradeoff": "ArchSpace比较架构/超参的匹配预算曲面；本篇专门研究重复数据及feedback的额外计算。两种拟合系数不可交换，单独输出预测loss不等于已训练候选。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "同主题比较与边界"
+        ]
+      },
+      "analysis": {
+        "title": "Latent Feedback：在重复数据下比较相同计算预算",
+        "body": "ArchSpace比较架构/超参的匹配预算曲面；本篇专门研究重复数据及feedback的额外计算。两种拟合系数不可交换，单独输出预测loss不等于已训练候选。 R<1时有效数据改为RU；R>=1时重复收益逐渐饱和。capacity multiplier与每token额外计算成本不同，loss预测依赖重新拟合和外推验证，不是重复token越多越省的无条件结论。",
+        "papers": [
+          "foundation-models:latent-feedback-scaling",
+          "foundation-models:archspace"
+        ]
+      },
+      "question": {
+        "id": "nov18-latent-feedback-scaling",
+        "question": "能直接把ArchSpace的loss系数填进本篇吗？",
+        "answer": "不能。两者控制变量和函数形式不同，本篇包含repeat saturation与feedback capacity factor；需要自己的拟合。",
+        "example": "即使都预测validation loss，参数N与FLOPs/token M也不是相同量。",
+        "papers": [
+          "foundation-models:latent-feedback-scaling",
+          "foundation-models:archspace"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "foundation-models:latent-feedback-scaling",
+          "foundation-models:archspace"
+        ],
+        "summary": "ArchSpace比较架构/超参的匹配预算曲面；本篇专门研究重复数据及feedback的额外计算。两种拟合系数不可交换，单独输出预测loss不等于已训练候选。 本地边界与完整高成本不复现分别记录。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Latent feedback passes the preceding token top-layer state into the next token input at additional per-token cost. The paper lets a plain Transformer spend the same FLOPs on more epochs, controlling unique data and model scale rather than matching token counts alone.",
+          "tradeoff": "ArchSpace compares architecture/hyperparameter budget surfaces. This paper studies repeated data and feedback compute. Coefficients are not interchangeable, and a predicted loss is not a trained candidate."
+        },
+        "analysis": {
+          "title": "Latent Feedback: matched-compute scaling with repeated data",
+          "body": "ArchSpace compares architecture/hyperparameter budget surfaces. This paper studies repeated data and feedback compute. Coefficients are not interchangeable, and a predicted loss is not a trained candidate. Below one epoch effective data is RU; later repeat value saturates. The capacity multiplier differs from per-token compute cost. Predictions depend on fitted laws and checked extrapolation, not an unconditional claim that more repetition always saves compute."
+        },
+        "question": {
+          "question": "Can ArchSpace coefficients be inserted directly?",
+          "answer": "No. The interventions and functional form differ, including repeat saturation and feedback capacity.",
+          "example": "Predicting validation loss does not make parameter count N equal to FLOPs-per-token M."
+        },
+        "update": "ArchSpace compares architecture/hyperparameter budget surfaces. This paper studies repeated data and feedback compute. Coefficients are not interchangeable, and a predicted loss is not a trained candidate. Local boundaries and high-cost non-reproduction are recorded separately."
+      }
+    }
+  ]
+}

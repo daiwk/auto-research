@@ -7,7 +7,7 @@ hide:
 
 # 偏好不是一个分数：先确定反馈格式，再选对齐目标
 
-[LLM 后训练](../index.md) · 更新 2026-11-18 · 27 篇主题资料 / 8 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-18 · 32 篇主题资料 / 13 篇重点对照
 
 DPO、KTO、SimPO、ORPO和IPO主要改变“怎样使用反馈”，CleanRM先处理“反馈是否可信”。参考模型、长度归一化、有限间隔和噪声校正是不同设计轴，不能因都在扩大好坏回答差异就当成同一方法。
 
@@ -33,6 +33,11 @@ DPO、KTO、SimPO、ORPO和IPO主要改变“怎样使用反馈”，CleanRM先�
 | [CleanRM: Reward Modeling from Noisy Feedback with a Few Clean Feedback for RLHF](../../../post-training/2610.21138-clean-rm/README.md) · [原始来源](https://arxiv.org/abs/2610.21138v1)<br>章节：背景与主要改动、核心公式、结果、代码映射与边界 | 先用干净校准子集与语义—恢复偏好的joint OT估计双向噪声，再冻结估计器校正RM风险。 | 校正依赖噪声率与校准代表性，signed loss不能擅自截零；完整RM/RLHF因成本过高未复现，当前是L1组件。 |
 | [Similar Models, Broken Odds: Where Luce&#x27;s Axiom Fails in Chatbot Arena](../../../post-training/2610.19095-luce-similarity-audit/README.md) · [原始来源](https://arxiv.org/abs/2610.19095v3)<br>章节：背景与主要改动、核心公式、论文离线与线上效果、结果、负控与边界 | 分开审计BT非平局decisiveness、joint模型的tie增益和兄弟菜单相对强度匹配placebo的赔率偏移。 | Probabilistic Autorater用proper reward校准偏好分布；Luce审计检验从全局分数到相关模型odds的结构假设。proper概率并不保证IIA，合并菜单正偏移也不证明prompt内因果效应。 |
 | [Grounding Language Models in Speech Does Not Fix AI Flavor: Calibrated LLM Judges, Goodhart Traps, and a Preference-Tuning Fix](../../../post-training/2611.19840-calibrated-judges-protocol/README.md) · [原始来源](https://arxiv.org/abs/2611.19840v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射 | evaluator-only catch灵敏度gate、两隔离judge与双order还原一致性、分歧tie，训练后另查偏差转导。 | Probabilistic Autorater校准偏好分布及proper reward；RA-Eval先资格考试再加工verdict，但高catch准确率不证明训练偏差消失。fixture映射1/0.5不是LLM能力，普通join不能读取gold。 |
+| [Ambient LLMs: Data-Efficient Supervised Fine-tuning via Temperature Matching](../../../post-training/2611.23229-ambient-sft/README.md) · [原始来源](https://arxiv.org/abs/2611.23229v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 原式CE与同位置温度forward-KL、冻结教师、随机clean/matching分支；不乘T²。 | DPO对chosen/rejected的reference-relative log-ratio分类；Ambient SFT在相同观察token的完整词表上匹配冻结base温度分布，既不需要偏好对，也不是奖励优化。 |
+| [Margin Dynamics for Large Language Model Alignment](../../../post-training/2611.21766-margin-dynamics-tpo/README.md) · [原始来源](https://arxiv.org/abs/2611.21766v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 长度归一化分数的TPO-S label-smoothed sigmoid与AppendixB精确归一化Huber TPO-H；验证有限吸引点和有界梯度。 | 二者都可用label smoothing，但本式用reference-free长度归一化分数并带目标margin；DPO用相对冻结reference的log-ratio，参考轴不同，不能只比较同一个ε。 |
+| [Contrastive Activation-Guided Zeroth-Order Preference Optimisation for Memory-Efficient LLM Alignment](../../../post-training/2611.20635-ca-zodpo/README.md) · [原始来源](https://arxiv.org/abs/2611.20635v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | chosen/rejected activation差的power-iteration子空间、rank归一化双点有限差分、换basis投影的低秩momentum更新。 | 不一定。每步要提取activation basis并做正负两次损失前向，少了反传但增加前向；真实time-to-quality需同数据预算和模型评判，组件不报告该结论。 |
+| [Teaching Language Models to Adapt Answer Granularity to Their Confidence](../../../post-training/2611.21211-confidence-adaptive-granularity/README.md) · [原始来源](https://arxiv.org/abs/2611.21211v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 给定已核验hierarchy上的20采样/16共识规则、recognition的逐层全coarser通过规则与归一化information utility；不拿gold选训练共识。 | 这里按模型展示的可辨识知识自训练粒度，不需要chosen/rejected偏好loss；Granola-EQ另用答案和同层distractor的mean-token-logp识别规则。DPO的pair margin不能替代层级知识探测。 |
+| [Sample-efficient Personalization of Large Language Model Alignment with Multidimensional User Preference Data](../../../post-training/2611.22210-mpg-dpo/README.md) · [原始来源](https://arxiv.org/abs/2611.22210v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 只收录cone+ridge confidence+非支配trade-off主动选对的完整算法；不将一个pair selector宣称完整个性化DPO。 | 不是，核心在带ridge置信界的主动pair选择及cone在线更新，随后才用标准在线DPO。只调用DPO loss或从固定pair池挑最高差分不能冒充完整MPG-DPO。 |
 
 </div>
 
@@ -61,6 +66,36 @@ Probabilistic Autorater的proper规则针对报告分布的校准；Luce论文�
 Proper概率强调报告分布，RA-Eval强调catch灵敏度、盲化和位置交换，这些都是不同风险的控制。原文长度75字的拒绝轮次表明可感知judge也会把短文本偏好转导到DPO。SFT anchor不是校准的替代品，训练后长度/风格和heldout检查不可少。本地只加工外部verdict并禁止catch训练ID重用，不调用judge或训练模型。
 
 对照来源：[calibrated-judges-protocol](../../../post-training/2611.19840-calibrated-judges-protocol/README.md) · [probabilistic-autorater](../../../post-training/2510.00263-probabilistic-autorater/README.md)
+
+### 为何这里不能套常见KD的T²缩放？
+
+原式没有T²，T趋无穷时KL项自然消失并还原SFT；乘T²会改变这个极限和温度控制的偏差—方差关系。 DPO对chosen/rejected的reference-relative log-ratio分类；Ambient SFT在相同观察token的完整词表上匹配冻结base温度分布，既不需要偏好对，也不是奖励优化。 本轮边界：原式CE与同位置温度forward-KL、冻结教师、随机clean/matching分支；不乘T²。
+
+对照来源：[ambient-sft](../../../post-training/2611.23229-ambient-sft/README.md) · [dpo](../../../post-training/2305.18290-dpo/README.md)
+
+### TPO-S有限吸引点由什么决定？
+
+label smoothing让正负两侧力平衡，δ*=log((1-ε)/ε)，所以原始长度归一化分差还要加μ并除β；不能漏掉margin平移。 二者都可用label smoothing，但本式用reference-free长度归一化分数并带目标margin；DPO用相对冻结reference的log-ratio，参考轴不同，不能只比较同一个ε。 本轮边界：长度归一化分数的TPO-S label-smoothed sigmoid与AppendixB精确归一化Huber TPO-H；验证有限吸引点和有界梯度。
+
+对照来源：[margin-dynamics-tpo](../../../post-training/2611.21766-margin-dynamics-tpo/README.md) · [dpo](../../../post-training/2305.18290-dpo/README.md)
+
+### 为何Δ=RAᵀ还需除sqrt(rank)？
+
+原式用该因子使不同rank的扰动规模可比。删掉会把增大rank与增大搜索步长混在一起，使算子和成本/质量对照失去原口径。 不一定。每步要提取activation basis并做正负两次损失前向，少了反传但增加前向；真实time-to-quality需同数据预算和模型评判，组件不报告该结论。 本轮边界：chosen/rejected activation差的power-iteration子空间、rank归一化双点有限差分、换basis投影的低秩momentum更新。
+
+对照来源：[ca-zodpo](../../../post-training/2611.20635-ca-zodpo/README.md) · [dpo](../../../post-training/2305.18290-dpo/README.md)
+
+### 共识target为何不能从gold层级选？
+
+Vital Persons规则在20个模型回答中找至少16条共享的最细值，只依赖一致性而非gold正确性。usable不足16则排除；足够却无共识则训练IDK。 这里按模型展示的可辨识知识自训练粒度，不需要chosen/rejected偏好loss；Granola-EQ另用答案和同层distractor的mean-token-logp识别规则。DPO的pair margin不能替代层级知识探测。 本轮边界：给定已核验hierarchy上的20采样/16共识规则、recognition的逐层全coarser通过规则与归一化information utility；不拿gold选训练共识。
+
+对照来源：[confidence-adaptive-granularity](../../../post-training/2611.21211-confidence-adaptive-granularity/README.md) · [dpo](../../../post-training/2305.18290-dpo/README.md)
+
+### 新反馈与旧偏好冲突就全部丢弃吗？
+
+只有所有旧规则都以超过τ的margin支持相反方向才丢弃；还要处理零score差、dual trivial和候选不足等边界。不能把任一规则反对误读成全体反对。 不是，核心在带ridge置信界的主动pair选择及cone在线更新，随后才用标准在线DPO。只调用DPO loss或从固定pair池挑最高差分不能冒充完整MPG-DPO。 本轮边界：只收录cone+ridge confidence+非支配trade-off主动选对的完整算法；不将一个pair selector宣称完整个性化DPO。
+
+对照来源：[mpg-dpo](../../../post-training/2611.22210-mpg-dpo/README.md) · [dpo](../../../post-training/2305.18290-dpo/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -116,9 +151,79 @@ Proper概率强调报告分布，RA-Eval强调catch灵敏度、盲化和位置�
 
     对照来源：[calibrated-judges-protocol](../../../post-training/2611.19840-calibrated-judges-protocol/README.md) · [probabilistic-autorater](../../../post-training/2510.00263-probabilistic-autorater/README.md)
 
+### 它与DPO的reference约束有何不同？ {#cross-nov18-ambient-sft}
+
+??? note "展开答案与例子"
+
+    **答案：** DPO对chosen/rejected的reference-relative log-ratio分类；Ambient SFT在相同观察token的完整词表上匹配冻结base温度分布，既不需要偏好对，也不是奖励优化。
+
+    **教学例子：** 教学例：一条无偏好标注的SFT序列足以算Ambient loss，却不足以构成DPO偏好对。
+
+    对照来源：[ambient-sft](../../../post-training/2611.23229-ambient-sft/README.md) · [dpo](../../../post-training/2305.18290-dpo/README.md)
+
+### TPO-S就是带reference的cDPO吗？ {#cross-nov18-margin-dynamics-tpo}
+
+??? note "展开答案与例子"
+
+    **答案：** 二者都可用label smoothing，但本式用reference-free长度归一化分数并带目标margin；DPO用相对冻结reference的log-ratio，参考轴不同，不能只比较同一个ε。
+
+    **教学例子：** 教学例：复制DPO的reference差分到TPO-S会改变原式吸引点所对应的量。
+
+    对照来源：[margin-dynamics-tpo](../../../post-training/2611.21766-margin-dynamics-tpo/README.md) · [dpo](../../../post-training/2305.18290-dpo/README.md)
+
+### 与DPO相比，低显存是否一定更快？ {#cross-nov18-ca-zodpo}
+
+??? note "展开答案与例子"
+
+    **答案：** 不一定。每步要提取activation basis并做正负两次损失前向，少了反传但增加前向；真实time-to-quality需同数据预算和模型评判，组件不报告该结论。
+
+    **教学例子：** 教学例：两点差分可在小二次loss上精确匹配方向导数，但没有测1.5B模型wall time。
+
+    对照来源：[ca-zodpo](../../../post-training/2611.20635-ca-zodpo/README.md) · [dpo](../../../post-training/2305.18290-dpo/README.md)
+
+### 它与DPO对齐回答偏好有什么不同？ {#cross-nov18-confidence-adaptive-granularity}
+
+??? note "展开答案与例子"
+
+    **答案：** 这里按模型展示的可辨识知识自训练粒度，不需要chosen/rejected偏好loss；Granola-EQ另用答案和同层distractor的mean-token-logp识别规则。DPO的pair margin不能替代层级知识探测。
+
+    **教学例子：** 教学例：最细答案分高但某coarser层败给distractor时，不允许直接选最细层。
+
+    对照来源：[confidence-adaptive-granularity](../../../post-training/2611.21211-confidence-adaptive-granularity/README.md) · [dpo](../../../post-training/2305.18290-dpo/README.md)
+
+### 与DPO相比，主要新意在loss吗？ {#cross-nov18-mpg-dpo}
+
+??? note "展开答案与例子"
+
+    **答案：** 不是，核心在带ridge置信界的主动pair选择及cone在线更新，随后才用标准在线DPO。只调用DPO loss或从固定pair池挑最高差分不能冒充完整MPG-DPO。
+
+    **教学例子：** 教学例：还没查询的候选不能先读取oracle评分来筛选；应由历史拟合的score predictor估计。
+
+    对照来源：[mpg-dpo](../../../post-training/2611.22210-mpg-dpo/README.md) · [dpo](../../../post-training/2305.18290-dpo/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-18** · 只收录cone+ridge confidence+非支配trade-off主动选对的完整算法；不将一个pair selector宣称完整个性化DPO。 完整实验高成本不复现；组件诊断不等于能力比较。
+
+涉及：[mpg-dpo](../../../post-training/2611.22210-mpg-dpo/README.md) · [dpo](../../../post-training/2305.18290-dpo/README.md)
+
+**2026-11-18** · 给定已核验hierarchy上的20采样/16共识规则、recognition的逐层全coarser通过规则与归一化information utility；不拿gold选训练共识。 完整实验高成本不复现；组件诊断不等于能力比较。
+
+涉及：[confidence-adaptive-granularity](../../../post-training/2611.21211-confidence-adaptive-granularity/README.md) · [dpo](../../../post-training/2305.18290-dpo/README.md)
+
+**2026-11-18** · chosen/rejected activation差的power-iteration子空间、rank归一化双点有限差分、换basis投影的低秩momentum更新。 完整实验高成本不复现；组件诊断不等于能力比较。
+
+涉及：[ca-zodpo](../../../post-training/2611.20635-ca-zodpo/README.md) · [dpo](../../../post-training/2305.18290-dpo/README.md)
+
+**2026-11-18** · 长度归一化分数的TPO-S label-smoothed sigmoid与AppendixB精确归一化Huber TPO-H；验证有限吸引点和有界梯度。 完整实验高成本不复现；组件诊断不等于能力比较。
+
+涉及：[margin-dynamics-tpo](../../../post-training/2611.21766-margin-dynamics-tpo/README.md) · [dpo](../../../post-training/2305.18290-dpo/README.md)
+
+**2026-11-18** · 原式CE与同位置温度forward-KL、冻结教师、随机clean/matching分支；不乘T²。 完整实验高成本不复现；组件诊断不等于能力比较。
+
+涉及：[ambient-sft](../../../post-training/2611.23229-ambient-sft/README.md) · [dpo](../../../post-training/2305.18290-dpo/README.md)
 
 **2026-11-18** · 补校准judge的catch/双judge换序/tie/隔离组件，与proper概率和训练后偏差转导分开；保留语音负结果与长度塌缩，不调用付费judge、不跑0.6B完整训练。
 
@@ -132,7 +237,7 @@ Proper概率强调报告分布，RA-Eval强调catch灵敏度、盲化和位置�
 
 覆盖 25 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 27 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 32 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -163,6 +268,11 @@ Proper概率强调报告分布，RA-Eval强调catch灵敏度、盲化和位置�
 - [Constitutional AI](../../../post-training/2212.08073-constitutional-ai/README.md)
 - [Similar Models, Broken Odds: Where Luce&#x27;s Axiom Fails in Chatbot Arena](../../../post-training/2610.19095-luce-similarity-audit/README.md)
 - [Grounding Language Models in Speech Does Not Fix AI Flavor: Calibrated LLM Judges, Goodhart Traps, and a Preference-Tuning Fix](../../../post-training/2611.19840-calibrated-judges-protocol/README.md)
+- [Ambient LLMs: Data-Efficient Supervised Fine-tuning via Temperature Matching](../../../post-training/2611.23229-ambient-sft/README.md)
+- [Margin Dynamics for Large Language Model Alignment](../../../post-training/2611.21766-margin-dynamics-tpo/README.md)
+- [Contrastive Activation-Guided Zeroth-Order Preference Optimisation for Memory-Efficient LLM Alignment](../../../post-training/2611.20635-ca-zodpo/README.md)
+- [Teaching Language Models to Adapt Answer Granularity to Their Confidence](../../../post-training/2611.21211-confidence-adaptive-granularity/README.md)
+- [Sample-efficient Personalization of Large Language Model Alignment with Multidimensional User Preference Data](../../../post-training/2611.22210-mpg-dpo/README.md)
 
 </details>
 

@@ -1,0 +1,59 @@
+{
+  "domain": "post-training",
+  "key": "jev-safety-reward",
+  "title": "Jev-as-a-Reward: Validating Probabilistic Safety Judges for Reinforcement Learning",
+  "paper_url": "https://arxiv.org/abs/2611.20955v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.20955v1",
+  "reviewed_version": "v1",
+  "detail_path": "post-training/2611.20955-jev-safety-reward/README.md",
+  "first_author": "Eunkyeong Lee",
+  "first_author_affiliation": "KT / Sungkyunkwan University",
+  "published": "2026-11-16",
+  "published_at": "2026-11-16T12:01:19Z",
+  "code": null,
+  "code_status": "固定v1及所核作者入口未找到可验证的本篇方法源码发布；引用的训练器、模型或库不算本篇开源。",
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "topic": [
+    "reward-and-credit",
+    "后训练算法组件"
+  ],
+  "priority": "P1",
+  "intake_class": "new_submission_in_requested_window",
+  "implementation_status": "component_only",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.20955v1",
+    "source_sections": [
+      "§3.1–3.4",
+      "§4–5",
+      "AppendixC human audit"
+    ],
+    "basis": "§3–5每run76800个rollout、11组RL运行、8B策略/8B guard与120B第二参考及商业judge、人类审核；完整安全训练和评判campaign不运行。",
+    "available_resource": "Single NVIDIA A100/A30 or local Mac",
+    "decision": "Full experiment not reproduced due to high cost; review DONE. No checkpoint/data download or paid API call.",
+    "local_budget": {
+      "checkpoint_download_bytes": 0,
+      "dataset_download_bytes": 0,
+      "paid_api_calls": 0,
+      "local_component_seconds_per_seed_cap": 30,
+      "gpu_component_seconds_per_seed_cap": 0,
+      "cap_scope": "Tiny exact operator/negative-control checks only; not a training campaign."
+    }
+  },
+  "summary": "c=max(p,1-p)低于阈值才交强judge；高置信把有害判为安全的miss永远不会被委托，训练可能集中到这个区域。 固定概率judge的confidence gate、校准集阈值、PHR/GPR分母区分、prompt级bootstrap和judge升级重审规则；不实现商业judge。",
+  "evaluation_tier": "l0_interface",
+  "local_operator": "auto_research.post_training.jev_safety_reward.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.jev_safety_reward import diagnostic; print(diagnostic(42))'"
+}

@@ -1,0 +1,67 @@
+{
+  "schema_version": 2,
+  "paper": "agent-research:elite-eval-free",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "evaluation_tier": "l0_interface",
+  "execution_device": "cpu",
+  "execution_accelerator": "CPU",
+  "local_operator": "auto_research.agent_research.elite_eval_free.diagnostic",
+  "source_sha256": {
+    "src/auto_research/agent_research/elite_eval_free.py": "a7a6cd43aca85e8f2254d82dd529b1686dc16b6928f6f6b22e6c01eff0c12212"
+  },
+  "data_revision": "authored deterministic boundary controls v1; not official benchmark",
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l0_interface",
+      "checks": {
+        "independent_common_parent": true,
+        "failed_acceptance_keeps_parent": true,
+        "valid_children_really_explored": true,
+        "no_evaluation_input": true
+      },
+      "metrics": {
+        "explorer_calls": 2,
+        "valid_children": 2
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l0_interface",
+      "checks": {
+        "independent_common_parent": true,
+        "failed_acceptance_keeps_parent": true,
+        "valid_children_really_explored": true,
+        "no_evaluation_input": true
+      },
+      "metrics": {
+        "explorer_calls": 2,
+        "valid_children": 2
+      }
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l0_interface",
+      "checks": {
+        "independent_common_parent": true,
+        "failed_acceptance_keeps_parent": true,
+        "valid_children_really_explored": true,
+        "no_evaluation_input": true
+      },
+      "metrics": {
+        "explorer_calls": 2,
+        "valid_children": 2
+      }
+    }
+  ],
+  "capability_claim": false,
+  "note": "All seeds repeat deterministic controls; no statistical robustness or task success claim."
+}

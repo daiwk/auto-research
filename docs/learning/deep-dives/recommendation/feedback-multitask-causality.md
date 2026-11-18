@@ -7,7 +7,7 @@ hide:
 
 # 从CTR到满意度与uplift：先定义监督对象，再决定怎样共享
 
-[搜广推](../index.md) · 更新 2026-10-29 · 36 篇主题资料 / 6 篇重点对照
+[搜广推](../index.md) · 更新 2026-11-18 · 37 篇主题资料 / 7 篇重点对照
 
 ESMM约束点击—转化漏斗概率，MMoE和PLE安排不同任务怎样共享专家，FLVM尝试把消费、主动参与和正负方向分开，Incrementality则比较采取与不采取动作的潜在结果。预测更多头、共享更多参数或拆出潜因子，都不自动解决因果识别。
 
@@ -31,6 +31,7 @@ ESMM约束点击—转化漏斗概率，MMoE和PLE安排不同任务怎样共享
 | [Mend the Measurement Gap: Latent User Preference Modeling for Short-Form Video Recommendation](../../../reproductions/2609.32839-flvm/README.md) · [原始来源](https://arxiv.org/abs/2609.32839)<br>章节：背景与主要改动、核心公式、本地复现 | 三维潜因子表达消费、主动参与、正负方向；反馈头按固定稀疏语义路由，叠加停止梯度的受限基线。 | 把时长等测量因素与偏好通道分开，但该结构不自动识别真实因果偏好；原文mask未公开，本地路由是明确的可检验选择，缺失反馈也不能补零标签。 |
 | [From Prediction to Incrementality: Causal Optimization for Large-Scale Targeting and Recommendation](../../../reproductions/2608.10182-incrementality/README.md) · [原始来源](https://arxiv.org/abs/2608.10182)<br>章节：背景与主要改动、核心公式、复现边界 | 估计处理/不处理的潜在结果差，再按uplift及不确定度在固定触达预算下分配动作。 | 目标是动作带来的额外价值，不是高响应人群本来的结果；需要可信处理对照和识别条件，本地代理任务不能证明真实用户增量。 |
 | [KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation](../../../recommendation-components/2610.36973-kl-mopd/README.md) · [原始来源](https://arxiv.org/abs/2610.36973v1)<br>章节：背景与主要改动、核心公式 | 一次校准位置级教师差距，以固定alpha最小化两项student\|\|teacher KL。 | 没有初始/当前学生采样器、推荐骨干或语义ID评测，不继承线上收益。 |
+| [COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift](../../../recommendation-components/2611.22597-cotti/README.md) · [原始来源](https://arxiv.org/abs/2611.22597v1)<br>章节：背景与主要改动、核心公式、同主题对照、高成本完整实验 | COTTI把训练时历史偏好连续性和上线时促销概率修正分开。CPC比较同一用户常态/促销双视图并用可微门控调节一致性；RW按相对历史距离重加权但截断其梯度；ABA在冻结预测器的logit上添加事件强度与预测头方差决定的有界修正。 | BAFF按竞价策略干扰过滤日志，COTTI按用户历史距离改变促销样本影响；两种权重/过滤都不自动成为因果无偏估计，COTTI的校准也不能证明A/B日志无污染。 |
 
 </div>
 
@@ -53,6 +54,12 @@ FLVM用受限基线和三因子路由区分观看、主动参与与正负方向�
 KL-MOPD把点击/价值的竞争定位到SID位置，而非只合并整物品分数：初始学生到两教师的KL差距校准一次并冻结，当前学生在自己前缀上计算加权反向KL。这与动态追逐当前KL或算术平均教师概率不同；线上收入+1.63%属于完整系统，本地只验损失与梯度，不推出业务因果效果。
 
 对照来源：[esmm](../../../reproductions/1804.07931-esmm/README.md) · [kl-mopd](../../../recommendation-components/2610.36973-kl-mopd/README.md)
+
+### COTTI：促销漂移中的跨周期对比与时变校准：区别机制与能力
+
+严格保留Eq6–16：CPC门控用未归一化表示距离并参与反传；RW不裁剪、不均值归一化，权重是正影响量而非可靠性概率；ABA使用预测头多次dropout logit的总体方差，不是全编码器不确定性。事件中心须事先公告、宽度来自历史，幅度只在验证集选；修正只能向上，不能解决过预测。 BAFF按竞价策略干扰过滤日志，COTTI按用户历史距离改变促销样本影响；两种权重/过滤都不自动成为因果无偏估计，COTTI的校准也不能证明A/B日志无污染。
+
+对照来源：[cotti](../../../recommendation-components/2611.22597-cotti/README.md) · [baff](../../../reproductions/2609.08725-baff/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -98,9 +105,23 @@ KL-MOPD把点击/价值的竞争定位到SID位置，而非只合并整物品分
 
     对照来源：[esmm](../../../reproductions/1804.07931-esmm/README.md) · [kl-mopd](../../../recommendation-components/2610.36973-kl-mopd/README.md)
 
+### COTTI能代替BAFF解决实验干扰吗？ {#cross-cross-nov18-latest-cotti}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。历史距离不是反事实曝光或竞价干扰证据，促销概率修正和实验日志污染是不同问题。
+
+    **教学例子：** 教学例：HDR线上control与TEN离线control不能当成同一因果基线。
+
+    对照来源：[cotti](../../../recommendation-components/2611.22597-cotti/README.md) · [baff](../../../reproductions/2609.08725-baff/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-18** · 本地只运行CPC/RW/ABA张量；没有历史构造、缺失常态视图回退或服务融合策略。保留paid-item新类目召回下降的作者负结果，不能拿整体AUC覆盖探索代价。 完整实验高成本不复现，未作能力或Evolve晋级证据。
+
+涉及：[cotti](../../../recommendation-components/2611.22597-cotti/README.md) · [baff](../../../reproductions/2609.08725-baff/README.md)
 
 **2026-10-29** · KL-MOPD把点击/价值的竞争定位到SID位置，而非只合并整物品分数：初始学生到两教师的KL差距校准一次并冻结，当前学生在自己前缀上计算加权反向KL。这与动态追逐当前KL或算术平均教师概率不同；线上收入+1.63%属于完整系统，本地只验损失与梯度，不推出业务因果效果。
 
@@ -110,7 +131,7 @@ KL-MOPD把点击/价值的竞争定位到SID位置，而非只合并整物品分
 
 覆盖 35 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 36 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 37 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -150,6 +171,7 @@ KL-MOPD把点击/价值的竞争定位到SID位置，而非只合并整物品分
 - [Multi-Objective Ranking for Live-Streaming: Balancing Fresh and Delayed Signals with Segment-Aware Targeting](../../../reproductions/2608.04455-twitch-mor/README.md)
 - [Jointly Optimizing Debiased CTR and Uplift for Coupons Marketing: A Unified Causal Framework](../../../reproductions/2602.12972-unimvt/README.md)
 - [KL-MOPD: Discrepancy-Aware Multi-Objective On-Policy Distillation for Generative Recommendation](../../../recommendation-components/2610.36973-kl-mopd/README.md)
+- [COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift](../../../recommendation-components/2611.22597-cotti/README.md)
 
 </details>
 

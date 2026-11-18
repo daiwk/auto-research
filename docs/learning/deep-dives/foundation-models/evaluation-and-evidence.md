@@ -7,7 +7,7 @@ hide:
 
 # 能力证据：准确打分、节省观测与解释预测
 
-[基础模型](../index.md) · 更新 2026-11-18 · 25 篇主题资料 / 17 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-18 · 26 篇主题资料 / 18 篇重点对照
 
 先区分“正确答案怎样定义”“下一题测谁”“多个裁判怎样融合”和“预测怎样解释”。XLGoBench、ProEval、FUSE、TCAB 与 DetectorScope 分别改变这些环节；观测更少或解释可加，不等于被测能力本身更强。XLA from the Trenches还提醒：评分之前，编译后程序本身就可能静默偏离原始数值语义，不能把编译成功当作执行正确。
 
@@ -42,6 +42,7 @@ hide:
 | [Inherited Weights: Measuring the Tokenization Premium and the Sovereignty Cost of Language Models for the Global South](../../../foundation-models/2611.13441-tokenization-premium/README.md) · [原始来源](https://arxiv.org/abs/2611.13441v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 先拼接相同UDHR共同条款再一次编码，比较总token成本并排除UNK坍缩；同时约束全样本ECE、覆盖率/风险与全程能量分母。 | XLGoBench固定抽象算法实例与复杂度来比较跨语言任务能力，token溢价只测相同内容的输入成本。两者都需语言内容可比，但token数不能替代模型错误率；本地两个scorer均不等于完整多语能力矩阵。 |
 | [Inference Validation for Regulated AI: A Governed Decision Pipeline for LLM Serving](../../../foundation-models/2611.12737-runway-inference-protocol/README.md) · [原始来源](https://arxiv.org/abs/2611.12737v2)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界 | 在原样AIPerf前后构建配置/缓存身份、声明式SLA和每成功请求成本，明确缓存命中只复用既有证据。 | XLA from the Trenches验证目标TPU编译数值正确性；Runway验证某serving配置是否满足指标和契约。CPU协议既不证明TPU语义，也不测CUDA吞吐；模型/引擎名字相同不能保证缓存身份相同。 |
 | [Mixed Signals: Weight-Space Programming for EEG and ECG](../../../foundation-models/2611.13758-mixed-signals-weights/README.md) · [原始来源](https://arxiv.org/abs/2611.13758v1)<br>章节：核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 用原子参数补丁和受限practice反馈表达WSP接口，测试标签留在外部评价器，不用SGD替代推理编辑。 | AMS从固定激活读出结构差异，不写参数也不认证安全；WSP问能否推理改权重。当前L0线性harness不含LLM、TinyEEGNet或被试数据。 |
+| [Rich Insights from Cheap Signals: Efficient Evaluations via Tensor Factorization](../../../foundation-models/2603.02029-efficient-evals-tensor/README.md) · [原始来源](https://arxiv.org/abs/2603.02029v1)<br>章节：背景与主要改动、核心公式、同主题对照、高成本完整实验 | 本文将模型、prompt和rater三者的能力张量作低rank CP分解，先用大量廉价autorater评分学共享表示，再冻结表示、只拟合人类rater向量及有序cutoff。它保留prompt异质性和rater偏好差异，不把某个自动judge分数直接当人类真值。2026-11-16是Google官方代码新仓库，不是论文首发；v1首发为2026-03-02 16:12:46 UTC。 | ProEval用其他模型历史逐题分数建立GP先验并主动决定下一题；本篇用多rater廉价数据学prompt/model表示再做人类对齐。前者的采样后验不等于后者的rater偏差校准，条件置信界也不能无条件覆盖共享表示估计误差。 |
 
 </div>
 
@@ -130,6 +131,12 @@ XLA审计强调保留目标硬件语义；Runway强调保留测量配置及raw A
 AMS的方向/漂移是检测信号，存在结构保持攻击盲区；Mixed Signals的推理写权重还要求受限反馈和独立未见被试评价。原子写入、失败消耗预算和正确balanced accuracy是必要工程合同，却不创造会编辑的LLM。SGD违规替换和test反馈泄漏都改变了问题。完整campaign高成本不复现，保留L0接口与实际CUDA加载前向证据，不拿作者医学结果背书。
 
 对照来源：[mixed-signals-weights](../../../foundation-models/2611.13758-mixed-signals-weights/README.md) · [activation-model-scanner](../../../foundation-models/2608.05578-activation-model-scanner/README.md)
+
+### Efficient Evals：借廉价评分学能力张量，再用少量人类标签校准：区别机制与能力
+
+§3的ordinal likelihood支持单侧评分和成对能力差及平局；首尾类别用0/1 CDF边界。第二阶段只给human向量／cutoff梯度，模型和prompt因子冻结。条件Wald区间把第一阶段表示当高精度固定量，并用Bonferroni处理多比较；Sigma是渐近协方差，需除m。可选全参数human fine-tune可能改善点预测，却使这些条件区间失效，不能两种好处同时声称。 ProEval用其他模型历史逐题分数建立GP先验并主动决定下一题；本篇用多rater廉价数据学prompt/model表示再做人类对齐。前者的采样后验不等于后者的rater偏差校准，条件置信界也不能无条件覆盖共享表示估计误差。
+
+对照来源：[efficient-evals-tensor](../../../foundation-models/2603.02029-efficient-evals-tensor/README.md) · [proeval](../../../foundation-models/2604.23099-proeval/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -285,9 +292,23 @@ AMS的方向/漂移是检测信号，存在结构保持攻击盲区；Mixed Sign
 
     对照来源：[mixed-signals-weights](../../../foundation-models/2611.13758-mixed-signals-weights/README.md) · [activation-model-scanner](../../../foundation-models/2608.05578-activation-model-scanner/README.md)
 
+### 它与ProEval都省评测费，方法是否相同？ {#cross-cross-nov18-latest-efficient-evals-tensor}
+
+??? note "展开答案与例子"
+
+    **答案：** 不同。ProEval主动选目标问题并更新GP；本篇校准多个rater到人类尺度。
+
+    **教学例子：** 教学例：多一个便宜judge评分不等于主动选了一道人类问题。
+
+    对照来源：[efficient-evals-tensor](../../../foundation-models/2603.02029-efficient-evals-tensor/README.md) · [proeval](../../../foundation-models/2604.23099-proeval/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-18** · 官方google-research/efficient_evals固定b4421d929d1078631ee890f8e4a776442c816d36、Apache2.0。本地只执行CP、ordinal概率、冻结human NLL和外部Sigma的条件区间算术；不含完整Adam/BFGS拟合、30切分或真实评分重收集。上游CPU notebook估约1小时，完整多judge矩阵高成本不复现，CUDA只验算子。 完整实验高成本不复现，未作能力或Evolve晋级证据。
+
+涉及：[efficient-evals-tensor](../../../foundation-models/2603.02029-efficient-evals-tensor/README.md) · [proeval](../../../foundation-models/2604.23099-proeval/README.md)
 
 **2026-11-18** · 补WSP权重补丁、预算和评价接口，对照AMS检测而非编辑的边界；不调用LLM、不替代TinyEEGNet，完整实验高成本不复现。
 
@@ -341,7 +362,7 @@ AMS的方向/漂移是检测信号，存在结构保持攻击盲区；Mixed Sign
 
 覆盖 13 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 25 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 26 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -370,6 +391,7 @@ AMS的方向/漂移是检测信号，存在结构保持攻击盲区；Mixed Sign
 - [Inherited Weights: Measuring the Tokenization Premium and the Sovereignty Cost of Language Models for the Global South](../../../foundation-models/2611.13441-tokenization-premium/README.md)
 - [Inference Validation for Regulated AI: A Governed Decision Pipeline for LLM Serving](../../../foundation-models/2611.12737-runway-inference-protocol/README.md)
 - [Mixed Signals: Weight-Space Programming for EEG and ECG](../../../foundation-models/2611.13758-mixed-signals-weights/README.md)
+- [Rich Insights from Cheap Signals: Efficient Evaluations via Tensor Factorization](../../../foundation-models/2603.02029-efficient-evals-tensor/README.md)
 
 </details>
 

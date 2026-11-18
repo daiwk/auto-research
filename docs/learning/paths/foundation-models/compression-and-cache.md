@@ -7,7 +7,7 @@ hide:
 
 # 推理压缩：权重、KV 缓存与服务带宽
 
-[基础模型](index.md) / 144 个问题 · 36 篇论文
+[基础模型](index.md) / 160 个问题 · 40 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,221 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">144 个问题 · 36 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">160 个问题 · 40 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:echomoe" data-paper-title="Communicate the Change: Efficient Expert Parallelism via Activation Compression" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Communicate the Change: Efficient Expert Parallelism via Activation Compression 基础模型 Mila / McGill University 2026-11-17 每组MoE层先广播参考z，其余层只发送x-a⊙z的压缩code；router仍读取完整x。专家将reference gain和dispatch decoder折入gate/up权重，再将combine compressor折入down权重，避免完整重建或输出物化。已核方法位置：4.1–4.4, 5.1, G.1。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行非reference层的两侧压缩、专家SwiGLU、路由加权合并、折叠/未折叠输出与梯度对照及解析traffic；不实现分布式collectives、异步broadcast或完整模型适配。  推理与系统效率 MoE通信压缩 基础模型 推理压缩：权重、KV 缓存与服务带宽 EchoMoE压缩的是token的KV cache吗？ 不是。主要压缩专家并行dispatch/combine的激活；跨层参考保存在各rank，以差值code代替每层全宽通信。 教学例：参考z已存在时，发送C_d(x-a⊙z)而不是整条x。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<span id="paper-foundation-models-echomoe-e4a304a5" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-27a4c77e9f413865">EchoMoE压缩的是token的KV cache吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aechomoe">Communicate the Change: Efficient Expert Parallelism via Activation Compression</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Mila / McGill University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。主要压缩专家并行dispatch/combine的激活；跨层参考保存在各rank，以差值code代替每层全宽通信。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：参考z已存在时，发送C_d(x-a⊙z)而不是整条x。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22215v1">原论文</a> · <a href="../../../../foundation-models/2611.22215-echomoe/">实现解读</a> · <a href="#qa-27a4c77e9f413865">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:echomoe" data-paper-title="Communicate the Change: Efficient Expert Parallelism via Activation Compression" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Communicate the Change: Efficient Expert Parallelism via Activation Compression 基础模型 Mila / McGill University 2026-11-17 每组MoE层先广播参考z，其余层只发送x-a⊙z的压缩code；router仍读取完整x。专家将reference gain和dispatch decoder折入gate/up权重，再将combine compressor折入down权重，避免完整重建或输出物化。已核方法位置：4.1–4.4, 5.1, G.1。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行非reference层的两侧压缩、专家SwiGLU、路由加权合并、折叠/未折叠输出与梯度对照及解析traffic；不实现分布式collectives、异步broadcast或完整模型适配。  推理与系统效率 MoE通信压缩 基础模型 推理压缩：权重、KV 缓存与服务带宽 为何专家不必显式构造完整xhat？ 线性重建Gz+D_dc与gate/up投影可相乘折叠；combine compressor也可折入down。SwiGLU仍在两线性映射之间，不能跨非线性任意折叠。 教学例：W_g(Gz+D_dc)=[W_gG,W_gD_d][z;c]。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-98d76eb07e8c884a">为何专家不必显式构造完整xhat？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aechomoe">Communicate the Change: Efficient Expert Parallelism via Activation Compression</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Mila / McGill University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>线性重建Gz+D_dc与gate/up投影可相乘折叠；combine compressor也可折入down。SwiGLU仍在两线性映射之间，不能跨非线性任意折叠。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：W_g(Gz+D_dc)=[W_gG,W_gD_d][z;c]。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22215v1">原论文</a> · <a href="../../../../foundation-models/2611.22215-echomoe/">实现解读</a> · <a href="#qa-98d76eb07e8c884a">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:echomoe" data-paper-title="Communicate the Change: Efficient Expert Parallelism via Activation Compression" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Communicate the Change: Efficient Expert Parallelism via Activation Compression 基础模型 Mila / McGill University 2026-11-17 每组MoE层先广播参考z，其余层只发送x-a⊙z的压缩code；router仍读取完整x。专家将reference gain和dispatch decoder折入gate/up权重，再将combine compressor折入down权重，避免完整重建或输出物化。已核方法位置：4.1–4.4, 5.1, G.1。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行非reference层的两侧压缩、专家SwiGLU、路由加权合并、折叠/未折叠输出与梯度对照及解析traffic；不实现分布式collectives、异步broadcast或完整模型适配。  推理与系统效率 MoE通信压缩 基础模型 推理压缩：权重、KV 缓存与服务带宽 与MoEZip的routing-aware压缩能直接比压缩率吗？ 不能。MoEZip选择attention KV行，EchoMoE发送低维专家激活，分母、额外参考成本和质量误差都不同。 教学例：少存50%KV不等于少发50%RDMA字节。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-366ebf08b4848f26">与MoEZip的routing-aware压缩能直接比压缩率吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aechomoe">Communicate the Change: Efficient Expert Parallelism via Activation Compression</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Mila / McGill University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。MoEZip选择attention KV行，EchoMoE发送低维专家激活，分母、额外参考成本和质量误差都不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：少存50%KV不等于少发50%RDMA字节。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22215v1">原论文</a> · <a href="../../../../foundation-models/2611.22215-echomoe/">实现解读</a> · <a href="#qa-366ebf08b4848f26">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:echomoe" data-paper-title="Communicate the Change: Efficient Expert Parallelism via Activation Compression" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Communicate the Change: Efficient Expert Parallelism via Activation Compression 基础模型 Mila / McGill University 2026-11-17 每组MoE层先广播参考z，其余层只发送x-a⊙z的压缩code；router仍读取完整x。专家将reference gain和dispatch decoder折入gate/up权重，再将combine compressor折入down权重，避免完整重建或输出物化。已核方法位置：4.1–4.4, 5.1, G.1。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行非reference层的两侧压缩、专家SwiGLU、路由加权合并、折叠/未折叠输出与梯度对照及解析traffic；不实现分布式collectives、异步broadcast或完整模型适配。  推理与系统效率 MoE通信压缩 基础模型 推理压缩：权重、KV 缓存与服务带宽 折叠输出和梯度一致，是否证明压缩模型能力不下降？ 只证明同一压缩参数下两种执行形式一致。Cd/Dd低秩近似、路由变化、蒸馏和多层误差还需完整模型实验。 教学例：把Cd设为零，折叠仍可完全一致，却已丢掉当前x的差值。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-f6a686a8c83414d9">折叠输出和梯度一致，是否证明压缩模型能力不下降？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aechomoe">Communicate the Change: Efficient Expert Parallelism via Activation Compression</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Mila / McGill University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>只证明同一压缩参数下两种执行形式一致。Cd/Dd低秩近似、路由变化、蒸馏和多层误差还需完整模型实验。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把Cd设为零，折叠仍可完全一致，却已丢掉当前x的差值。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22215v1">原论文</a> · <a href="../../../../foundation-models/2611.22215-echomoe/">实现解读</a> · <a href="#qa-f6a686a8c83414d9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:risa" data-paper-title="RISA: Recoverable Sparse Attention for Block-Diffusion Language Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="RISA: Recoverable Sparse Attention for Block-Diffusion Language Models 基础模型 Rice University 2026-11-17 RISA区分长期HOT/COLD存储优先级和当前denoising block的短期read plan。未读取页面不被删除，后续query可以恢复COLD。seed根据page min/max key摘要评分，保护初始/近期HOT并加入mandatory近期/current行。已核方法位置：4.1–4.3, 5。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行mass-only grace优先级、HOT/COLD/mandatory地址选择与实际gather attention；输入store由调用者持有。没有native块扩散解码、learned admission correction、seed提交/finalization或CUDA graph engine。  注意力与长上下文 块扩散稀疏attention 基础模型 推理压缩：权重、KV 缓存与服务带宽 COLD页面是否已经从GPU删除？ 没有。HOT/COLD都保留精确KV，COLD只是当前访问优先级较低，未来plan仍可选择。 教学例：第一个query不读页面2，第二个query相关性改变后仍能选回页面2。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<span id="paper-foundation-models-risa-a37606be" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-66c93a1607150739">COLD页面是否已经从GPU删除？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arisa">RISA: Recoverable Sparse Attention for Block-Diffusion Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Rice University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>没有。HOT/COLD都保留精确KV，COLD只是当前访问优先级较低，未来plan仍可选择。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：第一个query不读页面2，第二个query相关性改变后仍能选回页面2。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22191v1">原论文</a> · <a href="../../../../foundation-models/2611.22191-risa/">实现解读</a> · <a href="#qa-66c93a1607150739">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:risa" data-paper-title="RISA: Recoverable Sparse Attention for Block-Diffusion Language Models" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="RISA: Recoverable Sparse Attention for Block-Diffusion Language Models 基础模型 Rice University 2026-11-17 RISA区分长期HOT/COLD存储优先级和当前denoising block的短期read plan。未读取页面不被删除，后续query可以恢复COLD。seed根据page min/max key摘要评分，保护初始/近期HOT并加入mandatory近期/current行。已核方法位置：4.1–4.3, 5。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行mass-only grace优先级、HOT/COLD/mandatory地址选择与实际gather attention；输入store由调用者持有。没有native块扩散解码、learned admission correction、seed提交/finalization或CUDA graph engine。  注意力与长上下文 块扩散稀疏attention 基础模型 推理压缩：权重、KV 缓存与服务带宽 复用plan是否也复用attention概率和输出？ 不是。只复用历史索引，每步用fresh query和current KV重算分数、共享归一化及value聚合。 教学例：同一组地址下，把query方向反转应允许输出改变。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-ac5473aa84c5d49c">复用plan是否也复用attention概率和输出？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arisa">RISA: Recoverable Sparse Attention for Block-Diffusion Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Rice University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。只复用历史索引，每步用fresh query和current KV重算分数、共享归一化及value聚合。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一组地址下，把query方向反转应允许输出改变。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22191v1">原论文</a> · <a href="../../../../foundation-models/2611.22191-risa/">实现解读</a> · <a href="#qa-ac5473aa84c5d49c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:risa" data-paper-title="RISA: Recoverable Sparse Attention for Block-Diffusion Language Models" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="RISA: Recoverable Sparse Attention for Block-Diffusion Language Models 基础模型 Rice University 2026-11-17 RISA区分长期HOT/COLD存储优先级和当前denoising block的短期read plan。未读取页面不被删除，后续query可以恢复COLD。seed根据page min/max key摘要评分，保护初始/近期HOT并加入mandatory近期/current行。已核方法位置：4.1–4.3, 5。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行mass-only grace优先级、HOT/COLD/mandatory地址选择与实际gather attention；输入store由调用者持有。没有native块扩散解码、learned admission correction、seed提交/finalization或CUDA graph engine。  注意力与长上下文 块扩散稀疏attention 基础模型 推理压缩：权重、KV 缓存与服务带宽 与DropKV的驱逐是同一预算吗？ 不是。DropKV删除存储条目，RISA保留未选COLD并减少循环读取；RISA的HOT cap还不包含protected、COLD和mandatory部分。 教学例：512页cap并不意味着总共只读取或保存512页。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-08b44767b9efe681">与DropKV的驱逐是同一预算吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arisa">RISA: Recoverable Sparse Attention for Block-Diffusion Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Rice University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。DropKV删除存储条目，RISA保留未选COLD并减少循环读取；RISA的HOT cap还不包含protected、COLD和mandatory部分。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：512页cap并不意味着总共只读取或保存512页。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22191v1">原论文</a> · <a href="../../../../foundation-models/2611.22191-risa/">实现解读</a> · <a href="#qa-08b44767b9efe681">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:risa" data-paper-title="RISA: Recoverable Sparse Attention for Block-Diffusion Language Models" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="RISA: Recoverable Sparse Attention for Block-Diffusion Language Models 基础模型 Rice University 2026-11-17 RISA区分长期HOT/COLD存储优先级和当前denoising block的短期read plan。未读取页面不被删除，后续query可以恢复COLD。seed根据page min/max key摘要评分，保护初始/近期HOT并加入mandatory近期/current行。已核方法位置：4.1–4.3, 5。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行mass-only grace优先级、HOT/COLD/mandatory地址选择与实际gather attention；输入store由调用者持有。没有native块扩散解码、learned admission correction、seed提交/finalization或CUDA graph engine。  注意力与长上下文 块扩散稀疏attention 基础模型 推理压缩：权重、KV 缓存与服务带宽 history与current各算softmax再平均会怎样？ 会改变权重分母，不再是同一support上的attention。必须把各部分logits放在共同归一化下合并。 教学例：history只有一个低分条目、current有一个高分条目时，平均会错给history固定一半权重。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-54c31aea076691df">history与current各算softmax再平均会怎样？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arisa">RISA: Recoverable Sparse Attention for Block-Diffusion Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Rice University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>会改变权重分母，不再是同一support上的attention。必须把各部分logits放在共同归一化下合并。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：history只有一个低分条目、current有一个高分条目时，平均会错给history固定一半权重。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22191v1">原论文</a> · <a href="../../../../foundation-models/2611.22191-risa/">实现解读</a> · <a href="#qa-54c31aea076691df">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:spool" data-paper-title="Spool: Low-Latency Streaming Inference for Hybrid Vision-Language Models" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Spool: Low-Latency Streaming Inference for Hybrid Vision-Language Models 基础模型 MIT CSAIL 2026-11-17 GDN的key/value/gates只依赖已记录的层输入，因此状态更新对旧状态是仿射的。每帧缓存一个变换，以非交换的时间顺序组成segment tree；窗口到期时从prefix anchor重放保留摘要，而非重跑所有视频token。已核方法位置：3.2–3.4, 4, 5.1, Appendix A。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行GDN逐token摘要、残差合并和循环segment tree的append/expiry/query；不含VLM、Triton/FLA集成、KV tail filling或RoPE重基内核。  注意力与长上下文 流式递归状态 基础模型 推理压缩：权重、KV 缓存与服务带宽 Spool为什么可以跳过保留帧的backbone重算？ 固定层输入后GDN更新写成SA+B，帧内多个仿射更新仍是仿射更新，可缓存后作用到不同anchor状态。 教学例：两帧更新先乘A1再乘A2，旧写入B1还要被A2传播。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<span id="paper-foundation-models-spool-0e99d232" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-01ba2224a8625979">Spool为什么可以跳过保留帧的backbone重算？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aspool">Spool: Low-Latency Streaming Inference for Hybrid Vision-Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · MIT CSAIL</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>固定层输入后GDN更新写成SA+B，帧内多个仿射更新仍是仿射更新，可缓存后作用到不同anchor状态。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两帧更新先乘A1再乘A2，旧写入B1还要被A2传播。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23228v1">原论文</a> · <a href="../../../../foundation-models/2611.23228-spool/">实现解读</a> · <a href="#qa-01ba2224a8625979">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:spool" data-paper-title="Spool: Low-Latency Streaming Inference for Hybrid Vision-Language Models" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Spool: Low-Latency Streaming Inference for Hybrid Vision-Language Models 基础模型 MIT CSAIL 2026-11-17 GDN的key/value/gates只依赖已记录的层输入，因此状态更新对旧状态是仿射的。每帧缓存一个变换，以非交换的时间顺序组成segment tree；窗口到期时从prefix anchor重放保留摘要，而非重跑所有视频token。已核方法位置：3.2–3.4, 4, 5.1, Appendix A。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行GDN逐token摘要、残差合并和循环segment tree的append/expiry/query；不含VLM、Triton/FLA集成、KV tail filling或RoPE重基内核。  注意力与长上下文 流式递归状态 基础模型 推理压缩：权重、KV 缓存与服务带宽 有结合律是否意味着可把帧顺序排序？ 不可以。仿射摘要构成非交换monoid；segment tree可改变括号而不能交换时间顺序，循环槽跨尾时也必须先旧后新。 教学例：F1(S)=2S、F2(S)=S+1，交换后分别为2S+1和2S+2。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-7702ede49bd92da4">有结合律是否意味着可把帧顺序排序？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aspool">Spool: Low-Latency Streaming Inference for Hybrid Vision-Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · MIT CSAIL</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不可以。仿射摘要构成非交换monoid；segment tree可改变括号而不能交换时间顺序，循环槽跨尾时也必须先旧后新。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：F1(S)=2S、F2(S)=S+1，交换后分别为2S+1和2S+2。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23228v1">原论文</a> · <a href="../../../../foundation-models/2611.23228-spool/">实现解读</a> · <a href="#qa-7702ede49bd92da4">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:spool" data-paper-title="Spool: Low-Latency Streaming Inference for Hybrid Vision-Language Models" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Spool: Low-Latency Streaming Inference for Hybrid Vision-Language Models 基础模型 MIT CSAIL 2026-11-17 GDN的key/value/gates只依赖已记录的层输入，因此状态更新对旧状态是仿射的。每帧缓存一个变换，以非交换的时间顺序组成segment tree；窗口到期时从prefix anchor重放保留摘要，而非重跑所有视频token。已核方法位置：3.2–3.4, 4, 5.1, Appendix A。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行GDN逐token摘要、残差合并和循环segment tree的append/expiry/query；不含VLM、Triton/FLA集成、KV tail filling或RoPE重基内核。  注意力与长上下文 流式递归状态 基础模型 推理压缩：权重、KV 缓存与服务带宽 Spool的精确与DropKV的近似驱逐有何不同？ Spool精确重放固定记录层输入的状态变换；DropKV估计删除KV对attention输出的扰动。Spool也不保证整个多层网络重算等价。 教学例：高层某帧特征已受旧帧影响，删除低层旧帧摘要不会改写那份缓存特征。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-0c3cd91180300a10">Spool的精确与DropKV的近似驱逐有何不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aspool">Spool: Low-Latency Streaming Inference for Hybrid Vision-Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · MIT CSAIL</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Spool精确重放固定记录层输入的状态变换；DropKV估计删除KV对attention输出的扰动。Spool也不保证整个多层网络重算等价。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：高层某帧特征已受旧帧影响，删除低层旧帧摘要不会改写那份缓存特征。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23228v1">原论文</a> · <a href="../../../../foundation-models/2611.23228-spool/">实现解读</a> · <a href="#qa-0c3cd91180300a10">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:spool" data-paper-title="Spool: Low-Latency Streaming Inference for Hybrid Vision-Language Models" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Spool: Low-Latency Streaming Inference for Hybrid Vision-Language Models 基础模型 MIT CSAIL 2026-11-17 GDN的key/value/gates只依赖已记录的层输入，因此状态更新对旧状态是仿射的。每帧缓存一个变换，以非交换的时间顺序组成segment tree；窗口到期时从prefix anchor重放保留摘要，而非重跑所有视频token。已核方法位置：3.2–3.4, 4, 5.1, Appendix A。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行GDN逐token摘要、残差合并和循环segment tree的append/expiry/query；不含VLM、Triton/FLA集成、KV tail filling或RoPE重基内核。  注意力与长上下文 流式递归状态 基础模型 推理压缩：权重、KV 缓存与服务带宽 为何存D=A-I而不是直接存A？ A接近单位矩阵时低精度可能抹掉对角微小变化，残差表示把单位部分单独保留；本地用双精度验证代数，不声称已实现作者BF16内核。 教学例：1.0001可能舍入为1，但0.0001作为残差仍能表达小变化。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-3bb1470ea135c989">为何存D=A-I而不是直接存A？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aspool">Spool: Low-Latency Streaming Inference for Hybrid Vision-Language Models</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · MIT CSAIL</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>A接近单位矩阵时低精度可能抹掉对角微小变化，残差表示把单位部分单独保留；本地用双精度验证代数，不声称已实现作者BF16内核。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：1.0001可能舍入为1，但0.0001作为残差仍能表达小变化。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.23228v1">原论文</a> · <a href="../../../../foundation-models/2611.23228-spool/">实现解读</a> · <a href="#qa-3bb1470ea135c989">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:beyond-bitwidth" data-paper-title="Beyond Bitwidth: Deployment-Constrained Mixed-Precision Quantization for Multilingual LLM Inference on NVIDIA Blackwell" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Beyond Bitwidth: Deployment-Constrained Mixed-Precision Quantization for Multilingual LLM Inference on NVIDIA Blackwell 基础模型 ThakiCloud 2026-11-16 低比特名称不保证GPU真的按该格式执行，也不保证多语种质量。本文用固定诊断/selection/final切分，逐fused-module核对weight类型、activation policy、kernel、fallback和显存，再按服务质量约束配置保护。已核方法位置：3.5–3.6, 4.1, abstract。 完整实验成本过高，不复现（审查 DONE）；诊断、selection、final分别实测4.98/2.39/1.35 GPU小时，核144个fused modules，FINAL-81有5,168项。资料收录，未实现。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。仅资料收录，无低比特kernel或模型评测。B200原生NVFP4执行不能由A100/A30上的字节算术替代；不实现通用budget knapsack就声称复现该部署方法。  推理与系统效率 混合精度部署 基础模型 推理压缩：权重、KV 缓存与服务带宽 叫INT4的模型是否就证明按INT4原生执行？ 不能。要核packed weight类型、activation policy、选中的kernel及是否fallback。相同Marlin名称可服务不同格式。 教学例：只打印kernel名，不足以区分INT4和INT8存储。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<span id="paper-foundation-models-beyond-bitwidth-4ae8cc18" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-f02b3f60c60de8df">叫INT4的模型是否就证明按INT4原生执行？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Abeyond-bitwidth">Beyond Bitwidth: Deployment-Constrained Mixed-Precision Quantization for Multilingual LLM Inference on NVIDIA Blackwell</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · ThakiCloud</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。要核packed weight类型、activation policy、选中的kernel及是否fallback。相同Marlin名称可服务不同格式。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：只打印kernel名，不足以区分INT4和INT8存储。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21974v1">原论文</a> · <a href="../../../../foundation-models/2611.21974-beyond-bitwidth/">实现解读</a> · <a href="#qa-f02b3f60c60de8df">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:beyond-bitwidth" data-paper-title="Beyond Bitwidth: Deployment-Constrained Mixed-Precision Quantization for Multilingual LLM Inference on NVIDIA Blackwell" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Beyond Bitwidth: Deployment-Constrained Mixed-Precision Quantization for Multilingual LLM Inference on NVIDIA Blackwell 基础模型 ThakiCloud 2026-11-16 低比特名称不保证GPU真的按该格式执行，也不保证多语种质量。本文用固定诊断/selection/final切分，逐fused-module核对weight类型、activation policy、kernel、fallback和显存，再按服务质量约束配置保护。已核方法位置：3.5–3.6, 4.1, abstract。 完整实验成本过高，不复现（审查 DONE）；诊断、selection、final分别实测4.98/2.39/1.35 GPU小时，核144个fused modules，FINAL-81有5,168项。资料收录，未实现。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。仅资料收录，无低比特kernel或模型评测。B200原生NVFP4执行不能由A100/A30上的字节算术替代；不实现通用budget knapsack就声称复现该部署方法。  推理与系统效率 混合精度部署 基础模型 推理压缩：权重、KV 缓存与服务带宽 多个模块单独恢复的收益能相加吗？ 不能。模块交互使效果强烈非加性，原文用恢复实验排名再预算填充，并不把它当组合效果预测。 教学例：两个模块各恢复1点，不保证同时恢复2点。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-aee8f9f6ce828d74">多个模块单独恢复的收益能相加吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Abeyond-bitwidth">Beyond Bitwidth: Deployment-Constrained Mixed-Precision Quantization for Multilingual LLM Inference on NVIDIA Blackwell</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · ThakiCloud</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。模块交互使效果强烈非加性，原文用恢复实验排名再预算填充，并不把它当组合效果预测。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个模块各恢复1点，不保证同时恢复2点。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21974v1">原论文</a> · <a href="../../../../foundation-models/2611.21974-beyond-bitwidth/">实现解读</a> · <a href="#qa-aee8f9f6ce828d74">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:beyond-bitwidth" data-paper-title="Beyond Bitwidth: Deployment-Constrained Mixed-Precision Quantization for Multilingual LLM Inference on NVIDIA Blackwell" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Beyond Bitwidth: Deployment-Constrained Mixed-Precision Quantization for Multilingual LLM Inference on NVIDIA Blackwell 基础模型 ThakiCloud 2026-11-16 低比特名称不保证GPU真的按该格式执行，也不保证多语种质量。本文用固定诊断/selection/final切分，逐fused-module核对weight类型、activation policy、kernel、fallback和显存，再按服务质量约束配置保护。已核方法位置：3.5–3.6, 4.1, abstract。 完整实验成本过高，不复现（审查 DONE）；诊断、selection、final分别实测4.98/2.39/1.35 GPU小时，核144个fused modules，FINAL-81有5,168项。资料收录，未实现。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。仅资料收录，无低比特kernel或模型评测。B200原生NVFP4执行不能由A100/A30上的字节算术替代；不实现通用budget knapsack就声称复现该部署方法。  推理与系统效率 混合精度部署 基础模型 推理压缩：权重、KV 缓存与服务带宽 最终混合精度优于NVFP4是否证明allocation算法单独有效？ 不证明。比较同时改变activation精度和INT8保护，原文明确未隔离allocation效应。 教学例：activation从4位改16位的贡献不能归给模块排序。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-e34ea702e7238dc3">最终混合精度优于NVFP4是否证明allocation算法单独有效？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Abeyond-bitwidth">Beyond Bitwidth: Deployment-Constrained Mixed-Precision Quantization for Multilingual LLM Inference on NVIDIA Blackwell</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · ThakiCloud</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不证明。比较同时改变activation精度和INT8保护，原文明确未隔离allocation效应。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：activation从4位改16位的贡献不能归给模块排序。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21974v1">原论文</a> · <a href="../../../../foundation-models/2611.21974-beyond-bitwidth/">实现解读</a> · <a href="#qa-e34ea702e7238dc3">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:beyond-bitwidth" data-paper-title="Beyond Bitwidth: Deployment-Constrained Mixed-Precision Quantization for Multilingual LLM Inference on NVIDIA Blackwell" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="Beyond Bitwidth: Deployment-Constrained Mixed-Precision Quantization for Multilingual LLM Inference on NVIDIA Blackwell 基础模型 ThakiCloud 2026-11-16 低比特名称不保证GPU真的按该格式执行，也不保证多语种质量。本文用固定诊断/selection/final切分，逐fused-module核对weight类型、activation policy、kernel、fallback和显存，再按服务质量约束配置保护。已核方法位置：3.5–3.6, 4.1, abstract。 完整实验成本过高，不复现（审查 DONE）；诊断、selection、final分别实测4.98/2.39/1.35 GPU小时，核144个fused modules，FINAL-81有5,168项。资料收录，未实现。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。仅资料收录，无低比特kernel或模型评测。B200原生NVFP4执行不能由A100/A30上的字节算术替代；不实现通用budget knapsack就声称复现该部署方法。  推理与系统效率 混合精度部署 基础模型 推理压缩：权重、KV 缓存与服务带宽 为何不在A100上做一次就当B200验证？ 硬件支持和native格式不同，本地也无作者final checkpoint可核rebuild；完整B200实验超预算，明确不复现并审查DONE。 教学例：A100上FP16模拟NVFP4误差，不是Blackwell原生执行证据。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-c786a73f7149ae40">为何不在A100上做一次就当B200验证？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Abeyond-bitwidth">Beyond Bitwidth: Deployment-Constrained Mixed-Precision Quantization for Multilingual LLM Inference on NVIDIA Blackwell</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · ThakiCloud</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>硬件支持和native格式不同，本地也无作者final checkpoint可核rebuild；完整B200实验超预算，明确不复现并审查DONE。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：A100上FP16模拟NVFP4误差，不是Blackwell原生执行证据。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21974v1">原论文</a> · <a href="../../../../foundation-models/2611.21974-beyond-bitwidth/">实现解读</a> · <a href="#qa-c786a73f7149ae40">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:e-means" data-paper-title="e-means: outperforming k-means (in one-tenth the epochs)" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/compression-and-cache" data-search="e-means: outperforming k-means (in one-tenth the epochs) 基础模型 FAIR at Meta 2026-11-06 Lloyd 每扫完一轮数据才更新质心。e-means 每批更新各簇的 EMA 计数与向量和，让同一轮中的后续批次立即使用新质心。每五批检查低计数簇，借活跃簇分裂复苏；末轮按过程中产生的分配取均值，不额外做一轮全量分配。原文另拟合批大小与峰值步长的缩放律，在大规模场景比较精确、低精度与 IVF 分配。 成本过高，不复现（审查 DONE）。L1 机制诊断。L1 机制诊断。本地执行稠密 CPU 聚类，不是 DINO10B、近邻检索或 GPU 加速复现。fit 使用 NumPy float64 精确平方 L2 分配、确定性同分处理、每轮重新洗牌、余弦步长 EMA、低质量簇复苏、末轮均值。仅接受批大小整除行数的有界输入。若弱簇多于可用的不重复活跃 donor，余下弱簇延到下一次检查；若零计数（例如首步步长为 1）或末轮无分配，保留该簇最近有效中心。这里用固定的小样本步长，不把原文拟合范围外的缩放律当作最佳值。  推理与系统效率 向量索引与聚类训练 基础模型 推理压缩：权重、KV 缓存与服务带宽 为什么 e-means 不能对每批质心简单做 EMA？ 一批里落入同一簇的点数会变。分别累积点数与向量和再相除，会按该簇的实际观测质量加权；对每批均值做 EMA 会把很少点的批次当成同等可靠。 教学例：一批有 9 个值 0，另一批只有一个值 10。若先忽略时间衰减，点数加权均值是 1，而等权平均两个批次的均值是 5。 2026-11-09">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 推理压缩：权重、KV 缓存与服务带宽</a></p>
 <span id="paper-foundation-models-e-means-85035e10" class="ar-learning-paper-anchor"></span>

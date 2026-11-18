@@ -1,0 +1,59 @@
+{
+  "domain": "post-training",
+  "key": "specal",
+  "title": "SpeCal: Spectral Calibration for Unsupervised RLVR",
+  "paper_url": "https://arxiv.org/abs/2611.20691v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.20691v1",
+  "reviewed_version": "v1",
+  "detail_path": "post-training/2611.20691-specal/README.md",
+  "first_author": "Kai Tang",
+  "first_author_affiliation": "Zhejiang University / Ant Group",
+  "published": "2026-11-16",
+  "published_at": "2026-11-16T07:56:19Z",
+  "code": null,
+  "code_status": "固定v1及所核作者入口未找到可验证的本篇方法源码发布；引用的训练器、模型或库不算本篇开源。",
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "topic": [
+    "policy-optimization",
+    "后训练算法组件"
+  ],
+  "priority": "P1",
+  "intake_class": "new_submission_in_requested_window",
+  "implementation_status": "component_only",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_passed": true,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.20691v1",
+    "source_sections": [
+      "§3 Eq.3–12",
+      "§5 experimental setup"
+    ],
+    "basis": "§5明确8张A100，Qwen3-8B-Base/DeepSeek-R1-Distill-Llama-8B、DeepMath难题、batch128、多数学及OOD评测。",
+    "available_resource": "Single NVIDIA A100/A30 or local Mac",
+    "decision": "Full experiment not reproduced due to high cost; review DONE. No checkpoint/data download or paid API call.",
+    "local_budget": {
+      "checkpoint_download_bytes": 0,
+      "dataset_download_bytes": 0,
+      "paid_api_calls": 0,
+      "local_component_seconds_per_seed_cap": 30,
+      "gpu_component_seconds_per_seed_cap": 30,
+      "cap_scope": "Tiny exact operator/negative-control checks only; not a training campaign."
+    }
+  },
+  "summary": "不是。它从response hidden-state几何生成group和rollout权重，重加权已有无监督advantage，再沿原GRPO目标更新；几何权重全部stop-gradient。 归一化response表示的中心Gram谱、质量×effective-rank带通、LOO去噪SVD条件支持及双层RMS advantage校准。",
+  "evaluation_tier": "l1_mechanism",
+  "local_operator": "auto_research.post_training.specal.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.specal import diagnostic; print(diagnostic(42))'",
+  "gpu_validation_artifact": "docs/gpu-validations/specal-a100-20261118-latest.json"
+}

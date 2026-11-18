@@ -1,0 +1,12 @@
+{
+  "figure": 1,
+  "caption": "Rich Insights from Cheap Signals: Efficient Evaluations via Tensor Factorization",
+  "source_url": "https://arxiv.org/pdf/2603.02029v1",
+  "source_version": "v1",
+  "source_sha256": "80be3f0a9e1bb3625b661cf160f163ff1ec968ed5d886aae97ca210d66d3b4c5",
+  "extraction": "fixed v1 PDF page8, crop[65, 80, 533, 206]; no redraw",
+  "file": "paper-figure-01.png",
+  "asset_sha256": "1aa0a0f6878ac1be3d3b0095ffc469f0d62526859952f57083a7039dcf87d233",
+  "copyright": "Original paper authors; no claim of local generation",
+  "visual_review_done": true
+}

@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:yuanbao-rubric/set-utility": {
+      "reviewed": true,
+      "fields": {
+        "question": "Why is pointwise relevance insufficient?",
+        "answer": "A set must cover complementary information and avoid any harmful evidence; individually relevant documents need not form a useful set.",
+        "example": "Teaching example: separate price/performance documents can cover positive criteria collectively, but either document can trigger an outdated-price penalty."
+      },
+      "source_sha256": "5a59ef81e8dd548e1d1da994c799c44c19e60c7476e2e2b61df1660dca606946"
+    },
+    "qa/recommendation:yuanbao-rubric/best-imitation": {
+      "reviewed": true,
+      "fields": {
+        "question": "What does a poor rollout imitate?",
+        "answer": "It maximizes the best in-group trajectory likelihood, weighted by its reward gap, rather than imitating its own failure.",
+        "example": "Teaching example: with rewards0,1,3, the first two imitate the reward3 token sequence with weights3 and2."
+      },
+      "source_sha256": "2b0a65a9e8e9363143232d99c8c3719ad79b90924035ea88637140782524511b"
+    },
+    "qa/recommendation:yuanbao-rubric/not-wesearch": {
+      "reviewed": true,
+      "fields": {
+        "question": "Does Yuanbao change the same layer as WeSearch?",
+        "answer": "No. It aligns utility supervision and subset selection; WeSearch primarily changes atomic matching within cluster-constrained candidates.",
+        "example": "Teaching example: correct ADC distances do not prove a final evidence set is nonredundant, complete or current."
+      },
+      "source_sha256": "03519e4469476cd73f392b7d0bc8ea62361a8eb846f6557e836f6437ebf55c6c"
+    },
+    "qa/recommendation:yuanbao-rubric/zero-ties": {
+      "reviewed": true,
+      "fields": {
+        "question": "What happens when all rewards tie?",
+        "answer": "Advantages and best-reward gaps are zero, so neither branch fabricates a policy update; padding must still receive no gradient.",
+        "example": "Teaching example: rewards all equal to2 yield zero update; arbitrarily small padding log probabilities must not change the loss."
+      },
+      "source_sha256": "162ba22c4d9b8901ef9f89b129c569be88f8318dd451c00efa8121d73828c6e2"
+    },
+    "qa/recommendation:cotti/separate-phases": {
+      "reviewed": true,
+      "fields": {
+        "question": "Why does ABA not retrain the encoder?",
+        "answer": "It corrects event logits after fixing the predictor; CPC/RW handle representation learning, keeping calibration separate.",
+        "example": "Teaching example: a promotion peak changes the ABA event amplitude without retraining the historical encoder."
+      },
+      "source_sha256": "ebdedfc01cd0e0ee0504eb3302fc3206d6400764e410edcb2cc9cc630726d0dd"
+    },
+    "qa/recommendation:cotti/gradient-convention": {
+      "reviewed": true,
+      "fields": {
+        "question": "Do CPC and RW share the same gradient convention?",
+        "answer": "No. CPC eta participates in backpropagation; RW omega is detached and only scales supervised gradients. Detaching both changes the algorithm.",
+        "example": "Teaching example: identical views give a CPC gate of0.5; an RW distance below the mean can receive a weight above1."
+      },
+      "source_sha256": "765fe13cd9a0cd731892e88d580e4dcb29cd4994c53699a67c105f3abad528c5"
+    },
+    "qa/recommendation:cotti/not-causal-filter": {
+      "reviewed": true,
+      "fields": {
+        "question": "Can COTTI replace BAFF interference handling?",
+        "answer": "No. Historical distance is not counterfactual exposure/interference evidence; promotion calibration and polluted experiment logs are different problems.",
+        "example": "Teaching example: online HDR and offline TEN are different controls, not interchangeable causal baselines."
+      },
+      "source_sha256": "2b97f0d47bfe0e9a397c2eac453c9aff2d0af98eca739745b06b28cf9c358fd6"
+    },
+    "qa/recommendation:cotti/one-sided": {
+      "reviewed": true,
+      "fields": {
+        "question": "Why can ABA worsen calibration?",
+        "answer": "A nonnegative event amplitude times tanh variance only raises probabilities. Already-overpredicted groups can worsen, requiring separate subgroup calibration and novel-category recall analysis.",
+        "example": "Teaching example: an overpredicted0.8 probability is still raised by nonnegative ABA; retain this adverse result."
+      },
+      "source_sha256": "86667105e2d398cf9e192fe716d258f940c5059b47d1610a6eb8466bfdcb055e"
+    },
+    "qa/recommendation:intentflow/intent-not-object": {
+      "reviewed": true,
+      "fields": {
+        "question": "Why can one watch image yield different relevance labels?",
+        "answer": "Exact-model search requires entity correspondence, while strap-durability questions can accept transferable material/use evidence from another model.",
+        "example": "Teaching example: one candidate can be grade0/1 for an exact-model request but grade2 for a transferable leather-strap durability question."
+      },
+      "source_sha256": "085c67dbcdab0cdf22b4207235efddfb8c4ef1fee949fe8ae77cbe16fd2fdcc8"
+    },
+    "qa/recommendation:intentflow/shared-bottleneck": {
+      "reviewed": true,
+      "fields": {
+        "question": "Are residual experts six independent query encoders?",
+        "answer": "No. Each branch shares a down bottleneck and mixes six up projections with one query gate, preserving the base projection and document space.",
+        "example": "Teaching example: rank8/64 branches each share a down matrix; their gate is not a hand-written intent one-hot."
+      },
+      "source_sha256": "debf7e26334cabd103fc9ac07af07a3b1e847c2f393fd420f2109576b5095b60"
+    },
+    "qa/recommendation:intentflow/fixed-index": {
+      "reviewed": true,
+      "fields": {
+        "question": "How does it differ from WeSearch cluster constraints?",
+        "answer": "Fixed-index adaptation changes how a query maps into existing document space; cluster constraints organize candidates. They can combine but are not substitutes.",
+        "example": "Teaching example: changing query residuals with bitwise-unchanged documents proves only the fixed-index interface."
+      },
+      "source_sha256": "54961a54b7563575cf1dc86baa6d45c2a4ccaf584b12093ee43db7bf3abc005e"
+    },
+    "qa/recommendation:intentflow/no-test-bank": {
+      "reviewed": true,
+      "fields": {
+        "question": "May the CSLS reference bank use test queries?",
+        "answer": "Do not tune on test distribution or labels. The paper uses training queries to precompute document density for the adapted model; serving only adjusts candidate scores.",
+        "example": "Teaching example: a document with high training-query similarity receives a larger density correction; do not choose k using test hit rates."
+      },
+      "source_sha256": "660982d70bac6920589e3b13c5188311994aa5ac821fda56c543c6ec8796621f"
+    },
+    "qa/foundation-models:simq/token-hit-not-cluster-hit": {
+      "reviewed": true,
+      "fields": {
+        "question": "How many SIMQ+ hits arise when one query token reaches three clusters of one document?",
+        "answer": "One. Counts measure distinct query-token coverage, not cluster multiplicity.",
+        "example": "Teaching example: three clusters containingdocA add only one hit for that token."
+      },
+      "source_sha256": "82371a93275666927d77b290e814350d6987ba721c52da85c624da660cf37ba7"
+    },
+    "qa/foundation-models:simq/threshold-ties": {
+      "reviewed": true,
+      "fields": {
+        "question": "Why can SIMQ+ rerank more thanNmin documents?",
+        "answer": "It uses the largest integer count threshold retaining at leastNmin and keeps every boundary tie.",
+        "example": "Teaching example: if ranks4–6 tie withNmin=4, all six remain."
+      },
+      "source_sha256": "822456473388593a7618e207d6ca99e30ad8ab5e8d60e0d5671b099d59e491a6"
+    },
+    "qa/foundation-models:simq/not-space-alignment": {
+      "reviewed": true,
+      "fields": {
+        "question": "Can SIMQ replace HVMap heterogeneous-space alignment?",
+        "answer": "No. SIMQ changes candidate indexing within one token space; HVMap learns cross-space mappings.",
+        "example": "Teaching example: equal vector dimensionality does not make two encoders comparable by SIMQ inner products."
+      },
+      "source_sha256": "cabf9e137770f6cd28863eb2657f0e3aec676b0963a1109c62ea76ecce9b9461"
+    },
+    "qa/foundation-models:simq/finite-backend-not-qps": {
+      "reviewed": true,
+      "fields": {
+        "question": "Does a working exact local build establish CPU throughput gains?",
+        "answer": "No. It is a small-data backend with real traversal/reranking, not scalable HNSW or matched-recall QPS measurement.",
+        "example": "Teaching example: correct counts on12 documents do not predict million-document latency."
+      },
+      "source_sha256": "9e5f6e834f3cfc2067ae4451bfaa7ec27ab859484388e53d9791ea4fef0935cb"
+    },
+    "qa/foundation-models:unigraph/dynamic-neighborhood": {
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a fixed-alpha graph fail another query?",
+        "answer": "Alpha changes hybrid order and neighborhoods; a0.5 graph can miss lexical- or semantic-dominant neighbors.",
+        "example": "Teaching example: movingalpha from0.3 to0.7 can change the useful entry point."
+      },
+      "source_sha256": "96a4be82ad39fb434bb024a915354486572318dd930d359662bb10dd15727c24"
+    },
+    "qa/foundation-models:unigraph/gamma-safe-bound": {
+      "reviewed": true,
+      "fields": {
+        "question": "Is stronger pruning at smaller gamma still safe?",
+        "answer": "Not guaranteed. Onlygamma=1 directly yields the Cauchy–Schwarz lower bound; smaller values add a positive margin and can discard useful vertices.",
+        "example": "Teaching example: fewer sparse dot products may cost recall."
+      },
+      "source_sha256": "5f36e5821bb655bdd617294f1a05a91ff70f3c179aa0c73854081940bd5bf407"
+    },
+    "qa/foundation-models:unigraph/hybrid-not-mapped": {
+      "reviewed": true,
+      "fields": {
+        "question": "Is UniGraph alpha the HVMap native weight?",
+        "answer": "No. It mixes dense/sparse distances, whereas HVMap weights native/mapped scores.",
+        "example": "Teaching example: raisingalpha does not mean trusting a candidate’s own database more."
+      },
+      "source_sha256": "0c0b0ce4fd04989b45551f62f75cde7df2d70a40fd54df68c989bbaf7c571522"
+    },
+    "qa/foundation-models:unigraph/safe-beam-not-exact-ann": {
+      "reviewed": true,
+      "fields": {
+        "question": "Does matching unpruned beam search atgamma1 prove exact retrieval?",
+        "answer": "No. It preserves that beam’s insertion decisions, while graph reachability, entries and finite beam still limit recall.",
+        "example": "Teaching example: a never-visited true neighbor is not recovered merely by a safe bound."
+      },
+      "source_sha256": "4438fe0c7fd1c794fbbea1fde0289f15461865391b3b3bb34b3f8f98513947fb"
+    },
+    "qa/foundation-models:dealrank/prefix-crowding": {
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a better retriever suffer more from contiguous chunks?",
+        "answer": "Strong documents concentrate in the prefix and exceed one chunk’s quota.",
+        "example": "Teaching example: twenty good prefix documents with quota4 lose sixteen when crowded together; dealing spreads them."
+      },
+      "source_sha256": "bcba7e07af590de339db2a0922959b6898a2e7ffb36d818c976f7174757b46c0"
+    },
+    "qa/foundation-models:dealrank/top4-not-top10": {
+      "reviewed": true,
+      "fields": {
+        "question": "Do six calls/two rounds guarantee the full top10?",
+        "answer": "No. The consistent-ranker proposition guarantees topq, hereq=4; the other six depend on expected-cut analysis.",
+        "example": "Teaching example: exact top4 does not imply lossless nDCG@10."
+      },
+      "source_sha256": "15dec5aa610b48bca6b438b3d489705bdee1306139d5608a4fbd399565306c15"
+    },
+    "qa/foundation-models:dealrank/schedule-not-mapping": {
+      "reviewed": true,
+      "fields": {
+        "question": "Can it replace HVMap dual-space reranking?",
+        "answer": "No. DealRank determines which candidates share a comparison; HVMap defines comparable cross-encoder scores.",
+        "example": "Teaching example: dealing cannot align incompatible embeddings."
+      },
+      "source_sha256": "b8f73822aff46859a26ff8ab9a52e49daed3c53120fc0fee6f021a6693ad3d92"
+    },
+    "qa/foundation-models:dealrank/callback-not-model": {
+      "reviewed": true,
+      "fields": {
+        "question": "What does a deterministic-ranker diagnostic establish?",
+        "answer": "Only concurrency, quota accounting and permutation conservation on controls, not LLM prompting or latency.",
+        "example": "Teaching example: an evaluator’s ranking table must not become a model-visible answer."
+      },
+      "source_sha256": "2dc7485865c6baabd0247c1d3c0438c35dc11c075fab3d71ccc84cd24b132178"
+    },
+    "qa/foundation-models:efficient-evals-tensor/new-code-old-paper": {
+      "reviewed": true,
+      "fields": {
+        "question": "Why is a November intake not a November first release?",
+        "answer": "The Google repository is new; arXivv1 is from March2. First-author grouping remains Michigan with Google collaboration separate.",
+        "example": "Teaching example: a November16 commit cannot replace the original arXiv date."
+      },
+      "source_sha256": "b9a0202631b21a00a8de7afdcd72c8b14efef627e27c0941c0362583f2c7fc85"
+    },
+    "qa/foundation-models:efficient-evals-tensor/frozen-stage2": {
+      "reviewed": true,
+      "fields": {
+        "question": "Why freeze model/prompt factors during human calibration?",
+        "answer": "Autorater data learns shared features; scarce human labels fit an alignment head, and conditional inference treats those features as fixed.",
+        "example": "Teaching example: human loss must not update stage1 prompt vectors."
+      },
+      "source_sha256": "7885ffcaafad9abdf3b21b24eeabd67e3a33f6ba1bdd91f01baf9e91d2acd8ec"
+    },
+    "qa/foundation-models:efficient-evals-tensor/not-proeval": {
+      "reviewed": true,
+      "fields": {
+        "question": "Is it the same method as cost-saving ProEval?",
+        "answer": "No. ProEval actively selects target items and updates a GP, while this model calibrates raters to human judgments.",
+        "example": "Teaching example: adding a cheap judge label is not selecting a human evaluation item."
+      },
+      "source_sha256": "ce12c0f48eed9a1280d5bce8f77945f7829ba9a2d55111640222bb05ad4144ce"
+    },
+    "qa/foundation-models:efficient-evals-tensor/conditional-not-unconditional": {
+      "reviewed": true,
+      "fields": {
+        "question": "May the same interval be used after all-parameter human fine-tuning?",
+        "answer": "No. It assumes fixed features and ignores stage1 estimation error. Fine-tuning changes that condition.",
+        "example": "Teaching example: supplying an identitySigma tests arithmetic, not real coverage."
+      },
+      "source_sha256": "3faaa69219604973906be381150163c6957074bf35bd3cf7eee6504e7202bc48"
+    },
+    "qa/recommendation:cutagent/gene-interface": {
+      "reviewed": true,
+      "fields": {
+        "question": "Why is a creative gene not just the final script?",
+        "answer": "It is a structured planning/production interface specifying narrative units and rules, followed by storyboards, clips, narration and rendering.",
+        "example": "Teaching example: a trust-building unit does not prove the rendered certification shot exists."
+      },
+      "source_sha256": "ca4b9975381f85bad7266fc70988145c307f981fde598991dd9b4320bce7fdc9"
+    },
+    "qa/recommendation:cutagent/ctr-surrogate": {
+      "reviewed": true,
+      "fields": {
+        "question": "Does a high LightGBM CTR-level mean real clicks?",
+        "answer": "No. It is a category-relative training surrogate; realCTR comes from production clicks/impressions.",
+        "example": "Teaching example: reward1 is not100%CTR."
+      },
+      "source_sha256": "e07b4c9350a07ec40793e94e2d51e339ca92b65fe6d653ef7a4e8c5bc880023a"
+    },
+    "qa/recommendation:cutagent/memory-versus-skillhub": {
+      "reviewed": true,
+      "fields": {
+        "question": "Is CutAgent memory the same as AgenticRecTune SkillHub?",
+        "answer": "Both reuse experience, but production-defect corrections conditioned on category/gene differ from recommendation-configuration experiments.",
+        "example": "Teaching example: avoiding repeated close-ups does not specify a recommendation fusion weight."
+      },
+      "source_sha256": "8776d72eba86549c3c4b0ef476e57677666be5594c35f54ed91f8722a10dd15c"
+    },
+    "qa/recommendation:cutagent/preference-not-production": {
+      "reviewed": true,
+      "fields": {
+        "question": "Why must60.4% and2.21% remain separate?",
+        "answer": "The former is forced-choice human preference and the latter production clicks/impressions. Their denominators and objects differ; this round is review-only.",
+        "example": "Teaching example: a participant choosing a video is not an ad-slot click."
+      },
+      "source_sha256": "1593a66dd8af83ea86f04b0b4664d2155e4eb5f7917ff2fb407e9d4da48d5cff"
+    }
+  }
+}

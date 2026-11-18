@@ -1,0 +1,51 @@
+{
+  "domain": "foundation-models",
+  "key": "efficient-evals-tensor",
+  "title": "Rich Insights from Cheap Signals: Efficient Evaluations via Tensor Factorization",
+  "paper_url": "https://arxiv.org/abs/2603.02029v1",
+  "reviewed_version_url": "https://arxiv.org/html/2603.02029v1",
+  "reviewed_version": "v1",
+  "published": "2026-03-02",
+  "published_at": "2026-03-02T16:12:46Z",
+  "detail_path": "foundation-models/2603.02029-efficient-evals-tensor/README.md",
+  "topic": [
+    "评测与可信度",
+    "人类校准与张量评测"
+  ],
+  "first_author": "Felipe Maia Polo",
+  "first_author_affiliation": "University of Michigan",
+  "verified_priority_organizations": [
+    "Google DeepMind"
+  ],
+  "code": "https://github.com/google-deepmind/efficient_evals",
+  "code_status": "已验证Google DeepMind官方仓库，Apache-2.0，固定commit `b4421d929d1078631ee890f8e4a776442c816d36`；2026-11-16新开源，不改变3月首发日期。",
+  "method_source_sha256": "7ca62cee3a591fce9dc58c2fd47dbf1ba43e653acd7e08e1a404465292a603bb",
+  "adapter": null,
+  "priority": "P0",
+  "intake_class": "new_code_historical_backfill",
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": true,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/pdf/2603.02029v1",
+    "available_resource": "one A100/A30 or local Mac",
+    "paper_configuration": "New official Nov16 repository refers to March paper. Public saved-label analysis is possible but upstream full CPU notebook estimates1hour; original three-dataset30-split campaign adds hundreds of thousands of judge ratings. No recollection or full campaign run",
+    "decision": "原文三基准、30次切分及大量judge评分的完整矩阵不重采集；新仓库公开已存评分使离线分析可行，但其完整CPU notebook估计约1小时，本轮不运行。原始数据可用不等于每个组件都必须跑全campaign。"
+  },
+  "summary": "本文将模型、prompt和rater三者的能力张量作低rank CP分解，先用大量廉价autorater评分学共享表示，再冻结表示、只拟合人类rater向量及有序cutoff。它保留prompt异质性和rater偏好差异，不把某个自动judge分数直接当人类真值。2026-11-16是Google官方代码新仓库，不是论文首发；v1首发为2026-03-02 16:12:46 UTC。 本地边界：官方google-research/efficient_evals固定b4421d929d1078631ee890f8e4a776442c816d36、Apache2.0。本地只执行CP、ordinal概率、冻结human NLL和外部Sigma的条件区间算术；不含完整Adam/BFGS拟合、30切分或真实评分重收集。上游CPU notebook估约1小时，完整多judge矩阵高成本不复现，CUDA只验算子。",
+  "local_operator": "auto_research.foundation_models.efficient_evals_tensor.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.foundation_models.efficient_evals_tensor import diagnostic; print(diagnostic(42, device=\"cpu\"))'",
+  "upstream_revision": "b4421d929d1078631ee890f8e4a776442c816d36",
+  "code_license": "Apache-2.0",
+  "gpu_validation_passed": true,
+  "gpu_validation_artifact": "docs/gpu-validations/efficient-evals-tensor-a100-20261118-latest.json"
+}

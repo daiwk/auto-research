@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "key": "design-taste-admission",
+  "device": "cpu",
+  "diagnostic_only": true,
+  "evaluation_tier": "l0_interface",
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l0_interface",
+      "checks": {
+        "all_four_boundaries_are_inclusive": true,
+        "high_agreement_does_not_override_hack_trap": true,
+        "integrity_is_multiplicative": true,
+        "starting_state_floor_is_separate": true
+      },
+      "metrics": {
+        "gated_reward": 0.75,
+        "failed_gate_reward": 0.0,
+        "admission_threshold": 0.85
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l0_interface",
+      "checks": {
+        "all_four_boundaries_are_inclusive": true,
+        "high_agreement_does_not_override_hack_trap": true,
+        "integrity_is_multiplicative": true,
+        "starting_state_floor_is_separate": true
+      },
+      "metrics": {
+        "gated_reward": 0.75,
+        "failed_gate_reward": 0.0,
+        "admission_threshold": 0.85
+      }
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l0_interface",
+      "checks": {
+        "all_four_boundaries_are_inclusive": true,
+        "high_agreement_does_not_override_hack_trap": true,
+        "integrity_is_multiplicative": true,
+        "starting_state_floor_is_separate": true
+      },
+      "metrics": {
+        "gated_reward": 0.75,
+        "failed_gate_reward": 0.0,
+        "admission_threshold": 0.85
+      }
+    }
+  ],
+  "capability_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "checkpoint_calls": 0,
+  "dataset_downloads": 0
+}

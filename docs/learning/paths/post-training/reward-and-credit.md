@@ -7,7 +7,7 @@ hide:
 
 # 奖励与信用：正确结果该奖励哪些步骤
 
-[LLM 后训练](index.md) / 172 个问题 · 43 篇论文
+[LLM 后训练](index.md) / 188 个问题 · 47 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,221 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">172 个问题 · 43 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">188 个问题 · 47 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:design-taste-admission" data-paper-title="Learning Design Taste through Verifiable Synthetic Environments and Agentic Reinforcement Learning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Learning Design Taste through Verifiable Synthetic Environments and Agentic Reinforcement Learning LLM 后训练 固定v1未列一作机构（不由其他作者邮箱推断） 2026-11-16 spacing等指标也可被刷分；必须同时通过expert agreement、单原则扰动/修复因果敏感性、hack trap和重复稳定性。未通过的项只作evaluation，不进reward。不能。专家选择哪些低层信号可被准入并做盲评canary，reward只聚合func/design/rubric/pref；build/render/anticheat等是乘性V0门。 完整实验成本过高，不复现（审查 DONE）；l0_interface 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。expert agreement/causal sensitivity/hack resistance/stability四项admission、V0乘性hard gates与已admit分数composite reward；不造浏览器/设计judge能力。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 为什么可计算的网页指标还不能直接当RL reward？ spacing等指标也可被刷分；必须同时通过expert agreement、单原则扰动/修复因果敏感性、hack trap和重复稳定性。未通过的项只作evaluation，不进reward。 教学例：把所有间距压成同值能提高scale conformity，却可能破坏proximity，应由trap抓到。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<span id="paper-post-training-design-taste-admission-0e6a4951" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-94c285365b1d34ca">为什么可计算的网页指标还不能直接当RL reward？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Adesign-taste-admission">Learning Design Taste through Verifiable Synthetic Environments and Agentic Reinforcement Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · 固定v1未列一作机构（不由其他作者邮箱推断）</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>spacing等指标也可被刷分；必须同时通过expert agreement、单原则扰动/修复因果敏感性、hack trap和重复稳定性。未通过的项只作evaluation，不进reward。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：把所有间距压成同值能提高scale conformity，却可能破坏proximity，应由trap抓到。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20612v1">原论文</a> · <a href="../../../../post-training/2611.20612-design-taste-admission/">实现解读</a> · <a href="#qa-94c285365b1d34ca">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:design-taste-admission" data-paper-title="Learning Design Taste through Verifiable Synthetic Environments and Agentic Reinforcement Learning" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Learning Design Taste through Verifiable Synthetic Environments and Agentic Reinforcement Learning LLM 后训练 固定v1未列一作机构（不由其他作者邮箱推断） 2026-11-16 spacing等指标也可被刷分；必须同时通过expert agreement、单原则扰动/修复因果敏感性、hack trap和重复稳定性。未通过的项只作evaluation，不进reward。不能。专家选择哪些低层信号可被准入并做盲评canary，reward只聚合func/design/rubric/pref；build/render/anticheat等是乘性V0门。 完整实验成本过高，不复现（审查 DONE）；l0_interface 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。expert agreement/causal sensitivity/hack resistance/stability四项admission、V0乘性hard gates与已admit分数composite reward；不造浏览器/设计judge能力。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 V4专家panel能否直接加入composite reward？ 不能。专家选择哪些低层信号可被准入并做盲评canary，reward只聚合func/design/rubric/pref；build/render/anticheat等是乘性V0门。 教学例：所有软分1但no-regression=false时reward仍为0，不能靠其它项补偿。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-a41ff7837d6ce5f6">V4专家panel能否直接加入composite reward？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Adesign-taste-admission">Learning Design Taste through Verifiable Synthetic Environments and Agentic Reinforcement Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · 固定v1未列一作机构（不由其他作者邮箱推断）</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。专家选择哪些低层信号可被准入并做盲评canary，reward只聚合func/design/rubric/pref；build/render/anticheat等是乘性V0门。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：所有软分1但no-regression=false时reward仍为0，不能靠其它项补偿。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20612v1">原论文</a> · <a href="../../../../post-training/2611.20612-design-taste-admission/">实现解读</a> · <a href="#qa-a41ff7837d6ce5f6">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:design-taste-admission" data-paper-title="Learning Design Taste through Verifiable Synthetic Environments and Agentic Reinforcement Learning" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Learning Design Taste through Verifiable Synthetic Environments and Agentic Reinforcement Learning LLM 后训练 固定v1未列一作机构（不由其他作者邮箱推断） 2026-11-16 spacing等指标也可被刷分；必须同时通过expert agreement、单原则扰动/修复因果敏感性、hack trap和重复稳定性。未通过的项只作evaluation，不进reward。不能。专家选择哪些低层信号可被准入并做盲评canary，reward只聚合func/design/rubric/pref；build/render/anticheat等是乘性V0门。 完整实验成本过高，不复现（审查 DONE）；l0_interface 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。expert agreement/causal sensitivity/hack resistance/stability四项admission、V0乘性hard gates与已admit分数composite reward；不造浏览器/设计judge能力。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 与Bait都防reward hacking，为何不是同一个机制？ Bait看private probe奖励偏好并翻转reward；本方法在训练前后筛选和复核候选评判信号。前者依赖probe覆盖，后者依赖专家golden/trap覆盖，均非通用安全保证。 教学例：expert agreement=.99但hack trap失败率.21时仍拒绝admit，而不是翻转该项分数。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-0548901ea9c80458">与Bait都防reward hacking，为何不是同一个机制？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Adesign-taste-admission">Learning Design Taste through Verifiable Synthetic Environments and Agentic Reinforcement Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · 固定v1未列一作机构（不由其他作者邮箱推断）</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Bait看private probe奖励偏好并翻转reward；本方法在训练前后筛选和复核候选评判信号。前者依赖probe覆盖，后者依赖专家golden/trap覆盖，均非通用安全保证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：expert agreement=.99但hack trap失败率.21时仍拒绝admit，而不是翻转该项分数。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20612v1">原论文</a> · <a href="../../../../post-training/2611.20612-design-taste-admission/">实现解读</a> · <a href="#qa-0548901ea9c80458">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:design-taste-admission" data-paper-title="Learning Design Taste through Verifiable Synthetic Environments and Agentic Reinforcement Learning" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Learning Design Taste through Verifiable Synthetic Environments and Agentic Reinforcement Learning LLM 后训练 固定v1未列一作机构（不由其他作者邮箱推断） 2026-11-16 spacing等指标也可被刷分；必须同时通过expert agreement、单原则扰动/修复因果敏感性、hack trap和重复稳定性。未通过的项只作evaluation，不进reward。不能。专家选择哪些低层信号可被准入并做盲评canary，reward只聚合func/design/rubric/pref；build/render/anticheat等是乘性V0门。 完整实验成本过高，不复现（审查 DONE）；l0_interface 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。expert agreement/causal sensitivity/hack resistance/stability四项admission、V0乘性hard gates与已admit分数composite reward；不造浏览器/设计judge能力。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 组件是否复现了网页设计Agent？ 没有。只接受外部观测率和已admit分数，执行四门槛及奖励代数；无Chromium、真实专家、judge ensemble或4B模型。起始状态≤.4是训练题准入，不应强行裁剪最终reward。 教学例：starting reward=.41标不合格，但已完成episode的.75分不被硬改为.4。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-2dd27c6a77c3ffe8">组件是否复现了网页设计Agent？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Adesign-taste-admission">Learning Design Taste through Verifiable Synthetic Environments and Agentic Reinforcement Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · 固定v1未列一作机构（不由其他作者邮箱推断）</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>没有。只接受外部观测率和已admit分数，执行四门槛及奖励代数；无Chromium、真实专家、judge ensemble或4B模型。起始状态≤.4是训练题准入，不应强行裁剪最终reward。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：starting reward=.41标不合格，但已完成episode的.75分不被硬改为.4。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20612v1">原论文</a> · <a href="../../../../post-training/2611.20612-design-taste-admission/">实现解读</a> · <a href="#qa-2dd27c6a77c3ffe8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:gprm" data-paper-title="GPRM: Global Perspective Process Reward Model" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="GPRM: Global Perspective Process Reward Model LLM 后训练 Wuhan University 2026-11-16 除问题和当前step，还读历史step与已预测judgment、当前候选的后续trajectory；四维分析是forward consistency、posterior verification、goal alignment、self validity。离线诊断和Best-of-N已有完整候选，未来信息免费可见；逐步搜索尚无未来，需要先生成continuation再判当前step，成本不能按普通prefix PRM估。 完整实验成本过高，不复现（审查 DONE）；parser只能提取[CORRECT]格式，不能代替235B教师合成、4B/14B诊断模型和搜索训练。仅方法与成本收录，无本地模型实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录方法和成本；不以字符串parser或固定规则替代4维global PRM。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 global perspective多看了哪些信息？ 除问题和当前step，还读历史step与已预测judgment、当前候选的后续trajectory；四维分析是forward consistency、posterior verification、goal alignment、self validity。 教学例：历史项必须是模型预测标签，评测不能偷偷换gold历史。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<span id="paper-post-training-gprm-16ca3358" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-7d57307b03ad7cc4">global perspective多看了哪些信息？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Agprm">GPRM: Global Perspective Process Reward Model</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Wuhan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>除问题和当前step，还读历史step与已预测judgment、当前候选的后续trajectory；四维分析是forward consistency、posterior verification、goal alignment、self validity。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：历史项必须是模型预测标签，评测不能偷偷换gold历史。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20755v1">原论文</a> · <a href="../../../../post-training/2611.20755-gprm/">实现解读</a> · <a href="#qa-7d57307b03ad7cc4">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:gprm" data-paper-title="GPRM: Global Perspective Process Reward Model" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="GPRM: Global Perspective Process Reward Model LLM 后训练 Wuhan University 2026-11-16 除问题和当前step，还读历史step与已预测judgment、当前候选的后续trajectory；四维分析是forward consistency、posterior verification、goal alignment、self validity。离线诊断和Best-of-N已有完整候选，未来信息免费可见；逐步搜索尚无未来，需要先生成continuation再判当前step，成本不能按普通prefix PRM估。 完整实验成本过高，不复现（审查 DONE）；parser只能提取[CORRECT]格式，不能代替235B教师合成、4B/14B诊断模型和搜索训练。仅方法与成本收录，无本地模型实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录方法和成本；不以字符串parser或固定规则替代4维global PRM。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 为何完整trajectory评分可用于离线，却增加在线搜索成本？ 离线诊断和Best-of-N已有完整候选，未来信息免费可见；逐步搜索尚无未来，需要先生成continuation再判当前step，成本不能按普通prefix PRM估。 教学例：树中扩8个当前step候选还可能各需续写终点，不能仅记8次短前向。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-4429c7b88d8638af">为何完整trajectory评分可用于离线，却增加在线搜索成本？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Agprm">GPRM: Global Perspective Process Reward Model</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Wuhan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>离线诊断和Best-of-N已有完整候选，未来信息免费可见；逐步搜索尚无未来，需要先生成continuation再判当前step，成本不能按普通prefix PRM估。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：树中扩8个当前step候选还可能各需续写终点，不能仅记8次短前向。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20755v1">原论文</a> · <a href="../../../../post-training/2611.20755-gprm/">实现解读</a> · <a href="#qa-4429c7b88d8638af">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:gprm" data-paper-title="GPRM: Global Perspective Process Reward Model" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="GPRM: Global Perspective Process Reward Model LLM 后训练 Wuhan University 2026-11-16 除问题和当前step，还读历史step与已预测judgment、当前候选的后续trajectory；四维分析是forward consistency、posterior verification、goal alignment、self validity。离线诊断和Best-of-N已有完整候选，未来信息免费可见；逐步搜索尚无未来，需要先生成continuation再判当前step，成本不能按普通prefix PRM估。 完整实验成本过高，不复现（审查 DONE）；parser只能提取[CORRECT]格式，不能代替235B教师合成、4B/14B诊断模型和搜索训练。仅方法与成本收录，无本地模型实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录方法和成本；不以字符串parser或固定规则替代4维global PRM。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 它与现有GRPO的关系是什么？ GRPO只是训练第二阶段优化器；核心模型是带历史预测和未来视角的四维诊断器。已有GRPO loss并不自动提供global process correctness能力。 教学例：一个二值随机classifier外面套GRPO，仍没有四维分析与递归judgment。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-5dfbebf0f4357873">它与现有GRPO的关系是什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Agprm">GPRM: Global Perspective Process Reward Model</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Wuhan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>GRPO只是训练第二阶段优化器；核心模型是带历史预测和未来视角的四维诊断器。已有GRPO loss并不自动提供global process correctness能力。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个二值随机classifier外面套GRPO，仍没有四维分析与递归judgment。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20755v1">原论文</a> · <a href="../../../../post-training/2611.20755-gprm/">实现解读</a> · <a href="#qa-5dfbebf0f4357873">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:gprm" data-paper-title="GPRM: Global Perspective Process Reward Model" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="GPRM: Global Perspective Process Reward Model LLM 后训练 Wuhan University 2026-11-16 除问题和当前step，还读历史step与已预测judgment、当前候选的后续trajectory；四维分析是forward consistency、posterior verification、goal alignment、self validity。离线诊断和Best-of-N已有完整候选，未来信息免费可见；逐步搜索尚无未来，需要先生成continuation再判当前step，成本不能按普通prefix PRM估。 完整实验成本过高，不复现（审查 DONE）；parser只能提取[CORRECT]格式，不能代替235B教师合成、4B/14B诊断模型和搜索训练。仅方法与成本收录，无本地模型实现。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。只收录方法和成本；不以字符串parser或固定规则替代4维global PRM。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 为什么这轮不做一个parser当低成本实现？ parser只能提取[CORRECT]格式，不能代替235B教师合成、4B/14B诊断模型和搜索训练。故完整实验高成本不复现，review DONE；没有本地模型实现或虚构分数。 教学例：返回标签能解析不等于能识别第一处逻辑错误。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-4e9db155360719e0">为什么这轮不做一个parser当低成本实现？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Agprm">GPRM: Global Perspective Process Reward Model</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Wuhan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>parser只能提取[CORRECT]格式，不能代替235B教师合成、4B/14B诊断模型和搜索训练。故完整实验高成本不复现，review DONE；没有本地模型实现或虚构分数。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：返回标签能解析不等于能识别第一处逻辑错误。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20755v1">原论文</a> · <a href="../../../../post-training/2611.20755-gprm/">实现解读</a> · <a href="#qa-4e9db155360719e0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:jev-safety-reward" data-paper-title="Jev-as-a-Reward: Validating Probabilistic Safety Judges for Reinforcement Learning" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Jev-as-a-Reward: Validating Probabilistic Safety Judges for Reinforcement Learning LLM 后训练 KT / Sungkyunkwan University 2026-11-16 c=max(p,1-p)低于阈值才交强judge；高置信把有害判为安全的miss永远不会被委托，训练可能集中到这个区域。GPR分母是剩余harm，PHR分母是harmful-prompt全部回答。若已知harm消失更快，盲区绝对量仍下降而份额上升；escape要看PHR显著增加及外部人工审核。 完整实验成本过高，不复现（审查 DONE）；l0_interface 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。固定概率judge的confidence gate、校准集阈值、PHR/GPR分母区分、prompt级bootstrap和judge升级重审规则；不实现商业judge。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 为何只委托不确定判断仍有安全盲区？ c=max(p,1-p)低于阈值才交强judge；高置信把有害判为安全的miss永远不会被委托，训练可能集中到这个区域。 教学例：harm概率.01而外部参考认定harm时，c=.99，高τ=.93仍直接放行。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<span id="paper-post-training-jev-safety-reward-9ee7130c" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-f51e24cf4dcfd026">为何只委托不确定判断仍有安全盲区？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ajev-safety-reward">Jev-as-a-Reward: Validating Probabilistic Safety Judges for Reinforcement Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · KT / Sungkyunkwan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>c=max(p,1-p)低于阈值才交强judge；高置信把有害判为安全的miss永远不会被委托，训练可能集中到这个区域。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：harm概率.01而外部参考认定harm时，c=.99，高τ=.93仍直接放行。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20955v1">原论文</a> · <a href="../../../../post-training/2611.20955-jev-safety-reward/">实现解读</a> · <a href="#qa-f51e24cf4dcfd026">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:jev-safety-reward" data-paper-title="Jev-as-a-Reward: Validating Probabilistic Safety Judges for Reinforcement Learning" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Jev-as-a-Reward: Validating Probabilistic Safety Judges for Reinforcement Learning LLM 后训练 KT / Sungkyunkwan University 2026-11-16 c=max(p,1-p)低于阈值才交强judge；高置信把有害判为安全的miss永远不会被委托，训练可能集中到这个区域。GPR分母是剩余harm，PHR分母是harmful-prompt全部回答。若已知harm消失更快，盲区绝对量仍下降而份额上升；escape要看PHR显著增加及外部人工审核。 完整实验成本过高，不复现（审查 DONE）；l0_interface 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。固定概率judge的confidence gate、校准集阈值、PHR/GPR分母区分、prompt级bootstrap和judge升级重审规则；不实现商业judge。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 GPR升高为什么不能直接说reward被攻破？ GPR分母是剩余harm，PHR分母是harmful-prompt全部回答。若已知harm消失更快，盲区绝对量仍下降而份额上升；escape要看PHR显著增加及外部人工审核。 教学例：miss从10降到5，总harm从100降到10时GPR从.1升到.5，量却减半。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-20bc959ec35aa261">GPR升高为什么不能直接说reward被攻破？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ajev-safety-reward">Jev-as-a-Reward: Validating Probabilistic Safety Judges for Reinforcement Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · KT / Sungkyunkwan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>GPR分母是剩余harm，PHR分母是harmful-prompt全部回答。若已知harm消失更快，盲区绝对量仍下降而份额上升；escape要看PHR显著增加及外部人工审核。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：miss从10降到5，总harm从100降到10时GPR从.1升到.5，量却减半。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20955v1">原论文</a> · <a href="../../../../post-training/2611.20955-jev-safety-reward/">实现解读</a> · <a href="#qa-20bc959ec35aa261">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:jev-safety-reward" data-paper-title="Jev-as-a-Reward: Validating Probabilistic Safety Judges for Reinforcement Learning" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Jev-as-a-Reward: Validating Probabilistic Safety Judges for Reinforcement Learning LLM 后训练 KT / Sungkyunkwan University 2026-11-16 c=max(p,1-p)低于阈值才交强judge；高置信把有害判为安全的miss永远不会被委托，训练可能集中到这个区域。GPR分母是剩余harm，PHR分母是harmful-prompt全部回答。若已知harm消失更快，盲区绝对量仍下降而份额上升；escape要看PHR显著增加及外部人工审核。 完整实验成本过高，不复现（审查 DONE）；l0_interface 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。固定概率judge的confidence gate、校准集阈值、PHR/GPR分母区分、prompt级bootstrap和judge升级重审规则；不实现商业judge。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 它与Bait的reward符号翻转是什么关系？ Bait基于私有probe/policy reward差改变训练reward；本协议验证judge的门控漏报和时间变化，不自动翻转reward，也不把某个参考judge当绝对真值。 教学例：PHR区间含0进入S3，不应直接触发所有训练reward取负。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-a11a88c1b09a3350">它与Bait的reward符号翻转是什么关系？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ajev-safety-reward">Jev-as-a-Reward: Validating Probabilistic Safety Judges for Reinforcement Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · KT / Sungkyunkwan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Bait基于私有probe/policy reward差改变训练reward；本协议验证judge的门控漏报和时间变化，不自动翻转reward，也不把某个参考judge当绝对真值。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：PHR区间含0进入S3，不应直接触发所有训练reward取负。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20955v1">原论文</a> · <a href="../../../../post-training/2611.20955-jev-safety-reward/">实现解读</a> · <a href="#qa-a11a88c1b09a3350">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:jev-safety-reward" data-paper-title="Jev-as-a-Reward: Validating Probabilistic Safety Judges for Reinforcement Learning" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Jev-as-a-Reward: Validating Probabilistic Safety Judges for Reinforcement Learning LLM 后训练 KT / Sungkyunkwan University 2026-11-16 c=max(p,1-p)低于阈值才交强judge；高置信把有害判为安全的miss永远不会被委托，训练可能集中到这个区域。GPR分母是剩余harm，PHR分母是harmful-prompt全部回答。若已知harm消失更快，盲区绝对量仍下降而份额上升；escape要看PHR显著增加及外部人工审核。 完整实验成本过高，不复现（审查 DONE）；l0_interface 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。固定概率judge的confidence gate、校准集阈值、PHR/GPR分母区分、prompt级bootstrap和judge升级重审规则；不实现商业judge。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 为何bootstrap不能把同prompt八条回答当独立？ 它们共享prompt，相关性会低估区间宽度。原文按prompt重采样2000次，并将100校准条目排除在后续评测之外；新judge版本重查阈值规则。 教学例：接口输入prompt×rollout矩阵，整行抽样而非打散token或回答。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-5c2ce21bf84eb11e">为何bootstrap不能把同prompt八条回答当独立？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Ajev-safety-reward">Jev-as-a-Reward: Validating Probabilistic Safety Judges for Reinforcement Learning</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · KT / Sungkyunkwan University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它们共享prompt，相关性会低估区间宽度。原文按prompt重采样2000次，并将100校准条目排除在后续评测之外；新judge版本重查阈值规则。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：接口输入prompt×rollout矩阵，整行抽样而非打散token或回答。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20955v1">原论文</a> · <a href="../../../../post-training/2611.20955-jev-safety-reward/">实现解读</a> · <a href="#qa-5c2ce21bf84eb11e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:optimistic-verifier-audit" data-paper-title="Optimistic Verifiers Get Hacked: Reward Hacking Under an Exact Process Oracle" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Optimistic Verifiers Get Hacked: Reward Hacking Under an Exact Process Oracle LLM 后训练 University College of Engineering, BIT Campus, Anna University, Tiruchirappalli 2026-11-16 固定被引用特征后，所有其它特征补全都必须维持同一决策；再去掉任一特征就不充分才是minimal。可能存在多个替代充分理由，需保存antichain。引用所有特征通常充分，却夹带无因果作用内容。精确reward用MSR并集测precision、最佳单个MSR测recall，padding会降低precision而不因充分性拿满分。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。小有限状态域的精确MSR antichain、因果precision/recall/F1、代理selection-error和signed/absolute gap；不伪造LLM训练伤害。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 minimal sufficient reason为何不等于命中的第一条rule？ 固定被引用特征后，所有其它特征补全都必须维持同一决策；再去掉任一特征就不充分才是minimal。可能存在多个替代充分理由，需保存antichain。 教学例：gate=x0或x1且二者为1时，{0}和{1}都是最小理由，不是{0,1}。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<span id="paper-post-training-optimistic-verifier-audit-58a49b47" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-75a889f7b6de31b0">minimal sufficient reason为何不等于命中的第一条rule？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aoptimistic-verifier-audit">Optimistic Verifiers Get Hacked: Reward Hacking Under an Exact Process Oracle</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University College of Engineering, BIT Campus, Anna University, Tiruchirappalli</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>固定被引用特征后，所有其它特征补全都必须维持同一决策；再去掉任一特征就不充分才是minimal。可能存在多个替代充分理由，需保存antichain。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：gate=x0或x1且二者为1时，{0}和{1}都是最小理由，不是{0,1}。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21538v1">原论文</a> · <a href="../../../../post-training/2611.21538-optimistic-verifier-audit/">实现解读</a> · <a href="#qa-75a889f7b6de31b0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:optimistic-verifier-audit" data-paper-title="Optimistic Verifiers Get Hacked: Reward Hacking Under an Exact Process Oracle" data-learning-pending="false" data-level="mechanism" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Optimistic Verifiers Get Hacked: Reward Hacking Under an Exact Process Oracle LLM 后训练 University College of Engineering, BIT Campus, Anna University, Tiruchirappalli 2026-11-16 固定被引用特征后，所有其它特征补全都必须维持同一决策；再去掉任一特征就不充分才是minimal。可能存在多个替代充分理由，需保存antichain。引用所有特征通常充分，却夹带无因果作用内容。精确reward用MSR并集测precision、最佳单个MSR测recall，padding会降低precision而不因充分性拿满分。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。小有限状态域的精确MSR antichain、因果precision/recall/F1、代理selection-error和signed/absolute gap；不伪造LLM训练伤害。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 只测sufficiency为何奖励padding？ 引用所有特征通常充分，却夹带无因果作用内容。精确reward用MSR并集测precision、最佳单个MSR测recall，padding会降低precision而不因充分性拿满分。 教学例：理由只需x0，额外引用无关x2会降低precision；不能只判断结论字正确。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-497af4ef4fa03e60">只测sufficiency为何奖励padding？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aoptimistic-verifier-audit">Optimistic Verifiers Get Hacked: Reward Hacking Under an Exact Process Oracle</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University College of Engineering, BIT Campus, Anna University, Tiruchirappalli</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>引用所有特征通常充分，却夹带无因果作用内容。精确reward用MSR并集测precision、最佳单个MSR测recall，padding会降低precision而不因充分性拿满分。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：理由只需x0，额外引用无关x2会降低precision；不能只判断结论字正确。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21538v1">原论文</a> · <a href="../../../../post-training/2611.21538-optimistic-verifier-audit/">实现解读</a> · <a href="#qa-497af4ef4fa03e60">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:optimistic-verifier-audit" data-paper-title="Optimistic Verifiers Get Hacked: Reward Hacking Under an Exact Process Oracle" data-learning-pending="false" data-level="comparison" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Optimistic Verifiers Get Hacked: Reward Hacking Under an Exact Process Oracle LLM 后训练 University College of Engineering, BIT Campus, Anna University, Tiruchirappalli 2026-11-16 固定被引用特征后，所有其它特征补全都必须维持同一决策；再去掉任一特征就不充分才是minimal。可能存在多个替代充分理由，需保存antichain。引用所有特征通常充分，却夹带无因果作用内容。精确reward用MSR并集测precision、最佳单个MSR测recall，padding会降低precision而不因充分性拿满分。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。小有限状态域的精确MSR antichain、因果precision/recall/F1、代理selection-error和signed/absolute gap；不伪造LLM训练伤害。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 它与Bait一样直接修复reward吗？ 不是。该论文先在可知真值域测proxy selection-error及gap，预测风险；Bait用probe差做防御变换。精确oracle通常只在特定小域可得，不能据此声称通用Agent真值已解决。 教学例：两个true reward不同而proxy打平，selection error计.5，说明选择失真而非训练已发生伤害。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-94b66b5f973c1cb2">它与Bait一样直接修复reward吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aoptimistic-verifier-audit">Optimistic Verifiers Get Hacked: Reward Hacking Under an Exact Process Oracle</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University College of Engineering, BIT Campus, Anna University, Tiruchirappalli</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。该论文先在可知真值域测proxy selection-error及gap，预测风险；Bait用probe差做防御变换。精确oracle通常只在特定小域可得，不能据此声称通用Agent真值已解决。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个true reward不同而proxy打平，selection error计.5，说明选择失真而非训练已发生伤害。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21538v1">原论文</a> · <a href="../../../../post-training/2611.21538-optimistic-verifier-audit/">实现解读</a> · <a href="#qa-94b66b5f973c1cb2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:optimistic-verifier-audit" data-paper-title="Optimistic Verifiers Get Hacked: Reward Hacking Under an Exact Process Oracle" data-learning-pending="false" data-level="implementation" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Optimistic Verifiers Get Hacked: Reward Hacking Under an Exact Process Oracle LLM 后训练 University College of Engineering, BIT Campus, Anna University, Tiruchirappalli 2026-11-16 固定被引用特征后，所有其它特征补全都必须维持同一决策；再去掉任一特征就不充分才是minimal。可能存在多个替代充分理由，需保存antichain。引用所有特征通常充分，却夹带无因果作用内容。精确reward用MSR并集测precision、最佳单个MSR测recall，padding会降低precision而不因充分性拿满分。 完整实验成本过高，不复现（审查 DONE）；l1_mechanism 独立组件，diagnostic only。完整实验成本过高，不复现（审查 DONE）；不自动重试、不进入Evolve晋级。小有限状态域的精确MSR antichain、因果precision/recall/F1、代理selection-error和signed/absolute gap；不伪造LLM训练伤害。  reward-and-credit 后训练算法组件 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 本地为何只允许小枚举域？ 按定义枚举补全和子集成本指数增长；组件用上限显式拒绝超预算，不为了证明昂贵跑124416状态×多gate×多模型矩阵。oracle只给外部scorer。 教学例：13个二元特征有8192状态，超过默认4096就报错；不是把未检查状态默认安全。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-daa56f779f4bbbaa">本地为何只允许小枚举域？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=post-training%3Aoptimistic-verifier-audit">Optimistic Verifiers Get Hacked: Reward Hacking Under an Exact Process Oracle</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University College of Engineering, BIT Campus, Anna University, Tiruchirappalli</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>按定义枚举补全和子集成本指数增长；组件用上限显式拒绝超预算，不为了证明昂贵跑124416状态×多gate×多模型矩阵。oracle只给外部scorer。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：13个二元特征有8192状态，超过默认4096就报错；不是把未检查状态默认安全。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.21538v1">原论文</a> · <a href="../../../../post-training/2611.21538-optimistic-verifier-audit/">实现解读</a> · <a href="#qa-daa56f779f4bbbaa">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="post-training:bait-reward-defense" data-paper-title="Bait: Mitigating Harmful Agentic Reinforcement Learning via Probing Reward Function" data-learning-pending="false" data-level="basics" data-domain="post-training" data-theme="post-training" data-topic="post-training/reward-and-credit" data-search="Bait: Mitigating Harmful Agentic Reinforcement Learning via Probing Reward Function LLM 后训练 Georgia Institute of Technology 2026-11-12 当外部环境给不安全行为更高奖励时，普通 RL 会沿错误方向更新。Bait 在防御者私有标识下混入 probe 回答，用其平均 reward 与真实 policy 回答比较；探针更受奖励时反转整组奖励，再只向策略学习暴露 policy 部分。核心是检测 reward function 偏好，不是根据“最终回答看起来安全”给固定加分。本地只接受外部数值 reward 和 private probe mask，不实现 probe 生成模型、语义安全判断、攻击或 RL 更新。 完整实验成本过高，不复现（审查 DONE）。CPU 三种子诊断；L1 防御性 reward-gap / sign-flip 数值组件，diagnostic only。不生成有害 probe、攻击或有害文本，不训练 Agent。完整实验成本过高，不复现（审查 DONE）。transform_rewards(rewards, probe_mask)接收有限二维 numeric reward 和同形 Boolean mask，返回每组 divergence、检测结果、全部变换 reward 和剔除 probe 的 policy-only reward。probe 身份是调用方的防御私有状态，不应传给被训练 Agent。  奖励与信用分配 防御性奖励探测与符号变换 LLM 后训练 奖励与信用：正确结果该奖励哪些步骤 Bait本地组件检测的是有害文本吗？ 不是。它比较外部reward对防御私有probe与policy回答的偏好，只处理数字及membership。probe生成、语义安全判断与真实RL都不在实现中，数值gap不是harmfulness准确率。 教学例：同一张reward表在不同probe标签下可得到不同gap；若标签或probe含义不可靠，公式正确仍不能保证安全。 2026-11-15">
 <p class="ar-learning-card__domain"><a href="./">LLM 后训练 / 奖励与信用：正确结果该奖励哪些步骤</a></p>
 <span id="paper-post-training-bait-reward-defense-04045664" class="ar-learning-paper-anchor"></span>

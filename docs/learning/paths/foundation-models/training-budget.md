@@ -7,7 +7,7 @@ hide:
 
 # 训练预算：数据配比、目标与优化器
 
-[基础模型](index.md) / 136 个问题 · 34 篇论文
+[基础模型](index.md) / 144 个问题 · 36 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,115 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">136 个问题 · 34 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">144 个问题 · 36 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:lara-plus-plus" data-paper-title="The Kernel Reality Check: Benchmarking and Distilling Efficient Attention at Scale" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="The Kernel Reality Check: Benchmarking and Distilling Efficient Attention at Scale 基础模型 Concordia University / Mila 2026-11-17 本文重新核查核化attention的真实效率，并用确定性proposal均值代替随机采样、相似性聚类代替连续切块改善LARA质量。与复杂度口号不同，cluster数量随序列增长时k-center成本为二次；近softmax质量不等于比FlashAttention快。已核方法位置：7, Appendix E.1。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行固定源码的deterministic clustering、proposal means、mis-opt自归一重要性权重与value聚合；不执行逐层蒸馏、ImageNet/YFCC15M训练或FLA高效内核。  注意力与长上下文 核注意力与蒸馏 基础模型 训练预算：数据配比、目标与优化器 恢复接近softmax的准确率，是否解决核注意力实际效率问题？ 没有。原文LARA++仍有importance权重与聚类开销，甚至是较慢核化方案；质量恢复和系统提速需分别测量。 教学例：cluster数量取N/8时，贪心分组不是固定cluster数下的线性成本。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<span id="paper-foundation-models-lara-plus-plus-d79ad020" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-73c576763d03e770">恢复接近softmax的准确率，是否解决核注意力实际效率问题？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Alara-plus-plus">The Kernel Reality Check: Benchmarking and Distilling Efficient Attention at Scale</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Concordia University / Mila</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>没有。原文LARA++仍有importance权重与聚类开销，甚至是较慢核化方案；质量恢复和系统提速需分别测量。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：cluster数量取N/8时，贪心分组不是固定cluster数下的线性成本。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22947v1">原论文</a> · <a href="../../../../foundation-models/2611.22947-lara-plus-plus/">实现解读</a> · <a href="#qa-73c576763d03e770">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:lara-plus-plus" data-paper-title="The Kernel Reality Check: Benchmarking and Distilling Efficient Attention at Scale" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="The Kernel Reality Check: Benchmarking and Distilling Efficient Attention at Scale 基础模型 Concordia University / Mila 2026-11-17 本文重新核查核化attention的真实效率，并用确定性proposal均值代替随机采样、相似性聚类代替连续切块改善LARA质量。与复杂度口号不同，cluster数量随序列增长时k-center成本为二次；近softmax质量不等于比FlashAttention快。已核方法位置：7, Appendix E.1。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行固定源码的deterministic clustering、proposal means、mis-opt自归一重要性权重与value聚合；不执行逐层蒸馏、ImageNet/YFCC15M训练或FLA高效内核。  注意力与长上下文 核注意力与蒸馏 基础模型 训练预算：数据配比、目标与优化器 确定性feature替代了什么？ 用proposal分布均值直接作为特征，而非再从高斯proposal采样；它不移除proposal密度和重要性权重。 教学例：两个相同输入不因新增高斯噪声得到不同features，但仍计算self-normalized weights。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-5db44165fa6a2a87">确定性feature替代了什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Alara-plus-plus">The Kernel Reality Check: Benchmarking and Distilling Efficient Attention at Scale</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Concordia University / Mila</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>用proposal分布均值直接作为特征，而非再从高斯proposal采样；它不移除proposal密度和重要性权重。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个相同输入不因新增高斯噪声得到不同features，但仍计算self-normalized weights。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22947v1">原论文</a> · <a href="../../../../foundation-models/2611.22947-lara-plus-plus/">实现解读</a> · <a href="#qa-5db44165fa6a2a87">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:lara-plus-plus" data-paper-title="The Kernel Reality Check: Benchmarking and Distilling Efficient Attention at Scale" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="The Kernel Reality Check: Benchmarking and Distilling Efficient Attention at Scale 基础模型 Concordia University / Mila 2026-11-17 本文重新核查核化attention的真实效率，并用确定性proposal均值代替随机采样、相似性聚类代替连续切块改善LARA质量。与复杂度口号不同，cluster数量随序列增长时k-center成本为二次；近softmax质量不等于比FlashAttention快。已核方法位置：7, Appendix E.1。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行固定源码的deterministic clustering、proposal means、mis-opt自归一重要性权重与value聚合；不执行逐层蒸馏、ImageNet/YFCC15M训练或FLA高效内核。  注意力与长上下文 核注意力与蒸馏 基础模型 训练预算：数据配比、目标与优化器 论文和当前作者实现的聚类是否完全相同？ 不完全。论文写query相似性与随机初始点，固定源码用归一化Q+K、确定性初始点并保留CLS。本地记录源码变体，不声称两者无差别。 教学例：两个query相同但key不同的token，在joint特征里可能分到不同簇。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-5edac4d7514a03c2">论文和当前作者实现的聚类是否完全相同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Alara-plus-plus">The Kernel Reality Check: Benchmarking and Distilling Efficient Attention at Scale</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Concordia University / Mila</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不完全。论文写query相似性与随机初始点，固定源码用归一化Q+K、确定性初始点并保留CLS。本地记录源码变体，不声称两者无差别。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个query相同但key不同的token，在joint特征里可能分到不同簇。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22947v1">原论文</a> · <a href="../../../../foundation-models/2611.22947-lara-plus-plus/">实现解读</a> · <a href="#qa-5edac4d7514a03c2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:lara-plus-plus" data-paper-title="The Kernel Reality Check: Benchmarking and Distilling Efficient Attention at Scale" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="The Kernel Reality Check: Benchmarking and Distilling Efficient Attention at Scale 基础模型 Concordia University / Mila 2026-11-17 本文重新核查核化attention的真实效率，并用确定性proposal均值代替随机采样、相似性聚类代替连续切块改善LARA质量。与复杂度口号不同，cluster数量随序列增长时k-center成本为二次；近softmax质量不等于比FlashAttention快。已核方法位置：7, Appendix E.1。 完整实验成本过高，不复现（审查 DONE）；仅为合成张量机制诊断，不含公开能力benchmark。L1机制组件；不是完整模型。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。执行固定源码的deterministic clustering、proposal means、mis-opt自归一重要性权重与value聚合；不执行逐层蒸馏、ImageNet/YFCC15M训练或FLA高效内核。  注意力与长上下文 核注意力与蒸馏 基础模型 训练预算：数据配比、目标与优化器 常量V保持不变的负控验证了什么？ 验证两个归一化阶段没有漏分母或错误维度，并不证明一般输入近似无误或速度更快。 教学例：所有value都是2时输出应为2；对任意非恒定V仍可能有近似误差。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-06b8ac2f98f8821f">常量V保持不变的负控验证了什么？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Alara-plus-plus">The Kernel Reality Check: Benchmarking and Distilling Efficient Attention at Scale</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Concordia University / Mila</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>验证两个归一化阶段没有漏分母或错误维度，并不证明一般输入近似无误或速度更快。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：所有value都是2时输出应为2；对任意非恒定V仍可能有近似误差。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22947v1">原论文</a> · <a href="../../../../foundation-models/2611.22947-lara-plus-plus/">实现解读</a> · <a href="#qa-06b8ac2f98f8821f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:latent-feedback-scaling" data-paper-title="Latent Feedback Is a Compute and Data Amplifier" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Latent Feedback Is a Compute and Data Amplifier 基础模型 Institute of Foundation Models / Carnegie Mellon University 2026-11-16 latent feedback把上一token的顶层状态注入下一token输入，花更多每token计算。本文不只在相同token数比较，而让普通Transformer把相同FLOPs用于更多epoch，并同时控制unique数据和模型规模。已核方法位置：3, 4。 完整实验成本过高，不复现（审查 DONE）；资料收录，未实现。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。仅资料收录，不录入公开系数算术冒充重新拟合，也不实现generic feedback层就声称模型效果。保留equal-FLOP、unique-data与epoch三个轴的证据边界。  预训练与数据 计算与数据缩放规律 基础模型 训练预算：数据配比、目标与优化器 相同训练token数为何不够公平？ feedback每token花更多FLOPs；普通Transformer可以用这部分预算多训epoch。本文比较相同FLOPs而非只比较相同token。 教学例：若feedback每token贵25%，相同token训练已多用25%计算。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<span id="paper-foundation-models-latent-feedback-scaling-87a194f0" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-f86c9bb6f878c5e8">相同训练token数为何不够公平？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Alatent-feedback-scaling">Latent Feedback Is a Compute and Data Amplifier</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Institute of Foundation Models / Carnegie Mellon University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>feedback每token花更多FLOPs；普通Transformer可以用这部分预算多训epoch。本文比较相同FLOPs而非只比较相同token。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：若feedback每token贵25%，相同token训练已多用25%计算。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20404v1">原论文</a> · <a href="../../../../foundation-models/2611.20404-latent-feedback-scaling/">实现解读</a> · <a href="#qa-f86c9bb6f878c5e8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:latent-feedback-scaling" data-paper-title="Latent Feedback Is a Compute and Data Amplifier" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Latent Feedback Is a Compute and Data Amplifier 基础模型 Institute of Foundation Models / Carnegie Mellon University 2026-11-16 latent feedback把上一token的顶层状态注入下一token输入，花更多每token计算。本文不只在相同token数比较，而让普通Transformer把相同FLOPs用于更多epoch，并同时控制unique数据和模型规模。已核方法位置：3, 4。 完整实验成本过高，不复现（审查 DONE）；资料收录，未实现。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。仅资料收录，不录入公开系数算术冒充重新拟合，也不实现generic feedback层就声称模型效果。保留equal-FLOP、unique-data与epoch三个轴的证据边界。  预训练与数据 计算与数据缩放规律 基础模型 训练预算：数据配比、目标与优化器 重复四遍是否等于四倍独立数据？ 不是。有效数据公式让每次重复边际价值递减，R大时趋向U(1+R*)；少于一遍则用RU。 教学例：看过的文档第20遍不能默认和第一遍同价值。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-a96e4ab2446f4b2f">重复四遍是否等于四倍独立数据？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Alatent-feedback-scaling">Latent Feedback Is a Compute and Data Amplifier</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Institute of Foundation Models / Carnegie Mellon University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。有效数据公式让每次重复边际价值递减，R大时趋向U(1+R*)；少于一遍则用RU。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：看过的文档第20遍不能默认和第一遍同价值。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20404v1">原论文</a> · <a href="../../../../foundation-models/2611.20404-latent-feedback-scaling/">实现解读</a> · <a href="#qa-a96e4ab2446f4b2f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:latent-feedback-scaling" data-paper-title="Latent Feedback Is a Compute and Data Amplifier" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Latent Feedback Is a Compute and Data Amplifier 基础模型 Institute of Foundation Models / Carnegie Mellon University 2026-11-16 latent feedback把上一token的顶层状态注入下一token输入，花更多每token计算。本文不只在相同token数比较，而让普通Transformer把相同FLOPs用于更多epoch，并同时控制unique数据和模型规模。已核方法位置：3, 4。 完整实验成本过高，不复现（审查 DONE）；资料收录，未实现。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。仅资料收录，不录入公开系数算术冒充重新拟合，也不实现generic feedback层就声称模型效果。保留equal-FLOP、unique-data与epoch三个轴的证据边界。  预训练与数据 计算与数据缩放规律 基础模型 训练预算：数据配比、目标与优化器 能直接把ArchSpace的loss系数填进本篇吗？ 不能。两者控制变量和函数形式不同，本篇包含repeat saturation与feedback capacity factor；需要自己的拟合。 教学例：即使都预测validation loss，参数N与FLOPs/token M也不是相同量。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-aa7961e8da6d7b95">能直接把ArchSpace的loss系数填进本篇吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Alatent-feedback-scaling">Latent Feedback Is a Compute and Data Amplifier</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Institute of Foundation Models / Carnegie Mellon University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。两者控制变量和函数形式不同，本篇包含repeat saturation与feedback capacity factor；需要自己的拟合。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：即使都预测validation loss，参数N与FLOPs/token M也不是相同量。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20404v1">原论文</a> · <a href="../../../../foundation-models/2611.20404-latent-feedback-scaling/">实现解读</a> · <a href="#qa-aa7961e8da6d7b95">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:latent-feedback-scaling" data-paper-title="Latent Feedback Is a Compute and Data Amplifier" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="Latent Feedback Is a Compute and Data Amplifier 基础模型 Institute of Foundation Models / Carnegie Mellon University 2026-11-16 latent feedback把上一token的顶层状态注入下一token输入，花更多每token计算。本文不只在相同token数比较，而让普通Transformer把相同FLOPs用于更多epoch，并同时控制unique数据和模型规模。已核方法位置：3, 4。 完整实验成本过高，不复现（审查 DONE）；资料收录，未实现。完整实验成本过高，不复现（审查 DONE）；无能力提升或Evolve晋级声明。仅资料收录，不录入公开系数算术冒充重新拟合，也不实现generic feedback层就声称模型效果。保留equal-FLOP、unique-data与epoch三个轴的证据边界。  预训练与数据 计算与数据缩放规律 基础模型 训练预算：数据配比、目标与优化器 为何没有本地scaling-law拟合指标？ 真实拟合需要多尺度、unique-token和LR/decay网格训练；本轮成本过高不复现，不以代入公式代替新实验。 教学例：随机造几组loss再回归不能验证778M外推或节省计算的结论。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-717902c2dcfb37f8">为何没有本地scaling-law拟合指标？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Alatent-feedback-scaling">Latent Feedback Is a Compute and Data Amplifier</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Institute of Foundation Models / Carnegie Mellon University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>真实拟合需要多尺度、unique-token和LR/decay网格训练；本轮成本过高不复现，不以代入公式代替新实验。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：随机造几组loss再回归不能验证778M外推或节省计算的结论。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、同主题比较与边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.20404v1">原论文</a> · <a href="../../../../foundation-models/2611.20404-latent-feedback-scaling/">实现解读</a> · <a href="#qa-717902c2dcfb37f8">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:archspace" data-paper-title="ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/training-budget" data-search="ArchSpace: Recording, Reviewing, and Referencing LLM Architecture Research 基础模型 Shanghai AI Laboratory 2026-11-12 复用基线的最佳超参可能掩盖新架构优势；中途checkpoint的排序也可能在完整学习率衰减后反转。ArchSpace把架构提案、相同数据/tokenizer的预算梯度比较、较长训练和可审查记录连起来。比较从复用基线最优点，到IsoFLOP规模搜索，再到同时搜索LR/BS逐级加严；验证损失按11个域等权，不让大域主导。§3—4 成本过高，不复现（审查 DONE），不下载语料/权重，不试跑完整矩阵，不自动重试。L1 算术组件：只复算论文公开系数的损失曲面和预算关系，不是架构搜索平台，不自动生成或执行 Evolve 候选。CoupledLaw.base_loss/recipe/loss/budget_optimum复算公开曲面、LR/BS耦合与固定FLOP预算下的解析最优点。仅CPU标准库算术，不读取语料、训练模型、检索论文、拟合scaling law或调用Evolve。  预训练与数据 训练预算与公平架构比较 基础模型 训练预算：数据配比、目标与优化器 ArchSpace的M能直接填参数量吗？ 不能。M是训练FLOPs/token，预算C=M乘训练token数D。不同架构的每参数计算量可能不同；把参数量当M会同时破坏预算和公开拟合系数的单位。 教学例：两种结构都1B参数，但每token训练FLOPs不同，不能仅凭1B就认为处于相同IsoFLOP点。 2026-11-15">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 训练预算：数据配比、目标与优化器</a></p>
 <span id="paper-foundation-models-archspace-8aade641" class="ar-learning-paper-anchor"></span>

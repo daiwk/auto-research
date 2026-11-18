@@ -1,0 +1,60 @@
+{
+  "domain": "post-training",
+  "key": "streaming-opd",
+  "title": "Streaming On-Policy Distillation: Decoupling Three Clocks for Stage-Wise Supervision Consumption",
+  "paper_url": "https://arxiv.org/abs/2611.22298v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.22298v1",
+  "reviewed_version": "v1",
+  "detail_path": "post-training/2611.22298-streaming-opd/README.md",
+  "first_author": "Yun Zhu",
+  "first_author_affiliation": "Independent Researcher, China",
+  "published": "2026-11-17",
+  "published_at": "2026-11-17T06:55:10Z",
+  "code": null,
+  "code_status": "固定v1及所核作者入口未找到可验证的本篇方法源码发布；引用的训练器、模型或库不算本篇开源。",
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "topic": [
+    "student-trajectory-distillation",
+    "后训练算法组件"
+  ],
+  "priority": "P1",
+  "intake_class": "new_submission_in_requested_window",
+  "implementation_status": "component_only",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_passed": true,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.22298v1",
+    "source_sections": [
+      "§3 Eq.1–6, Table2, Definition1",
+      "§4.1 launch resources",
+      "§5 stage-wise interventions"
+    ],
+    "basis": "§4.1为Qwen3-4B教师/Qwen3-0.6B学生、VERL/vLLM多服务，trainer/generator/teacher分配4/1/1或2/1/1 GPU；响应2048、多预算/陈旧度/续训对照。",
+    "available_resource": "Single NVIDIA A100/A30 or local Mac",
+    "decision": "Full experiment not reproduced due to high cost; review DONE. No checkpoint/data download or paid API call.",
+    "local_budget": {
+      "checkpoint_download_bytes": 0,
+      "dataset_download_bytes": 0,
+      "paid_api_calls": 0,
+      "local_component_seconds_per_seed_cap": 30,
+      "gpu_component_seconds_per_seed_cap": 30,
+      "cap_scope": "Tiny exact operator/negative-control checks only; not a training campaign."
+    }
+  },
+  "summary": "token局部teacher监督只依赖已生成prefix，不依赖未来token。片段可先进入candidate pool，等监督预算凑齐才更新，而不必每片段一次更新或等整答案结束。 保留完整因果prefix的新片段loss mask/version记录、teacher top-k不重归一化截断clip损失、按监督权重归约。",
+  "evaluation_tier": "l1_mechanism",
+  "local_operator": "auto_research.post_training.streaming_opd.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.streaming_opd import diagnostic; print(diagnostic(42))'",
+  "gpu_validation_artifact": "docs/gpu-validations/streaming-opd-a100-20261118-latest.json"
+}

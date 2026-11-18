@@ -1,0 +1,60 @@
+{
+  "domain": "post-training",
+  "key": "sh-opd",
+  "title": "Rethinking Supervision Scaling in On-Policy Distillation: From Dense Supervision to Stochastic Horizons",
+  "paper_url": "https://arxiv.org/abs/2611.20687v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.20687v1",
+  "reviewed_version": "v1",
+  "detail_path": "post-training/2611.20687-sh-opd/README.md",
+  "first_author": "Xinhao Yao",
+  "first_author_affiliation": "Renmin University of China",
+  "published": "2026-11-16",
+  "published_at": "2026-11-16T07:51:25Z",
+  "code": "https://github.com/chen123CtrlS/SH-OPD",
+  "code_status": "[作者仓库](https://github.com/chen123CtrlS/SH-OPD)；固定SHA `98467d23930e2197dd0b240af9e37cc7c5c3f505`；许可 MIT。仅核对发布证据，未执行上游训练。",
+  "code_license": "MIT",
+  "upstream_revision": "98467d23930e2197dd0b240af9e37cc7c5c3f505",
+  "adapter": null,
+  "topic": [
+    "data-and-budget",
+    "后训练算法组件"
+  ],
+  "priority": "P1",
+  "intake_class": "new_submission_in_requested_window",
+  "implementation_status": "component_only",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_passed": true,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.20687v1",
+    "source_sections": [
+      "§4 Definition1, Algorithm1, Eq.5–8",
+      "§5",
+      "AppendixA.1"
+    ],
+    "basis": "§3.1/§5用1.5B学生和教师，数学/代码任务，响应上限7168、batch64；数学训练约4500万监督token，多α和多任务扫描。",
+    "available_resource": "Single NVIDIA A100/A30 or local Mac",
+    "decision": "Full experiment not reproduced due to high cost; review DONE. No checkpoint/data download or paid API call.",
+    "local_budget": {
+      "checkpoint_download_bytes": 0,
+      "dataset_download_bytes": 0,
+      "paid_api_calls": 0,
+      "local_component_seconds_per_seed_cap": 30,
+      "gpu_component_seconds_per_seed_cap": 30,
+      "cap_scope": "Tiny exact operator/negative-control checks only; not a training campaign."
+    }
+  },
+  "summary": "每个训练batch先抽一个共享生成长度上限，广播给所有rollout worker，生成在EOS或该上限结束；不是先生成完整长答案再裁loss。 power-survival离散分布、每批共享真实生成cap、标准token-mean OPD及隐式位置权重；不作逆概率去偏。",
+  "evaluation_tier": "l1_mechanism",
+  "local_operator": "auto_research.post_training.sh_opd.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.sh_opd import diagnostic; print(diagnostic(42))'",
+  "gpu_validation_artifact": "docs/gpu-validations/sh-opd-a100-20261118-latest.json"
+}

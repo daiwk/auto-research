@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "key": "specal",
+  "device": "cpu",
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "all_calibration_stop_gradient": true,
+        "conditional_support_in_unit_interval": true,
+        "collapsed_group_yields_no_advantage": true,
+        "response_l2_scale_invariant": true,
+        "rollout_weights_clipped": true
+      },
+      "metrics": {
+        "mean_group_weight": 0.19210839698873675,
+        "mean_support": 0.32736554618263763,
+        "advantage_rms": 1.0
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "all_calibration_stop_gradient": true,
+        "conditional_support_in_unit_interval": true,
+        "collapsed_group_yields_no_advantage": true,
+        "response_l2_scale_invariant": true,
+        "rollout_weights_clipped": true
+      },
+      "metrics": {
+        "mean_group_weight": 0.3035628535645701,
+        "mean_support": 0.5144446915876242,
+        "advantage_rms": 1.0
+      }
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "all_calibration_stop_gradient": true,
+        "conditional_support_in_unit_interval": true,
+        "collapsed_group_yields_no_advantage": true,
+        "response_l2_scale_invariant": true,
+        "rollout_weights_clipped": true
+      },
+      "metrics": {
+        "mean_group_weight": 0.23608392202562148,
+        "mean_support": 0.47908877211759066,
+        "advantage_rms": 1.0
+      }
+    }
+  ],
+  "capability_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "checkpoint_calls": 0,
+  "dataset_downloads": 0
+}

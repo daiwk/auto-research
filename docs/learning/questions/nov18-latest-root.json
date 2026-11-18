@@ -1,0 +1,517 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "recommendation:yuanbao-rubric": {
+      "questions": [
+        {
+          "id": "set-utility",
+          "level": "basics",
+          "question": "为什么逐文档相关性不够？",
+          "answer": "集合需要覆盖互补信息并避开任一有害证据，单文档高相关不能保证集合效用。",
+          "example": "教学例：两篇分别覆盖价格与性能仍可共同满足正向标准，但其中任一含过期价格就触发扣分。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "best-imitation",
+          "level": "mechanism",
+          "question": "较差轨迹在蒸馏分支学习什么？",
+          "answer": "按最佳奖励与自身奖励之差，最大化组内最佳轨迹的概率，不是模仿自己的失败轨迹。",
+          "example": "教学例：奖励0、1、3时，前两条都向奖励3的token序列蒸馏，权重分别3、2。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "not-wesearch",
+          "level": "comparison",
+          "question": "元宝和WeSearch改动的是同一层吗？",
+          "answer": "不是。前者统一效用监督并优化集合；后者主要改变簇内原子文档匹配。",
+          "example": "教学例：ADC距离正确不能证明最终三个证据文档没有重复、缺漏或过期信息。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "zero-ties",
+          "level": "implementation",
+          "question": "组内奖励全部相同时该怎样？",
+          "answer": "优势和最佳奖励差都为零；两分支不给虚假策略更新，且padding必须始终无梯度。",
+          "example": "教学例：奖励全为2时应为零更新；把padding logp改成极小值也不改变loss。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "recommendation:cotti": {
+      "questions": [
+        {
+          "id": "separate-phases",
+          "level": "basics",
+          "question": "为什么ABA不直接训练编码器？",
+          "answer": "它是冻结预测器后的事件logit修正；训练表征由CPC和RW承担，避免把校准与表征学习混在一起。",
+          "example": "教学例：促销高峰只改ABA的事件幅度，不因此更新历史编码器。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "gradient-convention",
+          "level": "mechanism",
+          "question": "CPC和RW的门控梯度一样吗？",
+          "answer": "不同。CPC的eta参与反传，RW的omega只控制监督梯度大小并detach；统一detach会改算法。",
+          "example": "教学例：两视图相同的CPC gate为0.5；RW中低于均值距离的权重可以大于1。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "not-causal-filter",
+          "level": "comparison",
+          "question": "COTTI能代替BAFF解决实验干扰吗？",
+          "answer": "不能。历史距离不是反事实曝光或竞价干扰证据，促销概率修正和实验日志污染是不同问题。",
+          "example": "教学例：HDR线上control与TEN离线control不能当成同一因果基线。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "one-sided",
+          "level": "implementation",
+          "question": "为什么ABA有可能校准更差？",
+          "answer": "非负事件幅度加tanh方差只能提高概率；某子群已经过预测时会继续推高，应独立看分组校准与新类目召回。",
+          "example": "教学例：原概率0.8的过预测样本仍被非负ABA推高，应记录该负结果。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "recommendation:intentflow": {
+      "questions": [
+        {
+          "id": "intent-not-object",
+          "level": "basics",
+          "question": "同一块手表图片为什么能改变相关性标签？",
+          "answer": "找同型号要求实体对应，问表带耐用性允许其他型号提供可迁移的材料/使用证据；标签由完整意图决定。",
+          "example": "教学例：同一候选在找同型号时得0/1档，在问皮表带耐用时可得2档。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "shared-bottleneck",
+          "level": "mechanism",
+          "question": "残差专家是不是六套独立query encoder？",
+          "answer": "不是。每个分支共享一个down瓶颈，六套up投影由同一query门控混合；基础投影和文档空间保留。",
+          "example": "教学例：两个分支rank8/64，共享各自down矩阵；gate不是人工意图one-hot。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "fixed-index",
+          "level": "comparison",
+          "question": "它和WeSearch的簇约束有什么区别？",
+          "answer": "固定索引适配改变query如何落入已有文档空间；簇约束改变候选空间组织，两者可组合但不是相互替代。",
+          "example": "教学例：query残差改变而doc向量逐位不变，只证明固定索引接口成立。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "no-test-bank",
+          "level": "implementation",
+          "question": "CSLS参考query能用测试查询吗？",
+          "answer": "不能用测试分布或标签调参。原文参考库来自训练query，离线密度项随适配模型计算，线上仅校正候选分数。",
+          "example": "教学例：热门文档对训练query平均相似度高，离线密度扣分较大；不能用测试命中率来选k。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "foundation-models:simq": {
+      "questions": [
+        {
+          "id": "token-hit-not-cluster-hit",
+          "level": "basics",
+          "question": "同一query token命中一个文档的三个cluster，SIMQ+计几次？",
+          "answer": "只计一次，count按不同query token覆盖，不按cluster数量。",
+          "example": "教学例：一个token在三个cluster都找到docA，docA的count仍只加1。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "threshold-ties",
+          "level": "mechanism",
+          "question": "为什么SIMQ+可能重排超过Nmin个文档？",
+          "answer": "它取能保留至少Nmin项的最大整数count阈值，边界并列整组保留。",
+          "example": "教学例：Nmin=4而第四到第六项同count时要保留6项。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "not-space-alignment",
+          "level": "comparison",
+          "question": "SIMQ能代替HVMap做异构编码器对齐吗？",
+          "answer": "不能。SIMQ在同一token空间内改变候选索引，HVMap学习跨空间映射。",
+          "example": "教学例：不同编码器的同维向量也不能直接靠SIMQ内积变得可比。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "finite-backend-not-qps",
+          "level": "implementation",
+          "question": "本地exact构图跑通能宣称CPU吞吐提升吗？",
+          "answer": "不能。它是小数据后端，真实遍历和重排被执行，但没有可扩展HNSW或匹配召回的QPS测量。",
+          "example": "教学例：12文档的正确计数不能外推百万文档延迟。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "foundation-models:unigraph": {
+      "questions": [
+        {
+          "id": "dynamic-neighborhood",
+          "level": "basics",
+          "question": "固定alpha图为什么可能不适合另一个查询？",
+          "answer": "alpha改变混合距离排序及邻域，单一0.5图可能漏掉偏词汇或偏语义的近邻。",
+          "example": "教学例：同一query从alpha0.3改成0.7后，正确入口可不同。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "gamma-safe-bound",
+          "level": "mechanism",
+          "question": "gamma越小剪枝越强，是否仍然安全？",
+          "answer": "不保证。只有gamma=1直接是Cauchy–Schwarz下界，gamma<1给估计加正margin，可能删掉真实有用节点。",
+          "example": "教学例：跳过sparse内积节省计算同时可能掉召回。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "hybrid-not-mapped",
+          "level": "comparison",
+          "question": "UniGraph的alpha等于HVMap的native权重吗？",
+          "answer": "不等于。前者混合dense和sparse距离，后者混合候选native与mapped空间分数。",
+          "example": "教学例：提高alpha不等于更相信候选所属数据库。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "safe-beam-not-exact-ann",
+          "level": "implementation",
+          "question": "gamma=1与未剪枝beam一致能证明exact检索吗？",
+          "answer": "不能。它只保证不改变同一beam算法的插入结果，图连通性、入口和有限beam仍限制全局召回。",
+          "example": "教学例：从没访问到的真近邻不会因安全bound自动出现。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "foundation-models:dealrank": {
+      "questions": [
+        {
+          "id": "prefix-crowding",
+          "level": "basics",
+          "question": "更好的retriever为什么反而会被连续切块伤害？",
+          "answer": "好文档集中在前部，一个chunk的晋级配额会切掉同组其他好文档。",
+          "example": "教学例：前20全是好文档而每组留4，连续切块先丢16个，轮发可分摊。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "top4-not-top10",
+          "level": "mechanism",
+          "question": "6调用2轮保证完整top10吗？",
+          "answer": "不保证。原命题在一致ranker下保证topq，这里q=4；其他六个位置只有分布模型下的期望切损分析。",
+          "example": "教学例：top4准确不意味着nDCG@10必然无损。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "schedule-not-mapping",
+          "level": "comparison",
+          "question": "它能代替HVMap双空间重排吗？",
+          "answer": "不能。DealRank决定哪些候选同场比较，HVMap定义跨编码器的可比分数。",
+          "example": "教学例：轮流发牌不能修正未对齐的embedding。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "callback-not-model",
+          "level": "implementation",
+          "question": "确定性ranker回调下的通关说明什么？",
+          "answer": "只说明实际并发、配额与排列守恒符合控制例，不能验证LLM提示或延迟。",
+          "example": "教学例：人工排序表只供外层cuts核查，不能传给被测模型当答案。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "foundation-models:efficient-evals-tensor": {
+      "questions": [
+        {
+          "id": "new-code-old-paper",
+          "level": "basics",
+          "question": "为何11月新收录不能写成11月新论文？",
+          "answer": "新的是Google官方仓库，论文v1首发在3月2日；作者聚合按一作Michigan，Google合作单独记录。",
+          "example": "教学例：11月16日commit不能覆盖原arXiv日期。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "frozen-stage2",
+          "level": "mechanism",
+          "question": "人类校准为什么冻结模型与prompt因子？",
+          "answer": "大量autorater先学共享表示，少量human只拟合对齐头以降低样本需求；条件推断把共享量当固定。",
+          "example": "教学例：human loss不能反传改写第一阶段prompt向量。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "not-proeval",
+          "level": "comparison",
+          "question": "它与ProEval都省评测费，方法是否相同？",
+          "answer": "不同。ProEval主动选目标问题并更新GP；本篇校准多个rater到人类尺度。",
+          "example": "教学例：多一个便宜judge评分不等于主动选了一道人类问题。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "conditional-not-unconditional",
+          "level": "implementation",
+          "question": "human全参数微调后能沿用当前CI吗？",
+          "answer": "不能。区间忽略第一阶段因子误差并要求固定features；全参数微调改变条件假设。",
+          "example": "教学例：传入任意单位矩阵Sigma只测公式，不能当真实覆盖证书。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "recommendation:cutagent": {
+      "questions": [
+        {
+          "id": "gene-interface",
+          "level": "basics",
+          "question": "Creative gene为何不是普通最终脚本？",
+          "answer": "它是连接规划与制作的结构化中间表示，定义叙事单位和规则，之后还需分镜／素材／配音／渲染。",
+          "example": "教学例：有“信任建立”unit不代表成片已包含认证镜头。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "ctr-surrogate",
+          "level": "mechanism",
+          "question": "LightGBM给高CTR-level能当真实点击吗？",
+          "answer": "不能。它按类目历史分档提供训练surrogate reward，真实CTR来自随机流量的点击／曝光。",
+          "example": "教学例：reward=1不能记成100%CTR。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "memory-versus-skillhub",
+          "level": "comparison",
+          "question": "CutAgent memory与AgenticRecTune SkillHub一样吗？",
+          "answer": "复用思路相近但前者保存类目／gene条件的制作缺陷修复，后者保存配置实验经验。",
+          "example": "教学例：减少开场重复近景不能直接变成推荐融合权重。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "preference-not-production",
+          "level": "implementation",
+          "question": "60.4%和2.21%为什么不能放同一列？",
+          "answer": "前者是强制人类偏好胜率，后者是线上点击／曝光；分母和实验对象不同。本轮只审查不运行完整制作链。",
+          "example": "教学例：参与者选视频不等于用户在广告位点击。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "高成本完整实验",
+            "同主题对照"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    }
+  }
+}

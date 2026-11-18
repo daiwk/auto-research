@@ -1,0 +1,12 @@
+{
+  "figure": 3,
+  "caption": "Fig. 3: Overview of UniGraph construction for one center base vector pair x x . Across sampled α \\alpha values ranging from the sparse (lexical) endpoint to the dense (semantic) endpoint, the construction retains the top- k g k_{g} hybrid neighbors of x x at each weight; the illustration uses k g = 3 k_{g}=3 . The per- α \\alpha lists are merged and deduplicated, and the number in parentheses indicates each candidate’s occurrence frequency. Ranking the candidates by this frequency produces a single UniGraph neighborhood that favors neighbors selected across multiple dense-sparse trade-offs.",
+  "source_url": "https://arxiv.org/pdf/2611.20758v1",
+  "source_version": "v1",
+  "source_sha256": "4ac5ea6e1ea53b17041c9ea13d69cf98e713e5454d8be0e9041e97cd3f0cf7a5",
+  "extraction": "fixed v1 PDF page5, crop[45, 45, 565, 338]; no redraw",
+  "file": "paper-figure-01.png",
+  "asset_sha256": "e34733e6f196ead4395c4bc8ad515202e56de6eecdb68dfe9115c0b1c0beaaa8",
+  "copyright": "Original paper authors; no claim of local generation",
+  "visual_review_done": true
+}

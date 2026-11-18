@@ -1,0 +1,111 @@
+{
+  "schema_version": 2,
+  "method": "risa",
+  "manifest_ref": "foundation-models:risa",
+  "dataset": {
+    "id": "synthetic:nov18-latest-risa-mechanism-v1",
+    "kind": "explicit_mechanism_or_protocol_fixtures",
+    "revision": "sha256:41a76b852b957c17a9a29fe732ba234ebff26e7f793db533f2f2d9c82e861548",
+    "public_capability_benchmark": false,
+    "source": "Seeded synthetic operator tensors; no pretrained model or capability dataset"
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "first_read_rows": 6.0,
+        "second_read_rows": 6.0
+      },
+      "checks": {
+        "cold_page_can_be_recovered_later": true,
+        "mandatory_current_row_kept": true,
+        "plan_does_not_cache_outputs": true,
+        "fresh_query_gradient": true,
+        "exact_values_not_evicted": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "first_read_rows": 6.0,
+        "second_read_rows": 6.0
+      },
+      "checks": {
+        "cold_page_can_be_recovered_later": true,
+        "mandatory_current_row_kept": true,
+        "plan_does_not_cache_outputs": true,
+        "fresh_query_gradient": true,
+        "exact_values_not_evicted": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "first_read_rows": 6.0,
+        "second_read_rows": 6.0
+      },
+      "checks": {
+        "cold_page_can_be_recovered_later": true,
+        "mandatory_current_row_kept": true,
+        "plan_does_not_cache_outputs": true,
+        "fresh_query_gradient": true,
+        "exact_values_not_evicted": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "first_read_rows": 6.0,
+    "second_read_rows": 6.0
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Bounded defining-operator arithmetic and negative controls, not complete model or benchmark capability"
+  },
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "66cda00810da75bb8e3daa789c8d29b5b71b851d",
+    "source_state": "uncommitted working tree with exact executed-source fingerprints",
+    "accelerator": "CPU",
+    "artifact_path": "docs/foundation-models/2611.22191-risa/metrics/component-cpu-seeds42-44.json",
+    "executed_source_sha256": {
+      "src/auto_research/foundation_models/risa.py": "41a76b852b957c17a9a29fe732ba234ebff26e7f793db533f2f2d9c82e861548"
+    }
+  }
+}

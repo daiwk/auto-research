@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "key": "leaf-opd",
+  "device": "cpu",
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "persistent_teacher_passes": true,
+        "front_loaded_teacher_rejected": true,
+        "student_never_gets_privileged_context": true,
+        "retain_teacher_is_bare": true,
+        "teacher_frozen_and_student_updates": true
+      },
+      "metrics": {
+        "loss": 0.3674106223425757,
+        "persistent_ss_half": 2.0,
+        "weak_ss_half": -0.0
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "persistent_teacher_passes": true,
+        "front_loaded_teacher_rejected": true,
+        "student_never_gets_privileged_context": true,
+        "retain_teacher_is_bare": true,
+        "teacher_frozen_and_student_updates": true
+      },
+      "metrics": {
+        "loss": 0.8410801194718533,
+        "persistent_ss_half": 2.0,
+        "weak_ss_half": -0.0
+      }
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "persistent_teacher_passes": true,
+        "front_loaded_teacher_rejected": true,
+        "student_never_gets_privileged_context": true,
+        "retain_teacher_is_bare": true,
+        "teacher_frozen_and_student_updates": true
+      },
+      "metrics": {
+        "loss": 0.74664003842341,
+        "persistent_ss_half": 2.0,
+        "weak_ss_half": -0.0
+      }
+    }
+  ],
+  "capability_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "checkpoint_calls": 0,
+  "dataset_downloads": 0
+}

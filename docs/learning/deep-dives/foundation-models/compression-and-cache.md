@@ -7,7 +7,7 @@ hide:
 
 # 推理压缩先找瓶颈：权重、KV 内容与缓存层级
 
-[基础模型](../index.md) · 更新 2026-11-09 · 36 篇主题资料 / 13 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-18 · 40 篇主题资料 / 17 篇重点对照
 
 AWQ 减权重位宽，GQA 减 KV 头，DropKV 与 TwinKV 改保留内容，KVMEM 管可执行历史视图，Remote KV Tiers 解决跨层级加载。它们可以组合，但不能用一个“压缩率”解释质量、可恢复性和端到端速度。 FoldBias另解决压缩缓存的接口障碍：把静态bias折进同维key，但未来query漂移仍会引入误差。
 
@@ -38,6 +38,10 @@ AWQ 减权重位宽，GQA 减 KV 头，DropKV 与 TwinKV 改保留内容，KVMEM
 | [Turbocharging PiPNN for Proximity and k-NN Graph Building](../../../foundation-models/2611.05690-pipnn-ii/README.md) · [原始来源](https://arxiv.org/abs/2611.05690v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 在近邻图构建的叶内，对已解码的量化候选做有符号点积修正，应用各行尺度后直接更新 top-K，避免物化完整候选分数矩阵。 | 缩小的是图构建的输入表示和中间分数流量，不是 LM 权重、KV 或跨层依赖；本地只做 CPU 分数和排序参考，未实现编码、分区、剪枝或生产 SIMD/Hopper 核。 |
 | [GINGER: Spicing Up Graph-Based Vector Search](../../../foundation-models/2611.08306-ginger/README.md) · [原始来源](https://arxiv.org/abs/2611.08306v1)<br>章节：核心公式、数据协议与代码映射 | 在同一已旋转向量的固定 4-bit 高斯粗码上做分区 Lloyd–Max 细化，导航只读粗码及其尺度，重排才加载细码。 | 细位宽独立于导航前缀，换取更准的重排；仍需保留两套尺度，并为入围项读取细位。本地只验证量化与内积，不覆盖图或 SIMD。 |
 | [e-means: outperforming k-means (in one-tenth the epochs)](../../../foundation-models/2611.09501-e-means/README.md) · [原始来源](https://arxiv.org/abs/2611.09501v1)<br>章节：核心公式、结果、负控与边界 | 用计数与向量和的小批量 EMA 训练质心，每五批分裂活跃 donor 复苏弱簇，再用末轮历史分配均值收尾。 | 加快的是聚类优化，不是 GINGER 的候选读带宽或 PiPNN II 的构建打分；CPU 固定标签 MSE 不代表 IVF 召回或 GPU 吞吐。 |
+| [Spool: Low-Latency Streaming Inference for Hybrid Vision-Language Models](../../../foundation-models/2611.23228-spool/README.md) · [原始来源](https://arxiv.org/abs/2611.23228v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | GDN的key/value/gates只依赖已记录的层输入，因此状态更新对旧状态是仿射的。每帧缓存一个变换，以非交换的时间顺序组成segment tree；窗口到期时从prefix anchor重放保留摘要，而非重跑所有视频token。 | DropKV直接挑选attention KV驱逐项，Spool处理递归共享状态的到期重建。后者的固定层输入精确性不能推导为保留视频内容的全网络精确性。 |
+| [Communicate the Change: Efficient Expert Parallelism via Activation Compression](../../../foundation-models/2611.22215-echomoe/README.md) · [原始来源](https://arxiv.org/abs/2611.22215v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 每组MoE层先广播参考z，其余层只发送x-a⊙z的压缩code；router仍读取完整x。专家将reference gain和dispatch decoder折入gate/up权重，再将combine compressor折入down权重，避免完整重建或输出物化。 | MoEZip保护路由敏感KV token；EchoMoE压缩专家并行激活通信，两者不是同一缓存，也不能共享“压缩率”作为吞吐对照。 |
+| [RISA: Recoverable Sparse Attention for Block-Diffusion Language Models](../../../foundation-models/2611.22191-risa/README.md) · [原始来源](https://arxiv.org/abs/2611.22191v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | RISA区分长期HOT/COLD存储优先级和当前denoising block的短期read plan。未读取页面不被删除，后续query可以恢复COLD。seed根据page min/max key摘要评分，保护初始/近期HOT并加入mandatory近期/current行。 | DropKV实际驱逐KV以缩减存储；RISA主要限制每步读取但保留COLD以便恢复。读得少与存得少是不同预算，不能互换显存/延迟结论。 |
+| [Beyond Bitwidth: Deployment-Constrained Mixed-Precision Quantization for Multilingual LLM Inference on NVIDIA Blackwell](../../../foundation-models/2611.21974-beyond-bitwidth/README.md) · [原始来源](https://arxiv.org/abs/2611.21974v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | 低比特名称不保证GPU真的按该格式执行，也不保证多语种质量。本文用固定诊断/selection/final切分，逐fused-module核对weight类型、activation policy、kernel、fallback和显存，再按服务质量约束配置保护。 | AWQ用calibration activation搜索等价通道缩放后统一做低比特weight-only量化；Beyond Bitwidth研究B200原生format、mixed precision分配及质量/显存/延迟门槛。保护重要通道与给模块分配不同格式不是同一算法，AWQ的小型输出MSE不能充当Blackwell执行证据。 |
 
 </div>
 
@@ -84,6 +88,30 @@ AWQ 通过激活感知缩放保护模型权重的低比特表示；PiPNN II 量�
 AWQ 改模型权重：由校准激活决定等价缩放，再做低比特重建。PiPNN II 在建图时把量化分数与 top-K 融合，避免写出候选分数矩阵。GINGER 在已有图上做检索，省的是扫描候选时对向量的读带宽。三者分别用权重输出误差、构建时间与图召回、固定召回的查询吞吐验收；合成 NTQ 误差不代替后两类系统数据。
 
 对照来源：[ginger](../../../foundation-models/2611.08306-ginger/README.md) · [pipnn-ii](../../../foundation-models/2611.05690-pipnn-ii/README.md) · [awq](../../../reproductions/2306.00978-awq/README.md)
+
+### Spool：用仿射摘要维护混合 VLM 的滑动窗口
+
+DropKV直接挑选attention KV驱逐项，Spool处理递归共享状态的到期重建。后者的固定层输入精确性不能推导为保留视频内容的全网络精确性。 摘要存D=A-I避免BF16把接近单位矩阵的小变化舍入掉；合并顺序不可交换。逐层、固定记录输入下精确，不等于整个多层网络重新处理剩余帧，因为高层缓存输入可能仍含已到期帧的影响。
+
+对照来源：[spool](../../../foundation-models/2611.23228-spool/README.md) · [drop-kv](../../../foundation-models/2610.22130-drop-kv/README.md)
+
+### EchoMoE：复用跨层参考，只通信压缩变化量
+
+MoEZip保护路由敏感KV token；EchoMoE压缩专家并行激活通信，两者不是同一缓存，也不能共享“压缩率”作为吞吐对照。 相对于压缩后模型，折叠与未折叠线性代数等价；不等于压缩模型无损于原backbone。原文还以projection-weighted重建初始化，再执行KL蒸馏和少量next-token训练。通信公式是张量/路由字节计算，不是测得RDMA流量。
+
+对照来源：[echomoe](../../../foundation-models/2611.22215-echomoe/README.md) · [moezip](../../../foundation-models/2610.30206-moezip/README.md)
+
+### RISA：保留可恢复KV存储，只缓存稀疏读取地址
+
+DropKV实际驱逐KV以缩减存储；RISA主要限制每步读取但保留COLD以便恢复。读得少与存得少是不同预算，不能互换显存/延迟结论。 max在两个完整dot之后进行，不是QUEST的逐坐标上界。后续步只重用地址，用新query/current KV重新计算同一个softmax；不能把history和current分别归一化后平均。精确存储不等于dense-equivalent解码。
+
+对照来源：[risa](../../../foundation-models/2611.22191-risa/README.md) · [drop-kv](../../../foundation-models/2610.22130-drop-kv/README.md)
+
+### 保护量化敏感内容，不等于验证部署格式
+
+实读AWQ的核心是XW=(XS^-1)(SW)，用激活统计搜索缩放以减少量化输出误差；本地未用TinyChat CUDA kernel，MSE不代表端到端吞吐。Beyond Bitwidth按fused module核weight type、activation policy、kernel及fallback，在独立final集合验证服务约束；单模块BF16恢复效应不可相加，最终activation精度与INT8保护共同改变，不能把全部收益归于allocation。原生NVFP4/B200路径也不能由A100上的模拟误差替代。
+
+对照来源：[beyond-bitwidth](../../../foundation-models/2611.21974-beyond-bitwidth/README.md) · [awq](../../../reproductions/2306.00978-awq/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -169,9 +197,65 @@ AWQ 改模型权重：由校准激活决定等价缩放，再做低比特重建�
 
     对照来源：[ginger](../../../foundation-models/2611.08306-ginger/README.md) · [pipnn-ii](../../../foundation-models/2611.05690-pipnn-ii/README.md)
 
+### Spool的精确与DropKV的近似驱逐有何不同？ {#cross-nov18-spool}
+
+??? note "展开答案与例子"
+
+    **答案：** Spool精确重放固定记录层输入的状态变换；DropKV估计删除KV对attention输出的扰动。Spool也不保证整个多层网络重算等价。
+
+    **教学例子：** 高层某帧特征已受旧帧影响，删除低层旧帧摘要不会改写那份缓存特征。
+
+    对照来源：[spool](../../../foundation-models/2611.23228-spool/README.md) · [drop-kv](../../../foundation-models/2610.22130-drop-kv/README.md)
+
+### 与MoEZip的routing-aware压缩能直接比压缩率吗？ {#cross-nov18-echomoe}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。MoEZip选择attention KV行，EchoMoE发送低维专家激活，分母、额外参考成本和质量误差都不同。
+
+    **教学例子：** 少存50%KV不等于少发50%RDMA字节。
+
+    对照来源：[echomoe](../../../foundation-models/2611.22215-echomoe/README.md) · [moezip](../../../foundation-models/2610.30206-moezip/README.md)
+
+### 与DropKV的驱逐是同一预算吗？ {#cross-nov18-risa}
+
+??? note "展开答案与例子"
+
+    **答案：** 不是。DropKV删除存储条目，RISA保留未选COLD并减少循环读取；RISA的HOT cap还不包含protected、COLD和mandatory部分。
+
+    **教学例子：** 512页cap并不意味着总共只读取或保存512页。
+
+    对照来源：[risa](../../../foundation-models/2611.22191-risa/README.md) · [drop-kv](../../../foundation-models/2610.22130-drop-kv/README.md)
+
+### AWQ输出误差更小，是否已经满足Beyond Bitwidth的部署门槛？ {#cross-nov18-beyond-bitwidth}
+
+??? note "展开答案与例子"
+
+    **答案：** 没有。AWQ等价缩放的局部MSE只检验量化近似，部署门槛还要求真实packed格式、activation policy、无fallback、显存/延迟与独立服务质量评测。
+
+    **教学例子：** 教学例：一层W4输出MSE降低，不说明整个8B模型在B200按目标格式执行，也不说明韩语保留率过门槛。
+
+    对照来源：[beyond-bitwidth](../../../foundation-models/2611.21974-beyond-bitwidth/README.md) · [awq](../../../reproductions/2306.00978-awq/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-18** · AWQ用calibration activation搜索等价通道缩放后统一做低比特weight-only量化；Beyond Bitwidth研究B200原生format、mixed precision分配及质量/显存/延迟门槛。保护重要通道与给模块分配不同格式不是同一算法，AWQ的小型输出MSE不能充当Blackwell执行证据。 本次实读已有同主题代表README，按真实研究轴比较，不借比较对象改变算法或宣称跨论文效果复现。
+
+涉及：[beyond-bitwidth](../../../foundation-models/2611.21974-beyond-bitwidth/README.md) · [awq](../../../reproductions/2306.00978-awq/README.md)
+
+**2026-11-18** · DropKV实际驱逐KV以缩减存储；RISA主要限制每步读取但保留COLD以便恢复。读得少与存得少是不同预算，不能互换显存/延迟结论。 本地边界与完整高成本不复现分别记录。
+
+涉及：[risa](../../../foundation-models/2611.22191-risa/README.md) · [drop-kv](../../../foundation-models/2610.22130-drop-kv/README.md)
+
+**2026-11-18** · MoEZip保护路由敏感KV token；EchoMoE压缩专家并行激活通信，两者不是同一缓存，也不能共享“压缩率”作为吞吐对照。 本地边界与完整高成本不复现分别记录。
+
+涉及：[echomoe](../../../foundation-models/2611.22215-echomoe/README.md) · [moezip](../../../foundation-models/2610.30206-moezip/README.md)
+
+**2026-11-18** · DropKV直接挑选attention KV驱逐项，Spool处理递归共享状态的到期重建。后者的固定层输入精确性不能推导为保留视频内容的全网络精确性。 本地边界与完整高成本不复现分别记录。
+
+涉及：[spool](../../../foundation-models/2611.23228-spool/README.md) · [drop-kv](../../../foundation-models/2610.22130-drop-kv/README.md)
 
 **2026-11-09** · 加入 e-means，对比质心训练、图构建与查询读带宽三个阶段。末轮固定分配均值能减小相应训练目标，不保证留出误差或检索性能都改善。
 
@@ -201,7 +285,7 @@ AWQ 改模型权重：由校准激活决定等价缩放，再做低比特重建�
 
 覆盖 29 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 36 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 40 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -241,6 +325,10 @@ AWQ 改模型权重：由校准激活决定等价缩放，再做低比特重建�
 - [Turbocharging PiPNN for Proximity and k-NN Graph Building](../../../foundation-models/2611.05690-pipnn-ii/README.md)
 - [GINGER: Spicing Up Graph-Based Vector Search](../../../foundation-models/2611.08306-ginger/README.md)
 - [e-means: outperforming k-means (in one-tenth the epochs)](../../../foundation-models/2611.09501-e-means/README.md)
+- [Spool: Low-Latency Streaming Inference for Hybrid Vision-Language Models](../../../foundation-models/2611.23228-spool/README.md)
+- [Communicate the Change: Efficient Expert Parallelism via Activation Compression](../../../foundation-models/2611.22215-echomoe/README.md)
+- [RISA: Recoverable Sparse Attention for Block-Diffusion Language Models](../../../foundation-models/2611.22191-risa/README.md)
+- [Beyond Bitwidth: Deployment-Constrained Mixed-Precision Quantization for Multilingual LLM Inference on NVIDIA Blackwell](../../../foundation-models/2611.21974-beyond-bitwidth/README.md)
 
 </details>
 

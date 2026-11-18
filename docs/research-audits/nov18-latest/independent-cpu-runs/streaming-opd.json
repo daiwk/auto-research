@@ -1,0 +1,68 @@
+{
+  "schema_version": 2,
+  "key": "streaming-opd",
+  "device": "cpu",
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "full_prefix_not_truncated": true,
+        "sealing_not_eos": true,
+        "old_prefix_zero_loss_gradient": true,
+        "topk_not_renormalized": true,
+        "teacher_frozen": true,
+        "actual_versions_retained": true
+      },
+      "metrics": {
+        "loss": 0.6679442300475492,
+        "supervised_tokens": 2,
+        "topk_teacher_mass": 0.7294484099607593
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "full_prefix_not_truncated": true,
+        "sealing_not_eos": true,
+        "old_prefix_zero_loss_gradient": true,
+        "topk_not_renormalized": true,
+        "teacher_frozen": true,
+        "actual_versions_retained": true
+      },
+      "metrics": {
+        "loss": 0.7796956781983918,
+        "supervised_tokens": 2,
+        "topk_teacher_mass": 0.7009150154900039
+      }
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "full_prefix_not_truncated": true,
+        "sealing_not_eos": true,
+        "old_prefix_zero_loss_gradient": true,
+        "topk_not_renormalized": true,
+        "teacher_frozen": true,
+        "actual_versions_retained": true
+      },
+      "metrics": {
+        "loss": 0.6857625018700997,
+        "supervised_tokens": 2,
+        "topk_teacher_mass": 0.7156759407818722
+      }
+    }
+  ],
+  "capability_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "checkpoint_calls": 0,
+  "dataset_downloads": 0
+}

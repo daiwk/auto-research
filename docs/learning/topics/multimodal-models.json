@@ -48,7 +48,9 @@
         "foundation-models:duojepa",
         "foundation-models:spectral-ghost",
         "multimodal-models:multimodal-library-protocol",
-        "multimodal-models:fend-protocol"
+        "multimodal-models:fend-protocol",
+        "foundation-models:vishead-spec",
+        "foundation-models:cascadejepa"
       ]
     },
     {
@@ -134,7 +136,9 @@
         "multimodal-models:sensorwm-planning",
         "multimodal-models:pixvid",
         "foundation-models:stratified-retention-protocol",
-        "multimodal-models:rslivebench-uav-protocol"
+        "multimodal-models:rslivebench-uav-protocol",
+        "foundation-models:wm-quant",
+        "multimodal-models:dwd"
       ]
     }
   ]

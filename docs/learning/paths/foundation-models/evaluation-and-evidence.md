@@ -7,7 +7,7 @@ hide:
 
 # 能力证据：评测采样、读出与可靠性
 
-[基础模型](index.md) / 100 个问题 · 25 篇论文
+[基础模型](index.md) / 104 个问题 · 26 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">100 个问题 · 25 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">104 个问题 · 26 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:mixed-signals-weights" data-paper-title="Mixed Signals: Weight-Space Programming for EEG and ECG" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Mixed Signals: Weight-Space Programming for EEG and ECG 基础模型 EPFL 2026-11-10 论文让 LLM 通过阅读/写入网络参数解决 EEG/ECG 任务，覆盖读权重、改善、修复和从零写网络。关键区别是 weight-space programming 不使用梯度下降或迭代拟合；把 SGD 包装成“编辑器”不能视为等价复现。不同实验的网络、数据权限和 evaluate/probe 预算不同。§II 成本过高，不复现（审查 DONE），不调用付费模型、不启动完整编辑矩阵，不自动重试。诊断里的 nn.Linear(4,2) 只是自定义测试 harness，不是论文 TinyEEGNet；L0 接口：实现外部权重补丁、practice 调用预算和评价算术。没有调用 LLM，没有复现 TinyEEGNet/ECGResNet，没有患者数据，不声称模型会理解或修复网络。apply_weight_patch 只编辑显式传入的已注册参数，不接受任意 Python 程序或 buffer；PracticeBudget 只封装外部 practice callback；测试 labels 仅传给评价函数，不传给编辑提供方。  网络架构 权重空间编程与可解释性 基础模型 能力证据：评测采样、读出与可靠性 Mixed Signals中的权重空间编程，为什么不能直接用SGD实现？ 其研究问题是LLM能否通过推理读取或写入权重，规则排除梯度下降与迭代拟合。SGD能优化网络但回答不同问题；本地只实现外部补丁接口，未伪装一个LLM编辑器。 教学例：把loss.backward和optimizer.step藏在edit函数中，仍是梯度训练，不是WSP。 2026-11-18">
@@ -1140,6 +1140,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>所有题都没有事实轨迹时应失败，而不是返回干净准确率1。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.09906v1">原论文</a> · <a href="../../../../foundation-models/2603.09906-thinking-to-recall/">实现解读</a> · <a href="#qa-6416371045655a44">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:efficient-evals-tensor" data-paper-title="Rich Insights from Cheap Signals: Efficient Evaluations via Tensor Factorization" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Rich Insights from Cheap Signals: Efficient Evaluations via Tensor Factorization 基础模型 University of Michigan 2026-03-02 本文将模型、prompt和rater三者的能力张量作低rank CP分解，先用大量廉价autorater评分学共享表示，再冻结表示、只拟合人类rater向量及有序cutoff。它保留prompt异质性和rater偏好差异，不把某个自动judge分数直接当人类真值。2026-11-16是Google官方代码新仓库，不是论文首发；v1首发为2026-03-02 16:12:46 UTC。 成本过高，不复现（审查DONE）；L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。官方google-research/efficient_evals固定b4421d929d1078631ee890f8e4a776442c816d36、Apache2.0。本地只执行CP、ordinal概率、冻结human NLL和外部Sigma的条件区间算术；不含完整Adam/BFGS拟合、30切分或真实评分重收集。上游CPU notebook估约1小时，完整多judge矩阵高成本不复现，CUDA只验算子。  评测与可信度 人类校准与张量评测 基础模型 能力证据：评测采样、读出与可靠性 为何11月新收录不能写成11月新论文？ 新的是Google官方仓库，论文v1首发在3月2日；作者聚合按一作Michigan，Google合作单独记录。 教学例：11月16日commit不能覆盖原arXiv日期。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<span id="paper-foundation-models-efficient-evals-tensor-90916013" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-bf9bfe865e0ec543">为何11月新收录不能写成11月新论文？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aefficient-evals-tensor">Rich Insights from Cheap Signals: Efficient Evaluations via Tensor Factorization</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University of Michigan</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>新的是Google官方仓库，论文v1首发在3月2日；作者聚合按一作Michigan，Google合作单独记录。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：11月16日commit不能覆盖原arXiv日期。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.02029v1">原论文</a> · <a href="../../../../foundation-models/2603.02029-efficient-evals-tensor/">实现解读</a> · <a href="#qa-bf9bfe865e0ec543">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:efficient-evals-tensor" data-paper-title="Rich Insights from Cheap Signals: Efficient Evaluations via Tensor Factorization" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Rich Insights from Cheap Signals: Efficient Evaluations via Tensor Factorization 基础模型 University of Michigan 2026-03-02 本文将模型、prompt和rater三者的能力张量作低rank CP分解，先用大量廉价autorater评分学共享表示，再冻结表示、只拟合人类rater向量及有序cutoff。它保留prompt异质性和rater偏好差异，不把某个自动judge分数直接当人类真值。2026-11-16是Google官方代码新仓库，不是论文首发；v1首发为2026-03-02 16:12:46 UTC。 成本过高，不复现（审查DONE）；L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。官方google-research/efficient_evals固定b4421d929d1078631ee890f8e4a776442c816d36、Apache2.0。本地只执行CP、ordinal概率、冻结human NLL和外部Sigma的条件区间算术；不含完整Adam/BFGS拟合、30切分或真实评分重收集。上游CPU notebook估约1小时，完整多judge矩阵高成本不复现，CUDA只验算子。  评测与可信度 人类校准与张量评测 基础模型 能力证据：评测采样、读出与可靠性 人类校准为什么冻结模型与prompt因子？ 大量autorater先学共享表示，少量human只拟合对齐头以降低样本需求；条件推断把共享量当固定。 教学例：human loss不能反传改写第一阶段prompt向量。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-b5cb32b6b7012a30">人类校准为什么冻结模型与prompt因子？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aefficient-evals-tensor">Rich Insights from Cheap Signals: Efficient Evaluations via Tensor Factorization</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University of Michigan</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>大量autorater先学共享表示，少量human只拟合对齐头以降低样本需求；条件推断把共享量当固定。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：human loss不能反传改写第一阶段prompt向量。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.02029v1">原论文</a> · <a href="../../../../foundation-models/2603.02029-efficient-evals-tensor/">实现解读</a> · <a href="#qa-b5cb32b6b7012a30">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:efficient-evals-tensor" data-paper-title="Rich Insights from Cheap Signals: Efficient Evaluations via Tensor Factorization" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Rich Insights from Cheap Signals: Efficient Evaluations via Tensor Factorization 基础模型 University of Michigan 2026-03-02 本文将模型、prompt和rater三者的能力张量作低rank CP分解，先用大量廉价autorater评分学共享表示，再冻结表示、只拟合人类rater向量及有序cutoff。它保留prompt异质性和rater偏好差异，不把某个自动judge分数直接当人类真值。2026-11-16是Google官方代码新仓库，不是论文首发；v1首发为2026-03-02 16:12:46 UTC。 成本过高，不复现（审查DONE）；L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。官方google-research/efficient_evals固定b4421d929d1078631ee890f8e4a776442c816d36、Apache2.0。本地只执行CP、ordinal概率、冻结human NLL和外部Sigma的条件区间算术；不含完整Adam/BFGS拟合、30切分或真实评分重收集。上游CPU notebook估约1小时，完整多judge矩阵高成本不复现，CUDA只验算子。  评测与可信度 人类校准与张量评测 基础模型 能力证据：评测采样、读出与可靠性 它与ProEval都省评测费，方法是否相同？ 不同。ProEval主动选目标问题并更新GP；本篇校准多个rater到人类尺度。 教学例：多一个便宜judge评分不等于主动选了一道人类问题。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-9f60641a0a05220b">它与ProEval都省评测费，方法是否相同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aefficient-evals-tensor">Rich Insights from Cheap Signals: Efficient Evaluations via Tensor Factorization</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University of Michigan</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同。ProEval主动选目标问题并更新GP；本篇校准多个rater到人类尺度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：多一个便宜judge评分不等于主动选了一道人类问题。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.02029v1">原论文</a> · <a href="../../../../foundation-models/2603.02029-efficient-evals-tensor/">实现解读</a> · <a href="#qa-9f60641a0a05220b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:efficient-evals-tensor" data-paper-title="Rich Insights from Cheap Signals: Efficient Evaluations via Tensor Factorization" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Rich Insights from Cheap Signals: Efficient Evaluations via Tensor Factorization 基础模型 University of Michigan 2026-03-02 本文将模型、prompt和rater三者的能力张量作低rank CP分解，先用大量廉价autorater评分学共享表示，再冻结表示、只拟合人类rater向量及有序cutoff。它保留prompt异质性和rater偏好差异，不把某个自动judge分数直接当人类真值。2026-11-16是Google官方代码新仓库，不是论文首发；v1首发为2026-03-02 16:12:46 UTC。 成本过高，不复现（审查DONE）；L1低成本机制组件；不是能力benchmark，未接入Evolve晋级。官方google-research/efficient_evals固定b4421d929d1078631ee890f8e4a776442c816d36、Apache2.0。本地只执行CP、ordinal概率、冻结human NLL和外部Sigma的条件区间算术；不含完整Adam/BFGS拟合、30切分或真实评分重收集。上游CPU notebook估约1小时，完整多judge矩阵高成本不复现，CUDA只验算子。  评测与可信度 人类校准与张量评测 基础模型 能力证据：评测采样、读出与可靠性 human全参数微调后能沿用当前CI吗？ 不能。区间忽略第一阶段因子误差并要求固定features；全参数微调改变条件假设。 教学例：传入任意单位矩阵Sigma只测公式，不能当真实覆盖证书。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-86d77e63645f75e2">human全参数微调后能沿用当前CI吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aefficient-evals-tensor">Rich Insights from Cheap Signals: Efficient Evaluations via Tensor Factorization</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · University of Michigan</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。区间忽略第一阶段因子误差并要求固定features；全参数微调改变条件假设。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：传入任意单位矩阵Sigma只测公式，不能当真实覆盖证书。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.02029v1">原论文</a> · <a href="../../../../foundation-models/2603.02029-efficient-evals-tensor/">实现解读</a> · <a href="#qa-86d77e63645f75e2">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:qe-length-normalization" data-paper-title="Penalizing Length: Uncovering Systematic Bias in Quality Estimation Metrics" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Penalizing Length: Uncovering Systematic Bias in Quality Estimation Metrics 基础模型 Carnegie Mellon University / Google 2025-10-24 同样没有翻译错误，较长译文却被质量估计器判得更差，会把 reranking 和基于评分的训练导向短答案。本文不把长度和真实质量相关性混在一起：对同一文档的连续金标准段落构造一至五段的前缀，尽量固定领域和质量，再观察评分漂移。缓解方案之一是在训练时预测单位长度的错误密度，在推理时乘回译文长度。它改变监督目标及其分布，不是对已经训练好的 MetricX 输出做一次除法，就能声称修好了偏差。论文还检查引入参考文本的评估方案，本地未实现该模型分支。 完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。本地交付是 L1 数值/协议组件，不是完整论文能力复现。完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。density_targets、restore_ratings 对应监督目标和输出恢复；controlled_passages 对应同文档前缀与整组过滤；within_document_differences 只计算五个控制前缀的相对评分。没有下载 WMT、加载 MetricX/Gemini、重新训练评分器或生成翻译。  评测与研究证据 翻译指标与长度偏差 基础模型 能力证据：评测采样、读出与可靠性 QE 长度偏差为何不能靠比较任意长句和短句证明？ 长短句可能本来就有不同错误率、领域和难度。论文对同文档连续金标准段落做一至五段前缀，保持假设无错质量与领域，再看指标是否系统漂移。它仍依赖后编辑金标准近似无错的前提。 教学例：同一篇新闻的前三个正确段落拼起来后评分下降，不同于拿一段简单广告与一篇难译法律长文比较。 2026-11-13">

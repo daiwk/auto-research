@@ -7,7 +7,7 @@ hide:
 
 # 从更便宜的一次前向，到可验证的长期研究闭环
 
-[搜广推](../index.md) · 更新 2026-10-27 · 19 篇主题资料 / 5 篇重点对照
+[搜广推](../index.md) · 更新 2026-11-18 · 20 篇主题资料 / 6 篇重点对照
 
 ROCS减少请求内重复计算，Rec-Distill将昂贵教师知识移到训练，Effective Training Time追踪训练生命周期损耗，FORTE控制特征退役风险，Self-Evolving RecSys把提案、实验和线上反馈接成长期循环。它们优化的时间尺度不同；省GPU、删特征和自动提出方案，都不能直接当作推荐效果提升。
 
@@ -30,6 +30,7 @@ ROCS减少请求内重复计算，Rec-Distill将昂贵教师知识移到训练�
 | [Optimizing Effective Training Time for Large-Scale Recommendation Systems](../../../reproductions/2610.02057-effective-training-time/README.md) · [原始来源](https://arxiv.org/abs/2610.02057)<br>章节：背景与主要改动、核心公式、复现边界 | 以消费新数据的训练时间除端到端wall time，按初始化、编译、checkpoint、发布和恢复等阶段归因损耗。 | 提高ETT不等于提升模型准确率，也不同于GPU忙碌率；本地是生命周期分解与owner归因组件，不是推荐模型能力实验。 |
 | [FORTE: A Production Framework for Feature Evaluation and Deprecation in Industrial Recommender Systems](../../../reproductions/2610.13806-forte/README.md) · [原始来源](https://arxiv.org/abs/2610.13806)<br>章节：背景与主要改动、核心公式、复现边界 | 冻结模型扰动依赖，经所有头/时间窗筛选，再联合消融、真实重训、线上实验与所有消费者血缘审计逐级退役特征。 | 单特征弱依赖不能相加推导联合安全；本地A100三种子没有候选通过全部门槛，最终保留基线，流程完成不等于删除带来收益。 |
 | [Self-Evolving Recommendation System: End-To-End Autonomous Model Optimization With LLM Agents](../../../reproductions/2602.10226-self-evolving-rec/README.md) · [原始来源](https://arxiv.org/abs/2602.10226)<br>章节：背景与主要改动、核心公式、本地复现 | 内层研究agent提出optimizer/结构/reward并运行工具，外层状态机控制约束、离线门槛和真实A/B promotion，结论写回journal。 | 可执行试验与独立评价是闭环必要条件，提案或注册名称不是能力；原文生产反馈不能用本地小实验替代，也不能因agent主动探索跳过门槛。 |
+| [CutAgent: Creative-Gene-Driven Planning and Experience-Guided Self-Refinement for High-CTR E-commerce Advertising Video Creation](../../../recommendation-components/2611.22418-cutagent/README.md) · [原始来源](https://arxiv.org/abs/2611.22418v1)<br>章节：背景与主要改动、核心公式、同主题对照、高成本完整实验 | CutAgent把多模态商品理解与可靠视频制作拆为GeneAgent和VideoAgent，以结构化creative gene连接。Gene规定narrative units和配音／音乐／脚本规则；前者经高CTR SFT和CTR-level GRPO学习规划，后者展开分镜并检索商品素材、做TTS/BGM和渲染，再只修复带时间证据的缺陷。 | AgenticRecTune把推荐系统配置方案经实验平台反馈沉淀到SkillHub，CutAgent把广告制作失败修复写成类目／gene条件经验。二者都复用执行经验，但优化对象、反馈和测试权限不同；本篇的LightGBM surrogate不是推荐实验平台，也不能替代真实线上随机分流证据。 |
 
 </div>
 
@@ -46,6 +47,12 @@ ROCS把同请求多候选共享编码，节省在线重复工作；Rec-Distill�
 FORTE把成本节省的提案放进多道质量与血缘门槛，本地无候选通过后保留原模型是有效结论。Self-Evolving RecSys的外层状态机同样不能把内层成功跑完当成可上线；ETT也提醒把失败恢复和重复开销算进生命周期。长期记忆应保存失败原因、预算和消费者边界，而非只积累宣称成功的方案名。
 
 对照来源：[forte](../../../reproductions/2610.13806-forte/README.md) · [self-evolving-rec](../../../reproductions/2602.10226-self-evolving-rec/README.md) · [effective-training-time](../../../reproductions/2610.02057-effective-training-time/README.md)
+
+### CutAgent：以创意基因连接广告规划、制作与经验反思：区别机制与能力
+
+GeneAgent采用Qwen3-VL-8B，冻结视觉模块、仅语言LoRA；SFT取观测CTR前20%，GRPO每商品采8个gene。LightGBM按类目内Low/Mid/High预测CTR-level，仅是训练奖励，不充当线上CTR。VideoAgent先按43类目选memory shard，再用gene相似度取已验证failure-correction作为制作约束；memory不是商品clip pool，反思不能用固定模板成功代替。 AgenticRecTune把推荐系统配置方案经实验平台反馈沉淀到SkillHub，CutAgent把广告制作失败修复写成类目／gene条件经验。二者都复用执行经验，但优化对象、反馈和测试权限不同；本篇的LightGBM surrogate不是推荐实验平台，也不能替代真实线上随机分流证据。
+
+对照来源：[cutagent](../../../recommendation-components/2611.22418-cutagent/README.md) · [agentic-rec-tune](../../../reproductions/2604.26969-agentic-rec-tune/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -91,15 +98,29 @@ FORTE把成本节省的提案放进多道质量与血缘门槛，本地无候选
 
     对照来源：[rec-distill](../../../reproductions/2605.29755-rec-distill/README.md) · [self-evolving-rec](../../../reproductions/2602.10226-self-evolving-rec/README.md)
 
+### CutAgent memory与AgenticRecTune SkillHub一样吗？ {#cross-cross-nov18-latest-cutagent}
+
+??? note "展开答案与例子"
+
+    **答案：** 复用思路相近但前者保存类目／gene条件的制作缺陷修复，后者保存配置实验经验。
+
+    **教学例子：** 教学例：减少开场重复近景不能直接变成推荐融合权重。
+
+    对照来源：[cutagent](../../../recommendation-components/2611.22418-cutagent/README.md) · [agentic-rec-tune](../../../reproductions/2604.26969-agentic-rec-tune/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-18** · 本篇review-only，完整实验成本过高，不复现（审查DONE）。70K商品每件90–120clips、多模态teacher、8B训练／检索、TTS与渲染、397Bjudge及真实流量均未运行；不下载资源，不编造creative-gene规划器、素材检索或本地CTR。固定v1没有核实本篇作者仓库，FireRed等第三方baseline代码不算CutAgent开源。 完整实验高成本不复现，未作能力或Evolve晋级证据。
+
+涉及：[cutagent](../../../recommendation-components/2611.22418-cutagent/README.md) · [agentic-rec-tune](../../../reproductions/2604.26969-agentic-rec-tune/README.md)
 
 **2026-10-27** · 首版：比较rocs、rec-distill、effective-training-time、forte、self-evolving-rec，围绕成本属于训练、请求内推理还是长期研发生命周期与复用与删除要求哪些依赖/消费者保持一致建立分析和跨论文问答。
 
 覆盖 19 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 19 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 20 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -122,6 +143,7 @@ FORTE把成本节省的提案放进多道质量与血缘门槛，本地无候选
 - [Self-Evolving Recommendation System: End-To-End Autonomous Model Optimization With LLM Agents](../../../reproductions/2602.10226-self-evolving-rec/README.md)
 - [SOLARIS: Speculative Offloading of Latent-bAsed Representation for Inference Scaling](../../../reproductions/2604.12110-solaris/README.md)
 - [Compute Only Once: UG-Separation for Efficient Large Recommendation Models](../../../reproductions/2602.10455-ug-sep/README.md)
+- [CutAgent: Creative-Gene-Driven Planning and Experience-Guided Self-Refinement for High-CTR E-commerce Advertising Video Creation](../../../recommendation-components/2611.22418-cutagent/README.md)
 
 </details>
 

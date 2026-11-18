@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "key": "confidence-adaptive-granularity",
+  "device": "cpu",
+  "diagnostic_only": true,
+  "evaluation_tier": "l0_interface",
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l0_interface",
+      "checks": {
+        "shared_coarse_value_selected_without_gold": true,
+        "too_few_parses_excluded": true,
+        "all_coarser_recognition_required": true,
+        "abstention_differs_from_error": true
+      },
+      "metrics": {
+        "year_information_utility": 0.5393459267796299,
+        "selected_level": 1,
+        "recognition_level": 2
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l0_interface",
+      "checks": {
+        "shared_coarse_value_selected_without_gold": true,
+        "too_few_parses_excluded": true,
+        "all_coarser_recognition_required": true,
+        "abstention_differs_from_error": true
+      },
+      "metrics": {
+        "year_information_utility": 0.5393459267796299,
+        "selected_level": 1,
+        "recognition_level": 2
+      }
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l0_interface",
+      "checks": {
+        "shared_coarse_value_selected_without_gold": true,
+        "too_few_parses_excluded": true,
+        "all_coarser_recognition_required": true,
+        "abstention_differs_from_error": true
+      },
+      "metrics": {
+        "year_information_utility": 0.5393459267796299,
+        "selected_level": 1,
+        "recognition_level": 2
+      }
+    }
+  ],
+  "capability_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "checkpoint_calls": 0,
+  "dataset_downloads": 0
+}

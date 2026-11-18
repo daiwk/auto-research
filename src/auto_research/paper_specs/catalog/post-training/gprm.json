@@ -1,0 +1,56 @@
+{
+  "domain": "post-training",
+  "key": "gprm",
+  "title": "GPRM: Global Perspective Process Reward Model",
+  "paper_url": "https://arxiv.org/abs/2611.20755v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.20755v1",
+  "reviewed_version": "v1",
+  "detail_path": "post-training/2611.20755-gprm/README.md",
+  "first_author": "Zifan Zhang",
+  "first_author_affiliation": "Wuhan University",
+  "published": "2026-11-16",
+  "published_at": "2026-11-16T09:03:27Z",
+  "code": null,
+  "code_status": "固定v1及所核作者入口未找到可验证的本篇方法源码发布；引用的训练器、模型或库不算本篇开源。",
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "topic": [
+    "reward-and-credit",
+    "后训练算法组件"
+  ],
+  "priority": "P1",
+  "intake_class": "new_submission_in_requested_window",
+  "implementation_status": "deferred_high_cost",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.20755v1",
+    "source_sections": [
+      "§3.1–3.5",
+      "§4 model and search setup"
+    ],
+    "basis": "§4使用4B/14B PRM、Qwen3-235B-Instruct错误注入/分析教师与7B搜索策略，SFT后GRPO，再Best-of8/逐步续写搜索、多benchmark。",
+    "available_resource": "Single NVIDIA A100/A30 or local Mac",
+    "decision": "Full experiment not reproduced due to high cost; review DONE. No checkpoint/data download or paid API call.",
+    "local_budget": {
+      "checkpoint_download_bytes": 0,
+      "dataset_download_bytes": 0,
+      "paid_api_calls": 0,
+      "local_component_seconds_per_seed_cap": 30,
+      "gpu_component_seconds_per_seed_cap": 0,
+      "cap_scope": "Tiny exact operator/negative-control checks only; not a training campaign."
+    }
+  },
+  "summary": "除问题和当前step，还读历史step与已预测judgment、当前候选的后续trajectory；四维分析是forward consistency、posterior verification、goal alignment、self validity。 只收录方法和成本；不以字符串parser或固定规则替代4维global PRM。",
+  "deferral_reason": "§4使用4B/14B PRM、Qwen3-235B-Instruct错误注入/分析教师与7B搜索策略，SFT后GRPO，再Best-of8/逐步续写搜索、多benchmark。 完整实验成本过高，不复现（审查DONE）；不以固定规则或公式占位冒充模型/系统实现。"
+}

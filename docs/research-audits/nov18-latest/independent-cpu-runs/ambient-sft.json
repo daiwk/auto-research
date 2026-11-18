@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "key": "ambient-sft",
+  "device": "cpu",
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "teacher_frozen": true,
+        "exact_unscaled_combination": true,
+        "masked_tokens_have_zero_gradient": true,
+        "high_temperature_recovers_sft": true,
+        "stochastic_branch_boundary": true
+      },
+      "metrics": {
+        "loss": 1.6531200987032963,
+        "temperature_matching": 0.15621121688864578,
+        "high_temperature_kl": 6.564118930745991e-13
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "teacher_frozen": true,
+        "exact_unscaled_combination": true,
+        "masked_tokens_have_zero_gradient": true,
+        "high_temperature_recovers_sft": true,
+        "stochastic_branch_boundary": true
+      },
+      "metrics": {
+        "loss": 3.1421937114637175,
+        "temperature_matching": 0.3587361089545276,
+        "high_temperature_kl": 1.3797322291186638e-12
+      }
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "teacher_frozen": true,
+        "exact_unscaled_combination": true,
+        "masked_tokens_have_zero_gradient": true,
+        "high_temperature_recovers_sft": true,
+        "stochastic_branch_boundary": true
+      },
+      "metrics": {
+        "loss": 2.5813347733367102,
+        "temperature_matching": 0.1766684212179769,
+        "high_temperature_kl": 8.252233390758007e-13
+      }
+    }
+  ],
+  "capability_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "checkpoint_calls": 0,
+  "dataset_downloads": 0
+}

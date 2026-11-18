@@ -1,0 +1,13 @@
+{
+  "source_url": "https://arxiv.org/html/2611.22426v1/Foresight-PLT-new.png",
+  "figure": "S1.F1",
+  "caption": "Figure 1: Overview of InfuseLoop. Each loop combines the latest token embedding with\nthe current state and causally available future states\nthrough attention residual aggregation.\nThe enlarged view details the attention-based aggregation of current latent state and future states.",
+  "original_sha256": "3c084a979bc22499fede776a6dbda5ac3dc8fbf54bc949cdab67f62952a9ecfe",
+  "extraction": "Author original raster image, or original SVG rasterized without semantic editing",
+  "paper_url": "https://arxiv.org/html/2611.22426v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-18",
+  "copyright": "Copyright retained by the original authors; research commentary, not a local result.",
+  "source_html_sha256": "4ca10d5305f7025bfe170d8fe2f2e1e2b753c645a8d51a88ce2668a3094f7d43",
+  "asset_sha256": "a347e311264550fbd74f9b6bea33308f30d3ba0f4c4908d21f766ff4e1468de7"
+}

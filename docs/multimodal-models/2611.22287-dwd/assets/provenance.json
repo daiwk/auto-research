@@ -1,0 +1,13 @@
+{
+  "source_url": "https://arxiv.org/html/2611.22287v1/dwd_arch.png",
+  "figure": "S3.F2",
+  "caption": "Figure 2: Standard latent generation vs. DWD. (a) A standard generator samples a denoised latent and maps it to pixels with a decoder. (b) DWD retains the denoising head for latent denoising and adds a parallel DWD head that produces the final pixels only at the final step, bypassing this decoder. DWD finetunes the pretrained generator’s final blocks and heads (fire icon), while freezing all previous blocks (ice icon). Time t t and conditioning 𝒄 {\\bm{c}} are omitted for clarity.",
+  "original_sha256": "82748f35cf05df5451df74350823f9b6b2adddba894e17da98428d6287ba7627",
+  "extraction": "Author original raster image, or original SVG rasterized without semantic editing",
+  "paper_url": "https://arxiv.org/html/2611.22287v1",
+  "reviewed_version": "v1",
+  "retrieved_on": "2026-11-18",
+  "copyright": "Copyright retained by the original authors; research commentary, not a local result.",
+  "source_html_sha256": "d0b2eaad5adc876dc4604489044f7d6dd8162a22f863b98caf9faf56d1d74304",
+  "asset_sha256": "34ca445424740d2021f710320c25150af699900a6f41402c85801498361ce0cb"
+}

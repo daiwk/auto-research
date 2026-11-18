@@ -1,0 +1,365 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:detourbench/oracle-not-policy": {
+      "source_sha256": "1d208119e1a794e13553755d91a1c7fa885af4e440a50f20f80a982053375af9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is the minimum access count not an achievable policy promise?",
+        "answer": "The oracle sees the full graph whereas the actor sees revealed observations. NDR is excess over a hindsight optimum, not proof that every exploratory access was unreasonable.",
+        "example": "Teaching example: an oracle picks the correct one of two lookalike resources first; the actor cannot know it beforehand."
+      }
+    },
+    "qa/agent-research:detourbench/wrong-is-undefined": {
+      "source_sha256": "514a2020e7b6e92aaa1111d82e357f04a24a0235f53a5d82f152e8d26014ca08",
+      "reviewed": true,
+      "fields": {
+        "question": "May residual work be zero after a wrong commitment?",
+        "answer": "No. Zero denotes success. An irreversible wrong terminal has no finite route to success; residual progress and detour are undefined and failure is reported separately.",
+        "example": "Teaching example: an irreversible wrong submission is not zero steps from success."
+      }
+    },
+    "qa/agent-research:detourbench/contrast-not-oracle": {
+      "source_sha256": "f9c03e9e871c3e946ec4334c9bf9c913798fecdb568303a37990e757733aca01",
+      "reviewed": true,
+      "fields": {
+        "question": "How does this differ from Harness² execution comparison?",
+        "answer": "DetourBench measures a fixed trajectory against a provable offline minimum. Harness² changes a harness through execution contrasts without gold or rubrics. Their objects and information privileges differ.",
+        "example": "Teaching example: choosing an anonymous artifact does not prove its access count was minimal."
+      }
+    },
+    "qa/agent-research:detourbench/charge-dispatch": {
+      "source_sha256": "9b8a466d8278023c8dc15471286fe6e9204ff25ec81d76bc001647ac5678b166",
+      "reviewed": true,
+      "fields": {
+        "question": "Why charge duplicate calls?",
+        "answer": "Cost counts dispatched accesses, not state changes. Free duplicates would corrupt RSR and NDR. Conversely, an undispatched suffix after a terminal transition must not be charged.",
+        "example": "Teaching example: read, reread, submit costs three; an unexecuted suffix after submit costs nothing."
+      }
+    },
+    "qa/agent-research:sciresearch-eval/fit-not-validity": {
+      "source_sha256": "7b98f8ab1999b345bb88a097e3769fe55f93284c74810622707e07db640f417c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a good fit still be wrong?",
+        "answer": "Missing radiation, side loss or contact resistance lets parameters compensate for model mismatch, producing small residuals but poor interval coverage.",
+        "example": "Teaching example: fitting a glued plate with a monolithic model absorbs joint resistance into conductivity."
+      }
+    },
+    "qa/agent-research:sciresearch-eval/proper-score-not-width": {
+      "source_sha256": "739e2bc3a2cc06004c68e3405b930c3d5cfabced12d563930733db746a6a8f61",
+      "reviewed": true,
+      "fields": {
+        "question": "Can arbitrarily wide intervals game the score?",
+        "answer": "No. Lower is better and width itself costs score. Narrow misses incur a40-fold distance penalty, balancing coverage with informativeness.",
+        "example": "Teaching example: a wide covering interval scores worse than a narrower covering interval."
+      }
+    },
+    "qa/agent-research:sciresearch-eval/truth-versus-sufficiency": {
+      "source_sha256": "9717417c7cffb9b92976265027a9c5b31fa496ef596d13e34740f86b870640b6",
+      "reviewed": true,
+      "fields": {
+        "question": "Is its reference information the same as an AskALCF sufficiency probe?",
+        "answer": "No. This evaluator has exact physical truth. AskALCF sufficiency sees only question and documents, not generation. Each reference and permission boundary must remain separate.",
+        "example": "Teaching example: a scorer may use conductivity truth; the experiment-design actor may not."
+      }
+    },
+    "qa/agent-research:sciresearch-eval/positive-log-values": {
+      "source_sha256": "6a553cdd1f8ae30865da023b69f2e02f2f0c86d0a7389f19a38fa8e93e1ab819",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reject zero or negative endpoints?",
+        "answer": "Property scoring is on log10, which is not finite for nonpositive values. Adding an undocumented epsilon changes the rule, and missing parameters cannot count as correct.",
+        "example": "Teaching example: reject a conductivity interval[0,10] instead of replacing zero by1e-8."
+      }
+    },
+    "qa/agent-research:silentguard/success-status-not-contract": {
+      "source_sha256": "9e1213b8e0e585a5c4456c0b86fbcf92a40a2449c49af189d77c53aa7df95516",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is HTTP200 insufficient?",
+        "answer": "It indicates transport/service success, not filter semantics. Check invariants and enforce outcomes instead of relying on voluntary model compliance.",
+        "example": "Teaching example: a misspelled price_max is ignored while the API returns the total for all items."
+      }
+    },
+    "qa/agent-research:silentguard/identity-no-truth-oracle": {
+      "source_sha256": "dc144624e3ab8bf0714cedda726664cab3babf977a03681c0f23c64b5686df83",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the identity detect every wrong count?",
+        "answer": "No. It detects violations of consistency under the stated query contract. Mutually consistent false responses can pass; this is not an external truth oracle.",
+        "example": "Teaching example: returning zero for every query still satisfies the additive identity."
+      }
+    },
+    "qa/agent-research:silentguard/guard-versus-harness-learning": {
+      "source_sha256": "377f280698abe7f5f8c7fd4bd0e1cc8682224cd43162b18aeca3fcad8e5c90d8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is this not Harness²-style self-improvement?",
+        "answer": "SilentGuard applies fixed release/withhold rules. It does not propose or integrate harness edits; Harness² requires execution contrasts and accumulated experience. They can compose but are not substitutes.",
+        "example": "Teaching example: retrying an API once is not proposing a new tool policy."
+      }
+    },
+    "qa/agent-research:silentguard/withheld-not-zero": {
+      "source_sha256": "9952a95dfc89e64dac0eba12f9fa3e9e3a12d923d63b3584a8c6eab866bd9d96",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not replace a withheld count by zero?",
+        "answer": "Zero is a concrete and potentially false answer. The method withholds, permits re-querying or abstention, and checks provenance rather than repairing values automatically.",
+        "example": "Teaching example: after two failed checks the field is absent; two unverified answer rejections are followed by abstention."
+      }
+    },
+    "qa/agent-research:metaact/constraint-not-reminder": {
+      "source_sha256": "c02f44c69cad401fcfe3e6aa4c90cd22b6bef185ffcccee24a5f96856d453857",
+      "reviewed": true,
+      "fields": {
+        "question": "What does an executable constraint add over a lesson?",
+        "answer": "The execution boundary blocks violations of represented rules without relying on the model to obey reminders. Unrepresented failures remain possible.",
+        "example": "Teaching example: blocking a redundant click does not guarantee shopping-task success."
+      }
+    },
+    "qa/agent-research:metaact/effective-denominator": {
+      "source_sha256": "959b8ca81e661b89557860f5d542146307d26159a9e973b4f92efec4102d9efe",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not use all actions as the eff denominator?",
+        "answer": "No-ops are intended suppression targets. Effective actions in the safety reference isolate harmful blocking and prevent many no-ops from diluting it.",
+        "example": "Teaching example: blocking ten useless look calls must not conceal blocking the only productive submit."
+      }
+    },
+    "qa/agent-research:metaact/union-not-free": {
+      "source_sha256": "a59afaada28f5b56f76f71b73143b88aed5badb8178ac631d2b0cbb16e544026",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a GEAR union be adopted without evaluation unlike Harness² composition?",
+        "answer": "No. Conjunction can block more actions and harm successful traces, so replay is repeated. Harness² likewise executes compositions, but uses a different evidence type.",
+        "example": "Teaching example: recompute eff and ok even when both separate guards passed."
+      }
+    },
+    "qa/agent-research:metaact/two-guards-not-agent": {
+      "source_sha256": "5107ae9c3cb5ec9a0cccccdd8793709f049872762e9e539659d16e69aa05bfbb",
+      "reviewed": true,
+      "fields": {
+        "question": "Do two local primitives reproduce all of MetaAct?",
+        "answer": "No. They test independent guards and replay equations, not goal extraction, the other primitives, LLM synthesis or environments. Log provenance remains external and labels must not reach guards.",
+        "example": "Teaching example: a hand-authored no-op rule passing does not show an LLM learned it from failures."
+      }
+    },
+    "qa/agent-research:elite-eval-free/eval-free-not-no-check": {
+      "source_sha256": "b6fc485c5a8ef91c2ae2c49f2639087c9ee29a838ff7d3d3011ff9f1d80f165f",
+      "reviewed": true,
+      "fields": {
+        "question": "Does evaluation-free mean no checks?",
+        "answer": "No. It excludes downstream scores and solving trajectories while retaining deterministic structural and operational validity gates. Passing does not establish capability improvement.",
+        "example": "Teaching example: successful import does not prove a SWE issue was solved."
+      }
+    },
+    "qa/agent-research:elite-eval-free/integrate-common-parent": {
+      "source_sha256": "1668219b2dd869ae59556a217cae292135606fc40ea240671a95a91a7942f214",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not apply seven patches sequentially?",
+        "answer": "Each is an independent same-parent exploration and may conflict or overlap. The integrator must reimplement coherent mechanisms rather than mechanically concatenate patches.",
+        "example": "Teaching example: two edits to the same tool schema can break compatibility when stacked."
+      }
+    },
+    "qa/agent-research:elite-eval-free/elite-harness-evidence": {
+      "source_sha256": "3313f13ecddd4f52de326a9db44dbae4225da5db6bbc983fdf48c8bb7cf1585d",
+      "reviewed": true,
+      "fields": {
+        "question": "How does ELITE differ from rubric-free Harness²?",
+        "answer": "Harness² runs tasks and compares behavior; ELITE integrates implementation-level evidence while excluding downstream task outcomes. Rubric-free does not imply identical information boundaries.",
+        "example": "Teaching example: handing ELITE an offspring success-rate table changes the algorithm."
+      }
+    },
+    "qa/agent-research:elite-eval-free/callback-not-reasoning": {
+      "source_sha256": "3a2280a941deaa14e9f9285a84fd2c20510e662380a3a2cc520e5100b5d6082a",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a working callback prove effective LLM integration?",
+        "answer": "No. The local interface checks invocation, isolation, scope and fallback, not model reasoning or SWE containers. External callbacks remain trusted; MappingProxy is not a process sandbox.",
+        "example": "Teaching example: a fixed integrator returning compilable text tests protocol execution only."
+      }
+    },
+    "qa/agent-research:resolution-hypothesis/repeat-not-run": {
+      "source_sha256": "d5255979b15ea24c05bddc9883cb29eb6c84424881c857b4bb9b57de04751127",
+      "reviewed": true,
+      "fields": {
+        "question": "Can sixteen evaluations of one artifact replace sixteen evolution runs?",
+        "answer": "No. They estimate evaluation noise, whereas separate evolution runs reveal variation in artifact quality. Method comparisons need both.",
+        "example": "Teaching example: rerunning one prompt does not create sixteen independent proposal processes."
+      }
+    },
+    "qa/agent-research:resolution-hypothesis/negative-estimator": {
+      "source_sha256": "45565b3ef89ad6d3c1ab226cdcef026681cc0587a298b27422ee926dc377ffc4",
+      "reviewed": true,
+      "fields": {
+        "question": "Is a negative tau² estimate a bug?",
+        "answer": "Not necessarily. Subtracting evaluation noise from row-mean variance can yield a negative moment estimate. Retain it and clip only the displayed SD.",
+        "example": "Teaching example: two rows[0,1] have equal means but within-row noise, producing−0.25."
+      }
+    },
+    "qa/agent-research:resolution-hypothesis/measurement-not-selector": {
+      "source_sha256": "dfc31584b27b47a7d14b49bf2fd724273f0df4c8d399e6122213f170d27d1a88",
+      "reviewed": true,
+      "fields": {
+        "question": "Can it replace the Harness² selector?",
+        "answer": "No. It estimates measurement variability, not mechanism compatibility or task fitness. Candidate quality, selection and evaluation resolution are distinct objects.",
+        "example": "Teaching example: a low-variance wrong answer remains wrong."
+      }
+    },
+    "qa/agent-research:resolution-hypothesis/balanced-provenance": {
+      "source_sha256": "c5d731331116c6893cf2d9490784878e224ccfee65e2269f7d841839cc61e5a0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reject unbalanced matrices?",
+        "answer": "The implementation follows the balanced-design sigma²/M correction. Missing evaluations require different weighting and assumptions, not zero padding.",
+        "example": "Teaching example: a run with eight evaluations and another with one cannot both useM=8."
+      }
+    },
+    "qa/agent-research:clam-memory/instant-after-training": {
+      "source_sha256": "fbf4ce0bde934f39894b18650a10e16c7f630dc9d360ed31591b08fcb1a8f990",
+      "reviewed": true,
+      "fields": {
+        "question": "Does instant mean no training?",
+        "answer": "No. New sessions need no gradient steps, but the hypernetwork requires pretrained initialization and multi-session distillation.",
+        "example": "Teaching example: one serving forward pass does not make its training cost zero."
+      }
+    },
+    "qa/agent-research:clam-memory/fixed-state-not-adapter-concat": {
+      "source_sha256": "a0026f8258fe6fa21d1e6b8de987475dbd5e6d727d7d6b10399ee7f6b4133a4e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not concatenate session LoRA ranks?",
+        "answer": "CLAM accumulates within fixedQ and decodes rank8. Concatenation grows capacity and cost with history and changes the method.",
+        "example": "Teaching example:100 sessions do not imply rank800."
+      }
+    },
+    "qa/agent-research:clam-memory/clam-versus-coremem": {
+      "source_sha256": "4d2993d5b2e1c5af92c3ad7205acde620177a74520999d73a58221d4c4e45589",
+      "reviewed": true,
+      "fields": {
+        "question": "How does CLAM differ from CoReMem?",
+        "answer": "CLAM distills full-history answers into parameters. CoReMem uses future-task with/without-memory value for credit. Neither is a cheap stand-in for the other.",
+        "example": "Teaching example: retaining a name does not prove fewer steps on the next repository task."
+      }
+    },
+    "qa/agent-research:clam-memory/untrained-not-reproduction": {
+      "source_sha256": "6a48e9c0df7d0b70f6e250ca302e782c68edc263f8703c361dacdcdd397b07ac",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not run a tiny random hypernetwork as the reproduction?",
+        "answer": "Capability depends on900K synthetic trajectories,8K–25K steps,2–7B bases and70B generation/judging. A random module tests shapes, not consolidation; the full campaign is explicitly not reproduced.",
+        "example": "Teaching example: a zero-initialized adapter is a no-op, not learned memory."
+      }
+    },
+    "qa/agent-research:skillbuffbench/curated-upper-bound": {
+      "source_sha256": "452fdf7cfbc70fefa15251e6bc0a9a2330dc6991e518a235def4a56e9d21a8c1",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a curated skill gain prove automatic discovery helps?",
+        "answer": "No. Curated access solves selection for the actor. Automatic access adds descriptions, distractors and loading failures, requiring a separate arm.",
+        "example": "Teaching example: supplying an XRD skill does not show discovery among100 skills."
+      }
+    },
+    "qa/agent-research:skillbuffbench/m0-isolation": {
+      "source_sha256": "5796d53f74fb7d44f327cd5918925b3ad46a6a6c26e0e6fdeaf6085e52f6ad06",
+      "reviewed": true,
+      "fields": {
+        "question": "Is deleting chat history enough forM0?",
+        "answer": "No. Workspace, memory namespace, history and caches must not carry over, or repeats cease to be exchangeable and memory contaminates skill effects.",
+        "example": "Teaching example: an answer file from the previous run also leaks."
+      }
+    },
+    "qa/agent-research:skillbuffbench/evaluation-versus-improvement": {
+      "source_sha256": "dfa74909df97c53d52c15ce16f197232712b347a114564cbdf627d360f4f83c5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is it not the same experiment as Harness²?",
+        "answer": "It holds configuration fixed while varying access and memory; Harness² actively edits a harness and accumulates experience. Evolution artifacts and evaluation factors are distinct.",
+        "example": "Teaching example: installing new skills changes a supposedly fixed benchmark cell."
+      }
+    },
+    "qa/agent-research:skillbuffbench/private-skills-not-cloned": {
+      "source_sha256": "d5390550c0a1eac8fa70349c46de12ac11ec004d20c5cc5dd4d7523a8e80f924",
+      "reviewed": true,
+      "fields": {
+        "question": "Why catalog without reconstructing the tasks?",
+        "answer": "There are3,168 runs and partly private skill contents. Purpose descriptions do not support equivalent implementation; a same-name toy is not a reproduction.",
+        "example": "Teaching example: a generic biology prompt does not replace an unreleased regulatory-prioritization skill."
+      }
+    },
+    "qa/agent-research:gandalf-bvb/verifier-not-actor": {
+      "source_sha256": "d87c57ffd38f3928fc22dcd4dc7792cc5b4956d59bc8b85dfc1699bae160a31a",
+      "reviewed": true,
+      "fields": {
+        "question": "Is BVB F1 an actor success rate?",
+        "answer": "No. It measures verifier detection of unmet criteria. The actor may fail while the verifier correctly identifies it.",
+        "example": "Teaching example: correctly flagging a spreadsheet error improves judge F1, not actor success."
+      }
+    },
+    "qa/agent-research:gandalf-bvb/native-read-only": {
+      "source_sha256": "09548e6dba0064ea5f160c24c2e11cca9d7cd0355e2fadaa5a4c795cbf8722f8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why native tools but read-only access?",
+        "answer": "Native structure preserves formulas and application state lost in text. Read-only snapshots prevent judges from modifying the object being evaluated.",
+        "example": "Teaching example: inspect an Excel formula, but do not fix it before passing the sheet."
+      }
+    },
+    "qa/agent-research:gandalf-bvb/gandalf-askalcf": {
+      "source_sha256": "80e966da8fe39e5e3d38c8c9d2c1d9d9834bfe9cb4a9b14410a63c115f37704a",
+      "reviewed": true,
+      "fields": {
+        "question": "Can it reuse AskALCF probe labels directly?",
+        "answer": "No. Deliverable criteria differ from answer-blind document sufficiency. Questions, references and permissions are different.",
+        "example": "Teaching example: an available citation does not prove the slide contains the correct chart."
+      }
+    },
+    "qa/agent-research:gandalf-bvb/no-shadow-verifier": {
+      "source_sha256": "05cf81680ae64910daff4f968dd11898cd2323e94af2b70d075d901ebefb610f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not claim integration after adding a schema?",
+        "answer": "The defining mechanism is a reactive judge with native-artifact access. A schema cannot execute it; the real API/environment campaign is high cost and explicitly review-only.",
+        "example": "Teaching example: reading criteria JSON without inspecting a workbook does not verify the workbook."
+      }
+    },
+    "qa/agent-research:self-organized-learning/self-organization-not-loop": {
+      "source_sha256": "046d3441adb7a966c28f18a49356163636013f9e42ab7ed9995a1a0f93503308",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is a fixed curriculum not this self-organization?",
+        "answer": "The study observes models choosing their learning process from primitives. Prescribing generation and update timing replaces the behavior being studied.",
+        "example": "Teaching example: automatically increasing difficulty every ten steps is not an emergent curriculum."
+      }
+    },
+    "qa/agent-research:self-organized-learning/teacher-player-state": {
+      "source_sha256": "992f78825633347984131644186ecb8f054baae44d2c9289f378c527f526a0bb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why persistent teachers and ephemeral players?",
+        "answer": "Teachers retain experiments and artifact versions; fresh players test the current artifact without hidden carryover. This separates artifact transfer from player-session memory.",
+        "example": "Teaching example: a new player must not resume the previous chat while claiming a skill-only effect."
+      }
+    },
+    "qa/agent-research:self-organized-learning/loop-versus-elite": {
+      "source_sha256": "f7df751a7853a5e51f5b44b6bc493132eaaa843270d57ca88e00571de01aef99",
+      "reviewed": true,
+      "fields": {
+        "question": "Is this the same as ELITE evaluation-free evolution?",
+        "answer": "No. ELITE prescribes same-parent exploration and code integration without downstream results. Here teachers organize learning from self-generated-game feedback. Interventions and feedback permissions differ.",
+        "example": "Teaching example: forcing seven-child integration changes the free self-organization setting."
+      }
+    },
+    "qa/agent-research:self-organized-learning/no-cheap-fixed-policy": {
+      "source_sha256": "568ed36643bbbaf556b4b5c5688fd4aa45f78e47aa6bd8d5bb1035983ee3a6b4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not run a fixed-policy toy agent?",
+        "answer": "A fixed policy cannot demonstrate spontaneous algorithm construction. The real three-session,150-gameplay, multi-frontier campaign is costly; the method is cataloged without invented capability scores.",
+        "example": "Teaching example: a prewritten winning move sequence is not a player learning from teacher artifacts."
+      }
+    }
+  }
+}

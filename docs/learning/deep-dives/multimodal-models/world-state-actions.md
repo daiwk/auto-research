@@ -7,7 +7,7 @@ hide:
 
 # 会预测下一幕，还不等于会行动或保持同一个世界
 
-[多模态](../index.md) · 更新 2026-11-18 · 30 篇主题资料 / 14 篇重点对照
+[多模态](../index.md) · 更新 2026-11-18 · 32 篇主题资料 / 16 篇重点对照
 
 世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。 SWIM从离线动作可预测性学习状态坐标的相对权重，训练期校准latent距离，部署时不向规划器增加真实状态。
 
@@ -39,6 +39,8 @@ hide:
 | [Back to Pixels: Lifting Latent Video Diffusion into Pixel Space](../../../multimodal-models/2611.17336-pixvid/README.md) · [原始来源](https://arxiv.org/abs/2611.17336v1)<br>章节：背景与主要改动、核心机制与公式、论文离线与线上效果 | 以像素-latent线性对齐、时间校准和detailer把预训练视频DiT迁移到pixel空间，处理高分辨率细节与跨帧一致性；本轮仅资料收录。 | WOVEN用动作条件rollout形成转移监督并训练MLLM回答；PixVid改变生成器的表示与计算路径。更清晰的生成不自动意味着因果/动作正确，也不是选择题准确率。 |
 | [What Should World Models Forget? Stratified Retention for Continual Adaptation](../../../foundation-models/2610.03713-stratified-retention-protocol/README.md) · [原始来源](https://arxiv.org/abs/2610.03713v2)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 把世界知识按环境不变时间尺度分层，分别报告逐轮不变量保持和新episode修订延迟；原文是无新实证的评测提案，本地仅L0报告协议。 | WOVEN用(s,a,s&#x27;)视觉转移产生受控监督并训练MLLM；分层保持不生成训练数据、不指定适应算法。WOVEN的source_id隔离不代替逐轮不变量面板与变化后新episode查询，不能把两个分数直接排名。 |
 | [RSLiveBench-UAV: A Continually Evolving Vision-Language Benchmark for Aerial Spatial Intelligence](../../../multimodal-models/2611.14953-rslivebench-uav-protocol/README.md) · [原始来源](https://arxiv.org/abs/2611.14953v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 以真实新UAV观察、四场景FIFO和答案禁运控制持续评测；本地只实现采集/发布时窗、日历月禁运、SC子计分及缺失感知层次聚合。 | WOVEN训练视觉状态转移推理并按scene/action/reasoning验证迁移；RSLiveBench-UAV重点是航空几何与持续刷新。时间新鲜、真实采集和scene-OOD是不同维度，二者分数不能直接比较。 |
+| [WM-Quant: Rollout-Aware Post-Training Quantization for JEPA-Style World Models](../../../foundation-models/2611.21882-wm-quant/README.md) · [原始来源](https://arxiv.org/abs/2611.21882v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | JEPA世界模型把连续latent递归输入预测器，量化误差不会像离散token一样重置。WM-Quant保留前三个encoder blocks的8-bit激活、浮点action/proprioception控制通路，并联合优化encoder范围和每个rollout step独立的predictor范围。 | LeWAM联合训练视觉encoder、latent动力学与action flow，再对策略候选做潜空间规划；WM-Quant研究连续rollout中的量化误差与范围校准。注意新论文实验对象是LeWM/DINO-WM，不是LeWAM，未声称把WM-Quant接入了LeWAM训练或规划。 |
+| [Decoding Without a Decoder: Direct Pixel Prediction from Diffusion Transformers](../../../multimodal-models/2611.22287-dwd/README.md) · [原始来源](https://arxiv.org/abs/2611.22287v1)<br>章节：背景与主要改动、核心公式、同主题比较与边界 | DWD在预训练DiT最后隐状态上并联线性pixel head，原denoising head继续驱动采样，只有最后一个非零time step才由pixel head输出图像/视频。通过分离pixel质量目标与trajectory anchoring，避免让同一输出承担冲突目标。 | PixVid迁移latent DiT到pixel输入/生成空间并加detailer；DWD保留latent采样，只改变最终读出。输出是像素不意味着整个采样都在pixel空间。 |
 
 </div>
 
@@ -103,6 +105,18 @@ WOVEN按scene/action/reasoning控制训练与泛化，真实视觉状态转移�
 WOVEN源初始图分组防止多个动作/问题跨split，RSLiveBench-UAV要求每批图像在相邻release之间拍摄，并退役最早入窗场景。持续更新降低旧答案暴露但不自动消除场景偏差；反过来，生成场景的OOD测试不提供真实航空空间几何。小FIFO重放只检验时窗与分母，不证明任何VLM空间能力或完整benchmark已接入。
 
 对照来源：[rslivebench-uav-protocol](../../../multimodal-models/2611.14953-rslivebench-uav-protocol/README.md) · [woven](../../../reproductions/2610.12417-woven/README.md)
+
+### 先学习可控制的动力学，再讨论数值精度如何改变rollout
+
+实读LeWAM说明其action flow、latent MSE和SIGReg联合训练，规划只更新动作，选择用未惩罚goal cost；本地训练轨迹目标仍是非holdout诊断。WM-Quant冻结基础模型并联合校准encoder/逐步predictor范围，控制通路保留浮点，且必须遵循整数zero-point Eq1–2。两篇都依赖动作条件rollout，但训练动力学、规划搜索与PTQ校准不能互相补证；本轮小张量校准没有执行LeWAM量化或机器人成功率比较。
+
+对照来源：[wm-quant](../../../foundation-models/2611.21882-wm-quant/README.md) · [lewam](../../../reproductions/2610.12818-lewam/README.md)
+
+### DWD：将最终像素读出与去噪目标分开
+
+PixVid迁移latent DiT到pixel输入/生成空间并加detailer；DWD保留latent采样，只改变最终读出。输出是像素不意味着整个采样都在pixel空间。 pixel与trajectory损失从不同time distributions取样，两次反传后统一optimizer step。末步不用CFG，因为该步读出像素而不推进trajectory；t=0的“当成decoder”模式在原文退化。
+
+对照来源：[dwd](../../../multimodal-models/2611.22287-dwd/README.md) · [pixvid](../../../multimodal-models/2611.17336-pixvid/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -218,9 +232,37 @@ WOVEN源初始图分组防止多个动作/问题跨split，RSLiveBench-UAV要求
 
     对照来源：[rslivebench-uav-protocol](../../../multimodal-models/2611.14953-rslivebench-uav-protocol/README.md) · [woven](../../../reproductions/2610.12417-woven/README.md)
 
+### WM-Quant与LeWAM都用JEPA rollout，是否说明本轮已经量化验证了LeWAM？ {#cross-nov18-wm-quant}
+
+??? note "展开答案与例子"
+
+    **答案：** 不是。WM-Quant论文评测LeWM/DINO-WM，LeWAM是另一套联合世界—动作模型。本地仅验证量化格点、跨步范围目标与控制保留，没有接入LeWAM模型、CEM或机器人环境。
+
+    **教学例子：** 教学例：LeWAM的三臂机器人结果不能替代WM-Quant的低比特规划评测；一个校准loss也不能证明LeWAM规划能力。
+
+    对照来源：[wm-quant](../../../foundation-models/2611.21882-wm-quant/README.md) · [lewam](../../../reproductions/2610.12818-lewam/README.md)
+
+### 和PixVid都去掉decoder，有何关键不同？ {#cross-nov18-dwd}
+
+??? note "展开答案与例子"
+
+    **答案：** PixVid迁移输入与整个pixel生成路径，DWD保留latent denoising加最终输出head；改动范围和监督不同。
+
+    **教学例子：** 删除VAE后直接换线性输出，不会自动获得PixVid的时间映射/detailer。
+
+    对照来源：[dwd](../../../multimodal-models/2611.22287-dwd/README.md) · [pixvid](../../../multimodal-models/2611.17336-pixvid/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-18** · PixVid迁移latent DiT到pixel输入/生成空间并加detailer；DWD保留latent采样，只改变最终读出。输出是像素不意味着整个采样都在pixel空间。 本地边界与完整高成本不复现分别记录。
+
+涉及：[dwd](../../../multimodal-models/2611.22287-dwd/README.md) · [pixvid](../../../multimodal-models/2611.17336-pixvid/README.md)
+
+**2026-11-18** · LeWAM联合训练视觉encoder、latent动力学与action flow，再对策略候选做潜空间规划；WM-Quant研究连续rollout中的量化误差与范围校准。注意新论文实验对象是LeWM/DINO-WM，不是LeWAM，未声称把WM-Quant接入了LeWAM训练或规划。 本次实读已有同主题代表README，按真实研究轴比较，不借比较对象改变算法或宣称跨论文效果复现。
+
+涉及：[wm-quant](../../../foundation-models/2611.21882-wm-quant/README.md) · [lewam](../../../reproductions/2610.12818-lewam/README.md)
 
 **2026-11-18** · 补入RSLiveBench-UAV的L0发布/scorer协议，与WOVEN场景迁移分开；完整采集、标注和30模型高成本矩阵不复现。
 
@@ -258,7 +300,7 @@ WOVEN源初始图分组防止多个动作/问题跨split，RSLiveBench-UAV要求
 
 覆盖 22 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 30 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 32 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -292,6 +334,8 @@ WOVEN源初始图分组防止多个动作/问题跨split，RSLiveBench-UAV要求
 - [Back to Pixels: Lifting Latent Video Diffusion into Pixel Space](../../../multimodal-models/2611.17336-pixvid/README.md)
 - [What Should World Models Forget? Stratified Retention for Continual Adaptation](../../../foundation-models/2610.03713-stratified-retention-protocol/README.md)
 - [RSLiveBench-UAV: A Continually Evolving Vision-Language Benchmark for Aerial Spatial Intelligence](../../../multimodal-models/2611.14953-rslivebench-uav-protocol/README.md)
+- [WM-Quant: Rollout-Aware Post-Training Quantization for JEPA-Style World Models](../../../foundation-models/2611.21882-wm-quant/README.md)
+- [Decoding Without a Decoder: Direct Pixel Prediction from Diffusion Transformers](../../../multimodal-models/2611.22287-dwd/README.md)
 
 </details>
 

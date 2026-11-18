@@ -47,7 +47,12 @@
         "post-training:rrhf",
         "post-training:constitutional-ai",
         "post-training:luce-similarity-audit",
-        "post-training:calibrated-judges-protocol"
+        "post-training:calibrated-judges-protocol",
+        "post-training:ambient-sft",
+        "post-training:margin-dynamics-tpo",
+        "post-training:ca-zodpo",
+        "post-training:confidence-adaptive-granularity",
+        "post-training:mpg-dpo"
       ]
     },
     {
@@ -127,7 +132,10 @@
         "post-training:excursion-td",
         "post-training:apmd-reference-reset",
         "post-training:lgpo",
-        "post-training:safety-budget-cgrpo"
+        "post-training:safety-budget-cgrpo",
+        "post-training:specal",
+        "post-training:regularized-score-centering",
+        "post-training:ash-hint-steering"
       ]
     },
     {
@@ -190,7 +198,11 @@
         "post-training:maxim",
         "post-training:mcpo",
         "post-training:rlmf",
-        "post-training:bait-reward-defense"
+        "post-training:bait-reward-defense",
+        "post-training:jev-safety-reward",
+        "post-training:optimistic-verifier-audit",
+        "post-training:design-taste-admission",
+        "post-training:gprm"
       ]
     },
     {
@@ -255,7 +267,8 @@
         "post-training:minillm",
         "post-training:mpopd",
         "post-training:cord-rollout",
-        "post-training:drd-mopd"
+        "post-training:drd-mopd",
+        "post-training:streaming-opd"
       ]
     },
     {
@@ -329,7 +342,8 @@
         "post-training:bopd",
         "post-training:lcs-reference-opd",
         "post-training:social-meta-learning",
-        "post-training:behavioral-canaries"
+        "post-training:behavioral-canaries",
+        "post-training:leaf-opd"
       ]
     },
     {
@@ -388,7 +402,9 @@
         "post-training:spiral",
         "post-training:absolute-zero",
         "post-training:raft",
-        "post-training:maple-icl"
+        "post-training:maple-icl",
+        "post-training:sh-opd",
+        "post-training:tailroll"
       ]
     }
   ]

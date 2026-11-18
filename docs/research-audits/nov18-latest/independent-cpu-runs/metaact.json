@@ -1,0 +1,76 @@
+{
+  "schema_version": 2,
+  "paper": "agent-research:metaact",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "execution_device": "cpu",
+  "execution_accelerator": "CPU",
+  "local_operator": "auto_research.agent_research.metaact.diagnostic",
+  "source_sha256": {
+    "src/auto_research/agent_research/metaact.py": "645e0e4af415e39b06c0cf74c3142937591ec2a1a3a40c812be29b0759d71b04"
+  },
+  "data_revision": "authored deterministic boundary controls v1; not official benchmark",
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "no_op_blocked": true,
+        "changed_observation_allows": true,
+        "safe_action_not_blocked": true,
+        "offline_gate_accepts": true,
+        "union_measured_not_assumed": true,
+        "guard_has_no_reward_input": true
+      },
+      "metrics": {
+        "coverage": 1.0,
+        "effective_block_rate": 0.0,
+        "wasted_recall": 1.0
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "no_op_blocked": true,
+        "changed_observation_allows": true,
+        "safe_action_not_blocked": true,
+        "offline_gate_accepts": true,
+        "union_measured_not_assumed": true,
+        "guard_has_no_reward_input": true
+      },
+      "metrics": {
+        "coverage": 1.0,
+        "effective_block_rate": 0.0,
+        "wasted_recall": 1.0
+      }
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "no_op_blocked": true,
+        "changed_observation_allows": true,
+        "safe_action_not_blocked": true,
+        "offline_gate_accepts": true,
+        "union_measured_not_assumed": true,
+        "guard_has_no_reward_input": true
+      },
+      "metrics": {
+        "coverage": 1.0,
+        "effective_block_rate": 0.0,
+        "wasted_recall": 1.0
+      }
+    }
+  ],
+  "capability_claim": false,
+  "note": "All seeds repeat deterministic controls; no statistical robustness or task success claim."
+}

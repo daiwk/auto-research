@@ -10,6 +10,10 @@
 
 | 方向 | 方法 | 机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 训练目标与决策优化 | [COTTI: Contrastive Training and Time-Aware Inference for Robust Industrial Recommendation under Promotional Drift](../../recommendation-components/2611.22597-cotti/README.md) | Alibaba Group，2026-11-17 | 未发现官方代码 | `cotti`：仅低成本组件，完整实验不复现 |
+| 广告与商业决策 | [CutAgent: Creative-Gene-Driven Planning and Experience-Guided Self-Refinement for High-CTR E-commerce Advertising Video Creation](../../recommendation-components/2611.22418-cutagent/README.md) | JD.com / Tsinghua University，2026-11-17 | 未发现官方代码 | `cutagent` |
+| 检索与匹配 | [From Relevance to Utility: Rubric Alignment in Yuanbao Search](../../recommendation-components/2611.22503-yuanbao-rubric/README.md) | Tencent，2026-11-17 | 未发现官方代码 | `yuanbao-rubric`：仅低成本组件，完整实验不复现 |
+| 检索与匹配 | [IntentFlow: An Intent-Driven Real-Time Multimodal Search System with Image-Text Queries at Xiaohongshu](../../recommendation-components/2611.20448-intentflow/README.md) | Xiaohongshu，2026-11-16 | 未发现官方代码 | `intentflow`：仅低成本组件，完整实验不复现 |
 | 生成式推荐与语义ID | [KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation](../../recommendation-components/2611.16795-kuairec-v2-protocol/README.md) | University of Science and Technology of China，2026-11-12 | [原作者入口](https://github.com/cxli2333/KuaiRecV2)；论文链接作者仓库，但2026-11-15GitHubAPI404，未核实可访问实现/数据、license/SHA，未下载或接入官方benchmark。 | `kuairec-v2-protocol`：CPU 评测接口，不执行模型 |
 | 生成式推荐与语义ID | [ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through item Reachability](../../recommendation-components/2611.16404-resid/README.md) | Alibaba International Digital Commerce Group，2026-11-12 | [原作者入口](https://github.com/Gabriel-reina/ReSID)；原作者公开Apache-2.0仓库已核；工业数据与生产服务未开放。 | `resid`：仅低成本组件，完整实验不复现 |
 | 生成式推荐与语义ID | [TriGen: A Generative Paradigm for Trigger-Induced Recommendation](../../recommendation-components/2611.16395-trigen/README.md) | Alibaba International Digital Commerce Group，2026-11-12 | 未发现官方代码 | `trigen`：仅低成本组件，完整实验不复现 |

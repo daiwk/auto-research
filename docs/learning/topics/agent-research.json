@@ -124,7 +124,8 @@
         "agent-research:lisa",
         "agent-research:wikitrace",
         "agent-research:policybank",
-        "agent-research:coremem"
+        "agent-research:coremem",
+        "agent-research:clam-memory"
       ]
     },
     {
@@ -280,7 +281,16 @@
         "agent-research:multiloop",
         "agent-research:stellar-colosseum",
         "agent-research:askalcf-protocol",
-        "agent-research:prodpilot-protocol"
+        "agent-research:prodpilot-protocol",
+        "agent-research:detourbench",
+        "agent-research:sciresearch-eval",
+        "agent-research:silentguard",
+        "agent-research:metaact",
+        "agent-research:elite-eval-free",
+        "agent-research:resolution-hypothesis",
+        "agent-research:skillbuffbench",
+        "agent-research:gandalf-bvb",
+        "agent-research:self-organized-learning"
       ]
     },
     {

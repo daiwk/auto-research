@@ -7,7 +7,7 @@ hide:
 
 # 教师更强仍可能教错：信息、兼容性与成功行为保护
 
-[LLM 后训练](../index.md) · 更新 2026-11-13 · 54 篇主题资料 / 13 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-18 · 55 篇主题资料 / 14 篇重点对照
 
 教师的价值不只取决于总分。OPSD改变训练期可见信息，MOPD与逐token路由组织多教师，CSD先统一概率事件，SPOD保护学生已成功选择，VAD筛出可归于视觉证据的修正；这些约束要在模仿之前分别成立。
 
@@ -38,6 +38,7 @@ hide:
 | [Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation](../../../post-training/2611.13135-lcs-reference-opd/README.md) · [原始来源](https://arxiv.org/abs/2611.13135v1)<br>章节：核心公式、数据协议与代码映射、结果、负控与边界 | 按同任务完整动作LCS选最兼容成功reference，free-target OT独立argmax且允许复用；只更新失败episode，无引用时reference-free，ALFWorld/tau3分别使用不同归一化。 | 不同于SPOD只在成功episode内保护teacher较不支持的action，这里整条成功轨迹不更新。LCS状态解释需要可恢复绕行，不是潜状态等价；本地没有Agent/OPD trainer，4500A100小时完整矩阵不复现。 |
 | [Learning to Learn from Language Feedback with Social Meta-Learning](../../../post-training/2602.16488-social-meta-learning/README.md) · [原始来源](https://arxiv.org/abs/2602.16488)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界 | 把teacher反馈放进公开多轮历史，以成功轨迹student-only SFT或在线RL训练反馈利用，并另用Qpriming教提问。 | OPSD用特权教师分布监督学生前缀，SML让教师通过对话转移信息；两者的额外知识都不能泄漏给评测student。本地只实现SML离线目标。 |
 | [Behavioral Canaries: Auditing Private Retrieved Context Usage in RL Fine-Tuning](../../../post-training/2604.22191-behavioral-canaries/README.md) · [原始来源](https://arxiv.org/abs/2604.22191v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射 | 用held-out clean/trigger文档对的canary序列logprob差测条件行为影响，再按独立训练策略统计。 | RAGCompass的答案F1只作离线路由蒸馏监督，运行时scorer不读gold；Canaries的配对目标属于审计测量，不能据此给actor答案，也不把有用证据或单次风格变化判作违规。 |
+| [LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation](../../../post-training/2611.20674-leaf-opd/README.md) · [原始来源](https://arxiv.org/abs/2611.20674v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | SS1/SS0.5教师持续监督诊断、teacher-only privileged-context边界、forget/retain分离forward-KL。 | 二者都隔离额外教师上下文，但LCS提供任务兼容成功轨迹纠正失败；LEAF用非披露上下文让teacher压低目标事实概率，并用retain支路保留效用。 |
 
 </div>
 
@@ -96,6 +97,12 @@ OPSD的教师额外看验证答案，并在学生到达的前缀提供稠密分�
 RAGCompass从各检索器证据组带来的答案效用构造候选分布，训练可泛化的路由scorer；真实推理只用其分数选组，不能继续看参考答案。Behavioral Canaries则控制文档trigger、问题和答案前缀，观察已训练策略的目标风格概率变化，回答的是训练条件影响而非路由优劣。效用、数据使用权限和可测影响不能互相替代：许可取决于真实约定，弱行为信号也不是某份文档违规的证明。两者都必须保存离线标签与运行/审计接口的界线，并防止把重复题目当独立策略。
 
 对照来源：[behavioral-canaries](../../../post-training/2604.22191-behavioral-canaries/README.md) · [ragcompass](../../../post-training/2611.05596-ragcompass/README.md)
+
+### privileged context能不能也交给student？
+
+不能。forget teacher读取非披露指令，student始终只读原问题和自身生成prefix；retain teacher不带该指令。将指令给学生会改变所研究的参数遗忘问题。 二者都隔离额外教师上下文，但LCS提供任务兼容成功轨迹纠正失败；LEAF用非披露上下文让teacher压低目标事实概率，并用retain支路保留效用。 本轮边界：SS1/SS0.5教师持续监督诊断、teacher-only privileged-context边界、forget/retain分离forward-KL。
+
+对照来源：[leaf-opd](../../../post-training/2611.20674-leaf-opd/README.md) · [lcs-reference-opd](../../../post-training/2611.13135-lcs-reference-opd/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -211,9 +218,23 @@ RAGCompass从各检索器证据组带来的答案效用构造候选分布，训�
 
     对照来源：[behavioral-canaries](../../../post-training/2604.22191-behavioral-canaries/README.md) · [ragcompass](../../../post-training/2611.05596-ragcompass/README.md)
 
+### 它与LCS的teacher-only reference相同吗？ {#cross-nov18-leaf-opd}
+
+??? note "展开答案与例子"
+
+    **答案：** 二者都隔离额外教师上下文，但LCS提供任务兼容成功轨迹纠正失败；LEAF用非披露上下文让teacher压低目标事实概率，并用retain支路保留效用。
+
+    **教学例子：** 教学例：一个reference帮助正确完成任务；一个forget context要求不披露事实，目标方向并不相同。
+
+    对照来源：[leaf-opd](../../../post-training/2611.20674-leaf-opd/README.md) · [lcs-reference-opd](../../../post-training/2611.13135-lcs-reference-opd/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-18** · SS1/SS0.5教师持续监督诊断、teacher-only privileged-context边界、forget/retain分离forward-KL。 完整实验高成本不复现；组件诊断不等于能力比较。
+
+涉及：[leaf-opd](../../../post-training/2611.20674-leaf-opd/README.md) · [lcs-reference-opd](../../../post-training/2611.13135-lcs-reference-opd/README.md)
 
 **2026-11-13** · 改为同卡片RAGCompass的离线效用监督与条件行为审计对照，明确gold只用于离线目标、文档许可与单文档证明边界。
 
@@ -243,7 +264,7 @@ RAGCompass从各检索器证据组带来的答案效用构造候选分布，训�
 
 覆盖 47 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 54 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 55 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -301,6 +322,7 @@ RAGCompass从各检索器证据组带来的答案效用构造候选分布，训�
 - [Which Successes Make Good References? Action-Sequence Alignment for Multi-Turn On-Policy Distillation](../../../post-training/2611.13135-lcs-reference-opd/README.md)
 - [Learning to Learn from Language Feedback with Social Meta-Learning](../../../post-training/2602.16488-social-meta-learning/README.md)
 - [Behavioral Canaries: Auditing Private Retrieved Context Usage in RL Fine-Tuning](../../../post-training/2604.22191-behavioral-canaries/README.md)
+- [LEAF-OPD: Learning to Forget from Privileged Contexts via On-Policy Distillation](../../../post-training/2611.20674-leaf-opd/README.md)
 
 </details>
 

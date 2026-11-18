@@ -7,7 +7,7 @@ hide:
 
 # 自动研究与高效上线
 
-[搜广推](index.md) / 76 个问题 · 19 篇论文
+[搜广推](index.md) / 80 个问题 · 20 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">76 个问题 · 19 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">80 个问题 · 20 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:cutagent" data-paper-title="CutAgent: Creative-Gene-Driven Planning and Experience-Guided Self-Refinement for High-CTR E-commerce Advertising Video Creation" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="CutAgent: Creative-Gene-Driven Planning and Experience-Guided Self-Refinement for High-CTR E-commerce Advertising Video Creation 搜广推与 LLM 应用 JD.com / Tsinghua University 2026-11-17 CutAgent把多模态商品理解与可靠视频制作拆为GeneAgent和VideoAgent，以结构化creative gene连接。Gene规定narrative units和配音／音乐／脚本规则；前者经高CTR SFT和CTR-level GRPO学习规划，后者展开分镜并检索商品素材、做TTS/BGM和渲染，再只修复带时间证据的缺陷。 本篇review-only，完整实验成本过高，不复现（审查DONE）。70K商品每件90–120clips、多模态teacher、8B训练／检索、TTS与渲染、397Bjudge及真实流量均未运行；仅收录审查；高成本完整实验不复现，没有本地能力或算法执行结果。本篇review-only，完整实验成本过高，不复现（审查DONE）。70K商品每件90–120clips、多模态teacher、8B训练／检索、TTS与渲染、397Bjudge及真实流量均未运行；不下载资源，不编造creative-gene规划器、素材检索或本地CTR。  广告与商业决策 创意生成与投放优化 搜广推 自动研究与高效上线 Creative gene为何不是普通最终脚本？ 它是连接规划与制作的结构化中间表示，定义叙事单位和规则，之后还需分镜／素材／配音／渲染。 教学例：有“信任建立”unit不代表成片已包含认证镜头。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
+<span id="paper-recommendation-cutagent-6d59d626" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-106683b285b37244">Creative gene为何不是普通最终脚本？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Acutagent">CutAgent: Creative-Gene-Driven Planning and Experience-Guided Self-Refinement for High-CTR E-commerce Advertising Video Creation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · JD.com / Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它是连接规划与制作的结构化中间表示，定义叙事单位和规则，之后还需分镜／素材／配音／渲染。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：有“信任建立”unit不代表成片已包含认证镜头。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22418v1">原论文</a> · <a href="../../../../recommendation-components/2611.22418-cutagent/">实现解读</a> · <a href="#qa-106683b285b37244">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:cutagent" data-paper-title="CutAgent: Creative-Gene-Driven Planning and Experience-Guided Self-Refinement for High-CTR E-commerce Advertising Video Creation" data-learning-pending="false" data-level="mechanism" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="CutAgent: Creative-Gene-Driven Planning and Experience-Guided Self-Refinement for High-CTR E-commerce Advertising Video Creation 搜广推与 LLM 应用 JD.com / Tsinghua University 2026-11-17 CutAgent把多模态商品理解与可靠视频制作拆为GeneAgent和VideoAgent，以结构化creative gene连接。Gene规定narrative units和配音／音乐／脚本规则；前者经高CTR SFT和CTR-level GRPO学习规划，后者展开分镜并检索商品素材、做TTS/BGM和渲染，再只修复带时间证据的缺陷。 本篇review-only，完整实验成本过高，不复现（审查DONE）。70K商品每件90–120clips、多模态teacher、8B训练／检索、TTS与渲染、397Bjudge及真实流量均未运行；仅收录审查；高成本完整实验不复现，没有本地能力或算法执行结果。本篇review-only，完整实验成本过高，不复现（审查DONE）。70K商品每件90–120clips、多模态teacher、8B训练／检索、TTS与渲染、397Bjudge及真实流量均未运行；不下载资源，不编造creative-gene规划器、素材检索或本地CTR。  广告与商业决策 创意生成与投放优化 搜广推 自动研究与高效上线 LightGBM给高CTR-level能当真实点击吗？ 不能。它按类目历史分档提供训练surrogate reward，真实CTR来自随机流量的点击／曝光。 教学例：reward=1不能记成100%CTR。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-65acac4626371b9f">LightGBM给高CTR-level能当真实点击吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Acutagent">CutAgent: Creative-Gene-Driven Planning and Experience-Guided Self-Refinement for High-CTR E-commerce Advertising Video Creation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · JD.com / Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。它按类目历史分档提供训练surrogate reward，真实CTR来自随机流量的点击／曝光。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：reward=1不能记成100%CTR。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22418v1">原论文</a> · <a href="../../../../recommendation-components/2611.22418-cutagent/">实现解读</a> · <a href="#qa-65acac4626371b9f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:cutagent" data-paper-title="CutAgent: Creative-Gene-Driven Planning and Experience-Guided Self-Refinement for High-CTR E-commerce Advertising Video Creation" data-learning-pending="false" data-level="comparison" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="CutAgent: Creative-Gene-Driven Planning and Experience-Guided Self-Refinement for High-CTR E-commerce Advertising Video Creation 搜广推与 LLM 应用 JD.com / Tsinghua University 2026-11-17 CutAgent把多模态商品理解与可靠视频制作拆为GeneAgent和VideoAgent，以结构化creative gene连接。Gene规定narrative units和配音／音乐／脚本规则；前者经高CTR SFT和CTR-level GRPO学习规划，后者展开分镜并检索商品素材、做TTS/BGM和渲染，再只修复带时间证据的缺陷。 本篇review-only，完整实验成本过高，不复现（审查DONE）。70K商品每件90–120clips、多模态teacher、8B训练／检索、TTS与渲染、397Bjudge及真实流量均未运行；仅收录审查；高成本完整实验不复现，没有本地能力或算法执行结果。本篇review-only，完整实验成本过高，不复现（审查DONE）。70K商品每件90–120clips、多模态teacher、8B训练／检索、TTS与渲染、397Bjudge及真实流量均未运行；不下载资源，不编造creative-gene规划器、素材检索或本地CTR。  广告与商业决策 创意生成与投放优化 搜广推 自动研究与高效上线 CutAgent memory与AgenticRecTune SkillHub一样吗？ 复用思路相近但前者保存类目／gene条件的制作缺陷修复，后者保存配置实验经验。 教学例：减少开场重复近景不能直接变成推荐融合权重。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-4848fab3527c7e97">CutAgent memory与AgenticRecTune SkillHub一样吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Acutagent">CutAgent: Creative-Gene-Driven Planning and Experience-Guided Self-Refinement for High-CTR E-commerce Advertising Video Creation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · JD.com / Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>复用思路相近但前者保存类目／gene条件的制作缺陷修复，后者保存配置实验经验。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：减少开场重复近景不能直接变成推荐融合权重。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22418v1">原论文</a> · <a href="../../../../recommendation-components/2611.22418-cutagent/">实现解读</a> · <a href="#qa-4848fab3527c7e97">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:cutagent" data-paper-title="CutAgent: Creative-Gene-Driven Planning and Experience-Guided Self-Refinement for High-CTR E-commerce Advertising Video Creation" data-learning-pending="false" data-level="implementation" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="CutAgent: Creative-Gene-Driven Planning and Experience-Guided Self-Refinement for High-CTR E-commerce Advertising Video Creation 搜广推与 LLM 应用 JD.com / Tsinghua University 2026-11-17 CutAgent把多模态商品理解与可靠视频制作拆为GeneAgent和VideoAgent，以结构化creative gene连接。Gene规定narrative units和配音／音乐／脚本规则；前者经高CTR SFT和CTR-level GRPO学习规划，后者展开分镜并检索商品素材、做TTS/BGM和渲染，再只修复带时间证据的缺陷。 本篇review-only，完整实验成本过高，不复现（审查DONE）。70K商品每件90–120clips、多模态teacher、8B训练／检索、TTS与渲染、397Bjudge及真实流量均未运行；仅收录审查；高成本完整实验不复现，没有本地能力或算法执行结果。本篇review-only，完整实验成本过高，不复现（审查DONE）。70K商品每件90–120clips、多模态teacher、8B训练／检索、TTS与渲染、397Bjudge及真实流量均未运行；不下载资源，不编造creative-gene规划器、素材检索或本地CTR。  广告与商业决策 创意生成与投放优化 搜广推 自动研究与高效上线 60.4%和2.21%为什么不能放同一列？ 前者是强制人类偏好胜率，后者是线上点击／曝光；分母和实验对象不同。本轮只审查不运行完整制作链。 教学例：参与者选视频不等于用户在广告位点击。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-9d797396bb1b4e09">60.4%和2.21%为什么不能放同一列？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=recommendation%3Acutagent">CutAgent: Creative-Gene-Driven Planning and Experience-Guided Self-Refinement for High-CTR E-commerce Advertising Video Creation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · JD.com / Tsinghua University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>前者是强制人类偏好胜率，后者是线上点击／曝光；分母和实验对象不同。本轮只审查不运行完整制作链。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：参与者选视频不等于用户在广告位点击。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射、高成本完整实验、同主题对照；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.22418v1">原论文</a> · <a href="../../../../recommendation-components/2611.22418-cutagent/">实现解读</a> · <a href="#qa-9d797396bb1b4e09">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="recommendation:forte" data-paper-title="FORTE: A Production Framework for Feature Evaluation and Deprecation in Industrial Recommender Systems" data-learning-pending="false" data-level="basics" data-domain="recommendation" data-theme="recommendation" data-topic="recommendation/research-serving-loop" data-search="FORTE: A Production Framework for Feature Evaluation and Deprecation in Industrial Recommender Systems 搜广推与 LLM 应用 Pinterest 2026-10-09 添加一个特征只需在某项指标上有收益，删除却不能损伤任何业务指标，而且同一个特征可能有多个模型消费者。FORTE 将退役流程拆成逐渐昂贵的门槛：先每天衡量冻结模型的特征依赖，检查长期稳定性，再联合扰动候选集合并真实重训，最后做线上实验和所有消费者的血缘审计。它不是单次 feature selection，也不能把单特征收益相加当成联合删除效果。一个特征单独看没有价值，可能与另一个冗余特征共同承载重要信号；不同输出头也可能给出相反方向。 结果仍是诊断，不能宣称复现 Pinterest 能力或吞吐收益。L2 公开数据训练，核心机制实现；结果仍是诊断，不能宣称复现 Pinterest 能力或吞吐收益。未复刻私有多模态特征、DCNv2/MMoE 大型 Pin Ranker、分布式 actor、每日生产 checkpoint sensors、线上 A/B 和实际基础设施移除。没有通过任一门槛也是有效结果，保留而不伪造通过。加载经过固定 archive SHA-256 校验的公开 MovieLens-100K。按 timestamp、user、item 排序，chronological 80/10/10；  features efficiency feature-deprecation 搜广推 自动研究与高效上线 FORTÉ 为什么把特征退役看成全生命周期任务，而非一次重要性排序？ 模型弱依赖只是开始，同一特征可被多个头和下游系统消费，训练适应后还可能重新依赖它。流程逐级检查时间稳定、联合删除、重训、线上及血缘，直到全部消费者允许退役。删除决策的证据比增加特征更全面，低重要性本身不是删除许可。 示意：某字段对主点击头无用，却仍被反欺诈模型读取；从一个模型移除不代表可停日志与数据生产，必须查完所有消费路径。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">搜广推 / 自动研究与高效上线</a></p>
 <span id="paper-recommendation-forte-d5b8210d" class="ar-learning-paper-anchor"></span>

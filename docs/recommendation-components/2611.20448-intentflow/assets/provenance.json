@@ -1,0 +1,12 @@
+{
+  "figure": 6,
+  "caption": "Figure 6: Multimodal embedding training. Intent-specific criteria define supervision for contrastive learning, graded ranking, and candidate-distribution distillation. Query-side feature adaptation and residual projection subsequently refine retrieval within the fixed document space. The price example illustrates three-grade relevance supervision.",
+  "source_url": "https://arxiv.org/html/2611.20448v1/embedding-training.png",
+  "source_version": "v1",
+  "source_sha256": "e98dd95eb1ec53eb578a84526ba5e116b5e4d8cbbfca9e926cc354d784e4d626",
+  "extraction": "original HTML image, no redraw",
+  "file": "paper-figure-01.png",
+  "asset_sha256": "58c3abf16a13e91dd4712a1cf0a4f5be57d461a2170d95239a813fb2d721bc77",
+  "copyright": "Original paper authors; no claim of local generation",
+  "visual_review_done": true
+}

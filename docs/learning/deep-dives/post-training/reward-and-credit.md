@@ -7,7 +7,7 @@ hide:
 
 # 奖励从哪里来，信用才该分到哪里
 
-[LLM 后训练](../index.md) · 更新 2026-11-15 · 43 篇主题资料 / 13 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-18 · 47 篇主题资料 / 17 篇重点对照
 
 过程标签、最终结果、模型自置信与回溯归因是不同证据。逐步PRM、MRTPO、TACO和MART-GRPO分别做标签获取、奖励定位、正信用降权和失败后缀过滤；INTUITOR则改用内在分布信号，不能把它当外部正确性验证器。 CONCUR另处理奖励维度之间的优先级，把门控辅助优势投影到主奖励保序锥；这不是沿时间轴分配token信用。
 
@@ -38,6 +38,10 @@ hide:
 | [Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards](../../../post-training/2611.14015-mcpo/README.md) · [原始来源](https://arxiv.org/abs/2611.14015v1)<br>章节：核心公式、原文结果与限制、结果、负控与边界 | 用温度后old-policy top1-top2 margin构造截断线性不确定度，按优势符号指数加权，再按响应内有效token均值归一，保持平均序列优势。 | 负优势时不确定token少受罚，非band-pass、非额外verifier。原文更长生成与缺length-matched对照限制因果解释；Qwen三数据种子的p=.083不应写成显著胜出。 |
 | [Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs](../../../post-training/2606.32032-rlmf/README.md) · [原始来源](https://arxiv.org/abs/2606.32032v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射 | 按模型自评FC的质量，仅放大高于组均值的completion级faithfulness项；其他奖励中心化项不变。 | Residual Advantage从同词表师生概率差产生token局部优势，再按响应中心化并加验证器优势。元认知Z不是师生概率残差；RLMF不再居中，也没有执行RA/Co-RA教师更新。 |
 | [Bait: Mitigating Harmful Agentic Reinforcement Learning via Probing Reward Function](../../../post-training/2611.16369-bait-reward-defense/README.md) · [原始来源](https://arxiv.org/abs/2611.16369v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界、高成本完整实验 | 用防御私有probe与policy的平均外部reward gap判定是否翻转整组，再剔除probe，仅实现Eqs3–5。 | TAG用独立训练探针的reverse KL选可信anchor后门控辅助奖励；Bait探测环境reward偏好，不是同种probe。无probe语义验证时数值gap不能证明安全，优势std冲突不猜。 |
+| [Jev-as-a-Reward: Validating Probabilistic Safety Judges for Reinforcement Learning](../../../post-training/2611.20955-jev-safety-reward/README.md) · [原始来源](https://arxiv.org/abs/2611.20955v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 固定概率judge的confidence gate、校准集阈值、PHR/GPR分母区分、prompt级bootstrap和judge升级重审规则；不实现商业judge。 | Bait基于私有probe/policy reward差改变训练reward；本协议验证judge的门控漏报和时间变化，不自动翻转reward，也不把某个参考judge当绝对真值。 |
+| [Optimistic Verifiers Get Hacked: Reward Hacking Under an Exact Process Oracle](../../../post-training/2611.21538-optimistic-verifier-audit/README.md) · [原始来源](https://arxiv.org/abs/2611.21538v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 小有限状态域的精确MSR antichain、因果precision/recall/F1、代理selection-error和signed/absolute gap；不伪造LLM训练伤害。 | 不是。该论文先在可知真值域测proxy selection-error及gap，预测风险；Bait用probe差做防御变换。精确oracle通常只在特定小域可得，不能据此声称通用Agent真值已解决。 |
+| [Learning Design Taste through Verifiable Synthetic Environments and Agentic Reinforcement Learning](../../../post-training/2611.20612-design-taste-admission/README.md) · [原始来源](https://arxiv.org/abs/2611.20612v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | expert agreement/causal sensitivity/hack resistance/stability四项admission、V0乘性hard gates与已admit分数composite reward；不造浏览器/设计judge能力。 | Bait看private probe奖励偏好并翻转reward；本方法在训练前后筛选和复核候选评判信号。前者依赖probe覆盖，后者依赖专家golden/trap覆盖，均非通用安全保证。 |
+| [GPRM: Global Perspective Process Reward Model](../../../post-training/2611.20755-gprm/README.md) · [原始来源](https://arxiv.org/abs/2611.20755v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 只收录方法和成本；不以字符串parser或固定规则替代4维global PRM。 | Bait对外部reward的probe/policy差做防御变换，不判断推理step；GPRM学习带预测历史和未来trajectory的四维过程模型。二者都要隔离scorer信息，但不能用Bait数值核或标签parser替代PRM。 |
 
 </div>
 
@@ -90,6 +94,30 @@ RLMF先将忠实度与其他约束分开中心化，再用自评与实际FC的�
 TAG的probe是从共同基线单奖励训练的策略，用它自身采样的reverse KL选anchor；Bait的probe是防御者私有membership下的特殊回答，比较外部reward偏好后反转整组。两者都要求探针的真实来源，而不是在评测端读取gold制作完美信号。Bait本地不生成文本或攻击，只验证>=0边界与policy-only过滤；TAG的anchor为零门控也不能替代这种符号判定。
 
 对照来源：[bait-reward-defense](../../../post-training/2611.16369-bait-reward-defense/README.md) · [tag-reward-gating](../../../post-training/2610.21404-tag-reward-gating/README.md)
+
+### GPR升高为什么不能直接说reward被攻破？
+
+GPR分母是剩余harm，PHR分母是harmful-prompt全部回答。若已知harm消失更快，盲区绝对量仍下降而份额上升；escape要看PHR显著增加及外部人工审核。 Bait基于私有probe/policy reward差改变训练reward；本协议验证judge的门控漏报和时间变化，不自动翻转reward，也不把某个参考judge当绝对真值。 本轮边界：固定概率judge的confidence gate、校准集阈值、PHR/GPR分母区分、prompt级bootstrap和judge升级重审规则；不实现商业judge。
+
+对照来源：[jev-safety-reward](../../../post-training/2611.20955-jev-safety-reward/README.md) · [bait-reward-defense](../../../post-training/2611.16369-bait-reward-defense/README.md)
+
+### 只测sufficiency为何奖励padding？
+
+引用所有特征通常充分，却夹带无因果作用内容。精确reward用MSR并集测precision、最佳单个MSR测recall，padding会降低precision而不因充分性拿满分。 不是。该论文先在可知真值域测proxy selection-error及gap，预测风险；Bait用probe差做防御变换。精确oracle通常只在特定小域可得，不能据此声称通用Agent真值已解决。 本轮边界：小有限状态域的精确MSR antichain、因果precision/recall/F1、代理selection-error和signed/absolute gap；不伪造LLM训练伤害。
+
+对照来源：[optimistic-verifier-audit](../../../post-training/2611.21538-optimistic-verifier-audit/README.md) · [bait-reward-defense](../../../post-training/2611.16369-bait-reward-defense/README.md)
+
+### V4专家panel能否直接加入composite reward？
+
+不能。专家选择哪些低层信号可被准入并做盲评canary，reward只聚合func/design/rubric/pref；build/render/anticheat等是乘性V0门。 Bait看private probe奖励偏好并翻转reward；本方法在训练前后筛选和复核候选评判信号。前者依赖probe覆盖，后者依赖专家golden/trap覆盖，均非通用安全保证。 本轮边界：expert agreement/causal sensitivity/hack resistance/stability四项admission、V0乘性hard gates与已admit分数composite reward；不造浏览器/设计judge能力。
+
+对照来源：[design-taste-admission](../../../post-training/2611.20612-design-taste-admission/README.md) · [bait-reward-defense](../../../post-training/2611.16369-bait-reward-defense/README.md)
+
+### 为何完整trajectory评分可用于离线，却增加在线搜索成本？
+
+离线诊断和Best-of-N已有完整候选，未来信息免费可见；逐步搜索尚无未来，需要先生成continuation再判当前step，成本不能按普通prefix PRM估。 Bait对外部reward的probe/policy差做防御变换，不判断推理step；GPRM学习带预测历史和未来trajectory的四维过程模型。二者都要隔离scorer信息，但不能用Bait数值核或标签parser替代PRM。 本轮边界：只收录方法和成本；不以字符串parser或固定规则替代4维global PRM。
+
+对照来源：[gprm](../../../post-training/2611.20755-gprm/README.md) · [bait-reward-defense](../../../post-training/2611.16369-bait-reward-defense/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -185,9 +213,65 @@ TAG的probe是从共同基线单奖励训练的策略，用它自身采样的rev
 
     对照来源：[bait-reward-defense](../../../post-training/2611.16369-bait-reward-defense/README.md) · [tag-reward-gating](../../../post-training/2610.21404-tag-reward-gating/README.md)
 
+### 它与Bait的reward符号翻转是什么关系？ {#cross-nov18-jev-safety-reward}
+
+??? note "展开答案与例子"
+
+    **答案：** Bait基于私有probe/policy reward差改变训练reward；本协议验证judge的门控漏报和时间变化，不自动翻转reward，也不把某个参考judge当绝对真值。
+
+    **教学例子：** 教学例：PHR区间含0进入S3，不应直接触发所有训练reward取负。
+
+    对照来源：[jev-safety-reward](../../../post-training/2611.20955-jev-safety-reward/README.md) · [bait-reward-defense](../../../post-training/2611.16369-bait-reward-defense/README.md)
+
+### 它与Bait一样直接修复reward吗？ {#cross-nov18-optimistic-verifier-audit}
+
+??? note "展开答案与例子"
+
+    **答案：** 不是。该论文先在可知真值域测proxy selection-error及gap，预测风险；Bait用probe差做防御变换。精确oracle通常只在特定小域可得，不能据此声称通用Agent真值已解决。
+
+    **教学例子：** 教学例：两个true reward不同而proxy打平，selection error计.5，说明选择失真而非训练已发生伤害。
+
+    对照来源：[optimistic-verifier-audit](../../../post-training/2611.21538-optimistic-verifier-audit/README.md) · [bait-reward-defense](../../../post-training/2611.16369-bait-reward-defense/README.md)
+
+### 与Bait都防reward hacking，为何不是同一个机制？ {#cross-nov18-design-taste-admission}
+
+??? note "展开答案与例子"
+
+    **答案：** Bait看private probe奖励偏好并翻转reward；本方法在训练前后筛选和复核候选评判信号。前者依赖probe覆盖，后者依赖专家golden/trap覆盖，均非通用安全保证。
+
+    **教学例子：** 教学例：expert agreement=.99但hack trap失败率.21时仍拒绝admit，而不是翻转该项分数。
+
+    对照来源：[design-taste-admission](../../../post-training/2611.20612-design-taste-admission/README.md) · [bait-reward-defense](../../../post-training/2611.16369-bait-reward-defense/README.md)
+
+### GPRM能否由现有Bait reward防御组件加一个标签parser得到？ {#cross-nov18-gprm}
+
+??? note "展开答案与例子"
+
+    **答案：** Bait对外部reward的probe/policy差做防御变换，不判断推理step；GPRM学习带预测历史和未来trajectory的四维过程模型。二者都要隔离scorer信息，但不能用Bait数值核或标签parser替代PRM。
+
+    **教学例子：** 教学例：Bait翻转reward不识别当前推理step是否与未来推导一致；[CORRECT]可解析也不代表判断正确。
+
+    对照来源：[gprm](../../../post-training/2611.20755-gprm/README.md) · [bait-reward-defense](../../../post-training/2611.16369-bait-reward-defense/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-18** · 只收录方法和成本；不以字符串parser或固定规则替代4维global PRM。 完整实验高成本不复现；组件诊断不等于能力比较。
+
+涉及：[gprm](../../../post-training/2611.20755-gprm/README.md) · [bait-reward-defense](../../../post-training/2611.16369-bait-reward-defense/README.md)
+
+**2026-11-18** · expert agreement/causal sensitivity/hack resistance/stability四项admission、V0乘性hard gates与已admit分数composite reward；不造浏览器/设计judge能力。 完整实验高成本不复现；组件诊断不等于能力比较。
+
+涉及：[design-taste-admission](../../../post-training/2611.20612-design-taste-admission/README.md) · [bait-reward-defense](../../../post-training/2611.16369-bait-reward-defense/README.md)
+
+**2026-11-18** · 小有限状态域的精确MSR antichain、因果precision/recall/F1、代理selection-error和signed/absolute gap；不伪造LLM训练伤害。 完整实验高成本不复现；组件诊断不等于能力比较。
+
+涉及：[optimistic-verifier-audit](../../../post-training/2611.21538-optimistic-verifier-audit/README.md) · [bait-reward-defense](../../../post-training/2611.16369-bait-reward-defense/README.md)
+
+**2026-11-18** · 固定概率judge的confidence gate、校准集阈值、PHR/GPR分母区分、prompt级bootstrap和judge升级重审规则；不实现商业judge。 完整实验高成本不复现；组件诊断不等于能力比较。
+
+涉及：[jev-safety-reward](../../../post-training/2611.20955-jev-safety-reward/README.md) · [bait-reward-defense](../../../post-training/2611.16369-bait-reward-defense/README.md)
 
 **2026-11-15** · 补入Google DeepMind相关Bait的防御性reward-gap/sign-flip，和TAG的anchor门控分清来源及变换对象。只实现Eqs3–5，不含有害probe/攻击/训练；原文优势std冲突保留，完整实验高成本不复现。
 
@@ -217,7 +301,7 @@ TAG的probe是从共同基线单奖励训练的策略，用它自身采样的rev
 
 覆盖 36 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 43 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 47 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -264,6 +348,10 @@ TAG的probe是从共同基线单奖励训练的策略，用它自身采样的rev
 - [Margin-Guided Token Credit for Reinforcement Learning with Verifiable Rewards](../../../post-training/2611.14015-mcpo/README.md)
 - [Reinforcement Learning with Metacognitive Feedback Elicits Faithful Uncertainty Expression in LLMs](../../../post-training/2606.32032-rlmf/README.md)
 - [Bait: Mitigating Harmful Agentic Reinforcement Learning via Probing Reward Function](../../../post-training/2611.16369-bait-reward-defense/README.md)
+- [Jev-as-a-Reward: Validating Probabilistic Safety Judges for Reinforcement Learning](../../../post-training/2611.20955-jev-safety-reward/README.md)
+- [Optimistic Verifiers Get Hacked: Reward Hacking Under an Exact Process Oracle](../../../post-training/2611.21538-optimistic-verifier-audit/README.md)
+- [Learning Design Taste through Verifiable Synthetic Environments and Agentic Reinforcement Learning](../../../post-training/2611.20612-design-taste-admission/README.md)
+- [GPRM: Global Perspective Process Reward Model](../../../post-training/2611.20755-gprm/README.md)
 
 </details>
 

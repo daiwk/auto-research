@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "key": "ca-zodpo",
+  "device": "cpu",
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "orthonormal_contrastive_basis": true,
+        "two_point_slope_matches_oracle": true,
+        "basis_transport_preserves_reconstructed_momentum": true,
+        "low_rank_update_executes": true
+      },
+      "metrics": {
+        "finite_difference_slope": 1.8721703518664867,
+        "slope_error": 8.599787548746463e-12,
+        "momentum_elements": 6,
+        "full_weight_elements": 15
+      }
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "orthonormal_contrastive_basis": true,
+        "two_point_slope_matches_oracle": true,
+        "basis_transport_preserves_reconstructed_momentum": true,
+        "low_rank_update_executes": true
+      },
+      "metrics": {
+        "finite_difference_slope": -2.6121995619821092,
+        "slope_error": 1.6822987447540072e-11,
+        "momentum_elements": 6,
+        "full_weight_elements": 15
+      }
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "orthonormal_contrastive_basis": true,
+        "two_point_slope_matches_oracle": true,
+        "basis_transport_preserves_reconstructed_momentum": true,
+        "low_rank_update_executes": true
+      },
+      "metrics": {
+        "finite_difference_slope": 0.1040494428128369,
+        "slope_error": 8.448797217397441e-13,
+        "momentum_elements": 6,
+        "full_weight_elements": 15
+      }
+    }
+  ],
+  "capability_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "checkpoint_calls": 0,
+  "dataset_downloads": 0
+}
