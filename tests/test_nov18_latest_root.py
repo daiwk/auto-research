@@ -50,6 +50,22 @@ def test_absolute_google_directory_links():
     ) == {"/pubs/a/", "/pubs/b/"}
 
 
+def test_priority_link_parser_imports_without_site_packages():
+    """Source capture's optional HTML parser must not leak into the pure normalizer."""
+    from pathlib import Path
+    import subprocess
+    import sys
+
+    path = Path(__file__).resolve().parents[1] / "scripts/prepare_nov18_priority_sources.py"
+    code = (
+        "import importlib.util; "
+        f"s=importlib.util.spec_from_file_location('priority',{str(path)!r}); "
+        "m=importlib.util.module_from_spec(s); s.loader.exec_module(m); "
+        "assert m.paper_links(['https://research.google/pubs/example/'])=={'/pubs/example/'}"
+    )
+    subprocess.run([sys.executable, "-S", "-c", code], check=True, capture_output=True)
+
+
 def test_dealrank_hierarchy_and_bad_ranker():
     from auto_research.foundation_models.dealrank import schedule
 

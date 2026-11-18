@@ -12,8 +12,6 @@ import re
 import subprocess
 from urllib.request import Request, urlopen
 
-from bs4 import BeautifulSoup
-
 ROOT = Path(__file__).resolve().parents[1]
 CACHE = ROOT / ".cache/nov18-latest/priority"
 AUDIT = ROOT / "docs/research-audits/nov18-latest"
@@ -26,6 +24,8 @@ def paper_links(links):
 
 
 def capture(url):
+    from bs4 import BeautifulSoup
+
     name = hashlib.sha256(url.encode()).hexdigest()[:20] + ".html"
     try:
         with urlopen(
@@ -55,6 +55,8 @@ def capture(url):
 
 
 def main():
+    from bs4 import BeautifulSoup
+
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--reconcile-captures",
