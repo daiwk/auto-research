@@ -1,4 +1,4 @@
-<!-- source-sha256: d7341e9e52e1b342ac71624e146eeed692a6766d710df5ddfd6d2177a7ce0950 -->
+<!-- source-sha256: a445ef56e0412ba813230da9f50808a00063c16e12464d02e598ef333039beca -->
 # Mixed Signals: A bounded weight-space editing interface
 
 [简体中文](README.md)
@@ -28,13 +28,17 @@ LLMs read/write network parameters for EEG/ECG tasks, including reading weights,
 [![Figure 1: practice subjects, reasoning-written weights and unseen-subject testing](assets/paper-figure-01.png)](https://arxiv.org/html/2611.13758v1#S1.F1)
 
 Original Figure 1 and author results, copyright belongs to its authors. The displayed 0.834 is not measured locally. [Source and SHA256](assets/provenance.json).
+
+Image from the [original paper](https://arxiv.org/html/2611.13758v1); copyright belongs to the original authors.
 <!-- paper-figure:end -->
 
 ### Core formulas
 
 EEG balanced accuracy averages class recalls; micro accuracy is not a substitute. Repair recovery is:
 
-$$\mathrm{recovery}=\frac{m_{repaired}-m_{faulty}}{m_{healthy}-m_{faulty}}.$$
+$$
+\mathrm{recovery}=\frac{m_{repaired}-m_{faulty}}{m_{healthy}-m_{faulty}}.
+$$
 
 Local code does not clip negative or above-one recovery; a zero denominator is rejected. All parameter names, shapes, dtypes and finite values are validated before atomic mutation; a failure leaves no partially edited model. Every actual practice-call attempt consumes budget before execution, including failures. Exceptions never become fabricated scores.
 

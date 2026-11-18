@@ -40,18 +40,23 @@ flowchart LR
 ![原论文Figure 1：漏掉重要邮件的成本改变最优系统](assets/paper-figure-01.png)
 
 固定v4 PDF第7页Figure 1，含原始图注；图中虚线阈值在交叉验证训练部分选择，不是测试后调参。图为作者结果，不是本地结果。[原图来源](https://arxiv.org/pdf/2610.32955v4#page=7)，版权归原作者；[裁剪及SHA256](assets/provenance.json)。
+图片来自[原论文](https://arxiv.org/html/2610.32955v4)，版权归原作者所有。
 <!-- paper-figure:end -->
 
 ### 核心公式
 
 原文用漏信、追踪、冲突提示和其他动作数量组成成本：
 
-$$L_S(c)=c\,m_S+t_S+0.5d_S+n_S.$$
+$$
+L_S(c)=c\,m_S+t_S+0.5d_S+n_S.
+$$
 
 其中漏掉需要动作的邮件具有可变价格$c$，不能只看三个开关的单独accuracy。原文还比较noise-wins、action-wins和冲突提示策略。本地**仅实现二元行动阈值接口**：
 
-$$\theta^*=\arg\min_\theta\frac1{|V|}\sum_{i\in V}
- [c_{FN}y_i\mathbf1(s_i<\theta)+c_{FP}(1-y_i)\mathbf1(s_i\ge\theta)].$$
+$$
+\theta^*=\arg\min_\theta\frac1{|V|}\sum_{i\in V}
+ [c_{FN}y_i\mathbf1(s_i<\theta)+c_{FP}(1-y_i)\mathbf1(s_i\ge\theta)].
+$$
 
 它不等于原文完整动作组合成本，也不包含训练分类器、联系图传播或类别分层采样。阈值只能接收显式validation集合；test标签不进入预测函数。
 

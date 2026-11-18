@@ -27,13 +27,16 @@
 [![Figure 1：从练习被试、推理写权重到未见被试测试](assets/paper-figure-01.png)](https://arxiv.org/html/2611.13758v1#S1.F1)
 
 原论文 Figure 1 与作者结果，版权归原作者；图中 0.834 不是本地测量。[图源与 SHA256](assets/provenance.json)。
+图片来自[原论文](https://arxiv.org/html/2611.13758v1)，版权归原作者所有。
 <!-- paper-figure:end -->
 
 ### 核心公式
 
 评价器 EEG balanced accuracy 为各类别 recall 的平均；不能用 micro accuracy 冒充。修复比例：
 
-$$\mathrm{recovery}=\frac{m_{repaired}-m_{faulty}}{m_{healthy}-m_{faulty}}.$$
+$$
+\mathrm{recovery}=\frac{m_{repaired}-m_{faulty}}{m_{healthy}-m_{faulty}}.
+$$
 
 本地不截断负值或大于 1 的恢复比例；分母为零时报错。参数补丁必须先验证所有参数名、形状、dtype 和有限值，全部通过才原子写入；失败不留下半个模型。每次真实 practice 调用在执行前计入预算，失败也消耗一次，不能把异常变成虚构分数。
 

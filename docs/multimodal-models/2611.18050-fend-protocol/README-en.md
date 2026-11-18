@@ -1,4 +1,4 @@
-<!-- source-sha256: b6073c9d55fedbdc5c57dc620154134b83250693c45fedf1078526233c5e8e95 -->
+<!-- source-sha256: 6ab965d73f88abc3a347317c728c010f709def3d70a3fd2069b83aa09eb3fd76 -->
 
 # FEND: accumulate evidence to a deadline instead of letting the first detector win
 
@@ -42,17 +42,23 @@ flowchart LR
 ![FEND Figure 1: parallel events followed by windowed priority arbitration](assets/paper-figure-01.png)
 
 Fixed-v1 PDF p.3, Figure 1, including its caption. Left-side detectors and ASR are not local implementations. [Original figure](https://arxiv.org/pdf/2611.18050v1#page=3), copyright belongs to the authors. [Crop and hashes](assets/provenance.json).
+
+Image from the [original paper](https://arxiv.org/html/2611.18050v1); copyright belongs to the original authors.
 <!-- paper-figure:end -->
 
 ### Core equations
 
 For events $e_j=(t_j,c_j)$ and automated-class priority $\pi$:
 
-$$\hat c=\arg\max_{c_j:t_j\le W}\pi(c_j),\quad\hat c=human\ \text{if the set is empty}.$$
+$$
+\hat c=\arg\max_{c_j:t_j\le W}\pi(c_j),\quad\hat c=human\ \text{if the set is empty}.
+$$
 
 The risk denominator contains only true humans:
 
-$$HFPR=\frac{\#\{i:y_i=human,\hat c_i\ne human\}}{\#\{i:y_i=human\}}.$$
+$$
+HFPR=\frac{\#\{i:y_i=human,\hat c_i\ne human\}}{\#\{i:y_i=human\}}.
+$$
 
 HFPR is undefined without human examples; it must not be filled with zero. Acoustic candidates first face a cross-human-corpus calibration screen: $g=(median(S)-median(R))/IQR(R)$, admitting only $|g|\le1$. Passing does not imply positive-class discrimination. Local sample quantiles explicitly use linear interpolation and do not reproduce the complete acoustic front end.
 

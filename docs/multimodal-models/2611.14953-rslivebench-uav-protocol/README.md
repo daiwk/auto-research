@@ -27,11 +27,14 @@
 [![Figure 1：17 任务、四能力组与 Start-10 数据概览](assets/paper-figure-01.png)](https://arxiv.org/pdf/2611.14953v1#page=2)
 
 固定 v1 第 2 页原始 Figure 1 和图注，未重绘。图中题量和模型结果均不属于本地数据。[来源、裁切与 SHA256](assets/provenance.json)。版权归原作者。
+图片来自[原论文](https://arxiv.org/html/2611.14953v1)，版权归原作者所有。
 <!-- paper-figure:end -->
 
 ### 核心公式
 
-$$R_{v-1}<\tau(I)<R_v,\quad T_{\rm public}(s)\ge\max(T_{\rm retire}(s),T_{\rm first}(s)+4\text{ calendar months}).$$
+$$
+R_{v-1}<\tau(I)<R_v,\quad T_{\rm public}(s)\ge\max(T_{\rm retire}(s),T_{\rm first}(s)+4\text{ calendar months}).
+$$
 
 四个月是日历月，不是 120 天；场景未退役不能公开答案。SC 计数仅接受十进制非负整数字符串，对正参考值用十个 5%—50% 相对误差门槛平均，返回 0—100 分。0 是有效预测，零参考的相对误差未定义，组件显式拒绝而非补规则。
 

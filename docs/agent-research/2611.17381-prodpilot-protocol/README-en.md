@@ -1,4 +1,4 @@
-<!-- source-sha256: 528d60ba9ae602cf962e4b0b2faf41dc5de4e4ce6a3570fc3a0968710576d428 -->
+<!-- source-sha256: 9e9a180da749547e6c08391a63ec611eaecf3e8455fe5fd627003810e1ba16e5 -->
 
 # ProdPilot: a repair is a claim until its independent checker accepts it
 
@@ -43,13 +43,17 @@ flowchart LR
 ![ProdPilot Figure 1: layered repair, independent verification and the three-condition gate](assets/paper-figure-01.png)
 
 Fixed-v1 PDF p.8, Figure 1, including its caption. Docker, GitHub and Render belong to the author system; the local interface connects to none. [Original figure](https://arxiv.org/pdf/2611.17381v1#page=8), copyright belongs to the authors. [Provenance](assets/provenance.json).
+
+Image from the [original paper](https://arxiv.org/pdf/2611.17381v1); copyright belongs to the original authors.
 <!-- paper-figure:end -->
 
 ### Core equations
 
 For priority $p\in\{0,\ldots,5\}$, use $w_p=2^{5-p}$ over applicable rules:
 
-$$score=100\frac{\sum_r w_{p_r}\mathbf1(pass_r)}{\sum_r w_{p_r}}.$$
+$$
+score=100\frac{\sum_r w_{p_r}\mathbf1(pass_r)}{\sum_r w_{p_r}}.
+$$
 
 The sequential conditions are no failing P0 rule, $score\ge90$, and deployability $\hat p\ge0.369$. The model may veto but never overrule rejected rules; missing model inputs or an undetermined build close the gate. The paper's probability comes from a calibrated model trained on 684 actual Render deployments. **Locally, probability is an external interface, not a trained/copied estimator**; an audit score is not a probability.
 

@@ -586,7 +586,7 @@
           ],
           "summary": "补入页面MaxSim、独立检索指标和显式计时scope的L0接口；与CLIP训练机制分轴，保留原文并发口径冲突，不跑高成本完整索引。",
           "source_revisions": {
-            "multimodal-models:multimodal-library-protocol": "6548730112efd7e7a2ba61319abe6440440a434bc3741f01ad1a6067154a5972",
+            "multimodal-models:multimodal-library-protocol": "4376093729a3f277a47da39c45ef1b60430de42fec608056f45836609eb904af",
             "foundation-models:clip": "9a8c03405713d34f4c7af432f78e05830369fa6b5e331a67a6d540983a205fa1"
           }
         },
@@ -598,7 +598,7 @@
           ],
           "summary": "外部事件在deadline内累计，以VM／IVR／AI优先级仲裁，human默认；独立HFPR和声学human-null接口。 完整实验高成本不复现，局部协议不作能力或Evolve证据。",
           "source_revisions": {
-            "multimodal-models:fend-protocol": "b6073c9d55fedbdc5c57dc620154134b83250693c45fedf1078526233c5e8e95",
+            "multimodal-models:fend-protocol": "6ab965d73f88abc3a347317c728c010f709def3d70a3fd2069b83aa09eb3fd76",
             "multimodal-models:gslm2": "5ab8ce37c3b3aadad488495535e4ecda1ab9dc939871212b55de7ae8d11e870a"
           }
         }
@@ -1382,7 +1382,7 @@
           ],
           "summary": "补入分层保持的L0报告协议，与WOVEN视觉转移训练分轴比较；无原始完整实证，不虚构高成本训练或能力排名。",
           "source_revisions": {
-            "foundation-models:stratified-retention-protocol": "68efe1fcce0a5bb196bcc3972e212df49356e1f3da325f1000b223acd730d867",
+            "foundation-models:stratified-retention-protocol": "4ca784aeee5aef56a27ffb538cf2c072c6981bd08177c9fec708de88a2de397a",
             "multimodal-models:woven": "3c7f5518fd36be1bc8aa964050531232d66f297057e8e0ccd57f3f4376d2f575"
           }
         },
@@ -1394,7 +1394,7 @@
           ],
           "summary": "补入RSLiveBench-UAV的L0发布/scorer协议，与WOVEN场景迁移分开；完整采集、标注和30模型高成本矩阵不复现。",
           "source_revisions": {
-            "multimodal-models:rslivebench-uav-protocol": "eb516b30f562e2d4033a325d06ad10f3ec71d04af8e5b4229eddafcd5c764a6f",
+            "multimodal-models:rslivebench-uav-protocol": "fd7ec0c903a2ca99b30f35a323af497cc2c51ae5579795ec96e8fc2440a22908",
             "multimodal-models:woven": "3c7f5518fd36be1bc8aa964050531232d66f297057e8e0ccd57f3f4376d2f575"
           }
         }

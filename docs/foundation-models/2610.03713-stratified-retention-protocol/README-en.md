@@ -1,6 +1,6 @@
 # Stratified Retention: separate what should persist from what should change
 
-<!-- source-sha256: 68efe1fcce0a5bb196bcc3972e212df49356e1f3da325f1000b223acd730d867 -->
+<!-- source-sha256: 4ca784aeee5aef56a27ffb538cf2c072c6981bd08177c9fec708de88a2de397a -->
 
 [简体中文](README.md)
 
@@ -31,11 +31,15 @@ Old-task accuracy alone favors a frozen model. The proposal therefore reports in
 
 Figure 1 and caption, fixed-v2 PDF page 2, rendered and cropped without redrawing. The quadrants are conceptual illustrations, not new author or local experiment points. [Provenance and SHA256](assets/provenance.json). Copyright remains with the authors.
 
+Image from the [original paper](https://arxiv.org/html/2610.03713v2); copyright belongs to the original authors.
+
 ### Equations
 
 A fixed held-out probe panel is evaluated after every adaptation round. Report its worst pass fraction over the stream, not just final recovery:
 
-$$R_{\min}=\min_t |P|^{-1}\sum_{p\in P}\mathbf 1[\hat y_{t,p}=y_p].$$
+$$
+R_{\min}=\min_t |P|^{-1}\sum_{p\in P}\mathbf 1[\hat y_{t,p}=y_p].
+$$
 
 A negative flip is a previously correct probe becoming incorrect; correcting an old error is not forgetting. After each real change, held-out queries from a new episode compare preference for the new versus old fact. Revision latency counts relevant-region observations until a declared margin is exceeded for several consecutive observations. This notation formalizes the paper's prose protocol; it is not a new training loss from the authors.
 

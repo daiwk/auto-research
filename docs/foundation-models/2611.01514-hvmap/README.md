@@ -27,19 +27,24 @@
 [![Figure 2：双向映射、独立检索与联合重排](assets/paper-figure-01.png)](https://arxiv.org/html/2611.01514v2#S3.F2)
 
 原论文 Figure 2，版权归原作者；不是本地完整系统架构或实测结果。[图源与 SHA256](assets/provenance.json)。
+图片来自[原论文](https://arxiv.org/html/2611.01514v2)，版权归原作者所有。
 <!-- paper-figure:end -->
 
 ### 核心公式
 
 映射为四个线性层，三个 SELU，中间宽度为目标维度的 5 倍，输出 L2 归一化。训练使用配对编码，不需要相关性 gold：
 
-$$L=\sum_{i,j}\left[\mu(y_i,y_j)-d(f(x_i),y_j)\right]^2.$$
+$$
+L=\sum_{i,j}\left[\mu(y_i,y_j)-d(f(x_i),y_j)\right]^2.
+$$
 
 注意右边是 **mapped-to-original-target** 距离，不是 mapped-to-mapped RKD；对角项可锚定绝对对齐，不能换成 InfoNCE 或 hinge。本地显式支持 cosine/L2，sum 为论文原式；mean 仅是明确缩放选项。
 
 对来自某库的候选，保留其原生向量：
 
-$$\mathrm{SCORE2}=w_1\cos(q^{native},x^{native})+w_2\cos(q^{mapped},f(x^{native})),\quad w_1=0.7,\ w_2=0.3.$$
+$$
+\mathrm{SCORE2}=w_1\cos(q^{native},x^{native})+w_2\cos(q^{mapped},f(x^{native})),\quad w_1=0.7,\ w_2=0.3.
+$$
 
 0.7 始终作用于该候选所属库的 **native** 空间，而非始终偏向 hub。多库采用 spoke→hub→spoke，最多两次映射；本地不建立 ANN 索引或训练完整多库映射。
 

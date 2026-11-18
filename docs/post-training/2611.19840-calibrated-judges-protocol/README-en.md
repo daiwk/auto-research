@@ -1,6 +1,6 @@
 # RA-Eval: qualify judges, swap orders, and audit bias transduction
 
-<!-- source-sha256: 9cb884121d509fdb636415eb39c5897ff2ec7e025b39fbb2fa062e002fec62a7 -->
+<!-- source-sha256: f2a3c82fd499c39d4a7d27d43cf996a9e98db6f4f2001ba5995f0a5a803aa340 -->
 
 [简体中文](README.md)
 
@@ -68,6 +68,8 @@ Section 5.4 reports a length statistic of 213, whereas Table 1 gives final media
 [![Original Table 1: iterations, length collapse and blind outcomes](assets/paper-figure-01.png)](https://arxiv.org/pdf/2611.19840v1#page=8)
 
 Fixed v1, page 8, original Table 1 and caption, without rearranged data or redrawing. Rejected iterations are not presented as completed blind evaluations. Copyright remains with the author; CC BY 4.0. [Source and SHA256](assets/provenance.json).
+
+Image from the [original paper](https://arxiv.org/html/2611.19840v1); copyright belongs to the original authors.
 <!-- paper-figure:end -->
 
 ## Local implementation

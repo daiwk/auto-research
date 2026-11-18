@@ -40,13 +40,16 @@ flowchart LR
 ![AskALCF原论文Figure 2：双层证据、有序树和人审训练闭环](assets/paper-figure-01.png)
 
 固定v1 PDF第5页Figure 2，含原图注；本地只实现部分确定性协议，不包含图中Agent judge或专家UI。[原论文图](https://arxiv.org/pdf/2611.15700v1#page=5)版权归原作者；[资产来源](assets/provenance.json)。
+图片来自[原论文](https://arxiv.org/html/2611.15700v1)，版权归原作者所有。
 <!-- paper-figure:end -->
 
 ### 核心公式
 
 令$R$为生产检索充分性，$C$为全库充分性：
 
-$$R=F,C=F\Rightarrow knowledge;\qquad R=F,C=T\Rightarrow retrieval.$$
+$$
+R=F,C=F\Rightarrow knowledge;\qquad R=F,C=T\Rightarrow retrieval.
+$$
 
 低回答分不能越过这个pivot直接归为model。no_failure需要$R=T$且回答忠实、正确的**正面证据**。缺字段不视作false，不支持的归因落到unknown。全库核心要求必须在看覆盖结果前确定，不能把缺失事实临时降为“不重要”。
 

@@ -27,11 +27,14 @@
 [![Figure 1：页面与查询多向量经 Qdrant 返回页面](assets/paper-figure-01.png)](https://arxiv.org/pdf/2611.17726v1#page=6)
 
 固定 v1 第 6 页原始 Figure 1 与图注，原图裁切非重绘。[来源、裁切与 SHA256](assets/provenance.json)。版权归原作者。
+图片来自[原论文](https://arxiv.org/html/2611.17726v1)，版权归原作者所有。
 <!-- paper-figure:end -->
 
 ### 核心公式
 
-$$s(q,d)=\sum_i\max_j\mathrm{sim}(q_i,d_j).$$
+$$
+s(q,d)=\sum_i\max_j\mathrm{sim}(q_i,d_j).
+$$
 
 每个 query token 匹配最合适的页面 token，再求和；不是先全页平均。距离越小越好，本地统一取负距离后求 max，明确分数方向。评测在独立 scorer 读取相关性：Precision@5 的分母固定为 5，Recall 分母为全部已知相关页，AP@5 保留这些未检索相关页的分母；不能将其误称为完整排名 MAP。
 

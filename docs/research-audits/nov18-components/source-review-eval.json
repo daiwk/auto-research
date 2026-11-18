@@ -11,7 +11,12 @@
       "source_sha256": "85344bbc7e80ada21d486f1af82e61863ad4ef58a728009bafe08e7e9af41ef8",
       "published_at": "2026-10-13T19:33:25Z",
       "first_author_affiliation": "Independent Researcher",
-      "reviewed_sections": ["Sections 3 and 6--7", "Software and Data", "Appendix B frozen-transfer limitations", "PDF page 7 Figure 3 with original caption"],
+      "reviewed_sections": [
+        "Sections 3 and 6--7",
+        "Software and Data",
+        "Appendix B frozen-transfer limitations",
+        "PDF page 7 Figure 3 with original caption"
+      ],
       "code_verification": "Fixed v3 says code and generated judgments will be released; no author repository URL is supplied. Public votes are not author code.",
       "decision": "CPU L1 Eq.2/3 and uncertainty audit only, no fitted tie/ranking model. Preserve ties-dominated gains, inconclusive frozen transfer and pooled-versus-within-prompt distinction. Full million-vote/multi-API campaign not reproduced due to cost.",
       "requires_gpu_validation": false,
@@ -25,7 +30,11 @@
       "source_sha256": "179662ea372bcf7b3917f5aa63ec0d47e89a91a21d5aad31be737b9d4fd39c67",
       "published_at": "2026-11-09T17:21:17Z",
       "first_author_affiliation": "MasterControl, Inc.",
-      "reviewed_sections": ["Sections 3--5", "Sections 6--7 findings and limits", "Figure 1 original architecture PNG"],
+      "reviewed_sections": [
+        "Sections 3--5",
+        "Sections 6--7 findings and limits",
+        "Figure 1 original architecture PNG"
+      ],
       "code_verification": "Runway is described as internal. Public AIPerf is a separate dependency and is not relabeled as an author harness release.",
       "decision": "CPU L1 cache/SLA/cost protocol. Full-config fingerprint is an explicit conservative local extension over paper path+fingerprint split. Cache hits do not add independent measurements. No AIPerf/backend/cloud run; full serving matrix not reproduced due to cost.",
       "requires_gpu_validation": false,
@@ -39,7 +48,14 @@
       "source_sha256": "9e79637de2d0b6c0e5050ac48e437e0c77bbb8f889073b3270e7b792f2024918",
       "published_at": "2026-11-11T19:13:21Z",
       "first_author_affiliation": "Independent Researcher",
-      "reviewed_sections": ["Sections 3.1--3.5 and Equations 1--8", "Sections 5.1--5.2 including negative learned-router and CPU gates", "Section 6 hypothetical prices", "Section 7 cost/checker caveats", "Reference 10 and public author README", "PDF page 13 Figure 1"],
+      "reviewed_sections": [
+        "Sections 3.1--3.5 and Equations 1--8",
+        "Sections 5.1--5.2 including negative learned-router and CPU gates",
+        "Section 6 hypothetical prices",
+        "Section 7 cost/checker caveats",
+        "Reference 10 and public author README",
+        "PDF page 13 Figure 1"
+      ],
       "code_verification": "Reference 10 links coauthor Deep Shah's public llm-routing-formula-validation repository at 26e0ebd288a7e48fe8cf5ec97fe7f2d8a143d7ac. GitHub license field is null; no upstream source copied/executed.",
       "decision": "CPU L1 independently implemented cost/quality equations including router/checker overhead and strict cascade threshold. No paid API, real model routing or learned router. Offline public-trace analysis is inexpensive but not claimed run; full recollection/model/API matrix not reproduced due to cost.",
       "requires_gpu_validation": false,
@@ -53,7 +69,12 @@
       "source_sha256": "4eee386d41452bb194dba59fbc3a390ef0f588e20ae452ae71941e0509a5ede3",
       "published_at": "2026-11-15T06:42:48Z",
       "first_author_affiliation": "Independent Researcher",
-      "reviewed_sections": ["Sections 3.3 and 4--5", "Limitations and Appendix B/C", "PDF page 8 Table 1", "Zenodo record 24237533 and v0.1 README/judge_pairs.py/p3r_join_labels.py/data license"],
+      "reviewed_sections": [
+        "Sections 3.3 and 4--5",
+        "Limitations and Appendix B/C",
+        "PDF page 8 Table 1",
+        "Zenodo record 24237533 and v0.1 README/judge_pairs.py/p3r_join_labels.py/data license"
+      ],
       "code_verification": "Zenodo v0.1 public code-data zip SHA256 6e2777051b06a90a73edbf4fb21555448ce82c5bc3bf243e5ef13602259f32c0; archive declares MIT code/CC-BY annotations and restricted human corpus. No weights downloaded, upstream code not executed.",
       "decision": "CPU L1 evaluator-only catches, two named judges each with both orders, canonical agreement/tie and split IDs. Four-verdict join is a disclosed conservative composition, not evidence of runtime judge isolation or judge capability. Preserve negative speech results, length collapse and Section5.4/Table1 reporting distinction. Full training/judge campaign not reproduced due to cost.",
       "requires_gpu_validation": false,

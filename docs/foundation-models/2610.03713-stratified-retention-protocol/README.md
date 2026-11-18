@@ -29,13 +29,16 @@
 [![Figure 1：知识分层与保持—修订二维评测](assets/paper-figure-01.png)](https://arxiv.org/pdf/2610.03713v2#page=2)
 
 固定 v2 第 2 页 Figure 1 及图注，原图直接裁切渲染，无重绘。二维象限是概念示意，不是本地或作者的新实验散点。[来源、裁切与 SHA256](assets/provenance.json)。版权归原作者。
+图片来自[原论文](https://arxiv.org/html/2610.03713v2)，版权归原作者所有。
 <!-- paper-figure:end -->
 
 ### 核心公式
 
 用固定 held-out probe 面板在每轮适应后评测，保留整个过程中最差的通过比例，而非只看最终恢复点：
 
-$$R_{\min}=\min_t |P|^{-1}\sum_{p\in P}\mathbf 1[\hat y_{t,p}=y_p].$$
+$$
+R_{\min}=\min_t |P|^{-1}\sum_{p\in P}\mathbf 1[\hat y_{t,p}=y_p].
+$$
 
 负翻转统计前一轮正确、后一轮错误；把原来错误的不变量纠正不算遗忘。对每次真实变化，用新 episode 的 held-out 查询测新事实相对旧事实的偏好差，连续若干次超过预先声明的 margin 后，记已观察到的相关区域次数为修订延迟。此式是本地对原文口头协议的记号化，不是作者新增损失函数。
 

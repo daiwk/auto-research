@@ -69,6 +69,7 @@ v3 在约 180 万票上报告版本/尺寸/同实验室 decisiveness 倍率为 1
 [![原文 Figure 3：冻结转移的增益区间与校准斜率](assets/paper-figure-01.png)](https://arxiv.org/pdf/2610.19095v3#page=7)
 
 固定 v3 第 7 页 Figure 3 与原图注，未重绘；版权归原作者，CC BY 4.0。[来源、裁剪和 SHA256](assets/provenance.json)。跨零区间不是本地实验失败或成功，而是原论文报告的限制。
+图片来自[原论文](https://arxiv.org/html/2610.19095v3)，版权归原作者所有。
 <!-- paper-figure:end -->
 
 ## 本地复现

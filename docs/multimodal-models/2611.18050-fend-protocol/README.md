@@ -40,17 +40,22 @@ flowchart LR
 ![FEND原论文Figure 1：检测器并行产生事件，再由窗口和优先级仲裁](assets/paper-figure-01.png)
 
 固定v1 PDF第3页Figure 1，含原图注；左侧检测器／ASR不是本地实现。[原论文图](https://arxiv.org/pdf/2611.18050v1#page=3)版权归原作者；[裁剪及SHA256](assets/provenance.json)。
+图片来自[原论文](https://arxiv.org/html/2611.18050v1)，版权归原作者所有。
 <!-- paper-figure:end -->
 
 ### 核心公式
 
 令事件$e_j=(t_j,c_j)$，自动类别优先级为$\pi$：
 
-$$\hat c=\arg\max_{c_j:t_j\le W}\pi(c_j),\quad\hat c=human\ \text{若集合为空}.$$
+$$
+\hat c=\arg\max_{c_j:t_j\le W}\pi(c_j),\quad\hat c=human\ \text{若集合为空}.
+$$
 
 关键风险指标只用真实human作为分母：
 
-$$HFPR=\frac{\#\{i:y_i=human,\hat c_i\ne human\}}{\#\{i:y_i=human\}}.$$
+$$
+HFPR=\frac{\#\{i:y_i=human,\hat c_i\ne human\}}{\#\{i:y_i=human\}}.
+$$
 
 无真人样本时HFPR未定义，不能填零。原文声学指标先做跨真人语料零假设校准：$g=(median(S)-median(R))/IQR(R)$，$|g|\le1$才保留；通过也不保证正类区分度。本地分位数采用线性插值的明确约定，未声称复现作者全部声学前端。
 

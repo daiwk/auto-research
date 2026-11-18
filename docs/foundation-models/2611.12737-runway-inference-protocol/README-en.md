@@ -1,6 +1,6 @@
 # Runway: separating inference measurements, cache, SLAs and cost decisions
 
-<!-- source-sha256: df20d30bedf0842b652b0a3b410e3b97e5e3b716603f1a1aebcda02d9b9944d6 -->
+<!-- source-sha256: 3744a62740739afcfcc3a6eb7426bc75a2de091b19eb418d144ed6ebadd23bf4 -->
 
 [简体中文](README.md)
 
@@ -62,6 +62,8 @@ The authors observe concurrency-dependent engine ranking reversals, lower per-re
 [![Original Figure 1: Before, Measure, After and measurement-skipping cache hits](assets/paper-figure-01.png)](https://arxiv.org/html/2611.12737v2#S3.F1)
 
 Original `architecture.png` from fixed v2, not redrawn. AIPerf alone touches the engine in the original system; the local protocol does not execute that stage. Copyright remains with the authors; CC BY 4.0. [Source and SHA256](assets/provenance.json).
+
+Image from the [original paper](https://arxiv.org/html/2611.12737v2); copyright belongs to the original authors.
 <!-- paper-figure:end -->
 
 ## Local implementation

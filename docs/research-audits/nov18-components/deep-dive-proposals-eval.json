@@ -7,31 +7,59 @@
       "paper": "post-training:luce-similarity-audit",
       "target_card": "post-training/preference-and-alignment",
       "source_revisions": {
-        "post-training:luce-similarity-audit": "52a879448b9256f3f8c18e4ca9c0c9a6c85b83df851f4f85feea2803c54cd5c1",
+        "post-training:luce-similarity-audit": "caa772f2b5225bc790fb8cba188ba337752e78f0c74bbd698ce60a238974c8ef",
         "post-training:probabilistic-autorater": "fe6f7067f554183ee185f524f706a4377ac0b1bd4191c607c03acc6c3acd8057"
       },
       "comparison": {
         "position": "分开审计BT非平局decisiveness、joint模型的tie增益和兄弟菜单相对强度匹配placebo的赔率偏移。",
         "tradeoff": "Probabilistic Autorater用proper reward校准偏好分布；Luce审计检验从全局分数到相关模型odds的结构假设。proper概率并不保证IIA，合并菜单正偏移也不证明prompt内因果效应。",
-        "sections": ["背景与主要改动", "核心公式", "论文离线与线上效果", "结果、负控与边界"]
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "论文离线与线上效果",
+          "结果、负控与边界"
+        ]
       },
       "analysis": {
         "title": "概率看起来校准，不等于分数之间的所有赔率都可信",
         "body": "Probabilistic Autorater的proper规则针对报告分布的校准；Luce论文针对相关模型比较和菜单变化，评估对象不同。三结果loss的多数增益来自ties，不能包装成非平局发布决策可靠；冻结lineage区间跨零、prompt内偏移衰减都必须保留。本地Eq.2/3只是可审计算术，不拟合Arena、不用test battle构造similarity，也不产生新的judge结果。",
-        "papers": ["post-training:luce-similarity-audit", "post-training:probabilistic-autorater"]
+        "papers": [
+          "post-training:luce-similarity-audit",
+          "post-training:probabilistic-autorater"
+        ]
       },
       "question": {
         "id": "cross-nov18-luce-calibration",
         "question": "一个proper-scored autorater准确报告总体偏好概率，能保证相邻版本的BT胜率也正确吗？",
         "answer": "不能。分布报告与BT的单分数结构是不同层次；相关模型的决断倍率、tie和prompt异质性仍可破坏由全局分数推出的odds。应分拆非平局、三结果和冻结转移指标，不能仅看总体loss。",
         "example": "原文ties-only几乎解释总体增益，但冻结lineage的非平局区间[-2.92,+1.68]仍不能建立改善。",
-        "papers": ["post-training:luce-similarity-audit", "post-training:probabilistic-autorater"]
+        "papers": [
+          "post-training:luce-similarity-audit",
+          "post-training:probabilistic-autorater"
+        ]
       },
-      "update": {"date": "2026-11-18", "papers": ["post-training:luce-similarity-audit", "post-training:probabilistic-autorater"], "summary": "补入相似模型odds与菜单审计，区分proper概率、tie增益与冻结转移负结果；CPU算术不拟合榜单或冒充能力结果，完整票据/裁判实验高成本不复现。"},
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "post-training:luce-similarity-audit",
+          "post-training:probabilistic-autorater"
+        ],
+        "summary": "补入相似模型odds与菜单审计，区分proper概率、tie增益与冻结转移负结果；CPU算术不拟合榜单或冒充能力结果，完整票据/裁判实验高成本不复现。"
+      },
       "english": {
-        "comparison": {"position": "Audit BT non-tied decisiveness, joint-model tie gains and sibling-menu odds against a strength-matched placebo separately.", "tradeoff": "Probabilistic Autorater uses proper rewards to calibrate preference distributions; Luce audits the structural map from global scores to related-model odds. Proper probabilities do not imply IIA, and pooled shifts do not establish within-prompt causality."},
-        "analysis": {"title": "Calibrated probabilities do not make every score-derived odds ratio trustworthy", "body": "Proper rewards calibrate reported distributions, while the Luce study examines related models and changing menus. Most three-outcome gains arise from ties, not proven release-decision odds. Crossing-zero frozen-lineage intervals and attenuated within-prompt shifts remain essential. Local Equations 2/3 are auditable arithmetic, not Arena fitting, test-battle similarity extraction or new judge evidence."},
-        "question": {"question": "Does a properly scored autorater reporting overall preferences guarantee correct BT odds for neighboring releases?", "answer": "No. Distribution reporting differs from BT's single-score structure. Related-pair decisiveness, ties and prompt heterogeneity may invalidate score-derived odds. Separate non-tied, three-outcome and frozen-transfer outcomes rather than relying on overall loss.", "example": "Ties-only nearly explains the paper's overall gain, yet the frozen-lineage non-tied interval [-2.92,+1.68] does not establish improvement."},
+        "comparison": {
+          "position": "Audit BT non-tied decisiveness, joint-model tie gains and sibling-menu odds against a strength-matched placebo separately.",
+          "tradeoff": "Probabilistic Autorater uses proper rewards to calibrate preference distributions; Luce audits the structural map from global scores to related-model odds. Proper probabilities do not imply IIA, and pooled shifts do not establish within-prompt causality."
+        },
+        "analysis": {
+          "title": "Calibrated probabilities do not make every score-derived odds ratio trustworthy",
+          "body": "Proper rewards calibrate reported distributions, while the Luce study examines related models and changing menus. Most three-outcome gains arise from ties, not proven release-decision odds. Crossing-zero frozen-lineage intervals and attenuated within-prompt shifts remain essential. Local Equations 2/3 are auditable arithmetic, not Arena fitting, test-battle similarity extraction or new judge evidence."
+        },
+        "question": {
+          "question": "Does a properly scored autorater reporting overall preferences guarantee correct BT odds for neighboring releases?",
+          "answer": "No. Distribution reporting differs from BT's single-score structure. Related-pair decisiveness, ties and prompt heterogeneity may invalidate score-derived odds. Separate non-tied, three-outcome and frozen-transfer outcomes rather than relying on overall loss.",
+          "example": "Ties-only nearly explains the paper's overall gain, yet the frozen-lineage non-tied interval [-2.92,+1.68] does not establish improvement."
+        },
         "update": "Add related-model odds and menu audits, separating proper probabilities, tie gains and inconclusive frozen transfer. CPU arithmetic does not fit a leaderboard or establish capabilities; full vote/judge campaigns are not reproduced due to cost."
       }
     },
@@ -39,31 +67,59 @@
       "paper": "foundation-models:runway-inference-protocol",
       "target_card": "foundation-models/evaluation-and-evidence",
       "source_revisions": {
-        "foundation-models:runway-inference-protocol": "df20d30bedf0842b652b0a3b410e3b97e5e3b716603f1a1aebcda02d9b9944d6",
+        "foundation-models:runway-inference-protocol": "3744a62740739afcfcc3a6eb7426bc75a2de091b19eb418d144ed6ebadd23bf4",
         "foundation-models:xla-trenches": "8d0084d662cf8f2c947333f64603556d3da43a5cf47fab26b5eb1aab086313a7"
       },
       "comparison": {
         "position": "在原样AIPerf前后构建配置/缓存身份、声明式SLA和每成功请求成本，明确缓存命中只复用既有证据。",
         "tradeoff": "XLA from the Trenches验证目标TPU编译数值正确性；Runway验证某serving配置是否满足指标和契约。CPU协议既不证明TPU语义，也不测CUDA吞吐；模型/引擎名字相同不能保证缓存身份相同。",
-        "sections": ["背景与主要改动", "核心公式", "数据协议与代码映射", "结果、负控与边界"]
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射",
+          "结果、负控与边界"
+        ]
       },
       "analysis": {
         "title": "可重复生成报告不等于重复获得独立测量",
         "body": "XLA审计强调保留目标硬件语义；Runway强调保留测量配置及raw AIPerf结果。两者都不能被CPU fixture替代。本地缓存更保守地哈希engine config、数据/模型revision和warm-up，cache-only缺失必须报错；SLA单位错配必须拒绝。重用一份raw结果审查两个SLA是两次决策、不是两份独立样本，不能缩小置信区间。",
-        "papers": ["foundation-models:runway-inference-protocol", "foundation-models:xla-trenches"]
+        "papers": [
+          "foundation-models:runway-inference-protocol",
+          "foundation-models:xla-trenches"
+        ]
       },
       "question": {
         "id": "cross-nov18-runway-cache-evidence",
         "question": "同一缓存配置反复生成报告，能当多次硬件复验吗？",
         "answer": "不能。Runway cache-hit明确跳过测量，增加的是决策/报告次数而不是独立观测。与XLA要求真实目标TPU确认相似，声明必须绑定实际执行环境和原始证据，不得从fixture或cache-hit推导硬件通过。",
         "example": "教学例：一条AIPerf结果生成10份报告仍只有1次测量；engine开启MTP需新身份而非沿用旧数值。",
-        "papers": ["foundation-models:runway-inference-protocol", "foundation-models:xla-trenches"]
+        "papers": [
+          "foundation-models:runway-inference-protocol",
+          "foundation-models:xla-trenches"
+        ]
       },
-      "update": {"date": "2026-11-18", "papers": ["foundation-models:runway-inference-protocol", "foundation-models:xla-trenches"], "summary": "补入推理缓存/SLA/成本证据协议，强调缓存不等于重复采样、单位必须匹配、硬件能力需真测；完整多引擎实例矩阵高成本不复现。"},
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "foundation-models:runway-inference-protocol",
+          "foundation-models:xla-trenches"
+        ],
+        "summary": "补入推理缓存/SLA/成本证据协议，强调缓存不等于重复采样、单位必须匹配、硬件能力需真测；完整多引擎实例矩阵高成本不复现。"
+      },
       "english": {
-        "comparison": {"position": "Wrap unmodified AIPerf with configuration/cache identity, declarative SLAs and cost per successful request; cache hits only reuse existing evidence.", "tradeoff": "XLA from the Trenches checks target-TPU numerical correctness; Runway checks serving metrics and contractual acceptance. CPU protocols establish neither TPU semantics nor CUDA throughput, and identical model/engine names do not imply identical cache identity."},
-        "analysis": {"title": "Reproducible reports are not repeated independent measurements", "body": "XLA preserves target hardware semantics; Runway preserves configurations and raw AIPerf outputs. Neither is replaced by CPU fixtures. The local conservative hash includes engine settings, revisions and warm-up; cache-only misses raise and unit-mismatched SLAs reject. Two SLA decisions on one cached observation are not two independent samples and cannot narrow measurement intervals."},
-        "question": {"question": "Do repeated reports from one cached configuration count as repeated hardware validation?", "answer": "No. Runway cache hits skip measurement, adding decisions/reports but no independent observations. As with XLA's real-target confirmation, claims must bind actual execution to raw evidence; fixtures/cache hits cannot establish hardware validation.", "example": "Teaching example: ten reports from one AIPerf result still contain one measurement. Enabling MTP requires a new identity, not old numbers."},
+        "comparison": {
+          "position": "Wrap unmodified AIPerf with configuration/cache identity, declarative SLAs and cost per successful request; cache hits only reuse existing evidence.",
+          "tradeoff": "XLA from the Trenches checks target-TPU numerical correctness; Runway checks serving metrics and contractual acceptance. CPU protocols establish neither TPU semantics nor CUDA throughput, and identical model/engine names do not imply identical cache identity."
+        },
+        "analysis": {
+          "title": "Reproducible reports are not repeated independent measurements",
+          "body": "XLA preserves target hardware semantics; Runway preserves configurations and raw AIPerf outputs. Neither is replaced by CPU fixtures. The local conservative hash includes engine settings, revisions and warm-up; cache-only misses raise and unit-mismatched SLAs reject. Two SLA decisions on one cached observation are not two independent samples and cannot narrow measurement intervals."
+        },
+        "question": {
+          "question": "Do repeated reports from one cached configuration count as repeated hardware validation?",
+          "answer": "No. Runway cache hits skip measurement, adding decisions/reports but no independent observations. As with XLA's real-target confirmation, claims must bind actual execution to raw evidence; fixtures/cache hits cannot establish hardware validation.",
+          "example": "Teaching example: ten reports from one AIPerf result still contain one measurement. Enabling MTP requires a new identity, not old numbers."
+        },
         "update": "Add inference cache/SLA/cost evidence protocols: caching is not replication, units must match and hardware claims require actual measurements. Full engine/instance matrices are not reproduced due to cost."
       }
     },
@@ -71,31 +127,59 @@
       "paper": "foundation-models:smart-model-routing",
       "target_card": "foundation-models/conditional-compute",
       "source_revisions": {
-        "foundation-models:smart-model-routing": "8e412f0e08740a448ca29aad3d578f714df9bf3b5b8cdc820508c0462f28c908",
+        "foundation-models:smart-model-routing": "9674bf6450a9b74de92d844c4814e42fbebb303ff4de63b4d4346fe713200326",
         "foundation-models:switch-transformer": "71cfc2d850556aa59636dc714b8879095e954f5731b7daca20eb2faf603473b8"
       },
       "comparison": {
         "position": "应用层按成本/预测质量选完整模型，计入router/checker、残余难题与token偏斜；cascade接受率需过严格全路径breakeven。",
         "tradeoff": "Switch在单网络内做token级top-1专家和负载均衡，Smart Routing选完整endpoint。内部激活FLOPs与外部API账单不是同一单位；便宜调用或校准平均概率本身不保证可区分易题，也不保证省钱。",
-        "sections": ["背景与主要改动", "核心公式", "论文离线与线上效果", "结果、负控与边界"]
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "论文离线与线上效果",
+          "结果、负控与边界"
+        ]
       },
       "analysis": {
         "title": "算了多少专家，不等于付了多少模型调用",
         "body": "Switch减少每token激活计算，而外部cascade无论首答是否采用都支付cheap/checker费用。原文2.19×变2.70×的误账与残余质量高估说明只统计终答不可靠；learned-router follow-up又未优于同成本blind mixing。CPU实现Eq.5/6/7与条件质量，只验证算术，不读取test gold选模型或宣称训练出有效router。",
-        "papers": ["foundation-models:smart-model-routing", "foundation-models:switch-transformer"]
+        "papers": [
+          "foundation-models:smart-model-routing",
+          "foundation-models:switch-transformer"
+        ]
       },
       "question": {
         "id": "cross-nov18-routing-layer-cost",
         "question": "Switch每token只激活一个expert，是否可直接套成外部cascade省钱比例？",
         "answer": "不可以。外部模型路由支付完整回答、checker、fallback及router开销，必须按实际请求token和接受历史计算；Switch的expert负载均衡不提供这些endpoint级统计，也不能保证质量门槛。",
         "example": "教学例：cheap1+checker1+router0.5、frontier10时，接受率0.25仅打平；即使内部top-1稀疏也不能删掉这些账单项。",
-        "papers": ["foundation-models:smart-model-routing", "foundation-models:switch-transformer"]
+        "papers": [
+          "foundation-models:smart-model-routing",
+          "foundation-models:switch-transformer"
+        ]
       },
-      "update": {"date": "2026-11-18", "papers": ["foundation-models:smart-model-routing", "foundation-models:switch-transformer"], "summary": "补应用层完整模型路由成本核，与token专家路由分层；保留learned-router负结果，显式计checker/router、token偏斜与条件fallback质量。完整推理/收集不复现。"},
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "foundation-models:smart-model-routing",
+          "foundation-models:switch-transformer"
+        ],
+        "summary": "补应用层完整模型路由成本核，与token专家路由分层；保留learned-router负结果，显式计checker/router、token偏斜与条件fallback质量。完整推理/收集不复现。"
+      },
       "english": {
-        "comparison": {"position": "Select complete models by cost/predicted quality, pricing router/checker overhead, residual hard traffic and token skew; cascade acceptance must clear strict whole-path breakeven.", "tradeoff": "Switch performs token-level top-1 expert selection and balancing inside one network; Smart Routing chooses complete endpoints. Activated FLOPs and API bills are different units. Cheap calls or calibrated averages alone do not identify easy requests or ensure savings."},
-        "analysis": {"title": "Counting activated experts is not counting paid model calls", "body": "Switch reduces per-token activated compute; external cascades pay cheap-answer/checker calls even when discarded. The paper's inflated 2.70x versus accounted 2.19x and residual-quality overstatement expose terminal-answer-only accounting. The learned-router follow-up also fails to beat cost-matched blind mixing. CPU Equations 5/6/7 check arithmetic, not gold-based routing or a trained useful router."},
-        "question": {"question": "Can Switch's one-expert-per-token sparsity directly predict external cascade savings?", "answer": "No. External routing pays complete answer, checker, fallback and router costs conditioned on actual token use and acceptance history. Switch load balancing provides no endpoint-level accounting or quality guarantee.", "example": "Teaching example: cheap1+checker1+router0.5 against frontier10 only breaks even at 0.25 acceptance. Internal top-1 sparsity does not erase these bills."},
+        "comparison": {
+          "position": "Select complete models by cost/predicted quality, pricing router/checker overhead, residual hard traffic and token skew; cascade acceptance must clear strict whole-path breakeven.",
+          "tradeoff": "Switch performs token-level top-1 expert selection and balancing inside one network; Smart Routing chooses complete endpoints. Activated FLOPs and API bills are different units. Cheap calls or calibrated averages alone do not identify easy requests or ensure savings."
+        },
+        "analysis": {
+          "title": "Counting activated experts is not counting paid model calls",
+          "body": "Switch reduces per-token activated compute; external cascades pay cheap-answer/checker calls even when discarded. The paper's inflated 2.70x versus accounted 2.19x and residual-quality overstatement expose terminal-answer-only accounting. The learned-router follow-up also fails to beat cost-matched blind mixing. CPU Equations 5/6/7 check arithmetic, not gold-based routing or a trained useful router."
+        },
+        "question": {
+          "question": "Can Switch's one-expert-per-token sparsity directly predict external cascade savings?",
+          "answer": "No. External routing pays complete answer, checker, fallback and router costs conditioned on actual token use and acceptance history. Switch load balancing provides no endpoint-level accounting or quality guarantee.",
+          "example": "Teaching example: cheap1+checker1+router0.5 against frontier10 only breaks even at 0.25 acceptance. Internal top-1 sparsity does not erase these bills."
+        },
         "update": "Add application-level model-routing arithmetic separately from token-expert routing. Preserve negative learned-router results and price checker/router overhead, token skew and conditional fallback quality; full inference/collection is not reproduced."
       }
     },
@@ -103,31 +187,59 @@
       "paper": "post-training:calibrated-judges-protocol",
       "target_card": "post-training/preference-and-alignment",
       "source_revisions": {
-        "post-training:calibrated-judges-protocol": "9cb884121d509fdb636415eb39c5897ff2ec7e025b39fbb2fa062e002fec62a7",
+        "post-training:calibrated-judges-protocol": "f2a3c82fd499c39d4a7d27d43cf996a9e98db6f4f2001ba5995f0a5a803aa340",
         "post-training:probabilistic-autorater": "fe6f7067f554183ee185f524f706a4377ac0b1bd4191c607c03acc6c3acd8057"
       },
       "comparison": {
         "position": "evaluator-only catch灵敏度gate、两隔离judge与双order还原一致性、分歧tie，训练后另查偏差转导。",
         "tradeoff": "Probabilistic Autorater校准偏好分布及proper reward；RA-Eval先资格考试再加工verdict，但高catch准确率不证明训练偏差消失。fixture映射1/0.5不是LLM能力，普通join不能读取gold。",
-        "sections": ["背景与主要改动", "核心公式", "论文离线与线上效果", "数据协议与代码映射"]
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "论文离线与线上效果",
+          "数据协议与代码映射"
+        ]
       },
       "analysis": {
         "title": "裁判通过资格考试后，训练仍可能把它的偏好放大成捷径",
         "body": "Proper概率强调报告分布，RA-Eval强调catch灵敏度、盲化和位置交换，这些都是不同风险的控制。原文长度75字的拒绝轮次表明可感知judge也会把短文本偏好转导到DPO。SFT anchor不是校准的替代品，训练后长度/风格和heldout检查不可少。本地只加工外部verdict并禁止catch训练ID重用，不调用judge或训练模型。",
-        "papers": ["post-training:calibrated-judges-protocol", "post-training:probabilistic-autorater"]
+        "papers": [
+          "post-training:calibrated-judges-protocol",
+          "post-training:probabilistic-autorater"
+        ]
       },
       "question": {
         "id": "cross-nov18-judge-calibration-transduction",
         "question": "judge概率校准且catch准确率高，是否可以取消训练后的长度检查？",
         "answer": "不可以。概率校准、catch敏感度、order一致性和偏差转导是不同检验。judge偏好可能仍偏短，DPO会放大数据中的chosen长度分布；必须独立检查长度/风格及heldout，不把训练标签一致率当能力提升。",
         "example": "原文扩到240对后median75字触发拒绝；本地四条fixture判断一致只应得到协议score1，不应得到100%模型准确率。",
-        "papers": ["post-training:calibrated-judges-protocol", "post-training:probabilistic-autorater"]
+        "papers": [
+          "post-training:calibrated-judges-protocol",
+          "post-training:probabilistic-autorater"
+        ]
       },
-      "update": {"date": "2026-11-18", "papers": ["post-training:calibrated-judges-protocol", "post-training:probabilistic-autorater"], "summary": "补校准judge的catch/双judge换序/tie/隔离组件，与proper概率和训练后偏差转导分开；保留语音负结果与长度塌缩，不调用付费judge、不跑0.6B完整训练。"},
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "post-training:calibrated-judges-protocol",
+          "post-training:probabilistic-autorater"
+        ],
+        "summary": "补校准judge的catch/双judge换序/tie/隔离组件，与proper概率和训练后偏差转导分开；保留语音负结果与长度塌缩，不调用付费judge、不跑0.6B完整训练。"
+      },
       "english": {
-        "comparison": {"position": "Evaluator-only catch sensitivity gate, two isolated judges with order-restored consistency, disagreement ties and separate post-training bias-transduction checks.", "tradeoff": "Probabilistic Autorater calibrates distributions/proper rewards; RA-Eval qualifies judges and processes verdicts. High catch accuracy does not remove training bias. Fixture 1/0.5 mappings are not capabilities, and ordinary joins cannot read gold."},
-        "analysis": {"title": "Passing a judge qualification exam does not stop training from amplifying its preferences into shortcuts", "body": "Proper probabilities, catch sensitivity, blinding and order swaps control different risks. The paper's rejected 75-character iteration shows perceptually sensitive judges can still transfer length bias into DPO. An SFT anchor does not replace calibration, nor post-training length/style and held-out checks. The local module processes external verdicts, rejects catch/training ID reuse and calls no judge or training job."},
-        "question": {"question": "Can calibrated judge probabilities and strong catch accuracy eliminate post-training length audits?", "answer": "No. Probability calibration, catch sensitivity, order consistency and bias transduction are separate tests. Short-text preferences can remain and DPO can amplify chosen-length distributions. Audit length/style and held-out outcomes separately rather than treating annotation agreement as capability gain.", "example": "The paper rejects a 240-pair iteration at median 75 characters. Four agreeing fixture verdicts locally yield protocol score 1, not 100% model accuracy."},
+        "comparison": {
+          "position": "Evaluator-only catch sensitivity gate, two isolated judges with order-restored consistency, disagreement ties and separate post-training bias-transduction checks.",
+          "tradeoff": "Probabilistic Autorater calibrates distributions/proper rewards; RA-Eval qualifies judges and processes verdicts. High catch accuracy does not remove training bias. Fixture 1/0.5 mappings are not capabilities, and ordinary joins cannot read gold."
+        },
+        "analysis": {
+          "title": "Passing a judge qualification exam does not stop training from amplifying its preferences into shortcuts",
+          "body": "Proper probabilities, catch sensitivity, blinding and order swaps control different risks. The paper's rejected 75-character iteration shows perceptually sensitive judges can still transfer length bias into DPO. An SFT anchor does not replace calibration, nor post-training length/style and held-out checks. The local module processes external verdicts, rejects catch/training ID reuse and calls no judge or training job."
+        },
+        "question": {
+          "question": "Can calibrated judge probabilities and strong catch accuracy eliminate post-training length audits?",
+          "answer": "No. Probability calibration, catch sensitivity, order consistency and bias transduction are separate tests. Short-text preferences can remain and DPO can amplify chosen-length distributions. Audit length/style and held-out outcomes separately rather than treating annotation agreement as capability gain.",
+          "example": "The paper rejects a 240-pair iteration at median 75 characters. Four agreeing fixture verdicts locally yield protocol score 1, not 100% model accuracy."
+        },
         "update": "Add catch, two-judge order-swap, tie and isolation components, separating proper probabilities from post-training bias transduction. Preserve negative speech interventions and length collapse; no paid judges or full 0.6B training."
       }
     }

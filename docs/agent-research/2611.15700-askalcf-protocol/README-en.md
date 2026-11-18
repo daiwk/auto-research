@@ -1,4 +1,4 @@
-<!-- source-sha256: b3b3f4b8a8c8321985e4da46b945c113afdcb88d88d25cb19ef0a92095d44422 -->
+<!-- source-sha256: b5f608c342784cce0a9c3b55229cf71de48c2848e2f086ce32acb16dbb1b9f2c -->
 
 # AskALCF: separate answer quality, retrieval sufficiency and repair attribution
 
@@ -42,13 +42,17 @@ flowchart LR
 ![AskALCF Figure 2: two evidence layers, ordered routing and human harness training](assets/paper-figure-01.png)
 
 Fixed-v1 PDF p.5, Figure 2, with its caption. The local subset contains neither the agent judge nor the expert UI. [Original figure](https://arxiv.org/pdf/2611.15700v1#page=5), copyright belongs to the authors. [Provenance](assets/provenance.json).
+
+Image from the [original paper](https://arxiv.org/html/2611.15700v1); copyright belongs to the original authors.
 <!-- paper-figure:end -->
 
 ### Core equations
 
 For production sufficiency $R$ and corpus sufficiency $C$:
 
-$$R=F,C=F\Rightarrow knowledge;\qquad R=F,C=T\Rightarrow retrieval.$$
+$$
+R=F,C=F\Rightarrow knowledge;\qquad R=F,C=T\Rightarrow retrieval.
+$$
 
 Low answer scores must not bypass this pivot and become model failures. No_failure requires positive evidence of $R=T$, faithfulness and correctness. Missing evidence does not mean false. Core requirements must be fixed before observing corpus coverage; missing facts cannot be reclassified as unimportant.
 

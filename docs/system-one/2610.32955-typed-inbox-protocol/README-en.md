@@ -1,4 +1,4 @@
-<!-- source-sha256: 25815fc18a615070fcbcbfd15bffd49c876c6f5c5d3dfd146dca549142d7a464 -->
+<!-- source-sha256: 073c22bdb82f313fe1a37a54330b4131e14ae0f5285d26b41d4ab53715ef867e -->
 
 # Typed Inbox: freeze the measurement protocol before deciding to train
 
@@ -42,18 +42,24 @@ flowchart LR
 ![Original Figure 1: changing the cost of a missed email changes the cheapest system](assets/paper-figure-01.png)
 
 Fixed-v4 PDF p.7, Figure 1, including its caption. Dashed cutoffs are selected inside CV training portions, not after seeing test outcomes. These are author results, not local results. [Original figure](https://arxiv.org/pdf/2610.32955v4#page=7); copyright belongs to the authors. [Crop and hashes](assets/provenance.json).
+
+Image from the [original paper](https://arxiv.org/html/2610.32955v4); copyright belongs to the original authors.
 <!-- paper-figure:end -->
 
 ### Core equations
 
 The paper combines missed messages, tasks, conflict flags and other actions:
 
-$$L_S(c)=c\,m_S+t_S+0.5d_S+n_S.$$
+$$
+L_S(c)=c\,m_S+t_S+0.5d_S+n_S.
+$$
 
 The missed-action price $c$ matters beyond individual-switch accuracy. The paper also compares noise-wins, action-wins and conflict-flag policies. Locally, **only a binary action-threshold interface** is implemented:
 
-$$\theta^*=\arg\min_\theta\frac1{|V|}\sum_{i\in V}
- [c_{FN}y_i\mathbf1(s_i<\theta)+c_{FP}(1-y_i)\mathbf1(s_i\ge\theta)].$$
+$$
+\theta^*=\arg\min_\theta\frac1{|V|}\sum_{i\in V}
+ [c_{FN}y_i\mathbf1(s_i<\theta)+c_{FP}(1-y_i)\mathbf1(s_i\ge\theta)].
+$$
 
 This is not the full action-composition cost, a trained classifier, contact-graph propagation, or class-stratified sampling. Only an explicit validation split can fit a cutoff. Prediction never receives test labels.
 

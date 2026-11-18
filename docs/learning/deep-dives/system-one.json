@@ -424,7 +424,7 @@
           ],
           "summary": "先冻结可见输入与线程切分，再按动作成本选择validation阈值；本地只含L0二元接口。 完整实验高成本不复现，局部协议不作能力或Evolve证据。",
           "source_revisions": {
-            "system-one:typed-inbox-protocol": "25815fc18a615070fcbcbfd15bffd49c876c6f5c5d3dfd146dca549142d7a464",
+            "system-one:typed-inbox-protocol": "073c22bdb82f313fe1a37a54330b4131e14ae0f5285d26b41d4ab53715ef867e",
             "foundation-models:jev-capability": "9484343eb3f24d2ff8c29ecdb8396472ae1bdf62060678922467f9d94eb10033"
           }
         }

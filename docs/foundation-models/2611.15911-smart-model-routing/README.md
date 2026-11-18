@@ -79,6 +79,7 @@ $$
 [![原文 Figure 1：价格比与frontier请求占比决定节省上限](assets/paper-figure-01.png)](https://arxiv.org/pdf/2611.15911v1#page=13)
 
 固定 v1 第 13 页 Figure 1 与图注，未重绘；图采用常请求成本 Eq.4，不能省略正文 Eq.5 的 token 偏斜限制。版权归原作者，arXiv 非独占发布许可。[来源与 SHA256](assets/provenance.json)。
+图片来自[原论文](https://arxiv.org/pdf/2611.15911v1)，版权归原作者所有。
 <!-- paper-figure:end -->
 
 ## 本地复现

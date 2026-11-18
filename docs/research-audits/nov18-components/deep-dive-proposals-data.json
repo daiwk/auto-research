@@ -7,7 +7,7 @@
       "paper": "foundation-models:stratified-retention-protocol",
       "target_card": "multimodal-models/world-state-actions",
       "source_revisions": {
-        "foundation-models:stratified-retention-protocol": "68efe1fcce0a5bb196bcc3972e212df49356e1f3da325f1000b223acd730d867",
+        "foundation-models:stratified-retention-protocol": "4ca784aeee5aef56a27ffb538cf2c072c6981bd08177c9fec708de88a2de397a",
         "multimodal-models:woven": "3c7f5518fd36be1bc8aa964050531232d66f297057e8e0ccd57f3f4376d2f575"
       },
       "comparison": {
@@ -66,7 +66,7 @@
       "paper": "foundation-models:tokenization-premium",
       "target_card": "foundation-models/evaluation-and-evidence",
       "source_revisions": {
-        "foundation-models:tokenization-premium": "f96c02652ba3ac0a922ab229f99b48c5494ae1a68af5caf91c330f41ca95205a",
+        "foundation-models:tokenization-premium": "7132c68508e01b7db33723dde8c0c61675eb44d0f843a750be2e1ee5d4a2f990",
         "foundation-models:xlgobench": "12c2082c37310106a20523d6a6845ba8f75628d01b7386fb40617c965c5df153"
       },
       "comparison": {
@@ -125,7 +125,7 @@
       "paper": "multimodal-models:rslivebench-uav-protocol",
       "target_card": "multimodal-models/world-state-actions",
       "source_revisions": {
-        "multimodal-models:rslivebench-uav-protocol": "eb516b30f562e2d4033a325d06ad10f3ec71d04af8e5b4229eddafcd5c764a6f",
+        "multimodal-models:rslivebench-uav-protocol": "fd7ec0c903a2ca99b30f35a323af497cc2c51ae5579795ec96e8fc2440a22908",
         "multimodal-models:woven": "3c7f5518fd36be1bc8aa964050531232d66f297057e8e0ccd57f3f4376d2f575"
       },
       "comparison": {
@@ -184,7 +184,7 @@
       "paper": "multimodal-models:multimodal-library-protocol",
       "target_card": "multimodal-models/alignment-interfaces",
       "source_revisions": {
-        "multimodal-models:multimodal-library-protocol": "6548730112efd7e7a2ba61319abe6440440a434bc3741f01ad1a6067154a5972",
+        "multimodal-models:multimodal-library-protocol": "4376093729a3f277a47da39c45ef1b60430de42fec608056f45836609eb904af",
         "foundation-models:clip": "9a8c03405713d34f4c7af432f78e05830369fa6b5e331a67a6d540983a205fa1"
       },
       "comparison": {

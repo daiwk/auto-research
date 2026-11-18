@@ -1,4 +1,4 @@
-<!-- source-sha256: 4673c164f643de52050232d5e9d2f315f8b808681b67986253a3558d88c4a4eb -->
+<!-- source-sha256: 34c0f79eee9d1fe6fbc2b41e76c1c4671ba6a2346e8a290b93efb9b9ae044d9b -->
 # HVMap: Mapping and two-space reranking across heterogeneous vector databases
 
 [简体中文](README.md)
@@ -28,19 +28,25 @@ Different encoders produce incompatible vector spaces. HVMap encodes a query onc
 [![Figure 2: bidirectional maps, retrieval and joint reranking](assets/paper-figure-01.png)](https://arxiv.org/html/2611.01514v2#S3.F2)
 
 Original Figure 2, copyright belongs to its authors; not a local complete-system result. [Source and SHA256](assets/provenance.json).
+
+Image from the [original paper](https://arxiv.org/html/2611.01514v2); copyright belongs to the original authors.
 <!-- paper-figure:end -->
 
 ### Core formulas
 
 Four affine layers, three SELUs, hidden width five times the target dimension, and L2-normalized output implement the map. Paired embeddings, not relevance gold, supervise:
 
-$$L=\sum_{i,j}[\mu(y_i,y_j)-d(f(x_i),y_j)]^2.$$
+$$
+L=\sum_{i,j}[\mu(y_i,y_j)-d(f(x_i),y_j)]^2.
+$$
 
 The observed matrix is **mapped-to-original-target**, not mapped-to-mapped RKD. Its diagonal anchors absolute alignment; InfoNCE or hinge is not equivalent. Cosine/L2 are explicit choices; sum matches the formula, while mean is an explicit scaling option.
 
 Retain each candidate's native embedding:
 
-$$\mathrm{SCORE2}=w_1\cos(q^{native},x^{native})+w_2\cos(q^{mapped},f(x^{native})),\quad w_1=0.7,\ w_2=0.3.$$
+$$
+\mathrm{SCORE2}=w_1\cos(q^{native},x^{native})+w_2\cos(q^{mapped},f(x^{native})),\quad w_1=0.7,\ w_2=0.3.
+$$
 
 The 0.7 coefficient always weights the candidate database's native space, not always the hub. Multiple databases use spoke→hub→spoke with at most two maps. Local code neither builds ANN indexes nor trains complete multi-database mappings.
 

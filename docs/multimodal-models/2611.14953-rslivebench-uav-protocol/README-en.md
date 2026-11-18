@@ -1,6 +1,6 @@
 # RSLiveBench-UAV: fresh scenes, answer embargo, and traceable scoring
 
-<!-- source-sha256: eb516b30f562e2d4033a325d06ad10f3ec71d04af8e5b4229eddafcd5c764a6f -->
+<!-- source-sha256: fd7ec0c903a2ca99b30f35a323af497cc2c51ae5579795ec96e8fc2440a22908 -->
 
 [简体中文](README.md)
 
@@ -29,9 +29,13 @@ Aerial spatial questions need cross-view entity association, real geometry and n
 
 Original Figure 1 and caption, fixed-v1 PDF page 2, not redrawn. Question counts and model results are not local data. [Provenance and SHA256](assets/provenance.json). Copyright remains with the authors.
 
+Image from the [original paper](https://arxiv.org/html/2611.14953v1); copyright belongs to the original authors.
+
 ### Equations
 
-$$R_{v-1}<\tau(I)<R_v,\quad T_{\rm public}(s)\ge\max(T_{\rm retire}(s),T_{\rm first}(s)+4\text{ calendar months}).$$
+$$
+R_{v-1}<\tau(I)<R_v,\quad T_{\rm public}(s)\ge\max(T_{\rm retire}(s),T_{\rm first}(s)+4\text{ calendar months}).
+$$
 
 Four months means calendar months, not 120 days. Answers remain embargoed until retirement as well. SC count parsing accepts only nonnegative decimal-integer strings. For positive references, it averages ten relative-error thresholds from 5% to 50%, producing a 0–100 score. Zero is a valid prediction; relative error at a zero reference is undefined and explicitly rejected rather than assigned an invented rule.
 

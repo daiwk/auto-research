@@ -1,6 +1,6 @@
 # Similar Models, Broken Odds: auditing similarity-dependent odds
 
-<!-- source-sha256: 52a879448b9256f3f8c18e4ca9c0c9a6c85b83df851f4f85feea2803c54cd5c1 -->
+<!-- source-sha256: caa772f2b5225bc790fb8cba188ba337752e78f0c74bbd698ce60a238974c8ef -->
 
 [简体中文](README.md)
 
@@ -71,6 +71,8 @@ The important negative result remains explicit: the frozen 2024→140k lineage c
 [![Original Figure 3: frozen-transfer intervals and calibration slopes](assets/paper-figure-01.png)](https://arxiv.org/pdf/2610.19095v3#page=7)
 
 Fixed v3, page 7, Figure 3 and its original caption, without redrawing. Copyright remains with the authors; CC BY 4.0. [Source, crop and SHA256](assets/provenance.json). The crossing-zero interval is an author-reported limitation, not a local experiment.
+
+Image from the [original paper](https://arxiv.org/html/2610.19095v3); copyright belongs to the original authors.
 <!-- paper-figure:end -->
 
 ## Local implementation

@@ -1,6 +1,6 @@
 # Multimodal digital-library retrieval: page matching and scoped performance
 
-<!-- source-sha256: 6548730112efd7e7a2ba61319abe6440440a434bc3741f01ad1a6067154a5972 -->
+<!-- source-sha256: 4376093729a3f277a47da39c45ef1b60430de42fec608056f45836609eb904af -->
 
 [简体中文](README.md)
 
@@ -29,9 +29,13 @@ OCR inverted indexes struggle with conceptual search over diagrams and layouts. 
 
 Original Figure 1 and caption, fixed-v1 PDF page 6, rendered and cropped without redrawing. [Provenance and SHA256](assets/provenance.json). Copyright remains with the authors.
 
+Image from the [original paper](https://arxiv.org/html/2611.17726v1); copyright belongs to the original authors.
+
 ### Equations
 
-$$s(q,d)=\sum_i\max_j\mathrm{sim}(q_i,d_j).$$
+$$
+s(q,d)=\sum_i\max_j\mathrm{sim}(q_i,d_j).
+$$
 
 Each query token selects its best page-token match, then scores sum; this is not page-average pooling. Smaller distance is better, so local distance scores are explicitly negated before max. A separate evaluator reads sealed relevance judgments: Precision@5 divides by 5, Recall by all known relevant pages, and AP@5 retains unretrieved relevant pages in its denominator. It is not full-ranking MAP.
 

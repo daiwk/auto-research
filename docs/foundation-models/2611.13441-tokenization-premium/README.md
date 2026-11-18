@@ -29,15 +29,20 @@
 [![Table 1：相同 UDHR 内容的多语言 token 溢价](assets/paper-figure-01.png)](https://arxiv.org/pdf/2611.13441v1#page=3)
 
 固定 arXiv v1 第 3 页 Table 1 与图注，CC BY 4.0；这些是作者数据，不是本地重新测得。[来源与 SHA256](assets/provenance.json)。
+图片来自[原论文](https://arxiv.org/pdf/2611.13441v1)，版权归原作者所有。
 <!-- paper-figure:end -->
 
 ### 核心公式
 
-$$P_\tau(\ell)=N_\tau(\ell)/N_\tau(\mathrm{en}).$$
+$$
+P_\tau(\ell)=N_\tau(\ell)/N_\tau(\mathrm{en}).
+$$
 
 分子分母是**相同 27 个条款按编号排序、用空格拼接后一次编码**的总 token 数，与作者公开脚本一致；不是逐条款比率的平均，也不保证等于独立编码 token 数之和。默认条款为 1、2、4、5、7、8、10—30。
 
-$$\mathrm{coverage}=n_{\rm answered}/n,\quad \mathrm{risk}=1-n_{\rm correct,answered}/n_{\rm answered}.$$
+$$
+\mathrm{coverage}=n_{\rm answered}/n,\quad \mathrm{risk}=1-n_{\rm correct,answered}/n_{\rm answered}.
+$$
 
 ECE 在全部题上计算，不能先按置信度丢掉难题；每焦耳正确回答的能量分母必须覆盖全部评测，包括拒答题。无题作答时 risk 不可用，不伪造为零。
 

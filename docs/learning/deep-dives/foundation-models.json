@@ -524,7 +524,7 @@
           ],
           "summary": "补HVMap跨空间fuzzy锚定、native权重与无配额联合检索；对照共享RAG表示，明确L1小张量与高成本完整实验的边界。",
           "source_revisions": {
-            "foundation-models:hvmap": "4673c164f643de52050232d5e9d2f315f8b808681b67986253a3558d88c4a4eb",
+            "foundation-models:hvmap": "34c0f79eee9d1fe6fbc2b41e76c1c4671ba6a2346e8a290b93efb9b9ae044d9b",
             "foundation-models:ecg-rag": "2d522783223ba0b570c26df2de796e7731ee037643b31cc39a0543368a720c7f"
           }
         }
@@ -781,7 +781,7 @@
           ],
           "summary": "补应用层完整模型路由成本核，与token专家路由分层；保留learned-router负结果，显式计checker/router、token偏斜与条件fallback质量。完整推理/收集不复现。",
           "source_revisions": {
-            "foundation-models:smart-model-routing": "8e412f0e08740a448ca29aad3d578f714df9bf3b5b8cdc820508c0462f28c908",
+            "foundation-models:smart-model-routing": "9674bf6450a9b74de92d844c4814e42fbebb303ff4de63b4d4346fe713200326",
             "foundation-models:switch-transformer": "71cfc2d850556aa59636dc714b8879095e954f5731b7daca20eb2faf603473b8"
           }
         }
@@ -2580,7 +2580,7 @@
           ],
           "summary": "补齐配对token成本与拒答安全读出，比较XLGoBench的能力轴；记录2026-09-22原始Zenodo首发和真实公开测量脚本，不误当11月新首发。",
           "source_revisions": {
-            "foundation-models:tokenization-premium": "f96c02652ba3ac0a922ab229f99b48c5494ae1a68af5caf91c330f41ca95205a",
+            "foundation-models:tokenization-premium": "7132c68508e01b7db33723dde8c0c61675eb44d0f843a750be2e1ee5d4a2f990",
             "foundation-models:xlgobench": "12c2082c37310106a20523d6a6845ba8f75628d01b7386fb40617c965c5df153"
           }
         },
@@ -2592,7 +2592,7 @@
           ],
           "summary": "补入推理缓存/SLA/成本证据协议，强调缓存不等于重复采样、单位必须匹配、硬件能力需真测；完整多引擎实例矩阵高成本不复现。",
           "source_revisions": {
-            "foundation-models:runway-inference-protocol": "df20d30bedf0842b652b0a3b410e3b97e5e3b716603f1a1aebcda02d9b9944d6",
+            "foundation-models:runway-inference-protocol": "3744a62740739afcfcc3a6eb7426bc75a2de091b19eb418d144ed6ebadd23bf4",
             "foundation-models:xla-trenches": "8d0084d662cf8f2c947333f64603556d3da43a5cf47fab26b5eb1aab086313a7"
           }
         },
@@ -2604,7 +2604,7 @@
           ],
           "summary": "补WSP权重补丁、预算和评价接口，对照AMS检测而非编辑的边界；不调用LLM、不替代TinyEEGNet，完整实验高成本不复现。",
           "source_revisions": {
-            "foundation-models:mixed-signals-weights": "d7341e9e52e1b342ac71624e146eeed692a6766d710df5ddfd6d2177a7ce0950",
+            "foundation-models:mixed-signals-weights": "a445ef56e0412ba813230da9f50808a00063c16e12464d02e598ef333039beca",
             "foundation-models:activation-model-scanner": "9160cad6a859eb0edd5be4fdc3cb49cc0b6077d93f426931592b67298289ff73"
           }
         }

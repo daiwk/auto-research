@@ -282,7 +282,7 @@
           ],
           "summary": "补入相似模型odds与菜单审计，区分proper概率、tie增益与冻结转移负结果；CPU算术不拟合榜单或冒充能力结果，完整票据/裁判实验高成本不复现。",
           "source_revisions": {
-            "post-training:luce-similarity-audit": "52a879448b9256f3f8c18e4ca9c0c9a6c85b83df851f4f85feea2803c54cd5c1",
+            "post-training:luce-similarity-audit": "caa772f2b5225bc790fb8cba188ba337752e78f0c74bbd698ce60a238974c8ef",
             "post-training:probabilistic-autorater": "fe6f7067f554183ee185f524f706a4377ac0b1bd4191c607c03acc6c3acd8057"
           }
         },
@@ -294,7 +294,7 @@
           ],
           "summary": "补校准judge的catch/双judge换序/tie/隔离组件，与proper概率和训练后偏差转导分开；保留语音负结果与长度塌缩，不调用付费judge、不跑0.6B完整训练。",
           "source_revisions": {
-            "post-training:calibrated-judges-protocol": "9cb884121d509fdb636415eb39c5897ff2ec7e025b39fbb2fa062e002fec62a7",
+            "post-training:calibrated-judges-protocol": "f2a3c82fd499c39d4a7d27d43cf996a9e98db6f4f2001ba5995f0a5a803aa340",
             "post-training:probabilistic-autorater": "fe6f7067f554183ee185f524f706a4377ac0b1bd4191c607c03acc6c3acd8057"
           }
         }

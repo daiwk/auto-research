@@ -2436,7 +2436,7 @@
           ],
           "summary": "回答盲的生产／全库充分性pivot、独立质量信号、revision缓存与受人审动作控制的修复协议。 完整实验高成本不复现，局部协议不作能力或Evolve证据。",
           "source_revisions": {
-            "agent-research:askalcf-protocol": "b3b3f4b8a8c8321985e4da46b945c113afdcb88d88d25cb19ef0a92095d44422",
+            "agent-research:askalcf-protocol": "b5f608c342784cce0a9c3b55229cf71de48c2848e2f086ce32acb16dbb1b9f2c",
             "agent-research:harness2": "c738a9266c1647b8f5cc0e50a0055d1aecf1fcf783ee78de3405c2e84850f48a"
           }
         },
@@ -2448,7 +2448,7 @@
           ],
           "summary": "按修复类型分层，真实checker接受修改、全量审计回滚回归，再按规则和概率顺序门控；本地仅文件映射回调。 完整实验高成本不复现，局部协议不作能力或Evolve证据。",
           "source_revisions": {
-            "agent-research:prodpilot-protocol": "528d60ba9ae602cf962e4b0b2faf41dc5de4e4ce6a3570fc3a0968710576d428",
+            "agent-research:prodpilot-protocol": "9e9a180da749547e6c08391a63ec611eaecf3e8455fe5fd627003810e1ba16e5",
             "agent-research:harness2": "c738a9266c1647b8f5cc0e50a0055d1aecf1fcf783ee78de3405c2e84850f48a"
           }
         }

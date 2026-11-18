@@ -60,6 +60,7 @@ $$
 [![原文 Figure 1：Before、Measure、After 及缓存绕过测量](assets/paper-figure-01.png)](https://arxiv.org/html/2611.12737v2#S3.F1)
 
 固定 v2 的原始 `architecture.png`，未重绘。原图中 AIPerf 是唯一触达被测引擎的组件；本地协议不执行这一环。版权归原作者，CC BY 4.0。[来源与 SHA256](assets/provenance.json)。
+图片来自[原论文](https://arxiv.org/html/2611.12737v2)，版权归原作者所有。
 <!-- paper-figure:end -->
 
 ## 本地复现

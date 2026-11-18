@@ -1,6 +1,6 @@
 # Smart Model Routing: accounting for overhead, traffic skew and conditional quality
 
-<!-- source-sha256: 8e412f0e08740a448ca29aad3d578f714df9bf3b5b8cdc820508c0462f28c908 -->
+<!-- source-sha256: 9674bf6450a9b74de92d844c4814e42fbebb303ff4de63b4d4346fe713200326 -->
 
 [简体中文](README.md)
 
@@ -81,6 +81,8 @@ The same repository's learned-router follow-up is negative: 96.28% versus 96.32%
 [![Original Figure 1: price ratio and frontier share bound savings](assets/paper-figure-01.png)](https://arxiv.org/pdf/2611.15911v1#page=13)
 
 Fixed v1, page 13, Figure 1 with its original caption, not redrawn. The plotted equal-cost Equation 4 must not erase Equation 5's token-skew caveat. Copyright remains with the authors under the arXiv non-exclusive publication license. [Source and SHA256](assets/provenance.json).
+
+Image from the [original paper](https://arxiv.org/pdf/2611.15911v1); copyright belongs to the original authors.
 <!-- paper-figure:end -->
 
 ## Local implementation

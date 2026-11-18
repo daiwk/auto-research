@@ -41,13 +41,16 @@ flowchart LR
 ![ProdPilot原论文Figure 1：分层修复、独立复核和三条件部署门](assets/paper-figure-01.png)
 
 固定v1 PDF第8页Figure 1，包含原图注。图中Docker、GitHub、Render为作者系统，本地不连接这些服务。[原论文图](https://arxiv.org/pdf/2611.17381v1#page=8)版权归原作者；[资产出处](assets/provenance.json)。
+图片来自[原论文](https://arxiv.org/pdf/2611.17381v1)，版权归原作者所有。
 <!-- paper-figure:end -->
 
 ### 核心公式
 
 优先级$p\in\{0,\ldots,5\}$权重为$w_p=2^{5-p}$，只在适用规则集合上计算：
 
-$$score=100\frac{\sum_r w_{p_r}\mathbf1(pass_r)}{\sum_r w_{p_r}}.$$
+$$
+score=100\frac{\sum_r w_{p_r}\mathbf1(pass_r)}{\sum_r w_{p_r}}.
+$$
 
 三条件依次为：无失败P0、$score\ge90$、部署概率$\hat p\ge0.369$。模型只能否决，不能越过规则批准；模型输入缺失／构建未确定则闭门。部署概率原文来自684次Render真实部署及其校准模型；**本地只接受外部概率接口，不训练或复制此估计器**，也不能把规则分数当概率。
 

@@ -1,6 +1,6 @@
 # Tokenization Premium: matched-content cost and abstention-safe evaluation
 
-<!-- source-sha256: f96c02652ba3ac0a922ab229f99b48c5494ae1a68af5caf91c330f41ca95205a -->
+<!-- source-sha256: 7132c68508e01b7db33723dde8c0c61675eb44d0f843a750be2e1ee5d4a2f990 -->
 
 [简体中文](README.md)
 
@@ -31,13 +31,19 @@ The paper also proposes eight black-box sovereignty audits. An abstaining system
 
 Table 1 and caption, fixed arXiv-v1 PDF page 3, CC BY 4.0. These are the authors' measurements, not local reruns. [Provenance and SHA256](assets/provenance.json).
 
+Image from the [original paper](https://arxiv.org/pdf/2611.13441v1); copyright belongs to the original authors.
+
 ### Equations
 
-$$P_\tau(\ell)=N_\tau(\ell)/N_\tau(\mathrm{en}).$$
+$$
+P_\tau(\ell)=N_\tau(\ell)/N_\tau(\mathrm{en}).
+$$
 
 The same 27 articles are **sorted by number, joined with spaces, then encoded once**, following the authors' public script. This is neither the mean of per-article ratios nor necessarily the sum of separately encoded article counts. Default articles are 1, 2, 4, 5, 7, 8, and 10–30.
 
-$$\mathrm{coverage}=n_{\rm answered}/n,\quad \mathrm{risk}=1-n_{\rm correct,answered}/n_{\rm answered}.$$
+$$
+\mathrm{coverage}=n_{\rm answered}/n,\quad \mathrm{risk}=1-n_{\rm correct,answered}/n_{\rm answered}.
+$$
 
 ECE uses all items, not only high-confidence answers. Correct answers per joule requires energy measured over the full evaluation, including abstained items. At zero coverage, risk is unavailable, not fictitiously zero.
 

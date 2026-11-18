@@ -66,6 +66,7 @@ catch 实测 16/16；pilot 单文本 22/24、同主题 pairs 24/24。这些是�
 [![原文 Table 1：训练迭代、长度塌缩与盲评结果](assets/paper-figure-01.png)](https://arxiv.org/pdf/2611.19840v1#page=8)
 
 固定 v1 第 8 页 Table 1 原表与表注，未重排数据或重绘；拒绝轮次没有被伪装成完成 blind evaluation。版权归原作者，CC BY 4.0。[来源与 SHA256](assets/provenance.json)。
+图片来自[原论文](https://arxiv.org/html/2611.19840v1)，版权归原作者所有。
 <!-- paper-figure:end -->
 
 ## 本地复现

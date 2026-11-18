@@ -1,7 +1,31 @@
 {
-  "schema_version": 1, "reviewed_on": "2026-11-18",
+  "schema_version": 1,
+  "reviewed_on": "2026-11-18",
   "records": [
-    {"key":"hvmap","source_url":"https://arxiv.org/html/2611.01514v2","source_sha256":"0f32fcc6330a8e321ebaf25d89c4814004d6f6e92f5ac5633144b13bf59e41c5","reviewed_sections":["Sections 3.3--3.5 in full","Section 5.1.3","Figures 2 and 4","pinned upstream mapping_function.py"],"decision":"L1 independent formula implementation; public upstream has no declared license. No full semantic/index campaign."},
-    {"key":"mixed-signals-weights","source_url":"https://arxiv.org/html/2611.13758v1","source_sha256":"6e70594ee34771edb4b8c0e9c0ff43151c63b3c9c6e094ecc23c6f7bbfb7dba1","reviewed_sections":["Section II in full","network definitions and Table I","tool budgets and withheld-test isolation","cost discussion","official BioWSP project links"],"decision":"L0 patch/budget/evaluator boundary, not a model editor or biosignal classifier. Tiny linear diagnostic is explicitly not paper architecture."}
+    {
+      "key": "hvmap",
+      "source_url": "https://arxiv.org/html/2611.01514v2",
+      "source_sha256": "0f32fcc6330a8e321ebaf25d89c4814004d6f6e92f5ac5633144b13bf59e41c5",
+      "reviewed_sections": [
+        "Sections 3.3--3.5 in full",
+        "Section 5.1.3",
+        "Figures 2 and 4",
+        "pinned upstream mapping_function.py"
+      ],
+      "decision": "L1 independent formula implementation; public upstream has no declared license. No full semantic/index campaign."
+    },
+    {
+      "key": "mixed-signals-weights",
+      "source_url": "https://arxiv.org/html/2611.13758v1",
+      "source_sha256": "6e70594ee34771edb4b8c0e9c0ff43151c63b3c9c6e094ecc23c6f7bbfb7dba1",
+      "reviewed_sections": [
+        "Section II in full",
+        "network definitions and Table I",
+        "tool budgets and withheld-test isolation",
+        "cost discussion",
+        "official BioWSP project links"
+      ],
+      "decision": "L0 patch/budget/evaluator boundary, not a model editor or biosignal classifier. Tiny linear diagnostic is explicitly not paper architecture."
+    }
   ]
 }

@@ -27,7 +27,7 @@
       }
     },
     "dive/multimodal-models/world-state-actions/update/2026-11-18/7": {
-      "source_sha256": "a6a8910dfa42dc0dc9f17aeb27e1b2ac8ad18dcbc982bf621a9c5edd42ba18f3",
+      "source_sha256": "64be4b33d90a6f48dc4d53e73426086a491b8b78e9dab93039e455f1f61b11fc",
       "reviewed": true,
       "fields": {
         "summary": "Added an L0 stratified-retention reporting protocol and an axis-separated comparison with WOVEN training; no original full empirical study or costly training/capability result is invented."
@@ -59,7 +59,7 @@
       }
     },
     "dive/foundation-models/evaluation-and-evidence/update/2026-11-18/10": {
-      "source_sha256": "0b669a814714f2d4c900f9555d935497f37614ea0eb4679a2c085e4e543f5940",
+      "source_sha256": "fadd64f0b63b85fcade60b14774a9669e9468bd6013512aaadd4b74bf85b3fb4",
       "reviewed": true,
       "fields": {
         "summary": "Added matched-content token cost and abstention-safe readouts alongside the XLGoBench capability axis; recorded the original September 22 Zenodo release and real public measurement scripts rather than calling it a new November release."
@@ -91,7 +91,7 @@
       }
     },
     "dive/multimodal-models/world-state-actions/update/2026-11-18/8": {
-      "source_sha256": "1ec1c5a313652e25201520afba636ddbb1f65ad1069a6a1b4e6c1e713e0b2786",
+      "source_sha256": "f7c631b6d05dabccc64227edc0973f81f2ba54ad1292ca31d4a709b9c16940ae",
       "reviewed": true,
       "fields": {
         "summary": "Added the L0 RSLiveBench-UAV release/scorer protocol separately from WOVEN transfer; full acquisition, annotation and the costly 30-model matrix are not reproduced."
@@ -123,7 +123,7 @@
       }
     },
     "dive/multimodal-models/alignment-interfaces/update/2026-11-18/9": {
-      "source_sha256": "12932f302d5cd2302fd7bbb8f2f568f0c1638f582f4089180e2fd39498e5aea7",
+      "source_sha256": "5248b80523b8c0de5a2d9d0be29c87e003fb4e7bb8043d98e86b047904d6f503",
       "reviewed": true,
       "fields": {
         "summary": "Added L0 page-MaxSim, independent retrieval metrics and explicit timing scope; separated them from CLIP training, retained the source's concurrency-scope conflict and did not run the costly full index."
@@ -155,7 +155,7 @@
       }
     },
     "dive/system-one/adaptive-decisions/update/2026-11-18/1": {
-      "source_sha256": "fbde6ef412ea4c17c4688a2ba8ca3accdb573d4775114fdc17b5882fb5300850",
+      "source_sha256": "9550a5a36ff62fe1c59b8cbba5286c8146c72127b1249e2ea596b8e2f889c5ec",
       "reviewed": true,
       "fields": {
         "summary": "Add frozen-view/thread-isolation and validation action-cost interfaces; full private multi-model CV is not reproduced."
@@ -187,7 +187,7 @@
       }
     },
     "dive/agent-research/harness-and-self-improvement/update/2026-11-18/16": {
-      "source_sha256": "b8e2b46c75a1f107f1ca552b7a02939a5e9f3c0d4c11b9d9c39330927ba89b48",
+      "source_sha256": "f2b07d197cdfb2671efa38b408db228b5c52f023185b9b36e370737565ea9bfb",
       "reviewed": true,
       "fields": {
         "summary": "Add answer-blind two-scope attribution, dependency-aware caching and real reviewed callbacks; no RAG/agent judge or private campaign."
@@ -219,7 +219,7 @@
       }
     },
     "dive/agent-research/harness-and-self-improvement/update/2026-11-18/17": {
-      "source_sha256": "d6bb46f8293779cbbb58663be9dcb1652fbbfddf0cdc7d77debfc645c34e8478",
+      "source_sha256": "58f800b9897bfed4346c8386db3440e7a61ecd316c551937ab6bc830bfb2cab2",
       "reviewed": true,
       "fields": {
         "summary": "Add bounded verified repair, regression rollback and fail-closed deployment interfaces; no cloud, full ruleset or trained estimator."
@@ -251,7 +251,7 @@
       }
     },
     "dive/multimodal-models/alignment-interfaces/update/2026-11-18/10": {
-      "source_sha256": "35b19f3a7cb87392f13adbd464e2814f9860c213905f952a64b175ea646d454e",
+      "source_sha256": "756a3be1820a7bf24e47170d99421b254eae0f68da96b0d1c400a51353621371",
       "reviewed": true,
       "fields": {
         "summary": "Add deadline/priority and human-FPR/null-calibration interfaces; no audio/ASR/LLM classifier, and distinguish binary F1 from four-class performance."
@@ -283,7 +283,7 @@
       }
     },
     "dive/post-training/preference-and-alignment/update/2026-11-18/1": {
-      "source_sha256": "ff300e0bcf7e4c8d0ffffa706b96b154f76b75d10da18898dde489b111f5564c",
+      "source_sha256": "a0e90b02e2349509016867296baf7f0ab550f11be843db50946dd6760c7fc0c4",
       "reviewed": true,
       "fields": {
         "summary": "Add related-model odds and menu audits, separating proper probabilities, tie gains and inconclusive frozen transfer. CPU arithmetic does not fit a leaderboard or establish capabilities; full vote/judge campaigns are not reproduced due to cost."
@@ -315,7 +315,7 @@
       }
     },
     "dive/foundation-models/evaluation-and-evidence/update/2026-11-18/11": {
-      "source_sha256": "b5f25da5610dadc7fc4787b7c837143aeb532f0353d4268949378a8cb5bd6eeb",
+      "source_sha256": "983b88d2c11eb87a830843bd14506d19c06be8c2584848f2840a1087d6659a41",
       "reviewed": true,
       "fields": {
         "summary": "Add inference cache/SLA/cost evidence protocols: caching is not replication, units must match and hardware claims require actual measurements. Full engine/instance matrices are not reproduced due to cost."
@@ -347,7 +347,7 @@
       }
     },
     "dive/foundation-models/conditional-compute/update/2026-11-18/1": {
-      "source_sha256": "69b33876b286323cea13e25147c38b5ee8793b6da2a1ac7a88012b8700b2ec16",
+      "source_sha256": "5d849aa3066709c948a3e4e3ae5a1e6fdc3fa279f9c6535f7df6b9bfa14696df",
       "reviewed": true,
       "fields": {
         "summary": "Add application-level model-routing arithmetic separately from token-expert routing. Preserve negative learned-router results and price checker/router overhead, token skew and conditional fallback quality; full inference/collection is not reproduced."
@@ -379,7 +379,7 @@
       }
     },
     "dive/post-training/preference-and-alignment/update/2026-11-18/2": {
-      "source_sha256": "a99d5bd5d0bef3865ea1d11602c897d51c3c3180f201ce68f70557d5dc5b4bef",
+      "source_sha256": "833122d25431c3ac114b07ff0693a285f798f8818f6f316df94ca7ad3955ee54",
       "reviewed": true,
       "fields": {
         "summary": "Add catch, two-judge order-swap, tie and isolation components, separating proper probabilities from post-training bias transduction. Preserve negative speech interventions and length collapse; no paid judges or full 0.6B training."
@@ -411,7 +411,7 @@
       }
     },
     "dive/foundation-models/context-and-state/update/2026-11-18/7": {
-      "source_sha256": "3c8544e2fe9ed4c5ad67cf6fb704391e96b3dc50ef4378849eedfe54e9665289",
+      "source_sha256": "381294bd8097f09fde82e3b59a5346237dfb2818ffe2b5dd7df05993535edd4b",
       "reviewed": true,
       "fields": {
         "summary": "Add HVMap cross-space anchors, native weights and quota-free merging, contrasted with shared RAG representations. Separate L1 tensor evidence from high-cost full campaigns."
@@ -443,7 +443,7 @@
       }
     },
     "dive/foundation-models/evaluation-and-evidence/update/2026-11-18/12": {
-      "source_sha256": "593f6248ea5bd6454dbbeeb4a48dcd0a87755588bfe01bb7488bf2d8806c31ad",
+      "source_sha256": "086ee91989494b7bde3fb6a6bf4c8966bfeef537d456f562d8853554d2a42fe4",
       "reviewed": true,
       "fields": {
         "summary": "Add WSP patch, budget and evaluator interfaces against AMS's detection-not-editing boundary. No LLM or TinyEEGNet substitute; high-cost full experiments are not reproduced."
