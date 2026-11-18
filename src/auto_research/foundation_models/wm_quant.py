@@ -15,9 +15,15 @@ def fake_quantize(x: Tensor, low: Tensor, log_width: Tensor, bits: int) -> Tenso
         raise ValueError("bit width must be 2–16")
     width = F.softplus(log_width) + 1e-6
     scale = width / (2**bits - 1)
-    coordinate = ((x - low) / scale).clamp(0, 2**bits - 1)
-    rounded = coordinate + (coordinate.round() - coordinate).detach()
-    return low + rounded * scale
+
+    def ste_round(value: Tensor) -> Tensor:
+        return value + (value.round() - value).detach()
+
+    # Fixed v1 Eq1–2: the grid has an INTEGER zero-point. Anchoring the
+    # grid directly at continuous low instead changes every representable value.
+    zero_point = ste_round(-low / scale)
+    quantized = (ste_round(x / scale) + zero_point).clamp(0, 2**bits - 1)
+    return scale * (quantized - zero_point)
 
 
 class RolloutCalibrator(nn.Module):
@@ -80,6 +86,7 @@ class RolloutCalibrator(nn.Module):
 def diagnostic(seed: int, device: str = "cpu") -> dict:
     torch.manual_seed(seed)
     model = RolloutCalibrator(6, 4).to(device)
+    exact_zero = fake_quantize(torch.zeros(1, device=device), model.low[0], model.log_width[0], 3)
     observations = torch.randn(8, 6, device=device)
     actions = torch.randn(8, 4, 1, device=device) * 0.01
     before = float(model.objective(observations, actions).detach())
@@ -99,11 +106,18 @@ def diagnostic(seed: int, device: str = "cpu") -> dict:
         "seed": seed,
         "diagnostic_only": True,
         "evaluation_tier": "l1_mechanism",
-        "metrics": {"rollout_calibration_before": before, "rollout_calibration_after": after},
+        "metrics": {
+            "rollout_calibration_before": before,
+            "rollout_calibration_after": after,
+            "zero_quantization_error": float(exact_zero.detach().abs().max()),
+        },
         "checks": {
             "joint_ranges_optimized": after < before,
             "control_path_preserved": bool(torch.allclose(control_effect, expected, atol=1e-6)),
             "step_ranges_not_shared": bool(model.low[4:].std() > 0),
+            "integer_zero_point_preserves_zero": bool(
+                torch.equal(exact_zero, torch.zeros_like(exact_zero))
+            ),
             "model_weights_frozen": all(not p.requires_grad for p in model.encoder.parameters()),
         },
     }
