@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:hvmap/native-space-first": {
+      "source_sha256": "67cf19f87a955cc2456cfb900d8bebef9cfde7e255b1a1ec9eb60be048cd9ce5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not search every database with one unchanged query vector?",
+        "answer": "Different encoders have incompatible dimensions and semantic coordinates. HVMap maps a hub-encoded query, retrieves independently and maps candidates for reranking. Zero padding does not align meaning.",
+        "example": "Teaching example: identical coordinates in rotated spaces represent different meanings; direct dot products change nearest neighbors."
+      }
+    },
+    "qa/foundation-models:hvmap/absolute-fuzzy-anchor": {
+      "source_sha256": "bf9ee6021c4f2ff485db34f06656246b3608ee1fd2ce5e5863585f77ed036539",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is mapped-to-mapped RKD not the fuzzy contrastive objective?",
+        "answer": "The objective compares target-target distances with mapped-to-original-target distances. Diagonal terms anchor paired absolute alignment. A global rotation or sign flip preserves mapped pairwise distances but not alignment to original targets.",
+        "example": "Teaching example: negating a three-vector orthonormal basis gives RKD zero but fuzzy sum loss 12."
+      }
+    },
+    "qa/foundation-models:hvmap/mapping-versus-shared-representation": {
+      "source_sha256": "5ff0cadf1d0f888782df515792ec0857b979f33d306c71aa45d005f1233ee907",
+      "reviewed": true,
+      "fields": {
+        "question": "Do HVMap and ECG-RAG solve the same representation problem?",
+        "answer": "No. HVMap aligns heterogeneous databases while retaining native scores for a union rerank. ECG-RAG reuses one document representation for retrieval and compressed generation context. HVMap does not answer questions; ECG still needs its decoder and joint training.",
+        "example": "Teaching example: a cross-database HVMap ranking does not supply ECG's compressed-context answer-generation path."
+      }
+    },
+    "qa/foundation-models:hvmap/native-weight-not-hub": {
+      "source_sha256": "04f88e05a66aa94abf82569d5ab2563e310e674e8ed24bd561242de910925e43",
+      "reviewed": true,
+      "fields": {
+        "question": "How do SCORE2's 0.7 weight and final K quota work?",
+        "answer": "The 0.7 weight belongs to the candidate database's native space, not always the hub; 0.3 weights its mapped space. Retrieve K per database, then select global K without equal quotas. Spokes use at most two hub maps and retain native embeddings.",
+        "example": "Teaching example: scores .9/.8 from A and .2/.1 from B produce two A winners for K=2."
+      }
+    },
+    "qa/foundation-models:mixed-signals-weights/wsp-not-gradient-descent": {
+      "source_sha256": "e649ee6fa531d7743c0dd400835d12d57f67a469074c7ba6134b3e05d105f1bc",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not implement weight-space programming using SGD?",
+        "answer": "The study asks whether LLM reasoning can read or write weights under rules excluding gradient descent and iterative fitting. SGD answers a different question. Local code provides an external patch interface, not a pretend LLM editor.",
+        "example": "Teaching example: hiding backward and optimizer.step inside edit is still gradient training, not WSP."
+      }
+    },
+    "qa/foundation-models:mixed-signals-weights/atomic-and-budgeted": {
+      "source_sha256": "775cacc41a59270de2c159594edf1b9d4b3bedc9535c6a207a53ce7b8834e288",
+      "reviewed": true,
+      "fields": {
+        "question": "Why test both atomic patches and practice budgets?",
+        "answer": "Validate the entire patch before mutation and preserve rollback, so a later invalid parameter cannot leave partial edits. Count each practice attempt before calling it, including failures, or exceptions become free search.",
+        "example": "Teaching example: a valid weight plus a NaN bias changes neither parameter; one callback exception still consumes one call."
+      }
+    },
+    "qa/foundation-models:mixed-signals-weights/read-signals-versus-edit-weights": {
+      "source_sha256": "791a834df21317f8054b3c2971181d9c56497e8371330767c1e04cfc0f2e1444",
+      "reviewed": true,
+      "fields": {
+        "question": "Can the Mixed Signals interface substitute for AMS activation scanning?",
+        "answer": "No. AMS inspects fixed-model activation directions for safety-training changes; it neither edits weights nor certifies safety. WSP studies reasoning-based edits evaluated on unseen subjects. Passing diagnostics establishes neither medical efficacy nor real repair capability.",
+        "example": "Teaching example: AMS self-comparison does not prove an unmodified model; a changed linear-harness forward does not prove EEG repair."
+      }
+    },
+    "qa/foundation-models:mixed-signals-weights/recovery-and-test-isolation": {
+      "source_sha256": "2e3d080e0c72fda77fd3d597660d395cfa495d1fea6403f9957a34e379ecaf05",
+      "reviewed": true,
+      "fields": {
+        "question": "Is recovery above one a bug, and may editors see test labels?",
+        "answer": "Recovery is (repaired-faulty)/(healthy-faulty); values above one or below zero remain unclipped, and a zero denominator is rejected. Test labels stay evaluator-only, not practice feedback. The local callback is not an adversarial-code sandbox.",
+        "example": "Teaching example: healthy=.8, faulty=.4, repaired=.9 yields recovery=1.25, not 125% accuracy."
+      }
+    }
+  }
+}

@@ -7,7 +7,7 @@ hide:
 
 # 能力证据：准确打分、节省观测与解释预测
 
-[基础模型](../index.md) · 更新 2026-11-13 · 22 篇主题资料 / 14 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-18 · 25 篇主题资料 / 17 篇重点对照
 
 先区分“正确答案怎样定义”“下一题测谁”“多个裁判怎样融合”和“预测怎样解释”。XLGoBench、ProEval、FUSE、TCAB 与 DetectorScope 分别改变这些环节；观测更少或解释可加，不等于被测能力本身更强。XLA from the Trenches还提醒：评分之前，编译后程序本身就可能静默偏离原始数值语义，不能把编译成功当作执行正确。
 
@@ -39,6 +39,9 @@ hide:
 | [Steering LLMs for Culturally Localized Generation](../../../foundation-models/2603.23301-cultural-cue/README.md) · [原始来源](https://arxiv.org/abs/2603.23301v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射 | 对外部SAE token激活取max，以累计文化MI选维度，再按国家原型差和decoder构造残差干预。 | MI估计/SAE/语言模型和judge外置；国家等权不是样本等权。与DetectorScope描述mask及稀疏检测头的监督目标不同。 |
 | [Estimating near-verbatim extraction risk in language models with decoding-constrained beam search](../../../foundation-models/2603.24917-decoding-constrained-beam/README.md) · [原始来源](https://arxiv.org/abs/2603.24917v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射 | 在实际top-k解码分布上累积精确路径概率，用可行性剪枝和末步全扩展给近逐字事件的确定性概率界。 | 需要外部模型logits与目标后缀；不是来源检测或无偏完整风险估计。bank是潜在质量，不是已验证成功；无可选τ早停/KV模型。 |
 | [StoryScope: Investigating idiosyncrasies in AI fiction](../../../foundation-models/2604.03136-storyscope/README.md) · [原始来源](https://arxiv.org/abs/2604.03136v1)<br>章节：背景与主要改动、核心公式、数据协议与代码映射 | 语义叙事赋值经prompt匹配分析和真实SHAP统计选稳定跨模型核心；本地精确执行核心合取与prompt-block索引。 | 叙事特征不是SAE随机列，分类重要性不是生成因果；外部LLM/XGBoost/SHAP阶段与未量化指纹门槛不伪造。 |
+| [Inherited Weights: Measuring the Tokenization Premium and the Sovereignty Cost of Language Models for the Global South](../../../foundation-models/2611.13441-tokenization-premium/README.md) · [原始来源](https://arxiv.org/abs/2611.13441v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 先拼接相同UDHR共同条款再一次编码，比较总token成本并排除UNK坍缩；同时约束全样本ECE、覆盖率/风险与全程能量分母。 | XLGoBench固定抽象算法实例与复杂度来比较跨语言任务能力，token溢价只测相同内容的输入成本。两者都需语言内容可比，但token数不能替代模型错误率；本地两个scorer均不等于完整多语能力矩阵。 |
+| [Inference Validation for Regulated AI: A Governed Decision Pipeline for LLM Serving](../../../foundation-models/2611.12737-runway-inference-protocol/README.md) · [原始来源](https://arxiv.org/abs/2611.12737v2)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界 | 在原样AIPerf前后构建配置/缓存身份、声明式SLA和每成功请求成本，明确缓存命中只复用既有证据。 | XLA from the Trenches验证目标TPU编译数值正确性；Runway验证某serving配置是否满足指标和契约。CPU协议既不证明TPU语义，也不测CUDA吞吐；模型/引擎名字相同不能保证缓存身份相同。 |
+| [Mixed Signals: Weight-Space Programming for EEG and ECG](../../../foundation-models/2611.13758-mixed-signals-weights/README.md) · [原始来源](https://arxiv.org/abs/2611.13758v1)<br>章节：核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 用原子参数补丁和受限practice反馈表达WSP接口，测试标签留在外部评价器，不用SGD替代推理编辑。 | AMS从固定激活读出结构差异，不写参数也不认证安全；WSP问能否推理改权重。当前L0线性harness不含LLM、TinyEEGNet或被试数据。 |
 
 </div>
 
@@ -109,6 +112,24 @@ CBS问的是给定前缀后模型以何概率生成目标邻域，DetectorScope�
 StoryScope的单位是人类可问的叙事结构，DetectorScope的单位是内部稀疏激活及描述；它们都有模型误差与抽取成本，而不是解释文字越自然越可靠。StoryScope必须把共享prompt的六个故事作为相关组隔离和重采样，且跨模型spread阻止把单模型偏好混成普遍AI核心。DetectorScope的稀疏贡献解释的是分类头本身，不自动证明整篇故事采用某种叙事。两者应保留各自输入和验收，不用通用特征fixture缩短语义过程。
 
 对照来源：[storyscope](../../../foundation-models/2604.03136-storyscope/README.md) · [detector-scope](../../../foundation-models/2610.30006-detector-scope/README.md)
+
+### 相同内容的价格差与相同任务的能力差应分轴
+
+Tokenization Premium的作者脚本先按编号拼27共同条款，独立分词后求和会受边界合并影响。XLGoBench则控制算法实例与复杂度，答案留在独立scorer。若未来研究token预算对跨语言推理的影响，应同时固定内容、翻译与预算，并使用真实模型输出；不能从阿姆哈拉语6.76倍成本推出6.76倍错误，也不能用UNK变少作为胜利。
+
+对照来源：[tokenization-premium](../../../foundation-models/2611.13441-tokenization-premium/README.md) · [xlgobench](../../../foundation-models/2605.30788-xlgobench/README.md)
+
+### 可重复生成报告不等于重复获得独立测量
+
+XLA审计强调保留目标硬件语义；Runway强调保留测量配置及raw AIPerf结果。两者都不能被CPU fixture替代。本地缓存更保守地哈希engine config、数据/模型revision和warm-up，cache-only缺失必须报错；SLA单位错配必须拒绝。重用一份raw结果审查两个SLA是两次决策、不是两份独立样本，不能缩小置信区间。
+
+对照来源：[runway-inference-protocol](../../../foundation-models/2611.12737-runway-inference-protocol/README.md) · [xla-trenches](../../../foundation-models/2611.00624-xla-trenches/README.md)
+
+### 读出差异与修复能力不能靠同一个诊断标签混为一谈
+
+AMS的方向/漂移是检测信号，存在结构保持攻击盲区；Mixed Signals的推理写权重还要求受限反馈和独立未见被试评价。原子写入、失败消耗预算和正确balanced accuracy是必要工程合同，却不创造会编辑的LLM。SGD违规替换和test反馈泄漏都改变了问题。完整campaign高成本不复现，保留L0接口与实际CUDA加载前向证据，不拿作者医学结果背书。
+
+对照来源：[mixed-signals-weights](../../../foundation-models/2611.13758-mixed-signals-weights/README.md) · [activation-model-scanner](../../../foundation-models/2608.05578-activation-model-scanner/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -234,9 +255,51 @@ StoryScope的单位是人类可问的叙事结构，DetectorScope的单位是内
 
     对照来源：[storyscope](../../../foundation-models/2604.03136-storyscope/README.md) · [detector-scope](../../../foundation-models/2610.30006-detector-scope/README.md)
 
+### 某语言token比英语多一倍，是否可以预测其XLGoBench准确率减半？ {#cross-nov18-tokenization-premium}
+
+??? note "展开答案与例子"
+
+    **答案：** 不可以。token溢价是等内容的成本比，XLGoBench准确率还受训练覆盖、翻译、推理能力与预算约束影响；需匹配实例、验证模板和真实模型评测才能研究两者关系。
+
+    **教学例子：** 同一最短路实例可以保持正确路径不变而换语言；输入从100变200token并不改变算法答案，不能把成本比直接换成准确率比。
+
+    对照来源：[tokenization-premium](../../../foundation-models/2611.13441-tokenization-premium/README.md) · [xlgobench](../../../foundation-models/2605.30788-xlgobench/README.md)
+
+### 同一缓存配置反复生成报告，能当多次硬件复验吗？ {#cross-cross-nov18-runway-cache-evidence}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。Runway cache-hit明确跳过测量，增加的是决策/报告次数而不是独立观测。与XLA要求真实目标TPU确认相似，声明必须绑定实际执行环境和原始证据，不得从fixture或cache-hit推导硬件通过。
+
+    **教学例子：** 教学例：一条AIPerf结果生成10份报告仍只有1次测量；engine开启MTP需新身份而非沿用旧数值。
+
+    对照来源：[runway-inference-protocol](../../../foundation-models/2611.12737-runway-inference-protocol/README.md) · [xla-trenches](../../../foundation-models/2611.00624-xla-trenches/README.md)
+
+### AMS检查通过、权重补丁接口也通过，能标成成功修复吗？ {#cross-cross-nov18-wsp-not-ams}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。AMS仅给激活结构诊断，接口仅给原子性/预算合同；修复需要真实推理编辑器在权限隔离的practice反馈下操作，并在未见被试上独立评价。
+
+    **教学例子：** 教学例：把线性层取负确实改了forward，但不能当EEG模型准确率提高。
+
+    对照来源：[mixed-signals-weights](../../../foundation-models/2611.13758-mixed-signals-weights/README.md) · [activation-model-scanner](../../../foundation-models/2608.05578-activation-model-scanner/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-18** · 补WSP权重补丁、预算和评价接口，对照AMS检测而非编辑的边界；不调用LLM、不替代TinyEEGNet，完整实验高成本不复现。
+
+涉及：[mixed-signals-weights](../../../foundation-models/2611.13758-mixed-signals-weights/README.md) · [activation-model-scanner](../../../foundation-models/2608.05578-activation-model-scanner/README.md)
+
+**2026-11-18** · 补入推理缓存/SLA/成本证据协议，强调缓存不等于重复采样、单位必须匹配、硬件能力需真测；完整多引擎实例矩阵高成本不复现。
+
+涉及：[runway-inference-protocol](../../../foundation-models/2611.12737-runway-inference-protocol/README.md) · [xla-trenches](../../../foundation-models/2611.00624-xla-trenches/README.md)
+
+**2026-11-18** · 补齐配对token成本与拒答安全读出，比较XLGoBench的能力轴；记录2026-09-22原始Zenodo首发和真实公开测量脚本，不误当11月新首发。
+
+涉及：[tokenization-premium](../../../foundation-models/2611.13441-tokenization-premium/README.md) · [xlgobench](../../../foundation-models/2605.30788-xlgobench/README.md)
 
 **2026-11-13** · 补入叙事语义与prompt组级证据，精确核心阈值不等同指纹判据；与SAE检测解释粒度分开。
 
@@ -278,7 +341,7 @@ StoryScope的单位是人类可问的叙事结构，DetectorScope的单位是内
 
 覆盖 13 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 22 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 25 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -304,6 +367,9 @@ StoryScope的单位是人类可问的叙事结构，DetectorScope的单位是内
 - [Steering LLMs for Culturally Localized Generation](../../../foundation-models/2603.23301-cultural-cue/README.md)
 - [Estimating near-verbatim extraction risk in language models with decoding-constrained beam search](../../../foundation-models/2603.24917-decoding-constrained-beam/README.md)
 - [StoryScope: Investigating idiosyncrasies in AI fiction](../../../foundation-models/2604.03136-storyscope/README.md)
+- [Inherited Weights: Measuring the Tokenization Premium and the Sovereignty Cost of Language Models for the Global South](../../../foundation-models/2611.13441-tokenization-premium/README.md)
+- [Inference Validation for Regulated AI: A Governed Decision Pipeline for LLM Serving](../../../foundation-models/2611.12737-runway-inference-protocol/README.md)
+- [Mixed Signals: Weight-Space Programming for EEG and ECG](../../../foundation-models/2611.13758-mixed-signals-weights/README.md)
 
 </details>
 

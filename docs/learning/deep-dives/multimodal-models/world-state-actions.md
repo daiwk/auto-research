@@ -7,7 +7,7 @@ hide:
 
 # 会预测下一幕，还不等于会行动或保持同一个世界
 
-[多模态](../index.md) · 更新 2026-11-15 · 28 篇主题资料 / 12 篇重点对照
+[多模态](../index.md) · 更新 2026-11-18 · 30 篇主题资料 / 14 篇重点对照
 
 世界模型需要分别回答：状态表征保留什么、动作如何影响未来、计划怎样被验收、跨段记忆如何维持。LeWAM与V-JEPA Policy连接预测和动作，预测—规划评测拆解误差，WOVEN提供视觉转移监督，PPMem维护几何记忆，VBVR-Pro定义可执行验收。 SWIM从离线动作可预测性学习状态坐标的相对权重，训练期校准latent距离，部署时不向规划器增加真实状态。
 
@@ -37,6 +37,8 @@ hide:
 | [OnlyAct: Extracting Action Representations from Foundation Models for World Models](../../../multimodal-models/2611.14420-onlyact/README.md) · [原始来源](https://arxiv.org/abs/2611.14420)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 在预训练V-JEPA2联合帧表征上，以场景交换正例及同视频非重叠hard negative适配动作几何，再冻结供世界模型使用。 | RS-JEPA用扫描视图和跨传感器邻域共识学习场景检索；OnlyAct希望保留动作、抑制场景。共享JEPA来源不代表优化目标相同。本地两者均只有独立公式/梯度L1，不提供图像检索或动作迁移能力排名。 |
 | [Personalized health coaching via coachable health age and counterfactual wearable trajectories](../../../multimodal-models/2611.08568-sensorwm-planning/README.md) · [原始来源](https://arxiv.org/abs/2611.08568)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、结果、负控与边界 | 动作条件可穿戴JEPA以状态依赖线性算子递推潜位移，再以未来status-quo对照、个体努力归一化收益排序外部候选。 | 完整论文用私有生理数据建模；本地只实现Eq55–56排序，不产生预测、不执行动作、不给医疗建议。与LeWAM实际学习策略/动力学及闭环不同，数学排序不等于世界模型控制或临床安全。 |
 | [Back to Pixels: Lifting Latent Video Diffusion into Pixel Space](../../../multimodal-models/2611.17336-pixvid/README.md) · [原始来源](https://arxiv.org/abs/2611.17336v1)<br>章节：背景与主要改动、核心机制与公式、论文离线与线上效果 | 以像素-latent线性对齐、时间校准和detailer把预训练视频DiT迁移到pixel空间，处理高分辨率细节与跨帧一致性；本轮仅资料收录。 | WOVEN用动作条件rollout形成转移监督并训练MLLM回答；PixVid改变生成器的表示与计算路径。更清晰的生成不自动意味着因果/动作正确，也不是选择题准确率。 |
+| [What Should World Models Forget? Stratified Retention for Continual Adaptation](../../../foundation-models/2610.03713-stratified-retention-protocol/README.md) · [原始来源](https://arxiv.org/abs/2610.03713v2)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 把世界知识按环境不变时间尺度分层，分别报告逐轮不变量保持和新episode修订延迟；原文是无新实证的评测提案，本地仅L0报告协议。 | WOVEN用(s,a,s&#x27;)视觉转移产生受控监督并训练MLLM；分层保持不生成训练数据、不指定适应算法。WOVEN的source_id隔离不代替逐轮不变量面板与变化后新episode查询，不能把两个分数直接排名。 |
+| [RSLiveBench-UAV: A Continually Evolving Vision-Language Benchmark for Aerial Spatial Intelligence](../../../multimodal-models/2611.14953-rslivebench-uav-protocol/README.md) · [原始来源](https://arxiv.org/abs/2611.14953v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果 | 以真实新UAV观察、四场景FIFO和答案禁运控制持续评测；本地只实现采集/发布时窗、日历月禁运、SC子计分及缺失感知层次聚合。 | WOVEN训练视觉状态转移推理并按scene/action/reasoning验证迁移；RSLiveBench-UAV重点是航空几何与持续刷新。时间新鲜、真实采集和scene-OOD是不同维度，二者分数不能直接比较。 |
 
 </div>
 
@@ -89,6 +91,18 @@ LeWAM在联合表征与动作flowmatching后，用冻结动力学rollout、动�
 视频生成器可以作为下游转移训练的数据源，但要分开验证视觉质量、动作条件忠实度、状态一致性和学习后的推理能力。PixVid完整14B/130万clip矩阵不运行；WOVEN既有小样本SFT负结果也不用于推断PixVid的收益。两者不构成本地联合系统。
 
 对照来源：[pixvid](../../../multimodal-models/2611.17336-pixvid/README.md) · [woven](../../../reproductions/2610.12417-woven/README.md)
+
+### 状态变化监督不等于“该改什么”的持续评测
+
+WOVEN按scene/action/reasoning控制训练与泛化，真实视觉状态转移进入response-only SFT；本地已有分组小样本负结果。Stratified Retention进一步区分旧事实过期与结构遗忘：应保持的不变量可纠错但不能退化，实例位置必须及时更新。要把二者连起来，需预先标注稳定性层、适应后逐轮probe和新episode修订轨迹；本轮没有这些模型实验，只有拒绝泄漏与删失混淆的协议。
+
+对照来源：[stratified-retention-protocol](../../../foundation-models/2610.03713-stratified-retention-protocol/README.md) · [woven](../../../reproductions/2610.12417-woven/README.md)
+
+### 新拍摄与新场景不是同一个泛化控制
+
+WOVEN源初始图分组防止多个动作/问题跨split，RSLiveBench-UAV要求每批图像在相邻release之间拍摄，并退役最早入窗场景。持续更新降低旧答案暴露但不自动消除场景偏差；反过来，生成场景的OOD测试不提供真实航空空间几何。小FIFO重放只检验时窗与分母，不证明任何VLM空间能力或完整benchmark已接入。
+
+对照来源：[rslivebench-uav-protocol](../../../multimodal-models/2611.14953-rslivebench-uav-protocol/README.md) · [woven](../../../reproductions/2610.12417-woven/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -184,9 +198,37 @@ LeWAM在联合表征与动作flowmatching后，用冻结动力学rollout、动�
 
     对照来源：[pixvid](../../../multimodal-models/2611.17336-pixvid/README.md) · [woven](../../../reproductions/2610.12417-woven/README.md)
 
+### WOVEN训练后某旧场景题准确率下降，能据此断言发生有害遗忘吗？ {#cross-nov18-stratified-retention-protocol}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。先判断旧答案是否仍真实；正确修订过期实例与忘掉不变量应分开。WOVEN现有分组accuracy也不提供逐轮差分保持证据，需要额外稳定面板、新episode变化查询和假修订对照。
+
+    **教学例子：** 椅子移动后不再选旧坐标可能是好事；若遮挡后认为椅子不存在才违反稳定知识。最终恢复正确也不能掩盖中途一次负翻转。
+
+    对照来源：[stratified-retention-protocol](../../../foundation-models/2610.03713-stratified-retention-protocol/README.md) · [woven](../../../reproductions/2610.12417-woven/README.md)
+
+### 用昨天新拍的同一停车场替换一个场景，是否同时完成了freshness和scene-OOD评测？ {#cross-nov18-rslivebench-uav-protocol}
+
+??? note "展开答案与例子"
+
+    **答案：** 不一定。可满足capture时窗与FIFO，但若地点、实体和视角类似，未必形成未见场景泛化。WOVEN的scene轴和UAV持续时间控制需各自按协议记录。
+
+    **教学例子：** 新拍同一停车场可算新观察；一个从未见过的生成餐厅可算场景OOD，却不代表真实UAV跨视角车辆几何。
+
+    对照来源：[rslivebench-uav-protocol](../../../multimodal-models/2611.14953-rslivebench-uav-protocol/README.md) · [woven](../../../reproductions/2610.12417-woven/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-18** · 补入RSLiveBench-UAV的L0发布/scorer协议，与WOVEN场景迁移分开；完整采集、标注和30模型高成本矩阵不复现。
+
+涉及：[rslivebench-uav-protocol](../../../multimodal-models/2611.14953-rslivebench-uav-protocol/README.md) · [woven](../../../reproductions/2610.12417-woven/README.md)
+
+**2026-11-18** · 补入分层保持的L0报告协议，与WOVEN视觉转移训练分轴比较；无原始完整实证，不虚构高成本训练或能力排名。
+
+涉及：[stratified-retention-protocol](../../../foundation-models/2610.03713-stratified-retention-protocol/README.md) · [woven](../../../reproductions/2610.12417-woven/README.md)
 
 **2026-11-15** · 补入固定版本方法、低成本组件或明确资料收录，分开原文结果、本地诊断及高成本不复现范围。
 
@@ -216,7 +258,7 @@ LeWAM在联合表征与动作flowmatching后，用冻结动力学rollout、动�
 
 覆盖 22 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 28 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 30 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -248,6 +290,8 @@ LeWAM在联合表征与动作flowmatching后，用冻结动力学rollout、动�
 - [OnlyAct: Extracting Action Representations from Foundation Models for World Models](../../../multimodal-models/2611.14420-onlyact/README.md)
 - [Personalized health coaching via coachable health age and counterfactual wearable trajectories](../../../multimodal-models/2611.08568-sensorwm-planning/README.md)
 - [Back to Pixels: Lifting Latent Video Diffusion into Pixel Space](../../../multimodal-models/2611.17336-pixvid/README.md)
+- [What Should World Models Forget? Stratified Retention for Continual Adaptation](../../../foundation-models/2610.03713-stratified-retention-protocol/README.md)
+- [RSLiveBench-UAV: A Continually Evolving Vision-Language Benchmark for Aerial Spatial Intelligence](../../../multimodal-models/2611.14953-rslivebench-uav-protocol/README.md)
 
 </details>
 

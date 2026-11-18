@@ -1,0 +1,220 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "foundation-models:stratified-retention-protocol": {
+      "questions": [
+        {
+          "id": "revise-is-not-forget",
+          "level": "basics",
+          "question": "椅子搬走后不再预测旧位置，为什么不应直接记成遗忘？",
+          "answer": "旧位置已经不真实，应修订；物体永久性等不变量仍应保持。论文按环境中知识为真的时间尺度分层，不把所有旧答案都当必须保留。",
+          "example": "教学例：门从开变关后预测关是正确更新；随后把“遮挡物仍存在”也忘掉才是不变量负翻转。",
+          "source_sections": [
+            "背景与主要改动"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "streak-and-censoring",
+          "level": "mechanism",
+          "question": "修订延迟为什么不能用第一次答对或最终准确率代替？",
+          "answer": "一次新事实偏好可能是瞬时抖动，需在新episode查询上连续超过已声明margin；延迟按相关区域观察次数计。未达门槛与临近结束无法判断的右删失必须分开。",
+          "example": "教学例：差值0.2、-0.2、0.2、0.2，margin0.1、连续2次时延迟为4次观察，不是1；只来得及观察1次的变化应单列censored。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "proposal-versus-woven",
+          "level": "comparison",
+          "question": "Stratified Retention和WOVEN都讨论状态变化，为什么不是两种可直接排名的训练算法？",
+          "answer": "WOVEN用视觉转移构造监督并训练MLLM；Stratified Retention提出应保留什么和怎样测修订，没有新训练算法或实证。评测协议可约束未来实验，但不能冒充训练收益。",
+          "example": "教学例：WOVEN的source_id分组防止相同初始图跨切分；分层保持还要求逐轮不变量probe和新episode修订轨迹，二者测的轴不同。",
+          "source_sections": [
+            "背景与主要改动",
+            "论文离线与线上效果",
+            "完整实验状态"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "probe-leakage-control",
+          "level": "implementation",
+          "question": "本地协议怎样避免把“记住刚见过的答案”当成修订能力？",
+          "answer": "固定probe ID必须与适应样本ID不重叠，ChangeTrace查询episode必须不同于适应episode。模块只读外部评测结果，没有模型或gold到策略的接口；人工轨迹只作L0反例。",
+          "example": "教学例：adaptation_ids含gravity时，gravity不能同时出现在held-out面板；query_episode=adaptation_episode也直接报错。",
+          "source_sections": [
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "foundation-models:tokenization-premium": {
+      "questions": [
+        {
+          "id": "aligned-content-first",
+          "level": "basics",
+          "question": "为什么tokenization premium必须先对齐相同条款再比较？",
+          "answer": "语义和长度不同会混入内容差异。论文使用共同27条款，按编号排序、空格拼接后一次编码，再把语言总token数除以英语总数；不是逐条款溢价均值。",
+          "example": "教学例：两条款英语token为10、30，另一语言为10、90，总数比是100/40=2.5；逐条比率平均(1+3)/2=2会改变结果。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "unknown-is-not-cheap",
+          "level": "mechanism",
+          "question": "把一个陌生文字段落压成一个UNK，为何不能算分词更高效？",
+          "answer": "UNK丢失了内容，低token数是覆盖失败而不是保留相同内容的低成本。作者把这类单元标n/a；原文未给通用阈值，本地保守地让任意UNK触发unavailable。",
+          "example": "教学例：英语40token，另一语言3token但其中2个UNK，不能展示0.075倍成本；接口返回premium=null并保留排除原因。",
+          "source_sections": [
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "cost-versus-xlgobench",
+          "level": "comparison",
+          "question": "这篇的多语言溢价与XLGoBench的跨语言能力差距能直接对应吗？",
+          "answer": "不能。溢价测等内容输入长度/计费成本；XLGoBench固定算法实例与复杂度，比较不同语言任务能力。token变多可能影响预算，但不是错误率或推理能力的直接测量。",
+          "example": "教学例：语言A使用2倍token，不代表最短路正确率必为英语一半；需相同实例、翻译核验与预算控制才能研究相关性。",
+          "source_sections": [
+            "背景与主要改动",
+            "论文离线与线上效果",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "abstention-denominators",
+          "level": "implementation",
+          "question": "怎样防止只回答少数高置信题美化校准与能效？",
+          "answer": "同时报告覆盖率和选择性风险，ECE保留全部样本；能量分母覆盖完整评测，包括拒答题。没有回答时risk为不可用而非0，correctness只在独立scorer内使用。",
+          "example": "教学例：4题只有1题被回答且正确，应展示coverage0.25；不能把100%已答准确率当全题准确率，或只计算这1题的能量。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "multimodal-models:rslivebench-uav-protocol": {
+      "questions": [
+        {
+          "id": "scenes-not-questions",
+          "level": "basics",
+          "question": "四场景每轮换一个，为什么不能说固定更新25%的题或分数？",
+          "answer": "FIFO替换最早入窗场景，25%只对场景数成立。场景题量、任务组成和四组宏平均权重不同，不能把场景比例直接当题量或分数比例。",
+          "example": "教学例：四场景分别有10、20、30、40题，退役10题场景只移除10%旧题；最终四能力组仍各占25%。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "calendar-and-retirement",
+          "level": "mechanism",
+          "question": "答案为什么不能在发布120天后直接公开？",
+          "answer": "协议要求场景已退役，且自首次发布至少经过4个日历月，取两者较晚时间。日历月不是固定120天；未退役时即使很久也不能公开。",
+          "example": "教学例：1月31日首发、2月退役，最早到5月31日；5月30日仍禁运。若6月1日才退役，则需等6月1日。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "freshness-versus-woven",
+          "level": "comparison",
+          "question": "RSLiveBench-UAV的freshness与WOVEN的scene-OOD有什么区别？",
+          "answer": "前者用实地采集时间和滚动退役控制新观察与答案暴露；后者按视觉转移监督的场景轴划分泛化评测。时间新鲜不能代替跨场景泛化，生成场景的OOD也不能证明真实新采集无污染。",
+          "example": "教学例：昨天新拍但一直同一停车场可满足采集时窗，却未必测新场景泛化；WOVEN未见过餐厅场景也不等于它有UAV几何。",
+          "source_sections": [
+            "背景与主要改动",
+            "论文离线与线上效果",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "missing-is-not-parse-failure",
+          "level": "implementation",
+          "question": "模型没跑的题和返回格式错误的题为什么不能都当0分？",
+          "answer": "格式错误是已观察失败，必须留在分母记0；没跑的题没有观察，官方完整得分应不可用。聚合先component再task再四组，不能按题数直接平均。",
+          "example": "教学例：四组得分100、50、解析失败0、80时宏平均57.5；若最后一组根本没跑，则overall=null而不是把它补0。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "multimodal-models:multimodal-library-protocol": {
+      "questions": [
+        {
+          "id": "maxsim-not-mean",
+          "level": "basics",
+          "question": "页面检索为什么要逐query token找最相关patch，而不是先平均整页？",
+          "answer": "late interaction让每个查询token匹配自己的最佳页面token后求和，能保留不同局部证据。整页平均可能把小图表或公式稀释，但局部得分仍不是相关性概率。",
+          "example": "教学例：查询两token向量分别是[1,0]和[0,1]，页面各有一个匹配patch，余弦MaxSim总和为2；不能将其读成200%正确率。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "rank-and-unretrieved-labels",
+          "level": "mechanism",
+          "question": "AP@5为何要看次序，并保留没检索出的已知相关页？",
+          "answer": "每个相关命中按其所在排名的precision加权，再除以全部已知相关页数。相同命中数但更靠后时AP更低；删掉没命中的相关页会夸大召回与AP。",
+          "example": "教学例：相关页a、c、z，排名x,a,b,c,y时AP@5=(1/2+2/4)/3=1/3，Recall@5=2/3；不能把分母改成2。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "clip-versus-page-tokens",
+          "level": "comparison",
+          "question": "与CLIP双塔相比，这里新增的是训练目标还是检索粒度？",
+          "answer": "论文沿用ColPali多向量与late interaction，并比较数据库距离和索引配置；并未新训CLIP式模型。CLIP双塔对比目标学习全局对齐，页面token粒度读出与其训练机制不能互换。",
+          "example": "教学例：本地CLIP的Fashion-MNIST小实验有真实视觉负控；数字馆小向量MaxSim通过只证明算术，不证明找到教材细图或更高真实检索率。",
+          "source_sections": [
+            "背景与主要改动",
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "throughput-scope",
+          "level": "implementation",
+          "question": "为何不能把Table VII的22k QPS直接当包含模型推理的数字馆吞吐？",
+          "answer": "原文预编码数据库测试与后文端到端描述冲突，平均延迟也不支持随意解释。接口必须写清是否含encoding，QPS按请求数除以实测总wall time，并发时不是平均延迟倒数。",
+          "example": "教学例：3个请求总wall time0.05秒得到60QPS，即使平均单请求20ms也不能套倒数得50；toy timing不是Qdrant实跑。",
+          "source_sections": [
+            "论文离线与线上效果",
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-18"
+        }
+      ]
+    }
+  }
+}

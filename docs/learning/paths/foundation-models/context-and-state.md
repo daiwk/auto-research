@@ -7,7 +7,7 @@ hide:
 
 # 长上下文：注意力、递归状态与记忆
 
-[基础模型](index.md) / 156 个问题 · 39 篇论文
+[基础模型](index.md) / 160 个问题 · 40 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">156 个问题 · 39 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">160 个问题 · 40 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:adindex" data-paper-title="ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation 基础模型 Nanjing University / Alibaba Group 2026-11-07 DSA 为每个 query 独立扫描整个因果前缀来选 Top-K。ADIndex 发现相邻 query 的候选有层相关的重叠：先校准各层组大小与候选库容量，再训练一个较少 head 的组索引器。组内先共享一次全前缀扫描，随后原 DSA 仍逐 query 精排，并补入 anchor 后新可见的 token；不是把所有 query 的最终索引强行设为相同。 成本过高，不复现（审查 DONE）。诊断只在 4 个 query、32 个历史 key 上执行 64 步学生优化，检查训练 KL、冻结梯度、因果索引、新可见 token 和回退分支。L1 机制组件：小张量组索引器与候选精排，不是 DeepSeek/GLM 长文能力、SGLang serving 或加速比复现。GroupIndexer 接受外部提供的归一化 query latent、hidden 与严格 anchor 可见的 keys；本地冻结这些输入。teacher_distribution、forward_kl、refine_indices 与 union_capacity 对应教师、蒸馏、精排和容量统计。  注意力与长上下文 稀疏索引与共享候选库 基础模型 长上下文：注意力、递归状态与记忆 ADIndex 共享候选库，是不是让组内所有 query 用相同最终 Top-K？ 不是。组索引器只共享 anchor 可见历史上的候选库；每个 query 还会补入 anchor 后自己新可见的 token，再用原 DSA 分数独立精排。共享的是昂贵全前缀扫描，不是最终注意力位置。 教学例：anchor=31、query=34，共享库可能都是0到31里的位置，但32、33、34必须补进候选，最终Top-K仍可与query=32不同。 2026-11-11">
@@ -239,6 +239,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>教学例：最高分块含3个历史token，K=1时仍取全部3个；另加当前token。若修改未来key并重建索引，早期选集可能改变，因此不能用支持为零宣称所有未来影响都被排除。</p>
 <p class="ar-learning-sources">依据：检查与负控、成本判断与复现边界；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.04313">原论文</a> · <a href="../../../../foundation-models/2611.04313-semantic-block-sparse-attention/">实现解读</a> · <a href="#qa-1a5d81bbbe5d186d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:hvmap" data-paper-title="Federated Vector Retrieval across Heterogeneous VectorDBs" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Federated Vector Retrieval across Heterogeneous VectorDBs 基础模型 Seoul National University 2026-11-01 异构向量库由不同编码器生成，查询不能直接拿同一向量跨库检索。HVMap 先在 hub 空间编码一次，再映射到其他空间；每库独立取 K 个候选，映射候选后联合重排。最终 K 个结果可以全来自同一库，不强制均分配额。§3.3—3.5 成本过高，不复现（审查 DONE）；小张量诊断不代表语义检索能力，不接入 Evolve 晋级。L1 机制组件：实现映射网络、fuzzy contrastive loss、SCORE2 和 hub/spoke 路径。小张量诊断不代表语义检索能力，不接入 Evolve 晋级。HVMap、fuzzy_contrastive_loss、score2、map_via_hub 与 federated_topk 分别实现映射、损失、双空间分数、星形路径和最终联合排序。输入是固定种子的随机小张量与显式排序例子；未下载作者数据，未训练语义编码器。  检索与知识增强 异构向量空间与联合检索 基础模型 长上下文：注意力、递归状态与记忆 HVMap为什么不能直接拿一个查询向量搜索所有库？ 不同编码器产生的维度和语义坐标系不兼容。HVMap在hub编码一次后映射查询，每库独立召回，再把候选映射到另一空间重排；并非把向量补零就能跨库可比。 教学例：同样的二维坐标在两个旋转空间代表不同语义，直接点积会改变最近邻。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-hvmap-232e24aa" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-e375487c2b67fc49">HVMap为什么不能直接拿一个查询向量搜索所有库？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ahvmap">Federated Vector Retrieval across Heterogeneous VectorDBs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Seoul National University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同编码器产生的维度和语义坐标系不兼容。HVMap在hub编码一次后映射查询，每库独立召回，再把候选映射到另一空间重排；并非把向量补零就能跨库可比。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同样的二维坐标在两个旋转空间代表不同语义，直接点积会改变最近邻。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.01514v2">原论文</a> · <a href="../../../../foundation-models/2611.01514-hvmap/">实现解读</a> · <a href="#qa-e375487c2b67fc49">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:hvmap" data-paper-title="Federated Vector Retrieval across Heterogeneous VectorDBs" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Federated Vector Retrieval across Heterogeneous VectorDBs 基础模型 Seoul National University 2026-11-01 异构向量库由不同编码器生成，查询不能直接拿同一向量跨库检索。HVMap 先在 hub 空间编码一次，再映射到其他空间；每库独立取 K 个候选，映射候选后联合重排。最终 K 个结果可以全来自同一库，不强制均分配额。§3.3—3.5 成本过高，不复现（审查 DONE）；小张量诊断不代表语义检索能力，不接入 Evolve 晋级。L1 机制组件：实现映射网络、fuzzy contrastive loss、SCORE2 和 hub/spoke 路径。小张量诊断不代表语义检索能力，不接入 Evolve 晋级。HVMap、fuzzy_contrastive_loss、score2、map_via_hub 与 federated_topk 分别实现映射、损失、双空间分数、星形路径和最终联合排序。输入是固定种子的随机小张量与显式排序例子；未下载作者数据，未训练语义编码器。  检索与知识增强 异构向量空间与联合检索 基础模型 长上下文：注意力、递归状态与记忆 fuzzy contrastive loss为什么不能替换为mapped-to-mapped RKD？ 原式比较目标间距离与映射结果到原始目标的距离；对角项锚定每个配对的绝对对齐。整体旋转或取负保留mapped之间距离，RKD可能为零，但与原始目标不对齐时fuzzy loss非零。 教学例：目标是单位正交基，映射结果整体取负；RKD为0，原式sum loss为12。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-5dc746bbe2396b41">fuzzy contrastive loss为什么不能替换为mapped-to-mapped RKD？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ahvmap">Federated Vector Retrieval across Heterogeneous VectorDBs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Seoul National University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>原式比较目标间距离与映射结果到原始目标的距离；对角项锚定每个配对的绝对对齐。整体旋转或取负保留mapped之间距离，RKD可能为零，但与原始目标不对齐时fuzzy loss非零。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：目标是单位正交基，映射结果整体取负；RKD为0，原式sum loss为12。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.01514v2">原论文</a> · <a href="../../../../foundation-models/2611.01514-hvmap/">实现解读</a> · <a href="#qa-5dc746bbe2396b41">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:hvmap" data-paper-title="Federated Vector Retrieval across Heterogeneous VectorDBs" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Federated Vector Retrieval across Heterogeneous VectorDBs 基础模型 Seoul National University 2026-11-01 异构向量库由不同编码器生成，查询不能直接拿同一向量跨库检索。HVMap 先在 hub 空间编码一次，再映射到其他空间；每库独立取 K 个候选，映射候选后联合重排。最终 K 个结果可以全来自同一库，不强制均分配额。§3.3—3.5 成本过高，不复现（审查 DONE）；小张量诊断不代表语义检索能力，不接入 Evolve 晋级。L1 机制组件：实现映射网络、fuzzy contrastive loss、SCORE2 和 hub/spoke 路径。小张量诊断不代表语义检索能力，不接入 Evolve 晋级。HVMap、fuzzy_contrastive_loss、score2、map_via_hub 与 federated_topk 分别实现映射、损失、双空间分数、星形路径和最终联合排序。输入是固定种子的随机小张量与显式排序例子；未下载作者数据，未训练语义编码器。  检索与知识增强 异构向量空间与联合检索 基础模型 长上下文：注意力、递归状态与记忆 HVMap与ECG-RAG都涉及表示转换，目标相同吗？ 不同。HVMap对齐异构库、保留各库native分数并联合重排；ECG-RAG复用同一文档表示服务检索与生成压缩。前者不产生答案，后者仍需decoder和联合训练；局部算子都不能代表完整RAG能力。 教学例：HVMap返回跨库候选排序，不会因此获得ECG压缩context并生成答案的路径。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-ef792332a756e29b">HVMap与ECG-RAG都涉及表示转换，目标相同吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ahvmap">Federated Vector Retrieval across Heterogeneous VectorDBs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Seoul National University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不同。HVMap对齐异构库、保留各库native分数并联合重排；ECG-RAG复用同一文档表示服务检索与生成压缩。前者不产生答案，后者仍需decoder和联合训练；局部算子都不能代表完整RAG能力。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：HVMap返回跨库候选排序，不会因此获得ECG压缩context并生成答案的路径。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.01514v2">原论文</a> · <a href="../../../../foundation-models/2611.01514-hvmap/">实现解读</a> · <a href="#qa-ef792332a756e29b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:hvmap" data-paper-title="Federated Vector Retrieval across Heterogeneous VectorDBs" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Federated Vector Retrieval across Heterogeneous VectorDBs 基础模型 Seoul National University 2026-11-01 异构向量库由不同编码器生成，查询不能直接拿同一向量跨库检索。HVMap 先在 hub 空间编码一次，再映射到其他空间；每库独立取 K 个候选，映射候选后联合重排。最终 K 个结果可以全来自同一库，不强制均分配额。§3.3—3.5 成本过高，不复现（审查 DONE）；小张量诊断不代表语义检索能力，不接入 Evolve 晋级。L1 机制组件：实现映射网络、fuzzy contrastive loss、SCORE2 和 hub/spoke 路径。小张量诊断不代表语义检索能力，不接入 Evolve 晋级。HVMap、fuzzy_contrastive_loss、score2、map_via_hub 与 federated_topk 分别实现映射、损失、双空间分数、星形路径和最终联合排序。输入是固定种子的随机小张量与显式排序例子；未下载作者数据，未训练语义编码器。  检索与知识增强 异构向量空间与联合检索 基础模型 长上下文：注意力、递归状态与记忆 SCORE2里0.7权重和最终K配额应怎样处理？ 0.7作用于候选所属库的native空间，不总是hub；另0.3为映射空间。每库先取K个，最后联合取K，不强制各库平分。多spoke经hub最多两次映射，原生向量不能被原地覆盖。 教学例：库A候选分数.9/.8，库B为.2/.1，K=2时两项都应来自A。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-ea075b65dff85e8d">SCORE2里0.7权重和最终K配额应怎样处理？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Ahvmap">Federated Vector Retrieval across Heterogeneous VectorDBs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Seoul National University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>0.7作用于候选所属库的native空间，不总是hub；另0.3为映射空间。每库先取K个，最后联合取K，不强制各库平分。多spoke经hub最多两次映射，原生向量不能被原地覆盖。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：库A候选分数.9/.8，库B为.2/.1，K=2时两项都应来自A。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.01514v2">原论文</a> · <a href="../../../../foundation-models/2611.01514-hvmap/">实现解读</a> · <a href="#qa-ea075b65dff85e8d">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:merlin" data-paper-title="Multi-State Linear Attention with Generalized Second-Order Routing" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Multi-State Linear Attention with Generalized Second-Order Routing 基础模型 Princeton University 2026-10-27 多状态线性注意力把上下文切成段，每段保留一个压缩状态。查询先读取多个状态，再加权汇总。只用位置或每段 key 均值做路由，会忽略同段 key 与查询对齐程度的分布：两个均值相同的段，可能只有一个含特别匹配的 key。MERLIN 在独立、较小维度的 routing 投影上保存 key 的均值和原始二阶矩，恢复每个查询的对齐均值及方差，再把两路 softmax 分布按门控混合。它改变的是段级 readout 的汇总，不是用二阶矩替换原模型的递归记忆，也不是精确还原完整 softmax 注意力。 完整训练与长上下文评测：成本过高，不复现（审查 DONE）；本地状态：L1 路由公式组件，diagnostic only。只验证由外部 routing keys / queries 和分段 readout 计算权重，不实现完整线性注意力层或 LLM。完整训练与长上下文评测：成本过高，不复现（审查 DONE）；不接入 evolve 晋级。组件接受等长分段的 routing keys，计算矩统计、对齐分数、两路权重和外部 readout 汇总。  注意力与长上下文 多状态线性注意力与段级路由 基础模型 长上下文：注意力、递归状态与记忆 为什么分段 key 均值相同，多状态注意力仍需要区别对待？ 均值只描述平均对齐，不能区分段内是否存在很强但被其他 keys 抵消的匹配。MERLIN额外保存原始二阶矩，从中计算特定query方向的对齐方差，再与均值路由混合。这是增加段级路由信息，不是恢复每个token的完整attention。 教学例子：一维两段keys分别为[-2,2]与[0,0]，均值都是0；query为1时，前者对齐方差4，后者0，均值路由看不出差别。 2026-10-30">

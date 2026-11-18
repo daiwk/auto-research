@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-18",
+  "figures": [
+    {
+      "file": "paper-figure-01.png",
+      "paper_id": "2611.15700",
+      "version": "v1",
+      "figure": 2,
+      "caption": "Answer-blind retrieval evidence, ordered attribution and human-guided harness training.",
+      "source_url": "https://arxiv.org/pdf/2611.15700v1#page=5",
+      "paper_url": "https://arxiv.org/abs/2611.15700v1",
+      "source_kind": "fixed_version_pdf_crop_rendered_png",
+      "source_sha256": "e37850c855a8e7e22860b32520c25dea1dc5192b5d87499c496d2b03de9fa806",
+      "asset_sha256": "62cb4181b786040bbb5d02c3b037bbc0555bc98bcf7b37296e2d61c54f872ce3",
+      "image_sha256": "62cb4181b786040bbb5d02c3b037bbc0555bc98bcf7b37296e2d61c54f872ce3",
+      "page": 5,
+      "crop_points": [
+        46,
+        45,
+        565,
+        530
+      ],
+      "render_dpi": 144,
+      "caption_included": true,
+      "scientific_content_modified": false,
+      "visual_review_done": true,
+      "attribution": "Copyright belongs to the original authors. Original paper crop used for research explanation, not local experimental evidence.",
+      "license": "See original arXiv source; this repository grants no new license."
+    }
+  ]
+}

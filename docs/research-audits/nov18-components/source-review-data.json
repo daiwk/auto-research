@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-18",
+  "scope": "Four previously accepted low-cost CPU data/evaluation protocols from November 15 closure; no new scan or watermark claim.",
+  "coverage_complete": false,
+  "watermark_change_claimed": false,
+  "accepted": [
+    {
+      "arxiv_id": "2610.03713",
+      "identity": "foundation-models:stratified-retention-protocol",
+      "reviewed_version": "v2",
+      "first_published_at": "2026-10-02T17:58:14Z",
+      "first_author": "Nishit Anand",
+      "first_author_affiliation": "University of Maryland, College Park",
+      "reviewed_source_url": "https://arxiv.org/html/2610.03713v2",
+      "source_sha256": "d1bb92c4fe02525b0d32d883217af944049fa01a9c0e61184b0fadc6777170ab",
+      "sections_read": [
+        "Sections 2–6",
+        "Appendices B–D",
+        "PDF pp1–3, Figure 1 and Table 1"
+      ],
+      "evaluation_tier": "l0_interface",
+      "implementation_status": "component_only",
+      "requires_gpu_validation": false,
+      "code_verification": "固定v2未给作者实现仓库；未查到单独发布，不把引用代码当作者实现。",
+      "cost_resolution": "No new empirical experiment exists in the source; do not invent or label one as high-cost. Only CPU report protocol implemented.",
+      "full_experiment_status": "not_applicable_no_original_experiment",
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "local_module": "src/auto_research/foundation_models/stratified_retention_protocol.py",
+      "unreproduced_scope": "A conceptual differential-retention proposal with four invariance strata and held-out probe/revision-latency requirements; no new empirical campaign."
+    },
+    {
+      "arxiv_id": "2611.13441",
+      "identity": "foundation-models:tokenization-premium",
+      "reviewed_version": "v1",
+      "first_published_at": "2026-09-22T15:08:28.012501Z",
+      "first_author": "Paulo Câmara",
+      "first_author_affiliation": "LUA Vision Tecnologia",
+      "reviewed_source_url": "https://arxiv.org/pdf/2611.13441v1",
+      "source_sha256": "02fabbe9f6a65e756f76db235fc8bc0250d89049621c8ada1644bd90ead55f3f",
+      "sections_read": [
+        "Sections 3.1–3.3",
+        "Sections 4–7",
+        "Table 1",
+        "Official Zenodo v1.0 metadata and measurement script"
+      ],
+      "evaluation_tier": "l1_mechanism",
+      "implementation_status": "component_only",
+      "requires_gpu_validation": false,
+      "code_verification": "官方Zenodo data.zip含measure_udhr_31_languages.py和results.json，CC BY 4.0；MD5 e624311cbfc5df3138003b9b44499f24。专有架构未开源。",
+      "cost_resolution": "The public tokenizer campaign is explicitly outside this bounded scope, not arbitrarily called high-cost. Proprietary architecture/internal tasks are unavailable; full model experiment not reproduced, review DONE.",
+      "full_experiment_status": "not_reproduced_private_architecture_and_scope",
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "local_module": "src/auto_research/foundation_models/tokenization_premium.py",
+      "unreproduced_scope": "Public 31-language × 7-tokenizer measurement on 27 UDHR articles; separate preliminary results use a proprietary architecture and internal tasks."
+    },
+    {
+      "arxiv_id": "2611.14953",
+      "identity": "multimodal-models:rslivebench-uav-protocol",
+      "reviewed_version": "v1",
+      "first_published_at": "2026-11-11T02:59:53Z",
+      "first_author": "Yue Zhou",
+      "first_author_affiliation": "East China Normal University",
+      "reviewed_source_url": "https://arxiv.org/html/2611.14953v1",
+      "source_sha256": "69048f43b46185d460e48dda9f4206c9c85a6292983e90f96b67e1d21f9dcd0f",
+      "sections_read": [
+        "Sections 3–5",
+        "Release/rolling-window and answer-disclosure protocol",
+        "Deterministic scorer and aggregation appendix",
+        "Figure 1/PDF p2"
+      ],
+      "evaluation_tier": "l0_interface",
+      "implementation_status": "component_only",
+      "requires_gpu_validation": false,
+      "code_verification": "固定v1仅给https://rslivebench.space并写will release，未给已发布作者scorer仓库；不把引用的第三方模型代码算作者代码。",
+      "cost_resolution": "Acquisition and cross-view human annotation plus the 30-model matrix exceed a short single-A100/A30 budget; complete public benchmark/scorers not released in fixed v1. No flights/training/model downloads attempted.",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "local_module": "src/auto_research/multimodal/rslivebench_uav_protocol.py",
+      "unreproduced_scope": "102 acquired UAV scenes, Start-10 with 35,491 questions/17 tasks, human entity/geometric verification, 30-model evaluation, recurring scene replacement."
+    },
+    {
+      "arxiv_id": "2611.17726",
+      "identity": "multimodal-models:multimodal-library-protocol",
+      "reviewed_version": "v1",
+      "first_published_at": "2026-11-13T04:16:25Z",
+      "first_author": "Krishna Priya",
+      "first_author_affiliation": "Indiana University",
+      "reviewed_source_url": "https://arxiv.org/html/2611.17726v1",
+      "source_sha256": "50e486fc9cfab069edcdfe3f7ad260bdfbc6cc72bfca0c88e1d92e331033a64b",
+      "sections_read": [
+        "Sections III–V",
+        "Tables II–VII",
+        "Figure 1/PDF p6",
+        "75-query/subset judgment limitations"
+      ],
+      "evaluation_tier": "l0_interface",
+      "implementation_status": "component_only",
+      "requires_gpu_validation": false,
+      "code_verification": "固定v1未给配套作者代码仓库；ColPali/Qdrant是依赖，不是完整实验代码开源证明。",
+      "cost_resolution": "Full encoding/index/concurrency campaign exceeds this short component budget; full textbooks/relevance judgments unavailable as accompanying release. Only external-vector/scorer/timing protocol implemented. Paper performance scope conflicts explicitly retained.",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "local_module": "src/auto_research/multimodal/library_retrieval_protocol.py",
+      "unreproduced_scope": "4,158 textbook pages and over four million patch vectors; ColPali/PaliGemma-3B encoding, independent Qdrant metric collections, 75 manually judged queries and repeated concurrency matrices."
+    }
+  ],
+  "specific_corrections": [
+    "Tokenization Premium first public Zenodo v1.0 is September 22, not the later arXiv upload. Official created UTC is retained separately from date-precision publication_date; no exact publication time is invented.",
+    "The 4KB official Zenodo archive contains author measurement source and raw results; proprietary architecture is separate. Tokenization joins sorted common articles before encoding once.",
+    "Stratified Retention is a proposal without new empirical results; no original full experiment is invented or mislabeled high-cost.",
+    "Digital library Section V-B versus V-D and Table VII conflict on database-only/end-to-end scope; 100,000 workers versus one million is not silently normalized. No throughput capability claim made locally."
+  ],
+  "local_results": "Not populated from expected values. Root owns unified real three-seed execution and receipt generation; per-module diagnostics remain L0/L1, not model capability evidence."
+}

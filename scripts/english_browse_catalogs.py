@@ -71,6 +71,23 @@ def _label_map(raw: str) -> dict[str, str]:
 
 
 _LABELS = _label_map("""
+偏好评测与校准 = Preference evaluation and calibration
+检索归因与受控修复 = Retrieval attribution and governed repair
+独立校验与部署门 = Independent checks and deployment gates
+权重空间编程与审计 = Weight-space programming and audits
+持续适应与评测协议 = Continual adaptation and evaluation protocols
+多语言tokenization与评测成本 = Multilingual tokenization and evaluation cost
+推理测量与证据协议 = Inference measurement and evidence protocols
+模型路由与级联预算 = Model routing and cascade budgets
+语音事件与人类误报评测 = Speech events and human false-positive evaluation
+持续航空空间评测 = Continual aerial spatial evaluation
+页面检索与系统测量 = Page retrieval and system measurement
+执行框架与自改进 = Execution frameworks and self-improvement
+偏好与对齐 = Preferences and alignment
+音频与多模态接口 = Audio and multimodal interfaces
+多模态评测与数据 = Multimodal evaluation and data
+跨模态对齐与检索 = Cross-modal alignment and retrieval
+L0 CPU 协议；不运行邮箱模型，完整实验不复现 = L0 CPU protocol; no inbox model; full experiments not reproduced
 生成式推荐与语义ID = Generative recommendation and semantic IDs
 评测与持续学习 = Evaluation and continual learning
 工具与协作 = Tools and collaboration

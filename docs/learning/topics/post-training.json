@@ -45,7 +45,9 @@
         "post-training:dpo",
         "post-training:slic-hf",
         "post-training:rrhf",
-        "post-training:constitutional-ai"
+        "post-training:constitutional-ai",
+        "post-training:luce-similarity-audit",
+        "post-training:calibrated-judges-protocol"
       ]
     },
     {

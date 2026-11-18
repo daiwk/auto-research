@@ -1,0 +1,16 @@
+{
+  "paper_url": "https://arxiv.org/abs/2611.15911v1",
+  "source_url": "https://arxiv.org/pdf/2611.15911v1#page=13",
+  "figure": "Figure 1",
+  "caption": "Sensitivity of the cost-reduction factor to price ratio and frontier-tier traffic share under the equal-per-request-cost model.",
+  "source_format": "PDF rendered crop including original caption",
+  "image": "paper-figure-01.png",
+  "asset_sha256": "5257199aefb790af0102718ad7112972470989867b9f7ef2feb7947b41f0f10c",
+  "image_sha256": "5257199aefb790af0102718ad7112972470989867b9f7ef2feb7947b41f0f10c",
+  "source_pdf_sha256": "9e79637de2d0b6c0e5050ac48e437e0c77bbb8f889073b3270e7b792f2024918",
+  "pdf_clip_points": [65, 65, 545, 374],
+  "render_scale": 2,
+  "copyright": "Copyright remains with the authors; arXiv perpetual non-exclusive license, no open redistribution license asserted",
+  "description": "Original scientific figure and caption; no redrawing. Read alongside the paper's token-skew correction; not local savings measurements.",
+  "visually_verified": true
+}

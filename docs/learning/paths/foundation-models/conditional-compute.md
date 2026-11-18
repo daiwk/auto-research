@@ -7,7 +7,7 @@ hide:
 
 # 按需计算：专家、弹性深宽与查表记忆
 
-[基础模型](index.md) / 104 个问题 · 26 篇论文
+[基础模型](index.md) / 108 个问题 · 27 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">104 个问题 · 26 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">108 个问题 · 27 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:smart-model-routing" data-paper-title="Smart Model Routing for Order-of-Magnitude LLM Cost Reduction" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/conditional-compute" data-search="Smart Model Routing for Order-of-Magnitude LLM Cost Reduction 基础模型 Independent Researcher 2026-11-11 本文研究应用层在多个完整模型/endpoint 之间选路，不是 MoE 内部 token→expert，也不是同一模型副本的负载均衡。核心问题是：在可接受质量下，让每个请求尽量使用便宜模型，同时计入 router、checker、被拒绝的小模型调用和长难题的额外 token 成本。作者区分 calibration 与 discrimination：所有请求都预测“便宜模型 90% 正确”可以完全校准，却无法辨别哪一条会错。 高成本完整矩阵标注不复现。状态：CPU L1 成本/策略算术组件，diagnostic only；不是训练好的 router，不发送真实模型请求。“10×”是条件化分析，不是本地或生产收益。完整模型/API 与跨任务实验不运行；高成本完整矩阵标注不复现。本地只实现影子价格 argmin、输入/输出 token 计费、frontier 最小份额、token 偏斜修正、K 阶段 cascade 成本、严格两阶段 breakeven 和条件质量求和。terminal stage 必须接受；负成本、无穷值、越界概率会拒绝。影子价格不由 test 选择，接口不接收 gold 答案。  推理与系统效率 模型选择与条件计算 基础模型 按需计算：专家、弹性深宽与查表记忆 Smart Model Routing和Switch Transformer的router是同一种东西吗？ 不是。本文在应用层选择完整模型endpoint，支付router/checker和每次推理费用；Switch在单个网络内部把token送给专家，关心激活参数和专家负载。两个层级的成本和质量约束不能混用。 教学例：选小LLM还是frontier是外部路由；同一个LLM中选expert3不等于省掉整个frontier API调用。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 按需计算：专家、弹性深宽与查表记忆</a></p>
+<span id="paper-foundation-models-smart-model-routing-6b2b5ae9" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-06e81a335b49870e">Smart Model Routing和Switch Transformer的router是同一种东西吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asmart-model-routing">Smart Model Routing for Order-of-Magnitude LLM Cost Reduction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Independent Researcher</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。本文在应用层选择完整模型endpoint，支付router/checker和每次推理费用；Switch在单个网络内部把token送给专家，关心激活参数和专家负载。两个层级的成本和质量约束不能混用。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：选小LLM还是frontier是外部路由；同一个LLM中选expert3不等于省掉整个frontier API调用。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、架构与流程；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.15911v1">原论文</a> · <a href="../../../../foundation-models/2611.15911-smart-model-routing/">实现解读</a> · <a href="#qa-06e81a335b49870e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:smart-model-routing" data-paper-title="Smart Model Routing for Order-of-Magnitude LLM Cost Reduction" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/conditional-compute" data-search="Smart Model Routing for Order-of-Magnitude LLM Cost Reduction 基础模型 Independent Researcher 2026-11-11 本文研究应用层在多个完整模型/endpoint 之间选路，不是 MoE 内部 token→expert，也不是同一模型副本的负载均衡。核心问题是：在可接受质量下，让每个请求尽量使用便宜模型，同时计入 router、checker、被拒绝的小模型调用和长难题的额外 token 成本。作者区分 calibration 与 discrimination：所有请求都预测“便宜模型 90% 正确”可以完全校准，却无法辨别哪一条会错。 高成本完整矩阵标注不复现。状态：CPU L1 成本/策略算术组件，diagnostic only；不是训练好的 router，不发送真实模型请求。“10×”是条件化分析，不是本地或生产收益。完整模型/API 与跨任务实验不运行；高成本完整矩阵标注不复现。本地只实现影子价格 argmin、输入/输出 token 计费、frontier 最小份额、token 偏斜修正、K 阶段 cascade 成本、严格两阶段 breakeven 和条件质量求和。terminal stage 必须接受；负成本、无穷值、越界概率会拒绝。影子价格不由 test 选择，接口不接收 gold 答案。  推理与系统效率 模型选择与条件计算 基础模型 按需计算：专家、弹性深宽与查表记忆 cascade只要有便宜的第一阶段就一定省钱吗？ 不一定。第一阶段无论接受与否都已付费，checker和router也有开销。两层严格省钱需要接受率大于(cheap+checker+router)/frontier，等号只是打平；K层需要比较完整路径而不是只看相邻阶段。 教学例：cheap=1、checker=1、router=0.5、frontier=10，接受率须严格大于0.25。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 按需计算：专家、弹性深宽与查表记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-994b1d36347196b1">cascade只要有便宜的第一阶段就一定省钱吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asmart-model-routing">Smart Model Routing for Order-of-Magnitude LLM Cost Reduction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Independent Researcher</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不一定。第一阶段无论接受与否都已付费，checker和router也有开销。两层严格省钱需要接受率大于(cheap+checker+router)/frontier，等号只是打平；K层需要比较完整路径而不是只看相邻阶段。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：cheap=1、checker=1、router=0.5、frontier=10，接受率须严格大于0.25。</p>
+<p class="ar-learning-sources">依据：核心公式、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.15911v1">原论文</a> · <a href="../../../../foundation-models/2611.15911-smart-model-routing/">实现解读</a> · <a href="#qa-994b1d36347196b1">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:smart-model-routing" data-paper-title="Smart Model Routing for Order-of-Magnitude LLM Cost Reduction" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/conditional-compute" data-search="Smart Model Routing for Order-of-Magnitude LLM Cost Reduction 基础模型 Independent Researcher 2026-11-11 本文研究应用层在多个完整模型/endpoint 之间选路，不是 MoE 内部 token→expert，也不是同一模型副本的负载均衡。核心问题是：在可接受质量下，让每个请求尽量使用便宜模型，同时计入 router、checker、被拒绝的小模型调用和长难题的额外 token 成本。作者区分 calibration 与 discrimination：所有请求都预测“便宜模型 90% 正确”可以完全校准，却无法辨别哪一条会错。 高成本完整矩阵标注不复现。状态：CPU L1 成本/策略算术组件，diagnostic only；不是训练好的 router，不发送真实模型请求。“10×”是条件化分析，不是本地或生产收益。完整模型/API 与跨任务实验不运行；高成本完整矩阵标注不复现。本地只实现影子价格 argmin、输入/输出 token 计费、frontier 最小份额、token 偏斜修正、K 阶段 cascade 成本、严格两阶段 breakeven 和条件质量求和。terminal stage 必须接受；负成本、无穷值、越界概率会拒绝。影子价格不由 test 选择，接口不接收 gold 答案。  推理与系统效率 模型选择与条件计算 基础模型 按需计算：专家、弹性深宽与查表记忆 便宜模型90%且router完全校准，为什么还可能几乎省不了钱？ 校准不等于区分。如果所有请求特征一样，90%只是平均数，router不知道哪条会错。要达到98%平均质量而frontier为99%，至少8/9流量仍需frontier；难题更长还会进一步降低成本倍数。 教学例：2%流量走25倍单价frontier看似省16.9倍，但这些请求若长100倍，修正后只约1.46倍。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 按需计算：专家、弹性深宽与查表记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-9384cc80e5743a13">便宜模型90%且router完全校准，为什么还可能几乎省不了钱？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asmart-model-routing">Smart Model Routing for Order-of-Magnitude LLM Cost Reduction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Independent Researcher</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>校准不等于区分。如果所有请求特征一样，90%只是平均数，router不知道哪条会错。要达到98%平均质量而frontier为99%，至少8/9流量仍需frontier；难题更长还会进一步降低成本倍数。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：2%流量走25倍单价frontier看似省16.9倍，但这些请求若长100倍，修正后只约1.46倍。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.15911v1">原论文</a> · <a href="../../../../foundation-models/2611.15911-smart-model-routing/">实现解读</a> · <a href="#qa-9384cc80e5743a13">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:smart-model-routing" data-paper-title="Smart Model Routing for Order-of-Magnitude LLM Cost Reduction" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/conditional-compute" data-search="Smart Model Routing for Order-of-Magnitude LLM Cost Reduction 基础模型 Independent Researcher 2026-11-11 本文研究应用层在多个完整模型/endpoint 之间选路，不是 MoE 内部 token→expert，也不是同一模型副本的负载均衡。核心问题是：在可接受质量下，让每个请求尽量使用便宜模型，同时计入 router、checker、被拒绝的小模型调用和长难题的额外 token 成本。作者区分 calibration 与 discrimination：所有请求都预测“便宜模型 90% 正确”可以完全校准，却无法辨别哪一条会错。 高成本完整矩阵标注不复现。状态：CPU L1 成本/策略算术组件，diagnostic only；不是训练好的 router，不发送真实模型请求。“10×”是条件化分析，不是本地或生产收益。完整模型/API 与跨任务实验不运行；高成本完整矩阵标注不复现。本地只实现影子价格 argmin、输入/输出 token 计费、frontier 最小份额、token 偏斜修正、K 阶段 cascade 成本、严格两阶段 breakeven 和条件质量求和。terminal stage 必须接受；负成本、无穷值、越界概率会拒绝。影子价格不由 test 选择，接口不接收 gold 答案。  推理与系统效率 模型选择与条件计算 基础模型 按需计算：专家、弹性深宽与查表记忆 为什么cascade_quality要求传条件质量，不能直接填各模型总准确率？ 更强模型只看到前一阶段拒绝的残余，通常比总体流量难。质量必须按接受/拒绝历史条件化。本地接口只计算输入统计量，既不偷看请求gold来选模型，也不假装估计checker能力。 教学例：半数易题被A全对接受；B在残余难题仅20%正确，整体为0.5×1+0.5×0.2=0.6，不是用B总体0.6算出的0.8。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 按需计算：专家、弹性深宽与查表记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-37637d2aba03ba1c">为什么cascade_quality要求传条件质量，不能直接填各模型总准确率？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Asmart-model-routing">Smart Model Routing for Order-of-Magnitude LLM Cost Reduction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Independent Researcher</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>更强模型只看到前一阶段拒绝的残余，通常比总体流量难。质量必须按接受/拒绝历史条件化。本地接口只计算输入统计量，既不偷看请求gold来选模型，也不假装估计checker能力。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：半数易题被A全对接受；B在残余难题仅20%正确，整体为0.5×1+0.5×0.2=0.6，不是用B总体0.6算出的0.8。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.15911v1">原论文</a> · <a href="../../../../foundation-models/2611.15911-smart-model-routing/">实现解读</a> · <a href="#qa-37637d2aba03ba1c">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:mirror-moe" data-paper-title="Rethinking Routing Exploration in Modern Mixture-of-Experts" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/conditional-compute" data-search="Rethinking Routing Exploration in Modern Mixture-of-Experts 基础模型 ETH Zurich 2026-10-15 共享专家占据较多输出后，改变路由专家带来的表征差异减弱，而细粒度分割又扩大组合空间。MirrorMoE 不简单增噪，而是以镜像选择暂时抑制部分专家，随训练退火恢复普通路由。主源是 §3 的公式 3–6。 现有单 A100/A30/Mac 不运行此完整预训练，成本过高，不复现（审查 DONE）。CUDA 诊断记录与真实GPU回执列出设备与源码 hash。revision synthetic-formula-and-bit-patterns@oct17-foundation-components-v1；无 checkpoint、公共语料或能力 benchmark。固定种子 42/43/44 初始化 8 维、6 个可路由专家、2 个共享专家、top-3 的真实可训练小网络。每 seed 仅一个 SGD 更新核验梯度，不是语言模型训练。  网络架构 混合专家路由 基础模型 按需计算：专家、弹性深宽与查表记忆 MirrorMoE 为什么希望边界外专家在训练早期也被选择？ 共享专家占较多输出、细粒度专家组合增多时，普通路由可能难以充分区分组合。镜像选择暂时抑制部分原高分专家，让其它组合获得机会，再随训练退火回普通路由。 示意：早期不总让同几个高分专家包办，使替代组合有被实际训练的机会。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 按需计算：专家、弹性深宽与查表记忆</a></p>
 <span id="paper-foundation-models-mirror-moe-43695dbb" class="ar-learning-paper-anchor"></span>

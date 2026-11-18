@@ -20,7 +20,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="adaptive-decisions/">按需决策：选择性推理、迁移与持续反馈</a></h2>
 <p>哪些请求值得追加推理，哪些反馈应该影响下一次选择？</p>
-<p class="ar-learning-topic-meta">16 个问题 · 4 篇论文</p>
+<p class="ar-learning-topic-meta">20 个问题 · 5 篇论文</p>
 </article>
 </div>
 

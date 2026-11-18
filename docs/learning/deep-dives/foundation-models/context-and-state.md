@@ -7,7 +7,7 @@ hide:
 
 # 长上下文不是一条轴：位置、读取与状态压缩
 
-[基础模型](../index.md) · 更新 2026-11-13 · 39 篇主题资料 / 13 篇重点对照
+[基础模型](../index.md) · 更新 2026-11-18 · 40 篇主题资料 / 14 篇重点对照
 
 先问历史以什么形式存在，再问当前 token 怎样读它。RoPE 改变相对位置关系，Mamba 把历史写入递归状态，NSA 在多条读取路径间分工，OpenAttention 为未精读部分保留代理，TTR 则为当前输入求一个压缩表示。这些方法不能只按“支持多长”排成一列。 MERLIN在多个压缩状态之外保留routing key矩统计，改变段间读取权重，而不替换每段内部的递归写入。
 
@@ -38,6 +38,7 @@ hide:
 | [ConvPE: Convolutional Position Embedding Improves Transformers](../../../foundation-models/2611.07749-convpe/README.md) · [原始来源](https://arxiv.org/abs/2611.07749)<br>章节：背景与主要改动、核心公式、数据协议与代码映射 | 将原始隐状态低维投影，经只在左侧补零的因果卷积，为每个查询生成相对距离偏置；注意力头按取模共享偏置头，在 softmax 前加到分数。 | 窗口外偏置为零而不是屏蔽。需要最近 W−1 个原始隐状态才能在分块解码中重建偏置；不减少 KV 条数。本地只验证默认一维偏置，不复现完整长上下文训练、融合核或吞吐。 |
 | [ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation](../../../foundation-models/2611.12956-adindex/README.md) · [原始来源](https://arxiv.org/abs/2611.12956v1)<br>章节：核心公式、数据协议与代码映射、结果与复现边界 | 按层校准组大小与共享候选库，用逐query标准化softmax后逐token max/Top-P教师蒸馏组索引器；只扫描anchor历史，再补新可见token并保留逐query DSA精排。 | 共享候选不等于共享最终Top-K，也不提供OpenAttention的未读尾部代理；teacher运算顺序、anchor因果边界和最大并集容量不可替换。L1训练KL降低不证明长文质量或B300 serving加速。 |
 | [A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation](../../../foundation-models/2604.14403-ecg-rag/README.md) · [原始来源](https://arxiv.org/abs/2604.14403v1)<br>章节：背景与主要改动、核心机制与公式、原文结果与限制、本地复现 | 设备端RAG既要控制文档索引磁盘占用，也要限制生成时的上下文/KV开销。ECG不是简单把检索器输出拼进prompt，而是只存一份多向量检索表示，再经投影转成同一decoder可消费的压缩上下文，避免独立检索向量和压缩向量重复存储。 | 不是。ECG压缩文档为共享语义向量并生成；ADIndex在模型注意力内部共享候选库，再逐query精排并补新token。外部文档表示压缩与因果KV索引的可见性、精度和成本单位不同。 |
+| [Federated Vector Retrieval across Heterogeneous VectorDBs](../../../foundation-models/2611.01514-hvmap/README.md) · [原始来源](https://arxiv.org/abs/2611.01514v2)<br>章节：核心公式、数据协议与代码映射、结果、负控与边界、高成本完整实验 | 四层归一化映射用跨目标fuzzy loss锚定异构空间；native/mapped双分数联合取K，spoke最多经hub两次映射。 | ECG-RAG让检索与压缩生成共享表示，HVMap不生成答案而对齐已存在的异构库。局部fuzzy loss与ECG联合loss均不代表完整RAG效果。 |
 
 </div>
 
@@ -90,6 +91,12 @@ ADIndex复用相邻query的候选扫描，再由各query精排，共享库只可
 不是。ECG压缩文档为共享语义向量并生成；ADIndex在模型注意力内部共享候选库，再逐query精排并补新token。外部文档表示压缩与因果KV索引的可见性、精度和成本单位不同。 `SharedRepresentation` 真正让compression依赖stored E_ret；`joint_loss` 固定teacher logits/relevance，不让teacher获得梯度，保留α与温度梯度。FKL按答案token求和再按题平均；只有显式hard negatives进入margin，正例不能混入负例mask。gate的大正bias原文无确数，本地5是明确初始化约定。未带pretrained decoder、索引、特殊token注入或完整训练管道。
 
 对照来源：[ecg-rag](../../../foundation-models/2604.14403-ecg-rag/README.md) · [adindex](../../../foundation-models/2611.12956-adindex/README.md)
+
+### 共享一份表示与对齐多种表示，是不同的系统选择
+
+ECG-RAG为避免重复存储而联合学习检索与压缩表示，依赖decoder训练；HVMap接受库已由不同编码器生成，通过配对映射和候选双空间评分消除部分不兼容。fuzzy loss对角锚定绝对对应，RKD只保相对几何不够；SCORE2还要保留每库native向量而不是总偏hub。小张量梯度不证明跨模态召回或索引吞吐，不能将完整campaign的作者结果搬进本地看板。
+
+对照来源：[hvmap](../../../foundation-models/2611.01514-hvmap/README.md) · [ecg-rag](../../../foundation-models/2604.14403-ecg-rag/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -185,9 +192,23 @@ ADIndex复用相邻query的候选扫描，再由各query精排，共享库只可
 
     对照来源：[ecg-rag](../../../foundation-models/2604.14403-ecg-rag/README.md) · [adindex](../../../foundation-models/2611.12956-adindex/README.md)
 
+### ECG式共享表示与HVMap的低fuzzy loss能共同证明RAG质量提升吗？ {#cross-cross-nov18-hvmap-alignment}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。两者改变不同链路且本地都缺完整训练/检索/答案评估；HVMap还须验证语义配对泛化与联合排序，ECG须验证压缩上下文生成。诊断loss不是端到端能力。
+
+    **教学例子：** 教学例：反向传播成功并不说明一个相关文档进入top10，更不说明答案正确。
+
+    对照来源：[hvmap](../../../foundation-models/2611.01514-hvmap/README.md) · [ecg-rag](../../../foundation-models/2604.14403-ecg-rag/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-18** · 补HVMap跨空间fuzzy锚定、native权重与无配额联合检索；对照共享RAG表示，明确L1小张量与高成本完整实验的边界。
+
+涉及：[hvmap](../../../foundation-models/2611.01514-hvmap/README.md) · [ecg-rag](../../../foundation-models/2604.14403-ecg-rag/README.md)
 
 **2026-11-13** · 补入固定Google COLM历史来源论文及L1组件，比较核心定义与证据边界；完整实验明确不复现，不把本地诊断当模型能力或Evolve改进。
 
@@ -217,7 +238,7 @@ ADIndex复用相邻query的候选扫描，再由各query精排，共享库只可
 
 覆盖 31 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 39 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 40 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -260,6 +281,7 @@ ADIndex复用相邻query的候选扫描，再由各query精排，共享库只可
 - [ConvPE: Convolutional Position Embedding Improves Transformers](../../../foundation-models/2611.07749-convpe/README.md)
 - [ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation](../../../foundation-models/2611.12956-adindex/README.md)
 - [A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation](../../../foundation-models/2604.14403-ecg-rag/README.md)
+- [Federated Vector Retrieval across Heterogeneous VectorDBs](../../../foundation-models/2611.01514-hvmap/README.md)
 
 </details>
 

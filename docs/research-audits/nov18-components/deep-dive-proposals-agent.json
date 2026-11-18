@@ -1,0 +1,251 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-18",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "system-one:typed-inbox-protocol",
+      "target_card": "system-one/adaptive-decisions",
+      "source_revisions": {
+        "system-one:typed-inbox-protocol": "25815fc18a615070fcbcbfd15bffd49c876c6f5c5d3dfd146dca549142d7a464",
+        "foundation-models:jev-capability": "9484343eb3f24d2ff8c29ecdb8396472ae1bdf62060678922467f9d94eb10033"
+      },
+      "comparison": {
+        "position": "先冻结可见输入与线程切分，再按动作成本选择validation阈值；本地只含L0二元接口。",
+        "tradeoff": "Jev能力入口运行独立问题／候选并按gold计分；Typed Inbox关注多开关组合后的行动损失与私有邮箱分布。线程隔离不能被三seed替代，简单阈值也不是原文完整模型。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射",
+          "结果、负控与边界",
+          "高成本完整实验"
+        ]
+      },
+      "analysis": {
+        "title": "从“选对标签”到“少漏重要邮件”还隔着行动策略",
+        "body": "Jev能力评测要求请求不带标准答案，并记录真实后端和数据覆盖。Typed Inbox进一步指出预测字段会组合为真实动作，错误的成本不对称；相同accuracy不代表同样漏信风险。先冻结邮箱可见快照，整线程切分，再在训练／validation内选阈值。原文的类别分层CV和完整三开关成本没有被局部二元接口替代。",
+        "papers": [
+          "system-one:typed-inbox-protocol",
+          "foundation-models:jev-capability"
+        ]
+      },
+      "question": {
+        "id": "cross-nov18-typed-inbox-protocol",
+        "question": "把邮箱noise阈值在held-out邮件上调到最低成本，能当Jev能力评测的公平对比吗？",
+        "answer": "不能。它把测试标签用于选择策略，且动作成本不同于独立选择accuracy。必须提前固定切分、成本和阈值选择规则，冻结后只评分；本地也没有调用Jev。",
+        "example": "教学例：看到漏掉一封重要信后回调阈值，会改变刚评过样本的决策，不能再当未见测试。",
+        "papers": [
+          "system-one:typed-inbox-protocol",
+          "foundation-models:jev-capability"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "system-one:typed-inbox-protocol",
+          "foundation-models:jev-capability"
+        ],
+        "summary": "先冻结可见输入与线程切分，再按动作成本选择validation阈值；本地只含L0二元接口。 完整实验高成本不复现，局部协议不作能力或Evolve证据。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Freeze visible inputs and whole-thread splits, then choose validation cost thresholds; the local slice is L0 binary protocol only.",
+          "tradeoff": "The Jev capability entry scores independent questions/options against isolated gold. Typed Inbox concerns composed actions and private inbox distributions. Three seeds do not replace thread isolation, and a binary threshold is not the complete paper model."
+        },
+        "analysis": {
+          "title": "Correct labels do not directly mean fewer costly missed emails",
+          "body": "The Jev benchmark isolates gold and records real backends and data coverage. Typed Inbox adds action composition and asymmetric error cost: equal accuracy need not mean equal missed-email risk. Freeze exact visible snapshots, isolate whole threads, and tune only inside training/validation. The binary interface does not replace class-stratified CV or full three-switch costs."
+        },
+        "question": {
+          "question": "Is tuning an inbox noise cutoff on held-out emails a fair Jev capability comparison?",
+          "answer": "No. It uses test labels to select policy, and action cost is not independent choice accuracy. Fix splits, costs and cutoff rules beforehand, then score only after freezing. No Jev backend is called locally.",
+          "example": "Teaching example: lowering the cutoff after seeing one missed important email changes an already-scored decision; it is no longer unseen test performance."
+        },
+        "update": "Add frozen-view/thread-isolation and validation action-cost interfaces; full private multi-model CV is not reproduced."
+      }
+    },
+    {
+      "paper": "agent-research:askalcf-protocol",
+      "target_card": "agent-research/harness-and-self-improvement",
+      "source_revisions": {
+        "agent-research:askalcf-protocol": "b3b3f4b8a8c8321985e4da46b945c113afdcb88d88d25cb19ef0a92095d44422",
+        "agent-research:harness2": "c738a9266c1647b8f5cc0e50a0055d1aecf1fcf783ee78de3405c2e84850f48a"
+      },
+      "comparison": {
+        "position": "回答盲的生产／全库充分性pivot、独立质量信号、revision缓存与受人审动作控制的修复协议。",
+        "tradeoff": "Harness²不依赖答案rubric，按开放执行对照选择并积累经验；AskALCF有冻结专家归因和target/control，不能用文本偏好选择替代充分性探针。局部七路不是原文28规则。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射",
+          "结果、负控与边界",
+          "高成本完整实验"
+        ]
+      },
+      "analysis": {
+        "title": "执行差异是证据，但不自动告诉你该修哪一层",
+        "body": "Harness²先提出并真实执行不同harness，再组合和反思；AskALCF先区分生产检索与全库知识是否充分，才把错误交给对应组件。两者都不能用成功计数代替真实动作。AskALCF的after必须与冷缓存null比较，并记录逐题翻转；人审ship/revert/decline不由judge自信度授权。",
+        "papers": [
+          "agent-research:askalcf-protocol",
+          "agent-research:harness2"
+        ]
+      },
+      "question": {
+        "id": "cross-nov18-askalcf-protocol",
+        "question": "Harness²的某候选回答更好，足以认定AskALCF需要补知识吗？",
+        "answer": "不足。更好文本不证明全库缺少权威文档；应看回答盲的R／C。R假C真优先修retrieval，二者假才是knowledge。再以冻结参考和null对照验证候选。",
+        "example": "教学例：同一文档已在全库但top-k错过，补一份重复文档可能掩盖检索问题。",
+        "papers": [
+          "agent-research:askalcf-protocol",
+          "agent-research:harness2"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "agent-research:askalcf-protocol",
+          "agent-research:harness2"
+        ],
+        "summary": "回答盲的生产／全库充分性pivot、独立质量信号、revision缓存与受人审动作控制的修复协议。 完整实验高成本不复现，局部协议不作能力或Evolve证据。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Answer-blind production/corpus sufficiency, separate quality signals, revision caching and governed repair callbacks.",
+          "tradeoff": "Harness² uses open execution contrasts without answer rubrics; AskALCF has frozen expert attribution and target/control studies. Text preference cannot replace sufficiency probes, and the local seven routes are not all 28 rules."
+        },
+        "analysis": {
+          "title": "An execution difference does not automatically identify the component to repair",
+          "body": "Harness² proposes and executes harness variants before composing and reflecting. AskALCF separates production retrieval from corpus coverage before assigning repair responsibility. Neither can substitute counters for actions. AskALCF compares after with a cold-cache null and retains paired flips; human ship/revert/decline authority does not come from judge confidence."
+        },
+        "question": {
+          "question": "Does a better Harness² candidate answer establish that AskALCF needs new knowledge?",
+          "answer": "No. Better text does not prove missing authoritative corpus evidence. Use answer-blind R/C: false/true means retrieval, both false means knowledge. Then validate against frozen references and null controls.",
+          "example": "Teaching example: duplicating a page already in the corpus may conceal a top-k retrieval defect."
+        },
+        "update": "Add answer-blind two-scope attribution, dependency-aware caching and real reviewed callbacks; no RAG/agent judge or private campaign."
+      }
+    },
+    {
+      "paper": "agent-research:prodpilot-protocol",
+      "target_card": "agent-research/harness-and-self-improvement",
+      "source_revisions": {
+        "agent-research:prodpilot-protocol": "528d60ba9ae602cf962e4b0b2faf41dc5de4e4ce6a3570fc3a0968710576d428",
+        "agent-research:harness2": "c738a9266c1647b8f5cc0e50a0055d1aecf1fcf783ee78de3405c2e84850f48a"
+      },
+      "comparison": {
+        "position": "按修复类型分层，真实checker接受修改、全量审计回滚回归，再按规则和概率顺序门控；本地仅文件映射回调。",
+        "tradeoff": "ProdPilot依特定生产规则，Harness²比较开放任务行为且无gold rubric。规则通过不等于通用安全；handle返回不是smoke成功，外部调用异常还需记未知副作用。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射",
+          "结果、负控与边界",
+          "高成本完整实验"
+        ]
+      },
+      "analysis": {
+        "title": "从可执行修改到可信交付，需要独立验收和失败语义",
+        "body": "Harness²保留真实候选执行与采用依据，不把“提案”当“执行”。ProdPilot在结构化修复域进一步把每个fix的接受交给原checker，回归即回滚，关键P0不能被高模型概率覆盖。局部回调能验证这些控制流，但没有50条规则、概率模型或实际云环境，因此不能宣称应用已生产就绪。",
+        "papers": [
+          "agent-research:prodpilot-protocol",
+          "agent-research:harness2"
+        ]
+      },
+      "question": {
+        "id": "cross-nov18-prodpilot-protocol",
+        "question": "修复后的规则分数很高，Harness²或ProdPilot就能自动部署吗？",
+        "answer": "不能。ProdPilot还需无失败P0、概率门、确定构建和显式批准；Harness²没有同一生产门控保证。部署回调已发出但异常时状态未知，不能直接重试制造重复副作用。",
+        "example": "教学例：全局分数93但唯一P0失败仍须闭门；服务创建后超时需查外部状态。",
+        "papers": [
+          "agent-research:prodpilot-protocol",
+          "agent-research:harness2"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "agent-research:prodpilot-protocol",
+          "agent-research:harness2"
+        ],
+        "summary": "按修复类型分层，真实checker接受修改、全量审计回滚回归，再按规则和概率顺序门控；本地仅文件映射回调。 完整实验高成本不复现，局部协议不作能力或Evolve证据。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Typed repair callbacks are checked independently; full audits roll back regressions before sequential rule/probability gates. Only in-memory file contracts are local.",
+          "tradeoff": "ProdPilot relies on specific readiness rules; Harness² compares open-task behavior without gold rubrics. Passing rules is not general safety, a deploy handle is not smoke success, and interrupted external calls retain unknown side effects."
+        },
+        "analysis": {
+          "title": "Executable changes require independent acceptance and explicit failure semantics",
+          "body": "Harness² retains real candidate execution and adoption evidence rather than treating proposals as execution. ProdPilot accepts each fix through its original checker, reverts regressions, and never lets high model probability overrule a failing P0. Local callbacks validate control flow, not the absent 50 rules, estimator or cloud deployment."
+        },
+        "question": {
+          "question": "Does a high repaired audit score authorize automatic deployment in Harness² or ProdPilot?",
+          "answer": "No. ProdPilot also needs no failing P0, the probability condition, a determined build and explicit approval; Harness² supplies no equivalent production gate. A deploy call that raises leaves status unknown and should not be blindly retried.",
+          "example": "Teaching example: score 93 with one failing P0 remains closed; inspect external state after service-creation timeout."
+        },
+        "update": "Add bounded verified repair, regression rollback and fail-closed deployment interfaces; no cloud, full ruleset or trained estimator."
+      }
+    },
+    {
+      "paper": "multimodal-models:fend-protocol",
+      "target_card": "multimodal-models/alignment-interfaces",
+      "source_revisions": {
+        "multimodal-models:fend-protocol": "b6073c9d55fedbdc5c57dc620154134b83250693c45fedf1078526233c5e8e95",
+        "multimodal-models:gslm2": "5ab8ce37c3b3aadad488495535e4ecda1ab9dc939871212b55de7ae8d11e870a"
+      },
+      "comparison": {
+        "position": "外部事件在deadline内累计，以VM／IVR／AI优先级仲裁，human默认；独立HFPR和声学human-null接口。",
+        "tradeoff": "GSLM2学习多流语音单元、共享时序和生成分布；FEND是外呼风险检测。外部离散单元与检测事件都不是本地训练模型，二者不能共用能力排名。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射",
+          "结果、负控与边界",
+          "高成本完整实验"
+        ]
+      },
+      "analysis": {
+        "title": "语音表示分数与通话决策风险属于不同层次",
+        "body": "GSLM2的局部切片按流变化联合去重并计算转移分数，源模型仍在外部。FEND的局部切片从外部带时间事件选类，同样没有音频检测器。最高优先级要等窗口结束，不能抢答；HFPR以真人为分母。原文0.979是human-versus-rest F1，AI类F1仅0.571，不能把二元高分写成四类全解决。",
+        "papers": [
+          "multimodal-models:fend-protocol",
+          "multimodal-models:gslm2"
+        ]
+      },
+      "question": {
+        "id": "cross-nov18-fend-protocol",
+        "question": "FEND的human-versus-rest F1为0.979，可以证明多流语音模型也擅长AI语音识别吗？",
+        "answer": "不能。该二元指标不代表AI类F1或表征质量；FEND还依赖商业ASR、工具和时序模型。GSLM2的表示／语言判别任务不同，需各自冻结协议和真实模型输出。",
+        "example": "教学例：human误拒低，但AI被误判为voicemail，二元分数仍可很高，四类分辨却不理想。",
+        "papers": [
+          "multimodal-models:fend-protocol",
+          "multimodal-models:gslm2"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "multimodal-models:fend-protocol",
+          "multimodal-models:gslm2"
+        ],
+        "summary": "外部事件在deadline内累计，以VM／IVR／AI优先级仲裁，human默认；独立HFPR和声学human-null接口。 完整实验高成本不复现，局部协议不作能力或Evolve证据。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Accumulate external events through a deadline; arbitrate VM/IVR/AI with human default, separate HFPR and human-null calibration.",
+          "tradeoff": "GSLM2 learns multi-stream units and speech distributions; FEND detects outbound-call risk. Externally supplied units/events are not locally trained models and do not share a capability ranking."
+        },
+        "analysis": {
+          "title": "Speech representation scores and call-decision risks belong to different layers",
+          "body": "The GSLM2 slice jointly deduplicates changing streams and scores transitions, leaving the model external. The FEND slice arbitrates timestamped external events without audio detectors. Wait for the priority window and use true humans for HFPR. The paper's 0.979 is human-versus-rest F1; AI-class F1 is only 0.571, not solved four-class detection."
+        },
+        "question": {
+          "question": "Does FEND's 0.979 human-versus-rest F1 establish that a multi-stream speech model detects AI speech well?",
+          "answer": "No. Binary F1 is not AI-class F1 or representation quality. FEND additionally depends on commercial ASR, tools and timing models. GSLM2 addresses different tasks; each needs its own frozen protocol and real model outputs.",
+          "example": "Teaching example: low human rejection can coexist with AI mislabeled voicemail, retaining high binary F1 but poor four-way discrimination."
+        },
+        "update": "Add deadline/priority and human-FPR/null-calibration interfaces; no audio/ASR/LLM classifier, and distinguish binary F1 from four-class performance."
+      }
+    }
+  ]
+}

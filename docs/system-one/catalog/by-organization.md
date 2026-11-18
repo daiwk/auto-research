@@ -4,6 +4,7 @@
 
 ## Independent Researcher
 
+- [Typed Inbox](../2610.32955-typed-inbox-protocol/README.md)（2026-10-23，一作Federico Lucca）：脱敏冻结输入、整线程隔离与行动成本阈值；L0协议，未使用私有邮箱或运行模型。
 - [When Multiple Choices Are Correct](../2610.29217-jev-multicorrect/README.md)（2026-10-21，一作Rushab Munot）：审计多个正确项的概率不对称及阈值集合恢复；仅CPU评分/校准协议，不复现商业API完整实验。
 
 ## Aalto University

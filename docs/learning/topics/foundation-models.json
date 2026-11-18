@@ -58,7 +58,8 @@
         "foundation-models:anchor-kv",
         "foundation-models:convpe",
         "foundation-models:adindex",
-        "foundation-models:ecg-rag"
+        "foundation-models:ecg-rag",
+        "foundation-models:hvmap"
       ]
     },
     {
@@ -103,7 +104,8 @@
         "foundation-models:switch-transformer",
         "foundation-models:swrouter",
         "foundation-models:telescopic-lm",
-        "foundation-models:wide"
+        "foundation-models:wide",
+        "foundation-models:smart-model-routing"
       ]
     },
     {
@@ -288,7 +290,10 @@
         "foundation-models:qe-length-normalization",
         "foundation-models:cultural-cue",
         "foundation-models:decoding-constrained-beam",
-        "foundation-models:storyscope"
+        "foundation-models:storyscope",
+        "foundation-models:tokenization-premium",
+        "foundation-models:runway-inference-protocol",
+        "foundation-models:mixed-signals-weights"
       ]
     }
   ]

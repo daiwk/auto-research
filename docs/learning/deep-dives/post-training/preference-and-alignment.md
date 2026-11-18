@@ -7,7 +7,7 @@ hide:
 
 # 偏好不是一个分数：先确定反馈格式，再选对齐目标
 
-[LLM 后训练](../index.md) · 更新 2026-10-27 · 25 篇主题资料 / 6 篇重点对照
+[LLM 后训练](../index.md) · 更新 2026-11-18 · 27 篇主题资料 / 8 篇重点对照
 
 DPO、KTO、SimPO、ORPO和IPO主要改变“怎样使用反馈”，CleanRM先处理“反馈是否可信”。参考模型、长度归一化、有限间隔和噪声校正是不同设计轴，不能因都在扩大好坏回答差异就当成同一方法。
 
@@ -31,6 +31,8 @@ DPO、KTO、SimPO、ORPO和IPO主要改变“怎样使用反馈”，CleanRM先�
 | [ORPO](../../../post-training/2403.07691-orpo/README.md) · [原始来源](https://arxiv.org/abs/2403.07691)<br>章节：背景与主要改动、核心公式、复现边界 | 在同一目标里联合chosen的SFT NLL与chosen/rejected的odds-ratio偏好项。 | 单阶段兼顾绝对似然与相对偏好，但赔率有数值边界；本地完整候选action并非原文语言模型训练。 |
 | [IPO](../../../post-training/2310.12036-ipo/README.md) · [原始来源](https://arxiv.org/abs/2310.12036)<br>章节：背景与主要改动、核心公式、复现边界 | 让相对reference的偏好gap拟合有限目标1/(2τ)，而非只要求差距不断增大。 | 超过目标也会被拉回，改变的是目标形状；本地已有缩小的token级自由生成路径，不能据此推断原文大模型效果。 |
 | [CleanRM: Reward Modeling from Noisy Feedback with a Few Clean Feedback for RLHF](../../../post-training/2610.21138-clean-rm/README.md) · [原始来源](https://arxiv.org/abs/2610.21138v1)<br>章节：背景与主要改动、核心公式、结果、代码映射与边界 | 先用干净校准子集与语义—恢复偏好的joint OT估计双向噪声，再冻结估计器校正RM风险。 | 校正依赖噪声率与校准代表性，signed loss不能擅自截零；完整RM/RLHF因成本过高未复现，当前是L1组件。 |
+| [Similar Models, Broken Odds: Where Luce&#x27;s Axiom Fails in Chatbot Arena](../../../post-training/2610.19095-luce-similarity-audit/README.md) · [原始来源](https://arxiv.org/abs/2610.19095v3)<br>章节：背景与主要改动、核心公式、论文离线与线上效果、结果、负控与边界 | 分开审计BT非平局decisiveness、joint模型的tie增益和兄弟菜单相对强度匹配placebo的赔率偏移。 | Probabilistic Autorater用proper reward校准偏好分布；Luce审计检验从全局分数到相关模型odds的结构假设。proper概率并不保证IIA，合并菜单正偏移也不证明prompt内因果效应。 |
+| [Grounding Language Models in Speech Does Not Fix AI Flavor: Calibrated LLM Judges, Goodhart Traps, and a Preference-Tuning Fix](../../../post-training/2611.19840-calibrated-judges-protocol/README.md) · [原始来源](https://arxiv.org/abs/2611.19840v1)<br>章节：背景与主要改动、核心公式、论文离线与线上效果、数据协议与代码映射 | evaluator-only catch灵敏度gate、两隔离judge与双order还原一致性、分歧tie，训练后另查偏差转导。 | Probabilistic Autorater校准偏好分布及proper reward；RA-Eval先资格考试再加工verdict，但高catch准确率不证明训练偏差消失。fixture映射1/0.5不是LLM能力，普通join不能读取gold。 |
 
 </div>
 
@@ -47,6 +49,18 @@ DPO、SimPO、ORPO和IPO都消费同题回答的相对胜负，但KTO允许单�
 SimPO移除reference但保留长度平均隐式奖励和固定margin；ORPO用SFT项与赔率偏好共同训练。IPO保留reference，并把最优间隔设为有限值。三者改变不同部件：部署或训练内存、回答长度尺度、优选文本绝对似然和间隔饱和行为都要分开看，不能用一个本地准确率替代这些区别。
 
 对照来源：[simpo](../../../post-training/2405.14734-simpo/README.md) · [orpo](../../../post-training/2403.07691-orpo/README.md) · [ipo](../../../post-training/2310.12036-ipo/README.md)
+
+### 概率看起来校准，不等于分数之间的所有赔率都可信
+
+Probabilistic Autorater的proper规则针对报告分布的校准；Luce论文针对相关模型比较和菜单变化，评估对象不同。三结果loss的多数增益来自ties，不能包装成非平局发布决策可靠；冻结lineage区间跨零、prompt内偏移衰减都必须保留。本地Eq.2/3只是可审计算术，不拟合Arena、不用test battle构造similarity，也不产生新的judge结果。
+
+对照来源：[luce-similarity-audit](../../../post-training/2610.19095-luce-similarity-audit/README.md) · [probabilistic-autorater](../../../post-training/2510.00263-probabilistic-autorater/README.md)
+
+### 裁判通过资格考试后，训练仍可能把它的偏好放大成捷径
+
+Proper概率强调报告分布，RA-Eval强调catch灵敏度、盲化和位置交换，这些都是不同风险的控制。原文长度75字的拒绝轮次表明可感知judge也会把短文本偏好转导到DPO。SFT anchor不是校准的替代品，训练后长度/风格和heldout检查不可少。本地只加工外部verdict并禁止catch训练ID重用，不调用judge或训练模型。
+
+对照来源：[calibrated-judges-protocol](../../../post-training/2611.19840-calibrated-judges-protocol/README.md) · [probabilistic-autorater](../../../post-training/2510.00263-probabilistic-autorater/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -82,15 +96,43 @@ SimPO移除reference但保留长度平均隐式奖励和固定margin；ORPO用SF
 
     对照来源：[dpo](../../../post-training/2305.18290-dpo/README.md) · [ipo](../../../post-training/2310.12036-ipo/README.md) · [clean-rm](../../../post-training/2610.21138-clean-rm/README.md)
 
+### 一个proper-scored autorater准确报告总体偏好概率，能保证相邻版本的BT胜率也正确吗？ {#cross-cross-nov18-luce-calibration}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能。分布报告与BT的单分数结构是不同层次；相关模型的决断倍率、tie和prompt异质性仍可破坏由全局分数推出的odds。应分拆非平局、三结果和冻结转移指标，不能仅看总体loss。
+
+    **教学例子：** 原文ties-only几乎解释总体增益，但冻结lineage的非平局区间[-2.92,+1.68]仍不能建立改善。
+
+    对照来源：[luce-similarity-audit](../../../post-training/2610.19095-luce-similarity-audit/README.md) · [probabilistic-autorater](../../../post-training/2510.00263-probabilistic-autorater/README.md)
+
+### judge概率校准且catch准确率高，是否可以取消训练后的长度检查？ {#cross-cross-nov18-judge-calibration-transduction}
+
+??? note "展开答案与例子"
+
+    **答案：** 不可以。概率校准、catch敏感度、order一致性和偏差转导是不同检验。judge偏好可能仍偏短，DPO会放大数据中的chosen长度分布；必须独立检查长度/风格及heldout，不把训练标签一致率当能力提升。
+
+    **教学例子：** 原文扩到240对后median75字触发拒绝；本地四条fixture判断一致只应得到协议score1，不应得到100%模型准确率。
+
+    对照来源：[calibrated-judges-protocol](../../../post-training/2611.19840-calibrated-judges-protocol/README.md) · [probabilistic-autorater](../../../post-training/2510.00263-probabilistic-autorater/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-18** · 补校准judge的catch/双judge换序/tie/隔离组件，与proper概率和训练后偏差转导分开；保留语音负结果与长度塌缩，不调用付费judge、不跑0.6B完整训练。
+
+涉及：[calibrated-judges-protocol](../../../post-training/2611.19840-calibrated-judges-protocol/README.md) · [probabilistic-autorater](../../../post-training/2510.00263-probabilistic-autorater/README.md)
+
+**2026-11-18** · 补入相似模型odds与菜单审计，区分proper概率、tie增益与冻结转移负结果；CPU算术不拟合榜单或冒充能力结果，完整票据/裁判实验高成本不复现。
+
+涉及：[luce-similarity-audit](../../../post-training/2610.19095-luce-similarity-audit/README.md) · [probabilistic-autorater](../../../post-training/2510.00263-probabilistic-autorater/README.md)
 
 **2026-10-27** · 首版：比较DPO/KTO反馈格式、SimPO/ORPO无reference目标、IPO有限间隔与CleanRM噪声校正；已阅25篇摘要，精读6篇。
 
 覆盖 25 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 25 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 27 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -119,6 +161,8 @@ SimPO移除reference但保留长度平均隐式奖励和固定margin；ORPO用SF
 - [SLiC-HF](../../../post-training/2305.10425-slic-hf/README.md)
 - [RRHF](../../../post-training/2304.05302-rrhf/README.md)
 - [Constitutional AI](../../../post-training/2212.08073-constitutional-ai/README.md)
+- [Similar Models, Broken Odds: Where Luce&#x27;s Axiom Fails in Chatbot Arena](../../../post-training/2610.19095-luce-similarity-audit/README.md)
+- [Grounding Language Models in Speech Does Not Fix AI Flavor: Calibrated LLM Judges, Goodhart Traps, and a Preference-Tuning Fix](../../../post-training/2611.19840-calibrated-judges-protocol/README.md)
 
 </details>
 

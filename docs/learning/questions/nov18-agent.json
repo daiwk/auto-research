@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "system-one:typed-inbox-protocol": {
+      "questions": [
+        {
+          "id": "frozen-view-not-production-label",
+          "level": "basics",
+          "question": "为什么不能把生产邮箱已有的type字段当成Typed Inbox金标？",
+          "answer": "它混合历史关键词和模型预测，不是独立标注。应先保存模型实际可见且已脱敏的固定快照，再由独立标注协议给标签；否则只是在复刻旧系统的错误。",
+          "example": "教学例：旧规则把发票写成广告，训练和评估都用该字段时，新模型也写广告就被错误记为正确。",
+          "source_sections": ["背景与主要改动", "数据协议与代码映射"],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "whole-thread-not-email-hash",
+          "level": "mechanism",
+          "question": "每封邮件做稳定哈希切分，为什么仍会泄漏？",
+          "answer": "同一回复线程可能落到不同集合，重复正文和上下文就跨了边界。论文按规范化subject与sender key分组；本地保持整线程，但没有复制原文类别分层CV。",
+          "example": "教学例：Topic与Re: Topic来自同一sender，即使email ID不同，也必须进入同一折。",
+          "source_sections": ["背景与主要改动", "数据协议与代码映射"],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "capability-versus-action-cost",
+          "level": "comparison",
+          "question": "Typed Inbox与Jev能力评测都输出选项，为什么不能只比accuracy？",
+          "answer": "能力评测按任务标准答案计正确率；邮箱还把多个开关组合为动作，漏掉重要邮件的价格可能远高于多建一个任务。单字段accuracy相同也可有不同动作成本，两者都必须隔离gold。",
+          "example": "教学例：把一封必须回复的邮件判成noise，与把一封普通邮件多打一个标记，错误数量相同但损失不同。",
+          "source_sections": ["核心公式", "结果、负控与边界"],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "threshold-only-validation",
+          "level": "implementation",
+          "question": "本地行动阈值接口覆盖了原文完整实验吗？",
+          "answer": "没有。它只在显式validation上穷举二元分数切点，冻结后预测；不含模型、三开关组合、联系人图或分层CV。显式秘密替换也不是通用PII发现。完整私有多模型实验高成本不复现。",
+          "example": "教学例：调用split=test会拒绝；若收到未知密码但未提供secrets，接口不会承诺自动识别并删除它。",
+          "source_sections": ["数据协议与代码映射", "高成本完整实验"],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "agent-research:askalcf-protocol": {
+      "questions": [
+        {
+          "id": "attribution-not-weight-training",
+          "level": "basics",
+          "question": "AskALCF的self-improving意味着给HPC助手做RL训练吗？",
+          "answer": "不是。主要改规则、提示、知识和工具harness，并经专家参考和受控arm评估。论文未把这称为模型权重训练，也没有知识PR已经合并并重建生产索引的证据。",
+          "example": "教学例：修改澄清问题规则后离线重跑支持日志，不等于训练了一个新的大模型。",
+          "source_sections": ["背景与主要改动", "论文离线与线上效果"],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "answer-blind-two-scope-pivot",
+          "level": "mechanism",
+          "question": "为什么检索充分性判定不能看生成回答？",
+          "answer": "它要独立判定生产passages和全库是否足以回答。看到生成答案可能把模型幻觉当必需事实或遗漏覆盖，混淆检索与生成责任。R假C真归retrieval，R假C假归knowledge；低正确率不能越过此pivot。",
+          "example": "教学例：全库有正确安装页但top-k没取到，错误答案应先查检索，而不是直接改模型。",
+          "source_sections": ["背景与主要改动", "核心公式"],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "askalcf-versus-harness-two",
+          "level": "comparison",
+          "question": "能把Harness²无rubric的选择器直接当AskALCF的归因核验器吗？",
+          "answer": "不能。Harness²比较开放执行行为并匿名选择已有产物；AskALCF用独立回答／检索证据、冻结专家归因和target/control实验定位修复对象。执行对照是共同点，参考标签和判断对象不同。",
+          "example": "教学例：看到两个回复文本不同不能判定全库缺文档；还要运行回答盲的corpus充分性探针。",
+          "source_sections": ["结果、负控与边界", "数据协议与代码映射"],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "null-flips-and-revision-cache",
+          "level": "implementation",
+          "question": "null净变化为零，为何还需保存逐题翻转和缓存revision？",
+          "answer": "等量正反翻转可抵消均值，却不代表无随机噪声。扩展缓存还要依query、模型、提示和corpus等revision失效；null需要真实冷缓存调用。局部noise gate不是显著性检验，最终ship仍是显式人审。",
+          "example": "教学例：before为错／对，null为对／错，均值没变但有两次翻转；不应把一次修复增益当可靠效果。",
+          "source_sections": ["核心公式", "数据协议与代码映射"],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "agent-research:prodpilot-protocol": {
+      "questions": [
+        {
+          "id": "rules-share-not-project-rate",
+          "level": "basics",
+          "question": "ProdPilot的88%不需要模型，能说88%的应用自动部署成功吗？",
+          "answer": "不能。28静态加16参数化占50条规则的88%，是规则种类占比。项目可能同时触发委派规则或其他部署失败；还需原checker和部署门逐项验证。",
+          "example": "教学例：同一项目只要仍有一个未修复P0，其他49条都通过也不能由模型概率把它放行。",
+          "source_sections": ["背景与主要改动", "核心公式"],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "checker-and-regression-before-accept",
+          "level": "mechanism",
+          "question": "fix回调返回了新文件，为什么仍可能需要回滚？",
+          "answer": "回报和改文件都不是验收。原违规checker必须通过，全量审计还必须保持此前通过的规则不回归；越界改动或异常也不能接受。每问题至多3次、每run至多5cycle限制重试。",
+          "example": "教学例：新增health端点却破坏原有security middleware时，应恢复修改前快照并交人工，而非把health成功加一。",
+          "source_sections": ["背景与主要改动", "数据协议与代码映射"],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "prodpilot-versus-open-harness",
+          "level": "comparison",
+          "question": "ProdPilot与Harness²的执行证据可互相替代吗？",
+          "answer": "不能。ProdPilot面向特定生产规则和独立checker，通过并不保证覆盖外漏洞；Harness²在没有答案rubric时比较执行产物和harness行为。前者是规则验证，后者不是同一个安全证明。",
+          "example": "教学例：应用通过已登记的health规则，不表示业务权限逻辑无漏洞，也不等于开放任务回答更好。",
+          "source_sections": ["结果、负控与边界", "核心公式"],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "deploy-return-not-smoke-success",
+          "level": "implementation",
+          "question": "本地gated_deploy返回handle或抛异常，能直接判部署成功或从未部署吗？",
+          "answer": "都不能。handle返回只说明deploy回调返回，仍需smoke；调用中断可能已有外部副作用，必须保留attempt并记unknown。局部接口不含云或概率模型，完整684部署实验高成本不复现。",
+          "example": "教学例：创建服务后网络超时，不能宣称deployed=false再盲目重试创建；应先核实外部状态。",
+          "source_sections": ["数据协议与代码映射", "高成本完整实验"],
+          "added": "2026-11-18"
+        }
+      ]
+    },
+    "multimodal-models:fend-protocol": {
+      "questions": [
+        {
+          "id": "human-risk-not-ai-auc",
+          "level": "basics",
+          "question": "AI检测AUC很高，就能放心中断被标为自动系统的电话吗？",
+          "answer": "不能。误把真人判为任意自动类会伤害有效对话，必须看以真实human为分母的HFPR和固定工作点。AUC不能替代部署阈值下的真人误拒率。",
+          "example": "教学例：100个真人中3个被标AI，HFPR是3%，不应除以包含900个语音信箱的全部1000通话。",
+          "source_sections": ["背景与主要改动", "核心公式"],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "accumulate-not-first-firing",
+          "level": "mechanism",
+          "question": "1秒时AI检测触发，FEND应立即停止等后续检测吗？",
+          "answer": "不应。窗口内持续累计，按voicemail大于IVR大于AI选最高优先级；默认20秒且恰在deadline的事件纳入。无自动事件才human，晚于窗口不计入。",
+          "example": "教学例：1秒AI、19秒IVR、20秒voicemail，最终应是voicemail，不是第一个AI。",
+          "source_sections": ["背景与主要改动", "数据协议与代码映射"],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "fend-versus-gslm-two",
+          "level": "comparison",
+          "question": "FEND与GSLM2都是语音研究，可以用同一局部指标排名吗？",
+          "answer": "不可以。FEND关心外呼类别、期限和真人误拒，GSLM2学习多流离散语音表示并评语言判别／生成。外部事件仲裁与外部单元评分都不是各自完整模型能力。",
+          "example": "教学例：一组手写事件得到正确voicemail，不说明学到了更好的音位表示，也不能与sWuggy准确率比较。",
+          "source_sections": ["结果、负控与边界", "数据协议与代码映射"],
+          "added": "2026-11-18"
+        },
+        {
+          "id": "null-gate-not-discrimination",
+          "level": "implementation",
+          "question": "声学human-null校准通过，为什么不等于AI分类器有效？",
+          "answer": "它仅排除两真人语料上过大的标准化中位数偏移，不验证正类判别。零IQR或无human时相关量未定义，必须报错；本地没有ASR、STFT或训练分类器，不能报语音能力。",
+          "example": "教学例：两个human集合分布完全相同可以过null gate，但分类器若对AI也给同样分数，仍无区分度。",
+          "source_sections": ["核心公式", "数据协议与代码映射"],
+          "added": "2026-11-18"
+        }
+      ]
+    }
+  }
+}

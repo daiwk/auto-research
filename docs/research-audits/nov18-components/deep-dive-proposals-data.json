@@ -1,0 +1,243 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-18",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "foundation-models:stratified-retention-protocol",
+      "target_card": "multimodal-models/world-state-actions",
+      "source_revisions": {
+        "foundation-models:stratified-retention-protocol": "68efe1fcce0a5bb196bcc3972e212df49356e1f3da325f1000b223acd730d867",
+        "multimodal-models:woven": "3c7f5518fd36be1bc8aa964050531232d66f297057e8e0ccd57f3f4376d2f575"
+      },
+      "comparison": {
+        "position": "把世界知识按环境不变时间尺度分层，分别报告逐轮不变量保持和新episode修订延迟；原文是无新实证的评测提案，本地仅L0报告协议。",
+        "tradeoff": "WOVEN用(s,a,s')视觉转移产生受控监督并训练MLLM；分层保持不生成训练数据、不指定适应算法。WOVEN的source_id隔离不代替逐轮不变量面板与变化后新episode查询，不能把两个分数直接排名。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "论文离线与线上效果"
+        ]
+      },
+      "analysis": {
+        "title": "状态变化监督不等于“该改什么”的持续评测",
+        "body": "WOVEN按scene/action/reasoning控制训练与泛化，真实视觉状态转移进入response-only SFT；本地已有分组小样本负结果。Stratified Retention进一步区分旧事实过期与结构遗忘：应保持的不变量可纠错但不能退化，实例位置必须及时更新。要把二者连起来，需预先标注稳定性层、适应后逐轮probe和新episode修订轨迹；本轮没有这些模型实验，只有拒绝泄漏与删失混淆的协议。",
+        "papers": [
+          "foundation-models:stratified-retention-protocol",
+          "multimodal-models:woven"
+        ]
+      },
+      "question": {
+        "id": "nov18-stratified-retention-protocol",
+        "question": "WOVEN训练后某旧场景题准确率下降，能据此断言发生有害遗忘吗？",
+        "answer": "不能。先判断旧答案是否仍真实；正确修订过期实例与忘掉不变量应分开。WOVEN现有分组accuracy也不提供逐轮差分保持证据，需要额外稳定面板、新episode变化查询和假修订对照。",
+        "example": "椅子移动后不再选旧坐标可能是好事；若遮挡后认为椅子不存在才违反稳定知识。最终恢复正确也不能掩盖中途一次负翻转。",
+        "papers": [
+          "foundation-models:stratified-retention-protocol",
+          "multimodal-models:woven"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "foundation-models:stratified-retention-protocol",
+          "multimodal-models:woven"
+        ],
+        "summary": "补入分层保持的L0报告协议，与WOVEN视觉转移训练分轴比较；无原始完整实证，不虚构高成本训练或能力排名。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Stratifies world knowledge by environmental invariance timescale and separates per-round invariant retention from new-episode revision latency. The source is a proposal without new experiments; local code is an L0 reporting protocol.",
+          "tradeoff": "WOVEN turns (s,a,s') visual transitions into controlled supervision and trains an MLLM. Stratified retention neither generates data nor chooses an adaptation algorithm. WOVEN source-ID isolation does not replace fixed invariant panels and new-episode change probes; the scores are not directly rankable."
+        },
+        "analysis": {
+          "title": "Transition supervision is not a continual evaluation of what should change",
+          "body": "WOVEN controls scene/action/reasoning for training and generalization, putting real visual transitions into response-only SFT; the repository retains a negative small grouped result. Stratified Retention distinguishes expired facts from structural forgetting: invariants may be corrected but should not degrade, while instance positions must update promptly. Combining the ideas would require predeclared strata, per-round probes and new-episode revision traces. No such model experiment is run here; the component only rejects leakage and censoring confounds."
+        },
+        "question": {
+          "question": "Does lower old-scene accuracy after WOVEN training establish harmful forgetting?",
+          "answer": "No. First ask whether the old answer remains true. Correctly revising stale instances differs from losing invariants. Existing grouped WOVEN accuracy does not supply per-round differential-retention evidence; it needs fixed panels, new-episode change probes and false-revision controls.",
+          "example": "After a chair moves, rejecting its old coordinates may be correct. Assuming it ceases to exist when occluded violates an invariant. Final recovery cannot hide an intermediate negative flip."
+        },
+        "update": "Added an L0 stratified-retention reporting protocol and an axis-separated comparison with WOVEN training; no original full empirical study or costly training/capability result is invented."
+      }
+    },
+    {
+      "paper": "foundation-models:tokenization-premium",
+      "target_card": "foundation-models/evaluation-and-evidence",
+      "source_revisions": {
+        "foundation-models:tokenization-premium": "f96c02652ba3ac0a922ab229f99b48c5494ae1a68af5caf91c330f41ca95205a",
+        "foundation-models:xlgobench": "12c2082c37310106a20523d6a6845ba8f75628d01b7386fb40617c965c5df153"
+      },
+      "comparison": {
+        "position": "先拼接相同UDHR共同条款再一次编码，比较总token成本并排除UNK坍缩；同时约束全样本ECE、覆盖率/风险与全程能量分母。",
+        "tradeoff": "XLGoBench固定抽象算法实例与复杂度来比较跨语言任务能力，token溢价只测相同内容的输入成本。两者都需语言内容可比，但token数不能替代模型错误率；本地两个scorer均不等于完整多语能力矩阵。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "论文离线与线上效果"
+        ]
+      },
+      "analysis": {
+        "title": "相同内容的价格差与相同任务的能力差应分轴",
+        "body": "Tokenization Premium的作者脚本先按编号拼27共同条款，独立分词后求和会受边界合并影响。XLGoBench则控制算法实例与复杂度，答案留在独立scorer。若未来研究token预算对跨语言推理的影响，应同时固定内容、翻译与预算，并使用真实模型输出；不能从阿姆哈拉语6.76倍成本推出6.76倍错误，也不能用UNK变少作为胜利。",
+        "papers": [
+          "foundation-models:tokenization-premium",
+          "foundation-models:xlgobench"
+        ]
+      },
+      "question": {
+        "id": "nov18-tokenization-premium",
+        "question": "某语言token比英语多一倍，是否可以预测其XLGoBench准确率减半？",
+        "answer": "不可以。token溢价是等内容的成本比，XLGoBench准确率还受训练覆盖、翻译、推理能力与预算约束影响；需匹配实例、验证模板和真实模型评测才能研究两者关系。",
+        "example": "同一最短路实例可以保持正确路径不变而换语言；输入从100变200token并不改变算法答案，不能把成本比直接换成准确率比。",
+        "papers": [
+          "foundation-models:tokenization-premium",
+          "foundation-models:xlgobench"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "foundation-models:tokenization-premium",
+          "foundation-models:xlgobench"
+        ],
+        "summary": "补齐配对token成本与拒答安全读出，比较XLGoBench的能力轴；记录2026-09-22原始Zenodo首发和真实公开测量脚本，不误当11月新首发。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Joins the same common UDHR articles before one encoding, compares total token cost and excludes UNK collapse. Full-item ECE, coverage/risk and full-energy denominators are constrained separately.",
+          "tradeoff": "XLGoBench fixes abstract algorithmic instances and complexity to compare cross-lingual task capability; token premium only measures matched-content input cost. Both require comparable language content, but token count is not model error rate, and neither local scorer runs a full multilingual matrix."
+        },
+        "analysis": {
+          "title": "Matched-content price gaps and matched-task capability gaps are different axes",
+          "body": "The Tokenization Premium script joins 27 common articles by number; separately tokenizing and summing can change boundary merges. XLGoBench instead controls algorithmic instances and complexity and seals answers in a separate scorer. Studying token budgets and cross-lingual reasoning would require fixed content, verified translations, budgets and real model outputs. A 6.76× Amharic cost is not a 6.76× error prediction, and UNK collapse is not an improvement."
+        },
+        "question": {
+          "question": "Does twice the English token count imply half the XLGoBench accuracy?",
+          "answer": "No. Premium measures matched-content cost, while task accuracy also depends on training coverage, translation, reasoning and budgets. Matched instances, verified templates and real model evaluation are needed to study their relationship.",
+          "example": "A shortest-path instance can keep the correct path while changing language. Expanding its input from 100 to 200 tokens does not change the algorithmic answer or establish an accuracy ratio."
+        },
+        "update": "Added matched-content token cost and abstention-safe readouts alongside the XLGoBench capability axis; recorded the original September 22 Zenodo release and real public measurement scripts rather than calling it a new November release."
+      }
+    },
+    {
+      "paper": "multimodal-models:rslivebench-uav-protocol",
+      "target_card": "multimodal-models/world-state-actions",
+      "source_revisions": {
+        "multimodal-models:rslivebench-uav-protocol": "eb516b30f562e2d4033a325d06ad10f3ec71d04af8e5b4229eddafcd5c764a6f",
+        "multimodal-models:woven": "3c7f5518fd36be1bc8aa964050531232d66f297057e8e0ccd57f3f4376d2f575"
+      },
+      "comparison": {
+        "position": "以真实新UAV观察、四场景FIFO和答案禁运控制持续评测；本地只实现采集/发布时窗、日历月禁运、SC子计分及缺失感知层次聚合。",
+        "tradeoff": "WOVEN训练视觉状态转移推理并按scene/action/reasoning验证迁移；RSLiveBench-UAV重点是航空几何与持续刷新。时间新鲜、真实采集和scene-OOD是不同维度，二者分数不能直接比较。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "论文离线与线上效果"
+        ]
+      },
+      "analysis": {
+        "title": "新拍摄与新场景不是同一个泛化控制",
+        "body": "WOVEN源初始图分组防止多个动作/问题跨split，RSLiveBench-UAV要求每批图像在相邻release之间拍摄，并退役最早入窗场景。持续更新降低旧答案暴露但不自动消除场景偏差；反过来，生成场景的OOD测试不提供真实航空空间几何。小FIFO重放只检验时窗与分母，不证明任何VLM空间能力或完整benchmark已接入。",
+        "papers": [
+          "multimodal-models:rslivebench-uav-protocol",
+          "multimodal-models:woven"
+        ]
+      },
+      "question": {
+        "id": "nov18-rslivebench-uav-protocol",
+        "question": "用昨天新拍的同一停车场替换一个场景，是否同时完成了freshness和scene-OOD评测？",
+        "answer": "不一定。可满足capture时窗与FIFO，但若地点、实体和视角类似，未必形成未见场景泛化。WOVEN的scene轴和UAV持续时间控制需各自按协议记录。",
+        "example": "新拍同一停车场可算新观察；一个从未见过的生成餐厅可算场景OOD，却不代表真实UAV跨视角车辆几何。",
+        "papers": [
+          "multimodal-models:rslivebench-uav-protocol",
+          "multimodal-models:woven"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "multimodal-models:rslivebench-uav-protocol",
+          "multimodal-models:woven"
+        ],
+        "summary": "补入RSLiveBench-UAV的L0发布/scorer协议，与WOVEN场景迁移分开；完整采集、标注和30模型高成本矩阵不复现。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Controls continual evaluation using fresh real UAV observations, four-scene FIFO and answer embargo. Local code only implements capture/release windows, calendar-month embargo, an SC subscorer and missing-aware hierarchical aggregation.",
+          "tradeoff": "WOVEN trains visual-transition reasoning and controls scene/action/reasoning transfer. RSLiveBench-UAV emphasizes aerial geometry and continual renewal. Temporal freshness, physical acquisition and scene-OOD are distinct axes; their scores are not directly comparable."
+        },
+        "analysis": {
+          "title": "Fresh capture and unseen scenes are not the same generalization control",
+          "body": "WOVEN groups initial-frame sources to keep related actions/questions out of different splits. RSLiveBench-UAV requires captures between consecutive releases and retires the earliest admitted scene. Renewal reduces exposure to old answers without removing scene bias; generated-scene OOD does not provide real aerial geometry. Tiny FIFO replay only validates timing and denominators, not spatial VLM capability or full benchmark integration."
+        },
+        "question": {
+          "question": "Does replacing a scene with yesterday's images of the same car park establish both freshness and scene-OOD?",
+          "answer": "Not necessarily. It can satisfy capture windows and FIFO without testing unseen scenes when location, entities and viewpoints remain similar. WOVEN's scene axis and UAV temporal controls require separate records.",
+          "example": "A new capture of the same car park is a fresh observation. An unseen generated restaurant may be scene-OOD but supplies no real UAV cross-view vehicle geometry."
+        },
+        "update": "Added the L0 RSLiveBench-UAV release/scorer protocol separately from WOVEN transfer; full acquisition, annotation and the costly 30-model matrix are not reproduced."
+      }
+    },
+    {
+      "paper": "multimodal-models:multimodal-library-protocol",
+      "target_card": "multimodal-models/alignment-interfaces",
+      "source_revisions": {
+        "multimodal-models:multimodal-library-protocol": "6548730112efd7e7a2ba61319abe6440440a434bc3741f01ad1a6067154a5972",
+        "foundation-models:clip": "9a8c03405713d34f4c7af432f78e05830369fa6b5e331a67a6d540983a205fa1"
+      },
+      "comparison": {
+        "position": "沿用ColPali页面多向量做query-token到page-token MaxSim，比较Qdrant距离与索引；本地仅向量/排名算术和带scope的计时读出。",
+        "tradeoff": "CLIP学习双塔全局归一化表示与对比目标，数字馆论文不新训练对齐模型而研究局部读出/数据库。CLIP真实图像小实验与人工token向量算术的证据等级不同，不能当视觉检索胜负。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "论文离线与线上效果"
+        ]
+      },
+      "analysis": {
+        "title": "训练对齐、局部检索与数据库吞吐要分别验证",
+        "body": "CLIP的相似度来自对比学习的全局图文表征；页面多向量late interaction保留每个query token的局部最佳证据。向量检索分数不是相关概率，必须由独立封存相关性评价。数字馆原文数据库预编码与端到端并发描述存在冲突，因此本地接口强制scope并用真实wall time算QPS，拒绝把作者Table VII解释为已复现的模型吞吐。",
+        "papers": [
+          "multimodal-models:multimodal-library-protocol",
+          "foundation-models:clip"
+        ]
+      },
+      "question": {
+        "id": "nov18-multimodal-library-protocol",
+        "question": "MaxSim小例子优于干扰向量，能否据此说它比CLIP更适合真实数字馆？",
+        "answer": "不能。它只验证读出算术。真实比较还需相同页面与查询、标签审计、编码/重排配置和预算，并分离模型质量、索引召回与服务性能；CLIP小任务结果也不代表长文页面能力。",
+        "example": "两token可分别命中页面两patch且分数为2，但这不说明相关页是否被完整索引，也不说明含ColPali推理的端到端QPS。",
+        "papers": [
+          "multimodal-models:multimodal-library-protocol",
+          "foundation-models:clip"
+        ]
+      },
+      "update": {
+        "date": "2026-11-18",
+        "papers": [
+          "multimodal-models:multimodal-library-protocol",
+          "foundation-models:clip"
+        ],
+        "summary": "补入页面MaxSim、独立检索指标和显式计时scope的L0接口；与CLIP训练机制分轴，保留原文并发口径冲突，不跑高成本完整索引。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Uses existing ColPali page multivectors for query-token/page-token MaxSim and compares Qdrant metrics/indexing. Local code only implements vector/ranking arithmetic and scope-labeled timing readouts.",
+          "tradeoff": "CLIP learns normalized global dual-tower representations with a contrastive objective. The library study uses an existing alignment model and studies local readouts/databases. Real-image CLIP experiments and constructed token arithmetic have different evidence levels, not a visual-retrieval ranking."
+        },
+        "analysis": {
+          "title": "Alignment training, local retrieval and database throughput need separate validation",
+          "body": "CLIP similarities come from contrastively learned global image/text representations. Page multivector late interaction preserves each query token's best local evidence. Similarity is not relevance probability and requires sealed independent judgments. The library paper conflicts on preencoded database versus end-to-end concurrency scope, so local timing requires an explicit scope and true wall-clock QPS rather than treating Table VII as reproduced model throughput."
+        },
+        "question": {
+          "question": "Does a MaxSim toy example beating a distractor show that it is better than CLIP for real libraries?",
+          "answer": "No. It only validates readout arithmetic. Real comparison needs matched pages/queries, audited judgments, encoding/reranking settings and budgets, separating model quality, index recall and serving performance. CLIP's small-task result is not long-document page capability either.",
+          "example": "Two query tokens may match two page patches for score 2, but that says neither whether relevant pages are fully indexed nor what throughput includes ColPali inference."
+        },
+        "update": "Added L0 page-MaxSim, independent retrieval metrics and explicit timing scope; separated them from CLIP training, retained the source's concurrency-scope conflict and did not run the costly full index."
+      }
+    }
+  ]
+}

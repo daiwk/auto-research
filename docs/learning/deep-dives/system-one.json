@@ -261,7 +261,7 @@
     "adaptive-decisions": {
       "title": "追加推理、跨语言路由与持续反馈，各在哪个时刻改变决策？",
       "thesis": "按需决策有三条时间轴：Selective Reasoning在单题内分配推理和读取预算，跨语言级联在不同后端间分配请求，Jev-DLC用已发生反馈影响后续请求。能力评测提供基线边界，却不自动证明任何控制策略有效。所有选择都要在当前测试目标揭晓之前冻结或作出。",
-      "updated": "2026-10-27",
+      "updated": "2026-11-18",
       "axes": [
         "单请求内控制与请求之间的状态更新",
         "熵、校准、错误排序与任务准确率",
@@ -308,6 +308,18 @@
             "数据与评测契约",
             "本地验证与边界"
           ]
+        },
+        {
+          "paper": "system-one:typed-inbox-protocol",
+          "position": "先冻结可见输入与线程切分，再按动作成本选择validation阈值；本地只含L0二元接口。",
+          "tradeoff": "Jev能力入口运行独立问题／候选并按gold计分；Typed Inbox关注多开关组合后的行动损失与私有邮箱分布。线程隔离不能被三seed替代，简单阈值也不是原文完整模型。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -325,6 +337,14 @@
           "papers": [
             "foundation-models:jev-regional-transfer",
             "foundation-models:selective-reasoning",
+            "foundation-models:jev-capability"
+          ]
+        },
+        {
+          "title": "从“选对标签”到“少漏重要邮件”还隔着行动策略",
+          "body": "Jev能力评测要求请求不带标准答案，并记录真实后端和数据覆盖。Typed Inbox进一步指出预测字段会组合为真实动作，错误的成本不对称；相同accuracy不代表同样漏信风险。先冻结邮箱可见快照，整线程切分，再在训练／validation内选阈值。原文的类别分层CV和完整三开关成本没有被局部二元接口替代。",
+          "papers": [
+            "system-one:typed-inbox-protocol",
             "foundation-models:jev-capability"
           ]
         }
@@ -360,13 +380,24 @@
             "foundation-models:jev-capability",
             "foundation-models:selective-reasoning"
           ]
+        },
+        {
+          "id": "cross-nov18-typed-inbox-protocol",
+          "question": "把邮箱noise阈值在held-out邮件上调到最低成本，能当Jev能力评测的公平对比吗？",
+          "answer": "不能。它把测试标签用于选择策略，且动作成本不同于独立选择accuracy。必须提前固定切分、成本和阈值选择规则，冻结后只评分；本地也没有调用Jev。",
+          "example": "教学例：看到漏掉一封重要信后回调阈值，会改变刚评过样本的决策，不能再当未见测试。",
+          "papers": [
+            "system-one:typed-inbox-protocol",
+            "foundation-models:jev-capability"
+          ]
         }
       ],
       "reviewed_papers": [
         "foundation-models:jev-capability",
         "foundation-models:jev-dlc",
         "foundation-models:jev-regional-transfer",
-        "foundation-models:selective-reasoning"
+        "foundation-models:selective-reasoning",
+        "system-one:typed-inbox-protocol"
       ],
       "updates": [
         {
@@ -383,6 +414,18 @@
             "foundation-models:jev-dlc": "4e952074b293d33374f3d5e20ae50c3e443d1a9642a72b343308cadfce8e8d4f",
             "foundation-models:jev-regional-transfer": "3a550deb82128ff8f3339ffc10f50a730a3aef8a7167331ad5e905c9706f8360",
             "foundation-models:selective-reasoning": "20c8743f26e83c2507091f8b09077a70fd3e41c6e3693892836627e3010e6d6b"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "system-one:typed-inbox-protocol",
+            "foundation-models:jev-capability"
+          ],
+          "summary": "先冻结可见输入与线程切分，再按动作成本选择validation阈值；本地只含L0二元接口。 完整实验高成本不复现，局部协议不作能力或Evolve证据。",
+          "source_revisions": {
+            "system-one:typed-inbox-protocol": "25815fc18a615070fcbcbfd15bffd49c876c6f5c5d3dfd146dca549142d7a464",
+            "foundation-models:jev-capability": "9484343eb3f24d2ff8c29ecdb8396472ae1bdf62060678922467f9d94eb10033"
           }
         }
       ]

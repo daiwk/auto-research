@@ -10,7 +10,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="preference-and-alignment/">偏好与对齐：先看反馈长什么样</a></h2>
 <p>只有“更喜欢哪个回答”或单条点赞时，怎样把反馈变成可学习目标？</p>
-<p class="ar-learning-topic-meta">100 个问题 · 25 篇论文</p>
+<p class="ar-learning-topic-meta">108 个问题 · 27 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="policy-optimization/">策略优化：谁在采样，谁在被更新</a></h2>

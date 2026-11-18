@@ -221,6 +221,8 @@
 
 ## Independent Researcher
 
+- 2026-11-15 · 一作：Dongwu Qian · [Grounding Language Models in Speech Does Not Fix AI Flavor: Calibrated LLM Judges, Goodhart Traps, and a Preference-Tuning Fix](../2611.19840-calibrated-judges-protocol/README.md)（`calibrated-judges-protocol`）：论文先报告三个负结果：音素交织继续预训练没有改善可感知口语风格且增加重复；prosody plan 遵从低于门槛；规则韵律 reward 的人类与裁判盲评近似随机。作者因此把重点转向评测：自动特征、功效受限的人类盲评、经过 catch trials 校准的 LLM judge，三层互补，不能用单一客观特征代替感知质量。
+- 2026-10-13 · 一作：Soovadeep Bakshi · [Similar Models, Broken Odds: Where Luce's Axiom Fails in Chatbot Arena](../2610.19095-luce-similarity-audit/README.md)（`luce-similarity-audit`）：Bradley–Terry 用每个模型一个分数推导任意两模型胜率，隐含“加入相似选项不应改变现有两者赔率”的 Luce/IIA 思路。作者发现，同系列版本、同代不同尺寸和同实验室模型之间的投票比全局分差预测得更果断。
 - 2026-08-10 · 一作：Zhuo Sun · [SR-OPSD: Self-Referenced On-Policy Self-Distillation](../2608.09745-sr-opsd/README.md)（`sr-opsd`）：把自教师与 reference 做几何插值得到有效目标，再用 Rényi divergence 控制投影几何和密度比敏感度。
 
 ## Independent researchers

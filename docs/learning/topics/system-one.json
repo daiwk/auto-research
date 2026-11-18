@@ -73,7 +73,8 @@
         "foundation-models:jev-capability",
         "foundation-models:jev-dlc",
         "foundation-models:jev-regional-transfer",
-        "foundation-models:selective-reasoning"
+        "foundation-models:selective-reasoning",
+        "system-one:typed-inbox-protocol"
       ]
     }
   ]

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-18",
+  "figures": [
+    {
+      "file": "paper-figure-01.png",
+      "paper_id": "2611.17381",
+      "version": "v1",
+      "figure": 1,
+      "caption": "Five-layer architecture, independent repair checking and sequential deployment gates.",
+      "source_url": "https://arxiv.org/pdf/2611.17381v1#page=8",
+      "paper_url": "https://arxiv.org/abs/2611.17381v1",
+      "source_kind": "fixed_version_pdf_crop_rendered_png",
+      "source_sha256": "7bce2d6c62085f8024f5af9f548789ab82c3ee5982c84df19ddde586e9adedfa",
+      "asset_sha256": "f9fe1d5dac0ef110bc1b37e20de7b67cda3271488f0586242817bbf24034dde7",
+      "image_sha256": "f9fe1d5dac0ef110bc1b37e20de7b67cda3271488f0586242817bbf24034dde7",
+      "page": 8,
+      "crop_points": [
+        36,
+        20,
+        570,
+        393
+      ],
+      "render_dpi": 144,
+      "caption_included": true,
+      "scientific_content_modified": false,
+      "visual_review_done": true,
+      "attribution": "Copyright belongs to the original authors. Original paper crop used for research explanation, not local experimental evidence.",
+      "license": "See original arXiv source; this repository grants no new license."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "paper_url": "https://arxiv.org/abs/2611.19840v1",
+  "source_url": "https://arxiv.org/pdf/2611.19840v1#page=8",
+  "figure": "Table 1",
+  "caption": "Iteration chain with median characters, rejected iterations and held-out blind win rates.",
+  "source_format": "PDF rendered original table including caption",
+  "image": "paper-figure-01.png",
+  "asset_sha256": "0b027ad66074b2c66e215309f23aac29632902482314acc90f60ab7ae7bcd418",
+  "image_sha256": "0b027ad66074b2c66e215309f23aac29632902482314acc90f60ab7ae7bcd418",
+  "source_html_sha256": "4eee386d41452bb194dba59fbc3a390ef0f588e20ae452ae71941e0509a5ede3",
+  "pdf_clip_points": [67, 65, 545, 273],
+  "render_scale": 2,
+  "copyright": "Copyright remains with the author; CC BY 4.0",
+  "description": "Original scientific table and caption; no redrawing or rearrangement. Rejected iterations are not completed blind evaluations; author results, not local measurements.",
+  "visually_verified": true
+}

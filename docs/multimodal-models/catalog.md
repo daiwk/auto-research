@@ -9,7 +9,10 @@
 
 | 方法族 | 论文 / 官方模型 | 机构与日期 | Adapter / 独立组件 |
 |---|---|---|---|
+| 语音事件与人类误报评测 | [FEND: Far-End Detection in Outbound Voice AI Calls](../multimodal-models/2611.18050-fend-protocol/README.md) | Observe.AI, India，2026-11-13 | `fend-protocol` |
+| 页面检索与系统测量 | [Towards High-Performance Multimodal Discovery: Evaluating Retrieval Efficacy and Operational Scalability in Digital Libraries](../multimodal-models/2611.17726-multimodal-library-protocol/README.md) | Indiana University，2026-11-13 | `multimodal-library-protocol` |
 | 视觉状态转移监督 | [Back to Pixels: Lifting Latent Video Diffusion into Pixel Space](../multimodal-models/2611.17336-pixvid/README.md) | Roblox，2026-11-12 | 未复现（高成本资料） |
+| 持续航空空间评测 | [RSLiveBench-UAV: A Continually Evolving Vision-Language Benchmark for Aerial Spatial Intelligence](../multimodal-models/2611.14953-rslivebench-uav-protocol/README.md) | East China Normal University，2026-11-11 | `rslivebench-uav-protocol` |
 | 多流语音单元与打分 | [GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling](../multimodal-models/2611.01143-gslm2/README.md) | Meta Superintelligence Labs，2026-10-31 | `gslm2` |
 | 图像匹配与稀疏对应 | [FlexGlue: Sparse-to-Dense Feature Matching and Visual Disambiguation](../multimodal-models/2610.32976-flexglue/README.md) | ETH Zurich，2026-10-23 | 未复现（高成本资料） |
 | 统一动作表示与条件注意力 | [UniAction: Unified Action Conditioning for World Models](../multimodal-models/2610.32977-uniaction/README.md) | Stanford University，2026-10-23 | `uniaction` |

@@ -46,7 +46,9 @@
         "foundation-models:unbundling-vision",
         "foundation-models:d-jepa",
         "foundation-models:duojepa",
-        "foundation-models:spectral-ghost"
+        "foundation-models:spectral-ghost",
+        "multimodal-models:multimodal-library-protocol",
+        "multimodal-models:fend-protocol"
       ]
     },
     {
@@ -130,7 +132,9 @@
         "multimodal-models:rs-jepa",
         "multimodal-models:onlyact",
         "multimodal-models:sensorwm-planning",
-        "multimodal-models:pixvid"
+        "multimodal-models:pixvid",
+        "foundation-models:stratified-retention-protocol",
+        "multimodal-models:rslivebench-uav-protocol"
       ]
     }
   ]

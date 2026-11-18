@@ -1702,6 +1702,30 @@
             "背景与主要改动",
             "核心公式"
           ]
+        },
+        {
+          "paper": "agent-research:askalcf-protocol",
+          "position": "回答盲的生产／全库充分性pivot、独立质量信号、revision缓存与受人审动作控制的修复协议。",
+          "tradeoff": "Harness²不依赖答案rubric，按开放执行对照选择并积累经验；AskALCF有冻结专家归因和target/control，不能用文本偏好选择替代充分性探针。局部七路不是原文28规则。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ]
+        },
+        {
+          "paper": "agent-research:prodpilot-protocol",
+          "position": "按修复类型分层，真实checker接受修改、全量审计回滚回归，再按规则和概率顺序门控；本地仅文件映射回调。",
+          "tradeoff": "ProdPilot依特定生产规则，Harness²比较开放任务行为且无gold rubric。规则通过不等于通用安全；handle返回不是smoke成功，外部调用异常还需记未知副作用。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -1842,6 +1866,22 @@
           "papers": [
             "agent-research:stellar-colosseum",
             "agent-research:scientist-two"
+          ]
+        },
+        {
+          "title": "执行差异是证据，但不自动告诉你该修哪一层",
+          "body": "Harness²先提出并真实执行不同harness，再组合和反思；AskALCF先区分生产检索与全库知识是否充分，才把错误交给对应组件。两者都不能用成功计数代替真实动作。AskALCF的after必须与冷缓存null比较，并记录逐题翻转；人审ship/revert/decline不由judge自信度授权。",
+          "papers": [
+            "agent-research:askalcf-protocol",
+            "agent-research:harness2"
+          ]
+        },
+        {
+          "title": "从可执行修改到可信交付，需要独立验收和失败语义",
+          "body": "Harness²保留真实候选执行与采用依据，不把“提案”当“执行”。ProdPilot在结构化修复域进一步把每个fix的接受交给原checker，回归即回滚，关键P0不能被高模型概率覆盖。局部回调能验证这些控制流，但没有50条规则、概率模型或实际云环境，因此不能宣称应用已生产就绪。",
+          "papers": [
+            "agent-research:prodpilot-protocol",
+            "agent-research:harness2"
           ]
         }
       ],
@@ -2018,9 +2058,29 @@
             "agent-research:stellar-colosseum",
             "agent-research:scientist-two"
           ]
+        },
+        {
+          "id": "cross-nov18-askalcf-protocol",
+          "question": "Harness²的某候选回答更好，足以认定AskALCF需要补知识吗？",
+          "answer": "不足。更好文本不证明全库缺少权威文档；应看回答盲的R／C。R假C真优先修retrieval，二者假才是knowledge。再以冻结参考和null对照验证候选。",
+          "example": "教学例：同一文档已在全库但top-k错过，补一份重复文档可能掩盖检索问题。",
+          "papers": [
+            "agent-research:askalcf-protocol",
+            "agent-research:harness2"
+          ]
+        },
+        {
+          "id": "cross-nov18-prodpilot-protocol",
+          "question": "修复后的规则分数很高，Harness²或ProdPilot就能自动部署吗？",
+          "answer": "不能。ProdPilot还需无失败P0、概率门、确定构建和显式批准；Harness²没有同一生产门控保证。部署回调已发出但异常时状态未知，不能直接重试制造重复副作用。",
+          "example": "教学例：全局分数93但唯一P0失败仍须闭门；服务创建后超时需查外部状态。",
+          "papers": [
+            "agent-research:prodpilot-protocol",
+            "agent-research:harness2"
+          ]
         }
       ],
-      "updated": "2026-11-15",
+      "updated": "2026-11-18",
       "reviewed_papers": [
         "agent-research:verified-quantum-wiki",
         "agent-research:rsi-opt",
@@ -2083,7 +2143,9 @@
         "agent-research:alphaevolve",
         "agent-research:co-director",
         "agent-research:multiloop",
-        "agent-research:stellar-colosseum"
+        "agent-research:stellar-colosseum",
+        "agent-research:askalcf-protocol",
+        "agent-research:prodpilot-protocol"
       ],
       "updates": [
         {
@@ -2364,6 +2426,30 @@
           "source_revisions": {
             "agent-research:stellar-colosseum": "64562b4d44dc2fccd08df5c2ca93814521d0777b5b8b3a794a4fc46ffb5be122",
             "agent-research:scientist-two": "7dc069b4eafe45c0c793e19deeb6ce40815fa4bf2685a52ba3e0f54e8f642073"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "agent-research:askalcf-protocol",
+            "agent-research:harness2"
+          ],
+          "summary": "回答盲的生产／全库充分性pivot、独立质量信号、revision缓存与受人审动作控制的修复协议。 完整实验高成本不复现，局部协议不作能力或Evolve证据。",
+          "source_revisions": {
+            "agent-research:askalcf-protocol": "b3b3f4b8a8c8321985e4da46b945c113afdcb88d88d25cb19ef0a92095d44422",
+            "agent-research:harness2": "c738a9266c1647b8f5cc0e50a0055d1aecf1fcf783ee78de3405c2e84850f48a"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "agent-research:prodpilot-protocol",
+            "agent-research:harness2"
+          ],
+          "summary": "按修复类型分层，真实checker接受修改、全量审计回滚回归，再按规则和概率顺序门控；本地仅文件映射回调。 完整实验高成本不复现，局部协议不作能力或Evolve证据。",
+          "source_revisions": {
+            "agent-research:prodpilot-protocol": "528d60ba9ae602cf962e4b0b2faf41dc5de4e4ce6a3570fc3a0968710576d428",
+            "agent-research:harness2": "c738a9266c1647b8f5cc0e50a0055d1aecf1fcf783ee78de3405c2e84850f48a"
           }
         }
       ]

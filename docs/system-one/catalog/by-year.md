@@ -4,6 +4,7 @@
 
 ## 2026
 
+- **2026-10-23** — [Typed Inbox](../2610.32955-typed-inbox-protocol/README.md)：冻结模型可见快照、整线程隔离，以validation成本选行动阈值；L0协议不是邮箱模型复现。
 - **2026-10-21** — [When Multiple Choices Are Correct](../2610.29217-jev-multicorrect/README.md)：排序正确不等于恢复全部正确选项；本地仅CPU评分、概率精度与validation/test隔离协议，完整付费API实验不复现。
 - **2026-10-20** — [System One多模态重排](../../multimodal-models/2610.28435-system-one-rerank/README.md)：同一图文上下文一次前向读取候选概率；A100真实小VLM接口诊断，不是完整27B评测。
 - **2026-10-16** — [Jev 葡语 IR](../../foundation-models/2610.23346-jev-portuguese-ir/README.md)：有序判定与独立概率重排协议；CPU 合同检查和原文表格复算，不调用 Jev，完整 API 实验不复现。

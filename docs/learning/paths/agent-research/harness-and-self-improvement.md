@@ -7,7 +7,7 @@ hide:
 
 # 运行流程与自进化：改的是哪一层
 
-[Agent](index.md) / 248 个问题 · 62 篇论文
+[Agent](index.md) / 256 个问题 · 64 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,62 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">248 个问题 · 62 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">256 个问题 · 64 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:askalcf-protocol" data-paper-title="AskALCF: A Self-Improving Agentic System for Intelligent HPC User Support" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="AskALCF: A Self-Improving Agentic System for Intelligent HPC User Support Agent Argonne National Laboratory 2026-11-11 技术支持系统答错后，直接改提示或补知识容易修错对象。AskALCF把生产RAG问答、知识PR撰写、日志归因和工单处理连成受人审控制的闭环；“自改进”主要指harness规则、提示和知识，不是模型权重RL。回答层看正确性、忠实性、引用与完整性；检索层必须看不到生成回答，分别判断生产top-k是否充分、全库是否存在足够文档。两范围充分性之后，有序规则把失败归为knowledge、retrieval、prompt、model、tools_mcp，并保留no_failure和unknown。 成本过高且私有资源不可得，完整实验不复现（审查 DONE）；component_only／L1确定性协议机制。本地不运行RAG、Agent judge、HPC服务或私有支持日志；不训练模型权重。完整生产／API实验高成本不复现（审查 DONE）。two_scope_sufficiency真的调用两次外部evaluator，只传question、passages、scope，不传生成回答或gold。Evidence是bool／unknown信号；route实现7种粗粒度合同，不冒充原文28条完整规则或7类judge覆盖门。检索充分性本身由外部可信judge提供，本地不生成判断。  执行框架与自改进 检索归因与受控修复 Agent 运行流程与自进化：改的是哪一层 AskALCF的self-improving意味着给HPC助手做RL训练吗？ 不是。主要改规则、提示、知识和工具harness，并经专家参考和受控arm评估。论文未把这称为模型权重训练，也没有知识PR已经合并并重建生产索引的证据。 教学例：修改澄清问题规则后离线重跑支持日志，不等于训练了一个新的大模型。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-askalcf-protocol-effcb5fa" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-1575d11cbc509430">AskALCF的self-improving意味着给HPC助手做RL训练吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aaskalcf-protocol">AskALCF: A Self-Improving Agentic System for Intelligent HPC User Support</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Argonne National Laboratory</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。主要改规则、提示、知识和工具harness，并经专家参考和受控arm评估。论文未把这称为模型权重训练，也没有知识PR已经合并并重建生产索引的证据。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：修改澄清问题规则后离线重跑支持日志，不等于训练了一个新的大模型。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.15700v1">原论文</a> · <a href="../../../../agent-research/2611.15700-askalcf-protocol/">实现解读</a> · <a href="#qa-1575d11cbc509430">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:askalcf-protocol" data-paper-title="AskALCF: A Self-Improving Agentic System for Intelligent HPC User Support" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="AskALCF: A Self-Improving Agentic System for Intelligent HPC User Support Agent Argonne National Laboratory 2026-11-11 技术支持系统答错后，直接改提示或补知识容易修错对象。AskALCF把生产RAG问答、知识PR撰写、日志归因和工单处理连成受人审控制的闭环；“自改进”主要指harness规则、提示和知识，不是模型权重RL。回答层看正确性、忠实性、引用与完整性；检索层必须看不到生成回答，分别判断生产top-k是否充分、全库是否存在足够文档。两范围充分性之后，有序规则把失败归为knowledge、retrieval、prompt、model、tools_mcp，并保留no_failure和unknown。 成本过高且私有资源不可得，完整实验不复现（审查 DONE）；component_only／L1确定性协议机制。本地不运行RAG、Agent judge、HPC服务或私有支持日志；不训练模型权重。完整生产／API实验高成本不复现（审查 DONE）。two_scope_sufficiency真的调用两次外部evaluator，只传question、passages、scope，不传生成回答或gold。Evidence是bool／unknown信号；route实现7种粗粒度合同，不冒充原文28条完整规则或7类judge覆盖门。检索充分性本身由外部可信judge提供，本地不生成判断。  执行框架与自改进 检索归因与受控修复 Agent 运行流程与自进化：改的是哪一层 为什么检索充分性判定不能看生成回答？ 它要独立判定生产passages和全库是否足以回答。看到生成答案可能把模型幻觉当必需事实或遗漏覆盖，混淆检索与生成责任。R假C真归retrieval，R假C假归knowledge；低正确率不能越过此pivot。 教学例：全库有正确安装页但top-k没取到，错误答案应先查检索，而不是直接改模型。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-db8403eef363682c">为什么检索充分性判定不能看生成回答？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aaskalcf-protocol">AskALCF: A Self-Improving Agentic System for Intelligent HPC User Support</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Argonne National Laboratory</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它要独立判定生产passages和全库是否足以回答。看到生成答案可能把模型幻觉当必需事实或遗漏覆盖，混淆检索与生成责任。R假C真归retrieval，R假C假归knowledge；低正确率不能越过此pivot。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：全库有正确安装页但top-k没取到，错误答案应先查检索，而不是直接改模型。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.15700v1">原论文</a> · <a href="../../../../agent-research/2611.15700-askalcf-protocol/">实现解读</a> · <a href="#qa-db8403eef363682c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:askalcf-protocol" data-paper-title="AskALCF: A Self-Improving Agentic System for Intelligent HPC User Support" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="AskALCF: A Self-Improving Agentic System for Intelligent HPC User Support Agent Argonne National Laboratory 2026-11-11 技术支持系统答错后，直接改提示或补知识容易修错对象。AskALCF把生产RAG问答、知识PR撰写、日志归因和工单处理连成受人审控制的闭环；“自改进”主要指harness规则、提示和知识，不是模型权重RL。回答层看正确性、忠实性、引用与完整性；检索层必须看不到生成回答，分别判断生产top-k是否充分、全库是否存在足够文档。两范围充分性之后，有序规则把失败归为knowledge、retrieval、prompt、model、tools_mcp，并保留no_failure和unknown。 成本过高且私有资源不可得，完整实验不复现（审查 DONE）；component_only／L1确定性协议机制。本地不运行RAG、Agent judge、HPC服务或私有支持日志；不训练模型权重。完整生产／API实验高成本不复现（审查 DONE）。two_scope_sufficiency真的调用两次外部evaluator，只传question、passages、scope，不传生成回答或gold。Evidence是bool／unknown信号；route实现7种粗粒度合同，不冒充原文28条完整规则或7类judge覆盖门。检索充分性本身由外部可信judge提供，本地不生成判断。  执行框架与自改进 检索归因与受控修复 Agent 运行流程与自进化：改的是哪一层 能把Harness²无rubric的选择器直接当AskALCF的归因核验器吗？ 不能。Harness²比较开放执行行为并匿名选择已有产物；AskALCF用独立回答／检索证据、冻结专家归因和target/control实验定位修复对象。执行对照是共同点，参考标签和判断对象不同。 教学例：看到两个回复文本不同不能判定全库缺文档；还要运行回答盲的corpus充分性探针。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-210beb35d5ff16ae">能把Harness²无rubric的选择器直接当AskALCF的归因核验器吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aaskalcf-protocol">AskALCF: A Self-Improving Agentic System for Intelligent HPC User Support</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Argonne National Laboratory</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。Harness²比较开放执行行为并匿名选择已有产物；AskALCF用独立回答／检索证据、冻结专家归因和target/control实验定位修复对象。执行对照是共同点，参考标签和判断对象不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：看到两个回复文本不同不能判定全库缺文档；还要运行回答盲的corpus充分性探针。</p>
+<p class="ar-learning-sources">依据：结果、负控与边界、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.15700v1">原论文</a> · <a href="../../../../agent-research/2611.15700-askalcf-protocol/">实现解读</a> · <a href="#qa-210beb35d5ff16ae">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:askalcf-protocol" data-paper-title="AskALCF: A Self-Improving Agentic System for Intelligent HPC User Support" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="AskALCF: A Self-Improving Agentic System for Intelligent HPC User Support Agent Argonne National Laboratory 2026-11-11 技术支持系统答错后，直接改提示或补知识容易修错对象。AskALCF把生产RAG问答、知识PR撰写、日志归因和工单处理连成受人审控制的闭环；“自改进”主要指harness规则、提示和知识，不是模型权重RL。回答层看正确性、忠实性、引用与完整性；检索层必须看不到生成回答，分别判断生产top-k是否充分、全库是否存在足够文档。两范围充分性之后，有序规则把失败归为knowledge、retrieval、prompt、model、tools_mcp，并保留no_failure和unknown。 成本过高且私有资源不可得，完整实验不复现（审查 DONE）；component_only／L1确定性协议机制。本地不运行RAG、Agent judge、HPC服务或私有支持日志；不训练模型权重。完整生产／API实验高成本不复现（审查 DONE）。two_scope_sufficiency真的调用两次外部evaluator，只传question、passages、scope，不传生成回答或gold。Evidence是bool／unknown信号；route实现7种粗粒度合同，不冒充原文28条完整规则或7类judge覆盖门。检索充分性本身由外部可信judge提供，本地不生成判断。  执行框架与自改进 检索归因与受控修复 Agent 运行流程与自进化：改的是哪一层 null净变化为零，为何还需保存逐题翻转和缓存revision？ 等量正反翻转可抵消均值，却不代表无随机噪声。扩展缓存还要依query、模型、提示和corpus等revision失效；null需要真实冷缓存调用。局部noise gate不是显著性检验，最终ship仍是显式人审。 教学例：before为错／对，null为对／错，均值没变但有两次翻转；不应把一次修复增益当可靠效果。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-0d0c6bdfc1989eeb">null净变化为零，为何还需保存逐题翻转和缓存revision？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aaskalcf-protocol">AskALCF: A Self-Improving Agentic System for Intelligent HPC User Support</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Argonne National Laboratory</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>等量正反翻转可抵消均值，却不代表无随机噪声。扩展缓存还要依query、模型、提示和corpus等revision失效；null需要真实冷缓存调用。局部noise gate不是显著性检验，最终ship仍是显式人审。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：before为错／对，null为对／错，均值没变但有两次翻转；不应把一次修复增益当可靠效果。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.15700v1">原论文</a> · <a href="../../../../agent-research/2611.15700-askalcf-protocol/">实现解读</a> · <a href="#qa-0d0c6bdfc1989eeb">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:multiloop" data-paper-title="MULTILOOP: Evolving Multi-Agent Harnesses for Complex Information-Seeking Tasks" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="MULTILOOP: Evolving Multi-Agent Harnesses for Complex Information-Seeking Tasks Agent Tel Aviv University 2026-11-11 同样的底层模型，提示、工具、子Agent通信和终止策略不同，效果也可能不同。MULTILOOP检验自动coding agent能否从执行轨迹中诊断并修复多Agent系统：优化器读取训练分数、orchestrator／subagent全部轨迹以及既往代码改动，更新harness，重新评估后继续。正文§1明确不是提出新的优化策略，而是研究已有harness优化方法在多Agent场景的能力边界。实验证据尤其值得注意：大部分提升来自更好的提示和工具使用，而关键编排故障未消失。 完整实验成本过高，不复现（审查 DONE）。review_only：仅资料收录。完整实验成本过高，不复现（审查 DONE）。论文明确是现有优化范式在多Agent场景的实证case study，不制造通用loop组件冒充新算法。仅收录固定v1方法、成本、错误分类、原图和双语学习材料。未实现Antigravity coding optimizer、Gemini actor、DeepSearchQA bridge、网页/PDF工具或harness搜索；没有runtime、机制metrics或GPU收据。若未来正式实现，模型选择仅可使用validation，不能为了挑harness反复读取test。  Harness 与自我改进 多Agent编排诊断 Agent 运行流程与自进化：改的是哪一层 MULTILOOP是否提出了新的多Agent优化算法？ 正文明确不是新优化策略，而是将已有自动harness优化范式用于多Agent信息检索的实证研究。贡献包括真实结果和失败分类，不能用通用for-loop冒称实现新算法。 教学例：把现有代码优化器接到多Agent轨迹上值得研究，但一个空循环不等于复现其语义诊断。 2026-11-15">
 <p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
 <span id="paper-agent-research-multiloop-809dc218" class="ar-learning-paper-anchor"></span>
@@ -80,6 +133,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>教学例：10道每题并行几十次搜索的任务，可能比上千个CPU算术样例贵得多。</p>
 <p class="ar-learning-sources">依据：背景与主要改动、核心公式、数据协议与代码映射；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.15754v1">原论文</a> · <a href="../../../../agent-research/2611.15754-multiloop/">实现解读</a> · <a href="#qa-4bff878ff793a916">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:prodpilot-protocol" data-paper-title="ProdPilot: A Layered Model Context Protocol System for Automated Production Readiness and Deployment of Vibe-Coded Projects" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="ProdPilot: A Layered Model Context Protocol System for Automated Production Readiness and Deployment of Vibe-Coded Projects Agent Artificial Intelligence Technology Centre (AITeC) / Shifa Tameer-e-Millat University 2026-11-11 AI生成应用能在本地运行，不代表生产配置正确。ProdPilot用五层MCP系统识别技术栈、审计、修复、评分门控和部署。50条规则中28条是固定模板、16条从项目取值、6条由IDE Agent生成，所以88%的规则种类不需要模型写内容；它不意味着88%的项目可无模型部署。Node／Express与React／Vite采用不同blueprint，无法识别或存在歧义时不猜。修复合同限制可改文件／位置与必须不变的内容。不论静态、参数化还是委派生成，回报“已修复”只算声明，必须重跑原checker。 高成本完整实验不复现（审查 DONE）；component_only／L1 CPU修复与部署门合同。本地只在内存文件映射上调用真实checker／fix回调，不连接云、Docker、GitHub或IDE模型；不是完整MCP服务器或生产部署复现。Rule显式区分static／parametric／delegated，持有真正执行的check与可选fix回调及可改文件集。repair传递项目副本，拒绝越界改动，checker失败不接受；回归和异常不改变原快照。没有fix回调就转人工，不伪造模型动作。任一规则输出非bool／None或异常记error，None为不适用，不算通过。  执行框架与自改进 独立校验与部署门 Agent 运行流程与自进化：改的是哪一层 ProdPilot的88%不需要模型，能说88%的应用自动部署成功吗？ 不能。28静态加16参数化占50条规则的88%，是规则种类占比。项目可能同时触发委派规则或其他部署失败；还需原checker和部署门逐项验证。 教学例：同一项目只要仍有一个未修复P0，其他49条都通过也不能由模型概率把它放行。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<span id="paper-agent-research-prodpilot-protocol-994d6dfd" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-af1a9203943c43f2">ProdPilot的88%不需要模型，能说88%的应用自动部署成功吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aprodpilot-protocol">ProdPilot: A Layered Model Context Protocol System for Automated Production Readiness and Deployment of Vibe-Coded Projects</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Artificial Intelligence Technology Centre (AITeC) / Shifa Tameer-e-Millat University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。28静态加16参数化占50条规则的88%，是规则种类占比。项目可能同时触发委派规则或其他部署失败；还需原checker和部署门逐项验证。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一项目只要仍有一个未修复P0，其他49条都通过也不能由模型概率把它放行。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17381v1">原论文</a> · <a href="../../../../agent-research/2611.17381-prodpilot-protocol/">实现解读</a> · <a href="#qa-af1a9203943c43f2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:prodpilot-protocol" data-paper-title="ProdPilot: A Layered Model Context Protocol System for Automated Production Readiness and Deployment of Vibe-Coded Projects" data-learning-pending="false" data-level="mechanism" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="ProdPilot: A Layered Model Context Protocol System for Automated Production Readiness and Deployment of Vibe-Coded Projects Agent Artificial Intelligence Technology Centre (AITeC) / Shifa Tameer-e-Millat University 2026-11-11 AI生成应用能在本地运行，不代表生产配置正确。ProdPilot用五层MCP系统识别技术栈、审计、修复、评分门控和部署。50条规则中28条是固定模板、16条从项目取值、6条由IDE Agent生成，所以88%的规则种类不需要模型写内容；它不意味着88%的项目可无模型部署。Node／Express与React／Vite采用不同blueprint，无法识别或存在歧义时不猜。修复合同限制可改文件／位置与必须不变的内容。不论静态、参数化还是委派生成，回报“已修复”只算声明，必须重跑原checker。 高成本完整实验不复现（审查 DONE）；component_only／L1 CPU修复与部署门合同。本地只在内存文件映射上调用真实checker／fix回调，不连接云、Docker、GitHub或IDE模型；不是完整MCP服务器或生产部署复现。Rule显式区分static／parametric／delegated，持有真正执行的check与可选fix回调及可改文件集。repair传递项目副本，拒绝越界改动，checker失败不接受；回归和异常不改变原快照。没有fix回调就转人工，不伪造模型动作。任一规则输出非bool／None或异常记error，None为不适用，不算通过。  执行框架与自改进 独立校验与部署门 Agent 运行流程与自进化：改的是哪一层 fix回调返回了新文件，为什么仍可能需要回滚？ 回报和改文件都不是验收。原违规checker必须通过，全量审计还必须保持此前通过的规则不回归；越界改动或异常也不能接受。每问题至多3次、每run至多5cycle限制重试。 教学例：新增health端点却破坏原有security middleware时，应恢复修改前快照并交人工，而非把health成功加一。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-7cbd8031970364e5">fix回调返回了新文件，为什么仍可能需要回滚？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aprodpilot-protocol">ProdPilot: A Layered Model Context Protocol System for Automated Production Readiness and Deployment of Vibe-Coded Projects</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Artificial Intelligence Technology Centre (AITeC) / Shifa Tameer-e-Millat University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>回报和改文件都不是验收。原违规checker必须通过，全量审计还必须保持此前通过的规则不回归；越界改动或异常也不能接受。每问题至多3次、每run至多5cycle限制重试。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：新增health端点却破坏原有security middleware时，应恢复修改前快照并交人工，而非把health成功加一。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17381v1">原论文</a> · <a href="../../../../agent-research/2611.17381-prodpilot-protocol/">实现解读</a> · <a href="#qa-7cbd8031970364e5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:prodpilot-protocol" data-paper-title="ProdPilot: A Layered Model Context Protocol System for Automated Production Readiness and Deployment of Vibe-Coded Projects" data-learning-pending="false" data-level="comparison" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="ProdPilot: A Layered Model Context Protocol System for Automated Production Readiness and Deployment of Vibe-Coded Projects Agent Artificial Intelligence Technology Centre (AITeC) / Shifa Tameer-e-Millat University 2026-11-11 AI生成应用能在本地运行，不代表生产配置正确。ProdPilot用五层MCP系统识别技术栈、审计、修复、评分门控和部署。50条规则中28条是固定模板、16条从项目取值、6条由IDE Agent生成，所以88%的规则种类不需要模型写内容；它不意味着88%的项目可无模型部署。Node／Express与React／Vite采用不同blueprint，无法识别或存在歧义时不猜。修复合同限制可改文件／位置与必须不变的内容。不论静态、参数化还是委派生成，回报“已修复”只算声明，必须重跑原checker。 高成本完整实验不复现（审查 DONE）；component_only／L1 CPU修复与部署门合同。本地只在内存文件映射上调用真实checker／fix回调，不连接云、Docker、GitHub或IDE模型；不是完整MCP服务器或生产部署复现。Rule显式区分static／parametric／delegated，持有真正执行的check与可选fix回调及可改文件集。repair传递项目副本，拒绝越界改动，checker失败不接受；回归和异常不改变原快照。没有fix回调就转人工，不伪造模型动作。任一规则输出非bool／None或异常记error，None为不适用，不算通过。  执行框架与自改进 独立校验与部署门 Agent 运行流程与自进化：改的是哪一层 ProdPilot与Harness²的执行证据可互相替代吗？ 不能。ProdPilot面向特定生产规则和独立checker，通过并不保证覆盖外漏洞；Harness²在没有答案rubric时比较执行产物和harness行为。前者是规则验证，后者不是同一个安全证明。 教学例：应用通过已登记的health规则，不表示业务权限逻辑无漏洞，也不等于开放任务回答更好。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-938c5115724fa81f">ProdPilot与Harness²的执行证据可互相替代吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aprodpilot-protocol">ProdPilot: A Layered Model Context Protocol System for Automated Production Readiness and Deployment of Vibe-Coded Projects</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Artificial Intelligence Technology Centre (AITeC) / Shifa Tameer-e-Millat University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。ProdPilot面向特定生产规则和独立checker，通过并不保证覆盖外漏洞；Harness²在没有答案rubric时比较执行产物和harness行为。前者是规则验证，后者不是同一个安全证明。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：应用通过已登记的health规则，不表示业务权限逻辑无漏洞，也不等于开放任务回答更好。</p>
+<p class="ar-learning-sources">依据：结果、负控与边界、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17381v1">原论文</a> · <a href="../../../../agent-research/2611.17381-prodpilot-protocol/">实现解读</a> · <a href="#qa-938c5115724fa81f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:prodpilot-protocol" data-paper-title="ProdPilot: A Layered Model Context Protocol System for Automated Production Readiness and Deployment of Vibe-Coded Projects" data-learning-pending="false" data-level="implementation" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="ProdPilot: A Layered Model Context Protocol System for Automated Production Readiness and Deployment of Vibe-Coded Projects Agent Artificial Intelligence Technology Centre (AITeC) / Shifa Tameer-e-Millat University 2026-11-11 AI生成应用能在本地运行，不代表生产配置正确。ProdPilot用五层MCP系统识别技术栈、审计、修复、评分门控和部署。50条规则中28条是固定模板、16条从项目取值、6条由IDE Agent生成，所以88%的规则种类不需要模型写内容；它不意味着88%的项目可无模型部署。Node／Express与React／Vite采用不同blueprint，无法识别或存在歧义时不猜。修复合同限制可改文件／位置与必须不变的内容。不论静态、参数化还是委派生成，回报“已修复”只算声明，必须重跑原checker。 高成本完整实验不复现（审查 DONE）；component_only／L1 CPU修复与部署门合同。本地只在内存文件映射上调用真实checker／fix回调，不连接云、Docker、GitHub或IDE模型；不是完整MCP服务器或生产部署复现。Rule显式区分static／parametric／delegated，持有真正执行的check与可选fix回调及可改文件集。repair传递项目副本，拒绝越界改动，checker失败不接受；回归和异常不改变原快照。没有fix回调就转人工，不伪造模型动作。任一规则输出非bool／None或异常记error，None为不适用，不算通过。  执行框架与自改进 独立校验与部署门 Agent 运行流程与自进化：改的是哪一层 本地gated_deploy返回handle或抛异常，能直接判部署成功或从未部署吗？ 都不能。handle返回只说明deploy回调返回，仍需smoke；调用中断可能已有外部副作用，必须保留attempt并记unknown。局部接口不含云或概率模型，完整684部署实验高成本不复现。 教学例：创建服务后网络超时，不能宣称deployed=false再盲目重试创建；应先核实外部状态。 2026-11-18">
+<p class="ar-learning-card__domain"><a href="./">Agent / 运行流程与自进化：改的是哪一层</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-3f43522c33b3a7ec">本地gated_deploy返回handle或抛异常，能直接判部署成功或从未部署吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=agent-research%3Aprodpilot-protocol">ProdPilot: A Layered Model Context Protocol System for Automated Production Readiness and Deployment of Vibe-Coded Projects</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-18 · Artificial Intelligence Technology Centre (AITeC) / Shifa Tameer-e-Millat University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>都不能。handle返回只说明deploy回调返回，仍需smoke；调用中断可能已有外部副作用，必须保留attempt并记unknown。局部接口不含云或概率模型，完整684部署实验高成本不复现。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：创建服务后网络超时，不能宣称deployed=false再盲目重试创建；应先核实外部状态。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.17381v1">原论文</a> · <a href="../../../../agent-research/2611.17381-prodpilot-protocol/">实现解读</a> · <a href="#qa-3f43522c33b3a7ec">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="agent-research:fgse" data-paper-title="When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents" data-learning-pending="false" data-level="basics" data-domain="agent-research" data-theme="agent-research" data-topic="agent-research/harness-and-self-improvement" data-search="When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents Agent Nanyang Technological University 2026-11-10 一次经验修复能帮助当前任务，却可能在边界任务有害，或破坏旧技能。FGSE 将更新表示为带前提、行为、预期效果和 verifier 的假设，先在临时状态上跑迁移、定向证伪和归档回归探针，再 commit/refine/reject。风险集中于可分离子范围时允许一次前提细化；它不是“成功经验一律记住”。 完整实验成本过高，不复现（审查 DONE）。本地交付纯 CPU 经验准入门控，输入外部 verifier 的成对记录；不生成 Agent、探针或正确答案，不把门控通过率当任务成功率。Probe 保存同一探针在原状态/临时状态的有限分数及预期效果布尔值；不保存 gold answer。commitment_gate() 按 Eq.7–9 计算并返回三统计量和决定。调用者必须实际取得成对 verifier 结果；这里既没有 actor callback，也没有把预设分数冒充模型执行。  自进化与技能优化 证伪与回归保护 Agent 运行流程与自进化：改的是哪一层 FGSE 为什么不能把修好当前任务的经验立即写进长期记忆？ 当前任务增益没有覆盖迁移、边界反例和旧技能。FGSE 要在临时状态上分别测这些风险，再决定写入、一次细化或拒绝；只有原任务成功不足以支持持久化。 教学例：某工具报错时“始终重试”修好一次瞬时故障，但在付款已成功、回执丢失时可能重复扣款。 2026-11-11">

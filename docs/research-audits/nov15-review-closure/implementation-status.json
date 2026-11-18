@@ -7,11 +7,11 @@
   "review_finalized_on": "2026-11-18",
   "policy": "observed-catalog-and-evidence-not-capability-v1",
   "counts": {
-    "catalogued": 28,
-    "not_catalogued": 1228
+    "catalogued": 42,
+    "not_catalogued": 1214
   },
   "accepted_counts": {
-    "not_catalogued": 14
+    "catalogued": 14
   },
   "review_snapshot_modified": false,
   "implementation_complete": false,
@@ -1373,8 +1373,19 @@
       "title": "What Should World Models Forget? Stratified Retention for Continual Adaptation",
       "review_decision": "accepted",
       "frozen_implementation_status": "not_changed_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "foundation-models",
+          "key": "stratified-retention-protocol",
+          "detail_path": "foundation-models/2610.03713-stratified-retention-protocol/README.md",
+          "document_exists": true,
+          "registered_executable": false,
+          "gpu_receipt": null,
+          "gpu_receipt_valid": false,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2610.03951",
@@ -1624,8 +1635,19 @@
       "title": "Similar Models, Broken Odds: Where Luce's Axiom Fails in Chatbot Arena",
       "review_decision": "accepted",
       "frozen_implementation_status": "not_changed_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "post-training",
+          "key": "luce-similarity-audit",
+          "detail_path": "post-training/2610.19095-luce-similarity-audit/README.md",
+          "document_exists": true,
+          "registered_executable": false,
+          "gpu_receipt": null,
+          "gpu_receipt_valid": false,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2610.19323",
@@ -1856,8 +1878,19 @@
       "title": "Measure Before You Train: Typed Decision Models vs. a Classical Baseline vs. a Generative LLM for Routing a Personal Multilingual Inbox",
       "review_decision": "accepted",
       "frozen_implementation_status": "not_changed_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "system-one",
+          "key": "typed-inbox-protocol",
+          "detail_path": "system-one/2610.32955-typed-inbox-protocol/README.md",
+          "document_exists": true,
+          "registered_executable": false,
+          "gpu_receipt": null,
+          "gpu_receipt_valid": false,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2610.33253",
@@ -2064,8 +2097,19 @@
       "title": "Federated Vector Retrieval across Heterogeneous VectorDBs",
       "review_decision": "accepted",
       "frozen_implementation_status": "not_changed_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "foundation-models",
+          "key": "hvmap",
+          "detail_path": "foundation-models/2611.01514-hvmap/README.md",
+          "document_exists": true,
+          "registered_executable": false,
+          "gpu_receipt": "docs/gpu-validations/hvmap-a100-20261118.json",
+          "gpu_receipt_valid": true,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2611.01929",
@@ -2712,8 +2756,19 @@
       "title": "Inference Validation for Regulated AI: A Governed Decision Pipeline for LLM Serving",
       "review_decision": "accepted",
       "frozen_implementation_status": "not_changed_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "foundation-models",
+          "key": "runway-inference-protocol",
+          "detail_path": "foundation-models/2611.12737-runway-inference-protocol/README.md",
+          "document_exists": true,
+          "registered_executable": false,
+          "gpu_receipt": null,
+          "gpu_receipt_valid": false,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2611.12750",
@@ -3281,8 +3336,19 @@
       "title": "Inherited Weights: Measuring the Tokenization Premium and the Sovereignty Cost of Language Models for the Global South",
       "review_decision": "accepted",
       "frozen_implementation_status": "not_changed_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "foundation-models",
+          "key": "tokenization-premium",
+          "detail_path": "foundation-models/2611.13441-tokenization-premium/README.md",
+          "document_exists": true,
+          "registered_executable": false,
+          "gpu_receipt": null,
+          "gpu_receipt_valid": false,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2611.13442",
@@ -3607,8 +3673,19 @@
       "title": "Mixed Signals: Weight-Space Programming for EEG and ECG",
       "review_decision": "accepted",
       "frozen_implementation_status": "not_changed_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "foundation-models",
+          "key": "mixed-signals-weights",
+          "detail_path": "foundation-models/2611.13758-mixed-signals-weights/README.md",
+          "document_exists": true,
+          "registered_executable": false,
+          "gpu_receipt": "docs/gpu-validations/mixed-signals-weights-a100-20261118.json",
+          "gpu_receipt_valid": true,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2611.13776",
@@ -4712,8 +4789,19 @@
       "title": "RSLiveBench-UAV: A Continually Evolving Vision-Language Benchmark for Aerial Spatial Intelligence",
       "review_decision": "accepted",
       "frozen_implementation_status": "not_changed_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "multimodal-models",
+          "key": "rslivebench-uav-protocol",
+          "detail_path": "multimodal-models/2611.14953-rslivebench-uav-protocol/README.md",
+          "document_exists": true,
+          "registered_executable": false,
+          "gpu_receipt": null,
+          "gpu_receipt_valid": false,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2611.14963",
@@ -5347,8 +5435,19 @@
       "title": "AskALCF: A Self-Improving Agentic System for Intelligent HPC User Support",
       "review_decision": "accepted",
       "frozen_implementation_status": "not_changed_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "agent-research",
+          "key": "askalcf-protocol",
+          "detail_path": "agent-research/2611.15700-askalcf-protocol/README.md",
+          "document_exists": true,
+          "registered_executable": false,
+          "gpu_receipt": null,
+          "gpu_receipt_valid": false,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2611.15717",
@@ -5459,8 +5558,19 @@
       "title": "Smart Model Routing for Order-of-Magnitude LLM Cost Reduction",
       "review_decision": "accepted",
       "frozen_implementation_status": "not_changed_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "foundation-models",
+          "key": "smart-model-routing",
+          "detail_path": "foundation-models/2611.15911-smart-model-routing/README.md",
+          "document_exists": true,
+          "registered_executable": false,
+          "gpu_receipt": null,
+          "gpu_receipt_valid": false,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2611.15920",
@@ -6881,8 +6991,19 @@
       "title": "ProdPilot: A Layered Model Context Protocol System for Automated Production Readiness and Deployment of Vibe-Coded Projects",
       "review_decision": "accepted",
       "frozen_implementation_status": "not_changed_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "agent-research",
+          "key": "prodpilot-protocol",
+          "detail_path": "agent-research/2611.17381-prodpilot-protocol/README.md",
+          "document_exists": true,
+          "registered_executable": false,
+          "gpu_receipt": null,
+          "gpu_receipt_valid": false,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2611.17388",
@@ -7689,8 +7810,19 @@
       "title": "Towards High-Performance Multimodal Discovery: Evaluating Retrieval Efficacy and Operational Scalability in Digital Libraries",
       "review_decision": "accepted",
       "frozen_implementation_status": "not_changed_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "multimodal-models",
+          "key": "multimodal-library-protocol",
+          "detail_path": "multimodal-models/2611.17726-multimodal-library-protocol/README.md",
+          "document_exists": true,
+          "registered_executable": false,
+          "gpu_receipt": null,
+          "gpu_receipt_valid": false,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2611.17728",
@@ -8697,8 +8829,19 @@
       "title": "FEND: Far-End Detection in Outbound Voice AI Calls",
       "review_decision": "accepted",
       "frozen_implementation_status": "not_changed_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "multimodal-models",
+          "key": "fend-protocol",
+          "detail_path": "multimodal-models/2611.18050-fend-protocol/README.md",
+          "document_exists": true,
+          "registered_executable": false,
+          "gpu_receipt": null,
+          "gpu_receipt_valid": false,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2611.18053",
@@ -10273,8 +10416,19 @@
       "title": "Grounding Language Models in Speech Does Not Fix \"AI Flavor\": Calibrated LLM Judges, Goodhart Traps, and a Preference-Tuning Fix",
       "review_decision": "accepted",
       "frozen_implementation_status": "not_changed_by_review",
-      "current_status": "not_catalogued",
-      "observations": []
+      "current_status": "catalogued",
+      "observations": [
+        {
+          "domain": "post-training",
+          "key": "calibrated-judges-protocol",
+          "detail_path": "post-training/2611.19840-calibrated-judges-protocol/README.md",
+          "document_exists": true,
+          "registered_executable": false,
+          "gpu_receipt": null,
+          "gpu_receipt_valid": false,
+          "capability_claim_verified": false
+        }
+      ]
     },
     {
       "id": "2611.19858",

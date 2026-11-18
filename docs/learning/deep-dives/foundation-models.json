@@ -137,6 +137,17 @@
             "原文结果与限制",
             "本地复现"
           ]
+        },
+        {
+          "paper": "foundation-models:hvmap",
+          "position": "四层归一化映射用跨目标fuzzy loss锚定异构空间；native/mapped双分数联合取K，spoke最多经hub两次映射。",
+          "tradeoff": "ECG-RAG让检索与压缩生成共享表示，HVMap不生成答案而对齐已存在的异构库。局部fuzzy loss与ECG联合loss均不代表完整RAG效果。",
+          "sections": [
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -206,6 +217,14 @@
           "papers": [
             "foundation-models:ecg-rag",
             "foundation-models:adindex"
+          ]
+        },
+        {
+          "title": "共享一份表示与对齐多种表示，是不同的系统选择",
+          "body": "ECG-RAG为避免重复存储而联合学习检索与压缩表示，依赖decoder训练；HVMap接受库已由不同编码器生成，通过配对映射和候选双空间评分消除部分不兼容。fuzzy loss对角锚定绝对对应，RKD只保相对几何不够；SCORE2还要保留每库native向量而不是总偏hub。小张量梯度不证明跨模态召回或索引吞吐，不能将完整campaign的作者结果搬进本地看板。",
+          "papers": [
+            "foundation-models:hvmap",
+            "foundation-models:ecg-rag"
           ]
         }
       ],
@@ -301,9 +320,19 @@
             "foundation-models:ecg-rag",
             "foundation-models:adindex"
           ]
+        },
+        {
+          "id": "cross-nov18-hvmap-alignment",
+          "question": "ECG式共享表示与HVMap的低fuzzy loss能共同证明RAG质量提升吗？",
+          "answer": "不能。两者改变不同链路且本地都缺完整训练/检索/答案评估；HVMap还须验证语义配对泛化与联合排序，ECG须验证压缩上下文生成。诊断loss不是端到端能力。",
+          "example": "教学例：反向传播成功并不说明一个相关文档进入top10，更不说明答案正确。",
+          "papers": [
+            "foundation-models:hvmap",
+            "foundation-models:ecg-rag"
+          ]
         }
       ],
-      "updated": "2026-11-13",
+      "updated": "2026-11-18",
       "reviewed_papers": [
         "foundation-models:alibi",
         "foundation-models:autonomy-heads",
@@ -343,7 +372,8 @@
         "foundation-models:anchor-kv",
         "foundation-models:convpe",
         "foundation-models:adindex",
-        "foundation-models:ecg-rag"
+        "foundation-models:ecg-rag",
+        "foundation-models:hvmap"
       ],
       "updates": [
         {
@@ -485,6 +515,18 @@
             "foundation-models:ecg-rag": "2d522783223ba0b570c26df2de796e7731ee037643b31cc39a0543368a720c7f",
             "foundation-models:adindex": "40695a1f88a78659747bd168ea114fd40ca8ff6bf280f69df9177eb61fea57f5"
           }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "foundation-models:hvmap",
+            "foundation-models:ecg-rag"
+          ],
+          "summary": "补HVMap跨空间fuzzy锚定、native权重与无配额联合检索；对照共享RAG表示，明确L1小张量与高成本完整实验的边界。",
+          "source_revisions": {
+            "foundation-models:hvmap": "4673c164f643de52050232d5e9d2f315f8b808681b67986253a3558d88c4a4eb",
+            "foundation-models:ecg-rag": "2d522783223ba0b570c26df2de796e7731ee037643b31cc39a0543368a720c7f"
+          }
         }
       ]
     },
@@ -555,6 +597,17 @@
             "核心公式",
             "复现边界"
           ]
+        },
+        {
+          "paper": "foundation-models:smart-model-routing",
+          "position": "应用层按成本/预测质量选完整模型，计入router/checker、残余难题与token偏斜；cascade接受率需过严格全路径breakeven。",
+          "tradeoff": "Switch在单网络内做token级top-1专家和负载均衡，Smart Routing选完整endpoint。内部激活FLOPs与外部API账单不是同一单位；便宜调用或校准平均概率本身不保证可区分易题，也不保证省钱。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "结果、负控与边界"
+          ]
         }
       ],
       "analysis": [
@@ -574,6 +627,14 @@
             "foundation-models:adadsf",
             "foundation-models:telescopic-lm",
             "foundation-models:wide"
+          ]
+        },
+        {
+          "title": "算了多少专家，不等于付了多少模型调用",
+          "body": "Switch减少每token激活计算，而外部cascade无论首答是否采用都支付cheap/checker费用。原文2.19×变2.70×的误账与残余质量高估说明只统计终答不可靠；learned-router follow-up又未优于同成本blind mixing。CPU实现Eq.5/6/7与条件质量，只验证算术，不读取test gold选模型或宣称训练出有效router。",
+          "papers": [
+            "foundation-models:smart-model-routing",
+            "foundation-models:switch-transformer"
           ]
         }
       ],
@@ -609,9 +670,19 @@
             "foundation-models:switch-transformer",
             "foundation-models:wide"
           ]
+        },
+        {
+          "id": "cross-nov18-routing-layer-cost",
+          "question": "Switch每token只激活一个expert，是否可直接套成外部cascade省钱比例？",
+          "answer": "不可以。外部模型路由支付完整回答、checker、fallback及router开销，必须按实际请求token和接受历史计算；Switch的expert负载均衡不提供这些endpoint级统计，也不能保证质量门槛。",
+          "example": "教学例：cheap1+checker1+router0.5、frontier10时，接受率0.25仅打平；即使内部top-1稀疏也不能删掉这些账单项。",
+          "papers": [
+            "foundation-models:smart-model-routing",
+            "foundation-models:switch-transformer"
+          ]
         }
       ],
-      "updated": "2026-10-27",
+      "updated": "2026-11-18",
       "reviewed_papers": [
         "foundation-models:adadsf",
         "foundation-models:blt",
@@ -638,7 +709,8 @@
         "foundation-models:switch-transformer",
         "foundation-models:swrouter",
         "foundation-models:telescopic-lm",
-        "foundation-models:wide"
+        "foundation-models:wide",
+        "foundation-models:smart-model-routing"
       ],
       "updates": [
         {
@@ -699,6 +771,18 @@
             "foundation-models:swrouter": "e12ef64f7a16cbe09e65e121e08a658d3a136415a3a125fe2fed4561f4d7d895",
             "foundation-models:telescopic-lm": "dcffa4b00994402a02d5aba356a318aa7bc56a82188d8c4c58fcbd711df597ca",
             "foundation-models:wide": "5b9e1149579c0e479a42584949379a0b763d47677f1f5ad11c723a7b74269797"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "foundation-models:smart-model-routing",
+            "foundation-models:switch-transformer"
+          ],
+          "summary": "补应用层完整模型路由成本核，与token专家路由分层；保留learned-router负结果，显式计checker/router、token偏斜与条件fallback质量。完整推理/收集不复现。",
+          "source_revisions": {
+            "foundation-models:smart-model-routing": "8e412f0e08740a448ca29aad3d578f714df9bf3b5b8cdc820508c0462f28c908",
+            "foundation-models:switch-transformer": "71cfc2d850556aa59636dc714b8879095e954f5731b7daca20eb2faf603473b8"
           }
         }
       ]
@@ -2018,6 +2102,38 @@
             "核心公式",
             "数据协议与代码映射"
           ]
+        },
+        {
+          "paper": "foundation-models:tokenization-premium",
+          "position": "先拼接相同UDHR共同条款再一次编码，比较总token成本并排除UNK坍缩；同时约束全样本ECE、覆盖率/风险与全程能量分母。",
+          "tradeoff": "XLGoBench固定抽象算法实例与复杂度来比较跨语言任务能力，token溢价只测相同内容的输入成本。两者都需语言内容可比，但token数不能替代模型错误率；本地两个scorer均不等于完整多语能力矩阵。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果"
+          ]
+        },
+        {
+          "paper": "foundation-models:runway-inference-protocol",
+          "position": "在原样AIPerf前后构建配置/缓存身份、声明式SLA和每成功请求成本，明确缓存命中只复用既有证据。",
+          "tradeoff": "XLA from the Trenches验证目标TPU编译数值正确性；Runway验证某serving配置是否满足指标和契约。CPU协议既不证明TPU语义，也不测CUDA吞吐；模型/引擎名字相同不能保证缓存身份相同。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "paper": "foundation-models:mixed-signals-weights",
+          "position": "用原子参数补丁和受限practice反馈表达WSP接口，测试标签留在外部评价器，不用SGD替代推理编辑。",
+          "tradeoff": "AMS从固定激活读出结构差异，不写参数也不认证安全；WSP问能否推理改权重。当前L0线性harness不含LLM、TinyEEGNet或被试数据。",
+          "sections": [
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ]
         }
       ],
       "analysis": [
@@ -2108,6 +2224,30 @@
           "papers": [
             "foundation-models:storyscope",
             "foundation-models:detector-scope"
+          ]
+        },
+        {
+          "title": "相同内容的价格差与相同任务的能力差应分轴",
+          "body": "Tokenization Premium的作者脚本先按编号拼27共同条款，独立分词后求和会受边界合并影响。XLGoBench则控制算法实例与复杂度，答案留在独立scorer。若未来研究token预算对跨语言推理的影响，应同时固定内容、翻译与预算，并使用真实模型输出；不能从阿姆哈拉语6.76倍成本推出6.76倍错误，也不能用UNK变少作为胜利。",
+          "papers": [
+            "foundation-models:tokenization-premium",
+            "foundation-models:xlgobench"
+          ]
+        },
+        {
+          "title": "可重复生成报告不等于重复获得独立测量",
+          "body": "XLA审计强调保留目标硬件语义；Runway强调保留测量配置及raw AIPerf结果。两者都不能被CPU fixture替代。本地缓存更保守地哈希engine config、数据/模型revision和warm-up，cache-only缺失必须报错；SLA单位错配必须拒绝。重用一份raw结果审查两个SLA是两次决策、不是两份独立样本，不能缩小置信区间。",
+          "papers": [
+            "foundation-models:runway-inference-protocol",
+            "foundation-models:xla-trenches"
+          ]
+        },
+        {
+          "title": "读出差异与修复能力不能靠同一个诊断标签混为一谈",
+          "body": "AMS的方向/漂移是检测信号，存在结构保持攻击盲区；Mixed Signals的推理写权重还要求受限反馈和独立未见被试评价。原子写入、失败消耗预算和正确balanced accuracy是必要工程合同，却不创造会编辑的LLM。SGD违规替换和test反馈泄漏都改变了问题。完整campaign高成本不复现，保留L0接口与实际CUDA加载前向证据，不拿作者医学结果背书。",
+          "papers": [
+            "foundation-models:mixed-signals-weights",
+            "foundation-models:activation-model-scanner"
           ]
         }
       ],
@@ -2231,9 +2371,39 @@
             "foundation-models:storyscope",
             "foundation-models:detector-scope"
           ]
+        },
+        {
+          "id": "nov18-tokenization-premium",
+          "question": "某语言token比英语多一倍，是否可以预测其XLGoBench准确率减半？",
+          "answer": "不可以。token溢价是等内容的成本比，XLGoBench准确率还受训练覆盖、翻译、推理能力与预算约束影响；需匹配实例、验证模板和真实模型评测才能研究两者关系。",
+          "example": "同一最短路实例可以保持正确路径不变而换语言；输入从100变200token并不改变算法答案，不能把成本比直接换成准确率比。",
+          "papers": [
+            "foundation-models:tokenization-premium",
+            "foundation-models:xlgobench"
+          ]
+        },
+        {
+          "id": "cross-nov18-runway-cache-evidence",
+          "question": "同一缓存配置反复生成报告，能当多次硬件复验吗？",
+          "answer": "不能。Runway cache-hit明确跳过测量，增加的是决策/报告次数而不是独立观测。与XLA要求真实目标TPU确认相似，声明必须绑定实际执行环境和原始证据，不得从fixture或cache-hit推导硬件通过。",
+          "example": "教学例：一条AIPerf结果生成10份报告仍只有1次测量；engine开启MTP需新身份而非沿用旧数值。",
+          "papers": [
+            "foundation-models:runway-inference-protocol",
+            "foundation-models:xla-trenches"
+          ]
+        },
+        {
+          "id": "cross-nov18-wsp-not-ams",
+          "question": "AMS检查通过、权重补丁接口也通过，能标成成功修复吗？",
+          "answer": "不能。AMS仅给激活结构诊断，接口仅给原子性/预算合同；修复需要真实推理编辑器在权限隔离的practice反馈下操作，并在未见被试上独立评价。",
+          "example": "教学例：把线性层取负确实改了forward，但不能当EEG模型准确率提高。",
+          "papers": [
+            "foundation-models:mixed-signals-weights",
+            "foundation-models:activation-model-scanner"
+          ]
         }
       ],
-      "updated": "2026-11-13",
+      "updated": "2026-11-18",
       "reviewed_papers": [
         "foundation-models:activation-model-scanner",
         "foundation-models:combinatorial-watermark",
@@ -2256,7 +2426,10 @@
         "foundation-models:qe-length-normalization",
         "foundation-models:cultural-cue",
         "foundation-models:decoding-constrained-beam",
-        "foundation-models:storyscope"
+        "foundation-models:storyscope",
+        "foundation-models:tokenization-premium",
+        "foundation-models:runway-inference-protocol",
+        "foundation-models:mixed-signals-weights"
       ],
       "updates": [
         {
@@ -2397,6 +2570,42 @@
           "source_revisions": {
             "foundation-models:storyscope": "82619b14e93eca3b1b07d3de3740c86dfd97c3064552beb26e3f8722077623e6",
             "foundation-models:detector-scope": "1cec4de6a6435be3970d4caedeef69ee5bd22fbbf384fc711cc4f313826e4f40"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "foundation-models:tokenization-premium",
+            "foundation-models:xlgobench"
+          ],
+          "summary": "补齐配对token成本与拒答安全读出，比较XLGoBench的能力轴；记录2026-09-22原始Zenodo首发和真实公开测量脚本，不误当11月新首发。",
+          "source_revisions": {
+            "foundation-models:tokenization-premium": "f96c02652ba3ac0a922ab229f99b48c5494ae1a68af5caf91c330f41ca95205a",
+            "foundation-models:xlgobench": "12c2082c37310106a20523d6a6845ba8f75628d01b7386fb40617c965c5df153"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "foundation-models:runway-inference-protocol",
+            "foundation-models:xla-trenches"
+          ],
+          "summary": "补入推理缓存/SLA/成本证据协议，强调缓存不等于重复采样、单位必须匹配、硬件能力需真测；完整多引擎实例矩阵高成本不复现。",
+          "source_revisions": {
+            "foundation-models:runway-inference-protocol": "df20d30bedf0842b652b0a3b410e3b97e5e3b716603f1a1aebcda02d9b9944d6",
+            "foundation-models:xla-trenches": "8d0084d662cf8f2c947333f64603556d3da43a5cf47fab26b5eb1aab086313a7"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "foundation-models:mixed-signals-weights",
+            "foundation-models:activation-model-scanner"
+          ],
+          "summary": "补WSP权重补丁、预算和评价接口，对照AMS检测而非编辑的边界；不调用LLM、不替代TinyEEGNet，完整实验高成本不复现。",
+          "source_revisions": {
+            "foundation-models:mixed-signals-weights": "d7341e9e52e1b342ac71624e146eeed692a6766d710df5ddfd6d2177a7ce0950",
+            "foundation-models:activation-model-scanner": "9160cad6a859eb0edd5be4fdc3cb49cc0b6077d93f426931592b67298289ff73"
           }
         }
       ]

@@ -5,7 +5,7 @@
     "preference-and-alignment": {
       "title": "偏好不是一个分数：先确定反馈格式，再选对齐目标",
       "thesis": "DPO、KTO、SimPO、ORPO和IPO主要改变“怎样使用反馈”，CleanRM先处理“反馈是否可信”。参考模型、长度归一化、有限间隔和噪声校正是不同设计轴，不能因都在扩大好坏回答差异就当成同一方法。",
-      "updated": "2026-10-27",
+      "updated": "2026-11-18",
       "reviewed_papers": [
         "post-training:clean-rm",
         "post-training:gaw-po",
@@ -31,7 +31,9 @@
         "post-training:dpo",
         "post-training:slic-hf",
         "post-training:rrhf",
-        "post-training:constitutional-ai"
+        "post-training:constitutional-ai",
+        "post-training:luce-similarity-audit",
+        "post-training:calibrated-judges-protocol"
       ],
       "axes": [
         "监督单位：同题偏好对、单条满意标签、带噪标签",
@@ -99,6 +101,28 @@
             "核心公式",
             "结果、代码映射与边界"
           ]
+        },
+        {
+          "paper": "post-training:luce-similarity-audit",
+          "position": "分开审计BT非平局decisiveness、joint模型的tie增益和兄弟菜单相对强度匹配placebo的赔率偏移。",
+          "tradeoff": "Probabilistic Autorater用proper reward校准偏好分布；Luce审计检验从全局分数到相关模型odds的结构假设。proper概率并不保证IIA，合并菜单正偏移也不证明prompt内因果效应。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "结果、负控与边界"
+          ]
+        },
+        {
+          "paper": "post-training:calibrated-judges-protocol",
+          "position": "evaluator-only catch灵敏度gate、两隔离judge与双order还原一致性、分歧tie，训练后另查偏差转导。",
+          "tradeoff": "Probabilistic Autorater校准偏好分布及proper reward；RA-Eval先资格考试再加工verdict，但高catch准确率不证明训练偏差消失。fixture映射1/0.5不是LLM能力，普通join不能读取gold。",
+          "sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果",
+            "数据协议与代码映射"
+          ]
         }
       ],
       "analysis": [
@@ -118,6 +142,22 @@
             "post-training:simpo",
             "post-training:orpo",
             "post-training:ipo"
+          ]
+        },
+        {
+          "title": "概率看起来校准，不等于分数之间的所有赔率都可信",
+          "body": "Probabilistic Autorater的proper规则针对报告分布的校准；Luce论文针对相关模型比较和菜单变化，评估对象不同。三结果loss的多数增益来自ties，不能包装成非平局发布决策可靠；冻结lineage区间跨零、prompt内偏移衰减都必须保留。本地Eq.2/3只是可审计算术，不拟合Arena、不用test battle构造similarity，也不产生新的judge结果。",
+          "papers": [
+            "post-training:luce-similarity-audit",
+            "post-training:probabilistic-autorater"
+          ]
+        },
+        {
+          "title": "裁判通过资格考试后，训练仍可能把它的偏好放大成捷径",
+          "body": "Proper概率强调报告分布，RA-Eval强调catch灵敏度、盲化和位置交换，这些都是不同风险的控制。原文长度75字的拒绝轮次表明可感知judge也会把短文本偏好转导到DPO。SFT anchor不是校准的替代品，训练后长度/风格和heldout检查不可少。本地只加工外部verdict并禁止catch训练ID重用，不调用judge或训练模型。",
+          "papers": [
+            "post-training:calibrated-judges-protocol",
+            "post-training:probabilistic-autorater"
           ]
         }
       ],
@@ -152,6 +192,26 @@
             "post-training:dpo",
             "post-training:ipo",
             "post-training:clean-rm"
+          ]
+        },
+        {
+          "id": "cross-nov18-luce-calibration",
+          "question": "一个proper-scored autorater准确报告总体偏好概率，能保证相邻版本的BT胜率也正确吗？",
+          "answer": "不能。分布报告与BT的单分数结构是不同层次；相关模型的决断倍率、tie和prompt异质性仍可破坏由全局分数推出的odds。应分拆非平局、三结果和冻结转移指标，不能仅看总体loss。",
+          "example": "原文ties-only几乎解释总体增益，但冻结lineage的非平局区间[-2.92,+1.68]仍不能建立改善。",
+          "papers": [
+            "post-training:luce-similarity-audit",
+            "post-training:probabilistic-autorater"
+          ]
+        },
+        {
+          "id": "cross-nov18-judge-calibration-transduction",
+          "question": "judge概率校准且catch准确率高，是否可以取消训练后的长度检查？",
+          "answer": "不可以。概率校准、catch敏感度、order一致性和偏差转导是不同检验。judge偏好可能仍偏短，DPO会放大数据中的chosen长度分布；必须独立检查长度/风格及heldout，不把训练标签一致率当能力提升。",
+          "example": "原文扩到240对后median75字触发拒绝；本地四条fixture判断一致只应得到协议score1，不应得到100%模型准确率。",
+          "papers": [
+            "post-training:calibrated-judges-protocol",
+            "post-training:probabilistic-autorater"
           ]
         }
       ],
@@ -212,6 +272,30 @@
             "post-training:slic-hf": "274dc3fb96dc375c4d7515b7545a866beeb5fd26fc15eb2043d1712439460bdd",
             "post-training:rrhf": "2f2ceb86185f701ccc8c7b6b026c23b84eb80c1a4c1537e7656f53a7429faa90",
             "post-training:constitutional-ai": "0028e6be3f7dd52a6121858b4a8c21852885e9723dd1c9e253be6a19c41ebcbc"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "post-training:luce-similarity-audit",
+            "post-training:probabilistic-autorater"
+          ],
+          "summary": "补入相似模型odds与菜单审计，区分proper概率、tie增益与冻结转移负结果；CPU算术不拟合榜单或冒充能力结果，完整票据/裁判实验高成本不复现。",
+          "source_revisions": {
+            "post-training:luce-similarity-audit": "52a879448b9256f3f8c18e4ca9c0c9a6c85b83df851f4f85feea2803c54cd5c1",
+            "post-training:probabilistic-autorater": "fe6f7067f554183ee185f524f706a4377ac0b1bd4191c607c03acc6c3acd8057"
+          }
+        },
+        {
+          "date": "2026-11-18",
+          "papers": [
+            "post-training:calibrated-judges-protocol",
+            "post-training:probabilistic-autorater"
+          ],
+          "summary": "补校准judge的catch/双judge换序/tie/隔离组件，与proper概率和训练后偏差转导分开；保留语音负结果与长度塌缩，不调用付费judge、不跑0.6B完整训练。",
+          "source_revisions": {
+            "post-training:calibrated-judges-protocol": "9cb884121d509fdb636415eb39c5897ff2ec7e025b39fbb2fa062e002fec62a7",
+            "post-training:probabilistic-autorater": "fe6f7067f554183ee185f524f706a4377ac0b1bd4191c607c03acc6c3acd8057"
           }
         }
       ]

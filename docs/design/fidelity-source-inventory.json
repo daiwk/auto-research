@@ -11485,6 +11485,16 @@
         "fingerprint": "98d4e5502f5492aebfe3261d697e9b58b1febabdf5518bc06607d20d3404aab7"
       }
     ],
+    "src/auto_research/foundation_models/mixed_signals_weights.py": [
+      {
+        "kind": "state_update_not_execution_evidence",
+        "function": "evaluate",
+        "line": 63,
+        "qualified_name": "PracticeBudget.evaluate",
+        "expression": "self.calls += 1",
+        "fingerprint": "f04efee27f780cc5e8578f59179d0bb7ca8c11e40c12bc04897c98bdec2dd872"
+      }
+    ],
     "src/auto_research/foundation_models/replayssm.py": [
       {
         "kind": "state_update_not_execution_evidence",

@@ -61,6 +61,8 @@ INVALID_AFFILIATION_MARKERS = (
 # every generated page. Unknown future labels remain visible under “其他”.
 TOPIC_HIERARCHY = {
     "post-training": {
+        "luce-similarity-audit": ("偏好建模与监督", "偏好评测与校准"),
+        "calibrated-judges-protocol": ("偏好建模与监督", "偏好评测与校准"),
         "lgpo": ("在线强化学习与稳定性", "信任域、clip 与梯度稳定"),
         "safety-budget-cgrpo": ("在线强化学习与稳定性", "约束与安全预算"),
         "bait-reward-defense": ("奖励、信用与课程", "奖励构造与排序信号"),
@@ -177,6 +179,8 @@ TOPIC_HIERARCHY = {
         "Flow map": ("蒸馏与训练闭环", "生成模型蒸馏"),
     },
     "agent-research": {
+        "askalcf-protocol": ("工具调用与环境执行", "检索归因与受控修复"),
+        "prodpilot-protocol": ("多 Agent 与软件工程", "独立校验与部署门"),
         "coremem": ("记忆、技能与持续学习", "主动 / 长期记忆"),
         "ace-rl": ("Agentic RL 与后训练", "通用轨迹与 credit assignment"),
         "caplite": ("工具调用与环境执行", "工具选择、反馈与程序执行"),
@@ -341,6 +345,12 @@ POST_TRAINING_REPRODUCTION_KEYS = {
     "sis",
 }
 FOUNDATION_TOPIC_HIERARCHY = {
+    "hvmap": ("网络架构", "检索与生成共享表征"),
+    "mixed-signals-weights": ("网络架构", "权重空间编程与审计"),
+    "stratified-retention-protocol": ("预训练与数据", "持续适应与评测协议"),
+    "tokenization-premium": ("预训练与数据", "多语言tokenization与评测成本"),
+    "runway-inference-protocol": ("推理与系统效率", "推理测量与证据协议"),
+    "smart-model-routing": ("推理与系统效率", "模型路由与级联预算"),
     "unbundling-vision": ("多模态基础模型", "视觉语言适配与表征"),
     "archspace": ("预训练与数据", "训练预算与扩展规律"),
     "d-jepa": ("网络架构", "JEPA 与几何表征"),
@@ -885,6 +895,10 @@ def foundation_rows() -> list[dict[str, str]]:
         )
     extra = manifest_domain_rows("foundation-models", {
         **{key: FOUNDATION_TOPIC_HIERARCHY[key] for key in (
+            "hvmap", "mixed-signals-weights", "stratified-retention-protocol",
+            "tokenization-premium", "runway-inference-protocol", "smart-model-routing",
+        )},
+        **{key: FOUNDATION_TOPIC_HIERARCHY[key] for key in (
             "unbundling-vision", "archspace", "d-jepa", "duojepa", "spectral-ghost",
         )},
         "real-loss": ("推理与系统效率", "推测解码与 KV cache"),
@@ -1115,6 +1129,9 @@ def multimodal_rows() -> list[dict[str, str]]:
     for row in rows:
         row["index_href"] = f"../reproductions/{row['link']}"
     rows.extend(manifest_domain_rows("multimodal-models", {
+        "fend-protocol": ("多模态基础模型", "语音事件与人类误报评测"),
+        "rslivebench-uav-protocol": ("视觉世界模型与时序推理", "持续航空空间评测"),
+        "multimodal-library-protocol": ("多模态检索", "页面检索与系统测量"),
         "pixvid": ("视觉世界模型与时序推理", "视觉状态转移监督"),
         "avmeme-exam": ("多模态基础模型", "音视频文化理解评测"),
         "mmeb-v3": ("多模态检索", "全模态嵌入与模态遵循"),

@@ -83,6 +83,10 @@
 
 - 2026-07-30 · [WIDE: Boosting Adaptive LLM Inference via Token-level Dynamic Width Pruning](../../reproductions/2607.28418-wide/README.md)（`wide`）：静态剪枝无法按 token 难度分配算力，动态深度又过于粗粒度。WIDE 对每个 token 分别路由 attention head group 和 FFN channel group，并将 mask reorder、block skip 与设备内跳过联合设计。
 
+## EPFL
+
+- 2026-11-10 · [Mixed Signals: Weight-Space Programming for EEG and ECG](../../foundation-models/2611.13758-mixed-signals-weights/README.md)（`mixed-signals-weights`）：论文让 LLM 通过阅读/写入网络参数解决 EEG/ECG 任务，覆盖读权重、改善、修复和从零写网络。关键区别是 **weight-space programming 不使用梯度下降或迭代拟合**；把 SGD 包装成“编辑器”不能视为等价复现。不同实验的网络、数据权限和 evaluate/probe 预算不同。[§II](https://arxiv.org/html/2611.13758v1#S2)
+
 ## ETH Zurich
 
 - 2026-10-15 · [Rethinking Routing Exploration in Modern Mixture-of-Experts](../../foundation-models/2610.22353-mirror-moe/README.md)（`mirror-moe`）：共享专家占据较多输出后，改变路由专家带来的表征差异减弱，而细粒度分割又扩大组合空间。MirrorMoE 不简单增噪，而是以镜像选择暂时抑制部分专家，随训练退火恢复普通路由。主源是 §3 的公式 3–6。
@@ -196,6 +200,7 @@
 
 ## Independent Researcher
 
+- 2026-11-11 · [Smart Model Routing for Order-of-Magnitude LLM Cost Reduction](../../foundation-models/2611.15911-smart-model-routing/README.md)（`smart-model-routing`）：本文研究**应用层在多个完整模型/endpoint 之间选路**，不是 MoE 内部 token→expert，也不是同一模型副本的负载均衡。核心问题是：在可接受质量下，让每个请求尽量使用便宜模型，同时计入 router、checker、被拒绝的小模型调用和长难题的额外 token 成本。
 - 2026-10-27 · [Folding Attention Biases into Keys Makes Compacted KV Caches Run on Standard Kernels](../../foundation-models/2610.36520-fold-bias/README.md)（`fold-bias`）：Attention Matching（AM）保留部分 keys，拟合每个保留项的静态 logit bias 和 values。标准 KV cache / attention 内核未必接收这项 bias；直接丢掉它，会改变压缩后注意力。FoldBias 在每个 head 的上下文 queries 上拟合一个共享方向，把每项 bias 写成沿该方向的 key 位移，保持 head 维度和模型自身 query 路径。
 - 2026-10-21 · [When Multiple Choices Are Correct: Asymmetric Probability Allocation in Jev and Other Decision Models](../../system-one/2610.29217-jev-multicorrect/README.md)（`jev-multicorrect`）：当一个列表有多个正确选项时，模型可能把大部分概率分给其中一个正确项，另一个正确项虽高于所有干扰项，概率仍低于均匀基线。单选 top-1 或“正确项都排在干扰项之前”因此会掩盖完整集合恢复的失败。论文同时分析 JEV、Luna 和 Gemini，避免把所有现象都归因于某一种架构。
 
@@ -258,6 +263,10 @@
 
 - 2026-10-21 · [MoEZip: Routing-Aware KV Cache Compression for Sparse Mixture-of-Experts LLMs](../../foundation-models/2610.30206-moezip/README.md)（`moezip`）：MoE 的 KV 删除会扰动 attention 输出，进而改变路由。MoEZip 用已观察 instruction token 的路由分布 Fisher trace 作为敏感性代理，经 attention 传播到 context 位置，预留全局 routing anchors；其余预算沿用调用者提供的 dense/MoE base compressor 分数。future answer 不可用于真实选择。
 
+## LUA Vision Tecnologia
+
+- 2026-09-22 · [Inherited Weights: Measuring the Tokenization Premium and the Sovereignty Cost of Language Models for the Global South](../../foundation-models/2611.13441-tokenization-premium/README.md)（`tokenization-premium`）：微调通常继承基础模型的 tokenizer、知识、许可证与偏见。作者用《世界人权宣言》的平行内容，把“相同意思花多少 token”转成可比较成本：31 种语言、7 个 tokenizer、27 个共同条款。不能把大量字符压成 UNK 导致的低 token 数当作低成本优势。[原文 §3](https://arxiv.org/pdf/2611.13441v1#page=2)
+
 ## MIT
 
 - 2026-09-29 · [Triadic Linear Attention: Three-Dimensional Recurrent States for Long-Context Sequence Modeling](../../foundation-models/2609.36529-triadic-linear-attention/README.md)（`triadic-linear-attention`）：普通线性注意力写入 $k\otimes v$ 的二维状态；Triadic 再加入第二 key，写入 $k\otimes k'\otimes v$，读取时用 $q,q'$ 收缩两个 key 轴。第二 key 维度为 $E$ 时，状态容量乘以 $E$，只新增两组 projection；$E=1$ 严格退化为普通线性注意力。
@@ -270,6 +279,10 @@
 ## ML Collective
 
 - 2026-10-09 · [SmolWAM: A Latent World-Action Model for Robotic Manipulation on Edge Devices](../../reproductions/2610.13740-smolwam/README.md)（`smolwam`）：Cosmos Policy 将机器人状态、两路相机、动作和未来状态编码为九个 latent frame，沿用视频生成接口：33 帧 VAE、T5-XXL、28-block 2B DiT、1764 tokens 和五步去噪。SmolWAM 并非只换一个轻量 action head，而是在保留预训练 trunk、token 原位置与 rectified-flow readout 的同时，逐项恢复接口改变造成的分布偏移。
+
+## MasterControl, Inc.
+
+- 2026-11-09 · [Inference Validation for Regulated AI: A Governed Decision Pipeline for LLM Serving](../../foundation-models/2611.12737-runway-inference-protocol/README.md)（`runway-inference-protocol`）：推理吞吐不是单一模型或引擎的属性，它随输入输出长度、并发、streaming、warm-up、硬件和引擎配置变化。受监管场景还必须能回答：测量对应什么配置、是否满足既定 SLA、每个成功请求多少钱、报告能否由同一份原始测量重建。
 
 ## McGill University
 
@@ -411,6 +424,7 @@
 
 ## Seoul National University
 
+- 2026-11-01 · [Federated Vector Retrieval across Heterogeneous VectorDBs](../../foundation-models/2611.01514-hvmap/README.md)（`hvmap`）：异构向量库由不同编码器生成，查询不能直接拿同一向量跨库检索。HVMap 先在 hub 空间编码一次，再映射到其他空间；每库独立取 K 个候选，映射候选后联合重排。最终 K 个结果可以全来自同一库，不强制均分配额。[§3.3—3.5](https://arxiv.org/html/2611.01514v2#S3)
 - 2026-10-15 · [Fractional Power-of-Two Quantization for Efficient and Effective Multiplier-Free LLM Inference](../../foundation-models/2610.21257-fpot/README.md)（`fpot`）：传统power-of-two权重网格较粗。FPoT将相邻指数间隔减半，兼顾4-bit量化误差与移位加法实现；对奇指数的平方根2系数使用1.5近似，并让校准直接适配这一实际网格，避免“先精确量化、部署时再替换系数”的额外误差。
 - 2026-10-14 · [PN-Mix: Pair-Norm Guided Mixed-Precision Key Cache Quantization for Efficient Long-Output LLM Inference](../../reproductions/2610.19605-pn-mix/README.md)（`pn-mix`）：长输出解码的 KV cache 随 token 数增长；一律把 K 降到低位宽，会放大 attention logit 的偏差。PN-Mix 的精度分配不是仅按 K 的幅度排序：它同时观察 prefill 的 Q 和 K，把实际 RoPE 旋转耦合的两个通道作为整体，以两侧平均范数乘积预测重要性。
 - 2026-09-15 · [LoopSpec: Pipelined Self-Speculative Decoding for Looped Transformers](../../foundation-models/2609.17184-loopspec/README.md)（`loopspec`）：利用循环深度的中间预测做自推测，并以流水线残差提案隐藏验证等待。
@@ -588,6 +602,7 @@
 ## University of Maryland, College Park
 
 - 2026-11-03 · [Turbocharging PiPNN for Proximity and k-NN Graph Building](../../foundation-models/2611.05690-pipnn-ii/README.md)（`pipnn-ii`）：PiPNN 先用递归分区把可能相近的点送入同一叶，再在叶内批量打分，避免逐点搜索正在构建的图。PiPNN II 用量化减少内存流量，把打分和 top-K 合并，避免先写再读完整距离矩阵。直接 k-NN 图保留叶内见到的近邻，和需要可导航边并执行剪枝的 ANNS 索引不是同一产物。论文另有 GPiPNN：平坦分段路由、分段 top-K、排序聚合及复用已见边的剪枝；这些未在本地实现。
+- 2026-10-02 · [What Should World Models Forget? Stratified Retention for Continual Adaptation](../../foundation-models/2610.03713-stratified-retention-protocol/README.md)（`stratified-retention-protocol`）：世界会变化：椅子移动后继续预测旧位置不是“记忆好”，而是知识过期；但物体永久性等结构知识不应随一次适应丢失。作者按环境知识保持为真的时间尺度分四层：不变量、长期环境规律、短期实例配置、即时状态。这里的时间尺度不是缓存 TTL，即时状态也不应统统写入权重。[§3—5](https://arxiv.org/html/2610.03713v2#S3)
 - 2026-04-03 · [StoryScope: Investigating idiosyncrasies in AI fiction](../../foundation-models/2604.03136-storyscope/README.md)（`storyscope`）：作者身份检测常抓词汇或句长，却无法解释故事怎样组织主题、角色、时间和冲突。StoryScope 先把平行故事改为结构化叙事模板，在同一写作 prompt 的人类/五个模型之间比较，再归纳特征、去重、批量赋值。随后用分类器与 bootstrap SHAP 区分跨模型的人类–AI核心和特定模型指纹。
 
 ## University of Massachusetts Amherst

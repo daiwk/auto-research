@@ -10,6 +10,7 @@
 
 | 方向 | 方法 | 一作机构与日期 | 原作者代码 | 本地入口 |
 |---|---|---|---|---|
+| 偏好与对齐 | [Grounding Language Models in Speech Does Not Fix AI Flavor: Calibrated LLM Judges, Goodhart Traps, and a Preference-Tuning Fix](2611.19840-calibrated-judges-protocol/README.md) | Independent Researcher，2026-11-15 | [原作者入口](https://doi.org/10.5281/zenodo.24237533)；已核验Zenodo固定记录RA-Eval v0.1代码小归档、judge/blind/join脚本与calibration清单及许可声明；未下载权重或执行上游代码。 | `calibrated-judges-protocol`：仅低成本组件，完整实验不复现 |
 | 奖励与信用分配 | [Bait: Mitigating Harmful Agentic Reinforcement Learning via Probing Reward Function](2611.16369-bait-reward-defense/README.md) | Georgia Institute of Technology，2026-11-12 | [原作者入口](https://github.com/git-disl/Bait)；作者仓库已公开，只读核验固定SHA；不执行有害probe、攻击或上游训练系统。训练器仍有旧scapegoat路径，端到端可运行性未确认。 | `bait-reward-defense`：仅低成本组件，完整实验不复现 |
 | 策略优化 | [Safety as a Budget: Calibrating the Control Channel of Constrained GRPO for Vision-Language Models](2611.16628-safety-budget-cgrpo/README.md) | Lanzhou University，2026-11-12 | 未发现官方代码 | `safety-budget-cgrpo`：仅低成本组件，完整实验不复现 |
 | 策略优化 | [Is the Importance Ratio Necessary for Stable Reinforcement Learning in LLMs?](2611.15404-lgpo/README.md) | University of Wisconsin–Madison，2026-11-11 | 未发现官方代码 | `lgpo`：仅低成本组件，完整实验不复现 |
@@ -77,6 +78,7 @@
 | 扩散语言模型后训练 | [On-Policy Residual Learning for Diffusion Language Models](2610.20687-orl-diffusion/README.md) | Together AI / University of Illinois Urbana-Champaign，2026-10-14 | [原作者入口](https://github.com/Introspective-Diffusion/ORL)；已发布作者ORL代码；系统内核和完整实验仍需对应加速器、模型与训练预算 | 计划键 `orl-diffusion`：成本过高，不复现（审查 DONE）；仅研究资料，无可执行入口。 |
 | 偏好图信用分配 | [When Pairwise Preferences Cycle: A Reliability-Anchored Preference Walk for Video GRPO](2610.20089-rap-walk/README.md) | 未确认（已读 arXiv HTML 未列机构），2026-10-14 | 未发现官方代码 | `rap-walk`：仅低成本组件，完整实验不复现 |
 | on-policy-self-distillation | [LoOPSD: On-Policy Self-Distillation with Looped Teachers](../reproductions/2610.18162-loopsd/README.md) | Anhui Province Key Laboratory of Digital Security，2026-10-13 | 未发现官方代码 | 计划键 `loopsd`：成本过高，暂不复现；待验收，未注册可执行入口。 |
+| 偏好与对齐 | [Similar Models, Broken Odds: Where Luce's Axiom Fails in Chatbot Arena](2610.19095-luce-similarity-audit/README.md) | Independent Researcher，2026-10-13 | 未发现官方代码 | `luce-similarity-audit`：仅低成本组件，完整实验不复现 |
 | GRPO difficulty curriculum | [A Step Harder, Not a Step Too Far: The Benefits and Limits of Curriculum Difficulty Progression in GRPO](../reproductions/2610.13669-grpo-difficulty-curriculum/README.md) | Dalian Maritime University，2026-10-09 | [已开源](https://github.com/NHLling/GRPO-B) | `grpo-difficulty-curriculum` |
 | Multi-teacher distillation | [Beyond Domain-Routed Supervision: Cross-Teacher Guarding for Multi-Teacher On-Policy Distillation](../reproductions/2610.13521-road-mopd/README.md) | Nanjing University / JD.com，2026-10-09 | 未发现官方代码 | `road-mopd` |
 | Capability boundary | [BoundaryEvo: Data-Model Co-Evolution at the Capability Boundary for Long-Chain Reasoning Distillation](../reproductions/2610.13285-boundary-evo/README.md) | Shanghai Artificial Intelligence Laboratory，2026-10-09 | 未发现官方代码 | `boundary-evo` |
