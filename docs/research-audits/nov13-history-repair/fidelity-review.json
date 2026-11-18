@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-13",
+  "frozen_commit": "363d639261e1fc2e25c522ec0c5ac2c95edba446",
+  "scope": "Independent original-source comparison, negative tests and review of new AST inventory findings; not a capability or whole-program taint certificate",
+  "new_inventory_files": {
+    "src/auto_research/agent_research/ds_star.py": {
+      "finding": "plan attribute reads in typed state, prefix truncation, planner context and diagnostic fixtures",
+      "role_review": "These are current actor-authored plan steps and the retained prefix, not hidden reference plans or gold. The external semantic verifier is a typed callback, not locally implemented. Synthetic sufficiency truth tables remain diagnostics only.",
+      "claim_boundary": "No data-science actor, file reader, generated-code execution, semantic judge or benchmark capability"
+    },
+    "src/auto_research/agent_research/envharness.py": {
+      "finding": "submitted-step accounting, handoff observation concatenation and toy fixture transition/call counters",
+      "role_review": "The shared counter records submitted interactions, including callback failures. Toy counters and advance transitions are explicitly synthetic and cannot certify real tools or Agent success. External terminal verifiers are cached only at task boundaries; actors are never given gold answers or the verifier function.",
+      "negative_review": "Independent review found episode continuation after a malformed verifier and terminal resurrection. Both were fixed before freezing and covered by failure-poisoning, post-terminal and replay-prefix negative tests.",
+      "claim_boundary": "No generated-code compiler, sandbox, EnvRigger, RL, real environment bridge or compatibility judge"
+    }
+  },
+  "other_components": {
+    "scientist-two": "Literal v1 Figure4 control, subset escalation, Good/Bad history, strict external comparison and explicit review-call convention independently compared to named original sections",
+    "era-flat-puct": "v1 Algorithm1 rank, uniform whole-tree prior, root/child visit=1, ancestor increments and final raw-validation choice independently checked; tie conventions explicitly local"
+  },
+  "capability_comparison": false,
+  "evolve_promotion": false,
+  "full_experiments_executed": false,
+  "requires_gpu_validation": false
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:emoreward/prior-cannot-unmask": {
+      "source_sha256": "7e551f768110d73d63d22ef361fc281b308c43365e80f2356eb194b21e668c96",
+      "reviewed": true,
+      "fields": {
+        "question": "If a facial provider correlated strongly with the proxy outcome in the previous run, should it still get reward weight for a video with no usable face?",
+        "answer": "No. The historical multiplier changes relative weights among usable providers. The current gate controls availability. A zero gate gives zero effective weight regardless of the multiplier.",
+        "example": "Teaching example: A facial channel with base weight 0.4 and historical multiplier 2 still has zero effective weight when its gate is 0. A neutral default is not an observation."
+      }
+    },
+    "qa/post-training:emoreward/centered-reliability-capped-tilt": {
+      "source_sha256": "ea08d4146a7fa0887034f090dac8de3042ea19a190df7aeecf03f7429b3810fd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does RewardMemory correlate raw scores with outcomes, then subtract the provider mean and clip?",
+        "answer": "Using raw scores rather than gated contributions avoids mistaking the previous gating policy for provider reliability. Centering expresses relative reliability, and clipping bounds log multipliers. A constant provider has zero correlation, not necessarily a penalty. With a positive cap, its unnormalized multiplier is below 1 only when the mean correlation is positive.",
+        "example": "Teaching example: Correlations of 0.8 and 0 average to 0.4. At temperature 0.5 and cap 1, their unnormalized multipliers are exp(0.8) and exp(-0.8)."
+      }
+    },
+    "qa/post-training:emoreward/reward-mix-not-token-credit": {
+      "source_sha256": "901bc4f281379e77f7037dcd9e5bc50327a871d981c7dc323774bcf8d5be4328",
+      "reviewed": true,
+      "fields": {
+        "question": "EmoReward and TVRL both support video reinforcement learning. Do they change the same training quantity?",
+        "answer": "No. EmoReward changes how emotion scores are fused into a scalar for each video. TVRL starts from an existing group advantage and redistributes credit according to a frozen VLM's sensitivity to generation tokens. One does not substitute for the other.",
+        "example": "Teaching example: EmoReward can ignore a missing face score, while TVRL can allocate more of an existing advantage to influential tokens in the same trajectory. These changes operate along different axes."
+      }
+    },
+    "qa/post-training:emoreward/strict-gate-and-immutable-replay": {
+      "source_sha256": "66811bcb7a25ef0486193dff4c2d0d2b864019a5699ee279fb24c7fc3f16983d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does Eq. (8) apply the active threshold before normalization? May the current outcome update the table at runtime?",
+        "answer": "The threshold applies to the product w⁰gm, not its normalized version, and equality is excluded. Normalize only over the selected providers. The current outcome cannot refit the frozen table; the next run reads a table constructed after a separate reference run has finished.",
+        "example": "Teaching example: Effective weights (0.25, 1, 0) and a threshold of 0.25 keep only the second provider. If every gate is zero, the emotion term is zero, but the general video reward can still contribute."
+      }
+    }
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-12-official-source-refresh",
+  "date": "2026-11-12",
+  "scope_kind": "bounded-component-intake",
+  "source_artifact": "research-audits/nov12-refresh/README.md",
+  "all_sources_exhaustive": false,
+  "full_window_review_complete": false,
+  "selected_scope_complete": true,
+  "delivery_status": "bounded_scope_complete",
+  "review_watermark_advanced": false,
+  "review_watermark": {
+    "before": "2026-11-09",
+    "after": "2026-11-09"
+  },
+  "counts": {
+    "selected_papers": 1,
+    "component_implementations": 1,
+    "cpu_validated_components": 1,
+    "cuda_validated_components": 0,
+    "new_first_publications": 0,
+    "historical_priority_backfills": 1,
+    "high_cost_full_experiments_not_reproduced": 1,
+    "full_capability_reproductions": 0,
+    "specialized_application_exclusions": 1
+  },
+  "artifacts": [
+    {
+      "path": "research-audits/nov12-refresh/preflight.json",
+      "sha256": "b5f6b4b223deff1fe59c7dda7b96e881ea3ceaeb050c4f728c155768dcfe24a0"
+    },
+    {
+      "path": "research-audits/nov12-refresh/frozen-sources.json",
+      "sha256": "ccea77ed03e0e75eb24fa8a72fde8fd8195d1131919fb2a280fa58bbbff263e7"
+    },
+    {
+      "path": "research-audits/nov12-refresh/raw-cpu.json",
+      "sha256": "4ce1b547d4a6fa65df9c855bc8f36075f908cd2aef5f1f1bfe44f44ea5783c16"
+    },
+    {
+      "path": "research-audits/nov12-refresh/source-coverage.json",
+      "sha256": "91dfb8787d1997ae2389acdd34054caedd70135d78d35a71cda1b7cf1605a430"
+    },
+    {
+      "path": "research-audits/nov12-refresh/priority-review.json",
+      "sha256": "1270c3a37e7046dd630e2b0c75f5dcdb1a2cbb018684cb62ba50b4c30d01e85b"
+    },
+    {
+      "path": "research-audits/nov12-refresh/sensorwm-review.json",
+      "sha256": "4a4beb9f4489858caf56a203ce25ee2765742829d4d91aa94147879f71317393"
+    }
+  ],
+  "papers": [
+    {
+      "domain": "multimodal-models",
+      "key": "sensorwm-planning",
+      "title": "Personalized health coaching via coachable health age and counterfactual wearable trajectories",
+      "paper_url": "https://arxiv.org/abs/2611.08568",
+      "reviewed_version": "v1",
+      "reviewed_arxiv_id": "2611.08568v1",
+      "reviewed_version_url": "https://arxiv.org/html/2611.08568v1",
+      "detail_path": "multimodal-models/2611.08568-sensorwm-planning/README.md",
+      "topic": [
+        "JEPA 表征学习",
+        "可穿戴世界模型与外部候选排序"
+      ],
+      "first_author": "Simon A. Lee",
+      "first_author_affiliation": "Google Research / University of California, Los Angeles",
+      "published": "2026-11-05",
+      "published_at": "2026-11-05T17:52:57Z",
+      "code": null,
+      "code_status": "论文承诺在Google-Health/consumer-health-research发表时释放。固定HEAD3e9d1e4877a54cf81ce8ef34085006952dd19601的有限目录入口/README检查未确认SensorWM/CHA专属代码已发布；已有personal_health_agent属2508.20148，不误认本篇方法已开源，也不作全仓穷尽断言。",
+      "adapter": null,
+      "priority": "P0",
+      "implementation_status": "component_only",
+      "local_operator": "auto_research.multimodal.sensorwm_planning.rank_candidates",
+      "local_command": "PYTHONPATH=src python -c 'from auto_research.multimodal.sensorwm_planning import diagnostic; print(diagnostic(42))'",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "requires_gpu_validation": false,
+      "gpu_validation_passed": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source": "https://arxiv.org/html/2611.08568v1#S4.SS2",
+        "available_resource": "单张A100/A30或Mac",
+        "basis": "96,957人/2.28M person-weeks/182,797有效12周窗的私有SensorWM联合训练；Fitbit原记录不可公开、WEAR-ME审批访问、预训练权重未确认公开；另2780 eligible画像、2613 evaluable paired plans/三次Gemini评审及专家矩阵。原文未披露epochs/batch/GPU/总时长，不编造卡时，完整高成本不复现、不probe。"
+      },
+      "fidelity_note": "只执行Eq55-56：外部预测的future-vs-future收益、sigma下限努力、严格gain>0.1与外部可行性过滤。无encoder/rollout/125网格/医疗预测/临床安全或计划生成；只返回候选ID和数学分数。",
+      "summary": "Google SensorWM以动作条件JEPA预测可穿戴生理轨迹，再按个体努力排序反事实方案。本地仅实现给定外部预测端点的CPU排序核；完整私有训练和医疗能力验证不复现。",
+      "id": "2611.08568",
+      "doc": "multimodal-models/2611.08568-sensorwm-planning/README.md",
+      "track": "multimodal-models",
+      "status": "implemented",
+      "resolution": "bounded_l1_component_accepted",
+      "component_implemented": true,
+      "component_evidence": "docs/multimodal-models/2611.08568-sensorwm-planning/metrics/component-cpu-seeds42-44.json",
+      "full_capability_reproduced": false,
+      "new_first_publication": false,
+      "intake_class": "official_source_historical_priority_backfill",
+      "source_provenance": [
+        {
+          "organization": "Google",
+          "source_url": "https://www.research.google/blog/using-wearables-to-enable-cardiovascular-kidney-metabolic-ckm-risk-profiling-for-personalized-coaching/"
+        }
+      ],
+      "previous_selection_status": "not_selected_p2",
+      "previous_selection_was_method_review": false
+    }
+  ],
+  "excluded": [
+    {
+      "id": "2603.27787",
+      "title": "Cardiovascular-Kidney-Metabolic Health Age Using Wearables and Blood Biomarkers",
+      "priority": "P2",
+      "status": "rejected",
+      "resolution": "out_of_scope_specialized_application",
+      "review_done": true,
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "reason": "Section 4.6 explicitly reuses the earlier LSM-V2 architecture, objectives, and pretraining protocol. The downstream methods use train-fitted scalers, PCA, XGBoost regression/classification, and specialized medical risk/health-age formulas. This does not establish a new reusable foundation architecture, Agent/post-training algorithm, or public benchmark for the current topics. It is not accepted merely because the authors are Google or the data are costly.",
+      "source_artifact": "research-audits/nov12-refresh/priority-review.json"
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "schema_version": 2,
+  "method": "sensorwm-planning",
+  "manifest_ref": "multimodal-models:sensorwm-planning",
+  "dataset": {
+    "id": "synthetic:sensorwm-planning-arithmetic-v1",
+    "revision": "sha256:196145752be985fd614ed515479e4abb1e4af128b2ba9322d48b1bf1aab94570",
+    "kind": "nonclinical_formula_fixtures",
+    "public_capability_benchmark": false,
+    "source": "Explicit endpoint/target fixtures; no observed participant or model-generated predictions"
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "input_candidates": 4,
+        "ranked_candidates": 2,
+        "best_fixture_score": 0.2,
+        "three_floor_effort": 3.0
+      },
+      "checks": {
+        "three_sigma_floors_applied": true,
+        "future_status_quo_anchor": true,
+        "score_divides_by_one_plus_effort": true,
+        "expected_effort_adjusted_order": true,
+        "strict_gain_threshold": true,
+        "external_infeasible_excluded": true,
+        "status_quo_gain_zero_excluded": true,
+        "identities_and_scores_only": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "input_candidates": 4,
+        "ranked_candidates": 2,
+        "best_fixture_score": 0.2,
+        "three_floor_effort": 3.0
+      },
+      "checks": {
+        "three_sigma_floors_applied": true,
+        "future_status_quo_anchor": true,
+        "score_divides_by_one_plus_effort": true,
+        "expected_effort_adjusted_order": true,
+        "strict_gain_threshold": true,
+        "external_infeasible_excluded": true,
+        "status_quo_gain_zero_excluded": true,
+        "identities_and_scores_only": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "input_candidates": 4,
+        "ranked_candidates": 2,
+        "best_fixture_score": 0.2,
+        "three_floor_effort": 3.0
+      },
+      "checks": {
+        "three_sigma_floors_applied": true,
+        "future_status_quo_anchor": true,
+        "score_divides_by_one_plus_effort": true,
+        "expected_effort_adjusted_order": true,
+        "strict_gain_threshold": true,
+        "external_infeasible_excluded": true,
+        "status_quo_gain_zero_excluded": true,
+        "identities_and_scores_only": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "best_fixture_score": 0.20000000000000004,
+    "input_candidates": 4.0,
+    "ranked_candidates": 2.0,
+    "three_floor_effort": 3.0
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Equation-level arithmetic and contract checks; not clinical, forecasting or Agent capability"
+  },
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "provenance": {
+    "commit": "a28efd403e497ad3a482eada2f393fb4c323f845",
+    "accelerator": "CPU",
+    "artifact_path": "docs/multimodal-models/2611.08568-sensorwm-planning/metrics/component-cpu-seeds42-44.json",
+    "executed_source_sha256": {
+      "scripts/run_sensorwm_planning.py": "5abbb92e13cb1a0b164545d4b9e1199937e60c008c7c9af3b76a7451ac5eeb88",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "src/auto_research/multimodal/sensorwm_planning.py": "196145752be985fd614ed515479e4abb1e4af128b2ba9322d48b1bf1aab94570",
+      "docs/research-audits/nov12-refresh/preflight.json": "b5f6b4b223deff1fe59c7dda7b96e881ea3ceaeb050c4f728c155768dcfe24a0"
+    },
+    "dataset_fingerprint": "sha256:75e13c7e6b4468dd6973c994aecb01bc972a3de55bf1c218bcdd54e079c18fd5",
+    "raw_runner_artifact_sha256": "4ce1b547d4a6fa65df9c855bc8f36075f908cd2aef5f1f1bfe44f44ea5783c16"
+  }
+}

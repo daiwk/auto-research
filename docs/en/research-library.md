@@ -1,10 +1,10 @@
 # Paper implementation and evaluation library
 
-<!-- source-sha256: ac40d5f6fbe0db6a313bdd00aa3eeeff0c5f9367a7208142b4811205aec9dea2 -->
+<!-- source-sha256: 7d6e63ce0ed8d945fd621d38d047296dec5c79d9f4e6abd10bfb84458451d664 -->
 
 [简体中文](../research-library.md) · [English paper catalog](papers/index.md)
 
-Start with the [cross-domain paper lineage and coverage gaps](research-lineage.md) to see which foundational lines of work are covered and which candidates have not yet met the bar for implementation. The historical scan is complete; discovery is now incremental. The [historical full-text audit closeout](paper-audits/2026-historical-fulltext-review.md), [fixed roadmap for historical P0 implementations](paper-audits/2026-historical-p0-implementation-roadmap.md), dated scan lists, and completed TODOs remain available for traceability, but are no longer in the main navigation.
+Start with the [cross-domain paper lineage and coverage gaps](research-lineage.md) to see which foundational lines are covered. Routine discovery is incremental, with separate [historical institutional-source reconciliation](research-audits/nov13-history-repair/history-reconciliation.md). Earlier batches closed within their stated selection scope; they do not establish exhaustive Google/Meta or web-wide history. The [current ScientistTwo and related backfill](research-audits/nov13-history-repair/README.md) preserves both gaps and delivery limits. The [historical full-text audit closeout](paper-audits/2026-historical-fulltext-review.md), [fixed P0 roadmap](paper-audits/2026-historical-p0-implementation-roadmap.md), dated lists and completed TODOs remain scope-specific snapshots, outside the main navigation.
 
 The [public experiment dashboard](public-experiment-dashboard.md) shows committed results and lets readers search by domain, method, dataset, and metric. Temporary local experiments do not appear on the public site.
 

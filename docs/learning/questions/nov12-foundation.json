@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "foundation-models:real-loss": {"questions": [
+      {"id":"accepted-prefix-not-target-average","level":"basics","question":"为什么投机解码两步的期望接受长度不能一般地用两个边际接受率相乘？","answer":"第一步被接受的token决定下一步前缀，接受后的分支分布按min(p,q)的质量加权，而不再简单等于target分支比例。若某分支更易被接受且后续也更容易，忽略两者协方差会改变目标。","example":"教学例：两个draft的第一步接受率相同，但一个把接受质量放在后续容易的分支，另一个放在困难分支；真实两步EAL可以不同。","source_sections":["背景与主要改动","核心公式"],"added":"2026-11-12"},
+      {"id":"training-ratio-and-rb","level":"mechanism","question":"REAL在target采样轨迹上为什么用q/p，而不是serving接受概率p/q？","answer":"target轨迹的采样质量是p，乘min(1,q/p)后才变成min(p,q)的接受分支质量。Branch估计再将每个前缀的最后一个采样权重替换为全词表重叠a，前面的W仍必须保留draft梯度。","example":"教学例：p(A)=0.4、q(A)=0.8时，训练权重为1，采样质量乘后为0.4；若误用p/q则变0.2，已不等于接受分支质量。","source_sections":["核心公式","数据协议与代码映射"],"added":"2026-11-12"},
+      {"id":"same-value-opposite-gradient","level":"comparison","question":"REAL反例中真实目标与WTV都等于0.96，为什么不能据此认为两个loss等效？","answer":"等值只是一个参数点的前向结果。真实目标0.86+0.20theta随theta上升，WTV的1.02−0.12theta却下降；优化方向相反。应独立检查定义、期望和梯度，不只比较某次loss值。","example":"教学例：theta=0.5时都0.96；增到0.6，真实目标升到0.98，WTV降到0.948。","source_sections":["核心公式","论文离线与线上效果","结果、负控与边界"],"added":"2026-11-12"},
+      {"id":"fixed-gamma-not-random-valid-length","level":"implementation","question":"REAL的窗口为3但EOS后只剩2个有效位置，为什么损失仍除以3？","answer":"固定gamma是论文目标的归一化常数，prefix mask只去掉EOS后的贡献，不把它改成随机长度目标。target logits应冻结，而前缀W及重叠a都应反传；调用方还必须提供真实target采样来源。","example":"教学例：p=q且两位置有效时Branch=2，纯EAL损失为1−2/3；若改除有效长度2，就会错误得到0。","source_sections":["核心公式","数据协议与代码映射","结果、负控与边界"],"added":"2026-11-12"}
+    ]},
+    "multimodal-models:c2-routing": {"questions": [
+      {"id":"crop-versus-global-context","level":"basics","question":"C²-Routing为什么不总是裁剪得越小越好？","answer":"裁剪能放大小目标与局部文字，却会删掉跨区域关系和背景证据；压缩保留整图布局但可能损失微小细节。应按图像和问题选择，计算少本身不保证回答正确。","example":"教学例：读取船身编号适合局部裁剪；判断船是否位于两岸之间则需要保留更大的全景。","source_sections":["背景与主要改动","核心公式"],"added":"2026-11-12"},
+      {"id":"joint-harm-minus-benefit","level":"mechanism","question":"为什么安全门的风险是P(H)−P(B)，而不是缩减图回答错误的概率？","answer":"H是原图对而缩减错，回退能修复；B是原图错而缩减对，回退反而损失。00是两者都错，回退不能修复。正确率的期望变化只由H和B之差决定。","example":"教学例：概率(11,H,B,00)=(0.1,0,0,0.9)时缩减错误率0.9，但风险为0，不应仅因共享失败而回退。","source_sections":["核心公式","结果、负控与边界"],"added":"2026-11-12"},
+      {"id":"risk-gate-versus-token-cap","level":"comparison","question":"C²-Routing的安全门与简单设置视觉token上限，解决的是同一个约束吗？","answer":"不是。Token cap只限制输入规模，不能判断被删信息是否改变正确性；风险门比较缩减和原图的预期正确率差与validation固定成本节省。论文收益也是相对已有限制的整图基线，而不是无限分辨率基线。","example":"教学例：两张图都限制到1024token，局部文档再压到256可能丢字，全景图则可能保留足够关系；同预算不能推导同风险。","source_sections":["背景与主要改动","核心公式","论文离线与线上效果"],"added":"2026-11-12"},
+      {"id":"validation-macro-cost-not-test-oracle","level":"implementation","question":"C²-Routing的成本比为什么先在数据集内求FLOPs总和比，再对数据集平均？","answer":"这使各数据集等权，而不是让样本多的数据集主导，也不同于逐样本比值平均。成本、校准和阈值在validation固定；推理门只读预测概率，不能读test正确答案来决定回退。","example":"教学例：A有100张且成本比0.2，B只有1张且成本比0.8；dataset-macro为0.5，不是按101个样本加权的约0.206。","source_sections":["核心公式","数据协议与代码映射","结果、负控与边界"],"added":"2026-11-12"}
+    ]},
+    "multimodal-models:onlyact": {"questions": [
+      {"id":"motion-versus-appearance","level":"basics","question":"OnlyAct为什么把同一视频的另一时间窗当hard negative，而不只用其他视频？","answer":"不同视频常能仅凭背景外观分开，模型可能不必学习动作。同视频非重叠窗保留较相似场景，使这种捷径更难；但无动作标签，所以不同窗不保证动作语义真的不同。","example":"教学例：同一厨房里“开抽屉”和“关抽屉”比厨房与游戏画面的对比更难用场景颜色直接区分。","source_sections":["背景与主要改动","核心公式"],"added":"2026-11-12"},
+      {"id":"joint-clip-and-fixed-projection","level":"mechanism","question":"OnlyAct为什么不能用两个独立单帧embedding相减来替代原动作编码？","answer":"原V-JEPA2把两帧组成一个clip，tubelet从第一层就联合观察时空变化；独立编码后相减没有同样的跨帧交互。后续池化、固定随机投影和归一化只处理该联合表征，学习发生在encoder LoRA，不是投影。","example":"教学例：物体跨帧移动并同时改变光照；联合token可在上下文中比较运动，而两个独立全图向量差可能混合外观变化。","source_sections":["背景与主要改动","核心公式","数据协议与代码映射"],"added":"2026-11-12"},
+      {"id":"onlyact-versus-reconstruction-bottleneck","level":"comparison","question":"OnlyAct与无标签动作重建瓶颈方法的区别，是否只是把编码器换大？","answer":"不只是规模。它从预训练时空表征出发，用保动作换场景正例和同场景换时间负例重塑几何，不依靠窄瓶颈丢弃信息。瓶颈宽窄的表达力与场景泄漏折中，变成由构造与对比目标约束；真实解耦仍需下游检验。","example":"教学例：窄码可能同时丢掉小幅动作；OnlyAct尝试用不同场景中同一移动区域互为正例保留这种变化，但合成loss下降不能证明成功。","source_sections":["背景与主要改动","核心公式","论文离线与线上效果"],"added":"2026-11-12"},
+      {"id":"microbatch-bank-not-accumulated-batch","level":"implementation","question":"OnlyAct的microbatch为2、梯度累积8次，为什么每个query仍只有4个负例？","answer":"候选只来自当前forward的2组anchor/positive/hard negative，共6个；排除query自身后剩1正例和4负例。累积只把多次梯度相加，未建立memory queue或跨步候选bank。","example":"教学例：一组query不能看到下一次forward才出现的视频pair；把effective batch16直接变成48候选会改写论文目标。","source_sections":["核心公式","数据协议与代码映射","结果、负控与边界"],"added":"2026-11-12"}
+    ]}
+  }
+}

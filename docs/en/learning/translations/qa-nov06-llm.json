@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:convpe/bias-is-not-window-mask": {
+      "source_sha256": "064243316bb9fd023a6fa9e3fb511d4aa5e98f904a491cc1c1042d3c8a63317b",
+      "reviewed": true,
+      "fields": {
+        "question": "If ConvPE bias is zero outside the window, can attention see only the W latest keys?",
+        "answer": "No. ConvPE changes an additive pre-softmax score term. Older keys can still participate with their original QK scores, while a separate causal mask controls future visibility.",
+        "example": "Teaching example: With W=3 and query position 5, key 0 is five positions away and has zero bias but remains visible. Key 7 also lacks bias, yet the causal mask makes it invisible."
+      }
+    },
+    "qa/foundation-models:convpe/lag-and-modulo-head-mapping": {
+      "source_sha256": "85d595e263358a858204e5e8ae0af99f45b59d9f135428656e8197e1112ce389",
+      "reviewed": true,
+      "fields": {
+        "question": "How do the convolution outputs at one query map to attention heads and keys?",
+        "answer": "Reshape its H_bW outputs into bias heads and lags. For head h and key t, read bias head h mod H_b and lag s−t. Outside the lag range the bias is zero; do not group adjacent heads or reverse the lag sign.",
+        "example": "Teaching example: With H=4, H_b=2 and W=3, query 5 reads lag 2 for key 3. Heads 0 and 2 use bias head 0, while heads 1 and 3 use bias head 1."
+      }
+    },
+    "qa/foundation-models:convpe/position-bias-versus-rotations": {
+      "source_sha256": "cf06fbee7a04b0c8ad0c023f7a8f39c4b1dea95319c91f932445abcd8de8e8d5",
+      "reviewed": true,
+      "fields": {
+        "question": "What does ConvPE change compared with RoPE? Must a distant key's attention weight remain fixed?",
+        "answer": "RoPE alters dot products by rotating Q/K; ConvPE adds a content-dependent local score bias. An unchanged out-of-window logit does not guarantee an unchanged normalized weight, since changing a nearby logit also changes the softmax denominator.",
+        "example": "Teaching example: Two visible keys, one distant and one near, both start at score 0. Adding 2 only to the nearby key leaves the distant score at 0 but reduces its weight from 0.5 to about 0.119."
+      }
+    },
+    "qa/foundation-models:convpe/streaming-needs-hidden-history": {
+      "source_sha256": "bb6c552fc7705fa47c2e8ad308da79a7d14f918e4b630de5d02be39770d0f81f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must a decoding chunk include earlier hidden states instead of being left-padded with zeros again?",
+        "answer": "The causal convolution uses the previous W−1 projected inputs. Zero padding is for the real sequence start. A mid-sequence chunk needs earlier raw states from the same layer and its absolute offset so it matches a slice of the full-sequence computation.",
+        "example": "Teaching example: With W=3, decoding from position 4 needs the raw hidden states at positions 2 and 3. Zeroing those taps generally changes the position-4 bias even when the KV cache is correct."
+      }
+    },
+    "qa/post-training:cord-rollout/rollout-marginal-not-teacher-loss": {
+      "source_sha256": "322219364f9d8dc648cc8052950afaea4fe3752183f62efcc873720f72ff82ca",
+      "reviewed": true,
+      "fields": {
+        "question": "Does CoRD's qα replace the teacher in ordinary OPD?",
+        "answer": "No. qα is the emitted next-token marginal and changes which prefixes are visited. At a visited prefix the paper still uses full-vocabulary reverse KL from student pS to frozen teacher pT.",
+        "example": "Teaching example: Coupled sampling can visit an opening step the student rarely chooses. At that new prefix, pT still supplies the supervision, not an interpolation of pS and pT."
+      }
+    },
+    "qa/post-training:cord-rollout/maximal-coupling-residual-tv": {
+      "source_sha256": "f6260c943fb1eae0af2f0b5bfe030d24b1b5f11ccfdba8fd3a460efc3c622ef1",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does positive-residual resampling yield the target marginal, with total variation as the replacement rate?",
+        "answer": "The unconditional mass retained at each token is min(pS,qα), the largest diagonal mass the two marginals can share. The unfilled target mass is exactly (qα−pS)+. Adding it yields qα, and the remaining mass is TV.",
+        "example": "Teaching example: Let pS=(0.6,0.4) and qα=(0.3,0.7). Keep half of the first-token proposals and all second-token proposals. Put all 0.3 rejected mass on the second token to emit (0.3,0.7)."
+      }
+    },
+    "qa/post-training:cord-rollout/same-reject-rate-wrong-replacements": {
+      "source_sha256": "bb818fba79698e7e96f40fb4b823c2ff8578553547a648dcc5d888ccde594ed4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is drawing directly from the teacher after rejection not equivalent if the acceptance test is unchanged?",
+        "answer": "The rejection rule fixes how much probability mass moves; the replacement rule fixes its destination. The unconditional teacher can still place mass on student-overweighted tokens. Only the normalized positive residual fills the target's shortfall exactly.",
+        "example": "Teaching example: Let pS=(0.6,0.4) and qα=pT=(0.3,0.7) at α=1. The first token retains 0.3 mass. Drawing the 0.3 rejected mass from the teacher adds 0.09 back to the first token, giving the wrong marginal 0.39 instead of 0.30."
+      }
+    },
+    "qa/post-training:cord-rollout/geometric-zero-support-and-endpoints": {
+      "source_sha256": "b33e59f22d4b9af94b2f924df6a473e738f87b1e1c8feb7cefd2d99e663fb97e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why handle endpoints separately from intermediate α when geometric interpolation sees zero probabilities?",
+        "answer": "An interior α normalizes over tokens positive on both sides; an empty intersection has no valid target. Endpoints return the corresponding original marginal directly, avoiding multiplication of log(0) by zero. At α=0 no extra acceptance draw is needed, preserving the local student RNG stream.",
+        "example": "Teaching example: With pS=(1,0) and pT=(0,1), reject α=0.5, but α=0 always emits the first token and α=1 the second. Both endpoints are well-defined."
+      }
+    }
+  }
+}

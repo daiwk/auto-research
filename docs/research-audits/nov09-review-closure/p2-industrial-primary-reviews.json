@@ -1,0 +1,1736 @@
+{
+  "schema_version": 1,
+  "window": {
+    "start": "2026-10-16",
+    "end": "2026-11-09",
+    "timezone": "Asia/Shanghai"
+  },
+  "input_inventory_commit": "aedf2d24a996a833c4d8820932a29d5eb04cb04a",
+  "all_sources_exhaustive": false,
+  "scope": "18 industrial-route records plus four preserved production leads; all22 pinned originals checked, zero implementations and zero GPU runs claimed",
+  "counts": {
+    "rejected": 14,
+    "reviewed_deferred": 3,
+    "out_of_scope": 4,
+    "accepted": 1
+  },
+  "low_cost_core_delivery": "Not part of this review. Acceptance or high-cost complete-experiment closure does not imply an implemented cheap core.",
+  "reviews": [
+    {
+      "revision": 1,
+      "title": "Robustness Analysis of Pareto-based Joint Evaluation of Fairness and Relevance in Recommender Systems",
+      "published": "2026-10-20T08:31:48Z",
+      "updated": "2026-10-20T08:31:48Z",
+      "metadata_sha256": "93ec5a69764f779dbe5294222083a4d58232359fe9b10c043f777f60256198a0",
+      "capture": "39731868655/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture": "39731868655/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture_sha256": "377d4beef35de9f78684de6392f603e8ae998bd0cb36ba64aaee5280acfdef30",
+      "source_url": "https://arxiv.org/html/2610.27850v1",
+      "source_sha256": "fcbff5622b02b0998e484d88c11bac705f0d84036e5076fd1b7f08b7806fcf24",
+      "source_capture": "p2-industrial/2610.27850v1.html",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/html/2610.27850v1",
+          "source_sha256": "fcbff5622b02b0998e484d88c11bac705f0d84036e5076fd1b7f08b7806fcf24",
+          "source_capture": "p2-industrial/2610.27850v1.html",
+          "source_bytes": 1276641,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "html",
+          "location": "S3.SS3.SSS0.Px1.p3.1",
+          "paragraph_sha256": "b0e60eaf6fdb489391e03d2cf78374509880baf5046215f9cfdba343b0bd4e12",
+          "match": "not computed based on a percentile"
+        },
+        {
+          "format": "html",
+          "location": "S3.SS4.p1.1",
+          "paragraph_sha256": "2a2770874ccf91dc4ba9659127312d2a3b5db7fc2ab41aa91077ec490f21dddd",
+          "match": "Oracle2Fair"
+        },
+        {
+          "format": "html",
+          "location": "S4.SS0.SSSx1.p1.1",
+          "paragraph_sha256": "3b68bc44c4939bdf57847387ef89c36cdb8f47f534e0e469c85115c7cf964211",
+          "match": "six publicly available"
+        }
+      ],
+      "track": "recommendation",
+      "priority": "P2",
+      "verified_priority_organizations": [],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, experimental/deployment evidence, original date and relevant cost/limitations; not a whole-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2610.27850",
+      "organization": "University of Copenhagen / LUT University",
+      "decision": "rejected",
+      "resolution": "industrial_online_evidence_not_established",
+      "reason": "DPFR 有独立的新公平性/相关性联合评测方法：按 Pareto 前沿弧长选参考点，再计算二维距离，并提供均匀抽取替换进度的近似前沿。原文实验为六个公开推荐数据集上的四种推荐器与三种公平重排器离线比较，不是生产线上 A/B 或全流量部署。本轮仍按工业推荐门槛不选，而不是声称无原创算法；低成本指标核心未实现，也不贴高成本标签。",
+      "locations": [
+        "author block",
+        "§3.3–3.4",
+        "§4 experimental setup and public datasets"
+      ],
+      "algorithm_assessment": "new DPFR arc-length reference and approximate Pareto-front evaluator; low-cost arithmetic core not implemented",
+      "production_evidence": {
+        "kind": "six_public_datasets_offline_evaluation",
+        "online_ab": false,
+        "details": "Amazon Luxury Beauty、MovieLens10M/20M、Last.fm、QK-video、Jester；按时间或随机6:2:2切分。"
+      },
+      "upstream_artifact": "https://github.com/theresiavr/robustness-DPFR-recsys-evaluation"
+    },
+    {
+      "revision": 1,
+      "title": "From Scores to Safe Sets: Exact Safety--Constrained Decoding for Medication Recommendation",
+      "published": "2026-10-21T05:38:08Z",
+      "updated": "2026-10-21T05:38:08Z",
+      "metadata_sha256": "935d15977bf1a371d09b9f5da003234e90bb5c9c7db37c8cf5fa5b6406deafa2",
+      "capture": "39731868655/agent-paper-candidates/paper-candidates-agent.json",
+      "metadata_capture": "39731868655/agent-paper-candidates/paper-candidates-agent.json",
+      "metadata_capture_sha256": "972c47e765933ae15f422b7258719b2301e18ddd7c44408ec04fbadb060b6d52",
+      "source_url": "https://arxiv.org/html/2610.29228v1",
+      "source_sha256": "638bb310c1b7a2e0498bb6ca85d84319c1e95fb042782f69ec042d57d9af0c73",
+      "source_capture": "p2-industrial/2610.29228v1.html",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/html/2610.29228v1",
+          "source_sha256": "638bb310c1b7a2e0498bb6ca85d84319c1e95fb042782f69ec042d57d9af0c73",
+          "source_capture": "p2-industrial/2610.29228v1.html",
+          "source_bytes": 204959,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "html",
+          "location": "S6.SS0.SSS0.Px1.p1.1",
+          "paragraph_sha256": "8f9b3253dc681310228a34ca9c2b68c1019d05541ad03534a1e8207bfbc732d0",
+          "match": "frozen drug-level classifier"
+        },
+        {
+          "format": "html",
+          "location": "S6.SS0.SSS0.Px2.p1.1",
+          "paragraph_sha256": "989fc4e76651424717889e5c34ca4c9bd03a749d6fbd5aa3e8bde1c6d02e7303",
+          "match": "no shared patient identifiers"
+        },
+        {
+          "format": "html",
+          "location": "S9.p1.1",
+          "paragraph_sha256": "65b1bcd1359324f02bbd6e3f259eb0427a90589af4ccbe2fb360c54d776a9a6c",
+          "match": "does not establish the clinical safety"
+        }
+      ],
+      "track": "recommendation",
+      "priority": "P2",
+      "verified_priority_organizations": [],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, experimental/deployment evidence, original date and relevant cost/limitations; not a whole-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2610.29228",
+      "organization": "Optum",
+      "decision": "rejected",
+      "resolution": "industrial_online_evidence_not_established",
+      "reason": "论文定义了真实的精确 MILP 药物集合解码器，在冻结 FLAME 分数上联合约束药物数量和 DDI 边预算，不是无方法的临床报告。但验证仅为 MIMIC-III 单一回顾性 EHR 基准，原文明确尚不能建立临床安全性/效用、临床部署需进一步验证。没有本方法真实生产 A/B 或认可的全量部署证据，本轮不作为工业推荐例外；MILP 低成本核心未实现，不将其误标高成本。",
+      "locations": [
+        "author block",
+        "MILP formulation",
+        "§6 frozen scorer and split",
+        "§9 limitations"
+      ],
+      "algorithm_assessment": "new exact safety-constrained set decoder with a frozen scorer; core not implemented",
+      "production_evidence": {
+        "kind": "retrospective_clinical_benchmark_only",
+        "online_ab": false,
+        "details": "MIMIC-IIIv1.4约14000次就诊、151药物/1425DDI边，患者不交叉的4:1:1切分；临床部署仍为未来验证。"
+      }
+    },
+    {
+      "revision": 1,
+      "title": "LLM Multi-Agent Systems Are Vulnerable to Herding and Runaway Cascades",
+      "published": "2026-10-22T05:42:55Z",
+      "updated": "2026-10-22T05:42:55Z",
+      "metadata_sha256": "f77047c2e4ec5d03b3fc653a21fd51461a2c5e895f25f014570105b275b68c8b",
+      "capture": "40832864995/agent-paper-candidates/paper-candidates-agent.json",
+      "metadata_capture": "40832864995/agent-paper-candidates/paper-candidates-agent.json",
+      "metadata_capture_sha256": "6f1cfe2706766b6d5feb40e2c79363dc367f9021596ed7ea8fbf82bf453434cf",
+      "source_url": "https://arxiv.org/html/2610.30769v1",
+      "source_sha256": "be006ed84127d51ae36f476cc2cf777acdbc095d72b344bdd11dfef22fb7c2cd",
+      "source_capture": "p2-industrial/2610.30769v1.html",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/html/2610.30769v1",
+          "source_sha256": "be006ed84127d51ae36f476cc2cf777acdbc095d72b344bdd11dfef22fb7c2cd",
+          "source_capture": "p2-industrial/2610.30769v1.html",
+          "source_bytes": 280906,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "html",
+          "location": "S2.SS1",
+          "paragraph_sha256": "64034f93d82ca2da2cf8f64ee6f7439af5d8f69963fe2d508cf168f6dc7c1818",
+          "match": "two stages"
+        },
+        {
+          "format": "html",
+          "location": "S2.SS2",
+          "paragraph_sha256": "9ad813bb133d457df63aec7d2f770ed3252756ca47095c5f52389855c4dbf7b2",
+          "match": "168,480"
+        },
+        {
+          "format": "html",
+          "location": "S2.SS3",
+          "paragraph_sha256": "a52361aa97ec2989326e3307b502b132ae90677634435845df00c32b1af61226",
+          "match": "Qwen3-Next 80B"
+        },
+        {
+          "format": "html",
+          "location": "S2.SS5",
+          "paragraph_sha256": "40f06936997fb1b33b5cac06ced4aa60249b76508382fede6f66f9838920551f",
+          "match": "qualitative"
+        }
+      ],
+      "track": "agent",
+      "priority": "P1",
+      "verified_priority_organizations": [],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, experimental/deployment evidence, original date and relevant cost/limitations; not a whole-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2610.30769",
+      "organization": "Cornell University / Stanford University",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "reason": "这是多 Agent 社会反馈/羊群效应的受控研究，不是生产推荐部署：将每个 Agent 的歌曲推荐累积为后续 Agent 可见的社会信号，比较独立、弱影响和强影响世界。完整原文实验为13个模型、每模型12960名Agent、合计168480名Agent且每人两阶段调用，含闭源模型、27B/80B和DeepSeek-R1等；逐世界顺序反馈还限制并行。按用户成本规则不运行完整矩阵。小规模反馈环境/统计组件仍未实现，未把测量研究误称训练算法或已复现能力。",
+      "locations": [
+        "author block",
+        "§2.1–2.5",
+        "§3 outcomes",
+        "§4 limitations"
+      ],
+      "algorithm_assessment": "controlled sequential social-feedback protocol and herding/cascade measurements; small protocol components not implemented",
+      "production_evidence": {
+        "kind": "controlled_llm_population_simulation",
+        "online_ab": false,
+        "details": "48首新生成歌词；17个独立演化世界/模型；人类MusicLab只作定性参照，并非严格同任务人机对照。"
+      },
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.30769v1",
+        "basis": "§2.1两阶段任务、§2.2精确Agent规模、§2.3完整模型列表；原始规模判断，非本地运行估时",
+        "scale": "13模型×12960Agent=168480Agent，每Agent两阶段，独立世界1440、16个影响世界各720；包含多个闭源API及27B/80B模型，影响世界逐Agent顺序反馈。",
+        "available_resource": "one A100 or A30, or local Mac; no experiment was started by this review",
+        "cost_type": "大规模异构模型推理/API与顺序反馈实验矩阵"
+      },
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "low_cost_core_status": "not_implemented; full-experiment waiver does not deliver the component"
+    },
+    {
+      "revision": 1,
+      "title": "Theoretically Sound Item Similarity Measures for Recommender Systems",
+      "published": "2026-10-25T16:04:41Z",
+      "updated": "2026-10-25T16:04:41Z",
+      "metadata_sha256": "48669c7f2ef6b97b90c075d96b03c932ebc1769f198c5a422c482dfe37e90a19",
+      "capture": "40832864995/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture": "40832864995/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture_sha256": "16e5d2a0a54712dfe5c66729c23d802453f154db450411cda4e32f5ccf3ea8e0",
+      "source_url": "https://arxiv.org/html/2610.34402v1",
+      "source_sha256": "4c9dae7f049e7cc4a9352f965bedf4e916be6064772cf0dce0d700644c391510",
+      "source_capture": "p2-industrial/2610.34402v1.html",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/html/2610.34402v1",
+          "source_sha256": "4c9dae7f049e7cc4a9352f965bedf4e916be6064772cf0dce0d700644c391510",
+          "source_capture": "p2-industrial/2610.34402v1.html",
+          "source_bytes": 267488,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "html",
+          "location": "S7.SS1",
+          "paragraph_sha256": "1bf7cd5c50415530d6a20d41fac74d0f05d9f0b42d8f825a39407dc3eddd91d5",
+          "match": "Three datasets"
+        },
+        {
+          "format": "html",
+          "location": "S7.I1.i2.p1.1",
+          "paragraph_sha256": "03a6f0389991517bd3f705ccca4c4f67644fcc286971410c836d7ef648ec999b",
+          "match": "ignoring the impression data"
+        }
+      ],
+      "track": "recommendation",
+      "priority": "P2",
+      "verified_priority_organizations": [],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, experimental/deployment evidence, original date and relevant cost/limitations; not a whole-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2610.34402",
+      "organization": "University of Antwerp / Froomle",
+      "decision": "rejected",
+      "resolution": "industrial_online_evidence_not_established",
+      "reason": "论文从 Bernoulli/多项式朴素贝叶斯推导 item similarity，并分析平滑、偏置和已有 cosine 方法的优化解释，属于新相似度方法而非复述。原文用 Amazon Books、MIND、MovieLens25M 离线数据和用户训练/验证/测试划分评估，无本方法生产 A/B 或全量上线证据。保留工业推荐门槛，不因方法便宜而虚构经典例外；算子核心未实现、不标高成本。",
+      "locations": [
+        "author block",
+        "Naive Bayes similarity derivations",
+        "§7.1 datasets and evaluation protocol",
+        "conclusion"
+      ],
+      "algorithm_assessment": "new probabilistically derived item-similarity estimators; core not implemented",
+      "production_evidence": {
+        "kind": "offline_public_recommendation_datasets",
+        "online_ab": false,
+        "details": "三公开数据集；MIND只使用点击并忽略impressions，非现网实验。"
+      }
+    },
+    {
+      "revision": 1,
+      "title": "Do Similarity Measures Measure Similarity? How User Activity Creates Phantom Correlation in Recommender Systems",
+      "published": "2026-10-26T17:09:56Z",
+      "updated": "2026-10-26T17:09:56Z",
+      "metadata_sha256": "9f73532229a8daa0baf354660a3a8e4924cd02fa88a492b102c4206412449872",
+      "capture": "40832864995/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture": "40832864995/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture_sha256": "16e5d2a0a54712dfe5c66729c23d802453f154db450411cda4e32f5ccf3ea8e0",
+      "source_url": "https://arxiv.org/html/2610.35765v1",
+      "source_sha256": "f2461a40f64a920c81578ddd0c9374cd76f9c7c09442d3a4e02bad8fbe25ec03",
+      "source_capture": "p2-industrial/2610.35765v1.html",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/html/2610.35765v1",
+          "source_sha256": "f2461a40f64a920c81578ddd0c9374cd76f9c7c09442d3a4e02bad8fbe25ec03",
+          "source_capture": "p2-industrial/2610.35765v1.html",
+          "source_bytes": 407183,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "html",
+          "location": "S7.SS1.p1.1",
+          "paragraph_sha256": "a0a19a308c075bd31ed658bdafa4713f4469e7cc03a4309127e77985dd92f3fd",
+          "match": "four datasets"
+        },
+        {
+          "format": "html",
+          "location": "S7.SS1.p2.1",
+          "paragraph_sha256": "21c45074cbf2664f8762bb8f09ade17ab80831abba9e123ba673e942052a4b41",
+          "match": "assumptions fail"
+        }
+      ],
+      "track": "recommendation",
+      "priority": "P2",
+      "verified_priority_organizations": [],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, experimental/deployment evidence, original date and relevant cost/limitations; not a whole-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2610.35765",
+      "organization": "University of Antwerp",
+      "decision": "rejected",
+      "resolution": "industrial_online_evidence_not_established",
+      "reason": "原文有新 Rasch/activity 零假设与 EM 拟合和共现偏差检验，解释用户活跃度如何造成 phantom correlation，不是无原创分析。MovieLens1M/20M、Last.fm、Amazon Books 上的拟合和模拟属于离线推荐分析，没有本方法生产 A/B 或全量部署。本轮工业推荐门槛不通过；分析组件仍未实现，未用低优先级或数据量大替代该判断。",
+      "locations": [
+        "author block",
+        "activity baseline and EM fitting",
+        "§7.1 evaluation datasets",
+        "conclusion"
+      ],
+      "algorithm_assessment": "new activity-conditioned null model, EM fit and co-occurrence diagnostics; core not implemented",
+      "production_evidence": {
+        "kind": "offline_fit_and_simulation_on_four_public_datasets",
+        "online_ab": false,
+        "details": "四公开推荐数据集；Last.fm为假设失败的反例，不是线上系统。"
+      }
+    },
+    {
+      "revision": 1,
+      "title": "RPSD: Retrieval-Privileged On-Policy Self-Distillation with Optimal Transport",
+      "published": "2026-10-27T14:08:38Z",
+      "updated": "2026-10-27T14:08:38Z",
+      "metadata_sha256": "279070fe8fc933a3113f668fc46e9c48e416345a1c25675d3cfcf127c30172fb",
+      "capture": "40832864995/agent-paper-candidates/paper-candidates-agent.json",
+      "metadata_capture": "40832864995/agent-paper-candidates/paper-candidates-agent.json",
+      "metadata_capture_sha256": "6f1cfe2706766b6d5feb40e2c79363dc367f9021596ed7ea8fbf82bf453434cf",
+      "source_url": "https://arxiv.org/html/2610.37281v1",
+      "source_sha256": "8d023a99ae269076da4840661b85bb0d201fba742229fc3b0a82584c489b1c0c",
+      "source_capture": "p2-industrial/2610.37281v1.html",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/html/2610.37281v1",
+          "source_sha256": "8d023a99ae269076da4840661b85bb0d201fba742229fc3b0a82584c489b1c0c",
+          "source_capture": "p2-industrial/2610.37281v1.html",
+          "source_bytes": 437516,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "html",
+          "location": "A3.p1.1",
+          "paragraph_sha256": "7e66add7e2d2322f11d35480e15c97fdbe466c820414082659d0380bebecccc0",
+          "match": "student sees only"
+        },
+        {
+          "format": "html",
+          "location": "A3.p2.1",
+          "paragraph_sha256": "972a5aa941ff6291709627bc9250f47edf111c27ec85ab4ad40a8adb4bd618c4",
+          "match": "unbalanced OT"
+        },
+        {
+          "format": "html",
+          "location": "A3.p3.1",
+          "paragraph_sha256": "8fe9814fcdba8bb0fa313b4af5968f48920d9b182f9d3f689fbacd7f146369e4",
+          "match": "does not generate a separate response"
+        }
+      ],
+      "track": "recommendation",
+      "priority": "P2",
+      "verified_priority_organizations": [],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, experimental/deployment evidence, original date and relevant cost/limitations; not a whole-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2610.37281",
+      "organization": "Nagoya University / Shenzhen University / Sichuan Agricultural University / Guangdong AI Economy Laboratory / Tongji University",
+      "decision": "rejected",
+      "resolution": "industrial_online_evidence_not_established",
+      "reason": "RPSD 有明确新 OPD 方法：检索相似用户窗口，用时间感知非平衡OT和MMR筛选特权证据；同一策略作为特权教师，只评分学生已采样completion，以中心化token对数概率差调整credit，教师不另生成答案、推理时不读特权。原文仅为 MovieLens1M/Netflix/MicroLens 离线推荐实验，未证明本方法生产A/B。不能为绕过工业推荐门槛改归后训练；OT/credit低成本核心未实现，也不以4B训练的潜在成本代替资格判断。",
+      "locations": [
+        "author block",
+        "RPSD objective and retrieval",
+        "Appendix C implementation and split"
+      ],
+      "algorithm_assessment": "new retrieval-privileged on-policy self-distillation for recommendation; low-cost OT/token-credit operators not implemented",
+      "production_evidence": {
+        "kind": "three_offline_recommendation_datasets",
+        "online_ab": false,
+        "details": "Qwen3-4B LoRA，7:1:2实例切分，每题1目标+9负例，8次学生rollout；教师证据仅训练可见。"
+      }
+    },
+    {
+      "revision": 1,
+      "title": "Hidden Disparities in Ranking: Category-Aware Fairness via Distributional Stability",
+      "published": "2026-10-29T14:43:26Z",
+      "updated": "2026-10-29T14:43:26Z",
+      "metadata_sha256": "690e8c40d9126f06a05af0a33b3c64a732cd8a572aa066f82bb8c626c833156f",
+      "capture": "42582487347/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture": "42582487347/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture_sha256": "eb08c20fc43d7c45e897e69031fc96c527bca5539912a1c888fb9f5a44284028",
+      "source_url": "https://arxiv.org/html/2610.40182v1",
+      "source_sha256": "e6d468639b486d9b1dfe5de43803ff4e0a41249be8d4b5fd70d7238d0683e920",
+      "source_capture": "p2-industrial/2610.40182v1.html",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/html/2610.40182v1",
+          "source_sha256": "e6d468639b486d9b1dfe5de43803ff4e0a41249be8d4b5fd70d7238d0683e920",
+          "source_capture": "p2-industrial/2610.40182v1.html",
+          "source_bytes": 750420,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        },
+        {
+          "source_url": "https://arxiv.org/pdf/2610.40182v1",
+          "source_sha256": "15176f41c75fb433b9df8b59128af36e07ab5a1ff8fb8fe4cc798cb3cd5e2147",
+          "source_capture": "p2-industrial/2610.40182v1.pdf",
+          "source_bytes": 533265,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "html",
+          "location": "S6.SS2.p1.1",
+          "paragraph_sha256": "9b326a9319986b8b68be828e2925a5ce19269b9369e94f903a6bb00ac8b80ed1",
+          "match": "MovieLens-1M"
+        },
+        {
+          "format": "html",
+          "location": "S6.SS2.p2.1",
+          "paragraph_sha256": "92326ffc3e30487360f3dce037256acbfe1e948cc20802b387a305e60460f14f",
+          "match": "19"
+        },
+        {
+          "format": "html",
+          "location": "S6.SS2.p4.1",
+          "paragraph_sha256": "47420f47d3b3dfc7f71d48de20ce0865233da2423b459a6b0e429711fbe4974b",
+          "match": "milliseconds"
+        },
+        {
+          "format": "pdf",
+          "page_one_based": 1,
+          "page_text_sha256": "85cb81ea9850187c69f027f54db63f9bc553093023556aae13dc06accfb1dc62",
+          "match": "Institut Polytechnique de Paris"
+        }
+      ],
+      "track": "recommendation",
+      "priority": "P2",
+      "verified_priority_organizations": [],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, experimental/deployment evidence, original date and relevant cost/limitations; not a whole-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2610.40182",
+      "organization": "LTCI, Télécom Paris / Institut Polytechnique de Paris",
+      "decision": "rejected",
+      "resolution": "industrial_online_evidence_not_established",
+      "reason": "CUP 提出条件utility parity的分布稳定性解释，并对ranking-policy混合求解SOCP且给泛化界，确有新且低成本的公平排序核心。原文验证仅为MovieLens1M离线10次切分，估计集求混合权重后在test用户评估；没有本方法生产A/B或全量部署。按工业推荐门槛不选，不能以‘无原创’排除；HTML漏作者栏，已另核固定PDF第一页机构。",
+      "locations": [
+        "PDF p1 byline",
+        "conditional utility parity formulation and bounds",
+        "§6.2 setup, results and runtime"
+      ],
+      "algorithm_assessment": "new conditional utility parity and second-order-cone mixture optimization; low-cost core not implemented",
+      "production_evidence": {
+        "kind": "movielens1m_offline_split_evaluation",
+        "online_ab": false,
+        "details": "训练/估计/test用户50/25/25，10次随机划分；19-ranker字典，单前沿点毫秒级。"
+      }
+    },
+    {
+      "revision": 1,
+      "title": "Towards Trustworthy Multi-stakeholder Recommender Systems",
+      "published": "2026-10-30T12:41:26Z",
+      "updated": "2026-10-30T12:41:26Z",
+      "metadata_sha256": "cd1327c648276dc6df29673099900fbee95e20a1a61e313b2bf00caff21af405",
+      "capture": "42582487347/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture": "42582487347/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture_sha256": "eb08c20fc43d7c45e897e69031fc96c527bca5539912a1c888fb9f5a44284028",
+      "source_url": "https://arxiv.org/html/2610.41674v1",
+      "source_sha256": "ebec05233ebeba269f8711c019cd3f5692b4e67b07f50b2c0b7b61708e2c3ecd",
+      "source_capture": "p2-industrial/2610.41674v1.html",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/html/2610.41674v1",
+          "source_sha256": "ebec05233ebeba269f8711c019cd3f5692b4e67b07f50b2c0b7b61708e2c3ecd",
+          "source_capture": "p2-industrial/2610.41674v1.html",
+          "source_bytes": 91273,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "html",
+          "location": "S1",
+          "paragraph_sha256": "73adda23f79071e4af1e0b44393e03d10ff1eca37ea346cc89e74959e8053f14",
+          "match": "trustworthy"
+        },
+        {
+          "format": "html",
+          "location": "S3",
+          "paragraph_sha256": "215064e73f534087e1642361ed673e0d5197e8e10b729540eb0636a7fde71d60",
+          "match": "future"
+        }
+      ],
+      "track": "recommendation",
+      "priority": "P2",
+      "verified_priority_organizations": [],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, experimental/deployment evidence, original date and relevant cost/limitations; not a whole-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2610.41674",
+      "organization": "Kempelen Institute of Intelligent Technologies / Comenius University",
+      "decision": "rejected",
+      "resolution": "not_selected_this_window_position_and_research_agenda",
+      "reason": "已读原文讨论trustworthy multi-stakeholder RS的利益相关方价值、法规与研究议程。贡献是问题梳理和未来技术方向，而非交付一个新独立算法或公共能力基准，本轮不选。Facebook/YouTube等为讨论案例，不是作者Meta/Google归属；未将这类背景词或无A/B关键词自动当成机构/生产证据。",
+      "locations": [
+        "author block",
+        "§1–3 position, legal requirements and future research directions"
+      ],
+      "algorithm_assessment": "position and future research agenda, not a delivered new independent algorithm or public benchmark",
+      "production_evidence": {
+        "kind": "position_discussion",
+        "online_ab": false,
+        "details": "平台案例说明治理问题，不是作者新方法的生产实验。"
+      }
+    },
+    {
+      "revision": 1,
+      "title": "Recommendation Feedback Loops Shape Urban Income Segregation and Venue Visitation",
+      "published": "2026-10-30T15:47:06Z",
+      "updated": "2026-10-30T15:47:06Z",
+      "metadata_sha256": "6b34232a5b093463bd167147d4f67969f282c53e13cbd200b88c6267f354eabe",
+      "capture": "42582487347/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture": "42582487347/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture_sha256": "eb08c20fc43d7c45e897e69031fc96c527bca5539912a1c888fb9f5a44284028",
+      "source_url": "https://arxiv.org/html/2610.41911v1",
+      "source_sha256": "c007aa7505f1bd8a336cf6c749a1cde02a9622498f5afba162e9d3ad9f0f9742",
+      "source_capture": "p2-industrial/2610.41911v1.html",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/html/2610.41911v1",
+          "source_sha256": "c007aa7505f1bd8a336cf6c749a1cde02a9622498f5afba162e9d3ad9f0f9742",
+          "source_capture": "p2-industrial/2610.41911v1.html",
+          "source_bytes": 389241,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "html",
+          "location": "S3.SS1",
+          "paragraph_sha256": "d6120178310f1d7dcf00cdde5bb02ef0d0276804ad56761fb005b14749c4b019",
+          "match": "October 2016 to March 2017"
+        },
+        {
+          "format": "html",
+          "location": "S3.SS2",
+          "paragraph_sha256": "a5e9634152a09fcaeee761326daaef49ef452b9fd14cb3d0821da7a1a172e82f",
+          "match": "simulation runs for about three years"
+        },
+        {
+          "format": "html",
+          "location": "S6",
+          "paragraph_sha256": "e8c3af9609ae832a23448e50b68dcdf4ffb1c2217802da2cdd574ba2bd2fbf32",
+          "match": "before an algorithm is deployed"
+        }
+      ],
+      "track": "recommendation",
+      "priority": "P2",
+      "verified_priority_organizations": [],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, experimental/deployment evidence, original date and relevant cost/limitations; not a whole-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2610.41911",
+      "organization": "Northeastern University / Fondazione Bruno Kessler / University of Trento / ISTI-CNR / New York University / Scuola Normale Superiore",
+      "decision": "rejected",
+      "resolution": "industrial_online_evidence_not_established",
+      "reason": "论文有新的城市推荐反馈仿真框架及tail-boost重排干预，但‘部署后’指三年仿真中的周级重训，不是真平台上线。数据来自2016–2017 Cuebiq轨迹，模拟四座城市/20000居民，原始日程重复并施加容量与距离约束；作者结论明确要求部署前仿真评估且承认计算密集。没有本方法现网A/B或全量部署，本轮按工业推荐门槛不选，不把新仿真方法说成没有算法或将私有轨迹替换成伪造公开数据。",
+      "locations": [
+        "author block",
+        "§3.1–3.3",
+        "§4.3 replication",
+        "§5.4 tail-boost",
+        "§6 discussion and limitations"
+      ],
+      "algorithm_assessment": "new capacity/distance-constrained feedback simulation and tail-boost intervention; components not implemented",
+      "production_evidence": {
+        "kind": "mobility_driven_simulation_not_online_deployment",
+        "online_ab": false,
+        "details": "Boston/SanFrancisco/Detroit各4000居民、Chicago8000；四个月训练/两个月离线留出，仿真约三年，每配置五种子。"
+      }
+    },
+    {
+      "revision": 1,
+      "title": "Yielding Fairness: Coupled Learning and Fairness for Value-Weighted Ranking",
+      "published": "2026-11-01T06:49:58Z",
+      "updated": "2026-11-01T06:49:58Z",
+      "metadata_sha256": "47101ce611acd4efa3294027d64cf3b3b1dc86c948ec835378cf338ec0b18b11",
+      "capture": "42582487347/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture": "42582487347/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture_sha256": "eb08c20fc43d7c45e897e69031fc96c527bca5539912a1c888fb9f5a44284028",
+      "source_url": "https://arxiv.org/html/2611.01647v1",
+      "source_sha256": "9124fa1f17ae00a4119a1a8debf81ecab17d35aa1d5df79b0217c5bd74c6d8ec",
+      "source_capture": "p2-industrial/2611.01647v1.html",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/html/2611.01647v1",
+          "source_sha256": "9124fa1f17ae00a4119a1a8debf81ecab17d35aa1d5df79b0217c5bd74c6d8ec",
+          "source_capture": "p2-industrial/2611.01647v1.html",
+          "source_bytes": 502222,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "html",
+          "location": "Sx1.p1.1",
+          "paragraph_sha256": "cb394d998212cafedb95b6692e403f1b25fae56d325aaeaa4cd7783ea40bb6d9",
+          "match": "no production deployment"
+        },
+        {
+          "format": "html",
+          "location": "A1",
+          "paragraph_sha256": "2f8c45290f5bfe07a3bf9b4e85a815e845590b777956d4dee800bf5511cbed20",
+          "match": "github.com/atavory/yielding_fairness"
+        }
+      ],
+      "track": "recommendation",
+      "priority": "P0",
+      "verified_priority_organizations": [
+        "Meta"
+      ],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, experimental/deployment evidence, original date and relevant cost/limitations; not a whole-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2611.01647",
+      "organization": "Meta Platforms",
+      "verified_priority_authors": [
+        "Ami Tavory",
+        "Yaniv Sheena",
+        "Shaked Bar",
+        "Yair Zagdansky"
+      ],
+      "decision": "rejected",
+      "resolution": "industrial_online_evidence_not_established",
+      "reason": "Meta作者原文已核。W-BCE确有新低成本核心：对每条已实现value A与loss B，权重A+B、标签B/(A+B)，学习的是条件期望比而不是已实现比值的期望；另有账户异议与组约束定价。原文Ethics明确所有实验为公开回顾性数据，既无生产部署也无新增个人数据。依既定工业推荐证据门槛，本轮拒绝选入，尽管代码已公开且组件便宜；不是无原创/高成本、没有实现。须未来用户具名批准经典/离线例外才重开，不能改归foundation/post-training绕门槛。",
+      "locations": [
+        "author block",
+        "§2–4 mechanism",
+        "§5.1 and §6 evaluation",
+        "Ethical Considerations",
+        "Appendix A public artifact"
+      ],
+      "algorithm_assessment": "new weighted BCE ratio-ranking, account objections and group pricing; low-cost core not implemented",
+      "production_evidence": {
+        "kind": "explicitly_no_production_deployment",
+        "online_ab": false,
+        "details": "Ethical Considerations直接声明公开回顾性实验无生产部署；扩大的policy-bank组比较不能声称显著收益。"
+      },
+      "upstream_artifact": "https://github.com/atavory/yielding_fairness",
+      "reopen_condition": "explicit user-approved classic/offline industrial exception, or new qualifying production evidence"
+    },
+    {
+      "revision": 1,
+      "title": "IncVNM: An Interactive Recommender System with Incremental von Neumann-Morgenstern Utility Learning",
+      "published": "2026-11-01T10:46:54Z",
+      "updated": "2026-11-01T10:46:54Z",
+      "metadata_sha256": "f24146219cb9fe82e7a76790a9bf6a1a2f460ae01c8b4fcbde7ee92c93cfaa86",
+      "capture": "42582487347/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture": "42582487347/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture_sha256": "eb08c20fc43d7c45e897e69031fc96c527bca5539912a1c888fb9f5a44284028",
+      "source_url": "https://arxiv.org/html/2611.01786v1",
+      "source_sha256": "0c5523e473998d4a0fdec6b26dc6d86645b6449a0b2a2e1a80d33c3b597ba544",
+      "source_capture": "p2-industrial/2611.01786v1.html",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/html/2611.01786v1",
+          "source_sha256": "0c5523e473998d4a0fdec6b26dc6d86645b6449a0b2a2e1a80d33c3b597ba544",
+          "source_capture": "p2-industrial/2611.01786v1.html",
+          "source_bytes": 672309,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "html",
+          "location": "S5.p2.1",
+          "paragraph_sha256": "e550cb5e15a87b85d6fb5a897f255843a75e75fa6a5ff88c2d2ea795a0c3da77",
+          "match": "simulated risk-averse user"
+        },
+        {
+          "format": "html",
+          "location": "S6.p1.1",
+          "paragraph_sha256": "8e233e40eabf3415f43d401ebbcc4130b6426d8b1ebe855c864116b130a6bcd6",
+          "match": "Future research may evaluate IncVNM through online experiments"
+        }
+      ],
+      "track": "recommendation",
+      "priority": "P2",
+      "verified_priority_organizations": [],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, experimental/deployment evidence, original date and relevant cost/limitations; not a whole-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2611.01786",
+      "organization": "Xi’an Jiaotong University",
+      "decision": "rejected",
+      "resolution": "industrial_online_evidence_not_established",
+      "reason": "IncVNM有新交互式VNM效用增量学习算法，用有序点击反馈更新随机结果产品的效用并加入熵正则探索。原文§5股票推荐评估明确是有response error的模拟用户、oracle效用驱动点击；§6将真实用户线上实验列为未来研究。不是已有工业A/B，也不能把股票应用标题当成部署证据。本轮工业推荐门槛不通过；低成本效用更新核心未实现、不标高成本。",
+      "locations": [
+        "author block",
+        "incremental VNM utility update and exploration",
+        "§5 stock simulation",
+        "§6 future online experiments"
+      ],
+      "algorithm_assessment": "new incremental VNM utility elicitation from ordinal clicks; core not implemented",
+      "production_evidence": {
+        "kind": "simulated_user_with_response_error",
+        "online_ab": false,
+        "details": "风险厌恶模拟用户根据oracle expected utility点击；真实用户线上实验是未来事项。"
+      }
+    },
+    {
+      "revision": 1,
+      "title": "Multi-criteria Rating and Review based Recommendation Model",
+      "published": "2026-11-01T16:07:04Z",
+      "updated": "2026-11-01T16:07:04Z",
+      "metadata_sha256": "52fe8e4daff501443d78b37ef5170cf7f143b286bc64ec85c0aaa6c016fdac4b",
+      "capture": "42582487347/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture": "42582487347/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture_sha256": "eb08c20fc43d7c45e897e69031fc96c527bca5539912a1c888fb9f5a44284028",
+      "source_url": "https://arxiv.org/html/2611.02019v1",
+      "source_sha256": "c61260bd5245ec55181fb5fcb3a213f1fe2c93b9ed4f663add7ac95fff9779b9",
+      "source_capture": "p2-industrial/2611.02019v1.html",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/html/2611.02019v1",
+          "source_sha256": "c61260bd5245ec55181fb5fcb3a213f1fe2c93b9ed4f663add7ac95fff9779b9",
+          "source_capture": "p2-industrial/2611.02019v1.html",
+          "source_bytes": 240928,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "html",
+          "location": "@article",
+          "paragraph_sha256": "e748ed32e5a8a1e87a2f09fb15de199f22c300155f40175950184cf84f13b8d4",
+          "match": "published in the 2022 IEEE International Conference"
+        },
+        {
+          "format": "html",
+          "location": "S4.SS2",
+          "paragraph_sha256": "53165f7faeeb5d30517093bb839fd760bdc8369c1cad47c44c9191004fa79984",
+          "match": "NVIDIA Tesla P100"
+        }
+      ],
+      "track": "recommendation",
+      "priority": "P2",
+      "verified_priority_organizations": [],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, experimental/deployment evidence, original date and relevant cost/limitations; not a whole-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2611.02019",
+      "organization": "Toronto Metropolitan University / University of Calabria",
+      "decision": "out_of_scope",
+      "resolution": "historical_republication_not_new_2026_research",
+      "reason": "固定原文版权/出版说明明确这是IEEE Big Data 2022论文的accepted version（pp5494–5503，DOI 10.1109/BigData55660.2022.10020741）。2026年arXiv上传不是2026新研究。MRRRec确有implicit/explicit criteria双路评分再聚合的新方法，原实验为TripAdvisor离线80:10:10与P100/25epochs；本轮按历史重刊出窗结案，不伪称方法无原创或生产未通过是唯一理由，也不自动批准经典例外。",
+      "locations": [
+        "front-matter 2022 publication notice",
+        "§III MRRRec",
+        "§IV-B",
+        "§VI conclusion"
+      ],
+      "algorithm_assessment": "original 2022 multi-criteria/review recommendation model, not a new 2026 method",
+      "original_publication": {
+        "year": 2022,
+        "doi": "10.1109/BigData55660.2022.10020741"
+      },
+      "production_evidence": {
+        "kind": "historical_offline_experiment",
+        "online_ab": false,
+        "details": "当前上传为2022工作重刊；没有据此把2026水位回退。"
+      }
+    },
+    {
+      "revision": 1,
+      "title": "Multicriteria Recommendation System by Leveraging Predefined, Implicit, and Undefined Criteria",
+      "published": "2026-11-01T16:37:49Z",
+      "updated": "2026-11-01T16:37:49Z",
+      "metadata_sha256": "2fb3f4784fbcf2cb91fdb816c9daddb6bd9ad4cabc20c2a48bae8a650109d5c9",
+      "capture": "42582487347/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture": "42582487347/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture_sha256": "eb08c20fc43d7c45e897e69031fc96c527bca5539912a1c888fb9f5a44284028",
+      "source_url": "https://arxiv.org/html/2611.02040v1",
+      "source_sha256": "2915f316e1e4ae63f6d4ec167b3287dcb9720ac1e4f718de0c3dcf6dd7a6655c",
+      "source_capture": "p2-industrial/2611.02040v1.html",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/html/2611.02040v1",
+          "source_sha256": "2915f316e1e4ae63f6d4ec167b3287dcb9720ac1e4f718de0c3dcf6dd7a6655c",
+          "source_capture": "p2-industrial/2611.02040v1.html",
+          "source_bytes": 197399,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "html",
+          "location": "@article",
+          "paragraph_sha256": "d18701a2cd0b5485893cd7ed81d2c645df8df2f26317020781d608d820910591",
+          "match": "ASONAM 2024"
+        },
+        {
+          "format": "html",
+          "location": "S4.SS3",
+          "paragraph_sha256": "d570615972ea2f6a5de59d6695e1733cafc2a07b46a54af4e5cf4a232069f844",
+          "match": "80, 10, 10"
+        }
+      ],
+      "track": "recommendation",
+      "priority": "P2",
+      "verified_priority_organizations": [],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, experimental/deployment evidence, original date and relevant cost/limitations; not a whole-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2611.02040",
+      "organization": "Toronto Metropolitan University",
+      "decision": "out_of_scope",
+      "resolution": "historical_republication_not_new_2026_research",
+      "reason": "原文front-matter明确Version of Record为ASONAM 2024 / Springer LNCS、DOI 10.1007/978-3-031-78538-2_6；2026 arXiv日期不等于新方法发表日期。论文确有predefined/implicit/undefined criteria抽取、情感评分与聚合，TripAdvisor/BeerAdvocate各30000评论、80:10:10离线评测；按历史重刊出窗结案，而不是无原创或高成本。",
+      "locations": [
+        "front-matter ASONAM2024 notice",
+        "§III mechanism",
+        "§IV-A/IV-C",
+        "§VI conclusion"
+      ],
+      "algorithm_assessment": "original ASONAM2024 multi-criteria method, not new 2026 research",
+      "original_publication": {
+        "year": 2024,
+        "doi": "10.1007/978-3-031-78538-2_6"
+      },
+      "production_evidence": {
+        "kind": "historical_offline_experiment",
+        "online_ab": false,
+        "details": "Google Colab是计算工具，不是Google作者机构。"
+      }
+    },
+    {
+      "revision": 1,
+      "title": "Preprocessing Choices in Fine-Tuning Data Matter: Utility and Demographic Sensitivity in LLM-Based Recommendation",
+      "published": "2026-11-02T13:32:28Z",
+      "updated": "2026-11-02T13:32:28Z",
+      "metadata_sha256": "45068880ed48d7b6487f5f90742787bfc1cbfea5d1beca9801d92bc2e26d9ca8",
+      "capture": "42582487347/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture": "42582487347/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture_sha256": "eb08c20fc43d7c45e897e69031fc96c527bca5539912a1c888fb9f5a44284028",
+      "source_url": "https://arxiv.org/html/2611.03113v1",
+      "source_sha256": "66156e7179cc9543afc448f145bf769482044577730df5ebb42bb90fb6aad022",
+      "source_capture": "p2-industrial/2611.03113v1.html",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/html/2611.03113v1",
+          "source_sha256": "66156e7179cc9543afc448f145bf769482044577730df5ebb42bb90fb6aad022",
+          "source_capture": "p2-industrial/2611.03113v1.html",
+          "source_bytes": 270932,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "html",
+          "location": "S4.SS1.p1.1",
+          "paragraph_sha256": "6ba91956d2c262eeab4d74c6f8309c3a9529c09de88b33f80d9dc7b14fb0a9d1",
+          "match": "4,995"
+        },
+        {
+          "format": "html",
+          "location": "S4.SS2.p1.1",
+          "paragraph_sha256": "887bdb654339c552029bf9176de2f1e1731540428bfe1308b437abf0cabdc998",
+          "match": "Llama-3-8B-Instruct"
+        },
+        {
+          "format": "html",
+          "location": "S6",
+          "paragraph_sha256": "7c138dfe6784dfb16b0f6da151be94eb8849075180220dbd64068ded0ee4a5b4",
+          "match": "beyond one dataset"
+        }
+      ],
+      "track": "recommendation",
+      "priority": "P2",
+      "verified_priority_organizations": [],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, experimental/deployment evidence, original date and relevant cost/limitations; not a whole-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2611.03113",
+      "organization": "Istanbul Technical University",
+      "decision": "rejected",
+      "resolution": "industrial_online_evidence_not_established",
+      "reason": "这是受控的LLM推荐微调数据预处理研究，含catalog前缀树约束、标题表面形式、prompt多样化和人口平衡/知识增强对照；不是因为提到Meta Llama就成为Meta论文。原文仅MovieLens1M按用户时间留出验证/test、4995用户与Llama3-8B QLoRA单次微调，结论明确需扩展到更多数据和群体。没有本方法线上A/B或全量部署，不绕过工业推荐门槛；可重用预处理组件未实现、未按模型名称武断高成本。",
+      "locations": [
+        "author block",
+        "§3 controlled pipeline",
+        "§4.1–4.2",
+        "§6 conclusion"
+      ],
+      "algorithm_assessment": "controlled recommendation fine-tuning/preprocessing comparisons and constrained output pipeline; components not implemented",
+      "production_evidence": {
+        "kind": "single_public_dataset_offline_finetuning",
+        "online_ab": false,
+        "details": "4995用户、119056基础训练样本；validation/test目标按时间隔离；Llama是基础模型引用非作者机构。"
+      }
+    },
+    {
+      "revision": 1,
+      "title": "$τ$-Rec-Books: A Disclosure-Controlled Benchmark for Requirement Elicitation in Agentic Recommender Systems",
+      "published": "2026-11-03T07:47:46Z",
+      "updated": "2026-11-03T07:47:46Z",
+      "metadata_sha256": "9123aabb16c377ed72517dd0ef25413ecf964c113148969e6c34685d9394a9e4",
+      "capture": "42582487347/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture": "42582487347/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture_sha256": "eb08c20fc43d7c45e897e69031fc96c527bca5539912a1c888fb9f5a44284028",
+      "source_url": "https://arxiv.org/html/2611.04459v1",
+      "source_sha256": "30c88fa99d6a17cc4a44c7aafd12041ffb4f493001b6f9c45802f68c8bba40a3",
+      "source_capture": "p2-industrial/2611.04459v1.html",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/html/2611.04459v1",
+          "source_sha256": "30c88fa99d6a17cc4a44c7aafd12041ffb4f493001b6f9c45802f68c8bba40a3",
+          "source_capture": "p2-industrial/2611.04459v1.html",
+          "source_bytes": 273938,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "html",
+          "location": "S3.p2.1",
+          "paragraph_sha256": "500d41c321a9f72a40454f86b44c531624d041a661e07ea8f5c5ed28cdb07a0d",
+          "match": "450 tasks"
+        },
+        {
+          "format": "html",
+          "location": "S5",
+          "paragraph_sha256": "832c8349b8383f4c3a9dfd4a16f1a6a8931ce9faebee9269538c0af9e84e3677",
+          "match": "byte for byte"
+        },
+        {
+          "format": "html",
+          "location": "S7.p1.1",
+          "paragraph_sha256": "289c52880998402fe426cdeb875858fd02f9302754db2937bf8a1ea8ef3d8c8b",
+          "match": "code MIT"
+        },
+        {
+          "format": "html",
+          "location": "S7.p2.1",
+          "paragraph_sha256": "77f7bf80041fe812584acce21032b273c15517804bee5114c6af4c15006c92ba",
+          "match": "1.0–4.4"
+        }
+      ],
+      "track": "agent",
+      "priority": "P1",
+      "verified_priority_organizations": [],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, experimental/deployment evidence, original date and relevant cost/limitations; not a whole-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2611.04459",
+      "organization": "Independent Researcher / Princeton University",
+      "decision": "accepted",
+      "resolution": "accepted_low_cost_public_agent_benchmark_interface_not_implemented",
+      "reason": "原文是新公开Agent需求澄清/工具协议基准，而非工业推荐训练模型，可正当归Agent。450任务属于150个固定请求族，volunteer/mixed/hidden只变披露时机；20000册Wikidata目录、LLM-free用户/判分、两个检索接口、冻结快照与全部32976轨迹公开。低成本接口可接入但本轮只审查，未实现/未跑分；原文单Agent结构化panel每prompt约$1–4.4，不给它虚贴高成本。后续接入必须把隐藏条件和gold留在环境/判分端，不暴露给受测Agent。",
+      "locations": [
+        "author block",
+        "§3 resource and disclosure protocol",
+        "§4 controlled setup",
+        "§5 validators and scripted agents",
+        "§7 availability/cost",
+        "§8 limitations"
+      ],
+      "algorithm_assessment": "new public matched-disclosure Agent benchmark and deterministic replay/validator interface; accepted but not implemented",
+      "production_evidence": {
+        "kind": "public_agent_benchmark_not_industrial_deployment_claim",
+        "online_ab": false,
+        "details": "判分基于catalog metadata和协议检查，无LLM judge；规则用户不是经人类验证的完整真实用户模型。"
+      },
+      "upstream_artifact": "https://github.com/nbharaths/tau-rec/tree/main/data/tracks/books-wikidata-v2",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2611.04459v1",
+        "basis": "§7每Agent结构化panel的实际报告成本",
+        "scale": "450任务/150族，20000册；单Agent结构化运行每prompt约US$1.0–4.4。完整32976轨迹矩阵未重跑。",
+        "available_resource": "one A100 or A30, or local Mac; no experiment was started by this review",
+        "cost_type": "low-cost deterministic interface/replay; not a high-cost waiver"
+      },
+      "gold_access_contract": "Task facts, answer sets and hidden predicate values remain environment/judge-only; agent receives only permitted user/tool replies."
+    },
+    {
+      "revision": 1,
+      "title": "Alternatives to Shallow Autoencoders for Collaborative Filtering",
+      "published": "2026-11-04T14:59:03Z",
+      "updated": "2026-11-04T14:59:03Z",
+      "metadata_sha256": "941e4703827a581adf6d033cbb0bcee66d99e7eb125a54910ae03a162cd35d0b",
+      "capture": "42582487347/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture": "42582487347/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture_sha256": "eb08c20fc43d7c45e897e69031fc96c527bca5539912a1c888fb9f5a44284028",
+      "source_url": "https://arxiv.org/pdf/2611.06610v1",
+      "source_sha256": "d151518bb65c2a236a2c6381b9cdee0200799667105200c4740f5ebf1abaff69",
+      "source_capture": "p2-industrial/2611.06610v1.pdf",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/pdf/2611.06610v1",
+          "source_sha256": "d151518bb65c2a236a2c6381b9cdee0200799667105200c4740f5ebf1abaff69",
+          "source_capture": "p2-industrial/2611.06610v1.pdf",
+          "source_bytes": 587796,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "pdf",
+          "page_one_based": 1,
+          "page_text_sha256": "47810536de38f755123dc66849e90b59efe3b2b42557846d729f86af47f152dc",
+          "match": "Catalunya"
+        },
+        {
+          "format": "pdf",
+          "page_one_based": 7,
+          "page_text_sha256": "53a3ab736297d40d8bede816431b1c460ce41fb8837d5ae540db314cbae65789",
+          "match": "u-EASE"
+        },
+        {
+          "format": "pdf",
+          "page_one_based": 10,
+          "page_text_sha256": "d1bf3b4829019b9b2b0fa02a710ea8810c69f7e88bffb2c89e8285953b75cf76",
+          "match": "minutes"
+        },
+        {
+          "format": "pdf",
+          "page_one_based": 13,
+          "page_text_sha256": "355a6994ac02f470cd2c57a219f3f6b8a23ecdf49a380a96eae6c75863142730",
+          "match": "24.5"
+        }
+      ],
+      "track": "recommendation",
+      "priority": "P2",
+      "verified_priority_organizations": [],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, experimental/deployment evidence, original date and relevant cost/limitations; not a whole-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2611.06610",
+      "organization": "Universitat Politècnica de Catalunya",
+      "decision": "rejected",
+      "resolution": "industrial_online_evidence_not_established",
+      "reason": "HTML固定版本不可用后已改核原始PDF。u-EASE和u-EASE-i是有定义的新闭式协同过滤方法，公开代码可见，不能按标题粗暴当重复评测。原文是Gowalla/Yelp2018/MovieLens1M的80/10/10离线实验；16vCPU实验的各模型/数据集耗时约0.1–24.5分钟，ML1M秒级，闭式组件也不应按标题误贴高成本。没有本方法生产A/B或认可全量部署，本轮工业推荐门槛不通过，低成本闭式核心未实现。",
+      "locations": [
+        "PDF p1 byline",
+        "PDF pp6–8 u-EASE/u-EASE-i and protocol",
+        "PDF p10 computation"
+      ],
+      "algorithm_assessment": "new closed-form user-side EASE and user-item composition; low-cost core not implemented",
+      "production_evidence": {
+        "kind": "offline_public_recommender_benchmarks",
+        "online_ab": false,
+        "details": "原文CPU计算数分钟，非生产实验；代码https://github.com/MariodotR/Alternatives_EASE.git。"
+      },
+      "upstream_artifact": "https://github.com/MariodotR/Alternatives_EASE.git",
+      "source_access_attempts": [
+        {
+          "url": "https://arxiv.org/html/2611.06610v1",
+          "outcome": "HTTP404; no HTML original obtained"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2611.06610v1",
+          "outcome": "PDF downloaded, first-page byline visually inspected and relevant original pages read"
+        }
+      ]
+    },
+    {
+      "revision": 1,
+      "title": "Tasteply: Externalizing Stable and Situational Preference as Manipulable Spatial Objects",
+      "published": "2026-11-05T11:30:27Z",
+      "updated": "2026-11-05T11:30:27Z",
+      "metadata_sha256": "19514ab8f8f300ee20bbb3e049a3bb15fad00f5f0d24e0769916163af3656630",
+      "capture": "42582487347/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture": "42582487347/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "metadata_capture_sha256": "eb08c20fc43d7c45e897e69031fc96c527bca5539912a1c888fb9f5a44284028",
+      "source_url": "https://arxiv.org/html/2611.07851v1",
+      "source_sha256": "859a01b92f5e16502fea7781f3b0140a7e8674de622783a6eb8fd414c33c68cf",
+      "source_capture": "p2-industrial/2611.07851v1.html",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/html/2611.07851v1",
+          "source_sha256": "859a01b92f5e16502fea7781f3b0140a7e8674de622783a6eb8fd414c33c68cf",
+          "source_capture": "p2-industrial/2611.07851v1.html",
+          "source_bytes": 69774,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "html",
+          "location": "S2.SS3",
+          "paragraph_sha256": "28b43e16195789142d286ac14ddaac9959f1e96e987d85d1025d2d0be9371c53",
+          "match": "Gaussian kernel"
+        },
+        {
+          "format": "html",
+          "location": "S3",
+          "paragraph_sha256": "68d0106011a1862991a62d53922cce0ad12173447b6d2ad315192df9bc0ab780",
+          "match": "5 HCI researchers"
+        },
+        {
+          "format": "html",
+          "location": "S3",
+          "paragraph_sha256": "68d0106011a1862991a62d53922cce0ad12173447b6d2ad315192df9bc0ab780",
+          "match": "suggest extending"
+        }
+      ],
+      "track": "recommendation",
+      "priority": "P2",
+      "verified_priority_organizations": [],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, experimental/deployment evidence, original date and relevant cost/limitations; not a whole-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2611.07851",
+      "organization": "KAIST / Salesforce AI Research",
+      "decision": "rejected",
+      "resolution": "industrial_online_evidence_not_established",
+      "reason": "Tasteply是有具体Gaussian attractor加权与global残差偏好场/cosine混合公式的新推荐交互原型，不能说完全没有新机制。原文实证是5名HCI研究者各15分钟探索+25分钟访谈，属于可用性试探，不是生产A/B/全流量证据；context-gated RLHF还是参与者提议的未来扩展。按工业推荐门槛不选；低成本混合算子未实现，不把未来RLHF当成已做后训练。",
+      "locations": [
+        "author block",
+        "§2.1–2.3 preference space and scoring",
+        "§3 exploratory evaluation and future work"
+      ],
+      "algorithm_assessment": "new preference-space UI and explicit attractor/global-field scoring; core not implemented",
+      "production_evidence": {
+        "kind": "five_participant_hci_exploratory_study",
+        "online_ab": false,
+        "details": "N=5，无现网随机试验；context-gated反馈学习为未来方向。"
+      }
+    },
+    {
+      "revision": 1,
+      "title": "Enhancing Academic Advisement with Case-Based Reasoning",
+      "published": "2026-11-05T18:25:36Z",
+      "updated": "2026-11-05T18:25:36Z",
+      "metadata_sha256": "782563171f0d0439b507fee1b4125538c628be5159ae95d1608cdf5ffeba16f8",
+      "capture": "42582487347/agent-paper-candidates/paper-candidates-agent.json",
+      "metadata_capture": "42582487347/agent-paper-candidates/paper-candidates-agent.json",
+      "metadata_capture_sha256": "c457c67963595d5674748fe46e17eb0b8800081e2163fc75d53095570fb03918",
+      "source_url": "https://arxiv.org/pdf/2611.08572v1",
+      "source_sha256": "a214d0e628e948758aac4e24caf5fd04efcd6a48c3c2d99d094d9e9ac8e80fb6",
+      "source_capture": "p2-industrial/2611.08572v1.pdf",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/pdf/2611.08572v1",
+          "source_sha256": "a214d0e628e948758aac4e24caf5fd04efcd6a48c3c2d99d094d9e9ac8e80fb6",
+          "source_capture": "p2-industrial/2611.08572v1.pdf",
+          "source_bytes": 4717865,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "pdf",
+          "page_one_based": 1,
+          "page_text_sha256": "9e4c05abb54ccec212ef8f6737ac28730bdd714cd50eee53c0e0828ab0f26225",
+          "match": "2003"
+        },
+        {
+          "format": "pdf",
+          "page_one_based": 1,
+          "page_text_sha256": "9e4c05abb54ccec212ef8f6737ac28730bdd714cd50eee53c0e0828ab0f26225",
+          "match": "digital"
+        },
+        {
+          "format": "pdf",
+          "page_one_based": 2,
+          "page_text_sha256": "5f1114ae941a35107768151c17fae87d0ba7785750f21999a4bbf07ef5a065aa",
+          "match": "2026"
+        }
+      ],
+      "track": "recommendation",
+      "priority": "P2",
+      "verified_priority_organizations": [],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, experimental/deployment evidence, original date and relevant cost/limitations; not a whole-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2611.08572",
+      "organization": "RMIT University",
+      "decision": "out_of_scope",
+      "resolution": "historical_republication_not_new_2026_research",
+      "reason": "HTML固定版本404后核原始PDF封面、数字版说明及方法/结论。封面明确RMIT Master of Engineering论文August2003，2026阅读版只做转录/校对/图形重建且不重新验证原研究。因其是2003案例推理学业建议原型的数字重刊，而非2026新算法/评测，按历史重刊出窗结案。保留原型研究存在的事实，不把144页数字版或2003日期误当本轮昂贵新实验。",
+      "locations": [
+        "PDF p1 2003 thesis cover and AI disclosure",
+        "PDF p2 digital reading edition scope",
+        "PDF pp108/115 prototype and future production system"
+      ],
+      "algorithm_assessment": "2003 case-based-reasoning advisement thesis, digitized in2026 without new scientific validation",
+      "original_publication": {
+        "year": 2003,
+        "doi": "10.25439/rmt.34846194"
+      },
+      "production_evidence": {
+        "kind": "historical_research_prototype_republication",
+        "online_ab": false,
+        "details": "2003历史研究；2026数字化不新增效果验证。"
+      },
+      "source_access_attempts": [
+        {
+          "url": "https://arxiv.org/html/2611.08572v1",
+          "outcome": "HTTP404; no HTML original obtained"
+        },
+        {
+          "url": "https://arxiv.org/pdf/2611.08572v1",
+          "outcome": "PDF downloaded, first-page byline visually inspected and relevant original pages read"
+        }
+      ]
+    },
+    {
+      "revision": 1,
+      "title": "A Smart Instant Book Filter Model based on Dual-Objective Optimization",
+      "published": "2026-10-26T21:11:30Z",
+      "updated": "2026-10-26T21:11:30Z",
+      "metadata_sha256": "e756562cc1ca89c7efc7a0f86f8e482bc4a3a12b3d23206f19c3407e4ff1d890",
+      "capture": "40832864995/agent-paper-candidates/paper-candidates-agent.json",
+      "metadata_capture": "40832864995/agent-paper-candidates/paper-candidates-agent.json",
+      "metadata_capture_sha256": "6f1cfe2706766b6d5feb40e2c79363dc367f9021596ed7ea8fbf82bf453434cf",
+      "source_url": "https://arxiv.org/html/2610.36287v1",
+      "source_sha256": "7c46343387f38aee607672224c3ad352ad793d80b2fd32be38f075a10f1a1b48",
+      "source_capture": "p2-industrial/2610.36287v1.html",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/html/2610.36287v1",
+          "source_sha256": "7c46343387f38aee607672224c3ad352ad793d80b2fd32be38f075a10f1a1b48",
+          "source_capture": "p2-industrial/2610.36287v1.html",
+          "source_bytes": 96435,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "html",
+          "location": "@article",
+          "paragraph_sha256": "199f521dfe68d549acb39855bf9a866a343090aef324ee0cfd72e4fff4eca2b8",
+          "match": "Feb 2018"
+        },
+        {
+          "format": "html",
+          "location": "S3.SS1",
+          "paragraph_sha256": "be7268317e75a20b2109fd494847cb6f6c1793994d7fb4ddc32e7ae4d639d5f7",
+          "match": "10,000"
+        },
+        {
+          "format": "html",
+          "location": "S4",
+          "paragraph_sha256": "0ac9090e5138ab889f824f13b2034021996ee601338428507d0b5a1770d997b5",
+          "match": "real global traffic"
+        },
+        {
+          "format": "html",
+          "location": "S4",
+          "paragraph_sha256": "0ac9090e5138ab889f824f13b2034021996ee601338428507d0b5a1770d997b5",
+          "match": "8.20%"
+        }
+      ],
+      "track": "recommendation",
+      "priority": "P1",
+      "verified_priority_organizations": [],
+      "production_gate_passed": true,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, experimental/deployment evidence, original date and relevant cost/limitations; not a whole-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2610.36287",
+      "organization": "Airbnb Inc.",
+      "decision": "out_of_scope",
+      "resolution": "historical_republication_not_new_2026_research",
+      "reason": "这篇有真实全局流量A/B且本方法已生产部署，不能因不是Google/Meta而漏审或误说无线上证据。双目标优化以DCG代理，随机walk+专家重启筛选instant-book阈值，原文A/B报告instant booking+8.20%、booking0.00%、host adoption+0.96%。但固定原文页首明确2018年2月Workshop on Two-sided Marketplace Optimization、版权2018；2026arXiv上传不是新研究。本轮按历史重刊出窗，未自动批准具名经典例外、未实现。",
+      "locations": [
+        "front-matter Feb2018 workshop and copyright",
+        "§2.3",
+        "§3.1–3.2",
+        "§4 Table1 real global traffic A/B"
+      ],
+      "algorithm_assessment": "original2018 constrained dual-objective random-walk threshold optimization; core not implemented",
+      "original_publication": {
+        "year": 2018,
+        "venue": "Workshop on Two-sided Marketplace Optimization, Feb2018"
+      },
+      "production_evidence": {
+        "kind": "historical_real_global_traffic_ab_and_deployment",
+        "online_ab": true,
+        "details": "learned参数instant bookings+8.20%、总bookings0.00%；host adoption+0.96%；原文明确服务百万用户。"
+      }
+    },
+    {
+      "revision": 1,
+      "title": "SPAR: Experience-Driven Strategy Evolution in Multi-Session B2B Sales",
+      "published": "2026-11-01T08:29:41Z",
+      "updated": "2026-11-01T08:29:41Z",
+      "metadata_sha256": "2ad5e0318f23770ed1498bba1f4e035c368dcf611114a0893142a86a37e5742f",
+      "capture": "42582487347/agent-paper-candidates/paper-candidates-agent.json",
+      "metadata_capture": "42582487347/agent-paper-candidates/paper-candidates-agent.json",
+      "metadata_capture_sha256": "c457c67963595d5674748fe46e17eb0b8800081e2163fc75d53095570fb03918",
+      "source_url": "https://arxiv.org/html/2611.01695v1",
+      "source_sha256": "a3d840b29b58de2e3bf8d34adf76c3eca84e074cec4b6b72fe6dafc43de59458",
+      "source_capture": "p2-industrial/2611.01695v1.html",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/html/2611.01695v1",
+          "source_sha256": "a3d840b29b58de2e3bf8d34adf76c3eca84e074cec4b6b72fe6dafc43de59458",
+          "source_capture": "p2-industrial/2611.01695v1.html",
+          "source_bytes": 186297,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "html",
+          "location": "S3.SS3",
+          "paragraph_sha256": "6305be6dee5431015b45aaadfcb52e9b7b198654ed62d25ddc8d8410a5cda2ae",
+          "match": "Beta-Bernoulli"
+        },
+        {
+          "format": "html",
+          "location": "S3.SS5",
+          "paragraph_sha256": "0845a1b3b2f9b1c5d0d13854da8511b3dcc28f176e712768174844a32a3beac0",
+          "match": "Only outcomes"
+        },
+        {
+          "format": "html",
+          "location": "S4.SS1",
+          "paragraph_sha256": "43e17be380c0d49d93827db136042391bfbeaeef94ca70ee9720a152f9d5e486",
+          "match": "51,603"
+        },
+        {
+          "format": "html",
+          "location": "S4.SS3",
+          "paragraph_sha256": "2d0ff34d8526c3e3d680b89eb7f2a4aa55ca75c2a2f621dac6fef1c35df01bfd",
+          "match": "30,000 merchants per group"
+        }
+      ],
+      "track": "agent",
+      "priority": "P1",
+      "verified_priority_organizations": [],
+      "production_gate_passed": true,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, experimental/deployment evidence, original date and relevant cost/limitations; not a whole-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2611.01695",
+      "organization": "South China University of Technology / Alibaba Group",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "reason": "SPAR定义了可复现的双环自进化机制：商家内episodic memory与跨商家策略假设；LLM归因只让strategy-driven证据进入Beta-Bernoulli置信度，七种最小修订动作/生命周期阈值进化playbook，非普通销售报告。原文真1688线上A/B每组>30000商家，转化+15.8%、高意向+35.8%，不能漏掉。完整实验依赖1642业务真实对话、51603笔记/3637案例设计、GPT-4o多臂多轮与真实生产商家；原文未提供可核验的业务数据公开获取路径、本轮也没有这些资源，按用户成本/资源规则不跑。本轮审查完成，低成本假设账本/归因门控核心仍未实现，未以生产效果替代本地验证。",
+      "locations": [
+        "author block",
+        "§3.3–3.5",
+        "§4.1",
+        "§4.3 online A/B",
+        "Appendix B Algorithm1",
+        "limitations"
+      ],
+      "algorithm_assessment": "new double-loop merchant memory and causal-attribution-gated hypothesis lifecycle/evolution; cheap core not implemented",
+      "production_evidence": {
+        "kind": "live_1688_ab_test",
+        "online_ab": true,
+        "details": "每组>30000商家；7日成交定义；对DirectPrompting相对转化+15.8%、M1+35.8%、outreach sessions-9.2%，bootstrap CI和双比例检验p<.001。未把LLM自报causal attribution视为随机因果识别。"
+      },
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2611.01695v1",
+        "basis": "§4.1业务对话/笔记规模与GPT-4o、§4.3生产商家A/B，原始完整评测要求而非本地实测；数据未找到可核验公开路径不等于断言永不公开",
+        "scale": "1642标注真实对话与300回放校验、51603session notes/3637sales cases、GPT-4o多轮多baseline/ablation；真实A/B每组>30000商家。",
+        "available_resource": "one A100 or A30, or local Mac; no experiment was started by this review",
+        "cost_type": "需原始业务/生产商家资源的大型多轮闭源API与线上实验矩阵，不能在单卡本地重放完整实验"
+      },
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "low_cost_core_status": "not_implemented; full-experiment waiver does not deliver the component"
+    },
+    {
+      "revision": 1,
+      "title": "Learnings and Pitfalls from AI-Assisted A/B Experimentation at Scale",
+      "published": "2026-11-03T08:41:31Z",
+      "updated": "2026-11-03T08:41:31Z",
+      "metadata_sha256": "47d9aaece76d5653005512586ca5feeef2e63e6b3e57619c6484034441ba8c9f",
+      "capture": "42582487347/agent-paper-candidates/paper-candidates-agent.json",
+      "metadata_capture": "42582487347/agent-paper-candidates/paper-candidates-agent.json",
+      "metadata_capture_sha256": "c457c67963595d5674748fe46e17eb0b8800081e2163fc75d53095570fb03918",
+      "source_url": "https://arxiv.org/html/2611.04515v1",
+      "source_sha256": "7bc4029b4fffc64df3f44ab764b77f4de5bdc0e232f12a9b4aa3e8a1506e957d",
+      "source_capture": "p2-industrial/2611.04515v1.html",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/html/2611.04515v1",
+          "source_sha256": "7bc4029b4fffc64df3f44ab764b77f4de5bdc0e232f12a9b4aa3e8a1506e957d",
+          "source_capture": "p2-industrial/2611.04515v1.html",
+          "source_bytes": 89883,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "html",
+          "location": "S2",
+          "paragraph_sha256": "b8938c8e918f5c203a677d25cf1440786218e9180282884dd0dd66b8cee6e0ad",
+          "match": "follows a conventional design"
+        },
+        {
+          "format": "html",
+          "location": "S2",
+          "paragraph_sha256": "b8938c8e918f5c203a677d25cf1440786218e9180282884dd0dd66b8cee6e0ad",
+          "match": "97 skills"
+        },
+        {
+          "format": "html",
+          "location": "S3",
+          "paragraph_sha256": "44b18e2e52bcc3926561537d08fe738eae62e5a8dfce10743c8e58ad2a34a99c",
+          "match": "ground-truth answers"
+        },
+        {
+          "format": "html",
+          "location": "S4",
+          "paragraph_sha256": "d504b423800fafe451fb803db9b672895503136b3aa4ae7225f2ae58e86a420b",
+          "match": "p-hacking"
+        }
+      ],
+      "track": "agent",
+      "priority": "P0",
+      "verified_priority_organizations": [
+        "Meta"
+      ],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, experimental/deployment evidence, original date and relevant cost/limitations; not a whole-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2611.04515",
+      "organization": "Meta",
+      "verified_priority_authors": [
+        "Brett Daley",
+        "Ilya Gorbachev",
+        "Anubhav Natani",
+        "Nicholas Brown",
+        "Athena Dai",
+        "Rachel Song",
+        "Marcin Pekalski",
+        "Josip Domazet",
+        "Anchal Choubey",
+        "Daniel Ting"
+      ],
+      "decision": "rejected",
+      "resolution": "not_selected_this_window_industrial_experience_report",
+      "reason": "Meta原始作者栏与全文§1–5已核。文章自称conventional Agent设计，报告97skills、固定CLI参数校验、专家知识库、模板typed provenance门禁与防p-hacking经验。它辅助既有A/B结果分析，并非把Agent自身放进随机线上A/B；三类报告模板的受控对照和使用占比不等于新独立算法/公共基准。按获批应用经验报告口径本轮不选，不把Meta优先误解成无条件收录；可借鉴低成本审计/报告门禁但本次未实现。",
+      "locations": [
+        "complete author block",
+        "§1–5 original main text",
+        "Tables1–2 and Figure1"
+      ],
+      "algorithm_assessment": "conventional Agent architecture and industrial lessons, not a newly delivered independent algorithm or public benchmark",
+      "production_evidence": {
+        "kind": "production_experimentation_assistant_usage_and_controlled_report_checks",
+        "online_ab": false,
+        "details": "97技能；45%请求为结果分析；Agent计算数字由确定性工具产生。正文无Agent自身随机流量提升实验，不能把被分析的A/B实验当本方法A/B。"
+      }
+    },
+    {
+      "revision": 1,
+      "title": "From Handcrafted to Generative: RLVR-Optimized Icon Generation for Alexa+",
+      "published": "2026-11-04T08:08:21Z",
+      "updated": "2026-11-04T08:08:21Z",
+      "metadata_sha256": "261f632742e9c91320e7e90dc07db90453cdfa2792fdd633dd2b9566fd5b8de8",
+      "capture": "42582487347/post-training-paper-candidates/paper-candidates-post-training.json",
+      "metadata_capture": "42582487347/post-training-paper-candidates/paper-candidates-post-training.json",
+      "metadata_capture_sha256": "bc16c0645f68ca0e982c355ffb0dc8054fad63cd9b527e4f78c9711bc18b5471",
+      "source_url": "https://arxiv.org/html/2611.06123v1",
+      "source_sha256": "e77c0cab20589d8a3036d02848a165ddb2e82c6e4ac5492cd0ebf54525a539bc",
+      "source_capture": "p2-industrial/2611.06123v1.html",
+      "source_receipts": [
+        {
+          "source_url": "https://arxiv.org/html/2611.06123v1",
+          "source_sha256": "e77c0cab20589d8a3036d02848a165ddb2e82c6e4ac5492cd0ebf54525a539bc",
+          "source_capture": "p2-industrial/2611.06123v1.html",
+          "source_bytes": 176793,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        },
+        {
+          "source_url": "https://arxiv.org/pdf/2611.06123v1",
+          "source_sha256": "52cb850669abd8e07f9d74b61bedabcfa6d2f9ce1dac7cec97c72c36fc26e877",
+          "source_capture": "p2-industrial/2611.06123v1.pdf",
+          "source_bytes": 6191815,
+          "fetch_result": "success; exact fixed-revision source locally read"
+        }
+      ],
+      "source_witnesses": [
+        {
+          "format": "html",
+          "location": "Sx4.SSx3",
+          "paragraph_sha256": "47461408db1961aa5d9fda66182fe90973902f575099a68b7956ec756c37a68b",
+          "match": "runs on CPU"
+        },
+        {
+          "format": "html",
+          "location": "Sx4.SSx4",
+          "paragraph_sha256": "65866d8b6a21eeb0cca04f43afb4bac512666aebd03cb256376c7b9a9e7498b9",
+          "match": "30 %"
+        },
+        {
+          "format": "html",
+          "location": "S1.SSx1",
+          "paragraph_sha256": "7f5a39b2f0a17ea65849215d78fe535082b200a4ae50263fbf9abbcb5977bec7",
+          "match": "H200"
+        },
+        {
+          "format": "html",
+          "location": "Sx8",
+          "paragraph_sha256": "2f2a7aeba65b296a22afdcd363198feb6320f9d0a0eb7d54c96253e54b27a088",
+          "match": "deployed in production"
+        },
+        {
+          "format": "pdf",
+          "page_one_based": 1,
+          "page_text_sha256": "442c0d978504af33a0ba6cbb80b87250eb6035b6a56837215c31674cb1132bf3",
+          "match": "University of Southern California"
+        },
+        {
+          "format": "pdf",
+          "page_one_based": 1,
+          "page_text_sha256": "442c0d978504af33a0ba6cbb80b87250eb6035b6a56837215c31674cb1132bf3",
+          "match": "Amazon Alexa"
+        }
+      ],
+      "track": "post-training",
+      "priority": "P1",
+      "verified_priority_organizations": [],
+      "production_gate_passed": false,
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "source_review_scope": "bounded original byline, defining contribution, experimental/deployment evidence, original date and relevant cost/limitations; not a whole-article endorsement",
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "experiments_started": 0,
+      "gpu_runs": 0,
+      "id": "2611.06123",
+      "organization": "University of Southern California / Amazon Alexa",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "reason": "Alexicon确有真实生产pipeline，新CPU几何crowding verifier与防reward hacking的concept-gated奖励，训练FLUX.2-klein4B的Flow-GRPO LoRA。15.7%→58.7%是1000概念上的独立VLM离线成对判分，不是用户A/B；原文另明确训练模型/verifier已生产部署。附录A原配置8×H200、5000优化步、每步128张512²图且每样本VLM语义调用，显著超单A100/A30低成本范围，因此完整实验不复现。低成本形态学测量/计数reward核心仍未实现，不能把完整高成本豁免冒充组件交付。",
+      "locations": [
+        "PDF p1 author affiliations and Amazon internship",
+        "System Overview",
+        "Method verifier/reward",
+        "Experimental Setup",
+        "Results Tables2–3",
+        "Appendix A TableA.1"
+      ],
+      "algorithm_assessment": "new morphology-plus-GBDT verifier and concept-gated count-based RLVR reward for a flow policy; cheap core not implemented",
+      "production_evidence": {
+        "kind": "explicit_production_deployment_and_offline_paired_eval",
+        "online_ab": false,
+        "details": "模型与verifier在Alexa+生产pipeline；1000概念base/finetuned独立VLM判分15.7%→58.7%、McNemar p=3.3e-94，非线上用户A/B。"
+      },
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2611.06123v1",
+        "basis": "Appendix A TableA.1直接报告8H200与batch/steps；Method每样本语义VLM；原始配置非本地估计",
+        "scale": "4B DiT+4B Qwen3 encoder，8×H200/ZeRO2，5000steps×128张512×512图、每张10步denoising和VLM概念判断；两LoRA rank轨迹与1000概念成对eval。",
+        "available_resource": "one A100 or A30, or local Mac; no experiment was started by this review",
+        "cost_type": "明确多GPU大图像flow-policy RL训练与逐样本VLM调用"
+      },
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "low_cost_core_status": "not_implemented; full-experiment waiver does not deliver the component"
+    }
+  ]
+}

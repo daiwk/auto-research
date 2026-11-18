@@ -29,6 +29,7 @@ from auto_research.models import Paper
 from auto_research.discovery_checkpoint import atomic_json, coverage_summary
 from auto_research.discovery_watermark import partition_archived_official_reviews
 from auto_research.discovery_review import priority_organizations
+from auto_research.discovery_history import reconcile_priority_history
 
 
 def effective_start_date(
@@ -55,6 +56,7 @@ def external_paper_in_window(
     paper: Paper, provenance: dict[str, list[dict]], *,
     start_date: dt.date, end_date: dt.date,
     repository_statuses: dict[str, str] | None = None,
+    historical_review_ids: set[str] | None = None,
 ) -> bool:
     if paper.published and dt.date.fromisoformat(paper.published[:10]) > end_date:
         return False
@@ -62,7 +64,9 @@ def external_paper_in_window(
         return True
     identity = canonical_arxiv_id(paper.arxiv_id)
     if (repository_statuses is not None
-            and repository_statuses.get(identity, "new") in {"new", "implementation-pending", "accepted-unimplemented", "review-deferred"}
+            and (repository_statuses.get(identity, "new") in {
+                "new", "implementation-pending", "accepted-unimplemented", "review-deferred", "selection-reviewed",
+            } or identity in (historical_review_ids or set()))
             and priority_organizations({"source_provenance": provenance.get(identity, ())})):
         # The official source may reveal an older paper for the first time.
         # It belongs to historical backfill, not today's publication count, but
@@ -107,6 +111,8 @@ def main() -> int:
     parser.add_argument("--output")
     parser.add_argument("--summary-output")
     parser.add_argument("--official-review-output")
+    parser.add_argument("--historical-review-output", type=Path,
+                        help="bounded exact-ID historical source reconciliation; defaults beside --output when configured")
     parser.add_argument("--checkpoint-dir", type=Path, help="persist each successful query page; use a separate directory per track/window")
     parser.add_argument("--resume", action="store_true", help="resume the exact saved window/query matrix")
     parser.add_argument("--github-actions", action="store_true")
@@ -168,6 +174,9 @@ def main() -> int:
     )
     source_failures = []
     source_stats = []
+    historical_review = None
+    historical_review_ids: set[str] = set()
+    sources = []
     announcement_reports = []
     if not args.skip_announcements:
         bulletin, provenance, announcement_reports = discover_announcements(
@@ -198,14 +207,34 @@ def main() -> int:
             ),
             source_snapshots=load_source_snapshots(args.source_snapshots),
         )
+        if any(source.historical_inventory for source in sources) or args.historical_review_output:
+            historical_review = reconcile_priority_history(
+                source_stats, Path(args.manifest), Path(args.ledger), expected_sources=sources,
+            )
+            historical_review_ids = {row["arxiv_id"] for row in historical_review["candidates"]
+                                     if row["historical_review_required"]}
         external = [paper for paper in external if external_paper_in_window(
             paper, provenance, start_date=start_date, end_date=args.end_date,
-            repository_statuses=statuses,
+            repository_statuses=statuses, historical_review_ids=historical_review_ids,
         )]
         papers = merge_external_candidates(papers, external, provenance)
+    if historical_review is None and args.historical_review_output:
+        historical_review = reconcile_priority_history(
+            source_stats, Path(args.manifest), Path(args.ledger), expected_sources=sources,
+        )
+    triage_statuses = dict(statuses)
+    for identity in historical_review_ids:
+        # Only exact priority-source gaps reopen; cost/exception/catalog rows
+        # are already excluded by the independent reconciliation above.
+        if triage_statuses.get(identity) != "selection-reviewed":
+            triage_statuses[identity] = "new"
     candidates = triage_candidates(
-        papers, statuses, repository_versions=repository_paper_versions(args.reviewed_versions),
+        papers, triage_statuses, repository_versions=repository_paper_versions(args.reviewed_versions),
     )
+    for candidate in candidates:
+        if candidate["arxiv_id"] in historical_review_ids:
+            candidate.update(historical_review_required=True, review_required=True,
+                             priority_review_required=True, automatic_implementation_queue=False)
     payload = build_discovery_payload(
         track=args.track,
         start_date=start_date,
@@ -243,6 +272,12 @@ def main() -> int:
                     raise ValueError("exception archive must remain inside docs")
     archive = json.loads(archive_path.read_text()) if archive_path is not None else {}
     review_queue, archived_review_queue = partition_archived_official_reviews(review_queue, archive)
+    source_retrieval_complete = (
+        bool(source_stats)
+        and not source_failures
+        and all(source.get("transport_status", source["status"]) == "ok" for source in source_stats)
+        and not any(source.get("pagination_capped") for source in source_stats)
+    )
     payload["cross_source"] = {
         "enabled": bool(
             args.cross_source_config or args.author_page
@@ -251,20 +286,31 @@ def main() -> int:
         "config": str(args.cross_source_config) if args.cross_source_config else None,
         "source_failures": source_failures,
         "source_stats": source_stats,
+        "source_retrieval_complete": source_retrieval_complete,
         "coverage_complete": (
-            bool(source_stats)
-            and not source_failures
+            source_retrieval_complete
             and not review_queue
             and not archived_review_queue
-            and all(
-                source.get("transport_status", source["status"]) == "ok"
-                for source in source_stats
-            )
-            and not any(source.get("pagination_capped") for source in source_stats)
         ),
     }
     payload["cross_source"]["official_review_queue_count"] = len(review_queue)
     payload["cross_source"]["archived_official_review_count"] = len(archived_review_queue)
+    if historical_review is not None:
+        payload["cross_source"]["historical_review"] = historical_review
+        historical_review_complete = (
+            historical_review["needs_original_review_count"] == 0
+            and not historical_review["exceptions"]
+        )
+        payload["cross_source"]["historical_review_complete"] = historical_review_complete
+        payload["cross_source"]["historical_review_scope"] = "configured captured source identities only"
+        payload["cross_source"]["coverage_complete"] &= historical_review_complete
+        history_output = args.historical_review_output
+        if history_output is None and args.output:
+            output = Path(args.output)
+            history_output = output.with_name(output.stem + "-historical-review.json")
+        if history_output is not None:
+            atomic_json(history_output, historical_review)
+            payload["cross_source"]["historical_review_output"] = str(history_output)
     if args.official_review_output:
         Path(args.official_review_output).write_text(json.dumps({
             "schema_version": 1,

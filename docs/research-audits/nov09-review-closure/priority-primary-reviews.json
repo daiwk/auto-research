@@ -1,0 +1,2176 @@
+{
+  "schema_version": 1,
+  "window": {
+    "start": "2026-10-16",
+    "end": "2026-11-09",
+    "timezone": "Asia/Shanghai"
+  },
+  "checked_at": "2026-11-09T10:10:47.575880+00:00",
+  "policy": "机构检索与工业证据判定分开。候选无摘要 A/B 也可召回；须以作者单位、固定正文和明确实验对照判断。高成本终态与代码实现状态分开。只做只读核查。",
+  "all_sources_exhaustive": false,
+  "official_directory": {
+    "baseline": "docs/research-audits/oct29-components/official-source-inventory.json",
+    "scope": "当前官方 Google Research 2026 年目录 30 页、DeepMind 选编目录 9 页、Meta 官方替代目录前 6 页；只比较解析到的 URL/标题/日期，不推断全网或 Meta 全站。",
+    "attempted": 45,
+    "retrieved": 45,
+    "unique_record_counts": {
+      "Google": 450,
+      "Google DeepMind": 266,
+      "Meta": 144
+    },
+    "added_count": 18,
+    "removed_count": 3,
+    "changed_count": 0,
+    "pages": [
+      {
+        "organization": "Google",
+        "page": 1,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:23.070644+00:00",
+        "count": 15,
+        "sha256": "f6d13d17b512c4b55927586dc95eb46eeb19c1de485d47e7505e4b576d83cea0"
+      },
+      {
+        "organization": "Google",
+        "page": 2,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=2",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:17.949910+00:00",
+        "count": 15,
+        "sha256": "c8326a57f427fbdeda7c17544d3ea5a60c9b0353e0dbf782401776115aa45809"
+      },
+      {
+        "organization": "Google",
+        "page": 3,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=3",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:18.959001+00:00",
+        "count": 15,
+        "sha256": "e65f2b5f593810c66997a811afb27223c53bf7716ee9a84d12a8822c07ad0ee7"
+      },
+      {
+        "organization": "Google",
+        "page": 4,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=4",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:18.048488+00:00",
+        "count": 15,
+        "sha256": "c4b0917dbcb73d5c40a0cbffda634ee35427a841521fdf170c36bd9288c0724d"
+      },
+      {
+        "organization": "Google",
+        "page": 5,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=5",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:17.948177+00:00",
+        "count": 15,
+        "sha256": "910f935e59095f32a1e9e3480c7f22e719a79e771ce56fb03d6612033db09cbe"
+      },
+      {
+        "organization": "Google",
+        "page": 6,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=6",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:19.190747+00:00",
+        "count": 15,
+        "sha256": "e6ee3260f06caeb1a24ebfbcaa9be6e6f8c90e7b83b8e01b99f9fcb974218964"
+      },
+      {
+        "organization": "Google",
+        "page": 7,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=7",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:32.238271+00:00",
+        "count": 15,
+        "sha256": "d86dc8f3f6a325b257cf8145606816cdb98908f2e310d06af89d4c9b26c68552"
+      },
+      {
+        "organization": "Google",
+        "page": 8,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=8",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:34.539442+00:00",
+        "count": 15,
+        "sha256": "3a0609cf65d4234f10b1b0fb3bc7b6bf5889cd2b39929893bbd44da283f905c9"
+      },
+      {
+        "organization": "Google",
+        "page": 9,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=9",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:32.233922+00:00",
+        "count": 15,
+        "sha256": "070efb421e680b425dfdcf5427721c60a5e0acede79e2e6cc1491dd317623616"
+      },
+      {
+        "organization": "Google",
+        "page": 10,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=10",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:33.261310+00:00",
+        "count": 15,
+        "sha256": "4252ad5d924578af1e81311a0a3118b66098908c3c2f6efddc9cf9c9d0b87fd5"
+      },
+      {
+        "organization": "Google",
+        "page": 11,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=11",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:33.276110+00:00",
+        "count": 15,
+        "sha256": "77467c774f8571ff9b352078f90e58321901cdcb3ae19b7bb6eca89073632942"
+      },
+      {
+        "organization": "Google",
+        "page": 12,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=12",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:25.039165+00:00",
+        "count": 15,
+        "sha256": "261c12d96b2b99a0ef64d729c56e2b97bbfebc37542df50756452896175779a6"
+      },
+      {
+        "organization": "Google",
+        "page": 13,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=13",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:27.271628+00:00",
+        "count": 15,
+        "sha256": "2b92a14c8f7baaada6d46136089f5a5fb0e63519d4a9895a1ef6add0fb90efcb"
+      },
+      {
+        "organization": "Google",
+        "page": 14,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=14",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:29.233833+00:00",
+        "count": 15,
+        "sha256": "bc95f583271d6257298bb417f3e62155db3d1563e3486f0144dfa08cb2afc5e9"
+      },
+      {
+        "organization": "Google",
+        "page": 15,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=15",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:31.440349+00:00",
+        "count": 15,
+        "sha256": "cec9830dda482e671303a1aa1c53e84aa42b41f33673bcc0dbe6d2b62b7ceb9d"
+      },
+      {
+        "organization": "Google",
+        "page": 16,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=16",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:34.700740+00:00",
+        "count": 15,
+        "sha256": "65c942ac9046a8f77b94cc785e78d0e4db5b0a18539ba1171077f5e2cef5387e"
+      },
+      {
+        "organization": "Google",
+        "page": 17,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=17",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:35.918817+00:00",
+        "count": 15,
+        "sha256": "6f9a451e1a3b1d4444dc517b3fb273904cfeaa8d9ea9c6dd91953e56bd22c94b"
+      },
+      {
+        "organization": "Google",
+        "page": 18,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=18",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:34.362847+00:00",
+        "count": 15,
+        "sha256": "9f68869a2bcc995061df21e6debfafbd96f2045f27ae483a1223fa7b2f8649c1"
+      },
+      {
+        "organization": "Google",
+        "page": 19,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=19",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:36.904143+00:00",
+        "count": 15,
+        "sha256": "da00be4a43dd76594680761add885d93a3bd91e7ee86f1bab625f16fcc18e989"
+      },
+      {
+        "organization": "Google",
+        "page": 20,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=20",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:35.433522+00:00",
+        "count": 15,
+        "sha256": "29b34fae078ae52d2f63cdd5e0b19b81c638a48914a7fc4f1016349dc7220267"
+      },
+      {
+        "organization": "Google",
+        "page": 21,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=21",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:36.775518+00:00",
+        "count": 15,
+        "sha256": "1114983488ca57221b1245802272ae6f4dac4c6a26678e4fd8c2c673b70274ff"
+      },
+      {
+        "organization": "Google",
+        "page": 22,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=22",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:36.844506+00:00",
+        "count": 15,
+        "sha256": "42710889717e3efa52375099abfa9d625a26c9a42cc286823b74732115990c53"
+      },
+      {
+        "organization": "Google",
+        "page": 23,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=23",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:36.542215+00:00",
+        "count": 15,
+        "sha256": "38c9f8ef77e8fbf636eed64acefacf6eb7c9e3cd5ed7393276dd49c37a765b0a"
+      },
+      {
+        "organization": "Google",
+        "page": 24,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=24",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:38.682105+00:00",
+        "count": 15,
+        "sha256": "565fe046d9e2b3ecb66fdd32eb294e5e892270a642ab1b20ba9b5e2ae578e7c0"
+      },
+      {
+        "organization": "Google",
+        "page": 25,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=25",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:38.137054+00:00",
+        "count": 15,
+        "sha256": "ade8b7fe848fef4259f291d1e169bd1dc91a02b99b222dd37b5b1edabe3f1e35"
+      },
+      {
+        "organization": "Google",
+        "page": 26,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=26",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:39.425304+00:00",
+        "count": 15,
+        "sha256": "10fc0e492ae4de61f17b63f95cdd2b5c4c6026f0f67ceef2dac576e3780b57b9"
+      },
+      {
+        "organization": "Google",
+        "page": 27,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=27",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:39.700080+00:00",
+        "count": 15,
+        "sha256": "93f6a8103db960dbecb08f011345279b877f37aecee4157ed07fbb8b7e7402c0"
+      },
+      {
+        "organization": "Google",
+        "page": 28,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=28",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:39.429970+00:00",
+        "count": 15,
+        "sha256": "d234c446bfb09adf2e78433b8e6368cf294283e1a017a584dd4cb9fca1cc56d3"
+      },
+      {
+        "organization": "Google",
+        "page": 29,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=29",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:39.892588+00:00",
+        "count": 15,
+        "sha256": "1b7ea1f5c35953c52636df41f04a9ce39340a94148b513bf1ce54d950c2861aa"
+      },
+      {
+        "organization": "Google",
+        "page": 30,
+        "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=30",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:40.100699+00:00",
+        "count": 15,
+        "sha256": "ab97f12ebc66dbd6c3734c3ad9992247577674f85db9ffafa304541f882e96c2"
+      },
+      {
+        "organization": "Google DeepMind",
+        "page": 1,
+        "url": "https://deepmind.google/research/publications/",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:40.346414+00:00",
+        "count": 30,
+        "sha256": "2487b2cb9baeb7deb5ebeddebd5765e45d113ffc59b9ab40c1d7c0d23f383654"
+      },
+      {
+        "organization": "Google DeepMind",
+        "page": 2,
+        "url": "https://deepmind.google/research/publications/page/2/",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:40.374280+00:00",
+        "count": 30,
+        "sha256": "dc907c9d13cdf9a984b924a6edb50ef8e826665bd55b3554264acbffbe65045d"
+      },
+      {
+        "organization": "Google DeepMind",
+        "page": 3,
+        "url": "https://deepmind.google/research/publications/page/3/",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:41.542463+00:00",
+        "count": 30,
+        "sha256": "626ce5964a69a32b0b748e684ec5924b8442fb209cb5f393f8730610f336afcc"
+      },
+      {
+        "organization": "Google DeepMind",
+        "page": 4,
+        "url": "https://deepmind.google/research/publications/page/4/",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:41.270068+00:00",
+        "count": 30,
+        "sha256": "9f10fae2511b0e6a30a2930cb79147f366ee40a49729d4f655641a8addf955b7"
+      },
+      {
+        "organization": "Google DeepMind",
+        "page": 5,
+        "url": "https://deepmind.google/research/publications/page/5/",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:41.533660+00:00",
+        "count": 30,
+        "sha256": "fa505f77df43097ca371c55ed8a3a488a04cdd4bb49c770b8f6b33d10740458a"
+      },
+      {
+        "organization": "Google DeepMind",
+        "page": 6,
+        "url": "https://deepmind.google/research/publications/page/6/",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:41.524831+00:00",
+        "count": 30,
+        "sha256": "634b243846d85c591e0ef9a4f959ecabb0272c451de9c755c61655e1c0933e4d"
+      },
+      {
+        "organization": "Google DeepMind",
+        "page": 7,
+        "url": "https://deepmind.google/research/publications/page/7/",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:42.071186+00:00",
+        "count": 30,
+        "sha256": "5102da9cfbbc40bc7ed2e0369889ec7d845b9bb285746903256526c158537fee"
+      },
+      {
+        "organization": "Google DeepMind",
+        "page": 8,
+        "url": "https://deepmind.google/research/publications/page/8/",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:42.030648+00:00",
+        "count": 30,
+        "sha256": "ecac669159195b36771d612cac0b29204e7a4325afe365fe0d9ded1631010c98"
+      },
+      {
+        "organization": "Google DeepMind",
+        "page": 9,
+        "url": "https://deepmind.google/research/publications/page/9/",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:43.511011+00:00",
+        "count": 27,
+        "sha256": "aceeee1eca76a5b9aea3d1253d2c20aab61fce094ddf82f98804787e6d68cf9a"
+      },
+      {
+        "organization": "Meta",
+        "page": 1,
+        "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=1",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:45.934783+00:00",
+        "count": 24,
+        "sha256": "07b2692b3e3ba33ae01faecaaf5a896cb350f3fd9a345ed90793c48fc0f1df08"
+      },
+      {
+        "organization": "Meta",
+        "page": 2,
+        "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=2",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:45.868114+00:00",
+        "count": 24,
+        "sha256": "50f5f5b73305cd4580e48bc86a8d97a33ae2ab7c4f7d2fb0566b1830640f6b90"
+      },
+      {
+        "organization": "Meta",
+        "page": 3,
+        "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=3",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:46.052818+00:00",
+        "count": 24,
+        "sha256": "5cf7a3c664597b619af34fe6a1ebba9ec1bc664b76e6f4a0489bd4be67a73d1e"
+      },
+      {
+        "organization": "Meta",
+        "page": 4,
+        "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=4",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:46.613889+00:00",
+        "count": 24,
+        "sha256": "e47e4d8f41d2112b515403cb0f119f29bf959934dd6c31c35f25c498e257e94f"
+      },
+      {
+        "organization": "Meta",
+        "page": 5,
+        "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=5",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:46.410756+00:00",
+        "count": 24,
+        "sha256": "2d4d85b80a32693a41e78a7539e0edab51feb1553bc199850083a79a282a156b"
+      },
+      {
+        "organization": "Meta",
+        "page": 6,
+        "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=6",
+        "status": "retrieved",
+        "retrieved_at": "2026-11-09T10:10:47.575880+00:00",
+        "count": 24,
+        "sha256": "58bbbd7e91772eda19fb7f286c21ca45cbb73824dfd474c7cf76193e75441ba3"
+      }
+    ],
+    "removed": [
+      {
+        "organization": "Google",
+        "title": "Two Uncertainties Are Not One: Disagreement versus Decision-Risk in Cheap Structured Content Moderation",
+        "url": "https://research.google/pubs/two-uncertainties-are-not-one-disagreement-versus-decision-risk-in-cheap-structured-content-moderation/",
+        "directory_date": null
+      },
+      {
+        "organization": "Meta",
+        "title": "ARE: scaling up agent environments and evaluations",
+        "url": "https://ai.meta.com/research/publications/are-scaling-up-agent-environments-and-evaluations/",
+        "directory_date": "2025-09-22"
+      },
+      {
+        "organization": "Google DeepMind",
+        "title": "Teach LLMs to Phish: Stealing Private Information from Language Models",
+        "url": "https://deepmind.google/research/publications/43000/",
+        "directory_date": "2024-05-07"
+      }
+    ],
+    "exact_url_title_date_inheritance_note": "不把现有目录旧条目逐个算作新阅读全文；Oct29 目录是清单，不是接受证据，具体旧决定另由终态账本或既有审查继承。",
+    "visible_dated_records": [
+      {
+        "id": "2610.37364",
+        "key": "embeddinggemma2",
+        "organization": "Google DeepMind",
+        "directory_date": "2026-10-27",
+        "source_url": "https://deepmind.google/research/publications/279443/",
+        "decision": "reuse_catalog"
+      },
+      {
+        "id": "2611.01143",
+        "key": "gslm2",
+        "organization": "Meta",
+        "directory_date": "2026-11-04",
+        "source_url": "https://ai.meta.com/research/publications/gslm2-multi-stream-speech-representation-learning-and-generative-spoken-language-modeling/",
+        "decision": "reuse_catalog"
+      },
+      {
+        "id": "2610.24854",
+        "key": "rpl",
+        "organization": "Meta",
+        "directory_date": "2026-10-20",
+        "source_url": "https://ai.meta.com/research/publications/learning-to-program-retrievals-composing-search-primitives-via-reinforcement-learning/",
+        "decision": "reuse_catalog"
+      },
+      {
+        "id": "2610.24628",
+        "key": "muse-glimmer-30b",
+        "organization": "Meta",
+        "directory_date": "2026-10-19",
+        "source_url": "https://ai.meta.com/research/publications/muse-glimmer-30b-an-on-device-agentic-model/",
+        "decision": "reuse_catalog"
+      }
+    ],
+    "added_detail_checks": [
+      {
+        "organization": "Google",
+        "title": "ResidencyRL: Reinforcement Learning in Simulated Clinical Environments",
+        "url": "https://research.google/pubs/residencyrl-reinforcement-learning-in-simulated-clinical-environments/",
+        "directory_date": null,
+        "retrieved_at": "2026-11-09T10:12:19.619415+00:00",
+        "body_sha256": "a9d99f3271f681f3733ca08a951812fb28918f10a8542e221410c879f6bfc343",
+        "source_status": "retrieved",
+        "decision": "prior_catalogued",
+        "reason": "作者链接 arXiv 2608.07418，8 月旧文，目录已有且原完整实验已标高成本。",
+        "support_url": "https://arxiv.org/abs/2608.07418"
+      },
+      {
+        "organization": "Google",
+        "title": "FabScore: Fine-Grained Evaluation of Fabrications in Automated AI Research",
+        "url": "https://research.google/pubs/fabscore-fine-grained-evaluation-of-fabrications-in-automated-ai-research-2/",
+        "directory_date": null,
+        "retrieved_at": "2026-11-09T10:12:19.410085+00:00",
+        "body_sha256": "48f67526db3763ca586f0a7d3ac939da6d24d15ff6164f061731a4dbf3c81a70",
+        "source_status": "retrieved",
+        "decision": "prior_identity_recovered",
+        "reason": "与 10/15 归档相同标题、作者。作者 PDF 证实 Google 合作者；5 月作者网站 Git 提交已链接并托管此 PDF，10/15 已见同名机构条目。仍不把 Git 提交时间硬写成论文首公开时间。",
+        "support_url": "https://github.com/chchenhui/chchenhui.github.io/commit/b236e451145b1a596033cf8b1d7b765a86f39590"
+      },
+      {
+        "organization": "Google",
+        "title": "Entitlement Is Not Authorization",
+        "url": "https://research.google/pubs/entitlement-is-not-authorization/",
+        "directory_date": null,
+        "retrieved_at": "2026-11-09T10:12:18.382587+00:00",
+        "body_sha256": "8fd592578071e4255bf8f6bdf8d493b861ba1dc90cfa6d873edbd016a4e01b6f",
+        "source_status": "retrieved",
+        "decision": "outside_scope_after_doi_resolution",
+        "reason": "Google 官方条目链接的 Zenodo v1 与 DataCite DOI 确认公开日为 2026-11-01，作者稿的实现及评测为确定性订阅权益投影、计费对账和 TLA+ 验证；20,000 名订阅者及十种子敏感性分析均为模拟，不是 LLM Agent、模型后训练或工业搜广推方法。",
+        "support_url": "https://zenodo.org/api/records/23854189",
+        "published_date": "2026-11-01",
+        "doi_metadata_url": "https://api.datacite.org/dois/10.5281/zenodo.23854189",
+        "locations": [
+          "Zenodo v1 record: authors, publication date, files",
+          "architecture.tex: deterministic snapshot projection and reconciliation",
+          "evaluation.tex: 20,000 simulated subscribers and sensitivity across ten seeds"
+        ]
+      },
+      {
+        "organization": "Google",
+        "title": "What Limits Us? Analyzing Self-Reported Limitations in NLP Research",
+        "url": "https://research.google/pubs/what-limits-us-analyzing-self-reported-limitations-in-nlp-research/",
+        "directory_date": null,
+        "retrieved_at": "2026-11-09T10:12:19.397701+00:00",
+        "body_sha256": "dda7dfb9b20e0d04e86c21b7857c7f37dfbb51b8ab71a9bc8a595d3efa9e6e87",
+        "source_status": "retrieved",
+        "decision": "prior_terminal_review",
+        "reason": "同名 arXiv 2609.15191 已记拒绝：研究局限性元分析，不是本库 Agent 机制。",
+        "support_url": "https://arxiv.org/abs/2609.15191"
+      },
+      {
+        "organization": "Google",
+        "title": "Hierarchical Functional Fault Grading: A Chiplet-Based Methodology to Supplement Structural ATPG Coverage",
+        "url": "https://research.google/pubs/hierarchical-functional-fault-grading-a-chiplet-based-methodology-to-supplement-structural-atpg-coverage-3/",
+        "directory_date": null,
+        "retrieved_at": "2026-11-09T10:12:18.143035+00:00",
+        "body_sha256": "b76f3149c344179f4c6c1848ecd0849270538aa35309e1780fc0c85d19ccf73a",
+        "source_status": "retrieved",
+        "decision": "outside_scope",
+        "reason": "芯粒结构 ATPG 的功能故障分级，不是模型、后训练、Agent 或推荐方法。",
+        "support_url": "https://research.google/pubs/hierarchical-functional-fault-grading-a-chiplet-based-methodology-to-supplement-structural-atpg-coverage-3/"
+      },
+      {
+        "organization": "Google",
+        "title": "Synergetic Adaptive Orchestration and Governance: A Unified Framework for Production-Grade Multi-Agent Systems",
+        "url": "https://research.google/pubs/synergetic-adaptive-orchestration-and-governance-a-unified-framework-for-production-grade-multi-agent-systems/",
+        "directory_date": null,
+        "retrieved_at": "2026-11-09T10:12:18.354652+00:00",
+        "body_sha256": "7cad5868983af5ac29e5f5bb72f9efa610cb3271ad11aef70b68f5cb8c22a9dc",
+        "source_status": "retrieved",
+        "decision": "prior_identity_recovered",
+        "reason": "正式 IEEE 条目 2026-04-20 已加入 Xplore；不是目录新出现时的窗口首发。",
+        "support_url": "https://ieeexplore.ieee.org/abstract/document/11476668"
+      },
+      {
+        "organization": "Google",
+        "title": "Convergence of LLM Integration and Edge Intelligence in Decentralized IoT Ecosystems",
+        "url": "https://research.google/pubs/convergence-of-llm-integration-and-edge-intelligence-in-decentralized-iot-ecosystems/",
+        "directory_date": null,
+        "retrieved_at": "2026-11-09T10:12:19.682334+00:00",
+        "body_sha256": "8505fe451af827b50844387aee8cfaad6678f80670a3558aa98e0208d92a77f5",
+        "source_status": "retrieved",
+        "decision": "pre_window_conference",
+        "reason": "Crossref 出版商记录对应 AIIoT 论文集 pp.337–343，印刷出版 2026-05-20，DOI 记录 2026-06-22 已创建；不计本窗口首发，未取得全文。",
+        "support_url": "https://api.crossref.org/works/10.1109/aiiot68874.2026.11569542"
+      },
+      {
+        "organization": "Google",
+        "title": "Semantic Representation for Agentic Self-Play in Automated Laboratories",
+        "url": "https://research.google/pubs/semantic-representation-for-agentic-self-play-in-automated-laboratories/",
+        "directory_date": null,
+        "retrieved_at": "2026-11-09T10:12:19.718143+00:00",
+        "body_sha256": "afd4d76b2b20a004d1b7aea7f8f11ab90fd301d8d2169c08da09b8fd98a1d907",
+        "source_status": "retrieved",
+        "decision": "new_fulltext_review",
+        "reason": "官方 Download 确认 2610.32755；见独立全文决定。",
+        "support_url": "https://arxiv.org/pdf/2610.32755v1"
+      },
+      {
+        "organization": "Google",
+        "title": "Muir: Linear Attention with Sensitivity-Allocated Gating and Matched-Filter Readout",
+        "url": "https://research.google/pubs/muir-linear-attention-with-sensitivity-allocated-gating-and-matched-filter-readout/",
+        "directory_date": null,
+        "retrieved_at": "2026-11-09T10:12:19.690048+00:00",
+        "body_sha256": "934079f8ab5a65f28fb41f7689f078c78feb48cfb7b79a4b79ec73ddd5c1dc14",
+        "source_status": "retrieved",
+        "decision": "new_fulltext_review",
+        "reason": "官方 Download 确认 2611.08376；见独立全文决定。",
+        "support_url": "https://arxiv.org/pdf/2611.08376v1"
+      },
+      {
+        "organization": "Google",
+        "title": "Breaking the Loop: An Empirical Comparison of Strategies for Novelty and Freshness in YouTube Music",
+        "url": "https://research.google/pubs/breaking-the-loop-an-empirical-comparison-of-strategies-for-novelty-and-freshness-in-youtube-music/",
+        "directory_date": null,
+        "retrieved_at": "2026-11-09T10:12:20.118965+00:00",
+        "body_sha256": "03e75f9216567c243e7d3ae82b1c3fcd7572f48e36aee8f6793fa4bbec1258ba",
+        "source_status": "retrieved",
+        "decision": "prior_catalogued",
+        "reason": "官方 ACM DOI 对应原有 youtube-freshness，arXiv 2607.23749；不把目录新出现当新论文。",
+        "support_url": "https://doi.org/10.1145/3773078.3831876"
+      },
+      {
+        "organization": "Google",
+        "title": "Seeing vs. Counting: Complexity Twins Show Where Multimodal LLMs Fail on Diagrams",
+        "url": "https://research.google/pubs/seeing-vs-counting-complexity-twins-show-where-multimodal-llms-fail-on-diagrams/",
+        "directory_date": null,
+        "retrieved_at": "2026-11-09T10:12:20.394826+00:00",
+        "body_sha256": "01d5b3861f2d4fd9cf2976bc2c84110645e7edaec703c8123c1ae5e96cfa7200",
+        "source_status": "retrieved",
+        "decision": "new_fulltext_review",
+        "reason": "作者、标题与 arXiv 2611.08998 正文一致；见独立全文决定。",
+        "support_url": "https://arxiv.org/html/2611.08998v1"
+      },
+      {
+        "organization": "Google",
+        "title": "Machine learning quantum data to accelerate quantum Monte Carlo",
+        "url": "https://research.google/pubs/machine-learning-quantum-data-to-accelerate-quantum-monte-carlo/",
+        "directory_date": null,
+        "retrieved_at": "2026-11-09T10:12:20.320099+00:00",
+        "body_sha256": "5aeffaae959cbc3d627e935fb50c92ffaf6c6605c5ab8bdd03ee09b5150eb4a2",
+        "source_status": "retrieved",
+        "decision": "outside_scope",
+        "reason": "arXiv 2611.08151 的量子 Monte Carlo 属范围外；见独立正文决定。",
+        "support_url": "https://arxiv.org/html/2611.08151v1"
+      },
+      {
+        "organization": "Google",
+        "title": "VEPHand: View-Efficient Photometric Hand Performance Capture at Scale",
+        "url": "https://research.google/pubs/vephand-view-efficient-photometric-hand-performance-capture-at-scale/",
+        "directory_date": null,
+        "retrieved_at": "2026-11-09T10:12:21.173196+00:00",
+        "body_sha256": "5405d63cb27dcd80e0cc3a5a014f512a1b74938f102b461324fed5cbdb6ee6ab",
+        "source_status": "retrieved",
+        "decision": "pre_window",
+        "reason": "官方链接 arXiv 2606.15966，六月旧稿的光度手部动作重建。",
+        "support_url": "https://arxiv.org/abs/2606.15966"
+      },
+      {
+        "organization": "Google",
+        "title": "A Dichotomy for Cubic Bipartite Holant Problems with Complex Algebraic Weights",
+        "url": "https://research.google/pubs/a-dichotomy-for-cubic-bipartite-holant-problems-with-complex-algebraic-weights/",
+        "directory_date": null,
+        "retrieved_at": "2026-11-09T10:12:20.628141+00:00",
+        "body_sha256": "c1186a6e8809727d5ce7e2e25fb608324399c4fd8bf918393f2e56e352d8e766",
+        "source_status": "retrieved",
+        "decision": "pre_window_outside_scope",
+        "reason": "arXiv 2609.33473；9 月复杂度定理，非当前研究轨。",
+        "support_url": "https://arxiv.org/abs/2609.33473"
+      },
+      {
+        "organization": "Google",
+        "title": "Agentic AI for Personalized Physiotherapy: A Multi-Agent Framework for Generative Video Training and Real-Time Pose Correction",
+        "url": "https://research.google/pubs/agentic-ai-for-personalized-physiotherapy-a-multi-agent-framework-for-generative-video-training-and-real-time-pose-correction/",
+        "directory_date": null,
+        "retrieved_at": "2026-11-09T10:12:21.016093+00:00",
+        "body_sha256": "6526d1de093ff9701e3dc69f0c422065cd4b1af358cbb54aed2bb583fc3e073c",
+        "source_status": "retrieved",
+        "decision": "pre_window_bibliographic",
+        "reason": "Crossref 出版商记录给出 2026-07（仅到月），DOI 记录 2026-08-26 已创建；不把目录新增当本窗口首发，不声称取得全文。",
+        "support_url": "https://api.crossref.org/works/10.1109/ICDH72779.2026.00059"
+      },
+      {
+        "organization": "Google",
+        "title": "An Optimal Quantum Linear Systems Algorithm",
+        "url": "https://research.google/pubs/an-optimal-quantum-linear-systems-algorithm/",
+        "directory_date": null,
+        "retrieved_at": "2026-11-09T10:12:20.808106+00:00",
+        "body_sha256": "398b5ac1984540ed8c66baf726a5e337c83fd1104d3dcdca25cbe26df1362653",
+        "source_status": "retrieved",
+        "decision": "pre_window_outside_scope",
+        "reason": "arXiv 2609.35660；量子线性系统算法，非当前研究轨。",
+        "support_url": "https://arxiv.org/abs/2609.35660"
+      },
+      {
+        "organization": "Google DeepMind",
+        "title": "EmbeddingGemma 2: Unified and Efficient Multimodal Representations",
+        "url": "https://deepmind.google/research/publications/279443/",
+        "directory_date": "2026-10-27",
+        "retrieved_at": "2026-11-09T10:12:22.978130+00:00",
+        "body_sha256": "0e9e26deaa7e3ffd3f9dd39916586db5cd6eda2b8eb180e11db5bc4ad7fddb91",
+        "source_status": "retrieved",
+        "decision": "prior_catalogued",
+        "reason": "EmbeddingGemma 2 已入库。",
+        "support_url": "https://arxiv.org/abs/2610.37364"
+      },
+      {
+        "organization": "Meta",
+        "title": "GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling",
+        "url": "https://ai.meta.com/research/publications/gslm2-multi-stream-speech-representation-learning-and-generative-spoken-language-modeling/",
+        "directory_date": "2026-11-04",
+        "retrieved_at": "2026-11-09T10:12:21.922397+00:00",
+        "body_sha256": "32d09eadd180c429d60e05914f941d1986d18fdb7b33d505558617eb74c762f0",
+        "source_status": "retrieved",
+        "decision": "prior_catalogued",
+        "reason": "GSLM2 已入库；11/04 目录日不等于 10/31 UTC 的 arXiv v1。",
+        "support_url": "https://arxiv.org/abs/2611.01143"
+      }
+    ]
+  },
+  "ci_priority_official_review": {
+    "scope": "Exact-URL union of official-review artifacts from three CI runs; this is an additional priority discovery surface, not a census or new manuscript count.",
+    "source_artifacts": [
+      {
+        "run_url": "https://github.com/daiwk/auto-research/actions/runs/39731868655",
+        "artifact_name": "agent-paper-candidates",
+        "file": "paper-official-review-agent.json",
+        "sha256": "e3c5c77c483eb5b9ec2a79c1f4b53918905700bc2bea95cc96a5ff2ff219165d"
+      },
+      {
+        "run_url": "https://github.com/daiwk/auto-research/actions/runs/39731868655",
+        "artifact_name": "foundation-model-paper-candidates",
+        "file": "paper-official-review-foundation-model.json",
+        "sha256": "a34c8c496418173b76fd1057f57b653ebaf46eb06c5f12e92620d184bf4c4bb3"
+      },
+      {
+        "run_url": "https://github.com/daiwk/auto-research/actions/runs/39731868655",
+        "artifact_name": "post-training-paper-candidates",
+        "file": "paper-official-review-post-training.json",
+        "sha256": "c12ad013868881e569f104e91fa03eb6f6af7aef492f356d6a6933b08cc9b9d0"
+      },
+      {
+        "run_url": "https://github.com/daiwk/auto-research/actions/runs/39731868655",
+        "artifact_name": "recommendation-paper-candidates",
+        "file": "paper-official-review-recommendation.json",
+        "sha256": "18d13391b0468a1aab131fef0c231a3558fdfca00d4026e5a0c58c1f7af36839"
+      },
+      {
+        "run_url": "https://github.com/daiwk/auto-research/actions/runs/40832864995",
+        "artifact_name": "agent-paper-candidates",
+        "file": "paper-official-review-agent.json",
+        "sha256": "cd79ad1ff301d29f67b199056d157744c396234abe2adc5280dfba246fc2825d"
+      },
+      {
+        "run_url": "https://github.com/daiwk/auto-research/actions/runs/40832864995",
+        "artifact_name": "foundation-model-paper-candidates",
+        "file": "paper-official-review-foundation-model.json",
+        "sha256": "0542af81b2a7c0ebfe801374cf1084d4e191905b02347cefad128a48cee64f86"
+      },
+      {
+        "run_url": "https://github.com/daiwk/auto-research/actions/runs/40832864995",
+        "artifact_name": "post-training-paper-candidates",
+        "file": "paper-official-review-post-training.json",
+        "sha256": "79fa980b5ae9af4856620597fdbe8c6108ec929eb672f93bf63d94906e5b9105"
+      },
+      {
+        "run_url": "https://github.com/daiwk/auto-research/actions/runs/40832864995",
+        "artifact_name": "recommendation-paper-candidates",
+        "file": "paper-official-review-recommendation.json",
+        "sha256": "364853a191761452d5ed4b7f4b52e28dfc2d66e534a84fbd3cb415369b111788"
+      },
+      {
+        "run_url": "https://github.com/daiwk/auto-research/actions/runs/42582487347",
+        "artifact_name": "agent-paper-candidates",
+        "file": "paper-official-review-agent.json",
+        "sha256": "c303b161f181499a56082c9b67b3896a2002114e5b00fac7747fc5d380e0188b"
+      },
+      {
+        "run_url": "https://github.com/daiwk/auto-research/actions/runs/42582487347",
+        "artifact_name": "foundation-model-paper-candidates",
+        "file": "paper-official-review-foundation-model.json",
+        "sha256": "614c8102f5dfe096c200b1d9cee6889de13db52f9e6d691ce18743011fb1a82c"
+      },
+      {
+        "run_url": "https://github.com/daiwk/auto-research/actions/runs/42582487347",
+        "artifact_name": "post-training-paper-candidates",
+        "file": "paper-official-review-post-training.json",
+        "sha256": "4d2f3fcffc58d8d6e5d9d94998d339b2694a332a48024f39e946d512448a6c61"
+      },
+      {
+        "run_url": "https://github.com/daiwk/auto-research/actions/runs/42582487347",
+        "artifact_name": "recommendation-paper-candidates",
+        "file": "paper-official-review-recommendation.json",
+        "sha256": "d3cb2b49608118b22f0f886ac7e0f549ad898f6f6ff35ee0edc93e3e84711a37"
+      }
+    ],
+    "distinct_urls": 92,
+    "normalized_title_matches_are_triage_only": true,
+    "disposition_counts": {
+      "inherits_official_review": 73,
+      "pre_window_bibliographic": 2,
+      "archive_source_exception": 2,
+      "pre_window_primary": 1,
+      "pre_window_research_line_no_production_evidence": 1,
+      "title_match_terminal_ledger": 5,
+      "title_match_catalog_identity": 3,
+      "pre_window_identity_recovered": 1,
+      "pre_window_outside_scope": 1,
+      "inherits_prior_outside_scope": 1,
+      "new_fulltext_reviewed_high_cost": 1,
+      "inherits_prior_source_exception": 1
+    },
+    "records": [
+      {
+        "title": "Human-Guided Agentic AI for End-to-End EHR Research: Sequential Antibody-Drug Conjugate Pathways in Breast Cancer",
+        "url": "https://ai.meta.com/research/publications/human-guided-agentic-ai-for-end-to-end-ehr-research-sequential-antibody-drug-conjugate-pathways-in-breast-cancer/",
+        "organization": "Meta",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/meta-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": null,
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Pickleball injuries, search interest, and participation in the United States, 2014-2023: an ecological time series study",
+        "url": "https://ai.meta.com/research/publications/pickleball-injuries-search-interest-and-participation-in-the-united-states-2014-2023-an-ecological-time-series-study/",
+        "organization": "Meta",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/meta-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": null,
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "A large language model for complex cardiology care",
+        "url": "https://research.google/pubs/a-large-language-model-for-complex-cardiology-care/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "historical",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "A Multi-Layered Framework for Behavioral Governance of Non-Deterministic AI Agents",
+        "url": "https://research.google/pubs/a-multi-layered-framework-for-behavioral-governance-of-non-deterministic-ai-agents/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "historical",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "A2RD: Agentic Autoregressive Diffusion for Long Video Consistency",
+        "url": "https://research.google/pubs/a2rd-agentic-autoregressive-diffusion-for-long-video-consistency-2/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "ok",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Abstain and Validate: A Dual-LLM Policy for Reducing Noise in Agentic Program Repair",
+        "url": "https://research.google/pubs/abstain-and-validate-a-dual-llm-policy-for-reducing-noise-in-agentic-program-repair/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "historical",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Adversarial Attacks on Multimodal Large Language Models: A Comprehensive Survey",
+        "url": "https://research.google/pubs/adversarial-attacks-on-multimodal-large-language-models-a-comprehensive-survey/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback",
+        "url": "https://research.google/pubs/agent-gym-a-framework-for-continuous-evaluation-and-evolution-of-llm-agents-through-human-in-the-loop-feedback/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": null,
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Agent-to-Agent (A2A) Protocol: The Future of Autonomous Multi-Agent Systems",
+        "url": "https://research.google/pubs/agent-to-agent-a2a-protocol-the-future-of-autonomous-multi-agent-systems/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "AgentHands: Generating Interactive Hands Gestures for Spatially Grounded Agent Conversations in XR",
+        "url": "https://research.google/pubs/agenthands-generating-interactive-hands-gestures-for-spatially-grounded-agent-conversations-in-xr/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "historical",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Agentic AI for Personalized Physiotherapy: A Multi-Agent Framework for Generative Video Training and Real-Time Pose Correction",
+        "url": "https://research.google/pubs/agentic-ai-for-personalized-physiotherapy-a-multi-agent-framework-for-generative-video-training-and-real-time-pose-correction/",
+        "organization": "Google",
+        "disposition": "pre_window_bibliographic",
+        "reference": "https://api.crossref.org/works/10.1109/ICDH72779.2026.00059",
+        "note": "IEEE deposit gives July 2026 (month precision), with DOI record creation on 2026-08-26. No claim of full-text review."
+      },
+      {
+        "title": "Agentic AI Infrastructure in Practice: Learn These Key Hurdles to Deploy Production AI Agents Efficiently",
+        "url": "https://research.google/pubs/agentic-ai-infrastructure-in-practice-learn-these-key-hurdles-to-deploy-production-ai-agents-efficiently/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Agentic AI Is Forcing Procurement to Rethink What It Means to Trust a Vendor",
+        "url": "https://research.google/pubs/agentic-ai-is-forcing-procurement-to-rethink-what-it-means-to-trust-a-vendor/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Agentic Coding Needs Proactivity, Not Just Autonomy",
+        "url": "https://research.google/pubs/agentic-coding-needs-proactivity-not-just-autonomy/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "ok",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "ARM-Orchestrated Dynamic Workload Partitioning for Vision Model Training on FPGA Accelerators",
+        "url": "https://research.google/pubs/arm-orchestrated-dynamic-workload-partitioning-for-vision-model-training-on-fpga-accelerators/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Beyond the Emulator: Bridging the Sim-to-Real Gap in Mobile Agent Benchmarking",
+        "url": "https://research.google/pubs/beyond-the-emulator-bridging-the-sim-to-real-gap-in-mobile-agent-benchmarking/",
+        "organization": "Google",
+        "disposition": "archive_source_exception",
+        "reference": "https://openreview.net/forum?id=0rA1AvKI8I",
+        "note": "Google lists the paper, but the linked OpenReview forum, PDF and API could not establish an accessible, dated manuscript. See source exceptions."
+      },
+      {
+        "title": "Bi-level Hierarchical Neural Contextual Bandits for Online Recommendation",
+        "url": "https://research.google/pubs/bi-level-hierarchical-neural-contextual-bandits-for-online-recommendation/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "historical",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Bottom-Up AI Agent Security: The Complete 14-Layer Framework for Cloud Architects",
+        "url": "https://research.google/pubs/bottom-up-ai-agent-security-the-complete-14-layer-framework-for-cloud-architects/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Bounded Provisional Visibility: Controlling Poisoning Exposure in Continuously Ingested RAG Vector Stores",
+        "url": "https://research.google/pubs/bounded-provisional-visibility-controlling-poisoning-exposure-in-continuously-ingested-rag-vector-stores/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": null,
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Bridging the Dimensionality Gap: A Taxonomy and Survey of 2D Vision Model Adaptation for 3D Analysis",
+        "url": "https://research.google/pubs/bridging-the-dimensionality-gap-a-taxonomy-and-survey-of-2d-vision-model-adaptation-for-3d-analysis-2/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Can Agents Infer Environment from Interaction? Evidence from Agentic Automata Learning",
+        "url": "https://research.google/pubs/can-agents-infer-environment-from-interaction-evidence-from-agentic-automata-learning/",
+        "organization": "Google",
+        "disposition": "pre_window_primary",
+        "reference": "https://arxiv.org/abs/2606.16576",
+        "note": "Author project directly links this arXiv record; June v1 and September v2 predate this window."
+      },
+      {
+        "title": "CAST: Modeling Visual State Transitions for Consistent Video Retrieval",
+        "url": "https://research.google/pubs/cast-modeling-visual-state-transitions-for-consistent-video-retrieval/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "ok",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "“ Catching lightning in a bottle”: How Blind or Low Vision Creators Navigate Ideation Across Creative Domains",
+        "url": "https://research.google/pubs/catching-lightning-in-a-bottle-how-blind-or-low-vision-creators-navigate-ideation-across-creative-domains/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "CinematicVQA: Benchmarking Film-Grammar Reasoning in Large Vision-Language Models",
+        "url": "https://research.google/pubs/cinematicvqa-benchmarking-film-grammar-reasoning-in-large-vision-language-models/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "ok",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Claim-Gated Source-Risk Auditing for Generative Search",
+        "url": "https://research.google/pubs/claim-gated-source-risk-auditing-for-generative-search-2/",
+        "organization": "Google",
+        "disposition": "pre_window_research_line_no_production_evidence",
+        "reference": "https://arxiv.org/html/2609.29145v2",
+        "note": "The title, author identities/email aliases and method tie the official variant to this September v1/October 9 v2 research line. The abstract variants report different conformance workloads, so do not identify the exact version or date of the -2 variant. Neither reports production A/B or full rollout."
+      },
+      {
+        "title": "Claim-Gated Source-Risk Auditing for Generative Search",
+        "url": "https://research.google/pubs/claim-gated-source-risk-auditing-for-generative-search/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": null,
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Co-RedTeam: Orchestrated Security Discovery and Exploitation with LLM Agents",
+        "url": "https://research.google/pubs/co-redteam-orchestrated-security-discovery-and-exploitation-with-llm-agents/",
+        "organization": "Google",
+        "disposition": "title_match_terminal_ledger",
+        "reference": "20261021-google-meta-review-and-two-components",
+        "prior_id": "2602.02164",
+        "prior_status": "deferred",
+        "note": "Normalized title matches terminal ledger; not newly read in this check."
+      },
+      {
+        "title": "Budget-Aware Tool Use Enables Effective Agent Scaling",
+        "url": "https://research.google/pubs/cost-effective-agent-test-time-scaling/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "ok",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "CROP: Token-Efficient Reasoning in Large Language Models via Regularized Prompt Optimization",
+        "url": "https://research.google/pubs/crop-token-efficient-reasoning-in-large-language-models-via-regularized-prompt-optimization/",
+        "organization": "Google",
+        "disposition": "title_match_catalog_identity",
+        "reference": "agent-research/2604.14214-crop/README.md",
+        "paper_url": "https://arxiv.org/abs/2604.14214v1",
+        "note": "Normalized title matches canonical catalog; not newly read in this check."
+      },
+      {
+        "title": "Data-usage descriptors as search metadata: the case of food security data and the National Data Platform (2015-2025)",
+        "url": "https://research.google/pubs/data-usage-descriptors-as-search-metadata-the-case-of-food-security-data-and-the-national-data-platform-2015-2025/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "DDRop: Generic Memory Interposer Attacks on Confidential VMs by Dropping DDR5 Writes",
+        "url": "https://research.google/pubs/ddrop-generic-memory-interposer-attacks-on-confidential-vms-by-dropping-ddr5-writes/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Depth-CoT Tradeoffs in Transformers: A Look at Path Following",
+        "url": "https://research.google/pubs/depth-cot-tradeoffs-in-transformers-a-look-at-path-following/",
+        "organization": "Google",
+        "disposition": "archive_source_exception",
+        "reference": "https://research.google/pubs/depth-cot-tradeoffs-in-transformers-a-look-at-path-following/",
+        "note": "Directory only reports year 2027; no dated, readable manuscript found. See source exceptions."
+      },
+      {
+        "title": "Digital Shadow AI Risk Theoretical Framework (DART): A Framework for Managing Data Disclosure and Privacy Risks of AI tools at Work",
+        "url": "https://research.google/pubs/digital-shadow-ai-risk-theoretical-framework-dart-a-framework-for-managing-data-disclosure-and-privacy-risks-of-ai-tools-at-work-2/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Discrepancy Beyond Additive Functions with Applications to Fair Division",
+        "url": "https://research.google/pubs/discrepancy-beyond-additive-functions-with-applications-to-fair-division/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "DocLens: A Tool-Augmented Multi-Agent Framework for Long Visual Document Understanding",
+        "url": "https://research.google/pubs/doclens-a-tool-augmented-multi-agent-framework-for-long-visual-document-understanding/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "historical",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Dynamic Case Precedent: An Architecture for Accelerating Agent Proficiency and Resolution Consistency in Large-Scale People Operations",
+        "url": "https://research.google/pubs/dynamic-case-precedent-an-architecture-for-accelerating-agent-proficiency-and-resolution-consistency-in-large-scale-people-operations/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Enhancements in Memory Test for Improved Diagnosability and Comprehensive Multi-Bank Test",
+        "url": "https://research.google/pubs/enhancements-in-memory-test-for-improved-diagnosability-and-comprehensive-multi-bank-test/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "FabScore: Fine-Grained Evaluation of Fabrications in Automated AI Research",
+        "url": "https://research.google/pubs/fabscore-fine-grained-evaluation-of-fabrications-in-automated-ai-research-2/",
+        "organization": "Google",
+        "disposition": "pre_window_identity_recovered",
+        "reference": "https://github.com/chchenhui/chchenhui.github.io/commit/b236e451145b1a596033cf8b1d7b765a86f39590",
+        "note": "Author PDF and public website commit predate the window, independently of the undated added Google URL. Does not establish exact first-public date."
+      },
+      {
+        "title": "FabScore: Fine-Grained Evaluation of Fabrications in Automated AI Research",
+        "url": "https://research.google/pubs/fabscore-fine-grained-evaluation-of-fabrications-in-automated-ai-research/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "explicit_exception",
+        "prior_decision": "explicit_exception(date_or_identity_unresolved)",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "From Black Box to Toolbox: Human-Centered Explainability in Developer-Authored Agent Rules",
+        "url": "https://research.google/pubs/from-black-box-to-toolbox-human-centered-explainability-in-developer-authored-agent-rules/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "From Correctness to Collaboration: A Human-Centered Taxonomy of AI Agent Behavior in Software Engineering",
+        "url": "https://research.google/pubs/from-correctness-to-collaboration-a-human-centered-taxonomy-of-ai-agent-behavior-in-software-engineering/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "GenAI on Google Cloud: Enterprise Generative AI Systems and AI Agents",
+        "url": "https://research.google/pubs/genai-on-google-cloud-enterprise-generative-ai-systems-and-ai-agents/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Generational differences in anthropomorphism and trust calibration for large language models",
+        "url": "https://research.google/pubs/generational-differences-in-anthropomorphism-and-trust-calibration-for-large-language-models/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Generative AI Synthesis of Automated Interactions into a Structured Agent Briefing",
+        "url": "https://research.google/pubs/generative-ai-synthesis-of-automated-interactions-into-a-structured-agent-briefing/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "GENSTRAT: Toward a Science of Strategic Reasoning in Large Language Models",
+        "url": "https://research.google/pubs/genstrat-toward-a-science-of-strategic-reasoning-in-large-language-models/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "ok",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Google Earth AI Geospatial Reasoning Agent: Capabilities and a Systematic Evaluation",
+        "url": "https://research.google/pubs/google-earth-ai-geospatial-reasoning-agent-capabilities-and-a-systematic-evaluation/",
+        "organization": "Google",
+        "disposition": "title_match_terminal_ledger",
+        "reference": "2026-10-15-review-closure-agent",
+        "prior_id": "2610.15750",
+        "prior_status": "deferred",
+        "note": "Normalized title matches terminal ledger; not newly read in this check."
+      },
+      {
+        "title": "GroupDPO: Memory-Efficient Group-Wise Direct Preference Optimization",
+        "url": "https://research.google/pubs/groupdpo-memory-efficient-group-wise-direct-preference-optimization/",
+        "organization": "Google",
+        "disposition": "title_match_catalog_identity",
+        "reference": "post-training/2604.15602-group-dpo/README.md",
+        "paper_url": "https://arxiv.org/abs/2604.15602v1",
+        "note": "Normalized title matches canonical catalog; not newly read in this check."
+      },
+      {
+        "title": "GS-Offload: Scalable 3D Gaussian Splatting Training System via Host Memory Offloading",
+        "url": "https://research.google/pubs/gs-offload-scalable-3d-gaussian-splatting-training-system-via-host-memory-offloading/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "In Search of \"Weird Corners\": Diagnosing the Limits of Convergent AI in Professional Creative Practice",
+        "url": "https://research.google/pubs/in-search-of-weird-corners-diagnosing-the-limits-of-convergent-ai-in-professional-creative-practice/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Industrial Agentic Engineering",
+        "url": "https://research.google/pubs/industrial-agentic-engineering/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Inference Perf: A Benchmarking Tool for GenAI Inference",
+        "url": "https://research.google/pubs/inference-perf-a-benchmarking-tool-for-genai-inference/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "historical",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Keeping a Secret Requires a Good Memory: Space Lower-Bounds for Private Algorithms",
+        "url": "https://research.google/pubs/keeping-a-secret-requires-a-good-memory-space-lower-bounds-for-private-algorithms/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "KVCIS: Activation-Based Token Importance Prediction for Intelligent KV-Cache Compression",
+        "url": "https://research.google/pubs/kvcis-activation-based-token-importance-prediction-for-intelligent-kv-cache-compression-2/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "historical",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Latent Reasoning with Supervised Thinking States",
+        "url": "https://research.google/pubs/latent-reasoning-with-supervised-thinking-states/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "ok",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Method for Secure AI Grounding using Semantic Token Substitution and Client-Side Re-Hydration",
+        "url": "https://research.google/pubs/method-for-secure-ai-grounding-using-semantic-token-substitution-and-client-side-re-hydration/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Multi-agent cooperation through in-context co-player inference",
+        "url": "https://research.google/pubs/multi-agent-cooperation-through-in-context-co-player-inference/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "ok",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Multi-Agent System for Cognitive Work Automation Using an Adversarial Review Panel",
+        "url": "https://research.google/pubs/multi-agent-system-for-cognitive-work-automation-using-an-adversarial-review-panel/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "historical",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Multi-Modal Multi-Agent Robotic Cognitive Alignment enabled by Non-invasive Consumer Brain Computer Interfaces: A Proof of Concept Exploration",
+        "url": "https://research.google/pubs/multi-modal-multi-agent-robotic-cognitive-alignment-enabled-by-non-invasive-consumer-brain-computer-interfaces-a-proof-of-concept-exploration/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "ok",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Nudging Developers Toward Privacy: Evaluating the Impact of Personalized App Review Reports",
+        "url": "https://research.google/pubs/nudging-developers-toward-privacy-evaluating-the-impact-of-personalized-app-review-reports/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "OBASE: Object-Based Address-Space Engineering to Improve Memory Tiering",
+        "url": "https://research.google/pubs/obase-object-based-address-space-engineering-to-improve-memory-tiering/",
+        "organization": "Google",
+        "disposition": "pre_window_outside_scope",
+        "reference": "https://arxiv.org/abs/2603.00378",
+        "note": "v1 2026-02-27 23:35:24 UTC; v2 August 5. OS/compiler runtime object tiering, with production traces rather than evidence for a new in-scope model or industrial ranking method."
+      },
+      {
+        "title": "Open and Emergent Problems in Agentic Privacy and Security: A Contextual Angle",
+        "url": "https://research.google/pubs/open-and-emergent-problems-in-agentic-privacy-and-security-a-contextual-angle/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "OpenClaw in Practice: Building Laptop-Less Engineering Workflows with an Agent Harness",
+        "url": "https://research.google/pubs/openclaw-in-practice-building-laptop-less-engineering-workflows-with-an-agent-harness/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "OpenClaw in the Wild: Security Analysis of Autonomous Agents",
+        "url": "https://research.google/pubs/openclaw-in-the-wild-security-analysis-of-autonomous-agents/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "historical",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Position: Explainability Research Must Prioritize Foundations over Ad-hoc Methods",
+        "url": "https://research.google/pubs/position-explainability-research-must-prioritize-foundations-over-ad-hoc-methods-2/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "PoTRE: Test-Time Reasoning inspired by Cognitive Heterogeneity",
+        "url": "https://research.google/pubs/potre-test-time-reasoning-inspired-by-cognitive-heterogeneity/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "historical",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Proactive AI for Superintelligent Agents",
+        "url": "https://research.google/pubs/proactive-ai-for-superintelligent-agents/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Probabilistic Governance and Telemetry Framework for Autonomous Agents",
+        "url": "https://research.google/pubs/probabilistic-governance-and-telemetry-framework-for-autonomous-agents/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "historical",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "PROMPTS: Performance Optimization via Multi-Agent Planning for LLM Training and Serving",
+        "url": "https://research.google/pubs/prompts-performance-optimization-via-multi-agent-planning-for-llm-training-and-serving/",
+        "organization": "Google",
+        "disposition": "title_match_catalog_identity",
+        "reference": "agent-research/mlsys2026-prompts/README.md",
+        "paper_url": "https://research.google/pubs/prompts-performance-optimization-via-multi-agent-planning-for-llm-training-and-serving/",
+        "note": "Normalized title matches canonical catalog; not newly read in this check."
+      },
+      {
+        "title": "Prospective multi-pathogen disease forecasting using autonomous LLM-guided tree search",
+        "url": "https://research.google/pubs/prospective-multi-pathogen-disease-forecasting-using-autonomous-llm-guided-tree-search/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "ok",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Query-Aware Source-Risk Triage for Retrieval-Augmented Generation",
+        "url": "https://research.google/pubs/query-aware-source-risk-triage-for-retrieval-augmented-generation/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": null,
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Reasoning Models Generate Societies of Thought",
+        "url": "https://research.google/pubs/reasoning-models-generate-societies-of-thought/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "ok",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Regional Policies for Memory Tiering Systems",
+        "url": "https://research.google/pubs/regional-policies-for-memory-tiering-systems/",
+        "organization": "Google",
+        "disposition": "inherits_prior_outside_scope",
+        "reference": "docs/research-audits/oct23-priority-components/README.md",
+        "note": "Prior source review and current Google description identify generic OS memory tiering; no first-public date inferred."
+      },
+      {
+        "title": "ScholarPeer: A Multi-Agent Framework for Automated Peer Review",
+        "url": "https://research.google/pubs/scholarpeer-a-multi-agent-framework-for-automated-peer-review/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "ok",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Scientist-One: Verifiable Autonomous Research via Chain-of-Evidence",
+        "url": "https://research.google/pubs/scientist-one-verifiable-autonomous-research-via-chain-of-evidence/",
+        "organization": "Google",
+        "disposition": "title_match_terminal_ledger",
+        "reference": "20261021-google-meta-review-and-two-components",
+        "prior_id": "2605.26340",
+        "prior_status": "deferred",
+        "note": "Normalized title matches terminal ledger; not newly read in this check."
+      },
+      {
+        "title": "Securing the Agentic Enterprise",
+        "url": "https://research.google/pubs/securing-the-agentic-enterprise/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Semantic Representation for Agentic Self-Play in Automated Laboratories",
+        "url": "https://research.google/pubs/semantic-representation-for-agentic-self-play-in-automated-laboratories/",
+        "organization": "Google",
+        "disposition": "new_fulltext_reviewed_high_cost",
+        "reference": "https://arxiv.org/pdf/2610.32755v1",
+        "note": "VERID, Google DeepMind; independent paper decision in this file."
+      },
+      {
+        "title": "Smarter tools, weaker minds? Introducing the CTRL theory of Youth–AI dependency",
+        "url": "https://research.google/pubs/smarter-tools-weaker-minds-introducing-the-ctrl-theory-of-youthai-dependency/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "SpatialStack: Layered Geometry-Language Fusion for 3D VLM Spatial Reasoning",
+        "url": "https://research.google/pubs/spatialstack-layered-geometry-language-fusion-for-3d-vlm-spatial-reasoning/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "ok",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Stakes-Adaptive Verification and Origin-Traced Rollback in Autonomous Agent Workflows",
+        "url": "https://research.google/pubs/stakes-adaptive-verification-and-origin-traced-rollback-in-autonomous-agent-workflows/",
+        "organization": "Google",
+        "disposition": "inherits_prior_source_exception",
+        "reference": "docs/research-audits/oct23-priority-components/README.md",
+        "note": "TDC 12058 was recorded as public October 8, before this window. Prior source exception retained; not counted as full-text reviewed."
+      },
+      {
+        "title": "SymptomAI: Toward a Conversational AI Agent for Everyday Symptom Assessment",
+        "url": "https://research.google/pubs/symptomai-toward-a-conversational-ai-agent-for-everyday-symptom-assessment/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "ok",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Synergetic Adaptive Orchestration and Governance: A Unified Framework for Production-Grade Multi-Agent Systems",
+        "url": "https://research.google/pubs/synergetic-adaptive-orchestration-and-governance-a-unified-framework-for-production-grade-multi-agent-systems/",
+        "organization": "Google",
+        "disposition": "pre_window_bibliographic",
+        "reference": "https://ieeexplore.ieee.org/abstract/document/11476668",
+        "note": "IEEE Xplore record existed 2026-04-20. Directory discovery date is not first-public date."
+      },
+      {
+        "title": "TCO-driven Storage Provisioning for Exascale Data Centers",
+        "url": "https://research.google/pubs/tco-driven-storage-provisioning-for-exascale-data-centers/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "The End of SaaS Dashboards: Why 2026 Belongs to Agents-as-a-Service",
+        "url": "https://research.google/pubs/the-end-of-saas-dashboards-why-2026-belongs-to-agents-as-a-service/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "The Horizon Threshold in Cooperative Multi-Agent Reward-Free Exploration",
+        "url": "https://research.google/pubs/the-horizon-threshold-in-cooperative-multi-agent-reward-free-exploration/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "ok",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Towards AI as a Collaborative Partner: A Taxonomy of AI Agent Behavior in Software Engineering",
+        "url": "https://research.google/pubs/towards-ai-as-a-collaborative-partner-a-taxonomy-of-ai-agent-behavior-in-software-engineering/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "out_of_scope",
+        "prior_decision": "out_of_scope",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Type-Aware Ranking of Urban Similarity from Aerial Imagery",
+        "url": "https://research.google/pubs/type-aware-ranking-of-urban-similarity-from-aerial-imagery/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "historical",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "Unified Management System for a Hybrid Workforce of Human and Computational Agents",
+        "url": "https://research.google/pubs/unified-management-system-for-a-hybrid-workforce-of-human-and-computational-agents/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "historical",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "VeriGuard: Enhancing LLM Agent Safety via Verified Code Generation",
+        "url": "https://research.google/pubs/veriguard-enhancing-llm-agent-safety-via-verified-code-generation-2/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "ok",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "VIP-MINGLE: A Corpus for Videoconference and In-Person Multimodal Interaction in Group Language Engagement",
+        "url": "https://research.google/pubs/vip-mingle-a-corpus-for-videoconference-and-in-person-multimodal-interaction-in-group-language-engagement/",
+        "organization": "Google",
+        "disposition": "title_match_terminal_ledger",
+        "reference": "20261021-google-meta-review-and-two-components",
+        "prior_id": "2607.13614",
+        "prior_status": "rejected",
+        "note": "Normalized title matches terminal ledger; not newly read in this check."
+      },
+      {
+        "title": "Visual Planning: Let’s Think Only with Images",
+        "url": "https://research.google/pubs/visual-planning-lets-think-only-with-images/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "ok",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      },
+      {
+        "title": "What Limits Us? Analyzing Self-Reported Limitations in NLP Research",
+        "url": "https://research.google/pubs/what-limits-us-analyzing-self-reported-limitations-in-nlp-research/",
+        "organization": "Google",
+        "disposition": "title_match_terminal_ledger",
+        "reference": "2026-10-25-google-emnlp25-closure",
+        "prior_id": "2609.15191",
+        "prior_status": "rejected",
+        "note": "Normalized title matches terminal ledger; not newly read in this check."
+      },
+      {
+        "title": "When “Correct” Is Not Safe: Can We Trust Functionally Correct Patches Generated by Code Agents?",
+        "url": "https://research.google/pubs/when-correct-is-not-safe-can-we-trust-functionally-correct-patches-generated-by-code-agents-2/",
+        "organization": "Google",
+        "disposition": "inherits_official_review",
+        "reference": "docs/research-audits/oct15-review-closure/google-source-review.json",
+        "prior_status": "historical",
+        "prior_decision": "historical",
+        "note": "Exact URL and title match earlier per-record review; its archive status is preserved."
+      }
+    ]
+  },
+  "reviews": [
+    {
+      "id": "2611.05643",
+      "title": "Data-Efficient Scaling-Law Discovery for Recommendation Systems via Coupled Hyperparameter Scaling",
+      "organization": "Meta",
+      "track": "recommendation",
+      "published": "2026-11-03T21:27:46Z",
+      "revision": 1,
+      "priority": "P0",
+      "source_url": "https://arxiv.org/pdf/2611.05643v1",
+      "locations": [
+        "p. 1 author block",
+        "§3.1 scaling layer",
+        "§4 Axia model and acquisition",
+        "§6 Deployment Comparison and Measurements (PDF p. 6)",
+        "§6.4 and Table 3 (PDF p. 8)"
+      ],
+      "reason": "原文联合约束架构参数，基于代理与后验采集提出规模点，再按实测 Pareto 前沿和车队效用选择。部署用各生产模型原配置作对照；业务指标来自实流量 A/B。两周期分别 11 个模型 +0.07% 与 23 个模型 +0.29%；+0.36% 是互不相交周期的相加，不是独立聚合 A/B 或系统级随机对照。原文没有披露业务指标名称、分流比例或显著性。 完整实验成本过高，不复现（审查 DONE）。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/pdf/2611.05643v1",
+        "basis": "§6.1–6.4、Table 3；生产数据及模型配置未公开、无等价单卡重跑。",
+        "scale": "两次开发周期的 34 次 Meta 广告排序/召回生产模型迭代、多个真实完整训练试验和专有部署数据；新增服务预算为前代 1.2–10 倍。",
+        "available_resource": "单张 A100/A30 或本地 Mac；没有启动训练、API 或硬件实验。",
+        "cost_type": "published_configuration_not_local_measurement"
+      },
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "first_author": "John Martabano Landy",
+      "first_author_affiliation": "Meta",
+      "industrial_gate_passed": true,
+      "online_evidence": {
+        "metric": "unspecified primary business metrics",
+        "control": "incumbent production configuration produced by manual scaling process",
+        "cycle_1_lift_pct": 0.07,
+        "cycle_2_lift_pct": 0.29,
+        "reported_sum_pct": 0.36,
+        "source": "§6 Setup and §6.4/Table 3",
+        "aggregate_is_sum_not_separately_measured": true
+      },
+      "author_code": null,
+      "code_status": "固定 PDF 未找到作者方法源码；文中引用的 BoTorch 不是 Axia。"
+    },
+    {
+      "id": "2610.22603",
+      "title": "At the Limits of Computability: Steps Towards Autonomous AI Discovery on the Busy Beaver Frontier",
+      "organization": "Google DeepMind / University of Cambridge",
+      "track": "agent",
+      "published": "2026-10-15T19:56:48Z",
+      "revision": 2,
+      "priority": "P0",
+      "source_url": "https://arxiv.org/html/2610.22603v2",
+      "locations": [
+        "PDF first page author indices",
+        "§3.1–3.5",
+        "§4.1–4.3",
+        "Appendices C–E"
+      ],
+      "reason": "上海时间 10 月 16 日 03:56:48。轨迹压缩抽象模式、代理猜测与模拟筛选、非正式证明和独立 Lean 检查；已证明规则描述 11 台机器的行为，但没有证明这些机器停机或不停止。 完整实验成本过高，不复现（审查 DONE）。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.22603v2",
+        "basis": "§3.5、§4.1–4.3；72 小时是上限，不是本地实测或所有证明的实际耗时。",
+        "scale": "1,094+65+4 个 holdouts，每台先模拟 500 万步及取最多 100 个模式；Gemini 3.1 Pro 多代理与 Lean 4.28.1，单项形式验证最长允许 72 小时。",
+        "available_resource": "单张 A100/A30 或本地 Mac；没有启动训练、API 或硬件实验。",
+        "cost_type": "published_configuration_not_local_measurement"
+      },
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "first_author": "Marco Dos Santos",
+      "first_author_affiliation": "Google DeepMind / University of Cambridge",
+      "author_code": "https://github.com/google-deepmind/cryptids",
+      "code_status": "作者公开 Lean 证明产物与相关代码；未核实完整代理生成和验证管线被发布。",
+      "version_evidence": "https://arxiv.org/abs/2610.22603"
+    },
+    {
+      "id": "2610.27307",
+      "title": "Evolving Self-tuning Benchmarks for Long-Horizon Tool Use",
+      "organization": "Stanford University / Google DeepMind / University of Washington",
+      "track": "agent",
+      "published": "2026-10-19T21:22:08Z",
+      "revision": 2,
+      "priority": "P0",
+      "source_url": "https://arxiv.org/html/2610.27307v2",
+      "locations": [
+        "PDF first page author indices",
+        "§3.1–3.3",
+        "§4 Experiments",
+        "§5.1, §5.4",
+        "Appendix B"
+      ],
+      "reason": "使用 proposer 修改可执行任务、solver 重跑估计难度、feedback generator 总结失败，再用 AlphaEvolve 探索目标难度附近的任务。工作在 DeepMind 实习期间开展，第一作者署名 Stanford。 完整实验成本过高，不复现（审查 DONE）。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.27307v2",
+        "basis": "§4 进化步数、每任务尝试次数和模型规格。",
+        "scale": "Gemma 4 31B-it 主 solver 与 feedback generator，AppWorld 1,000 步，其他基准各 500 步，每个新任务重跑 10 次；另有两个 Gemini API 模型及不同检索条件。",
+        "available_resource": "单张 A100/A30 或本地 Mac；没有启动训练、API 或硬件实验。",
+        "cost_type": "published_configuration_not_local_measurement"
+      },
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "first_author": "Hyunji Alex Nam",
+      "first_author_affiliation": "Stanford University",
+      "author_code": null,
+      "code_status": "固定正文未找到 TURTLE 作者源；OpenEvolve、AlphaEvolve 和基准环境是依赖，不是该论文完整代码。",
+      "version_evidence": "https://arxiv.org/abs/2610.27307"
+    },
+    {
+      "id": "2610.32755",
+      "title": "Semantic Representation for Agentic Self-Play in Automated Laboratories",
+      "organization": "Google Research / Google Cloud / Google DeepMind",
+      "track": "agent",
+      "published": "2026-10-23T15:00:16Z",
+      "revision": 1,
+      "priority": "P0",
+      "source_url": "https://arxiv.org/pdf/2610.32755v1",
+      "locations": [
+        "PDF p. 1 author block",
+        "§2 semantic representation and digital twin",
+        "§3–4 case studies",
+        "§6.1–6.3"
+      ],
+      "reason": "VERID 持久同步工作单元与数字孪生状态：命令先在克隆的状态上模拟检查，分发前再校验当前真实状态，采集多模态轨迹做诊断。不能用合成回调替代真实仪器验证。 完整实验成本过高，不复现（审查 DONE）。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/pdf/2610.32755v1",
+        "basis": "§6.1–6.2 原文实物/模型要求，不是 CUDA 算力不足或本地耗时估计。",
+        "scale": "三项物理案例使用内部 Gemini 4 Argon checkpoint、Hamilton Microlab STAR 移液机、Byonoy 96 孔板读数器、UFACTORY Lite 6 机器人臂及视觉记录。",
+        "available_resource": "单张 A100/A30 或本地 Mac；没有启动训练、API 或硬件实验。",
+        "cost_type": "published_configuration_not_local_measurement"
+      },
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "first_author": "Yves Delley",
+      "first_author_affiliation": "Google Research",
+      "author_code": null,
+      "code_status": "未核实 VERID 完整公开实现；PyLabRobot 是依赖。",
+      "official_url": "https://research.google/pubs/semantic-representation-for-agentic-self-play-in-automated-laboratories/"
+    },
+    {
+      "id": "2611.08376",
+      "title": "Muir: Linear Attention with Sensitivity-Allocated Gating and Matched-Filter Readout",
+      "organization": "University of Texas at Austin / Google",
+      "track": "foundation-model",
+      "published": "2026-11-05T17:53:49Z",
+      "revision": 1,
+      "priority": "P0",
+      "source_url": "https://arxiv.org/html/2611.08376v1",
+      "locations": [
+        "PDF p. 1 author block",
+        "§2 accelerators and chunk execution",
+        "§3 gating/readout and stable parallel update",
+        "§4.1 training setup and results"
+      ],
+      "reason": "按擦除与写入敏感度分配低秩门控，并以匹配滤波读出调节不同衰减行；原文用并行求解稳定大 chunk，CPU 小张量不能证明 TPU 内核吞吐。 完整实验成本过高，不复现（审查 DONE）。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2611.08376v1",
+        "basis": "原论文摘要及 §4 规模，§2/3 TPU 专用计算路径。",
+        "scale": "166M–1.34B 模型、100B-token 训练/验证预算及长上下文矩阵；Google TPU7x Ironwood 高性能内核。",
+        "available_resource": "单张 A100/A30 或本地 Mac；没有启动训练、API 或硬件实验。",
+        "cost_type": "published_configuration_not_local_measurement"
+      },
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "first_author": "Tushaar Gangavarapu",
+      "first_author_affiliation": "University of Texas at Austin / Google",
+      "author_code": null,
+      "code_status": "固定正文未找到 Muir 作者源码；JAX/Pallas/FLA 链接为依赖与基线。",
+      "official_url": "https://research.google/pubs/muir-linear-attention-with-sensitivity-allocated-gating-and-matched-filter-readout/"
+    },
+    {
+      "id": "2611.08998",
+      "title": "Seeing vs. Counting: Complexity Twins Show Where Multimodal LLMs Fail on Diagrams",
+      "organization": "Google",
+      "track": "foundation-model",
+      "published": "2026-11-06T05:17:08Z",
+      "revision": 1,
+      "priority": "P0",
+      "source_url": "https://arxiv.org/html/2611.08998v1",
+      "locations": [
+        "author affiliation",
+        "§3 Complexity Twins",
+        "§4 Benchmark and Protocol",
+        "§5 Seeing at Benchmark Scale",
+        "Appendix G reproducibility and cost",
+        "Appendices I, P, Q"
+      ],
+      "reason": "在同一图像上成对设置不同计数复杂度的问题，以转录探针与文本对照区分读错与算错；不把配对图数据或基准公式当成模型能力复现。 完整实验成本过高，不复现（审查 DONE）。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2611.08998v1",
+        "basis": "§4 与附录 G/I/P/Q。成本估算是作者报价乘用量，不是本地实测；子集数字不能和总量相加。",
+        "scale": "正文主结果与种子扩展 21,534 次独立 API 评分调用，自托管 Gemma 4 34,592 次、Qwen3-VL 19,458 次，含 31B 与 32B；附录 G 另列 13,886 次子集 API 成本估算 $314.93。",
+        "available_resource": "单张 A100/A30 或本地 Mac；没有启动训练、API 或硬件实验。",
+        "cost_type": "published_configuration_not_local_measurement"
+      },
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "first_author": "Yin Liu",
+      "first_author_affiliation": "Google",
+      "author_code": null,
+      "code_status": "附录 G 说明生成器、题集和运行记录将公开；未核实独立可执行作者仓。",
+      "official_url": "https://research.google/pubs/seeing-vs-counting-complexity-twins-show-where-multimodal-llms-fail-on-diagrams/"
+    },
+    {
+      "id": "2610.39339",
+      "title": "Does the Citation Matter? Quality, Grounding, and Physician-Rubric Accuracy of Google's AI Overviews for Medical Information",
+      "organization": "Northwestern University",
+      "track": "recommendation",
+      "published": "2026-10-29T04:31:44Z",
+      "revision": 1,
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.39339v1",
+      "locations": [
+        "author block",
+        "§2 Methods",
+        "§3 Results",
+        "§6 Data and Code Availability"
+      ],
+      "reason": "只观察既有 Google AI Overviews 的医学搜索、引文质量和与医生 rubric 的一致性，未部署/评估一个新的推荐、检索或 Agent 方法；作者不是 Google。",
+      "decision": "rejected",
+      "resolution": "not_selected",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented"
+    },
+    {
+      "id": "2610.40936",
+      "title": "Fair Recommender Systems for Intersecting Groups",
+      "organization": "Georgia Institute of Technology",
+      "track": "recommendation",
+      "published": "2026-10-29T20:12:07Z",
+      "revision": 1,
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.40936v1",
+      "locations": [
+        "author block",
+        "§6 Datasets and Methodology",
+        "Appendices C–D"
+      ],
+      "reason": "算法是 intersection-aware UCB；评估用 Goodreads 与 BoardGameGeek 评分模拟，不是生产 A/B 或全量上线。Meta 是查询误命中。",
+      "decision": "rejected",
+      "resolution": "not_selected",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "industrial_gate_passed": false
+    },
+    {
+      "id": "2611.04225",
+      "title": "IntentGEO: Intent-aware Generative Engine Optimization for Recommendation",
+      "organization": "Renmin University of China / National University of Singapore",
+      "track": "recommendation",
+      "published": "2026-11-03T03:04:18Z",
+      "revision": 1,
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2611.04225v1",
+      "locations": [
+        "author block",
+        "§3.3 Datasets",
+        "§5.1–5.2",
+        "Appendix B Online Doubao"
+      ],
+      "reason": "不是 Meta 作者。论文做控制查询、源内容优化与 Doubao 黑箱探测；线上接口可访问不等于把新算法分流给生产用户，未核实业务 A/B 或全流量。",
+      "decision": "rejected",
+      "resolution": "not_selected",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "industrial_gate_passed": false
+    },
+    {
+      "id": "2611.07659",
+      "title": "Simple Meta-Learning for HPO and CASH Using Performance Representations",
+      "organization": "Delft University of Technology",
+      "track": "foundation-model",
+      "published": "2026-11-05T08:45:04Z",
+      "revision": 1,
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2611.07659v1",
+      "locations": [
+        "author block",
+        "§3 scope and acquisition",
+        "§4",
+        "Appendix B.1 and B.10"
+      ],
+      "reason": "此处 Meta 是元学习，不是机构；主要研究表格 AutoML 的固定配置集合选择，two-tower 附加实验也不是新大模型架构或工业线上方案。",
+      "decision": "rejected",
+      "resolution": "not_selected",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented"
+    },
+    {
+      "id": "2611.08151",
+      "title": "Machine learning quantum data to accelerate quantum Monte Carlo",
+      "organization": "Google Quantum AI and collaborators",
+      "track": "foundation-model",
+      "published": "2026-11-05T15:10:10Z",
+      "revision": 1,
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2611.08151v1",
+      "locations": [
+        "author block",
+        "main results",
+        "Supplement §S1–S2"
+      ],
+      "reason": "学习量子态代理加速量子化学 Monte Carlo；不涉及当前模型、Agent、后训练或工业搜广推目标。",
+      "decision": "rejected",
+      "resolution": "not_selected",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented"
+    },
+    {
+      "id": "2611.09728",
+      "title": "SAGE-PAIR: Source-Pretrained Routed Residual Adaptation for Sparse-Feedback Recommendation",
+      "organization": "Southwest Jiaotong University / Peking University / Guangzhou University",
+      "track": "recommendation",
+      "published": "2026-11-06T17:06:10Z",
+      "revision": 1,
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2611.09728v1",
+      "locations": [
+        "author block",
+        "§5.1 Table 1",
+        "§6"
+      ],
+      "reason": "在冻结源模型上评估稀疏目标反馈，数据是 KuaiRand、KuaiRec、Tenrec 和 KuaiSAR-v2 的时间切分与历史标注，未见生产 A/B 或全流量；不是 Meta 作者。",
+      "decision": "rejected",
+      "resolution": "not_selected",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "industrial_gate_passed": false
+    }
+  ],
+  "source_exceptions": [
+    {
+      "title": "Beyond the Emulator: Bridging the Sim-to-Real Gap in Mobile Agent Benchmarking",
+      "url": "https://research.google/pubs/beyond-the-emulator-bridging-the-sim-to-real-gap-in-mobile-agent-benchmarking/",
+      "scope": "Mobile Agent benchmark",
+      "reason": "Google 条目链接 OpenReview 0rA1AvKI8I，但论坛、PDF 和 API 路径遇验证拦截或 HTTP 403。无法确认首公开日或论文正文；官方条目可用于记录研究方向，不能据此排期。",
+      "attempts": [
+        "Google Research detail retrieved with OpenReview identifier",
+        "https://openreview.net/forum?id=0rA1AvKI8I",
+        "https://openreview.net/pdf?id=0rA1AvKI8I",
+        "https://api2.openreview.net/notes?id=0rA1AvKI8I",
+        "https://api.openreview.net/notes?id=0rA1AvKI8I"
+      ],
+      "reopen_when": "OpenReview 恢复可读，或作者发布有日期的同版原稿。",
+      "counts_as_accepted": false,
+      "blocking": false
+    },
+    {
+      "title": "Depth-CoT Tradeoffs in Transformers: A Look at Path Following",
+      "url": "https://research.google/pubs/depth-cot-tradeoffs-in-transformers-a-look-at-path-following/",
+      "scope": "Foundation model / depth versus chain-of-thought",
+      "reason": "Google 详情只列 2027 年，未提供原稿，精确题名检索未找到可证实首公开的同篇全文。理论与最多五层 Transformer 的路径跟随是目录摘要，尚不能作全文证据。",
+      "attempts": [
+        "Google Research detail retrieved; displayed year 2027",
+        "Exact-title search found no verified manuscript"
+      ],
+      "reopen_when": "作者发布带日期的同篇原稿、正式论文链接或 DOI。",
+      "counts_as_accepted": false,
+      "blocking": false
+    },
+    {
+      "title": "Scaling Public Input on AI Policy with Pluralistic Agents",
+      "url": "https://github.com/google-deepmind/pluralistic_agents",
+      "scope": "Multi-Agent / policy simulations",
+      "reason": "作者仓已公开源码与数据，但精确题名检索及官方仓未找到可核验论文全文、DOI 或独立首公开日；GitHub 创建时间只证明仓库记录。",
+      "attempts": [
+        "read Google DeepMind public repository and README",
+        "search exact title and arXiv",
+        "GitHub API repository metadata created 2026-11-04T21:13:33Z"
+      ],
+      "reopen_when": "作者发布可核验论文全文或 DOI。",
+      "counts_as_accepted": false,
+      "blocking": false
+    }
+  ],
+  "other_official_observations": [
+    {
+      "title": "F3 Lightning",
+      "url": "https://engineering.fb.com/2026/11/03/ml-applications/f3-lightning-how-meta-accelerates-ads-ml-features-to-production/",
+      "date": "2026-11-03",
+      "decision": "engineering_release_not_paper_or_business_ab",
+      "reason": "Feature release-to-production 3.6× 是系统交付延时对照；不是新排序模型业务 A/B。"
+    },
+    {
+      "title": "GEM Training",
+      "url": "https://engineering.fb.com/2026/08/03/ml-applications/training-gem-at-llm-scale-meta-ads-recommendation-foundation-model/",
+      "date": "2026-08-03",
+      "decision": "older_engineering_post",
+      "reason": "档案列表日期与原文不一致，采用原文发表页；原始发布不在本窗。"
+    },
+    {
+      "title": "Specialized Models to Muse and Meta AI",
+      "url": "https://research.meta.ai/blog/specialized-models-for-muse-and-metaai",
+      "date": "2026-11-06",
+      "decision": "product_update_not_method_paper",
+      "reason": "介绍上线专用模型，不提供可独立核对的新论文。"
+    },
+    {
+      "title": "Agentic cheminformatics with Google Antigravity",
+      "url": "https://deepmind.google/blog/agentic-cheminformatics-with-google-antigravity/",
+      "date": "2026-11-03",
+      "decision": "product_workflow_not_paper",
+      "reason": "工具工作流介绍，不等同于新的论文实验。"
+    }
+  ]
+}

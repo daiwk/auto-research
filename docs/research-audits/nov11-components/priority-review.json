@@ -1,0 +1,455 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-11-11",
+  "task": "bounded priority original-source review and explicitly assigned low-cost components",
+  "nominal_new_window": {
+    "start": "2026-11-08",
+    "end": "2026-11-11",
+    "timezone": "Asia/Shanghai"
+  },
+  "all_sources_exhaustive": false,
+  "scope": "Google/Meta优先的当期官方边界核对与独立方法补漏；不重爬历史全站，不等同完整水位审查。",
+  "counts": {
+    "selected_components": 2,
+    "new_official_report_high_cost": 1,
+    "independent_historical_method_backfills": 2,
+    "rejected_industrial_online_gate": 1,
+    "known_duplicates": 2
+  },
+  "reviewed_papers": [
+    {
+      "key": "reprobridge",
+      "id": "2611.08452",
+      "title": "ReproBridge: Building Reproducibility into ML Research Artifacts",
+      "intake_class": "historical_backfill",
+      "first_release_utc": "2026-11-05T18:45:36Z",
+      "first_release_shanghai": "2026-11-06T02:45:36+08:00",
+      "announcement_or_discovery_date": "2026-11-11",
+      "discovery_is_not_first_release": true,
+      "verified_organizations": "University of Waterloo / Google",
+      "priority": "P0",
+      "fixed_source": {
+        "capture": ".cache/nov11-components/priority/reprobridge.html",
+        "sha256": "9fe82d65e120f565a1df3d2017b6e615ccd53a6cc42aa12c6f783d40ca05d582",
+        "bytes": 560995,
+        "retrieved_at": "2026-11-11T09:47:45.139627+00:00",
+        "url": "https://arxiv.org/html/2611.08452v1",
+        "transport_status": "HTTP200",
+        "content_status": "retrieved"
+      },
+      "original_affiliation_evidence": "fixed HTML author block: YuboWangWaterloo+Google;RuiMeng/JaehyunNam/TomasPfister/JinsungYoonGoogle",
+      "upstream_code_url": null,
+      "upstream_code_status": "作者项目页明确Code和Dataset处于内部审查；截至2026-11-11未发布作者源码，不把项目介绍当开源实现",
+      "decision": "selected_low_cost_component",
+      "implementation_status": "component_only",
+      "review_done": true,
+      "full_article_read": false,
+      "source_review_scope": "author block,§2.3–2.4,§3.1–3.2,§4.1,§E.1 and project release notice",
+      "production_online_ab": "not reported; public/offline benchmark or simulated deployment, not production A/B",
+      "low_cost_component": "CPU只实现四件套哈希合同、输出新鲜度/字节/路径机械检查、Eq1真实Student-t预测区间和外部局部审计发现的判定逻辑。私有参考和成功标准不进入ActorTask。没有LLM Reproducer、语义Auditor、官方任务或真实复现能力比较；同一合成真值表三seed不升级L1。",
+      "component_code": "src/auto_research/agent_research/reprobridge.py",
+      "dedup_before_this_batch": {
+        "manifest": "absent by exactID/title before adding new specs",
+        "ledger": "absent by exactID/title",
+        "nov09_register": "absent by exactID/title",
+        "scope": "independent method backfill, not a claim that a November11 announcement is a new first release"
+      },
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2611.08452v1",
+        "source_location": "§4.1, §E.1 and project release notice",
+        "available_resource": "one NVIDIA A100 or A30, or local Mac",
+        "model_scale": "four coding models; construction/reproduction/audit are independent sessions; GPU experiments use 8×H100-80GB",
+        "data_scale": "36 papers,387 experiments,1,029tasks; five independent reference observations per task",
+        "estimated_cost_basis": "24-hour wall-clock per paper/model/condition; author construction API spending alone $5,026,excluding GPU,audit and reference development; not local timing",
+        "decision": "完整实验成本过高，不复现（审查 DONE）；只运行CPU数学和证据合同，不发API，不下载模型或训练数据"
+      },
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false
+    },
+    {
+      "key": "lisa",
+      "id": "2605.14454",
+      "title": "LiSA: Lifelong Safety Adaptation via Conservative Policy Induction",
+      "intake_class": "historical_backfill",
+      "first_release_utc": "2026-05-14T06:47:35Z",
+      "first_release_shanghai": "2026-05-14T14:47:35+08:00",
+      "announcement_or_discovery_date": "2026-11-11",
+      "discovery_is_not_first_release": true,
+      "verified_organizations": "Google Cloud AI Research / Seoul National University",
+      "priority": "P0",
+      "fixed_source": {
+        "capture": ".cache/nov11-components/priority/lisa.html",
+        "sha256": "239de7f9abb1981f7d67ca54837a34262e7a9e60dd6f5fe80afa4a6f670b4308",
+        "bytes": 352992,
+        "retrieved_at": "2026-11-11T09:47:44.214891+00:00",
+        "url": "https://arxiv.org/html/2605.14454v1",
+        "transport_status": "HTTP200",
+        "content_status": "retrieved"
+      },
+      "original_affiliation_evidence": "PDF page1 visually checked: Minbeom Kim1,2;1GoogleCloudAIResearch;2SeoulNationalUniversity;HTML omitted his affiliation",
+      "upstream_code_url": null,
+      "upstream_code_status": "固定v1正文与Google官方详情未找到公开作者实现；明确未核实已开源",
+      "decision": "selected_low_cost_component",
+      "implementation_status": "component_only",
+      "review_done": true,
+      "full_article_read": false,
+      "source_review_scope": "v1PDFauthorblock,§3.1–3.4,§4.1–4.2,AppendixC.1–4",
+      "production_online_ab": "not reported; public/offline benchmark or simulated deployment, not production A/B",
+      "low_cost_component": "CPU执行真实Beta分位数、average-linkage余弦聚类/代表原句、标签支持矛盾汇总、按领域混合案例的局部提示、两通道检索上限及原句存活统计继承。LLM策略草稿和语义embedding由显式外层提供；本地合成输入不是最终guardrail/安全能力，heldout组拒绝进入适应；没有API模型或Evolve晋级。",
+      "component_code": "src/auto_research/agent_research/lisa.py",
+      "dedup_before_this_batch": {
+        "manifest": "absent by exactID/title before adding new specs",
+        "ledger": "absent by exactID/title",
+        "nov09_register": "absent by exactID/title",
+        "scope": "independent method backfill, not a claim that a November11 announcement is a new first release"
+      },
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2605.14454v1",
+        "source_location": "§4.2, AppendixC.1–4",
+        "available_resource": "one NVIDIA A100 or A30, or local Mac",
+        "model_scale": "Gemini3.1flash-lite/ClaudeHaiku4.5 online, Gemini3.1pro offline manager, Geminiembedding001 managed API",
+        "data_scale": "three public benchmark streams;5–10days, daily heldout evaluation,5seeds,noise and ablations",
+        "estimated_cost_basis": "many managed inference/embedding/induction calls across the full matrix; paper does not provide a safe short single-device runtime; no trial launched",
+        "decision": "完整实验成本过高，不复现（审查 DONE）；只做CPU数学与有界记忆流程，不发API或下载checkpoint"
+      },
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false
+    },
+    {
+      "key": "alphaproof-code",
+      "id": null,
+      "title": "AlphaProof Code: Verifying Signal's Security at the Machine-Code Level",
+      "intake_class": "new_official_report",
+      "published": "2026-11-10",
+      "publication_precision": "day",
+      "publication_basis": "PDFpage1andofficialannouncement; no arXiv identity or exact UTC time asserted",
+      "verified_organizations": [
+        "Google DeepMind",
+        "Google"
+      ],
+      "affiliation_evidence": "PDFpage1 visually checked: Chaudhuri/Ferraiuolo/Kovsharov/Chajed/Sutton/Kohli=GoogleDeepMind;Schlesinger/Seth/Katz=Google",
+      "fixed_source": {
+        "capture": ".cache/nov11-components/priority/alphaproof.pdf",
+        "sha256": "cf813b7192ed247d33003e09cfa612fcda695502eb03768cd96c849afe1cb0a4",
+        "bytes": 888318,
+        "retrieved_at": "2026-11-11T09:47:46.547366+00:00",
+        "url": "https://deepmind.google/documents/36/Formal_Verification_of_Signal_4.pdf",
+        "transport_status": "HTTP200",
+        "content_status": "retrieved"
+      },
+      "upstream_code_url": "https://github.com/google-deepmind/code-verification",
+      "upstream_code_revision": "808b4b7ffef198e6a91f71ed776d641a1c236882",
+      "upstream_code_scope": "public proof/specification/checking artifacts; not assumed to include a turnkey autonomous proving campaign",
+      "decision": "not_reproduced_high_cost",
+      "implementation_status": "deferred_high_cost",
+      "review_done": true,
+      "full_article_read": false,
+      "source_review_scope": "PDFpages1–3,officialproject§2.4and§7,pinnedREADMEBuildingandVerifying",
+      "method": "human-approved specification; isolated immutable baseline; untrusted prover teams; Lean kernel plus comparator checks theorem and all transitive definitions,standard axioms and fresh kernel replay",
+      "local_code": "无本地复现；仅成本审查文档",
+      "production_online_ab": "no randomized traffic A/B or business uplift; verification of deployed cryptographic implementation is a different evidence class",
+      "cost_assessment": {
+        "source_url": "https://github.com/google-deepmind/code-verification/blob/808b4b7ffef198e6a91f71ed776d641a1c236882/README.md",
+        "source_location": "Building and Verifying; technical report §7",
+        "scale": "about6.5million proof lines; several-hour CPU builds at15–34GiB peak RAM; five-person/four-week original development",
+        "available_resource": "one NVIDIA A100 or A30, or local Mac",
+        "cost_type": "published_configuration_not_local_measurement",
+        "decision": "成本过高，不复现（审查 DONE）；不克隆大仓库、不安装大型工具链、不试构建"
+      },
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "promotion_eligible": false,
+      "evolve_integrated": false
+    }
+  ],
+  "excluded_or_duplicate": [
+    {
+      "id": "2611.13539",
+      "revision": 1,
+      "title": "Exploiting Feature-invariant Scaling Laws for Efficient A/B Experimentation in Recommendation Systems",
+      "first_release_utc": "2026-11-10T04:02:31Z",
+      "source": {
+        "capture": ".cache/nov11-components/priority/scaling-ab.html",
+        "sha256": "cbc2106934750a9003435e951d36b6dd11c981c631191627ba0231bcb2f12964",
+        "bytes": 327705,
+        "retrieved_at": "2026-11-11T10:03:50.483599+00:00",
+        "url": "https://arxiv.org/html/2611.13539v1",
+        "transport_status": "HTTP200",
+        "content_status": "retrieved"
+      },
+      "verified_organizations": [
+        "Meta",
+        "National University of Singapore"
+      ],
+      "affiliation_evidence": "authorblock:ZhiliangChenMeta+NUS;SammyNammari/JiahaoSu/XiaoqiangLuoMeta",
+      "source_review_scope": "§5.2–5.3,§8.1,§8.3,§9.1,§10.2",
+      "decision": "rejected_online_evidence_not_established",
+      "reason": "正文A/B是候选架构/特征/优化器的离线实验对照：Criteo4.2B训练/178M末日validation、MovieLens20M、Llama/Qwen。未建立真实生产随机流量、量化线上收益和生产对照证据；标题A/B和online data动机不能替代门槛。按既有工业标准本轮不收录，不改到foundation/评测接口绕门槛，不创建经典例外。",
+      "method_note": "log-linear OLS;Student-t for fitted full-scale mean usesσsqrt[x*(X'X)^−1x*],without+1;beneficialifPr(Lfeature<.99Lbaseline)>.9. Statistical kernel remains only a future user-approved opportunity,not this batch.",
+      "cost_note": "原完整配置Wukong/LLM8×A100、HSTU100epochs和40+特征变化；这里只陈述原文成本，不用成本理由包装成接受/实现。",
+      "accepted": false,
+      "implemented": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "key": "e-means",
+      "id": "2611.09501",
+      "decision": "known_catalogued_duplicate",
+      "reason": "现manifest/ledger与Nov9register均已catalogued；11/9–11/11新闻热度不构成新首发或新实现任务。"
+    },
+    {
+      "key": "gslm2",
+      "decision": "known_catalogued_duplicate",
+      "reason": "manifest已有gslm2，root核实已有收录，不重新计为新增。"
+    },
+    {
+      "key": "fm-changenet",
+      "id": "2607.04750",
+      "decision": "historical_specialized_application_not_selected_this_batch",
+      "official_url": "https://research.google/pubs/fm-changenet-flow-matching-network-for-change-detection/",
+      "primary_url": "https://arxiv.org/abs/2607.04750",
+      "first_release_utc": "2026-07-06T07:42:58Z",
+      "reason": "本轮官方第31页URL新增，Download直接对应首作和作者相同的七月遥感变化检测稿；arXiv元数据已核，不按ID月份或目录发现日期猜首发。当前只做身份/日期/摘要选题，不声称方法/成本/机构原文核验。"
+    },
+    {
+      "title": "Case study: How much does it cost to maintain a copy of an open source software package (at Google)?",
+      "decision": "out_of_scope",
+      "reason": "新目录链接为OSS维护成本经验研究，无独立模型/Agent新算法或公开能力基准。"
+    },
+    {
+      "title": "Mentorship, Interrupted: How AI Disrupts the GSoC Pipeline and Why Mentors Matter More",
+      "decision": "out_of_scope",
+      "reason": "新目录链接为15位mentor/组织管理者的定性访谈和治理框架，无独立模型训练/Agent算法或能力benchmark。"
+    }
+  ],
+  "official_coverage": [
+    {
+      "organization": "Google",
+      "actual_pages": [
+        "https://research.google/pubs/?category=2026&sort=-publication__year",
+        "https://research.google/pubs/?category=2026&sort=-publication__year&page=31"
+      ],
+      "current_visible_counts": {
+        "first": 15,
+        "last": 12
+      },
+      "exact_diff_against_prior_last9": 3,
+      "disposition_of_delta": "FM-ChangeNetJulyhistoricalapplication;twoOSS/governance reportsoutsidealgorithmfocus",
+      "limitations": "Onlyfirstandlastpagescheckednow;prior30pagecapturesremaininheriteddatedevidence;462vs450isnot12newpapers."
+    },
+    {
+      "organization": "Google DeepMind",
+      "actual_pages": [
+        "https://deepmind.google/research/publications/",
+        "https://deepmind.google/blog/introducing-alphaproof-code/"
+      ],
+      "observation": "publicationlandinghashunchangedversuspriorboundedreview;newAlphaProofCodefoundviaofficialNov10blog/project,notinferredfromdirectorytotal",
+      "limitations": "SelectedpublicationlistnotwholeDeepMindoutput"
+    },
+    {
+      "organization": "Meta",
+      "actual_pages": [
+        "https://research.meta.ai/",
+        "https://ai.meta.com/research/publications/"
+      ],
+      "observation": "researchhomeidenticalpriorcapturelatestNov9MuseEmber;publicationHTTP200returns45-byteSorrycontentunavailable",
+      "limitations": "Curatedhomepageisnotpublicationcensus;blockedprimarydirectoryretainedasactualsourceaccesslimitation;nomodel-name-basedaffiliation"
+    }
+  ],
+  "dedup_snapshot": {
+    "before_integration": true,
+    "manifest_sha256": "1c5153870636ca5917e6292a2b553c9850de6fd742619f2d4da4c138c8b83edf",
+    "ledger_sha256": "7903e3afc699b358d28b84ad95e57e07c8883c41374f0f8fc994a3acd83e14f6",
+    "nov09_register_sha256": "0b67aa8c1830c59556f933a2d436a4a7a9ec7c125bd23b27925da3d6d2c5e522",
+    "note": "Point-in-time source hashes at bounded review before root-generated catalogs integrate these new leaf specs,not a requirement that the eventual merged snapshots remain unchanged."
+  },
+  "source_receipts": [
+    {
+      "capture": ".cache/nov11-components/priority/alphaproof-blog.html",
+      "sha256": "29c2f431d1f6afe2125bf34319f05f87e4c802dd3548782522c618aefd1c1cc8",
+      "bytes": 30066,
+      "retrieved_at": "2026-11-11T09:47:46.584840+00:00",
+      "url": "https://deepmind.google/blog/introducing-alphaproof-code/",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/alphaproof-project.html",
+      "sha256": "3436b07ab2d661dff5217f6f2074d3ea9c459815fd072f62e53892d83c8fd061",
+      "bytes": 1985046,
+      "retrieved_at": "2026-11-11T09:48:37.057153+00:00",
+      "url": "https://google-deepmind.github.io/code-verification",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/alphaproof-readme.md",
+      "sha256": "eaf6b742fa399084521b416c57bca7558e7911d92cd44adf2edfe529f89c4acd",
+      "bytes": 6488,
+      "retrieved_at": "2026-11-11T10:11:40.865506+00:00",
+      "url": "https://raw.githubusercontent.com/google-deepmind/code-verification/808b4b7ffef198e6a91f71ed776d641a1c236882/README.md",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/alphaproof.pdf",
+      "sha256": "cf813b7192ed247d33003e09cfa612fcda695502eb03768cd96c849afe1cb0a4",
+      "bytes": 888318,
+      "retrieved_at": "2026-11-11T09:47:46.547366+00:00",
+      "url": "https://deepmind.google/documents/36/Formal_Verification_of_Signal_4.pdf",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/deepmind-publications.html",
+      "sha256": "30d4dcbb7ed594f587f9d6411f2c48214d313926343c91e15848780355e72911",
+      "bytes": 142847,
+      "retrieved_at": "2026-11-11T09:49:47.200696+00:00",
+      "url": "https://deepmind.google/research/publications/",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/fm-changenet-detail.html",
+      "sha256": "247764b7bf3f28194daa258155dbd96940b097d57376cb5fa3352f4dfe9af686",
+      "bytes": 146012,
+      "retrieved_at": "2026-11-11T09:50:08.083902+00:00",
+      "url": "https://research.google/pubs/fm-changenet-flow-matching-network-for-change-detection/",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/google2026-first.html",
+      "sha256": "ef5539979f6a228874951c54feb49c3e709eb01fb726c6d5c771c4e1581771c1",
+      "bytes": 323474,
+      "retrieved_at": "2026-11-11T09:49:48.507898+00:00",
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/google2026-last.html",
+      "sha256": "cda859c424b89e9f6f5f00a4ef0c601ac3077464f64056aec2933c6bf4bf13bf",
+      "bytes": 290904,
+      "retrieved_at": "2026-11-11T09:49:46.398644+00:00",
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=31",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/lisa-abs.html",
+      "sha256": "2fc529c92359cbd98afa6dfc105bf44d0cd8449ec4eca145ac0eab2de6368301",
+      "bytes": 45420,
+      "retrieved_at": "2026-11-11T09:47:44.911669+00:00",
+      "url": "https://arxiv.org/abs/2605.14454",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/lisa.html",
+      "sha256": "239de7f9abb1981f7d67ca54837a34262e7a9e60dd6f5fe80afa4a6f670b4308",
+      "bytes": 352992,
+      "retrieved_at": "2026-11-11T09:47:44.214891+00:00",
+      "url": "https://arxiv.org/html/2605.14454v1",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/lisa.pdf",
+      "sha256": "48882b8114e8e4c5bb801c69d21eb63b5c882875a409a97a8c3ee88d53737248",
+      "bytes": 1880037,
+      "retrieved_at": "2026-11-11T09:53:44.391186+00:00",
+      "url": "https://arxiv.org/pdf/2605.14454v1",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/meta-home.html",
+      "sha256": "16be5410a1ce7a8d177ad1470ba7f1d1566ee008b43dc237a864aee225e01de4",
+      "bytes": 338011,
+      "retrieved_at": "2026-11-11T09:49:46.194455+00:00",
+      "url": "https://research.meta.ai/",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/meta-publications.html",
+      "sha256": "de23e0c264ff944ee66adb95a36d8b8613ad646ba1147b3f87d843d0d73f88a0",
+      "bytes": 45,
+      "retrieved_at": "2026-11-11T09:49:45.258980+00:00",
+      "url": "https://ai.meta.com/research/publications/",
+      "transport_status": "HTTP200",
+      "content_status": "unavailable_despite_http200"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/reprobridge-abs.html",
+      "sha256": "f6b73afb8c57b4a2afaf19a814b4d6d564c447d9ec3803bd8a8c79648461fd41",
+      "bytes": 41602,
+      "retrieved_at": "2026-11-11T09:47:46.214307+00:00",
+      "url": "https://arxiv.org/abs/2611.08452",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/reprobridge-project.html",
+      "sha256": "e3f9211b5dbd08175b83923eb2a6637a7df35ba63737bdebf0213319decdd45b",
+      "bytes": 248017,
+      "retrieved_at": "2026-11-11T09:47:46.120189+00:00",
+      "url": "https://wyyyb.github.io/reprobridge_website/",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/reprobridge.html",
+      "sha256": "9fe82d65e120f565a1df3d2017b6e615ccd53a6cc42aa12c6f783d40ca05d582",
+      "bytes": 560995,
+      "retrieved_at": "2026-11-11T09:47:45.139627+00:00",
+      "url": "https://arxiv.org/html/2611.08452v1",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/scaling-ab-abs.html",
+      "sha256": "1ec4e52f62697652ca52af86e2effa6533234f20aa1b1f6a894a94a120e27262",
+      "bytes": 42289,
+      "retrieved_at": "2026-11-11T10:03:52.061525+00:00",
+      "url": "https://arxiv.org/abs/2611.13539",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    },
+    {
+      "capture": ".cache/nov11-components/priority/scaling-ab.html",
+      "sha256": "cbc2106934750a9003435e951d36b6dd11c981c631191627ba0231bcb2f12964",
+      "bytes": 327705,
+      "retrieved_at": "2026-11-11T10:03:50.483599+00:00",
+      "url": "https://arxiv.org/html/2611.13539v1",
+      "transport_status": "HTTP200",
+      "content_status": "retrieved"
+    }
+  ],
+  "verification": {
+    "focused_tests": "PYTHONPATH=src python -m pytest -q tests/agent_research/test_nov11_priority.py",
+    "focused_test_count": 30,
+    "focused_tests_result": "passed",
+    "ruff_result": "passed for two modules and dedicated test",
+    "gpu_or_api_experiments_run": false,
+    "large_checkpoint_or_dataset_downloads": false,
+    "shared_registry_or_ledger_changed_by_this_subagent": false
+  },
+  "handoff": {
+    "deep_dive_proposals": "research-audits/nov11-components/priority-deep-dive-proposals.json",
+    "qa_source": "learning/questions/nov11-priority.json",
+    "reviewed_qa_english": "en/learning/translations/qa-nov11-priority.json",
+    "root_owns": "shared registry/runner integration,manifest/ledger/generated catalogs,existing deep-dive source and English translations,final PR and unified gates"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "domain": "recommendation",
+  "key": "ice",
+  "title": "Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking",
+  "paper_url": "https://arxiv.org/abs/2611.07591",
+  "reviewed_version": "v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.07591v1",
+  "detail_path": "recommendation-components/2611.07591-ice/README.md",
+  "topic": [
+    "重排与混排",
+    "曝光感知与序列评估"
+  ],
+  "browse_company": "Alibaba",
+  "browse_topic": [
+    "多阶段排序与混排",
+    "重排、混排与多目标页面决策"
+  ],
+  "first_author": "Jiayi Zhang",
+  "first_author_affiliation": "Alibaba Taobao & Tmall Group",
+  "published": "2026-11-05",
+  "published_at": "2026-11-05T07:41:22Z",
+  "announced_on": "2026-11-06",
+  "code": null,
+  "code_status": "固定 v1 和论文链接未找到原作者公开实现。",
+  "adapter": null,
+  "priority": "P0",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.reproductions.ice_components.ice_objective",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.reproductions.ice_components import diagnostic; print(diagnostic(42, device=\"cuda\"))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_passed": true,
+  "gpu_validation_artifact": "docs/gpu-validations/ice-a100-20261106.json",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "online_ab": [
+    {
+      "product": "Taobao Guess You Like",
+      "metric": "commercial revenue",
+      "lift_percent": 3.67,
+      "traffic": "14 days, 5% production traffic, control production Transformer evaluator, fixed generator; later full-traffic deployment",
+      "source_location": "§5.5; impressions +0.58%, clicks +0.70%, LT-14d +0.23%, average response time <0.5 ms more",
+      "source_url": "https://arxiv.org/html/2611.07591v1"
+    }
+  ],
+  "cost_assessment": {
+    "source_url": "https://arxiv.org/html/2611.07591v1",
+    "source_location": "§§3.3–5.5, Tables 1 and 2",
+    "available_resource": "one NVIDIA A100 or A30, or local Mac",
+    "model_scale": "six evaluator backbones and a fixed production candidate generator; repeated offline comparisons",
+    "data_scale": "48.38M users, 141.79M private slates; seven days of Taobao logs and 14-day production A/B",
+    "estimated_cost_basis": "published data scale, private inputs and production control; no local estimate of training GPU-hours",
+    "decision": "完整私有数据、生产评估与线上对照成本过高，不复现（审查 DONE）；只运行独立低成本组件。"
+  },
+  "summary": "将展示到点击拆成达到曝光与条件点击；浏览深度尾和约束曝光，停止梯度门控抑制未曝光上下文，列表 KL 建模点击竞争。本地只验证张量组件。"
+}

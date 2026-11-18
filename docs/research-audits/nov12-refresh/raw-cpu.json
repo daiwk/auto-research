@@ -1,0 +1,100 @@
+{
+  "schema_version": 2,
+  "batch": "2026-11-12-official-source-refresh",
+  "component": "sensorwm-planning",
+  "device": "cpu",
+  "accelerator": "CPU",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "code_commit": "a28efd403e497ad3a482eada2f393fb4c323f845",
+  "source_sha256": {
+    "scripts/run_sensorwm_planning.py": "5abbb92e13cb1a0b164545d4b9e1199937e60c008c7c9af3b76a7451ac5eeb88",
+    "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+    "src/auto_research/multimodal/sensorwm_planning.py": "196145752be985fd614ed515479e4abb1e4af128b2ba9322d48b1bf1aab94570",
+    "docs/research-audits/nov12-refresh/preflight.json": "b5f6b4b223deff1fe59c7dda7b96e881ea3ceaeb050c4f728c155768dcfe24a0"
+  },
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "input_candidates": 4,
+        "ranked_candidates": 2,
+        "best_fixture_score": 0.2,
+        "three_floor_effort": 3.0
+      },
+      "checks": {
+        "three_sigma_floors_applied": true,
+        "future_status_quo_anchor": true,
+        "score_divides_by_one_plus_effort": true,
+        "expected_effort_adjusted_order": true,
+        "strict_gain_threshold": true,
+        "external_infeasible_excluded": true,
+        "status_quo_gain_zero_excluded": true,
+        "identities_and_scores_only": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "input_candidates": 4,
+        "ranked_candidates": 2,
+        "best_fixture_score": 0.2,
+        "three_floor_effort": 3.0
+      },
+      "checks": {
+        "three_sigma_floors_applied": true,
+        "future_status_quo_anchor": true,
+        "score_divides_by_one_plus_effort": true,
+        "expected_effort_adjusted_order": true,
+        "strict_gain_threshold": true,
+        "external_infeasible_excluded": true,
+        "status_quo_gain_zero_excluded": true,
+        "identities_and_scores_only": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "input_candidates": 4,
+        "ranked_candidates": 2,
+        "best_fixture_score": 0.2,
+        "three_floor_effort": 3.0
+      },
+      "checks": {
+        "three_sigma_floors_applied": true,
+        "future_status_quo_anchor": true,
+        "score_divides_by_one_plus_effort": true,
+        "expected_effort_adjusted_order": true,
+        "strict_gain_threshold": true,
+        "external_infeasible_excluded": true,
+        "status_quo_gain_zero_excluded": true,
+        "identities_and_scores_only": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "elapsed_seconds": 0.00013691606000065804,
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "pretrained_model_calls": 0,
+  "api_calls": 0,
+  "full_experiments_executed": false,
+  "automatic_retry": false
+}

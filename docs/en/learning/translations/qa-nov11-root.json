@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:adindex/shared-bank-not-shared-final-index": {
+      "source_sha256": "826c6e6550ebcfa156fc68cec0fdb32e97d62712bef3d45c90d28ed3f4f9f45f",
+      "reviewed": true,
+      "fields": {
+        "question": "Does ADIndex's shared bank force every query to use the same final Top-K?",
+        "answer": "No. The group indexer shares only a bank over anchor-visible history. Each query adds its newly visible post-anchor tokens, then the original DSA scores refine candidates separately. The shared operation is the expensive full-prefix scan, not the final attention indices.",
+        "example": "For anchor31 and query34, the shared bank contains positions at most31, but positions32,33,34 must be added. The final Top-K can differ from query32's."
+      }
+    },
+    "qa/foundation-models:adindex/teacher-operation-order": {
+      "source_sha256": "6fc0160caa69a0e21461455bec73ecb0829c4cc8c0ebae534e99acc0aa6f7fe9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not maximize raw query scores first and apply one softmax afterward?",
+        "answer": "The teacher first standardizes each query, applies temperature3 softmax, takes tokenwise maxima across queries, and renormalizes on Top-P support. Maximizing raw scores first mixes query offsets/scales and changes the target; these operations do not commute.",
+        "example": "Adding100 to every raw score of one query should not change its standardized probabilities. Taking the raw maximum first could instead let that query dominate the teacher bank."
+      }
+    },
+    "qa/foundation-models:adindex/causal-new-token-union": {
+      "source_sha256": "993635612de68b43da387a57a4746aaa080635a8809182248ef79145e037f3e7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why restrict the bank to anchor history but add new tokens for later queries?",
+        "answer": "The bank is built at the anchor, so later keys would leak future information. A later query legitimately sees newly available causal tokens; failing to add them unnecessarily removes recent context. Shared-bank visibility and per-query visibility are separate contracts.",
+        "example": "Passing key34 to an anchor31 group indexer is future leakage. Adding positions32 through34 during query34 refinement is legitimate causal context."
+      }
+    },
+    "qa/foundation-models:adindex/training-kl-not-throughput": {
+      "source_sha256": "46c007d4601a25a5c2fce74ef3b0ce9eaf61cb14390cc3446d8d1a9dab7f3e31",
+      "reviewed": true,
+      "fields": {
+        "question": "Does reduced local training KL establish the paper's 6.22x kernel speedup?",
+        "answer": "No. Small tensors check the teacher, indexer optimization, frozen inputs, causal candidates and fallback. There is no backbone, fused kernel or SGLang workload. Speed requires separate measurements under matched hardware, context length and quality.",
+        "example": "The local diagnostic has4queries,32historicalkeys and64updates. The source uses up to256K indexing and B300 serving; its speedup cannot be inferred from a small KL reduction."
+      }
+    },
+    "qa/foundation-models:b3/overlap-without-backward-leak": {
+      "source_sha256": "ab55597eaa519b7ae105b572ede5875f6b458a3326161a72fab9fac86ada4a0d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must a shared forward pass prevent future drafts from affecting the current block?",
+        "answer": "Block-causal attention blocks current-block queries from future keys/values. The future block may read the current block, not vice versa. Overlap then preserves the current block's attention input, while the future sampler still needs self-editing as its prefix settles.",
+        "example": "For two4token blocks in an8token attention matrix, the first4rows must not see the last4columns; the last4rows may see the first4columns."
+      }
+    },
+    "qa/foundation-models:b3/lagged-exclusive-frontier": {
+      "source_sha256": "35faef8561f686a9089619d78bedfc4d52732905d078c7531f460b51e4ecac54",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use previous-pass entropy and strictly exclude the frontier token?",
+        "answer": "The candidate estimates the solved region strictly left of the advanced frontier using the preceding pass. Including the frontier or using current-pass entropy changes the self-calibration sample. Candidates require an advancing frontier, no active future block and an available previous pass.",
+        "example": "If the new frontier is position2, use the previous pass's maximum entropy over positions0and1, not position2 or the just-decreased current entropy."
+      }
+    },
+    "qa/foundation-models:b3/candidate-versus-spawn-state": {
+      "source_sha256": "0555caf60877aacaec3f61976ed2bf9e4d9a8c21c98e7f43454f3afbc98eed2c",
+      "reviewed": true,
+      "fields": {
+        "question": "Should very low current entropy always spawn another future block?",
+        "answer": "No. A calibrated candidate threshold must exist, no future block may already be active, and EOS must not be predicted. An active future block suppresses both spawning and candidate collection. Candidates carry across blocks, but the previous-pass entropy cannot be reused with another block's positions.",
+        "example": "Even if maximum entropy is .01, an already active future block must not spawn a third block. Predicted EOS also suppresses spawning."
+      }
+    },
+    "qa/foundation-models:b3/gate-not-decoder": {
+      "source_sha256": "ce5615f5b6ec4eab6f21065af635cc4006ce8e2e87efccdef076d0aa31b857f3",
+      "reviewed": true,
+      "fields": {
+        "question": "Do the gate and attention-invariance checks establish a diffusion decoder?",
+        "answer": "No. The component consumes caller-supplied entropy, acceptance flags and EOS state and implements only the spawn gate and two-block mask. Native samplers, noise schedules, KV caches and a self-editing model are absent; synthetic inputs are not generated text.",
+        "example": "Equal current-block outputs for random Q/K/V verify visibility only. They do not measure the paper's ten-benchmark throughput or quality changes."
+      }
+    },
+    "qa/multimodal-models:steprefine/entropy-trigger-not-everywhere": {
+      "source_sha256": "c272a42b7372d78e3bafefa86e33b628674700bc684a450a908eb3a0d0ab4569",
+      "reviewed": true,
+      "fields": {
+        "question": "Why trigger StepRefine at entropy spikes rather than add fixed extra passes everywhere?",
+        "answer": "It reserves computation for steps whose masked mean-entropy change rises unusually above completed history, retaining competing token semantics before checking stability. The trigger must not inspect future denoising changes to select steps.",
+        "example": "For previous changes-.1,-.2,-.15, a current+.5 triggers. Equality with the historical mean plus standard deviation does not satisfy the strict greater-than threshold."
+      }
+    },
+    "qa/multimodal-models:steprefine/new-to-old-kl": {
+      "source_sha256": "5dda1aadafba4281b392d0fef5ba6d7875682d0bc427e4378887eb0718856878",
+      "reviewed": true,
+      "fields": {
+        "question": "Which KL direction controls refinement termination?",
+        "answer": "Compute KL(p_new||p_old) over valid masked positions and average across positions. Reversing it changes the criterion. If the new distribution puts positive mass where the old assigns zero, KL is infinite; silently smoothing that away changes the stopping test.",
+        "example": "For new(.5,.5) and old(1,0), new-to-old KL is infinite, whereas the reverse direction is finite and could yield a different stop decision."
+      }
+    },
+    "qa/multimodal-models:steprefine/fixed-budget-charge": {
+      "source_sha256": "8999fe24e8e01205b8ebfa7e0986e668889e920747abfdaa705681b8a42450a5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is the next index not simply t-1 after k refinement passes?",
+        "answer": "The paper compares a fixed total forward budget. The normal denoising pass costs one and refinements cost k more, so the next index is t-1-k. Advancing only by one gives the method uncharged computation.",
+        "example": "At t=16 with k=2 additional passes, the next index is13. Using15 fails to charge the two extra forwards."
+      }
+    },
+    "qa/multimodal-models:steprefine/soft-input-not-mdlm": {
+      "source_sha256": "438ad4488e521dede273959972898734e169eab15920dc0a9132c77cea6a8961",
+      "reviewed": true,
+      "fields": {
+        "question": "Does computing soft_embeddings reproduce reduced hallucination in a multimodal diffusion model?",
+        "answer": "No. It replaces masked inputs with probability-weighted embeddings and preserves unmasked inputs. Images, model forwards, token commitment and a remasking loop are absent. Synthetic probability/KL checks are L1 formula evidence, not POPE or MMHalu scores.",
+        "example": "A random9word vocabulary and5dimensional embedding table can verify p@E exactly without seeing an image; it cannot determine whether an object exists in that image."
+      }
+    }
+  }
+}

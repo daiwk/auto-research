@@ -1,0 +1,20 @@
+{
+  "domain":"agent-research","key":"envharness","title":"EnvHarness: Awakening Static Worlds for Agent Learning",
+  "paper_url":"https://arxiv.org/abs/2608.19880","reviewed_version":"v1","reviewed_arxiv_id":"2608.19880v1","reviewed_version_url":"https://arxiv.org/html/2608.19880v1",
+  "detail_path":"agent-research/2608.19880-envharness/README.md",
+  "topic":["环境与Agent共同进化","可组合环境接口"],
+  "first_author":"Chengsong Huang","first_author_affiliation":"Washington University in St. Louis",
+  "verified_priority_organizations":["Google Cloud AI Research"],
+  "published":"2026-08-20","published_at":"2026-08-20T10:42:06Z",
+  "code":"https://github.com/google-research/envharness",
+  "code_status":"原文提供GoogleResearch官方仓库，当前README及实现入口已公开；一作署名WashingtonUniversity，脚注GoogleCloudAIResearch实习期间完成，Google合作优先信号独立保留。",
+  "adapter":null,"priority":"P0","implementation_status":"component_only",
+  "local_operator":"auto_research.agent_research.envharness.diagnostic",
+  "local_command":"PYTHONPATH=src python -c 'from auto_research.agent_research.envharness import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier":"l1_mechanism","diagnostic_only":true,"promotion_eligible":false,"evolve_integrated":false,
+  "requires_gpu_validation":false,"gpu_validation_passed":false,"review_done":true,"full_experiment_review_done":true,
+  "full_experiment_status":"not_reproduced_high_cost","automatic_retry":false,"automatic_implementation_queue":false,
+  "cost_assessment":{"source":"https://arxiv.org/html/2608.19880v1#A6.SS1","available_resource":"单张A100/A30或Mac","basis":"完整技能/EnvRigger矩阵含五benchmark和商业模型，AppendixG报告ALFWorld约228.0M/WebArena137.3M总tokens。另GRPO实验是Qwen3-8B、8×H100、150steps；不能用CPU包装器或单卡fixture替代。高成本完整实验不复现，不试训不调用API。"},
+  "fidelity_note":"仅实现Stage普通动作重放与notify_replay_complete、Contract三hook及原verifier委托、serialChain共享步预算/lazyB/缓存A∧B。无动态源码编译、安全sandbox、EnvRigger、RL或benchmarkbridges；callback为可信外部代码，CPUtoy仅测合同。",
+  "summary":"EnvHarness在固定环境接口外组合初始状态、交互规则与串行任务，不改底层成功判据；EnvRigger据轨迹设计并用新rollout验收。本地交CPU包装器，不宣称环境自动生成或Agent学习能力。"
+}

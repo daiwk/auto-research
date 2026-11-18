@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-13",
+  "reviewer": "priority_final (independent of foundation implementation owner)",
+  "review_type": "Bounded code, test, definition and fidelity-boundary cross-review; not a full original-experiment reproduction.",
+  "modules": [
+    {
+      "module": "auto_research.foundation_models.rosetta_unification",
+      "source_path": "src/auto_research/foundation_models/rosetta_unification.py",
+      "source_sha256": "b27190f76ff2bd482f473486a6be4b8aa0d69564f9cd9311d7d4133cdd6cef60"
+    },
+    {
+      "module": "auto_research.foundation_models.lidas",
+      "source_path": "src/auto_research/foundation_models/lidas.py",
+      "source_sha256": "ef7a496201c9f8f59af5d5bb0efc2ff728cdbe38821fdf80b62a4d5c47c67b64"
+    },
+    {
+      "module": "auto_research.foundation_models.thinking_to_recall",
+      "source_path": "src/auto_research/foundation_models/thinking_to_recall.py",
+      "source_sha256": "8f7ff5a0324c18b612fb25d4232aac998d37ef9d8957b8b60c4217ad1bc36c4e"
+    },
+    {
+      "module": "auto_research.foundation_models.latent_generalization",
+      "source_path": "src/auto_research/foundation_models/latent_generalization.py",
+      "source_sha256": "7fd61edabf36dbc420e270eb1092d4d71a9b34dce7bb68be25ab7729d7d9f04a"
+    },
+    {
+      "module": "auto_research.agent_research.planning_optimality",
+      "source_path": "src/auto_research/agent_research/planning_optimality.py",
+      "source_sha256": "07cd3ab4c9e2db0e1c1564c0410e044341601cbc17d358d9227e4fa80a371189"
+    },
+    {
+      "module": "auto_research.foundation_models.llm_stochasticity",
+      "source_path": "src/auto_research/foundation_models/llm_stochasticity.py",
+      "source_sha256": "0445584730e405cb0c3b00be027cb099239a4c9c89ef5bc7f0f105e2ceff425f"
+    },
+    {
+      "module": "auto_research.foundation_models.ecg_rag",
+      "source_path": "src/auto_research/foundation_models/ecg_rag.py",
+      "source_sha256": "21e27bf9553af2dafaed1b240c55ff5be9eff9afdaf3d7f1fbe4a4b9e0a5daaa"
+    },
+    {
+      "module": "auto_research.foundation_models.continuousbench",
+      "source_path": "src/auto_research/foundation_models/continuousbench.py",
+      "source_sha256": "d6ebbad425df69292e03387e4cdd9e738cbec5e9f056d4e832180fdb00b81180"
+    }
+  ],
+  "verification": {
+    "command": "PYTHONPATH=src ../../.venv/bin/python -m pytest tests/test_colm_foundation_components.py -q",
+    "result": "47 passed, 6 CUDA tests skipped on this Mac after the planning goal correction",
+    "gpu_executed_by_this_reviewer": false,
+    "implementation_files_edited_by_reviewer": false,
+    "blocking_findings": [],
+    "initial_result_superseded": "44 passed, 6 skipped before singleton-covered-goal and nonempty-hand negative controls were added. That initial review missed the prefix-goal bug."
+  },
+  "source_checks": [
+    {
+      "paper": "2512.08819v1",
+      "source_url": "https://arxiv.org/html/2512.08819v1",
+      "locations": [
+        "§3.1",
+        "Figure2",
+        "AppendixA"
+      ],
+      "checked": "b=4 layer-wise middle order rather than block-wise MIDAS; deep-copy layer parameters and AdamW moments; persistent groups/global LR scheduler; PROP-1 stage budget. The figure clarifies the inclusive-index prose ambiguity, and the source itself states largest-remainder rounding.",
+      "boundary": "Only the transformation and one subsequent numerical gradient/update are tested; no pretrained model/depth-training gain."
+    },
+    {
+      "paper": "2604.14403v1",
+      "source_url": "https://arxiv.org/pdf/2604.14403v1",
+      "locations": [
+        "p4 §3.1–3.3",
+        "p16 AppendixA.1",
+        "p18 AppendixB.5.1"
+      ],
+      "checked": "Four scalar-gated residual projection layers, signed last projection, retrieval sqrt(d) scaling and restoration, mean-over-query MaxSim, teacher-to-student FKL summed over answer tokens, InfoNCE over all supplied candidates and teacher margin MSE over hard negatives. Detached teacher scores/logits and learned temperature/alpha match the stated formula.",
+      "boundary": "No pretrained reader/embedding model, corpus index, answer generator or on-device latency claim; local gate bias5 is explicitly a local choice rather than an asserted source number."
+    },
+    {
+      "paper": "2508.11017v1",
+      "source_url": "https://arxiv.org/html/2508.11017v1#S5",
+      "locations": [
+        "§5"
+      ],
+      "checked": "Mean of per-fact cross-language/same-language similarity ratios, not a ratio of pooled means. External fact and semantically distinct baseline grouping is explicit.",
+      "boundary": "No hidden-state extraction, training or causal/generalization-accuracy claim from synthetic cosine values."
+    },
+    {
+      "paper": "2603.09906v1",
+      "source_url": "https://arxiv.org/html/2603.09906v1#S5.SS4",
+      "locations": [
+        "§5.4",
+        "definition/test checks for retained question groups"
+      ],
+      "checked": "Offline factual/factual-and-correct conditional accuracy analyses are labeled oracle analyses, with no runtime actor trace selector exposed. Fact-free traces cannot qualify via vacuous all-facts-correct truth.",
+      "boundary": "Annotations consumed only after external completions; no gold-assisted executable Agent."
+    },
+    {
+      "paper": "2604.01430v1",
+      "source_url": "https://arxiv.org/html/2604.01430v1#S3.SS3",
+      "locations": [
+        "§3.3"
+      ],
+      "checked": "Overall P/R/F1, exposed versus held-out recall, exact-set pass@N and primary inclusion have distinct meanings; extra false items invalidate exact-set success.",
+      "boundary": "Only exact-string completed-output evaluation; no Gemini/teacher/RL or semantic-equivalence judge is fabricated."
+    },
+    {
+      "paper": "2604.02910v1",
+      "source_url": "https://arxiv.org/html/2604.02910v1#S4.SS1",
+      "locations": [
+        "§4.1",
+        "restricted formula guard and independent BFS tests"
+      ],
+      "checked": "Executable four-action Blocksworld transitions, validity before relative optimality gap, curriculum-restricted optimum formula and independent small-instance BFS checks. The corrected goal predicate requires the entire clear target tower and empty hand; independent BFS now agrees on singleton targets with one/two covering blocks, and a held obstacle is not yet finished.",
+      "boundary": "Not the full VAL tool or an LLM planner; formula rejects layouts outside one-target-per-source-tower/table-supported-base assumptions."
+    },
+    {
+      "paper": "2604.06543v1",
+      "source_url": "https://arxiv.org/html/2604.06543v1#S3",
+      "locations": [
+        "§3",
+        "§4"
+      ],
+      "checked": "Fixed sample count/support, chi-square or KS marginal tests separated from temporal repeat/autocorrelation checks. Non-rejection is correctly not advertised as proof of randomness, despite the original prose's stronger p-value interpretation.",
+      "boundary": "PRNG fixtures only expose numerical behavior; no LLM output or sampler capability is fabricated."
+    },
+    {
+      "paper": "2606.01849v1",
+      "source_url": "https://arxiv.org/html/2606.01849v1#S3.SS2",
+      "locations": [
+        "§3.1–3.2",
+        "AppendixC.1–C.2",
+        "module fixed upstream parser-revision declaration"
+      ],
+      "checked": "Validation contains accuracy selects checkpoints; held-out Geminon exact match and paired no-corpus/base capability gain use one release. Original News judging stays external. The module explicitly distinguishes fixed released parser behavior from prose normalization.",
+      "boundary": "No synthesis, private-data process, DP accountant or training. This reviewer did not independently refetch every upstream repository file."
+    }
+  ],
+  "limitations": [
+    "Necessary primary method sections and executed local contracts were reviewed, not every page of the eight papers.",
+    "The six skipped CUDA tests require root's actual NVIDIA A100/A30 execution and committed receipt; this CPU cross-review cannot substitute for that gate.",
+    "No experiment or implementation source was modified during this review.",
+    "The initial cross-review was not exhaustive: an additional owner-found planning negative control exposed a real bug. This final record supersedes that source hash/result and preserves the correction."
+  ],
+  "resolved_findings": [
+    {
+      "module": "auto_research.agent_research.planning_optimality",
+      "discovered_by": "foundation implementation owner during additional source/negative-control review",
+      "initial_source_sha256": "5a720c35a662860a19911fca7cd65f238ea2ff47878fc2584d46e5ab07556655",
+      "problem": "Prefix-based goal satisfaction marked a covered singleton target or a held final obstacle as complete, disagreeing with the restricted clearing-cost formula.",
+      "correction": "Exact completed target tower and empty hand are now required. New tests cover one/two blockers above a singleton and a held obstacle that must be put down.",
+      "corrected_source_sha256": "07cd3ab4c9e2db0e1c1564c0410e044341601cbc17d358d9227e4fa80a371189",
+      "independent_verification": "The reviewer reran the updated tests and inspected all three new negative-control cases; 47 passed/6 skipped.",
+      "scope": "CPU verifier only; frozen source changed and root owns new full batch freeze/execution receipts."
+    }
+  ]
+}

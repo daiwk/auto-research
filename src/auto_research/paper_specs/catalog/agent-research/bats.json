@@ -1,0 +1,53 @@
+{
+  "domain": "agent-research",
+  "review_done": true,
+  "priority": "P0",
+  "adapter": null,
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "intake_class": "official_directory_triggered_historical_backfill",
+  "verified_priority_organizations": [
+    "Google"
+  ],
+  "key": "bats",
+  "title": "Budget-Aware Tool Use Enables Effective Agent Scaling",
+  "paper_url": "https://arxiv.org/abs/2511.17006",
+  "reviewed_version_url": "https://arxiv.org/html/2511.17006v2",
+  "reviewed_version": "v2",
+  "reviewed_version_published_at": "2026-08-17T07:14:22Z",
+  "published": "2025-11-21",
+  "published_at": "2025-11-21T07:18:55Z",
+  "detail_path": "agent-research/2511.17006-bats/README.md",
+  "topic": [
+    "规划与搜索",
+    "预算感知与测试时扩展"
+  ],
+  "first_author": "Tengxiao Liu",
+  "first_author_affiliation": "UC Santa Barbara",
+  "code": "https://github.com/google-research/budget-aware-agent/tree/37d23f66c512734db476313cf436a506edbec9e0",
+  "code_status": "公开Apache-2.0作者仓库，固定37d23f66c512734db476313cf436a506edbec9e0；只读README，不克隆/运行/下载或解密benchmark。Google官网旧摘要名CATS，固定v2和公开代码名BATS。",
+  "summary": "持续向Agent展示每工具已用/剩余预算；用显式自验证决定CONTINUE/PIVOT/SUCCESS，换路不重置预算，任一工具耗尽即终止，并按token及工具实际消耗统一计费。",
+  "fidelity_note": "仅CPU预算/费用/显式外部verdict状态核，不产生计划、语义验证、摘要或答案。无gold/reference字段；外部selector必须选择已接受集合，完整搜索Agent及Evolve未接入。",
+  "local_operator": "auto_research.agent_research.bats.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.agent_research.bats import diagnostic; print(diagnostic(42))'",
+  "cost_assessment": {
+    "source_url": "https://arxiv.org/html/2511.17006v2#A1",
+    "source_location": "§5,Appendix A.1–2 and B; official repository README",
+    "model_scale": "Gemini-2.5-Flash/Pro and Claude-Sonnet-4; up to64K–65,536generated tokens with self-verification and final LLM judge",
+    "data_scale": "BrowseComp1,266questions(author code also200subset), BrowseComp-ZH289, HLE-Search200; multiple tool-budget curves and supplementary tasks",
+    "available_resource": "one NVIDIA A100 or A30, or local Mac",
+    "estimated_cost_basis": "Paid multi-model search/browse and repeated verification matrix; paper tool rate USD0.001/call is a historical post-hoc average, not current pricing. No local full-run hours measured.",
+    "cost_type": "published_configuration_not_local_measurement",
+    "decision": "完整实验成本过高，不复现（审查 DONE）；不调用API、不下载/解密题目、不接触gold，仅执行CPU控制与费用核。"
+  }
+}

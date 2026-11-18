@@ -1,0 +1,9 @@
+{
+  "schema_version":1,
+  "papers":{"agent-research:scientist-two":{"questions":[
+    {"id":"subset-good-is-not-full-success","level":"basics","question":"ScientistTwo的想法在子集上被判为Good，为什么还不能算一次成功科研产物？","answer":"子集用于低成本筛选，相对复现的子集基线判断是否值得升阶。全量benchmark有独立实验与critic，仍可失败或需要工程修改；本地升阶门保留这些判定，不把subset Good自动复制成full Good。","example":"教学例：一个方法在短序列子集更快，但全量长序列显存溢出；它可以获准全量验证，却不能凭子集结果被写成全benchmark成功。","source_sections":["背景与主要改动","核心公式","数据协议与代码映射"],"added":"2026-11-13"},
+    {"id":"evolved-plus-untried-seeds","level":"mechanism","question":"ScientistTwo为什么给Idea Evolver传入失败历史，又加入没有试过的种子？","answer":"失败日志能定位无效假设和工程边界，删掉它们会使进化反复犯同类错误。只围绕成功种子又容易局部最优，所以每轮把历史驱动提案和按外部novelty排序的未试seed合并；本地不替代语义novelty判断。","example":"教学例：早期想法都依赖慢检索，失败日志说明瓶颈在I/O；新提案可以针对缓存，同时仍测试一个完全不同的无检索种子，而不是只改变旧方案参数。","source_sections":["背景与主要改动","核心公式","结果与负控"],"added":"2026-11-13"},
+    {"id":"expansion-versus-integrity-audit","level":"comparison","question":"ScientistTwo的消融和review循环能否替代ScientistOne的证据完整性审计？","answer":"不能。前者安排怎样补实验、改方法和写论文；后者核对分数复算、规则、引文与方法代码一致性。一个外部review给高分或strict comparator返回true，仍可能建立在不真实的日志或错误语义上；控制通过不是证据正确。","example":"教学例：rebuttal把抄来的分数写进更漂亮的表格并获高评审分，仍未通过独立执行和来源核验；多一次写作循环不会使该分数真实。","source_sections":["背景与主要改动","数据协议与代码映射","复现边界"],"added":"2026-11-13"},
+    {"id":"last-refinement-needs-a-critic","level":"implementation","question":"Fig.4最后一轮critic要求refine，为什么本地仍返回exhausted而不是返回修改后的candidate？","answer":"原文伪代码只有accept分支能返回成功；最后refine虽被调用，但没有剩余critic槽确认其有效。返回修改产物为成功会绕过判据。review_rebuttal还明确在无复审槽时不再生成未复审稿，两个函数的计费单位及约定都写清楚。","example":"教学例：只允许一次critic，旧代码被要求修复后得到新代码；新代码还没被评价，不能因refine函数返回了对象就假定bug修好。","source_sections":["核心公式","数据协议与代码映射","结果与负控"],"added":"2026-11-13"}
+  ]}}
+}

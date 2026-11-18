@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/foundation-models/context-and-state/comparison/foundation-models:adindex": {
+      "source_sha256": "e95b13dba71fbc8b4e57def2125ee81aec656788e776452fe873ebd912a52a71",
+      "reviewed": true,
+      "fields": {
+        "position": "Calibrates layer-specific groups and shared banks, distilling a group indexer from per-query standardized softmax, tokenwise maxima and Top-P teacher support. It scans anchor history, adds newly visible tokens and retains per-query DSA refinement.",
+        "tradeoff": "A shared bank does not imply identical final Top-K sets or OpenAttention-style tail proxies. Teacher operation order, anchor causality and maximum-union capacity are essential. Lower L1 training KL proves neither long-context quality nor B300 serving speed."
+      }
+    },
+    "dive/foundation-models/context-and-state/analysis/6": {
+      "source_sha256": "1d6d5f7b57581e4020cc2b0dcbbde4e0dc3db52da7f151c3941bacb38af42418",
+      "reviewed": true,
+      "fields": {
+        "title": "Identify whether the saving comes from prefix scanning or approximating unread mass",
+        "body": "ADIndex reuses candidate scanning across neighboring queries before query-specific refinement. The bank sees only anchor history; later queries add newly visible tokens. OpenAttention instead represents unread KV clusters with count-weighted mean proxies in a joint softmax with exact rows. The first does not preserve all unread probability mass, while the second does not retain exact within-cluster detail. Read percentages alone do not make them equivalent compression schemes."
+      }
+    },
+    "dive/foundation-models/context-and-state/question/shared-bank-versus-tail-proxy": {
+      "source_sha256": "91c8d296f702dbaa31e66fc7b7ca4a8f20bcd35cd452c035a649daac2156c8fc",
+      "reviewed": true,
+      "fields": {
+        "question": "Do an ADIndex shared bank and OpenAttention tail proxies have the same missed-read semantics?",
+        "answer": "No. ADIndex shares candidate search and still chooses a query-specific final Top-K; positions outside the candidate union receive no automatic proxy mass. OpenAttention keeps counted proxies for unread clusters, but their content is approximate and must exclude already read rows. Check index coverage and residual softmax mass separately.",
+        "example": "A position outside ADIndex's candidate union cannot enter that refinement. In OpenAttention, it may still contribute through a residual cluster mean and count, without retaining all its individual detail."
+      }
+    },
+    "dive/foundation-models/context-and-state/update/2026-11-11/5": {
+      "source_sha256": "ad2d5c8d73e69deb0e01be20b5b82a968c06c26bf53624741fdd8dce8ef76828",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added ADIndex, separating grouped candidate-scan reuse from OpenAttention's unread-tail proxy mass. Preserved standardized-softmax then max then Top-P, anchor visibility and newly visible tokens. These are L1 indexing/training checks; the full long-context and serving matrix is not reproduced."
+      }
+    },
+    "dive/foundation-models/generation-paths/comparison/foundation-models:b3": {
+      "source_sha256": "c8aee132a5f873a2fe27930cc5b8d7eed0004d6d20fe2185b88b066bd9f1b28a",
+      "reviewed": true,
+      "fields": {
+        "position": "Overlaps current and future blocks in a self-editing-compatible diffusion decoder, protecting current outputs with a block-causal mask. A cross-block mean of previous-pass entropy strictly left of the accepted frontier controls spawning.",
+        "tradeoff": "The gate is not a diffusion backbone and cannot turn an AR model into a bidirectional DLM. Candidates exclude the frontier and active-future periods, respect EOS and retain a one-pass lag. Local attention invariance establishes neither full-distribution invariance nor quality or TPS."
+      }
+    },
+    "dive/foundation-models/generation-paths/analysis/2": {
+      "source_sha256": "7a11e287fd17f15ee7c99c0001649e3e44c35f7d9e852083fff85a6120d3dae3",
+      "reviewed": true,
+      "fields": {
+        "title": "Changing generative conditions differs from scheduling an existing decoder",
+        "body": "dQwen3.5 modifies a hybrid attention/RNN backbone for bidirectional conditioning and masked-denoising training. B3 schedules overlapping blocks in an already compatible diffusion model; it does not supply that model. Its block-causal mask prevents the current block from reading a future draft, but does not eliminate future self-editing or prove full target-distribution preservation like exact speculative correction. Backbone, sampler and gate need separate validation."
+      }
+    },
+    "dive/foundation-models/generation-paths/question/spawn-gate-not-diffusion-backbone": {
+      "source_sha256": "4fb53b9a0bfc9fc419d7eacccc861d9470262224f5fd735bd972ddc719e1dd57",
+      "reviewed": true,
+      "fields": {
+        "question": "Does adding B3's spawn gate turn an ordinary AR model into a diffusion language model?",
+        "answer": "No. The gate decides when a compatible diffusion decoder may start its future block. Bidirectional/block conditioning, denoising and a self-editing sampler are still needed. dQwen3.5's architecture adaptation and masked training are a different layer that gating cannot replace.",
+        "example": "A CPU gate returning True for low entropy is only a permission state. It predicts no token and does not transform fixed causal AR weights into a future-block editing model."
+      }
+    },
+    "dive/foundation-models/generation-paths/update/2026-11-11/1": {
+      "source_sha256": "dc370068fa17b87a1664ac2dcd5c9f07d472666a41433f2ee51ab0552a5e2473",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added B3 to distinguish diffusion-backbone adaptation from overlapping schedules in existing decoders. Checked frontier exclusion, the one-pass lag, active-future state and EOS protection. CPU gating is not DLM generation; full 16B/26B/100B throughput studies are not reproduced."
+      }
+    },
+    "dive/foundation-models/training-budget/comparison/foundation-models:stochastic-rounding": {
+      "source_sha256": "b578d17d1abab6626458dfd9f0c6f058360487b30478418129a2505b7638edfe",
+      "reviewed": true,
+      "fields": {
+        "position": "Keeps FP32 master weights and randomly chooses adjacent BF16/FP16 values by distance, preserving the updated value in conditional expectation and reducing nearest-rounding weight sticking.",
+        "tradeoff": "Unlike ECO's momentum compensation and master-weight removal, SR alone does not save master storage. Unbiasedness guarantees neither smaller per-step error nor faster convergence. Trainer and rollout still need identical rounded weights; scalar L1 checks do not establish 64-GPU RL curves."
+      }
+    },
+    "dive/foundation-models/training-budget/analysis/3": {
+      "source_sha256": "0553a8d287ee1ce39c93e43289d1da69bb89a6c3b89863c169e0b3f7d56d7c95",
+      "reviewed": true,
+      "fields": {
+        "title": "Low-precision update visibility and high-precision state memory are different benefits",
+        "body": "The stochastic-rounding paper retains FP32 masters and addresses updates disappearing in BF16 rollout weights. ECO removes masters and injects requantization error into existing momentum using effective step sizes, trading state memory against loss. SR can be a quantization choice without implementing ECO's compensation. Removing masters likewise does not guarantee each small update becomes visible. Report storage, quantization bias, synchronization and convergence separately."
+      }
+    },
+    "dive/foundation-models/training-budget/question/rounding-is-not-master-removal": {
+      "source_sha256": "30970db7c9bc6bc2a852c2f7fdad7ba36b03e3b64ec8ea59b457ab018a2a2a5b",
+      "reviewed": true,
+      "fields": {
+        "question": "Does replacing nearest rounding with SR implement ECO's master-free training?",
+        "answer": "No. SR changes how an FP32 value maps to low-precision grid points; this local function still takes FP32 master values. ECO additionally removes resident masters and compensates momentum, with elementwise effective steps for Adam. Their state and update contracts differ.",
+        "example": "Rounding 1+1/1024 upward to BF16 with probability1/8 checks a conditional mean. It says nothing about deleting the FP32 master and performs no momentum-error compensation."
+      }
+    },
+    "dive/foundation-models/training-budget/update/2026-11-11/2": {
+      "source_sha256": "6f22323ee3a6958eba8bd71714d58d59eed4f57f52bdc9da1823b3285ed8c58f",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added NVIDIA stochastic rounding alongside Google's ECO to separate quantized update visibility from master-state memory savings. Preserved finite-range, negative/subnormal, conditional-unbiasedness and synchronization contracts. This is an L1 numerical core; full 64-H100/64-B200 training is not reproduced."
+      }
+    },
+    "dive/multimodal-models/visual-evidence-budget/comparison/multimodal-models:steprefine": {
+      "source_sha256": "9168e1c0c3133b24eeea341fc39fe5c64c58c6e4e5454b85f7d8e6e4ffb48f75",
+      "reviewed": true,
+      "fields": {
+        "position": "Detects masked mean-entropy spikes against completed history, refines probability-weighted masked-token embeddings, stops by new-to-old KL stability and charges k extra forwards through the next index t-1-k.",
+        "tradeoff": "Changes diffusion-token semantic computation, not image acquisition or visual-encoder reruns. It differs from visual AdaLoop recurrence. CPU formulas contain no MDLM, images or remasking loop and establish no hallucination-benchmark improvement."
+      }
+    },
+    "dive/multimodal-models/visual-evidence-budget/analysis/2": {
+      "source_sha256": "a4c270122f3ae16f81b2e9c790320bf81cdb2b99d90215ccf60623e88b5811c7",
+      "reviewed": true,
+      "fields": {
+        "title": "Equal iteration counts do not equate soft-token refinement with visual recurrence",
+        "body": "StepRefine preserves probability-weighted semantics in masked MDLM inputs, stopping by new-to-old KL and charging the fixed NFE budget. Visual AdaLoop instead modulates frozen visual blocks by the question and recurrently updates visual state, placing extra computation on the visual side. Neither gains new raw image evidence merely by computing again. Track stage, state, stop signals and full generation cost before comparing, rather than treating formula accuracy as less hallucination."
+      }
+    },
+    "dive/multimodal-models/visual-evidence-budget/question/soft-token-versus-visual-loop": {
+      "source_sha256": "b40e67c5f972317c279acde6d876b65892a998d135a7958d354969f1a8e21ff2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not compare StepRefine and visual AdaLoop simply by iteration count?",
+        "answer": "They compute on different objects, with different per-iteration costs and accounting. StepRefine refines soft-token semantics and charges a fixed denoising budget. AdaLoop recurs over question-modulated visual states. A comparison needs real backbones and end-to-end budgets, not equal loop counts.",
+        "example": "Two additional StepRefine passes at t=16 must move the index to13. Two visual-block loops in AdaLoop have no corresponding denoising index and do not automatically acquire a new image."
+      }
+    },
+    "dive/multimodal-models/visual-evidence-budget/update/2026-11-11/1": {
+      "source_sha256": "ac36fc56a757cf1249148a6ae0cd1a38151a4bbbea923d1aa49503b6d8b3d9c6",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added StepRefine, distinguishing entropy-triggered soft-token refinement from visual AdaLoop recurrence. Preserved new-to-old KL, historical-window isolation and t-1-k budget accounting. L1 CPU formulas do not substitute for real MDLM/hallucination evaluation; the full model matrix is not reproduced."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/comparison/multimodal-models:rs-jepa": {
+      "source_sha256": "50f8ebe2e7930764afb615c2d1e5c040f04ed65116cf5c0c23ecd0e6ba162f72",
+      "reviewed": true,
+      "fields": {
+        "position": "Builds non-pixel-edited views from Vision Mamba scan orders, uses straight-through gradient-reversed hard half-partitions and aligns four twin-excluded sensor-neighborhood distributions to detached consensus.",
+        "tradeoff": "The shared-trunk stop-gradient target is not an EMA teacher. Cross-sensor retrieval representations are not action-conditioned future prediction or policy. Local permutation/gradient/neighborhood kernels omit Vim, full CVA/predictors and retrieval results; the four-V100 study is not reproduced."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/analysis/4": {
+      "source_sha256": "147356afd2f48cdde036f6fde1eed340e878a25d2077ab300f5b6cbae474b8a6",
+      "reviewed": true,
+      "fields": {
+        "title": "JEPA representation alignment and a world-action loop require different supervision",
+        "body": "RS-JEPA aligns registered sensor images and scan views for retrieval. Its adversarial partitions and neighborhood loss describe relationships among current scenes, not action-conditioned state transitions merely because its name includes JEPA. V-JEPA Policy freezes a pretrained encoder and trains a future-latent predictor and action expert, requiring separate action/environment validation. Remote-sensing F1@5, latent prediction error and robot success cannot be combined into one score."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/question/retrieval-jepa-not-action-policy": {
+      "source_sha256": "266140adb1075de767f0c840df7391f2821bbd37a5bc56a142e2bb2c4060f673",
+      "reviewed": true,
+      "fields": {
+        "question": "Does consistent cross-sensor neighborhoods in RS-JEPA establish action planning?",
+        "answer": "No. They constrain registered-image retrieval representations and similarities to other scenes, without defining action-conditioned dynamics or a policy output. V-JEPA Policy adds a future predictor and flow-matching action expert. Passing representation kernels cannot replace environment-task validation.",
+        "example": "Both sensors ranking similar farmland scenes consistently demonstrates agreement in representation. It predicts neither what a robot will see after moving nor which action it should take."
+      }
+    },
+    "dive/multimodal-models/world-state-actions/update/2026-11-11/3": {
+      "source_sha256": "386f17dc5478269c58938650191f28d6274a3d6259dcee808b3e361320cf18a1",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added RS-JEPA to distinguish scan views, adversarial partitions and neighborhood consensus from V-JEPA Policy's future/action loop. Preserved shared-trunk stop-gradient rather than momentum targets. These are L1 tensor mechanisms; full Vim/CVA/predictor training and multi-dataset retrieval are not reproduced."
+      }
+    }
+  }
+}

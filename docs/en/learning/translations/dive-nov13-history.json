@@ -1,0 +1,197 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:scientist-two": {
+      "source_sha256": "0d0971aaa4937da3b07b4e3902dd06f8bf62e6c35e4388f13759af3ad4769c48",
+      "reviewed": true,
+      "fields": {
+        "position": "Research is organized into rejectable, refinable, budgeted stages, with independent full evaluation after subset screening and continued exploration from both successful and failed history.",
+        "tradeoff": "Control schedules experiments and reviews but does not establish the truth of external judgments or artifacts. ScientistOne's integrity audit complements ScientistTwo's research-expansion control; neither local component is a complete autonomous scientist."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/9": {
+      "source_sha256": "4c34a9a4c47eff584f08de07c78d22dad5704853acc14ccb8856e3e77d280d14",
+      "reviewed": true,
+      "fields": {
+        "title": "Bounded research expansion and evidence integrity need separate acceptance gates",
+        "body": "ScientistTwo organizes research through subset-to-full escalation, successful and failed history, untried seeds, strict-improvement replacement and review budgets. ScientistOne's CoE targets score recomputation, citations, rules and method/code consistency, while its local kernel also externalizes semantic judgments. Even unanimous stage acceptance and high review scores can rest on incorrect or fabricated logs. Conversely, recomputable evidence does not establish novelty or superiority. Local state tests establish budgets and data flow, not capability on the 107 research tasks."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/cross-scientist-control-versus-evidence-integrity": {
+      "source_sha256": "02d70388f3db023cf471b31f27c413301e22d91b38c9403adbad4f4779158643",
+      "reviewed": true,
+      "fields": {
+        "question": "After strict-improvement comparison and two review rounds, may ScientistTwo skip a ScientistOne-style evidence audit?",
+        "answer": "No. Comparison and review judgments come from external models or people; the control kernel only schedules calls, updates and stopping. Independent score recomputation, split isolation, log provenance and method/code consistency still need checking. A high score does not prove provenance.",
+        "example": "Teaching example: an external comparator returns true based on a copied high score, and the kernel faithfully updates best. Only execution and provenance audits reveal that the score does not belong to the current code."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-13/9": {
+      "source_sha256": "a2cc968725a24642eff14be06e238da125bbc360dfaed280aae1a1e054a4a166",
+      "reviewed": true,
+      "fields": {
+        "summary": "Repair the historical omission of Google's ScientistTwo, separating research-expansion control from evidence integrity. The local CPU contracts generate no scientific findings; full multi-day commercial-agent experiments are not reproduced because of cost."
+      }
+    },
+    "dive/agent-research/planning-and-search/comparison/agent-research:ds-star": {
+      "source_sha256": "3efa6fae69317dea5a8eaee0212e69f8b2c0fdb921e2dd6a7f91473bdb65c7c5",
+      "reviewed": true,
+      "fields": {
+        "position": "Explicit semantic sufficiency checks condition on plan, code and execution output; insufficient plans route to append or truncate an erroneous suffix before generating one step.",
+        "tradeoff": "Backtracking can undo dependencies rather than merely append, but semantic verifier/router capability remains external. Local tests cover routing, data flow and budgets; an unreviewed final draft is not success. Full commercial evaluation was not run."
+      }
+    },
+    "dive/agent-research/planning-and-search/analysis/3": {
+      "source_sha256": "f9e24cf1e2eed3b23487d0f92d368133ac7df11b5f225f6d1e04fc85e87d81af",
+      "reviewed": true,
+      "fields": {
+        "title": "Observation feedback is not sufficiency proof, and truncation is not recomputation",
+        "body": "ReAct alternates reasoning, tool actions and observations to adapt to new information. DS-STAR additionally sends query, cumulative plan, code and output to a sufficiency verifier before appending or removing an erroneous suffix. After truncation, the original method still sends the last output to the planner and last code to the coder: these are revision context, not a recomputed prefix state. Real execution and semantic verification remain external; local L1 checks must not be ranked against ReAct's isolated capability results."
+      }
+    },
+    "dive/agent-research/planning-and-search/question/cross-plan-truncation-versus-execution-replay": {
+      "source_sha256": "80d3c5aa007ec78beb2d8e0b73ec3adaac41945e75381af68a6e1bd23104ef42",
+      "reviewed": true,
+      "fields": {
+        "question": "After DS-STAR removes an erroneous step, may the last output be treated as an execution of the correct prefix?",
+        "answer": "No. It came from the complete old code and may depend on the erroneous suffix. The original method retains it as revision context; the kernel claims neither file-state rollback nor data recomputation. Real coder/executor and independent verifier components must handle that.",
+        "example": "Teaching example: an aggregate after a wrong join does not disappear when plan text is deleted. External code must be regenerated and executed."
+      }
+    },
+    "dive/agent-research/planning-and-search/update/2026-11-13/2": {
+      "source_sha256": "fc35a74bf1d38b90abb9984712db1debf8964de8e6cc48076f1c9551a44f6904",
+      "reviewed": true,
+      "fields": {
+        "summary": "Repair the historical Google/KAIST DS-STAR omission, separating semantic sufficiency, plan backtracking and real execution state. Three CPU seeds test control only; the full commercial-agent evaluation is not reproduced and is not mischaracterized as large-model training."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:envharness": {
+      "source_sha256": "620f076f337923baed85cb79283e071c3ea6d4aa96c00b2af1c23656c334a396",
+      "reviewed": true,
+      "fields": {
+        "position": "Compose reachable-state replay, action/transition/observation hooks and serial tasks outside a frozen environment's standard interface while preserving its original success verifiers.",
+        "tradeoff": "This changes environments, not model-external tools/memory. Resettable tasks, trusted verifiers and fresh-rollout acceptance are prerequisites. Local CPU wrappers provide no EnvRigger, learning, real bridge or security sandbox."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/10": {
+      "source_sha256": "5102064c78d40341759693966ea524cb32478de0b99941efa1aac990c1a9e330",
+      "reviewed": true,
+      "fields": {
+        "title": "Agent execution layers and environment practice layers need separate ablations",
+        "body": "Harness² compares tools, prompts, memory and scripts under the same model/environment and accumulates evidence about improvement. EnvHarness changes practice conditions to expose particular weaknesses while retaining base goal verifiers. Changing both obscures attribution. A serial Chain's conjunction does not establish semantic compatibility; blocking shortcuts does not establish transferable learning. Full EnvRigger requires fresh-rollout acceptance and testing on untouched tasks, a capability chain absent from local wrappers."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/cross-environment-and-agent-harness-attribution": {
+      "source_sha256": "82a6920b59386ba34d96972cd2800f022feb16a693ca85a6706e11d16f5b1837",
+      "reviewed": true,
+      "fields": {
+        "question": "If both an agent harness and an environment Contract change and success rises, may the gain be attributed to EnvHarness?",
+        "answer": "No. Fix the policy, task splits and agent execution layer, compare learning/skills from original versus wrapped environments, then evaluate on untouched environments. Fixed toy wrapper tests cover neither learning nor transfer and do not integrate the two systems.",
+        "example": "Teaching example: adding a test tool while blocking direct submission may reduce failures because of either change. Separate controls are needed for attribution."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-13/10": {
+      "source_sha256": "7492c3180d5bea128df93546e3b219f941ac06038b76a572af1eb06ca6753737",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add EnvHarness's composable environment-side control, separating agent execution from practice conditions. Three CPU seeds test Stage/Contract/serial Chain contracts only; full commercial rollouts and eight-H100 training are not reproduced."
+      }
+    },
+    "dive/agent-research/planning-and-search/comparison/agent-research:era-flat-puct": {
+      "source_sha256": "364b485894ecdf88d9a869fbb92f208c546bda83ed5369f22f57f4a93daed90d",
+      "reviewed": true,
+      "fields": {
+        "position": "All executed programs compete directly, using normalized task-score ranks, a whole-tree uniform prior, and ancestor visit counts to choose the next code mutation.",
+        "tradeoff": "Descendant rollout means are not backed up, and selection does not recursively descend from the root. This differs from LATS action trajectories, environment feedback, and value backup. External execution, scoring, and split isolation are absent from the CPU arithmetic kernel; node counts or perfect fixtures do not establish scientific capability."
+      }
+    },
+    "dive/agent-research/planning-and-search/analysis/4": {
+      "source_sha256": "c29c11e1079cb6d85dcfb05d1336090f0ca755e6747188422a94dec5eaa85e14",
+      "reviewed": true,
+      "fields": {
+        "title": "Program-quality ranks and trajectory-return means are different tree values",
+        "body": "An ERA node is an executed program, and any node can be expanded directly. Task scores become relative ranks for PUCT selection; visit updates do not average descendant scores into ancestor values, and final selection still uses raw task score. LATS organizes actions and rollouts with MCTS, combining environment returns, value statistics, and failure reflections. Both need external feedback, but their search units, per-evaluation costs, and available evidence differ. Local ERA verifies finite-candidate selection arithmetic; local LATS uses complete-plan leaves and does not run the original LM value model or WebShop. These partial results cannot establish equal-budget scientific superiority. Fair comparison first fixes executors, validation/test isolation, failure costs, and the total budget."
+      }
+    },
+    "dive/agent-research/planning-and-search/question/cross-flat-program-rank-versus-rollout-value": {
+      "source_sha256": "778ffe3fea1e6654a16ce4b85f3cce6eeefcb0eb36a0d7c5a6536b09ef988fc3",
+      "reviewed": true,
+      "fields": {
+        "question": "Does limiting ERA and LATS to one hundred expansions make their exploration quality fairly comparable?",
+        "answer": "No. An ERA expansion generates and executes a new program to obtain a task score. A LATS rollout may perform several interactions and update values and reflections. A count is not a cost unit, and whole-tree ranking is not a trajectory-return mean. First align tasks and visible evidence, record model calls, execution and failure costs, and separate validation-based selection from testing. The local mechanism kernels do not supply that capability comparison.",
+        "example": "Teaching example: one program evaluation trains a model for two hours while another trajectory makes four inexpensive tool calls. Counting each as one expansion hides the budget difference. An exploration bonus also cannot, without new evaluation, replace the candidate with the highest raw validation score."
+      }
+    },
+    "dive/agent-research/planning-and-search/update/2026-11-13/3": {
+      "source_sha256": "c7bc57f4fad1b8791b68597f5556d2a7daa4a77863925178ac9ac3ea4e2df336",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add the historical Google ERA anchor, distinguishing whole-tree program-rank PUCT from LATS trajectory rollouts and value backup. Preserve v1 visit initialization and final selection by raw task score. The CPU component supplies mechanism evidence only; the full multi-task scientific search campaign is not reproduced because of cost."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:mle-star": {
+      "source_sha256": "42f06ef6b73cb403c54aaed4016c609010f60ed139c8bc6492357297cd8632d8",
+      "reviewed": true,
+      "fields": {
+        "position": "Retrieve models, validate beneficial merges, then target influential blocks with ablations and nested plan/evaluation loops; search ensembles separately.",
+        "tradeoff": "Real training and ablations are required. This is not MARS's cost-aware repository scheduling. The eight-V100, multi-hour full matrix is deferred; no local controller or capability metrics are supplied."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/11": {
+      "source_sha256": "35c4dbbcb5413a7c208941854ba1c6114b9e1fe680c20dd9eff86ea5e6ce0a75",
+      "reviewed": true,
+      "fields": {
+        "title": "Targeting an influential component differs from allocating budget across branches",
+        "body": "MLE-STAR uses executed ablations to focus local plans on a block. MARS schedules modular candidates with budget-aware MCTS and converts code/result differences into transferable lessons. Local impact and performance/time tradeoffs can complement each other but are not one score. Neither paper's competition results validate an empty local controller. Generated scripts, orchestration source, and executed capability are distinct assets."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/cross-block-targeting-versus-budget-allocation": {
+      "source_sha256": "4a51e406560b6f326e6a10242412cb318eaf9eee02b1de55530fc19b4a2c259e",
+      "reviewed": true,
+      "fields": {
+        "question": "Would MLE-STAR's ablation targeting and MARS's budget reward always choose the same expensive but influential change?",
+        "answer": "No. Ablation asks where refinement matters; a budget reward also trades performance against execution time. Neither automatically implements the other's search rule. A combination must separately fix validation and measured cost.",
+        "example": "Teaching example: a preprocessing change gains 0.01 in one hour, while another branch gains 0.008 in one minute. Influence and budget-limited exploration value can differ."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-13/11": {
+      "source_sha256": "57538235eb38ff961ba45b72bdd406b76b9b2fda04b6355f2b5a3e5e1fccda68",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add retrieval initialization and ablation-targeted refinement; distinguish local block search from cost-aware tree scheduling. Pin the exact2025v1 date and separate generated artifacts from controller source; full experiments are cost-deferred."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:alphaevolve": {
+      "source_sha256": "566f5e2b72704747593ee7df28c94ed6226ac518d1b9062694be680b8b14fed3",
+      "reviewed": true,
+      "fields": {
+        "position": "Fix a human evaluation contract and explore programs using mixed-model proposals, executed cascades, multidimensional archives, and asynchronous workers.",
+        "tradeoff": "Optimization depends on evaluator sufficiency and does not provide ScientistOne's claim/citation/method audit. Official artifacts verify constructions, not the controller; full search/production matrices are deferred with no local operator."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/12": {
+      "source_sha256": "279742fa02b0fa37007cd68a87e28ff80d0776a9dbef1ffa50da2cfb043d5e8f",
+      "reviewed": true,
+      "fields": {
+        "title": "Discovering a better object differs from grounding research claims about it",
+        "body": "AlphaEvolve searches using task-specific executable feedback. ScientistOne additionally checks numerical recomputation, citation support, and method/code alignment. A construction verifier establishes only its checked property, not every claim in a generated paper; a reliable evidence chain also does not guarantee novelty. Official result notebooks cannot recover the original discovery process, so the local contribution remains a cost-reviewed reference."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/cross-discovery-score-versus-claim-grounding": {
+      "source_sha256": "ade70793a1efd85f8ca2698295bec404b2c0f5a11afe229a14e8cae928cdae2c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does verifying a published matrix construction establish neither local AlphaEvolve discovery nor complete research integrity?",
+        "answer": "It does not execute proposals, archives, or distributed search, and it does not audit all numbers, citations, or prose/code alignment. Evidence supports only the object and property actually checked.",
+        "example": "Teaching example: a valid complex rank-48 construction does not establish rank48 over every field or local rediscovery. Each stronger claim needs separate evidence."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-13/12": {
+      "source_sha256": "20977864502e3249cf402a66be6893a6126cca7f94bf0817376d7f829dff6ac8",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add classical program evolution and cascaded evaluation; distinguish search results, construction verification, and claim grounding. The full runtime is not released or locally executed, and full experiments are cost-deferred."
+      }
+    }
+  }
+}

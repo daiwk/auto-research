@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "agent-research:agent-gym": {
+      "questions": [
+        {
+          "id": "post-agent-correction-layer",
+          "level": "basics",
+          "question": "Agent Gym为什么不把每条新业务例外都变成一次模型重训？",
+          "answer": "它把原acting agent与下游ALF规则层分开。显式条件只在匹配的案例上修正JSON，专家可以审核、关闭和回滚规则；原Agent和模型权重不必为每条例外改变。自动把规则晋升回原Agent仍是未来工作。",
+          "example": "教学例：紧急维修低于2000的授权例外可做窄条件纠错；这不等于模型已学会所有新采购规则，也不应放宽无关案例。",
+          "source_sections": [
+            "背景与主要改动",
+            "论文离线与线上效果"
+          ],
+          "added": "2026-11-12"
+        },
+        {
+          "id": "collect-plan-execute-order",
+          "level": "mechanism",
+          "question": "为什么ALF必须合并动作，并按Continuation→Patch→Edit执行？",
+          "answer": "多条规则分别运行LLM容易互相覆盖。先合并续跑到最早阶段，再对目标字段并集做一次patch，最后保留常量编辑，既保留纠错优先关系又把两个LLM层限制为最多两次调用。同scope还只选首条优先匹配规则。",
+          "example": "教学例：续跑把status改为continued，patch改为patched，最终常量规则改为approved；若先Edit后续跑，approved就会丢失。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-12"
+        },
+        {
+          "id": "rule-approval-versus-program-validation",
+          "level": "comparison",
+          "question": "Agent Gym的规则批准与PASE的程序patch接受，有什么不同？",
+          "answer": "Agent Gym核对目标与collateral后由SME显式批准下游纠错规则，运行时不直接编辑原Agent。PASE维护skill/program配对，以held-out validation严格改善决定是否接受程序替换。人工规则治理和测得的任务效果准入不能互相充当证据。",
+          "example": "教学例：一个采购例外经专家授权可以保留；一个电子表格程序即使语法正确，也须validation分数提高才被PASE接受，不能拿专家喜欢代替分数。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-12"
+        },
+        {
+          "id": "target-collateral-and-trust-boundary",
+          "level": "implementation",
+          "question": "本地ALF的批准字段和callback通过，能证明是真人批准或语义正确吗？",
+          "answer": "不能。组件要求精确规则摘要、目标匹配、外部具名批准及collateral警告确认，但不认证真人身份；callback必须返回真实修订JSON而不是success标签，仍不证明修正符合业务语义。八个条件操作也不是论文全部21个操作或完整Agent。",
+          "example": "教学例：callback把合法字符串状态改成错误字符串仍可能过类型检查，所以返回semantic_correctness_verified=false；缺批准或改错字段类型则机械拒绝。",
+          "source_sections": [
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-12"
+        }
+      ]
+    },
+    "agent-research:bats": {
+      "questions": [
+        {
+          "id": "budget-versus-realized-cost",
+          "level": "basics",
+          "question": "BATS里的工具预算和统一费用为什么要分开？",
+          "answer": "预算是事先允许的每工具调用上限；费用是实际发生的token和工具消耗。预算相同的两条路径可能缓存命中、输出长度和工具使用都不同，所以不能用预算额度替代实际费用。",
+          "example": "教学例：两条路径都允许10次搜索，一条只搜2次且命中缓存，另一条搜10次并生成长文；两者预算相同但账本成本不同。",
+          "source_sections": [
+            "核心公式",
+            "背景与主要改动"
+          ],
+          "added": "2026-11-12"
+        },
+        {
+          "id": "any-tool-exhausted-and-pivot",
+          "level": "mechanism",
+          "question": "搜索用尽但浏览还有余额时，BATS应该继续吗？PIVOT会补满预算吗？",
+          "answer": "不会。Appendix B只在所有工具u_i<b_i时进入下一轮，所以任一工具耗尽即终止。PIVOT仅保存外部摘要、清空原轨迹并换方向，已用次数必须保留；SUCCESS后有预算也继续新attempt。",
+          "example": "教学例：search预算1、browse预算10；一次search后browse仍有10次也结束。若search预算3且只用1次再Pivot，剩余仍是2，不是3。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-12"
+        },
+        {
+          "id": "adaptive-budget-versus-precomputed-plan",
+          "level": "comparison",
+          "question": "相比ReWOO一次性计划再执行，BATS多强调了什么？",
+          "answer": "ReWOO把Planner与后续工具观察解耦以减少重复规划；BATS持续让剩余额度进入推理，并根据外部自验证继续、换路或收集候选。它们改变不同控制假设，不能仅凭本地状态测试判定谁的任务正确率更高。",
+          "example": "教学例：一个预排三步的ReWOO计划照依赖填证据；BATS发现首方向矛盾时可摘要换路，但必须面对真实剩余预算，而不是免费重启。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-12"
+        },
+        {
+          "id": "external-verdict-and-cache-accounting",
+          "level": "implementation",
+          "question": "本地BATS为什么不把SUCCESS计为accuracy，cache token又怎么收费？",
+          "answer": "SUCCESS只是显式外部verifier的接受信号，模块没有gold或语义judge；最终selector还必须从接受集合选。计费规定input包含cache子集，因此先从input减去cache，再分别按uncached/cache/output价格计算，不能重复收费。",
+          "example": "教学例：100个input含40个cache、20个output，价格分别.002/.0005/.004，token费用为.22而不是.30；这仅是构造账本，不是API实测或正确率。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-12"
+        }
+      ]
+    }
+  }
+}

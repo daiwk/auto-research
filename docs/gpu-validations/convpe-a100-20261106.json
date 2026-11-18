@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "adapter_key": "convpe",
+  "validated_at": "2026-11-06",
+  "accelerator": {
+    "vendor": "NVIDIA",
+    "model": "NVIDIA A100-SXM4-80GB",
+    "count": 1
+  },
+  "command": [
+    "timeout",
+    "300",
+    "python3",
+    "scripts/run_nov06_components.py",
+    "--device",
+    "cuda",
+    "--source-commit",
+    "a08d1337e6e455bf645184a9787569b85c17f422",
+    "--frozen-proof",
+    "frozen-sources.json",
+    "--output",
+    "raw-cuda.json"
+  ],
+  "dataset": {
+    "id": "synthetic:nov06-convpe-v1",
+    "revision": "sha256:3d5ea7c401a1f112fb72b6017f1740ac29d0b1e01882c0d7496a26ea8dfaead2",
+    "recipe": "small seeded tensors, CPU arithmetic or state contracts; no public capability benchmark",
+    "capability_benchmark": false
+  },
+  "checkpoint": {
+    "public_id": "none-seeded-component-initialization",
+    "revision": "a08d1337e6e455bf645184a9787569b85c17f422",
+    "pretrained": false
+  },
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "result": "passed",
+  "metrics": {
+    "causal_prefix_max_abs_error": 0.0,
+    "decode_chunk_max_abs_error": 0.0,
+    "formula_max_abs_error": 2.220446049250313e-16,
+    "hidden_gradient_l2": 0.019844437585297522
+  },
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "provenance": {
+    "commit": "a08d1337e6e455bf645184a9787569b85c17f422",
+    "artifact_path": "docs/gpu-validations/convpe-a100-20261106.json",
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "executed_source_sha256": {
+      "scripts/run_nov06_components.py": "2c5d5f19018068f192b2ba3ef7ae8a1b3ec83d1f2d135d312a300d46bfa64dc2",
+      "docs/research-audits/nov06-priority-components/preflight.json": "0994e5e26c511991235fa5ea80d6b3e5cfb383b62567b55ae130b202636f5950",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "scripts/run_nov04_components.py": "61d35d574d9561e4611d2647174b8a6af07fabf8c30b6909e21e253542cf4336",
+      "src/auto_research/agent_research/envopt.py": "8abf3ddda4747863290bbaaff173d2059442221550b5e23eb4178086cdeebcab",
+      "src/auto_research/foundation_models/convpe.py": "3d5ea7c401a1f112fb72b6017f1740ac29d0b1e01882c0d7496a26ea8dfaead2",
+      "src/auto_research/foundation_models/pipnn_ii.py": "64bdabb4932d519cc7f2354fb478faf5b673e0ee5f46fdbd100e90a31a9093db",
+      "src/auto_research/post_training/cord_rollout.py": "d1ebc55e1d18c6456e105a097f09c6180d9b4ddb43da6417e5be9f4b2ca4fc15",
+      "src/auto_research/post_training/ragcompass.py": "b333a14ddd0976d482d9c4441a9968bebdfe449ab6d0afc8133ebaebf2b6d771",
+      "src/auto_research/reproductions/ice_components.py": "112ff079a24314900335837c65a00bb3a9a523ac6337c15bceccd97cb48f60e2",
+      "src/auto_research/reproductions/ured_components.py": "6691937b7e5e837414e18947c2d2d54ee0e5195686f28697ef9d08fc4550cb69"
+    },
+    "dataset_fingerprint": "sha256:071cd891ac0056ff63666005e0bc997ab1c71e8629e5047218da344998dbdda9",
+    "raw_runner_artifact_sha256": "8764d3f6a95b712bf4c1fe4ed74fdd280290abc5e9c12c09042daa92f022ed56",
+    "metric_artifact_path": "docs/foundation-models/2611.07749-convpe/metrics/component-cuda-seeds42-44.json"
+  }
+}

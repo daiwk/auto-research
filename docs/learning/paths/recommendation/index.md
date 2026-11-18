@@ -10,7 +10,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="retrieval-matching/">候选生成与搜索匹配</a></h2>
 <p>精排模型再强，能否找回召回阶段漏掉的好内容？</p>
-<p class="ar-learning-topic-meta">148 个问题 · 37 篇论文</p>
+<p class="ar-learning-topic-meta">152 个问题 · 38 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="content-semantic-ids/">语义表征、用户知识与冷启动</a></h2>
@@ -25,7 +25,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="generative-retrieval-reasoning/">生成式召回与推理推荐</a></h2>
 <p>把物品改写成token后，推荐究竟改变了哪一步？</p>
-<p class="ar-learning-topic-meta">256 个问题 · 64 篇论文</p>
+<p class="ar-learning-topic-meta">268 个问题 · 67 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="feedback-multitask-causality/">学习信号、多任务与反馈偏差</a></h2>
@@ -35,7 +35,7 @@
 <article class="ar-learning-topic-tile">
 <h2><a href="slates-business-value/">列表与业务控制：重排、出价和长期价值</a></h2>
 <p>把单个物品按分数排好，为什么还不等于一张好列表？</p>
-<p class="ar-learning-topic-meta">152 个问题 · 38 篇论文</p>
+<p class="ar-learning-topic-meta">156 个问题 · 39 篇论文</p>
 </article>
 <article class="ar-learning-topic-tile">
 <h2><a href="research-serving-loop/">自动研究与高效上线</a></h2>

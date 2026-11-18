@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/post-training/student-trajectory-distillation/comparison/post-training:cord-rollout": {
+      "source_sha256": "17a73d9350381924c970fd3d1226f4fbdbe251ac2f70ca7e5ea84b759d375433",
+      "reviewed": true,
+      "fields": {
+        "position": "CoRD constructs a geometric mixture q directly at each shared prefix. It proposes a student token, then keeps or replaces it via maximal coupling so that the emitted marginal is exactly q. Distillation still uses reverse KL to the teacher.",
+        "tradeoff": "Unlike MPOPD, it requires neither a separately fitted proposal nor a frozen one-token-lag ratio. It needs both distributions at every sampling prefix, and an intermediate mixing weight restricts q to their common support."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/analysis/5": {
+      "source_sha256": "47335f61de53e66fbbd4e56fb97f9f349f00a1402dfaa5dbd1ff50180046290d",
+      "reviewed": true,
+      "fields": {
+        "title": "One geometric target, two rollout designs",
+        "body": "MPOPD fits a separate proposal and rolls out from it. Student training uses a frozen, one-token-lag ratio. CoRD computes q directly at the same prefix and replaces tokens using the positive residual, moving the emitted distribution exactly to q. Both retain reverse KL to the teacher. A comparison must separate proposal approximation, per-step teacher cost, and loss weighting, rather than crediting every difference to the geometric mixture."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/question/cord-rollout-vs-mpopd": {
+      "source_sha256": "33ef75853592ccce1b30f51c03cc1535b70f2c1ab9c36fcdcc6bdbe4633c45ab",
+      "reviewed": true,
+      "fields": {
+        "question": "If MPOPD's fitted proposal replaces CoRD's maximal coupling, do we still emit exactly q while changing as few student proposals as possible?",
+        "answer": "No. MPOPD's proposal approximates q; it is not maximally coupled to student proposals. CoRD keeps mass min(pS, q) and replaces only into the positive residual. It therefore matches the target marginal and attains the total variation lower bound on replacements.",
+        "example": "For student probabilities (0.8, 0.2) and q = (0.5, 0.5), CoRD moves only 0.3 of total mass from the first token to the second. Even a proposal with marginal exactly q would disagree with the student with probability 0.5 if sampled independently."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/update/2026-11-06/4": {
+      "source_sha256": "118a75b15ff57824f3f85144c6a41ed5c2e75205d5d04a26c5842972ad99fa57",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added CoRD rollout sampling and compared its geometric target, maximal coupling, and proposal design with MPOPD. Local checks verify only the distribution mechanism, without student training."
+      }
+    },
+    "dive/post-training/teacher-and-context/comparison/post-training:ragcompass": {
+      "source_sha256": "c9b81793f82d40cea22ebcd07da60df5acb119524a05a493f09dc7d72313f48a",
+      "reviewed": true,
+      "fields": {
+        "position": "RAGCompass uses a shared reranker for retrieved evidence sets. It softens answer F1 from a fixed offline reader into a target distribution over candidates, then minimizes candidate-level KL.",
+        "tradeoff": "It does not need retriever IDs or incomparable retriever confidence scores, but its labels depend on a fixed reader and offline reference answers. Inference compares scores alone, without true F1 or the filtering gap."
+      }
+    },
+    "dive/post-training/teacher-and-context/analysis/4": {
+      "source_sha256": "86c3b20a6793c1d9c96475ff0d61a68fc626f09256785f99da3ccd1eff3df6a6",
+      "reviewed": true,
+      "fields": {
+        "title": "Does extra information condition the teacher or merely define a training label?",
+        "body": "OPSD gives a verified solution to a same-weights teacher that predicts a vocabulary distribution at the student's prefix. Targeted Guidance inserts judgment feedback only before failed turns, alongside the usual RL reward. RAGCompass uses reference answers only to label candidate evidence sets by offline reader F1; its supervision is over whole candidates, not tokens. None permits training-only information to leak into inference."
+      }
+    },
+    "dive/post-training/teacher-and-context/question/ragcompass-offline-gap": {
+      "source_sha256": "ccd44fe9c3a0f31a329d070d15c3b8f2ec64e49133c488217be4b08bc26598b2",
+      "reviewed": true,
+      "fields": {
+        "question": "When offline F1 is close between two retrieval candidates, can RAGCompass apply the 0.05 threshold at inference? How is this different from OPSD's privileged information?",
+        "answer": "No. That threshold filters offline examples with reference answers. Inference uses reranker or comparison-head scores. OPSD feeds the privileged solution to the teacher to change vocabulary predictions; RAGCompass uses reference answers only to define candidate labels, not as scorer inputs.",
+        "example": "Offline F1 values of 0.50 and 0.48 fail the filter. In deployment, scorer values of 0.2 and 0.7 still select the second candidate; true F1 must not be consulted."
+      }
+    },
+    "dive/post-training/teacher-and-context/update/2026-11-06/2": {
+      "source_sha256": "4847e93736666c6d7e0c9163a3c1158941c2d9557befa9593c9da1570ea312ac",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added RAGCompass evidence-set utility distillation and compared the supervision axis, feedback entry point, and offline-to-deployment boundary with OPSD and Targeted Guidance."
+      }
+    }
+  }
+}

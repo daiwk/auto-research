@@ -1,0 +1,23 @@
+{
+  "domain":"agent-research","key":"ds-star",
+  "title":"DS-STAR: Data Science Agent via Iterative Planning and Verification",
+  "paper_url":"https://arxiv.org/abs/2509.21825","reviewed_version":"v1",
+  "reviewed_arxiv_id":"2509.21825v1","reviewed_version_url":"https://arxiv.org/html/2509.21825v1",
+  "detail_path":"agent-research/2509.21825-ds-star/README.md",
+  "topic":["数据科学 Agent","验证驱动规划与回溯"],
+  "first_author":"Jaehyun Nam","first_author_affiliation":"Google Cloud / KAIST",
+  "verified_priority_organizations":["Google Cloud"],
+  "published":"2025-09-26","published_at":"2025-09-26T03:38:12Z",
+  "code":"https://github.com/google-research/ds-star",
+  "code_status":"作者官方仓库已发布；本次核对HEAD6c05b01e30f01489af12708e99eda932e44d10ba，README含新版题名及DS-STAR+，本地组件仍按固定v1的§3.2/Algorithm1实现，不声称复现新版扩展。",
+  "adapter":null,"priority":"P0","implementation_status":"component_only",
+  "local_operator":"auto_research.agent_research.ds_star.run_plan",
+  "local_command":"PYTHONPATH=src python -c 'from auto_research.agent_research.ds_star import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier":"l1_mechanism","diagnostic_only":true,"promotion_eligible":false,"evolve_integrated":false,
+  "requires_gpu_validation":false,"gpu_validation_passed":false,"review_done":true,"full_experiment_review_done":true,
+  "full_experiment_status":"not_reproduced_commercial_dependencies",
+  "automatic_retry":false,"automatic_implementation_queue":false,
+  "cost_assessment":{"source":"https://arxiv.org/html/2509.21825v1#A3","available_resource":"CPU控制核，无API或GPU依赖","basis":"作者在DABStep10个development任务报告每任务12.7次LLM调用、154669输入和3373输出token、USD0.23；不是大训练，不能因多Agent就夸为高成本。完整三benchmark需商业Gemini2.5Pro/GPT5、数据文件和真实代码执行，本轮不运行其商业Agent评测或虚构完整成本。"},
+  "fidelity_note":"仅按typed外部planner/coder-executor/verifier/router执行有界控制。回溯删除被错步骤及其后缀，保留上一输出供再规划；严格区分语义充分与预算耗尽未验证。无数据分析模型、真实执行器或benchmark接入，固定truth-table只测L1合同。",
+  "summary":"DS-STAR先描述异构文件，再让语义verifier检查计划、代码和执行输出是否足以答题；不足时router决定追加或回溯再生成。本地只复现CPU数据流和预算，不把callback当成数据科学能力。"
+}

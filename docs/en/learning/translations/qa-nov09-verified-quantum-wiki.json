@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:verified-quantum-wiki/frozen-specification-before-sharing": {
+      "source_sha256": "c1f6d98c60d9ba9851720db5245dc52f49cd8259fd24fe3d0814f3f7be155f44",
+      "reviewed": true,
+      "fields": {
+        "question": "A team says its Lean file compiles. Why is that insufficient for admission to the shared wiki?",
+        "answer": "Teams can edit their workspaces, potentially changing the theorem, dependency definitions, or allowed axioms. This paper replays submissions in an independent clean sandbox, using Comparator against the frozen specification to ensure the problem was not weakened and the resource theorem matches the claimed cost before admission.",
+        "example": "Teaching example: The original theorem covers all inputs, but a team changes it to cover only zero. The file may compile, yet target_theorems_match must be false; even a claimed 90% cost reduction cannot justify admission."
+      }
+    },
+    "qa/agent-research:verified-quantum-wiki/two-admission-branches": {
+      "source_sha256": "f20a9a36b57eb2913871bed096a7f7b0709039a849da4326cf7d8d56579367c8",
+      "reviewed": true,
+      "fields": {
+        "question": "Are the default 5% cost threshold and 20% code-shortening threshold joined by AND or OR?",
+        "answer": "Passing external re-verification is mandatory. The two subsequent branches are OR: reduce cost by at least 5%, or shorten code by at least 20% while strictly reducing cost. Shortening alone at unchanged cost is insufficient. Both solutions must share the frozen specification and cost convention.",
+        "example": "Teaching example: Starting from cost 100 and size 100, (95,120) passes the first branch, (99,80) passes the second, and (100,1) is rejected. Callers fix the size unit; the paper does not specify bytes or lines."
+      }
+    },
+    "qa/agent-research:verified-quantum-wiki/proof-not-benchmark-selection": {
+      "source_sha256": "04518a5dc0e570e7f4bb2d3e6b0fffb3a35194a86e21e2ae59eb3d042d79ff39",
+      "reviewed": true,
+      "fields": {
+        "question": "How does wiki admission fundamentally differ from selecting reasoning strategies by development-set accuracy?",
+        "answer": "Development-set selection compares empirical performance on finite samples and requires held-out testing and uncertainty analysis. This paper first proves correctness and cost under frozen formal specifications, then filters for sufficiently large improvements. Proofs can exceed simulatable examples but cannot validate the physical assumptions or turn retrospective collaboration attribution into a causal experiment.",
+        "example": "Teaching example: A strategy answering 95 of 100 development questions correctly does not prove correctness for all inputs. A QHL theorem may cover every state satisfying its precondition yet inherit a specification that omits a gate cost. They need different external reviews."
+      }
+    },
+    "qa/agent-research:verified-quantum-wiki/typed-receipt-is-not-proof": {
+      "source_sha256": "807d01c5acff3fc7adeba440155b9ffe46fc74a03629e8f6f803802b53dbbf51",
+      "reviewed": true,
+      "fields": {
+        "question": "Does constructing an ExternalComparatorResult and passing admission establish formal verification of a quantum program?",
+        "answer": "No. The object is an interface to a trusted external verifier; it neither runs Lean nor authenticates evidence. A real host must independently verify the candidate and authenticate the source before supplying the result. CPU fixtures test bindings, failure rejection, and thresholds only. The number of actual Lean proofs verified is zero.",
+        "example": "Teaching example: Reusing an old proof receipt for a new artifact is rejected on its hash mismatch even if every flag is true. If a malicious caller forges both hashes and flags, this component cannot detect it; an external trusted boundary must prevent that."
+      }
+    }
+  }
+}

@@ -27,6 +27,47 @@ def test_delta_state_replay_matches_official_reference():
     assert torch.allclose(scores.final_state, state, atol=1e-6)
 
 
+@pytest.mark.parametrize('key_heads,value_heads,length', [(1, 2, 7), (2, 4, 4), (2, 2, 2)])
+def test_checkpoint_replay_expands_documented_grouped_value_heads(key_heads, value_heads, length):
+    from auto_research.multimodal.vcola_checkpoint import _replay_query_key_heads
+    module = pytest.importorskip('transformers.models.qwen3_5.modeling_qwen3_5')
+    torch.manual_seed(53)
+    q = torch.randn(1, length, key_heads, 3)
+    k = torch.randn_like(q)
+    v = torch.randn(1, length, value_heads, 4)
+    g, beta = -torch.rand(1, length, value_heads), torch.rand(1, length, value_heads)
+    original_q, original_k = q.clone(), k.clone()
+    expanded_q, expanded_k = _replay_query_key_heads(q, k, v)
+    repetitions = value_heads // key_heads
+    # Keep [B,S,H,D] even when S==H_v (or S==H_k==H_v). Repetition
+    # order is [head0, head0, head1, head1], not [head0,head1,...].
+    assert expanded_q.shape == (1, length, value_heads, 3)
+    for index in range(value_heads):
+        assert torch.equal(expanded_q[:, :, index], q[:, :, index // repetitions])
+        assert torch.equal(expanded_k[:, :, index], k[:, :, index // repetitions])
+    assert torch.equal(q, original_q) and torch.equal(k, original_k)
+    if repetitions == 1:
+        assert expanded_q is q and expanded_k is k
+    scores = delta_state_scores(expanded_q, expanded_k, v, g, beta)
+    # Expanded inputs are accepted by both old and new official kernels, so
+    # this numerical oracle does not skip behavior on older dependencies.
+    output, state = module.torch_recurrent_gated_delta_rule(
+        expanded_q, expanded_k, v, g, beta, initial_state=None,
+        output_final_state=True, use_qk_l2norm_in_kernel=True)
+    torch.testing.assert_close(scores.recurrent_output, output, atol=1e-6, rtol=1e-5)
+    torch.testing.assert_close(scores.final_state, state, atol=1e-6, rtol=1e-5)
+
+
+def test_checkpoint_replay_rejects_invalid_grouped_value_head_contracts():
+    from auto_research.multimodal.vcola_checkpoint import _replay_query_key_heads
+    q = torch.randn(1, 4, 2, 3)
+    for bad_value in (torch.randn(1, 4, 3, 4), torch.randn(1, 4, 1, 4)):
+        with pytest.raises(ValueError, match='positive integer multiple'):
+            _replay_query_key_heads(q, q.clone(), bad_value)
+    with pytest.raises(ValueError, match='batch,sequence,heads,dimension'):
+        _replay_query_key_heads(q, q.clone(), torch.randn(1, 5, 4, 4))
+
+
 def test_importance_reads_final_state_and_uniqueness_is_probe_change():
     q = torch.tensor([[[[1., 0.]], [[0., 1.]]]])
     key = q.clone()

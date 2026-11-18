@@ -1,0 +1,257 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:clarification-sgp/cost-sensitive-three-actions": {
+      "source_sha256": "4736e1d436ca5675e337fbe60f8e0bf93ce0f21b2dff392251977d7b9cb1cc8f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why doesn't SGP always clarify or always answer?",
+        "answer": "Questions and long answers impose user costs. The policy trades expected accuracy gains against α and β; the best behavior depends on context, not maximum clarification.",
+        "example": "Teaching example: enumerating ten interpretations may be worse than one question in voice use, while a high question cost can favor the most likely answer."
+      }
+    },
+    "qa/agent-research:clarification-sgp/balanced-expectation-before-best-rollout": {
+      "source_sha256": "724f9a097e55acce6b1dfebd54e8dcd9da81a9ab23172830a0e5d4f10deac70f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why choose an interpretation-balanced action sequence before best rollouts?",
+        "answer": "One lucky maximum favors easy interpretations. Average within each interpretation and then uniformly across them; only after sequence selection choose each interpretation's best compatible rollout.",
+        "example": "Teaching example: guessing scores100 for one intent and0 for another, while clarification scores80 for both. The isolated100 must not decide the sequence."
+      }
+    },
+    "qa/agent-research:clarification-sgp/sgp-versus-sml-feedback": {
+      "source_sha256": "f8957c3d9340d06be73d5fd2ef0eac73f084189a932c295e463238b01e23cc93",
+      "reviewed": true,
+      "fields": {
+        "question": "Do SGP and Social Meta-Learning optimize the same dialogue behavior?",
+        "answer": "No. SGP explicitly conditions guessing/clarifying/multi-answer selection on numerical costs. SML learns to solve through teacher feedback, with separate question priming. Shared multi-turn form or success filtering does not imply identical objectives.",
+        "example": "Teaching example: deciding whether a question is worth its cost differs from using the answer to correct a solution."
+      }
+    },
+    "qa/agent-research:clarification-sgp/reward-score-and-filter-units": {
+      "source_sha256": "cddae0dacd41e1ccd1a434c0be5197741f69ac3969cce61e5e78d75c055938b3",
+      "reviewed": true,
+      "fields": {
+        "question": "Can threshold0.1 and clarification cost2 be subtracted in the same F1 units?",
+        "answer": "Not without conversion. Filtering uses0–1 F1 locally; reward uses100×F1 points before subtracting costs. If reward is normalized, costs must also divide by100 or the policy changes.",
+        "example": "Teaching example: a0.1 F1 gain is ten points, so a two-point question can pay off. Subtracting2 directly from0.1 is wrong."
+      }
+    },
+    "qa/post-training:social-meta-learning/public-history-private-teacher": {
+      "source_sha256": "73597520d33b0ae0f72f13e9986bdc15be02b6c073735d43366553af3138e8db",
+      "reviewed": true,
+      "fields": {
+        "question": "May the SML student directly see the teacher's private answer at inference?",
+        "answer": "No. The student sees public dialogue; the teacher owns private answers or verifier feedback. Private knowledge used to synthesize training questions does not authorize evaluation leakage.",
+        "example": "Teaching example: a teacher can explain a boundary condition, not secretly add a hidden-answer field to student observations."
+      }
+    },
+    "qa/post-training:social-meta-learning/success-student-mask-gradient": {
+      "source_sha256": "f146420d27b088f71de11ef43a6a4f115ec525cdd976824776d2f3587e1ff543",
+      "reviewed": true,
+      "fields": {
+        "question": "Why filter successful dialogues and mask teacher tokens in offline SML?",
+        "answer": "Success filtering retains productive interaction, while student-only training updates the student's response policy. Treating teacher answers as student targets trains the wrong role and breaks information separation.",
+        "example": "Teaching example: an eloquent teacher explanation in a failed dialogue must not produce student-policy gradients as if it were a successful student response."
+      }
+    },
+    "qa/post-training:social-meta-learning/sml-not-sgp-cost-policy": {
+      "source_sha256": "ae45db19f493ed7e0f9acc45cf422b541e647504691f495a3f449ebb8b6805bc",
+      "reviewed": true,
+      "fields": {
+        "question": "Does asking more questions prove SML learned SGP-style cost steerability?",
+        "answer": "No. SML chiefly rewards solving through feedback, and Q-priming adds questions after failures. SGP also conditions on α/β and tests predictable behavior changes under costs.",
+        "example": "Teaching example: always asking twice may improve success yet fail a voice user's preference for fewer questions."
+      }
+    },
+    "qa/post-training:social-meta-learning/empty-success-and-q-exponent": {
+      "source_sha256": "d1bc2655d27880a7462af3f1e1efe78a7277ba0c44bdf3a9ebe97483a3fad1c8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why reject a batch with no successful student tokens instead of returning zero loss?",
+        "answer": "Zero would hide absent training signal as a normal completed update. The kernel rejects empty selection; Q-priming also requires an explicit nonnegative exponent and incorrect boolean.",
+        "example": "Teaching example: an all-failed batch needs resampling or an explicit no-data record, not a purported successful training update."
+      }
+    },
+    "qa/agent-research:mt-pingeval/private-information-needs-dialogue": {
+      "source_sha256": "e97e7e3bf0c206cb5f60326c537062090d2a0103aedc3c4aa00574c9217bf361",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not evaluate Name-game from one player's table alone?",
+        "answer": "The target depends on the intersection of two private tables and generally cannot be determined from one. Isolate views and make communication the information channel instead of supplying a merged table.",
+        "example": "Teaching example: Alice has two Isabellas; Bob's private company/allergy fields distinguish the complete match."
+      }
+    },
+    "qa/agent-research:mt-pingeval/isotoken-turn-formula": {
+      "source_sha256": "606d4d7aeecfeda14e4f0f435e30a3234ae6de2cba60cf2195fe6b057d0cfbb3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does128 tokens/player over16 alternating turns allow16, not8, per utterance?",
+        "answer": "The conversation has256 tokens across16 alternating turns. Each player speaks eight times, giving128. Dividing128 by16 confuses per-player and total turns.",
+        "example": "Teaching example: Alice and Bob each get8×16 tokens, without an extra budget reset."
+      }
+    },
+    "qa/agent-research:mt-pingeval/more-turns-versus-random-guess-opportunity": {
+      "source_sha256": "be2466c6c953f376b62255270b076fd758c4d767088079072e03bafb300eb593",
+      "reviewed": true,
+      "fields": {
+        "question": "Does higher Name-game success with more turns necessarily mean better collaboration?",
+        "answer": "No. More turns also permit more random guesses without replacement, a baseline examined in the paper. Hold tokens fixed and inspect information exchange rather than success alone.",
+        "example": "Teaching example: guessing one of25 rows per turn is naturally likelier to succeed in16 turns than two."
+      }
+    },
+    "qa/agent-research:mt-pingeval/evaluator-not-actor-object": {
+      "source_sha256": "50e96cdd262a8c01d955c51539868aa5495a7fdcbceb3ef77052557ca35784e7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why pass only PrivateView, not NameGame, to an actor?",
+        "answer": "NameGame holds both tables and the intersection as evaluator state. Exposing it leaks the other player's information. PrivateView contains only the actor's records; scoring stays outside.",
+        "example": "Teaching example: reading game._common in an actor closure makes perfect success answer leakage, not dialogue."
+      }
+    },
+    "qa/post-training:maple-icl/dp-metadata-not-raw-private-icl": {
+      "source_sha256": "1ab6eddb0a2a44c4546e6b7295ac9bfb4135ee4ebad9888c09393a7a0f671734",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not use raw private metadata/text directly as MAPLE few-shot examples?",
+        "answer": "That bypasses privacy and reveals records to the generator. The method first privatizes metadata with AIM and uses donated/public non-private examples. Local code proves neither premise.",
+        "example": "Teaching example: adding a consent_ref string to a private record creates neither actual consent nor DP."
+      }
+    },
+    "qa/post-training:maple-icl/hamming-categorical-bins": {
+      "source_sha256": "d0770b16a2b8d7ea3cf9363ade17013ff3402c3481a87e16be0c66561349c0a8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use Hamming for numerical word-count bins rather than Euclidean distance?",
+        "answer": "The schema treats bins as categories: each unequal field contributes one regardless of magnitude. Normalizing by the common field count preserves top-k; local ties are stable.",
+        "example": "Teaching example: for target100, bins50 and1000 each contribute one mismatch, not different numerical penalties."
+      }
+    },
+    "qa/post-training:maple-icl/initialization-not-pe-or-privacy": {
+      "source_sha256": "980d4040e81e0c9a57c49032b441ac5d9c145ac2b663fc8358afcdc25f57c342",
+      "reviewed": true,
+      "fields": {
+        "question": "Does metadata-nearest ICL selection reproduce private synthesis?",
+        "answer": "No. It is one initialization step; AIM, privacy accounting, the generator and AugPE are absent. The paper also finds initialization alone does not match full MAPLE.",
+        "example": "Teaching example: choosing ten suitable public examples does not make later unprotected private voting safe."
+      }
+    },
+    "qa/post-training:maple-icl/schema-and-tie-provenance": {
+      "source_sha256": "177e144f9918516e529c192cf45ec0d72c14202c90ee271d41cb76757bfae74b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not fill a missing schema field with Other before ranking?",
+        "answer": "That changes distances and hides extraction failures. Require exact fields and public-domain values. Stable input-order ties are a local convention, not attributed to the paper.",
+        "example": "Teaching example: replacing a missing research area with Other can promote the wrong example; upstream provenance must be repaired."
+      }
+    },
+    "qa/agent-research:policybank/compliant-but-wrong": {
+      "source_sha256": "c3ab1f1d9a328bcb51302cbb152ef437e85725c59661dd4d75800fd54a601629",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is a TypeII PolicyBank failure not simply disobedience?",
+        "answer": "TypeII follows the written specification yet violates actual requirements. Repeating the specification can reinforce the gap; trusted developer feedback must identify it.",
+        "example": "Teaching example: a flawed rule couples compensation to rebooking, so a compliant refusal may still be wrong."
+      }
+    },
+    "qa/agent-research:policybank/capability-not-tool-only-memory": {
+      "source_sha256": "f1207cf980719fa693c07b80ae5259184005f9386b38e5d5a998183fc11d03b5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why split one tool into several capability entries?",
+        "answer": "The same tool can have different authorization boundaries. Entries expose trigger/preconditions/eligibility/action/key insight; headers support targeted full retrieval.",
+        "example": "Teaching example: insured cancellation and exception waivers share an API but have different eligibility."
+      }
+    },
+    "qa/agent-research:policybank/policybank-versus-workflow-memory": {
+      "source_sha256": "75a4cd7a5b34f660824fd11dfee3189cc8af90c8cb05d0b9d0850889b99e20c2",
+      "reviewed": true,
+      "fields": {
+        "question": "Can successful workflow memory replace PolicyBank's authorization updates?",
+        "answer": "Not necessarily. Past trajectories may repeatedly follow a flawed spec. PolicyBank targets authorization deltas in developer feedback; local storage still lacks semantic repair.",
+        "example": "Teaching example: ten successful rebookings do not settle compensation without rebooking."
+      }
+    },
+    "qa/agent-research:policybank/explicit-revise-not-automatic-permit": {
+      "source_sha256": "e4d2e878b25e1470ed95865d5e3618c6aa20b01127bf1eebd777feecfccaadc7",
+      "reviewed": true,
+      "fields": {
+        "question": "Does apply_after_task establish that a corrected policy is true?",
+        "answer": "No. It applies explicit Add/Revise/Omit changes and preserves IDs/provenance, without interpreting permit/deny or validating feedback truth. Real permission changes need review.",
+        "example": "Teaching example: an attacker can supply a well-typed but false refund rule and cause policy drift."
+      }
+    },
+    "qa/agent-research:co-director/factored-strategy-not36-pipelines": {
+      "source_sha256": "e0cecabb95d7d580d13a06c4c74273527e2037a8cc6526a4b6ba3c94c2aaaa1b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why ten factored arms rather than36 independent joint arms?",
+        "answer": "Three strategy, three narrative and four aesthetic arms maintain separate statistics. Each video updates three selected arms; one evaluation is not multiplied into36 observations.",
+        "example": "Teaching example: strategy80/narrative50/aesthetic70 update their own dimensions."
+      }
+    },
+    "qa/agent-research:co-director/quality-not-strategic-reward": {
+      "source_sha256": "e6540668e4fff343552fbc8d31d8b4fe49f3a17f317dea1e774a51a415a20ee4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not choose best_video by the sum of strategic rewards?",
+        "answer": "Strategic efficacy updates the bandit; aggregate video quality chooses the final artifact. Strong strategy can coexist with visual or temporal artifacts.",
+        "example": "Teaching example: a strategically strong video with identity drift may lose to a coherent lower-strategy one."
+      }
+    },
+    "qa/agent-research:co-director/ucb-versus-random-causal-claim": {
+      "source_sha256": "d7bed9898011d002697c5ef3f6f77b5012c9266d250286a42bb231527158e0a6",
+      "reviewed": true,
+      "fields": {
+        "question": "Do factored rewards identify each creative axis's causal effect?",
+        "answer": "No. MLLM ratings are observations and dimensions may interact. UCB organizes exploration/exploitation, not causal identification.",
+        "example": "Teaching example: changing lighting also alters performance; the aesthetic rating does not isolate lighting's causal contribution."
+      }
+    },
+    "qa/agent-research:co-director/warm-start-no-fake-counts": {
+      "source_sha256": "4e97cc85aa21e24b4af71f693279db47f326edb7d08e32819f9bee82ceff40b1",
+      "reviewed": true,
+      "fields": {
+        "question": "May a warm-start recommendation receive ten invented high-reward pulls?",
+        "answer": "No. Inspected upstream code prioritizes a recommended unpulled arm without fabricating observations. Counts update only after external evaluation.",
+        "example": "Teaching example: recommending cinematic aesthetics means try it first, not record ten90-point videos."
+      }
+    },
+    "qa/agent-research:instruct-to-act/planner-versus-controller-timescale": {
+      "source_sha256": "7e64ecdc5000b2f22aaf35489e22c6b37353f28cc2253334d1e7e22e06d30867",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not ask the VLM for every low-level action?",
+        "answer": "High-level VLM reasoning is slow; a controller acts quickly from observations. Sparse language guidance separates timescales but does not remove environment-specific training.",
+        "example": "Teaching example: a VLM says chop a tree while the controller performs movement/swings; the sentence alone does not create motor skill."
+      }
+    },
+    "qa/agent-research:instruct-to-act/interval-end-completion": {
+      "source_sha256": "a8b0c75048ac6796a9227b77a395fe505c6c80980dfde982320d18e081bb8025",
+      "reviewed": true,
+      "fields": {
+        "question": "Why mark completion only at an annotated interval's last step?",
+        "answer": "The interval's actions jointly realize one instruction. Marking every step complete teaches immediate stopping. Instruction completion also differs from episode termination.",
+        "example": "Teaching example: in a three-step approach to a door, only the last step reaches the subgoal."
+      }
+    },
+    "qa/agent-research:instruct-to-act/bc-not-full-dreamer": {
+      "source_sha256": "c6e02e20350e645874f9f5ee46b6cb7f44eae97bec4a45c2396dfcd980ccbb9e",
+      "reviewed": true,
+      "fields": {
+        "question": "Do correct BC and stop losses reproduce the language world-model controller?",
+        "answer": "No. RSSM model/actor/value learning, real rollouts, instruction embeddings and annotation are still required. Local code executes two auxiliary objectives without replacing missing networks.",
+        "example": "Teaching example: correct gradients do not establish diamond collection in Minecraft."
+      }
+    },
+    "qa/agent-research:instruct-to-act/unannotated-stop-negative-padding": {
+      "source_sha256": "9299553d7fbb84dabb36d801fc4fd61cb267f8cd1370068c9cb8899b73d5d6d4",
+      "reviewed": true,
+      "fields": {
+        "question": "How do unannotated actions and padding differ across the two losses?",
+        "answer": "Unannotated valid actions have no BC but remain stop negatives with completion=false. Padding is excluded from both. Removing unannotated stop terms changes the objective.",
+        "example": "Teaching example: a valid autonomous step teaches continue; a padding slot must produce no gradient."
+      }
+    }
+  }
+}

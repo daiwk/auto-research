@@ -1,0 +1,41 @@
+{
+  "domain": "agent-research",
+  "key": "retrace",
+  "title": "ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows",
+  "paper_url": "https://arxiv.org/abs/2611.14492",
+  "reviewed_version": "2611.14492v1",
+  "detail_path": "agent-research/2611.14492-retrace/README.md",
+  "topic": [
+    "工具调用与执行",
+    "轨迹到工作流与可审计条件"
+  ],
+  "first_author": "Kaiyuan Hou",
+  "first_author_affiliation": "Columbia University / Amazon internship",
+  "published": "2026-11-10",
+  "published_at": "2026-11-10T18:49:47Z",
+  "code": null,
+  "code_status": "固定原文未给ReTrace作者代码仓库；公共benchmark仓库不等于方法源码。",
+  "adapter": null,
+  "priority": "P1",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.agent_research.retrace.DecisionList",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.agent_research.retrace import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.14492v1",
+    "available_resource": "单张 A100/A30 或本地 Mac",
+    "basis": "Sonnet/Opus多次构建、每trace配置36个requested workflow、训练折repair、多benchmark执行；79内部SOP与平台私有。完整实验不复现；$2.32只是公共构建估计，不能冒充企业总成本。"
+  },
+  "fidelity_note": "运行限定eq/ne/exists的typed decision-list IR，保留SOP/轨迹支持及unwitnessed标记；不做LLM抽取/聚合/合成，不调用真实工具或模型。",
+  "summary": "ReTrace从Agent推理与工具记录恢复条件、参数来源和分支，再编译成运行时无planner的工作流。本地实现可审计typed IR分派，不复现79私有生产SOP或公共benchmark能力。",
+  "gpu_validation_passed": false
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "status": "failed_diagnostic_preserved_not_accepted_evidence",
+  "diagnostic_only": true,
+  "accelerator": "NVIDIA A100-SXM4-80GB",
+  "failed_source_commit": "2dae975f27347276954c7724d0b192462101a36c",
+  "failure": "stochastic_rounding.stochastic_cast rejected a cuda generator against the equivalent cuda:0 input device before producing accepted CUDA evidence",
+  "cause": "strict torch.device equality did not canonicalize an unspecified CUDA index to the current CUDA device",
+  "fix_commit": "ef3521b7a3bdef545a584bc356ada87c68938a99",
+  "resolution": "resolve only unspecified CUDA indices to the actual current device; retain rejection of different explicit GPU indices and CPU/CUDA mismatch",
+  "rerun": "all sixteen CPU components and all four CUDA components rerun from the new immutable source proof for seeds 42,43,44",
+  "accepted_raw_artifact": "docs/research-audits/nov11-components/raw-cuda.json",
+  "pretrained_model_calls": 0,
+  "full_experiments_executed": false,
+  "promotion_eligible": false
+}

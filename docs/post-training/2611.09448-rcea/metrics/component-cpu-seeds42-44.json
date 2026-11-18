@@ -1,0 +1,128 @@
+{
+  "schema_version": 2,
+  "method": "rcea",
+  "manifest_ref": "post-training:rcea",
+  "dataset": {
+    "id": "synthetic:nov09-rcea-v1",
+    "revision": "sha256:b663756ec3e6fdf490dcab15a02df3d4fe3403f691bebbfbeab00ca891a86802",
+    "recipe": "Seeded numerical or control-rule fixtures; not an upstream capability benchmark",
+    "capability_benchmark": false
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "chain_rule": true,
+        "covariance_predicts_sharpening": true,
+        "mode_count_within_support": true
+      },
+      "metrics": {
+        "entropy_reconstruction_abs_error": 0.0,
+        "effective_valid_modes": 2.553140546326134,
+        "predicted_entropy_delta_nats": -0.0008536026780058914,
+        "observed_entropy_delta_nats": -0.0008534359324126051,
+        "first_order_abs_error": 1.6674559328634132e-07
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "chain_rule": true,
+        "covariance_predicts_sharpening": true,
+        "mode_count_within_support": true
+      },
+      "metrics": {
+        "entropy_reconstruction_abs_error": 0.0,
+        "effective_valid_modes": 2.6717323577849763,
+        "predicted_entropy_delta_nats": -0.0008319262572659713,
+        "observed_entropy_delta_nats": -0.000831744787157751,
+        "first_order_abs_error": 1.8147010822028645e-07
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "chain_rule": true,
+        "covariance_predicts_sharpening": true,
+        "mode_count_within_support": true
+      },
+      "metrics": {
+        "entropy_reconstruction_abs_error": 2.220446049250313e-16,
+        "effective_valid_modes": 2.736102292453902,
+        "predicted_entropy_delta_nats": -0.0011928881157783748,
+        "observed_entropy_delta_nats": -0.0011925888972552645,
+        "first_order_abs_error": 2.99218523110243e-07
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "effective_valid_modes": 2.653658398855004,
+    "entropy_reconstruction_abs_error": 7.401486830834377e-17,
+    "first_order_abs_error": 2.158114082056236e-07,
+    "observed_entropy_delta_nats": -0.0009592565389418736,
+    "predicted_entropy_delta_nats": -0.0009594723503500791
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "three-seed synthetic mechanism diagnostic; not a capability comparison"
+  },
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "9e7827e38009b1f5d7333c3f1139e1f27f4c15cd",
+    "artifact_path": "docs/post-training/2611.09448-rcea/metrics/component-cpu-seeds42-44.json",
+    "accelerator": "CPU",
+    "executed_source_sha256": {
+      "scripts/run_nov09_components.py": "90b27c91333e1762269aa3e5369ba23d84e74af59d1c9fbbb30619c12ac18ebf",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "scripts/curate_nov04_components.py": "d390b21757809ed0e8a4a6a2441f92073447965a341cbd33aeece73bc0c4f050",
+      "scripts/run_nov04_components.py": "61d35d574d9561e4611d2647174b8a6af07fabf8c30b6909e21e253542cf4336",
+      "docs/research-audits/nov09-atom-increment/preflight.json": "b87057ca049fdf855d3389b53a4a3bbf147b724684c156014353bbc52fe18e43",
+      "src/auto_research/agent_research/verified_quantum_wiki.py": "9eacc4874d9f9e6ed068f11bc8bf8f7afa876555c731c442e40548f2813e30e4",
+      "src/auto_research/foundation_models/e_means.py": "0b57d3b779508e288f8604de54bedb72a64348429ece2ebb10fbf6d5c93563bc",
+      "src/auto_research/agent_research/engram_consolidation.py": "f6632e88509a5fe7ee1da4f8af6ccc94d4f623b541c146221552ee85326f4b30",
+      "src/auto_research/post_training/rcea.py": "b663756ec3e6fdf490dcab15a02df3d4fe3403f691bebbfbeab00ca891a86802",
+      "src/auto_research/paper_specs/catalog/agent-research/verified-quantum-wiki.json": "ebd7c5668b5700e878e1cdac876f2af517adf876787b776c7b216c12f06f2286",
+      "src/auto_research/paper_specs/catalog/foundation-models/e-means.json": "b05f8a1382b2a40a40449c61a2cac5d7312b8219e036d31ebd7db0ba1ba0c10f",
+      "src/auto_research/paper_specs/catalog/agent-research/engram-consolidation.json": "563364e390d068516fa3b5775c3ede63ac577e6d1bb446acc330ea116eaebc57",
+      "src/auto_research/paper_specs/catalog/post-training/rcea.json": "a1564ef089be6f6d14a355fd850d93c303b23c9ae50ceb6866b83cdac6e07afe"
+    },
+    "dataset_fingerprint": "sha256:e02e49865a33870b318cde487dd4097c7200022d1c26bd3a5e4b5e4576d6f22e"
+  }
+}

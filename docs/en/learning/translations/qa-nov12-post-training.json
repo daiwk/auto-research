@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/post-training:bopd/fresh-student-not-continuation": {
+      "source_sha256": "6f797ac0048255b15309592af1665a2f1fc1c299e5a5ef4cb3f90a692293de56",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not continue training the Stage I student during BOPD Stage II?",
+        "answer": "BOPD separates teacher construction from transfer. The Stage I student becomes the frozen intermediate teacher. Stage II restores the student exactly to M0 and creates a fresh optimizer. Retaining Stage I student parameters or momentum changes the method.",
+        "example": "For example, a weight moving from 1 to 1.2 in Stage I remains 1.2 in the teacher, while the fresh student returns to 1; both must not start at 1.2."
+      }
+    },
+    "qa/post-training:bopd/fkl-and-trajectory-means": {
+      "source_sha256": "b46280e7643ee611037355943c641a3a533abbeea7a1fbd74905d2976ab4265e",
+      "reviewed": true,
+      "fields": {
+        "question": "Should BOPD FKL average every token in the batch together?",
+        "answer": "No. Average valid tokens within each student trajectory, then average trajectories. Preserve teacher-to-student KL and detach teacher distributions. A flat token average gives longer responses more weight.",
+        "example": "For response lengths 1 and 3 with losses 2 and all zeros respectively, equal-trajectory loss is 1, whereas a flat token average is .5."
+      }
+    },
+    "qa/post-training:bopd/teacher-context-after-bootstrap": {
+      "source_sha256": "bb25498d935f9ffe72b2a92d889453da32d5ac54f1b85b50bbd2d8d8aa0f3c61",
+      "reviewed": true,
+      "fields": {
+        "question": "How does BOPD's teacher context differ from continued reference-conditioned OPSD?",
+        "answer": "Stage I uses the reference-conditioned frozen initial teacher to construct an intermediate. Stage II freezes that intermediate and removes references, so teacher and student share observable context. Renaming a teacher or giving the student the reference is not equivalent.",
+        "example": "The Stage I teacher sees the problem and verified solution. In Stage II both models see only the problem and fresh-student prefix; reference-conditioned scores cannot be reused as though they were reference-free."
+      }
+    },
+    "qa/post-training:bopd/handoff-loss-not-two-stage-llm": {
+      "source_sha256": "68401794b75fe52a2ce67770b2dd9706dfe6f89e9dd03b7b1fbd2fb478533637",
+      "reviewed": true,
+      "fields": {
+        "question": "Do the handoff and CUDA checks establish a complete BOPD reproduction?",
+        "answer": "No. Local execution covers actual FKL, module copies, buffer restoration, a frozen teacher and a fresh optimizer. LLM rollouts, reference prompts and full two-stage training are absent. The mathematical FKL also does not implement the unaudited Appendix pointwise clipping.",
+        "example": "A zero restoration error in a small Linear module checks handoff only. The source additionally uses 2-4 GPUs, 3,200 student rollouts per stage and up to 38,912-token evaluation."
+      }
+    },
+    "qa/post-training:apmd-reference-reset/reference-not-student-reset": {
+      "source_sha256": "07d766cd8ea673d71265c8357ca8bf6fd98844619023e5d28fd74451dab076b7",
+      "reviewed": true,
+      "fields": {
+        "question": "Does an APMD reference reset restore student weights to the base?",
+        "answer": "No. The learner keeps its latest policy and uses it as the next KL anchor. Restoring the learner to the base each round would discard cumulative mirror progress. This is different from BOPD's fresh-student reset.",
+        "example": "After pi0 becomes pi1, APMD uses pi1 as the next reference; it does not restore the trainable learner to pi0."
+      }
+    },
+    "qa/post-training:apmd-reference-reset/kimi-bias-rebel-centering": {
+      "source_sha256": "f7f8cc92f49165d4de41af0a0757c9e999db21f31b6d83e35f4656d6d0d091e5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can centered-MSE vanish at the mirror target while Kimi's mean-baseline loss stays positive?",
+        "answer": "The mean reward is not the log normalizer. Kimi retains squared KL from the reference to the candidate, divided by eta squared. Rebel differences of independent same-reference response residuals cancel the constant, yielding exactly twice centered-MSE.",
+        "example": "With a uniform reference, rewards (1,0) and eta 1, the mirror target is softmax(1,0). Its centered residual vanishes, but reference and target differ, leaving positive Kimi bias."
+      }
+    },
+    "qa/post-training:apmd-reference-reset/practical-grpo-not-theorem": {
+      "source_sha256": "afc15cc155d86cbf2235b30c710139c4e9f7ef529c20892b4a72a7bcb1a49860",
+      "reviewed": true,
+      "fields": {
+        "question": "Does the PPO/GRPO analysis guarantee that any practical GRPO avoids coverage collapse?",
+        "answer": "No. Guarantees concern specific approximate-mirror algorithms satisfying reference-reset and inner-accuracy conditions, with softmax-linear policy and reward-realizability assumptions. Group advantages or clipping alone do not supply them.",
+        "example": "A GRPO implementation may refresh its old policy while keeping the KL reference fixed. That is not a reference reset and does not automatically inherit APMD's conclusion."
+      }
+    },
+    "qa/post-training:apmd-reference-reset/finite-enumeration-not-sample-complexity": {
+      "source_sha256": "1547da2c064504ffd5fec2b05b74f0be3852ad4f7950572de85529f665d2b539",
+      "reviewed": true,
+      "fields": {
+        "question": "Why enumerate finite responses without claiming a sample-complexity validation?",
+        "answer": "Enumeration checks mirror targets, reset paths and loss identities using explicit rewards. The source complexity guarantees additionally involve online sampling, policy classes and inner-error bounds. Array checks neither cover these conditions nor prove all theorems.",
+        "example": "The local 3 prompts each have 7 responses, so expectations are explicit. A real LLM's complete-response space cannot be exhausted by that small table."
+      }
+    },
+    "qa/post-training:lcs-reference-opd/same-task-success-not-any-success": {
+      "source_sha256": "6b140fbd4300a2b1cf926c85c28a3fa707fe6a4c66a5b2f3d1b7cb06817269f8",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not choose any similar successful trajectory for a failure?",
+        "answer": "Success validates its own task, not compatibility with the failed path. Select from reward-validated successes of the same task instance using ordered executed-action LCS. Even an identical cross-task sequence cannot bypass that boundary.",
+        "example": "Two room tasks may both contain a take-cup action but start with different cabinets and inventory. The other task's actions are not automatically a valid reference."
+      }
+    },
+    "qa/post-training:lcs-reference-opd/benchmark-normalizers": {
+      "source_sha256": "fd194d00d758cb7d6f1d15a6a262d0e98f3c1ee894cacdfb852dd77ec0c0696b",
+      "reviewed": true,
+      "fields": {
+        "question": "Can the ALFWorld and tau3 normalizers be silently unified?",
+        "answer": "No. ALFWorld divides by the shorter trajectory length, while tau3 divides by the failed length. The former measures agreement relative to the shorter sequence; the latter measures failed-sequence coverage. Rankings can reverse.",
+        "example": "For failure length 6, a length 2 reference matching 2 scores 1 under shorter normalization; a length 5 reference matching 4 scores .8. Failed normalization instead gives 1/3 and 2/3 and selects the longer reference."
+      }
+    },
+    "qa/post-training:lcs-reference-opd/lcs-not-state-proof": {
+      "source_sha256": "a443bcac258ccff172ded596a269f273a9fc8161d3b20b638d7b650b352a4d80",
+      "reviewed": true,
+      "fields": {
+        "question": "Do more LCS matches prove that actions occur in identical states?",
+        "answer": "No. Prefix matching has a state interpretation under shared initial conditions and deterministic transitions. After skipping unmatched actions, LCS additionally requires recoverable detours. Irreversible database writes or object moves can change later action meaning.",
+        "example": "An extra look may preserve the state and rejoin a route. An extra delete-record changes the database, so a later identical query need not see the same state."
+      }
+    },
+    "qa/post-training:lcs-reference-opd/free-target-failure-only": {
+      "source_sha256": "aae90ac586428751d6688c1bbfe638a8d1697a09024dbe5782176671bd1844f2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why neither one-to-one reference matching nor a full-batch loss denominator?",
+        "answer": "Free-target OT does not constrain reference frequencies, so multiple failures may choose the same best reference independently. Only failures are updated and the loss divides by their count. All-success batches skip the optimizer rather than applying momentum or decay with zero loss.",
+        "example": "Two failures may both choose reference A. If only 2 of 3 rollouts fail with losses 2 and 6, their mean is 4, not 8/3."
+      }
+    }
+  }
+}

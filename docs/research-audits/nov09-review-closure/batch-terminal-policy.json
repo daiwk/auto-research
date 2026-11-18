@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "authorized_on": "2026-11-11",
+  "window": {"start": "2026-10-16", "end": "2026-11-09"},
+  "authorization": {
+    "source": "user confirmation in the continuing PR #247 task",
+    "answer": "允许按此标准结案",
+    "scope": "标题和摘要明确表明为单一应用报告、重复评测或观点总结，且没有新的可独立复现算法或公开基准时，可按本轮不收录结案。"
+  },
+  "terminal_selection_decision": "not_selected_this_window",
+  "required_evidence": [
+    "fixed arXiv identity and observed revision",
+    "pinned original metadata capture and fingerprint",
+    "paper-specific title and abstract witnesses",
+    "positive genre or contribution evidence and an individual reason"
+  ],
+  "original_source_priority": ["verified or plausible Google/Meta affiliation", "possible production A/B or full-traffic evidence"],
+  "does_not_authorize": [
+    "rejecting original algorithms or new public benchmarks merely for low priority",
+    "treating an absent code or A/B keyword as proof of ineligibility",
+    "marking an unread in-scope paper as high cost",
+    "claiming title/abstract screening is full-text review or implementation",
+    "automatically implementing, training, retrying, merging or deploying"
+  ],
+  "full_experiment_cost_rule": "Original-source-supported high-cost non-reproduction is review DONE and non-blocking."
+}

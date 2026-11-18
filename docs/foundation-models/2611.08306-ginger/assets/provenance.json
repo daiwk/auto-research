@@ -1,0 +1,16 @@
+{
+  "paper_id": "2611.08306v1",
+  "figure": "2",
+  "source_page": "https://arxiv.org/html/2611.08306v1#S3.F2",
+  "source_url": "https://arxiv.org/html/2611.08306v1/nested_cubic_fit.svg",
+  "image": "paper-figure-01.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "23a29e1551c8f63f68b43644fca28b42e862538ff1185fb4eb0fdd0a490f2d93",
+  "original_sha256": "b79767ae29ad8d58c4c60fae12e284f1bd52bc09683546fd91a62fd24b5a2f84",
+  "width": 966,
+  "height": 415,
+  "license": "CC BY 4.0; figure copyright retained by the authors",
+  "transformation": "author SVG rasterized at 3× with rsvg-convert, without cropping or redesign",
+  "visual_review": "目视核对左侧高斯密度与固定粗区间内细分，以及右侧尾部区间的精确质心与分段拟合。",
+  "checked_on": "2026-11-07"
+}

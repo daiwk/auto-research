@@ -1,0 +1,20 @@
+{
+  "page": "docs/post-training/2611.06518-emoreward/README.md",
+  "paper_url": "https://arxiv.org/abs/2611.06518",
+  "arxiv_id": "2611.06518",
+  "figure": "Figure 2",
+  "original_caption": "See original figure and caption in the attributed source",
+  "source_url": "https://arxiv.org/html/2611.06518v1/Figure2_0915_Handdrawn.png",
+  "source_page": "https://arxiv.org/html/2611.06518v1#S3.F2",
+  "extraction": "arxiv-fixed-v1-original-png",
+  "asset": "docs/post-training/2611.06518-emoreward/assets/paper-figure-01.png",
+  "width": 2000,
+  "height": 1000,
+  "score": 0,
+  "error": "",
+  "visually_inspected": true,
+  "sha256": "060d7b557399deff6acd112c18fbf4d3d26476325aca8330477eb2db0560a339",
+  "license": "CC BY 4.0",
+  "checked_on": "2026-11-07",
+  "transformation": "original author PNG, byte-for-byte and uncropped"
+}

@@ -7,7 +7,7 @@ hide:
 
 # 长上下文：注意力、递归状态与记忆
 
-[基础模型](index.md) / 144 个问题 · 36 篇论文
+[基础模型](index.md) / 156 个问题 · 39 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,9 +26,115 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">144 个问题 · 36 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">156 个问题 · 39 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:adindex" data-paper-title="ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation 基础模型 Nanjing University / Alibaba Group 2026-11-07 DSA 为每个 query 独立扫描整个因果前缀来选 Top-K。ADIndex 发现相邻 query 的候选有层相关的重叠：先校准各层组大小与候选库容量，再训练一个较少 head 的组索引器。组内先共享一次全前缀扫描，随后原 DSA 仍逐 query 精排，并补入 anchor 后新可见的 token；不是把所有 query 的最终索引强行设为相同。 成本过高，不复现（审查 DONE）。诊断只在 4 个 query、32 个历史 key 上执行 64 步学生优化，检查训练 KL、冻结梯度、因果索引、新可见 token 和回退分支。L1 机制组件：小张量组索引器与候选精排，不是 DeepSeek/GLM 长文能力、SGLang serving 或加速比复现。GroupIndexer 接受外部提供的归一化 query latent、hidden 与严格 anchor 可见的 keys；本地冻结这些输入。teacher_distribution、forward_kl、refine_indices 与 union_capacity 对应教师、蒸馏、精排和容量统计。  注意力与长上下文 稀疏索引与共享候选库 基础模型 长上下文：注意力、递归状态与记忆 ADIndex 共享候选库，是不是让组内所有 query 用相同最终 Top-K？ 不是。组索引器只共享 anchor 可见历史上的候选库；每个 query 还会补入 anchor 后自己新可见的 token，再用原 DSA 分数独立精排。共享的是昂贵全前缀扫描，不是最终注意力位置。 教学例：anchor=31、query=34，共享库可能都是0到31里的位置，但32、33、34必须补进候选，最终Top-K仍可与query=32不同。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-adindex-a6c2f650" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-e1a6656e0afe7986">ADIndex 共享候选库，是不是让组内所有 query 用相同最终 Top-K？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aadindex">ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Nanjing University / Alibaba Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。组索引器只共享 anchor 可见历史上的候选库；每个 query 还会补入 anchor 后自己新可见的 token，再用原 DSA 分数独立精排。共享的是昂贵全前缀扫描，不是最终注意力位置。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：anchor=31、query=34，共享库可能都是0到31里的位置，但32、33、34必须补进候选，最终Top-K仍可与query=32不同。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.12956v1">原论文</a> · <a href="../../../../foundation-models/2611.12956-adindex/">实现解读</a> · <a href="#qa-e1a6656e0afe7986">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:adindex" data-paper-title="ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation 基础模型 Nanjing University / Alibaba Group 2026-11-07 DSA 为每个 query 独立扫描整个因果前缀来选 Top-K。ADIndex 发现相邻 query 的候选有层相关的重叠：先校准各层组大小与候选库容量，再训练一个较少 head 的组索引器。组内先共享一次全前缀扫描，随后原 DSA 仍逐 query 精排，并补入 anchor 后新可见的 token；不是把所有 query 的最终索引强行设为相同。 成本过高，不复现（审查 DONE）。诊断只在 4 个 query、32 个历史 key 上执行 64 步学生优化，检查训练 KL、冻结梯度、因果索引、新可见 token 和回退分支。L1 机制组件：小张量组索引器与候选精排，不是 DeepSeek/GLM 长文能力、SGLang serving 或加速比复现。GroupIndexer 接受外部提供的归一化 query latent、hidden 与严格 anchor 可见的 keys；本地冻结这些输入。teacher_distribution、forward_kl、refine_indices 与 union_capacity 对应教师、蒸馏、精排和容量统计。  注意力与长上下文 稀疏索引与共享候选库 基础模型 长上下文：注意力、递归状态与记忆 为什么 ADIndex 教师不能先对原始分数取 max，再做一次 softmax？ 论文先逐query标准化分数、按温度3做softmax，再逐token取跨query最大值，最后在Top-P支持归一。先max会混合不同query的偏移和尺度，并改变教师质量；这些运算不交换。 教学例：某query全部原始分数加100，不应改变它的逐query标准化概率；若先跨query取原始max，它却可能垄断教师候选。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-76f7fe0bca500e68">为什么 ADIndex 教师不能先对原始分数取 max，再做一次 softmax？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aadindex">ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Nanjing University / Alibaba Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>论文先逐query标准化分数、按温度3做softmax，再逐token取跨query最大值，最后在Top-P支持归一。先max会混合不同query的偏移和尺度，并改变教师质量；这些运算不交换。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：某query全部原始分数加100，不应改变它的逐query标准化概率；若先跨query取原始max，它却可能垄断教师候选。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.12956v1">原论文</a> · <a href="../../../../foundation-models/2611.12956-adindex/">实现解读</a> · <a href="#qa-76f7fe0bca500e68">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:adindex" data-paper-title="ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation 基础模型 Nanjing University / Alibaba Group 2026-11-07 DSA 为每个 query 独立扫描整个因果前缀来选 Top-K。ADIndex 发现相邻 query 的候选有层相关的重叠：先校准各层组大小与候选库容量，再训练一个较少 head 的组索引器。组内先共享一次全前缀扫描，随后原 DSA 仍逐 query 精排，并补入 anchor 后新可见的 token；不是把所有 query 的最终索引强行设为相同。 成本过高，不复现（审查 DONE）。诊断只在 4 个 query、32 个历史 key 上执行 64 步学生优化，检查训练 KL、冻结梯度、因果索引、新可见 token 和回退分支。L1 机制组件：小张量组索引器与候选精排，不是 DeepSeek/GLM 长文能力、SGLang serving 或加速比复现。GroupIndexer 接受外部提供的归一化 query latent、hidden 与严格 anchor 可见的 keys；本地冻结这些输入。teacher_distribution、forward_kl、refine_indices 与 union_capacity 对应教师、蒸馏、精排和容量统计。  注意力与长上下文 稀疏索引与共享候选库 基础模型 长上下文：注意力、递归状态与记忆 共享库为什么必须只看 anchor 历史，却又要给后续 query 补新 token？ 组库在anchor处构造，读取之后的key会泄漏未来；但后续query本来有权读取新出现的因果token，若不补回会不必要地丢失近期信息。因此共享库与每query可见区间要分开。 教学例：给anchor31的组索引器传入key34属于越界未来；到query34精排时加入32到34却是合法因果上下文。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-b506edaef4703085">共享库为什么必须只看 anchor 历史，却又要给后续 query 补新 token？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aadindex">ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Nanjing University / Alibaba Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>组库在anchor处构造，读取之后的key会泄漏未来；但后续query本来有权读取新出现的因果token，若不补回会不必要地丢失近期信息。因此共享库与每query可见区间要分开。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：给anchor31的组索引器传入key34属于越界未来；到query34精排时加入32到34却是合法因果上下文。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.12956v1">原论文</a> · <a href="../../../../foundation-models/2611.12956-adindex/">实现解读</a> · <a href="#qa-b506edaef4703085">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:adindex" data-paper-title="ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation 基础模型 Nanjing University / Alibaba Group 2026-11-07 DSA 为每个 query 独立扫描整个因果前缀来选 Top-K。ADIndex 发现相邻 query 的候选有层相关的重叠：先校准各层组大小与候选库容量，再训练一个较少 head 的组索引器。组内先共享一次全前缀扫描，随后原 DSA 仍逐 query 精排，并补入 anchor 后新可见的 token；不是把所有 query 的最终索引强行设为相同。 成本过高，不复现（审查 DONE）。诊断只在 4 个 query、32 个历史 key 上执行 64 步学生优化，检查训练 KL、冻结梯度、因果索引、新可见 token 和回退分支。L1 机制组件：小张量组索引器与候选精排，不是 DeepSeek/GLM 长文能力、SGLang serving 或加速比复现。GroupIndexer 接受外部提供的归一化 query latent、hidden 与严格 anchor 可见的 keys；本地冻结这些输入。teacher_distribution、forward_kl、refine_indices 与 union_capacity 对应教师、蒸馏、精排和容量统计。  注意力与长上下文 稀疏索引与共享候选库 基础模型 长上下文：注意力、递归状态与记忆 本地训练 KL 降低，能确认论文 6.22× kernel 加速了吗？ 不能。小张量只验证教师、组索引器优化、冻结输入、候选因果与回退分支，没有backbone、融合kernel或SGLang负载。速度应在匹配硬件、长度和质量条件下另测。 本地是4个query、32个历史key、64步优化；原文长达256K索引与B300 serving，加速比不能从小KL训练外推。 2026-11-11">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-14cd9ef74390351d">本地训练 KL 降低，能确认论文 6.22× kernel 加速了吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aadindex">ADIndex: Layer-Adaptive Sparse Attention Indexing via Group-Level Distillation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-11 · Nanjing University / Alibaba Group</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。小张量只验证教师、组索引器优化、冻结输入、候选因果与回退分支，没有backbone、融合kernel或SGLang负载。速度应在匹配硬件、长度和质量条件下另测。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>本地是4个query、32个历史key、64步优化；原文长达256K索引与B300 serving，加速比不能从小KL训练外推。</p>
+<p class="ar-learning-sources">依据：结果与复现边界、高成本完整实验；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.12956v1">原论文</a> · <a href="../../../../foundation-models/2611.12956-adindex/">实现解读</a> · <a href="#qa-14cd9ef74390351d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:convpe" data-paper-title="ConvPE: Convolutional Position Embedding Improves Transformers" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="ConvPE: Convolutional Position Embedding Improves Transformers 基础模型 Nanjing University 2026-11-05 RoPE 旋转 query/key；ConvPE 改的是 softmax 前的加性分数。它先把当前层隐状态投影到少量通道，再从当前及最近若干隐状态学习各相对距离的偏置。每个查询只得到窗口内偏置；窗口外偏置为零，不是把远处 key 屏蔽。因果和 padding mask 仍由注意力层负责。论文还讨论分组、低秩与二维变体，此处仅实现 §3.1 的默认无分组、无分解一维公式。 依据论文配置判断，完整训练/TileLang 对比超出单张 A100/A30 或 Mac 的本轮低成本预算，成本过高，不复现（审查 DONE）。ConvPEBias.compact_bias 输入浮点 [batch, query, model_dim]，输出 [batch, query, bias_head, lag]。其 forward 将这些偏置映射到稠密参考分数矩阵，不计算 QK、mask 或 softmax。解码块须传入绝对 query_start 与前置的 min(query_start, W-1) 个原始隐状态，而不是已经投影的 KV；跨序列不复用这些状态。  注意力与长上下文 卷积位置偏置 基础模型 长上下文：注意力、递归状态与记忆 ConvPE 在窗口外的偏置为零，是否意味着注意力只能看最近 W 个 key？ 不是。ConvPE 只改 softmax 之前的加性分数。窗口外的历史 key 仍可按原始 QK 分数参与注意力，未来位置是否可见则由独立的因果 mask 决定。 教学例：W=3，query 位于 5 时，key 0 的距离是 5，偏置为零但仍可读；key 7 也没有该偏置，却因因果 mask 不可读。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-convpe-a877fbf3" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-133f35f7b515da6d">ConvPE 在窗口外的偏置为零，是否意味着注意力只能看最近 W 个 key？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aconvpe">ConvPE: Convolutional Position Embedding Improves Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Nanjing University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。ConvPE 只改 softmax 之前的加性分数。窗口外的历史 key 仍可按原始 QK 分数参与注意力，未来位置是否可见则由独立的因果 mask 决定。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：W=3，query 位于 5 时，key 0 的距离是 5，偏置为零但仍可读；key 7 也没有该偏置，却因因果 mask 不可读。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07749">原论文</a> · <a href="../../../../foundation-models/2611.07749-convpe/">实现解读</a> · <a href="#qa-133f35f7b515da6d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:convpe" data-paper-title="ConvPE: Convolutional Position Embedding Improves Transformers" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="ConvPE: Convolutional Position Embedding Improves Transformers 基础模型 Nanjing University 2026-11-05 RoPE 旋转 query/key；ConvPE 改的是 softmax 前的加性分数。它先把当前层隐状态投影到少量通道，再从当前及最近若干隐状态学习各相对距离的偏置。每个查询只得到窗口内偏置；窗口外偏置为零，不是把远处 key 屏蔽。因果和 padding mask 仍由注意力层负责。论文还讨论分组、低秩与二维变体，此处仅实现 §3.1 的默认无分组、无分解一维公式。 依据论文配置判断，完整训练/TileLang 对比超出单张 A100/A30 或 Mac 的本轮低成本预算，成本过高，不复现（审查 DONE）。ConvPEBias.compact_bias 输入浮点 [batch, query, model_dim]，输出 [batch, query, bias_head, lag]。其 forward 将这些偏置映射到稠密参考分数矩阵，不计算 QK、mask 或 softmax。解码块须传入绝对 query_start 与前置的 min(query_start, W-1) 个原始隐状态，而不是已经投影的 KV；跨序列不复用这些状态。  注意力与长上下文 卷积位置偏置 基础模型 长上下文：注意力、递归状态与记忆 同一个查询的卷积输出，怎样映射到具体注意力头与 key？ 把卷积的 H_bW 个输出重排为偏置头和滞后距离。对头 h 和 key t，取头 h mod H_b、距离 s−t 的格子；距离越界时加零，不能按相邻头分组或使用 t−s。 教学例：H=4、H_b=2、W=3，查询 5 对 key 3 读取距离 2。头 0 和 2 读偏置头 0，头 1 和 3 读偏置头 1。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-f9b27b0187e38e82">同一个查询的卷积输出，怎样映射到具体注意力头与 key？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aconvpe">ConvPE: Convolutional Position Embedding Improves Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Nanjing University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>把卷积的 H_bW 个输出重排为偏置头和滞后距离。对头 h 和 key t，取头 h mod H_b、距离 s−t 的格子；距离越界时加零，不能按相邻头分组或使用 t−s。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：H=4、H_b=2、W=3，查询 5 对 key 3 读取距离 2。头 0 和 2 读偏置头 0，头 1 和 3 读偏置头 1。</p>
+<p class="ar-learning-sources">依据：核心公式、数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07749">原论文</a> · <a href="../../../../foundation-models/2611.07749-convpe/">实现解读</a> · <a href="#qa-f9b27b0187e38e82">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:convpe" data-paper-title="ConvPE: Convolutional Position Embedding Improves Transformers" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="ConvPE: Convolutional Position Embedding Improves Transformers 基础模型 Nanjing University 2026-11-05 RoPE 旋转 query/key；ConvPE 改的是 softmax 前的加性分数。它先把当前层隐状态投影到少量通道，再从当前及最近若干隐状态学习各相对距离的偏置。每个查询只得到窗口内偏置；窗口外偏置为零，不是把远处 key 屏蔽。因果和 padding mask 仍由注意力层负责。论文还讨论分组、低秩与二维变体，此处仅实现 §3.1 的默认无分组、无分解一维公式。 依据论文配置判断，完整训练/TileLang 对比超出单张 A100/A30 或 Mac 的本轮低成本预算，成本过高，不复现（审查 DONE）。ConvPEBias.compact_bias 输入浮点 [batch, query, model_dim]，输出 [batch, query, bias_head, lag]。其 forward 将这些偏置映射到稠密参考分数矩阵，不计算 QK、mask 或 softmax。解码块须传入绝对 query_start 与前置的 min(query_start, W-1) 个原始隐状态，而不是已经投影的 KV；跨序列不复用这些状态。  注意力与长上下文 卷积位置偏置 基础模型 长上下文：注意力、递归状态与记忆 ConvPE 与 RoPE 改变注意力的哪一部分？远处 key 的注意力权重一定不变吗？ RoPE 通过旋转 Q/K 改变点积，ConvPE 则叠加内容相关的局部分数偏置。窗口外原始 logit 不变，不等于归一化后的权重不变；局部 logit 变化也会改变 softmax 分母。 教学例：历史远近两个可见 key 的原始分数都为 0。只给近 key 加 2，远 key 的分数仍是 0，但权重从 0.5 降为约 0.119。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-6f7c1a5d0d6e0fed">ConvPE 与 RoPE 改变注意力的哪一部分？远处 key 的注意力权重一定不变吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aconvpe">ConvPE: Convolutional Position Embedding Improves Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Nanjing University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>RoPE 通过旋转 Q/K 改变点积，ConvPE 则叠加内容相关的局部分数偏置。窗口外原始 logit 不变，不等于归一化后的权重不变；局部 logit 变化也会改变 softmax 分母。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：历史远近两个可见 key 的原始分数都为 0。只给近 key 加 2，远 key 的分数仍是 0，但权重从 0.5 降为约 0.119。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心公式、论文离线与线上效果；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07749">原论文</a> · <a href="../../../../foundation-models/2611.07749-convpe/">实现解读</a> · <a href="#qa-6f7c1a5d0d6e0fed">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:convpe" data-paper-title="ConvPE: Convolutional Position Embedding Improves Transformers" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="ConvPE: Convolutional Position Embedding Improves Transformers 基础模型 Nanjing University 2026-11-05 RoPE 旋转 query/key；ConvPE 改的是 softmax 前的加性分数。它先把当前层隐状态投影到少量通道，再从当前及最近若干隐状态学习各相对距离的偏置。每个查询只得到窗口内偏置；窗口外偏置为零，不是把远处 key 屏蔽。因果和 padding mask 仍由注意力层负责。论文还讨论分组、低秩与二维变体，此处仅实现 §3.1 的默认无分组、无分解一维公式。 依据论文配置判断，完整训练/TileLang 对比超出单张 A100/A30 或 Mac 的本轮低成本预算，成本过高，不复现（审查 DONE）。ConvPEBias.compact_bias 输入浮点 [batch, query, model_dim]，输出 [batch, query, bias_head, lag]。其 forward 将这些偏置映射到稠密参考分数矩阵，不计算 QK、mask 或 softmax。解码块须传入绝对 query_start 与前置的 min(query_start, W-1) 个原始隐状态，而不是已经投影的 KV；跨序列不复用这些状态。  注意力与长上下文 卷积位置偏置 基础模型 长上下文：注意力、递归状态与记忆 解码块为什么要带入此前的隐状态，不能每块重新左补零？ 因果卷积依赖当前位置前的 W−1 个投影输入。真正序列起点才补零；在中间切块需给出相同层的原始隐状态及绝对偏移，保证输出与全序列计算切片一致。 教学例：W=3，从位置 4 开始解码，需要位置 2、3 的原始隐状态；把这两个 tap 当作零一般会改变位置 4 的偏置，即使 KV 缓存本身正确。 2026-11-06">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-f3a8236e5f08063f">解码块为什么要带入此前的隐状态，不能每块重新左补零？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aconvpe">ConvPE: Convolutional Position Embedding Improves Transformers</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-06 · Nanjing University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>因果卷积依赖当前位置前的 W−1 个投影输入。真正序列起点才补零；在中间切块需给出相同层的原始隐状态及绝对偏移，保证输出与全序列计算切片一致。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：W=3，从位置 4 开始解码，需要位置 2、3 的原始隐状态；把这两个 tap 当作零一般会改变位置 4 的偏置，即使 KV 缓存本身正确。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射、结果、负控与边界；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2611.07749">原论文</a> · <a href="../../../../foundation-models/2611.07749-convpe/">实现解读</a> · <a href="#qa-f3a8236e5f08063f">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:anchor-kv" data-paper-title="Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Anchor: Augmented Cross-Layer Recurrent State for Long-Context Retrieval in Test-Time Training 基础模型 University of Arizona 2026-11-03 不同层可能存储相近信息，却使用不同坐标基。Anchor 让一组层共享一个 recurrent state，以各层可学习 read-map 变换读出，再由输入相关 gate 与局部 SWA 合并。训练时保留 interior TTT 分支，部署时才删除，不能把部署结构直接当作训练配方。依据固定 v1 §3.2、§4.1、Appendix C。 完整训练与配置矩阵成本过高，不复现（审查 DONE）。诊断使用明确提供的人工 KV 矩阵，并非 LaCT 训练。SharedKVReadout 接收外部已更新 KVState，只允许指定 writer 推进 revision；复制输入 buffer 以免调用方后续修改旧证据。多个 reader 共享该 state，各自学习 identity 初始化的线性变换与 sigmoid gate。外部 writer 的 autograd 图不会被暗自 detach。  注意力与长上下文 跨层共享状态与测试时训练 基础模型 长上下文：注意力、递归状态与记忆 Anchor 既然发现状态跨层冗余，为什么不能直接给所有层读同一矩阵？ 冗余指内容相关，不代表坐标基相同。各reader需要可学习线性read-map，把共享内容表达成该层可用的坐标；writer保留自己的基。仅复制同一状态而没有映射，会把共享和基不匹配混为一谈。 教学例：同一个二维方向在一层写成(1,0)，另一层习惯的坐标是(0,1)。共享内容不变，但reader需要旋转映射才读到正确语义方向。 2026-11-04">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
 <span id="paper-foundation-models-anchor-kv-2d58f519" class="ar-learning-paper-anchor"></span>
@@ -1511,6 +1617,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>教学例：两段整数token得到0.9奖励，只说明该输入满足奖励公式，不说明任何语言模型权重发生了变化。</p>
 <p class="ar-learning-sources">依据：本地复现与边界、高成本完整实验；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2606.03979v2">原论文</a> · <a href="../../../../foundation-models/2606.03979-sleep-lti/">实现解读</a> · <a href="#qa-da8dd16e738119ab">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ecg-rag" data-paper-title="A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation 基础模型 University of Massachusetts Amherst 2026-04-15 设备端RAG既要控制文档索引磁盘占用，也要限制生成时的上下文/KV开销。ECG不是简单把检索器输出拼进prompt，而是只存一份多向量检索表示，再经投影转成同一decoder可消费的压缩上下文，避免独立检索向量和压缩向量重复存储。 完整实验成本过高，不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU及真实NVIDIA A100-SXM4-80GB的42/43/44三种子L1检查已通过；只运行小张量算子，没有完整训练。未接入Evolve，不可据本地fixture成绩晋级。SharedRepresentation 真正让compression依赖stored E_ret；joint_loss 固定teacher logits/relevance，不让teacher获得梯度，保留α与温度梯度。  检索增强与记忆 统一检索与上下文压缩 基础模型 长上下文：注意力、递归状态与记忆 ECG为什么不分别存检索向量和压缩向量？ 它让同一份E_ret既支持多向量检索，又经compression投影变成decoder上下文，减少重复索引存储。仅共用模型权重但仍存两套独立向量，不是这一表示统一设计。 检索命中的E_ret从磁盘读入后可直接进入compression，而非再加载另一套文档缓存。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<span id="paper-foundation-models-ecg-rag-313aa17c" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-4c0dae522269b505">ECG为什么不分别存检索向量和压缩向量？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aecg-rag">A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · University of Massachusetts Amherst</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它让同一份E_ret既支持多向量检索，又经compression投影变成decoder上下文，减少重复索引存储。仅共用模型权重但仍存两套独立向量，不是这一表示统一设计。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>检索命中的E_ret从磁盘读入后可直接进入compression，而非再加载另一套文档缓存。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.14403v1">原论文</a> · <a href="../../../../foundation-models/2604.14403-ecg-rag/">实现解读</a> · <a href="#qa-4c0dae522269b505">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ecg-rag" data-paper-title="A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation 基础模型 University of Massachusetts Amherst 2026-04-15 设备端RAG既要控制文档索引磁盘占用，也要限制生成时的上下文/KV开销。ECG不是简单把检索器输出拼进prompt，而是只存一份多向量检索表示，再经投影转成同一decoder可消费的压缩上下文，避免独立检索向量和压缩向量重复存储。 完整实验成本过高，不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU及真实NVIDIA A100-SXM4-80GB的42/43/44三种子L1检查已通过；只运行小张量算子，没有完整训练。未接入Evolve，不可据本地fixture成绩晋级。SharedRepresentation 真正让compression依赖stored E_ret；joint_loss 固定teacher logits/relevance，不让teacher获得梯度，保留α与温度梯度。  检索增强与记忆 统一检索与上下文压缩 基础模型 长上下文：注意力、递归状态与记忆 联合loss中的teacher方向、缩放和α分别有什么用？ 生成是teacher||student前向KL；E_ret除sqrt(d)用于点积，compression前乘回；margin用ΔS-αΔT以适配teacher分数尺度。teacher须detach，而α和正温度必须保留梯度。 若把teacher logits也训练，目标本身会追随student变化；若固定α=1则不再有论文强调的可学习scale。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-193a8244f3627f75">联合loss中的teacher方向、缩放和α分别有什么用？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aecg-rag">A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · University of Massachusetts Amherst</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>生成是teacher||student前向KL；E_ret除sqrt(d)用于点积，compression前乘回；margin用ΔS-αΔT以适配teacher分数尺度。teacher须detach，而α和正温度必须保留梯度。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>若把teacher logits也训练，目标本身会追随student变化；若固定α=1则不再有论文强调的可学习scale。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.14403v1">原论文</a> · <a href="../../../../foundation-models/2604.14403-ecg-rag/">实现解读</a> · <a href="#qa-193a8244f3627f75">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ecg-rag" data-paper-title="A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation 基础模型 University of Massachusetts Amherst 2026-04-15 设备端RAG既要控制文档索引磁盘占用，也要限制生成时的上下文/KV开销。ECG不是简单把检索器输出拼进prompt，而是只存一份多向量检索表示，再经投影转成同一decoder可消费的压缩上下文，避免独立检索向量和压缩向量重复存储。 完整实验成本过高，不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU及真实NVIDIA A100-SXM4-80GB的42/43/44三种子L1检查已通过；只运行小张量算子，没有完整训练。未接入Evolve，不可据本地fixture成绩晋级。SharedRepresentation 真正让compression依赖stored E_ret；joint_loss 固定teacher logits/relevance，不让teacher获得梯度，保留α与温度梯度。  检索增强与记忆 统一检索与上下文压缩 基础模型 长上下文：注意力、递归状态与记忆 它与ADIndex都减少读取成本，是否是同一稀疏检索？ 不是。ECG压缩文档为共享语义向量并生成；ADIndex在模型注意力内部共享候选库，再逐query精排并补新token。外部文档表示压缩与因果KV索引的可见性、精度和成本单位不同。 ECG少存一套文档向量，不等于ADIndex少扫描历史key；二者的召回损失也不能同口径相加。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-834c48da62a20584">它与ADIndex都减少读取成本，是否是同一稀疏检索？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aecg-rag">A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · University of Massachusetts Amherst</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。ECG压缩文档为共享语义向量并生成；ADIndex在模型注意力内部共享候选库，再逐query精排并补新token。外部文档表示压缩与因果KV索引的可见性、精度和成本单位不同。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>ECG少存一套文档向量，不等于ADIndex少扫描历史key；二者的召回损失也不能同口径相加。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.14403v1">原论文</a> · <a href="../../../../foundation-models/2604.14403-ecg-rag/">实现解读</a> · <a href="#qa-834c48da62a20584">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:ecg-rag" data-paper-title="A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation 基础模型 University of Massachusetts Amherst 2026-04-15 设备端RAG既要控制文档索引磁盘占用，也要限制生成时的上下文/KV开销。ECG不是简单把检索器输出拼进prompt，而是只存一份多向量检索表示，再经投影转成同一decoder可消费的压缩上下文，避免独立检索向量和压缩向量重复存储。 完整实验成本过高，不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU及真实NVIDIA A100-SXM4-80GB的42/43/44三种子L1检查已通过；只运行小张量算子，没有完整训练。未接入Evolve，不可据本地fixture成绩晋级。SharedRepresentation 真正让compression依赖stored E_ret；joint_loss 固定teacher logits/relevance，不让teacher获得梯度，保留α与温度梯度。  检索增强与记忆 统一检索与上下文压缩 基础模型 长上下文：注意力、递归状态与记忆 小张量联合loss能反传，为什么还不能说复现了端侧RAG？ 还缺pretrained decoder、特殊embedding token训练、语料索引、检索、上下文注入和真实问答/系统评测。L1仅验共享表示依赖、梯度和loss定义；原文8H100训练与百万passage评测明确不复现。 projection梯度非零不能推出NQ exact match、手机延迟或1/10上下文的作者成绩。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 长上下文：注意力、递归状态与记忆</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-e117caceb28c0563">小张量联合loss能反传，为什么还不能说复现了端侧RAG？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aecg-rag">A Unified Model and Document Representation for On-Device Retrieval-Augmented Generation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · University of Massachusetts Amherst</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>还缺pretrained decoder、特殊embedding token训练、语料索引、检索、上下文注入和真实问答/系统评测。L1仅验共享表示依赖、梯度和loss定义；原文8H100训练与百万passage评测明确不复现。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>projection梯度非零不能推出NQ exact match、手机延迟或1/10上下文的作者成绩。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.14403v1">原论文</a> · <a href="../../../../foundation-models/2604.14403-ecg-rag/">实现解读</a> · <a href="#qa-e117caceb28c0563">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:switch-attention" data-paper-title="Switch Attention: Towards Dynamic and Fine-grained Hybrid Transformers" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/context-and-state" data-search="Switch Attention: Towards Dynamic and Fine-grained Hybrid Transformers 基础模型 Peking University / Huawei Technologies 2026-03-27 静态 hybrid attention 对所有 token 使用固定模式。Switch Attention 学习细粒度 router，只让需要全局信息的 token 走 full attention。 Fidelity: 核心机制复现。实现逐 token 动态选择 full/local attention 的可学习 router。本地使用可微 soft router，未复刻论文 STE 硬路由、32K continual pretraining 和 branch-selective fused kernel。本地对照口径：基线是 full-attention tiny Transformer；实验组动态混合 full 与 16-token local attention；30-step perplexity 相对 +0.19%（近似持平但略差）。  llm-architecture efficient-attention long-context 基础模型 长上下文：注意力、递归状态与记忆 Switch Attention 的 local 与 full 两条路径，分别能读到哪些历史？ local只看限定窗口内的可见位置，full可读完整因果历史。二者首先是证据范围与读取成本的差别；router根据token决定路径，不是让full路径访问未来token。 示意：回答刚出现的局部词组可能只需近邻，关联很久以前的信息才可能需要更广历史。 2026-10-27">

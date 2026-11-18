@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/post-training/policy-optimization/comparison/post-training:excursion-td": {
+      "source_sha256": "f87a35fefc4e4cfca5ab8dd562660ac813004efe75fff564ef1cc2e4ebf16ee2",
+      "reviewed": true,
+      "fields": {
+        "position": "Mixes the duration of following the target before permanently returning to behavior, deriving recursive Ex-TD/Ex-Retrace weights. The local component computes exact operators and real trajectory targets in a five-state/three-action MDP.",
+        "tradeoff": "Beta trades target bias, variance and contraction; it is not TIS's trainer/rollout-engine ratio truncation. Intermediate beta need not preserve the target fixed point. The seven-task MPO matrix, about twelve hours per source run, is not reproduced."
+      }
+    },
+    "dive/post-training/policy-optimization/analysis/3": {
+      "source_sha256": "fac728fb66818ba21d3b8e31993e19de65f8f733f869cad7fa928e325a266816",
+      "reviewed": true,
+      "fields": {
+        "title": "Locate the off-policy mismatch before choosing a correction",
+        "body": "TIS compares probabilities from training and rollout engines at the same weights, addressing numerical implementation mismatch. Ex-Retrace compares target and behavior policies and builds a multi-step value target by mixing whole excursion durations. Both use importance ratios, but their conditional variables and update objects differ. A tokenwise trainer/rollout ratio cannot replace an excursion prefix, and excursion TD does not remove an LM engine's numerical mismatch."
+      }
+    },
+    "dive/post-training/policy-optimization/question/engine-ratio-versus-excursion": {
+      "source_sha256": "82f9324f2c35a6b93ae9cc7f5bd03c5610b09bdc16787f77ecd7818d268f760e",
+      "reviewed": true,
+      "fields": {
+        "question": "Can TIS's one-sided ratio truncation directly replace Ex-Retrace?",
+        "answer": "No. TIS corrects training/rollout-engine probability mismatch. Ex-Retrace defines a multi-step value target between target and behavior policies, mixing target-then-behavior durations. First identify each ratio's numerator, denominator, conditioning variables and update object.",
+        "example": "For example, two engines assigning a token probabilities .2 and .1 give a TIS ratio of 2. An Ex-Retrace ratio instead compares target/behavior action probabilities at a state and additionally needs gamma, lambda, beta and subsequent Q values."
+      }
+    },
+    "dive/post-training/policy-optimization/update/2026-11-11/3": {
+      "source_sha256": "67ed309cf4b8525b5dd962ea287813fa9ecb71dc033b4fd3d1367a5e4081ea0a",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added the Google DeepMind-related Excursion TD work, separating duration mixing from actionwise mixing and target/behavior correction from TIS engine correction. The affordable tabular core is implemented; full control experiments, about twelve hours per run in the source, are not reproduced."
+      }
+    },
+    "dive/post-training/reward-and-credit/comparison/post-training:maxim": {
+      "source_sha256": "ed8f5bf07da87ee97ee609c94e8d7a990f5d7002d3946503a5a2ccff012bde31",
+      "reviewed": true,
+      "fields": {
+        "position": "Uses frozen teacher-forced conditional/null critic log-ratios for target information and forward history support, then centered sigmoids, one-minus-gamma scaling and annealing to form cross-turn returns.",
+        "tradeoff": "Creates reward signals rather than redistributing existing token credit. Privileged targets belong only on the reward side, not in evaluated summarizer inputs. Approximate critics and nonlinear shaping guarantee neither facts nor the optimal policy. The local component does not train Gemini."
+      }
+    },
+    "dive/post-training/reward-and-credit/comparison/post-training:mcpo": {
+      "source_sha256": "3db76f370087c6232f702dce1d9cbd1d7e14c8455d75e0260fdbcc6b9594d0ba",
+      "reviewed": true,
+      "fields": {
+        "position": "Transforms the temperature-adjusted old-policy top1-minus-top2 margin into clipped-linear uncertainty, applies advantage-sign-aware exponential weights and normalizes over valid response tokens to preserve mean sequence advantage.",
+        "tradeoff": "Uncertain tokens receive less penalty for negative advantages. This is neither a band-pass nor an extra verifier. Longer generations and missing length-matched controls limit causal attribution; Qwen's three-data-seed p=.083 is not a significant win."
+      }
+    },
+    "dive/post-training/reward-and-credit/analysis/5": {
+      "source_sha256": "0d94b4c6654641e042b593f06dbbf72fd62cc492f78d2f4c4307d20590399f2c",
+      "reviewed": true,
+      "fields": {
+        "title": "Useful rewards and token attribution are separate; conserved credit does not validate a reward",
+        "body": "MaxIM defines how task information and factual consistency become rewards. MCPO takes a supplied sequence advantage and changes relative token weights. MCPO's preserved response mean cannot repair a mistaken critic, and MaxIM's critic does not automatically provide correct token attribution. Check privileged leakage on the reward side, old versus current policy on the credit side, and whether generation length changes the real budget."
+      }
+    },
+    "dive/post-training/reward-and-credit/question/reward-versus-token-redistribution": {
+      "source_sha256": "4df15841f626d823d8aafa07b5086297195b7206c342863c22b39254bf47e6df",
+      "reviewed": true,
+      "fields": {
+        "question": "Would applying MCPO to MaxIM rewards guarantee more factual memory?",
+        "answer": "No. They can affect different stages, but approximate information rewards, token-credit heuristics and inference-input isolation require separate validation. Preserving mean sequence advantage is only an arithmetic contract; it proves neither critic correctness nor factual summaries or task improvement.",
+        "example": "If a critic wrongly rewards a fabricated budget, MCPO can still distribute that positive advantage by token margin. The mean is exactly conserved while the wrong direction is reinforced."
+      }
+    },
+    "dive/post-training/reward-and-credit/update/2026-11-11/4": {
+      "source_sha256": "13f24bcdaf1eddfd29c0aa3c371dfb3e7228663499f50d0e9c61f1b72371116b",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added Google's MaxIM and PayPal's MCPO to separate reward creation, forward grounding and token-credit redistribution. Preserved MCPO's negative-advantage direction, mean invariance and length/significance limitations. These are CPU L1 components; full Gemini/long-rollout studies are not reproduced due to cost."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/comparison/post-training:drd-mopd": {
+      "source_sha256": "823708a68a3138719aec3f64be8d54ab1bade6a9bde67c72ad6b0150a389e1a8",
+      "reviewed": true,
+      "fields": {
+        "position": "Forms one student from a frozen base plus every full-parameter delta and routes only domain updates. Own/Other/Alternate/SingleComponent keep independent AdamW state, with all domain gradients computed at one W snapshot.",
+        "tradeoff": "Parameter-update routing differs from DrOPD's token-divergence gate and inference-time MoE. Unselected deltas must skip momentum, counters and weight decay. This paper's training code/checkpoints are not released; the local component omits teachers and OPD rollouts."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/analysis/6": {
+      "source_sha256": "68c0341774ed6f1eb025f8fca2924011ad5d9cf94040bf25a51f987c4f93bb79",
+      "reviewed": true,
+      "fields": {
+        "title": "Token-supervision gates and parameter-update routing use different coordinates",
+        "body": "Divergence-Routed OPD uses teacher/student disagreement to choose token positions receiving additional FKL supervision. DRD-MOPD instead keeps one all-delta student and uses domain labels to route loss gradients to parameter deltas. Other must not be divided by K-1 by default, and SingleComponent does not activate just one delta in the forward pass. Combining the methods requires a new explicit loss/optimizer contract; two standalone components are not automatically a multi-teacher Evolve operator."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/question/two-routing-coordinates": {
+      "source_sha256": "96b066bb6c49460a614898a886b7289023771cc9b7dd205ffe9ce8c20d1fa793",
+      "reviewed": true,
+      "fields": {
+        "question": "Can DRD-MOPD and Divergence-Routed OPD share one Boolean routing switch?",
+        "answer": "No. The former routes domain gradients to parameter deltas; the latter routes extra FKL supervision by token disagreement. Their inputs, selected objects, normalization and optimizer-state semantics differ. A combination must define these contracts explicitly rather than reuse a name.",
+        "example": "A high-JS math token may receive extra supervision in DrOPD. DRD's Other mode can then send that domain loss to other deltas, all of which remain present in every forward pass."
+      }
+    },
+    "dive/post-training/student-trajectory-distillation/update/2026-11-11/5": {
+      "source_sha256": "df5805da8699f5351093d4258277db59b9569a35f7dce4f465e9ec34b79bdeff",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added DRD-MOPD to distinguish token-supervision routing, domain-to-parameter updates and inference activation routing. The local core preserves common-snapshot gradients and selected-only AdamW, without treating upstream Open-MOPD or small parameter checks as full distillation evidence."
+      }
+    }
+  }
+}

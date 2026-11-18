@@ -1,75 +1,81 @@
 {
   "schema_version": 2,
   "policy": "review-with-coverage-and-archived-exceptions-v2",
-  "checked_on": "2026-10-15",
+  "checked_on": "2026-11-11",
   "user_authorized_exceptions": true,
-  "authorization_record": "2026-10-10 用户明确要求退休严格来源穷尽水位，统一为审查水位、覆盖范围和例外清单；实际尝试后不能确认的记录归档、不再阻塞，只在新证据出现时重开。论文收录、正文线上证据、算法保真与GPU验证标准不变。 2026-10-15 用户要求10-13..15审查收口，已记录高成本不复现按审查DONE，不训练，仍以覆盖与非阻塞例外公开边界。",
+  "authorization_record": "2026-10-10 retired source-exhaustiveness; 2026-10-15 high-cost no reproduction is review DONE; 2026-11-11 user explicitly approved P2 title/abstract selection closure, not verification of every method. Google/Meta and possible production A/B still require priority primary review.",
   "window": {
-    "start": "2026-10-13",
-    "end": "2026-10-15"
+    "start": "2026-10-16",
+    "end": "2026-11-09"
   },
-  "review_watermark": "2026-10-15",
+  "review_watermark": "2026-11-09",
+  "review_as_of": "2026-11-09T18:23:24+08:00",
+  "review_semantics": "selection-screening-with-protected-primary-review",
+  "selection_review_complete": true,
+  "method_review_complete": false,
+  "selection_policy": "research-audits/nov09-review-closure/p2-selection-policy.json",
   "all_sources_exhaustive": false,
   "implementation_complete": false,
-  "candidate_register": "research-audits/oct15-review-closure/paper-register.json",
+  "candidate_register": "research-audits/nov09-review-closure/paper-register.json",
   "retrieval_receipts": [
     {
       "track": "recommendation",
       "mode": "submission-window",
-      "artifact": "research-audits/oct15-review-closure/recommendation-submission-window-retrieval.json"
+      "artifact": "research-audits/nov09-review-closure/recommendation-submission-window-retrieval.json"
     },
     {
       "track": "recommendation",
       "mode": "late-index",
-      "artifact": "research-audits/oct15-review-closure/recommendation-late-index-retrieval.json"
+      "artifact": "research-audits/nov09-review-closure/recommendation-late-index-retrieval.json"
     },
     {
       "track": "foundation-model",
       "mode": "submission-window",
-      "artifact": "research-audits/oct15-review-closure/foundation-model-submission-window-retrieval.json"
+      "artifact": "research-audits/nov09-review-closure/foundation-model-submission-window-retrieval.json"
     },
     {
       "track": "foundation-model",
       "mode": "late-index",
-      "artifact": "research-audits/oct15-review-closure/foundation-model-late-index-retrieval.json"
+      "artifact": "research-audits/nov09-review-closure/foundation-model-late-index-retrieval.json"
     },
     {
       "track": "post-training",
       "mode": "submission-window",
-      "artifact": "research-audits/oct15-review-closure/post-training-submission-window-retrieval.json"
+      "artifact": "research-audits/nov09-review-closure/post-training-submission-window-retrieval.json"
     },
     {
       "track": "post-training",
       "mode": "late-index",
-      "artifact": "research-audits/oct15-review-closure/post-training-late-index-retrieval.json"
+      "artifact": "research-audits/nov09-review-closure/post-training-late-index-retrieval.json"
     },
     {
       "track": "agent",
       "mode": "submission-window",
-      "artifact": "research-audits/oct15-review-closure/agent-submission-window-retrieval.json"
+      "artifact": "research-audits/nov09-review-closure/agent-submission-window-retrieval.json"
     },
     {
       "track": "agent",
       "mode": "late-index",
-      "artifact": "research-audits/oct15-review-closure/agent-late-index-retrieval.json"
+      "artifact": "research-audits/nov09-review-closure/agent-late-index-retrieval.json"
     }
   ],
   "source_reviews": [
     {
       "organization": "Google",
-      "artifact": "research-audits/oct15-review-closure/google-source-review.json"
-    },
-    {
-      "organization": "Meta",
-      "artifact": "research-audits/oct15-review-closure/meta-source-review.json"
+      "artifact": "research-audits/nov09-review-closure/google-source-review.json"
     },
     {
       "organization": "Google DeepMind",
-      "artifact": "research-audits/oct15-review-closure/google-deepmind-source-review.json"
+      "artifact": "research-audits/nov09-review-closure/google-deepmind-source-review.json"
+    },
+    {
+      "organization": "Meta",
+      "artifact": "research-audits/nov09-review-closure/meta-source-review.json"
     }
   ],
-  "next_scan_start_with_overlap": "2026-10-14",
-  "exception_reopening_policy": "不能确认项已归档、不阻塞水位、不按周期重试；仅官方资料变化或独立补发现提供新证据时重开。确认属于窗口内的未审候选不能归档逃避审查。",
+  "exception_archive": "research-audits/nov09-review-closure/exception-archive.json",
+  "next_scan_start_with_overlap": "2026-11-08",
+  "exception_reopening_policy": "Only new identity/date/document/independent source evidence reopens archived sources; no automatic retry. New priority/production or changed metadata can reopen a P2 selection; it is not an originality rejection.",
   "coverage_scope": {
     "tracks": [
       "recommendation",
@@ -84,45 +90,50 @@
     "official_sources": [
       {
         "organization": "Google",
-        "records": 412,
-        "pages": 28
-      },
-      {
-        "organization": "Meta",
-        "records": 144,
-        "pages": 6
+        "records": 125,
+        "pages": 31
       },
       {
         "organization": "Google DeepMind",
-        "records": 265,
+        "records": 4,
         "pages": 9
+      },
+      {
+        "organization": "Meta",
+        "records": 11,
+        "pages": 8
       }
     ],
-    "limitations": [
-      "Fixed four-track/two-mode configured recall, not all-web or all-site exhaustiveness.",
-      "Fresh first publication, older date/overlap discoveries, known identities and revisions are counted separately.",
-      "Historical entries may be identity/date/abstract triage only; bounded original method/resource checks are not complete article reading.",
-      "Known decisions inherit their referenced snapshot; latest version review does not certify an implementation upgrade.",
-      "High-cost nonreproduction is review DONE, not implemented, not capability evidence and not an automatic queue.",
-      "As-of timestamp is an intraday cutoff; the next scan overlaps October 14 and will catch later submissions/indexing.",
-      "Eight receipts are derived subsets of actual exhausted containing CI queries; original query bounds and source SHA remain intact.",
-      "The capped September+October LLM query was replaced by an actually exhausted October-only query (1088 unique papers); no capped query is relabelled exhaustive.",
-      "Google7/Meta11 new detail URLs checked; unchanged URL/title evidence inherited; current directory dates checked separately; DeepMind265 is not265 fresh full-text reviews.",
-      "Meta scope is the first6 pages, not proof of whole-site pagination; original publication dates are not inferred from directory update dates."
-    ],
     "counts": {
-      "queried_unique": 3742,
-      "fresh_identities_reviewed": 2114,
-      "fresh_first_publication_in_window": 794,
-      "fresh_historical_or_overlap": 1320,
-      "known_identities": 1628,
-      "known_latest_revision_reviews": 11,
-      "independent_official_non_arxiv_identities": 2,
-      "official_detail_delta_reviews": 18,
-      "high_cost_review_done": 383,
-      "candidate_document_exceptions": 2
-    }
-  },
-  "exception_archive": "research-audits/oct15-review-closure/exception-archive.json",
-  "review_as_of": "2026-10-15T15:39:55+08:00"
+      "raw_unique_identities": 9677,
+      "in_window_identities": 5164,
+      "late_index_or_missing_date_scope_triage_pending": 0,
+      "late_index_date_scope_only_excluded": 395,
+      "late_index_metadata_scope_only_excluded": 38,
+      "post_capture_tail_identities": 122,
+      "post_capture_tail_review_pending": 0,
+      "post_capture_tail_metadata_scope_only_excluded": 42,
+      "existing_disposition": 112,
+      "metadata_scope_only_excluded": 441,
+      "new_primary_decisions": 318,
+      "newer_versions_pending": 0,
+      "p2_selection_only_closed": 4293,
+      "pending_identity_review": 0,
+      "registered_unique_identities": 9803,
+      "primary_decisions": 613
+    },
+    "limitations": [
+      "Review watermark is selection screening plus protected primary-source decisions, not method verification for every paper.",
+      "Fixed four-track/two-mode containing recall with actual split replacements; no all-web or all-site exhaustiveness.",
+      "Late-index captures have the pinned intraday cutoff; the official Atom adds first releases to November 9 midnight, not all later revisions.",
+      "P2 nonselection is window-only, preserves novelty and does not establish actual affiliation absence from abstract evidence.",
+      "No new implementation, training, GPU receipt, capability gain, or executable evolve integration is implied.",
+      "Official-source subreview: Only exact-URL inherited per-record terminal decisions count as known/historical; unresolved title-only matches are explicit nonblocking exceptions, not manufactured identities.",
+      "Official-source subreview: 45 prior directory pages are dated transport/list receipts. Their450/266/144URLcounts do not mean this follow-up read those manuscripts.",
+      "Official-source subreview: Current Google last-page31 was retrieved and its nine exact detail/Download identities reviewed: seven historical, one out of scope, one after the Shanghai Nov9 cutoff. Google current pages2–30 were not recrawled; old30-page receipts are finite inherited coverage, not a current whole-site exhaustion claim.",
+      "Official-source subreview: Current DeepMind first-page30 URLs compared with the inherited Oct29 exact nine-page266-URL set produce two identified differences, one known and one historical. The reported268 total does not establish a further unknown candidate; no fresh pages2–9 exhaustion claim.",
+      "Official-source subreview: Meta primary unavailable and alternate landing curated; no whole Meta or whole web exhaustive claim.",
+      "Official-source subreview: No experiments, training, implementation, automatic retry, deployment or global watermark/register modification."
+    ]
+  }
 }

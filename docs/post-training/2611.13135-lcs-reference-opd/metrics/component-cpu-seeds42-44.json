@@ -1,0 +1,142 @@
+{
+  "schema_version": 2,
+  "method": "lcs-reference-opd",
+  "manifest_ref": "post-training:lcs-reference-opd",
+  "dataset": {
+    "id": "synthetic:nov12-lcs-reference-opd-v1",
+    "revision": "sha256:c4bdf1c1d5f1d48ea66e1555d269a6d50fcd906a8ae746f29b8c85827c393c91",
+    "recipe": "small seeded tensors, exact finite-policy operators, and explicit control/evaluator contracts; no capability benchmark",
+    "capability_benchmark": false
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "device": "cpu",
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "selected_lcs_coverage": 0.8,
+        "same_task_references": 2,
+        "failure_only_mean_loss": 1.252192763892615,
+        "lcs_length": 4
+      },
+      "checks": {
+        "lcs_retains_agreement_after_detour": true,
+        "same_task_highest_compatibility_selected": true,
+        "complete_sequence_duplicates_removed": true,
+        "cross_task_exact_match_not_selected": true,
+        "successful_student_skips_update": true,
+        "no_same_task_success_falls_back_reference_free": true,
+        "only_failed_losses_enter_mean": true,
+        "all_success_batch_has_no_optimizer_step": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "device": "cpu",
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "selected_lcs_coverage": 0.8,
+        "same_task_references": 2,
+        "failure_only_mean_loss": 0.7612708570229119,
+        "lcs_length": 4
+      },
+      "checks": {
+        "lcs_retains_agreement_after_detour": true,
+        "same_task_highest_compatibility_selected": true,
+        "complete_sequence_duplicates_removed": true,
+        "cross_task_exact_match_not_selected": true,
+        "successful_student_skips_update": true,
+        "no_same_task_success_falls_back_reference_free": true,
+        "only_failed_losses_enter_mean": true,
+        "all_success_batch_has_no_optimizer_step": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "device": "cpu",
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "selected_lcs_coverage": 0.8,
+        "same_task_references": 2,
+        "failure_only_mean_loss": 0.4616446552243123,
+        "lcs_length": 4
+      },
+      "checks": {
+        "lcs_retains_agreement_after_detour": true,
+        "same_task_highest_compatibility_selected": true,
+        "complete_sequence_duplicates_removed": true,
+        "cross_task_exact_match_not_selected": true,
+        "successful_student_skips_update": true,
+        "no_same_task_success_falls_back_reference_free": true,
+        "only_failed_losses_enter_mean": true,
+        "all_success_batch_has_no_optimizer_step": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "failure_only_mean_loss": 0.825036092046613,
+    "lcs_length": 4.0,
+    "same_task_references": 2.0,
+    "selected_lcs_coverage": 0.8000000000000002
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "formal_comparison": false,
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "three-seed synthetic mechanism diagnostic; not a capability comparison"
+  },
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "9d46c1778c3df693907c113c803e617ae0690117",
+    "artifact_path": "docs/post-training/2611.13135-lcs-reference-opd/metrics/component-cpu-seeds42-44.json",
+    "accelerator": "CPU",
+    "executed_source_sha256": {
+      "scripts/run_nov12_components.py": "7622e7d554c13c9b9cd61931ac248ac26534751412854091d09f1248e2519eb3",
+      "scripts/run_nov04_components.py": "61d35d574d9561e4611d2647174b8a6af07fabf8c30b6909e21e253542cf4336",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "docs/research-audits/nov12-components/preflight.json": "b82e1ddb82f3b3ee6e1a461d902243cc8cd8e6fb824b95b7d29037c4bebdfc95",
+      "src/auto_research/agent_research/agent_gym.py": "54d8b71b2fbb7fdb71b6968944b1084fe7a1b9e1b0b3badcab3f3fecb0ea1e30",
+      "src/auto_research/agent_research/bats.py": "845c320fb7363675133eb83076ffc55c8c8b8146c41ad7f4aea818f1cf8eeb48",
+      "src/auto_research/post_training/bopd.py": "59124e92ca515dd15e45aad0d63b039771e46c011c9ea99acd8f23a707fe23f6",
+      "src/auto_research/post_training/apmd_reference_reset.py": "89a7feb87728af69a0aeab947818e800fdf03902d91834626aa01b7cebb66b6d",
+      "src/auto_research/post_training/lcs_reference_opd.py": "c4bdf1c1d5f1d48ea66e1555d269a6d50fcd906a8ae746f29b8c85827c393c91",
+      "src/auto_research/foundation_models/real_loss.py": "0b7a84e98aea5fe0d1f578d889d19f6dbe760c0d43fba3887e814f3d118c2afa",
+      "src/auto_research/multimodal/c2_routing.py": "d296a544abfde9829041566dbc028e34c1181c1dfee4b448c0a02a308b22a2da",
+      "src/auto_research/multimodal/onlyact.py": "ca94c19145158d8fd07e6579687c68aa0e2e7b8de02941af098c4a030999e155"
+    },
+    "dataset_fingerprint": "sha256:d27d148bac011e84148e41ede64c90784716914039cb4276d7ccc6be98b5cdeb",
+    "raw_runner_artifact_sha256": "81ae87a81256a236ff436a06bc6c3e68947105338eceebb785407ca505ca6d94"
+  }
+}

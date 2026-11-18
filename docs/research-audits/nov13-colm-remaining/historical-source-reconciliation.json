@@ -1,0 +1,1421 @@
+{
+  "schema_version": 1,
+  "scope_kind": "bounded-historical-priority-inventory",
+  "all_institutional_history_exhaustive": false,
+  "review_watermark_advanced": false,
+  "automatic_implementation_queue": false,
+  "automatic_retry": false,
+  "identity_matching": "exact arXiv identity only; never title or URL-slug similarity",
+  "source_priority_is_authorship_proof": false,
+  "industrial_online_evidence_accepted": false,
+  "source_identity_count": 28,
+  "reconciliation_counts": {
+    "catalogued": 27,
+    "reviewed": 1
+  },
+  "needs_original_review_count": 0,
+  "sources": [
+    {
+      "source": "Google COLM 2026 historical paper inventory",
+      "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+      "source_kind": "official-research",
+      "organization": "Google",
+      "priority_source_matches": [
+        "Google"
+      ],
+      "capture_receipts": [
+        {
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "captured_at": "2026-11-13T04:42:22.470947+00:00",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454",
+          "decoded_text_bytes": 197641,
+          "capture_kind": "decoded-text-utf8"
+        }
+      ],
+      "inventory_scope": "One actually captured official COLM event page; only exact direct arXiv identities, no metadata/API lookup or institution-wide crawl",
+      "source_identity_count": 28
+    }
+  ],
+  "candidates": [
+    {
+      "arxiv_id": "2508.11017",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2508.11017",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2508.11017",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "catalogued",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": true,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "implemented",
+        "resolution": "bounded_component_accepted",
+        "reason": "CPU unification similarity-block arithmetic only; no training/model selection on test.",
+        "cost_assessment": {
+          "source": "https://arxiv.org/html/2508.11017v1",
+          "sections": "§2.1, §4–6 and Appendix B.3",
+          "paper_configuration": "110 controlled ~2M-parameter Transformer runs plus Gemma 2B/4B representation and translation analyses; full experiment matrix not reproduced.",
+          "component_boundary": "CPU unification similarity-block arithmetic only; no training/model selection on test.",
+          "available_resource": "Local CPU/Mac or one NVIDIA A100/A30",
+          "decision": "成本过高，完整实验不复现；审查DONE。"
+        }
+      }
+    },
+    {
+      "arxiv_id": "2510.22028",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2510.22028",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2510.22028",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "catalogued",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": true,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "implemented",
+        "resolution": "bounded_component_accepted",
+        "reason": "训练目标R/|h|与推理乘回|h|、同文档前五连续段前缀构造/整组500token门槛、相对首前缀的组内分差；不拟合MetricX、不做后处理去偏伪称。",
+        "cost_assessment": {
+          "source": "https://arxiv.org/html/2510.22028v1",
+          "reviewed_sections": [
+            "§3.1–3.2",
+            "§4.1–4.2",
+            "§7.2"
+          ],
+          "available_resource": "单张NVIDIA A100/A30或本地Mac",
+          "basis": "WMT24++十个语言方向、MetricX/CometKiwi/Gemini-2.0 AutoMQM/Gemini-2.5-Pro评测及MetricX QE重新训练。原文未给总GPU/墙钟，完整多臂评测/训练涉及商业模型且成本无法廉价确认；按单A100/A30/Mac预算不启动，不试训。",
+          "decision": "成本过高，不复现（审查DONE）；仅交付独立低成本L1组件，不下载大资源、不试训、不自动重试。"
+        }
+      }
+    },
+    {
+      "arxiv_id": "2511.17006",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2511.17006",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2511.17006",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "catalogued",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": false,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false
+    },
+    {
+      "arxiv_id": "2512.04068",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2512.04068",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2512.04068",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "catalogued",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": true,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "implemented",
+        "resolution": "bounded_component_accepted",
+        "reason": "以成本惩罚reward控制澄清、直接回答或多答案；先按解释均衡均值选动作序列，再逐解释选最高reward轨迹。本地只实现离线选择，不运行模型或ReST训练。",
+        "cost_assessment": {
+          "source": "https://arxiv.org/html/2512.04068v1",
+          "available_resource": "单张A100/A30或Mac",
+          "basis": "Gemma2-9B双模型、192训练rollout/query、64测试rollout/query、3轮ReST和两benchmark；完整多轮生成/训练高成本不复现。"
+        }
+      }
+    },
+    {
+      "arxiv_id": "2512.08819",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2512.08819",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2512.08819",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "catalogued",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": true,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "implemented",
+        "resolution": "bounded_component_accepted",
+        "reason": "Real Torch layer/optimizer-state growth and one subsequent gradient step; CPU/CUDA L1, Real NVIDIA A100-SXM4-80GB seeds42/43/44 L1 operator checks passed; receipt bound to frozen commit084bf0b1409d4bd5593c8704e37eced5f4f52bde, no full training.",
+        "cost_assessment": {
+          "source": "https://arxiv.org/html/2512.08819v1",
+          "sections": "§3.1–3.2, Figure 2, Appendices A/E",
+          "paper_configuration": "360M baseline uses 64 A100-40GB for 1.5 days; 1.7B baseline 128 A100-40GB for 4.5 days; full pretraining not reproduced.",
+          "component_boundary": "Real Torch layer/optimizer-state growth and one subsequent gradient step; CPU/CUDA L1, Real NVIDIA A100-SXM4-80GB seeds42/43/44 L1 operator checks passed; receipt bound to frozen commit084bf0b1409d4bd5593c8704e37eced5f4f52bde, no full training.",
+          "available_resource": "Local CPU/Mac or one NVIDIA A100/A30",
+          "decision": "成本过高，完整实验不复现；审查DONE。"
+        }
+      }
+    },
+    {
+      "arxiv_id": "2601.16355",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2601.16355",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2601.16355",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "reviewed",
+      "reconciliation_status": "reviewed",
+      "catalogued": false,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": true,
+      "method_or_cost_review_closed": true,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "rejected",
+        "resolution": "out_of_scope_application_study",
+        "review_decision": "out_of_scope",
+        "reason": "The original contribution is an empirical social-behavior simulation study of U.S. partisan Dictator/Trust games and framing/date/participant effects. Narrative deep binding and demographic matching reuse the cited anthology method; temporal prompt grounding and an LLM consistency critic are study controls, not a new independently specified general agent algorithm. No new released public benchmark/framework was verified; AppendixF promises future code/prompts/backstories. Preserve this scientific study as a sourceful exclusion, not a high-cost reproduction falsely advertised as accepted. This does not deny its empirical contribution."
+      }
+    },
+    {
+      "arxiv_id": "2601.17645",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2601.17645",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2601.17645",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "catalogued",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": true,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "implemented",
+        "resolution": "bounded_component_accepted",
+        "reason": "实现选项重排、私有答案映射、主集文本捷径过滤、视频捷径屏蔽及三轴分组计分。严格字母解析为明示本地约定；不处理媒体、不生成捷径标签或模型回答，不猜测七题型宏平均。",
+        "cost_assessment": {
+          "source": "https://arxiv.org/html/2601.17645v1",
+          "available_resource": "单张A100/A30或Mac",
+          "basis": "19个多模态模型、人工标注及多后端推理完整矩阵；官方媒体受访问条件约束，未下载或调用模型。原文未披露可直接套用的单卡总时长，不编造卡时。"
+        }
+      }
+    },
+    {
+      "arxiv_id": "2602.16488",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2602.16488",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2602.16488",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "catalogued",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": true,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "implemented",
+        "resolution": "bounded_component_accepted",
+        "reason": "通过与持有私有信息的teacher交互训练student；本地实现成功对话student-only可微SFT与Q-priming概率，不伪造teacher或在线GRPO。",
+        "cost_assessment": {
+          "source": "https://arxiv.org/html/2602.16488v1",
+          "available_resource": "单张A100/A30或Mac",
+          "basis": "Gemma3-12B-IT/Qwen3-8B、2000训练问题/domain、g8 GRPO、teacher多轮、3seed，完整模型训练与跨域benchmark高成本不复现。"
+        }
+      }
+    },
+    {
+      "arxiv_id": "2602.24188",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2602.24188",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2602.24188",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "catalogued",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": true,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "implemented",
+        "resolution": "bounded_component_accepted",
+        "reason": "以私有信息游戏和isotoken预算检查模型能否利用交互。本地只提供Name-game隔离视图/scorer及轮次token合同，不声称完整公开数据集接入。",
+        "cost_assessment": {
+          "source": "https://arxiv.org/html/2602.24188v1",
+          "available_resource": "单张A100/A30或Mac",
+          "basis": "5游戏×1000样本×5模型/思考变体×4轮次预算，包含商业LLM和图像任务；完整能力矩阵高成本不复现。"
+        }
+      }
+    },
+    {
+      "arxiv_id": "2603.09906",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2603.09906",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2603.09906",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "catalogued",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": true,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "implemented",
+        "resolution": "bounded_component_accepted",
+        "reason": "CPU evaluation only on externally annotated completed traces; gold correctness never exposed to an actor; not an executable oracle selector.",
+        "cost_assessment": {
+          "source": "https://arxiv.org/html/2603.09906v1",
+          "sections": "§2, §5.4, Appendices A.2–A.4",
+          "paper_configuration": "Gemini 2.5 Flash/Pro and Qwen3-32B, 100 samples per question, ~2000 questions plus factual extraction/search judging; full study not reproduced.",
+          "component_boundary": "CPU evaluation only on externally annotated completed traces; gold correctness never exposed to an actor; not an executable oracle selector.",
+          "available_resource": "Local CPU/Mac or one NVIDIA A100/A30",
+          "decision": "成本过高，完整实验不复现；审查DONE。"
+        }
+      }
+    },
+    {
+      "arxiv_id": "2603.19258",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2603.19258",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2603.19258",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "catalogued",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": true,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "implemented",
+        "resolution": "bounded_component_accepted",
+        "reason": "先用DP表格metadata约束初始化，再用与metadata最接近的已捐赠示例做ICL，继续PrivateEvolution。本地只实现分类Hamming近邻示例选择，不产生DP数据或隐私保证。",
+        "cost_assessment": {
+          "source": "https://arxiv.org/html/2603.19258v1",
+          "available_resource": "单张A100/A30或Mac",
+          "basis": "上游建议至少2×A10040GB；Qwen2.5-7B、AIM、2k/5k长文本合成、AugPE、多隐私预算和下游训练；完整实验高成本不复现。"
+        }
+      }
+    },
+    {
+      "arxiv_id": "2603.23301",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2603.23301",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2603.23301",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "catalogued",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": true,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "implemented",
+        "resolution": "bounded_component_accepted",
+        "reason": "对真实外部SAE激活有效token max-pool、外部MI的累计质量选特征、国家均值原型/其他国家等权基线、decoder方向与残差加法；不伪造MI估计器、SAE/LM或文化judge。",
+        "cost_assessment": {
+          "source": "https://arxiv.org/html/2603.23301v1",
+          "reviewed_sections": [
+            "§2.2–2.5",
+            "§3",
+            "Appendix C"
+          ],
+          "available_resource": "单张NVIDIA A100/A30或本地Mac",
+          "basis": "六组Gemma2-2B/9B与Llama3.1-8B、16K–131K/128K SAE、多文化四α/四种提示条件与双judge。原文单A10080GB；较大SAE全层超过该卡显存，原文改每四层加载。完整矩阵高成本不复现，不下载大权重或API评测。",
+          "decision": "成本过高，不复现（审查DONE）；仅交付独立低成本L1组件，不下载大资源、不试训、不自动重试。"
+        }
+      }
+    },
+    {
+      "arxiv_id": "2603.24917",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2603.24917",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2603.24917",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "catalogued",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": true,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "implemented",
+        "resolution": "bounded_component_accepted",
+        "reason": "外部next-logits上的top-k重归一、精确路径logp、Hamming/带状Levenshtein可行性剪枝、末步保留B×k、概率质量下界/剪枝bank上界；无大模型/KV cache，无可选τ提前结束。",
+        "cost_assessment": {
+          "source": "https://arxiv.org/html/2603.24917v1",
+          "reviewed_sections": [
+            "§4.1–4.3",
+            "§5",
+            "Appendix C.3",
+            "Appendix D–E",
+            "Appendix F.2/F.7"
+          ],
+          "available_resource": "单张NVIDIA A100/A30或本地Mac",
+          "basis": "OLMo2 7/13/32B、Llama2 7/13/70B和Pythia等；上万训练序列/独立负控，T=50、B=20、k=40。原文指出beam增加KV缓存与逐步前向，完整模型/数据/参数矩阵超本轮单卡短预算，不运行。",
+          "decision": "成本过高，不复现（审查DONE）；仅交付独立低成本L1组件，不下载大资源、不试训、不自动重试。"
+        }
+      }
+    },
+    {
+      "arxiv_id": "2604.01430",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2604.01430",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2604.01430",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "catalogued",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": true,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "implemented",
+        "resolution": "bounded_component_accepted",
+        "reason": "CPU paper-specific set-completion metric interface only; no generic guard relabeled as the algorithm and no invented Gemini trainer.",
+        "cost_assessment": {
+          "source": "https://arxiv.org/html/2604.01430v1",
+          "sections": "§2–3.3 and Appendix B.3",
+          "paper_configuration": "Private Gemini 2.5 Flash fine-tuning plus teacher traces and RL; not a fully specified public training recipe; full experiment not reproduced (commercial/private dependency).",
+          "component_boundary": "CPU paper-specific set-completion metric interface only; no generic guard relabeled as the algorithm and no invented Gemini trainer.",
+          "available_resource": "Local CPU/Mac or one NVIDIA A100/A30",
+          "decision": "私有/商业训练依赖，完整实验不复现；审查DONE。"
+        }
+      }
+    },
+    {
+      "arxiv_id": "2604.02910",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2604.02910",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2604.02910",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "catalogued",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": true,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "implemented",
+        "resolution": "bounded_component_accepted",
+        "reason": "CPU simulator, restricted-formula guards, independent BFS small-instance negative controls; no LLM planner or gold plan fed to actor.",
+        "cost_assessment": {
+          "source": "https://arxiv.org/html/2604.02910v1",
+          "sections": "§3–4.1 and Appendix A",
+          "paper_configuration": "Gemini 3 Pro planning across large curricula (tower heights up to 1000 and hundreds of goal blocks); full model/API evaluation not reproduced.",
+          "component_boundary": "CPU simulator, restricted-formula guards, independent BFS small-instance negative controls; no LLM planner or gold plan fed to actor.",
+          "available_resource": "Local CPU/Mac or one NVIDIA A100/A30",
+          "decision": "成本过高，完整实验不复现；审查DONE。"
+        }
+      }
+    },
+    {
+      "arxiv_id": "2604.03136",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2604.03136",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2604.03136",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "catalogued",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": true,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "implemented",
+        "resolution": "bounded_component_accepted",
+        "reason": "按prompt整组bootstrap索引与AppendixD核心特征严格合取门控/方向：重要性分位、稳定性、null95/p值、top25、human-AI gap及跨AI模型spread；真实LLM特征、XGBoost/SHAP统计外置，不猜fingerprint阈值。",
+        "cost_assessment": {
+          "source": "https://arxiv.org/html/2604.03136v1",
+          "reviewed_sections": [
+            "§2.1–2.2",
+            "§3–5",
+            "Appendix B–D",
+            "Appendix H"
+          ],
+          "available_resource": "单张NVIDIA A100/A30或本地Mac",
+          "basis": "61,608篇约5000词故事、10,272个prompt、GPT5.1结构化/特征发现、Gemini3Flash给304特征赋值、F2LLM4B去重、50次bootstrap分类器及基线矩阵。完整API/大语料流程高成本不复现，官方公开缓存不等于本地已跑。",
+          "decision": "成本过高，不复现（审查DONE）；仅交付独立低成本L1组件，不下载大资源、不试训、不自动重试。"
+        }
+      }
+    },
+    {
+      "arxiv_id": "2604.05018",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2604.05018",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2604.05018",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "reviewed",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": false,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "deferred",
+        "resolution": "not_reproduced_high_cost",
+        "reason": "完整实验成本过高，不复现（审查 DONE）；仅参考资料，无执行入口或自动重试。",
+        "cost_assessment": {
+          "source": "固定v1 Section4/5、AppendixB/D；https://arxiv.org/html/2604.05018v1",
+          "available_resource": "单张NVIDIA A100或A30，或本地Mac；不假设免费无限外部API",
+          "paper_configuration": "Gemini3.1Pro写作、Gemini3Flash联网检索、图像模型/PaperBanana、三轮refinement；作者报告单文60–70次LLM调用、39.6分钟裁尾均值；200篇PaperWritingBench和多judge/多基线及11位研究者评测。",
+          "estimated_cost_basis": "调用量/均值为作者在10篇子集上的报告，不是本地测量；按完整评测矩阵需大量联网API调用与人工审查，单次fixture不能忠实代表。",
+          "decision": "成本过高，不复现（审查 DONE）；不调用付费API/启动长写作评测、不自动重试；保留方法、泄漏风险、来源和成本记录。"
+        }
+      }
+    },
+    {
+      "arxiv_id": "2604.06543",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2604.06543",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2604.06543",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "catalogued",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": true,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "implemented",
+        "resolution": "bounded_component_accepted",
+        "reason": "CPU statistical evaluator only; does not claim an LLM sampler or use PRNG to fake model outputs.",
+        "cost_assessment": {
+          "source": "https://arxiv.org/html/2604.06543v1",
+          "sections": "§3–6",
+          "paper_configuration": "1024 samples per distribution/prompt/model with sequential long histories across Qwen up to 32B and Gemini; full model sweep not reproduced.",
+          "component_boundary": "CPU statistical evaluator only; does not claim an LLM sampler or use PRNG to fake model outputs.",
+          "available_resource": "Local CPU/Mac or one NVIDIA A100/A30",
+          "decision": "成本过高，完整实验不复现；审查DONE。"
+        }
+      }
+    },
+    {
+      "arxiv_id": "2604.14403",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2604.14403",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2604.14403",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "catalogued",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": true,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "implemented",
+        "resolution": "bounded_component_accepted",
+        "reason": "Real differentiable Torch projection and joint-loss kernel CPU/CUDA, without pretrained decoder, index or generated answers; Real NVIDIA A100-SXM4-80GB seeds42/43/44 L1 operator checks passed; receipt bound to frozen commit084bf0b1409d4bd5593c8704e37eced5f4f52bde, no full training.",
+        "cost_assessment": {
+          "source": "https://arxiv.org/pdf/2604.14403v1",
+          "sections": "§3–4, Appendices A.1/B.1/B.5.1",
+          "paper_configuration": "8 NVIDIA H100 training; 135M/1B models, Wikipedia pretraining and ~110k NQ/TriviaQA questions, pooled 840k/2.1M passage evaluation; full study not reproduced.",
+          "component_boundary": "Real differentiable Torch projection and joint-loss kernel CPU/CUDA, without pretrained decoder, index or generated answers; Real NVIDIA A100-SXM4-80GB seeds42/43/44 L1 operator checks passed; receipt bound to frozen commit084bf0b1409d4bd5593c8704e37eced5f4f52bde, no full training.",
+          "available_resource": "Local CPU/Mac or one NVIDIA A100/A30",
+          "decision": "成本过高，完整实验不复现；审查DONE。"
+        }
+      }
+    },
+    {
+      "arxiv_id": "2604.15505",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2604.15505",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2604.15505",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "catalogued",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": true,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "implemented",
+        "resolution": "bounded_component_accepted",
+        "reason": "以工具能力级结构化条目维护授权解释，按对话主动检索，并据开发反馈Add/Revise/Omit。本地实现内存合同，不自动解释反馈或修改真实授权。",
+        "cost_assessment": {
+          "source": "https://arxiv.org/html/2604.15505v1",
+          "available_resource": "单张A100/A30或Mac",
+          "basis": "扩展tau-bench两领域、5种任务序、pass1–4、Gemini3Pro/ClaudeOpus4.5和商业PolicyAgent/UserSimulator；完整流式能力矩阵高成本不复现。"
+        }
+      }
+    },
+    {
+      "arxiv_id": "2604.22191",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2604.22191",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2604.22191",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "catalogued",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": true,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "implemented",
+        "resolution": "bounded_component_accepted",
+        "reason": "自回归canary序列logp求和、heldout触发/干净成对差及policy-level均值/AUROC、RM/RL/Eval文档身份隔离。无注入诱导/奖励校准训练、无RM/PPO/GRPO、不能证明单文档违规。",
+        "cost_assessment": {
+          "source": "https://arxiv.org/html/2604.22191v1",
+          "reviewed_sections": [
+            "§3.1–3.5",
+            "§4",
+            "Appendix A.1–A.3",
+            "Appendix C.3",
+            "Appendix D–E"
+          ],
+          "available_resource": "单张NVIDIA A100/A30或本地Mac",
+          "basis": "RepliQA/QMSUM、Gemma2B/Qwen1.5B、独立文档分区/种子/注入率/模式/训练regime，RM二元反馈训练后PPO/GRPO。原文单A10040GB，未给完整矩阵总墙钟；重复独立RM/策略训练成本不确定且超短时验收，本轮完整不复现。",
+          "decision": "成本过高，不复现（审查DONE）；仅交付独立低成本L1组件，不下载大资源、不试训、不自动重试。"
+        }
+      }
+    },
+    {
+      "arxiv_id": "2604.23321",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2604.23321",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2604.23321",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "catalogued",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": true,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "implemented",
+        "resolution": "bounded_component_accepted",
+        "reason": "精确区分Hit@1/NDCG@5与任务等权聚合，显式选择线性/指数gain；OmniSET要求12方向同一混合池、保留query干扰项、语义与模态同时正确且不计入排行榜。输入排序外置，无编码器或官方数据物化。",
+        "cost_assessment": {
+          "source": "https://arxiv.org/html/2604.23321v1",
+          "available_resource": "单张A100/A30或Mac",
+          "basis": "190任务、多种2B–8B模型、多模态数据物化和部分百万级候选池；OmniSET还依赖视频/音频生成。只核CPU排序算术，不下载模型、媒体或调用生成API。"
+        }
+      }
+    },
+    {
+      "arxiv_id": "2604.24842",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2604.24842",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2604.24842",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "catalogued",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": true,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "implemented",
+        "resolution": "bounded_component_accepted",
+        "reason": "以创意策略/叙事/美学三轴factored bandit优化全局方向，配合多模态局部修正。本地只实现推荐冷启动、UCB及分轴reward算术，不生成或评价视频。",
+        "cost_assessment": {
+          "source": "https://arxiv.org/html/2604.24842v1",
+          "available_resource": "单张A100/A30或Mac",
+          "basis": "400场景、每场4次完整video pipeline、3次localretry、Gemini3Pro/NanoBananaPro/Veo3.1/TTS/Lyria2；完整商业视频生成高成本不复现。"
+        }
+      }
+    },
+    {
+      "arxiv_id": "2606.01849",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2606.01849",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2606.01849",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "catalogued",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": true,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "implemented",
+        "resolution": "bounded_component_accepted",
+        "reason": "CPU fixed-release Geminon parser and exact-match/capability-gain protocol; News judge remains external, no privacy accountant/proof claim.",
+        "cost_assessment": {
+          "source": "https://arxiv.org/html/2606.01849v1",
+          "sections": "§3.1–3.2, Appendices C.1–C.3 and author evaluation repository",
+          "paper_configuration": "1B/4B models, rank128 LoRA/full evaluation 10000 steps, DP generation 3000 steps with batch512 and sweeps; full synthesis/privacy/training matrix not reproduced.",
+          "component_boundary": "CPU fixed-release Geminon parser and exact-match/capability-gain protocol; News judge remains external, no privacy accountant/proof claim.",
+          "available_resource": "Local CPU/Mac or one NVIDIA A100/A30",
+          "decision": "成本过高，完整实验不复现；审查DONE。"
+        }
+      }
+    },
+    {
+      "arxiv_id": "2606.32032",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2606.32032",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2606.32032",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "catalogued",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": true,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "implemented",
+        "resolution": "bounded_component_accepted",
+        "reason": "严格<τ的句级FC、Z=1−(Fpred−Fgold)^2、仅高于组均值faithfulness项的k+Z放大、不std归一；训练数据上下尾平衡选样。无内在置信估计/LLM自评/GRPO/改写模型。",
+        "cost_assessment": {
+          "source": "https://arxiv.org/html/2606.32032v1",
+          "reviewed_sections": [
+            "§3.1–3.4",
+            "§4–5",
+            "Appendix B.1"
+          ],
+          "available_resource": "单张NVIDIA A100/A30或本地Mac",
+          "basis": "Qwen3 1.7/4/8B与Llama3.1-8B；LoRA64，4训练GPU+2生成/judgeGPU，32completions/prompt，1500步和多模型/多任务/学习率矩阵。原文每100步按in-domain test挑checkpoint；本地不沿用泄漏，只允许train选样、validation选择，test隔离。完整高成本不复现。",
+          "decision": "成本过高，不复现（审查DONE）；仅交付独立低成本L1组件，不下载大资源、不试训、不自动重试。"
+        }
+      }
+    },
+    {
+      "arxiv_id": "2608.19880",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2608.19880",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2608.19880",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "catalogued",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": true,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "implemented",
+        "resolution": "bounded_l1_component_accepted",
+        "reason": "仅实现Stage普通动作重放与notify_replay_complete、Contract三hook及原verifier委托、serialChain共享步预算/lazyB/缓存A∧B。无动态源码编译、安全sandbox、EnvRigger、RL或benchmarkbridges；callback为可信外部代码，CPUtoy仅测合同。",
+        "cost_assessment": {
+          "source": "https://arxiv.org/html/2608.19880v1#A6.SS1",
+          "available_resource": "单张A100/A30或Mac",
+          "basis": "完整技能/EnvRigger矩阵含五benchmark和商业模型，AppendixG报告ALFWorld约228.0M/WebArena137.3M总tokens。另GRPO实验是Qwen3-8B、8×H100、150steps；不能用CPU包装器或单卡fixture替代。高成本完整实验不复现，不试训不调用API。"
+        }
+      }
+    },
+    {
+      "arxiv_id": "2608.26788",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2608.26788",
+          "observed_version": "v1",
+          "identity_url": "https://arxiv.org/abs/2608.26788v1",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "catalogued",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": true,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "implemented",
+        "resolution": "bounded_component_accepted",
+        "reason": "把高频world-model控制与稀疏VLM规划解耦，给自身轨迹后标指令训练BC/stop目标。本地实现区间完成标签和真实可微loss，无RSSM/策略/环境控制。",
+        "cost_assessment": {
+          "source": "https://arxiv.org/html/2608.26788v1",
+          "available_resource": "单张A100/A30或Mac",
+          "basis": "800M每环境controller、7环境、4×RTXA6000、平均23h/最高36h每环境，GPT4o标注增17%GPUh；完整训练高成本不复现。"
+        }
+      }
+    },
+    {
+      "arxiv_id": "2609.19644",
+      "source_provenance": [
+        {
+          "source": "Google COLM 2026 historical paper inventory",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "source_kind": "official-research",
+          "organization": "Google"
+        }
+      ],
+      "inventory_witnesses": [
+        {
+          "arxiv_id": "2609.19644",
+          "observed_version": null,
+          "identity_url": "https://arxiv.org/abs/2609.19644",
+          "source_url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "decoded_text_sha256": "7bc1ec4b49d993d1402ed8fde8ac704015fcc7aa3ecc6779f7c77aa3232f9454"
+        }
+      ],
+      "priority_source_matches": [
+        "Google"
+      ],
+      "automatic_implementation_queue": false,
+      "automatic_retry": false,
+      "repository_status": "catalogued",
+      "reconciliation_status": "catalogued",
+      "catalogued": true,
+      "historical_review_required": false,
+      "priority_review_required": false,
+      "full_text_review_required": false,
+      "review_bucket": "already-closed",
+      "review_reason": "exact canonical identity or substantive disposition retained; not a new implementation task",
+      "method_review_completed": true,
+      "method_or_cost_review_closed": false,
+      "full_capability_reproduced": false,
+      "prior_disposition": {
+        "status": "implemented",
+        "resolution": "bounded_l1_component_accepted",
+        "reason": "仅执行Fig4有界stage、subset Good升阶门、成功/失败历史与未试seed混合、严格改善更新及review/rebuttal预算。所有模型/实验/novelty/语义比较均外部callback，fixed truth-table是L1控制诊断，非完整科研Agent或Evolve。",
+        "cost_assessment": {
+          "source": "https://arxiv.org/html/2609.19644v1#S4.SS3",
+          "available_resource": "单张A100/A30或Mac",
+          "basis": "完整107科研任务。作者在33个NeurIPS问题上的成本分析：单任务2–3天，平均USD3765含token与VM；不是本地测量。Gemini3.6Flash/ClaudeCodeOpus4.8、迭代多benchmark实验/消融/反驳/审稿矩阵明显高成本，不试跑、不下载checkpoint、不调用API。"
+        }
+      }
+    }
+  ],
+  "exceptions": [
+    {
+      "source": "Google Research publications",
+      "source_url": "https://research.google/pubs/?category=2026&sort=-publication__year",
+      "type": "inventory_not_captured",
+      "reason": "configured historical source has no observation; no zero-delta inference",
+      "attempted": false,
+      "counts_as_accepted": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "source": "Google Research recent cross-year publications",
+      "source_url": "https://research.google/pubs/?sort=-publication__year",
+      "type": "inventory_not_captured",
+      "reason": "configured historical source has no observation; no zero-delta inference",
+      "attempted": false,
+      "counts_as_accepted": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "source": "Google DeepMind publications",
+      "source_url": "https://deepmind.google/research/publications/",
+      "type": "inventory_not_captured",
+      "reason": "configured historical source has no observation; no zero-delta inference",
+      "attempted": false,
+      "counts_as_accepted": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "source": "Meta AI publications",
+      "source_url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=1",
+      "type": "inventory_not_captured",
+      "reason": "configured historical source has no observation; no zero-delta inference",
+      "attempted": false,
+      "counts_as_accepted": false,
+      "automatic_implementation_queue": false
+    }
+  ],
+  "coverage_note": "Only configured captured source identities were reconciled; missing pages/sources are explicit exceptions, not evidence of exhaustive history."
+}

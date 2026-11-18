@@ -7,7 +7,7 @@ hide:
 
 # 从列表边际价值到出价控制：策略权重与约束
 
-[搜广推](../index.md) · 更新 2026-11-04 · 38 篇主题资料 / 6 篇重点对照
+[搜广推](../index.md) · 更新 2026-11-06 · 39 篇主题资料 / 7 篇重点对照
 
 CDM把相关性与去冗余的教师选择蒸馏给学生，SORT-Gen直接估计前缀条件下的列表边际价值，PRL-PUTS扫描多目标权重策略，Primal-Dual Decoding则在解码中根据约束松弛量更新乘子。它们分别改变列表上下文、效用模型、策略选择和约束控制，不能把多样性更高或某一目标更好当成全面胜出。 RLBP把相同的多目标治理问题带到日级PID参数选择，但其BU/CPC奖励和控制动作不能当成列表逐项效用。
 
@@ -31,6 +31,7 @@ CDM把相关性与去冗余的教师选择蒸馏给学生，SORT-Gen直接估计
 | [Stochastic Primal-Dual Decoding for Multiobjective Generative Recommender Systems](../../../reproductions/2607.19357-primal-dual-decoding/README.md) · [原始来源](https://arxiv.org/abs/2607.19357)<br>章节：背景与主要改动、核心公式、复现边界 | 不重训生成器，在逐位置选择中加入辅助贡献，并用剩余约束松弛量以镜像下降更新乘子。 | 乘子可随已选前缀改变压力，但软惩罚不是硬可行性证明；若剩余候选无法满足约束，权重再大也不能制造可行解。本地只验证代理机制。 |
 | [Reinforcement Learning for Controller Parameters in the Auto-Bidding System at Pinterest](../../../recommendation-components/2610.33248-pinterest-rlbp/README.md) · [原始来源](https://arxiv.org/abs/2610.33248v1)<br>章节：背景与主要改动、核心公式、高成本完整实验 | 日级选择九种P/I倍率且D固定，生产gamma0回归BU/CPC相对lift，推理用Qbu−betaQcpc再topK softmax，服务保留PID。 | 不同于PRL-PUTS的Repin/P2P策略扫描；CPC改善的reward仍是负值，多步max/min是扩展，生产beta幅度与数值预处理外置。 |
 | [OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer](../../../recommendation-components/2611.04720-onetrans-gsr/README.md) · [原始来源](https://arxiv.org/abs/2611.04720v1)<br>章节：背景与主要改动、核心公式、结果、负控与边界 | 以单个自回归policy统一重排与混排，RM仅离线训练使用；解码保留硬mask/有限偏置，RM和规则奖励分别标准化后组合。 | 几何奖励与集成惩罚是代理目标，不保证每个真实业务指标改善；局部规则不保证全局可行，本地仅CPU约束/算术参考，未训练整页模型。 |
+| [Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking](../../../recommendation-components/2611.07591-ice/README.md) · [原始来源](https://arxiv.org/abs/2611.07591)<br>章节：核心公式、数据协议、代码映射与结果边界 | 用达到概率与条件点击给固定生成器的候选列表算联合效用，另加列表点击分布监督。 | 深度先验适合顺序浏览，不适用于任意非前缀曝光界面；目标分布匹配不等于新策略。 |
 
 </div>
 
@@ -59,6 +60,12 @@ PRL-PUTS分别估计Repin/P2P效用，再扫描权重策略；RLBP的两个头�
 CDM用可控MMR教师产生列表边际监督，OneTrans-GSR则由整页RM指导一个直接生成混合内容序列的policy。后者的几何多目标reward先组内minmax再正值floor，规则reward还要独立标准化；它不是在若干业务分数上随意乘权。硬mask阻止非法动作，有限惩罚允许取舍，局部配额又可能冲突。RM代理得分、最终选择规则与真实A/B应分别记录，不把CPU算术或未曝光页的RM预测写成用户收益。
 
 对照来源：[onetrans-gsr](../../../recommendation-components/2611.04720-onetrans-gsr/README.md) · [cdm](../../../reproductions/2406.09021-cdm/README.md)
+
+### 区分评估器行为模型与生成策略
+
+ICE 固定生成器，在曝光先于点击的假设下改变候选序列的估值。OneTrans-GSR 改变候选序列如何生成和如何以规则、奖励训练。前者的离线对照应固定候选集合，后者不能把训练奖励分数等同真实线上收入。
+
+对照来源：[ice](../../../recommendation-components/2611.07591-ice/README.md) · [onetrans-gsr](../../../recommendation-components/2611.04720-onetrans-gsr/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -114,9 +121,23 @@ CDM用可控MMR教师产生列表边际监督，OneTrans-GSR则由整页RM指导
 
     对照来源：[onetrans-gsr](../../../recommendation-components/2611.04720-onetrans-gsr/README.md) · [cdm](../../../reproductions/2406.09021-cdm/README.md)
 
+### ICE 和 OneTrans-GSR 都影响最终整页，为什么不能把两者都叫生成策略改进？ {#cross-fixed-evaluator-versus-slate-policy}
+
+??? note "展开答案与例子"
+
+    **答案：** ICE 排同一组生成列表，改变的是评估信号；OneTrans-GSR 直接改变生成分布。对照时先对齐哪个候选池和哪个策略能变化。
+
+    **教学例子：** 示意：固定候选 A/B 两页，改评估器只可能切换 A 或 B；新生成策略可以提出原来没有的 C。
+
+    对照来源：[ice](../../../recommendation-components/2611.07591-ice/README.md) · [onetrans-gsr](../../../recommendation-components/2611.04720-onetrans-gsr/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-06** · 加入 ICE，区分固定生成器下的曝光条件估值与 OneTrans-GSR 生成策略；L1 公式检查不与线上提升混算。
+
+涉及：[ice](../../../recommendation-components/2611.07591-ice/README.md) · [onetrans-gsr](../../../recommendation-components/2611.04720-onetrans-gsr/README.md)
 
 **2026-11-04** · 补入OneTrans-GSR，区分单policy整页生成、RM离线代理、几何多目标奖励与独立标准化；相对CDM保留教师/策略差异，并明确局部约束和线上证据不可互相代替。
 
@@ -130,7 +151,7 @@ CDM用可控MMR教师产生列表边际监督，OneTrans-GSR则由整页RM指导
 
 覆盖 36 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 38 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 39 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -172,6 +193,7 @@ CDM用可控MMR教师产生列表边际监督，OneTrans-GSR则由整页RM指导
 - [Breaking the Loop: An Empirical Comparison of Strategies for Novelty and Freshness in YouTube Music](../../../reproductions/2607.23749-youtube-freshness/README.md)
 - [Reinforcement Learning for Controller Parameters in the Auto-Bidding System at Pinterest](../../../recommendation-components/2610.33248-pinterest-rlbp/README.md)
 - [OneTrans-GSR: A Generative Slate Ranking Paradigm Unifying Reranking and Mix-Ranking with One Autoregressive Transformer](../../../recommendation-components/2611.04720-onetrans-gsr/README.md)
+- [Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking](../../../recommendation-components/2611.07591-ice/README.md)
 
 </details>
 

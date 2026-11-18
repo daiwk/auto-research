@@ -1,0 +1,47 @@
+[
+  {
+    "page": "docs/agent-research/2611.08452-reprobridge/README.md",
+    "paper_url": "https://arxiv.org/abs/2611.08452",
+    "arxiv_id": "2611.08452",
+    "figure": "Figure 2",
+    "original_caption": "Construction workflow: Specify, Execute, Preserve and independent review.",
+    "source_url": "https://arxiv.org/html/2611.08452v1/construction_overview.svg",
+    "source_sha256": "62b5a693b94a103a40dc9ac4b0ae4ed8a2fe887f59f63820fc1cbc3bfec5dd98",
+    "extraction": "original SVG rasterized with PyMuPDF; no redrawing",
+    "asset": "docs/agent-research/2611.08452-reprobridge/assets/paper-figure-01.png",
+    "asset_sha256": "0323a2f4bc56e7476fae30ce0a0235590b15835675dbe1804c3fddcd33c620fe",
+    "width": 1800,
+    "height": 552,
+    "error": ""
+  },
+  {
+    "page": "docs/agent-research/2605.14454-lisa/README.md",
+    "paper_url": "https://arxiv.org/abs/2605.14454",
+    "arxiv_id": "2605.14454",
+    "figure": "Figure 1",
+    "original_caption": "Overview of LiSA guardrail: online feedback, offline policy induction and run-time reuse.",
+    "source_url": "https://arxiv.org/pdf/2605.14454v1#page=2",
+    "source_sha256": "48882b8114e8e4c5bb801c69d21eb63b5c882875a409a97a8c3ee88d53737248",
+    "extraction": "PDF page 2 crop [59,80,537,222] points at 3x; no redrawing",
+    "asset": "docs/agent-research/2605.14454-lisa/assets/paper-figure-01.png",
+    "asset_sha256": "53e28e63cca9ca546635f4fbc5d1b49af55a34ad2c09eaffffebcb91cb897b6a",
+    "width": 1434,
+    "height": 426,
+    "error": ""
+  },
+  {
+    "page": "docs/agent-research/alphaproof-code/README.md",
+    "paper_url": "https://deepmind.google/documents/36/Formal_Verification_of_Signal_4.pdf",
+    "arxiv_id": null,
+    "figure": "Figure 1",
+    "original_caption": "The AlphaProof Code workflow: specification, code and proof through a trusted gatekeeper.",
+    "source_url": "https://deepmind.google/documents/36/Formal_Verification_of_Signal_4.pdf#page=2",
+    "source_sha256": "cf813b7192ed247d33003e09cfa612fcda695502eb03768cd96c849afe1cb0a4",
+    "extraction": "PDF page 2 crop [59,82,537,330] points at 3x; no redrawing",
+    "asset": "docs/agent-research/alphaproof-code/assets/paper-figure-01.png",
+    "asset_sha256": "47e2e1a639d542280ecb64300dba791c06cdaeef4e7fdb4dcef2750c4f999fbd",
+    "width": 1434,
+    "height": 744,
+    "error": ""
+  }
+]

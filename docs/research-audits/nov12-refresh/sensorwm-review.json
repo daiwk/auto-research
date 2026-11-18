@@ -1,0 +1,30 @@
+{
+  "schema_version":1, "reviewed_on":"2026-11-12",
+  "scope":"Google11/11官方博客触发的旧P2重新原文核查；只接受Eq55–56低成本CPU核，不称完整SensorWM、125候选生成或医疗/规划能力。",
+  "records":[{
+    "id":"2611.08568", "revision":1, "key":"sensorwm-planning", "domain":"multimodal-models", "priority":"P0",
+    "title":"Personalized health coaching via coachable health age and counterfactual wearable trajectories",
+    "html_title_alias":"Personalized coaching via coachable health age and counterfactual wearable trajectories",
+    "published":"2026-11-05", "published_at":"2026-11-05T17:52:57Z", "discovery_kind":"google_official_blog_historical_gap",
+    "first_author":"Simon A. Lee", "first_author_affiliation":"Google Research / University of California, Los Angeles",
+    "source_url":"https://arxiv.org/html/2611.08568v1", "source_cache":".cache/nov12-refresh/sensorwm/paper.html", "source_sha256":"95237eae5b595ca259e85c172b26288480c1c96eccf43368fdb852c111d962b4",
+    "publication_source_url":"https://arxiv.org/abs/2611.08568v1",
+    "trigger_source":"https://www.research.google/blog/using-wearables-to-enable-cardiovascular-kidney-metabolic-ckm-risk-profiling-for-personalized-coaching/",
+    "reviewed_sections":["2.1 cohort/offline design", "2.4 SensorWM", "2.5 counterfactual planning", "3 limitations/causality", "4.2.1-4.2.7", "4.3.1-4.3.6", "Appendix A.2", "Data availability", "Code availability"],
+    "algorithm_witness":"SensorWM models second-order latent displacement with F_t=g(z_t,a_t), uses predicted states after two observed initial weeks, optimizes rollout and path losses with joint encoder/noEMA/no-stopgrad and256-projectionSIGReg. Accepted localEq55–56 alone: floored within-user sigma(500,15,10), effort sum of squared standardized action changes, gain=CHA_sq−CHA_c at the SAME future horizon, strictgain>0.1,score=gain/(1+effort).",
+    "implementation_boundary":"No learned encoder/predictor/decoder, medical forecast, synthetic substitute rollout,125-grid generator,clinical safety checker,pathway grouping,LLM coach orEvolve. External finite endpoints and booleanfeasible required; returnsID/gain/effort/score only. Equal-scoreID order is local determinism,not claimed original algorithm.",
+    "grid_limitation":"Google blog mentions125 candidate combinations; fixed text does not give precise generation spacing. Do not infer a5cubed grid or claim125 generation reproduced.",
+    "upstream_code":{"url":"https://github.com/Google-Health/consumer-health-research", "checked_commit":"3e9d1e4877a54cf81ce8ef34085006952dd19601", "status":"publication_release_promised_no_verified_dedicated_SensorWM_CHA_release_found", "scope":"Limited directory-entry/README checks only,not repository-wide source exhaustion;existingPHAexplicitlyreferences2508.20148,not thispaper;no publicSensorWMweightsconfirmed."},
+    "production_ab":"not_reported_all_coaching_offline_retrospective_profiles", "causal_effects_identified":false,
+    "decision":"accepted_low_cost_component", "implementation_status":"component_only", "evaluation_tier":"l1_mechanism", "diagnostic_only":true,
+    "full_experiment_status":"not_reproduced_high_cost", "full_experiment_review_done":true, "review_done":true,
+    "cost_basis":"Private96,957participant/2.28Mperson-weeks/182,797valid12week-window pretraining;Fitbitrecords notshareable,WEAR-MEapproval/AllofUsregistration;unconfirmedpublicweights;2780eligibleprofiles,2613evaluablepairedplans+Gemini3-passjudging andexpertcohorts/multitaskclinical validation. GPU,batch,epochs,totalruntime notdisclosed;do not inventA100hours. Fullprivate/model/API matrix notattempted.",
+    "requires_gpu_validation":false, "gpu_validation_status":"not_required_cpu_only",
+    "cpu_validation_artifact":"docs/multimodal-models/2611.08568-sensorwm-planning/metrics/component-cpu-seeds42-44.json",
+    "cpu_validation_status":"passed_frozen_source_seeds42_43_44_arithmetic_only", "execution_commit":"a28efd403e497ad3a482eada2f393fb4c323f845",
+    "source_module_sha256":"196145752be985fd614ed515479e4abb1e4af128b2ba9322d48b1bf1aab94570",
+    "promotion_eligible":false, "evolve_integrated":false, "automatic_retry":false, "automatic_implementation_queue":false,
+    "readme_sha256":"547ec8785646f513290c6ad65a5ed302920716e67f746cce5466396f06ec4111",
+    "figure":{"asset":"docs/multimodal-models/2611.08568-sensorwm-planning/assets/paper-figure-01.png", "source_url":"https://arxiv.org/html/2611.08568v1/Figure4_new.png", "figure":"Figure4", "source_section":"https://arxiv.org/html/2611.08568v1#S2.F4", "sha256":"00396912ef89aa7de7968c8997f7d7f2345d50d2cf61214849de7a2cb70b04dc", "render":"Original officialHTMLPNG bytes; no rendering,cropping orcontentedits; nofullPDFdownload", "visually_reviewed":true}
+  }]
+}

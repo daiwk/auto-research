@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-11",
+  "scope": "2026-11-08 through 2026-11-11 Agent/RSI/JEPA focused primary-source review; not an exhaustive all-paper claim",
+  "review_boundary": "Implementation decisions cover independently executable low-cost components only. No model API, checkpoint, complete agent rollout, official benchmark run, or capability improvement has been executed by this review.",
+  "deduplication": {
+    "checked": ["docs/research-manifest.json", "docs/paper-discovery-ledger.json", "docs/research-audits/nov09-review-closure/paper-register.json"],
+    "result": "None of the seven reviewed identities occur in those inputs. La-JEPA 2611.08156 already has window-only P2 selection and is not counted as a new paper.",
+    "priority_boundary": "No Google/Meta affiliation appears in the seven primary-source author blocks. AlphaProof Code is owned by the separate priority reviewer; this file does not close the Google/Meta sweep."
+  },
+  "source_receipts": [
+    {"artifact": ".cache/nov11-components/ci/agent-paper-candidates/paper-candidates-agent.json", "sha256": "50d9ac4619c21d0ebeeca81e893bc2615710f26fe2fbfadf2e745c50b21687d2"},
+    {"artifact": ".cache/nov11-components/ci/foundation-model-paper-candidates/paper-candidates-foundation-model.json", "sha256": "374128ab8dbffb2458ec4e198cecbdf039c0b89e27091bd5cf187510c0a29890"}
+  ],
+  "papers": [
+    {
+      "id": "2611.14320", "revision": 1,
+      "title": "Don't Just Trust Your Memory: Evidence-Linked Memory Reduces Memory-Induced Degradation in LLM Agents",
+      "published": "2026-11-10T16:46:59Z", "first_author": "Yukyeong Lee", "first_author_affiliation": "KAIST",
+      "metadata_sha256": "cb7e8dfd443f4a79920b905a3e547853e97d586e57d03701b2216d65e0f0fcc6",
+      "source_url": "https://arxiv.org/html/2611.14320v1", "source_sha256": "a726f2ac0fdc858ed4c5a42042a4edfd09548f1b04a6579725d960d66192877b",
+      "source_cache": ".cache/nov11-components/agent/2611.14320v1.html",
+      "reviewed_sections": ["3.3 Constructing Source-Linked Memory", "3.4 Revisiting Source Evidence at Test Time", "4.1 Experimental Setup", "Appendix B"],
+      "code_url": "https://github.com/yukyeongleee/wikitrace", "code_status": "Public author repository verified; Apache-2.0. No code or weights copied.",
+      "algorithm": "Fixed training runs are linked to per-run compilations and at most three immutable insights each. The test agent initially sees insights and may explicitly descend to the original evidence; the source corpus remains read-only.",
+      "priority": "P1", "decision": "implement_component_only", "module_key": "wikitrace",
+      "component_scope": "Immutable training-run/compilation/insight graph, exact source digests, validated navigation and read-only actor memory views; no LLM compiler or task-solving agent.",
+      "cost_assessment": {"decision": "not_reproduced_high_cost", "basis": "Section 4.1 and Appendix A: five benchmarks/eight suites, multiple memory methods and three trials using a high-reasoning DeepSeek-V4-Flash terminal agent, plus memory construction and up to 200 environment steps. Complete grid is long hosted-model rollout work, not a cheap corpus operation.", "measured_locally": false},
+      "gpu_required_for_component": false
+    },
+    {
+      "id": "2611.14326", "revision": 1,
+      "title": "When Should Agents Remember? Falsification-Gated Self-Evolution for LLM Agents",
+      "published": "2026-11-10T16:52:25Z", "first_author": "Runxuan Tang", "first_author_affiliation": "Nanyang Technological University",
+      "metadata_sha256": "0d520a132664018ebe1aabb3b89cfab549ba5f34497b4ad9d3da9c3d2cbf359f",
+      "source_url": "https://arxiv.org/html/2611.14326v1", "source_sha256": "73b30a47759dea36fb245533de62836173c35de94402ffda3661b1860c1e7cfc",
+      "source_cache": ".cache/nov11-components/agent/2611.14326v1.html",
+      "reviewed_sections": ["4.2 Falsification-Gated Self-Evolution", "Appendix A.3", "Appendix A.4", "Appendix C.7 Compute Resources"],
+      "code_url": null, "code_status": "No author implementation repository linked in the fixed paper; exact-title search did not identify one.",
+      "algorithm": "Before persistent memory admission, compare temporary and original states on paired transfer, falsification and regression probes. Commit only if gain, failure-rate and regression-damage thresholds all pass; a failed hypothesis may undergo one precondition refinement.",
+      "priority": "P1", "decision": "implement_component_only", "module_key": "fgse",
+      "component_scope": "Equations 7-9 empirical gate over explicit verifier records; no fake actor, automatically generated probes, proposer or claimed generalization guarantee.",
+      "cost_assessment": {"decision": "not_reproduced_high_cost", "basis": "Appendix C.7 Table 4 reports approximately 460,000 LLM calls and 703,000 verifier calls across groups, up to 32 CPU workers, with individual groups taking 12-39 hours. Hosted API inference is not local GPU training and its provider compute is not disclosed.", "measured_locally": false},
+      "gpu_required_for_component": false
+    },
+    {
+      "id": "2611.14019", "revision": 1, "title": "Program-Aided Patchable Skill Evolution",
+      "published": "2026-11-10T12:53:12Z", "first_author": "Jiahao Wang", "first_author_affiliation": "Northeastern University, Shenyang, China",
+      "metadata_sha256": "b12ae544ef018740b1ac294520b3670f6c013df784a0f1ce8413ae9a870aac6d",
+      "source_url": "https://arxiv.org/html/2611.14019v1", "source_sha256": "c1b8d1fe0335dd2bd93d27204b5e03e7618e304fbf901005b8040c47b0e2753a",
+      "source_cache": ".cache/nov11-components/agent/2611.14019v1.html",
+      "reviewed_sections": ["3.1 Preliminaries", "3.2 Program-Aided Evolution", "4 Experimental Methodology", "Appendix A.3"],
+      "code_url": null, "code_status": "Paper promises a future GitHub release but provides no author repository URL; no release found by exact-title search.",
+      "algorithm": "Separate natural-language strategy from linked executable procedures. Propose localized skill/program patches and retain a patched bundle only after strict held-out validation improvement.",
+      "priority": "P1", "decision": "implement_component_only", "module_key": "pase",
+      "component_scope": "Content-addressed program patches, syntax validation, immutable skill-program pairing, and strict validation-only accept/rollback. No LLM proposer, generated-program execution or spreadsheet-agent result.",
+      "cost_assessment": {"decision": "not_reproduced_high_cost", "basis": "Appendix A.3: 131,072-token contexts; up to 50 ReAct iterations during evolution, ten steps with batch eight, three independent evolution runs per method, three large/API backbones and four benchmarks including 1,000 test examples on each TableQA task. Full grid would require long repeated model rollouts.", "measured_locally": false},
+      "gpu_required_for_component": false
+    },
+    {
+      "id": "2611.14492", "revision": 1, "title": "ReTrace: Distilling Tool-Using Agents into Planner-Free Workflows",
+      "published": "2026-11-10T18:49:47Z", "first_author": "Kaiyuan Hou", "first_author_affiliation": "Columbia University; work during Amazon internship",
+      "metadata_sha256": "4beb96b0b54c2ebc4d58d695faa6486bc7fcd49ca47e3b3f72e26d697addb641",
+      "source_url": "https://arxiv.org/html/2611.14492v1", "source_sha256": "f927fdf1429f6458252b825e3c16fee546938300ee70ca5f7ba94af2c5af0455",
+      "source_cache": ".cache/nov11-components/agent/2611.14492v1.html",
+      "reviewed_sections": ["3 Method", "Appendix A", "Appendix C", "Appendix D", "Appendix L"],
+      "code_url": null, "code_status": "No author ReTrace repository linked in the fixed paper. Public benchmark repositories are not the method implementation.",
+      "algorithm": "Extract reasoning-grounded conditions, typed arguments and their provenance; aggregate them into a cited decision-list IR and synthesize a workflow where code chooses the next step. Model use inside individual tools remains possible.",
+      "priority": "P1", "decision": "implement_component_only", "module_key": "retrace",
+      "component_scope": "Typed decision-list IR interpreter with explicit input/result provenance, first-matching guard, completion and support citations; no LLM extraction/aggregation/synthesis or autonomous production actions.",
+      "production_evidence": "The paper reports 79 internal production procedures and aggregate platform logs; those private procedures are unavailable. Public tests use tau2 telecom and SOP-Bench, not actual user A/B traffic.",
+      "cost_assessment": {"decision": "not_reproduced_high_cost", "basis": "Appendices C/D/L: hosted Sonnet/Opus construction, repeated merges and 36 requested constructions per trace configuration, training-only repairs and multi-benchmark execution; the internal platform and 79 SOPs are private. The reported $2.32 public one-time construction estimate is not an enterprise cost or a claim that the cheap IR interpreter itself is expensive.", "measured_locally": false},
+      "gpu_required_for_component": false
+    },
+    {
+      "id": "2611.14364", "revision": 1,
+      "title": "ARE-bench: Benchmarking Agents' Research Ability in Real-World Researcher Sessions and Workspaces",
+      "published": "2026-11-10T17:21:31Z", "first_author": "Jiahang Lin", "first_author_affiliation": "Fudan University; Shanghai Artificial Intelligence Laboratory research intern",
+      "affiliation_source": "https://curry09.github.io/",
+      "affiliation_boundary": "Paper front matter lists institutions collectively rather than mapping each author; the first author's own homepage supplies his current affiliation.",
+      "metadata_sha256": "81fa318f9092fce27ac3eabda3459d4429f6a4a5565e1e11e8cda749fceacff8",
+      "source_url": "https://arxiv.org/html/2611.14364v1", "source_sha256": "055e9f2e74621c7a0e864ac818f314b686f7dd3415c381a0b05e8f27009ff63f",
+      "source_cache": ".cache/nov11-components/agent/2611.14364v1.html",
+      "pdf_sha256": "fb8f375d824ed5d301f0bfce44f2ed96306665d4c865c562c8a635adb27d7f4c",
+      "reviewed_sections": ["3.1 Task Formulation", "3.4 Evaluation Protocol", "3.5 Metrics", "4.5 Cost Analysis", "Appendix G"],
+      "project_url": "https://arebench.com", "code_url": null,
+      "code_status": "Project site verified but offers contact-based evaluation, not a public code/data download. No official dataset integrated.",
+      "algorithm": "Preserve still-valid background requests and the actual workspace at a real session cut. Score a separate intent-grounded checklist using strict all-item instance success and per-task macro checklist success; the actor must not receive the private rubric.",
+      "priority": "P1", "decision": "implement_evaluation_interface_only", "module_key": "are-bench",
+      "component_scope": "Actor/evaluator payload separation, exact checklist denominator checks, macro CSR and strict ISR; no fabricated official task set or agent evaluations.",
+      "cost_assessment": {"decision": "not_reproduced_high_cost", "basis": "75 real workspaces, seven frontier models and three rollouts imply 1,575 long environment runs, plus checklist judging. Appendix G uses E2B/RJob/Docker and task-specific timeouts; Section 4.5 reports provider costs per run. Public source does not provide a downloadable task release, so this review implements only the CPU scoring contract.", "measured_locally": false},
+      "gpu_required_for_component": false
+    },
+    {
+      "id": "2611.14496", "revision": 1,
+      "title": "RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval",
+      "published": "2026-11-10T18:51:05Z", "first_author": "Tanishq Rachamalla", "first_author_affiliation": "Prince Mohammad Bin Fahd University",
+      "metadata_sha256": "f930fabe0a040158740be201d062ab9c19a5891ad9b91331fd66b898fed47582",
+      "source_url": "https://arxiv.org/html/2611.14496v1", "source_sha256": "e4e1db589db34593275e820ad73070bfdcea6301dce0ece0af92a9a571ebcc7e",
+      "source_cache": ".cache/nov11-components/agent/2611.14496v1.html", "pdf_sha256": "5d0542df7379b6b9aff71bbef560fe20a44d725d82605aee1857b94bf049904e",
+      "reviewed_sections": ["3.2 Scan-Path Views", "3.3 Adversarial View Coupling", "3.4 Cross-Sensor Neighbourhood Consensus", "4.2 Implementation Details", "4.3 Evaluation Protocol"],
+      "code_url": "https://github.com/Tanishq251/RSJEPA", "code_status": "Author repository linked by the paper and verified. No weights or dataset downloaded.",
+      "algorithm": "A shared order-sensitive Vision Mamba encoder learns from four scan traversals. Adversarial hard half-splits use straight-through gradient-reversal weights; four twin-excluded neighbourhood distributions match a detached within-sensor consensus.",
+      "priority": "P1", "decision": "implement_component_only", "module_key": "rs-jepa", "domain": "multimodal-models",
+      "component_scope": "Exact scan-path permutations, adversarial split forward/backward and equations 8-9 relational consensus. No replacement Vim backbone, pretrained checkpoint, full CVA/predictor training or cross-sensor benchmark claim.",
+      "cost_assessment": {"decision": "not_reproduced_high_cost", "basis": "Section 4.2 trains 100 epochs at batch 290 with a 12-block encoder, six-layer predictor and four CVA blocks on three paired datasets; DSRSID alone has 56,000 training pairs. The reported experiment grid includes independent repetitions and retrained baselines on four V100s. Full multi-dataset comparisons are outside the single-GPU time budget; the independent tensor operators are cheap and will be validated separately.", "measured_locally": false},
+      "gpu_required_for_component": true, "gpu_validation_status": "passed_real_A100_cuda_seeds42_43_44",
+      "gpu_validation_artifact": "docs/gpu-validations/rs-jepa-a100-20261111.json",
+      "gpu_validation_boundary": "All eight tiny-tensor mechanism checks passed on cuda:0 in every seed; no remote-sensing dataset, pretrained backbone or capability benchmark was executed."
+    },
+    {
+      "id": "2611.13426", "revision": 1, "title": "BioMem: Agentic Memory for Biomedical LLM Agents",
+      "published": "2026-11-10T01:09:11Z", "first_author": "Mingchen Li", "first_author_affiliation": "University of Massachusetts Amherst / VA Bedford Healthcare",
+      "metadata_sha256": "9334f2bac4a5b1f767c7c7139a8223155e7281fcbf0adbbbfe129d2a10553ef3",
+      "source_url": "https://arxiv.org/html/2611.13426v1", "source_sha256": "fbdcfea8f5dba2ad0921c09b77073aa69b69992a4cf5c58d58f6abaf7bf7c2d0",
+      "source_cache": ".cache/nov11-components/agent/2611.13426v1.html",
+      "reviewed_sections": ["2.3 Performance Evaluation of HMRU", "4.1 Datasets", "4.4 Hybrid Memory Retrieval and Utilization"],
+      "code_url": null, "code_status": "No author code repository linked in the fixed paper or found by exact-title search.",
+      "algorithm": "HMRU unions existing dense and BM25 retrieval, reranks with a cross-encoder and builds task-conditioned evidence prompts. Its distinctive contribution is controlled biomedical retrieval/fidelity/use analysis rather than a new standalone retrieval primitive.",
+      "priority": "P2", "decision": "not_selected_this_window", "originality_not_rejected": true,
+      "reason": "Do not duplicate the repository's existing hybrid-retrieval score hooks merely to add another generic component. This selection does not reject the paper's empirical biomedical contribution or claim a completed implementation.",
+      "cost_assessment": {"decision": "not_reproduced_high_cost", "basis": "Four 8B-30B open models, five memory configurations and six biomedical tasks plus long conversations, with multiple sensitivity grids; MIMIC resources require access authorization. Exact full runtime is undisclosed. Do not launch model probes or acquire clinical data to resolve that uncertainty.", "measured_locally": false},
+      "automatic_implementation_queue": false
+    }
+  ],
+  "shared_integrity_constraints": [
+    "No gold answer, plan or private evaluation rubric is sent to an evaluated actor.",
+    "Synthetic diagnostics validate operators and protocols, not task-solving ability.",
+    "No component is an executable evolve capability mapping merely because it has a catalog entry.",
+    "Complete expensive studies are not reproduced and are review DONE; low-cost operator delivery is tracked separately.",
+    "No official source outage is filled by DeepXiv; unresolved release status stays explicit."
+  ]
+}

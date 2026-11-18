@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:envopt": {
+      "source_sha256": "06c08d90fe0cb20846d11dc6c3ecb9ac6aaf9085927faf8723b96662930f1d78",
+      "reviewed": true,
+      "fields": {
+        "position": "Keep model and harness fixed and evolve a reusable information representation across tasks. Screen cost and proxy quality without training verifiers, then use separate validation to decide retention.",
+        "tradeoff": "A cheaper trajectory can fool the proxy; validation regression triggers rollback. Local code only replays selection rules and neither generates environments nor executes agents."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/6": {
+      "source_sha256": "bf9c43f6cde6c0fc96b112c544d175be99fab6e6f284f1dbef3fb31b1d2e37bf",
+      "reviewed": true,
+      "fields": {
+        "title": "Persisting an environment, evolution guidance and session experience are distinct interventions",
+        "body": "EnvOpt retains an environment representation that can serve different queries. It requires lower cost and proxy preservation in training, then rolls back on validation regression. Meta² retains frozen evolution guidance while concrete harness edits apply only to the current run. Continual AutoResearch matches task streams to measure the effects of session and workspace state, separating search speed from final selection. Track edit scope, validation access and what persists across tasks; cheaper trajectories do not establish stronger model capability."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/environment-index-versus-in-run-edit": {
+      "source_sha256": "7e1647fc3cf08cef12cfe62b8c714d8fd9a7769041d107942ea05f1919f0822f",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a shared file index and a tool reminder added after one run fails use the same training-gain table?",
+        "answer": "Not directly. EnvOpt's index changes a shared environment representation and needs validation on tasks not used to propose the edit. Meta²'s reminder is a bounded harness edit for the current run. What transfers is guidance for making edits, not that reminder.",
+        "example": "Teaching example: search tasks can reuse a directory index, but a recovery reminder for one missing permission should not persist in unrelated tasks."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-06/5": {
+      "source_sha256": "d2597b8d1c45c91085a360e8b29aa9613abb9f2e319040a95c57097790daf1a2",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add EnvOpt as environment-representation evolution with a fixed model and harness. Distinguish it from Meta²'s within-run edits and Continual AutoResearch's measurement of session experience. Held-out rollback does not expose training gold; the local CPU replay is not a complete autonomous optimizer."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/comparison/agent-research:xstack": {
+      "source_sha256": "170a4cc2adb80c505ddc0f8f3ea728946ddcd39f4d949d4f3b0b37bb00ac8a10",
+      "reviewed": true,
+      "fields": {
+        "position": "Define a pass jointly by clean full-scale TPU reruns, independent grading, anti-cheating review and original-framework weight loading. Phase two reveals only the recipe and freezes code outside the entry script.",
+        "tradeoff": "Recipe alignment and training reproduction are different diagnostic stages. The preliminary GPU study cannot replace the main TPU matrix. Local coverage is review only."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/analysis/3": {
+      "source_sha256": "03ea8c8335375fe5e912f094a2a12ec65ea06c828ee69edd970ab53be0480af7",
+      "reviewed": true,
+      "fields": {
+        "title": "Clarifying the recipe is not the same protocol change as perturbing the task",
+        "body": "AgentPerturb changes one input surface and independently checks unchanged goals and solvability, so a paired difference can be attributed to that perturbation. XStack phase two clarifies the headline recipe for the same migration, freezes code outside the entry point and withholds the target. It distinguishes experiment-selection errors from migration failures, not input robustness. Both separate grading from execution and must withhold private targets from the actor."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/question/aligned-recipe-not-robustness-pair": {
+      "source_sha256": "914ff0456cc862d07857de97121c09e8b6774a4257abbd4f948a00ef4f1fa369",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is a phase-one failure followed by a phase-two pass in XStack not an AgentPerturb-style paired robustness score?",
+        "answer": "XStack adds the recipe only to failed cells and restricts edits, asking whether the same migration can reach the target under the correct recipe. AgentPerturb executes both clean and perturbed inputs on matched tasks with preserved goals and solvability. Their denominators, interventions and pass criteria differ.",
+        "example": "Teaching example: after initially choosing a smaller dataset, correcting the entry point and reaching the full-scale target shows a working migration path, not resilience to altered tool descriptions."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/update/2026-11-06/2": {
+      "source_sha256": "16aa95a67ce83445c83957497a93912bd938693d844ad834f560eb97a323cdb3",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add XStack to separate cross-framework execution, isolated provenance checks and weight loading from input robustness. The TPU campaign is too costly and is reviewed only; neither Appendix G nor static contracts are local capability results."
+      }
+    }
+  }
+}

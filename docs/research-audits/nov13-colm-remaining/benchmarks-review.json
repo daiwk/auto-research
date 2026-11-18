@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-13",
+  "scope": "Two fixed-v1 benchmark papers; sourceful review and L0 protocol only",
+  "papers": [
+    {
+      "id": "2601.17645",
+      "key": "avmeme-exam",
+      "domain": "multimodal-models",
+      "decision": "implement_l0_protocol_full_campaign_not_reproduced_high_cost",
+      "verified_priority_organizations": [
+        "Google",
+        "Meta"
+      ],
+      "method_sections": [
+        "benchmark construction",
+        "evaluation protocol",
+        "results and limitations"
+      ],
+      "source_url": "https://arxiv.org/html/2601.17645v1",
+      "source_sha256": "8059d806ef6ffee43d467bef89be6f2ce26340de545393e4a3c6645ea575bfc2",
+      "figure_sha256": "8c880dafe001a4a10cc76dc2031f745aa8a978eb24ad68da7ee2ba359e1ab976",
+      "cost_basis": "19个多模态模型、人工标注及多后端推理完整矩阵；官方媒体受访问条件约束，未下载或调用模型。原文未披露可直接套用的单卡总时长，不编造卡时。"
+    },
+    {
+      "id": "2604.23321",
+      "key": "mmeb-v3",
+      "domain": "multimodal-models",
+      "decision": "implement_l0_protocol_full_campaign_not_reproduced_high_cost",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "method_sections": [
+        "benchmark construction",
+        "evaluation protocol",
+        "results and limitations"
+      ],
+      "source_url": "https://arxiv.org/html/2604.23321v1",
+      "source_sha256": "17c6d7030ec6d4d9206716e5e3aac0a1e5efd2556978ec0bb5bfcad86a6c6e3f",
+      "figure_sha256": "6eec251da0f50fb59bbad4827e42684faf2c57847844acaa9d3c4092e4bcf272",
+      "cost_basis": "190任务、多种2B–8B模型、多模态数据物化和部分百万级候选池；OmniSET还依赖视频/音频生成。只核CPU排序算术，不下载模型、媒体或调用生成API。"
+    }
+  ]
+}

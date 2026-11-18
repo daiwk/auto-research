@@ -1,0 +1,140 @@
+{
+  "schema_version": 1,
+  "scope": "Selected original-source checks for the post-capture Shanghai November 9 tail.",
+  "reviews": [
+    {
+      "id": "2611.12356",
+      "published": "2026-11-09T13:06:52Z",
+      "title": "DForkTree: Accelerating Speculative Decoding with Fork-Aware Block Diffusion Draft Trees",
+      "track": "foundation-model",
+      "revision": 1,
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2611.12356v1",
+      "locations": [
+        "§4",
+        "§5.1",
+        "Appendix D"
+      ],
+      "reason": "用目标模型历史生成的 n-gram 点互信息修正 block diffusion 分支边际分数，按分叉状态重新锚定，再找固定节点预算下的最优树。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2611.12356v1",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "原实验用 RTX 5090、SGLang、Qwen3.5-4B/9B 与 DFlash、848 条提示。匹配吞吐需要目标 GPU 和验证内核；不能用单卡 A100/A30 的小规模重放替代。",
+        "available_resource": "one A100 or A30, or a local Mac",
+        "cost_type": "指定 GPU 与匹配推理基线"
+      }
+    },
+    {
+      "id": "2611.12393",
+      "published": "2026-11-09T13:30:18Z",
+      "title": "AutoBuddy: Evaluating Proactive, Always-On Agents on Task Discovery and Execution in a Simulated Workplace",
+      "track": "agent",
+      "revision": 1,
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2611.12393v1",
+      "locations": [
+        "§3.1–3.2",
+        "§5.1–5.3",
+        "Table 1"
+      ],
+      "reason": "从合成组织工作区找出用户应做的任务，再按真实工具修改后的状态评分；任务发现精确率/召回与执行成绩分开。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2611.12393v1",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "17 个模型骨干、5 家提供方、每模型三次完整工作区运行，共 6,120 个任务观测，包括商业闭源模型与统一工具环境。",
+        "available_resource": "one A100 or A30, or a local Mac",
+        "cost_type": "多提供方的闭源 Agent 推理和长程工具调用"
+      }
+    },
+    {
+      "id": "2611.12411",
+      "published": "2026-11-09T13:43:37Z",
+      "title": "PhysOPSD: Code as Privilege for Physically Plausible Video Generation",
+      "track": "post-training",
+      "revision": 1,
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2611.12411v1",
+      "locations": [
+        "§4.2–4.3",
+        "§5.1–5.2",
+        "Table 1"
+      ],
+      "reason": "从可执行物理仿真形成教师特权输入；对成对的学生在线去噪轨迹做结构化自蒸馏，生成时不再需要仿真。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2611.12411v1",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "基于 3,000 个物理样例，在 NVIDIA H20 上用 BF16 对 8.3B、13B 两个视频模型做 LoRA；每条学生轨迹 20 步去噪，分别跑视频物理和通用质量基线。",
+        "available_resource": "one A100 or A30, or a local Mac",
+        "cost_type": "大视频模型成对蒸馏与采样"
+      }
+    },
+    {
+      "id": "2611.12521",
+      "published": "2026-11-09T14:58:53Z",
+      "title": "Can the Confidence and Decisions of System 1 Models Be Trusted? An Explainability and Perturbation Audit of Jev-Style Decision Models",
+      "track": "foundation-model",
+      "revision": 1,
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2611.12521v1",
+      "locations": [
+        "§3.2–3.4",
+        "§4.2–4.4",
+        "Table 5"
+      ],
+      "reason": "用独立/合并问法、问序与中性对照测量决策干扰，区分置信分校准、稳定性和归因。原文公开代码与评测；已有小型开权重模型可做限界本地诊断。仅记录接受审查，未实施。",
+      "decision": "accepted",
+      "resolution": "accepted_core_not_implemented_this_run",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2611.12557",
+      "published": "2026-11-09T15:23:53Z",
+      "title": "WanderBench: Can World Models Explore Dynamic Worlds from Video?",
+      "track": "foundation-model",
+      "revision": 1,
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2611.12557v1",
+      "locations": [
+        "§3",
+        "§4.1",
+        "Table 2",
+        "§5"
+      ],
+      "reason": "用相机轨迹条件和源视频动态事件对齐，衡量视角改变后物体与动作是否延续，包含回访一致性；短模型仅在能生成的片段上计分。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2611.12557v1",
+        "basis": "verified_original_complete_experiment_configuration",
+        "scale": "745 条源视频、三个难度、八个原始视频世界模型、六维 24 子指标；完整对照需要大量原分辨率、帧率的视频生成与视觉评估。",
+        "available_resource": "one A100 or A30, or a local Mac",
+        "cost_type": "原视频生成模型矩阵和多指标计算"
+      }
+    }
+  ]
+}

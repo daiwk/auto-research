@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-11-priority-components",
+  "component_keys": ["reprobridge", "lisa", "maxim", "excursion-td", "drd-mopd", "mcpo", "stochastic-rounding", "wikitrace", "fgse", "pase", "retrace", "are-bench", "rs-jepa", "adindex", "b3", "steprefine"],
+  "cuda_keys": ["adindex", "drd-mopd", "rs-jepa", "stochastic-rounding"],
+  "seeds": [42, 43, 44],
+  "maximum_run_seconds": 180,
+  "model_and_dataset_downloads": 0,
+  "pretrained_model_calls": 0,
+  "api_calls": 0,
+  "full_experiments_executed": false,
+  "automatic_retry": false,
+  "input_scope": "small seeded tensors, finite toy MDPs, and explicit evaluator/control contracts; no capability benchmark"
+}

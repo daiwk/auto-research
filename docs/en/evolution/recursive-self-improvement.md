@@ -1,6 +1,6 @@
 # Recursive self-improvement (RSI)
 
-<!-- source-sha256: 83d4e1ef46328a1ba1e011ca0a508c6fd54232659b819b67d6ab73966e81b36e -->
+<!-- source-sha256: 2ca906642dfa74dced7263754bdd7e70f7a60ac701816c3b39479f71c6dfe41c -->
 
 [简体中文](../../evolution/recursive-self-improvement.md)
 
@@ -32,7 +32,18 @@ A model writing a reflection is not enough. **Persist the change**, **inherit it
 
 The entries below distinguish local mechanisms from candidates still to review. An external paper is not a local reproduction.
 
-Updated on 2026-11-05. The following three papers were announced on 2026-11-04; their detail pages retain the respective original v1 dates. Meta² provides a boundary comparison between task-local edits and transferable guidance, while Continual AutoResearch is a protocol for evaluating retained experience. Inclusion here does not mean all three have a complete local RSI implementation.
+### November 13: Historical autonomous-research and algorithm-discovery backfills
+
+These papers first appeared in 2025–2026, not in a new announcement today. The [delivery and source boundaries](../research-audits/nov13-history-repair/README.md) separate local components from complete systems:
+
+- [ScientistTwo](../../agent-research/2609.19644-scientist-two/README-en.md) proposes ideas using both successful and failed experiments and strictly compares successor versions. [MLE-STAR](../../agent-research/2506.15692-mle-star/README-en.md) uses executed ablations to locate code blocks for two-level refinement. Locally the former has bounded CPU control only, and the latter is a method/cost reference. Neither supplies scientific capability or unified Evolve integration.
+- [ERA](../../agent-research/2509.06503-era-flat-puct/README-en.md) and [AlphaEvolve](../../agent-research/2506.13131-alphaevolve/README-en.md) search by scores from executed programs. Local ERA supplies flat-PUCT arithmetic only. The original AlphaEvolve runtime is not released, and an invented archive is not substituted for it. Their full scientific/production matrices are not reproduced because of cost (review DONE).
+- [DS-STAR](../../agent-research/2509.21825-ds-star/README-en.md) append/backtrack is **within-task plan correction**, not automatically transferable cross-task RSI. Local work checks control flow driven by external semantic judgments; the commercial Agent is not run, without inventing expensive training.
+- [EnvHarness](../../agent-research/2608.19880-envharness/README-en.md) adapts environment scaffolds to policy weaknesses, an environment-side part of a learning loop. Local wrappers include neither EnvRigger nor policy learning; composable reset/step is not completed self-improvement.
+
+### Earlier update: November 5, 2026
+
+The following three papers were announced on 2026-11-04; their detail pages retain the respective original v1 dates. Meta² provides a boundary comparison between task-local edits and transferable guidance, while Continual AutoResearch is a protocol for evaluating retained experience. Inclusion here does not mean all three have a complete local RSI implementation.
 
 - [Meta²](../../agent-research/2611.05139-meta-square/README-en.md): Freezes an offline Meta-Skill and makes bounded KEEP/EVOLVE decisions at checkpoints within one environment and trajectory. Concrete edits apply only to the current task; evolution guidance, not the final harness, transfers across tasks. Local work covers only CPU state-lifetime and feedback-isolation contracts, without an LLM evolver or Meta-Skill learning. Full multi-model/API experiments are not reproduced because of cost (review DONE). Meta² is not a Meta-company paper.
 - [Continual AutoResearch](../../agent-research/2611.05108-continual-autoresearch/README-en.md): Pairs persistent and reset sessions/workspaces, separately measuring initialization, the best-so-far curve under budget and actual final selection. Finding a good candidate earlier is not automatically a better final outcome. Local work covers only post-run CPU scoring and pairing protocols, not autonomous research, and does not expose hidden scores to evaluated agents. The full multi-task, multi-model research matrix is not reproduced because of cost (review DONE).

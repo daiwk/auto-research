@@ -1,0 +1,15 @@
+{
+  "paper_id": "2611.07959v1",
+  "figure": "1",
+  "source_page": "https://arxiv.org/html/2611.07959v1#S1.F1",
+  "source_url": "https://arxiv.org/html/2611.07959v1/figs/teaser.png",
+  "image": "paper-figure-01.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "af8034cdf46d78bad892b0867a9056619e11e3dc66f7ca4b54e986aebd4338c4",
+  "width": 1888,
+  "height": 779,
+  "license": "arXiv.org perpetual non-exclusive license; figure copyright retained by the authors",
+  "transformation": "original author PNG, byte-for-byte and uncropped",
+  "visual_review": "2026-11-06 目视核对 OPD 状态盲点与耦合采样两个面板完整，图中接受比率和正残差清晰。",
+  "checked_on": "2026-11-06"
+}

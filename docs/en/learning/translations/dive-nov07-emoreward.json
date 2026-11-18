@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/post-training/reward-and-credit/comparison/post-training:emoreward": {
+      "source_sha256": "5f780f79d3b26a3015d47647840862df9aeb138b0b935ba4f50bf3ce3d8e50c8",
+      "reviewed": true,
+      "fields": {
+        "position": "Gate the current video's evidence to decide which scores can enter the fusion. Tilt provider weights using correlations between raw scores and outcomes from a completed run. Fit the table once between runs, then keep it read-only.",
+        "tradeoff": "The method needs a completed reference run and its correlations depend on the VideoAlign proxy, not independent emotion preferences. CPU tests cover allocation only; they do not execute visual scorers or full generation training."
+      }
+    },
+    "dive/post-training/reward-and-credit/analysis/4": {
+      "source_sha256": "5208a959490f2712e2a8ab4279943fcce6e5e8f15c1005000e8f79a7cb15e094",
+      "reviewed": true,
+      "fields": {
+        "title": "Fuse the video reward, or allocate it across generation tokens?",
+        "body": "EmoReward calibrates one scalar per video across score providers, using current validity and proxy correlations from a completed run. TVRL redistributes an existing group advantage along the generation-token axis using input gradients from a frozen VLM. A scalar does not identify which tokens caused an effect; a gradient attribution does not estimate whether facial or motion providers remain reliable across runs. Control the provider set and credit allocator separately in comparisons."
+      }
+    },
+    "dive/post-training/reward-and-credit/question/emoreward-vs-tvrl-credit-axis": {
+      "source_sha256": "bd533eec23978551692f99464754732a8d7552755c7217d8c43200ce2c0ff3aa",
+      "reviewed": true,
+      "fields": {
+        "question": "If two videos have the same final emotion scalar, must EmoReward and TVRL assign the same credit to their generation tokens?",
+        "answer": "No. EmoReward outputs a video-level scalar, not token credit. TVRL distributes an existing group advantage using gradients from a frozen VLM. Two videos with the same scalar can have different token sensitivities. Attribution cannot create nonzero credit when the underlying group advantage is zero.",
+        "example": "Teaching example: Suppose both videos have positive advantages in one group. Foreground movement matters more in one video, while a later transition matters more in the other. TVRL sensitivities can differ; EmoReward does not emit that allocation."
+      }
+    },
+    "dive/post-training/reward-and-credit/update/2026-11-07/3": {
+      "source_sha256": "571670260ff37cc96250d18d621f1d232793a9f47ba3f6d23190d5c0c087a4d0",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added EmoReward from the November 5 bulletin overlap. Comparing it with TVRL separates provider correlation, current validity, and within-group token sensitivity. The CPU L1 component runs neither the generator nor full training."
+      }
+    }
+  }
+}

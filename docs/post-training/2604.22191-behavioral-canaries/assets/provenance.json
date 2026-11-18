@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "paper_id": "2604.22191v1",
+  "figure": "Figure 1",
+  "source_url": "https://arxiv.org/html/2604.22191v1/COLM_Overview.png",
+  "source_kind": "original_html_asset",
+  "source_html_sha256": "264c5373dacb62ca767168684e4f38150536e69887efd81fefbb95754f194ec5",
+  "asset": "paper-figure-01.png",
+  "asset_sha256": "ee8e67336b03d62807b9acba74b46affb403d60e26799a247ed64310c4ea31d5",
+  "caption": "Canary construction, controlled RLFT regimes and held-out behavioral audit.",
+  "copyright": "Original authors",
+  "reviewed_on": "2026-11-13",
+  "rendered_and_visually_reviewed": true,
+  "local_result": false
+}

@@ -1,0 +1,42 @@
+{
+  "title": "AVMeme Exam: A Multimodal Multilingual Multicultural Benchmark for LLMs' Contextual and Cultural Knowledge and Thinking",
+  "first_author": "Xilin Jiang",
+  "first_author_affiliation": "Columbia University",
+  "published_at": "2026-01-25T01:40:15Z",
+  "code": "https://avmemeexam.github.io/public/",
+  "code_status": "官方项目、受访问条件约束的数据与加载说明公开；完整模型评测框架源码未确认发布。",
+  "summary": "AVMeme Exam用多语言、多文化短音视频多选题评估声音的情境、幽默和应用知识，并过滤文本捷径、屏蔽答案泄漏视频。本地只实现独立可核的协议与计分，不将夹具准确率冒充模型能力。",
+  "domain": "multimodal-models",
+  "key": "avmeme-exam",
+  "paper_url": "https://arxiv.org/abs/2601.17645",
+  "reviewed_version": "v1",
+  "reviewed_arxiv_id": "2601.17645v1",
+  "reviewed_version_url": "https://arxiv.org/html/2601.17645v1",
+  "detail_path": "multimodal-models/2601.17645-avmeme-exam/README.md",
+  "topic": [
+    "跨模态评测与检索",
+    "文化理解"
+  ],
+  "published": "2026-01-25",
+  "adapter": null,
+  "priority": "P1",
+  "implementation_status": "evaluation_protocol_interface",
+  "local_operator": "auto_research.multimodal.avmeme_exam.evaluate",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.multimodal.avmeme_exam import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l0_interface",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "fidelity_note": "实现选项重排、私有答案映射、主集文本捷径过滤、视频捷径屏蔽及三轴分组计分。严格字母解析为明示本地约定；不处理媒体、不生成捷径标签或模型回答，不猜测七题型宏平均。",
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2601.17645v1",
+    "available_resource": "单张A100/A30或Mac",
+    "basis": "19个多模态模型、人工标注及多后端推理完整矩阵；官方媒体受访问条件约束，未下载或调用模型。原文未披露可直接套用的单卡总时长，不编造卡时。"
+  }
+}

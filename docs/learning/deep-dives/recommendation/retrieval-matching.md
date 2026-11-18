@@ -7,7 +7,7 @@ hide:
 
 # 召回覆盖从哪里来：用户表示、正例组织与负例难度
 
-[搜广推](../index.md) · 更新 2026-11-04 · 37 篇主题资料 / 5 篇重点对照
+[搜广推](../index.md) · 更新 2026-11-06 · 38 篇主题资料 / 6 篇重点对照
 
 候选生成先决定后续排序能看见什么。YouTube DNN说明单用户向量如何进入近邻检索，Airbnb EBR把监督放回搜索—浏览—预订旅程，MIMA让同请求多正例分配给互补兴趣，MDCNS改变负例的难度与多视角监督。这四种改动分别作用于表示、标签、兴趣分工和梯度，不能用召回数变大统一解释。
 
@@ -30,6 +30,7 @@ hide:
 | [MIMA: Multi-Interest Recommendation via Multi-Positive Exclusive Assignment](../../../reproductions/2609.12842-mima/README.md) · [原始来源](https://arxiv.org/abs/2609.12842)<br>章节：背景与主要改动、核心公式、复现边界 | causal decoder产生多个兴趣，同请求多正例用一对一最优匹配监督，再以兴趣激活概率校准多通道分数。 | 排他分配抑制所有正例挤到同一兴趣，但依赖真实多正例集合及路由校准；本地相邻行为组替代同请求成交，不能直接证明生产兴趣分解。 |
 | [Divergence Meets Consensus: A Multi-Source Negative Sampling Framework for Sequential Recommendation](../../../reproductions/2605.19651-mdcns/README.md) · [原始来源](https://arxiv.org/abs/2605.19651)<br>章节：背景与主要改动、核心公式、本地复现 | Self、Peer、Teacher多视角在候选池上评分，以模型分歧修正难负例排序，再把Teacher整池软分布蒸馏回Self。 | 比单一高分负例提供更多监督，但难负例仍可能是假负例，分歧也不等于标签真错；需要对齐候选池、采样预算和训练成本。 |
 | [WeSearch: A Unified Model-Centric Retrieval Framework for WeChat Search](../../../recommendation-components/2611.00530-wesearch/README.md) · [原始来源](https://arxiv.org/abs/2611.00530v1)<br>章节：背景与主要改动、核心公式、代码映射 | 簇只收缩候选空间，再对原子文档做OPQ粗排和特征FFN精排；固定簇/码本还能挂载新文档，不必逐SID前缀解码。 | 簇选择仍有漏召回风险；查表精确仅说明对既有量化向量的距离恒等，不等于训练表示或生产质量更好。局部快照也不等于分布式原子刷新。 |
+| [From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation](../../../recommendation-components/2611.05997-ured/README.md) · [原始来源](https://arxiv.org/abs/2611.05997)<br>章节：核心公式、数据协议、代码映射与结果边界 | 从既有排序日志回收高分未展示项，按时间建用户池，再按曝光类目筛选。 | 只重用已经被打过分的候选，不创造语义索引里的新命中；依赖历史新鲜度和曝光记录。 |
 
 </div>
 
@@ -52,6 +53,12 @@ MDCNS从未交互候选中寻找模型认为困难且有分歧的负例，让Sel
 WeSearch在簇并集内保留原子文档，再区分粗排与特征精排；MIMA则让多个用户兴趣各自提出候选。两者都应在最终去重预算固定时比较覆盖，不能因多取候选宣称表征改善。ADC恒等式只验证同一量化向量的计算，新文档挂载复用固定参数也不能替代完整训练或模型/索引联合刷新。
 
 对照来源：[wesearch](../../../recommendation-components/2611.00530-wesearch/README.md) · [mima](../../../reproductions/2609.12842-mima/README.md)
+
+### 日志再利用不是新的匹配表征
+
+WeSearch 先用簇收缩检索空间，再以 OPQ 和特征打分；URED 反过来依赖既有打分，把当时没展示的高分项积累成独立通道。比较应固定召回与展示配额，另检查去重、索引新鲜度和重复曝光。
+
+对照来源：[ured](../../../recommendation-components/2611.05997-ured/README.md) · [wesearch](../../../recommendation-components/2611.00530-wesearch/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -87,9 +94,23 @@ WeSearch在簇并集内保留原子文档，再区分粗排与特征精排；MIM
 
     对照来源：[youtube-dnn](../../../reproductions/recsys2016-youtube-dnn-youtube-dnn/README.md) · [mima](../../../reproductions/2609.12842-mima/README.md) · [mdcns](../../../reproductions/2605.19651-mdcns/README.md)
 
+### URED 能找回从未进入任何历史排序候选池的文档吗？ {#cross-candidate-pool-history-versus-clusters}
+
+??? note "展开答案与例子"
+
+    **答案：** 不能，它的输入来自历史排序器。WeSearch 的检索索引可以在其可用快照中为文档产生首次候选；两个入口不互相替代。
+
+    **教学例子：** 示意：刚上线的商品可进更新后的索引；在任何请求给它打分之前，它不会从 URED 日志池凭空出现。
+
+    对照来源：[ured](../../../recommendation-components/2611.05997-ured/README.md) · [wesearch](../../../recommendation-components/2611.00530-wesearch/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-06** · 加入 URED，区分候选的日志回收与 WeSearch 的语义索引召回，记录时间截断和曝光去重边界。
+
+涉及：[ured](../../../recommendation-components/2611.05997-ured/README.md) · [wesearch](../../../recommendation-components/2611.00530-wesearch/README.md)
 
 **2026-11-04** · 加入WeSearch，区分簇约束候选、兴趣分工、ADC距离等价和固定参数挂载；L1 CPU证据不升级为完整检索器能力，生产A/B与本地机制继续分开。
 
@@ -99,7 +120,7 @@ WeSearch在簇并集内保留原子文档，再区分粗排与特征精排；MIM
 
 覆盖 36 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 37 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 38 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -140,6 +161,7 @@ WeSearch在簇并集内保留原子文档，再区分粗排与特征精排；MIM
 - [TransRetrieval: Scaling Up Transformer-Based Retrieval for Industrial Recommendation](../../../reproductions/2608.25528-transretrieval/README.md)
 - [Deep Neural Networks for YouTube Recommendations](../../../reproductions/recsys2016-youtube-dnn-youtube-dnn/README.md)
 - [ZoRRO: A Zero-Weight Personalized Recommender System for Scalable News Recommendation](../../../reproductions/2607.10910-zorro/README.md)
+- [From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation](../../../recommendation-components/2611.05997-ured/README.md)
 
 </details>
 

@@ -1,0 +1,427 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-13",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "agent-research:clarification-sgp",
+      "target_card": "agent-research/planning-and-search",
+      "source_revisions": {
+        "agent-research:clarification-sgp": "bcfc3426ac9f82a6fe1cb0a77ffa9fb5c23038102618b455d222f8c46adc72f3",
+        "agent-research:react": "e356d3e717cb7cf1b6f307cb79728bffd7d3d9807443aa881c22dab763ac518e"
+      },
+      "comparison": {
+        "position": "把猜测、澄清、多答案作为受数值成本条件化的动作，按解释均衡reward选序列后再选训练轨迹。",
+        "tradeoff": "ReAct据观察继续行动；SGP还问多一次沟通的收益是否抵成本。低成本时多问不等于高成本下也最优，本地选择器不具备对话语义能力。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射",
+          "复现边界"
+        ]
+      },
+      "analysis": {
+        "title": "澄清的价值必须连同沟通成本与解释分布一起定义",
+        "body": "ReAct让推理与工具观察交替，而SGP在存在私有意图的协作中显式训练行动形式。它先对解释均衡再选序列，避免只对好猜解释最优；数值成本还要与F1单位一致。两者都依赖真实模型产生有效观察或问题，本地满分控制检查不能相互排能力。",
+        "papers": [
+          "agent-research:clarification-sgp",
+          "agent-research:react"
+        ]
+      },
+      "question": {
+        "id": "cross-colm-clarification-sgp",
+        "question": "ReAct执行更多推理与工具轮次，就等于SGP中更优的沟通策略吗？",
+        "answer": "不等于。ReAct根据观察继续行动；SGP还把准确性收益与澄清、篇幅的数值成本比较。只有在相同成本与解释分布下评价reward，轮次数才有可比意义。",
+        "example": "教学例：多问一句虽提高正确率，却可能在高提问成本的语音任务中降低reward。",
+        "papers": [
+          "agent-research:clarification-sgp",
+          "agent-research:react"
+        ]
+      },
+      "update": {
+        "date": "2026-11-13",
+        "papers": [
+          "agent-research:clarification-sgp",
+          "agent-research:react"
+        ],
+        "summary": "补入clarification-sgp历史遗漏，把猜测、澄清、多答案作为受数值成本条件化的动作，按解释均衡reward选序列后再选训练轨迹。 ReAct据观察继续行动；SGP还问多一次沟通的收益是否抵成本。低成本时多问不等于高成本下也最优，本地选择器不具备对话语义能力。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Cost-condition guessing, clarification and multi-answer actions; choose sequences by interpretation-balanced rewards, then training rollouts.",
+          "tradeoff": "ReAct adapts actions to observations; SGP also prices extra communication. More questions at low cost need not be optimal at high cost. The local selector has no dialogue semantics."
+        },
+        "analysis": {
+          "title": "Clarification value depends on both communication costs and intent distributions",
+          "body": "ReAct alternates reasoning and tool observations. SGP trains action forms in collaboration with private intent, balancing interpretations before sequence selection and keeping F1/cost units consistent. Both need real models to produce useful observations or questions; local control checks cannot rank their capabilities."
+        },
+        "question": {
+          "question": "Do more ReAct reasoning/tool turns imply a better SGP communication policy?",
+          "answer": "No. ReAct continues acting from observations; SGP also trades accuracy gains against numerical question/verbosity costs. Turn counts become comparable only under matching costs and intent distributions.",
+          "example": "Teaching example: an extra question can improve accuracy yet lower reward for a high-question-cost voice task."
+        },
+        "update": "Repair the historical clarification-sgp omission. Cost-condition guessing, clarification and multi-answer actions; choose sequences by interpretation-balanced rewards, then training rollouts. ReAct adapts actions to observations; SGP also prices extra communication. More questions at low cost need not be optimal at high cost. The local selector has no dialogue semantics."
+      }
+    },
+    {
+      "paper": "post-training:social-meta-learning",
+      "target_card": "post-training/teacher-and-context",
+      "source_revisions": {
+        "post-training:social-meta-learning": "9101cef8e8f0469b3619e4e6635307dce6b7a4a948c2feaffdd15a46eb92f143",
+        "post-training:opsd": "8082928a5bc28763d2b28f8f7f640f9498cf8516f2e58f3841760950f405df74"
+      },
+      "comparison": {
+        "position": "把teacher反馈放进公开多轮历史，以成功轨迹student-only SFT或在线RL训练反馈利用，并另用Qpriming教提问。",
+        "tradeoff": "OPSD用特权教师分布监督学生前缀，SML让教师通过对话转移信息；两者的额外知识都不能泄漏给评测student。本地只实现SML离线目标。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射",
+          "复现边界"
+        ]
+      },
+      "analysis": {
+        "title": "特权知识经分布蒸馏还是经语言反馈，会改变训练与泄漏边界",
+        "body": "OPSD的教师额外看验证答案，并在学生到达的前缀提供稠密分布。SML的student看teacher公开回复，外层才优化未来的互动方式；Qpriming合成训练问题时可用私有知识，不代表测试可读gold。成功student token屏蔽只是训练算子正确性，缺失完整对话与backbone时不能声称已学会问问题。",
+        "papers": [
+          "post-training:social-meta-learning",
+          "post-training:opsd"
+        ]
+      },
+      "question": {
+        "id": "cross-colm-social-meta-learning",
+        "question": "OPSD和SML都让teacher有额外知识，就能把这些知识直接交给被评student吗？",
+        "answer": "不能。OPSD训练时以特权教师分布监督学生前缀；SML通过公开teacher回复提供反馈。两者都必须保留student观测边界，训练教师持有答案不意味着测试student可读gold。",
+        "example": "教学例：用答案生成训练提示，与在测试请求里放隐藏解题字段，是不同的数据流。",
+        "papers": [
+          "post-training:social-meta-learning",
+          "post-training:opsd"
+        ]
+      },
+      "update": {
+        "date": "2026-11-13",
+        "papers": [
+          "post-training:social-meta-learning",
+          "post-training:opsd"
+        ],
+        "summary": "补入social-meta-learning历史遗漏，把teacher反馈放进公开多轮历史，以成功轨迹student-only SFT或在线RL训练反馈利用，并另用Qpriming教提问。 OPSD用特权教师分布监督学生前缀，SML让教师通过对话转移信息；两者的额外知识都不能泄漏给评测student。本地只实现SML离线目标。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Train feedback use from public dialogue through successful student-only SFT or online RL, with separate Q-priming.",
+          "tradeoff": "OPSD supervises student prefixes with privileged teacher distributions; SML transfers information through dialogue. Neither permits privileged knowledge in evaluated students. Only SML's offline objective is local."
+        },
+        "analysis": {
+          "title": "Privileged distributions and language feedback imply different learning and leakage boundaries",
+          "body": "OPSD's teacher sees verified answers and supplies dense distributions on student prefixes. SML exposes public teacher replies to the student and optimizes later interaction through an outer loop. Private knowledge used to synthesize training questions does not authorize test-time gold. Correct gradient masks without dialogue/backbones do not establish learned enquiry."
+        },
+        "question": {
+          "question": "Because OPSD and SML teachers have privileged knowledge, may evaluated students receive it directly?",
+          "answer": "No. OPSD uses privileged teacher distributions on student prefixes during training; SML exposes public teacher replies. Both must preserve student observation boundaries: teacher answers do not authorize student test-time gold.",
+          "example": "Teaching example: using solutions to synthesize training guidance differs from placing hidden solutions in evaluation requests."
+        },
+        "update": "Repair the historical social-meta-learning omission. Train feedback use from public dialogue through successful student-only SFT or online RL, with separate Q-priming. OPSD supervises student prefixes with privileged teacher distributions; SML transfers information through dialogue. Neither permits privileged knowledge in evaluated students. Only SML's offline objective is local."
+      }
+    },
+    {
+      "paper": "agent-research:mt-pingeval",
+      "target_card": "agent-research/evaluation-and-reliability",
+      "source_revisions": {
+        "agent-research:mt-pingeval": "8d76f5844fbe873df528ef274e4e03c16a46520b1c7a5d4223780f5ef151cfe9",
+        "agent-research:user-proxy-bench": "d415873cbb379260c87b230a4bb250b67bed3f628ff32b671bb68e71b2ceb4b3"
+      },
+      "comparison": {
+        "position": "用各方私有视图与固定token总预算区分交互收益、额外输出和多次猜测机会；Name-game按完整记录判定。",
+        "tradeoff": "UserProxyBench审计模拟用户是否提前泄露，MT-PingEval测受控信息博弈中的协作。任务成功不替代信息边界合规，更多轮次也不自动代表协作更好。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射",
+          "复现边界"
+        ]
+      },
+      "analysis": {
+        "title": "私有信息测评先检查谁知道什么，再看谁答对",
+        "body": "UserProxyBench把用户合同保真与任务reward分开，并审计请求前披露。MT-PingEval用分离数据库或图像建立不对称信息，再固定每玩家token检验轮次。Name-game要比较完整记录而非同名，且应对照无放回随机猜。协议实现没有actor，只有真实模型和tokenizer接入后才能评价协作。",
+        "papers": [
+          "agent-research:mt-pingeval",
+          "agent-research:user-proxy-bench"
+        ]
+      },
+      "question": {
+        "id": "cross-colm-mt-pingeval",
+        "question": "Name-game随轮数提高成功率，就一定是更好的协作吗？",
+        "answer": "不一定。更多轮次也给随机无放回猜记录更多机会，原文专门比较该基线。还需固定token预算和检查传递的信息，不能只看成功曲线。",
+        "example": "教学例：25行里每轮猜一行，允许16轮天然比2轮更容易撞对。",
+        "papers": [
+          "agent-research:mt-pingeval",
+          "agent-research:user-proxy-bench"
+        ]
+      },
+      "update": {
+        "date": "2026-11-13",
+        "papers": [
+          "agent-research:mt-pingeval",
+          "agent-research:user-proxy-bench"
+        ],
+        "summary": "补入mt-pingeval历史遗漏，用各方私有视图与固定token总预算区分交互收益、额外输出和多次猜测机会；Name-game按完整记录判定。 UserProxyBench审计模拟用户是否提前泄露，MT-PingEval测受控信息博弈中的协作。任务成功不替代信息边界合规，更多轮次也不自动代表协作更好。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Use private views and fixed total tokens to distinguish interaction gains from extra output or guessing opportunities; Name-game scores full records.",
+          "tradeoff": "UserProxyBench audits premature user disclosure; MT-PingEval tests collaboration in controlled information games. Task success does not establish compliant information boundaries, nor do more turns establish better cooperation."
+        },
+        "analysis": {
+          "title": "Private-information evaluation begins with who knows what, not who answered correctly",
+          "body": "UserProxyBench separates user-contract fidelity from task reward and audits disclosure before requests. MT-PingEval establishes asymmetric tables/images and holds each player's tokens fixed. Name-game needs complete-record matching and a without-replacement random-guess baseline. Protocol code alone supplies no actor capability."
+        },
+        "question": {
+          "question": "Does higher Name-game success with more turns necessarily mean better collaboration?",
+          "answer": "No. More turns also permit more random guesses without replacement, a baseline examined in the paper. Hold tokens fixed and inspect information exchange rather than success alone.",
+          "example": "Teaching example: guessing one of25 rows per turn is naturally likelier to succeed in16 turns than two."
+        },
+        "update": "Repair the historical mt-pingeval omission. Use private views and fixed total tokens to distinguish interaction gains from extra output or guessing opportunities; Name-game scores full records. UserProxyBench audits premature user disclosure; MT-PingEval tests collaboration in controlled information games. Task success does not establish compliant information boundaries, nor do more turns establish better cooperation."
+      }
+    },
+    {
+      "paper": "post-training:maple-icl",
+      "target_card": "post-training/data-and-budget",
+      "source_revisions": {
+        "post-training:maple-icl": "2762218a95bffd8819414d30cb486e7bcb699856a579f3309db608d99bb3524b",
+        "post-training:lesser": "efd0a45a81ae7b58f504fed90763d336a2d67227271808055de87e951c19e804"
+      },
+      "comparison": {
+        "position": "用DP metadata条件化初始化，并按分类Hamming选非私有已捐赠示例；局部仅实现后一个选择步骤。",
+        "tradeoff": "LESSER按模型梯度特征选训练数据，MAPLE按schema相似性选提示示例，选择单元与目标不同；近邻排序既不保证目标梯度价值，也不建立隐私。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射",
+          "复现边界"
+        ]
+      },
+      "analysis": {
+        "title": "选样相似度必须绑定它的用途，不能跨层解释",
+        "body": "LESSER用固定模型输出层梯度特征近似目标任务相关性；MAPLE的Hamming只量化schema分类是否相同，用于初始化提示的捐赠示例。数值word-count桶也按类别比较，稳定tie是局部约定。MAPLE完整隐私来自外部AIM与PE预算，选择器本身不保护任意私有记录，也不生成高质量文本。",
+        "papers": [
+          "post-training:maple-icl",
+          "post-training:lesser"
+        ]
+      },
+      "question": {
+        "id": "cross-colm-maple-icl",
+        "question": "MAPLE的ICL选择器比随机示例更贴近metadata，是否已复现完整隐私合成？",
+        "answer": "没有。它只是初始化的一步；AIM的DP生成、预算组合、文本模型和AugPE仍缺失。原文也发现初始化单独不等于完整MAPLE，不能用近邻正确性替隐私效用结果。",
+        "example": "教学例：选对10条公开示例不会自动让之后未经DP处理的私有投票安全。",
+        "papers": [
+          "post-training:maple-icl",
+          "post-training:lesser"
+        ]
+      },
+      "update": {
+        "date": "2026-11-13",
+        "papers": [
+          "post-training:maple-icl",
+          "post-training:lesser"
+        ],
+        "summary": "补入maple-icl历史遗漏，用DP metadata条件化初始化，并按分类Hamming选非私有已捐赠示例；局部仅实现后一个选择步骤。 LESSER按模型梯度特征选训练数据，MAPLE按schema相似性选提示示例，选择单元与目标不同；近邻排序既不保证目标梯度价值，也不建立隐私。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Condition initialization on DP metadata and select non-private donated prompt examples by categorical Hamming distance; only selection is local.",
+          "tradeoff": "LESSER selects training data through model-gradient features; MAPLE selects prompt examples through schema similarity. Different units/objectives cannot justify gradient-value or privacy claims."
+        },
+        "analysis": {
+          "title": "Selection similarity must be interpreted for its own layer and purpose",
+          "body": "LESSER's output-layer gradient features approximate relevance to target tasks. MAPLE's Hamming distance only compares categorical schema fields for donated initialization examples, including numeric bins treated as categories. Privacy comes from external AIM/PE accounting, not the selector; neither privacy nor generated-text quality follows from correct sorting."
+        },
+        "question": {
+          "question": "Does metadata-nearest ICL selection reproduce private synthesis?",
+          "answer": "No. It is one initialization step; AIM, privacy accounting, the generator and AugPE are absent. The paper also finds initialization alone does not match full MAPLE.",
+          "example": "Teaching example: choosing ten suitable public examples does not make later unprotected private voting safe."
+        },
+        "update": "Repair the historical maple-icl omission. Condition initialization on DP metadata and select non-private donated prompt examples by categorical Hamming distance; only selection is local. LESSER selects training data through model-gradient features; MAPLE selects prompt examples through schema similarity. Different units/objectives cannot justify gradient-value or privacy claims."
+      }
+    },
+    {
+      "paper": "agent-research:policybank",
+      "target_card": "agent-research/memory-and-skills",
+      "source_revisions": {
+        "agent-research:policybank": "c7edc9f6e99adaecc9c6877b41b8ebfb00812bf3eb4595c83a0cf55cd47c6c65",
+        "agent-research:memgpt": "468b0f83c09cf59f74f1961de490d034f5f454baae55fa2a36fcb391aa4407f3"
+      },
+      "comparison": {
+        "position": "按工具能力存半结构化授权解释，header→ID选择→全文检索，再据外部开发反馈Add/Revise/Omit。",
+        "tradeoff": "MemGPT解决有限上下文的分层容量与换入换出，PolicyBank解决spec与requirement差异。容量足够不代表规则正确；本地PolicyBank只有L0合同，语义修复仍缺失。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射",
+          "复现边界"
+        ]
+      },
+      "analysis": {
+        "title": "记忆记得更多，与记忆中的授权规则可信，是两种问题",
+        "body": "MemGPT分层归档使长期信息可取回；PolicyBank则允许修正先前解释而不是反复遵守有缺口的规则。标题选择降低注入量，但相关ID选择仍需真实actor。外部PolicyAgent给出修正不应被库当成授权真理，本地只有typed变更和provenance；恶意反馈、真实权限审核与正式验证都在边界外。",
+        "papers": [
+          "agent-research:policybank",
+          "agent-research:memgpt"
+        ]
+      },
+      "question": {
+        "id": "cross-colm-policybank",
+        "question": "成功轨迹记忆能否替代PolicyBank的授权解释更新？",
+        "answer": "不一定。轨迹告诉agent过去怎么做，可能反复执行有缺口的spec。PolicyBank关注开发反馈中的授权逻辑差异；本地结构化存储仍不具备语义修复能力。",
+        "example": "教学例：十次成功改签案例也无法证明不改签时应否补偿，需要明确边界反馈。",
+        "papers": [
+          "agent-research:policybank",
+          "agent-research:memgpt"
+        ]
+      },
+      "update": {
+        "date": "2026-11-13",
+        "papers": [
+          "agent-research:policybank",
+          "agent-research:memgpt"
+        ],
+        "summary": "补入policybank历史遗漏，按工具能力存半结构化授权解释，header→ID选择→全文检索，再据外部开发反馈Add/Revise/Omit。 MemGPT解决有限上下文的分层容量与换入换出，PolicyBank解决spec与requirement差异。容量足够不代表规则正确；本地PolicyBank只有L0合同，语义修复仍缺失。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Store semi-structured authorization interpretations by tool capability, retrieve headers then selected full entries, and apply explicit feedback-authored Add/Revise/Omit.",
+          "tradeoff": "MemGPT manages capacity/page-in/page-out; PolicyBank targets specification–requirement gaps. More capacity does not imply correct rules. Local PolicyBank remains L0 without semantic repair."
+        },
+        "analysis": {
+          "title": "Remembering more and trusting authorization rules are separate problems",
+          "body": "MemGPT makes long-term information retrievable through tiers. PolicyBank revises interpretations instead of repeatedly following flawed rules. Header selection reduces context but needs a real actor. Typed changes and provenance do not make an external PolicyAgent's update true; malicious feedback, permission review and formal validation remain external."
+        },
+        "question": {
+          "question": "Can successful workflow memory replace PolicyBank's authorization updates?",
+          "answer": "Not necessarily. Past trajectories may repeatedly follow a flawed spec. PolicyBank targets authorization deltas in developer feedback; local storage still lacks semantic repair.",
+          "example": "Teaching example: ten successful rebookings do not settle compensation without rebooking."
+        },
+        "update": "Repair the historical policybank omission. Store semi-structured authorization interpretations by tool capability, retrieve headers then selected full entries, and apply explicit feedback-authored Add/Revise/Omit. MemGPT manages capacity/page-in/page-out; PolicyBank targets specification–requirement gaps. More capacity does not imply correct rules. Local PolicyBank remains L0 without semantic repair."
+      }
+    },
+    {
+      "paper": "agent-research:co-director",
+      "target_card": "agent-research/harness-and-self-improvement",
+      "source_revisions": {
+        "agent-research:co-director": "58ad99ff56809bf5026bbab820d90e9777cdbdc92d9c55f7e90eda1fc40a4216",
+        "agent-research:ruharness": "01c81c72f03453d7ecff3e3ab7e10ad03b9b84925a5fd8def1a87d678df02a37"
+      },
+      "comparison": {
+        "position": "分别更新策略/叙事/美学轴的战略reward，用推荐冷启动和UCB选方向，独立质量分选择已有视频。",
+        "tradeoff": "CoDirector用UCB乐观探索尚不确定的创意方向；RuHarness按联合后验效用的低分位保守选择rubric frontier，再让独立validation决定harness是否晋级。探索奖励和准入证据不能互换，也都不把judge关联分当因果效应。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射",
+          "复现边界"
+        ]
+      },
+      "analysis": {
+        "title": "乐观探索不等于保守准入：两种不确定性用途",
+        "body": "CoDirector在3/3/4个创意轴上用战略reward均值加UCB探索项分配下一次尝试，官方warmstart只推荐先试未观察arm，不虚构计数。RuHarness从六格联合Dirichlet后验抽2000次，取效用0.2分位保守选择active rubric，候选harness仍须独立validation严格增益超过0.05才晋级。前者的不确定性鼓励探索，后者抑制小样本虚高；不能用UCB高分替代验证改善。CoDirector最终成片还按独立质量分而非战略分之和选取。本地只核两类数值机制，没有视频生成、语义judge或完整自进化能力证据。",
+        "papers": [
+          "agent-research:co-director",
+          "agent-research:ruharness"
+        ]
+      },
+      "question": {
+        "id": "cross-colm-co-director",
+        "question": "CoDirector的UCB高分与RuHarness的后验低分位，为什么不能作为同一种晋级证据？",
+        "answer": "UCB故意给未充分探索的方向加乐观奖励，服务于下一次尝试；RuHarness用联合后验效用低分位抑制不确定的rubric点估计，并另外要求独立validation严格提升。两者调度对象和风险偏好不同，分轴judge评分也不能识别因果贡献。",
+        "example": "教学例：只试一次的新创意可因探索项很高而被再次选择，但一个只解释单次失败的rubric不应据此直接晋级；harness候选还必须跨过validation门槛。这不是实测效果。",
+        "papers": [
+          "agent-research:co-director",
+          "agent-research:ruharness"
+        ]
+      },
+      "update": {
+        "date": "2026-11-13",
+        "papers": [
+          "agent-research:co-director",
+          "agent-research:ruharness"
+        ],
+        "summary": "补入CoDirector分轴UCB和独立质量选优，与RuHarness联合后验低分位及validation准入比较：明确乐观探索和保守接受的不同不确定性用途；两者本地机制检查均不是完整生成或自进化能力。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Update strategy/narrative/aesthetic strategic rewards separately, choose directions by recommendation-first cold start/UCB and select existing videos by quality.",
+          "tradeoff": "Co-Director uses optimistic UCB exploration of uncertain creative directions. RuHarness conservatively selects a rubric frontier using a lower posterior utility quantile, then requires independent validation for harness promotion. Exploration rewards are not acceptance evidence, and judge associations do not identify causal effects."
+        },
+        "analysis": {
+          "title": "Optimistic exploration is not conservative acceptance",
+          "body": "Co-Director allocates the next attempt over three, three and four creative choices using mean strategic rewards plus a UCB exploration bonus. Official warm starts recommend unobserved arms without invented counts. RuHarness instead takes the 0.2 utility quantile from 2,000 joint six-cell Dirichlet posterior draws to conservatively select active rubrics. A candidate harness must still improve independent validation by strictly more than 0.05. Uncertainty encourages exploration in the former but discounts poorly supported estimates in the latter; a high UCB score cannot replace validated improvement. Co-Director also selects the final video by separate quality, not summed strategic rewards. Local numeric mechanisms provide no video-generation, semantic-judge or complete self-improvement capability evidence."
+        },
+        "question": {
+          "question": "Why are Co-Director's high UCB score and RuHarness's lower posterior quantile not interchangeable promotion evidence?",
+          "answer": "UCB intentionally rewards underexplored directions optimistically to select another attempt. RuHarness discounts uncertain rubric estimates through joint posterior utility quantiles and separately requires strict independent validation improvement. Their scheduling objects and risk preferences differ; factored judge ratings also do not establish causal contributions.",
+          "example": "Teaching example: a creative arm tried once can receive another attempt because its exploration bonus is high, but a rubric associated with one failed task should not be promoted on that basis. The harness candidate still has to pass validation. This is not a measured result."
+        },
+        "update": "Add Co-Director's factored UCB and separate quality selection, comparing them with RuHarness's lower joint-posterior utility quantile and validation gate. Distinguish optimistic exploration from conservative acceptance; local mechanism checks for either method do not establish complete generation or self-improvement capability."
+      }
+    },
+    {
+      "paper": "agent-research:instruct-to-act",
+      "target_card": "agent-research/agent-policy-learning",
+      "source_revisions": {
+        "agent-research:instruct-to-act": "82fd13e09ebc60a9ddef4b2986e7700afd4c1642d702a5ad847451245dd75ab7",
+        "agent-research:agent-lightning": "88baa5a31b38f5ab1099242151d513f0dafe5340c3852e144e001321ae05fc66"
+      },
+      "comparison": {
+        "position": "用自身rollout后标指令区间，BC监督已标动作、stop监督完成端点；保留Dreamer其他目标。",
+        "tradeoff": "AgentLightning解耦执行与RL训练transition，Instruct-to-Act解耦规划与高频控制。两种解耦不是同一接口，标签正确也不能补缺失RSSM和环境学习。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射",
+          "复现边界"
+        ]
+      },
+      "analysis": {
+        "title": "轨迹变成训练数据时，目标边界比统一接口更重要",
+        "body": "AgentLightning把异构执行记录变成可归因transition；Instruct-to-Act用同一episode内非重叠区间绑定语言，在末步标指令完成。未标注有效步不贡献BC却仍是stop负例，padding两者排除。完整controller还需RSSM、actor/value与真实rollout，单独两项loss不得宣传为通用指令执行器。",
+        "papers": [
+          "agent-research:instruct-to-act",
+          "agent-research:agent-lightning"
+        ]
+      },
+      "question": {
+        "id": "cross-colm-instruct-to-act",
+        "question": "算出BC和stoploss是否已复现语言worldmodelcontroller？",
+        "answer": "没有。原目标还包括RSSM模型、actor、value训练及真实rollout，指令embedding和标注器也不可缺。本地仅真实执行两项辅助目标，不替代缺失网络。",
+        "example": "教学例：一组logits梯度正确，不等于模型在Minecraft能挖出钻石。",
+        "papers": [
+          "agent-research:instruct-to-act",
+          "agent-research:agent-lightning"
+        ]
+      },
+      "update": {
+        "date": "2026-11-13",
+        "papers": [
+          "agent-research:instruct-to-act",
+          "agent-research:agent-lightning"
+        ],
+        "summary": "补入instruct-to-act历史遗漏，用自身rollout后标指令区间，BC监督已标动作、stop监督完成端点；保留Dreamer其他目标。 AgentLightning解耦执行与RL训练transition，Instruct-to-Act解耦规划与高频控制。两种解耦不是同一接口，标签正确也不能补缺失RSSM和环境学习。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Label own-rollout intervals post hoc, train BC on annotated actions and stop on completion endpoints, retaining other Dreamer objectives.",
+          "tradeoff": "Agent Lightning separates execution from RL transitions; Instruct-to-Act separates planning from high-frequency control. These are different interfaces, and labels do not replace missing RSSM/environment learning."
+        },
+        "analysis": {
+          "title": "When trajectories become training data, objective boundaries matter more than shared interfaces",
+          "body": "Agent Lightning turns heterogeneous execution into attributable transitions. Instruct-to-Act binds language to non-overlapping intervals within one episode and marks instruction completion at the end. Unannotated valid steps have no BC but remain stop negatives; padding affects neither. RSSM, actor/value training and real rollouts remain necessary."
+        },
+        "question": {
+          "question": "Do correct BC and stop losses reproduce the language world-model controller?",
+          "answer": "No. RSSM model/actor/value learning, real rollouts, instruction embeddings and annotation are still required. Local code executes two auxiliary objectives without replacing missing networks.",
+          "example": "Teaching example: correct gradients do not establish diamond collection in Minecraft."
+        },
+        "update": "Repair the historical instruct-to-act omission. Label own-rollout intervals post hoc, train BC on annotated actions and stop on completion endpoints, retaining other Dreamer objectives. Agent Lightning separates execution from RL transitions; Instruct-to-Act separates planning from high-frequency control. These are different interfaces, and labels do not replace missing RSSM/environment learning."
+      }
+    }
+  ]
+}

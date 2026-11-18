@@ -1,0 +1,425 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "agent-research:clarification-sgp": {
+      "questions": [
+        {
+          "id": "cost-sensitive-three-actions",
+          "level": "basics",
+          "question": "SGP为什么不始终澄清或始终回答？",
+          "answer": "提问与长答案都会消耗用户成本；模型需在预计准确性收益和α、β成本之间取舍。不同场景的最优行为不同，不是澄清越多越可靠。",
+          "example": "教学例：小屏语音场景中列十种解释可能比问一句更烦，但高提问成本下可直接回答最可能意图。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "balanced-expectation-before-best-rollout",
+          "level": "mechanism",
+          "question": "为什么先选解释均衡的动作序列，再选最高reward轨迹？",
+          "answer": "直接选幸运高分会偏向某个易猜解释。先在各解释内求均值，再均匀平均，选序列后每解释取最佳兼容轨迹，才保留跨解释监督。",
+          "example": "教学例：直接猜在常见解释100分、另一解释0分；澄清两种均80分，不能因100这个最大值选猜。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "sgp-versus-sml-feedback",
+          "level": "comparison",
+          "question": "SGP与Social Meta-Learning都用对话，优化重点相同吗？",
+          "answer": "不同。SGP显式以数值成本控制猜、澄清、多答案的选择；SML训练从teacher反馈中继续求解，Qpriming另教提问。成功过滤或多轮形式相同不表示目标相同。",
+          "example": "教学例：知道什么时候值得付费问一句，与问完后能否根据纠错解出题，是两个能力。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "reward-score-and-filter-units",
+          "level": "implementation",
+          "question": "过滤阈值0.1和提问成本2能直接从同一F1值里减吗？",
+          "answer": "不能混单位。本地过滤用0–1 F1；reward先转100×F1分再减α、β。若全用归一化reward，成本也要除100，否则会改变策略而非仅换单位。",
+          "example": "教学例：F1提升0.1等于10分，问一次成本2分仍划算；把0.1减2会错判。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        }
+      ]
+    },
+    "post-training:social-meta-learning": {
+      "questions": [
+        {
+          "id": "public-history-private-teacher",
+          "level": "basics",
+          "question": "SML的student在推理时能直接看teacher私有答案吗？",
+          "answer": "不能。student只见公开对话，teacher持有答案或测试反馈并决定如何回复。训练阶段为合成Qpriming问题使用私有知识，不是评测泄漏许可。",
+          "example": "教学例：teacher可提示边界条件，但不能把隐藏答案字段塞进student观测再称反馈学习。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "success-student-mask-gradient",
+          "level": "mechanism",
+          "question": "离线SML为什么既过滤成功对话又屏蔽teacher token？",
+          "answer": "成功过滤保留能完成任务的交互，student-only训练更新student自己的响应策略。把teacher答案也当student目标会训练错误角色，并破坏信息分工。",
+          "example": "教学例：一个失败对话有漂亮teacher解释，也不能让这些teacher token替student产生训练梯度。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "sml-not-sgp-cost-policy",
+          "level": "comparison",
+          "question": "SML多问问题是否证明它学到了SGP式成本可控策略？",
+          "answer": "不证明。SML主要优化反馈后的求解成功，Qpriming只是失败回合的提问数据。SGP还显式条件化α、β，并检查改变成本是否规律改变动作。",
+          "example": "教学例：总是问两句可能提高成功率，却无法适应语音用户要求少提问的成本。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "empty-success-and-q-exponent",
+          "level": "implementation",
+          "question": "没有成功student token时为什么不返回零loss继续训练？",
+          "answer": "零loss会让未产生训练信号的批次看似正常完成。组件拒绝空集合；Qpriming还要求显式非负t和incorrect布尔，不猜轮次起点。",
+          "example": "教学例：全失败批次应被上层重新采样或记录无有效数据，不应记作一次成功训练更新。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        }
+      ]
+    },
+    "agent-research:mt-pingeval": {
+      "questions": [
+        {
+          "id": "private-information-needs-dialogue",
+          "level": "basics",
+          "question": "Name-game为什么不能只把一方的表给模型就评价最终答案？",
+          "answer": "共同记录由两张私有表的交集决定，任何一方单独看表都通常无法确定。评测应隔离双方视图并让通信成为信息来源，而不是预先给双方合并表。",
+          "example": "教学例：Alice有两个Isabella，只有Bob知道哪条公司和过敏字段完全匹配。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "isotoken-turn-formula",
+          "level": "mechanism",
+          "question": "每玩家128token、总16个交替turn时，每次为什么是16而非8token？",
+          "answer": "总对话预算是256token，分到16个交替turn是16；每玩家各发8次，恰128。若用128除16，就把每玩家的轮数和总轮数混了。",
+          "example": "教学例：Alice8次×16，Bob8次×16；两者不能共享一个额外重置预算。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "more-turns-versus-random-guess-opportunity",
+          "level": "comparison",
+          "question": "Name-game随轮数提高成功率，就一定是更好的协作吗？",
+          "answer": "不一定。更多轮次也给随机无放回猜记录更多机会，原文专门比较该基线。还需固定token预算和检查传递的信息，不能只看成功曲线。",
+          "example": "教学例：25行里每轮猜一行，允许16轮天然比2轮更容易撞对。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "evaluator-not-actor-object",
+          "level": "implementation",
+          "question": "为什么只能把PrivateView给actor，不能把NameGame对象也给它？",
+          "answer": "NameGame持有两张表和共同记录，是evaluator状态；把它交给actor会泄漏私有对方信息。PrivateView仅含本方记录，scorer在外层调用。",
+          "example": "教学例：actor闭包若可访问game._common，1.0成功率只是读答案，不是对话。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        }
+      ]
+    },
+    "post-training:maple-icl": {
+      "questions": [
+        {
+          "id": "dp-metadata-not-raw-private-icl",
+          "level": "basics",
+          "question": "MAPLE为什么不能直接把私有metadata和原文本当few-shot示例？",
+          "answer": "那会绕开隐私保护，把私有记录交给生成模型。原方法先用AIM私有化metadata，示例来自已捐赠或公开非私有数据；本地不证明这两个前提。",
+          "example": "教学例：把患者原病历标成consent_ref字符串并不会自动获得合法同意或DP保证。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "hamming-categorical-bins",
+          "level": "mechanism",
+          "question": "word-count桶是数字，为什么仍按Hamming而非欧氏距离？",
+          "answer": "schema把它们当离散类别，每个不等字段贡献1，与数值差大小无关。统一除以字段数不会改变top-k；本地返回计数并稳定处理并列。",
+          "example": "教学例：目标100，示例50与1000都在该字段上不相等，均贡献1，不应给1000更大惩罚。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "initialization-not-pe-or-privacy",
+          "level": "comparison",
+          "question": "MAPLE的ICL选择器比随机示例更贴近metadata，是否已复现完整隐私合成？",
+          "answer": "没有。它只是初始化的一步；AIM的DP生成、预算组合、文本模型和AugPE仍缺失。原文也发现初始化单独不等于完整MAPLE，不能用近邻正确性替隐私效用结果。",
+          "example": "教学例：选对10条公开示例不会自动让之后未经DP处理的私有投票安全。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "schema-and-tie-provenance",
+          "level": "implementation",
+          "question": "为什么缺一个schema字段不能默认填Other后继续排序？",
+          "answer": "默认填值会改变分类距离并掩盖上游抽取问题。组件要求字段齐全和值在公开域内；并列用输入顺序是局部约定，不宣称原作指定。",
+          "example": "教学例：缺研究领域字段时填Other可能把错误示例推到前面，应该让调用方补齐来源。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        }
+      ]
+    },
+    "agent-research:policybank": {
+      "questions": [
+        {
+          "id": "compliant-but-wrong",
+          "level": "basics",
+          "question": "PolicyBank里的TypeII失败为什么不等于agent没遵守规则？",
+          "answer": "TypeII是遵守书面spec却违反真实requirement，问题在规则解释或缺口。重复原spec可能强化错误，需可信开发反馈指出差异。",
+          "example": "教学例：书面规则误把补偿与改签绑定，agent拒绝不改签用户补偿，可能忠实但错误。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "capability-not-tool-only-memory",
+          "level": "mechanism",
+          "question": "为什么一项tool要拆成多个capability条目？",
+          "answer": "同一工具在不同能力或边界下的授权条件不同。条目按trigger/preconditions/eligibility/action/keyinsight拆解，标题选择后取全文，而不是把所有规则一次塞prompt。",
+          "example": "教学例：cancel工具的保险取消与特殊豁免可共享API，但资格条件不能混成一条模糊规则。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "policybank-versus-workflow-memory",
+          "level": "comparison",
+          "question": "成功轨迹记忆能否替代PolicyBank的授权解释更新？",
+          "answer": "不一定。轨迹告诉agent过去怎么做，可能反复执行有缺口的spec。PolicyBank关注开发反馈中的授权逻辑差异；本地结构化存储仍不具备语义修复能力。",
+          "example": "教学例：十次成功改签案例也无法证明不改签时应否补偿，需要明确边界反馈。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "explicit-revise-not-automatic-permit",
+          "level": "implementation",
+          "question": "apply_after_task写入修正规则，是否说明组件验证了新规则正确？",
+          "answer": "没有。组件只执行外部明确Add/Revise/Omit、保持ID和feedback来源，不判断自然语言permit/deny，也不能防恶意反馈。真实权限变更仍需审核。",
+          "example": "教学例：攻击者给出错误退款资格，类型正确的字符串也可能导致policy drift。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        }
+      ]
+    },
+    "agent-research:co-director": {
+      "questions": [
+        {
+          "id": "factored-strategy-not36-pipelines",
+          "level": "basics",
+          "question": "Co-Director为什么是10个分轴参数而不是36个独立组合arm？",
+          "answer": "创意策略3、叙事3、美学4分别维护统计，每次视频更新三个选中arm。联合组合虽有36种，但没有把一次视频虚增成36次评价。",
+          "example": "教学例：一个视频提供策略分80、叙事分50、美学分70，分别写回3个维度。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "quality-not-strategic-reward",
+          "level": "mechanism",
+          "question": "为什么best_video不能直接选三轴战略分之和最高者？",
+          "answer": "论文把战略有效性用于bandit更新，视频总体质量用于最终产物选择。高战略分仍可能有扩散伪影或时序问题，两个信号不能偷换。",
+          "example": "教学例：视频A战略分低但清晰完整，B战略分高却人物漂移；已有质量judge可能选A。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "ucb-versus-random-causal-claim",
+          "level": "comparison",
+          "question": "分轴reward更新是否证明找到了每个创意因素的因果贡献？",
+          "answer": "不证明。MLLM给的是相关观察性评分，维度也可能交互。UCB组织探索利用，不是随机化因果实验或creditassignment识别。",
+          "example": "教学例：换灯光同时改变角色表现，judge美学分变化不能独立归因灯光。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "warm-start-no-fake-counts",
+          "level": "implementation",
+          "question": "官方warmstart推荐arm，能否直接给它添十次虚构高分？",
+          "answer": "不能。所核源码优先选择推荐的未试arm，没有为推荐伪造观察次数。本地依同接口，真实reward回来才更新count；并列规则是局部约定。",
+          "example": "教学例：推荐电影感美学只决定先试它，不能写入十次90分评价。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        }
+      ]
+    },
+    "agent-research:instruct-to-act": {
+      "questions": [
+        {
+          "id": "planner-versus-controller-timescale",
+          "level": "basics",
+          "question": "Instruct-to-Act为什么不让VLM每一步直接输出低层动作？",
+          "answer": "高层VLM推理慢，controller能快速根据观察动作。稀疏语言指导与高频worldmodel控制解耦，但controller仍需环境特定训练。",
+          "example": "教学例：VLM说先砍树，controller连续执行移动和挥动，不能因一条文字指令就假装会所有动作。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "interval-end-completion",
+          "level": "mechanism",
+          "question": "一段后标指令为什么只有末步complete=true？",
+          "answer": "整个区间的动作共同实现同一指令，前面步骤仍在执行；末端才代表完成。每步都标true会让stophead学到立即结束。",
+          "example": "教学例：移动三步到门口，不能第一步就标到达；末步完成标签与episode结束也不相同。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "bc-not-full-dreamer",
+          "level": "comparison",
+          "question": "算出BC和stoploss是否已复现语言worldmodelcontroller？",
+          "answer": "没有。原目标还包括RSSM模型、actor、value训练及真实rollout，指令embedding和标注器也不可缺。本地仅真实执行两项辅助目标，不替代缺失网络。",
+          "example": "教学例：一组logits梯度正确，不等于模型在Minecraft能挖出钻石。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "unannotated-stop-negative-padding",
+          "level": "implementation",
+          "question": "未标注动作和padding在两个loss中怎么区别？",
+          "answer": "未标注valid动作不算BC，但complete=false所以是stop负例；padding在两项都排除。把未标注步也从stop删掉会改变论文目标。",
+          "example": "教学例：有效自主动作应学到不停止，补齐batch的空位则不能产生任何训练梯度。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "数据协议与代码映射",
+            "复现边界"
+          ],
+          "added": "2026-11-13"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "paper_id": "2510.22028v1",
+  "figure": "Figure 1",
+  "source_url": "https://arxiv.org/html/2510.22028v1/length-bias-teaser.png",
+  "source_kind": "original_html_asset",
+  "source_html_sha256": "7b4b83deaa00c283c1e7af5b76ef9727ee56a6073fb70a5f53e24e7fa549f859",
+  "asset": "paper-figure-01.png",
+  "asset_sha256": "8e8c1fae46fbb02c094df1ad9b2b4c6b115d7b496b46177e3be9a9b3cf56a8a5",
+  "caption": "Matched gold-segment prefix construction and length-related QE penalty.",
+  "copyright": "Original authors",
+  "reviewed_on": "2026-11-13",
+  "rendered_and_visually_reviewed": true,
+  "local_result": false
+}

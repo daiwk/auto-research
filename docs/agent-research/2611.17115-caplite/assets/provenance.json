@@ -1,0 +1,12 @@
+{
+  "asset": "paper-figure-01.png",
+  "id": "2611.17115",
+  "asset_sha256": "7b21dd6109779b1618de93db94ce1837a86ef9c51cf79e4615d4a175ab4d82ce",
+  "source_url": "https://arxiv.org/html/2611.17115v1/fig7_architecture.png",
+  "source_html_sha256": "4ae1213910a9aad59cadac9462b8dcac90923592d95cc004d7efca3d147a4329",
+  "figure": "Figure 4",
+  "method": "Official HTML PNG original bytes; no crop, redraw or rendering.",
+  "visual_review": "已目视确认可信路径、Planner、候选绑定、mediator、ask/execute与最终回答，四边完整。",
+  "copyright": "Copyright belongs to the original authors.",
+  "reviewed_on": "2026-11-15"
+}

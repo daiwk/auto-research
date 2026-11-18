@@ -1,0 +1,624 @@
+{
+  "schema_version": 2,
+  "batch": "2026-11-12-overlap-components",
+  "device": "cpu",
+  "accelerator": "CPU",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "code_commit": "9d46c1778c3df693907c113c803e617ae0690117",
+  "source_sha256": {
+    "scripts/run_nov12_components.py": "7622e7d554c13c9b9cd61931ac248ac26534751412854091d09f1248e2519eb3",
+    "scripts/run_nov04_components.py": "61d35d574d9561e4611d2647174b8a6af07fabf8c30b6909e21e253542cf4336",
+    "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+    "docs/research-audits/nov12-components/preflight.json": "b82e1ddb82f3b3ee6e1a461d902243cc8cd8e6fb824b95b7d29037c4bebdfc95",
+    "src/auto_research/agent_research/agent_gym.py": "54d8b71b2fbb7fdb71b6968944b1084fe7a1b9e1b0b3badcab3f3fecb0ea1e30",
+    "src/auto_research/agent_research/bats.py": "845c320fb7363675133eb83076ffc55c8c8b8146c41ad7f4aea818f1cf8eeb48",
+    "src/auto_research/post_training/bopd.py": "59124e92ca515dd15e45aad0d63b039771e46c011c9ea99acd8f23a707fe23f6",
+    "src/auto_research/post_training/apmd_reference_reset.py": "89a7feb87728af69a0aeab947818e800fdf03902d91834626aa01b7cebb66b6d",
+    "src/auto_research/post_training/lcs_reference_opd.py": "c4bdf1c1d5f1d48ea66e1555d269a6d50fcd906a8ae746f29b8c85827c393c91",
+    "src/auto_research/foundation_models/real_loss.py": "0b7a84e98aea5fe0d1f578d889d19f6dbe760c0d43fba3887e814f3d118c2afa",
+    "src/auto_research/multimodal/c2_routing.py": "d296a544abfde9829041566dbc028e34c1181c1dfee4b448c0a02a308b22a2da",
+    "src/auto_research/multimodal/onlyact.py": "ca94c19145158d8fd07e6579687c68aa0e2e7b8de02941af098c4a030999e155"
+  },
+  "components": {
+    "agent-gym": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "selected_rules": 3,
+            "external_callback_calls": 2,
+            "continuation_steps": 1
+          },
+          "checks": {
+            "scope_mutual_exclusion": true,
+            "three_two_one_order": true,
+            "deterministic_edit_last": true,
+            "continuation_state_really_updated": true,
+            "caller_output_unchanged": true,
+            "not_a_semantic_judge": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "selected_rules": 3,
+            "external_callback_calls": 2,
+            "continuation_steps": 1
+          },
+          "checks": {
+            "scope_mutual_exclusion": true,
+            "three_two_one_order": true,
+            "deterministic_edit_last": true,
+            "continuation_state_really_updated": true,
+            "caller_output_unchanged": true,
+            "not_a_semantic_judge": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "selected_rules": 3,
+            "external_callback_calls": 2,
+            "continuation_steps": 1
+          },
+          "checks": {
+            "scope_mutual_exclusion": true,
+            "three_two_one_order": true,
+            "deterministic_edit_last": true,
+            "continuation_state_really_updated": true,
+            "caller_output_unchanged": true,
+            "not_a_semantic_judge": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ]
+    },
+    "bats": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "attempts": 2,
+            "verified_candidates": 1,
+            "search_calls": 1,
+            "browse_calls": 2,
+            "unified_cost": 0.26999999999999996
+          },
+          "checks": {
+            "pivot_preserves_usage": true,
+            "resets_clear_raw_trajectory": true,
+            "any_tool_exhaustion_stops": true,
+            "external_selector_only": true,
+            "no_gold_payload": true,
+            "cached_input_not_double_charged": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "attempts": 2,
+            "verified_candidates": 1,
+            "search_calls": 1,
+            "browse_calls": 2,
+            "unified_cost": 0.26999999999999996
+          },
+          "checks": {
+            "pivot_preserves_usage": true,
+            "resets_clear_raw_trajectory": true,
+            "any_tool_exhaustion_stops": true,
+            "external_selector_only": true,
+            "no_gold_payload": true,
+            "cached_input_not_double_charged": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "attempts": 2,
+            "verified_candidates": 1,
+            "search_calls": 1,
+            "browse_calls": 2,
+            "unified_cost": 0.26999999999999996
+          },
+          "checks": {
+            "pivot_preserves_usage": true,
+            "resets_clear_raw_trajectory": true,
+            "any_tool_exhaustion_stops": true,
+            "external_selector_only": true,
+            "no_gold_payload": true,
+            "cached_input_not_double_charged": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ]
+    },
+    "bopd": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "forward_kl_before_student_update": 0.0004195890660283162,
+            "forward_kl_after_student_update": 7.027196646425092e-05,
+            "student_gradient_norm": 0.01739703802810024,
+            "fresh_student_max_initial_error": 0.0,
+            "teacher_max_copy_error": 0.0,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "fresh_student_restored_exact_initial_weights": true,
+            "frozen_teacher_copies_intermediate_weights": true,
+            "fresh_optimizer_not_stage_one_optimizer": true,
+            "teacher_has_no_gradient": true,
+            "teacher_unchanged_by_student_update": true,
+            "student_receives_actual_loss_gradient": true,
+            "loss_and_update_finite": true,
+            "student_teacher_storage_disjoint": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "forward_kl_before_student_update": 0.00047555587846840247,
+            "forward_kl_after_student_update": 5.022555197265963e-05,
+            "student_gradient_norm": 0.01861476441728588,
+            "fresh_student_max_initial_error": 0.0,
+            "teacher_max_copy_error": 0.0,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "fresh_student_restored_exact_initial_weights": true,
+            "frozen_teacher_copies_intermediate_weights": true,
+            "fresh_optimizer_not_stage_one_optimizer": true,
+            "teacher_has_no_gradient": true,
+            "teacher_unchanged_by_student_update": true,
+            "student_receives_actual_loss_gradient": true,
+            "loss_and_update_finite": true,
+            "student_teacher_storage_disjoint": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "forward_kl_before_student_update": 0.0006525215796397673,
+            "forward_kl_after_student_update": 0.00015416810315529414,
+            "student_gradient_norm": 0.027950431628250217,
+            "fresh_student_max_initial_error": 0.0,
+            "teacher_max_copy_error": 0.0,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "fresh_student_restored_exact_initial_weights": true,
+            "frozen_teacher_copies_intermediate_weights": true,
+            "fresh_optimizer_not_stage_one_optimizer": true,
+            "teacher_has_no_gradient": true,
+            "teacher_unchanged_by_student_update": true,
+            "student_receives_actual_loss_gradient": true,
+            "loss_and_update_finite": true,
+            "student_teacher_storage_disjoint": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ]
+    },
+    "apmd-reference-reset": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "closed_form_max_error": 1.6653345369377348e-16,
+            "centered_mse": 12.644292939740106,
+            "rebel_on_policy_loss": 25.288585879480213,
+            "kimi_bias_term": 5.676949994954891,
+            "exact_reward_before": 0.22237810756315865,
+            "exact_reward_after": 0.5635897586044026
+          },
+          "checks": {
+            "reset_path_matches_closed_form": true,
+            "exact_mirror_reward_nondecreasing": true,
+            "exact_mirror_optimal_response_mass_nondecreasing": true,
+            "mirror_target_zero_centered_mse": true,
+            "rebel_is_twice_centered_mse": true,
+            "kimi_mean_baseline_retains_squared_kl_bias": true,
+            "fixed_reference_target_is_not_repeated_reset": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "closed_form_max_error": 8.326672684688674e-17,
+            "centered_mse": 17.343464823777367,
+            "rebel_on_policy_loss": 34.68692964755474,
+            "kimi_bias_term": 9.88982210344202,
+            "exact_reward_before": 0.04923173778242996,
+            "exact_reward_after": 0.30729348803674883
+          },
+          "checks": {
+            "reset_path_matches_closed_form": true,
+            "exact_mirror_reward_nondecreasing": true,
+            "exact_mirror_optimal_response_mass_nondecreasing": true,
+            "mirror_target_zero_centered_mse": true,
+            "rebel_is_twice_centered_mse": true,
+            "kimi_mean_baseline_retains_squared_kl_bias": true,
+            "fixed_reference_target_is_not_repeated_reset": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "closed_form_max_error": 2.220446049250313e-16,
+            "centered_mse": 8.68966664119508,
+            "rebel_on_policy_loss": 17.37933328239016,
+            "kimi_bias_term": 6.455086347533766,
+            "exact_reward_before": 0.20240762949873894,
+            "exact_reward_after": 0.5394755723422283
+          },
+          "checks": {
+            "reset_path_matches_closed_form": true,
+            "exact_mirror_reward_nondecreasing": true,
+            "exact_mirror_optimal_response_mass_nondecreasing": true,
+            "mirror_target_zero_centered_mse": true,
+            "rebel_is_twice_centered_mse": true,
+            "kimi_mean_baseline_retains_squared_kl_bias": true,
+            "fixed_reference_target_is_not_repeated_reset": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ]
+    },
+    "lcs-reference-opd": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "selected_lcs_coverage": 0.8,
+            "same_task_references": 2,
+            "failure_only_mean_loss": 1.252192763892615,
+            "lcs_length": 4
+          },
+          "checks": {
+            "lcs_retains_agreement_after_detour": true,
+            "same_task_highest_compatibility_selected": true,
+            "complete_sequence_duplicates_removed": true,
+            "cross_task_exact_match_not_selected": true,
+            "successful_student_skips_update": true,
+            "no_same_task_success_falls_back_reference_free": true,
+            "only_failed_losses_enter_mean": true,
+            "all_success_batch_has_no_optimizer_step": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "selected_lcs_coverage": 0.8,
+            "same_task_references": 2,
+            "failure_only_mean_loss": 0.7612708570229119,
+            "lcs_length": 4
+          },
+          "checks": {
+            "lcs_retains_agreement_after_detour": true,
+            "same_task_highest_compatibility_selected": true,
+            "complete_sequence_duplicates_removed": true,
+            "cross_task_exact_match_not_selected": true,
+            "successful_student_skips_update": true,
+            "no_same_task_success_falls_back_reference_free": true,
+            "only_failed_losses_enter_mean": true,
+            "all_success_batch_has_no_optimizer_step": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "selected_lcs_coverage": 0.8,
+            "same_task_references": 2,
+            "failure_only_mean_loss": 0.4616446552243123,
+            "lcs_length": 4
+          },
+          "checks": {
+            "lcs_retains_agreement_after_detour": true,
+            "same_task_highest_compatibility_selected": true,
+            "complete_sequence_duplicates_removed": true,
+            "cross_task_exact_match_not_selected": true,
+            "successful_student_skips_update": true,
+            "no_same_task_success_falls_back_reference_free": true,
+            "only_failed_losses_enter_mean": true,
+            "all_success_batch_has_no_optimizer_step": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ]
+    },
+    "real-loss": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "counterexample_eal": 0.96,
+            "exact_theta_gradient": 0.19999999999999996,
+            "wtv_theta_gradient": -0.12000000000000008,
+            "prefix_parameter_gradient": -1.6,
+            "synthetic_loss": 0.8988039645895481
+          },
+          "checks": {
+            "exact_path_and_branch_expectations": true,
+            "paper_value": true,
+            "opposite_surrogate_gradient": true,
+            "prefix_gradient_not_detached": true,
+            "target_frozen": true,
+            "draft_gradient_finite": true,
+            "actual_tensor_device": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "counterexample_eal": 0.96,
+            "exact_theta_gradient": 0.19999999999999996,
+            "wtv_theta_gradient": -0.12000000000000008,
+            "prefix_parameter_gradient": -1.6,
+            "synthetic_loss": 0.9959255010808761
+          },
+          "checks": {
+            "exact_path_and_branch_expectations": true,
+            "paper_value": true,
+            "opposite_surrogate_gradient": true,
+            "prefix_gradient_not_detached": true,
+            "target_frozen": true,
+            "draft_gradient_finite": true,
+            "actual_tensor_device": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "counterexample_eal": 0.96,
+            "exact_theta_gradient": 0.19999999999999996,
+            "wtv_theta_gradient": -0.12000000000000008,
+            "prefix_parameter_gradient": -1.6,
+            "synthetic_loss": 0.9433413288925452
+          },
+          "checks": {
+            "exact_path_and_branch_expectations": true,
+            "paper_value": true,
+            "opposite_surrogate_gradient": true,
+            "prefix_gradient_not_detached": true,
+            "target_frozen": true,
+            "draft_gradient_finite": true,
+            "actual_tensor_device": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ]
+    },
+    "c2-routing": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "joint_expected_accuracy_loss": 0.04999999999999999,
+            "dataset_macro_cost_ratio": 0.5,
+            "shared_failure_probability": 0.55
+          },
+          "checks": {
+            "risk_equals_expected_correctness_difference": true,
+            "benefit_is_credited": true,
+            "shared_failure_is_not_correctable_harm": true,
+            "harm_triggers_original_fallback": true,
+            "dataset_macro_not_sample_micro": true,
+            "cost_and_risk_utility_identity": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "joint_expected_accuracy_loss": 0.04999999999999999,
+            "dataset_macro_cost_ratio": 0.5,
+            "shared_failure_probability": 0.55
+          },
+          "checks": {
+            "risk_equals_expected_correctness_difference": true,
+            "benefit_is_credited": true,
+            "shared_failure_is_not_correctable_harm": true,
+            "harm_triggers_original_fallback": true,
+            "dataset_macro_not_sample_micro": true,
+            "cost_and_risk_utility_identity": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "joint_expected_accuracy_loss": 0.04999999999999999,
+            "dataset_macro_cost_ratio": 0.5,
+            "shared_failure_probability": 0.55
+          },
+          "checks": {
+            "risk_equals_expected_correctness_difference": true,
+            "benefit_is_credited": true,
+            "shared_failure_is_not_correctable_harm": true,
+            "harm_triggers_original_fallback": true,
+            "dataset_macro_not_sample_micro": true,
+            "cost_and_risk_utility_identity": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ]
+    },
+    "onlyact": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "synthetic_contrastive_loss": 0.19099129401526568,
+            "loop_reference_error": 1.3877787807814457e-16,
+            "candidates_per_query": 5,
+            "hard_negative_gradient_norm": 0.00010102421761355179
+          },
+          "checks": {
+            "independent_full_bank_reference": true,
+            "exclude_self_only": true,
+            "matched_positive_in_denominator": true,
+            "all_hard_negatives_included": true,
+            "fixed_projection_frozen": true,
+            "joint_token_gradient_finite": true,
+            "hard_negative_gradient_present": true,
+            "actual_tensor_device": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "synthetic_contrastive_loss": 5.245818658285928e-06,
+            "loop_reference_error": 2.8650381221108356e-16,
+            "candidates_per_query": 5,
+            "hard_negative_gradient_norm": 5.1897823384284956e-05
+          },
+          "checks": {
+            "independent_full_bank_reference": true,
+            "exclude_self_only": true,
+            "matched_positive_in_denominator": true,
+            "all_hard_negatives_included": true,
+            "fixed_projection_frozen": true,
+            "joint_token_gradient_finite": true,
+            "hard_negative_gradient_present": true,
+            "actual_tensor_device": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "synthetic_contrastive_loss": 0.033587130543356734,
+            "loop_reference_error": 9.020562075079397e-17,
+            "candidates_per_query": 5,
+            "hard_negative_gradient_norm": 0.4629961983288457
+          },
+          "checks": {
+            "independent_full_bank_reference": true,
+            "exclude_self_only": true,
+            "matched_positive_in_denominator": true,
+            "all_hard_negatives_included": true,
+            "fixed_projection_frozen": true,
+            "joint_token_gradient_finite": true,
+            "hard_negative_gradient_present": true,
+            "actual_tensor_device": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ]
+    }
+  },
+  "elapsed_seconds": 2.3100218339823186,
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "pretrained_model_calls": 0,
+  "full_experiments_executed": false,
+  "automatic_retry": false
+}

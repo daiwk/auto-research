@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "agent-research:envopt": {
+      "questions": [
+        {
+          "id": "optimize-representation-not-model",
+          "level": "basics",
+          "question": "EnvOpt 固定信息 I 后究竟在优化什么？",
+          "answer": "它优化信息的表示和访问路径，固定目标 Agent 的模型和 Harness。把同一批散落定义组织为可查询索引，改变每个任务探索所需成本，并不改变问题或答案。",
+          "example": "教学例：表定义仍在原有文件里，但 SQLite 目录记录每张表对应的路径；Agent 无须遍历所有文件。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-06"
+        },
+        {
+          "id": "train-proxy-validation-rollback",
+          "level": "mechanism",
+          "question": "一项改动在训练代理判断下更省，为什么还能在外层被回滚？",
+          "answer": "训练内层只看相同分片上的严格成本降低和代理保真；留出验证独立比较上一轮聚合成本及准确率，成本升或准确率降超容差就停止并保留上一轮。",
+          "example": "教学例：索引使训练成本从 10 降到 7，但验证准确率从 0.875 降到 0.625，容差 0.125；仍应回滚。",
+          "source_sections": [
+            "核心公式",
+            "本地结果与负控"
+          ],
+          "added": "2026-11-06"
+        },
+        {
+          "id": "environment-versus-harness",
+          "level": "comparison",
+          "question": "EnvOpt 和 Meta-Harness 是同一类搜索吗？",
+          "answer": "两者都想改进任务完成成本或成功率，但 EnvOpt 迁移的是可复用的环境表示，固定模型和 Harness；Meta-Harness 搜索控制 Agent 运行的流程。可以叠加，不能把两种干预的效应混报。",
+          "example": "教学例：预建目录索引改变可访问的数据组织；改变何时重试工具调用属于 Harness 控制。",
+          "source_sections": [
+            "背景与主要改动",
+            "论文离线与线上效果"
+          ],
+          "added": "2026-11-06"
+        },
+        {
+          "id": "replay-no-verifier-access",
+          "level": "implementation",
+          "question": "本地离线回放怎样阻止把验证答案当成训练策略输入？",
+          "answer": "内层函数的输入只有候选成本、代理布尔判断、环境及 Harness 标识。宿主验证聚合只用于外层停止，且训练与验证 ID 不重叠。接口不是真实沙箱，不能认证调用方提供的记录。",
+          "example": "教学例：验证聚合绑定索引版本 A，却声称训练选中 B，会报错；训练 ID 与验证 ID 相同也会拒绝。",
+          "source_sections": [
+            "数据协议与实现边界",
+            "本地结果与负控"
+          ],
+          "added": "2026-11-06"
+        }
+      ]
+    },
+    "agent-research:xstack": {
+      "questions": [
+        {
+          "id": "real-migration-contract",
+          "level": "basics",
+          "question": "XStack 的迁移通过为什么不能只看程序能启动？",
+          "answer": "必须在干净 TPU 上跑完整源配方并达标，裁判还要核对结果确属该次运行且未作弊，权重必须能回载到原 PyTorch 模型。启动只是其中很弱的前置条件。",
+          "example": "教学例：JAX 脚本正常退出，但运行了缩小数据集的教程任务，不是全规模迁移通过。",
+          "source_sections": [
+            "背景与主要改动",
+            "评估协议"
+          ],
+          "added": "2026-11-06"
+        },
+        {
+          "id": "frozen-phase-two",
+          "level": "mechanism",
+          "question": "第二阶段提供主实验配方，为何不等同于泄漏答案？",
+          "answer": "配方让执行者知道该跑哪个实验，不公开数值目标；仅允许调整入口脚本，其余迁移冻结。若入口脚本重写冻结文件，也破坏了这个对照。",
+          "example": "教学例：阶段一误跑音频分类的另一数据集，阶段二可把入口切到指定配方，不能借机改模型源码或硬编码目标。",
+          "source_sections": [
+            "评估协议"
+          ],
+          "added": "2026-11-06"
+        },
+        {
+          "id": "gpu-preliminary-versus-tpu",
+          "level": "comparison",
+          "question": "Appendix G 在单 A100 的初步实验能否替代主 TPU 矩阵？",
+          "answer": "不能。初步实验覆盖 12 个较小仓库，以前向、梯度和 checkpoint 等对齐检查为主；主矩阵比较 20 个仓库、7 个 Agent 在真实 TPU 的全规模复现，两种通过率不是同一指标。",
+          "example": "教学例：小任务的前向 logits 一致，不能推出大训练任务在新 TPU 上收敛到公布目标。",
+          "source_sections": [
+            "论文离线与线上效果",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-06"
+        },
+        {
+          "id": "grader-outside-agent-sandbox",
+          "level": "implementation",
+          "question": "复现时公开的 criteria.json 能否放进 Agent 工作区便于调试？",
+          "answer": "不能作为被评估 Agent 的输入。应固定源提交并隔离目标、评分程序和历史结果；宿主在干净环境独立重跑并记录产物来源。否则命中目标无法区分迁移成功与读取答案。",
+          "example": "教学例：测试可以读取 rubric 并判分，迁移 Agent 只能看到源仓库和规定配方；两者不能共享测试目标文件。",
+          "source_sections": [
+            "评估协议",
+            "复现与验证边界"
+          ],
+          "added": "2026-11-06"
+        }
+      ]
+    }
+  }
+}

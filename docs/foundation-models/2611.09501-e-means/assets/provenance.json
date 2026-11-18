@@ -1,0 +1,16 @@
+{
+  "paper_id": "2611.09501v1",
+  "figure": "22",
+  "source_page": "https://arxiv.org/html/2611.09501v1#A9.F22",
+  "source_url": "https://arxiv.org/html/2611.09501v1/train-vs-test-appendix.png",
+  "image": "paper-figure-01.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "0ef2f23a41236ea327ea8f2187a2592c4b58951b204432ac99d7d506d9ee53c8",
+  "original_sha256": "0ef2f23a41236ea327ea8f2187a2592c4b58951b204432ac99d7d506d9ee53c8",
+  "width": 1378,
+  "height": 682,
+  "license": "arXiv perpetual non-exclusive license; no Creative Commons claim for this paper figure",
+  "transformation": "original author PNG, byte-for-byte and uncropped",
+  "visual_review": "目视核对训练/测试 MSE 坐标与末轮均值、无收尾、慢速 EMA、Lloyd 的图例。",
+  "checked_on": "2026-11-09"
+}

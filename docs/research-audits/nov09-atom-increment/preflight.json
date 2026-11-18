@@ -1,0 +1,11 @@
+{
+  "batch": "2026-11-09-atom-increment",
+  "component_keys": ["verified-quantum-wiki", "e-means", "engram-consolidation", "rcea"],
+  "seeds": [42, 43, 44],
+  "device": "cpu",
+  "maximum_run_seconds": 120,
+  "data_and_checkpoint_downloads": 0,
+  "pretrained_model_or_api_calls": 0,
+  "full_experiments_executed": false,
+  "automatic_retry": false
+}

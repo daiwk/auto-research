@@ -1,0 +1,58 @@
+{
+  "domain": "agent-research",
+  "key": "leap-formal-math",
+  "title": "LEAP: Supercharging LLMs for Formal Mathematics with Agentic Frameworks",
+  "paper_url": "https://arxiv.org/abs/2606.03303",
+  "reviewed_version": "v3",
+  "reviewed_arxiv_id": "2606.03303v3",
+  "reviewed_version_url": "https://arxiv.org/html/2606.03303v3",
+  "detail_path": "agent-research/2606.03303-leap-formal-math/README.md",
+  "topic": [
+    "规划与推理",
+    "形式化证明与DAG记忆"
+  ],
+  "published": "2026-06-02",
+  "published_at": "2026-06-02T08:16:42Z",
+  "reviewed_version_at": "2026-11-12T18:13:31Z",
+  "first_author": "Po-Nien Kung",
+  "first_author_affiliation": "Google Cloud AI Research",
+  "verified_priority_organizations": [
+    "Google Cloud AI Research",
+    "Google Cloud",
+    "Google DeepMind"
+  ],
+  "intake_class": "historical_priority_revision_backfill",
+  "new_first_release": false,
+  "code": "https://github.com/google-deepmind/superhuman/tree/main/leap",
+  "code_status": "已核官方仓库目录说明仅公开Lean4 proof results及论文；软件Apache2.0、其他材料CC-BY4.0。未找到可核实通用LEAP agent/harness源代码，证明产物开源不等同系统实现。",
+  "adapter": null,
+  "priority": "P0",
+  "implementation_status": "deferred_high_cost",
+  "local_operator": null,
+  "evaluation_tier": "review_only",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "review_done": true,
+  "full_experiment_review_done": true,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2606.03303v3",
+    "source_locations": [
+      "§4.1 Table3",
+      "§4.2 Table4",
+      "§5.1–5.3"
+    ],
+    "available_resource": "单张A100或A30，或本地Mac",
+    "basis": "Gemini3.1Pro+Lean多轮证明搜索，Putnam12题报告累计822分钟与约28M tokens，另60题Lean-IMO、2rollout/Pass128对照和消融。不同系统计时不可当受控架构比较；完整收费语义搜索成本高。",
+    "decision": "成本过高，完整实验不复现（审查DONE）；不调用API、不运行Lean证明或下载模型/数据。"
+  },
+  "summary": "以持久AND–OR DAG保存可复用的已验证lemma，将非形式blueprint与Lean proof sketch交错构建。编译器验证形式依赖，LLM reviewer过滤无进展分解，DFS回溯探索替代路线；不是把通用DAG当成语义证明器。",
+  "fidelity_note": "仅固定v3与v1日期、原图、成本及双语学习资料收录，无agent/LeanSearch/compiler bridge或本地证明检查，不以开放Lean解答冒称本地复现。",
+  "deferral_reason": "Gemini形式化数学多轮搜索：仅12题累计822分钟及约2800万tokens，完整实验成本过高，不复现（审查 DONE）。"
+}

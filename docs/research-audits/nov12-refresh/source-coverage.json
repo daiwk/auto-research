@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-11-12",
+  "batch": "2026-11-12-official-source-refresh",
+  "baseline_review": "research-audits/nov12-components/source-coverage.json",
+  "baseline_delivery_commit": "bad501b9f35264f2813ef7b97535b7b42c710efb",
+  "announcement_date": "2026-11-11",
+  "new_announcement_established": false,
+  "new_first_publications_admitted": 0,
+  "all_sources_exhaustive": false,
+  "full_window_review_complete": false,
+  "review_watermark_advanced": false,
+  "review_watermark": {
+    "before": "2026-11-09",
+    "after": "2026-11-09"
+  },
+  "automatic_implementation_queue": false,
+  "sources": [
+    {
+      "source_url": "https://arxiv.org/list/cs.AI/new?show=1000",
+      "displayed_heading": "Showing new listings for Wednesday, 11 November 2026",
+      "capture": ".cache/nov12-refresh/arxiv/cs.AI-new.html",
+      "sha256": "2540380977a6f95bf9e2ff34905b48633287faa8feaf167cbae5d140c5860b3b",
+      "bytes": 1222454,
+      "baseline_capture": ".cache/nov12-components/arxiv/cs.AI-new.html",
+      "baseline_sha256": "2540380977a6f95bf9e2ff34905b48633287faa8feaf167cbae5d140c5860b3b",
+      "bytes_unchanged": true,
+      "added_ids": [],
+      "removed_ids": []
+    },
+    {
+      "source_url": "https://arxiv.org/list/cs.CL/new?show=1000",
+      "displayed_heading": "Showing new listings for Wednesday, 11 November 2026",
+      "capture": ".cache/nov12-refresh/arxiv/cs.CL-new.html",
+      "sha256": "5ed23f545943960bf8e303401fb5f67f34b2ae7fc7d4dd49a155494e1cb25956",
+      "bytes": 581856,
+      "baseline_capture": ".cache/nov12-components/arxiv/cs.CL-new.html",
+      "baseline_sha256": "5ed23f545943960bf8e303401fb5f67f34b2ae7fc7d4dd49a155494e1cb25956",
+      "bytes_unchanged": true,
+      "added_ids": [],
+      "removed_ids": []
+    },
+    {
+      "source_url": "https://arxiv.org/list/cs.CV/new?show=1000",
+      "displayed_heading": "Showing new listings for Wednesday, 11 November 2026",
+      "capture": ".cache/nov12-refresh/arxiv/cs.CV-new.html",
+      "sha256": "b1b6f89e660e968afb5266052807f24694283a3af3c7f7a1719c4f788576a4c4",
+      "bytes": 800959,
+      "baseline_capture": ".cache/nov12-components/arxiv/cs.CV-new.html",
+      "baseline_sha256": "b1b6f89e660e968afb5266052807f24694283a3af3c7f7a1719c4f788576a4c4",
+      "bytes_unchanged": true,
+      "added_ids": [],
+      "removed_ids": []
+    },
+    {
+      "source_url": "https://arxiv.org/list/cs.IR/new?show=1000",
+      "displayed_heading": "Showing new listings for Wednesday, 11 November 2026",
+      "capture": ".cache/nov12-refresh/arxiv/cs.IR-new.html",
+      "sha256": "37bdf17db403e1be7464e5588a5fc435e8717e16b941ba3ecf6203f2ae3d2fef",
+      "bytes": 98232,
+      "baseline_capture": ".cache/nov12-components/arxiv/cs.IR-new.html",
+      "baseline_sha256": "37bdf17db403e1be7464e5588a5fc435e8717e16b941ba3ecf6203f2ae3d2fef",
+      "bytes_unchanged": true,
+      "added_ids": [],
+      "removed_ids": []
+    },
+    {
+      "source_url": "https://arxiv.org/list/cs.LG/new?show=1000",
+      "displayed_heading": "Showing new listings for Wednesday, 11 November 2026",
+      "capture": ".cache/nov12-refresh/arxiv/cs.LG-new.html",
+      "sha256": "8f53b5e60237025f941b82250cf3cfeee7531a81cc43dcbf3810ae34776daff3",
+      "bytes": 1207678,
+      "baseline_capture": ".cache/nov12-components/arxiv/cs.LG-new.html",
+      "baseline_sha256": "8f53b5e60237025f941b82250cf3cfeee7531a81cc43dcbf3810ae34776daff3",
+      "bytes_unchanged": true,
+      "added_ids": [],
+      "removed_ids": []
+    },
+    {
+      "source_url": "https://arxiv.org/list/cs.RO/new?show=1000",
+      "displayed_heading": "Showing new listings for Wednesday, 11 November 2026",
+      "capture": ".cache/nov12-refresh/arxiv/cs.RO-new.html",
+      "sha256": "2c45963b7ce4adf8e6241d230ae5f6b4f9964de13dd426bdb0c921716252985a",
+      "bytes": 365903,
+      "baseline_capture": ".cache/nov12-components/arxiv/cs.RO-new.html",
+      "baseline_sha256": "2c45963b7ce4adf8e6241d230ae5f6b4f9964de13dd426bdb0c921716252985a",
+      "bytes_unchanged": true,
+      "added_ids": [],
+      "removed_ids": []
+    },
+    {
+      "source_url": "https://arxiv.org/list/cs.SD/new?show=1000",
+      "displayed_heading": "Showing new listings for Wednesday, 11 November 2026",
+      "capture": ".cache/nov12-refresh/arxiv/cs.SD-new.html",
+      "sha256": "2edeaa6c20da6e1a5e4fa19c4bdaf40b2beda00af25d2c39a9ecc3b3649707a6",
+      "bytes": 75810,
+      "baseline_capture": ".cache/nov12-components/arxiv/cs.SD-new.html",
+      "baseline_sha256": "2edeaa6c20da6e1a5e4fa19c4bdaf40b2beda00af25d2c39a9ecc3b3649707a6",
+      "bytes_unchanged": true,
+      "added_ids": [],
+      "removed_ids": []
+    },
+    {
+      "source_url": "https://arxiv.org/list/stat.ML/new?show=1000",
+      "displayed_heading": "Showing new listings for Wednesday, 11 November 2026",
+      "capture": ".cache/nov12-refresh/arxiv/stat.ML-new.html",
+      "sha256": "7fff33b3c08cfb075cf99809651213400c5a56763f416192e5d2dd8c07af5e8c",
+      "bytes": 162652,
+      "baseline_capture": ".cache/nov12-components/arxiv/stat.ML-new.html",
+      "baseline_sha256": "7fff33b3c08cfb075cf99809651213400c5a56763f416192e5d2dd8c07af5e8c",
+      "bytes_unchanged": true,
+      "added_ids": [],
+      "removed_ids": []
+    }
+  ],
+  "official_source_review": "research-audits/nov12-refresh/priority-review.json",
+  "limitations": [
+    "Eight official announcement captures are byte-identical to the prior delivery; this is not an institution-wide or whole-window absence claim.",
+    "Google blog publication or dataset-license update dates are not paper v1 publication dates.",
+    "The old SensorWM P2 selection record was not a method review; new verified Google provenance justifies a historical priority recheck, not a claim of a new November12 paper.",
+    "Official-source recall triggers review but does not prove author affiliation, methodological eligibility, public-code release, causal effects, production deployment or A/B evidence."
+  ]
+}

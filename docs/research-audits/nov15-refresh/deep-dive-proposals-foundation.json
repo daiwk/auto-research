@@ -1,0 +1,361 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-15",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "foundation-models:unbundling-vision",
+      "target_card": "multimodal-models/alignment-interfaces",
+      "source_revisions": {
+        "foundation-models:unbundling-vision": "54272bc45b34a3b748db3a9602751fa76b0ea0db090b46fbd0eabcad1208af92",
+        "foundation-models:blip2": "cb8635dd08c94c0b835306c1c9ae9019e5f28f793e04e781417cfcb2611333ad"
+      },
+      "comparison": {
+        "position": "把预训练先验、专属视觉容量和pre-fusion位置分离；以零初始化vision-only QKVO/SwiGLU将容量加入早期backbone，仍使用联合图文attention。",
+        "tradeoff": "BLIP-2用Q-Former在冻结视觉encoder和LLM之间形成query瓶颈；Unbundling比较同数据/生命周期预算下容量的位置及训练。接口token压缩与专属容量位置不是同一干预，本地小核不能比较两者VQA或TTFT。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "论文离线与线上效果"
+        ]
+      },
+      "analysis": {
+        "title": "视觉接口的位置与专属容量是不同变量",
+        "body": "Unbundling把额外容量移进联合attention/FFN，BLIP-2先用query从视觉token提取信息再接冻结LLM。前者必须核对vision mask而非模态隔离，后者必须核对冻结边界和query瓶颈。初始函数相同是初始化性质，不是训练后能力等价；BLIP-2本地负结果也不能用来代替新论文的大模型对照。",
+        "papers": [
+          "foundation-models:unbundling-vision",
+          "foundation-models:blip2"
+        ]
+      },
+      "question": {
+        "id": "nov15-unbundling-vision",
+        "question": "Unbundling和BLIP-2都连接视觉与语言，为什么不能只按视觉token数判断谁更好？",
+        "answer": "BLIP-2重点是冻结模型之间的query瓶颈；Unbundling分离专属容量、先验和位置，保留joint attention。token数、参数训练范围、生命周期预算不同，需匹配实验而非按一个数排名。",
+        "example": "四个query减少token但可能损失细节；早期vision-only FFN增加容量却不直接减少token，两个收益并不互相替代。",
+        "papers": [
+          "foundation-models:unbundling-vision",
+          "foundation-models:blip2"
+        ]
+      },
+      "update": {
+        "date": "2026-11-15",
+        "papers": [
+          "foundation-models:unbundling-vision",
+          "foundation-models:blip2"
+        ],
+        "summary": "补入固定版本方法、低成本组件或明确资料收录，分开原文结果、本地诊断及高成本不复现范围。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Separates pretraining priors, visual capacity and pre-fusion placement; zero-initialized vision-only QKVO/SwiGLU puts capacity into early backbone layers while retaining joint attention.",
+          "tradeoff": "BLIP-2 places a Q-Former bottleneck between frozen vision and language models. Unbundling compares capacity placement and training under matched data/lifetime compute. Token compression and capacity placement are different interventions; local kernels cannot rank VQA or TTFT."
+        },
+        "analysis": {
+          "title": "Visual interface placement and dedicated capacity are different variables",
+          "body": "Unbundling inserts extra capacity into joint attention/FFNs; BLIP-2 extracts visual information with learned queries before a frozen LLM. Check the visual mask rather than modality isolation for the former, and frozen boundaries/query bottlenecks for the latter. Initial functional equality is not trained capability equality, and the existing small BLIP-2 negative result is not the new paper's large-model comparison."
+        },
+        "question": {
+          "question": "Why not rank Unbundling against BLIP-2 simply by visual token count?",
+          "answer": "BLIP-2 studies a query bottleneck between frozen models. Unbundling separates dedicated capacity, priors and placement while retaining joint attention. Token counts, trainable parameters and lifetime budgets differ and need matched experiments.",
+          "example": "Four queries can reduce tokens but lose details. Early vision-only FFNs add capacity without directly reducing tokens; these are not interchangeable benefits."
+        },
+        "update": "Added fixed-version methods and bounded components or explicit review-only coverage, separating author results, local diagnostics and high-cost non-reproduction."
+      }
+    },
+    {
+      "paper": "foundation-models:archspace",
+      "target_card": "foundation-models/training-budget",
+      "source_revisions": {
+        "foundation-models:archspace": "f6418801859e15fc9ebdb43c23db9b1a13c3953d38e5a84b4af5d7e62e515cc6",
+        "foundation-models:data-mixing-laws": "71c42d6af6dca0a2b11e5d2899b54695a5514a0b08de1d4fe694aa96b9fa42aa"
+      },
+      "comparison": {
+        "position": "固定数据和tokenizer，用FLOPs/token、训练token数及LR/BS耦合曲面比较架构；最终衰减checkpoint和11域等权validation是比较协议的一部分。",
+        "tradeoff": "Data Mixing Laws改变域比例并从pilot拟合配比；ArchSpace控制架构规模与LR/BS。两类曲面系数不能交换，公开算术复算也不等于重新拟合或执行自动架构搜索。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "论文离线与线上效果"
+        ]
+      },
+      "analysis": {
+        "title": "拟合损失之前先固定干预变量和预算单位",
+        "body": "相同loss输出不意味着相同研究任务。Data Mixing Laws的输入有mixture simplex，ArchSpace把数据固定并用C=MD计训练FLOPs。M不是参数量，LR条件最优随batch平方根变化；未重跑新架构的pilot就不能用旧基线系数宣称收益。",
+        "papers": [
+          "foundation-models:archspace",
+          "foundation-models:data-mixing-laws"
+        ]
+      },
+      "question": {
+        "id": "nov15-archspace",
+        "question": "Data Mixing Laws与ArchSpace都能预测loss，为什么不能直接串起来就说完成了架构进化？",
+        "answer": "它们分别拟合数据配比与架构/超参预算关系；串接需要真实候选训练、验证各自外推范围并统一预算。仅注册或调用公开系数没有执行和评测新候选。",
+        "example": "改变语料配比同时改变架构后，loss下降仍需要对照区分数据与结构贡献。",
+        "papers": [
+          "foundation-models:archspace",
+          "foundation-models:data-mixing-laws"
+        ]
+      },
+      "update": {
+        "date": "2026-11-15",
+        "papers": [
+          "foundation-models:archspace",
+          "foundation-models:data-mixing-laws"
+        ],
+        "summary": "补入固定版本方法、低成本组件或明确资料收录，分开原文结果、本地诊断及高成本不复现范围。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Fixes data/tokenization and compares architecture using FLOPs/token, tokens and a coupled LR/batch surface. Final decayed checkpoints and equally weighted eleven-domain validation are part of the protocol.",
+          "tradeoff": "Data Mixing Laws changes domain mixtures using pilot fits; ArchSpace controls architecture size and LR/batch. Coefficients are not interchangeable, and arithmetic replay is neither new fitting nor architecture search."
+        },
+        "analysis": {
+          "title": "Fix interventions and budget units before fitting loss",
+          "body": "A shared loss output does not imply the same research task. Data Mixing Laws takes a mixture simplex; ArchSpace fixes data and measures training FLOPs as C=MD. M is not parameter count, and conditional optimal LR scales with square-root batch. Old baseline coefficients cannot establish new-architecture gains without new pilots."
+        },
+        "question": {
+          "question": "Why does combining loss predictors not establish architecture evolution?",
+          "answer": "They model different interventions. Combining them requires real candidate training, checked extrapolation and unified budgets; registration or published coefficients do not execute and evaluate a new candidate.",
+          "example": "Changing mixture and architecture together requires controls to separate data and structural contributions."
+        },
+        "update": "Added fixed-version methods and bounded components or explicit review-only coverage, separating author results, local diagnostics and high-cost non-reproduction."
+      }
+    },
+    {
+      "paper": "foundation-models:d-jepa",
+      "target_card": "multimodal-models/alignment-interfaces",
+      "source_revisions": {
+        "foundation-models:d-jepa": "8a2b4116620b1775b241ac6aaaaa8077f0237ea8cdd9616bee4f260e9c283dbd",
+        "foundation-models:clip": "9a8c03405713d34f4c7af432f78e05830369fa6b5e331a67a6d540983a205fa1"
+      },
+      "comparison": {
+        "position": "在每模态拆共享core/私有fiber，对四子空间独立SIGReg，预测另一view的停止梯度表示，仅惩罚四组private-shared相关。",
+        "tradeoff": "CLIP直接把配对图文映射进同一单位空间并双向对比；D-JEPA专门处理信息不对称下共享与私有信号的分工。定理只约束严格alignment-only解，不是对CLIP完整训练的无条件否定。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "论文离线与线上效果"
+        ]
+      },
+      "analysis": {
+        "title": "共享对齐与保留私有信息不能用一个目标代替",
+        "body": "对齐是约束哪部分信息保留，不是自动保证所有任务所需信息齐全。图像细节与问题选择关系可能分别进入private；去掉private-private惩罚保留协调机会。本地四项loss和梯度测试不能测得真实synergy，CLIP已有Fashion-MNIST结果也不是两论文同数据比较。",
+        "papers": [
+          "foundation-models:d-jepa",
+          "foundation-models:clip"
+        ]
+      },
+      "question": {
+        "id": "nov15-d-jepa",
+        "question": "D-JEPA是否说明CLIP对齐思路总是错误？",
+        "answer": "不是。它讨论信息不对称及严格对齐解，CLIP的目标和任务还包括实例区分与检索。是否损失任务信息需要匹配模型、数据和下游读出，不能由名字或单一界下结论。",
+        "example": "同一场景的不同问题不是等信息视图；但图片与描述检索有不同监督结构，需单独比较。",
+        "papers": [
+          "foundation-models:d-jepa",
+          "foundation-models:clip"
+        ]
+      },
+      "update": {
+        "date": "2026-11-15",
+        "papers": [
+          "foundation-models:d-jepa",
+          "foundation-models:clip"
+        ],
+        "summary": "补入固定版本方法、低成本组件或明确资料收录，分开原文结果、本地诊断及高成本不复现范围。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Splits shared cores/private fibers, separately applies SIGReg, predicts stopped other-view representations and penalizes four private–shared correlations.",
+          "tradeoff": "CLIP maps paired images/text into one unit space with symmetric contrastive learning. D-JEPA studies information asymmetry and shared/private roles. Its exact alignment-only theorem is not an unconditional rejection of complete CLIP training."
+        },
+        "analysis": {
+          "title": "Shared alignment does not replace private-information preservation",
+          "body": "Alignment constrains retained information; it does not automatically preserve everything needed downstream. Visual details and question relations may need private fibers; omitting private–private decorrelation permits coordination. Local loss/gradient tests do not measure actual synergy, and existing Fashion-MNIST CLIP results are not matched-paper comparisons."
+        },
+        "question": {
+          "question": "Does D-JEPA establish that CLIP-style alignment is always wrong?",
+          "answer": "No. It concerns informational asymmetry and exactly aligned solutions, while CLIP also performs instance discrimination and retrieval. Match models, data and readouts before claiming task-information loss.",
+          "example": "Different questions about one scene are not equally informative views; image–caption retrieval has a different supervision structure."
+        },
+        "update": "Added fixed-version methods and bounded components or explicit review-only coverage, separating author results, local diagnostics and high-cost non-reproduction."
+      }
+    },
+    {
+      "paper": "foundation-models:duojepa",
+      "target_card": "multimodal-models/alignment-interfaces",
+      "source_revisions": {
+        "foundation-models:duojepa": "a9014f50664d09ff5dae4989e99ffb5db0b9ce66818b60edce48fc5cc68fb6e5",
+        "foundation-models:clip": "9a8c03405713d34f4c7af432f78e05830369fa6b5e331a67a6d540983a205fa1"
+      },
+      "comparison": {
+        "position": "各模态保留自己的LeJEPA空间，单层skipless translator在对方own space做InfoNCE；centroid由逐view LN/单位化后聚合，两个目标侧都反传。",
+        "tradeoff": "CLIP直接优化共同空间的图文分数；DuoJEPA将匹配压力交给无残差翻译层，但encoder仍联合训练。没有直接own-space项不证明独立训练，也不保证任意空间都能翻译。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "论文离线与线上效果"
+        ]
+      },
+      "analysis": {
+        "title": "同空间匹配和跨空间翻译提供不同几何约束",
+        "body": "比较应先问分数两边是否属于同一target space，以及哪一侧参与梯度。Duo把translated source和own target比较，CLIP直接比较own representations。skipless移除identity shortcut并配专门初始化；本地单head层不含完整LeJEPA和全设备负例，因此不能声称复现未对齐的医学检索几何。",
+        "papers": [
+          "foundation-models:duojepa",
+          "foundation-models:clip"
+        ]
+      },
+      "question": {
+        "id": "nov15-duojepa",
+        "question": "DuoJEPA也用双向InfoNCE，为什么不能直接替换成CLIP loss？",
+        "answer": "CLIP比较两own vectors；Duo的每项在一个目标空间内比较translated source与own centroid。替换会直接改变空间约束、centroid构造和encoder梯度路径。",
+        "example": "图像own向量在图像空间，翻译后的图像向量在文本空间；与文本own匹配的是后者。",
+        "papers": [
+          "foundation-models:duojepa",
+          "foundation-models:clip"
+        ]
+      },
+      "update": {
+        "date": "2026-11-15",
+        "papers": [
+          "foundation-models:duojepa",
+          "foundation-models:clip"
+        ],
+        "summary": "补入固定版本方法、低成本组件或明确资料收录，分开原文结果、本地诊断及高成本不复现范围。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Retains modality-specific LeJEPA spaces and uses a skipless translator for target-space InfoNCE. Centroids normalize each view before aggregation, and both target sides receive gradients.",
+          "tradeoff": "CLIP directly optimizes common-space image/text scores. DuoJEPA assigns matching pressure to residual-free translation while jointly training encoders. No direct own-space term means neither independent training nor guaranteed translatability."
+        },
+        "analysis": {
+          "title": "Shared-space matching and cross-space translation impose different geometry",
+          "body": "First identify the space of each score operand and which sides receive gradients. Duo compares translated sources with own targets, whereas CLIP compares own representations directly. Skipless removes identity shortcuts and needs dedicated initialization. The local single-head layer omits full LeJEPA and global negatives, so it does not reproduce unaligned medical-retrieval geometry."
+        },
+        "question": {
+          "question": "Why not replace DuoJEPA's bidirectional InfoNCE with CLIP loss?",
+          "answer": "CLIP compares own vectors. Each Duo term compares a translated source with an own centroid inside one target space. Replacing it changes geometry, centroid construction and encoder gradients.",
+          "example": "An own image vector is in image space; its translated version is in text space. The latter matches the own text vector."
+        },
+        "update": "Added fixed-version methods and bounded components or explicit review-only coverage, separating author results, local diagnostics and high-cost non-reproduction."
+      }
+    },
+    {
+      "paper": "multimodal-models:pixvid",
+      "target_card": "multimodal-models/world-state-actions",
+      "source_revisions": {
+        "multimodal-models:pixvid": "af14fd84ecf954028202fd5cf61ef0145afa848db73a106afc7f41fd4ff8a8ae",
+        "multimodal-models:woven": "3c7f5518fd36be1bc8aa964050531232d66f297057e8e0ccd57f3f4376d2f575"
+      },
+      "comparison": {
+        "position": "以像素-latent线性对齐、时间校准和detailer把预训练视频DiT迁移到pixel空间，处理高分辨率细节与跨帧一致性；本轮仅资料收录。",
+        "tradeoff": "WOVEN用动作条件rollout形成转移监督并训练MLLM回答；PixVid改变生成器的表示与计算路径。更清晰的生成不自动意味着因果/动作正确，也不是选择题准确率。",
+        "sections": [
+          "背景与主要改动",
+          "核心机制与公式",
+          "论文离线与线上效果"
+        ]
+      },
+      "analysis": {
+        "title": "生成视频与学习状态转移不是同一次验收",
+        "body": "视频生成器可以作为下游转移训练的数据源，但要分开验证视觉质量、动作条件忠实度、状态一致性和学习后的推理能力。PixVid完整14B/130万clip矩阵不运行；WOVEN既有小样本SFT负结果也不用于推断PixVid的收益。两者不构成本地联合系统。",
+        "papers": [
+          "multimodal-models:pixvid",
+          "multimodal-models:woven"
+        ]
+      },
+      "question": {
+        "id": "nov15-pixvid",
+        "question": "把WOVEN的视频生成器替换成PixVid，能直接说状态推理更强吗？",
+        "answer": "不能。需先测生成对动作和状态的忠实度，再用冻结数据协议训练/评测下游模型；画面更清晰只覆盖一个轴。本轮没有执行这样的组合。",
+        "example": "更清晰地生成一个错误动作结果，仍会把错误监督传给下游转移问答。",
+        "papers": [
+          "multimodal-models:pixvid",
+          "multimodal-models:woven"
+        ]
+      },
+      "update": {
+        "date": "2026-11-15",
+        "papers": [
+          "multimodal-models:pixvid",
+          "multimodal-models:woven"
+        ],
+        "summary": "补入固定版本方法、低成本组件或明确资料收录，分开原文结果、本地诊断及高成本不复现范围。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Transfers a pretrained video DiT into pixel space through linear alignment, timestep calibration and a detailer, addressing high-resolution detail and temporal consistency. Review only locally.",
+          "tradeoff": "WOVEN turns action-conditioned rollouts into transition supervision for MLLM answers. PixVid changes the generator's representation/compute path. Sharper generation does not establish action/causal correctness or multiple-choice accuracy."
+        },
+        "analysis": {
+          "title": "Generating video and learning transitions require separate acceptance",
+          "body": "A video generator can supply transition-training data, but visual quality, action fidelity, state consistency and downstream reasoning need separate checks. The full 14B/1.3-million-clip PixVid matrix is not run. Existing small WOVEN SFT negative results do not predict PixVid benefits. No local joint system is claimed."
+        },
+        "question": {
+          "question": "Would replacing WOVEN's generator with PixVid establish stronger transition reasoning?",
+          "answer": "No. First evaluate action/state fidelity, then train/evaluate downstream models under fixed data protocols. Image clarity covers only one axis; no such combination was run here.",
+          "example": "A sharper but incorrect action outcome still supplies incorrect downstream transition supervision."
+        },
+        "update": "Added fixed-version methods and bounded components or explicit review-only coverage, separating author results, local diagnostics and high-cost non-reproduction."
+      }
+    },
+    {
+      "paper": "foundation-models:spectral-ghost",
+      "target_card": "multimodal-models/alignment-interfaces",
+      "source_revisions": {
+        "foundation-models:spectral-ghost": "8974441bb41e91e867e062ab0490aef1ba6086eb162dd60354b1c09df6ad05bd",
+        "foundation-models:clip": "9a8c03405713d34f4c7af432f78e05830369fa6b5e331a67a6d540983a205fa1"
+      },
+      "comparison": {
+        "position": "以谱表示联系CLIP等SSL方法，区分无偏、固定负例surrogate和有偏plug-in，推导排除同样本项的U-statistic目标；固定v4仅理论收录。",
+        "tradeoff": "CLIP提供可执行图文对比模型；Spectral Ghost分析其参数化与目标估计，不能由无偏或一致性推出某任务准确率更高。v1 Google署名历史也不能替代v4机构。",
+        "sections": [
+          "背景与主要改动",
+          "核心机制与公式",
+          "论文结果与证据边界"
+        ]
+      },
+      "analysis": {
+        "title": "估计器偏差和模态对齐几何是两条讨论轴",
+        "body": "InfoNCE中的负例数不仅影响采样方差；在错设条件下可改变surrogate最优点。另一方面，non-contrastive平方协方差若带同样本项也可有偏。应分别审查表示几何、目标定义、独立采样和优化预算，而不是给方法贴contrastive标签后推断成本/能力。本篇原文无实证矩阵，本地也不制造高成本延期实验。",
+        "papers": [
+          "foundation-models:spectral-ghost",
+          "foundation-models:clip"
+        ]
+      },
+      "question": {
+        "id": "nov15-spectral-ghost",
+        "question": "Spectral Ghost的无偏分析能否直接证明CLIP batch越小越好？",
+        "answer": "不能。无偏性与方差、统计效率和模型错设不同；ranking NCE固定负例数的surrogate还有自己的最优点。理论目标性质不是下游性能排序。",
+        "example": "移除同样本偏差仍可能增加有限batch方差，准确率和收敛速度须单独实验；本文没有给出该实证。",
+        "papers": [
+          "foundation-models:spectral-ghost",
+          "foundation-models:clip"
+        ]
+      },
+      "update": {
+        "date": "2026-11-15",
+        "papers": [
+          "foundation-models:spectral-ghost",
+          "foundation-models:clip"
+        ],
+        "summary": "补入固定v4理论方法及版本化机构证据，不虚构训练实验或本地指标。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Connects CLIP and other SSL through spectral representations, distinguishes unbiased objectives, fixed-negative surrogates and biased plug-ins, and derives U-statistic penalties excluding same-sample terms. Fixed-v4 theory intake only.",
+          "tradeoff": "CLIP provides executable image/text contrastive models; Spectral Ghost analyzes parametrizations and estimators. Unbiasedness/consistency does not rank task accuracy. Historical Google bylines do not replace v4 affiliations."
+        },
+        "analysis": {
+          "title": "Estimator bias and multimodal alignment geometry are different axes",
+          "body": "InfoNCE negative counts affect more than variance: under misspecification they can change surrogate optima. Non-contrastive squared-covariance plug-ins can be biased through same-sample terms. Audit geometry, objectives, independent sampling and optimization budgets separately rather than infer cost/capability from labels. There is no source empirical matrix and no invented expensive deferred experiment."
+        },
+        "question": {
+          "question": "Does unbiasedness analysis prove smaller CLIP batches are better?",
+          "answer": "No. Unbiasedness differs from variance, statistical efficiency and misspecification; a fixed-negative ranking-NCE surrogate has its own optimum. Objective theory is not a downstream performance ranking.",
+          "example": "Removing same-sample bias can still leave large finite-batch variance. Accuracy and convergence need experiments that this paper does not supply."
+        },
+        "update": "Added fixed-v4 theoretical methods and versioned affiliation evidence without inventing training experiments or local metrics."
+      }
+    }
+  ]
+}

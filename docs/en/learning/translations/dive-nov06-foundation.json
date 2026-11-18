@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/foundation-models/context-and-state/comparison/foundation-models:convpe": {
+      "source_sha256": "350800be897c26fd81a6a7637ed361faa923b45579ca4baf249af6ffd7f86ffd",
+      "reviewed": true,
+      "fields": {
+        "position": "Project raw hidden states into fewer channels and apply a left-padded causal convolution to predict relative-lag biases per query. Attention heads share bias heads by modulo and add the bias to scores before softmax.",
+        "tradeoff": "A zero bias outside the window is not a mask. Chunked decoding needs the last W−1 raw hidden states to reconstruct the bias; no KV entries are removed. The local component verifies the default one-dimensional bias, not full long-context training, fused kernels, or throughput."
+      }
+    },
+    "dive/foundation-models/context-and-state/analysis/5": {
+      "source_sha256": "86316c2fbb5d8d806f8d77f9fcf99360fd5cb984046a92cbfc133a5f74e0cf19",
+      "reviewed": true,
+      "fields": {
+        "title": "A position-bias window is not a window on visible history",
+        "body": "RoPE rotates Q and K so relative displacement enters their dot product. ConvPE predicts an input-dependent score adjustment from recent hidden states; visible keys outside the bias window still enter softmax with their original QK scores. CSB instead selects whole blocks of original KV and changes the support. These are changes to dot-product representation, additive scores, and support, respectively; W is not a KV budget. ConvPE also requires actual left-context hidden states for chunked decoding. Agreement between chunked and full-sequence slices verifies the bias contract, not long-context capability or speed."
+      }
+    },
+    "dive/foundation-models/context-and-state/question/nov06-bias-window-not-support": {
+      "source_sha256": "25cbcf64d0c513f584f20c1baa910bc1d5a25f8c5effbac34097a4e94b7f3c31",
+      "reviewed": true,
+      "fields": {
+        "question": "With ConvPE bias window W = 4, does a causally visible key at lag 8 disappear? What does CSB do differently?",
+        "answer": "No. ConvPE adds zero bias, preserving the original QK score and causal mask. In CSB, if the block containing that key is not selected and the key is outside the always-visible region, it is excluded from attention support. In ConvPE, W = 4 also means that the first query in a chunk needs at most three earlier raw hidden states, not that it can see only four historical positions.",
+        "example": "Example: A lag-8 key with a high original score can still receive high weight after ConvPE adds zero. If CSB excludes it, its original value cannot contribute to that query's readout."
+      }
+    },
+    "dive/foundation-models/context-and-state/update/2026-11-06/4": {
+      "source_sha256": "ac039dabe0fe740658b03ff57ba3e0d45aa7894edded158bfc6b07d1084352a4",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add ConvPE alongside RoPE and CSB to distinguish dot-product representation, windowed additive bias, and visible support. Record the raw hidden-state requirement for chunked decoding and the exclusion of full training and fused kernels."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/comparison/foundation-models:pipnn-ii": {
+      "source_sha256": "2359b742b2c13b9386a3cefa97ac400344e10a56a045c9381bea2d51e13af8d6",
+      "reviewed": true,
+      "fields": {
+        "position": "Correct the signed dot product over decoded quantized candidates inside a graph-construction leaf, apply each row's scale, and update top-K immediately instead of materializing a complete candidate score matrix.",
+        "tradeoff": "This reduces input representation and intermediate score traffic in graph construction, not LM weights, KV, or cross-layer dependencies. The local CPU reference verifies scores and ordering; encoding, partitioning, pruning, and production SIMD/Hopper kernels are outside scope."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/analysis/5": {
+      "source_sha256": "203d9b32cf246c3a0ae7178c22a8f8287e7896921bb81e0471b33b33fdc35ac3",
+      "reviewed": true,
+      "fields": {
+        "title": "Input bytes, intermediate writeback, and scheduling overlap are distinct",
+        "body": "AWQ uses activation-aware scaling to protect low-bit model weights. PiPNN II quantizes external graph points and maintains the best K after scaling each candidate, avoiding full distance-matrix writeback. MLI instead restructures critical same-token selection dependencies across layers, without targeting byte compression. Verify these separately through weight error, graph-build recall and time, and actual serving-stream overlap. Agreement with a full sort on a small matrix establishes PiPNN's local scoring semantics, not large-graph recall or kernel performance."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/question/nov06-score-fusion-versus-scheduling": {
+      "source_sha256": "b26fe3045bd2e526e671c259c4d2ad4d1c253139c2bfcbf721a4e503036118fa",
+      "reviewed": true,
+      "fields": {
+        "question": "Both PiPNN II and MLI change how steps are organized. Why can't both be explained as eliminating an intermediate tensor?",
+        "answer": "PiPNN II scores each candidate and updates top-K without materializing all distances; row scales must be applied first. MLI still computes fresh selections but lets a later full layer consume a previous selection, enabling same-token index work to overlap main computation. One changes materialization and the other changes dependency and overlap. CPU agreement with a full sort cannot establish GPU overlap.",
+        "example": "Example: Keeping only three distances out of 100 scores checks that full-table writeback is unnecessary and the result matches. Whether two CUDA streams advance together needs separate event and first-consumer measurements."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/update/2026-11-06/4": {
+      "source_sha256": "2f95074e21af0db6b3aabaeac93757b27eb5359d13301e2fd0888695e7068bad",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add PiPNN II alongside AWQ and MLI to distinguish input bit width, intermediate score writeback, and critical dependencies. Note that ranking follows candidate scaling and that the local CPU semantic reference is not full graph-construction performance."
+      }
+    }
+  }
+}

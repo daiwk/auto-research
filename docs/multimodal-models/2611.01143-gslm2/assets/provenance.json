@@ -1,0 +1,18 @@
+{
+  "page": "docs/multimodal-models/2611.01143-gslm2/README.md",
+  "paper_url": "https://arxiv.org/abs/2611.01143",
+  "arxiv_id": "2611.01143",
+  "figure": "Figure 1 (left, architecture panel)",
+  "original_caption": "See Figure 1 in the fixed source for the original caption. The left panel depicts SpidR 2.0, the shared temporal backbone and the two output paths.",
+  "source_url": "https://arxiv.org/html/2611.01143v1/gslm2.png",
+  "extraction": "Unmodified author PNG for the left architecture panel only, excluding the separately drawn scaling plot",
+  "asset": "docs/multimodal-models/2611.01143-gslm2/assets/paper-figure-01.png",
+  "width": 1200,
+  "height": 561,
+  "score": 0,
+  "error": "",
+  "visually_inspected": true,
+  "sha256": "1d430d4545d80097e6144a9685ba4e480c409656c2747ae96160c9c0f5ef1ec1",
+  "source_sha256": "1d430d4545d80097e6144a9685ba4e480c409656c2747ae96160c9c0f5ef1ec1",
+  "license": "arXiv perpetual non-exclusive license; no Creative Commons claim for this paper figure"
+}

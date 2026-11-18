@@ -1,0 +1,57 @@
+{
+  "domain": "foundation-models",
+  "key": "storyscope",
+  "title": "StoryScope: Investigating idiosyncrasies in AI fiction",
+  "paper_url": "https://arxiv.org/abs/2604.03136v1",
+  "reviewed_version_url": "https://arxiv.org/html/2604.03136v1",
+  "reviewed_version": "v1",
+  "reviewed_arxiv_id": "2604.03136v1",
+  "detail_path": "foundation-models/2604.03136-storyscope/README.md",
+  "topic": [
+    "评测与研究证据",
+    "可解释生成文本检测"
+  ],
+  "first_author": "Jenna Russell",
+  "first_author_affiliation": "University of Maryland, College Park",
+  "verified_priority_organizations": [
+    "Google DeepMind"
+  ],
+  "published": "2026-04-03",
+  "published_at": "2026-04-03T15:56:38Z",
+  "code": "https://github.com/jenna-russell/storyscope",
+  "code_status": "作者公开MIT仓库/README与数据入口已核；当前README作者/数据量有修订，算法和成本只按固定v1，不将新版当v1。",
+  "code_license": "MIT",
+  "adapter": null,
+  "priority": "P0",
+  "priority_reason": "Google/DeepMind原文署名；Google COLM官方独立历史库存触发补漏，非本轮新首发。",
+  "intake_class": "historical_inventory_omission",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.foundation_models.storyscope.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.foundation_models.storyscope import diagnostic; print(diagnostic(42, \"cpu\"))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2604.03136v1",
+    "reviewed_sections": [
+      "§2.1–2.2",
+      "§3–5",
+      "Appendix B–D",
+      "Appendix H"
+    ],
+    "available_resource": "单张NVIDIA A100/A30或本地Mac",
+    "basis": "61,608篇约5000词故事、10,272个prompt、GPT5.1结构化/特征发现、Gemini3Flash给304特征赋值、F2LLM4B去重、50次bootstrap分类器及基线矩阵。完整API/大语料流程高成本不复现，官方公开缓存不等于本地已跑。",
+    "decision": "成本过高，不复现（审查DONE）；仅交付独立低成本L1组件，不下载大资源、不试训、不自动重试。"
+  },
+  "fidelity_note": "按prompt整组bootstrap索引与AppendixD核心特征严格合取门控/方向：重要性分位、稳定性、null95/p值、top25、human-AI gap及跨AI模型spread；真实LLM特征、XGBoost/SHAP统计外置，不猜fingerprint阈值。",
+  "summary": "按prompt整组bootstrap索引与AppendixD核心特征严格合取门控/方向：重要性分位、稳定性、null95/p值、top25、human-AI gap及跨AI模型spread；真实LLM特征、XGBoost/SHAP统计外置，不猜fingerprint阈值。"
+}

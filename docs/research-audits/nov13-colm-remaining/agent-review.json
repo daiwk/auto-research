@@ -1,0 +1,448 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-13",
+  "scope": "Eight original #250 Agent/collaboration candidates; original-source decisions, not a new-publication scan.",
+  "records": [
+    {
+      "arxiv_id": "2512.04068",
+      "reviewed_version": "v1",
+      "title": "Learning Steerable Clarification Policies with Collaborative Self-play",
+      "published": "2025-12-03T18:49:54Z",
+      "first_author": "Jonathan Berant",
+      "first_author_affiliation": "Google Research",
+      "verified_priority_organizations": [
+        "Google Research",
+        "Google DeepMind",
+        "Meta"
+      ],
+      "domain": "agent-research",
+      "key": "clarification-sgp",
+      "decision": "component_only",
+      "source_url": "https://arxiv.org/html/2512.04068v1",
+      "source_cache": ".cache/nov13-colm-remaining/agent/2512.04068-v1.html",
+      "source_sha256": "0968c37ab9e18a2d897de9f48adad33d526a3e6ce09a5b65c4fc7de2d5fcfd5a",
+      "reviewed_sections": [
+        "3.1",
+        "3.2 Algorithm1/Eq2–4",
+        "4.2"
+      ],
+      "code": null,
+      "code_status": "No verified author-code entry in fixed paper or bounded official-author search; do not count third-party reproductions.",
+      "low_cost_component": "CPU cost-penalized reward and ReST action-sequence selection by interpretation-balanced empirical means, followed by per-interpretation best compatible rollout; no assistant/user model.",
+      "cost_basis": "Full Gemma2-9B user+assistant, 192 training rollouts/query, 64 test rollouts/query, three ReST epochs and two benchmarks; multi-arm self-play and fine-tuning exceed current single-device budget.",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "requires_gpu_validation": false,
+      "implementation_pending": false,
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "readme_sha256": "bcfc3426ac9f82a6fe1cb0a77ffa9fb5c23038102618b455d222f8c46adc72f3",
+      "validation": {
+        "unit_tests": 37,
+        "unit_test_status": "passed",
+        "cpu_three_seed": "local mechanism checks passed; canonical freeze managed by root",
+        "gpu_validation_pending": false,
+        "capability_measured": false
+      },
+      "figure": {
+        "path": "docs/agent-research/2512.04068-clarification-sgp/assets/paper-figure-01.png",
+        "source_url": "https://arxiv.org/html/2512.04068v1/figures/example_rollout_nano.png",
+        "section_url": "https://arxiv.org/html/2512.04068v1#S3.F2",
+        "figure": "Figure 2",
+        "pdf_page": null,
+        "render": "Official HTML PNG original bytes; no PDF renderer, crop or redraw.",
+        "sha256": "34606d5b6e06172a1c5feaa6a6cbcef65da9814f3f630f3444204cf2ae84879b",
+        "visually_inspected": true
+      },
+      "abs_capture": ".cache/nov13-colm-remaining/agent/2512.04068-abs.html",
+      "reward_units": "Normalized F1 for0.1/0.4 filters; explicit percentage-point reward100*F1 matching Tables2–3 and alpha2/20. Normalizing reward requires costs/100.",
+      "implementation_evidence": "docs/agent-research/2512.04068-clarification-sgp/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "arxiv_id": "2601.16355",
+      "reviewed_version": "v1",
+      "title": "Identity, Cooperation and Framing Effects within Groups of Real and Simulated Humans",
+      "published": "2026-01-22T22:41:24Z",
+      "first_author": "Suhong Moon",
+      "first_author_affiliation": "University of California, Berkeley",
+      "verified_priority_organizations": [
+        "Google DeepMind"
+      ],
+      "decision": "out_of_scope_application_study",
+      "source_url": "https://arxiv.org/html/2601.16355v1",
+      "source_cache": ".cache/nov13-colm-remaining/agent/2601.16355-v1.html",
+      "source_sha256": "e8a023c9be66a69ac6561269bbd413f0398a64116c6ed239179e2a88a32a16ea",
+      "reviewed_sections": [
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "AppendixE",
+        "AppendixF"
+      ],
+      "code": null,
+      "reason": "The original contribution is an empirical social-behavior simulation study of U.S. partisan Dictator/Trust games and framing/date/participant effects. Narrative deep binding and demographic matching reuse the cited anthology method; temporal prompt grounding and an LLM consistency critic are study controls, not a new independently specified general agent algorithm. No new released public benchmark/framework was verified; AppendixF promises future code/prompts/backstories. Preserve this scientific study as a sourceful exclusion, not a high-cost reproduction falsely advertised as accepted. This does not deny its empirical contribution.",
+      "cost_context_only": "Authors use eight RTX A6000/A5000 with 24B/70B base models and Gemini critic; no run attempted. Cost is not the selection reason.",
+      "method_review_completed": true,
+      "implementation": false,
+      "automatic_retry": false
+    },
+    {
+      "arxiv_id": "2602.16488",
+      "reviewed_version": "v1",
+      "title": "Learning to Learn from Language Feedback with Social Meta-Learning",
+      "published": "2026-02-18T14:22:13Z",
+      "first_author": "Jonathan Cook",
+      "first_author_affiliation": "Google DeepMind",
+      "verified_priority_organizations": [
+        "Google DeepMind"
+      ],
+      "domain": "post-training",
+      "key": "social-meta-learning",
+      "decision": "component_only",
+      "source_url": "https://arxiv.org/html/2602.16488v1",
+      "source_cache": ".cache/nov13-colm-remaining/agent/2602.16488-v1.html",
+      "source_sha256": "80ddd54483bebef53f389ca14275318be0f22bfab1dcc0cd7c42233e582a2946",
+      "reviewed_sections": [
+        "2",
+        "4.1–4.4",
+        "5.1",
+        "5.4"
+      ],
+      "code": null,
+      "code_status": "No verified author repository in fixed paper or bounded exact-title search.",
+      "low_cost_component": "Real differentiable successful-dialogue, student-token-only SFT objective and exact failed-turn Q-priming probability 0.75^t. No fabricated teacher/student, no test-time private knowledge to actor, no GRPO discounting convention invented.",
+      "cost_basis": "Full Gemma3-12B-IT/Qwen3-8B, 2000 training problems/domain, teacher interactions, g8 GRPO, 4 training turns and 10-turn evaluation, one epoch/three seeds; no full model or rollout matrix.",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/social-meta-learning-a100-20261113.json",
+      "implementation_pending": false,
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "readme_sha256": "9101cef8e8f0469b3619e4e6635307dce6b7a4a948c2feaffdd15a46eb92f143",
+      "validation": {
+        "unit_tests": 37,
+        "unit_test_status": "passed",
+        "cpu_three_seed": "local mechanism checks passed; canonical freeze managed by root",
+        "gpu_validation_pending": true,
+        "capability_measured": false
+      },
+      "figure": {
+        "path": "docs/post-training/2602.16488-social-meta-learning/assets/paper-figure-01.png",
+        "source_url": "https://arxiv.org/html/2602.16488v1/figures/single_fig_1.png",
+        "section_url": "https://arxiv.org/html/2602.16488v1#S6.F1",
+        "figure": "Figure 1",
+        "pdf_page": null,
+        "render": "Official HTML PNG original bytes; no PDF renderer, crop or redraw.",
+        "sha256": "86d5880ec3d0d59405dea26db9ced1ce05c8e1004693f16337c6c3097915a0e8",
+        "visually_inspected": true
+      },
+      "abs_capture": ".cache/nov13-colm-remaining/agent/2602.16488-abs.html",
+      "implementation_evidence": "docs/post-training/2602.16488-social-meta-learning/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "arxiv_id": "2602.24188",
+      "reviewed_version": "v1",
+      "title": "MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games",
+      "published": "2026-02-27T17:13:20Z",
+      "first_author": "Jacob Eisenstein",
+      "first_author_affiliation": "Google DeepMind",
+      "verified_priority_organizations": [
+        "Google DeepMind",
+        "Google Research"
+      ],
+      "domain": "agent-research",
+      "key": "mt-pingeval",
+      "decision": "component_only",
+      "source_url": "https://arxiv.org/html/2602.24188v1",
+      "source_cache": ".cache/nov13-colm-remaining/agent/2602.24188-v1.html",
+      "source_sha256": "9e25373c3b1767dc3e17fb473339c0101dd96cfb3a93bf04aec64158ec6f3b2f",
+      "reviewed_sections": [
+        "2",
+        "3.4",
+        "4",
+        "4.4"
+      ],
+      "code": null,
+      "code_status": "No verified author-code/data entry in fixed v1 or bounded exact-title search.",
+      "low_cost_component": "Private Name-game views, unique full-record intersection evaluator and isotoken per-player/alternating-turn token-budget contract. No LLM, no public full-suite dataset claimed.",
+      "cost_basis": "Full five tasks, 1000 examples/task, five models plus thinking variants and four turn budgets, commercial calls and image/chess resources. No model runs.",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "requires_gpu_validation": false,
+      "implementation_pending": false,
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "readme_sha256": "8d76f5844fbe873df528ef274e4e03c16a46520b1c7a5d4223780f5ef151cfe9",
+      "validation": {
+        "unit_tests": 37,
+        "unit_test_status": "passed",
+        "cpu_three_seed": "local mechanism checks passed; canonical freeze managed by root",
+        "gpu_validation_pending": false,
+        "capability_measured": false
+      },
+      "figure": {
+        "path": "docs/agent-research/2602.24188-mt-pingeval/assets/paper-figure-01.png",
+        "source_url": "https://arxiv.org/html/2602.24188v1/covr_alice.png",
+        "section_url": "https://arxiv.org/html/2602.24188v1#S3.F1",
+        "figure": "Figure 1",
+        "pdf_page": null,
+        "render": "Official HTML PNG original bytes; no PDF renderer, crop or redraw.",
+        "sha256": "46c686bd923601238f4400c98e42bee931e72995fdeabc45eef332468e005c89",
+        "visually_inspected": true
+      },
+      "abs_capture": ".cache/nov13-colm-remaining/agent/2602.24188-abs.html",
+      "implementation_evidence": "docs/agent-research/2602.24188-mt-pingeval/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "arxiv_id": "2603.19258",
+      "reviewed_version": "v1",
+      "title": "MAPLE: Metadata Augmented Private Language Evolution",
+      "published": "2026-02-26T14:18:36Z",
+      "first_author": "Eli Chien",
+      "first_author_affiliation": "National Taiwan University",
+      "verified_priority_organizations": [
+        "Google Research",
+        "Meta"
+      ],
+      "domain": "post-training",
+      "key": "maple-icl",
+      "decision": "component_only",
+      "source_url": "https://arxiv.org/html/2603.19258v1",
+      "source_cache": ".cache/nov13-colm-remaining/agent/2603.19258-v1.html",
+      "source_sha256": "448bfd1a7b875141f1ef7a69c93a251a884f8fc2fb9524145900b4ab839d65a2",
+      "reviewed_sections": [
+        "3",
+        "5",
+        "AppendixA.1",
+        "AppendixB"
+      ],
+      "code": "https://github.com/elichien-google/MAPLE",
+      "code_status": "Author code released; README capture .cache/nov13-colm-remaining/agent/maple-readme.html sha e7095e88964056fde5bb3ddf08f07e1577e39d1d90b69e8ef476bc10937cf477.",
+      "low_cost_component": "Exact categorical-metadata Hamming nearest donated-example selection for initialization. Stable input-order ties and normalized-vs-count convention explicit; no AIM substitute, DP accountant, extraction, private corpus or model generation.",
+      "cost_basis": "Qwen2.5-7B, 2k/5k synthetic texts, up-to3000-token ICL contexts, bioRxiv28846/OpenReview8396 rows, AIM+AugPE/privacy matrices/downstream training; upstream recommends at least two A10040GB. Full pipeline not run.",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "requires_gpu_validation": false,
+      "implementation_pending": false,
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "readme_sha256": "2762218a95bffd8819414d30cb486e7bcb699856a579f3309db608d99bb3524b",
+      "validation": {
+        "unit_tests": 37,
+        "unit_test_status": "passed",
+        "cpu_three_seed": "local mechanism checks passed; canonical freeze managed by root",
+        "gpu_validation_pending": false,
+        "capability_measured": false
+      },
+      "figure": {
+        "path": "docs/post-training/2603.19258-maple-icl/assets/paper-figure-01.png",
+        "source_url": "https://arxiv.org/html/2603.19258v1/Figs/maple_fig.png",
+        "section_url": "https://arxiv.org/html/2603.19258v1#S1.F2",
+        "figure": "Figure 2",
+        "pdf_page": null,
+        "render": "Official HTML PNG original bytes; no PDF renderer, crop or redraw.",
+        "sha256": "918160f9367e14b85211c56c9262f93fcf6fd2ced4a172f337c857cd32d1b2a2",
+        "visually_inspected": true
+      },
+      "abs_capture": ".cache/nov13-colm-remaining/agent/2603.19258-abs.html",
+      "implementation_evidence": "docs/post-training/2603.19258-maple-icl/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "arxiv_id": "2604.15505",
+      "reviewed_version": "v1",
+      "title": "PolicyBank: Evolving Policy Understanding for LLM Agents",
+      "published": "2026-04-16T20:29:30Z",
+      "first_author": "Jihye Choi",
+      "first_author_affiliation": "Google Cloud",
+      "verified_priority_organizations": [
+        "Google Cloud"
+      ],
+      "domain": "agent-research",
+      "key": "policybank",
+      "decision": "component_only",
+      "source_url": "https://arxiv.org/html/2604.15505v1",
+      "source_cache": ".cache/nov13-colm-remaining/agent/2604.15505-v1.html",
+      "source_sha256": "40b6e9c402ed8eed855a89ff6aac4416f2bb1ac6e0bbe92e8d95a2547262d498",
+      "reviewed_sections": [
+        "3",
+        "4",
+        "5",
+        "6.1",
+        "AppendixB"
+      ],
+      "code": null,
+      "code_status": "No verified author PolicyBank source release in fixed v1/current official publication entry; cited tau-bench repositories are not PolicyBank framework code.",
+      "low_cost_component": "Tool-capability entry schema with trigger/preconditions/eligibility/action/key insight; explicit add/revise/omit operations and two-stage headers→selected full-entry retrieval, retaining developer-feedback provenance. No semantic PolicyAgent or authorization oracle.",
+      "cost_basis": "Full extended tau-bench airline/retail, five shuffled curricula, pass^1…4, Gemini3.0Pro/ClaudeOpus4.5 and fixed commercial PolicyAgent/UserSimulator. No paid benchmark matrix.",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "requires_gpu_validation": false,
+      "implementation_pending": false,
+      "implementation_status": "component_only",
+      "evaluation_tier": "l0_interface",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "readme_sha256": "c7edc9f6e99adaecc9c6877b41b8ebfb00812bf3eb4595c83a0cf55cd47c6c65",
+      "validation": {
+        "unit_tests": 37,
+        "unit_test_status": "passed",
+        "cpu_three_seed": "local mechanism checks passed; canonical freeze managed by root",
+        "gpu_validation_pending": false,
+        "capability_measured": false
+      },
+      "figure": {
+        "path": "docs/agent-research/2604.15505-policybank/assets/paper-figure-01.png",
+        "source_url": "https://arxiv.org/html/2604.15505v1/overview.png",
+        "section_url": "https://arxiv.org/html/2604.15505v1#S5.F2",
+        "figure": "Figure 2",
+        "pdf_page": null,
+        "render": "Official HTML PNG original bytes; no PDF renderer, crop or redraw.",
+        "sha256": "717cd37430947b78519a3f71f8f192beaa5f604fff8baf4099318dafe6d12fdf",
+        "visually_inspected": true
+      },
+      "abs_capture": ".cache/nov13-colm-remaining/agent/2604.15505-abs.html",
+      "implementation_evidence": "docs/agent-research/2604.15505-policybank/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "arxiv_id": "2604.24842",
+      "reviewed_version": "v1",
+      "title": "Co-Director: Agentic Generative Video Storytelling",
+      "published": "2026-04-27T18:00:00Z",
+      "first_author": "Yale Song",
+      "first_author_affiliation": "Google Inc.",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "domain": "agent-research",
+      "key": "co-director",
+      "decision": "component_only",
+      "source_url": "https://arxiv.org/html/2604.24842v1",
+      "source_cache": ".cache/nov13-colm-remaining/agent/2604.24842-v1.html",
+      "source_sha256": "f60f83deb595f2ea1897f7f76ab05ae24a71c471c6b0f546507d552055d436a8",
+      "reviewed_sections": [
+        "3.1–3.3",
+        "5",
+        "AppendixF",
+        "AppendixH"
+      ],
+      "code": "https://github.com/GoogleCloudPlatform/genmedia-izumi-agent/tree/main/demos/backend/ads_codirector",
+      "code_status": "Official project links this released GoogleCloudPlatform demo; local factored arithmetic is not the media pipeline.",
+      "low_cost_component": "Official UCBBandit mean+c*sqrt(log(stage pulls)/arm pulls), c2, recommendation-first unpulled arm, separate strategic updates and terminal quality. No invented prior counts.",
+      "cost_basis": "400 scenarios, T4 full pipelines each, up-to3 local retries, Gemini3Pro/NanoBananaPro/Veo3.1/TTS/Lyria2 and 4-shot12s videos; high-cost commercial media generation not attempted.",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "requires_gpu_validation": false,
+      "implementation_pending": false,
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "readme_sha256": "58ad99ff56809bf5026bbab820d90e9777cdbdc92d9c55f7e90eda1fc40a4216",
+      "validation": {
+        "unit_tests": 37,
+        "unit_test_status": "passed",
+        "cpu_three_seed": "local mechanism checks passed; canonical freeze managed by root",
+        "gpu_validation_pending": false,
+        "capability_measured": false
+      },
+      "figure": {
+        "path": "docs/agent-research/2604.24842-co-director/assets/paper-figure-01.png",
+        "source_url": "https://arxiv.org/html/2604.24842v1/pipeline.png",
+        "section_url": "https://arxiv.org/html/2604.24842v1#S2.F1",
+        "figure": "Figure 1",
+        "pdf_page": null,
+        "render": "Official HTML PNG original bytes; no PDF renderer, crop or redraw.",
+        "sha256": "d8dff4dd2598d3c82031d518e5ad5829214598be3e46f31a2bef1e786acdef09",
+        "visually_inspected": true
+      },
+      "abs_capture": ".cache/nov13-colm-remaining/agent/2604.24842-abs.html",
+      "upstream_sources": [
+        {
+          "url": "https://raw.githubusercontent.com/GoogleCloudPlatform/genmedia-izumi-agent/main/demos/backend/ads_codirector/mab/bandit.py",
+          "source_cache": ".cache/nov13-colm-remaining/agent/codirector-bandit.py",
+          "sha256": "fdc24991c24d7e5eded0ae2f190ed259953a472f641d7c730364a33817cae61e"
+        },
+        {
+          "url": "https://raw.githubusercontent.com/GoogleCloudPlatform/genmedia-izumi-agent/main/demos/backend/ads_codirector/mab/utils.py",
+          "source_cache": ".cache/nov13-colm-remaining/agent/codirector-utils.py",
+          "sha256": "d9fbbb1784cd15ae2bf9ef33486e1eb03e76c5f42871230f9124a285d5cf1c5d"
+        }
+      ],
+      "implementation_evidence": "docs/agent-research/2604.24842-co-director/metrics/component-cpu-seeds42-44.json"
+    },
+    {
+      "arxiv_id": "2608.26788",
+      "reviewed_version": "v1",
+      "title": "Decoupling Planning and Control for Instructable Agents",
+      "published": "2026-08-27T08:17:58Z",
+      "first_author": "Zineng Tang",
+      "first_author_affiliation": "UC Berkeley",
+      "verified_priority_organizations": [
+        "Google DeepMind"
+      ],
+      "domain": "agent-research",
+      "key": "instruct-to-act",
+      "decision": "component_only",
+      "source_url": "https://arxiv.org/html/2608.26788v1",
+      "source_cache": ".cache/nov13-colm-remaining/agent/2608.26788-v1.html",
+      "source_sha256": "e63f0494206615692c65a6e128ea740d3fdb181d00b1b04faa27633fbb436303",
+      "reviewed_sections": [
+        "3.2–3.4",
+        "4.1",
+        "AppendixA.4",
+        "AppendixD.1"
+      ],
+      "code": "https://github.com/zinengtang/instruct-to-act-code",
+      "code_status": "Official author project links released repository; local code does not claim Dreamer/planner/environment integration.",
+      "low_cost_component": "Non-overlapping annotated replay interval labels, completion only at interval ends, and actual differentiable instruction BC plus stop BCE; no artificial world-model/backbone/annotation model.",
+      "cost_basis": "800M controller per environment, seven embodied environments, GPT4o annotation, four RTX A6000, max36h/mean23h per environment and+17%GPUh annotation. Full training/rollout matrix not attempted.",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "requires_gpu_validation": true,
+      "gpu_validation_artifact": "docs/gpu-validations/instruct-to-act-a100-20261113.json",
+      "implementation_pending": false,
+      "implementation_status": "component_only",
+      "evaluation_tier": "l1_mechanism",
+      "diagnostic_only": true,
+      "promotion_eligible": false,
+      "evolve_integrated": false,
+      "readme_sha256": "82fd13e09ebc60a9ddef4b2986e7700afd4c1642d702a5ad847451245dd75ab7",
+      "validation": {
+        "unit_tests": 37,
+        "unit_test_status": "passed",
+        "cpu_three_seed": "local mechanism checks passed; canonical freeze managed by root",
+        "gpu_validation_pending": true,
+        "capability_measured": false
+      },
+      "figure": {
+        "path": "docs/agent-research/2608.26788-instruct-to-act/assets/paper-figure-01.png",
+        "source_url": "https://arxiv.org/html/2608.26788v1/dynamicmodel.png",
+        "section_url": "https://arxiv.org/html/2608.26788v1#S1.F1",
+        "figure": "Figure 1",
+        "pdf_page": null,
+        "render": "Official HTML PNG original bytes; no PDF renderer, crop or redraw.",
+        "sha256": "0ed93b59c830e2ee0f79025481f80d87a34cadad0676c5b23898ffd6b083613b",
+        "visually_inspected": true
+      },
+      "abs_capture": ".cache/nov13-colm-remaining/agent/2608.26788-abs.html",
+      "upstream_sources": [
+        {
+          "url": "https://raw.githubusercontent.com/zinengtang/instruct-to-act-code/master/README.md",
+          "source_cache": ".cache/nov13-colm-remaining/agent/instruct-to-act-readme.md",
+          "sha256": "e21214744c66ce5fe69307fe99c3a4dbb71822c2f4aad0d02169f4f9fe66e3e8"
+        }
+      ],
+      "implementation_evidence": "docs/agent-research/2608.26788-instruct-to-act/metrics/component-cpu-seeds42-44.json"
+    }
+  ]
+}

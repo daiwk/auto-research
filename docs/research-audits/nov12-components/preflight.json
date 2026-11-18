@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-12-overlap-components",
+  "component_keys": [
+    "agent-gym",
+    "bats",
+    "bopd",
+    "apmd-reference-reset",
+    "lcs-reference-opd",
+    "real-loss",
+    "c2-routing",
+    "onlyact"
+  ],
+  "cuda_keys": [
+    "bopd",
+    "onlyact",
+    "real-loss"
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "maximum_run_seconds": 180,
+  "model_and_dataset_downloads": 0,
+  "pretrained_model_calls": 0,
+  "api_calls": 0,
+  "full_experiments_executed": false,
+  "automatic_retry": false,
+  "input_scope": "small seeded tensors, exact finite-policy operators, and explicit control/evaluator contracts; no capability benchmark",
+  "theory_only_paper": "apmd-reference-reset",
+  "theory_note": "Theoretical operators are checked numerically; no nonexistent large empirical protocol is labeled high-cost or reproduced."
+}

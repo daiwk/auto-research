@@ -1,0 +1,8 @@
+{
+  "schema_version":1,"papers":{"agent-research:envharness":{"questions":[
+    {"id":"wrapper-keeps-original-verifier","level":"basics","question":"EnvHarness为什么修改环境交互，却要保留基础环境的verifier？","answer":"目标是提供有针对性的练习，而不是让新生成的世界随意定义成功。Stage/Contract仍由基础环境判断任务是否完成；串行Chain合取两个原判据。保留接口委托不自动证明外部verifier可靠，仍需审计。","example":"教学例：把杯子藏进抽屉增加寻找难度，不能把‘看到抽屉’改成‘成功放好杯子’的评分条件。","source_sections":["背景与主要改动","核心公式","复现边界"],"added":"2026-11-13"},
+    {"id":"stage-replay-versus-private-state-edit","level":"mechanism","question":"Stage为什么重放普通动作，并调用notify_replay_complete？","answer":"动作重放使初始状态来自环境可达路径而非私有字段注入；随后通知环境恢复episode计数，避免准备阶段占用策略预算。可复现仍依赖seeded reset与底层确定性；本地拒绝准备重放已经完成任务的情况。","example":"教学例：先拿杯子放进抽屉再关门作为初态，但这些准备动作不应减少后续策略的可用步数。","source_sections":["核心公式","数据协议与代码映射","结果与负控"],"added":"2026-11-13"},
+    {"id":"environment-harness-versus-agent-harness","level":"comparison","question":"EnvHarness与Harness²都叫harness，改变的是同一层吗？","answer":"不是。Harness²修改固定模型外的工具、记忆、提示与脚本，并根据执行对照积累改进经验；EnvHarness包装固定环境的初态、动作/观察和任务长度。两者可以概念上互补，但本地并未集成二者，也不能把环境toy检查当成agent能力改进。","example":"教学例：给agent加测试工具是agent harness；禁止环境中的直接提交捷径是environment harness，影响变量和归因不同。","source_sections":["背景与主要改动","核心公式","复现边界"],"added":"2026-11-13"},
+    {"id":"lazy-handoff-budget-and-cached-conjunction","level":"implementation","question":"串行Chain里A完成了，什么时候不能启动B，也不能返回成功？","answer":"A的原verifier失败或共享步预算已耗尽时，不启动B；B未执行或未成功，合取就不成立。B只在成功交接时lazy reset，每段原verifier在边界缓存，evaluate不反复运行昂贵scorer。","example":"教学例：总预算两步，A正好两步成功，B还未开始；不能把A成功记成组合任务成功，也不能偷偷给B新预算。","source_sections":["核心公式","数据协议与代码映射","结果与负控"],"added":"2026-11-13"}
+  ]}}
+}

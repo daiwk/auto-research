@@ -1,0 +1,443 @@
+{
+  "organization": "Meta",
+  "scope": "Finite exact-URL official-source review, not a whole-site census.",
+  "expected_records": 11,
+  "pages": [
+    {
+      "organization": "Meta",
+      "page": 1,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=1",
+      "status": "retrieved",
+      "retrieved_at": "2026-11-09T10:10:45.934783+00:00",
+      "count": 24,
+      "sha256": "07b2692b3e3ba33ae01faecaaf5a896cb350f3fd9a345ed90793c48fc0f1df08",
+      "inheritance": "Original 2026-11-09 directory receipt, not a new full-text check",
+      "receipt_reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "receipt_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a"
+    },
+    {
+      "organization": "Meta",
+      "page": 2,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=2",
+      "status": "retrieved",
+      "retrieved_at": "2026-11-09T10:10:45.868114+00:00",
+      "count": 24,
+      "sha256": "50f5f5b73305cd4580e48bc86a8d97a33ae2ab7c4f7d2fb0566b1830640f6b90",
+      "inheritance": "Original 2026-11-09 directory receipt, not a new full-text check",
+      "receipt_reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "receipt_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a"
+    },
+    {
+      "organization": "Meta",
+      "page": 3,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=3",
+      "status": "retrieved",
+      "retrieved_at": "2026-11-09T10:10:46.052818+00:00",
+      "count": 24,
+      "sha256": "5cf7a3c664597b619af34fe6a1ebba9ec1bc664b76e6f4a0489bd4be67a73d1e",
+      "inheritance": "Original 2026-11-09 directory receipt, not a new full-text check",
+      "receipt_reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "receipt_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a"
+    },
+    {
+      "organization": "Meta",
+      "page": 4,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=4",
+      "status": "retrieved",
+      "retrieved_at": "2026-11-09T10:10:46.613889+00:00",
+      "count": 24,
+      "sha256": "e47e4d8f41d2112b515403cb0f119f29bf959934dd6c31c35f25c498e257e94f",
+      "inheritance": "Original 2026-11-09 directory receipt, not a new full-text check",
+      "receipt_reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "receipt_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a"
+    },
+    {
+      "organization": "Meta",
+      "page": 5,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=5",
+      "status": "retrieved",
+      "retrieved_at": "2026-11-09T10:10:46.410756+00:00",
+      "count": 24,
+      "sha256": "2d4d85b80a32693a41e78a7539e0edab51feb1553bc199850083a79a282a156b",
+      "inheritance": "Original 2026-11-09 directory receipt, not a new full-text check",
+      "receipt_reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "receipt_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a"
+    },
+    {
+      "organization": "Meta",
+      "page": 6,
+      "url": "https://ai.meta.com/results/?content_types%5B0%5D=publication&page=6",
+      "status": "retrieved",
+      "retrieved_at": "2026-11-09T10:10:47.575880+00:00",
+      "count": 24,
+      "sha256": "58bbbd7e91772eda19fb7f286c21ca45cbb73824dfd474c7cf76193e75441ba3",
+      "inheritance": "Original 2026-11-09 directory receipt, not a new full-text check",
+      "receipt_reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "receipt_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a"
+    },
+    {
+      "url": "https://ai.meta.com/research/publications/",
+      "http_status": 200,
+      "body_sha256": "de23e0c264ff944ee66adb95a36d8b8613ad646ba1147b3f87d843d0d73f88a0",
+      "bytes": 45,
+      "retrieved_at": "2026-11-11T05:09:19.732646+00:00",
+      "response_text": "Sorry, this content isn't available right now",
+      "content_status": "unavailable_despite_http200",
+      "status": "document_unavailable",
+      "observation_scope": "current landing page only"
+    },
+    {
+      "url": "https://research.meta.ai/",
+      "http_status": 200,
+      "body_sha256": "2c257e69a4b6044866718bc9e68ae5ca05de68a362b0b8ce7950d24a07581008",
+      "bytes": 338011,
+      "retrieved_at": "2026-11-11T05:09:20.250258+00:00",
+      "status": "retrieved",
+      "observation_scope": "current landing page only",
+      "limitation": "News/research landing page, not a complete publication directory. Selected in-window posts reviewed separately."
+    }
+  ],
+  "records": [
+    {
+      "url": "https://ai.meta.com/research/publications/gslm2-multi-stream-speech-representation-learning-and-generative-spoken-language-modeling/",
+      "title": "GSLM2: Multi-Stream Speech Representation Learning and Generative Spoken Language Modeling",
+      "organization": "Meta",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-manifest.json",
+      "reference_sha256": "1c5153870636ca5917e6292a2b553c9850de6fd742619f2d4da4c138c8b83edf",
+      "reference_section": "official_directory.visible_dated_records",
+      "arxiv_ids": [
+        "2611.01143"
+      ],
+      "date_evidence": [
+        {
+          "url": "https://ai.meta.com/research/publications/gslm2-multi-stream-speech-representation-learning-and-generative-spoken-language-modeling/",
+          "date": "2026-11-04",
+          "kind": "directory display"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "body_sha256": "32d09eadd180c429d60e05914f941d1986d18fdb7b33d505558617eb74c762f0",
+      "retrieved_at": "2026-11-09T10:12:21.922397+00:00",
+      "primary_source_url": "https://arxiv.org/abs/2611.01143",
+      "reason": "Known catalog identity 2611.01143/gslm2; inherited prior official link check; directory day is not first publication.",
+      "captured_disposition": "prior_catalogued",
+      "review_status": "known",
+      "inherited_reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "corroborating_evidence": [
+        {
+          "reference": "docs/research-manifest.json",
+          "reference_sha256": "1c5153870636ca5917e6292a2b553c9850de6fd742619f2d4da4c138c8b83edf",
+          "reference_section": "official_directory.added_detail_checks",
+          "review_status": "known",
+          "reason": "GSLM2 已入库；11/04 目录日不等于 10/31 UTC 的 arXiv v1。"
+        }
+      ]
+    },
+    {
+      "url": "https://ai.meta.com/research/publications/human-guided-agentic-ai-for-end-to-end-ehr-research-sequential-antibody-drug-conjugate-pathways-in-breast-cancer/",
+      "title": "Human-Guided Agentic AI for End-to-End EHR Research: Sequential Antibody-Drug Conjugate Pathways in Breast Cancer",
+      "organization": "Meta",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/oct15-review-closure/meta-source-review.json",
+      "reference_sha256": "6a48d19e1510ab7caafe00dfc6f7eb7746e532858831a7cdea6e5bdc7388d111",
+      "reference_section": "ci_priority_official_review.records",
+      "arxiv_ids": [],
+      "date_evidence": [
+        {
+          "date": "2026-10-14",
+          "url": "https://ai.meta.com/research/publications/human-guided-agentic-ai-for-end-to-end-ehr-research-sequential-antibody-drug-conjugate-pathways-in-breast-cancer/",
+          "location": "official publication date",
+          "meaning": "official listing/release date, not automatically first arXiv submission"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "captured_disposition": "inherits_official_review",
+      "inherited_reference": "docs/research-audits/oct15-review-closure/meta-source-review.json",
+      "review_status": "out_of_scope",
+      "reason": "已核官方原文 PDF pp.6–7 与 p.22 Methods S7：使用 Muse Spark 1.3 在授权 EHR 中做人类主导病例研究，原文明确不主张新 Agent 架构、量化效率提升或独立复现；没有匹配人类对照/预设 AI 性能端点。不作为新算法能力实现；不请求受限患者数据。"
+    },
+    {
+      "url": "https://ai.meta.com/research/publications/learning-to-program-retrievals-composing-search-primitives-via-reinforcement-learning/",
+      "title": "Learning to Program Retrievals: Composing Search Primitives via Reinforcement Learning",
+      "organization": "Meta",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-manifest.json",
+      "reference_sha256": "1c5153870636ca5917e6292a2b553c9850de6fd742619f2d4da4c138c8b83edf",
+      "reference_section": "official_directory.visible_dated_records",
+      "arxiv_ids": [
+        "2610.24854"
+      ],
+      "date_evidence": [
+        {
+          "url": "https://ai.meta.com/research/publications/learning-to-program-retrievals-composing-search-primitives-via-reinforcement-learning/",
+          "date": "2026-10-20",
+          "kind": "directory display"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "review_status": "known",
+      "reason": "Known catalog identity 2610.24854/rpl; inherited prior official link check; directory day is not first publication.",
+      "inherited_reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json"
+    },
+    {
+      "url": "https://ai.meta.com/research/publications/muse-glimmer-30b-an-on-device-agentic-model/",
+      "title": "Muse Glimmer 30B: An On-Device Agentic Model",
+      "organization": "Meta",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-manifest.json",
+      "reference_sha256": "1c5153870636ca5917e6292a2b553c9850de6fd742619f2d4da4c138c8b83edf",
+      "reference_section": "official_directory.visible_dated_records",
+      "arxiv_ids": [
+        "2610.24628"
+      ],
+      "date_evidence": [
+        {
+          "url": "https://ai.meta.com/research/publications/muse-glimmer-30b-an-on-device-agentic-model/",
+          "date": "2026-10-19",
+          "kind": "directory display"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "review_status": "known",
+      "reason": "Known catalog identity 2610.24628/muse-glimmer-30b; inherited prior official link check; directory day is not first publication.",
+      "inherited_reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json"
+    },
+    {
+      "url": "https://ai.meta.com/research/publications/pickleball-injuries-search-interest-and-participation-in-the-united-states-2014-2023-an-ecological-time-series-study/",
+      "title": "Pickleball injuries, search interest, and participation in the United States, 2014-2023: an ecological time series study",
+      "organization": "Meta",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/oct15-review-closure/meta-source-review.json",
+      "reference_sha256": "6a48d19e1510ab7caafe00dfc6f7eb7746e532858831a7cdea6e5bdc7388d111",
+      "reference_section": "ci_priority_official_review.records",
+      "arxiv_ids": [],
+      "date_evidence": [
+        {
+          "date": "2026-10-14",
+          "url": "https://ai.meta.com/research/publications/pickleball-injuries-search-interest-and-participation-in-the-united-states-2014-2023-an-ecological-time-series-study/",
+          "location": "official publication date",
+          "meaning": "official listing/release date, not automatically first arXiv submission"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "captured_disposition": "inherits_official_review",
+      "inherited_reference": "docs/research-audits/oct15-review-closure/meta-source-review.json",
+      "review_status": "out_of_scope",
+      "reason": "NEISS 匹克球损伤、参与人数与搜索热度的生态时间序列研究；方法为去趋势/负对照流行病学分析，不是检索排序模型或 LLM 训练算法。"
+    },
+    {
+      "url": "https://engineering.fb.com/2026/08/03/ml-applications/training-gem-at-llm-scale-meta-ads-recommendation-foundation-model/",
+      "title": "GEM Training",
+      "organization": "Meta",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "other_official_observations",
+      "arxiv_ids": [],
+      "date_evidence": [
+        {
+          "url": "https://engineering.fb.com/2026/08/03/ml-applications/training-gem-at-llm-scale-meta-ads-recommendation-foundation-model/",
+          "date": "2026-08-03",
+          "kind": "official page date"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "review_status": "historical",
+      "reason": "档案列表日期与原文不一致，采用原文发表页；原始发布不在本窗。"
+    },
+    {
+      "url": "https://engineering.fb.com/2026/11/03/ml-applications/f3-lightning-how-meta-accelerates-ads-ml-features-to-production/",
+      "title": "F3 Lightning",
+      "organization": "Meta",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "other_official_observations",
+      "arxiv_ids": [],
+      "date_evidence": [
+        {
+          "url": "https://engineering.fb.com/2026/11/03/ml-applications/f3-lightning-how-meta-accelerates-ads-ml-features-to-production/",
+          "date": "2026-11-03",
+          "kind": "official page date"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "review_status": "out_of_scope",
+      "reason": "Feature release-to-production 3.6× 是系统交付延时对照；不是新排序模型业务 A/B。"
+    },
+    {
+      "url": "https://research.meta.ai/blog/muse-ember",
+      "title": "Introducing Our Smallest, Most Efficient Model: Muse Ember",
+      "organization": "Meta",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "current official post + linked four-page evaluation methodology",
+      "arxiv_ids": [],
+      "date_evidence": [
+        {
+          "url": "https://research.meta.ai/blog/muse-ember",
+          "date": "2026-11-09",
+          "kind": "product post publication date"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "body_sha256": "7d51e9c9191871f2b6f335af8a4254a7057050d85f1cf31e4e029195b63d23f8",
+      "retrieved_at": "2026-11-11T05:09:20.309662+00:00",
+      "review_status": "out_of_scope",
+      "reason": "产品发布与四页既有基准评测方法说明，未公开可独立复现的新模型训练算法或新的公共基准。本次不把产品API上线/合作伙伴评价当新方法论文或生产A/B。",
+      "evaluation_report_url": "https://research.meta.ai/static/muse-ember-evaluation-report",
+      "evaluation_report_sha256": "9738837b51e7bcf589a7856a84de9a11bc9184c7ca9504e86aaf97ed86d71efd"
+    },
+    {
+      "url": "https://research.meta.ai/blog/specialized-models-for-muse-and-metaai",
+      "title": "Specialized Models to Muse and Meta AI",
+      "organization": "Meta",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "other_official_observations",
+      "arxiv_ids": [],
+      "date_evidence": [
+        {
+          "url": "https://research.meta.ai/blog/specialized-models-for-muse-and-metaai",
+          "date": "2026-11-06",
+          "kind": "official page date"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "review_status": "out_of_scope",
+      "reason": "介绍上线专用模型，不提供可独立核对的新论文。"
+    },
+    {
+      "url": "https://research.meta.ai/blog/supporting-medical-scientific-research",
+      "title": "How American Universities Are Using AI Models From Meta to Accelerate Medical and Scientific Breakthroughs",
+      "organization": "Meta",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "current official news page read",
+      "arxiv_ids": [],
+      "date_evidence": [
+        {
+          "url": "https://research.meta.ai/blog/supporting-medical-scientific-research",
+          "date": "2026-10-28",
+          "kind": "official news publication date"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "review_status": "out_of_scope",
+      "reason": "五所大学模型/资助支持与待开展项目介绍，文中多项研究仍将开展或论文准备中；不是一篇可独立核查的新算法论文或新公开基准。仅审核本页，不据此宣布所有大学未来论文已审。",
+      "current_access": "official web reader, 2026-11-11; no body hash captured"
+    },
+    {
+      "url": "https://research.meta.ai/static/muse-ember-evaluation-report",
+      "title": "Muse Ember Evaluation Methodology",
+      "organization": "Meta",
+      "scope_triage_completed": true,
+      "counts_as_accepted": false,
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "reference_section": "current four-page official PDF",
+      "arxiv_ids": [],
+      "date_evidence": [
+        {
+          "url": "https://research.meta.ai/static/muse-ember-evaluation-report",
+          "date": "2026-11",
+          "precision": "month",
+          "kind": "month printed in PDF; not exact first-public day"
+        }
+      ],
+      "fulltext_review_completed": false,
+      "inherited_not_new_fulltext_review": true,
+      "body_sha256": "9738837b51e7bcf589a7856a84de9a11bc9184c7ca9504e86aaf97ed86d71efd",
+      "retrieved_at": "2026-11-11T05:09:20.078380+00:00",
+      "review_status": "out_of_scope",
+      "reason": "固定四页说明列出现成/私有评测与不同harness，非新训练算法或公开基准；部分外部编码成绩保留各厂商harness，不能视作统一受控比较。没有将MuseEmber完整训练或私有评测称作已复现。"
+    }
+  ],
+  "directory_exceptions": [
+    {
+      "organization": "Meta",
+      "url": "https://ai.meta.com/research/publications/",
+      "title": "Bounded official-directory coverage exception",
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "review_status": "explicit_exception",
+      "exception_type": "document_unavailable",
+      "reason": "主publication入口浏览器和curl均返回内容不可用文本；HTTP200并不等于成功取得目录。继承旧替代目录前6页/144URL回执，不冒称Meta全站。",
+      "attempts": [
+        {
+          "kind": "official_current_publications",
+          "url": "https://ai.meta.com/research/publications/",
+          "http_status": 200,
+          "body_sha256": "de23e0c264ff944ee66adb95a36d8b8613ad646ba1147b3f87d843d0d73f88a0",
+          "bytes": 45,
+          "retrieved_at": "2026-11-11T05:09:19.732646+00:00",
+          "response_text": "Sorry, this content isn't available right now",
+          "content_status": "unavailable_despite_http200",
+          "result": "Sorry, this content isn't available right now"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "入口恢复可读且能确认分页/日期时重新检查差集，或作者提供可核验固定原稿。"
+    },
+    {
+      "organization": "Meta",
+      "url": "https://research.meta.ai/",
+      "title": "Bounded official-directory coverage exception",
+      "reference": "docs/research-audits/nov09-review-closure/priority-primary-reviews.json",
+      "reference_sha256": "781904f37f8f2f26c04418c45025cc35c5439bda161b849a396b8630ec9a1d6a",
+      "review_status": "explicit_exception",
+      "exception_type": "pagination_unproven",
+      "reason": "当前新研究主页可读但为精选新闻/产品动态，没有提供完整论文分页。本次只复核可见窗口内Nov9/Nov6/Oct28新闻，不将其推成整个Meta论文发布清单。",
+      "attempts": [
+        {
+          "kind": "official_current_research_home",
+          "url": "https://research.meta.ai/",
+          "http_status": 200,
+          "body_sha256": "2c257e69a4b6044866718bc9e68ae5ca05de68a362b0b8ce7950d24a07581008",
+          "bytes": 338011,
+          "retrieved_at": "2026-11-11T05:09:20.250258+00:00",
+          "result": "HTTP200 curated news landing page"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "blocking": false,
+      "resolution": "archive_nonblocking",
+      "reopen_when": "官方恢复完整论文目录或提供可核验日期范围的导出时，定向复核未覆盖部分。"
+    }
+  ],
+  "expected_pages": 8,
+  "all_sources_exhaustive": false,
+  "record_scope": "Exact-URL union of CI92,18added details,4dated visible records,current15Google exact inherited terminals and explicitly read official news; overlaps deduplicated. Not450/266/144 newly reviewed manuscripts.",
+  "window": {
+    "start": "2026-10-16",
+    "end": "2026-11-09"
+  }
+}

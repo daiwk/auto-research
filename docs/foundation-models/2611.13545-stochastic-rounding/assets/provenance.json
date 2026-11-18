@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-11",
+  "figures": [
+    {
+      "file": "paper-figure-01.png",
+      "paper_id": "2611.13545",
+      "version": "v1",
+      "figure": 1,
+      "page_number": 1,
+      "paper_url": "https://arxiv.org/abs/2611.13545v1",
+      "source_url": "https://arxiv.org/pdf/2611.13545v1#page=1",
+      "source_kind": "fixed_v1_pdf_rendered_crop",
+      "pdf_sha256": "5039fefde24206d60c9e400e43d9cc2f59abf32faaf817c12204594d3be25923",
+      "image_sha256": "09b74ae15d13a60b6bd1286698a137fba680c3cc8d85ecb72c90be252b13683c",
+      "render_scale": 3,
+      "dpi": 216,
+      "crop_pdf_points": [
+        104,
+        452,
+        511,
+        725
+      ],
+      "caption_included": true,
+      "scientific_content_modified": false,
+      "visual_review_done": true,
+      "attribution": "Copyright belongs to the original authors; attributed paper figure reproduced for research explanation, not a local experimental result.",
+      "license": "See the fixed arXiv source; no new license granted by this repository."
+    }
+  ]
+}

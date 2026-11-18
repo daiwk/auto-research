@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/agent-research/memory-and-skills/comparison/agent-research:wikitrace": {
+      "source_sha256": "b63cc7a7777af4df8ecf809d609f8165a0d9ead505cab964f327907c8b7a03f0",
+      "reviewed": true,
+      "fields": {
+        "position": "Freeze three linked layers: training runs, model interpretations and insights. The test agent starts with all insights and can descend to original executions.",
+        "tradeoff": "Traceable sources neither verify interpretations nor guarantee correct use. Local coverage is a read-only corpus, digests and navigation, not a compiler LLM or task-capability comparison."
+      }
+    },
+    "dive/agent-research/memory-and-skills/analysis/5": {
+      "source_sha256": "4be2c9f491a616b5a7c791bcec415419d0c4b189f5676a0740eb02517b7f5218",
+      "reviewed": true,
+      "fields": {
+        "title": "Finding a relevant record and checking a lesson's source are different problems",
+        "body": "MemFit preserves raw turns and uses summary indexing and hybrid retrieval to narrow candidates. WikiTrace links insights to interpretations and raw execution so a model can inspect why a lesson holds. Correct ranking cannot repair a false explanation; complete sources do not guarantee descent. Both local implementations are independent components: MemFit calls neither embeddings nor a cross-encoder, while WikiTrace calls neither a compiler LLM nor a test actor. Interface checks do not establish long-term question-answering gains."
+      }
+    },
+    "dive/agent-research/memory-and-skills/question/source-link-versus-memory-ranking": {
+      "source_sha256": "9c873f04f4ca06b85d892aeeb2635f4d2f37c6066cd4fc7db37526fdc1f7fd45",
+      "reviewed": true,
+      "fields": {
+        "question": "If the most relevant lesson already ranks first, why does WikiTrace still need raw traces, and what does MemFit's retrieval test establish?",
+        "answer": "Relevance determines what appears first, not whether a lesson is true or applicable. WikiTrace permits inspection of observations omitted by a summary. MemFit's local fusion hook checks externally supplied score composition, not model-computed semantic relevance or descent. Source fidelity, ranking and actual use need separate validation.",
+        "example": "Teaching example: a lesson says the task ended, but the raw trace contains a later submission. Ranking first does not fix the omission; a correct link does not establish the model notices it."
+      }
+    },
+    "dive/agent-research/memory-and-skills/update/2026-11-11/4": {
+      "source_sha256": "8657e6a76ed34a2a94bdf2d684e5d95099c41e90e3085c7fad0f4f419a38c19f",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add WikiTrace to distinguish relevance ranking from checking experience provenance. Freeze training evidence, keep interpretations distinct from facts and preserve raw trajectories. CPU links and read-only checks are not compilation or task-solving capability; the full rollout matrix is not reproduced."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:fgse": {
+      "source_sha256": "e219e9197248ca570f7848191248b9164ac80f36cdedf11f13524fa01554d35c",
+      "reviewed": true,
+      "fields": {
+        "position": "Evaluate a temporary update separately on transfer, targeted falsification and archived regression probes, requiring gain, risk and damage thresholds to pass together.",
+        "tradeoff": "The empirical gate depends on real paired verifiers and appropriate probes. Local coverage is equations 7-9, not automatic refinement, an actor or the confidence guarantee; the full API campaign is not reproduced."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/comparison/agent-research:pase": {
+      "source_sha256": "6876faf91a98ff11d8db0cebbe8e9d1e78155c468b8270d65f0aa1b7431ca085",
+      "reviewed": true,
+      "fields": {
+        "position": "Separate descriptive skills from linked programs and retain local patches only after strict held-out validation improvement.",
+        "tradeoff": "Program syntax proves neither correctness nor safety, and external scores cannot validate a stale target. Local coverage is preimage-bound transactions and accept/rollback, without model or generated-code execution."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/analysis/7": {
+      "source_sha256": "f8aab6c1fa9e53e84c9f695a3034cabe48e81e81d986f567306c47160c38bdb4",
+      "reviewed": true,
+      "fields": {
+        "title": "Average validation gain, boundary risk and formal specifications provide different admission evidence",
+        "body": "PASE retains skill-program patches on independent validation improvement. FGSE additionally bounds falsification failures and archived damage to avoid hiding dangerous subgroups behind average gains. Verified Quantum Wiki requires independent proofs against frozen specifications before cost/size comparison. These gates provide different guarantees: AST syntax, empirical probes and formal theorems are not interchangeable. The local CPU components neither generate candidates nor perform external verification; test scores and synthetic receipts are contract controls only."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/question/risk-gates-versus-validation": {
+      "source_sha256": "94f685e69fa1e06253b33827e38567012aa82edd1b5ae093578024e830defd9d",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a patch that raises average validation score but breaks old cases pass PASE, FGSE and Verified Quantum Wiki alike?",
+        "answer": "Those two observations do not decide all three. PASE's explicit rule requires strict held-out improvement. FGSE separately checks archived damage and falsification risk and may reject. Verified Quantum Wiki needs specification-bound independent proof and resource improvement, not an average score. Match admission to observable evidence and update scope.",
+        "example": "Teaching example: nine improved tasks can hide one duplicate payment. An average-score gate may pass while a risk gate rejects; the quantum wiki does not use that task-score criterion at all."
+      }
+    },
+    "dive/agent-research/harness-and-self-improvement/update/2026-11-11/7": {
+      "source_sha256": "d0c64647bc35f79d53532644248206227ba0ba9b12d8699ed4ed215872f9ae8a",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add FGSE and PASE, separating risk-constrained admission from validation-only program-patch acceptance and comparing both with independent, specification-bound proof in Verified Quantum Wiki. CPU empirical gates, syntax checks and synthetic receipts are not complete self-evolution or proving capability."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/comparison/agent-research:retrace": {
+      "source_sha256": "03a20b935b06e15982cddf4b320e34ec389780cc2f7ad036912b2ea6da332272",
+      "reviewed": true,
+      "fields": {
+        "position": "Recover preconditions, argument sources and citations from SOPs and reasoning/tool traces, then compile a decision-list workflow whose code chooses the next step.",
+        "tradeoff": "Planner-free permits model-backed tools. Local coverage is a typed-guard subset without LLM extraction, aggregation, synthesis or production-tool execution; unsupported-by-execution branches retain an unwitnessed marker."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/analysis/4": {
+      "source_sha256": "0c7f907344faadbc4c560c2153a4d7f5abed1ad219af784982c9dec71c2d3694",
+      "reviewed": true,
+      "fields": {
+        "title": "Learning when to call a tool and dispatching in code are different deliverables",
+        "body": "Toolformer filters calls by the help their real results provide to downstream token loss and continues model training. ReTrace recovers conditions from SOPs and reasoning, compiling runtime choice into code. The former retains model-generation control; the latter still permits models inside fixed tools. Tool-call counts alone cannot rank them: local Toolformer uses deterministic utility rather than GPT-J loss, and local ReTrace is only typed IR. Neither supplies complete original-model or production evidence."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/question/compiled-rule-versus-learned-call": {
+      "source_sha256": "14fc96fe6e04f7cea1e137c7944d3da35d9fe5b0260f2173686d5c253ce4d512",
+      "reviewed": true,
+      "fields": {
+        "question": "If both systems emit the same query call, how do Toolformer training and ReTrace workflow dispatch differ?",
+        "answer": "Inspect how the call is produced and what supports it. Toolformer training changes model call-generation probabilities. ReTrace tests available guards, selects the first match and binds sourced arguments. Matching one output establishes neither training nor compilation fidelity and cannot let future tool results fill missing observations.",
+        "example": "Teaching example: one order query comes from a model prediction and another from a code condition saying no query has occurred. Identical calls do not establish equivalent exception handling."
+      }
+    },
+    "dive/agent-research/tools-and-collaboration/update/2026-11-11/3": {
+      "source_sha256": "4e3a6af14e3485ab06e216de97ee9c320665a1e5f36cabdba1b22d0239c76186",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add ReTrace to separate tool learning inside models from workflow control in code, including pre-action evidence, typed argument provenance, unwitnessed alternatives and model-backed tools. Only CPU IR is checked; no private production SOP or complete public benchmark is claimed integrated."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/comparison/agent-research:are-bench": {
+      "source_sha256": "2891ccbea26406804bf2052e7337b245c37c9eec3ae0add74b78740973101d45",
+      "reviewed": true,
+      "fields": {
+        "position": "Preserve effective earlier requirements and an uncleaned workspace at a real session boundary, separating actor and evaluator and scoring strict ISR and task-macro CSR.",
+        "tradeoff": "Scoring needs verifiable rubrics and an intact denominator. Local coverage is input separation and a scorer, not the official 75-task release, actor or judge; hand-built examples are not benchmark scores."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/analysis/4": {
+      "source_sha256": "bde0d6ac0244befacf44b79823a6cc48ddfaa14a5f48e3833de2a7ead63674e7",
+      "reviewed": true,
+      "fields": {
+        "title": "Historical-method fidelity and cross-framework retraining are distinct research-delivery evidence",
+        "body": "ARE-bench checks whether a handoff preserves earlier decisions and workspace materials. Strict ISR prevents a high item average from masking incomplete delivery; CSR remains task-macro. XStack checks clean full-scale cross-framework reruns, provenance and weight loading. Both withhold private grading targets from actors, but denominators, resources and pass criteria differ. A local ARE scorer is not official task integration, and an XStack source review is not a completed training migration."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/question/history-checklist-versus-clean-retraining": {
+      "source_sha256": "f3b700a7f44432ab27574d588e0cfbf28be2f41a835a1f66647842453b6c606f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can resumed training and mostly passed checklist items still fail both an ARE-style handoff and an XStack-style migration?",
+        "answer": "ARE's strict ISR requires all effective historical and material conditions to pass; resumed execution cannot offset an incorrect change to the original loss. XStack additionally needs independent full retraining, anti-cheating checks and loading in the original framework. Partial checks or one successful execution cover neither complete evidence set.",
+        "example": "Teaching example: deleting a matching loss may restore logs and checkpoints while violating the historical method and failing to establish faithful cross-framework reproduction."
+      }
+    },
+    "dive/agent-research/evaluation-and-reliability/update/2026-11-11/3": {
+      "source_sha256": "e2b4aacc364f57aa9a1f7ae25f41d56fd8dc5a377775a6f5e28f8b47ee2cc1cd",
+      "reviewed": true,
+      "fields": {
+        "summary": "Add ARE-bench with real session/workspace context, private-rubric isolation, strict ISR and task-macro CSR, separate from XStack independent retraining evidence. Only a CPU scoring interface is delivered; no official task package or frontier-model long-task matrix was run."
+      }
+    }
+  }
+}

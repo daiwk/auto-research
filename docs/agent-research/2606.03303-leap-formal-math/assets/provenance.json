@@ -1,0 +1,20 @@
+{
+  "asset": "paper-figure-01.png",
+  "asset_sha256": "b08650cece5ac045623befe0309af1c747cf07679fbd51a78743ada1ad88b1a2",
+  "source_pdf_url": "https://arxiv.org/pdf/2606.03303v3",
+  "source_pdf_sha256": "ed2dc9f08c5c32904f33dea45cefcbec97ade70a95cdf969e157ecd5108b6e1f",
+  "source_html_sha256": "537176f9a8b1b79b66376ae91a4708c855228e5545ae530b1f8bbf69e05f26ea",
+  "page": 4,
+  "figure": "Figure 1",
+  "crop_pdf_points": [
+    60,
+    90,
+    535,
+    310
+  ],
+  "render_scale": 2.5,
+  "method": "PyMuPDF PDF crop preserving the complete caption; no redraw. SVG draft discarded after visual fidelity check.",
+  "visual_review": "已目视核对AND–OR DAG、direct formalization、blueprint generation、Lean/compiler/reviewer与完整caption；替换出现黑色背景的SVG草稿。",
+  "copyright": "Copyright belongs to the original authors.",
+  "reviewed_on": "2026-11-15"
+}

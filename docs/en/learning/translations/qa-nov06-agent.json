@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:envopt/optimize-representation-not-model": {
+      "source_sha256": "47bbd0e361d26370f75ccd2449e10881e90e160e8db959d488c50883b353e7c8",
+      "reviewed": true,
+      "fields": {
+        "question": "What does EnvOpt optimize when the underlying information I is fixed?",
+        "answer": "It optimizes representation and access while keeping the target model and harness fixed. Indexing the same scattered definitions changes the effort needed to explore them, not the task or its answer.",
+        "example": "Teaching example: table definitions remain in their original files, while a SQLite catalog maps each table to its path so the agent need not scan every file."
+      }
+    },
+    "qa/agent-research:envopt/train-proxy-validation-rollback": {
+      "source_sha256": "fa4498a1d674185e93678ab4f83dea12e99094ec2d72d54cc0c91b9236ac8c2e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can an edit judged cheaper by the training proxy still be rolled back?",
+        "answer": "The inner loop checks strict cost reduction and proxy preservation on the same shard. Held-out validation independently compares aggregate cost and accuracy to the previous step; higher cost or a drop beyond tolerance stops the loop and retains the prior version.",
+        "example": "Teaching example: an index lowers training cost from 10 to 7, but validation accuracy drops from 0.875 to 0.625 with tolerance 0.125. Roll back."
+      }
+    },
+    "qa/agent-research:envopt/environment-versus-harness": {
+      "source_sha256": "5bd3ca9f529113b313f6f65a84b17227b58d54819d65f17fb812067c515992c6",
+      "reviewed": true,
+      "fields": {
+        "question": "Is EnvOpt the same kind of search as Meta-Harness?",
+        "answer": "Both target cost or success, but EnvOpt transfers a reusable environment representation while holding the model and harness fixed. Meta-Harness searches the process controlling agent execution. The interventions can be combined, but their effects should not be conflated.",
+        "example": "Teaching example: a prebuilt file index changes data organization; changing when to retry a tool call changes harness control."
+      }
+    },
+    "qa/agent-research:envopt/replay-no-verifier-access": {
+      "source_sha256": "3bbfdb970944865698dd83abfaa9354837257aa6dd8d8a200d52883eb30ab8fe",
+      "reviewed": true,
+      "fields": {
+        "question": "How does the offline replay avoid treating validation answers as training policy inputs?",
+        "answer": "The inner function sees only candidate cost, a proxy boolean, and environment and harness identifiers. Host validation aggregates are reserved for outer-loop stopping, with disjoint task IDs. The interface is not a sandbox and cannot authenticate caller-supplied records.",
+        "example": "Teaching example: validation bound to indexed version A is rejected if training selected B. An overlapping training and validation ID is also rejected."
+      }
+    },
+    "qa/agent-research:xstack/real-migration-contract": {
+      "source_sha256": "09a4d90d215c12ea5ec26507210236bf99fa2f24fcdd6cb39642dfb8d49f6969",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is starting the program insufficient to pass an XStack migration?",
+        "answer": "A fresh TPU must rerun the full source recipe and reach the target. Judges also check run provenance and cheating, and the exported weights must load into the original PyTorch model. Startup is only a weak prerequisite.",
+        "example": "Teaching example: a JAX script exits normally after running a small tutorial dataset. That is not a successful full-scale migration."
+      }
+    },
+    "qa/agent-research:xstack/frozen-phase-two": {
+      "source_sha256": "2efcdc1b7d9b0d8d83c2f98e3d85bebb049bd560f1c9cb134c923ee2d4db63b4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does revealing the main recipe in phase two not give away the answer?",
+        "answer": "The recipe identifies the experiment but withholds the numeric target. Only the entry point may change; the rest of the migration is frozen. Rewriting frozen code from the entry point violates the control.",
+        "example": "Teaching example: phase one chose the wrong audio dataset. Phase two may point the entry point at the specified recipe, but cannot change model source or hard-code the target."
+      }
+    },
+    "qa/agent-research:xstack/gpu-preliminary-versus-tpu": {
+      "source_sha256": "32e69b9e4cfd6124f38427f8083570a7394284f5dfbbee56dcf1378f6a6183e0",
+      "reviewed": true,
+      "fields": {
+        "question": "Can the preliminary single-A100 experiment substitute for the main TPU matrix?",
+        "answer": "No. The preliminary experiment covers twelve smaller repositories and checks forward, gradient and checkpoint parity. The main matrix tests twenty repositories and seven agents at full scale on actual TPUs. Their pass rates are different measurements.",
+        "example": "Teaching example: matching forward logits on a small example does not establish that a full training job on a new TPU reaches its published target."
+      }
+    },
+    "qa/agent-research:xstack/grader-outside-agent-sandbox": {
+      "source_sha256": "9b3d1dfaf8997c56068e4d56a13965641b57380a21e4b9fe12811c1b315e6c59",
+      "reviewed": true,
+      "fields": {
+        "question": "Should public criteria.json be put in the evaluated agent's workspace to ease debugging?",
+        "answer": "Not as an input to the evaluated agent. Pin the source commit and isolate grading targets, code and historical results. A host independently reruns in a clean environment and records provenance; otherwise reaching the target cannot distinguish migration from reading the answer.",
+        "example": "Teaching example: the grader reads the rubric, but the migration agent sees only the source repository and permitted recipe. They must not share the target file."
+      }
+    }
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-10",
+  "requested_window": {
+    "from": "2026-11-09",
+    "through": "2026-11-09",
+    "timezone": "Asia/Shanghai"
+  },
+  "read_scope": "官方 Atom 尾段的三个高信号来源，查验固定版正文方法、部署/实验和规模。未通读全文；没有启动复现实验。",
+  "counts": {
+    "fixed_primary_source_reviews": 3,
+    "high_cost_not_reproduced": 3,
+    "industrial_gate_passed": 2
+  },
+  "reviews": [
+    {
+      "id": "2611.12180",
+      "title": "TS-GEAR: Taobao Shangou GEnerative Ad Retrieval",
+      "published": "2026-11-09T10:30:44Z",
+      "revision": 1,
+      "track": "recommendation",
+      "organization": "Alibaba Group",
+      "priority": "P1",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "reason": "Geo-Semantic ID 把地域可达性约束放到生成前缀；Query-Geo Target Attention 聚合行为，GMPO 用去重的组收益和 leave-one-out 边际优势。§4.3/Table 5 在淘宝闪购主搜广告链路进行 7 天、20% 流量 A/B，广告展示 +3.8%、广告效率 +0.4%、广告收入 +4.2%（均 p<0.01）；原文明示全量生产，每日处理超过 1.5 亿次搜索。",
+      "production_gate_passed": true,
+      "production_evidence_type": "quantified_production_ab_and_explicit_full_deployment",
+      "source_url": "https://arxiv.org/html/2611.12180v1",
+      "source_sha256": "ff098322e7cf0ee0c3f4d3174b31533c7ef5afc1342351540fecf5952634a7f5",
+      "source_body_bytes": 238305,
+      "locations": [
+        "https://arxiv.org/html/2611.12180v1#S3.SS5",
+        "https://arxiv.org/html/2611.12180v1#S4.SS1.SSS1",
+        "https://arxiv.org/html/2611.12180v1#S4.SS2.SSS4",
+        "https://arxiv.org/html/2611.12180v1#S4.SS3"
+      ],
+      "review_level": "abstract_and_bounded_original_scope_evidence",
+      "abstract_review_completed": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented_by_review",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2611.12180v1",
+        "basis": "固定版本原文 S3.SS5, S4.SS1.SSS1, S4.SS2.SSS4, S4.SS3 所列模型、数据和实验配置；未做本地耗时或报价测量。",
+        "scale": "TS-Delivery 含约 1 亿用户、480 万商家、5 亿交互的私有搜索广告日志；上线的 0.1B 模型接入 TensorRT/A10 和现有广告召回、排序、竞价。公共 Foursquare 没有实际搜索词或实时用户坐标，只能代理评测，不复现原业务实验。",
+        "cost_type": "production_data_or_full_experiment_budget_not_local_measurement",
+        "available_resource": "本地 Mac 或单张 NVIDIA A100/A30"
+      }
+    },
+    {
+      "id": "2611.12296",
+      "title": "RecoGEM: A Serving System for Production-Scale Generative Recommendation",
+      "published": "2026-11-09T12:20:07Z",
+      "revision": 1,
+      "track": "recommendation",
+      "organization": "The University of Hong Kong / Kuaishou Technology / Peking University / Renmin University of China",
+      "priority": "P1",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "reason": "快手与高校共同研发的生成式推荐 serving 把引擎构建和在线运行解耦，按 SID 步规划执行，并在版本切换前离线验证新引擎。§5 报告已经部署超过 9 个月并服务 4 亿以上 DAU；§5.6/Figure 20 是实际生产流量，历史峰值 6 万 QPS、P99 <80 ms、平均 MFU 55.3%，旧更新路径的 P99 尖峰比当前路径大 2–3 倍。此处收录直接测得的线上系统运行证据，不将历史对照称为随机 A/B、产品指标因果提升或全量比例。",
+      "production_gate_passed": true,
+      "production_evidence_type": "quantified_live_serving_and_historical_operational_comparison_not_randomized_ab",
+      "source_url": "https://arxiv.org/html/2611.12296v1",
+      "source_sha256": "806acffb62a0e3b8a80679ab778c2be7b547cd420c1cc2f972be6ac00203fe61",
+      "source_body_bytes": 252391,
+      "locations": [
+        "https://arxiv.org/html/2611.12296v1#S3",
+        "https://arxiv.org/html/2611.12296v1#S4.SS3",
+        "https://arxiv.org/html/2611.12296v1#S5.SS1",
+        "https://arxiv.org/html/2611.12296v1#S5.SS6"
+      ],
+      "review_level": "abstract_and_bounded_original_scope_evidence",
+      "abstract_review_completed": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented_by_review",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2611.12296v1",
+        "basis": "固定版本原文 S3, S4.SS3, S5.SS1, S5.SS6 所列模型、数据和实验配置；未做本地耗时或报价测量。",
+        "scale": "原文包含快手生产部署的 4B OneRec-v2、0.2B OneModel、TensorRT/CUDA 内核、服务集群和生产流量记录；完整的负载、热更新和 SLA 对照依赖生产引擎与流量，不能用单张 A100/A30 代替。",
+        "cost_type": "production_data_or_full_experiment_budget_not_local_measurement",
+        "available_resource": "本地 Mac 或单张 NVIDIA A100/A30"
+      }
+    },
+    {
+      "id": "2611.12311",
+      "title": "MNN-Pocket-0.3B Technical Report",
+      "published": "2026-11-09T12:33:26Z",
+      "revision": 1,
+      "track": "foundation-model",
+      "organization": "Taobao and Tmall Group of Alibaba",
+      "priority": "P1",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "reason": "MNN Team 把 0.3B 稠密模型、紧凑双语词表、分域多教师 OPD、量化感知自蒸馏和端侧算子一并设计。作者开放权重及 MNN 推理引擎，§5.2 报告 iPad Pro M5 上的 INT4 测量；173 MB 部署包说明小规模公开 checkpoint 运行可单独接入，不代表已复现原训练或原设备速度。",
+      "source_url": "https://arxiv.org/html/2611.12311v1",
+      "source_sha256": "aee1c04b7ad63793eae1d785768796b0d704752a6c8c8a726b142b2881458e16",
+      "source_body_bytes": 407618,
+      "locations": [
+        "https://arxiv.org/html/2611.12311v1#S3.SS3",
+        "https://arxiv.org/html/2611.12311v1#S4.SS2",
+        "https://arxiv.org/html/2611.12311v1#S5.SS2",
+        "https://arxiv.org/html/2611.12311v1#S6.SS2"
+      ],
+      "author_linked_checkpoint_url": "https://huggingface.co/taobao-mnn/MNN-Pocket-0.3B",
+      "author_linked_inference_engine_url": "https://github.com/alibaba/mnn",
+      "review_level": "abstract_and_bounded_original_scope_evidence",
+      "abstract_review_completed": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented_by_review",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2611.12311v1",
+        "basis": "固定版本原文 S3.SS3, S4.SS2, S5.SS2, S6.SS2 所列模型、数据和实验配置；未做本地耗时或报价测量。",
+        "scale": "§3.3 的四阶段预训练约 4.1 万亿 token；§4.2 还要运行多域教师及量化感知训练。冻结的 0.3B 发布权重不降低重训原始数据和教师路径的成本。",
+        "cost_type": "full_experiment_budget_not_local_measurement",
+        "available_resource": "本地 Mac 或单张 NVIDIA A100/A30"
+      }
+    }
+  ]
+}

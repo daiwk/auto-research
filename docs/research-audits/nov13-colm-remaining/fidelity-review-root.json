@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-13",
+  "scope": "Integrated review of the exact 24 identities, 23 bounded components and source-bound evidence; root reads plus three bounded cross-reviews, not a capability certificate",
+  "accepted_execution_commit": "1b7fe8699efd48e6421b01f6df756d6e4086eb52",
+  "cross_review_artifacts": ["fidelity-review-evaluation.json", "fidelity-review-agent.json"],
+  "foundation_cross_review": "Foundation owner independently read the seven Agent/collaboration modules and their defining equations; this review was reported to root and does not replace actual CUDA evidence",
+  "resolved_findings": [
+    {"finding": "Blocksworld goal-prefix matching accepted covered singleton goals and a held obstacle", "resolution": "Require an exact clear goal tower and empty hand; independently verify one/two covering blocks and held-obstacle completion with BFS", "old_evidence": "superseded-pre-planning-fix.json", "new_execution": ["raw-cpu.json", "raw-cuda.json"], "automatic_retry": false},
+    {"finding": "Frozen raw validator did not reject some contradictory labels or an existing per-seed device field", "resolution": "Separate unfrozen admission gate rejects conflicting device, diagnostic, pretrained-call, Evolve, retry and full-experiment claims before receipt materialization; mutation tests added", "actual_raw_conflict_found": false, "gpu_rerun_required_for_admission_only_change": false},
+    {"finding": "Standalone collection of two new tests depended on another test adding scripts to sys.path", "resolution": "Make script-path setup explicit; isolated test collection and execution pass"},
+    {"finding": "Five authored deep-dive comparisons referenced papers outside their declared topic", "resolution": "Reread suitable same-topic sources, rewrite both languages and synchronize exact source/unit fingerprints; retain the existing strict validator"}
+  ],
+  "evidence_boundaries": {
+    "l0_interfaces": ["policybank", "avmeme-exam", "mmeb-v3"],
+    "l1_components": 20,
+    "formal_comparisons": 0,
+    "full_capability_reproductions": 0,
+    "evolve_integrations": 0,
+    "gold_role": "Completed-output evaluators and training-loss targets only; no evaluated actor receives scoring keys through the provided interfaces. Typed boundaries are not a security sandbox",
+    "cost_policy": "No checkpoint/media download, commercial API or full campaign was launched. Twenty-two full campaigns are high-cost not reproduced; one private-training dependency is separately closed"
+  },
+  "source_inventory_review": {
+    "changed_path": "src/auto_research/agent_research/mt_pingeval.py",
+    "expression": "self.turns += 1",
+    "role": "Isotoken message-budget bookkeeping, not tool execution or task-success evidence",
+    "semantic_pass_inferred_from_ast": false
+  },
+  "cuda_evidence": {"components": 7, "seeds": [42, 43, 44], "accelerator": "NVIDIA A100-SXM4-80GB", "count": 1, "evidence": "raw-cuda.json", "full_model_training": false},
+  "historical_reconciliation": {"captured_identities": 28, "catalogued": 27, "sourceful_exclusions": 1, "needs_review": 0, "source_exceptions_retained": 4, "review_watermark": "2026-11-09", "new_window_scan_claimed": false}
+}

@@ -1,0 +1,593 @@
+{
+  "schema_version": 1,
+  "checked_on": "2026-11-13",
+  "scope": "Bounded independent official-institution and related-work inventory for autonomous scientific research, automatic ML, and adjacent self-improving-agent infrastructure. The original 2026 window was explicitly expanded by the integrating agent to include classic 2025 anchors; this is not all-domain exhaustiveness.",
+  "baseline_check": "Canonicalmanifest+ledger+oldNov9selection/date-onlyrecords were read before new contributions. Absence is an inventory gap, not proof of why an earlier collector missed it.",
+  "review_watermark_advanced": false,
+  "all_sources_exhaustive": false,
+  "selected_extra_ids": [
+    "2506.15692",
+    "2509.21825",
+    "2506.13131",
+    "2509.06503",
+    "2608.19880"
+  ],
+  "selection_owner": "root",
+  "automatic_implementation_queue": false,
+  "records": [
+    {
+      "id": "2609.19644",
+      "title": "ScientistTwo: Pioneering the Human Knowledge Frontier with Autonomous AI",
+      "published": "2026-09-17T03:37:42Z",
+      "publication_date_precision": "second",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "affiliation_evidence": "Fixed-v1 byline: Jaehyun Nam, Jinsung Yoon, Yanzhou Pan, Rui Meng, Parthasarathy Ranganathan and Tomas Pfister, Google Cloud AI Research; Yubo Wang, University of Waterloo.",
+      "known_status": "not_in_canonical_manifest_or_prior_ledger_at_start_of_repair",
+      "prior_review_evidence": "No ID/title record in checked September scan summaries, canonical manifest, ledger, Nov9 selection register or three retained Nov9 CI groups. September19 summary claims Sep15-18 coverage but does not list this paper; the precise prior omission mechanism is not recoverable.",
+      "decision": "confirmed_historical_omission_root_owns_delivery",
+      "source_receipts": [
+        {
+          "url": "https://arxiv.org/abs/2609.19644v1",
+          "capture": ".cache/nov13-history-repair/priority/scientisttwo-abs.html",
+          "sha256": "5f6ad48691c8c03cb168f71c15b8ab41555bc760437875959f787af1c22b9281",
+          "bytes": 42821
+        },
+        {
+          "url": "https://arxiv.org/html/2609.19644v1",
+          "capture": ".cache/nov13-history-repair/priority/scientisttwo-v1.html",
+          "sha256": "23f93180ac10e5b4e1cbdf9f1e532aa80c33351b7968345752ec7c6d12925aa3",
+          "bytes": 458046
+        },
+        {
+          "url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "capture": ".cache/nov13-history-repair/priority/google-colm-2026.html",
+          "sha256": "6efaebb261379d338046e4b7a8f9912119a02d0ec6b1aa109d2f15669ee6112b",
+          "bytes": 197684
+        }
+      ],
+      "method_sections": [
+        "3",
+        "4.3"
+      ],
+      "method_summary": "Problem-driven seed ideation, executable idea refinement, dynamic peer review and meta-review keep empirical evidence coupled to a generated paper; these stages are not just text summarization.",
+      "cost_basis": "Section4.3 reports 33 NeurIPS2025 target problems, 2–3 days and USD3765 average per full research cycle, including tokens and virtual machines.",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "implementation_owner": "root",
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2506.15692",
+      "title": "MLE-STAR: Machine Learning Engineering Agent via Search and Targeted Refinement",
+      "published": "2025-05-27T18:11:25Z",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "affiliation_evidence": "Fixed-v1 PDF page1 explicitly assigns Jaehyun Nam to Google Cloud and KAIST, with a student-researcher-at-Google-Cloud note; Jinsung Yoon/Jiefeng Chen/Sercan Ö.Arık/Tomas Pfister are Google Cloud.",
+      "known_status": "no_canonical_manifest_or_ledger_id_at_repair_start",
+      "decision": "confirmed_related_classic_omission_selected_review_only",
+      "not_a_new_2026_first_publication": true,
+      "source_receipts": [
+        {
+          "url": "https://arxiv.org/abs/2506.15692",
+          "capture": ".cache/nov13-history-repair/priority/mle-star-abs.html",
+          "sha256": "3f0d5ef79d9ba56809b049a1dc4f4daef675ad5840ba6eacec98e7b6fb3e3101",
+          "bytes": 42165
+        },
+        {
+          "url": "https://arxiv.org/html/2506.15692v1",
+          "capture": ".cache/nov13-history-repair/priority/mle-star-v1.html",
+          "sha256": "40e08401c52b9334def0a24ed0bf3789a4e90a6194adfed3b3583e627ef304b5",
+          "bytes": 502349
+        },
+        {
+          "url": "https://arxiv.org/pdf/2506.15692v1",
+          "capture": ".cache/nov13-history-repair/priority/mle-star-v1.pdf",
+          "sha256": "e75ac96750c805012553358cc21ebbde570f05a26d902f461597a13221229aea",
+          "bytes": 2914150
+        },
+        {
+          "url": "https://research.google/pubs/mle-star-machine-learning-engineering-agent-via-search-and-targeted-refinement/",
+          "capture": ".cache/nov13-history-repair/priority/mle-star-google.html",
+          "sha256": "9ceb8c15345a429c3dabbb59ce640e852ba4ed7d070d94b0ac120639b635fa4a",
+          "bytes": 144585
+        }
+      ],
+      "date_evidence": "Abs submission history, citation_date and fixed-v1 PDF page1 all say27May2025; the identifier month is not used as a date.",
+      "method_sections": [
+        "3.1-3.4",
+        "4.1",
+        "AppendixB",
+        "AppendixF"
+      ],
+      "method_summary": "Search retrieves task-specific models; candidates are trained/scored on validation and merged only if improved. An ablation selects a high-impact not-yet-refined code block; inner plan/refinement evaluations update the best replacement and outer loops repeat. Ensemble search and leakage/data-usage checks are distinct additional agents.",
+      "cost_basis": "AppendixF:96vCPU/360GB RAM/eight16GBV100 GPUs;14.1hours average per final solution over22competitions×3trials;24h task cap. This is a published configuration, not a local measurement.",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "code_url": "https://github.com/jaehyun513/MLE-STAR",
+      "code_status": "The paper-linked author repository exposes example_final_solutions and example_intermediate_outputs; these are generated artifacts, not a complete controller. The current root README contains only a title. Google's official blog links an ADK sample, but its exact raw README returned 404 in this bounded check; current complete source availability is not overclaimed.",
+      "code_receipts": [
+        {
+          "url": "https://raw.githubusercontent.com/jaehyun513/MLE-STAR/main/README.md",
+          "capture": ".cache/nov13-history-repair/priority/mle-star-readme.md",
+          "sha256": "4d3bb5da7b36f60a2df8ec323f314c6784d2bdf2762477528d334c86d053b6be",
+          "bytes": 10
+        },
+        {
+          "url": "https://research.google/blog/mle-star-a-state-of-the-art-machine-learning-engineering-agents/",
+          "capture": ".cache/nov13-history-repair/priority/mle-star-blog.html",
+          "sha256": "f53773576a503ffe1b64f5d64f27ca7e3a29d2b6a3dea45a9c8a783160165fa8",
+          "bytes": 188382
+        },
+        {
+          "url": "https://github.com/jaehyun513/MLE-STAR",
+          "capture": ".cache/nov13-history-repair/priority/mle-star-repo.html",
+          "sha256": "fc12de6ae501d7cd10d42515b02f9708511345df223b67b3383309b89722cfcb",
+          "bytes": 185401
+        }
+      ],
+      "implementation_selected": false,
+      "review_only_delivery_owner": "priority",
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2509.21825",
+      "title": "DS-STAR: Data Science Agent for Solving Diverse Tasks across Heterogeneous Formats and Open-Ended Queries",
+      "title_aliases": [
+        "DS-STAR: Data Science Agent via Iterative Planning and Verification"
+      ],
+      "published": "2025-09-26T03:38:12Z",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "affiliation_evidence": "Fixed-v1 PDF page 1 assigns first author Jaehyun Nam to Google Cloud and KAIST and notes a Google Cloud student-research placement. Google Cloud coauthors and KAIST's Jinwoo Shin are explicitly labeled. This resolves an affiliation omitted by the HTML conversion.",
+      "known_status": "no_canonical_manifest_or_ledger_id_at_repair_start",
+      "decision": "confirmed_related_classic_omission_selected_for_root_component_assessment",
+      "not_a_new_2026_first_publication": true,
+      "source_receipts": [
+        {
+          "url": "https://arxiv.org/abs/2509.21825",
+          "capture": ".cache/nov13-history-repair/priority/ds-star-abs.html",
+          "sha256": "15540b0a8d5dbdd3bb17f1adca028d285793f378262b08dd0c7da3a204e44beb",
+          "bytes": 41580
+        },
+        {
+          "url": "https://arxiv.org/html/2509.21825v1",
+          "capture": ".cache/nov13-history-repair/priority/ds-star-v1.html",
+          "sha256": "22aa4bdc844a28494d183dc3e9a95f9ca6f48cf31f6d9c07cee03bf8ffa77ade",
+          "bytes": 1534291
+        },
+        {
+          "url": "https://research.google/pubs/ds-star-data-science-agent-via-iterative-planning-and-verification/",
+          "capture": ".cache/nov13-history-repair/priority/ds-star-google.html",
+          "sha256": "e69a518f6c6c8b17d7070b47b0c7ef224e33e5fe387b9b629090fefc112ec59b",
+          "bytes": 143924
+        },
+        {
+          "url": "https://arxiv.org/pdf/2509.21825v1",
+          "capture": ".cache/nov13-history-repair/priority/ds-star-v1.pdf",
+          "sha256": "69da97270382fe9914e11d2f0455fd76673bf7ae18d2b7fe4b21bbaa46c667b4",
+          "bytes": 1949807
+        }
+      ],
+      "method_sections": [
+        "3.1",
+        "3.2",
+        "AppendixA",
+        "AppendixB",
+        "AppendixC"
+      ],
+      "method_summary": "An analyzer writes/executes scripts to describe heterogeneous files. The verifier judges plan sufficiency from query,plan,code and execution output. If insufficient, router either appends or truncates at a mistaken step before replanning; semantic judging is an external model responsibility, not a deterministic controller capability.",
+      "cost_basis": "AppendixC measures ten development tasks:12.7model calls,154669input tokens and USD0.23 average per task using Gemini2.5Pro. AppendixB lists450DABStep,104KramaBench and500DA-Code tasks; main configuration allows20rounds and adds baseline/ablation/API work. The per-task number alone is not classified as an expensive GPU training run; total full-suite time is not disclosed.",
+      "full_experiment_status": "not_run_in_read_only_review",
+      "cost_limitation": "A deterministic controller is affordable; a faithful semantic agent and complete hidden-label/API benchmark need separate bounded implementation/cost disposition, not an invented local timing.",
+      "code_url": "https://github.com/google-research/ds-star",
+      "code_status": "Current official Google Research repository is available at commit 6c05b01e30f01489af12708e99eda932e44d10ba. The checked README now uses the revised title and includes DSSTAR+; that later implementation is not silently substituted for the fixed-v1 algorithm. Independent IBM/OpenDsStar and JulesLscx/DS-Star remain distinct community implementations.",
+      "low_cost_boundary": "Exact append/truncate/replan execution state with external analyzer/coder/verifier/router ports; no gold labels or hidden benchmark answers exposed to actors.",
+      "automatic_implementation_queue": false,
+      "code_receipts": [
+        {
+          "url": "https://github.com/google-research/ds-star/blob/6c05b01e30f01489af12708e99eda932e44d10ba/README.md",
+          "capture": ".cache/nov13-history-repair/ds-star/upstream-readme.md",
+          "sha256": "943c607de3932382afc19675c3744209be3d3246fb8b12ba45638d727c5f3f8e",
+          "bytes": 3705,
+          "head_provenance": "Read-only repository HEAD independently checked by scope_b; README bytes rehashed by this reviewer."
+        }
+      ]
+    },
+    {
+      "id": "2506.13131",
+      "title": "AlphaEvolve: A coding agent for scientific and algorithmic discovery",
+      "published": "2025-06-16T06:37:18Z",
+      "verified_priority_organizations": [
+        "Google DeepMind"
+      ],
+      "affiliation_evidence": "Fixed-v1 PDF page1 assigns the author team to Google DeepMind.",
+      "known_status": "no_canonical_manifest_or_ledger_id_at_repair_start",
+      "decision": "confirmed_related_classic_omission_selected_review_only",
+      "not_a_new_2026_first_publication": true,
+      "source_receipts": [
+        {
+          "url": "https://arxiv.org/abs/2506.13131",
+          "capture": ".cache/nov13-history-repair/priority/alphaevolve-abs.html",
+          "sha256": "7a0d9acc7002b1960fea119a059a925a6c20d27edd8233777aa0179cb5e8f451",
+          "bytes": 45620
+        },
+        {
+          "url": "https://arxiv.org/html/2506.13131v1",
+          "capture": ".cache/nov13-history-repair/priority/alphaevolve-v1.html",
+          "sha256": "0a5a44d90b13ed1e6aeb1b4b4f1f1e7dcfc819ad2a2812ff5d1fb9ed539f5489",
+          "bytes": 815670
+        },
+        {
+          "url": "https://arxiv.org/pdf/2506.13131v1",
+          "capture": ".cache/nov13-history-repair/priority/alphaevolve-v1.pdf",
+          "sha256": "f092c8cbd65da89951ee6496374da9a54963f9035758c25ac6e4625f506df9ad",
+          "bytes": 3525764
+        },
+        {
+          "url": "https://deepmind.google/blog/alphaevolve-impact/",
+          "capture": ".cache/nov13-history-repair/priority/alphaevolve-impact.html",
+          "sha256": "b9c55cc4825dbede066e4a6a5f52ccf01afa453bd6a460b60ec54088106af539",
+          "bytes": 162303
+        }
+      ],
+      "method_sections": [
+        "2.1-2.6",
+        "3.1-3.3"
+      ],
+      "method_summary": "A task-specific evaluator, sampled code/context, Gemini2.0Flash/Pro proposals, evaluation cascades and multi-score evolutionary database interact in an asynchronous distributed pipeline. The database is inspired by MAP-Elites and islands; the paper does not fully specify a unique replacement implementation.",
+      "cost_basis": "Section2.4 permits roughly100compute-hours for evaluation of a new candidate and distributes evaluations over a cluster; sections3.1-3.3 cover many mathematical targets and production-specificGoogle compute kernels/circuits. Single-A100/A30 capacity cannot reproduce the disclosed complete pipeline/engineering matrix cheaply.",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "code_url": "https://github.com/google-deepmind/alphaevolve_results",
+      "code_status": "Official repository contains discovered constructions and correctness-checking notebook only; README explicitly excludes code to runAlphaEvolve. OpenEvolve or other community controllers are not the original system.",
+      "code_receipts": [
+        {
+          "url": "https://raw.githubusercontent.com/google-deepmind/alphaevolve_results/master/README.md",
+          "capture": ".cache/nov13-history-repair/priority/alphaevolve-results-readme.md",
+          "sha256": "6705252d42fb27af57cbe604421f7d0cca70058bc71067f9b0aed4c097800f5a",
+          "bytes": 2904
+        }
+      ],
+      "implementation_selected": false,
+      "review_only_delivery_owner": "priority",
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2509.06503",
+      "title": "An AI system to help scientists write expert-level empirical software",
+      "title_aliases": [
+        "Empirical Research Assistance (ERA)"
+      ],
+      "published": "2025-09-08T10:08:36Z",
+      "journal_publication_date": "2026-05-19",
+      "verified_priority_organizations": [
+        "Google",
+        "Google DeepMind"
+      ],
+      "affiliation_evidence": "Fixed-v1 byline explicitly includes first-authorEserAygün/GoogleDeepMind and numerousGoogleResearch authors includingMichaelP.Brenner; some authors additionally listMIT/Harvard/McGill/Caltech.",
+      "known_status": "no_canonical_manifest_or_ledger_id_at_repair_start",
+      "decision": "confirmed_related_classic_omission_selected_for_root_component_assessment",
+      "not_a_new_2026_first_publication": true,
+      "source_receipts": [
+        {
+          "url": "https://arxiv.org/abs/2509.06503",
+          "capture": ".cache/nov13-history-repair/priority/era-abs.html",
+          "sha256": "e1d3d146d61b9d409e4de070750277454a8003759ce734e3ae4870e50787e9dc",
+          "bytes": 49926
+        },
+        {
+          "url": "https://arxiv.org/html/2509.06503v1",
+          "capture": ".cache/nov13-history-repair/priority/era-v1.html",
+          "sha256": "8baaa8faf621add370a76acaddef8e85456b497714be15c839dcbcb492069f83",
+          "bytes": 477696
+        },
+        {
+          "url": "https://research.google/pubs/an-ai-system-to-help-scientists-write-expert-level-empirical-software/",
+          "capture": ".cache/nov13-history-repair/priority/era-google.html",
+          "sha256": "7e6905027101deca8bba283bc7f05aa0a3c3f095ac77ec6ea7cb1f8cbe52858d",
+          "bytes": 162344
+        }
+      ],
+      "method_sections": [
+        "Methods:CodeMutationSystem/Algorithm1",
+        "Methods:scRNA-seqbatchintegration",
+        "Methods:COVID19prediction",
+        "Methods:GIFT-Eval"
+      ],
+      "method_summary": "Flat selection across all executed candidate nodes uses rank-normalized task score plus uniform-priorPUCT exploration, with ancestor visit backpropagation. Generated code is separately executed in a sandbox against the task metric. Research-idea injection and recombination are additional stages, not provided by a UCB scalar alone.",
+      "cost_basis": "500-node scRNA-seq searches take about7hours on original infrastructure;COVID-19 runs use2000nodes;unifiedGIFT-Eval uses1000+nodes and another500-node refinement. These are published counts/times, not a local probe.",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "code_url": "https://github.com/google-research/era",
+      "code_status": "Current official repository has a genericFUTS module and API-backed end-to-end example, plus generated results. Fixed-v1 CodeAvailability described generated solutions/tree views under google-research/score; publication, later rename and current source release are distinguished.",
+      "code_receipts": [
+        {
+          "url": "https://raw.githubusercontent.com/google-research/era/main/README.md",
+          "capture": ".cache/nov13-history-repair/priority/era-readme.md",
+          "sha256": "96ecf5eafe119c0d9f9d765fb3f7dfc2bb2c8010764bf2f829596870f79c552b",
+          "bytes": 4520
+        },
+        {
+          "url": "https://raw.githubusercontent.com/google-research/era/main/implementation/futs.py",
+          "capture": ".cache/nov13-history-repair/priority/era-futs.py",
+          "sha256": "5cc827f3d609105c1bd7b1103e4c33e393043c6db882bd1f44b9e4ec4301b814",
+          "bytes": 4483
+        }
+      ],
+      "low_cost_boundary": "CPUAlgorithm1 over explicit external generate/execute functions. Current upstream singletonrank0.5/rootvisit0 differs from paperAlgorithm1 singletonrank1/rootvisit1, so select and document a fixed semantic target rather than silently mixing versions.",
+      "automatic_implementation_queue": false
+    },
+    {
+      "id": "2608.19880",
+      "title": "EnvHarness: Awakening Static Worlds for Agent Learning",
+      "published": "2026-08-20T10:42:06Z",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "affiliation_evidence": "Fixed-v1 PDF page 1 assigns first author Chengsong Huang to Washington University in St. Louis; a footnote states work during a Google Cloud AI Research internship. Zifeng Wang and many coauthors are explicitly Google Cloud AI Research, with Google Cloud and UNC collaborators. The internship is not invented as a dual first-author affiliation.",
+      "known_status": "no_canonical_manifest_or_ledger_id_at_repair_start",
+      "decision": "confirmed_historical_omission_selected_for_root_component_assessment",
+      "source_receipts": [
+        {
+          "url": "https://arxiv.org/abs/2608.19880",
+          "capture": ".cache/nov13-history-repair/priority/envharness-abs.html",
+          "sha256": "5355713de2ee034efa1171712e4dd4ef5893707583a4072235a58be7f4a6dfd6",
+          "bytes": 44094
+        },
+        {
+          "url": "https://arxiv.org/html/2608.19880v1",
+          "capture": ".cache/nov13-history-repair/priority/envharness-v1.html",
+          "sha256": "29d05452aeb3267a73af16d8d1b86f665ef4dc72acd5ed2b5c7fe521daf9d398",
+          "bytes": 828890
+        },
+        {
+          "url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "capture": ".cache/nov13-history-repair/priority/google-colm-2026.html",
+          "sha256": "6efaebb261379d338046e4b7a8f9912119a02d0ec6b1aa109d2f15669ee6112b",
+          "bytes": 197684
+        },
+        {
+          "url": "https://arxiv.org/pdf/2608.19880v1",
+          "capture": ".cache/nov13-history-repair/priority/envharness-v1.pdf",
+          "sha256": "3859eed3337e0324ef94f38ca21f69cc6daa15b5a78497680370959223d51fd4",
+          "bytes": 2510495
+        }
+      ],
+      "method_sections": [
+        "2.1-2.2",
+        "3",
+        "4.1",
+        "AppendixC",
+        "AppendixRLconfiguration"
+      ],
+      "method_summary": "Stage/Contract/Chain wrappers alter reachable initial states, action/observation/transition contracts or multi-environment composition while retaining trusted task verifiers. EnvRigger diagnoses policy trajectories, synthesizes components and validates fresh rollouts; Chain is excluded from the automated main pipeline and tested separately.",
+      "cost_basis": "Main evaluation spansALFWorld/WebArena/SWE-benchVerified/OfficeQA and programmatic tasks withGemini3.1FlashLite/3.5Flash;RLconfigurationuses8H100 GPUs,FSDP,checkpointing and multiple models. CompleteAPI/benchmark/RLmatrix is not affordable on oneA100/A30.",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "code_url": "https://github.com/google-research/envharness",
+      "code_status": "Official author repository README and source naming map are available; historicalSetups/Rules/Link map toStage/Contract/Chain. The repository was read, not installed or run.",
+      "code_receipts": [
+        {
+          "url": "https://raw.githubusercontent.com/google-research/envharness/main/README.md",
+          "capture": ".cache/nov13-history-repair/priority/envharness-readme.md",
+          "sha256": "4156d91f2924e56dcd3d2b2e8bfa905c0ceaa1ff8434c8e8e50a716b43b9e14d",
+          "bytes": 22987
+        }
+      ],
+      "low_cost_boundary": "Typed reset/step wrapper composition with unchanged verifier ownership. Replayed setup actions do not consumeepisodebudget; serialchainlazyresetsB,cachesownverdicts,andreturnsconjunction. It cannot claimEnvRigger semantic synthesis orreal-agentgains.",
+      "automatic_implementation_queue": false,
+      "date_note": "The manuscript's top date says August21; the arXiv footer and abs submission history establish original v1 August20 10:42:06Z. Do not replace the submission datetime with the internal typesetting date."
+    },
+    {
+      "id": "2604.15505",
+      "title": "PolicyBank: Evolving Policy Understanding for LLM Agents",
+      "published": "2026-04-16T20:29:30Z",
+      "verified_priority_organizations": [
+        "Google"
+      ],
+      "affiliation_evidence": "Fixed-v1 original byline explicitly assignsJinsungYoon,LongT.Le,TomasPfister toGoogleCloud andSomeshJha toUniversityofWisconsin-Madison; theHTMLdoesnotattachfirst-authorJihyeChoi’s affiliation.",
+      "known_status": "no_canonical_manifest_or_ledger_id_at_repair_start",
+      "decision": "not_selected_current_focus_nonblocking_lead",
+      "source_receipts": [
+        {
+          "url": "https://arxiv.org/abs/2604.15505",
+          "capture": ".cache/nov13-history-repair/priority/policybank-abs.html",
+          "sha256": "f0bf56312eedcaad0db7655ca89b6e77533969cb1f678cf581f65487fc4977c0",
+          "bytes": 41646
+        },
+        {
+          "url": "https://arxiv.org/html/2604.15505v1",
+          "capture": ".cache/nov13-history-repair/priority/policybank-v1.html",
+          "sha256": "b361a7719a87ea88a59cdc06f73e3f37c306b32280d43b045d89ecf4ae74b870",
+          "bytes": 693490
+        },
+        {
+          "url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+          "capture": ".cache/nov13-history-repair/priority/google-colm-2026.html",
+          "sha256": "6efaebb261379d338046e4b7a8f9912119a02d0ec6b1aa109d2f15669ee6112b",
+          "bytes": 197684
+        }
+      ],
+      "method_review_completed": false,
+      "implementation_selected": false,
+      "reason": "A boundedidentity/scope read confirms an evolvingpolicy-memory paper, but the integrating agent locked five extra papers aroundScientistTwo. It is retainedasafuturelead, notadvertisedasanacceptedalgorithmreview, implementation, orhigh-costDONEdisposition.",
+      "code_url": null,
+      "code_status": "Noauthorimplementationlinkfoundinthecheckedfixed-v1source;benchmarkdependencylinksarenotauthorcode.",
+      "automatic_implementation_queue": false
+    }
+  ],
+  "already_catalogued": [
+    {
+      "id": "2605.26340",
+      "title": "ScientistOne: Towards Human-Level Autonomous Research via Chain-of-Evidence",
+      "canonical_key": "scientist-one",
+      "published": "2026-05-25T21:30:27Z",
+      "known_status": "catalogued_evaluation_protocol_interface",
+      "decision": "already_catalogued_not_new_omission"
+    },
+    {
+      "id": "2602.02660",
+      "title": "MARS: Modular Agent with Reflective Search for Automated AI Research",
+      "canonical_key": "mars-research",
+      "published": "2026-02-02T19:00:03Z",
+      "known_status": "catalogued_deferred_high_cost_review_done",
+      "decision": "already_catalogued_not_new_omission"
+    },
+    {
+      "id": "2604.05018",
+      "title": "PaperOrchestra: A Multi-Agent Framework for Automated AI Research Paper Writing",
+      "canonical_key": "paperorchestra",
+      "published": "2026-04-06T18:00:00Z",
+      "known_status": "catalogued_deferred_high_cost",
+      "decision": "already_catalogued_not_new_omission"
+    },
+    {
+      "id": "2511.17006",
+      "title": "Budget-Aware Tool Use Enables Effective Agent Scaling",
+      "canonical_key": "bats",
+      "published": "2025-11-21T07:18:55Z",
+      "known_status": "catalogued_component_only",
+      "decision": "already_catalogued_not_new_omission"
+    }
+  ],
+  "attribution_controls": [
+    {
+      "id": "2604.05550",
+      "title": "AutoSOTA: An End-to-End Automated Research System for State-of-the-Art AI Model Discovery",
+      "published": "2026-04-07T07:52:01Z",
+      "source_receipts": [
+        {
+          "url": "https://arxiv.org/abs/2604.05550",
+          "capture": ".cache/nov13-history-repair/priority/autosota-abs.html",
+          "sha256": "a14255ee5ade710da9b93b08b6f3caf9c20de9273b8aae2f3cc3d83d5c8dac50",
+          "bytes": 46370
+        },
+        {
+          "url": "https://arxiv.org/html/2604.05550v1",
+          "capture": ".cache/nov13-history-repair/priority/autosota-v1.html",
+          "sha256": "0b2bdd15883674e829590f96a24a1a255f6b24ab9a69b6f424fa0ee3deee4dbc",
+          "bytes": 384400
+        }
+      ],
+      "verified_priority_organizations": [],
+      "affiliation_evidence": "Original byline listsTsinghuaUniversity/BNRist,ZhongguancunAcademy,PekingUniversityandUSTC,notGoogle/Meta.",
+      "decision": "nonpriority_related_work_not_selected_in_this_bounded_priority_repair",
+      "method_review_completed": false
+    },
+    {
+      "id": "2404.07738",
+      "title": "ResearchAgent: Iterative Research Idea Generation over Scientific Literature with Large Language Models",
+      "published": "2024-04-11T13:36:29Z",
+      "source_receipts": [
+        {
+          "url": "https://arxiv.org/abs/2404.07738",
+          "capture": ".cache/nov13-history-repair/priority/researchagent-abs.html",
+          "sha256": "74cc4b6dbc7c85cf8c2142a51d34e4c73a1bacb1c94be8c124925f2cb0b86793",
+          "bytes": 43764
+        },
+        {
+          "url": "https://arxiv.org/html/2404.07738v1",
+          "capture": ".cache/nov13-history-repair/priority/researchagent-v1.html",
+          "sha256": "a0045db5215337a0ec45d63ef46c30e8b0d0405ddacd807cd8e00beaa7b8a0ae",
+          "bytes": 432117
+        }
+      ],
+      "verified_priority_organizations": [],
+      "affiliation_evidence": "Original byline explicitlynamesKAIST,MicrosoftResearchandDeepAuto.ai,notMeta. A genericResearchAgentnameisnotMetaauthorship.",
+      "decision": "attribution_mismatch_not_a_meta_priority_omission",
+      "method_review_completed": false
+    }
+  ],
+  "official_inventory_source": {
+    "url": "https://research.google/conferences-and-events/google-at-colm-2026/",
+    "capture": ".cache/nov13-history-repair/priority/google-colm-2026.html",
+    "sha256": "6efaebb261379d338046e4b7a8f9912119a02d0ec6b1aa109d2f15669ee6112b",
+    "bytes": 197684,
+    "exact_unique_arxiv_ids": [
+      "2609.19644",
+      "2608.19880",
+      "2606.01849",
+      "2508.11017",
+      "2604.14403",
+      "2604.02910",
+      "2601.17645",
+      "2604.22191",
+      "2511.17006",
+      "2604.24842",
+      "2608.26788",
+      "2512.08819",
+      "2603.24917",
+      "2601.16355",
+      "2604.01430",
+      "2512.04068",
+      "2602.16488",
+      "2603.19258",
+      "2604.23321",
+      "2602.24188",
+      "2604.05018",
+      "2510.22028",
+      "2604.15505",
+      "2606.32032",
+      "2603.23301",
+      "2604.03136",
+      "2604.06543",
+      "2603.09906"
+    ],
+    "count": 28,
+    "limitation": "IncludesBoothactivitiesandacceptedpaperlinks;28unique arxivlinks is not a claim of28new/qualifying/fullyreviewedpapers. Onlythefinitefocusedsubsetaboveisadjudicatedhere."
+  },
+  "additional_official_receipts": [
+    {
+      "url": "https://research.google/people/106672/",
+      "capture": ".cache/nov13-history-repair/priority/google-yoon.html",
+      "sha256": "cc4366bfcd72ea6016dfb1cb1d5f8dcf29688b984c3fefd433b92c6ff879c15e",
+      "bytes": 237252
+    },
+    {
+      "url": "https://research.meta.ai/blog/supporting-medical-scientific-research",
+      "capture": ".cache/nov13-history-repair/priority/meta-scientific-support.html",
+      "sha256": "5288d96492c9c8cb3675470f618dd8a13c5e5ec7b64f28d56ad3b9280c9df955",
+      "bytes": 234985
+    }
+  ],
+  "meta_scope_result": "The checked Meta official scientific-support blog describes university collaborations and planned applications, not a new fixed autonomous-research algorithm identity. Bounded official/primary title lookups did not establish an additional Meta paper in this family. This is not an absence claim about all Meta research.",
+  "source_exceptions": [
+    {
+      "url": "https://ai.meta.com/research/publications/",
+      "capture": ".cache/nov13-history-repair/priority/meta-publications.html",
+      "sha256": "de23e0c264ff944ee66adb95a36d8b8613ad646ba1147b3f87d843d0d73f88a0",
+      "bytes": 45,
+      "exception_type": "document_unavailable",
+      "reason": "HTTP200returned45-byteunavailable-contentmessage,notausefulpublicationinventory.",
+      "attempts": [
+        {
+          "result": "unavailable_content",
+          "http_status": 200
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "Theofficialpublicationdirectoryreturnsdatedusablepaperrecords."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/google/adk-samples/main/python/agents/machine-learning-engineering/README.md",
+      "exception_type": "document_unavailable",
+      "reason": "TheofficialMLE-STARblogpointsatthisADKsampledirectory,buttheexactrawREADMEpathreturned404intheboundedcheck;thecompletecurrentimplementationwasnotindependentlyverified.",
+      "attempts": [
+        {
+          "http_status": 404,
+          "result": "raw_readme_not_found"
+        }
+      ],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "Anexactcurrentofficialsamplepathorimmutableauthorreleaseisconfirmed."
+    }
+  ],
+  "limitations": [
+    "This inventory is not an automatic implementation queue and does not modify the global ledger or review watermark.",
+    "Known canonical papers are explicitly deduplicated. Old P2 selection or date-only coverage is not inherited as a method review.",
+    "Published cost counts come from necessary original method/configuration sections, not trial runs. No models, experiment data, external model APIs, or GPU experiments were used.",
+    "PolicyBank is a retained nonblocking future lead, not one of the selected five extra papers.",
+    "Raw captures are local cache files; committed hashes describe the reviewed sources but do not make those files available in a fresh clone."
+  ]
+}

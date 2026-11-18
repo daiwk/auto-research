@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "agent-research:engram-consolidation": {
+      "questions": [
+        {
+          "id": "admission-versus-release",
+          "level": "basics",
+          "question": "学生从未完成一个技能，为什么仍可能通过 ENGRAM 的训练准入？通过后能马上移走记录吗？",
+          "answer": "足够的成功教师示范可独立通过准入。准入只决定是否尝试学习；没有当前有效训练贡献或没有留出的验证探针都不能释放记忆。",
+          "example": "教学例：熟练度为 0，同一个教师 episode 中两条有效成功记录满足 d_min=2，但若两条都留作开发探针，本轮没有训练贡献。",
+          "source_sections": ["背景与主要改动", "核心公式"],
+          "added": "2026-11-09"
+        },
+        {
+          "id": "relative-and-absolute-gates",
+          "level": "mechanism",
+          "question": "为什么既要设相对分差，又要设严格的绝对下限？",
+          "answer": "相对分差防止权重替换检索后退步超过容忍量。绝对下限阻止两个都很差时靠微小改善过关。相对分差等于阈值可过，候选分等于绝对下限不可过。",
+          "example": "教学例：四题中候选答对两题，参考答对一题，δ=0.25、α=0.5。相对门通过，但候选恰等于下限，所以不释放。",
+          "source_sections": ["核心公式", "原文效果与负结果"],
+          "added": "2026-11-09"
+        },
+        {
+          "id": "store-allocation-versus-removal",
+          "level": "comparison",
+          "question": "MemPrice 不选某条记忆的原文，是否等同于 ENGRAM 释放该技能的记忆？",
+          "answer": "不等同。MemPrice 在当前窗口选择记忆表示或不放入，依据是效用与预算。ENGRAM 用有检索的基础模型做参考，要求更新后的权重在独立探针上达标才允许从检索库归档。",
+          "example": "教学例：窗口很短可以只放关键词，但不说明模型离开检索仍能正确完成任务；归档通过也不会自动删除存储里的原始记录。",
+          "source_sections": ["背景与主要改动", "原文效果与负结果"],
+          "added": "2026-11-09"
+        },
+        {
+          "id": "reserve-before-optimization",
+          "level": "implementation",
+          "question": "同一源 episode 的两个片段分别属于不同技能，能否一个训练、另一个作为开发探针？",
+          "answer": "不能。按 episode 隔离，而不是按技能标签隔离；留作探针的 episode 也不能出现在 replay。策略回调不收探针目标，独立评分器拿到它。原论文预释放参考检索库与训练分区不是同一个概念。",
+          "example": "教学例：同一次购物的导航与结账片段不能横跨训练和开发；关闭 episodic 检索也不应抹去结账页这一当前环境观察。",
+          "source_sections": ["核心公式", "数据协议与代码映射"],
+          "added": "2026-11-09"
+        }
+      ]
+    }
+  }
+}

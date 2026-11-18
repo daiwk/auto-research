@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/recommendation/slates-business-value/comparison/recommendation:ice": {
+      "source_sha256": "334011a19b167cd95eb23bab30aa0b7ce4d90d23d2efee85af08ea20ce4802c5",
+      "reviewed": true,
+      "fields": {
+        "position": "Scores fixed-generator slates with reach times conditional click and separate click-distribution supervision.",
+        "tradeoff": "The depth prior suits sequential browsing, not arbitrary non-prefix visibility; distribution matching is not a new policy."
+      }
+    },
+    "dive/recommendation/slates-business-value/analysis/4": {
+      "source_sha256": "6e4f5e439c1d77ac2ecfcedf438387f28995e4f05c60e2becea80c86f8a58c5b",
+      "reviewed": true,
+      "fields": {
+        "title": "Separate the evaluator's behavior model from the generation policy",
+        "body": "ICE changes slate valuation under an impression-before-click assumption while holding generation fixed. OneTrans-GSR changes how slates are generated and trained with rules and rewards. Hold candidate slates fixed for an evaluator comparison; do not equate training reward scores with revenue."
+      }
+    },
+    "dive/recommendation/slates-business-value/question/fixed-evaluator-versus-slate-policy": {
+      "source_sha256": "eed6646c99a1864e7195e9885927fbdf798e852a9a2e96afab3cc0f2b0113109",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are ICE and OneTrans-GSR not both generation-policy improvements?",
+        "answer": "ICE reranks the same generated slates by changing the evaluator. OneTrans-GSR changes the generating distribution. A comparison must specify what can change in the candidate pool and policy.",
+        "example": "Example: With candidate slates A and B fixed, an evaluator may switch from A to B; a new generator can propose a previously absent C."
+      }
+    },
+    "dive/recommendation/slates-business-value/update/2026-11-06/3": {
+      "source_sha256": "354abcba58a558b9d8a04497f40f62b4e620fb30478bb63b229872c62337ba84",
+      "reviewed": true,
+      "fields": {
+        "summary": "Adds ICE to separate reach-conditioned valuation with a fixed generator from OneTrans-GSR policy learning. L1 formula checks are not production lift."
+      }
+    },
+    "dive/recommendation/retrieval-matching/comparison/recommendation:ured": {
+      "source_sha256": "296c2690abd47d8249ae5b66abb7e8d75a9fd9fc36ccac274643b114f756a00b",
+      "reviewed": true,
+      "fields": {
+        "position": "Recycles high-scored unshown items from ranker logs, materializes a recency-based user pool, and filters exposed categories.",
+        "tradeoff": "Reuses previously scored items rather than finding new semantic index matches; depends on freshness and observed exposure."
+      }
+    },
+    "dive/recommendation/retrieval-matching/analysis/3": {
+      "source_sha256": "f2cd5b634e1afa500f4e85917c2110067a3e8a2beccc863e315a66f49c7a7d00",
+      "reviewed": true,
+      "fields": {
+        "title": "Reusing logs is not a new matching representation",
+        "body": "WeSearch narrows the retrieval space with clusters, then scores by OPQ and features. URED relies on existing scores and accumulates unshown items into another channel. Keep recall and display quotas fixed and audit deduplication, freshness and exposure."
+      }
+    },
+    "dive/recommendation/retrieval-matching/question/candidate-pool-history-versus-clusters": {
+      "source_sha256": "e32b6c8d6a24d3bf44f1a394fe5cd95b535ac2cf4166a1edcf161a617a6765f4",
+      "reviewed": true,
+      "fields": {
+        "question": "Can URED recover a document that has never entered a historical ranking pool?",
+        "answer": "No. It consumes historical ranker outputs. A retrieval index such as WeSearch's can surface a first candidate in an available snapshot; the channels are not substitutes.",
+        "example": "Example: A new item may enter a refreshed index, but cannot appear in the URED log pool before any request scores it."
+      }
+    },
+    "dive/recommendation/retrieval-matching/update/2026-11-06/2": {
+      "source_sha256": "374bdad587f32b6e6207fa0579690932d22b19aa91f53676356da17656e3d148",
+      "reviewed": true,
+      "fields": {
+        "summary": "Adds URED to contrast log recycling with WeSearch semantic index retrieval, with explicit temporal and exposure-deduplication boundaries."
+      }
+    }
+  }
+}

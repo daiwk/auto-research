@@ -7,7 +7,7 @@ hide:
 
 # 能力证据：评测采样、读出与可靠性
 
-[基础模型](index.md) / 56 个问题 · 14 篇论文
+[基础模型](index.md) / 88 个问题 · 22 篇论文
 
 先看问题，想一想，再展开答案。这里持续积累本子主题各篇论文的问答，一篇论文也可以追加多个问题。
 
@@ -26,7 +26,7 @@ hide:
 <button type="button" data-learning-level="comparison" aria-pressed="false">方法对比</button>
 <button type="button" data-learning-level="implementation" aria-pressed="false">实现细节</button>
 </div>
-<p class="ar-learning-status" data-learning-status role="status">56 个问题 · 14 篇论文</p>
+<p class="ar-learning-status" data-learning-status role="status">88 个问题 · 22 篇论文</p>
 <noscript>已显示全部问题；启用 JavaScript 后可搜索和筛选。</noscript>
 <div class="ar-learning-grid">
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:xla-trenches" data-paper-title="XLA from the Trenches: Correctness on TPU Workloads at Scale" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="XLA from the Trenches: Correctness on TPU Workloads at Scale 基础模型 Google 2026-10-31 编译器成功生成并执行程序，不保证数值正确。Google 将模板引导合成程序、生产 autotuner 的真实融合配置和 agent swarm 组合，发现静默错编译；随后从大 HLO 图定位到单个 fusion，再保留 fusion 原貌检查 VREG 中间值。它是编译正确性基础设施，不是新的推荐模型或通过 A/B 门槛的工业推荐条目。 完整实验成本过高，不复现（审查 DONE）。只读核对固定 v1 的 Sections2–4、上游 isolation/evaluator 链接与日期；没有运行、训练或调用其内部 harness，没有本地算法目录、metrics、GPU 收据或 Evolve 映射。公开宏图工具不意味着 agent 编排、目标 ISA/MXU 仿真、VREG stepping 和生产样本全部公开。  推理与系统效率 编译器正确性与分层故障隔离 基础模型 能力证据：评测采样、读出与可靠性 编译成功、程序没有崩溃，为什么还不能说明XLA执行正确？ 静默错编译会返回合法形状的有限张量，但索引、舍入、buffer或同步语义已出错。没有错误信号，只看运行完成或loss短期正常会漏检；论文依赖合法输入下的差分参考及逐层隔离，不把成功启动当作正确性证据。 教学例：一次窄整数iota回绕可能让索引5的写操作也改到261，程序仍执行完成，只有与正确索引语义的输出比较才暴露问题。 2026-11-04">
@@ -665,6 +665,377 @@ hide:
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.18547v1">原论文</a> · <a href="../../../../foundation-models/2604.18547-fuse-verifiers/">实现解读</a> · <a href="#qa-025e98a438bb7ffe">问题链接</a></p>
 </details>
 </article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:llm-stochasticity" data-paper-title="The Illusion of Stochasticity in LLMs" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="The Illusion of Stochasticity in LLMs 基础模型 National University of Singapore 2026-04-08 要求LLM“随机选一个数”不等价于访问可靠随机源。论文比较不同模型、离散/连续目标分布、逐次和批量提示，发现明显类别偏好、历史排斥和周期性；看起来均匀的直方图也可能来自确定性序列。 完整实验成本过高，不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU组件专测已通过；没有CUDA路径，不需要GPU验收。未接入Evolve，不可据本地fixture成绩晋级。evaluate_discrete_uniform 拒绝错误样本数、重复标签、布尔/非整数、support之外的值；evaluate_continuous 拒绝NaN和均匀分布越界。反例序列0,1,2,3不断循环：直方图卡方为0，却从无相邻重复且转移高度集中，说明边缘分布检验不足。  评测与可靠性 随机性与统计诊断 基础模型 能力证据：评测采样、读出与可靠性 直方图完全均匀，为什么仍不是真随机？ 直方图只描述单点边缘频率，不描述时间次序。确定性的0,1,2,3循环也完全均匀，但下一项可被前一项预测；需要另外检查转移和时序依赖。 循环1024项的卡方统计量为0，仍从不相邻重复。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<span id="paper-foundation-models-llm-stochasticity-133d0a6f" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-8335bb71e04411d5">直方图完全均匀，为什么仍不是真随机？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Allm-stochasticity">The Illusion of Stochasticity in LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>直方图只描述单点边缘频率，不描述时间次序。确定性的0,1,2,3循环也完全均匀，但下一项可被前一项预测；需要另外检查转移和时序依赖。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>循环1024项的卡方统计量为0，仍从不相邻重复。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.06543v1">原论文</a> · <a href="../../../../foundation-models/2604.06543-llm-stochasticity/">实现解读</a> · <a href="#qa-8335bb71e04411d5">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:llm-stochasticity" data-paper-title="The Illusion of Stochasticity in LLMs" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="The Illusion of Stochasticity in LLMs 基础模型 National University of Singapore 2026-04-08 要求LLM“随机选一个数”不等价于访问可靠随机源。论文比较不同模型、离散/连续目标分布、逐次和批量提示，发现明显类别偏好、历史排斥和周期性；看起来均匀的直方图也可能来自确定性序列。 完整实验成本过高，不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU组件专测已通过；没有CUDA路径，不需要GPU验收。未接入Evolve，不可据本地fixture成绩晋级。evaluate_discrete_uniform 拒绝错误样本数、重复标签、布尔/非整数、support之外的值；evaluate_continuous 拒绝NaN和均匀分布越界。反例序列0,1,2,3不断循环：直方图卡方为0，却从无相邻重复且转移高度集中，说明边缘分布检验不足。  评测与可靠性 随机性与统计诊断 基础模型 能力证据：评测采样、读出与可靠性 KS或卡方p&gt;0.05应怎样解释？ 在指定原假设与检验前提下，当前样本未提供足够拒绝证据；不是模型有95%概率随机，也不是独立性证明。多次选prompt后挑最好p值还会改变推断口径。 一个精心构造的均匀周期序列可以得到p=1，但不能作为可靠熵源。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-83fe38b1f38d842f">KS或卡方p&gt;0.05应怎样解释？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Allm-stochasticity">The Illusion of Stochasticity in LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>在指定原假设与检验前提下，当前样本未提供足够拒绝证据；不是模型有95%概率随机，也不是独立性证明。多次选prompt后挑最好p值还会改变推断口径。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>一个精心构造的均匀周期序列可以得到p=1，但不能作为可靠熵源。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.06543v1">原论文</a> · <a href="../../../../foundation-models/2604.06543-llm-stochasticity/">实现解读</a> · <a href="#qa-83fe38b1f38d842f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:llm-stochasticity" data-paper-title="The Illusion of Stochasticity in LLMs" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="The Illusion of Stochasticity in LLMs 基础模型 National University of Singapore 2026-04-08 要求LLM“随机选一个数”不等价于访问可靠随机源。论文比较不同模型、离散/连续目标分布、逐次和批量提示，发现明显类别偏好、历史排斥和周期性；看起来均匀的直方图也可能来自确定性序列。 完整实验成本过高，不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU组件专测已通过；没有CUDA路径，不需要GPU验收。未接入Evolve，不可据本地fixture成绩晋级。evaluate_discrete_uniform 拒绝错误样本数、重复标签、布尔/非整数、support之外的值；evaluate_continuous 拒绝NaN和均匀分布越界。反例序列0,1,2,3不断循环：直方图卡方为0，却从无相邻重复且转移高度集中，说明边缘分布检验不足。  评测与可靠性 随机性与统计诊断 基础模型 能力证据：评测采样、读出与可靠性 这里的外部PRNG与随机舍入里的随机数有何不同？ 论文检验LLM是否能按请求生成目标分布；外部PRNG是一个不同的可控随机源。SR使用明确generator实现相邻舍入概率，并检验条件均值，不是在证明LLM自身随机。 用NumPy生成均匀数不能填成Gemini采样结果；用torch generator检验SR也不能推断自然语言输出独立。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-b2fbd708dbb1b403">这里的外部PRNG与随机舍入里的随机数有何不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Allm-stochasticity">The Illusion of Stochasticity in LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>论文检验LLM是否能按请求生成目标分布；外部PRNG是一个不同的可控随机源。SR使用明确generator实现相邻舍入概率，并检验条件均值，不是在证明LLM自身随机。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>用NumPy生成均匀数不能填成Gemini采样结果；用torch generator检验SR也不能推断自然语言输出独立。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.06543v1">原论文</a> · <a href="../../../../foundation-models/2604.06543-llm-stochasticity/">实现解读</a> · <a href="#qa-b2fbd708dbb1b403">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:llm-stochasticity" data-paper-title="The Illusion of Stochasticity in LLMs" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="The Illusion of Stochasticity in LLMs 基础模型 National University of Singapore 2026-04-08 要求LLM“随机选一个数”不等价于访问可靠随机源。论文比较不同模型、离散/连续目标分布、逐次和批量提示，发现明显类别偏好、历史排斥和周期性；看起来均匀的直方图也可能来自确定性序列。 完整实验成本过高，不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU组件专测已通过；没有CUDA路径，不需要GPU验收。未接入Evolve，不可据本地fixture成绩晋级。evaluate_discrete_uniform 拒绝错误样本数、重复标签、布尔/非整数、support之外的值；evaluate_continuous 拒绝NaN和均匀分布越界。反例序列0,1,2,3不断循环：直方图卡方为0，却从无相邻重复且转移高度集中，说明边缘分布检验不足。  评测与可靠性 随机性与统计诊断 基础模型 能力证据：评测采样、读出与可靠性 遇到越界数或输出不足1024条时，为什么不能丢掉后继续？ 丢弃会改变被评测分布和样本数，可能只保留好看的输出。接口严格校验完整计数、support和有限性，解析失败应由上层单独记录，不静默改分母。 模型生成1000条合法数与24条越界数，不能把合法1000条当完整成功采样。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-eeba2316ffba1af7">遇到越界数或输出不足1024条时，为什么不能丢掉后继续？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Allm-stochasticity">The Illusion of Stochasticity in LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · National University of Singapore</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>丢弃会改变被评测分布和样本数，可能只保留好看的输出。接口严格校验完整计数、support和有限性，解析失败应由上层单独记录，不静默改分母。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>模型生成1000条合法数与24条越界数，不能把合法1000条当完整成功采样。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.06543v1">原论文</a> · <a href="../../../../foundation-models/2604.06543-llm-stochasticity/">实现解读</a> · <a href="#qa-eeba2316ffba1af7">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:storyscope" data-paper-title="StoryScope: Investigating idiosyncrasies in AI fiction" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="StoryScope: Investigating idiosyncrasies in AI fiction 基础模型 University of Maryland, College Park 2026-04-03 作者身份检测常抓词汇或句长，却无法解释故事怎样组织主题、角色、时间和冲突。StoryScope 先把平行故事改为结构化叙事模板，在同一写作 prompt 的人类/五个模型之间比较，再归纳特征、去重、批量赋值。随后用分类器与 bootstrap SHAP 区分跨模型的人类–AI核心和特定模型指纹。本地没有把字数、几个关键词或已知作者标签假装成语义特征。贡献限定为真实外部特征统计上的精确核心门控，以及保持同 prompt 六个来源共同抽样的 bootstrap 索引。 完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。本地交付是 L1 数值/协议组件，不是完整论文能力复现。完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。prompt_bootstrap 对 prompt 采样并把该 prompt 所有行一并展开；重复抽中同一 prompt 也保留整组重复。select_core_features 验证输入并实际计算分位、中位数、显著性和跨模型门槛，返回核心 mask 与方向。没有 LLM 特征发现/赋值、完整 XGBoost/SHAP 拟合或可调用的文本检测模型。  评测与研究证据 可解释生成文本检测 基础模型 能力证据：评测采样、读出与可靠性 StoryScope 的叙事特征与数几个AI常用词有何区别？ 它描述主题显露、角色能动性、时间组织等跨句故事结构，通过平行prompt比较与LLM归纳/赋值获得。几词计数没有执行这些语义阶段，本地也不把便宜关键词替代成叙事模型。 教学例：两篇故事都不用相同词汇，但都在结尾明说教训；“是否明确主题”是结构线索，不是某个单词是否出现。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<span id="paper-foundation-models-storyscope-91aa94e5" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-409045ced6c7e999">StoryScope 的叙事特征与数几个AI常用词有何区别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Astoryscope">StoryScope: Investigating idiosyncrasies in AI fiction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · University of Maryland, College Park</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它描述主题显露、角色能动性、时间组织等跨句故事结构，通过平行prompt比较与LLM归纳/赋值获得。几词计数没有执行这些语义阶段，本地也不把便宜关键词替代成叙事模型。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两篇故事都不用相同词汇，但都在结尾明说教训；“是否明确主题”是结构线索，不是某个单词是否出现。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.03136v1">原论文</a> · <a href="../../../../foundation-models/2604.03136-storyscope/">实现解读</a> · <a href="#qa-409045ced6c7e999">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:storyscope" data-paper-title="StoryScope: Investigating idiosyncrasies in AI fiction" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="StoryScope: Investigating idiosyncrasies in AI fiction 基础模型 University of Maryland, College Park 2026-04-03 作者身份检测常抓词汇或句长，却无法解释故事怎样组织主题、角色、时间和冲突。StoryScope 先把平行故事改为结构化叙事模板，在同一写作 prompt 的人类/五个模型之间比较，再归纳特征、去重、批量赋值。随后用分类器与 bootstrap SHAP 区分跨模型的人类–AI核心和特定模型指纹。本地没有把字数、几个关键词或已知作者标签假装成语义特征。贡献限定为真实外部特征统计上的精确核心门控，以及保持同 prompt 六个来源共同抽样的 bootstrap 索引。 完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。本地交付是 L1 数值/协议组件，不是完整论文能力复现。完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。prompt_bootstrap 对 prompt 采样并把该 prompt 所有行一并展开；重复抽中同一 prompt 也保留整组重复。select_core_features 验证输入并实际计算分位、中位数、显著性和跨模型门槛，返回核心 mask 与方向。没有 LLM 特征发现/赋值、完整 XGBoost/SHAP 拟合或可调用的文本检测模型。  评测与研究证据 可解释生成文本检测 基础模型 能力证据：评测采样、读出与可靠性 为什么最高SHAP特征也可能不是跨模型核心？ 核心还要求稳定性、null显著性、top25频率、人类–AI均值差及五个AI模型之间较小spread。一个只对某模型很强的特征可能是指纹，不应因SHAP大就叫核心；本地逐项合取而非加权打分。 教学例：某特征五模型均值为0.8、0.8、0.8、0.8、0，spread0.8超过0.35，即使重要性最大也被核心门槛拒绝。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-de1fa713fe07f924">为什么最高SHAP特征也可能不是跨模型核心？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Astoryscope">StoryScope: Investigating idiosyncrasies in AI fiction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · University of Maryland, College Park</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>核心还要求稳定性、null显著性、top25频率、人类–AI均值差及五个AI模型之间较小spread。一个只对某模型很强的特征可能是指纹，不应因SHAP大就叫核心；本地逐项合取而非加权打分。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：某特征五模型均值为0.8、0.8、0.8、0.8、0，spread0.8超过0.35，即使重要性最大也被核心门槛拒绝。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.03136v1">原论文</a> · <a href="../../../../foundation-models/2604.03136-storyscope/">实现解读</a> · <a href="#qa-de1fa713fe07f924">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:storyscope" data-paper-title="StoryScope: Investigating idiosyncrasies in AI fiction" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="StoryScope: Investigating idiosyncrasies in AI fiction 基础模型 University of Maryland, College Park 2026-04-03 作者身份检测常抓词汇或句长，却无法解释故事怎样组织主题、角色、时间和冲突。StoryScope 先把平行故事改为结构化叙事模板，在同一写作 prompt 的人类/五个模型之间比较，再归纳特征、去重、批量赋值。随后用分类器与 bootstrap SHAP 区分跨模型的人类–AI核心和特定模型指纹。本地没有把字数、几个关键词或已知作者标签假装成语义特征。贡献限定为真实外部特征统计上的精确核心门控，以及保持同 prompt 六个来源共同抽样的 bootstrap 索引。 完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。本地交付是 L1 数值/协议组件，不是完整论文能力复现。完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。prompt_bootstrap 对 prompt 采样并把该 prompt 所有行一并展开；重复抽中同一 prompt 也保留整组重复。select_core_features 验证输入并实际计算分位、中位数、显著性和跨模型门槛，返回核心 mask 与方向。没有 LLM 特征发现/赋值、完整 XGBoost/SHAP 拟合或可调用的文本检测模型。  评测与研究证据 可解释生成文本检测 基础模型 能力证据：评测采样、读出与可靠性 StoryScope与DetectorScope的可解释性来自哪里，能互换特征吗？ StoryScope把叙事问题转成外部语义赋值，靠分类器/SHAP定位核心与指纹；DetectorScope依赖模型内部SAE特征和稀疏线性头的可加归因。两者解释单位、获取成本与错误模式不同，不能把未生成的叙事特征拿SAE随机列替代。 教学例：“结尾主题是否明说”要检查全文；SAE某列的激活贡献是另一个观测，不能凭列编号宣称它语义上等于该叙事问题。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-00b20bade33adf0d">StoryScope与DetectorScope的可解释性来自哪里，能互换特征吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Astoryscope">StoryScope: Investigating idiosyncrasies in AI fiction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · University of Maryland, College Park</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>StoryScope把叙事问题转成外部语义赋值，靠分类器/SHAP定位核心与指纹；DetectorScope依赖模型内部SAE特征和稀疏线性头的可加归因。两者解释单位、获取成本与错误模式不同，不能把未生成的叙事特征拿SAE随机列替代。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：“结尾主题是否明说”要检查全文；SAE某列的激活贡献是另一个观测，不能凭列编号宣称它语义上等于该叙事问题。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.03136v1">原论文</a> · <a href="../../../../foundation-models/2604.03136-storyscope/">实现解读</a> · <a href="#qa-00b20bade33adf0d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:storyscope" data-paper-title="StoryScope: Investigating idiosyncrasies in AI fiction" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="StoryScope: Investigating idiosyncrasies in AI fiction 基础模型 University of Maryland, College Park 2026-04-03 作者身份检测常抓词汇或句长，却无法解释故事怎样组织主题、角色、时间和冲突。StoryScope 先把平行故事改为结构化叙事模板，在同一写作 prompt 的人类/五个模型之间比较，再归纳特征、去重、批量赋值。随后用分类器与 bootstrap SHAP 区分跨模型的人类–AI核心和特定模型指纹。本地没有把字数、几个关键词或已知作者标签假装成语义特征。贡献限定为真实外部特征统计上的精确核心门控，以及保持同 prompt 六个来源共同抽样的 bootstrap 索引。 完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。本地交付是 L1 数值/协议组件，不是完整论文能力复现。完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。prompt_bootstrap 对 prompt 采样并把该 prompt 所有行一并展开；重复抽中同一 prompt 也保留整组重复。select_core_features 验证输入并实际计算分位、中位数、显著性和跨模型门槛，返回核心 mask 与方向。没有 LLM 特征发现/赋值、完整 XGBoost/SHAP 拟合或可调用的文本检测模型。  评测与研究证据 可解释生成文本检测 基础模型 能力证据：评测采样、读出与可靠性 同一prompt的六种来源为什么必须一起bootstrap？ 这些故事共享写作条件，不是独立同分布的任意六行。先按prompt隔离train/validation/test，再按prompt重采样并展开全部来源，可保留匹配结构。逐故事抽样或跨split同prompt会夸大独立证据。 教学例：抽中promptA两次，就把A的人类与五AI故事各出现两次；不能只抽人类A而漏掉五个AI版本来造更稳定SHAP。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-bbd0eae682f39c8b">同一prompt的六种来源为什么必须一起bootstrap？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Astoryscope">StoryScope: Investigating idiosyncrasies in AI fiction</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · University of Maryland, College Park</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>这些故事共享写作条件，不是独立同分布的任意六行。先按prompt隔离train/validation/test，再按prompt重采样并展开全部来源，可保留匹配结构。逐故事抽样或跨split同prompt会夸大独立证据。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：抽中promptA两次，就把A的人类与五AI故事各出现两次；不能只抽人类A而漏掉五个AI版本来造更稳定SHAP。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.03136v1">原论文</a> · <a href="../../../../foundation-models/2604.03136-storyscope/">实现解读</a> · <a href="#qa-bbd0eae682f39c8b">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:latent-generalization" data-paper-title="Improving Latent Generalization Using Test-time Compute" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Improving Latent Generalization Using Test-time Compute 基础模型 Google DeepMind 2026-04-01 模型记住 A&gt;B 并不必然推出 B&lt;A，记住多个关系也不保证能答出未显式训练的组合。论文把知识获取、会思考的轨迹引导、正确性RL分开，研究在一个结构训练出的推理能力能否迁移到仅做知识SFT的另一个结构。 私有/商业训练依赖，完整实验不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU组件专测已通过；没有CUDA路径，不需要GPU验收。未接入Evolve，不可据本地fixture成绩晋级。score_completion 要求heldout是all的子集，primary属于heldout，且gold集合非空；exact_set_pass_at_n 对已经完成的独立尝试计算无偏pass估计。负控显示：train recall=1可以同时heldout recall=0；  知识与推理 潜在知识与泛化 基础模型 能力证据：评测采样、读出与可靠性 latent generalization与记住训练答案有什么区别？ 要答出未显式暴露的关系或组合，而不是复述已见completion。论文分别报告exposed和heldout recall，因为总体F1可能被大量已见答案撑高。 all={A,B,C}、heldout={C}，只答A和B时train recall=1但heldout recall=0。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<span id="paper-foundation-models-latent-generalization-265f2cc5" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-e016f2e859cc84f9">latent generalization与记住训练答案有什么区别？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Alatent-generalization">Improving Latent Generalization Using Test-time Compute</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>要答出未显式暴露的关系或组合，而不是复述已见completion。论文分别报告exposed和heldout recall，因为总体F1可能被大量已见答案撑高。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>all={A,B,C}、heldout={C}，只答A和B时train recall=1但heldout recall=0。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.01430v1">原论文</a> · <a href="../../../../foundation-models/2604.01430-latent-generalization/">实现解读</a> · <a href="#qa-e016f2e859cc84f9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:latent-generalization" data-paper-title="Improving Latent Generalization Using Test-time Compute" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Improving Latent Generalization Using Test-time Compute 基础模型 Google DeepMind 2026-04-01 模型记住 A&gt;B 并不必然推出 B&lt;A，记住多个关系也不保证能答出未显式训练的组合。论文把知识获取、会思考的轨迹引导、正确性RL分开，研究在一个结构训练出的推理能力能否迁移到仅做知识SFT的另一个结构。 私有/商业训练依赖，完整实验不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU组件专测已通过；没有CUDA路径，不需要GPU验收。未接入Evolve，不可据本地fixture成绩晋级。score_completion 要求heldout是all的子集，primary属于heldout，且gold集合非空；exact_set_pass_at_n 对已经完成的独立尝试计算无偏pass估计。负控显示：train recall=1可以同时heldout recall=0；  知识与推理 潜在知识与泛化 基础模型 能力证据：评测采样、读出与可靠性 heldout recall=1是否意味着exact-set pass成功？ 不意味着。exact要求预测集合严格等于全部有效答案集合，不能有漏项或虚假附加项；primary inclusion也只是一个指定heldout答案出现的二值指标。 答A,B,C,错误D，heldout C的recall仍是1，但exact=0。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-059b3a359c603bf0">heldout recall=1是否意味着exact-set pass成功？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Alatent-generalization">Improving Latent Generalization Using Test-time Compute</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不意味着。exact要求预测集合严格等于全部有效答案集合，不能有漏项或虚假附加项；primary inclusion也只是一个指定heldout答案出现的二值指标。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>答A,B,C,错误D，heldout C的recall仍是1，但exact=0。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.01430v1">原论文</a> · <a href="../../../../foundation-models/2604.01430-latent-generalization/">实现解读</a> · <a href="#qa-059b3a359c603bf0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:latent-generalization" data-paper-title="Improving Latent Generalization Using Test-time Compute" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Improving Latent Generalization Using Test-time Compute 基础模型 Google DeepMind 2026-04-01 模型记住 A&gt;B 并不必然推出 B&lt;A，记住多个关系也不保证能答出未显式训练的组合。论文把知识获取、会思考的轨迹引导、正确性RL分开，研究在一个结构训练出的推理能力能否迁移到仅做知识SFT的另一个结构。 私有/商业训练依赖，完整实验不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU组件专测已通过；没有CUDA路径，不需要GPU验收。未接入Evolve，不可据本地fixture成绩晋级。score_completion 要求heldout是all的子集，primary属于heldout，且gold集合非空；exact_set_pass_at_n 对已经完成的独立尝试计算无偏pass估计。负控显示：train recall=1可以同时heldout recall=0；  知识与推理 潜在知识与泛化 基础模型 能力证据：评测采样、读出与可靠性 它与Thinking to Recall的协议分别定位什么问题？ 前者用受控知识获取和结构划分考察未显式答案的泛化；后者研究已有参数事实如何因计算和factual priming被读出。两者都不能把gold-conditioned teacher或事后标注暴露给最终actor。 同一事实被更容易召回，不等于模型学会了未训练关系反转；两者需要不同holdout。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-27c6bab8250f947e">它与Thinking to Recall的协议分别定位什么问题？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Alatent-generalization">Improving Latent Generalization Using Test-time Compute</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>前者用受控知识获取和结构划分考察未显式答案的泛化；后者研究已有参数事实如何因计算和factual priming被读出。两者都不能把gold-conditioned teacher或事后标注暴露给最终actor。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>同一事实被更容易召回，不等于模型学会了未训练关系反转；两者需要不同holdout。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.01430v1">原论文</a> · <a href="../../../../foundation-models/2604.01430-latent-generalization/">实现解读</a> · <a href="#qa-27c6bab8250f947e">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:latent-generalization" data-paper-title="Improving Latent Generalization Using Test-time Compute" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Improving Latent Generalization Using Test-time Compute 基础模型 Google DeepMind 2026-04-01 模型记住 A&gt;B 并不必然推出 B&lt;A，记住多个关系也不保证能答出未显式训练的组合。论文把知识获取、会思考的轨迹引导、正确性RL分开，研究在一个结构训练出的推理能力能否迁移到仅做知识SFT的另一个结构。 私有/商业训练依赖，完整实验不复现（审查 DONE）。所有metric仅属L1诊断，无gold给actor、无test选择、无模型效果提升声明。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU组件专测已通过；没有CUDA路径，不需要GPU验收。未接入Evolve，不可据本地fixture成绩晋级。score_completion 要求heldout是all的子集，primary属于heldout，且gold集合非空；exact_set_pass_at_n 对已经完成的独立尝试计算无偏pass估计。负控显示：train recall=1可以同时heldout recall=0；  知识与推理 潜在知识与泛化 基础模型 能力证据：评测采样、读出与可靠性 为什么本地只实现这些集合指标，不提供一个简化Gemini训练器？ 原文依赖私有Gemini knowledge SFT、teacher trace与REINFORCE接口，公开方法不足以还原完整训练。精确指标核可负担且有独立价值；虚构通用RL循环会掩盖关键依赖。完整训练明确不复现DONE。 用随机答案数组测试F1公式，不得宣传为Gemini在OOD结构上的实测结果。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-79f71e514d5d6dde">为什么本地只实现这些集合指标，不提供一个简化Gemini训练器？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Alatent-generalization">Improving Latent Generalization Using Test-time Compute</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>原文依赖私有Gemini knowledge SFT、teacher trace与REINFORCE接口，公开方法不足以还原完整训练。精确指标核可负担且有独立价值；虚构通用RL循环会掩盖关键依赖。完整训练明确不复现DONE。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>用随机答案数组测试F1公式，不得宣传为Gemini在OOD结构上的实测结果。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2604.01430v1">原论文</a> · <a href="../../../../foundation-models/2604.01430-latent-generalization/">实现解读</a> · <a href="#qa-79f71e514d5d6dde">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:decoding-constrained-beam" data-paper-title="Estimating near-verbatim extraction risk in language models with decoding-constrained beam search" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Estimating near-verbatim extraction risk in language models with decoding-constrained beam search 基础模型 AVERI / Stanford University 2026-03-26 只检查 greedy 是否生成训练原文，会漏掉许多单条概率不大、合计概率却很高的近逐字变体。普通 beam 的模型 softmax 分数也不等于实际 top-k 解码分布下的概率。本文把解码约束纳入每一步归一化，枚举部分高概率路径，对与目标后缀接近的路径求和得到确定性下界。本地用途是可审计的概率与距离算子：模型 callback 只接收前缀和已生成 token；目标后缀留在评价侧用于距离剪枝，不交给 callback。没有下载训练语料或加载被审计模型，也不把玩具转移概率称作真实记忆泄漏。 完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。本地交付是 L1 数值/协议组件，不是完整论文能力复现。完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。search 实际执行 top-k、路径 logp、带状编辑/Hamming 剪枝、确定性同分排序和末步质量求和。EOS 在非最终步被移除，最终扩展仍按原算法允许；固定长度协议不等于任意停止规则。没有实现可选的提前停止、批量 KV cache 或 GPU 模型执行，不能用 callback 次数证明原文吞吐。  评测与研究证据 近逐字提取风险 基础模型 能力证据：评测采样、读出与可靠性 greedy没有逐字命中，为什么不等于近逐字提取风险为零？ greedy只看一条最高局部路径。许多接近原文的变体各自概率不大，但总概率可能显著；CBS只枚举其中一部分，因此求和是确定性下界，不是无偏完整风险估计。 教学例：两个不同标点变体概率各0.08，greedy走向第三条不匹配路径，也不能抹掉这0.16的已知近逐字质量。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<span id="paper-foundation-models-decoding-constrained-beam-7d0bad73" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-668c7dba6665932c">greedy没有逐字命中，为什么不等于近逐字提取风险为零？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adecoding-constrained-beam">Estimating near-verbatim extraction risk in language models with decoding-constrained beam search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · AVERI / Stanford University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>greedy只看一条最高局部路径。许多接近原文的变体各自概率不大，但总概率可能显著；CBS只枚举其中一部分，因此求和是确定性下界，不是无偏完整风险估计。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：两个不同标点变体概率各0.08，greedy走向第三条不匹配路径，也不能抹掉这0.16的已知近逐字质量。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.24917v1">原论文</a> · <a href="../../../../foundation-models/2603.24917-decoding-constrained-beam/">实现解读</a> · <a href="#qa-668c7dba6665932c">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:decoding-constrained-beam" data-paper-title="Estimating near-verbatim extraction risk in language models with decoding-constrained beam search" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Estimating near-verbatim extraction risk in language models with decoding-constrained beam search 基础模型 AVERI / Stanford University 2026-03-26 只检查 greedy 是否生成训练原文，会漏掉许多单条概率不大、合计概率却很高的近逐字变体。普通 beam 的模型 softmax 分数也不等于实际 top-k 解码分布下的概率。本文把解码约束纳入每一步归一化，枚举部分高概率路径，对与目标后缀接近的路径求和得到确定性下界。本地用途是可审计的概率与距离算子：模型 callback 只接收前缀和已生成 token；目标后缀留在评价侧用于距离剪枝，不交给 callback。没有下载训练语料或加载被审计模型，也不把玩具转移概率称作真实记忆泄漏。 完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。本地交付是 L1 数值/协议组件，不是完整论文能力复现。完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。search 实际执行 top-k、路径 logp、带状编辑/Hamming 剪枝、确定性同分排序和末步质量求和。EOS 在非最终步被移除，最终扩展仍按原算法允许；固定长度协议不等于任意停止规则。没有实现可选的提前停止、批量 KV cache 或 GPU 模型执行，不能用 callback 次数证明原文吞吐。  评测与研究证据 近逐字提取风险 基础模型 能力证据：评测采样、读出与可靠性 为何必须top-k内部归一化且最后不能再剪到B？ 要度量的是实际top-k解码分布，不是完整softmax。每条路径概率都须按该分布累乘；末步再剪B会丢掉已付前向成本得到的有效质量，原算法保留最多B×k。剪枝后也不对剩余路径重归一化。 教学例：原模型三token概率0.5、0.3、0.2，top2变成0.625、0.375；B=1的最后一步仍应保留这两条扩展，而非只留0.625。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-853ada14e4653cef">为何必须top-k内部归一化且最后不能再剪到B？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adecoding-constrained-beam">Estimating near-verbatim extraction risk in language models with decoding-constrained beam search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · AVERI / Stanford University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>要度量的是实际top-k解码分布，不是完整softmax。每条路径概率都须按该分布累乘；末步再剪B会丢掉已付前向成本得到的有效质量，原算法保留最多B×k。剪枝后也不对剩余路径重归一化。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：原模型三token概率0.5、0.3、0.2，top2变成0.625、0.375；B=1的最后一步仍应保留这两条扩展，而非只留0.625。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.24917v1">原论文</a> · <a href="../../../../foundation-models/2603.24917-decoding-constrained-beam/">实现解读</a> · <a href="#qa-853ada14e4653cef">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:decoding-constrained-beam" data-paper-title="Estimating near-verbatim extraction risk in language models with decoding-constrained beam search" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Estimating near-verbatim extraction risk in language models with decoding-constrained beam search 基础模型 AVERI / Stanford University 2026-03-26 只检查 greedy 是否生成训练原文，会漏掉许多单条概率不大、合计概率却很高的近逐字变体。普通 beam 的模型 softmax 分数也不等于实际 top-k 解码分布下的概率。本文把解码约束纳入每一步归一化，枚举部分高概率路径，对与目标后缀接近的路径求和得到确定性下界。本地用途是可审计的概率与距离算子：模型 callback 只接收前缀和已生成 token；目标后缀留在评价侧用于距离剪枝，不交给 callback。没有下载训练语料或加载被审计模型，也不把玩具转移概率称作真实记忆泄漏。 完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。本地交付是 L1 数值/协议组件，不是完整论文能力复现。完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。search 实际执行 top-k、路径 logp、带状编辑/Hamming 剪枝、确定性同分排序和末步质量求和。EOS 在非最终步被移除，最终扩展仍按原算法允许；固定长度协议不等于任意停止规则。没有实现可选的提前停止、批量 KV cache 或 GPU 模型执行，不能用 callback 次数证明原文吞吐。  评测与研究证据 近逐字提取风险 基础模型 能力证据：评测采样、读出与可靠性 CBS概率下界能否替代DetectorScope的AI文本来源检测分数？ 不能。CBS假定有目标后缀并能访问模型条件概率，衡量该前缀下近目标生成质量；DetectorScope从文本的SAE特征预测来源。一个文本容易被模型生成不等于它真的由该模型写成，两类统计也不共享标签含义。 教学例：公开常见句在模型下概率很高，仍可能完全由人类撰写；高来源检测分数也不给某段训练原文的提取概率。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-e5f81f1a027a0060">CBS概率下界能否替代DetectorScope的AI文本来源检测分数？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adecoding-constrained-beam">Estimating near-verbatim extraction risk in language models with decoding-constrained beam search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · AVERI / Stanford University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。CBS假定有目标后缀并能访问模型条件概率，衡量该前缀下近目标生成质量；DetectorScope从文本的SAE特征预测来源。一个文本容易被模型生成不等于它真的由该模型写成，两类统计也不共享标签含义。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：公开常见句在模型下概率很高，仍可能完全由人类撰写；高来源检测分数也不给某段训练原文的提取概率。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.24917v1">原论文</a> · <a href="../../../../foundation-models/2603.24917-decoding-constrained-beam/">实现解读</a> · <a href="#qa-e5f81f1a027a0060">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:decoding-constrained-beam" data-paper-title="Estimating near-verbatim extraction risk in language models with decoding-constrained beam search" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Estimating near-verbatim extraction risk in language models with decoding-constrained beam search 基础模型 AVERI / Stanford University 2026-03-26 只检查 greedy 是否生成训练原文，会漏掉许多单条概率不大、合计概率却很高的近逐字变体。普通 beam 的模型 softmax 分数也不等于实际 top-k 解码分布下的概率。本文把解码约束纳入每一步归一化，枚举部分高概率路径，对与目标后缀接近的路径求和得到确定性下界。本地用途是可审计的概率与距离算子：模型 callback 只接收前缀和已生成 token；目标后缀留在评价侧用于距离剪枝，不交给 callback。没有下载训练语料或加载被审计模型，也不把玩具转移概率称作真实记忆泄漏。 完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。本地交付是 L1 数值/协议组件，不是完整论文能力复现。完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。search 实际执行 top-k、路径 logp、带状编辑/Hamming 剪枝、确定性同分排序和末步质量求和。EOS 在非最终步被移除，最终扩展仍按原算法允许；固定长度协议不等于任意停止规则。没有实现可选的提前停止、批量 KV cache 或 GPU 模型执行，不能用 callback 次数证明原文吞吐。  评测与研究证据 近逐字提取风险 基础模型 能力证据：评测采样、读出与可靠性 Levenshtein的行最小值没超epsilon，为何到最后还要查D[T,T]？ 行最小值只说明当前串能与目标某个前缀低成本对齐，是中间剪枝的必要条件；完成后必须与整个目标比较。把存活直接当成功会误计尚未覆盖目标末尾的路径。bank也只是被剪前缀的潜在质量，不是成功质量。 教学例：目标abc，某部分路径与a很接近，不说明完整输出和abc距离达标。专测以穷举分布检查LB≤p≤LB+bank，宽beam才恢复完整质量。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-84ee62e986a4b99f">Levenshtein的行最小值没超epsilon，为何到最后还要查D[T,T]？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Adecoding-constrained-beam">Estimating near-verbatim extraction risk in language models with decoding-constrained beam search</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · AVERI / Stanford University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>行最小值只说明当前串能与目标某个前缀低成本对齐，是中间剪枝的必要条件；完成后必须与整个目标比较。把存活直接当成功会误计尚未覆盖目标末尾的路径。bank也只是被剪前缀的潜在质量，不是成功质量。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：目标abc，某部分路径与a很接近，不说明完整输出和abc距离达标。专测以穷举分布检查LB≤p≤LB+bank，宽beam才恢复完整质量。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.24917v1">原论文</a> · <a href="../../../../foundation-models/2603.24917-decoding-constrained-beam/">实现解读</a> · <a href="#qa-84ee62e986a4b99f">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:cultural-cue" data-paper-title="Steering LLMs for Culturally Localized Generation" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Steering LLMs for Culturally Localized Generation 基础模型 Carnegie Mellon University 2026-03-24 文化定位失败可能是知识缺失，也可能是已有知识不易被提示词唤起。CuE 从预训练 SAE 的稀疏特征中寻找与国家标签相关的维度，建立可解释文化原型，再沿目标文化相对其他文化的差向量干预残差流。国家只是论文采用的文化代理，不能把国家均值当成每个个体的价值观。这种方法不更新语言模型参数，也不是给模型简单补上一句国家名称。它需要真实 SAE、对齐的层/特征编号和 decoder；本地只实现这些外部结果上的确定性张量部分，不生成文化判断或假装理解刻板印象。 完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。本地交付是 L1 数值/协议组件，不是完整论文能力复现。完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。max_pool_features、select_cumulative_mi、country_prototypes、steering_direction、apply_steering 依次实现上述确定性算子。张量支持 CPU/CUDA；真实 NVIDIA 验收由统一批次记录，不能由单元测试替代。  评测与研究证据 可解释文化表征与干预 基础模型 能力证据：评测采样、读出与可靠性 CuE 为什么关注隐藏文化特征，而不只再加一句国家提示？ 它要区分缺少知识和已有知识没有被唤起，使用SAE特征构造白盒干预。显式提示与特征干预可以互补，但国家原型只是论文的群体代理，不能代表每个个体。 教学例：模型知道某地区的小众菜名，却在无地点食谱中总给常见菜；沿已验证文化特征方向干预是在测试知识唤起，不证明社会文化安全。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<span id="paper-foundation-models-cultural-cue-701f9550" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-7a4c318f71d636fc">CuE 为什么关注隐藏文化特征，而不只再加一句国家提示？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Acultural-cue">Steering LLMs for Culturally Localized Generation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Carnegie Mellon University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>它要区分缺少知识和已有知识没有被唤起，使用SAE特征构造白盒干预。显式提示与特征干预可以互补，但国家原型只是论文的群体代理，不能代表每个个体。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：模型知道某地区的小众菜名，却在无地点食谱中总给常见菜；沿已验证文化特征方向干预是在测试知识唤起，不证明社会文化安全。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.23301v1">原论文</a> · <a href="../../../../foundation-models/2603.23301-cultural-cue/">实现解读</a> · <a href="#qa-7a4c318f71d636fc">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:cultural-cue" data-paper-title="Steering LLMs for Culturally Localized Generation" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Steering LLMs for Culturally Localized Generation 基础模型 Carnegie Mellon University 2026-03-24 文化定位失败可能是知识缺失，也可能是已有知识不易被提示词唤起。CuE 从预训练 SAE 的稀疏特征中寻找与国家标签相关的维度，建立可解释文化原型，再沿目标文化相对其他文化的差向量干预残差流。国家只是论文采用的文化代理，不能把国家均值当成每个个体的价值观。这种方法不更新语言模型参数，也不是给模型简单补上一句国家名称。它需要真实 SAE、对齐的层/特征编号和 decoder；本地只实现这些外部结果上的确定性张量部分，不生成文化判断或假装理解刻板印象。 完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。本地交付是 L1 数值/协议组件，不是完整论文能力复现。完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。max_pool_features、select_cumulative_mi、country_prototypes、steering_direction、apply_steering 依次实现上述确定性算子。张量支持 CPU/CUDA；真实 NVIDIA 验收由统一批次记录，不能由单元测试替代。  评测与研究证据 可解释文化表征与干预 基础模型 能力证据：评测采样、读出与可靠性 rho=0.1 是否就是保留10%的SAE特征？ 不是。§2.3保留按MI降序的最短集合，使累计MI达到总MI的10%。信息高度集中时只需很少维度；按特征个数截10%会改变核心算法。 教学例：四个特征MI为0.97、0.01、0.01、0.01，rho=0.5只选第一个，而不是四舍五入选一半维度。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-957214d86e09fec1">rho=0.1 是否就是保留10%的SAE特征？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Acultural-cue">Steering LLMs for Culturally Localized Generation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Carnegie Mellon University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。§2.3保留按MI降序的最短集合，使累计MI达到总MI的10%。信息高度集中时只需很少维度；按特征个数截10%会改变核心算法。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：四个特征MI为0.97、0.01、0.01、0.01，rho=0.5只选第一个，而不是四舍五入选一半维度。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.23301v1">原论文</a> · <a href="../../../../foundation-models/2603.23301-cultural-cue/">实现解读</a> · <a href="#qa-957214d86e09fec1">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:cultural-cue" data-paper-title="Steering LLMs for Culturally Localized Generation" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Steering LLMs for Culturally Localized Generation 基础模型 Carnegie Mellon University 2026-03-24 文化定位失败可能是知识缺失，也可能是已有知识不易被提示词唤起。CuE 从预训练 SAE 的稀疏特征中寻找与国家标签相关的维度，建立可解释文化原型，再沿目标文化相对其他文化的差向量干预残差流。国家只是论文采用的文化代理，不能把国家均值当成每个个体的价值观。这种方法不更新语言模型参数，也不是给模型简单补上一句国家名称。它需要真实 SAE、对齐的层/特征编号和 decoder；本地只实现这些外部结果上的确定性张量部分，不生成文化判断或假装理解刻板印象。 完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。本地交付是 L1 数值/协议组件，不是完整论文能力复现。完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。max_pool_features、select_cumulative_mi、country_prototypes、steering_direction、apply_steering 依次实现上述确定性算子。张量支持 CPU/CUDA；真实 NVIDIA 验收由统一批次记录，不能由单元测试替代。  评测与研究证据 可解释文化表征与干预 基础模型 能力证据：评测采样、读出与可靠性 CuE 和 DetectorScope 都对SAE特征max-pool，为何不是同一方法？ 池化只是共享表示操作。CuE以特征–文化MI和国家原型差构造残差干预；DetectorScope用描述验证mask和稀疏检测头作预测与特征归因。前者方向不自动构成检测器，后者头权重也不等于文化干预。 教学例：一个食物特征能区分国家，却不一定区分人类与AI文本；检测头贡献大也不意味着沿该方向生成就文化忠实。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-e841df37bb0cb2cb">CuE 和 DetectorScope 都对SAE特征max-pool，为何不是同一方法？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Acultural-cue">Steering LLMs for Culturally Localized Generation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Carnegie Mellon University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>池化只是共享表示操作。CuE以特征–文化MI和国家原型差构造残差干预；DetectorScope用描述验证mask和稀疏检测头作预测与特征归因。前者方向不自动构成检测器，后者头权重也不等于文化干预。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：一个食物特征能区分国家，却不一定区分人类与AI文本；检测头贡献大也不意味着沿该方向生成就文化忠实。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.23301v1">原论文</a> · <a href="../../../../foundation-models/2603.23301-cultural-cue/">实现解读</a> · <a href="#qa-e841df37bb0cb2cb">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:cultural-cue" data-paper-title="Steering LLMs for Culturally Localized Generation" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Steering LLMs for Culturally Localized Generation 基础模型 Carnegie Mellon University 2026-03-24 文化定位失败可能是知识缺失，也可能是已有知识不易被提示词唤起。CuE 从预训练 SAE 的稀疏特征中寻找与国家标签相关的维度，建立可解释文化原型，再沿目标文化相对其他文化的差向量干预残差流。国家只是论文采用的文化代理，不能把国家均值当成每个个体的价值观。这种方法不更新语言模型参数，也不是给模型简单补上一句国家名称。它需要真实 SAE、对齐的层/特征编号和 decoder；本地只实现这些外部结果上的确定性张量部分，不生成文化判断或假装理解刻板印象。 完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。本地交付是 L1 数值/协议组件，不是完整论文能力复现。完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。max_pool_features、select_cumulative_mi、country_prototypes、steering_direction、apply_steering 依次实现上述确定性算子。张量支持 CPU/CUDA；真实 NVIDIA 验收由统一批次记录，不能由单元测试替代。  评测与研究证据 可解释文化表征与干预 基础模型 能力证据：评测采样、读出与可靠性 其他国家的基线为什么要先各自求均值再等权平均？ 公式比较目标原型与其他国家原型的平均，国家样本数不是权重。直接把其他所有断言混在一起，会让数据多的国家支配方向。decoder还必须与该层所选特征一一对齐。 教学例：B国两条值2，C国一条值0，其他国家基线为(2+0)/2=1，不是(2+2+0)/3。目标A值4时差为3而非8/3。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-9a96eaffcdc6fb16">其他国家的基线为什么要先各自求均值再等权平均？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Acultural-cue">Steering LLMs for Culturally Localized Generation</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Carnegie Mellon University</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>公式比较目标原型与其他国家原型的平均，国家样本数不是权重。直接把其他所有断言混在一起，会让数据多的国家支配方向。decoder还必须与该层所选特征一一对齐。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：B国两条值2，C国一条值0，其他国家基线为(2+0)/2=1，不是(2+2+0)/3。目标A值4时差为3而非8/3。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.23301v1">原论文</a> · <a href="../../../../foundation-models/2603.23301-cultural-cue/">实现解读</a> · <a href="#qa-9a96eaffcdc6fb16">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:thinking-to-recall" data-paper-title="Thinking to Recall: How Reasoning Unlocks Parametric Knowledge in LLMs" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Thinking to Recall: How Reasoning Unlocks Parametric Knowledge in LLMs 基础模型 Google Research 2026-03-10 推理不仅可能分解复杂任务，也可能通过额外计算和相关事实的自检索帮助单跳知识召回。论文控制同一 hybrid 模型的 reasoning ON/OFF，区分计算缓冲与 factual priming，同时发现中间事实幻觉会连带增加最终答案错误。 完整实验成本过高，不复现（审查 DONE）。诊断中的真值数组是显式教学输入，不是Agent任务成绩。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU组件专测已通过；没有CUDA路径，不需要GPU验收。未接入Evolve，不可据本地fixture成绩晋级。conditional_expected_accuracy 只返回汇总统计、保留/剔除题数，绝不返回被oracle选中的轨迹、行动或训练样本；默认严格要求每题100条。pass_at_k 使用无偏组合数估计。负控同时覆盖共同题目mask、逐题宏平均而非微平均、空事实集合和缺失子集。  知识与推理 参数知识召回 基础模型 能力证据：评测采样、读出与可靠性 单跳事实题不需多步逻辑，为什么thinking仍可能有帮助？ 原文区分额外token带来的计算缓冲与相关事实的factual priming，两者都可能帮助参数知识读出；并不意味着所有思考内容都正确或推理越长越好。 重复dummy trace可检测内容无关计算，而相关事实提示测试语义桥接；它们不是同一个实验。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<span id="paper-foundation-models-thinking-to-recall-75a6061f" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-1f1300a5c5f8f35d">单跳事实题不需多步逻辑，为什么thinking仍可能有帮助？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Athinking-to-recall">Thinking to Recall: How Reasoning Unlocks Parametric Knowledge in LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>原文区分额外token带来的计算缓冲与相关事实的factual priming，两者都可能帮助参数知识读出；并不意味着所有思考内容都正确或推理越长越好。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>重复dummy trace可检测内容无关计算，而相关事实提示测试语义桥接；它们不是同一个实验。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.09906v1">原论文</a> · <a href="../../../../foundation-models/2603.09906-thinking-to-recall/">实现解读</a> · <a href="#qa-1f1300a5c5f8f35d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:thinking-to-recall" data-paper-title="Thinking to Recall: How Reasoning Unlocks Parametric Knowledge in LLMs" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Thinking to Recall: How Reasoning Unlocks Parametric Knowledge in LLMs 基础模型 Google Research 2026-03-10 推理不仅可能分解复杂任务，也可能通过额外计算和相关事实的自检索帮助单跳知识召回。论文控制同一 hybrid 模型的 reasoning ON/OFF，区分计算缓冲与 factual priming，同时发现中间事实幻觉会连带增加最终答案错误。 完整实验成本过高，不复现（审查 DONE）。诊断中的真值数组是显式教学输入，不是Agent任务成绩。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU组件专测已通过；没有CUDA路径，不需要GPU验收。未接入Evolve，不可据本地fixture成绩晋级。conditional_expected_accuracy 只返回汇总统计、保留/剔除题数，绝不返回被oracle选中的轨迹、行动或训练样本；默认严格要求每题100条。pass_at_k 使用无偏组合数估计。负控同时覆盖共同题目mask、逐题宏平均而非微平均、空事实集合和缺失子集。  知识与推理 参数知识召回 基础模型 能力证据：评测采样、读出与可靠性 三种轨迹子集为什么必须用相同的题目集合？ 若只给干净子集剔除难题，而all臂保留，会把题目难度变化误当过滤收益。原文每题100条采样，任何条件子集为空时三臂共同剔除，再算每题比例的宏平均。 A题只有1条干净轨迹、B题有90条，仍先各算题内率再等权平均，不按91条合并微平均。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-bcaa798381c505d2">三种轨迹子集为什么必须用相同的题目集合？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Athinking-to-recall">Thinking to Recall: How Reasoning Unlocks Parametric Knowledge in LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>若只给干净子集剔除难题，而all臂保留，会把题目难度变化误当过滤收益。原文每题100条采样，任何条件子集为空时三臂共同剔除，再算每题比例的宏平均。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>A题只有1条干净轨迹、B题有90条，仍先各算题内率再等权平均，不按91条合并微平均。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.09906v1">原论文</a> · <a href="../../../../foundation-models/2603.09906-thinking-to-recall/">实现解读</a> · <a href="#qa-bcaa798381c505d2">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:thinking-to-recall" data-paper-title="Thinking to Recall: How Reasoning Unlocks Parametric Knowledge in LLMs" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Thinking to Recall: How Reasoning Unlocks Parametric Knowledge in LLMs 基础模型 Google Research 2026-03-10 推理不仅可能分解复杂任务，也可能通过额外计算和相关事实的自检索帮助单跳知识召回。论文控制同一 hybrid 模型的 reasoning ON/OFF，区分计算缓冲与 factual priming，同时发现中间事实幻觉会连带增加最终答案错误。 完整实验成本过高，不复现（审查 DONE）。诊断中的真值数组是显式教学输入，不是Agent任务成绩。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU组件专测已通过；没有CUDA路径，不需要GPU验收。未接入Evolve，不可据本地fixture成绩晋级。conditional_expected_accuracy 只返回汇总统计、保留/剔除题数，绝不返回被oracle选中的轨迹、行动或训练样本；默认严格要求每题100条。pass_at_k 使用无偏组合数估计。负控同时覆盖共同题目mask、逐题宏平均而非微平均、空事实集合和缺失子集。  知识与推理 参数知识召回 基础模型 能力证据：评测采样、读出与可靠性 这种“优先正确事实轨迹”能像在线Agent策略一样部署吗？ 本地实现不能；它使用事后外部标注的事实真值模拟条件期望，只是离线oracle分析。要部署还需要不看gold的可靠事实验证器，并计入调用成本和误判；这不是由汇总公式自动得到的。 用gold确认哪条轨迹正确，再展示该轨迹给actor，会泄漏答案，不能算推理提升。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-26c83fa9c9887b9d">这种“优先正确事实轨迹”能像在线Agent策略一样部署吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Athinking-to-recall">Thinking to Recall: How Reasoning Unlocks Parametric Knowledge in LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>本地实现不能；它使用事后外部标注的事实真值模拟条件期望，只是离线oracle分析。要部署还需要不看gold的可靠事实验证器，并计入调用成本和误判；这不是由汇总公式自动得到的。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>用gold确认哪条轨迹正确，再展示该轨迹给actor，会泄漏答案，不能算推理提升。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.09906v1">原论文</a> · <a href="../../../../foundation-models/2603.09906-thinking-to-recall/">实现解读</a> · <a href="#qa-26c83fa9c9887b9d">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:thinking-to-recall" data-paper-title="Thinking to Recall: How Reasoning Unlocks Parametric Knowledge in LLMs" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Thinking to Recall: How Reasoning Unlocks Parametric Knowledge in LLMs 基础模型 Google Research 2026-03-10 推理不仅可能分解复杂任务，也可能通过额外计算和相关事实的自检索帮助单跳知识召回。论文控制同一 hybrid 模型的 reasoning ON/OFF，区分计算缓冲与 factual priming，同时发现中间事实幻觉会连带增加最终答案错误。 完整实验成本过高，不复现（审查 DONE）。诊断中的真值数组是显式教学输入，不是Agent任务成绩。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU组件专测已通过；没有CUDA路径，不需要GPU验收。未接入Evolve，不可据本地fixture成绩晋级。conditional_expected_accuracy 只返回汇总统计、保留/剔除题数，绝不返回被oracle选中的轨迹、行动或训练样本；默认严格要求每题100条。pass_at_k 使用无偏组合数估计。负控同时覆盖共同题目mask、逐题宏平均而非微平均、空事实集合和缺失子集。  知识与推理 参数知识召回 基础模型 能力证据：评测采样、读出与可靠性 接口为什么只返回统计而不返回“最佳轨迹”？ 让正确性标签局限在独立evaluator，避免被actor或训练选择器当成oracle。函数显式输出保留题数、剔除题数与offline标记；缺少任何条件子集就报错或共同剔除，不默默补一条假事实。 所有题都没有事实轨迹时应失败，而不是返回干净准确率1。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-6416371045655a44">接口为什么只返回统计而不返回“最佳轨迹”？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Athinking-to-recall">Thinking to Recall: How Reasoning Unlocks Parametric Knowledge in LLMs</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google Research</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>让正确性标签局限在独立evaluator，避免被actor或训练选择器当成oracle。函数显式输出保留题数、剔除题数与offline标记；缺少任何条件子集就报错或共同剔除，不默默补一条假事实。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>所有题都没有事实轨迹时应失败，而不是返回干净准确率1。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2603.09906v1">原论文</a> · <a href="../../../../foundation-models/2603.09906-thinking-to-recall/">实现解读</a> · <a href="#qa-6416371045655a44">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:qe-length-normalization" data-paper-title="Penalizing Length: Uncovering Systematic Bias in Quality Estimation Metrics" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Penalizing Length: Uncovering Systematic Bias in Quality Estimation Metrics 基础模型 Carnegie Mellon University / Google 2025-10-24 同样没有翻译错误，较长译文却被质量估计器判得更差，会把 reranking 和基于评分的训练导向短答案。本文不把长度和真实质量相关性混在一起：对同一文档的连续金标准段落构造一至五段的前缀，尽量固定领域和质量，再观察评分漂移。缓解方案之一是在训练时预测单位长度的错误密度，在推理时乘回译文长度。它改变监督目标及其分布，不是对已经训练好的 MetricX 输出做一次除法，就能声称修好了偏差。论文还检查引入参考文本的评估方案，本地未实现该模型分支。 完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。本地交付是 L1 数值/协议组件，不是完整论文能力复现。完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。density_targets、restore_ratings 对应监督目标和输出恢复；controlled_passages 对应同文档前缀与整组过滤；within_document_differences 只计算五个控制前缀的相对评分。没有下载 WMT、加载 MetricX/Gemini、重新训练评分器或生成翻译。  评测与研究证据 翻译指标与长度偏差 基础模型 能力证据：评测采样、读出与可靠性 QE 长度偏差为何不能靠比较任意长句和短句证明？ 长短句可能本来就有不同错误率、领域和难度。论文对同文档连续金标准段落做一至五段前缀，保持假设无错质量与领域，再看指标是否系统漂移。它仍依赖后编辑金标准近似无错的前提。 教学例：同一篇新闻的前三个正确段落拼起来后评分下降，不同于拿一段简单广告与一篇难译法律长文比较。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<span id="paper-foundation-models-qe-length-normalization-fae0f407" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-8afab47abd83b7e9">QE 长度偏差为何不能靠比较任意长句和短句证明？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aqe-length-normalization">Penalizing Length: Uncovering Systematic Bias in Quality Estimation Metrics</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Carnegie Mellon University / Google</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>长短句可能本来就有不同错误率、领域和难度。论文对同文档连续金标准段落做一至五段前缀，保持假设无错质量与领域，再看指标是否系统漂移。它仍依赖后编辑金标准近似无错的前提。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同一篇新闻的前三个正确段落拼起来后评分下降，不同于拿一段简单广告与一篇难译法律长文比较。</p>
+<p class="ar-learning-sources">依据：背景与主要改动；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2510.22028v1">原论文</a> · <a href="../../../../foundation-models/2510.22028-qe-length-normalization/">实现解读</a> · <a href="#qa-8afab47abd83b7e9">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:qe-length-normalization" data-paper-title="Penalizing Length: Uncovering Systematic Bias in Quality Estimation Metrics" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Penalizing Length: Uncovering Systematic Bias in Quality Estimation Metrics 基础模型 Carnegie Mellon University / Google 2025-10-24 同样没有翻译错误，较长译文却被质量估计器判得更差，会把 reranking 和基于评分的训练导向短答案。本文不把长度和真实质量相关性混在一起：对同一文档的连续金标准段落构造一至五段的前缀，尽量固定领域和质量，再观察评分漂移。缓解方案之一是在训练时预测单位长度的错误密度，在推理时乘回译文长度。它改变监督目标及其分布，不是对已经训练好的 MetricX 输出做一次除法，就能声称修好了偏差。论文还检查引入参考文本的评估方案，本地未实现该模型分支。 完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。本地交付是 L1 数值/协议组件，不是完整论文能力复现。完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。density_targets、restore_ratings 对应监督目标和输出恢复；controlled_passages 对应同文档前缀与整组过滤；within_document_differences 只计算五个控制前缀的相对评分。没有下载 WMT、加载 MetricX/Gemini、重新训练评分器或生成翻译。  评测与研究证据 翻译指标与长度偏差 基础模型 能力证据：评测采样、读出与可靠性 把现成 MetricX 输出除以长度，就复现了训练归一化吗？ 没有。原文把训练标签变为R/|h|，训练预测密度的模型，再把预测密度乘回同口径长度。冻结模型的后处理没有改变训练分布；本地只执行目标变换与恢复，不声称模型已去偏。 教学例：同为错误评分−5，10与20个计量单位的训练目标为−0.5与−0.25；乘回后都为−5，但这些数值不证明一个冻结模型真的学会密度。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-499312e689768aec">把现成 MetricX 输出除以长度，就复现了训练归一化吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aqe-length-normalization">Penalizing Length: Uncovering Systematic Bias in Quality Estimation Metrics</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Carnegie Mellon University / Google</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>没有。原文把训练标签变为R/|h|，训练预测密度的模型，再把预测密度乘回同口径长度。冻结模型的后处理没有改变训练分布；本地只执行目标变换与恢复，不声称模型已去偏。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：同为错误评分−5，10与20个计量单位的训练目标为−0.5与−0.25；乘回后都为−5，但这些数值不证明一个冻结模型真的学会密度。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2510.22028v1">原论文</a> · <a href="../../../../foundation-models/2510.22028-qe-length-normalization/">实现解读</a> · <a href="#qa-499312e689768aec">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:qe-length-normalization" data-paper-title="Penalizing Length: Uncovering Systematic Bias in Quality Estimation Metrics" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Penalizing Length: Uncovering Systematic Bias in Quality Estimation Metrics 基础模型 Carnegie Mellon University / Google 2025-10-24 同样没有翻译错误，较长译文却被质量估计器判得更差，会把 reranking 和基于评分的训练导向短答案。本文不把长度和真实质量相关性混在一起：对同一文档的连续金标准段落构造一至五段的前缀，尽量固定领域和质量，再观察评分漂移。缓解方案之一是在训练时预测单位长度的错误密度，在推理时乘回译文长度。它改变监督目标及其分布，不是对已经训练好的 MetricX 输出做一次除法，就能声称修好了偏差。论文还检查引入参考文本的评估方案，本地未实现该模型分支。 完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。本地交付是 L1 数值/协议组件，不是完整论文能力复现。完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。density_targets、restore_ratings 对应监督目标和输出恢复；controlled_passages 对应同文档前缀与整组过滤；within_document_differences 只计算五个控制前缀的相对评分。没有下载 WMT、加载 MetricX/Gemini、重新训练评分器或生成翻译。  评测与研究证据 翻译指标与长度偏差 基础模型 能力证据：评测采样、读出与可靠性 错误密度训练与验证集温度校准解决同一个问题吗？ 不是。前者改变监督目标对长度的尺度关系；温度校准改变已有分类概率的锐度，通常不改变预测类别。二者都须明确数据和计量，但不能因为都叫校准就用温度替代MetricX重训。 教学例：将二类logit除以2能降低置信度，却不会使翻译错误评分自动按译文长度学习。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-ab022e08119760af">错误密度训练与验证集温度校准解决同一个问题吗？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aqe-length-normalization">Penalizing Length: Uncovering Systematic Bias in Quality Estimation Metrics</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Carnegie Mellon University / Google</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不是。前者改变监督目标对长度的尺度关系；温度校准改变已有分类概率的锐度，通常不改变预测类别。二者都须明确数据和计量，但不能因为都叫校准就用温度替代MetricX重训。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：将二类logit除以2能降低置信度，却不会使翻译错误评分自动按译文长度学习。</p>
+<p class="ar-learning-sources">依据：核心公式；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2510.22028v1">原论文</a> · <a href="../../../../foundation-models/2510.22028-qe-length-normalization/">实现解读</a> · <a href="#qa-ab022e08119760af">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:qe-length-normalization" data-paper-title="Penalizing Length: Uncovering Systematic Bias in Quality Estimation Metrics" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Penalizing Length: Uncovering Systematic Bias in Quality Estimation Metrics 基础模型 Carnegie Mellon University / Google 2025-10-24 同样没有翻译错误，较长译文却被质量估计器判得更差，会把 reranking 和基于评分的训练导向短答案。本文不把长度和真实质量相关性混在一起：对同一文档的连续金标准段落构造一至五段的前缀，尽量固定领域和质量，再观察评分漂移。缓解方案之一是在训练时预测单位长度的错误密度，在推理时乘回译文长度。它改变监督目标及其分布，不是对已经训练好的 MetricX 输出做一次除法，就能声称修好了偏差。论文还检查引入参考文本的评估方案，本地未实现该模型分支。 完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。本地交付是 L1 数值/协议组件，不是完整论文能力复现。完整实验成本过高，不复现（审查 DONE）；未执行模型/API训练，不启用自动重试或 evolve 晋级。density_targets、restore_ratings 对应监督目标和输出恢复；controlled_passages 对应同文档前缀与整组过滤；within_document_differences 只计算五个控制前缀的相对评分。没有下载 WMT、加载 MetricX/Gemini、重新训练评分器或生成翻译。  评测与研究证据 翻译指标与长度偏差 基础模型 能力证据：评测采样、读出与可靠性 为什么整组500-token门槛不能用独立段落的token数求和？ 分词依赖边界，串接后的token数不一定等于各段独立计数之和。接口要求五个实际前缀计数；第五超过500则丢弃整组，否则长度组不再是同一控制文档。长度单位也必须在密度训练与恢复时一致。 教学例：五段分别计100并不保证串接后恰好500；实测第五前缀501时五条都拒绝，不只删最长一条。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-8d2fbee47169ed6a">为什么整组500-token门槛不能用独立段落的token数求和？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Aqe-length-normalization">Penalizing Length: Uncovering Systematic Bias in Quality Estimation Metrics</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Carnegie Mellon University / Google</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>分词依赖边界，串接后的token数不一定等于各段独立计数之和。接口要求五个实际前缀计数；第五超过500则丢弃整组，否则长度组不再是同一控制文档。长度单位也必须在密度训练与恢复时一致。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>教学例：五段分别计100并不保证串接后恰好500；实测第五前缀501时五条都拒绝，不只删最长一条。</p>
+<p class="ar-learning-sources">依据：数据协议与代码映射；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2510.22028v1">原论文</a> · <a href="../../../../foundation-models/2510.22028-qe-length-normalization/">实现解读</a> · <a href="#qa-8d2fbee47169ed6a">问题链接</a></p>
+</details>
+</article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:combinatorial-watermark" data-paper-title="Detecting Post-generation Edits to Watermarked LLM Outputs via Combinatorial Watermarking" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Detecting Post-generation Edits to Watermarked LLM Outputs via Combinatorial Watermarking 基础模型 University of Minnesota 2025-10-02 固定v1 Section3 Eqs2–5：调用方提供真实secret分区与base logits；bias δ到当前pattern tag后softmax。Iw(t)对所有cyclic phases检查，global mean；local在完整interior t=w−1..T−w平均w个covering windows。全局&gt;=threshold、局部&lt;threshold，阈值需在calibration控制TypeI。binary周期整周期删除可以不可检测，不能承诺完美定位。 成本过高，不复现（审查 DONE）。诊断不加载tokenizer/LLM。完整实验Llama2-7B/OPT1.3B，WikiText多水印强度/模式/1–6token编辑×三种编辑方式，1000条64token、阈值校准及PPL矩阵；原文RTX6000Ada48GB。完整模型数据构造与全矩阵不跑，不编造总耗时；只保留CPU公式和负控。调用方提供vocabulary partition与base logits；CPU实现bias、softmax、cyclic窗口统计和阈值判定，不提供production secret系统或密码安全保证。诊断不加载tokenizer/LLM。  安全与可验证性 文本水印与编辑检测 基础模型 能力证据：评测采样、读出与可靠性 组合水印为什么按周期 pattern 给不同词表分区加偏置？ 生成时按当前tag轻微改变相应分区的logits，使序列出现可统计的周期结构；检测器再检查窗口对任意循环相位的匹配，用于水印与潜在编辑诊断。 示意：AB周期控制偏置分区，检测并不要求观察文本正好从周期第一个位置开始。 2026-10-27">
 <p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
 <span id="paper-foundation-models-combinatorial-watermark-183aedb0" class="ar-learning-paper-anchor"></span>
@@ -716,6 +1087,59 @@ hide:
 <p class="ar-learning-example"><strong>教学例子：</strong>缺少完整覆盖窗口的开头位置，不应因人为补零被误标成编辑。</p>
 <p class="ar-learning-sources">依据：核心公式、本地复现；例子用于解释机制。</p>
 <p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2510.01637v1">原论文</a> · <a href="../../../../foundation-models/2510.01637-combinatorial-watermark/">实现解读</a> · <a href="#qa-cb75a73b696eddd8">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:rosetta-unification" data-paper-title="Beyond the Rosetta Stone: Unification Forces in Generalization Dynamics" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Beyond the Rosetta Stone: Unification Forces in Generalization Dynamics 基础模型 Google DeepMind 2025-08-14 同一事实以不同语言出现时，模型可能把它们存成互不相通的表征。作者在受控合成知识图谱上从零训练小型 Transformer，分别改变平行事实比例、语言频率差异和语言可提取性，发现同语言准确率接近满分并不代表跨语言迁移良好。 完整实验成本过高，不复现（审查 DONE）。诊断验证尺度不变性、平均比值及集合自相似不等于对角线常数1。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU组件专测已通过；没有CUDA路径，不需要GPU验收。未接入Evolve，不可据本地fixture成绩晋级。average_cosine 与 unification_score 实现有限、非零表示的集合余弦和逐组比值，拒绝接近零的分母。诊断验证尺度不变性、平均比值及集合自相似不等于对角线常数1。外部特征没有由本地模型生成；诊断不证明跨语言准确率提高。  预训练与知识表示 跨语言知识迁移 基础模型 能力证据：评测采样、读出与可靠性 同语言召回接近100%，为什么仍可能跨语言答错？ 模型可能借助语言特征形成分离的知识表示；同一事实在训练语言中可读出，不代表另一语言能访问。论文用相同事实、不同语言分布的受控训练区分两者，不能用ID分数替代跨语言validation。 某个出生城市事实只用语言A表达；A的改写题全对，B的问题仍可能错。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<span id="paper-foundation-models-rosetta-unification-42d28816" class="ar-learning-paper-anchor"></span>
+<p class="ar-learning-level">基础理解</p>
+<h2 id="qa-e283ba490c9106d0">同语言召回接近100%，为什么仍可能跨语言答错？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arosetta-unification">Beyond the Rosetta Stone: Unification Forces in Generalization Dynamics</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>模型可能借助语言特征形成分离的知识表示；同一事实在训练语言中可读出，不代表另一语言能访问。论文用相同事实、不同语言分布的受控训练区分两者，不能用ID分数替代跨语言validation。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>某个出生城市事实只用语言A表达；A的改写题全对，B的问题仍可能错。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2508.11017v1">原论文</a> · <a href="../../../../foundation-models/2508.11017-rosetta-unification/">实现解读</a> · <a href="#qa-e283ba490c9106d0">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:rosetta-unification" data-paper-title="Beyond the Rosetta Stone: Unification Forces in Generalization Dynamics" data-learning-pending="false" data-level="mechanism" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Beyond the Rosetta Stone: Unification Forces in Generalization Dynamics 基础模型 Google DeepMind 2025-08-14 同一事实以不同语言出现时，模型可能把它们存成互不相通的表征。作者在受控合成知识图谱上从零训练小型 Transformer，分别改变平行事实比例、语言频率差异和语言可提取性，发现同语言准确率接近满分并不代表跨语言迁移良好。 完整实验成本过高，不复现（审查 DONE）。诊断验证尺度不变性、平均比值及集合自相似不等于对角线常数1。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU组件专测已通过；没有CUDA路径，不需要GPU验收。未接入Evolve，不可据本地fixture成绩晋级。average_cosine 与 unification_score 实现有限、非零表示的集合余弦和逐组比值，拒绝接近零的分母。诊断验证尺度不变性、平均比值及集合自相似不等于对角线常数1。外部特征没有由本地模型生成；诊断不证明跨语言准确率提高。  预训练与知识表示 跨语言知识迁移 基础模型 能力证据：评测采样、读出与可靠性 统一度为什么要明确同语言基线，不能只算两个向量的余弦？ 原文比较跨语言语义等价组与同语言基线组的平均相似度，并对比值取平均。自余弦恒为1会改变定义；本地要求显式传入组和基线，并拒绝近零分母，不猜测隐藏状态与事实配对。 两组的numerator/denominator分别是0.8/0.6和0.6/0.8，分数是两个比值的均值，不是(0.8+0.6)/(0.6+0.8)。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">核心机制</p>
+<h2 id="qa-8230e66a99e4d014">统一度为什么要明确同语言基线，不能只算两个向量的余弦？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arosetta-unification">Beyond the Rosetta Stone: Unification Forces in Generalization Dynamics</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>原文比较跨语言语义等价组与同语言基线组的平均相似度，并对比值取平均。自余弦恒为1会改变定义；本地要求显式传入组和基线，并拒绝近零分母，不猜测隐藏状态与事实配对。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>两组的numerator/denominator分别是0.8/0.6和0.6/0.8，分数是两个比值的均值，不是(0.8+0.6)/(0.6+0.8)。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2508.11017v1">原论文</a> · <a href="../../../../foundation-models/2508.11017-rosetta-unification/">实现解读</a> · <a href="#qa-8230e66a99e4d014">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:rosetta-unification" data-paper-title="Beyond the Rosetta Stone: Unification Forces in Generalization Dynamics" data-learning-pending="false" data-level="comparison" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Beyond the Rosetta Stone: Unification Forces in Generalization Dynamics 基础模型 Google DeepMind 2025-08-14 同一事实以不同语言出现时，模型可能把它们存成互不相通的表征。作者在受控合成知识图谱上从零训练小型 Transformer，分别改变平行事实比例、语言频率差异和语言可提取性，发现同语言准确率接近满分并不代表跨语言迁移良好。 完整实验成本过高，不复现（审查 DONE）。诊断验证尺度不变性、平均比值及集合自相似不等于对角线常数1。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU组件专测已通过；没有CUDA路径，不需要GPU验收。未接入Evolve，不可据本地fixture成绩晋级。average_cosine 与 unification_score 实现有限、非零表示的集合余弦和逐组比值，拒绝接近零的分母。诊断验证尺度不变性、平均比值及集合自相似不等于对角线常数1。外部特征没有由本地模型生成；诊断不证明跨语言准确率提高。  预训练与知识表示 跨语言知识迁移 基础模型 能力证据：评测采样、读出与可靠性 Rosetta与Thinking to Recall都涉及事实，干预位置有什么不同？ Rosetta观察/干预预训练语言分布及表示统一度；Thinking to Recall分析推理时自生成事实及其正确性。前者的相似度不是事实真值judge，后者的oracle条件准确率也不证明跨语言表示统一。 提高两语言表示相似度，不会自动判断某条中间生日事实是否幻觉；过滤正确事实也不保证低资源语言可读出知识。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">方法对比</p>
+<h2 id="qa-ccd798e2e8e68a79">Rosetta与Thinking to Recall都涉及事实，干预位置有什么不同？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arosetta-unification">Beyond the Rosetta Stone: Unification Forces in Generalization Dynamics</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>Rosetta观察/干预预训练语言分布及表示统一度；Thinking to Recall分析推理时自生成事实及其正确性。前者的相似度不是事实真值judge，后者的oracle条件准确率也不证明跨语言表示统一。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>提高两语言表示相似度，不会自动判断某条中间生日事实是否幻觉；过滤正确事实也不保证低资源语言可读出知识。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2508.11017v1">原论文</a> · <a href="../../../../foundation-models/2508.11017-rosetta-unification/">实现解读</a> · <a href="#qa-ccd798e2e8e68a79">问题链接</a></p>
+</details>
+</article>
+<article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:rosetta-unification" data-paper-title="Beyond the Rosetta Stone: Unification Forces in Generalization Dynamics" data-learning-pending="false" data-level="implementation" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Beyond the Rosetta Stone: Unification Forces in Generalization Dynamics 基础模型 Google DeepMind 2025-08-14 同一事实以不同语言出现时，模型可能把它们存成互不相通的表征。作者在受控合成知识图谱上从零训练小型 Transformer，分别改变平行事实比例、语言频率差异和语言可提取性，发现同语言准确率接近满分并不代表跨语言迁移良好。 完整实验成本过高，不复现（审查 DONE）。诊断验证尺度不变性、平均比值及集合自相似不等于对角线常数1。L1 机制/评测组件，diagnostic only，不是完整模型能力复现。CPU组件专测已通过；没有CUDA路径，不需要GPU验收。未接入Evolve，不可据本地fixture成绩晋级。average_cosine 与 unification_score 实现有限、非零表示的集合余弦和逐组比值，拒绝接近零的分母。诊断验证尺度不变性、平均比值及集合自相似不等于对角线常数1。外部特征没有由本地模型生成；诊断不证明跨语言准确率提高。  预训练与知识表示 跨语言知识迁移 基础模型 能力证据：评测采样、读出与可靠性 本地比值测试通过，能否宣称复现0.97的相关系数？ 不能。0.97来自作者跨多次模型训练的表示与独立准确率联合测量。本地只做给定数组的算术，既无模型特征抽取，也无跨语言答案；新实验还必须用validation选择而非test调参。 随机矩阵的比值有限只说明数值核可算，不是110次训练相关性证据。 2026-11-13">
+<p class="ar-learning-card__domain"><a href="./">基础模型 / 能力证据：评测采样、读出与可靠性</a></p>
+<p class="ar-learning-level">实现细节</p>
+<h2 id="qa-91f883c07674fabc">本地比值测试通过，能否宣称复现0.97的相关系数？</h2>
+<p class="ar-learning-paper"><a href="../../../all/?paper=foundation-models%3Arosetta-unification">Beyond the Rosetta Stone: Unification Forces in Generalization Dynamics</a></p>
+<p class="ar-learning-card__meta">问答新增：2026-11-13 · Google DeepMind</p>
+<details class="ar-learning-answer"><summary>展开答案与例子</summary>
+<p><strong>答案：</strong>不能。0.97来自作者跨多次模型训练的表示与独立准确率联合测量。本地只做给定数组的算术，既无模型特征抽取，也无跨语言答案；新实验还必须用validation选择而非test调参。</p>
+<p class="ar-learning-example"><strong>教学例子：</strong>随机矩阵的比值有限只说明数值核可算，不是110次训练相关性证据。</p>
+<p class="ar-learning-sources">依据：背景与主要改动、核心机制与公式、原文结果与限制、本地复现；例子用于解释机制。</p>
+<p class="ar-learning-card__links"><a href="https://arxiv.org/abs/2508.11017v1">原论文</a> · <a href="../../../../foundation-models/2508.11017-rosetta-unification/">实现解读</a> · <a href="#qa-91f883c07674fabc">问题链接</a></p>
 </details>
 </article>
 <article class="ar-learning-card ar-learning-qa" data-learning-card data-identity="foundation-models:mechanistic-etm" data-paper-title="Model Directions, Not Words: Mechanistic Topic Models Using Sparse Autoencoders" data-learning-pending="false" data-level="basics" data-domain="foundation-models" data-theme="foundation-models" data-topic="foundation-models/evaluation-and-evidence" data-search="Model Directions, Not Words: Mechanistic Topic Models Using Sparse Autoencoders 基础模型 Columbia University 2025-07-31 固定v3 Section4.2.2 Eqs9–13：δN(0,I)、θ=softmaxδ、βk=sigmoid(W_in vk+b)，W_in为冻结SAE ENCODER，不是decoder；每个feature计数Binomial(Ntokens,[θβ]i)。variational q拓扑与MC noise显式外传，优化NLL+analytic Gaussian KL。Eqs16–19仅steering才用独立SAE DECODER列方向加权单位化，再移除已有parallel分量、注入指定strength。 成本过高，不复现（审查 DONE）。Gemma2-9B、layer10的16K GemmaScope SAE、8数据集、LDA/ETM/BERTopic多变种及Bayesian优化，GPT4.1 topic judge每数据集2800成对比较和额外coherence/steering评测。完整矩阵超单卡短时预算；不下载LLM/SAE或调API，不编造未报告总GPU小时。MechanisticETM接冻结SAE encoder_weights与真实过滤后的activation counts；steering函数单独接不同的decoder方向和decoder bias。  可解释性 SAE主题模型与控制 基础模型 能力证据：评测采样、读出与可靠性 Mechanistic ETM 为什么以 SAE feature 而非词项作为主题观察？ 它用稀疏激活方向描述文档概念，主题经冻结SAE encoder形成feature概率，再拟合文档比例与feature计数。可解释对象因此是模型内部方向，不只是高频词列表。 示意：不同表面词可激活相近概念feature，而同一词在不同语境中也未必代表同一主题。 2026-10-27">

@@ -1,0 +1,53 @@
+{
+  "domain": "post-training",
+  "key": "maxim",
+  "title": "MaxIM: Maximally Informative Incremental Summarization via Reinforcement Learning",
+  "paper_url": "https://arxiv.org/abs/2611.12825v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.12825v1",
+  "reviewed_version": "v1",
+  "detail_path": "post-training/2611.12825-maxim/README.md",
+  "topic": [
+    "奖励与信用分配",
+    "信息论奖励与增量记忆"
+  ],
+  "first_author": "Jihwan Jeong",
+  "first_author_affiliation": "Google Research",
+  "published": "2026-11-09",
+  "published_at": "2026-11-09T18:25:42Z",
+  "code": null,
+  "code_status": "截至2026-11-11，固定v1正文未给出已核实的MaxIM作者实现仓库；本地据式4–7独立实现奖励算术，不包含critic或摘要策略。",
+  "code_license": null,
+  "upstream_revision": null,
+  "adapter": null,
+  "priority": "P0",
+  "priority_reason": "Google/DeepMind相关优先原文核对；核心可用独立低成本数值组件验证。",
+  "intake_class": "new_first_publication",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.post_training.maxim.normalized_pmi",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.post_training.maxim import diagnostic; print(diagnostic(42, device=\"cpu\"))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "固定v1 §4.3–4.4、Appendix D.4；https://arxiv.org/html/2611.12825v1",
+    "model_scale": "Gemini 2.5 Flash用于可训练策略、统一critic及行动/用户模拟；非可下载公开checkpoint。",
+    "data_scale": "arXiv与WildChat合成监督和在线交互；评测500个对话种子、最多15轮，GPT-4.1 judge及10000次bootstrap。",
+    "paper_configuration": "所有SFT、RL和serving在Google Cloud TPU；arXiv RL 1000步、WildChat 800步；多奖励与claim-grounding消融。",
+    "estimated_cost_basis": "闭源可训练模型、TPU与多角色长程交互不属于单卡短时复现；不把作者系统换成小模型后冒充完整复现。",
+    "available_resource": "本地Mac或单张NVIDIA A100/A30",
+    "decision": "成本过高，不复现（审查DONE）；仅本地L1核心组件，不下载大权重/数据、不完整训练、不自动重试。"
+  },
+  "summary": "统一冻结critic分别对目标和新摘要计算conditional/null逐token对数似然比，再做中心化sigmoid、1-gamma尺度平衡与余弦退火。本地仅CPU奖励核，不训练critic或摘要器。",
+  "verified_priority_organizations": [
+    "Google"
+  ]
+}

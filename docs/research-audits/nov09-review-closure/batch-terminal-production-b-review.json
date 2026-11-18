@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "window": {
+    "start": "2026-10-16",
+    "end": "2026-11-09",
+    "timezone": "Asia/Shanghai"
+  },
+  "scope": "Independent fixed-original review of the preserved in-window Finteract AI production lead. Source sections distinguish architectural contribution, observational production evidence, reproducibility limits and computational cost; no implementation or experiment was performed.",
+  "input_inventory_commit": "a86689a72b42d93fa726972c0ab2ecb42e378a84",
+  "all_sources_exhaustive": false,
+  "reviews": [
+    {
+      "id": "2610.39230",
+      "title": "Beyond LLM Wrappers: Context Engineering and the Three-Engine Architecture for Reliable Financial AI",
+      "published": "2026-10-29T02:50:00Z",
+      "updated": "2026-10-29T02:50:00Z",
+      "revision": 1,
+      "metadata_sha256": "2981bbbde99a984baa7744184b9cc8c148a4e80daaadc8de906083fc528ac81c",
+      "source_sha256": "5eb28dbfba4c58346a3a77de855271a8048a2e6bf6f20fbeb08b3c0673245235",
+      "source_url": "https://arxiv.org/html/2610.39230v1",
+      "track": "agent",
+      "priority": "P1",
+      "organization": "Finteract AI",
+      "verified_priority_organizations": [],
+      "source_review_scope": "fixed byline, complete architecture and context-engineering descriptions, integration requirements, production observations, related-work novelty boundaries and limitations",
+      "locations": [
+        "author block: Pradeep Kumar GS / Ravi Tanniru, Finteract AI",
+        "§3 Three-Engine Architecture (HTML #Sx4)",
+        "§4 Context Engineering (HTML #Sx5)",
+        "§5 Integration Challenges (HTML #Sx6)",
+        "§6 Production Deployment (HTML #Sx7)",
+        "§7 Related Work (HTML #Sx8)",
+        "§8 Limitations (HTML #Sx9)"
+      ],
+      "reason": "固定原文确认这是 Finteract AI 的金融系统架构与生产经验报告，不是 Google 机构论文；Gemini 只是主要服务提供方。中心贡献是金融知识图谱、既有 OR-Tools 优化器与分工 LLM Agent 的集成模式，以及时间、租户权限、确定性计算和证据验证边界。§3/§7 明确不提出新优化算法；§4 将严格的上下文选择优化形式化留为开放问题；§8 明确未提供全部图模式、优化模型或验证规则的形式规格，并把开放参考实现、合成基准与正式评测列为未来工作。§6 的 15 项部署及约 500 条建议抽查是有价值的真实观测，但不是随机生产 A/B，且私有 ERP 数据未公开；不能将它们改称公开基准。按用户批准的单应用/经验报告且无独立新算法或公开基准标准，本窗口不选，完成审查而非实施。此结论不基于硬件规模，也不将可廉价搭建的示意流水线冒充论文精确复现。",
+      "decision": "rejected",
+      "resolution": "not_selected_this_window_architectural_production_experience_report",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "selection_policy": "user-approved not-selected application/report or repeated-evaluation scope with no independently reproducible new algorithm or public benchmark; decision verified against fixed original rather than inferred from title or abstract",
+      "defining_contribution": {
+        "kind": "domain_specific_architectural_integration_and_production_lessons",
+        "components": [
+          "financial graph with entity relationships, temporal validity, tenant scope and provenance",
+          "existing deterministic optimizer; OR-Tools used in described deployments",
+          "intent, context assembly, optimizer invocation, response and validation agents",
+          "context coordination and record-/solver-grounded claim validation"
+        ],
+        "new_optimizer_claimed": false,
+        "formal_context_selection_algorithm_supplied": false,
+        "complete_reference_specification_supplied": false,
+        "public_reproducible_benchmark_supplied": false,
+        "upstream_reference_implementation": "原文未给出本系统开放代码；§8 将开放模式、参考实现、合成基准和正式评测列为未来工作。参考文献中的 AutoGen、CrewAI、OR-Tools 等不当作作者系统代码。"
+      },
+      "production_evidence": {
+        "classification": "observational_customer_deployments_not_randomized_ab",
+        "deployments": 15,
+        "selection_pool": "150+ client base; selected by deployment maturity, data availability and organizational data readiness",
+        "duration": "approximately 11 months",
+        "deployment_domains": [
+          "manufacturing",
+          "SaaS",
+          "services",
+          "e-commerce",
+          "trading"
+        ],
+        "query_scale": "approximately 50–500 invoices per optimization query; graphs from tens of thousands to more than one million nodes",
+        "comparator": "early single-agent pilot recommendations versus later graph-backed multi-agent-validated production recommendations",
+        "reported_unsupported_claim_counts": "approximately 36–43 of 500 pilot responses versus approximately 4–5 per 500 production responses",
+        "reported_rates": "paper describes approximately 7–9% and below 1%, respectively",
+        "rate_precision_caveat": "5/500 equals exactly 1%; the paper uses approximate counts and a below-1% description without supplying precise underlying denominators. Do not strengthen this into a strict independently verified <1% bound.",
+        "deployment_time_observation": "roughly six weeks for early tenants versus approximately two weeks for later tenants",
+        "randomization_reported": false,
+        "causal_component_effect_established": false,
+        "public_customer_traces_available": false,
+        "confounders": [
+          "system maturity and improved templates",
+          "better data pipelines and model upgrades",
+          "team learning and deployment process improvements",
+          "customer selection and tenant data maturity"
+        ]
+      },
+      "production_gate_passed": false,
+      "resource_assessment": {
+        "model": "Gemini is the primary provider; exact checkpoint/version and open-model configurations are not specified",
+        "training_compute": "not reported; no original training procedure or required GPU count is specified",
+        "full_reproduction_barrier": "private ERP records, nonreleased complete graph/optimizer/validation specifications, and uncontrolled observational deployment history",
+        "low_cost_prototype": "A small deterministic graph/solver/validation integration could be implemented on CPU, but would be a locally designed prototype rather than the fully specified author algorithm or a replication of the production effect.",
+        "high_cost_inferred": false,
+        "experiment_started": false
+      }
+    }
+  ]
+}

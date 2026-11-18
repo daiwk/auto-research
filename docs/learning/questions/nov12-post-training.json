@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "post-training:bopd": {
+      "questions": [
+        {
+          "id": "fresh-student-not-continuation",
+          "level": "basics",
+          "question": "BOPD 的 Stage II 为什么不能继续训练 Stage I 学生？",
+          "answer": "方法把教师构造与知识转移分开。Stage I 学生变成冻结的中间教师；Stage II 学生必须精确恢复原始 M0，并创建新 optimizer。继续保留 Stage I 参数或动量会变成另一条训练路径。",
+          "example": "教学例：Stage I 某权重从1变为1.2，Stage II 教师保留1.2，而新学生回到1；不能两者都从1.2出发。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-12"
+        },
+        {
+          "id": "fkl-and-trajectory-means",
+          "level": "mechanism",
+          "question": "BOPD 的 FKL 应按所有 token 一起平均吗？",
+          "answer": "不是。正文先对每条学生轨迹有效 token 平均，再对轨迹平均，教师到学生的KL方向也必须保留。把全部token混在一起会让长响应获得更高权重；教师分布在梯度中冻结。",
+          "example": "教学例：两条响应长度为1和3，损失分别为2及全部为0；等轨迹平均是1，按所有token平均却是.5。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-12"
+        },
+        {
+          "id": "teacher-context-after-bootstrap",
+          "level": "comparison",
+          "question": "BOPD 与持续的 reference-conditioned OPSD，教师条件有什么不同？",
+          "answer": "Stage I 仍用带参考的冻结初始教师，构造中间模型；Stage II 教师改为冻结的中间模型，并移除参考，师生共享可观察上下文。不是只把教师名称换掉，也不是把参考解直接提供给学生。",
+          "example": "教学例：Stage I 教师看到题目与验证解；Stage II 两者只看到题目和新学生已生成前缀，不能重用答案条件教师的分数。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-12"
+        },
+        {
+          "id": "handoff-loss-not-two-stage-llm",
+          "level": "implementation",
+          "question": "本地 handoff 和 CUDA 检查通过，能否说完整 BOPD 训练已复现？",
+          "answer": "不能。本地真实执行FKL、模块复制、buffer恢复、冻结teacher与新optimizer，但没有LLM rollout、参考prompt或完整两阶段训练。正文FKL也不能冒充Appendix中未核到实现的pointwise clipping。",
+          "example": "本地小Linear模块的参数恢复误差为0，只验证阶段交接；原实验还需2到4GPU、每阶段3200学生rollout和最长38912token评测。",
+          "source_sections": [
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-12"
+        }
+      ]
+    },
+    "post-training:apmd-reference-reset": {
+      "questions": [
+        {
+          "id": "reference-not-student-reset",
+          "level": "basics",
+          "question": "APMD 的 reference reset 是把学生权重重置回 base 吗？",
+          "answer": "不是。学生保留本轮学到的策略，下一轮只把KL锚点换成这份最新策略。若每轮把学生退回base，就不能累积镜像更新；这与BOPD的fresh-student重置是不同操作。",
+          "example": "教学例：pi0经一轮变成pi1后，APMD以pi1为下一轮reference；不会把可训练学生重新改回pi0。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-12"
+        },
+        {
+          "id": "kimi-bias-rebel-centering",
+          "level": "mechanism",
+          "question": "为什么镜像目标上的 centered-MSE 为0，Kimi mean-baseline loss 却可能非0？",
+          "answer": "均值reward baseline不等于log-normalizer，所以Kimi还含reference到candidate的KL平方除以eta平方。Rebel用同reference独立响应的残差差消掉常数，其期望恰为2倍centered-MSE。",
+          "example": "教学例：reference均匀、reward为(1,0)、eta=1时镜像目标为softmax(1,0)。centered残差消失，但reference与target不同，Kimi的KL偏差项仍为正。",
+          "source_sections": [
+            "核心公式",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-12"
+        },
+        {
+          "id": "practical-grpo-not-theorem",
+          "level": "comparison",
+          "question": "论文分析了 PPO/GRPO 家族，是否说明现有任意 GRPO 都不会 coverage collapse？",
+          "answer": "没有。覆盖保证针对满足假设的特定近似镜像算法，包含参考重置和足够准确的内层求解；softmax线性策略及reward可实现性也很关键。组内优势或clipping本身不提供这些条件。",
+          "example": "教学例：某GRPO实现周期刷新old policy却始终固定KL reference，这与重置reference不是同一操作，不能直接套用APMD结论。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果"
+          ],
+          "added": "2026-11-12"
+        },
+        {
+          "id": "finite-enumeration-not-sample-complexity",
+          "level": "implementation",
+          "question": "本地为什么采用有限响应精确期望，却不宣称验证采样复杂度？",
+          "answer": "它把所有响应和reward显式枚举，用于核对镜像目标、重置路径和损失恒等式。原文复杂度还取决于在线抽样、策略类和内层误差界，有限数组检查不覆盖这些条件，也不是全部定理的证明。",
+          "example": "本地3个prompt各7个response可以直接求期望；真实LLM完整响应空间无法用这张小表穷尽。",
+          "source_sections": [
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "理论与实验范围"
+          ],
+          "added": "2026-11-12"
+        }
+      ]
+    },
+    "post-training:lcs-reference-opd": {
+      "questions": [
+        {
+          "id": "same-task-success-not-any-success",
+          "level": "basics",
+          "question": "为什么不能给失败 rollout 随便挑一条相似的成功轨迹？",
+          "answer": "成功只保证它完成自己的任务，不保证与当前失败路径兼容。选择必须来自同一任务实例的reward验证成功池，再按执行动作的有序LCS比较；跨任务完全相同的片段也不能越过任务边界。",
+          "example": "教学例：两个房间任务都有“拿杯子”，但初始柜子和物品状态不同；另一个任务的相同动作不能直接充当当前reference。",
+          "source_sections": [
+            "背景与主要改动",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-12"
+        },
+        {
+          "id": "benchmark-normalizers",
+          "level": "mechanism",
+          "question": "ALFWorld 和 tau3 的 LCS normalizer 可以统一吗？",
+          "answer": "不能无说明统一。ALFWorld按较短轨迹长度归一，tau3按失败轨迹长度归一；前者偏向衡量短轨迹覆盖，后者关注失败序列被解释多少，排序可能反转。",
+          "example": "教学例：失败长度6，短reference长度2且匹配2，长reference长度5且匹配4。shorter归一得1和.8选短；failed归一得1/3和2/3选长。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-12"
+        },
+        {
+          "id": "lcs-not-state-proof",
+          "level": "comparison",
+          "question": "LCS 比 LCP 留下更多匹配，就证明这些动作处于相同状态吗？",
+          "answer": "不是。LCP在共享初始状态和相同确定性转移下有明确前缀解释；LCS跳过不匹配动作后，还需要绕行能恢复到相同状态。不可逆写库或移动物品可能使后续相同动作语义不同。",
+          "example": "教学例：额外look不改状态，可以恢复到共同路线；额外delete-record改变了数据库，后续相同query未必面对同一状态。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "论文离线与线上效果"
+          ],
+          "added": "2026-11-12"
+        },
+        {
+          "id": "free-target-failure-only",
+          "level": "implementation",
+          "question": "为什么不用一对一匹配reference，也不能按整个batch平均loss？",
+          "answer": "free-target OT不约束成功reference使用频率，多个失败可以独立选中同一最优引用。更新只针对失败，loss分母是失败数；全成功batch不执行optimizer step，而不是用零loss继续动量或衰减。",
+          "example": "教学例：两个失败都最适合referenceA，就都选A；若3条rollout仅2条失败、loss为2和6，均值应为4，不是8/3。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-12"
+        }
+      ]
+    }
+  }
+}

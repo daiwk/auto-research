@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "post-training:rcea": {
+      "questions": [
+        {
+          "id": "lower-entropy-ambiguous",
+          "level": "basics",
+          "question": "RLVR 训练后总熵下降，是否说明模型的正确解法也变少了？",
+          "answer": "不一定。错误路径被压低、验证结果更确定、同一正确策略的表达变少，以及不同有效解法的概率变集中，都可能降低熵。要检查有效解法的条件分布。",
+          "example": "两种有效解法仍各占有效轨迹的一半时，即便所有错误路径的概率都下降，有效模式数仍是 2。",
+          "source_sections": ["背景与主要改动", "核心公式"],
+          "added": "2026-11-09"
+        },
+        {
+          "id": "zero-valid-support",
+          "level": "mechanism",
+          "question": "为什么有效成功轨迹概率为零时，有效模式数不该报成 1？",
+          "answer": "exp(0)=1 表示一个占满条件分布的模式。没有有效成功轨迹时，这个条件分布不存在；只有其加权熵贡献能按零处理。",
+          "example": "所有概率都在失败轨迹上时，模式熵项权重为零，但把模式数报为 1 会误导为至少有一个正确策略。",
+          "source_sections": ["核心公式"],
+          "added": "2026-11-09"
+        },
+        {
+          "id": "trajectory-versus-token",
+          "level": "comparison",
+          "question": "轨迹熵的分解和平均 token 熵按结果分组，为什么不是同一条公式？",
+          "answer": "轨迹熵是完整路径分布的 Shannon 熵，用链式法则包含验证结果熵；平均 token 熵是沿路径得到的局部统计量，用全期望公式只做分组加权。",
+          "example": "若一半轨迹成功、一半失败，验证结果贡献 log(2) 纳特；不能把这一项额外加进已经按成败加权的平均 token 熵。",
+          "source_sections": ["核心公式"],
+          "added": "2026-11-09"
+        },
+        {
+          "id": "constant-logit-shift",
+          "level": "implementation",
+          "question": "给一个前缀的每个 logit 增加相同常数，局部协方差和实际熵会如何变化？",
+          "answer": "与常数的协方差为零，softmax 也对共同平移不变。两者都应给零变化；这适合作为局部诊断的负控。",
+          "example": "对 logits (2, 0, -2) 使用增量 (1, 1, 1)，预测和有限差均为 0；不要把 logit 绝对值变化误认为熵变化。",
+          "source_sections": ["核心公式", "数据协议与代码映射"],
+          "added": "2026-11-09"
+        }
+      ]
+    }
+  }
+}

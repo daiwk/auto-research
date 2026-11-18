@@ -1,0 +1,140 @@
+{
+  "schema_version": 2,
+  "method": "d-jepa",
+  "manifest_ref": "foundation-models:d-jepa",
+  "dataset": {
+    "id": "synthetic:nov15-d-jepa-component-v1",
+    "kind": "explicit_mechanism_or_protocol_fixtures",
+    "revision": "sha256:35b44d460ee06ab4bfb0a9d7ac4b8d2756129fb034cef1fa3c8220b30ef333cc",
+    "public_capability_benchmark": false,
+    "source": "Seeded tensors or explicit evaluator/control examples; no pretrained output, public dataset or model capability score"
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "training_loss_before": 4.926127910614014,
+        "training_loss_after": 2.251809597015381,
+        "cross": 0.9283840656280518,
+        "sigreg": 4.228300094604492,
+        "reconstruction": 0.8646168112754822,
+        "independence": 1.4690649509429932
+      },
+      "checks": {
+        "other_view_targets_stop_gradient": true,
+        "shared_private_heads_trainable": true,
+        "single_context_objective_optimized": true,
+        "finite_all_terms": true
+      },
+      "execution_device": "cuda",
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "training_loss_before": 5.040816783905029,
+        "training_loss_after": 2.261664628982544,
+        "cross": 0.885640025138855,
+        "sigreg": 4.05390739440918,
+        "reconstruction": 0.9936528205871582,
+        "independence": 1.1197928190231323
+      },
+      "checks": {
+        "other_view_targets_stop_gradient": true,
+        "shared_private_heads_trainable": true,
+        "single_context_objective_optimized": true,
+        "finite_all_terms": true
+      },
+      "execution_device": "cuda",
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "training_loss_before": 4.989076137542725,
+        "training_loss_after": 2.3515548706054688,
+        "cross": 1.0107851028442383,
+        "sigreg": 4.040748596191406,
+        "reconstruction": 0.8973894119262695,
+        "independence": 1.4594097137451172
+      },
+      "checks": {
+        "other_view_targets_stop_gradient": true,
+        "shared_private_heads_trainable": true,
+        "single_context_objective_optimized": true,
+        "finite_all_terms": true
+      },
+      "execution_device": "cuda",
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    }
+  ],
+  "metrics": {
+    "cross": 0.9416030645370483,
+    "independence": 1.3494224945704143,
+    "reconstruction": 0.9185530145963033,
+    "sigreg": 4.107652028401692,
+    "training_loss_after": 2.2883430322011313,
+    "training_loss_before": 4.985340277353923
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Exact operator arithmetic and interface checks only; not a complete model, agent or benchmark comparison"
+  },
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "provenance": {
+    "commit": "7112a7d0c9e750ea1329652cb2684b2b10b4eac9",
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "artifact_path": "docs/foundation-models/2611.16639-d-jepa/metrics/component-cuda-seeds42-44.json",
+    "executed_source_sha256": {
+      "scripts/run_nov15_refresh_components.py": "56da489e6c444797e15dd3c45646728338d284a15ec7098aecf7c930b9eeb0fc",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "docs/research-audits/nov15-refresh/preflight.json": "b00a6b6009bd08644faac74369290bda2bce0dbafc575e7c6c73d545e984c57e",
+      "src/auto_research/reproductions/resid_components.py": "50b892b455584689ad3eb9b3ee06619866d16a6c430a28717fdcbc2eab8a4ba0",
+      "src/auto_research/reproductions/trigen_components.py": "08332bbccaa57660d1d65d8c404ac2fe0eacd41f2f34698d7e868ec8d82f1fd7",
+      "src/auto_research/reproductions/kuairec_v2_protocol.py": "150fa6cd3fcd5bb9689039de6ed961919c074878915735d1570d713101e07cb1",
+      "src/auto_research/foundation_models/unbundling_vision.py": "e981ab44a469956cd605b08eaf3ec91e24420377f9dc438febd993d3a8a5c727",
+      "src/auto_research/foundation_models/archspace.py": "551df18833187977729f483c640c5abcb9d6c0ca8148c5e8a5fa24efcf5f5226",
+      "src/auto_research/foundation_models/d_jepa.py": "35b44d460ee06ab4bfb0a9d7ac4b8d2756129fb034cef1fa3c8220b30ef333cc",
+      "src/auto_research/foundation_models/duojepa.py": "ca39777e81e3e2c24c39a80cc780ac583f2edc8c55b73345203487eb3d096184",
+      "src/auto_research/post_training/lgpo.py": "00e2ea759a90fc0a8ddc372e6b80f38787a9454872fb828d6b4ec03fa0b96b4e",
+      "src/auto_research/post_training/safety_budget_cgrpo.py": "fe82bfc675816a8d5dfa7b11e45472c5b76afe2559de231b0119f56c43f0e0cf",
+      "src/auto_research/post_training/bait_reward_defense.py": "e913df759855be9e23973a5a47c93ea0b9747763a0b58c2227b58a6129195c44",
+      "src/auto_research/agent_research/coremem.py": "4ba13422f9a3b45659193ac8d881b3e50c977d015fac11e5d49188ff22ab9567",
+      "src/auto_research/agent_research/caplite.py": "8bc0345bb5c046cca59e68769d71eb2463e3f9127ac5e60a1619d837a7311f73",
+      "src/auto_research/agent_research/ace_rl.py": "5ed0badd58424fdf73120fefb431a20e70db7fbcae8bdeaec18b6697e576014a"
+    },
+    "dataset_fingerprint": "sha256:90c20da9f67082c98d95986741d2562b66d204cff543ccae52415fd92d757a2f",
+    "raw_runner_artifact_sha256": "a47312b3201251a5b73feb5a7b5ba66fb6628950abde3ea361abeb3c065bd69f"
+  }
+}

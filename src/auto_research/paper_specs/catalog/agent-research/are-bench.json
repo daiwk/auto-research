@@ -1,0 +1,41 @@
+{
+  "domain": "agent-research",
+  "key": "are-bench",
+  "title": "ARE-bench: Benchmarking Agents' Research Ability in Real-World Researcher Sessions and Workspaces",
+  "paper_url": "https://arxiv.org/abs/2611.14364",
+  "reviewed_version": "2611.14364v1",
+  "detail_path": "agent-research/2611.14364-are-bench/README.md",
+  "topic": [
+    "真实任务与可靠性评测",
+    "历史约束与研究交付"
+  ],
+  "first_author": "Jiahang Lin",
+  "first_author_affiliation": "Fudan University / Shanghai Artificial Intelligence Laboratory",
+  "published": "2026-11-10",
+  "published_at": "2026-11-10T17:21:31Z",
+  "code": null,
+  "code_status": "项目站arebench.com只提供联系评测入口，本轮未找到公开任务/源码下载，未接入官方数据集。",
+  "adapter": null,
+  "priority": "P1",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.agent_research.are_bench.score",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.agent_research.are_bench import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.14364v1#A7",
+    "available_resource": "单张 A100/A30 或本地 Mac",
+    "basis": "75真实workspace×7模型×3rollout=1575环境运行，另逐checklist项judge；任务包无公开下载。完整长任务与API评测不跑，只交CPU协议接口。"
+  },
+  "fidelity_note": "只实现actor输入隔离、严格ISR、逐任务macro CSR与空/缺失checklist拒绝；不是官方75任务或真实研究Agent能力验收。",
+  "summary": "ARE-bench要求Agent在真实历史请求和未清理workspace中继续科研交付，用全条目通过率及逐任务checklist均值评估。本地仅实现隔离和计分合同，未宣称官方数据集已接入。",
+  "gpu_validation_passed": false
+}

@@ -1,0 +1,17 @@
+{
+  "page": "docs/recommendation-components/2611.05997-ured/README.md",
+  "paper_url": "https://arxiv.org/abs/2611.05997",
+  "arxiv_id": "2611.05997",
+  "figure": "Figure 1",
+  "original_caption": "See original figure and caption in the attributed source",
+  "source_url": "https://arxiv.org/html/2611.05997v1/URED_framework.png",
+  "extraction": "original-author-png",
+  "asset": "docs/recommendation-components/2611.05997-ured/assets/paper-figure-01.png",
+  "width": 1102,
+  "height": 783,
+  "score": 0,
+  "error": "",
+  "visually_inspected": true,
+  "sha256": "94dc83d81de0432ada747ffb4d8fa313b93e32f88dbfadc475723046d0cc08d0",
+  "license": "arXiv perpetual non-exclusive license"
+}

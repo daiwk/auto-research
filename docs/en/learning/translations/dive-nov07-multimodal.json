@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/multimodal-models/alignment-interfaces/comparison/multimodal-models:gslm2": {
+      "source_sha256": "5a56a9be3a3bed7f176256df2c8593d1eefa86ce5fb832dc497c65880a0ab785",
+      "reviewed": true,
+      "fields": {
+        "position": "SpidR 2.0 obtains discrete speech streams from several encoder layers. Keep the union of change frames, feed aligned tuples to a temporal backbone, and score pairs with equally weighted stream transition log probabilities.",
+        "tradeoff": "The aligned multi-stream sequence keeps more time positions than deduplicating each stream separately. A transition score does not establish generation, cross-modal retrieval, or translation quality. Local coverage verifies frame alignment and arithmetic only, with no encoder, audio, model or benchmark run."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/analysis/3": {
+      "source_sha256": "7774729fb8b5442a946d9e6903162711985ee56a48a6ab6deb9025935ba93631",
+      "reviewed": true,
+      "fields": {
+        "title": "Speech embeddings, discrete speech units, and translation candidates are different output interfaces",
+        "body": "EmbeddingGemma 2 maps multiple modalities to comparable fixed-width vectors, with MRL reducing vector width. GSLM2 extracts several time-aligned discrete streams from the same speech, so joint deduplication changes sequence length; its stream-specific heads score spoken candidates conditioned on shared history. NaijaS2ST instead requires cross-language speech generation and evaluates it with translation references and ASR-COMET. Vector neighbors, same-language paired discrimination and cross-language generation cannot share one accuracy measure. The local GSLM2 slice verifies transformations of supplied units and probabilities, not real speech capability."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/question/nov07-speech-stream-versus-embedding": {
+      "source_sha256": "b8f629618785fb457ffc235f992e56d5141d0b5bacbe8de32c8e638108eaa4b6",
+      "reviewed": true,
+      "fields": {
+        "question": "To compare which spoken continuation is more plausible, can a unified audio embedding similarity replace GSLM2's transition score?",
+        "answer": "They are not equivalent. EmbeddingGemma 2's fixed vector supports object similarity. GSLM2's score uses sequential conditional probabilities at first and changed positions per stream, then weights streams equally. Continuations can match the same topic while differing in grammar or phonetic transitions. Translation needs a separate cross-language protocol such as NaijaS2ST.",
+        "example": "Example: Two endings mention a cup and may be close in embedding space, but only one uses the right verb form in context. Compare sequence scores and retrieval similarity separately; do not report the latter as sBLIMP accuracy."
+      }
+    },
+    "dive/multimodal-models/alignment-interfaces/update/2026-11-07/2": {
+      "source_sha256": "6201e407ec69ffc8cdeade0344997b684d42331e3b831ac13ac1877be4fe6ac4",
+      "reviewed": true,
+      "fields": {
+        "summary": "Backfill Meta GSLM2 and compare unified vectors, aligned discrete streams, and cross-language generation with EmbeddingGemma 2 and NaijaS2ST. Review change-point unions, equal stream weighting, and the high-cost reproduction boundary."
+      }
+    }
+  }
+}

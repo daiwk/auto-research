@@ -1,0 +1,814 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-07-priority-backfill",
+  "checked_on": "2026-11-07",
+  "timezone": "Asia/Shanghai",
+  "baseline": "docs/research-audits/nov06-priority-components/source-coverage.json",
+  "baseline_sha256": "ab2abd1367397393b3c6ec376c44217982ce8bc4a1856b18a5c786b5ef5a9fac",
+  "baseline_last_checked_at": "2026-11-06T09:29:40.200104+00:00",
+  "retrieval_receipts": [
+    {
+      "category": "cs.AI",
+      "route": "new",
+      "url": "https://arxiv.org/list/cs.AI/new?show=2000",
+      "checked_at": "2026-11-06T21:17:53.871070+00:00",
+      "sha256": "fef5cd9e86d6a4fe46fcb27376fad8c9b21a35497f1feedbb52dcadeea47b630",
+      "announced_on": "2026-11-06",
+      "expected_entries": 361,
+      "parsed_entries": 361,
+      "sections": [
+        {
+          "kind": "new",
+          "shown": 75,
+          "expected": 75
+        },
+        {
+          "kind": "cross-list",
+          "shown": 123,
+          "expected": 123
+        },
+        {
+          "kind": "replacement",
+          "shown": 163,
+          "expected": 163
+        }
+      ],
+      "parse_complete": true,
+      "latest_announcement": "2026-11-06",
+      "compared_with": "2026-11-06",
+      "added_identities": [],
+      "removed_identities": [],
+      "versioned_entries_changed": [],
+      "matched_backfills": [],
+      "status": "retrieved"
+    },
+    {
+      "category": "cs.AI",
+      "route": "recent",
+      "url": "https://arxiv.org/list/cs.AI/recent?show=2000",
+      "checked_at": "2026-11-06T21:17:53.873358+00:00",
+      "sha256": "d0380ccd08f6c52742da559c7b1870a11bf49418cd82de9d380f814918270dbc",
+      "latest_announcement": "2026-11-06",
+      "parse_complete": true,
+      "sections": [
+        {
+          "announced_on": "2026-11-06",
+          "parsed_entries": 198,
+          "expected_entries": 198,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": [],
+          "removed_identities": [],
+          "versioned_entries_changed": []
+        },
+        {
+          "announced_on": "2026-11-05",
+          "parsed_entries": 217,
+          "expected_entries": 217,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        },
+        {
+          "announced_on": "2026-11-04",
+          "parsed_entries": 252,
+          "expected_entries": 252,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        },
+        {
+          "announced_on": "2026-11-03",
+          "parsed_entries": 521,
+          "expected_entries": 521,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        },
+        {
+          "announced_on": "2026-11-02",
+          "parsed_entries": 186,
+          "expected_entries": 186,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        }
+      ],
+      "status": "retrieved"
+    },
+    {
+      "category": "cs.CL",
+      "route": "new",
+      "url": "https://arxiv.org/list/cs.CL/new?show=2000",
+      "checked_at": "2026-11-06T21:17:53.873510+00:00",
+      "sha256": "796efd6bc944843f5472d425f008d8ede9b356873ab678e236da3ee422c8fdb9",
+      "announced_on": "2026-11-06",
+      "expected_entries": 160,
+      "parsed_entries": 160,
+      "sections": [
+        {
+          "kind": "new",
+          "shown": 62,
+          "expected": 62
+        },
+        {
+          "kind": "cross-list",
+          "shown": 32,
+          "expected": 32
+        },
+        {
+          "kind": "replacement",
+          "shown": 66,
+          "expected": 66
+        }
+      ],
+      "parse_complete": true,
+      "latest_announcement": "2026-11-06",
+      "compared_with": "2026-11-06",
+      "added_identities": [],
+      "removed_identities": [],
+      "versioned_entries_changed": [],
+      "matched_backfills": [],
+      "status": "retrieved"
+    },
+    {
+      "category": "cs.CL",
+      "route": "recent",
+      "url": "https://arxiv.org/list/cs.CL/recent?show=2000",
+      "checked_at": "2026-11-06T21:17:53.873668+00:00",
+      "sha256": "bd86a8e4638e4a793b78b9f6d528986d6260770a253be1cc83599e9f5627a776",
+      "latest_announcement": "2026-11-06",
+      "parse_complete": true,
+      "sections": [
+        {
+          "announced_on": "2026-11-06",
+          "parsed_entries": 94,
+          "expected_entries": 94,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": [],
+          "removed_identities": [],
+          "versioned_entries_changed": []
+        },
+        {
+          "announced_on": "2026-11-05",
+          "parsed_entries": 90,
+          "expected_entries": 90,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        },
+        {
+          "announced_on": "2026-11-04",
+          "parsed_entries": 85,
+          "expected_entries": 85,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        },
+        {
+          "announced_on": "2026-11-03",
+          "parsed_entries": 251,
+          "expected_entries": 251,
+          "parse_complete": true,
+          "matched_backfills": [
+            "2611.01143"
+          ],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        },
+        {
+          "announced_on": "2026-11-02",
+          "parsed_entries": 86,
+          "expected_entries": 86,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        }
+      ],
+      "status": "retrieved"
+    },
+    {
+      "category": "cs.CV",
+      "route": "new",
+      "url": "https://arxiv.org/list/cs.CV/new?show=2000",
+      "checked_at": "2026-11-06T21:17:53.873786+00:00",
+      "sha256": "38dd47b1ed4485f18007be056aabcd73c93b53ed137027a256daf15b6cec7716",
+      "announced_on": "2026-11-06",
+      "expected_entries": 258,
+      "parsed_entries": 258,
+      "sections": [
+        {
+          "kind": "new",
+          "shown": 107,
+          "expected": 107
+        },
+        {
+          "kind": "cross-list",
+          "shown": 31,
+          "expected": 31
+        },
+        {
+          "kind": "replacement",
+          "shown": 120,
+          "expected": 120
+        }
+      ],
+      "parse_complete": true,
+      "latest_announcement": "2026-11-06",
+      "compared_with": "2026-11-06",
+      "added_identities": [],
+      "removed_identities": [],
+      "versioned_entries_changed": [],
+      "matched_backfills": [],
+      "status": "retrieved"
+    },
+    {
+      "category": "cs.CV",
+      "route": "recent",
+      "url": "https://arxiv.org/list/cs.CV/recent?show=2000",
+      "checked_at": "2026-11-06T21:17:53.873920+00:00",
+      "sha256": "850c980f854f4cdd246f614f5b2bf6a845e75ce089d3678541a0989225b920ea",
+      "latest_announcement": "2026-11-06",
+      "parse_complete": true,
+      "sections": [
+        {
+          "announced_on": "2026-11-06",
+          "parsed_entries": 138,
+          "expected_entries": 138,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": [],
+          "removed_identities": [],
+          "versioned_entries_changed": []
+        },
+        {
+          "announced_on": "2026-11-05",
+          "parsed_entries": 148,
+          "expected_entries": 148,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        },
+        {
+          "announced_on": "2026-11-04",
+          "parsed_entries": 160,
+          "expected_entries": 160,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        },
+        {
+          "announced_on": "2026-11-03",
+          "parsed_entries": 395,
+          "expected_entries": 395,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        },
+        {
+          "announced_on": "2026-11-02",
+          "parsed_entries": 102,
+          "expected_entries": 102,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        }
+      ],
+      "status": "retrieved"
+    },
+    {
+      "category": "cs.IR",
+      "route": "new",
+      "url": "https://arxiv.org/list/cs.IR/new?show=2000",
+      "checked_at": "2026-11-06T21:17:53.874025+00:00",
+      "sha256": "5281f99fb353cb04724f70af826e9bda7e68b3966a45a1aa2c4a01e5bf147d1e",
+      "announced_on": "2026-11-06",
+      "expected_entries": 35,
+      "parsed_entries": 35,
+      "sections": [
+        {
+          "kind": "new",
+          "shown": 10,
+          "expected": 10
+        },
+        {
+          "kind": "cross-list",
+          "shown": 8,
+          "expected": 8
+        },
+        {
+          "kind": "replacement",
+          "shown": 17,
+          "expected": 17
+        }
+      ],
+      "parse_complete": true,
+      "latest_announcement": "2026-11-06",
+      "compared_with": "2026-11-06",
+      "added_identities": [],
+      "removed_identities": [],
+      "versioned_entries_changed": [],
+      "matched_backfills": [
+        "2611.07425",
+        "2611.08306"
+      ],
+      "status": "retrieved"
+    },
+    {
+      "category": "cs.IR",
+      "route": "recent",
+      "url": "https://arxiv.org/list/cs.IR/recent?show=2000",
+      "checked_at": "2026-11-06T21:17:53.874116+00:00",
+      "sha256": "590d2931b8471c035464788cf42e3e7fdc5647b506ee631afb2551ff00f6a121",
+      "latest_announcement": "2026-11-06",
+      "parse_complete": true,
+      "sections": [
+        {
+          "announced_on": "2026-11-06",
+          "parsed_entries": 18,
+          "expected_entries": 18,
+          "parse_complete": true,
+          "matched_backfills": [
+            "2611.07425",
+            "2611.08306"
+          ],
+          "added_identities": [],
+          "removed_identities": [],
+          "versioned_entries_changed": []
+        },
+        {
+          "announced_on": "2026-11-05",
+          "parsed_entries": 22,
+          "expected_entries": 22,
+          "parse_complete": true,
+          "matched_backfills": [
+            "2611.05799"
+          ],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        },
+        {
+          "announced_on": "2026-11-04",
+          "parsed_entries": 26,
+          "expected_entries": 26,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        },
+        {
+          "announced_on": "2026-11-03",
+          "parsed_entries": 48,
+          "expected_entries": 48,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        },
+        {
+          "announced_on": "2026-11-02",
+          "parsed_entries": 22,
+          "expected_entries": 22,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        }
+      ],
+      "status": "retrieved"
+    },
+    {
+      "category": "cs.LG",
+      "route": "new",
+      "url": "https://arxiv.org/list/cs.LG/new?show=2000",
+      "checked_at": "2026-11-06T21:17:54.822164+00:00",
+      "sha256": "64ffd94068d332c18d4e3a5507efd494414c56ccf94d750bd946786a1ff10d3c",
+      "announced_on": "2026-11-06",
+      "expected_entries": 417,
+      "parsed_entries": 417,
+      "sections": [
+        {
+          "kind": "new",
+          "shown": 145,
+          "expected": 145
+        },
+        {
+          "kind": "cross-list",
+          "shown": 79,
+          "expected": 79
+        },
+        {
+          "kind": "replacement",
+          "shown": 193,
+          "expected": 193
+        }
+      ],
+      "parse_complete": true,
+      "latest_announcement": "2026-11-06",
+      "compared_with": "2026-11-06",
+      "added_identities": [],
+      "removed_identities": [],
+      "versioned_entries_changed": [],
+      "matched_backfills": [],
+      "status": "retrieved"
+    },
+    {
+      "category": "cs.LG",
+      "route": "recent",
+      "url": "https://arxiv.org/list/cs.LG/recent?show=2000",
+      "checked_at": "2026-11-06T21:17:55.201706+00:00",
+      "sha256": "d5d9de4922016ccfdfaf757e7601e5b7551f9c734f572d5cfefd09d791073473",
+      "latest_announcement": "2026-11-06",
+      "parse_complete": true,
+      "sections": [
+        {
+          "announced_on": "2026-11-06",
+          "parsed_entries": 224,
+          "expected_entries": 224,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": [],
+          "removed_identities": [],
+          "versioned_entries_changed": []
+        },
+        {
+          "announced_on": "2026-11-05",
+          "parsed_entries": 214,
+          "expected_entries": 214,
+          "parse_complete": true,
+          "matched_backfills": [
+            "2611.05799"
+          ],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        },
+        {
+          "announced_on": "2026-11-04",
+          "parsed_entries": 252,
+          "expected_entries": 252,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        },
+        {
+          "announced_on": "2026-11-03",
+          "parsed_entries": 570,
+          "expected_entries": 570,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        },
+        {
+          "announced_on": "2026-11-02",
+          "parsed_entries": 198,
+          "expected_entries": 198,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        }
+      ],
+      "status": "retrieved"
+    },
+    {
+      "category": "cs.RO",
+      "route": "new",
+      "url": "https://arxiv.org/list/cs.RO/new?show=2000",
+      "checked_at": "2026-11-06T21:17:55.327777+00:00",
+      "sha256": "f84c03206c51d02d3e0d1a80ad2d33d4957d328f2bebdf910508299baa7286df",
+      "announced_on": "2026-11-06",
+      "expected_entries": 115,
+      "parsed_entries": 115,
+      "sections": [
+        {
+          "kind": "new",
+          "shown": 68,
+          "expected": 68
+        },
+        {
+          "kind": "cross-list",
+          "shown": 13,
+          "expected": 13
+        },
+        {
+          "kind": "replacement",
+          "shown": 34,
+          "expected": 34
+        }
+      ],
+      "parse_complete": true,
+      "latest_announcement": "2026-11-06",
+      "compared_with": "2026-11-06",
+      "added_identities": [],
+      "removed_identities": [],
+      "versioned_entries_changed": [],
+      "matched_backfills": [],
+      "status": "retrieved"
+    },
+    {
+      "category": "cs.RO",
+      "route": "recent",
+      "url": "https://arxiv.org/list/cs.RO/recent?show=2000",
+      "checked_at": "2026-11-06T21:17:55.381525+00:00",
+      "sha256": "6057e2e40168b073c8e114fa2e4cec74fa4426b0b04e2c31f4bca98fdf24b8b4",
+      "latest_announcement": "2026-11-06",
+      "parse_complete": true,
+      "sections": [
+        {
+          "announced_on": "2026-11-06",
+          "parsed_entries": 81,
+          "expected_entries": 81,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": [],
+          "removed_identities": [],
+          "versioned_entries_changed": []
+        },
+        {
+          "announced_on": "2026-11-05",
+          "parsed_entries": 62,
+          "expected_entries": 62,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        },
+        {
+          "announced_on": "2026-11-04",
+          "parsed_entries": 72,
+          "expected_entries": 72,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        },
+        {
+          "announced_on": "2026-11-03",
+          "parsed_entries": 149,
+          "expected_entries": 149,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        },
+        {
+          "announced_on": "2026-11-02",
+          "parsed_entries": 72,
+          "expected_entries": 72,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        }
+      ],
+      "status": "retrieved"
+    },
+    {
+      "category": "cs.SD",
+      "route": "new",
+      "url": "https://arxiv.org/list/cs.SD/new?show=2000",
+      "checked_at": "2026-11-06T21:17:55.411422+00:00",
+      "sha256": "3a270a9149e91eff1d15a3093cd3e1eb0bca70010de329be41eb91aa6f4cb0ac",
+      "announced_on": "2026-11-06",
+      "expected_entries": 16,
+      "parsed_entries": 16,
+      "sections": [
+        {
+          "kind": "new",
+          "shown": 8,
+          "expected": 8
+        },
+        {
+          "kind": "cross-list",
+          "shown": 2,
+          "expected": 2
+        },
+        {
+          "kind": "replacement",
+          "shown": 6,
+          "expected": 6
+        }
+      ],
+      "parse_complete": true,
+      "latest_announcement": "2026-11-06",
+      "compared_with": "2026-11-06",
+      "added_identities": [],
+      "removed_identities": [],
+      "versioned_entries_changed": [],
+      "matched_backfills": [],
+      "status": "retrieved"
+    },
+    {
+      "category": "cs.SD",
+      "route": "recent",
+      "url": "https://arxiv.org/list/cs.SD/recent?show=2000",
+      "checked_at": "2026-11-06T21:17:55.582114+00:00",
+      "sha256": "4779365707063c6e2efb0ff279ec23466213a2c5212a3693580486b01a8b18ab",
+      "latest_announcement": "2026-11-06",
+      "parse_complete": true,
+      "sections": [
+        {
+          "announced_on": "2026-11-06",
+          "parsed_entries": 10,
+          "expected_entries": 10,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": [],
+          "removed_identities": [],
+          "versioned_entries_changed": []
+        },
+        {
+          "announced_on": "2026-11-05",
+          "parsed_entries": 11,
+          "expected_entries": 11,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        },
+        {
+          "announced_on": "2026-11-04",
+          "parsed_entries": 13,
+          "expected_entries": 13,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        },
+        {
+          "announced_on": "2026-11-03",
+          "parsed_entries": 30,
+          "expected_entries": 30,
+          "parse_complete": true,
+          "matched_backfills": [
+            "2611.01143"
+          ],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        },
+        {
+          "announced_on": "2026-11-02",
+          "parsed_entries": 16,
+          "expected_entries": 16,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        }
+      ],
+      "status": "retrieved"
+    },
+    {
+      "category": "eess.AS",
+      "route": "new",
+      "url": "https://arxiv.org/list/eess.AS/new?show=2000",
+      "checked_at": "2026-11-06T21:17:55.663347+00:00",
+      "sha256": "f48eaaafa61665481618dd40e3e51fdabcf972328514342ac28a95f9fe6cef0f",
+      "announced_on": "2026-11-06",
+      "expected_entries": 11,
+      "parsed_entries": 11,
+      "sections": [
+        {
+          "kind": "new",
+          "shown": 6,
+          "expected": 6
+        },
+        {
+          "kind": "cross-list",
+          "shown": 2,
+          "expected": 2
+        },
+        {
+          "kind": "replacement",
+          "shown": 3,
+          "expected": 3
+        }
+      ],
+      "parse_complete": true,
+      "latest_announcement": "2026-11-06",
+      "compared_with": "2026-11-06",
+      "added_identities": [],
+      "removed_identities": [],
+      "versioned_entries_changed": [],
+      "matched_backfills": [],
+      "status": "retrieved"
+    },
+    {
+      "category": "eess.AS",
+      "route": "recent",
+      "url": "https://arxiv.org/list/eess.AS/recent?show=2000",
+      "checked_at": "2026-11-06T21:17:55.857255+00:00",
+      "sha256": "ccfcbbc3e51b0f70106b2efd44f01f35558f4726d86cadea33819961b51d0a6e",
+      "latest_announcement": "2026-11-06",
+      "parse_complete": true,
+      "sections": [
+        {
+          "announced_on": "2026-11-06",
+          "parsed_entries": 8,
+          "expected_entries": 8,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": [],
+          "removed_identities": [],
+          "versioned_entries_changed": []
+        },
+        {
+          "announced_on": "2026-11-05",
+          "parsed_entries": 7,
+          "expected_entries": 7,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        },
+        {
+          "announced_on": "2026-11-04",
+          "parsed_entries": 6,
+          "expected_entries": 6,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        },
+        {
+          "announced_on": "2026-11-03",
+          "parsed_entries": 36,
+          "expected_entries": 36,
+          "parse_complete": true,
+          "matched_backfills": [
+            "2611.01143"
+          ],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        },
+        {
+          "announced_on": "2026-11-02",
+          "parsed_entries": 11,
+          "expected_entries": 11,
+          "parse_complete": true,
+          "matched_backfills": [],
+          "added_identities": null,
+          "removed_identities": null,
+          "versioned_entries_changed": null
+        }
+      ],
+      "status": "retrieved"
+    }
+  ],
+  "latest_announcement_on_observed_routes": "2026-11-06",
+  "observed_new_announcement_days": [],
+  "compared_bulletin_changed": false,
+  "all_sources_exhaustive": false,
+  "full_bulletin_full_text_review_complete": false,
+  "review_watermark_advanced": false,
+  "review_watermark": {
+    "before": "2026-10-15",
+    "after": "2026-10-15"
+  },
+  "institutional_review": "priority-review.json"
+}

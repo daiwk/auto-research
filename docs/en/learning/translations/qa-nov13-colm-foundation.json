@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:rosetta-unification/why-id-is-not-transfer": {
+      "source_sha256": "6eebcf7cf786b710f5ac37e46a127c48d3e4e9864f1df7e5a0ac391605709d60",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can perfect same-language recall coexist with failed transfer?",
+        "answer": "Language features can support separate knowledge representations. A fact readable in its training language need not be accessible in another. Controlled training isolates this distinction; ID scores cannot replace cross-language validation.",
+        "example": "A birthplace appears only in language A: A paraphrases can all succeed while language B queries fail."
+      }
+    },
+    "qa/foundation-models:rosetta-unification/mean-of-ratios": {
+      "source_sha256": "779efee8ba7328ed75e2de509df1effdb1bed641e16823bbc975c2ac9f4d6e02",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is an explicit same-language baseline essential?",
+        "answer": "The score compares cross-language group similarity with a same-language baseline and averages ratios. Self-cosine fixed at one changes the definition. Local inputs explicitly identify groups/baselines and reject unstable denominators.",
+        "example": "Ratios 0.8/0.6 and 0.6/0.8 must be averaged; the ratio of their summed numerators and denominators is different."
+      }
+    },
+    "qa/foundation-models:rosetta-unification/representation-versus-factual-filter": {
+      "source_sha256": "e601ffaa3cee415a58f70971984afc0de0f036930a1d545dad3aaf43d34d3874",
+      "reviewed": true,
+      "fields": {
+        "question": "How does Rosetta differ from Thinking to Recall?",
+        "answer": "Rosetta studies pretraining language distributions and representation unification; Thinking to Recall analyzes generated reasoning facts and their correctness. Similarity is not a truth judge, and oracle-conditioned accuracy does not establish multilingual unification.",
+        "example": "More similar language representations do not verify a generated birthday; verified reasoning facts do not ensure low-resource-language access."
+      }
+    },
+    "qa/foundation-models:rosetta-unification/no-correlation-from-fixture": {
+      "source_sha256": "aa29b74a4361f8d1fbe7fbc23a018ffbc182ed5bcec42c82a9bf1bc5cb92b895",
+      "reviewed": true,
+      "fields": {
+        "question": "Do passing arithmetic tests reproduce the reported 0.97 correlation?",
+        "answer": "No. That coefficient needs representations and independent accuracies from many trained models. Local arrays establish arithmetic only, without feature extraction or answers; any new selection experiment must use validation rather than test.",
+        "example": "A finite random-matrix ratio is not evidence from 110 training runs."
+      }
+    },
+    "qa/foundation-models:lidas/grow-not-append-random": {
+      "source_sha256": "ed0fc5a267a33f16576868f783f46dcb240d7ff87910fca707903c3b60d18990",
+      "reviewed": true,
+      "fields": {
+        "question": "How does LIDAS differ from appending random layers?",
+        "answer": "It copies trained middle layers and their optimizer state instead of adding untrained random layers. The training trajectory changes; a copy operation alone proves no reasoning improvement.",
+        "example": "Copying layers 2–5 of an eight-layer network is not appending four random Linear layers."
+      }
+    },
+    "qa/foundation-models:lidas/physical-layer-order": {
+      "source_sha256": "72ed4bf46754a50d0396ea279f718d6e64a7f8d0d411296194f581580fc9a26e",
+      "reviewed": true,
+      "fields": {
+        "question": "What is the exact layer order when growing depth eight by four?",
+        "answer": "Using zero-based indices: 0,1,2,3,4,5,2',3',4',5',6,7. Figure 2 and odd-block equivalence resolve the inclusive-index notation ambiguity; copying five layers would be wrong.",
+        "example": "At depth twelve, layers 4–7 are copied after that region, coinciding with MIDAS."
+      }
+    },
+    "qa/foundation-models:lidas/growth-versus-numerical-update": {
+      "source_sha256": "43bc3cf53cb9b44a9c9b5cec252f2cb6becde500100ac7936dde252c6eec263b",
+      "reviewed": true,
+      "fields": {
+        "question": "Why should LIDAS and stochastic-rounding gains be kept separate?",
+        "answer": "LIDAS changes depth, initialization and state inheritance; stochastic rounding changes how FP32 updates become low-precision parameters. Their budgets and error sources differ and need separate controls before a matched-budget combination.",
+        "example": "Inherited Adam moments and unbiased quantization are distinct L1 properties, not proof of faster combined convergence."
+      }
+    },
+    "qa/foundation-models:lidas/optimizer-alias-and-lr": {
+      "source_sha256": "1712c6f488097e37235479adb188ba48efdf36f4d95f2b8dfe0fa0ed3d72dc5b",
+      "reviewed": true,
+      "fields": {
+        "question": "What is wrong with shared or reset Adam state?",
+        "answer": "Shared state couples two layers; resetting changes the prescribed initialization. Parameters, moments, optional AMSGrad state and step need independent copies. The global LR schedule continues, while model-specific depth configuration remains the caller's responsibility.",
+        "example": "Mutating a copied layer's exp_avg must not change its source; both should receive genuine subsequent updates."
+      }
+    },
+    "qa/foundation-models:thinking-to-recall/reasoning-singlehop": {
+      "source_sha256": "c21b838d1572e859ec115e0af9165099764a7f8eced6536027c25c0c7b1cdca7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why might thinking help a single-hop factual question?",
+        "answer": "The paper distinguishes extra-token computational buffering from factual priming. Both may aid knowledge readout, without making every thought correct or establishing that longer is always better.",
+        "example": "Dummy traces probe content-independent computation; related facts probe semantic priming."
+      }
+    },
+    "qa/foundation-models:thinking-to-recall/common-retained-mask": {
+      "source_sha256": "04a9adc53cfc861e95fb159c75b58d861d9dee19ecca5da2ae55639d4d97a70e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must all trace conditions share the retained-question set?",
+        "answer": "Dropping difficult questions only from the clean condition confounds filtering with question difficulty. With 100 samples per question, any empty condition excludes that question from every arm, followed by macro averaging.",
+        "example": "A question with one clean trace and one with ninety still contribute equal question-level weight."
+      }
+    },
+    "qa/foundation-models:thinking-to-recall/oracle-not-actor": {
+      "source_sha256": "64ee3b36351fe810b4e1160c0f0fc744093f5d9a8a69d861eb490d0679e30bf2",
+      "reviewed": true,
+      "fields": {
+        "question": "Can the clean-fact condition be deployed as an agent policy?",
+        "answer": "Not by this component. It uses post-hoc truth annotations to estimate offline conditional expectations. Deployment needs an oracle-free verifier with measured errors and costs.",
+        "example": "Choosing a trace by gold correctness and feeding it to an actor leaks the answer rather than improving reasoning."
+      }
+    },
+    "qa/foundation-models:thinking-to-recall/no-selected-traces": {
+      "source_sha256": "a75e52cb4c46c6adebd4385b1c6c504c6f30322dab38f2c0415bc83bd699253e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does the API return summaries rather than the best trace?",
+        "answer": "It confines truth labels to an independent evaluator instead of exposing an oracle to actors or training selection. Retention counts and offline status are explicit; missing conditions are never fabricated.",
+        "example": "If no question has factual traces, the evaluator fails rather than reporting clean accuracy one."
+      }
+    },
+    "qa/foundation-models:latent-generalization/implicit-versus-seen": {
+      "source_sha256": "20b59a1f49a5312c2fcac7e724328116089028b320b79ba9a668ae32556855d0",
+      "reviewed": true,
+      "fields": {
+        "question": "How does latent generalization differ from recalling exposed answers?",
+        "answer": "It requires relations or combinations not explicitly exposed as completions. Exposed and held-out recall are separated because overall F1 can be dominated by seen answers.",
+        "example": "With all={A,B,C} and heldout={C}, answering A and B yields exposed recall one and held-out recall zero."
+      }
+    },
+    "qa/foundation-models:latent-generalization/set-exact-not-recall": {
+      "source_sha256": "b72c91f6622e8da11dcd348039e388569432ede409dbc401d7aed8079c4efda0",
+      "reviewed": true,
+      "fields": {
+        "question": "Does held-out recall one imply exact-set success?",
+        "answer": "No. Exact matching requires the complete valid answer set with neither omissions nor false additions. Primary inclusion only checks one designated held-out answer.",
+        "example": "Predicting A,B,C plus false D recalls C perfectly but fails exact matching."
+      }
+    },
+    "qa/foundation-models:latent-generalization/newknowledge-versus-cleanthought": {
+      "source_sha256": "0bcb248ab71b50649a03ce4d09f1fd6a6a8d625327c06f2a8fc37b937b934f20",
+      "reviewed": true,
+      "fields": {
+        "question": "What differs from Thinking to Recall?",
+        "answer": "Latent generalization uses controlled acquisition/structure splits to test implicit completions; Thinking to Recall studies access to existing factual knowledge. Neither permits gold-conditioned teachers or post-hoc truth labels to leak to the deployed actor.",
+        "example": "Better recall of one fact does not establish generalization to an unseen reversal relation."
+      }
+    },
+    "qa/foundation-models:latent-generalization/metric-not-gemini-trainer": {
+      "source_sha256": "dc8e6fae0cac0b07f5b57e8a34695fa9a6d4831378e743f8e2d819d72a8e29b9",
+      "reviewed": true,
+      "fields": {
+        "question": "Why implement metrics instead of a simplified Gemini trainer?",
+        "answer": "The study depends on private Gemini SFT, teacher traces and RL interfaces. Exact metrics are affordable and useful; inventing a generic RL loop would hide defining dependencies. Full training is explicitly not reproduced.",
+        "example": "Random answer-set fixtures verify formulas, not Gemini's out-of-distribution performance."
+      }
+    },
+    "qa/agent-research:planning-optimality/valid-not-optimal": {
+      "source_sha256": "2c9e7fe83068bff208cde72369820260eb3953df71022328ab2fa0d0da8a0c3f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is a valid plan not necessarily good?",
+        "answer": "Executable goal-reaching actions establish validity but may include unnecessary moves. Optimality compares valid length with an independently established optimum.",
+        "example": "Putting a held target down and picking it up again may add two avoidable actions."
+      }
+    },
+    "qa/agent-research:planning-optimality/formula-support": {
+      "source_sha256": "8d573e33191eceb514971b755f05693b4277cd71d9e1e6ce52939b848409214b",
+      "reviewed": true,
+      "fields": {
+        "question": "Which assumptions are required by the closed-form optimum?",
+        "answer": "An empty hand, a table-supported goal base and at most one target per initial tower. Covering blocks and non-base targets each cost two actions. Interleaved multi-target towers require a different analysis.",
+        "example": "A tower containing both goal A and goal B is rejected even if a special case happens to match the formula."
+      }
+    },
+    "qa/agent-research:planning-optimality/search-versus-verifier": {
+      "source_sha256": "541b49f4a476ef0dccf8a3b775161619bd51137381a2f19d6d524bedad182089",
+      "reviewed": true,
+      "fields": {
+        "question": "How does this differ from LATS search?",
+        "answer": "LATS allocates search/rollout effort to find trajectories; this component only validates external plans and restricted-curriculum gaps. Search scores do not replace precondition verification, and validity does not establish optimality.",
+        "example": "A four-step valid result against a two-step BFS optimum has gap one."
+      }
+    },
+    "qa/agent-research:planning-optimality/independent-bfs": {
+      "source_sha256": "aad2c76e811ef4e885db69418a6b034847927e392cc23b09e0b89aa9a0c6a311",
+      "reviewed": true,
+      "fields": {
+        "question": "Why validate with independent BFS rather than another copy of the formula?",
+        "answer": "Repeating a formula tests self-consistency, not missing assumptions. Small-instance BFS explores only the four-action transition graph and never calls the formula; invalid plans have no numeric gap.",
+        "example": "Permuted four-block layouts expose any forgotten cost of clearing blocks above the goal base."
+      }
+    },
+    "qa/foundation-models:llm-stochasticity/marginal-not-independent": {
+      "source_sha256": "72b13d719654b073e2556de8fa064a16f5874a0ab8272c8602792f12da61b5eb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can a perfectly uniform histogram be nonrandom?",
+        "answer": "Histograms describe marginal frequencies, not order. A deterministic 0,1,2,3 cycle is uniform while the next value is predictable; temporal checks are separate.",
+        "example": "A 1,024-element cycle has zero chi-square and still never repeats adjacent symbols."
+      }
+    },
+    "qa/foundation-models:llm-stochasticity/pvalue-not-proof": {
+      "source_sha256": "83f2f91261c4e2f51a83bcee7afd00a9aad0abc18db5ea880b072203734a4f51",
+      "reviewed": true,
+      "fields": {
+        "question": "How should a KS/chi-square p-value above 0.05 be interpreted?",
+        "answer": "It is non-rejection under specified assumptions, not a 95% probability of randomness or proof of independence. Selecting the best p-value after many prompts changes inference.",
+        "example": "A crafted uniform cycle can obtain p=1 without supplying entropy."
+      }
+    },
+    "qa/foundation-models:llm-stochasticity/prng-versus-rounding": {
+      "source_sha256": "87200ecf9b02394d4d0a6619588cd2718b321db139761a78990e151696bc594a",
+      "reviewed": true,
+      "fields": {
+        "question": "How does an external PRNG differ from randomness in stochastic rounding?",
+        "answer": "This paper evaluates model-requested sampling, while a PRNG supplies a different controlled source. SR uses an explicit generator for adjacent-rounding probabilities and conditional means, not LLM randomness.",
+        "example": "NumPy draws are not Gemini samples; SR generator tests establish no independence of natural-language outputs."
+      }
+    },
+    "qa/foundation-models:llm-stochasticity/no-dropping-invalid": {
+      "source_sha256": "95055e46ed250bbe7838a45c7be581ae742420d0d0b2a76f712e8f67f0e04e1e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not discard invalid values or missing samples?",
+        "answer": "Discarding changes the evaluated distribution and count, potentially selecting favorable outputs. The API checks count, support and finiteness; parsing failures need separate reporting.",
+        "example": "One thousand valid values plus twenty-four invalid ones are not a complete successful 1,024-sample run."
+      }
+    },
+    "qa/foundation-models:ecg-rag/one-store-two-uses": {
+      "source_sha256": "449eabb05fd5692c4843703af7a0dda2cd4bde5702aa1325776cce5ea15f596a",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does ECG avoid separate retrieval and compression vectors?",
+        "answer": "Stored E_ret supports multi-vector retrieval and is projected into decoder context, reducing duplicated storage. Sharing model weights while storing two independent vectors is a different design.",
+        "example": "Retrieved E_ret can be projected immediately instead of loading a second document cache."
+      }
+    },
+    "qa/foundation-models:ecg-rag/loss-scale-and-grad": {
+      "source_sha256": "1eb38da824b400d0321166f2b71fab6c38583e4aa34661d4be40a14d99b02d1b",
+      "reviewed": true,
+      "fields": {
+        "question": "What do KL direction, representation scaling and alpha do?",
+        "answer": "Generation uses teacher-to-student FKL. Retrieval vectors divide by sqrt(d) and compression reverses it. Margin ΔS-alphaΔT adapts teacher score scale. Teachers are detached; alpha and positive temperature remain trainable.",
+        "example": "Training teacher logits changes the target; fixing alpha to one removes the learned score scaling."
+      }
+    },
+    "qa/foundation-models:ecg-rag/compression-versus-candidate-bank": {
+      "source_sha256": "8625385dc045bf7aa8c8606af57583946c90e16bd9f9f58f1e2b301117f8a2ba",
+      "reviewed": true,
+      "fields": {
+        "question": "Is ECG equivalent to ADIndex sparse retrieval?",
+        "answer": "No. ECG compresses external documents into shared semantic vectors. ADIndex shares attention candidate banks, then refines per query and adds newly visible tokens. Their support, fidelity and cost units differ.",
+        "example": "Eliminating duplicate document vectors is not the same as avoiding scans of historical attention keys."
+      }
+    },
+    "qa/foundation-models:ecg-rag/kernel-not-llm": {
+      "source_sha256": "f57e947b0d0d38b9b31e3cb125b5b378dc9a94adbcfb03103c351e2eadf47062",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do valid gradients not establish on-device RAG reproduction?",
+        "answer": "A pretrained decoder, special-token training, index, retrieval, context injection and real QA/system evaluation remain absent. L1 checks definitions and gradients; eight-H100 training and million-passage evaluation are explicitly not reproduced.",
+        "example": "Nonzero projection gradients say nothing about NQ exact match, phone latency or the reported context reduction."
+      }
+    },
+    "qa/foundation-models:continuousbench/new-capability-not-saturation": {
+      "source_sha256": "09689aa9905f5867e7b80a1202836be7bc0a08749578f97c08e44d0d39df41cf",
+      "reviewed": true,
+      "fields": {
+        "question": "Why continually refresh knowledge corpora?",
+        "answer": "An old benchmark may already be mastered by the base model. Fixed fresh corpus/QA releases and an unchanged-base control separate transferred capability from existing knowledge.",
+        "example": "Moving a 95% base to 96% differs from learning fresh material from 5% to 60%."
+      }
+    },
+    "qa/foundation-models:continuousbench/validation-contains-test-exact": {
+      "source_sha256": "ab0ffaff169c25911843e794082aca43a2dcaffa1b9aa311f5aa1df15df92797",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate validation contains selection from test exact reporting?",
+        "answer": "They are different metrics at different stages. Test cannot select checkpoints. Reordered types may satisfy containment but fail exact strings; parser differences between paper prose and released code must be versioned.",
+        "example": "Flying and Normal contains both required types but is not exactly Normal and Flying."
+      }
+    },
+    "qa/foundation-models:continuousbench/utility-not-privacy": {
+      "source_sha256": "918b9bdc4c1075a0eb717bdb5c4af7dce09f3f60e25b91414b9fa7f55a48ce20",
+      "reviewed": true,
+      "fields": {
+        "question": "Does higher capability gain establish stronger DP privacy?",
+        "answer": "No. Gain measures utility; epsilon/delta require a specified DP mechanism and accountant. Repeated-fact learning is not permission to memorize singleton records. Local code includes neither DP training/accounting nor the News judge.",
+        "example": "A non-DP generator may score highly while satisfying no claimed privacy budget."
+      }
+    },
+    "qa/foundation-models:continuousbench/paired-release-baseline": {
+      "source_sha256": "97ee46e6c4f81124d7d5296bbe2fd4bc9096db878d20f812e0a236ac070357b7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why bind both arms to the same release, IDs and references?",
+        "answer": "Different releases or question sets confound difficulty with learning. The interface checks revision, questions and references by ID, and requires actual base predictions instead of assuming zero.",
+        "example": "Accurate scores on easy new questions and difficult old questions cannot be subtracted into a valid gain."
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "schema_version":1,"papers":{"agent-research:ds-star":{"questions":[
+    {"id":"executable-is-not-sufficient","level":"basics","question":"DS-STAR为什么在脚本成功执行后还要单独调用verifier？","answer":"脚本不报错只说明执行路径跑通，输出可能没覆盖query或计划本身缺步骤。原文verifier同时看累计计划、query、代码和输出，做语义充分性判断；本地外置这个能力，不能用执行成功自动返回sufficient。","example":"教学例：脚本正确求了全表平均值，但用户问两个地区分组比较；程序正常退出，答案仍不足。","source_sections":["背景与主要改动","核心公式","数据协议与代码映射"],"added":"2026-11-13"},
+    {"id":"remove-error-and-dependent-suffix","level":"mechanism","question":"router说某一步错了，DS-STAR为什么连后面的步骤一起删掉？","answer":"后续步骤可能依赖错误的中间数据，保留它们会累积错误。控制核删除指定位置及其后缀，再让planner生成一步；planner仍看上次输出作为修正上下文，不把该输出误称保留前缀重新执行的结果。","example":"教学例：第二步用错join键，第三步对错误合并表求和；不能只改第二步的文字却保留第三步结果。","source_sections":["背景与主要改动","核心公式","结果与负控"],"added":"2026-11-13"},
+    {"id":"react-observation-versus-sufficiency-judge","level":"comparison","question":"DS-STAR与ReAct都读取执行观察，二者控制重点有什么不同？","answer":"ReAct交替生成推理、动作和观察，更新下一步行为。DS-STAR显式检查累计计划、代码、输出是否足以回答query，再路由追加或删除错误后缀。读取观察相同不代表充分性判据相同；本地callback合同也不能与ReAct隔离能力分数混排。","example":"教学例：观察到空表后，ReAct可选择再查文件；DS-STAR还需外部判据决定已有计划是缺步骤还是错误过滤，并据此回溯。","source_sections":["背景与主要改动","核心公式","复现边界"],"added":"2026-11-13"},
+    {"id":"budget-exhaustion-is-unverified","level":"implementation","question":"为什么M次verifier预算可能执行M+1份代码，末稿仍不能算成功？","answer":"Algorithm1先执行初始计划，每次insufficient都会路由、再规划并执行，包括最后一轮。本地忠实保留末稿，但没有多余verifier确认，返回exhausted_unverified；不能用预算到期、引用非空或代码成功退出冒充sufficient。","example":"教学例：预算一次，初始稿不充分后生成第二稿。第二稿虽然存在却没被判充分，因此不能记录为任务成功。","source_sections":["核心公式","数据协议与代码映射","结果与负控"],"added":"2026-11-13"}
+  ]}}
+}

@@ -1,0 +1,132 @@
+{
+  "schema_version": 2,
+  "method": "archspace",
+  "manifest_ref": "foundation-models:archspace",
+  "dataset": {
+    "id": "synthetic:nov15-archspace-component-v1",
+    "kind": "explicit_mechanism_or_protocol_fixtures",
+    "revision": "sha256:551df18833187977729f483c640c5abcb9d6c0ca8148c5e8a5fa24efcf5f5226",
+    "public_capability_benchmark": false,
+    "source": "Seeded tensors or explicit evaluator/control examples; no pretrained output, public dataset or model capability score"
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "model_flops_per_token": 8712113908.602762,
+        "training_tokens": 11478270491.993357,
+        "predicted_base_loss": 2.7147461856168165,
+        "coupled_batch_penalty": 0.030866982118020303
+      },
+      "checks": {
+        "budget_conserved": true,
+        "penalty_zero_at_recipe": true,
+        "conditional_lr_sqrt_batch": true,
+        "budget_optimum_beats_neighbors": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "model_flops_per_token": 8712113908.602762,
+        "training_tokens": 11478270491.993357,
+        "predicted_base_loss": 2.7147461856168165,
+        "coupled_batch_penalty": 0.030866982118020303
+      },
+      "checks": {
+        "budget_conserved": true,
+        "penalty_zero_at_recipe": true,
+        "conditional_lr_sqrt_batch": true,
+        "budget_optimum_beats_neighbors": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "model_flops_per_token": 8712113908.602762,
+        "training_tokens": 11478270491.993357,
+        "predicted_base_loss": 2.7147461856168165,
+        "coupled_batch_penalty": 0.030866982118020303
+      },
+      "checks": {
+        "budget_conserved": true,
+        "penalty_zero_at_recipe": true,
+        "conditional_lr_sqrt_batch": true,
+        "budget_optimum_beats_neighbors": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "coupled_batch_penalty": 0.030866982118020303,
+    "model_flops_per_token": 8712113908.602762,
+    "predicted_base_loss": 2.7147461856168165,
+    "training_tokens": 11478270491.993357
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Exact operator arithmetic and interface checks only; not a complete model, agent or benchmark comparison"
+  },
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "provenance": {
+    "commit": "566debb84d888fe275cc764384480c3ef80d70be",
+    "accelerator": "CPU",
+    "artifact_path": "docs/foundation-models/2611.17332-archspace/metrics/component-cpu-seeds42-44.json",
+    "executed_source_sha256": {
+      "scripts/run_nov15_refresh_components.py": "af3fd3b4c35a40b590707373a218b39d3127c45cc29e170799f800ab35f30c96",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "docs/research-audits/nov15-refresh/preflight.json": "b00a6b6009bd08644faac74369290bda2bce0dbafc575e7c6c73d545e984c57e",
+      "src/auto_research/reproductions/resid_components.py": "92c8947cb697f0a05d48440ee03b6eff8c77c4672c5d80653a7fef40ce8aa7b3",
+      "src/auto_research/reproductions/trigen_components.py": "f4c306eed4f35e626df019b72c0fa99083f3ab8f6ecb86cdf46bcd39925d6ef3",
+      "src/auto_research/reproductions/kuairec_v2_protocol.py": "150fa6cd3fcd5bb9689039de6ed961919c074878915735d1570d713101e07cb1",
+      "src/auto_research/foundation_models/unbundling_vision.py": "e981ab44a469956cd605b08eaf3ec91e24420377f9dc438febd993d3a8a5c727",
+      "src/auto_research/foundation_models/archspace.py": "551df18833187977729f483c640c5abcb9d6c0ca8148c5e8a5fa24efcf5f5226",
+      "src/auto_research/foundation_models/d_jepa.py": "a9c4828b2dec476bf091eb0977c057dae5d194724569d5d92c709bc7f0bc391a",
+      "src/auto_research/foundation_models/duojepa.py": "ca39777e81e3e2c24c39a80cc780ac583f2edc8c55b73345203487eb3d096184",
+      "src/auto_research/post_training/lgpo.py": "797be5266c75afd259726051f76e1bf77eaa74a7cefde856b804c49114d79cd4",
+      "src/auto_research/post_training/safety_budget_cgrpo.py": "fe82bfc675816a8d5dfa7b11e45472c5b76afe2559de231b0119f56c43f0e0cf",
+      "src/auto_research/post_training/bait_reward_defense.py": "e913df759855be9e23973a5a47c93ea0b9747763a0b58c2227b58a6129195c44",
+      "src/auto_research/agent_research/coremem.py": "4ba13422f9a3b45659193ac8d881b3e50c977d015fac11e5d49188ff22ab9567",
+      "src/auto_research/agent_research/caplite.py": "8bc0345bb5c046cca59e68769d71eb2463e3f9127ac5e60a1619d837a7311f73",
+      "src/auto_research/agent_research/ace_rl.py": "5ed0badd58424fdf73120fefb431a20e70db7fbcae8bdeaec18b6697e576014a"
+    },
+    "dataset_fingerprint": "sha256:f2f3709df66708cbd9e47b31d72c7cc091438f23563b8e616ccd8e72497e347e",
+    "raw_runner_artifact_sha256": "fc00793cd813fcdffb7ce5724c87dbf7e9097dcf0631d86f02fffaa52ff31ec7"
+  }
+}

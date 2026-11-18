@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "post-training:maxim": {
+      "questions": [
+        {
+          "id": "critic-versus-summary",
+          "level": "basics",
+          "question": "MaxIM 的 critic 可以看任务目标，为什么摘要器仍不能看答案？",
+          "answer": "特权目标用于训练和评分奖励，不是被评估摘要器的输入。摘要器只接收上一摘要、上一动作和当前观测；把目标直接放进去会破坏论文的记忆因果假设，测到答案泄漏。",
+          "example": "教学例：critic 用已知问答答案判断摘要是否有用，但生成摘要的模型只能读文章片段，不能先看到该答案。",
+          "source_sections": [
+            "背景与主要改动"
+          ],
+          "added": "2026-11-11"
+        },
+        {
+          "id": "null-subtraction",
+          "level": "mechanism",
+          "question": "为什么 MaxIM 要减去 null 条件的 log probability？",
+          "answer": "直接似然会混入目标本身的难度。对同一目标减去无摘要基线，衡量摘要增加的信息；一致性则在历史与 null 历史条件下逐 token 评分新摘要。两项的目标 token 不同，不能混在同一长度分母。",
+          "example": "教学例：某答案在有摘要时 logp=-1，无摘要时=-3，PMI 为2；另一个容易答案两者都=-.2，其信息增益为0。",
+          "source_sections": [
+            "核心公式"
+          ],
+          "added": "2026-11-11"
+        },
+        {
+          "id": "forward-grounding",
+          "level": "comparison",
+          "question": "为什么从摘要重建历史不能代替 MaxIM 的前向一致性？",
+          "answer": "反向重建可能只利用真实声明而忽略附加的幻觉。前向一致性对新摘要的每个 token 询问历史是否支持，因此额外无依据内容也会进入评分；近似 critic 仍可能判断错误，并非事实保证。",
+          "example": "教学例：摘要先正确写会议在周一，又虚构预算翻倍。重建会议历史可能不受影响，但第二句在真实历史下不应获得额外似然支持。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-11"
+        },
+        {
+          "id": "reward-not-agent",
+          "level": "implementation",
+          "question": "运行本地 MaxIM diagnostic 后能说已经训练出记忆 Agent 吗？",
+          "answer": "不能。这里只验证冻结分数的 PMI、sigmoid、退火和 return，既没有 critic 或摘要模型，也没有 PPO、组优势与真实交互。L1 数值核与语言记忆能力必须分开。",
+          "example": "本地一组数组的 null 抵消精确成立，只说明奖励算术正确；原文还需 Gemini/TPU 训练和500个对话种子评测。",
+          "source_sections": [
+            "数据协议与代码映射",
+            "结果、负控与边界",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-11"
+        }
+      ]
+    },
+    "post-training:excursion-td": {
+      "questions": [
+        {
+          "id": "duration-versus-action",
+          "level": "basics",
+          "question": "excursion 策略为什么不等于每一步混合目标与行为策略？",
+          "answer": "excursion 先跟随目标一段时间，结束后永久回到行为策略；逐动作混合允许之后重新选择目标，生成不同轨迹分布。因此权重应混合持续时长，不能直接连乘混合 ratio。",
+          "example": "教学例：三步 excursion 可以是目标-目标-行为；一旦切到行为就不能再变成目标-行为-目标，逐步混合却允许后者。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-11"
+        },
+        {
+          "id": "initial-action-ratio",
+          "level": "mechanism",
+          "question": "Ex-Retrace 的前缀为什么从 t+1 而不是初始动作 t 开始？",
+          "answer": "目标已经条件于给定的起始状态动作对 Q(S_t,A_t)，不需要再次校正这个动作。后续动作决定 bootstrap 与轨迹分布，才进入 clipped ratio 前缀；错误加入起始 ratio 会改变目标。",
+          "example": "教学例：仅一步 target 在 beta=0 时是奖励加 gamma 乘行为策略的下一状态 Q 平均，不应再乘当前动作的 pi/mu。",
+          "source_sections": [
+            "核心公式"
+          ],
+          "added": "2026-11-11"
+        },
+        {
+          "id": "bias-is-not-bug",
+          "level": "comparison",
+          "question": "中间 beta 的固定点与 q_pi 不一致，是实现 bug 吗？",
+          "answer": "不一定。持续时长混合本来就在收缩、偏差、方差之间权衡；beta=0 对应行为值，beta=1 恢复目标固定点。应先验证端点及精确算子，再把中间偏差作为指标，而不是强制抹成零。",
+          "example": "本地 seed42、beta=.5 的目标固定点 MSE 约 .00305，被保留为真实偏差；不是把它改标签后声称无偏。",
+          "source_sections": [
+            "核心公式",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-11"
+        },
+        {
+          "id": "enumeration-not-control",
+          "level": "implementation",
+          "question": "本地怎么独立检查 Ex-Retrace，而不是用同一公式自证？",
+          "answer": "测试对两状态两动作的所有两步路径枚举概率并计算 sample target，再与有限 MDP 的矩阵展开比较。还独立检查 beta=0 的 gamma^N 收缩和行为固定点。这验证表格型机制，不验证神经控制回报。",
+          "example": "教学例：每条路径按 P(s1|s0,a0) mu(a1|s1) P(s2|s1,a1) 加权；求和应等于仿射算子 b+MQ 的对应行。",
+          "source_sections": [
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-11"
+        }
+      ]
+    },
+    "post-training:drd-mopd": {
+      "questions": [
+        {
+          "id": "update-not-moe",
+          "level": "basics",
+          "question": "DRD-MOPD 的 domain routing 是推理时 MoE 吗？",
+          "answer": "不是。所有输入都使用冻结基座加所有增量的同一个合成学生。域标签只决定当前梯度更新哪些增量；前向不屏蔽未选组件。",
+          "example": "教学例：Code 域输入也读取 Math 增量；Own 模式下只是 Code 的梯度只更新 Code 对应增量。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心公式"
+          ],
+          "added": "2026-11-11"
+        },
+        {
+          "id": "inactive-means-frozen",
+          "level": "mechanism",
+          "question": "未选分量给零梯度后调用 AdamW，等于保持不动吗？",
+          "answer": "不等于。已有 momentum、step counter 和 decoupled weight decay 仍可能改变状态或参数。论文要求未选分量完全跳过更新，独立保存每个分量自己的优化器历史。",
+          "example": "教学例：某分量已有非零一阶矩，本轮未选。若执行零梯度 AdamW，它仍可能沿旧动量移动；正确实现连计数都不增加。",
+          "source_sections": [
+            "核心公式",
+            "数据协议与代码映射"
+          ],
+          "added": "2026-11-11"
+        },
+        {
+          "id": "other-scale",
+          "level": "comparison",
+          "question": "为什么不能把 Other 的梯度都除以 K-1，并声称只是等价归一化？",
+          "answer": "原文 Other 把每个域的梯度完整复制到其他分量，不作该除法；无自适应 SGD 下合成梯度是 Own 的 K-1 倍。更改系数改变定义，且独立 Adam 状态下无法简单用整体学习率证明等价。",
+          "example": "教学例：K=3 时，一个域同时完整更新另外两个增量；除以2会把这两条路径各减半。SingleComponent 的其他域1/(K-1)是另一个模式的定义。",
+          "source_sections": [
+            "核心公式"
+          ],
+          "added": "2026-11-11"
+        },
+        {
+          "id": "snapshot-and-evidence",
+          "level": "implementation",
+          "question": "本地如何保证先路由再更新，而不在各域之间偷偷改变学生？",
+          "answer": "step_losses 先构造一份合成权重快照，在它上面计算所有域的真实 autograd 梯度，再统一路由及逐分量更新。测试与独立 torch AdamW 对照；这不包含多教师 loss、模型或 rollout。",
+          "example": "教学例：两个域的 loss 回调记录到的输入权重必须完全相同；先更新第一个域再计算第二个，会失败。",
+          "source_sections": [
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-11"
+        }
+      ]
+    },
+    "foundation-models:stochastic-rounding": {
+      "questions": [
+        {
+          "id": "weight-sticking",
+          "level": "basics",
+          "question": "FP32 主权重明明变了，为什么 BF16 rollout 可能完全没变？",
+          "answer": "更新可能小于 BF16 当前格点半间距，round-to-nearest 后仍是同一个值。主权重有变化不保证实际 rollout 参数有变化；应观察量化后的权重。",
+          "example": "本地示例1+1/1024转为BF16 nearest仍是1，因为该处BF16向上间距为1/128。",
+          "source_sections": [
+            "背景与主要改动",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-11"
+        },
+        {
+          "id": "distance-probability",
+          "level": "mechanism",
+          "question": "随机舍入的上舍入概率为什么是距离比例？",
+          "answer": "用p=(x-lower)/(upper-lower)选择上端，其余选下端，期望正好是x。概率不是固定一半；精确可表示值应直接返回以避免0/0，负数也按数值上下端处理。",
+          "example": "教学例：x=1+1/1024，邻居1和1+1/128，因此上舍入概率是1/8而不是1/2。",
+          "source_sections": [
+            "核心公式"
+          ],
+          "added": "2026-11-11"
+        },
+        {
+          "id": "unbiased-not-faster",
+          "level": "comparison",
+          "question": "SR 无偏是否证明每次误差更小、训练必然更快？",
+          "answer": "没有。无偏是条件期望性质，单个随机输出仍可能比 nearest 更远，也引入方差。实际收敛还依赖学习率、模型、同步与训推一致性，不能从标量均值直接推导。",
+          "example": "教学例：大多数输出为1，少数跳到1+1/128；个别上跳的绝对误差更大，但足够多样本的均值可接近原FP32值。",
+          "source_sections": [
+            "核心公式",
+            "原文结果与限制"
+          ],
+          "added": "2026-11-11"
+        },
+        {
+          "id": "finite-boundary",
+          "level": "implementation",
+          "question": "为什么本地不对超范围值 clipping 后继续随机舍入？",
+          "answer": "clipping改变了目标值的期望，不能继续声称对原输入无偏。本地明确拒绝非有限或目标范围外输入，并测试负数、零、subnormal与最大有限值。no_grad也避免冒充STE训练器。",
+          "example": "教学例：大于FP16最大值65504的输入被拒绝，而不是压到65504再报告量化无偏。",
+          "source_sections": [
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-11"
+        }
+      ]
+    },
+    "post-training:mcpo": {
+      "questions": [
+        {
+          "id": "margin-not-entropy",
+          "level": "basics",
+          "question": "MCPO 的 uncertainty 直接用 entropy 或 band-pass 吗？",
+          "answer": "都不是。它用温度后 old-policy top1减top2的margin，再对1-margin做截断线性变换。最高不确定度保留为1，不像band-pass丢掉极端区域。",
+          "example": "教学例：margin=.95给h=0，margin=.2给h=1；只知道entropy通常不能还原这两个top概率差。",
+          "source_sections": [
+            "核心公式"
+          ],
+          "added": "2026-11-11"
+        },
+        {
+          "id": "negative-credit",
+          "level": "mechanism",
+          "question": "MCPO 对负优势里的不确定 token 惩罚更重吗？",
+          "answer": "相反。指数包含sign(A)，负优势时高不确定度权重更小，响应内归一后它少受惩罚，较确定token承担更多负信用。每条响应有效token的平均优势不变。",
+          "example": "教学例：一个确定token h=0、一个不确定token h=1，A=-1、kappa=log4，二者token优势为-1.6和-.4。",
+          "source_sections": [
+            "核心公式"
+          ],
+          "added": "2026-11-11"
+        },
+        {
+          "id": "compute-matched",
+          "level": "comparison",
+          "question": "相同200步且平均分提高，是否足以证明MCPO在同算力下更好？",
+          "answer": "不够。论文生成长度增长约1.2–4.6倍，缺length-matched和随机信用等控制。Qwen三数据种子的p=.083也不能称为显著；训练数据种子并不覆盖所有优化器/采样随机性。",
+          "example": "教学例：两个算法都更新200次，但一个每响应生成8000token、另一个2000token，生成预算已经不同。",
+          "source_sections": [
+            "原文结果与限制",
+            "高成本完整实验"
+          ],
+          "added": "2026-11-11"
+        },
+        {
+          "id": "old-policy-contract",
+          "level": "implementation",
+          "question": "实现 MCPO 时随手使用当前模型 top2 概率可以吗？",
+          "answer": "不可以。接口要求生成轨迹时温度后的冻结 old-policy 概率，才能把信用与原采样决策对齐。当前模型、原始logits或忽略mask都会改变定义；本地没有代替调用方收集这些概率。",
+          "example": "教学例：同一logit在temperature=.5和1下的margin不同，产生的h和信用也不同；padding不能进入响应权重均值。",
+          "source_sections": [
+            "数据协议与代码映射",
+            "结果、负控与边界"
+          ],
+          "added": "2026-11-11"
+        }
+      ]
+    }
+  }
+}

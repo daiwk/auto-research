@@ -1,0 +1,312 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-12-official-source-refresh",
+  "checked_on": "2026-11-12",
+  "baseline_delivery_commit": "bad501b9f35264f2813ef7b97535b7b42c710efb",
+  "baseline_review": "research-audits/nov12-components/priority-review.json",
+  "review_watermark": "2026-11-09",
+  "review_watermark_advanced": false,
+  "all_sources_exhaustive": false,
+  "new_first_publications_established": 0,
+  "selected_historical_priority_backfills": 1,
+  "review_only": true,
+  "implementation_or_gpu_evidence_in_this_file": false,
+  "comparison_method": "Compare exact unique canonical visible links and whitespace-normalized link titles in the bounded captures below. Raw-byte changes alone are not paper additions. A newly examined directory or blog is not evidence of a newly first-published paper.",
+  "comparable_sources": [
+    {
+      "organization": "Google",
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year",
+      "capture": ".cache/nov12-refresh/priority/google2026-first.html",
+      "sha256": "09df2a9bda5714ca67fd2619f411a5ed3a43414d0b7174631acddfc1f3599d2c",
+      "bytes": 323474,
+      "baseline_capture": ".cache/nov12-components/priority/google2026-first-exact.html",
+      "baseline_sha256": "24bd12d273fbefbb517ee5d702f20394685481eefda48693f896d618fa9cfab7",
+      "baseline_visible_papers": 15,
+      "current_visible_papers": 15,
+      "added_urls": [],
+      "removed_urls": [],
+      "changed_titles": [],
+      "limitation": "Only the first 2026-filter page was compared here; this is not an institution-wide absence claim."
+    },
+    {
+      "organization": "Google",
+      "url": "https://research.google/pubs/?category=2026&sort=-publication__year&page=31",
+      "capture": ".cache/nov12-refresh/priority/google2026-last.html",
+      "sha256": "6c2d44c76616e2861ce3bb7a5eb3159940241d3b912a30781c36ef30c96e2f96",
+      "bytes": 290904,
+      "baseline_capture": ".cache/nov12-components/priority/google2026-last.html",
+      "baseline_sha256": "df59eaee616b41db935fc6d98caae1ca3a3761f8ff59f65b432a0c17676c1177",
+      "baseline_visible_papers": 12,
+      "current_visible_papers": 12,
+      "added_urls": [],
+      "removed_urls": [],
+      "changed_titles": [],
+      "limitation": "A boundary-page comparison, not a recrawl of the intervening 29 pages."
+    },
+    {
+      "organization": "Google DeepMind",
+      "url": "https://deepmind.google/research/publications/",
+      "capture": ".cache/nov12-refresh/priority/deepmind-publications.html",
+      "sha256": "30d4dcbb7ed594f587f9d6411f2c48214d313926343c91e15848780355e72911",
+      "bytes": 142847,
+      "baseline_capture": ".cache/nov12-components/priority/deepmind-publications.html",
+      "baseline_raw_sha256": "3cfffc9c49018cacab124201306148949404c3c594adf78b2fb321d799e6c29e",
+      "baseline_decoded_sha256": "30d4dcbb7ed594f587f9d6411f2c48214d313926343c91e15848780355e72911",
+      "baseline_visible_compared_links": 38,
+      "current_visible_compared_links": 38,
+      "current_numeric_publication_detail_urls": 30,
+      "added_urls": [],
+      "removed_urls": [],
+      "changed_titles": [],
+      "limitation": "The compared 38 include publication-navigation/blog links; 30 are publication detail URLs. Only the currently visible page was checked. The baseline capture was gzip-compressed, so decoded hashes were compared."
+    },
+    {
+      "organization": "Meta",
+      "url": "https://research.meta.ai/",
+      "capture": ".cache/nov12-refresh/priority/meta-home-retry.html",
+      "sha256": "a34ae3607c5e53d863ed0e70fe585f2bcb7e95551821b3c30b8af78c78dbd3f8",
+      "bytes": 338011,
+      "baseline_capture": ".cache/nov12-components/priority/meta-research-home.html",
+      "baseline_sha256": "086ba46427af3f72bd8fe85ed5c34e775afa0ef82359b9e1564d19d5f23b76fd",
+      "baseline_visible_blog_links": 21,
+      "current_visible_blog_links": 21,
+      "added_urls": [],
+      "removed_urls": [],
+      "changed_titles": [],
+      "attempts": [
+        {"result": "timeout", "timeout_seconds": 20},
+        {"result": "usable_capture", "timeout_seconds": 12}
+      ],
+      "limitation": "This is the curated research homepage, not the complete Meta publication inventory. The latest visible Muse Ember entry remained dated November 9, 2026."
+    }
+  ],
+  "source_access_exceptions": [
+    {
+      "organization": "Meta",
+      "url": "https://ai.meta.com/research/publications/",
+      "capture": ".cache/nov12-refresh/priority/meta-publications.html",
+      "sha256": "de23e0c264ff944ee66adb95a36d8b8613ad646ba1147b3f87d843d0d73f88a0",
+      "bytes": 45,
+      "http_status": 200,
+      "exception_type": "document_unavailable",
+      "reason": "The response is an unavailable-content message rather than a usable publication directory, also seen in the previous capture. HTTP 200 does not establish source coverage.",
+      "attempts": [{"result": "unavailable_content", "usable_directory": false}],
+      "counts_as_accepted": false,
+      "scope_triage_completed": true,
+      "reopen_when": "The official publication directory returns usable dated records or a verifiable equivalent public inventory is available."
+    }
+  ],
+  "newly_examined_finite_entrance": {
+    "organization": "Google",
+    "url": "https://research.google/pubs/?category=2027&sort=-publication__year",
+    "capture": ".cache/nov12-refresh/priority/google2027-first.html",
+    "sha256": "7b0d956e5262ec717fa10d2442b620cd709ffcba080bf9c0676efd31f5e77121",
+    "bytes": 269889,
+    "visible_unique_papers": 4,
+    "has_comparable_previous_capture": false,
+    "newly_published_count_inferred": false,
+    "records": [
+      {
+        "title": "When Android Apps Request Location with a Reason: A Developer Study and User Behavior Experiment",
+        "url": "https://research.google/pubs/when-android-apps-request-location-with-a-reason-a-developer-study-and-user-behavior-experiment/",
+        "capture": ".cache/nov12-refresh/priority/android-location-google.html",
+        "sha256": "cf7cd136198e316b197993d887d9b56c27f711b5bfb816a6b4e099e25a5f7921",
+        "review_scope": "official-detail-title-and-abstract-selection",
+        "decision": "out_of_scope_specialized_privacy_user_study",
+        "reason": "The official abstract describes a 323-developer survey and a randomized location-permission study with 2,579 Android users. This is a privacy-interface/user-behavior study, not a new Agent/foundation/post-training algorithm or industrial recommendation model with production A/B results. The presence of randomized participants alone is not the industrial model evidence gate.",
+        "method_review_completed": false,
+        "original_publication_datetime": null,
+        "date_limitation": "The official detail lists a 2027 venue year, not an exact original release date."
+      },
+      {
+        "title": "A 3D Scene Graphs Survey: Open Challenges and Future Directions",
+        "url": "https://research.google/pubs/a-3d-scene-graphs-survey-open-challenges-and-future-directions/",
+        "capture": ".cache/nov12-refresh/priority/scene-graph-survey-google.html",
+        "sha256": "af2d0a82375e7250abf390882b95562070bd45390b7863a3019b872c7930929a",
+        "linked_primary_url": "https://arxiv.org/abs/2606.19383",
+        "review_scope": "official-detail-title-and-abstract-selection",
+        "decision": "not_selected_survey",
+        "reason": "The official abstract describes a critical survey and an organized bibliography/site. It does not establish an independent new executable algorithm or benchmark to implement in this refresh.",
+        "method_review_completed": false,
+        "original_publication_datetime": null,
+        "date_limitation": "The 2027 to-appear venue metadata is not used as a first-publication date; the linked paper was not newly method-reviewed in this refresh."
+      },
+      {
+        "title": "Depth-CoT Tradeoffs in Transformers: A Look at Path Following",
+        "url": "https://research.google/pubs/depth-cot-tradeoffs-in-transformers-a-look-at-path-following/",
+        "capture": ".cache/nov12-refresh/priority/depth-cot-google.html",
+        "sha256": "e42b1e61ba2cb81ce3c03d4b39c167eeb8a0dc2395d98c582965e70a314cac87",
+        "authors_in_official_metadata": ["Clayton Sanford", "Matus Telgarsky", "Justin D. Li"],
+        "official_venue_year": 2027,
+        "arxiv_id": null,
+        "original_publication_datetime": null,
+        "original_author_affiliations_verified": false,
+        "review_scope": "official-detail-title-abstract-and-primary-identity-lookup",
+        "decision": "archived_identity_or_date_unresolved",
+        "exception_type": "date_or_identity_unresolved",
+        "reason": "The official detail contains a theoretical depth/CoT tradeoff and synthetic path-following experiments with networks up to five layers, but no Download link or exact first-release date. Bounded title-and-author lookup did not establish a fixed original identity. A Google directory entry alone is not original affiliation evidence. Cost is unknown, not assumed high.",
+        "attempts": [
+          {"url": "https://research.google/pubs/depth-cot-tradeoffs-in-transformers-a-look-at-path-following/", "result": "official_metadata_read_no_download_or_exact_date"},
+          {"result": "bounded_exact_title_and_author_primary_lookup_no_confirmed_identity"}
+        ],
+        "method_review_completed": false,
+        "high_cost_classification": false,
+        "counts_as_accepted": false,
+        "scope_triage_completed": true,
+        "reopen_when": "A fixed original manuscript with matching title/authors, exact first-release date, and verifiable affiliation/cost details becomes available."
+      },
+      {
+        "title": "A Joint Academic-Industry Data Architecture Specification of Fundamental Sleep Measures for Wearable Consumer Health Trackers",
+        "url": "https://research.google/pubs/a-joint-academic-industry-data-architecture-specification-of-fundamental-sleep-measures-for-wearable-consumer-health-trackers/",
+        "capture": ".cache/nov12-refresh/priority/sleep-spec-google.html",
+        "sha256": "aa99efec19cca58d5155036a15dc61ec9ab0f128214a9cd982851a5fda2e7e50",
+        "linked_primary_url": "https://www.sciencedirect.com/science/article/abs/pii/S1389945726005496",
+        "review_scope": "official-detail-title-and-abstract-selection",
+        "decision": "out_of_scope_specialized_health_data_semantics_specification",
+        "reason": "The contribution is a common semantic/provenance/quality specification for wearable-derived sleep measures, not an independently established foundation/Agent/post-training algorithm or public evaluation benchmark for the current implementation topics.",
+        "method_review_completed": false,
+        "original_publication_datetime": null,
+        "date_limitation": "The 2027-filter entry's detail itself says Sleep Medicine (2026). Neither field supplies an exact original release datetime."
+      }
+    ]
+  },
+  "official_blog_trigger": {
+    "url": "https://www.research.google/blog/using-wearables-to-enable-cardiovascular-kidney-metabolic-ckm-risk-profiling-for-personalized-coaching/",
+    "title": "Using wearables to enable cardiovascular-kidney-metabolic (CKM) risk profiling for personalized coaching",
+    "blog_publication_date": "2026-11-11",
+    "capture": ".cache/nov12-refresh/priority/ckm-blog.html",
+    "sha256": "bb3f19073f680ceaa60a3ed4c8ed3e75ba06e8b657bf7695f920e997fcd6476d",
+    "linked_paper_ids": ["2611.08568", "2603.27787"],
+    "limitation": "The new official blog makes older manuscripts newly visible; its November 11 date is not either manuscript's original release date. The blog's 125 candidate trajectories do not disclose an exact 5-by-5-by-5 action-grid constructor."
+  },
+  "primary_reviews": [
+    {
+      "id": "2611.08568",
+      "revision": 1,
+      "title": "Personalized health coaching via coachable health age and counterfactual wearable trajectories",
+      "title_aliases": ["Personalized coaching via coachable health age and counterfactual wearable trajectories"],
+      "published": "2026-11-05T17:52:57Z",
+      "url": "https://arxiv.org/abs/2611.08568v1",
+      "primary_url": "https://arxiv.org/html/2611.08568v1",
+      "verified_priority_organizations": ["Google"],
+      "affiliation_evidence": {
+        "source": "fixed-v1-html-original-byline",
+        "co_first_authors": [
+          {"name": "Simon A. Lee", "affiliations": ["Google Research", "University of California, Los Angeles"]},
+          {"name": "Zeinab Esmaeilpour", "affiliations": ["Google Research"]}
+        ],
+        "additional_byline_check": "Ahmed A. Metwally and A. Ali Heydari are explicitly affiliated with Google Research. Attribution is not inferred from the Gemini model or the official blog."
+      },
+      "identity_evidence": [
+        {"url": "https://arxiv.org/abs/2611.08568v1", "capture": ".cache/nov12-refresh/priority/sensorwm-abs.html", "sha256": "b058fd6bfffd7b0cc23da2605539f2a038c9f51c49926a76afd55bfd5fb09f37", "supports": "Canonical citation title and exact sole-v1 submission datetime."},
+        {"url": "https://arxiv.org/html/2611.08568v1", "capture": ".cache/nov12-refresh/priority/sensorwm-v1.html", "sha256": "95237eae5b595ca259e85c172b26288480c1c96eccf43368fdb852c111d962b4", "supports": "Original affiliations, method/evaluation/data/code sections; HTML h1 omits health and is retained as an alias."},
+        {"url": "https://arxiv.org/pdf/2611.08568v1", "capture": ".cache/nov12-refresh/priority/sensorwm-pdf-head.bin", "sha256": "ca2b8a0aeeeb631244664d8874ab512dcd11199c0098967553879d4d0f541975", "bytes": 65536, "capture_scope": "HTTP 206 prefix bytes 0-65535 only", "supports": "Embedded PDF Title metadata agrees with the abs title containing health.", "limitations": "The 34 MB manuscript was not downloaded or visually reviewed as a complete PDF; this prefix is not a complete paper or first-page visual check."}
+      ],
+      "previous_selection": {
+        "artifact": "research-audits/nov09-review-closure/paper-register.json",
+        "artifact_sha256": "0b67aa8c1830c59556f933a2d436a4a7a9ec7c125bd23b27925da3d6d2c5e522",
+        "record_id": "2611.08568",
+        "metadata_sha256": "0f5bf78ebc173438b92a8d0a831edde201d83ce59b51afd3e81590564d7b031c",
+        "status": "not_selected_p2",
+        "review_scope": "title-abstract-selection",
+        "method_review_completed": false,
+        "fulltext_review_completed": false,
+        "protected_priority_signal": false,
+        "reopen_reason": "The old P2 selection did not verify methods or the Google byline. Newly verified original Google provenance requires a priority method recheck, not an assertion that a completed review was already implemented."
+      },
+      "decision": "accepted_historical_priority_backfill_low_cost_planning_component",
+      "november_12_new_first_release": false,
+      "method_review_completed": true,
+      "fulltext_review_scope": "Necessary original sections 4.2.1, 4.2.3-4.2.7, 4.3.2-4.3.6, Data availability, and Code availability; not a claim of line-by-line proof checking of every appendix.",
+      "defining_method": [
+        "Sections 4.2.3-4.2.4 define an action-conditioned second-order latent transition: delta_z_t=z_t-z_(t-1), predicted_z_(t+1)=z_t+g(z_t,a_t)delta_z_t. Encoder hidden size is 256 and latent size 128. Rollout and path losses use jointly encoded observed targets; an EMA/stop-gradient teacher is not asserted.",
+        "The first two observed states initialize recursive future rollout. A post-hoc decoder operates on the frozen learned dynamics. Future observed physiological states are not supplied as rollout inputs.",
+        "Section 4.3.2 Eq55 defines personalized quadratic action effort using baseline variability and specified minimum variability floors. Eq56 ranks externally predicted future-versus-future CHA benefits by benefit/(1+effort), filters benefits at or below 0.1 years, and returns at most three feasible sleep/movement/combined pathways."
+      ],
+      "permitted_low_cost_boundary": "Only exact Eq55-Eq56 deterministic CPU planning postprocessing over explicitly external model predictions is selected. It is not a SensorWM encoder/dynamics reproduction, an inferred 125-grid generator, a clinical safety validator, or an agent/clinical capability result. The source/action-versus-outcome separation must remain explicit.",
+      "evaluation_and_causality_boundary": "Original comparisons are retrospective/offline: 49 profiles with ten expert raters, and 2,613 evaluable paired plans from a 2,780-person cohort with repeated LLM judging. Observational conditional projections are not identified causal intervention effects, clinical efficacy, or production A/B evidence.",
+      "full_experiment": {
+        "status": "not_reproduced_high_cost",
+        "review_done": true,
+        "cost_evidence": [
+          {"section": "4.2.1", "detail": "96,957 participants; 2.28 million private longitudinal Fitbit person-weeks; 182,797 valid 12-week windows."},
+          {"section": "4.2.4", "detail": "Learned encoder/dynamics, recursive multi-step objectives, AdamW and decoder fitting; GPU count, total time, epochs, and batch size are not disclosed and are not invented."},
+          {"section": "4.3.3-4.3.6", "detail": "Gemini 3.5 Flash generation, repeated judge evaluation and expert review add external-model and human evaluation cost."},
+          {"section": "Data availability", "detail": "Longitudinal Fitbit records are not publicly redistributable; All of Us and WEAR-ME access is approved/registered-researcher access rather than unrestricted downloadable data."}
+        ],
+        "training_or_api_probe_attempted": false,
+        "blocking_review_watermark": false
+      },
+      "upstream_code_status": "promised_in_paper_release_not_verified_in_bounded_current_repository_check",
+      "upstream_url": "https://github.com/Google-Health/consumer-health-research"
+    },
+    {
+      "id": "2603.27787",
+      "revision_reviewed": 4,
+      "title": "Cardiovascular-Kidney-Metabolic Health Age Using Wearables and Blood Biomarkers",
+      "published": "2026-03-29T17:44:21Z",
+      "reviewed_revision_datetime": "2026-09-11T00:51:44Z",
+      "url": "https://arxiv.org/abs/2603.27787",
+      "primary_url": "https://arxiv.org/html/2603.27787v4",
+      "verified_priority_organizations": ["Google"],
+      "affiliation_evidence": "The fixed-v4 original byline explicitly lists Google Research for all ten authors, including first author Zeinab Esmaeilpour.",
+      "source_receipts": [
+        {"url": "https://arxiv.org/abs/2603.27787", "capture": ".cache/nov12-refresh/priority/ckm-abs.html", "sha256": "210e5aed32e7d402efabd9839926d8d060ceea3492fe63c85c7c9338516752f8"},
+        {"url": "https://arxiv.org/html/2603.27787v4", "capture": ".cache/nov12-refresh/priority/ckm-v4.html", "sha256": "f7b88c166b49295e20b33cabba66c83f2f3898a34a3be3c1b4829af2a9ecf662"}
+      ],
+      "decision": "out_of_scope_specialized_medical_application",
+      "method_review_completed": true,
+      "original_sections_checked": ["4.6", "4.10.1", "4.10.2", "4.10.3", "4.10.4", "6"],
+      "reason": "Section 4.6 explicitly reuses the earlier LSM-V2 architecture, objectives, and pretraining protocol. The downstream methods use train-fitted scalers, PCA, XGBoost regression/classification, and specialized medical risk/health-age formulas. This does not establish a new reusable foundation architecture, Agent/post-training algorithm, or public benchmark for the current topics. It is not accepted merely because the authors are Google or the data are costly.",
+      "scope_limitations": "This selection does not dispute the clinical contribution or claim that every formula is unchanged. No experiment was attempted and no model/benchmark capability was reproduced.",
+      "november_12_new_first_release": false,
+      "implementation_selected": false
+    }
+  ],
+  "upstream_release_check": {
+    "repository_url": "https://github.com/Google-Health/consumer-health-research",
+    "observed_head": "3e9d1e4877a54cf81ce8ef34085006952dd19601",
+    "head_evidence": "Read-only git ls-remote HEAD returned the exact commit above; no repository was cloned.",
+    "paper_statement": "The SensorWM Code availability section promises future release of CHA, SensorWM and analysis code upon publication at this repository.",
+    "checked_receipts": [
+      {"url": "https://github.com/Google-Health/consumer-health-research", "capture": ".cache/nov12-refresh/priority/consumer-health-repo.html", "sha256": "e7fbd64019f239aa2bda0f3041bfb3e35663add721e47133bd82114e3d9a2d73", "scope": "Visible top-level directory listing."},
+      {"url": "https://raw.githubusercontent.com/Google-Health/consumer-health-research/main/README.md", "capture": ".cache/nov12-refresh/priority/consumer-health-readme.md", "sha256": "b42d9b10cba75b8e0c97828684dd64660f7cfdc69b7cc1ffa692eac5f95f0345", "scope": "Repository mission statement, no SensorWM release reference."},
+      {"url": "https://raw.githubusercontent.com/Google-Health/consumer-health-research/main/personal_health_agent/README.md", "capture": ".cache/nov12-refresh/priority/personal-health-agent-readme.md", "sha256": "ad1b17c4d6ee03ac13598ace0a4dc48bad34f026c76796596a335fdbc684f69b", "scope": "This nearby agent directory explicitly implements the older Anatomy of a Personal Health Agent paper, arXiv 2508.20148, not SensorWM."},
+      {"url": "https://raw.githubusercontent.com/Google-Health/consumer-health-research/main/worldwide_model_cardiac_physiology/README.md", "capture": ".cache/nov12-refresh/priority/cardiac-physiology-readme.md", "sha256": "28e9e7201a89853b34c7ffbb001f51f6b9816063191ec11812327aa16bffb3af", "scope": "This nearby physiology directory implements a separate five-million-Fitbit-user statistical pipeline, not SensorWM latent dynamics."}
+    ],
+    "visible_top_level_directories": ["fhir-retrieval-bench", "insulin_resistance_prediction", "personal_health_agent", "phllm", "rppg", "sensorlm", "synthetic_wearable_log_for_causal_discovery", "worldwide_model_cardiac_physiology", "worldwide_step_trends"],
+    "additional_attempt": {
+      "url": "https://api.github.com/repos/Google-Health/consumer-health-research/git/trees/3e9d1e4877a54cf81ce8ef34085006952dd19601?recursive=1",
+      "http_status": 403,
+      "result": "recursive_tree_unavailable",
+      "raw_body_captured": false
+    },
+    "decision": "promised_release_not_verified",
+    "conclusion": "No specifically attributable SensorWM/CHA implementation release was found in the checked top-level and nearby README paths. Existing PHA/physiology code is not proof that SensorWM code has been released. Because the recursive API was unavailable and this was a bounded check, this is not a claim that every file in the repository was searched."
+  },
+  "publication_vs_update_check": {
+    "organization": "Meta",
+    "title": "Reality Labs Research Conversations for Hearing Augmentation Technology (RL-R CHAT) Dataset",
+    "url": "https://ai.meta.com/datasets/rlr-chat/",
+    "capture": ".cache/nov12-refresh/priority/meta-rlr-chat.html",
+    "sha256": "be360a1efbd61ad03bc4501d5dc5d71e1a469ed5ba73d35b4c54d1bff4ddd252",
+    "official_page_publication_date": "2026-05-01",
+    "license_notice_posted": "2026-11-05",
+    "license_change_effective": "2026-12-05",
+    "paper_doi": "10.1109/ICASSP55912.2026.11460964",
+    "exact_paper_original_publication_datetime": null,
+    "decision": "not_a_november_new_paper_or_dataset_release",
+    "reason": "The official page's May 1 heading and November 5 license-change notice are distinct. The notice changes the license effective December 5; it is not evidence of a November 5 paper first release. The dataset description reports 800+ participants and 300+ approximately one-hour conversations. No historical data interface or expensive evaluation is added solely from the changed search date.",
+    "full_paper_method_review_completed": false,
+    "counts_as_accepted_paper": false
+  },
+  "limitations": [
+    "This is a bounded official-source refresh relative to the prior delivery, not an exhaustive new review of Google/Meta/DeepMind or of all intervening directory pages.",
+    "Zero changed links on comparable visible pages is not zero new papers globally. The Meta full publication directory remains unavailable.",
+    "Google 2027-filter metadata is not a first-release calendar, and one entry's detail says 2026. The unresolved Depth-CoT identity is archived without inventing a date, affiliation, arXiv ID, or high-cost label.",
+    "SensorWM is one reopened Google-priority historical backfill, not a newly first-published November 12 paper. The old P2 screen was selection-only and had missed its institution signal.",
+    "No training, external model/API call, full dataset download, checkpoint transfer, or GPU experiment was performed by this source review. Separate component/runtime evidence belongs to the integrating agent's committed artifacts.",
+    "Raw captures remain in the local cache for optional source-byte rechecks; their committed hashes and bounded receipt descriptions do not make the uncommitted cache available on a fresh clone.",
+    "No global ledger, watermark, classifier, implementation, or paper documentation was edited by this review contribution."
+  ]
+}

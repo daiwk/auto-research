@@ -1,0 +1,320 @@
+{
+  "schema_version": 2,
+  "batch": "2026-11-13-scientisttwo-history-repair",
+  "device": "cpu",
+  "accelerator": "CPU",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "code_commit": "363d639261e1fc2e25c522ec0c5ac2c95edba446",
+  "source_sha256": {
+    "scripts/run_nov13_history_components.py": "6cc254add9f9fc9bbfb246bfbdcc0f401ace4bb1abde2b9e7d0616b488c6a49c",
+    "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+    "docs/research-audits/nov13-history-repair/preflight.json": "c8fe1313974dd10070e4f65c124e0ce67ac15697f20f988c02cf45b1f677c9ea",
+    "src/auto_research/agent_research/scientist_two.py": "228d0204bd939e5a571b9c9ec9d6a45cfb41d7e2314af8afcf4df3017f04fbbf",
+    "src/auto_research/agent_research/ds_star.py": "055b48769b8e98c8b9820df9cb236f5e5856e8d9f40a8e362357c9cf15bd30a0",
+    "src/auto_research/agent_research/era_flat_puct.py": "9edaba9390efc3c9e7358c2e0fe44a8a17b8add5f98015c2027fa867fcdd51d3",
+    "src/auto_research/agent_research/envharness.py": "3ee917770c3d6039acca6dc62f57428ff1832a63dc75b0f3bb5bd43eb993cc0b"
+  },
+  "components": {
+    "scientist-two": [
+      {
+        "seed": 42,
+        "diagnostic_only": true,
+        "evaluation_tier": "l1_mechanism",
+        "metrics": {
+          "critic_calls": 2,
+          "stage_refinements": 1,
+          "history_records_forwarded": 2,
+          "round_candidates": 2,
+          "full_callback_calls": 1,
+          "review_calls": 2,
+          "rebuttal_calls": 1
+        },
+        "checks": {
+          "bounded_stage_accepts_reviewed_revision": true,
+          "history_keeps_success_and_failure": true,
+          "evolved_plus_untried_novel_seed": true,
+          "engineer_does_not_unlock_full": true,
+          "full_failure_not_promoted": true,
+          "non_improvement_retains_original": true,
+          "review_threshold_and_budget": true,
+          "budget_with_some_success_selects": true
+        },
+        "execution_device": "cpu",
+        "execution_accelerator": "CPU"
+      },
+      {
+        "seed": 43,
+        "diagnostic_only": true,
+        "evaluation_tier": "l1_mechanism",
+        "metrics": {
+          "critic_calls": 2,
+          "stage_refinements": 1,
+          "history_records_forwarded": 2,
+          "round_candidates": 2,
+          "full_callback_calls": 1,
+          "review_calls": 2,
+          "rebuttal_calls": 1
+        },
+        "checks": {
+          "bounded_stage_accepts_reviewed_revision": true,
+          "history_keeps_success_and_failure": true,
+          "evolved_plus_untried_novel_seed": true,
+          "engineer_does_not_unlock_full": true,
+          "full_failure_not_promoted": true,
+          "non_improvement_retains_original": true,
+          "review_threshold_and_budget": true,
+          "budget_with_some_success_selects": true
+        },
+        "execution_device": "cpu",
+        "execution_accelerator": "CPU"
+      },
+      {
+        "seed": 44,
+        "diagnostic_only": true,
+        "evaluation_tier": "l1_mechanism",
+        "metrics": {
+          "critic_calls": 2,
+          "stage_refinements": 1,
+          "history_records_forwarded": 2,
+          "round_candidates": 2,
+          "full_callback_calls": 1,
+          "review_calls": 2,
+          "rebuttal_calls": 1
+        },
+        "checks": {
+          "bounded_stage_accepts_reviewed_revision": true,
+          "history_keeps_success_and_failure": true,
+          "evolved_plus_untried_novel_seed": true,
+          "engineer_does_not_unlock_full": true,
+          "full_failure_not_promoted": true,
+          "non_improvement_retains_original": true,
+          "review_threshold_and_budget": true,
+          "budget_with_some_success_selects": true
+        },
+        "execution_device": "cpu",
+        "execution_accelerator": "CPU"
+      }
+    ],
+    "ds-star": [
+      {
+        "seed": 42,
+        "diagnostic_only": true,
+        "evaluation_tier": "l1_mechanism",
+        "checks": {
+          "backtrack_removes_error_and_suffix": true,
+          "add_keeps_existing_prefix": true,
+          "first_step_can_be_replaced": true,
+          "last_output_preserved_for_planner": true,
+          "explicit_verifier_stops_before_router": true,
+          "coder_receives_previous_code_reference": true,
+          "budget_end_not_capability_success": true
+        },
+        "metrics": {
+          "control_checks": 7,
+          "verified_rounds": 2,
+          "routing_calls": 1,
+          "budgeted_unverified_executions": 1
+        },
+        "execution_device": "cpu",
+        "execution_accelerator": "CPU"
+      },
+      {
+        "seed": 43,
+        "diagnostic_only": true,
+        "evaluation_tier": "l1_mechanism",
+        "checks": {
+          "backtrack_removes_error_and_suffix": true,
+          "add_keeps_existing_prefix": true,
+          "first_step_can_be_replaced": true,
+          "last_output_preserved_for_planner": true,
+          "explicit_verifier_stops_before_router": true,
+          "coder_receives_previous_code_reference": true,
+          "budget_end_not_capability_success": true
+        },
+        "metrics": {
+          "control_checks": 7,
+          "verified_rounds": 2,
+          "routing_calls": 1,
+          "budgeted_unverified_executions": 1
+        },
+        "execution_device": "cpu",
+        "execution_accelerator": "CPU"
+      },
+      {
+        "seed": 44,
+        "diagnostic_only": true,
+        "evaluation_tier": "l1_mechanism",
+        "checks": {
+          "backtrack_removes_error_and_suffix": true,
+          "add_keeps_existing_prefix": true,
+          "first_step_can_be_replaced": true,
+          "last_output_preserved_for_planner": true,
+          "explicit_verifier_stops_before_router": true,
+          "coder_receives_previous_code_reference": true,
+          "budget_end_not_capability_success": true
+        },
+        "metrics": {
+          "control_checks": 7,
+          "verified_rounds": 2,
+          "routing_calls": 1,
+          "budgeted_unverified_executions": 1
+        },
+        "execution_device": "cpu",
+        "execution_accelerator": "CPU"
+      }
+    ],
+    "era-flat-puct": [
+      {
+        "seed": 42,
+        "diagnostic_only": true,
+        "evaluation_tier": "l1_mechanism",
+        "metrics": {
+          "nodes": 5,
+          "external_evaluations": 2,
+          "total_visits": 14,
+          "fixture_best_validation_score": 0.9,
+          "maximum_rank_score": 1.0
+        },
+        "checks": {
+          "v1_singleton_rank_and_root_visits": true,
+          "ancestor_counts_not_rollout_means": true,
+          "flat_selection_can_choose_deep_leaf": true,
+          "bounded_external_evaluations": true,
+          "best_uses_raw_validation_not_exploration": true,
+          "rank_extrema": true,
+          "explicit_average_rank_tie_convention": true
+        },
+        "execution_device": "cpu",
+        "execution_accelerator": "CPU"
+      },
+      {
+        "seed": 43,
+        "diagnostic_only": true,
+        "evaluation_tier": "l1_mechanism",
+        "metrics": {
+          "nodes": 5,
+          "external_evaluations": 2,
+          "total_visits": 14,
+          "fixture_best_validation_score": 0.9,
+          "maximum_rank_score": 1.0
+        },
+        "checks": {
+          "v1_singleton_rank_and_root_visits": true,
+          "ancestor_counts_not_rollout_means": true,
+          "flat_selection_can_choose_deep_leaf": true,
+          "bounded_external_evaluations": true,
+          "best_uses_raw_validation_not_exploration": true,
+          "rank_extrema": true,
+          "explicit_average_rank_tie_convention": true
+        },
+        "execution_device": "cpu",
+        "execution_accelerator": "CPU"
+      },
+      {
+        "seed": 44,
+        "diagnostic_only": true,
+        "evaluation_tier": "l1_mechanism",
+        "metrics": {
+          "nodes": 5,
+          "external_evaluations": 2,
+          "total_visits": 14,
+          "fixture_best_validation_score": 0.9,
+          "maximum_rank_score": 1.0
+        },
+        "checks": {
+          "v1_singleton_rank_and_root_visits": true,
+          "ancestor_counts_not_rollout_means": true,
+          "flat_selection_can_choose_deep_leaf": true,
+          "bounded_external_evaluations": true,
+          "best_uses_raw_validation_not_exploration": true,
+          "rank_extrema": true,
+          "explicit_average_rank_tie_convention": true
+        },
+        "execution_device": "cpu",
+        "execution_accelerator": "CPU"
+      }
+    ],
+    "envharness": [
+      {
+        "seed": 42,
+        "diagnostic_only": true,
+        "evaluation_tier": "l1_mechanism",
+        "metrics": {
+          "stage_replay_actions": 1,
+          "chain_agent_steps": 2,
+          "first_verifier_calls": 1,
+          "second_verifier_calls": 1,
+          "blocked_inner_steps": 0
+        },
+        "checks": {
+          "reachable_replay_resets_budget": true,
+          "blocked_action_does_not_mutate_inner": true,
+          "lazy_second_environment": true,
+          "handoff_masks_first_termination": true,
+          "cached_verifier_conjunction": true,
+          "shared_budget_exhaustion_is_not_success": true
+        },
+        "execution_device": "cpu",
+        "execution_accelerator": "CPU"
+      },
+      {
+        "seed": 43,
+        "diagnostic_only": true,
+        "evaluation_tier": "l1_mechanism",
+        "metrics": {
+          "stage_replay_actions": 1,
+          "chain_agent_steps": 2,
+          "first_verifier_calls": 1,
+          "second_verifier_calls": 1,
+          "blocked_inner_steps": 0
+        },
+        "checks": {
+          "reachable_replay_resets_budget": true,
+          "blocked_action_does_not_mutate_inner": true,
+          "lazy_second_environment": true,
+          "handoff_masks_first_termination": true,
+          "cached_verifier_conjunction": true,
+          "shared_budget_exhaustion_is_not_success": true
+        },
+        "execution_device": "cpu",
+        "execution_accelerator": "CPU"
+      },
+      {
+        "seed": 44,
+        "diagnostic_only": true,
+        "evaluation_tier": "l1_mechanism",
+        "metrics": {
+          "stage_replay_actions": 1,
+          "chain_agent_steps": 2,
+          "first_verifier_calls": 1,
+          "second_verifier_calls": 1,
+          "blocked_inner_steps": 0
+        },
+        "checks": {
+          "reachable_replay_resets_budget": true,
+          "blocked_action_does_not_mutate_inner": true,
+          "lazy_second_environment": true,
+          "handoff_masks_first_termination": true,
+          "cached_verifier_conjunction": true,
+          "shared_budget_exhaustion_is_not_success": true
+        },
+        "execution_device": "cpu",
+        "execution_accelerator": "CPU"
+      }
+    ]
+  },
+  "elapsed_seconds": 0.0539089587982744,
+  "diagnostic_only": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "pretrained_model_calls": 0,
+  "api_calls": 0,
+  "full_experiments_executed": false,
+  "automatic_retry": false
+}

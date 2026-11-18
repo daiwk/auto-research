@@ -1,0 +1,46 @@
+{
+  "domain": "agent-research",
+  "key": "instruct-to-act",
+  "title": "Decoupling Planning and Control for Instructable Agents",
+  "paper_url": "https://arxiv.org/abs/2608.26788",
+  "reviewed_version": "v1",
+  "reviewed_arxiv_id": "2608.26788v1",
+  "reviewed_version_url": "https://arxiv.org/html/2608.26788v1",
+  "detail_path": "agent-research/2608.26788-instruct-to-act/README.md",
+  "topic": [
+    "语言指令与世界模型控制"
+  ],
+  "published": "2026-08-27",
+  "published_at": "2026-08-27T08:17:58Z",
+  "first_author": "Zineng Tang",
+  "first_author_affiliation": "UC Berkeley",
+  "verified_priority_organizations": [
+    "Google DeepMind"
+  ],
+  "code": "https://github.com/zinengtang/instruct-to-act-code",
+  "code_status": "作者/官方项目链接的仓库已核验公开；本地仅实现固定v1所列子组件，未运行上游完整系统。",
+  "adapter": null,
+  "priority": "P0",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.agent_research.instruct_to_act.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.agent_research.instruct_to_act import diagnostic; print(diagnostic(42))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_passed": true,
+  "review_done": true,
+  "full_experiment_review_done": true,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2608.26788v1",
+    "available_resource": "单张A100/A30或Mac",
+    "basis": "800M每环境controller、7环境、4×RTXA6000、平均23h/最高36h每环境，GPT4o标注增17%GPUh；完整训练高成本不复现。"
+  },
+  "fidelity_note": "把高频world-model控制与稀疏VLM规划解耦，给自身轨迹后标指令训练BC/stop目标。本地实现区间完成标签和真实可微loss，无RSSM/策略/环境控制。",
+  "summary": "把高频world-model控制与稀疏VLM规划解耦，给自身轨迹后标指令训练BC/stop目标。本地实现区间完成标签和真实可微loss，无RSSM/策略/环境控制。",
+  "gpu_validation_artifact": "docs/gpu-validations/instruct-to-act-a100-20261113.json"
+}

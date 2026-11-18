@@ -7,7 +7,7 @@ hide:
 
 # 评测追问四件事：完成了、稳健吗、靠什么、花多少
 
-[Agent](../index.md) · 更新 2026-11-04 · 44 篇主题资料 / 7 篇重点对照
+[Agent](../index.md) · 更新 2026-11-13 · 49 篇主题资料 / 12 篇重点对照
 
 GAIA测最终任务回答，AgentPerturb检查单目标输入扰动，User Proxy Bench检查用户模拟是否偷省信息获取；AlphaDiana完整记录失败与重试，HDA拆解harness涨分来源，选择性评测则约束自动裁判的错误区域。高分只有在这些协议讲清后才有可解释性。
 
@@ -32,6 +32,11 @@ GAIA测最终任务回答，AgentPerturb检查单目标输入扰动，User Proxy
 | [Harness-Delta Attribution: Dissecting Gains From Harness Evolution](../../../agent-research/2610.22466-harness-decomposition/README.md) · [原始来源](https://arxiv.org/abs/2610.22466)<br>章节：背景与主要改动、核心公式、本地复现与边界 | 先检验配对增益，再构造人审算力匹配与捷径中和四臂，分解额外算力、已检测捷径和剩余项。 | 中和只能覆盖已发现机制，剩余项仍可能含捷径，不能直接当迁移证据；本地只执行已测四臂统计。 |
 | [Certified Selective Automation of LLM Agent Evaluation](../../../agent-research/2609.34320-certified-selective-eval/README.md) · [原始来源](https://arxiv.org/abs/2609.34320)<br>章节：背景与主要改动、复现边界 | 以任务簇bootstrap估计自动判断区域的错误率上界，证书低于预算才自动接管。 | 依赖校准任务簇与目标自动区域，不能把轨迹数当独立样本；本地mini证书不代表论文语料覆盖或通用裁判可靠。 |
 | [AgentHeal: Evaluating Goal-Preserving Resource Recovery of Web Agents under Access Barriers](../../../agent-research/2610.39234-agentheal/README.md) · [原始来源](https://arxiv.org/abs/2610.39234)<br>章节：背景与主要改动、核心公式、数据协议与实现边界、本地结果与负控 | 显式构造无障碍、可恢复和不可恢复资源三联，按副本/版本关系、障碍诊断和访问政策联合评价目标保真。 | 不可恢复时正确行为是诚实弃答而非强行回答；需要独立来源与政策标注，本地真值表不具备浏览器或语义judge能力。 |
+| [XStack: A Benchmark for ML Repo Migration](../../../agent-research/2611.08472-xstack/README.md) · [原始来源](https://arxiv.org/abs/2611.08472)<br>章节：评估协议、论文离线与线上效果、复现与验证边界 | 以干净 TPU 全规模重训、独立判分、反作弊与原框架权重回载共同定义通过；二阶段只公开配方并冻结入口外代码。 | 补配方与训练复现是不同诊断阶段；GPU 初步实验不可替代主 TPU 矩阵。本地只收录。 |
+| [ARE-bench: Benchmarking Agents&#x27; Research Ability in Real-World Researcher Sessions and Workspaces](../../../agent-research/2611.14364-are-bench/README.md) · [原始来源](https://arxiv.org/abs/2611.14364)<br>章节：背景与主要改动、核心公式、数据协议与代码映射 | 在真实会话切点保留仍有效要求与未清理workspace，actor/evaluator分离，以全条目ISR和逐任务macro CSR判断交付。 | 评分依赖可验证rubric与完整任务分母；本地只实现输入隔离和scorer，无官方75任务包、Actor或judge，不将手工例子算benchmark成绩。 |
+| [ReproBridge: Building Reproducibility into ML Research Artifacts](../../../agent-research/2611.08452-reprobridge/README.md) · [原始来源](https://arxiv.org/abs/2611.08452)<br>章节：核心公式、数据协议与代码映射、高成本完整实验 | 将复现的执行知识保存为代码、环境、launcher和指南；评价侧把五次参考的双侧数值兼容与独立执行完整性审计分开。 | 公开任务不含私有参考/成功阈值；本地只有数学与文件证据合同，没有LLM Reproducer或语义Auditor，完整8×H100/多模型任务矩阵高成本不复现。 |
+| [AlphaProof Code: Verifying Signal&#x27;s Security at the Machine-Code Level](../../../agent-research/alphaproof-code/README.md) · [原始来源](https://deepmind.google/documents/36/Formal_Verification_of_Signal_4.pdf)<br>章节：核心验证条件、来源核验、高成本完整实验 | 由人类批准规格，再用Lean内核、隔离规格副本及comparator检查顶层定理、所有传递定义和标准公理；证明生成Agent不自行宣布完成。 | 内核证明以可信规格、机器语义和密码学假设为前提，不等于真实意图充分；650万行证明及数小时工具链构建高成本，仅收录不复现。 |
+| [MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games](../../../agent-research/2602.24188-mt-pingeval/README.md) · [原始来源](https://arxiv.org/abs/2602.24188)<br>章节：背景与主要改动、核心公式、数据协议与代码映射、复现边界 | 用各方私有视图与固定token总预算区分交互收益、额外输出和多次猜测机会；Name-game按完整记录判定。 | UserProxyBench审计模拟用户是否提前泄露，MT-PingEval测受控信息博弈中的协作。任务成功不替代信息边界合规，更多轮次也不自动代表协作更好。 |
 
 </div>
 
@@ -54,6 +59,36 @@ AlphaDiana强调逻辑样本不随重试扩张，所有attempt成本都要累计
 AgentPerturb要求扰动后仍保留原目标与可解性，避免凭空制造失败。AgentHeal则把真正不可恢复作为明确标注的独立regime，评价诚实弃答、障碍诊断和合规，而不强求不存在的答案；可恢复时又要求优先精确副本或披露版本差异。GAIA式最终答案正确性不能替代这类来源与过程条件。只有明确每组期待行为并分组保留分母，回答率、恢复率和可靠性才不会混淆。
 
 对照来源：[agentheal](../../../agent-research/2610.39234-agentheal/README.md) · [agent-perturb](../../../agent-research/2610.21624-agent-perturb/README.md) · [gaia](../../../agent-research/2311.12983-gaia/README.md)
+
+### 明确配方与改坏任务不是同一种协议变化
+
+AgentPerturb 只改一个输入面，并独立验证目标保持和可解性，配对差值才可归因于该扰动。XStack 的第二阶段却是在同一迁移产物上补主实验配方，锁住入口脚本外代码且不公开目标；它是在区分实验选择错误与迁移错误，不是输入扰动稳健性测量。两者都需要评分者独立于执行 Agent，不能让执行者看到用于判定的隐含目标。
+
+对照来源：[xstack](../../../agent-research/2611.08472-xstack/README.md) · [agent-perturb](../../../agent-research/2610.21624-agent-perturb/README.md)
+
+### 历史语义保真与跨栈重训是两种研究交付证据
+
+ARE-bench检验任务接手时是否保留历史决定和工作区材料，严格ISR防止高条目均分掩盖缺一项交付；CSR仍按任务macro。XStack检验跨框架代码在干净全规模重跑、来源判定和权重回载中是否达标。二者都不能把私有判据交给Actor，但任务分母、资源和成功标准不同。ARE的本地scorer接口不是官方任务集接入，XStack资料审查也不是训练迁移已完成。
+
+对照来源：[are-bench](../../../agent-research/2611.14364-are-bench/README.md) · [xstack](../../../agent-research/2611.08472-xstack/README.md)
+
+### 结果相符、过程有效与目标保留是不同的审计问题
+
+AgentHeal关心失败恢复后是否仍引用合法同版本来源并遵守政策；ReproBridge关心一个接近论文的分数是否来自指定实验与统计单位。前者不能凭答案相似替代来源归因，后者不能凭数值兼容替代独立执行审计。它们都要求评价侧标注/参考与actor隔离，也都不能把机械真值表当真实Agent成功率。
+
+对照来源：[reprobridge](../../../agent-research/2611.08452-reprobridge/README.md) · [agentheal](../../../agent-research/2610.39234-agentheal/README.md)
+
+### 可机器检查的证据仍需要先固定要证明什么
+
+AlphaProof Code把获批规格及依赖隔离，阻止模型把secure偷改成恒真再交付合法Lean证明。ReproBridge则预先固定实验与报告统计，阻止得到目标分数后再替换测量。两者都保留人类规格/评价设计责任，但形式证明的逻辑正确性不能替代实验执行完整性，反过来数值复现也不证明程序安全。
+
+对照来源：[alphaproof-code](../../../agent-research/alphaproof-code/README.md) · [reprobridge](../../../agent-research/2611.08452-reprobridge/README.md)
+
+### 私有信息测评先检查谁知道什么，再看谁答对
+
+UserProxyBench把用户合同保真与任务reward分开，并审计请求前披露。MT-PingEval用分离数据库或图像建立不对称信息，再固定每玩家token检验轮次。Name-game要比较完整记录而非同名，且应对照无放回随机猜。协议实现没有actor，只有真实模型和tokenizer接入后才能评价协作。
+
+对照来源：[mt-pingeval](../../../agent-research/2602.24188-mt-pingeval/README.md) · [user-proxy-bench](../../../agent-research/2609.38043-userproxybench/README.md)
 
 ## 跨论文问答 {#questions}
 
@@ -99,9 +134,79 @@ AgentPerturb要求扰动后仍保留原目标与可解性，避免凭空制造�
 
     对照来源：[agentheal](../../../agent-research/2610.39234-agentheal/README.md) · [agent-perturb](../../../agent-research/2610.21624-agent-perturb/README.md) · [gaia](../../../agent-research/2311.12983-gaia/README.md)
 
+### 同一个迁移在 XStack 第一阶段失败、第二阶段通过，为什么不能当作 AgentPerturb 式的稳健性配对分数？ {#cross-aligned-recipe-not-robustness-pair}
+
+??? note "展开答案与例子"
+
+    **答案：** XStack 只对失败单元追加配方并约束修改范围，判的是同一迁移在正确配方下能否重训达标；AgentPerturb 对共同任务的干净和扰动输入分别执行且保持目标与可解性。分母、干预和通过条件不同。
+
+    **教学例子：** 教学例：原来误跑较小数据集，澄清后换入口并全规模达标，说明该迁移路径可运行，不说明 Agent 能应对不同工具说明扰动。
+
+    对照来源：[xstack](../../../agent-research/2611.08472-xstack/README.md) · [agent-perturb](../../../agent-research/2610.21624-agent-perturb/README.md)
+
+### 脚本能恢复训练、checklist大部分通过，为何仍可能同时没通过ARE式交接和XStack式迁移？ {#cross-history-checklist-versus-clean-retraining}
+
+??? note "展开答案与例子"
+
+    **答案：** ARE的严格ISR要求所有有效历史和材料条目通过，恢复运行不能抵消改错原loss的失败；XStack还要求独立完整重训、反作弊核验及原框架权重加载。部分条目通过或一次执行成功都不覆盖另一套证据。
+
+    **教学例子：** 教学例：为了让训练跑起来删掉匹配loss，可能仍生成日志和checkpoint，却违反历史方法要求，也不能证明跨栈复现达标。
+
+    对照来源：[are-bench](../../../agent-research/2611.14364-are-bench/README.md) · [xstack](../../../agent-research/2611.08472-xstack/README.md)
+
+### AgentHeal的任务成功与ReproBridge的数值兼容，为什么都不能只看最终输出是否漂亮？ {#cross-cross-reproduction-compatibility-versus-goal-preservation}
+
+??? note "展开答案与例子"
+
+    **答案：** AgentHeal还要求合法来源版本与逐动作合规；ReproBridge还要求指定测量程序、统计单位与可反驳的执行审计。输出好看可能分别掩盖旧版本替换或复制旧分数，评价者也不能把这些答案/参考交给actor。
+
+    **教学例子：** 教学例：拿旧版论文答对一句话不等于恢复指定新版本；把已发表MSE抄进新JSON也不等于训练了模型。
+
+    对照来源：[reprobridge](../../../agent-research/2611.08452-reprobridge/README.md) · [agentheal](../../../agent-research/2610.39234-agentheal/README.md)
+
+### Lean能检查证明，为什么AlphaProof仍需要人类审规格；ReproBridge又为何不能只检查分数？ {#cross-cross-proof-checking-versus-execution-audit}
+
+??? note "展开答案与例子"
+
+    **答案：** 内核只证明给定命题，弱化规格依然可能得到有效证明；数值兼容只说明数值落在区间，复制或错误统计也可能相符。前者固定规格及传递定义，后者固定实验程序与证据链，均不能以漂亮最终产物跳过输入合同。
+
+    **教学例子：** 教学例：把secure定义为True后证明成功，与把旧结果复制成新JSON后分数兼容，都可能表面通过一个窄检查，却没有完成原要求。
+
+    对照来源：[alphaproof-code](../../../agent-research/alphaproof-code/README.md) · [reprobridge](../../../agent-research/2611.08452-reprobridge/README.md)
+
+### Name-game随轮数提高成功率，就一定是更好的协作吗？ {#cross-cross-colm-mt-pingeval}
+
+??? note "展开答案与例子"
+
+    **答案：** 不一定。更多轮次也给随机无放回猜记录更多机会，原文专门比较该基线。还需固定token预算和检查传递的信息，不能只看成功曲线。
+
+    **教学例子：** 教学例：25行里每轮猜一行，允许16轮天然比2轮更容易撞对。
+
+    对照来源：[mt-pingeval](../../../agent-research/2602.24188-mt-pingeval/README.md) · [user-proxy-bench](../../../agent-research/2609.38043-userproxybench/README.md)
+
 ## 更新记录 {#updates}
 
 新论文带来新路线、改变取舍，或补充现有路线时，都在这里说明。
+
+**2026-11-13** · 补入mt-pingeval历史遗漏，用各方私有视图与固定token总预算区分交互收益、额外输出和多次猜测机会；Name-game按完整记录判定。 UserProxyBench审计模拟用户是否提前泄露，MT-PingEval测受控信息博弈中的协作。任务成功不替代信息边界合规，更多轮次也不自动代表协作更好。
+
+涉及：[mt-pingeval](../../../agent-research/2602.24188-mt-pingeval/README.md) · [user-proxy-bench](../../../agent-research/2609.38043-userproxybench/README.md)
+
+**2026-11-11** · 增加形式规格保真与传递依赖门控维度；明确高成本reference无本地证明能力，不用regex或玩具定理替代官方验证。
+
+涉及：[alphaproof-code](../../../agent-research/alphaproof-code/README.md)
+
+**2026-11-11** · 补充独立科研复现的统计兼容与证据完整性维度，明确相近分数不是执行证明；未改变现有来源/政策审计边界。
+
+涉及：[reprobridge](../../../agent-research/2611.08452-reprobridge/README.md)
+
+**2026-11-11** · 加入ARE-bench，强调真实会话/workspace与私有rubric隔离、严格ISR及task-macro CSR；与XStack独立重训证据分开。仅交CPU评分接口，官方任务包和多frontier长任务评测均未运行。
+
+涉及：[are-bench](../../../agent-research/2611.14364-are-bench/README.md) · [xstack](../../../agent-research/2611.08472-xstack/README.md)
+
+**2026-11-06** · 补入 XStack，将真实跨框架执行、隔离来源判定和权重回载与输入稳健性分开。主实验 TPU 成本高，仅资料审查，不把 Appendix G 或静态合同当成本地能力结果。
+
+涉及：[xstack](../../../agent-research/2611.08472-xstack/README.md) · [agent-perturb](../../../agent-research/2610.21624-agent-perturb/README.md)
 
 **2026-11-04** · 补AgentHeal，并对照AgentPerturb与GAIA解释不可恢复regime、目标版本、来源归因与政策乘积。区分精确副本的交集条件与其他版本的子集条件，独立gold标注仅给评价者；本地TS=0.5是四条合成真值表，不是Agent准确率。855任务×13模型完整矩阵高成本不复现、审查DONE。
 
@@ -111,7 +216,7 @@ AgentPerturb要求扰动后仍保留原目标与可解性，避免凭空制造�
 
 覆盖 43 篇主题资料；目录见下。
 
-<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 44 篇资料</summary>
+<details class="ar-deep-catalog" markdown="1"><summary>本主题全部 49 篇资料</summary>
 
 目录归类覆盖本主题全部资料；重点对照范围以上表为准。
 
@@ -159,6 +264,11 @@ AgentPerturb要求扰动后仍保留原目标与可解性，避免凭空制造�
 - [SOPBench: Evaluating Language Agents at Following Standard Operating Procedures and Constraints](../../../agent-research/2503.08669-sopbench-protocol/README.md)
 - [GAIA](../../../agent-research/2311.12983-gaia/README.md)
 - [AutoformBench: A Lean Formalization Benchmark for Advanced Mathematics](../../../agent-research/autoformbench/README.md)
+- [XStack: A Benchmark for ML Repo Migration](../../../agent-research/2611.08472-xstack/README.md)
+- [ReproBridge: Building Reproducibility into ML Research Artifacts](../../../agent-research/2611.08452-reprobridge/README.md)
+- [ARE-bench: Benchmarking Agents&#x27; Research Ability in Real-World Researcher Sessions and Workspaces](../../../agent-research/2611.14364-are-bench/README.md)
+- [AlphaProof Code: Verifying Signal&#x27;s Security at the Machine-Code Level](../../../agent-research/alphaproof-code/README.md)
+- [MT-PingEval: Evaluating Multi-Turn Collaboration with Private Information Games](../../../agent-research/2602.24188-mt-pingeval/README.md)
 
 </details>
 

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-13",
+  "figures": [
+    {
+      "file": "paper-figure-01.png",
+      "paper_id": "2606.01849",
+      "version": "v1",
+      "figure": 2,
+      "page_number": null,
+      "paper_url": "https://arxiv.org/abs/2606.01849v1",
+      "source_url": "https://arxiv.org/html/2606.01849v1/workflow_updated_v4.png",
+      "source_kind": "fixed_v1_html_original_image",
+      "pdf_sha256": null,
+      "image_sha256": "66a7d5e601abf0ccc089f510eb57c195c5a78df22556d5ed6214fa1da1e2de49",
+      "render_scale": null,
+      "crop_pdf_points": null,
+      "caption_included": false,
+      "scientific_content_modified": false,
+      "visual_review_done": true,
+      "attribution": "Copyright belongs to the original authors; original-paper illustration is not a local component result.",
+      "license": "See original fixed arXiv source; no new license granted."
+    }
+  ]
+}

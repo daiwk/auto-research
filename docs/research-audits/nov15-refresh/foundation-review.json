@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-15",
+  "scope": "Bounded foundation/multimodal review, official cs.LG/cs.CV November 13 announcement plus overlap and one explicitly requested historical version check.",
+  "discovery_sources": [
+    "https://arxiv.org/list/cs.LG/recent?show=2000&skip=0",
+    "https://arxiv.org/list/cs.CV/recent?show=2000&skip=0"
+  ],
+  "deduplication": "Exact normalized arXiv IDs checked against docs/research-manifest.json and discovery ledger before intake; no existing match for the six records at the check time.",
+  "coverage_complete": false,
+  "watermark_change_claimed": false,
+  "accepted": [
+    {
+      "arxiv_id": "2611.17334",
+      "identity": "foundation-models:unbundling-vision",
+      "first_published_at": "2026-11-12T18:59:54Z",
+      "announced_on": "2026-11-13",
+      "reviewed_version": "v1",
+      "reviewed_source_url": "https://arxiv.org/html/2611.17334v1",
+      "source_sha256": "cb94aced7fd35701c6885bbb307d66a07ffab31fdc841364c82a99e07fcb10de",
+      "first_author": "Ellis Brown",
+      "first_author_affiliation": "Meta FAIR / New York University",
+      "sections_read": [
+        "PDF p1",
+        "Sections 2–6",
+        "Appendices E.1/H"
+      ],
+      "implementation_status": "component_only",
+      "code_verification": "No released code link found on fixed v1 or https://unbundling.github.io/; do not equate project website with source release.",
+      "cost_resolution": "0.6B–6.4B common-data lifetime-compute matrix, eight-GPU throughput, H200 concurrent TTFT: full experiments too costly, not reproduced (review DONE).",
+      "scope_note": "Newly announced on November 13; exact v1 timestamp retained.",
+      "automatic_implementation_queue": false,
+      "automatic_retry": false
+    },
+    {
+      "arxiv_id": "2611.17332",
+      "identity": "foundation-models:archspace",
+      "first_published_at": "2026-11-12T18:59:52Z",
+      "announced_on": "2026-11-13",
+      "reviewed_version": "v1",
+      "reviewed_source_url": "https://arxiv.org/html/2611.17332v1",
+      "source_sha256": "7f5f2440a1aad7dae5351395a4791bbaf545ba4a34cfb30dabed05a142f09056",
+      "first_author": "Jie Wang",
+      "first_author_affiliation": "Shanghai AI Laboratory / East China Normal University",
+      "sections_read": [
+        "Sections 3–4",
+        "Tables 1–3",
+        "Figure 2",
+        "Appendix C"
+      ],
+      "implementation_status": "component_only",
+      "code_verification": "https://github.com/InternLM/archspace at 002e48df32c880898b0813e02c0439544b35cc85, Apache-2.0; proposal/record platform, not evidence that full training/fitting was executed locally.",
+      "cost_resolution": "Five compute budgets with size/LR/BS grids and 1B 150B+10B-token Phase II: full experiments too costly, not reproduced (review DONE).",
+      "scope_note": "Newly announced on November 13; exact v1 timestamp retained.",
+      "automatic_implementation_queue": false,
+      "automatic_retry": false
+    },
+    {
+      "arxiv_id": "2611.16639",
+      "identity": "foundation-models:d-jepa",
+      "first_published_at": "2026-11-12T11:13:13Z",
+      "announced_on": "2026-11-13",
+      "reviewed_version": "v1",
+      "reviewed_source_url": "https://arxiv.org/html/2611.16639v1",
+      "source_sha256": "3906fde34ddd7210fcb7f094a5311fbeec65fcd56e32a212314416875e524d3f",
+      "first_author": "Yusuf Shihata",
+      "first_author_affiliation": "Not listed in the paper",
+      "sections_read": [
+        "Sections 2–4",
+        "Appendix C",
+        "Fixed author models.py/training.py"
+      ],
+      "implementation_status": "component_only",
+      "code_verification": "https://github.com/Vixel2006/D-JEPA at 5e99bdde79716d742622e53cc0c1fa60dfeb459a, MIT. Paper single-context regularizer and author multi-view averaging differ; local docs preserve that distinction.",
+      "cost_resolution": "CLEVR multi-arm/three-seed backbone extraction/training/probe/flow-PID campaign too costly for the short single-device budget; not reproduced (review DONE). No hours invented.",
+      "scope_note": "Newly announced on November 13; exact v1 timestamp retained.",
+      "automatic_implementation_queue": false,
+      "automatic_retry": false
+    },
+    {
+      "arxiv_id": "2611.15968",
+      "identity": "foundation-models:duojepa",
+      "first_published_at": "2026-11-11T20:10:52Z",
+      "announced_on": "2026-11-13",
+      "reviewed_version": "v1",
+      "reviewed_source_url": "https://arxiv.org/html/2611.15968v1",
+      "source_sha256": "698926a696686d6423254c22f9a5f34d75549ce60f35772f82c6275fa5b40f21",
+      "first_author": "Mahmut S. Gokmen",
+      "first_author_affiliation": "Kentucky Center for Digital Innovation, University of Louisville",
+      "sections_read": [
+        "Sections 5–8",
+        "Table 8",
+        "Appendix A"
+      ],
+      "implementation_status": "component_only",
+      "code_verification": "No original code repository found in fixed v1 or author links.",
+      "cost_resolution": "Satellite 2 H200 28h49m, radiograph/report 2 H200 2h34m, plus ablations. Full experiments too costly, not reproduced (review DONE).",
+      "scope_note": "First released November 11 after cutoff; discovered in November 13 bulletin, not a November 15 release.",
+      "automatic_implementation_queue": false,
+      "automatic_retry": false
+    },
+    {
+      "arxiv_id": "2611.17336",
+      "identity": "multimodal-models:pixvid",
+      "first_published_at": "2026-11-12T18:59:55Z",
+      "announced_on": "2026-11-13",
+      "reviewed_version": "v1",
+      "reviewed_source_url": "https://arxiv.org/html/2611.17336v1",
+      "source_sha256": "7286034d500d3624211ad74a4840428c8bd70e28c42448cc06c6d1160b76369c",
+      "first_author": "Yanke Song",
+      "first_author_affiliation": "Roblox",
+      "sections_read": [
+        "Sections 2–5",
+        "Official project affiliation byline",
+        "Full model/compute configuration"
+      ],
+      "implementation_status": "review_only",
+      "code_verification": "https://chenshuo20.github.io/PixVid/ has unlinked GitHub/Hugging Face labels, not a verified release.",
+      "cost_resolution": "Wan2.1-14B, about 1.3M clips/20k updates; B200 50-step CFG sampling, 960x1664x21 uses 53.6GB and 192s/clip. Full experiments too costly, not reproduced (review DONE).",
+      "scope_note": "Newly announced on November 13; exact v1 timestamp retained.",
+      "automatic_implementation_queue": false,
+      "automatic_retry": false
+    },
+    {
+      "arxiv_id": "2601.20154",
+      "identity": "foundation-models:spectral-ghost",
+      "first_published_at": "2026-01-28T01:08:24Z",
+      "announced_on": null,
+      "reviewed_version": "v4",
+      "reviewed_source_url": "https://arxiv.org/html/2601.20154v4",
+      "source_sha256": "1550ad19d7782c155b7b406268c6e7d7cd452f4b5cf6eab0ba302e23651d423c",
+      "first_author": "Bo Dai",
+      "first_author_affiliation": "Georgia Tech (reviewed v4)",
+      "sections_read": [
+        "v1 and v4 bylines",
+        "v4 Sections 2–3.2/9/12",
+        "v4 Figure 4",
+        "v4 PDF p1 visual check"
+      ],
+      "implementation_status": "review_only_theory",
+      "code_verification": "No dedicated author source repository found in fixed v4. V1 had Google DeepMind affiliations; v4 does not. Code-free theory intake, not a high-cost training deferral.",
+      "cost_resolution": "No empirical experiment reported: v4 Section 12 leaves ablations outside scope. No invented model/data/GPU-hour matrix; review DONE as theory, no automatic queue.",
+      "scope_note": "Historical-version backfill, updated 2026-11-10T21:17:38Z; original January date retained.",
+      "automatic_implementation_queue": false,
+      "automatic_retry": false
+    }
+  ],
+  "method_cautions": [
+    "D-JEPA paper reports both 3,000 scenes x 6 questions and 12,000 pairs; no fabricated reconciliation.",
+    "D-JEPA paper Eq.5 and fixed author multi-view SIGReg averaging differ. Local single-context equation and elementwise reconstruction reduction are explicit.",
+    "DuoJEPA target centroids receive gradients; a stopped target would change the main method.",
+    "Meta Unbundling official PDF p1 visual check resolves lost HTML affiliations: Meta FAIR then NYU.",
+    "Spectral v1 Google attribution is version-specific; reviewed v4 byline is Georgia Tech/Harvard/UAlberta, with Google only in acknowledgments."
+  ],
+  "separate_sourceful_lead": {
+    "arxiv_id": "2611.16579",
+    "title": "ActWorld-JEPA: Action-Conditioned JEPA World Models Meet Latent Planning for End-to-End Autonomous Driving",
+    "url": "https://arxiv.org/abs/2611.16579",
+    "review_status": "abstract_only_not_adjudicated",
+    "reason": "Abstract discloses final NAVSIM v1 selector calibration using aggregate NAVTEST feedback. Preserve that test-selection limitation if later reviewed; no local controller/implementation is fabricated.",
+    "included_in_this_intake": false
+  },
+  "unreviewed_leads": [
+    {
+      "arxiv_id": "2611.17162",
+      "review_status": "title_lead_only_not_adjudicated",
+      "claimed_new_or_qualifying": false,
+      "source": "official recent-title listing"
+    },
+    {
+      "arxiv_id": "2611.16803",
+      "review_status": "title_lead_only_not_adjudicated",
+      "claimed_new_or_qualifying": false,
+      "source": "official recent-title listing"
+    },
+    {
+      "arxiv_id": "2611.16736",
+      "review_status": "title_lead_only_not_adjudicated",
+      "claimed_new_or_qualifying": false,
+      "source": "official recent-title listing"
+    },
+    {
+      "arxiv_id": "2611.16375",
+      "review_status": "title_lead_only_not_adjudicated",
+      "claimed_new_or_qualifying": false,
+      "source": "official recent-title listing"
+    },
+    {
+      "arxiv_id": "2611.16345",
+      "review_status": "title_lead_only_not_adjudicated",
+      "claimed_new_or_qualifying": false,
+      "source": "official recent-title listing"
+    },
+    {
+      "arxiv_id": "2611.16265",
+      "review_status": "title_lead_only_not_adjudicated",
+      "claimed_new_or_qualifying": false,
+      "source": "official recent-title listing"
+    },
+    {
+      "arxiv_id": "2611.16182",
+      "review_status": "title_lead_only_not_adjudicated",
+      "claimed_new_or_qualifying": false,
+      "source": "official recent-title listing"
+    },
+    {
+      "arxiv_id": "2611.16072",
+      "review_status": "title_lead_only_not_adjudicated",
+      "claimed_new_or_qualifying": false,
+      "source": "official recent-title listing"
+    },
+    {
+      "arxiv_id": "2611.15569",
+      "review_status": "title_lead_only_not_adjudicated",
+      "claimed_new_or_qualifying": false,
+      "source": "official recent-title listing"
+    },
+    {
+      "arxiv_id": "2611.15234",
+      "review_status": "title_lead_only_not_adjudicated",
+      "claimed_new_or_qualifying": false,
+      "source": "official recent-title listing"
+    },
+    {
+      "arxiv_id": "2611.15029",
+      "review_status": "title_lead_only_not_adjudicated",
+      "claimed_new_or_qualifying": false,
+      "source": "official recent-title listing"
+    },
+    {
+      "arxiv_id": "2611.16517",
+      "review_status": "title_lead_only_not_adjudicated",
+      "claimed_new_or_qualifying": false,
+      "source": "official recent-title listing"
+    },
+    {
+      "arxiv_id": "2611.16402",
+      "review_status": "title_lead_only_not_adjudicated",
+      "claimed_new_or_qualifying": false,
+      "source": "official recent-title listing"
+    },
+    {
+      "arxiv_id": "2611.15640",
+      "review_status": "title_lead_only_not_adjudicated",
+      "claimed_new_or_qualifying": false,
+      "source": "official recent-title listing"
+    },
+    {
+      "arxiv_id": "2611.15602",
+      "review_status": "title_lead_only_not_adjudicated",
+      "claimed_new_or_qualifying": false,
+      "source": "official recent-title listing"
+    },
+    {
+      "arxiv_id": "2611.15448",
+      "review_status": "title_lead_only_not_adjudicated",
+      "claimed_new_or_qualifying": false,
+      "source": "official recent-title listing"
+    },
+    {
+      "arxiv_id": "2611.15131",
+      "review_status": "title_lead_only_not_adjudicated",
+      "claimed_new_or_qualifying": false,
+      "source": "official recent-title listing"
+    },
+    {
+      "arxiv_id": "2611.15082",
+      "review_status": "title_lead_only_not_adjudicated",
+      "claimed_new_or_qualifying": false,
+      "source": "official recent-title listing"
+    },
+    {
+      "arxiv_id": "2611.15069",
+      "review_status": "title_lead_only_not_adjudicated",
+      "claimed_new_or_qualifying": false,
+      "source": "official recent-title listing"
+    }
+  ],
+  "local_validation": {
+    "test_file": "tests/test_nov15_foundation.py",
+    "cpu_result": "21 tests passed before integration; root additionally ran integrated checks. CUDA acceptance owned by root; no GPU claim inferred from CPU checks.",
+    "cuda_required_keys": [
+      "unbundling-vision",
+      "d-jepa",
+      "duojepa"
+    ],
+    "cpu_only_key": "archspace",
+    "no_execution_keys": [
+      "pixvid",
+      "spectral-ghost"
+    ]
+  }
+}

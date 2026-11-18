@@ -16,6 +16,13 @@ FORBIDDEN_FIELDS = (
     "ssh_alias", "user", "ip_address",
 )
 STANDALONE_GPU_RECEIPTS = {
+    **{key: f"docs/gpu-validations/{key}-a100-20261115.json" for key in (
+        "trigen", "unbundling-vision", "d-jepa", "duojepa", "lgpo", "coremem", "ace-rl",
+    )},
+    **{key: f"docs/gpu-validations/{key}-a100-20261113.json" for key in (
+        "lidas", "ecg-rag", "social-meta-learning", "instruct-to-act",
+        "cultural-cue", "behavioral-canaries", "rlmf",
+    )},
     **{key: f"docs/gpu-validations/{key}-a100-20261104.json" for key in (
         "proland", "gavagai", "specopd", "rlid",
     )},
@@ -88,7 +95,7 @@ STANDALONE_GPU_RECEIPTS = {
     "jev-workflow-measurement": "docs/gpu-validations/oct12-jev-workflow-measurement-a100.json",
     "sguid": "docs/gpu-validations/sguid-a100-20261012.json",
     "data-space-iteration": "docs/gpu-validations/data-space-iteration-a100-20261011.json",
-    "vcola": "docs/gpu-validations/vcola-a100-20261011.json",
+    "vcola": "docs/gpu-validations/vcola-gva-compat-a100-20261115.json",
     "memento3": "docs/gpu-validations/memento3-a100-20261011.json",
     "pivot": "docs/gpu-validations/pivot-a100-20261011.json",
     "sparse-decoding": "docs/gpu-validations/sparse-decoding-a100-20261011.json",

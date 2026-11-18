@@ -1,0 +1,49 @@
+{
+  "domain": "agent-research",
+  "key": "stellar-colosseum",
+  "title": "Stellar Colosseum: A Many-Agent Harness for Long-Horizon Research in Mathematics and Theoretical Computer Science",
+  "paper_url": "https://arxiv.org/abs/2609.15983v1",
+  "reviewed_version": "v1",
+  "reviewed_arxiv_id": "2609.15983v1",
+  "reviewed_version_url": "https://arxiv.org/html/2609.15983v1",
+  "detail_path": "agent-research/2609.15983-stellar-colosseum/README.md",
+  "topic": [
+    "Harness 与自我改进",
+    "多Agent长程科学研究"
+  ],
+  "published": "2026-09-14",
+  "published_at": "2026-09-14T17:58:55Z",
+  "first_author": "Honghao Lin",
+  "first_author_affiliation": "Google Research",
+  "verified_priority_organizations": [
+    "Google Research"
+  ],
+  "code": null,
+  "code_status": "固定v1提供相关研究结果仓库dpwoodru/erdos与knuthCycles，但未找到可核实的Colosseum harness作者源码发布；结果仓库不等同通用系统源码。",
+  "adapter": null,
+  "priority": "P0",
+  "intake_class": "historical_priority_backfill",
+  "implementation_status": "deferred_high_cost",
+  "local_operator": null,
+  "evaluation_tier": "review_only",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "review_done": true,
+  "full_experiment_review_done": true,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2609.15983v1",
+    "available_resource": "单张A100或A30，或本地Mac",
+    "basis": "§4.4/6/7：32→16→8→5→1探索树，其余阶段16→8→5→1且依赖证明节数与重试；Gemini3.1Pro/3.7Flash双系统覆盖300TCS证明和222Codeforces，另含八次critique选路。收费语义研究完整实验高成本不复现。",
+    "decision": "成本过高，完整实验不复现（审查DONE）；不下载checkpoint或数据，不试训估价。"
+  },
+  "summary": "以策略探索、readiness gate、依赖DAG证明分解、局部重试和全局验证组织长程研究；阶段内对候选及其反驳做可重叠随机子集树综合，保留未解决的异议而非多数投票。",
+  "fidelity_note": "仅固定v1方法、原图、成本和双语学习资料收录。新Google博客是历史发现证据，不改变首发日期；不以通用tree/DAG组件冒充语义证明、falsifier或Long Proof能力。",
+  "deferral_reason": "长程多Agent科学推理、收费Gemini与300TCS/222Codeforces完整搜索矩阵成本过高，不复现（审查 DONE）。"
+}

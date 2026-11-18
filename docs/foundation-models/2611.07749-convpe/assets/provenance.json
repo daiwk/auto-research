@@ -1,0 +1,16 @@
+{
+  "paper_id": "2611.07749v1",
+  "figure": "2 (left panel)",
+  "source_page": "https://arxiv.org/html/2611.07749v1#S3.F2",
+  "source_url": "https://arxiv.org/html/2611.07749v1/convpe.jpeg",
+  "image": "paper-figure-01.png",
+  "local_path": "paper-figure-01.png",
+  "sha256": "2df55c37eba6d306bac756c3ffadb5551cd0f955922b035008130c421675d235",
+  "original_sha256": "51a2507f37593b32a2a4238128910f948e0fa844a76c7c1335ab4375bb27b0a9",
+  "width": 1430,
+  "height": 990,
+  "license": "CC BY 4.0; figure copyright retained by the author",
+  "transformation": "author JPEG for the left panel converted to PNG at native size, with no crop or redesign",
+  "visual_review": "2026-11-06 目视核对线性投影、仅左填充因果卷积和相对距离偏置形状，文字与箭头清晰。",
+  "checked_on": "2026-11-06"
+}

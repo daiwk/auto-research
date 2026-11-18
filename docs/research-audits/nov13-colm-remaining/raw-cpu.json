@@ -1,0 +1,1573 @@
+{
+  "schema_version": 2,
+  "batch": "2026-11-13-colm-historical-review",
+  "device": "cpu",
+  "accelerator": "CPU",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "code_commit": "1b7fe8699efd48e6421b01f6df756d6e4086eb52",
+  "source_sha256": {
+    "scripts/run_nov13_colm_components.py": "a7a7420b47bdd9a34321846e535f4382a42d42ca03c94fe7772facca9b97892c",
+    "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+    "docs/research-audits/nov13-colm-remaining/preflight.json": "36667fa334aea3fb9141416ef12677c47cf93711e36e47993ee0543b4e885848",
+    "src/auto_research/foundation_models/rosetta_unification.py": "b27190f76ff2bd482f473486a6be4b8aa0d69564f9cd9311d7d4133cdd6cef60",
+    "src/auto_research/foundation_models/lidas.py": "ef7a496201c9f8f59af5d5bb0efc2ff728cdbe38821fdf80b62a4d5c47c67b64",
+    "src/auto_research/foundation_models/thinking_to_recall.py": "8f7ff5a0324c18b612fb25d4232aac998d37ef9d8957b8b60c4217ad1bc36c4e",
+    "src/auto_research/foundation_models/latent_generalization.py": "7fd61edabf36dbc420e270eb1092d4d71a9b34dce7bb68be25ab7729d7d9f04a",
+    "src/auto_research/agent_research/planning_optimality.py": "07cd3ab4c9e2db0e1c1564c0410e044341601cbc17d358d9227e4fa80a371189",
+    "src/auto_research/foundation_models/llm_stochasticity.py": "0445584730e405cb0c3b00be027cb099239a4c9c89ef5bc7f0f105e2ceff425f",
+    "src/auto_research/foundation_models/ecg_rag.py": "21e27bf9553af2dafaed1b240c55ff5be9eff9afdaf3d7f1fbe4a4b9e0a5daaa",
+    "src/auto_research/foundation_models/continuousbench.py": "d6ebbad425df69292e03387e4cdd9e738cbec5e9f056d4e832180fdb00b81180",
+    "src/auto_research/agent_research/clarification_sgp.py": "2c52e8f6f123de952112b878daf1e4fa76919b99ae1d5d0761e4878acf4d6ce4",
+    "src/auto_research/post_training/social_meta_learning.py": "d4b4f2ba9be58b83f39ecc1054219b347387ecdf50c2e100c32c0b6d07cb8b96",
+    "src/auto_research/agent_research/mt_pingeval.py": "631a31c0573327c9a71899314b147b9f7d1ece0e546bbac8a64889723d7bd2da",
+    "src/auto_research/post_training/maple_icl.py": "883f7bc6be631768bea138d53608002ce3023243ccecd2a327f61ced291cfeed",
+    "src/auto_research/agent_research/policybank.py": "ba641735f3645965ca82cdcc9653dbc384329c35c9292ef10dcb2baa8e4c343b",
+    "src/auto_research/agent_research/co_director.py": "2022749148497a432bbfc250dd455c5696bc19151ed778731c39bcbc967b0810",
+    "src/auto_research/agent_research/instruct_to_act.py": "e4e048a95e592f5c28ac108b32a5087a2a03af1c47304d69379109791753b83d",
+    "src/auto_research/foundation_models/qe_length_normalization.py": "daffd9781f4d1796b02c8af52a3f086e0a9913b9b2f9d752b7f1936261c8fe9a",
+    "src/auto_research/foundation_models/cultural_cue.py": "3988b6983c0d6c5e8060e0762da9eec488f6556118a95d038e806a324ce04e31",
+    "src/auto_research/foundation_models/decoding_constrained_beam.py": "55ece33c1534d320ad3c78826a7871eb6cbdbb419cd72c192ef08861db0e4519",
+    "src/auto_research/foundation_models/storyscope.py": "d7ecf53e834b2f9061f34a17f814f59de2c174f8d4ea8cb910f345170212a6f1",
+    "src/auto_research/post_training/behavioral_canaries.py": "76cf87e2424bae656117d5fa35cf1bdfc3a4fc6fecd1d7ad61620c2889d69174",
+    "src/auto_research/post_training/rlmf.py": "5c99b3e291e1b2f712d8ec76c632f83c2814cbd0e460ca102f2a89b6763f3b03",
+    "src/auto_research/multimodal/avmeme_exam.py": "557d9e6dbff97a9ef1befacc864cc95fe69d83308c15ac2dd4c3f17103a24a89",
+    "src/auto_research/multimodal/mmeb_v3.py": "c33d34bd6a224ee8897352547dc483786a63a64879b1916b1395e8d0af3b29ca"
+  },
+  "components": {
+    "rosetta-unification": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "metrics": {
+            "unification_ratio": 1.944640255237475,
+            "cross_language_cosine": 0.188261705493823
+          },
+          "checks": {
+            "finite_ratio": true,
+            "cosine_scale_invariant": true,
+            "self_set_mean_is_not_diagonal_one": true
+          },
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "metrics": {
+            "unification_ratio": 1.2853494212186531,
+            "cross_language_cosine": 0.2036211153199396
+          },
+          "checks": {
+            "finite_ratio": true,
+            "cosine_scale_invariant": true,
+            "self_set_mean_is_not_diagonal_one": true
+          },
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "metrics": {
+            "unification_ratio": 1.0156938980230261,
+            "cross_language_cosine": 0.17883635472759032
+          },
+          "checks": {
+            "finite_ratio": true,
+            "cosine_scale_invariant": true,
+            "self_set_mean_is_not_diagonal_one": true
+          },
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "lidas": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "metrics": {
+            "grown_depth": 12,
+            "loss": 2.255108322302135e-09,
+            "copied_gradient_norm": 1.2214584899084002e-08
+          },
+          "checks": {
+            "depth_increased_by_four": true,
+            "inherited_adam_moments": true,
+            "no_parameter_or_moment_alias": true,
+            "copied_layer_receives_gradient": true,
+            "copied_layer_updates": true,
+            "device_is_requested": true,
+            "prop1_conserves_steps": true
+          },
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "metrics": {
+            "grown_depth": 12,
+            "loss": 1.1219223772229725e-08,
+            "copied_gradient_norm": 1.3794982578474446e-07
+          },
+          "checks": {
+            "depth_increased_by_four": true,
+            "inherited_adam_moments": true,
+            "no_parameter_or_moment_alias": true,
+            "copied_layer_receives_gradient": true,
+            "copied_layer_updates": true,
+            "device_is_requested": true,
+            "prop1_conserves_steps": true
+          },
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "metrics": {
+            "grown_depth": 12,
+            "loss": 7.458438866514427e-10,
+            "copied_gradient_norm": 2.7142241787458943e-09
+          },
+          "checks": {
+            "depth_increased_by_four": true,
+            "inherited_adam_moments": true,
+            "no_parameter_or_moment_alias": true,
+            "copied_layer_receives_gradient": true,
+            "copied_layer_updates": true,
+            "device_is_requested": true,
+            "prop1_conserves_steps": true
+          },
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "thinking-to-recall": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "metrics": {
+            "all_expected_accuracy": 0.52,
+            "factual_expected_accuracy": 0.52,
+            "correct_factual_expected_accuracy": 1.0,
+            "retained_questions": 2,
+            "dropped_questions": 1,
+            "samples_per_question": 100
+          },
+          "checks": {
+            "shared_retained_questions": true,
+            "oracle_condition_is_explicit": true,
+            "no_runtime_selector": true,
+            "unbiased_passk_example": true
+          },
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "metrics": {
+            "all_expected_accuracy": 0.485,
+            "factual_expected_accuracy": 0.485,
+            "correct_factual_expected_accuracy": 1.0,
+            "retained_questions": 2,
+            "dropped_questions": 1,
+            "samples_per_question": 100
+          },
+          "checks": {
+            "shared_retained_questions": true,
+            "oracle_condition_is_explicit": true,
+            "no_runtime_selector": true,
+            "unbiased_passk_example": true
+          },
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "metrics": {
+            "all_expected_accuracy": 0.49,
+            "factual_expected_accuracy": 0.49,
+            "correct_factual_expected_accuracy": 1.0,
+            "retained_questions": 2,
+            "dropped_questions": 1,
+            "samples_per_question": 100
+          },
+          "checks": {
+            "shared_retained_questions": true,
+            "oracle_condition_is_explicit": true,
+            "no_runtime_selector": true,
+            "unbiased_passk_example": true
+          },
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "latent-generalization": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "metrics": {
+            "overall_precision": 1.0,
+            "overall_recall": 0.6666666666666666,
+            "overall_f1": 0.8,
+            "train_recall": 1.0,
+            "heldout_recall": 0.0,
+            "exact_set_match": 0.0,
+            "primary_reference_inclusion": 0.0,
+            "exact_set_pass_at_2": 0.6666666666666667
+          },
+          "checks": {
+            "exposed_recall_can_hide_heldout_failure": true,
+            "false_inclusion_invalidates_exact_match": true,
+            "primary_is_separate_from_overall": true
+          },
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "metrics": {
+            "overall_precision": 1.0,
+            "overall_recall": 0.6666666666666666,
+            "overall_f1": 0.8,
+            "train_recall": 1.0,
+            "heldout_recall": 0.0,
+            "exact_set_match": 0.0,
+            "primary_reference_inclusion": 0.0,
+            "exact_set_pass_at_2": 0.8666666666666667
+          },
+          "checks": {
+            "exposed_recall_can_hide_heldout_failure": true,
+            "false_inclusion_invalidates_exact_match": true,
+            "primary_is_separate_from_overall": true
+          },
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "metrics": {
+            "overall_precision": 1.0,
+            "overall_recall": 0.6666666666666666,
+            "overall_f1": 0.8,
+            "train_recall": 1.0,
+            "heldout_recall": 0.0,
+            "exact_set_match": 0.0,
+            "primary_reference_inclusion": 0.0,
+            "exact_set_pass_at_2": 0.8666666666666667
+          },
+          "checks": {
+            "exposed_recall_can_hide_heldout_failure": true,
+            "false_inclusion_invalidates_exact_match": true,
+            "primary_is_separate_from_overall": true
+          },
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "planning-optimality": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "metrics": {
+            "bfs_optimal_cost": 2,
+            "formula_optimal_cost": 2,
+            "valid_detour_relative_gap": 1.0
+          },
+          "checks": {
+            "formula_matches_independent_search": true,
+            "valid_is_not_optimal": true,
+            "invalid_plans_not_given_gap": true
+          },
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "metrics": {
+            "bfs_optimal_cost": 2,
+            "formula_optimal_cost": 2,
+            "valid_detour_relative_gap": 1.0
+          },
+          "checks": {
+            "formula_matches_independent_search": true,
+            "valid_is_not_optimal": true,
+            "invalid_plans_not_given_gap": true
+          },
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "metrics": {
+            "bfs_optimal_cost": 2,
+            "formula_optimal_cost": 2,
+            "valid_detour_relative_gap": 1.0
+          },
+          "checks": {
+            "formula_matches_independent_search": true,
+            "valid_is_not_optimal": true,
+            "invalid_plans_not_given_gap": true
+          },
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "llm-stochasticity": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "metrics": {
+            "chi_square": 0.0,
+            "marginal_p_value": 1.0,
+            "lag1_repeat_rate": 0.0,
+            "uniform_independent_repeat_reference": 0.25,
+            "max_transition_fraction": 0.25024437927663734,
+            "samples": 1024,
+            "independent_fixture_ks": 0.021593132123466363
+          },
+          "checks": {
+            "uniform_histogram_can_be_deterministic": true,
+            "temporal_repeat_exposes_cycle": true,
+            "reference_fixture_not_llm_output": true
+          },
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "metrics": {
+            "chi_square": 0.0,
+            "marginal_p_value": 1.0,
+            "lag1_repeat_rate": 0.0,
+            "uniform_independent_repeat_reference": 0.25,
+            "max_transition_fraction": 0.25024437927663734,
+            "samples": 1024,
+            "independent_fixture_ks": 0.017906594617067784
+          },
+          "checks": {
+            "uniform_histogram_can_be_deterministic": true,
+            "temporal_repeat_exposes_cycle": true,
+            "reference_fixture_not_llm_output": true
+          },
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "metrics": {
+            "chi_square": 0.0,
+            "marginal_p_value": 1.0,
+            "lag1_repeat_rate": 0.0,
+            "uniform_independent_repeat_reference": 0.25,
+            "max_transition_fraction": 0.25024437927663734,
+            "samples": 1024,
+            "independent_fixture_ks": 0.046276295162320125
+          },
+          "checks": {
+            "uniform_histogram_can_be_deterministic": true,
+            "temporal_repeat_exposes_cycle": true,
+            "reference_fixture_not_llm_output": true
+          },
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "ecg-rag": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "metrics": {
+            "total_loss": 19.681076049804688,
+            "generation_loss": 16.93920135498047,
+            "contrastive_loss": 0.9992753267288208,
+            "margin_loss": 1.7425999641418457,
+            "projection_gradient_l1": 217.9855710696429
+          },
+          "checks": {
+            "shared_projection_receives_gradients": true,
+            "teacher_is_frozen": true,
+            "alpha_and_temperature_trainable": true,
+            "finite_components": true,
+            "requested_device": true,
+            "compression_depends_on_stored_retrieval": true
+          },
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "metrics": {
+            "total_loss": 7.703153610229492,
+            "generation_loss": 4.700735092163086,
+            "contrastive_loss": 0.8422119617462158,
+            "margin_loss": 2.1602065563201904,
+            "projection_gradient_l1": 216.38231017440557
+          },
+          "checks": {
+            "shared_projection_receives_gradients": true,
+            "teacher_is_frozen": true,
+            "alpha_and_temperature_trainable": true,
+            "finite_components": true,
+            "requested_device": true,
+            "compression_depends_on_stored_retrieval": true
+          },
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "metrics": {
+            "total_loss": 4.485671520233154,
+            "generation_loss": 2.503783941268921,
+            "contrastive_loss": 1.1739234924316406,
+            "margin_loss": 0.8079639673233032,
+            "projection_gradient_l1": 80.83845101250336
+          },
+          "checks": {
+            "shared_projection_receives_gradients": true,
+            "teacher_is_frozen": true,
+            "alpha_and_temperature_trainable": true,
+            "finite_components": true,
+            "requested_device": true,
+            "compression_depends_on_stored_retrieval": true
+          },
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "continuousbench": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "metrics": {
+            "base_exact_match": 0.0,
+            "adapted_exact_match": 1.0,
+            "absolute_capability_gain": 1.0,
+            "examples": 1
+          },
+          "checks": {
+            "reference_baseline_is_not_assumed_zero": true,
+            "validation_selects_checkpoint": true,
+            "types_contains_is_not_exact_match": true,
+            "fixture_not_benchmark_capability": true
+          },
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "metrics": {
+            "base_exact_match": 0.0,
+            "adapted_exact_match": 1.0,
+            "absolute_capability_gain": 1.0,
+            "examples": 1
+          },
+          "checks": {
+            "reference_baseline_is_not_assumed_zero": true,
+            "validation_selects_checkpoint": true,
+            "types_contains_is_not_exact_match": true,
+            "fixture_not_benchmark_capability": true
+          },
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "metrics": {
+            "base_exact_match": 0.0,
+            "adapted_exact_match": 1.0,
+            "absolute_capability_gain": 1.0,
+            "examples": 1
+          },
+          "checks": {
+            "reference_baseline_is_not_assumed_zero": true,
+            "validation_selects_checkpoint": true,
+            "types_contains_is_not_exact_match": true,
+            "fixture_not_benchmark_capability": true
+          },
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "clarification-sgp": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "cost_changes_selected_sequence": true,
+            "balanced_not_lucky_max": true,
+            "one_best_per_interpretation": true,
+            "word_cost_uses_final_assistant_only": true,
+            "paper_cost_points_not_normalized_f1": true
+          },
+          "metrics": {
+            "low_cost_expected_reward": 88.0,
+            "high_cost_expected_reward": 50.0,
+            "selected_rollouts": 2
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "cost_changes_selected_sequence": true,
+            "balanced_not_lucky_max": true,
+            "one_best_per_interpretation": true,
+            "word_cost_uses_final_assistant_only": true,
+            "paper_cost_points_not_normalized_f1": true
+          },
+          "metrics": {
+            "low_cost_expected_reward": 88.0,
+            "high_cost_expected_reward": 50.0,
+            "selected_rollouts": 2
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "cost_changes_selected_sequence": true,
+            "balanced_not_lucky_max": true,
+            "one_best_per_interpretation": true,
+            "word_cost_uses_final_assistant_only": true,
+            "paper_cost_points_not_normalized_f1": true
+          },
+          "metrics": {
+            "low_cost_expected_reward": 88.0,
+            "high_cost_expected_reward": 50.0,
+            "selected_rollouts": 2
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "social-meta-learning": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "real_tensor_device": true,
+            "student_tokens_receive_gradient": true,
+            "teacher_tokens_excluded": true,
+            "failed_dialogue_excluded": true,
+            "exact_successful_ce": true,
+            "q_priming_failed_only": true
+          },
+          "execution_device": "cpu",
+          "metrics": {
+            "student_sft_loss": 0.12692804634571075,
+            "selected_student_tokens": 2,
+            "q_probability_t2": 0.5625
+          },
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "real_tensor_device": true,
+            "student_tokens_receive_gradient": true,
+            "teacher_tokens_excluded": true,
+            "failed_dialogue_excluded": true,
+            "exact_successful_ce": true,
+            "q_priming_failed_only": true
+          },
+          "execution_device": "cpu",
+          "metrics": {
+            "student_sft_loss": 0.12692804634571075,
+            "selected_student_tokens": 2,
+            "q_probability_t2": 0.5625
+          },
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "real_tensor_device": true,
+            "student_tokens_receive_gradient": true,
+            "teacher_tokens_excluded": true,
+            "failed_dialogue_excluded": true,
+            "exact_successful_ce": true,
+            "q_priming_failed_only": true
+          },
+          "execution_device": "cpu",
+          "metrics": {
+            "student_sft_loss": 0.12692804634571075,
+            "selected_student_tokens": 2,
+            "q_probability_t2": 0.5625
+          },
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "mt-pingeval": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "private_view_has_no_other_database": true,
+            "same_name_not_enough": true,
+            "correct_record_selected": true,
+            "isotoken_example_matches_paper": true,
+            "truncation_charged_actual_ids": true
+          },
+          "metrics": {
+            "contract_checks": 5,
+            "tokens_per_utterance": 16,
+            "accepted_token_ids": 16
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "private_view_has_no_other_database": true,
+            "same_name_not_enough": true,
+            "correct_record_selected": true,
+            "isotoken_example_matches_paper": true,
+            "truncation_charged_actual_ids": true
+          },
+          "metrics": {
+            "contract_checks": 5,
+            "tokens_per_utterance": 16,
+            "accepted_token_ids": 16
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "private_view_has_no_other_database": true,
+            "same_name_not_enough": true,
+            "correct_record_selected": true,
+            "isotoken_example_matches_paper": true,
+            "truncation_charged_actual_ids": true
+          },
+          "metrics": {
+            "contract_checks": 5,
+            "tokens_per_utterance": 16,
+            "accepted_token_ids": 16
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "maple-icl": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "exact_categorical_match_first": true,
+            "not_numeric_euclidean": true,
+            "donated_text_not_regenerated": true,
+            "no_dp_claim_or_private_training": true
+          },
+          "metrics": {
+            "selected_examples": 2,
+            "best_hamming_count": 0,
+            "schema_fields": 2
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "exact_categorical_match_first": true,
+            "not_numeric_euclidean": true,
+            "donated_text_not_regenerated": true,
+            "no_dp_claim_or_private_training": true
+          },
+          "metrics": {
+            "selected_examples": 2,
+            "best_hamming_count": 0,
+            "schema_fields": 2
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "exact_categorical_match_first": true,
+            "not_numeric_euclidean": true,
+            "donated_text_not_regenerated": true,
+            "no_dp_claim_or_private_training": true
+          },
+          "metrics": {
+            "selected_examples": 2,
+            "best_hamming_count": 0,
+            "schema_fields": 2
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "policybank": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l0_interface",
+          "checks": {
+            "header_selection_before_full_entry": true,
+            "revision_same_capability_not_duplicate": true,
+            "omit_does_not_rewrite_memory": true,
+            "developer_feedback_provenance_preserved": true
+          },
+          "metrics": {
+            "capabilities": 1,
+            "audited_changes": 2,
+            "semantic_repairs_measured": 0
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l0_interface",
+          "checks": {
+            "header_selection_before_full_entry": true,
+            "revision_same_capability_not_duplicate": true,
+            "omit_does_not_rewrite_memory": true,
+            "developer_feedback_provenance_preserved": true
+          },
+          "metrics": {
+            "capabilities": 1,
+            "audited_changes": 2,
+            "semantic_repairs_measured": 0
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l0_interface",
+          "checks": {
+            "header_selection_before_full_entry": true,
+            "revision_same_capability_not_duplicate": true,
+            "omit_does_not_rewrite_memory": true,
+            "developer_feedback_provenance_preserved": true
+          },
+          "metrics": {
+            "capabilities": 1,
+            "audited_changes": 2,
+            "semantic_repairs_measured": 0
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l0_interface"
+    },
+    "co-director": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "recommendation_first_unpulled": true,
+            "unpulled_explored_before_ucb": true,
+            "factor_specific_update": true,
+            "quality_selection_not_strategic_sum": true,
+            "three_axes_not36_joint_paths": true
+          },
+          "metrics": {
+            "external_evaluation_fixtures": 2,
+            "factored_arm_count": 10,
+            "best_fixture_quality": 90.0
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "recommendation_first_unpulled": true,
+            "unpulled_explored_before_ucb": true,
+            "factor_specific_update": true,
+            "quality_selection_not_strategic_sum": true,
+            "three_axes_not36_joint_paths": true
+          },
+          "metrics": {
+            "external_evaluation_fixtures": 2,
+            "factored_arm_count": 10,
+            "best_fixture_quality": 90.0
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "checks": {
+            "recommendation_first_unpulled": true,
+            "unpulled_explored_before_ucb": true,
+            "factor_specific_update": true,
+            "quality_selection_not_strategic_sum": true,
+            "three_axes_not36_joint_paths": true
+          },
+          "metrics": {
+            "external_evaluation_fixtures": 2,
+            "factored_arm_count": 10,
+            "best_fixture_quality": 90.0
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "instruct-to-act": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "checks": {
+            "actual_tensor_device": true,
+            "completion_only_interval_end": true,
+            "bc_not_unannotated_or_padding": true,
+            "unannotated_stop_negative": true,
+            "end_stop_positive": true,
+            "padding_stop_zero": true,
+            "exact_sum_reduction": true
+          },
+          "metrics": {
+            "bc_loss": 0.31326165795326233,
+            "stop_loss": 2.079441547393799,
+            "total_loss": 2.3927032947540283,
+            "annotated_steps": 2
+          },
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "checks": {
+            "actual_tensor_device": true,
+            "completion_only_interval_end": true,
+            "bc_not_unannotated_or_padding": true,
+            "unannotated_stop_negative": true,
+            "end_stop_positive": true,
+            "padding_stop_zero": true,
+            "exact_sum_reduction": true
+          },
+          "metrics": {
+            "bc_loss": 0.31326165795326233,
+            "stop_loss": 2.079441547393799,
+            "total_loss": 2.3927032947540283,
+            "annotated_steps": 2
+          },
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "execution_device": "cpu",
+          "checks": {
+            "actual_tensor_device": true,
+            "completion_only_interval_end": true,
+            "bc_not_unannotated_or_padding": true,
+            "unannotated_stop_negative": true,
+            "end_stop_positive": true,
+            "padding_stop_zero": true,
+            "exact_sum_reduction": true
+          },
+          "metrics": {
+            "bc_loss": 0.31326165795326233,
+            "stop_loss": 2.079441547393799,
+            "total_loss": 2.3927032947540283,
+            "annotated_steps": 2
+          },
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "qe-length-normalization": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "max_round_trip_error": 0.0,
+            "controlled_passages": 5,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "training_target_round_trip": true,
+            "whole_document_prefixes": true,
+            "whole_group_rejected_above_cap": true,
+            "bias_is_within_document": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "max_round_trip_error": 0.0,
+            "controlled_passages": 5,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "training_target_round_trip": true,
+            "whole_document_prefixes": true,
+            "whole_group_rejected_above_cap": true,
+            "bias_is_within_document": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "max_round_trip_error": 0.0,
+            "controlled_passages": 5,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "training_target_round_trip": true,
+            "whole_document_prefixes": true,
+            "whole_group_rejected_above_cap": true,
+            "bias_is_within_document": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "cultural-cue": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "selected_features": 2,
+            "direction_norm": 0.4731836627231898,
+            "steering_formula_error": 0.0,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "cumulative_mi_not_feature_count": true,
+            "token_padding_excluded": true,
+            "country_not_example_weighted_baseline": true,
+            "residual_addition_exact": true,
+            "country_labels_preserved": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "selected_features": 2,
+            "direction_norm": 0.3432432518392542,
+            "steering_formula_error": 0.0,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "cumulative_mi_not_feature_count": true,
+            "token_padding_excluded": true,
+            "country_not_example_weighted_baseline": true,
+            "residual_addition_exact": true,
+            "country_labels_preserved": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "selected_features": 2,
+            "direction_norm": 0.4664142399210589,
+            "steering_formula_error": 0.0,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "cumulative_mi_not_feature_count": true,
+            "token_padding_excluded": true,
+            "country_not_example_weighted_baseline": true,
+            "residual_addition_exact": true,
+            "country_labels_preserved": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "decoding-constrained-beam": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "mass_error": 1.1102230246251565e-16,
+            "narrow_lower_bound": 0.6639426798457884,
+            "narrow_upper_bound": 1.0,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "renormalized_mass_exact": true,
+            "narrow_beam_lower_bound": true,
+            "bank_covers_unexplored_viable_mass": true,
+            "final_expansion_not_pruned_to_B": true,
+            "levenshtein_final_check": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "mass_error": 1.1102230246251565e-16,
+            "narrow_lower_bound": 0.603855183933738,
+            "narrow_upper_bound": 1.0,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "renormalized_mass_exact": true,
+            "narrow_beam_lower_bound": true,
+            "bank_covers_unexplored_viable_mass": true,
+            "final_expansion_not_pruned_to_B": true,
+            "levenshtein_final_check": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "mass_error": 1.1102230246251565e-16,
+            "narrow_lower_bound": 0.6408535879254492,
+            "narrow_upper_bound": 0.9999999999999999,
+            "pretrained_model_calls": 0
+          },
+          "checks": {
+            "renormalized_mass_exact": true,
+            "narrow_beam_lower_bound": true,
+            "bank_covers_unexplored_viable_mass": true,
+            "final_expansion_not_pruned_to_B": true,
+            "levenshtein_final_check": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "storyscope": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "selected_core_features": 1,
+            "bootstrap_iterations": 50,
+            "pretrained_model_calls": 0,
+            "trained_classifiers": 0
+          },
+          "checks": {
+            "all_core_conditions_required": true,
+            "cross_model_spread_rejects_source_only_signal": true,
+            "prompt_blocks_not_individual_stories": true,
+            "fifty_bootstrap_draws": true,
+            "signed_role": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "selected_core_features": 1,
+            "bootstrap_iterations": 50,
+            "pretrained_model_calls": 0,
+            "trained_classifiers": 0
+          },
+          "checks": {
+            "all_core_conditions_required": true,
+            "cross_model_spread_rejects_source_only_signal": true,
+            "prompt_blocks_not_individual_stories": true,
+            "fifty_bootstrap_draws": true,
+            "signed_role": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "selected_core_features": 1,
+            "bootstrap_iterations": 50,
+            "pretrained_model_calls": 0,
+            "trained_classifiers": 0
+          },
+          "checks": {
+            "all_core_conditions_required": true,
+            "cross_model_spread_rejects_source_only_signal": true,
+            "prompt_blocks_not_individual_stories": true,
+            "fifty_bootstrap_draws": true,
+            "signed_role": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "behavioral-canaries": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "synthetic_amplification": 3.1574534642159584,
+            "zero_control_amplification": 0.0,
+            "pretrained_model_calls": 0,
+            "trained_policies": 0
+          },
+          "checks": {
+            "paired_direction_positive": true,
+            "swap_reverses_statistic": true,
+            "identical_context_is_zero": true,
+            "document_leakage_rejected": true,
+            "tie_aware_policy_auroc": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "synthetic_amplification": 2.6933888202965157,
+            "zero_control_amplification": 0.0,
+            "pretrained_model_calls": 0,
+            "trained_policies": 0
+          },
+          "checks": {
+            "paired_direction_positive": true,
+            "swap_reverses_statistic": true,
+            "identical_context_is_zero": true,
+            "document_leakage_rejected": true,
+            "tie_aware_policy_auroc": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "synthetic_amplification": 2.993670487945342,
+            "zero_control_amplification": 0.0,
+            "pretrained_model_calls": 0,
+            "trained_policies": 0
+          },
+          "checks": {
+            "paired_direction_positive": true,
+            "swap_reverses_statistic": true,
+            "identical_context_is_zero": true,
+            "document_leakage_rejected": true,
+            "tie_aware_policy_auroc": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "rlmf": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "advantage_formula_error": 0.0,
+            "synthetic_fc": 0.6666666666666666,
+            "pretrained_model_calls": 0,
+            "training_steps": 0
+          },
+          "checks": {
+            "eq4_selective_faithfulness_boost": true,
+            "negative_faithfulness_not_boosted": true,
+            "strict_tau_boundary": true,
+            "perfect_self_judgment_feedback_one": true,
+            "balanced_training_tail_selection": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "advantage_formula_error": 0.0,
+            "synthetic_fc": 0.6666666666666666,
+            "pretrained_model_calls": 0,
+            "training_steps": 0
+          },
+          "checks": {
+            "eq4_selective_faithfulness_boost": true,
+            "negative_faithfulness_not_boosted": true,
+            "strict_tau_boundary": true,
+            "perfect_self_judgment_feedback_one": true,
+            "balanced_training_tail_selection": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "device": "cpu",
+          "diagnostic_only": true,
+          "evaluation_tier": "l1_mechanism",
+          "metrics": {
+            "advantage_formula_error": 0.0,
+            "synthetic_fc": 0.6666666666666666,
+            "pretrained_model_calls": 0,
+            "training_steps": 0
+          },
+          "checks": {
+            "eq4_selective_faithfulness_boost": true,
+            "negative_faithfulness_not_boosted": true,
+            "strict_tau_boundary": true,
+            "perfect_self_judgment_feedback_one": true,
+            "balanced_training_tail_selection": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l1_mechanism"
+    },
+    "avmeme-exam": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l0_interface",
+          "metrics": {
+            "eligible_fixture_items": 2,
+            "filtered_shortcut_items": 1,
+            "visual_masked_items": 1,
+            "invalid_response_items": 3
+          },
+          "checks": {
+            "main_excludes_text_shortcuts": true,
+            "visual_shortcut_masked": true,
+            "shuffle_preserves_private_key_mapping": true,
+            "actor_fields_are_label_blind": true,
+            "invalid_outputs_are_not_guessed": true,
+            "analysis_counts_preserved": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l0_interface",
+          "metrics": {
+            "eligible_fixture_items": 2,
+            "filtered_shortcut_items": 1,
+            "visual_masked_items": 1,
+            "invalid_response_items": 3
+          },
+          "checks": {
+            "main_excludes_text_shortcuts": true,
+            "visual_shortcut_masked": true,
+            "shuffle_preserves_private_key_mapping": true,
+            "actor_fields_are_label_blind": true,
+            "invalid_outputs_are_not_guessed": true,
+            "analysis_counts_preserved": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l0_interface",
+          "metrics": {
+            "eligible_fixture_items": 2,
+            "filtered_shortcut_items": 1,
+            "visual_masked_items": 1,
+            "invalid_response_items": 3
+          },
+          "checks": {
+            "main_excludes_text_shortcuts": true,
+            "visual_shortcut_masked": true,
+            "shuffle_preserves_private_key_mapping": true,
+            "actor_fields_are_label_blind": true,
+            "invalid_outputs_are_not_guessed": true,
+            "analysis_counts_preserved": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l0_interface"
+    },
+    "mmeb-v3": {
+      "per_seed": [
+        {
+          "seed": 42,
+          "diagnostic_only": true,
+          "evaluation_tier": "l0_interface",
+          "metrics": {
+            "fixture_linear_ndcg_at_five": 0.7967075809905066,
+            "fixture_exponential_ndcg_at_five": 0.7098097413968655,
+            "directed_cross_modal_pairs": 12,
+            "shared_fixture_pool_size": 8
+          },
+          "checks": {
+            "gain_variants_not_silently_mixed": true,
+            "hit_categories_use_top_one": true,
+            "task_mean_not_query_weighted": true,
+            "same_instance_is_not_a_correct_target": true,
+            "target_semantics_and_modality_both_required": true,
+            "omniset_not_a_leaderboard_task": true,
+            "all_twelve_directed_pairs": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 43,
+          "diagnostic_only": true,
+          "evaluation_tier": "l0_interface",
+          "metrics": {
+            "fixture_linear_ndcg_at_five": 0.7967075809905066,
+            "fixture_exponential_ndcg_at_five": 0.7098097413968655,
+            "directed_cross_modal_pairs": 12,
+            "shared_fixture_pool_size": 8
+          },
+          "checks": {
+            "gain_variants_not_silently_mixed": true,
+            "hit_categories_use_top_one": true,
+            "task_mean_not_query_weighted": true,
+            "same_instance_is_not_a_correct_target": true,
+            "target_semantics_and_modality_both_required": true,
+            "omniset_not_a_leaderboard_task": true,
+            "all_twelve_directed_pairs": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        },
+        {
+          "seed": 44,
+          "diagnostic_only": true,
+          "evaluation_tier": "l0_interface",
+          "metrics": {
+            "fixture_linear_ndcg_at_five": 0.7967075809905066,
+            "fixture_exponential_ndcg_at_five": 0.7098097413968655,
+            "directed_cross_modal_pairs": 12,
+            "shared_fixture_pool_size": 8
+          },
+          "checks": {
+            "gain_variants_not_silently_mixed": true,
+            "hit_categories_use_top_one": true,
+            "task_mean_not_query_weighted": true,
+            "same_instance_is_not_a_correct_target": true,
+            "target_semantics_and_modality_both_required": true,
+            "omniset_not_a_leaderboard_task": true,
+            "all_twelve_directed_pairs": true
+          },
+          "execution_device": "cpu",
+          "execution_accelerator": "CPU"
+        }
+      ],
+      "evaluation_tier": "l0_interface"
+    }
+  },
+  "elapsed_seconds": 4.126982290996239,
+  "diagnostic_only": true,
+  "evaluation_tier": "mixed_l0_interface_l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "pretrained_model_calls": 0,
+  "full_experiments_executed": false,
+  "automatic_retry": false
+}

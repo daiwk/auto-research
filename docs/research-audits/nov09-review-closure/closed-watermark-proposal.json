@@ -1,0 +1,139 @@
+{
+  "schema_version": 2,
+  "policy": "review-with-coverage-and-archived-exceptions-v2",
+  "checked_on": "2026-11-11",
+  "user_authorized_exceptions": true,
+  "authorization_record": "2026-10-10 retired source-exhaustiveness; 2026-10-15 high-cost no reproduction is review DONE; 2026-11-11 user explicitly approved P2 title/abstract selection closure, not verification of every method. Google/Meta and possible production A/B still require priority primary review.",
+  "window": {
+    "start": "2026-10-16",
+    "end": "2026-11-09"
+  },
+  "review_watermark": "2026-11-09",
+  "review_as_of": "2026-11-09T18:23:24+08:00",
+  "review_semantics": "selection-screening-with-protected-primary-review",
+  "selection_review_complete": true,
+  "method_review_complete": false,
+  "selection_policy": "research-audits/nov09-review-closure/p2-selection-policy.json",
+  "all_sources_exhaustive": false,
+  "implementation_complete": false,
+  "candidate_register": "research-audits/nov09-review-closure/paper-register.json",
+  "retrieval_receipts": [
+    {
+      "track": "recommendation",
+      "mode": "submission-window",
+      "artifact": "research-audits/nov09-review-closure/recommendation-submission-window-retrieval.json"
+    },
+    {
+      "track": "recommendation",
+      "mode": "late-index",
+      "artifact": "research-audits/nov09-review-closure/recommendation-late-index-retrieval.json"
+    },
+    {
+      "track": "foundation-model",
+      "mode": "submission-window",
+      "artifact": "research-audits/nov09-review-closure/foundation-model-submission-window-retrieval.json"
+    },
+    {
+      "track": "foundation-model",
+      "mode": "late-index",
+      "artifact": "research-audits/nov09-review-closure/foundation-model-late-index-retrieval.json"
+    },
+    {
+      "track": "post-training",
+      "mode": "submission-window",
+      "artifact": "research-audits/nov09-review-closure/post-training-submission-window-retrieval.json"
+    },
+    {
+      "track": "post-training",
+      "mode": "late-index",
+      "artifact": "research-audits/nov09-review-closure/post-training-late-index-retrieval.json"
+    },
+    {
+      "track": "agent",
+      "mode": "submission-window",
+      "artifact": "research-audits/nov09-review-closure/agent-submission-window-retrieval.json"
+    },
+    {
+      "track": "agent",
+      "mode": "late-index",
+      "artifact": "research-audits/nov09-review-closure/agent-late-index-retrieval.json"
+    }
+  ],
+  "source_reviews": [
+    {
+      "organization": "Google",
+      "artifact": "research-audits/nov09-review-closure/google-source-review.json"
+    },
+    {
+      "organization": "Google DeepMind",
+      "artifact": "research-audits/nov09-review-closure/google-deepmind-source-review.json"
+    },
+    {
+      "organization": "Meta",
+      "artifact": "research-audits/nov09-review-closure/meta-source-review.json"
+    }
+  ],
+  "exception_archive": "research-audits/nov09-review-closure/exception-archive.json",
+  "next_scan_start_with_overlap": "2026-11-08",
+  "exception_reopening_policy": "Only new identity/date/document/independent source evidence reopens archived sources; no automatic retry. New priority/production or changed metadata can reopen a P2 selection; it is not an originality rejection.",
+  "coverage_scope": {
+    "tracks": [
+      "recommendation",
+      "foundation-model",
+      "post-training",
+      "agent"
+    ],
+    "recall_modes": [
+      "submission-window",
+      "late-index"
+    ],
+    "official_sources": [
+      {
+        "organization": "Google",
+        "records": 125,
+        "pages": 31
+      },
+      {
+        "organization": "Google DeepMind",
+        "records": 4,
+        "pages": 9
+      },
+      {
+        "organization": "Meta",
+        "records": 11,
+        "pages": 8
+      }
+    ],
+    "counts": {
+      "raw_unique_identities": 9677,
+      "in_window_identities": 5164,
+      "late_index_or_missing_date_scope_triage_pending": 0,
+      "late_index_date_scope_only_excluded": 395,
+      "late_index_metadata_scope_only_excluded": 38,
+      "post_capture_tail_identities": 122,
+      "post_capture_tail_review_pending": 0,
+      "post_capture_tail_metadata_scope_only_excluded": 42,
+      "existing_disposition": 112,
+      "metadata_scope_only_excluded": 441,
+      "new_primary_decisions": 318,
+      "newer_versions_pending": 0,
+      "p2_selection_only_closed": 4293,
+      "pending_identity_review": 0,
+      "registered_unique_identities": 9803,
+      "primary_decisions": 613
+    },
+    "limitations": [
+      "Review watermark is selection screening plus protected primary-source decisions, not method verification for every paper.",
+      "Fixed four-track/two-mode containing recall with actual split replacements; no all-web or all-site exhaustiveness.",
+      "Late-index captures have the pinned intraday cutoff; the official Atom adds first releases to November 9 midnight, not all later revisions.",
+      "P2 nonselection is window-only, preserves novelty and does not establish actual affiliation absence from abstract evidence.",
+      "No new implementation, training, GPU receipt, capability gain, or executable evolve integration is implied.",
+      "Official-source subreview: Only exact-URL inherited per-record terminal decisions count as known/historical; unresolved title-only matches are explicit nonblocking exceptions, not manufactured identities.",
+      "Official-source subreview: 45 prior directory pages are dated transport/list receipts. Their450/266/144URLcounts do not mean this follow-up read those manuscripts.",
+      "Official-source subreview: Current Google last-page31 was retrieved and its nine exact detail/Download identities reviewed: seven historical, one out of scope, one after the Shanghai Nov9 cutoff. Google current pages2–30 were not recrawled; old30-page receipts are finite inherited coverage, not a current whole-site exhaustion claim.",
+      "Official-source subreview: Current DeepMind first-page30 URLs compared with the inherited Oct29 exact nine-page266-URL set produce two identified differences, one known and one historical. The reported268 total does not establish a further unknown candidate; no fresh pages2–9 exhaustion claim.",
+      "Official-source subreview: Meta primary unavailable and alternate landing curated; no whole Meta or whole web exhaustive claim.",
+      "Official-source subreview: No experiments, training, implementation, automatic retry, deployment or global watermark/register modification."
+    ]
+  }
+}

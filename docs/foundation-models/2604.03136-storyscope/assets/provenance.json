@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "paper_id": "2604.03136v1",
+  "figure": "Figure 1",
+  "source_url": "https://arxiv.org/html/2604.03136v1/storyscope_pipeline2.png",
+  "source_kind": "original_html_asset",
+  "source_html_sha256": "5425656a5459fb6fb9079e3d1674e6c7a399d26cb28a269427c26ab87f43ddcc",
+  "asset": "paper-figure-01.png",
+  "asset_sha256": "9872d8d894f4640a92eca553d2910e1b523cab6cc0c2140d0f3061dcd620b3a7",
+  "caption": "Narrative templates, comparative feature discovery and source attribution.",
+  "copyright": "Original authors",
+  "reviewed_on": "2026-11-13",
+  "rendered_and_visually_reviewed": true,
+  "local_result": false
+}

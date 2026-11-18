@@ -1,0 +1,42 @@
+{
+  "domain": "multimodal-models",
+  "key": "rs-jepa",
+  "title": "RS-JEPA: Remote Sensing Joint-Embedding Predictive Architecture with Scan-Path Views for Cross-Sensor Image Retrieval",
+  "paper_url": "https://arxiv.org/abs/2611.14496",
+  "reviewed_version": "2611.14496v1",
+  "detail_path": "multimodal-models/2611.14496-rs-jepa/README.md",
+  "topic": [
+    "JEPA 表征学习",
+    "扫描路径与跨传感器邻域对齐"
+  ],
+  "first_author": "Tanishq Rachamalla",
+  "first_author_affiliation": "Prince Mohammad Bin Fahd University",
+  "published": "2026-11-10",
+  "published_at": "2026-11-10T18:51:05Z",
+  "code": "https://github.com/Tanishq251/RSJEPA",
+  "code_status": "原文链接的作者仓库已核实；未复制源码、下载权重或数据。",
+  "adapter": null,
+  "priority": "P1",
+  "implementation_status": "component_only",
+  "local_operator": "auto_research.multimodal.rs_jepa.neighbourhood_consensus",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.multimodal.rs_jepa import diagnostic; print(diagnostic(42, device=\"cuda\"))'",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": true,
+  "gpu_validation_passed": true,
+  "gpu_validation_artifact": "docs/gpu-validations/rs-jepa-a100-20261111.json",
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "cost_assessment": {
+    "source": "https://arxiv.org/html/2611.14496v1#S4.SS2",
+    "available_resource": "单张 A100/A30 或本地 Mac",
+    "basis": "12层Vim+6层predictor+4CVA，batch290训练100epoch；三paired dataset（DSRSID训练56k对）、独立重复及重训基线，原实验四V100。完整grid不跑，廉价独立tensor算子单独CUDA验证。"
+  },
+  "fidelity_note": "四扫描排列、Eq5 hard half-split/直通反梯度、Eq8–9排除同pair的四分布共识；没有替身Vim、CVA/predictor全网络或图像检索成绩。",
+  "summary": "RS-JEPA以同一图像的扫描次序构造JEPA视图，联合对抗划分与跨传感器邻域一致性训练小型检索器。本地仅执行扫描、反梯度划分及共识损失，完整三数据集实验不复现。"
+}

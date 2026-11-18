@@ -1,0 +1,261 @@
+{
+  "schema_version": 1,
+  "scope": "Decisions verified against pinned primary sources for papers escalated by late-index-scope.json; cited full-text sections or explicitly bounded abstracts only, no inference about unlisted candidates, and no implementation is claimed.",
+  "review_count": 8,
+  "reviews": [
+    {
+      "id": "2610.21091",
+      "title": "MemComposer: Learning to Assemble Memories for LLM Agents via Reinforcement Learning",
+      "track": "agent",
+      "published": "2026-10-15T01:47:06Z",
+      "updated": "2026-10-24T01:28:57Z",
+      "revision": 2,
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.21091v2",
+      "locations": [
+        "§§3.3–3.4",
+        "§4",
+        "Appendix E: Training cost"
+      ],
+      "reason": "以执行器多次试跑的任务结果为奖励，训练记忆编排器有序选择经验轨迹。完整复现的算力超出单卡预算。",
+      "signals": [
+        "update_in_requested_window"
+      ],
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.21091v2",
+        "basis": "verified_paper_experiment_configuration",
+        "scale": "原文区分训练与推理：4B 版在各领域使用 1 张 H100 训练，并用 5 或 7 张 H100 做推理；8B 版需要 2 张 H100，并使用 Bedrock。",
+        "available_resource": "one A100 or A30, or a local Mac",
+        "cost_type": "模型训练与多实例推理"
+      }
+    },
+    {
+      "id": "2610.21561",
+      "title": "DialFork: Going Beyond Factuality to Evaluate Procedural Hallucination in Conversational Agents",
+      "track": "agent",
+      "published": "2026-10-15T09:18:32Z",
+      "updated": "2026-10-30T16:29:18Z",
+      "revision": 5,
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.21561v5",
+      "locations": [
+        "§§4–6",
+        "Appendix E: Generator choice"
+      ],
+      "reason": "用带分叉的对话任务评测流程性幻觉，而不只比较回答的事实正确性。完整数据生成超出单卡预算；不等同于无法读取已公开的数据。",
+      "signals": [
+        "arxiv_announcement_in_window",
+        "update_in_requested_window",
+        "v1_between_prior_cutoff_and_window"
+      ],
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.21561v5",
+        "basis": "verified_paper_experiment_configuration",
+        "scale": "作者报告 36,278 条合成对话、约 75 万轮；用 31B Gemma 4 生成，每个生成作业使用一张 V100，合计约 33 GPU 日。",
+        "available_resource": "one A100 or A30, or a local Mac",
+        "cost_type": "数据生成与完整评测"
+      },
+      "upstream_code_url": "https://github.com/idiap/dialfork"
+    },
+    {
+      "id": "2610.21640",
+      "title": "ReFlow: Replay-Driven Decoupling for Efficient RL Post-Training",
+      "track": "post-training",
+      "published": "2026-10-15T10:21:41Z",
+      "updated": "2026-10-15T10:21:41Z",
+      "revision": 1,
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.21640v1",
+      "locations": [
+        "§§3–6",
+        "§§7.1–7.2"
+      ],
+      "reason": "以经验回放将 rollout 和 trainer 解耦，调度各阶段资源并比较单轮、多轮 RL 后训练。完整分布式实验不复现。",
+      "signals": [
+        "update_between_prior_cutoff_and_window",
+        "v1_between_prior_cutoff_and_window"
+      ],
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.21640v1",
+        "basis": "verified_paper_experiment_configuration",
+        "scale": "原文系统实验使用 16 节点、128 张 H800，比较 Qwen3 的 4B、8B、14B、32B 版本和 DAPO-Math-17K/APPS。",
+        "available_resource": "one A100 or A30, or a local Mac",
+        "cost_type": "分布式后训练与系统扩展性"
+      }
+    },
+    {
+      "id": "2610.21810",
+      "title": "N-Gram Memories at Two Bits: Quantizing Lookup Tables in Large Language Models",
+      "track": "foundation-model",
+      "published": "2026-10-15T12:57:19Z",
+      "updated": "2026-10-21T01:39:30Z",
+      "revision": 3,
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.21810v3",
+      "locations": [
+        "§§3–4",
+        "§5.2",
+        "Appendix G"
+      ],
+      "reason": "将条件 N-gram 查找表逐行编码，利用 Gaussian trellis 量化并恢复行范数；完整模型显存和服务规模超预算。",
+      "signals": [
+        "arxiv_announcement_in_window",
+        "update_in_requested_window",
+        "v1_between_prior_cutoff_and_window"
+      ],
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.21810v3",
+        "basis": "verified_paper_experiment_configuration",
+        "scale": "原文用 4 或 8 张 H200 部署 DeepSeek 骨干及独立查找表；4 卡设定下，未压缩的 FP8 查找表一项约占每卡 50.7 GB。",
+        "available_resource": "one A100 or A30, or a local Mac",
+        "cost_type": "大模型多卡服务与评测"
+      }
+    },
+    {
+      "id": "2610.22448",
+      "title": "Lean4AgenticRL: Advancing Agentic RL with Verifiable Multi-level Process Rewards",
+      "track": "post-training",
+      "published": "2026-10-15T15:26:54Z",
+      "updated": "2026-10-15T15:26:54Z",
+      "revision": 1,
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.22448v1",
+      "locations": [
+        "§§2.3–2.4",
+        "§3.2",
+        "Table 1"
+      ],
+      "reason": "把 Lean 4 中可验证的工作流阶段和工具调用转为多层过程奖励，再做异步 Agent RL；完整训练成本超预算。",
+      "signals": [
+        "update_between_prior_cutoff_and_window",
+        "v1_between_prior_cutoff_and_window"
+      ],
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.22448v1",
+        "basis": "verified_paper_experiment_configuration",
+        "scale": "原文系统配置为 64 张 H200；报告 9B 和 27B 的完整训练分别约需 160 和 240 小时墙钟时间。",
+        "available_resource": "one A100 or A30, or a local Mac",
+        "cost_type": "异步强化学习训练"
+      }
+    },
+    {
+      "id": "2610.23946",
+      "title": "How Data Scales in Agentic Reinforcement Learning: Laws and Synthesis Strategies",
+      "track": "post-training",
+      "published": "2026-10-08T15:55:21Z",
+      "updated": "2026-10-20T01:59:17Z",
+      "revision": 2,
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.23946v2",
+      "locations": [
+        "§3.1",
+        "§§4、6",
+        "Appendix Q"
+      ],
+      "reason": "分开扩大环境、任务和轨迹数量，研究 Agent RL 数据规模规律和合成轨迹折扣。完整 scaling sweep 不复现。",
+      "signals": [
+        "update_in_requested_window"
+      ],
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.23946v2",
+        "basis": "verified_paper_experiment_configuration",
+        "scale": "附录 Q 记录约 61,000 H100 GPU 小时训练（首版约 48,000，v2 新增约 13,000）；合成数据另需约 3,500 H100 GPU 小时及约 2,800 美元 API 成本。",
+        "available_resource": "one A100 or A30, or a local Mac",
+        "cost_type": "全规模训练扫描与合成数据"
+      }
+    },
+    {
+      "id": "2610.28639",
+      "title": "Can AI Chat Replace Traditional Search? Evidence from a RAG-based Live Events Experiment",
+      "track": "recommendation",
+      "published": "2026-08-20T02:36:58Z",
+      "updated": "2026-08-20T02:36:58Z",
+      "revision": 1,
+      "priority": "P1",
+      "source_url": "https://arxiv.org/html/2610.28639v1",
+      "locations": [
+        "§§3.1–3.4",
+        "§4"
+      ],
+      "reason": "正文报告 CloudResearch Connect 招募的随机分组界面对照：389 人入组，排除后分析 362 人。比较的是抓取的活动数据上的研究任务，不是线上业务生产流量实验，也不构成全流量部署证据。",
+      "signals": [
+        "arxiv_announcement_in_window"
+      ],
+      "decision": "rejected",
+      "resolution": "industrial_evidence_gate_not_met",
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "production_gate_passed": false
+    },
+    {
+      "id": "2611.08494",
+      "title": "Embedding Consistent Recurrent Neural Networks in Finite Element Simulations for Path-Dependent Damage Prediction",
+      "track": "foundation-model",
+      "published": "2026-07-30T08:28:30Z",
+      "updated": "2026-07-30T08:28:30Z",
+      "revision": 1,
+      "priority": "P2",
+      "source_url": "https://arxiv.org/abs/2611.08494v1",
+      "locations": [
+        "Abstract",
+        "Submission history"
+      ],
+      "reason": "原始摘要明确限定为将损伤预测 RNN 嵌入 Abaqus/Explicit 的有限元材料子程序，以验证板材断裂模拟的应变增量一致性；不是通用基础模型或本库的工业搜广推、后训练、Agent 方法。摘要中的部署指有限元仿真结构尺度，不是线上业务部署。仅做范围排除。",
+      "signals": [
+        "arxiv_announcement_in_window"
+      ],
+      "decision": "out_of_scope",
+      "resolution": "cross_domain_scope_mismatch",
+      "fulltext_review_completed": false,
+      "full_article_read": false,
+      "review_done": true,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false
+    }
+  ]
+}

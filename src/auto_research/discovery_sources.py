@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 import datetime as dt
 import gzip
+import hashlib
 from html.parser import HTMLParser
 import html
 import json
@@ -21,7 +22,9 @@ from .papers import ArxivClient, canonical_arxiv_id
 
 
 ARXIV_LINK = re.compile(
-    r"(?:arxiv\.org/(?:abs|pdf)/|arxiv:)(\d{4}\.\d{4,5})(?:v\d+)?",
+    r"(?<![\w.-])(?:https?://(?:(?:www|export)\.)?arxiv\.org/(?:abs|pdf|html)/|"
+    r"arxiv\.org/(?:abs|pdf|html)/|arxiv:)(\d{4}\.\d{4,5})(v\d+)?"
+    r"(?:\.pdf)?(?![\w.])",
     re.IGNORECASE,
 )
 
@@ -46,6 +49,7 @@ class DiscoverySource:
     max_title_lookups: int = 0
     max_detail_lookups: int = 0
     review_policy: str = "incremental"
+    historical_inventory: bool = False
 
 
 @dataclass(frozen=True)
@@ -58,6 +62,7 @@ class CrossSourceHit:
     relation: str = "direct"
     seed_arxiv_id: str | None = None
     source_published: str | None = None
+    historical_inventory: bool = False
 
     def provenance(self) -> dict:
         result = {
@@ -70,6 +75,8 @@ class CrossSourceHit:
         }
         if self.source_published:
             result["source_published"] = self.source_published
+        if self.historical_inventory:
+            result["historical_inventory"] = True
         return result
 
 
@@ -133,6 +140,7 @@ def extract_source_hits(source: DiscoverySource, content: str) -> tuple[CrossSou
             source_kind=source.kind,
             source_url=source.url,
             organization=source.organization,
+            historical_inventory=source.historical_inventory,
         )
         for identity in dict.fromkeys(
             canonical_arxiv_id(match.group(1)) for match in ARXIV_LINK.finditer(content)
@@ -439,6 +447,32 @@ def discover_external(
         title_index.setdefault(normalized_title(paper.title), []).append(paper)
         known_ids.add(canonical_arxiv_id(paper.arxiv_id))
     for source in sources:
+        inventory: list[dict] = []
+        captures: list[dict] = []
+
+        def capture_inventory(content: str, url: str) -> None:
+            if not source.historical_inventory:
+                return
+            encoded = content.encode("utf-8")
+            receipt = {
+                "source_url": url,
+                "captured_at": dt.datetime.now(dt.timezone.utc).isoformat(),
+                "decoded_text_sha256": hashlib.sha256(encoded).hexdigest(),
+                "decoded_text_bytes": len(encoded),
+                "capture_kind": "decoded-text-utf8",
+            }
+            captures.append(receipt)
+            for match in ARXIV_LINK.finditer(content):
+                identity, version = match.group(1), match.group(2) or ""
+                row = {
+                    "arxiv_id": canonical_arxiv_id(identity),
+                    "observed_version": version or None,
+                    "identity_url": f"https://arxiv.org/abs/{identity}{version}",
+                    "source_url": url,
+                    "decoded_text_sha256": receipt["decoded_text_sha256"],
+                }
+                if row not in inventory:
+                    inventory.append(row)
         try:
             if (
                 source.max_pages < 1
@@ -481,6 +515,7 @@ def discover_external(
                     failures.append(failure)
                     continue
                 pages_scanned += 1
+                capture_inventory(content, url)
                 if deepmind_listing and page == 1:
                     pages_available = _deepmind_page_count(content)
                     pages_to_scan = min(source.max_pages, pages_available or 1)
@@ -490,7 +525,7 @@ def discover_external(
                     if pages_available is not None:
                         pages_to_scan = min(source.max_pages, pages_available)
                 if source.kind != "official-conference":
-                    extracted.extend(extract_source_hits(source, content))
+                    extracted.extend(extract_source_hits(replace(source, url=url), content))
                 for title, detail_url, published in publication_records(source, content):
                     records.setdefault(
                         (normalized_title(title), detail_url), (title, detail_url, published)
@@ -525,6 +560,7 @@ def discover_external(
                     detail_lookups += 1
                     try:
                         detail_content = fetcher(detail_url)
+                        capture_inventory(detail_content, detail_url)
                         detail_hits = extract_source_hits(source, detail_content)
                         detail_ids = {hit.arxiv_id for hit in detail_hits}
                         if len(detail_ids) == 1:
@@ -550,6 +586,7 @@ def discover_external(
                     extracted.append(CrossSourceHit(
                         identity, source.name, source.kind, detail_url,
                         source.organization, identity_relation, source_published=published,
+                        historical_inventory=source.historical_inventory,
                     ))
                     matched += 1
                     catalog_matched += identity in catalog_ids
@@ -573,6 +610,19 @@ def discover_external(
             }
             if page_failures:
                 stat["page_failures"] = page_failures
+            if source.historical_inventory:
+                stat.update({
+                    "historical_inventory": True, "organization": source.organization,
+                    "kind": source.kind, "inventory_records": inventory,
+                    "capture_receipts": captures, "configured_max_pages": source.max_pages,
+                    "configured_pages_scanned": pages_scanned,
+                    "inventory_scope": "configured source pages only; not all institutional history",
+                })
+                if deepmind_listing or google_listing:
+                    stat["pages_available"] = pages_available
+                    stat["pagination_capped"] = (
+                        pages_available is None or pages_available > source.max_pages
+                    )
             if records:
                 stat.update({
                     "organization": source.organization,
@@ -606,10 +656,20 @@ def discover_external(
             source_stats.append(stat)
         except Exception as exc:  # each source is independently auditable
             failures.append({"source": source.name, "url": source.url, "error": str(exc)})
-            source_stats.append({
+            stat = {
                 "source": source.name, "url": source.url,
                 "arxiv_ids_extracted": 0, "status": "error",
-            })
+            }
+            if source.historical_inventory:
+                stat.update({
+                    "historical_inventory": True, "organization": source.organization,
+                    "kind": source.kind, "inventory_records": inventory,
+                    "capture_receipts": captures,
+                    "attempted_at": dt.datetime.now(dt.timezone.utc).isoformat(),
+                    "error": str(exc), "configured_max_pages": source.max_pages,
+                    "inventory_scope": "configured source pages only; not all institutional history",
+                })
+            source_stats.append(stat)
     if snowball_seeds:
         try:
             hits.extend(semantic_scholar_citation_hits(snowball_seeds, fetcher=fetcher))

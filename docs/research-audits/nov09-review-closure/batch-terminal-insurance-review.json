@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "window": {
+    "start": "2026-10-16",
+    "end": "2026-11-09",
+    "timezone": "Asia/Shanghai"
+  },
+  "scope": "Correct three title/abstract scope false positives against exact captured originals. Low-cost core acceptance is not implementation delivery; full ATLAS field/training reproduction is separately high-cost.",
+  "input_inventory_commit": "a86689a72b42d93fa726972c0ab2ecb42e378a84",
+  "all_sources_exhaustive": false,
+  "counts": {
+    "accepted": 2,
+    "reviewed_deferred": 1,
+    "implementations": 0,
+    "experiments": 0,
+    "gpu_runs": 0
+  },
+  "reviews": [
+    {
+      "id": "2610.34459",
+      "revision": 1,
+      "title": "From Explaining to Enabling: Actionable Transparency in Algorithmic Insurance Pricing",
+      "published": "2026-10-25T17:28:41Z",
+      "updated": "2026-10-25T17:28:41Z",
+      "metadata_sha256": "5ba389e6d688c5c55c407968e31a7966027c630c5b7f34702dcef3313678422a",
+      "capture": "40832864995/recommendation-paper-candidates/paper-candidates-recommendation.json",
+      "source_url": "https://arxiv.org/html/2610.34459v1",
+      "source_sha256": "7f7776b07563a1292111134f830dc4c5373dbb3f8f518729fcfde06c76139720",
+      "source_capture": "production-final/2610.34459v1.html",
+      "organization": "Université du Québec à Montréal / UNSW Sydney",
+      "verified_priority_organizations": [],
+      "track": "foundation-model",
+      "topic": "evaluation, calibration and counterfactual recourse",
+      "priority": "P1",
+      "classification_correction": "The recommendation query captured insurance pricing, but this is a generic model-agnostic calibration/recourse operator, not an industrial recommender ranking model. No production A/B exception is inferred.",
+      "source_review_scope": "fixed original author block, defining conformal constraint, public implementations, experimental configuration and guarantee limitations",
+      "locations": [
+        "author block",
+        "§3.1–3.4, Equation2, Propositions3.2–3.4",
+        "§4.1–4.2, Tables7–8",
+        "§5.2–5.3",
+        "Code Availability",
+        "Appendices B/E/H/I"
+      ],
+      "reason": "原先将本文概括为保险HCI讨论是误排：固定原文明确给出通用于回归反事实解释的conformal约束，要求不可变特征不变、预测落入目标区间，且独立校准集构建的预测区间上界不超过目标；并扩展WhatIf/NICE、接入MOC/DiCE，发布复现代码。核心可用小型回归模型与候选过滤实现，不应仅因保险应用而判为无算法。接受该低成本核心进入方法候选；本轮仅完成审查，核心及论文全量实验均尚未实现或执行，不以高成本免复现掩盖缺项。",
+      "decision": "accepted",
+      "resolution": "accepted_low_cost_conformal_core_not_implemented",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "full_experiment_status": "not_run",
+      "production_gate_passed": false,
+      "upstream_code_status": "released",
+      "upstream_code": "https://github.com/fer-agathe/counterfactuals_insurance.git",
+      "upstream_extension": "https://github.com/fer-agathe/counterfactuals.git",
+      "algorithm_boundary": {
+        "mechanism": "以独立calibration数据构造locally adaptive split-conformal区间，对满足actionability与点预测目标的候选施加区间上界硬门槛；区间约束可嵌入搜索或对候选做后验过滤。",
+        "guarantee": "原文界限针对从数据分布抽样且被约束接受的profile，不直接保证优化选出的某个反事实点；软约束fallback不享有该界限。",
+        "limitations": "没有验证建议的因果性，也没有证明跨领域推广、真实保费降低或部署收益。不能把对优化候选的筛选称为逐个反事实的条件覆盖保证。"
+      },
+      "resource_assessment": {
+        "source_url": "https://arxiv.org/html/2610.34459v1",
+        "basis": "§4以及Table7/Code Availability；仅原始配置，不是本地测量",
+        "scale": "57,832条洪水索赔与98,058条合成驾驶保单；GLM/小型回归与四种反事实方法；Table7全局比较取1,000个测试查询。",
+        "reported_cost": "Table7平均每查询秒数为WhatIf0.04、NICE2.46、MOC0.71、DiCE2.32；原文未要求CUDA或大型语言模型。",
+        "decision": "low_cost_core_feasible; full reproduction not attempted and not classified high_cost"
+      },
+      "production_evidence": {
+        "kind": "offline_public_data_method_demonstration",
+        "online_ab": false,
+        "details": "论文两领域示例及1,000条测试子样本比较；无用户流量实验、全流量部署或真实行为干预收益。"
+      }
+    },
+    {
+      "id": "2610.24910",
+      "revision": 1,
+      "title": "ATLAS: Expert-Guided Sustainable Satellite Backhaul for Off-Grid Wildlife Monitoring",
+      "published": "2026-10-17T23:12:21Z",
+      "updated": "2026-10-17T23:12:21Z",
+      "metadata_sha256": "7180ce87706fbc57da36f82ac29f557f3dcb98e3a8ad2dabb115d134ac8640b4",
+      "capture": "39731868655/post-training-paper-candidates/paper-candidates-post-training.json",
+      "source_url": "https://arxiv.org/html/2610.24910v1",
+      "source_sha256": "edb990cf91db3787abef5cd01683bf56650a49fa163172a50041d719f1ab6f34",
+      "source_capture": "production-final/2610.24910v1.html",
+      "organization": "Simon Fraser University / AXSOTA Intelligence Inc.",
+      "verified_priority_organizations": [],
+      "track": "agent",
+      "priority": "P1",
+      "source_review_scope": "fixed original byline, semantic assessment and GRPO reward, CMDP/SAC scheduler, safety shield, deployment versus trace-replay protocol and resource configuration",
+      "locations": [
+        "author block",
+        "§4.1–4.2 Equations1–3",
+        "§5.1–5.4 Equations4–12/Algorithm1",
+        "§6 Expert-in-the-Loop Workflow",
+        "§7 Deployment and data / Trace-driven replay / Implementation",
+        "§8–9 Tables1–2"
+      ],
+      "reason": "ATLAS不是单纯卫星链路案例：原文定义专家意图rubric、带证据帧和误差估计的语义评估、log-loss/证据IoU/不确定性误差GRPO奖励，以及预算与阈值联合动作的约束SAC和能量/连通性shield。完整实验需四GPU的8B蒸馏/GRPO、专门视觉模型、私有领域标注及18离网站点长期观测与Jetson硬件回放，按高成本规则不复现。低成本奖励计算、SelectTop预算装箱与shield接口本身不属于高成本，记为可接受但尚未实现的核心，不能以本次原文审查冒充交付。",
+      "decision": "reviewed_deferred",
+      "resolution": "not_reproduced_high_cost",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "full_experiment_status": "not_reproduced_high_cost",
+      "full_experiment_review_done": true,
+      "production_gate_passed": false,
+      "upstream_code_status": "not_found_in_fixed_original",
+      "component_assessment": {
+        "decision": "accepted_low_cost_core_not_implemented",
+        "components": [
+          "score/evidence/uncertainty reward from Equation3",
+          "sentinel allowance and confidence-weighted SelectTop budget plan",
+          "forecast-based battery reserve and connectivity safety shield"
+        ],
+        "cost_class": "low_cost_interface_and_arithmetic_not_full_policy_training",
+        "status": "not_implemented",
+        "boundary": "规则组件不等同于已训练Qwen语义评估器或约束SAC；shield基于预测值，不能保证实际能量永不低于储备。"
+      },
+      "cost_assessment": {
+        "source_url": "https://arxiv.org/html/2610.24910v1",
+        "basis": "§7明列模型、训练硬件和领域数据；§7–8明列实地部署与对照回放。仅原始完整实验成本，不是本地测量或小组件成本。",
+        "scale": "Qwen3-8B LoRA rank32，GPT-4o教师，1,000专家复核clip、每输入8采样GRPO，两阶段在4×RTX A5000训练；YOLO26s/FastVLM-1.5B/Qwen3-Embedding-0.6B；18站点2025年4–11月部署，Jetson Orin NX端到端回放。",
+        "available_resource": "one A100 or A30, or local Mac; no experiment was started",
+        "cost_type": "多模型蒸馏/GRPO与领域数据准备、长期离网现场部署及专门端侧硬件回放"
+      },
+      "production_evidence": {
+        "kind": "live_field_deployment_plus_trace_driven_hardware_replay",
+        "online_ab": false,
+        "details": "ATLAS在18站点真实运行，但§7明确每站只有单一终端和电池，不能现场并行比较；所有系统间accuracy/uptime对比在相同实测轨迹的Jetson回放上完成。",
+        "interpretation": "87.4%平均选择准确率与基线差值不是随机用户A/B，亦不是18站点现场随机分组实验。"
+      }
+    },
+    {
+      "id": "2610.26433",
+      "revision": 2,
+      "title": "The Geometry of Agent Memory: Forecasting Retrieval-Bound Memory Failures, and Characterizing Its Limits",
+      "published": "2026-10-19T13:56:49Z",
+      "updated": "2026-10-26T08:13:39Z",
+      "metadata_sha256": "2817917566e7d7f55fde9a815163bf3416022c6f568db3d902751ba02150fae1",
+      "capture": "40832864995/foundation-model-paper-candidates/paper-candidates-foundation-model.json",
+      "source_url": "https://arxiv.org/html/2610.26433v2",
+      "source_sha256": "2b6fc1ee07ae3a5430bbcec343b2b82c248dc76dbdb6b7c015236f392f976a7c",
+      "source_capture": "production-final/2610.26433v2.html",
+      "organization": "Redis / 原文未单列一作机构",
+      "verified_priority_organizations": [],
+      "track": "agent",
+      "priority": "P1",
+      "source_review_scope": "fixed v2 byline, all 25 feature definitions, grouped classifier protocol, confounding controls, released artifact scope and negative-result limitations",
+      "locations": [
+        "author block",
+        "§3 Geometric features",
+        "§4 Experimental setup",
+        "§5.4–5.8",
+        "§6 Limitations",
+        "AppendixA Table7",
+        "AppendixB Classifier and preprocessing / Generation, judging, and prompts"
+      ],
+      "reason": "原文定义25项query/memory/conversation特征与生成前正确性logistic读出，并发布派生数值产物；这是可独立检查的低成本Agent诊断方法，不能因超越difficulty/system-identity的增益不显著而当成无方法。接受其特征与分组评测核心作为diagnostic-only候选，尚未实现。完整原始五后端构建/生成/打分不在公开release中，API别名也无固定快照，不能声称精确全量可复现；原文没有完整运行成本，故不武断标高成本。",
+      "decision": "accepted",
+      "resolution": "accepted_low_cost_memory_geometry_diagnostic_not_implemented",
+      "review_done": true,
+      "fulltext_review_completed": true,
+      "full_article_read": false,
+      "automatic_retry": false,
+      "automatic_implementation_queue": false,
+      "implementation_status": "not_implemented",
+      "diagnostic_only": true,
+      "full_experiment_status": "original_multi_backend_pipeline_not_released_exact_replay_unavailable",
+      "production_gate_passed": false,
+      "upstream_code_status": "released_analysis_and_derived_numerical_artifacts_only",
+      "upstream_code": "https://github.com/ichko/agent-memory-geometry",
+      "algorithm_boundary": {
+        "mechanism": "归一化嵌入上的六个query特征、14个memory-conversation特征、五个conversation covariates；L2 logistic regression，按question_id分组五折，训练fold拟合scaler。",
+        "limitations": "主结果AUROC0.640低于difficulty基线0.655；加入difficulty与system identity后增量0.002的95%区间跨零。相似度不验证事实覆盖，也不分离构建/检索/生成错误，不能据此宣称部署拒答或检索改进。",
+        "leakage_boundary": "参考答案嵌入及正确性条件阈值仅用于离线proxy分析，不能暴露给被评估Agent；未来本地实现应保留这种隔离。原始imputation/PCA在划分前拟合的covariate暴露需明确记录，不能当作严格独立test证据。"
+      },
+      "resource_assessment": {
+        "source_url": "https://arxiv.org/html/2610.26433v2",
+        "basis": "AppendixA/B与§4–6，仅原配置，不是本地测量",
+        "scale": "2,367个question-system行/500问题；25标量特征、sklearn L2 LogisticRegression与五折/1,000次fixed-prediction bootstrap；派生数值release可做离线重分析。",
+        "decision": "low_cost_diagnostic_core_feasible; original end_to_end replay unavailable, not asserted high_cost",
+        "limitations": "原文明确未提供完整runtime/hardware/API成本；原始多后端harness、文本log和embedding cache不随数值产物发布，gpt-4o别名无dated snapshot。pairwise特征开销随集合大小平方增长。"
+      },
+      "production_evidence": {
+        "kind": "offline_benchmark_diagnostic",
+        "online_ab": false,
+        "details": "LongMemEval-small与LoCoMo的离线特征分析、固定context干预及既有记忆harness；无线上流量部署实验。"
+      }
+    }
+  ],
+  "scope_a_corrections": [
+    {
+      "id": "2610.34459",
+      "action": "withdrawn_from_scope_exclusions",
+      "resolution": "original_review_present_above"
+    },
+    {
+      "id": "2610.24910",
+      "action": "withdrawn_from_scope_exclusions",
+      "reason": "原文确认定义独立语义评估/GRPO与约束SAC系统，完整实验高成本，低成本规则核心尚未实现。",
+      "resolution": "original_review_present_above",
+      "review_done": true
+    },
+    {
+      "id": "2610.26433",
+      "action": "withdrawn_from_scope_exclusions",
+      "reason": "固定v2原文确认25特征诊断与公开数值产物；核心低成本可接受但未实现，不宣称部署有效或精确全量可复现。",
+      "resolution": "original_review_present_above",
+      "review_done": true
+    }
+  ]
+}

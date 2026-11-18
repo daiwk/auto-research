@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "post-training:emoreward": {
+      "questions": [
+        {
+          "id": "prior-cannot-unmask",
+          "level": "basics",
+          "question": "上轮人脸通道与代理结果高度正相关，这轮视频没有可用人脸时是否仍应给它奖励权重？",
+          "answer": "不应给。历史乘子调节已可用通道的相对权重，当前门控负责可用性。门控为零时，无论乘子多大，通道有效权重仍为零。",
+          "example": "教学例：人脸通道基权重 0.4，历史乘子 2，当前门控 0，有效质量仍为 0；中性默认分数不是观测。",
+          "source_sections": ["背景与主要改动", "核心公式"],
+          "added": "2026-11-07"
+        },
+        {
+          "id": "centered-reliability-capped-tilt",
+          "level": "mechanism",
+          "question": "RewardMemory 为什么比较原始分数相关性，还要先减去通道平均相关再裁剪？",
+          "answer": "估计基于原始分数，而不是已乘门控的贡献，避免把过去的门控策略当成通道可靠性。减均值表达相对可靠性，裁剪限制 log 乘子。常数通道相关性为零，不必然降权；在正裁剪上限下，平均相关大于零时它的未归一乘子才小于 1。",
+          "example": "教学例：相关性 0.8 和 0 的均值是 0.4；温度 0.5、上限 1 时，两个未归一乘子分别是 exp(0.8) 和 exp(-0.8)。",
+          "source_sections": ["核心公式"],
+          "added": "2026-11-07"
+        },
+        {
+          "id": "reward-mix-not-token-credit",
+          "level": "comparison",
+          "question": "EmoReward 与 TVRL 都用于视频强化学习，它们改动的是同一个训练量吗？",
+          "answer": "不是。EmoReward 改变每段视频的情绪奖励融合并给出标量；TVRL 从一个已有组优势出发，按冻结 VLM 对生成 token 的敏感度重新分配信用。两者不能互相替代。",
+          "example": "教学例：EmoReward 可以舍弃缺失人脸的评分，TVRL 可以让同一条轨迹中影响较大的 token 获得更多现有优势；这两项改变作用在不同维度。",
+          "source_sections": ["背景与主要改动", "诊断与边界"],
+          "added": "2026-11-07"
+        },
+        {
+          "id": "strict-gate-and-immutable-replay",
+          "level": "implementation",
+          "question": "Eq. (8) 为什么不能先全量归一再执行活跃阈值？运行时能否用当前结果更新表？",
+          "answer": "活跃阈值针对乘积 w⁰gm，不是归一后的权重；等于阈值也排除。归一化只能在筛出的通道上做。当前结果不能重拟合冻结表，下一轮只读；历史统计只能在独立的已完成参考轮之后构造。",
+          "example": "教学例：有效质量 (0.25, 1, 0)、阈值 0.25，只保留第二项。若所有门控为零，情绪项为零，通用视频奖励项仍可存在。",
+          "source_sections": ["核心公式", "数据协议与代码映射"],
+          "added": "2026-11-07"
+        }
+      ]
+    }
+  }
+}

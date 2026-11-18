@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "units": {
+    "dive/foundation-models/compression-and-cache/comparison/foundation-models:ginger": {
+      "source_sha256": "b4066a6a83a55e076b51a5c536ac74c69cbe1e48443fd137129d3ab3289fc2ec",
+      "reviewed": true,
+      "fields": {
+        "position": "Refines a fixed 4-bit Gaussian coarse code for the same rotated vector with per-interval Lloyd–Max codebooks. Navigation reads only coarse codes and scales; reranking also loads the refinement stream.",
+        "tradeoff": "Refinement width is independent of the navigation prefix and improves reranking precision, but both scales are still stored and shortlisted vectors require refinement bits. The local checks cover only quantization and inner products, not graphs or SIMD."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/analysis/6": {
+      "source_sha256": "147b00856cde5d10b1b114bc9c90dac9e5a188ad8d6b1109efc39adb16a655bc",
+      "reviewed": true,
+      "fields": {
+        "title": "Distinguish the compressed object, writes, and random reads",
+        "body": "AWQ changes model weights, using calibration activations to choose equivalent scaling before low-bit reconstruction. PiPNN II fuses quantized scoring with top-K during graph construction to avoid writing a candidate score matrix. GINGER searches an existing graph and reduces vector read bandwidth while scanning candidates. Their respective checks are output error from quantized weights, construction time and graph recall, and query throughput at fixed recall. Synthetic NTQ error does not replace the two system measurements."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/question/ginger-versus-pipnn-evidence": {
+      "source_sha256": "d18a4e0d45bcea9f616d5e931f1c3525deddb527ea1ff38ead172d218e9b6191",
+      "reviewed": true,
+      "fields": {
+        "question": "If NTQ reads a few fewer bytes per candidate, does that directly show faster PiPNN II construction or higher GINGER production QPS?",
+        "answer": "No. Fused scoring in PiPNN II is on the construction path; NTQ stream splitting is on the search path. Query performance also depends on graph adjacency, reranking volume, and hardware caches and must be timed at fixed recall. The local byte counts exclude scales and graph storage and are not a system memory figure.",
+        "example": "In the 31-dimensional CPU example, navigation reads 16 coarse-code bytes and only the shortlist needs eight extra refinement bytes. This does not establish full-graph traffic or construction time."
+      }
+    },
+    "dive/foundation-models/compression-and-cache/update/2026-11-07/5": {
+      "source_sha256": "443078311238108417cb398ad7717d6f81e7690ed7bde7bade35148a55f46c18",
+      "reviewed": true,
+      "fields": {
+        "summary": "Added GINGER's Nested TurboQuant and compared weight compression, construction writes, and query reads with AWQ and PiPNN II. Verified that the official PiPNN II repository linked by GINGER remains a placeholder; prior local evidence is unchanged."
+      }
+    }
+  }
+}

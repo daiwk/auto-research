@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-15",
+  "integration_owner": "root",
+  "proposals": [
+    {
+      "paper": "recommendation:resid",
+      "target_card": "recommendation/generative-retrieval-reasoning",
+      "source_revisions": {
+        "recommendation:resid": "aa17c2202a55ee2c9cbed5071e733d965d51624ea52d088dd8639d61ed0b9ad0",
+        "recommendation:tiger": "8baf748cca80fb5364e9dd7280b98de93249f38e0f8f6930149c1c64afee63d5"
+      },
+      "comparison": {
+        "position": "独立子空间parallel SID，加训练prior校准与prefix语义势能guided beam，再按Hamming mismatch和beam score恢复候选。",
+        "tradeoff": "TIGER逐层量化residual并要求有效SID检索；ReSID同时改变token结构与候选可达性，不能仅用tail bonus解释。局部冻结输入核不训练量化器或生成器。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "结果、负控与边界",
+          "高成本完整实验"
+        ]
+      },
+      "analysis": {
+        "title": "语义ID能表达物品，不等于物品能穿过窄beam",
+        "body": "TIGER把内容编码为逐层residual SID；ReSID指出早期量化和解码剪枝可让长尾目标根本到不了最终排名。独立子空间抑制残差误差传播，log-prior校准与log-mean-exp势能在prefix阶段引导，partial matching再容忍局部错码。三者改变不同环节，不能把真实gold相似度喂给搜索来制造长尾提升；本地全枚举分数相等也不证明线上10.3ms或收入提升。",
+        "papers": [
+          "recommendation:resid",
+          "recommendation:tiger"
+        ]
+      },
+      "question": {
+        "id": "cross-nov15-resid-reachability",
+        "question": "TIGER生成的精确SID概率低，就能在最终重排里用ReSID补回来吗？",
+        "answer": "只有候选或足够近的SID已经存活时重排才有机会；被beam早剪掉的分支需在解码阶段处理。ReSID还改变独立量化与partial matching，不能退化成只对最终列表加分。",
+        "example": "教学例：第一层只留下prefix0而目标在prefix1下，最终排序看不到该目标。",
+        "papers": [
+          "recommendation:resid",
+          "recommendation:tiger"
+        ]
+      },
+      "update": {
+        "date": "2026-11-15",
+        "papers": [
+          "recommendation:resid",
+          "recommendation:tiger"
+        ],
+        "summary": "补入有量化线上A/B的ReSID，区分parallel/residual ID、prefix可达性与最终排序；CPU核不冒充推荐训练或生产性能，完整工业实验成本过高不复现。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Independent-subspace parallel SIDs, training-prior calibration and prefix semantic-potential guidance, followed by Hamming/beam-score candidate recovery.",
+          "tradeoff": "TIGER quantizes successive residuals; ReSID changes both token structure and candidate reachability, not merely tail bonuses. Local frozen-input kernels train neither quantizers nor generators."
+        },
+        "analysis": {
+          "title": "Representing an item with a semantic ID does not make it survive a narrow beam",
+          "body": "TIGER encodes content with residual SIDs. ReSID highlights how quantization and early pruning can make tail items unreachable. Independent subspaces isolate errors, log-prior and log-mean-exp potentials guide prefixes, and partial matching tolerates local code errors. These operate at different stages. Gold similarities must not manufacture improvements, and exact finite-score checks establish neither 10.3ms serving nor revenue."
+        },
+        "question": {
+          "question": "Can a final ReSID reranker recover a low-probability exact TIGER SID?",
+          "answer": "Only if candidates or sufficiently close SIDs already survived. Early-pruned branches require decoding-stage treatment. ReSID also changes independent quantization and partial matching, so it is not just final-list scoring.",
+          "example": "Teaching example: keeping only prefix zero when the target lies below one leaves no target for the final reranker."
+        },
+        "update": "Add ReSID with quantified production A/B, separating parallel/residual IDs, prefix reachability and final ranking. CPU kernels are not recommender training or production evidence; full industrial experiments are not reproduced due to cost."
+      }
+    },
+    {
+      "paper": "recommendation:trigen",
+      "target_card": "recommendation/generative-retrieval-reasoning",
+      "source_revisions": {
+        "recommendation:trigen": "3ce4ba847498e9545b3043d67b586147e385b84060a05c837b475925fa8e4f77",
+        "recommendation:tiger": "8baf748cca80fb5364e9dd7280b98de93249f38e0f8f6930149c1c64afee63d5"
+      },
+      "comparison": {
+        "position": "固定窗口tail注入trigger，pristine history上的trigger/default双路径经pooled router和独立level PFFN持续调制生成。",
+        "tradeoff": "TIGER定义内容量化和自回归ID检索；TriGen处理即时trigger与历史偏好的条件冲突。局部可微条件不含完整encoder/decoder，随机梯度不能当Recall。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射",
+          "结果、负控与边界"
+        ]
+      },
+      "analysis": {
+        "title": "条件来自哪份历史，比给生成器多一个向量更重要",
+        "body": "TIGER按历史条件生成Semantic ID，TriGen还处理最近点击引起的意图重定向。tail-injected encoder序列可以耦合trigger与历史，而双路径必须读pristine history来保留默认偏好；router先pool路径再输出每level权重，PFFN独立参数并不允许读取未来SID。完整生成训练、mask隔离与GPU算子证据分层记录，不能用六市场线上提升替随机层背书。",
+        "papers": [
+          "recommendation:trigen",
+          "recommendation:tiger"
+        ]
+      },
+      "question": {
+        "id": "cross-nov15-trigen-pristine",
+        "question": "把trigger拼到TIGER历史后，让两个TriGen条件分支都读这份序列可以吗？",
+        "answer": "不符合固定v1定义。注入序列用于encoder；双路径另读pristine history，使default-query路径不随trigger改变。丢掉这份原始历史会破坏分离意图与长期偏好的结构。",
+        "example": "教学例：只改变trigger时default path应保持数值不变，而非也被重复trigger带走。",
+        "papers": [
+          "recommendation:trigen",
+          "recommendation:tiger"
+        ]
+      },
+      "update": {
+        "date": "2026-11-15",
+        "papers": [
+          "recommendation:trigen",
+          "recommendation:tiger"
+        ],
+        "summary": "加入有六市场线上A/B的TriGen，区分固定窗口尾注入、pristine双路径与位置专属PFFN，保留observed-prefix边界。局部前后向不是完整推荐训练；完整工业矩阵高成本不复现。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Fixed-window trigger-tail injection, pristine-history trigger/default paths, a pooled router and independent level PFFNs condition generation.",
+          "tradeoff": "TIGER defines content quantization and autoregressive ID retrieval; TriGen addresses immediate-trigger versus historical-preference conflict. Local differentiable conditions omit full encoders/decoders, and random gradients are not recall."
+        },
+        "analysis": {
+          "title": "Which history supplies a condition matters more than adding another vector",
+          "body": "TIGER generates SIDs from history; TriGen also models recent-click redirection. Tail-injected encoder input may couple trigger/history, but dual paths read pristine history to preserve default preferences. The router pools paths before per-level weights; independent PFFNs do not authorize future SIDs. Record generation training, masks and GPU kernels separately; six-market author lifts do not validate random local layers."
+        },
+        "question": {
+          "question": "May both TriGen paths read the trigger-appended TIGER history?",
+          "answer": "Not under fixed v1. Injected history supplies the encoder, while both condition paths separately read pristine history so default queries remain trigger-independent. Dropping pristine history defeats the separation.",
+          "example": "Teaching example: changing only the trigger must leave the default path identical rather than steering it through repeated triggers."
+        },
+        "update": "Add TriGen with six-market production A/B, preserving fixed-window injection, pristine dual paths, position-specific PFFNs and observed-prefix boundaries. Local forward/backward is not full recommendation training; the high-cost industrial matrix is not reproduced."
+      }
+    },
+    {
+      "paper": "recommendation:kuairec-v2-protocol",
+      "target_card": "recommendation/generative-retrieval-reasoning",
+      "source_revisions": {
+        "recommendation:kuairec-v2-protocol": "c660e4e753d0e01f56d3aa95feec51d3ebe96b7b06d0ce3f597686f2e170dd37",
+        "recommendation:tiger": "8baf748cca80fb5364e9dd7280b98de93249f38e0f8f6930149c1c64afee63d5"
+      },
+      "comparison": {
+        "position": "以逐用户/日validation、实例加权FullMonth和一次召回多行为评测定义持续学习协议；本地仅有限split/HR/NDCG接口。",
+        "tradeoff": "TIGER是生成检索模型，KuaiRecV2是可评不同模型的动态item-pool benchmark。官方链接API404，L0接口不代表已下载官方数据或完成能力排名。",
+        "sections": [
+          "背景与主要改动",
+          "核心公式",
+          "数据协议与代码映射",
+          "结果、负控与边界"
+        ]
+      },
+      "analysis": {
+        "title": "模型名称不统一评测时间轴，月均分也不能抹掉每日退化",
+        "body": "TIGER原文静态数据下的生成检索与KuaiRecV2的动态候选池回答不同问题。持续学习协议每天保留每用户最后一条作validation，FullMonth按实例加权，并保留每日轨迹观察适应/遗忘；同请求多任务子集必须复用单次召回。评价器gold不得回流producer。当前L0接口不实现候选池、history、官方数据或模型，不能据有限HR与TIGER真实本地NDCG比较。",
+        "papers": [
+          "recommendation:kuairec-v2-protocol",
+          "recommendation:tiger"
+        ]
+      },
+      "question": {
+        "id": "cross-nov15-kuairec-evidence-level",
+        "question": "KuaiRecV2有限例子的HR=1，可以与TIGER的MovieLens NDCG比较吗？",
+        "answer": "不可以。前者是无模型、无官方数据的L0协议例子，后者是特定数据与实际训练的指标；任务、数据、候选池、时间轴和证据层级不同。应接入真实模型/官方数据并同协议同预算对照后再谈能力。",
+        "example": "教学例：两条手写request的rank discount算对，不等于在30天约4.84亿交互上检索。",
+        "papers": [
+          "recommendation:kuairec-v2-protocol",
+          "recommendation:tiger"
+        ]
+      },
+      "update": {
+        "date": "2026-11-15",
+        "papers": [
+          "recommendation:kuairec-v2-protocol",
+          "recommendation:tiger"
+        ],
+        "summary": "加入KuaiRecV2公共评测协议入口，明确daily validation、按实例加权与single-retrieval evaluate-all；未核实官方仓库可访问，不伪称benchmark已接入，完整大规模评测高成本不复现。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Daily user-wise validation, instance-weighted FullMonth and one-retrieval behavior evaluation define the continual protocol; local code supplies finite split/HR/NDCG interfaces.",
+          "tradeoff": "TIGER is a model; KuaiRecV2 benchmarks different models under dynamic item pools. The official link returned API404. L0 interfaces imply neither official-data ingestion nor capability rankings."
+        },
+        "analysis": {
+          "title": "A model name does not align evaluation time, and monthly means must not hide daily drops",
+          "body": "Static TIGER retrieval and KuaiRecV2 dynamic pools answer different questions. Daily validation retains each user's last daily event; FullMonth weights instances while trajectories reveal adaptation/forgetting. Behavior subsets reuse one request list and evaluator gold cannot flow to producers. The local L0 interface has no pool builder, history, official data or model, so finite HR cannot rank against actual local TIGER NDCG."
+        },
+        "question": {
+          "question": "Can HR=1 on a finite KuaiRecV2 example be compared with TIGER MovieLens NDCG?",
+          "answer": "No. The former is a model-free, unofficial-data L0 protocol example; the latter comes from specific data and real training. Tasks, pools, time axes and evidence tiers differ. Capability comparison requires actual models/official data under the same protocol and budget.",
+          "example": "Teaching example: correct discounts on two handwritten requests are not retrieval across thirty days and roughly 484 million interactions."
+        },
+        "update": "Add the KuaiRecV2 public protocol entry, clarifying daily validation, instance weighting and single-retrieval evaluate-all. Official repository accessibility is unverified, not a completed benchmark integration; full large-scale evaluation is not reproduced due to cost."
+      }
+    }
+  ]
+}

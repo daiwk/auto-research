@@ -1,0 +1,53 @@
+{
+  "domain": "agent-research",
+  "review_done": true,
+  "priority": "P0",
+  "adapter": null,
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "requires_gpu_validation": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "intake_class": "official_directory_triggered_historical_backfill",
+  "verified_priority_organizations": [
+    "Google"
+  ],
+  "key": "agent-gym",
+  "title": "Agent Gym: A Framework for Continuous Evaluation and Evolution of LLM Agents Through Human-in-the-Loop Feedback",
+  "paper_url": "https://arxiv.org/abs/2608.15591",
+  "reviewed_version_url": "https://arxiv.org/html/2608.15591v3",
+  "reviewed_version": "v3",
+  "reviewed_version_published_at": "2026-11-03T23:26:41Z",
+  "published": "2026-08-16",
+  "published_at": "2026-08-16T07:27:26Z",
+  "detail_path": "agent-research/2608.15591-agent-gym/README.md",
+  "topic": [
+    "Harness与自进化",
+    "规则纠错与人工治理"
+  ],
+  "first_author": "Pouya Ghiasnezhad Omran",
+  "first_author_affiliation": "Google Cloud",
+  "code": "https://github.com/GoogleCloudPlatform/generative-ai/tree/8c7b207806b3d4754d6722ecf08785b1f33bf542/agents/invoice-processing",
+  "code_status": "公开GoogleCloudPlatform参考实现，固定commit 8c7b207806b3d4754d6722ecf08785b1f33bf542；仅阅读README/ALF，不克隆或执行。论文21操作，当前上游README24；本地仅八个明确操作，不混写。",
+  "summary": "独立纠错层按scope收集确定性AND条件，合并续跑与patch并以3→2→1顺序改真实JSON；新规则检查target/collateral后须显式SME批准，原Agent不直接重训。",
+  "fidelity_note": "仅CPU ALF控制核、八种条件、type-preserving编辑及人工准入合同。真实语义续跑/patch来自外部callback，不实现LLM discovery/investigation、自动三轮收窄、发票Agent或规则晋升。",
+  "local_operator": "auto_research.agent_research.agent_gym.diagnostic",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.agent_research.agent_gym import diagnostic; print(diagnostic(42))'",
+  "cost_assessment": {
+    "source_url": "https://arxiv.org/html/2608.15591v3#S6",
+    "source_location": "§3.4–3.5,§6–7; fixed upstream README model/configuration",
+    "model_scale": "nine-stage acting pipeline; three-layer investigation; paid Gemini-3.5-Flash/Pro in current public reference; SME rule-learning sessions",
+    "data_scale": "single invoice domain; full end-to-end document/revision matrix and human sessions, not a published multi-domain benchmark",
+    "available_resource": "one NVIDIA A100 or A30, or local Mac",
+    "estimated_cost_basis": "Paper gives no wall-clock/token total and leaves large-scale cost quantification to future work. Paid proprietary inference and human feedback cannot be faithfully replaced by a free single-card control fixture; unresolved full-run cost is not probed.",
+    "cost_type": "published_configuration_and_unresolved_cost_not_local_measurement",
+    "decision": "完整系统成本过高，不复现（审查 DONE）；不调用API、不下载文档包、不试部署。只执行明确CPU组件。"
+  }
+}

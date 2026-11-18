@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import datetime as dt
 import calendar
+from hashlib import sha256
 import json
 from pathlib import Path
 
@@ -90,6 +91,52 @@ def audit_review_watermark(root: Path) -> list[str]:
             if paper.get("status") == "accepted":
                 require(any(r.get("decision") == "accepted" and r.get("fulltext_review_completed")
                             for r in paper.get("reviews", [])), f"{paper['id']}: acceptance lacks full text")
+        selected_p2 = [paper for paper in papers if paper.get("status") == "not_selected_p2"]
+        if selected_p2:
+            semantics = "selection-screening-with-protected-primary-review"
+            require(state.get("review_semantics") == register.get("review_semantics") == semantics,
+                    "P2 selection must declare its distinct review semantics")
+            require(state.get("selection_review_complete") is register.get("selection_review_complete") is True
+                    and state.get("method_review_complete") is register.get("method_review_complete") is False,
+                    "P2 selection is not complete method verification")
+            selection_policy = read(state["selection_policy"])
+            require(selection_policy.get("authorization", {}).get("answer") == "允许 P2 选题级结案"
+                    and selection_policy["window"] == state["window"], "P2 selection lacks explicit window authorization")
+            selection_ref = str(Path(state["candidate_register"]).parent / "p2-selection-screen.json")
+            selection = read(selection_ref)
+            selected_rows = {row["id"]: row for row in selection["records"]}
+            require(len(selected_rows) == len(selection["records"])
+                    and set(selected_rows) == {p["id"] for p in selected_p2}, "P2 selection/register mismatch")
+            policy_path = root / "docs" / state["selection_policy"]
+            require(selection["policy_sha256"] == sha256(policy_path.read_bytes()).hexdigest(),
+                    "P2 selection uses a stale policy")
+            require(not selection["protected_records"], "protected priority/production records remain unread")
+            require(not set(selected_rows).intersection(selection_policy.get("always_protected_identities", {})),
+                    "P2 selection cannot close a nonwaivable priority/production identity")
+            for paper in selected_p2:
+                row = selected_rows.get(paper["id"], {})
+                require(paper.get("priority") == row.get("priority") == "P2"
+                        and paper.get("selection_review_done") is row.get("selection_review_done") is True
+                        and paper.get("method_review_completed") is row.get("method_review_completed") is False
+                        and paper.get("fulltext_review_completed") is row.get("fulltext_review_completed") is False
+                        and paper.get("originality_not_rejected") is row.get("originality_not_rejected") is True,
+                        f"{paper['id']}: inflated or unreviewed P2 selection")
+                require(paper.get("protected_priority_signal") is False
+                        and paper.get("protected_production_signal") is False
+                        and not row.get("high_cost") and not row.get("implementation")
+                        and not paper.get("cost_assessment") and not paper.get("reviews")
+                        and paper.get("implementation_status") not in {"implemented", "component_only"}
+                        and paper.get("automatic_implementation_queue") is row.get("automatic_implementation_queue") is False,
+                        f"{paper['id']}: selection cannot imply priority clearance, cost, acceptance or implementation")
+                nonwaivable = {"source_priority_flag", "source_priority_query", "source_priority_organization",
+                               "official_source_domain", "metadata_conflict", "frozen_industrial_route",
+                               "policy_protected_identity"}
+                require(not nonwaivable.intersection(row.get("positive_signal_matches", {})),
+                        f"{paper['id']}: nonwaivable priority signal cannot become P2")
+                require(paper.get("metadata_sha256") == row.get("metadata_sha256")
+                        and paper.get("revision") == row.get("revision")
+                        and bool(row.get("title_witness")) and bool(row.get("abstract_witness"))
+                        and bool(paper.get("reason")), f"{paper['id']}: selection lacks pinned metadata evidence")
         receipts = state.get("retrieval_receipts", [])
         expected = {(track, mode) for track in ("recommendation", "foundation-model", "post-training", "agent")
                     for mode in ("submission-window", "late-index")}
@@ -156,6 +203,10 @@ def audit_review_watermark(root: Path) -> list[str]:
                 elif row.get("review_status") == "reviewed":
                     ids = row.get("arxiv_ids") or [row.get("id")]
                     require(any(i in reviewed_ids for i in ids), f"{label}: missing reviewed candidate")
+                    require(any(any(review.get("review_done") is True
+                                    and review.get("fulltext_review_completed") is True
+                                    for review in paper_map.get(identity, {}).get("reviews", []))
+                                for identity in ids), f"{label}: priority source lacks original-method/cost review")
                 elif row.get("review_status") == "historical":
                     evidence_dates = dates(row, upper=True)
                     ids = row.get("arxiv_ids", [])

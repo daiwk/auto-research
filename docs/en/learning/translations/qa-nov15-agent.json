@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:leap-formal-math/compiler-not-usefulness": {
+      "source_sha256": "548b405b66a71a38d8e97969b9aadddbf35b024408e39b5c78255b7360ce81f1",
+      "reviewed": true,
+      "fields": {
+        "question": "Does Lean compilation establish a useful blueprint?",
+        "answer": "No. It validates a sketch under proposed lemmas, which may restate the parent or be harder. LEAP adds an LLM reviewer to filter unproductive decompositions; this remains a heuristic, not the proof kernel.",
+        "example": "Teaching example: renaming the theorem as a new lemma can compile without reducing any proof work."
+      }
+    },
+    "qa/agent-research:leap-formal-math/and-or-shared-lemmas": {
+      "source_sha256": "43c4863d96db9317a9847416318f9259cc5f3834aa20d6afee2ccf5e8ae29a74",
+      "reviewed": true,
+      "fields": {
+        "question": "Why an AND–OR DAG rather than only a decomposition tree?",
+        "answer": "OR nodes represent alternative strategies; AND sketches require all necessary lemmas. Shared DAG nodes reuse verified lemmas across branches. Anticipatory auxiliary lemmas can be retained without becoming required dependencies.",
+        "example": "Teaching example: two routes can reuse one finite-set lemma rather than proving it twice; unrelated auxiliary lemmas are not automatically required."
+      }
+    },
+    "qa/agent-research:leap-formal-math/leap-versus-drago": {
+      "source_sha256": "0f855e297a8f4f82e55019fe97b947ce83cfddd287085fab4f06bbca7a18b635",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do LEAP and DRAGO still need semantic checks despite formal tools?",
+        "answer": "Formal tools verify supplied statements. A valid LEAP decomposition may make no progress; a solvable DRAGO specification may express the wrong task. Usefulness and fidelity need separate checks.",
+        "example": "Teaching example: proving a mistranslated weak theorem resembles solving a plan after deleting goals—formally valid but not the original task."
+      }
+    },
+    "qa/agent-research:leap-formal-math/revision-artifacts-no-agent": {
+      "source_sha256": "6d8f8677a8ffad4607bec6bb4506246cb29b8f9eee501e2c6dea6dc011f4193d",
+      "reviewed": true,
+      "fields": {
+        "question": "Do public Lean solutions establish open agent source or local reproduction?",
+        "answer": "No. Proof artifacts differ from a general agent/harness release; no Lean/model execution occurred locally. Preserve the June v1 publication and label November v3 as a revision rather than another paper.",
+        "example": "Teaching example: feeding published solutions to an actor leaks answers rather than implementing theorem proving."
+      }
+    },
+    "qa/agent-research:coremem/future-inherited-state": {
+      "source_sha256": "e437bba686c1cc72383cec0da8c1cb0748d2c8a54341f77bfd9a157fe51866a7",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not reset the repository before every CoReMem task?",
+        "answer": "The setting inherits both prior repository changes and memory. Resetting or injecting gold patches changes future-task difficulty and invalidates the matched-state memory comparison.",
+        "example": "Teaching example: if task1 renames an interface, task2 must face that actual change, not a secretly repaired checkout."
+      }
+    },
+    "qa/agent-research:coremem/traceable-use-not-causality": {
+      "source_sha256": "2cf6286f274a5c0d25d5af79fc13393abfb902f1763bb61f6d7bc8103c5cd18b",
+      "reviewed": true,
+      "fields": {
+        "question": "Does one memory-anchor mention establish causal success?",
+        "answer": "No. The gate also excludes prior history and anchors reached in the first eight steps of no-memory siblings, and credits first use only. Passing means traceable use, not proven causal benefit.",
+        "example": "Teaching example: an agent may discover a test command without memory; sibling-prefix exclusion reduces such attribution errors."
+      }
+    },
+    "qa/agent-research:coremem/value-versus-price": {
+      "source_sha256": "2362eced2eb3bc32d49ceff8c00295ee7fc91151a3185dab314a927f8858bd68",
+      "reviewed": true,
+      "fields": {
+        "question": "Do CoReMem and MemPrice optimize the same memory cost?",
+        "answer": "No. CoReMem values future-task reward/step changes through matched replay and trains memory behavior. MemPrice allocates fidelity from external utility/token sizes with a long-run pressure queue.",
+        "example": "Teaching example: saving100 context tokens need not avoid one test execution; future work and context occupancy are distinct."
+      }
+    },
+    "qa/agent-research:coremem/fixed-scale-reduction": {
+      "source_sha256": "732e0d4c5a0c6c71dc1023e0f7166439f3cf4b5a3f32466b66ed6f62653c836f",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not replace scale100 with group standard deviation and always use session means?",
+        "answer": "The paper fixes scale100 and uses global token means for27B but per-session means for9B. Changing normalization or reduction changes gradient scales and length weighting, not merely numerical stability.",
+        "example": "Teaching example: sessions of three and one tokens receive3:1 weights under token means but1:1 under session means."
+      }
+    },
+    "qa/agent-research:caplite/authority-not-payload": {
+      "source_sha256": "7fbb0db5d5af400a3475ca00f3767515be487ff3188757cb6d5db6c7cd516794",
+      "reviewed": true,
+      "fields": {
+        "question": "Does CapLite write integrity protect arbitrary message content?",
+        "answer": "No. It constrains authority values such as recipients, amounts, objects and destinations plus the committed write sequence. Free payloads, temporal values, final answers and read content are outside that guarantee.",
+        "example": "Teaching example: the recipient may be authorized while the message body is still wrong; the whole email is not therefore safe."
+      }
+    },
+    "qa/agent-research:caplite/grounding-and-prefix": {
+      "source_sha256": "bd8dced2240c147faf33594410480554a2cb5431aba8b4eee2c7cad8dd90fb30",
+      "reviewed": true,
+      "fields": {
+        "question": "Why commit write order if every argument is user-grounded?",
+        "answer": "Grounding constrains values, not newly added or reordered authorized-looking effects. Commitment constrains actions; mediation executes only a successful prefix and stops at the first denial, clarification or error.",
+        "example": "Teaching example: mentioning Alice and Bob does not authorize a malicious page to add another transfer to Bob."
+      }
+    },
+    "qa/agent-research:caplite/caplite-versus-runtime-tickets": {
+      "source_sha256": "38db603a6f104585c1ef3b7999e02291c55be3064f511895d8aa5d9ddaf6a331",
+      "reviewed": true,
+      "fields": {
+        "question": "Do CapLite and RuntimeTickets share the same trust root?",
+        "answer": "Not entirely. CapLite derives authority from trusted schemas/request grounding and commits writes. RuntimeTickets freezes host-reviewed source-grounded obligations and checks grant narrowing, validators and cumulative budgets.",
+        "example": "Teaching example: requiring a recipient in the request differs from enforcing a100-byte cumulative delivery limit."
+      }
+    },
+    "qa/agent-research:caplite/schema-subset-no-universal-guarantee": {
+      "source_sha256": "f0b6447e2e87ae7edf9e43706f429c65e242dfd06efc9ed7a3b74ac8b2f7056e",
+      "reviewed": true,
+      "fields": {
+        "question": "Can the local kernel protect all tools after its controls pass?",
+        "answer": "No. It supports only flat scalar/scalar-array schemas and rejects unknown forms. Schemas/confirmations must be trusted and every effect mediated. Bypasses, nested schemas and real SLM binding remain outside scope.",
+        "example": "Teaching example: a tool named get may secretly write files; grounding cannot repair an incorrect tool contract."
+      }
+    },
+    "qa/agent-research:ace-rl/fixed-scaffold-frozen-inference": {
+      "source_sha256": "4a96dc98126d99af2add32009b4bdf127982c4e5bb1b105de81d2df6686338ba",
+      "reviewed": true,
+      "fields": {
+        "question": "Does ACE-RL RSI update weights or mutate the harness at test time?",
+        "answer": "No. Training teaches the shared actor/reflector/curator policy. Inference freezes weights and keeps the ACE scaffold fixed, carrying only a task-local playbook between attempts.",
+        "example": "Teaching example: receiving a new test insight in the next attempt does not mean a gradient step just occurred."
+      }
+    },
+    "qa/agent-research:ace-rl/downstream-value-not-text-judge": {
+      "source_sha256": "6461cfffa6f0bad7eb7a46588255cedfe0f12a8e4a1f7337723806a349526f2c",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not reward reflection/curation by text quality?",
+        "answer": "Their target is downstream actors. Curators receive fresh-environment actor reward after applying edits; reflectors receive the mean over their admissible edits. Inapplicable/unchanged edits yield no candidate; an empty set scores zero.",
+        "example": "Teaching example: eloquent reflection that makes the next execution fail must not earn reward for prose quality."
+      }
+    },
+    "qa/agent-research:ace-rl/ace-versus-gigpo-group": {
+      "source_sha256": "0acc4ae1716e64f8eccc876c896065fd006bd3796e07dbcaf54bea8ec083eacb",
+      "reviewed": true,
+      "fields": {
+        "question": "Are ACE-RL and GiGPO credit groups the same?",
+        "answer": "No. GiGPO combines trajectory macro credit with shared-anchor-state micro credit. ACE-RL compares actor tasks, reflector seeds and curator reflection provenance, valuing handoffs through downstream actors.",
+        "example": "Teaching example: three edits from one reflection form a curator group, not three trajectories that happen to meet at one state."
+      }
+    },
+    "qa/agent-research:ace-rl/singleton-reset-token-mean": {
+      "source_sha256": "4aed3ef2c984d00857bc984c3b7f8a272117498aad16fda72f29a112c57edc54",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not drop all singletons and reset globally every three steps?",
+        "answer": "Fractional threshold-filtered singletons can survive with mean0/scale1; MiniSWE's range filter requires variation. Reset is per task before encounters3,6,..., not optimizer steps; the joint loss averages generated tokens.",
+        "example": "Teaching example: if A has two encounters and B one, only A resets upon its third encounter, not every task."
+      }
+    },
+    "qa/agent-research:multiloop/empirical-not-new-optimizer": {
+      "source_sha256": "52f16097b22ad9aff86a86e76695ad6a93b43d991a665f55e6633b3750f68327",
+      "reviewed": true,
+      "fields": {
+        "question": "Does MULTILOOP propose a new multi-agent optimizer?",
+        "answer": "The paper explicitly applies an existing harness-optimization paradigm in a multi-agent empirical case study. Results/failure analysis matter, but a generic for-loop is not a new algorithm implementation.",
+        "example": "Teaching example: studying a coding optimizer on multi-agent traces is useful; an empty loop does not reproduce semantic diagnosis."
+      }
+    },
+    "qa/agent-research:multiloop/traces-and-history": {
+      "source_sha256": "07a8595703d70aa2ebd97220aa60d057ef70cbf06facd6ed0e06c280b296120c",
+      "reviewed": true,
+      "fields": {
+        "question": "What does the optimizer need beyond the current score?",
+        "answer": "Complete orchestrator/subagent traces, tool inputs/outputs, and prior edits/evaluations. Scores show failure; detailed history helps locate causes and avoid repeating earlier changes.",
+        "example": "Teaching example: a low score alone cannot distinguish bad delegation, retrieval drift and final-answer composition errors."
+      }
+    },
+    "qa/agent-research:multiloop/optimization-versus-attribution": {
+      "source_sha256": "e18b166b9f98327bb2e8de70aeed7de12f330b38d8aa49c629d019a11fdc3ddb",
+      "reviewed": true,
+      "fields": {
+        "question": "Does a MULTILOOP gain establish HarnessLens-style attributable orchestration repair?",
+        "answer": "No. MULTILOOP gains largely come from prompts/tools while orchestration failures persist. HarnessLens emphasizes paired behavior-relevant validation and attribution gates; aggregate gains alone do not establish structural repair.",
+        "example": "Teaching example: a clearer search prompt may improve scores without improving task delegation."
+      }
+    },
+    "qa/agent-research:multiloop/ten-examples-not-cheap": {
+      "source_sha256": "7014628be01f06e03da4471a3ee135f3017570eacfccad235c7c13168ecdaa75",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is a ten-example training campaign still costly?",
+        "answer": "Each task triggers multiple real search agents and long tool traces. The paper reports USD 104–213 per ten-task evaluation and thousands of dollars for twice evaluating890 test tasks. Sample count is not inference cost.",
+        "example": "Teaching example: ten tasks with many parallel searches can cost far more than thousands of CPU arithmetic fixtures."
+      }
+    },
+    "qa/agent-research:stellar-colosseum/readiness-not-proof": {
+      "source_sha256": "7900667e30894fb6a37a274cc9cd89835226113e2dd5bff3f2bd40517a972492",
+      "reviewed": true,
+      "fields": {
+        "question": "Does passing the readiness gate establish a correct proof?",
+        "answer": "No. It means the route is stable enough to assign precise unresolved claims to sections. Local sections and the assembled proof still need review; foundational strategy failures should reopen exploration.",
+        "example": "Teaching example: identifying a needed lemma neither proves it nor authorizes downstream use of missing assumptions."
+      }
+    },
+    "qa/agent-research:stellar-colosseum/overlap-not-partition-vote": {
+      "source_sha256": "ee80a0b36493857674fccf25bc1e28e2543addab86621ed7d318fccd26fdb873",
+      "reviewed": true,
+      "fields": {
+        "question": "Is tree synthesis a partition followed by majority voting?",
+        "answer": "No. Each node samples without replacement within its group, while groups are independent and may overlap. Candidate–critique bundles support semantic repair/conflict retention; specific fatal objections cannot be voted away.",
+        "example": "Teaching example: one valid counterexample refutes a theorem despite five vague model approvals."
+      }
+    },
+    "qa/agent-research:stellar-colosseum/proof-versus-scientist-experiments": {
+      "source_sha256": "905ebdcf8df99dbab868c94096844c1c53833fa35249b97d67e7af2b5b94a588",
+      "reviewed": true,
+      "fields": {
+        "question": "Can Stellar Colosseum and ScientistTwo share one undifferentiated success signal?",
+        "answer": "They should not. The former reviews proof assumptions/dependencies/claims; the latter controls subset/full experiments, ablations and reviews. Both require external semantics, but sufficient evidence differs.",
+        "example": "Teaching example: a better benchmark mean does not prove a lemma; a consistent proof does not replace experimental controls."
+      }
+    },
+    "qa/agent-research:stellar-colosseum/grader-reference-selection-separation": {
+      "source_sha256": "5862d114b34a53b0fb4b42f096f18397613c959f9e3c5e49f7dbe38139850111",
+      "reviewed": true,
+      "fields": {
+        "question": "Why separate71.0% selection from77.3% oracle, and hide reference proofs from routing?",
+        "answer": "71.0% uses an executable eight-critique rule;77.3% assumes knowing which candidate is correct. References belong only to the final grader, never actors/selectors, or the oracle ceiling is misrepresented as capability.",
+        "example": "Teaching example: selecting without answers differs from using gold afterward to choose the correct candidate."
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-06-priority-components",
+  "component_keys": ["convpe", "cord-rollout", "envopt", "ice", "pipnn-ii", "ragcompass", "ured"],
+  "cuda_keys": ["convpe", "ice"],
+  "reference_only_keys": ["xstack"],
+  "seeds": [42, 43, 44],
+  "available_resource": "one NVIDIA A100 or A30, or local Mac",
+  "scope": "bounded seeded L1 tensors, CPU arithmetic and controller contracts",
+  "data_and_checkpoint_downloads": 0,
+  "pretrained_model_or_api_calls": 0,
+  "estimated_cost": "tiny tensors and bounded generated inputs; under five minutes per execution, not a measured full-experiment estimate",
+  "maximum_run_seconds": 300,
+  "full_experiments_executed": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "automatic_retry": false
+}

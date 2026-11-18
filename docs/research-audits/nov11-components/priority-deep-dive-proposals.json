@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-11",
+  "integration_owner": "root",
+  "scope": "Authored proposals only; existing deep-dive JSON and generated cards are untouched.",
+  "proposals": [
+    {
+      "paper": "agent-research:reprobridge",
+      "target_card": "agent-research/evaluation-and-reliability",
+      "source_revisions": {
+        "agent-research:reprobridge": "504ab8b476ae88cb371d3d81ee738137ade332ebbf08639aea08fb9fd204a3f4",
+        "agent-research:agentheal": "68c172c45d549e915d3f7e15e28e894848846d4e6761a3b84e2410a319f019aa"
+      },
+      "comparison": {
+        "position": "将复现的执行知识保存为代码、环境、launcher和指南；评价侧把五次参考的双侧数值兼容与独立执行完整性审计分开。",
+        "tradeoff": "公开任务不含私有参考/成功阈值；本地只有数学与文件证据合同，没有LLM Reproducer或语义Auditor，完整8×H100/多模型任务矩阵高成本不复现。",
+        "sections": [
+          "核心公式",
+          "数据协议与代码映射",
+          "高成本完整实验"
+        ]
+      },
+      "analysis": {
+        "title": "结果相符、过程有效与目标保留是不同的审计问题",
+        "body": "AgentHeal关心失败恢复后是否仍引用合法同版本来源并遵守政策；ReproBridge关心一个接近论文的分数是否来自指定实验与统计单位。前者不能凭答案相似替代来源归因，后者不能凭数值兼容替代独立执行审计。它们都要求评价侧标注/参考与actor隔离，也都不能把机械真值表当真实Agent成功率。",
+        "papers": [
+          "agent-research:reprobridge",
+          "agent-research:agentheal"
+        ]
+      },
+      "question": {
+        "id": "cross-reproduction-compatibility-versus-goal-preservation",
+        "question": "AgentHeal的任务成功与ReproBridge的数值兼容，为什么都不能只看最终输出是否漂亮？",
+        "answer": "AgentHeal还要求合法来源版本与逐动作合规；ReproBridge还要求指定测量程序、统计单位与可反驳的执行审计。输出好看可能分别掩盖旧版本替换或复制旧分数，评价者也不能把这些答案/参考交给actor。",
+        "example": "教学例：拿旧版论文答对一句话不等于恢复指定新版本；把已发表MSE抄进新JSON也不等于训练了模型。",
+        "papers": [
+          "agent-research:reprobridge",
+          "agent-research:agentheal"
+        ]
+      },
+      "update": {
+        "date": "2026-11-11",
+        "papers": [
+          "agent-research:reprobridge"
+        ],
+        "summary": "补充独立科研复现的统计兼容与证据完整性维度，明确相近分数不是执行证明；未改变现有来源/政策审计边界。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Preserve code, environment, launchers and a guide; separate five-reference two-sided numerical compatibility from independent execution-integrity auditing.",
+          "tradeoff": "Actor tasks exclude private references and success thresholds. The local component provides mathematics and file-evidence contracts, not an LLM Reproducer or semantic Auditor; full multi-model, eight-H100 experiments are cost-deferred."
+        },
+        "analysis": {
+          "title": "Numerical agreement, execution integrity, and goal preservation are different audits",
+          "body": "AgentHeal asks whether recovery retains legitimate same-version sources and policy compliance. ReproBridge asks whether a compatible score came from the intended experiment and reporting statistic. Neither answer similarity nor numerical agreement replaces the respective independent audit. Evaluator annotations and references remain separate from actors, and mechanical truth tables are not agent success rates."
+        },
+        "question": {
+          "question": "Why can neither AgentHeal success nor ReproBridge compatibility be judged by an attractive final output alone?",
+          "answer": "AgentHeal additionally requires legitimate version-aware sources and compliant actions. ReproBridge additionally requires the intended measurement, reporting unit, and refutable execution audit. Attractive outputs can hide version substitution or copied scores; evaluator answers and references cannot be handed to actors.",
+          "example": "Teaching example: a correct sentence from an old paper version does not recover the requested new version. Copying a published MSE into a fresh JSON does not train a model."
+        },
+        "update": "Add statistical compatibility and evidence integrity for independent research reproduction: a matching number is not execution proof; existing source/policy audit boundaries remain unchanged."
+      }
+    },
+    {
+      "paper": "agent-research:lisa",
+      "target_card": "agent-research/memory-and-skills",
+      "source_revisions": {
+        "agent-research:lisa": "40ed2f47946b3f33598f1a1b5cc6298d5436f2f1f04866613f8d41ad149534a0",
+        "agent-research:memprice": "d4ee0743c138d1d79e69a22798bddc199b6cea29fbbbcb6d1410a067b48b8c40"
+      },
+      "comparison": {
+        "position": "以Beta后验下界门控广义策略，并用按领域的混合标签局部提示保留边界；跨日平均链接重聚类和同原句运行时统计继承均显式执行。",
+        "tradeoff": "置信度度量反馈条件下的可复用可靠性，不是因果收益或token效用；本地策略草稿与embedding来自外层，未运行LLM归纳和guardrail。",
+        "sections": [
+          "核心公式",
+          "数据协议与代码映射",
+          "本地结果与负控"
+        ]
+      },
+      "analysis": {
+        "title": "记忆值不值得放入，与证据够不够支撑，是两根轴",
+        "body": "MemPrice在有限token下联合分配保真等级，以效用与长期压力定价；LiSA在语义检索后问广义规则是否有足够支持，弱规则可能不展示而局部矛盾提示仍保留。低token成本不保证可靠，可靠也不保证预算内最优。两者分别需要外部效用/压缩或策略/embedding，不能把合成输入下的精确求解说成任务能力提升。",
+        "papers": [
+          "agent-research:lisa",
+          "agent-research:memprice"
+        ]
+      },
+      "question": {
+        "id": "cross-memory-confidence-versus-capacity",
+        "question": "一个只有一次支持的规则很短，MemPrice能放进预算，LiSA为什么仍可能不展示？",
+        "answer": "容量选择和证据可靠性不是同一约束。MemPrice的候选成本/效用允许某表示入选，不证明规则正确；LiSA的Beta(2,1)5%分位数约0.22361，低于0.55。若它是已发现的局部边界提示，又不适用广义策略同一门控。",
+        "example": "教学例：10token规则被分配器保留，但只成功过一次；全局安全建议应暂缓，公开/私密两个情境的局部冲突提示可以另行呈现。",
+        "papers": [
+          "agent-research:lisa",
+          "agent-research:memprice"
+        ]
+      },
+      "update": {
+        "date": "2026-11-11",
+        "papers": [
+          "agent-research:lisa"
+        ],
+        "summary": "补入证据量感知的广义策略门控和不门控局部冲突通道，区分记忆容量/效用与反馈可靠性；完整API评测高成本不复现。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Gate broad policies with a Beta posterior lower bound while preserving domain-local mixed-label cues; execute average-linkage refresh and carry runtime counts only for surviving verbatim representatives.",
+          "tradeoff": "Confidence measures feedback-conditional reuse reliability, not causal benefit or token utility. Draft policies and embeddings remain external; no LLM induction or final guardrail is run."
+        },
+        "analysis": {
+          "title": "Worth allocating memory and supported by enough evidence are separate axes",
+          "body": "MemPrice jointly assigns fidelity levels under token limits using utility and long-run pressure. LiSA asks whether retrieved broad rules have enough evidence, while retaining narrow conflict cues. Cheap memory need not be reliable; reliable memory need not be budget-optimal. Both rely on external semantic inputs, so exact synthetic-input computations are not task-capability gains."
+        },
+        "question": {
+          "question": "A short rule fits MemPrice's budget after one supporting observation. Why might LiSA still withhold it?",
+          "answer": "Capacity allocation and evidential reliability are distinct. A candidate's cost and utility can justify its representation without proving correctness. Beta(2,1)'s 5% quantile is about 0.22361, below 0.55. A narrow observed conflict cue instead follows the local channel's different rule.",
+          "example": "Teaching example: retain a ten-token rule in storage, but delay using it as general safety advice after only one success; separately surface public/private contextual boundary cues."
+        },
+        "update": "Add evidence-volume-aware broad-policy gating and ungated local conflict cues; distinguish capacity/utility from feedback reliability. Full API evaluation remains cost-deferred."
+      }
+    },
+    {
+      "paper": "agent-research:alphaproof-code",
+      "target_card": "agent-research/evaluation-and-reliability",
+      "source_revisions": {
+        "agent-research:alphaproof-code": "59b4b3240a997fe7783fb61d85fd46e7a9ffd50ba00486231218ab4f4d50ff4e",
+        "agent-research:reprobridge": "504ab8b476ae88cb371d3d81ee738137ade332ebbf08639aea08fb9fd204a3f4"
+      },
+      "comparison": {
+        "position": "由人类批准规格，再用Lean内核、隔离规格副本及comparator检查顶层定理、所有传递定义和标准公理；证明生成Agent不自行宣布完成。",
+        "tradeoff": "内核证明以可信规格、机器语义和密码学假设为前提，不等于真实意图充分；650万行证明及数小时工具链构建高成本，仅收录不复现。",
+        "sections": [
+          "核心验证条件",
+          "来源核验",
+          "高成本完整实验"
+        ]
+      },
+      "analysis": {
+        "title": "可机器检查的证据仍需要先固定要证明什么",
+        "body": "AlphaProof Code把获批规格及依赖隔离，阻止模型把secure偷改成恒真再交付合法Lean证明。ReproBridge则预先固定实验与报告统计，阻止得到目标分数后再替换测量。两者都保留人类规格/评价设计责任，但形式证明的逻辑正确性不能替代实验执行完整性，反过来数值复现也不证明程序安全。",
+        "papers": [
+          "agent-research:alphaproof-code",
+          "agent-research:reprobridge"
+        ]
+      },
+      "question": {
+        "id": "cross-proof-checking-versus-execution-audit",
+        "question": "Lean能检查证明，为什么AlphaProof仍需要人类审规格；ReproBridge又为何不能只检查分数？",
+        "answer": "内核只证明给定命题，弱化规格依然可能得到有效证明；数值兼容只说明数值落在区间，复制或错误统计也可能相符。前者固定规格及传递定义，后者固定实验程序与证据链，均不能以漂亮最终产物跳过输入合同。",
+        "example": "教学例：把secure定义为True后证明成功，与把旧结果复制成新JSON后分数兼容，都可能表面通过一个窄检查，却没有完成原要求。",
+        "papers": [
+          "agent-research:alphaproof-code",
+          "agent-research:reprobridge"
+        ]
+      },
+      "update": {
+        "date": "2026-11-11",
+        "papers": [
+          "agent-research:alphaproof-code"
+        ],
+        "summary": "增加形式规格保真与传递依赖门控维度；明确高成本reference无本地证明能力，不用regex或玩具定理替代官方验证。"
+      },
+      "english": {
+        "comparison": {
+          "position": "Humans approve specifications; Lean, a held-out specification and comparator check theorem statements, transitive definitions and standard axioms. Prover agents cannot declare top-level completion.",
+          "tradeoff": "Kernel results depend on trusted specifications, semantics and cryptographic assumptions, not all real intentions. Millions of proof lines and hours of toolchain builds are cost-deferred; this is a reference-only entry."
+        },
+        "analysis": {
+          "title": "Machine-checkable evidence still requires fixing what must be established",
+          "body": "AlphaProof Code isolates approved specifications and dependencies so changing secure to constant True cannot silently replace the goal. ReproBridge pins experimental procedures and reporting statistics before outcomes, rather than changing measurements after seeing scores. Both retain human design responsibility; logical proof and experimental execution integrity cannot substitute for each other."
+        },
+        "question": {
+          "question": "If Lean checks proofs, why does AlphaProof need human specification review, and why cannot ReproBridge check scores alone?",
+          "answer": "A kernel proves only its supplied proposition; a weakened specification may still have a valid proof. Numerical compatibility only locates a number inside an interval; copying or wrong statistics can match too. One pins specifications and dependencies, the other procedures and evidence, rather than judging attractive outputs alone.",
+          "example": "Teaching example: defining secure as True before proving it, and copying an old result into a fresh JSON, can each pass a narrow surface check without fulfilling the original requirement."
+        },
+        "update": "Add specification fidelity and transitive-dependency gating. This high-cost reference has no local proving capability; regexes and toy theorems do not replace upstream verification."
+      }
+    }
+  ]
+}

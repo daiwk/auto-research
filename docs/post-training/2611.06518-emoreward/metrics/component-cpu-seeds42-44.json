@@ -1,0 +1,139 @@
+{
+  "schema_version": 2,
+  "method": "emoreward",
+  "manifest_ref": "post-training:emoreward",
+  "dataset": {
+    "id": "synthetic:nov07-emoreward-v1",
+    "revision": "sha256:bb0f54e6e189892463da3811507b717b45befdf73d97a9a76a61085349d5bab3",
+    "recipe": "small seeded arithmetic fixtures; not an upstream capability benchmark",
+    "capability_benchmark": false
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "reflect_emotion_reward": 0.6999999825000005,
+        "memory_emotion_reward": 0.6537882603761233,
+        "largest_multiplier": 2.718281828459045,
+        "smallest_multiplier": 0.36787944117144233,
+        "masked_provider_weight": 0.0,
+        "reference_mean_outcome": 0.4293366324213328
+      },
+      "checks": {
+        "signed_reliability_is_bounded": true,
+        "invalid_evidence_gets_no_mass": true,
+        "memory_changes_relative_allocation": true,
+        "sparse_and_unseen_regimes_use_global": true,
+        "empty_bank_recovers_reflect": true,
+        "runtime_lookup_does_not_update_memory": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 43,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "reflect_emotion_reward": 0.6999999825000005,
+        "memory_emotion_reward": 0.6537882603761233,
+        "largest_multiplier": 2.718281828459045,
+        "smallest_multiplier": 0.36787944117144233,
+        "masked_provider_weight": 0.0,
+        "reference_mean_outcome": 0.4949346209996668
+      },
+      "checks": {
+        "signed_reliability_is_bounded": true,
+        "invalid_evidence_gets_no_mass": true,
+        "memory_changes_relative_allocation": true,
+        "sparse_and_unseen_regimes_use_global": true,
+        "empty_bank_recovers_reflect": true,
+        "runtime_lookup_does_not_update_memory": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    },
+    {
+      "seed": 44,
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "metrics": {
+        "reflect_emotion_reward": 0.6999999825000005,
+        "memory_emotion_reward": 0.6537882603761233,
+        "largest_multiplier": 2.718281828459045,
+        "smallest_multiplier": 0.36787944117144233,
+        "masked_provider_weight": 0.0,
+        "reference_mean_outcome": 0.40096764115013594
+      },
+      "checks": {
+        "signed_reliability_is_bounded": true,
+        "invalid_evidence_gets_no_mass": true,
+        "memory_changes_relative_allocation": true,
+        "sparse_and_unseen_regimes_use_global": true,
+        "empty_bank_recovers_reflect": true,
+        "runtime_lookup_does_not_update_memory": true
+      },
+      "execution_device": "cpu",
+      "execution_accelerator": "CPU"
+    }
+  ],
+  "metrics": {
+    "largest_multiplier": 2.718281828459045,
+    "masked_provider_weight": 0.0,
+    "memory_emotion_reward": 0.6537882603761233,
+    "reference_mean_outcome": 0.44174629819037853,
+    "reflect_emotion_reward": 0.6999999825000005,
+    "smallest_multiplier": 0.36787944117144233
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "three-seed synthetic mechanism diagnostic; not a capability comparison"
+  },
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "provenance": {
+    "commit": "8f9edfe352339d25c5fde6d288dece224c0d8a6d",
+    "artifact_path": "docs/post-training/2611.06518-emoreward/metrics/component-cpu-seeds42-44.json",
+    "accelerator": "CPU",
+    "executed_source_sha256": {
+      "scripts/run_nov07_components.py": "98d4fa469ec1930a3dd1711e5260022f51ae4a3ac39e64cc16f12c940e8a01e4",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "scripts/curate_nov04_components.py": "d390b21757809ed0e8a4a6a2441f92073447965a341cbd33aeece73bc0c4f050",
+      "scripts/run_nov04_components.py": "61d35d574d9561e4611d2647174b8a6af07fabf8c30b6909e21e253542cf4336",
+      "docs/research-audits/nov07-priority-backfill/preflight.json": "436ce124fb0cd2ab96bc889ada8d50eaac958c3cc5a0e16af60b9dd8e3492086",
+      "src/auto_research/foundation_models/ginger.py": "7fdecf0c726ecfb412aaba3a4959755cbed341998af1b8378ab7235ced513a9c",
+      "src/auto_research/multimodal/gslm2.py": "d639b0033defa81e9369c9c99b240745c8776a56c063e1fef56b75979064cb28",
+      "src/auto_research/post_training/emoreward.py": "bb0f54e6e189892463da3811507b717b45befdf73d97a9a76a61085349d5bab3",
+      "src/auto_research/paper_specs/catalog/foundation-models/ginger.json": "e7f049481d506c166dffe76846bb22f8e8e5b5a407b2630991eea9b732d7757b",
+      "src/auto_research/paper_specs/catalog/multimodal-models/gslm2.json": "ca8fa65a051d221c8399a7df5b2c8d3d3d420f6eb4e97e2f84f5ac3efab13fbf",
+      "src/auto_research/paper_specs/catalog/post-training/emoreward.json": "f8b6560d7e2f2562937558b3640d28439ceefdae93a6607796e1fa8bfe3516d4"
+    },
+    "dataset_fingerprint": "sha256:d8697a3050566a7ee545c6a5cb0f16faeb9f77895101eff1518efede229c1284"
+  }
+}

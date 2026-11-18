@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-13-colm-historical-review",
+  "date": "2026-11-13",
+  "scope_kind": "fixed-24-identity-historical-review",
+  "source_inventory": "research-audits/nov13-history-repair/historical-source-reconciliation.json",
+  "source_page": "https://research.google/conferences-and-events/google-at-colm-2026/",
+  "scope_definition": "Exactly the 24 needs-review identities in the committed earlier COLM snapshot; not a new-date scan, institution-wide census, or automatic acceptance of every paper",
+  "requested_delivery": "Review every identity; implement qualifying affordable components, explicitly close expensive full campaigns as not reproduced, validate advertised CUDA paths on one A100/A30, and deliver reviewed bilingual write-ups, original figures and learning content for every newly catalogued paper",
+  "review_watermark_advanced": false,
+  "publication_dates_rewritten_as_discovery_date": false,
+  "automatic_implementation_queue": false,
+  "review_assignments": {
+    "foundation": ["2508.11017", "2512.08819", "2603.09906", "2604.01430", "2604.02910", "2604.06543", "2604.14403", "2606.01849"],
+    "agent": ["2512.04068", "2601.16355", "2602.16488", "2602.24188", "2603.19258", "2604.15505", "2604.24842", "2608.26788"],
+    "evaluation": ["2510.22028", "2601.17645", "2603.23301", "2603.24917", "2604.03136", "2604.22191", "2604.23321", "2606.32032"]
+  },
+  "selected_scope_complete": false,
+  "delivery_status": "in_progress",
+  "full_capability_reproduced": false,
+  "merge_request_requested": 250,
+  "merge_request_state_observed": "MERGED",
+  "publication_target": "single_followup_PR_linked_to_250",
+  "followup_publication_authorized": true,
+  "publication_base_branch": "codex/nov06-priority-papers",
+  "publication_head_branch": "codex/nov13-colm-history-closeout"
+}

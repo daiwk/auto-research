@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-13",
+  "figures": [
+    {
+      "file": "paper-figure-01.png",
+      "paper_id": "2604.06543",
+      "version": "v1",
+      "figure": 1,
+      "page_number": null,
+      "paper_url": "https://arxiv.org/abs/2604.06543v1",
+      "source_url": "https://arxiv.org/html/2604.06543v1/mcq_comparison_viridis.svg",
+      "source_kind": "fixed_v1_html_svg_rendered_png",
+      "pdf_sha256": null,
+      "image_sha256": "02de094f1b61c3a0bd5b01f004c7918c06bac911016052c5abd7dc18601a03f4",
+      "render_scale": 3,
+      "crop_pdf_points": null,
+      "caption_included": false,
+      "scientific_content_modified": false,
+      "visual_review_done": true,
+      "attribution": "Copyright belongs to the original authors; original-paper illustration is not a local component result.",
+      "license": "See original fixed arXiv source; no new license granted."
+    }
+  ]
+}

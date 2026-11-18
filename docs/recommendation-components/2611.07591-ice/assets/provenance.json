@@ -1,0 +1,17 @@
+{
+  "page": "docs/recommendation-components/2611.07591-ice/README.md",
+  "paper_url": "https://arxiv.org/abs/2611.07591",
+  "arxiv_id": "2611.07591",
+  "figure": "Figure 2",
+  "original_caption": "See original figure and caption in the attributed source",
+  "source_url": "https://arxiv.org/html/2611.07591v1/fig2.png",
+  "extraction": "original-author-png",
+  "asset": "docs/recommendation-components/2611.07591-ice/assets/paper-figure-01.png",
+  "width": 1623,
+  "height": 588,
+  "score": 0,
+  "error": "",
+  "visually_inspected": true,
+  "sha256": "486d3f915abdecfa9936b5715977ed743d70f3f5dec4ca2063cdcd80cd859cce",
+  "license": "CC BY 4.0"
+}

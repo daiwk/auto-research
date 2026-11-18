@@ -1,0 +1,48 @@
+"""Source-bind two authored benchmark comparisons; never generate translation."""
+from __future__ import annotations
+
+import hashlib
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def main():
+    paths = {
+        "multimodal-models:avmeme-exam": "multimodal-models/2601.17645-avmeme-exam/README.md",
+        "multimodal-models:mmeb-v3": "multimodal-models/2604.23321-mmeb-v3/README.md",
+        "multimodal-models:mveb": "multimodal-models/2606.14958-mveb/README.md",
+    }
+    fingerprints = {key: hashlib.sha256((ROOT / "docs" / path).read_bytes()).hexdigest()
+                    for key, path in paths.items()}
+    rows = [
+        {"paper": "multimodal-models:avmeme-exam", "target_card": "multimodal-models/alignment-interfaces",
+         "source_revisions": {key: fingerprints[key] for key in ("multimodal-models:avmeme-exam", "multimodal-models:mmeb-v3")},
+         "comparison": {"position": "用多文化音视频选择题区分声音情境知识与文本、视频捷径；本地只实现过滤、重排、私有答案映射和分组计分。", "tradeoff": "文化多选正确率与MMEB-V3嵌入检索不是同一种能力；无媒体和模型时，协议测试不能给出文化理解结论。", "sections": ["背景与主要改动", "核心公式", "数据协议与代码映射", "复现边界与完整实验"]},
+         "analysis": {"title": "接口对齐不等于文化理解：先辨认被测输出与捷径", "body": "AVMeme Exam要求模型把声音置于多语言、多文化情境中选择答案，并以text_cheat/visual_cheat处理非目标捷径。MMEB-V3则从外部嵌入排序评价语义相关性、输出模态及任务覆盖。两者都需要干净的评测边界，但分母、候选空间和输出不同。匿名上传字段与私有答案映射只约束协议；若问题文字、文件权限或模型预训练已泄漏，L0字段测试不能排除污染，也不能证明文化判断可靠。", "papers": ["multimodal-models:avmeme-exam", "multimodal-models:mmeb-v3"]},
+         "question": {"id": "cross-cultural-answer-versus-retrieval-interface", "question": "AVMeme的主集过滤和MMEB-V3的混合池都通过检查，能否推出统一模型的多模态能力提高？", "answer": "不能。检查通过只说明样本和候选协议满足声明；还需真实模型、固定合法数据、覆盖完整的任务指标与独立比较。文化多选与嵌入检索应分别报告，不能用协议成功或固定夹具的1作能力提升。", "example": "教学例：固定返回A的回调能通过不泄漏字段检查，但并不听音频；手写排序也可命中正确模态，却不是编码器预测。", "papers": ["multimodal-models:avmeme-exam", "multimodal-models:mmeb-v3"]},
+         "update": {"date": "2026-11-13", "papers": ["multimodal-models:avmeme-exam", "multimodal-models:mmeb-v3"], "summary": "补入Google/Meta合作的历史评测论文，区分文化问答、嵌入排序与L0协议；完整媒体/模型矩阵高成本不复现。"},
+         "english": {
+             "comparison": {"position": "Multicultural audiovisual multiple-choice questions separate contextual audio knowledge from text/video shortcuts. Local code implements filtering, shuffling, private answer mapping and grouped scoring only.", "tradeoff": "Cultural multiple-choice accuracy and MMEB-V3 embedding retrieval measure different capabilities. Without media and models, protocol tests establish no cultural understanding."},
+             "analysis": {"title": "Interface alignment is not cultural understanding: identify outputs and shortcuts first", "body": "AVMeme Exam asks models to interpret audio in multilingual, multicultural contexts and handles non-target shortcuts through text_cheat and visual_cheat. MMEB-V3 instead evaluates external embedding rankings for semantic relevance, requested modality and task coverage. Both require clean evaluation boundaries, but denominators, candidate spaces and outputs differ. Anonymous upload fields and private answer mappings constrain the protocol only. If question text, file permissions or pretraining leak answers, L0 field checks neither rule out contamination nor establish reliable cultural judgment."},
+             "question": {"question": "If AVMeme's main-split filtering and MMEB-V3's mixed-pool checks pass, does multimodal capability improve?", "answer": "No. Passing checks establishes declared sample and candidate protocols only. Real models, fixed authorized data, complete task metrics and independent comparisons remain necessary. Cultural answering and embedding retrieval must be reported separately; protocol success or a fixture score of one is not capability improvement.", "example": "Teaching example: an always-A callback can pass answer-field isolation without hearing audio. A handwritten ranking can retrieve the right modality without being an encoder prediction."},
+             "update": "Backfill historical Google/Meta-coauthored evaluations, distinguishing cultural answering, embedding ranking and L0 protocols. Full media/model matrices are not reproduced because of cost."}},
+        {"paper": "multimodal-models:mmeb-v3", "target_card": "multimodal-models/alignment-interfaces",
+         "source_revisions": {key: fingerprints[key] for key in ("multimodal-models:mmeb-v3", "multimodal-models:mveb")},
+         "comparison": {"position": "以190任务评价统一嵌入，并用独立OmniSET的12方向混合池揭示同语义表示的模态偏向。", "tradeoff": "相比MVEB的视频与音频预算控制，MMEB-V3覆盖更广的六类任务。Hit@1/NDCG、完整候选池和任务等权必须分别守住，纯排序核不是完整benchmark。", "sections": ["背景与主要改动", "核心公式", "数据协议与代码映射", "复现边界与完整实验"]},
+         "analysis": {"title": "语义对齐与模态遵循是两个验收轴", "body": "MMEB-V3的OmniSET把相同语义的T/I/V/A留在共享候选池，连查询本身也作为干扰项，要求语义和目标模态同时命中。若先按目标模态过滤，会删掉本来要暴露的模态坍缩。MVEB则强调视频任务、八方向检索及模型适配的帧/音频预算；协议不同，不能互换总分。两者完整矩阵都高成本，本轮MMEB-V3仅核计分，而MVEB保留资料收录，未把泛化聚合器包装成两套完整接口。", "papers": ["multimodal-models:mmeb-v3", "multimodal-models:mveb"]},
+         "question": {"id": "cross-omniset-prefilter-hides-failure", "question": "为什么给OmniSET先筛音频候选，即使提高Hit@1也不是公平优化？", "answer": "它改变了被测问题，提前替模型满足输出模态要求，隐藏模型偏向查询自身或其他模态的失败。12方向必须使用同一混合池；MVEB的输入预算控制也不能代替这个候选协议。", "example": "教学例：图像到音频时模型总把原图排第一，预筛音频后看似成功，但原始指令遵循失败已被删掉。", "papers": ["multimodal-models:mmeb-v3", "multimodal-models:mveb"]},
+         "update": {"date": "2026-11-13", "papers": ["multimodal-models:mmeb-v3", "multimodal-models:mveb"], "summary": "补MMEB-V3共享混合池、任务等权和显式NDCG gain，联系MVEB预算协议；只验CPU计分，不报告编码器能力。"},
+         "english": {
+             "comparison": {"position": "A 190-task embedding evaluation is complemented by separate twelve-direction OmniSET diagnostics exposing modality bias among equivalent semantics.", "tradeoff": "MMEB-V3 spans six categories, while MVEB emphasizes video/audio budgets. Hit@1 versus NDCG, full pools and equal task weights must remain explicit. A ranking kernel is not a complete benchmark."},
+             "analysis": {"title": "Semantic alignment and modality adherence are separate acceptance axes", "body": "OmniSET retains semantically equivalent T/I/V/A candidates in one shared pool, including the query itself as a distractor. Correctness requires both semantics and target modality. Target-modality prefiltering removes the collapse it is meant to expose. MVEB emphasizes video tasks, eight retrieval directions and model-specific frame/audio budgets; aggregates are not interchangeable. Both complete matrices are expensive. This round verifies MMEB-V3 scoring only, while MVEB remains review-only rather than disguising a generic aggregator as two complete integrations."},
+             "question": {"question": "Why is audio-prefiltering OmniSET unfair even if Hit@1 improves?", "answer": "It changes the task by satisfying output modality on the model's behalf and hides preference for the query itself or another modality. All twelve directions must share the mixed pool. MVEB input-budget controls do not replace this candidate protocol.", "example": "Teaching example: an image-to-audio model always ranks the original image first. Audio filtering makes it appear successful by removing its original instruction-following failure."},
+             "update": "Add MMEB-V3 shared-pool scoring, equal task weights and explicit NDCG gain, compared with MVEB's budget protocol. Only CPU scoring is verified, not encoder capability."}},
+    ]
+    path = ROOT / "docs/research-audits/nov13-colm-remaining/deep-dive-proposals-benchmarks.json"
+    path.write_text(json.dumps({"schema_version": 1, "reviewed_on": "2026-11-13", "proposals": rows}, ensure_ascii=False, indent=2) + "\n")
+
+
+if __name__ == "__main__":
+    main()

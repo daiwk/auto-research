@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/recommendation:ice/reach-before-conditional-click": {
+      "source_sha256": "0fdb8be4e6c7ac5534d598369da5c5dff6d9b8e2f1dc4b3b7c03d429be1cf66d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is conditional CTR not the click probability after displaying a slate?",
+        "answer": "Conditional CTR is defined only over actual impressions. An unreached position cannot receive a click. ICE multiplies its reach probability by conditional CTR before scoring the slate.",
+        "example": "Example: Two positions each have conditional CTR 0.4. Reach probabilities of 1 and 0.25 give joint click probabilities of 0.4 and 0.1."
+      }
+    },
+    "qa/recommendation:ice/survival-and-detached-mask": {
+      "source_sha256": "a9331b0be07e1c8352642491a1f29379f3874c1c6d568c62f4b751e584a62d75",
+      "reviewed": true,
+      "fields": {
+        "question": "How does a depth distribution enforce monotone impressions, and why is the gate detached?",
+        "answer": "Reach at position k sums all depths at or beyond k, a shrinking set. The click branch uses the result as confidence, without updating the depth branch through the gate.",
+        "example": "Example: Depth probabilities 0.2, 0.3 and 0.5 yield reach 1, 0.8 and 0.5. A click-loss change sends no gradient through that gate to the depth logits."
+      }
+    },
+    "qa/recommendation:ice/listwise-budget-not-pointwise-click": {
+      "source_sha256": "fec7629eb93e77f90e215015604e1c44523dc256cb210b0390160d1a20b33d66",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is listwise KL not redundant with per-position conditional click BCE?",
+        "answer": "BCE calibrates absolute click probabilities at reached positions. KL compares relative click allocation after normalization. A uniform no-click target does not require each conditional CTR to equal 1/L.",
+        "example": "Example: Adding one to every logit leaves softmax unchanged but increases every sigmoid; the objectives respond differently to a shared shift."
+      }
+    },
+    "qa/recommendation:ice/prefix-label-and-probability-saturation": {
+      "source_sha256": "174a1864ee5277c8192b04a3a37387a3af951dadcb5c2556eb0605a7de58d1c6",
+      "reviewed": true,
+      "fields": {
+        "question": "What happens to unreached first positions and tiny tail probabilities when depth is 1 through L?",
+        "answer": "An unreached first position is outside this contract; reject it rather than invent a label. Compute log tails and heads with logcumsumexp before probability saturation.",
+        "example": "Example: Depth logits of 1000 and -1000 with position two observed imply a negative log probability near 2000, not a tail rounded to zero before taking its log."
+      }
+    },
+    "qa/recommendation:ured/discarded-score-is-not-click-label": {
+      "source_sha256": "c29f326e8ade14f3cd421de408ddae8582c682091126627b0495b60958b67c5e",
+      "reviewed": true,
+      "fields": {
+        "question": "Why recycle high-scored unshown items rather than inject cold items randomly?",
+        "answer": "Reuse a relevance signal the ranker already computed, then seek categories recently unseen by that user. This does not turn unshown items into positive clicks or replace quality filtering with indiscriminate exposure.",
+        "example": "Example: A highly scored photography video missed the last slate because of capacity. The pool may retain it, but no click was observed."
+      }
+    },
+    "qa/recommendation:ured/recency-dedup-before-novelty": {
+      "source_sha256": "9615090331639dd3aeb61b76a763709e8d1f61244f5d7c1b6dce720712ce1281",
+      "reviewed": true,
+      "fields": {
+        "question": "Which record survives when an item has a higher old score and a lower newer score?",
+        "answer": "Score selects entries within each session. User aggregation deduplicates by recency and caps the pool before novelty filtering. An older high score does not override the newer observation.",
+        "example": "Example: If a score of 0.9 three days ago and 0.7 yesterday both survive session selection, use yesterday's record and category."
+      }
+    },
+    "qa/recommendation:ured/discovery-not-global-coldness": {
+      "source_sha256": "ac2cbb72d95d26c882ec6c318a4c452b574263720a791a304f94d59b99340c94",
+      "reviewed": true,
+      "fields": {
+        "question": "Are a recently unseen category, an unseen item, and a globally cold item equivalent?",
+        "answer": "No. Discovery uses the user's recent category history, with separate item-level deduplication. Global popularity is neither filter. Random cold injection is a different intervention.",
+        "example": "Example: A popular photography video can represent an unseen category for one user, but prior exposure to that exact item can still exclude it."
+      }
+    },
+    "qa/recommendation:ured/no-future-exposure-join": {
+      "source_sha256": "a3b7a9b19407e0a054d7a38197b4637653db5ce9a22c2a436bd1321892febda3",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must both candidate and exposure streams stop at the replay cutoff?",
+        "answer": "Future scores inject unavailable items into past requests; future exposures incorrectly block categories that were unseen then. Use the same as_of and exclude events at the cutoff.",
+        "example": "Example: A photography impression in the afternoon cannot remove a candidate from the pool built at noon. It can inform the next day's rebuild."
+      }
+    }
+  }
+}

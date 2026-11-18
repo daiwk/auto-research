@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "batch": "2026-11-12-official-source-refresh",
+  "component": "sensorwm-planning",
+  "device": "cpu",
+  "seeds": [42, 43, 44],
+  "maximum_run_seconds": 10,
+  "pretrained_model_calls": 0,
+  "model_and_dataset_downloads": 0,
+  "api_calls": 0,
+  "full_experiments_executed": false,
+  "automatic_retry": false,
+  "scope": "Only Eq.55-56 ranking arithmetic on explicit nonclinical fixtures; no SensorWM, CHA estimator, candidate generator, medical advice or clinical validation."
+}

@@ -1,0 +1,25 @@
+{
+  "key": "bats",
+  "page": "docs/agent-research/2511.17006-bats/README.md",
+  "paper_url": "https://arxiv.org/abs/2511.17006",
+  "arxiv_id": "2511.17006",
+  "source_url": "https://arxiv.org/pdf/2511.17006v2#page=7",
+  "source_sha256": "33de6a06ad58c90e5b3c526af1b750c1fae16a38b9dd2fc3cc4f23bbdb340333",
+  "figure": "Figure 6",
+  "original_caption": "Overview of BATS: budget-aware planning, verification, repeated attempts and any-budget termination.",
+  "pdf_page": 7,
+  "crop_points": [
+    60,
+    395,
+    537,
+    720
+  ],
+  "extraction": "PyMuPDF 3x crop of original figure and caption; not redrawn",
+  "asset": "docs/agent-research/2511.17006-bats/assets/paper-figure-01.png",
+  "asset_sha256": "1d037089714e9345dcd33c543d4d17a52a99cb55b39bd2bca1dd5545029ece30",
+  "width": 1431,
+  "height": 975,
+  "visually_reviewed": true,
+  "copyright": "Original authors; educational reference with source attribution",
+  "error": ""
+}

@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/agent-research:reprobridge/private-evaluator-reference": {
+      "source_sha256": "6eeb6f8b08315457860d329f8d0527e5c632e20e3d4a307d8294e82d6fefdd06",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must reference scores and success thresholds stay hidden from an evaluated ReproBridge agent?",
+        "answer": "Independent reproduction should recover an experiment from its paper and code, not tune a result toward evaluator references. Five private reference observations and the two-sided interval belong to the evaluator. The local ActorTask contains only public experimental instructions.",
+        "example": "Teaching example: the public task requests a five-seed MSE mean; the evaluator privately knows a mean of 1 and an interval near [0.952,1.048]. Revealing that interval and allowing seed selection would undermine independent measurement."
+      }
+    },
+    "qa/agent-research:reprobridge/prediction-not-mean-ci": {
+      "source_sha256": "8a29c08e66aa1303bdd41253b0338d9094ac388db655c88d98e42b2a5ee66148",
+      "reviewed": true,
+      "fields": {
+        "question": "Why cannot sqrt(1+1/5) be replaced with sqrt(1/5)?",
+        "answer": "The former includes both uncertainty in the estimated reference center and variation of one new independent observation. The latter covers only uncertainty in the mean and incorrectly narrows compatibility for a new measurement. The paper also retains a floor of 1% of the absolute mean.",
+        "example": "Teaching example: with five reference observations and standard deviation s, the 95% half-width is t(0.975,4) times s times sqrt(1.2), not sqrt(0.2). Five references all equal to 100 still yield the floor interval [99,101]."
+      }
+    },
+    "qa/agent-research:reprobridge/compatibility-versus-integrity": {
+      "source_sha256": "03fd9515f431251e666450af053090c4750a038967dd078d554d6765ca2df1c9",
+      "reviewed": true,
+      "fields": {
+        "question": "What does independent auditing constrain beyond numerical agreement?",
+        "answer": "A matching score can come from copying, substituting the measurement instrument, altering formula operands, selecting outcomes after observation, or computing the wrong statistic. Invalidation requires localized evidence, material effect, and failed refutation. Numerical mismatch alone is not fabrication, and disputed findings are not automatically invalidating.",
+        "example": "Teaching example: a score of 1 is rejected if evidence establishes that the script copied an old JSON. A suspicion of a wrong statistic without supporting evidence remains uncertain rather than becoming a fabrication verdict."
+      }
+    },
+    "qa/agent-research:reprobridge/hashes-not-execution-proof": {
+      "source_sha256": "6ba33b8fcb53d64c0621199b9ac2006a0ae36e414f79c72b2dec6b67e735da80",
+      "reviewed": true,
+      "fields": {
+        "question": "Do matching script/output hashes and timestamps implement the paper's semantic Auditor?",
+        "answer": "No. They mechanically check pinned bytes, declared ordering, and the scalar's location. They cannot authenticate actual script execution, script semantics, or an executor-controlled clock. Independent external auditing must still provide semantic findings and refutation evidence.",
+        "example": "Teaching example: creating a fresh JSON and hashing its true bytes can pass byte checks even if no model trained. Accordingly, the module explicitly returns semantic_auditor_executed=false."
+      }
+    },
+    "qa/agent-research:lisa/broad-versus-local-memory": {
+      "source_sha256": "036877a5c437d148b247daa56e42911b08a2ddbbe7a6e3f046d874748e507779",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do broad policies and local rules require different gating in LiSA?",
+        "answer": "Broad policies claim reuse across contexts and need accumulated support before being surfaced. Local rules expose a narrow observed conflict rather than assert global reliability. Applying the same confidence threshold to a tiny mixed cluster would suppress the boundary information that local memory preserves.",
+        "example": "Teaching example: two similar cases concern sharing a public lecture versus a private meeting. A weak broad information-sharing rule is blocked, while two local cues explicitly distinguishing those contexts remain visible."
+      }
+    },
+    "qa/agent-research:lisa/beta-counts-not-empirical-rate": {
+      "source_sha256": "e5c84f04124403d97727cb7ee55328a92685179b15432136e6bf32e9b320cdd0",
+      "reviewed": true,
+      "fields": {
+        "question": "One and five flawless observations both have 100% empirical accuracy. Why does only the latter pass LiSA's default gate?",
+        "answer": "LiSA uses the 5% quantile of Beta(1+s,1+c), not empirical accuracy. The lower bounds are about 0.22361 after one support and 0.60696 after five. Only the latter exceeds 0.55, reflecting evidence volume as well as proportion.",
+        "example": "Teaching example: one correct outcome should not immediately let a new rule govern future decisions. A contradiction then lowers its Beta bound even if the rule's wording never changes."
+      }
+    },
+    "qa/agent-research:lisa/average-linkage-not-connectivity": {
+      "source_sha256": "838b636f1322ca8b07cc5cfd196cc2e6d36803fc57e5a72fa599122c423e5396",
+      "reviewed": true,
+      "fields": {
+        "question": "Why cannot connected components of similar cases replace average-linkage clustering?",
+        "answer": "Connectivity permits single-linkage chains: distant endpoints merge through intermediate cases. Average linkage checks mean inter-cluster distance and may prevent that merge, changing conflict regions and policy representatives.",
+        "example": "Teaching example: unit vectors at 0,30,60 degrees have neighboring cosine distance about 0.134, below 0.20. After one merge, the mean cross-cluster distance is about 0.317. The component retains two clusters rather than one connected component."
+      }
+    },
+    "qa/agent-research:lisa/external-induction-and-heldout": {
+      "source_sha256": "c1a62d8d0f21003371c46f105e9f6ab21465ab87fa4f5a48f30ea05777cd8274",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does an executed LiSA CPU kernel not justify safety macro-F1 or a full-reproduction claim?",
+        "answer": "Real LLM policy induction, semantic embeddings, and the final fixed guardrail are not connected. Synthetic inputs test Beta gating, clustering, and state contracts only. Adaptation receives failure reports; held-out scenarios and their labels cannot be used to construct memory.",
+        "example": "Teaching example: fixed (1,0) vectors can make public/private cases similar and verify ungated local cues, but cannot establish that a model understands privacy. Passing a held-out scenario group to refresh raises an error."
+      }
+    },
+    "qa/agent-research:alphaproof-code/trusted-spec-untrusted-proof": {
+      "source_sha256": "ad53901e5a151e5734b2e8a59752bd3a0ef41d793a32a27132547073d56e67da",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does AlphaProof Code trust specifications but treat AI-generated proofs as untrusted?",
+        "answer": "Lean can reject logical errors in a proof, so the proof-generating model need not be trusted. Its kernel only checks the supplied proposition; it cannot decide whether that proposition adequately captures a real security goal. Humans must still review specifications, dependencies, machine semantics, and cryptographic assumptions.",
+        "example": "Teaching example: a correct proof that a program returns an integer says nothing about whether an attacker can recover a key. Proof correctness and specification strength are distinct."
+      }
+    },
+    "qa/agent-research:alphaproof-code/transitive-specification-gate": {
+      "source_sha256": "501010807b971e6db2216bfd816f4680bb10c80a1a2cd52c39fc2305276913a2",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is comparing only the top-level theorem text insufficient?",
+        "answer": "An agent could preserve a theorem's name and surface statement while weakening a predicate or definition it depends on. The framework pins an approved specification outside agents' write access and checks the theorem, transitive definitions, axioms, and kernel replay. Specification amendments require approval.",
+        "example": "Teaching example: the theorem still says secure(program), but secure has become the constant True predicate. Lean may accept the proof; comparison with the held-out approved dependencies detects the changed goal."
+      }
+    },
+    "qa/agent-research:alphaproof-code/kernel-proof-versus-numerical-audit": {
+      "source_sha256": "0804f33cfb46fefcb64e1decb7ac1aa68b5fb1c6ee83b4d1f2c05a46a6a55f03",
+      "reviewed": true,
+      "fields": {
+        "question": "Can AlphaProof Code's formal verification substitute for ReproBridge's compatibility and execution audit, or vice versa?",
+        "answer": "No. Formal verification establishes logical properties under specifications and machine models. ReproBridge checks whether the intended experiment was executed, its measurement is compatible, and materially invalidating evidence exists. Numerical agreement does not prove security; a kernel-checked theorem does not prove that a specified ML experiment ran.",
+        "example": "Teaching example: matching a paper's MSE cannot establish an encryption implementation's forward secrecy. Conversely, a valid Lean theorem does not establish that an experiment trained five seeds."
+      }
+    },
+    "qa/agent-research:alphaproof-code/no-regex-proof-substitution": {
+      "source_sha256": "4b33be98bbe1b22f881011bbb8ed629216b5a17cd3b1af2457b4098a64e31292",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not claim a cheap reproduction from the absence of sorry tokens or a few toy theorems?",
+        "answer": "Such checks do not execute the paper's formal semantics, approved-specification dependency comparison, or fresh-kernel replay, and cannot establish Signal's target properties. Upstream full builds and comparator checks require hours, memory, and Linux tooling. This pass records a source-backed cost deferral, not executable capability or invented metrics.",
+        "example": "Teaching example: theorem result : True := by trivial may be valid Lean but concerns neither Signal's handshake, ratchet, nor machine code. String checks on it do not constitute security validation."
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:e-means/ema-counts-and-sums": {
+      "source_sha256": "4875d9b7742aff93453159e342810583249a83cf2d6f49551f9609234c5e9a0d",
+      "reviewed": true,
+      "fields": {
+        "question": "Why not apply an EMA directly to each batch centroid?",
+        "answer": "The number of points assigned to a cluster changes across batches. Maintaining counts and vector sums separately and taking their ratio weights observations by their actual cluster mass. An EMA of batch means would give a batch with very few points undue influence.",
+        "example": "Teaching example: One batch contributes nine zeros; the next contributes one ten. Ignoring time decay, the point-weighted mean is 1, whereas the mean of the batch means is 5."
+      }
+    },
+    "qa/foundation-models:e-means/weak-slot-split": {
+      "source_sha256": "f6d4a2c4cf0f1e90a84d3415516a9bff87419aa8b648371d1909821ad165e9eb",
+      "reviewed": true,
+      "fields": {
+        "question": "Why split an active donor instead of resampling from the current batch to revive a weak cluster?",
+        "answer": "Mass-weighted sampling is more likely to give representation capacity to a cluster with many observations. Opposite multiplicative perturbations produce two nearby but distinct centers for future assignments. The original donor mass is halved, and the weak slot's old state is overwritten.",
+        "example": "Teaching example: A donor with mass 8 and center (2, 4) becomes two children of mass 4 whose centers move slightly in opposite directions on alternating coordinates."
+      }
+    },
+    "qa/foundation-models:e-means/closing-mean-limits": {
+      "source_sha256": "8fffc0937c67d4125cb9689c062ec11cf61998915a2f6fe72d830d645cf93815",
+      "reviewed": true,
+      "fields": {
+        "question": "The closing mean lowers fixed-label MSE. Why does this not mean e-means always beats Lloyd?",
+        "answer": "The mean is optimal only for the same training points and historical assignments. Reassignment, initialization, the held-out distribution, and the comparator can change the error. The authors distinguish finalizers targeting training and test error.",
+        "example": "In local seed 42, fixed-label error falls, but held-out MSE is 1.87753 for e-means versus 1.84352 for Lloyd."
+      }
+    },
+    "qa/foundation-models:e-means/l2-versus-system-throughput": {
+      "source_sha256": "f38d0b2ec93bfdb7ad7b1714b4cf6cb1a0f2771d066667ce98a18fadb3790914",
+      "reviewed": true,
+      "fields": {
+        "question": "Can an exact-L2 CPU clustering check stand in for the paper's GPU evaluation?",
+        "answer": "No. A small check verifies sufficient statistics, revival, and final means independently. It does not run the large-scale low-precision or IVF assignment backends and provides neither a speed measurement nor a retrieval workload. A systems comparison requires wall-clock measurements at matched error on the relevant data and hardware.",
+        "example": "The local run uses 256 training and 64 held-out vectors per seed. The authors' DINO10B setting has ten billion vectors and about 16.78 million centers."
+      }
+    }
+  }
+}

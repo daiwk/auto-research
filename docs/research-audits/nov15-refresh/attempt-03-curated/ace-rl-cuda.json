@@ -1,0 +1,143 @@
+{
+  "schema_version": 2,
+  "method": "ace-rl",
+  "manifest_ref": "agent-research:ace-rl",
+  "dataset": {
+    "id": "synthetic:nov15-ace-rl-component-v1",
+    "kind": "explicit_mechanism_or_protocol_fixtures",
+    "revision": "sha256:5ed0badd58424fdf73120fefb431a20e70db7fbcae8bdeaec18b6697e576014a",
+    "public_capability_benchmark": false,
+    "source": "Seeded tensors or explicit evaluator/control examples; no pretrained output, public dataset or model capability score"
+  },
+  "seed": [
+    42,
+    43,
+    44
+  ],
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "per_seed": [
+    {
+      "seed": 42,
+      "execution_device": "cuda",
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "actual_tensor_device": true,
+        "task_actor_group_cross_seed": true,
+        "fractional_singleton_outcome_update": true,
+        "range_filter_drops_singleton": true,
+        "third_task_encounter_resets": true,
+        "admissible_only_reflection_mean": true,
+        "generated_tokens_only": true,
+        "evaluator_and_old_policy_detached": true,
+        "token_not_output_mean": true
+      },
+      "metrics": {
+        "joint_policy_loss": -0.3333333432674408,
+        "retained_role_outputs": 3,
+        "reflection_value": 0.5
+      },
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    },
+    {
+      "seed": 43,
+      "execution_device": "cuda",
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "actual_tensor_device": true,
+        "task_actor_group_cross_seed": true,
+        "fractional_singleton_outcome_update": true,
+        "range_filter_drops_singleton": true,
+        "third_task_encounter_resets": true,
+        "admissible_only_reflection_mean": true,
+        "generated_tokens_only": true,
+        "evaluator_and_old_policy_detached": true,
+        "token_not_output_mean": true
+      },
+      "metrics": {
+        "joint_policy_loss": -0.3333333432674408,
+        "retained_role_outputs": 3,
+        "reflection_value": 0.5
+      },
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    },
+    {
+      "seed": 44,
+      "execution_device": "cuda",
+      "diagnostic_only": true,
+      "evaluation_tier": "l1_mechanism",
+      "checks": {
+        "actual_tensor_device": true,
+        "task_actor_group_cross_seed": true,
+        "fractional_singleton_outcome_update": true,
+        "range_filter_drops_singleton": true,
+        "third_task_encounter_resets": true,
+        "admissible_only_reflection_mean": true,
+        "generated_tokens_only": true,
+        "evaluator_and_old_policy_detached": true,
+        "token_not_output_mean": true
+      },
+      "metrics": {
+        "joint_policy_loss": -0.3333333432674408,
+        "retained_role_outputs": 3,
+        "reflection_value": 0.5
+      },
+      "execution_accelerator": "NVIDIA A100-SXM4-80GB"
+    }
+  ],
+  "metrics": {
+    "joint_policy_loss": -0.3333333432674408,
+    "reflection_value": 0.5,
+    "retained_role_outputs": 3.0
+  },
+  "diagnostic_only": true,
+  "fixture_demo": true,
+  "evaluation_tier": "l1_mechanism",
+  "formal_comparison": false,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "evaluation_protocol": {
+    "tier": "l1_mechanism",
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "formal_comparison": false,
+    "claim_policy": "Exact operator arithmetic and interface checks only; not a complete model, agent or benchmark comparison"
+  },
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "provenance": {
+    "commit": "7112a7d0c9e750ea1329652cb2684b2b10b4eac9",
+    "accelerator": "NVIDIA A100-SXM4-80GB",
+    "artifact_path": "docs/agent-research/2611.16409-ace-rl/metrics/component-cuda-seeds42-44.json",
+    "executed_source_sha256": {
+      "scripts/run_nov15_refresh_components.py": "56da489e6c444797e15dd3c45646728338d284a15ec7098aecf7c930b9eeb0fc",
+      "scripts/oct18_frozen_sources.py": "da08355049c1f6b5184ee659643c9be9decedf2041ef6a87a3dce2e4582e385a",
+      "docs/research-audits/nov15-refresh/preflight.json": "b00a6b6009bd08644faac74369290bda2bce0dbafc575e7c6c73d545e984c57e",
+      "src/auto_research/reproductions/resid_components.py": "50b892b455584689ad3eb9b3ee06619866d16a6c430a28717fdcbc2eab8a4ba0",
+      "src/auto_research/reproductions/trigen_components.py": "08332bbccaa57660d1d65d8c404ac2fe0eacd41f2f34698d7e868ec8d82f1fd7",
+      "src/auto_research/reproductions/kuairec_v2_protocol.py": "150fa6cd3fcd5bb9689039de6ed961919c074878915735d1570d713101e07cb1",
+      "src/auto_research/foundation_models/unbundling_vision.py": "e981ab44a469956cd605b08eaf3ec91e24420377f9dc438febd993d3a8a5c727",
+      "src/auto_research/foundation_models/archspace.py": "551df18833187977729f483c640c5abcb9d6c0ca8148c5e8a5fa24efcf5f5226",
+      "src/auto_research/foundation_models/d_jepa.py": "35b44d460ee06ab4bfb0a9d7ac4b8d2756129fb034cef1fa3c8220b30ef333cc",
+      "src/auto_research/foundation_models/duojepa.py": "ca39777e81e3e2c24c39a80cc780ac583f2edc8c55b73345203487eb3d096184",
+      "src/auto_research/post_training/lgpo.py": "00e2ea759a90fc0a8ddc372e6b80f38787a9454872fb828d6b4ec03fa0b96b4e",
+      "src/auto_research/post_training/safety_budget_cgrpo.py": "fe82bfc675816a8d5dfa7b11e45472c5b76afe2559de231b0119f56c43f0e0cf",
+      "src/auto_research/post_training/bait_reward_defense.py": "e913df759855be9e23973a5a47c93ea0b9747763a0b58c2227b58a6129195c44",
+      "src/auto_research/agent_research/coremem.py": "4ba13422f9a3b45659193ac8d881b3e50c977d015fac11e5d49188ff22ab9567",
+      "src/auto_research/agent_research/caplite.py": "8bc0345bb5c046cca59e68769d71eb2463e3f9127ac5e60a1619d837a7311f73",
+      "src/auto_research/agent_research/ace_rl.py": "5ed0badd58424fdf73120fefb431a20e70db7fbcae8bdeaec18b6697e576014a"
+    },
+    "dataset_fingerprint": "sha256:037f88bd3d2cbb24c341e467c81951db89b2d0c45385a5644bad90160450e986",
+    "raw_runner_artifact_sha256": "a47312b3201251a5b73feb5a7b5ba66fb6628950abde3ea361abeb3c065bd69f"
+  }
+}

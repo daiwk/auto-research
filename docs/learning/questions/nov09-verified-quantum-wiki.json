@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "agent-research:verified-quantum-wiki": {
+      "questions": [
+        {
+          "id": "frozen-specification-before-sharing",
+          "level": "basics",
+          "question": "团队说自己的 Lean 文件编译通过，为什么还不能直接写入共享 wiki？",
+          "answer": "团队可修改自己的工作区，可能连定理、依赖定义或允许公理一起改掉。本篇将提交放到独立干净沙箱，用 Comparator 对照冻结规范，确认证明没有偷换问题且资源定理等于申报成本，再决定是否合并。",
+          "example": "教学例：原题要求所有输入满足性质，团队把定理改成只对零输入成立。文件可能编译，但 target_theorems_match 应为 false，不能因成本下降 90% 就接纳。",
+          "source_sections": ["背景与主要改动", "数据协议与代码映射"],
+          "added": "2026-11-09"
+        },
+        {
+          "id": "two-admission-branches",
+          "level": "mechanism",
+          "question": "默认 5% 成本门槛与 20% 代码缩短是 AND 还是 OR？",
+          "answer": "通过外部重验证是共同前提；之后两个分支是 OR：成本至少下降 5%，或者代码至少缩短 20% 且成本严格下降。第二个分支不能只缩短代码而维持原成本。两项还必须比较同一冻结规范与成本口径。",
+          "example": "教学例：从成本 100、长度 100 出发，(95,120) 可经第一分支接纳，(99,80) 可经第二分支接纳，(100,1) 仍拒绝。代码长度的单位由调用方固定，论文未指定字节或行。",
+          "source_sections": ["核心公式", "结果、负控与边界"],
+          "added": "2026-11-09"
+        },
+        {
+          "id": "proof-not-benchmark-selection",
+          "level": "comparison",
+          "question": "这套 wiki 接纳规则与按开发集准确率选择推理策略有什么根本区别？",
+          "answer": "开发集策略选择比较有限样本的经验效果，需要测试隔离及不确定性分析；本篇对冻结形式规格证明正确性和成本后，再筛选足够大的改善。证明可以超出可模拟样本，但不能证明物理建模假设正确，也不能把事后协作归因变成因果实验。",
+          "example": "教学例：一个策略在 95/100 道开发题答对不能证明所有输入正确；一个 QHL 定理证明全体满足前置条件的状态正确，却可能沿用遗漏某类门成本的规格。两者需要不同的外部审查。",
+          "source_sections": ["背景与主要改动", "论文离线与线上效果"],
+          "added": "2026-11-09"
+        },
+        {
+          "id": "typed-receipt-is-not-proof",
+          "level": "implementation",
+          "question": "本地构造 ExternalComparatorResult 并通过 admission，可以说量子程序已正式验证吗？",
+          "answer": "不可以。它是可信外部验证器的接口，既不运行 Lean 也不鉴别凭据真实性。真实宿主先完成独立验证并认证来源，才可填入结果。CPU 夹具只测试绑定一致性、失败拒绝和阈值；实际 Lean 证明数为零。",
+          "example": "教学例：复制旧证明凭据给新 artifact，即便所有 flags 为 true，也因摘要不匹配拒绝；若恶意调用方同时伪造摘要和 flags，本组件无法识别，必须由外部可信边界防止。",
+          "source_sections": ["数据协议与代码映射", "结果、负控与边界", "高成本完整实验"],
+          "added": "2026-11-09"
+        }
+      ]
+    }
+  }
+}

@@ -59,6 +59,9 @@ def test_later_real_cost_closure_stays_terminal_and_catalog_is_authoritative(tmp
     {"source_provenance": [{"source_url": "https://github.com/facebookresearch/project"}]},
     {"source_provenance": [{"source_url": "https://github.com/facebook/meta-encoder-eval"}]},
     {"source_provenance": [{"source_url": "https://github.com/google/project"}]},
+    {"source_provenance": [{"source_url": "https://github.com/Google-Health/consumer-health-research"}]},
+    {"source_provenance": [{"source_url": "https://www.research.google/blog/sensor-world-model/"}]},
+    {"source_provenance": [{"source_url": "https://research.meta.ai/"}]},
     {"first_author_affiliation": "Google DeepMind"},
     {"priority_review_required": True},
 ])
@@ -69,9 +72,28 @@ def test_official_priority_source_is_not_lost_without_an_org_query(signal):
 
 
 @pytest.mark.parametrize("url", [
+    "https://www.research.google/blog/sensor-world-model/",
+    "https://research.meta.ai/research/",
+])
+def test_current_official_domains_reopen_old_p2_selection(url):
+    row = classify_candidate("foundation-model", _candidate(
+        repository_status="selection-reviewed", priority_review_required=False,
+        source_provenance=[{"source_url": url}],
+    ))
+    assert row["review_bucket"] == "priority-fulltext-review"
+    assert row["full_text_review_required"] is True
+    assert "reopens" in row["review_reason"]
+
+
+@pytest.mark.parametrize("url", [
     "https://github.com.evil.invalid/google-research/harness2",
     "https://github.com/not-google-research/harness2",
+    "https://github.com/not-google-health/consumer-health-research",
     "https://research.google.evil.invalid/pubs/",
+    "https://www.research.google.evil.invalid/blog/",
+    "https://research.meta.ai.evil.invalid/",
+    "https://research-meta.ai/",
+    "https://research.meta.ai@evil.invalid/",
 ])
 def test_lookalike_domains_and_meta_learning_are_not_priority_affiliations(url):
     row = classify_candidate("agent", _candidate(

@@ -57,7 +57,8 @@
         "recommendation:toolrec",
         "recommendation:transretrieval",
         "recommendation:youtube-dnn",
-        "recommendation:zorro"
+        "recommendation:zorro",
+        "recommendation:ured"
       ]
     },
     {
@@ -314,7 +315,10 @@
         "recommendation:pailitao-mmsearch2",
         "recommendation:pinger",
         "recommendation:reusegr",
-        "recommendation:spade-local-search"
+        "recommendation:spade-local-search",
+        "recommendation:resid",
+        "recommendation:trigen",
+        "recommendation:kuairec-v2-protocol"
       ]
     },
     {
@@ -428,7 +432,8 @@
         "recommendation:uame",
         "recommendation:youtube-freshness",
         "recommendation:pinterest-rlbp",
-        "recommendation:onetrans-gsr"
+        "recommendation:onetrans-gsr",
+        "recommendation:ice"
       ]
     },
     {

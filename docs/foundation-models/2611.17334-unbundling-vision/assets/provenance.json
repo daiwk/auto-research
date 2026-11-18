@@ -1,0 +1,19 @@
+{
+  "paper_url": "https://arxiv.org/abs/2611.17334v1",
+  "source_url": "https://arxiv.org/pdf/2611.17334v1#page=1",
+  "figure": "Figure 1",
+  "source_format": "PDF rendered crop including original caption",
+  "image": "paper-figure-01.png",
+  "image_sha256": "6ff27260fbe0af656e917aa2739c62cc0f5a52e206299ec1215900d751051b4e",
+  "source_html_sha256": "cb94aced7fd35701c6885bbb307d66a07ffab31fdc841364c82a99e07fcb10de",
+  "pdf_clip_points": [
+    65,
+    480,
+    565,
+    681
+  ],
+  "render_scale": 2,
+  "description": "Original scientific figure, no redraw or scientific-content edits; not a locally executed full system.",
+  "copyright": "Copyright remains with the paper's authors; CC BY 4.0",
+  "visually_verified": true
+}

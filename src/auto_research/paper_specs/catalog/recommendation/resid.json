@@ -1,0 +1,66 @@
+{
+  "domain": "recommendation",
+  "reviewed_version": "v1",
+  "adapter": null,
+  "intake_class": "new_first_publication",
+  "diagnostic_only": true,
+  "promotion_eligible": false,
+  "evolve_integrated": false,
+  "gpu_validation_passed": false,
+  "full_experiment_status": "not_reproduced_high_cost",
+  "full_experiment_review_done": true,
+  "review_resolution": "not_reproduced_high_cost",
+  "review_done": true,
+  "automatic_retry": false,
+  "automatic_implementation_queue": false,
+  "key": "resid",
+  "title": "ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through item Reachability",
+  "paper_url": "https://arxiv.org/abs/2611.16404v1",
+  "reviewed_version_url": "https://arxiv.org/html/2611.16404v1",
+  "detail_path": "recommendation-components/2611.16404-resid/README.md",
+  "topic": [
+    "生成式推荐与语义ID",
+    "长尾可达性与约束解码"
+  ],
+  "browse_company": "Alibaba",
+  "browse_topic": [
+    "生成式推荐与语义ID",
+    "生成式召回与长尾检索"
+  ],
+  "first_author": "Muyu Zou",
+  "first_author_affiliation": "Alibaba International Digital Commerce Group",
+  "published": "2026-11-12",
+  "published_at": "2026-11-12T07:12:15Z",
+  "code": "https://github.com/Gabriel-reina/ReSID",
+  "code_status": "原作者公开Apache-2.0仓库已核；工业数据与生产服务未开放。",
+  "code_license": "Apache-2.0",
+  "upstream_revision": "bb5bdc94707f43223eb1c1cca067534b42be9117",
+  "priority": "P1",
+  "priority_reason": "正文§5.7有量化生产user-randomized A/B；可分离独立低成本量化/搜索组件。",
+  "implementation_status": "component_only",
+  "evaluation_tier": "l1_mechanism",
+  "local_operator": "auto_research.reproductions.resid_components.guided_beam",
+  "local_command": "PYTHONPATH=src python -c 'from auto_research.reproductions.resid_components import diagnostic; print(diagnostic(42))'",
+  "requires_gpu_validation": false,
+  "online_ab": [
+    {
+      "product": "e-commerce advertising retrieval",
+      "metric": "advertising revenue",
+      "lift_percent": 1.3,
+      "traffic": "2026-07-01至07-12,user-randomized15%/bucket; TIGER-style control,other retrieval/downstream ranking fixed",
+      "source_url": "https://arxiv.org/html/2611.16404v1#S5.SS7",
+      "source_location": "§5.7; CTR+1.1%,GMV+0.8%,tail exposure+4.0%,allp<0.05;10.3msmean andJulyfullproduction"
+    }
+  ],
+  "cost_assessment": {
+    "source_url": "https://arxiv.org/html/2611.16404v1",
+    "source_location": "§4–5、Appendix B.3",
+    "model_scale": "learned item MLP/codebooks/decoder、Transformer recommender、user-content projection",
+    "data_scale": "公开Office与私有Industrial/In-house，多基线、长尾/全体、生产A/B",
+    "paper_configuration": "完整quantizer/推荐训练、beam guidance/cache、200uniqueitems服务评估；私有生产平台",
+    "estimated_cost_basis": "完整工业私有数据/训练/生产服务非单卡短时可复刻；未估报本地wallclock",
+    "available_resource": "本地Mac或单张NVIDIA A100/A30",
+    "decision": "完整工业实验成本过高，不复现（审查DONE）；仅CPU独立量化/guidedbeam/partialmatching，不下载、不试训、不自动重试"
+  },
+  "summary": "用独立子空间长parallel SID避免残差链误差，完整词表log-prior校准配合prefix log-mean-exp势能引导beam，再按Hamming partial matching排序。本地只实现冻结输入上的有限CPU核，不训练推荐器。"
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "reviewed_on": "2026-11-15",
+  "figures": [
+    {
+      "file": "paper-figure-01.png",
+      "paper_id": "2611.16395",
+      "version": "v1",
+      "figure": 2,
+      "paper_url": "https://arxiv.org/abs/2611.16395v1",
+      "source_url": "https://arxiv.org/html/2611.16395v1/trigen.png",
+      "source_kind": "fixed_v1_original_png",
+      "source_image_sha256": "ac3137ada6f17e40b24fd78196fa14c94c99462bcd883819c475d287d0fa06e3",
+      "image_sha256": "ac3137ada6f17e40b24fd78196fa14c94c99462bcd883819c475d287d0fa06e3",
+      "caption_included": false,
+      "scientific_content_modified": false,
+      "visual_review_done": true,
+      "attribution": "Copyright belongs to original authors; original source figure rendered/copied for research explanation, not local experimental evidence.",
+      "license": "See fixed arXiv source; no new license granted by this repository."
+    }
+  ]
+}

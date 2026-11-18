@@ -1,0 +1,221 @@
+{
+  "schema_version": 1,
+  "units": {
+    "qa/foundation-models:qe-length-normalization/quality-controlled-prefixes": {
+      "source_sha256": "1ed005d187d18d231900d0208dddcae2f3c318d19b93b44e2cfc10705565eede",
+      "reviewed": true,
+      "fields": {
+        "question": "Why is comparing arbitrary long and short translations insufficient to establish QE length bias?",
+        "answer": "Quality, domain and difficulty may differ. The paper concatenates consecutive gold segments from one document and varies prefix length, controlling assumed error-free quality and domain before measuring score drift. This still depends on the gold translations being approximately error-free.",
+        "example": "Teaching example: a score drop after concatenating correct paragraphs of one article is a different control from comparing an easy advertisement with a difficult legal document."
+      }
+    },
+    "qa/foundation-models:qe-length-normalization/training-density-not-frozen-score": {
+      "source_sha256": "7e99f35e2e0348e7b01d14dc616698d076e2ac5e264cc31f321d558099a452ac",
+      "reviewed": true,
+      "fields": {
+        "question": "Does dividing an existing MetricX score by length reproduce training-time normalization?",
+        "answer": "No. The source changes labels to R/|h|, trains a density predictor, and multiplies its output by the matching length. Post-processing a frozen model does not change its training distribution. The local core transforms targets and restores outputs without claiming a debiased model.",
+        "example": "Teaching example: rating−5 gives targets−0.5 and−0.25 for lengths10 and20. Restoring both yields−5, but this identity does not establish learned density prediction."
+      }
+    },
+    "qa/foundation-models:qe-length-normalization/density-versus-temperature": {
+      "source_sha256": "70ff638caa0470c64a918b6309ae2fa29b5e17d394ad8710ecb0545519d7620a",
+      "reviewed": true,
+      "fields": {
+        "question": "Does density-target training solve the same problem as validation-fitted temperature scaling?",
+        "answer": "No. Density training changes the relationship between supervision and length. Temperature scaling changes the sharpness of existing classification probabilities, generally without changing the predicted class. Neither substitutes for the other's model and data requirements.",
+        "example": "Teaching example: dividing binary logits by2 softens confidence but does not train a translation-error score per unit length."
+      }
+    },
+    "qa/foundation-models:qe-length-normalization/tokenize-concatenated-prefixes": {
+      "source_sha256": "737437b8c40ae874ce6f7346048d21c0e56e62460805b442a78daebe158c7ca5",
+      "reviewed": true,
+      "fields": {
+        "question": "Why must the500-token group filter use tokenized concatenated prefixes rather than sums of independent segments?",
+        "answer": "Tokenization depends on boundaries. The interface requires actual counts for the five concatenated prefixes and rejects the whole group if the fifth exceeds500. Keeping a partial group changes the matched control. Density training and restoration must also use one length unit.",
+        "example": "Teaching example: five separately counted100-token segments need not concatenate to exactly500. If the fifth prefix measures501, all five are rejected."
+      }
+    },
+    "qa/foundation-models:cultural-cue/elicitation-versus-missing-knowledge": {
+      "source_sha256": "9e691a9e2dd8e760a95f2570fbf739be51aa152005db3905adcc74160a7c3982",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does CuE intervene on latent cultural features rather than only adding a country prompt?",
+        "answer": "It distinguishes missing knowledge from failed elicitation and constructs a white-box intervention using SAE features. Prompts and feature steering can complement each other. A country prototype is only a group proxy, not every individual's culture.",
+        "example": "Teaching example: a model may know a rare regional dish yet always suggest common dishes without a location. Steering tests elicitation of represented knowledge, not cultural safety."
+      }
+    },
+    "qa/foundation-models:cultural-cue/cumulative-information-not-count": {
+      "source_sha256": "8ae8c645addbd1137acd5b5bfd61d4572357aa4ffc0c9d9f50c3a68ce4b96ea0",
+      "reviewed": true,
+      "fields": {
+        "question": "Does rho=0.1 mean retaining10% of SAE features?",
+        "answer": "No. Section2.3 retains the smallest descending-MI set whose cumulative information reaches10% of total MI. Concentrated information can require very few features. A fixed feature-count fraction changes the method.",
+        "example": "Teaching example: MI values0.97,0.01,0.01,0.01 require only the first feature at rho0.5, not half the dimensions."
+      }
+    },
+    "qa/foundation-models:cultural-cue/cue-versus-detectorscope": {
+      "source_sha256": "f917f507d708ad931437afcbe9315892ecfa3196ffb1e38a42a5fc8c9dd21a61",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are CuE and DetectorScope different despite both max-pooling SAE features?",
+        "answer": "Pooling is only a shared representation step. CuE selects feature-country information and constructs residual interventions from prototype differences. DetectorScope uses description-validation masks and a sparse detection head with attributions. A steering direction is not a detector and a head weight is not a cultural intervention.",
+        "example": "Teaching example: a food feature may distinguish countries without distinguishing human from AI text. A large detection contribution does not establish culturally faithful generation when steering it."
+      }
+    },
+    "qa/foundation-models:cultural-cue/country-average-not-example-average": {
+      "source_sha256": "c3d90d132de3f156aad0271dff75b325744ae41b496dc8678e84272d87d64c46",
+      "reviewed": true,
+      "fields": {
+        "question": "Why average other country prototypes equally rather than pool all other examples?",
+        "answer": "The formula compares the target prototype with the mean of other country prototypes, not a sample-count-weighted baseline. Pooling all assertions overweights countries with more examples. Decoder rows must also match the selected layer/features.",
+        "example": "Teaching example: B has two values2 and C one value0. The other-country baseline is1, not4/3. A target value4 therefore yields difference3, not8/3."
+      }
+    },
+    "qa/foundation-models:decoding-constrained-beam/risk-mass-not-greedy-hit": {
+      "source_sha256": "db10c5a997c5610db4f2e93b549f3c3d43b6187d58728c8db27c98147fb238c4",
+      "reviewed": true,
+      "fields": {
+        "question": "Why does a failed greedy verbatim match not imply zero near-verbatim extraction risk?",
+        "answer": "Greedy examines one locally preferred path. Multiple nearby variants can have substantial combined mass. CBS enumerates only a subset, so its sum is a deterministic lower bound rather than an unbiased estimate of all risk.",
+        "example": "Teaching example: two punctuation variants each have probability0.08. A different greedy path does not erase their known combined mass0.16."
+      }
+    },
+    "qa/foundation-models:decoding-constrained-beam/topk-distribution-and-final-width": {
+      "source_sha256": "e238a57b586c95b18caa34bf8e967d271cd2ad20555222aa3059910a1a94dec0",
+      "reviewed": true,
+      "fields": {
+        "question": "Why normalize inside top-k and avoid pruning the final expansion back to B?",
+        "answer": "The audit targets the actual top-k decoding distribution, not the full softmax. Path probabilities use its conditionals. Final pruning would discard already enumerated valid mass, so the algorithm retains up toB×k finals. Surviving paths are not renormalized after beam pruning.",
+        "example": "Teaching example: probabilities0.5,0.3,0.2 become0.625,0.375 under top2. Even with B1, both final expansions are retained."
+      }
+    },
+    "qa/foundation-models:decoding-constrained-beam/logprob-bound-versus-detector": {
+      "source_sha256": "c44b9c415bf340201fe29bb35b4906d4154703b81f2641443fa126c4e7596e0a",
+      "reviewed": true,
+      "fields": {
+        "question": "Can a CBS probability lower bound replace a DetectorScope AI-authorship score?",
+        "answer": "No. CBS uses a target suffix and model conditionals to bound near-target generation mass. DetectorScope predicts source from SAE text features. High generatability is not proof of authorship, and the statistics have different targets and labels.",
+        "example": "Teaching example: a common public sentence may have high model probability while being human-written. An authorship score likewise does not establish extraction probability for a training passage."
+      }
+    },
+    "qa/foundation-models:decoding-constrained-beam/final-levenshtein-cell": {
+      "source_sha256": "3a3ce917b790e7a110f2b2655fd6cd5caf9d6a2e5f51515738e91e72c62a7a17",
+      "reviewed": true,
+      "fields": {
+        "question": "Why check D[T,T] at the end even if the Levenshtein row minimum stays within epsilon?",
+        "answer": "The row minimum permits low-cost alignment to some target prefix, a necessary condition for intermediate viability. Final acceptance must compare the full target. Treating survival as success can count paths that do not match its end. Banked mass is only potential mass.",
+        "example": "Teaching example: closeness to prefix a does not establish closeness to full target abc. Exhaustive tests check LB≤p≤LB+bank and exact recovery with a wide beam."
+      }
+    },
+    "qa/foundation-models:storyscope/narrative-not-surface": {
+      "source_sha256": "4ea28e7eb052db34d15a1a18866fe3e98e116e92c1b6837b2259ded9b2473bcc",
+      "reviewed": true,
+      "fields": {
+        "question": "How do StoryScope narrative features differ from counts of stereotypical AI words?",
+        "answer": "They describe discourse-level choices such as thematic explicitness, agency and temporal structure, derived through matched-prompt comparison and LLM feature discovery/assignment. Keyword counts do not execute that semantic pipeline.",
+        "example": "Teaching example: two stories can use different vocabulary yet both explicitly state a moral at the end. The narrative choice is not one word's presence."
+      }
+    },
+    "qa/foundation-models:storyscope/stable-core-conjunction": {
+      "source_sha256": "ed062d11b3c93728d7e74f51bdf283f8a0e450705c7b1d971d273b7639638498",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can the highest-SHAP feature still fail cross-model core selection?",
+        "answer": "Core membership also requires stability, null significance, top25 frequency, a human–AI mean gap and limited spread across all five AI models. A source-specific signal can be a fingerprint rather than a core. The local gate is conjunctive, not a weighted score.",
+        "example": "Teaching example: five AI means0.8,0.8,0.8,0.8,0 have spread0.8, exceeding0.35 even if SHAP is maximal."
+      }
+    },
+    "qa/foundation-models:storyscope/storyscope-versus-detectorscope": {
+      "source_sha256": "6f797ef084b6e38240c9bf87bb04fcac72b117c0b5d61ba057125d6361d92f48",
+      "reviewed": true,
+      "fields": {
+        "question": "Where do StoryScope and DetectorScope obtain interpretability, and are their features interchangeable?",
+        "answer": "StoryScope uses externally assigned semantic narrative questions with classifier/SHAP analysis. DetectorScope uses internal SAE features and an additive sparse head. Their explanation units, costs and errors differ; random SAE columns cannot replace uncomputed narrative assignments.",
+        "example": "Teaching example: deciding whether an ending states its theme requires semantic reading. The contribution of a numbered SAE column is a separate observation."
+      }
+    },
+    "qa/foundation-models:storyscope/prompt-block-bootstrap": {
+      "source_sha256": "7fa5408cb75d426a0d75b05f0fa513131d768db1803c2ff4eedbb1c614dedd01",
+      "reviewed": true,
+      "fields": {
+        "question": "Why bootstrap all six source stories sharing a prompt together?",
+        "answer": "They share a writing condition rather than forming six independent arbitrary rows. Split by prompt first, then resample prompt blocks and expand all sources. Story-level sampling or cross-split prompt overlap can inflate apparent independent evidence.",
+        "example": "Teaching example: selecting prompt A twice includes its human story and all five AI stories twice, not only whichever versions favor a stable feature."
+      }
+    },
+    "qa/post-training:behavioral-canaries/behavior-not-verbatim-memory": {
+      "source_sha256": "77321e8b83cb6ff1a8128c35da8f906cbe75b18d7a6e1fdac9fd67974dfd4fcd",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use weak behavioral canaries instead of waiting for verbatim private-document reproduction?",
+        "answer": "RL may alter conditional stylistic preferences without memorizing facts. Trigger-linked feedback can leave a small held-out probability shift, providing distributional influence evidence rather than definitive proof of misuse of one document.",
+        "example": "Teaching example: feedback slightly favors a punctuation pattern under a trigger. Its later conditional logprob can shift without the model reciting document text."
+      }
+    },
+    "qa/post-training:behavioral-canaries/sequence-sum-and-pairing": {
+      "source_sha256": "1592a6b0e01dca4ea90c5ee27b6e5d78a766deb1424fed7b77f0b3d72b7df200",
+      "reviewed": true,
+      "fields": {
+        "question": "Why use paired sequence log probabilities rather than a token-average score?",
+        "answer": "The statistic is the log probability of the entire autoregressive canary, a sum over tokens. Question, answer prefix and target match across views. Averaging changes length weighting; free-generation frequency is a different estimator.",
+        "example": "Teaching example: two tokens each at0.5 give sequence logprob log0.25, not log0.5. The same two-token target must be scored in both views."
+      }
+    },
+    "qa/post-training:behavioral-canaries/behavior-audit-versus-rm-memorization": {
+      "source_sha256": "a10e9982eac1ac894f7b97532dc06e8244f5e51b9b7d7fa9efb3fd450f748d55",
+      "reviewed": true,
+      "fields": {
+        "question": "Why are Behavioral Canaries and reward-model counterfactual memorization different despite both taking differences?",
+        "answer": "CM compares preference-pair behavior across RMs trained with and without a user. Behavioral Canaries compare clean/triggered contexts under one policy and then distinguish independently trained policy regimes. Their counterfactuals, isolation units and conclusions differ.",
+        "example": "Teaching example: a high preference-pair CM does not establish trigger-induced RL behavior. A stylistic shift does not supply that pair's TM/TG."
+      }
+    },
+    "qa/post-training:behavioral-canaries/document-and-policy-units": {
+      "source_sha256": "a214c6170ce1a76a9a4e98d4b9c9cbc343e2f545355650a64160901f7f62d725",
+      "reviewed": true,
+      "fields": {
+        "question": "Why do row-level splits and treating each probe as an independent policy distort this audit?",
+        "answer": "Questions from one document can leak across RM/RL/evaluation. Multiple probes under one trained policy yield one average amplification score, not many independent policies for AUROC. ID-set checks cannot prove truthful identifiers.",
+        "example": "Teaching example:100 probes from one document and one policy are not100 independently trained experiments. A document appearing in RM and evaluation must be rejected despite different row numbers."
+      }
+    },
+    "qa/post-training:rlmf/three-uncertainty-quantities": {
+      "source_sha256": "d13894febe123b3d493229483910f109d8a1543040d5372c19212b31e1ce5988",
+      "reviewed": true,
+      "fields": {
+        "question": "Why can task accuracy not replace faithfulness and metacognitive self-judgment?",
+        "answer": "Correctness is a task outcome. Faithful calibration compares expressed with sampling-estimated intrinsic confidence. Metacognitive feedback compares predicted FC with evaluated FC. A correct answer can still express unfaithful certainty, and good self-judgment does not ensure correctness.",
+        "example": "Teaching example: intrinsic confidence0.6 paired with a claim of100% certainty is unfaithful even if the answer happens to be correct. Recognizing that mismatch is a third observation."
+      }
+    },
+    "qa/post-training:rlmf/selective-component-boost": {
+      "source_sha256": "64725526e0e29d06ead8ec040b812b8fbb990a19e633c311e352067841c8b06f",
+      "reviewed": true,
+      "fields": {
+        "question": "Can Eq.4 be replaced by multiplying the total advantage by1+Z or adding Z as a reward?",
+        "answer": "No. Only above-mean faithfulness deviations are multiplied by k+Z. Other rewards are merely centered, and nonpositive faithfulness deviations are unchanged. There is no standard-deviation normalization or post-boost recentering.",
+        "example": "Teaching example: f=[0,1,2], o=[1,0,−1], all Z1 and k1 yield advantages[0,0,1]. Multiplying the total centered advantage by2 yields all zeros instead."
+      }
+    },
+    "qa/post-training:rlmf/rlmf-versus-dr-grpo": {
+      "source_sha256": "8b85e97cf753fccc12290071cdc1e9c6c5ac34105ad2c3a5debf19d378b40221",
+      "reviewed": true,
+      "fields": {
+        "question": "What does RLMF share with Dr.GRPO, and what remains different?",
+        "answer": "Both retain centered reward scale without group-standard-deviation normalization. RLMF additionally separates faithfulness from other constraints and selectively boosts positive faithfulness deviations according to self-judgment quality. Sharing normalization does not make the objectives identical.",
+        "example": "Teaching example: with identical base rewards, different Z values change RLMF's credit for high-faithfulness completions; Dr.GRPO has no metacognitive factor."
+      }
+    },
+    "qa/post-training:rlmf/train-tails-and-validation-checkpoint": {
+      "source_sha256": "ca1c9aa00143c973a364b661982727d3274bcc1d7813ad0feb43d3e6972ed924",
+      "reviewed": true,
+      "fields": {
+        "question": "Which information must remain outside training-tail and checkpoint selection?",
+        "answer": "Tail selection uses self-judgments from training candidates only, equally sampling high and low ends. Hyperparameters/checkpoints must use validation. AppendixB.1 selects RL checkpoints on in-domain test FC; the local protocol explicitly declines that practice and documents the deviation.",
+        "example": "Teaching example: training scores10,40,70,90 yield10 and90 when selecting two. More extreme test examples remain excluded; checking test every100 steps to pick a checkpoint is still leakage."
+      }
+    }
+  }
+}

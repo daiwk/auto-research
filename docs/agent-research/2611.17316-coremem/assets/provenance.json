@@ -1,0 +1,12 @@
+{
+  "asset": "paper-figure-01.png",
+  "id": "2611.17316",
+  "asset_sha256": "8b7149813edd886bbd37d4464f067ec66e779e9e24e4e5fbb4f2c63d340f678f",
+  "source_url": "https://arxiv.org/html/2611.17316v1/fig2.png",
+  "source_html_sha256": "27c439ec31295ecaa894c6f23df4e4c14c4dc1d444b710ad1353e3f6439535d8",
+  "figure": "Figure 2",
+  "method": "Official HTML PNG original bytes; no crop, redraw or rendering.",
+  "visual_review": "已目视确认四列跨任务记忆协议完整；右列同时继承repo与memory。",
+  "copyright": "Copyright belongs to the original authors.",
+  "reviewed_on": "2026-11-15"
+}

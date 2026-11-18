@@ -1,0 +1,485 @@
+{
+  "schema_version": 1,
+  "papers": {
+    "foundation-models:rosetta-unification": {
+      "questions": [
+        {
+          "id": "why-id-is-not-transfer",
+          "level": "basics",
+          "question": "同语言召回接近100%，为什么仍可能跨语言答错？",
+          "answer": "模型可能借助语言特征形成分离的知识表示；同一事实在训练语言中可读出，不代表另一语言能访问。论文用相同事实、不同语言分布的受控训练区分两者，不能用ID分数替代跨语言validation。",
+          "example": "某个出生城市事实只用语言A表达；A的改写题全对，B的问题仍可能错。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "mean-of-ratios",
+          "level": "mechanism",
+          "question": "统一度为什么要明确同语言基线，不能只算两个向量的余弦？",
+          "answer": "原文比较跨语言语义等价组与同语言基线组的平均相似度，并对比值取平均。自余弦恒为1会改变定义；本地要求显式传入组和基线，并拒绝近零分母，不猜测隐藏状态与事实配对。",
+          "example": "两组的numerator/denominator分别是0.8/0.6和0.6/0.8，分数是两个比值的均值，不是(0.8+0.6)/(0.6+0.8)。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "representation-versus-factual-filter",
+          "level": "comparison",
+          "question": "Rosetta与Thinking to Recall都涉及事实，干预位置有什么不同？",
+          "answer": "Rosetta观察/干预预训练语言分布及表示统一度；Thinking to Recall分析推理时自生成事实及其正确性。前者的相似度不是事实真值judge，后者的oracle条件准确率也不证明跨语言表示统一。",
+          "example": "提高两语言表示相似度，不会自动判断某条中间生日事实是否幻觉；过滤正确事实也不保证低资源语言可读出知识。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "no-correlation-from-fixture",
+          "level": "implementation",
+          "question": "本地比值测试通过，能否宣称复现0.97的相关系数？",
+          "answer": "不能。0.97来自作者跨多次模型训练的表示与独立准确率联合测量。本地只做给定数组的算术，既无模型特征抽取，也无跨语言答案；新实验还必须用validation选择而非test调参。",
+          "example": "随机矩阵的比值有限只说明数值核可算，不是110次训练相关性证据。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        }
+      ]
+    },
+    "foundation-models:lidas": {
+      "questions": [
+        {
+          "id": "grow-not-append-random",
+          "level": "basics",
+          "question": "LIDAS与随机追加四层有什么根本区别？",
+          "answer": "它从当前网络中间区域复制已训练层，继承参数与优化器状态，而不是加入未训练随机层。目标是改变深度增长过程，不能从一次复制直接推断推理更强。",
+          "example": "8层网络复制2–5层后继续优化，与末尾追加4个随机Linear不是同一变换。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "physical-layer-order",
+          "level": "mechanism",
+          "question": "block size=4、原来8层时，LIDAS的实际层顺序是什么？",
+          "answer": "从0计数为0,1,2,3,4,5,2′,3′,4′,5′,6,7。中间连续四层在边界6重复；以原文Figure2与奇数块时等于MIDAS的约束为准，不把正文闭区间排版歧义实现成五层。",
+          "example": "12层时复制4–7层到其后，这时恰与MIDAS一致。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "growth-versus-numerical-update",
+          "level": "comparison",
+          "question": "LIDAS与随机舍入都影响训练，为什么收益不能混算？",
+          "answer": "LIDAS改变层数、初始化和优化器状态继承；随机舍入改变FP32主权重进入低精度参数时的量化分布。两者的控制变量、预算和误差来源不同，需分别验证，再做同预算组合实验。",
+          "example": "层生长保持Adam moments；SR保持量化条件期望。两项都通过L1，不等于组合模型会更快达到同精度。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "optimizer-alias-and-lr",
+          "level": "implementation",
+          "question": "复制参数值相同但Adam状态共享或清零，会怎样？",
+          "answer": "共享状态会让两层相互污染，清零则改变论文初始化；参数、exp_avg、exp_avg_sq、AMSGrad状态和step应独立复制。全局LR scheduler继续原step，不因生长重启。模型特定层编号/配置仍须调用方正确更新。",
+          "example": "改变复制层exp_avg不应改变源层；下一步真实梯度应能使两份参数分别更新。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        }
+      ]
+    },
+    "foundation-models:thinking-to-recall": {
+      "questions": [
+        {
+          "id": "reasoning-singlehop",
+          "level": "basics",
+          "question": "单跳事实题不需多步逻辑，为什么thinking仍可能有帮助？",
+          "answer": "原文区分额外token带来的计算缓冲与相关事实的factual priming，两者都可能帮助参数知识读出；并不意味着所有思考内容都正确或推理越长越好。",
+          "example": "重复dummy trace可检测内容无关计算，而相关事实提示测试语义桥接；它们不是同一个实验。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "common-retained-mask",
+          "level": "mechanism",
+          "question": "三种轨迹子集为什么必须用相同的题目集合？",
+          "answer": "若只给干净子集剔除难题，而all臂保留，会把题目难度变化误当过滤收益。原文每题100条采样，任何条件子集为空时三臂共同剔除，再算每题比例的宏平均。",
+          "example": "A题只有1条干净轨迹、B题有90条，仍先各算题内率再等权平均，不按91条合并微平均。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "oracle-not-actor",
+          "level": "comparison",
+          "question": "这种“优先正确事实轨迹”能像在线Agent策略一样部署吗？",
+          "answer": "本地实现不能；它使用事后外部标注的事实真值模拟条件期望，只是离线oracle分析。要部署还需要不看gold的可靠事实验证器，并计入调用成本和误判；这不是由汇总公式自动得到的。",
+          "example": "用gold确认哪条轨迹正确，再展示该轨迹给actor，会泄漏答案，不能算推理提升。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "no-selected-traces",
+          "level": "implementation",
+          "question": "接口为什么只返回统计而不返回“最佳轨迹”？",
+          "answer": "让正确性标签局限在独立evaluator，避免被actor或训练选择器当成oracle。函数显式输出保留题数、剔除题数与offline标记；缺少任何条件子集就报错或共同剔除，不默默补一条假事实。",
+          "example": "所有题都没有事实轨迹时应失败，而不是返回干净准确率1。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        }
+      ]
+    },
+    "foundation-models:latent-generalization": {
+      "questions": [
+        {
+          "id": "implicit-versus-seen",
+          "level": "basics",
+          "question": "latent generalization与记住训练答案有什么区别？",
+          "answer": "要答出未显式暴露的关系或组合，而不是复述已见completion。论文分别报告exposed和heldout recall，因为总体F1可能被大量已见答案撑高。",
+          "example": "all={A,B,C}、heldout={C}，只答A和B时train recall=1但heldout recall=0。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "set-exact-not-recall",
+          "level": "mechanism",
+          "question": "heldout recall=1是否意味着exact-set pass成功？",
+          "answer": "不意味着。exact要求预测集合严格等于全部有效答案集合，不能有漏项或虚假附加项；primary inclusion也只是一个指定heldout答案出现的二值指标。",
+          "example": "答A,B,C,错误D，heldout C的recall仍是1，但exact=0。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "newknowledge-versus-cleanthought",
+          "level": "comparison",
+          "question": "它与Thinking to Recall的协议分别定位什么问题？",
+          "answer": "前者用受控知识获取和结构划分考察未显式答案的泛化；后者研究已有参数事实如何因计算和factual priming被读出。两者都不能把gold-conditioned teacher或事后标注暴露给最终actor。",
+          "example": "同一事实被更容易召回，不等于模型学会了未训练关系反转；两者需要不同holdout。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "metric-not-gemini-trainer",
+          "level": "implementation",
+          "question": "为什么本地只实现这些集合指标，不提供一个简化Gemini训练器？",
+          "answer": "原文依赖私有Gemini knowledge SFT、teacher trace与REINFORCE接口，公开方法不足以还原完整训练。精确指标核可负担且有独立价值；虚构通用RL循环会掩盖关键依赖。完整训练明确不复现DONE。",
+          "example": "用随机答案数组测试F1公式，不得宣传为Gemini在OOD结构上的实测结果。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        }
+      ]
+    },
+    "agent-research:planning-optimality": {
+      "questions": [
+        {
+          "id": "valid-not-optimal",
+          "level": "basics",
+          "question": "合法计划为何不一定是好计划？",
+          "answer": "动作都可执行且达到目标只保证validity，仍可能有可避免的搬运。optimality比较合法计划长度与独立确定的最短长度，二者必须分别报告。",
+          "example": "先把目标块放桌上再拿起堆到目标塔，可能合法但比直接stack多两步。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "formula-support",
+          "level": "mechanism",
+          "question": "最优长度闭式公式有哪些不能省略的前提？",
+          "answer": "初始空手、目标链底块在桌面、每座初始塔最多一个目标块。每个遮挡块需两动作清除，每个非底目标需两动作搬到链上；同塔多个目标的interleaved任务不能套此式。",
+          "example": "同一塔里既有目标A又有目标B时，接口应拒绝该公式，即便某个特例数值巧合正确。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "search-versus-verifier",
+          "level": "comparison",
+          "question": "与LATS树搜索相比，这个组件解决了哪一层问题？",
+          "answer": "LATS分配搜索与rollout预算来寻找行动轨迹；本组件不生成LLM计划，只验证外部计划及计算受限课程gap。搜索分高不能代替真实前置条件验证，合法性分也不能替代最优性。",
+          "example": "LATS找到一个能完成任务的四步计划，而独立BFS发现两步解时，valid仍为真但gap=1。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "independent-bfs",
+          "level": "implementation",
+          "question": "为什么要用独立BFS校验公式，而不是在测试里再写一遍公式？",
+          "answer": "重复同一公式只能验证程序自洽，无法发现推导前提遗漏。小n BFS只通过四操作状态转移穷举最短路径，不调用公式；非法计划不输出数值gap。",
+          "example": "测试遍历4块的多种塔排列；若公式遗漏清除底目标上的遮挡块，BFS会给出不同最短长度。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        }
+      ]
+    },
+    "foundation-models:llm-stochasticity": {
+      "questions": [
+        {
+          "id": "marginal-not-independent",
+          "level": "basics",
+          "question": "直方图完全均匀，为什么仍不是真随机？",
+          "answer": "直方图只描述单点边缘频率，不描述时间次序。确定性的0,1,2,3循环也完全均匀，但下一项可被前一项预测；需要另外检查转移和时序依赖。",
+          "example": "循环1024项的卡方统计量为0，仍从不相邻重复。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "pvalue-not-proof",
+          "level": "mechanism",
+          "question": "KS或卡方p>0.05应怎样解释？",
+          "answer": "在指定原假设与检验前提下，当前样本未提供足够拒绝证据；不是模型有95%概率随机，也不是独立性证明。多次选prompt后挑最好p值还会改变推断口径。",
+          "example": "一个精心构造的均匀周期序列可以得到p=1，但不能作为可靠熵源。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "prng-versus-rounding",
+          "level": "comparison",
+          "question": "这里的外部PRNG与随机舍入里的随机数有何不同？",
+          "answer": "论文检验LLM是否能按请求生成目标分布；外部PRNG是一个不同的可控随机源。SR使用明确generator实现相邻舍入概率，并检验条件均值，不是在证明LLM自身随机。",
+          "example": "用NumPy生成均匀数不能填成Gemini采样结果；用torch generator检验SR也不能推断自然语言输出独立。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "no-dropping-invalid",
+          "level": "implementation",
+          "question": "遇到越界数或输出不足1024条时，为什么不能丢掉后继续？",
+          "answer": "丢弃会改变被评测分布和样本数，可能只保留好看的输出。接口严格校验完整计数、support和有限性，解析失败应由上层单独记录，不静默改分母。",
+          "example": "模型生成1000条合法数与24条越界数，不能把合法1000条当完整成功采样。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        }
+      ]
+    },
+    "foundation-models:ecg-rag": {
+      "questions": [
+        {
+          "id": "one-store-two-uses",
+          "level": "basics",
+          "question": "ECG为什么不分别存检索向量和压缩向量？",
+          "answer": "它让同一份E_ret既支持多向量检索，又经compression投影变成decoder上下文，减少重复索引存储。仅共用模型权重但仍存两套独立向量，不是这一表示统一设计。",
+          "example": "检索命中的E_ret从磁盘读入后可直接进入compression，而非再加载另一套文档缓存。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "loss-scale-and-grad",
+          "level": "mechanism",
+          "question": "联合loss中的teacher方向、缩放和α分别有什么用？",
+          "answer": "生成是teacher||student前向KL；E_ret除sqrt(d)用于点积，compression前乘回；margin用ΔS-αΔT以适配teacher分数尺度。teacher须detach，而α和正温度必须保留梯度。",
+          "example": "若把teacher logits也训练，目标本身会追随student变化；若固定α=1则不再有论文强调的可学习scale。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "compression-versus-candidate-bank",
+          "level": "comparison",
+          "question": "它与ADIndex都减少读取成本，是否是同一稀疏检索？",
+          "answer": "不是。ECG压缩文档为共享语义向量并生成；ADIndex在模型注意力内部共享候选库，再逐query精排并补新token。外部文档表示压缩与因果KV索引的可见性、精度和成本单位不同。",
+          "example": "ECG少存一套文档向量，不等于ADIndex少扫描历史key；二者的召回损失也不能同口径相加。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "kernel-not-llm",
+          "level": "implementation",
+          "question": "小张量联合loss能反传，为什么还不能说复现了端侧RAG？",
+          "answer": "还缺pretrained decoder、特殊embedding token训练、语料索引、检索、上下文注入和真实问答/系统评测。L1仅验共享表示依赖、梯度和loss定义；原文8H100训练与百万passage评测明确不复现。",
+          "example": "projection梯度非零不能推出NQ exact match、手机延迟或1/10上下文的作者成绩。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        }
+      ]
+    },
+    "foundation-models:continuousbench": {
+      "questions": [
+        {
+          "id": "new-capability-not-saturation",
+          "level": "basics",
+          "question": "ContinuousBench为什么要持续更新知识语料？",
+          "answer": "旧benchmark可能已被基座掌握，难区分合成文本是否传递新能力。新release把语料和QA一起固定，并与同一未适配基座对照，避免把原有知识算作合成数据收益。",
+          "example": "若base原已答对95%，新方法到96%与base原只会5%后到60%不是相同学习证据。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "validation-contains-test-exact",
+          "level": "mechanism",
+          "question": "checkpoint用contains选，最终exact报告，为什么要分开？",
+          "answer": "contains是validation选择指标；exact是heldout配对结果，两者定义不同且不能用test选checkpoint。类型反序可能覆盖全部词却不等于canonical字符串；作者代码与论文清洗描述差异也须固定版本。",
+          "example": "Flying and Normal可contains匹配Normal and Flying，但exact为假；不能悄悄切换parser提高结果。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "utility-not-privacy",
+          "level": "comparison",
+          "question": "有更高capability gain就说明DP更安全吗？",
+          "answer": "不说明。gain评估合成数据utility，ε/δ隐私来自明确DP机制和会计；不应混淆高重复事实可学与单条私有记录可记忆。本地没有DP训练/会计，也没有复现News的LLMjudge。",
+          "example": "一个非DP数据生成器可有很高QA准确率，仍不满足任何声称的隐私预算。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        },
+        {
+          "id": "paired-release-baseline",
+          "level": "implementation",
+          "question": "两臂为什么必须绑定相同release、题目ID和gold？",
+          "answer": "不同release或题目集会让难度变化伪装成学习收益。接口逐ID校验问题、参考答案及revision，并显式要求base预测，不把基线默认为0。",
+          "example": "adapted用新版简单题、base用旧版难题，即使各自准确率都真实，也不能相减成capability gain。",
+          "source_sections": [
+            "背景与主要改动",
+            "核心机制与公式",
+            "原文结果与限制",
+            "本地复现"
+          ],
+          "added": "2026-11-13"
+        }
+      ]
+    }
+  }
+}

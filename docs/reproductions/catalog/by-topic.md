@@ -369,6 +369,7 @@
 - [COBRA](../2503.02453-cobra/README.md)：先执行稀疏生成缩小候选空间，再用稠密生成细排，形成级联召回—排序路径。
 
 ### 重排、混排与多目标页面决策
+- [Beyond Independent Predictions: Learning the Browsing Journey for Sequence-Level Re-ranking](../../recommendation-components/2611.07591-ice/README.md)：将展示到点击拆成达到曝光与条件点击；浏览深度尾和约束曝光，停止梯度门控抑制未曝光上下文，列表 KL 建模点击竞争。本地只验证张量组件。
 - [Once Generated, Ranked: End-to-End Generative Slate Recommendation with Unified Semantic-Collaborative IDs](../2608.17613-ogr/README.md)：以统一语义-协同 ID 生成整张 slate，再用列表反馈做保守策略对齐。
 - [DEGR](../2608.04809-degr/README.md)：用 cohort 内 embedding 多样性、adaptive reward ORPO 和 greedy selection 控制跨曝光重复。
 - [Twitch Multi-Objective Ranking](../2608.04455-twitch-mor/README.md)：以 fresh/delayed 标签、生命周期 gate 和共享专家统一直播场景的多目标排序，显式平衡即时互动与滞后价值。
@@ -496,3 +497,21 @@
 
 ### 召回与匹配
 - [PAIR: Preference-Aligned Intent Retrieval for Premium People Recommendation at LinkedIn](../../recommendation-components/2610.30941-pair/README.md)：通过曝光条件偏好对比目标、可学习位置历史注意力和归一化加性融合建模职业社交互补意图。本地仅实现可独立验证的向量/损失组件；原8GPU私有数据完整实验成本过高，不复现（审查 DONE）。
+
+## 召回与匹配
+
+
+### 召回、触发与多通道路由
+- [From Waste to Discovery: Recycling High-Scored Unexposed Candidates in Taobao Feed Recommendation](../../recommendation-components/2611.05997-ured/README.md)：从排序器已打分但未展示的候选中按会话保留高分项，聚合后按时间去重，再按近期曝光类目和商品去重筛选。本地仅验证时间、截断与过滤顺序。
+
+## 生成式推荐与语义ID
+
+
+### 持续学习与公共评测
+- [KuaiRecV2: Benchmarking Large-Scale Continual Learning for Diversified and Multi-task Recommendation](../../recommendation-components/2611.16795-kuairec-v2-protocol/README.md)：明确按用户逐日leave-one-out为validation，FullMonth按每日验证实例数加权，并用每请求一份召回列表评价所有行为子集。本地只有有限协议接口，无官方数据、模型或多样性benchmark结果。
+
+### 生成式召回与长尾检索
+- [ReSID: Rethinking Long-Tail Retrieval in Generative Recommendation through item Reachability](../../recommendation-components/2611.16404-resid/README.md)：用独立子空间长parallel SID避免残差链误差，完整词表log-prior校准配合prefix log-mean-exp势能引导beam，再按Hamming partial matching排序。本地只实现冻结输入上的有限CPU核，不训练推荐器。
+
+### 生成式召回与意图条件
+- [TriGen: A Generative Paradigm for Trigger-Induced Recommendation](../../recommendation-components/2611.16395-trigen/README.md)：固定窗口尾部重复trigger，双条件路径直接读取pristine history，分别pool后逐level路由并用独立PFFN持续调制BOS/已观察prefix。本地无完整encoder-decoder推荐训练，MLP内部两层GELU为明示选择。
