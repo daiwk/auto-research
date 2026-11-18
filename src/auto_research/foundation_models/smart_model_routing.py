@@ -21,12 +21,19 @@ def _probabilities(values: list[float]) -> None:
         raise ValueError("probabilities must lie in [0, 1]")
 
 
+def _finite_result(value: float) -> float:
+    if not math.isfinite(value):
+        raise ValueError("cost arithmetic exceeded finite floating-point range")
+    return value
+
+
 def token_cost(input_tokens: int, output_tokens: int, input_price_per_million: float,
                output_price_per_million: float) -> float:
     if any(type(x) is not int or x < 0 for x in (input_tokens, output_tokens)):
         raise ValueError("nonnegative integer token counts required")
     _finite_nonnegative([input_price_per_million, output_price_per_million])
-    return (input_tokens * input_price_per_million + output_tokens * output_price_per_million) / 1_000_000
+    return _finite_result((input_tokens / 1_000_000) * input_price_per_million
+                          + (output_tokens / 1_000_000) * output_price_per_million)
 
 
 def shadow_price_tier(costs: list[float], predicted_qualities: list[float], shadow_price: float) -> int:
@@ -63,7 +70,9 @@ def cost_reduction(frontier_share: float, price_ratio: float, *, frontier_token_
     phi, tau = frontier_share, frontier_token_ratio
     baseline = price_ratio * ((1 - phi) + phi * tau)
     routed = (1 - phi) + phi * tau * price_ratio + router_cost_in_cheap_units
-    return baseline / routed
+    if routed == 0:
+        raise ValueError("cost arithmetic exceeded finite floating-point range")
+    return _finite_result(baseline / routed)
 
 
 def cascade_cost(costs: list[float], acceptance_rates: list[float], *,
@@ -80,7 +89,7 @@ def cascade_cost(costs: list[float], acceptance_rates: list[float], *,
     for cost, checker, acceptance in zip(costs, checkers, acceptance_rates, strict=True):
         total += reach * (cost + checker)
         reach *= 1 - acceptance
-    return total
+    return _finite_result(total)
 
 
 def two_stage_breakeven(cheap_cost: float, frontier_cost: float, *, checker_cost: float = 0,
@@ -89,7 +98,7 @@ def two_stage_breakeven(cheap_cost: float, frontier_cost: float, *, checker_cost
     _finite_nonnegative([cheap_cost, frontier_cost, checker_cost, router_cost])
     if frontier_cost == 0:
         raise ValueError("positive escalation cost required")
-    return (cheap_cost + checker_cost + router_cost) / frontier_cost
+    return _finite_result((cheap_cost + checker_cost + router_cost) / frontier_cost)
 
 
 def cascade_quality(acceptance_rates: list[float], conditional_qualities: list[float]) -> float:

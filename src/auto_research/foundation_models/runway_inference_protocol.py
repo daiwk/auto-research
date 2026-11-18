@@ -68,7 +68,10 @@ def cost_per_successful_request(hourly_price: float, duration_seconds: float, co
     if (not math.isfinite(hourly_price) or hourly_price < 0 or not math.isfinite(duration_seconds)
             or duration_seconds <= 0 or type(completed_requests) is not int or completed_requests <= 0):
         raise ValueError("finite price, positive duration and positive completed request count required")
-    return hourly_price * duration_seconds / 3600 / completed_requests
+    result = (hourly_price / 3600) * (duration_seconds / completed_requests)
+    if not math.isfinite(result):
+        raise ValueError("cost arithmetic exceeded finite floating-point range")
+    return result
 
 
 def diagnostic(seed: int, device: str = "cpu") -> dict:
