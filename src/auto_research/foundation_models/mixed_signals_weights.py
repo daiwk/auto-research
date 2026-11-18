@@ -93,7 +93,10 @@ def recovery_fraction(repaired: float, faulty: float, healthy: float) -> float:
     """Do not clip negative or above-one recovery, nor hide a zero denominator."""
     if any(isinstance(v, bool) or not math.isfinite(v) for v in (repaired, faulty, healthy)) or healthy == faulty:
         raise ValueError("finite metrics and nonzero healthy-faulty gap required")
-    return (repaired - faulty) / (healthy - faulty)
+    result = (repaired - faulty) / (healthy - faulty)
+    if not math.isfinite(result):
+        raise ValueError("recovery arithmetic overflowed; no finite ratio available")
+    return result
 
 
 def diagnostic(seed: int, device: str = "cpu") -> dict:

@@ -41,7 +41,9 @@ class HVMap(nn.Module):
             raise ValueError("wrong source dimension")
         for layer in self.layers[:-1]:
             value = F.selu(layer(value))
-        return F.normalize(self.layers[-1](value), p=2, dim=-1)
+        value = self.layers[-1](value)
+        _vectors(value, "unnormalized mapping output")
+        return F.normalize(value, p=2, dim=-1)
 
 
 def fuzzy_contrastive_loss(mapped: Tensor, target: Tensor, *, metric: str = "cosine", reduction: str = "sum") -> Tensor:
