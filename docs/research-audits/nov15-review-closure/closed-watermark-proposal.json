@@ -1,0 +1,130 @@
+{
+  "schema_version": 2,
+  "policy": "review-with-coverage-and-archived-exceptions-v2",
+  "checked_on": "2026-11-18",
+  "user_authorized_exceptions": true,
+  "authorization_record": "Continuing user authorization: Nov11 explicit P2 selection approval; Nov18 request to complete this subsequent review window under the existing review semantics.",
+  "window": {
+    "start": "2026-11-10",
+    "end": "2026-11-15"
+  },
+  "review_watermark": "2026-11-15",
+  "review_as_of": "2026-11-18T12:40:05.792650+08:00",
+  "review_semantics": "selection-screening-with-protected-primary-review",
+  "selection_review_complete": true,
+  "method_review_complete": false,
+  "all_sources_exhaustive": false,
+  "implementation_complete": false,
+  "selection_policy": "research-audits/nov15-review-closure/p2-selection-policy.json",
+  "candidate_register": "research-audits/nov15-review-closure/paper-register.json",
+  "retrieval_receipts": [
+    {
+      "track": "recommendation",
+      "mode": "submission-window",
+      "artifact": "research-audits/nov15-review-closure/recommendation-submission-window-retrieval.json"
+    },
+    {
+      "track": "recommendation",
+      "mode": "late-index",
+      "artifact": "research-audits/nov15-review-closure/recommendation-late-index-retrieval.json"
+    },
+    {
+      "track": "foundation-model",
+      "mode": "submission-window",
+      "artifact": "research-audits/nov15-review-closure/foundation-model-submission-window-retrieval.json"
+    },
+    {
+      "track": "foundation-model",
+      "mode": "late-index",
+      "artifact": "research-audits/nov15-review-closure/foundation-model-late-index-retrieval.json"
+    },
+    {
+      "track": "post-training",
+      "mode": "submission-window",
+      "artifact": "research-audits/nov15-review-closure/post-training-submission-window-retrieval.json"
+    },
+    {
+      "track": "post-training",
+      "mode": "late-index",
+      "artifact": "research-audits/nov15-review-closure/post-training-late-index-retrieval.json"
+    },
+    {
+      "track": "agent",
+      "mode": "submission-window",
+      "artifact": "research-audits/nov15-review-closure/agent-submission-window-retrieval.json"
+    },
+    {
+      "track": "agent",
+      "mode": "late-index",
+      "artifact": "research-audits/nov15-review-closure/agent-late-index-retrieval.json"
+    }
+  ],
+  "source_reviews": [
+    {
+      "organization": "Google",
+      "artifact": "research-audits/nov15-review-closure/google-source-review.json"
+    },
+    {
+      "organization": "Google DeepMind",
+      "artifact": "research-audits/nov15-review-closure/google-deepmind-source-review.json"
+    },
+    {
+      "organization": "Meta",
+      "artifact": "research-audits/nov15-review-closure/meta-source-review.json"
+    }
+  ],
+  "exception_archive": "research-audits/nov15-review-closure/exception-archive.json",
+  "previous_review_state": "research-audits/nov09-review-closure/closed-watermark-proposal.json",
+  "previous_review_state_sha256": "632e9c534cf58011312950707623b3c3e6eb77d8ed9648c700f91c3fa12b4492",
+  "next_scan_start_with_overlap": "2026-11-14",
+  "exception_reopening_policy": "new evidence only; no automatic retries",
+  "coverage_scope": {
+    "tracks": [
+      "recommendation",
+      "foundation-model",
+      "post-training",
+      "agent"
+    ],
+    "recall_modes": [
+      "submission-window",
+      "late-index"
+    ],
+    "official_sources": [
+      {
+        "organization": "Google",
+        "records": 329,
+        "pages": 48
+      },
+      {
+        "organization": "Google DeepMind",
+        "records": 10,
+        "pages": 7
+      },
+      {
+        "organization": "Meta",
+        "records": 7,
+        "pages": 11
+      }
+    ],
+    "counts": {
+      "raw_unique_identities": 9178,
+      "outside_window_date_only": 7922,
+      "registered_unique_identities": 1256,
+      "primary_decisions": 72,
+      "p2_selection_only_closed": 1138,
+      "inherited_terminal": 46,
+      "high_cost_review_done": 24,
+      "accepted_low_cost_not_implemented": 14,
+      "protected_pending": 0,
+      "implementations": 0,
+      "gpu_runs": 0
+    },
+    "limitations": [
+      "Selection screening plus protected primary-source review, not verification or implementation of every method.",
+      "Containing Nov16 Actions captures and actual split-query replacements; no all-web or all-institution historical exhaustiveness.",
+      "Original first publication, later revision, source discovery and review date are distinct; outside-window date filtering is not method review.",
+      "High-cost full experiments are review DONE/not reproduced; no training, GPU runs or executable evolve promotion.",
+      "Official sources have per-record and pagination/date exceptions archived with actual attempts; no access failure means no-paper inference."
+    ]
+  }
+}

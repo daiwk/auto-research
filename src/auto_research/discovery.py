@@ -142,18 +142,69 @@ SELECTION_REVIEW_SEMANTICS = "selection-screening-with-protected-primary-review"
 
 
 def _window_selection_records(docs: Path) -> dict[str, dict]:
-    """Load explicitly authorized current-window selections, never ledger rejections.
+    """Load a validated, hash-linked selection history without changing evidence.
 
-    Missing/invalid provenance fails open to discovery (no suppression). These rows
-    carry an exact version/fingerprint and must reopen when either changes or a
-    new institutional priority source/query is observed.
+    Every window must independently satisfy the original selection contract.
+    Invalid evidence or an unsafe history link fails open for the entire chain:
+    discovery must not suppress a paper on the strength of a broken baseline.
+    Newer windows override older observations, while downstream version, metadata
+    and independent priority-evidence reopening remain unchanged.
     """
     try:
-        state = json.loads((docs / "paper-discovery-watermark.json").read_text())
+        docs = docs.resolve()
+        path = docs / "paper-discovery-watermark.json"
+        expected_hash = None
+        visited: set[Path] = set()
+        windows: list[dict[str, dict]] = []
+        newer_window: tuple[dt.date, dt.date] | None = None
+        while True:
+            path = path.resolve()
+            if not path.is_relative_to(docs) or path in visited:
+                return {}
+            visited.add(path)
+            raw = path.read_bytes()
+            if expected_hash is not None and hashlib.sha256(raw).hexdigest() != expected_hash:
+                return {}
+            state = json.loads(raw)
+            window = state["window"]
+            start, end = (dt.date.fromisoformat(window[key]) for key in ("start", "end"))
+            if start > end or (newer_window is not None and (
+                    start > newer_window[0] or end >= newer_window[1])):
+                return {}
+            records = _validated_window_selection_records(docs, state)
+            if records is None:
+                return {}
+            windows.append(records)
+            previous = state.get("previous_review_state")
+            previous_hash = state.get("previous_review_state_sha256")
+            if previous is None and previous_hash is None:
+                break
+            if (not isinstance(previous, str) or not previous or Path(previous).is_absolute()
+                    or not isinstance(previous_hash, str) or len(previous_hash) != 64
+                    or any(char not in "0123456789abcdef" for char in previous_hash)):
+                return {}
+            path = docs / previous
+            expected_hash = previous_hash
+            newer_window = (start, end)
+        result = {}
+        for records in reversed(windows):
+            result.update(records)
+        return result
+    except (OSError, ValueError, KeyError, TypeError, AttributeError, RuntimeError):
+        return {}
+
+
+def _validated_window_selection_records(docs: Path, state: dict) -> dict[str, dict] | None:
+    """Return exact authorized selections, or None for invalid provenance.
+
+    A valid empty window differs from a failed validation. This helper is read-only
+    and applies the same single-window contract to current and historical states.
+    """
+    try:
         if (state.get("review_semantics") != SELECTION_REVIEW_SEMANTICS
                 or state.get("selection_review_complete") is not True
                 or state.get("method_review_complete") is not False):
-            return {}
+            return None
 
         def local(reference: str) -> Path:
             result = (docs / reference).resolve()
@@ -182,12 +233,12 @@ def _window_selection_records(docs: Path) -> dict[str, dict]:
                 or state.get("review_watermark") != state.get("window", {}).get("end")
                 or selection.get("policy_sha256") != hashlib.sha256(policy_bytes).hexdigest()
                 or selection.get("protected_records") or selection.get("protected_ids")):
-            return {}
+            return None
         rows = {r["id"]: r for r in selection["records"]}
         selected = [r for r in register["papers"] if r.get("status") == "not_selected_p2"]
         if (len(rows) != len(selection["records"])
                 or {r["id"] for r in selected} != set(rows)):
-            return {}
+            return None
         result = {}
         for paper in selected:
             identity = paper["id"]
@@ -222,7 +273,7 @@ def _window_selection_records(docs: Path) -> dict[str, dict]:
                     or len(row.get("metadata_sha256", "")) != 64
                     or nonwaivable.intersection(row.get("positive_signal_matches", {}))
                     or identity in policy.get("always_protected_identities", {})):
-                return {}
+                return None
             result[canonical_arxiv_id(identity)] = {
                 "arxiv_id": identity, "revision": row["revision"],
                 "metadata_sha256": row["metadata_sha256"],
@@ -237,7 +288,7 @@ def _window_selection_records(docs: Path) -> dict[str, dict]:
             }
         return result
     except (OSError, ValueError, KeyError, TypeError, AttributeError):
-        return {}
+        return None
 
 
 def repository_paper_records(

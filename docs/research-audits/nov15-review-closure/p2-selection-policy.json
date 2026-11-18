@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "window": {
+    "start": "2026-11-10",
+    "end": "2026-11-15"
+  },
+  "authorized_on": "2026-11-11",
+  "authorization": {
+    "source": "Continuing user authorization: Nov11 explicit P2 selection approval; Nov18 request to complete this subsequent review window under the existing review semantics.",
+    "answer": "允许 P2 选题级结案",
+    "p2_selection_closure_allowed": true,
+    "new_answer_invented": false
+  },
+  "review_scope": "title-abstract-selection",
+  "terminal_selection_decision": "not_selected_this_window_p2",
+  "always_protected_identities": {
+    "2611.13442": "Meta official ForeSpark source",
+    "2611.16028": "Google verified author co-occurrence",
+    "2611.17501": "plausible Meta recommendation hardware authors"
+  },
+  "meaning": "Window-only selection; not originality rejection, method/cost verification or implementation. Google/Meta, possible production and new-revision conflicts need primary review.",
+  "input_sha256": "d9b1dea09ab536cde95a32db1ea80a3449b12a87bc3c2b1a587e29a2b28d5153",
+  "reopen_conditions": [
+    "changed revision or metadata",
+    "new institutional/production evidence",
+    "user prioritization"
+  ]
+}

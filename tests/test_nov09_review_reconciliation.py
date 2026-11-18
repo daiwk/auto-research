@@ -17,7 +17,7 @@ def test_coverage_replaces_cap_but_does_not_imply_review():
     assert value["arxiv_recall_matrix_covered"]
     assert not value["all_sources_exhaustive"]
     assert value["candidate_review_complete"] and value["review_watermark_advanced"]
-    state = read(ROOT / "docs/paper-discovery-watermark.json")
+    state = read(AUDIT / "closed-watermark-proposal.json")
     assert state["review_watermark"] == "2026-11-09"
     assert state["selection_review_complete"] and not state["method_review_complete"]
     receipts = value["capture_receipts"]
